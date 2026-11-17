@@ -233,15 +233,28 @@ N M 7837,6300 tc2_sr_g
 # --- row B (tc2_sr_r): pad (7837,6064), poly east y 6055-6081, ends rounded at x 8088. The
 #     pad's metal comes from the north (x 7826-7846, follower: end (7835,5520); g1_bnorth.png
 #     2.1x: no pad on the ten rows it crosses) from the pad (7836,5520), whose poly goes east
-#     (drawn to x 7872; not followed). The L's metal passes 18 px south of the pad (g1_wpads.png:
-#     no metal between y 6082 and 6100 in either chip).
+#     (below). The L's metal passes 18 px south of the pad (g1_wpads.png: no metal between
+#     y 6082 and 6100 in either chip).
 P 7822,6050:7862,6078
 C 7837,6064
 P 7850,6055:8088,6081
 M 7836,5512 y6074 w=20
 P 7820,5505:7855,5536
 C 7836,5520
-P 7845,5510:7872,5530
+P 7845,5510:8020,5530
+#     the poly runs east along y 5510-5530 under the thin metal x 7902 and rax's ground rail
+#     (field above and below it there: no gate; g2_r_a.png 2.9x, clean and chip-2 metal) to the
+#     pad (8031,5520) (g2_m8030.png first tile, 4.2x, three shots: ring and bright centre, green
+#     hole; the poly ends there). From the pad a thin metal x 8022-8040 leaves north; it is
+#     drawn to y 5468, as far as it is plain metal in both chips. North of that it passes over
+#     rax's units, where it is dark for 44-63 px at each unit in both chips (tc2_runs.py col 8031
+#     5045 5535 2) with contact-like spots at (8031,5440), (8031,5308), (8031,5180) and rax's
+#     pads at (8030,5392), (8030,5262), (8030,5133); the follower takes it to a pad (8031,5066)
+#     with a poly going east, rax's profile found it in short pieces. NOT RESOLVED, NOT DRAWN:
+#     notes, Ambiguity 4.
+P 8014,5504:8048,5537
+C 8031,5520
+M 8031,5528 y5468 w=18
 N M 7836,5800 tc2_sr_r
 
 # --- node q (tc2_sr_q): poly from the pad (7922,6108) east, ending on the strip between rows
@@ -372,3 +385,4 @@ M 6838,4433:6905,4500
 M 6840,4494:6884,4864
 M 6838,4858:6926,4905
 M 6882,4899:6926,4996
+N M 6862,4700 vss

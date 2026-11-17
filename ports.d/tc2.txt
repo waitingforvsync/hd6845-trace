@@ -15,7 +15,7 @@ tc2_sr_g     M  7827-7847,6400   in   the latch's gate line (rows A and D), goin
 tc2_sr_s     M  7782-7800,6400   in   row E's line, going on south (follower: end (7791,6958))
 tc2_sr_q     M  7913-7931,6400   out  the latch's node q, going on south (follower: end (7922,7046))
 tc2_sr_q     P  8250,6163-6180   out  the arm of q's load poly, going on east under the VCC rail
-tc2_sr_r     P  7872,5510-5530   in   drawn end of the poly east of the pad (7836,5520); it goes on east
+tc2_sr_r     M  8022-8040,5468   in   drawn end of the thin metal north of the pad (8031,5520); it goes on into rax's units (not resolved)
 tc2_sr_c     P  8250,6358-6376   ?    top line of cdp2's channel 2, going on east
 tc2_sr_c     M  6400,6360-6380   ?    metal from the pad (7490,6367), going on west (follower: end (6184,6370))
 vss          M  7990-8040,5625   -    meets rax's rail step (x 7945-8035, y 5600-5650)
