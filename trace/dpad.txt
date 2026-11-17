@@ -1,0 +1,146 @@
+# D0-D7 pad cells (dpad): tri-state output driver, its two-NOR pre-driver under the
+# VCC band, and the lines from the bus-interface column (dbus).
+# Master is D0. All coordinates are metal-shot pixels.
+#
+# Read from the eight-copy median composite (tools/composite.py dpad
+# 17600,5950:19200,7600 --offsets "0,0 0,1735 1,3470 1,5054 2,6637 2,8242 2,9847 3,11452",
+# view with --comp dpad) in acid1b, acid and metal at 2.2-5x, then each copy on its own.
+# Images: cache/scratch/dpad/ (c1b, c2b, c2a, c2m, v1b, v1m, v2b, v2m, v3, z_*).
+#
+# Big transistors are drawn schematically, as in pads_out.txt: one diffusion rectangle
+# for the whole finger stack (the gates split it), one long contact rectangle per row.
+#
+#   d#_pu = NOR(d_hiz, d#_out_n)        gate of the pull-up fingers   (load U')
+#   d#_pd = NOR(d_hiz, d#_pu)           gate of the pull-down fingers (load L')
+@block dpad
+
+# ---- supplies, outside the cell
+# VCC band over the pre-drivers. Identified by the loads: the pocket between U' and L'
+# is contacted to it. Drawn over the eight cells only.
+M 17900,6000:18200,19150
+N M 18050,6500 vcc
+
+@cell dpad_cell tag=d0
+
+# ---- output transistors: finger stack. Rows top to bottom: A vcc, B pad, C vss,
+# D pad, E vcc, F pad. Gates: g1 (pu), g2 g3 (pd), g4 g5 (pu).
+D 17897,6733:19040,7155
+P 17847,6787:19048,6808            # g1, between A and B
+P 17847,6780:17893,6815            # its pad left of the band
+P 17868,6862:19048,6883            # g2, between B and C
+P 17868,6862:17890,6945            # down to the pd pad
+P 17805,6920:17893,6957            # pd pad
+P 17805,6937:19050,6958            # g3, between C and D
+P 17850,7012:19048,7033            # g4, between D and E
+P 17850,7010:17893,7108            # pu pad
+P 17850,7087:19048,7108            # g5, between E and F
+N P 18500,6797 {}_pu
+N P 18500,6872 {}_pd
+
+# row metal and contacts
+M 17900,6735:18835,6778            # A, from the band
+C 17915,6745:18812,6770
+M 18225,6805:19025,6850            # B
+C 18225,6815:19017,6840
+M 18225,6805:18285,7000            # joins B and D on the left
+M 18300,6885:19150,6932            # C, leaves right to the ring
+C 18305,6896:19017,6921
+N M 19100,6908 vss
+M 18225,6955:19025,7000            # D
+C 18225,6965:19017,6990
+M 17900,7030:18948,7078            # E, from the band
+C 17915,7044:18940,7069
+M 18970,6955:19025,7150            # joins D and F on the right
+M 18225,7105:19025,7150            # F
+C 18225,7115:19017,7140
+M 18850,6650:19025,6850            # neck up to the bond pad
+N M 18600,6828 {}
+
+# ---- right group: three more pull-down fingers. F / G' vss / H' pad / I' vss
+D 18742,7155:19037,7390
+P 18690,7168:18732,7340            # poly bar, fed from row I's metal
+P 18690,7165:19050,7185            # gr1, between F and G'
+P 18690,7242:19050,7262            # gr2, between G' and H'
+P 18690,7318:19050,7340            # gr3, between H' and I'
+C 18702,7217 18702,7257 18702,7297 s=24x26
+M 18685,7180:18722,7372            # column from row I
+M 18805,7185:19030,7235            # G'
+C 18822,7198:19008,7222
+M 18978,7185:19030,7385            # joins G' and I'
+M 18745,7265:18950,7310            # H'
+C 18757,7276:18940,7300
+M 18745,7105:18787,7300            # joins F and H'
+M 18745,7335:19090,7385            # I', leaves right to the ring
+C 18755,7348:19008,7372
+N M 19070,7360 vss
+
+# ---- pre-driver. Diffusion under the band and under rows G-K, without the field
+# islands (left bar 17937-17957 x 7215-7368, right bar 18085-18107 x 7255-7368 with
+# the box 18085-18195 x 7215-7258).
+D 17897,7175:18665,7215            # pu node: band part and row G
+D 17843,7177:17900,7247            # its tab left of the band (strap contact)
+D 17897,7215:17937,7250            # tab under the left end of U'
+D 17957,7215:18085,7368            # load column: pu node / U' / vcc pocket / L' / pd node
+D 18195,7215:18468,7400            # rows G (low part), H, I right of the band
+D 18468,7215:18597,7374            # the same, where row I's lower edge is at 7374
+D 18597,7215:18630,7295            # G's right part and H's end tab
+D 18630,7215:18665,7224
+D 18112,7262:18195,7405            # pd node right of the right bar; H's left end
+D 17897,7368:18210,7540            # pd node / d_hiz / vss / out_n / pu node, under the band
+D 17897,7310:17937,7368            # tab under the left end of L'
+D 17800,7310:17900,7360            # pd tab left of the band (strap contact)
+D 18200,7400:18365,7540            # row J vss / out_n / row K pu
+D 18365,7400:18468,7452            # row J, right part
+D 17840,7445:17900,7545            # tabs left of the band: vss / out_n / pu (strap contact)
+
+P 17908,7225:18163,7262            # U': load of the pu node
+B 17905,7222:17939,7253            # U' tied to the pu node
+P 17908,7318:18104,7355            # L': load of the pd node
+B 17905,7315:17939,7358            # L' tied to the pd node
+C 17980,7292 18020,7292 18057,7292 s=28x28   # vcc pocket
+P 18153,7240 y7312 x18620 w=20     # strip 2: U' poly on between H and I (gate = pu)
+P 18183,7228:18655,7250            # strip 1 (d_hiz), between G and H
+P 18635,7228:18655,7400            # round H's end, down to strip 3
+P 18198,7378:18655,7400            # strip 3 (d_hiz), between I and J
+P [ 18160,7405 18200,7378 18200,7400 18167,7430 ]
+P 17878,7405:18167,7430            # d_hiz under the band, between pd node and vss
+P 17853,7375:17882,7430            # under the pu strap, no contact
+P 17623,7375:17858,7398            # in from the column
+C 17637,7385 s=26x24
+M 17624,7372:17652,7400
+P 17800,7466:18382,7492            # out_n (strip 4), between vss and the pu node
+
+# row metal
+M 18225,7175:18662,7222            # G (pu node)
+C 18232,7188:18655,7212
+M 18225,7175:18250,7520            # joins G and K
+M 18225,7465:18362,7540            # K (pu node)
+C 18240,7500:18332,7525
+M 18270,7250:18592,7300            # H (vss)
+C 18282,7263:18580,7288
+M 18270,7250:18300,7445            # joins H and J
+M 18270,7400:18760,7445            # J (vss), leaves right
+C 18282,7412:18455,7437
+N M 18700,7422 vss
+M 18325,7325:18722,7372            # I (pd node), to the column of the right group
+C 18332,7337:18430,7360
+
+# straps left of the band
+M 17871,6790 y7522 w=20            # pu strap
+M 17847,6782:17881,6813
+C 17860,6797 s=24x24
+M 17848,7022:17881,7098
+C 17860,7040 17860,7080 s=24x24
+C 17862,7208 s=26x26
+M 17843,7498:17881,7534
+C 17857,7514 s=26x26
+M 17813,6925 y7350 w=18            # pd strap
+M 17803,6922:17836,6953
+C 17818,6937 s=24x24
+C 17815,7335 s=24x26
+N M 17871,7150 {}_pu
+N M 17813,7150 {}_pd
+N P 18000,7479 {}_out_n
+@end
+
+N P 17700,7386 d_hiz
