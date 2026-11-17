@@ -1,5 +1,5 @@
 # tla: top-left logic, cluster where the row counter's step is made
-2440,2940:3090,5330   ?logic  row counter step logic (cluster) | two mirrored columns of small NOR gates between VSS, VCC, VSS rails. Traced: the row counter's step = in1 OR (NOT e4 AND ((x1 AND NOT a2) OR NOT e3)), seven gates. About twenty more gates not traced
+2440,2940:3090,5330   ?logic  row counter step logic (cluster) | two mirrored columns of small gates between VSS, VCC, VSS rails. Traced: the row counter's step = in1 OR (NOT e4 AND NOT (e3 AND a2)) and its gates; in the west column an inverting two-way selector (y 3255-3590: one input believed the vertical sync width match) switched by the net on thin metal E, and its inverter. About fifteen more gates not traced
 3090,2400:3400,6400   ?route  vertical bus | seven metal positions, in pieces, joining the gate clusters at x 2450-3090 to each other and to poly lines going east. Eight pieces drawn
 3400,2620:4250,2900   ?route  poly lines along the top | seven horizontal lines from the vertical bus east to a second bus field at x 4140-4420; one drawn (first input of the step gate)
 3400,5480:5860,5700   ?route  second crossing field | horizontal poly lines over vertical metals; the step signal b crosses it on the poly y 5585
