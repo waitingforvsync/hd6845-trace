@@ -51,9 +51,9 @@ tc1_x1_u     M  6962-6974,3905  ?    the thin metal x 6968 (alias of tc1_x1); Am
 tc1_x1_u     M  6962-6974,4300  ?    the same
 tc1_p4308    P  6750,4428-4448  in   input of the inverter, going west; ends on the pad (6620,4436), whose metal goes south along x 6621 (seen, not drawn)
 tc1_x1_u     P  6750,4385-4405  ?    the poly row from the thin metal x 6968's south pad (6947,4396), going west; seen to about x 6445
-tc1_p3698    M  6765-6785,2800  in   gate 1 of the second driver, thin metal going north; drawn to y 2800
+tc1_p3698    M  6765-6785,2800  in   gate 1 of the second driver, thin metal going north; drawn to y 2800 (seen to end on a contact at about (6773,2789))
 tc1_m7100    M  7091-7110,3140  in   upper piece of the channel metal, going north from contact (7100,3180); follower: north to y 2766, west to x 6947, north to (6949,2677)
-tc1_m7056    M  8350,2591-2604  out  the bus line y 2598 going east: tc1_o3740 (aliased through ? items, Ambiguity 20); follower: ends at (9056,2595)
+tc1_m7056    M  8350,2591-2604  out  the bus line y 2598 going east: tc1_o3740 if join J6 holds (aliased across a ?M, Ambiguity 20); follower: ends at (9056,2595)
 vcc          M  6690-6742,2895  -    the supply rail at cell D; goes on north
 vss          M  6858-6906,2800  -    the rail; goes on both ways, not followed
 vss          M  6861-6932,3905  -    the same rail
