@@ -141,8 +141,8 @@ diffusion break. If a later reading disproves one of them, the item becomes `?D`
 Traced (cell `dpad_prot`, D0 coordinates): one diffusion with the rail side (x
 17685-17775, nine contacts at x 17705 to the rail metal), the clamp gate (the frame's
 left arm, poly x 17778-17808) and the node (x 17810-17868, nine contacts at x 17830 to
-a metal column that leaves south). Extracted as a field transistor `d#_prot_g`: vss,
-`d#_in`, W/L 397/30.
+a metal column that leaves south). The frame (the clamp's gate) is tied to VSS (below), so
+the clamp is a grounded-gate transistor: vss, `d#_in`, W/L 397/30, gate vss.
 
 The rail x 17690-17765 is VSS: it is metal-continuous with `dbus`'s VSS rail (x
 17355-17400) through the trunk at y 6625-6708 [rail, o3], and a metal test along it
@@ -168,10 +168,14 @@ Seen and NOT drawn (composite with the protection's own offsets, `--comp dpadp`
   x 18295-18315 to y 6095, west along y 6085-6105 to x 18065, south along x 18062-18080
   to about y 6600 [p_m, p_b]. Not followed further.
 
-So the series resistor from the pad and what the frame is tied to are not established:
-either the pad's strip ends on the frame and the comb ties it to the node (the `inprot`
-reading), or the frame is tied to VSS by the strip from the rail contact and the pad
-reaches the node another way. In both readings the clamp is off in normal operation.
+**The frame is tied to VSS** (review round 2, confirmed in the photos by the tracer): its
+right arm and the outer strip x 17978-17995 join in a U at the foot (y 6490-6512, acid1b
+4.5x, `chk_foot.png`); the strip runs up to y 5985 and west along y 5975-5995 to a contact
+on the rail at (17727,6000) (ring in metal, green patch in acid1b, `chk_prot0.png`; the
+reviewer saw the same in all seven copies, D1 at 3.7-5x); in D0 a 20 px metal stub joins
+it to the rail's top. Drawn in the cell. So the clamp is off in normal operation, as a
+grounded-gate clamp. Still open: the series resistor from the pad (the comb and the pad's
+strip): how the pad reaches the node.
 
 ## Ports
 
@@ -187,8 +191,8 @@ reaches the node another way. In both readings the clamp is off in normal operat
 
 ## Ambiguities
 
-- The protection's frame and comb, and the pad's series strip: above. Same question as
-  AMB-005.
+- The protection's comb and the pad's series strip (how the pad reaches the node): above.
+  Related to AMB-005 (the frame is now known to be tied to VSS).
 - D7's protection (x 17685-17960, y 17540-18030) is not the same layout: its frame is
   closed along the bottom and no neck leaves south [P_all, last tile]. Not traced.
 - Whether the pull-up fingers are enhancement devices cannot be seen (AMB-002).
@@ -216,4 +220,14 @@ y 18850; (3) row J's metal runs on to x ~18812 and merges north into I': confirm
 the extension (drawn), the merge left undrawn (both are `vss`); (4) believed continuities
 drawn firm: the notes now say why.
 
-
+Round 2 (2026-11-17 15:32 +0000, a fresh agent briefed with the skill's text; told to suspect the copies D1-D7
+in the clean shot at 3x, the protection copies' placement, the pre-driver in two copies
+other than D0, L' and its tie, the cross-under and the rail around y 18100-18350; checked
+each copy's pre-driver at 3x with overlay, the metal gaps in all eight copies in both metal
+shots, straps and finger stacks, the pd tab, row H's end, the protection copies, the joins
+and the follower's candidates on `d_hiz`). One finding, which changes a connection: the
+clamp gate (the frame) is tied to VSS by an outer strip and a rail contact in all seven
+copies. Confirmed by the tracer at 1.9x and 4.5x (`chk_prot0.png`, `chk_foot.png`): drawn
+in the cell; `d#_prot_g` is gone (merged into `vss`, 7 nets fewer). Could not be checked:
+whether the two load-gate boxes are buried contacts (accepted from acid1b), D0's metal under
+the bond-wire shadow, D7's protection.

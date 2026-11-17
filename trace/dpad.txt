@@ -165,7 +165,17 @@ C 17693,6100:17718,6485            # nine contacts to the rail
 P 17778,6060:17808,6510            # frame, left arm: the clamp gate
 P 17778,6060:17955,6098            # frame, top arm
 P 17920,6060:17955,6515            # frame, right arm (the comb hangs from it)
-N P 17793,6300 {}_prot_g
+# The frame is the clamp gate and is tied to VSS (review round 2, confirmed by the tracer):
+# the right arm and an outer strip (x 17978-17995) join in a U at the foot (y 6490-6512,
+# acid1b 4.5x, cache/scratch/dpad/chk_foot.png); the strip runs up to y 5985 and west along
+# y 5975-5995 to a contact on the rail at (17727,6000) (ring in metal, green patch in
+# acid1b; chk_prot0.png); in D0 a 20 px metal stub joins that contact to the rail's top.
+P 17978,5985:17995,6512            # outer strip
+P 17920,6490:17995,6512            # the U at the foot
+P 17712,5975:17995,5995            # top run west to the rail contact
+P 17712,5978:17742,6012
+C 17727,6000
+M 17716,5986:17744,6080            # stub from the contact down to the rail (D0); over the rail in the other copies
 A 17772,6095:17814,6500 kind=field
 C 17818,6112:17843,6490            # nine contacts on the node
 M 17814,6105:17850,6500
