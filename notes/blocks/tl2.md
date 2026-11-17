@@ -39,7 +39,7 @@ strip that runs west under the rail to the node, and the load is a strip from a 
 R2, under a poly plate between R2 and R3, with a tie box at the plate.
 
 - **Lower unit, `tl2_w6070` = NOT `tl1_w6022`.** VSS box x 2968-3015, y 6095-6170, contact
-  (2982,6140). Gate: `tl1`'s row y 6187-6203 (the third latch's output) runs on east under R2,
+  (2988,6144). Gate: `tl1`'s row y 6187-6203 (the third latch's output) runs on east under R2,
   the thin metals and R3, turns north at x 3101-3125 and west along y 6098-6120 across the top
   of the VSS box (W 47); its west end is at x 2953. Drain: tan under the rail, y 6064-6092. Node:
   a diffusion strip in the open gap between thin metal E and R3, x 2934-2947, y 6048-6120. Load:
@@ -48,12 +48,12 @@ R2, under a poly plate between R2 and R3, with a tie box at the plate.
   y 6066-6122. Tie: box x 2895-2927, y 6042-6062 at the plate's top, reached by the node strip.
   Output: a strip east along y 6064-6084 to the buried contact B (box x 3038-3068, y 6050-6084).
 - **Upper unit, `tl1_w5936` = NOT `tl2_w6070`.** VSS box x 2968-3015, y 5962-6040, contact
-  (2982,6012). Gate: the poly from B east along y 6056-6076, north at x 3101-3125, west along
+  (2986,6011). Gate: the poly from B east along y 6056-6076, north at x 3101-3125, west along
   y 5966-5990 across the top of the VSS box (W 47), west end x 2952. Drain: strip y 5942-5960
   north of the gate, west under the rail and through the gap to the node (x 2897-2930,
   y 5935-6005, under thin metal E), east to the buried contact A (box x 3038-3068, y 5924-5958).
   Load: strip y 5936-5962 from `tl1`'s VCC box under R2 (contact (2803,5935)) under the plate
-  x 2848-2892, y 5915-5990. Tie: box x 2868-2897, y 5988-6008 below the plate.
+  x 2842-2892, y 5915-5990. Tie: box x 2868-2897, y 5988-6008 below the plate.
   Output: poly from A east along y 5926-5947, south at x 3147-3170 round both loops, west along
   y 6228-6247, under R3, the thin metals and R2, to `tl1`'s row at x 2817.
 - **The loops.** Each gate poly goes round a rectangle of bare ground east of the rail
@@ -120,10 +120,44 @@ a contact.
    (which would make each a long transistor) cannot be excluded from colour alone; the field
    colour of the rectangles and gaps, and the two units being complete without it, speak
    against it.
-4. Sizes: the pull-downs' W (47) is the VSS box's width; the lower load's strip is read from
+4. The joins of the lower node strip and of the two strips east of the rail to the diffusion
+   under the rail are hidden by a rail-edge line in every shot (review round 1); drawn joined on
+   the continuity of their outlines.
+5. Sizes: the pull-downs' W (47) is the VSS box's width; the lower load's strip is read from
    the brighter band of the plate (y 6093-6120). No connection depends on these.
 
 ## Review
+
+Round 1 (full review, 2026-11-17 22:41 +0000, a fresh agent on claude-fable-5-2, at commit
+7886411; 11 images in `cache/scratch/tl2/review-1/`). Piece: the small cluster's east half
+with R3, the VSS metal and the two thin metals. Told to suspect: thin metal E dark over the
+lower tie box (contact, break or pass-over), the follower's contact candidates (2912,5983) and
+(2867,5980), diffusion under the loops and the boxes A and B, the lower node strip and its
+joins, the upper drain strip under the rail, the lower load and its VCC box, the two rows
+between x 2817 and x 3010, the pad (2913,6327) and its row.
+It checked, at 3.3x and more in two or three shots and with text maps and profiles: thin E over
+the tie box (pass-over: no bright centre, no pad, protected tan inside, green minus red at most
++1 against +44 and +52 at two real contacts); both candidates (not contacts); the lower node
+strip (a feature in three shots; the gate's west end stays under the rail); both pull-downs;
+the strips to A and B (diffusion, continuous) and the loops (plain poly on field, no edge
+lines across them); the lower VCC box, contact and strip; both rows (continuous, no rings in
+the chip-2 shots); R3 to its foot and the VSS metal (no contact to the rows); the pad
+(2913,6327) (a contact) and its row to x 3530; the extraction, `opendiff.py`, `unsure.py`,
+the ports at x 2817.
+Findings, both geometry only, both checked by the tracer and fixed:
+1. The upper load plate's west edge is at about x 2840, not 2848: confirmed (`px.py row 5950
+   2834 2858 3`: chip-2 stripped 171/145/67 at x 2846, the edge at x 2840); drawn from x 2842.
+2. The VSS contacts lie a few px east of where they were drawn: the clean shot's hole is at
+   (2987,6011) for the upper one (94/127/84), and the metal shots' ring at about (2990,6146)
+   for the lower; moved to (2986,6011) and (2988,6144).
+Could not be checked: the joins of the lower node strip and of the two strips east of the rail
+to the diffusion under the rail (a rail-edge line hides each in every shot; they rest on
+outline continuity); the chip-2 stripped shot in the narrow gaps between the metals (fringes);
+x 3200-3533 north of y 6215 was not surveyed.
+`tools/t.sh tl2 sameconn.py 7886411`: `connections identical`.
+`.venv/bin/python tools/sameconn.py 7886411`: `connections identical`.
+
+Round 1: no findings that change a connection.
 
 ## Not done
 
