@@ -599,4 +599,31 @@ rails was overstated (the metal joins are real; the identity is by the layout ru
 the handoff).
 Not checked: west of x 6400; the x 6364 stretch above 1.95x; the tie's diffusion in chip 1.
 
-Round 1: no findings.
+Round 1 of the first round of work: clean (no findings).
+
+### Second round of work (pieces 4-6: the latch `tc2_sr`, two wires, the east ground rail)
+
+Round 1 (full review of what was added since 7562c27, 2026-11-17 23:58 +0000, a fresh agent on
+claude-fable-5-2). Told to suspect the latch as a circuit (which poly is which gate of the
+five-gate stack, the nodes between, row A as two polys, the `?P`, the load ties, the band to
+the lower column, the top diffusion, row C's end, the cross-coupling), the wires read below
+4x (`tc2_sr_r`, the row y 6367 and the metal y 6370, the rails), the pads, and widths, ends
+and undrawn features. Checked: the stack order and nodes at 4x in three shots (ground, A,
+n20, B, q, C, ground, D, n21, E, q_n; no contact on n20, n21), row A's gap at 8x, the `?P`,
+the tie of q's load by profiles, the diffusion links by column and row profiles in both
+chip-2 shots, the stub, every pad, `tc2_sr_r`'s metal over ten rows at 4.4x, the row y 6367
+and the metal y 6370 as one piece at 3.2-3.3x, both rails in both chips.
+No finding changes a connection. Three minor points:
+1. The join of q_n's buried-contact poly to its pad poly across x 8140-8150 was drawn
+   certain on the same grade of evidence as the `?P` (dark in all four shots; only the
+   C-shaped rings open east in the clean shot): confirmed by the tracer on
+   `review2-1/l_qnbc.png`; that stretch is now `?P`. Connections identical. Note:
+   `tools/unsure.py --equations` now prints `tc2_sr_q` as FIRM and `tc2_sr_q_n` as DEPENDS;
+   that is where the name's label sits (on the gate side of the join), not more certainty:
+   the latch's cross-coupling depends on both `?P` items.
+2. The upper column's west edge at y 6052-6107 is at about x 8095 (drawn 8105), and
+3. the top diffusion runs east to about x 8150 (drawn 8138): drain side only, the channels
+   unchanged; recorded, not redrawn.
+Not checked: `tc2_sr_r` north of y 5468 (left open by the trace), `tc2_sr_c`'s metal
+y 6315-6338 (follower only), the VCC rail north of y 5960.
+

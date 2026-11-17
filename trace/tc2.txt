@@ -299,7 +299,8 @@ N M 7791,6350 tc2_sr_s
 #     Metal from the pad north (x 8156-8178, follower (8166,6248)-(8168,6026)) to the pad
 #     (8168,6028) of the east piece of row A's track, which crosses the upper column: the
 #     pull-down of q that q_n gates (249/175/125 at (8127,6025): poly over a channel).
-P 8118,6224:8152,6248
+P 8118,6224:8140,6248
+?P 8138,6224:8152,6248                 # the join to the pad poly across x 8140-8150: dark in all four shots; only the C-shaped nested rings open east in the clean shot (review round 1 of the second round; review2-1/l_qnbc.png)
 B 8116,6220:8148,6251
 P 8150,6230:8197,6301
 C 8166,6243
