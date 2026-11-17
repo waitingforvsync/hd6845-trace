@@ -737,3 +737,64 @@ P 17016,16322:17052,16365          # pad
 C 17034,16343 s=26x26
 P 16950,16334:17040,16355          # west, out of the region
 N P 16960,16344 d1_out_n
+
+# ==== d2_out_n .. d5_out_n: the output data lines of D2-D5 (run 5, 2026-11-17; wiring only) ====
+# Each is the chain's "line 2": a poly from the west end of strip 4 of the pin's pad cell (dpad),
+# west under the trunk, the d_hiz metal, the VCC rail, the thin metal and the VSS rail to a pad
+# in the wiring field, and from that pad a metal south to a pad in the staircase at the column's
+# south-west corner, where a poly leaves west (the driver is west of the column, like D1's).
+# D3-D5: the poly first runs along the channel (x 17592-17614, in the gap between the VCC rail
+# and the d_hiz metal) from the pad cell's height up to the chain's line 2. No contact on any
+# metal between its two pads: each passes over the east part of one or two plain diffusion
+# rectangles (the chains' capacitors: tan, no specks, no ring, no pad on the metal).
+
+# -- d2_out_n: straight west from the cell; at x 17184-17199 a connector north to an upper row
+#    (y 10911-10933), which ends on pad A (17078,10921). The pad B (17032,10965) 45 px south-west
+#    with a poly that turns south at x 17135-17155 is another net (field between x 17155 and 17183).
+P 17183,10954:17812,10976          # line 2, into the block at the west end of D2's strip 4
+P 17184,10911:17199,10976          # connector north
+P 17085,10911:17199,10933          # upper row, west to pad A
+P 17061,10902:17097,10941          # pad A
+C 17078,10921 s=26x26
+M 17080,10908 y15718 x16993 y16232 w=18
+P 16976,16194:17014,16238          # end pad
+C 16993,16217 s=26x26
+P 16950,16203:16985,16225          # west, out of the region
+N P 16960,16214 d2_out_n
+
+# -- d3_out_n
+P 17592,12538:17812,12560          # from the block at the west end of D3's strip 4
+P 17592,12320:17614,12560          # north along the channel
+P 17030,12320:17614,12343          # line 2, west under the rails
+P 17030,12320:17050,12368          # corner south to the pad
+P 17020,12358:17056,12395          # pad
+C 17037,12376 s=26x26
+M 17037,12364 y15674 x16950 y16102 w=18
+P 16933,16065:16971,16108          # end pad
+C 16950,16087 s=26x26
+P 16905,16073:16942,16096          # west (drawn 30 px beyond the pad; goes on)
+N P 16912,16085 d3_out_n
+
+# -- d4_out_n
+P 17592,14121:17812,14143          # from the block at the west end of D4's strip 4
+P 17592,13688:17614,14143          # north along the channel
+P 16985,13688:17614,13710          # line 2, west under the rails to the pad
+P 16975,13680:17012,13717          # pad
+C 16993,13698 s=26x26
+M 16994,13686 y15630 x16906 y15972 w=18
+P 16889,15935:16927,15978          # end pad
+C 16907,15957 s=26x26
+P 16860,15943:16898,15965          # west (30 px beyond the pad; goes on)
+N P 16868,15954 d4_out_n
+
+# -- d5_out_n
+P 17592,15726:17812,15748          # from the block at the west end of D5's strip 4
+P 17592,14446:17614,15748          # north along the channel, 1,300 px
+P 16940,14446:17614,14468          # line 2, west under the rails to the pad
+P 16931,14438:16968,14476          # pad
+C 16949,14457 s=26x26
+M 16950,14445 y15588 x16862 y15842 w=18
+P 16846,15804:16884,15847          # end pad
+C 16863,15827 s=26x26
+P 16817,15815:16855,15836          # west (30 px beyond the pad; goes on)
+N P 16825,15826 d5_out_n
