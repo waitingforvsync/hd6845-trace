@@ -1065,6 +1065,46 @@ contact near (6965,4480).
 
 Round 1: no findings.
 
+### Run 8's review
+
+**Round 1** (2026-11-17 13:08 -0600; full review of cell A and its input route, x 6690-7160, y 3140-3420, by a
+fresh agent: twelve views at 4-9x in up to four shots in `cache/scratch/tc1/review-13/`,
+colour profiles, text maps, the follower, `tools/railprof.py`, the extraction and
+`tools/unsure.py`). Told to suspect: `tc1_m6817` over the stub and arm (contact, break or
+neither); the thin metal x 6948 over the finger and over the box; the vertical poly
+x 6986-7006 (one piece, its two joins, a contact to the channel metal beside it); the west
+ends of both gate rows; the band across the two gaps and the load band at the supply
+region; the arm's join to the stub; the finger's join and the column's top; the contact
+(7100,3180) and the bare stretch of the metal x 7091-7110; the two rail contacts; anything
+left out.
+
+Checked and found correct: the vertical poly is one piece (orange in chip 1 down x 6992
+from y 3174 to y 3312, including y 3244; bare ground at y 3156 and y 3330), joins the row
+and gate row 1 and ends at both; the channel metal x 7013 beside it is unbroken with no ring
+from y 3150 to y 3420 in both chips. The contact (7100,3180) is real, the follower stops at
+y 3184 from the north and at y 3392 from the south with bare ground between, and neither
+channel metal taps the row. Both gate rows end at about x 6914, with field under the rail;
+no third gate. The column starts at y 3285; the finger and the band cross both gaps as
+diffusion and the band joins the region under `tc1_m6817`. The thin metal x 6948 has no ring
+or hole at the finger or the box (one dark speck at (6947,3288), chip-2 stripped shot only).
+`tc1_m6817` over the ladder is neither a contact nor a break (clean shot 209/173/126 there
+against 143-180/152-164 at four real contacts, no pits); Ambiguity 18 stands, since only the
+green test separates the readings. The stub is continuous with the region and the arm is
+orange in the gap at y 3407; the contacts (6890,3276) and (6708,3378) are real and on the
+metals claimed.
+
+Two remarks that change no connection, **not applied to the trace** (so that what is merged
+is what was reviewed): the supply rail's east edge measures about x 6732-6734 over
+y 3336-3402 (drawn 6742; the band still reaches the block); gate row 2 reads y 3386-3406 in
+the clean shot (drawn 3388-3403: L nearer 20 than 15).
+Not checked by the reviewer: which supply each rail is; anything north of y 3140 (the route
+of `tc1_m7100`, the cell north, a follower candidate at (6948,3210)); the contact
+(7100,3395) and the C-shaped poly (earlier runs); the exact shape of the arm, stub and
+buried contact at (6800-6812, 3378-3400), too blurred at 9x: only the arm-to-stub tie is
+supported.
+
+Round 1: no findings.
+
 ## Not done
 
 - **Gate columns x 6400-7000, y 2650-4450**: nothing drawn. Dense random logic with large
