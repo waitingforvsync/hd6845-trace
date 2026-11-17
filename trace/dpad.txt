@@ -143,4 +143,12 @@ N M 17813,7150 {}_pd
 N P 18000,7479 {}_out_n
 @end
 
+@inst dpad_cell 0,1735 tag=d1
+@inst dpad_cell 1,3470 tag=d2
+@inst dpad_cell 1,5054 tag=d3
+@inst dpad_cell 2,6637 tag=d4
+@inst dpad_cell 2,8242 tag=d5
+@inst dpad_cell 2,9847 tag=d6
+@inst dpad_cell 3,11452 tag=d7
+
 N P 17700,7386 d_hiz
