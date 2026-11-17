@@ -5,8 +5,13 @@
 7420,2975:7820,3040   power  VSS strap | joins the two outer rails of the island; the poly lines a and b run west under it
 7900,2950:8090,4060   route  island to datapath wiring | metal verticals joining the gates to each other, to the datapath and to the bus field below
 8085,2715:8335,4110   route  six north-south lines ns1-ns6 | ns1 = island input w1 (from logic at the datapath slice-0 position); ns2 from the west bus; ns3, ns4, ns6 from over the datapath, ns3/ns4 on south to tc2; ns5, ns6 tap polys going east. No transistors
-7000,2950:7170,4450   ?route channel west of the island | four more vertical metals with poly taps into the gate columns; carries l4_out north and the g poly west; mostly untraced
-6400,2650:7000,3600   ?logic gate columns | dense random logic with large devices under wide rails; not traced
+7000,2950:7170,3160   ?route channel west of the island, north part | the four vertical metals' north ends and their poly taps into the gate columns; not traced
+6975,3160:7170,3405   route  channel west of the island, middle part | tc1_m7100's contact (7100,3180) and its poly west and south to cell A's upper gate row; tc1_m7013, tc1_x1, tc1_o4020 pass
+7035,3405:7170,4450   route  channel west of the island, south part | four vertical metals: x 7013 in two pieces (tc1_m7013 down to cell B's gate, tc1_o3527 from cell B's output south), tc1_x1 (x 7058), tc1_l4_out (x 7100), tc1_o4020 (x 7142); two C-shaped polys under them (tc1_o3353, tc1_o3527); the g poly west
+6400,2650:7000,3240   ?logic gate columns | dense random logic with large devices under wide rails; not traced
+6400,3240:6690,3405   ?logic gate columns | not traced
+6690,3240:6975,3405   logic  NOR(tc1_m7100, tc1_l4_out) | cell A (tc1_o3353): two pull-downs on the column east of the rail, load from the supply rail on the west; output is the C-shaped poly to cell B's upper gate
+6690,3405:7035,3600   logic  NOR(tc1_o3353, tc1_m7013) | cell B (tc1_o3527): two pull-downs on a column east of the rail, load from the supply rail on the west; output in poly south along the channel to the contact (7011,3852) and on south in metal
 6690,3600:7035,3905   logic  driver NOR(tc1_p3698, thin metal x 6968) | second wide two-input NOR with a strong load (tc1_o3740); output by a buried contact to the contact (7010,3722) and north on a metal
 6700,3920:6995,4225   logic  driver NOR(tc1_g, tc1_x1) | wide two-input NOR with a strong load (tc1_o4020): tc1_g wraps one drain as an L, tc1_x1 rings an island; output east by a buried contact to the channel metal x 7142 going north
 7115,2620:8350,2850   route  tc1_o4020 to the bus line y 2641 | from the contact (7140,2832) in poly (east, north, east, north) to the contact (7465,2640); bus metal east, under the VSS rail in poly, on east over the datapath
