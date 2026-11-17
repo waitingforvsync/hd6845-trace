@@ -1350,11 +1350,10 @@ were already questions in its handoffs of `3c0efe1` and `48b43dd`). Done on a br
   with the words `connections identical` in the section. Before, "no findings" anywhere in the
   section passed, so an unfinished later cycle passed on an earlier one's clean round. Notes
   with no `Round N:` line pass as before. `--review-test FILE` runs that check alone.
-  **Not tightened yet (owner to decide):** the agent that made these changes also had the gate
-  fail when the last `Round N:` line is not a clean one. That is stricter than before for
-  every collaborator and was not among the suggestions, so as pushed the gate only warns
-  there and passes on the older rule ("no findings" anywhere in the section). To enforce it,
-  set `STRICT_LAST_ROUND = True` in `tools/mergecheck.py`.
+  The gate now also **fails when the last `Round N:` line is not a clean one**
+  (`STRICT_LAST_ROUND` in `tools/mergecheck.py`). This is stricter than before for every
+  collaborator and was not among the suggestions; it was pushed switched off, and the user
+  turned it on the same day ("yeah let's turn that on").
 - **Ports are machine-readable**: `ports.d/PREFIX.txt`, one line per port (name, layer, place
   or range, direction, note), a tracer's own file (workflow step 3, guide sections 8-10, the
   gate, the pull request template; `tools/rename.py` and `tools/signals.py --docs` cover it).

@@ -26,8 +26,8 @@ repository's main into the branch. It prints each check and ends with PASS or FA
     the section: the words "connections identical", which tools/sameconn.py prints. Notes
     with no "Round N:" line at all (written before that form was used) pass on the words
     "no findings" or "no issues" anywhere in the section, as before. A last verdict line
-    that is not clean only warns while STRICT_LAST_ROUND is False (the older rule still
-    passes it if "no findings" stands anywhere in the section);
+    that is not clean fails (STRICT_LAST_ROUND; set it False to only warn, as before
+    2026-11-17);
  6. tools/unsure.py: nets that are joined only through uncertain items on the branch but
     not on main (listed; each must be written up in the block notes, not a failure);
  7. a no-op merge into main: main must fast-forward to the branch;
@@ -73,9 +73,9 @@ def unsure_nets(cwd):
 
 
 # When True, check 5 fails if the last "Round N:" line of the Review section is not a clean one.
-# Off for now: it is stricter than the gate was (which passed on "no findings" anywhere in the
-# section), and the owner has not decided to enforce it. While off, that case only warns.
-STRICT_LAST_ROUND = False
+# On since 2026-11-17 (the owner's decision). Before, "no findings" anywhere in the section
+# passed, so an unfinished later review passed on an earlier clean round. False: only warn.
+STRICT_LAST_ROUND = True
 
 VERDICT = re.compile(r'^[\s*_>-]*Round\s+\d+[*_]*\s*:[*_]*\s*(.*?)[\s*_]*$', re.I | re.M)
 CLEAN = re.compile(r'^no (findings|issues)\.?$', re.I)
