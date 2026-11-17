@@ -1,21 +1,23 @@
 #!/usr/bin/env python3
-"""Build the tracing dashboard: a static page of who is working on what, and progress.
+"""Build the tracing dashboard: who is working on what, progress, open questions, package pages.
 
 usage: tools/dashboard.py [--out DIR]      (default: _site)
 
 Reads only what is in git, with the standard library, so that a GitHub Action can run it
 without the image cache:
   claims/*.md                  active claims (who, since, region, status)
-  notes/work-packages.md       the master list (every package, its region and status)
+  notes/work-packages.md       the master list (packages, regions, status) and the Re-read list
+  notes/ambiguities.md         the ambiguity register
+  notes/blocks/*.md            each package's notes (rendered on its own page)
   out/floorplan_legend.txt     the functional blocks of the floor plan
   out/report.txt, its history  extraction figures now, and transistors traced over time
   out/netlist.json             transistor positions (counted per package region)
-  notes/ambiguities.md         open and resolved ambiguities
-  git log                      who touched each package's files, contributors, recent commits,
-                               last commit on each claim's branch
+  git log                      who touched each package's files, contributors, XP, recent
+                               commits, last commit on each claim's branch
   dashboard/die.jpg            the die at 1/16 scale
-Writes DIR/index.html and DIR/die.jpg. .github/workflows/dashboard.yml runs it on every push
-with DIR = _site/dashboard and publishes it at https://waitingforvsync.github.io/hd6845-trace/dashboard/.
+Writes DIR/index.html, DIR/p/PREFIX.html (one page per package), DIR/version.json and
+DIR/die.jpg. .github/workflows/dashboard.yml runs it on every push with DIR = _site/dashboard
+and publishes it at https://waitingforvsync.github.io/hd6845-trace/dashboard/.
 """
 import argparse
 import collections
@@ -23,15 +25,19 @@ import datetime
 import glob
 import html
 import json
+import math
 import os
 import re
 import shutil
 import subprocess
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+REPO = 'https://github.com/waitingforvsync/hd6845-trace'
 W, H = 19838, 21025
 REGION_RE = re.compile(r'(\d+)\s*-\s*(\d+)\s*x\s*(\d+)\s*-\s*(\d+)')
+POINT_RE = re.compile(r'\((\d{3,5}),\s*(\d{3,5})\)')
 E = html.escape
+STALE_HOURS = 24
 
 
 def git(*args):
@@ -48,14 +54,107 @@ def regions(text):
     return [tuple(int(v) for v in m.groups()) for m in REGION_RE.finditer(text)]
 
 
-def md(s):
+def inline(s):
     s = E(s)
     s = re.sub(r'`([^`]+)`', r'<code>\1</code>', s)
-    return re.sub(r'\*\*([^*]+)\*\*', r'<b>\1</b>', s)
+    s = re.sub(r'\*\*([^*]+)\*\*', r'<b>\1</b>', s)
+    s = re.sub(r'(?<![\w*])\*([^*\s][^*]*)\*(?![\w*])', r'<i>\1</i>', s)
+    s = re.sub(r'\[([^\]]+)\]\((https?://[^)\s]+)\)', r'<a href="\2">\1</a>', s)
+    return s
 
 
 def short(s, n):
     return s if len(s) <= n else s[:n].rsplit(' ', 1)[0] + ' ...'
+
+
+def plain(s):
+    return re.sub(r'[`*]', '', s)
+
+
+def epoch_ms(s):
+    """'2026-11-17 08:29 -0600' or ISO -> ms since the epoch (0 if unknown)."""
+    for fmt in ('%Y-%m-%d %H:%M %z', '%Y-%m-%dT%H:%M:%S%z'):
+        try:
+            return int(datetime.datetime.strptime(s.strip(), fmt).timestamp() * 1000)
+        except ValueError:
+            pass
+    return 0
+
+
+def markdown(text):
+    """A small Markdown renderer for the block notes: headings, paragraphs, lists, tables,
+    code blocks, inline code, bold, italics, links."""
+    out, para, lst, table, code = [], [], None, [], None
+
+    def flush():
+        nonlocal para, lst, table
+        if para:
+            out.append('<p>%s</p>' % inline(' '.join(para)))
+            para = []
+        if lst:
+            tag, items = lst
+            out.append('<%s>%s</%s>' % (tag, ''.join('<li>%s</li>' % inline(' '.join(i)) for i in items), tag))
+            lst = None
+        if table:
+            rows = [[c.strip() for c in r.strip().strip('|').split('|')] for r in table
+                    if not set(r.replace('|', '').strip()) <= set('-: ')]
+            if rows:
+                head, body = rows[0], rows[1:]
+                out.append('<div class="tw"><table><thead><tr>%s</tr></thead><tbody>%s</tbody></table></div>' % (
+                    ''.join('<th>%s</th>' % inline(c) for c in head),
+                    ''.join('<tr>%s</tr>' % ''.join('<td>%s</td>' % inline(c) for c in r) for r in body)))
+            table = []
+
+    for line in text.split('\n'):
+        if code is not None:
+            if line.strip().startswith('```'):
+                out.append('<pre><code>%s</code></pre>' % E('\n'.join(code)))
+                code = None
+            else:
+                code.append(line)
+            continue
+        s = line.strip()
+        if s.startswith('```'):
+            flush()
+            code = []
+            continue
+        m = re.match(r'^(#{1,6})\s+(.*)$', s)
+        if m:
+            flush()
+            lvl = min(6, len(m.group(1)) + 1)
+            out.append('<h%d>%s</h%d>' % (lvl, inline(m.group(2)), lvl))
+            continue
+        if s.startswith('|'):
+            if para or lst:
+                p, t = para, table
+                flush()
+                table = t
+            table.append(s)
+            continue
+        if table:
+            flush()
+        m = re.match(r'^(\s*)([-*]|\d+\.)\s+(.*)$', line)
+        if m and not para:
+            tag = 'ol' if m.group(2)[0].isdigit() else 'ul'
+            if lst and lst[0] == tag:
+                lst[1].append([m.group(3)])
+            else:
+                flush()
+                lst = (tag, [[m.group(3)]])
+            continue
+        if not s:
+            flush()
+            continue
+        if lst and line.startswith((' ', '\t')):
+            lst[1][-1].append(s)
+            continue
+        if lst:
+            flush()
+        para.append(s)
+    if code is not None:
+        out.append('<pre><code>%s</code></pre>' % E('\n'.join(code)))
+    flush()
+    return '\n'.join(out)
 
 
 # ------------------------------------------------------------------------------------- data
@@ -69,12 +168,15 @@ def read_claims():
         br = field(t, 'Branch') or name
         last = ''
         for ref in ('origin/' + br, br):
-            last = git('log', '-1', '--format=%ad', '--date=format:%Y-%m-%d %H:%M', ref).strip()
+            last = git('log', '-1', '--format=%ad', '--date=format:%Y-%m-%d %H:%M %z', ref).strip()
             if last:
                 break
         st = field(t, 'Status') or 'tracing'
-        out.append(dict(prefix=name, who=field(t, 'Who'), claimed=field(t, 'Claimed'), region=field(t, 'Region'),
-                        what=field(t, 'What'), last=last, status=st, merged=st.startswith('merged')))
+        claimed = field(t, 'Claimed')
+        activity = max(epoch_ms(claimed), epoch_ms(last)) if last else epoch_ms(claimed)
+        out.append(dict(prefix=name, who=field(t, 'Who'), claimed=claimed, region=field(t, 'Region'),
+                        what=field(t, 'What'), last=last, status=st, merged=st.startswith('merged'),
+                        activity=activity, text=t))
     return out
 
 
@@ -105,31 +207,57 @@ def read_master():
             continue
         get = lambda k: cells[cols.index(k)] if k in cols and cols.index(k) < len(cells) else ''
         status = get('status') if 'status' in cols else ''
-        rows.append(dict(label=get('prefix'), prefixes=re.findall(r'`([a-z][a-z0-9_]*)`', get('prefix')),
-                         region=get('region'), what=get('what'), status=status, kind=status_kind(status),
-                         section=section))
+        prefixes = re.findall(r'`([a-z][a-z0-9_]*)`', get('prefix'))
+        m = re.match(r'`([a-z]+)(\d+)`\s*-\s*`\1(\d+)`', get('prefix'))
+        if m:
+            prefixes = ['%s%d' % (m.group(1), k) for k in range(int(m.group(2)), int(m.group(3)) + 1)]
+        rows.append(dict(label=get('prefix'), prefixes=prefixes, region=get('region'), what=get('what'),
+                         status=status, kind=status_kind(status), section=section))
     return rows
 
 
-def package_history(prefixes):
-    """Authors (by commits) and first/last date of the commits that touched a package's files."""
-    paths = []
-    for p in prefixes:
-        paths += ['trace/%s.txt' % p, 'notes/blocks/%s.md' % p, 'floorplan.d/%s.txt' % p]
-    if not paths:
-        return {}
-    log = git('log', '--format=%an\t%ad', '--date=format:%Y-%m-%d', '--', *paths)
-    rows = [l.split('\t') for l in log.splitlines() if '\t' in l]
-    if not rows:
-        return {}
-    who = collections.Counter(a for a, _ in rows)
-    return dict(who=who.most_common(), first=rows[-1][1], last=rows[0][1], commits=len(rows))
+def read_ambiguities():
+    t = open(os.path.join(ROOT, 'notes', 'ambiguities.md')).read()
+    parts = re.split(r'^(## AMB-\d+.*)$', t, flags=re.M)
+    out = []
+    for i in range(1, len(parts), 2):
+        head, body = parts[i], parts[i + 1]
+        num = int(re.match(r'## AMB-(\d+)', head).group(1))
+        title = re.sub(r'^## AMB-\d+[:\s]*', '', head)
+        title = re.sub(r'\s*\((?:\d{4}-\d\d-\d\d|resolved[^)]*|open[^)]*|assumed[^)]*|mostly resolved)\)\s*', ' ', title).strip()
+        h = head.lower()
+        state = 'open' if 'mostly resolved' in h else 'resolved' if '(resolved' in h else 'assumed' if 'assumed' in h else 'open'
+        m = POINT_RE.search(head + body)
+        at = (int(m.group(1)), int(m.group(2))) if m else None
+        if at is None:
+            r = regions(head + body)
+            at = ((r[0][0] + r[0][1]) // 2, (r[0][2] + r[0][3]) // 2) if r else None
+        out.append(dict(id='A%d' % num, title=title, state=state, at=at,
+                        anchor='amb-%03d' % num, line=t[:t.find(head)].count('\n') + 1))
+    return out
 
 
-def transistors_in(nl, regs):
-    if not nl or not regs:
-        return 0
-    return sum(1 for t in nl if any(x0 <= t[0] <= x1 and y0 <= t[1] <= y1 for x0, x1, y0, y1 in regs))
+def read_reread(master):
+    t = open(os.path.join(ROOT, 'notes', 'work-packages.md')).read()
+    sec = t.split('## Re-read list', 1)[1].split('\n## ', 1)[0] if '## Re-read list' in t else ''
+    by_prefix = {p: r for r in master for p in r['prefixes']}
+    out = []
+    for line in sec.splitlines():
+        m = re.match(r'^\| (R\d+) \|', line)
+        if not m:
+            continue
+        cells = [c.strip() for c in line.strip().strip('|').split('|')]
+        block, region, what, status = cells[1], cells[2], cells[3], cells[-1]
+        st = status.lower()
+        state = 'done' if st.startswith(('done', '~~')) else 'standing' if st.startswith('standing') else 'open'
+        r = regions(region)
+        if not r:
+            for p in re.findall(r'`([a-z][a-z0-9_]*)`', block)[:1]:
+                if p in by_prefix:
+                    r = regions(by_prefix[p]['region'])
+        at = ((r[0][0] + r[0][1]) // 2, (r[0][2] + r[0][3]) // 2) if r else None
+        out.append(dict(id=m.group(1), title=plain(short(block + ': ' + what, 200)), state=state, at=at))
+    return out
 
 
 def report_figures():
@@ -147,27 +275,11 @@ def progress_series():
     pts = []
     for line in git('log', '--format=%H\t%ad', '--date=format:%Y-%m-%d %H:%M', '--', 'out/report.txt').splitlines():
         h, d = line.split('\t')
-        head = git('show', '%s:out/report.txt' % h)[:300]
-        m = re.search(r'(\d+) nets, (\d+) transistors', head)
+        m = re.search(r'(\d+) nets, (\d+) transistors', git('show', '%s:out/report.txt' % h)[:300])
         if m:
             pts.append((d, int(m.group(2))))
     pts.reverse()
     return pts
-
-
-def ambiguity_counts():
-    t = open(os.path.join(ROOT, 'notes', 'ambiguities.md')).read()
-    heads = re.findall(r'^## AMB-\d+.*$', t, re.M)
-    resolved = sum(1 for h in heads if 'resolved' in h.lower())
-    return len(heads), resolved
-
-
-def reread_counts():
-    t = open(os.path.join(ROOT, 'notes', 'work-packages.md')).read()
-    sec = t.split('## Re-read list', 1)[1].split('\n## ', 1)[0] if '## Re-read list' in t else ''
-    rows = [l for l in sec.splitlines() if re.match(r'^\| R\d+ ', l)]
-    done = sum(1 for l in rows if l.rstrip(' |').split('|')[-1].strip().lower().startswith(('done', '~~')))
-    return len(rows), done
 
 
 def floor_blocks():
@@ -185,27 +297,151 @@ def floor_blocks():
     return out
 
 
-def contributors():
-    out = []
-    for line in git('shortlog', '-sn', '--no-merges', 'HEAD').splitlines():
-        n, name = line.strip().split('\t', 1)
-        last = git('log', '-1', '--author=' + name, '--format=%ad', '--date=format:%Y-%m-%d %H:%M').strip()
-        out.append((name, int(n), last))
+def read_commits():
+    """Every non-merge commit: author, ISO date, subject, files."""
+    out, cur = [], None
+    for line in git('log', '--no-merges', '--format=@@%an\t%ad\t%s', '--date=iso-strict', '--name-only').splitlines():
+        if line.startswith('@@'):
+            a, d, s = line[2:].split('\t', 2)
+            cur = dict(author=a, date=d, subject=s, files=[])
+            out.append(cur)
+        elif line.strip() and cur:
+            cur['files'].append(line.strip())
     return out
 
 
-# ------------------------------------------------------------------------------------- page
+def package_history(prefixes, commits):
+    pats = [re.compile(r'^(trace/%s(_[^/]*)?\.txt|notes/blocks/%s\.md|floorplan\.d/%s\.txt)$' % (p, p, p)) for p in prefixes]
+    rows = [c for c in commits if any(any(pt.match(f) for pt in pats) for f in c['files'])]
+    if not rows:
+        return {}
+    who = collections.Counter(c['author'] for c in rows)
+    return dict(who=who.most_common(), first=rows[-1]['date'][:10], last=rows[0]['date'][:10], commits=len(rows),
+                recent=[(c['date'][:16].replace('T', ' '), c['author'], c['subject']) for c in rows[:12]])
+
+
+def transistors_in(nl, regs):
+    if not nl or not regs:
+        return 0
+    return sum(1 for t in nl if any(x0 <= t[0] <= x1 and y0 <= t[1] <= y1 for x0, x1, y0, y1 in regs))
+
+
+# ------------------------------------------------------------------------------------- XP
+TITLES = ['Probe', 'Polysilicon Apprentice', 'Diffusion Scout', 'Contact Finder', 'Gate Keeper', 'Netlist Smith',
+          'Die Whisperer', 'Silicon Archaeologist', 'Mask Master', 'Grand Tracer']
+
+
+def level_of(xp):
+    lv = int(math.sqrt(xp / 100)) + 1
+    lo, hi = 100 * (lv - 1) ** 2, 100 * lv ** 2
+    return lv, TITLES[min(lv, len(TITLES)) - 1], (xp - lo) / (hi - lo), hi - xp
+
+
+def xp_table(commits, master, hist, tcount, claims):
+    people = collections.defaultdict(lambda: dict(xp=0, commits=0, claims=0, done=0, partial=0, transistors=0.0,
+                                                  days=collections.Counter(), badges=[], night=False, fixes=0,
+                                                  renames=0, reviews=0, carto=False, wiring=0, gates=0, amb=0))
+    for c in commits:
+        p = people[c['author']]
+        p['commits'] += 1
+        p['xp'] += 10
+        day = c['date'][:10]
+        p['days'][day] += 1
+        hour = int(c['date'][11:13])
+        if hour < 5:
+            p['night'] = True
+        s = c['subject'].lower()
+        if s.startswith('claim ') and any(f.startswith('claims/') for f in c['files']):
+            p['claims'] += 1
+            p['xp'] += 25
+        if re.search(r'\b(fix|fixes|fixed|correct|corrected|correction)\b', s):
+            p['fixes'] += 1
+        if 'rename' in s:
+            p['renames'] += 1
+        if 'review' in s:
+            p['reviews'] += 1
+        if 'amb-' in s:
+            p['amb'] += 1
+        if any(f.startswith('floorplan.d/') for f in c['files']):
+            p['carto'] = True
+    for r in master:
+        h = hist.get(r['label'], {})
+        if not h:
+            continue
+        total = sum(n for _, n in h['who'])
+        for a, n in h['who']:
+            p = people[a]
+            if r['kind'] == 'done':
+                p['done'] += 1
+                p['xp'] += 150
+                if tcount.get(r['label'], 0):
+                    p['gates'] += 1
+                else:
+                    p['wiring'] += 1
+            elif r['kind'] == 'partial':
+                p['partial'] += 1
+                p['xp'] += 50
+            share = tcount.get(r['label'], 0) * n / total
+            p['transistors'] += share
+            p['xp'] += int(share)
+    out = []
+    for name, p in people.items():
+        days = sorted(p['days'])
+        streak = best = 0
+        prev = None
+        for d in days:
+            dd = datetime.date.fromisoformat(d)
+            streak = streak + 1 if prev and (dd - prev).days == 1 else 1
+            best = max(best, streak)
+            prev = dd
+        b = []
+        if p['claims']:
+            b.append(('🏁', 'First claim', 'made a claim with tools/claim.py'))
+        if p['gates']:
+            b.append(('🔬', 'Gate hunter', 'a finished package with transistors in it'))
+        if p['wiring']:
+            b.append(('🧵', 'Wire wrangler', 'a finished wiring package'))
+        if p['done'] >= 5:
+            b.append(('🏗️', 'Block builder', 'five or more finished packages'))
+        if p['night']:
+            b.append(('🦉', 'Night owl', 'a commit between midnight and 5 am, local time'))
+        if max(p['days'].values() or [0]) >= 15:
+            b.append(('🏃', 'Marathon', '15 or more commits in one day'))
+        if best >= 3:
+            b.append(('🔥', '%d-day streak' % best, 'commits on %d days in a row' % best))
+        if p['fixes'] >= 3:
+            b.append(('🧹', 'Bug squasher', 'three or more fixes or corrections'))
+        if p['renames']:
+            b.append(('🏷️', 'Name giver', 'renamed a signal once its purpose was known'))
+        if p['reviews']:
+            b.append(('🤝', 'Second pair of eyes', 'a commit that records a review'))
+        if p['amb']:
+            b.append(('❓', 'Question keeper', 'worked on the ambiguity register'))
+        if p['carto']:
+            b.append(('🗺️', 'Cartographer', 'drew blocks on the floor plan'))
+        if p['commits'] >= 100:
+            b.append(('💯', 'Centurion', '100 commits'))
+        lv, title, frac, need = level_of(p['xp'])
+        out.append(dict(name=name, xp=p['xp'], level=lv, title=title, frac=frac, need=need, commits=p['commits'],
+                        done=p['done'], partial=p['partial'], transistors=int(p['transistors']), claims=p['claims'],
+                        streak=best, badges=b))
+    out.sort(key=lambda r: -r['xp'])
+    return out
+
+
+# ------------------------------------------------------------------------------------- page parts
 CSS = """
 .viz-root{color-scheme:light;--surface:#fcfcfb;--card:#ffffff;--ink:#0b0b0b;--ink2:#52514e;--ink3:#8a8984;--line:#e6e5e0;
- --partial:#2a78d6;--active:#eb6834;--done:#1baf7a;--todo:#9a9994;--series:#2a78d6}
+ --partial:#2a78d6;--active:#eb6834;--done:#1baf7a;--todo:#9a9994;--series:#2a78d6;--track:#ecebe6}
 @media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])) .viz-root{color-scheme:dark;--surface:#1a1a19;--card:#222220;
- --ink:#f0efec;--ink2:#c3c2b7;--ink3:#8f8e86;--line:#33332f;--partial:#3987e5;--active:#d95926;--done:#199e70;--todo:#77766f;--series:#3987e5}}
+ --ink:#f0efec;--ink2:#c3c2b7;--ink3:#8f8e86;--line:#33332f;--partial:#3987e5;--active:#d95926;--done:#199e70;--todo:#77766f;--series:#3987e5;--track:#2d2d2a}}
 :root[data-theme="dark"] .viz-root{color-scheme:dark;--surface:#1a1a19;--card:#222220;--ink:#f0efec;--ink2:#c3c2b7;--ink3:#8f8e86;--line:#33332f;
- --partial:#3987e5;--active:#d95926;--done:#199e70;--todo:#77766f;--series:#3987e5}
-*{box-sizing:border-box}body{margin:0}
+ --partial:#3987e5;--active:#d95926;--done:#199e70;--todo:#77766f;--series:#3987e5;--track:#2d2d2a}
+*{box-sizing:border-box}body{margin:0}a{color:inherit}
 .viz-root{background:var(--surface);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
 main{max-width:1240px;margin:0 auto;padding:24px 16px 64px}h1{font-size:24px;margin:0 0 4px}h2{font-size:18px;margin:36px 0 12px}h3{font-size:15px;margin:0 0 8px}
 .dim{color:var(--ink2)}.mut{color:var(--ink3)}code{font:13px ui-monospace,SFMono-Regular,Menlo,monospace}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:20px 0}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}.stat .v{font-size:24px;font-weight:600}.stat .l{color:var(--ink2);font-size:13px}
 .grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:28px}@media(max-width:900px){.grid{grid-template-columns:1fr}}
@@ -213,36 +449,69 @@ main{max-width:1240px;margin:0 auto;padding:24px 16px 64px}h1{font-size:24px;mar
 .pk{stroke-width:45;fill-opacity:.16}.pk.todo{fill:none;stroke:var(--todo);stroke-dasharray:160 120;stroke-width:35}
 .pk.partial{fill:var(--partial);stroke:var(--partial)}.pk.done{fill:var(--done);stroke:var(--done)}
 .pk.active{fill:var(--active);stroke:var(--active);stroke-width:110;fill-opacity:.32}
-.fb{fill:none;stroke:#fff;stroke-opacity:.7;stroke-width:25}.fb:hover,.pk:hover{stroke-width:120;fill-opacity:.35}
+.fb{fill:none;stroke:#fff;stroke-opacity:.7;stroke-width:25}a:hover .fb,a:hover .pk,.fb:hover{stroke-width:120;fill-opacity:.35}
 .lbl{fill:#fff;font:600 380px system-ui,sans-serif;paint-order:stroke;stroke:#000;stroke-width:60;pointer-events:none}
-svg[data-layer="blocks"] .pk,svg[data-layer="blocks"] .lbl{display:none}svg[data-layer="packages"] .fb{display:none}
+.qm circle{fill:#fff;stroke:#111;stroke-width:40}.qm text{fill:#111;font:700 230px system-ui,sans-serif;text-anchor:middle;dominant-baseline:central}
+.qm.reread circle{fill:#111;stroke:#fff}.qm.reread text{fill:#fff}.qm:hover circle{stroke-width:90}
+svg[data-layer="blocks"] .pk,svg[data-layer="blocks"] .lbl{display:none}svg[data-layer="packages"] .fb{display:none}svg[data-q="off"] .qm{display:none}
 .key{display:inline-flex;align-items:center;gap:6px;margin:10px 16px 0 0;font-size:13px;color:var(--ink2)}.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
 .seg button,.filters button{font:inherit;font-size:13px;margin:0 6px 8px 0;padding:3px 12px;border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
-.seg button.on,.filters button.on{border-color:var(--ink)}
+.seg button.on,.filters button.on{border-color:var(--ink)}.theme button{margin-bottom:0}
+.chk{font-size:13px;color:var(--ink2);margin-left:6px}
 .lists{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}@media(max-width:900px){.lists{grid-template-columns:1fr}}
 .col{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;max-height:620px;overflow:auto}
 .item{padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}.item:last-child{border:0}.item .h{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.item a{text-decoration:none}.item a:hover{text-decoration:underline}
 .tag{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--ink2)}.tag i{width:9px;height:9px;border-radius:2px;display:inline-block}
+.stale{display:none;font-size:12px;font-weight:600;color:var(--ink);border:1px solid var(--ink);border-radius:99px;padding:0 7px}.is-stale .stale{display:inline-block}
 .tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:left;vertical-align:top;padding:7px 8px;border-bottom:1px solid var(--line)}th{font-weight:600;color:var(--ink2);font-size:13px}
 td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
 .chart{position:relative}.chart svg{width:100%;height:auto;display:block}.gridl{stroke:var(--line);stroke-width:1}.axis{fill:var(--ink3);font-size:12px}
 .line{fill:none;stroke:var(--series);stroke-width:2}.xh{stroke:var(--ink3);stroke-width:1}.dot{fill:var(--series);stroke:var(--surface);stroke-width:2}
 .tip{position:absolute;pointer-events:none;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,.12);display:none;white-space:nowrap}
-.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.theme button{margin-bottom:0}
 .commits{list-style:none;padding:0;margin:0;font-size:14px}.commits li{padding:6px 0;border-bottom:1px solid var(--line)}
+.xp{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.who{display:flex;gap:12px;align-items:center}.av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:700;color:#fff;background:var(--ink3);flex:none}
+.lvl{font-size:13px;color:var(--ink2)}.bar{height:8px;border-radius:99px;background:var(--track);margin:10px 0 4px;overflow:hidden}.bar i{display:block;height:100%;background:var(--series);border-radius:99px}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.badge{font-size:12px;border:1px solid var(--line);border-radius:99px;padding:2px 8px;color:var(--ink2)}
+.mini{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px;text-align:center}.mini b{display:block;font-size:16px}.mini span{font-size:11px;color:var(--ink3)}
+.notes h2{font-size:17px;margin:28px 0 8px}.notes h3{font-size:15px;margin:20px 0 6px}.notes p,.notes li{max-width:860px}.notes table{font-size:13px}
+.notes pre{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px;overflow:auto}
+.crumb{font-size:14px;margin:0}.minimap{max-width:420px}h1 code{font-size:inherit}
 """
 
-JS = """
+THEME_JS = """
 function setTheme(t){if(t==='auto')delete document.documentElement.dataset.theme;else document.documentElement.dataset.theme=t;
  document.querySelectorAll('.theme button').forEach(x=>x.classList.toggle('on',x.dataset.theme===t));try{localStorage.setItem('theme',t)}catch(e){}}
 document.querySelectorAll('.theme button').forEach(b=>b.onclick=()=>setTheme(b.dataset.theme));
 try{setTheme(localStorage.getItem('theme')||'auto')}catch(e){setTheme('auto')}
-document.querySelectorAll('.seg:not(.theme) button').forEach(b=>b.onclick=()=>{
- document.querySelectorAll('.seg:not(.theme) button').forEach(x=>x.classList.toggle('on',x===b));
- document.getElementById('die').dataset.layer=b.dataset.layer;
- document.getElementById('key-pk').style.display=b.dataset.layer==='blocks'?'none':'';});
+const live=document.getElementById('live');let checked=null,timer=null;
+function showLive(){if(live)live.textContent=checked?'Checks for updates every minute; last checked '+checked.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})+'.':'Checks for updates every minute.'}
+async function check(){try{const r=await fetch(VROOT+'version.json?t='+Date.now(),{cache:'no-store'});
+ if(r.ok){const v=(await r.json()).version;checked=new Date();
+  if(v&&v!==VERSION){try{sessionStorage.setItem('scroll:'+location.pathname,String(window.scrollY))}catch(e){}location.reload();return}}}catch(e){}
+ showLive()}
+function start(){if(!timer){timer=setInterval(check,60000)}}
+function stop(){clearInterval(timer);timer=null}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else{check();start()}});
+try{const y=sessionStorage.getItem('scroll:'+location.pathname);if(y!==null){sessionStorage.removeItem('scroll:'+location.pathname);requestAnimationFrame(()=>window.scrollTo(0,+y))}}catch(e){}
+document.querySelectorAll('[data-activity]').forEach(el=>{const t=+el.dataset.activity;if(t&&Date.now()-t>STALE_MS){el.classList.add('is-stale');
+ const h=Math.round((Date.now()-t)/3600000);const s=el.querySelector('.stale');if(s)s.textContent='stale: '+(h>=48?Math.round(h/24)+' days':h+' h')+' quiet'}});
+const ns=document.querySelectorAll('.is-stale').length,sv=document.getElementById('stale-count');if(sv)sv.textContent=ns;
+showLive();start();
+"""
+
+INDEX_JS = """
+function setLayer(l){document.querySelectorAll('.seg.layer button').forEach(x=>x.classList.toggle('on',x.dataset.layer===l));
+ document.getElementById('die').dataset.layer=l;document.getElementById('key-pk').style.display=l==='blocks'?'none':'';
+ try{sessionStorage.setItem('layer',l)}catch(e){}}
+document.querySelectorAll('.seg.layer button').forEach(b=>b.onclick=()=>setLayer(b.dataset.layer));
+const qbox=document.getElementById('showq');function setQ(on){document.getElementById('die').dataset.q=on?'on':'off';qbox.checked=on;try{sessionStorage.setItem('q',on?'1':'0')}catch(e){}}
+qbox.onchange=()=>setQ(qbox.checked);
+try{const l=sessionStorage.getItem('layer');if(l)setLayer(l);const q=sessionStorage.getItem('q');if(q!==null)setQ(q==='1')}catch(e){}
 const P=JSON.parse(document.getElementById('series').textContent),svg=document.getElementById('prog'),tip=document.getElementById('tip');
-if(P.length){const W=760,H=260,L=56,R=16,T=12,B=28,t0=Date.parse(P[0][0]),t1=Date.parse(P[P.length-1][0])||t0+1,
+if(P.length){const W=760,H=260,L=56,R=16,T=12,B=28,t0=Date.parse(P[0][0].replace(' ','T')),t1=Date.parse(P[P.length-1][0].replace(' ','T'))||t0+1,
  ymax=Math.ceil(Math.max(...P.map(p=>p[1]))/500)*500||500,X=t=>L+(W-L-R)*((t-t0)/Math.max(1,t1-t0)),Y=v=>H-B-(H-T-B)*v/ymax;
  let g='';for(let v=0;v<=ymax;v+=ymax/5){g+=`<line class="gridl" x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}"/><text class="axis" x="${L-8}" y="${Y(v)+4}" text-anchor="end">${v.toLocaleString()}</text>`}
  const days=[...new Set(P.map(p=>p[0].slice(0,10)))];days.forEach(d=>{const x=X(Date.parse(d+'T00:00'));if(x>=L&&x<=W-R)g+=`<text class="axis" x="${x}" y="${H-8}" text-anchor="middle">${d.slice(5)}</text>`});
@@ -258,68 +527,91 @@ if(P.length){const W=760,H=260,L=56,R=16,T=12,B=28,t0=Date.parse(P[0][0]),t1=Dat
 """
 
 
-def page(d):
-    claims, master, figs = d['claims'], d['master'], d['figs']
-    claimed = {c['prefix']: c for c in claims}
+def shell(title, body, version, root, extra_js=''):
+    return """<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>%s</title><style>%s</style></head><body><div class="viz-root"><main>%s</main></div>
+<script>const VERSION=%s,VROOT=%s,STALE_MS=%d;%s%s</script></body></html>""" % (
+        E(title), CSS, body, json.dumps(version), json.dumps(root), STALE_HOURS * 3600 * 1000, THEME_JS, extra_js)
 
-    def state(r):
-        return 'active' if any(p in claimed for p in r['prefixes']) else r['kind']
 
-    # ---- die: packages layer + functional blocks layer
-    svg = []
-    order = {'todo': 0, 'partial': 1, 'done': 2, 'active': 3}
-    for r in sorted(master, key=lambda r: order[state(r)]):
+THEME_BTNS = ('<div class="seg theme" role="group" aria-label="Colour theme"><button data-theme="auto" class="on">Auto</button>'
+              '<button data-theme="light">Light</button><button data-theme="dark">Dark</button></div>')
+STATE_COL = {'active': 'var(--active)', 'partial': 'var(--partial)', 'done': 'var(--done)', 'todo': 'var(--todo)'}
+STATE_NAME = {'active': 'in progress', 'partial': 'partly done', 'done': 'done', 'todo': 'to do'}
+
+
+def tag(kind, text=None):
+    return '<span class="tag"><i style="background:%s"></i>%s</span>' % (STATE_COL[kind], E(text or STATE_NAME[kind]))
+
+
+def whos(h):
+    return ', '.join('%s (%d)' % (E(a), n) for a, n in h.get('who', [])) or '<span class="mut">no commits yet</span>'
+
+
+def claim_item(c, link):
+    return ('<div class="item" data-activity="%d"><div class="h"><a href="%s"><code>%s</code></a> <b>%s</b> %s <span class="stale">stale</span></div>'
+            '<div class="dim">%s</div><div class="mut">claimed %s; last commit %s</div></div>'
+            % (c['activity'], link, E(c['prefix']), E(c['who']),
+               tag('active', 'merged, awaiting coordinator' if c['merged'] else 'tracing'),
+               inline(short(c['what'], 200)), E(c['claimed']), E(c['last'] or 'none yet')))
+
+
+def die_svg(d, state, page_of, root, view=None, highlight=None):
+    claimed = {c['prefix']: c for c in d['claims']}
+    svg, order = [], {'todo': 0, 'partial': 1, 'done': 2, 'active': 3}
+    for r in sorted(d['master'], key=lambda r: order[state(r)]):
         s = state(r)
+        if highlight is not None and r is not highlight:
+            continue
+        link = page_of.get(r['label'])
         for x0, x1, y0, y1 in regions(r['region']):
-            svg.append('<rect class="pk %s" x="%d" y="%d" width="%d" height="%d"><title>%s: %s\n%s</title></rect>'
-                       % (s, x0, y0, x1 - x0, y1 - y0, E(re.sub('[`*]', '', r['label'])),
-                          {'active': 'in progress', 'todo': 'to do'}.get(s, s), E(short(re.sub('[`*]', '', r['what']), 160))))
-    for c in claims:
-        for x0, x1, y0, y1 in regions(c['region']):
-            svg.append('<rect class="pk active" x="%d" y="%d" width="%d" height="%d"><title>%s (%s): %s</title></rect>'
-                       '<text class="lbl" x="%d" y="%d">%s</text>'
-                       % (x0, y0, x1 - x0, y1 - y0, E(c['prefix']), E(c['who']), E(c['what']), x0 + 80, y0 + 420, E(c['prefix'])))
-    for b in d['blocks']:
-        x0, y0, x1, y1 = b['box']
-        svg.append('<rect class="fb" x="%d" y="%d" width="%d" height="%d"><title>%s (%s)\n%s</title></rect>'
-                   % (x0, y0, x1 - x0, y1 - y0, E(b['name']), E(b['kind']), E(short(b['desc'], 200))))
-    die = ('<svg id="die" data-layer="packages" viewBox="0 0 %d %d" class="die" role="img" aria-label="Die shot with the tracing packages">'
-           '<image href="die.jpg" width="%d" height="%d" preserveAspectRatio="none"/>%s</svg>' % (W, H, W, H, ''.join(svg)))
-    key = ('<div id="key-pk">%s</div>' % ''.join(
-        '<span class="key"><i class="sw" style="%s"></i>%s</span>' % (st, lb) for st, lb in (
-            ('background:var(--active)', 'in progress'), ('background:var(--partial)', 'partly done'),
-            ('background:var(--done)', 'done'), ('border:2px dashed var(--todo)', 'to do'))))
+            rect = ('<rect class="pk %s" x="%d" y="%d" width="%d" height="%d"><title>%s: %s\n%s</title></rect>'
+                    % (s, x0, y0, x1 - x0, y1 - y0, E(plain(r['label'])), STATE_NAME[s], E(short(plain(r['what']), 160))))
+            svg.append('<a href="%s%s">%s</a>' % (root, link, rect) if link else rect)
+    if highlight is None:
+        for c in d['claims']:
+            for x0, x1, y0, y1 in regions(c['region']):
+                svg.append('<a href="%sp/%s.html"><rect class="pk active" x="%d" y="%d" width="%d" height="%d"><title>%s (%s): %s</title></rect></a>'
+                           '<text class="lbl" x="%d" y="%d">%s</text>'
+                           % (root, E(c['prefix']), x0, y0, x1 - x0, y1 - y0, E(c['prefix']), E(c['who']), E(c['what']),
+                              x0 + 80, y0 + 420, E(c['prefix'])))
+        for b in d['blocks']:
+            x0, y0, x1, y1 = b['box']
+            svg.append('<rect class="fb" x="%d" y="%d" width="%d" height="%d"><title>%s (%s)\n%s</title></rect>'
+                       % (x0, y0, x1 - x0, y1 - y0, E(b['name']), E(b['kind']), E(short(b['desc'], 200))))
+        for q in d['questions']:
+            if q['at'] is None or q['state'] in ('resolved', 'done'):
+                continue
+            cls = 'reread' if q['id'].startswith('R') else 'amb'
+            svg.append('<a href="#q-%s"><g class="qm %s"><circle cx="%d" cy="%d" r="230"/><text x="%d" y="%d">%s</text>'
+                       '<title>%s %s (%s)</title></g></a>' % (q['id'], cls, q['at'][0], q['at'][1], q['at'][0], q['at'][1],
+                                                            q['id'], q['id'], E(q['title']), q['state']))
+    vb = view or (0, 0, W, H)
+    return ('<svg id="die" data-layer="packages" data-q="on" viewBox="%d %d %d %d" class="die" role="img" aria-label="Die shot">'
+            '<image href="%sdie.jpg" width="%d" height="%d" preserveAspectRatio="none"/>%s</svg>'
+            % (vb[0], vb[1], vb[2], vb[3], root, W, H, ''.join(svg)))
 
-    # ---- the three lists
-    def tag(kind, text):
-        col = {'active': 'var(--active)', 'partial': 'var(--partial)', 'done': 'var(--done)', 'todo': 'var(--todo)'}[kind]
-        return '<span class="tag"><i style="background:%s"></i>%s</span>' % (col, text)
 
-    def whos(h):
-        return ', '.join('%s (%d)' % (E(a), n) for a, n in h.get('who', [])) or '<span class="mut">no commits yet</span>'
-
-    act = []
-    for c in claims:
-        act.append('<div class="item"><div class="h"><code>%s</code> <b>%s</b> %s</div><div class="dim">%s</div>'
-                   '<div class="mut">claimed %s; last commit %s</div></div>'
-                   % (E(c['prefix']), E(c['who']), tag('active', 'merged, awaiting coordinator' if c['merged'] else 'tracing'),
-                      md(short(c['what'], 200)), E(c['claimed']), E(c['last'] or 'none yet')))
+def index_page(d, state, page_of):
+    claims, master, figs = d['claims'], d['master'], d['figs']
+    act = [claim_item(c, 'p/%s.html' % E(c['prefix'])) for c in claims]
     todo, done = [], []
     for r in master:
         s, h = state(r), d['hist'].get(r['label'], {})
         nt = d['tcount'].get(r['label'], 0)
         if s == 'active':
             continue
-        label = md(r['label'])
+        link = page_of.get(r['label'])
+        label = '<a href="%s">%s</a>' % (link, inline(r['label'])) if link else inline(r['label'])
         if s == 'done':
             done.append((h.get('last', ''), '<div class="item"><div class="h">%s %s</div><div class="dim">%s</div>'
                          '<div class="mut">by %s%s</div></div>'
-                         % (label, tag('done', 'done'), md(short(r['what'], 150)), whos(h),
+                         % (label, tag('done'), inline(short(r['what'], 150)), whos(h),
                             '; %s to %s; %d transistors in its region' % (h['first'], h['last'], nt) if h else '')))
         else:
             left = r['status'] if s == 'partial' else r['what']
             todo.append('<div class="item"><div class="h">%s %s</div><div class="dim">%s</div>%s</div>'
-                        % (label, tag(s, 'partly done' if s == 'partial' else 'to do'), md(short(left, 260)),
+                        % (label, tag(s), inline(short(left, 260)),
                            '<div class="mut">so far by %s; %d transistors in its region</div>' % (whos(h), nt) if h else ''))
     done.sort(reverse=True)
     lists = ('<div class="lists"><div class="col"><h3>In progress (%d)</h3>%s</div><div class="col"><h3>To do (%d)</h3>%s</div>'
@@ -327,66 +619,160 @@ def page(d):
              % (len(act), ''.join(act) or '<p class="mut">Nothing claimed right now.</p>', len(todo), ''.join(todo),
                 len(done), ''.join(x for _, x in done)))
 
-    # ---- tables
-    contrib = ('<table><thead><tr><th>Contributor</th><th class="n">Commits</th><th>Last commit</th></tr></thead><tbody>%s</tbody></table>'
-               % ''.join('<tr><td>%s</td><td class="n">%d</td><td>%s</td></tr>' % (E(n), c, E(l)) for n, c, l in d['contrib']))
-    commits = '<ul class="commits">%s</ul>' % ''.join(
-        '<li><span class="mut">%s</span> <b>%s</b> %s</li>' % (E(dt), E(a), E(s)) for dt, a, s in d['commits'])
-    ntot, nres = d['amb']
-    rtot, rdone = d['reread']
-    n_done = sum(1 for r in master if state(r) == 'done')
-    n_part = sum(1 for r in master if state(r) == 'partial')
-    n_todo = sum(1 for r in master if state(r) == 'todo')
-    stat = lambda v, l: '<div class="stat"><div class="v">%s</div><div class="l">%s</div></div>' % (v, l)
+    qrows = []
+    for q in d['questions']:
+        if q['state'] in ('resolved', 'done'):
+            continue
+        href = ('%s/blob/main/notes/ambiguities.md#L%d' % (REPO, q['line'])) if q['id'].startswith('A') else \
+            '%s/blob/main/notes/work-packages.md#re-read-list' % REPO
+        qrows.append('<tr id="q-%s"><td><b>%s</b></td><td>%s</td><td>%s</td><td class="mut">%s</td><td><a href="%s">notes</a></td></tr>'
+                     % (q['id'], q['id'], inline(short(q['title'], 220)), E(q['state']),
+                        '(%d, %d)' % q['at'] if q['at'] else 'no single place', href))
+    questions = ('<div class="tw"><table><thead><tr><th>#</th><th>Question</th><th>State</th><th>Where</th><th></th></tr></thead>'
+                 '<tbody>%s</tbody></table></div>' % ''.join(qrows))
+
+    xp = '<div class="xp">%s</div>' % ''.join(
+        '<div class="card"><div class="who"><div class="av" style="background:%s">%s</div><div><b>%s</b>'
+        '<div class="lvl">Level %d &middot; %s</div></div></div>'
+        '<div class="bar" title="%d XP; %d to the next level"><i style="width:%.0f%%"></i></div>'
+        '<div class="mut" style="font-size:12px">%s XP &middot; %s to level %d</div>'
+        '<div class="mini"><div><b>%d</b><span>commits</span></div><div><b>%d</b><span>packages done</span></div>'
+        '<div><b>%s</b><span>transistors</span></div><div><b>%d</b><span>best streak</span></div></div>'
+        '<div class="badges">%s</div></div>'
+        % (('var(--partial)', 'var(--active)', 'var(--done)')[i % 3], E(''.join(w[0] for w in p['name'].split()[:2]).upper()),
+           E(p['name']), p['level'], E(p['title']), p['xp'], p['need'], 100 * p['frac'], '{:,}'.format(p['xp']),
+           '{:,}'.format(p['need']), p['level'] + 1, p['commits'], p['done'], '{:,}'.format(p['transistors']), p['streak'],
+           ''.join('<span class="badge" title="%s">%s %s</span>' % (E(t), e, E(n)) for e, n, t in p['badges'])
+           or '<span class="mut" style="font-size:12px">no badges yet</span>')
+        for i, p in enumerate(d['xp']))
+
+    contrib_commits = '<ul class="commits">%s</ul>' % ''.join(
+        '<li><span class="mut">%s</span> <b>%s</b> %s</li>' % (E(dt), E(a), E(s)) for dt, a, s in d['recent'])
+    n_open_q = sum(1 for q in d['questions'] if q['state'] not in ('resolved', 'done'))
+    amb_open = sum(1 for q in d['questions'] if q['id'].startswith('A') and q['state'] != 'resolved')
+    amb_all = sum(1 for q in d['questions'] if q['id'].startswith('A'))
+    rr_open = sum(1 for q in d['questions'] if q['id'].startswith('R') and q['state'] != 'done')
+    rr_all = sum(1 for q in d['questions'] if q['id'].startswith('R'))
+    cnt = collections.Counter(state(r) for r in master)
+    stat = lambda v, l, i='': '<div class="stat"><div class="v"%s>%s</div><div class="l">%s</div></div>' % (
+        ' id="%s"' % i if i else '', v, l)
     stats = ''.join([
-        stat('{:,}'.format(figs.get('transistors', 0)), 'transistors traced'),
-        stat('{:,}'.format(figs.get('nets', 0)), 'nets'),
-        stat(len(claims), 'packages in progress'),
-        stat(n_done, 'packages done'), stat(n_part, 'partly done'), stat(n_todo, 'to do'),
+        stat('{:,}'.format(figs.get('transistors', 0)), 'transistors traced'), stat('{:,}'.format(figs.get('nets', 0)), 'nets'),
+        stat(len(claims), 'packages in progress'), stat('0', 'stale claims (24 h quiet)', 'stale-count'),
+        stat(cnt['done'], 'packages done'), stat(cnt['partial'], 'partly done'), stat(cnt['todo'], 'to do'),
         stat(figs.get('errors', '?'), 'extraction errors'), stat(figs.get('open_joins', '?'), 'open joins'),
-        stat('%d / %d' % (ntot - nres, ntot), 'ambiguities open'), stat('%d / %d' % (rtot - rdone, rtot), 're-read items open'),
-        stat(len(d['contrib']), 'contributors')])
-    return """<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HD6845S trace status</title><style>%s</style></head><body><div class="viz-root"><main>
-<div class="top"><h1>HD6845S die trace</h1><div class="seg theme" role="group" aria-label="Colour theme"><button data-theme="auto" class="on">Auto</button><button data-theme="light">Light</button><button data-theme="dark">Dark</button></div></div>
-<p class="dim">Who is working on what, and how far the trace has got. Built %s. Claims are made with <code>tools/claim.py</code>; the workflow is <code>notes/workflow.md</code>.</p>
+        stat('%d / %d' % (amb_open, amb_all), 'ambiguities open'), stat('%d / %d' % (rr_open, rr_all), 're-read items open'),
+        stat(len(d['xp']), 'contributors')])
+    key = ('<div id="key-pk">%s<span class="key"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="#fff" stroke="#111" stroke-width="2"/></svg>ambiguity</span>'
+           '<span class="key"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="#111" stroke="#fff" stroke-width="2"/></svg>re-read item</span></div>'
+           % ''.join('<span class="key"><i class="sw" style="%s"></i>%s</span>' % (st, lb) for st, lb in (
+               ('background:var(--active)', 'in progress'), ('background:var(--partial)', 'partly done'),
+               ('background:var(--done)', 'done'), ('border:2px dashed var(--todo)', 'to do'))))
+    body = """<div class="top"><h1>HD6845S die trace</h1>%s</div>
+<p class="dim">Who is working on what, and how far the trace has got. Built %s. <span id="live" class="mut"></span></p>
 <div class="stats">%s</div>
-<div class="grid"><section><h2>The die</h2><div class="seg"><button class="on" data-layer="packages">Tracing packages</button><button data-layer="blocks">Functional blocks</button></div>
-%s%s<p class="mut">Hover a region for its name and status. Package regions overlap where wiring crosses blocks.</p></section>
+<div class="grid"><section><h2>The die</h2><div class="seg layer"><button class="on" data-layer="packages">Tracing packages</button><button data-layer="blocks">Functional blocks</button>
+<label class="chk"><input type="checkbox" id="showq" checked> open questions (%d)</label></div>
+%s%s<p class="mut">Click a package for its page; hover any region or marker for its name. Package regions overlap where wiring crosses blocks.</p></section>
 <section><h2>Transistors traced</h2><div class="chart"><svg id="prog" viewBox="0 0 760 260" role="img" aria-label="Transistors traced over time"></svg><div class="tip" id="tip"></div></div>
 <p class="mut">From each version of <code>out/report.txt</code> on main.</p>
-<h2>Contributors</h2><div class="tw">%s</div></section></div>
+<h2>Recent commits on main</h2>%s</section></div>
 <h2>Packages</h2>%s
-<h2>Recent commits on main</h2>%s
-</main></div><script type="application/json" id="series">%s</script><script>%s</script></body></html>""" % (
-        CSS, E(d['built']), stats, die, key, contrib, lists, commits, json.dumps(d['series']), JS)
+<h2>Open questions</h2><p class="dim">Ambiguities (A) from <code>notes/ambiguities.md</code> and re-read items (R) from the master list, placed on the die where their notes give a place.</p>%s
+<h2>Collaboration XP</h2><p class="mut">For fun. 10 XP a commit, 25 a claim, 150 for each finished package you worked on (50 if partly done), plus your share of its transistors. Level n needs 100&middot;(n&minus;1)&sup2; XP.</p>%s
+<script type="application/json" id="series">%s</script>""" % (
+        THEME_BTNS, E(d['built']), stats, n_open_q, die_svg(d, state, page_of, ''), key, contrib_commits, lists, questions, xp,
+        json.dumps(d['series']))
+    return shell('HD6845S trace status', body, d['version'], '', INDEX_JS)
+
+
+def package_page(prefix, row, d, state, page_of):
+    claim = next((c for c in d['claims'] if c['prefix'] == prefix), None)
+    s = 'active' if claim else (state(row) if row else 'todo')
+    h = package_history([prefix], d['commits'])
+    notes_p = os.path.join(ROOT, 'notes', 'blocks', prefix + '.md')
+    notes = markdown(open(notes_p).read()) if os.path.exists(notes_p) else '<p class="mut">No notes yet.</p>'
+    regs = regions((row or {}).get('region', '') + ' ' + (claim['region'] if claim else ''))
+    mini = ''
+    if regs:
+        x0 = min(r[0] for r in regs); x1 = max(r[1] for r in regs); y0 = min(r[2] for r in regs); y1 = max(r[3] for r in regs)
+        pad = max(1200, int(0.35 * max(x1 - x0, y1 - y0)))
+        vx0, vy0 = max(0, x0 - pad), max(0, y0 - pad)
+        vx1, vy1 = min(W, x1 + pad), min(H, y1 + pad)
+        hl = dict(row) if row else dict(region=claim['region'], label=prefix, what=claim['what'])
+        if row is None:
+            hl.update(kind='todo', prefixes=[prefix])
+        mini = ('<div class="minimap">%s<p class="mut">Region %s. <a href="../index.html">Whole die</a></p></div>'
+                % (die_svg(dict(d, master=[hl]), lambda r: s if r is hl else state(r), {}, '../',
+                           view=(vx0, vy0, vx1 - vx0, vy1 - vy0), highlight=hl), E(', '.join('%d-%d x %d-%d' % r for r in regs))))
+    files = [f for f in ('trace/%s.txt' % prefix, 'notes/blocks/%s.md' % prefix, 'floorplan.d/%s.txt' % prefix)
+             if os.path.exists(os.path.join(ROOT, f))]
+    links = ' &middot; '.join('<a href="%s/blob/main/%s">%s</a>' % (REPO, f, f) for f in files)
+    hist_links = ' &middot; '.join('<a href="%s/commits/main/%s">history of %s</a>' % (REPO, f, os.path.basename(f)) for f in files[:2])
+    facts = []
+    if claim:
+        facts.append('<div class="col" style="max-height:none;margin-bottom:16px" data-activity="%d"><h3>Claimed</h3>%s</div>'
+                     % (claim['activity'], claim_item(claim, '#').replace('data-activity', 'data-x')))
+    facts.append('<p>%s &nbsp;<span class="dim">%s</span></p>' % (tag(s), inline((row or {}).get('status', '')) if row else ''))
+    if row:
+        facts.append('<p><b>What</b>: %s</p>' % inline(row['what']))
+    facts.append('<p><b>Who</b>: %s%s</p>' % (whos(h), ' <span class="mut">(%s to %s, %d commits)</span>' % (h['first'], h['last'], h['commits']) if h else ''))
+    if row:
+        facts.append('<p><b>Transistors in its region</b>: %d</p>' % d['tcount'].get(row['label'], 0))
+    if links:
+        facts.append('<p class="dim">%s<br>%s</p>' % (links, hist_links))
+    recent = ('<h2>Recent commits</h2><ul class="commits">%s</ul>' % ''.join(
+        '<li><span class="mut">%s</span> <b>%s</b> %s</li>' % (E(dt), E(a), E(sub)) for dt, a, sub in h['recent'])) if h else ''
+    body = """<div class="top"><p class="crumb"><a href="../index.html">&larr; Dashboard</a></p>%s</div>
+<h1><code>%s</code></h1><p class="mut" id="live"></p>
+<div class="grid"><section>%s</section><section>%s</section></div>%s
+<h2>Notes</h2><div class="notes">%s</div>""" % (THEME_BTNS, E(prefix), ''.join(facts), mini, recent, notes)
+    return shell('%s: HD6845S trace' % prefix, body, d['version'], '../')
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--out', default=os.path.join(ROOT, '_site'))
     a = ap.parse_args()
-    os.makedirs(a.out, exist_ok=True)
+    os.makedirs(os.path.join(a.out, 'p'), exist_ok=True)
     master = read_master()
     nl = None
     p = os.path.join(ROOT, 'out', 'netlist.json')
     if os.path.exists(p):
         nl = [(t['x'], t['y']) for t in json.load(open(p))['transistors']]
-    hist, tcount = {}, {}
-    for r in master:
-        hist[r['label']] = package_history(r['prefixes'])
-        tcount[r['label']] = transistors_in(nl, regions(r['region']))
+    commits = read_commits()
+    hist = {r['label']: package_history(r['prefixes'], commits) for r in master}
+    tcount = {r['label']: transistors_in(nl, regions(r['region'])) for r in master}
+    claims = read_claims()
+    claimed = {c['prefix'] for c in claims}
+    state = lambda r: 'active' if any(x in claimed for x in r['prefixes']) else r['kind']
     log = git('log', '-30', '--first-parent', '--format=%ad\t%an\t%s', '--date=format:%Y-%m-%d %H:%M', 'HEAD')
     head = git('log', '-1', '--format=%h, %ad', '--date=format:%Y-%m-%d %H:%M %z', 'HEAD').strip()
-    d = dict(claims=read_claims(), master=master, figs=report_figures(), hist=hist, tcount=tcount,
-             blocks=floor_blocks(), series=progress_series(), amb=ambiguity_counts(), reread=reread_counts(),
-             contrib=contributors(),
-             commits=[tuple(l.split('\t', 2)) for l in log.splitlines() if l.count('\t') >= 2],
-             built='%s from commit %s' % (datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC'), head))
-    open(os.path.join(a.out, 'index.html'), 'w').write(page(d))
+    built = '%s from commit %s' % (datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC'), head)
+    d = dict(claims=claims, master=master, figs=report_figures(), hist=hist, tcount=tcount, commits=commits,
+             blocks=floor_blocks(), series=progress_series(),
+             questions=read_ambiguities() + read_reread(master),
+             xp=xp_table(commits, master, hist, tcount, claims),
+             recent=[tuple(l.split('\t', 2)) for l in log.splitlines() if l.count('\t') >= 2],
+             built=built, version=built)
+    # one page per package: every prefix on the master list, every notes file, every claim
+    prefixes = {}
+    for r in master:
+        for x in r['prefixes']:
+            prefixes.setdefault(x, r)
+    for f in glob.glob(os.path.join(ROOT, 'notes', 'blocks', '*.md')):
+        prefixes.setdefault(os.path.basename(f)[:-3], None)
+    for c in claims:
+        prefixes.setdefault(c['prefix'], None)
+    page_of = {r['label']: 'p/%s.html' % r['prefixes'][0] for r in master if r['prefixes']}
+    for x, row in sorted(prefixes.items()):
+        open(os.path.join(a.out, 'p', '%s.html' % x), 'w').write(package_page(x, row, d, state, page_of))
+    open(os.path.join(a.out, 'index.html'), 'w').write(index_page(d, state, page_of))
+    json.dump({'version': d['version']}, open(os.path.join(a.out, 'version.json'), 'w'))
     shutil.copy(os.path.join(ROOT, 'dashboard', 'die.jpg'), os.path.join(a.out, 'die.jpg'))
-    print('dashboard: %d claims, %d packages, %d blocks, %d progress points -> %s'
-          % (len(d['claims']), len(master), len(d['blocks']), len(d['series']), a.out))
+    print('dashboard: %d claims, %d packages, %d package pages, %d open questions, %d contributors -> %s'
+          % (len(claims), len(master), len(prefixes), sum(1 for q in d['questions'] if q['state'] not in ('resolved', 'done')),
+             len(d['xp']), a.out))
 
 
 if __name__ == '__main__':

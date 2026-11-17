@@ -12,7 +12,7 @@ fitted robustly, and what the affine leaves over is smoothed into a correction f
 (different stitching of the two dies shows up there). The shot is resampled with
 affine + correction and written to cache/<name>.npy.
 
-  usage: align.py [name ...]        (default: all that are missing)
+  usage: align.py [--record] [name ...]        (default: all that are missing)
 
 Shots (name: source file, matched against):
   acid     hd6845acid2ndchip.jpg   chip 2, metal stripped         against metal
@@ -20,7 +20,11 @@ Shots (name: source file, matched against):
   acid1    hd6845acid.jpg          chip 1, metal stripped         against acid
   acid1b   hd6845acid2.jpg         chip 1, second stripped shot   against acid
 
-The fit for each is recorded in trace/align.json.
+The fit is written to cache/align.json (untracked: each machine's own fit, which can differ
+from another machine's by a fraction of a pixel, and is what that machine's cache was resampled
+with). trace/align.json is the project's recorded fit, read by tools/build.py to place the photos
+in the SVG; only --record writes it, and only the coordinator, who builds out/, uses --record.
+Tracing never reads either file.
 """
 import json
 import os
@@ -179,9 +183,12 @@ def align(name):
 
 
 def main():
-    names = sys.argv[1:] or [n for n in SHOTS if not os.path.exists(os.path.join(CACHE, FILES[n]))]
-    jpath = os.path.join(ROOT, 'trace', 'align.json')
-    rec = json.load(open(jpath)) if os.path.exists(jpath) else {}
+    args = [a for a in sys.argv[1:] if a != '--record']
+    record = '--record' in sys.argv[1:]
+    names = args or [n for n in SHOTS if not os.path.exists(os.path.join(CACHE, FILES[n]))]
+    jpath = os.path.join(ROOT, 'trace', 'align.json') if record else os.path.join(CACHE, 'align.json')
+    seed = jpath if os.path.exists(jpath) else os.path.join(ROOT, 'trace', 'align.json')
+    rec = json.load(open(seed)) if os.path.exists(seed) else {}
     if 'metal_to_acid' in rec:       # old single-shot format
         rec = {'acid_old_affine': rec}
     for n in names:

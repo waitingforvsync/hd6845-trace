@@ -12,7 +12,8 @@ repository's main into the branch. It prints each check and ends with PASS or FA
     notes/blocks/PREFIX.md, floorplan.d/PREFIX.txt, tools/PREFIX_*.py), notes/signals.md,
     notes/operation.md, or other blocks' trace files (allowed, listed: each must be a fix
     of a clear error, in a commit of its own, and named in the handoff). Anything else
-    (the coordinator's files, out/, claims/, shared tools, .claude/, .github/) fails;
+    (the coordinator's files, out/, claims/, shared tools, .claude/, .github/, trace/align.json)
+    fails;
  3. the full extraction (no TRACE): 0 errors, 0 warnings;
  4. every net name is in the glossary, and no former name is left in the documents;
  5. notes/blocks/PREFIX.md has a "## Review" section that records a clean final round
@@ -78,7 +79,7 @@ def main():
     own = re.compile(r'^(trace/%s[^/]*\.txt|notes/blocks/%s\.md|floorplan\.d/%s\.txt|tools/%s_[^/]*\.py)$'
                      % ((re.escape(p),) * 4))
     shared_ok = {'notes/signals.md', 'notes/operation.md'}
-    others = [f for f in changed if f.startswith('trace/') and not own.match(f)]
+    others = [f for f in changed if f.startswith('trace/') and f.endswith('.txt') and not own.match(f)]
     bad = [f for f in changed if not own.match(f) and f not in shared_ok and f not in others]
     check(not bad, '2. only the package\'s own files, the glossary and operation.md changed',
           ('not allowed: ' + ' '.join(bad)) if bad else

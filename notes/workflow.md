@@ -60,7 +60,9 @@ tools/newwork.sh PREFIX
 makes a worktree beside the repository on a new branch `PREFIX` from main, links `cache/`
 and `.venv/` into it, and pushes the branch. Work there. Never let two agents share one
 working tree. A remote collaborator with a separate clone needs `cache/` built once
-(`tools/prepare.py`, then `tools/align.py`) and the Python packages listed in `CLAUDE.md`.
+(`tools/prepare.py`, then `tools/align.py`) (they write only under `cache/`: `align.py` keeps its fit in
+`cache/align.json`; the tracked `trace/align.json` is the coordinator's record, changed only
+with `--record`, and the merge gate refuses a branch that changes it) and the Python packages listed in `CLAUDE.md`.
 
 What you may change on your branch:
 
