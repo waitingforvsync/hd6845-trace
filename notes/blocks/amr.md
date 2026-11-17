@@ -196,8 +196,8 @@ under the wide supply metal (y 5200-5550) to a pad on one metal line of a 13-lin
 |---|---|---|
 | c3 | `db_b7` -> bus y 5177 | bus y 4742 = `cdp1_l4676` (an earlier reading that this line ends on `ra_eq_r9` was wrong: `notes/blocks/r9m.md`, correction) |
 | c2 | `db_b6` -> bus y 5135 | `amr_ob_c2` -> bus y 4696 |
-| c1 | `db_b5` -> bus y 5047 | `amr_ob_c1` -> bus y 4657 |
-| c0 | poly from about (11497,5590) diagonally north-east, then north along x about 11645 to a pad near (11645,5005) | poly from about (11580,5590) diagonally, north along x about 11725, then diagonally north-west towards the pad (11650,4500) of `rab`'s bit 0 (`wt.png`, image not kept): drawn: it is `cdp1_l4544` = `c4l0` (section "The inputs and the match line's route") |
+| c1 | `db_b5` -> bus y 5047 | `c4l1` -> bus y 4657 |
+| c0 | poly from about (11497,5590) diagonally north-east, then north along x about 11645 to a pad near (11645,5005) | poly from about (11580,5590) diagonally, north along x about 11725, then diagonally north-west towards the pad (11650,4500) of `rab`'s bit 0 (`wt.png`, image not kept): drawn: it is `c4l0` = `c4l0` (section "The inputs and the match line's route") |
 
 The bus lines run west to the staircase of pads at x 11650-11700 and on under the wide
 supply metal x 11280-11600 (the same cross-under as `rab`'s and the strobe's), and
@@ -233,7 +233,7 @@ lines: the section "The inputs and the match line's route" below.)
 | Name | Layer | Where | Direction | What |
 |---|---|---|---|---|
 | `db_b5` ... `db_b7` (aliases of the data lines, `notes/blocks/bust.md`); c0's is `db_b4` | metal | x 11916, 12304, 12693 (c0: 11522), y 5585-6312 | in | data bus bits 5, 6, 7 (c0: bit 4): written into R3 bits 4-7 through T1 |
-| `amr_ob_c1`, `amr_ob_c2` (= `cdp1_l4588`, `cdp1_l4632`), `cdp1_l4676`, c0's `cdp1_l4544` | metal | x 12001, 12390, 12782 (c0: 11611), y 5585-6312 | **in** | the four bits compared with R3 bits 4-7: `c4l1`, `c4l2`, `c4l3` and c0's `c4l0`, the 4-bit counter of the left array (the section "The inputs and the match line's route" below) |
+| `c4l1`, `amr_ob_c2` (= `c4l1`, `cdp1_l4632`), `cdp1_l4676`, c0's `c4l0` | metal | x 12001, 12390, 12782 (c0: 11611), y 5585-6312 | **in** | the four bits compared with R3 bits 4-7: `c4l1`, `c4l2`, `c4l3` and c0's `c4l0`, the 4-bit counter of the left array (the section "The inputs and the match line's route" below) |
 | `wr_r3` | poly | y 5636, x 11445-13125 | in | R3's write strobe, from `rdp1`'s x 13327 line |
 | `r3_b4_q` ... `r3_b7_q` | poly | (12965 - 390k, 6400), going south from the pad (12957 - 390k, 6348) | out | the stored bits leave the slice south; in c3 the poly joins a band y 6405-6425 running west under the VCC rail (`b5.png`). Not followed |
 | `amr_eq_r3` | diffusion; poly from the buried contact (11601-11628, 6286-6307) | y 6246-6272, x 11445-13047; pad (11350,6347) | out | to the top-left logic (the section "The inputs and the match line's route" below) |
@@ -281,8 +281,8 @@ extraction, the gate, this section and the Status): no findings beyond recording
 and 5 here.
 
 
-After Round 5, main gained `tla`'s west column (commit 0cbaceb), whose input `tla_w3461`
-is this route's end: merging main gave "carries several names: amr_eq_r3, tla_w3461", the
+After Round 5, main gained `tla`'s west column (commit 0cbaceb), whose input `amr_eq_r3`
+is this route's end: merging main gave "carries several names: amr_eq_r3, amr_eq_r3", the
 intended join, declared by one alias line in `trace/amrw.txt` (no geometry changed).
 
 Round 6 (fix check of that join, 2026-11-17 19:27 +0000, a fresh agent on claude-fable-5-2): both blocks' items
@@ -313,14 +313,14 @@ Wiring drawn (`trace/amrw.txt`; about the first 320 px of the result's route, fr
 no transistors; the full extraction has 0 errors, 0 warnings and the same transistor count.
 
 - **The four compared lines of `amr` are the 4-bit counter of the left array**, bit for bit:
-  `c4l0` = `cdp1_l4544` (R3 bit 4), `c4l1` = `cdp1_l4588` (bit 5), `c4l2` = `cdp1_l4632` (bit 6),
+  `c4l0` = `c4l0` (R3 bit 4), `c4l1` = `c4l1` (bit 5), `c4l2` = `cdp1_l4632` (bit 6),
   `c4l3` = `cdp1_l4676` (bit 7). The extraction now gives `r3c_b4_x = c4l0 XOR r3_b4_q` ...
   `r3c_b7_x = c4l3 XOR r3_b7_q` and `amr_eq_r3` = NOR of the four: **high when the 4-bit
   counter equals R3 bits 4-7**. That the counter is the datasheet's vertical sync width
   counter is what this says in the datasheet's words; nothing was assumed from it.
 - **`amr_eq_r3` is followed to `tla`**: 12,000 px of wire to a poly crossing of the west
   column of `tla`'s first cluster, read as the gate of one transistor of a series pair under rail R1 at
-  (2625,3461). `tla` has since traced that column: the line is its `tla_w3461`, a data input
+  (2625,3461). `tla` has since traced that column: the line is its `amr_eq_r3`, a data input
   of the inverting selector `tla_w3417 = NOT(rcs_thin_e·tla_w3376 + tla_w3505·amr_eq_r3)`
   (alias in `trace/amrw.txt`; the extraction prints that equation, FIRM).
 
@@ -384,7 +384,7 @@ y 5100-5300. Not drawn: the node's load, its exit and the other three gates are 
 | east pad | (6968,4570) | (6925,4612) | `bust`'s | `bust`'s | |
 | metal east, north, east | y 4572, x 7492, y 4506 | y 4613, x 7536 (`bust`'s corner), y 4547 | `bust` | `bust` | follower; `cn1.png`, `z3.png` 4x |
 | pad on the row into `cdp1` | (7860,4502) | (7810,4547) | (7848,4592) | (7830,4635) | `cn1.png` |
-| `cdp1`'s line (after the stair at x 8215-8345, `notes/blocks/bust.md`) | `cdp1_l4544` | `cdp1_l4588` | `cdp1_l4632` | `cdp1_l4676` | |
+| `cdp1`'s line (after the stair at x 8215-8345, `notes/blocks/bust.md`) | `c4l0` | `c4l1` | `cdp1_l4632` | `cdp1_l4676` | |
 | `amr` column, R3 bit | c0, bit 4 | c1, bit 5 | c2, bit 6 | c3, bit 7 | |
 
 The four lines stay nested in the same order from the counter to `cdp1`; none crosses
@@ -399,8 +399,8 @@ were seen end to end in both stripped shots (`cf2.png`), so those two can be mad
 
 ### Names
 
-The nets keep the counter's names (`c4l0` ... `c4l3`); `cdp1_l4544` ... `cdp1_l4676` and
-`amr_ob_c1`, `amr_ob_c2` are aliases of them (`trace/amrw.txt`; the two alias lines in
+The nets keep the counter's names (`c4l0` ... `c4l3`); `c4l0` ... `cdp1_l4676` and
+`c4l1`, `amr_ob_c2` are aliases of them (`trace/amrw.txt`; the two alias lines in
 `trace/bust.txt` now point at `c4l1`, `c4l2`). Renaming the counter for what it is (the
 vertical sync width counter) and `amr_eq_r3` after it is left to the coordinator.
 

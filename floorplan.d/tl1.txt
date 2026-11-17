@@ -1,11 +1,11 @@
 # tl1: top-left random logic, westmost strip (what tla did not draw)
 2540,4778:2835,5000   logic   driver of rcs_e4 | rcs_e4 = NOR(tl1_w4678, tl1_w4937): wide two-input NOR under and west of rail R1, output by the metal x 2500 into the step logic's e4 pad (2497,5238)
-2540,3558:2842,3742   ?logic  NOR in the west column | tl1_w3636 = NOR(tl1_w3594, tl1_w3678); output by the metal x 2283 to two gates of the units below
-2535,4215:2835,4345   ?logic  inverter in the west column | tl1_w4243 = NOT tl1_w4287 (rail gate under R1); output by the metal x 2283 to a gate of the unit at y 4340-4470
-2540,3742:2835,3982   ?logic  west column unit (untraced), copy of y 4340-4585 | series gates tl1_w2857, tl1_w3636 on a diffusion under R1; its box is on tl1_w4287's row (believed its output, the inverter's input)
-2540,3982:2835,4215   ?logic  pull-downs of tl1_w4070 | copy of the unit at y 4590-4800: to VSS through tl1_w4025, or tl1_w3636 and tl1_w3752 in series; load not traced
-2540,4345:2835,4590   ?logic  west column unit (untraced) | series gates tl1_w4243, tl1_w3594 and a third gate on a diffusion under R1; believed to drive tl1_w4360
-2540,4590:2835,4778   logic   pull-downs of tl1_w4678 | first input of rcs_e4's NOR: to VSS through tl1_w4025, or tl1_w3594 and tl1_w4360 in series; load not traced
+2540,3558:2842,3742   ?logic  NOR in the west column | tl1_w3636 = NOR(tl1_w3594, tl1_w3678); output by the metal x 2283: the first latch's enable
+2535,4215:2835,4345   ?logic  inverter in the west column | tl1_w4243 = NOT tl1_w4287 (rail gate under R1); output by the metal x 2283 to the second latch (its data)
+2540,3732:2842,3982   logic   first latch, upper half | tl1_w3752 = NOT tl1_w2857; tl1_w4287 = NOT(tl1_w2857 AND tl1_w3636 OR tl1_w4070): copy of the unit at y 4340-4590
+2540,3982:2842,4215   logic   first latch, lower half | tl1_w4070 = NOT(tl1_w4025 OR tl1_w3636 AND tl1_w3752 OR tl1_w4287): open while tl1_w3636 is high, data tl1_w2857, cleared by tl1_w4025; copy of the unit at y 4590-4800
+2540,4340:2842,4590   logic   second latch, upper half | tl1_w4360 = NOT tl1_w4243; tl1_w4703 = NOT(tl1_w4243 AND tl1_w3594 OR tl1_w4678)
+2540,4590:2842,4778   logic   second latch, lower half: first input of rcs_e4's NOR | tl1_w4678 = NOT(tl1_w4025 OR tl1_w3594 AND tl1_w4360 OR tl1_w4703): open while tl1_w3594 is high, data tl1_w4243 (the first latch's output), cleared by tl1_w4025
 2260,2790:2540,5480   route   vertical metals west of the first cluster | tracks x 2283, 2370, 2457, 2500 (43 px pitch): pieces joining pads of poly rows that run east into the west column, and to rows under the foot (y 5372, y 5459)
 2330,2795:2817,2915   route   three poly rows above the cluster | y 2812, 2857, 2899: from the top pads of the metals x 2457, 2370, 2500 east under R1 and out of the strip
 2125,2535:2600,2570   route   tl1_w3333, metal along the top | from a pad (2563,2550) west and down x 2199 to a contact (2197,3333)

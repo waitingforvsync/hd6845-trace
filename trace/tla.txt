@@ -754,7 +754,7 @@ N M 2370,7000 ck_out
 # contacts between y 3600 and y 4590 belong to units not yet traced).
 M 2625,3000 y4600 w=50
 
-# ---- the mux unit, y 3255-3590: tla_w3417 = NOT( rcs_thin_e . tla_w3376 + tla_w3505 . tla_w3461 )
+# ---- the mux unit, y 3255-3590: tla_w3417 = NOT( rcs_thin_e . tla_w3376 + tla_w3505 . amr_eq_r3 )
 # One diffusion x 2558-2693 under R1 and on both sides of it, between two VSS boxes of the
 # rail (contacts (2620,3277) and (2612,3550)). Four gate polys cross all of it; the node is the
 # part between gate 2 and gate 3 (y 3388-3449). From the top: VSS, gate 1 (y 3319-3343), gate 2
@@ -796,7 +796,7 @@ M 2239,3449 y5646 w=12
 P 2228,5617:2264,5647
 C 2239,5632
 P 2258,5622:2300,5642
-N P 2450,3462 tla_w3461
+N P 2450,3462 amr_eq_r3
 # gate 4: poly y 3494-3515 from a pad with a contact (2283,3506) at the bottom end of the metal
 # x 2283 (y 3188-3518), whose top contact (2283,3202) is on the output poly of the inverter above
 P 2296,3494:2703,3515

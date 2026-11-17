@@ -6,7 +6,7 @@ Wiring drawn (`trace/bust.txt`): twelve of the fourteen lines of `cdp1`'s big ch
 from its east edge (x 10845) through the cross-under at x 11230-11700 and east as metal
 to their ends at x 12000-16926, and five of the east ends joined to what they feed. No
 transistors. (The thirteenth, `cdp1_l4676`, is drawn by `r9m` the same way; the
-fourteenth, `cdp1_l4544`, does not drop: it is `amr` c0's outer line, below: an input, the counter bit `c4l0`.)
+fourteenth, `c4l0`, does not drop: it is `amr` c0's outer line, below: an input, the counter bit `c4l0`.)
 
 
 **Names (refresh 2026-11-17).** The data bus lines are now one name per bit, `db_b0`..`db_b7`. The tables below were written when the central datapath's slice lines and the right datapath's `ubus`/`rbus` lines had names of their own; where a row now shows the same name on both sides, read the left as the line of the slice it names and the right as its continuation in the right datapath.
@@ -24,7 +24,7 @@ default gap bridges). East of the staircase: metal, `tools/follow.py` from each 
 
 | cdp1 line (x 10845) | metal y | east end | joined to |
 |---|---|---|---|
-| `cdp1_l4588` | 4655 | 12000 | `amr` c1's outer line, an input (`c4l1`; alias of `amr_ob_c1`); drop seen end to end at 3x (`c0a.png`) |
+| `c4l1` | 4655 | 12000 | `amr` c1's outer line, an input (`c4l1`; alias of `c4l1`); drop seen end to end at 3x (`c0a.png`) |
 | `cdp1_l4632` | 4697 | 12390 | `amr` c2's outer line, an input (`c4l2`; `amr_ob_c2`) |
 | `cdp1_l4676` | 4740 | 12782 | `amr` c3's outer line, an input (`c4l3`; drawn by `r9m`) |
 | `sl_eq_r5` | 4787 | pad (13540,4787) | **R5's match**: poly south to `rdp1`'s poly x 13533-13556 from y 5450 (alias of `sl_eq_r5`) |
@@ -51,7 +51,7 @@ default gap bridges). East of the staircase: metal, `tools/follow.py` from each 
   (`cdp1` found no contact on it), towards the west logic. Where it is used: not
   followed west of x 8340.
 - **`amr`'s lines on the bus** (corrected 2026-11-17 by the trace of `amr`'s slice,
-  `notes/blocks/amr.md`): the four outer lines `cdp1_l4544`, `cdp1_l4588`, `cdp1_l4632`,
+  `notes/blocks/amr.md`): the four outer lines `c4l0`, `c4l1`, `cdp1_l4632`,
   `cdp1_l4676` are **inputs** to `amr` (each ends on two gate contacts there), the 4-bit value
   compared with R3 bits 4-7; they are driven from the west, source not found. The inner
   lines are data bits 4-7, written into R3. The earlier text here called both outputs.
@@ -104,8 +104,8 @@ on a staircase of pads at x 7810-7860, from which metals run west:
 
 | cdp1 line (east of the step) | west row, pad | metal west | `amr` |
 |---|---|---|---|
-| `cdp1_l4544` | y 4500, pad about (7860,4500) | not followed | c0 outer |
-| `cdp1_l4588` | y 4547, pad (7810,4547) | west to x 7532, south to (7535,4619), end not looked at | c1 outer |
+| `c4l0` | y 4500, pad about (7860,4500) | not followed | c0 outer |
+| `c4l1` | y 4547, pad (7810,4547) | west to x 7532, south to (7535,4619), end not looked at | c1 outer |
 | `cdp1_l4632` | y 4592, pad (7848,4592) | west, south, west along y 4657 to (6913,4658), across the crossing field | c2 outer |
 | `cdp1_l4676` | y 4635, pad (7830,4635) | west, south, west along y 4704 to (6921,4699), across the crossing field | c3 outer |
 | (none) | y 4676, pad (7855,4676) | `r9m`'s `r9m_l1w`; the row turns south near x 8190 | - |
@@ -136,11 +136,11 @@ north, 45 degrees north-east under the supply metal, and north beside the stairc
 - **inner output** -> along x 11740 to a contact (11738,5000) on the bus metal y 5002,
   i.e. **data bit 4** (`db_b4`) (4x in four shots, `c0e.png`);
 - **outer output** -> along x 11786, 45 degrees north-west to (11640,4544), and west as
-  **`cdp1_l4544`**, the top through-line. It passes `rab`'s bit-0 pad with a dark edge
+  **`c4l0`**, the top through-line. It passes `rab`'s bit-0 pad with a dark edge
   between them (5x, `c0c.png`): `rax_o0` has no second driver.
 
 So all four of `amr`'s slices put an outer output on a through-line into the west logic
-(c0 `cdp1_l4544`, c1 `cdp1_l4588`, c2 `cdp1_l4632`, c3 `cdp1_l4676`), and an
+(c0 `c4l0`, c1 `c4l1`, c2 `cdp1_l4632`, c3 `cdp1_l4676`), and an
 inner output on a data bus bit (c0 bit 4, c1 bit 5, c2 bit 6, c3 bit 7). Four slices,
 data bits 4-7, and one result each to the west: the shape of a read-back or comparison
 unit on the upper nibble. That's a guess from the wiring; the slice is not traced.

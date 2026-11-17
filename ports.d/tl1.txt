@@ -6,8 +6,8 @@
 
 # East side (x 2817), rows that run on east
 tl1_w3678   P  2817,2803-2821  in   row above the cluster; its only other end is gate 2 of the NOR at y 3558-3742
-tl1_w2857   P  2817,2848-2866  ?    row above the cluster; the other end is the gate row y 3841-3861
-tl1_w3594   P  2817,2890-2908  ?    row above the cluster; four gate-side pads on the metal x 2500
+tl1_w2857   P  2817,2848-2866  in   row above the cluster; its other ends are gates (the data of the first latch)
+tl1_w3594   P  2817,2890-2908  in   row above the cluster; its other ends are four gates (NOR tl1_w3636; the enable of the second latch)
 tl1_w4025   P  2817,5362-5382  ?    row under the foot, on east past x 3400; gates of the two units at y 3982 and y 4590
 tl1_w4937   P  2817,5450-5470  in   row under the foot, on east past x 3400; gate 2 of rcs_e4's NOR
 
@@ -18,19 +18,6 @@ ck_out      P  2545,6054-6072  in   gate row into the small cluster, from a seco
 # Ends of drawn wires inside the region (where the drawing stopped)
 tl1_w3333   P  2640,2543-2560  ?    east end of the top pad's poly, under R1
 tl1_w3333   P  2545,5793-5810  ?    row into the small cluster
-tl1_w3636   P  2545,3884-3904  out  gate row into the unit at y 3740-3960 (not traced)
-tl1_w2857   P  2545,3841-3861  ?    gate row into the unit at y 3740-3960 (not traced)
-tl1_w4287   P  2545,3929-3949  in   from the heavy box (2550-2575, 3925-3952) of the unit at y 3740-3960 (believed its output)
-tl1_w4243   P  2545,4452-4470  out  gate row into the unit at y 4340-4585 (not traced)
-tl1_w3594   P  2545,4494-4512  ?    gate row into the unit at y 4340-4585 (not traced)
-tl1_w4360   P  2660,4353-4372  in   believed: the top pad's poly ends on a small box (2660-2680, 4352-4372) of the unit at y 4340-4585 (not traced); every drawn end is a gate
-tl1_w3752   P  2660,3745-3764  in   believed: the same 608 px higher, box (2660-2680, 3744-3764) of the unit at y 3740-3960
-tl1_w4678   D  2702,4670-4698  out  the node goes on east under thin metal W: its load is not traced
-tl1_w4070   D  2702,4062-4090  out  the same 608 px higher
-tl1_w4703   P  2742,4482-4512  ?    top pad of the thin metal x 2742, on a wide poly band (not traced)
-tl1_w4703   P  2742,4688-4726  ?    bottom pad; its poly goes on south (not traced)
-tl1_w4095   P  2742,3874-3904  ?    the same 608 px higher
-tl1_w4095   P  2742,4080-4118  ?    the same 608 px higher
 tl1_w5978   P  2545,5969-5987  ?    row into the small cluster
 tl1_w5978   M  2320-2332,6350  ?    metal x 2326 on south out of the strip
 tl1_w6022   P  2545,6013-6031  ?    row into the small cluster

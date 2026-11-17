@@ -258,7 +258,7 @@ Fourteen poly lines, 11-12 px wide on a 43.5 px pitch (which lines pass under ea
 and each bit line was measured with `tools/cdp1_under.py`; contacts by colour test along
 every vertical line):
 
-- y 4544, 4588, 4632, 4676, 4719 (`cdp1_l4544` ..): cross the whole block from x 8340 to
+- y 4544, 4588, 4632, 4676, 4719 (`c4l0` ..): cross the whole block from x 8340 to
   x 10850 with no contact in it. Not identified.
 - The six that exist at x 9412-9580 step down one track there (diagonals, 2.6x view):
   west of the step they lie at y 4850 (c2), 4893 (c1), 4937 (a0), 4981, 5024, 5068 (a2),
@@ -296,7 +296,7 @@ have to be followed east.
 | `cdp1_bK_b` (K = 1..5) | P | 10850, y 4176, 4132, 4089, 4046, 4003 | in | the compare value, one bit per line; K = 5 is the top line |
 | `db_b6` | P | 8340,4372 going west | in/out | bit line of a3 |
 | `ra_eq_r9` | P | 8340,4459 going west (unbroken to x 7900 by colour scan) | out | 1 when row C equals the compare value |
-| `cdp1_l4544`, `_l4588`, `_l4632`, `_l4676`, `_l4719` | P | 8340 and 10850 at those y | - | pass through |
+| `c4l0`, `_l4588`, `_l4632`, `_l4676`, `_l4719` | P | 8340 and 10850 at those y | - | pass through |
 | `db_b0`, `_c4_bl`, `_c3_bl`, `_c2_bl`, `_c1_bl`, `_a0_bl` | P | 10850, y 4764, 4806, 4850, 4893, 4937, 4981 | in/out | bus lines of the bit lines (c1, c4, c5 also serve a1, a4, a5) |
 | `cdp1_lw1`, `db_b6` | P | 8340, y 4981 and 5024; 10850, y 5024 and 5068 | - | pass through, one track lower on the east |
 | `db_b7` | P | 10850,5110 | in/out | bus line of a2's bit line |
