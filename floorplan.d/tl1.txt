@@ -1,0 +1,10 @@
+# tl1: top-left random logic, westmost strip (what tla did not draw)
+2540,4778:2835,5000   logic   driver of rcs_e4 | rcs_e4 = NOR(tl1_w4678, tl1_w4937): wide two-input NOR under and west of rail R1, output by the metal x 2500 into the step logic's e4 pad (2497,5238)
+2540,3558:2842,3742   ?logic  NOR in the west column | tl1_w3636 = NOR(tl1_w3594, tl1_w3678); output by the metal x 2283 to two gates of the units below
+2535,4215:2835,4345   ?logic  inverter in the west column | tl1_w4243 = NOT tl1_w4287 (rail gate under R1); output by the metal x 2283 to a gate of the unit at y 4340-4470
+2540,3742:2835,4215   ?logic  west column, two units (untraced) | y 3740-3960: series gates on a diffusion under R1, believed to make the inverter's input; y 4000-4200: unit with bent gates and a pad (2555,4160)
+2540,4345:2835,4778   ?logic  west column, three units (untraced) | y 4340-4470, y 4480-4650, y 4650-4800; the last is where rcs_e4's first gate (tl1_w4678) comes from
+2260,2790:2540,5480   route   vertical metals west of the first cluster | tracks x 2283, 2370, 2457, 2500 (43 px pitch): pieces joining pads of poly rows that run east into the west column, and to rows under the foot (y 5372, y 5459)
+2330,2795:2817,2915   route   three poly rows above the cluster | y 2812, 2857, 2899: from the top pads of the metals x 2457, 2370, 2500 east under R1 and out of the strip
+2100,2500:2540,2790   ?route  north-west corner (untraced) | the MA0/MA1 metals, the metal x 2199 turning east at y 2557, nested poly L's going north
+2440,5650:2817,6350   ?logic  small cluster below the step logic, west half (untraced) | units at y 5690-5790, 5850-5980, 6000-6130, 6170-6330
