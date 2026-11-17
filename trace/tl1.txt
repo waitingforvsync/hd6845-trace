@@ -368,6 +368,9 @@ M 2457,2800 y3690
 P 2440,2797:2478,2827
 C 2458,2812
 P 2470,2803:2817,2821
+P 2811,2796:2848,2828                 # the row ends on a pad with a contact (2830,2811) just east of the strip's edge (ring with a bright centre, green centre in the clean shot: n10.png, 3.4x); a metal leaves it east along y 2803-2820
+C 2830,2811
+M 2830,2811 x2856 w=16
 # tl1_w3594 (the NOR's first gate): metal x 2500, y 2886-4730, four contacts. Top pad
 # (2502,2899): poly row east along y 2890-2908 out of the strip. Pads (2499,4503) and
 # (2499,4718): poly rows east into the units at y 4480-4650 and y 4650-4800 (cells tl1_ua, tl1_ub)
@@ -456,7 +459,10 @@ P 2514,6228:2817,6246                 # likewise (sc11.png)
 M 2572,2553 x2198 y3342
 P 2545,2535:2582,2566
 C 2563,2550
-P 2575,2543:2640,2560
+P 2575,2543:2817,2560                 # east under the rail R1 (x 2598-2652) and the wide metal x 2733-2785, over field, no pad (n5.png, 3x, three shots) ...
+P 2808,2536:2846,2570                 # ... to a pad with a contact (2826,2553) just east of the strip's edge (ring with a bright centre in the metal shot, green centre in the clean shot: n7.png, 3.6x); a metal leaves it east along y 2545-2562
+C 2826,2553
+M 2826,2553 x2852 w=16
 P 2170,3282:2187,3360
 P 2180,3318:2215,3350
 C 2197,3333
@@ -520,3 +526,50 @@ M 2625,5320 y6350 w=50
 N M 2625,5600 vss
 M 2806,5320 y6350 w=52
 N M 2806,5600 vcc
+
+# ====================================================================
+# North of y 2790: wiring only (n3.png 1.75x; n4.png 2.7x both stripped shots; n5.png 3x three
+# shots; n6.png 4x; n7.png 3.6x; n8.png 2.9x; n9.png 2.2x; n11.png 3x).
+
+# rcs_c1's poly line (tla drew it from x 2330 east along y 2977-2995): it runs on WEST to
+# x 2258, north at x 2258-2274 to y 2713, east along y 2713-2728 to x 2420 and north at
+# x 2405-2420 out of the strip (y 2500). Orange in the chip-2 stripped shot all the way,
+# cream where a metal lies over it, textured dark red in the open (n8.png, n6.png, n4.png).
+# tla's metal x 2283 / y 2727 (rcs_u3288) lies half on it along both legs of the upper
+# corner (metal y 2721-2733 on poly y 2713-2728; metal x 2277-2289 beside poly x 2258-2274):
+# no pad, no ring, the metal evenly bright (n6.png): not joined (tracing guide, trap 13).
+# It passes under the metals x 2283, x 2326 (row y 2986) and y 2553 without a pad.
+P 2258,2977:2335,2995
+P 2258,2713:2274,2995
+P 2258,2713:2420,2728
+P 2405,2500:2420,2728
+# Two nested L's east of it: polys from the north at x 2448-2463 and x 2493-2508, each turning
+# east into a row that runs under R1 and the wide metal, over field, without a pad (n4, n5):
+#   tl1_w2637: down to y 2645, row y 2627-2645, to a pad with a contact (2827,2637) just east
+#              of the strip's edge; a metal leaves it east along y 2630-2645 (n7.png)
+#   tl1_w2592: down to y 2600, row y 2582-2600, drawn to the strip's edge; it goes on to a
+#              pad with a contact at about (2867,2595) with a metal going east (n7.png)
+P 2448,2500:2463,2645
+P 2448,2627:2817,2645
+P 2808,2620:2846,2654
+C 2827,2637
+M 2827,2637 x2852 w=16
+N P 2600,2636 tl1_w2637
+P 2493,2500:2508,2600
+P 2493,2582:2817,2600
+N P 2600,2591 tl1_w2592
+# A poly along the strip's north edge: from the west (x < 2100) along y 2498-2515 under the MA
+# metals to a corner at x 2372-2388, where it turns north out of the strip (n11.png, 3x, both
+# stripped shots). No connection in the strip.
+P 2100,2498:2388,2515
+N P 2250,2506 tl1_w2506
+# R1 north of tla's piece (which begins at y 3000): the same rail, x 2600-2650, without a
+# break from y 3005 up to the strip's north edge (n9.png 2.2x, n5.png, n3.png). No contact
+# under it here: the rows pass over field.
+M 2625,2500 y3005 w=50
+# A second wide metal, x 2733-2785, from the north down to y 2955, where it turns east along
+# y 2905-2955 and leaves the strip (n9.png, n5.png). No contact in the strip (the dark dots on
+# it at (2765,2820), (2775,2905) in chip 2 have no pad in the clean shot). It is not R2,
+# whose top end is at y 3018, 65 px below, with thin metal E's arm between.
+M [ 2733,2500 x2785 y2905 x2817 y2955 x2733 ]
+N M 2760,2700 tl1_w2930
