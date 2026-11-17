@@ -564,8 +564,29 @@ P 6972,4037:7114,4057
 B 6966,4032:6990,4062
 P 7084,4032:7116,4062
 C 7099,4047
-M 7087,4047 x7142 y3900 w=16
+M 7087,4047 x7142 y2822 w=16       # the channel metal x 7133-7152: no ring and no break on it between the two contacts (dark runs of 6-10 px only, each the edge of a poly underneath)
 N P 7030,4047 tc1_o4020
+# ... its north end: contact (7140,2832) on a pad; poly east along y 2822-2845, north at
+# x 7202-7222, east along y 2676-2694 (under the vertical metals x 7185, 7232 and, from
+# x 7350, lengthwise under the bus metal y 2684: no contact, no ring, no green hole), north
+# at x 7462-7482 to a pad with the contact (7465,2640) at the west end of the bus metal
+# y 2641; that metal east to the contact (7706,2640), poly under the island's right VSS
+# rail, contact (7900,2640), metal east (the follower: to (9098,2639); drawn to x 8350)
+P 7124,2817:7160,2848
+C 7140,2832
+P 7124,2822:7222,2845
+P 7202,2676:7222,2845
+P 7202,2676:7482,2694
+P 7462,2625:7482,2694
+P 7448,2624:7482,2656
+C 7465,2640
+M 7455,2641 x7718 w=13
+P 7690,2625:7722,2655
+C 7706,2640
+P 7692,2630:7914,2651
+P 7884,2625:7916,2655
+C 7900,2640
+M 7888,2641 x8350 w=13
 
 # ---- load: strip from the diffusion under the west rail to the west column, under the
 #      poly block; the block's stem goes up to a buried contact on a tab of the column

@@ -18,8 +18,9 @@ the top bus field.
 Run 3 (2026-11-17, a collaborator's session; claim `tc1`, region x 6750-8250). Traced,
 overlay-checked and extracting (34 transistors in all, no errors, no warnings): **the
 driver gated by `tc1_g`** at x 6700-7160, y 3920-4225, with its load, its supply contacts
-and its wiring into the channel: `tc1_o4020` = NOR(`tc1_g`, `tc1_x1`). See "The driver
-gated by `tc1_g`".
+and its wiring into the channel: `tc1_o4020` = NOR(`tc1_g`, `tc1_x1`), and **the output's
+route** up the channel and into the top bus field, where it becomes the bus line y 2641
+and leaves east over the datapath. See "The driver gated by `tc1_g`".
 
 ## How this area reads in the photos (cost me a third of the run; read this first)
 
@@ -289,6 +290,34 @@ its share of W is uncertain; the connections do not depend on it.
 | Buried contact of the output on the east column | a box with nested outlines at the poly's west end in both stripped shots, pale inside, no pits; the poly ends there (text map: no poly across the column at y 4036-4056) |
 | Contacts (7054,4092), (7099,4047) | ring and bright centre in both metal shots, green hole inside the pad in the clean shot |
 
+**Where the output goes** (traced to the region's east edge; views `n1.png` ... `n8.png`,
+overlay `n6.png`):
+
+1. Channel metal x 7133-7152 from the contact (7099,4047) north to a pad with the
+   **contact (7140,2832)**. No tap on the way: along x 7142 both metal shots show only dark
+   bars of 6-10 px (the edges of the polys it crosses: `tc1_g` at y 3995/4014, `tc1_l4_out`
+   at y 3885/3905, two more at y 3342 and y 3495), no ring.
+2. Poly from the pad east along y 2822-2845, north at x 7202-7222 to y 2676, east along
+   y 2676-2694 to x 7482, north at x 7462-7482 to a pad with the **contact (7465,2640)**
+   (ring and bright centre in both metal shots, green hole in the clean shot). Seen whole in
+   one 3.2x view of the clean shot with the trace on it. From x 7350 to x 7480 this poly
+   lies lengthwise under the bus metal y 2684 (trap 13): the text map shows no ring in the
+   metal and no hole in the poly there, so no contact.
+3. The contact is the west end of **the bus metal y 2641** (the third of the top bus
+   field's seven lines). It runs east to the contact (7706,2640), crosses the island's
+   right VSS rail in poly (salmon under the rail, x 7740-7822; open poly east of it) to
+   the contact (7900,2640), and goes on east as metal. `tools/follow.py` gives its end at
+   (9098,2639), 1,180 px on, over the top of the datapath: drawn to x 8350, not looked at
+   beyond.
+
+**Not joined, measured:** a second poly lies on the same y just west of the pad at
+(7465,2640): it comes from a vertical poly x 7160-7180 along y 2628-2648 (under metal to
+x 7370, in the open from there) and stops at x 7438. Between its end and the pad's ring
+the clean shot is bright green (114/166/77 and 129/152/94 at x 7443-7446, y 2634-2646:
+open field) for about 8 px, and the chip-2 stripped shot shows the poly's end edge at
+x 7437-7440. Two nets. What that poly does at its end is not looked at (a tan band lies
+under it at y 2652-2668).
+
 `tools/unsure.py`-style statement: with the four `?D` deleted, the NOR and its load still
 extract on the west column and under the rail, but the output loses its way out (the
 buried contact is on the east column). So **the equation is firm; that `tc1_o4020` is the
@@ -346,7 +375,7 @@ Run 3's ports (the driver; region edges as drawn):
 
 | Name | Layer | Where it crosses | Dir | What |
 |---|---|---|---|---|
-| `tc1_o4020` | M | x 7133-7152, y 3900, going north | out | NOR(`tc1_g`, `tc1_x1`). `tools/follow.py` gives the metal's north end at (7140,2830) with a contact candidate at (7141,3497): not looked at |
+| `tc1_o4020` | M | x 8350, y 2634-2648 (the bus line y 2641), going east | out | NOR(`tc1_g`, `tc1_x1`). The follower gives the metal's end at (9098,2639): not looked at. East of x 8250 it is outside this package
 | `tc1_x1` | M | x 7047-7061, y 4060, going north | in | the channel metal x 7053 runs on north of the driver's contact; the follower gives its end at (7054,3134) (run 2 saw a contact (7056,3138) there) and candidates at (7058,3745), (7057,3717): not looked at |
 | `tc1_m6817` | M | x 6811-6823, y 3905 and y 4228 | ? | thin metal over the driver's west column, no contact drawn (Ambiguity 12). Follower: from (6822,3496) to (6809,4379), candidates (6818,3883), (6813,3754), (6818,4309); the two at (6820,3977) and (6817,4211) are not contacts (text maps: unbroken metal, no ring) |
 | `tc1_m6968` | M | x 6962-6974, y 3905 and y 4228 | ? | thin metal over the driver's east column (Ambiguity 13). Follower: from (6966,3806) to (6975,4402), candidates (6970,3947), (6972,4218): not looked at |
@@ -461,9 +490,12 @@ and touches neither (field at y 3896-3908 and 4056-4070, measured).
   verticals between (x 6745-6762, 6766-6785, 6808-6828, 6913-6932, 6938-6955, 6959-6977).
   It is not built like the island: budget for 3x views and profiles, not 2x.
 - The driver gated by `tc1_g` is traced (run 3). Left there: Ambiguities 12 and 13 (the
-  two thin metals over it), and the far ends of its ports: `tc1_o4020` north of y 3900 on
-  the channel metal x 7133-7152, `tc1_x1`'s metal north of y 4060, `tc1_m6817`,
-  `tc1_m6968`, both rails. Run 2's observation that `sel_tracks.py` reports false breaks
+  two thin metals over it), and the far ends of its ports: `tc1_o4020` east of x 8350 on
+  the bus line y 2641 (follower: ends at (9098,2639)), `tc1_x1`'s metal north of y 4060
+  (a ring at about (7055,3730): dark runs y 3713-3723 and 3736-3753 with bright between,
+  a tap not looked at; and its top end at (7054,3134)), `tc1_m6817`, `tc1_m6968`, both
+  rails. The poly along y 2628-2648 that stops at (7438,2640), and the vertical poly
+  x 7160-7180 it comes from. Run 2's observation that `sel_tracks.py` reports false breaks
   on ns3 and ns5 (chip 2 has blemishes, chip 1 does not) still stands.
 - **Channel x 7000-7170**: verticals at x 7002-7022 (from contact 7010,3092 down), x 7048-7068
   (from contact 7056,3138 down), x 7091-7110 (upper piece from the north to contact

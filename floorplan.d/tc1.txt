@@ -8,6 +8,7 @@
 7000,2950:7170,4450   ?route channel west of the island | four more vertical metals with poly taps into the gate columns; carries l4_out north and the g poly west; mostly untraced
 6400,2650:7000,3920   ?logic gate columns | dense random logic with large devices under wide rails; not traced
 6700,3920:6995,4225   logic  driver NOR(tc1_g, tc1_x1) | wide two-input NOR with a strong load (tc1_o4020): tc1_g wraps one drain as an L, tc1_x1 rings an island; output east by a buried contact to the channel metal x 7142 going north
+7115,2620:8350,2850   route  tc1_o4020 to the bus line y 2641 | from the contact (7140,2832) in poly (east, north, east, north) to the contact (7465,2640); bus metal east, under the VSS rail in poly, on east over the datapath
 6400,4225:7000,4450   ?logic gate columns, foot | not traced
 6400,2500:8250,2975   ?route top bus field | seven horizontal metal lines crossing the VSS rail in poly; y 2771 = w1/ns1, y 2727 = ns2 traced, rest not
 7330,4010:8020,4135   route  three tracks under the island | bring the two driver outputs and one outside signal from the west side to the AND-OR gate's inputs; two are tapped by lines going south
