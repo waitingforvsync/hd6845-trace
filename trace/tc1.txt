@@ -1146,7 +1146,9 @@ N M 7273,2750 tc1_bus2858
 P 7117,2500:7133,2582              # from the north (open poly y 2518-2572, salmon under the wide metal above y 2512)
 P 7104,2577:7140,2612              # pad
 C 7120,2596 s=14x14
-M 7114,2597 x7314 y2814 x7714 w=13 # east (the metal crosses the pad's east edge and the west end of tc1_bus2684's strip: two dark bars with a bright piece between, x 7146-7154, in both metal shots), lengthwise over that strip without contact, south at x 7308-7320
+M 7114,2597 x7142 w=13             # on the pad, to its east edge
+?M 7140,2597 x7164 w=13            # across the gap between the pad's east edge and the west end of tc1_bus2684's strip: a bright piece at x 7146-7154 between two dark bars. Chip 1 reads metal there (A-C against 7-9 for bare ground), chip 2 only 9-A, which is bare-ground level; the clean shot is protected either way. Drawn because the follower runs through and the pad has no other way out; the review could not confirm it in chip 2
+M 7162,2597 x7314 y2814 x7714 w=13 # east, lengthwise over that strip without contact, south at x 7308-7320, east on the track y 2814
 P 7692,2798:7722,2830              # pad
 C 7706,2814 s=14x14
 P 7700,2805:8195,2822              # poly east

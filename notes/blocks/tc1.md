@@ -843,7 +843,8 @@ strip is not joined to `tc1_bus2814`'s pad: field between them at x 7140-7160 in
 (`mid_acid1b.png`). The metal does cross that gap: both metal shots show the pad's ring, a
 bright piece at x 7146-7154 between two dark bars (the pad's east edge and the strip's west
 end), then the line (`tools/textmap.py 7100 2576 7190 2616 2`: chip 1 A-C there against 7-9 for
-bare ground; chip 2 only 9-A). The pad has no other way out.
+bare ground; chip 2 only 9-A). The pad has no other way out. Because chip 2 does not show it, that piece is drawn `?M`
+(x 7140-7164): `tc1_bus2814`'s north poly and its track are joined only through it.
 
 A small spot on `tc1_bus2554`'s poly at (7208-7212, 2506-2510), ring-like in the clean shot at
 4x, is not a contact: `tools/textmap.py 7150 2490 7230 2526 2` shows no 'g' hole (R-G drops to
@@ -1538,6 +1539,14 @@ branch; every cross-under pad. It looked at 4-5x in two or more shots and measur
 
 After the fix: `tools/t.sh tc1 sameconn.py 4184bf8`: `connections identical`;
 `.venv/bin/python tools/sameconn.py 4184bf8`: `connections identical`.
+
+After the review, with the owner asking how firm the two items it could not check fully are:
+the piece of `tc1_bus2814`'s metal across the gap x 7140-7164 is now `?M` (it rests on one chip
+and on the pad having no other exit); the contact (6773,2790) stays firm (ring in chip 2's metal
+shot and the hole in chip 1's stripped shot: two chips). The four placeholders were renamed
+`tc1_bus#` (`tc1_b` is a former name). Neither changes a connection:
+`tools/t.sh tc1 sameconn.py 0690a1c`: `connections identical`;
+`.venv/bin/python tools/sameconn.py 0690a1c`: `connections identical`.
 
 Round 1: no findings that change a connection.
 
