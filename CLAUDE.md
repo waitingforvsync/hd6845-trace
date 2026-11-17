@@ -106,7 +106,7 @@ access). In short:
   [--trace] [--nofill] --out FILE` renders a view. Keep each output under about
   1400 px a side or it is downscaled when read. `--trace --nofill` is the clearest
   way to check a trace against the photo.
-- `tools/netlist.py` prints the extraction report; `tools/build.py` regenerates `out/`.
+- `tools/netlist.py` prints the extraction report; `HD_COORD=1 tools/build.py` regenerates `out/` (coordinator only; `--check` prints the report lines and writes nothing).
 - Trace file format: docstring of `tools/tracelib.py`. Layer legend and what each
   feature looks like: `notes/layers.md`. Read that before tracing anything.
 
@@ -119,7 +119,7 @@ coordinating session, the owner's.
 - The coordinator alone edits `notes/work-packages.md` (the master list of tracing
   tasks, which must cover the whole die), `notes/ambiguities.md`, `notes/journal.md`,
   `floorplan.txt`, `PLAN.md`, this file and the shared tools, and alone runs
-  `tools/build.py` on main and commits `out/`. It commits on main with
+  `HD_COORD=1 tools/build.py` on main and commits `out/`. It commits on main with
   `HD_COORD=1 tools/ship.sh ...`.
 - Its own tracing follows the workflow too: claim the package first (`tools/claim.py
   take`), so that collaborators do not start on it. **While unsupervised it works
