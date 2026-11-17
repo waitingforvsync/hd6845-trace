@@ -30,6 +30,11 @@ D 17440,8280:17462,8330            # the output node's column under the thin met
                                    # gate band under the rail). So G1 has a second pull-down on
                                    # the same gate, W about 22 (found 2026-11-17, run 3)
 D 17350,8287:17410,8386            # VSS land, channel, output
+D 17316,8310:17352,8358            # the land's tab west of the rail, above the band, and the channel under
+                                   # the band down to the output band: a closed outline 17312-17350 x
+                                   # 8305-8328 whose inside is green (open diffusion) in the clean shot,
+                                   # and its west edge crosses the band at x 17310-17316 in all shots.
+                                   # So G1 is about 94 wide, not 60 (review round 1 of run 4)
 C 17385,8308 s=30x30               # VSS
 D 17305,8356:17462,8386            # output band
 D 17436,8324:17462,8404            # output, under the thin metal
@@ -87,6 +92,7 @@ C 17553,8680 s=30x34
 P 17255,8781:17425,8804            # gate band, fed by G3; the line also runs on left
 N P 17275,8792 d{}_c
 D 17350,8742:17410,8841
+D 17316,8766:17352,8813            # the same tab and channel west of the rail as in G1 (W about 94)
 C 17385,8763 s=30x30
 D 17305,8811:17462,8841            # output band
 D 17436,8779:17462,8859

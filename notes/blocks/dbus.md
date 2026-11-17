@@ -37,7 +37,8 @@ Traced, extracting (127 transistors, 0 errors, 0 warnings), overlay-checked:
   - **the "logic above D0" is the east half of `r9c`'s five units** (x 17500-17670,
     y 5260-5870): each unit's depletion load and its contact to the rail x 17616-17667,
     which is VCC (cell `dbus_r9l`, one transistor, five copies). With `r9c`'s pull-downs
-    the full extraction now gives `ra#_cmp = NOT ra#_drv_in` for all five (AMB-012).
+    the full extraction now gives `ra#_cmp = NOT ra#_drv_in` for all five (AMB-012):
+    firm for bits 0-3; bit 4's still depends on `r9c`'s `?P` on its gate line.
   - **the input lines of D2, D3, D4 and D5** (2026-11-17 19:10 +0000), each from the
     pin's protection node in `dpad` to the first gate of its buffer chain: `d2_in`..
     `d5_in` are now aliases of the pins `d2`..`d5` (wiring only, no transistors), so all
@@ -391,9 +392,11 @@ The east half is the load, and nothing else:
   heavy-outlined box (17557-17583, 22 px tall), where a tab of the block comes down onto
   it: the buried contact that ties the load's gate to the output side.
 
-**Traced** (full extraction): `ra#_cmp = NOT ra#_drv_in`, # = 0-4. The equations still pass
-through `r9c`'s `?B` at each unit's west end (the tie from the output band to the poly that
-carries the output away): those are `r9c`'s items. One of them (unit 1, 17380-17410 x
+**Traced** (full extraction): `ra#_cmp = NOT ra#_drv_in`, # = 0-4. `tools/unsure.py
+--equations` gives bits 0-3 as firm; bit 4's depends on `r9c`'s `?P`, the gate poly of its
+unit (`trace/r9c.txt`, the open join `ra4_drv_in_u`). On its way to the comparator each
+output also passes `r9c`'s `?B` at the unit's west end (the tie from the output band to the
+poly that carries the output away): those are `r9c`'s items. One of them (unit 1, 17380-17410 x
 5440-5470) was looked at here at 5x in three shots (`u1_west.png`): a heavy-outlined box
 with a lighter centre between the poly from the pad and the diffusion from the band, i.e.
 it looks like the buried contact `r9c` assumed. Not measured, the other four not looked at.
@@ -458,8 +461,9 @@ Evidence:
   were not, each half would be a metal with one end. D5's jumper is bright over its
   line 2 in both chips.
 - A feature that crosses every chain's first gate band at x 17313 (an outline from above
-  the band to below it) is the same in chains 1-4 (`g1w_a1b.png`, `g1w_acid.png`) and
-  belongs to the chain's left-hand wiring, not to the input line.
+  the band to below it) is the same in chains 1-4 (`g1w_a1b.png`, `g1w_acid.png`). It is
+  not part of the input line: it is the west edge of the chain's own diffusion (review
+  round 1 of run 4: the first pull-down is wider than drawn; see the Review section).
 - Overlays: `ov_tops.png`, `ov_bots.png` (chip-2 stripped shot), `ov_jmps.png` (metal, 3x).
 
 Extraction (full): `d2_a = NOT d2` .. `d5_a = NOT d5`, firm; transistor count unchanged.
@@ -601,7 +605,10 @@ bus lines.
    in the column is tied that way.
 13. `dbus_in`'s pull-down widths (60 for G1/G4, 56 for G2/G3) were drawn in the first
    session from the land under the rail. In `dbus_in2` the diffusion reaches west of the
-   rail (W 107 and 64). Whether `dbus_in`'s does too was not looked at (a size only).
+   rail (W 107 and 64). **G1 and G4: settled in run 4** (review round 1): the land has a
+   tab west of the rail to x 17316 above the band and the channel runs on under the band
+   to the output band, so W is about 94 (drawn). G2 and G3 (land drawn from x 17322) were
+   not looked at again.
 
 ## Review
 
@@ -743,6 +750,55 @@ Round 2: no findings.
 
 Its one remark, not an error: the stage 2/3 load strip measures about 24 tall where it is
 drawn 20 (a size; Ambiguity 10).
+
+### Run 4 (2026-11-17)
+
+**Round 1, full review of what run 4 added or changed** (2026-11-17 19:20-19:36 +0000, a
+fresh Fable 5.2 agent; 37 images in `cache/scratch/dbus/review-7/`). Told to suspect: the
+east rail's join to VCC (read at 1.2x); whether the tab-on-arm box is a buried contact and
+arm and strip one diffusion; each output strip's join to `r9c`'s band and its clearance
+from the gate poly end; the cell copies; D4's jumper over line 2; a hidden contact under
+the `d_hiz` metal on D5's poly and its corners; each node metal's reach to its pad; each
+second pad's join to the gate band; branches or breaks along the channel runs;
+`d1_out_n`'s join to the pad cell's strip, its corner, the Z-step (trap 10), the long
+metal's candidate taps, a bridge at the metal's step, the end pad; whether anything goes on
+west of `dbus_do0_in`'s pad. It read unit 1 at 4x in three shots and unit 0 at 4x, profiled
+the rail-band-wide-metal joins in both metal shots, ran `cellcheck.py` on the loads (units
+2-4: 0.96-0.98, unit 0: 0.92), viewed the tops of all four input lines at 3.6-4.6x and the
+channel runs of D2-D4 end to end, the pads and jumpers at 3.6-4x, and every junction of
+`d1_out_n` and `dbus_do0_in`.
+
+No finding changes a connection. Two points:
+
+- Finding 1, **confirmed and fixed (a size)**: the outline that crosses each chain's first
+  gate band at x 17313 is diffusion, not wiring: G1's land reaches west of the rail. My
+  check on the master (chain 0): a closed outline 17312-17350 x 8305-8328 above the band,
+  green inside in the clean shot (105-130/131-152/85 against khaki 135-161/131-153/80
+  outside: open diffusion), pinker than field in both chip-2 shots; its west edge is a
+  dark line at x 17309-17316 at y 8316 and across the band at y 8340 (`g1_land.png`, 5x,
+  three shots; `tools/dbus_dark.py`). Below the band the output band was already drawn
+  from x 17305. G4 has the same tab (outline 17312-17350 x 8762-8781, green inside:
+  `g4_land.png`). Drawn: both channels now run from x 17316, W 94 (was 60), in the cell,
+  so in all six chains. No net changes (2176 nets, 3796 transistors before and after).
+- Finding 2, **confirmed, notes corrected**: the notes said `ra#_cmp = NOT ra#_drv_in` for
+  all five and named only `r9c`'s `?B`; `ra4_cmp`'s equation depends on `r9c`'s `?P` gate
+  poly. The Status and the loads' section now say so (`operation.md` already did).
+- Found correct: the rail to the band to the wide metal (both metal shots, 1.8x and
+  profiles; dark samples alternate between the chips: pits); strip, arm, box, load and
+  land of the units; the strip one diffusion with `r9c`'s band and 8 px clear of the gate
+  poly end; D2's channel poly 6-9 px clear of a `d_hiz` contact pad at (17640,10855) (three
+  shots); D4's jumper continuous (chip 2's stripped shot shows the metal's ghost over
+  line 2); D4's pad 2 joined to the band and clear of the `d4_a` poly below; D5's poly
+  salmon from y 14416 to 14896 with field beyond both corners, the nick dark in both chips
+  (y 14587-14597 and 14596-14602) but both stripped shots uniform and no pad: no contact;
+  `d1_out_n`'s join at x 17800, both corners, the Z-step one poly (poly colour down
+  x 17230-17236 from y 9593 to 9628 in chip 2, field beyond both stubs in the clean shot),
+  no tap at any candidate (chain 4's rectangle has its own contact at (17188,14155)), the
+  metal's step clear of its neighbour, the end pad, no contact under the metal
+  x 16940-16960; field west of `dbus_do0_in`'s pad in all shots.
+- Not checked: the 6,140 px metal between its candidates (`follow.py` only); line 1 under
+  the rails in chip 2 (fringes; read in the clean shot); `r9c`'s `?B` boxes; the VCC metal
+  north of y 4520.
 
 ## Not done
 
