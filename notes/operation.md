@@ -2,7 +2,7 @@
 
 This is the short version. The block notes (`notes/blocks/`) are the reference; the
 glossary of names is `notes/signals.md`. Last checked against the extraction on
-2026-11-17 (2,108 nets, 3,582 transistors on this branch; signals renamed by the first refresh).
+2026-11-17 (2,192 nets, 3,807 transistors; second refresh).
 
 ## How to read this page
 
@@ -10,7 +10,7 @@ Every statement carries one of three marks.
 
 | Mark | Meaning |
 |---|---|
-| **Firm** | The extracted netlist says it, and still says it when every item marked uncertain (`?`) is deleted from the trace. `tools/unsure.py --equations NAME` prints this for any equation: 708 of the 1,049 extracted equations are firm. |
+| **Firm** | The extracted netlist says it, and still says it when every item marked uncertain (`?`) is deleted from the trace. `tools/unsure.py --equations NAME` prints this for any equation: 752 of the 1,095 extracted equations are firm. |
 | **Marked** | Extracted, but it depends on at least one uncertain item or on a join that is believed and not drawn. The assumption is named. |
 | **Open** | Not traced. Nothing is claimed. |
 
@@ -93,7 +93,7 @@ is not settled.
 | The register rows of R3 (one nibble), R5, R6, R7, R8, R9, R10, R11 are identified by their strobe lines, drawn end to end. | Firm for the joins; the register *numbers* rest on the address decoder's numbering of its lines |
 | The rows of R0, R1, R2, R4 are identified by their strobe lines, drawn end to end (`notes/blocks/wrj.md`). | Firm for the joins; the register *numbers* rest on the address decoder's numbering of its lines |
 | The data bus: all eight bits are joined from the right datapath across the chip to the central datapath (`notes/blocks/bust.md`); bits 0-3 reach the D0-D3 units of the data bus column (`dbl`). The registers each bit writes match the datasheet's widths exactly (R5, R9 bits 0-4; R4, R6, R7 bits 0-6; R8 bits 0, 1, 4-7; R0-R2 bits 0-7), which nothing in the trace assumed. | Firm for the joins; the bit numbers rest on that match and, for bits 0 and 1, on the D0/D1 units |
-| Data bits 0-3 reach the bus through a **transparent latch per bit** in the data bus column: `dl#_q` follows pin D# (through four inverters) while `dbus_le` is high and holds when it falls, and a static inverter drives `db_b#` = NOT `dl#_q_n` all the time. The internal data bus is not tri-stated at this end (`notes/blocks/dbus.md`). | Firm (equations and the joins to `db_b0`..`db_b3`) |
+| Data bits 0-3 reach the bus through a **transparent latch per bit** in the data bus column: `dl#_q` follows pin D# (through four inverters) while `dbus_le` is high and holds when it falls, and a static inverter drives `db_b#` = NOT `dl#_q_n` all the time. The internal data bus is not tri-stated at this end (`notes/blocks/dbus.md`). The latch is a cross-coupled pair gated by `dbus_le`: `dl#_q` = NOT((`d#_d_n` AND `dbus_le`) OR `dl#_q_n`). | Firm (equations and the joins to `db_b0`..`db_b3`); from the pin itself for D0 and D1. D2's and D3's buffers take `d2_in`, `d3_in`, whose join to the pin is not drawn: marked |
 | What `dbus_le` is: a line shared with eight taps in the columns west of the data bus column; its driver is not traced. | Open |
 | Data bits 4-7: the pins D4-D7 have their four-inverter input buffers in the same column (D6's and D7's are another layout of the same chain; D6's input is drawn from its pin, D4, D5 and D7 are assigned by position). The buffered levels `d4_d`..`d7_d` leave the column west towards the gate column where `dbus_le` has its eight taps; the latches of bits 4-7 are believed to be there (`notes/blocks/dbus.md`). | Firm for the buffers and D6's join; the latches of bits 4-7 are open |
 | The first inverter of every data input buffer has two pull-downs on the pin: its gate poly's L-shaped arm crosses a second diffusion under a metal (AMB-004 said the arm crosses nothing). The logic is the same; the device is a third wider. | Firm (eight buffers) |
