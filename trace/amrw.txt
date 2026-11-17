@@ -79,11 +79,11 @@ N M 2240,4500 amr_eq_r3
 
 # =====================================================================================
 # The four compared lines come from the 4-bit counter in the left array's upper rows (c4l,
-# trace/ur.txt, trace/urch.txt): c4l0 -> cdp1_l4544 (amr c0, R3 bit 4), c4l1 -> cdp1_l4588
+# trace/ur.txt, trace/urch.txt): c4l0 -> c4l0 (amr c0, R3 bit 4), c4l1 -> c4l1
 # (c1, bit 5), c4l2 -> cdp1_l4632 (c2, bit 6), c4l3 -> cdp1_l4676 (c3, bit 7).
 # urch draws the four poly rows (y 6157, 6197, 6239, 6280) as far as x 4720; bust draws
-# cdp1_l4632 and cdp1_l4676 west to the pads (5885,5893) and (5922,5935), cdp1_l4588 to the
-# corner (7532,4619) and cdp1_l4544 to x 7870. What is drawn here joins them.
+# cdp1_l4632 and cdp1_l4676 west to the pads (5885,5893) and (5922,5935), c4l1 to the
+# corner (7532,4619) and c4l0 to x 7870. What is drawn here joins them.
 # Views in cache/scratch/amr/: c4a (rows and pads x 4700-5020, 1.85x), c4b (the four nested
 # corners, 1.7x, both shots), c4c (the four rows x 5530-5930 and their eight pads, 2.7x),
 # vv (the four nested metals x 5890-6016, y 4570-5935), cf1, cf2 (crossing field x 6440-6990:
@@ -131,8 +131,8 @@ P 5537,5893 x5885 w=18
 P 5582,5935 x5922 w=18
 # --- c4l0 and c4l1: metals north (x 5888, 5933) and east (y 4572, 4613) to the west pads of
 #     the crossing field, rows across it, metals east and north to the pads on the rows that
-#     enter cdp1 (bust: the stair at x 8215-8345 takes row y 4500 to cdp1_l4544 and the row
-#     from (7810,4547) to cdp1_l4588)
+#     enter cdp1 (bust: the stair at x 8215-8345 takes row y 4500 to c4l0 and the row
+#     from (7810,4547) to c4l1)
 M 5886,5805 y4572 x6495
 P 6478,4551:6512,4585
 C 6495,4568
@@ -153,13 +153,10 @@ N P 4900,6157 c4l0
 N P 4900,6197 c4l1
 N P 4900,6239 c4l2
 N P 4900,6281 c4l3
-@alias c4l0 cdp1_l4544
-@alias c4l1 cdp1_l4588
 @alias c4l2 cdp1_l4632
 @alias c4l3 cdp1_l4676
 
 # The join to tla (drawn there after this route was): amr_eq_r3's metal x 2240 and its poly
-# east along y 3463 are tla's `tla_w3461`, a data input of the west column's selector
-# tla_w3417 = NOT(rcs_thin_e.tla_w3376 + tla_w3505.tla_w3461). The two blocks' geometry meets
+# east along y 3463 are tla's `amr_eq_r3`, a data input of the west column's selector
+# tla_w3417 = NOT(rcs_thin_e.tla_w3376 + tla_w3505.amr_eq_r3). The two blocks' geometry meets
 # on the metal x 2240; the alias says which name the net keeps.
-@alias amr_eq_r3 tla_w3461

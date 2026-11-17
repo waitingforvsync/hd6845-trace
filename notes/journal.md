@@ -1422,7 +1422,7 @@ equations firm; traced 60.0 % of the die, 0.0 % in no package.
   D2-D5's lines; D6's was drawn in run 3); `trace/mal.txt` header.
 - **Not applied.** `notes/blocks/dbus.md`'s "depletion load on P_x / P_y" (from `dpad`): left to Tom,
   whose claim is active and whose run 3 already names P_x `d_hiz`. `bust`'s two `?P` rows (made firm
-  only by tracing, noted in the `amr` row). Renaming `tla_w3461` away (an alias of `amr_eq_r3`): `tla`'s
+  only by tracing, noted in the `amr` row). Dropping `amr_eq_r3`'s redundant alias from `tla` (done in the refresh below): `tla`'s
   region is inside dp111's `tl1` claim, so it waits for the next refresh.
 - **PR #17** (dp111's bits 4-7 latches) is kept open on purpose (user): an independent trace of what
   `dlat` covers, to compare when that package lands. Checked against main today: 222 of main's 236
