@@ -753,7 +753,7 @@ drawn 20 (a size; Ambiguity 10).
 
 ### Run 4 (2026-11-17)
 
-**Round 1, full review of what run 4 added or changed** (2026-11-17 19:20-19:36 +0000, a
+**Round 1, full review of what run 4 added or changed** (reported 2026-11-17 19:31 +0000, a
 fresh Fable 5.2 agent; 37 images in `cache/scratch/dbus/review-7/`). Told to suspect: the
 east rail's join to VCC (read at 1.2x); whether the tab-on-arm box is a buried contact and
 arm and strip one diffusion; each output strip's join to `r9c`'s band and its clearance
@@ -799,6 +799,19 @@ No finding changes a connection. Two points:
 - Not checked: the 6,140 px metal between its candidates (`follow.py` only); line 1 under
   the rails in chip 2 (fringes; read in the clean shot); `r9c`'s `?B` boxes; the VCC metal
   north of y 4520.
+
+**Round 2: no findings.** Fix check (reported 2026-11-17 19:44 +0000, a fresh Fable 5.2
+agent; images in `cache/scratch/dbus/review-8/`) of the two rectangles added to `dbus_in`
+since commit 0e53e80. It measured the outline at all twelve sites (G1 and G4, chains 0-5)
+in all four shots (west edge x 17311-17316, top 19-23 px above the band; the drawn edges
+sit 3-6 px inside, so W could be about 98), found the inside pinker than field in both
+chip-2 shots at every site (in the clean shot green only in chain 0, mauve in chains 1-4),
+the west edge crossing the gate band as a dark line at every site, the tab one colour with
+the land up to the rail's edge, a 12-15 px field gap to the input line's poly in chains
+1-3 and the pads of chains 4 and 5 ending at x 17298 and 17293, and the extraction
+unchanged but for twelve widths. Viewed at 4x or more: the master's G1 and G4, G1 of
+chains 1, 4 and 5, G4 of chain 3. Could not check directly: the tab's join to the land
+under the rail's edge line (inferred from the absence of a second edge).
 
 ## Not done
 

@@ -32,7 +32,8 @@ D 17440,8280:17462,8330            # the output node's column under the thin met
 D 17350,8287:17410,8386            # VSS land, channel, output
 D 17316,8310:17352,8358            # the land's tab west of the rail, above the band, and the channel under
                                    # the band down to the output band: a closed outline 17312-17350 x
-                                   # 8305-8328 whose inside is green (open diffusion) in the clean shot,
+                                   # 8305-8328 whose inside is green (open diffusion) in the clean shot
+                                   # in chain 0 (mauve in chains 1-4; pinker than field in chip 2 in all),
                                    # and its west edge crosses the band at x 17310-17316 in all shots.
                                    # So G1 is about 94 wide, not 60 (review round 1 of run 4)
 C 17385,8308 s=30x30               # VSS
