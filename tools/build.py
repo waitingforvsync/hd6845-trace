@@ -15,7 +15,11 @@ fragments in floorplan.d are written by whoever traces a block and are drawn on 
   x0,y0:x1,y1  kind  name | description
 kind is one of: pad io array pla logic route test power unknown
 A leading '?' on the kind marks the identification as provisional.
+
+Only the coordinator runs the build (HD_COORD=1 tools/build.py): it rewrites the tracked
+files in out/. Anyone else can use --check, which prints the summary lines and writes nothing.
 """
+import argparse
 import json
 import os
 import sys
@@ -379,8 +383,23 @@ def build_floorplan(blocks, scale=1 / 6):
     print('floor plan: %d labels drawn in place, %d numbered' % (len(placed), len(numbered)))
 
 
+def summary_lines(nl, missing, opens):
+    yield nl.report().split('\n')[0]
+    yield ('signal names: %d not in notes/signals.md%s; %d open joins (_u)'
+           % (len(missing), (' (' + ' '.join(missing[:8]) + (' ...' if len(missing) > 8 else '') + ')') if missing else '',
+              len(opens)))
+
+
 def main():
-    os.makedirs(OUT, exist_ok=True)
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument('--check', action='store_true',
+                    help='extract and check, print the summary lines, write nothing')
+    ap.add_argument('--no-floorplan', action='store_true', help='skip the floor-plan images')
+    args = ap.parse_args()
+    if not args.check and os.environ.get('HD_COORD') != '1':
+        print('build: this rewrites out/, and only the coordinator runs it (HD_COORD=1 tools/build.py).\n'
+              '       tools/build.py --check prints the report lines without writing.', file=sys.stderr)
+        sys.exit(2)
     # Blocks are traced by several agents at once: leave out any file that does not
     # load on its own (work in progress) rather than fail the whole build.
     import glob
@@ -395,10 +414,14 @@ def main():
         print(f'left out {name}: {why}')
     tr = tracelib.Trace(files=good)
     nl = netlist_mod.Netlist(tr)
-    with open(os.path.join(OUT, 'netlist.json'), 'w') as f:
-        json.dump(nl.to_json(), f, indent=1)
     import signals as signals_mod
     missing, opens = signals_mod.check([n.name for n in nl.nodes.values() if n.names])
+    if args.check:
+        print('\n'.join(summary_lines(nl, missing, opens)))
+        return
+    os.makedirs(OUT, exist_ok=True)
+    with open(os.path.join(OUT, 'netlist.json'), 'w') as f:
+        json.dump(nl.to_json(), f, indent=1)
     with open(os.path.join(OUT, 'report.txt'), 'w') as f:
         f.write(nl.report() + '\n')
         f.write('\nsignal names (notes/signals.md)\n')
@@ -406,12 +429,9 @@ def main():
         f.write('  open joins, names ending in _u (%d): %s\n' % (len(opens), ' '.join(opens) or '-'))
     blocks = read_floorplan()
     build_svg(tr, nl, blocks)
-    if '--no-floorplan' not in sys.argv:
+    if not args.no_floorplan:
         build_floorplan(blocks)
-    print(nl.report().split('\n')[0])
-    print('signal names: %d not in notes/signals.md%s; %d open joins (_u)'
-          % (len(missing), (' (' + ' '.join(missing[:8]) + (' ...' if len(missing) > 8 else '') + ')') if missing else '',
-             len(opens)))
+    print('\n'.join(summary_lines(nl, missing, opens)))
     print(f'{len(tr.items)} shapes, {len(blocks)} floor-plan blocks -> out/')
 
 

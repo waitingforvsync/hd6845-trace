@@ -1,10 +1,19 @@
 # tcw: the gate column west of the island (x 6380-6760, y 2500-4450)
 
-Serial work, 2026-11-16. Trace: `trace/tcw.txt` (one full gate and three pull-down stacks); the three pull-downs at
-y 3940-4200 are in `trace/fld.txt`. Views in `cache/scratch/rax/`: `tcw_s.png` (survey of
-the whole column at 1.03x), `t1a.png`, `t1m.png`, `t1cm.png` (class map), `t1load.png`
-(the gate at y 3690-3905), `t2cm.png`, `w3a.png`, `w3c.png`, `w3m.png`, `w4.png`,
-`w5cm.png` (the group at y 3940-4200).
+## Status
+
+Partial. 22 transistors in `trace/tcw.txt` (plus three pull-downs in `trace/fld.txt`).
+
+- **South end, y 3660-4450: complete** (run 2, 2026-11-17): the latch `fld_a_in` / `tcw_o3820`
+  with both loads, the inverter `fld_y_b`, and the last inverter, which drives the row
+  `tc1_x1_u`. Sections "Run 2" and "AND-OR-invert" below.
+- **North of y 3660**: the pull-downs under the ground rail and the bus metals of their inputs
+  (serial work, 2026-11-16), one inverter complete (`tcw_o3550`); the loads and outputs east of
+  the rail are not traced. "Not done" says what was seen there.
+
+Serial work of 2026-11-16 used views in `cache/scratch/rax/` (`tcw_s.png`, `t1a.png`, `t1m.png`,
+`t1cm.png`, `t1load.png`, `t2cm.png`, `w3a.png`, `w3c.png`, `w3m.png`, `w4.png`, `w5cm.png`);
+run 2's are in `cache/scratch/tcw/`.
 
 ## What the block is
 
@@ -25,22 +34,22 @@ the bundle that carries R9's match passes it (`notes/blocks/r9m.md`). The field
 
 ### AND-OR-invert at y 3690-3905 (extracted)
 
-    tcw_o3820 = NOT( tcw_x3855 OR (tcw_a AND tcw_c) )
+    tcw_o3820 = NOT( fld_a_in OR (tcw_a AND tcw_c) )      (third input identified in run 2)
 
 Under the rail one diffusion column: rail contact (6512,3708) | gate `tcw_c` (y 3732-3750)
-| node | gate `tcw_a` (y 3777-3795) | output | gate `tcw_x3855` (y 3845-3863) | rail contact
+| node | gate `tcw_a` (y 3777-3795) | output | gate `fld_a_in` (y 3845-3863) | rail contact
 (6535,3905). The output node has an arm east (y 3808-3836) to a load whose gate poly is
 one piece with a pad (6648,3785) above it; the pad's tail goes west and down onto the arm
 (buried contact, `?`). From the pad a thin metal runs south along x 6645 to a pad
-(6640,3985): the output's way out. What that pad feeds is not traced.
+(6646,3986): the output's way out. That pad's poly gates a pull-down of `fld_a_in` (run 2).
 
 - `tcw_c` and `tcw_a` are the same nets as two of the three inputs of the group below:
   their thin metals (x 6319, x 6403) end on pads at (6318,3740) and (6400,3788), and from
   each pad the poly goes east as a gate of this stack. So neither net is driven here;
   their drivers are further on (each also has a poly going west from its lower pad, along
   y 4130 and y 4000).
-- `tcw_x3855`: a short gate poly that widens south-east of the rail at
-  (6570-6625, 3850-3900). Not followed.
+- The third gate: a short poly that widens south-east of the rail at (6570-6625, 3850-3900).
+  Run 2: it is `fld_a_in` (tied to that node at (6590,3912), and the gate of its load).
 
 How sure: class map (poly over channel at the three gates, diffusion between, both
 contacts), one 2.8x view in two shots, the load and its pad at 5.6x in both stripped
@@ -48,9 +57,8 @@ shots. The supply assignment of the two rails is the layout rule (AMB-014).
 
 ### The group at y 3940-4200 (in `trace/fld.txt`; pull-downs only)
 
-`fld_a_in` low through `tcw_a` AND `tcw_b`; `fld_y_b` low through `tcw_c`. Their loads are
-not found: the class map of the area east of the rail there (`t2cm.png`) does not give a
-readable picture (the open-area thresholds are not calibrated for this spot).
+`fld_a_in` low through `tcw_a` AND `tcw_b`; `fld_y_b` low through `tcw_c`. Their loads, and a
+third pull-down of `fld_a_in`, were found in run 2 (below).
 
 ## Read, not drawn (2026-11-16)
 
@@ -231,22 +239,196 @@ height of the first contact box); the loads; everything east of the rail.
 - **A third metal on the x 6362 track**, `tcw_m6362c`, from a pad (6362,3832) to a pad
   (6362,4266). The upper pad's poly goes east towards the west side of `tcw_o3820`'s
   output node (drawn to x 6440; the join is not read). The lower pad's poly is the gate
-  of the column's last pull-down (y 4257-4281), between the nodes `tcw_o4228` (above; a
-  box with pit marks at about (6520,4215): probably a rail contact) and `tcw_o4313`
-  (below). `tools/findcell.py` matched `fld`'s inverter here.
+  of the column's last pull-down (y 4257-4281). Run 2: the node above is the rail's contact,
+  the node below is the output, and the gate is a complete inverter driving `tc1_x1_u`.
 
 With this the first column's ground rail is complete in the trace as pull-downs: all
 seventeen gates.
 
+## Run 2 (2026-11-17, Matt Godbolt's session): the south end, y 3840-4450
+
+Tools run as `tools/t.sh tcw ...`; views in `cache/scratch/tcw/`. The open areas between the two
+rails were classed with `tools/tcw_cls.py` (new: the chip-2 stripped shot as a text class map;
+thresholds measured on this run's first inverter: diffusion arm (6580,4295) 165/141/105, field
+(6600,4350) 156/153/102, open poly (6650,4295) 191/157/76) and checked on views in both stripped
+shots (R16, R19: nothing here is decided from `classmap.py` or `railprof.py` in the open).
+
+### The last inverter, y 4200-4330: it drives the row `tc1_x1_u` (traced)
+
+    tc1_x1_u = NOT tcw_m6362c
+
+Rail contact (6521,4226) (ring in the metal shot, pits in both stripped shots) | gate y 4257-4281
+| output node y 4282-4305. South of y 4305 the rail lies on field (pink in the clean shot): the
+earlier node drawn below the output does not exist, and the node above the gate is ground.
+
+- West: the output's arm (y 4287-4307) ends in a buried contact, a heavy box (6455-6478,
+  4296-4320) in both stripped shots (`e3.png`, 5x); the poly from it runs south along
+  x 6443-6466 and east as the row y 4383-4401, under both rails over field (salmon between
+  pink), to x 6750: the row `tc1` drew from there to the pad (6947,4396) and labelled
+  `tc1_x1_u`. The poly has no other branch west of x 6443.
+- East: the arm (y 4284-4306) runs under the load's poly block (6622-6682, 4262-4322) to the
+  supply pocket (6688-6735, 4245-4322, two pits). The load's gate tie is a tab of the block on a
+  finger of the output's diffusion, buried contact box (6620-6650, 4236-4262).
+
+**What this means for `tc1`'s Ambiguity 13 / AMB-020:** `tc1` aliases `tc1_x1_u` to `tc1_x1`
+(assumed joins), and `tc1_x1` = NOT `ras_o0_sel1` has a driver of its own in `shm`. With this
+inverter the row has a second driver. Two inverters on one net is not impossible but is unusual;
+the joins at `tc1`'s pads (6962,4268) and (6968,3905) should be looked at again with this in
+mind. Nothing in `tc1`'s trace is changed here.
+
+### `tc1_p4308`'s row, y 4428-4448
+
+Ends on a pad with a metal contact at (6622,4440) (text map: bright centre in a dark ring in
+both metal shots, green hole in the clean shot); the thin metal leaves south at x 6621 into
+`fld`'s region (port).
+
+### The group at y 3900-4200, east of the rail: a cross-coupled pair (traced)
+
+    fld_a_in  = NOT( (tcw_a AND tcw_b) OR tcw_o3820 )
+    tcw_o3820 = NOT( fld_a_in OR (tcw_a AND tcw_c) )
+    fld_y_b   = NOT tcw_c
+
+A latch gated by `tcw_a`: with `tcw_a` low both keep their state; with it high `tcw_b` pulls
+`fld_a_in` low and `tcw_c` pulls `tcw_o3820` low (traced; "a transparent latch with `tcw_a` as
+its enable" is the reading, not a traced fact about what the signals are).
+
+- **`fld_a_in`'s node** (the top node of `fld`'s stack, y 3956-3985 under the rail) has an arm
+  east (y 3960-3974) to a vertical strip x 6603-6622 from y 3904 to y 4075 (class map: diffusion
+  over its whole length; `px.py col 6612`: 141/117/84 in the chip-2 stripped shot).
+- **Its load**: from the strip's head east (y 3906-3930) under a poly (6632-6670), which lies
+  under the thin metal x 6645 (salmon in the clean shot, with the dark lines of the diffusion's
+  edges at y 3900-3904 and y 3932), to the supply pocket (pale tan x 6686-6730, contact ring
+  (6708,3917) in the metal shot).
+- **The load's gate is the third gate of `tcw_o3820`** (formerly named by its place): that poly
+  runs from the gate's east end south (x 6575-6600) and east (y 3872-3900) to the load, and
+  comes down into a heavy box (6580-6600, 3903-3925) at the strip's head: a buried contact
+  (`px.py row 3912`: interior 157/138/98 in the chip-2 stripped shot and dark in the clean shot,
+  like the two known buried contacts of the last inverter). So that gate input is `fld_a_in`.
+- **A third pull-down of `fld_a_in`**: the strip's south end passes under the poly block
+  (6600-6680, 4028-4056) and ends on a diffusion strip y 4062-4080 that runs west to the rail's
+  contact node. The block is one poly with the pad (6646,3986) (dark-brown open poly
+  x 6650-6675, y 4005-4030 between them), where the thin metal x 6645 from `tcw_o3820`'s load
+  pad lands.
+- **`fld_y_b`'s load**: the bottom node's arm (y 4156-4178) runs on under the poly block
+  (6626-6676, 4134-4184) to the supply pocket `tc1` drew (contact (6730,4158)); gate tie: a tab
+  of the block on a finger of the node (x 6600-6620 north to y 4108), buried contact box
+  (6625-6654, 4106-4132).
+
+Overlay: `d4.png` (3.4x, both stripped shots).
+
+## Ports
+
+Also in `ports.d/tcw.txt`.
+
+| Name | Layer | Where | Direction | What |
+|---|---|---|---|---|
+| `tc1_x1_u` | poly | x 6750, y 4383-4401 | out | output of the last inverter, east into `tc1` (its row to the pad (6947,4396)) |
+| `tc1_p4308` | poly | x 6750, y 4428-4448 | in | from `tc1`; ends on the pad (6622,4440) |
+| `tc1_p4308` | metal | x 6615-6627, y 4450 | ? | the thin metal from that pad, south into `fld` |
+| `tcw_m6404` | poly | pad (6275,4405) | in | top of a vertical poly going south; gate input of four pull-downs |
+| `tcw_m6320` | poly | x 6205, y 3646-3664 | ? | poly going west from the pad (6315,3655) |
+| `tcw_m6278` | metal | x 6270-6282, y 2700 | ? | bus metal, drawn end |
+| `vss`, `vcc` | metal | x 6507-6557 and x 6687-6737, y 4450 | - | the two rails |
+
+`tcw_a`, `tcw_b`, `tcw_c`, `fld_a_in` and `fld_y_b` leave through `fld`'s geometry (pads west of
+the rail), not through a boundary of this package.
+
+## Ambiguities
+
+1. **Supply assignment** of the two rails (x 6505-6560 ground, x 6690-6740 supply): the layout
+   rule (loads towards the east rail), AMB-014. Run 2 adds four loads on the east rail and none
+   on the west, which fits.
+2. **The buried contact (6580-6600, 3903-3925)** decides that the third gate of `tcw_o3820` is
+   `fld_a_in`, that is, that the pair is cross-coupled. Evidence: a heavy box in both stripped
+   shots and an outline in both metal shots; interior colour like the two known buried contacts
+   of the last inverter; the poly it ties is the gate of `fld_a_in`'s own load, which in this
+   chip is tied to the load's source. The other reading (the box is only the strip's head and
+   the poly passes beside it) would leave that load's gate untied. Drawn firm.
+3. **Two drivers on `tc1_x1`** if `tc1`'s assumed joins (its Ambiguities 13 and 17, AMB-020) hold:
+   see "The last inverter". Not resolved here; nothing of `tc1`'s is changed.
+4. Stretch B's east side: AMB-015 (unchanged; three `?` items). Seen in run 2 and not redrawn:
+   the tie of `tcw_o3550`'s load looks like the other ties of this column (a tab of the block
+   going up to a box at (6585-6650, 3495-3520)), not like the `?B` at the block's west end; the
+   net is the same either way.
+
+## Review
+
+### Run 2's review (2026-11-17 15:25 -0600)
+
+Round 1, full review of run 2's two pieces (the last inverter with the two rows from `tc1`,
+x 6430-6760, y 4190-4455; the loads and the third pull-down east of the rail, x 6545-6760,
+y 3840-4200), by a fresh agent on Claude Fable 5.2, at commit `b197dbb`; 13 images in
+`cache/scratch/tcw/review-1/`. The older geometry north of y 3660 was not under review.
+
+Told to suspect: the buried contact (6576-6603, 3898-3926) that makes the pair cross-coupled;
+whether the poly y 3872-3900 and the rectangle under the thin metal are one poly, and the
+diffusion under it; whether the strip x 6603-6622 passes under the block (6600-6680, 4028-4056)
+to the strip y 4062-4080; the block's link to the pad (6646,3986); the east end of the strip
+y 4062-4080; the row y 4383-4401 under both rails; the buried contact (6455-6478, 4294-4320);
+the thresholds of `tools/tcw_cls.py`.
+
+Checked and found correct (views at 3-5x in two or more shots, `tools/px.py` profiles, the
+follower): every item above. The buried contact: row y 3915 of the chip-2 stripped shot reads
+box interior x 6583-6596, a 12 px dark line, the strip x 6613-6620, the same form as the two
+load ties (rows y 4120 and y 4250); field west and south of the box; the poly continuous down
+x 6590 into it. The poly and the rectangle are one (the lines at y 3902 and y 3933 are the
+diffusion's edges and continue at x 6674). Pad, link and block are one poly. The strip
+y 4062-4080 has no top edge of its own at x 6612-6638 (the diffusion comes out from under the
+block) and a closed east end. Row y 4392 continuous from x 6443 to x 6764 over field under
+both rails. The thin metal x 6645 runs pad to pad (214 px).
+
+Findings, all geometry only, all confirmed by me (`px.py row 4042`, `col 6650`, `row 4420`,
+`row 3917`) and fixed:
+
+1. The pull-down of `fld_a_in` under the block is about 40 wide, not 25 (diffusion edges cross
+   the block at x 6601-6604 and x 6643-6646).
+2. `fld_a_in`'s load poly reaches x 6677, not 6670.
+3. `fld_y_b`'s load block reaches y 4198, not 4184.
+4. The strip is x 6600-6614 at y 3933-3958 (drawn from x 6600 now).
+5. The ground rail widens east to x 6586 south of y 4388 (drawn).
+
+Not checked by the reviewer: the arms where they cross the rails' edge lines (x 6556-6572,
+x 6676-6686: hidden by the edge line in every shot, inferred from matching edges on both
+sides); `tc1`'s rail and contact (6730,4158); a patch `tools/opendiff.py` reports at
+(6711-6732, 3943-3987) under `tc1`'s rail; `tc1_x1_u` being `tc1_x1` (that is `tc1`'s alias).
+The reviewer also notes that `tools/tcw_cls.py` misreads poly under the thin metal's ghost and
+strip edges; `tools/px.py` profiles decide.
+
+    tools/t.sh tcw sameconn.py b197dbb          -> connections identical
+    .venv/bin/python tools/sameconn.py b197dbb  -> connections identical
+
+Round 1: no findings that change a connection.
+
 ## Not done
 
-Everything else in the column (y 2500-3690 and y 4200-4450); the loads of the group at
-y 3940-4200; `tcw_b`'s metal (x 6465) north of y 3990; `tcw_x3855`; the pad (6640,3985);
-the polys of `tcw_a` and `tcw_c` going west along y 4000 and y 4130.
+North of y 3660 the loads and outputs. What run 2 saw there, not drawn (views `b1.png`, `b2.png`,
+`b3.png`, `a1.png`, `a2.png`; class maps from `tools/tcw_cls.py`):
 
-Suggested order: calibrate `tools/classmap.py --open` on the load of the traced gate
-(known poly over channel at (6628-6668, 3808-3836), known diffusion arm, known field),
-then take the column in 300 px tiles from y 3690 upwards.
+- **Stretch B, y 3210-3460, east of the rail.** A metal contact at (6612,3270) on a salmon pad
+  (6592-6640, 3252-3288) (green hole in the clean shot, bright centre in a ring in both metal
+  shots): the south end of a thin metal x 6615-6625 that comes from a pad with a contact at about
+  (6625,3165) (`follow.py 6620 3240 N` ends at y 3180). The pad at (6612,3270) is 10 px east of
+  the east end of stack 1's first gate poly (y 3254-3272): probably one poly (then this thin
+  metal is `tcw_m6320`'s net); not read. This is the "small contact with its own island of
+  metal" of the 2026-11-16 notes. The class map supports the `?D` strip x 6588-6612 as diffusion
+  (y 3324-3444). A vertical poly block (6633-6655, 3315-3370), a diffusion (6636-6670, 3378-3402)
+  running east to the supply pocket (contact (6705,3375), `tc1`'s), a vertical poly x 6661-6680
+  from y 3215 to y 3370: the load of `tcw_o3326` is among these.
+- **Stretch A, y 2690-3220, east of the rail.** A metal about 25 px wide along x 6630-6655 from
+  a pad with a contact at (6642,2755) to a pad with a contact at (6642,2965); poly blocks at
+  (6600-6628, 2742-2766), (6590-6660, 2840-2870), (6600-6660, 2900-2925), (6600-6680,
+  2995-3015), (6620-6680, 3060-3140); a diffusion strip y 2724-2736 from the rail's contact node
+  east to x 6625; a diffusion (6565-6610, 2780-2830) east of the rail beside pair 1's second
+  gate and output.
+- y 2500-2690: not looked at.
+- `tcw_b`'s metal (x 6465) north of y 3990 and its poly east from (6580,3647); the polys of
+  `tcw_a` and `tcw_c` going west along y 4000 and y 4130 (west of this package's region).
+- Re-read items R16, R19, R20, R23 for the 2026-11-16 work north of y 3660 are still open; the
+  south end was read in the chip-2 stripped shot in run 2.
+
+Method that worked in run 2: `tools/tcw_cls.py X0 Y0 X1 Y1 4` first (it shows the diffusion
+strips between the rails as runs of `d`), then one view of both stripped shots at about 3.4x
+(sharper than 6x) with the draft overlaid.
 
 ## Notes from `tc1` (coordinator, from the 2026-11-17 handoffs)
 

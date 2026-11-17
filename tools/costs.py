@@ -14,6 +14,8 @@ Each response is attributed to the package whose files (trace/PREFIX.txt (or a f
 such as trace/PREFIX_x.txt), notes/blocks/PREFIX.md, floorplan.d/PREFIX.txt, ports.d/PREFIX.txt) the next commit by NAME touched within six
 hours of it; a response followed by a commit that touches no package, or by none, counts as
 "coordination". A commit touching several packages splits the cost evenly. This is rough.
+A subagent that is not a reviewer and neither ran tools/t.sh nor edited a trace file (a side
+task: a tool fix, an investigation) always counts as coordination.
 
 Writes costs/<NAME>.json (NAME defaults to git's user.name): totals, and the split by package,
 model and day. Only numbers leave the transcripts: no text, no file contents. The dashboard
@@ -106,12 +108,50 @@ def is_review(path):
     return False
 
 
+# What marks a subagent as working on the trace: a command it ran through the tracing wrapper,
+# or an edit of a trace file. Only its own tool calls count: every transcript also carries the
+# project instructions, which mention tools/t.sh.
+TRACE_FILE_RE = re.compile(r'(^|/)trace/[a-z0-9_]+\.txt$')
+
+
+def traces(path):
+    with open(path, errors='replace') as f:
+        for line in f:
+            if '"tool_use"' not in line:
+                continue
+            try:
+                c = (json.loads(line).get('message') or {}).get('content')
+            except ValueError:
+                continue
+            for x in c if isinstance(c, list) else []:
+                if not isinstance(x, dict) or x.get('type') != 'tool_use':
+                    continue
+                inp = x.get('input') or {}
+                if x.get('name') == 'Bash' and 'tools/t.sh ' in str(inp.get('command', '')):
+                    return True
+                if x.get('name') in ('Edit', 'Write') and TRACE_FILE_RE.search(str(inp.get('file_path', ''))):
+                    return True
+    return False
+
+
+def is_side(path):
+    """A subagent that is neither a reviewer nor doing tracing: a side task (a tool or CI fix, an
+    investigation) that happened to run between two commits of a package. Its responses count
+    as coordination whatever the next commit touched, so that the merge gate's model check
+    (tracing is done with Claude Fable 5.2) is about who traced, not about who else was busy.
+    A subagent that ran tools/t.sh or edited a trace file is tracing and is never a side task."""
+    if os.sep + 'subagents' + os.sep not in path or is_review(path):
+        return False
+    return not traces(path)
+
+
 def responses():
-    """One record per API response: (time, session, model, usage, is_review)."""
+    """One record per API response: (time, session, model, usage, is_review, is_side)."""
     seen, out = set(), []
     for d in transcript_dirs():
         for path in glob.glob(os.path.join(d, '**', '*.jsonl'), recursive=True):
             review = is_review(path)
+            side = is_side(path)
             with open(path, errors='replace') as f:
                 for line in f:
                     if '"usage"' not in line:
@@ -127,7 +167,7 @@ def responses():
                     if key in seen:
                         continue
                     seen.add(key)
-                    out.append((ts(e['timestamp']), e.get('sessionId', path), m.get('model', '?'), m['usage'], review))
+                    out.append((ts(e['timestamp']), e.get('sessionId', path), m.get('model', '?'), m['usage'], review, side))
     out.sort(key=lambda r: r[0])
     return out
 
@@ -180,7 +220,7 @@ def main():
     tot = collections.Counter()
     total_cost, unknown = 0.0, set()
     rs = responses()
-    for t, sess, model, u, review in rs:
+    for t, sess, model, u, review, side in rs:
         tok, cost, known = price(model, u)
         if not known:
             unknown.add(model)
@@ -193,7 +233,7 @@ def main():
         by_day[t.date().isoformat()] += cost
         i = bisect.bisect_left(times, t)
         pk = []
-        if i < len(commits) and (commits[i][0] - t).total_seconds() <= 6 * 3600:
+        if not side and i < len(commits) and (commits[i][0] - t).total_seconds() <= 6 * 3600:
             pk = sorted(commits[i][1])
         for p in pk or ['(coordination)']:
             by_pkg[p]['cost'] += cost / max(1, len(pk))

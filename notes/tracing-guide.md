@@ -558,7 +558,7 @@ Most of the die is repeated cells. Trace a cell once.
   `notes/signals.md`, and `notes/operation.md` where your block changes what it says.
 - Not yours: `notes/work-packages.md`, `floorplan.txt`, `notes/journal.md`,
   `notes/ambiguities.md`, `PLAN.md`, `CLAUDE.md`, `claims/`, `out/`, the shared tools,
-  and other blocks' notes. Do not run `tools/build.py`, `align.py` or `prepare.py`
+  and other blocks' notes. Do not run `tools/build.py` (`--check` is the safe form: it writes nothing), `align.py` or `prepare.py`
   except to build your own `cache/`. What you would change in those files goes into your
   pull request (the template has a place for each). If a shared tool is wrong or missing
   something, say so there (and copy it to `tools/BLOCK_x.py` if you need a variant now).

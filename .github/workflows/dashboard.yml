@@ -1,22 +1,47 @@
 # Rebuilds the tracing dashboard (tools/dashboard.py) and publishes it with GitHub Pages.
-# Runs on every push to any branch, so that claims and the last commit on each package's
-# branch are current; the page is always built from main.
+#
+# The page is always built from main, but the generator also reads the last commit on each
+# package's branch (origin/<branch>), so a push to a work branch must refresh it too.
+# The github-pages environment only lets main deploy, so a run started by a branch push
+# cannot deploy itself. Instead it re-dispatches this workflow on main (workflow_dispatch
+# is one of the two events GITHUB_TOKEN may trigger; the other is repository_dispatch),
+# and that run checks out main, sees the new branch commit, and deploys.
+#
+# No loop: the dispatched run has event workflow_dispatch on main, and only a push to a
+# non-main branch dispatches. The schedule is a fallback for a missed dispatch and keeps
+# claim and branch ages current; it runs on the default branch.
 name: dashboard
 on:
   push:
   workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *"
 permissions:
   contents: read
-  pages: write
-  id-token: write
 concurrency:
-  group: pages
+  # Runs on main share one group and queue (one running, one pending: a burst of
+  # dispatches collapses into a single deploy, and a pending run builds the latest main
+  # anyway). Runs on other refs get a group of their own, so they can never replace a
+  # pending run on main, which is what used to leave the page stale.
+  group: pages-${{ github.ref == 'refs/heads/main' && 'main' || github.run_id }}
   cancel-in-progress: false
 jobs:
-  build:
+  redispatch:
+    if: github.event_name == 'push' && github.ref != 'refs/heads/main'
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: write
     steps:
-      - uses: actions/checkout@v4
+      - run: gh workflow run dashboard.yml --repo "$GITHUB_REPOSITORY" --ref main
+        env:
+          GH_TOKEN: ${{ github.token }}
+  build:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
         with:
           ref: main
           fetch-depth: 0
@@ -35,15 +60,20 @@ jobs:
       - run: |
           python3 tools/dashboard.py --out _site/dashboard
           printf '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=dashboard/"><title>HD6845S trace</title><a href="dashboard/">Dashboard</a>\n' > _site/index.html
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
   deploy:
     needs: build
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

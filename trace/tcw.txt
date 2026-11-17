@@ -13,7 +13,7 @@ M 6715,3660 y3900 w=50
 N M 6715,3680 vcc
 
 # ===== AND-OR-invert, y 3690-3905 (views cache/scratch/rax/t1a.png, t1m.png, t1cm.png, t1load.png) =====
-#   tcw_o3820 = NOT( tcw_x3855 OR (tcw_a AND tcw_c) )
+#   tcw_o3820 = NOT( fld_a_in OR (tcw_a AND tcw_c) )     (gate 3 identified in run 2)
 # diffusion column under the rail: rail contact | gate tcw_c | node | gate tcw_a | OUT | gate x | rail contact
 D 6500,3695:6545,3925
 C 6512,3708
@@ -27,9 +27,8 @@ P 6318,3732:6550,3750
 P 6383,3771:6418,3805
 C 6400,3788
 P 6400,3777:6550,3795
-# gate 3: a poly from the east (it widens south-east of the rail at (6570-6625, 3850-3900): NOT FOLLOWED)
+# gate 3: a poly from the east: it is fld_a_in, tied to that node's diffusion at (6590,3912) (run 2, below)
 P 6492,3845:6600,3863
-N P 6590,3854 tcw_x3855
 # OUT: the node between gates 2 and 3, with an arm east to the load
 D 6540,3808:6700,3836
 P 6628,3768:6668,3838                 # one poly: the load gate (y 3808-3836) and, above it, a pad
@@ -43,8 +42,52 @@ N D 6520,3822 tcw_o3820
 # from the pad a thin metal south along x 6645 to a pad (6640,3985) (follower); what that pad feeds
 # is NOT TRACED
 M 6648,3785 y3990 w=11
-?P 6623,3968:6657,4002
-C 6640,3985
+P 6630,3968:6674,4006                 # the pad: salmon with a green hole in the clean shot, ring in both metal shots
+C 6646,3986 s=14x14
+
+# ===== east of the rail, y 3840-4200: the loads of fld_a_in and fld_y_b, and fld_a_in's third
+# pull-down (run 2, 2026-11-17) =====
+# Views cache/scratch/tcw/d1a.png, d1b.png (4x, both stripped shots), d2a.png, d2b.png (6x),
+# d2m.png (both metal shots), d3.png (6x); class of the open areas from tools/tcw_cls.py (the
+# chip-2 stripped shot: diffusion red-green 16+, field under 10, poly blue under 84) and
+# tools/px.py profiles (notes).
+#   fld_a_in = NOT( (tcw_a AND tcw_b) OR tcw_o3820 )      tcw_o3820 = NOT( fld_a_in OR (tcw_a AND tcw_c) )
+#   fld_y_b  = NOT tcw_c
+# --- fld_a_in: the top node of fld's stack (y 3956-3985 under the rail) has an arm east
+# (y 3960-3974) to a vertical strip x 6603-6622, y 3904-4075
+D 6553,3960:6622,3974
+D 6600,3904:6622,4022
+# north end: the strip's head, with the buried contact box (6580-6600, 3903-3925) (heavy outline
+# in both stripped shots, outline in both metal shots) where gate 3's poly comes down onto it
+D 6580,3903:6622,3930
+P 6575,3845:6600,3900                 # gate 3's poly: south from the gate's east end ...
+P 6578,3890:6600,3922                 # ... into the box
+B 6576,3898:6603,3926
+P 6575,3872:6677,3900                 # ... and east along y 3872-3900 to under the thin metal x 6645
+P 6632,3872:6677,3948                 # where it turns south over the load's channel (y 3904-3932) and ends at y 3948
+# the load: from the strip's head east under that poly to the supply pocket under the rail
+# (pale tan x 6686-6730 at y 3917 in the clean shot; contact ring x 6698-6718 in the metal shot)
+D 6618,3906:6692,3930
+D 6684,3898:6735,3935
+C 6708,3917 s=22x22
+M 6715,3895 y4000 w=50
+# south end: the strip passes under the poly block (6600-6680, 4028-4056), which is one poly with
+# the pad (6646,3986) of tcw_o3820, and ends on a strip y 4062-4080 that runs west to the rail's
+# contact node (vss): a third pull-down of fld_a_in, gate tcw_o3820
+D 6603,4015:6645,4075                 # the channel is about 40 wide (review 1: the diffusion's edges cross the block at x 6601-6604 and x 6643-6646)
+P 6600,4028:6680,4056
+P 6648,4000:6676,4032
+D 6553,4062:6645,4080
+# --- fld_y_b: the bottom node of fld's stack (y 4144-4195) has an arm east (y 4156-4178) that
+# runs on under the load's poly block (6626-6676, 4134-4184) to the supply pocket (tc1's contact
+# (6730,4158)); the gate tie is a tab of the block (6628-6652, 4108-4138) on a finger of the
+# node (x 6600-6620 north to y 4108), buried contact box heavy in both stripped shots
+D 6553,4156:6708,4178
+D 6600,4108:6620,4160
+D 6600,4108:6652,4132
+P 6626,4134:6676,4198                 # to y 4198 (review 1: diffusion edges at y 4152 and y 4183, poly again to y 4195)
+P 6628,4108:6652,4138
+B 6625,4106:6654,4132
 
 # ===== stretch B, y 3230-3620: three pull-down stacks and their inputs (PARTIAL) =====
 # Views cache/scratch/rax/t4cm.png, t3cm.png (class maps), bus1.png (the bus and the gate polys at
@@ -224,8 +267,47 @@ N M 6363,4100 tcw_m6362c
 P 6345,4249:6379,4283
 C 6362,4266
 P 6362,4258:6565,4280
-M 6532,4230 y4360 w=50
-D 6500,4200:6560,4344
-N D 6530,4228 tcw_o4228
-N D 6530,4313 tcw_o4313
+
+# ===== the last inverter of the column, y 4200-4330 (run 2, 2026-11-17) =====
+# Views cache/scratch/tcw/e1.png (four panels, 2x), e2a.png / e2b.png (both stripped shots, 4x),
+# e3.png (the output's west end, 5x, both stripped shots).
+#   tc1_x1_u = NOT tcw_m6362c
+# rail contact (box 6505-6555 x 4205-4250, ring in the metal shot, pits in both stripped shots) |
+# gate y 4257-4281 | output node y 4282-4305. South of y 4305 the rail lies on field (pink).
+M 6532,4190 y4455 w=50
+D 6503,4203:6557,4306
+C 6521,4226 s=22x22
+# the output's arm west to a buried contact (heavy box (6455-6478, 4296-4320) in both stripped
+# shots); from it a poly south along x 6443-6466 and east as the row y 4383-4401, which passes
+# under both rails over field (salmon between pink) and leaves east at x 6750: tc1's row tc1_x1_u
+D 6462,4287:6506,4307
+B 6455,4294:6478,4320
+P 6443,4296:6466,4401
+P 6443,4383:6755,4401
+N P 6600,4392 tc1_x1_u
+# the output's arm east to the load: a strip y 4288-4314 under the poly block (6622-6682,
+# 4262-4322) to the supply pocket under the rail x 6690-6740 (two pits)
+D 6553,4284:6619,4306
+D 6600,4288:6700,4314
+P 6622,4262:6682,4322
+D 6688,4245:6735,4322
+C 6706,4286 s=20x40
+M 6712,4190 y4455 w=50
+N M 6712,4400 vcc
+M 6507,4388:6586,4455                 # the ground rail widens east to x 6586 south of y 4388 (review 1; both metal shots)
+# the load's gate tie: a tab of the block (6620-6650, 4238-4262) on a finger of the output's
+# diffusion (x 6598-6622, y 4240-4300); buried contact box, heavy in both stripped shots
+D 6598,4240:6619,4300
+D 6598,4240:6650,4258
+P 6622,4238:6650,4264
+B 6617,4236:6652,4260
+
+# ===== tc1_p4308: the row y 4428-4448 from tc1 ends on a pad =====
+# contact (6622,4440): bright centre in a dark ring in both metal shots, green hole in the clean
+# shot (text map); the thin metal goes south from it into fld's region
+P 6605,4428:6755,4448
+P 6603,4422:6641,4456
+C 6622,4440 s=14x14
+M 6621,4440 y4458 w=12
+N P 6700,4438 tc1_p4308
 
