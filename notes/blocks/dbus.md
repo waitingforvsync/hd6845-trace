@@ -109,7 +109,7 @@ Where things are (all coordinates checked by overlay at 2.85x, `ov_top.png`, `ov
 |---|---|
 | Diffusion column under the VSS rail, x 17330-17405 | VSS land 8888-8942 (contact 17364,8910); band A 8942-8966; mid node; band B 8986-9010; node N0 9012-9042 |
 | N0 = `dl0_q` | from the column east (y 9015-9042) to under the thin metal, then south under it (x 17434-17470) to y 9095, and from y 9063 east under the load gate to the VCC land |
-| Third pull-down of N0 | a narrow diffusion x 17450-17467 runs from the VSS land's east strip (y 8920-8942, which goes on to x 17494) south to N0; the poly from M_d's top pad (17491,9010) runs up x 17498-17520 and west along y 8944-8966 over it and ends at x 17437. Gate = `dl0_q_n` |
+| Third pull-down of N0 (W 41 with the `?D` of Ambiguity 5, else 17) | a narrow diffusion x 17450-17467 runs from the VSS land's east strip (y 8920-8942, which goes on to x 17494) south to N0; the poly from M_d's top pad (17491,9010) runs up x 17498-17520 and west along y 8944-8966 over it and ends at x 17437. Gate = `dl0_q_n` |
 | Load of N0 | poly x 17476-17518, y 9049-9121 under metal M_d; channel y 9063-9094. It is band C's east end. **Tied to N0 by the buried contact (17427,9085)**: a box 17414-17438 x 9072-9097 in the gap between the VSS rail and the thin metal, on a north tab of band C, with N0's west edge open into it (found by review round 2) |
 | Column, middle part, x 17350-17400 for the land and band C, **x 17323-17400 from y 9153 down** (bands D and E are W 77 like A and B; review round 1) | VSS land 9063-9113 (contact 17362,9087); band C 9111-9133; node N1 9133-9198; band D 9196-9219; mid node; band E 9240-9262; VSS land 9268-9310 (contact 17368,9285) |
 | N1 = `dl0_q_n` | east along y 9157-9190 under the thin metal and the load gate to the VCC land; load gate x 17478-17518, y 9142-9228 under M_d, tied to N1 by the buried contact (17446,9205); contact (17491,9213) to M_d |
@@ -259,23 +259,24 @@ bus lines.
    D0's P_y. It is not drawn, and it does not end in unit 0: it goes on south through unit 1
    at least to y 9900. If it is one line down the column it is not a per-bit line; where it
    ends was not looked for.
-5. **The dark line across the third pull-down's gate poly at x 17488-17496, y 8944-8966.**
-   Full strength in all four units in both metal shots and the chip-2 stripped shot
-   (review round 1: brightness 44-48 against about 160 either side), in one straight line
-   with the east end of the VSS strip from y 8915 to 8985. The pocket south of the poly
-   (17471-17487, 8974-8983) measures as field, so it is not a diffusion edge. The two parts
-   are drawn as one poly: the west part (to x 17437, the gate) has no other connection, so
-   as two pieces it would float; band A, the only alternative, is separated from it by 20 px
-   of measured field. What the line is, is not explained. Review round 2: it could be an
-   active-area edge under the poly, which would make the third pull-down W about 42, not 17;
-   the pocket south of the poly is neither green nor khaki in the clean shot (about
-   115/95/73), so not settled. A size question only.
+5. **The width of the third pull-down of N0** (`?D` at 17465-17491 x 8940-8986). A dark
+   line crosses its gate poly at x 17488-17496, y 8944-8966, at full strength in all four
+   units and all four shots, in one straight line with the east end of the VSS strip from
+   y 8915 to 8988 (review rounds 1-3; my row profiles at y 8930, 8956, 8979: the dip is at
+   x 17488-17494 in each). Round 3 measured it as a diffusion edge under the poly (6 px, like
+   the edges under the small inverter's load gate), with the poly's own edge beside it at
+   x 17498 south of the gate. So the diffusion under the gate reaches from x 17450 to 17491
+   and the pocket south of the gate (17467-17491, 8968-8988) is drain: W about 41, not 17.
+   Marked `?` because the pocket has no clear diffusion colour in any shot (clean shot
+   116/99/77 against 115/158/76 for the open strip north of the gate and 141/137/74 for
+   open field; it is 18 px tall between two poly outlines). Without the `?` item the
+   transistor is W 17. No connection depends on it.
 6. `d0_b` capacitor: contacts cut, strap absent in both metal shots. Looks like a
    metal-mask option. No effect on logic. (First session.)
 7. Chains 2-5 are assigned to D2-D5 by position only. Chains 2 and 3 now drive `db_b2` and
    `db_b3` through their latches, which agrees with `dbl`'s bit numbers for those lines.
-8. Device sizes: W/L of the cell's transistors as drawn are within about 5 px; the third
-   pull-down of N0 is narrow (W about 17) against 76-79 for the two in series.
+8. Device sizes: W/L of the cell's transistors as drawn are within about 5 px, except the
+   third pull-down (Ambiguity 5).
 
 ## Review
 
@@ -322,6 +323,25 @@ M_a-M_d and `cellcheck.py` on the copies (0.92-0.95).
   poly reaches both its ends and touches no neighbour; M_b's end.
 - Could not check: N0's west stub beyond its being a dead end in all four units; diffusion
   against field by colour in the chip-2 shots.
+
+**Round 3** (2026-11-17, a fresh agent, not shown rounds 1-2; `cache/scratch/dbus/review-3/`).
+Told to suspect: the tie box at (17427,9085) and anything else in the five gaps between the
+vertical metals that could have been dismissed as a gap artefact; which polys under the
+thin metal and M_d touch; the small inverter's gate; unit 1's join with its chain; the
+transistor count. It scanned columns in each gap over y 8885-9505 against the trace, read
+the junctions at 4-6x in two to four shots, compared the copies numerically and by montage.
+
+- Finding 1, **taken over as `?D`**: the third pull-down of N0 is about 41 wide, not 17
+  (Ambiguity 5). A size, not a connection.
+- Minor geometry, fixed: the small inverter's gate is L 22 (east edge x 17424); band C in the
+  gap reaches y 9130.
+- Found correct: the tie box in all four units, separated by field from the VSS land and
+  from the pocket north of it; nothing untraced in the gaps; bands A, B, D end before the
+  field strip x 17420-17432; the polys under M_d and the thin metal separate where claimed;
+  band E into the inverter's gate; all boxes buried contacts; M_a-M_d one piece each; twelve
+  transistors in unit 0, none missing; unit 1's `d1_d` does not meet `d1_c`.
+- Could not check: poly continuity through the contact (17450,9346) (only the common bottom
+  edge supports it); the tie box's opening to N0 in chip 2; where the thin metal ends.
 
 ## Not done
 

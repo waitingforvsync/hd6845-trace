@@ -171,6 +171,11 @@ D 17330,8920:17405,9042            # column: land, band A, mid node, band B, nod
 D 17398,8920:17494,8942            # VSS strip east, under the thin metal, to x 17494
 D 17450,8920:17467,9044            # narrow column south from the strip under the thin metal:
                                    # channel under the poly at y 8944-8966, then N0
+?D 17465,8940:17491,8986           # the diffusion under that gate reaches east to x 17491 (the strip's
+                                   # east edge runs on as a dark line through the poly and south to
+                                   # y 8988, all shots, all four units: review round 3), which makes
+                                   # the third pull-down W 41, not 17. `?`: the pocket south of the
+                                   # poly has no clear diffusion colour. A size question only.
 D 17398,9015:17470,9042            # N0 east, to under the thin metal
 D 17434,9015:17470,9095            # N0 south, under the thin metal
 D 17413,9073:17440,9096            # N0's west tab in the gap between the rail and the thin metal
@@ -212,6 +217,7 @@ D 17300,9022:17335,9046
 P 17476,9049:17518,9121
 P 17405,9099:17530,9121
 P 17338,9111:17420,9133
+P 17405,9099:17438,9131            # (in the gap the band is y 9099-9131)
 # -- column, middle part: gate N1 (dl_q_n)
 D 17350,9063:17400,9310            # VSS land, band C, node N1, band D, mid node, band E, VSS land
 D 17323,9153:17355,9283            # from N1 down the column is wider: west edge x 17323 under
@@ -234,7 +240,7 @@ C 17252,9208 s=26x26
 # band E: from the end pad of metal M_a (d_d) east across the column, then south as the
 # gate of inverter N3
 P 17237,9240:17423,9262            # (its west end is drawn per copy)
-P 17402,9255:17419,9322
+P 17402,9255:17424,9322            # (east edge x 17424 in both chips: L 22)
 N P 17300,9251 d{}_d
 # -- inverter N3: d_d_n = NOT d_d
 D 17398,9272:17476,9310            # channel under the vertical gate, output node
