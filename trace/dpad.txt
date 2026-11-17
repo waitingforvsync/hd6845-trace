@@ -55,6 +55,17 @@ M 18225,7105:19025,7150            # F
 C 18225,7115:19017,7140
 M 18850,6650:19025,6850            # neck up to the bond pad
 N M 18600,6828 {}
+# The bond pad and its tab to the series strip's contact box: the same in all eight cells
+# (metal test along six columns and five rows in metal and metal1, every copy: main square
+# x 18515-19024, y 6049-6558; west tab x 18363-18515, y 6374-6558; neck x 18840-19024 down to
+# row B; the bond ball hides the middle, each edge is seen in one copy or another). The tab
+# runs on west over the box (metal 18285-18355 x 6490-6558; the 8 px dark line at x 18356-18364
+# is the box's own edge printing through, bright metal on both sides in both metal shots,
+# cache/scratch/dpad/s_box_m.png). Box: tan (protected diffusion) in acid1b in every copy,
+# one contact with pits at its centre, ring in the metal shots (s_box_b.png, s_box_m.png).
+M [ 18285,6490 x18363 y6374 x18515 y6049 x19025 y6700 x18840 y6558 x18285 ]
+D 18272,6478:18360,6565            # the series strip's contact box
+C 18307,6523 s=30x34
 
 # ---- right group: three more pull-down fingers. F / G' vss / H' pad / I' vss
 D 18742,7155:19037,7390
@@ -154,9 +165,9 @@ N P 18000,7479 {}_out_n
 # ---- input protection, above each pad cell on the left. Its position relative to the
 # output cell differs from pad to pad, so it is a cell of its own. Only the clamp
 # transistor, the node and its metal are drawn. NOT drawn (see notes, Ambiguities): the
-# comb of poly fingers over the node's right part (x 17868-17920), the diffusion under
-# it and under the arms (the outline runs to x 17938 and up to y 6080), the poly strips
-# right of the frame and below it, and the strip from the bond pad (series resistor).
+# comb of poly fingers over the node's right part (x 17868-17920) and the diffusion under
+# it and under the arms (the outline runs to x 17938 and up to y 6080). The series strip
+# from the bond pad to the node's neck is drawn per copy below the cell.
 @cell dpad_prot tag=d0
 M 17690,6075:17765,6500            # the rail left of the pads (joined to dbus's VSS rail by the trunk at y 6625-6708)
 N M 17727,6300 vss
@@ -172,11 +183,11 @@ P 17920,6060:17955,6515            # frame, right arm (the comb hangs from it)
 # acid1b; chk_prot0.png); in D0 a 20 px metal stub joins that contact to the rail's top.
 P 17978,5985:17995,6512            # outer strip
 P 17920,6490:17995,6512            # the U at the foot
-P 17712,5975:17995,5995            # top run west to the rail contact
-P 17712,5978:17742,6012
-C 17727,6000
-M 17716,5986:17744,6080            # stub from the contact down to the rail (D0); over the rail in the other copies
-A 17772,6095:17814,6500 kind=field
+P 17712,5975:17995,5995            # top run west to the rail contact (the contact and its pad: per copy, below the cell)
+# Thin-oxide grounded-gate device (review round 3: the diffusion's top edge shows under the top
+# arm, no inner edge in the left arm), gate and source on vss, drain the pad node: off in normal
+# operation. 'clamp' is the fitting kind of the three (it was 'field', which says thick oxide).
+A 17772,6095:17814,6500 kind=clamp
 C 17818,6112:17843,6490            # nine contacts on the node
 M 17814,6105:17850,6500
 M 17823,6490:17847,6560            # down towards the input line
@@ -188,6 +199,61 @@ D 17822,6490:17852,6546            # the node's neck
 @inst dpad_prot 2,6723 tag=d4
 @inst dpad_prot 2,8306 tag=d5
 @inst dpad_prot 3,9911 tag=d6
+
+# ---- the frame's rail contact, per copy (review round 3; metal and acid1b at 3.2x, all seven,
+# cache/scratch/dpad/s_rc.png). D0: the pad hangs below the top run, contact at (17727,6002),
+# and a metal stub joins it to the rail's top. D1-D6: the pad is in line with the top run,
+# contact at y 5978 (cell coordinates), under the rail's own metal.
+P 17712,5978:17744,6016
+C 17727,6002
+M 17716,5988:17744,6080            # stub from the contact down to the rail's top
+P 17712,7702:17746,7728
+C 17727,7714 s=24x22            # D1
+P 17713,9435:17747,9461
+C 17728,9447 s=24x22            # D2
+P 17713,11084:17747,11110
+C 17728,11096 s=24x22            # D3
+P 17714,12689:17748,12715
+C 17729,12701 s=24x22            # D4
+P 17714,14272:17748,14298
+C 17729,14284 s=24x22            # D5
+P 17715,15877:17749,15903
+C 17730,15889 s=24x22            # D6
+
+# ---- the pad's series strip (the input's series resistor), per copy: one diffusion strip about
+# 22 px wide between the centres of its edge lines, from the pad's contact box round a loop
+# east of and under the VCC band to the neck of the protection node. Its route differs from pad
+# to pad, so it is drawn here and not in a cell. Evidence (cache/scratch/dpad/):
+# - layer: in the open the strip's middle is green in acid1b (115/154/90 at 17885,6541; open
+#   poly beside it, d0_in's line at 17795,6586, is 136/106/74), and in both chip-2 shots it is
+#   brighter and pinker than field where poly is darker and orange (metal 182/130/84 against
+#   162/112/55; acid 190/150/96 against 166/124/66). Under the band it is the same outlined
+#   strip without a break at the band's edges (s_d0_b.png 1.8x, s_d0_sw.png 4x in three shots).
+# - position: both edge lines of every leg found in acid1b at six points per leg
+#   (strip_meas.py); the centres agree within 2 px along each leg.
+# - no poly crosses it: the nearest is the foot of the frame's U, 12-19 px of field north of
+#   the bottom run in every copy (s_foot_b.png 3x); overlays of all eight: ov_01 .. ov_67.png.
+# - the west end: the strip's lower edge line runs straight on as the bottom edge of the neck
+#   (tan, under the node's metal column) in all seven copies, also in D2 and D6 where the
+#   strip arrives 44 and 23 px lower and the neck is longer by as much (s_neck_b.png 4x).
+#   Between the two, along the column's east edge, is a dark line 5-8 px wide (colour
+#   profiles): too narrow for two diffusion edges with field between, and the same line runs
+#   on along the whole metal edge. Taken as the metal-edge artefact (guide trap 2), not a break.
+D 18318,6490 y6065 x18080 y6541 x17840 w=20            # D0
+D 18318,8225 y7801 x18080 y8278 x17840 w=20            # D1
+D 18319,9960 y9578 x18081 y10055 x17841 w=20            # D2
+D 18320,11544 y11140 x18081 y11660 x17841 w=20            # D3
+D 18321,13127 y12744 x18082 y13266 x17842 w=20            # D4
+D 18321,14732 y14350 x18082 y14848 x17842 w=20            # D5
+D 18322,16337 y15955 x18082 y16476 x17843 w=20            # D6
+# the neck is longer in D2 and D6 (tan under the column down to the strip's lower edge)
+D 17823,10005:17853,10066           # D2
+D 17825,16447:17855,16487           # D6
+# D7: the route is different (box, west, north, east round a second loop, north, west along
+# y 17527-17548) and it enters D7's protection from the top, near x 17850. That protection is
+# not traced; the strip is drawn to x 17920, the last stretch east of D7's frame
+# (s_d7_b.png 1.85x; both edge lines measured on every leg).
+D 18300,17971 x18084 y17776 x18322 y17538 x17920 w=20            # D7
 
 # rail and trunk: metal-continuous with dbus's VSS rail (both metal shots, 0.82x)
 M 17690,6068:17765,18850            # runs on past D7 (seen at y 18850, review round 1); a wide west branch at y 18175-18255 (over d_hiz's cross-under) is not drawn
@@ -209,7 +275,18 @@ P 17820,8394:17852,8413            # the pad under the contact; dbus's poly ends
 C 17836,8402 s=26x26
 N M 17836,8100 d1_in
 
-# D2-D6: the node's exit to the column is not traced (Not done)
+# With the series strips drawn, each protection node is the pad's own net: the pin name is
+# the net's name and the input-side names are aliases of it. (A diffused resistor separates
+# pad and node on the chip; the netlist has no resistors.)
+@alias d0 d0_in
+@alias d1 d1_in
+@alias d2 d2_in_u
+@alias d3 d3_in_u
+@alias d4 d4_in_u
+@alias d5 d5_in_u
+@alias d6 d6_in_u
+
+# D2-D6: the node's exit to the column is not traced (Not done): the _u names stand for that
 N M 17833,9800 d2_in_u
 N M 17833,11450 d3_in_u
 N M 17834,13050 d4_in_u
