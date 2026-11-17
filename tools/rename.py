@@ -5,7 +5,8 @@ usage: rename.py OLD NEW [OLD NEW ...] [--dry]
 
 Use it the moment a signal is identified (rule 2 of notes/signals.md). Each OLD is replaced
 by NEW as a whole word in trace/*.txt (labels, aliases and comments; cell, block and file
-names are left alone), notes/**/*.md, PLAN.md, CLAUDE.md, floorplan.txt and floorplan.d/*.txt,
+names are left alone), notes/**/*.md, PLAN.md, CLAUDE.md, floorplan.txt, floorplan.d/*.txt and
+ports.d/*.txt,
 and a line "| OLD | NEW | |" is added to "Former names" in notes/signals.md. An @alias line
 that would then alias a name to itself is dropped.
 
@@ -53,7 +54,7 @@ def main():
             if not dry:
                 open(path, 'w').write(''.join(out))
     docs = (glob.glob('notes/*.md') + glob.glob('notes/blocks/*.md') + ['PLAN.md', 'CLAUDE.md', 'floorplan.txt']
-            + glob.glob('floorplan.d/*.txt'))
+            + glob.glob('floorplan.d/*.txt') + glob.glob('ports.d/*.txt'))
     for path in sorted(docs):
         s = open(path).read()
         if path == 'notes/signals.md':
