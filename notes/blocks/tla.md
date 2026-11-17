@@ -472,3 +472,9 @@ Findings, each checked by the tracer:
 Could not be checked: the joins across R1's edge at x 2600 (the etch line sits on the rail
 edge; supported by outlines continuing across), the `?D` link, the top unit's pad-to-plate
 join, the row y 5543 in a second shot.
+
+Round 2 (fix check, 2026-11-17 19:04 +0000, a fresh agent on claude-fable-5-2, against commit fff417a). The
+added west patch is right (diffusion on both sides of the gate, joined to the rail's VSS
+box; the netlist differs only in that one transistor). One finding: the same pull-down
+also runs east of the rail, a mirror-image closed patch at (2655-2683, 3125-3147):
+confirmed by the tracer at 6x (`chk_east.png`) and drawn; W 105 -> about 133, same nets.

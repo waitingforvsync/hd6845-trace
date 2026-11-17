@@ -895,6 +895,7 @@ D 2598,3080:2655,3175
 C 2620,3150 s=24x30
 D 2538,3058:2602,3098
 D 2550,3098:2602,3148               # the pull-down also runs west of the rail: closed outline y 3098-3148 with the gate across it, tan below the gate in chip 2 (review round 1, 5x, review-1/j1.png): W about 105
+D 2655,3098:2684,3148               # and east of the rail: a mirror-image closed patch (2655-2683, 3125-3147) under the gate, tan in chip 2, no edge towards the VSS box (review round 2, 6x; tracer: cache/scratch/tla/chk_east.png): W about 133
 P 2296,3103:2698,3122
 P 2266,3098:2302,3128
 C 2283,3112
