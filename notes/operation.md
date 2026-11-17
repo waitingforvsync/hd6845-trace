@@ -2,7 +2,7 @@
 
 This is the short version. The block notes (`notes/blocks/`) are the reference; the
 glossary of names is `notes/signals.md`. Last checked against the extraction on
-2026-11-17 (2,112 nets, 3,582 transistors; signals renamed by the first refresh).
+2026-11-17 (2,168 nets, 3,845 transistors; second refresh).
 
 ## How to read this page
 
@@ -10,7 +10,7 @@ Every statement carries one of three marks.
 
 | Mark | Meaning |
 |---|---|
-| **Firm** | The extracted netlist says it, and still says it when every item marked uncertain (`?`) is deleted from the trace. `tools/unsure.py --equations NAME` prints this for any equation: 708 of the 1,049 extracted equations are firm. |
+| **Firm** | The extracted netlist says it, and still says it when every item marked uncertain (`?`) is deleted from the trace. `tools/unsure.py --equations NAME` prints this for any equation: 772 of the 1,117 extracted equations are firm. |
 | **Marked** | Extracted, but it depends on at least one uncertain item or on a join that is believed and not drawn. The assumption is named. |
 | **Open** | Not traced. Nothing is claimed. |
 
@@ -46,7 +46,7 @@ Five counters are identified. All use the same master-slave bit cell.
 | Horizontal sync width counter `hsw` | 4 | `ck_b` and `ck_a` directly | as above | Firm |
 | Character row counter `rc` | 7 | its own pair `rc_ck_m`, `rc_ck_s` | once per pulse of `rc_step` | Firm |
 | Scan line counter `sl` | 5 | a second pair `lc_ck_m`, `lc_ck_s` | once per pulse of `lc_step` | Firm |
-| A 4-bit counter `c4l` (not identified; possibly vertical sync width) | 4 | the same pair as `sl` | once per pulse of `lc_step` | Firm |
+| A 4-bit counter `c4l`, compared with R3 bits 4-7 (`amr`): believed the vertical sync width counter | 4 | the same pair as `sl` | once per pulse of `lc_step` | Firm |
 
 How the two private clock pairs are made (the same cell twice):
 
@@ -59,6 +59,7 @@ How the two private clock pairs are made (the same cell twice):
 | `rc_step` = NOR(`inh_rc`, `rc_stepreq_n`): the row counter steps when the step logic asks and the inhibit signal is low. | Firm |
 | `rc_stepreq_n` = NOR of three terms; the step happens when term 1 is high, or when NOT `rcs_e4` AND NOT (`rcs_e3` AND `rcs_a2`). | Marked (one term's gate has an uncertain item); and the inputs `rcs_e3`, `rcs_e4`, `rcs_a2` are **not identified** |
 | Term 1 is `rcs_in1` = NOR(`rcs_mu`, `rcs_mv`), and `rcs_mu` is made by an inverter whose input is **R9's match** (`ra_eq_r9`): so term 1 = R9's match AND NOT `rcs_mv`. The row counter steps when the scan line (as compared at the RA pins) equals R9, unless `rcs_mv`. | Firm for the join from R9's comparator to the inverter (AMB-013, resolved 2026-11-17); marked for the equations (the comparator's NOR and `rcs_in1` depend on uncertain items). `rcs_mv` is open |
+| In the west column of the same cluster an inverting two-way selector: `tla_w3417` = NOT(`rcs_thin_e` AND `tla_w3376` OR NOT `rcs_thin_e` AND `tla_w3461`). The select is the net on the thin metal that runs the length of the cluster; its driver, the source of `tla_w3376` (the small cluster below) and where the output goes (drawn as far as a poly entering the right cluster at (4520,4461)) are open. `tla_w3461` is believed to be `amr_eq_r3`, the vertical sync width match (a line followed from `amr` on a branch not merged here; not joined). | Firm for the selector's equation; marked for the inverter that makes NOT `rcs_thin_e` (its load tie); the identities are open |
 | What makes `lc_step`. | Open |
 | The memory address counter (14 bits, left array) and what clocks it. | Open (cells traced, control lines not) |
 
@@ -92,7 +93,7 @@ is not settled.
 | The register rows of R3 (one nibble), R5, R6, R7, R8, R9, R10, R11 are identified by their strobe lines, drawn end to end. | Firm for the joins; the register *numbers* rest on the address decoder's numbering of its lines |
 | The rows of R0, R1, R2, R4 are identified by their strobe lines, drawn end to end (`notes/blocks/wrj.md`). | Firm for the joins; the register *numbers* rest on the address decoder's numbering of its lines |
 | The data bus: all eight bits are joined from the right datapath across the chip to the central datapath (`notes/blocks/bust.md`); bits 0-3 reach the D0-D3 units of the data bus column (`dbl`). The registers each bit writes match the datasheet's widths exactly (R5, R9 bits 0-4; R4, R6, R7 bits 0-6; R8 bits 0, 1, 4-7; R0-R2 bits 0-7), which nothing in the trace assumed. | Firm for the joins; the bit numbers rest on that match and, for bits 0 and 1, on the D0/D1 units |
-| Data bits 0-3 reach the bus through a **transparent latch per bit** in the data bus column: `dl#_q` follows pin D# (through four inverters) while `dbus_le` is high and holds when it falls, and a static inverter drives `db_b#` = NOT `dl#_q_n` all the time. The internal data bus is not tri-stated at this end (`notes/blocks/dbus.md`). | Firm (equations and the joins to `db_b0`..`db_b3`) |
+| Data bits 0-3 reach the bus through a **transparent latch per bit** in the data bus column: `dl#_q` follows pin D# (through four inverters) while `dbus_le` is high and holds when it falls, and a static inverter drives `db_b#` = NOT `dl#_q_n` all the time. The internal data bus is not tri-stated at this end (`notes/blocks/dbus.md`). The latch is a cross-coupled pair gated by `dbus_le`: `dl#_q` = NOT((`d#_d_n` AND `dbus_le`) OR `dl#_q_n`). | Firm (equations and the joins to `db_b0`..`db_b3`); from the pin itself for D0 and D1. D2's and D3's buffers take `d2_in`, `d3_in`, whose join to the pin is not drawn: marked |
 | What `dbus_le` is: a line shared with eight taps in the columns west of the data bus column; its driver is not traced. | Open |
 | Data bits 4-7: the pins D4-D7 have their four-inverter input buffers in the same column (D6's and D7's are another layout of the same chain; D6's input is drawn from its pin, D4, D5 and D7 are assigned by position). The buffered levels `d4_d`..`d7_d` leave the column west towards the gate column where `dbus_le` has its eight taps; the latches of bits 4-7 are believed to be there (`notes/blocks/dbus.md`). | Firm for the buffers and D6's join; the latches of bits 4-7 are open |
 | The first inverter of every data input buffer has two pull-downs on the pin: its gate poly's L-shaped arm crosses a second diffusion under a metal (AMB-004 said the arm crosses nothing). The logic is the same; the device is a third wider. | Firm (eight buffers) |
@@ -116,14 +117,14 @@ throughout.
 | `h_eq_r1` | `hc` with R1 | as above | into the bottom-centre logic. **Use: open** |
 | `h_eq_r2` | `hc` with R2 | as above | runs west of the counters on bus line G (joined, `notes/blocks/ucz.md`). **Use: open** |
 | `hsw_eq_r3` | `hsw` with the R3 nibble (4 bits) | drawn | not followed. **Use: open** |
-| `amr_eq_r3` | R3 bits 4-7 (the vertical sync width, `amr`) with four lines `cdp1_l4544`..`cdp1_l4676` from the west | source of the four lines not found (believed a 4-bit counter: `c4l`?) | not found: the diffusion line's ends are closed. Per bit XOR and the NOR marked (seven `?` items). **Use: open** |
+| `amr_eq_r3` | R3 bits 4-7 (the vertical sync width, `amr`) with the 4-bit counter `c4l0`..`c4l3` (drawn through `cdp1_l4544`..`cdp1_l4676`; `c4l2`, `c4l3` over two `?P` rows of `bust`) | drawn | leaves through a buried contact at c0 (marked) and runs about 12,000 px west to `tla`'s west column, where it is a data input of the selector `tla_w3417 = NOT(rcs_thin_e·tla_w3376 + tla_w3505·amr_eq_r3)`. Per bit XOR and the NOR marked (`?` items in the cell). **Use: the selector's output, to the right cluster, not followed** |
 | `rc_eq_r4`, `rc_eq_r6`, `rc_eq_r7` | the row counter `rc` with R4, R6, R7 | drawn: the seven lines of the upper array are `rc0`..`rc6`, joined on firm geometry (`notes/blocks/ucz.md`) | R6's goes to the strobe channel, R7's leaves west; not followed. **Use: open** |
 | `sl_eq_r5` | scan line counter with R5 (5 bits) | drawn | leaves north and runs west on `sl_eq_r5` through the central datapath's channel (`notes/blocks/bust.md`); not followed west of it. **Use: open** |
 | R9's (`ra_eq_r9`) | **the row address as it goes to the RA pins** with R9 (5 bits) | marked (the five lines pass units whose loads are not traced) | drawn to the row counter's step logic: it is the input of the inverter that makes `rcs_mu` (AMB-013, resolved). **Use: the row counter's step request (above)** |
 | R10's (central datapath) | the row address one stage earlier with R10 bits 0-4; gives "equal" and "greater" | marked | not followed. **Use: open** |
 
 Not found at all: comparators for R11 (cursor end), R12-R15 against the address
-counter, and whatever the 4-bit counter `c4l` is compared with.
+counter.
 
 ## The row address (RA0-RA4)
 
