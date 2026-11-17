@@ -117,9 +117,9 @@ P 16753,14599:16790,14617
 @inst dlat_lat 0,954 tag=7
 
 # ---- rails (measured on rows of both metal shots: VCC bright 16491-16538, VSS 16666-16711)
-M 16515,13880 y15790 w=48
+M 16515,13060 y15790 w=48
 N M 16515,14600 vcc
-M 16689,13880 y15790 w=46
+M 16689,13060 y15790 w=46
 N M 16689,14600 vss
 
 # ---- the latch enable dbus_le: dbus draws it to x 16950 (M 16950,13614 x17002). tools/follow.py
@@ -150,3 +150,94 @@ P 16836,13994:16955,14016          # d4_d
 P 16836,14684:16955,14706          # d5_d
 P 16836,15161:16955,15183          # d6_d
 P 16836,15638:16955,15660          # d7_d
+
+# ---- the bus inverters of bits 4-7: four copies of one cell at a pitch of 195, between the
+# same two rails north of the latches (x 16480-16810, y 13095-13860). Master = the second cell.
+#   out = NOT in: VCC land, a strong load (gate tied to the node by the buried contact at the
+#   end of its arm), node strip above the gate band, pull-down under the VSS rail and east of
+#   it, VSS land below. The gate band's east end runs down to the input row under the cell.
+#   The output leaves the node's north-east tab through a second buried contact, in poly, east.
+@cell dlat_drv tag=k2
+D 16495,13325:16545,13398          # VCC land
+C 16505,13337:16527,13385
+D 16540,13330:16605,13400          # load strip under the load gate (W 70, L 40)
+P 16548,13300:16588,13405          # load gate
+P 16548,13298:16642,13322          # its arm east
+P 16615,13315:16647,13345          # the arm's end, down into the tie box
+B 16612,13314:16650,13347          # tie: heavy-outlined box in both stripped shots (5x, k2_top5.png)
+D 16598,13324:16650,13346          # the box's diffusion: the load strip's top end and the node strip's west end meet in it
+D 16640,13340:16772,13362          # node strip above the gate band
+D 16742,13318:16786,13362          # node, north-east tab
+B 16756,13318:16788,13347          # output box (no metal over it)
+P 16762,13320:16795,13343          # output poly, east out of the box (beyond: per copy)
+P 16632,13364:16802,13386          # gate band
+P 16786,13364:16804,13469          # down to the input row
+P 16480,13451:16804,13469          # input row under the cell
+D 16660,13340:16772,13438          # node, channel under the band (W about 112), VSS land
+C 16690,13410 s=30x30
+@end
+# Copies at exactly 195 (tools/dbus_localmatch.py 16500 13290 16820 13470 0 195 8: 0.93 clean,
+# 0.89 metal; tools/cellcheck.py dlat_drv: median 0.95-0.97 in three shots). Tags by position,
+# k1 (top) to k4; by their outputs k1 is bit 7, k2 bit 6, k3 bit 5, k4 bit 4.
+@inst dlat_drv 0,-195 tag=k1
+@inst dlat_drv 0,195 tag=k3
+@inst dlat_drv 0,390 tag=k4
+
+# ---- the outputs: each inverter drives one data bus line that comes down from rdp3 (its
+# south edge y 12900: db_b7 poly x 16788-16808, db_b4, db_b5, db_b6 metals x 16818, 16862, 16908)
+# k1 -> db_b7: the poly comes down x 16790-16808 to the output box's stub (tools/px.py rows
+#   13000, 13080, 13120: open poly at x 16792-16806)
+P 16787,12895:16805,13148
+N P 16799,13000 db_b7
+# k2 -> db_b6: poly east under the metals of db_b4 and db_b5 (no contact) to a pad and contact
+#   (16904,13330) at the end of db_b6's metal (tools/follow.py 16905 13200: one piece,
+#   y 12654-13334; tools/textmap.py: bright centre in a ring in both chips, hole in the pad)
+P 16790,13320:16920,13343
+C 16904,13330 s=22x22
+M 16904,12895 y13342 w=16
+N M 16904,13100 db_b6
+# k3 -> db_b5: the same, pad and contact (16862,13525); metal one piece y 12696-13528
+P 16790,13515:16878,13538
+C 16862,13525 s=22x22
+M 16862,12895 y13537 w=16
+N M 16862,13100 db_b5
+# k4 -> db_b4: the same, pad and contact (16818,13721); metal one piece y 12742-13724 (the
+#   follower's candidate (16820,13227) is not a contact: metal bright through it, no ring)
+P 16790,13710:16834,13733
+C 16818,13721 s=22x22
+M 16818,12895 y13733 w=16
+N M 16818,13100 db_b4
+
+# ---- the inputs: the four latch outputs dl#_q_n, from the cells' west exits (x 16466)
+# bit 4: in the gap between areg_rail_r and the VCC rail a poly runs north, x 16459-16477, from
+#   the exit row y 14256-14273 to y 13841, and east as k4's input row (chip-2 stripped: orange
+#   all the way down col 16467, y 13850-14270; row 13850: poly from x 16464 on east)
+P 16459,13841:16477,14273
+P 16459,13841:16485,13859
+# bit 5: the exit row runs on west under areg_rail_r to x 16400; north under that rail,
+#   x 16400-16418 (salmon down col 16408 from y 13660 to 14440, pink field either side), to
+#   y 13646; east as k3's input row
+P 16400,14427:16470,14444
+P 16400,13646:16418,14444
+P 16400,13646:16485,13664
+# bit 6: a diagonal north-west from the exit row (16466,14912) to (16364,14810) (centres
+#   (16451,14890), (16430,14870), (16411,14850), (16385,14830), (16367,14810):
+#   tools/dlat_polyruns.py), then north along x 16354-16374 into the poly that areg draws from
+#   y 14700 (its areg_w7), which runs up to y 13453 and east to x 16480: k2's input row
+P [ 16476,14904 16372,14800 16354,14800 16354,14808 16467,14921 16476,14921 ]
+P 16354,14695:16374,14812
+@alias dl6_q_n areg_w7
+# bit 7: a diagonal north-west from the exit row (16466,15389) through (16408,15330) to
+#   (16341,15240), north along x 16332-16350 to a pad and contact (16339,14868); metal north
+#   (tools/follow.py 16341 14780: one piece from y 14872 to 13262) into the metal that areg
+#   draws from y 14700 (its areg_w6): to its contact (16337,13264) and a poly east, k1's row
+P [ 16480,15381 16420,15321 16350,15231 16332,15231 16332,15250 16396,15332 16462,15398 16480,15398 ]
+P 16332,14852:16350,15250
+P 16322,14852:16356,14884
+C 16339,14868 s=22x22
+M 16340,14695 y14880 w=15
+@alias dl7_q_n areg_w6
+# k1's and k2's input rows west of x 16480 are areg's (P 16337,13263 x16480 w=16;
+# P 16364,14700 y13453 x16480 w=20); a short overlap here joins them to the cells' rows
+P 16470,13256:16485,13274
+P 16470,13451:16485,13469

@@ -3,3 +3,9 @@
 16466,14806:16848,15291  logic  D6 input latch | the same latch
 16466,15283:16848,15768  logic  D7 input latch | the same latch
 16760,13600:16960,15935  route  dbus_le | latch enable of all eight data input latches: down x 16819 past the four latches, then west and on south along x 16774
+16480,13095:16810,13275  logic  D7 bus inverter | static inverter with a strong load: db_b7 = NOT dl7_q_n, drives the internal data bus bit all the time
+16480,13290:16810,13470  logic  D6 bus inverter | the same cell: db_b6 = NOT dl6_q_n
+16480,13485:16810,13665  logic  D5 bus inverter | the same cell: db_b5 = NOT dl5_q_n
+16480,13680:16810,13860  logic  D4 bus inverter | the same cell: db_b4 = NOT dl4_q_n
+16320,13640:16480,15400  route  latch outputs dl4_q_n..dl7_q_n | from the four latches west and north to the bus inverters: two polys beside and under the ground rail, two diagonals into the bundle
+16780,12895:16925,13735  route  db_b4..db_b7 | the internal data bus lines of bits 4-7 coming down from the right datapath to the inverters that drive them
