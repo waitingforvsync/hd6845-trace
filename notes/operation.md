@@ -138,7 +138,7 @@ counter.
 | In shift mode output 0 has no counter bit; **R9's bit 0** (`r9_b0_q`) chooses which of two signals drives it (`ras_o0_sel1` = shift AND R9 bit 0, `ras_o0_sel2` = shift AND NOT R9 bit 0). | Firm (equations and the bit's identity, from the data bus) |
 | One of those two signals is NOT(row counter bit 0) XOR another signal. | Marked; the other signal is open |
 | In shift mode the R9 comparator does not compare R9's bit 0; the comparator's input is switched to another signal. | Firm that it is switched; what it is switched to is marked and its source open |
-| Where the field (odd/even) signal is made. | **Open**: expected in the gate column west of the nine-gate island, which is being traced |
+| Where the field (odd/even) signal is made. | **Open**: expected in the gate column west of the nine-gate island, which is being traced. Marked, from that column (`notes/blocks/tcw.md`, run 2): the input of `tc1_g`'s inverter is one half of a cross-coupled pair gated by `tcw_a` (`fld_a_in` = NOT((`tcw_a` AND `tcw_b`) OR `tcw_o3820`), `tcw_o3820` = NOT(`fld_a_in` OR (`tcw_a` AND `tcw_c`))), a latch; `fld_y_b` = NOT `tcw_c`. What `tcw_a`, `tcw_b` and `tcw_c` are is not traced |
 
 ## The data pins (D0-D7) as outputs
 

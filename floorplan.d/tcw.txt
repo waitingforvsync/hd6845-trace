@@ -1,3 +1,4 @@
 # tcw: the gate column west of the island
-6380,3660:6760,3930    logic   AND-OR-invert (bit-0 logic) | NOT(x OR (a AND c)) of the inputs that also gate the bit-0 source lines below; output leaves south on a thin metal
-?6380,2500:6760,3660   logic   gate column west of the island (untraced) | about fifteen gates under one ground rail; expected to hold the field flip-flop
+6380,3660:6760,4210    logic   latch gated by tcw_a (cross-coupled pair) | fld_a_in = NOT((a AND b) OR q), q = NOT(fld_a_in OR (a AND c)); and the inverter fld_y_b = NOT c
+6380,4210:6760,4450    logic   inverter driving the row tc1_x1_u | NOT of the bus metal tcw_m6362c; its output poly runs east into the island's logic
+?6380,2500:6760,3660   logic   gate column west of the island (pull-downs traced, loads not) | about twelve gates under one ground rail
