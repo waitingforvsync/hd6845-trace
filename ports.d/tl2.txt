@@ -1,0 +1,7 @@
+# tl2: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+# The package's region is x 2817-3533, y 2500-6350.
+tl1_w6022   P  2817,6187-6203   in   the third latch's output (tl1): gate of the lower inverter of the small cluster's east half
+tl1_w5936   P  2817,6228-6247   out  output of the upper inverter (= tl1_w6022 through two inverters), on to tl1's row
+tla_w3376   M  2865-2877,6350   ?    thin metal x 2871 on south
+rcs_thin_e  P  3533,6316-6337   ?    row east from the pad (2913,6327) at the south end of thin metal E
+vss         M  3257-3305,6350   -    the metal from R3's foot, on south
