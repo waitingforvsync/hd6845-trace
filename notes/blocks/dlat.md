@@ -220,6 +220,32 @@ a connection change all the same: a contact was drawn that is not there).
 
 Round 1: one finding that changes a connection (`dbus_le`'s end), fixed; one geometry finding, fixed.
 
+**Round 2: fix check** (2026-11-17 22:30-22:45 +0000, a fresh agent on claude-fable-5-2, of the
+changes since 8d1ec73, at commit 6e79f1a; images in `cache/scratch/dlat/review-2/`, 4 used).
+Told the two findings of round 1 and their fixes, and to check: that `dbus_le` is one metal
+through the dark stretch y 15810-15858, the corner at (16774,15802), no contact at the box or
+anywhere down to y 15935; that bit 7's added diffusion lies on diffusion, that no poly crosses
+it, and that its contact is there; everything within about 100 px of a changed item.
+
+Checked and found correct (its report): the box's interior is protected tan in the clean shot
+(187/173/129), like the boxes at y 15957 and 16087 and the buried boxes under M_c, where real
+contact holes nearby are green ((16815,15867): 152/177/96; the line's own pads 141/164/89); all
+three boxes give the same text-map pattern in both metal shots (about 50 px dark with a
+half-bright 6 px spot) and at boxes 2 and 3 the line is bright on both sides, so it is one
+metal; the arm is bright at y 15798-15806 and ends at x 16767, the vertical at x 16768-16780, no
+metal north of the arm; the band crossing at y 15858-15876 is salmon with no hole or ring and
+y 15885-15935 is bright over pink field; the metal at x 16815 that starts on the pad
+(16815,15867) is separate (`d5_out_n`'s poly shows between it and the arm). Bit 7: the column
+x 16530 is uniform tan from y 15566 to 15662, where bits 4, 5 and 6 each have a pink gap between
+two edges; no poly crosses (167 transistors as before); both metal shots show one long ring.
+Both `tools/sameconn.py 8d1ec73` runs: `connections identical`.
+
+It remarked, as geometry needing no change: bit 7's contact spans about y 15611-15697 against
+the drawn union 15616-15681, and that land's west edge at y 15630 is about x 16500, not 16493.
+Left as drawn (within the cell's general accuracy; both VCC).
+
+Round 2: no findings.
+
 ## Not done
 
 - **The four outputs** `dl4_q_n`..`dl7_q_n` west of x 16466, as far as the gates they drive
