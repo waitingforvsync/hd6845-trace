@@ -512,7 +512,7 @@ N P 8300,4374 db_b6
 # Views cache/scratch/tc1/g1..g11.png, cm1.png (class map); text maps tools/tc1_hex.py.
 # Supplies by the layout rule only (loads hang from the west rail): notes, Ambiguities.
 # =====================================================================================
-M 6896,3905 y4228 w=72             # the rail x 6861-6932 (it goes on north and south: not followed)
+M 6896,3905 y4380 w=72             # the rail x 6861-6932 (it goes on north and south: not followed)
 N M 6896,3915 vss
 M 6719,3990 y4228 w=58             # the rail x 6690-6748 (the same)
 N M 6719,4000 vcc
@@ -526,8 +526,10 @@ D 6800,3931:6836,3961              # ... and above it (10 px of diffusion above 
 D 6800,4076:6816,4166              # west column narrowed beside the poly strip
 ?D 6812,4108:6862,4130             # the island's neck on west across the gap and under the strip to the column (review round 1: diffusion colour in the gap at (6844,4122), the strip paler at y 4112-4130): the strip is then one more gate of tc1_x1 between island and output. Same nets either way
 D 6800,4166:6836,4222              # ... and its foot
+D 6838,4158:6862,4222              # output-side diffusion west of the lower U's leg (tan at x 6852-6860 under the rail's margin, red in the gap, rows y 4165 and 4190: review round 2): the leg is a gate
 D 6830,4203:6862,4222              # the band y 4203-4222 across the gap (red in the gap at y 4212 where field is khaki; its edges cross the gap in the metal shot)
 D 6830,4014:6862,4083              # out to the west column across the gap, y 4014-4083 (red in the gap where field is khaki: measured at y 4021, 4045, 4060, 4075)
+?D 6786,3931:6804,3992             # the column is wider at the arm: red-brown to an edge at x 6784 at y 3972 (review round 2; width only)
 ?D 6830,3961:6862,3992             # the same under tc1_g's north arm (not seen: the arm covers it), which makes the arm a gate between region A and the column
 D 6848,4014:6864,4083              # out's strip down the west side of the upper U's left leg
 D 6948,3925:6988,3992              # east column, top (A's side)
@@ -555,8 +557,8 @@ C 7054,4092                        # ring and bright centre in both metal shots,
 P 6836,4083:6884,4106              # upper U's left foot, west to the strip
 P 6820,4083:6838,4160              # the strip joining the two U's, beside the thin metal x 6817 (no contact found: notes)
 P 6836,4130:6884,4152              # lower U's foot
-P 6850,4130:6884,4202              # lower U: left leg
-P 6850,4178:6978,4202              # ... bar (it ends on the east leg: the diffusion east of the leg runs on down to the band)
+P 6862,4130:6884,4202              # lower U: left leg (poly from x 6862: review round 2)
+P 6862,4178:6978,4202              # ... bar (it ends on the east leg: the diffusion east of the leg runs on down to the band)
 P [ 6950,4123 6990,4123 6990,4148 6978,4148 6978,4202 6950,4202 ]   # ... east leg (a block under the thin metal x 6968)
 # ---- a branch of the ring (review round 1): the east leg's top runs on east along y 4122-4146
 #      under the channel metal x 7011 (no ring there), south at x 7028-7046, west along
@@ -573,6 +575,23 @@ P 6996,4254:7046,4272
 P 6940,4252:6978,4284
 C 6962,4268 s=18x20
 M 7054,4060 y4345 w=14             # the channel metal x 7053 between this contact and tc1_x1's contact (7056,4352): one metal (text map; no break, no other ring)
+
+# ---- what else is on the pad (6962,4268) (review round 2): a diffusion strip y 4270-4293
+#      runs from the pad's west edge west under the rail to the diffusion under the thin
+#      metal x 6817. Under the rail it is one side of a pull-down: gate = a poly along
+#      y 4298-4320 that comes from the east (NOT FOLLOWED east of x 6995), other side a
+#      diffusion with a rail contact (6888,4338). How the strip joins the pad (a buried
+#      contact, or the pad is the strip's end) is not resolved: ?B, and the strip is ?D where
+#      it is in the open. The column under the thin metal x 6817 south of y 4293 (a poly
+#      beside it, pits at y 4312-4341) is NOT TRACED.
+D 6862,4270:6918,4368              # under the rail: strip / gate / source
+C 6888,4338 s=28x28                # rail contact: ring 6870-6915 x 4320-4365 in both metal shots, pit in the clean shot
+D 6803,4270:6835,4293              # the strip's west end under the thin metal x 6817
+?D 6830,4270:6866,4293             # ... across the west gap
+?D 6914,4270:6950,4293             # ... east of the rail, in the open, to the pad's west edge (plain tan in both chip-2 shots, red-tan in the clean shot; a dark line at x 6940-6946)
+?B 6938,4266:6952,4290
+P 6858,4298:6995,4320
+N P 6980,4309 tc1_p4308
 
 # ---- output: buried contact on the east column, poly east to the contact (7099,4047),
 #      metal x 7133-7152 north (NOT FOLLOWED north of y 3900)
