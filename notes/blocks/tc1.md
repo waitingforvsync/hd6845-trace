@@ -47,7 +47,7 @@ warnings.
 
 Run 9 (same day, same claim). **Cell C, the three-input NOR north of cell A**:
 `tc1_o3095` = NOR(`tc1_p3051`, `tc1_x1`, `tc1_m7100`), four transistors. Its output is the
-channel metal x 7003-7023 that ends on cell B's gate (so far `tc1_m7013`, renamed
+channel metal x 7003-7023 that ends on cell B's gate (until now named as that metal, renamed
 `tc1_o3095`). `tc1_x1`'s channel metal and `tc1_o3740`'s thin metal are followed to their
 north ends as far as they can be read. **Gate row 1's source is open** (`tc1_p3051`): its
 poly ends in a box 10 px from a contact of `tc1_o3740`'s metal, and what is joined there is
