@@ -1244,6 +1244,16 @@ all corrected: a garbled comment line in the trace file; the band's continuity a
 x 6906-6935 was stated as fact and rests on the metal shots only (the clean shot is dark
 there); the contact is not 10 px south of the box but adjoins its bottom outline.
 
+**Round 3** (2026-11-17 13:36 -0600; fix check of the wording changes since `a1848f0`, by a fresh agent: the
+diff, the extraction before and after, profiles and views in `cache/scratch/tc1/review-16/`).
+The diff touches comments only and the extraction is byte-identical. The three corrected
+statements hold: the box at the east end of the tan band with its east outline at
+x 6972-6976; the gap dark in the clean shot (at x 6914-6932) with a plain strip between two
+edge lines in both metal shots; the contact's hole and bright centre at y 2976-2980 against
+the box's outline at y 2970-2974.
+
+Round 3: no findings.
+
 ## Not done
 
 - **Gate columns x 6400-7000, y 2650-4450**: nothing drawn. Dense random logic with large
