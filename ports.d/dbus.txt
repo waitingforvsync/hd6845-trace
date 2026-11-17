@@ -1,0 +1,47 @@
+# dbus: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+# X or Y may be a range A-B: the wire's extent where it crosses. DIR: in / out / ? / - (supply),
+# as seen from this package.
+# Written 2026-11-17 (run 4) from the Ports table of notes/blocks/dbus.md and the drawn ends
+# in trace/dbus.txt. Only rows with a definite place. Left out: the capacitor taps of chains
+# 1-5, the "line 2" of chains 2-5 (believed d2_out_n..d5_out_n, not drawn), P_x (d_hiz, drawn
+# in dpad).
+
+# East side: the D0-D7 pad cells (dpad)
+d0_in         M  17548-17566,8050    in   pin D0 behind its protection; dpad's metal comes down to here
+d1_in         P  17835,8398-8412     in   pin D1: the poly ends under dpad's contact (17836,8402)
+d2_in         M  17824-17848,10020   in   pin D2: top of the node metal drawn here (dpad's ends at y 10029)
+d3_in         M  17824-17848,11670   in   pin D3, the same
+d4_in         M  17824-17848,13275   in   pin D4, the same
+d5_in         M  17824-17848,14858   in   pin D5, the same
+d6_in         P  17838,16519         in   pin D6: pad under the metal from D6's protection node
+d0_out_n      M  17591-17609,7560    out  D0's output data line: joins dpad's metal from the contact (17597,7492)
+d1_out_n      P  17805,9219-9240     in   D1's output data line: joins the west end of dpad's strip 4 of D1's cell
+
+# South side
+d7_in         P  17531-17548,17000   in   believed pin D7; under the VCC rail, not followed to the pad
+vcc           M  17527-17585,17000   -    the column's VCC rail; turns west into a wide metal at y 17000-17030
+
+# West side (x 16950)
+dbus_le       M  16950,13605-13623   ?    latch enable of bits 0-3; believed driven from the west
+d4_d          P  16950,13993-14008   out  buffered pin D4, to the latch column x 16480-16800 (believed)
+d5_d          P  16950,14688-14704   out  buffered pin D5
+d6_d          P  16950,15165-15181   out  buffered pin D6
+d7_d          P  16950,15642-15657   out  buffered pin D7
+d1_out_n      P  16950,16334-16355   in   D1's output data line; its driver is west of here
+dbus_do0_in   M  16950,16702-16722   in   input of the inverter that drives d0_out_n; follow.py: on west to x 16795, south to (16797,17434)
+d7_c          M  16950,16750-16766   ?    chain 7's c tap, probably to a capacitor; not followed
+
+# Inside the region: joins to other packages' wires
+db_b0         P  17207,9467          out  pad under dbl's contact: data bus bit 0, driven by dbus_drv
+db_b1         P  17077,10832         out  the same, bit 1
+db_b2         P  17165,12200         out  the same, bit 2
+db_b3         P  17208,13563         out  the same, bit 3
+
+# North: the loads of r9c's five compare units (their pull-downs are in r9c)
+ra0_cmp       D  17480,5287-5305     out  west end of the output strip; joins r9c's band under the rail x 17440-17495
+ra1_cmp       D  17480,5435-5453     out  the same
+ra2_cmp       D  17480,5565-5583     out  the same
+ra3_cmp       D  17480,5695-5713     out  the same
+ra4_cmp       D  17480,5825-5843     out  the same
+vcc           M  17616-17666,4600    -    the loads' rail; runs into a band y 4592-4635 that enters pads_out's vcc metal
+vss           M  17355-17400,8030    -    the column's VSS rail; joins dpad's trunk y 6625-6708 further up

@@ -497,6 +497,9 @@ table) and are not drawn.
 
 ## Ports
 
+The same ports with a definite place, one per line, are in `ports.d/dbus.txt` (run 4);
+keep the two in step.
+
 | Name | Layer | Where | Direction | What |
 |---|---|---|---|---|
 | `d0_in` | metal x 17548-17566 | comes down from the D0 pad cell: poly from a contact near 17818,6578 left along y 6578, down to a contact near 17546,6755, then metal down; turns left at y 8188 (cross-under 17300-17500) | in | D0 pad after its protection structure. Drawn from y 8050 down |
@@ -800,7 +803,9 @@ No finding changes a connection. Two points:
   the rails in chip 2 (fringes; read in the clean shot); `r9c`'s `?B` boxes; the VCC metal
   north of y 4520.
 
-**Round 2: no findings.** Fix check (reported 2026-11-17 19:38 +0000, a fresh Fable 5.2
+**Round 2: no findings.**
+
+Round 2 was a fix check (reported 2026-11-17 19:38 +0000, a fresh Fable 5.2
 agent; images in `cache/scratch/dbus/review-8/`) of the two rectangles added to `dbus_in`
 since commit 0e53e80. It measured the outline at all twelve sites (G1 and G4, chains 0-5)
 in all four shots (west edge x 17311-17316, top 19-23 px above the band; the drawn edges
