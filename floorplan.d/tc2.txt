@@ -1,0 +1,10 @@
+# tc2: top-centre random logic, lower half
+6420,5020:6712,5290    logic   NOR of the shift-mode select and the bit-0 compare | tc2_o5175 = NOR(tc1_x1, fld_b_in): two pull-downs west of the ground rail, load east of it; output leaves west
+6400,4464:7025,4500    route   tc1 cell B output going west | tc1_o3527: pad, poly row under the rails, pad, metal west
+6436,4864:7073,5068    route   tc1_x1 to the NOR | from the contact (7055,4478) by poly and metal to the gate at (6500,5132)
+6400,4984:6640,5020    route   tc1_p4308 going west | metal from tc1's pad (6620,4436) to the pad (6620,5002), poly row west
+6400,4769:6950,4802    route   ras_o0_alt2 going west | row address bit 0 source (shift mode, R9 bit 0 clear): pad, poly row, pad, metal west
+6477,4808:6819,4848    route   tc1_m6817 row | from tc1's thin metal x 6797 to the pad (6492,4828)
+6355,4825:6373,5534    route   tc1_m6817 metal | west leg of the line, south along x 6364
+6485,5516:6545,6400    route   tc1_m6817 metal and poly | through the nest to the pad (6533,6152), poly south
+6686,4450:6755,4996    power   VCC rail through the crossing field | joins the rail of the gate columns west of the island to the rail of the bit-0 inverters

@@ -1,0 +1,5 @@
+# tl2: top-left random logic, second strip (what tla, tl1, r9m and ur did not draw)
+2835,5900:3180,6250   logic   buffer of the third latch's output | tl2_w6070 = NOT tl1_w6022; tl1_w5936 = NOT tl2_w6070: two inverters on R3, each gate poly looped round a rectangle of field
+2950,5320:3000,6292   power   R3 (VSS) over the foot and the small cluster | one rail with tla's piece above
+2950,6238:3305,6350   power   VSS metal from R3's foot | east along y 6250-6292, south at x 3257-3305 out of the strip
+2895,6312:3533,6342   route   rcs_thin_e, south end | pad (2913,6327) at the end of thin metal E; poly row east out of the strip
