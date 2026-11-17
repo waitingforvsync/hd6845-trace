@@ -422,6 +422,15 @@ for `e4`, and it would arrive up the left bus field, which is where `e4` comes f
 
 ## Not done
 
+- `rcs_iso2958`'s top end (2959,3447): its cap abuts `rcs_u3425`'s diffusion with a single
+  edge line between (acid1b column profile; review round 1, 6x); a tie there is not
+  excluded, and would make the gate `rcs_u3425` itself. "No connection found" is not
+  "no connection".
+- The poly y 2977-2996 on `rcs_c1`'s line does not start at x 2330: it runs on west to
+  x 2262, north along x 2258-2272, east along y 2712-2725 beside the y 2727 metal to about
+  x 2415 and north out of the region (review round 1; no contact to the x 2283 / y 2727
+  metal). A port not drawn.
+
 - The inputs' sources (table in Status). Next: `e4` south down the left bus field, and
   from the other side the R0 match line from bd1's k7/k8.
 - West column (R1's columns) y 3590-4940: not traced. Polys from west pads cross R1 at about
@@ -446,3 +455,20 @@ for `e4`, and it would arrive up the left bus field, which is where `e4` comes f
 
 ## Review
 
+Round 1 (full review, 2026-11-17 19:00 +0000, a fresh agent on claude-fable-5-2, at commit fff417a). Told to
+suspect the poly row y 5543 (read at 2.1x), the corner (2696,2986), a swap or tap among the
+four parallel metals x 2199-2326, the two contacts on x 2326, the AOI's series order and
+node box, the inverter ties, the joins across R1's edge and the `?D` link. It read the row
+y 5543 over its whole length at 3.3x (constant y, no pad or step), the metals and their
+contacts in both chips, the AOI's four gates with a rail profile and views, the corner and
+both routes at y 2726 / y 2768, and the foreign poly under x 2326. No wrong connection.
+Findings, each checked by the tracer:
+1. The pull-down of `rcs_u3288_n` also runs west of the rail (closed outline 2550-2600 x
+   3098-3148 with the gate across it): confirmed on `review-1/j1.png`; drawn, W 57 -> 105,
+   same nets.
+2. `rcs_iso2958`'s top end may be tied to `rcs_u3425`'s diffusion: undecidable at 6x;
+   recorded under Not done.
+3. An untraced poly continuing `rcs_c1`'s line west and north: recorded under Not done.
+Could not be checked: the joins across R1's edge at x 2600 (the etch line sits on the rail
+edge; supported by outlines continuing across), the `?D` link, the top unit's pad-to-plate
+join, the row y 5543 in a second shot.
