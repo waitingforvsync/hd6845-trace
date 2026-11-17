@@ -26,7 +26,12 @@ Run 4 (same day, same claim). Traced and extracting (37 transistors in all): **t
 whose output is the strip on `tc1_x1`'s pad**: its load, supply contact and gate tie, added
 to the pull-down that run 3's review found: the strip's node = NOT `tc1_p4308`. See "The
 inverter of `tc1_p4308`". Run 3's work was not merged (its third review round had findings);
-it goes in with this run's review.
+it goes in with this run's review. Runs 3 and 4 were merged at `3c0efe1`.
+
+Run 5 (same day, same claim; wiring only, no new transistor). **Where the inverter's input
+comes from and where the thin metal x 6968 goes in the south**: two poly rows running west
+below the inverter, drawn to this package's west edge. See "The two rows below the
+inverter".
 
 ## How this area reads in the photos (cost me a third of the run; read this first)
 
@@ -400,12 +405,25 @@ join in the review of run 4 (a butting contact is the likeliest reading of the p
 `?D`); `tc1_x1` is two pieces without the uncertain items (the line, and the thin metal
 x 6968 with the pad).
 
-**`tc1_p4308`, the input.** The gate poly runs east from the rail to x 7002 and turns south
-at x 6988-7002 (drawn to y 4384). Seen further in one view (`k4.png`), not drawn: it goes
-on south to about y 4425 and there seems to meet a horizontal poly y 4425-4445 going west
-(orange in the chip-2 stripped shot from x 6945 to x 6992). Two pads with green centres lie
-beside it, at about (6952,4395) and (6972,4482); the follower puts the south end of the thin
-metal x 6968 at (6975,4402), which would be the first of them.
+## The two rows below the inverter (run 5, 2026-11-17; wiring, traced to x 6750)
+
+Views `m1.png` ... `m5.png` in `cache/scratch/tc1/`; text maps and strips.
+
+| Row | Route | Evidence |
+|---|---|---|
+| `tc1_p4308` (y 4428-4448) | the inverter's gate poly goes on south at x 6988-7006 to y 4448 and turns west along y 4428-4448, under the rail x 6858-6908, the metal of `tc1_m6817` (x 6788-6806) and the supply rail x 6688-6736, to x 6750 (drawn). **Seen further, outside this package:** it ends on a pad with a contact at (6620,4436) (dark ring 6600-6640 x 4415-4455 with a bright centre in both metal shots, green hole in the clean shot); the pad's metal goes south along x 6621 to (6622,5006) by the follower, into `fld`'s upper group | clean shot: salmon all along under the metals, over pink (field: no transistor under either rail; `tools/railprof.py` says the same under the rail); chip-2 stripped shot: orange in the open stretches (x 6910-6990, x 6610-6724). No ring on any metal that crosses it (the metal of `tc1_m6817` is bright over it at y 4434-4446) |
+| `tc1_x1_u` (y 4385-4405) | the thin metal x 6968 runs on south from the pad (6962,4268), jogs south-west at y 4376-4394 and ends on the **contact (6947,4396)** of a poly pad (6928-6966, 4380-4412); the pad's poly runs west along y 4385-4405 under the same three metals to x 6750 (drawn). **Seen further:** west under the ground rail x 6505-6560 (salmon there: not checked for a channel) to about x 6445, where a strip of the chip-2 stripped shot loses it | contact: ring with a bright centre in both metal shots (text map), green hole inside the salmon pad. The 20 px gap at x 6914-6930 between the row and the pad is orange in both metal shots (158/120/53 and 158/76/39) where the row between the two polys is bare ground (172/151/87, 157/125/68). The metal of `tc1_m6817` is bright over the row at y 4392-4401: no contact |
+
+So the input of the inverter comes from the south, from the logic west of the selector
+(`fld`); and the net of the thin metal x 6968, which is `tc1_x1` if the `?P` holds, goes
+west into the first gate column. Neither end is in this package. For Ambiguity 17 this
+adds: the net on the pad (6962,4268) has at least one more destination, which fits a
+distributed signal; it does not decide any of the three joins.
+
+**The thin metal x 6968's north end** (one view, `m4.png`; not drawn): above a dark bar at
+y 3798-3805 the metal widens to a pad (6958-6998, 3778-3797) lying on a horizontal poly
+y 3775-3795; whether that is a contact is not decided. South of the bar the metal runs
+over a diffusion-coloured column (x 6952-6975).
 
 ## Ports
 
@@ -463,7 +481,8 @@ Run 3's ports (the driver; region edges as drawn):
 | `tc1_x1` | M | x 7047-7061, y 4060, going north | in | the channel metal x 7053 runs on north of the driver's contact; the follower gives its end at (7054,3134) (run 2 saw a contact (7056,3138) there) and candidates at (7058,3745), (7057,3717): not looked at |
 | `tc1_m6817` | M | x 6811-6823 at y 3905; x 6788-6806 at y 4380, going south | ? | thin metal over the driver's west column, no contact drawn (Ambiguity 12). Follower (started either side of the strip, where it stops): from (6822,3496) south; it does not end at (6809,4379) as the follower says: there it has a foot (6788-6828, 4362-4380), a jog 20 px west, and goes on south at x 6788-6806 (bright again from y 4392 to at least y 4530, with the dark bars of poly rows across it: not followed, contacts not checked); candidates (6818,3883), (6813,3754), (6818,4309); the two at (6820,3977) and (6817,4211) are not contacts (text maps: unbroken metal, no ring) |
 | `tc1_x1_u` (alias of `tc1_x1`) | M | x 6962-6974, y 3905 and y 4300 | ? | the thin metal x 6968: contact on the pad (6962,4268) at the end of `tc1_x1`'s branch; no contact to the driver's diffusion (Ambiguity 13). Follower: from (6966,3806) to (6975,4402) when started either side of the box at y 4033-4068, where it stops; candidates (6970,3947), (6972,4218) are not contacts (review round 1)
-| `tc1_p4308` | P | x 6988-7002, y 4384, going south | in (a gate here) | input of the inverter; seen to about y 4425, where it seems to turn west (not drawn) |
+| `tc1_p4308` | P | x 6750, y 4428-4448, going west | in | input of the inverter; ends on the pad (6620,4436), whose metal goes south along x 6621 to (6622,5006) (seen, not drawn) |
+| `tc1_x1_u` | P | x 6750, y 4385-4405, going west | ? | the poly row from the thin metal x 6968's south pad (6947,4396); seen to about x 6445 |
 | `vcc` | M | rail x 6688-6736 at y 4330 | | the supply rail, narrower here than at the driver; goes on south |
 | `vss` | M | rail x 6861-6932 at y 3905; x 6858-6908 at y 4380 (it narrows at y 4238) | | goes on both ways, not followed |
 | `vcc` | M | rail x 6690-6748 at y 3990 and y 4228 | | the same; `tcw` draws it at y 3440-3900 |
@@ -725,9 +744,11 @@ Round 3: no findings.
   a tap not looked at; and its top end at (7054,3134)), `tc1_m6817`, the thin metal x 6968
   (`tc1_x1_u`: its ends at y 3806 and y 4402 and any other contact; the pad (6962,4268)'s
   west side, now drawn as the strip), both rails. **First for the next run**: the strip's
-  node is done (run 4: an inverter). **First for the next run**: `tc1_p4308` south of
-  y 4384 (seen to y 4425, turning west), the two pads at (6952,4395) and (6972,4482), and
-  the thin metal x 6968's ends; then Ambiguity 17 from `shm`'s side. The channel metal x 7003-7023 (no ring on it over
+  node is done (run 4: an inverter); its input and the thin metal x 6968's south end are
+  followed to this package's west edge (run 5). Left: the thin metal x 6968's north end
+  (a pad at (6958-6998, 3778-3797) on a poly y 3775-3795: contact not decided); the pad at
+  about (6972,4482); Ambiguity 17 from `shm`'s side (its `?B` at about (8370-8410,
+  4240-4270)). West of x 6750 both rows belong to `tcw`'s region. The channel metal x 7003-7023 (no ring on it over
   y 3972-4296; follower: from (7011,3850) south to a corner at (7006,4484)) is not drawn. The poly along y 2628-2648 that stops at (7438,2640), and the vertical poly
   x 7160-7180 it comes from. Run 2's observation that `sel_tracks.py` reports false breaks
   on ns3 and ns5 (chip 2 has blemishes, chip 1 does not) still stands.

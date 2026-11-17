@@ -598,7 +598,7 @@ D 6803,4270:6835,4293              # the strip's west end under the thin metal x
 # contact joining metal, poly and strip. If the join is real this inverter drives the tc1_x1
 # line, on which shm already draws an inverter: notes, Ambiguity 17. Left open on purpose.
 P 6856,4298:7002,4320
-P 6988,4298:7002,4384              # it turns south at x 6988-7002 (review round 3; salmon to y 4382 at least: NOT FOLLOWED)
+P 6988,4298:7002,4400              # it turns south at x 6988-7002 (review round 3)
 N P 6975,4309 tc1_p4308
 
 # ---- the strip's node has a load of its own (run 4, 2026-11-17): a weak load of the island's
@@ -618,6 +618,25 @@ P 6778,4300:6798,4336
 B 6774,4312:6802,4342
 D 6803,4290:6832,4337              # the diffusion under the thin metal x 6817 runs on south to y 4337 (no contact to that metal: unbroken, no ring, y 4290-4329)
 D 6780,4320:6808,4340              # its tab under the box
+
+# ---- run 5 (2026-11-17): where the inverter's input comes from and where the thin metal
+#      x 6968 goes: two poly rows running west below the inverter, drawn to this package's
+#      west edge (x 6750).
+# tc1_p4308: the gate poly goes on south (shifting 4 px east) to y 4448 and turns west
+# along y 4428-4448 (orange in the chip-2 shots in the open east of the rail, salmon under
+# the rail x 6858-6908 and the supply rail: over field, no transistor). Seen further, not
+# drawn (outside this package): it ends on a pad with a contact at (6620,4436), whose metal
+# runs south along x 6621 to (6622,5006) by the follower.
+P 6990,4380:7006,4448
+P 6750,4428:7006,4448
+# The thin metal x 6968 ends in the south on the contact (6947,4396) of a poly pad (ring
+# and bright centre in both metal shots, green hole in the clean shot); the pad's poly runs
+# west along y 4385-4405 (across the 20 px gap at x 6914-6930 it is orange in both metal
+# shots where the row between the two polys is bare ground). Seen further, not drawn: it
+# runs on west under the ground rail x 6505-6560 to about x 6445.
+P 6928,4380:6966,4412
+C 6947,4396
+P 6750,4385:6934,4405
 
 # ---- output: buried contact on the east column, poly east to the contact (7099,4047),
 #      metal x 7133-7152 north (NOT FOLLOWED north of y 3900)
@@ -669,6 +688,6 @@ B 6764,3988:6796,4018
 M 6817,3905 y4372 w=12              # south to a foot at y 4366-4380. No contact on the diffusion it crosses at y 4270-4337
 M 6788,4366:6826,4380              # the foot: a jog 20 px west (bare ground west of x 6782 at y 4372 in both metal shots). From it the metal goes on SOUTH at x 6788-6806 (bright again from y 4392 in both chips): NOT FOLLOWED
 N M 6817,3915 tc1_m6817
-M 6968,3905 y4300 w=12
+M 6968,3905 y4376 6949,4394 w=12    # run 5: on south past the pad (6962,4268), a jog south-west at y 4376-4394 onto its south end, the contact (6947,4396)
 N M 6968,3915 tc1_x1_u
 @alias tc1_x1 tc1_x1_u
