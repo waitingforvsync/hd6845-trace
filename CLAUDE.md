@@ -19,13 +19,21 @@ access). In short:
 3. Work on branch `PREFIX` in a working tree of your own (`tools/newwork.sh PREFIX`),
    touching only your own files; ship each finished piece with `tools/ship.sh`.
 4. Read `notes/tracing-guide.md` before tracing; follow it.
-5. **Independent review** against the photos, in rounds (one fresh reviewer agent per
-   round) until a round finds nothing; recorded in the block notes.
+5. **Independent review** against the photos by a fresh reviewer agent: one full review, then
+   short fix checks of only what changed, at most three rounds in all; recorded in the block
+   notes.
 6. Merge main into the branch, pass `tools/mergecheck.py PREFIX`, push to main, and hand
    off with `tools/claim.py done` (proposals for the coordinator's files go there, not in
    those files). Without write access: a pull request with the template instead.
 
 ## Standing rules from the user
+
+- **Tracing is done with Claude Fable 5.2** (user, 2026-11-17: "insist that only Fable 5.2 is
+  used by a collaborator"). `.claude/settings.json` makes it the project's default model,
+  `/trace6845` runs on it and starts its reviewers on it, and the merge gate fails a package
+  whose cost report (`tools/costs.py`, committed as `costs/<git name>.json`) shows any other
+  model doing its work. The coordinator may use another model for coordination
+  (`.claude/settings.local.json`).
 
 - Trace independently. Do not open Lance Ewing's HD6845 reverse-engineering work (on
   GitHub) or any other 6845 netlist/schematic effort until our own trace of the
@@ -117,12 +125,14 @@ coordinating session, the owner's.
   priority order of the queue; the one agent it starts per package is the independent
   reviewer, and it waits for it.
 - At the start of every session, and when told a package is in: `git pull`, then
-  `tools/claim.py list`. For each claim marked "merged, awaiting coordinator" (and each
-  pull request, merged first): read the notes and the proposals in the claim file,
-  spot-check an overlay, run the full extraction (no `TRACE`) and `tools/unsure.py`, apply
-  the proposals (master list status, Re-read items, ambiguities, other blocks' notes),
-  trim the coarse block in `floorplan.txt` that its `floorplan.d` fragment replaces,
-  rebuild `out/`, write the journal, push, then `tools/claim.py release PREFIX`.
+  `tools/claim.py handoffs`. For each handoff in `handoffs/` (and each pull request, merged
+  first): read the notes and the proposals in the handoff file, spot-check an overlay, run
+  the full extraction (no `TRACE`) and `tools/unsure.py`, apply the proposals (master list
+  status, Re-read items, ambiguities, other blocks' notes), trim the coarse block in
+  `floorplan.txt` that its `floorplan.d` fragment replaces, rebuild `out/`, write the
+  journal, `git rm` the handoff, push. Claims are the tracers' own: they keep them while
+  they work and release them when they stop; the coordinator releases only a stale one,
+  after asking its owner.
 - **`/refresh6845`** (`.claude/skills/refresh6845/`): rename placeholders the trace has
   identified (checked with `tools/names.py compare`: only names may change), bring
   `notes/operation.md` up to date, rebuild `out/`, journal. Run it after a batch of merges.

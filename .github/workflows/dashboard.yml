@@ -23,6 +23,8 @@ jobs:
           filter: blob:none
           sparse-checkout: |
             claims
+            handoffs
+            costs
             notes
             dashboard
             tools/dashboard.py

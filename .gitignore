@@ -9,3 +9,6 @@ __pycache__/
 
 # the dashboard, built by tools/dashboard.py
 _site/
+
+# personal Claude Code overrides (e.g. a different model for coordination)
+.claude/settings.local.json

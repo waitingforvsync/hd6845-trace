@@ -1250,7 +1250,7 @@ after, every transistor and connection identical, only names changed (86 nets).
   `h_eq_r0`, `rdp3_n0` -> `h_eq_r0half`; R9's match `cdp1_b_eq` and its far end
   `rcs_bq3335` -> `ra_eq_r9`.
 - **Batch 2**: the data bus is one name per bit, `db_b0`..`db_b7` (it had been `ubus_b#`,
-  `rbus_b#`, `cdp1_*_bl`, `r3_b#_d`, `amr_oa_c#`, `cdp1_lw2`, `tc1_x2`); R8 and R9's bits
+  `rbus_b#`, `cdp1_*_bl`, `r3_b#_d`, `amr_oa_c#` and two link names: see Former names); R8 and R9's bits
   (`cdp1` rows A and C) are `r8_b#_a/_n2/_q/_m#` and `r9_b#_*`. The cell `cdp1_reg` now
   takes the whole stem as its tag, and no longer labels its bit line (the bus names it).
 - Wording repaired where the renames made notes circular (ucz's route table, r9m's
@@ -1267,3 +1267,31 @@ after, every transistor and connection identical, only names changed (86 nets).
 
 Branches in flight that use an old name fail `tools/mergecheck.py` until they run
 `tools/rename.py OLD NEW` after merging main (the former-names table has every pair).
+
+## 2026-11-17 16:17  The review step made proportionate; review cost tracked
+
+User: the review loop is a new requirement of `/trace6845`, "but maybe it's too slow and
+expensive". Changed: round 1 is a full review (as before, with a budget of about 40 images and
+text tools first); rounds 2 and 3 are fix checks, which a fresh agent does from the diff since
+the previous round and the junctions it touches (about 15 images); at most three rounds, not
+five; a package with confirmed errors after round 3 is not merged. `tools/costs.py` now marks
+review agents by their brief and records review cost per package; the dashboard shows it.
+
+Measured so far: no review agent has run on this machine. A first count that found five
+(02) was wrong: it took tracing agents' "check ... against the photo" for review wording.
+The reviews in the 2026-11-17 merges ran on dp111's machine and have no cost report. A
+tracing agent run costs about $18 API-equivalent here, which is the only guide to what a full
+review round may cost until `/trace6845` runs produce numbers.
+
+## 2026-11-17 16:27  Claims no longer wait for the coordinator
+
+A collaborator's agent pointed out that each `/trace6845` loop finishes only part of a package
+and then left the package's name locked ("merged, awaiting coordinator") until this session
+released it. Changed: `tools/claim.py done` writes the tracer's proposals to `handoffs/` on main
+and, in the same commit, keeps the claim (`--continue`, for the next round of a loop) or releases
+it. `take` of a package you already hold is a no-op; `tools/newwork.sh` reuses the worktree and
+branch; `/trace6845` resumes a held claim first. The coordinator works through `handoffs/`
+(`tools/claim.py handoffs`) and removes each file once applied; claims are the tracers' own.
+The dashboard lists the handoffs waiting. Tested end to end in a scratch clone with its own
+remote (take, take again, done --continue, done, someone else's prefix refused, two handoffs
+in one second kept apart).
