@@ -7,14 +7,20 @@ several offsets side by side, for comparing repeats), `tools/dbus_autocorr.py`
 
 ## Status
 
-Traced, extracting, overlay-checked: the input buffer chain (four inverters) as cell
-`dbus_in`, placed six times (D0-D5); the input line of D0 from where it enters the
-column, and the whole input line of D1 from the pad cell's contact.
+Traced, extracting (96 transistors, 0 errors), overlay-checked:
 
-Surveyed, with coordinates below, but NOT traced: the gate group ("cluster") under
-each of chains 0-3, all other logic in the column, the channel wiring to the pads.
-The pad cell (AMB-003) was not attempted; what the column tells us about its two
-lines is under "P_x and P_y" below.
+- the input buffer chain (four inverters), cell `dbus_in`, six copies (D0-D5); D0's and
+  D1's input lines (first session);
+- **the input latch of D0-D3** (cell `dbus_lat`, ten transistors, master under chain 0,
+  three more copies upside down under chains 1-3) and **the inverter that drives each
+  data bus bit from it** (cell `dbus_drv`, two transistors, four copies at the chain
+  pitch), with the lines between them, the lines from the chains (`d#_d`) and the ends of
+  `dbl`'s four data lines: `db_b0`..`db_b3` are now driven nets (2026-11-17 15:28 +0000);
+- the latch enable `dbus_le` (metal M_b) from its top pad down the column and west to the
+  region's edge.
+
+Not traced: everything for bits 4-7 below chain 4, the logic at y 15100-16600, the logic
+above D0, the channel wiring to the pads, the pad cells (those are `dpad`). See "Not done".
 
 ## Inventory
 
@@ -37,9 +43,11 @@ down from the D0 pad cell. Gates sit on a 152 px vertical pitch between two rail
 | Input chain, D0 | 17255-17590 x 8280-8880 | cell `dbus_in`, traced |
 | Input chain, D1-D5 | same cell at (1,1365) (1,2732) (2,4098) (2,5465) (2,6223) | placed; findcell on the clean shot scores 0.81-0.83, each overlay checked at 1.25x. The four-gate core is the same in all six; the wiring left of x 17290 differs per copy and is drawn only for D0 (and D1's input) |
 | Capacitor rectangles of chain 0 | 16960-17040 x 8445-8580 and x 8745-8880 | drawn |
-| Cluster 0 | 17150-17590 x 8885-9520 | not traced, see below |
-| Clusters 1-3 | cluster 0 + 1366, 2732, 4098 (by eye at 0.5x; not checked) | not traced |
-| Cross-unders between units 0 and 1 | poly "line 1" y 9545-9566, "line 2" y 9590-9610, both under both rails | line 1 drawn (D1 input); line 2 is D1's P_y, not drawn |
+| Input latch, D0 | 17230-17590 x 8885-9370 | cell `dbus_lat`, traced |
+| Input latch, D1-D3 | **upside down**: `@inst dbus_lat` at (1,1266) (1,2631) (2,3998), mirrored about y 9195 (centres y 10461, 11826, 13193) | placed: findcell on the clean shot 0.76-0.77; `cellcheck.py` in both chip-2 shots: median correlation 0.92-0.94, the badly matching blocks are the VCC contact pits and the top edge. The first notes' "cluster 0 + 1366" was wrong |
+| Bus inverter, D0 | 17290-17590 x 9373-9500 | cell `dbus_drv`, traced |
+| Bus inverter, D1-D3 | the same cell at (0,1366) (0,2732) (0,4098), **not** upside down; its VSS land runs into the upside-down latch's land above it | placed; `cellcheck.py` metal: 0.95-0.96, bad blocks only along the top edge (the neighbour differs) |
+| Cross-unders between units 0 and 1 | poly "line 1" y 9545-9566, "line 2" y 9590-9610, both under both rails | line 1 drawn (D1 input); line 2 is D1's P_y, not drawn. The same pair recurs below unit 1 (contact (17293,10920) seen) |
 | Logic below chain 5 | 17150-17590 x 15100-16600 | single gates on the 152 pitch, not surveyed in detail. No cluster follows chains 4 and 5 (chain 5 starts 758 px below chain 4) |
 | Logic above D0 | 17200-17700 x 5250-5900 | several gates, not looked at |
 
@@ -144,6 +152,45 @@ How the doubtful junctions were decided (colour maps of the clean shot, cells of
   y 9308-9362 is the edges of the diffusion and poly under its west half; the east half is
   metal throughout (brightness map of both metal shots).
 
+### Units 1-3, and what differs from copy to copy
+
+Extracted for all four bits (# = 0..3):
+
+    d#_d_n  = NOT d#_d
+    dl#_q   = NOT( (d#_d_n AND dbus_le) OR dl#_q_n )
+    dl#_q_n = NOT( (d#_d   AND dbus_le) OR dl#_q   )
+    db_b#   = NOT dl#_q_n
+
+The latch cell holds what is common (x >= 17237). Drawn per unit:
+
+| | Unit 0 | Unit 1 | Units 2, 3 |
+|---|---|---|---|
+| `d#_d` to band E | poly west from G4 to the contact (17205,8837), metal M_a x 17208 down to the pad (17207,9248) on band E | **no metal**: poly west from G4 along y 10192-10212, south down x 17225-17241 (in the gap between the metal x 17210 and M_b) to band E's west end at y 10394-10416 (both stripped shots at 3.2x, `u1_dd2.png`) | the same, moved by 1366 and 2732 (metal shot at 1.85x, `u2_left.png`, `u3_left.png`) |
+| `dl#_q_n` from the latch to band F of the bus inverter | west along y 9155-9173, south down x 17157-17185, east along y 9415-9437 | west along y 10483-10501, south down x 17202-17222 **under the metal x 17210** (no contact: no pad; `dbl`'s review saw the same U), east along y 10781-10803 | the vertical is at x 17181-17200, west of that metal (y 11849-12169 and 13215-13535) |
+| `db_b#` | pad under `dbl`'s contact (17207,9467), poly east along y 9462-9479 to the buried contact at N2's south-west tab (17314,9466) | from (17077,10832) east along y 10828-10845 | from (17165,12200) along y 12194-12211; from (17208,13563) along y 13560-13577 |
+
+The four data lines of `dbl` therefore each end on the **output** of an inverter (a buried
+contact on its node), which answers `dbl`'s open question (gate or node): the unit drives
+the line. With `dbl` loaded the extraction joins D0-D3's latches to `db_b0`..`db_b3`.
+
+### The latch enable `dbus_le`
+
+Metal M_b, x 17243-17262: starts on the pad (17252,8990) of unit 0's band B, has a pad on
+bands B and D of every latch (unit 0: y 8990, 9208; units 1-3: 10448, 10666; 11813, 12031;
+13180, 13398), runs on to y 13614 and turns west to the pad (17160,13612) (`follow.py`: one
+piece, 4630 px). From that pad a poly goes west along y 13602-13622, under two vertical
+metals, to the pad (16990,13612), where a metal takes over and leaves the region west
+(`mb_end.png`, `le_west.png`, overlay `le_ov.png`).
+
+Followed beyond the region, **not drawn** (`follow.py` and one strip image,
+`le_strip_m.png`): the metal goes west to x 16862, south to y 13810, west to x 16820 and
+south along x 16818 to y 15800, then west, ending at about (16772,15800). On the run south
+it carries **eight pads, each with a poly leaving west**, at about y 14040, 14260, 14435,
+14650, 14900, 15120, 15385 and 15605. So `dbus_le` is not private to the four latches: it
+also feeds eight things in the column x 16480-16800 (`areg`'s and `bd2`'s right-hand
+columns, both untraced), and its driver is probably at its south-west end in `bd2`'s
+right-hand column. Which way it is driven is not established (trap 20).
+
 ### P_x and P_y (established about the two lines of AMB-003)
 
 - **P_x is one line common to all eight pad cells**, not a per-bit line. A single
@@ -173,31 +220,79 @@ How the doubtful junctions were decided (colour maps of the clean shot, cells of
 | `d0_in` | metal x 17548-17566 | comes down from the D0 pad cell: poly from a contact near 17818,6578 left along y 6578, down to a contact near 17546,6755, then metal down; turns left at y 8188 (cross-under 17300-17500) | in | D0 pad after its protection structure. Drawn from y 8050 down |
 | `d1_in` | poly | from the D1 pad cell's contact at 17822,8400 (drawn up to x 17835) | in | D1 pad after its protection structure |
 | `d2_in`..`d5_in` | poly | G1 gate band of each chain, at 17291,8340 + offset | in | not followed to the pads |
-| `dN_d` | poly, then metal | G4 output, 17290-17345 x 8825-8847 + offset | out of the chain | pad level, buffered and delayed; into the cluster |
+| `dN_d` | poly, then metal | G4 output, 17290-17345 x 8825-8847 + offset | out of the chain | pad level, buffered and delayed; into the latch (drawn for D0-D3; chains 4 and 5: not followed) |
+| `db_b0`..`db_b3` | poly | pads under `dbl`'s contacts (17207,9467), (17077,10832), (17165,12200), (17208,13563) | out | the internal data bus bits, driven here by `dbus_drv` |
+| `dbus_le` | metal | leaves west at (16950,13614) | believed in | latch enable; see above for where it goes |
 | P_y of D0 | metal x 17590-17610 from the pad cell (contact near 17580,7495), contact 17597,8097, poly cross-under y 8090-8105, contact 17510,8097, metal left to x 17448 and down as the thin metal | - | to the pad | not drawn |
 | P_y of D1 | poly y 9225-9240 from the pad cell to x 17650, down x 17640-17655 (under the P_x metal) to line 2 (y 9590-9610), left to a contact at 17120,9620, metal x 17110-17130 downward | - | to the pad | not drawn |
 | P_x | metal x 17633-17650, y 7380-18835 | contacts listed above | to the pads | common enable-type line, not drawn |
-| M_b | metal x 17243-17262 | from 17252,8990 down through unit 1 | unknown | shared control line of the clusters, not drawn |
-| lines from the core | metal | two wide metals arrive from the left at y 9520-9545 and 9565-9585 and turn down at x 17195-17215 and 17155-17175; another arrives at y 9460-9480 to a contact at 17207,9470 | unknown | not followed |
+| lines from the core | metal | two wide metals arrive from the left at y 9520-9545 and 9565-9585 and turn down at x 17195-17215 and 17155-17175: `dbl`'s `db_b3` and `db_b2`; the one at y 9460-9480 to the contact (17207,9467) is `db_b0` | - | drawn in `trace/dbl.txt` |
 
-**Internal data bus: not identified.** The two poly lines leaving each chain to the
-left (y 8532 and 8792 in chain 0) are the capacitor taps, not bus lines. The bus
-lines must leave from the clusters or run in the left-hand wiring field.
+**Internal data bus**: bits 0-3 leave the bus inverters as above. The two poly lines
+leaving each chain to the left (y 8532 and 8792 in chain 0) are the capacitor taps, not
+bus lines.
 
 ## Ambiguities
 
-- `d0_b` capacitor: contacts cut, strap absent in both metal shots. Looks like a
-  metal-mask option. No effect on logic.
-- Chains 2-5 are assigned to D2-D5 by position only.
-- Whether clusters 1-3 are exact copies of cluster 0 has not been checked.
+1. **The tie of `dl#_q` to band C (ASSUMED, `?B` at 17431-17473 x 9092-9110 in the cell).**
+   Band C is the gate of N0's load and of N1's single pull-down, and has no other
+   connection: its west end is at about x 17340 (field under M_c beyond it, measured), its
+   east end is the load gate. So it must be tied to a node, and by position to N0. No box
+   of a buried contact is seen for it. Drawn where N0's diffusion, running south under the
+   thin metal, ends on band C with one heavy line (y 9092-9097) and no field between: the
+   same construction as the three ties that are certain (N1's at (17446,9205), N3's at
+   (17450,9346), N2's at (17448,9478): each a diffusion tab under the thin metal ending on a
+   horizontal poly). Other reading: no contact there and the tie elsewhere, unseen; the
+   equations would be the same. A third reading, band C driven from outside, is excluded as
+   far as the photos go (no poly leaves it). **Every equation of `dl#_q` and `dl#_q_n`
+   depends on this item** (`tools/unsure.py --equations dl`). What would settle it: a
+   sharper photograph of (17450,9095), or the same spot in units 1-3 (flipped: y 10561,
+   11926, 13293) where the dirt differs.
+2. **N0's west tab** (`?B`, `?P` at 17286-17328 x 9020-9048): a box like a buried contact
+   under M_c (M_c has no pad there) with a short orange bar west of it (x 17289-17296 in the
+   chip-2 shots), rounded end at x 17286. Drawn as a poly stub tied to N0. Nothing leaves
+   it: the corridor between M_b and M_c is field from y 9058 to 9139 (measured), and under
+   M_c it is field. It joins nothing either way; if it is not a contact the circuit does
+   not change.
+3. **A vertical salmon strip under the west half of the thin metal**, x 17434-17449,
+   y 8968-9013, beside the narrow diffusion of the third pull-down: by colour poly over field
+   (R-G about 55), not drawn. It would be the west end of the gate poly turned south; it
+   reaches N0's diffusion at y 9013 where nothing marks a contact. If it were tied to N0
+   there, `dl#_q_n` and `dl#_q` would be one net, which cannot be. Not explained.
+4. **The thin metal** x 17438-17459: taken to have no contact in the latch (no pad on it;
+   the boxes under it measure as diffusion, not as contact holes). The first notes call it
+   D0's P_y. It is not drawn, and it does not end in unit 0: it goes on south through unit 1
+   at least to y 9900. If it is one line down the column it is not a per-bit line; where it
+   ends was not looked for.
+5. The dark line between the two parts of the third pull-down's gate poly at x 17485-17493
+   (both chips): taken to be the outline of the vertical part; the two parts are drawn as
+   one poly because neither has another connection (the west part ends at x 17437 over
+   field) and band A, the only alternative, is separated from it by 20 px of field.
+6. `d0_b` capacitor: contacts cut, strap absent in both metal shots. Looks like a
+   metal-mask option. No effect on logic. (First session.)
+7. Chains 2-5 are assigned to D2-D5 by position only. Chains 2 and 3 now drive `db_b2` and
+   `db_b3` through their latches, which agrees with `dbl`'s bit numbers for those lines.
+8. Device sizes: W/L of the cell's transistors as drawn are within about 5 px; the third
+   pull-down of N0 is narrow (W about 17) against 76-79 for the two in series.
+
+## Review
+
+(to be filled in by the review rounds)
 
 ## Not done
 
-- Clusters 0-3 (start with the diffusion-column table above; the open questions are
-  the loads and the structures at x 17400-17525).
-- Left-hand wiring of chains 1-5: capacitor taps, and where each `dN_d` goes
-  (for chains 4 and 5 there is no cluster below).
-- Logic at y 15100-16600 (and the D6, D7 input buffers), logic at y 5250-5900.
-- Channel wiring x 17590-17830: P_x line, P_y lines, input lines of D2-D7.
-- The driver of P_x.
-- Pad cell (AMB-003): not attempted.
+- **Bits 4-7.** Chains 4 and 5 have no latch below them (chain 5 starts 758 px below
+  chain 4); where `d4_d` and `d5_d` go is not followed. Where the input buffers and
+  latches of D6 and D7 are is not known: the lower part of the column (y 15100-16600) is
+  the first place to look. `db_b4`..`db_b7`'s routes to this column are not drawn (`dbl`
+  did bits 0-3 only).
+- Logic at y 15100-16600 (single gates on the 152 px pitch), logic above D0 at
+  17200-17700 x 5250-5900.
+- Left-hand wiring of chains 1-5: the capacitor taps (`d#_b`, `d#_c`; in unit 1 a poly
+  comes down x 17181-17197 and turns west along y 10325-10345, probably `d1_c`'s), the
+  input lines of D2-D5 (the contact (17293,10920) below unit 1 is on D2's cross-under).
+- Channel wiring x 17590-17830: the P_x line, the P_y lines, input lines of D2-D7. The
+  driver of P_x. The thin metal x 17438-17459 (Ambiguity 4): follow it to both ends.
+- `dbus_le` west of x 16950: drawn to the region's edge only; its eight taps and its
+  south-west end (16772,15800) belong to `areg`'s and `bd2`'s right-hand columns.
+- Pad cell (AMB-003): `dpad`.

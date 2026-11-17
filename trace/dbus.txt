@@ -227,8 +227,7 @@ P 17237,9196:17409,9219
 C 17252,9208 s=26x26
 # band E: from the end pad of metal M_a (d_d) east across the column, then south as the
 # gate of inverter N3
-P 17193,9236:17222,9262            # pad
-P 17200,9240:17423,9262
+P 17237,9240:17423,9262            # (its west end is drawn per copy)
 P 17402,9255:17419,9322
 N P 17300,9251 d{}_d
 # -- inverter N3: d_d_n = NOT d_d
@@ -253,15 +252,20 @@ P 17237,9155:17325,9173
 N P 17260,9164 dl{}_q_n
 @end
 
-# ---- unit 0 (D0): what differs from copy to copy
-M 17252,8978 y9530 w=20            # metal M_b, the latch enable (continues south)
-N M 17252,9400 dbus_le
-# inverter N2: db_b0 = NOT dl0_q_n, with a strong load (y 9373-9500). In units 1-3 the
-# latch is upside down and this inverter is not below it in the same way.
+# Copies under chains 1-3: upside down (findcell on the clean shot, scores 0.76-0.77).
+@inst dbus_lat 1,1266 mx=17440 rot=180 o=17440,9195 tag=1
+@inst dbus_lat 1,2631 mx=17440 rot=180 o=17440,9195 tag=2
+@inst dbus_lat 2,3998 mx=17440 rot=180 o=17440,9195 tag=3
+
+# ---- the inverter that drives the data bus bit: db_b = NOT dl_q_n, with a strong load.
+# For D0 at y 9373-9500. It repeats at the chains' pitch, NOT upside down, so under the
+# upside-down latches of units 1-3 its VSS land runs into the latch's own.
+@cell dbus_drv tag=0
 D 17350,9373:17400,9400            # VSS land
 C 17362,9382 s=30x30
 D 17300,9395:17431,9461            # land widened to x 17300-17431, band F, node N2
-P 17237,9415:17449,9437            # band F (its west end is drawn per copy)
+P 17296,9415:17449,9437            # band F (its west end is drawn per copy)
+N P 17380,9426 dl{}_q_n
 D 17425,9453:17463,9476            # N2 east, under the thin metal
 D 17440,9455:17456,9486            # tab south
 B 17437,9463:17459,9492            # N2 tied to its load gate
@@ -275,12 +279,68 @@ P 17437,9480:17535,9500            # its foot, west to the buried contact
 D 17302,9455:17327,9478            # N2's south-west tab
 B 17299,9450:17330,9482            # N2 to the poly that goes west to the data bus contact
 P 17290,9462:17327,9479
-N P 17296,9470 db_b0
+N P 17296,9470 db_b{}
+@end
+@inst dbus_drv 0,1366 tag=1
+@inst dbus_drv 0,2732 tag=2
+@inst dbus_drv 0,4098 tag=3
+
+# ---- metal M_b, the latch enable: one piece from its top pad to y 13614, then west
+# (follow.py). Pads on bands B and D of every latch.
+M 17252,8978 y13614 x17161 w=20
+N M 17252,9400 dbus_le
+C 17160,13612 s=26x26               # M_b's end pad: down to poly
+P 17145,13598:17177,13626
+P 16976,13602:17160,13622          # poly west under the metals x 17078 and x 17118
+P 16976,13598:17006,13626          # pad
+C 16990,13612 s=26x26
+M 16950,13614 x17002 w=18          # metal on west: leaves the region at x 16950 (followed, not
+                                   # drawn: to x 16862, south, west to x 16820 at y 13813, south
+                                   # past eight tapped pads to y 15800, west to (16772,15800))
+
+# ---- unit 0 (D0): what differs from copy to copy
+# d0_d: band E's west end and its pad under the end of metal M_a
+P 17193,9236:17222,9262
+P 17200,9240:17240,9262
 # dl0_q_n from N1's west contact: west along y 9155-9173, south down x 17157-17185, east
 # along y 9415-9437 into band F
 P 17157,9155:17240,9173
 P 17157,9155:17185,9437
-P 17157,9415:17240,9437
+P 17157,9415:17300,9437
 # data bus bit 0: from dbl's contact (17207,9467) east to N2's buried contact
 P 17193,9453:17222,9481            # pad under dbl's contact
 P 17200,9462:17300,9479
+
+# ---- unit 1 (D1)
+# dl1_q_n: west along y 10483-10501, south down x 17202-17222, east along y 10781-10803
+P 17202,10483:17240,10501
+P 17202,10483:17222,10803
+P 17202,10781:17300,10803
+# data bus bit 1: from dbl's contact (17077,10832) east along y 10828-10845
+P 17063,10819:17092,10847          # pad under dbl's contact
+P 17070,10828:17300,10845
+# d1_d: no metal here. Poly from G4's output west along y 10192-10212, south down
+# x 17225-17241 (in the gap between the metals x 17210 and M_b) to band E's west end
+P 17225,10192:17295,10212
+P 17225,10192:17241,10416
+P 17225,10394:17240,10416
+
+# ---- unit 2 (D2) and unit 3 (D3): as unit 1, moved by 1366 and 2732 (checked by overlay)
+# (the vertical of dl#_q_n is at x 17181-17200 here, west of the metal x 17210; in unit 1
+# it lies under that metal)
+P 17181,11849:17240,11867
+P 17181,11849:17200,12169
+P 17181,12147:17300,12169
+P 17151,12187:17180,12215          # pad under dbl's contact (17165,12200)
+P 17158,12194:17300,12211
+P 17225,11558:17295,11578
+P 17225,11558:17241,11782
+P 17225,11760:17240,11782
+P 17181,13215:17240,13233
+P 17181,13215:17200,13535
+P 17181,13513:17300,13535
+P 17194,13551:17223,13579          # pad under dbl's contact (17208,13563)
+P 17201,13560:17300,13577
+P 17225,12924:17295,12944
+P 17225,12924:17241,13148
+P 17225,13126:17240,13148
