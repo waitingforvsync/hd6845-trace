@@ -1301,7 +1301,7 @@ in one second kept apart).
 The second run of `/refresh6845`. Since the first (14:43): three collaborators merged through
 the gate with the new claim and handoff flow: dp111 (`dpad`, the D0-D7 pad cells; `areg`;
 `tla`; `amr`), Tom Seddon (`dbus`, twice) and Matt Godbolt (`tc1`, five merges in a loop, the
-claim kept between them). Fourteen handoffs wait in `handoffs/`.
+claim kept between them). Twelve handoffs wait in `handoffs/`.
 
 - **Renames: none.** The candidates are deliberate aliases (`ar#_q`, `*_tab`, the data pins'
   `d0_in`/`d1_in`/`d6_in`, `cdp2_c_s#_bus` while R10/R11 stay unrenamed under AMB-019) or
