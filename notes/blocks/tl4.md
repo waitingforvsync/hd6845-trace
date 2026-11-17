@@ -164,6 +164,40 @@ piece, the neighbours' VCC boxes on RB (undrawn).
 
 Round 1: no findings that change a connection.
 
+Round 1 of the second run (full review of a batch of two pieces, 2026-11-17 23:42 +0000, a
+fresh agent on claude-fable-5-2, at commit 204c586; 14 images in
+`cache/scratch/tl4/review-2/`). Pieces: the NOR (y 3000-3232) and the inverter (y 3770-3911).
+Told to suspect: differences from the masters (a third gate, anything west of the column), the
+five pads and their metals (trap 16), whether the track x 4408-4410 is cut between the NOR's
+output pad and its gate 2 pad, whether the inverter's gate pad is separate from the latch's
+data pad on the same track and its output pad from the latch's output pad, the load strips and
+VCC boxes, a second VCC contact near (4930,3874), contacts under the metals the rows cross,
+the gate row y 3841-3859.
+It checked at 4x-6x in two to four shots, with profiles and text maps: the NOR's column
+(exactly two gate bands, both across the diffusion; node box; both VSS boxes; field west of
+it); both load strips east of RA (plain diffusion, no poly across); the cut of the track
+x 4409 (no metal y 3124-3172 in either metal shot, open green in the clean shot); the five
+pads; the gate pad's L metal and the field on the track x 4452 from y 3882 to 4002; no metal
+on the track x 4493 from y 3872 to 4220 (chip 2; chip 1 has dirt at y 4094-4184); no contacts
+under x 4362-4625; the two rows; the extraction.
+Findings, geometry only, checked by the tracer and fixed:
+1. The inverter's VCC box is x 4908-4955, y 3815-3868, not one diffusion to y 3904: a field
+   band lies at y 3870-3890 and a second box (4905-4960, 3893-3955) with its own contact about
+   (4928,3922) begins below it: confirmed (`textmap.py 4908 3800 4952 3912 4`: edge bars at
+   y 3868-3872 and y 3888-3892, plain bright metal between). The box is drawn to y 3868. The
+   second box feeds a strip east under a plate at about x 4962-5015, y 3890-3925: the east
+   neighbour's load, not drawn (Not done).
+2. The NOR's VCC box is y 3068-3148 with one elongated ring y 3078-3140 (`a1.png`): drawn so.
+The reviewer also read the inverter's tie box (4838-4872, 3857-3888) as a heavy-outlined box on
+the tail in four shots; the `?` is kept, because the item is copied from `tl1`'s uncertain one
+and was not measured by the tracer.
+Could not be checked: the far ends of the followed metals; a greenish patch in the clean shot
+at (4918-4940, 3878-3887) under RB with no ring in either metal shot.
+`tools/t.sh tl4 sameconn.py 204c586`: `connections identical`.
+`.venv/bin/python tools/sameconn.py 204c586`: `connections identical`.
+
+Round 2: no findings that change a connection.
+
 ## Not done
 
 - The nine tracks beyond the views (table under Ports), and their other pads.
@@ -171,4 +205,6 @@ Round 1: no findings that change a connection.
 - The rest of the gate column: y 3220-3780 (no findcell match), y 4390-5400 (findcell: `tl1`'s
   inverter at 2126,955, score 0.75; weaker hits for the NOR at 2125,912 and the wide NOR at
   2126,174).
+- A VCC box under RB at (4905-4960, 3893-3955) with a contact about (4928,3922) and a strip
+  east under a plate at about x 4962-5015, y 3890-3925: a load of the logic east of RB (`tl5`).
 - The bus field, the rows north of y 2960 and south of y 5400.
