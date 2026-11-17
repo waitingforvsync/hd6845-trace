@@ -78,7 +78,7 @@ in the bottom row (`rw_a`..`rw_d`). For chain n:
   metal shots: each contact carries only a dot of metal. They are NOT bus lines.
 - Only `dN_d`, the pad level delayed by four inverters, feeds logic. `d0_d` leaves G4
   in poly to a contact at 17205,8837 and goes down in metal (x 17198-17218, "M_a")
-  into cluster 0, ending at a contact at 17207,9255.
+  into the latch, ending at the contact (17207,9248) on band E's pad.
 - G1's gate poly continues into an L (17413-17503 x 8292-8318) that crosses no
   diffusion and ends beside the load, as on the bottom-row input inverters (AMB-004).
 
@@ -118,7 +118,7 @@ Where things are (all coordinates checked by overlay at 2.85x, `ov_top.png`, `ov
 | Metal M_c, x 17309-17327 | (17300,8944) to (17313,9345): carries `d0_d_n` up to band A. `follow.py`: one piece, 8940-9350 |
 | Metal M_b, x 17243-17262 | starts at the pad (17252,8990) on band B; second pad (17252,9208) on band D; goes on south (`follow.py`: to y 13614, then west): `dbus_le` |
 | Metal M_a, x 17198-17218 | `d0_d` from chain 0, ends on the pad (17207,9248) of band E |
-| Inverter N3 | band E turns south at x 17402-17419 (y 9255-9322) between the VSS land and the node x 17420-17476, y 9272-9310; load gate x 17475-17525, y 9252-9316 (chip-2 shot: orange block with the diffusion's edge across it at y 9270); VCC land x 17530-17586, y 9238-9300, contact (17555,9268). The node goes south under the thin metal to the buried contact (17450,9346) on the poly y 9336-9360 that joins the load gate's stem and runs west to M_c's bottom pad |
+| Inverter N3 | band E turns south at x 17402-17424 (y 9255-9322) between the VSS land and the node x 17425-17476, y 9272-9310; load gate x 17475-17525, y 9252-9316 (chip-2 shot: orange block with the diffusion's edge across it at y 9270); VCC land x 17530-17586, y 9238-9300, contact (17555,9268). The node goes south under the thin metal to the buried contact (17450,9346) on the poly y 9336-9360 that joins the load gate's stem and runs west to M_c's bottom pad |
 | Inverter N2 | VSS land y 9373-9415, widened to x 17300-17431 below y 9395 (outline in both chip-2 shots, `n2w.png`); band F y 9415-9437 (W about 131); node N2 below it; east under the thin metal, buried contact (17448,9478) to the load gate's foot; a narrow diffusion x 17478-17497 north beside the load gate; load gate x 17497-17535, y 9390-9500 (W about 70); VCC land x 17535-17586, y 9400-9475, contact (17553,9440) |
 | `db_b0` | N2's south-west tab, buried contact (17314,9466), poly west along y 9462-9479 to the pad under dbl's contact (17207,9467) |
 | `dl0_q_n` to band F | N1's west tab and buried contact (17313,9166) under M_c; poly west along y 9155-9173, south down x 17157-17185, east along y 9415-9437: band F, which ends under the thin metal at x 17449 |
@@ -178,8 +178,8 @@ the line. With `dbl` loaded the extraction joins D0-D3's latches to `db_b0`..`db
 Metal M_b, x 17243-17262: starts on the pad (17252,8990) of unit 0's band B, has a pad on
 bands B and D of every latch (unit 0: y 8990, 9208; units 1-3: 10448, 10666; 11813, 12031;
 13180, 13398), runs on to y 13614 and turns west to the pad (17160,13612) (`follow.py`: one
-piece, 4630 px). From that pad a poly goes west along y 13602-13622, under two vertical
-metals, to the pad (16990,13612), where a metal takes over and leaves the region west
+piece, 4630 px). From that pad a poly goes west along y 13602-13622, under three vertical
+metals (x about 17036, 17080, 17122), to the pad (16990,13612), where a metal takes over and leaves the region west
 (`mb_end.png`, `le_west.png`, overlay `le_ov.png`).
 
 Followed beyond the region, **not drawn** (`follow.py` and one strip image,
@@ -342,6 +342,24 @@ the junctions at 4-6x in two to four shots, compared the copies numerically and 
   transistors in unit 0, none missing; unit 1's `d1_d` does not meet `d1_c`.
 - Could not check: poly continuity through the contact (17450,9346) (only the common bottom
   edge supports it); the tie box's opening to N0 in chip 2; where the thin metal ends.
+
+**Round 4** (2026-11-17, a fresh agent, not shown rounds 1-3; `cache/scratch/dbus/review-4/`).
+Told to suspect: every place where one named net could be two or two one (the three long
+polys of each unit against each other and the chains' other outputs; the poly through the
+contact (17450,9346); what M_b touches on its 4600 px; M_a's pad; the data bus poly against
+band F and the loop); the tie box and the `?D` pocket; each N2's south-west contact; unit
+3; anything left out. It read the junctions at 4-5x in three shots with 1-2 px colour
+profiles, ran `follow.py` on M_a-M_d, a strip of M_b end to end, `cellcheck.py` on the
+copies (0.92-0.95) and overlays of units 1-3 at 2.7x.
+
+Round 4: no findings.
+
+Its observations, not errors: three of `follow.py`'s contact candidates on M_b ((17252,9141),
+(17252,11232), (17255,11289)) are dark blotches in chip 1's metal shot only, with no pad and
+continuous metal in chip 2: taken as damage on chip 1. Three wording slips in these notes,
+corrected. It could not check: whether N2's south-west box takes its diffusion from above or
+from the neck at x 17328-17350 (the same net either way), the `?D` pocket's width, `dbl`'s
+bit order, the thin metal's ends.
 
 ## Not done
 
