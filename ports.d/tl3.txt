@@ -1,0 +1,11 @@
+# tl3: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+# The package's region is x 3533-4250, y 2500-6350. Kept in step with the Ports table of
+# notes/blocks/tl3.md.
+
+# West side (x 3533): rows of the latch at y 3212-3652
+tl3_w3333   P  3533,3324-3342  in   data of the latch; the row turns north at x 3510-3525 (tl2's strip)
+tl3_w3419   P  3533,3409-3429  out  the latch's inverted output; on west to a pad (3495,3418) under a metal going south
+tl3_w3506   P  3533,3497-3515  in   clear of the latch; on west to a pad (3455,3503)
+# drawn ends inside the strip
+tl3_w3373   P  3606,2985       ?    enable of the latch: pad at the north end of the metal x 3540; a poly row y 2955-2975 goes on east from the pad, not drawn
+vss         M  3645-3695,4060  -    the west rail, drawn to y 4060; it goes on south

@@ -1,0 +1,70 @@
+# tl3: top-left random logic, strip 3 (x 3533-4250, y 2500-6350): the middle cluster of the
+# row counter's step logic and what lies north and south of it; what tla did not draw.
+@requires tl1
+@block tl3
+@w M=12 P=20
+
+# ====================================================================
+# The cluster's rails. tla drew the VCC rail (x 3824-3868) and the east VSS rail (x 3992-4041,
+# from y 3050). The WEST rail x 3645-3695 is the same metal as the east VSS rail: both run up
+# to one wide metal along y 2595-2648 (top_m.png, 2.2x metal; follow.py 3667 3400 N: corners
+# (3680,2638) E, (4028,2638) S). So the west rail is VSS, the mirror of tla's R1.
+M 3670,2622 y4060 w=50                # west rail; south of y 4060 not read (follow.py: a corner west at y 4080)
+M 3670,2622 x4020 w=52                # the link along the top
+M 4020,2622 y3060 w=50                # the east VSS rail north of tla's piece
+N M 3670,3400 vss
+
+# ====================================================================
+# West column, y 3212-3652: a latch, the pair of units tl1_ua / tl1_ub again.
+# findcell (clean shot): tl1_ua at 1041,-1128 (0.79), tl1_ub at 1041,-1128 (0.80); cellcheck
+# 13 % and 15 % bad blocks, all from metal that differs (there is no thin metal W in this
+# cluster: the middle of the unit is in the open here) and from the VCC boxes' pits.
+# Checked on la_ov.png (1.9x), la_mid1.png, la_mid2.png (4x, three shots), la_rows.png (3.5x).
+#   tl3_w3233 = NOT tl3_w3333
+#   tl3_w3419 = NOT( tl3_w3333 AND tl3_w3373  OR  tl3_w3550 )
+#   tl3_w3550 = NOT( tl3_w3506  OR  tl3_w3373 AND tl3_w3233  OR  tl3_w3419 )
+@inst tl1_ua 1041,-1128 tag=a
+@inst tl1_ub 1041,-1128 tag=a
+# the VSS box under the rail below the stack (railprof 3645 3690: diffusion y 3651-3719)
+D 3641,3651:3698,3719
+C 3670,3685
+# the contact of the lower VCC box (the cell draws the box, x 3819-3879, y 3397-3520)
+C 3846,3477 s=24x44
+# the thin metal x 3783 (follow.py: (3783,3370)-(3783,3576)): top pad on the top bar of ua's
+# load plate, bottom pad one poly with the gate of ub's third pull-down, as in tl1
+M 3783,3356 y3586 w=12
+P 3766,3354:3803,3384
+C 3783,3368
+P 3766,3560:3803,3598
+C 3783,3575
+N M 3783,3470 tl3_w3368
+# ua's node carries that plate: one net if the plate's tie (?) is right (as tl1's alias)
+@alias tl3_w3419 tl3_w3368
+N M 3605,3450 tl3_w3233
+N P 3592,3550 tl3_w3550               # ub's node: its poly on the box is a stub here (rounded end at x ~3570)
+
+# ---- the rows from the west
+# data: row y 3324-3342, on west out of the strip (it turns north at x 3510-3525, in tl2's)
+P 3533,3324:3585,3342
+N P 3560,3333 tl3_w3333
+# enable: the metal x 3531-3549 joins the pads of the rows y 3364-3382 (ua's gate 2) and
+# y 3580-3600 (ub's gate 1) and runs on north to y 2988, east to a pad (3606,2985)
+# (follow.py 3540 3450 N: corner (3544,2988) E, end (3610,2990); the rows y 3333, 3419 and
+# 3506 pass under it without a pad: la_rows.png)
+P 3545,3364:3585,3382
+P 3522,3357:3559,3387
+C 3540,3372
+P 3545,3580:3585,3600
+P 3522,3575:3559,3605
+C 3540,3590
+M 3540,3598 y2988 x3612 w=16
+P 3590,2970:3625,3000
+C 3606,2985
+N M 3540,3450 tl3_w3373
+# ua's node (the latch's inverted output): row y 3409-3429 west out of the strip (to a pad
+# (3495,3418) on a metal going south, in tl2's)
+P 3533,3409:3580,3429
+N P 3555,3419 tl3_w3419
+# clear: row y 3497-3515 from the west
+P 3533,3497:3585,3515
+N P 3560,3506 tl3_w3506
