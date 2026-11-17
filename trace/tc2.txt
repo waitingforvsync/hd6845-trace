@@ -114,6 +114,7 @@ B 6610,5208:6645,5245
 #     looked at).
 P 6911,4770:6950,4802
 C 6928,4786
+M 6915,4780:6945,4794                 # the contact's own metal: the end of ras's line (drawn there to x 6922), so that this file extracts alone
 P 6928,4786 x6452 w=16
 P 6437,4769:6467,4801
 C 6447,4786
