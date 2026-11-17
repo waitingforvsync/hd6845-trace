@@ -20,8 +20,6 @@ tl1_w2592   P  2493-2508,2500  ?    the row's poly comes from the north
 rcs_c1      P  2405-2420,2500  out  rcs_c1's poly line (from tla's row y 2986, west, north, east along y 2720), on north
 tl1_w2506   P  2100,2498-2515  ?    poly along the strip's north edge, from the west
 tl1_w2506   P  2372-2388,2498  ?    the same poly turns north out of the strip
-tl1_w2930   M  2733-2785,2500  ?    wide metal from the north, no contact in the strip
-tl1_w2930   M  2817,2905-2955  ?    the same metal's arm east
 vss         M  2600-2650,2500  -    R1 on north
 
 # Onto tla's geometry

@@ -28,7 +28,7 @@ the top of the strip), is cleared by `tl1_w5978`, and sends its output `tl1_w602
 along y 6195 out of the strip. **North of y 2790 there is only wiring**, now drawn: the rest
 of `rcs_c1`'s poly line (west, north and out of the strip at (2413,2500)), two rows from the
 north (`tl1_w2637`, `tl1_w2592`), `tl1_w3333`'s row to its pad (2826,2553), R1 up to the
-strip's north edge and a second wide metal (`tl1_w2930`). Thin metal W is not decided and
+strip's north edge and a second wide metal x 2733-2785, which is VSS (a leg of the same plane as R1). Thin metal W is not decided and
 not drawn; the wiring west of x 2260 below y 2600 is surveyed only: see Not done.
 
 ```
@@ -547,9 +547,10 @@ the lower corner), `n9.png` (2.2x: the rails), `n11.png` (3x: the north-west cor
   (y 2899) go on east as poly, the second under the wide metal's east arm.
 - **R1** (x 2600-2650) is one rail from `tla`'s piece (y 3000) up to the strip's north edge;
   no contact under it here.
-- **A second wide metal, `tl1_w2930`** (x 2733-2785): from the north down to y 2955, where it
-  turns east along y 2905-2955 and leaves the strip. No contact in the strip. It is not R2
-  (top end y 3018, 65 px below, thin metal E's arm between). What it is: not known.
+- **A second wide metal x 2733-2785 is VSS**: it and R1 are legs of one metal plane whose
+  lower edge is at y ~2506 (review; `review4-1/k2.png`); from the north down to y 2955, where
+  it turns east along y 2905-2955. It was first named `tl1_w2930` as a net of its own; both
+  legs had been drawn to end at y 2500, 6 px short of the plane's edge.
 - **`tl1_w2506`**: a poly along the strip's north edge, y 2498-2515, from west of x 2100
   under the MA metals to a corner at x 2372-2388, where it turns north out of the strip. No
   connection in the strip.
@@ -595,7 +596,6 @@ but they are drawn `?P`, so the wire as one net is **marked**.
 | `tl1_w2637` | P, M | (2448-2463,2500) north; (2852,2637) east, from the pad (2827,2637) | not known | passes: poly from the north, row y 2636, metal east |
 | `tl1_w2592` | P | (2493-2508,2500) north; (2817,2591) east | not known | passes: poly from the north, row y 2591, on to a pad (2867,2595) |
 | `tl1_w2506` | P | (2100,2506) west; (2372-2388,2498) north | not known | poly along the north edge |
-| `tl1_w2930` | M | (2733-2785,2500) north; (2817,2905-2955) east | not known | wide metal, no contact in the strip |
 | `vss` | M | (2600-2650,2500) north | - | R1, on north |
 | `ck_out` | M, P | trunk contacts (2365,5847) (`tla`'s) and (2372,6061) | from `tla`'s trunk | the third latch's enable: two gate rows |
 | `tl1_w5978` | M | (2326,6350) south | into the block (its other end is a gate) | the third latch's clear; metal x 2326 on south |
@@ -607,7 +607,7 @@ but they are drawn `?P`, so the wire as one net is **marked**.
 The same ports, one per line: `ports.d/tl1.txt`.
 
 The rows y 2812, 2857, 2899 were read at 2.5x (`n2.png`) from their pads to x 2820: straight,
-under R1, thin metal E's north arm and the wide metal x 2733-2785 (`tl1_w2930`), no pad on
+under R1, thin metal E's north arm and the wide VSS metal x 2733-2785, no pad on
 the way; the row y 2812 ends on a pad (2830,2811) (`n10.png`).
 
 ## Ambiguities
@@ -714,7 +714,7 @@ the way; the row y 2812 ends on a pad (2830,2811) (`n10.png`).
 - `tl1_w3333`'s metal east of (2852,2553); `tl1_w2637`'s east of (2852,2637); `tl1_w3678`'s
   east of (2856,2811); `tl1_w2592` east of x 2817 (pad at about (2867,2595)); the three polys
   north of y 2500 (`rcs_c1` at x 2413, `tl1_w2637` at x 2455, `tl1_w2592` at x 2500);
-  `tl1_w2506` beyond both ends; where the wide metal `tl1_w2930` comes from and goes.
+  `tl1_w2506` beyond both ends; where the wide VSS metal x 2733-2785's east arm (y 2905-2955) goes.
 - `tl1_w5936`'s poly north of (2096,5925), `tl1_w5978`'s metal south of y 6350. A second
   vertical poly x 2137-2147, y 3192-4205 (free ends at both? `v1.png`, 1.9x) between MA1's
   and MA0's metals: not looked at.
@@ -822,5 +822,23 @@ x 2772-2775 on all eight rows; at 4x the drawn edge sits on the outline; 20 px o
 clearance to the VCC box's contacts; `tools/sameconn.py`: connections identical; all four
 loads 26/50.
 
-Round 3: no findings.
+Round 3 of the third round of work: clean (no findings).
+
+### Fourth round of work (the third latch copy, the north wiring, the fix to tla's ck_out row)
+
+Round 1 (full review of what was added since 43af615, 2026-11-17 22:15 +0000, a fresh agent on
+claude-fable-5-2). Told to suspect the third copy's inputs (read from the photo, not the
+masters), the `ck_out` row ends and the tla fix, the copy item by item, its rail-edge joins,
+the contact (2803,5935), the R1/R2 extensions, `rcs_c1`'s poly under tla's metal, the pads
+at the strip edge, and the self-check classes (widths, 50 px beyond each end, undrawn rings
+and boxes). Checked: the `ck_out` rows at 6x in four shots (the tla fix is right), the copy
+by 4x overlays and rail profiles, its inputs from their own pads, the contacts, the rails,
+the four east-edge pads, `rcs_c1`'s loop at 6x in three shots.
+One finding, which changes a connection: the wide metal x 2733-2785 (named `tl1_w2930`) is
+the same metal as R1: both rise into one plane whose lower edge is at y ~2506, 6 px beyond
+the drawn ends. Confirmed by the tracer on `review4-1/k2.png` (both metal shots): the
+plane's edge drawn, the metal labelled `vss`, the name, its two ports and its notes
+removed. No transistor affected. Minor, not changed: three polys from the north look about
+5 px wider or further east than drawn.
+Not checked: the `?` load ties, thin W, anything east of x 2850 or north of y 2440.
 

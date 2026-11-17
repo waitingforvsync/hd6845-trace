@@ -572,4 +572,10 @@ M 2625,2500 y3005 w=50
 # it at (2765,2820), (2775,2905) in chip 2 have no pad in the clean shot). It is not R2,
 # whose top end is at y 3018, 65 px below, with thin metal E's arm between.
 M [ 2733,2500 x2785 y2905 x2817 y2955 x2733 ]
-N M 2760,2700 tl1_w2930
+# This wide metal and R1 are legs of ONE metal plane whose lower edge is at y ~2506 (the
+# pocket between the legs, x 2655-2735, closes at y 2506-2510): metal without a break from
+# x 2604 to 2832 along y 2490 in both chips, ground between the legs along y 2520 (review
+# round 1 of the fourth round, px.py rows and columns, review4-1/k1.png, k2.png; confirmed by
+# the tracer on k2.png). So it is VSS, not a net of its own.
+M 2600,2470:2832,2508               # the plane's lower edge (it goes on north out of the strip)
+N M 2760,2700 vss
