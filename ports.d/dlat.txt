@@ -8,8 +8,8 @@ d5_d       P  16955,14684-14706   in   buffered pin D5
 d6_d       P  16955,15161-15183   in   buffered pin D6
 d7_d       P  16955,15638-15660   in   buffered pin D7
 
-# South: the enable's end
-dbus_le    P  16756-16790,15841   in   poly pad under the end contact (16772,15824); its poly goes on south and east (bd2's right-hand column): believed the driver's side
+# South: the enable goes on
+dbus_le    M  16765-16783,15935   in   the metal runs on south along x 16774 (over the box ends of d5_out_n, d4_out_n, d3_out_n without contact; followed to y 16104): believed the driver's side
 
 # West side: the latch outputs, on west and north to the bus inverters (not followed)
 dl4_q_n    P  16466,14256-14273   out  turns north at x 16458-16477

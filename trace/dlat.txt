@@ -124,16 +124,26 @@ N M 16689,14600 vss
 
 # ---- the latch enable dbus_le: dbus draws it to x 16950 (M 16950,13614 x17002). tools/follow.py
 # from (16900,13614): west to x 16862, south to y 13810, west to x 16820, south to y 15803,
-# west, end (16772,15800). One piece; bright 16812-16825 on the long run. No contact on the run
-# other than the eight pads (tools/textmap.py over the follower's candidates y 14705-14800:
-# metal throughout, no ring, no hole). At its west end the arm turns south onto a contact
-# (16772,15824) on a poly pad (bright centre in a dark ring in both metal shots, pale hole in a
-# heavy-outlined box in both stripped shots: le_m.png, le_a.png at 6x). The pad's poly goes on
-# south and east, outside the region (bd2's right-hand column): the enable's driver side.
-M 16960,13615 x16860 y13812 x16819 y15802 x16772 y15836 w=18
-C 16772,15824 s=22x22
-P 16756,15807:16790,15841          # the poly pad under the contact (its lines beyond: not drawn)
-N P 16762,15812 dbus_le
+# west to x 16772, then SOUTH along x 16767-16781 out of the region. One piece; bright
+# 16812-16825 on the long run. No contact on the run other than the eight pads (tools/textmap.py
+# over the follower's candidates y 14705-14800: metal throughout, no ring, no hole).
+# The follower stops at (16772,15800) and again at (16771,15962) and (16771,16090): each stop is
+# a dark stretch of about 50 px where the thin metal passes over a heavy-outlined box at the
+# west end of a poly of dbus (d5_out_n's at y 15815-15836, then d4_out_n's and d3_out_n's, 130
+# apart). Those are NOT contacts (review round 1; trap 22): the box centre is greenish, not
+# metal-bright, in both metal shots (122/147/53 against 207/197/97 on this line's real pads) and
+# tan, not green, in the clean shot; between the boxes the metal is bright in both chips
+# (tools/textmap.py 16747 15790 16803 15975 5, and on to y 16104). Run 1 drew the first box as
+# the line's end contact, which would have put dbus_le on d5_out_n's poly.
+# Drawn to y 15935, in the bright stretch between the first two boxes; it goes on south.
+M 16960,13615 x16860 y13812 x16819 y15802 x16774 y15935 w=18
+N M 16774,15900 dbus_le
+
+# bit 7 only: the VCC land of the two loads runs on south into N3's VCC land (one tan area at
+# x 16516 from y 15470 to 15700 but for one edge line at y 15645; the bit-5 master has 45 px of
+# field there), with one long contact over the lower part (review round 1; both lands are VCC)
+D 16493,15580:16542,15645
+C 16502,15616:16522,15650
 
 # ---- the data inputs: dbus draws d4_d..d7_d to x 16950; poly on west into band E of each latch
 P 16836,13994:16955,14016          # d4_d
