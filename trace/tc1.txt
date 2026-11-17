@@ -587,13 +587,16 @@ M 7054,4060 y4345 w=14             # the channel metal x 7053 between this conta
 #      beside it, pits at y 4312-4341) is NOT TRACED.
 D 6862,4270:6918,4297              # under the rail: the strip
 N D 6890,4282 tc1_o4280
-@alias tc1_x1 tc1_o4280               # the strip's node, joined to tc1_x1's pad and branch only through ?B and ?P (notes, Ambiguity 17)
 D 6877,4290:6914,4368              # ... gate / source: narrower than the strip (edge at x 6874, field at x 6858-6866 at y 4345: review round 3)
 C 6888,4338 s=28x28                # rail contact: ring 6870-6915 x 4320-4365 in both metal shots, pit in the clean shot
 D 6803,4270:6835,4293              # the strip's west end under the thin metal x 6817
 ?D 6830,4270:6866,4293             # ... across the west gap
-?D 6914,4270:6950,4293             # ... east of the rail, in the open, to the pad's west edge (plain tan in both chip-2 shots, red-tan in the clean shot; a dark line at x 6940-6946)
-?B 6938,4266:6952,4290
+?D 6914,4270:6934,4293             # ... east of the rail, in the open, towards the pad (plain tan in both chip-2 shots, red-tan in the clean shot)
+# THE STRIP'S JOIN TO THE PAD (6962,4268) IS NOT DRAWN (x 6934-6957, y 4266-4290): a dark line
+# at x 6940-6957 hides it. Review of run 4: the pad's contact ring (6957-6976, 4258-4290) holds
+# two pale patches, and the lower one has the strip's colour, which would make it a butting
+# contact joining metal, poly and strip. If the join is real this inverter drives the tc1_x1
+# line, on which shm already draws an inverter: notes, Ambiguity 17. Left open on purpose.
 P 6856,4298:7002,4320
 P 6988,4298:7002,4384              # it turns south at x 6988-7002 (review round 3; salmon to y 4382 at least: NOT FOLLOWED)
 N P 6975,4309 tc1_p4308
@@ -663,7 +666,7 @@ B 6764,3988:6796,4018
 #      diffusion or to the strip (notes, Ambiguities 12, 13). The one at x 6968 has a contact
 #      on the pad at (6962,4268), the end of tc1_x1's branch: it is labelled tc1_x1_u and
 #      aliased (as trace/rad.txt does for ra4_drv_in_u), because the join runs through one ?P.
-M 6817,3905 y4228 w=12
+M 6817,3905 y4373 x6790 w=12        # it turns west at y 4366-4380 (both metal shots; review of run 4) and goes on: NOT FOLLOWED. No contact on the diffusion it crosses at y 4270-4337
 N M 6817,3915 tc1_m6817
 M 6968,3905 y4300 w=12
 N M 6968,3915 tc1_x1_u
