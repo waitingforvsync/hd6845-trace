@@ -9,7 +9,8 @@ Partial. 23 transistors in `trace/tcw.txt` (plus three pull-downs in `trace/fld.
   `tc1_x1_u`. Sections "Run 2" and "AND-OR-invert" below.
 - **Stretch B, y 3200-3620** (run 3, 2026-11-17): the big gate has its output and load,
   `tcw_o3240` = NOT(`tcw_m6320` AND `tcw_o3550` AND (`tcw_m6362a` OR `tcw_m6404`)), and the
-  inverter `tcw_o3550` was complete already. Where `tcw_o3240` goes is not traced. Section "Run 3".
+  inverter `tcw_o3550` was complete already. Its output leaves north on a poly along x 6584-6600, drawn to y 3150; beyond is not traced.
+  Section "Run 3".
 - **Stretch A, y 2690-3220**: the pull-downs under the ground rail and the bus metals of their
   inputs (serial work, 2026-11-16); the loads and outputs east of the rail are not traced. "Not
   done" says what was seen there.
@@ -367,7 +368,8 @@ Read, not drawn:
   3150-3178) and that with the large block (6628-6678, 3118-3142) north of it (a dark line at
   y 3144-3148 between them, which may be a diffusion edge under one poly). If so, `tcw_m6320` is
   on a load's gate, that is, it is the output of a gate of stretch A.
-- A poly foot leaves the tie's box west along y 3200-3216 to x 6592 (`px.py row 3208`), where a
+- (Drawn after review 2, to y 3150, its last 10 px to the box `?`.) A poly foot leaves the tie's
+  box west along y 3200-3216 to x 6592 (`px.py row 3208`), where a
   vertical poly x 6575-6600 runs north along the rail's east side (salmon-red in the clean shot at
   x 6574-6590 from y 3108 to y 3172, `px.py col 6578`, `col 6595`). That would be the output's way
   out, north into stretch A. Its north end is not read, nor whether it lies on diffusion there
@@ -464,12 +466,62 @@ strip edges; `tools/px.py` profiles decide.
 
 Round 1: no findings that change a connection.
 
+### Run 3's review (2026-11-17 16:00 -0600)
+
+Round 1, full review of run 3's one piece (stretch B's big gate east of the rail, x 6545-6745,
+y 3140-3410), by a fresh agent on Claude Fable 5.2, at commit `98e8ecc`; 10 images in
+`cache/scratch/tcw/review-2/`. Nothing else was under review.
+
+Told to suspect: whether the output's arm y 3232-3246 is one diffusion from the rail to x 6656
+(the dark lines at x 6584-6590, 6605-6611, 6632-6638 read as etch lines; a vertical poly
+crossing it instead); the corner (6640-6656, 3232-3252); whether the load block and the long
+poly x 6662-6680 are one poly, and whether the block's west part is poly; the buried contact
+box; the pad (6616,3272) being one poly with the gate; the thin metal's continuity and other
+contacts on it; the drain's east end; anything left out between y 3190 and y 3410.
+
+Checked and found correct (views at 3-5x, `px.py`, `textmap.py`, `follow.py`, `opendiff.py`):
+the arm is continuous (chip-2 metal shot plain and uniform, 150/133/65, over x 6586-6607; the
+dark lines also cross the poly at y 3210, so they are etch lines; field at y 3221-3226 north of
+the arm; no contact on it); the corner (the line at x 6634 is weaker in the arm's mouth: the
+metal's edge only); the strip (`px.py col 6648` continuous y 3226-3307 in both chip-2 shots); the
+drain (uniform to x 6675, protected tan from x 6679 into the pocket); the pad and gate one poly
+(continuous x 6574-6604); both contacts of the thin metal (green holes) and none at (6617,3240),
+(6617,3210), (6617,3187); the equation. Block and arm one poly: by elimination only (the block's
+west part is poly-coloured and the block has no other way out; the line at x 6657-6663 does not
+decide it): Ambiguity 5 stands. A patch `opendiff.py` lists at (6587-6598, 3273-3294) is field
+(no outline in three shots), isolated either way.
+
+Findings:
+
+1. **An undrawn poly reaches the tie box from the west**: an L-shaped poly down x 6586-6598 from
+   north of y 3150, east along y 3200-3218 under the thin metal (no contact) to at least x 6631;
+   the last 10 px to the box are dark in both chip-2 shots. The reviewer classed this as changing
+   a connection (it is where `tcw_o3240` leaves). It was in this run's "Read, not drawn" list.
+   Confirmed by me (`px.py row 3204`, `3210`, `3216`: metal shot 150/105/45 at x 6590-6605, clean
+   shot salmon 220/170/115 under the thin metal, dark from x 6632 to x 6645) and drawn: the poly
+   to y 3150, labelled `tcw_o3240`, its last piece to the box as `?P`. The drawing adds a wire
+   to an existing net inside the package: no nets joined or split, no transistor, no equation and
+   no port changes, as the two commands below show; so I count it as not changing a connection
+   of the extraction. That is my classification, against the reviewer's label.
+2. Geometry only: the block's arm runs 6-8 px south of the block; the drain's bottom edge is
+   y 3407. Fixed.
+
+Not checked by the reviewer: the tie itself (no poly is seen on the box's interior; it rests on
+the frame); the drain's last 10 px under the rail's edge line; where the L-shaped poly goes north
+of y 3150.
+
+    tools/t.sh tcw sameconn.py 98e8ecc          -> connections identical
+    .venv/bin/python tools/sameconn.py 98e8ecc  -> connections identical
+
+Round 1: no findings that change a connection.
+
 ## Not done
 
 North of y 3660 the loads and outputs. What run 2 saw there, not drawn (views `b1.png`, `b2.png`,
 `b3.png`, `a1.png`, `a2.png`; class maps from `tools/tcw_cls.py`):
 
-- **Where `tcw_o3240` goes**, and what the pad (6623-6656, 3148-3180) at the north end of
+- **Where `tcw_o3240` goes** north of y 3150 on its poly x 6584-6600 (and whether that poly
+  lies on diffusion there: a pull-down east of the rail, R23), and what the pad (6623-6656, 3148-3180) at the north end of
   `tcw_m6320`'s thin metal is on: "Run 3", Read, not drawn. Both lead into stretch A's east side
   (y 3060-3220), which is the next piece.
 - **Stretch A, y 2690-3220, east of the rail.** A metal about 25 px wide along x 6630-6655 from

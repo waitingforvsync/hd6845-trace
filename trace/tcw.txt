@@ -188,16 +188,24 @@ N D 6648,3280 tcw_o3240
 # the load: the strip widens under the poly block (6618-6680, 3314-3368) (the diffusion's edge
 # lines x 6630 and x 6660 run through the poly) and comes out south as the drain, which runs east
 # into the supply pocket tc1 drew (D 6694,3347:6742,3408 with the contact (6708,3378))
-D 6632,3310:6657,3378
-D 6632,3374:6700,3404
+D 6632,3310:6657,3386
+D 6632,3380:6700,3407                 # top edge y 3378, bottom y 3407 (review 2)
 N D 6690,3390 vcc                     # through tc1's contact (6708,3378)
 P 6618,3314:6680,3368
 # the load's gate tie: the block's arm north along x 6662-6680 to y 3204, where its head turns
 # west onto the strip's head: buried contact box (6640-6660, 3200-3220), heavy frame in the
 # chip-2 stripped shot, dark in the clean shot
-P 6662,3204:6680,3320
+P 6662,3204:6680,3374                 # the arm runs 6-8 px on south of the block (review 2)
 P 6640,3202:6680,3220
 B 6638,3200:6660,3222
+# the output's way out (review 2): an L-shaped poly comes down x 6586-6598 from north of y 3150
+# and turns east along y 3200-3218 under the thin metal (no contact) to x 6631; its last 10 px
+# to the box are dark in both chip-2 shots, so that end is drawn uncertain. North of y 3150 it
+# is NOT TRACED (it may lie on diffusion there: notes).
+P 6584,3150:6600,3218
+P 6584,3200:6632,3218
+?P 6628,3202:6644,3218
+N P 6592,3170 tcw_o3240
 # stack 1's first gate poly runs on east of the rail to a pad with a metal contact (6616,3272);
 # a thin metal goes north from it along x 6620 and north-east to a contact (6637,3166) on a pad
 # (6623-6656, 3148-3180). What that pad's poly joins is NOT TRACED (it seems to go east and north
