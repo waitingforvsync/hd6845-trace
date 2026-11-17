@@ -779,14 +779,14 @@ B 6757,3686:6795,3722
 # =====================================================================================
 # Cell B: the NOR north of the second driver (x 6690-7160, y 3405-3625; its output poly
 # runs on south to y 3870 and its channel metal to y 4450).  Run 7, 2026-11-17.
-#     tc1_o3527 = NOR(tc1_o3353, tc1_m7013)
+#     tc1_o3527 = NOR(tc1_o3353, tc1_o3095)
 # East of the rail x 6858-6906, under the thin metal x 6941-6956, a diffusion column
 # x 6928-6968: finger of the rail-contact region / gate row 1 / middle node (output) /
 # gate row 2 / finger of the second driver's rail-contact region.
 #   gate row 1 (tc1_o3353): y 3472-3492. It is the lower row of a C-shaped poly: east to
 #     x 7137-7154, north under the channel metal x 7133-7152 to y 3345, west along
 #     y 3345-3362 to the next cell north (cell A, NOT DRAWN: the port is labelled).
-#   gate row 2 (tc1_m7013): y 3558-3579, east to a pad with the contact (7011,3571) on the
+#   gate row 2 (tc1_o3095): y 3558-3579, east to a pad with the contact (7011,3571) on the
 #     channel metal x 7003-7023, which comes from the north and ends there.
 #   output: buried-contact box (6940-6970, 3510-3546) on the middle node; poly east along
 #     y 3517-3536 to x 7050-7067, south lengthwise under the channel metal x 7048-7068
@@ -807,7 +807,7 @@ M 6817,3405 y3605 w=12             # tc1_m6817, on north: not followed. Dark ove
 M 6948,3405 y3605 w=13             # tc1_o3740's metal from the second driver, on north: not followed. Dark over the box y 3510-3546: no contact (the box is a buried contact: nested outlines at a poly end, tan inside, no hole)
 M 6775,3405 y3600 w=20             # thin metal x 6765-6785 from the north, ending on the pad (6772,3591)
 M 7013,3405 y3585 w=20             # channel metal x 7003-7023 from the north (run 2: from a contact at (7010,3092)), ending on gate row 2's pad: bare ground south of the ring
-N M 7013,3450 tc1_m7013
+N M 7013,3450 tc1_o3095
 M 7058,3405 y4065 w=20             # channel metal x 7048-7068 (tc1_x1's, joined at y 4060): continuous in both metal shots, no ring; the notch at (7052,3718) has no hole in the clean shot
 M 7013,3840 y4450 w=20             # channel metal x 7003-7023 south of the output's pad: no ring on it over y 3870-4450 in either metal shot, no hole in the clean shot. South of y 4450 it turns west along y 4465-4495 to a contact at about (6965,4480): outside the package
 
@@ -887,7 +887,7 @@ M 6716,3330 y3410 w=52             # the supply rail (x 6690-6742); on north: no
 M 6817,3300 y3410 w=12             # tc1_m6817, on north: not followed. Bright over the region; dim over the stub and the arm (y 3374-3422), bright only at x 6818-6824, y 3404-3414 in both chips (B-D of 16): as over cell B's ladder, no contact drawn (no green hole in the clean shot; Ambiguity 18)
 M 6948,3250 y3410 w=13             # tc1_o3740's metal, on north: not followed. Over the finger (y 3280-3296) it is bright between the finger's two edge bars, which run on either side of it: no ring, no hole. Dim over the box y 3338-3371 as over cell B's: no contact drawn
 M 6775,3300 y3410 w=20             # tc1_p3698's thin metal x 6765-6785, on north: not followed (its west edge is dim at y 3257-3263 in both chips: not looked at)
-M 7013,3160 y3410 w=20             # tc1_m7013, on north: only dark bars where it crosses the edges of the poly rows (y 3168, 3190, 3341, 3365, 3383), no ring in either chip, field under it in the clean shot
+M 7013,3160 y3410 w=20             # tc1_o3095, on north: only dark bars where it crosses the edges of the poly rows (y 3168, 3190, 3341, 3365, 3383), no ring in either chip, field under it in the clean shot
 M 7058,3320 y3410 w=20             # tc1_x1's channel metal, on north: bars at the same poly edges, no ring
 
 # ---- diffusion
@@ -905,7 +905,7 @@ C 6708,3378 s=18x40                # ring 6695-6722 x 3355-3400 in the metal sho
 # ---- gate row 1 and its poly from the contact (7100,3180)
 P 6915,3301:7004,3319              # salmon over the column, orange in the open x 6971-6998 in three shots; ends at x 6915 (pink field under the rail west of it)
 P 6986,3172:7006,3319              # north in the open: red-brown in the clean shot and orange in both metal shots all the way (column x 6992; one dull sample in the clean shot at y 3244)
-P 6975,3170:7100,3190              # the row east to the pad; west of x 6975 it goes on across the column (not drawn)
+P 6914,3170:7100,3190              # the row east to the pad; west of the corner it crosses the column as the third gate row of cell C (run 9) and ends at x 6914
 P 7082,3162:7118,3200              # pad
 C 7100,3180                        # bright centre in a dark ring in both metal shots, green hole in the clean shot
 M 7100,3140 y3190 w=19             # the channel metal x 7091-7110, upper piece: from the north (the follower: north to y 2766, west along y 2766 to x 6947, north to its end at (6949,2677)); not drawn north of y 3140
@@ -919,3 +919,85 @@ P 6950,3345:6975,3362              # the C-shaped poly's end in the box
 P 6748,3328:6798,3416              # the block (orange in the open at x 6750 from y 3330 to y 3414 in both metal shots; salmon under the thin metal x 6775)
 P 6748,3398:6834,3416              # its arm east (orange in the gap x 6792-6800 at y 3407 in the chip-1 metal shot)
 B 6808,3394:6838,3420
+
+# =====================================================================================
+# Cell C: the three-input NOR north of cell A (x 6690-7080, y 2940-3240).  Run 9, 2026-11-17.
+#     tc1_o3095 = NOR(tc1_o3740_u, tc1_x1, tc1_m7100)     (tc1_o3740_u: believed tc1_o3740, not joined)
+# On the same column x 6928-6968 under the thin metal x 6941-6956, top to bottom:
+#   finger of rail-contact region 1 (contact (6887,3015)) / gate row 1 (y 3042-3060) /
+#   middle node with the output's buried-contact box (6940-6970, 3077-3113) /
+#   gate row 2 (y 3127-3146, tc1_x1) / finger of rail-contact region 2 (contact
+#   (6877,3146)) / gate row 3 (y 3170-3190, tc1_m7100: drawn in the section "Cell A") /
+#   bottom region (y 3190-3231).
+# The bottom region is the output node too: it runs west as a band y 3206-3222 under the
+# rail, north as a strip x 6818-6836 under tc1_m6817 to the region (6804-6836, 3080-3106),
+# and east again as a band y 3085-3103 under the rail to the middle node: one outline round
+# rail-contact region 2 (both metal shots).
+#   gate row 1: poly y 3042-3060, x 6914-7003; north in the open along x 6988-7003 to
+#     y 2950, west along y 2950-2962 into a box (6936-6974, 2944-2970) on a small diffusion
+#     island under the north end of the thin metal x 6941-6956, which has a metal contact
+#     (6948,2977) there. The box is at the limit of the photos: the join is NOT drawn, and
+#     the poly is labelled tc1_o3740_u (an open join).
+#   gate row 2: poly y 3127-3146 from x 6909 east to a pad with the contact (7056,3138),
+#     the north end of tc1_x1's channel metal x 7048-7068.
+#   output: poly from the box east to a pad with the contact (7010,3093), the north end of
+#     the channel metal x 7003-7023 (formerly tc1_o3095), which ends on cell B's gate row 2.
+#   load: band y 3078-3103 from the region under tc1_m6817 west under the poly block
+#     (6748-6798, 3028-3120) to the supply rail's contact region; the block's top runs east
+#     as an arm (y 3028-3048) onto a stub north of the region: buried contact.
+# Views cache/scratch/tc1/run9/.
+# =====================================================================================
+M 6882,2985 y3245 w=48             # the rail, on north: not followed
+M 6716,3040 y3335 w=52             # the supply rail, on north: not followed
+M 6817,3000 y3305 w=12             # tc1_m6817, on north: not followed. No contact drawn over the stub and the arm (Ambiguity 18)
+M 6775,3000 y3305 w=20             # tc1_p3698's thin metal, on north: not followed. Its west edge is dim at y 3257-3263 in both chips over plain field in the clean shot: nothing under it to contact
+M 6948,2972 y3255 w=13             # tc1_o3740's metal to its north end on the contact (6948,2977). No ring or hole over the bottom region (bright y 3200-3216 between the region's two edge bars), dim over the box y 3077-3113 as over the other boxes: no contact drawn
+M 7013,3085 y3165 w=20             # the channel metal x 7003-7023 from its north end on the contact (7010,3093); only edge bars where gate row 2 passes under it
+M 7058,3128 y3325 w=20             # tc1_x1's channel metal from its north end on the contact (7056,3138) (the follower: ends at (7054,3134); bare ground north of the pad)
+
+# ---- diffusion
+D 6870,2990:6918,3038              # rail-contact region 1
+C 6887,3015 s=26x30                # ring 6872-6903 x 2998-3032 in the metal shot, pits in the clean shot
+D 6912,3018:6968,3038              # its finger east onto the column
+D 6928,3030:6968,3231              # the column: gate row 1 / middle node / gate row 2 / finger 2 / gate row 3 / bottom region
+D 6859,3127:6902,3176              # rail-contact region 2 (its east edge at x 6902: gate row 2 ends 6 px east of it)
+C 6877,3146 s=28x30                # ring 6861-6892 x 3128-3163 in the metal shot, pits in the clean shot
+D 6896,3152:6968,3166              # its finger east onto the column, between gate rows 2 and 3
+D 6832,3085:6932,3103              # the middle node's band west under the rail (tan 206/169/141 from x 6846 to x 6911)
+D 6804,3080:6836,3106              # region under tc1_m6817
+D 6818,3100:6836,3224              # the strip south from it (206/169/141 at y 3160; its outline turns the corner into the band below without a break in both metal shots)
+D 6818,3206:6932,3222              # the band east under the rail to the column's bottom region
+D 6818,3034:6836,3084              # the stub north of the region, to the arm's end
+D 6736,3078:6808,3103              # the load's band (edge lines y 3076 and y 3104 across the block)
+D 6692,3058:6742,3160              # the supply rail's contact region
+C 6705,3078 s=20x26                # ring in the metal shot
+C 6705,3136 s=20x28                # ring in the metal shot, pits in the clean shot
+
+# ---- gate row 1 and its poly from the north
+P 6914,3042:7003,3060              # salmon over the column, orange in the open x 6975-6999; ends at x 6914
+P 6988,2950:7003,3060              # north in the open: orange in the chip-1 metal shot from y 2965 to y 3050 (column x 6997), salmon under the margin of the metal y 2936-2950 at its top
+P 6950,2950:7003,2962              # west into the box (salmon x 6976-7000 at y 2952-2958)
+?D 6936,2966:6966,2986             # what the thin metal's contact lands on: diffusion by railprof (to y 2984, field from y 2985); its extent is not read
+C 6948,2977 s=14x12                # bright centre in a dark ring in both metal shots at the thin metal's end, green hole in the clean shot
+N P 6995,3000 tc1_o3740_u
+# NOT JOINED in the trace (an open join): the poly ends in a box of pale cells with nested outlines
+# (6936-6974, 2944-2970), 10 px north of the contact, too blurred at 9x to read; a tan band runs
+# on west from the box along y 2943-2962 under the metal y 2933-2948 (not read). Believed: the
+# poly is joined to the thin metal there, so that gate row 1 is tc1_o3740.
+
+# ---- gate row 2 (tc1_x1)
+P 6909,3127:7071,3146
+P 7042,3120:7074,3156              # pad
+C 7056,3138                        # bright centre in a dark ring in both metal shots, green hole in the clean shot
+
+# ---- output
+B 6940,3077:6970,3113
+P 6950,3085:7030,3103
+P 6995,3075:7032,3112              # pad
+C 7010,3093                        # bright centre in a dark ring in both metal shots, green hole in the clean shot
+N P 6985,3094 tc1_o3095
+
+# ---- load
+P 6748,3028:6798,3120              # the block (orange in the open at x 6750 from y 3031 to y 3116 in both metal shots)
+P 6748,3028:6822,3048              # its arm east (orange in the gap x 6792-6801 at y 3038)
+B 6804,3024:6834,3052
