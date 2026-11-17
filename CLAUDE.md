@@ -17,11 +17,14 @@ access). In short:
    --what "..."` pulls main again, then pushes `claims/PREFIX.md` to main at once, so
    everyone sees it.
 3. Work on branch `PREFIX` in a working tree of your own (`tools/newwork.sh PREFIX`),
-   touching only your own files; ship each finished piece with `tools/ship.sh`.
+   touching only your own files (among them `ports.d/PREFIX.txt`, the package's ports, which
+   `tools/ports.py` joins up); ship each finished piece with `tools/ship.sh`.
 4. Read `notes/tracing-guide.md` before tracing; follow it.
-5. **Independent review** against the photos by a fresh reviewer agent: one full review, then
-   short fix checks of only what changed, at most three rounds in all; recorded in the block
-   notes.
+5. **Independent review** against the photos by a fresh reviewer agent: one full review (two
+   or three small cells of the same build may share it), then short fix checks of only what
+   changed, at most three rounds in all; only findings that change a connection count against
+   that limit (geometry-only ones are fixed and shown harmless with `tools/sameconn.py`);
+   recorded in the block notes.
 6. Merge main into the branch, pass `tools/mergecheck.py PREFIX`, push to main, and hand
    off with `tools/claim.py done` (proposals for the coordinator's files go there, not in
    those files). Without write access: a pull request with the template instead.

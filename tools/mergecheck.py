@@ -2,6 +2,7 @@
 """The gate a package's branch must pass before it is pushed to main.
 
 usage: tools/mergecheck.py PREFIX
+       tools/mergecheck.py --review-test FILE   (only check 5, on any notes file; changes nothing)
 
 Run it on the package's branch, in its working tree, after merging the shared
 repository's main into the branch. It prints each check and ends with PASS or FAIL
@@ -9,15 +10,22 @@ repository's main into the branch. It prints each check and ends with PASS or FA
 
  1. the branch contains the remote's current main (merge it first);
  2. the files changed against main are the tracer's own (trace/PREFIX*.txt,
-    notes/blocks/PREFIX.md, floorplan.d/PREFIX.txt, tools/PREFIX_*.py), notes/signals.md,
+    notes/blocks/PREFIX.md, floorplan.d/PREFIX.txt, ports.d/PREFIX.txt, tools/PREFIX_*.py),
+    notes/signals.md,
     notes/operation.md, or other blocks' trace files (allowed, listed: each must be a fix
     of a clear error, in a commit of its own, and named in the handoff). Anything else
     (the coordinator's files, out/, claims/, shared tools, .claude/, .github/, trace/align.json)
-    fails;
+    fails. ports.d/PREFIX.txt, if the package has one, must parse (tools/ports.py); a
+    package without one gets a reminder, not a failure;
  3. the full extraction (no TRACE): 0 errors, 0 warnings;
  4. every net name is in the glossary, and no former name is left in the documents;
- 5. notes/blocks/PREFIX.md has a "## Review" section that records a clean final round
-    (a line containing "no findings" or "no issues");
+ 5. notes/blocks/PREFIX.md has a "## Review" section whose last verdict line is a clean one.
+    A verdict line starts "Round N:". Clean is "Round N: no findings." (or "no issues."), or
+    "Round N: no findings that change a connection." for a round whose confirmed findings
+    were geometry only (notes/workflow.md, step 6); that second form also needs the proof in
+    the section: the words "connections identical", which tools/sameconn.py prints. Notes
+    with no "Round N:" line at all (written before that form was used) pass on the words
+    "no findings" or "no issues" anywhere in the section, as before;
  6. tools/unsure.py: nets that are joined only through uncertain items on the branch but
     not on main (listed; each must be written up in the block notes, not a failure);
  7. a no-op merge into main: main must fast-forward to the branch;
@@ -62,8 +70,38 @@ def unsure_nets(cwd):
     return set(re.findall(r'^(\S+): \d+ pieces without the uncertain items', out, re.M))
 
 
+VERDICT = re.compile(r'^[\s*_>-]*Round\s+\d+[*_]*\s*:[*_]*\s*(.*?)[\s*_]*$', re.I | re.M)
+CLEAN = re.compile(r'^no (findings|issues)\.?$', re.I)
+CLEAN_CONN = re.compile(r'^no (findings|issues) that changes? a connection\.?$', re.I)
+
+
+def review_verdict(txt):
+    """(ok, why) for check 5, from the text of a block's notes."""
+    if '## Review' not in txt:
+        return False, 'no "## Review" section'
+    rev = txt.split('## Review', 1)[1].split('\n## ', 1)[0]
+    verdicts = VERDICT.findall(rev)
+    if not verdicts:
+        if re.search(r'no (findings|issues)', rev, re.I):
+            return True, 'no "Round N:" verdict line; passed on the words "no findings" (the older form)'
+        return False, 'no line "Round N: no findings."'
+    last = verdicts[-1].strip()
+    if CLEAN.match(last):
+        return True, ''
+    if CLEAN_CONN.match(last):
+        if re.search(r'connections identical', rev, re.I):
+            return True, 'last round: geometry-only findings, with tools/sameconn.py\'s "connections identical"'
+        return False, ('the last round says "no findings that change a connection" but the section does not record '
+                       'tools/sameconn.py\'s "connections identical" (run it on the package and on every file)')
+    return False, 'the last verdict line is not clean: "Round ...: %s"' % last[:80]
+
+
 def main():
-    if len(sys.argv) != 2:
+    if len(sys.argv) == 3 and sys.argv[1] == '--review-test':
+        ok, why = review_verdict(open(sys.argv[2]).read())
+        print('%s  5. Review section ends in a clean round%s' % ('ok  ' if ok else 'FAIL', ('\n      ' + why) if why else ''))
+        sys.exit(0 if ok else 1)
+    if len(sys.argv) != 2 or sys.argv[1].startswith('-'):
         sys.exit(__doc__)
     p = sys.argv[1]
     remote = canon()
@@ -81,8 +119,8 @@ def main():
           '' if contains else 'run: git merge %s/main, resolve, re-run' % remote)
 
     changed = git('diff', '--name-only', '%s...HEAD' % main_rev)[1].split()
-    own = re.compile(r'^(trace/%s[^/]*\.txt|notes/blocks/%s\.md|floorplan\.d/%s\.txt|tools/%s_[^/]*\.py)$'
-                     % ((re.escape(p),) * 4))
+    own = re.compile(r'^(trace/%s[^/]*\.txt|notes/blocks/%s\.md|floorplan\.d/%s\.txt|ports\.d/%s\.txt|tools/%s_[^/]*\.py)$'
+                     % ((re.escape(p),) * 5))
     shared_ok = {'notes/signals.md', 'notes/operation.md'}
     others = [f for f in changed if f.startswith('trace/') and f.endswith('.txt') and not own.match(f)]
     bad = [f for f in changed if not own.match(f) and f not in shared_ok and f not in others
@@ -90,6 +128,13 @@ def main():
     check(not bad, '2. only the package\'s own files, the glossary and operation.md changed',
           ('not allowed: ' + ' '.join(bad)) if bad else
           ('other blocks\' trace files changed (name each in the handoff): ' + ' '.join(others)) if others else '')
+
+    if os.path.exists(os.path.join(ROOT, 'ports.d', p + '.txt')):
+        rc, out, err = run(PY, 'tools/ports.py', '--prefix', p)
+        perr = [l for l in out.splitlines() if l.startswith('ERROR') and ('ports.d/%s.txt:' % p) in l]
+        check(not perr and bool(out), '2b. ports.d/%s.txt parses' % p, '\n      '.join(perr) or err.strip()[:300])
+    else:
+        print('info  2b. no ports.d/%s.txt: expected for new work (notes/tracing-guide.md, section 8)' % p)
 
     rc, out, err = run(PY, 'tools/netlist.py', env={'TRACE': ''})
     head = (out.splitlines() or [err.strip()])[0]
@@ -104,10 +149,8 @@ def main():
 
     notes = os.path.join(ROOT, 'notes', 'blocks', p + '.md')
     txt = open(notes).read() if os.path.exists(notes) else ''
-    rev = txt.split('## Review', 1)[1] if '## Review' in txt else ''
-    rev = rev.split('\n## ', 1)[0]
-    clean = re.search(r'no (findings|issues)', rev, re.I)
-    check(bool(rev) and bool(clean), '5. notes/blocks/%s.md has a Review section ending in a clean round' % p)
+    ok, why = review_verdict(txt)
+    check(ok, '5. notes/blocks/%s.md has a Review section ending in a clean round' % p, why)
 
     with tempfile.TemporaryDirectory(dir=os.path.join(ROOT, 'cache', 'scratch')) as d:
         wt = os.path.join(d, 'main')

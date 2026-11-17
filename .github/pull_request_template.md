@@ -16,12 +16,16 @@ what is left (the block notes' Not done) -->
 - `tools/signals.py`: <!-- 0 not in the glossary; open joins: ... -->
 - `tools/signals.py --docs`: <!-- no former names left -->
 - `tools/unsure.py`, compared with main: <!-- nets newly joined only through ? items, and why each is acceptable -->
+- `tools/ports.py --prefix PREFIX`: <!-- ports.d/PREFIX.txt parses, N ports; each meeting with another package it lists, and whether names, layers and directions agree -->
 
 ## Independent review
 
 <!-- who reviewed (agent/model or person), what it was told to suspect, what it checked
 and at what zoom, what it found, what was changed, what it could not check.
-The block notes carry the same as their "Review" section. -->
+The block notes carry the same as their "Review" section, whose last line is
+"Round N: no findings." or, if the last round's findings were geometry only,
+"Round N: no findings that change a connection." with both `tools/sameconn.py` results
+("connections identical"). Pieces reviewed together in one round: say which. -->
 
 ## For the coordinator
 
