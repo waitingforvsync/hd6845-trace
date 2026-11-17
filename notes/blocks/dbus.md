@@ -65,6 +65,15 @@ Traced, extracting (127 transistors, 85 nets, 0 errors, 0 warnings), overlay-che
     to a pad, a metal strap and a contact on a second rectangle: the pattern of chain 0,
     laid out differently in every chain. See "The capacitor taps of chains 1-5".
 
+- **run 7 (2026-11-17 16:40 -0600; Matt Godbolt's second session; no geometry changed):**
+  - **`d_hiz` has no tap inside the region.** Its metal (x 17631-17651, drawn in `dpad`) was
+    followed from D0's contact (y 7382) to the cross-under (y 18148): no corner, and one
+    wide stretch only, y 17080-17090, the known west branch south of the region. See
+    "A look along `d_hiz`".
+  - **Ambiguity 9 (AMB-021) read again**, side by side with two buried boxes and a real pad
+    on the same metal: it compares as a buried-contact box. Still assumed "no contact",
+    still not provable from these photos. See Ambiguity 9.
+
 Not traced: the latches of bits 4-7 (west of this region, see "Where bits 4-7 go"),
 D7's input line south of y 17000, `d6_out_n` and `d7_out_n`. See "Not done".
 
@@ -745,6 +754,27 @@ bus lines.
    there: the tab and box are a `?D`, and `d6_in`'s metal is drawn through. To settle: the
    same spot at 6-8x in a better photo, or the logic (if D6 read back as D0's data ever
    shows in behaviour, the contact is real).
+   **Run 7 (2026-11-17 16:40 -0600), a second reader, same conclusion.** The spot at 6x in
+   all four shots (`c2_amb21.png`) and at 3x beside three references on the same metal
+   (`c2_amb21_cmp.png`: `mosaic.py 17255 16445 100 90 --offsets "0,0 0,-513 0,-358 0,174"`,
+   layers `acid1b`, `metal1`, `metal`, `acid`): chain 7's two buried boxes (y 15975, 16130)
+   and the real pad (17297,16662).
+   - The real pad has all three marks of a contact: the metal widened to a pad about 40 px
+     across with a bright centre in both metal shots, a dark pit in the pale pad in the
+     clean shot, a pitted box in the chip-2 stripped shot. The box here has none of them.
+   - In the clean shot the box here is the same object as chain 7's two: a heavy outline
+     with a clean pale square centre, no pit. It sits 6-8 px further west than they do
+     relative to the metal (box x 17302-17317 inside its outline, against 17308-17323), so
+     the metal lies over its west third where at chain 7 it passes beside the box. That
+     is trap 22's pass-over (a thin metal dark for 35-80 px over a buried box, both metal
+     shots, no pad, no hole), deeper here because the metal is on the box, not beside it.
+   - `tools/textmap.py 17270 16455 17340 16525 3 --acid`: over y 16482-16509 the metal's
+     columns read 2-6 in chip 2 and 2-8 in chip 1 (C-D on the plain line), no bright
+     centre; the clean map has no `g` hole inside the box (0-6); the chip-2 stripped map
+     is `-`/0-4 inside (dark), as the notes above say.
+   Not explained, as before: why the interior is darker in the chip-2 stripped shot than
+   chain 7's boxes. A dead-end buried box is not new in this column (Ambiguity 2).
+   **AMB-021 stays as it is: assumed no contact, nothing drawn but the `?D`.**
 10. **Load sizes in `dbus_in2`.** Stages 2 and 3: under the thin metal the load gate lies
    on the strip: 2 px rows of the clean shot there are poly over field y 15314-15322, an
    edge, the channel colour (R 220-242, R-G 70-106) y 15330-15349, 4 px of tan, an edge,
@@ -1083,6 +1113,36 @@ run and chain 2's two west runs were checked by survey and profile, not at 4x.
 
 Round 1: no findings that change a connection.
 
+### Run 7 (2026-11-17 16:40 -0600): no review round
+
+Run 7 changed no geometry (`git diff 17f1585 -- trace/dbus.txt` is empty), so there was
+nothing for a reviewer to check against the photos and none was started; the last round
+above stands. What run 7 read is in "A look along `d_hiz`" and Ambiguity 9, with the
+commands, so that it can be checked.
+
+## A look along `d_hiz` (run 7, 2026-11-17 16:40 -0600)
+
+The line is `dpad`'s (metal x 17631-17651, `M 17641,7374 y18155`). Looked at here because
+its driver was listed under this region.
+
+- `tools/t.sh dbus follow.py 17641 7420 S`: no corner; "wide from 17638,17080 to
+  17638,17090" (the west branch `dpad`'s review found, south of this region); end at
+  (17644,18148), the cross-under. `... N`: ends at (17642,7382), D0's contact.
+- Its twenty contact candidates, each accounted for:
+
+| y | What it is | How |
+|---|---|---|
+| 9139, 10873, 12456, 14039, 15645 (and 17249) | the cells' own contacts (17637,7385 + cell offset; the follower reports each about 18 px low) | `textmap.py 17612 9092 17675 9160 3 --acid`: ring, bright centre, `g` hole, poly pad `F` in the stripped map |
+| 9290-9573 (eight) | `d1_out_n`'s poly directly under the metal, y 9219-9609 | text maps y 9275-9400, 9440-9590: metal C-E at one width throughout, clean map 5-9 (poly), no `g` hole |
+| 14500, 14798 | `d5_out_n`'s poly under the metal, y 14403-14899 | the same, y 14480-14522 and 14776-14820 |
+| 11168 | nothing: a soft green patch in the clean shot (no outline, shading off over 50 px), plain field in the chip-2 stripped shot, metal unwidened in both chips; the follower's candidate is a dark blob on the metal's west edge | `c2_hiz11168.png`, 5x, four shots |
+| 16754, 16827 | nothing: the same kind of soft green patch at the metal's east edge (y 16817-16840), dark blobs on the west edge at y 16745, 16805, 16840; no pad, no poly under the line in the stripped shot | `c2_hiz16800.png`, 5x, four shots |
+
+So between y 7374 and 17000 `d_hiz` touches nothing but the six pad cells (D0-D5; D6's and
+D7's are south of the region). What this does not cover: a tap in poly or diffusion that
+leaves one of the cell contacts' pads inside a pad cell (that is `dpad`'s cell, reviewed
+there).
+
 ## Not done
 
 - **The latches and bus inverters of bits 4-7**: not in this region. `d4_d`..`d7_d` leave
@@ -1108,7 +1168,13 @@ Round 1: no findings that change a connection.
 - Seen in run 5 and not looked at: a second staircase of pads with polys west lies
   between the end pads of `d2_out_n`..`d5_out_n` (about (16862,15990), (16905,16125),
   (16950,16255)), on or west of the region's edge.
-- Channel wiring x 17590-17830: `d_hiz`'s driver.
+- `d_hiz`'s driver: not in this region (run 7: no tap between y 7374 and 17000). The lead
+  is the metal that leaves it west at (17630,17085), in `busC`'s area.
 - `dbus_le` west of x 16950: drawn to the region's edge only; its eight taps and its
   south-west end (16772,15800).
-- Ambiguity 9 (the box beside `d6_in`'s metal).
+- Ambiguity 9 (the box beside `d6_in`'s metal; AMB-021): read twice now (runs 3 and 7),
+  assumed no contact. Nothing more can be had from these photos; it is settled by a better
+  photo or by behaviour, not by another look.
+
+**Inside the region nothing else is left** (run 7): every other item above leaves it, to
+`dlat`, `busC` or `bd2` (rest).
