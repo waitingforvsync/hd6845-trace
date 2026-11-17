@@ -1,19 +1,19 @@
 {
  "who": "dp111",
- "generated": "2026-11-17T21:35:54+00:00",
+ "generated": "2026-11-17T22:20:16+00:00",
  "price_source": "Claude API list prices per million tokens, as of 2026-11-03",
  "unpriced_models": [],
- "responses": 4466,
+ "responses": 4670,
  "first": "2026-11-16T22:18:49.326000+00:00",
- "last": "2026-11-17T21:35:34.793000+00:00",
- "total_cost": 521.14,
- "review_cost": 141.33,
+ "last": "2026-11-17T22:19:42.223000+00:00",
+ "total_cost": 548.49,
+ "review_cost": 145.86,
  "tokens": {
-  "input": 9150,
-  "output": 3970192,
-  "cache_write_5m": 10001013,
-  "cache_write_1h": 6204161,
-  "cache_read": 1098139835
+  "input": 9574,
+  "output": 4214624,
+  "cache_write_5m": 10666631,
+  "cache_write_1h": 6252159,
+  "cache_read": 1148842708
  },
  "by_model": {
   "claude-opus-5-5": {
@@ -21,18 +21,26 @@
    "responses": 1584
   },
   "claude-fable-5-2": {
-   "cost": 334.57,
-   "responses": 2882
+   "cost": 361.92,
+   "responses": 3086
   }
  },
  "by_package": {
   "(coordination)": {
-   "cost": 106.68,
+   "cost": 112.43,
    "review_cost": 5.32,
-   "responses": 806,
+   "responses": 837,
    "models": {
     "claude-opus-5-5": 149,
-    "claude-fable-5-2": 657
+    "claude-fable-5-2": 688
+   }
+  },
+  "tl1": {
+   "cost": 73.03,
+   "review_cost": 22.86,
+   "responses": 573,
+   "models": {
+    "claude-fable-5-2": 573
    }
   },
   "bust": {
@@ -42,14 +50,6 @@
    "models": {
     "claude-opus-5-5": 430,
     "claude-fable-5-2": 250
-   }
-  },
-  "tl1": {
-   "cost": 54.86,
-   "review_cost": 18.34,
-   "responses": 434,
-   "models": {
-    "claude-fable-5-2": 434
    }
   },
   "amr": {
@@ -71,12 +71,12 @@
    }
   },
   "tla": {
-   "cost": 29.72,
+   "cost": 33.14,
    "review_cost": 5.95,
-   "responses": 165,
+   "responses": 199,
    "models": {
     "claude-opus-5-5": 7,
-    "claude-fable-5-2": 158
+    "claude-fable-5-2": 192
    }
   },
   "ral": {
@@ -297,6 +297,6 @@
  },
  "by_day": {
   "2026-11-16": 4.76,
-  "2026-11-17": 516.39
+  "2026-11-17": 543.73
  }
 }

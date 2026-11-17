@@ -5,22 +5,32 @@
 # cluster's west column) is shared with tla, whose rails and units stand among tl1's.
 
 # East side (x 2817), rows that run on east
-tl1_w3678   P  2817,2803-2821  in   row above the cluster; its only other end is gate 2 of the NOR at y 3558-3742
+tl1_w3678   M  2856,2803-2820  in   metal east from the pad (2830,2811) at the end of the row y 2812; its only other end is gate 2 of the NOR at y 3558-3742
 tl1_w2857   P  2817,2848-2866  in   row above the cluster; its other ends are gates (the data of the first latch)
 tl1_w3594   P  2817,2890-2908  in   row above the cluster; its other ends are four gates (NOR tl1_w3636; the enable of the second latch)
 tl1_w4025   P  2817,5362-5382  ?    row under the foot, on east past x 3400; gates of the two units at y 3982 and y 4590
 tl1_w4937   P  2817,5450-5470  in   row under the foot, on east past x 3400; gate 2 of rcs_e4's NOR
 
+# North of y 2790 (wiring)
+tl1_w3333   M  2852,2545-2562  in   metal east from the pad (2826,2553) at the end of the row y 2551; the wire's other ends are two gates of the third latch
+tl1_w2637   M  2852,2630-2645  ?    metal east from the pad (2827,2637) at the end of the row y 2636
+tl1_w2637   P  2448-2463,2500  ?    the row's poly comes from the north
+tl1_w2592   P  2817,2582-2600  ?    row y 2591, on east to a pad at about (2867,2595)
+tl1_w2592   P  2493-2508,2500  ?    the row's poly comes from the north
+rcs_c1      P  2405-2420,2500  out  rcs_c1's poly line (from tla's row y 2986, west, north, east along y 2720), on north
+tl1_w2506   P  2100,2498-2515  ?    poly along the strip's north edge, from the west
+tl1_w2506   P  2372-2388,2498  ?    the same poly turns north out of the strip
+vss         M  2600-2650,2500  -    R1 on north
+
 # Onto tla's geometry
 rcs_e4      M  2494-2506,5232  out  the metal x 2500 runs into tla's pad (2497,5238)
-ck_out      P  2545,6054-6072  in   gate row into the small cluster, from a second contact (2372,6061) on tla's trunk
+
+# South of the small cluster (rows straight east under the rails) and the south edge
+tl1_w6022   P  2817,6186-6204  out  the third latch's output (west column of the small cluster), row east under R1, thin W, R2
+tl1_w5936   P  2817,6228-6246  ?    row east under the rails; its other end is the poly from the pad-ring side (below)
+tl1_w5978   M  2320-2332,6350  in   metal x 2326 on south out of the strip; its other end is a gate (the third latch's clear)
+vss         M  2600-2650,6350  -    R1 on south
+vcc         M  2780-2832,6350  -    R2 on south
 
 # Ends of drawn wires inside the region (where the drawing stopped)
-tl1_w3333   P  2640,2543-2560  ?    east end of the top pad's poly, under R1
-tl1_w3333   P  2545,5793-5810  ?    row into the small cluster
-tl1_w5978   P  2545,5969-5987  ?    row into the small cluster
-tl1_w5978   M  2320-2332,6350  ?    metal x 2326 on south out of the strip
-tl1_w6022   P  2545,6013-6031  ?    row into the small cluster
-tl1_w6022   P  2545,6186-6204  ?    row into the small cluster
-tl1_w5936   P  2545,6228-6246  ?    row into the small cluster
 tl1_w5936   P  2110,5926-5944  ?    west end as drawn; the poly goes on to a corner (2096,5935) and north

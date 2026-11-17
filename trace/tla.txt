@@ -741,10 +741,13 @@ B 2716,7896:2738,7928
 M 2512,7907 x2370 y5836 w=18
 P 2348,5830:2386,5866
 C 2365,5847
-P 2380,5849 x2735 w=20                # ... east across the diffusion under the VSS rail x 2600-2655 (bright there: it is
-P 2726,5826:2764,5862                # a gate of a unit of the small cluster, not drawn) to a pad with a contact
-C 2745,5842                          # (2745,5842) under a thin vertical metal x 2728-2760 (not followed)
-M 2744,5822 y5868 w=28
+P 2380,5849 x2545 w=20                # ... east to the west column of the small cluster, where it is a gate under the VSS
+# rail x 2600-2650 and ENDS at the rail's east edge (x about 2658): the unit is drawn in trace/tl1.txt.
+# (Corrected 2026-11-17 from tl1: this poly was drawn on to x 2735 and onto the pad with a contact (2745,5842).
+# The gap between the rail and thin metal W, x 2667-2676, is plain ground on the row in both metal shots
+# (148-161/109-148/75-81 at y 5839-5849, like the same place in the two other copies of the unit at y 4498 and
+# y 3890) and field in the chip-2 stripped shot (147/147/90). The pad (2745,5842) is the top pad of the thin metal
+# x 2742 on the top bar of a load plate, a different net; it is drawn in trace/tl1.txt.)
 M 2500,7895 y8000 w=22
 N M 2370,7000 ck_out
 
