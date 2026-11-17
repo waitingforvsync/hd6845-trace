@@ -1,7 +1,8 @@
 # ral: the stage in front of the RA pad drivers, x 13990-16330, y 4250-4560.
 # Five copies of one cell (pitch 434, one gap of 563): notes/blocks/ral.md.
-# This file draws only what is read with confidence. Inverter 1 (node a -> ral_n1_{}) is NOT
-# drawn yet (see the notes, "Not done").
+# The cell: pass transistor (strobe) -> node a; inverter 1 = NOR(node a, cnt_gab) -> ral_n1;
+# inverter 2 = NOT ral_n1 -> output; hold device (gate VSS) from the output back to node a.
+# Read from medians of the copies (5 RA; 14 MA turned back) and single shots: notes/blocks/ral.md.
 @block ral
 @w M=16 P=20
 @s 26x26
@@ -10,31 +11,80 @@
 # --- supply rails, one piece per cell (they run on through the band).
 # Top rail VCC, middle rail VSS: by device orientation (pull-down sources on the middle
 # rail, load-shaped blocks under the top one), not followed to a labelled rail.
-M 13996,4220:14452,4268
+# The top rail's piece starts at x 13960 so that it covers inverter 1's VCC contact.
+M 13960,4220:14452,4268
 N M 14000,4244 vcc
 M 13996,4397:14452,4446
 N M 14000,4421 vss
 
-# --- pull-down Tf: gate = the line y 4350 (cnt_gab), source on the middle rail.
-# Poly pad under the line's tab, contact (14157,4318); poly strip down across the
-# diffusion box; drain the strip x 14172-14196 (where it goes: not drawn).
+# --- pull-down Tf of inverter 1: gate = the line y 4350 (cnt_gab), source on the middle rail.
+# Poly pad under the line's tab, contact (14157,4318), on a field island (outline
+# 14130-14192 x 4290-4350 in both metal shots; the diffusion of ral_n1 goes round it).
+# The poly strip runs down across the diffusion from y 4352 (the island's lower edge,
+# under the line's metal: bright salmon in the clean shot at (14160,4360), as at
+# (14160,4420)) to the box's lower edge y 4446: W about 94. West of the gate the
+# diffusion is the VSS region (contact (14118,4423)), which is one piece with the
+# source side of the node-a pull-down; east of it the drain, ral_n1.
 P 14142,4303:14176,4346
 C 14158,4320 s=24x24
 M 14140,4300:14176,4352
 P 14150,4340:14170,4462
-D 14102,4380:14196,4446
+D 14106,4370:14196,4446
+D 14100,4352:14172,4376
 C 14118,4423 s=28x28
-N D 14185,4420 ral_tf_{}
+
+# --- inverter 1: ral_n1 = NOR(node a, cnt_gab).
+# Pull-down on node a: the poly bar y 4322-4344 over the diffusion 14014-14108 x 4301-4376
+# (edges of the diffusion cross the bar at x 14010 and x 14108 in both metal shots):
+# W about 94, L 22. South of the bar the diffusion is VSS (it runs east under the
+# line's metal to Tf's source and the contact (14118,4423)); north of it ral_n1.
+# The bar ends east on the field island of Tf's pad (x 14128, 12 px short of the pad).
+# West, the bar goes on 30 px over field, turns south (x 13984-14006, under the line's
+# metal without a contact) and ends in a buried contact (heavy-outlined box
+# 13982-14016 x 4390-4420, light centre: metal1 medians of both groups, single shots of
+# s1) on a diffusion wire y 4395-4410 under the VSS rail, which runs east to x 14086 and
+# south along x 14065-14086 into node a east of the pass gate.
+D 14014,4301:14108,4376
+P 13984,4322:14128,4344
+P 13984,4322:14006,4416
+P 13984,4392:14014,4416
+B 13982,4390:14018,4420
+# Load: VCC contact (13980,4240) (ring in both metal shots, specks in the clean shot) on
+# a land 13966-14072 x 4220-4268; a strip x 14037-14072 from the land south into ral_n1;
+# the poly block 14016-14110 x 4246-4296 over the strip (its edges show as lines across
+# the block at x 14036 and x 14072): W about 35, L 50. The block's south-east corner is
+# tied to ral_n1 by a buried contact (heavy-outlined box 14088-14110 x 4276-4298, light
+# centre). The block's west end x 14016-14036 is drawn over field (the land's outline
+# turns up round it in the clean shot; not certain, and it changes only the load's size).
+C 13980,4240 s=28x26
+D [ 13966,4220 x14072 y4302 x14037 y4240 x14012 y4268 x13966 ]
+P 14016,4246:14110,4296
+B 14086,4272:14112,4300
+# ral_n1's diffusion: north of the bar (y 4301-4322), a neck up round the load's corner
+# (x 14088-14128), a band y 4274-4292 above the pad's island to the buried contact at the
+# top of inverter 2's gate poly (box 14240-14272 x 4270-4295, light centre), and a strip
+# x 14192-14206 down the island's east side into Tf's drain.
+D 14088,4274:14128,4304
+D 14088,4274:14262,4292
+B 14244,4272:14274,4296
+D 14192,4274:14206,4360
+D [ 14170,4352 x14206 y4368 14196,4386 y4446 x14170 ]
 
 # --- input pass transistor: rax_o# -> node a, gate = the strobe line y 4548 (ral_stb).
-# The input poly (drawn by rab for bit 0, ending at x 14000) lands on the strip's west
-# end by a buried contact (round ring at (14000,4495) in both stripped shots: ?).
-# The strip y 4479-4494 is diffusion from x 14015 to x 14315 (colour profile along
-# y 4486, tools/ral_prof.py): it passes under the strobe poly and on under the lower
-# poly block. The buried contact is drawn outside the
-# cell, for s0 only; the other copies' inputs are drawn after the instances.
+# The input poly (drawn by rab for bit 0, ending at x 14000) lands on the diffusion's
+# west end by a buried contact (round ring at (14000,4495) in both stripped shots: ?);
+# it is drawn outside the cell, for s0 only; the other copies' inputs are drawn after
+# the instances.
+# The gate poly is x 14033-14058 (row profile y 4465), top end y 4421 under the VSS
+# rail. The diffusion under it runs from y 4434 (edge under the poly, clean shot) to
+# y 4502 (edge across the poly in the metal shot; none between): W about 68, L 25.
+# East of the gate the diffusion is node a: the strip y 4479-4495 east to the hold
+# device (colour profile along y 4486, tools/ral_prof.py: diffusion from x 14015 to
+# 14315), and the wire north along x 14065-14086 and west along y 4395-4410 to the
+# buried contact of the pull-down's gate (above).
 D 13988,4479:14340,4495
-P 14028,4430:14054,4536
+D [ 13998,4434 x14065 y4410 x13990 y4395 x14086 y4502 x13998 ]
+P 14033,4421:14058,4536
 P 14024,4530:14058,4564
 C 14041,4547 s=24x24
 N D 14100,4487 ral_a_{}
@@ -43,51 +93,61 @@ N D 14100,4487 ral_a_{}
 # gate is the poly pad 14200-14246 x 4398-4446, contacted to the VSS rail (ring in the
 # metal shot at (14222,4425), pale centre on poly in the clean shot). Upper half of the
 # block lies over field (row profile y 4462: field at x 14185-14195 and 14300-14360); the
-# dark line at y 4470-4476 across the block is the strip's edge under the poly; the one
-# at y 4447 between pad and block is the VSS rail's edge (the join itself is not
-# resolved at any zoom: ?). Same structure as cdp2_lat's hold device: W/L about 15/90,
-# gate on VSS, believed depletion-mode.
+# dark line at y 4470-4476 across the block is the strip's edge under the poly.
+# Pad and block are one poly: the dark line at y 4447 between them in the metal and
+# chip-2 stripped shots is the VSS rail's edge; in the clean shot (no metal) the columns
+# x 14210, 14225, 14240 of both group medians go from the pad's colour to the block's
+# with no edge line (darkest 128/79/52 at x 14225, where an edge reads 40-80/30-50/20-35),
+# and the west outline x 14200 runs unbroken from y 4400 to the block's foot in the
+# chip-1 metal shot of both medians (cache/scratch/ralinv/h1.png, h3.png). Was `?P`.
+# Same structure as cdp2_lat's hold device: W/L about 15/90, gate on VSS, believed
+# depletion-mode.
 P 14200,4398:14246,4446
 C 14223,4422 s=26x26
-?P 14200,4440:14246,4452
+P 14200,4440:14246,4452
 P 14200,4448:14290,4500
 A 14205,4475:14285,4500 kind=hold
-# East end of the strip: a heavy-outlined patch where it meets the output poly's bend
-# (clean shot, 14315-14347 x 4470-4500): taken as a buried contact, so the hold device
-# feeds the output back to node a (?).
-?B 14315,4472:14347,4500
+# East end of the strip: a buried contact onto the west end of the output poly's bend:
+# a box 14320-14347 x 4474-4500 with a heavy outline and a light centre, the poly's
+# orange starting at its east edge, the strip (diffusion colour at x 14298-14304, row
+# y 4487) entering from the west. The same look as the cell's three other buried
+# contacts, in the clean shot (single shots), the chip-1 metal shot of both medians and
+# the chip-2 stripped shot of the MA median (h1.png, h2.png, h3.png). Was `?B`. So the
+# hold device feeds the output back to node a.
+B 14315,4472:14347,4500
 
-# --- inverter 2 (the output stage), read from the median of all nineteen copies
-# (tools/ral_comp19.py: 5 RA + 14 MA copies, the MA ones turned back; views at 4.2x,
-# cache/scratch/ral/c19r.png, c19t.png, and in the stripped shot c19.png).
-# Load: VCC contact (14330,4252) (ring in the metal shot) onto a land; a poly block
-# 14295-14395 x 4280-4312 over it as gate, tied to the output poly x 14372-14395 (one poly).
-# Output node: diffusion below the load, y 4312-4340, and down x 14345-14370 to the
-# pull-down's drain; joined to the output poly by a buried contact (heavy-outlined box
-# 14365-14410 x 4418-4450; drawn only to x 14396, the poly's edge: in MA copy m0 the
-# full box, turned, touched tla's clk_tl inverter diffusion and shorted MA0 to VSS).
-# Pull-down: L-shaped poly (vertical x 14320-14345 from y 4350 to 4452, west along
-# y 4350-4372 to x 14250, up x 14255-14280 to y 4320) crossing the diffusion between the
-# VSS-contacted box 14255-14330 x 4385-4445 (contact (14282,4422), speckled in the clean
-# shot) and the drain strip x 14345-14370. Its gate net is ral_n1_{}: believed NOT node a
-# (inverter 1), not drawn.
+# --- inverter 2 (the output stage): output = NOT ral_n1.
+# Load: VCC contact (14330,4252) (ring in the metal shot) onto a strip x 14300-14360; the
+# poly block 14283-14395 x 4279-4316 over it as gate (it overhangs the strip's west edge
+# by 15 px), one poly with the output poly x 14372-14395.
+# Pull-down: ONE diffusion 14229-14362 x 4322-4447 (its west edge steps in to x 14252
+# below y 4391, beside the hold device's gate pad), cut in two by the Z-shaped gate
+# poly: down x 14247-14270 from the buried contact on ral_n1 to y 4374, east along
+# y 4353-4374, down x 14321-14344 to y 4453. South-west of the Z is VSS (contact
+# (14282,4422), speckled in the clean shot); north-east of it the output node, which is
+# the foot of the load's strip and the strip x 14344-14362 down to the buried contact on
+# the output poly (heavy-outlined box 14365-14410 x 4418-4450; drawn only to x 14396,
+# the poly's edge: in MA copy m0 the full box, turned, touched tla's clk_tl inverter
+# diffusion and shorted MA0 to VSS). The whole Z is gate: W about 170 (30 + 50 + 68
+# and two corners), L 21-23. Row and column profiles through all three legs: channel
+# colour (bright salmon under metal) at (14295,4362) and (14333,4410), diffusion both
+# sides of each leg.
 C 14330,4252 s=28x26
 D 14300,4240:14360,4340
-P 14295,4280:14395,4312
-D 14345,4312:14370,4448
-D 14370,4418:14396,4448
+P 14283,4279:14395,4316
+D [ 14229,4322 x14362 y4447 x14252 y4391 x14229 ]
+D 14356,4418:14396,4448
 B 14366,4418:14396,4450
 P 14372,4280:14395,4500
-D 14255,4385:14370,4445
 C 14282,4422 s=28x28
-P 14320,4350:14345,4452
-P 14250,4350:14345,4372
-P 14255,4320:14280,4372
-N P 14268,4330 ral_n1_{}
+P 14247,4274:14270,4374
+P 14247,4353:14344,4374
+P 14321,4353:14344,4453
+N P 14258,4330 ral_n1_{}
 
 # --- output: poly from the cell to the pad driver (S-shaped): vertical x 14372-14395,
 # west along y 4480-4500, south along x 14331-14349 to the pad (14340,4764) that r9c drew
-# for RA0. Drawn from y 4480 down; the part above is inverter 2's output (drawn below).
+# for RA0. Drawn from y 4480 down; the part above is inverter 2's output (drawn above).
 P 14331,4480:14395,4500
 P 14331,4480:14349,4525
 @end

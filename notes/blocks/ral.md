@@ -1,44 +1,129 @@
-# ral: the stage in front of the RA pad drivers (x 13990-16330, y 4250-4560)
+# ral: the stage in front of the RA pad drivers (x 13960-16330, y 4220-4560)
 
-## Status (2026-11-17 07:16, contributor session; corrected after independent review)
+## Status (2026-11-17 14:14 (UTC+1), contributor session; inverter 1 independently reviewed in three rounds, the last clean)
 
-**Partly traced** (`trace/ral.txt`, cell `ral_cell`, five copies s0-s4 west to east; s0 is
-RA bit 0's cell, at x 13990-14460). Drawn: the two supply rails per cell, the line
-`cnt_gab` (y 4354) with its tap and the pull-down it gates, the strobe line `ral_stb`
-(y 4548) with its pad and the input pass transistor, the input strip, the hold device
-(gate on VSS) from node a to the output, **inverter 2** (the output stage: load,
-pull-down, output buried contact), and every copy's input (`rax_o0`-`rax_o4`). Outputs:
-s0 and s1 join the RA0 and RA1 pad drivers' input lines (`ra0_drv_in`, `ra1_drv_in`);
-s2-s4 join r9c's RA2-RA4 comparator-unit lines (`ra2/3/4_drv_in_u`), and reach the pad
-drivers through `rad`'s lines: RA2 and RA3 renamed `ra2_drv_in`, `ra3_drv_in`; RA4 joined
-only through r9c's `?P` (`ra4_drv_in_u`, aliased). **Not drawn**:
-inverter 1 (node a -> `ral_n1_s#`). 25 transistors (five per cell).
+**The cell is traced in full** (`trace/ral.txt`, cell `ral_cell`, five copies s0-s4 west
+to east; s0 is RA bit 0's cell, at x 13960-14460): 7 transistors per cell, 35 in the band
+(and 98 in the fourteen MA copies, `notes/blocks/mal.md`). Inverter 1 is drawn: it is a
+**two-input NOR of node a and `cnt_gab`**, so the cell is a static latch, transparent
+while the strobe is high, **whose output `cnt_gab` forces high** (AMB-018 settled as its
+second reading). Nothing in the cell drives `cnt_gab` (AMB-017 reading B: no). The device
+sizes of re-read item R14 are corrected. Outputs: s0 and s1 join the RA0 and RA1 pad
+drivers' input lines (`ra0_drv_in`, `ra1_drv_in`); s2-s4 join r9c's RA2-RA4 comparator-unit
+lines and reach the pad drivers through `rad`'s lines: RA2 and RA3 renamed `ra2_drv_in`,
+`ra3_drv_in`; RA4 joined only through r9c's `?P` (`ra4_drv_in_u`, aliased).
+The hold device's two `?` items were re-read on the group medians and are now drawn firm
+(below, "The hold device's two joins"). Left open: where `cnt_gab` and `ral_stb` come from.
 
-### Logic (traced)
+### Logic (extracted)
 
 ```
-ral_a_s#  <- rax_o#    pass transistor 16/26 at (14041,4487) + 434 per cell, gate ral_stb
-ral_a_s#  <-> out_s#   hold device 16/90 at (14245,4487) + 434, gate VSS (out_s0 = ra0_drv_in)
-ral_tf_s# -> VSS       pull-down 66/20 at (14160,4413) + 434 per cell, gate cnt_gab
-out_s#  = NOT ral_n1_s#   inverter 2: load 61/32 at (14330,4296), pull-down 61/25 at (14332,4415)
+ral_a_s#   <- rax_o#            pass transistor 68/25 at (14046,4468) + 434 per cell, gate ral_stb
+ral_n1_s#  = NOR(ral_a_s#, cnt_gab)
+                                 pull-down 94/22 at (14061,4333), gate ral_a_s#
+                                 pull-down Tf 94/20 at (14160,4399), gate cnt_gab
+                                 load 35/50 at (14054,4271), gate tied to ral_n1_s#
+out_s#     = NOT ral_n1_s#      pull-down 199/22 at (14332,4410) (the extractor's figure for
+                                 the Z-shaped gate; about 170 along its centre line),
+                                 load 60/37 at (14330,4298)       (out_s0 = ra0_drv_in)
+ral_a_s#   <-> out_s#           hold device 16/90 at (14245,4487), gate VSS
 ```
 
-The hold device is the same structure as `cdp2_lat`'s (long weak device, gate on VSS,
-believed depletion-mode): it feeds the output back onto node a, overpowered by the
-input while `ral_stb` is high. With a non-inverting path a -> output (two inverters,
-not yet drawn), that is the static latch of the register rows: **each RA output would be
-latched, transparent while `ral_stb` is high**. Believed, not extracted: the forward
-path is the missing piece.
+So, per cell: `out = ral_a OR cnt_gab`; while `ral_stb` is high `ral_a` follows the input
+`rax_o#`; while it is low the hold device (believed depletion-mode, gate on VSS: a weak
+always-on path, as in `cdp2_lat`) feeds the output back onto node a and the cell holds.
+While `cnt_gab` is high the output is high whatever node a holds, and through the hold
+device node a is pulled high too, so with the strobe low a high `cnt_gab` **sets** the
+latch. `tools/unsure.py --equations`: both equations are FIRM for RA0-RA3 and for all
+fourteen MA copies (RA4's output depends on r9c's `?P`). The feedback path is not an
+equation; it is the hold device, whose two joins are below.
 
-How the hold device was read: the poly block 14200-14290 x 4448-4500 lies over field in
-its upper half (row profile y 4462: field at x 14185-14195 and 14300-14360, poly only at
-14205-14285) and over the input strip in its lower half; the dark line at y 4470-4476
-runs the block's full width in every column profiled (x 14204, 14208, 14250, 14282,
-14286), which is the strip's edge under the poly, not a gap between two polys. So it is
-one block, and its only neighbour is the VSS-contacted poly pad above (dark line at
-y 4447 between them = the VSS rail's edge; join drawn `?P`). The strip's east end meets
-the output poly's bend under a heavy-outlined patch (14315-14347 x 4470-4500, clean
-shot): drawn `?B`.
+This does not sit easily with the name: `cnt_gab` is the counters' `_m` to `_mb` transfer
+gate line (`mra`, `wl`), which would be expected to pulse every character. A line that
+forces all five RA outputs high whenever it is high cannot do that in normal operation.
+Either the net is not what its name says at this end (the join is drawn, firm: metal
+y 4287, three poly hops), or it is low in normal operation. Not settled here; it bears on
+AMB-017.
+
+### Inverter 1: how it was read (2026-11-17 14:14)
+
+Three earlier passes with single shots and the 19-copy median did not resolve it. What
+did: **the medians of the two groups kept apart**, over a wider window
+(`tools/ral_comp19.py --groups`: `ral_cr`, the five RA copies; `ral_cm`, the fourteen MA
+copies turned back). The two groups lie under different metal and beside different
+neighbours, so a feature both show is the cell's. The chip-1 metal shot (`metal1`) of
+`ral_cm` is the clearest single view (`cache/scratch/ralinv/ev_cm_w.png`, with the trace
+over it); poly not under metal is orange and grainy there, diffusion plain.
+All views named in this file without a folder are in `cache/scratch/ralinv/`.
+Diffusion against field in the open was decided by colour profiles of `ral_cr`
+(calibrated on the input strip and on the field beside the hold block: diffusion reads
+R-G about 40-46 in the metal shot and 30-35 in the chip-2 stripped shot, field about 20
+and 0), under metal by the clean shot (diffusion 195/177/136, field 156-177/130-140/115,
+poly over a channel 240/170/124, poly over field 213/168/118).
+
+| Piece | Where (master) | Evidence |
+|---|---|---|
+| Pull-down on node a | poly bar y 4322-4344 over the diffusion 14014-14108 x 4301-4376 | the bar is orange and grainy in both metal shots; the diffusion's edges cross it as dark lines at x 14010 and x 14108; diffusion colour north (column profile x 14060: y 4301-4313) and south (clean shot under the line's metal, (14060,4360)) |
+| Its source | the diffusion south of the bar runs east under the line's metal to Tf's source box and the VSS contact (14118,4423) | one outline: the lower edge y 4378 turns down at x 14105 into the box's west edge (`cache/scratch/ralinv/w5_metal.png`); clean shot at (14130,4362): diffusion |
+| Its gate = node a | the bar goes on west over field to x 13984, turns south (x 13984-14006, under the line's metal, no ring), and ends in a buried contact (box 13982-14016 x 4390-4420, heavy outline, light centre) on a diffusion wire y 4395-4410 under the VSS rail, which runs east to x 14086 and south along x 14065-14086 into node a east of the pass gate | `ral_cm` metal1 (`kw1.png`); single shots of s1 in four layers (`b1.png`-`b4.png`); the wire's colour under the rail is uniform 196-204/167-177/134-140 over its whole length (row y 4402, column x 14074), with field (168-177/118-138/101-114) between its east end and Tf's box |
+| Pull-down Tf on `cnt_gab` | as before, but the diffusion runs up to y 4352 (W 94, was 66) | channel colour under the line's metal at (14160,4360) |
+| Its drain = `ral_n1` | the strip x 14172-14196 widens to x 14206 at y 4352-4368 (a diagonal edge from (14206,4368) to (14196,4386) in both metal shots) and goes north as a strip x 14192-14206 beside the pad's field island to a band y 4274-4292 | `zt1.png`, `nm.png`; clean shot at (14190,4360): diffusion; row y 4282 x 14196-14229: diffusion |
+| The pad of `cnt_gab` sits on a field island | outline 14130-14192 x 4290-4350, the poly pad inside it | two nested outlines in every metal view; the ring between them is field. The bar's east end (x 14128) stops 12 px short of the pad on this island (`nk2.png`) |
+| `ral_n1` onto inverter 2's gate | buried contact at the top of the Z poly: box 14240-14272 x 4270-4295 with a light centre, the band entering from the west | `zt1.png` (`ral_cm` metal1), `o_s1e_m.png` |
+| `ral_n1` north of the bar | the band goes west above the pad's island to x 14128, down a neck x 14113-14128 round the load's corner, into the diffusion north of the bar | the chip-2 stripped shot of both medians shows one light path round the corner (`nk4.png`, `nk5.png`); no edge line across it in the row profile y 4310. The clean shot is murky here (dark red-brown at x 14086-14125) and the chip-2 shots read greener east of x 14086 with no edge between: taken as one region |
+| Load | VCC contact (13980,4240) (ring in both metal shots of both medians, specks in the clean shot) on a land 13966-14072 x 4220-4268; strip x 14037-14072 south into `ral_n1`; poly block 14016-14110 x 4246-4296 over it (the strip's edges cross the block at x 14036 and x 14072); buried contact at the block's south-east corner (box 14088-14110 x 4276-4298, light centre) onto `ral_n1` | `top_m.png`, `top_b.png`, `ld1.png`, `ld2.png`, `nk2.png` |
+
+Overlays checked at 3.3-3.8x: s1 west and east halves in the metal and clean shots
+(`o_s1w_m.png`, `o_s1w_b.png`, `o_s1e_m.png`, `o_s1e_b.png`), s0's west half
+(`o_s0w.png`), MA copies m4 (both halves, `o_m4a_m.png`, `o_m4b_m.png`) and m12
+(`o_m12a_m.png`), and the two medians (`ev_cm_w.png`, `ev_cm_e.png`). Full extraction:
+0 errors, 0 warnings, no net with several names; every copy gives the same two gates.
+
+### Device sizes (re-read item R14, 2026-11-17 14:14)
+
+| Device | Was | Now | How measured |
+|---|---|---|---|
+| Inverter 2's pull-down | 61/25 | 199/22 by the extractor (about 170 along the gate's centre line) | the diffusion is one piece 14229-14362 x 4322-4447 (stepping in to x 14252 below y 4391), and the whole Z-shaped poly is gate: west leg x 14247-14270 (source strip x 14229-14247 west of it, drain east of it above y 4353), middle leg y 4353-4374 (drain north, source south), east leg x 14321-14344 (source west, drain east). Row y 4335, column x 14295, row y 4410, column x 14333: channel colour under metal on the middle and east legs, diffusion colour both sides of each leg. South of the middle leg the chip-2 metal shot reads greener at x 14248-14281 than on the source strip, with no edge between and uniform in the chip-1 metal shot (`zg1.png`): taken as the same diffusion |
+| Inverter 2's load | 61/32 | 60/37 | block 14283-14395 x 4279-4316 (it overhangs the strip's west edge by 15 px: column x 14289 is poly) |
+| Pass transistor | 16/26 | 68/25 | gate poly x 14033-14058 (row y 4465: edges at x 14031 and 14059), top end y 4421; diffusion under it from y 4434 (edge under the poly in the clean shot, column x 14047) to y 4502 (edge across the poly in the metal shot), with no edge between; diffusion both sides (west: clean shot green at y 4455-4470 and tan under the rail at y 4437-4446; east: the wire x 14065-14086) |
+| Tf | 66/20 | 94/20 | above |
+| Hold device | 16/90 | unchanged | not re-read |
+
+Ratios: inverter 1 (94/22) / (35/50) = 6; inverter 2 (199/22) / (60/37) = 5.6.
+
+### The hold device's two joins (2026-11-17 14:14; were `?P` and `?B`)
+
+- **Gate pad to gate block** (`P 14200,4440:14246,4452`): the dark line at y 4447 between
+  them in the metal and chip-2 stripped shots is the VSS rail's edge. In the clean shot,
+  which has no metal, the columns x 14210, 14225 and 14240 of both group medians pass
+  from the pad's colour (about 215/165/113, poly under metal) to the block's (about
+  140/80/50, poly in the open) with no edge line: the darkest point at x 14225 is
+  128/79/52 (RA) and 133/72/51 (MA), where an edge reads 40-80/30-50/20-35 (columns
+  x 14190 and x 14256 beside the pad, same rows). The west outline x 14200 runs unbroken
+  from y 4400 to the block's foot in the chip-1 metal shot of both medians (`h1.png`,
+  `h3.png`). Nothing else comes near the block, so its gate is the pad: VSS.
+- **Strip to output poly** (`B 14315,4472:14347,4500`): a box 14320-14347 x 4474-4500
+  with a heavy outline and a light centre, at the west end of the output poly's bend (the
+  poly's orange starts at the box's east edge), with the strip entering from the west
+  (diffusion colour at x 14298-14304 on the row y 4487). It looks like the cell's three
+  other buried contacts in the chip-1 metal shot of both medians and the chip-2 stripped
+  shot of the MA median (`h1.png`, `h2.png`, `h3.png`), and was already a heavy-outlined
+  patch in the clean shot's single views.
+
+Both were promoted in this pass on that evidence; a reviewer should look at them once
+more, because the latch's feedback rests on them and on nothing else.
+
+### What the cell does with `cnt_gab` (AMB-017, reading B: no)
+
+The line y 4346-4362 crosses each cell over, from west to east: the bar's southward poly,
+the VSS diffusion, Tf's gate, `ral_n1`'s strip, a field island, inverter 2's source strip,
+the Z poly's middle leg (which lies under the metal for 100 px: trap 13), the output strip
+and the output poly. Its only connection is the tab to Tf's poly pad (contact
+(14157,4318)). No ring anywhere else along it in either metal shot of the five-copy
+median at 5x (`ln1.png`, `ln2.png`), no contact patch in the clean shot under it (green
+minus red along y 4350-4358 is positive only at two 3 px edge crossings, x 14204 and
+x 14362), and the pad's poly leaves only southwards, as Tf's gate. **So the cell only
+reads `cnt_gab`.**
 
 ### Where `cnt_gab` is driven: every end looked at, none found (2026-11-17 05:08)
 
@@ -68,14 +153,13 @@ y 4287 (x 11700-13820) finds only the known pads at the ends, plus six spots (x 
 y 4508, 4638, 4726, 5100; x 11396 at y 6352, 6940) which at 3.4x in both shots are polys
 crossing under continuous metal, with no ring (`nb1.png`, `nb2.png`).
 
-**So the whole drawn net of `cnt_gab` has no driver.** Two possibilities are left. (a) A
+**So the whole drawn net of `cnt_gab` has no driver.** Two possibilities were left. (a) A
 contact where the colour test fails, under a wide metal, for instance where the north branch
 passes under the supply metal x 11280-11600. (b) The net is driven inside the RA band
-cells (`ral_tf_s#` is only a drain; the cell's untraced part could hold a gate whose
-output is the line y 4354). (b) would mean the RA band makes `cnt_gab`. That would be
-surprising, but nothing here rules it out, and it is worth checking when the cell's
-forward path is traced.
-This is the next thing to look at for the counters' `_m`/`_mb` transfer.
+cells. **(b) is now ruled out** (2026-11-17 14:14, "What the cell does with `cnt_gab`"
+above): with the cell traced in full, the line's only connection in each cell is the gate
+of the pull-down Tf. (a) is what is left, together with (c): the line through the fourteen
+MA copies (below, "Not done" 3), which has not been followed and may be the same net.
 
 ### Inverter 2, from the median of all nineteen copies (2026-11-17 06:23)
 
@@ -93,28 +177,16 @@ it shows what single shots and the five-copy composite did not
   and the drain strip.
 
 Extracted: `ra#_drv_in = NOT ral_n1_s#` (`_u` for RA4) for all five RA
-copies (and for the fourteen MA copies in `trace/mal.txt`). **Inverter 1 is the remaining piece**: `ral_n1_s#` should be
-NOT node a. Candidates seen: the outlined box at 14225-14280 x 4290-4345 at the
-L-poly's upper end (a buried contact onto an output diffusion?), and a diffusion strip
-x 14205-14225 rising from the VSS-contacted box at 14205-14250 x 4400-4450. That box is
-cream like the diffusion boxes, not orange like poly, so it may be diffusion and not
-the poly pad drawn as the hold device's gate. (Withdrawn by the independent review: R-G
-is 58-73 on that pad against 15-22 on the diffusion boxes, in all five copies, with a
-ring in the metal shot: it is poly, as drawn.)
-
-Third pass on inverter 1 (19-copy composite, metal and stripped shots at 3x, `i1.png`):
-the strip x 14205-14225 is plain from y 4290 to y 4395, and the outlined region at the
-L-poly's top (x 14230-14290, y 4290-4340) has a rounded corner at (14295,4285). No
-junction resolves. Stopped here (trap 9): settle it with single shots at 5-6x of
-x 14195-14300, y 4280-4460 in the two cleanest copies (s1 and m4 score best in
-cellcheck), and a colour profile across the box 14205-14250 x 4400-4450 against the Tf
-tab pad, to decide poly against diffusion.
+copies (and for the fourteen MA copies in `trace/mal.txt`). The pull-down's size was
+re-read on 2026-11-17 14:14 (the whole Z is gate: "Device sizes" above). Three passes at
+inverter 1 with this composite did not resolve it; the fourth, with the two groups' medians
+kept apart, did ("Inverter 1: how it was read" above).
 
 ### Ports
 
 | Name | Layer | Where (s0; +434, +868, +1431, +1865 for s1-s4) | Direction | What |
 |---|---|---|---|---|
-| `vcc` | metal | top rail y 4220-4268 | supply | by device orientation, not followed to a labelled rail |
+| `vcc` | metal | top rail y 4220-4268 (drawn from x 13960: its west end in s0 is at x 13955) | supply | by device orientation, not followed to a labelled rail |
 | `vss` | metal | middle rail y 4397-4446 | supply | same |
 | `cnt_gab` | metal | y 4346-4362, x 13895-16258 | in | the counters' `_m`/`_mb` gate line: drawn back to `wl`'s band H4 (glossary); this block's first name for it is in the glossary's former names |
 | `ral_stb` | metal | y 4540-4556, x 13990-15910 (ends on s4's pad) | in | the sixth line of rab's bundle; drawn back 9,000 px to x 8350, where it is `tc1`'s nested metal ns4 (renamed; the old name is in the glossary's former names) |
@@ -125,44 +197,95 @@ tab pad, to decide poly against diffusion.
 | `ra2_drv_in` | poly | s2's output poly down to a pad (15208,4805), where r9c's RA2 unit line starts | out | |
 | `ra3_drv_in` | poly, metal, poly | s3's output poly to a pad (15771,4593), metal east along y 4590 and south along x 16297, poly to a pad (16297,5108), where r9c's RA3 unit line starts | out | |
 | `ra4_drv_in_u` | poly, metal, poly | s4's output poly to a pad (16205,4640), metal south along x 16207, poly to a pad (16205,5153), where r9c's RA4 unit line starts | out | |
-| `ral_a_s#`, `ral_tf_s#` | diffusion | inside the cell | internal | node a (between the pass and hold devices) and Tf's drain; both continue into the untraced part |
+| `ral_a_s#` | diffusion, poly | inside the cell | internal | node a: east of the pass gate, the strip to the hold device, the wire under the VSS rail and the bar (gate of inverter 1's pull-down) |
+| `ral_n1_s#` | diffusion, poly | inside the cell | internal | inverter 1's output: north of the bar, Tf's drain, the band above the pad, the Z poly |
 
 ### How sure
 
+- Inverter 1, the sizes and the line: the three sections above.
 - Rails, line taps, contacts: metal composite and single shots at 2.6-4x; overlay
   `cache/scratch/ral/ov1.png`.
 - The input strip: colour profile along y 4486 in both stripped shots
   (`tools/ral_prof.py row 4486 13985 14460 5`): not field from x 14015 to 14315, field
   at 14320-14340, again not field 14345-14390 (the output poly's horizontal piece).
-  Down x 14120: diffusion at y 4479-4491, field at 4458-4467 (so the box of the
-  pull-down Tf ends at the middle rail's edge, y about 4450; the dark line there is
-  that edge).
-- Copies: `cellcheck.py ral_cell --layer acid`: s1 0.6 %, s2 4.2 %, s3 1.2 % bad blocks;
-  s4 15 %, all of it the strobe line ending at s4's pad and a wide rail at the band's
-  east edge, outside the drawn devices.
+  Down x 14120: diffusion at y 4479-4491, field at 4458-4467 (a field moat between Tf's
+  box and the strip; Tf's poly runs on 16 px over it and makes no second device).
+- Copies: `cellcheck.py ral_cell --layer acid` (before this pass): s1 0.6 %, s2 4.2 %,
+  s3 1.2 % bad blocks; s4 15 %, all of it the strobe line ending at s4's pad and a wide
+  rail at the band's east edge, outside the drawn devices.
 
-### Not done (next)
+### Ambiguities
 
-1. **Inverter 1** (node a -> `ral_n1_s#`): see the three passes above. The independent
-   review adds two leads: an undrawn tan band under the VSS rail at y about 4413-4432,
-   with a rounded east end at x 14065 (the "ring at (14045,4425)" is that end; no contact
-   seen) - possibly node a's route north; and an undrawn closed outline west of the
-   L-poly (west edge x 14225 from y 4325 to 4395, stepping in to the VSS box), which
-   would also be the "strip" puzzled over above.
-2. **Inverter 2's pull-down is probably under-drawn** (review, medium confidence; nets
-   unchanged): drawn W/L 61/25 against the load's 61/32 is not a workable ratio. The
-   outline above suggests VSS diffusion wrapping the L-poly on its west and south, the
-   drain inside the elbow (14272-14345 x 4318-4352), the whole L as gate (W about
-   170-190). Re-read at 5-6x and extend the diffusion.
-3. **The pass transistor's width** (review, unsure): drawn 16/26; the gate poly is
-   uniformly bright over y 4455-4493 in all five copies and the chip-2 stripped shot
-   shows diffusion on both sides from y 4440 to 4500, so W is probably about 45, and the
-   gate about 5 px further east (x 14035-14059).
-4. Whether Tf's drain `ral_tf_s#` is inverter 1's output (n1 = NOR(a, `cnt_gab`)?), which
-   would make `cnt_gab` a force/clear of the latch.
-5. `cnt_gab`'s driver (above), the `?P` (hold gate to its pad) and the output `?B`.
-6. The fourteen copies in the left array are in `trace/mal.txt` (`notes/blocks/mal.md`); the
-   twentieth, at (8449,5562), is not placed.
+1. The hold device's two joins are drawn firm on the evidence above; they are the only
+   support of the latch's feedback and deserve an independent look. That the device is
+   depletion-mode (conducting with its gate on VSS) is believed, from `cdp2_lat`, not seen.
+2. The west end of the load's poly block (x 14016-14036) is drawn over field: the land's
+   outline turns up round it in the clean shot (`top_b.png`), and under the rail it reads
+   210/141/100 against 231/156/119 on the channel. If the land runs under it the load is
+   wider; no net changes.
+3. Two places where diffusion changes shade with no edge line (east end of `ral_n1`
+   north of the bar; south of the Z's middle leg) are drawn as one region each.
+4. The input buried contact at the strip's west end (`?` in the trace's comment, drawn
+   `B`) was not re-read.
+
+## Review
+
+Round 1 (2026-11-17, an independent agent, single copies s0-s3, m4, m9, m12 and both group
+medians at 5x+): see below; its findings (notes nits, a diffusion item overhanging Tf's
+gate by 2 px) were fixed.
+
+Round 2 (2026-11-17, an independent agent, single copies s3, m7 and m0 at 5-7x): one
+finding: the Round 1 fix (diffusion item trimmed to x 14150) had removed the diffusion under
+Tf's gate at y 4352-4370, so Tf extracted as 77/20; the photo shows diffusion on both sides
+there (gate poly continuous from y 4338 to 4455). Restored to x 14172: Tf 94/20 again in all
+19 copies. Everything else re-checked right (load, bar pull-down and its gate wire, pass
+gate 68/25, the `ral_n1` band by colour against known diffusion, inverter 2, the hold
+device in four layers).
+
+Round 3 (2026-11-17, an independent agent; the Tf fix against an extraction of the previous
+commit: only the 19 Tf lines changed, 77/20 to 94/20, same nets; fresh copies s4 and m11 at
+5x in four layers, judged without the trace first; the notes' sizes, counts and equations
+against the extraction).
+
+Re-read of the force line and the strobe (2026-11-17, an independent agent, every hop at
+4.4-6x in both stripped shots and both metal shots), because a force line that is the
+counters' transfer line does not fit: the cross-under at x 11150-11720 (three polys, none
+steps), the metal y 4287, the hop at (13822-13905, 4285-4350), the metal x 11242 and
+x 11396 down to band H4 at (11392,7212), and the strobe's route back to `tc1`'s ns4 with
+its three poly hops on y 2768: no swap and no wrong join. The contradiction is therefore
+not in these routes: it is in what band H4 / the line x 12902 does (`wl`'s and `mra`'s
+reading) or in an undiscovered driver (AMB-017).
+
+### Round 1 details: inverter 1
+
+Independently reviewed on single copies s0-s3, m4, m9, m12 and both group medians at 5x+:
+inverter 1 = NOR(node a, `cnt_gab`) confirmed device by device (the bar's gate wire to
+node a, its VSS source, the drain and load on one net, both buried contacts on `ral_n1`);
+nothing in the cell drives `cnt_gab` (AMB-017 reading B: no); the R14 sizes confirmed
+within edge width (inverter 2's load measured about 64/40 against the drawn 60/37); the
+hold device's poly join and buried contact read firm in all 19 copies (the latch's
+feedback rests on these two); overlays on s0, s1, m4, m12; extraction against the
+previous cell: only the cell's own devices changed, nets fell by exactly 19.
+
+Round 3: no findings.
+
+## Not done (next)
+
+1. `cnt_gab`'s driver (AMB-017, reading A), and whether a line that sets the RA outputs
+   can be the counters' transfer gate line (above).
+2. The hold device's size (drawn 16/90; the block's foot is at about y 4508, not 4500,
+   which changes nothing electrically) was not re-read.
+3. **The fourteen MA copies have a common line too**: a thin vertical metal at x about
+   2700 runs through the column past the copies' pads (seen from y 10250 to 11350 in both
+   metal shots, with tabs to the pads of m4 and m5, `cache/scratch/ralinv/frc.png`; it is
+   the image of this band's line y 4354, and the MA median shows it right across the
+   cell). `mal` names each pad `mal_frc_m#` as a port of its own; the line is not drawn
+   and its ends are not looked at. If it joins `cnt_gab`, one line sets all nineteen
+   address outputs.
+4. `ral_stb`'s source.
+5. The twentieth copy, at (8449,5562), is not placed (`notes/blocks/mal.md`).
+
+## History: earlier passes (superseded by the Status above where they differ)
 
 ## First survey
 

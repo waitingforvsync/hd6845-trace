@@ -25,7 +25,7 @@ db_b6        P  8250,4365-4383  ?    passes through (drawn to x 8350); see the s
 tc1_o4020    M  8350,2634-2648  out  the bus line y 2641, going east; NOR(tc1_g, tc1_x1); the follower gives its end at (9098,2639), not looked at
 
 # South side (tc2), west to east
-tc1_o3527    M  7003-7023,4450  out  NOR(tc1_o3353, tc1_m7013), cell B's output, from contact (7011,3852); south of y 4450 it turns west along y 4465-4495 (seen, not drawn)
+tc1_o3527    M  7003-7023,4450  out  NOR(tc1_o3353, tc1_o3095), cell B's output, from contact (7011,3852); south of y 4450 it turns west along y 4465-4495 (seen, not drawn)
 tc1_x1       M  7049-7068,4450  ?    from contact (7056,4352)
 tc1_g        P  7134-7153,4450  in   believed: every other end of g is a gate; from contact (7315,4395)
 tc1_i        P  7179-7196,4450  in   its only other end; from contact (7270,4437)
@@ -45,19 +45,17 @@ tc1_g        P  6960,3995-4014  out  out of this wire, going west: it is a gate 
 tc1_ns2      P  7180,2867-2883  ?    far end of ns2, going west (1.5x view)
 
 # The gate columns x 6690-7160 (runs 3-8): where each drawn wire stops
-tc1_x1       M  7048-7068,3405  in   the channel metal x 7053, going north; the follower gives its end at (7054,3134)
 tc1_m6817    M  6811-6823,3905  ?    thin metal over the driver's west column, no contact drawn (Ambiguity 12)
 tc1_m6817    M  6788-6806,4380  ?    the same metal going south after its foot and jog; not followed
 tc1_x1_u     M  6962-6974,3905  ?    the thin metal x 6968 (alias of tc1_x1); Ambiguity 13
 tc1_x1_u     M  6962-6974,4300  ?    the same
 tc1_p4308    P  6750,4428-4448  in   input of the inverter, going west; ends on the pad (6620,4436), whose metal goes south along x 6621 (seen, not drawn)
 tc1_x1_u     P  6750,4385-4405  ?    the poly row from the thin metal x 6968's south pad (6947,4396), going west; seen to about x 6445
-tc1_p3698    M  6765-6785,3405  in   gate 1 of the second driver, thin metal going north; drawn to y 3300
-tc1_m7013    M  7003-7023,3160  in   the channel metal that ends on cell B's gate row 2, going north; run 2 saw its north end as a contact at (7010,3092): not checked
+tc1_p3698    M  6765-6785,3000  in   gate 1 of the second driver, thin metal going north; drawn to y 3000
 tc1_m7100    M  7091-7110,3140  in   upper piece of the channel metal, going north from contact (7100,3180); follower: north to y 2766, west to x 6947, north to (6949,2677)
-tc1_m7100    P  6975,3170-3190  out  out of this wire: the row from contact (7100,3180) goes on west to a gate of the next cell north (not drawn)
-tc1_o3740    M  6941-6956,3405  out  NOR(tc1_p3698, tc1_x1_u), going north; drawn to y 3250; its north end is not found (Ambiguity 18)
-vss          M  6858-6906,3240  -    the rail; goes on both ways, not followed
+tc1_o3740    M  6941-6956,2977  out  NOR(tc1_p3698, tc1_x1_u); drawn north to its contact (6948,2977); what the contact joins and whether the metal goes on north is open (Ambiguity 20)
+tc1_p3051    P  6980,2950-2962  in   gate row 1 of cell C; its poly ends on a box (6936-6974, 2944-2970); source open (Ambiguity 20)
+vss          M  6858-6906,2985  -    the rail; goes on both ways, not followed
 vss          M  6861-6932,3905  -    the same rail
 vss          M  6858-6908,4380  -    the same rail (it narrows at y 4238)
 vcc          M  6688-6736,4330  -    the supply rail, narrower here than at the driver; goes on south
