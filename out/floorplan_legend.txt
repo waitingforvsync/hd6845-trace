@@ -102,7 +102,7 @@
 46	route	bit-0 source lines	6300,4430:7050,5000	two vertical polys under the six bus metals, then east along y 4937/4915
 57	?logic	field logic, upper group (untraced)	6380,4720:6690,5300	routing field and gates: the sources of row address bit 0 in interlace sync+video lead here
 49	?logic	top-centre logic, lower half	6400,4450:8250,6400	random logic left of the central datapath (`tc2`); the upper half is `tc1` and `tcw`
-51	route	c4l0, c4l1 to cdp1	6440,4482:7882,4625	rows across the crossing field, metals east and north to the pads of the rows that enter cdp1 as cdp1_l4544 / cdp1_l4588
+51	route	c4l0, c4l1 to cdp1	6440,4482:7882,4625	rows across the crossing field, metals east and north to the pads of the rows that enter cdp1 as c4l0 / c4l1
 50	route	R9 match line, east	6440,4440:8350,4545	from the R9 comparator west along y 4460 / 4528 (two poly hops)
 53	route	two poly rows west	6750,4378:7008,4450	y 4385-4405: from the thin metal x 6968's south pad (6947,4396), west; y 4428-4448: tc1_p4308, the inverter's input, from a pad (6620,4436) whose metal comes from the south
 -	route	selector outputs	7500,4720:7860,5960	the five outputs east in poly to their units; nest of metals from the units to the central datapath channel 1 lines (comparator inputs)
