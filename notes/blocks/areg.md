@@ -197,7 +197,9 @@ continuous with the land's outline, in both metal shots at 6x (`pass5_m.png`,
 plain. In the AR row that part is in the open, where the clean shot cannot tell channel
 from field; in the rows where a metal covers it, the gate band is channel-bright over
 the whole 70 px in the clean shot (`passR_acid1b.png`: four cells of R1/R2;
-`passX1.png`, `passX2.png`: ten cells in the rows of R0, R4, R6, R7, R5, R3). The
+`passX1.png`, `passX2.png`: cells in the rows of R4, R6, R7, R5, R3; review round 1
+measured all 46 covered copies of R1-R7). In R0's row, as in the AR row, that part is in
+the open and rests on the outlines in the two metal shots. The
 strobe's riser beside it stands at x 15851-15872 (the cell had 15837-15867, which
 would have lain on the wider diffusion). Effect: 59 pass transistors (all copies of the
 cell in rdp1, rdp2, rdp3) change from 34/28 to 70/28; no net changes; the full
@@ -300,13 +302,19 @@ metal shots over the full height.
    shows, from the top: diffusion to y 13110, a box with a heavy outline and a tan inside
    at y 13113-13135, poly from y 13138, the channel of T_b from y 13152 (`arm5.png`,
    5.8x). That is the cell's reading. Either way the net is the same (`ar4_a`).
-5a. Register cell, "concentric arches" at 16030-16050 x 13112-13150, which the first run
-   drew as the buried contact of load L1. They are the 24 px gap between the strap
-   (edge x 16021) and stub M5 (edge x 16045) showing on the output diffusion: the arch
-   starts where the strap starts (y 13112) and the same gap runs on down over field as a
-   green line to y 13215. L1's gate tie is the box at 16016-16044 x 13066-13100 at the
-   end of the load gate (green-centred box with a heavy outline). Both readings put the
-   load gate on `ar4`.
+5a. Register cell, "concentric arches" at 16028-16050 x 13113-13147, which the first run
+   drew as the buried contact of load L1. This run read them as a metal-gap artefact; that
+   is wrong: review round 1 found a closed box there in BOTH metal shots, in every cell
+   viewed (ar0-ar4 and three register cells, 6.5x, `review-1/arch_mos.png`; confirmed by
+   the tracer), with a top edge at y 13113-13120 that the trace has no item for. It is a
+   real feature of `rdp3_lat`, probably a second poly-to-diffusion tie from L1's pad onto
+   the `ar4` drain; undecided. L1's drawn gate tie is the box at 16016-16044 x 13066-13100.
+   Every reading puts the load gate on `ar4`, so no net depends on it. Not drawn (the
+   cell is rdp3's): in the handoff.
+5b. `rdp3_lat`'s L2 gate block: its left edge is drawn at x 15877; both metal shots put
+   it at about 15863-15866 in all five AR cells (review round 1). Poly over field only,
+   no device or net change; about 12 px from the wide diffusion's corner (15847,13104),
+   no overlap. Not changed (rdp3's cell): in the handoff.
 6. Which supply `areg_rail_r` is. The loads of the right-hand column cells will tell.
 7. Under `areg_rail_r` a poly runs along its left edge (x 16402-16420) from y 13650 to
    y 14440, with an arm to the right at each end (y 13650-13665 and y 14422-14440). Seen
@@ -333,4 +341,17 @@ metal shots over the full height.
 
 ## Review
 
-(For the coordinator: review rounds are recorded here.)
+Round 1 (full review, 2026-11-17 17:50 +0000, a fresh agent on claude-fable-5-2, at commit a0069a7). Told to
+suspect the T1 width change in every register row (a cell variant with the narrow strip),
+the moved riser (a new transistor or short), the node-a buried contact, the "arches", L2's
+right edge, and cell 5 against cells 1-4. It measured the gate band in all 46 covered
+copies of R1-R7 in the clean shot, viewed nine at 3.7x, profiled all 13 open copies (AR,
+R0) in both metal shots, compared the netlists before and after the cell fix (identical
+except 59 transistors 34/28 -> 70/28), and checked cell 5's joins in four shots.
+No finding changes a connection or needs a geometry change in this package. Findings,
+each confirmed by the tracer in the reviewer's images:
+1. The "arches" are a real closed box, not a metal-gap artefact: Ambiguity 5a rewritten.
+2. L2's gate block left edge is about 12 px east of the photo: recorded as Ambiguity 5b.
+3. R0's row is in the open like AR's (the notes had it among the covered rows): corrected.
+Not checked: the hold strip's ends (stays `?D`), the riser of the non-AR copies beyond the
+nine viewed.
