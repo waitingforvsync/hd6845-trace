@@ -208,7 +208,7 @@ P 2682,4744:2772,4766
 # 215-225/160-165/120 for the bars over field).
 D 2697,4622:2790,4648
 D 2778,4565:2838,4648
-P 2722,4587:2772,4666
+P 2722,4587:2758,4666
 # The plate's top bar runs on west under W to x 2678 (salmon, poly over field). Below its
 # west end a heavy-outlined box (2673-2697, 4622-4648) beside the top of the node's strip:
 # taken as the tie (tab, buried contact). Not resolved: drawn uncertain.
@@ -251,7 +251,7 @@ N P 2545,4070 tl1_w4070
 D 2600,4403:2650,4447
 C 2620,4420
 D 2645,4403:2716,4440
-P 2653,4388:2668,4470
+P 2651,4388:2663,4470
 # the inverter's node: wide part under thin W, a column north to y 4350, and at the column's
 # top a buried contact (heavy arch, tan inside where the row's poly lies on it) with the row
 # y 4353-4372 of the pad (2562,4361): the output, and the plate's stem
@@ -282,7 +282,7 @@ D 2778,4525:2838,4570                 # the upper part of the VCC box that the u
 # load plate under the thin metal x 2742, with that metal's top pad on its top bar; the bar
 # runs west under thin W to x 2683; below its west end a heavy box (2683-2708, 4500-4524) on
 # a tail of the node: the tie, drawn uncertain as in the other loads
-P 2722,4487:2772,4568
+P 2722,4487:2758,4568
 P 2683,4486:2724,4499
 ?P 2685,4495:2705,4516
 ?D 2685,4504:2707,4530

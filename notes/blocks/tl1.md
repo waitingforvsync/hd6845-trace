@@ -633,5 +633,23 @@ in four; plain ground at x 2673-2679, no poly edge lines down x 2676); the gate 
 crosses the whole stack (east edge x 2655-2658; both transistors 81/21 as before);
 `tools/sameconn.py 8fbdd7d`: connections identical; the ports file parses.
 
-Round 2: no findings.
+Round 2 of the second round of work: clean (no findings).
+
+### Third round of work (the loads, cell `tl1_ua`, the two latches)
+
+Round 1 (full review of what was added since 404455d, 2026-11-17 21:28 +0000, a fresh agent on
+claude-fable-5-2). Told to suspect the four `?` ties, whether the cross-coupling is real in
+both copies or drawn by analogy, the gap joins at x 2656-2684, whether the third
+pull-down's far side is VSS, the vertical gate, the buried contact (2704,4362) and each
+copy. Checked in master and copy each: the ties (not metal contacts; the same colour
+gradient as two known buried contacts of this column; `?` is right), the cross-coupling
+(one path each way, seen in both copies: the third gate's poly across the gap and south
+into the plate; thin metal x 2742 pad to pad), the polys that must stay separate, the gap
+joins by colour in three shots, the inverter's one-piece gate, the buried contact, both
+copies by overlay and `cellcheck.py`. No finding changes a connection. Two geometry
+findings, applied: the inverter's gate poly is x 2651-2663 (drawn 2653-2668); the two load
+plates' east edge on the channel rows is about x 2758 (drawn 2772). `tools/sameconn.py`:
+connections identical; the loads are now 26/36 and the inverters 37/12.
+Could not be checked: whether poly overlaps diffusion inside the tie boxes (12-15 px
+interiors), the third gate's west end under R1's edge line, thin W over the lower tie boxes.
 
