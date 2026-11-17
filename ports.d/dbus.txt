@@ -3,8 +3,7 @@
 # as seen from this package.
 # Written 2026-11-17 (run 4) from the Ports table of notes/blocks/dbus.md and the drawn ends
 # in trace/dbus.txt. Only rows with a definite place. Left out: the capacitor taps of chains
-# 1-5, the "line 2" of chains 2-5 (believed d2_out_n..d5_out_n, not drawn), P_x (d_hiz, drawn
-# in dpad).
+# 1-5, P_x (d_hiz, drawn in dpad). d2_out_n..d5_out_n added in run 5.
 
 # East side: the D0-D7 pad cells (dpad)
 d0_in         M  17548-17566,8050    in   pin D0 behind its protection; dpad's metal comes down to here
@@ -16,6 +15,10 @@ d5_in         M  17824-17848,14858   in   pin D5, the same
 d6_in         P  17838,16519         in   pin D6: pad under the metal from D6's protection node
 d0_out_n      M  17591-17609,7560    out  D0's output data line: joins dpad's metal from the contact (17597,7492)
 d1_out_n      P  17805,9219-9240     in   D1's output data line: joins the west end of dpad's strip 4 of D1's cell
+d2_out_n      P  17812,10954-10976   in   D2's output data line: joins the block at the west end of dpad's strip 4 of D2's cell
+d3_out_n      P  17812,12538-12560   in   D3's, the same
+d4_out_n      P  17812,14121-14143   in   D4's, the same
+d5_out_n      P  17812,15726-15748   in   D5's, the same
 
 # South side
 d7_in         P  17531-17548,17000   in   believed pin D7; under the VCC rail, not followed to the pad
@@ -27,6 +30,10 @@ d4_d          P  16950,13993-14008   out  buffered pin D4, to the latch column x
 d5_d          P  16950,14688-14704   out  buffered pin D5
 d6_d          P  16950,15165-15181   out  buffered pin D6
 d7_d          P  16950,15642-15657   out  buffered pin D7
+d5_out_n      P  16817,15815-15836   in   D5's output data line: 30 px west of its end pad (16863,15827); goes on west to its driver
+d4_out_n      P  16860,15943-15965   in   D4's: west of its end pad (16907,15957); goes on west
+d3_out_n      P  16905,16073-16096   in   D3's: west of its end pad (16950,16087); goes on west
+d2_out_n      P  16950,16203-16225   in   D2's: from its end pad (16993,16217); goes on west
 d1_out_n      P  16950,16334-16355   in   D1's output data line; its driver is west of here
 dbus_do0_in   M  16950,16702-16722   in   input of the inverter that drives d0_out_n; follow.py: on west to x 16795, south to (16797,17434)
 d7_c          M  16950,16750-16766   ?    chain 7's c tap, probably to a capacitor; not followed
