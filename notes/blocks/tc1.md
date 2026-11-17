@@ -653,7 +653,8 @@ the two are one node through the strip under `tc1_m6817`.
 one piece from the gate row north to y 2950 and west to about x 6980, with nothing joining it
 on the way; it ends on the east outline of a box of pale cells with nested outlines
 (6936-6974, 2944-2970), which looks like a buried contact. The thin metal x 6941-6956
-(`tc1_o3740`, from the second driver) has a **contact (6948,2977)** 10 px south of the box:
+(`tc1_o3740`, from the second driver) has a **contact (6948,2977)** directly south of the box
+(the box's bottom outline is at y 2970-2974, the contact's centre at y 2977):
 bright centre in a dark ring in both metal shots, a green hole in the clean shot. Not
 established: what the contact lands on, whether box and contact are one node, and whether the
 thin metal ends at the contact (the review: north of it the metal shots are as dim as over
@@ -662,8 +663,9 @@ follower's stop at (6947,2978) is not evidence). A metal y 2933-2948 comes from 
 south along x 7056 and west to at least x 6974, and a dim strip carries it to about x 6940,
 directly above the thin metal: one L-shaped metal or two is not readable. (My note that this
 metal runs from about x 6820 came from one 3x overlay and is withdrawn: it would cross the
-rail.) The box is the east end of a tan band y 2940-2961 that runs west, continuous across
-the gap x 6906-6935, under the rail to a region (6800-6835, 2940-2970) and, in one low-zoom
+rail.) The box is the east end of a tan band y 2940-2961 that runs west, across the gap
+x 6906-6935 (unconfirmed there: a plain strip between two edge lines in the metal shots, but
+dark in the clean shot, neither tan nor green), under the rail to a region (6800-6835, 2940-2970) and, in one low-zoom
 view, on under a poly block (6755-6797, 2940-2980) to a supply region: the shape of a load.
 `tc1_o3740` already has its load. **Nothing is joined in the trace**, and the poly is named
 by place. The equations below wait on this.
@@ -916,7 +918,7 @@ and touches neither (field at y 3896-3908 and 4056-4070, measured).
    open, nothing joined). At (6925-7010, 2935-2990): the poly `tc1_p3051` ends on a box
    (6936-6974, 2944-2970) that looks like a buried contact onto the east end of a diffusion
    band y 2940-2961 with what looks like a load at its west end; the thin metal has a contact
-   (6948,2977) 10 px south of the box; a metal y 2933-2948 arrives from the east directly
+   (6948,2977) adjoining the box's bottom outline; a metal y 2933-2948 arrives from the east directly
    above. Readings: (a) box and contact are on one diffusion, so `tc1_p3051`, `tc1_o3740` and
    the band are one net (then `tc1_o3740` has two loads, or the "load" is something else);
    (b) the contact is on a separate patch and the thin metal carries `tc1_o3740` on north
@@ -1230,6 +1232,17 @@ the metal x 7003-7023; `tc1_m6817` over the gate tie is neither a contact nor a 
 stub is continuous and the arm crosses its gap; nothing undrawn in the cell. Not checked:
 the rails' supplies; the diffusion under the north cell's poly block; the load band's 4 px
 junction at x 6742-6746 (edge line only).
+
+**Round 2** (2026-11-17 13:35 -0600; fix check of the changes since `4738538`, by a fresh agent: views at 4-9x in
+four shots and profiles in `cache/scratch/tc1/review-15/`, the diff, the extraction before and
+after). Both fixes right: the diff changes only comments and the label's name; the two
+extractions are identical apart from that name; the gate of the transistor at (6948,3051) is
+a net with no driver and nothing else on it; nothing drawn joins the poly, the box, the
+contact's patch and the metal. The poly, its outline at x 6974-6978, the contact and the dim
+strip are as described. Three points about wording, none changing geometry or a connection,
+all corrected: a garbled comment line in the trace file; the band's continuity across the gap
+x 6906-6935 was stated as fact and rests on the metal shots only (the clean shot is dark
+there); the contact is not 10 px south of the box but adjoins its bottom outline.
 
 ## Not done
 

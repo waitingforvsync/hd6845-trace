@@ -934,9 +934,9 @@ B 6808,3394:6838,3420
 # and east again as a band y 3085-3103 under the rail to the middle node: one outline round
 # rail-contact region 2 (both metal shots).
 #   gate row 1: poly y 3042-3060, x 6914-7003; north in the open along x 6988-7003 to
-#     y 2950, west along y 2950-2962 into a box (6936-6974, 2944-2970) on a small diffusion
-#     diffusion; the thin metal x 6941-6956 has a metal contact (6948,2977) 10 px south of
-#     the box. What joins what there is not readable: nothing is joined in the trace, and
+#     y 2950, west along y 2950-2962 to a box (6936-6974, 2944-2970) at the east end of a
+#     tan band; the thin metal x 6941-6956 has a metal contact (6948,2977) directly south of
+#     the box (the box's bottom outline is at y 2970-2974). What joins what there is not readable: nothing is joined in the trace, and
 #     the poly is named by place (tc1_p3051).
 #   gate row 2: poly y 3127-3146 from x 6909 east to a pad with the contact (7056,3138),
 #     the north end of tc1_x1's channel metal x 7048-7068.
@@ -983,8 +983,9 @@ N P 6995,3000 tc1_p3051
 # NOT JOINED to anything in the trace: the poly ends at about x 6980 on the east outline of a box of
 # pale cells (6936-6974, 2944-2970), which looks like a buried contact; the box is the east end of a
 # tan band y 2940-2961 that runs west under the rail to a region under tc1_m6817 and (one low-zoom
-# view) on under a poly block to a supply region: the shape of a load. The thin metal's contact is
-# 10 px south of the box. Whether the metal ends there or goes on north, dim, to the metal
+# view) on under a poly block to a supply region: the shape of a load; that the band is continuous
+# across the gap x 6906-6935 rests on the metal shots only. The thin metal's contact adjoins the
+# box's bottom outline (y 2970-2974). Whether the metal ends there or goes on north, dim, to the metal
 # y 2933-2948 cannot be read (review of run 9). Open: Ambiguity 20.
 
 # ---- gate row 2 (tc1_x1)
