@@ -586,6 +586,8 @@ M 7054,4060 y4345 w=14             # the channel metal x 7053 between this conta
 #      it is in the open. The column under the thin metal x 6817 south of y 4293 (a poly
 #      beside it, pits at y 4312-4341) is NOT TRACED.
 D 6862,4270:6918,4297              # under the rail: the strip
+N D 6890,4282 tc1_o4280
+@alias tc1_x1 tc1_o4280               # the strip's node, joined to tc1_x1's pad and branch only through ?B and ?P (notes, Ambiguity 17)
 D 6877,4290:6914,4368              # ... gate / source: narrower than the strip (edge at x 6874, field at x 6858-6866 at y 4345: review round 3)
 C 6888,4338 s=28x28                # rail contact: ring 6870-6915 x 4320-4365 in both metal shots, pit in the clean shot
 D 6803,4270:6835,4293              # the strip's west end under the thin metal x 6817
@@ -595,6 +597,24 @@ D 6803,4270:6835,4293              # the strip's west end under the thin metal x
 P 6856,4298:7002,4320
 P 6988,4298:7002,4384              # it turns south at x 6988-7002 (review round 3; salmon to y 4382 at least: NOT FOLLOWED)
 N P 6975,4309 tc1_p4308
+
+# ---- the strip's node has a load of its own (run 4, 2026-11-17): a weak load of the island's
+#      kind. The supply rail x 6688-6736 contacts a diffusion pad (6690-6742, 4250-4322; ring
+#      in both metal shots, pits in the clean shot); a strip y 4268-4292 runs east from it
+#      under a poly block (6746-6798, 4246-4310: orange in the chip-2 shots, the strip's two
+#      edges across it at y 4264 and y 4294, brighter over the channel in the clean shot) to
+#      the diffusion under the thin metal x 6817, which is the strip's west end. The block's
+#      foot enters a buried-contact box (6774-6802, 4318-4346: dark ring, pale centre) on a
+#      tab of that diffusion. So the strip's node = NOT tc1_p4308, a complete inverter.
+M 6712,4228 y4330 w=48             # the supply rail, x 6688-6736 here
+D 6690,4250:6742,4322
+C 6708,4290 s=24x36
+D 6735,4268:6806,4292
+P 6746,4246:6798,4310
+P 6778,4300:6798,4336
+B 6774,4312:6802,4342
+D 6803,4290:6832,4337              # the diffusion under the thin metal x 6817 runs on south to y 4337 (no contact to that metal: unbroken, no ring, y 4290-4329)
+D 6780,4320:6808,4340              # its tab under the box
 
 # ---- output: buried contact on the east column, poly east to the contact (7099,4047),
 #      metal x 7133-7152 north (NOT FOLLOWED north of y 3900)
