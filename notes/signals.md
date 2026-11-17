@@ -79,7 +79,7 @@ Central datapath (registers identified by their write strobes, `notes/blocks/wrs
 | `d#_a`, `d#_b`, `d#_c`, `d#_d` | the four inverters of data input buffer #: `_a`, `_c` inverted, `_b`, `_d` true |
 | `dbus_cap#b` | plate of a capacitor beside the D0 input buffer (purpose not established) |
 | `d#_d_n` | NOT `d#_d`: the inverter inside data input latch # (`notes/blocks/dbus.md`) |
-| `dl#_q`, `dl#_q_n` | the data input latch of bit # in the data bus column: two cross-coupled AND-OR-invert gates, transparent while `dbus_le` is high. `dl#_q` follows pin D#; `db_b#` = NOT `dl#_q_n` (a static inverter drives the bus bit). The tie of `dl#_q` to its own load gate (the input of the other gate) is an assumed buried contact |
+| `dl#_q`, `dl#_q_n` | the data input latch of bit # in the data bus column: two cross-coupled AND-OR-invert gates, transparent while `dbus_le` is high. `dl#_q` follows pin D#; `db_b#` = NOT `dl#_q_n` (a static inverter drives the bus bit). |
 | `dbus_le` | enable of the data input latches: a vertical metal x 17243-17262 down the data bus column from y 8988 (to y 13614, then west). Source not traced |
 
 ## Clocks

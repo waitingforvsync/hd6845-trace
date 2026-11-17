@@ -93,8 +93,8 @@ transistors); below it, y 9373-9500, an inverter with a strong load that drives 
 bus bit (two transistors, drawn outside the cell). As extracted:
 
     d0_d_n  = NOT d0_d                                  inverter N3
-    dl0_q   = NOT( (d0_d_n AND dbus_le) OR dl0_q_n )    gate N0   (marked: one assumed tie)
-    dl0_q_n = NOT( (d0_d   AND dbus_le) OR dl0_q   )    gate N1   (marked: the same tie)
+    dl0_q   = NOT( (d0_d_n AND dbus_le) OR dl0_q_n )    gate N0
+    dl0_q_n = NOT( (d0_d   AND dbus_le) OR dl0_q   )    gate N1
     db_b0   = NOT dl0_q_n                               inverter N2
 
 So it is a transparent latch: while `dbus_le` is high `dl0_q` follows the D0 pin (through
@@ -110,7 +110,7 @@ Where things are (all coordinates checked by overlay at 2.85x, `ov_top.png`, `ov
 | Diffusion column under the VSS rail, x 17330-17405 | VSS land 8888-8942 (contact 17364,8910); band A 8942-8966; mid node; band B 8986-9010; node N0 9012-9042 |
 | N0 = `dl0_q` | from the column east (y 9015-9042) to under the thin metal, then south under it (x 17434-17470) to y 9095, and from y 9063 east under the load gate to the VCC land |
 | Third pull-down of N0 | a narrow diffusion x 17450-17467 runs from the VSS land's east strip (y 8920-8942, which goes on to x 17494) south to N0; the poly from M_d's top pad (17491,9010) runs up x 17498-17520 and west along y 8944-8966 over it and ends at x 17437. Gate = `dl0_q_n` |
-| Load of N0 | poly x 17476-17518, y 9049-9121 under metal M_d; channel y 9063-9094. It is band C's east end |
+| Load of N0 | poly x 17476-17518, y 9049-9121 under metal M_d; channel y 9063-9094. It is band C's east end. **Tied to N0 by the buried contact (17427,9085)**: a box 17414-17438 x 9072-9097 in the gap between the VSS rail and the thin metal, on a north tab of band C, with N0's west edge open into it (found by review round 2) |
 | Column, middle part, x 17350-17400 for the land and band C, **x 17323-17400 from y 9153 down** (bands D and E are W 77 like A and B; review round 1) | VSS land 9063-9113 (contact 17362,9087); band C 9111-9133; node N1 9133-9198; band D 9196-9219; mid node; band E 9240-9262; VSS land 9268-9310 (contact 17368,9285) |
 | N1 = `dl0_q_n` | east along y 9157-9190 under the thin metal and the load gate to the VCC land; load gate x 17478-17518, y 9142-9228 under M_d, tied to N1 by the buried contact (17446,9205); contact (17491,9213) to M_d |
 | VCC land of both loads | x 17527-17585, y 9063-9188, long contact y 9082-9165; its west edge steps back to x 17536 between the two channels |
@@ -234,20 +234,16 @@ bus lines.
 
 ## Ambiguities
 
-1. **The tie of `dl#_q` to band C (ASSUMED, `?B` at 17431-17473 x 9092-9110 in the cell).**
-   Band C is the gate of N0's load and of N1's single pull-down, and has no other
-   connection: its west end is at about x 17340 (field under M_c beyond it, measured), its
-   east end is the load gate. So it must be tied to a node, and by position to N0. No box
-   of a buried contact is seen for it. Drawn where N0's diffusion, running south under the
-   thin metal, ends on band C with one heavy line (y 9092-9097) and no field between: the
-   same construction as the three ties that are certain (N1's at (17446,9205), N3's at
-   (17450,9346), N2's at (17448,9478): each a diffusion tab under the thin metal ending on a
-   horizontal poly). Other reading: no contact there and the tie elsewhere, unseen; the
-   equations would be the same. A third reading, band C driven from outside, is excluded as
-   far as the photos go (no poly leaves it). **Every equation of `dl#_q` and `dl#_q_n`
-   depends on this item** (`tools/unsure.py --equations dl`). What would settle it: a
-   sharper photograph of (17450,9095), or the same spot in units 1-3 (flipped: y 10561,
-   11926, 13293) where the dirt differs.
+1. **The tie of `dl#_q` to band C** (the gate of N0's load and of N1's single pull-down).
+   I did not find it and first drew an assumed contact under the thin metal at (17450,9095).
+   Review round 2 found the box: 17414-17438 x 9072-9097, in the open gap between the VSS
+   rail and the thin metal, heavy outline, poly-coloured inside in both chip-2 shots (metal
+   174/126/76, stripped 159/122/63, like the poly below it and unlike the field above), in
+   all four units; in the clean shot N0's west edge (x 17438-17442) is there at y 9070 and
+   gone at y 9084, where tan runs into the box (my own 2 px map shows the same: 6-7 against
+   2-3). Drawn as a buried contact there (not `?`). Residual doubt: chip 1's metal shot does
+   not read as poly at the box centre (145/128/73). Under the thin metal itself there is no
+   contact (no dim line before the heavy line, unlike the three ties there).
 2. **N0's west tab** (`?B`, `?P` at 17286-17328 x 9020-9048): a box like a buried contact
    under M_c (M_c has no pad there) with a short orange bar west of it (x 17289-17296 in the
    chip-2 shots), rounded end at x 17286. Drawn as a poly stub tied to N0. Nothing leaves
@@ -270,7 +266,10 @@ bus lines.
    (17471-17487, 8974-8983) measures as field, so it is not a diffusion edge. The two parts
    are drawn as one poly: the west part (to x 17437, the gate) has no other connection, so
    as two pieces it would float; band A, the only alternative, is separated from it by 20 px
-   of measured field. What the line is, is not explained.
+   of measured field. What the line is, is not explained. Review round 2: it could be an
+   active-area edge under the poly, which would make the third pull-down W about 42, not 17;
+   the pocket south of the poly is neither green nor khaki in the clean shot (about
+   115/95/73), so not settled. A size question only.
 6. `d0_b` capacitor: contacts cut, strap absent in both metal shots. Looks like a
    metal-mask option. No effect on logic. (First session.)
 7. Chains 2-5 are assigned to D2-D5 by position only. Chains 2 and 3 now drive `db_b2` and
@@ -304,6 +303,25 @@ unit 2 by difference map only).
 - Could not check: the assumed tie (Ambiguity 1): in all four units a 10-12 px dark band
   with no field colour between N0's end and band C, as at N1's certain tie, but no box and
   no contact patch.
+
+**Round 2** (2026-11-17, a fresh agent, not shown round 1; `cache/scratch/dbus/review-2/`).
+Told to suspect: the extent of every diffusion; unit 3's per-unit wiring and the joins of
+units 2 and 3 (read at 1.85x before); the stretch between each upside-down latch and the
+bus inverter below it; band A's end and the third pull-down; the boxes under the thin metal
+and M_c; the assumed tie; anything left out. It read the junctions at 4-6x in two to four
+shots, profiled each per-unit poly along its length in four shots, ran `follow.py` on
+M_a-M_d and `cellcheck.py` on the copies (0.92-0.95).
+
+- Finding 1, **confirmed and fixed**: the tie of N0 to band C is a real box about 20 px west
+  of the assumed one (Ambiguity 1). Same net; the equations stand and no longer rest on a
+  `?` item.
+- Not decided, recorded (Ambiguity 5): the width of the third pull-down.
+- Found correct: band A's end; the poly east of x 17437 to M_d's pad and its channel; bands
+  B and D; the two load gates separate; all five boxes buried contacts; `dbus_drv`'s land
+  and node both x 17300-17431; one VSS land at each latch/inverter junction; every per-unit
+  poly reaches both its ends and touches no neighbour; M_b's end.
+- Could not check: N0's west stub beyond its being a dead end in all four units; diffusion
+  against field by colour in the chip-2 shots.
 
 ## Not done
 

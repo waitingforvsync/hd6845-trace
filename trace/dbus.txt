@@ -158,7 +158,7 @@ N P 17700,8405 d1_in
 #   d_d_n  = NOT d_d                                   (inverter N3, y 9270-9360)
 #   dl_q   = NOT(dl_q_n + d_d_n.dbus_le)               (N0, y 8888-9095)
 #   dl_q_n = NOT(dl_q + d_d.dbus_le)                   (N1, y 9051-9310); band C, its dl_q
-#            input, is the gate of dl_q's load: tied to dl_q by an ASSUMED buried contact (?B)
+#            input, is the gate of dl_q's load: tied to dl_q by the buried contact (17427,9085)
 #   db_b   = NOT dl_q_n                                (inverter N2, outside the cell)
 # dbus_le is the vertical metal M_b (x 17243-17262), shared by the units.
 # The thin metal x 17438-17459 that crosses the cell has no contact in it (no pad on it;
@@ -172,10 +172,13 @@ D 17398,8920:17494,8942            # VSS strip east, under the thin metal, to x 
 D 17450,8920:17467,9044            # narrow column south from the strip under the thin metal:
                                    # channel under the poly at y 8944-8966, then N0
 D 17398,9015:17470,9042            # N0 east, to under the thin metal
-D 17434,9015:17470,9106            # N0 south, under the thin metal, ending on band C
-?B 17431,9092:17473,9110           # ASSUMED tie of N0 to band C (its load gate): the diffusion ends
-                                   # on the poly with one heavy line, as at the three ties below;
-                                   # no box of its own is seen (notes, Ambiguities)
+D 17434,9015:17470,9095            # N0 south, under the thin metal
+D 17413,9073:17440,9096            # N0's west tab in the gap between the rail and the thin metal
+P 17414,9070:17438,9105            # band C's north tab in that gap
+B 17411,9068:17441,9100            # N0 tied to band C (its load gate): a heavy-outlined box at
+                                   # 17414-17438 x 9072-9097, poly-coloured inside in both chip-2
+                                   # shots, in all four units (review round 2); N0's west edge
+                                   # is open into it in the clean shot
 D 17434,9063:17532,9094            # ... and east under the load gate to the VCC land
 D 17536,9063:17585,9188            # VCC land (shared by the loads of N0 and N1); its west
 D 17527,9063:17540,9094            # edge is at x 17527 beside the two load channels and
