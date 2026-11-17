@@ -480,3 +480,11 @@ through the gap between R1 and thin W to x 2715; it ends at x ~2670. Cut at x 26
 cell; the two ports that named the foreign band removed; no extracted connection changed.
 Not decided (left undrawn): whether thin W contacts the node near (2693,4688).
 
+Round 2 (fix check, 2026-11-17 20:46 +0000, a fresh agent on claude-fable-5-2, against commit 8fbdd7d). Gate 2's
+poly ends between x 2668 and 2673 in the master and in the copy (7x in two shots, profiles
+in four; plain ground at x 2673-2679, no poly edge lines down x 2676); the gate still
+crosses the whole stack (east edge x 2655-2658; both transistors 81/21 as before);
+`tools/sameconn.py 8fbdd7d`: connections identical; the ports file parses.
+
+Round 2: no findings.
+
