@@ -63,7 +63,7 @@ tc1_m7100    P  6750,2652-2666  in   the poly row that feeds the channel metal x
 r8_b5_q      P  6750,2612-2626  out  R8 bit 5 going west: from cdp1 (x 8350, y 3019-3035) through the bus track y 2943
 r8_b4_q      M  6750,2568-2582  out  R8 bit 4 going west: from cdp1 (x 8350, y 2976-2992) through the bus track y 2899; follower: the metal ends at (6189,4402)
 tc1_b2858    P  6750,2520-2540  ?    west end of the through line on the bus track y 2858
-vss          M  6750,2630-2648  -    the rail's branch west (follower: end (6514,2639))
+vss          M  6750,2614-2666  -    the rail's branch west (follower: end (6514,2639)); it lies over the poly rows of r8_b5_q and tc1_m7100 here, without contact
 vss          M  6858-6906,2500  -    the rail x 6858-6906; it goes on north under a wide metal
 tc1_b2814    P  7117-7133,2500  ?    north end of the through line on the bus track y 2814
 tc1_b2684    P  7160-7176,2500  ?    north end of the through line on the bus track y 2684

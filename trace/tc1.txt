@@ -1095,10 +1095,10 @@ M 7850,2597 x8350 w=13             # on east over the datapath (follower: end (9
 # Views cache/scratch/tc1/run11/.
 # =====================================================================================
 M 6882,2500 y2800 w=48             # the rail (vss), on north to the region's edge, where a wide horizontal metal lies (y < 2512: pink across x 6840-6925 at y 2505)
-M 6750,2639 x6860 w=18             # its branch west, y 2630-2648 (follower: W end (6514,2639), E corner into the rail at (6886,2638)); drawn from x 6750
+M 6750,2640 x6860 w=52             # its branch west, y 2614-2666 (review of run 11: wider than the bright middle band y 2630-2648; it lies over the two poly rows y 2612-2626 and y 2652-2666, whose inner edges print through as the dark lines y 2628 and y 2648; the outer bands read 180-200 red against 150 for the same rows in the open east of the rail, and the clean shot is protected over y 2608-2668). No contact to either row: no ring, no hole. Follower: W end (6514,2639), E corner into the rail at (6886,2638); drawn from x 6750
 
 # ---- tc1_m7100's source: row y 2652-2666, pad P4, metal A
-P 6750,2652:6962,2666              # from the west (salmon beside the branch, salmon under the rail, open poly x 6922-6954)
+P 6750,2652:6962,2666              # from the west (salmon under the rail's branch and under the rail, open poly x 6922-6954)
 P 6927,2663:6963,2698              # pad P4
 C 6946,2680 s=14x14                # bright centre in a dark ring in both metal shots, green hole in the clean shot
 M 6948,2673 y2769 x7100 y3145 w=16 # metal A: south, east along y 2762-2776, and south as the channel metal x 7091-7110. No contact at the corner (7100,2768): plain end at x 7108, no ring, no hole (aend.png)

@@ -803,7 +803,8 @@ is crossed by five poly rows and nothing else. The block (6750-6850, 2680-2775),
 `tools/railprof.py 6806 6830 2600 3050` called a diffusion, is open field
 (`tools/px.py col 6830 2500 2800 6`: clean shot 158/138/100, chip-2 stripped shot red = green).
 The rail goes on north to y 2500, where a very wide metal (y < 2512) covers everything; it has a
-branch west along y 2630-2648 (`tools/follow.py 6750 2639 W`: end (6514,2639)).
+branch west, y 2614-2666, which lies over the two southern poly rows of the fan without contact
+(its width is from the review; `tools/follow.py 6750 2639 W`: end (6514,2639)).
 
 **The fan.** Four lines arrive from the west, cross under the rail in poly, and each ends on a
 pad with a contact from which a metal runs south and east; the four metals nest.
@@ -935,7 +936,7 @@ Run 3's ports (the driver; region edges as drawn):
 | `tc1_b2814` | P | x 7117-7133, y 2500 (north); x 8350, y 2890-2907 (east) | ? | through line on the bus track y 2814 |
 | `tc1_b2684` | P / M | poly x 7160-7176 at y 2500 (north); metal x 8350, y 2677-2691 (east) | ? | through line on the bus track y 2684 |
 | `tc1_b2554` | P / M | poly x 7201-7218 at y 2500 (north); metal x 8350, y 2546-2560 (east) | ? | through line on the bus track y 2554 |
-| `vss` | M | the rail x 6858-6906 at y 2500 (it goes on north under a wide metal); its branch y 2630-2648 at x 6750, going west | | |
+| `vss` | M | the rail x 6858-6906 at y 2500 (it goes on north under a wide metal); its branch y 2614-2666 at x 6750, going west (over the rows of `r8_b5_q` and `tc1_m7100`, no contact) | | |
 | `tc1_m6817` | M | north end on the contact (6815,2833) (run 10) | ? | its gate is cell D's pull-down; its source is at its other end |
 | `vss` | M | rail x 6858-6906 at y 2800 (run 10); x 6861-6932 at y 3905; x 6858-6908 at y 4380 (it narrows at y 4238) | | goes on both ways, not followed |
 | `vcc` | M | rail x 6690-6748 at y 3990 and y 4228 | | the same; `tcw` draws it at y 3440-3900 |
@@ -1505,13 +1506,48 @@ that edit:
 
 Round 2: no findings that change a connection.
 
+### Run 11's review
+
+**Round 1 (full review, 2026-11-17 14:40 -0600; fresh reviewer, images in
+`cache/scratch/tc1/review-19/`, 17 used).** Covered: the bus fan and the top bus field (the
+last section of the trace), at commit `4184bf8`. Told to suspect: the gap x 7140-7160 between
+`tc1_b2814`'s pad and its line (metal across, poly not joined); which pad each fan row ends on
+and the west pad (6818,2575); whether `tc1_b2814`'s vertical and the west end of the y 2684
+metal are separate; the corner (7100,2768); the join of the row y 2867-2885 to the older poly
+and the gap x 7026-7048 (**the join that makes `tc1_p3698` = `tc1_ns2`**); the poly turns east
+of x 8040 and contacts under ns1..ns3; the spot (7208,2508); what lies under the rail and its
+branch; every cross-under pad. It looked at 4-5x in two or more shots and measured with
+`px.py`, `textmap.py`, `follow.py`, `railprof.py`, `opendiff.py`.
+
+- Finding 1, **geometry only**: the rail's west branch is about 55 px wide (y 2614-2666), not
+  18: it lies over the poly rows of `r8_b5_q` and `tc1_m7100`, whose inner edges are the dark
+  lines y 2628 and y 2648; no contact to either row (no ring, no hole). Checked
+  (`tools/px.py col 6790 2600 2676 3 metal,metal1,acid1b`: the outer bands 166-201 red in chip 2
+  and 145-183 in chip 1 against 147-156 and 118-126 for the same rows in the open at x 6915; the
+  clean shot salmon from y 2612 to y 2666): **confirmed, fixed** (`M 6750,2640 x6860 w=52`; the
+  port line and the comments).
+- Found correct: every item on the list above. The gap x 7140-7160: poly not joined (field in
+  both stripped shots), metal continuous (`follow.py 7314 2700 N` and `7500 2814 W` both run to
+  (7115,2595)). The row y 2867-2885 is continuous poly from x 7010 to x 7230 and the gap
+  x 7034-7046 is field. No hole under any new metal other than the listed contacts.
+- Could not check fully: the contact (6773,2790) has no bright centre in chip 1 (accepted on
+  chip 2 and the clean shot's hole); the bright piece at x 7146-7154 is at bare-ground level in
+  chip 2 (continuity rests on chip 1, the follower, and the pad having no other exit); a
+  diffusion under the branch's middle band is excluded only by the lack of an outline and of
+  contacts.
+
+After the fix: `tools/t.sh tc1 sameconn.py 4184bf8`: `connections identical`;
+`.venv/bin/python tools/sameconn.py 4184bf8`: `connections identical`.
+
+Round 1: no findings that change a connection.
+
 ## Not done
 
 - **Gate columns x 6400-7000, y 2650-4450**: nothing drawn. Dense random logic with large
   devices under wide rails (x 6510-6560, 6682-6757, 6857-6932 near y 4000) and thin
   verticals between (x 6745-6762, 6766-6785, 6808-6828, 6913-6932, 6938-6955, 6959-6977).
   It is not built like the island: budget for 3x views and profiles, not 2x.
-- The second driver is traced (run 6). Left there: the structure at (6745-6800, 3810-3900).
+- The second driver is traced (run 6). The "structure" at (6745-6800, 3810-3900) is open field (run 11: clean shot 161/145/104, chip-2 stripped shot red = green, `tools/opendiff.py 6730 3790 6820 3915` none): nothing to draw.
 - Cells B, A, C and D are traced (runs 7-10), and the column north of cell D (run 11: wiring
   only). Left there: Ambiguities 18 and 19; of Ambiguity 20's three joins two are assumed (`?`)
   and J5 is not drawn; `tc1_m6817`'s south end (its source). The far ends of the lines of run 11
@@ -1524,15 +1560,13 @@ Round 2: no findings that change a connection.
   (`tc1_x1_u`: its ends at y 3806 and y 4402 and any other contact; the pad (6962,4268)'s
   west side, now drawn as the strip), both rails. **First for the next run**: the strip's
   node is done (run 4: an inverter); its input and the thin metal x 6968's south end are
-  followed to this package's west edge (run 5). Left: the thin metal x 6968's north end
-  (a pad at (6958-6998, 3778-3797) on a poly y 3775-3795: contact not decided); the pad at
+  followed to this package's west edge (run 5). Left (the thin metal x 6968's north end was settled in run 6: the contact (7009,3789)): the pad at
   about (6972,4482); Ambiguity 17 from `shm`'s side (its `?B` at about (8370-8410,
-  4240-4270)). West of x 6750 both rows belong to `tcw`'s region. The poly along y 2628-2648 that stops at (7438,2640), and the vertical poly
-  x 7160-7180 it comes from. Run 2's observation that `sel_tracks.py` reports false breaks
+  4240-4270)). West of x 6750 both rows belong to `tcw`'s region. Run 2's observation that `sel_tracks.py` reports false breaks
   on ns3 and ns5 (chip 2 has blemishes, chip 1 does not) still stands.
 - **Channel x 7000-7170**: all four verticals are drawn to their ends south of y 3085
   (run 9: x 7003-7023 = `tc1_o3095` from the contact (7010,3093); x 7048-7068 = `tc1_x1`
   from the contact (7056,3138)), and `tc1_m7100` (x 7091-7110) is drawn to its source in the top bus field (run 11); `tc1_o4020` (drawn). North of y 3085 the channel is
-  bare ground as far as y 3070 (text map); above that not looked at.
+  bare field up to the top bus field, with only `tc1_m7100`'s and `tc1_o4020`'s metals passing (run 11, one 3.3x view).
 - Top bus field y 2500-2975: all ten tracks drawn (run 11).
 - Far ends of ns3..ns6; `tc1_x1`, `db_b6` (all in the Ports table).
