@@ -237,7 +237,13 @@ NOT `tla_w3376`, while it is low NOT `tla_w3461`.
   y 3406-3430, west to a pad with a contact (2326,3418); metal x 2326 south 2,130 px (follow.py),
   east along y 5545 to a contact (2562,5545); poly east along y 5535-5550 at the cluster's
   foot, straight under R1, R2, R3 and the bus (read at 3x to 5.6x from x 2580 to x 3720: no pad,
-  no step). It runs on east of x 3720 beside the step signal's poly (y 5585): **not followed**.
+  no step) and on through the second crossing field beside the step signal's poly (2.1x in
+  three shots, x 3700-4400: at the same y under every metal) to a pad with a contact
+  (4408,5545). There a metal on **track V of the second bus field** (x 4409) takes it north
+  1,085 px (follow.py: no contact candidate) to a contact (4410,4460), whose pad's poly leaves
+  **east along y 4452-4470 towards the right cluster** (drawn to x 4520; not followed).
+  The poly that goes on east along y 5543 is another net: it starts on its own pad
+  (4497,5545) with a metal going south, 45 px of bare ground from the first pad (4.2x).
 - Load: the node bulges east under thin W (x 2693-2730) and runs on as a strip y 3400-3443
   under a plate x 2735-2777 (W/L 43/42) to the VCC box (contact (2805,3440)) that also feeds
   `rcs_u3425`'s load from its other side. A tail x 2714-2729 runs up to a box (2714-2757,
@@ -393,7 +399,7 @@ for `e4`, and it would arrive up the left bus field, which is where `e4` comes f
   buried-contact box (2550-2575, 3060-3090), a strip east under R1 at y 3078, a load at
   x 2700-2775, y 3050-3150, thin W's top contact (2738,3025)), and y 3590-4940. Polys
   from west pads cross R1 at about y 3600, 3690, 3810-3900 and on down (0.7x overview only).
-- `tla_w3417`'s poly east of (3720,5543); `tla_w3376`'s metal south of (2871,5975);
+- `tla_w3417`'s poly east of (4520,4461), into the right cluster; `tla_w3376`'s metal south of (2871,5975);
   `tla_w3461`'s poly east of (2300,5632) (to be joined to `amr_eq_r3` when that branch is
   merged); thin E south of y 5400 (to about y 6036). All lead into the small cluster below
   (y 5450-6330), which is not traced, or east along the foot.

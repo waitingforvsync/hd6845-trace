@@ -796,7 +796,12 @@ M 2283,3188 y3520 w=12
 # output: the node's buried contact (concentric box x 2558-2594, y 3398-3438) with the poly
 # y 3406-3430, which runs west to a pad with a contact (2326,3418); metal x 2326 south 2,130 px,
 # east along y 5545 to a contact (2562,5545); poly east along y 5535-5550, straight under R1,
-# R2, R3 and the bus (3x to 5.6x: no pad, no step), seen to x 3720 and going on east.
+# R2, R3 and the bus (3x to 5.6x: no pad, no step) and on through the second crossing field
+# (2.1x, three shots; at constant y under every metal) to a pad with a contact (4408,5545) at
+# the bottom end of a metal on track V of the second bus field (x 4409). The line that goes
+# on east at this y starts on a separate pad (4497,5545), 45 px of bare ground between (4.2x).
+# The metal runs north to a contact (4410,4460) (follow.py: no contact candidate on the way);
+# the pad's poly leaves east along y 4452-4470 towards the right cluster (drawn to x 4520).
 # (A poly of another net lies under this metal from y 4540 to y 4985: it arrives from the west
 # along y 4547 and leaves west along y 4980. No pad, no ring: not joined.)
 B 2556,3398:2596,3438
@@ -806,7 +811,13 @@ C 2326,3418
 M 2326,3404 y5545 x2576 w=12
 P 2545,5529:2584,5561
 C 2562,5545
-P 2578,5535:3720,5550
+P 2578,5535:4392,5550
+P 4386,5529:4428,5560
+C 4408,5545
+M 4409,5560 y4447 w=12
+P 4396,4447:4428,4474
+C 4410,4460
+P 4420,4452:4520,4470
 N P 2450,3418 tla_w3417
 # load: the node bulges east under thin metal W (x 2693-2730, y 3395-3445) and goes on as a
 # strip y 3400-3443 under the plate (x 2735-2777, W/L 43/42) to the VCC box of R2 that also
