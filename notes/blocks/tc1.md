@@ -703,6 +703,15 @@ Otherwise no findings: y 4228-4366 of that metal is one piece with no ring and n
 new metal touches no other; with the `?B` gone the strip's `?D` clears the pad's poly by
 6 px and the gate poly by 5 px and overlaps no poly; the netlist differs only as intended.
 
+**Round 3** (2026-11-17 10:29 -0600; a fix check of the one change since commit `9eaf935`, the thin metal
+x 6817's foot: a text map at 2 px, one view `cache/scratch/tc1/review-6/foot.png`, the
+extraction before and after, alone and with every file loaded). It checked that the foot
+(6788-6826, 4366-4380) is right in both metal shots and joined to the line from the north,
+that nothing drawn comes within 24 px of it and no contact lies under it, that the metal does
+go on south from it at x 6790-6802, and that no net or transistor changed.
+
+Round 3: no findings.
+
 ## Not done
 
 - **Gate columns x 6400-7000, y 2650-4450**: nothing drawn. Dense random logic with large
