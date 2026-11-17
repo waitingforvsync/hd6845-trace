@@ -653,3 +653,13 @@ connections identical; the loads are now 26/36 and the inverters 37/12.
 Could not be checked: whether poly overlaps diffusion inside the tie boxes (12-15 px
 interiors), the third gate's west end under R1's edge line, thin W over the lower tie boxes.
 
+Round 2 (fix check, 2026-11-17 21:34 +0000, a fresh agent on claude-fable-5-2, against commit 89ba1c4). The
+inverter gate change is right (bright x 2654-2663 in the clean shot, edge line at x
+2662-2664 in the chip-2 shot, master and copy). **The load-plate trim was wrong and is
+reverted**: x 2758-2762 is the edge of thin metal x 2742 (its protected margin and ghost
+outline), seen identically on the bar rows over field; the plate's outline runs on through
+x 2762-2774 in both metal shots, and the sibling plate in the open has its east edge at
+x 2773-2776. Checked by the tracer on `review3-2/gapM.png`: round 1's finding is refuted;
+the plates are back at x 2772 (loads 26/50). The tracer had applied that finding without
+looking at the photo first. Connections identical throughout.
+
