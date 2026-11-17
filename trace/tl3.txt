@@ -9,7 +9,7 @@
 # from y 3050). The WEST rail x 3645-3695 is the same metal as the east VSS rail: both run up
 # to one wide metal along y 2595-2648 (top_m.png, 2.2x metal; follow.py 3667 3400 N: corners
 # (3680,2638) E, (4028,2638) S). So the west rail is VSS, the mirror of tla's R1.
-M 3670,2622 y4060 w=50                # west rail; south of y 4060 not read (follow.py: a corner west at y 4080)
+M 3670,2622 y4850 w=50                # west rail; drawn to y 4850 (sv_top.png, sv_bot.png, n34_ov.png); it goes on south
 M 3670,2622 x4020 w=52                # the link along the top
 M 4020,2622 y3060 w=50                # the east VSS rail north of tla's piece
 N M 3670,3400 vss
@@ -71,3 +71,80 @@ N P 3555,3419 tl3_w3419
 # clear: row y 3497-3515 from the west
 P 3533,3497:3585,3515
 N P 3560,3506 tl3_w3506
+
+# ====================================================================
+# West column, four NOR units: tla's in2 unit / tl1's NOR (tl1_w3636) again.
+# findcell (clean shot, 2535 3558 2842 3742): 1042,130 (0.73)  1041,304 (0.79)  1042,911 (0.74)  1042,1085 (0.73)
+# master of the cell: the unit at y 3688-3872 (tl1's geometry moved by 1042,130; to be checked on an overlay)
+@cell tl3_nor
+D 3591,3688:3646,3708                 # top arm onto the rail box above
+D 3591,3688:3633,3850                 # the column
+D 3591,3830:3646,3850                 # bottom arm
+D 3640,3827:3694,3872                 # rail box below, VSS contact
+C 3664,3852
+P 3582,3712:3640,3732                 # gate 1
+P 3582,3798:3640,3818                 # gate 2
+B 3589,3750:3619,3782                 # output: buried contact on the node between the gates
+P 3582,3755:3617,3775
+D 3611,3761:3741,3775                 # load: strip east under the rail
+D 3717,3764:3755,3786
+D 3733,3782:3749,3828
+D 3747,3760:3827,3789                 # under the plate; its edges show as lines across the plate at y ~3760 and ~3790 in the chip-2 stripped shot (n1_e.png)
+P 3763,3744:3816,3832
+P 3731,3808:3771,3830
+B 3725,3805:3749,3830
+D 3822,3756:3882,3798                 # VCC box
+C 3845,3773
+@end
+@inst tl3_nor 0,174 tag=n2
+# (the unit at 0,781, y 4469-4653, is a copy too but is NOT placed yet: its top arm lands on the
+# diffusion under the rail at y 4433-4486, which belongs to the unit above and is not read)
+@inst tl3_nor 0,955 tag=n4
+# ---- rows of NOR 1 (y 3688-3872):  tl3_w3765 = NOR(tl3_w3722, tl3_w3803)
+P 3533,3712:3590,3732                 # gate 1, from the west
+N P 3560,3722 tl3_w3722
+P 3533,3755:3590,3775                 # output, west out of the strip
+N P 3560,3765 tl3_w3765
+# gate 2: its row ends on a pad with a contact (3540,3803) at the north end of a metal
+# x 3533-3548 (follow.py 3541 3850: (3543,3806)-(3542,4596)) that has two more contacts on
+# pads, (3540,4068) and (3540,4590) (trk_both.png, 4x four shots: ring and bright centre in
+# both metal shots, green centre on a salmon pad, pits in the stripped shot)
+P 3550,3798:3590,3818
+P 3522,3788:3559,3820
+C 3541,3808
+M 3540,3795 y4598 w=14
+P 3522,4053:3559,4083
+C 3540,4068
+P 3522,4575:3559,4605
+C 3540,4590
+N M 3540,3900 tl3_w3803
+# ---- rows of NOR 2 (y 3862-4046):  tl3_w3939 = NOR(tl3_w3896, tl3_w3982)
+P 3533,3886:3590,3906                 # gate 1: west under the metal x 3540 (no pad) to a pad (3497,3890) in tl2's
+N P 3560,3896 tl3_w3896
+P 3533,3929:3590,3949                 # output, west out of the strip
+N P 3560,3939 tl3_w3939
+P 3533,3972:3590,3992                 # gate 2: west under the metal x 3540 (no pad) to a pad (3497,3978) in tl2's
+N P 3560,3982 tl3_w3982
+# ---- rows of NOR 4 (y 4643-4827):  tl3_w4720 = NOR(tl3_w3803, tl3_w4763)
+# gate 1: the same poly as the pad (3540,4590) (from which a row y 4579-4599 also goes east
+# into the unit above, not placed yet): south along x 3533-3555 and east along
+# y 4667-4687 (n34_rows.png, 3.3x: one orange L in both chip-2 shots)
+P 3533,4598:3560,4687
+P 3533,4667:3590,4687
+# output: row to a pad with a contact (3540,4720); a thin metal south from it to a pad with a
+# contact (3540,4912) (follow.py 3540 4718 S: end (3542,4920); textmap 3480 4690 3570 4750;
+# trk4920.png, 4x four shots), whose poly goes on east along y 4930-4948 (not drawn: the
+# data row of the unit below)
+P 3550,4710:3590,4730
+P 3522,4702:3559,4736
+C 3540,4720
+M 3541,4712 y4920 w=14
+P 3522,4895:3559,4950
+C 3540,4912
+N M 3541,4800 tl3_w4720
+P 3533,4753:3590,4773                 # gate 2, from the west
+N P 3565,4763 tl3_w4763
+# the rail's VSS box above NOR 4 (it is the box below the unit at y 4469-4653; contact ring
+# in the metal shot, n34_mov.png): NOR 4's top arm lands on it
+D 3640,4608:3694,4653
+C 3664,4633
