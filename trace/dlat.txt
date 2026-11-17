@@ -1,0 +1,142 @@
+# dlat: the input latches of data bits 4-7, the gate column x 16488-16848, y 13886-15768
+# (west of the data bus column `dbus`), with its rails, the latch enable `dbus_le` and the
+# four buffered pin levels d4_d..d7_d that arrive from `dbus` at x 16950.
+#
+# The latch is the same circuit as `dbus_lat` (trace/dbus.txt), mirrored left to right: its
+# poly and diffusion are that cell's mirror image to within 3-5 px (tools/dlat_shift.py), but
+# its contacts, pads and metals lie 6-17 px further west than a mirror image would put them,
+# the east stub of N1 is cut short, and dl#_q_n leaves WEST under the VCC rail. So it is a
+# cell of its own here, drawn on the bit-5 copy (y 14329-14814):
+#   d_d_n  = NOT d_d                                   (inverter N3)
+#   dl_q   = NOT(dl_q_n + d_d_n.dbus_le)               (N0)
+#   dl_q_n = NOT(dl_q + d_d.dbus_le)                   (N1)
+@block dlat
+@requires dbus
+
+@cell dlat_lat tag=5
+# -- diffusion column under the VSS rail, upper part: gate N0 (dl_q)
+D 16678,14332:16728,14386          # VSS land
+C 16697,14350 s=30x30
+D 16673,14364:16748,14486          # column: land, band A, mid node, band B, node N0
+D 16584,14364:16680,14386          # VSS strip west, in the open, to x 16584
+D 16611,14364:16628,14488          # narrow column south from the strip: channel under the
+                                   # poly at y 14388-14410 (third pull-down of N0), then N0
+?D 16587,14384:16613,14430         # as in dbus_lat: the diffusion under that gate may reach west
+                                   # to x 16587 (W 41, not 17). A size question only.
+D 16608,14459:16680,14486          # N0 west
+D 16608,14459:16644,14539          # N0 south
+D 16638,14517:16665,14540          # N0's tab
+P 16640,14514:16664,14549          # band C's north tab
+B 16637,14512:16667,14544          # N0 tied to band C (its load gate): heavy-outlined box
+D 16546,14507:16644,14538          # N0 west under the load gate to the VCC land
+D 16493,14507:16542,14632          # VCC land (shared by the loads of N0 and N1)
+D 16538,14507:16551,14538
+D 16538,14601:16551,14632
+C 16502,14528:16522,14608          # long VCC contact
+# band A: from the top pad of metal M_c west across the column; ends at x 16665, in a field
+# pocket 16628-16673 x 14386-14459 (4x in three shots, j1.png: the third pull-down's poly
+# ends in the same pocket at x 16641, 20 px of field between the two)
+P 16753,14370:16790,14408          # pad
+C 16766,14389 s=26x26
+P 16665,14386:16778,14410
+N P 16708,14398 d{}_d_n
+# band B: from dbus_le's pad west across the column; ends at x 16666
+P 16803,14419:16838,14452          # pad
+C 16819,14436 s=26x26
+P 16733,14421:16823,14444
+P 16666,14430:16748,14454
+# third pull-down of N0: the poly from M_d's top pad runs up x 16557-16579 and east along
+# y 14388-14410 over the narrow column to x 16641
+P 16556,14436:16596,14470          # pad
+C 16576,14455 s=26x26
+P 16557,14386:16579,14444
+P 16557,14388:16641,14410
+N P 16568,14419 dl{}_q_n
+N D 16708,14472 dl{}_q
+# dl_q_n leaves the cell WEST: a poly from the foot of that vertical, y 14427-14444, under
+# the VCC rail (salmon there) and on in the open. Drawn to x 16466 in the cell; beyond per copy.
+P 16466,14427:16562,14444
+# N0's east tab with a buried contact and a short poly stub that ends at x 16790
+D 16743,14466:16778,14490
+?B 16750,14464:16780,14492
+?P 16752,14470:16790,14488
+# load of N0: gate poly under metal M_d, which is band C's west end
+P 16560,14493:16602,14565
+P 16548,14543:16673,14565
+P 16658,14555:16740,14577
+P 16640,14543:16673,14575
+# -- column, middle part: gate N1 (dl_q_n)
+D 16678,14507:16728,14754          # VSS land, band C, node N1, band D, mid node, band E, VSS land
+D 16723,14597:16755,14727          # from N1 down the column is wider (bands D, E: W 77)
+C 16701,14530 s=30x30
+C 16702,14729 s=30x30
+D 16546,14601:16681,14634          # N1 west, under the load gate, to the VCC land
+D 16622,14630:16642,14662          # tab south
+B 16620,14633:16645,14668          # N1 tied to its load gate
+P 16598,14654:16647,14669
+P 16560,14586:16600,14672          # load gate of N1, under M_d
+C 16578,14658 s=26x26
+M 16573,14442 y14670 w=20          # metal M_d: N1 up to the third pull-down of N0
+M 16560,14441:16590,14469          # pads
+M 16562,14644:16592,14672
+# band D: from dbus_le's second pad west across the column; ends at x 16669
+P 16669,14640:16836,14663
+C 16818,14654 s=26x26
+# band E: the data input, from the east (drawn per copy beyond x 16841) west across the
+# column, then south as the gate of inverter N3
+P 16655,14684:16841,14706
+P 16654,14699:16676,14766
+N P 16778,14695 d{}_d
+# -- inverter N3: d_d_n = NOT d_d
+D 16602,14716:16680,14754          # channel under the vertical gate, output node
+D 16538,14714:16608,14744          # under the load gate to the VCC land
+D 16492,14682:16548,14744          # VCC land
+C 16512,14710 s=30x34
+D 16617,14744:16632,14801          # output south
+B 16615,14774:16640,14806          # output tied to the load gate's line
+P 16553,14696:16603,14760          # load gate
+P 16581,14744:16603,14804          # stem
+P 16581,14780:16770,14804          # east to M_c's bottom pad
+P 16740,14772:16775,14809          # pad
+C 16756,14792 s=26x26
+M 16752,14388 y14804 w=18          # metal M_c: d_d_n up to band A
+M 16744,14374:16782,14404          # top pad
+M 16742,14777:16771,14806          # bottom pad
+# N1's east buried contact and stub: in dbus_lat this is where dl_q_n leaves; here the stub
+# ends at x 16790 like N0's (the two rows have the same profile, tools/px.py row 14608 and
+# row 14479), and dl_q_n leaves west (above)
+B 16750,14595:16779,14625
+D 16726,14601:16778,14623
+P 16753,14599:16790,14617
+@end
+
+# Copies: bits 6 and 7 at the pitch 477 (tools/dbus_localmatch.py: best offset exactly 0,477
+# and 0,954, 0.82-0.90 in all three shots); bit 4 upside down (mirrored about y 14350).
+@inst dlat_lat 0,0 my=14350 tag=4
+@inst dlat_lat 0,477 tag=6
+@inst dlat_lat 0,954 tag=7
+
+# ---- rails (measured on rows of both metal shots: VCC bright 16491-16538, VSS 16666-16711)
+M 16515,13880 y15790 w=48
+N M 16515,14600 vcc
+M 16689,13880 y15790 w=46
+N M 16689,14600 vss
+
+# ---- the latch enable dbus_le: dbus draws it to x 16950 (M 16950,13614 x17002). tools/follow.py
+# from (16900,13614): west to x 16862, south to y 13810, west to x 16820, south to y 15803,
+# west, end (16772,15800). One piece; bright 16812-16825 on the long run. No contact on the run
+# other than the eight pads (tools/textmap.py over the follower's candidates y 14705-14800:
+# metal throughout, no ring, no hole). At its west end the arm turns south onto a contact
+# (16772,15824) on a poly pad (bright centre in a dark ring in both metal shots, pale hole in a
+# heavy-outlined box in both stripped shots: le_m.png, le_a.png at 6x). The pad's poly goes on
+# south and east, outside the region (bd2's right-hand column): the enable's driver side.
+M 16960,13615 x16860 y13812 x16819 y15802 x16772 y15836 w=18
+C 16772,15824 s=22x22
+P 16756,15807:16790,15841          # the poly pad under the contact (its lines beyond: not drawn)
+N P 16762,15812 dbus_le
+
+# ---- the data inputs: dbus draws d4_d..d7_d to x 16950; poly on west into band E of each latch
+P 16836,13994:16955,14016          # d4_d
+P 16836,14684:16955,14706          # d5_d
+P 16836,15161:16955,15183          # d6_d
+P 16836,15638:16955,15660          # d7_d

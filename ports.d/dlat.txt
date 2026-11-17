@@ -1,0 +1,24 @@
+# dlat: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+# Written 2026-11-17 (run 1) with the Ports table of notes/blocks/dlat.md.
+
+# East side: from dbus (x 16950)
+dbus_le    M  16960,13606-13624   ?    latch enable: joins dbus's metal, which ends at x 16950
+d4_d       P  16955,13994-14016   in   buffered pin D4, into band E of the bit-4 latch
+d5_d       P  16955,14684-14706   in   buffered pin D5
+d6_d       P  16955,15161-15183   in   buffered pin D6
+d7_d       P  16955,15638-15660   in   buffered pin D7
+
+# South: the enable's end
+dbus_le    P  16756-16790,15841   in   poly pad under the end contact (16772,15824); its poly goes on south and east (bd2's right-hand column): believed the driver's side
+
+# West side: the latch outputs, on west and north to the bus inverters (not followed)
+dl4_q_n    P  16466,14256-14273   out  turns north at x 16458-16477
+dl5_q_n    P  16466,14427-14444   out  on west to x 16400, north under areg_rail_r
+dl6_q_n    P  16466,14904-14921   out  a diagonal north-west towards areg_w7 (poly x 16364)
+dl7_q_n    P  16466,15381-15398   out  a diagonal north-west towards areg_w6 (x 16335)
+
+# Rails
+vcc        M  16491-16539,13880   -    the column's VCC rail, goes on north
+vcc        M  16491-16539,15790   -    and south
+vss        M  16666-16712,13880   -    the column's VSS rail, goes on north
+vss        M  16666-16712,15790   -    and south

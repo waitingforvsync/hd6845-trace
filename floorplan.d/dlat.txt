@@ -1,0 +1,5 @@
+16466,13886:16848,14371  logic  D4 input latch | transparent latch of pin D4 (two cross-coupled AND-OR-invert gates, open while dbus_le is high), upside down; dl4_q_n leaves west
+16466,14329:16848,14814  logic  D5 input latch | the same latch (cell dlat_lat, the mirror image of the D0-D3 latch); dl5_q_n leaves west under the VCC rail
+16466,14806:16848,15291  logic  D6 input latch | the same latch
+16466,15283:16848,15768  logic  D7 input latch | the same latch
+16800,13600:16960,15845  route  dbus_le | latch enable of all eight data input latches: down x 16819 past the four latches to its end contact (16772,15824)

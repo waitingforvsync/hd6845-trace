@@ -1,0 +1,156 @@
+# dlat: the input latches of data bits 4-7
+
+Region 16450-16950 x 13900-15800 (the gate column west of the data bus column `dbus`), and
+the four latch outputs where they leave it west. Trace: `trace/dlat.txt` (it `@requires dbus`).
+Started 2026-11-17 21:00 +0000 (Tom Seddon's session, Claude Fable 5.2).
+
+## Status
+
+Run 1 (2026-11-17). **Traced**: the four input latches of data bits 4-7 (cell `dlat_lat`, ten
+transistors, four copies: 40 transistors), the two rails, the latch enable `dbus_le` from
+`dbus`'s end at x 16950 to its end contact (16772,15824), and the four buffered pin levels
+`d4_d`..`d7_d` from x 16950 into the latches. As extracted, for # = 4..7:
+
+    d#_d_n  = NOT d#_d
+    dl#_q   = NOT( (d#_d_n AND dbus_le) OR dl#_q_n )
+    dl#_q_n = NOT( (d#_d   AND dbus_le) OR dl#_q   )
+
+the same transparent latch as bits 0-3 (`notes/blocks/dbus.md`). **Not traced**: where the
+four `dl#_q_n` lines go after they leave the column west (seen, see "Where the outputs go"),
+and so the inverters that drive `db_b4`..`db_b7`. See Not done.
+
+## Inventory
+
+| What | Where | State |
+|---|---|---|
+| Latch, bit 5 | 16466-16848 x 14329-14814 | cell `dlat_lat` (master), traced |
+| Latch, bits 6, 7 | the same cell at (0,477), (0,954) | placed: `tools/dbus_localmatch.py 16488 14329 16848 14814 0 477 12` (and `0 954`): best offset exactly (0,477) and (0,954), 0.82-0.90 in the clean shot, the metal shot and the chip-2 stripped shot |
+| Latch, bit 4 | the same cell **upside down** (`my=14350`: y' = 28700 - y), y 13886-14371 | placed: `findcell` with `dbus_lat` (rot 180), clean shot 0.64, metal 0.65; overlay on both shots at 1.6x (`c4_ov.png`) |
+| VCC rail | metal x 16491-16539, through the whole column and on north and south | drawn y 13880-15790 |
+| VSS rail | metal x 16666-16712, the same | drawn y 13880-15790 |
+| `dbus_le` | metal, from `dbus`'s (16950,13614): west to x 16860, south to y 13812, west to x 16819, south to y 15802, west to x 16772, south onto the contact (16772,15824) | drawn |
+| `d4_d`..`d7_d` | poly rows y 13994-14016, 14684-14706, 15161-15183, 15638-15660 from x 16955 west into band E of each latch | drawn |
+| East strip x 16850-16950 | nothing but the above and `dbus`'s capacitor rectangles and pads (views `e_top.png`, `e_bot.png`, 1.3x, metal and clean shot) | - |
+| Bus inverters | **not in the column**: the latches fill y 13886-15768 without a gap (`findcell` with `dbus_drv`: 0.41-0.43, no copy) | see "Where the outputs go" |
+
+## Logic
+
+### The latch cell `dlat_lat` (traced)
+
+The circuit and the layout of poly and diffusion are those of `dbus_lat`
+(`notes/blocks/dbus.md`, "The input latch"), mirrored left to right: VCC rail on the west,
+VSS rail in the middle, `dbus_le` on the east. What was checked and how:
+
+- `findcell` with `dbus_lat`'s rectangle (17230 8885 17590 9370), all eight orientations,
+  finds four copies and nothing else: `-742,5444 mx=17410` (bit 5), `-742,5921`, `-742,6398`
+  (bits 6, 7) and `-742,5001 rot=180` (bit 4).
+- `tools/dlat_shift.py` (block-by-block displacement of the bit-5 copy against the mirrored
+  master): poly and diffusion lie within 3-5 px of the mirror image in the clean shot.
+- **The contacts, pads and metals do not**: they lie 6-17 px west of where a mirror image
+  puts them (`tools/textmap.py` on each contact: bright centre in both metal shots and the
+  hole in the clean shot agree to 3 px). So the cell is drawn here as a cell of its own, the
+  poly and diffusion mirrored from `dbus_lat` and every contact and metal measured:
+
+  | Contact | mirror image | measured |
+  |---|---|---|
+  | M_d top (third pull-down's pad) | (16587,14454) | (16576,14455) |
+  | M_d bottom (N1's load gate) | (16587,14657) | (16578,14658) |
+  | M_c top (band A's pad) | (16778,14388) | (16766,14389) |
+  | M_c bottom | (16765,14789) | (16756,14792) |
+  | `dbus_le` on band B / band D | (16826,14434) / (16826,14652) | (16819,14436) / (16818,14654) |
+  | VSS land, top / middle / bottom | (16714,14354) / (16716,14531) / (16710,14729) | (16697,14350) / (16701,14530) / (16702,14729) |
+  | VCC, long contact / N3's | x 16508-16532 / (16523,14712) | x 16502-16522 / (16512,14710) |
+
+  Metals (runs where R > 176 and G > 128 on rows of both metal shots): M_d bright
+  x 16567-16580, M_c 16745-16758, `dbus_le` 16812-16825, VCC rail 16491-16538, VSS rail
+  16666-16711.
+- Views of the bit-5 copy at 3.1x in the clean shot with the outline and in the chip-2
+  stripped shot (`c5t_b.png`, `c5t_a.png`, `c5b_b.png`, `c5b_a.png`): every band, load gate,
+  tie box and land of the master is there.
+- **Band A and the third pull-down's gate are two polys** (the junction that would short
+  `d#_d_n` to `dl#_q_n`): 4x in three shots (`j1.png`). The gate poly from M_d's pad ends at
+  x 16641 and band A at x 16665, both inside a field pocket 16628-16673 x 14386-14459 (a closed
+  outline in both stripped shots; green in the clean shot between them:
+  `tools/px.py row 14398 16596 16704 4`).
+- **Band D ends at x 16669**, short of the tie box of N1's load at x 16620-16645
+  (`tools/px.py row 14652 16596 16700 4`: dark and green from x 16644 to 16660).
+- There is no thin metal through this cell (the one in `dbus_lat` is D0's output line), so
+  the strip x 16600-16660 is open here and the clean shot's colours differ there from the
+  master's: that is what `cellcheck.py`'s 14-21 % of badly matching blocks are.
+
+What differs from `dbus_lat`'s circuit: nothing. What differs in the wiring:
+
+- **`dl#_q_n` leaves west.** From the foot of the vertical poly at M_d's top pad a poly runs
+  west along y 14427-14444 under the VCC rail (salmon there: `tools/px.py col 16510 14408
+  14462 3`) and on in the open. The same in all four copies (`tools/px.py row` at y 14913,
+  15390, 14264).
+- **N1's east stub is cut short**: in `dbus_lat` the poly from N1's buried contact carries
+  `dl#_q_n` to the bus inverter; here it ends at x 16790, like N0's stub above it (the two
+  rows have the same profile: `tools/px.py row 14608 16740 16812 4` and `row 14479`).
+- `d#_d` reaches band E directly in poly from the east (no metal).
+
+### The latch enable `dbus_le`
+
+One metal from `dbus`'s end (16950,13614) to its end contact (`tools/follow.py 16900 13614
+W`: corners (16862,13616), (16858,13810), (16820,13813), (16812,15803), end (16772,15800)).
+Pads with contacts on bands B and D of the four latches (y 14046, 14264; 14436, 14654;
+14913, 15131; 15390, 15608). The follower's other contact candidates (y 14723, 14746, 14788)
+are not contacts: `tools/textmap.py 16798 14705 16846 14800 3` shows metal throughout in both
+chips, no ring and no hole, against the pad at y 14652 as reference.
+
+**Its end** (6x in both metal shots and both stripped shots, `le_m.png`, `le_a.png`): the west
+arm (y 15795-15808) turns south at x 16772 onto a contact at (16772,15824): a bright centre in
+a dark ring in both metal shots, a pale hole in a heavy-outlined box 16755-16790 x 15805-15840
+in both stripped shots. The box is a poly pad; its poly goes on south and east, below the
+region (`bd2`'s right-hand column). That is where the enable must be driven from: the line
+has no other end (its east end is the pad on D0's latch). Not followed.
+
+### Where the outputs go (seen, not drawn)
+
+Views `w_top.png`, `w_bot.png` (1.5x, metal, chip-2 stripped and clean shot, x 16330-16500):
+
+| Line | Leaves the cell | Then |
+|---|---|---|
+| `dl4_q_n` | west along y 14256-14273 | turns north at x 16458-16477, a poly in the gap between `areg_rail_r` and the VCC rail (orange in both chip-2 shots), from y 14255 up past y 13860 |
+| `dl5_q_n` | west along y 14427-14444 | under `areg_rail_r` to x 16400, north along x 16400-16416 under that rail (salmon in the clean shot) past y 13860. `areg`'s notes: the arms at y 14431 and y 13657 of "the poly under `areg_rail_r`" |
+| `dl6_q_n` | west along y 14904-14921 | a diagonal north-west from (16460,14900) to about (16365,14810), into the bundle: believed `areg_w7` (poly x 16364, which `areg` draws from y 14700 up to y 13453 and east to x 16480) |
+| `dl7_q_n` | west along y 15381-15398 | a diagonal north-west from (16460,15380) past (16340,15255): believed `areg_w6` (`bd2`'s notes: contact (16337,14866), poly down x 16330-16345; `areg` draws the metal x 16341 from y 14700 up to the contact (16337,13264) and a poly east along y 13263 to x 16480) |
+
+All four head for `areg`'s "four identical cells" at x 16480-16800, y 13060-13840 (pitch about
+190), north of this region: **believed** the four bus inverters (`db_b#` = NOT `dl#_q_n`).
+None of this is drawn.
+
+## Ports
+
+| Name | Layer | Where | Direction | What |
+|---|---|---|---|---|
+| `dbus_le` | metal | (16960,13606-13624) | ? | joins `dbus`'s metal at x 16950 |
+| `dbus_le` | poly | pad (16756-16790, 15807-15841) under the contact (16772,15824) | in (believed) | the enable's end: the pad's poly goes on south and east into `bd2`'s right-hand column |
+| `d4_d`, `d5_d`, `d6_d`, `d7_d` | poly | x 16955, y 13994-14016, 14684-14706, 15161-15183, 15638-15660 | in | from `dbus`'s buffers (its ports at x 16950) |
+| `dl4_q_n`, `dl5_q_n`, `dl6_q_n`, `dl7_q_n` | poly | x 16466, y 14256-14273, 14427-14444, 14904-14921, 15381-15398 | out | the latch outputs, on west (see above) |
+| `vcc` | metal | x 16491-16539, y 13880 and y 15790 | - | the column's VCC rail, continues both ways |
+| `vss` | metal | x 16666-16712, y 13880 and y 15790 | - | the column's VSS rail, continues both ways |
+
+## Ambiguities
+
+1. **Which rail is which** rests on the loads (every load's far end is on the west rail), as
+   in `dbus`; neither rail was followed to a known supply.
+2. `?D` (16587-16613, 14384-14430) and its copies: the width of the third pull-down of N0
+   (41 or 17), copied from `dbus_lat`'s Ambiguity 5. Sizes only.
+3. `?B`/`?P` at N0's east tab (16750-16790, 14464-14492): a buried contact with a stub that
+   goes nowhere, as in `dbus_lat`. Connects nothing.
+
+## Review
+
+(not yet reviewed)
+
+## Not done
+
+- **The four outputs** `dl4_q_n`..`dl7_q_n` west of x 16466, as far as the gates they drive
+  (table above), and those gates: the bus inverters of bits 4-7 and their joins to
+  `db_b4`..`db_b7`. Start from the table; the cells are north of this region
+  (x 16480-16800, y 13060-13840, in `areg`'s old region).
+- `dbus_le` beyond its end pad (16772,15824): the poly south and east of it, to the driver.
+- The rails north of y 13880 and south of y 15790.
+- Sizes: the cell's poly and diffusion are `dbus_lat`'s mirrored, not re-measured edge by
+  edge here (within 3-5 px by `tools/dlat_shift.py`).
