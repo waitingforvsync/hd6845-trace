@@ -445,7 +445,9 @@ Evidence (survey and commands: `cache/scratch/dbus/survey.md`):
   diffusion rectangle.
 - **No tap on the rectangles** (`s5_rects.png`, 2.6x, metal and clean shot): D2's metal
   passes over the east edge of the rectangles 16977-17090 x 11140-11270 and x 11575-11705,
-  D3's over 16955-17060 x 12830-12965, D4's over 16925-17000 x 13820-13965. Under each
+  D3's over 16955-17060 x 12830-12965, D4's over 16925-17000 x 13820-13965, D5's over the
+  east edge of one at about x 16880-16958, y 15220-15345 (its own contact pad near
+  (16885,15305); found by the review, `review-9/rect_d5.png`, three shots). Under each
   metal the rectangle is plain tan: no specks, no ring in the metal shot, no pad on the
   metal. Each rectangle has its own contact elsewhere (a dot at (17012,11205); straps
   ending at (17005,11650), (16972,12900), about (16935,13895)). They are the chains'
@@ -904,6 +906,57 @@ unchanged but for twelve widths. Viewed at 4x or more: the master's G1 and G4, G
 chains 1, 4 and 5, G4 of chain 3. Could not check directly: the tab's join to the land
 under the rail's edge line (inferred from the absence of a second edge).
 
+### Run 5 (2026-11-17)
+
+**Round 1, full review of what run 5 added** (reported 2026-11-17 20:27 +0000, a fresh
+Fable 5.2 agent; 29 images in `cache/scratch/dbus/review-9/`; the piece: `d2_out_n`..
+`d5_out_n`, commit 0288b78). Told to suspect: D2's west end (the 16 px connector, and
+whether line 2 is separate from pad B's row under the metal); D3's corner against the pad
+10 px away; the joins into the four pad cells (an 8 px overlap with a strip `dpad` draws
+15 px higher); the three top corners and the input lines' corners above them; a break,
+branch or hidden contact along the channel runs, their clearance from the `d_hiz` pads and
+the VCC lands, D5's input poly alongside; a contact wherever a metal crosses a line 2
+(the earlier lines' metals cross the later lines' line 2); taps, track changes and
+contacts onto the rectangles along the four long metals; bridges between the five nested
+L's of the staircase and runs that share an x; whether each of the eight pads has a real
+contact and each end pad's poly leaves from that pad.
+
+What it checked: D2's west end at 4.5x in four shots with a column profile down the
+connector (continuous poly from the upper row to line 2 in both chip-2 shots and the
+clean shot; pad B's row ends at x about 17155; x 17162-17174 field pink under the bus
+metal, which has no edge bars at line 2's height); D3's west end at 4.5x in four shots
+(10-15 px of field to the neighbouring pad); the four joins into the cells at 4.5x in
+both stripped shots (one stepped poly shape with strip 4 in each); the three top corners
+with column profiles (one poly round each, about 9 px of field between dark edges to the
+input line's corner); the channel runs by a row-by-row scan and views (poly unbroken at
+every row in both chip-2 shots, no branch either way; 16-18 px between the interiors of
+poly and VCC land at 6x; the `d_hiz` pads 8-10 px clear; D5's input poly 24 px away);
+line 2 under the rails, the trunk and the field metals at 2x with text maps and
+`railprof.py` (poly over field everywhere, no hole or ring at any crossing, including the
+earlier lines' metals and the input jumpers); the long metals with `follow.py` and a scan
+of both metal shots (one piece each, no widening, no ring; four dark patches are in one
+chip only), the rectangles under them; the staircase corners at 4.2x in both metal shots
+(five separate L's, no bridge; runs that share an x are separated by another line's
+horizontal); the eight pads (real contacts; each end pad's poly leaves west from that
+pad, clear of the second staircase's pads); the full extraction and `tools/unsure.py`
+(none of these nets listed).
+
+It reported no finding, and two remarks that change nothing in the trace:
+
+- D5's metal also passes over the east edge of a plain diffusion rectangle (about
+  y 15215-15350, its own contact pad near (16885,15305)) without contact; the notes named
+  rectangles only under the other three. Checked (`review-9/rect_d5.png`: plain tan under
+  the metal in the clean shot, no ring in either metal shot). Added to the notes.
+- D2's line 2 is drawn at y 10954-10976 and `railprof.py` puts it at 10957-10977: within
+  the 3 px tolerance; not changed.
+
+Not checked by it: the long metals at 4x between their pads, corners and rectangles
+(measured, not viewed); the crossing of D2's metal over D3's line 2 at (17080,12331) in
+the clean shot (residue; both metal shots show no ring or pad); line 2 under the rails
+above 2x.
+
+Round 1: no findings.
+
 ## Not done
 
 - **The latches and bus inverters of bits 4-7**: not in this region. `d4_d`..`d7_d` leave
@@ -934,8 +987,9 @@ under the rail's edge line (inferred from the absence of a second edge).
   diffusion rectangles 16977-17090 x 11140-11270 (dot contact (17012,11205)),
   16977-17090 x 11575-11705 (a strap from the pad (17020,11395) to the contact
   (17005,11650)), 16963-17053 x 12085-12195 (dot (17000,12085)), 16955-17060 x 12830-12965
-  (strap to (16972,12900)), 16925-17000 x 13820-13965 (strap to about (16935,13895)):
-  the capacitors of chains 2-4 with their taps (`tools/opendiff.py 16900 10850 17270
+  (strap to (16972,12900)), 16925-17000 x 13820-13965 (strap to about (16935,13895)),
+  about 16880-16958 x 15220-15345 (contact pad near (16885,15305)):
+  the capacitors of chains 2-5 with their taps (`tools/opendiff.py 16900 10850 17270
   16400` lists them). A second staircase of pads with polys west lies between the end
   pads (about (16862,15990), (16905,16125), (16950,16255)): not looked at.
 - Channel wiring x 17590-17830: `d_hiz`'s driver.
