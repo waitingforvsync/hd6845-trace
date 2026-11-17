@@ -1,4 +1,5 @@
 # tl1: top-left random logic, westmost strip (x 2100-2817, y 2500-6350): what tla did not draw
+@requires tla
 @block tl1
 @w M=12 P=20
 
@@ -211,3 +212,44 @@ P 2470,4625:2545,4643
 P 2504,5358:2542,5386
 C 2521,5372
 P 2535,5362:2817,5382
+
+# ====================================================================
+# Tracks beside the small cluster below (y 5900-6350): s1.png (2.05x, metal and acid1b),
+# s2.png; pieces by tools/follow.py. The rows run east into the small cluster (not traced);
+# each is drawn to x 2545 (seen to x 2550 on s1.png).
+
+# ck_out: a second contact on tla's trunk metal x 2370, at (2372,6060) (ring on the line in
+# the metal shot, pad with a green centre in the clean shot; follow.py's candidate (2371,6051)).
+# Poly row east along y 6054-6072.
+P 2354,6046:2392,6076
+C 2372,6061
+P 2386,6054:2545,6072
+# tl1_w5978: metal x 2326 from a pad with a contact (2326,5978) south, out of the strip
+# (follow.py north from (2327,6100) ends at y 5976). Poly row east along y 5969-5987.
+M 2326,5966 y6350
+P 2308,5963:2346,5993
+C 2326,5978
+P 2340,5969:2545,5987
+N P 2450,5978 tl1_w5978
+# tl1_w6022: metal x 2414, y 6010-6207, a pad at each end: (2414,6022) row y 6013-6031,
+# (2414,6195) row y 6186-6204
+M 2414,6010 y6207
+P 2396,6007:2434,6037
+C 2414,6022
+P 2428,6013:2545,6031
+N P 2480,6022 tl1_w6022
+P 2396,6180:2434,6210
+C 2414,6195
+P 2428,6186:2545,6204
+# tl1_w5936: metal x 2500, y 5924-6252. Top pad (2500,5936): its poly row runs WEST along
+# y 5926-5944 under all the tracks to a corner at about (2096,5935), where it turns north
+# under the edge of MA1's metal (s2.png; drawn from x 2110, the vertical not followed).
+# Bottom pad (2500,6239): poly row east along y 6228-6246.
+M 2500,5924 y6252
+P 2482,5921:2520,5951
+C 2500,5936
+P 2110,5926:2495,5944
+N P 2300,5935 tl1_w5936
+P 2482,6223:2520,6253
+C 2500,6239
+P 2514,6228:2545,6246

@@ -8,7 +8,7 @@ Package `tl1` (part 1 of 6 of the top-left logic). Trace: `trace/tl1.txt`. Views
 ## Status
 
 2026-11-17 19:44 +0000. **Partial.** Three gates (8 transistors) and the vertical metals of the tracks
-x 2283, 2370, 2457, 2500 with their pads and rows are traced and extract with 0 errors and
+x 2283, 2326, 2370, 2414, 2457, 2500 with their pads and rows (y 2790-5480 and y 5900-6350) are traced and extract with 0 errors and
 0 warnings in the full extraction. Main result: **the driver of `rcs_e4` is found**, a wide
 two-input NOR in the west column at y 4778-5000. Five units of the west column (y 3740-4215,
 y 4345-4778), the small cluster below (y 5650-6350), the north-west corner (y 2500-2790)
@@ -62,11 +62,11 @@ kind (wide diffusions under R1 with several gates across).
 | 2199 | north piece: from the east along y 2557, corner (2199,2557), south to about y 3308-3336 (contact candidate (2199,3336)): **not traced**. South of y 3371: `tla_w3376` (`tla`) |
 | 2239 | `tla_w3461` (`tla`), y 3449-5646 |
 | 2283 | y 2721-3126 and y 3188-3520 (`tla`); **y 3622-4126 `tl1_w3636`**; **y 4230-4474 `tl1_w4243`**; south of y 4914 `ma4_drv_in` (`mal`) |
-| 2326 | `rcs_thin_e` y 2754-3347, `tla_w3417` y 3404-5551 (`tla`); a piece from a contact (2327,5977) south out of the strip: not traced. A poly of another net lies under it y 4540-4985 (from the west along y 4547, leaves west along y 4980; seen again at 2.05x, `a4.png`, `a5.png`): not traced |
-| 2370 | **y 2843-3863 `tl1_w2857`**; **y 3925-4300 `tl1_w4287`**; **y 4925-5459 and east to (2521,5459) `tl1_w4937`**; `ck_out`'s contact (2365,5847) (`tla`); a piece from a contact (2373,6066) south: not traced |
-| 2414 | `rcs_c1` y 2972-5082, `rcs_in2` y 5182-5411 (`tla`); a piece (2412,6020)-(2412,6193): not traced; `lc_step` from (2412,6278) (`ur`) |
+| 2326 | `rcs_thin_e` y 2754-3347, `tla_w3417` y 3404-5551 (`tla`); **from a pad (2326,5978) south out of the strip: `tl1_w5978`**. A poly of another net lies under it y 4540-4985 (from the west along y 4547, leaves west along y 4980; seen again at 2.05x, `a4.png`, `a5.png`): not traced |
+| 2370 | **y 2843-3863 `tl1_w2857`**; **y 3925-4300 `tl1_w4287`**; **y 4925-5459 and east to (2521,5459) `tl1_w4937`**; from (2365,5847) south it is `ck_out`'s trunk (`tla`), with **a second contact (2372,6061)** found here |
+| 2414 | `rcs_c1` y 2972-5082, `rcs_in2` y 5182-5411 (`tla`); **y 6010-6207 `tl1_w6022`**; `lc_step` from (2412,6278) (`ur`) |
 | 2457 | **y 2800-3690 `tl1_w3678`**; **y 4012-5372 and east to (2521,5372) `tl1_w4025`**; `clk_tl` from (2458,5587) (`tla`) |
-| 2500 | **y 2886-4730 `tl1_w3594`**; **y 4882-5232 `rcs_e4`**, continuing as `tla`'s metal round to bus line C; a piece (2503,5934)-(2498,6235): not traced |
+| 2500 | **y 2886-4730 `tl1_w3594`**; **y 4882-5232 `rcs_e4`**, continuing as `tla`'s metal round to bus line C; **y 5924-6252 `tl1_w5936`** |
 
 **North of y 2790** (`n1.png`, 1.45x): only wiring. The metal x 2199 turns east at y 2557. Nested
 poly L's at x 2440-2530, y 2590-2680 and three polys going north at x 2410, 2455, 2500 above
@@ -158,6 +158,22 @@ as in the master.
 - Output: metal x 2283, y 4230-4474, to a pad (2283,4462) whose row y 4452-4470 runs east
   into the unit at y 4340-4470.
 
+### The tracks beside the small cluster (y 5900-6350): traced (wiring only)
+
+`s1.png` (2.05x, metal and clean shot), overlay `o3.png`. Each row runs east into the small
+cluster, which is not traced; rows are drawn to x 2545.
+
+- **`ck_out` has a second contact on its trunk metal x 2370**, at (2372,6061), 214 px below
+  `tla`'s (2365,5847): ring on the line in the metal shot, pad with a green centre in the
+  clean shot. Its poly row runs east along y 6054-6072: one more `ck_out` load in the small
+  cluster.
+- `tl1_w5978`: pad (2326,5978), row east y 5969-5987; the metal x 2326 goes south out of the
+  strip (not followed).
+- `tl1_w6022`: metal x 2414, y 6010-6207, joins two rows: y 6013-6031 and y 6186-6204.
+- `tl1_w5936`: metal x 2500, y 5924-6252. The top pad's row runs **west** along y 5926-5944
+  under all the tracks to a corner at about (2096,5935) and turns north under the edge of
+  MA1's metal (`s2.png`; not followed); the bottom pad's row runs east along y 6228-6246.
+
 ## Ports
 
 | Name | Layer | Where it crosses | Direction | What |
@@ -172,6 +188,10 @@ as in the master.
 | `tl1_w3636` | P | (2545,3894), (2545,4113) | driven here | into the units at y 3740 and y 4000 |
 | `tl1_w4243` | P | (2545,4461) | driven here | into the unit at y 4340 |
 | `tl1_w4287` | P | (2545,3939) | from the unit at y 3740-3960 (believed) | the inverter's input |
+| `ck_out` | P | (2545,6063) | from `tla`'s trunk | a gate row into the small cluster |
+| `tl1_w5978` | P, M | (2545,5978); (2326,6350) south | not known | row into the small cluster; metal x 2326 on south |
+| `tl1_w6022` | P | (2545,6022), (2545,6195) | not known | joins two rows of the small cluster |
+| `tl1_w5936` | P | (2110,5935), on to a corner (2096,5935) and north; (2545,6237) | not known | from the pad-ring side to a row of the small cluster |
 
 The rows y 2812, 2857, 2899 were read at 2.5x (`n2.png`) from their pads to x 2820: straight,
 under R1, thin metal E's north arm and a wide metal x 2735-2785, no pad.
@@ -188,8 +208,26 @@ under R1, thin metal E's north arm and a wide metal x 2735-2785, no pad.
 
 ## Not done
 
-- West column units at y 3740-3960, 4000-4215, 4340-4470, 4480-4650, 4650-4800 (Inventory). Start
-  with y 4650-4800: it makes `tl1_w4678`. Needed for each: 5-6x in `acid1b` and both metal
+- **Where `tl1_w4678` (first gate of `rcs_e4`'s NOR) comes from: two passes, not resolved.**
+  Its row y 4668-4688 ends at x 2548 on a tan rectangle (2553-2573, 4655-4690) with a heavy
+  outline on its west side and a heavy rounded bottom (y 4690-4697), right under the metal
+  x 2557-2573 (`u7b.png`, 6x, clean shot and metal). The same shape, 123 px higher: a tan
+  rectangle (2553-2573, 4535-4558) with a heavy rounded bottom (`u6b.png`, 6x). Under that
+  metal, going down: tan end (4535-4558), pink = field (4563-4595), tan (4597-4620), the
+  salmon row of `tl1_w4025` (4622-4643), pink (4645-4655), the tan rectangle (4655-4690).
+  Readings: (a) each tan rectangle is the end of the row's poly on a buried contact to a
+  diffusion under the metal; (b) the row `tl1_w4025` crosses a diffusion column there (a
+  pass transistor into `tl1_w4678`, which would make `rcs_e4`'s first input a latched
+  value). Neither is shown: under this metal the clean shot's tan and salmon could not be
+  told apart with confidence, and the gap between the metal and R1 (x 2575-2600) hides what
+  lies beside it. Next: the metal x 2557-2573 itself (where are its contacts: (2562,3757),
+  (2555,4160)?, (2562,4360)?, (2555,4767)), then a profile down x 2563 in all four shots.
+- The unit at y 4650-4800 (`u7a.png`, `u7b.png`): under R1, from the top: diffusion y 4668-4700
+  (reaching east to x 2700), gate y 4702-4722 (`tl1_w3594`, from the pad (2499,4718)), diffusion
+  y 4722-4747, gate y 4747-4773 (from the pad (2555,4767); its poly goes on east as a thin
+  line along y 4745-4755), then the VSS box shared with `rcs_e4`'s NOR. West of x 2578 there
+  is field between the gates, so the unit's output leaves east. Not traced.
+- West column units at y 3740-3960, 4000-4215, 4340-4470, 4480-4650 (Inventory). Needed for each: 5-6x in `acid1b` and both metal
   shots; the gap between the metal x 2557-2573 and R1 (x 2575-2600) hides the column in the
   clean shot, so read the column in the metal shots.
 - The vertical metal x 2557-2573 over the column, from the pad (2562,3757) south to the pad
@@ -197,9 +235,13 @@ under R1, thin metal E's north arm and a wide metal x 2735-2785, no pad.
 - The metal x 2735-2765 from (2742,3893) to (2745,4090); thin metal W's contacts.
 - The far ends of the rows `tl1_w4937`, `tl1_w4025` (east of x 2817, past x 3400) and of
   `tl1_w2857`, `tl1_w3678`, `tl1_w3594` (east of x 2817 along y 2812-2899).
-- Track pieces listed as not traced in the Inventory: x 2199 north piece, x 2326 from
-  (2327,5977), x 2370 from (2373,6066), x 2414 (2412,6020)-(2412,6193), x 2500
-  (2503,5934)-(2498,6235); the poly under x 2326 (y 4547 / y 4980, both ends west).
+- The metal x 2199's north piece (from the east along y 2553-2557 to a corner (2199,2556),
+  south to y 3338: follow.py; its end at (2196,3338) not looked at).
+- The poly under the metal x 2326, y 4540-4985 (`s3.png`, 2.15x): at the top it runs west
+  along y 4533-4550 to a corner at about x 2165-2180 and north; at the bottom west along
+  y 4972-4988 to about x 2131 and (not clear) south. Both ends leave among the pad-ring
+  metals. Likewise `tl1_w5936`'s poly north of (2096,5925), and `tl1_w5978`'s metal south
+  of y 6350.
 - North of y 2790 and the small cluster south of y 5640: surveyed at low zoom only.
 - The tie of the plate's tab in the two marked loads (2706-2754, 4287-4323) and (2712-2744, 4906-4960).
 
