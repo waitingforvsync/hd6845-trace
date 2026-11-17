@@ -1,0 +1,105 @@
+# tc2: top-centre random logic, lower half (x 6400-8250, y 4450-6400).
+# Notes: notes/blocks/tc2.md. Views: cache/scratch/tc2/.
+@block tc2
+
+# ===== Piece 1 (2026-11-17): three lines from tc1 through the crossing field, and the NOR at
+# ===== x 6420-6710, y 5020-5290 that the second of them feeds.
+#
+# Colours here (calibrated on the two VSS contact boxes (6548,5092), (6548,5254) and the rows
+# under the rail x 6537-6583): clean shot under metal: poly 215-224/155-170/117-124, diffusion
+# 198-204/161-175/130-139, field 190/120/126. In the open: poly dark red-brown, diffusion
+# pinkish 165/115/105 (clean), R-G 20-33 in the chip-2 stripped shot against 0-6 for field and
+# 45-55 for poly (tools/px.py rows y 5107, 5132, 5218, 5243).
+
+# --- the ground rail x 6537-6583: tcw draws it to y 4455 (x 6507-6586), fld from y 5400
+#     (x 6575-6625). Between them one metal: tools/tc2_runs.py col 6560 4450 5445 (no dark run
+#     over 21 px in both metal shots except the two contact rings); it widens east to x 6625 at
+#     y 5388-5445 and its west edge steps to x 6575 at y 5445 (railstep.png, 3x).
+M 6560,4445 y5445 w=46
+M 6537,5388:6625,5445
+
+# --- tc1_o3527 (tc1's cell B output): tc1's metal x 7003-7023 comes down to y 4492 and is one
+#     metal with the pad (6967,4481) (text map: ring 9 px either side of the centre, a 6 px bar
+#     at x 6988-6991 where the poly pad's east edge prints through; tools/follow.py from
+#     (7013,4400) S turns west at y 4484). Poly row y 4473-4491 west under the vertical metals
+#     (no pad on it; profile row 4481, row4480.png) to the pad (6490,4482); metal west along
+#     y 4470-4494, over the vertical poly x 6400-6420 without a pad, on past x 6400 (follower:
+#     end (6012,4484), not looked at).
+M 7013,4440 y4481 x6958 w=22
+P 6950,4464:6990,4500
+C 6967,4481
+P 6975,4482 x6500 w=18
+P 6478,4465:6515,4500
+C 6490,4482
+M 6500,4482 x6400 w=24
+N P 6700,4482 tc1_o3527
+
+# --- tc1_x1: tc1's channel metal x 7048-7068 ends on the contact (7055,4478) (pad2.png 3.1x;
+#     follower: end (7054,4488)). Poly south along x 7057 to y 4592, a diagonal to x 7017 at
+#     y 4638 (x1diag.png 4.6x, both stripped shots: separate from ras's diagonal of tc1_g, field
+#     between them), south to y 4873, west along y 4865-4881 under the rails to x 6485, where it
+#     turns down into the pad (6492,4893) (x1pad.png, x1padm.png 4.8x). Metal west and south
+#     along x 6444-6456 (text map: only 6-9 px bars where the rows y 4937 and y 5003 pass under,
+#     and the ring of the end contact) to the pad (6450,5045).
+M 7058,4440 y4486 w=20
+P 7039,4461:7073,4498
+C 7055,4478
+P 7057,4478 7057,4592 7017,4638 7017,4873 6492,4873 w=18
+P 6478,4864:6512,4910
+C 6492,4893
+M 6502,4893 x6443 w=22
+M 6450,4882 y5052 w=14
+P 6436,5026:6468,5068
+C 6450,5045
+N P 7017,4750 tc1_x1
+
+# --- tc1_p4308 (the input of tc1's inverter tc1_o4280): its pad (6620,4436) is tc1's; the metal
+#     x 6612-6634 runs south (follower: (6623,4436) to (6622,5006)) to the pad (6620,5002); poly
+#     row y 4993-5012 west, under the metals x 6450 (tc1_x1) and x 6400-6417 without a pad, on
+#     past x 6400 (row5003.png 4.2x, three shots). East of the pad: field.
+M 6623,4440 y5008 w=20
+P 6600,4984:6640,5020
+C 6620,5002
+P 6610,5003 x6400 w=18
+N P 6500,5003 tc1_p4308
+
+# --- the NOR  tc2_o5175 = NOR(tc1_x1, fld_b_in)  (lg2.png 3.5x, node5.png 5x, lg4.png, lg5.png)
+# Diffusion strip x 6481-6520 from y 5096 to y 5250, west of the rail; each end is one
+# diffusion with a contact box under the rail (rows y 5107 and 5243: no edge between the strip
+# and the box in the chip-2 shots, only the rail's etch line at x 6525-6529).
+D 6481,5096:6520,5250
+D 6515,5073:6577,5116                 # VSS contact box (pits; ring (6548,5090) in both metal shots)
+C 6548,5092
+D 6515,5237:6577,5282                 # VSS contact box, ring (6548,5252)
+C 6548,5254
+# gate 1 (tc1_x1): poly from the pad (6450,5045) south, east across the strip at y 5119-5146;
+# ends at x 6527, 7 px past the strip's east edge (row y 5132). W 39 / L 27.
+P 6443,5060:6465,5146
+P 6436,5119:6527,5146
+# gate 2 (fld_b_in): y 5205-5233, from x 6423; the poly turns south at x 6423-6442 and at
+# y 5337-5356 east: the row y 5345 that fld draws from x 6560 (its lower inverter's gate line).
+# The row's west end is this corner: field under the metal x 6397-6417 (g2row.png 4.4x, three
+# shots; rows y 5220, 5290).
+P 6423,5205:6527,5233
+P 6423,5205:6442,5356
+P 6423,5337:6570,5356
+# the output node: the strip between the gates. A poly arrives from the west along y 5161-5185
+# and ends, rounded, at x 6505 inside the strip in a heavy-outlined box with a lighter centre
+# (nested rings in the clean shot): buried contact. It runs on west under the metal x 6397-6417
+# (salmon there) past x 6400.
+P 6400,5161:6503,5185
+B 6475,5157:6507,5189
+N P 6440,5173 tc2_o5175
+# east from the node: a diffusion band y 5168-5186 under the rail (clean shot 200/163/132 =
+# the contact boxes' colour, not the rows' 220/165/120), on in the open to x 6612, where it
+# widens down to y 5243; from x 6640 it is a strip y 5170-5197 under the load's poly to the VCC
+# contact box that fld draws (6705-6755 x 5175-5235, contact (6722,5200)).
+D 6515,5168:6616,5186
+D 6612,5168:6641,5243
+D 6636,5170:6712,5197
+# the load: poly block x 6650-6702, y 5152-5242 (three zones in the column x 6667: over field,
+# over the strip, over field); a tab from its lower west corner ends in the heavy-outlined box
+# (6612-6643, 5212-5243) on the widened band: the tie to the output. W 27 / L 52.
+P 6650,5152:6702,5242
+P 6622,5214:6652,5240
+B 6610,5208:6645,5245
