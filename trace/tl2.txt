@@ -3,3 +3,83 @@
 @requires tl1
 @block tl2
 @w M=12 P=20
+
+# ====================================================================
+# The small cluster's east half (x 2817-3180, y 5900-6300): two inverters in series on R3,
+# built like tla's units (pull-down on a VSS box under R3, load between R2 and R3):
+#   tl2_w6070 = NOT tl1_w6022        (lower unit)
+#   tl1_w5936 = NOT tl2_w6070        (upper unit)
+# Each gate poly makes a loop round a rectangle of field east of the rail before it reaches
+# its VSS box (poly on field: the rectangles and the gaps between the loops measure as field
+# in the chip-2 stripped shot, 157/152/104 against 159/155/103).
+
+# R3 (VSS) on south from tla's piece (y 5330), and the wide VSS metal east from its foot
+# (y 6250-6292 as far as x 3160, where the output row below ends, y 6238-6292 beyond; lc_step's
+# poly row under it prints through as a dark line at y 6272), which turns south at x 3257-3305
+# and leaves the strip (c14.png, o3.png)
+M 2975,5320 y6292 w=48
+M 2952,6271 x3170 w=42
+M 3160,6265 x3281 y6350 w=52
+N M 2975,5700 vss
+
+# ---- upper unit: tl1_w5936 = NOT tl2_w6070
+# VSS box under R3 with its contact; the gate band crosses its top; the drain strip north of
+# the band runs west to the node and east to the buried contact A
+D 2968,5942:3015,6040
+C 2982,6012 s=26x28
+D 2897,5942:3064,5960
+B 3038,5924:3068,5958
+# node under thin metal E, load strip under the plate from R2's VCC box (tl1's, contact
+# (2803,5935)), tie box below the plate
+D 2897,5935:2930,6005
+D 2828,5936:2900,5962
+P 2848,5915:2892,5990
+D 2868,5988:2930,6005
+B 2868,5988:2897,6008
+P 2868,5986:2897,6008
+# output: poly from A east, south round both loops, west along y 6228-6247 to tl1's row
+P 3040,5926:3172,5947
+P 3147,5926:3170,6247
+P 2810,6228:3170,6247
+N P 3158,6100 tl1_w5936
+
+# ---- lower unit: tl2_w6070 = NOT tl1_w6022
+D 2968,6064:3015,6170
+C 2982,6140 s=26x28
+D 2934,6064:3015,6092
+D 3010,6064:3064,6084
+B 3038,6050:3068,6084
+# node: a diffusion strip in the gap between thin metal E and R3; load strip under the plate
+# from a VCC box of its own under R2 (contact (2803,6092)); tie box above the plate
+D 2934,6042:2947,6122
+D 2828,6093:2940,6120
+D 2785,6062:2835,6122
+C 2803,6092 s=24x30
+P 2836,6066:2925,6122
+D 2895,6042:2947,6062
+B 2895,6042:2927,6062
+P 2895,6042:2925,6070
+# its output is the upper unit's gate: poly from B east, north round the rectangle, west
+# across the upper VSS box
+P 3040,6056:3125,6076
+P 3101,5966:3125,6076
+P 2952,5966:3125,5990
+N P 3112,6020 tl2_w6070
+# input: tl1's row y 6187-6203 on east under R3, north round the lower rectangle, west across
+# the lower VSS box
+P 2810,6187:3125,6203
+P 3101,6098:3125,6203
+P 2954,6098:3125,6120
+
+# ---- the two thin metals that pass over the two units (no contact on either unit: each is dim
+# over a tie box, with no pad, no bright centre and protected colours in the clean shot)
+# tla_w3376: tla's metal x 2871 on south from y 5975 (follow.py 2870 6100 N runs to y 5498, S to
+# y 6374): out of the strip at y 6350
+M 2871,5970 y6350 w=12
+# rcs_thin_e: tla's thin metal E on south from y 5400 to a pad with a contact (2913,6327)
+# (bright centre in a dark ring in both metal shots, green hole in the clean shot); poly row
+# east along y 6316-6337 out of the strip
+M 2913,5395 y6334 w=14
+P 2895,6312:2932,6342
+C 2913,6327
+P 2925,6327 x3533 w=20
