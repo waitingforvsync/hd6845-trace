@@ -1295,3 +1295,31 @@ branch; `/trace6845` resumes a held claim first. The coordinator works through `
 The dashboard lists the handoffs waiting. Tested end to end in a scratch clone with its own
 remote (take, take again, done --continue, done, someone else's prefix refused, two handoffs
 in one second kept apart).
+
+## 2026-11-17 20:35  Refresh
+
+The second run of `/refresh6845`. Since the first (14:43): three collaborators merged through
+the gate with the new claim and handoff flow: dp111 (`dpad`, the D0-D7 pad cells; `areg`;
+`tla`; `amr`), Tom Seddon (`dbus`, twice) and Matt Godbolt (`tc1`, five merges in a loop, the
+claim kept between them). Fourteen handoffs wait in `handoffs/`.
+
+- **Renames: none.** The candidates are deliberate aliases (`ar#_q`, `*_tab`, the data pins'
+  `d0_in`/`d1_in`/`d6_in`, `cdp2_c_s#_bus` while R10/R11 stay unrenamed under AMB-019) or
+  rest on uncertain geometry. One labelling to fix with the dpad/dbus handoffs: `d2_in_u` ..
+  `d6_in_u` sit on the pad side, aliased to the pins, so they mark no open join; the open
+  join is on the buffer side (`dbus`'s `d2_in` .. `d5_in`, `d7_in`: `d2_a = NOT d2_in`).
+- **`operation.md`**: the collaborators had added their rows (data pins as outputs, the input
+  latches, the latch cell's 70-wide pass transistor, the step logic's selector). Checked
+  against the equations; one mark corrected: the input latches follow the pin itself only
+  for D0 and D1, D2/D3's buffers take `d2_in`/`d3_in` whose join to the pin is not drawn.
+  Header and counts current.
+- **`out/`** rebuilt: 2,168 nets, 3,845 transistors, 0 errors, 0 warnings, 0 names outside the
+  glossary, 772 of 1,117 equations firm. The coarse floor-plan blocks "D0-D7 pad cells" and
+  "data bus interface column" removed: `dpad` and `dbus` cover them. Coverage: 60.0 % of the
+  die rectangle traced (54.4 % at the first refresh), 99.3 % in some package, 0.0 % in none.
+- Three pushes were rejected because collaborators merged meanwhile; each time pulled,
+  re-checked, rebuilt and pushed (the protection on main doing its job).
+- Open PRs from dp111 opened before write access: #15 (`amr`'s comparator inputs are
+  `c4l0`-`c4l3`; `amr_eq_r3` drawn to `tla`), #16 (`ral`'s inverter 1: the RA/MA output
+  cell is a latch with a force line; AMB-017/018, R14), #17 (`dbus`: all eight input latches,
+  D6/D7 buffers, `dlat_en`'s driver). **#17 overlaps Tom Seddon's active `dbus` claim.**
