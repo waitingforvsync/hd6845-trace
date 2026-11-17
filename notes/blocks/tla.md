@@ -478,3 +478,11 @@ added west patch is right (diffusion on both sides of the gate, joined to the ra
 box; the netlist differs only in that one transistor). One finding: the same pull-down
 also runs east of the rail, a mirror-image closed patch at (2655-2683, 3125-3147):
 confirmed by the tracer at 6x (`chk_east.png`) and drawn; W 105 -> about 133, same nets.
+
+Round 3 (fix check, 2026-11-17 19:07 +0000, a fresh agent on claude-fable-5-2, against commit 90ea353). The east
+patch is diffusion below the gate, joined to the VSS box, ends at x 2681-2684 short of thin
+W, and is 44 px clear of the load; the overlap above the gate is the same node. The full
+extraction of both versions differs only in that transistor (105/19 -> 134/19); the node
+and `vss` stay separate.
+
+Round 3: no findings.
