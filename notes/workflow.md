@@ -195,7 +195,9 @@ its commit on the new main and re-checks the prefix and the regions; the merge s
 main again and re-runs `tools/mergecheck.py`. So two claims of one prefix (or two
 overlapping regions) cannot both succeed, and no merge reaches main without passing the
 gate against exactly the main it lands on. **Never force-push**: it is the one thing that
-defeats this. `tools/newwork.sh` starts work only on a claim that is yours.
+defeats this, and GitHub's branch protection on main now refuses it (and deletion of main) for
+everyone, administrators included; pull requests and status checks are deliberately not
+required, because claims and merges push to main directly. `tools/newwork.sh` starts work only on a claim that is yours.
 
 ## Why it is done this way
 
