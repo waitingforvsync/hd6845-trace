@@ -94,7 +94,7 @@ D 2600,4950:2652,5000                 # rail box below, VSS contact
 C 2620,4982
 # gate 1: poly y 4843-4862. It comes from the north: an L, down x 2434-2452 from a corner at
 # y 4668-4688, where the poly comes from the east (from the unit at y 4650-4800, not traced).
-P 2434,4843:2680,4862
+P 2434,4843:2697,4862
 P 2434,4668:2452,4862
 P 2434,4668:2545,4688
 N P 2443,4760 tl1_w4678
@@ -102,7 +102,7 @@ N P 2443,4760 tl1_w4678
 # x 2370 that runs south to y 5459 and east to a pad with a contact (2521,5459); from that pad
 # a poly row runs east along y 5450-5470 under the foot of the cluster (seen straight to
 # x 3400 at 1.44x, f2.png; drawn to the strip's edge).
-P 2384,4926:2680,4946
+P 2384,4926:2697,4946
 P 2352,4921:2390,4953
 C 2370,4937
 M 2371,4925 y5459 x2532

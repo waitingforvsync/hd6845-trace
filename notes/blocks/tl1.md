@@ -294,3 +294,12 @@ Could not be checked: the diffusion's continuity across R1's west edge (x 2600) 
 wide NOR (the dark line there could be the etch boundary; if it were a break the output
 contact would be cut off from the load; drawn without `?`: see Ambiguities), the load ties
 (`?`), the far ends of the port rows.
+
+Round 2 (fix check, 2026-11-17 20:10 +0000, a fresh agent on claude-fable-5-2, against commit a3b1701). The two
+VCC boxes and the firmed stretches of `tl1_w3333` are right (each stretch at 4x at both ends
+and three places, profiled end to end in two shots); the netlists of the two versions are
+identical. One finding: the wide NOR's gate polys run on under thin metal W to about
+x 2697, not 2680 (salmon on exactly those rows in the clean shot, edge lines across W in
+both metal shots; confirmed by the tracer on `review-2/C1.png`): drawn to x 2697. No ring
+on W there and no other diffusion reached: no electrical effect.
+
