@@ -181,7 +181,11 @@ Traps, all of them real:
    metal lines shows in `acid1b` only as a thin dark bar across whatever is underneath,
    or as a narrow olive strip with a dark outline. Those bars and strips are not layout.
    Where such a gap crosses poly it can leave a dark ring that looks like a contact;
-   a real contact also shows as a ring in the metal shot.
+   a real contact also shows as a ring in the metal shot. **But before dismissing anything
+   in a gap as such an artefact, look at the same spot in both chip-2 shots: an artefact of
+   the clean shot is not there.** A buried contact in a 36 px gap in `dbus` was read as an
+   artefact for a whole session; in the chip-2 shots it is an ordinary heavy-outlined box
+   (2026-11-17, R24).
 3. A dark line across a metal wire in the metal shots is the edge of something
    *underneath*, not a break in the metal. Likewise, bright green bands in `acid1b`
    inside the arrays are gaps of open field between metal lines, not features.
@@ -278,7 +282,6 @@ Traps, all of them real:
    receives depends on whether its contact lands on a gate poly or on a source or drain.
    Two packages called `amr`'s four outer lines outputs; they are gate inputs. Found
    2026-11-17 (R18).
-
 21. **Bright green in the open is a large diffusion, not field.** In the clean shot a large
    open diffusion (the drain of a big driver) is bright green (118/155/90) and open field is
    khaki-brown (151/138/100); a narrow diffusion wire in the open is not green at all (trap 4).
@@ -305,6 +308,18 @@ Traps, all of them real:
    (its docstring gives two). Do not draw a contact from the darkness alone, and do not take
    the follower's stop there as the line's end (trap 14). Found 2026-11-17 in `tc1`, where run
    2 had taken one for a ring gate's contact (re-read item R20).
+
+23. **A gate poly that runs on past its diffusion is not a dead end until the clean shot shows
+   field on both sides of it.** In the data bus column the L arm of each input inverter's gate
+   runs under a metal and lies on a diffusion there: a second pull-down. Compare the arm's
+   colour under the metal with a gate band under a rail (240/171/120 against 196/144/100 for
+   poly over field). Found 2026-11-17 in `dbus` (AMB-004 changed, R25).
+24. **Medians over copies under different metal blur what differs.** A cell whose copies lie
+   under different metal (or none) reads best on per-group medians (`tools/ral_comp19.py
+   --groups`); `ral`'s inverter 1 failed three passes on the mixed median and was read at
+   once on the groups. Also: pass transistors on a land that widens under the gate are wider
+   than the strip (`rdp3_lat`'s was 34 in the trace and is 70: R22), and a pull-down under a
+   rail can continue as a separate patch on the rail's other side (R23). Found 2026-11-17.
 
 **When a trap turns out to affect work already done**, add the affected blocks to the
 "Re-read list" in `notes/work-packages.md` in the same commit that records the finding.

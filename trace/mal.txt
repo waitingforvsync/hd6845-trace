@@ -1,7 +1,7 @@
 # mal: the fourteen copies of ral_cell in front of the MA pad drivers (left array's left
 # column, x 2480-2860). notes/blocks/mal.md. Placements from tools/findcell.py with ral's
 # master (14020,4265:14450,4525, clean shot), scores 0.78-0.82; tags m0-m13 top to bottom
-# (which MA bit each serves: not established).
+# (copy m# drives MA#: each output followed to its pad driver, notes/blocks/mal.md).
 @block mal
 @requires ral
 @inst ral_cell -11576,3760 mx=14235 rot=90 o=14235,4395 tag=m0    # centre y 8155

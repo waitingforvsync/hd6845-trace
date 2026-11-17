@@ -415,8 +415,6 @@
 <text x="15376" y="4001" font-family="sans-serif" font-size="93" fill="#ffffff" stroke="#000000" stroke-width="9" paint-order="stroke">R9 compare lines, nest</text>
 <rect x="15540" y="14850" width="350" height="1045" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>select buffers R16 R17 R15 R14: two inverters each; the buffered selects go down tracks T11-T14 (?read enables)</title></rect>
 <text x="15556" y="14876" font-family="sans-serif" font-size="18" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">select buffers R16 R17 R15 R14</text>
-<rect x="6400" y="2650" width="600" height="590" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10" stroke-dasharray="60 40"><title>gate columns: dense random logic with large devices under wide rails; not traced</title></rect>
-<text x="6416" y="2728" font-family="sans-serif" font-size="70" fill="#ffffff" stroke="#000000" stroke-width="7" paint-order="stroke">gate columns ?</text>
 <rect x="8085" y="2715" width="250" height="1395" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>six north-south lines ns1-ns6: ns1 = island input w1 (from logic at the datapath slice-0 position); ns2 from the west bus; ns3, ns4, ns6 from over the datapath, ns3/ns4 on south to tc2; ns5, ns6 tap polys going east. No transistors</title></rect>
 <text x="8101" y="2737" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">six north-south lines ns1-ns6</text>
 <rect x="6560" y="5400" width="480" height="710" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>bit-0 XOR cells: two copies of the comparator's XOR cell: one makes the R9 comparator's bit-0 input, the other the row address bit-0 source</title></rect>
@@ -525,14 +523,14 @@
 <text x="17271" y="8323" font-family="sans-serif" font-size="35" fill="#ffffff" stroke="#000000" stroke-width="4" paint-order="stroke">D0 input buffer</text>
 <rect x="17255" y="9645" width="335" height="600" fill="#ffc800" fill-opacity="0.10" stroke="#ffc800" stroke-width="10"><title>D1 input buffer: same cell; input traced from the D1 pad</title></rect>
 <text x="17271" y="9688" font-family="sans-serif" font-size="35" fill="#ffffff" stroke="#000000" stroke-width="4" paint-order="stroke">D1 input buffer</text>
-<rect x="17255" y="11012" width="335" height="600" fill="#ffc800" fill-opacity="0.10" stroke="#ffc800" stroke-width="10" stroke-dasharray="60 40"><title>D2 input buffer: same cell, assigned by position</title></rect>
-<text x="17271" y="11051" font-family="sans-serif" font-size="31" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">D2 input buffer ?</text>
-<rect x="17255" y="12378" width="335" height="600" fill="#ffc800" fill-opacity="0.10" stroke="#ffc800" stroke-width="10" stroke-dasharray="60 40"><title>D3 input buffer: same cell, assigned by position</title></rect>
-<text x="17271" y="12417" font-family="sans-serif" font-size="31" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">D3 input buffer ?</text>
-<rect x="17255" y="13745" width="335" height="600" fill="#ffc800" fill-opacity="0.10" stroke="#ffc800" stroke-width="10" stroke-dasharray="60 40"><title>D4 input buffer: same cell, assigned by position</title></rect>
-<text x="17271" y="13784" font-family="sans-serif" font-size="31" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">D4 input buffer ?</text>
-<rect x="17255" y="14503" width="335" height="600" fill="#ffc800" fill-opacity="0.10" stroke="#ffc800" stroke-width="10" stroke-dasharray="60 40"><title>D5 input buffer: same cell, assigned by position</title></rect>
-<text x="17271" y="14542" font-family="sans-serif" font-size="31" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">D5 input buffer ?</text>
+<rect x="17255" y="11012" width="335" height="600" fill="#ffc800" fill-opacity="0.10" stroke="#ffc800" stroke-width="10"><title>D2 input buffer: same cell; input traced from the D2 pad</title></rect>
+<text x="17271" y="11055" font-family="sans-serif" font-size="35" fill="#ffffff" stroke="#000000" stroke-width="4" paint-order="stroke">D2 input buffer</text>
+<rect x="17255" y="12378" width="335" height="600" fill="#ffc800" fill-opacity="0.10" stroke="#ffc800" stroke-width="10"><title>D3 input buffer: same cell; input traced from the D3 pad</title></rect>
+<text x="17271" y="12421" font-family="sans-serif" font-size="35" fill="#ffffff" stroke="#000000" stroke-width="4" paint-order="stroke">D3 input buffer</text>
+<rect x="17255" y="13745" width="335" height="600" fill="#ffc800" fill-opacity="0.10" stroke="#ffc800" stroke-width="10"><title>D4 input buffer: same cell; input traced from the D4 pad</title></rect>
+<text x="17271" y="13788" font-family="sans-serif" font-size="35" fill="#ffffff" stroke="#000000" stroke-width="4" paint-order="stroke">D4 input buffer</text>
+<rect x="17255" y="14503" width="335" height="600" fill="#ffc800" fill-opacity="0.10" stroke="#ffc800" stroke-width="10"><title>D5 input buffer: same cell; input traced from the D5 pad (the line runs up the channel under the d_hiz metal)</title></rect>
+<text x="17271" y="14546" font-family="sans-serif" font-size="35" fill="#ffffff" stroke="#000000" stroke-width="4" paint-order="stroke">D5 input buffer</text>
 <rect x="6440" y="4440" width="1910" height="105" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>R9 match line, east: from the R9 comparator west along y 4460 / 4528 (two poly hops)</title></rect>
 <text x="6456" y="4483" font-family="sans-serif" font-size="35" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">R9 match line, east</text>
 <rect x="10840" y="4660" width="1960" height="100" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>cdp1_l4676, east: diagonal at x 11465-11530, metal y 4742 to x 12782</title></rect>
@@ -561,6 +559,8 @@
 <text x="17246" y="11700" font-family="sans-serif" font-size="41" fill="#ffffff" stroke="#000000" stroke-width="4" paint-order="stroke">D2 input latch</text>
 <rect x="17230" y="13018" width="360" height="485" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>D3 input latch: the same latch, upside down</title></rect>
 <text x="17246" y="13067" font-family="sans-serif" font-size="41" fill="#ffffff" stroke="#000000" stroke-width="4" paint-order="stroke">D3 input latch</text>
+<rect x="6400" y="2650" width="600" height="290" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10" stroke-dasharray="60 40"><title>gate columns: dense random logic with large devices under wide rails; not traced</title></rect>
+<text x="6416" y="2728" font-family="sans-serif" font-size="70" fill="#ffffff" stroke="#000000" stroke-width="7" paint-order="stroke">gate columns ?</text>
 <rect x="16260" y="9195" width="750" height="220" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>data bits 0-3, east: rows on east of the R3 taps to four contacts</title></rect>
 <text x="16276" y="9268" font-family="sans-serif" font-size="65" fill="#ffffff" stroke="#000000" stroke-width="7" paint-order="stroke">data bits 0-3, east</text>
 <rect x="11040" y="9160" width="630" height="260" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>bus channel, west end: ck_a, the R2 match and bus line B turn north here and cross the block to poly lines into the bus field</title></rect>
@@ -573,7 +573,7 @@
 <text x="8081" y="5062" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">data bit 6 to R10</text>
 <rect x="7430" y="6390" width="3610" height="40" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>amr_eq_r3 in channel 2: the second line of the central datapath's channel 2 (poly, no pad on it): the vertical sync width comparison going west</title></rect>
 <text x="7446" y="6412" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">amr_eq_r3 in channel 2</text>
-<rect x="7035" y="3405" width="135" height="1045" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>channel west of the island, south part: four vertical metals: x 7013 in two pieces (tc1_m7013 down to cell B's gate, tc1_o3527 from cell B's output south), tc1_x1 (x 7058), tc1_l4_out (x 7100), tc1_o4020 (x 7142); two C-shaped polys under them (tc1_o3353, tc1_o3527); the g poly west</title></rect>
+<rect x="7035" y="3405" width="135" height="1045" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>channel west of the island, south part: four vertical metals: x 7013 in two pieces (tc1_o3095 down to cell B's gate, tc1_o3527 from cell B's output south), tc1_x1 (x 7058), tc1_l4_out (x 7100), tc1_o4020 (x 7142); two C-shaped polys under them (tc1_o3353, tc1_o3527); the g poly west</title></rect>
 <text x="7051" y="3427" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">channel west of the island, south part</text>
 <rect x="11080" y="4300" width="640" height="220" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>row address cross-under: five poly lines under the wide supply metal</title></rect>
 <text x="11096" y="4354" font-family="sans-serif" font-size="46" fill="#ffffff" stroke="#000000" stroke-width="5" paint-order="stroke">row address cross-under</text>
@@ -641,6 +641,8 @@
 <text x="16256" y="15429" font-family="sans-serif" font-size="21" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">address load gate</text>
 <rect x="16950" y="13984" width="320" height="332" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>d4_d: buffered D4 leaves the column west along y 14000</title></rect>
 <text x="16966" y="14102" font-family="sans-serif" font-size="110" fill="#ffffff" stroke="#000000" stroke-width="11" paint-order="stroke">d4_d</text>
+<rect x="17500" y="5260" width="170" height="620" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>R9 compare inverters, loads: the depletion loads of r9c's five units (ra</title></rect>
+<text x="17516" y="5282" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">R9 compare inverters, loads</text>
 <rect x="6690" y="3600" width="345" height="305" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>driver NOR(tc1_p3698, thin metal x 6968): second wide two-input NOR with a strong load (tc1_o3740); output by a buried contact to the contact (7010,3722) and north on a metal</title></rect>
 <text x="6706" y="3622" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">driver NOR(tc1_p3698, thin metal x 6968)</text>
 <rect x="6790" y="18410" width="3490" height="30" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>S along the bottom bus field: middle one of three bus lines, with three poly links</title></rect>
@@ -665,10 +667,14 @@
 <text x="6716" y="3946" font-family="sans-serif" font-size="18" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">driver NOR(tc1_g, tc1_x1)</text>
 <rect x="11680" y="14955" width="42" height="2135" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>look-ahead line B: wired NOR of g1 = AND of q of rows r15-r18 with its load at the bottom, feeds the chain input of row r14</title></rect>
 <text x="11696" y="14977" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">look-ahead line B</text>
+<rect x="6400" y="2940" width="290" height="300" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10" stroke-dasharray="60 40"><title>gate columns: not traced</title></rect>
+<text x="6416" y="2980" font-family="sans-serif" font-size="32" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">gate columns ?</text>
 <rect x="7330" y="4010" width="690" height="125" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>three tracks under the island: bring the two driver outputs and one outside signal from the west side to the AND-OR gate's inputs; two are tapped by lines going south</title></rect>
 <text x="7346" y="4057" font-family="sans-serif" font-size="39" fill="#ffffff" stroke="#000000" stroke-width="4" paint-order="stroke">three tracks under the island</text>
 <rect x="7470" y="15400" width="430" height="200" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>latch strobe NAND: 2-input NAND of two channel lines; the strobe is their AND</title></rect>
 <text x="7486" y="15449" font-family="sans-serif" font-size="41" fill="#ffffff" stroke="#000000" stroke-width="4" paint-order="stroke">latch strobe NAND</text>
+<rect x="6690" y="2940" width="285" height="300" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>NOR(tc1_p3051, tc1_x1, tc1_m7100): cell C (tc1_o3095): three pull-downs on the column east of the rail, the output node wrapping the second rail contact; load from the supply rail on the west; output to the channel metal x 7013 and cell B's gate</title></rect>
+<text x="6706" y="2962" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">NOR(tc1_p3051, tc1_x1, tc1_m7100)</text>
 <rect x="18690" y="7155" width="360" height="235" fill="#ffc800" fill-opacity="0.10" stroke="#ffc800" stroke-width="10"><title>D0 extra pull-down fingers: three more pull-down fingers on the pad (gate d0_pd through the poly comb fed from row I)</title></rect>
 <text x="18706" y="7185" font-family="sans-serif" font-size="22" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">D0 extra pull-down fingers</text>
 <rect x="18690" y="8890" width="360" height="235" fill="#ffc800" fill-opacity="0.10" stroke="#ffc800" stroke-width="10"><title>D1 extra pull-down fingers: three more pull-down fingers on the pad (gate d1_pd through the poly comb fed from row I)</title></rect>
@@ -707,8 +713,8 @@
 <text x="15251" y="3877" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">RA2 driver input, end</text>
 <rect x="13760" y="15120" width="295" height="230" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>two inverters on line X: both driven by X (the input of input-row gate 0); outputs NOT X leave north on track k6 and south on x 13716</title></rect>
 <text x="13776" y="15148" font-family="sans-serif" font-size="20" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">two inverters on line X</text>
-<rect x="6690" y="3405" width="345" height="195" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>NOR(tc1_o3353, tc1_m7013): cell B (tc1_o3527): two pull-downs on a column east of the rail, load from the supply rail on the west; output in poly south along the channel to the contact (7011,3852) and on south in metal</title></rect>
-<text x="6706" y="3435" font-family="sans-serif" font-size="22" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">NOR(tc1_o3353, tc1_m7013)</text>
+<rect x="6690" y="3405" width="345" height="195" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>NOR(tc1_o3353, tc1_o3095): cell B (tc1_o3527): two pull-downs on a column east of the rail, load from the supply rail on the west; output in poly south along the channel to the contact (7011,3852) and on south in metal</title></rect>
+<text x="6706" y="3435" font-family="sans-serif" font-size="22" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">NOR(tc1_o3353, tc1_o3095)</text>
 <rect x="14045" y="9250" width="80" height="735" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>rc5, rc4 tracks: thin metals x 14062, 14105 down the s0 column to their pads</title></rect>
 <text x="14061" y="9272" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">rc5, rc4 tracks</text>
 <rect x="13700" y="15700" width="350" height="160" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>latch gated by NOT X (lower half): bd1_n2: pull-downs bd1_an.inh_lat and bd1_n1 traced; its load (north-east, y 15640-15705) not traced</title></rect>
@@ -725,7 +731,7 @@
 <text x="14466" y="9147" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">rc6 row</text>
 <rect x="6400" y="3240" width="290" height="165" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10" stroke-dasharray="60 40"><title>gate columns: not traced</title></rect>
 <text x="6416" y="3280" font-family="sans-serif" font-size="32" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">gate columns ?</text>
-<rect x="6975" y="3160" width="195" height="245" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>channel west of the island, middle part: tc1_m7100's contact (7100,3180) and its poly west and south to cell A's upper gate row; tc1_m7013, tc1_x1, tc1_o4020 pass</title></rect>
+<rect x="6975" y="3160" width="195" height="245" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>channel west of the island, middle part: tc1_m7100's contact (7100,3180) and its poly west and south to cell A's upper gate row; tc1_o3095, tc1_x1, tc1_o4020 pass</title></rect>
 <text x="6991" y="3182" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">channel west of the island, middle part</text>
 <rect x="6690" y="3240" width="285" height="165" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>NOR(tc1_m7100, tc1_l4_out): cell A (tc1_o3353): two pull-downs on the column east of the rail, load from the supply rail on the west; output is the C-shaped poly to cell B's upper gate</title></rect>
 <text x="6706" y="3265" font-family="sans-serif" font-size="17" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">NOR(tc1_m7100, tc1_l4_out)</text>
@@ -733,6 +739,8 @@
 <text x="13776" y="16162" font-family="sans-serif" font-size="29" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">driver of line X</text>
 <rect x="6688" y="4243" width="314" height="141" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>inverter NOT tc1_p4308: pull-down under the rail, weak load from the supply rail on the west; its output strip runs east up to the pad (6962,4268), where tc1_x1's ring branch and the thin metal x 6968 meet; whether the strip joins that pad is open</title></rect>
 <text x="6704" y="4273" font-family="sans-serif" font-size="22" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">inverter NOT tc1_p4308</text>
+<rect x="6975" y="2940" width="195" height="220" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>channel west of the island, north part: the north ends of the channel metals x 7013 (tc1_o3095, cell C's output) and x 7058 (tc1_x1) on their contacts; cell C's gate row 1 poly north to the box at (6955,2957); tc1_m7100 goes on north</title></rect>
+<text x="6991" y="2962" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">channel west of the island, north part</text>
 <rect x="13418" y="14012" width="194" height="210" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>hc4 diagonal: poly south-west under L5..L2 to the wiring channel's end (13425,14212)</title></rect>
 <text x="13434" y="14044" font-family="sans-serif" font-size="24" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">hc4 diagonal</text>
 <rect x="13690" y="15920" width="50" height="805" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>ck_out rail: NOT CLK at the left edge of the logic below the decode array, fed by a wide poly from x 13131</title></rect>
@@ -747,8 +755,6 @@
 <text x="17306" y="13510" font-family="sans-serif" font-size="31" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">D3 bus inverter</text>
 <rect x="13590" y="9370" width="210" height="180" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>rc2, rc3, rc6 nest: three nested L's down to the pads at the tops of the track x 13650, L8 and L6</title></rect>
 <text x="13606" y="9395" font-family="sans-serif" font-size="17" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">rc2, rc3, rc6 nest</text>
-<rect x="7000" y="2950" width="170" height="210" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10" stroke-dasharray="60 40"><title>channel west of the island, north part: the four vertical metals' north ends and their poly taps into the gate columns; not traced</title></rect>
-<text x="7016" y="2972" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">channel west of the island, north part ?</text>
 <rect x="16960" y="8445" width="80" height="435" fill="#ffc800" fill-opacity="0.10" stroke="#ffc800" stroke-width="10"><title>D0 buffer capacitors: plain diffusion rectangles for d0_b (contact cut, not strapped) and d0_c</title></rect>
 <text x="16976" y="8467" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">D0 buffer capacitors</text>
 <rect x="16270" y="3940" width="50" height="670" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>RA3 driver input, end: poly and metal south along x 16290-16297 through the ral band</title></rect>

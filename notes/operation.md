@@ -2,7 +2,7 @@
 
 This is the short version. The block notes (`notes/blocks/`) are the reference; the
 glossary of names is `notes/signals.md`. Last checked against the extraction on
-2026-11-17 (2,168 nets, 3,845 transistors; second refresh).
+2026-11-17 (2,169 nets, 3,849 transistors; after the handoffs of the evening).
 
 ## How to read this page
 
@@ -10,7 +10,7 @@ Every statement carries one of three marks.
 
 | Mark | Meaning |
 |---|---|
-| **Firm** | The extracted netlist says it, and still says it when every item marked uncertain (`?`) is deleted from the trace. `tools/unsure.py --equations NAME` prints this for any equation: 772 of the 1,117 extracted equations are firm. |
+| **Firm** | The extracted netlist says it, and still says it when every item marked uncertain (`?`) is deleted from the trace. `tools/unsure.py --equations NAME` prints this for any equation: 773 of the 1,119 extracted equations are firm. |
 | **Marked** | Extracted, but it depends on at least one uncertain item or on a join that is believed and not drawn. The assumption is named. |
 | **Open** | Not traced. Nothing is claimed. |
 
@@ -131,8 +131,8 @@ counter.
 | Fact | Mark |
 |---|---|
 | The RA pins are not the scan line counter directly. Between them: a selector, a row of five units, then a five-cell stage (`ral`) in front of the pad drivers. | Firm that they are there |
-| The `ral` stage: each cell passes its input onto a node on a strobe (`ral_stb`), holds it there through a weak device, and drives the pad driver's input as NOT `ral_n1`. That it is a latch transparent while the strobe is high needs the cell's inverter 1, not traced (AMB-018). | Firm for the output inverter (RA0-RA3; RA4 marked); the latch is believed. Where `ral_stb` comes from: open |
-| The fourteen MA outputs pass through the same cell, strobed by `ck_out` (high while CLK is low): copy m# drives MA# (`notes/blocks/mal.md`). | Firm for the output inverters and the bit order; the latch is believed, as above; what feeds each copy is open |
+| The `ral` stage is a **latch with a force line**: each cell passes its input onto node a while its strobe (`ral_stb`) is high, holds it through a weak device, and drives the pad driver's input with out = node a OR `cnt_gab` (`ral_n1` = NOR(`ral_a`, `cnt_gab`), out = NOT `ral_n1`; `notes/blocks/ral.md`, AMB-018 resolved). | Firm (all five RA copies; RA4's line marked). Where `ral_stb` comes from, and what `cnt_gab` does in use (AMB-017): open |
+| The fourteen MA outputs pass through the same cell, strobed by `ck_out` (high while CLK is low) and forced by `mal_frc_m#`: copy m# drives MA# (`notes/blocks/mal.md`). So every MA output is latched while CLK is high. | Firm (equations, all fourteen copies, and the bit order); what feeds each copy and what drives the force line: open |
 | The selector passes scan line bit k to output k, or to output k+1 (a shift up by one bit). The two control lines are opposites: `ras_straight` = NOT `ras_shift`. | Firm for the control; six strip joins inside the selector are uncertain |
 | `ras_shift` = R8 bit 0 AND R8 bit 1 (`r8_b0_q`, `r8_b1_q`): the interlace field, set to 3 ("interlace sync and video"). | Marked for the gate (four buried contacts in its NAND); firm that the two inputs are R8's bits 0 and 1 (R8's bit order from the data bus, `notes/blocks/bust.md`) |
 | In shift mode output 0 has no counter bit; **R9's bit 0** (`r9_b0_q`) chooses which of two signals drives it (`ras_o0_sel1` = shift AND R9 bit 0, `ras_o0_sel2` = shift AND NOT R9 bit 0). | Firm (equations and the bit's identity, from the data bus) |
@@ -164,5 +164,5 @@ So that silence is not read as knowledge:
 - The memory address counter's control, and the cursor compare.
 
 The list of what is assumed, with the evidence for and against each, is
-`notes/ambiguities.md` (AMB-001 to AMB-019). Work still to re-check before anything is
-simulated is the "Re-read list" in `notes/work-packages.md` (R1-R18).
+`notes/ambiguities.md` (AMB-001 to AMB-023). Work still to re-check before anything is
+simulated is the "Re-read list" in `notes/work-packages.md` (R1-R27).

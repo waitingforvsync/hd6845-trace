@@ -16,7 +16,7 @@ Trace: `trace/dpad.txt`. Scratch images: `cache/scratch/dpad/` (names in bracket
 - the bond pad's metal, its contact box and **the pad's series strip** (a diffused
   resistor from the pad to the protection node), drawn per copy for D0-D6, so that the
   protection node and the input line are the pad's own net `d#` (`d0_in`, `d1_in` and
-  `d2_in_u`..`d6_in_u` are now aliases of `d0`..`d6`); D7's strip as far as its
+  the lines from the protection nodes to the input buffers are drawn in `trace/dbus.txt`, `d2_in`..`d6_in`); D7's strip as far as its
   untraced protection.
 
 AMB-003 is settled (see Logic). Not traced: the comb inside the protection, D7's
@@ -250,7 +250,7 @@ Evidence (images in `cache/scratch/dpad/`):
 | `d1_out_n` .. `d7_out_n` | poly | west end of strip 4 at 17800,7466-7492 + cell offset | into the cell | routes differ per pad (`dbus` notes list D1's and D7's); not drawn |
 | `d0` (alias `d0_in`) | metal, poly, metal | node column, contact 17835,6585, poly west along y 6573-6597 and south along x 17550-17572, contact 17555,6755, metal x 17548-17566 to `dbus`'s piece at y 8050 | out | joined: `dbus`'s input buffer reads `d0_a = NOT d0` |
 | `d1` (alias `d1_in`) | metal | node column to the contact 17836,8402, where `dbus`'s poly starts | out | joined: `d1_a = NOT d1` |
-| `d2` .. `d6` (aliases `d2_in_u` .. `d6_in_u`) | metal | node column, drawn to y 6560 + protection offset; in the composite the contact is near 17825,6665 + offset with poly leaving west | out | the line to `dbus`'s input buffer is not followed: that is what the `_u` aliases stand for |
+| `d2` .. `d6` (the lines on to the input buffers drawn by `dbus` as `d2_in`..`d6_in`; D6's pad under the node's metal at (17838,16519)) | metal | node column, drawn to y 6560 + protection offset; in the composite the contact is near 17825,6665 + offset with poly leaving west | out | the line to `dbus`'s input buffer is not followed: that is what the `_u` aliases stand for |
 | `d7` | diffusion | the series strip's end at 17920,17538 | out | goes on into D7's untraced protection |
 
 ## Ambiguities
@@ -274,8 +274,8 @@ Evidence (images in `cache/scratch/dpad/`):
 - D7's strip west of x 17920: it continues west to a neck at x ~17838-17858 that runs
   south into D7's protection node (seen by the second cycle's reviewer); not drawn.
 - Protection: the comb; D7's variant (its strip enters from the top near 17850,17538).
-- Input lines of D2-D7 from the protection nodes to the column (`d#_in_u`).
-- `d#_out_n` outside the cells and the driver of `d_hiz`: `dbus`'s channel wiring. Lead (review round 1, confirmed): at (17630,17085) a metal leaves `d_hiz` west along y 17073-17095 to x 17355 and turns south along x 17350-17370 past y 17237 (`metal` at 2.4-3x): almost certainly its feed. It lies in `dbus`'s claimed region, so it is not drawn here.
+- Input line of D7 from its protection to the column (D2-D6's are drawn by `dbus`, 2026-11-17).
+- `d#_out_n` outside the cells (D0's is drawn: `dbus`, from the contact (17597,7492) down the channel to the inverter `d0_out_n` = NOT `dbus_do0_in`) and the driver of `d_hiz`: `dbus`'s channel wiring. Lead (review round 1, confirmed): at (17630,17085) a metal leaves `d_hiz` west along y 17073-17095 to x 17355 and turns south along x 17350-17370 past y 17237 (`metal` at 2.4-3x): almost certainly its feed. It lies in `dbus`'s claimed region, so it is not drawn here.
 - The straps' metal was checked per copy only at 0.42x [U_a, U_b]; the rows' metal of
   D1-D6 at 1.05x [Rm_all], D7 at 1.5x.
 

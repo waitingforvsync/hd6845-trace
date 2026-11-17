@@ -2,7 +2,7 @@
 
 ## Status (2026-11-17 05:18, contributor session)
 
-Placed (`trace/mal.txt`, 70 transistors: five per copy, as far as `ral_cell` is
+Placed (`trace/mal.txt`, 98 transistors: seven per copy, `ral_cell` being traced in full
 traced, with inverter 2), and **every copy's output followed to its MA pad driver: copy m# drives MA#**,
 m0 at the top (y 8155) to m13 at the bottom (y 18576). Depends on `trace/ral.txt`
 (`@requires ral`). Inputs and the force taps' wiring are not drawn.
@@ -28,9 +28,12 @@ the contacts on rings.
 2500-2504, with "contact candidates about every 608 px (y 8360, 8965, 9573, 10181,
 10831, 11440 ...): its taps into the left column, not looked at"). The copies' strobe
 contacts are at y 8349, 8955, 9562, 10170, 10821, 11428, 12230, 12924, 13576, 15700,
-16395, 17081, 17731, 18382, i.e. those taps. So, if the cell is the latch it is believed
-to be (`notes/blocks/ral.md`), **every MA output is latched, transparent while
-`ck_out` is high (CLK low)**, where the RA outputs are latched on `ral_stb`.
+16395, 17081, 17731, 18382, i.e. those taps. The cell being the latch
+traced in `notes/blocks/ral.md`, **every MA output is latched, transparent while `ck_out` is
+high (CLK low), and forced high by its `mal_frc_m#` line**, where the RA outputs are latched
+on `ral_stb` and forced by `cnt_gab`. The fourteen `mal_frc_m#` are probably one line: a thin
+vertical metal at x about 2700 runs past the copies' pads (seen y 10250-11350, tabs to m4 and
+m5; not drawn).
 Believed, not extracted: the cell's forward path is not traced.
 
 ## Ports
