@@ -1,0 +1,289 @@
+# tl1: top-left random logic, westmost strip (x 2100-2817, y 2500-6350): what tla did not draw
+@requires tla
+@block tl1
+@w M=12 P=20
+
+# ====================================================================
+# West column of the first cluster (tla's rails: R1 = VSS x 2600-2650, R2 = VCC x 2778-2834,
+# thin metal W x 2689-2703), y 3558-3742: a NOR unit. findcell: tla's in2 unit
+# (2535-2790 x 5120-5290) recurs here at -1,-1562 with score 0.92 (acid1b); the geometry
+# below is that unit's, moved, and checked on b1.png (2.7x acid1b) and m1.png (2.7x metal).
+#   tl1_w3636 = NOR(tl1_w3594, tl1_w3678)
+# Column x 2549-2591 west of R1 between the rail's VSS boxes at y 3530-3588 (tla's, contact
+# (2612,3550)) and y 3697-3742 (contact (2622,3722)).
+D 2549,3558:2604,3578                 # top arm onto tla's rail box
+D 2549,3558:2591,3720                 # the column
+D 2549,3700:2604,3720                 # bottom arm
+D 2598,3697:2652,3742                 # rail box below, VSS contact
+C 2622,3722
+# gate 1: poly y 3582-3602 from a pad with a contact (2500,3594) on the metal x 2500
+P 2500,3582:2598,3602
+P 2482,3578:2520,3611
+C 2500,3594
+N P 2530,3592 tl1_w3594
+# gate 2: poly y 3668-3688 from a pad with a contact (2457,3678) at the south end of the
+# metal x 2457
+P 2460,3668:2598,3688
+P 2440,3663:2476,3693
+C 2457,3678
+N P 2500,3678 tl1_w3678
+# output: buried contact (concentric box) on the node between the gates, poly west along
+# y 3625-3645 to a pad with a contact (2283,3636) at the north end of a metal x 2283
+B 2547,3620:2577,3652
+P 2296,3625:2575,3645
+P 2265,3621:2302,3651
+C 2283,3636
+N P 2400,3635 tl1_w3636
+# load: strip east under R1 to a box under thin metal W, strip under the plate x 2721-2774 to
+# the VCC box under R2 (contact (2803,3643)); tail and buried-contact tie at (2695,3688)
+D 2569,3631:2699,3645
+D 2675,3634:2713,3656
+D 2691,3652:2707,3698
+D 2705,3635:2785,3652
+P 2721,3614:2774,3702
+P 2689,3678:2729,3700
+B 2683,3675:2707,3700
+D 2780,3626:2840,3668                 # VCC box of its own, below tla's box (which ends about y 3590): two dark edges y 3588-3592 and 3624-3628 with no tan between in acid1b (review round 1, 4.2x, review-1/norload.png); own contact
+C 2803,3643
+
+# ====================================================================
+# West column, y 4215-4345: an inverter, a "rail gate". findcell: tla's inverter tla_w3505
+# (2535-2790 x 3170-3290) recurs here at 0,+1041 with score 0.93; geometry is that unit's,
+# moved, checked on b2.png.
+#   tl1_w4243 = NOT tl1_w4287
+D 2598,4248:2655,4299                 # node under R1 (y 4248-4275), gate, down to the VSS box
+D 2598,4295:2652,4345                 # rail box below, VSS contact
+C 2622,4318
+D 2540,4231:2602,4268                 # node, part west of the rail
+B 2538,4229:2582,4265
+# output poly y 4233-4253 west to a pad with a contact (2283,4243) at the north end of a
+# metal x 2283 (y 4230-4472)
+P 2296,4233:2578,4253
+P 2265,4229:2302,4258
+C 2283,4243
+N P 2400,4243 tl1_w4243
+# gate: poly y 4275-4293 across the rail from a pad with a contact (2370,4287) at the south
+# end of a metal x 2370
+P 2384,4275:2670,4293
+P 2352,4271:2390,4303
+C 2370,4287
+N P 2450,4284 tl1_w4287
+# load
+D 2650,4246:2725,4269
+D 2720,4241:2792,4266                 # onto tla's VCC box (2785-2842, 4190-4262; contact (2806,4205))
+D 2785,4255:2842,4338                 # that box is one diffusion about y 4188-4338 with three contact rings (review round 1, 3.7x in metal, metal1, acid1b, review-1/invvcc.png; confirmed by the tracer): the lower part and its two contacts
+C 2805,4265
+C 2805,4308
+D 2699,4266:2719,4317
+P 2722,4221:2776,4293
+?P 2716,4289:2752,4321
+?B 2706,4287:2754,4323
+
+# ====================================================================
+# West column, y 4778-5000: the gate that DRIVES rcs_e4 (tla's long control line, whose driver
+# was not found):     rcs_e4 = NOR(tl1_w4678, tl1_w4937)
+# One diffusion west of R1 (heavy outline x 2548-2600, y 4820-4975) and under R1 (to x 2664),
+# two poly lines across all of it, VSS boxes of the rail above and below. Read on u8a.png
+# (4.3x acid1b), u8c.png (4.2x acid1b + metal: the upper box is one with the diffusion above
+# gate 1), u8b.png (load), b3.png.
+D 2550,4822:2600,4972                 # part west of the rail
+D 2596,4840:2664,4962                 # part under the rail
+D 2600,4778:2662,4845                 # rail box above, VSS contact (elongated ring in the metal)
+C 2620,4810 s=24x36
+D 2600,4950:2652,5000                 # rail box below, VSS contact
+C 2620,4982
+# gate 1: poly y 4843-4862. It comes from the north: an L, down x 2434-2452 from a corner at
+# y 4668-4688, where the poly comes from the east (from the unit at y 4650-4800, not traced).
+P 2434,4843:2697,4862
+P 2434,4668:2452,4862
+P 2434,4668:2545,4688
+N P 2443,4760 tl1_w4678
+# gate 2: poly y 4926-4946 from a pad with a contact (2370,4937) at the north end of a metal
+# x 2370 that runs south to y 5459 and east to a pad with a contact (2521,5459); from that pad
+# a poly row runs east along y 5450-5470 under the foot of the cluster (seen straight to
+# x 3400 at 1.44x, f2.png; drawn to the strip's edge).
+P 2384,4926:2697,4946
+P 2352,4921:2390,4953
+C 2370,4937
+M 2371,4925 y5459 x2532
+P 2504,5445:2542,5471
+C 2521,5459
+P 2535,5450:2817,5470
+N P 2700,5460 tl1_w4937
+# output: buried contact (concentric box) on the node between the gates, poly west to a pad
+# with a contact (2500,4894) at the north end of the metal x 2500, which runs south INTO the
+# pad (2497,5238) of rcs_e4 (tla's gate pad of in2's unit, from which tla's metal goes on
+# round to bus line C). One metal through the pad: follow.py from (2500,5000) runs north to
+# y 4892 and south through the pad to tla's corner (2511,5330); profile down x 2500 and
+# j1.png (6x, both chips): the ring north of the pad centre is 15 px, south of it 12 px, and
+# chip 1 shows bright metal right up to the ring.
+B 2550,4874:2579,4914
+P 2500,4884:2577,4904
+P 2482,4878:2520,4910
+C 2500,4894
+M 2500,4882 y5232
+# load: the node runs east from under the rail (y 4880-4908; x 2665-2682 is the gap between R1
+# and thin metal W, where the clean shot shows only the gap's dark outline) to a plate
+# x 2732-2770, y 4848-4912 and on to the VCC box under R2 (contact (2800,4882)). The plate
+# shows no diffusion edge across it in the metal shots (profile down x 2752), so the channel
+# may be as wide as the plate is tall (a strong load, like rcs_u3288_n's); drawn at the width
+# of the node's strip. The plate's tab (2722-2760, 4918-4958) and its tie to the node are
+# not resolved: drawn uncertain.
+D 2660,4880:2740,4908
+D 2736,4880:2785,4908
+D 2780,4845:2832,4916
+C 2800,4882
+P 2732,4848:2770,4914
+?P 2722,4910:2760,4958
+?D 2702,4904:2728,4958                # tail east of thin W (u8d.png, 6x: under thin W it is field or poly, not tan)
+?B 2712,4906:2744,4960
+
+# ====================================================================
+# Wiring west of the column: vertical metals on the tracks x 2283, 2370, 2457, 2500 (43 px
+# pitch; tla holds x 2199, 2239, 2326, 2414 and pieces of 2283; mal holds x 2110, 2153 and
+# x 2283 south of y 4914). Each piece joins pads of poly rows that run east into the column.
+# Pieces from tools/follow.py, contacts and pads from a3.png, a4.png, a5.png (2.05-2.1x, metal
+# and acid1b side by side), n1.png, n2.png (north ends), f1.png (foot).
+
+# tl1_w3636 (the NOR's output): metal x 2283, y 3622-4126, three contacts. The two lower pads
+# carry poly rows east into the units at y 3740-3960 and y 4000-4200 (not traced), where
+# each crosses the diffusion under R1.
+M 2283,3622 y4126
+P 2265,3879:2302,3909
+C 2283,3894
+P 2296,3884:2545,3904
+P 2265,4098:2302,4128
+C 2283,4113
+P 2296,4104:2545,4122
+# tl1_w4243 (the inverter's output): metal x 2283, y 4230-4474; bottom pad's poly row east
+# along y 4452-4470 into the unit at y 4340-4470 (not traced)
+M 2283,4230 y4474
+P 2265,4447:2302,4477
+C 2283,4462
+P 2296,4452:2545,4470
+# tl1_w4287 (the inverter's input): metal x 2370, y 3925-4300. Top pad (2372,3938): its poly
+# row runs east along y 3929-3949 to a heavy-outlined box at (2550-2575, 3925-3952) on the
+# unit at y 3740-3960, believed that unit's output (not traced: the row is drawn to x 2545)
+M 2371,3925 y4300
+P 2354,3923:2392,3953
+C 2372,3938
+P 2386,3929:2545,3949
+# tl1_w2857: metal x 2370, y 2843-3863. Top pad (2372,2857): poly row east along y 2848-2866,
+# under R1 and on east out of the strip. Bottom pad (2372,3851): poly row east along
+# y 3841-3861, a gate of the unit at y 3740-3960 (not traced)
+M 2371,2843 y3863
+P 2354,2842:2392,2872
+C 2372,2857
+P 2386,2848:2817,2866
+N P 2700,2857 tl1_w2857
+P 2354,3836:2392,3866
+C 2372,3851
+P 2386,3841:2545,3861
+# tl1_w3678 (the NOR's second gate): metal x 2457, y 2800-3690. Top pad (2458,2812): poly
+# row east along y 2803-2821 out of the strip
+M 2457,2800 y3690
+P 2440,2797:2478,2827
+C 2458,2812
+P 2470,2803:2817,2821
+# tl1_w3594 (the NOR's first gate): metal x 2500, y 2886-4730, four contacts. Top pad
+# (2502,2899): poly row east along y 2890-2908 out of the strip. Pads (2499,4503) and
+# (2499,4718): poly rows east into the units at y 4480-4650 and y 4650-4800 (not traced)
+M 2500,2886 y4730
+P 2483,2884:2521,2914
+C 2502,2899
+P 2514,2890:2817,2908
+P 2482,4488:2520,4518
+C 2499,4503
+P 2512,4494:2545,4512
+P 2482,4703:2520,4733
+C 2499,4718
+P 2512,4708:2545,4728
+# tl1_w4025: metal x 2457 from a pad (2458,4026) south, 1,350 px, to y 5372 and east to a
+# pad (2521,5372), whose poly row runs east along y 5362-5382 under the foot (seen straight
+# to x 3400, f2.png; drawn to the strip's edge). Contact on the way at (2458,4635). The pads'
+# rows go east into the units at y 4000-4200 and y 4480-4650 (not traced). follow.py: one
+# metal (2456,4026)-(2461,5374)-(2525,5369); tla_tracks.py's break at y 4683-4869 is the poly
+# of tl1_w4678 underneath beside it.
+M 2457,4012 y5372 x2532
+P 2440,4011:2478,4041
+C 2458,4026
+P 2470,4017:2545,4036
+N P 2520,4026 tl1_w4025
+P 2440,4620:2478,4650
+C 2458,4635
+P 2470,4625:2545,4643
+P 2504,5358:2542,5386
+C 2521,5372
+P 2535,5362:2817,5382
+
+# ====================================================================
+# Tracks beside the small cluster below (y 5900-6350): s1.png (2.05x, metal and acid1b),
+# s2.png; pieces by tools/follow.py. The rows run east into the small cluster (not traced);
+# each is drawn to x 2545 (seen to x 2550 on s1.png).
+
+# ck_out: a second contact on tla's trunk metal x 2370, at (2372,6060) (ring on the line in
+# the metal shot, pad with a green centre in the clean shot; follow.py's candidate (2371,6051)).
+# Poly row east along y 6054-6072.
+P 2354,6046:2392,6076
+C 2372,6061
+P 2386,6054:2545,6072
+# tl1_w5978: metal x 2326 from a pad with a contact (2326,5978) south, out of the strip
+# (follow.py north from (2327,6100) ends at y 5976). Poly row east along y 5969-5987.
+M 2326,5966 y6350
+P 2308,5963:2346,5993
+C 2326,5978
+P 2340,5969:2545,5987
+N P 2450,5978 tl1_w5978
+# tl1_w6022: metal x 2414, y 6010-6207, a pad at each end: (2414,6022) row y 6013-6031,
+# (2414,6195) row y 6186-6204
+M 2414,6010 y6207
+P 2396,6007:2434,6037
+C 2414,6022
+P 2428,6013:2545,6031
+N P 2480,6022 tl1_w6022
+P 2396,6180:2434,6210
+C 2414,6195
+P 2428,6186:2545,6204
+# tl1_w5936: metal x 2500, y 5924-6252. Top pad (2500,5936): its poly row runs WEST along
+# y 5926-5944 under all the tracks to a corner at about (2096,5935), where it turns north
+# under the edge of MA1's metal (s2.png; drawn from x 2110, the vertical not followed).
+# Bottom pad (2500,6239): poly row east along y 6228-6246.
+M 2500,5924 y6252
+P 2482,5921:2520,5951
+C 2500,5936
+P 2110,5926:2495,5944
+N P 2300,5935 tl1_w5936
+P 2482,6223:2520,6253
+C 2500,6239
+P 2514,6228:2545,6246
+
+# ====================================================================
+# tl1_w3333: a long wire down the west side, from the top of the strip to the small cluster.
+#   - metal: from a pad with a contact (2563,2550) west along y 2553 to a corner (2199,2556)
+#     and south at x 2199 to a contact (2197,3333) (follow.py: one piece, 836 + 362 px;
+#     ends on w1.png 3.1x, w2.png 2.4x). The top pad's poly goes on east under R1 (seen to
+#     x 2637; drawn to x 2640).
+#   - poly from the pad (2197,3333): the pad is a bulge on a vertical poly x 2170-2187 whose
+#     top end is a free stub at y 3282; it runs south to y 4550 (mosaic v1.png, 1.9x: alone in
+#     bare field between the tracks x 2153 and x 2199), east along y 4533-4550, south under
+#     the metal x 2326 (no pad, no ring: tla's notes, and a4.png, a5.png), west along
+#     y 4972-4988, south at x 2134-2149 to y 5810 (v1.png), east along y 5793-5810 into the
+#     small cluster (r1.png, 1.8x; drawn to x 2545). The five corners: r2.png (2.3x).
+#   The three long stretches seen only at 1.8-1.9x are drawn uncertain.
+M 2572,2553 x2198 y3342
+P 2545,2535:2582,2566
+C 2563,2550
+P 2575,2543:2640,2560
+P 2170,3282:2187,3360
+P 2180,3318:2215,3350
+C 2197,3333
+N P 2178,3300 tl1_w3333
+P 2170,3355:2187,4535
+P 2170,4530:2187,4550
+P 2170,4533:2333,4550
+P 2317,4533:2333,4988
+P 2134,4972:2333,4988
+P 2134,4972:2150,5000
+P 2134,4995:2150,5795
+P 2134,5790:2150,5810
+P 2134,5793:2545,5810

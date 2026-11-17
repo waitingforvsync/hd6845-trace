@@ -1,19 +1,19 @@
 {
  "who": "dp111",
- "generated": "2026-11-17T19:28:47+00:00",
+ "generated": "2026-11-17T20:13:38+00:00",
  "price_source": "Claude API list prices per million tokens, as of 2026-11-03",
  "unpriced_models": [],
- "responses": 4020,
+ "responses": 4207,
  "first": "2026-11-16T22:18:49.326000+00:00",
- "last": "2026-11-17T19:28:36.410000+00:00",
- "total_cost": 464.62,
- "review_cost": 125.1,
+ "last": "2026-11-17T20:13:27.239000+00:00",
+ "total_cost": 484.55,
+ "review_cost": 129.85,
  "tokens": {
-  "input": 8232,
-  "output": 3434107,
-  "cache_write_5m": 8511894,
-  "cache_write_1h": 6132948,
-  "cache_read": 1002911759
+  "input": 8614,
+  "output": 3617023,
+  "cache_write_5m": 8955751,
+  "cache_write_1h": 6157580,
+  "cache_read": 1041797961
  },
  "by_model": {
   "claude-opus-5-5": {
@@ -21,8 +21,8 @@
    "responses": 1584
   },
   "claude-fable-5-2": {
-   "cost": 278.05,
-   "responses": 2436
+   "cost": 297.98,
+   "responses": 2623
   }
  },
  "by_package": {
@@ -37,7 +37,7 @@
   },
   "amr": {
    "cost": 53.66,
-   "review_cost": 18.73,
+   "review_cost": 16.79,
    "responses": 720,
    "models": {
     "claude-opus-5-5": 137,
@@ -45,12 +45,12 @@
    }
   },
   "(coordination)": {
-   "cost": 48.61,
+   "cost": 49.46,
    "review_cost": 5.32,
-   "responses": 267,
+   "responses": 275,
    "models": {
     "claude-opus-5-5": 149,
-    "claude-fable-5-2": 118
+    "claude-fable-5-2": 126
    }
   },
   "dpad": {
@@ -98,9 +98,17 @@
     "claude-fable-5-2": 157
    }
   },
+  "tl1": {
+   "cost": 19.08,
+   "review_cost": 6.85,
+   "responses": 179,
+   "models": {
+    "claude-fable-5-2": 179
+   }
+  },
   "dbus": {
    "cost": 18.66,
-   "review_cost": 6.37,
+   "review_cost": 6.29,
    "responses": 366,
    "models": {
     "claude-opus-5-5": 68,
@@ -207,7 +215,7 @@
   },
   "dbus_h": {
    "cost": 2.49,
-   "review_cost": 0.87,
+   "review_cost": 0.79,
    "responses": 41,
    "models": {
     "claude-opus-5-5": 23,
@@ -289,6 +297,6 @@
  },
  "by_day": {
   "2026-11-16": 4.76,
-  "2026-11-17": 459.86
+  "2026-11-17": 479.79
  }
 }

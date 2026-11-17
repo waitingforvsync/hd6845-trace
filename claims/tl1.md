@@ -10,4 +10,4 @@ merged, or by `tools/claim.py release` if it is abandoned.
 | Region | 2100-2817 x 2500-6350 |
 | What | top-left random logic, part 1 of 6 (the westmost strip): what no block has drawn there yet (tla holds x 2440-2817 x 2940-5640): the logic and wiring west of x 2440, north of y 2940 and south of y 5640, joined to tla's and urch's nets |
 | Branch | tl1 |
-| Status | tracing |
+| Status | tracing (part merged aa293c2 at 2026-11-17 20:15 +0000) |
