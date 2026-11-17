@@ -173,7 +173,12 @@ P 16762,13320:16795,13343          # output poly, east out of the box (beyond: p
 P 16632,13364:16802,13386          # gate band
 P 16786,13364:16804,13469          # down to the input row
 P 16480,13451:16804,13469          # input row under the cell
-D 16660,13340:16772,13438          # node, channel under the band (W about 112), VSS land
+D 16650,13340:16772,13406          # node, channel under the band (W 100-125: the west edge is a dark
+                                   # line across the band at x 16644-16650), and the VSS strip below it
+D 16678,13400:16724,13438          # VSS land under the rail (east of the rail the diffusion below the
+                                   # band is only the strip to y 13406; 16728-16772 x 13408-13438 is a
+                                   # field pocket: chip-2 stripped red minus green 0-4 there, 16-28 on
+                                   # the strip; review of run 2)
 C 16690,13410 s=30x30
 @end
 # Copies at exactly 195 (tools/dbus_localmatch.py 16500 13290 16820 13470 0 195 8: 0.93 clean,

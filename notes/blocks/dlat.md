@@ -140,8 +140,8 @@ strip and both boxes at 5x in both stripped shots (`k2_top5.png`), overlay `k2_o
 | VCC land | 16495-16545 x 13325-13398, long contact 16505-16527 x 13337-13385 under the VCC rail |
 | Load | gate: an open poly block 16548-16588 x 13300-13405 over the strip y 13330-13400 (W 70, L 40: a strong load); its arm runs east along y 13298-13322 and ends in a heavy-outlined box 16612-16650 x 13314-13347 (both stripped shots): the buried contact that ties the gate to the node. The load strip's top end and the node strip's west end meet in that box |
 | Node | a strip above the gate band, y 13340-13362, from the box east under the VSS rail (tan there: `tools/px.py col 16690 13284 13452 6`: edge at y 13338, tan 13344-13356) to x 16772, with a tab north at x 16742-16786 up to y 13318 |
-| Pull-down | gate band: poly y 13364-13386 from a rounded west end at x 16632 to x 16802; bright salmon (236/165/120, poly over a channel) under the rail; the diffusion runs through under it from the node strip to the VSS land, x 16660-16772 (W about 112, L 22) |
-| VSS land | below the band to y 13438, contact (16690,13410) (a ring in the metal shot) |
+| Pull-down | gate band: poly y 13364-13386 from a rounded west end at x 16632 to x 16802; bright salmon (236/165/120, poly over a channel) under the rail; the diffusion runs through under it from the node strip to the VSS side, x 16650-16772 as drawn (W 100-125, L 22: the west edge is a dark line across the band at x 16644-16650, and on the node side the last 25 px are a narrow slit under the output box) |
+| VSS land | below the band: under the rail a land x 16678-16724 down to y 13438 with the contact (16690,13410) (a ring in the metal shot); east of the rail only a strip y 13388-13406 to x 16772 (`tools/px.py col 16745 13386 13440 6 acid`: red minus green 16-28 down to y 13404, -14 to 4 below) |
 | Input | the band's east end joins a vertical open poly x 16786-16804 that runs down to the input row, a poly y 13451-13469 under the cell's lower edge, which arrives from the west |
 | Output | a second heavy-outlined box 16756-16788 x 13318-13347 on the node's tab, with no metal over it (a buried contact); the poly leaves it east along y 13320-13343 |
 
@@ -281,6 +281,56 @@ the drawn union 15616-15681, and that land's west edge at y 15630 is about x 165
 Left as drawn (within the cell's general accuracy; both VCC).
 
 Round 2: no findings.
+
+### Run 2 (2026-11-17)
+
+**Round 1, full review of what run 2 added** (2026-11-17 23:10-23:25 +0000, a fresh agent on
+claude-fable-5-2, at commit 7c1c5ae; 25 images in `cache/scratch/dlat/review-3/`). Three pieces
+in one brief: A the bus inverter cell `dlat_drv` and its three copies, B the outputs to
+`db_b4`..`db_b7`, C the routes of the four latch outputs. Told to suspect: how the load strip,
+the tie box and the node strip connect; the channel's extent in the open east of the rail and
+any other diffusion under the band or the vertical; the patch under the VSS rail called field
+against `tools/railprof.py`; whether the output box is a buried contact; per-copy differences;
+`k1`'s junction with the poly from the north and that poly's run to `rdp3`; the three end
+contacts and the crossings under the thin metals; trap 10 on both diagonals and on the polys
+under and beside the wide rail; `dl7_q_n`'s vertical and its contact (trap 22); which input
+row each route reaches; anything left out of 16450-16930 x 12900-13880.
+
+Checked and found correct (its report). A: load, tie box and node strip at 6x in both stripped
+shots; neither box has metal over it; the patch under the rail at y 13284-13334 is field (no
+tan, no outline, a dark edge between it and the node); the vertical x 16786-16804 is poly
+throughout, the source strip ends at x 16775 and the pocket is field; output poly and the
+band's vertical are 12 px of field apart in all four copies; `k1`, `k3`, `k4` by overlay at
+3.2-3.5x in the clean shot and per-copy profiles. B: `k1`'s junction at 6x in both stripped
+shots, its poly does not go on east; the north run at 2.5x in three shots (one poly, three
+metals, field between); the three end contacts (bright centre in a ring in both chips, green
+hole in the clean shot); no contact at the crossings or at (16820,13227); the follower gives
+one piece per metal up to `rdp3`'s contacts. C: both diagonals at 3.9x in both stripped shots;
+`dl7_q_n`'s vertical continuous in three shots and its contact (16339,14868) real; the metal
+branch over it at y 14905-14960 has no contact; (16341,14268) is not a contact; `dl5_q_n` and
+`dl4_q_n` with their corners at 4x in both stripped shots, no tap or break, field between
+them; each route reaches the row claimed and crosses no diffusion; the four equations; nothing
+untraced in 16450-16930 x 12900-13880 but the rails north of y 13060. Not checked: `areg`'s
+stretches of `dl6_q_n` and `dl7_q_n` (y 13264-14700) above 1.7x; `dl7_q_n`'s vertical is only
+weakly orange in the chip-2 stripped shot (it rests on both metal shots and the clean shot);
+`k1`, `k3`, `k4` in chip 2 by profiles and a 1.28x survey only.
+
+Findings, both geometry only:
+
+1. **The VSS land east of the rail was overdrawn** (all four copies): the drawn column
+   16660-16772 x 13340-13438 included the field pocket 16728-16772 x 13408-13438. **Confirmed**:
+   `tools/px.py col 16745 13386 13440 6 acid` and `col 16760`: red minus green 16-28 down to
+   y 13404, -14 to 4 from y 13410 on. Fixed: the column ends at y 13406, with a separate land
+   16678-16724 x 13400-13438 under the rail. No poly crosses the removed part; all `vss`.
+2. **The pull-down's width**: the channel's west edge is at about x 16648, not 16660, and on
+   the node side x 16748-16776 is a narrow slit. **Confirmed** as far as the profiles go
+   (`tools/px.py row 13375 16630 16670 3 acid,acid1b`: dark at x 16642-16654, the band bright
+   from x 16660). Fixed: west edge at x 16650; W recorded as 100-125. One transistor either way.
+
+`tools/t.sh dlat sameconn.py 7c1c5ae`: `connections identical`; `.venv/bin/python
+tools/sameconn.py 7c1c5ae`: `connections identical`.
+
+Round 1: no findings that change a connection.
 
 ## Not done
 
