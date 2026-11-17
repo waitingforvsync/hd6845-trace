@@ -285,6 +285,14 @@ After Round 5, main gained `tla`'s west column (commit 0cbaceb), whose input `tl
 is this route's end: merging main gave "carries several names: amr_eq_r3, tla_w3461", the
 intended join, declared by one alias line in `trace/amrw.txt` (no geometry changed).
 
+Round 6 (fix check of that join, 2026-11-17 19:27 +0000, a fresh agent on claude-fable-5-2): both blocks' items
+lie on one metal x 2239-2240 from the contact (2240,5632) to the contact (2240,3463)
+(4x quads at four places, follower end to end; the metals x 2199 and x 2283 are separate
+lines throughout); the extraction has 0 errors and prints `tla_w3417 = NOT((amr_eq_r3 &
+tla_w3505) | (rcs_thin_e & tla_w3376))`, FIRM; no other net merged.
+
+Round 6: no findings.
+
 ## Not done
 
 1. (Done: `amr_eq_r3` leaves by the buried contact under c0's outer metal; the section "The inputs and the match line's route" below.
