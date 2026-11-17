@@ -409,9 +409,11 @@ D 17397,15378:17452,15400          # ... east to the load tie
 B 17424,15375:17453,15399          # load gate tied to the output
 P 17427,15363:17450,15396          # stem
 P 17427,15363:17470,15375          # bar east to the load gate
-P 17428,15314:17527,15347          # load gate: upper part, also under the thin metal
+P 17428,15314:17527,15355          # load gate: upper part, also under the thin metal, where it covers
+                                   # the strip (channel colour y 15330-15349: review round 1), so the
+                                   # channel is about 100 long
 P 17468,15314:17527,15377          # load gate: the part in the open
-D 17415,15338:17535,15358          # load strip
+D 17415,15330:17535,15350          # load strip
 D 17530,15327:17587,15386          # VCC land
 C 17556,15367 s=30x34              # VCC
 # -- stage 2: as stage 3, 155 lower
@@ -429,9 +431,9 @@ D 17397,15533:17452,15555
 B 17424,15530:17453,15554
 P 17427,15518:17450,15551
 P 17427,15518:17470,15530
-P 17428,15469:17527,15502
+P 17428,15469:17527,15510
 P 17468,15469:17527,15532
-D 17415,15493:17535,15513
+D 17415,15485:17535,15505
 D 17530,15482:17587,15541
 C 17556,15522 s=30x34
 # -- stage 1 (bottom): as stage 4, 455 lower; its gate band comes from a pad and runs on
@@ -492,8 +494,8 @@ D 17147,16776:17257,16905          # capacitor rectangle (plain diffusion) on d6
 M 17254,15695 y15890 x17298 y16674 w=16
 C 17297,16662 s=26x26
 P 17283,16648:17312,16676          # pad
-P 17297,16655:17678,16672
-P 17662,16509:17678,16672
+P 17297,16661:17678,16677          # (y 16663-16676 under the VCC rail: review round 1)
+P 17662,16509:17678,16677
 P 17662,16509:17840,16526
 P 17824,16505:17854,16534          # pad under the node's metal
 C 17838,16519 s=26x26
@@ -549,13 +551,14 @@ P 16950,14688:17167,14704          # leaves the region at x 16950
 # (17452,16564). So the thin metal x 17438-17459 that crosses every cell of the column is
 # this inverter's output. Input: a poly from the west along y 16444-16463.
 D 17354,16390:17403,16497          # VSS land (runs on into chain 7's), channel, output node
-P 16950,16444:17424,16463          # gate band; comes in from the west edge of the region
+C 17372,16414 s=30x30              # VSS contact on that land (ring in both metal shots; review round 1)
+P 16950,16444:17418,16463          # gate band; comes in from the west edge of the region
 N P 17000,16453 dbus_do0_in
-D 17354,16466:17419,16497          # output node, to x 17419
 D 17325,16478:17360,16499          # node's west tab ...
-?D 17303,16476:17330,16500         # ... into a heavy-outlined box beside the d6_in metal: kind not
-                                   # settled (Ambiguity 9); nothing is drawn joining it to that metal
-D 17415,16468:17455,16497          # node east, through the gap, to the strip
+?D 17294,16476:17330,16500         # ... into a heavy-outlined box whose west end lies under the d6_in
+                                   # metal: kind not settled (Ambiguity 9); nothing is drawn joining
+                                   # it to that metal
+D 17398,16476:17455,16490          # node east in a neck 14 px tall, through the gap, to the strip
 D 17450,16423:17474,16560          # strip under the thin metal
 D 17435,16545:17474,16590          # its pad
 C 17452,16564 s=30x34
