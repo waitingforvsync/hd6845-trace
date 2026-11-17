@@ -22,3 +22,7 @@ vss          M  7990-8040,5625   -    meets rax's rail step (x 7945-8035, y 5600
 vss          M  8030-8075,6400   -    the ground rail going on south
 vcc          M  8206-8248,6400   -    going on south (cdp2's vcc rail x 8229 from y 7425)
 vcc          M  8206-8248,5960   -    the drawn north end; the rail goes on north
+tc2_m6490    M  6400,5557-5577   ?    metal of the nest, going on west (follower: end (6318,4999))
+tc2_m6490    P  6483-6501,6400   ?    poly from the pad (6490,6108), going on south
+tc2_m6447    M  6400,5601-5621   ?    metal of the nest, going on west (follower: end (6276,4825))
+tc2_m6447    P  6443-6460,6400   ?    poly from the pad (6447,6150), going on south

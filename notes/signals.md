@@ -341,6 +341,7 @@ Row tags `s0` ... `s13` are rows from the top; which MA bit each is has not been
 | `tc2_sr_r` | with `tc2_sr_g` high, pulls `tc2_sr_q` low. From the pad (7836,5520) below `rax`'s fifth unit by a metal x 7836; the pad's poly goes east, not followed |
 | `tc2_sr_s` | with `tc2_sr_g` high, pulls `tc2_sr_q_n` low. Metal x 7791 going south past y 6400 (not followed) |
 | `tc2_sr_c` | pulls `tc2_sr_q` low by itself. It is the top line of `cdp2`'s channel 2 (poly y 6367, from the pad (7490,6367) east past x 8250), with a metal from that pad west along y 6370 past x 6400 (not followed either way) |
+| `tc2_m#` | a metal of the nest west of the XOR cells (x 6400-6580, y 5350-6170), named by the x of its pad (`notes/blocks/tc2.md`, piece 5). `tc2_m6490`: from the west along y 5567 to the pad (6490,6108), poly south past y 6400. `tc2_m6447`: from the west along y 5611 to the pad (6447,6150), poly south past y 6400. Neither end is followed |
 | `bc1_s#`, `bc1_s#_n` | the two bus lines the 2-bit decoder decodes, and their inverses |
 | `bc1_dec#_n` | decoder outputs, active low (00, 10, 01) |
 | `bc1_ld_in#`, `bc1_ld_n`, `bc1_ld_a` | inputs, NAND output and twin output of the driver of cdp4's row D strobe |

@@ -15,3 +15,5 @@
 7782,6278:7932,6400    route   tc2_sr_s, tc2_sr_g, tc2_sr_q going south | three metals x 7791, 7837, 7922
 7990,5625:8092,6400    power   ground rail | from the row address units' rail to the latch and on south
 8206,5960:8248,6400    power   VCC rail | the latch's two loads end on it
+6396,5557:6508,6170    route   tc2_m6490, tc2_m6447 | two metals of the nest from the west edge to their pads (6490,6108), (6447,6150)
+6443,6160:6501,6400    route   tc2_m6490, tc2_m6447 polys | from the two pads south under the supply metals

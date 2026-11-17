@@ -8,7 +8,8 @@ Tool: `tools/tc2_runs.py` (dark runs along a straight metal in both metal shots)
 Most of this region was already drawn by other packages (`ras`, `rax`, `fld`, and the
 crossing lines of `bust`, `amr`'s west route, `r9m`, `rde`): see the inventory. This package
 adds what they left. Traced and extracted so far: 12 transistors, 6 new nets, 3 equations
-(1 FIRM, 2 that depend on one `?` poly), and five lines of other packages carried on.
+(1 FIRM, 2 that depend on one `?` poly), five lines of other packages carried on, and two
+lines of the nest west of the XOR cells.
 
 **Piece 1**
 
@@ -48,6 +49,12 @@ adds what they left. Traced and extracted so far: 12 transistors, 6 new nets, 3 
 - The ground rail from `rax`'s piece (y 5645) to y 6400, and the VCC rail x 8206-8248 from
   y 5960 to y 6400 (VCC by the layout rule and its place; its north end is not drawn).
 
+**Piece 5** (run 2, wiring only; not through a review round)
+
+- `tc2_m6490` and `tc2_m6447`: the two other metals of the nest west of the XOR cells, each
+  from the region's west edge to a pad ((6490,6108), (6447,6150)) and on south in poly past
+  y 6400.
+
 Not done: see the end.
 
 ## Inventory (survey at 0.68x in the metal and clean shots: `survey_m.png`, `survey_a.png`)
@@ -59,7 +66,7 @@ Not done: see the end.
 | x 6420-6710, y 5020-5290 | one NOR with its load (two pull-downs under the west edge of the rail x 6537-6583) | **piece 1** |
 | x 6600-7050, y 5020-5275 | two inverters (`tc1_g`, `tc1_i`) | `fld` |
 | x 6580-7030, y 5410-6100 | two copies of the comparator's XOR cell | `fld` |
-| x 6400-6580, y 5350-6100 | a nest of metals turning from south to east; field pockets between them (clean shot khaki, chip-2 stripped shot red minus green 2-7: `tools/px.py pt` at (6490,5420)) | `fld`'s metal of `fld_y_b`; **`tc1_m6817`'s metal: piece 2**; the rest not drawn |
+| x 6400-6580, y 5350-6170 | a nest of metals turning from south to east; field pockets between them (clean shot khaki, chip-2 stripped shot red minus green 2-7: `tools/px.py pt` at (6490,5420)); each ends on a pad with a poly going south | `fld`'s metal of `fld_y_b`; **`tc1_m6817`'s metal: piece 2; `tc2_m6490`, `tc2_m6447`: piece 5**; a fourth pad (6404,6108) on the west edge not drawn |
 | x 7150-7420, y 4880-6000 | row address selector | `ras` |
 | x 7430-7900, y 4500-6100 | nest of metals between the selector and its units | `ras`, `rde` |
 | x 7860-8110, y 4700-5470 | five units, one per selector output | `rax` (pull-downs only) |
@@ -393,6 +400,31 @@ columns without a contact (below).
 | the slots x 8078-8100, y 6048-6100 and y 6205-6258 between the rail and `db_b6`'s metal | the upper: row B's end cap and the gap bar; the lower: field (green in both chip-2 shots, `px.py row 6240`) |
 | nested rings at (7977-8005, 6092-6122), (8116-8148, 6220-6250), (7975-8005, 6264-6296) | the three buried contacts, drawn |
 
+## Piece 5 (wiring only): the two other lines of the nest west of the XOR cells (run 2)
+
+| Net | From | Path | To |
+|---|---|---|---|
+| `tc2_m6490` | the region's edge (6400,5567), a metal arriving from the west (follower: from (6318,4999) south along x 6320, east along y 5563) | metal east along y 5557-5577 to x 6448, south x 6438-6458 to y 5938, east to x 6490, south x 6480-6500; pad (6490,6108); poly south x 6483-6501 | the region's edge (6492,6400), going on south under the supply metals |
+| `tc2_m6447` | the region's edge (6400,5611), a metal arriving from the west (follower: from (6276,4825) south along x 6271, east along y 5607) | metal south x 6396-6416 (on the region's edge) to y 5981, east to x 6447, south x 6437-6457; pad (6447,6150); poly south x 6443-6460 | the region's edge (6451,6400), going on south |
+
+Joins between named nets: none (two new names; neither end is followed). Which end drives
+is not known.
+
+Self-check (ends, each with what lies beyond):
+
+| End | Seen | Result |
+|---|---|---|
+| pads (6490,6108), (6447,6150) | `g2_pad6485.png` (4.6x, four shots) | each: ring and bright centre in both metal shots, a green hole in the pad in the clean shot; the metal arrives from the north and ends on the pad, the poly leaves south. Field between the three pads of the nest ((6533,6152) is `tc1_m6817`'s) |
+| corners (6490,5938), (6448,5938), (6447,5981), (6406,5981) | `g2_nest1.png` (4.4x, chip-2 metal and clean) | plain corners over field, no pad, ring or hole |
+| corners (6448,5567), (6406,5611) and both exits at x 6400 | `g2_nest2.png` (4.4x) | plain corners; both metals go on west of x 6400. A speck on `tc2_m6490`'s metal at (6430,5571) in chip 2's metal shot only (the clean shot is plain field there) |
+| the straight stretches | `ov_g2_nest.png` (1.9x overlay, metal and clean), `follow.py 6489 6070 N`, `6449 6100 N` | field under them throughout; **read below 4x** |
+| the polys from the pads to y 6400 | `g2_polyS.png` (4x, clean, chip-2 stripped, chip-2 metal; y 6125-6415) | each keeps its width under the four horizontal metals (y 6195-6245, 6315-6340, `tc2_sr_c`'s y 6360-6380, `amr`'s west route y 6407-6419): no pad; both go on past y 6400 |
+
+No transistor. Rings and boxes inside the piece with no drawn item: a fourth pad of the nest
+at (6404,6108), on the region's west edge, whose metal comes from the west along y 6015-6040
+(`ov_g2_nest.png`); not drawn (Not done). Blobs on the green rims of the metals in the clean
+shot at about (6384,5652), (6465,5610): residue (run 1 found the same kind at (6493,5615)).
+
 ## Ports
 
 | Name | Layer | Where | Direction | What |
@@ -410,6 +442,10 @@ columns without a contact (below).
 | `tc1_m6817` | M | x 6789-6805, y 4450 | out (to `tc1`) | `tc1`'s foot (6797,4372) is 70 px north of the edge |
 | `tc1_m6817` | P | x 6524-6544, y 6400 | in | going on south: the line's driver is that way (its other end is a gate in `tc1`) |
 | `tc1_m6817` | M | x 6355-6373, y 4834-5525 | - | not a port: the stretch drawn 36 px outside the region |
+| `tc2_m6490` | M | x 6400, y 5557-5577 | ? | going on west (follower: end (6318,4999)) |
+| `tc2_m6490` | P | x 6483-6501, y 6400 | ? | going on south |
+| `tc2_m6447` | M | x 6400, y 5601-5621 | ? | going on west (follower: end (6276,4825)); its vertical x 6396-6416 lies on the edge |
+| `tc2_m6447` | P | x 6443-6460, y 6400 | ? | going on south |
 | `tc2_sr_g` | M | x 7827-7847, y 6400 | in | the latch's gate line, going on south (follower: end (7835,7218)) |
 | `tc2_sr_s` | M | x 7782-7800, y 6400 | in | going on south (follower: end (7791,6958)) |
 | `tc2_sr_q` | M | x 7913-7931, y 6400 | out | going on south (follower: end (7922,7046)) |
@@ -469,11 +505,11 @@ None in pieces 1 to 3.
   (6860,4610), (6862,4628), (6865,4780), (6870,4890) in **both** metal shots, not resolved
   (blemishes would not repeat on two chips: look at each at 4x or more before drawing the rail
   through). So `fld`'s VSS rail is still "VSS by the layout rule".
-- The pad (6485,6110) and its poly x 6480-6500 going south; the other metals of the nest
-  x 6400-6580, y 5350-6100.
+- `tc2_m6490` and `tc2_m6447` west of x 6400 and south of y 6400. The fourth pad of the nest,
+  (6404,6108), on the region's west edge, with its metal from the west along y 6015-6040.
 - What stands east of `rax`'s units (x 8040-8250, y 4700-5470: `rax`'s own Not done); the
   supply metals and cross-unders y 6100-6400 west of x 7700. Not looked at above 0.68x.
-- The independent review of piece 4 (the Review section below covers pieces 1 to 3 only).
+- The independent review of pieces 4 and 5 (the Review section below covers pieces 1 to 3 only).
 
 ## Review
 
