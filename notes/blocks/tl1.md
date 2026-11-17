@@ -303,3 +303,11 @@ x 2697, not 2680 (salmon on exactly those rows in the clean shot, edge lines acr
 both metal shots; confirmed by the tracer on `review-2/C1.png`): drawn to x 2697. No ring
 on W there and no other diffusion reached: no electrical effect.
 
+Round 3 (fix check, 2026-11-17 20:13 +0000, a fresh agent on claude-fable-5-2, against commit efc2c51). Colour
+profiles along both gate rows and four comparison rows in four shots: both polys end at
+x 2697-2701, nothing gate-specific continues east of thin W, no pad; thin W has no ring
+over either poly; the polys stop short of the load's `?` items; the netlist outputs of the
+two versions are byte-identical.
+
+Round 3: no findings.
+
