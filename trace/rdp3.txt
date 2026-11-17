@@ -25,10 +25,16 @@ C 14835,13217 s=28x30                # strap to the output land
 # --- pass transistor T1: bus -> node a, gate = row strobe
 D 14602,13010:14648,13056            # bus contact land
 D 14606,13050:14640,13140            # strip down through the gate to node a
+# The diffusion is twice as wide where the gate crosses it: right of the bus line it runs on
+# to x 14677 from y 13045 to 13105 (one closed outline with the land, rounded corners, in
+# both metal shots in all five AR cells; in RA/RB, where a metal covers it, the gate band
+# is channel-bright from x 14608 to 14680 in the clean shot). So T1 is about 70/28, not
+# 34/28. Added by the areg package (2026-11-17, notes/blocks/areg.md "Pass transistor").
+D 14630,13047:14676,13104
 P 14572,13015:14597,13088            # strobe line: down the left of the contact,
-P 14572,13060:14697,13088            #   across the strip (the gate),
-P 14667,13015:14697,13088            #   back up on the right,
-P 14667,13015:14975,13043            #   and on to the next cell
+P 14572,13060:14702,13088            #   across the strip (the gate),
+P 14681,13015:14702,13088            #   back up on the right (riser x 14681-14702: its left edge is 5 px right of the diffusion),
+P 14681,13015:14975,13043            #   and on to the next cell
 
 # --- node a: buried contact to the gate of inverter 2, and on to the feedback land
 P 14602,13122:14642,13150            # pad over the end of the strip
