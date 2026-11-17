@@ -125,3 +125,6 @@ N M 16426,13000 areg_rail_r
 # It is the same cell as the other four, which the rdp3 block traced completely and
 # placed five times (trace/rdp3.txt, cell rdp3_lat); that instance replaces the partial
 # drawing, which is kept in notes/blocks/areg_fifth_cell_partial.txt for reference.
+# That instance (tag ar4, @inst rdp3_lat 1170,0) was checked against the photos by this
+# package on 2026-11-17, with the other four (notes/blocks/areg.md, "Fifth register cell");
+# its output poly joins the pair-4 feed above at (16066,13280-13292).

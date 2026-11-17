@@ -77,11 +77,12 @@ Central datapath (registers identified by their write strobes, `notes/blocks/wrs
 | `*_pu`, `*_pd` | inside an output pad cell: gate of the pull-up fingers (first inverter) and of the pull-down fingers (second inverter) |
 | `d#_in` | data pin D# behind its protection, at its input buffer. With the pad's series strip drawn it is the pad's own net: an alias of `d#` (`trace/dpad.txt`) |
 | `d#` | data pins D0-D7: the bond pad, the metal of the output fingers, and (D0-D6) the series strip, the protection node and the line to the input buffer. On the chip the strip is a diffused resistor between pad and node; the netlist has one net (`notes/blocks/dpad.md`) |
-| `d#_in_u` | alias of `d#` for data pads 2-6: the protection node, whose line to the input buffer in the column is not yet drawn |
+| `d#_in_u` | alias of `d#` for data pads 2-6: the protection node, whose line to the input buffer in the column is not yet drawn (D6's is drawn in `trace/dbus.txt`: `d6_in` is an alias of `d6`) |
 | `d_hiz` | output disable of the data pins, one line common to the eight pad cells (metal x 17631-17651, y 7374-18850, a contact in each cell): high turns off both output gates of every data pad. Driven from the bus-interface column; the driver is not traced. The "P_x" of the first notes |
-| `d#_out_n` | the per-bit data line into data pad cell #, from the bus-interface column: while `d_hiz` is low the pin D# is its inverse. The "P_y" of the first notes |
+| `d#_out_n` | the per-bit data line into data pad cell #, from the bus-interface column: while `d_hiz` is low the pin D# is its inverse. The "P_y" of the first notes. `d0_out_n` is the thin metal x 17438-17459 down the whole column, driven by an inverter at its foot (y 16415-16590) |
 | `d#_pu`, `d#_pd` | inside data pad cell #: gate of the pull-up fingers, NOR(`d_hiz`, `d#_out_n`), and gate of the pull-down fingers, NOR(`d_hiz`, `d#_pu`) |
-| `d#_a`, `d#_b`, `d#_c`, `d#_d` | the four inverters of data input buffer #: `_a`, `_c` inverted, `_b`, `_d` true |
+| `d#_a`, `d#_b`, `d#_c`, `d#_d` | the four inverters of data input buffer #: `_a`, `_c` inverted, `_b`, `_d` true. Buffers 0-5 are cell `dbus_in`, 6 and 7 cell `dbus_in2` (`notes/blocks/dbus.md`). `d#_d` feeds the input latch: in the data bus column for bits 0-3; `d4_d`..`d7_d` leave it west at x 16950 |
+| `dbus_do0_in` | input of the inverter at the foot of the data bus column that drives `d0_out_n` (`d0_out_n` = NOT `dbus_do0_in`): a poly from the west along y 16444-16463, not followed. The bit the chip puts on D0, in true sense |
 | `dbus_cap#b` | plate of a capacitor beside the D0 input buffer (purpose not established) |
 | `d#_d_n` | NOT `d#_d`: the inverter inside data input latch # (`notes/blocks/dbus.md`) |
 | `dl#_q`, `dl#_q_n` | the data input latch of bit # in the data bus column: two cross-coupled AND-OR-invert gates, transparent while `dbus_le` is high. `dl#_q` follows pin D#; `db_b#` = NOT `dl#_q_n` (a static inverter drives the bus bit). |

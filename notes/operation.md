@@ -85,6 +85,7 @@ is not settled.
 | Fact | Mark |
 |---|---|
 | Each register bit is a transparent latch: it follows the data line while its write strobe is high and holds when it falls. | Extracted; the cell has uncertain items |
+| In the latch cell of the right datapath and the address register (`rdp3_lat`, 59 copies) the write pass transistor is 70/28 and the feedback that holds the bit is one weak device (22/82, gate on VSS) from the output back to the storage node, so a write overpowers it about nine to one. | Firm for the pass transistor and the two inverters; the hold device is marked (its strip is an uncertain item, and that it is a depletion device is believed) |
 | `wr_r#` = register # selected AND the common strobe (`wr_stb_n` low). | Firm for R0-R11; marked for R12-R15 |
 | The common strobe is a latch of "write, chip selected, RS high" that is open while E is high. | Marked (four of its nets are joined only through uncertain items) |
 | Whether anything ends the strobe when E falls, or re-times it to CLK. | **Open**. As drawn nothing does; that reading rests on the marked nets above |
@@ -93,6 +94,8 @@ is not settled.
 | The data bus: all eight bits are joined from the right datapath across the chip to the central datapath (`notes/blocks/bust.md`); bits 0-3 reach the D0-D3 units of the data bus column (`dbl`). The registers each bit writes match the datasheet's widths exactly (R5, R9 bits 0-4; R4, R6, R7 bits 0-6; R8 bits 0, 1, 4-7; R0-R2 bits 0-7), which nothing in the trace assumed. | Firm for the joins; the bit numbers rest on that match and, for bits 0 and 1, on the D0/D1 units |
 | Data bits 0-3 reach the bus through a **transparent latch per bit** in the data bus column: `dl#_q` follows pin D# (through four inverters) while `dbus_le` is high and holds when it falls, and a static inverter drives `db_b#` = NOT `dl#_q_n` all the time. The internal data bus is not tri-stated at this end (`notes/blocks/dbus.md`). | Firm (equations and the joins to `db_b0`..`db_b3`) |
 | What `dbus_le` is: a line shared with eight taps in the columns west of the data bus column; its driver is not traced. | Open |
+| Data bits 4-7: the pins D4-D7 have their four-inverter input buffers in the same column (D6's and D7's are another layout of the same chain; D6's input is drawn from its pin, D4, D5 and D7 are assigned by position). The buffered levels `d4_d`..`d7_d` leave the column west towards the gate column where `dbus_le` has its eight taps; the latches of bits 4-7 are believed to be there (`notes/blocks/dbus.md`). | Firm for the buffers and D6's join; the latches of bits 4-7 are open |
+| The first inverter of every data input buffer has two pull-downs on the pin: its gate poly's L-shaped arm crosses a second diffusion under a metal (AMB-004 said the arm crosses nothing). The logic is the same; the device is a third wider. | Firm (eight buffers) |
 | R8 is the central datapath's row A and R9 its row C; slice = 5 - bit (R8's bit 6 is in slice 3, bit 7 in slice 2). | Firm for the joins (from the data bus) |
 | R3's high nibble is the four-slice block `amr` (bits 4-7 from data bits 4-7 on `wr_r3`), so every data bit writes R3, as the datasheet's R3. | Firm for the latch equations and the data joins (`notes/blocks/amr.md`) |
 | R10 (central datapath `cdp2` row C, bits 0-6) and R11 (row A, bits 0-4) take their data from the data bus (`notes/blocks/rde.md`). | Firm for bits 5 and 6; marked for bits 0-4 (AMB-019) |
@@ -142,7 +145,8 @@ counter, and whatever the 4-bit counter `c4l` is compared with.
 |---|---|
 | Each data pin has a push-pull driver whose two gates are made by two NOR gates in the pad cell: `d#_pu` = NOR(`d_hiz`, `d#_out_n`), `d#_pd` = NOR(`d_hiz`, `d#_pu`) (`notes/blocks/dpad.md`). While `d_hiz` is high both gates are low and the pin floats; while it is low the pin is the inverse of `d#_out_n`. | Firm (all sixteen equations) |
 | `d_hiz` is one line common to the eight pad cells. | Firm (drawn end to end) |
-| What drives `d_hiz` and the eight `d#_out_n` lines (the bus-interface column, `dbus`), and so when the chip drives the bus and with what. | Open |
+| `d0_out_n` = NOT `dbus_do0_in`: an inverter at the foot of the data bus column drives D0's line up the whole column on one thin metal. `dbus_do0_in`, the bit read out on D0 in true sense, arrives from the west and is not followed. | Firm (the equation and the join into D0's pad cell) |
+| What drives `d_hiz` and the other seven `d#_out_n` lines, and so when the chip drives the bus and with what. | Open |
 | The pull-up fingers are ordinary transistors with their drain on VCC (source followers), so a driven high level is below VCC by a threshold. | Firm for the connection; that they are enhancement devices is not visible in the photos |
 
 ## Not established at all
