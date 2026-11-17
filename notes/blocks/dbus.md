@@ -580,6 +580,23 @@ thin metal from y 8125 to 16540 in both chips.
   continuity through the foot tie box's outline; whether the VCC rail joins the wide metal
   at y 16975.
 
+**Round 2, fix check** (2026-11-17, a fresh agent, given only the diff since `b956b15` and
+the six changes; ten images in `cache/scratch/dbus/review-6/`). It compared the extraction
+before and after (70 nets, 122 transistors both; only the four `dbus_in2` loads differ,
+W/L 40/39 to 20/99; no net joined or split) and read each change at 4x or more in two to
+four shots with column profiles: the VSS contact (ring in both metal shots, pitted box in
+the chip-2 stripped shot, specks in the clean shot); the load gates on their strips in
+both copies (channel y 15330-15350 and 15483-15501, the gate clear of the node, the bar
+and the tie box); the band end (salmon to x 17416); the neck (tan y 16477-16489, one piece
+from the node to the strip and pad, 13 px of field between it and the band); the `d6_in`
+poly (y 16662-16677 in three shots, meets its pad, 28 px clear of `d7_in`); the `?D` on
+its box, touching only the west tab and lying under the `d6_in` metal.
+
+Round 2: no findings.
+
+Its one remark, not an error: the stage 2/3 load strip measures about 24 tall where it is
+drawn 20 (a size; Ambiguity 10).
+
 ## Not done
 
 - **The latches and bus inverters of bits 4-7**: not in this region. `d4_d`..`d7_d` leave
