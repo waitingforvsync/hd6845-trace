@@ -27,6 +27,13 @@ access). In short:
 
 ## Standing rules from the user
 
+- **Tracing is done with Claude Fable 5.2** (user, 2026-11-17: "insist that only Fable 5.2 is
+  used by a collaborator"). `.claude/settings.json` makes it the project's default model,
+  `/trace6845` runs on it and starts its reviewers on it, and the merge gate fails a package
+  whose cost report (`tools/costs.py`, committed as `costs/<git name>.json`) shows any other
+  model doing its work. The coordinator may use another model for coordination
+  (`.claude/settings.local.json`).
+
 - Trace independently. Do not open Lance Ewing's HD6845 reverse-engineering work (on
   GitHub) or any other 6845 netlist/schematic effort until our own trace of the
   relevant block is complete. After that it may be used as confirmation only, never as

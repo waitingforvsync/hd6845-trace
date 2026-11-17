@@ -127,6 +127,13 @@ proposed Re-read item; that is how the list stays honest.
 
 ### 7. Merge into main through the gate (or open a pull request)
 
+First write and commit your cost report: `python3 tools/costs.py`, then
+`tools/ship.sh "Cost report" costs/*.json`. It reads this machine's Claude Code transcripts and
+records only numbers (tokens and API-equivalent dollars by package, model and day). The
+dashboard adds the reports up, and the gate reads the models: **tracing here is done with
+Claude Fable 5.2**, the project's default model (`.claude/settings.json`), and the gate fails a
+package that anything else worked on.
+
 With write access, the package goes into main directly, but only through the gate:
 
 ```

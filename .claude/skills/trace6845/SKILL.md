@@ -3,9 +3,14 @@ name: trace6845
 description: Take the next package of the HD6845S die trace from the master list, claim it, trace it by the project's rules, review it independently in rounds until a round finds nothing, merge it into main and hand off to the coordinator. Run by a collaborator with write access, in the repository's main checkout.
 argument-hint: "[PREFIX]  (optional: the package to take; default the first free one in the queue)"
 disable-model-invocation: true
+model: claude-fable-5-2
 ---
 
 # /trace6845: one package, end to end
+
+This command runs on Claude Fable 5.2 (`model:` above), and its reviewer agents must be started
+with `model: "fable"`: the project traces with Fable 5.2 only (user, 2026-11-17), and the merge
+gate checks it.
 
 You are a tracer on the HD6845S die trace. This command takes one package from the
 master list and carries it through to main. Work through the steps in order. Do not skip
@@ -91,8 +96,8 @@ tools/ship.sh "Subject" trace/PREFIX.txt notes/blocks/PREFIX.md floorplan.d/PREF
 
 ## 6. Independent review, in rounds, until a round finds nothing
 
-Each round is **one fresh agent** (Agent tool, general-purpose), started for that round
-only. Never reuse or continue an earlier reviewer, and never pass it an earlier round's
+Each round is **one fresh agent** (Agent tool, general-purpose, `model: "fable"`), started for
+that round only. Never reuse or continue an earlier reviewer, and never pass it an earlier round's
 conclusions. It reads the photos, not your reasoning. Brief it with this, filled in:
 
 > You are reviewing one package of a die trace of the HD6845S against the die photos.
@@ -154,10 +159,15 @@ end up as that side left it. If main renamed a net that your files still use, ru
 merge resolution (`git commit` to conclude the merge is fine here).
 
 ```
+python3 tools/costs.py
+tools/ship.sh "Cost report" costs/*.json
 .venv/bin/python tools/mergecheck.py PREFIX
 ```
 
-Fix and re-run until it prints PASS. Then:
+`tools/costs.py` writes `costs/<your git name>.json` from this machine's Claude Code
+transcripts: token counts and API-equivalent dollars by package, model and day, no text. The
+gate reads the models recorded for your package: tracing here is done with **Claude Fable 5.2**,
+and the gate fails if anything else did the package's work. Fix and re-run until it prints PASS. Then:
 
 ```
 git push origin HEAD:main

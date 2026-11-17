@@ -320,6 +320,40 @@ def package_history(prefixes, commits):
                 recent=[(c['date'][:16].replace('T', ' '), c['author'], c['subject']) for c in rows[:12]])
 
 
+MODEL_NAME = {'claude-fable-5-2': 'Fable 5.2', 'claude-opus-5-5': 'Opus 5.5', 'claude-sonnet-5-5': 'Sonnet 5.5',
+              'claude-haiku-5-5': 'Haiku 5.5', 'claude-fable-5-1': 'Fable 5.1', 'claude-opus-5': 'Opus 5'}
+
+
+def read_costs():
+    out = {}
+    for p in glob.glob(os.path.join(ROOT, 'costs', '*.json')):
+        try:
+            r = json.load(open(p))
+            out[r.get('who') or os.path.basename(p)[:-5]] = r
+        except ValueError:
+            pass
+    return out
+
+
+def package_cost(costs, prefixes):
+    """API-equivalent dollars and models for a package, over every contributor's report."""
+    total, models = 0.0, collections.Counter()
+    for r in costs.values():
+        for k, v in r.get('by_package', {}).items():
+            if any(k == p or k.startswith(p + '_') for p in prefixes):
+                total += v.get('cost', 0)
+                models.update({m: n for m, n in v.get('models', {}).items() if m != '<synthetic>'})
+    return total, models
+
+
+def money(x):
+    return '$%s' % ('{:,.0f}'.format(x) if x >= 100 else '{:,.2f}'.format(x))
+
+
+def models_text(models):
+    return ', '.join(MODEL_NAME.get(m, m) for m, _ in models.most_common()) or 'unknown'
+
+
 def transistors_in(nl, regs):
     if not nl or not regs:
         return 0
@@ -603,16 +637,18 @@ def index_page(d, state, page_of):
             continue
         link = page_of.get(r['label'])
         label = '<a href="%s">%s</a>' % (link, inline(r['label'])) if link else inline(r['label'])
+        pc, pm = package_cost(d['costs'], r['prefixes'])
+        cost = '; about %s (%s)' % (money(pc), models_text(pm)) if pc else ''
         if s == 'done':
             done.append((h.get('last', ''), '<div class="item"><div class="h">%s %s</div><div class="dim">%s</div>'
-                         '<div class="mut">by %s%s</div></div>'
+                         '<div class="mut">by %s%s%s</div></div>'
                          % (label, tag('done'), inline(short(r['what'], 150)), whos(h),
-                            '; %s to %s; %d transistors in its region' % (h['first'], h['last'], nt) if h else '')))
+                            '; %s to %s; %d transistors' % (h['first'], h['last'], nt) if h else '', cost)))
         else:
             left = r['status'] if s == 'partial' else r['what']
             todo.append('<div class="item"><div class="h">%s %s</div><div class="dim">%s</div>%s</div>'
                         % (label, tag(s), inline(short(left, 260)),
-                           '<div class="mut">so far by %s; %d transistors in its region</div>' % (whos(h), nt) if h else ''))
+                           '<div class="mut">so far by %s; %d transistors%s</div>' % (whos(h), nt, cost) if h else ''))
     done.sort(reverse=True)
     lists = ('<div class="lists"><div class="col"><h3>In progress (%d)</h3>%s</div><div class="col"><h3>To do (%d)</h3>%s</div>'
              '<div class="col"><h3>Done (%d)</h3>%s</div></div>'
@@ -637,11 +673,12 @@ def index_page(d, state, page_of):
         '<div class="bar" title="%d XP; %d to the next level"><i style="width:%.0f%%"></i></div>'
         '<div class="mut" style="font-size:12px">%s XP &middot; %s to level %d</div>'
         '<div class="mini"><div><b>%d</b><span>commits</span></div><div><b>%d</b><span>packages done</span></div>'
-        '<div><b>%s</b><span>transistors</span></div><div><b>%d</b><span>best streak</span></div></div>'
+        '<div><b>%s</b><span>transistors</span></div><div><b>%s</b><span>API-equivalent</span></div></div>'
         '<div class="badges">%s</div></div>'
         % (('var(--partial)', 'var(--active)', 'var(--done)')[i % 3], E(''.join(w[0] for w in p['name'].split()[:2]).upper()),
            E(p['name']), p['level'], E(p['title']), p['xp'], p['need'], 100 * p['frac'], '{:,}'.format(p['xp']),
-           '{:,}'.format(p['need']), p['level'] + 1, p['commits'], p['done'], '{:,}'.format(p['transistors']), p['streak'],
+           '{:,}'.format(p['need']), p['level'] + 1, p['commits'], p['done'], '{:,}'.format(p['transistors']),
+           money(d['costs'][p['name']]['total_cost']) if p['name'] in d['costs'] else '&ndash;',
            ''.join('<span class="badge" title="%s">%s %s</span>' % (E(t), e, E(n)) for e, n, t in p['badges'])
            or '<span class="mut" style="font-size:12px">no badges yet</span>')
         for i, p in enumerate(d['xp']))
@@ -654,6 +691,23 @@ def index_page(d, state, page_of):
     rr_open = sum(1 for q in d['questions'] if q['id'].startswith('R') and q['state'] != 'done')
     rr_all = sum(1 for q in d['questions'] if q['id'].startswith('R'))
     cnt = collections.Counter(state(r) for r in master)
+    spend = sum(r.get('total_cost', 0) for r in d['costs'].values())
+    bymodel = collections.Counter()
+    for r in d['costs'].values():
+        for m, v in r.get('by_model', {}).items():
+            if m != '<synthetic>':
+                bymodel[m] += v.get('cost', 0)
+    spend_rows = ''.join('<tr><td>%s</td><td class="n">%s</td><td class="n">%s</td><td>%s</td><td class="mut">%s</td></tr>' % (
+        E(w), money(r.get('total_cost', 0)), '{:,}'.format(r.get('responses', 0)),
+        money(r.get('by_package', {}).get('(coordination)', {}).get('cost', 0)), E((r.get('generated') or '')[:16].replace('T', ' ')))
+        for w, r in sorted(d['costs'].items(), key=lambda kv: -kv[1].get('total_cost', 0)))
+    spend_html = ('<div class="tw"><table><thead><tr><th>Reported by</th><th class="n">API-equivalent</th><th class="n">responses</th>'
+                  '<th>of which coordination</th><th>report written</th></tr></thead><tbody>%s</tbody></table></div>'
+                  '<p class="mut">By model: %s. From each contributor\'s Claude Code transcripts (<code>tools/costs.py</code>), '
+                  'priced at API list prices; on a subscription nothing is billed per token. Just for interest. Contributors who have '
+                  'not committed a <code>costs/</code> report show as &ndash;.</p>'
+                  % (spend_rows or '<tr><td colspan="5" class="mut">No reports yet.</td></tr>',
+                     ', '.join('%s %s' % (MODEL_NAME.get(m, m), money(c)) for m, c in bymodel.most_common()) or 'none'))
     stat = lambda v, l, i='': '<div class="stat"><div class="v"%s>%s</div><div class="l">%s</div></div>' % (
         ' id="%s"' % i if i else '', v, l)
     stats = ''.join([
@@ -662,7 +716,9 @@ def index_page(d, state, page_of):
         stat(cnt['done'], 'packages done'), stat(cnt['partial'], 'partly done'), stat(cnt['todo'], 'to do'),
         stat(figs.get('errors', '?'), 'extraction errors'), stat(figs.get('open_joins', '?'), 'open joins'),
         stat('%d / %d' % (amb_open, amb_all), 'ambiguities open'), stat('%d / %d' % (rr_open, rr_all), 're-read items open'),
-        stat(len(d['xp']), 'contributors')])
+        stat(len(d['xp']), 'contributors'),
+        stat(money(spend) if spend else '&ndash;', 'API-equivalent spend so far'),
+        stat(('$%.2f' % (spend / figs['transistors'])) if spend and figs.get('transistors') else '&ndash;', 'per transistor traced')])
     key = ('<div id="key-pk">%s<span class="key"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="#fff" stroke="#111" stroke-width="2"/></svg>ambiguity</span>'
            '<span class="key"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="#111" stroke="#fff" stroke-width="2"/></svg>re-read item</span></div>'
            % ''.join('<span class="key"><i class="sw" style="%s"></i>%s</span>' % (st, lb) for st, lb in (
@@ -679,9 +735,10 @@ def index_page(d, state, page_of):
 <h2>Recent commits on main</h2>%s</section></div>
 <h2>Packages</h2>%s
 <h2>Open questions</h2><p class="dim">Ambiguities (A) from <code>notes/ambiguities.md</code> and re-read items (R) from the master list, placed on the die where their notes give a place.</p>%s
+<h2>What it has cost</h2>%s
 <h2>Collaboration XP</h2><p class="mut">For fun. 10 XP a commit, 25 a claim, 150 for each finished package you worked on (50 if partly done), plus your share of its transistors. Level n needs 100&middot;(n&minus;1)&sup2; XP.</p>%s
 <script type="application/json" id="series">%s</script>""" % (
-        THEME_BTNS, E(d['built']), stats, n_open_q, die_svg(d, state, page_of, ''), key, contrib_commits, lists, questions, xp,
+        THEME_BTNS, E(d['built']), stats, n_open_q, die_svg(d, state, page_of, ''), key, contrib_commits, lists, questions, spend_html, xp,
         json.dumps(d['series']))
     return shell('HD6845S trace status', body, d['version'], '', INDEX_JS)
 
@@ -718,7 +775,10 @@ def package_page(prefix, row, d, state, page_of):
         facts.append('<p><b>What</b>: %s</p>' % inline(row['what']))
     facts.append('<p><b>Who</b>: %s%s</p>' % (whos(h), ' <span class="mut">(%s to %s, %d commits)</span>' % (h['first'], h['last'], h['commits']) if h else ''))
     if row:
-        facts.append('<p><b>Transistors in its region</b>: %d</p>' % d['tcount'].get(row['label'], 0))
+        facts.append('<p><b>Transistors</b>: %d <span class="mut">(each transistor counted once, for the most specific package whose region holds it)</span></p>' % d['tcount'].get(row['label'], 0))
+    pc, pm = package_cost(d['costs'], [prefix])
+    facts.append('<p><b>Cost</b>: %s</p>' % ('about %s API-equivalent, by %s' % (money(pc), models_text(pm)) if pc
+                                             else '<span class="mut">no cost report covers it</span>'))
     if links:
         facts.append('<p class="dim">%s<br>%s</p>' % (links, hist_links))
     recent = ('<h2>Recent commits</h2><ul class="commits">%s</ul>' % ''.join(
@@ -742,14 +802,21 @@ def main():
         nl = [(t['x'], t['y']) for t in json.load(open(p))['transistors']]
     commits = read_commits()
     hist = {r['label']: package_history(r['prefixes'], commits) for r in master}
-    tcount = {r['label']: transistors_in(nl, regions(r['region'])) for r in master}
+    # each transistor counts once, for the most specific package whose region holds it (regions
+    # overlap: wiring packages span other blocks), so per-package and per-person figures add up
+    tcount = collections.Counter()
+    boxes = [(r['label'], b, (b[1] - b[0]) * (b[3] - b[2])) for r in master for b in regions(r['region'])]
+    for x, y in (nl or []):
+        inside = [(area, label) for label, (x0, x1, y0, y1), area in boxes if x0 <= x <= x1 and y0 <= y <= y1]
+        if inside:
+            tcount[min(inside)[1]] += 1
     claims = read_claims()
     claimed = {c['prefix'] for c in claims}
     state = lambda r: 'active' if any(x in claimed for x in r['prefixes']) else r['kind']
     log = git('log', '-30', '--first-parent', '--format=%ad\t%an\t%s', '--date=format:%Y-%m-%d %H:%M', 'HEAD')
     head = git('log', '-1', '--format=%h, %ad', '--date=format:%Y-%m-%d %H:%M %z', 'HEAD').strip()
     built = '%s from commit %s' % (datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC'), head)
-    d = dict(claims=claims, master=master, figs=report_figures(), hist=hist, tcount=tcount, commits=commits,
+    d = dict(claims=claims, master=master, figs=report_figures(), hist=hist, tcount=tcount, commits=commits, costs=read_costs(),
              blocks=floor_blocks(), series=progress_series(),
              questions=read_ambiguities() + read_reread(master),
              xp=xp_table(commits, master, hist, tcount, claims),

@@ -1250,7 +1250,7 @@ after, every transistor and connection identical, only names changed (86 nets).
   `h_eq_r0`, `rdp3_n0` -> `h_eq_r0half`; R9's match `cdp1_b_eq` and its far end
   `rcs_bq3335` -> `ra_eq_r9`.
 - **Batch 2**: the data bus is one name per bit, `db_b0`..`db_b7` (it had been `ubus_b#`,
-  `rbus_b#`, `cdp1_*_bl`, `r3_b#_d`, `amr_oa_c#`, `cdp1_lw2`, `tc1_x2`); R8 and R9's bits
+  `rbus_b#`, `cdp1_*_bl`, `r3_b#_d`, `amr_oa_c#` and two link names: see Former names); R8 and R9's bits
   (`cdp1` rows A and C) are `r8_b#_a/_n2/_q/_m#` and `r9_b#_*`. The cell `cdp1_reg` now
   takes the whole stem as its tag, and no longer labels its bit line (the bus names it).
 - Wording repaired where the renames made notes circular (ucz's route table, r9m's

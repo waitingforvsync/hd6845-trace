@@ -20,16 +20,21 @@ repository's main into the branch. It prints each check and ends with PASS or FA
     (a line containing "no findings" or "no issues");
  6. tools/unsure.py: nets that are joined only through uncertain items on the branch but
     not on main (listed; each must be written up in the block notes, not a failure);
- 7. a no-op merge into main: main must fast-forward to the branch.
+ 7. a no-op merge into main: main must fast-forward to the branch;
+ 8. costs/<git user.name>.json (tools/costs.py) is newer than the claim, and the models it
+    records for this package are Claude Fable 5.2 only (the project's rule since 2026-11-17).
 """
 import os
 import re
 import subprocess
 import sys
 import tempfile
+import json
+import datetime
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PY = os.path.join(ROOT, '.venv', 'bin', 'python')
+FABLE = {'claude-fable-5-2'}
 COORD = ('notes/work-packages.md', 'notes/ambiguities.md', 'notes/journal.md', 'floorplan.txt',
          'PLAN.md', 'CLAUDE.md', 'README.md')
 
@@ -80,7 +85,8 @@ def main():
                      % ((re.escape(p),) * 4))
     shared_ok = {'notes/signals.md', 'notes/operation.md'}
     others = [f for f in changed if f.startswith('trace/') and f.endswith('.txt') and not own.match(f)]
-    bad = [f for f in changed if not own.match(f) and f not in shared_ok and f not in others]
+    bad = [f for f in changed if not own.match(f) and f not in shared_ok and f not in others
+           and not re.match(r'^costs/[A-Za-z0-9_.-]+\.json$', f)]
     check(not bad, '2. only the package\'s own files, the glossary and operation.md changed',
           ('not allowed: ' + ' '.join(bad)) if bad else
           ('other blocks\' trace files changed (name each in the handoff): ' + ' '.join(others)) if others else '')
@@ -118,6 +124,30 @@ def main():
     if new:
         missing = [n for n in new if n not in txt]
         check(not missing, '6. each is written up in the block notes', ('not mentioned: ' + ' '.join(missing)) if missing else '')
+
+    who = git('config', 'user.name')[1].strip()
+    cpath = os.path.join(ROOT, 'costs', re.sub(r'[^A-Za-z0-9_.-]+', '_', who) + '.json')
+    if not os.path.exists(cpath):
+        check(False, '8. cost report costs/%s.json' % os.path.basename(cpath)[:-5], 'run: python3 tools/costs.py, and commit it')
+    else:
+        rec = json.load(open(cpath))
+        pk = {k: v for k, v in rec.get('by_package', {}).items() if k == p or k.startswith(p + '_')}
+        models = set()
+        for v in pk.values():
+            models |= set(v.get('models', {}))
+        models -= {'<synthetic>'}
+        claim = git('show', '%s:claims/%s.md' % (main_rev, p))[1]
+        cm = re.search(r'^\|\s*Claimed\s*\|\s*(.*?)\s*\|', claim, re.M)
+        fresh = True
+        if cm:
+            try:
+                fresh = datetime.datetime.fromisoformat(rec['generated']) >= datetime.datetime.strptime(cm.group(1), '%Y-%m-%d %H:%M %z')
+            except (KeyError, ValueError):
+                pass
+        check(fresh, '8a. cost report written after the claim', '' if fresh else 'run: python3 tools/costs.py again')
+        ok = bool(models) and models <= FABLE
+        check(ok, '8b. the package was traced with Claude Fable 5.2 (models seen: %s)' % (', '.join(sorted(models)) or 'none'),
+              '' if ok else 'tracing here is done with claude-fable-5-2 only (.claude/settings.json; /trace6845 runs on it)')
 
     ff = git('merge-base', '--is-ancestor', main_rev, 'HEAD')[0] == 0
     check(ff, '7. main fast-forwards to this branch')
