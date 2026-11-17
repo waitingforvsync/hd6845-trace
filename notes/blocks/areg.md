@@ -15,10 +15,15 @@ Extracts with 0 errors, 0 warnings, no unnamed open nets.
   inverters**: upper row of each decode pair in, lower row out. Traced, placed five
   times, each instance checked, joined to the decode rows.
 - **The address register is the row of five cells above the decode array**
-  (x 14180-16150, y 13000-13290, one every 390 px, the datapath pitch). Four are in
-  rdp3's area. The fifth (x 15745-16150) is in this region and is **partly** traced: its
-  write path, its output inverter and its output line are in the trace; the first
-  inverter's load and two internal links are described below but not drawn.
+  (x 14180-16150, y 13000-13290, one every 390 px, the datapath pitch). All five are
+  instances of rdp3's latch cell `rdp3_lat` (`trace/rdp3.txt`, tags `ar0`..`ar4`); the
+  fifth (x 15745-16150), which lies in this region, is the instance `ar4`. **Complete:
+  6 transistors per cell, all extracted, every equation firm; each of the five instances
+  checked by overlay at 3x and compared block by block in three shots** (2026-11-17
+  17:37 +0000, see "Fifth register cell"). The partial drawing of the first run is
+  superseded; everything it listed as "seen but not drawn" is accounted for below.
+  The check found one error in the cell, fixed in `trace/rdp3.txt` in a commit of its
+  own (64f8b04): the write pass transistor is 70 px wide, not 34.
 - The load strobe (`ar_load`) is traced from the register cells to where it leaves the
   region: metal at x 16299, y 14700, going down. Followed by eye below the region: it is
   the output of a gate at about x 15880-16150, y 15230-15330 (bd2's area), see Logic.
@@ -34,7 +39,7 @@ Extracts with 0 errors, 0 warnings, no unnamed open nets.
 | VSS rail | enters at (16122,12900), diagonals, x 15925-15975 over the inverters, ends y 14625 | traced |
 | VCC rail of the inverters | enters at (16282,12900), x 16142-16194, leaves at y 14700 | traced |
 | VCC rail of the register row | x 15925-15975 from y 12900 to 13578, then the wide rail x 15795-15890 down to y 14700; joins the decode array's VCC bus | traced |
-| Fifth register cell | 15745-16150 x 13000-13290 | partial (see Logic) |
+| Fifth register cell (`rdp3_lat` instance `ar4`, in `trace/rdp3.txt`) | 15745-16150 x 13000-13290 | traced, extracted, checked (see Logic) |
 | Bundle: `ar_load`, `areg_w6`, `areg_w7`, `areg_rail_r` | x 16291-16451 | traced as wires |
 | Right-hand column | x 16480-16800 | not traced |
 
@@ -79,86 +84,140 @@ cells left of x 15800 (each cell's output poly goes down to a contact at about y
 seen on cell 4 at 15668,13308). Which cell drives which line is in rdp3's area; the
 natural guess (leftmost cell = pair 0) is not traced.
 
-### Fifth register cell (partly traced)
+### Fifth register cell (traced: `rdp3_lat`, instance `ar4`)
 
-Five copies, found by correlation at dx 0, -390, -781, -1171, -1562 (scores 0.83-0.93).
-A 5-instance median picture is `cache/comp/areg_bit_*` (`--comp areg_bit`, master frame =
-this cell, 15740,12980:16150,13300); rebuild with
-`tools/t.sh areg composite.py areg_bit 15740,12980:16150,13300 --offsets "0,0 -390,0 -781,0 -1171,1 -1562,0"`.
+The cell is not drawn in `trace/areg.txt`. It is the fifth copy (`@inst rdp3_lat 1170,0
+tag=ar4` in `trace/rdp3.txt`) of the latch cell that rdp3 traced on the second cell from
+the left (master x 14597-14987; add 1170 for this cell). `notes/blocks/rdp3.md`, "Latch
+cell", is the reference for the cell; this section says what this package checked, what
+it changed, and how the first run's partial reading maps onto the cell. Coordinates below
+are those of the fifth cell.
 
-Traced (in the trace file, extracted):
+Devices (6 per cell; extracted for all five, k = 0..4, data bit k on cell k):
 
-- **Strobe poly.** One poly line snakes through all five cells: a band along the top of
-  the cell (y 13015-13033), at its left end a strip down (x 15852-15872) to a band at
-  y 13061-13081 that crosses the write strip. In this cell the top band runs on right to
-  a contact at (16297,13022) and from there in metal down the bundle (`ar_load`). To the
-  left the band at y 13061-13081 meets a leg (x 15745-15766, y 13015-13085) that is the
-  right end of cell 4's top band.
-- **Write path.** Thin vertical metal at x 15787-15807 comes from above the region and
-  ends at y 13275 (`areg_din4`). Contact at (15797,13037) to a diffusion strip
-  (x 15778-15848). The strobe band crosses the strip: pass transistor, W/L 70/20. Below
-  the band the strip ends in a buried contact (15818-15850 x 13088-13106) to a poly
-  (`areg_s4`, the storage node) that runs down under the data line and is the gate of a
-  pull-down at 15781-15801 x 13150-13200 (W/L 50/20).
-  Extracted: `areg_s4 <- areg_din4` through the pass transistor when `ar_load` is high.
-- **First inverter (pull-down only).** Source side runs left under the next cell's VSS
-  rail to its contact at (15728,13165) (outside this region, labelled `areg_c5_src`);
-  drain side is `areg_s4_n`.
-- **Output inverter.** VCC land 15885-15962 x 13050-13099 (contact 15930,13069 to the VCC
-  rail), strip to the right under the load gate (15966-16022 x 13062-13100, W/L 25/56),
-  turning down into the output node (16026-16070 x 13100-13150). Pull-down gate
-  16071-16090 x 13092-13182 (W/L 50/19), source contacted to the VSS rail at (16118,13152).
-  The load gate continues down as a pad (to y 13145) and right onto the output node
-  through a buried contact (16030-16052 x 13112-13148). Extracted: `ar4 = NOT areg_g1`.
-- **Output route.** Contact on the pad (15995,13127), metal strap (x 15988-16028) down to a
-  contact at (16008,13215) on a diffusion that extends right to x 16076; the output poly
-  (x 16055-16075) starts on that extension and goes down to become the `ar4` feed.
-- `areg_g1`, the output pull-down's gate, is the end of a poly band (y 13160-13182) that
-  comes from a vertical piece at x 15919-15944 under the VCC rail.
+| Device | Where (cell 5) | W/L | Gate | Between |
+|---|---|---|---|---|
+| T1, write pass transistor | 15776-15846 x 13060-13088 | **70/28** | `ar_load` | `db_b4` <-> `ar4_a` |
+| T_b, pull-down of inverter 2 | 15780-15802 x 13152-13203 | 51/22 | `ar4_a` | `ar4_n2` <-> `vss` |
+| L2, load of inverter 2 | 15877-15922 x 13100-13152 | 30/52 | `ar4_n2` (tied) | `vcc` <-> `ar4_n2` |
+| T_a, pull-down of inverter 1 | 16070-16092 x 13098-13150 | 52/22 | `ar4_n2` | `ar4` <-> `vss` |
+| L1, load of inverter 1 | 15967-16018 x 13072-13100 | 28/49 | `ar4` (tied) | `vcc` <-> `ar4` |
+| hold device | 15897-15979 x 13224-13246 | 22/82 | `vss` | `ar4` <-> `ar4_a` |
 
-Seen but not drawn (believed):
+Equations (`tools/unsure.py --equations '^ar'`: all FIRM):
 
-- The first inverter's load: a poly block under strap M2 at 15885-15904 x 13105-13157 over
-  a strip coming down from the VCC land.
-- `areg_s4_n` reaches `areg_g1`: the drain of the first pull-down seems to run right along
-  y 13160-13187 under M2 to a heavy edge at x 15905-15912 (a buried contact onto the
-  vertical piece of `areg_g1`). There is also a poly blob with a buried-contact box at
-  15828-15866 x 13127-13172 that belongs to this node.
-- Static feedback: something runs right from the foot of the storage poly (15783-15815 x
-  13203-13228) along y 13205-13245 (poly pieces in the open at x 15815-15848, 15855-15873,
-  15900-15920; two bands under the VCC rail, y 13207-13218 and y 13225-13245) to the left
-  edge of the diffusion under the strap's lower contact (x 15985). If that is a
-  connection, the storage node and the output node are the same net and the cell is a
-  cross-coupled ("jam") latch that the data line overpowers while the strobe is high.
-- A horizontal poly band at y 13250-13268, x 15748-15985, along the bottom of the cell.
-- Two metal straps that run from the top band to the bottom of the cell with no contact
-  found: M2 (x 15877-15897, y 13015-13275) and M5 (x 16050-16068, y 13015-13272), named
-  `areg_m2`, `areg_m5`. The clean shot shows no contact mark on the top band under either.
+```
+ar4_a  <- db_b4          through T1 while ar_load is high
+ar4_n2 =  NOT ar4_a
+ar4    =  NOT ar4_n2     (so ar4 has the sense of the data line)
+ar4_a <-> ar4            hold device, always on if it is a depletion device (believed)
+ar4_n  =  NOT ar4        (row inverter, this block)
+```
 
-What the cell is, as far as established:
+What rests on `?` items: only the hold device. Its diffusion strip (`?D`
+15890-15994 x 13224-13246, in the cell) is rdp3's reading and stays uncertain: the
+strip's two ends are hidden under metal-gap lines and the implant cannot be seen. The
+three inverter equations and the write path do not depend on it. Without the hold
+device the cell would be a dynamic latch (storage on the gate of T_b only).
 
-- Kind of latch: a level-sensitive latch written through a single pass transistor.
-  Transparent while `ar_load` is high. The address register must hold indefinitely, so
-  it has to be static; two inverters are present, which fits a cross-coupled pair, but
-  the closing link is not traced.
-- Data input: the thin vertical metal at x 15797, entering the region at y 12900 from
-  the datapath above (a data bus bit line by its position; which bit is not established).
-- Load strobe: `ar_load` (see Ports). No clock is involved in the cell.
+**How the first run's "seen but not drawn" list maps onto the cell** (each looked at
+again on cell 5, 3x overlay `c5_acid1b.png`, `c5_acid.png`, `c5_metal.png` in
+`cache/scratch/areg/`, and at 4.6-5.8x where named):
+
+- "The first inverter's load, a poly block under strap M2 at 15885-15904 x 13105-13157":
+  L2. The block is wider than it looked (15877-15922, on to the vertical piece at
+  15921-15945 without a gap); only its part under the track shows channel-bright because
+  the gap between the track and the VCC rail draws a dark bar down x 15902-15917. Profile
+  of the clean shot across it in all five cells (R 237-248 at x 15890-15899 against
+  213-228 for the same poly over field on either side); the strip itself measures
+  x 15886-15913 just above the block.
+- "`areg_s4_n` reaches `areg_g1` ... heavy edge at x 15905-15912, poly blob with a
+  buried-contact box at 15828-15866 x 13127-13172": that is node `ar4_n2`. The drain of
+  T_b runs right as a band (y 13172-13189) to the land at the foot of L2
+  (15870-15914 x 13156-13190); the box is the gate tie of L2 (buried contact
+  15830-15862 x 13140-13168 on a bump of the drain band), whose poly is the load gate
+  block and continues down the right side (x 15921-15945) and along y 13162-13187 to the
+  gate of T_a. The first run's names `areg_s4`, `areg_s4_n`/`areg_g1` are `ar4_a`,
+  `ar4_n2`. (`hard5.png`, 4.6x, clean shot and chip-2 stripped shot.)
+- "Static feedback ... poly pieces along y 13205-13245 ... two bands under the VCC rail":
+  the gate poly of T_b runs on right along y 13210-13232 to a buried contact
+  (15848-15870 x 13210-13240) on the feedback land (15850-15894 x 13214-13244); from
+  there the hold device's strip runs under the block to the output land
+  (15990-16038 x 13197-13243). So the storage node and the output node are **not** one
+  net: they are joined through the hold device. Seen on cell 5 at 5.5x in three shots
+  (`hold5_55x.png`): three bands under the VCC rail separated by thin dark lines at
+  y 13221 and 13247, the middle band brighter and redder than the outer two. Measured
+  in the clean shot at x 15945 in all five cells (R, R-G): upper band 185-195, +37..+56;
+  middle band 199-227, +53..+86; lower band 188-216, +42..+74; reference under the bus
+  line: gate over channel 232-242, +70..+73, poly over field 212-219, +56..+65. The
+  middle band is the brighter in every cell (by 4 in cell 1, by 25-42 in the others),
+  which is what poly over a channel does under metal (tracing guide, trap 6). It agrees
+  with rdp3's reading and does not prove it: the strip stays `?D`.
+- "A horizontal poly band at y 13250-13268, x 15748-15985": the lower part of the hold
+  device's gate, which runs on left to a metal contact on the VSS rail at (15732,13256)
+  (olive in the clean shot, R-G -17; the same in the other four, -24..-1).
+- "Straps M2 (x 15877-15897) and M5 (x 16050-16068) with no contact found": both are
+  isolated metal stubs, the pieces inside the cell of two tracks that run through the
+  same cell in the register rows above (rdp3: the `hc` track and a track that is a
+  through line in one slice). M2 is `ar4_trk`. Measured in the clean shot in all five
+  cells: where each stub crosses the strobe's top band the poly is salmon (R-G +26..+40,
+  no olive patch; the metal contacts on poly in the same cell read -24..-1), at the
+  bottom band likewise (+45..+62). M5 lies on the drain of T_a (flat tan, no specks) and
+  on the output's buried contact. At 5x in both metal shots and the clean shot
+  (`t56_5x.png`) M5 shows no ring anywhere from y 13012 to 13275, only the dark lines of
+  the edges it crosses. If M5 did touch the drain or the output land it would change
+  nothing: both are `ar4`.
+
+**The check of the five instances.** (a) Overlay of the whole trace on the clean shot at
+3x, one image per cell (`c1_acid1b.png` .. `c5_acid1b.png`): every outline of the cell
+sits on its feature in each of the five; cell 5 also on the chip-2 stripped shot and the
+metal shot. (b) `tools/rdp3_cmp.py 15740,12995:16160,13295` with offsets 0, -390, -780,
+-1170, -1560, blocks of 30 px, in `acid1b`, `metal` and `acid`: the cells agree
+everywhere except (i) the right-hand 60 px of cell 5 (x 16100-16160: the sixth VSS rail
+is narrower there and there is no next cell: no bottom band and no band contact at
+(16122,13256)), (ii) the left-hand edge and the track at x 14322 in cell 1 (the `hc0`
+track runs through that cell; rdp3), (iii) scattered single blocks at contacts (pits
+differ). (c) The contact and no-contact readings above were measured in all five cells
+(`tools/rdp3_boxstat.py`). (d) Below the cell: cells 1-4 end their output poly on a pad
+with a metal contact at y 13308; cell 5 has none, its output poly (x 16045-16070) turns
+right at y 13297-13317 and is the feed of row pair 4, continuous in poly under the VSS
+and VCC rails in both stripped shots (`out5.png`, 3.8x). (e) The strobe's right end:
+poly from the cell's top band under both rails to a pad with a metal contact at
+(16296,13023) (`strobe_end.png`, 4x).
+
+**Pass transistor: found wrong in the cell, fixed (commit 64f8b04, `trace/rdp3.txt`).**
+The cell had T1's diffusion as the 34 px strip under the bus line. The diffusion is one
+P-shaped region: the bus contact land (x 15772-15822, y 13010-13045) widens to
+x 15848 from y 13045 to 13105 and the gate band (y 13060-13088) crosses all of it; below
+y 13105 only the strip under the bus line goes on down to the buried contact of node a.
+Evidence: one closed outline with rounded corners at (15846,13047) and (15848,13105),
+continuous with the land's outline, in both metal shots at 6x (`pass5_m.png`,
+`pass5_wide.png`), the same in all five AR cells (`pass_mos_metal.png`,
+`pass_mos_metal1.png`); the band between is poly-coloured, the areas above and below
+plain. In the AR row that part is in the open, where the clean shot cannot tell channel
+from field; in the rows where a metal covers it, the gate band is channel-bright over
+the whole 70 px in the clean shot (`passR_acid1b.png`: four cells of R1/R2;
+`passX1.png`, `passX2.png`: ten cells in the rows of R0, R4, R6, R7, R5, R3). The
+strobe's riser beside it stands at x 15851-15872 (the cell had 15837-15867, which
+would have lain on the wider diffusion). Effect: 59 pass transistors (all copies of the
+cell in rdp1, rdp2, rdp3) change from 34/28 to 70/28; no net changes; the full
+extraction still has 3760 transistors, 0 errors, 0 warnings. The first run of this
+package had read it so (W/L 70/20). With it the write path is about nine times as
+strong as the hold device (2.5 squares against 0.27).
+
+What the cell is: a level-sensitive latch written through one pass transistor,
+transparent while `ar_load` is high, two inverters, and (believed) a weak always-on
+feedback from the output to the storage node that makes it static. No clock is
+involved. Data input of cell 5: `db_b4`, the bus line at x 15797 (contact
+(15792,13035)); so the address register takes data bits 0-4 in order, cell k = bit k.
 
 ### Is the upper row of each pair the true address bit?
 
-- Traced: the upper row is the register cell's output node (no gate in between), the
-  lower row is its inverse. So decode.md's naming (upper = `ar<k>`, lower = `ar<k>_n`) is
-  right in the sense "upper = what the register puts out".
-- Traced: the output node is the output of an inverter whose input is `areg_g1`, and the
-  storage node (same sense as the data line) drives a first inverter.
-- Not traced: that `areg_g1` is the first inverter's output. If it is (believed), the
-  register output has the **same sense as the data line**, and the upper row is the true
-  address bit provided the data line carries the data bit uninverted.
-- So: **confirmed that the upper row is the register's direct output; "upper = true bit"
-  is supported (two inversions between storage node and output, as far as seen) but
-  rests on one link that is believed, not traced, and on the polarity of the data line.**
-  Nothing found contradicts decode.md.
+Traced, and extracted with firm equations: the upper row of pair k is `ark`, the output
+node of register cell k with no gate in between; `ark` = NOT `ark_n2` = `ark_a`, the
+stored value of `db_bk`, in the sense of the data line; the lower row is `ark_n` = NOT
+`ark`. So decode.md's naming holds: **upper row = true address bit**, provided `db_bk`
+carries data bit k uninverted (that is the data bus column's business, `dbus`).
 
 ### Where the load strobe comes from (seen below the region, not traced: bd2's area)
 
@@ -203,8 +262,8 @@ Followed `ar_load` past the boundary at 1-3x, without tracing:
 | decode ground rails | diffusion | x 15775, y 13782-13832 and every 173 below | - | also contacted to VSS here |
 | `ar_load` | metal | x 16299, y 14700 | from outside (below) | load strobe of the address register; no tap in this region other than the register |
 | `ar_load` | poly | x 15800, y 13061-13081 | passes on to the left | the same strobe continuing to the other four register cells |
-| `areg_din4` | metal | x 15797, y 12900 | from outside (above) | data line of the fifth register cell |
-| `areg_c5_src` | diffusion | x 15745, y 13150-13200 | - | source of the first pull-down; joins cell 4's VSS rail contact at (15728,13165) |
+| `db_b4` | metal | x 15797, y 12900 | from outside (above) | data line of the fifth register cell (drawn in `trace/rdp3.txt`) |
+| `vss` | diffusion | x 15745, y 13150-13200 | - | source of T_b of the fifth cell: the VSS land under the rail at x 15735, contact (15725,13163) (in the cell) |
 | `areg_w6` | metal | x 16341, y 14700 | unknown | up the bundle to contact 16337,13264, then poly right along y 13263; drawn to x 16480, goes on to the right-hand column |
 | `areg_w7` | poly | x 16364, y 14700 | unknown | up the bundle to y 13453, then right; drawn to x 16480, goes on to the right-hand column |
 | `areg_rail_r` | metal | x 16426, y 12900 and y 14700 | supply? | 49 px wide rail through the whole region; which supply is not established |
@@ -222,20 +281,32 @@ metal shots over the full height.
    left and the tab is a dead end. No contact seen on it in either metal shot or the clean
    shot (a contact would short `ar0` to VCC). Working assumption: no contact.
 2. Register cell, join between the strobe band's left end (x 15772) and cell 4's leg
-   (x 15745-15766): a dark line at x 15768-15775 lies between them, under the edge of
-   cell 4's VSS rail. Read as the metal-margin artefact, i.e. one poly. Two separate polys
-   6 px apart would break the design rules. Not drawn left of x 15772.
-3. Register cell, output poly start (16050-16080 x 13222-13249): drawn as a buried contact
-   to the diffusion extension. No contact mark there in the clean shot. Strap M5 passes
-   over it, so a metal contact joining M5, diffusion and poly cannot be excluded from the
-   metal shots alone; that would make `areg_m5` the output node as well.
-4. Register cell, straps M2 and M5: both run exactly from the top band to the bottom of
-   the cell, which suggests contacts at their ends, but none is visible. If M5 contacted
-   the top band and the output poly the strobe would be shorted to the output, so at most
-   one of those can be real. Needs the other four cells compared one by one.
-5. Register cell, storage poly between the buried contact and y 13140 (marked `?`): the
-   route (down the right edge of the data line, then widening under it) is read from heavy
-   outlines only.
+   (x 15745-15766): a dark line at x 15768-15775 lies between them. **Closed: one poly.**
+   The line is the bar that the 16 px gap between the VSS rail (edge x 15765) and the bus
+   line (edge x 15781) leaves on whatever is underneath (layers.md, traps); it is there in
+   all five cells and in both stripped shots, with poly of the same height on both sides.
+   The cell draws the strobe as one snake. (For cell 5 nothing depends on it: its gate
+   band is fed from the right, by the riser.)
+3. Register cell, output poly start (16042-16071 x 13218-13245), with stub M5 over it.
+   **Closed: buried contact, no metal contact.** Flat tan box with a heavy outline and no
+   specks in the clean shot, no ring in either metal shot at 5x (`t56_5x.png`). A metal
+   contact there would only put the stub on `ar4`.
+4. Register cell, stubs M2 and M5. **Closed: no contact on either** (see Logic).
+5. Register cell, how the storage diffusion meets the gate poly of T_b. The first run
+   read a buried contact on a tab at 15818-15850 x 13088-13106 and a poly down the right
+   edge of the bus line; the cell has the strip going on down under the bus line to a
+   buried contact at 15774-15812 x 13120-13142. The "tab" is the lower part of the wide
+   pass-transistor diffusion (see "Pass transistor"). Under the bus line the clean shot
+   shows, from the top: diffusion to y 13110, a box with a heavy outline and a tan inside
+   at y 13113-13135, poly from y 13138, the channel of T_b from y 13152 (`arm5.png`,
+   5.8x). That is the cell's reading. Either way the net is the same (`ar4_a`).
+5a. Register cell, "concentric arches" at 16030-16050 x 13112-13150, which the first run
+   drew as the buried contact of load L1. They are the 24 px gap between the strap
+   (edge x 16021) and stub M5 (edge x 16045) showing on the output diffusion: the arch
+   starts where the strap starts (y 13112) and the same gap runs on down over field as a
+   green line to y 13215. L1's gate tie is the box at 16016-16044 x 13066-13100 at the
+   end of the load gate (green-centred box with a heavy outline). Both readings put the
+   load gate on `ar4`.
 6. Which supply `areg_rail_r` is. The loads of the right-hand column cells will tell.
 7. Under `areg_rail_r` a poly runs along its left edge (x 16402-16420) from y 13650 to
    y 14440, with an arm to the right at each end (y 13650-13665 and y 14422-14440). Seen
@@ -243,10 +314,12 @@ metal shots over the full height.
 
 ## Not done
 
-- Fifth register cell: everything listed under "seen but not drawn". Best next step:
-  trace the cell on the median picture at 6x in three strips (x 15800-15925 is the hard
-  one), then check the result on each of the five instances; the cell differs between
-  instances only below y 13270 (output contact at y 13308 in cells 1-4, none in cell 5).
+- Fifth register cell: nothing. (The hold device's strip stays `?D` in the cell; what
+  would settle it is a shot that shows the implant, or the strip's two ends, which lie
+  under metal-gap lines at x 15893-15900 and x 15978-15985 in every cell.)
+- Not checked by this package: the copies of `rdp3_lat` in rdp1 and rdp2 other than the
+  pass transistor (ten sampled for that), and the cell's W/L values other than T1's and
+  L2's width.
 - The gate that drives `ar_load` (about x 15880-16150, y 15230-15330, outside the
   region): trace it and its inputs. This is the question that matters most.
 - Right-hand column, x 16480-16800: four identical cells at about y 13060-13250,
@@ -257,3 +330,7 @@ metal shots over the full height.
   (the two arms of the poly under `areg_rail_r`).
 - Region right of x 16800 (a block at 16860-16950 x 13820-13930, lines to the right edge).
 - The neighbouring items left of x 15800 that belong to this cell row are rdp3's.
+
+## Review
+
+(For the coordinator: review rounds are recorded here.)

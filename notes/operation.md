@@ -85,6 +85,7 @@ is not settled.
 | Fact | Mark |
 |---|---|
 | Each register bit is a transparent latch: it follows the data line while its write strobe is high and holds when it falls. | Extracted; the cell has uncertain items |
+| In the latch cell of the right datapath and the address register (`rdp3_lat`, 59 copies) the write pass transistor is 70/28 and the feedback that holds the bit is one weak device (22/82, gate on VSS) from the output back to the storage node, so a write overpowers it about nine to one. | Firm for the pass transistor and the two inverters; the hold device is marked (its strip is an uncertain item, and that it is a depletion device is believed) |
 | `wr_r#` = register # selected AND the common strobe (`wr_stb_n` low). | Firm for R0-R11; marked for R12-R15 |
 | The common strobe is a latch of "write, chip selected, RS high" that is open while E is high. | Marked (four of its nets are joined only through uncertain items) |
 | Whether anything ends the strobe when E falls, or re-times it to CLK. | **Open**. As drawn nothing does; that reading rests on the marked nets above |
