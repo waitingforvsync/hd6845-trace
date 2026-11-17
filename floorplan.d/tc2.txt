@@ -7,3 +7,4 @@
 6477,4808:6819,4848    route   tc1_m6817 row | from tc1's thin metal x 6797 to the pad (6492,4828)
 6355,4825:6373,5534    route   tc1_m6817 metal | west leg of the line, south along x 6364
 6485,5516:6545,6400    route   tc1_m6817 metal and poly | through the nest to the pad (6533,6152), poly south
+6686,4450:6755,4996    power   VCC rail through the crossing field | joins the rail of the gate columns west of the island to the rail of the bit-0 inverters

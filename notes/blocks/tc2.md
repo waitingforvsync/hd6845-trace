@@ -3,7 +3,7 @@
 Trace: `trace/tc2.txt`. Ports: `ports.d/tc2.txt`. Views: `cache/scratch/tc2/`.
 Tool: `tools/tc2_runs.py` (dark runs along a straight metal in both metal shots).
 
-## Status (2026-11-17 22:47 +0000, dp111's session, run 1)
+## Status (2026-11-17 22:50 +0000, dp111's session, run 1)
 
 Most of this region was already drawn by other packages (`ras`, `rax`, `fld`, and the
 crossing lines of `bust`, `amr`'s west route, `r9m`, `rde`): see the inventory. This package
@@ -27,13 +27,19 @@ adds what they left. Traced and extracted so far: 3 transistors, 1 new net, 1 eq
   pad (6492,4828), a metal through the nest west of the XOR cells to the pad (6533,6152), and
   a poly south past y 6400.
 
+**Piece 3** (wiring only)
+
+- The VCC rail through the crossing field, between `tcw`'s piece (to y 4455) and `fld`'s (from
+  y 4990): `fld`'s rail, and with it the loads of `tc1_g`, `tc1_i` and `tc2_o5175`, is now
+  joined to a labelled VCC rail by drawn metal (it was "VCC by the layout rule").
+
 Not done: see the end.
 
 ## Inventory (survey at 0.68x in the metal and clean shots: `survey_m.png`, `survey_a.png`)
 
 | Where | What | Drawn by |
 |---|---|---|
-| x 6430-6990, y 4450-4850 | crossing field: horizontal poly rows under vertical metals (the rail x 6537-6583, thin metals x 6400-6417, 6612-6634, wide ones x 6680-6740, 6790-6800, 6830, the rail x 6858-6908), a pad at each end of each row | rows y 4527 (`r9m`), 4568, 4613 (`amr`'s west route), 4657, 4700 (`bust`, `?P`), 4745 (`r9m`); **row y 4482: piece 1; rows y 4786 and y 4829: piece 2**. Of the vertical metals the wide one x 6685-6758 (believed the VCC rail that `tc1` draws to y 4330 and `fld` from y 5040) and the one at x 6830 are not drawn |
+| x 6430-6990, y 4450-4850 | crossing field: horizontal poly rows under vertical metals (the rail x 6537-6583, thin metals x 6400-6417, 6612-6634, wide ones x 6680-6740, 6790-6800, 6830, the rail x 6858-6908), a pad at each end of each row | rows y 4527 (`r9m`), 4568, 4613 (`amr`'s west route), 4657, 4700 (`bust`, `?P`), 4745 (`r9m`); **row y 4482: piece 1; rows y 4786 and y 4829: piece 2**. The VCC rail x 6687-6737: **piece 3**. Of the vertical metals the one at x 6830 is not drawn |
 | x 6920-7900, y 4450-4800 | six bus metals and the fan of diagonal polys down to the selector | `r9m`, `amr`'s west route, `bust`, `ras`, `tc1`'s ends |
 | x 6420-6710, y 5020-5290 | one NOR with its load (two pull-downs under the west edge of the rail x 6537-6583) | **piece 1** |
 | x 6600-7050, y 5020-5275 | two inverters (`tc1_g`, `tc1_i`) | `fld` |
@@ -185,8 +191,29 @@ Joins between named nets: none new (each line only carried on). `tc1_m6817` is t
 
 No transistor in this piece. Read below 4x: the two rows between their pads (as in piece 1).
 Rings and boxes inside the piece with no drawn item: the pad (6485,6110) and its poly
-x 6480-6500 going south (another net; Not done); the wide metal x 6685-6758 and the metal
-x 6830 (Not done); the pad (6558,5870)/(6535,5848) is `fld`'s.
+x 6480-6500 going south (another net; Not done); the metal x 6830 (Not done); the wide metal
+x 6685-6758 is piece 3; the pad (6558,5870)/(6535,5848) is `fld`'s.
+
+## Piece 3 (wiring only): the VCC rail x 6687-6755, y 4455-4990
+
+| Net | From | Path | To |
+|---|---|---|---|
+| `vcc` | `tcw`'s rail x 6687-6737 (to y 4455; `vcc` through `tc1`'s piece) | the same metal south to y 4822; it widens east to x 6755 at y 4822-4873; from y 4873 it is x 6703-6752 | `fld`'s rail x 6700-6750 (from y 4990) |
+
+Seen: `vccstep.png` (3.2x, both metal shots and the clean shot: the widening, the step of the
+west edge at y 4873, the meeting with `fld`'s rail); `ov_vcc.png` (1.6x overlay, both metal
+shots, y 4430-5030); `ov_routes_m.png` (1.9x); rows `px.py row 4700 6670 6770`, `row 4940
+6680 6770` (edges x 6686/6732 and 6706/6754); `tc2_runs.py col 6712 4330 5060 5` and `col 6728
+4330 5060`: no dark run of 25 px or more at the same place in both chips (the longest, 30-36
+px, are each in one chip only, where the edges of two rows lie 10 px apart). The stretch
+y 4455-4800 was read at 1.6-2x and by these profiles only.
+
+Under the rail in this stretch there are only the poly rows of the crossing field (y 4482 to
+4958); none has a pad there, and the clean shot shows no diffusion box and no hole
+(`row4480.png`, `rows2.png`, `row4877.png`, `foot2.png`). Omissions looked at: the dark dot on
+the rail at (6712,4462) in chip 2's metal shot is a blemish (`spot.png`, 4.8x in four shots:
+chip 1's metal whole, field in both stripped shots); the widening at y 4822 has no contact
+(piece 2's table).
 
 ## Ports
 
@@ -200,6 +227,7 @@ x 6830 (Not done); the pad (6558,5870)/(6535,5848) is `fld`'s.
 | `tc1_p4308` | M | x 6612-6634, y 4450 | ? | `tc1`'s pad (6620,4436) is 14 px north of the edge |
 | `fld_b_in` | P | x 6560, y 5337-5356 | in | `fld`'s row (inside the region; where this package's drawing meets `fld`'s) |
 | `vss` | M | x 6537-6583, y 4450 | - | `tcw`'s rail |
+| `vcc` | M | x 6687-6737, y 4450 | - | `tcw`'s rail |
 | `ras_o0_alt2` | M | x 6400, y 4778-4798 | ? | goes on west; follower: end (6059,4876) |
 | `tc1_m6817` | M | x 6789-6805, y 4450 | out (to `tc1`) | `tc1`'s foot (6797,4372) is 70 px north of the edge |
 | `tc1_m6817` | P | x 6524-6544, y 6400 | in | going on south: the line's driver is that way (its other end is a gate in `tc1`) |
@@ -212,8 +240,7 @@ None in piece 1.
 ## Not done
 
 - `tc2_o5175`, `tc1_p4308`, `tc1_o3527`, `ras_o0_alt2` west of x 6400; `tc1_m6817` south of y 6400.
-- The wide metal x 6685-6758 through the crossing field (believed the VCC rail between `tc1`'s
-  piece, to y 4330, and `fld`'s, from y 5040; it widens east at y 4822) and the metal x 6830.
+- The metal x 6830 of the crossing field.
 - The pad (6485,6110) and its poly x 6480-6500 going south; the other metals of the nest
   x 6400-6580, y 5350-6100.
 - The logic at x 7880-8250, y 5980-6320 (seen once at 1.7x, `br1.png`: a column of five or six
@@ -222,6 +249,6 @@ None in piece 1.
   metal x 8105-8118; nothing drawn or decided).
 - What stands east of `rax`'s units (x 8040-8250, y 4700-5470: `rax`'s own Not done); the
   supply metals and cross-unders y 6100-6400. Not looked at above 0.68x.
-- The independent review of pieces 1 and 2 (the Review section below is empty).
+- The independent review of pieces 1 to 3 (the Review section below is empty).
 
 ## Review

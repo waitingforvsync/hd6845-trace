@@ -143,3 +143,15 @@ P 6515,6134:6551,6170
 C 6533,6152
 P 6534,6152 y6400 w=20
 N P 6600,4829 tc1_m6817
+
+# ===== Piece 3 (2026-11-17): the VCC rail through the crossing field.
+# tcw draws it to y 4455 (x 6687-6737, labelled vcc there through tc1's piece), fld from y 4990
+# (x 6700-6750: "VCC by the layout rule, not followed"). Between them one metal: x 6687-6737 to
+# y 4822, there it widens east to x 6755 (no contact under the widening: foot1.png, foot2.png
+# 4.8x, text map), and from y 4873 it is x 6703-6752 (vccstep.png 3.2x, both metal shots and the
+# clean shot; rows y 4700, 4940). tools/tc2_runs.py col 6712 and col 6728, y 4330-5060: no dark
+# run of 25 px or more at the same place in both chips (the longest, 30-36 px, are in one chip
+# only, where two row edges lie 10 px apart). It crosses the rows y 4482 ... 4958 without a pad.
+M 6712,4445 y4826 w=50
+M 6686,4820:6755,4876
+M 6727,4870 y4996 w=49
