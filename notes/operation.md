@@ -161,6 +161,9 @@ So that silence is not read as knowledge:
   counter is established.
 - The R8 skew path, the light pen, the status register, reset from the RES pin (the
   buffered `res_b` line is followed across the chip; what it does at its taps is not).
+  Of the skew path only the wires' first stretch is traced: `r8_b5_q` and `r8_b4_q` leave the
+  datapath westwards through the top bus field of `tc1` and go on west of x 6750 at
+  y 2568-2626, into logic that is not traced yet.
 - The memory address counter's control, and the cursor compare.
 
 The list of what is assumed, with the evidence for and against each, is

@@ -1076,3 +1076,116 @@ P 7660,2588:7862,2606              # under the island's right VSS rail in poly (
 P 7845,2580:7875,2612              # pad
 C 7858,2596 s=14x14
 M 7850,2597 x8350 w=13             # on east over the datapath (follower: end (9056,2595)); drawn to x 8350
+
+# =====================================================================================
+# The bus fan north of cell D and the rest of the top bus field (x 6750-8350,
+# y 2500-3035).  Run 11, 2026-11-17.  Wiring only: no transistor.
+# Between y 2500 and y 2800 nothing but poly rows crosses under the rail x 6858-6906
+# (the block (6750-6850, 2680-2775) is open field: khaki in the clean shot, red = green
+# in the chip-2 stripped shot).  Four lines come from the west, cross under the rail in
+# poly, rise to metal on the pads P4..P1 and run east; three polys come from the north.
+#   row y 2652-2666 -> P4 -> metal -> tc1_m7100's channel metal (its source)
+#   row y 2612-2626 -> P3 -> metal -> bus track y 2943 -> poly east     r8_b5_q (the datapath's name: cdp1 draws this poly from the east to x 8340)
+#   metal y 2575 -> pad -> row y 2566-2582 -> P2 -> metal -> track y 2899   r8_b4_q (the same)
+#   row y 2520-2540 -> P1 -> metal -> track y 2858 -> poly east         tc1_b2858
+#   poly x 7117-7133 from the north -> pad -> metal -> track y 2814     tc1_b2814
+#   poly x 7160-7176 from the north -> strip y 2585-2603 -> pad -> metal -> track y 2684   tc1_b2684
+#   poly x 7201-7218 from the north -> pad -> metal track y 2554        tc1_b2554
+# and tc1_p3698's thin metal ends on a pad whose poly is the west end of tc1_ns2.
+# Views cache/scratch/tc1/run11/.
+# =====================================================================================
+M 6882,2500 y2800 w=48             # the rail (vss), on north to the region's edge, where a wide horizontal metal lies (y < 2512: pink across x 6840-6925 at y 2505)
+M 6750,2639 x6860 w=18             # its branch west, y 2630-2648 (follower: W end (6514,2639), E corner into the rail at (6886,2638)); drawn from x 6750
+
+# ---- tc1_m7100's source: row y 2652-2666, pad P4, metal A
+P 6750,2652:6962,2666              # from the west (salmon beside the branch, salmon under the rail, open poly x 6922-6954)
+P 6927,2663:6963,2698              # pad P4
+C 6946,2680 s=14x14                # bright centre in a dark ring in both metal shots, green hole in the clean shot
+M 6948,2673 y2769 x7100 y3145 w=16 # metal A: south, east along y 2762-2776, and south as the channel metal x 7091-7110. No contact at the corner (7100,2768): plain end at x 7108, no ring, no hole (aend.png)
+
+# ---- r8_b5_q: row y 2612-2626, pad P3, metal B, bus track y 2943
+P 6750,2612:7004,2626              # from the west
+P 6972,2620:7008,2655              # pad P3
+C 6990,2637 s=14x14
+M 6991,2630 y2730 x7191 y2945 x7670 w=14   # metal B (follower: corners (7193,2730), (7187,2950), end (7665,2943))
+P 7648,2927:7682,2959              # pad
+C 7662,2943 s=14x14
+P 7660,2934:8064,2950              # poly east: salmon under the island's right VSS rail, open poly on to x 8064
+P 8048,2934:8064,3035              # south in the open (row y 2965: open poly x 8050-8060)
+P 8048,3019:8350,3035              # east under ns1..ns6 without contact; drawn to x 8350
+N M 7190,2850 r8_b5_q
+
+# ---- r8_b4_q: metal y 2575 from the west, row y 2566-2582, pad P2, metal C, bus track y 2899
+M 6750,2575 x6824 w=14             # from the west (the follower takes it far west and south)
+P 6805,2560:6838,2590              # pad
+C 6818,2575 s=14x14
+P 6830,2566:7046,2582              # row east under the rail to P2
+P 7012,2575:7050,2612              # pad P2
+C 7031,2591 s=14x14
+M 7032,2584 y2685 x7231 y2900 x7714 w=14   # metal C (follower: corners (7233,2685), (7233,2901), end (7709,2899))
+P 7692,2883:7722,2915              # pad
+C 7706,2899 s=14x14
+P 7700,2891:8107,2907              # poly east
+P 8090,2891:8107,2992              # south, lengthwise under ns1's metal (salmon x 8095-8105 at y 2922 and y 2965)
+P 8090,2976:8350,2992              # east under ns2..ns6 without contact
+N M 7231,2800 r8_b4_q
+
+# ---- tc1_b2858: row y 2520-2540, pad P1, metal D, bus track y 2858
+P 6750,2520:7092,2540              # from the west, in the open
+P 7055,2533:7093,2570              # pad P1
+C 7073,2550 s=14x14
+M 7074,2543 y2641 x7273 y2858 x7670 w=14   # metal D (follower: corners (7081,2640), (7271,2642), (7274,2858)); lengthwise over tc1_o3740's poly y 2630-2648 from x 7162 to x 7272, no contact
+P 7648,2842:7682,2874              # pad
+C 7662,2858 s=14x14
+P 7660,2848:8150,2864              # poly east
+P 8135,2848:8150,2950              # south, lengthwise under ns2's metal
+P 8135,2933:8350,2950              # east under ns3..ns6 without contact
+N M 7273,2750 tc1_b2858
+
+# ---- tc1_b2814: poly from the north, pad (7120,2596), metal y 2597 / x 7314, bus track y 2814
+P 7117,2500:7133,2582              # from the north (open poly y 2518-2572, salmon under the wide metal above y 2512)
+P 7104,2577:7140,2612              # pad
+C 7120,2596 s=14x14
+M 7114,2597 x7314 y2814 x7714 w=13 # east (the metal crosses the pad's east edge and the west end of tc1_b2684's strip: two dark bars with a bright piece between, x 7146-7154, in both metal shots), lengthwise over that strip without contact, south at x 7308-7320
+P 7692,2798:7722,2830              # pad
+C 7706,2814 s=14x14
+P 7700,2805:8195,2822              # poly east
+P 8178,2805:8195,2907              # south, lengthwise under ns3's metal
+P 8178,2890:8350,2907              # east under ns4..ns6 without contact
+N M 7314,2700 tc1_b2814
+
+# ---- tc1_b2684: poly from the north, strip y 2585-2603, pad (7361,2596), metal, bus track y 2684
+P 7160,2500:7176,2603              # from the north
+P 7160,2585:7378,2603              # the strip east (salmon under tc1_b2814's metal); NOT joined to the pad (7104-7140): field between, x 7140-7160
+P 7348,2580:7378,2612              # pad
+C 7361,2596 s=14x14
+M 7360,2590 y2684 x7668 w=13
+P 7648,2668:7680,2700              # pad
+C 7661,2684 s=14x14
+P 7655,2676:7872,2693              # under the island's right VSS rail
+P 7845,2668:7875,2700              # pad
+C 7859,2684 s=14x14
+M 7852,2684 x8350 w=13             # on east over the datapath; drawn to x 8350
+N M 7500,2684 tc1_b2684
+
+# ---- tc1_b2554: poly from the north, pad (7206,2551), bus track y 2554
+P 7201,2500:7218,2540              # from the north
+P 7192,2535:7226,2568              # pad
+C 7206,2551 s=14x14
+M 7200,2554 x7714 w=13             # follower: (7204,2553) to (7708,2553)
+P 7692,2537:7722,2569              # pad
+C 7706,2553 s=14x14
+P 7700,2545:7912,2562              # under the island's right VSS rail
+P 7887,2537:7917,2569              # pad
+C 7901,2553 s=14x14
+M 7894,2553 x8350 w=13             # on east over the datapath; drawn to x 8350
+N M 7500,2554 tc1_b2554
+
+# ---- tc1_p3698 is the west end of tc1_ns2
+M 6775,2784 y2800 w=20             # the thin metal's north end
+P 6758,2772:6792,2802              # pad: salmon with a green hole (6768-6782, 2786-2798) in the clean shot
+C 6773,2790 s=14x14                # bright centre (6766-6780, 2784-2796) in a dark ring in the chip-2 metal shot
+P 6785,2782:7026,2798              # row east: open poly x 6802-6850, salmon under the rail, on to x 7026. NOT joined to the row on the same y east of x 7048 (run 10)
+P 7008,2782:7026,2887              # south in the open (column x 7017: poly from y 2780 to y 2884)
+P 7008,2867:7185,2885              # east under tc1_o3740's, tc1_m7100's and tc1_o4020's metals without contact, into ns2's west poly (drawn from x 7180 in run 2)
+@alias tc1_ns2 tc1_p3698
