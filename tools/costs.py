@@ -11,7 +11,7 @@ transcript entries is counted once. On a Claude subscription nothing is billed p
 so the figures are API-equivalent costs, not bills: for interest only.
 
 Each response is attributed to the package whose files (trace/PREFIX.txt (or a file of that block,
-such as trace/PREFIX_x.txt), notes/blocks/PREFIX.md, floorplan.d/PREFIX.txt) the next commit by NAME touched within six
+such as trace/PREFIX_x.txt), notes/blocks/PREFIX.md, floorplan.d/PREFIX.txt, ports.d/PREFIX.txt) the next commit by NAME touched within six
 hours of it; a response followed by a commit that touches no package, or by none, counts as
 "coordination". A commit touching several packages splits the cost evenly. This is rough.
 
@@ -71,14 +71,28 @@ def ts(s):
     return datetime.datetime.fromisoformat(s.replace('Z', '+00:00'))
 
 
-REVIEW_RE = re.compile(r'you are reviewing one package|you are checking corrections to a die trace|'
-                       r'\b(independent(ly)? review|adversarial(ly)? verif|review (this|the) (trace|package|block))', re.I)
+# A review agent is known by how its brief opens, not by words anywhere in it: tracers edit the
+# /trace6845 briefs ("one package" became "one piece", "corrections" became "one correction"),
+# and a brief that merely quotes review wording further down is not a review.
+BRIEF_RE = re.compile(r'\W*you are (reviewing|checking)\b[^.]{0,200}?\bdie trace', re.I)
+# Older review briefs (before /trace6845), by wording in their first lines.
+OLD_BRIEF_RE = re.compile(r'\b(independent(ly)? review|adversarial(ly)? verif|review (this|the) (trace|package|block))', re.I)
+# The short description the agent was started with (subagents/agent-*.meta.json).
+DESC_RE = re.compile(r'\s*(review|fix[- ]check)\b', re.I)
 
 
 def is_review(path):
-    """A subagent whose brief is a review (the /trace6845 briefs, or older review wording)."""
+    """A subagent that is a reviewer or a fix checker: by the opening of its brief (the
+    /trace6845 briefs, as given or edited), by older review wording at its start, or by the
+    description it was started with ("Review ...", "Fix check ...")."""
     if os.sep + 'subagents' + os.sep not in path:
         return False
+    try:
+        desc = json.load(open(path[:-len('.jsonl')] + '.meta.json')).get('description') or ''
+    except (OSError, ValueError, AttributeError):
+        desc = ''
+    if DESC_RE.match(desc):
+        return True
     with open(path, errors='replace') as f:
         for line in f:
             try:
@@ -88,7 +102,7 @@ def is_review(path):
             if e.get('type') == 'user':
                 c = (e.get('message') or {}).get('content')
                 text = c if isinstance(c, str) else ' '.join(x.get('text', '') for x in c if isinstance(x, dict)) if isinstance(c, list) else ''
-                return bool(REVIEW_RE.search(text[:3000]))
+                return bool(BRIEF_RE.match(text) or OLD_BRIEF_RE.search(text[:600]))
     return False
 
 
@@ -136,7 +150,7 @@ def price(model, u):
 
 def package_commits(who):
     out = []
-    pat = re.compile(r'^(?:trace/([a-z][a-z0-9_]*)\.txt|notes/blocks/([a-z][a-z0-9_]*)\.md|floorplan\.d/([a-z][a-z0-9_]*)\.txt)$')
+    pat = re.compile(r'^(?:trace/([a-z][a-z0-9_]*)\.txt|notes/blocks/([a-z][a-z0-9_]*)\.md|floorplan\.d/([a-z][a-z0-9_]*)\.txt|ports\.d/([a-z][a-z0-9_]*)\.txt)$')
     cur = None
     for line in git('log', '--all', '--author=' + who, '--format=@@%aI', '--name-only').splitlines():
         if line.startswith('@@'):
