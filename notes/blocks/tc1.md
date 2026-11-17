@@ -1114,6 +1114,11 @@ and touches neither (field at y 3896-3908 and 4056-4070, measured).
    supported by the clean shot's protected strip. Would be settled by: where the bus line
    y 2598 goes; whether anything else drives it; a stripped shot of another die for J5.
 
+**Note from `tcw` (coordinator, 2026-11-17).** The row `tc1_x1_u` (y 4383-4401) has a driver
+of its own in `tcw`: `tc1_x1_u` = NOT `tcw_m6362c` (`notes/blocks/tcw.md`). With this file's alias
+`@alias tc1_x1 tc1_x1_u`, `tc1_x1` has two inverters on it (AMB-020); this bears on Ambiguities 13
+and 17.
+
 ## Review
 
 Independent review of run 3 (workflow step 6): one fresh agent per round, briefed with the
