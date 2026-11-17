@@ -68,6 +68,8 @@ def stale_in_docs():
         for n, line in enumerate(text.splitlines(), 1):
             if 'old name' in line or 'former name' in line.lower():
                 continue
+            if path.endswith(os.path.join('notes', 'journal.md')) and '->' in line:
+                continue      # a rename record in the journal names the old name on purpose (old -> new)
             for old, rx in olds:
                 if rx.search(line):
                     hits.append('%s:%d: %s' % (os.path.relpath(path, tracelib.ROOT), n, old))

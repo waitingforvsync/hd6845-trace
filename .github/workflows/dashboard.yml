@@ -1,0 +1,49 @@
+# Rebuilds the tracing dashboard (tools/dashboard.py) and publishes it with GitHub Pages.
+# Runs on every push to any branch, so that claims and the last commit on each package's
+# branch are current; the page is always built from main.
+name: dashboard
+on:
+  push:
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          filter: blob:none
+          sparse-checkout: |
+            claims
+            handoffs
+            costs
+            notes
+            dashboard
+            tools/dashboard.py
+            out/report.txt
+            out/netlist.json
+            out/floorplan_legend.txt
+          sparse-checkout-cone-mode: false
+      - run: |
+          python3 tools/dashboard.py --out _site/dashboard
+          printf '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=dashboard/"><title>HD6845S trace</title><a href="dashboard/">Dashboard</a>\n' > _site/index.html
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
