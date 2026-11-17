@@ -967,9 +967,14 @@ Round 1: no findings.
   (17230 8885 17590 9370) and `dbus_drv` restricted to 16450,13900:16850,15750.
 - `dbus_do0_in` west of (16950,16712) (metal; see its section) and `d1_out_n` west of
   (16950,16344) (poly): both drivers are outside the region.
-- `d6_out_n`, `d7_out_n`: not drawn (D6's cell strip 4 west end is at (17802, y 17313-17339),
-  D7's at (17803, 18918-18944); D7's "arrives in poly down x 17590-17605 and along
-  y 18905-18935"). `d2_out_n`..`d5_out_n` are drawn to their end pads (run 5); the poly
+- `d6_out_n`, `d7_out_n`: not drawn, and not in this region: both leave their pad cells
+  south of y 17000 (`busC`'s area). Seen in run 5 (`s5_d67cell.png`, 2.6x, both stripped
+  shots): D6's poly comes west out of its cell along y 17331-17353 to a pad (17600,17340)
+  with a contact, and a metal runs SOUTH from the pad to (17600,18084)
+  (`tools/follow.py 17601 17370 S`; nothing goes north); D7's comes west along
+  y 18936-18958 and turns north up the channel at x 17592-17612 (edges at y 18400-18900).
+  So these two are driven from below the column, not from the staircase.
+  `d2_out_n`..`d5_out_n` are drawn to their end pads (run 5); the poly
   that leaves each end pad west (y 16214, 16085, 15954, 15826) goes into the column west
   of x 16950 (`bd2`'s right-hand column), where their drivers must be, with D1's
   (16950,16344) and `dbus_do0_in`'s metal.
