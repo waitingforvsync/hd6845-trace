@@ -30,7 +30,9 @@ jobs:
             out/netlist.json
             out/floorplan_legend.txt
           sparse-checkout-cone-mode: false
-      - run: python3 tools/dashboard.py --out _site
+      - run: |
+          python3 tools/dashboard.py --out _site/dashboard
+          printf '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=dashboard/"><title>HD6845S trace</title><a href="dashboard/">Dashboard</a>\n' > _site/index.html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

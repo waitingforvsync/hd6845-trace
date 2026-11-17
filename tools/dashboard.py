@@ -15,7 +15,7 @@ without the image cache:
                                last commit on each claim's branch
   dashboard/die.jpg            the die at 1/16 scale
 Writes DIR/index.html and DIR/die.jpg. .github/workflows/dashboard.yml runs it on every push
-and publishes DIR with GitHub Pages.
+with DIR = _site/dashboard and publishes it at https://waitingforvsync.github.io/hd6845-trace/dashboard/.
 """
 import argparse
 import collections

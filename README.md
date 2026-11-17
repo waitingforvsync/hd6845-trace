@@ -5,7 +5,7 @@ CPC world) from die photographs, down to a complete transistor netlist, with the
 an exact model of its behaviour, including the undocumented edge cases, and a "visual
 6845" that runs the netlist in a browser over the die layout.
 
-- **Who is working on what**: the dashboard, https://waitingforvsync.github.io/hd6845-trace/
+- **Who is working on what**: the dashboard, https://waitingforvsync.github.io/hd6845-trace/dashboard/
   (rebuilt on every push by `.github/workflows/dashboard.yml` from `tools/dashboard.py`)
 - What is established so far: `notes/operation.md`
 - The plan and milestones: `PLAN.md`
