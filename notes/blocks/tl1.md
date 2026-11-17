@@ -842,3 +842,12 @@ removed. No transistor affected. Minor, not changed: three polys from the north 
 5 px wider or further east than drawn.
 Not checked: the `?` load ties, thin W, anything east of x 2850 or north of y 2440.
 
+Round 2 (fix check, 2026-11-17 22:18 +0000, a fresh agent on claude-fable-5-2, against commit ca8efff). The
+plane is metal without a break between the legs along y 2490 and 2496 in both chips; the
+drawn item covers only metal (lower edge y 2506-2509; ground at y 2515-2528 between it and
+the pad metals below); R1 is unbroken to tla's named VSS piece; the east arm has no contact
+in the strip; `tools/sameconn.py`: the only difference is that name gone (terminals and
+equations unchanged); the ports file parses.
+
+Round 2: no findings.
+
