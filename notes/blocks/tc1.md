@@ -814,7 +814,7 @@ pad with a contact from which a metal runs south and east; the four metals nest.
 | `tc1_m7100` | poly row y 2652-2666 | P4 (6927-6963, 2663-2698), contact (6946,2680) | south at x 6940-6956, east along y 2762-2776 to x 7108 | the corner into the channel metal x 7091-7110 (no contact there), which runs south to the contact (7100,3180): cells A and C |
 | `r8_b5_q` | poly row y 2612-2626 | P3 (6972-7008, 2620-2655), contact (6990,2637) | south, east along y 2730, south at x 7184-7198, east on track y 2943 | pad (7648-7682, 2927-2959), contact (7662,2943); poly east under the island's right VSS rail to x 8064, south to y 3035, east under ns1..ns6 to x 8350, where `cdp1` has it |
 | `r8_b4_q` | **metal** y 2568-2582, pad (6805-6838, 2560-2590) with contact (6818,2575), then poly row y 2566-2582 | P2 (7012-7050, 2575-2612), contact (7031,2591) | south, east along y 2685, south at x 7224-7238, east on track y 2899 | pad, contact (7706,2899); poly east to x 8107, south **lengthwise under ns1's metal** to y 2992, east to x 8350, where `cdp1` has it |
-| `tc1_b2858` | poly row y 2520-2540 | P1 (7055-7093, 2533-2570), contact (7073,2550) | south, east along y 2641 (lengthwise over `tc1_o3740`'s poly, no contact), south at x 7266-7280, east on track y 2858 | pad, contact (7662,2858); poly east to x 8150, south lengthwise under ns2's metal to y 2950, east to x 8350 |
+| `tc1_bus2858` | poly row y 2520-2540 | P1 (7055-7093, 2533-2570), contact (7073,2550) | south, east along y 2641 (lengthwise over `tc1_o3740`'s poly, no contact), south at x 7266-7280, east on track y 2858 | pad, contact (7662,2858); poly east to x 8150, south lengthwise under ns2's metal to y 2950, east to x 8350 |
 
 Rows: `tools/px.py row 2530 / 2574 / 2617 / 2659 6690 7130 8` and
 `tools/px.py col 6720 / 6830 / 6882 / 6930 / 6975 2500 2800 6`: each row is open poly (orange
@@ -825,7 +825,7 @@ in the trace's comments).
 So **`tc1_m7100` is driven from the west** (`tcw`'s region), and **R8's bits 5 and 4 go west
 through this field**: `cdp1` names the two polys where they leave the datapath
 (`trace/cdp1.txt`: `r8_b5_q` along y 3024 and `r8_b4_q` along y 2985, both drawn to x 8340), and
-the full extraction joins them to these lines by overlap. `tc1_b2858` and `tc1_b2814` are the
+the full extraction joins them to these lines by overlap. `tc1_bus2858` and `tc1_bus2814` are the
 next two polys of the same nest (they leave at x 8350 on y 2933-2950 and y 2890-2907); `cdp1`
 has not drawn them yet.
 
@@ -833,19 +833,19 @@ has not drawn them yet.
 
 | Line | Poly | Pad and contact | Then |
 |---|---|---|---|
-| `tc1_b2814` | x 7117-7133 | (7104-7140, 2577-2612), contact (7120,2596) | metal east along y 2597 to x 7322, south at x 7308-7320, east on track y 2814; pad, contact (7706,2814); poly east to x 8195, south lengthwise under ns3's metal to y 2907, east to x 8350 |
-| `tc1_b2684` | x 7160-7176, then east as a strip y 2585-2603 | (7348-7378, 2580-2612), contact (7361,2596) | metal south at x 7353-7367, east on track y 2684; cross-under at the island's right VSS rail (contacts (7661,2684) and (7859,2684)); metal east to x 8350 |
-| `tc1_b2554` | x 7201-7218 | (7192-7226, 2535-2568), contact (7206,2551) | metal east on track y 2554; cross-under (contacts (7706,2553) and (7901,2553)); metal east to x 8350 |
+| `tc1_bus2814` | x 7117-7133 | (7104-7140, 2577-2612), contact (7120,2596) | metal east along y 2597 to x 7322, south at x 7308-7320, east on track y 2814; pad, contact (7706,2814); poly east to x 8195, south lengthwise under ns3's metal to y 2907, east to x 8350 |
+| `tc1_bus2684` | x 7160-7176, then east as a strip y 2585-2603 | (7348-7378, 2580-2612), contact (7361,2596) | metal south at x 7353-7367, east on track y 2684; cross-under at the island's right VSS rail (contacts (7661,2684) and (7859,2684)); metal east to x 8350 |
+| `tc1_bus2554` | x 7201-7218 | (7192-7226, 2535-2568), contact (7206,2551) | metal east on track y 2554; cross-under (contacts (7706,2553) and (7901,2553)); metal east to x 8350 |
 
-`tc1_b2814`'s metal lies **lengthwise over `tc1_b2684`'s poly strip** from x 7160 to x 7322
+`tc1_bus2814`'s metal lies **lengthwise over `tc1_bus2684`'s poly strip** from x 7160 to x 7322
 without contact (the same arrangement as the metal on y 2641 over `tc1_o3740`'s poly). The
-strip is not joined to `tc1_b2814`'s pad: field between them at x 7140-7160 in the clean shot
+strip is not joined to `tc1_bus2814`'s pad: field between them at x 7140-7160 in the clean shot
 (`mid_acid1b.png`). The metal does cross that gap: both metal shots show the pad's ring, a
 bright piece at x 7146-7154 between two dark bars (the pad's east edge and the strip's west
 end), then the line (`tools/textmap.py 7100 2576 7190 2616 2`: chip 1 A-C there against 7-9 for
 bare ground; chip 2 only 9-A). The pad has no other way out.
 
-A small spot on `tc1_b2554`'s poly at (7208-7212, 2506-2510), ring-like in the clean shot at
+A small spot on `tc1_bus2554`'s poly at (7208-7212, 2506-2510), ring-like in the clean shot at
 4x, is not a contact: `tools/textmap.py 7150 2490 7230 2526 2` shows no 'g' hole (R-G drops to
 1-2 over 6 px) and unbroken bright metal in both metal shots.
 
@@ -932,10 +932,10 @@ Run 3's ports (the driver; region edges as drawn):
 | `tc1_m7100` (run 11; replaces the row above) | P | x 6750, y 2652-2666, going west | **in** | the poly row that feeds the channel metal x 7091-7110 through pad P4; its driver is west of x 6750 |
 | `r8_b5_q` | P | x 6750, y 2612-2626, going west | out (through) | R8 bit 5 from the datapath (`cdp1` at x 8340-8350, y 3019-3035), through the bus track y 2943 |
 | `r8_b4_q` | M | x 6750, y 2568-2582, going west | out (through) | R8 bit 4 from the datapath (`cdp1` at x 8340-8350, y 2976-2992), through the bus track y 2899; the follower takes the metal west and south to an end at (6189,4402) |
-| `tc1_b2858` | P | x 6750, y 2520-2540 (west); x 8350, y 2933-2950 (east) | ? | through line on the bus track y 2858 |
-| `tc1_b2814` | P | x 7117-7133, y 2500 (north); x 8350, y 2890-2907 (east) | ? | through line on the bus track y 2814 |
-| `tc1_b2684` | P / M | poly x 7160-7176 at y 2500 (north); metal x 8350, y 2677-2691 (east) | ? | through line on the bus track y 2684 |
-| `tc1_b2554` | P / M | poly x 7201-7218 at y 2500 (north); metal x 8350, y 2546-2560 (east) | ? | through line on the bus track y 2554 |
+| `tc1_bus2858` | P | x 6750, y 2520-2540 (west); x 8350, y 2933-2950 (east) | ? | through line on the bus track y 2858 |
+| `tc1_bus2814` | P | x 7117-7133, y 2500 (north); x 8350, y 2890-2907 (east) | ? | through line on the bus track y 2814 |
+| `tc1_bus2684` | P / M | poly x 7160-7176 at y 2500 (north); metal x 8350, y 2677-2691 (east) | ? | through line on the bus track y 2684 |
+| `tc1_bus2554` | P / M | poly x 7201-7218 at y 2500 (north); metal x 8350, y 2546-2560 (east) | ? | through line on the bus track y 2554 |
 | `vss` | M | the rail x 6858-6906 at y 2500 (it goes on north under a wide metal); its branch y 2614-2666 at x 6750, going west (over the rows of `r8_b5_q` and `tc1_m7100`, no contact) | | |
 | `tc1_m6817` | M | north end on the contact (6815,2833) (run 10) | ? | its gate is cell D's pull-down; its source is at its other end |
 | `vss` | M | rail x 6858-6906 at y 2800 (run 10); x 6861-6932 at y 3905; x 6858-6908 at y 4380 (it narrows at y 4238) | | goes on both ways, not followed |
@@ -1511,8 +1511,8 @@ Round 2: no findings that change a connection.
 **Round 1 (full review, 2026-11-17 14:40 -0600; fresh reviewer, images in
 `cache/scratch/tc1/review-19/`, 17 used).** Covered: the bus fan and the top bus field (the
 last section of the trace), at commit `4184bf8`. Told to suspect: the gap x 7140-7160 between
-`tc1_b2814`'s pad and its line (metal across, poly not joined); which pad each fan row ends on
-and the west pad (6818,2575); whether `tc1_b2814`'s vertical and the west end of the y 2684
+`tc1_bus2814`'s pad and its line (metal across, poly not joined); which pad each fan row ends on
+and the west pad (6818,2575); whether `tc1_bus2814`'s vertical and the west end of the y 2684
 metal are separate; the corner (7100,2768); the join of the row y 2867-2885 to the older poly
 and the gap x 7026-7048 (**the join that makes `tc1_p3698` = `tc1_ns2`**); the poly turns east
 of x 8040 and contacts under ns1..ns3; the spot (7208,2508); what lies under the rail and its
