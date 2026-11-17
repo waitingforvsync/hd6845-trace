@@ -1113,12 +1113,48 @@ run and chain 2's two west runs were checked by survey and profile, not at 4x.
 
 Round 1: no findings that change a connection.
 
-### Run 7 (2026-11-17 16:40 -0600): no review round
+### Run 7: review of its two readings
 
-Run 7 changed no geometry (`git diff 17f1585 -- trace/dbus.txt` is empty), so there was
-nothing for a reviewer to check against the photos and none was started; the last round
-above stands. What run 7 read is in "A look along `d_hiz`" and Ambiguity 9, with the
-commands, so that it can be checked.
+Run 7 changed no geometry, and was first merged (93cdc12) **without** a review, on the
+tracer's reasoning that there was nothing drawn to check. That was wrong: its two readings
+each decide a connection (whether `d_hiz` has a tap; whether pin D6 is tied to `d0_out_n`).
+The user was told by a side note, and the review was run afterwards:
+
+**Round 1, full review of run 7's two readings** (reported 2026-11-17 17:19 -0600, a fresh
+Fable 5.2 agent, 31 tool uses, 8 images in `cache/scratch/dbus/review-11/`; told not to read
+the tracer's two sections or AMB-021). Told to suspect: a contact with little or no pad
+missed by the follower, a thin branch, the two long pass-overs; and, for Ambiguity 9, that
+"no contact" was concluded from what makes sense electrically and not from the photos.
+
+- **`d_hiz`, y 7374-17000: supported.** A 1 px scan of the whole length in `metal`,
+  `metal1` and `acid1b` finds a green hole between two dark bars at exactly six places
+  (y 7381-96, 9116-29, 10854-65, 12439-47, 14018-31, 15624-36): the cell contacts. The
+  metal's own edge lines (x 17628-17636 and 17650-17658) are never interrupted in either
+  chip: no branch. Every other dark feature present in both chips is a pair of bars
+  22-25 px apart, a poly crossing (ten sampled: protected salmon poly, no green, no
+  widening). Over y 9225-9605 and 14408-14895 the poly under the centre is uniform (red
+  minus green 34-69, never green) and neither metal shot has a ring. Rejected one by one:
+  (17640,9480), a debris ring on chip 1 only; y 11141-11194, a soft interference patch on
+  chip 1; (17643,8713), a 10 px speck over plain field; (17647,14590), a 12 px notch in the
+  east edge with intact poly beneath; y 16754 and 16827, fringes.
+- **Ambiguity 9 (AMB-021): neither a contact nor a break, "about 85-90 % sure".** Not a
+  break: the metal's west edge line at x 17285 is continuous through y 16480-16512 in both
+  metal shots, the west flank at x 17290 is as bright there as above and below, and the
+  protected/open boundary in the clean shot at x 17287 is unbroken. Not a contact: no
+  widening (the real pad at (17297,16662) widens about 8 px west), no centred bright spot,
+  no green pitted hole (the real contact reads 143/140/83 under a bright centre). What it
+  is: two full-width dark bars (y 16479-85 and 16506-12, the box's top and bottom outlines)
+  with a half-bright flank between, the same structure as the pass-overs at y 15958-91 and
+  16110-43 (6.5x, four shots).
+- Geometry only, not changed (weak evidence, the reviewer's words): under the metal at
+  x 17288-17292, y 16485-16505, the clean shot's blue is 83-98 against 120-127 on field,
+  which suggests the box or tab reaches west to about x 17287; the `?D` starts at 17294.
+  No connection depends on it.
+
+Not checked by it: the poly crossings' own routing, the contacts' targets inside the pad
+cells, anything south of y 17000.
+
+Round 1: no findings.
 
 ## A look along `d_hiz` (run 7, 2026-11-17 16:40 -0600)
 
