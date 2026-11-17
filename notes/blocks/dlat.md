@@ -116,9 +116,31 @@ Views `w_top.png`, `w_bot.png` (1.5x, metal, chip-2 stripped and clean shot, x 1
 | `dl6_q_n` | west along y 14904-14921 | a diagonal north-west from (16460,14900) to about (16365,14810), into the bundle: believed `areg_w7` (poly x 16364, which `areg` draws from y 14700 up to y 13453 and east to x 16480) |
 | `dl7_q_n` | west along y 15381-15398 | a diagonal north-west from (16460,15380) past (16340,15255): believed `areg_w6` (`bd2`'s notes: contact (16337,14866), poly down x 16330-16345; `areg` draws the metal x 16341 from y 14700 up to the contact (16337,13264) and a poly east along y 13263 to x 16480) |
 
-All four head for `areg`'s "four identical cells" at x 16480-16800, y 13060-13840 (pitch about
-190), north of this region: **believed** the four bus inverters (`db_b#` = NOT `dl#_q_n`).
-None of this is drawn.
+All four head for `areg`'s "four identical cells" at x 16480-16800, y 13060-13840, north of
+this region: **believed** the four bus inverters (`db_b#` = NOT `dl#_q_n`). None of this is
+drawn. Seen in one survey view (`n_wide.png`, 1.1x, metal and clean shot, x 16320-16880,
+y 13010-13910, with `areg`'s trace):
+
+- Four like cells between the same two rails, at y about 13100-13230, 13295-13425,
+  13490-13620, 13685-13815 (pitch about 195). Each has a VCC land with a contact at about
+  x 16530-16570, a load gate (open poly) at x 16575-16610, a gate band under the VSS rail at
+  x 16650-16740, and a pad with a contact at about x 16750 near its top.
+- A poly row runs east under each cell's lower edge, from the west: y 13263 (`areg_w6`, so
+  bit 7 by the table above), y 13453 (`areg_w7`, bit 6), y 13657 (from x 16400: the poly
+  under `areg_rail_r`, bit 5) and y about 13850 (from x about 16460: bit 4). Each reaches
+  x about 16790.
+- East of the cells: thin vertical metals at x about 16795 and 16845, with pads at about
+  (16855,13520) and (16805,13710), and short polys east at y about 13330 and 13520: the
+  candidates for the outputs towards the `db_b#` lines.
+
+The pairing of rows with bits in the second item is from the direction each line was seen to
+take, not from a drawn route.
+
+Also checked with text tools in this run: `tools/dlat_contacts.py` (every metal contact of
+all four copies: a bright centre in a dark ring within 3 px of the drawn place in both metal
+shots, except three that are dim in one chip and bright in the other), and the poly rows of
+`d4_d`, `d6_d`, `d7_d` from x 16842 to 16955 (`tools/px.py row 14005 | 15172 | 15649`: open
+poly or poly under metal all the way).
 
 ## Ports
 
