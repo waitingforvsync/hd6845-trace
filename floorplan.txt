@@ -56,8 +56,6 @@
 11150,18600:12150,19000  logic   clock gate row | six inverters: two pairs delay each clock phase for the other half of the generator; one pair sits across the two phase lines
 11950,18850:12900,19950  route   clock wiring | lines A, B, their re-buffered copies, buffered CLK and the CLK pin node on their way down; six small clamp devices to VCC
 10900,19140:12000,19890  logic   two-phase clock generator | two cross-coupled NOR drivers: ck_a (high only while CLK low) on the left, ck_b (high only while CLK high) on the right, with an inverter for NOT CLK in the middle
-17050,5900:17700,17000  ?logic  data bus interface column | column of logic beside the D0-D7 pads
-17720,5950:19150,19150  ?io     D0-D7 pad cells | eight identical cells, 1600-1735 px apart: tri-state driver with its pre-driver under the VCC band, input protection above. Located, not yet fully traced (AMB-003)
 
 # --- regular arrays
 
