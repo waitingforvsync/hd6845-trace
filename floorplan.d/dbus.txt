@@ -1,9 +1,9 @@
 17255,8280:17590,8880  io  D0 input buffer | four inverters in series from the D0 pad (d0_a..d0_d), like the R/W, RS, CS buffers; only d0_d, the delayed pad level, feeds logic
 17255,9645:17590,10245  io  D1 input buffer | same cell; input traced from the D1 pad
-17255,11012:17590,11612  ?io  D2 input buffer | same cell, assigned by position
-17255,12378:17590,12978  ?io  D3 input buffer | same cell, assigned by position
-17255,13745:17590,14345  ?io  D4 input buffer | same cell, assigned by position
-17255,14503:17590,15103  ?io  D5 input buffer | same cell, assigned by position
+17255,11012:17590,11612  io  D2 input buffer | same cell; input traced from the D2 pad
+17255,12378:17590,12978  io  D3 input buffer | same cell; input traced from the D3 pad
+17255,13745:17590,14345  io  D4 input buffer | same cell; input traced from the D4 pad
+17255,14503:17590,15103  io  D5 input buffer | same cell; input traced from the D5 pad (the line runs up the channel under the d_hiz metal)
 16960,8445:17040,8880  io  D0 buffer capacitors | plain diffusion rectangles for d0_b (contact cut, not strapped) and d0_c
 17262,15150:17590,15770  io  D6 input buffer | four inverters in series from the D6 pin (d6_a..d6_d), another layout of the chain, upside down; d6_d leaves west at y 15173 towards the latch of bit 6
 17262,15780:17590,16400  ?io  D7 input buffer | the same cell; input line goes south towards the D7 pad; d7_d leaves west at y 15650

@@ -621,3 +621,84 @@ B 17555,5384:17585,5409            # the box: load gate tied to the output
 @inst dbus_r9l 0,130 tag=2
 @inst dbus_r9l 0,260 tag=3
 @inst dbus_r9l 0,390 tag=4
+
+# ==== the input lines of D2, D3, D4, D5: from each pin's protection node (dpad) to the
+# first gate of its buffer chain ====
+# All four start like D1's: the node's metal (x 17824-17848; dpad draws it to 70 px below
+# the protection) comes down to a contact on a poly pad; the poly runs west under dpad's
+# VSS trunk (x 17690-17765) and the d_hiz metal (x 17633-17652), no contact, turns and runs
+# along the channel to "line 1" of its chain (cell y 8180-8201), which goes west under the
+# VCC rail, the thin metal (d0_out_n) and the VSS rail (no contacts: tla_contacts.py finds
+# only the open gaps between the metals, the same four in every line) to a pad. A metal
+# jumper over "line 2" (the poly 42 px below line 1) joins that pad to a second pad on the
+# chain's first gate band.
+# Edges: tools/dbus_dark.py in the chip-2 stripped shot, each run cut across every 60-120
+# px and along its centre (no edge line crosses any of them between its two corners).
+#
+# D2: chain 2. The same shape as D1's, 1366 lower at the chain end.
+M 17824,10020:17848,10155          # node metal down to the contact
+P 17820,10124:17856,10158          # pad
+C 17837,10141 s=26x26
+P 17592,10131:17840,10152          # west, under the trunk and the d_hiz metal
+P 17592,10131:17613,10932          # down the channel between the VCC rail and the d_hiz metal
+P 17285,10912:17613,10931          # line 1
+P 17278,10905:17314,10937          # pad
+C 17295,10920 s=26x26
+M 17294,10908 y11020 w=18          # jumper over line 2 (y 10952-10975)
+P 17279,10992:17314,11026          # pad
+C 17295,11008 s=26x26
+P 17276,11018:17302,11083          # down to G1's gate band
+@alias d2 d2_in
+#
+# D3: chain 3. The same again; here line 2 (y 12322-12343) turns south at x 17592-17612.
+M 17824,11670:17848,11742
+P 17821,11710:17858,11743          # pad
+C 17838,11727 s=26x26
+P 17592,11714:17840,11736
+P 17592,11714:17614,12299
+P 17285,12278:17614,12298          # line 1
+P 17280,12271:17314,12304          # pad
+C 17295,12287 s=26x26
+M 17294,12274 y12388 w=18          # jumper over line 2
+P 17278,12358:17315,12395          # pad
+C 17295,12376 s=26x26
+P 17276,12388:17302,12449          # down to G1's gate band
+@alias d3 d3_in
+#
+# D4: chain 4. Line 1 ends on a pad east of the others' (17316,13655); the jumper is an L:
+# west to x 17266 and south over line 2 (y 13687-13710; dim over the poly in chip 2,
+# 137/119/58, yellow in chip 1, 191/177/85: metal, trap 19) to a pad at the west end of
+# G1's gate band itself.
+M 17824,13275:17848,13345
+P 17820,13308:17857,13350          # pad
+C 17838,13329 s=26x26
+P 17592,13318:17840,13340
+P 17592,13318:17614,13666
+P 17300,13645:17614,13666          # line 1
+P 17300,13638:17337,13676          # pad
+C 17316,13655 s=26x26
+M 17266,13650:17326,13682          # jumper, west
+M 17266,13650:17286,13816          # ... and south
+P 17257,13790:17298,13824          # pad on the west end of G1's gate band
+C 17275,13806 s=26x26
+@alias d4 d4_in
+#
+# D5: chain 5 lies above D5's protection, so the line goes up: from the pad west only to
+# x 17631, then north in a poly 26 wide directly under the d_hiz metal for 480 px (no
+# contact: no pad or ring in either metal shot, salmon throughout in the clean shot; the
+# dark nick at (17650,14592) is in the metal's edge in chip 2 only) to line 1, y 14403.
+M 17824,14858:17848,14900
+P 17817,14868:17853,14906          # pad
+C 17835,14887 s=26x26
+P 17631,14878:17840,14899          # west under the trunk
+P 17631,14403:17657,14899          # north under the d_hiz metal
+P 17300,14403:17657,14424          # line 1, west under the rails
+P 17300,14396:17338,14432          # pad
+C 17316,14412 s=26x26
+M 17266,14402:17326,14430          # jumper, west
+M 17267,14402:17287,14512          # ... and south over line 2 (y 14445-14468)
+P 17258,14483:17293,14518          # pad
+C 17275,14500 s=26x26
+P 17266,14512:17290,14576          # down ...
+P 17266,14553:17300,14576          # ... and east into G1's gate band
+@alias d5 d5_in
