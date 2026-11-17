@@ -1,0 +1,5 @@
+# tl2: top-left random logic, second strip (x 2817-3533, y 2500-6350): what tla, tl1 and r9m
+# did not draw there
+@requires tl1
+@block tl2
+@w M=12 P=20
