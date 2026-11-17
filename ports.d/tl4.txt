@@ -1,0 +1,2 @@
+# tl4: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+# The package's region is x 4250-4967, y 2500-6350. No wire is drawn to the strip's edge yet.
