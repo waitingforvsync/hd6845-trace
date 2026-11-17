@@ -524,9 +524,11 @@ D 6800,3961:6836,4076              # west column under the thin metal x 6817, be
 D 6800,3931:6836,3961              # ... and above it (10 px of diffusion above the arm: A's side)
 ?D 6830,3931:6862,3943             # that strip to region A across the gap between the two metals (not seen: trap 2)
 D 6800,4076:6816,4166              # west column narrowed beside the poly strip
+?D 6812,4108:6862,4130             # the island's neck on west across the gap and under the strip to the column (review round 1: diffusion colour in the gap at (6844,4122), the strip paler at y 4112-4130): the strip is then one more gate of tc1_x1 between island and output. Same nets either way
 D 6800,4166:6836,4222              # ... and its foot
 D 6830,4203:6862,4222              # the band y 4203-4222 across the gap (red in the gap at y 4212 where field is khaki; its edges cross the gap in the metal shot)
-D 6830,4014:6862,4032              # out to the west column across the gap at y 4014-4032 (red in the gap, measured at y 4021)
+D 6830,4014:6862,4083              # out to the west column across the gap, y 4014-4083 (red in the gap where field is khaki: measured at y 4021, 4045, 4060, 4075)
+?D 6830,3961:6862,3992             # the same under tc1_g's north arm (not seen: the arm covers it), which makes the arm a gate between region A and the column
 D 6848,4014:6864,4083              # out's strip down the west side of the upper U's left leg
 D 6948,3925:6988,3992              # east column, top (A's side)
 ?D 6930,3931:6952,3985             # ... to region A across the gap (one outline in the metal shot; the gap itself is a dark bar)
@@ -540,13 +542,13 @@ C 6902,4136 s=28x44                # rail contact of the island (pits at y 4118-
 
 # ---- tc1_g: band, north arm, west arm
 P 6850,3992:6962,4014
-P 6850,3943:6862,4000
+P 6836,3943:6862,4000              # north arm, 26 px wide (orange in the gap in both metal shots at y 3975: review round 1)
 P 6772,3943:6862,3961
 
 # ---- tc1_x1's ring
 P 6862,4035:6934,4057              # upper U: bar
 P 6862,4035:6884,4106              # ... left leg
-P 6920,4035:6934,4100              # ... right leg
+P 6920,4035:6944,4100              # ... right leg (it reaches out into the gap, to about x 6950: review round 1)
 P 6920,4078:7068,4100              # its foot east, over the east column (a gate there) to the pad
 P 7038,4076:7070,4108
 C 7054,4092                        # ring and bright centre in both metal shots, green hole in the clean shot
@@ -556,6 +558,20 @@ P 6836,4130:6884,4152              # lower U's foot
 P 6850,4130:6884,4202              # lower U: left leg
 P 6850,4178:6978,4202              # ... bar (it ends on the east leg: the diffusion east of the leg runs on down to the band)
 P [ 6950,4123 6990,4123 6990,4148 6978,4148 6978,4202 6950,4202 ]   # ... east leg (a block under the thin metal x 6968)
+# ---- a branch of the ring (review round 1): the east leg's top runs on east along y 4122-4146
+#      under the channel metal x 7011 (no ring there), south at x 7028-7046, west along
+#      y 4254-4272 to a pad (6940-6978, 4252-4284) under the thin metal x 6968, which has a
+#      contact there: ring and centre in both metal shots, green hole in the clean shot, white
+#      in the chip-2 stripped shot. So that thin metal is tc1_x1. Two stretches of the branch
+#      cross the gap between the metals x 6968 and x 7011, a dark bar in the clean shot
+#      (trap 2): the first is one band continuing at the same y on both sides; the second,
+#      where the band meets the pad, is drawn uncertain.
+P 6986,4122:7046,4146
+P 7028,4122:7046,4272
+P 6996,4254:7046,4272
+?P 6972,4254:7000,4272
+P 6940,4252:6978,4284
+C 6962,4268 s=18x20
 M 7054,4060 y4345 w=14             # the channel metal x 7053 between this contact and tc1_x1's contact (7056,4352): one metal (text map; no break, no other ring)
 
 # ---- output: buried contact on the east column, poly east to the contact (7099,4047),
@@ -595,15 +611,18 @@ D 6716,4041:6806,4100
 D 6716,4036:6752,4125              # the diffusion under the west rail ...
 D 6700,4120:6756,4206              # ... widening into its contact pad
 C 6730,4158 s=30x50                # the rail's contact: a ring 6705-6750 x 4125-4195 in both metal shots, pits in the clean shot
-P 6752,4035:6790,4105              # load gate
+P 6752,4035:6790,4110              # load gate
 P 6752,3992:6764,4040              # stem
 P 6752,3992:6784,4012
 D 6770,3992:6806,4014              # tab of the column under the box
 B 6764,3988:6796,4018
 
-# ---- the two thin metals that pass over the driver. No contact of either is drawn here:
-#      see the notes (Ambiguities) for the two places where one may exist.
+# ---- the two thin metals that pass over the driver. Neither has a contact to the driver's
+#      diffusion or to the strip (notes, Ambiguities 12, 13). The one at x 6968 has a contact
+#      on the pad at (6962,4268), the end of tc1_x1's branch: it is labelled tc1_x1_u and
+#      aliased (as trace/rad.txt does for ra4_drv_in_u), because the join runs through one ?P.
 M 6817,3905 y4228 w=12
 N M 6817,3915 tc1_m6817
-M 6968,3905 y4228 w=12
-N M 6968,3915 tc1_m6968
+M 6968,3905 y4300 w=12
+N M 6968,3915 tc1_x1_u
+@alias tc1_x1 tc1_x1_u

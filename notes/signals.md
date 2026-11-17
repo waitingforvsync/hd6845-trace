@@ -318,7 +318,8 @@ Row tags `s0` ... `s13` are rows from the top; which MA bit each is has not been
 | `cdp1_fx_n2`, `cdp1_fy_n2`, `cdp1_fx_b`, `cdp1_fy_b` | names that the comparator cell's template gives the two copies west of the selector: `_n2` the cell's internal NOR of its inputs; `cdp1_fx_b` is an alias of `tc1_g`, `cdp1_fy_b` of `fld_y_b` |
 | `tc1_ns#` | north-south lines ns1-ns6 east of the island |
 | `tc1_o#` | output node of a gate in the columns west of the island's channel, named by its y (`notes/blocks/tc1.md`). `tc1_o4020` = NOR(`tc1_g`, `tc1_x1`): a wide driver at x 6800-6990, y 3925-4222 with a strong load; leaves on the channel metal x 7133-7152, a poly through the top bus field and the bus metal y 2641 going east over the datapath (drawn to x 8350; the follower gives its end at (9098,2639)) |
-| `tc1_m#` | a thin vertical metal of the gate columns west of the island's channel, named by its x. `tc1_m6817` and `tc1_m6968` pass over the driver `tc1_o4020`; no contact of either is drawn there (`notes/blocks/tc1.md`, Ambiguities 12, 13); ends not followed |
+| `tc1_m#` | a thin vertical metal of the gate columns west of the island's channel, named by its x. `tc1_m6817` passes over the driver `tc1_o4020`; no contact is drawn there (`notes/blocks/tc1.md`, Ambiguity 12); ends not followed |
+| `tc1_x1_u` | the thin metal x 6968 over the same driver: an open join of `tc1_x1` (aliased in `trace/tc1.txt`): it has a contact on the pad (6962,4268) at the end of a branch of `tc1_x1`'s ring poly, and the branch meets the pad across a gap drawn `?P`. Ends (y 3806, y 4402) not followed |
 | `bc1_s#`, `bc1_s#_n` | the two bus lines the 2-bit decoder decodes, and their inverses |
 | `bc1_dec#_n` | decoder outputs, active low (00, 10, 01) |
 | `bc1_ld_in#`, `bc1_ld_n`, `bc1_ld_a` | inputs, NAND output and twin output of the driver of cdp4's row D strobe |
