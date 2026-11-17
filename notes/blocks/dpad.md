@@ -199,6 +199,11 @@ strip): how the pad reaches the node.
 
 ## Not done
 
+1. **The pad's series strip (the pad-to-node path)**: diffusion from the pad box 18265-18355 x
+   6475-6560 north along x ~18300-18315, west along y ~6060-6075, south along x ~18065-18085,
+   west along y 6530-6548 to the node's neck at x ~17850 (D0; in D2 and D6 about 60 px lower
+   relative to the cell). Draw it in `dpad_prot` (per copy where it differs) and review it.
+
 - Protection: comb, strips, the series strip from each bond pad (lengths differ per
   pad), D7's variant; the bond pads.
 - Input lines of D2-D7 from the protection nodes to the column (`d#_in_u`).
@@ -231,3 +236,25 @@ copies. Confirmed by the tracer at 1.9x and 4.5x (`chk_prot0.png`, `chk_foot.png
 in the cell; `d#_prot_g` is gone (merged into `vss`, 7 nets fewer). Could not be checked:
 whether the two load-gate boxes are buried contacts (accepted from acid1b), D0's metal under
 the bond-wire shadow, D7's protection.
+
+Round 3 (2026-11-17 15:41 +0000, a fresh agent; told to suspect the new frame-to-VSS path in each copy, the
+load-gate boxes, D0's metal under the bond-wire shadow and the protection's inside). No
+wrong connection in the drawn geometry (frame-to-VSS confirmed in all seven copies at
+3-4.5x; U' and L' gate boxes read as buried contacts; extraction unchanged). Findings,
+checked by the tracer:
+- **The pad's series strip is diffusion and runs to the node: confirmed** (`acid1b` 2.1x,
+  `review-3/series0.png`: one outlined strip from the pad box 18265-18355 x 6475-6560 north
+  along x ~18300-18315, west along y ~6060-6075, south along x ~18065-18085, west along
+  y 6530-6548 to the node's neck at x ~17850; colour in the open diffusion-green, not poly).
+  The notes had it as a poly ending at the neck and as "not followed". It is the pad-to-node
+  path and is **not drawn**: see Not done 1.
+- The rail contact in copies D1-D6 sits at about y 5978 (master coordinates), drawn at 6000
+  as in D0: it still overlaps; not changed.
+- The clamp is a thin-oxide grounded-gate device (the diffusion's top edge shows under the
+  top arm at y 6080-6086; no internal edge in the left arm): the `kind=field` annotation
+  in the cell is wrong in name only.
+
+Round 3 is the last round the project allows; it had a confirmed finding (the omission
+above), so this package is not ready to merge: it waits for the series strip to be drawn
+and reviewed.
+
