@@ -136,7 +136,8 @@ D 16960,8745:17040,8880            # capacitor rectangle
 # d0_d: poly left to a contact, then down in metal (line M_a) into the gate group below
 P 17195,8825:17295,8847
 C 17205,8837 s=26x26
-M 17208,8825 y9100 w=20            # continues down (not yet traced)
+M 17208,8825 y9262 w=20            # line M_a, down to the latch's data gate (band E)
+C 17207,9248 s=26x26
 
 # ---- chain 1 (D1): pad input line. Poly all the way from the pad cell: left along
 # y 8405, down the channel beside the VCC rail, left again under both rails
@@ -150,3 +151,136 @@ C 17293,9643 s=26x26
 P 17272,9630:17312,9660
 P 17272,9655:17300,9717            # down to G1's gate band
 N P 17700,8405 d1_in
+
+# ---- the input latch under each buffer chain ("cluster"), x 17230-17590, y 8885-9370 for D0.
+# Two cross-coupled AND-OR-invert gates and an inverter (ten transistors), and for D0 the
+# inverter below it that drives the data bus bit:
+#   d_d_n  = NOT d_d                                   (inverter N3, y 9270-9360)
+#   dl_q   = NOT(dl_q_n + d_d_n.dbus_le)               (N0, y 8888-9095)
+#   dl_q_n = NOT(dl_q + d_d.dbus_le)                   (N1, y 9051-9310); band C, its dl_q
+#            input, is the gate of dl_q's load: tied to dl_q by an ASSUMED buried contact (?B)
+#   db_b   = NOT dl_q_n                                (inverter N2, outside the cell)
+# dbus_le is the vertical metal M_b (x 17243-17262), shared by the units.
+# The thin metal x 17438-17459 that crosses the cell has no contact in it (no pad on it;
+# the three boxes under it are buried contacts: colour measured, see the notes).
+@cell dbus_lat tag=0
+# -- diffusion column under the VSS rail, upper part: gate N0 (dl_q)
+D 17350,8888:17400,8942            # VSS land
+C 17364,8910 s=30x30
+D 17330,8920:17405,9042            # column: land, band A, mid node, band B, node N0
+D 17398,8920:17494,8942            # VSS strip east, under the thin metal, to x 17494
+D 17450,8920:17467,9044            # narrow column south from the strip under the thin metal:
+                                   # channel under the poly at y 8944-8966, then N0
+D 17398,9015:17470,9042            # N0 east, to under the thin metal
+D 17434,9015:17470,9106            # N0 south, under the thin metal, ending on band C
+?B 17431,9092:17473,9110           # ASSUMED tie of N0 to band C (its load gate): the diffusion ends
+                                   # on the poly with one heavy line, as at the three ties below;
+                                   # no box of its own is seen (notes, Ambiguities)
+D 17434,9063:17532,9094            # ... and east under the load gate to the VCC land
+D 17536,9063:17585,9188            # VCC land (shared by the loads of N0 and N1); its west
+D 17527,9063:17540,9094            # edge is at x 17527 beside the two load channels and
+D 17527,9157:17540,9188            # steps back to x 17536 between them
+C 17546,9082:17570,9165            # long VCC contact
+# band A: from the top pad of metal M_c east across the column; ends at x 17413
+P 17285,8926:17316,8964            # pad
+C 17300,8944 s=26x26
+P 17300,8942:17413,8966
+N P 17370,8954 d{}_d_n
+# band B: from M_b's top pad east across the column; ends at x 17412
+P 17237,8975:17268,9008            # pad
+C 17252,8990 s=26x26
+P 17255,8977:17345,9000
+P 17330,8986:17412,9010
+# third pull-down of N0: the poly from M_d's top pad runs up x 17498-17520 and west along
+# y 8944-8966, over the narrow column under the thin metal, to x 17437
+P 17478,8992:17518,9024            # pad
+C 17491,9010 s=26x26
+P 17498,8942:17520,9000
+P 17437,8944:17520,8966
+N P 17508,8975 dl{}_q_n
+N D 17370,9028 dl{}_q
+# N0's west tab with a buried contact and a short poly stub that ends at x 17286
+D 17300,9022:17335,9046
+?B 17298,9020:17328,9048
+?P 17286,9026:17326,9044
+# load of N0: gate poly under metal M_d (overhangs y 9049-9063 and 9095-9121), which is
+# band C's east end. Band C: across the column at y 9111-9133, steps up in the gap east of
+# the rail, under the thin metal at y 9099-9121.
+P 17476,9049:17518,9121
+P 17405,9099:17530,9121
+P 17338,9111:17420,9133
+# -- column, middle part: gate N1 (dl_q_n)
+D 17350,9051:17400,9310            # VSS land, band C, node N1, band D, mid node, band E, VSS land
+C 17362,9087 s=30x30
+C 17368,9285 s=30x30
+D 17397,9157:17532,9190            # N1 east, under the thin metal and the load gate, to the VCC land
+D 17436,9186:17456,9218            # tab south under the thin metal
+B 17433,9189:17458,9224            # N1 tied to its load gate
+P 17431,9210:17480,9225
+P 17478,9142:17518,9228            # load gate of N1, under M_d
+C 17491,9213 s=26x26
+M 17491,8998 y9226 w=22            # metal M_d: N1 up to the third pull-down of N0
+M 17477,8996:17506,9024            # pads
+M 17477,9199:17506,9227
+# band D: from M_b's second pad east across the column; ends at x 17409
+P 17237,9196:17409,9219
+C 17252,9208 s=26x26
+# band E: from the end pad of metal M_a (d_d) east across the column, then south as the
+# gate of inverter N3
+P 17193,9236:17222,9262            # pad
+P 17200,9240:17423,9262
+P 17402,9255:17419,9322
+N P 17300,9251 d{}_d
+# -- inverter N3: d_d_n = NOT d_d
+D 17398,9272:17476,9310            # channel under the vertical gate, output node
+D 17470,9270:17540,9300            # under the load gate to the VCC land
+D 17530,9238:17586,9300            # VCC land
+C 17555,9268 s=30x34
+D 17446,9300:17461,9357            # output south under the thin metal
+B 17438,9330:17463,9362            # output tied to the load gate's line
+P 17475,9252:17525,9316            # load gate
+P 17475,9300:17497,9360            # stem
+P 17300,9336:17497,9360            # west to M_c's bottom pad
+P 17297,9328:17334,9365            # pad
+C 17313,9345 s=26x26
+M 17318,8944 y9358 w=20            # metal M_c: d_d_n up to band A
+M 17286,8929:17328,8960            # top pad
+M 17300,9331:17330,9361            # bottom pad
+# N1's west buried contact: N1 leaves west in poly (to band F, drawn per copy)
+B 17299,9151:17328,9181            # box x 17302-17323 under M_c (no pad on M_c: not a metal contact)
+D 17300,9157:17352,9179
+P 17237,9155:17325,9173
+N P 17260,9164 dl{}_q_n
+@end
+
+# ---- unit 0 (D0): what differs from copy to copy
+M 17252,8978 y9530 w=20            # metal M_b, the latch enable (continues south)
+N M 17252,9400 dbus_le
+# inverter N2: db_b0 = NOT dl0_q_n, with a strong load (y 9373-9500). In units 1-3 the
+# latch is upside down and this inverter is not below it in the same way.
+D 17350,9373:17400,9400            # VSS land
+C 17362,9382 s=30x30
+D 17300,9395:17431,9461            # land widened to x 17300-17431, band F, node N2
+P 17237,9415:17449,9437            # band F (its west end is drawn per copy)
+D 17425,9453:17463,9476            # N2 east, under the thin metal
+D 17440,9455:17456,9486            # tab south
+B 17437,9463:17459,9492            # N2 tied to its load gate
+D 17458,9455:17497,9472            # narrow wire east ...
+D 17478,9403:17497,9472            # ... and north beside the load gate
+D 17478,9403:17540,9472            # under the load gate
+D 17535,9400:17586,9475            # VCC land
+C 17553,9440 s=30x34
+P 17497,9390:17535,9500            # load gate
+P 17437,9480:17535,9500            # its foot, west to the buried contact
+D 17302,9455:17327,9478            # N2's south-west tab
+B 17299,9450:17330,9482            # N2 to the poly that goes west to the data bus contact
+P 17290,9462:17327,9479
+N P 17296,9470 db_b0
+# dl0_q_n from N1's west contact: west along y 9155-9173, south down x 17157-17185, east
+# along y 9415-9437 into band F
+P 17157,9155:17240,9173
+P 17157,9155:17185,9437
+P 17157,9415:17240,9437
+# data bus bit 0: from dbl's contact (17207,9467) east to N2's buried contact
+P 17193,9453:17222,9481            # pad under dbl's contact
+P 17200,9462:17300,9479

@@ -78,56 +78,71 @@ In chains 1-5 the b and c lines also run left (for chain 1: `d1_b` up at x 17225
 to y 9750 and left along y 9740-9760; `d1_c` left to x 17165 and down), presumably
 to their capacitors; not followed.
 
-### Cluster 0 (observed, NOT traced; none of this is in the trace file)
+### The input latch (cell `dbus_lat`; "cluster 0" of the first notes), traced 2026-11-17
 
-Seen in 2.6x-4x views. Reliable: the diffusion column under the VSS rail and the
-poly bands crossing it. Not resolved: everything between the rails at x 17400-17525.
+Under chain 0, y 8885-9370: two cross-coupled AND-OR-invert gates and an inverter (ten
+transistors); below it, y 9373-9500, an inverter with a strong load that drives the data
+bus bit (two transistors, drawn outside the cell). As extracted:
 
-Vertical metal lines through the cluster:
-- M_a x 17198-17218: `d0_d`, from 17205,8837 to a contact at 17207,9255.
-- M_b x 17243-17262: starts at a contact at 17252,8990 (to poly band B) and runs on
-  down through unit 1 and beyond: a line shared by several units.
-- M_c x 17305-17325: from a contact at 17303,8942 (poly band A) to a contact at
-  17313,9345.
-- thin metal x 17438-17458: D0's `P_y` (see Ports), through the whole of unit 0.
-- M_d x 17488-17508: from a contact at 17492,9010 to a contact at 17492,9210.
-- VCC rail carries one long contact at 17555, y 9080-9165 and ordinary ones at
-  17555,9270 and 17555,9430.
+    d0_d_n  = NOT d0_d                                  inverter N3
+    dl0_q   = NOT( (d0_d_n AND dbus_le) OR dl0_q_n )    gate N0   (marked: one assumed tie)
+    dl0_q_n = NOT( (d0_d   AND dbus_le) OR dl0_q   )    gate N1   (marked: the same tie)
+    db_b0   = NOT dl0_q_n                               inverter N2
 
-Diffusion column under the VSS rail, x 17325-17405, top to bottom:
+So it is a transparent latch: while `dbus_le` is high `dl0_q` follows the D0 pin (through
+the four-inverter chain) and `db_b0` = D0; when `dbus_le` falls the pair holds. **The
+internal data bus bit is driven all the time, by a static inverter, from this latch**:
+there is no tri-state driver here. (Traced: the equations. Believed: that `dbus_le` is a
+write-side enable; its source is not traced. It is the vertical metal M_b.)
 
-| y | What |
+Where things are (all coordinates checked by overlay at 2.85x, `ov_top.png`, `ov_bot.png`):
+
+| What | Where |
 |---|---|
-| 8890-8935 | VSS land, contact 17362,8910 |
-| 8937-8962 | poly band A (left end on the contact at 17303,8942, metal M_c) |
-| 8962-8985 | diffusion |
-| 8985-9012 | poly band B (runs left to the contact at 17252,8990, metal M_b) |
-| 9012-9058 | node N0. A heavy-outlined box at 17295-17345 x 9022-9052 on its left looks like a buried contact (N0 leaving in poly); where that poly goes is not resolved |
-| 9058-9110 | VSS land, contact 17363,9090 |
-| 9112-9133 | poly band C |
-| 9133-9195 | node N1 |
-| 9195-9218 | poly band D |
-| 9220-9240 | diffusion |
-| 9243-9263 | poly band E |
-| 9265-9310 | VSS land, contact 17368,9285 |
-| 9360-9400 | VSS land, contact 17362,9380 |
-| 9410-9432 | poly band F |
-| 9432-9470 | node N2 |
+| Diffusion column under the VSS rail, x 17330-17405 | VSS land 8888-8942 (contact 17364,8910); band A 8942-8966; mid node; band B 8986-9010; node N0 9012-9042 |
+| N0 = `dl0_q` | from the column east (y 9015-9042) to under the thin metal, then south under it (x 17434-17470) to y 9095, and from y 9063 east under the load gate to the VCC land |
+| Third pull-down of N0 | a narrow diffusion x 17450-17467 runs from the VSS land's east strip (y 8920-8942, which goes on to x 17494) south to N0; the poly from M_d's top pad (17491,9010) runs up x 17498-17520 and west along y 8944-8966 over it and ends at x 17437. Gate = `dl0_q_n` |
+| Load of N0 | poly x 17476-17518, y 9049-9121 under metal M_d; channel y 9063-9094. It is band C's east end |
+| Column, middle part, x 17350-17400 | VSS land 9051-9113 (contact 17362,9087); band C 9111-9133; node N1 9133-9198; band D 9196-9219; mid node; band E 9240-9262; VSS land 9268-9310 (contact 17368,9285) |
+| N1 = `dl0_q_n` | east along y 9157-9190 under the thin metal and the load gate to the VCC land; load gate x 17478-17518, y 9142-9228 under M_d, tied to N1 by the buried contact (17446,9205); contact (17491,9213) to M_d |
+| VCC land of both loads | x 17527-17585, y 9063-9188, long contact y 9082-9165; its west edge steps back to x 17536 between the two channels |
+| Metal M_d, x 17480-17502 | (17491,9010) to (17491,9213): carries `dl0_q_n` up to the third pull-down of N0. `follow.py`: one piece, 9008-9216 |
+| Metal M_c, x 17309-17327 | (17300,8944) to (17313,9345): carries `d0_d_n` up to band A. `follow.py`: one piece, 8940-9350 |
+| Metal M_b, x 17243-17262 | starts at the pad (17252,8990) on band B; second pad (17252,9208) on band D; goes on south (`follow.py`: to y 13614, then west): `dbus_le` |
+| Metal M_a, x 17198-17218 | `d0_d` from chain 0, ends on the pad (17207,9248) of band E |
+| Inverter N3 | band E turns south at x 17402-17419 (y 9255-9322) between the VSS land and the node x 17420-17476, y 9272-9310; load gate x 17475-17525, y 9252-9316 (chip-2 shot: orange block with the diffusion's edge across it at y 9270); VCC land x 17530-17586, y 9238-9300, contact (17555,9268). The node goes south under the thin metal to the buried contact (17450,9346) on the poly y 9336-9360 that joins the load gate's stem and runs west to M_c's bottom pad |
+| Inverter N2 | VSS land y 9373-9415, widened to x 17300-17431 below y 9395 (outline in both chip-2 shots, `n2w.png`); band F y 9415-9437 (W about 131); node N2 below it; east under the thin metal, buried contact (17448,9478) to the load gate's foot; a narrow diffusion x 17478-17497 north beside the load gate; load gate x 17497-17535, y 9390-9500 (W about 70); VCC land x 17535-17586, y 9400-9475, contact (17553,9440) |
+| `db_b0` | N2's south-west tab, buried contact (17314,9466), poly west along y 9462-9479 to the pad under dbl's contact (17207,9467) |
+| `dl0_q_n` to band F | N1's west tab and buried contact (17313,9166) under M_c; poly west along y 9155-9173, south down x 17157-17185, east along y 9415-9437: band F, which ends under the thin metal at x 17449 |
 
-Read as gates this gives N0 = NOT(A.B), N1 = NOT(C + D.E), N2 = NOT(F) (or more
-inputs). Loads and outputs were not resolved, so these equations are a reading of the
-pull-downs only. Other features, unexplained:
-- Two nested L-shaped poly lines right of the column at 17400-17520 x 8915-9020; the
-  inner one (y 8943-8965, then down x 17495-17520) ends on M_d's top contact
-  (17492,9010). Band A (y 8948-8968 at its right end) lines up with it and may be
-  the same line.
-- A closed outline 17403-17447 x 8935-9022 in the gap between the VSS rail and the
-  thin metal: gap artefact or a diffusion strip, undecided.
-- A ring-shaped outline 17425-17535 x 9095-9160 beside the long VCC contact, with
-  poly under M_d at x 17478-17520 from y 9060 to 9200. Probably the driver of
-  `P_y` (whose load is in the pad cell, see below).
-- A load with VCC contact 17555,9270 (poly block 17470-17520 x 9255-9300) and one
-  with VCC contact 17555,9430 (vertical poly block 17487-17520 x 9395-9480).
+How the doubtful junctions were decided (colour maps of the clean shot, cells of 2-3 px,
+`cache/scratch/dbus/map.py`; R-G about 80 is field under metal, 55 poly, 25 diffusion):
+
+- **Band A does not go on east of the rail.** In the gap between the VSS rail and the thin
+  metal (x 17416-17436) the rows of band A (y 8944-8965) are neutral (R-G 0-10) in the clean
+  shot and not orange in the chip-2 stripped shot, where the rows of band C in the same gap
+  are red-brown (R-G 60-70). The poly that continues at the same height east of the gap
+  (x 17437-17520) is a different piece: it joins the poly that comes up from M_d's top pad.
+  The first reading (one band from M_c's pad to M_d's pad) would short `d0_d_n` to `dl0_q_n`.
+- **That piece crosses a channel under the thin metal.** At x 17452-17463 it is as red and
+  bright (R-G 85-90) as the two load channels; its west end x 17437-17448 has the colour of
+  poly over field. North of it the strip y 8920-8942 and south of it the strip x 17452-17466
+  down to N0 are tan (diffusion); the strip in the open at (17470-17488, 8923-8935) is bright
+  green (open diffusion).
+- **Band D ends at x 17409**: green (field) in the gap at x 17410-17421 on its rows. The poly
+  under the thin metal at y 9210-9225 comes from the load gate of N1 and ends at x 17431.
+- **The boxes under the thin metal** at (17446,9200), (17450,9345), (17448,9475) are buried
+  contacts, not metal contacts: tan inside like the diffusion beside them (179/170/128
+  against 131/139/71 to 183/188/101 on the six known contact holes of M_a-M_d), and the
+  thin metal has no pad anywhere in the cell. The same holds for the two boxes under M_c at
+  (17313,9166) and (17315,9035): M_c is a straight line there, its two real contacts have pads.
+- **The two load gates are separate** (not one comb): between them at y 9122-9141 the clean
+  shot is field (pink under M_d, green in the gaps either side). A 9 px salmon strip at
+  x 17524-17532 there is taken to be field between the gap and the land's outline.
+- **The thin metal** x 17438-17459 runs through the whole cell and on south through unit 1
+  (strip image `py_strip.png`): it starts at the corner (17448,8097). Its dark stretch at
+  y 9308-9362 is the edges of the diffusion and poly under its west half; the east half is
+  metal throughout (brightness map of both metal shots).
 
 ### P_x and P_y (established about the two lines of AMB-003)
 
