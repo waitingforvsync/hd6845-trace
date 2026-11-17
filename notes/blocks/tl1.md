@@ -7,7 +7,7 @@ Package `tl1` (part 1 of 6 of the top-left logic). Trace: `trace/tl1.txt`. Views
 
 ## Status
 
-2026-11-17 19:44 +0000. **Partial.** Three gates (8 transistors) and the vertical metals of the tracks
+2026-11-17 19:53 +0000. **Partial.** Three gates (8 transistors) and the vertical metals of the tracks
 x 2283, 2326, 2370, 2414, 2457, 2500 with their pads and rows (y 2790-5480 and y 5900-6350) and one long wire down the west side (`tl1_w3333`) are traced and extract with 0 errors and
 0 warnings in the full extraction. Main result: **the driver of `rcs_e4` is found**, a wide
 two-input NOR in the west column at y 4778-5000. Five units of the west column (y 3740-4215,
@@ -262,6 +262,9 @@ under R1, thin metal E's north arm and a wide metal x 2735-2785, no pad.
   vertical poly x 2137-2147, y 3192-4205 (free ends at both? `v1.png`, 1.9x) between MA1's
   and MA0's metals: not looked at.
 - North of y 2790 and the small cluster south of y 5640: surveyed at low zoom only.
+- The six pad contacts (2370,4937), (2500,4894), (2521,5459), (2521,5372), (2372,6061), (2458,4635) were
+  re-checked in one mosaic at 3x in both shots (`k_metal.png`, `k_acid1b.png`): ring with a bright
+  centre, pad with a green centre, in all six. The other pads were read at 2.05-2.5x only.
 - The tie of the plate's tab in the two marked loads (2706-2754, 4287-4323) and (2712-2744, 4906-4960).
 
 ## Review
