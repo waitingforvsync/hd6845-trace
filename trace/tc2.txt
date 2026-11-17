@@ -350,3 +350,25 @@ C 6447,6150
 M 6447,6158 y5981 x6406 y5611 x6396 w=20
 P 6451,6160 y6400 w=17
 N M 6447,6050 tc2_m6447
+
+# ===== Piece 6 (2026-11-17): the ground rail on the east side of the crossing field, between
+# ===== tc1's piece (x 6858-6908, to y 4380) and fld's (x 6879-6925, from y 4990).
+# One metal, in five widths (tools/tc2_runs.py row Y 6820 6940 1 at sixteen y between the
+# poly rows, both metal shots; g3_steps.png 4x for both ends):
+#   y 4380-4435  x 6860-6907   (tc1's rail going on south)
+#   y 4435-4497  x 6838-6905   (it widens west)
+#   y 4497-4858  x 6840-6884   (its east edge steps in; profiles and vssE.png 1.9x only)
+#   y 4858-4903  x 6838-6926   (it widens east)
+#   y 4903-4990  x 6882-6926   (and meets fld's rail)
+# No contact on it in this stretch: under it the clean shot shows only the crossing field's
+# poly rows, none with a pad, and field between them (g3_dots.png 4x, four shots; g3_steps.png).
+# The small dark dots on it, at about (6862,4573), (6862,4630), (6870,4800), (6867,4893) and a
+# small ring at (6892,4390) in chip 2's metal shot, are specks of 6-8 px, not at the same
+# places in chip 1's metal shot ((6868,4587), (6875,4632), (6865,4795)), with no ring and bright
+# centre in either, and nothing under them in either stripped shot; the contact (6548,5092)
+# of the west rail, in the same image, has a 30 px ring in both and a box with pits.
+M 6860,4375:6907,4440
+M 6838,4433:6905,4500
+M 6840,4494:6884,4864
+M 6838,4858:6926,4905
+M 6882,4899:6926,4996

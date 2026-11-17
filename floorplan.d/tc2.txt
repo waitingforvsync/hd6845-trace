@@ -17,3 +17,4 @@
 8206,5960:8248,6400    power   VCC rail | the latch's two loads end on it
 6396,5557:6508,6170    route   tc2_m6490, tc2_m6447 | two metals of the nest from the west edge to their pads (6490,6108), (6447,6150)
 6443,6160:6501,6400    route   tc2_m6490, tc2_m6447 polys | from the two pads south under the supply metals
+6838,4375:6926,4996    power   ground rail east of the crossing field | joins the island's rail to the rail of the bit-0 inverters; no contact on it here
