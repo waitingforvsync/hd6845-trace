@@ -880,6 +880,17 @@ Checked and found correct: the output metal's route and corners, with no ring or
 anywhere on it; the diffusion's east edge at x 6970-6972 crossing gate 1's band; both arms
 over diffusion under the thin metal x 6817; the legs continuous into the bands.
 
+**Round 3** (2026-11-17 11:55 -0600; fix check of the one geometry change since `6b214a1`, the diffusion
+west of the column at x 6758-6802, y 3627-3690: 7x views in four shots and an overlay in
+`cache/scratch/tc1/review-11/`, colour profiles on rows y 3635, 3656, 3679 and 3830, the
+chip-1 stripped shot read directly, extraction before and after, `tools/unsure.py`). Checked
+and found correct: the west edge at x 6756-6759 over the full height; both bands diffusion
+and not poly; no edge between them and the column; the south band, the load's box, the tab
+and the column one piece, the neck 6 px clear of the band; the netlist differing only in
+that channel's width (20 to 62) on the same nets.
+
+Round 3: no findings.
+
 ## Not done
 
 - **Gate columns x 6400-7000, y 2650-4450**: nothing drawn. Dense random logic with large
