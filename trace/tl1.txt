@@ -139,6 +139,83 @@ P 2732,4848:2770,4914
 ?B 2712,4906:2744,4960
 
 # ====================================================================
+# West column, y 4590-4800: the gate that drives tl1_w4678 (first input of rcs_e4's NOR).
+#   pull-downs:  tl1_w4678 = NOT( tl1_w4025  OR  tl1_w3594 AND tl1_w4360 )
+# The load is east of R1 and is NOT traced (notes, Not done): the netlist has no equation yet.
+# Read on p2a.png (6.8x acid1b), p2m.png (3.4x both metal shots), p4.png (3.75x), profiles
+# with tools/px.py and tools/textmap.py --acid (notes: "The gate that drives tl1_w4678").
+# A column of diffusion west of R1, x 2553-2588, mostly under the thin metal x 2557-2573, as
+# in the NOR units: an arm at its top (y 4598-4616) onto the rail's VSS box (y 4590-4640,
+# contact (2628,4610)); the row of tl1_w4025 (y 4625-4643, from the pad (2458,4635)) crosses
+# it and ends at x 2598; below the row the node, with a buried contact (heavy box 2551-2575,
+# 4663-4692) onto the east end of tl1_w4678's row. From y 4670 the node widens east, across
+# the gap between the thin metal and R1, to the diffusion under R1 (y 4668-4700).
+@cell tl1_ub
+D 2600,4590:2655,4640                 # rail box, VSS contact
+C 2628,4610
+D 2553,4598:2604,4616                 # arm
+D 2553,4598:2588,4692                 # the column
+P 2540,4625:2598,4643                 # tl1_w4025's row, on east across the column
+B 2551,4663:2575,4692
+P 2540,4668:2573,4688                 # east end of tl1_w4678's row, on the box
+# The stack under R1 and in the gap west of it (x 2580-2657): node (y 4668-4700; it goes on
+# east under thin metal W, drawn to x 2702), gate tl1_w3594 (y 4702-4722 under the rail; its
+# row y 4708-4728 comes from the pad (2499,4718) and steps up 6 px in the gap), diffusion
+# y 4722-4747, gate tl1_w4360 (y 4750-4772), then the VSS box of rcs_e4's NOR (contact
+# (2620,4810)).
+D 2580,4670:2657,4782
+D 2650,4670:2702,4698
+P 2540,4708:2590,4728
+P 2582,4702:2680,4722
+# gate 2: from a pad with a contact (2555,4767) under the south end of the thin metal
+# x 2557-2573; its poly runs on east past the rail, under thin metal W (salmon there,
+# y 4745-4763) and further (seen to about x 2762: not drawn beyond x 2715)
+P 2535,4750:2577,4790
+C 2555,4767
+P 2570,4752:2625,4774
+P 2615,4748:2715,4770
+# The thin metal x 2557-2573, south piece: from a pad with a contact (2562,4360) to the pad
+# (2555,4767). follow.py: (2563,4364)-(2565,4684); it reports an end at y 4684 where the metal
+# is dim for 25 px over the box's heavy bottom edge and the row's top edge (trap 22); both
+# metal shots show its two edge lines running on to the pad (p2m.png).
+M 2565,4352 y4775 w=14
+P 2548,4347:2588,4376
+C 2562,4361
+P 2580,4353:2660,4372                 # the top pad's poly east under R1 (over field there), to a small box at (2660-2680, 4352-4372): not traced beyond
+@end
+N P 2620,4362 tl1_w4360
+# The same unit 608 px higher (findcell on the clean shot: 2535-2790 x 4590-4780 recurs at
+# 0,-608 with score 0.94; the unit above it, 2535-2790 x 4345-4585, at 0,-608 with 0.93), with
+# the north piece of the thin metal x 2557-2573 (follow.py: (2563,3756)-(2566,4172)):
+#   pull-downs:  tl1_w4070 = NOT( tl1_w4025  OR  tl1_w3636 AND tl1_w3752 )
+# Its own VSS box below the stack (y 4170-4215), where the master has the NOR's.
+@inst tl1_ub 0,-608
+D 2600,4170:2655,4215
+C 2622,4188
+N P 2620,3754 tl1_w3752
+N P 2545,4070 tl1_w4070
+
+# ====================================================================
+# The thin metal x 2740-2752 between thin metal W and R2, two pieces 608 px apart (one in each
+# copy of the pair of units). follow.py: (2740,4496)-(2741,4706) and (2741,3890)-(2741,4100).
+# Each end is a contact on a poly pad (mosaic m2_metal.png, m2_acid1b.png, 3.9x: ring with a
+# bright centre, green centre on a salmon pad, all four). The top pad is part of a wide poly
+# band (x 2700-2780, y 4485-4520 in the lower copy) and the bottom pad's poly goes on south
+# (to the band y 4742-4762 east of thin W): neither is traced, only the pads are drawn.
+M 2742,4484 y4714 w=12
+P 2725,4482:2762,4512
+C 2742,4496
+P 2725,4688:2762,4726
+C 2742,4703
+N M 2742,4600 tl1_w4703
+M 2742,3876 y4106 w=12
+P 2725,3874:2762,3904
+C 2742,3888
+P 2725,4080:2762,4118
+C 2742,4095
+N M 2742,3990 tl1_w4095
+
+# ====================================================================
 # Wiring west of the column: vertical metals on the tracks x 2283, 2370, 2457, 2500 (43 px
 # pitch; tla holds x 2199, 2239, 2326, 2414 and pieces of 2283; mal holds x 2110, 2153 and
 # x 2283 south of y 4914). Each piece joins pads of poly rows that run east into the column.
