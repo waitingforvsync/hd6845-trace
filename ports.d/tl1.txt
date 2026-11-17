@@ -24,9 +24,7 @@ tl1_w4287   P  2545,3929-3949  in   from the heavy box (2550-2575, 3925-3952) of
 tl1_w4243   P  2545,4452-4470  out  gate row into the unit at y 4340-4585 (not traced)
 tl1_w3594   P  2545,4494-4512  ?    gate row into the unit at y 4340-4585 (not traced)
 tl1_w4360   P  2660,4353-4372  in   believed: the top pad's poly ends on a small box (2660-2680, 4352-4372) of the unit at y 4340-4585 (not traced); every drawn end is a gate
-tl1_w4360   P  2715,4748-4770  ?    gate 2's poly runs on east of thin W, seen to about x 2762
 tl1_w3752   P  2660,3745-3764  in   believed: the same 608 px higher, box (2660-2680, 3744-3764) of the unit at y 3740-3960
-tl1_w3752   P  2715,4140-4162  ?    the same 608 px higher
 tl1_w4678   D  2702,4670-4698  out  the node goes on east under thin metal W: its load is not traced
 tl1_w4070   D  2702,4062-4090  out  the same 608 px higher
 tl1_w4703   P  2742,4482-4512  ?    top pad of the thin metal x 2742, on a wide poly band (not traced)

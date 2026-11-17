@@ -173,7 +173,7 @@ P 2582,4702:2680,4722
 P 2535,4750:2577,4790
 C 2555,4767
 P 2570,4752:2625,4774
-P 2615,4748:2715,4770
+P 2615,4748:2672,4770                 # ends in a rounded end at x ~2670, like gate 1; the band under thin W starting at x ~2684 is another poly (review round 1 of the second round of work, 5x in four shots, master and copy)
 # The thin metal x 2557-2573, south piece: from a pad with a contact (2562,4360) to the pad
 # (2555,4767). follow.py: (2563,4364)-(2565,4684); it reports an end at y 4684 where the metal
 # is dim for 25 px over the box's heavy bottom edge and the row's top edge (trap 22); both

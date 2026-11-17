@@ -349,8 +349,8 @@ but they are drawn `?P`, so the wire as one net is **marked**.
 | `tl1_w3594` | P | (2817,2899), east; (2545,4503) | not known (four gate-side pads) | gate 1 of the NOR; a gate of the unit at y 4590; a gate row of the unit at y 4340 |
 | `tl1_w4678` | D | (2702,4684), east | driven here (pull-downs) | the node of the unit at y 4590-4800 and gate 1 of `rcs_e4`'s NOR; its load is east, not traced |
 | `tl1_w4070` | D | (2702,4076), east | driven here (pull-downs) | the node of the copy at y 3982-4215; load and destination not traced |
-| `tl1_w4360` | P | (2660,4362); (2715,4759) east | believed from the unit at y 4340-4585 | thin metal x 2557-2573, south piece; gate 2 of the unit at y 4590 |
-| `tl1_w3752` | P | (2660,3754); (2715,4151) east | believed from the unit at y 3740-3960 | thin metal x 2557-2573, north piece; gate 2 of the unit at y 3982 |
+| `tl1_w4360` | P | (2660,4362) | believed from the unit at y 4340-4585 | thin metal x 2557-2573, south piece; gate 2 of the unit at y 4590 |
+| `tl1_w3752` | P | (2660,3754) | believed from the unit at y 3740-3960 | thin metal x 2557-2573, north piece; gate 2 of the unit at y 3982 |
 | `tl1_w4703` | P | pads (2742,4497), (2742,4707) | not known | thin metal x 2742, south piece |
 | `tl1_w4095` | P | pads (2742,3889), (2742,4099) | not known | thin metal x 2742, north piece |
 | `tl1_w3636` | P | (2545,3894) | driven here | into the unit at y 3740 (its other row is gate 1 of the unit at y 3982) |
@@ -390,10 +390,11 @@ under R1, thin metal E's north arm and a wide metal x 2735-2785, no pad.
   hang; if the node were not, `tl1_w4678` would have that one pull-down only.
 - **Is thin metal W on the node `tl1_w4678` at about (2693,4688)?** See the load, above. Not
   drawn.
-- **`tl1_w4360` at the rail's east side**: gate 2's poly is drawn to x 2715; that it is the
-  same poly as the band y 4742-4762 east of there and so reaches the pad (2742,4703)
-  (`tl1_w4703`) is likely and not drawn. If so, `tl1_w4703` = `tl1_w4360`.
-
+- **The band y 4742-4762 east of x 2684 (under thin W; orange where it crosses the strip
+  x 2700-2715; the same 608 px higher) is NOT gate 2's poly**: gate 2 (`tl1_w4360`, in the
+  copy `tl1_w3752`) ends in a rounded end at x ~2670 with plain ground across x 2672-2684
+  (review). What that band is, and whether it reaches the pad (2742,4703) (`tl1_w4703`),
+  is not traced.
 ## Not done
 
 - **The loads of the units at y 4590-4800 and y 3982-4215** (the copy, 608 px higher) and
@@ -463,5 +464,19 @@ x 2697-2701, nothing gate-specific continues east of thin W, no pad; thin W has 
 over either poly; the polys stop short of the load's `?` items; the netlist outputs of the
 two versions are byte-identical.
 
-Round 3: no findings.
+Round 3 of the first round of work: clean (no findings).
+
+### Second round of work (the units at y 3740-4215 and 4345-4800, the thin metals, ports)
+
+Round 1 (full review of what was added since 526f8e1, 2026-11-17 20:43 +0000, a fresh agent on
+claude-fable-5-2). Told to suspect the rail-edge joins at x 2590-2600, whether (2570,4634)
+is a pull-down to VSS, the buried contact, the thin metal's continuity at y 4687-4711, gate
+2's poly east of the rail, thin W on the node, and the copy at -608. Checked: the rail-edge
+joins by colour in both chip-2 shots against field rows; the pull-down (tan above and below
+the row, the arm to the box, contact (2628,4610) with ring and pits); the buried-contact box
+in two stripped shots; both thin metals' pieces and pads; the copy by overlay item by item.
+One finding, confirmed by the tracer on `review2-1/06_gap.png`: gate 2's poly was drawn
+through the gap between R1 and thin W to x 2715; it ends at x ~2670. Cut at x 2672 in the
+cell; the two ports that named the foreign band removed; no extracted connection changed.
+Not decided (left undrawn): whether thin W contacts the node near (2693,4688).
 
