@@ -566,6 +566,7 @@ P 7084,4032:7116,4062
 C 7099,4047
 M 7087,4047 x7142 y2822 w=16       # the channel metal x 7133-7152: no ring and no break on it between the two contacts (dark runs of 6-10 px only, each the edge of a poly underneath)
 N P 7030,4047 tc1_o4020
+N D 6818,4040 tc1_o4020             # the same node on the west column: the two labels are joined only through the ?D across the east gap (notes)
 # ... its north end: contact (7140,2832) on a pad; poly east along y 2822-2845, north at
 # x 7202-7222, east along y 2676-2694 (under the vertical metals x 7185, 7232 and, from
 # x 7350, lengthwise under the bus metal y 2684: no contact, no ring, no green hole), north

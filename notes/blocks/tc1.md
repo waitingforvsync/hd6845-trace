@@ -318,10 +318,14 @@ open field) for about 8 px, and the chip-2 stripped shot shows the poly's end ed
 x 7437-7440. Two nets. What that poly does at its end is not looked at (a tan band lies
 under it at y 2652-2668).
 
-`tools/unsure.py`-style statement: with the four `?D` deleted, the NOR and its load still
-extract on the west column and under the rail, but the output loses its way out (the
-buried contact is on the east column). So **the equation is firm; that `tc1_o4020` is the
-net on the channel metal x 7142 is marked**.
+**What `tools/unsure.py` says.** `--equations tc1_o4020`: FIRM (the NOR and its load
+extract with every `?` item deleted). `tc1_o4020` is listed as "2 pieces without the
+uncertain items": the node as labelled on the west column, and the output poly with the
+channel metal and the bus line y 2641. They are joined only through the `?D` at
+(6930-6952, 4014-4032), the strip of the output node across the gap between the rail and
+the thin metal x 6968 (table above). So **the equation is firm; that the net on the
+channel metal x 7142 and the bus line y 2641 is this NOR's output is an assumption**
+(trap 17), resting on that one strip.
 
 ## Ports
 
