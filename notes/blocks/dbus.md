@@ -7,7 +7,7 @@ several offsets side by side, for comparing repeats), `tools/dbus_autocorr.py`
 
 ## Status
 
-Traced, extracting (122 transistors, 0 errors, 0 warnings), overlay-checked:
+Traced, extracting (127 transistors, 0 errors, 0 warnings), overlay-checked:
 
 - the input buffer chain (four inverters), cell `dbus_in`, six copies (D0-D5); D0's and
   D1's input lines (first session);
@@ -33,8 +33,14 @@ Traced, extracting (122 transistors, 0 errors, 0 warnings), overlay-checked:
     thin metal x 17438-17459, which is its output and is `d0_out_n`**: drawn end to end
     and joined to `dpad`'s contact, so D0's output data line has its driver.
 
+- **run 4 (2026-11-17 18:55 +0000):**
+  - **the "logic above D0" is the east half of `r9c`'s five units** (x 17500-17670,
+    y 5260-5870): each unit's depletion load and its contact to the rail x 17616-17667,
+    which is VCC (cell `dbus_r9l`, one transistor, five copies). With `r9c`'s pull-downs
+    the full extraction now gives `ra#_cmp = NOT ra#_drv_in` for all five (AMB-012).
+
 Not traced: the latches of bits 4-7 (west of this region, see "Where bits 4-7 go"), the
-logic above D0, the left-hand wiring of chains 1-5, the channel wiring to the pads for
+left-hand wiring of chains 1-5, the channel wiring to the pads for
 D2-D5 and D7, the other seven `d#_out_n` lines. See "Not done".
 
 ## Inventory
@@ -69,7 +75,7 @@ down from the D0 pad cell. Gates sit on a 152 px vertical pitch between two rail
 | Capacitor rectangle of D6's c tap | 17147-17257 x 16776-16905 | drawn (plain diffusion, one contact) |
 | Capacitor rectangles of chains 4, 5 | 16880-16950 x 13820-13950; 17100-17210 x 14090-14210; 17130-17230 x 14820-14930 | seen, not drawn |
 | No latch follows chains 4-7 | - | chain 5 starts 758 px below chain 4, chain 6 679 px below chain 5, chain 7 630 px below chain 6 |
-| Logic above D0 | 17200-17700 x 5250-5900 | several gates, not looked at |
+| Logic above D0 | 17200-17700 x 5250-5900 | `r9c`'s five compare units. Their east halves (the loads, x 17500-17670) traced here in run 4: cell `dbus_r9l`, master = unit 1 (y 5384-5478), copies at (0,130) (0,260) (0,390), unit 0 mirrored about y 5370. Nothing else is there: field between the units, and no structure east of the rail up to x 17700 |
 
 findcell (metal and clean shot, threshold 0.4) finds no seventh or eighth copy of
 `dbus_in`: the buffers of D6 and D7 are a different cell (`dbus_in2`, below chain 5).
@@ -322,6 +328,49 @@ Traced (run 3; `g9.png`, `g9b.png` at 3-3.3x, overlay `ov9.png`):
 
 What `dbus_do0_in` is: a poly from the west along y 16444-16463, not followed. It is the
 data that the chip puts on D0, in true sense (the pad is NOT `d0_out_n`).
+
+### The loads of R9's compare units (cell `dbus_r9l`), traced 2026-11-17 (run 4)
+
+`r9c` drew, for each RA bit, a pull-down under the rail x 17440-17495 (gate = the pad
+driver's input line `ra#_drv_in`, output = `ra#_cmp`, the compare line of R9's comparator)
+and left the east half, so that the unit being an inverter was an assumption (AMB-012).
+The east half is the load, and nothing else:
+
+- the output band under the rail runs on east as a diffusion strip 20 px wide, widens to
+  30 px and passes under a poly block (x 17558-17611, 66 px tall): the load channel,
+  W/L 30/53;
+- east of the block the strip ends on a land (58 x 64) with a metal contact to the rail
+  x 17616-17667;
+- west of the block an arm of the strip (x 17532-17552) turns back beside the block to a
+  heavy-outlined box (17557-17583, 22 px tall), where a tab of the block comes down onto
+  it: the buried contact that ties the load's gate to the output side.
+
+**Traced** (full extraction): `ra#_cmp = NOT ra#_drv_in`, # = 0-4. The equations still pass
+through `r9c`'s `?B` at each unit's west end (the tie from the output band to the poly that
+carries the output away): those are `r9c`'s items. One of them (unit 1, 17380-17410 x
+5440-5470) was looked at here at 5x in three shots (`u1_west.png`): a heavy-outlined box
+with a lighter centre between the poly from the pad and the diffusion from the band, i.e.
+it looks like the buried contact `r9c` assumed. Not measured, the other four not looked at.
+
+**The east rail is VCC** (traced, by metal continuity): `tools/follow.py` from (17632,5600)
+north reaches y 4597 and turns east; cuts in both metal shots (`tools/larr_px.py`, along
+x 17640 from y 4540 to 5300 and along y 4600 from x 17640 to 17920) show metal all the
+way, the dark samples being pits (one at (17640,4656) is dark in chip 2 only). The rail
+runs into a horizontal band y 4592-4635, which enters the wide metal x 17890-18190 that
+`pads_out` has as `vcc` from y 4810 down (`rail_n.png`, 1.2x). The rail's south end is at
+y 5902. That the *other* rail is VSS then also follows from the loads' orientation, which
+is what AMB-012 asked for.
+
+How it was measured: dark edge lines in the chip-2 stripped shot along five vertical cuts
+(x 17515, 17541, 17568, 17592, 17640) and fourteen rows (`tools/dbus_dark.py`). Units 1-4
+repeat at 130 px within 1 px on every edge; unit 0 is unit 1 mirrored about y 5370 within
+2 px. At x 17541 the cut shows the strip's outer edge and the arm's end but no line where
+the arm leaves the strip, so arm and strip are one layer. In the clean shot the arm is
+green (open diffusion) and the land is tan with contact specks. Overlay: `ov_r9l.png`
+(2x, metal and chip-2 stripped shot, all five).
+
+Raw `cache/acid.npy` is **not** in the common frame (10 px off here); the aligned array is
+`cache/acid_aligned.npy`, which `view.py` and `larr_px.py` use.
 
 ### P_x and P_y (established about the two lines of AMB-003)
 
@@ -610,7 +659,6 @@ drawn 20 (a size; Ambiguity 10).
   seven vertical metals at x 16945-17130 left of chains 4-7 are probably these lines and
   `dbl`-like bus lines; none is drawn.
 - `d7_in` south of y 17000 to D7's protection; `d7_c`'s metal west of x 16950.
-- Logic above D0 at 17200-17700 x 5250-5900.
 - Left-hand wiring of chains 1-5: the capacitor taps (`d#_b`, `d#_c`; in unit 1 a poly
   comes down x 17181-17197 and turns west along y 10325-10345, probably `d1_c`'s; chain 4:
   `d4_c` runs west and diagonally to a pad (16945,14345), `d4_b` to a pad (17158,14045)

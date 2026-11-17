@@ -586,3 +586,38 @@ P 17512,8095:17600,8113
 P 17586,8089:17614,8117            # pad
 C 17600,8103 s=26x26
 M 17600,7560 y8116 w=18
+
+# ==== the loads of the five units that make R9's compare value (r9c's units, AMB-012) ====
+# y 5260-5870, east of the units' rail x 17440-17495. r9c drew each unit's pull-down under
+# that rail and left the east half. Each has a depletion load: the output band under the
+# rail runs on east as a 20 px diffusion strip, widens to 30 px under a poly block
+# (x 17558-17611, 66 tall) and ends on a land with a contact to the rail x 17616-17667.
+# West of the block an arm of the strip turns back beside the block to a heavy-outlined box
+# (17557-17583, 22 tall) where a tab of the block lands on it: the load's gate is tied to
+# the output side. So the east rail is the loads' supply and the units are inverters.
+# Edges measured in the chip-2 stripped shot (tools/dbus_dark.py, cuts at x 17515, 17541,
+# 17568, 17592, 17640 and fourteen rows): units 1-4 repeat at 130.0 +- 1; unit 0 is unit 1
+# mirrored about y 5370 (as r9c found for its pull-down).
+#
+# The east rail: followed north (follow.py) to y 4592, where it runs into a horizontal band
+# (y 4592-4635) that enters the wide metal x 17890-18190, which pads_out has as vcc from
+# y 4810 (cuts along y 4600 and x 17640 in both metal shots: metal throughout, the dark
+# spots are pits). Its south end is at y 5902.
+M 17641,4600 y5900 w=50
+N M 17641,5000 vcc
+@cell dbus_r9l tag=1
+D 17480,5435:17545,5453            # output strip coming east from r9c's band under the VSS rail
+N D 17500,5444 ra{}_cmp
+D 17538,5431:17616,5461            # wider under the load gate, to the land
+D 17612,5398:17670,5462            # VCC land
+C 17641,5430 s=30x34
+P 17558,5412:17611,5478            # load gate: W 30 / L 53
+P 17558,5386:17583,5420            # its tab north onto the arm's end
+D 17532,5387:17552,5442            # arm of the output strip, north beside the block
+D 17545,5387:17583,5407            # ... and east under the tab
+B 17555,5384:17585,5409            # the box: load gate tied to the output
+@end
+@inst dbus_r9l 0,0 my=5370 tag=0
+@inst dbus_r9l 0,130 tag=2
+@inst dbus_r9l 0,260 tag=3
+@inst dbus_r9l 0,390 tag=4
