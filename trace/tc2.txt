@@ -155,3 +155,174 @@ N P 6600,4829 tc1_m6817
 M 6712,4445 y4826 w=50
 M 6686,4820:6755,4876
 M 6727,4870 y4996 w=49
+
+# ===== Piece 4 (2026-11-17): the latch at x 7760-8250, y 5960-6300 (two cross-coupled gates
+# ===== with their loads), its five lines in and two out.
+#
+#   tc2_sr_q   = NOR(tc2_sr_q_n, tc2_sr_c, tc2_sr_g AND tc2_sr_r)
+#   tc2_sr_q_n = NOR(tc2_sr_q,             tc2_sr_g AND tc2_sr_s)
+#
+# Build: one diffusion x 7977-8073 (its west 47 px in the open, the rest under the ground
+# rail x 8030-8075), top to bottom: ground (contact (8053,5982)), row A, row B, node q, row C,
+# ground (contact (8060,6155)), row D, row E, node q_n. Rows A and D are one net (tc2_sr_g: an
+# L of metal joins their pads). East of the rail, under the thin metal of db_b6, two diffusion
+# columns x 8106-8136: the upper from the top ground diffusion to node q under a separate poly
+# (the east piece of row A's track = q_n), the lower from the ground box to node q_n under the
+# west arm of q's load poly. Loads east of them, to the VCC rail x 8206-8248.
+# Colours (clean shot, under metal): poly over field 213-220/160-165/110, poly over a channel
+# 236-249/166-178/115-128, diffusion 188-200/175-184/130, field 187/125/125 (tools/px.py pt).
+# Views: g1_acid1b.png, g1_metal.png, g1_acid.png (3.2x), g1_W1.png, g1_E1.png, g1_E1b.png (4x),
+# g1_NE.png, g1_SE.png (4.3x four shots), g1_dc1top.png (4.6x), g1_gap.png, g1_tie.png,
+# g1_swbox.png (6.3-6.5x), g1_S.png (4x), g1_wpads.png (4.2x).
+
+# --- supplies. The ground rail: rax draws it to y 5645 (x 7931-7985) with the step east
+#     (x 7945-8035, y 5600-5650). From there one metal x 7990-8040 south to y 5945, widening
+#     east to x 8075 at y 5888-5945, then x 8030-8075 (rails_m.png 1.6x, g1_N_m.png 4x); it
+#     bulges east to about x 8092 at y 6095-6212 (g1_metal.png).
+M 7990,5625:8040,5945
+M 7990,5888:8075,5945
+M 8030,5940:8075,6400
+M 8070,6095:8092,6212
+N M 8052,6300 vss
+#     The VCC rail x 8206-8248: its metal comes from the north (a rail x 8105-8150 that turns east
+#     along y 5750-5800: rails_m.png, not drawn) and is at the x of cdp2's vcc rail (x 8229 at
+#     y 7425). Drawn from y 5960 to y 6400; labelled vcc by the layout rule (both loads end on it).
+M 8206,5960:8248,6400
+N M 8227,6350 vcc
+
+# --- the stack's diffusion
+D 8027,5965:8073,6000                 # ground contact box under the rail (speck (8053,5982), ring in both metal shots)
+C 8053,5982
+D 7977,5990:8138,6012                 # top diffusion: the open strip's top, the box, and east above row A's track to x 8138
+                                      # (row y 6002: tan through x 8075-8087 with no edge; top edge line y 5990 from x 7975 to
+                                      # 8151 in both metal shots and the chip-2 stripped shot: g1_dc1top.png)
+D 7977,6005:8073,6113                 # under rows A and B to node q (y 6083-6113)
+D 7977,6105:8024,6190                 # open strip on south, under row C, to the ground node between C and D
+D 8042,6127:8100,6170                 # ground contact box (speck (8060,6155)); pink field west of it under the rail; east to x 8100 under the bulge
+C 8060,6155
+D 7977,6163:8061,6190                 # ground node between rows C and D, under the rail joined to the box
+D 8050,6150:8106,6178                 # and east to the lower column's top
+D 7977,6185:8061,6260                 # under rows D and E (east edge x 8061: row y 6192)
+D 7977,6250:8090,6294                 # node q_n below row E
+D 8073,6090:8106,6110                 # node q east to the upper column (tan under the rail's bulge, g1_gap.png)
+D [ 8114,6005 x8138 y6110 x8105 y6052 x8114 ]   # upper column under db_b6's metal: x 8106-8136 (tan, R 180-205, on rows y 6056-6100);
+                                      # under the gate and just below it (rows y 6022, 6028, 6044) its west edge is at x 8114
+                                      # (a dark line across the poly at x 8112-8115, poly over field west of it, 247-254 east)
+D 8106,6105:8126,6132                 # its tab south: the tie's box
+D 8106,6150:8136,6294                 # lower column x 8106-8136 (rows y 6160, 6172, 6212, 6280; under the gate bright x 8111-8132)
+D 8088,6266:8106,6288                 # node q_n east to the lower column: a band y 6266-6286 between dark edges, redder
+                                      # than the field above and below it in all four shots (px.py col 8095 6196 6312)
+
+# --- row A (tc2_sr_g): pad (7878,6022), poly east y 6010-6034, 7 px lower east of x 8050, ends
+#     rounded at x 8086. Its track's east piece is another poly (below): field between x 8090 and
+#     8099 in both stripped shots (px.py row 6022, row 6028: green, G over R, in the chip-2 shots).
+P 7862,6006:7900,6040
+C 7878,6022
+P [ 7890,6010 x8050 y6017 x8086 y6041 x8050 y6034 x7890 ]
+# --- row D (tc2_sr_g): pad (7837,6193), poly east y 6183-6203, ends at x 8073 (pink field
+#     x 8078-8088 under the rail's bulge, green in the chip-2 shots: px.py row 6192).
+P 7822,6178:7862,6208
+C 7837,6193
+P 7850,6183:8073,6203
+# --- the L of metal: pad (7878,6022) south, west along y 6100-6122, south along x 7827-7847
+#     through the pad (7837,6193) (ring and bright centre in both metal shots, g1_wpads.png 4.2x)
+#     and on south past y 6400 (follower: end (7835,7218)).
+M 7880,6012 y6111 x7837 y6400 w=20
+N M 7837,6300 tc2_sr_g
+
+# --- row B (tc2_sr_r): pad (7837,6064), poly east y 6055-6081, ends rounded at x 8088. The
+#     pad's metal comes from the north (x 7826-7846, follower: end (7835,5520); g1_bnorth.png
+#     2.1x: no pad on the ten rows it crosses) from the pad (7836,5520), whose poly goes east
+#     (drawn to x 7872; not followed). The L's metal passes 18 px south of the pad (g1_wpads.png:
+#     no metal between y 6082 and 6100 in either chip).
+P 7822,6050:7862,6078
+C 7837,6064
+P 7850,6055:8088,6081
+M 7836,5512 y6074 w=20
+P 7820,5505:7855,5536
+C 7836,5520
+P 7845,5510:7872,5530
+N M 7836,5800 tc2_sr_r
+
+# --- node q (tc2_sr_q): poly from the pad (7922,6108) east, ending on the strip between rows
+#     B and C in a box of nested rings (buried contact, 7975-8005 x 6090-6122: g1_W1.png).
+#     Metal from the pad south past y 6400 (follower: end (7922,7046)).
+P 7905,6092:7940,6124
+C 7922,6108
+P 7930,6098:8003,6118
+B 7973,6090:8006,6122
+M 7922,6100 y6400 w=18
+N M 7922,6300 tc2_sr_q
+
+# --- row C (tc2_sr_c): pad (7880,6155), poly east y 6137-6163 across the open strip only; it
+#     ends at x 8036 over field (pink under the rail west of the ground box). Metal from the pad
+#     south to the pad (7880,6368) on the top line of cdp2's channel 2 (poly y 6358-6376), which
+#     runs from the pad (7490,6367) east past x 8250 (g1_crow.png 1.5x, both stripped shots; to
+#     x 11000 by amr's notes). From the pad (7490,6367) a metal y 6360-6380 west past x 6400
+#     (g1_cpadw.png 5x; g1_cmet.png 0.94x; follower: end (6184,6370) on a pad).
+P 7862,6138:7900,6172
+C 7880,6155
+P 7890,6137:8036,6163
+M 7879,6146 y6376 w=20
+P 7862,6352:7900,6384
+C 7880,6368
+P 7495,6367 x8250 w=18
+P 7478,6353:7510,6381
+C 7490,6367
+M 7498,6370 x6400 w=20
+N P 7700,6367 tc2_sr_c
+
+# --- row E (tc2_sr_s): pad (7790,6258), poly east y 6228-6250, ends at x 8072. Metal from the
+#     pad south past y 6400 (follower: end (7791,6958)).
+P 7773,6238:7806,6276
+C 7790,6258
+P 7785,6228:8072,6250
+M 7791,6250 y6400 w=18
+N M 7791,6350 tc2_sr_s
+
+# --- node q_n (tc2_sr_q_n): the lower column below its gate. A poly from the pad (8166,6243)
+#     ends on it in a box of nested rings (buried contact, 8116-8148 x 6220-6250: g1_SE.png).
+#     The pad's poly runs on down over the load's strip (speckled bright in the open: a channel).
+#     Metal from the pad north (x 8156-8178, follower (8166,6248)-(8168,6026)) to the pad
+#     (8168,6028) of the east piece of row A's track, which crosses the upper column: the
+#     pull-down of q that q_n gates (249/175/125 at (8127,6025): poly over a channel).
+P 8118,6224:8152,6248
+B 8116,6220:8148,6251
+P 8150,6230:8197,6301
+C 8166,6243
+D 8130,6268:8208,6296                 # load strip of q_n: W 28, L 47 (row y 6280: tan through x 8136-8146, no edge)
+D 8204,6240:8250,6300                 # VCC contact box (ring (8227,6263) on the rail)
+C 8227,6263
+M 8167,6018 y6256 w=22
+P 8150,6010:8188,6046
+C 8168,6028
+P 8098,6014:8152,6040
+N M 8167,6150 tc2_sr_q_n
+#     the stub at the stack's south-west corner: a poly x 7957-8003, y 6267-6297 that ends at
+#     both ends, with a buried contact box on the strip (lighter centre, heavy outline, in all
+#     four shots: g1_swbox.png 6.4x). It joins nothing else.
+P 7957,6267:8003,6297
+B 7975,6264:8005,6296
+
+# --- q's load: poly block x 8148-8198, y 6070-6135 over the strip y 6085-6112 (col 8188: R 244
+#     between dark edges at y 6081 and 6112; R 209-229 above and below) from the upper column to
+#     the VCC box. Tie: a tab of the block west along y 6117-6133 to a box, tan inside with an
+#     outline, on a tab of the column under db_b6's metal (8106-8126 x 6113-6132); the tab is
+#     orange-red at x 8132-8147 in both chip-2 shots and chip 1's metal shot where the field
+#     18 px south is green (px.py row 6128, row 6146).
+P 8148,6070:8198,6135
+D 8130,6085:8210,6112                 # load strip of q: W 27, L 50 (row y 6100: tan through x 8136-8146, no edge)
+D 8206,6090:8242,6142                 # VCC contact box
+C 8227,6114
+P 8106,6117:8150,6133
+B 8104,6113:8128,6134
+#     the block's poly goes on south (x 8152-8173) to y 6203, with an arm east along y 6163-6180
+#     past the VCC rail and x 8250 (px.py row 6172: salmon to x 8254), and an arm west along
+#     y 6183-6202 across the lower column: the pull-down of q_n that q gates.
+P 8152,6130:8173,6203
+P 8170,6163:8250,6180
+P 8096,6183:8135,6202
+#     the arm's join to the vertical, x 8135-8152: the arm's upper and lower edge lines run
+#     through in both chip-2 shots (g1_arm.png 11x), but the gap between db_b6's metal and the
+#     pad's metal shows no orange there (px.py row 6192: dark, G over R at x 8138-8141). Marked.
+?P 8133,6183:8154,6202
