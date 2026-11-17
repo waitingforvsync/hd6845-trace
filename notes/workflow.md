@@ -6,7 +6,8 @@ collaborators and their agents. Read this before taking any work, then
 
 **`/trace6845`** (a Claude Code command in this repository, `.claude/skills/trace6845/`)
 runs all of the steps below for one package: pull, choose, claim, trace, review in
-rounds until a round finds nothing, merge through the gate, hand off. Collaborators with
+a full review then fix checks until a round finds nothing (at most three), merge through the
+gate, hand off. Collaborators with
 write access use it; the steps below are what it does, and what a human tracer does by
 hand.
 
@@ -101,7 +102,10 @@ wait for it to be merged, or ask the coordinator to merge it first.
 ### 6. Independent review: required before the pull request
 
 When the package is traced and its notes are written, someone who did not trace it
-checks it against the photos. For an agent, that is one fresh agent started for the
+checks it against the photos. The first round is a full review; later rounds are fix checks,
+which look only at what changed since the previous round and at what it touches, so that the
+review stays affordable (a full round costs about as much as a tracing run). At most three
+rounds: a package that still has confirmed errors after the third is not ready to merge. For an agent, that is one fresh agent started for the
 purpose (the one exception to "do not start sub-agents" in the tracing guide). It is what
 caught the two worst errors of the first contributor round, both of them a bundle that
 steps one track where it had been drawn straight.

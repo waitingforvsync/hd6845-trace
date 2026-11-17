@@ -19,8 +19,9 @@ access). In short:
 3. Work on branch `PREFIX` in a working tree of your own (`tools/newwork.sh PREFIX`),
    touching only your own files; ship each finished piece with `tools/ship.sh`.
 4. Read `notes/tracing-guide.md` before tracing; follow it.
-5. **Independent review** against the photos, in rounds (one fresh reviewer agent per
-   round) until a round finds nothing; recorded in the block notes.
+5. **Independent review** against the photos by a fresh reviewer agent: one full review, then
+   short fix checks of only what changed, at most three rounds in all; recorded in the block
+   notes.
 6. Merge main into the branch, pass `tools/mergecheck.py PREFIX`, push to main, and hand
    off with `tools/claim.py done` (proposals for the coordinator's files go there, not in
    those files). Without write access: a pull request with the template instead.

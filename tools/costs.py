@@ -71,11 +71,33 @@ def ts(s):
     return datetime.datetime.fromisoformat(s.replace('Z', '+00:00'))
 
 
+REVIEW_RE = re.compile(r'you are reviewing one package|you are checking corrections to a die trace|'
+                       r'\b(independent(ly)? review|adversarial(ly)? verif|review (this|the) (trace|package|block))', re.I)
+
+
+def is_review(path):
+    """A subagent whose brief is a review (the /trace6845 briefs, or older review wording)."""
+    if os.sep + 'subagents' + os.sep not in path:
+        return False
+    with open(path, errors='replace') as f:
+        for line in f:
+            try:
+                e = json.loads(line)
+            except ValueError:
+                continue
+            if e.get('type') == 'user':
+                c = (e.get('message') or {}).get('content')
+                text = c if isinstance(c, str) else ' '.join(x.get('text', '') for x in c if isinstance(x, dict)) if isinstance(c, list) else ''
+                return bool(REVIEW_RE.search(text[:3000]))
+    return False
+
+
 def responses():
-    """One record per API response: (time, session, model, usage)."""
+    """One record per API response: (time, session, model, usage, is_review)."""
     seen, out = set(), []
     for d in transcript_dirs():
         for path in glob.glob(os.path.join(d, '**', '*.jsonl'), recursive=True):
+            review = is_review(path)
             with open(path, errors='replace') as f:
                 for line in f:
                     if '"usage"' not in line:
@@ -91,7 +113,7 @@ def responses():
                     if key in seen:
                         continue
                     seen.add(key)
-                    out.append((ts(e['timestamp']), e.get('sessionId', path), m.get('model', '?'), m['usage']))
+                    out.append((ts(e['timestamp']), e.get('sessionId', path), m.get('model', '?'), m['usage'], review))
     out.sort(key=lambda r: r[0])
     return out
 
@@ -137,17 +159,20 @@ def main():
     commits = package_commits(a.who)
     times = [c[0] for c in commits]
     import bisect
-    by_pkg = collections.defaultdict(lambda: dict(cost=0.0, responses=0, models=collections.Counter()))
+    by_pkg = collections.defaultdict(lambda: dict(cost=0.0, review_cost=0.0, responses=0, models=collections.Counter()))
+    review_total = 0.0
     by_model = collections.defaultdict(lambda: dict(cost=0.0, responses=0))
     by_day = collections.defaultdict(float)
     tot = collections.Counter()
     total_cost, unknown = 0.0, set()
     rs = responses()
-    for t, sess, model, u in rs:
+    for t, sess, model, u, review in rs:
         tok, cost, known = price(model, u)
         if not known:
             unknown.add(model)
         total_cost += cost
+        if review:
+            review_total += cost
         tot.update(tok)
         by_model[model]['cost'] += cost
         by_model[model]['responses'] += 1
@@ -158,20 +183,23 @@ def main():
             pk = sorted(commits[i][1])
         for p in pk or ['(coordination)']:
             by_pkg[p]['cost'] += cost / max(1, len(pk))
+            if review:
+                by_pkg[p]['review_cost'] += cost / max(1, len(pk))
             by_pkg[p]['responses'] += 1
             by_pkg[p]['models'][model] += 1
     rec = dict(who=a.who, generated=datetime.datetime.now(datetime.timezone.utc).isoformat(timespec='seconds'),
                price_source=PRICE_SOURCE, unpriced_models=sorted(unknown), responses=len(rs),
                first=rs[0][0].isoformat() if rs else None, last=rs[-1][0].isoformat() if rs else None,
-               total_cost=round(total_cost, 2), tokens=dict(tot),
+               total_cost=round(total_cost, 2), review_cost=round(review_total, 2), tokens=dict(tot),
                by_model={k: dict(cost=round(v['cost'], 2), responses=v['responses']) for k, v in by_model.items()},
-               by_package={k: dict(cost=round(v['cost'], 2), responses=v['responses'], models=dict(v['models']))
+               by_package={k: dict(cost=round(v['cost'], 2), review_cost=round(v['review_cost'], 2), responses=v['responses'],
+                               models=dict(v['models']))
                            for k, v in sorted(by_pkg.items(), key=lambda kv: -kv[1]['cost'])},
                by_day={k: round(v, 2) for k, v in sorted(by_day.items())})
     out = a.out or os.path.join(ROOT, 'costs', '%s.json' % re.sub(r'[^A-Za-z0-9_.-]+', '_', a.who))
     os.makedirs(os.path.dirname(out), exist_ok=True)
     json.dump(rec, open(out, 'w'), indent=1)
-    print('costs: %s, %d responses, $%.2f API-equivalent -> %s' % (a.who, len(rs), total_cost, os.path.relpath(out, ROOT)))
+    print('costs: %s, %d responses, $%.2f API-equivalent (review $%.2f) -> %s' % (a.who, len(rs), total_cost, review_total, os.path.relpath(out, ROOT)))
     if a.print:
         for k, v in list(rec['by_package'].items())[:15]:
             print('  %-16s $%9.2f  %6d responses' % (k, v['cost'], v['responses']))

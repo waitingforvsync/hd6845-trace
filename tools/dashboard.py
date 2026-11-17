@@ -337,13 +337,14 @@ def read_costs():
 
 def package_cost(costs, prefixes):
     """API-equivalent dollars and models for a package, over every contributor's report."""
-    total, models = 0.0, collections.Counter()
+    total, review, models = 0.0, 0.0, collections.Counter()
     for r in costs.values():
         for k, v in r.get('by_package', {}).items():
             if any(k == p or k.startswith(p + '_') for p in prefixes):
                 total += v.get('cost', 0)
+                review += v.get('review_cost', 0)
                 models.update({m: n for m, n in v.get('models', {}).items() if m != '<synthetic>'})
-    return total, models
+    return total, models, review
 
 
 def money(x):
@@ -637,8 +638,8 @@ def index_page(d, state, page_of):
             continue
         link = page_of.get(r['label'])
         label = '<a href="%s">%s</a>' % (link, inline(r['label'])) if link else inline(r['label'])
-        pc, pm = package_cost(d['costs'], r['prefixes'])
-        cost = '; about %s (%s)' % (money(pc), models_text(pm)) if pc else ''
+        pc, pm, pr = package_cost(d['costs'], r['prefixes'])
+        cost = '; about %s%s (%s)' % (money(pc), ', review %s' % money(pr) if pr else '', models_text(pm)) if pc else ''
         if s == 'done':
             done.append((h.get('last', ''), '<div class="item"><div class="h">%s %s</div><div class="dim">%s</div>'
                          '<div class="mut">by %s%s%s</div></div>'
@@ -697,16 +698,16 @@ def index_page(d, state, page_of):
         for m, v in r.get('by_model', {}).items():
             if m != '<synthetic>':
                 bymodel[m] += v.get('cost', 0)
-    spend_rows = ''.join('<tr><td>%s</td><td class="n">%s</td><td class="n">%s</td><td>%s</td><td class="mut">%s</td></tr>' % (
-        E(w), money(r.get('total_cost', 0)), '{:,}'.format(r.get('responses', 0)),
+    spend_rows = ''.join('<tr><td>%s</td><td class="n">%s</td><td class="n">%s</td><td class="n">%s</td><td>%s</td><td class="mut">%s</td></tr>' % (
+        E(w), money(r.get('total_cost', 0)), money(r.get('review_cost', 0)), '{:,}'.format(r.get('responses', 0)),
         money(r.get('by_package', {}).get('(coordination)', {}).get('cost', 0)), E((r.get('generated') or '')[:16].replace('T', ' ')))
         for w, r in sorted(d['costs'].items(), key=lambda kv: -kv[1].get('total_cost', 0)))
-    spend_html = ('<div class="tw"><table><thead><tr><th>Reported by</th><th class="n">API-equivalent</th><th class="n">responses</th>'
+    spend_html = ('<div class="tw"><table><thead><tr><th>Reported by</th><th class="n">API-equivalent</th><th class="n">of which review</th><th class="n">responses</th>'
                   '<th>of which coordination</th><th>report written</th></tr></thead><tbody>%s</tbody></table></div>'
                   '<p class="mut">By model: %s. From each contributor\'s Claude Code transcripts (<code>tools/costs.py</code>), '
                   'priced at API list prices; on a subscription nothing is billed per token. Just for interest. Contributors who have '
                   'not committed a <code>costs/</code> report show as &ndash;.</p>'
-                  % (spend_rows or '<tr><td colspan="5" class="mut">No reports yet.</td></tr>',
+                  % (spend_rows or '<tr><td colspan="6" class="mut">No reports yet.</td></tr>',
                      ', '.join('%s %s' % (MODEL_NAME.get(m, m), money(c)) for m, c in bymodel.most_common()) or 'none'))
     stat = lambda v, l, i='': '<div class="stat"><div class="v"%s>%s</div><div class="l">%s</div></div>' % (
         ' id="%s"' % i if i else '', v, l)
@@ -776,8 +777,8 @@ def package_page(prefix, row, d, state, page_of):
     facts.append('<p><b>Who</b>: %s%s</p>' % (whos(h), ' <span class="mut">(%s to %s, %d commits)</span>' % (h['first'], h['last'], h['commits']) if h else ''))
     if row:
         facts.append('<p><b>Transistors</b>: %d <span class="mut">(each transistor counted once, for the most specific package whose region holds it)</span></p>' % d['tcount'].get(row['label'], 0))
-    pc, pm = package_cost(d['costs'], [prefix])
-    facts.append('<p><b>Cost</b>: %s</p>' % ('about %s API-equivalent, by %s' % (money(pc), models_text(pm)) if pc
+    pc, pm, pr = package_cost(d['costs'], [prefix])
+    facts.append('<p><b>Cost</b>: %s</p>' % ('about %s API-equivalent (review %s), by %s' % (money(pc), money(pr), models_text(pm)) if pc
                                              else '<span class="mut">no cost report covers it</span>'))
     if links:
         facts.append('<p class="dim">%s<br>%s</p>' % (links, hist_links))

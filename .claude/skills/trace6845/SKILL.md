@@ -94,11 +94,17 @@ tools/ship.sh "Subject" trace/PREFIX.txt notes/blocks/PREFIX.md floorplan.d/PREF
   merging; a half-drawn piece is not (leave it out of the trace and describe it in Not
   done).
 
-## 6. Independent review, in rounds, until a round finds nothing
+## 6. Independent review: one full round, then fix checks
 
-Each round is **one fresh agent** (Agent tool, general-purpose, `model: "fable"`), started for
-that round only. Never reuse or continue an earlier reviewer, and never pass it an earlier round's
-conclusions. It reads the photos, not your reasoning. Brief it with this, filled in:
+The review is required: it is what catches wrong connections, which cost far more later than a
+review costs now. It is kept proportionate: the first round reads the whole package, later
+rounds read only what changed. At most three rounds.
+
+Every round is **one fresh agent** (Agent tool, general-purpose, `model: "fable"`), started for
+that round only. Never reuse or continue an earlier reviewer, and never pass it your reasoning or
+an earlier reviewer's conclusions. Note the commit before each round (`git rev-parse HEAD`).
+
+**Round 1: full review.** Brief it with this, filled in:
 
 > You are reviewing one package of a die trace of the HD6845S against the die photos.
 > Repository: `<absolute path of your worktree>`. Read `notes/tracing-guide.md` (all of
@@ -118,15 +124,38 @@ conclusions. It reads the photos, not your reasoning. Brief it with this, filled
 > (`tools/larr_px.py`), the metal test (`tools/follow.py`), `tools/unsure.py`. Check every
 > cell copy by overlay. Look for anything visible inside the region that the trace leaves
 > out. Run tools as `tools/t.sh PREFIX tool.py ...`; put images in
-> `cache/scratch/PREFIX/review-<round>/`. Do not edit any file and do not run git
-> commands that change anything.
+> `cache/scratch/PREFIX/review-1/`. Do not edit any file and do not run git commands that
+> change anything.
+>
+> Budget: about 40 images. Spend them on the listed suspicions and on the junctions that
+> decide connections, use the text tools (`tools/railprof.py`, `tools/follow.py`, the
+> extraction) before rendering, keep crops small, and do not re-survey what a view already
+> showed. What you could not check, say so.
 >
 > Report, under 400 words: each finding with its coordinates, what the trace has, what the
 > photos show, the evidence (shot, zoom, measurement, image file), and whether it changes
 > a connection. Then what you checked and found correct, and what you could not check.
 > If you find nothing wrong, say "no findings" plainly.
 
-Then, for each finding:
+**Rounds 2 and 3: fix checks.** Only if the previous round had confirmed findings. Brief a fresh
+agent with what changed, not with the whole package:
+
+> You are checking corrections to a die trace of the HD6845S against the die photos.
+> Repository: `<worktree>`. Read sections 2-4 of `notes/tracing-guide.md` and
+> `notes/layers.md`. The geometry changed since commit `<commit before the previous round>`:
+> `git diff <commit> -- trace/PREFIX.txt` shows every changed line. The changes were made
+> to fix these findings: `<each finding in one line, with coordinates>`.
+>
+> For each change: is it right in the photos (4x or more, two shots, a measurement where the
+> eye could be wrong)? Did it disturb anything it touches: every junction within about 100 px
+> of a changed item, and every net the extraction now joins or splits differently
+> (compare `tools/t.sh PREFIX netlist.py` with the same on the earlier version:
+> `git show <commit>:trace/PREFIX.txt > cache/scratch/PREFIX/before.txt`, then
+> `TRACE=$PWD/cache/scratch/PREFIX/before tools/t.sh PREFIX netlist.py`)? Do not re-review
+> the rest of the package. Budget: about 15 images. Do not edit files or run git commands
+> that change anything. Report under 250 words; if nothing is wrong, say "no findings".
+
+Then, for each finding of any round:
 
 1. Check it yourself in the photos (reviewers are wrong sometimes too). It is confirmed,
    refuted (say why, with evidence), or undecidable.
@@ -135,14 +164,14 @@ Then, for each finding:
 3. A finding that shows a *method* misleads (a trap) goes into the handoff as a proposed
    Re-read item, with the earlier blocks it may affect.
 
-Record each round in the notes' **Review** section: round number, date, what the
-reviewer was told to suspect, what it checked and at what zoom, each finding and its
-outcome. Ship the notes.
+Record each round in the notes' **Review** section: round number, full review or fix check,
+date, what the reviewer was told to suspect, what it checked and at what zoom, each finding and
+its outcome. Ship the notes.
 
 **Stop when a round reports no findings, or when every finding of the round was refuted
 with evidence.** Write that round as `Round N: no findings.` (the merge gate looks for
-those words). If round 5 still has confirmed findings, stop: push the branch, leave the
-claim, and report to the user. Do not merge.
+those words). If round 3 still has confirmed findings, the package is not ready: stop, push
+the branch, leave the claim, and report to the user. Do not merge.
 
 ## 7. Merge into main, through the gate
 

@@ -1267,3 +1267,18 @@ after, every transistor and connection identical, only names changed (86 nets).
 
 Branches in flight that use an old name fail `tools/mergecheck.py` until they run
 `tools/rename.py OLD NEW` after merging main (the former-names table has every pair).
+
+## 2026-11-17 16:17  The review step made proportionate; review cost tracked
+
+User: the review loop is a new requirement of `/trace6845`, "but maybe it's too slow and
+expensive". Changed: round 1 is a full review (as before, with a budget of about 40 images and
+text tools first); rounds 2 and 3 are fix checks, which a fresh agent does from the diff since
+the previous round and the junctions it touches (about 15 images); at most three rounds, not
+five; a package with confirmed errors after round 3 is not merged. `tools/costs.py` now marks
+review agents by their brief and records review cost per package; the dashboard shows it.
+
+Measured so far: no review agent has run on this machine. A first count that found five
+(02) was wrong: it took tracing agents' "check ... against the photo" for review wording.
+The reviews in the 2026-11-17 merges ran on dp111's machine and have no cost report. A
+tracing agent run costs about $18 API-equivalent here, which is the only guide to what a full
+review round may cost until `/trace6845` runs produce numbers.
