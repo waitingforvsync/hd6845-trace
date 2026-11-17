@@ -412,7 +412,7 @@ Views `m1.png` ... `m5.png` in `cache/scratch/tc1/`; text maps and strips.
 | Row | Route | Evidence |
 |---|---|---|
 | `tc1_p4308` (y 4428-4448) | the inverter's gate poly goes on south at x 6988-7006 to y 4448 and turns west along y 4428-4448, under the rail x 6858-6908, the metal of `tc1_m6817` (x 6788-6806) and the supply rail x 6688-6736, to x 6750 (drawn). **Seen further, outside this package:** it ends on a pad with a contact at (6620,4436) (dark ring 6600-6640 x 4415-4455 with a bright centre in both metal shots, green hole in the clean shot); the pad's metal goes south along x 6621 to (6622,5006) by the follower, into `fld`'s upper group | clean shot: salmon all along under the metals, over pink (field: no transistor under either rail; `tools/railprof.py` says the same under the rail); chip-2 stripped shot: orange in the open stretches (x 6910-6990, x 6610-6724). No ring on any metal that crosses it (the metal of `tc1_m6817` is bright over it at y 4434-4446) |
-| `tc1_x1_u` (y 4385-4405) | the thin metal x 6968 runs on south from the pad (6962,4268), jogs south-west at y 4376-4394 and ends on the **contact (6947,4396)** of a poly pad (6928-6966, 4380-4412); the pad's poly runs west along y 4385-4405 under the same three metals to x 6750 (drawn). **Seen further:** west under the ground rail x 6505-6560 (salmon there: not checked for a channel) to about x 6445, where a strip of the chip-2 stripped shot loses it | contact: ring with a bright centre in both metal shots (text map), green hole inside the salmon pad. The 20 px gap at x 6914-6930 between the row and the pad is orange in both metal shots (158/120/53 and 158/76/39) where the row between the two polys is bare ground (172/151/87, 157/125/68). The metal of `tc1_m6817` is bright over the row at y 4392-4401: no contact |
+| `tc1_x1_u` (y 4385-4405) | the thin metal x 6968 runs on south from the pad (6962,4268) to y 4404 (x 6964-6980 there), where a foot spreads west over a poly pad (6928-6966, 4380-4412) onto the **contact (6947,4396)**; the pad's poly runs west along y 4385-4405 under the same three metals to x 6750 (drawn). **Seen further:** west under the ground rail x 6505-6560 (salmon there: not checked for a channel) to about x 6445, where a strip of the chip-2 stripped shot loses it | contact: ring with a bright centre in both metal shots (text map), green hole inside the salmon pad. The 20 px gap at x 6914-6930 between the row and the pad is orange in both metal shots (158/120/53 and 158/76/39) where the row between the two polys is bare ground (172/151/87, 157/125/68). The metal of `tc1_m6817` is bright over the row at y 4392-4401: no contact |
 
 So the input of the inverter comes from the south, from the logic west of the selector
 (`fld`); and the net of the thin metal x 6968, which is `tc1_x1` if the `?P` holds, goes
@@ -730,6 +730,28 @@ that nothing drawn comes within 24 px of it and no contact lies under it, that t
 go on south from it at x 6790-6802, and that no net or transistor changed.
 
 Round 3: no findings.
+
+### Run 5's review
+
+**Round 1** (2026-11-17 10:52 -0600; full review of the piece at x 6750-7008, y 4298-4450: eight views at
+4-6.5x in two to four shots in `cache/scratch/tc1/review-7/`, text maps, the follower,
+`tools/railprof.py`, the extraction alone and with every file; told to suspect the vertical
+poly's continuity and its turn, the row-to-pad gap, the contact (6947,4396), contacts and
+channels under each of the three metals, and a third row).
+
+| Finding | Outcome |
+|---|---|
+| 1. The thin metal x 6968's south end is not a diagonal: the line runs straight on to y 4404 at x 6964-6980 and a foot spreads west over the pad | **Confirmed** (my text map: chip 1 bright at x 6974-6978 at y 4392-4400). Redrawn as the line to y 4404 and the foot (6938-6980, 4386-4406). Same connection |
+| 2. The rail x 6858-6908 widens west to about x 6836 from y 4438 south, over the lower row, with no contact | Not an error of the trace: the rail is drawn to y 4380 only and is listed as going on. Noted here for whoever draws it further |
+
+Checked and found correct: the vertical poly x 6988-7006 continuous from y 4320 to y 4448
+(orange in both metal shots) and turning west only; the contact (6947,4396) (ring and
+bright centre in both chips, green hole); the row-to-pad gap being poly in three shots; the
+pad's poly going nowhere else; no contact of either row to any of the three metals, none of
+the thin metal on the gate poly; no diffusion under or between the rows; no third row; the
+two nets separate in the extraction. Could not check: the thin metal x 6968 across
+y 4276-4298 (dark in both chips; unbroken is inferred); the supply-rail crossing other than
+by text map; anything west of x 6750.
 
 ## Not done
 
