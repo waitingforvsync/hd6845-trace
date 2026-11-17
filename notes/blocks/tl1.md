@@ -219,6 +219,11 @@ under R1, thin metal E's north arm and a wide metal x 2735-2785, no pad.
 
 ## Ambiguities
 
+- The wide NOR (`rcs_e4`): the diffusion's continuity across R1's west edge at x 2600 is
+  not seen directly (a dark line sits on the rail edge, as at every rail gate here); the
+  outlines continue across. If it were a break, the output contact would be cut off from
+  the load. Drawn firm; review round 1 could not decide it either.
+
 - **The load of `rcs_e4`'s gate**: its width (28 to 66) and the tie of its gate (see above).
 - **The joins across R1's west edge** (x 2600) in the wide NOR: as in `tla`.
 - **The dark dots on R1** at (2625,2855) and on the wide metal at (2765,2820), (2775,2905) in
@@ -268,3 +273,24 @@ under R1, thin metal E's north arm and a wide metal x 2735-2785, no pad.
 - The tie of the plate's tab in the two marked loads (2706-2754, 4287-4323) and (2712-2744, 4906-4960).
 
 ## Review
+
+Round 1 (full review, 2026-11-17 20:06 +0000, a fresh agent on claude-fable-5-2, at commit a3b1701). Told to
+suspect the nine parallel tracks west of x 2540 (piece ends, pads, a tap on a piece), the
+through-pad (2497,5238), the wide NOR's rail-edge joins, gates and load, the two cell
+copies, the rows y 2812 / 2857 / 2899 under R1, and `tl1_w3333`'s corners and long
+stretches. It checked all 24 pads (ring and green centre, 2.9x), every piece end with the
+follower in both chips, the through-pad at 5x, the NOR's gates and contacts, the L
+`tl1_w4678`, both copies by mosaic and a 4x overlay, the three rows in the clean shot, and
+`tl1_w3333`'s five corners at 5x with a scan of both long stretches every 4 px.
+No finding changes a connection. Findings, each checked by the tracer:
+1. The NOR copy's VCC box is a box of its own below tla's (two edges, no tan between):
+   redrawn from y 3626; still `vcc` through its own contact.
+2. The inverter copy's VCC box is one diffusion about y 4188-4338 with three contact rings
+   (confirmed on `review-1/invvcc.png`): the lower part and two contacts added.
+3. The wide NOR's gate polys run on east to about x 2680: drawn; W is somewhat above 114.
+Also: `tl1_w3333`'s three `?P` stretches were read end to end and are now firm.
+The extraction's transistor list is unchanged by these edits.
+Could not be checked: the diffusion's continuity across R1's west edge (x 2600) in the
+wide NOR (the dark line there could be the etch boundary; if it were a break the output
+contact would be cut off from the load; drawn without `?`: see Ambiguities), the load ties
+(`?`), the far ends of the port rows.
