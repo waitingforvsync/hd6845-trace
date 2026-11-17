@@ -136,6 +136,15 @@ counter, and whatever the 4-bit counter `c4l` is compared with.
 | In shift mode the R9 comparator does not compare R9's bit 0; the comparator's input is switched to another signal. | Firm that it is switched; what it is switched to is marked and its source open |
 | Where the field (odd/even) signal is made. | **Open**: expected in the gate column west of the nine-gate island, which is being traced |
 
+## The data pins (D0-D7) as outputs
+
+| Fact | Mark |
+|---|---|
+| Each data pin has a push-pull driver whose two gates are made by two NOR gates in the pad cell: `d#_pu` = NOR(`d_hiz`, `d#_out_n`), `d#_pd` = NOR(`d_hiz`, `d#_pu`) (`notes/blocks/dpad.md`). While `d_hiz` is high both gates are low and the pin floats; while it is low the pin is the inverse of `d#_out_n`. | Firm (all sixteen equations) |
+| `d_hiz` is one line common to the eight pad cells. | Firm (drawn end to end) |
+| What drives `d_hiz` and the eight `d#_out_n` lines (the bus-interface column, `dbus`), and so when the chip drives the bus and with what. | Open |
+| The pull-up fingers are ordinary transistors with their drain on VCC (source followers), so a driven high level is below VCC by a threshold. | Firm for the connection; that they are enhancement devices is not visible in the photos |
+
 ## Not established at all
 
 So that silence is not read as knowledge:
