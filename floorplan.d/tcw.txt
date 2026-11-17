@@ -2,3 +2,4 @@
 6380,3660:6760,4210    logic   latch gated by tcw_a (cross-coupled pair) | fld_a_in = NOT((a AND b) OR q), q = NOT(fld_a_in OR (a AND c)); and the inverter fld_y_b = NOT c
 6380,4210:6760,4450    logic   inverter driving the row tc1_x1_u | NOT of the bus metal tcw_m6362c; its output poly runs east into the island's logic
 ?6380,2500:6760,3660   logic   gate column west of the island (pull-downs traced, loads not) | about twelve gates under one ground rail
+6380,3200:6760,3460    logic   AND-OR-invert tcw_o3240 | NOT(m6320 AND o3550 AND (m6362a OR m6404)): three bus metals, the inverter below it and the common enable; where its output goes is not traced

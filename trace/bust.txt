@@ -100,7 +100,6 @@ C 15016,5630
 # the other east ends are left as ports: c5 (13715,4850), a0 (15280,5068), lw1 (15584,5110),
 # lw2 (16146,5153), a2 (16926,5196); notes/blocks/bust.md
 # amr's outer lines (inputs into its comparator; trace/amr.txt) are these lines: aliases
-@alias c4l1 amr_ob_c1
 @alias c4l2 amr_ob_c2
 
 
@@ -171,8 +170,8 @@ M 16926,5625 y6744 x16839 y12370 w=12
 # going east, by nested L's whose vertical legs are at x 8337, 8297, 8262, 8230 (3x in both
 # stripped shots, cache/scratch/bust/stair2.png; stair.png at 2.1x for the rows west of
 # x 8200). So each west pad feeds the cdp1 line one track below its own row:
-#   row y 4500 (pad about (7860,4500), its metal not followed) -> cdp1_l4544 (amr c0)
-#   pad (7810,4547) -> cdp1_l4588 (amr c1)
+#   row y 4500 (pad about (7860,4500), its metal not followed) -> c4l0 (amr c0)
+#   pad (7810,4547) -> c4l1 (amr c1)
 #   pad (7848,4592) -> cdp1_l4632 (amr c2)
 #   pad (7830,4635) -> cdp1_l4676 (amr c3)
 #   pad (7855,4676) -> turns south near x 8190 (r9m's r9m_l1w, not into cdp1)
@@ -202,7 +201,7 @@ M 7842,4637 x7618 y4704 x6921 w=12
 #          i.e. db_b4 (data bit 4): ring in both metal shots, contact on a poly pad
 #          in the clean shot (4x, c0e.png)
 #   outer: north along x 11786 to y 4690, 45 degrees north-west to (11640,4544), west as
-#          cdp1_l4544 to cdp1's edge: one poly, kept apart from rab's bit-0 pad by a dark
+#          c4l0 to cdp1's edge: one poly, kept apart from rab's bit-0 pad by a dark
 #          edge (5x, c0c.png; 2.2x c0u.png)
 P 11506,5568:11540,5602
 C 11523,5585

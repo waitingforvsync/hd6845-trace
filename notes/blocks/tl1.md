@@ -92,7 +92,7 @@ kind (wide diffusions under R1 with several gates across), traced as the cells `
 |---|---|
 | 2110, 2153 | `ma1_drv_in`, `ma0_drv_in` (`mal`), full height |
 | 2199 | **north piece `tl1_w3333`**: from a pad (2563,2550) west along y 2553, corner (2199,2556), south to a contact (2197,3333). South of y 3371: `tla_w3376` (`tla`) |
-| 2239 | `tla_w3461` (`tla`), y 3449-5646 |
+| 2239 | `amr_eq_r3` (`tla`), y 3449-5646 |
 | 2283 | y 2721-3126 and y 3188-3520 (`tla`); **y 3622-4126 `tl1_w3636`**; **y 4230-4474 `tl1_w4243`**; south of y 4914 `ma4_drv_in` (`mal`) |
 | 2326 | `rcs_thin_e` y 2754-3347, `tla_w3417` y 3404-5551 (`tla`); **from a pad (2326,5978) south out of the strip: `tl1_w5978`**. The poly that lies under it y 4533-4988 is **`tl1_w3333`** (below) |
 | 2370 | **y 2843-3863 `tl1_w2857`**; **y 3925-4300 `tl1_w4287`**; **y 4925-5459 and east to (2521,5459) `tl1_w4937`**; from (2365,5847) south it is `ck_out`'s trunk (`tla`), with **a second contact (2372,6061)** found here |

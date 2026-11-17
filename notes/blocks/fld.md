@@ -196,7 +196,7 @@ between; two contact pits to the rail at y 4078 and 4100). From the extraction:
     fld_a_in : pulled to the rail through two gates in series, tcw_a AND tcw_b
     fld_y_b  : pulled to the rail through one gate, tcw_c
 
-With loads (not traced) and the rail being VSS: `fld_a_in` = NAND(`tcw_a`, `tcw_b`),
+With loads (traced by `tcw`, run 2, 2026-11-17, in `trace/tcw.txt`; `fld_a_in` has a third pull-down there, gate `tcw_o3820`) and the rail being VSS: `fld_a_in` = NAND(`tcw_a`, `tcw_b`),
 `fld_y_b` = NOT `tcw_c`. The three inputs arrive on pads with thin metals from the
 north: `tcw_a` pad (6400,4005), metal x 6403 to y 3786, and a poly on west along y 4000;
 `tcw_b` pad (6455,4045), metal x 6465 (not followed); `tcw_c` pad (6318,4135), metal
