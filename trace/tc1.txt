@@ -1038,7 +1038,7 @@ C 6888,2885 s=24x26                # ring 6876-6901 x 2872-2898 in the metal sho
 D 6873,2905:6918,2964              # channel under the gate and the output node below it
 D 6803,2944:6940,2960              # the output band: west across the gap to the region (acid 167/141 at x 6845), east across the gap (acid 172/143 at x 6921)
 D 6934,2942:6974,2969              # its east end under the box (pale protected cells); the box's bottom outline is at y 2970-2974
-D 6803,2896:6832,2964              # region under tc1_m6817, with its stub north to y 2896. The dark spot (6803-6815, 2942-2954) in the clean shot is not a contact: both metal shots are bright across it
+D 6803,2896:6832,2964              # region under tc1_m6817, with its stub north to y 2896. The dark spot about 12 px across at (6811,2948) in the clean shot is not a contact: both metal shots are bright across it
 D 6780,2896:6810,2912              # the stub's tab west, under the gate-tie box
 D 6732,2940:6808,2968              # the load's strip (edge lines y 2940 and y 2968 across the block)
 D 6688,2905:6738,3000              # the supply rail's contact region

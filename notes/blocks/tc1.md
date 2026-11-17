@@ -720,7 +720,7 @@ with its command.
 | Load | supply region (6688-6738, 2905-3000) with contacts (6710,2939) and (6710,2979); a strip y 2940-2968 east under a poly block (6748-6799, 2922-2982) to the region | pits in the clean shot, rings in the metal shot; block salmon from x 6757 in the clean shot and orange from x 6748 in both metal shots (the review), brighter over the strip, edge lines at y 2940 and y 2968 (columns x 6770, x 6790) |
 | Gate tie, **`?`** | a box (6778-6806, 2893-2914) on a tab west of the region's stub, directly above the block's top | pale cell (6780-6797, 2897-2910) with nested outlines; a dark line y 2912-2920 lies between box and block (`tie.png`), so the stem is `?P` and the box `?B`: joined by the build of every load here. Under the thin metal of `tc1_p3698` the chip-2 metal shot is dark over the box (trap 22): no contact drawn |
 
-**Not a contact:** a dark spot (6803-6815, 2942-2954) in the clean shot on the region under
+**Not a contact:** a dark spot about 12 px across at (6811,2948) (the two reviews measured 6803-6815 x 2942-2954 and 6807-6818 x 2943-2952) in the clean shot on the region under
 `tc1_m6817`: both metal shots are bright across it (B-F of 16), no ring. A red dot
 (6852-6856, 2830-2836) in the clean shot where the top arm crosses the gap between
 `tc1_m6817`'s pad and the rail: the gap's bar over poly (trap 2), no hole.
@@ -1352,7 +1352,7 @@ Round 3: no findings.
 
 ### Run 10's review
 
-**Round 1** (2026-11-17 14:20 -0600; full review of cell D and the route of `tc1_m7056`,
+**Round 1** (2026-11-17 14:09 -0600; full review of cell D and the route of `tc1_m7056`,
 x 6680-8350, y 2570-2995, at commit `1fea1ff`, by a fresh agent: sixteen views at 4-6x in
 `cache/scratch/tc1/review-17/`, text maps, profiles, the followers, the extraction). Told to
 suspect: the three joins J4-J6 at the junction; the band's continuity across both gaps; the
@@ -1392,6 +1392,29 @@ one net in two and takes `tc1_m6817` out of `tc1_o3740`'s equation; against main
 `tc1_o3095` = NOR(`tc1_m7100`, `tc1_o2950`, `tc1_x1`).
 
 Round 1: no reviewer finding changes a connection; join J5 taken out by the tracer, which does. Fix check next.
+
+**Round 2** (2026-11-17 14:12 -0600; fix check of the changes since `1fea1ff`, at `f8a2994`,
+by a fresh agent: five views in `cache/scratch/tc1/review-18/`, column and row profiles, the
+diff, `tools/sameconn.py` both ways). Join J5's removal is right: the patch is 6 px south of
+the band's end and of the box and 22 px west of `tc1_p3051`'s poly, the contact's box clears
+band and box by 2 px and the extraction keeps them apart; the contact sits on the thin metal
+(bright centre (6944-6950, 2976-2980) in both metal shots, green hole (6944-6962, 2974-2982));
+a dark line y 2970-2976 separates the hole from the box's interior in both stripped shots, so
+the photos do not show the join. Both `sameconn.py 1fea1ff` runs list 19 differences, all the
+intended ones, nothing else moved. The wider load block is right (orange at x 6748-6756 on
+rows 2930, 2950, 2975 in both metal shots; 10 px clear of the supply contact region, 46 px of
+the next cell's block). The two vertical metals at x 7308-7320 and x 7352-7364 pass over
+without contact.
+
+One finding, a comment only: the dark spot on the region measures 6807-6818 x 2943-2952, not
+the 6803-6815 x 2942-2954 of round 1; not a contact either way. Geometry only: the comment and
+the notes now give its centre (6811,2948) and both measurements. Connections before and after
+that edit:
+
+    tools/t.sh tc1 sameconn.py f8a2994             -> connections identical
+    .venv/bin/python tools/sameconn.py f8a2994     -> connections identical
+
+Round 2: no findings that change a connection.
 
 ## Not done
 
