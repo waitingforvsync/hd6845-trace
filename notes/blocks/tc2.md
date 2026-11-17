@@ -31,7 +31,9 @@ adds what they left. Traced and extracted so far: 3 transistors, 1 new net, 1 eq
 
 - The VCC rail through the crossing field, between `tcw`'s piece (to y 4455) and `fld`'s (from
   y 4990): `fld`'s rail, and with it the loads of `tc1_g`, `tc1_i` and `tc2_o5175`, is now
-  joined to a labelled VCC rail by drawn metal (it was "VCC by the layout rule").
+  joined by drawn metal to `tcw`'s rail of that name. The metal join is real; the supply
+  identity is still by the layout rule for both rails, because `tcw`'s labels are that rule
+  too (AMB-014; review round 1).
 
 Not done: see the end.
 
@@ -258,3 +260,24 @@ None in piece 1.
 - The independent review of pieces 1 to 3 (the Review section below is empty).
 
 ## Review
+
+Round 1 (full review, 2026-11-17 23:05 +0000, a fresh agent on claude-fable-5-2, at commit 5bed081). Told to
+suspect the four adjacent crossing-field rows y 4482, 4786, 4829, 4873 (a one-track step
+drawn straight; pads on the wrong row), the diagonal hop and vertical of `tc1_x1`, the two
+north-edge joins onto tc1's lines, the no-contact calls, `tc1_m6817`'s long metal, the
+NOR's gates and its load tie, `fld_b_in`'s corner, the rails, and widths, ends and undrawn
+features. It tracked each row's edge pair every 12 px in the chip-2 stripped shot and every
+18 px in the clean shot (within 2 px from x 6512 to 6908, no step under either rail or the
+wide metals; all eight pads on their own rows, 3-4.5x), checked the north edge in four
+shots, the diagonal and corner, the no-contact spots at 5.4x with text maps, the long metal
+with the follower, and the NOR with profiles (strip to both VSS boxes, gate identities, the
+tie's diffusion by a chip-2 column profile).
+No finding in the trace. Two points in the notes, fixed: the supply identity of the two
+rails was overstated (the metal joins are real; the identity is by the layout rule, as for
+`tcw`); an unrecorded follower candidate at (6722,4852) under the VCC rail is not a contact
+(dark notch in chip 2 only; chip 1 whole; no ring, no hole; 5x). Outside the package:
+`bust`'s `?P` pads on rows y 4657 and y 4700 sit about 30 px off the photographed pads (in
+the handoff).
+Not checked: west of x 6400; the x 6364 stretch above 1.95x; the tie's diffusion in chip 1.
+
+Round 1: no findings.
