@@ -206,4 +206,20 @@ N M 17834,13050 d4_in_u
 N M 17834,14650 d5_in_u
 N M 17835,16250 d6_in_u
 
+# ---- D0's out_n line: poly from the cell west under the rail and the d_hiz metal (no
+# contacts) to a contact, then metal down the channel (dbus: to 17597,8097; not drawn)
+P 17583,7480:17820,7505
+C 17597,7492 s=24x26
+M 17599,7478 y7570 w=20
+N M 17599,7550 d0_out_n
+
+# ---- d_hiz: one line for all eight cells. Metal down the channel from D0's contact,
+# a contact in each cell (in the cell), a poly cross-under below the wide horizontal
+# metal at y 18175-18250, metal again to D7's contact. follow.py: no break from 7382
+# to 18143; cross-under seen in metal, acid1b and acid (cache/scratch/dpad/px_d7.png).
+M 17641,7374 y18155 w=20
+C 17643,18143 s=24x26
+P 17633,18128:17655,18304
+C 17643,18290 s=24x26
+M 17643,18278 y18850 w=20
 N P 17700,7386 d_hiz

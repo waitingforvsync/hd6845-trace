@@ -76,6 +76,12 @@ Central datapath (registers identified by their write strobes, `notes/blocks/wrs
 | `*_drv_in` | the signal from the core that an output pad cell receives (the pad is its inverse) |
 | `*_pu`, `*_pd` | inside an output pad cell: gate of the pull-up fingers (first inverter) and of the pull-down fingers (second inverter) |
 | `d#_in` | data pin D# behind its protection, at its input buffer |
+| `d#` | data pins D0-D7 (pad node: the metal of the output fingers and the neck up to the bond pad). The series strip from the bond pad to the protection node `d#_in` is not drawn, so the two are separate nets in the extraction (`notes/blocks/dpad.md`) |
+| `d#_in_u` | the protection node of data pads 2-6 (node diffusion and its metal column): `d#_in` once its line to the input buffer in the column is drawn |
+| `d_hiz` | output disable of the data pins, one line common to the eight pad cells (metal x 17631-17651, y 7374-18850, a contact in each cell): high turns off both output gates of every data pad. Driven from the bus-interface column; the driver is not traced. The "P_x" of the first notes |
+| `d#_out_n` | the per-bit data line into data pad cell #, from the bus-interface column: while `d_hiz` is low the pin D# is its inverse. The "P_y" of the first notes |
+| `d#_pu`, `d#_pd` | inside data pad cell #: gate of the pull-up fingers, NOR(`d_hiz`, `d#_out_n`), and gate of the pull-down fingers, NOR(`d_hiz`, `d#_pu`) |
+| `d#_prot_g` | poly frame of data pad #'s input protection; its left arm is the gate of the clamp between the node `d#_in` and the VSS rail. What the frame is tied to is not established (the node through the comb, as assumed for the bottom input pads in AMB-005, or VSS through a poly strip contacted to the rail above the cell) |
 | `d#_a`, `d#_b`, `d#_c`, `d#_d` | the four inverters of data input buffer #: `_a`, `_c` inverted, `_b`, `_d` true |
 | `dbus_cap#b` | plate of a capacitor beside the D0 input buffer (purpose not established) |
 
