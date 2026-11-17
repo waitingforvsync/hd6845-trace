@@ -103,3 +103,42 @@ D 6636,5170:6712,5197
 P 6650,5152:6702,5242
 P 6622,5214:6652,5240
 B 6610,5208:6645,5245
+
+# ===== Piece 2 (2026-11-17): the two remaining rows of the crossing field.
+#
+# --- ras_o0_alt2: ras's metal (from the contact (7205,5000) below S1) ends at (6922,4787) on a
+#     pad with a contact (6928,4786) (pads2.png 3.5x: ring and bright centre in both metal
+#     shots, green hole in the clean shot). Poly row y 4778-4794 west under the rails (rows2.png
+#     2.05x three shots; profile row 4786: poly throughout, no widening) to the pad (6447,4786);
+#     metal y 4778-4798 west past x 6400 (follower: west to x 6061, south, end (6059,4876); not
+#     looked at).
+P 6911,4770:6950,4802
+C 6928,4786
+P 6928,4786 x6452 w=16
+P 6437,4769:6467,4801
+C 6447,4786
+M 6455,4788 x6400 w=20
+
+# --- tc1_m6817: tc1's thin metal ends in a foot (6788-6826, 4366-4380), from which the metal
+#     goes on south at x 6789-6805 (m6817.png 4.6x; text map 6770 4405 6825 4470: over tc1_p4308's
+#     row y 4438 the metal is whole in both chips, bars only at the row's edges, no hole in the
+#     clean shot: no contact; tc2_runs.py col 6793 4380 4815: no run over 21 px in chip 2) to the
+#     pad (6796,4829). Poly row y 4821-4837 west to the pad (6492,4828). Metal west along y 4834,
+#     south along x 6364 (40 px outside this package's region, drawn so that the line is one
+#     piece), east along y 5525, south along x 6494, east along y 5902, south along x 6536 to the
+#     pad (6533,6152) (corners_metal.png, corners_acid1b.png 4x: five plain corners, no pad at
+#     any; r2end.png 4.2x). Two blobs beside the line in the clean shot, (6497,5615) and
+#     (6480,5925), are residue on chip 1 (blobs_acid.png, blobs_m1.png: nothing in chip 2's
+#     stripped shot, chip 1's metal whole). From the pad a poly x 6524-6544 south under the supply
+#     metals, no pad, past y 6400 (r2south.png 4.1x).
+M 6797,4368 y4832 w=16
+P 6781,4808:6819,4848
+C 6796,4829
+P 6796,4829 x6495 w=16
+P 6477,4811:6509,4846
+C 6492,4828
+M 6500,4832 6364,4834 6364,5525 6494,5525 6494,5902 6536,5902 6536,6158 w=18
+P 6515,6134:6551,6170
+C 6533,6152
+P 6534,6152 y6400 w=20
+N P 6600,4829 tc1_m6817

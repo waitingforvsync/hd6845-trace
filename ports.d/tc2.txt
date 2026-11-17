@@ -7,3 +7,6 @@ tc1_x1       M  7048-7068,4450   in   from tc1
 tc1_p4308    M  6612-6634,4450   ?    tc1's pad (6620,4436) is 14 px north of the edge
 fld_b_in     P  6560,5337-5356   in   fld's row y 5345, where this package's drawing meets fld's
 vss          M  6537-6583,4450   -    tcw's ground rail
+ras_o0_alt2  M  6400,4778-4798   ?    row y 4786 from ras's pad (6928,4786); the metal goes on west (follower: end (6059,4876))
+tc1_m6817    M  6789-6805,4450   out  to tc1's foot (6797,4372), 70 px north of the edge; the gate of tc1's cell D
+tc1_m6817    P  6524-6544,6400   in   poly from the pad (6533,6152) going on south
