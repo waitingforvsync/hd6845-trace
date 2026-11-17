@@ -253,3 +253,34 @@ N P 2300,5935 tl1_w5936
 P 2482,6223:2520,6253
 C 2500,6239
 P 2514,6228:2545,6246
+
+# ====================================================================
+# tl1_w3333: a long wire down the west side, from the top of the strip to the small cluster.
+#   - metal: from a pad with a contact (2563,2550) west along y 2553 to a corner (2199,2556)
+#     and south at x 2199 to a contact (2197,3333) (follow.py: one piece, 836 + 362 px;
+#     ends on w1.png 3.1x, w2.png 2.4x). The top pad's poly goes on east under R1 (seen to
+#     x 2637; drawn to x 2640).
+#   - poly from the pad (2197,3333): the pad is a bulge on a vertical poly x 2170-2187 whose
+#     top end is a free stub at y 3282; it runs south to y 4550 (mosaic v1.png, 1.9x: alone in
+#     bare field between the tracks x 2153 and x 2199), east along y 4533-4550, south under
+#     the metal x 2326 (no pad, no ring: tla's notes, and a4.png, a5.png), west along
+#     y 4972-4988, south at x 2134-2149 to y 5810 (v1.png), east along y 5793-5810 into the
+#     small cluster (r1.png, 1.8x; drawn to x 2545). The five corners: r2.png (2.3x).
+#   The three long stretches seen only at 1.8-1.9x are drawn uncertain.
+M 2572,2553 x2198 y3342
+P 2545,2535:2582,2566
+C 2563,2550
+P 2575,2543:2640,2560
+P 2170,3282:2187,3360
+P 2180,3318:2215,3350
+C 2197,3333
+N P 2178,3300 tl1_w3333
+?P 2170,3355:2187,4535
+P 2170,4530:2187,4550
+P 2170,4533:2333,4550
+P 2317,4533:2333,4988
+P 2134,4972:2333,4988
+P 2134,4972:2150,5000
+?P 2134,4995:2150,5795
+P 2134,5790:2150,5810
+?P 2134,5793:2545,5810

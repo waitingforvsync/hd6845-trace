@@ -8,7 +8,7 @@ Package `tl1` (part 1 of 6 of the top-left logic). Trace: `trace/tl1.txt`. Views
 ## Status
 
 2026-11-17 19:44 +0000. **Partial.** Three gates (8 transistors) and the vertical metals of the tracks
-x 2283, 2326, 2370, 2414, 2457, 2500 with their pads and rows (y 2790-5480 and y 5900-6350) are traced and extract with 0 errors and
+x 2283, 2326, 2370, 2414, 2457, 2500 with their pads and rows (y 2790-5480 and y 5900-6350) and one long wire down the west side (`tl1_w3333`) are traced and extract with 0 errors and
 0 warnings in the full extraction. Main result: **the driver of `rcs_e4` is found**, a wide
 two-input NOR in the west column at y 4778-5000. Five units of the west column (y 3740-4215,
 y 4345-4778), the small cluster below (y 5650-6350), the north-west corner (y 2500-2790)
@@ -59,10 +59,10 @@ kind (wide diffusions under R1 with several gates across).
 | Track x | Pieces |
 |---|---|
 | 2110, 2153 | `ma1_drv_in`, `ma0_drv_in` (`mal`), full height |
-| 2199 | north piece: from the east along y 2557, corner (2199,2557), south to about y 3308-3336 (contact candidate (2199,3336)): **not traced**. South of y 3371: `tla_w3376` (`tla`) |
+| 2199 | **north piece `tl1_w3333`**: from a pad (2563,2550) west along y 2553, corner (2199,2556), south to a contact (2197,3333). South of y 3371: `tla_w3376` (`tla`) |
 | 2239 | `tla_w3461` (`tla`), y 3449-5646 |
 | 2283 | y 2721-3126 and y 3188-3520 (`tla`); **y 3622-4126 `tl1_w3636`**; **y 4230-4474 `tl1_w4243`**; south of y 4914 `ma4_drv_in` (`mal`) |
-| 2326 | `rcs_thin_e` y 2754-3347, `tla_w3417` y 3404-5551 (`tla`); **from a pad (2326,5978) south out of the strip: `tl1_w5978`**. A poly of another net lies under it y 4540-4985 (from the west along y 4547, leaves west along y 4980; seen again at 2.05x, `a4.png`, `a5.png`): not traced |
+| 2326 | `rcs_thin_e` y 2754-3347, `tla_w3417` y 3404-5551 (`tla`); **from a pad (2326,5978) south out of the strip: `tl1_w5978`**. The poly that lies under it y 4533-4988 is **`tl1_w3333`** (below) |
 | 2370 | **y 2843-3863 `tl1_w2857`**; **y 3925-4300 `tl1_w4287`**; **y 4925-5459 and east to (2521,5459) `tl1_w4937`**; from (2365,5847) south it is `ck_out`'s trunk (`tla`), with **a second contact (2372,6061)** found here |
 | 2414 | `rcs_c1` y 2972-5082, `rcs_in2` y 5182-5411 (`tla`); **y 6010-6207 `tl1_w6022`**; `lc_step` from (2412,6278) (`ur`) |
 | 2457 | **y 2800-3690 `tl1_w3678`**; **y 4012-5372 and east to (2521,5372) `tl1_w4025`**; `clk_tl` from (2458,5587) (`tla`) |
@@ -174,6 +174,26 @@ cluster, which is not traced; rows are drawn to x 2545.
   under all the tracks to a corner at about (2096,5935) and turns north under the edge of
   MA1's metal (`s2.png`; not followed); the bottom pad's row runs east along y 6228-6246.
 
+### `tl1_w3333`: a long wire from the top of the strip to the small cluster (traced, part `?`)
+
+One net, about 4,700 px, no gate on it inside what is traced:
+
+1. a pad with a contact (2563,2550), whose poly goes on **east** under R1 along y 2543-2560
+   (seen to x 2637, `w2.png`; drawn to x 2640);
+2. metal west along y 2553 to a corner (2199,2556) and south at x 2199 to a contact
+   (2197,3333) (`tools/follow.py`: one piece; overlay `o4.png`);
+3. that contact's pad is a bulge on a vertical poly x 2170-2187 (free stub above it to y 3282,
+   `w1.png` 3.1x, `r2.png`), which runs south to y 4550, east along y 4533-4550, **south under
+   the metal x 2326** (the "poly of another net" of `tla`'s notes: no pad, no ring), west along
+   y 4972-4988, south at x 2134-2149 to y 5810, and east along y 5793-5810 into the small
+   cluster (drawn to x 2545; `r1.png`).
+
+Evidence: the five corners at 2.3x (`r2.png`), the horizontal pieces and the piece under the
+metal at 2.05-2.15x (`a4`, `a5`, `s3`, overlay `o5.png`). The three long stretches (x 2170-2187
+y 3355-4535; x 2134-2150 y 4995-5795; the row y 5793-5810) were seen only in a 1.9x mosaic
+(`v1.png`) and at 1.8x: they are alone in bare field, with nothing beside them to step onto,
+but they are drawn `?P`, so the wire as one net is **marked**.
+
 ## Ports
 
 | Name | Layer | Where it crosses | Direction | What |
@@ -188,6 +208,7 @@ cluster, which is not traced; rows are drawn to x 2545.
 | `tl1_w3636` | P | (2545,3894), (2545,4113) | driven here | into the units at y 3740 and y 4000 |
 | `tl1_w4243` | P | (2545,4461) | driven here | into the unit at y 4340 |
 | `tl1_w4287` | P | (2545,3939) | from the unit at y 3740-3960 (believed) | the inverter's input |
+| `tl1_w3333` | P | (2640,2551) east; (2545,5801) east | not known | long wire down the west side (marked) |
 | `ck_out` | P | (2545,6063) | from `tla`'s trunk | a gate row into the small cluster |
 | `tl1_w5978` | P, M | (2545,5978); (2326,6350) south | not known | row into the small cluster; metal x 2326 on south |
 | `tl1_w6022` | P | (2545,6022), (2545,6195) | not known | joins two rows of the small cluster |
@@ -235,13 +256,11 @@ under R1, thin metal E's north arm and a wide metal x 2735-2785, no pad.
 - The metal x 2735-2765 from (2742,3893) to (2745,4090); thin metal W's contacts.
 - The far ends of the rows `tl1_w4937`, `tl1_w4025` (east of x 2817, past x 3400) and of
   `tl1_w2857`, `tl1_w3678`, `tl1_w3594` (east of x 2817 along y 2812-2899).
-- The metal x 2199's north piece (from the east along y 2553-2557 to a corner (2199,2556),
-  south to y 3338: follow.py; its end at (2196,3338) not looked at).
-- The poly under the metal x 2326, y 4540-4985 (`s3.png`, 2.15x): at the top it runs west
-  along y 4533-4550 to a corner at about x 2165-2180 and north; at the bottom west along
-  y 4972-4988 to about x 2131 and (not clear) south. Both ends leave among the pad-ring
-  metals. Likewise `tl1_w5936`'s poly north of (2096,5925), and `tl1_w5978`'s metal south
-  of y 6350.
+- `tl1_w3333`: its three `?P` stretches at 4x; its ends (east of (2640,2551) under R1; east
+  of (2545,5801) in the small cluster).
+- `tl1_w5936`'s poly north of (2096,5925), `tl1_w5978`'s metal south of y 6350. A second
+  vertical poly x 2137-2147, y 3192-4205 (free ends at both? `v1.png`, 1.9x) between MA1's
+  and MA0's metals: not looked at.
 - North of y 2790 and the small cluster south of y 5640: surveyed at low zoom only.
 - The tie of the plate's tab in the two marked loads (2706-2754, 4287-4323) and (2712-2744, 4906-4960).
 

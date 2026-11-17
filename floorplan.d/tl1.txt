@@ -6,6 +6,8 @@
 2540,4345:2835,4778   ?logic  west column, three units (untraced) | y 4340-4470, y 4480-4650, y 4650-4800; the last is where rcs_e4's first gate (tl1_w4678) comes from
 2260,2790:2540,5480   route   vertical metals west of the first cluster | tracks x 2283, 2370, 2457, 2500 (43 px pitch): pieces joining pads of poly rows that run east into the west column, and to rows under the foot (y 5372, y 5459)
 2330,2795:2817,2915   route   three poly rows above the cluster | y 2812, 2857, 2899: from the top pads of the metals x 2457, 2370, 2500 east under R1 and out of the strip
-2100,2500:2540,2790   ?route  north-west corner (untraced) | the MA0/MA1 metals, the metal x 2199 turning east at y 2557, nested poly L's going north
+2125,2535:2600,2570   route   tl1_w3333, metal along the top | from a pad (2563,2550) west and down x 2199 to a contact (2197,3333)
+2125,3280:2340,5815   route   tl1_w3333, poly down the west side | from the contact (2197,3333) south, round under the metal x 2326, south again and east along y 5800 into the small cluster
+2380,2570:2540,2790   ?route  nested poly L's (untraced) | three polys from the north turning east along y 2590-2630
 2100,5900:2545,6350   route   tracks beside the small cluster | rows into the small cluster from the metals x 2326, 2414, 2500 and a second ck_out contact (2372,6061); one row comes from the pad-ring side along y 5935
 2545,5650:2817,6350   ?logic  small cluster below the step logic, west half (untraced) | units at y 5690-5790, 5850-5980, 6000-6130, 6170-6330
