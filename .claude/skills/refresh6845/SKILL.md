@@ -146,7 +146,7 @@ Commit and push: `git add notes/operation.md && git commit -m "Refresh: operatio
 `python3 tools/costs.py` updates `costs/<your git name>.json` for the dashboard (numbers only).
 
 ```
-.venv/bin/python tools/build.py
+HD_COORD=1 .venv/bin/python tools/build.py
 ```
 
 It must report 0 errors, 0 warnings and 0 names outside the glossary. Look at the
