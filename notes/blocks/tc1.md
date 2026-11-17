@@ -264,9 +264,9 @@ because of what follows.
 **What else is on that pad** (found by review round 2, then drawn; views `h1.png` ...
 `h5.png`, class map `h4.png`). A diffusion strip y 4270-4293 runs from the pad's west edge
 west under the rail to the diffusion under the thin metal x 6817. Under the rail the strip
-is one side of a pull-down: gate = a poly along y 4298-4320 that comes from the east
-(`tc1_p4308`; salmon under the rail at x 6865-6925, on east past x 6995: not followed),
-other side a diffusion (6862-6918, 4322-4368) with a **rail contact (6888,4338)** (a ring
+is one side of a pull-down: gate = a poly along y 4298-4320 (`tc1_p4308`; salmon under the
+rail at x 6878-6912) that turns south at x 6988-7002 (seen to y 4382: not followed),
+other side a diffusion (6877-6914, 4322-4368) with a **rail contact (6888,4338)** (a ring
 6870-6915 x 4320-4365 in both metal shots, a pit in the clean shot). So, as extracted:
 
     tc1_x1 = NOR(ras_o0_sel1, tc1_p4308)        (through ?P, ?B, ?D: see Ambiguity 17)
@@ -309,7 +309,7 @@ and `fld` make the same assumption for the same two rails, AMB-014).
 plus north arm), 51/18 at the west arm, 42/19 on the east column; `tc1_x1` 148/24 (upper
 U), 128/23 (lower U under the rail, the leg now a gate on its west side too), 96/27 (east
 leg and bar), 40/22 (the foot on the east column), 22/18 (the strip over the island's neck,
-`?D`); load 60/37; `tc1_p4308`'s pull-down 56/22. The north arm's and
+`?D`); load 60/37; `tc1_p4308`'s pull-down 37/22. The north arm's and
 the strip's shares rest on `?D` items; the connections do not depend on them.
 
 **How each join was decided.**
@@ -425,8 +425,8 @@ Run 3's ports (the driver; region edges as drawn):
 | `tc1_x1` | M | x 7047-7061, y 4060, going north | in | the channel metal x 7053 runs on north of the driver's contact; the follower gives its end at (7054,3134) (run 2 saw a contact (7056,3138) there) and candidates at (7058,3745), (7057,3717): not looked at |
 | `tc1_m6817` | M | x 6811-6823, y 3905 and y 4228 | ? | thin metal over the driver's west column, no contact drawn (Ambiguity 12). Follower (started either side of the strip, where it stops): from (6822,3496) to (6809,4379), candidates (6818,3883), (6813,3754), (6818,4309); the two at (6820,3977) and (6817,4211) are not contacts (text maps: unbroken metal, no ring) |
 | `tc1_x1_u` (alias of `tc1_x1`) | M | x 6962-6974, y 3905 and y 4300 | ? | the thin metal x 6968: contact on the pad (6962,4268) at the end of `tc1_x1`'s branch; no contact to the driver's diffusion (Ambiguity 13). Follower: from (6966,3806) to (6975,4402) when started either side of the box at y 4033-4068, where it stops; candidates (6970,3947), (6972,4218) are not contacts (review round 1)
-| `tc1_p4308` | P | x 6995, y 4298-4320, going east | in (a gate here) | gate of the pull-down on the strip; where it comes from is not followed |
-| `vss` | M | rail x 6861-6932 at y 3905 and y 4380 | | goes on both ways, not followed |
+| `tc1_p4308` | P | x 6988-7002, y 4384, going south | in (a gate here) | gate of the pull-down on the strip; where it comes from is not followed |
+| `vss` | M | rail x 6861-6932 at y 3905; x 6858-6908 at y 4380 (it narrows at y 4238) | | goes on both ways, not followed |
 | `vcc` | M | rail x 6690-6748 at y 3990 and y 4228 | | the same; `tcw` draws it at y 3440-3900 |
 
 South side, in the channel (tc2), west to east:
@@ -597,6 +597,28 @@ metal y 2684; the cross-under at the VSS rail; the load. Could not check: either
 metal over its dark stretch (Ambiguities 12, 13 stay open); whether the pad's interior is
 poly or diffusion.
 
+**Round 3** (2026-11-17 09:56 -0600; a fix check of the changes since commit `18544c5`, 15-odd views in
+`cache/scratch/tc1/review-3/`, row profiles, the extraction before and after). **No finding
+changes a connection**, and the netlist differs from the earlier one only as intended. But
+the round is not clean: three findings, all confirmed by my own row profiles and text map,
+all fixed.
+
+| Finding | Outcome |
+|---|---|
+| 1. The rail is drawn 72 px wide to y 4380; south of y 4238 it is x 6858-6908 | **Confirmed** (bare ground from x 6916 at y 4250, 4309, 4345 in both metal shots). Redrawn as two pieces; the contact (6888,4338) is inside the narrow one |
+| 2. The pull-down's gate and source diffusion are x 6876-6914, not 6862-6918 (W about 40, not 56) | **Confirmed** (edge at x 6874, field at x 6858-6866 at y 4345). Redrawn: W 37 |
+| 3. `tc1_p4308` does not come from the east: it turns south at x 6985-7000 | **Confirmed** (clean shot: salmon at x 6988-7000 from y 4322 to y 4382). Drawn to y 4384; notes and port corrected |
+
+Checked and found correct by the reviewer: the ring's closure round the redrawn leg (the
+lower foot's poly continuous over x 6842-6884); the gate crossing its whole diffusion; no
+contact of the rail on the strip; the strip separate from the band above it; the source
+contact; both gap `?D` diffusion-coloured in the chip-2 shots; the `?B` and the west-arm `?D`
+rightly uncertain.
+
+**The review is not closed.** Three rounds are the workflow's limit and the third had
+confirmed findings, so run 3 was **not merged**. The three fixes above have not been seen by
+a reviewer. The next run's full review must cover them together with whatever it adds.
+
 ## Not done
 
 - **Gate columns x 6400-7000, y 2650-4450**: nothing drawn. Dense random logic with large
@@ -611,7 +633,7 @@ poly or diffusion.
   (`tc1_x1_u`: its ends at y 3806 and y 4402 and any other contact; the pad (6962,4268)'s
   west side, now drawn as the strip), both rails. **First for the next run**: the strip's
   node (Ambiguity 17): the diffusion under the thin metal x 6817 south of y 4293, and
-  `tc1_p4308` east of x 6995. The channel metal x 7003-7023 (no ring on it over
+  `tc1_p4308` south of y 4384. The channel metal x 7003-7023 (no ring on it over
   y 3972-4296; follower: from (7011,3850) south to a corner at (7006,4484)) is not drawn. The poly along y 2628-2648 that stops at (7438,2640), and the vertical poly
   x 7160-7180 it comes from. Run 2's observation that `sel_tracks.py` reports false breaks
   on ns3 and ns5 (chip 2 has blemishes, chip 1 does not) still stands.

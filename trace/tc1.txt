@@ -512,7 +512,8 @@ N P 8300,4374 db_b6
 # Views cache/scratch/tc1/g1..g11.png, cm1.png (class map); text maps tools/tc1_hex.py.
 # Supplies by the layout rule only (loads hang from the west rail): notes, Ambiguities.
 # =====================================================================================
-M 6896,3905 y4380 w=72             # the rail x 6861-6932 (it goes on north and south: not followed)
+M 6896,3905 y4238 w=72             # the rail x 6861-6932 (it goes on north: not followed)
+M 6883,4230 y4380 w=50             # ... south of y 4238 it is narrower, x 6858-6908 (bare ground from x 6916 in both metal shots at y 4250, 4309, 4345: review round 3); goes on south
 N M 6896,3915 vss
 M 6719,3990 y4228 w=58             # the rail x 6690-6748 (the same)
 N M 6719,4000 vcc
@@ -579,19 +580,21 @@ M 7054,4060 y4345 w=14             # the channel metal x 7053 between this conta
 # ---- what else is on the pad (6962,4268) (review round 2): a diffusion strip y 4270-4293
 #      runs from the pad's west edge west under the rail to the diffusion under the thin
 #      metal x 6817. Under the rail it is one side of a pull-down: gate = a poly along
-#      y 4298-4320 that comes from the east (NOT FOLLOWED east of x 6995), other side a
+#      y 4298-4320 that comes up from the south at x 6988-7002 (NOT FOLLOWED), other side a
 #      diffusion with a rail contact (6888,4338). How the strip joins the pad (a buried
 #      contact, or the pad is the strip's end) is not resolved: ?B, and the strip is ?D where
 #      it is in the open. The column under the thin metal x 6817 south of y 4293 (a poly
 #      beside it, pits at y 4312-4341) is NOT TRACED.
-D 6862,4270:6918,4368              # under the rail: strip / gate / source
+D 6862,4270:6918,4297              # under the rail: the strip
+D 6877,4290:6914,4368              # ... gate / source: narrower than the strip (edge at x 6874, field at x 6858-6866 at y 4345: review round 3)
 C 6888,4338 s=28x28                # rail contact: ring 6870-6915 x 4320-4365 in both metal shots, pit in the clean shot
 D 6803,4270:6835,4293              # the strip's west end under the thin metal x 6817
 ?D 6830,4270:6866,4293             # ... across the west gap
 ?D 6914,4270:6950,4293             # ... east of the rail, in the open, to the pad's west edge (plain tan in both chip-2 shots, red-tan in the clean shot; a dark line at x 6940-6946)
 ?B 6938,4266:6952,4290
-P 6858,4298:6995,4320
-N P 6980,4309 tc1_p4308
+P 6856,4298:7002,4320
+P 6988,4298:7002,4384              # it turns south at x 6988-7002 (review round 3; salmon to y 4382 at least: NOT FOLLOWED)
+N P 6975,4309 tc1_p4308
 
 # ---- output: buried contact on the east column, poly east to the contact (7099,4047),
 #      metal x 7133-7152 north (NOT FOLLOWED north of y 3900)
