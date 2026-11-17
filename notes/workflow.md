@@ -6,7 +6,8 @@ collaborators and their agents. Read this before taking any work, then
 
 **`/trace6845`** (a Claude Code command in this repository, `.claude/skills/trace6845/`)
 runs all of the steps below for one package: pull, choose, claim, trace, review in
-rounds until a round finds nothing, merge through the gate, hand off. Collaborators with
+a full review then fix checks until a round finds nothing (at most three), merge through the
+gate, hand off. Collaborators with
 write access use it; the steps below are what it does, and what a human tracer does by
 hand.
 
@@ -60,7 +61,9 @@ tools/newwork.sh PREFIX
 makes a worktree beside the repository on a new branch `PREFIX` from main, links `cache/`
 and `.venv/` into it, and pushes the branch. Work there. Never let two agents share one
 working tree. A remote collaborator with a separate clone needs `cache/` built once
-(`tools/prepare.py`, then `tools/align.py`) and the Python packages listed in `CLAUDE.md`.
+(`tools/prepare.py`, then `tools/align.py`) (they write only under `cache/`: `align.py` keeps its fit in
+`cache/align.json`; the tracked `trace/align.json` is the coordinator's record, changed only
+with `--record`, and the merge gate refuses a branch that changes it) and the Python packages listed in `CLAUDE.md`.
 
 What you may change on your branch:
 
@@ -99,7 +102,10 @@ wait for it to be merged, or ask the coordinator to merge it first.
 ### 6. Independent review: required before the pull request
 
 When the package is traced and its notes are written, someone who did not trace it
-checks it against the photos. For an agent, that is one fresh agent started for the
+checks it against the photos. The first round is a full review; later rounds are fix checks,
+which look only at what changed since the previous round and at what it touches, so that the
+review stays affordable (a full round costs about as much as a tracing run). At most three
+rounds: a package that still has confirmed errors after the third is not ready to merge. For an agent, that is one fresh agent started for the
 purpose (the one exception to "do not start sub-agents" in the tracing guide). It is what
 caught the two worst errors of the first contributor round, both of them a bundle that
 steps one track where it had been drawn straight.
@@ -125,6 +131,13 @@ proposed Re-read item; that is how the list stays honest.
 
 ### 7. Merge into main through the gate (or open a pull request)
 
+First write and commit your cost report: `python3 tools/costs.py`, then
+`tools/ship.sh "Cost report" costs/*.json`. It reads this machine's Claude Code transcripts and
+records only numbers (tokens and API-equivalent dollars by package, model and day). The
+dashboard adds the reports up, and the gate reads the models: **tracing here is done with
+Claude Fable 5.2**, the project's default model (`.claude/settings.json`), and the gate fails a
+package that anything else worked on.
+
 With write access, the package goes into main directly, but only through the gate:
 
 ```
@@ -141,12 +154,15 @@ no findings."), and lists the nets newly joined only through `?` items, each of 
 be written up in your notes. Then hand off:
 
 ```
-tools/claim.py done PREFIX --merged <commit> --handoff FILE
+tools/claim.py done PREFIX --merged <commit> --handoff FILE [--continue]
 ```
 
 FILE holds what you propose for the coordinator's files (the headings are those of the
-pull request template below). The claim stays on main, marked "merged, awaiting
-coordinator", with the proposals in it, until the coordinator has applied them.
+pull request template below). It goes to `handoffs/` on main, and the coordinator applies it
+when next on; nothing waits for that. In the same commit your claim is either kept
+(`--continue`: you carry on with this package soon, e.g. the next round of a loop) or released
+(the package is finished, or you are stopping; the rest is free to take from the notes' Not
+done list). A package is often done in several merges this way.
 
 Without write access, or for work that needs discussion first, open a pull request
 instead. Run, on your branch, after merging main:
@@ -166,12 +182,11 @@ applies them. One package per pull request.
 
 ### 8. The coordinator's follow-up
 
-For each claim marked "merged, awaiting coordinator" (and each pull request, which it
+For each file in `handoffs/` (`tools/claim.py handoffs`; and each pull request, which it
 merges first): the coordinator reads the notes and the proposals, spot-checks overlays,
 runs `tools/unsure.py`, applies the proposals to the master list, the ambiguity register
-and other blocks' notes, trims `floorplan.txt`, rebuilds `out/`, writes the journal,
-pushes, and releases the claim (`tools/claim.py release PREFIX`). A merged claim keeps
-its prefix reserved until then, so nobody continues that package from a stale list.
+and other blocks' notes, trims `floorplan.txt`, rebuilds `out/`, writes the journal, removes
+the handoff file and pushes. Claims are not touched: they belong to whoever is working.
 
 ## The master list
 
