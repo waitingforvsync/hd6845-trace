@@ -663,3 +663,11 @@ x 2773-2776. Checked by the tracer on `review3-2/gapM.png`: round 1's finding is
 the plates are back at x 2772 (loads 26/50). The tracer had applied that finding without
 looking at the photo first. Connections identical throughout.
 
+Round 3 (fix check, 2026-11-17 21:35 +0000, a fresh agent on claude-fable-5-2, against commit 7f26d37). Rows on
+both plates in master and copy, in the clean and the chip-2 shot: the poly's east edge at
+x 2772-2775 on all eight rows; at 4x the drawn edge sits on the outline; 20 px or more of
+clearance to the VCC box's contacts; `tools/sameconn.py`: connections identical; all four
+loads 26/50.
+
+Round 3: no findings.
+
