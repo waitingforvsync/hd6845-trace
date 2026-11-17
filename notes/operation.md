@@ -91,6 +91,8 @@ is not settled.
 | The register rows of R3 (one nibble), R5, R6, R7, R8, R9, R10, R11 are identified by their strobe lines, drawn end to end. | Firm for the joins; the register *numbers* rest on the address decoder's numbering of its lines |
 | The rows of R0, R1, R2, R4 are identified by their strobe lines, drawn end to end (`notes/blocks/wrj.md`). | Firm for the joins; the register *numbers* rest on the address decoder's numbering of its lines |
 | The data bus: all eight bits are joined from the right datapath across the chip to the central datapath (`notes/blocks/bust.md`); bits 0-3 reach the D0-D3 units of the data bus column (`dbl`). The registers each bit writes match the datasheet's widths exactly (R5, R9 bits 0-4; R4, R6, R7 bits 0-6; R8 bits 0, 1, 4-7; R0-R2 bits 0-7), which nothing in the trace assumed. | Firm for the joins; the bit numbers rest on that match and, for bits 0 and 1, on the D0/D1 units |
+| Data bits 0-3 reach the bus through a **transparent latch per bit** in the data bus column: `dl#_q` follows pin D# (through four inverters) while `dbus_le` is high and holds when it falls, and a static inverter drives `db_b#` = NOT `dl#_q_n` all the time. The internal data bus is not tri-stated at this end (`notes/blocks/dbus.md`). | Firm (equations and the joins to `db_b0`..`db_b3`) |
+| What `dbus_le` is: a line shared with eight taps in the columns west of the data bus column; its driver is not traced. | Open |
 | R8 is the central datapath's row A and R9 its row C; slice = 5 - bit (R8's bit 6 is in slice 3, bit 7 in slice 2). | Firm for the joins (from the data bus) |
 | R3's high nibble is the four-slice block `amr` (bits 4-7 from data bits 4-7 on `wr_r3`), so every data bit writes R3, as the datasheet's R3. | Firm for the latch equations and the data joins (`notes/blocks/amr.md`) |
 | R10 (central datapath `cdp2` row C, bits 0-6) and R11 (row A, bits 0-4) take their data from the data bus (`notes/blocks/rde.md`). | Firm for bits 5 and 6; marked for bits 0-4 (AMB-019) |
@@ -133,6 +135,15 @@ counter, and whatever the 4-bit counter `c4l` is compared with.
 | One of those two signals is NOT(row counter bit 0) XOR another signal. | Marked; the other signal is open |
 | In shift mode the R9 comparator does not compare R9's bit 0; the comparator's input is switched to another signal. | Firm that it is switched; what it is switched to is marked and its source open |
 | Where the field (odd/even) signal is made. | **Open**: expected in the gate column west of the nine-gate island, which is being traced |
+
+## The data pins (D0-D7) as outputs
+
+| Fact | Mark |
+|---|---|
+| Each data pin has a push-pull driver whose two gates are made by two NOR gates in the pad cell: `d#_pu` = NOR(`d_hiz`, `d#_out_n`), `d#_pd` = NOR(`d_hiz`, `d#_pu`) (`notes/blocks/dpad.md`). While `d_hiz` is high both gates are low and the pin floats; while it is low the pin is the inverse of `d#_out_n`. | Firm (all sixteen equations) |
+| `d_hiz` is one line common to the eight pad cells. | Firm (drawn end to end) |
+| What drives `d_hiz` and the eight `d#_out_n` lines (the bus-interface column, `dbus`), and so when the chip drives the bus and with what. | Open |
+| The pull-up fingers are ordinary transistors with their drain on VCC (source followers), so a driven high level is below VCC by a threshold. | Firm for the connection; that they are enhancement devices is not visible in the photos |
 
 ## Not established at all
 
