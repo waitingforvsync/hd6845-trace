@@ -10,7 +10,7 @@ step signal is `rc_stepreq_n`. Bus line letters (A-G) and unit names are places,
 
 ## Status
 
-Twenty gates and one latch traced and extracted (60 transistors, no errors) in the first and middle
+Twenty-one gates and one latch traced and extracted (62 transistors, no errors) in the first and middle
 clusters; the rest is surveyed only. The first cluster runs from y 2940 to y 5330. Added
 2026-11-17: the west column y 3170-3590 (a selector and its inverter, below), the north end of
 thin metal E, and a second transistor on `rcs_u3425` whose gate has no connection found.
@@ -26,6 +26,7 @@ rcs_u3425  = NOR(rcs_bc3460, rcs_iso2958) inverter; its output goes by a strap t
                                          gate poly with no connection found (2958,3481): see "The west column" below
 tla_w3417  = NOT(rcs_thin_e AND tla_w3376 OR tla_w3505 AND tla_w3461)   west column, selector (2626,3418)
 tla_w3505  = NOT rcs_thin_e              west column, rail gate under R1               (2626,3243)
+rcs_u3288_n = NOT rcs_u3288              west column, top unit: rail gate with a strong load; drives thin metal W (2626,3112)
 rcs_bc3460 = NOR(e3, e4)                 a second copy of in3's function               (3046,3892)
 rcs_cond_n = NOR(in2, in3)               "m2": the step condition inverted              (3046,4765)
 rcs_cond   = NOT rcs_cond_n              inverter on the column above; on bus piece A3   (3046,4636)
@@ -270,6 +271,33 @@ y 3200-3228) to a VCC box of its own under R2 (contact (2805,3230)); tail x 2699
 the tie box (2712-2752, 3248-3282). That the tie's tab is one poly with the plate is not
 resolved (a dark line lies between them in both metal shots), so the tie is drawn `?`.
 
+**The top unit of the west column (y 3010-3178): `rcs_u3288_n` = NOT `rcs_u3288`, driving thin
+metal W.** (traced 2026-11-17)
+
+- Input: `rcs_u3288`'s metal (bus line C's top piece, north to y 2728 and west) ends on a
+  contact (2828,2726); a poly runs west along y 2717-2735 (3.9x: one straight line, pad to
+  pad) to a contact (2562,2725); metal west along y 2727 to x 2292 and south at x 2283 to a
+  contact (2283,3112) (follow.py; its one contact candidate (2286,2797) is fringe, no pad);
+  poly east along y 3103-3122 to the gate under R1 (W/L 57/19).
+- Node: diffusion under R1 at y 3080-3103 with a part west of the rail (x 2538-2602,
+  y 3058-3098) carrying a concentric box (2545-2575, 3062-3092) to which **no poly comes**
+  (4.6x and the 3.3x strip of the pads: nothing at y 3075 west of x 2535). The east column's
+  inverter `rcs_u3425` has the same box without a poly at (3045-3070, 3415-3440): it seems
+  to belong to this kind of unit. Below the gate: the rail's VSS box (contact (2620,3150)).
+- Load: **strong** (W/L about 47/33; the standard load is about 28/55). The node's strip runs
+  east at y 3080-3097 and turns down as the west side of a diffusion x 2728-2790, y 3092-3138;
+  the plate (x 2745-2778) crosses it north-south (no diffusion edge crosses the plate in the
+  metal shots, unlike the standard loads) to the VCC box under R2 (contact (2805,3110), shared
+  with `rcs_c1`'s load). The plate continues at its top as a band going west (y 3040-3068) with
+  a pad above it, and the pad has a **metal contact (2738,3027) to thin metal W**, which goes
+  west 40 px and south at x 2689-2703 over the west loads (follow.py: to y 4002; contact
+  candidates at y 3690, 3786, 3825, 3925, 3949, in units not traced). The band's west end is
+  tied to a tail of the node by a buried contact (box 2690-2712, 3056-3080) right under thin
+  W's metal: drawn `?`, so "thin W is this inverter's output" is **marked**. The piece of thin
+  W drawn earlier (y 4940-5330, `rcs_thin_w`) is not shown to be the same metal.
+- Not resolved: a heavy-outlined box west of the rail below the gate (2545-2598, 3128-3150).
+  If it is diffusion joined to the VSS box, the gate is twice as wide; the logic is the same.
+
 **If `tla_w3461` is the vertical sync width match**, this unit chooses between it and a signal
 from the small cluster below, under control of the net on thin metal E, which runs the length
 of the cluster. Nothing more is claimed.
@@ -324,8 +352,9 @@ a pad on the 4,000 px of metal in the left bus field that the profile tools did 
 
 - **Thin metal E: north end found 2026-11-17** (see "The west column"): it is the net of the
   selector's first gate and of the inverter's gate, by the metal x 2696 (y 2754-2986), the
-  poly y 2768 and the metal x 2326. Thin metal W's top end is a contact (2738,3025) on a poly
-  pad of the top unit of the west column (seen at 4x, not traced).
+  poly y 2768 and the metal x 2326. Thin metal W's top end is a contact (2738,3027) on the
+  load gate of the top unit of the west column: W carries that inverter's output
+  (`rcs_u3288_n`, marked).
 - **Thin metal E (x 2903-2923)** shows dark stretches of 40-60 px wherever it passes a
   load's tie (the buried contact between the load plate's tab and the tail of the node's
   box), at y 3164, 3337, 3530, 3620, 3820, 4202, 4313, 4640, 4813, 4935, 5011, 5246. Neither
@@ -395,10 +424,12 @@ for `e4`, and it would arrive up the left bus field, which is where `e4` comes f
 
 - The inputs' sources (table in Status). Next: `e4` south down the left bus field, and
   from the other side the R0 match line from bd1's k7/k8.
-- West column (R1's columns), everything except y 3170-3590: the top unit y 3040-3160 (a
-  buried-contact box (2550-2575, 3060-3090), a strip east under R1 at y 3078, a load at
-  x 2700-2775, y 3050-3150, thin W's top contact (2738,3025)), and y 3590-4940. Polys
-  from west pads cross R1 at about y 3600, 3690, 3810-3900 and on down (0.7x overview only).
+- West column (R1's columns) y 3590-4940: not traced. Polys from west pads cross R1 at about
+  y 3600, 3690, 3810-3900 and on down (0.7x overview only). Thin W (`rcs_u3288_n`) has
+  contact candidates there at y 3690, 3786, 3825, 3925, 3949; where it ends (y 4002?) and
+  whether the piece at y 4940-5330 is the same metal.
+- The top unit's box west of the rail (2545-2598, 3128-3150), and the boxes without a poly at
+  (2545-2575, 3062-3092) and (3045-3070, 3415-3440).
 - `tla_w3417`'s poly east of (4520,4461), into the right cluster; `tla_w3376`'s metal south of (2871,5975);
   `tla_w3461`'s poly east of (2300,5632) (to be joined to `amr_eq_r3` when that branch is
   merged); thin E south of y 5400 (to about y 6036). All lead into the small cluster below
@@ -409,7 +440,7 @@ for `e4`, and it would arrive up the left bus field, which is where `e4` comes f
 - The inverter `tla_w3505`'s load tie (2712-2752, 3248-3282): tab and plate one poly?
 - y 3700-4590 on the east side (the units at y 3420 and y 3895 and the dense part west of the
   rail at y 3395-3665 are traced: `rcs_u3425`, `rcs_bc3460`, `rcs_b1`'s load and third gate).
-- Thin W's contacts; how rail R2 (VCC, top end y 3018) is fed.
+- How rail R2 (VCC, top end y 3018) is fed.
 - Bus pieces not yet drawn: B2 (from (3150,3810) south), C upper, D, F, and everything
   north of y 2940.
 

@@ -445,6 +445,16 @@ P 3172,3270:3214,3306
 C 3192,3288
 M 3196,3302 y2728 x2822 w=20
 N M 3196,3000 rcs_u3288
+# its west end (read 2026-11-17 at 3.9x): a contact (2828,2726) on the pad of a poly that runs
+# west along y 2717-2735 (under a metal square and R1, open between) to a pad with a contact
+# (2562,2725); metal west along y 2727 to x 2292 and south at x 2283 to a contact (2283,3112):
+# the gate of the inverter at the top of the west column (below).
+P 2808,2710:2846,2742
+C 2828,2726
+P 2575,2717:2815,2735
+P 2545,2710:2582,2742
+C 2562,2725
+M 2576,2727 x2283 y3126 w=12
 # load (the standard one)
 D 2925,3278:3048,3297
 D 2898,3278:2932,3311
@@ -873,3 +883,38 @@ P 2340,2759:2684,2777
 P 2678,2752:2716,2786
 C 2695,2768
 M 2696,2754 y2986 x2750 w=16
+
+# ---- the top unit of the west column, y 3010-3178: rcs_u3288_n = NOT rcs_u3288, a rail gate
+# with a STRONG load (W/L about 47/33; the others are about 28/55) whose gate poly is contacted by
+# thin metal W: the inverter drives thin W. Node: diffusion under R1 at y 3080-3103 with a
+# part west of the rail (x 2538-2602, y 3058-3098, one outline) that carries a concentric box
+# (2545-2575, 3062-3092) to which NO poly comes (4.6x; the same box without a poly is on the
+# east column's inverter at (3045-3070, 3415-3440)). Gate: poly y 3103-3122 from the pad
+# (2283,3112). Below it the rail's VSS box (contact (2620,3150)).
+D 2598,3080:2655,3175
+C 2620,3150 s=24x30
+D 2538,3058:2602,3098
+P 2296,3103:2698,3122
+P 2266,3098:2302,3128
+C 2283,3112
+# load: the node's strip runs east (y 3080-3097) and turns down as the west side (x 2728-2745)
+# of a diffusion x 2728-2790, y 3092-3138 that the plate (x 2745-2778, y 3070-3143: no line
+# across it in the metal shots, so its channel runs east-west) crosses to the VCC box of R2
+# that rcs_c1's load uses from its other side (contact (2805,3110)). The plate goes on at its
+# top as a band west (y 3040-3068) with a pad above it: metal contact (2738,3027) to thin
+# metal W, which runs west 40 px and south at x 2689-2703 (follow.py: to y 4002; contact
+# candidates at y 3690, 3786, 3825, 3925, 3949 in units not traced; the piece of W drawn
+# earlier, y 4940-5330, is not shown to be the same metal). The band's west end is tied to a
+# tail of the node by a buried contact (box 2690-2712, 3056-3080, right under thin W's
+# metal): drawn uncertain, as it cannot be told there from the metal's own marks.
+D 2650,3080:2745,3097
+D 2728,3092:2790,3138
+P 2745,3066:2778,3143
+P 2716,3040:2780,3070
+P 2722,3010:2762,3046
+C 2738,3027
+?P 2695,3040:2720,3068
+?D 2690,3056:2712,3084
+?B 2686,3052:2716,3080
+M 2752,3026 x2696 y4000 w=14
+N M 2696,3500 rcs_u3288_n
