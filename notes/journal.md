@@ -1356,4 +1356,3 @@ were already questions in its handoffs of `3c0efe1` and `48b43dd`). Done on a br
   ("Review ...", "Fix check ..."). On this machine's transcripts, run back to back: review
   $57.55 before, $68.79 after, of $152.69. The committed cost reports are not regenerated
   here: the next `tools/costs.py` run will show the higher figure.
-
