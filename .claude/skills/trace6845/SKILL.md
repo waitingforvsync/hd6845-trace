@@ -42,7 +42,9 @@ Run `tools/claim.py list`.
 
 ## 2. Choose the package
 
-If the user gave a PREFIX, take that. Otherwise take the first row of the **Queue** in
+**If you already hold a claim** (`tools/claim.py list` shows you as Who), continue that package:
+its notes' Not done list is where to start, and steps 3 and 4 resume your claim and worktree.
+This is the normal case in a loop. Otherwise, if the user gave a PREFIX, take that; if not, the first row of the **Queue** in
 `notes/work-packages.md` that:
 
 - is not claimed (`tools/claim.py list`), and whose region does not overlap a claim whose
@@ -62,8 +64,8 @@ Say which package you chose and why, in one line, and go on. Do not ask.
 tools/claim.py take PREFIX --region "x0-x1 x y0-y1" --what "one line: what you will trace"
 ```
 
-It pulls main again and refuses a taken prefix or an overlapping region. If it refuses,
-go back to step 2. Never edit `claims/` by hand.
+It pulls main again and refuses a taken prefix or an overlapping region; for a package you
+already hold it just says so. If it refuses, go back to step 2. Never edit `claims/` by hand.
 
 ## 4. Your own working tree and branch
 
@@ -71,7 +73,8 @@ go back to step 2. Never edit `claims/` by hand.
 tools/newwork.sh PREFIX
 ```
 
-Then work **only** in the directory it prints (`../hd6845-trace-PREFIX`). Run every
+It reuses your worktree and branch if you have them (the next round of a loop), with main merged
+in. Then work **only** in the directory it prints (`../hd6845-trace-PREFIX`). Run every
 command there, and run tools through `tools/t.sh PREFIX tool.py ...`.
 
 ## 5. Trace
@@ -223,12 +226,25 @@ Write `cache/scratch/PREFIX/handoff.md` with these headings, in full:
 - **Not done**: as in the notes.
 
 ```
-tools/claim.py done PREFIX --merged $(git rev-parse HEAD) --handoff cache/scratch/PREFIX/handoff.md
+tools/claim.py done PREFIX --merged $(git rev-parse HEAD) --handoff cache/scratch/PREFIX/handoff.md [--continue]
 ```
+
+This writes the handoff to `handoffs/` on main for the coordinator, who applies it whenever they
+are next on; nothing waits for that. In the same commit it either **keeps your claim**
+(`--continue`) or **releases it**:
+
+- `--continue` when you will carry on with this package soon: the next round of a loop, or a
+  session later today. The package's name stays yours, so nobody starts on it from under you.
+- No `--continue` when the package is finished, or you are stopping: the claim is released at
+  once and anyone can take the rest from the notes' Not done list.
+
+A kept claim with no commits for 24 hours shows as stale on the dashboard: release it
+(`tools/claim.py release PREFIX --note "..."`) if you are not coming back to it.
 
 ## 9. Finish
 
-Remove the worktree's links and the worktree (`rm cache .venv` inside it, then
-`git worktree remove <dir>` from the main checkout); the branch stays on the remote.
+If you released the claim, remove the worktree's links and the worktree (`rm cache .venv` inside
+it, then `git worktree remove <dir>` from the main checkout); the branch stays on the remote.
+If you kept it (`--continue`), keep the worktree for the next round.
 Report to the user in under 300 words: the package, what was traced, the review rounds
 and what they changed, what is uncertain, what is left, and the merge commit.

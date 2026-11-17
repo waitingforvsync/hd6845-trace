@@ -154,12 +154,15 @@ no findings."), and lists the nets newly joined only through `?` items, each of 
 be written up in your notes. Then hand off:
 
 ```
-tools/claim.py done PREFIX --merged <commit> --handoff FILE
+tools/claim.py done PREFIX --merged <commit> --handoff FILE [--continue]
 ```
 
 FILE holds what you propose for the coordinator's files (the headings are those of the
-pull request template below). The claim stays on main, marked "merged, awaiting
-coordinator", with the proposals in it, until the coordinator has applied them.
+pull request template below). It goes to `handoffs/` on main, and the coordinator applies it
+when next on; nothing waits for that. In the same commit your claim is either kept
+(`--continue`: you carry on with this package soon, e.g. the next round of a loop) or released
+(the package is finished, or you are stopping; the rest is free to take from the notes' Not
+done list). A package is often done in several merges this way.
 
 Without write access, or for work that needs discussion first, open a pull request
 instead. Run, on your branch, after merging main:
@@ -179,12 +182,11 @@ applies them. One package per pull request.
 
 ### 8. The coordinator's follow-up
 
-For each claim marked "merged, awaiting coordinator" (and each pull request, which it
+For each file in `handoffs/` (`tools/claim.py handoffs`; and each pull request, which it
 merges first): the coordinator reads the notes and the proposals, spot-checks overlays,
 runs `tools/unsure.py`, applies the proposals to the master list, the ambiguity register
-and other blocks' notes, trims `floorplan.txt`, rebuilds `out/`, writes the journal,
-pushes, and releases the claim (`tools/claim.py release PREFIX`). A merged claim keeps
-its prefix reserved until then, so nobody continues that package from a stale list.
+and other blocks' notes, trims `floorplan.txt`, rebuilds `out/`, writes the journal, removes
+the handoff file and pushes. Claims are not touched: they belong to whoever is working.
 
 ## The master list
 

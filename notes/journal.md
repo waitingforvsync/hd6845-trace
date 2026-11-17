@@ -1282,3 +1282,16 @@ Measured so far: no review agent has run on this machine. A first count that fou
 The reviews in the 2026-11-17 merges ran on dp111's machine and have no cost report. A
 tracing agent run costs about $18 API-equivalent here, which is the only guide to what a full
 review round may cost until `/trace6845` runs produce numbers.
+
+## 2026-11-17 16:27  Claims no longer wait for the coordinator
+
+A collaborator's agent pointed out that each `/trace6845` loop finishes only part of a package
+and then left the package's name locked ("merged, awaiting coordinator") until this session
+released it. Changed: `tools/claim.py done` writes the tracer's proposals to `handoffs/` on main
+and, in the same commit, keeps the claim (`--continue`, for the next round of a loop) or releases
+it. `take` of a package you already hold is a no-op; `tools/newwork.sh` reuses the worktree and
+branch; `/trace6845` resumes a held claim first. The coordinator works through `handoffs/`
+(`tools/claim.py handoffs`) and removes each file once applied; claims are the tracers' own.
+The dashboard lists the handoffs waiting. Tested end to end in a scratch clone with its own
+remote (take, take again, done --continue, done, someone else's prefix refused, two handoffs
+in one second kept apart).

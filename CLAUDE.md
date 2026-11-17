@@ -125,12 +125,14 @@ coordinating session, the owner's.
   priority order of the queue; the one agent it starts per package is the independent
   reviewer, and it waits for it.
 - At the start of every session, and when told a package is in: `git pull`, then
-  `tools/claim.py list`. For each claim marked "merged, awaiting coordinator" (and each
-  pull request, merged first): read the notes and the proposals in the claim file,
-  spot-check an overlay, run the full extraction (no `TRACE`) and `tools/unsure.py`, apply
-  the proposals (master list status, Re-read items, ambiguities, other blocks' notes),
-  trim the coarse block in `floorplan.txt` that its `floorplan.d` fragment replaces,
-  rebuild `out/`, write the journal, push, then `tools/claim.py release PREFIX`.
+  `tools/claim.py handoffs`. For each handoff in `handoffs/` (and each pull request, merged
+  first): read the notes and the proposals in the handoff file, spot-check an overlay, run
+  the full extraction (no `TRACE`) and `tools/unsure.py`, apply the proposals (master list
+  status, Re-read items, ambiguities, other blocks' notes), trim the coarse block in
+  `floorplan.txt` that its `floorplan.d` fragment replaces, rebuild `out/`, write the
+  journal, `git rm` the handoff, push. Claims are the tracers' own: they keep them while
+  they work and release them when they stop; the coordinator releases only a stale one,
+  after asking its owner.
 - **`/refresh6845`** (`.claude/skills/refresh6845/`): rename placeholders the trace has
   identified (checked with `tools/names.py compare`: only names may change), bring
   `notes/operation.md` up to date, rebuild `out/`, journal. Run it after a batch of merges.

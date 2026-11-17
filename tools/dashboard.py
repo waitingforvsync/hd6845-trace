@@ -180,6 +180,18 @@ def read_claims():
     return out
 
 
+def read_handoffs():
+    out = []
+    for p in sorted(glob.glob(os.path.join(ROOT, 'handoffs', '*.md'))):
+        if os.path.basename(p) == 'README.md':
+            continue
+        t = open(p).read()
+        m = re.match(r'(.+?)-\d{8}-\d{6}(?:-[0-9a-f]{7})?(?:-\d+)?\.md$', os.path.basename(p))
+        out.append(dict(file=os.path.basename(p), prefix=m.group(1) if m else '?', who=field(t, 'Who'),
+                        merged=field(t, 'Merged'), written=field(t, 'Written'), continuing=field(t, 'Continuing')))
+    return out
+
+
 def status_kind(s):
     s = s.strip().lower()
     if s.startswith(('done', 'checked')):
@@ -587,7 +599,7 @@ def claim_item(c, link):
     return ('<div class="item" data-activity="%d"><div class="h"><a href="%s"><code>%s</code></a> <b>%s</b> %s <span class="stale">stale</span></div>'
             '<div class="dim">%s</div><div class="mut">claimed %s; last commit %s</div></div>'
             % (c['activity'], link, E(c['prefix']), E(c['who']),
-               tag('active', 'merged, awaiting coordinator' if c['merged'] else 'tracing'),
+               tag('active', 'merged, awaiting coordinator' if c['merged'] else c['status']),
                inline(short(c['what'], 200)), E(c['claimed']), E(c['last'] or 'none yet')))
 
 
@@ -686,6 +698,13 @@ def index_page(d, state, page_of):
 
     contrib_commits = '<ul class="commits">%s</ul>' % ''.join(
         '<li><span class="mut">%s</span> <b>%s</b> %s</li>' % (E(dt), E(a), E(s)) for dt, a, s in d['recent'])
+    handoff_html = ('<div class="tw"><table><thead><tr><th>Package</th><th>Who</th><th>Merged</th><th>Written</th><th>Claim</th>'
+                    '<th></th></tr></thead><tbody>%s</tbody></table></div>' % ''.join(
+                        '<tr><td><a href="p/%s.html"><code>%s</code></a></td><td>%s</td><td><a href="%s/commit/%s"><code>%s</code></a></td>'
+                        '<td class="mut">%s</td><td>%s</td><td><a href="%s/blob/main/handoffs/%s">proposals</a></td></tr>'
+                        % (E(h['prefix']), E(h['prefix']), E(h['who']), REPO, E(h['merged']), E(h['merged']), E(h['written']),
+                           'kept' if h['continuing'].startswith('yes') else 'released', REPO, E(h['file'])) for h in d['handoffs'])
+                    if d['handoffs'] else '<p class="mut">None: the coordinator is up to date.</p>')
     n_open_q = sum(1 for q in d['questions'] if q['state'] not in ('resolved', 'done'))
     amb_open = sum(1 for q in d['questions'] if q['id'].startswith('A') and q['state'] != 'resolved')
     amb_all = sum(1 for q in d['questions'] if q['id'].startswith('A'))
@@ -714,6 +733,7 @@ def index_page(d, state, page_of):
     stats = ''.join([
         stat('{:,}'.format(figs.get('transistors', 0)), 'transistors traced'), stat('{:,}'.format(figs.get('nets', 0)), 'nets'),
         stat(len(claims), 'packages in progress'), stat('0', 'stale claims (24 h quiet)', 'stale-count'),
+        stat(len(d['handoffs']), 'handoffs awaiting the coordinator'),
         stat(cnt['done'], 'packages done'), stat(cnt['partial'], 'partly done'), stat(cnt['todo'], 'to do'),
         stat(figs.get('errors', '?'), 'extraction errors'), stat(figs.get('open_joins', '?'), 'open joins'),
         stat('%d / %d' % (amb_open, amb_all), 'ambiguities open'), stat('%d / %d' % (rr_open, rr_all), 're-read items open'),
@@ -735,11 +755,13 @@ def index_page(d, state, page_of):
 <p class="mut">From each version of <code>out/report.txt</code> on main.</p>
 <h2>Recent commits on main</h2>%s</section></div>
 <h2>Packages</h2>%s
+<h3 style="margin-top:20px">Handoffs awaiting the coordinator (%d)</h3>%s
 <h2>Open questions</h2><p class="dim">Ambiguities (A) from <code>notes/ambiguities.md</code> and re-read items (R) from the master list, placed on the die where their notes give a place.</p>%s
 <h2>What it has cost</h2>%s
 <h2>Collaboration XP</h2><p class="mut">For fun. 10 XP a commit, 25 a claim, 150 for each finished package you worked on (50 if partly done), plus your share of its transistors. Level n needs 100&middot;(n&minus;1)&sup2; XP.</p>%s
 <script type="application/json" id="series">%s</script>""" % (
-        THEME_BTNS, E(d['built']), stats, n_open_q, die_svg(d, state, page_of, ''), key, contrib_commits, lists, questions, spend_html, xp,
+        THEME_BTNS, E(d['built']), stats, n_open_q, die_svg(d, state, page_of, ''), key, contrib_commits, lists,
+        len(d['handoffs']), handoff_html, questions, spend_html, xp,
         json.dumps(d['series']))
     return shell('HD6845S trace status', body, d['version'], '', INDEX_JS)
 
@@ -817,7 +839,7 @@ def main():
     log = git('log', '-30', '--first-parent', '--format=%ad\t%an\t%s', '--date=format:%Y-%m-%d %H:%M', 'HEAD')
     head = git('log', '-1', '--format=%h, %ad', '--date=format:%Y-%m-%d %H:%M %z', 'HEAD').strip()
     built = '%s from commit %s' % (datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC'), head)
-    d = dict(claims=claims, master=master, figs=report_figures(), hist=hist, tcount=tcount, commits=commits, costs=read_costs(),
+    d = dict(claims=claims, master=master, figs=report_figures(), hist=hist, tcount=tcount, commits=commits, costs=read_costs(), handoffs=read_handoffs(),
              blocks=floor_blocks(), series=progress_series(),
              questions=read_ambiguities() + read_reread(master),
              xp=xp_table(commits, master, hist, tcount, claims),
