@@ -111,7 +111,7 @@ Where things are (all coordinates checked by overlay at 2.85x, `ov_top.png`, `ov
 | N0 = `dl0_q` | from the column east (y 9015-9042) to under the thin metal, then south under it (x 17434-17470) to y 9095, and from y 9063 east under the load gate to the VCC land |
 | Third pull-down of N0 | a narrow diffusion x 17450-17467 runs from the VSS land's east strip (y 8920-8942, which goes on to x 17494) south to N0; the poly from M_d's top pad (17491,9010) runs up x 17498-17520 and west along y 8944-8966 over it and ends at x 17437. Gate = `dl0_q_n` |
 | Load of N0 | poly x 17476-17518, y 9049-9121 under metal M_d; channel y 9063-9094. It is band C's east end |
-| Column, middle part, x 17350-17400 | VSS land 9051-9113 (contact 17362,9087); band C 9111-9133; node N1 9133-9198; band D 9196-9219; mid node; band E 9240-9262; VSS land 9268-9310 (contact 17368,9285) |
+| Column, middle part, x 17350-17400 for the land and band C, **x 17323-17400 from y 9153 down** (bands D and E are W 77 like A and B; review round 1) | VSS land 9063-9113 (contact 17362,9087); band C 9111-9133; node N1 9133-9198; band D 9196-9219; mid node; band E 9240-9262; VSS land 9268-9310 (contact 17368,9285) |
 | N1 = `dl0_q_n` | east along y 9157-9190 under the thin metal and the load gate to the VCC land; load gate x 17478-17518, y 9142-9228 under M_d, tied to N1 by the buried contact (17446,9205); contact (17491,9213) to M_d |
 | VCC land of both loads | x 17527-17585, y 9063-9188, long contact y 9082-9165; its west edge steps back to x 17536 between the two channels |
 | Metal M_d, x 17480-17502 | (17491,9010) to (17491,9213): carries `dl0_q_n` up to the third pull-down of N0. `follow.py`: one piece, 9008-9216 |
@@ -254,20 +254,23 @@ bus lines.
    it: the corridor between M_b and M_c is field from y 9058 to 9139 (measured), and under
    M_c it is field. It joins nothing either way; if it is not a contact the circuit does
    not change.
-3. **A vertical salmon strip under the west half of the thin metal**, x 17434-17449,
-   y 8968-9013, beside the narrow diffusion of the third pull-down: by colour poly over field
-   (R-G about 55), not drawn. It would be the west end of the gate poly turned south; it
-   reaches N0's diffusion at y 9013 where nothing marks a contact. If it were tied to N0
-   there, `dl#_q_n` and `dl#_q` would be one net, which cannot be. Not explained.
+3. The strip under the west half of the thin metal, x 17434-17449, y 8968-9013, beside the
+   narrow diffusion of the third pull-down: I first read it as poly by colour (R-G about
+   55). Review round 1 measured it against poly under the same metal: 182/127/120 against
+   215/163/116. It is field. Nothing is drawn there. Closed.
 4. **The thin metal** x 17438-17459: taken to have no contact in the latch (no pad on it;
    the boxes under it measure as diffusion, not as contact holes). The first notes call it
    D0's P_y. It is not drawn, and it does not end in unit 0: it goes on south through unit 1
    at least to y 9900. If it is one line down the column it is not a per-bit line; where it
    ends was not looked for.
-5. The dark line between the two parts of the third pull-down's gate poly at x 17485-17493
-   (both chips): taken to be the outline of the vertical part; the two parts are drawn as
-   one poly because neither has another connection (the west part ends at x 17437 over
-   field) and band A, the only alternative, is separated from it by 20 px of field.
+5. **The dark line across the third pull-down's gate poly at x 17488-17496, y 8944-8966.**
+   Full strength in all four units in both metal shots and the chip-2 stripped shot
+   (review round 1: brightness 44-48 against about 160 either side), in one straight line
+   with the east end of the VSS strip from y 8915 to 8985. The pocket south of the poly
+   (17471-17487, 8974-8983) measures as field, so it is not a diffusion edge. The two parts
+   are drawn as one poly: the west part (to x 17437, the gate) has no other connection, so
+   as two pieces it would float; band A, the only alternative, is separated from it by 20 px
+   of measured field. What the line is, is not explained.
 6. `d0_b` capacitor: contacts cut, strap absent in both metal shots. Looks like a
    metal-mask option. No effect on logic. (First session.)
 7. Chains 2-5 are assigned to D2-D5 by position only. Chains 2 and 3 now drive `db_b2` and
@@ -277,7 +280,30 @@ bus lines.
 
 ## Review
 
-(to be filled in by the review rounds)
+**Round 1** (2026-11-17, a fresh agent; images and scripts `cache/scratch/dbus/review-1/`).
+Told to suspect: where band A ends and whose the poly east of it is; the assumed tie of N0
+to band C; each box under the thin metal and under M_c; band D's end; whether the two load
+gates are separate; the upside-down copies and the per-unit joins; the bus inverters' land
+width and south-west contacts; M_b's end. It read claims 1-4 and 6-10 at 4-6x in at least
+two shots with row and column profiles, compared every copy with its master by block
+difference maps, profiled the thin metal from y 8110 to 13700 in both metal shots (16 px
+wide, continuous, no pad), and checked the per-unit wiring by overlay (unit 3's against
+unit 2 by difference map only).
+
+- Finding 1, **confirmed and fixed**: the diffusion under bands D and E is wider than drawn;
+  its west edge is at x 17320-17324 from y 9150 to about 9285. My own map of the clean shot
+  agrees (tan at x 17326-17334 against pink west of the line, at y 9185-9194, 9224-9236 and
+  9263-9278; bands D and E as red there as over the rest of the channel). Drawn: W 77 for
+  D and E. No connection changes. The reviewer's doubt whether the mid node between D and
+  E is one piece (field tint at x 17338-17348 in the chip-2 shots) is in a gap between two
+  metals; in the clean shot the node is tan out to x 17325. Left as one node.
+- Finding 2, **no change, recorded** (Ambiguity 5): the line across the third pull-down's
+  gate poly is not explained by the drawn geometry.
+- Notes taken over: the VSS land above band C starts at y 9063, not 9051 (fixed);
+  Ambiguity 3's strip is field (closed); M_b's end poly passes under three metals.
+- Could not check: the assumed tie (Ambiguity 1): in all four units a 10-12 px dark band
+  with no field colour between N0's end and band C, as at N1's certain tie, but no box and
+  no contact patch.
 
 ## Not done
 

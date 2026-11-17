@@ -210,7 +210,10 @@ P 17476,9049:17518,9121
 P 17405,9099:17530,9121
 P 17338,9111:17420,9133
 # -- column, middle part: gate N1 (dl_q_n)
-D 17350,9051:17400,9310            # VSS land, band C, node N1, band D, mid node, band E, VSS land
+D 17350,9063:17400,9310            # VSS land, band C, node N1, band D, mid node, band E, VSS land
+D 17323,9153:17355,9283            # from N1 down the column is wider: west edge x 17323 under
+                                   # M_c (tan against pink field, y 9153-9283), so bands D and E
+                                   # are W 77 like A and B; band C is W 50
 C 17362,9087 s=30x30
 C 17368,9285 s=30x30
 D 17397,9157:17532,9190            # N1 east, under the thin metal and the load gate, to the VCC land
@@ -291,7 +294,7 @@ M 17252,8978 y13614 x17161 w=20
 N M 17252,9400 dbus_le
 C 17160,13612 s=26x26               # M_b's end pad: down to poly
 P 17145,13598:17177,13626
-P 16976,13602:17160,13622          # poly west under the metals x 17078 and x 17118
+P 16976,13602:17160,13622          # poly west under three vertical metals (x 17030, 17078, 17120)
 P 16976,13598:17006,13626          # pad
 C 16990,13612 s=26x26
 M 16950,13614 x17002 w=18          # metal on west: leaves the region at x 16950 (followed, not
