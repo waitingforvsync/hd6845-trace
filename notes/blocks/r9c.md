@@ -63,7 +63,9 @@ y 4005-4179; poly under the supply metal x 11280-11600 and the four strobe lines
    and up x 16606 to the rails of the band in front of the pad drivers, not to a labelled
    rail. Taken as ground because the gates cross the diffusion under it and the load
    blocks (poly at x 17550-17600) stand towards the next rail east.
-2. **Each unit has a load**, so `ra#_cmp` = NOT `ra#_drv_in`. Not traced.
+2. **Each unit has a load**, so `ra#_cmp` = NOT `ra#_drv_in`. Traced by `dbus` (2026-11-17,
+   cell `dbus_r9l` in `trace/dbus.txt`): a load to the rail x 17616-17667, which is VCC
+   (metal-continuous with `pads_out`'s `vcc`), so assumption 1 holds too (AMB-012).
 3. The buried contacts at the output polys' ends (`?B`).
 4. On bits 0 and 1's poly from the pads (14952,4003) and (14995,4048) north and east, a
    metal lies along the same path (bright in the metal shot); the follower ends at the
@@ -81,7 +83,7 @@ y 4005-4179; poly under the supply metal x 11280-11600 and the four strobe lines
 
 ## Not done
 
-The units' loads and east halves (x 17500-17660). The pad (17330,5800) on bit 4's input
+The units' loads and east halves: traced by `dbus` (above). The pad (17330,5800) on bit 4's input
 poly, with a metal going south. RA2-RA4's driver lines to the pad cells. The metal from
 RA0's line west to the pad (14340,4764) and its poly north are drawn; the cell they
 come from (`ral`) is not traced.

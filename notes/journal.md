@@ -1434,3 +1434,24 @@ equations firm; traced 60.0 % of the die, 0.0 % in no package.
   process change of 13:33 -0600 above; the `shm` `?B` re-look is in AMB-020 and `shm.md`; the west
   boundary at x 6750 is `tcw`'s (its row).
 - `/refresh6845` step 0 now points at `tools/claim.py handoffs`.
+
+## 2026-11-17 20:53  Handoff `dbus` run 4 (Tom Seddon, 9302a30); claim released
+
+Arrived while the thirteen above were being pushed. Extraction 2,165 nets, 3,854 transistors, 0
+errors, 0 warnings; 777 of 1,124 equations firm.
+
+- **Master list.** `dbus` partial, 127 transistors, claim released by its tracer; the queue row
+  `dbus (continue)` now lists only the wiring left (`d2_out_n`..`d7_out_n`, the drivers of
+  `dbus_do0_in` and `d1_out_n`, `d7_in`, the capacitor taps, `d_hiz`'s driver, AMB-021). `r9c`: its
+  units' loads are traced (in `trace/dbus.txt`, cell `dbus_r9l`).
+- **AMB-012** resolved for the loads and the rails (the east rail is VCC): `ra#_cmp` = NOT `ra#_drv_in`.
+  Left: `r9c`'s `?B` ties at the units' west ends. Notes of `r9c`, its floor-plan line, the glossary
+  row `ra#_cmp` updated.
+- **Re-read.** R22 widened to pull-downs drawn from the land under a rail (`dbus_in`'s G1, G4: 60 ->
+  94; `inrow`, `dbus_in`'s G2/G3, first-session blocks). New R28 (ports drawn to a region's edge
+  without looking at the edge; `dbus`'s `d4_d`..`d7_d`, `dbus_le`, `d7_c` at x 16950, for `dlat`)
+  with trap 25. Guide section 2: tools must load the aligned arrays, not `cache/acid.npy`.
+- `dpad.md`: D2-D6's node contacts and D1's `d1_out_n` recorded. The `d#_in_u` aliases had already
+  gone in the entry above.
+- **PR #17** stays open: Tom's run 4 confirms the bits 4-7 latches are not in `dbus`'s region, so
+  the comparison waits for `dlat`.

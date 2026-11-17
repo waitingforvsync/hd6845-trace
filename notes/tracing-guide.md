@@ -35,6 +35,10 @@ All coordinates are pixels of the chip-2 metal photo, origin top-left, x right, 
 | `acid` | chip 2, metal stripped | poly in open areas (orange, unmistakable); has interference fringes under wide metal |
 | `acid1` | chip 1, metal stripped, some fringes | rarely needed |
 
+A tool of your own that loads the photos as arrays must load the aligned ones
+(`cache/acid_aligned.npy` and the like), never the raw `cache/acid.npy`, which is about 10 px off
+at x 17500, y 5300 (`dbus`, 2026-11-17).
+
 Run every tool through the wrapper, which selects your trace file and your scratch
 folder (`cache/scratch/BLOCK/`):
 
@@ -320,6 +324,10 @@ Traps, all of them real:
    once on the groups. Also: pass transistors on a land that widens under the gate are wider
    than the strip (`rdp3_lat`'s was 34 in the trace and is 70: R22), and a pull-down under a
    rail can continue as a separate patch on the rail's other side (R23). Found 2026-11-17.
+
+25. **A port is drawn to the boundary only after the boundary itself has been looked at.** A
+   line still there 50 px short of the edge may end on a pad. `dbus`'s `dbus_do0_in` was drawn
+   to x 16950 and ends 40 px before it. Found 2026-11-17 (R28).
 
 **When a trap turns out to affect work already done**, add the affected blocks to the
 "Re-read list" in `notes/work-packages.md` in the same commit that records the finding.

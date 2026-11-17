@@ -2,7 +2,7 @@
 
 This is the short version. The block notes (`notes/blocks/`) are the reference; the
 glossary of names is `notes/signals.md`. Last checked against the extraction on
-2026-11-17 (2,169 nets, 3,849 transistors; after the handoffs of the evening).
+2026-11-17 (2,165 nets, 3,854 transistors; after the handoffs of the evening).
 
 ## How to read this page
 
@@ -10,7 +10,7 @@ Every statement carries one of three marks.
 
 | Mark | Meaning |
 |---|---|
-| **Firm** | The extracted netlist says it, and still says it when every item marked uncertain (`?`) is deleted from the trace. `tools/unsure.py --equations NAME` prints this for any equation: 773 of the 1,119 extracted equations are firm. |
+| **Firm** | The extracted netlist says it, and still says it when every item marked uncertain (`?`) is deleted from the trace. `tools/unsure.py --equations NAME` prints this for any equation: 777 of the 1,124 extracted equations are firm. |
 | **Marked** | Extracted, but it depends on at least one uncertain item or on a join that is believed and not drawn. The assumption is named. |
 | **Open** | Not traced. Nothing is claimed. |
 
@@ -165,4 +165,4 @@ So that silence is not read as knowledge:
 
 The list of what is assumed, with the evidence for and against each, is
 `notes/ambiguities.md` (AMB-001 to AMB-023). Work still to re-check before anything is
-simulated is the "Re-read list" in `notes/work-packages.md` (R1-R27).
+simulated is the "Re-read list" in `notes/work-packages.md` (R1-R28).

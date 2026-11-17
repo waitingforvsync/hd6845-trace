@@ -247,10 +247,10 @@ Evidence (images in `cache/scratch/dpad/`):
 | `d#` | metal | the bond pad 18515-19024 x 6049-6558 + cell offset | pad | pad metal, contact box and series strip drawn; D0-D6: the same net as the protection node and the input line |
 | `d_hiz` | metal x 17631-17651 | y 7374-18850; contact 17637,7385 + cell offset in each cell; poly cross-under 17633-17655 x 18128-18304 between contacts 17643,18143 and 17643,18290 | into the cells | driver not found: `follow.py` reports contact candidates along it at y 9290-9573, 11168, 14500, 14798, 16754, 16827, none looked at |
 | `d0_out_n` | poly, then metal | cell, west along y 7480-7505 to the contact 17597,7492, metal x 17589-17609 south (drawn to y 7570) | into the cell | `dbus` notes: continues to 17597,8097 |
-| `d1_out_n` .. `d7_out_n` | poly | west end of strip 4 at 17800,7466-7492 + cell offset | into the cell | routes differ per pad (`dbus` notes list D1's and D7's); not drawn |
+| `d1_out_n` .. `d7_out_n` | poly | west end of strip 4 at 17800,7466-7492 + cell offset | into the cell | routes differ per pad; D0's and D1's are drawn in `trace/dbus.txt` (D1's to the column's west edge), the rest not |
 | `d0` (alias `d0_in`) | metal, poly, metal | node column, contact 17835,6585, poly west along y 6573-6597 and south along x 17550-17572, contact 17555,6755, metal x 17548-17566 to `dbus`'s piece at y 8050 | out | joined: `dbus`'s input buffer reads `d0_a = NOT d0` |
 | `d1` (alias `d1_in`) | metal | node column to the contact 17836,8402, where `dbus`'s poly starts | out | joined: `d1_a = NOT d1` |
-| `d2` .. `d6` (the lines on to the input buffers drawn by `dbus` as `d2_in`..`d6_in`; D6's pad under the node's metal at (17838,16519)) | metal | node column, drawn to y 6560 + protection offset; in the composite the contact is near 17825,6665 + offset with poly leaving west | out | the line to `dbus`'s input buffer is not followed: that is what the `_u` aliases stand for |
+| `d2` .. `d6` (the lines on to the input buffers drawn by `dbus` as `d2_in`..`d6_in`; node contacts (17837,10141), (17838,11727), (17838,13329), (17835,14887), (17838,16519)) | metal | node column, drawn to y 6560 + protection offset; in the composite the contact is near 17825,6665 + offset with poly leaving west | out | the line to `dbus`'s input buffer is not followed: that is what the `_u` aliases stand for |
 | `d7` | diffusion | the series strip's end at 17920,17538 | out | goes on into D7's untraced protection |
 
 ## Ambiguities

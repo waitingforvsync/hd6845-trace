@@ -112,7 +112,7 @@
 -	route	data bus bits 4-0 through rows D/E	8840,5150:10430,5700	cdp1's five slice bit lines down to R11 and R10; a 54 px necked stretch at y 5542-5596 is assumed continuous
 -	route	data bus, east	13190,4770:16930,5210	eight lines step down one track, then end on pads into the right datapath: db_b1-b4, R5's match
 -	route	R9 compare inputs	17060,4950:17420,5330	five metals from the west (the RA pad drivers' input lines) to pads, poly on to the units
-46	logic	R9 compare inverters	17290,5170:17660,5880	five units, one per RA bit: gate = the RA pad driver input line, output = the compare line of R9's comparator. Pull-downs traced, loads not
+46	logic	R9 compare inverters	17290,5170:17660,5880	five units, one per RA bit: gate = the RA pad driver input line, output = the compare line of R9's comparator. Pull-downs traced here, loads in `dbus`
 47	route	RA4 driver input	17320,4960:17790,5960	from the RA4 pad cell south along x 17771, west along y 5938, to the RA4 comparator unit's input (17335,5800)
 50	route	amr_eq_r3, second crossing field	2230,5612:3758,5990	poly y 5978, metal x 3738, poly west along y 5630 to the pad (2242,5632)
 -	route	poly lines under the foot of the step logic cluster	2440,5370:3270,5640	six horizontal poly lines joining the bus lines west and east of the cluster; one carries the strobe clk_tl west

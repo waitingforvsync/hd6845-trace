@@ -264,7 +264,7 @@ somewhere east. **Adopted** because the result is the complement that the centra
 datapath's comparator needs, found independently. Settle by tracing the unit's east
 half and the thin metal's two end pads.
 
-## AMB-012: the units that make R9's compare value are taken to be inverters under a VSS rail (2026-11-16)
+## AMB-012: the units that make R9's compare value are taken to be inverters under a VSS rail (2026-11-16)  (resolved 2026-11-17 but for the `?B` ties)
 
 `notes/blocks/r9c.md`, "Assumptions". Drawn: one pull-down per unit from the output to
 the rail x 17440-17495, gate = an RA pad driver's input line. Not established: that the
@@ -273,6 +273,14 @@ were VCC the device would be a pull-up and `ra#_cmp` would follow `ra#_drv_in` i
 inverting it. **Adopted: VSS and a load**, by the layout rule (gates under the ground
 rail, load towards the other rail). Settle by tracing a unit's east half and following
 either rail to a labelled one.
+
+Resolved 2026-11-17 for the load and the rails by `dbus` (Tom Seddon, run 4, `notes/blocks/dbus.md`,
+"The loads of R9's compare units"): each unit has a load to the rail x 17616-17667, which is
+metal-continuous with `pads_out`'s `vcc`, with its gate tied to the output side (cell `dbus_r9l`).
+So the units are inverters and the rail the pull-downs sit under is ground: `ra#_cmp` = NOT
+`ra#_drv_in`. Left: `r9c`'s own `?B` at each unit's west end (the tie from the output band to the
+poly that carries the output away): unit 1's (17380-17410 x 5440-5470) looks like a buried contact
+at 5x in three shots, not measured; the other four not looked at.
 
 ## AMB-013: does R9's match line end on the step logic's input `ra_eq_r9`? (2026-11-16)  (resolved 2026-11-17)
 
