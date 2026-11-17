@@ -2,7 +2,7 @@
 
 This is the short version. The block notes (`notes/blocks/`) are the reference; the
 glossary of names is `notes/signals.md`. Last checked against the extraction on
-2026-11-17 (2,112 nets, 3,582 transistors; signals renamed by the first refresh).
+2026-11-17 (2,165 nets, 3,854 transistors; after the handoffs of the evening).
 
 ## How to read this page
 
@@ -10,7 +10,7 @@ Every statement carries one of three marks.
 
 | Mark | Meaning |
 |---|---|
-| **Firm** | The extracted netlist says it, and still says it when every item marked uncertain (`?`) is deleted from the trace. `tools/unsure.py --equations NAME` prints this for any equation: 708 of the 1,049 extracted equations are firm. |
+| **Firm** | The extracted netlist says it, and still says it when every item marked uncertain (`?`) is deleted from the trace. `tools/unsure.py --equations NAME` prints this for any equation: 777 of the 1,124 extracted equations are firm. |
 | **Marked** | Extracted, but it depends on at least one uncertain item or on a join that is believed and not drawn. The assumption is named. |
 | **Open** | Not traced. Nothing is claimed. |
 
@@ -46,7 +46,7 @@ Five counters are identified. All use the same master-slave bit cell.
 | Horizontal sync width counter `hsw` | 4 | `ck_b` and `ck_a` directly | as above | Firm |
 | Character row counter `rc` | 7 | its own pair `rc_ck_m`, `rc_ck_s` | once per pulse of `rc_step` | Firm |
 | Scan line counter `sl` | 5 | a second pair `lc_ck_m`, `lc_ck_s` | once per pulse of `lc_step` | Firm |
-| A 4-bit counter `c4l` (not identified; possibly vertical sync width) | 4 | the same pair as `sl` | once per pulse of `lc_step` | Firm |
+| A 4-bit counter `c4l`, compared with R3 bits 4-7 (`amr`): believed the vertical sync width counter | 4 | the same pair as `sl` | once per pulse of `lc_step` | Firm |
 
 How the two private clock pairs are made (the same cell twice):
 
@@ -92,10 +92,10 @@ is not settled.
 | Whether anything ends the strobe when E falls, or re-times it to CLK. | **Open**. As drawn nothing does; that reading rests on the marked nets above |
 | The register rows of R3 (one nibble), R5, R6, R7, R8, R9, R10, R11 are identified by their strobe lines, drawn end to end. | Firm for the joins; the register *numbers* rest on the address decoder's numbering of its lines |
 | The rows of R0, R1, R2, R4 are identified by their strobe lines, drawn end to end (`notes/blocks/wrj.md`). | Firm for the joins; the register *numbers* rest on the address decoder's numbering of its lines |
-| The data bus: all eight bits are joined from the right datapath across the chip to the central datapath (`notes/blocks/bust.md`); bits 0-3 reach the D0-D3 units of the data bus column (`dbl`). The registers each bit writes match the datasheet's widths exactly (R5, R9 bits 0-4; R4, R6, R7 bits 0-6; R8 bits 0, 1, 4-7; R0-R2 bits 0-7), which nothing in the trace assumed. | Firm for the joins; the bit numbers rest on that match and, for bits 0 and 1, on the D0/D1 units |
-| Data bits 0-3 reach the bus through a **transparent latch per bit** in the data bus column: `dl#_q` follows pin D# (through four inverters) while `dbus_le` is high and holds when it falls, and a static inverter drives `db_b#` = NOT `dl#_q_n` all the time. The internal data bus is not tri-stated at this end (`notes/blocks/dbus.md`). | Firm (equations and the joins to `db_b0`..`db_b3`) |
+| The data bus: all eight bits are joined from the right datapath across the chip to the central datapath (`notes/blocks/bust.md`); bits 0-3 reach the D0-D3 units of the data bus column (`dbl`). The registers each bit writes match the datasheet's widths exactly (R5, R9 bits 0-4; R4, R6, R7 bits 0-6; R8 bits 0, 1, 4-7; R0-R2 bits 0-7), which nothing in the trace assumed. | Firm for the joins; the bit numbers rest on that match and, for bits 0-3, on the pins D0-D3 being joined to the units that drive `db_b0`..`db_b3` |
+| Data bits 0-3 reach the bus through a **transparent latch per bit** in the data bus column: `dl#_q` follows pin D# (through four inverters) while `dbus_le` is high and holds when it falls, and a static inverter drives `db_b#` = NOT `dl#_q_n` all the time. The internal data bus is not tri-stated at this end (`notes/blocks/dbus.md`). The latch is a cross-coupled pair gated by `dbus_le`: `dl#_q` = NOT((`d#_d_n` AND `dbus_le`) OR `dl#_q_n`). | Firm (equations and the joins to `db_b0`..`db_b3`), from the pin itself for D0-D3: the input lines of D2 and D3 are drawn (`notes/blocks/dbus.md`) |
 | What `dbus_le` is: a line shared with eight taps in the columns west of the data bus column; its driver is not traced. | Open |
-| Data bits 4-7: the pins D4-D7 have their four-inverter input buffers in the same column (D6's and D7's are another layout of the same chain; D6's input is drawn from its pin, D4, D5 and D7 are assigned by position). The buffered levels `d4_d`..`d7_d` leave the column west towards the gate column where `dbus_le` has its eight taps; the latches of bits 4-7 are believed to be there (`notes/blocks/dbus.md`). | Firm for the buffers and D6's join; the latches of bits 4-7 are open |
+| Data bits 4-7: the pins D4-D7 have their four-inverter input buffers in the same column (D6's and D7's are another layout of the same chain; the inputs of D4, D5 and D6 are drawn from their pins, D7's is assigned by position). The buffered levels `d4_d`..`d7_d` leave the column west towards the gate column where `dbus_le` has its eight taps; the latches of bits 4-7 are believed to be there (`notes/blocks/dbus.md`). | Firm for the buffers and the joins of D4, D5 and D6 to their pins; the latches of bits 4-7 are open |
 | The first inverter of every data input buffer has two pull-downs on the pin: its gate poly's L-shaped arm crosses a second diffusion under a metal (AMB-004 said the arm crosses nothing). The logic is the same; the device is a third wider. | Firm (eight buffers) |
 | R8 is the central datapath's row A and R9 its row C; slice = 5 - bit (R8's bit 6 is in slice 3, bit 7 in slice 2). | Firm for the joins (from the data bus) |
 | R3's high nibble is the four-slice block `amr` (bits 4-7 from data bits 4-7 on `wr_r3`), so every data bit writes R3, as the datasheet's R3. | Firm for the latch equations and the data joins (`notes/blocks/amr.md`) |
@@ -117,22 +117,22 @@ throughout.
 | `h_eq_r1` | `hc` with R1 | as above | into the bottom-centre logic. **Use: open** |
 | `h_eq_r2` | `hc` with R2 | as above | runs west of the counters on bus line G (joined, `notes/blocks/ucz.md`). **Use: open** |
 | `hsw_eq_r3` | `hsw` with the R3 nibble (4 bits) | drawn | not followed. **Use: open** |
-| `amr_eq_r3` | R3 bits 4-7 (the vertical sync width, `amr`) with four lines `cdp1_l4544`..`cdp1_l4676` from the west | source of the four lines not found (believed a 4-bit counter: `c4l`?) | not found: the diffusion line's ends are closed. Per bit XOR and the NOR marked (seven `?` items). **Use: open** |
+| `amr_eq_r3` | R3 bits 4-7 (the vertical sync width, `amr`) with the 4-bit counter `c4l0`..`c4l3` (drawn through `cdp1_l4544`..`cdp1_l4676`; `c4l2`, `c4l3` over two `?P` rows of `bust`) | drawn | leaves through a buried contact at c0 (marked) and runs about 12,000 px west to `tla`'s west column, where it is a data input of the selector `tla_w3417 = NOT(rcs_thin_e·tla_w3376 + tla_w3505·amr_eq_r3)`. Per bit XOR and the NOR marked (`?` items in the cell). **Use: the selector's output, to the right cluster, not followed** |
 | `rc_eq_r4`, `rc_eq_r6`, `rc_eq_r7` | the row counter `rc` with R4, R6, R7 | drawn: the seven lines of the upper array are `rc0`..`rc6`, joined on firm geometry (`notes/blocks/ucz.md`) | R6's goes to the strobe channel, R7's leaves west; not followed. **Use: open** |
 | `sl_eq_r5` | scan line counter with R5 (5 bits) | drawn | leaves north and runs west on `sl_eq_r5` through the central datapath's channel (`notes/blocks/bust.md`); not followed west of it. **Use: open** |
-| R9's (`ra_eq_r9`) | **the row address as it goes to the RA pins** with R9 (5 bits) | marked (the five lines pass units whose loads are not traced) | drawn to the row counter's step logic: it is the input of the inverter that makes `rcs_mu` (AMB-013, resolved). **Use: the row counter's step request (above)** |
+| R9's (`ra_eq_r9`) | **the row address as it goes to the RA pins** with R9 (5 bits) | the five lines are `ra#_cmp` = NOT `ra#_drv_in`: an inverter per bit on the RA pad driver's input line, loads traced (`notes/blocks/dbus.md`). Firm for bits 0-3; bit 4 marked (one uncertain poly on its input, the open join `ra4_drv_in_u`). The comparator's own cells are marked | drawn to the row counter's step logic: it is the input of the inverter that makes `rcs_mu` (AMB-013, resolved). **Use: the row counter's step request (above)** |
 | R10's (central datapath) | the row address one stage earlier with R10 bits 0-4; gives "equal" and "greater" | marked | not followed. **Use: open** |
 
 Not found at all: comparators for R11 (cursor end), R12-R15 against the address
-counter, and whatever the 4-bit counter `c4l` is compared with.
+counter.
 
 ## The row address (RA0-RA4)
 
 | Fact | Mark |
 |---|---|
 | The RA pins are not the scan line counter directly. Between them: a selector, a row of five units, then a five-cell stage (`ral`) in front of the pad drivers. | Firm that they are there |
-| The `ral` stage: each cell passes its input onto a node on a strobe (`ral_stb`), holds it there through a weak device, and drives the pad driver's input as NOT `ral_n1`. That it is a latch transparent while the strobe is high needs the cell's inverter 1, not traced (AMB-018). | Firm for the output inverter (RA0-RA3; RA4 marked); the latch is believed. Where `ral_stb` comes from: open |
-| The fourteen MA outputs pass through the same cell, strobed by `ck_out` (high while CLK is low): copy m# drives MA# (`notes/blocks/mal.md`). | Firm for the output inverters and the bit order; the latch is believed, as above; what feeds each copy is open |
+| The `ral` stage is a **latch with a force line**: each cell passes its input onto node a while its strobe (`ral_stb`) is high, holds it through a weak device, and drives the pad driver's input with out = node a OR `cnt_gab` (`ral_n1` = NOR(`ral_a`, `cnt_gab`), out = NOT `ral_n1`; `notes/blocks/ral.md`, AMB-018 resolved). | Firm (all five RA copies; RA4's line marked). Where `ral_stb` comes from, and what `cnt_gab` does in use (AMB-017): open |
+| The fourteen MA outputs pass through the same cell, strobed by `ck_out` (high while CLK is low) and forced by `mal_frc_m#`: copy m# drives MA# (`notes/blocks/mal.md`). So every MA output is latched while CLK is high. | Firm (equations, all fourteen copies, and the bit order); what feeds each copy and what drives the force line: open |
 | The selector passes scan line bit k to output k, or to output k+1 (a shift up by one bit). The two control lines are opposites: `ras_straight` = NOT `ras_shift`. | Firm for the control; six strip joins inside the selector are uncertain |
 | `ras_shift` = R8 bit 0 AND R8 bit 1 (`r8_b0_q`, `r8_b1_q`): the interlace field, set to 3 ("interlace sync and video"). | Marked for the gate (four buried contacts in its NAND); firm that the two inputs are R8's bits 0 and 1 (R8's bit order from the data bus, `notes/blocks/bust.md`) |
 | In shift mode output 0 has no counter bit; **R9's bit 0** (`r9_b0_q`) chooses which of two signals drives it (`ras_o0_sel1` = shift AND R9 bit 0, `ras_o0_sel2` = shift AND NOT R9 bit 0). | Firm (equations and the bit's identity, from the data bus) |
@@ -146,8 +146,8 @@ counter, and whatever the 4-bit counter `c4l` is compared with.
 |---|---|
 | Each data pin has a push-pull driver whose two gates are made by two NOR gates in the pad cell: `d#_pu` = NOR(`d_hiz`, `d#_out_n`), `d#_pd` = NOR(`d_hiz`, `d#_pu`) (`notes/blocks/dpad.md`). While `d_hiz` is high both gates are low and the pin floats; while it is low the pin is the inverse of `d#_out_n`. | Firm (all sixteen equations) |
 | `d_hiz` is one line common to the eight pad cells. | Firm (drawn end to end) |
-| `d0_out_n` = NOT `dbus_do0_in`: an inverter at the foot of the data bus column drives D0's line up the whole column on one thin metal. `dbus_do0_in`, the bit read out on D0 in true sense, arrives from the west and is not followed. | Firm (the equation and the join into D0's pad cell) |
-| What drives `d_hiz` and the other seven `d#_out_n` lines, and so when the chip drives the bus and with what. | Open |
+| `d0_out_n` = NOT `dbus_do0_in`: an inverter at the foot of the data bus column drives D0's line up the whole column on one thin metal. `dbus_do0_in`, the bit read out on D0 in true sense, arrives by a metal that leaves the column west at (16950,16712) and is not followed. D1's line `d1_out_n` is drawn from its pad cell to a poly that leaves the column west at (16950,16344): its driver is not at the column's foot. | Firm (the equation and the join into D0's pad cell) |
+| What drives `d_hiz` and the `d#_out_n` lines of D1-D7, and so when the chip drives the bus and with what. | Open |
 | The pull-up fingers are ordinary transistors with their drain on VCC (source followers), so a driven high level is below VCC by a threshold. | Firm for the connection; that they are enhancement devices is not visible in the photos |
 
 ## Not established at all
@@ -164,5 +164,5 @@ So that silence is not read as knowledge:
 - The memory address counter's control, and the cursor compare.
 
 The list of what is assumed, with the evidence for and against each, is
-`notes/ambiguities.md` (AMB-001 to AMB-019). Work still to re-check before anything is
-simulated is the "Re-read list" in `notes/work-packages.md` (R1-R18).
+`notes/ambiguities.md` (AMB-001 to AMB-023). Work still to re-check before anything is
+simulated is the "Re-read list" in `notes/work-packages.md` (R1-R28).

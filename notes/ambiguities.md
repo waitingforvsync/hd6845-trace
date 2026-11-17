@@ -43,7 +43,7 @@ depletion-mode. So there are depletion devices that are not wired as loads, and
 topology alone will not find them all. Any transistor whose gate is tied to VSS or to
 its own source should be listed as a probable depletion device.
 
-## AMB-003  Data pad cell  (open, narrowed)
+## AMB-003  Data pad cell  (resolved 2026-11-17)
 
 Where: D0 master, 17780-18760 x 7150-7560 (and the same place in D1-D7).
 
@@ -62,7 +62,18 @@ clean shot, starting with the buried contact at 17835-17858 x 7440-7460 and the 
 end of row H's metal. A tri-state pair needs both output gates low when disabled,
 which is a strong check on any reading.
 
-## AMB-004  L-shaped poly on the input inverters  (assumed)
+Resolved 2026-11-17 by `dpad` (dp111, `notes/blocks/dpad.md`): the output cell is traced and
+placed on D0-D7. `d#_pu` = NOR(`d_hiz`, `d#_out_n`) and `d#_pd` = NOR(`d_hiz`, `d#_pu`) drive 3
+pull-up and 5 pull-down fingers; `d_hiz` (the "P_x" above) high floats the pin, `d#_out_n` (the
+"P_y") low drives it high. Both outputs low when disabled, as the check above requires. The
+readings of `notes/blocks/pads.md`'s data pad section that this entry rested on were wrong:
+rows G and K are the pull-up gate node, not VCC; H and J are VSS; I is the pull-down node; the
+"green shapes" are field islands; the boxes at 18597-18632 x 7250-7298, 17835-17858 x
+7440-7460 and strip 4's end are not buried contacts; "gate 7170" is a field strip. The thin
+metal that carries D0's "P_y" is one line down the whole data bus column, D0's alone
+(`dbus`, run 3): `d0_out_n` = NOT `dbus_do0_in`.
+
+## AMB-004  L-shaped poly on the input inverters  (changed 2026-11-17: wrong in the data bus column)
 
 Where: 14626-14689 x 18286-18375 on the R/W group, and the same place in the RS and
 CS groups (+628, +1256).
@@ -74,6 +85,14 @@ is drawn as part of the input net.
 
 To settle: nothing needed unless a diffusion turns up under it. Worth a second look
 if the input stage ever fails to simulate as a plain inverter.
+
+Changed 2026-11-17 by `dbus` (Tom Seddon, `notes/blocks/dbus.md`, "The L arm"): in the data bus
+column the L arm of every first input inverter is a **second pull-down** (gate the pin, between
+VSS and the stage's output, W about 22-26), traced in all eight chains: under the metal that
+crosses it the arm lies on a diffusion (channel colour in the clean shot, tan on both sides,
+one outline with the VSS land in the chip-2 shots). The logic is unchanged. For the bottom-row
+input inverters the assumption "crosses no diffusion" is now doubtful and untested: re-read
+item R25.
 
 ## AMB-005  Input protection cells: gate of the clamp, and the comb  (assumed)
 
@@ -102,6 +121,10 @@ Checked against the clean shot of chip 1: the frame is a poly plate
 diffusion reach down into the slots. The band above the node is poly with no metal
 over it. Nothing contradicts the working assumption; the trace still draws the comb
 as a single strip.
+
+Added 2026-11-17 by `dpad`: the data pads' protection is a thin-oxide grounded-gate clamp: the
+poly frame is tied to VSS by an outer strip and a rail contact, and the pad reaches the
+protected node through a diffused series strip.
 
 ## AMB-006  Island devices in the clock block wiring  (assumed: clamps)
 
@@ -241,7 +264,7 @@ somewhere east. **Adopted** because the result is the complement that the centra
 datapath's comparator needs, found independently. Settle by tracing the unit's east
 half and the thin metal's two end pads.
 
-## AMB-012: the units that make R9's compare value are taken to be inverters under a VSS rail (2026-11-16)
+## AMB-012: the units that make R9's compare value are taken to be inverters under a VSS rail (2026-11-16)  (resolved 2026-11-17 but for the `?B` ties)
 
 `notes/blocks/r9c.md`, "Assumptions". Drawn: one pull-down per unit from the output to
 the rail x 17440-17495, gate = an RA pad driver's input line. Not established: that the
@@ -250,6 +273,14 @@ were VCC the device would be a pull-up and `ra#_cmp` would follow `ra#_drv_in` i
 inverting it. **Adopted: VSS and a load**, by the layout rule (gates under the ground
 rail, load towards the other rail). Settle by tracing a unit's east half and following
 either rail to a labelled one.
+
+Resolved 2026-11-17 for the load and the rails by `dbus` (Tom Seddon, run 4, `notes/blocks/dbus.md`,
+"The loads of R9's compare units"): each unit has a load to the rail x 17616-17667, which is
+metal-continuous with `pads_out`'s `vcc`, with its gate tied to the output side (cell `dbus_r9l`).
+So the units are inverters and the rail the pull-downs sit under is ground: `ra#_cmp` = NOT
+`ra#_drv_in`. Left: `r9c`'s own `?B` at each unit's west end (the tie from the output band to the
+poly that carries the output away): unit 1's (17380-17410 x 5440-5470) looks like a buried contact
+at 5x in three shots, not measured; the other four not looked at.
 
 ## AMB-013: does R9's match line end on the step logic's input `ra_eq_r9`? (2026-11-16)  (resolved 2026-11-17)
 
@@ -370,7 +401,14 @@ views): no gate output drives it, and nothing ties it to a supply.
 No assumption adopted. Settle by tracing `ral`'s inverter 1 (B), then by single shots at
 5x under the supply metal (A).
 
-## AMB-018: the `ral` cell: latch, and its device sizes (2026-11-17)
+Updated 2026-11-17 by `ral` (dp111): **reading B is struck**: inverter 1 is traced and nothing in
+the cell drives `cnt_gab` (`ral_n1` = NOR(`ral_a`, `cnt_gab`): `cnt_gab` is a force input).
+A line that forces every RA output high cannot pulse each character, so either it is low in
+normal use, or band H4 and the line x 12902 are not the counters' per-character transfer line
+that `wl` and `mra` took them for. The routes from the cells to H4 were re-read and are right,
+so the question is H4 and x 12902 themselves.
+
+## AMB-018: the `ral` cell: latch, and its device sizes (2026-11-17)  (resolved 2026-11-17)
 
 `notes/blocks/ral.md`; copies in `trace/ral.txt` (RA0-RA4) and `trace/mal.txt` (MA0-MA13).
 Traced: a pass transistor from the input to node a on the strobe (`ral_stb` for RA,
@@ -384,6 +422,12 @@ Inverter 1 (node a to `ral_n1`) is not drawn after three passes.
 
 Device sizes: re-read item R14. Settle inverter 1 with single shots at 5-6x of
 x 14195-14300, y 4280-4460 in copies s1 and m4.
+
+Resolved 2026-11-17 by `ral` (dp111): inverter 1 traced, `ral_n1` = NOR(`ral_a`, `cnt_gab`) (MA
+copies: NOR(`ral_a_m#`, `mal_frc_m#`)), so out = node a OR force line: a static latch,
+transparent while the strobe is high, forced high (and set, through the hold device) by the
+force line. FIRM for all 19 copies. Sizes corrected in the cell: inverter 2's pull-down 199/22
+(the whole Z poly is gate), its load 60/37, the pass transistor 68/25, Tf 94/20 (R14 done).
 
 ## AMB-019: the data bit lines 0-4 through `cdp1`'s rows D/E, y 5542-5596 (2026-11-17)
 
@@ -402,3 +446,47 @@ y 5593-5600; about 12 px across a thin dark bar (y 5557-5567) cannot be seen in 
 The contributor's review leaned to continuous (about 80 %); the coordinator's look at 4x
 in two shots agrees that it cannot be seen. Settle by tracing row E's cell. The `cdp2`
 bus names are aliases, not renamed.
+
+## AMB-020: is the inverter `tc1_o4280` on the `tc1_x1` line? (2026-11-17)
+
+Proposed by `tc1` (Matt Godbolt, `notes/blocks/tc1.md`). `shm` draws `tc1_x1` as NOT `ras_o0_sel1`
+(inverter and load at x 8400-8650, y 4165-4280, joined to the `tc1_x1` poly through a `?B`).
+1,500 px west, `tc1` finds the inverter `tc1_o4280` = NOT `tc1_p4308`, whose output strip runs up
+to a pad at (6962,4268). A branch of the ring poly of the driver `tc1_o4020` (on the `tc1_x1`
+line by firm geometry) ends on that pad, and the pad's contact puts the thin metal x 6968 on it.
+Three joins: J1, **not drawn**, strip to pad (x 6934-6957); J2, drawn `?P`, branch poly to pad
+(6972-7000, 4254-4272); J3, `shm`'s `?B` at about (8370-8410, 4240-4270), not looked at. All three
+true would mean two complete inverters on one line. The thin metal x 6968 is also one input of
+the second driver `tc1_o3740` (firm, contact (7009,3789)), whose output does not return to
+`tc1_x1`; and the pad's net has a second destination west, the poly row y 4385-4405. **No reading
+adopted**; J1 is left out so that `tc1_x1`'s equation does not change on a guess. To settle: J3
+in the clean shot (a re-read under R12), the thin metal x 6968's other ends, `tc1_p4308`'s
+source. Open join `tc1_x1_u`.
+
+## AMB-021: a contact from pin D6's input line to the `d0_out_n` inverter? (2026-11-17)
+
+Proposed by `dbus` (Tom Seddon, the notes' Ambiguity 9). A possible contact between `d6_in`'s
+metal (x 17290-17306) and the box 17294-17328 x 16474-16502 at the west end of the output node
+of the inverter that drives `d0_out_n`. For: the metal is dim over y 16476-16512 in both chips
+(R at most 160 and 141 against 200-226), deeper than over any buried-contact box on the same
+line. Against: no pad, no bright centre, no specks; the clean shot is field colour under the
+metal's west edge all the way; a contact would tie pin D6 to `d0_out_n`. Unexplained: the box's
+interior is black in the chip-2 stripped shot. **Assumed: no contact**; nothing drawn. To
+settle: a better photo of the spot, or behaviour (D6 and D0 would interfere on reads).
+
+## AMB-022: the gate `rcs_iso2958` on `rcs_u3425` (2026-11-17)
+
+Proposed by `tla` (dp111). A second transistor on `rcs_u3425` at (2959,3481): `rcs_u3425` =
+NOR(`rcs_bc3460`, `rcs_iso2958`) as drawn. Its gate poly x 2950-2968, y 3449-3547 has no
+connection found; its top end (2959,3447) abuts `rcs_u3425`'s diffusion with a single edge line
+between. A tie there would make the gate `rcs_u3425` itself (a device that pulls its own gate
+node, which does nothing useful). **No reading adopted.** To settle: the poly's other end, or a
+profile across (2959,3447) against known buried contacts.
+
+## AMB-023: buried or metal contact under `amr` c0's outer line (2026-11-17)
+
+Proposed by `amr` (dp111). At (11601-11628, 6286-6307) a box under the outer line of column c0.
+Measured against known buried and metal contacts, it is a **buried contact** on `amr_eq_r3`'s
+diffusion line; a metal contact would make c0's compared bit (`c4l0`) the comparator's own output.
+**Assumed: buried** (measured; `notes/blocks/amr.md`). It corrects #14's lead of a "third
+connection" of c0's outer line.

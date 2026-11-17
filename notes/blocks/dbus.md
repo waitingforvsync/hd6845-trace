@@ -7,7 +7,7 @@ several offsets side by side, for comparing repeats), `tools/dbus_autocorr.py`
 
 ## Status
 
-Traced, extracting (122 transistors, 0 errors, 0 warnings), overlay-checked:
+Traced, extracting (127 transistors, 0 errors, 0 warnings), overlay-checked:
 
 - the input buffer chain (four inverters), cell `dbus_in`, six copies (D0-D5); D0's and
   D1's input lines (first session);
@@ -33,9 +33,27 @@ Traced, extracting (122 transistors, 0 errors, 0 warnings), overlay-checked:
     thin metal x 17438-17459, which is its output and is `d0_out_n`**: drawn end to end
     and joined to `dpad`'s contact, so D0's output data line has its driver.
 
+- **run 4 (2026-11-17 18:55 +0000):**
+  - **the "logic above D0" is the east half of `r9c`'s five units** (x 17500-17670,
+    y 5260-5870): each unit's depletion load and its contact to the rail x 17616-17667,
+    which is VCC (cell `dbus_r9l`, one transistor, five copies). With `r9c`'s pull-downs
+    the full extraction now gives `ra#_cmp = NOT ra#_drv_in` for all five (AMB-012):
+    firm for bits 0-3; bit 4's still depends on `r9c`'s `?P` on its gate line.
+  - **the input lines of D2, D3, D4 and D5** (2026-11-17 19:10 +0000), each from the
+    pin's protection node in `dpad` to the first gate of its buffer chain: `d2_in`..
+    `d5_in` are now aliases of the pins `d2`..`d5` (wiring only, no transistors), so all
+    of D0-D6 are joined to their buffers.
+  - **`d1_out_n`, D1's output data line** (2026-11-17 19:15 +0000), from the D1 pad cell
+    down the channel, west on chain 1's "line 2" and south on a 6,140 px metal to a poly
+    that leaves the region west at (16950,16344): its driver is west of the column, not at
+    the column's foot like D0's.
+  - **correction to run 3**: `dbus_do0_in` does not come from the west edge. Its poly ends
+    on a pad (16993,16451), and a metal from that pad runs south and then west out of the
+    region at (16950,16712).
+
 Not traced: the latches of bits 4-7 (west of this region, see "Where bits 4-7 go"), the
-logic above D0, the left-hand wiring of chains 1-5, the channel wiring to the pads for
-D2-D5 and D7, the other seven `d#_out_n` lines. See "Not done".
+capacitor taps of chains 1-5, D7's input line south of y 17000, the other seven
+`d#_out_n` lines. See "Not done".
 
 ## Inventory
 
@@ -56,7 +74,7 @@ down from the D0 pad cell. Gates sit on a 152 px vertical pitch between two rail
 | What | Where | State |
 |---|---|---|
 | Input chain, D0 | 17255-17590 x 8280-8880 | cell `dbus_in`, traced |
-| Input chain, D1-D5 | same cell at (1,1365) (1,2732) (2,4098) (2,5465) (2,6223) | placed; findcell on the clean shot scores 0.81-0.83, each overlay checked at 1.25x. The four-gate core is the same in all six; the wiring left of x 17290 differs per copy and is drawn only for D0 (and D1's input) |
+| Input chain, D1-D5 | same cell at (1,1365) (1,2732) (2,4098) (2,5465) (2,6223) | placed; findcell on the clean shot scores 0.81-0.83, each overlay checked at 1.25x. The four-gate core is the same in all six; the wiring left of x 17290 differs per copy: the input lines are drawn for all six (run 4), the capacitor taps only for D0 |
 | Capacitor rectangles of chain 0 | 16960-17040 x 8445-8580 and x 8745-8880 | drawn |
 | Input latch, D0 | 17230-17590 x 8885-9370 | cell `dbus_lat`, traced |
 | Input latch, D1-D3 | **upside down**: `@inst dbus_lat` at (1,1266) (1,2631) (2,3998), mirrored about y 9195 (centres y 10461, 11826, 13193) | placed: findcell on the clean shot 0.76-0.77; `cellcheck.py` in both chip-2 shots: median correlation 0.92-0.94, the badly matching blocks are the VCC contact pits and the top edge. The first notes' "cluster 0 + 1366" was wrong |
@@ -69,7 +87,7 @@ down from the D0 pad cell. Gates sit on a 152 px vertical pitch between two rail
 | Capacitor rectangle of D6's c tap | 17147-17257 x 16776-16905 | drawn (plain diffusion, one contact) |
 | Capacitor rectangles of chains 4, 5 | 16880-16950 x 13820-13950; 17100-17210 x 14090-14210; 17130-17230 x 14820-14930 | seen, not drawn |
 | No latch follows chains 4-7 | - | chain 5 starts 758 px below chain 4, chain 6 679 px below chain 5, chain 7 630 px below chain 6 |
-| Logic above D0 | 17200-17700 x 5250-5900 | several gates, not looked at |
+| Logic above D0 | 17200-17700 x 5250-5900 | `r9c`'s five compare units. Their east halves (the loads, x 17500-17670) traced here in run 4: cell `dbus_r9l`, master = unit 1 (y 5384-5478), copies at (0,130) (0,260) (0,390), unit 0 mirrored about y 5370. Nothing else is there: field between the units, and no structure east of the rail up to x 17700 |
 
 findcell (metal and clean shot, threshold 0.4) finds no seventh or eighth copy of
 `dbus_in`: the buffers of D6 and D7 are a different cell (`dbus_in2`, below chain 5).
@@ -320,8 +338,140 @@ Traced (run 3; `g9.png`, `g9b.png` at 3-3.3x, overlay `ov9.png`):
   buried-contact box under it, repeating with the cells; review round 1 of run 2 found
   it continuous, 16 px wide, with no pad from y 8110 to 13700.
 
-What `dbus_do0_in` is: a poly from the west along y 16444-16463, not followed. It is the
-data that the chip puts on D0, in true sense (the pad is NOT `d0_out_n`).
+What `dbus_do0_in` is: the data that the chip puts on D0, in true sense (the pad is NOT
+`d0_out_n`). Its poly (y 16444-16463) starts on a pad (16993,16451), box 16977-17012 x
+16435-16468, with a bright contact centre in the metal shot; the stripped shot has no edge
+at x 16960 on that y, so nothing goes on west (run 3 drew the poly to the region's edge:
+wrong, corrected in run 4). A metal x 16983-17002 leaves the pad south, turns west at
+y 16702-16722 (a plain corner, no pad near it: `do0_pad.png`, 4x) and leaves the region at
+(16950,16712). `tools/follow.py` takes it on west to x 16795 and south to (16797,17434),
+with contact candidates at y 17259, 17295, 17324: outside this region, not looked at.
+
+### `d1_out_n`: D1's output data line (traced 2026-11-17, run 4; wiring only)
+
+One net, in this order:
+
+1. `dpad`'s strip 4 of D1's cell (west end 17800, y 9201-9227) runs on west as a poly
+   y 9219-9240 under the trunk (`d1o_top.png`: one orange shape with the cell's block);
+2. south at x 17635-17657, directly under the `d_hiz` metal, 390 px. No contact: the clean
+   shot under the metal is salmon to y 9606 and field pink from y 9612 (colours along
+   x 17647), so the poly ends in the corner;
+3. west along y 9589-9609, chain 1's "line 2", under the VCC rail, the thin metal, the VSS
+   rail and D1's input jumper;
+4. a step down of 22 px at x 17225-17243 to y 9612-9631. One poly: the clean shot at 6x
+   shows the Z (`d1o_jog.png`). The chip-2 cuts alone were ambiguous here (at x 17270 they
+   show three edges, the middle one being the top of D1's input pad);
+5. a pad (17120,9620) and a metal x 17113-17132 south from it for 6,140 px
+   (`tools/follow.py`: one piece). Its seven contact candidates were looked at in the
+   metal and clean shots at 3x (`d1o_cand_metal.png`, `d1o_cand_acid1b.png`): at y 11021
+   nothing; at y 12314-12384 chain 3's line 2 passes under (the clean shot is covered by
+   residue there; no ring or pad in the metal shot); at y 14165 and y 14849-14911 the plain
+   diffusion rectangles of chains 4 and 5 pass under it (tan, no specks, no ring). No tap;
+6. a step west at y 15751-15770 to x 17026-17046 (`d1o_jogm.png`, both chips, 4x; the
+   metal that turns the same way 25 px north-west of it is a separate line);
+7. a pad (17034,16343) and a poly west along y 16334-16355, which passes under a vertical
+   metal x 16940-16960 and leaves the region at x 16950.
+
+Extraction (full): the net is `d1_out_n`, gate of D1's pad cell (`d1_pu` =
+NOR(`d1_out_n`, `d_hiz`)). Its driver is not in this region.
+
+
+### The loads of R9's compare units (cell `dbus_r9l`), traced 2026-11-17 (run 4)
+
+`r9c` drew, for each RA bit, a pull-down under the rail x 17440-17495 (gate = the pad
+driver's input line `ra#_drv_in`, output = `ra#_cmp`, the compare line of R9's comparator)
+and left the east half, so that the unit being an inverter was an assumption (AMB-012).
+The east half is the load, and nothing else:
+
+- the output band under the rail runs on east as a diffusion strip 20 px wide, widens to
+  30 px and passes under a poly block (x 17558-17611, 66 px tall): the load channel,
+  W/L 30/53;
+- east of the block the strip ends on a land (58 x 64) with a metal contact to the rail
+  x 17616-17667;
+- west of the block an arm of the strip (x 17532-17552) turns back beside the block to a
+  heavy-outlined box (17557-17583, 22 px tall), where a tab of the block comes down onto
+  it: the buried contact that ties the load's gate to the output side.
+
+**Traced** (full extraction): `ra#_cmp = NOT ra#_drv_in`, # = 0-4. `tools/unsure.py
+--equations` gives bits 0-3 as firm; bit 4's depends on `r9c`'s `?P`, the gate poly of its
+unit (`trace/r9c.txt`, the open join `ra4_drv_in_u`). On its way to the comparator each
+output also passes `r9c`'s `?B` at the unit's west end (the tie from the output band to the
+poly that carries the output away): those are `r9c`'s items. One of them (unit 1, 17380-17410 x
+5440-5470) was looked at here at 5x in three shots (`u1_west.png`): a heavy-outlined box
+with a lighter centre between the poly from the pad and the diffusion from the band, i.e.
+it looks like the buried contact `r9c` assumed. Not measured, the other four not looked at.
+
+**The east rail is VCC** (traced, by metal continuity): `tools/follow.py` from (17632,5600)
+north reaches y 4597 and turns east; cuts in both metal shots (`tools/larr_px.py`, along
+x 17640 from y 4540 to 5300 and along y 4600 from x 17640 to 17920) show metal all the
+way, the dark samples being pits (one at (17640,4656) is dark in chip 2 only). The rail
+runs into a horizontal band y 4592-4635, which enters the wide metal x 17890-18190 that
+`pads_out` has as `vcc` from y 4810 down (`rail_n.png`, 1.2x). The rail's south end is at
+y 5902. That the *other* rail is VSS then also follows from the loads' orientation, which
+is what AMB-012 asked for.
+
+How it was measured: dark edge lines in the chip-2 stripped shot along five vertical cuts
+(x 17515, 17541, 17568, 17592, 17640) and fourteen rows (`tools/dbus_dark.py`). Units 1-4
+repeat at 130 px within 1 px on every edge; unit 0 is unit 1 mirrored about y 5370 within
+2 px. At x 17541 the cut shows the strip's outer edge and the arm's end but no line where
+the arm leaves the strip, so arm and strip are one layer. In the clean shot the arm is
+green (open diffusion) and the land is tan with contact specks. Overlay: `ov_r9l.png`
+(2x, metal and chip-2 stripped shot, all five).
+
+Raw `cache/acid.npy` is **not** in the common frame (10 px off here); the aligned array is
+`cache/acid_aligned.npy`, which `view.py` and `larr_px.py` use.
+
+### The input lines of D2-D5 (traced 2026-11-17, run 4; wiring only)
+
+Each is one net from the pin's protection node (`dpad`) to the first gate band of its
+chain, and each has the parts of D1's line: node metal down to a contact on a poly pad,
+poly west under `dpad`'s VSS trunk and the `d_hiz` metal, poly along the channel, "line 1"
+west under the VCC rail, the thin metal and the VSS rail, a pad, a metal jumper over
+"line 2", a second pad on the chain's first gate.
+
+| Pin | Node contact | West run (y) | Channel run | Line 1 (y) | Pad 1 | Jumper | Pad 2 |
+|---|---|---|---|---|---|---|---|
+| D2 | (17837,10141) | 10131-10152 | x 17592-17613, down to y 10932 | 10912-10931 | (17295,10920) | straight, x 17285-17303 | (17295,11008), poly down to the band |
+| D3 | (17838,11727) | 11714-11736 | x 17592-17614, down to y 12299 | 12278-12298 | (17295,12287) | straight | (17295,12376), poly down to the band |
+| D4 | (17838,13329) | 13318-13340 | x 17592-17614, down to y 13666 | 13645-13666 | (17316,13655) | L: west to x 17266, south | (17275,13806), on the band's west end |
+| D5 | (17835,14887) | 14878-14899, only to x 17631 | x 17631-17657, **up** to y 14403, directly under the `d_hiz` metal | 14403-14424 | (17316,14412) | L: west to x 17266, south | (17275,14500), poly down and east into the band |
+
+Evidence:
+
+- Every run: dark edge lines across it in the chip-2 stripped shot every 60-120 px, and
+  one cut along its centre between the two corners (`tools/dbus_dark.py`): two edges at
+  constant x all the way, and no line across the run, so no break and no branch. The
+  poly is orange in both chip-2 shots (165/118/58 in the metal shot against 160/135/82
+  for field).
+- Corners and ends at 3-4x in two or three shots: `d2_top.png`, `d2_bot_acid.png`,
+  `d2_bot_a1b.png`, `d2_jmp.png`, `d3_top.png`, `d3_bot.png`, `d4_bot.png`, `d4_jmp.png`,
+  `d5_chan.png`, `d5_top.png`, `d5_cor.png`, `d5_west.png`.
+- **D5's 480 px under the `d_hiz` metal is not a contact** (trap 13): no pad or ring on
+  the metal in either chip, `tools/tla_contacts.py` finds no candidate, and the clean shot
+  is salmon (poly under metal) throughout. A dark nick at (17650,14592) is in the edge of
+  chip 2's metal only; chip 1 has a speckle 8 px lower; the clean shot is unchanged there
+  (`d5_595.png`, 6x). In the clean shot the poly ends at both corners (pink beyond).
+- Where a line passes under the rails, the thin metal, the trunk and the `d_hiz` metal,
+  `tla_contacts.py` lists the same candidates in all four lines, at the open gaps between
+  the metals (x 17344, 17424, 17495, 17594; 17671, 17788), 8 px off the poly: open field,
+  not contacts. No ring on any of those metals in the views.
+- **D4's jumper over line 2** (17266-17286 x 13690-13710) is dim in chip 2 (137/119/58;
+  open poly beside it is 165/110/50, clear metal 215/180/95) and yellow in chip 1
+  (191/177/85): metal, thinner over the poly step (trap 19). Read as continuous; if it
+  were not, each half would be a metal with one end. D5's jumper is bright over its
+  line 2 in both chips.
+- A feature that crosses every chain's first gate band at x 17313 (an outline from above
+  the band to below it) is the same in chains 1-4 (`g1w_a1b.png`, `g1w_acid.png`). It is
+  not part of the input line: it is the west edge of the chain's own diffusion (review
+  round 1 of run 4: the first pull-down is wider than drawn; see the Review section).
+- Overlays: `ov_tops.png`, `ov_bots.png` (chip-2 stripped shot), `ov_jmps.png` (metal, 3x).
+
+Extraction (full): `d2_a = NOT d2` .. `d5_a = NOT d5`, firm; transistor count unchanged.
+
+What the lines "line 2" are: in chains 3, 4 and 5 line 2 turns south at x 17592-17612
+after passing under the rails (at y 12322, 13687, 14445); in chain 2 it runs on east past
+x 17640. They are believed to be the `d#_out_n` lines (D1's is "P_y of D1" in the ports
+table) and are not drawn.
 
 ### P_x and P_y (established about the two lines of AMB-003)
 
@@ -347,22 +497,26 @@ data that the chip puts on D0, in true sense (the pad is NOT `d0_out_n`).
 
 ## Ports
 
+The same ports with a definite place, one per line, are in `ports.d/dbus.txt` (run 4);
+keep the two in step.
+
 | Name | Layer | Where | Direction | What |
 |---|---|---|---|---|
 | `d0_in` | metal x 17548-17566 | comes down from the D0 pad cell: poly from a contact near 17818,6578 left along y 6578, down to a contact near 17546,6755, then metal down; turns left at y 8188 (cross-under 17300-17500) | in | D0 pad after its protection structure. Drawn from y 8050 down |
 | `d1_in` | poly | from the D1 pad cell's contact at 17822,8400 (drawn up to x 17835) | in | D1 pad after its protection structure |
-| `d2_in`..`d5_in` | poly | G1 gate band of each chain, at 17291,8340 + offset | in | not followed to the pads |
+| `d2_in`..`d5_in` | metal, then poly | `dpad`'s node metals at (17836,10025), (17836,11674), (17836,13279), (17836,14862) | in | pins D2-D5 after their protection (aliases of `d2`..`d5`); drawn to the chains (run 4) |
 | `dN_d` | poly, then metal | G4 output, 17290-17345 x 8825-8847 + offset | out of the chain | pad level, buffered and delayed; into the latch (D0-D3) |
 | `d4_d`, `d5_d`, `d6_d`, `d7_d` | poly | leave west at (16950,14000), (16950,14696), (16950,15173), (16950,15650) | out | the buffered pins D4-D7, to the latch column at x 16480-16800 (believed) |
 | `d6_in` | poly | pad (17838,16519) under the metal from D6's protection node | in | pin D6 (alias of `d6`) |
 | `d7_in` | poly under the VCC rail, x 17531-17548 | leaves south at (17540,17000) | in | believed pin D7; not followed to the pad |
 | `d7_c` | metal | leaves west at (16950,16758) | - | chain 7's c tap, probably to a capacitor; not followed |
-| `dbus_do0_in` | poly y 16444-16463 | enters at (16950,16453) | in | input of the inverter that drives `d0_out_n` |
+| `dbus_do0_in` | metal | leaves west at (16950,16712), from the pad (16993,16451) at the west end of the poly y 16444-16463 | in | input of the inverter that drives `d0_out_n` |
+| `d1_out_n` | poly y 16334-16355 | leaves west at (16950,16344) | in | D1's output data line; drawn from here to D1's pad cell |
 | `d0_out_n` | metal x 17591-17609 | joins `dpad`'s metal at (17600,7565) | out | D0's output data line (the thin metal) |
 | `db_b0`..`db_b3` | poly | pads under `dbl`'s contacts (17207,9467), (17077,10832), (17165,12200), (17208,13563) | out | the internal data bus bits, driven here by `dbus_drv` |
 | `dbus_le` | metal | leaves west at (16950,13614) | believed in | latch enable; see above for where it goes |
 | P_y of D0 | now `d0_out_n` (row above): drawn | | | |
-| P_y of D1 | poly y 9225-9240 from the pad cell to x 17650, down x 17640-17655 (under the P_x metal) to line 2 (y 9590-9610), left to a contact at 17120,9620, metal x 17110-17130 downward | - | to the pad | not drawn |
+| P_y of D1 | now `d1_out_n` (row above): drawn | | | |
 | P_x | metal x 17633-17650, y 7380-18835 | contacts listed above | to the pads | common enable-type line, not drawn |
 | lines from the core | metal | two wide metals arrive from the left at y 9520-9545 and 9565-9585 and turn down at x 17195-17215 and 17155-17175: `dbl`'s `db_b3` and `db_b2`; the one at y 9460-9480 to the contact (17207,9467) is `db_b0` | - | drawn in `trace/dbl.txt` |
 
@@ -454,7 +608,10 @@ bus lines.
    in the column is tied that way.
 13. `dbus_in`'s pull-down widths (60 for G1/G4, 56 for G2/G3) were drawn in the first
    session from the land under the rail. In `dbus_in2` the diffusion reaches west of the
-   rail (W 107 and 64). Whether `dbus_in`'s does too was not looked at (a size only).
+   rail (W 107 and 64). **G1 and G4: settled in run 4** (review round 1): the land has a
+   tab west of the rail to x 17316 above the band and the channel runs on under the band
+   to the output band, so W is about 94 (drawn). G2 and G3 (land drawn from x 17322) were
+   not looked at again.
 
 ## Review
 
@@ -597,6 +754,70 @@ Round 2: no findings.
 Its one remark, not an error: the stage 2/3 load strip measures about 24 tall where it is
 drawn 20 (a size; Ambiguity 10).
 
+### Run 4 (2026-11-17)
+
+**Round 1, full review of what run 4 added or changed** (reported 2026-11-17 19:31 +0000, a
+fresh Fable 5.2 agent; 37 images in `cache/scratch/dbus/review-7/`). Told to suspect: the
+east rail's join to VCC (read at 1.2x); whether the tab-on-arm box is a buried contact and
+arm and strip one diffusion; each output strip's join to `r9c`'s band and its clearance
+from the gate poly end; the cell copies; D4's jumper over line 2; a hidden contact under
+the `d_hiz` metal on D5's poly and its corners; each node metal's reach to its pad; each
+second pad's join to the gate band; branches or breaks along the channel runs;
+`d1_out_n`'s join to the pad cell's strip, its corner, the Z-step (trap 10), the long
+metal's candidate taps, a bridge at the metal's step, the end pad; whether anything goes on
+west of `dbus_do0_in`'s pad. It read unit 1 at 4x in three shots and unit 0 at 4x, profiled
+the rail-band-wide-metal joins in both metal shots, ran `cellcheck.py` on the loads (units
+2-4: 0.96-0.98, unit 0: 0.92), viewed the tops of all four input lines at 3.6-4.6x and the
+channel runs of D2-D4 end to end, the pads and jumpers at 3.6-4x, and every junction of
+`d1_out_n` and `dbus_do0_in`.
+
+No finding changes a connection. Two points:
+
+- Finding 1, **confirmed and fixed (a size)**: the outline that crosses each chain's first
+  gate band at x 17313 is diffusion, not wiring: G1's land reaches west of the rail. My
+  check on the master (chain 0): a closed outline 17312-17350 x 8305-8328 above the band,
+  green inside in the clean shot (105-130/131-152/85 against khaki 135-161/131-153/80
+  outside: open diffusion), pinker than field in both chip-2 shots; its west edge is a
+  dark line at x 17309-17316 at y 8316 and across the band at y 8340 (`g1_land.png`, 5x,
+  three shots; `tools/dbus_dark.py`). Below the band the output band was already drawn
+  from x 17305. G4 has the same tab (outline 17312-17350 x 8762-8781, green inside:
+  `g4_land.png`). Drawn: both channels now run from x 17316, W 94 (was 60), in the cell,
+  so in all six chains. No net changes (2176 nets, 3796 transistors before and after).
+- Finding 2, **confirmed, notes corrected**: the notes said `ra#_cmp = NOT ra#_drv_in` for
+  all five and named only `r9c`'s `?B`; `ra4_cmp`'s equation depends on `r9c`'s `?P` gate
+  poly. The Status and the loads' section now say so (`operation.md` already did).
+- Found correct: the rail to the band to the wide metal (both metal shots, 1.8x and
+  profiles; dark samples alternate between the chips: pits); strip, arm, box, load and
+  land of the units; the strip one diffusion with `r9c`'s band and 8 px clear of the gate
+  poly end; D2's channel poly 6-9 px clear of a `d_hiz` contact pad at (17640,10855) (three
+  shots); D4's jumper continuous (chip 2's stripped shot shows the metal's ghost over
+  line 2); D4's pad 2 joined to the band and clear of the `d4_a` poly below; D5's poly
+  salmon from y 14416 to 14896 with field beyond both corners, the nick dark in both chips
+  (y 14587-14597 and 14596-14602) but both stripped shots uniform and no pad: no contact;
+  `d1_out_n`'s join at x 17800, both corners, the Z-step one poly (poly colour down
+  x 17230-17236 from y 9593 to 9628 in chip 2, field beyond both stubs in the clean shot),
+  no tap at any candidate (chain 4's rectangle has its own contact at (17188,14155)), the
+  metal's step clear of its neighbour, the end pad, no contact under the metal
+  x 16940-16960; field west of `dbus_do0_in`'s pad in all shots.
+- Not checked: the 6,140 px metal between its candidates (`follow.py` only); line 1 under
+  the rails in chip 2 (fringes; read in the clean shot); `r9c`'s `?B` boxes; the VCC metal
+  north of y 4520.
+
+**Round 2: no findings.**
+
+Round 2 was a fix check (reported 2026-11-17 19:38 +0000, a fresh Fable 5.2
+agent; images in `cache/scratch/dbus/review-8/`) of the two rectangles added to `dbus_in`
+since commit 0e53e80. It measured the outline at all twelve sites (G1 and G4, chains 0-5)
+in all four shots (west edge x 17311-17316, top 19-23 px above the band; the drawn edges
+sit 3-6 px inside, so W could be about 98), found the inside pinker than field in both
+chip-2 shots at every site (in the clean shot green only in chain 0, mauve in chains 1-4),
+the west edge crossing the gate band as a dark line at every site, the tab one colour with
+the land up to the rail's edge, a 12-15 px field gap to the input line's poly in chains
+1-3 and the pads of chains 4 and 5 ending at x 17298 and 17293, and the extraction
+unchanged but for twelve widths. Viewed at 4x or more: the master's G1 and G4, G1 of
+chains 1, 4 and 5, G4 of chain 3. Could not check directly: the tab's join to the land
+under the rail's edge line (inferred from the absence of a second edge).
+
 ## Not done
 
 - **The latches and bus inverters of bits 4-7**: not in this region. `d4_d`..`d7_d` leave
@@ -605,21 +826,26 @@ drawn 20 (a size; Ambiguity 10).
   is `areg`'s right-hand column down to y 14700 and `bd2`'s below; `db_b4`..`db_b7` are
   expected to be driven there. First thing to try: `findcell` with `dbus_lat`
   (17230 8885 17590 9370) and `dbus_drv` restricted to 16450,13900:16850,15750.
-- `dbus_do0_in` west of x 16950 (poly along y 16453), and the drivers of `d1_out_n`..
-  `d7_out_n` (D1's rises on a metal x 17110-17130 to a contact (17120,9620)): the five to
-  seven vertical metals at x 16945-17130 left of chains 4-7 are probably these lines and
-  `dbl`-like bus lines; none is drawn.
+- `dbus_do0_in` west of (16950,16712) (metal; see its section) and `d1_out_n` west of
+  (16950,16344) (poly): both drivers are outside the region.
+- `d2_out_n`..`d7_out_n`: not drawn. Method that worked for D1's (about ten images): cuts
+  with `tools/dbus_dark.py` for the poly parts, `tools/follow.py` for the metal, then a
+  look at each contact candidate and at the end. The vertical metals at x 16945-17260 left
+  of chains 4-7 (x about 16950, 17075, 17160, 17207, 17250 at y 16300) are probably these
+  lines; the one that jogs 25 px north-west of `d1_out_n`'s jog (y 15715-15730, then south
+  at x 16985-17005) is a neighbour of the same kind.
 - `d7_in` south of y 17000 to D7's protection; `d7_c`'s metal west of x 16950.
-- Logic above D0 at 17200-17700 x 5250-5900.
-- Left-hand wiring of chains 1-5: the capacitor taps (`d#_b`, `d#_c`; in unit 1 a poly
+- The capacitor taps of chains 1-5 (`d#_b`, `d#_c`; in unit 1 a poly
   comes down x 17181-17197 and turns west along y 10325-10345, probably `d1_c`'s; chain 4:
   `d4_c` runs west and diagonally to a pad (16945,14345), `d4_b` to a pad (17158,14045)
   with only a dot of metal beside a rectangle 17100-17210 x 14090-14210; chain 5: `d5_c`
-  to a pad (17210,15020) and by metal north to a rectangle 17130-17230 x 14820-14930), the
-  input lines of D2-D5 (the contact (17293,10920) below unit 1 is on D2's cross-under; a
-  poly along y 14440-14460 from a pad (16945,14450) reaches chain 5's input pad at about
-  (17278,14420)).
-- Channel wiring x 17590-17830: `d_hiz`'s driver, the input lines of D2-D5.
+  to a pad (17210,15020) and by metal north to a rectangle 17130-17230 x 14820-14930).
+  The poly along y 14445-14466 from a pad (16945,14450) is chain 5's "line 2", not its
+  input (the earlier note here was wrong).
+- The "line 2" of each chain (believed `d#_out_n`): chain 2's runs east past x 17640 at
+  y 10952-10975; chains 3, 4, 5's turn south at x 17592-17612 (y 12322, 13687, 14445) and
+  are not followed.
+- Channel wiring x 17590-17830: `d_hiz`'s driver.
 - `dbus_le` west of x 16950: drawn to the region's edge only; its eight taps and its
   south-west end (16772,15800).
 - Ambiguity 9 (the box beside `d6_in`'s metal).

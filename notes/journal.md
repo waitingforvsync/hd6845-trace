@@ -1295,3 +1295,163 @@ branch; `/trace6845` resumes a held claim first. The coordinator works through `
 The dashboard lists the handoffs waiting. Tested end to end in a scratch clone with its own
 remote (take, take again, done --continue, done, someone else's prefix refused, two handoffs
 in one second kept apart).
+
+## 2026-11-17 20:35  Refresh
+
+The second run of `/refresh6845`. Since the first (14:43): three collaborators merged through
+the gate with the new claim and handoff flow: dp111 (`dpad`, the D0-D7 pad cells; `areg`;
+`tla`; `amr`), Tom Seddon (`dbus`, twice) and Matt Godbolt (`tc1`, five merges in a loop, the
+claim kept between them). Twelve handoffs wait in `handoffs/`.
+
+- **Renames: none.** The candidates are deliberate aliases (`ar#_q`, `*_tab`, the data pins'
+  `d0_in`/`d1_in`/`d6_in`, `cdp2_c_s#_bus` while R10/R11 stay unrenamed under AMB-019) or
+  rest on uncertain geometry. One labelling to fix with the dpad/dbus handoffs: `d2_in_u` ..
+  `d6_in_u` sit on the pad side, aliased to the pins, so they mark no open join; the open
+  join is on the buffer side (`dbus`'s `d2_in` .. `d5_in`, `d7_in`: `d2_a = NOT d2_in`).
+- **`operation.md`**: the collaborators had added their rows (data pins as outputs, the input
+  latches, the latch cell's 70-wide pass transistor, the step logic's selector). Checked
+  against the equations; one mark corrected: the input latches follow the pin itself only
+  for D0 and D1, D2/D3's buffers take `d2_in`/`d3_in` whose join to the pin is not drawn.
+  Header and counts current.
+- **`out/`** rebuilt: 2,168 nets, 3,845 transistors, 0 errors, 0 warnings, 0 names outside the
+  glossary, 772 of 1,117 equations firm. The coarse floor-plan blocks "D0-D7 pad cells" and
+  "data bus interface column" removed: `dpad` and `dbus` cover them. Coverage: 60.0 % of the
+  die rectangle traced (54.4 % at the first refresh), 99.3 % in some package, 0.0 % in none.
+- Three pushes were rejected because collaborators merged meanwhile; each time pulled,
+  re-checked, rebuilt and pushed (the protection on main doing its job).
+- Open PRs from dp111 opened before write access: #15 (`amr`'s comparator inputs are
+  `c4l0`-`c4l3`; `amr_eq_r3` drawn to `tla`), #16 (`ral`'s inverter 1: the RA/MA output
+  cell is a latch with a force line; AMB-017/018, R14), #17 (`dbus`: all eight input latches,
+  D6/D7 buffers, `dlat_en`'s driver). **#17 overlaps Tom Seddon's active `dbus` claim.**
+
+## 2026-11-17 13:33 -0600  Process changes from a tracer's suggestions: batched reviews, the round rule, ports, shared tools
+
+User: apply the suggestions of the `tc1` tracing session (eight runs, 2026-11-17; two of them
+were already questions in its handoffs of `3c0efe1` and `48b43dd`). Done on a branch
+(`process-suggestions`), not traced: no trace file changed.
+
+- **Small pieces share a review.** One reviewer used about 250,000 tokens on a three-transistor
+  NOR, most of it the fixed cost of reading the guide and calibrating. Two or three small
+  cells of the same build may now be traced, each shipped as it is finished, and reviewed in
+  one full round: at most three pieces and about a dozen transistors, one brief listing every
+  piece's claims and suspicions (`notes/workflow.md` step 6, `/trace6845` steps 5 and 6).
+- **Only findings that change a connection count against the three rounds.** `tc1`'s run 3
+  was kept out of main by a third round of a rail's width, a diffusion's width and a comment.
+  A geometry-only finding is fixed and recorded, and needs no further round if
+  `tools/sameconn.py COMMIT` (new) ends `connections identical` for the package and for every
+  file: it compares the nets' names, each transistor's three nets and the equations between
+  a commit and the working tree, ignoring sizes and positions. (`tools/names.py compare` is
+  the test for renames and fails when any transistor's size moves, so it could not serve.)
+  Run on `tc1`'s history, the run-3 round-3 fixes (`92b9dcf` to `937a48b`) and run 6's width
+  fix (`6b214a1` to `61e6cf2`) both read `connections identical`. A moved port is a changed
+  connection that the extraction cannot see; the rule says so.
+  The gate (`tools/mergecheck.py`, check 5) now reads the **last** `Round N:` line of the
+  Review section: `Round N: no findings.`, or `Round N: no findings that change a connection.`
+  with the words `connections identical` in the section. Before, "no findings" anywhere in the
+  section passed, so an unfinished later cycle passed on an earlier one's clean round. Notes
+  with no `Round N:` line pass as before. `--review-test FILE` runs that check alone.
+  The gate now also **fails when the last `Round N:` line is not a clean one**
+  (`STRICT_LAST_ROUND` in `tools/mergecheck.py`). This is stricter than before for every
+  collaborator and was not among the suggestions; it was pushed switched off, and the user
+  turned it on the same day ("yeah let's turn that on").
+- **Ports are machine-readable**: `ports.d/PREFIX.txt`, one line per port (name, layer, place
+  or range, direction, note), a tracer's own file (workflow step 3, guide sections 8-10, the
+  gate, the pull request template; `tools/rename.py` and `tools/signals.py --docs` cover it).
+  `tools/ports.py` lists the ports of different packages that meet within 40 px and whether
+  names, layers and directions agree, names used by two packages at places that do not meet,
+  and ports with no partner; `--near X,Y`, `--prefix P`. Seeded with `ports.d/tc1.txt`, 50
+  lines transcribed from the tables in `notes/blocks/tc1.md`; with one file, nothing meets yet.
+  Optional for blocks already traced, expected for new work.
+- **Two traps** (guide, section 4): 21, bright green in the open is a large diffusion, which
+  the class map paints as field; 22, a thin metal is dark for 35-80 px over a buried contact
+  and that is not a contact. Both can have misled earlier blocks, so both are on the Re-read
+  list: **R19** (areas called field from green or from the class map without `--open`: `tcw`
+  first, then the rest of the top-centre and top-left logic) and **R20** (contacts on thin metals accepted from a dark stretch: `tcw`'s bus
+  metals first). The layer tables did not need changing: they already give open diffusion as
+  green and open field as khaki.
+- **Shared measuring tools**, since six packages had each written their own: `tools/px.py`
+  (colour profiles: rows, columns, points, any shots, composites), `tools/textmap.py` (text
+  maps; `--acid` adds the chip-2 stripped shot), `tools/opendiff.py` (large open diffusions).
+  Each prints the same as the tool it came from (`tc1_px.py`, `tc1_hex.py`, `tc1_green.py`) on
+  the calls tried; the per-block tools stay, because notes cite them.
+- **`/trace6845`**: the survey and a draft of the geometry are written to
+  `cache/scratch/PREFIX/` before anything is drawn (it made resuming after a compaction a
+  matter of reading two files); the point to compact or start afresh is right after a merge
+  and handoff. The reviewer briefs carry the lines tracers had been adding by hand: `cd` into
+  the worktree in every command, `--out cache/scratch/PREFIX/review-N/NAME.png` (a bare name
+  lands in the tracer's folder), which N, do not read the Review section, no agents, no web.
+- **`tools/costs.py` missed reviewers whose brief had been edited.** It matched two fixed
+  phrases; the run-7 reviewer's brief began "You are reviewing one piece of a die trace" and
+  two fix checks "You are checking one correction to a die trace", so three review agents
+  counted as tracing (the review figure stood at $51.08 across run 7's review).
+  It now goes by how the brief opens and by the description the agent was started with
+  ("Review ...", "Fix check ..."). On this machine's transcripts, run back to back: review
+  $57.55 before, $68.79 after, of $152.69. The committed cost reports are not regenerated
+  here: the next `tools/costs.py` run will show the higher figure.
+## 2026-11-17 20:46  Thirteen handoffs processed; PR #17 held
+
+Handoffs taken in (all merged to main earlier today by their tracers): `dpad` (dp111, e3b6adf),
+`areg` (dp111, 0d5e402), `tla` (dp111, 0cbaceb), `ral` (dp111, 8667009), `amr` (dp111, 8171755),
+`dbus` runs 2 and 3 (Tom Seddon, c492bf6, c034e51), `tc1` runs 3-9 (Matt Godbolt, six handoffs,
+3c0efe1 to 8650cb8). Extraction 2,169 nets, 3,849 transistors, 0 errors, 0 warnings; 773 of 1,119
+equations firm; traced 60.0 % of the die, 0.0 % in no package.
+
+- **Master list.** `dpad`, `areg`, `ral`, `mal`, `amr` done; `tla`, `dbus`, `tc1` partial (claims of
+  `dbus` and `tc1` kept by their tracers). New package **`dlat`** (16450-16950 x 13900-15800, the
+  input latches of data bits 4-7, proposed by `dbus` and `areg`), replacing the queue row `areg
+  (continue)`. Notes for `tcw` (two poly rows from `tc1` at x 6750) and `tc2` (where `tc1`'s cell B
+  output lands). Open join `tc1_x1_u` listed.
+- **Re-read list** R21-R27 (after Matt Godbolt's R19, R20, which already cover `tc1`'s two lessons:
+  bright green in the open, and a thin metal dark over a buried contact): `pads`' data pad readings
+  (R21), pass-transistor widths on a widened land (R22), pull-downs on both sides of a rail (R23),
+  gap artefacts not checked in the chip-2 shots (R24), the input inverters' L arm (R25), follower
+  jumps at pads beside wide metal (R26), mixed medians (R27).
+- **Ambiguities.** AMB-003 resolved (the data pad cell, `dpad`); AMB-004 changed (the L arm is a second
+  pull-down in the data bus column); AMB-005 extended; AMB-017 reading B struck; AMB-018 resolved (the
+  `ral` cell is a latch with a force line, FIRM in all 19 copies). New: AMB-020 (`tc1_x1`'s three
+  joins), AMB-021 (D6's line and the `d0_out_n` inverter, assumed no contact), AMB-022 (`rcs_iso2958`),
+  AMB-023 (`amr` c0's box, assumed buried).
+- **Tracing guide.** Trap 2 extended (check a gap artefact in both chip-2 shots); traps 23 (the L arm) and
+  24 (medians, widened lands, rails) new, after Matt's traps 21 and 22.
+- **Other blocks' notes.** `rdp3` (T1 70/28), `dbl` (the unit drives the data line; the poly U is
+  `dl1_q_n`), `bd2` (the metal at (16772,15800) is `dbus_le`), `bust` (`amr`'s lines are inputs),
+  `mal` (the latch is traced; 98 transistors), `pads` (data pad section superseded by `dpad`), `dpad`
+  (D6's line drawn by `dbus`), `tcw`, `fld`, `shm` (notes from `tc1`); glossary rows `db_b#`, `tc1_x1`,
+  `d#_in_u`, `dbus_le`; `operation.md`'s RA and MA rows (the latch is firm). `trace/dpad.txt`: the labels
+  `d2_in_u`..`d6_in_u` and their aliases dropped (Tom's run 4, which landed during this work, draws
+  D2-D5's lines; D6's was drawn in run 3); `trace/mal.txt` header.
+- **Not applied.** `notes/blocks/dbus.md`'s "depletion load on P_x / P_y" (from `dpad`): left to Tom,
+  whose claim is active and whose run 3 already names P_x `d_hiz`. `bust`'s two `?P` rows (made firm
+  only by tracing, noted in the `amr` row). Renaming `tla_w3461` away (an alias of `amr_eq_r3`): `tla`'s
+  region is inside dp111's `tl1` claim, so it waits for the next refresh.
+- **PR #17** (dp111's bits 4-7 latches) is kept open on purpose (user): an independent trace of what
+  `dlat` covers, to compare when that package lands. Checked against main today: 222 of main's 236
+  transistors in x 16300-17760 matched within 20 px, 81 nets mapped with 0 inconsistencies; #17 has 48
+  transistors main has not (bits 4-7) and predates the `rdp3_lat` width fix.
+- Two runs merged over the coordinator's earlier Opus session (`amr`, `ral`: mergecheck 8b) with the
+  contributor's approval; the tracing and reviews were Fable 5.2.
+- Matt's questions in the `tc1` handoffs (the colour trap, the review limit) were answered by his
+  process change of 13:33 -0600 above; the `shm` `?B` re-look is in AMB-020 and `shm.md`; the west
+  boundary at x 6750 is `tcw`'s (its row).
+- `/refresh6845` step 0 now points at `tools/claim.py handoffs`.
+
+## 2026-11-17 20:53  Handoff `dbus` run 4 (Tom Seddon, 9302a30); claim released
+
+Arrived while the thirteen above were being pushed. Extraction 2,165 nets, 3,854 transistors, 0
+errors, 0 warnings; 777 of 1,124 equations firm.
+
+- **Master list.** `dbus` partial, 127 transistors, claim released by its tracer; the queue row
+  `dbus (continue)` now lists only the wiring left (`d2_out_n`..`d7_out_n`, the drivers of
+  `dbus_do0_in` and `d1_out_n`, `d7_in`, the capacitor taps, `d_hiz`'s driver, AMB-021). `r9c`: its
+  units' loads are traced (in `trace/dbus.txt`, cell `dbus_r9l`).
+- **AMB-012** resolved for the loads and the rails (the east rail is VCC): `ra#_cmp` = NOT `ra#_drv_in`.
+  Left: `r9c`'s `?B` ties at the units' west ends. Notes of `r9c`, its floor-plan line, the glossary
+  row `ra#_cmp` updated.
+- **Re-read.** R22 widened to pull-downs drawn from the land under a rail (`dbus_in`'s G1, G4: 60 ->
+  94; `inrow`, `dbus_in`'s G2/G3, first-session blocks). New R28 (ports drawn to a region's edge
+  without looking at the edge; `dbus`'s `d4_d`..`d7_d`, `dbus_le`, `d7_c` at x 16950, for `dlat`)
+  with trap 25. Guide section 2: tools must load the aligned arrays, not `cache/acid.npy`.
+- `dpad.md`: D2-D6's node contacts and D1's `d1_out_n` recorded. The `d#_in_u` aliases had already
+  gone in the entry above.
+- **PR #17** stays open: Tom's run 4 confirms the bits 4-7 latches are not in `dbus`'s region, so
+  the comparison waits for `dlat`.

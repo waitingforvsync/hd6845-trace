@@ -99,9 +99,9 @@ P 14999,5613:15033,5647
 C 15016,5630
 # the other east ends are left as ports: c5 (13715,4850), a0 (15280,5068), lw1 (15584,5110),
 # lw2 (16146,5153), a2 (16926,5196); notes/blocks/bust.md
-# amr's outputs land on these lines (trace/amr.txt): aliases
-@alias cdp1_l4588 amr_ob_c1
-@alias cdp1_l4632 amr_ob_c2
+# amr's outer lines (inputs into its comparator; trace/amr.txt) are these lines: aliases
+@alias c4l1 amr_ob_c1
+@alias c4l2 amr_ob_c2
 
 
 # db_b0: its pad (13715,4850); poly south at x 13706 to a pad with a contact (13705,5628)

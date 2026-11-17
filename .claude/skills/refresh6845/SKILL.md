@@ -24,8 +24,8 @@ git switch main && git pull --ff-only
 tools/claim.py list
 ```
 
-Note any claim marked "merged, awaiting coordinator". Its proposals are a separate job
-(the coordinator's follow-up), but its notes are input to step 2. Find the last journal
+Run `tools/claim.py handoffs`: unprocessed handoffs in `handoffs/` are a separate job
+(the coordinator's follow-up), but their notes are input to step 2. Find the last journal
 entry titled "Refresh" (`grep -n '^## .*Refresh' notes/journal.md | tail -1`): what was
 merged since then is what this run must take in. Read those journal entries, the master
 list's `rename` row, `notes/signals.md` (its rules first), `notes/operation.md`, and the

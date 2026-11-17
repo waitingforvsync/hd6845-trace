@@ -119,7 +119,7 @@ and on the data path; it is what the silicon here says.
 | Group 3 (`wr_addr_sel`, NOR of R/W, RS, CS) | 15890-16400 x 16245-16470 | traced, west part by the pattern of group 2 |
 | Group 4, first gate (`bd2_rs_n`, from `rs_d`) | 16000-16360 x 16545-16680 | pull-down and output band traced, load not |
 | Left column below y 16680 | x 15890-16150, y 16680-17100 | not traced |
-| Right-hand column | x 16480-16800, y 14700-16450; routing east and south of it | not looked at |
+| Right-hand column | x 16480-16800, y 14700-16450; routing east and south of it | not looked at; the metal ending at about (16772,15800) and running north along x 16818 with eight tapped pads is `dbus_le`, the data input latches' enable (`dbus`, 2026-11-17); the column is the bits 4-7 latch column, package `dlat` |
 
 ## Logic
 

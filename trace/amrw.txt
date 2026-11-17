@@ -1,0 +1,165 @@
+# amrw: the route of amr_eq_r3 (R3 bits 4-7 = the four compared lines) from amr's column at
+# x 11490 to the top-left logic. notes/blocks/amr.md. Wiring only, no transistors.
+# It starts at the pad (11350,6347) that trace/amr.txt draws (buried contact on the wired-NOR
+# line, poly west). Every pad: ring in both metal shots and a green patch on a poly pad in
+# the clean shot (cache/scratch/amr/w1, p1, w3, pads1.png at 2.7-3.8x). Metals: tools/follow.py
+# (end to end between the pads, no other contact candidate). Poly rows: strips at 1.55-1.65x
+# in the clean shot (st2, st3, st4, st5.png) and a colour profile along each row against its
+# flanks (tools/amr_row.py: no weak stretch on any of them).
+@block amrw
+@w M=12 P=18
+@s 24x24
+
+# 1. metal west along y 6350, south at x 11068, to the pad (11027,6407) at the east end of
+#    the central datapath's channel 2 (w1.png, 3.5x)
+M 11350,6349 x11068 y6408 x11027 w=13
+P 11010,6391:11044,6424
+C 11027,6407
+
+# 2. poly west: the SECOND line of channel 2 (cdp2: 13 lines, this is "y 6410"), 3,580 px,
+#    under every slice's metals and rails with no pad (cdp2's contact test found none in
+#    s3..s7 either). No track step anywhere: the three top rows keep y 6365 / 6409 / 6452
+#    from x 7500 to 11000 (st2, st3 at 1.6x; the place where the lower lines step, x 7860-7960,
+#    at 3x in both stripped shots: k1.png).
+P 11027,6408 x7445 w=18
+P 7428,6394:7462,6427                   # pad (7445,6410); the thin metal x 7532 passes east of it over the poly, no pad
+C 7445,6410
+
+# 3. metal west along y 6413 over fld's crossing fields to the pad (6145,6410)
+M 7445,6413 x6145
+P 6128,6394:6162,6427
+C 6145,6410
+
+# 4. poly west to the pad (5629,6412); metal west over the vertical poly bus x 5000-5450 (no
+#    pad on it) to the pad (4931,6412); poly west to the pad (4631,6411). The same pattern as
+#    the scan line counter's lines two to six tracks south (trace/slbus.txt).
+P 6145,6410 x5629 w=18
+P 5612,6395:5646,6429
+C 5629,6412
+M 5629,6413 x4931
+P 4914,6395:4948,6429
+C 4931,6412
+P 4931,6412 x4631 w=18
+P 4614,6394:4648,6428
+C 4631,6411
+
+# 5. metal north along x 4628 (dim in the metal shots, protected strip in the clean shot;
+#    n1.png), west along y 5982 to the pad (3998,5979); poly west to the pad (3740,5978);
+#    metal north to the pad (3739,5630) (n2.png)
+M 4628,6411 y5982 x3998
+P 3981,5962:4015,5996
+C 3998,5979
+P 3998,5979 x3740 w=18
+P 3723,5961:3757,5995
+C 3740,5978
+M 3738,5978 y5630
+P 3722,5613:3756,5647
+C 3739,5630
+
+# 6. poly west along y 5630 through tla's second crossing field and under the foot of the
+#    step logic cluster, 1,500 px, to the pad (2242,5632) (st5 at 1.65x, w7.png)
+P 3739,5630 x2242 w=18
+P 2225,5615:2259,5649
+C 2242,5632
+
+# 7. metal north along x 2240, 2,170 px straight up the left bus field (v1m, v1b.png: the poly
+#    rows y 4540, 4980 and 5500 pass under it without a pad), to the pad (2244,3463)
+M 2240,5632 y3463
+P 2227,3446:2261,3480
+C 2244,3463
+
+# 8. poly east along y 3461 across the first bus field into the west side of tla's first
+#    cluster. Drawn to the west edge of the diffusion column under rail R1 (x 2600-2655): there
+#    it is the gate of a transistor (described in the notes, not drawn: the column is tla's
+#    untraced "west side above y 4940").
+P 2244,3461 x2596 w=18
+N P 2400,3461 amr_eq_r3
+N P 9000,6408 amr_eq_r3
+N M 2240,4500 amr_eq_r3
+
+# =====================================================================================
+# The four compared lines come from the 4-bit counter in the left array's upper rows (c4l,
+# trace/ur.txt, trace/urch.txt): c4l0 -> cdp1_l4544 (amr c0, R3 bit 4), c4l1 -> cdp1_l4588
+# (c1, bit 5), c4l2 -> cdp1_l4632 (c2, bit 6), c4l3 -> cdp1_l4676 (c3, bit 7).
+# urch draws the four poly rows (y 6157, 6197, 6239, 6280) as far as x 4720; bust draws
+# cdp1_l4632 and cdp1_l4676 west to the pads (5885,5893) and (5922,5935), cdp1_l4588 to the
+# corner (7532,4619) and cdp1_l4544 to x 7870. What is drawn here joins them.
+# Views in cache/scratch/amr/: c4a (rows and pads x 4700-5020, 1.85x), c4b (the four nested
+# corners, 1.7x, both shots), c4c (the four rows x 5530-5930 and their eight pads, 2.7x),
+# vv (the four nested metals x 5890-6016, y 4570-5935), cf1, cf2 (crossing field x 6440-6990:
+# four straight rows in both stripped shots, 2.1-2.25x), cn1, z3 (the corners at x 7490 / 7538,
+# 2.7x and 4x), pads2 (pads at 3.8x). Metals: tools/follow.py; rows: tools/amr_row.py profile.
+# Nothing crosses: the four lines stay nested in the same order all the way.
+# =====================================================================================
+# --- rows east from urch's ends to pads at the vertical poly bus (x 5050-5450)
+P 4715,6157 x5016 w=18
+P 4999,6136:5033,6170
+C 5016,6153
+P 4715,6197 x4977 w=18
+P 4960,6179:4994,6213
+C 4977,6196
+P 4715,6239 x5015 w=18
+P 4998,6223:5032,6257
+C 5015,6240
+P 4715,6281 x4977 w=18
+P 4960,6266:4994,6300
+C 4977,6283
+# --- metals east over the bus (no pad on any of its polys), north by nested corners, to four
+#     pads; a poly that runs down x 5497 under c4l1's metal and east along y 6238 is another
+#     net (no pad where they coincide)
+M 5016,6153 x5450 y5803 x5537
+M 4977,6196 x5495 y5849 x5580
+M 5015,6240 x5540 y5893
+M 4977,6284 x5582 y5935
+P 5520,5786:5554,5820
+C 5537,5803
+P 5563,5832:5597,5866
+C 5580,5849
+P 5520,5876:5554,5910
+C 5537,5893
+P 5565,5918:5599,5952
+C 5582,5935
+# --- four poly rows east under five vertical metals (no pads) to four pads; the lower two are
+#     the pads bust drew at the ends of cdp1_l4632 and cdp1_l4676
+P 5537,5803 x5880 w=18
+P 5863,5788:5897,5822
+C 5880,5805
+P 5580,5849 x5927 w=18
+P 5910,5833:5944,5867
+C 5927,5850
+P 5537,5893 x5885 w=18
+P 5582,5935 x5922 w=18
+# --- c4l0 and c4l1: metals north (x 5888, 5933) and east (y 4572, 4613) to the west pads of
+#     the crossing field, rows across it, metals east and north to the pads on the rows that
+#     enter cdp1 (bust: the stair at x 8215-8345 takes row y 4500 to cdp1_l4544 and the row
+#     from (7810,4547) to cdp1_l4588)
+M 5886,5805 y4572 x6495
+P 6478,4551:6512,4585
+C 6495,4568
+P 6495,4568 x6968 w=18
+P 6951,4553:6985,4587
+C 6968,4570
+M 6968,4572 x7492 y4506 x7860
+P 7843,4484:7879,4518                   # the pad "about (7860,4500)" of bust's notes: ring, green patch
+C 7860,4502
+M 5932,5850 y4613 x6454
+P 6437,4595:6471,4629
+C 6454,4612
+P 6454,4612 x6925 w=18
+P 6908,4595:6942,4629
+C 6925,4612
+M 6925,4613 x7536                       # joins bust's metal x 7532 (drawn there to y 4619: its corner)
+N P 4900,6157 c4l0
+N P 4900,6197 c4l1
+N P 4900,6239 c4l2
+N P 4900,6281 c4l3
+@alias c4l0 cdp1_l4544
+@alias c4l1 cdp1_l4588
+@alias c4l2 cdp1_l4632
+@alias c4l3 cdp1_l4676
+
+# The join to tla (drawn there after this route was): amr_eq_r3's metal x 2240 and its poly
+# east along y 3463 are tla's `tla_w3461`, a data input of the west column's selector
+# tla_w3417 = NOT(rcs_thin_e.tla_w3376 + tla_w3505.tla_w3461). The two blocks' geometry meets
+# on the metal x 2240; the alias says which name the net keeps.
+@alias amr_eq_r3 tla_w3461

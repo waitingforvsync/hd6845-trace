@@ -11,13 +11,13 @@
 
 # Each slice has two vertical metals that end at the top on a contact to poly at y 5585
 # (x 12693 and 12782 in c3; follow.py: metal straight down to y 6312, its contacts in the
-# slice not identified). From each contact a poly runs north under the wide supply metal
+# slice: y 5640, 5928 and 6112, see below). From each contact a poly runs north under the wide supply metal
 # (y 5200-5550) to a pad on one line of the bus; that line runs west to the staircase at
 # x 11650-11700 and east towards the right datapath (not drawn here).
 #   inner line (x 12693 - 390k): pads on bus lines y 5177 (c3), 5135 (c2), 5047 (c1)
 #   outer line (x 12782 - 390k): pads on bus lines y 4742 (c3), 4696 (c2), 4657 (c1)
 # Pads from the 0.85x survey and a 2.6x mosaic of the inner pads
-# (cache/scratch/amr/nl.png, pads.png); the bus lines' y from the metal shots' profile at
+# (nl.png, pads.png: images not kept); the bus lines' y from the metal shots' profile at
 # x 12200.
 
 # c3 outer: drawn by r9m (poly x 12782 from the pad (12780,4738) to y 5550): extended to
@@ -78,7 +78,7 @@ N M 11916,6000 db_b5
 # a pad with a contact (13310,6385)". The same metal goes on north (tools/follow.py from
 # (13327,6300) north: corner at y 5628, west to x 13123) to a pad with a contact
 # (13125,5628) (ring in the metal shot, poly pad in the stripped shot, 2.2x:
-# cache/scratch/bust/wr3.png), from which a poly runs west across all four slices. It is NOT
+# wr3.png, image not kept), from which a poly runs west across all four slices. It is NOT
 # straight (independent review, 4.7-7x in four shots): in each slice it detours south
 # around a metal-to-diffusion contact box (c3: x 12675-12720, y 5622-5665, ring at
 # (12690,5640)) - east of the box it turns south at x 12752-12770, runs west along
@@ -93,8 +93,8 @@ C 13125,5628
 # bottom runs y 5667-5690; the west corner of each detour (x 12642-12665 in c3) is seen
 # end to end under the rail's edge. The east leg (x 12752-12772) lies in the 28 px gap
 # between two metals: there both chip-2 shots show it as one orange band from y 5622 to
-# 5695 in all four columns (5x mosaic, wl.png). The bottom run and west corner of the
-# column at x 11490 are seen only at 1.4x (c0.png): ?P.
+# 5695 in all four columns (5x mosaic, amrc/wl.png). The bottom run and west corner of the
+# column at x 11490 are seen only at 1.4x (amrc/c0.png): ?P.
 P 13125,5636 x12762 w=22
 P 12762,5625 y5690 w=22
 P 12773,5679 x12653 y5636 x12372 w=22
@@ -109,6 +109,7 @@ N P 12000,5636 wr_r3
 # =====================================================================================
 # The slice. Master = column c3 (x 12560-13000, y 5620-6330); read on sub-pixel medians of
 # c1..c3 at 3-5x (cache/scratch/amrc/q11, q12, a15, a2, z1..z8.png) and the class map.
+# An image named below without a directory is in cache/scratch/amrc/.
 # Top third (y 5620-5880): one register bit, the same circuit as rdp3_lat in another
 # layout: pass transistor from the inner (data) line on wr_r3, two inverters, and a weak
 # always-on device (gate on VSS) from the output back to the storage node.
@@ -318,3 +319,28 @@ C 13016,5758 s=24x34
 D 12993,5888:13048,5946
 C 13018,5907 s=24x34
 D 12996,5940:13022,6095
+
+# --- where amr_eq_r3 leaves (2026-11-17, amrw). In the column at x 11490 the outer line's metal
+# (x 11601-11621) ends over a box with a heavy outline (11601-11628, 6286-6307). The box
+# stands on the line's diffusion, not on field: under that metal the clean shot is flat tan
+# (protected diffusion) from y 6243 to 6305, crossed only by two dark lines (y 6276, the
+# line's south edge of the other columns, and y 6287, the box's north side, which runs on
+# east as the south edge of the stepped-down line). Inside the box: tan, no specks (a metal
+# contact to diffusion has them, e.g. (11521,5640)), no green patch (a metal contact to
+# poly has one, e.g. (11611,5928)); the metal is not widened and the dark stretch across it
+# (12 px, y 6278-6289, both metal shots) is what the outline of a buried contact prints
+# through a metal (10-12 px at the tie box (11517-11543,6106-6135) under the data line). A
+# poly leaves the box south (salmon bar y 6312-6320 under the metal's margin, then orange in
+# both chip-2 shots) and turns west at y 6338-6356. So: a BURIED contact from amr_eq_r3 to
+# that poly; c0's outer line has no third connection (its metal just ends over the box,
+# 10 px short of where it ends on field in the other columns). Views: cache/scratch/amr/
+# b5a, b5b (5x, four shots), z1 (8x), cmp1 (the box beside known contacts of each kind), f1.
+# The diffusion between the line and the box is ?D because the two dark lines across it are
+# not explained in full; the box touches the line's diffusion under either reading of them.
+?D 11604,6266:11626,6305
+B 11601,6286:11628,6307
+P 11613,6292 y6347 x11345 w=18         # south, then west under the VSS rail and under cnt_gab's metal
+                                        # x 11396 (no pad, no patch, metal unbroken: cache/scratch/amr/z2.png at 6x)
+P 11333,6330:11367,6364                 # pad (11350,6347): ring in both metal shots, green patch
+C 11350,6347
+# it goes on west in trace/amrw.txt

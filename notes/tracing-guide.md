@@ -35,6 +35,10 @@ All coordinates are pixels of the chip-2 metal photo, origin top-left, x right, 
 | `acid` | chip 2, metal stripped | poly in open areas (orange, unmistakable); has interference fringes under wide metal |
 | `acid1` | chip 1, metal stripped, some fringes | rarely needed |
 
+A tool of your own that loads the photos as arrays must load the aligned ones
+(`cache/acid_aligned.npy` and the like), never the raw `cache/acid.npy`, which is about 10 px off
+at x 17500, y 5300 (`dbus`, 2026-11-17).
+
 Run every tool through the wrapper, which selects your trace file and your scratch
 folder (`cache/scratch/BLOCK/`):
 
@@ -78,8 +82,32 @@ tools/t.sh BLOCK netlist.py
   sideways it joins two different nets that share a track: that produced a wrong
   register identification. It also reports breaks at contacts, blemishes and poly
   crossings. `tools/rdp3_jogs.py` finds the jogs. Confirm every track by overlay.
+- **Measuring tools that print text** (no image, so they cost almost nothing; shared since
+  2026-11-17, when six packages had each written their own). Read each docstring once:
+  - `tools/t.sh BLOCK px.py row Y X0 X1 STEP [layers]` (also `col X Y0 Y1 STEP`, and
+    `pt X,Y ...`): the colour profile, R G B per sample in any of `metal`, `metal1`, `acid`,
+    `acid1`, `acid1b` (or `all`); `--comp NAME` reads a composite. The measurement for a
+    junction, a strip, a thin metal, a patch whose class is in doubt (traps 8, 19, 21).
+  - `tools/t.sh BLOCK textmap.py X0 Y0 X1 Y1 [STEP] [--acid]`: a rectangle as text maps, one
+    character per sample: both metal shots' brightness and the clean shot's red minus green,
+    with `--acid` the chip-2 stripped shot's as well. Its docstring says what a contact, a
+    break and an edge underneath look like in them (trap 22).
+  - `tools/t.sh BLOCK opendiff.py X0 Y0 X1 Y1`: lists the large open diffusions (green in the
+    clean shot, red over green in the chip-2 stripped shot) and how much of each your trace
+    draws as diffusion (trap 21).
+  - `tools/t.sh BLOCK sameconn.py COMMIT`: whether the extraction's connections are the same
+    as at an earlier commit, sizes and positions aside (the proof for a geometry-only fix,
+    `notes/workflow.md` step 6).
+  - `tools/ports.py`: the ports of all packages and which of them meet (section 8).
+  The per-block tools these came from stay, because notes cite them: `tc1_px.py`,
+  `larr_px.py` (profiles), `tc1_hex.py` (text maps), `tc1_green.py` (open diffusion). Still
+  per-block, useful anywhere: `tc1_edge.py` (the runs along a cut where a colour test
+  holds: a band's edges), `dbus_localmatch.py` (where a rectangle repeats near a guessed
+  offset). Before writing a `tools/BLOCK_*.py` of your own, look for one of these.
 - X Y is the top-left corner, W H the size, in die pixels. The tool prints the path of
-  the PNG; open it with the Read tool.
+  the PNG; open it with the Read tool. `--out`: a bare file name (`--out j1.png`) lands in
+  your scratch folder `cache/scratch/BLOCK/`; a name with a folder in it is taken as given,
+  relative to the working tree (`--out cache/scratch/BLOCK/review-3/j1.png`).
 - **Keep every image under about 1400 px a side or it is downscaled when read and the
   zoom is wasted.** quad.py puts two panels side by side: keep W x S under 640.
   view.py with one layer: W x S under 1300.
@@ -157,7 +185,11 @@ Traps, all of them real:
    metal lines shows in `acid1b` only as a thin dark bar across whatever is underneath,
    or as a narrow olive strip with a dark outline. Those bars and strips are not layout.
    Where such a gap crosses poly it can leave a dark ring that looks like a contact;
-   a real contact also shows as a ring in the metal shot.
+   a real contact also shows as a ring in the metal shot. **But before dismissing anything
+   in a gap as such an artefact, look at the same spot in both chip-2 shots: an artefact of
+   the clean shot is not there.** A buried contact in a 36 px gap in `dbus` was read as an
+   artefact for a whole session; in the chip-2 shots it is an ordinary heavy-outlined box
+   (2026-11-17, R24).
 3. A dark line across a metal wire in the metal shots is the edge of something
    *underneath*, not a break in the metal. Likewise, bright green bands in `acid1b`
    inside the arrays are gaps of open field between metal lines, not features.
@@ -179,7 +211,7 @@ Traps, all of them real:
    pixels. Metal over poly is a connection only where there is a contact.
    Where a poly line ends next to another feature, zoom to 4-6x before deciding whether
    they touch; and when the decision matters, **measure it**: a colour profile across
-   the junction (`tools/larr_px.py`, read its docstring) settled junctions that one
+   the junction (`tools/px.py`; it was `tools/larr_px.py` then) settled junctions that one
    agent had judged wrongly by eye three times. Most wrong readings so far were junctions judged at too low a zoom.
 9. If a region will not give a consistent circuit after two honest passes, stop, record
    exactly what is established (with coordinates) and what is not, and move on.
@@ -254,6 +286,48 @@ Traps, all of them real:
    receives depends on whether its contact lands on a gate poly or on a source or drain.
    Two packages called `amr`'s four outer lines outputs; they are gate inputs. Found
    2026-11-17 (R18).
+21. **Bright green in the open is a large diffusion, not field.** In the clean shot a large
+   open diffusion (the drain of a big driver) is bright green (118/155/90) and open field is
+   khaki-brown (151/138/100); a narrow diffusion wire in the open is not green at all (trap 4).
+   `tools/classmap.py` without `--open` paints the green as pale green, its colour for field in
+   the open, so a class map shows a drain as empty ground. Decide in the chip-2 stripped shot
+   (`acid`): red minus green is 0-4 on field and 13-17 on diffusion (`tools/px.py pt X,Y
+   acid1b,acid,metal`; `tools/textmap.py --acid`). `tools/opendiff.py X0 Y0 X1 Y1` lists the
+   green areas your trace does not draw as diffusion. This is about areas wider than about
+   25 px in the open; the narrow bright green bands between metal lines inside the arrays are
+   still field (trap 3). Found 2026-11-17 in `tc1` (run 6, after three runs of reading the
+   areas beside the drivers as field; calibration table at the top of `notes/blocks/tc1.md`;
+   re-read item R19).
+22. **A thin metal goes dark where it passes over a buried contact, and that is not a
+   contact.** A metal about 12 px wide is dark for 35-80 px in *both* metal shots where a
+   buried-contact box, or a poly's edge running lengthwise, lies under it: it looks like the
+   tall ring of a metal contact, and the follower stops there. Seen at every gate of `tc1`'s
+   gate columns (its Ambiguities 12, 13, 18); if these were contacts they would short the
+   outputs of neighbouring gates together. A real contact of a thin metal has all of: a
+   single bright centre about 12 px across inside a dark ring about 40 px across, in both
+   metal shots; a green hole inside the pad in the clean shot; the metal widened into a pad.
+   The pass-over has none: the clean shot under it is protected tan with no green hole and no
+   pits, the metal keeps its width, and the darkness is a lengthwise bar with half-bright
+   flanks. Measure with `tools/textmap.py` against a known contact of the same metal nearby
+   (its docstring gives two). Do not draw a contact from the darkness alone, and do not take
+   the follower's stop there as the line's end (trap 14). Found 2026-11-17 in `tc1`, where run
+   2 had taken one for a ring gate's contact (re-read item R20).
+
+23. **A gate poly that runs on past its diffusion is not a dead end until the clean shot shows
+   field on both sides of it.** In the data bus column the L arm of each input inverter's gate
+   runs under a metal and lies on a diffusion there: a second pull-down. Compare the arm's
+   colour under the metal with a gate band under a rail (240/171/120 against 196/144/100 for
+   poly over field). Found 2026-11-17 in `dbus` (AMB-004 changed, R25).
+24. **Medians over copies under different metal blur what differs.** A cell whose copies lie
+   under different metal (or none) reads best on per-group medians (`tools/ral_comp19.py
+   --groups`); `ral`'s inverter 1 failed three passes on the mixed median and was read at
+   once on the groups. Also: pass transistors on a land that widens under the gate are wider
+   than the strip (`rdp3_lat`'s was 34 in the trace and is 70: R22), and a pull-down under a
+   rail can continue as a separate patch on the rail's other side (R23). Found 2026-11-17.
+
+25. **A port is drawn to the boundary only after the boundary itself has been looked at.** A
+   line still there 50 px short of the edge may end on a pad. `dbus`'s `dbus_do0_in` was drawn
+   to x 16950 and ends 40 px before it. Found 2026-11-17 (R28).
 
 **When a trap turns out to affect work already done**, add the affected blocks to the
 "Re-read list" in `notes/work-packages.md` in the same commit that records the finding.
@@ -317,6 +391,13 @@ A 100,100:150,150 kind=clamp           # mark a transistor here: clamp, field (b
    `cdp1_reg` (8745 3040 9225 3330, in `trace/cdp1.txt`) recur, some upside down, in
    several rows of both datapaths. A row that matches can reuse the cell by
    `@requires`, after checking how its edges differ.
+   **Write the survey to disk before drawing anything**: `cache/scratch/BLOCK/survey.md`
+   (what is where, with coordinates, each measurement and the command that gave it), and for
+   each piece a draft of its geometry, `cache/scratch/BLOCK/draft-PIECE.txt` (trace-file
+   lines, not yet in `trace/`), which you correct there until the overlay fits and then move
+   into the trace file. Images drop out of your context and a long session is compacted;
+   with the survey and the draft on disk, resuming is reading two files. (The inventory in
+   the notes is the part of the survey worth keeping; the scratch files are not committed.)
 2. **Trace a piece** (one gate group or one cell): view at 2.5-3x with `quad.py`, write
    the shapes.
 3. **Overlay**: `quad.py` again (its last panel outlines your trace on the clean shot)
@@ -407,6 +488,31 @@ Most of the die is repeated cells. Trace a cell once.
   (driven inside / driven from outside), and what you think it is. Draw each such wire
   right up to the boundary and label it. Blocks are joined later through these tables,
   so they matter as much as the gates.
+- **The same ports, one per line, go in `ports.d/BLOCK.txt`**, which tools can read
+  (expected for new work since 2026-11-17; a block traced before then gets its file when it
+  is next opened):
+
+  ```
+  # NAME        LAYER  X,Y              DIR  note
+  tc1_f         P      8250,3348-3362   out  R3 output; runs on under ns1..ns6 without contact
+  ras_straight  M      7220-7240,4450   out  NOT b (W2 lower)
+  vss           M      7943-7990,4450   -    the VSS bus turns south
+  ```
+
+  NAME is the net's name in the trace; LAYER is `M`, `P` or `D`; X,Y is where the wire
+  crosses your boundary or where the drawn wire ends, and either number may be a range
+  `A-B` (the wire's extent across the edge); DIR is `in` (driven from outside), `out` (driven
+  inside your block), `?` (not known) or `-` (a supply); the rest of the line is a free
+  note. `#` starts a comment. One line per place a wire leaves. Only ports with a definite
+  place: a wire "seen going on west" stays in the notes until it has a coordinate. Keep the
+  file and the notes' table in step: when one changes, change the other in the same commit.
+- `tools/ports.py` reads every package's file and reports the ports of different packages
+  that lie within 40 px of each other (same name or not, layers, directions), the names two
+  packages both use at places that do not meet, and the ports with no partner;
+  `tools/ports.py --near X,Y` lists what other packages have near a wire you are following,
+  `--prefix BLOCK` only what involves yours. Run it before you name a wire that arrives from
+  a neighbour, and before the review: a meeting whose names differ is a join to check in the
+  photos (trap 17), not a rename to make from the list.
 
 ## 9. What to deliver
 
@@ -425,7 +531,8 @@ Most of the die is repeated cells. Trace a cell once.
      what it checked and at what zoom, what it found, what changed, what it could not check.
    - **Not done**: anything in your region you did not get to, with coordinates, so the
      next agent can pick it up without re-surveying.
-3. `floorplan.d/BLOCK.txt`: one line per functional piece you have identified, format
+3. `ports.d/BLOCK.txt`: the ports, one per line (section 8).
+4. `floorplan.d/BLOCK.txt`: one line per functional piece you have identified, format
    `x0,y0:x1,y1  kind  name | description` with kind one of
    `pad io array pla logic route test power unknown`, prefixed `?` if the function is a
    guess. Example: `7600,5480:10850,5910  array  R1 register (8 bit) | written from the data bus when rsel1; feeds the comparator below`.
@@ -434,7 +541,7 @@ Most of the die is repeated cells. Trace a cell once.
 ## 10. Committing, and what not to touch
 
 - Commit and push after every finished piece with
-  `tools/ship.sh "Subject line" trace/BLOCK.txt notes/blocks/BLOCK.md floorplan.d/BLOCK.txt`
+  `tools/ship.sh "Subject line" trace/BLOCK.txt notes/blocks/BLOCK.md floorplan.d/BLOCK.txt ports.d/BLOCK.txt`
   It commits exactly the files you name and refuses a trace file that does not parse.
   Subject in the imperative, under 70 characters, saying what was traced
   ("Address register: latch cell traced and placed five times"); add a body with a
@@ -446,8 +553,8 @@ Most of the die is repeated cells. Trace a cell once.
   step 7) after the review rounds, or by pull request. Merging main into your branch is
   fine; do not
   rewrite history that is already pushed (no rebase or reset of pushed commits).
-- Yours: `trace/BLOCK*.txt`, `notes/blocks/BLOCK.md`, `floorplan.d/BLOCK.txt`, new
-  tools named `tools/BLOCK_*.py`, your scratch folder; rows for your names in
+- Yours: `trace/BLOCK*.txt`, `notes/blocks/BLOCK.md`, `floorplan.d/BLOCK.txt`,
+  `ports.d/BLOCK.txt`, new tools named `tools/BLOCK_*.py`, your scratch folder; rows for your names in
   `notes/signals.md`, and `notes/operation.md` where your block changes what it says.
 - Not yours: `notes/work-packages.md`, `floorplan.txt`, `notes/journal.md`,
   `notes/ambiguities.md`, `PLAN.md`, `CLAUDE.md`, `claims/`, `out/`, the shared tools,
@@ -519,6 +626,10 @@ top), CLK, R/W, E, RS, CS bottom right, RES and LPSTB top. Table: `notes/pads.md
 - What a brief says "is known" about a block's structure is the coordinator's belief
   from a low-zoom look and may be wrong (one brief's "one unit per bit" was). Check
   it with one view before building on it.
+- **When to compact or start a fresh session: right after a merge and handoff.** Everything
+  is then in the notes, the trace and the handoff, and nothing is half-drawn. In the middle
+  of a piece a compaction loses the images and the reasoning; if one happens anyway, the
+  survey and draft in `cache/scratch/BLOCK/` (section 6, step 1) are what you resume from.
 - Ship often. If you run out of room, everything shipped so far is safe, and your notes
   tell the next agent where to resume.
 - Your final message should be short (under 300 words): what you traced, the main

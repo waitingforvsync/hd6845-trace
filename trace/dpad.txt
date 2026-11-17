@@ -280,18 +280,13 @@ N M 17836,8100 d1_in
 # pad and node on the chip; the netlist has no resistors.)
 @alias d0 d0_in
 @alias d1 d1_in
-@alias d2 d2_in_u
-@alias d3 d3_in_u
-@alias d4 d4_in_u
-@alias d5 d5_in_u
-@alias d6 d6_in_u
 
 # D2-D6: the node's exit to the column is not traced (Not done): the _u names stand for that
-N M 17833,9800 d2_in_u
-N M 17833,11450 d3_in_u
-N M 17834,13050 d4_in_u
-N M 17834,14650 d5_in_u
-N M 17835,16250 d6_in_u
+N M 17833,9800 d2
+N M 17833,11450 d3
+N M 17834,13050 d4
+N M 17834,14650 d5
+N M 17835,16250 d6
 
 # ---- D0's out_n line: poly from the cell west under the rail and the d_hiz metal (no
 # contacts) to a contact, then metal down the channel (dbus: to 17597,8097; not drawn)

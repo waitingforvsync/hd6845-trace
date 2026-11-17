@@ -98,7 +98,7 @@ cells agree: every load strip starts on a land contacted by that rail.
 Master at x 14597-14987, y 13010-13280 (slice s2 of row AR). 6 transistors:
 
 ```
-a   <- bus      pass transistor T1 while the strobe is high        34/28
+a   <- bus      pass transistor T1 while the strobe is high        70/28 (was 34/28: corrected by `areg`, 2026-11-17, all 59 copies)
 n2  = NOT a     pull-down 51/22, load 30/52
 q   = NOT n2    pull-down 52/22, load 28/49
 a  <-> q        hold device, gate tied to VSS, 22/82 (see below)

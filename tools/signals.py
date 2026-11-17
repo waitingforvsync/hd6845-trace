@@ -2,7 +2,7 @@
 """Check the net names of the trace against the glossary notes/signals.md.
 
 usage: signals.py            (through tools/t.sh BLOCK to look at one block)
-       signals.py --docs     list former names that still occur in notes, plan, floor plan or trace files
+       signals.py --docs     list former names that still occur in notes, plan, floor plan, ports or trace files
 
 Prints the names no row of the glossary covers, and the open joins (names ending in _u).
 In a glossary pattern `#` is a number and `*` any run of letters, digits and underscores;
@@ -59,7 +59,8 @@ def stale_in_docs():
             olds.add((old, re.compile(r'(?<![A-Za-z0-9_])' + rx + r'(?![A-Za-z0-9_])')))
     files = (glob.glob(os.path.join(tracelib.ROOT, 'notes', '*.md')) + glob.glob(os.path.join(tracelib.ROOT, 'notes', 'blocks', '*.md'))
              + [os.path.join(tracelib.ROOT, f) for f in ('PLAN.md', 'CLAUDE.md', 'floorplan.txt')]
-             + glob.glob(os.path.join(tracelib.ROOT, 'floorplan.d', '*.txt')) + glob.glob(os.path.join(tracelib.ROOT, 'trace', '*.txt')))
+             + glob.glob(os.path.join(tracelib.ROOT, 'floorplan.d', '*.txt')) + glob.glob(os.path.join(tracelib.ROOT, 'ports.d', '*.txt'))
+             + glob.glob(os.path.join(tracelib.ROOT, 'trace', '*.txt')))
     hits = []
     for path in sorted(files):
         text = open(path).read()
