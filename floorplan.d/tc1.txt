@@ -6,7 +6,11 @@
 7900,2950:8090,4060   route  island to datapath wiring | metal verticals joining the gates to each other, to the datapath and to the bus field below
 8085,2715:8335,4110   route  six north-south lines ns1-ns6 | ns1 = island input w1 (from logic at the datapath slice-0 position); ns2 from the west bus; ns3, ns4, ns6 from over the datapath, ns3/ns4 on south to tc2; ns5, ns6 tap polys going east. No transistors
 7000,2950:7170,4450   ?route channel west of the island | four more vertical metals with poly taps into the gate columns; carries l4_out north and the g poly west; mostly untraced
-6400,2650:7000,4450   ?logic gate columns | dense random logic with large devices under wide rails; not traced. At 6750,3930:6940,4200 a big driver gated by g and by the metal x 6808-6828
+6400,2650:7000,3920   ?logic gate columns | dense random logic with large devices under wide rails; not traced
+6700,3920:6995,4225   logic  driver NOR(tc1_g, tc1_x1) | wide two-input NOR with a strong load (tc1_o4020): tc1_g wraps one drain as an L, tc1_x1 rings an island; output east by a buried contact to the channel metal x 7142 going north
+7115,2620:8350,2850   route  tc1_o4020 to the bus line y 2641 | from the contact (7140,2832) in poly (east, north, east, north) to the contact (7465,2640); bus metal east, under the VSS rail in poly, on east over the datapath
+6688,4243:7002,4384   logic  inverter NOT tc1_p4308 | pull-down under the rail, weak load from the supply rail on the west; its output strip runs east up to the pad (6962,4268), where tc1_x1's ring branch and the thin metal x 6968 meet; whether the strip joins that pad is open
+6400,4225:7000,4450   ?logic gate columns, foot | not traced except the pull-down above
 6400,2500:8250,2975   ?route top bus field | seven horizontal metal lines crossing the VSS rail in poly; y 2771 = w1/ns1, y 2727 = ns2 traced, rest not
 7330,4010:8020,4135   route  three tracks under the island | bring the two driver outputs and one outside signal from the west side to the AND-OR gate's inputs; two are tapped by lines going south
 7170,4135:8350,4450   route  bus field below the island | VCC bus (y 4198-4250) and VSS bus (y 4288-4335) turning south; b, g, i arrive from tc2; l2_out, l3_out leave south and (l3_out) east; two through lines datapath to tc2
