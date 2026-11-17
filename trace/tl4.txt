@@ -24,9 +24,10 @@ M 4928,3880 y4392 w=44
 N M 4928,4100 vcc
 # the VSS box below the stack (the master has the wide NOR's): ring with a bright centre on RA
 D 4725,4344:4782,4390
-C 4768,4354
-# the contact of the VCC box the two loads share: one elongated ring on RB
-C 4930,4150 s=24x60
+C 4745,4368
+# the contact of the VCC box the two loads share: one elongated ring on RB, x 4915-4945,
+# y 3995-4200, which takes in the cell's own contact (4928,4013) (review round 1)
+C 4930,4115 s=24x165
 # thin metal x 4860-4875 between two pads with contacts (bright centre in a dark ring in both
 # metal shots, green hole in the clean shot): the three-input gate's plate to the third
 # pull-down's gate, as in the master

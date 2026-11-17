@@ -66,9 +66,9 @@ What the copy has of its own, read here:
   (`textmap.py 4846 4040 4890 4084 4` and `4846 4250 4890 4290 4`: bright centre B-D inside a
   dark ring in both metal shots, a green hole in the clean shot; `follow.py 4867 4150 N/S` ends
   at y 4040 and y 4272): `tl4_w4113`, the upper unit's plate to the third pull-down's gate.
-- **VSS box below the stack** (4725-4782, 4344-4390) with a contact (4768,4354) on RA
+- **VSS box below the stack** (4725-4782, 4344-4390) with a contact (4745,4368) on RA
   (`textmap.py 4712 4338 4796 4410 4`: bright centre in a dark ring, both metal shots).
-- **The VCC box's contact**: one elongated ring on RB, x 4915-4945, y 4105-4195 (`b3.png`).
+- **The VCC box's contact**: one elongated ring on RB, x 4915-4945, y 3995-4200 (`b3.png`; review round 1).
 - There is no thin metal at the place of the first cluster's thin metal W (x 4814-4828): bare
   ground between RA and the thin metal x 4867 (`b3.png`).
 
@@ -98,6 +98,40 @@ four tracks leave the piece inside the strip:
    diffusion to the VSS box, the gate caps) were not each measured here.
 
 ## Review
+
+Round 1 (full review, 2026-11-17 23:21 +0000, a fresh agent on claude-fable-5-2, at commit
+2a0c723; images in `cache/scratch/tl4/review-1/`). Piece: the latch at y 3906-4390 with its
+rows, pads and tracks. Told to suspect: any difference between the copy and the master, the
+node boxes west of RA, each row's pad and metal (trap 16) and contacts under the metals the
+rows cross, the metal x 4625 between its pads, the pads of the thin metal x 4860-4875 and the
+polys they lie on, the third pull-down's drain and source, the contact (4768,4354), anything
+undrawn between RA and the thin metal.
+It checked: copy against master side by side at 2x (clean and metal) and at 4x in three shots
+(no extra or missing gate, pad or contact); no thin metal at x 4814-4828; all nine pads (ring
+with a bright centre in both metal shots, green hole in the clean shot); the four rows to their
+pads at 4x in both stripped shots, with no green hole under the metals x 4537, 4580, 4625; the
+metal x 4625 between its pads; the thin metals x 4690 and x 4867 on their pads; the stub
+y 4103-4123; both node boxes; the upper unit's third pull-down gate (one poly with the lower
+plate's top bar, 5x); the lower third pull-down (pad, stem and band one poly; drain strip
+unbroken, 6x; source strip diffusion through to the VSS box); the extraction.
+Findings, all geometry only, each checked by the tracer:
+1. The VSS contact drawn at (4768,4354) is at about (4745,4368): confirmed (`textmap.py 4712
+   4338 4796 4410 4`: bright centre C-D inside a dark ring at x 4740-4748, y 4362-4370 in both
+   metal shots; plain bright metal at the drawn place). Moved. The reviewer noted that the old
+   rectangle began 1 px below the gate band of `tl4_w3928`.
+2. The VCC contact on RB is one ring x 4915-4945, y 3995-4200, not 24 x 60: confirmed
+   (`px.py col 4930 3980 4216 8`: no dark bar between y 4004 and y 4190); drawn 24 x 165 next
+   to the cell's own.
+3. The inverter's pull-down gate (the cell's `P 2651,4388:2663,4470`, here x 4776-4788) is
+   about 22 px long here, not 12: confirmed for the copy (`px.py row 3987 4770 4812 3`: dark
+   edges at x 4785-4788 and x 4800-4803 in the chip-2 stripped shot). Not changed: the item is
+   `tl1`'s cell, and the master was not looked at; in the handoff for `tl1`.
+Could not be checked: the two `?` load ties, the supplies of RA and RB, the tracks beyond the
+piece, the neighbours' VCC boxes on RB (undrawn).
+`tools/t.sh tl4 sameconn.py 2a0c723`: `connections identical`.
+`.venv/bin/python tools/sameconn.py 2a0c723`: `connections identical`.
+
+Round 1: no findings that change a connection.
 
 ## Not done
 
