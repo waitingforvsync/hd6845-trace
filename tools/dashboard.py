@@ -237,10 +237,22 @@ function setTheme(t){if(t==='auto')delete document.documentElement.dataset.theme
  document.querySelectorAll('.theme button').forEach(x=>x.classList.toggle('on',x.dataset.theme===t));try{localStorage.setItem('theme',t)}catch(e){}}
 document.querySelectorAll('.theme button').forEach(b=>b.onclick=()=>setTheme(b.dataset.theme));
 try{setTheme(localStorage.getItem('theme')||'auto')}catch(e){setTheme('auto')}
-document.querySelectorAll('.seg:not(.theme) button').forEach(b=>b.onclick=()=>{
- document.querySelectorAll('.seg:not(.theme) button').forEach(x=>x.classList.toggle('on',x===b));
- document.getElementById('die').dataset.layer=b.dataset.layer;
- document.getElementById('key-pk').style.display=b.dataset.layer==='blocks'?'none':'';});
+function setLayer(l){document.querySelectorAll('.seg:not(.theme) button').forEach(x=>x.classList.toggle('on',x.dataset.layer===l));
+ document.getElementById('die').dataset.layer=l;document.getElementById('key-pk').style.display=l==='blocks'?'none':'';
+ try{sessionStorage.setItem('layer',l)}catch(e){}}
+document.querySelectorAll('.seg:not(.theme) button').forEach(b=>b.onclick=()=>setLayer(b.dataset.layer));
+try{const l=sessionStorage.getItem('layer');if(l)setLayer(l);const y=sessionStorage.getItem('scroll');
+ if(y!==null){sessionStorage.removeItem('scroll');requestAnimationFrame(()=>window.scrollTo(0,+y))}}catch(e){}
+const live=document.getElementById('live');let checked=null,timer=null;
+function showLive(){live.textContent=checked?'Checks for updates every minute; last checked '+checked.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})+'.':'Checks for updates every minute.'}
+async function check(){try{const r=await fetch('version.json?t='+Date.now(),{cache:'no-store'});
+ if(r.ok){const v=(await r.json()).version;checked=new Date();
+  if(v&&v!==VERSION){try{sessionStorage.setItem('scroll',String(window.scrollY))}catch(e){}location.reload();return}}}catch(e){}
+ showLive()}
+function start(){if(!timer){timer=setInterval(check,60000)}}
+function stop(){clearInterval(timer);timer=null}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else{check();start()}});
+showLive();start();
 const P=JSON.parse(document.getElementById('series').textContent),svg=document.getElementById('prog'),tip=document.getElementById('tip');
 if(P.length){const W=760,H=260,L=56,R=16,T=12,B=28,t0=Date.parse(P[0][0]),t1=Date.parse(P[P.length-1][0])||t0+1,
  ymax=Math.ceil(Math.max(...P.map(p=>p[1]))/500)*500||500,X=t=>L+(W-L-R)*((t-t0)/Math.max(1,t1-t0)),Y=v=>H-B-(H-T-B)*v/ymax;
@@ -349,7 +361,7 @@ def page(d):
     return """<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>HD6845S trace status</title><style>%s</style></head><body><div class="viz-root"><main>
 <div class="top"><h1>HD6845S die trace</h1><div class="seg theme" role="group" aria-label="Colour theme"><button data-theme="auto" class="on">Auto</button><button data-theme="light">Light</button><button data-theme="dark">Dark</button></div></div>
-<p class="dim">Who is working on what, and how far the trace has got. Built %s. Claims are made with <code>tools/claim.py</code>; the workflow is <code>notes/workflow.md</code>.</p>
+<p class="dim">Who is working on what, and how far the trace has got. Built %s. <span id="live" class="mut"></span> Claims are made with <code>tools/claim.py</code>; the workflow is <code>notes/workflow.md</code>.</p>
 <div class="stats">%s</div>
 <div class="grid"><section><h2>The die</h2><div class="seg"><button class="on" data-layer="packages">Tracing packages</button><button data-layer="blocks">Functional blocks</button></div>
 %s%s<p class="mut">Hover a region for its name and status. Package regions overlap where wiring crosses blocks.</p></section>
@@ -358,8 +370,8 @@ def page(d):
 <h2>Contributors</h2><div class="tw">%s</div></section></div>
 <h2>Packages</h2>%s
 <h2>Recent commits on main</h2>%s
-</main></div><script type="application/json" id="series">%s</script><script>%s</script></body></html>""" % (
-        CSS, E(d['built']), stats, die, key, contrib, lists, commits, json.dumps(d['series']), JS)
+</main></div><script type="application/json" id="series">%s</script><script>const VERSION=%s;%s</script></body></html>""" % (
+        CSS, E(d['built']), stats, die, key, contrib, lists, commits, json.dumps(d['series']), json.dumps(d['version']), JS)
 
 
 def main():
@@ -383,7 +395,9 @@ def main():
              contrib=contributors(),
              commits=[tuple(l.split('\t', 2)) for l in log.splitlines() if l.count('\t') >= 2],
              built='%s from commit %s' % (datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC'), head))
+    d['version'] = d['built']
     open(os.path.join(a.out, 'index.html'), 'w').write(page(d))
+    json.dump({'version': d['version']}, open(os.path.join(a.out, 'version.json'), 'w'))
     shutil.copy(os.path.join(ROOT, 'dashboard', 'die.jpg'), os.path.join(a.out, 'die.jpg'))
     print('dashboard: %d claims, %d packages, %d blocks, %d progress points -> %s'
           % (len(d['claims']), len(master), len(d['blocks']), len(d['series']), a.out))
