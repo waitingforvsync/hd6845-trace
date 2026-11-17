@@ -1,28 +1,28 @@
 {
  "who": "dp111",
- "generated": "2026-11-17T16:11:05+00:00",
+ "generated": "2026-11-17T17:56:00+00:00",
  "price_source": "Claude API list prices per million tokens, as of 2026-11-03",
  "unpriced_models": [],
- "responses": 3663,
+ "responses": 3796,
  "first": "2026-11-16T22:18:49.326000+00:00",
- "last": "2026-11-17T16:11:02.804000+00:00",
- "total_cost": 399.91,
- "review_cost": 113.18,
+ "last": "2026-11-17T17:55:34.375000+00:00",
+ "total_cost": 427.02,
+ "review_cost": 118.66,
  "tokens": {
-  "input": 7478,
-  "output": 3089145,
-  "cache_write_5m": 7414553,
-  "cache_write_1h": 4709373,
-  "cache_read": 916125987
+  "input": 7762,
+  "output": 3223877,
+  "cache_write_5m": 7826508,
+  "cache_write_1h": 5437120,
+  "cache_read": 946913326
  },
  "by_model": {
   "claude-opus-5-5": {
-   "cost": 184.67,
-   "responses": 1573
+   "cost": 186.57,
+   "responses": 1584
   },
   "claude-fable-5-2": {
-   "cost": 215.24,
-   "responses": 2090
+   "cost": 240.45,
+   "responses": 2212
   }
  },
  "by_package": {
@@ -53,6 +53,15 @@
     "claude-fable-5-2": 363
    }
   },
+  "(coordination)": {
+   "cost": 42.01,
+   "review_cost": 4.87,
+   "responses": 218,
+   "models": {
+    "claude-opus-5-5": 149,
+    "claude-fable-5-2": 69
+   }
+  },
   "ral": {
    "cost": 32.33,
    "review_cost": 4.52,
@@ -60,15 +69,6 @@
    "models": {
     "claude-opus-5-5": 291,
     "claude-fable-5-2": 124
-   }
-  },
-  "(coordination)": {
-   "cost": 28.31,
-   "review_cost": 4.87,
-   "responses": 201,
-   "models": {
-    "claude-opus-5-5": 138,
-    "claude-fable-5-2": 63
    }
   },
   "mal": {
@@ -152,6 +152,14 @@
     "claude-fable-5-2": 100
    }
   },
+  "areg": {
+   "cost": 8.56,
+   "review_cost": 5.47,
+   "responses": 73,
+   "models": {
+    "claude-fable-5-2": 73
+   }
+  },
   "bd1": {
    "cost": 8.29,
    "review_cost": 2.25,
@@ -168,6 +176,15 @@
    "models": {
     "claude-opus-5-5": 33,
     "claude-fable-5-2": 61
+   }
+  },
+  "rdp3": {
+   "cost": 5.05,
+   "review_cost": 0.0,
+   "responses": 52,
+   "models": {
+    "claude-opus-5-5": 9,
+    "claude-fable-5-2": 43
    }
   },
   "r3d": {
@@ -214,14 +231,6 @@
   },
   "r9c": {
    "cost": 0.3,
-   "review_cost": 0.0,
-   "responses": 9,
-   "models": {
-    "claude-opus-5-5": 9
-   }
-  },
-  "rdp3": {
-   "cost": 0.22,
    "review_cost": 0.0,
    "responses": 9,
    "models": {
@@ -279,6 +288,6 @@
  },
  "by_day": {
   "2026-11-16": 4.76,
-  "2026-11-17": 395.16
+  "2026-11-17": 422.26
  }
 }
