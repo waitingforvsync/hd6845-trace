@@ -7,7 +7,7 @@ Package `tl1` (part 1 of 6 of the top-left logic). Trace: `trace/tl1.txt`. Views
 
 ## Status
 
-2026-11-17 21:10 +0000. **Partial.** Nine gates with their loads (28 transistors), the vertical metals of the
+2026-11-17 21:13 +0000. **Partial.** Nine gates with their loads (28 transistors), the vertical metals of the
 tracks x 2283, 2326, 2370, 2414, 2457, 2500 with their pads and rows (y 2790-5480 and
 y 5900-6350), the two pieces of the thin metal x 2557-2573 over the west column, the two
 pieces of the thin metal x 2742, and one long wire down the west side (`tl1_w3333`) are
@@ -274,7 +274,9 @@ every item.
   copies; both metal shots are dark over it for 35 px (y 4612-4646), which is what a
   buried contact under a thin metal does (tracing guide, trap 22). Taken as the tie of the
   plate to the node (a tab down from the bar, the strip's top widened west, a buried
-  contact). Not resolved at any zoom: drawn `?`, as the ties of the other loads here.
+  contact). Not resolved at any zoom: drawn `?`, as the ties of the other loads here. The clean shot shows a green-yellow centre
+  in the box (`w4_all.png`, 6.5x, both copies), which a buried contact under metal should
+  not have: see Not done, thin metal W.
 - **Thin metal W over the node**: W is bright and wide (x 2684-2704) over the node's box,
   y 4665-4692, with no ring in either metal shot and no green hole in the clean shot, in
   either copy. Not a contact by the tests of trap 22; nothing drawn. `tla`'s north piece
@@ -530,9 +532,35 @@ under R1, thin metal E's north arm and a wide metal x 2735-2785, no pad.
 - The four `?` ties of the latch gates' loads: (2673-2697, 4622-4648), (2683-2708, 4500-4524)
   and the same 608 px higher. Until one is read, the cross-coupling and the alias
   `tl1_w4287` = `tl1_w4095` are assumptions.
-- Thin metal W: its pieces (north piece `rcs_u3288_n` to y 4002, `tla`; a short piece
-  y 4042-4086; the south piece from y 4648 to y 5952) and their contacts. The follower's
-  metal test fails on it (8 px wide, dim): profiles needed.
+- **Thin metal W (x 2689-2703): its pieces and contacts. One pass made (2026-11-17), not
+  resolved, nothing drawn.** What was measured (`tools/tl1_wgaps.py 2684 2708 3030 5990 125 6`:
+  the rows where the brightest 4 px across the line stay dark in both metal shots;
+  `tools/tl1_wmap.py`: text map; strips `w_all.png` 1.15x, three shots, y 3000-6000):
+  - From `tla`'s contact (2738,3027) to about y 5952 the line is at the same x throughout
+    and no stretch is fully dark (below 125) for more than 20 px; `tla`'s end at y 4002 and
+    the earlier "short piece y 4042-4086" are follower stops. Bright pieces between dark
+    crossings all the way, each crossing over an edge or a box underneath.
+  - The two longest dim stretches (below 165 in both shots) are over the tie boxes of the
+    two `tl1_ub` units: y 4607-4647 and y 4004-4040 (37-41 px; fully dark for 20 and 34 px).
+    At 6.5x (`w4_all.png`, both metal shots and the clean shot, master and copy): no bright
+    metal at W's x between the plate's bar and the node's box; the box (2678-2697,
+    4622-4645) has two paler spots in the metal shots and a **green-yellow centre inside a
+    dark outline in the clean shot**, in both copies; W resumes at y 4648 and is wide over
+    the node box (y 4665-4692). Readings: (a) one metal, dark over a buried contact (tracing
+    guide, trap 22; but that trap says the clean shot shows no green there); (b) W is cut
+    there and the box is open diffusion; (c) a contact of W on the box. (b) and (c) put W on
+    the nodes of two different gates and on `rcs_u3288_n`, which cannot all be right; (a) is
+    the only reading that gives a circuit (W as one long wire from `rcs_u3288_n`'s strong
+    load to the small cluster, passing over the loads), and it is **not shown**.
+  - Other dark stretches of 10 px or more between y 4002 and y 4940: y 4350-4361 (the
+    inverter's buried contact), y 4500-4508 (the tie box of `tl1_w4703`), y 4739-4772 (the
+    third pull-down's gate band), y 4909-4916 (the wide NOR's tie). No ring with a bright
+    centre anywhere on the line in the strips.
+  - Not looked at: the south end (about y 5952-5990), `tla`'s piece `rcs_thin_w`
+    (y 4940-5330) against `rcs_u3288_n`. If W is one metal those two names are one net.
+  Next: the box (2678-2697, 4622-4645) against a load tie that certainly has no metal over
+  it (an east-column tie beside thin E's gaps) and against a known contact of a thin metal
+  on diffusion, in the clean shot at 6x; W's south end at 5x.
 - The far ends of the rows `tl1_w4937`, `tl1_w4025` (east of x 2817, past x 3400) and of
   `tl1_w2857`, `tl1_w3678`, `tl1_w3594` (east of x 2817 along y 2812-2899).
 - `tl1_w3333`: its ends (east of (2640,2551) under R1; east of (2545,5801) in the small
