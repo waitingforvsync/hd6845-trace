@@ -151,4 +151,59 @@ N P 18000,7479 {}_out_n
 @inst dpad_cell 2,9847 tag=d6
 @inst dpad_cell 3,11452 tag=d7
 
+# ---- input protection, above each pad cell on the left. Its position relative to the
+# output cell differs from pad to pad, so it is a cell of its own. Only the clamp
+# transistor, the node and its metal are drawn. NOT drawn (see notes, Ambiguities): the
+# comb of poly fingers over the node's right part (x 17868-17920), the diffusion under
+# it and under the arms (the outline runs to x 17938 and up to y 6080), the poly strips
+# right of the frame and below it, and the strip from the bond pad (series resistor).
+@cell dpad_prot tag=d0
+M 17690,6075:17765,6500            # the rail left of the pads (joined to dbus's VSS rail by the trunk at y 6625-6708)
+N M 17727,6300 vss
+D 17685,6100:17868,6497            # rail side / clamp channel / node
+C 17693,6100:17718,6485            # nine contacts to the rail
+P 17778,6060:17808,6510            # frame, left arm: the clamp gate
+P 17778,6060:17955,6098            # frame, top arm
+P 17920,6060:17955,6515            # frame, right arm (the comb hangs from it)
+N P 17793,6300 {}_prot_g
+A 17772,6095:17814,6500 kind=field
+C 17818,6112:17843,6490            # nine contacts on the node
+M 17814,6105:17850,6500
+M 17823,6490:17847,6560            # down towards the input line
+D 17822,6490:17852,6546            # the node's neck
+@end
+@inst dpad_prot 0,1736 tag=d1
+@inst dpad_prot 1,3469 tag=d2
+@inst dpad_prot 1,5118 tag=d3
+@inst dpad_prot 2,6723 tag=d4
+@inst dpad_prot 2,8306 tag=d5
+@inst dpad_prot 3,9911 tag=d6
+
+# rail and trunk: metal-continuous with dbus's VSS rail (both metal shots, 0.82x)
+M 17690,6068:17765,18080
+M 17355,6625:17765,6708
+M 17355,6625:17400,8040
+
+# ---- D0: from the protection node to the input buffer (dbus)
+M 17823,6550:17847,6597
+C 17835,6585 s=26x26
+P 17548,6573:17850,6597            # left, under the rail (no contact)
+P 17550,6573:17572,6770            # down, under the trunk (no contact)
+C 17555,6755 s=24x26
+M 17557,6743 y8060 w=18            # down to dbus's piece (follow.py: straight to 8188)
+N M 17835,6400 d0_in
+
+# ---- D1: the same; dbus's poly starts on this contact
+M 17824,8286:17848,8416
+P 17820,8394:17852,8413            # the pad under the contact; dbus's poly ends at x 17835
+C 17836,8402 s=26x26
+N M 17836,8100 d1_in
+
+# D2-D6: the node's exit to the column is not traced (Not done)
+N M 17833,9800 d2_in_u
+N M 17833,11450 d3_in_u
+N M 17834,13050 d4_in_u
+N M 17834,14650 d5_in_u
+N M 17835,16250 d6_in_u
+
 N P 17700,7386 d_hiz
