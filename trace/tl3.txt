@@ -27,9 +27,12 @@ N M 3670,3400 vss
 @inst tl1_ub 1041,-1128 tag=a
 # the VSS box under the rail below the stack (railprof 3645 3690: diffusion y 3651-3719)
 D 3641,3651:3698,3719
-C 3670,3685
-# the contact of the lower VCC box (the cell draws the box, x 3819-3879, y 3397-3520)
-C 3846,3477 s=24x44
+C 3662,3680                            # ring's centre (review round 1)
+# the lower VCC box: one box y 3363-3572 here (clean shot tan down x 3846), longer than the
+# cell's two pieces (y 3397-3520), with one long contact ring y 3372-3504 in both metal shots
+# (review round 1)
+D 3819,3363:3879,3572
+C 3846,3438 s=24x120
 # the thin metal x 3783 (follow.py: (3783,3370)-(3783,3576)): top pad on the top bar of ua's
 # load plate, bottom pad one poly with the gate of ub's third pull-down, as in tl1
 M 3783,3356 y3586 w=12

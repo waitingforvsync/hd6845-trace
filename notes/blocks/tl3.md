@@ -105,7 +105,41 @@ Rows and wiring outside the cells (`la_west.png` 2.4x, `la_rows.png` 3.5x in thr
 
 ## Review
 
-(none yet)
+**Round 1, full review of latch A** (2026-11-17 17:05 -0600, a fresh Fable 5.2 agent, 52 tool
+uses, images in `cache/scratch/tl3/review-1/`; commit reviewed 19e1cd2). Told to suspect: a
+cell copy differing from its master by one contact, box or poly end (the inverter's
+pull-down, both third pull-downs); the three rows passing under the metal x 3540 and that
+metal's three pads; the stub reading of `tl3_w3550`; the contacts (3670,3685) and
+(3846,3477); the ports at x 3533; the rail link. It checked: `cellcheck` on the clean and
+metal shots and master-against-copy mosaics at 4x in the chip-2 stripped shot; the
+inverter's pull-down, both third gates and the stub with row and column profiles
+(`tools/px.py`) and 4x views; the rows under x 3540 and the three pads with text maps; the
+three ports at the boundary in both stripped shots; both thin metals (contacts real, none
+between; the dark stretches of x 3605 over the two buried boxes are pass-overs); the rail
+link with `follow.py` and a 2x view.
+
+Findings, all geometry only, each checked by the tracer:
+
+1. The lower VCC box is one box y 3363-3577 with one long contact ring y 3372-3504, where
+   the cell's two pieces span y 3397-3520 and the contact was 24x44 at (3846,3477).
+   Confirmed (`tools/t.sh tl3 px.py col 3846 3350 3592 8 acid1b,metal`: clean shot tan from
+   y 3366 to 3566). Fixed: `D 3819,3363:3879,3572`, `C 3846,3438 s=24x120`. Still VCC.
+2. The VSS contact's ring is centred nearer (3662,3680) than (3670,3685). Fixed.
+3. In the cell `tl1_ua` (here): the third gate's west end is at x ~3638 against 3647 drawn,
+   and its arm turning south is about x 3710-3737 wide against 13 px drawn. Not changed:
+   the cell is `tl1`'s; passed on in the handoff.
+4. The data row's corner north straddles x 3533 (x 3510-3535). The port stands.
+5. North of the link the west rail continues as wider metal (x ~3648-3762 above y 2598):
+   not drawn. Added to Not done.
+
+Not checked by it: the two plate ties (AMB-026; in passing its `mid3.png` shows heavy boxes
+at (3722-3745, 3372-3395) and (3716-3738, 3490-3512), which fits the drawn reading); the
+masters; the rail outside y 3200-3725.
+
+    tools/t.sh tl3 sameconn.py 19e1cd2             -> connections identical
+    .venv/bin/python tools/sameconn.py 19e1cd2     -> connections identical
+
+Round 1: no findings that change a connection.
 
 ## Not done
 
@@ -115,5 +149,8 @@ Rows and wiring outside the cells (`la_west.png` 2.4x, `la_rows.png` 3.5x in thr
   unit E1 (read, not drawn).
 - The poly row y 2955-2975 east from the pad (3606,2985): `tl3_w3373`'s other end
   (towards E1's load plate at x 3875-3935; not followed).
-- The west rail south of y 4060; the VCC rail's top (y 2918) is `tla`'s.
+- The west rail south of y 4060, and the metal north of the link (review round 1: wider
+  metal x ~3648-3762 above y 2598, a supply feed, not drawn); the VCC rail's top (y 2918) is `tla`'s.
+- A draft of the four NOR units' cell is in `cache/scratch/tl3/draft-nor.txt` (`tl1`'s NOR
+  geometry moved by 1042,130; `n12_q.png` shows units 1 and 2 where expected): not overlaid yet.
 - The rows of latch A west of x 3533 are `tl2`'s.
