@@ -461,7 +461,7 @@ Run 3's ports (the driver; region edges as drawn):
 |---|---|---|---|---|
 | `tc1_o4020` | M | x 8350, y 2634-2648 (the bus line y 2641), going east | out | NOR(`tc1_g`, `tc1_x1`). The follower gives the metal's end at (9098,2639): not looked at. East of x 8250 it is outside this package
 | `tc1_x1` | M | x 7047-7061, y 4060, going north | in | the channel metal x 7053 runs on north of the driver's contact; the follower gives its end at (7054,3134) (run 2 saw a contact (7056,3138) there) and candidates at (7058,3745), (7057,3717): not looked at |
-| `tc1_m6817` | M | x 6811-6823, y 3905 and y 4228 | ? | thin metal over the driver's west column, no contact drawn (Ambiguity 12). Follower (started either side of the strip, where it stops): from (6822,3496) south; it does not end at (6809,4379) as the follower says but turns west along y 4366-4380 (drawn to x 6790; bright again at x 6788-6800, y 4390-4399: not followed); candidates (6818,3883), (6813,3754), (6818,4309); the two at (6820,3977) and (6817,4211) are not contacts (text maps: unbroken metal, no ring) |
+| `tc1_m6817` | M | x 6811-6823 at y 3905; x 6788-6806 at y 4380, going south | ? | thin metal over the driver's west column, no contact drawn (Ambiguity 12). Follower (started either side of the strip, where it stops): from (6822,3496) south; it does not end at (6809,4379) as the follower says: there it has a foot (6788-6828, 4362-4380), a jog 20 px west, and goes on south at x 6788-6806 (bright again from y 4392 to at least y 4530, with the dark bars of poly rows across it: not followed, contacts not checked); candidates (6818,3883), (6813,3754), (6818,4309); the two at (6820,3977) and (6817,4211) are not contacts (text maps: unbroken metal, no ring) |
 | `tc1_x1_u` (alias of `tc1_x1`) | M | x 6962-6974, y 3905 and y 4300 | ? | the thin metal x 6968: contact on the pad (6962,4268) at the end of `tc1_x1`'s branch; no contact to the driver's diffusion (Ambiguity 13). Follower: from (6966,3806) to (6975,4402) when started either side of the box at y 4033-4068, where it stops; candidates (6970,3947), (6972,4218) are not contacts (review round 1)
 | `tc1_p4308` | P | x 6988-7002, y 4384, going south | in (a gate here) | input of the inverter; seen to about y 4425, where it seems to turn west (not drawn) |
 | `vcc` | M | rail x 6688-6736 at y 4330 | | the supply rail, narrower here than at the driver; goes on south |
@@ -679,7 +679,7 @@ and the recent fixes).
 | Finding | Outcome |
 |---|---|
 | 1. The pad's contact ring is larger than drawn (6957-6976, 4258-4290) and holds two patches; the lower has the strip's colour: probably a butting contact joining metal, poly and strip. Not proven | **Undecidable**; it is evidence for the join J1 of Ambiguity 17, recorded there. The join was `?B` when reviewed; **it has since been removed from the trace** (not because of this finding: because, with `shm`'s inverter on the same line, I think one of three joins is wrong and will not let a guess change `tc1_x1`'s equation) |
-| 2. The thin metal x 6817 is not drawn south of y 4228 and does not end at (6809,4379): it turns west at y 4366-4380 | **Confirmed** (my text map of y 4290-4400 shows the same). Drawn to (6790,4373); the notes' port corrected |
+| 2. The thin metal x 6817 is not drawn south of y 4228 and does not end at (6809,4379): it turns west at y 4366-4380 | **Confirmed** (my text map of y 4290-4400 shows the same). Drawn to (6790,4373); the notes' port corrected. (The "turn west" is a jog: see round 2) |
 | 3. The supply rail is drawn only to y 4330 and runs on | Not an error: drawn as far as traced, a port in the table |
 
 Checked and found correct: the rail's narrowing and its contact; no ring or pit on the
@@ -690,6 +690,18 @@ load block being one block with the strip under it from pad to column (matched a
 pilot load); the supply contact; the gate-tie box (matched against the pilot buried
 contact) with the foot reaching it; the strip separate from the driver's band. Could not
 check: the thin metal x 6968 across y 4277-4297; `tc1_p4308` south of y 4390.
+
+**Round 2** (2026-11-17 10:26 -0600; a fix check of the changes since commit `0833b4a`: the thin metal x 6817
+drawn on south, the `?B` and its alias removed; views `turn.png`, `south.png` in
+`cache/scratch/tc1/review-5/`, text maps, the extraction before and after).
+
+| Finding | Outcome |
+|---|---|
+| 1. The thin metal x 6817 does not turn west at y 4366-4380: that is a foot, a 20 px jog, and the line goes on south at x 6788-6806. The drawn stub lies inside the foot, so no connection is wrong, but the description is | **Confirmed** (my text map of y 4290-4400: bare ground at x 6790-6808, y 4380-4389, bright metal again at x 6790-6799 from y 4392 in both chips). Redrawn as the line to y 4372 and the foot as a rectangle; comment, port and notes corrected |
+
+Otherwise no findings: y 4228-4366 of that metal is one piece with no ring and no hole; the
+new metal touches no other; with the `?B` gone the strip's `?D` clears the pad's poly by
+6 px and the gate poly by 5 px and overlaps no poly; the netlist differs only as intended.
 
 ## Not done
 

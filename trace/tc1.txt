@@ -666,7 +666,8 @@ B 6764,3988:6796,4018
 #      diffusion or to the strip (notes, Ambiguities 12, 13). The one at x 6968 has a contact
 #      on the pad at (6962,4268), the end of tc1_x1's branch: it is labelled tc1_x1_u and
 #      aliased (as trace/rad.txt does for ra4_drv_in_u), because the join runs through one ?P.
-M 6817,3905 y4373 x6790 w=12        # it turns west at y 4366-4380 (both metal shots; review of run 4) and goes on: NOT FOLLOWED. No contact on the diffusion it crosses at y 4270-4337
+M 6817,3905 y4372 w=12              # south to a foot at y 4366-4380. No contact on the diffusion it crosses at y 4270-4337
+M 6788,4366:6826,4380              # the foot: a jog 20 px west (bare ground west of x 6782 at y 4372 in both metal shots). From it the metal goes on SOUTH at x 6788-6806 (bright again from y 4392 in both chips): NOT FOLLOWED
 N M 6817,3915 tc1_m6817
 M 6968,3905 y4300 w=12
 N M 6968,3915 tc1_x1_u
