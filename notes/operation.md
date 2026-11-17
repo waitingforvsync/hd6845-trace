@@ -167,5 +167,5 @@ So that silence is not read as knowledge:
 - The memory address counter's control, and the cursor compare.
 
 The list of what is assumed, with the evidence for and against each, is
-`notes/ambiguities.md` (AMB-001 to AMB-025). Work still to re-check before anything is
-simulated is the "Re-read list" in `notes/work-packages.md` (R1-R29).
+`notes/ambiguities.md` (AMB-001 to AMB-026). Work still to re-check before anything is
+simulated is the "Re-read list" in `notes/work-packages.md` (R1-R30).

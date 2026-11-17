@@ -486,3 +486,8 @@ extraction of both versions differs only in that transistor (105/19 -> 134/19); 
 and `vss` stay separate.
 
 Round 3: no findings.
+
+**Note from `tl1` (coordinator, 2026-11-17).** Thin metal W's "end at y 4002" is probably a
+follower stop: `tl1` found no stretch of it fully dark for more than 20 px from y 3030 to y 5952.
+`rcs_e4`'s driver is the wide NOR in `tl1` (`notes/blocks/tl1.md`). Two VCC boxes here need
+correcting (master list, `tla` row; R29).

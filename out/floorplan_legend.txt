@@ -62,8 +62,8 @@
 -	route	RA3 driver input	16270,3200:17790,3980	from the RA3 pad cell south along x 17771 and west along y 3962
 20	route	tl1_w3333, poly down the west side	2125,3280:2340,5815	from the contact (2197,3333) south, round under the metal x 2326, south again and east along y 5800 into the small cluster
 30	route	amr_eq_r3 to the step logic	2228,3450:2600,5640	metal x 2240 north, poly east along y 3461 into tla's first cluster (gate under rail R1 at (2625,3461))
-31	?logic	NOR in the west column	2540,3558:2842,3742	tl1_w3636 = NOR(tl1_w3594, tl1_w3678); output by the metal x 2283 to two gates of the units below
-32	?logic	west column unit (untraced), copy of y 4340-4585	2540,3742:2835,3982	series gates tl1_w2857, tl1_w3636 on a diffusion under R1; its box is on tl1_w4287's row (believed its output, the inverter's input)
+31	?logic	NOR in the west column	2540,3558:2842,3742	tl1_w3636 = NOR(tl1_w3594, tl1_w3678); output by the metal x 2283: the first latch's enable
+32	logic	first latch, upper half	2540,3732:2842,3982	tl1_w3752 = NOT tl1_w2857; tl1_w4287 = NOT(tl1_w2857 AND tl1_w3636 OR tl1_w4070): copy of the unit at y 4340-4590
 33	logic	latch gated by tcw_a (cross-coupled pair)	6380,3660:6760,4210	fld_a_in = NOT((a AND b) OR q), q = NOT(fld_a_in OR (a AND c)); and the inverter fld_y_b = NOT c
 23	logic	NOR(tc1_o3353, tc1_o3095)	6690,3405:7035,3600	cell B (tc1_o3527): two pull-downs on a column east of the rail, load from the supply rail on the west; output in poly south along the channel to the contact (7011,3852) and on south in metal
 34	logic	driver NOR(tc1_p3698, thin metal x 6968)	6690,3600:7035,3905	second wide two-input NOR with a strong load (tc1_o3740); output by a buried contact to the contact (7010,3722) and north on a metal
@@ -73,8 +73,8 @@
 -	array	R9 comparator: XOR (5 bits)	8750,3650:10790,3990	per bit NOR(A,B) and an AND-OR-invert: differs = A XOR B, A the register bit, B a line from the channel below
 29	route	write strobes R8-R11, north	10870,3290:11130,10240	four nested metals up the central datapath's east edge, one ending on each register row's strobe
 -	?logic	top-right logic rows	11900,3400:16400,4210	gates under the test structures, near the RA/HSYNC/VSYNC pads (the RA output stage below is ral)
-43	?logic	inverter in the west column	2535,4215:2835,4345	tl1_w4243 = NOT tl1_w4287 (rail gate under R1); output by the metal x 2283 to a gate of the unit at y 4340-4470
-36	?logic	pull-downs of tl1_w4070	2540,3982:2835,4215	copy of the unit at y 4590-4800: to VSS through tl1_w4025, or tl1_w3636 and tl1_w3752 in series; load not traced
+43	?logic	inverter in the west column	2535,4215:2835,4345	tl1_w4243 = NOT tl1_w4287 (rail gate under R1); output by the metal x 2283 to the second latch (its data)
+36	logic	first latch, lower half	2540,3982:2842,4215	tl1_w4070 = NOT(tl1_w4025 OR tl1_w3636 AND tl1_w3752 OR tl1_w4287): open while tl1_w3636 is high, data tl1_w2857, cleared by tl1_w4025; copy of the unit at y 4590-4800
 37	route	bit-0 source lines, top	6250,3940:6430,4460	metals from the gate group down to the pads of two vertical polys
 -	logic	bit-0 source gates	6380,3880:6700,4220	partial: a series pair and a single pull-down under one rail make the two lines that feed the bit-0 inverter and XOR cell; loads untraced
 47	logic	inverter driving the row tc1_x1_u	6380,4210:6760,4450	NOT of the bus metal tcw_m6362c; its output poly runs east into the island's logic
@@ -95,8 +95,8 @@
 42	route	RA3 driver input, end	16270,3940:16320,4610	poly and metal south along x 16290-16297 through the ral band
 -	route	R9 compare lines, east	16350,4110:17420,4960	the units' outputs north and west, under two rails at x 16382-16550
 -	pad	8 MA4	670,4320:1430,5080	pin 8, MA4
-44	?logic	west column unit (untraced)	2540,4345:2835,4590	series gates tl1_w4243, tl1_w3594 and a third gate on a diffusion under R1; believed to drive tl1_w4360
-55	logic	pull-downs of tl1_w4678	2540,4590:2835,4778	first input of rcs_e4's NOR: to VSS through tl1_w4025, or tl1_w3594 and tl1_w4360 in series; load not traced
+44	logic	second latch, upper half	2540,4340:2842,4590	tl1_w4360 = NOT tl1_w4243; tl1_w4703 = NOT(tl1_w4243 AND tl1_w3594 OR tl1_w4678)
+55	logic	second latch, lower half: first input of rcs_e4's NOR	2540,4590:2842,4778	tl1_w4678 = NOT(tl1_w4025 OR tl1_w3594 AND tl1_w4360 OR tl1_w4703): open while tl1_w3594 is high, data tl1_w4243 (the first latch's output), cleared by tl1_w4025
 -	route	c4l0, c4l1 north	5880,4560:6500,5800	two nested metals to the crossing field (beside bust's two for c4l2, c4l3)
 45	route	line r9m_l1w, crossing field	6040,4420:8200,4760	x 6058 poly, bus metal y 4742, poly y 4740, metal y 4744/4673 to the row y 4676, which turns south near x 8190 (not into cdp1)
 46	route	bit-0 source lines	6300,4430:7050,5000	two vertical polys under the six bus metals, then east along y 4937/4915

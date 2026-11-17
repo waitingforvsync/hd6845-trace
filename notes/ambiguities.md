@@ -524,3 +524,14 @@ the end of a buried contact or a pass transistor gated by `tl1_w4025`. In the se
 `rcs_e4`'s first input (`tl1_w4678`) is a latched value. Two passes, **not resolved; nothing
 adopted**. Also open there: whether thin metal W contacts `tl1_w4678` near (2693,4688) (a widened
 head, no ring in either metal shot; not drawn).
+
+## AMB-026: the load-plate ties of `tl1`'s two latches (2026-11-17)
+
+Proposed by `tl1` (dp111, third run). Four boxes, (2673-2697, 4622-4648), (2683-2708, 4500-4524)
+and both 608 px higher, tie the load plates of the two cross-coupled pairs in the west column
+(cells `tl1_ub`, `tl1_ua`). They have a buried-contact look (the same colour gradient as two
+known buried contacts of the column; interiors 12-15 px) and are drawn `?`. The four latch
+equations and the cross-coupling's last step rest on them (marked in `operation.md`); every
+pull-down is firm, and the cross-coupling paths were seen in both copies independently. Thin
+metal W lies over the lower ties, dark for 38 px, neither metal nor bare ground; W's pieces are
+not drawn. To settle: profiles of the boxes against known buried and metal contacts.
