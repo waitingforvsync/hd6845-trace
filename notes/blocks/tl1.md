@@ -230,6 +230,26 @@ for the next pass (master coordinates; the copy is 608 px higher):
   (2742,4703) of the thin metal x 2742. Whether the band is one poly with gate 2 (it is
   salmon without a break under W in the text map) was not checked at a junction view.
 - A salmon bar y 4652-4665, x 2715-2775, with field below it under the thin metal x 2742.
+- Second pass, master and copy side by side (`tools/mosaic.py 2672 4640 115 165 --offsets
+  "0,0 0,-608" --scale 5.4`, clean shot and chip-1 metal: `L_acid1b.png`, `L_metal1.png`);
+  the two copies agree in all of this:
+  - the tan strip east of W is diffusion, not margin: right beside it, under W, the field is
+    pink (x 2683-2698, y 4697-4773). It is one tan band with the node's box under W
+    (x 2683-2715, y 4651-4697) and runs on south at x 2700-2718;
+  - where the band y 4744-4760 crosses it the poly is bright orange (x 2700-2715), the colour
+    of poly over a channel: **a transistor there, between the node's strip and the diffusion
+    south of the band** (x 2700-2741, y 4766-4797, closed by the heavy outline, with a
+    salmon box (2718-2742, 4773-4800) in its corner that looks like a buried contact);
+  - the band's poly (x 2709-2740) and a vertical poly x 2746-2768, y 4686-4768 are one
+    brown area in the metal shot, joined at the bottom; a dark line at x 2741, y 4729-4797
+    crosses the band (the east edge of that diffusion);
+  - W's wide part (y 4645-4692) shows no ring in either copy in the chip-1 metal shot, and
+    the clean shot no green hole under it in this view: against a contact of W there;
+  - the round mark on W at (2697,4786) is in the master only: dirt.
+  What is still missing for a circuit: which supply or node the diffusion south of the band
+  is on, and whether the band is one poly with gate 2 across x 2678-2686 (the metal shot
+  shows a rounded outline at x 2683 that may be the band's west end or W's edge line).
+  Nothing of this is drawn.
 - R2 has no VCC box between y 4640 and y 4760 (pink); the boxes are `tla`'s at y 4588-4627
   and y 4763-4802. West of the lower one, x 2755-2778, y 4775-4800 is field in the chip-2
   stripped shot.
