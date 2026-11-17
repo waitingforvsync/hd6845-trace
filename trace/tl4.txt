@@ -1,0 +1,69 @@
+# tl4: top-left random logic, fourth strip (x 4250-4967, y 2500-6350): the vertical control's
+# right cluster and what no other block has drawn in the strip
+@requires tl1
+@block tl4
+@w M=12 P=20
+
+# ====================================================================
+# The right cluster's gate column (rails RA x 4725-4780 and RB x 4905-4950) repeats the first
+# cluster's west column (tl1's units on R1/R2) 2125 px east and 434 px north.
+# findcell (clean shot, masters 2540-2842 x 4340-4590 and x 4590-4800): tl1_ub at 2125,-434
+# score 0.75, tl1_ua at 2125,-434 score 0.80 (as findcell named the two rectangles; the cells
+# placed are both). Overlays b1.png, b2.png (4x clean), b3.png (2.5x metal).
+#   tl4_w3928 = NOT tl4_w4025
+#   tl4_w4113 = NOT( tl4_w4025 AND tl4_w4068  OR  tl4_w4243 )
+#   tl4_w4243 = NOT( tl4_w4198  OR  tl4_w4068 AND tl4_w3928  OR  tl4_w4113 )
+@inst tl1_ua 2125,-434
+@inst tl1_ub 2125,-434
+# What the copy has of its own (b1-b4.png; follow.py; text maps in the notes):
+# rails over the pair, drawn only where looked at (y 3880-4390). RA carries the pull-downs'
+# boxes and RB the loads' boxes: named vss and vcc from that, not followed to a supply.
+M 4752,3880 y4392 w=46
+N M 4752,4100 vss
+M 4928,3880 y4392 w=44
+N M 4928,4100 vcc
+# the VSS box below the stack (the master has the wide NOR's): ring with a bright centre on RA
+D 4725,4344:4782,4390
+C 4745,4368
+# the contact of the VCC box the two loads share: one elongated ring on RB, x 4915-4945,
+# y 3995-4200, which takes in the cell's own contact (4928,4013) (review round 1)
+C 4930,4115 s=24x165
+# thin metal x 4860-4875 between two pads with contacts (bright centre in a dark ring in both
+# metal shots, green hole in the clean shot): the three-input gate's plate to the third
+# pull-down's gate, as in the master
+M 4867,4052 y4280 w=12
+P 4850,4048:4887,4078
+C 4866,4064
+P 4850,4254:4887,4292
+C 4866,4268
+N M 4867,4160 tl4_w4113
+# rows from the west, each from a pad with a contact on a vertical metal of the bus field
+# data (also the inverter's gate): pad (4455,4025), metal x 4452 south (followed to y 5202)
+P 4438,4010:4472,4040
+C 4455,4025
+P 4465,4016:4670,4034
+M 4452,4014 y4395
+N P 4560,4025 tl4_w4025
+# enable: metal x 4625 with two pads, (4625,4068) and (4625,4285); north of the upper pad the
+# metal goes on (followed to a corner (4630,2988)), not drawn
+P 4607,4053:4643,4083
+C 4625,4068
+P 4636,4058:4670,4076
+P 4607,4270:4643,4300
+C 4625,4285
+P 4636,4275:4670,4293
+M 4625,4056 y4297
+N M 4625,4180 tl4_w4068
+# clear: pad (4533,4198) on the metal x 4537 (followed from y 2938 to y 4814)
+P 4515,4183:4551,4213
+C 4533,4198
+P 4545,4190:4670,4208
+M 4537,3895 y4395
+N P 4600,4199 tl4_w4198
+# output: the node's box poly west to a pad (4490,4243), metal x 4494 south (followed to (4507,5336))
+P 4472,4228:4508,4258
+C 4490,4243
+P 4502,4234:4670,4252
+M 4494,4231 y4395
+N P 4600,4243 tl4_w4243
+N P 4745,3928 tl4_w3928
