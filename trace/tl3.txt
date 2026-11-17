@@ -89,7 +89,7 @@ P 3582,3755:3617,3775
 D 3611,3761:3741,3775                 # load: strip east under the rail
 D 3717,3764:3755,3786
 D 3733,3782:3749,3828
-D 3747,3763:3827,3787                 # under the plate; its edges show as lines across the plate at y ~3760 and ~3790 in the chip-2 stripped shot (n1_e.png)
+D 3747,3760:3827,3789                 # under the plate; its edges show as lines across the plate at y ~3760 and ~3790 in the chip-2 stripped shot (n1_e.png)
 P 3763,3744:3816,3832
 P 3731,3808:3771,3830
 B 3725,3805:3749,3830
@@ -111,7 +111,7 @@ N P 3560,3765 tl3_w3765
 # both metal shots, green centre on a salmon pad, pits in the stripped shot)
 P 3550,3798:3590,3818
 P 3522,3788:3559,3820
-C 3540,3803
+C 3541,3808
 M 3540,3795 y4598 w=14
 P 3522,4053:3559,4083
 C 3540,4068
@@ -129,7 +129,7 @@ N P 3560,3982 tl3_w3982
 # gate 1: the same poly as the pad (3540,4590) (from which a row y 4579-4599 also goes east
 # into the unit above, not placed yet): south along x 3533-3555 and east along
 # y 4667-4687 (n34_rows.png, 3.3x: one orange L in both chip-2 shots)
-P 3533,4598:3555,4687
+P 3533,4598:3560,4687
 P 3533,4667:3590,4687
 # output: row to a pad with a contact (3540,4720); a thin metal south from it to a pad with a
 # contact (3540,4912) (follow.py 3540 4718 S: end (3542,4920); textmap 3480 4690 3570 4750;

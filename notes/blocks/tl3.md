@@ -203,6 +203,41 @@ masters; the rail outside y 3200-3725.
 
 Round 1: no findings that change a connection.
 
+**Round 1, full review of the three NOR units** (second piece; 2026-11-17 17:27 -0600, a
+fresh Fable 5.2 agent, 19 images in `cache/scratch/tl3/review-2/`; commit reviewed f6d3984).
+Told to suspect: a copy differing from the master by one contact, box, arm or poly end;
+NOR 4's top arm and the box it lands on; the pad (3540,4590), its L poly and the gaps to the
+pad and metal below; the six rows under the metal x 3540 and at x 3533; the load strip's
+width and the tie; the contacts (3540,4068), (3540,4912). It checked: the three copies by
+overlay in `acid`, `acid1b` and `metal` at 3.3-3.4x; all four arms onto their VSS boxes at 5x
+in four shots, with the box 3640-3694 x 4608-4653's contact ring at (3662,4633); that
+nothing joins NOR 1's box to NOR 2's strip under the rail (y 3894-3926 is field by profile;
+`railprof.py` wrongly reports diffusion to y 3905 there); the five pad contacts with text
+maps; the metal x 3540 continuous from y 3803 to 4598 with no contact at the rows it
+crosses nor at a blemish (3540,4285); no metal at x 3540 between y 4598 and 4712 and field
+between the L and the pad at y 4692-4697 (6x); the ports (rows 3722, 3765, 3939, 4763 run
+on west past x 3440; 3896 and 3982 end on pads at x 3497); the extraction.
+
+Findings, all geometry only, each checked by the tracer against `n1_e.png`, `n34_rows.png`
+and `n34_mov.png`:
+
+1. The load strip under the plate is about y 3758-3790 (30 px) in all three units, drawn 24.
+   Fixed in the cell: `D 3747,3760:3827,3789`.
+2. The contact (3540,3803)'s bright centre is at about (3541,3810). Fixed: `C 3541,3808`.
+3. The L's vertical poly is x 3533-3560, drawn to 3555. Fixed.
+4. The VCC diffusion at NOR 1 runs on south to about y 3880 with a second contact near
+   (3845,3840); NOR 4's runs about y 4700-4810 with more pits. All VCC. Not drawn (not
+   checked by the tracer): Not done.
+
+Not checked by it: the `cellcheck` tint images; the west rail at y 4050-4650 beyond a 1.6x
+view (continuous in both metal shots) and y 2622-3680; features at x 3870-3885 and the row
+at y ~4825-4850, which belong to units not drawn.
+
+    tools/t.sh tl3 sameconn.py f6d3984             -> connections identical
+    .venv/bin/python tools/sameconn.py f6d3984     -> connections identical
+
+Round 1: no findings that change a connection.
+
 ## Not done
 
 - Everything in the Inventory marked not drawn. Next, in this order: the units at y 4031-4475
@@ -214,5 +249,7 @@ Round 1: no findings that change a connection.
   (towards E1's load plate at x 3875-3935; not followed).
 - The west rail south of y 4850, and the metal north of the link (review round 1: wider
   metal x ~3648-3762 above y 2598, a supply feed, not drawn); the VCC rail's top (y 2918) is `tla`'s.
+- The VCC boxes of NOR 1 and NOR 4 run on south of the cell's box with more contacts (review:
+  to about y 3880 with a contact near (3845,3840); y 4700-4810): not drawn.
 - The west rail is drawn to y 4850 from low-zoom views; its contacts between the drawn boxes are not read.
 - The rows of latch A west of x 3533 are `tl2`'s.
