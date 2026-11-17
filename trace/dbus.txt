@@ -112,7 +112,7 @@ N P 17300,8836 d{}_d
 
 # Copies for D1-D5 (offsets from findcell on the clean shot, each checked by overlay).
 # Tags follow position; chain 0 is tied to D0 by its traced input line, the others are
-# taken to follow the pad order. Their wiring left of x 17290 is not drawn yet.
+# taken to follow the pad order. Their wiring left of x 17290 is drawn per copy below.
 @inst dbus_in 1,1365 tag=1
 @inst dbus_in 1,2732 tag=2
 @inst dbus_in 2,4098 tag=3
@@ -798,3 +798,124 @@ P 16846,15804:16884,15847          # end pad
 C 16863,15827 s=26x26
 P 16817,15815:16855,15836          # west (30 px beyond the pad; goes on)
 N P 16825,15826 d5_out_n
+
+# ==== the capacitor taps of chains 1-5 (run 6, wiring and plain diffusion only) ====
+# As in chain 0: the b node of each buffer chain goes in poly to a pad whose contact has
+# only a dot of metal (the strap to its capacitor is absent: a metal option), and a plain
+# diffusion rectangle with its own dot contact lies nearby (dbus_cap#b, joined to nothing);
+# the c node goes in poly to a pad, and a metal strap joins the pad to a contact on a
+# second plain diffusion rectangle. Other nets' long metals pass over the rectangles
+# without contact.
+
+# ---- chain 1
+# d1_b: from G2's output west, north in the gap between the metals x 17197-17217 and
+# x 17243-17262, west under the five field metals to a pad with a dot of metal
+P 17220,9885:17262,9910
+P 17220,9740:17240,9910
+P 17030,9740:17240,9760
+P 17012,9730:17050,9772            # pad
+C 17030,9751 s=26x26
+M 17016,9737:17044,9765            # dot of metal only: no strap
+D 16990,10030:17058,10250          # capacitor rectangle, contact present, not strapped
+C 17014,10138 s=30x30
+M 16998,10122:17030,10154
+N M 17014,10138 dbus_cap1b
+# d1_c: from G4's gate band west, south between the metals x 17155-17175 and x 17197-17217,
+# west to a pad; metal strap south and west onto the rectangle's contact
+P 17180,10154:17262,10172            # (the band is y 10156-10171 here: col profiles at x 17208, 17250)
+P 17180,10154:17200,10345
+P 17030,10325:17200,10345
+P 17012,10318:17050,10355          # pad
+C 17031,10336 s=26x26
+M 17031,10324 y10596 x16996 w=18   # strap
+C 17008,10595 s=30x30
+D 16968,10400:17045,10615          # capacitor rectangle
+
+# ---- chain 2
+# d2_b: from G2's output west, north between the metals x 17112-17132 and x 17155-17175,
+# west to pad B (17030,10965): a dot of metal only
+P 17130,11252:17262,11277
+P 17130,10955:17150,11277
+P 17030,10955:17150,10975
+P 17010,10945:17048,10985          # pad B
+C 17030,10965 s=26x26
+M 17016,10951:17044,10979          # dot of metal only
+D 16980,11135:17090,11270          # capacitor rectangle, not strapped (d2_out_n's metal passes over its east part)
+C 17010,11205 s=30x30
+M 16994,11189:17026,11221
+N M 17010,11205 dbus_cap2b
+# d2_c: leaves at G3's OUTPUT (not at G4's band): a step up and west to a pad; strap
+# south and west onto the rectangle's contact. Field between the tap and G3's gate band
+# (d2_b) above it: clean shot pink at x 17245-17263, y 11377
+P 17225,11395:17262,11429
+P 17040,11388:17245,11408
+P 17005,11375:17045,11415          # pad
+C 17025,11395 s=26x26
+M 17035,11383 y11643 x16996 w=18   # strap
+C 17008,11640 s=30x30
+D 16975,11575:17090,11705          # capacitor rectangle
+
+# ---- chain 3
+# d3_b: from G2's output west under all the field metals, north in the open to a pad
+# (16992,12331): a dot of metal only
+P 16983,12620:17262,12640
+P 16983,12340:17002,12640
+P 16975,12312:17010,12350          # pad
+C 16992,12331 s=26x26
+M 16978,12317:17006,12345          # dot of metal only
+D 16953,12066:17060,12198          # capacitor rectangle, not strapped
+C 16990,12092 s=30x30
+M 16974,12076:17006,12108
+N M 16990,12092 dbus_cap3b
+# d3_c: leaves at G3's output, north 40 px, west to a pad; strap south and west onto the
+# rectangle's contact. Field between the tap and G3's gate band (d3_b): clean shot pink
+# at x 17254-17266, y 12743
+P 17224,12772:17262,12795
+P 17224,12733:17247,12795
+P 17000,12733:17247,12754
+P 16975,12722:17010,12760          # pad
+C 16992,12741 s=26x26
+M 16992,12729 y12893 x16960 w=18   # strap
+C 16972,12893 s=30x30
+D 16950,12825:17060,12965          # capacitor rectangle
+
+# ---- chain 4
+# d4_b: leaves the vertical poly between G2's output and G3's gate, west under the d4_d
+# metal (no contact) to a pad (17161,14043): a dot of metal only
+P 17170,14034:17275,14053
+P 17143,14025:17180,14062          # pad
+C 17161,14043 s=26x26
+M 17147,14029:17175,14057          # dot of metal only
+D 17097,14090:17212,14215          # capacitor rectangle, not strapped (d1_out_n's metal passes over its west part)
+C 17180,14150 s=30x30
+M 17164,14134:17196,14166
+N M 17180,14150 dbus_cap4b
+# d4_c: from G4's gate band west, diagonally down to y 14345, west to a pad on the
+# region's edge; strap north 450 px and west onto the rectangle's contact
+P 17195,14248:17262,14269
+P [ 17188,14248 17216,14248 17122,14355 17094,14355 ]   # diagonal: centre (17178,14275), (17157,14295), (17143,14315) by row profiles
+P 16950,14335:17112,14355
+P 16928,14325:16965,14365          # pad
+C 16946,14345 s=26x26
+M 16946,14357 y13890 x16910 w=16   # strap
+C 16922,13890 s=30x30
+D 16885,13825:16995,13955          # capacitor rectangle
+
+# ---- chain 5
+# d5_b: from G2's output straight west under everything to a pad (16898,14757), 50 px
+# beyond the region's edge: a dot of metal only
+P 16905,14748:17262,14768
+P 16880,14740:16918,14775          # pad
+C 16898,14757 s=26x26
+M 16884,14743:16912,14771          # dot of metal only
+D 16838,15215:16950,15345          # capacitor rectangle, not strapped (d5_out_n's metal passes over its east edge)
+C 16881,15301 s=30x30
+M 16865,15285:16897,15317
+N M 16881,15301 dbus_cap5b
+# d5_c: from G4's gate band west to a pad; strap north and west onto the rectangle's contact
+P 17200,15006:17262,15027
+P 17183,15000:17220,15035          # pad
+C 17201,15018 s=26x26
+M 17201,15030 y14886 x17163 w=18   # strap
+C 17178,14885 s=30x30
+D 17125,14820:17235,14950          # capacitor rectangle

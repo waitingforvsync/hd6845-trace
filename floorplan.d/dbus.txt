@@ -23,3 +23,4 @@
 16950,13598:17262,13626  route  data latch enable | dbus_le leaves the column west here; it also has eight taps along x 16818, y 14040-15605, outside this block
 17500,5260:17670,5880  logic  R9 compare inverters, loads | the depletion loads of r9c's five units (ra#_cmp = NOT ra#_drv_in) and their VCC rail x 17616-17667
 16840,10900:17110,16240  route  D2-D5 output data lines | d2_out_n..d5_out_n: four metals from pads on the chains' "line 2" south to a staircase of pads at the column's south-west corner, where each leaves west in poly to its driver; D1's is the fifth
+16838,9730:17262,15345  io  D1-D5 buffer capacitors | per chain a plain diffusion rectangle strapped to d#_c, and an unstrapped one (dbus_cap#b) beside the pad where d#_b ends on a dot of metal: a metal option not taken; no transistor
