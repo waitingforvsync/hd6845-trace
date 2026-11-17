@@ -5,9 +5,19 @@
 17255,13745:17590,14345  ?io  D4 input buffer | same cell, assigned by position
 17255,14503:17590,15103  ?io  D5 input buffer | same cell, assigned by position
 16960,8445:17040,8880  io  D0 buffer capacitors | plain diffusion rectangles for d0_b (contact cut, not strapped) and d0_c
-17150,8885:17590,9520  ?logic  D0 bus gating and read driver | NAND and AND-OR-invert pull-downs seen under the ground rail; takes d0_d, drives the per-bit line to the D0 pad cell; not traced
-17150,10250:17590,10885  ?logic  D1 bus gating and read driver | looks like a copy of the D0 group; not traced
-17150,11617:17590,12252  ?logic  D2 bus gating and read driver | looks like a copy of the D0 group; not traced
-17150,12983:17590,13618  ?logic  D3 bus gating and read driver | looks like a copy of the D0 group; not traced
-17150,15103:17590,16600  ?logic  data bus control logic | single gates on a 152 px pitch, not surveyed
+17262,15150:17590,15770  io  D6 input buffer | four inverters in series from the D6 pin (d6_a..d6_d), another layout of the chain, upside down; d6_d leaves west at y 15173 towards the latch of bit 6
+17262,15780:17590,16400  ?io  D7 input buffer | the same cell; input line goes south towards the D7 pad; d7_d leaves west at y 15650
+17300,16415:17590,16590  logic  D0 output data inverter | d0_out_n = NOT dbus_do0_in; drives the thin metal x 17438-17459 that runs up the whole column to the D0 pad cell
+17147,16776:17257,16905  io  D6 buffer capacitor | plain diffusion rectangle on d6_c
+16950,13984:17270,14316  route  d4_d | buffered D4 leaves the column west along y 14000
+16950,14683:17270,15079  route  d5_d | buffered D5 leaves the column west along y 14696
 17590,7380:17660,18840  route  pad driver lines | P_x, one metal line common to all eight data pad cells (enable), and the per-bit lines and pad input lines beside it
+17230,8885:17590,9370  logic  D0 input latch | transparent latch of the D0 pin (two cross-coupled AND-OR-invert gates, open while dbus_le is high): dl0_q follows the pin
+17290,9373:17590,9500  logic  D0 bus inverter | static inverter with a strong load: db_b0 = NOT dl0_q_n, drives the internal data bus bit all the time
+17230,10286:17590,10771  logic  D1 input latch | the same latch, upside down
+17290,10739:17590,10866  logic  D1 bus inverter | db_b1 = NOT dl1_q_n
+17230,11651:17590,12136  logic  D2 input latch | the same latch, upside down
+17290,12105:17590,12232  logic  D2 bus inverter | db_b2 = NOT dl2_q_n
+17230,13018:17590,13503  logic  D3 input latch | the same latch, upside down
+17290,13471:17590,13598  logic  D3 bus inverter | db_b3 = NOT dl3_q_n
+16950,13598:17262,13626  route  data latch enable | dbus_le leaves the column west here; it also has eight taps along x 16818, y 14040-15605, outside this block

@@ -141,7 +141,9 @@ assumption), or **open**. Keep its structure and its plain style.
 
 Commit and push: `git add notes/operation.md && git commit -m "Refresh: operation.md (<summary>)" && git push origin main`.
 
-## 4. `out/`
+## 4. `out/` and your cost report
+
+`python3 tools/costs.py` updates `costs/<your git name>.json` for the dashboard (numbers only).
 
 ```
 .venv/bin/python tools/build.py
@@ -154,7 +156,7 @@ fragment or `floorplan.txt` and rebuild. Run `tools/coverage.py` and note its th
 percentages. Commit and push:
 
 ```
-git add out floorplan.txt floorplan.d && git commit -m "Refresh: out/ rebuilt (<nets> nets, <transistors> transistors)" && git push origin main
+git add out floorplan.txt floorplan.d costs && git commit -m "Refresh: out/ rebuilt (<nets> nets, <transistors> transistors)" && git push origin main
 ```
 
 ## 5. Journal and report

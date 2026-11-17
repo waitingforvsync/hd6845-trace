@@ -4,7 +4,8 @@
 usage: tools/claim.py list
        tools/claim.py take PREFIX --region "x0-x1 x y0-y1[; ...]" --what "TEXT" [--overlap-ok] [--dry]
        tools/claim.py release PREFIX [--note "TEXT"] [--dry]
-       tools/claim.py done PREFIX --merged COMMIT --handoff FILE [--dry]
+       tools/claim.py done PREFIX --merged COMMIT --handoff FILE [--continue] [--dry]
+       tools/claim.py handoffs
 
 `take` first pulls: it must be run in the main checkout, on branch main, and it
 fast-forwards that checkout to the shared repository's main (and stops if it cannot), so
@@ -26,12 +27,13 @@ other regions; say in --what what you will and will not draw there).
 release your own claim only if you abandon the package (say why with --note, and leave
 notes that let the next person resume).
 
-`done` is run after the package's branch has been merged into main (the /trace6845
-command does this): it marks the claim "merged, awaiting coordinator" and appends FILE,
-the tracer's proposals for the coordinator's files (master list status, Re-read items,
-ambiguities, corrections to other blocks' notes, floor plan). The coordinator applies
-them and then releases the claim. A merged claim still reserves its prefix, but no
-longer blocks overlapping regions.
+`done` is run after a merge into main (the /trace6845 command does this). It writes the
+tracer's proposals for the coordinator's files (master list status, Re-read items,
+ambiguities, corrections to other blocks' notes, floor plan) to handoffs/PREFIX-<time>.md, and
+in the same commit either keeps the claim (--continue: the same person carries on with the
+package, e.g. the next round of a loop) or releases it. The coordinator works through
+handoffs/ (`handoffs` lists them) and removes each file once applied; nothing waits on that.
+`take` of a package you already hold is a no-op, so a loop can call it every time.
 
 `list` prints the active claims, with the date of the last commit on each claim's branch.
 
@@ -49,6 +51,7 @@ import tempfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CANON_URL = 'waitingforvsync/hd6845-trace'
 CLAIMS = 'claims'
+HANDOFFS = 'handoffs'
 PREFIX_RE = re.compile(r'^[a-z][a-z0-9_]*$')
 REGION_RE = re.compile(r'(\d+)\s*-\s*(\d+)\s*x\s*(\d+)\s*-\s*(\d+)')
 
@@ -111,15 +114,18 @@ def who():
 
 
 def commit_change(remote, base, path, content, message):
-    """Commit on top of base: path set to content (or removed if content is None)."""
+    """Commit on top of base: path set to content (or removed if content is None). path may be a
+    list of (path, content) pairs, all changed in the one commit."""
+    changes = path if isinstance(path, list) else [(path, content)]
     with tempfile.TemporaryDirectory() as d:
         env = {'GIT_INDEX_FILE': os.path.join(d, 'index')}
         git('read-tree', base, env=env)
-        if content is None:
-            git('update-index', '--force-remove', path, env=env)
-        else:
-            blob = git('hash-object', '-w', '--stdin', input=content).stdout.strip()
-            git('update-index', '--add', '--cacheinfo', '100644,%s,%s' % (blob, path), env=env)
+        for p, c in changes:
+            if c is None:
+                git('update-index', '--force-remove', p, env=env)
+            else:
+                blob = git('hash-object', '-w', '--stdin', input=c).stdout.strip()
+                git('update-index', '--add', '--cacheinfo', '100644,%s,%s' % (blob, p), env=env)
         tree = git('write-tree', env=env).stdout.strip()
     return git('commit-tree', tree, '-p', base, '-m', message).stdout.strip()
 
@@ -200,6 +206,9 @@ def cmd_take(a):
         base = fetch(remote)
         cl = claims_at(base)
         if a.prefix in cl:
+            if field(cl[a.prefix], 'Who') == me and not field(cl[a.prefix], 'Status').startswith('merged'):
+                print('you already hold %s: carry on (tools/newwork.sh %s reuses your worktree)' % (a.prefix, a.prefix))
+                return
             sys.exit('%s is already claimed:\n%s' % (a.prefix, cl[a.prefix]))
         if not on_master_list(a.prefix, base):
             sys.exit('%s is not on the master list (notes/work-packages.md on main); '
@@ -244,32 +253,61 @@ def cmd_release(a):
 
 
 def cmd_done(a):
+    """After a merge to main: write the handoff for the coordinator to handoffs/, and either keep
+    the claim (--continue: you carry on with the same package) or release it, in one commit."""
     remote = canon_remote()
     handoff = open(a.handoff).read().strip()
-    now = datetime.datetime.now().astimezone().strftime('%Y-%m-%d %H:%M %z')
+    me = who()
+    now = datetime.datetime.now().astimezone()
+    stamp = now.strftime('%Y-%m-%d %H:%M %z')
     for attempt in range(5):
         base = fetch(remote)
         cl = claims_at(base)
         if a.prefix not in cl:
             sys.exit('%s is not claimed' % a.prefix)
+        if field(cl[a.prefix], 'Who') not in (me, ''):
+            sys.exit('%s is claimed by %s, not by you (%s)' % (a.prefix, field(cl[a.prefix], 'Who'), me))
         if git('merge-base', '--is-ancestor', a.merged, base, check=False).returncode:
             sys.exit('%s is not on %s/main: merge first' % (a.merged, remote))
-        text = cl[a.prefix]
-        status = 'merged %s at %s, awaiting coordinator' % (a.merged[:7], now)
-        if '| Status |' in text:
-            text = re.sub(r'^\| Status \|.*$', '| Status | %s |' % status, text, flags=re.M)
+        hpath = '%s/%s-%s-%s.md' % (HANDOFFS, a.prefix, now.strftime('%Y%m%d-%H%M%S'), a.merged[:7])
+        k = 2
+        while git('cat-file', '-e', '%s:%s' % (base, hpath), check=False).returncode == 0:
+            hpath = '%s/%s-%s-%s-%d.md' % (HANDOFFS, a.prefix, now.strftime('%Y%m%d-%H%M%S'), a.merged[:7], k)
+            k += 1
+        htext = ('# Handoff: %s\n\nWritten by `tools/claim.py done`. The coordinator applies it and removes this file.\n\n'
+                 '| Field | Value |\n|---|---|\n| Who | %s |\n| Merged | %s |\n| Written | %s |\n| Continuing | %s |\n\n%s\n'
+                 % (a.prefix, me, a.merged[:7], stamp, 'yes' if a.cont else 'no, claim released', handoff))
+        changes = [(hpath, htext)]
+        if a.cont:
+            text = cl[a.prefix]
+            status = 'tracing (part merged %s at %s)' % (a.merged[:7], stamp)
+            text = re.sub(r'^\| Status \|.*$', '| Status | %s |' % status, text, flags=re.M) if '| Status |' in text \
+                else text.rstrip('\n') + '\n| Status | %s |\n' % status
+            changes.append(('%s/%s.md' % (CLAIMS, a.prefix), text))
+            msg = 'Handoff %s (%s); claim kept, %s continues' % (a.prefix, a.merged[:7], me)
         else:
-            text = text.rstrip('\n') + '\n| Status | %s |\n' % status
-        text = text.rstrip('\n') + '\n\n## For the coordinator\n\n' + handoff + '\n'
-        c = commit_change(remote, base, '%s/%s.md' % (CLAIMS, a.prefix), text,
-                          'Claim %s: merged (%s), proposals for the coordinator' % (a.prefix, a.merged[:7]))
+            changes.append(('%s/%s.md' % (CLAIMS, a.prefix), None))
+            msg = 'Handoff %s (%s); claim released' % (a.prefix, a.merged[:7])
+        c = commit_change(remote, base, changes, None, msg)
         if a.dry:
-            print(text)
+            print(htext)
             return
         if push(remote, c) == 'ok':
-            print('claim %s marked merged (%s)' % (a.prefix, c[:7]))
+            print('%s: handoff written to %s; claim %s (%s)' % (a.prefix, hpath, 'kept' if a.cont else 'released', c[:7]))
             return
     sys.exit('main kept moving; try again')
+
+
+def cmd_handoffs(a):
+    remote = canon_remote()
+    base = fetch(remote)
+    names = git('ls-tree', '--name-only', base, HANDOFFS + '/', check=False).stdout.split()
+    names = [n for n in names if n.endswith('.md') and not n.endswith('README.md')]
+    if not names:
+        print('no handoffs waiting')
+    for n in names:
+        t = git('show', '%s:%s' % (base, n)).stdout
+        print('%-40s %-14s merged %s  %s' % (n, field(t, 'Who'), field(t, 'Merged'), field(t, 'Written')))
 
 
 def main():
@@ -291,9 +329,11 @@ def main():
     d.add_argument('prefix')
     d.add_argument('--merged', required=True)
     d.add_argument('--handoff', required=True)
+    d.add_argument('--continue', dest='cont', action='store_true')
     d.add_argument('--dry', action='store_true')
+    sub.add_parser('handoffs')
     a = ap.parse_args()
-    {'list': cmd_list, 'take': cmd_take, 'release': cmd_release, 'done': cmd_done}[a.cmd](a)
+    {'list': cmd_list, 'take': cmd_take, 'release': cmd_release, 'done': cmd_done, 'handoffs': cmd_handoffs}[a.cmd](a)
 
 
 if __name__ == '__main__':

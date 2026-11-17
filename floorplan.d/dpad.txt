@@ -1,0 +1,33 @@
+17897,6733:19050,7155  io  D0 output fingers | three pull-up fingers (gate d0_pu) and two pull-down fingers (gate d0_pd) between the VCC rows A, E, the VSS row C and the pad rows B, D, F
+18690,7155:19050,7390  io  D0 extra pull-down fingers | three more pull-down fingers on the pad (gate d0_pd through the poly comb fed from row I)
+17800,7170:18670,7545  logic  D0 pre-driver | d0_pu = NOR(d_hiz, d0_out_n), d0_pd = NOR(d_hiz, d0_pu): both output gates low while d_hiz is high (tri-state)
+17897,8468:19050,8890  io  D1 output fingers | three pull-up fingers (gate d1_pu) and two pull-down fingers (gate d1_pd) between the VCC rows A, E, the VSS row C and the pad rows B, D, F
+18690,8890:19050,9125  io  D1 extra pull-down fingers | three more pull-down fingers on the pad (gate d1_pd through the poly comb fed from row I)
+17800,8905:18670,9280  logic  D1 pre-driver | d1_pu = NOR(d_hiz, d1_out_n), d1_pd = NOR(d_hiz, d1_pu): both output gates low while d_hiz is high (tri-state)
+17898,10203:19051,10625  io  D2 output fingers | three pull-up fingers (gate d2_pu) and two pull-down fingers (gate d2_pd) between the VCC rows A, E, the VSS row C and the pad rows B, D, F
+18691,10625:19051,10860  io  D2 extra pull-down fingers | three more pull-down fingers on the pad (gate d2_pd through the poly comb fed from row I)
+17801,10640:18671,11015  logic  D2 pre-driver | d2_pu = NOR(d_hiz, d2_out_n), d2_pd = NOR(d_hiz, d2_pu): both output gates low while d_hiz is high (tri-state)
+17898,11787:19051,12209  io  D3 output fingers | three pull-up fingers (gate d3_pu) and two pull-down fingers (gate d3_pd) between the VCC rows A, E, the VSS row C and the pad rows B, D, F
+18691,12209:19051,12444  io  D3 extra pull-down fingers | three more pull-down fingers on the pad (gate d3_pd through the poly comb fed from row I)
+17801,12224:18671,12599  logic  D3 pre-driver | d3_pu = NOR(d_hiz, d3_out_n), d3_pd = NOR(d_hiz, d3_pu): both output gates low while d_hiz is high (tri-state)
+17899,13370:19052,13792  io  D4 output fingers | three pull-up fingers (gate d4_pu) and two pull-down fingers (gate d4_pd) between the VCC rows A, E, the VSS row C and the pad rows B, D, F
+18692,13792:19052,14027  io  D4 extra pull-down fingers | three more pull-down fingers on the pad (gate d4_pd through the poly comb fed from row I)
+17802,13807:18672,14182  logic  D4 pre-driver | d4_pu = NOR(d_hiz, d4_out_n), d4_pd = NOR(d_hiz, d4_pu): both output gates low while d_hiz is high (tri-state)
+17899,14975:19052,15397  io  D5 output fingers | three pull-up fingers (gate d5_pu) and two pull-down fingers (gate d5_pd) between the VCC rows A, E, the VSS row C and the pad rows B, D, F
+18692,15397:19052,15632  io  D5 extra pull-down fingers | three more pull-down fingers on the pad (gate d5_pd through the poly comb fed from row I)
+17802,15412:18672,15787  logic  D5 pre-driver | d5_pu = NOR(d_hiz, d5_out_n), d5_pd = NOR(d_hiz, d5_pu): both output gates low while d_hiz is high (tri-state)
+17899,16580:19052,17002  io  D6 output fingers | three pull-up fingers (gate d6_pu) and two pull-down fingers (gate d6_pd) between the VCC rows A, E, the VSS row C and the pad rows B, D, F
+18692,17002:19052,17237  io  D6 extra pull-down fingers | three more pull-down fingers on the pad (gate d6_pd through the poly comb fed from row I)
+17802,17017:18672,17392  logic  D6 pre-driver | d6_pu = NOR(d_hiz, d6_out_n), d6_pd = NOR(d_hiz, d6_pu): both output gates low while d_hiz is high (tri-state)
+17900,18185:19053,18607  io  D7 output fingers | three pull-up fingers (gate d7_pu) and two pull-down fingers (gate d7_pd) between the VCC rows A, E, the VSS row C and the pad rows B, D, F
+18693,18607:19053,18842  io  D7 extra pull-down fingers | three more pull-down fingers on the pad (gate d7_pd through the poly comb fed from row I)
+17803,18622:18673,18997  logic  D7 pre-driver | d7_pu = NOR(d_hiz, d7_out_n), d7_pd = NOR(d_hiz, d7_pu): both output gates low while d_hiz is high (tri-state)
+17685,6060:17960,6550  io  D0 input protection | clamp from the node d0_in to the VSS rail, comb and frame; the series strip from the bond pad is not drawn
+17685,7796:17960,8286  io  D1 input protection | clamp from the node d1_in to the VSS rail, comb and frame; the series strip from the bond pad is not drawn
+17686,9529:17961,10019  io  D2 input protection | clamp from the node d2_in to the VSS rail, comb and frame; the series strip from the bond pad is not drawn
+17686,11178:17961,11668  io  D3 input protection | clamp from the node d3_in to the VSS rail, comb and frame; the series strip from the bond pad is not drawn
+17687,12783:17962,13273  io  D4 input protection | clamp from the node d4_in to the VSS rail, comb and frame; the series strip from the bond pad is not drawn
+17687,14366:17962,14856  io  D5 input protection | clamp from the node d5_in to the VSS rail, comb and frame; the series strip from the bond pad is not drawn
+17688,15971:17963,16461  io  D6 input protection | clamp from the node d6_in to the VSS rail, comb and frame; the series strip from the bond pad is not drawn
+17685,17540:17960,18030  ?io  D7 input protection | a different layout (frame closed at the bottom); not traced
+17631,7374:17651,18850  route  d_hiz | output disable of the data pins, one metal for all eight pad cells (poly cross-under at y 18128-18304)
