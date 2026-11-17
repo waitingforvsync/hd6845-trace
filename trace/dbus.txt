@@ -809,7 +809,7 @@ N P 16825,15826 d5_out_n
 
 # ---- chain 1
 # d1_b: from G2's output west, north in the gap between the metals x 17197-17217 and
-# x 17243-17262, west under the five field metals to a pad with a dot of metal
+# x 17243-17262, west under four field metals to a pad with a dot of metal
 P 17220,9885:17262,9910
 P 17220,9740:17240,9910
 P 17030,9740:17240,9760
@@ -847,7 +847,8 @@ N M 17010,11205 dbus_cap2b
 # d2_c: leaves at G3's OUTPUT (not at G4's band): a step up and west to a pad; strap
 # south and west onto the rectangle's contact. Field between the tap and G3's gate band
 # (d2_b) above it: clean shot pink at x 17245-17263, y 11377
-P 17225,11395:17262,11429
+P 17225,11395:17250,11429            # the step: the west run ends at x about 17250 ...
+P 17245,11410:17262,11429            # ... and only its lower part runs on east into G3's output (field at x 17254-17262 above y 11408: review round 1 of run 6)
 P 17040,11388:17245,11408
 P 17005,11375:17045,11415          # pad
 C 17025,11395 s=26x26
@@ -908,7 +909,7 @@ P 16905,14748:17262,14768
 P 16880,14740:16918,14775          # pad
 C 16898,14757 s=26x26
 M 16884,14743:16912,14771          # dot of metal only
-D 16838,15215:16950,15345          # capacitor rectangle, not strapped (d5_out_n's metal passes over its east edge)
+D 16846,15215:16950,15345          # capacitor rectangle, not strapped (d5_out_n's metal passes over its east edge)
 C 16881,15301 s=30x30
 M 16865,15285:16897,15317
 N M 16881,15301 dbus_cap5b

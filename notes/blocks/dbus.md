@@ -98,7 +98,7 @@ down from the D0 pad cell. Gates sit on a 152 px vertical pitch between two rail
 | Input chain, D7 | the same cell at (0,630) | placed: `tools/dbus_localmatch.py` 0.88 clean shot, 0.85 metal, 0.84 chip-2 stripped; overlay at 2x (`ovB.png`). Its wiring west of x 17265 differs and is drawn per copy |
 | Inverter at the foot of the column | 17300-17590 x 16415-16590 | traced (run 3): drives the thin metal (`d0_out_n`) |
 | Capacitor rectangle of D6's c tap | 17147-17257 x 16776-16905 | drawn (plain diffusion, one contact) |
-| Capacitor rectangles of chains 1-5 | b (not strapped): 16990-17058 x 10030-10250; 16980-17090 x 11135-11270; 16953-17060 x 12066-12198; 17097-17212 x 14090-14215; 16838-16950 x 15215-15345. c (strapped): 16968-17045 x 10400-10615; 16975-17090 x 11575-11705; 16950-17060 x 12825-12965; 16885-16995 x 13825-13955; 17125-17235 x 14820-14950 | drawn (run 6), with the taps' polys, pads and straps |
+| Capacitor rectangles of chains 1-5 | b (not strapped): 16990-17058 x 10030-10250; 16980-17090 x 11135-11270; 16953-17060 x 12066-12198; 17097-17212 x 14090-14215; 16846-16950 x 15215-15345. c (strapped): 16968-17045 x 10400-10615; 16975-17090 x 11575-11705; 16950-17060 x 12825-12965; 16885-16995 x 13825-13955; 17125-17235 x 14820-14950 | drawn (run 6), with the taps' polys, pads and straps |
 | No latch follows chains 4-7 | - | chain 5 starts 758 px below chain 4, chain 6 679 px below chain 5, chain 7 630 px below chain 6 |
 | Logic above D0 | 17200-17700 x 5250-5900 | `r9c`'s five compare units. Their east halves (the loads, x 17500-17670) traced here in run 4: cell `dbus_r9l`, master = unit 1 (y 5384-5478), copies at (0,130) (0,260) (0,390), unit 0 mirrored about y 5370. Nothing else is there: field between the units, and no structure east of the rail up to x 17700 |
 
@@ -483,16 +483,19 @@ inverted) each leave the chain west in poly and end on a pad in the wiring field
   diffusion rectangle**: that rectangle is on `d#_c` (junction capacitance to the
   substrate, as `d0_c`'s).
 - No poly crosses any rectangle (no transistor: the extraction's count is unchanged at
-  127), and the long metals of other nets that pass over the rectangles (`d1_out_n`,
-  `d2_out_n`, `d4_out_n`, `d5_out_n`) have no contact there (run 5's review).
+  127), and the long metals of other nets that pass over the rectangles have no contact
+  there (run 5's review, and round 1 of run 6 by text maps): `d1_out_n` over chain 4's b
+  and chain 5's c rectangle, `d2_out_n` over chain 2's two, `d3_out_n` (x 17030-17042)
+  over chain 3's c rectangle, `d4_out_n` (x 16984-16992) over chain 4's c rectangle,
+  `d5_out_n` over the east edge of chain 5's b rectangle.
 
 | Chain | `d#_b`: route from the cell (x 17257) | b pad (dot only) | b rectangle, its dot contact | `d#_c`: route | c pad | strap | c rectangle, contact |
 |---|---|---|---|---|---|---|---|
-| 1 | G2's output y 9885-9910 west to x 17220, north x 17220-17240 (in the gap between the metals x 17197-17217 and `dbus_le`'s x 17243-17262) to y 9750, west y 9740-9760 under the five field metals | (17030,9751) | 16990-17058 x 10030-10250, (17014,10138) | G4's gate band (y 10156-10171 here) west to x 17190, south x 17180-17200 to y 10335, west y 10325-10345 | (17031,10336) | metal x 17022-17040 south to y 10596, west | 16968-17045 x 10400-10615, (17008,10595) |
-| 2 | G2's output y 11252-11277 west to x 17140, north x 17130-17150 to y 10965, west y 10955-10975 | pad B (17030,10965) | 16980-17090 x 11135-11270, (17010,11205) | leaves at **G3's output** (y 11404-11429): a step x 17225-17262, then west y 11388-11408 | (17025,11395) | metal x 17026-17044 south to y 11643, west | 16975-17090 x 11575-11705, (17008,11640) |
+| 1 | G2's output y 9885-9910 west to x 17220, north x 17220-17240 (in the gap between the metals x 17197-17217 and `dbus_le`'s x 17243-17262) to y 9750, west y 9740-9760 under four field metals (x 17068-17085, 17112-17130, 17155-17172, 17198-17215) | (17030,9751) | 16990-17058 x 10030-10250, (17014,10138) | G4's gate band (y 10156-10171 here) west to x 17190, south x 17180-17200 to y 10335, west y 10325-10345 | (17031,10336) | metal x 17022-17040 south to y 10596, west | 16968-17045 x 10400-10615, (17008,10595) |
+| 2 | G2's output y 11252-11277 west to x 17140, north x 17130-17150 to y 10965, west y 10955-10975 | pad B (17030,10965) | 16980-17090 x 11135-11270, (17010,11205) | leaves at **G3's output** (y 11404-11429): a step (the west run y 11388-11408 ends at x about 17250; only its lower part, y 11410-11429, runs on east into the output band) | (17025,11395) | metal x 17026-17044 south to y 11643, west | 16975-17090 x 11575-11705, (17008,11640) |
 | 3 | G2's output y 12620-12640 west under all the field metals to x 16992, north in the open x 16983-17002 | (16992,12331) | 16953-17060 x 12066-12198, (16990,12092) | leaves at **G3's output** (y 12772-12795): north x 17224-17247 to y 12743, west y 12733-12754 | (16992,12741) | metal x 16983-17001 south to y 12893, west | 16950-17060 x 12825-12965, (16972,12893) |
 | 4 | leaves the **vertical poly between G2's output and G3's gate** (x 17264-17290) at y 14034-14053, west under `d4_d`'s metal | (17161,14043) | 17097-17212 x 14090-14215, (17180,14150) | G4's gate band y 14248-14269 west to x 17195, diagonally down-left (centre (17178,14275), (17157,14295), (17143,14315)) to y 14345, west y 14335-14355 | (16946,14345), on the region's edge | metal x 16938-16954 **north** 455 px to y 13890, west | 16885-16995 x 13825-13955, (16922,13890) |
-| 5 | G2's output y 14748-14768 straight west under everything | (16898,14757), 50 px west of the region's edge | 16838-16950 x 15215-15345, (16881,15301) | G4's gate band y 15006-15027 west 60 px | (17201,15018) | metal x 17192-17210 **north** to y 14886, west | 17125-17235 x 14820-14950, (17178,14885) |
+| 5 | G2's output y 14748-14768 straight west under everything | (16898,14757), 50 px west of the region's edge | 16846-16950 x 15215-15345, (16881,15301) | G4's gate band y 15006-15027 west 60 px | (17201,15018) | metal x 17192-17210 **north** to y 14886, west | 17125-17235 x 14820-14950, (17178,14885) |
 
 What was measured, and how (scratch: `cache/scratch/dbus/survey.md`, "run 6"; views
 `s6_*.png`):
@@ -1018,6 +1021,67 @@ the clean shot (residue; both metal shots show no ring or pad); line 2 under the
 above 2x.
 
 Round 1: no findings.
+
+### Run 6 (2026-11-17)
+
+**Round 1, full review of what run 6 added** (reported 2026-11-17 21:14 +0000, a fresh Fable 5.2 agent; 33
+images in `cache/scratch/dbus/review-10/`; the piece: the capacitor taps of chains 1-5,
+commit ddebb74). Told to suspect: the three places where a tap passes within 20 px of
+another net of its own chain (chain 2's c tap under G3's gate band, chain 3's c corner
+beside it, chain 4's b tap against the vertical poly and `d4_d`'s pad), decided by the
+tracer from clean-shot profiles; which cell poly each tap really joins; a thin metal
+leaving a b pad or a b rectangle's dot; whether each c strap lands on its pad and on a
+contact, and what else touches it (chain 4's 455 px strap beside `d4_out_n`'s and
+`d5_out_n`'s metals, and `d5_out_n`'s pad on the same x); hidden contacts where a tap runs
+under another net's metal; the gap specks read as artefacts; pad B and chain 3's b pad
+against run 5's `d2_out_n` and `d3_out_n`; chain 4's diagonal (first drawn 15 px off); a
+poly crossing a rectangle; anything undrawn in the field.
+
+What it checked, at 4-5x in four shots at each junction, with profiles: chain 2's c tap
+against G3's band (field pink at x 17254-17262 on every row y 11366-11404, chip 1's metal
+bright with no edge bar over y 11356-11401; the join to G3's output continuous at x 17230,
+y 11394-11427 in both chip-2 shots); chain 3's c corner (six rows y 12730-12756 pink at
+x 17254-17266, both metal shots bright over y 12722-12770); chain 4's b tap (salmon to
+x 17266 on row 14043, pink on rows 14022 and 14066; separate from `d4_d`'s pad; no contact
+under `d4_d`'s metal); the diagonal (joins both horizontals, touches nothing else); chain
+4's strap (ends at its pad; bare ground in both metal shots down to `d5_out_n`'s pad); all
+b pads and b-rectangle dots (mosaics at 3x in both metal shots and ring samples at radius
+36-38: nothing leaves); the five c straps (each lands on a pad and on a rectangle contact;
+chain 1's is dim over its rectangle and `follow.py` misses it, but both stripped shots
+show it continuous); every run on its centre line (continuous poly, no pad or contact hole
+under any crossing metal; the gap specks absent in chip 2); pad B against `d2_out_n` (25 px
+of field) and chain 3's b pad against `d3_out_n`'s corner (about 10 px of bare ground); the
+ten rectangles (no poly crosses any; the metals over them have no contact); the field
+x 16950-17290 for anything undrawn (nothing; a green patch at (17180-17260, 11190-11260)
+is a stain on the clean shot only); the extraction (127 transistors, every piece on the
+claimed net) and `tools/unsure.py` (none of these nets).
+
+It reported four findings, all geometry or comment only; each checked by me and confirmed:
+
+1. Chain 2's c step: the trace drew poly at (17246-17262, 11395-11410), which is field.
+   Mine: `tools/px.py col 17256 11392 11432 3 acid1b` is pink to y 11407, edge at
+   11410-11413, salmon 11416-11425; `row 11402 17240 17262` is salmon at x 17240, an edge
+   at 17243-17246 and pink from 17255. Fixed: the step is now two rectangles
+   (17225-17250 x 11395-11429 and 17245-17262 x 11410-11429). No connection changes: the
+   drawn gap to G3's band was 8 px before and is 23 px now. Geometry only.
+2. Chain 1's b west run crosses four field metals, not five (trace comment and the table
+   above corrected). Comment only.
+3. `dbus_cap5b`'s west edge is at x about 16846, not 16838 (mine: `px.py row 15250 16826
+   16866 3`: outline at x 16841-16850, green from 16853). Fixed. Geometry only.
+4. The notes' list of metals over rectangles left out `d3_out_n` over chain 3's c
+   rectangle and `d4_out_n` over chain 4's (no contact at either). Notes corrected.
+
+Proof that the fixes change no connection (commit before the fixes: ddebb74):
+
+    tools/t.sh dbus sameconn.py ddebb74             -> connections identical
+    .venv/bin/python tools/sameconn.py ddebb74      -> connections identical
+
+Not checked by it: the chip-2 stripped shot is fringed at the chain 2 and 3 gaps and at
+the metal edge where chain 4's b tap meets the vertical poly, so those three rest on the
+clean shot and the two metal shots; chain 2's b north run above y 11150, chain 1's c west
+run and chain 2's two west runs were checked by survey and profile, not at 4x.
+
+Round 1: no findings that change a connection.
 
 ## Not done
 
