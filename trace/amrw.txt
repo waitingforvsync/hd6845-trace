@@ -157,3 +157,9 @@ N P 4900,6281 c4l3
 @alias c4l1 cdp1_l4588
 @alias c4l2 cdp1_l4632
 @alias c4l3 cdp1_l4676
+
+# The join to tla (drawn there after this route was): amr_eq_r3's metal x 2240 and its poly
+# east along y 3463 are tla's `tla_w3461`, a data input of the west column's selector
+# tla_w3417 = NOT(rcs_thin_e.tla_w3376 + tla_w3505.tla_w3461). The two blocks' geometry meets
+# on the metal x 2240; the alias says which name the net keeps.
+@alias amr_eq_r3 tla_w3461

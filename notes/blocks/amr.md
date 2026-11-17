@@ -1,6 +1,6 @@
 # amr: R3's high nibble and its 4-bit comparator (x 11400-13060, y 5540-6450)
 
-## Status (2026-11-17 14:14 +0000, contributor session; the slice, its exit and its inputs independently reviewed, Rounds 1-5)
+## Status (2026-11-17 19:25 +0000, contributor session; the slice, its exit and its inputs independently reviewed, Rounds 1-5)
 
 **The slice is traced** (`trace/amr.txt`, cell `amr_slice`, placed four times; 57 transistors;
 the full extraction has 0 errors, 0 warnings). Each slice is
@@ -280,7 +280,10 @@ Round 5 (2026-11-17, an independent agent: the three fixes against the trace, th
 extraction, the gate, this section and the Status): no findings beyond recording Rounds 4
 and 5 here.
 
-Round 5: no findings.
+
+After Round 5, main gained `tla`'s west column (commit 0cbaceb), whose input `tla_w3461`
+is this route's end: merging main gave "carries several names: amr_eq_r3, tla_w3461", the
+intended join, declared by one alias line in `trace/amrw.txt` (no geometry changed).
 
 ## Not done
 
@@ -309,7 +312,9 @@ no transistors; the full extraction has 0 errors, 0 warnings and the same transi
   counter is what this says in the datasheet's words; nothing was assumed from it.
 - **`amr_eq_r3` is followed to `tla`**: 12,000 px of wire to a poly crossing of the west
   column of `tla`'s first cluster, read as the gate of one transistor of a series pair under rail R1 at
-  (2625,3461). The gate is seen, not drawn (it is in `tla`'s untraced part).
+  (2625,3461). `tla` has since traced that column: the line is its `tla_w3461`, a data input
+  of the inverting selector `tla_w3417 = NOT(rcs_thin_e·tla_w3376 + tla_w3505·amr_eq_r3)`
+  (alias in `trace/amrw.txt`; the extraction prints that equation, FIRM).
 
 ### Route of `amr_eq_r3` (east to west)
 
@@ -417,6 +422,5 @@ wording fixes are in.
 
 ### Not done
 
-1. The gate at (2625,3461) and the rest of `tla`'s west column y 3260-3570 (above): the
-   column, its four gates, the node's load and exit; and the source of the gate in series
-   with `amr_eq_r3` (metal x 2283 north from (2283,3505), to y 3198).
+1. Where the selector's output `tla_w3417` goes (`notes/blocks/tla.md`: to the right
+   cluster, not followed) and its other data input `tla_w3376`.
