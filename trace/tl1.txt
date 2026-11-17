@@ -426,7 +426,7 @@ P 2428,6013:2545,6031
 N P 2480,6022 tl1_w6022
 P 2396,6180:2434,6210
 C 2414,6195
-P 2428,6186:2545,6204
+P 2428,6186:2817,6204                 # row east, south of the small cluster: straight under R1, thin W and R2 to the strip's edge, no pad (sc11.png, 2.9x, both stripped shots)
 # tl1_w5936: metal x 2500, y 5924-6252. Top pad (2500,5936): its poly row runs WEST along
 # y 5926-5944 under all the tracks to a corner at about (2096,5935), where it turns north
 # under the edge of MA1's metal (s2.png; drawn from x 2110, the vertical not followed).
@@ -438,7 +438,7 @@ P 2110,5926:2495,5944
 N P 2300,5935 tl1_w5936
 P 2482,6223:2520,6253
 C 2500,6239
-P 2514,6228:2545,6246
+P 2514,6228:2817,6246                 # likewise (sc11.png)
 
 # ====================================================================
 # tl1_w3333: a long wire down the west side, from the top of the strip to the small cluster.
@@ -470,3 +470,53 @@ P 2134,4972:2150,5000
 P 2134,4995:2150,5795
 P 2134,5790:2150,5810
 P 2134,5793:2545,5810
+
+# ====================================================================
+# West column of the small cluster, y 5690-6175: a THIRD copy of the pair of units tl1_ua,
+# tl1_ub, 1345 px below the master (findcell, clean shot, region 2440-2850 x 5600-6350:
+# 2535-2790 x 4345-4585 recurs at 0,+1345 with score 0.91, its upper and lower parts singly
+# 0.90 and 0.91; 2535-2790 x 4590-4780 at 1,+1344 with 0.94; none of tla's units above 0.56).
+# tools/railprof.py 2604 2646 5650 6350 gives the same stack as the master's, 1345 lower.
+# Overlay of the copy on four shots, 4x: sc3Aa/sc3Am, sc3Ba/sc3Bm, sc3Ca/sc3Cm.png;
+# cellcheck.py: median ncc 0.95-0.97 in the clean shot and 0.94-0.95 in the metal shot.
+#   tl1_w5706 = NOT tl1_w3333
+#   tl1_w5841 = NOT( tl1_w3333 AND ck_out  OR  tl1_w6022 )
+#   tl1_w6022 = NOT( tl1_w5978  OR  ck_out AND tl1_w5706  OR  tl1_w5841 )
+# The rows that enter the copy from the west are the ones drawn above to x 2545: tl1_w3333
+# (y 5793-5810: gate 1 and the inverter's gate), tla's ck_out row from (2365,5847) (gate 2;
+# it ends at the rail's east edge like the master's: see the correction in trace/tla.txt),
+# tl1_w5978 (y 5969-5987: the pull-down west of the rail), tl1_w6022 (y 6013-6031: on the
+# node's buried contact, the output), ck_out's second row (y 6054-6072: the series gate).
+# The poly on the west box of the upper unit's node is a stub with a rounded end at x 2535,
+# as in the master (sc5.png, 4x, three shots).
+@inst tl1_ua 0,1345
+@inst tl1_ub 0,1345
+# the copy's own VSS box below the stack (the master has the wide NOR's): tan x 2600-2650,
+# y 6123-6168 with a contact (2622,6145) (ring in both metal shots, speck in the clean shot;
+# sc6.png, 4x)
+D 2600,6123:2652,6168
+C 2622,6145
+# the contact of the VCC box under R2 that the two loads share (x 2778-2838, y 5870-5993 in
+# the copy): one elongated ring x 2790-2815, y 5885-5985 in both metal shots, specks in the
+# clean shot (sc2Bm.png, sc2Ba.png)
+C 2803,5935 s=22x70
+# the thin metal x 2742 of this copy: follow.py (2740,5842)-(2742,6052). Top pad with a contact
+# (2742,5841) on the top bar of the load plate of the three-input gate; bottom pad (2742,6048)
+# one poly with the gate of the third pull-down (both in the cells). tla had the top pad as the
+# end of ck_out's row: corrected there.
+M 2742,5829 y6059 w=12
+P 2725,5827:2762,5857
+C 2742,5841
+P 2725,6033:2762,6071
+C 2742,6048
+N M 2742,5940 tl1_w5841
+N P 2620,5707 tl1_w5706
+# The rails over the small cluster and the foot: R1 (VSS) and R2 (VCC) go on south from the
+# ends of tla's pieces (y 5330) without a break, over the poly rows of the foot (sc7.png, 2x,
+# metal and clean shot) and over the small cluster, and out of the strip at y 6350 (sc8.png,
+# 2x, both metal shots; from y 6300 R1 lies at x 2605-2655). The copy's VSS and VCC contacts
+# are under them.
+M 2625,5320 y6350 w=50
+N M 2625,5600 vss
+M 2806,5320 y6350 w=52
+N M 2806,5600 vcc

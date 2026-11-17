@@ -13,14 +13,14 @@ tl1_w4937   P  2817,5450-5470  in   row under the foot, on east past x 3400; gat
 
 # Onto tla's geometry
 rcs_e4      M  2494-2506,5232  out  the metal x 2500 runs into tla's pad (2497,5238)
-ck_out      P  2545,6054-6072  in   gate row into the small cluster, from a second contact (2372,6061) on tla's trunk
+
+# South of the small cluster (rows straight east under the rails) and the south edge
+tl1_w6022   P  2817,6186-6204  out  the third latch's output (west column of the small cluster), row east under R1, thin W, R2
+tl1_w5936   P  2817,6228-6246  ?    row east under the rails; its other end is the poly from the pad-ring side (below)
+tl1_w5978   M  2320-2332,6350  in   metal x 2326 on south out of the strip; its other end is a gate (the third latch's clear)
+vss         M  2600-2650,6350  -    R1 on south
+vcc         M  2780-2832,6350  -    R2 on south
 
 # Ends of drawn wires inside the region (where the drawing stopped)
-tl1_w3333   P  2640,2543-2560  ?    east end of the top pad's poly, under R1
-tl1_w3333   P  2545,5793-5810  ?    row into the small cluster
-tl1_w5978   P  2545,5969-5987  ?    row into the small cluster
-tl1_w5978   M  2320-2332,6350  ?    metal x 2326 on south out of the strip
-tl1_w6022   P  2545,6013-6031  ?    row into the small cluster
-tl1_w6022   P  2545,6186-6204  ?    row into the small cluster
-tl1_w5936   P  2545,6228-6246  ?    row into the small cluster
+tl1_w3333   P  2640,2543-2560  in   east end of the top pad's poly, under R1; the wire's other ends are two gates of the third latch
 tl1_w5936   P  2110,5926-5944  ?    west end as drawn; the poly goes on to a corner (2096,5935) and north
