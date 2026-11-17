@@ -7,12 +7,15 @@ RA (x 4728-4775), loads between RA and a second rail RB (x 4905-4950).
 
 ## Status
 
-2026-11-17 17:08 -0600. **Partial: one piece.** The gate column repeats the first cluster's
-west column (`tl1`'s units on R1/R2) 2125 px east and 434 px north. Traced so far: one latch
-(y 3906-4390, 11 transistors), as copies of `tl1`'s cells `tl1_ua` and `tl1_ub`, with the rows
-that feed it read here. Full extraction: 0 errors, 0 warnings.
+2026-11-17 17:35 -0600. **Partial: three units.** The gate column repeats the first cluster's west column
+(`tl1`'s units on R1/R2) 2125 px east and 434 px north (the top unit 520 px north). Traced:
+the NOR at the top (y 3012-3222), the inverter above the latch (y 3781-3911) and the latch
+(y 3906-4390): 16 transistors, each unit with the rows that feed it, read here. Full
+extraction: 0 errors, 0 warnings.
 
 ```
+tl4_w3113 = NOR(tl4_w3070, tl4_w3178)                             firm
+tl4_w3808 = NOT tl4_w3850                                         marked: the load's tie (`?`, as in tl1)
 tl4_w3928 = NOT tl4_w4025                                         firm
 tl4_w4113 = NOT( tl4_w4025 AND tl4_w4068  OR  tl4_w4243 )         marked: the two load ties
 tl4_w4243 = NOT( tl4_w4198  OR  tl4_w4068 AND tl4_w3928  OR  tl4_w4113 )   marked: the two load ties
@@ -20,17 +23,19 @@ tl4_w4243 = NOT( tl4_w4198  OR  tl4_w4068 AND tl4_w3928  OR  tl4_w4113 )   marke
 
 A latch: open while `tl4_w4068` is high, it takes `tl4_w4025`; `tl4_w4198` high forces
 `tl4_w4243` low. The same build as the two latches in front of `rcs_e4` and the third latch
-of the small cluster (`notes/blocks/tl1.md`). What the four signals are is not known: their
-tracks are not followed yet.
+of the small cluster (`notes/blocks/tl1.md`). **Unlike in the first cluster, the inverter
+above the latch does not feed the latch's data here**: its output `tl4_w3808` leaves north on
+the metal x 4496, and the latch's data `tl4_w4025` comes from the south on the metal x 4452.
+What the signals are is not known: their tracks are not followed yet.
 
 ## Inventory
 
 | Where | What |
 |---|---|
 | x 4250-4680, y 2700-5800 | bus field: about ten vertical metals, poly rows east into the column, pads. Not drawn, except the pieces at the latch |
-| x 4690-4967, y 3000-3220 | top unit: two gates west of RA between two VSS boxes, load east; findcell: `tl1`'s NOR (2540-2842 x 3558-3742) at 2125,-520, score 0.77. Not drawn |
+| x 4290-4967, y 3012-3222 | **the NOR** (`tl1`'s NOR at 2125,-520, findcell 0.77) |
 | x 4690-4967, y 3220-3780 | units not matched by `tl1`'s first latch (findcell under 0.5). Not drawn |
-| x 4690-4967, y 3781-3911 | findcell: `tl1`'s inverter (2535-2835 x 4215-4345) at 2125,-434, score 0.74. Not drawn |
+| x 4400-4967, y 3781-3911 | **the inverter** (`tl1`'s inverter at 2125,-434, findcell 0.74) |
 | x 4665-4967, y 3906-4390 | **the latch: this piece** |
 | x 4690-4967, y 4390-5400 | further units (findcell: the NOR at 2125,912 score 0.56; the inverter at 2126,955 score 0.75; the wide NOR at 2126,174 score 0.53). Not drawn |
 | y 2500-2960 | rows and tracks north of the cluster (`r9m`'s lines along y 2560-2640) |
@@ -76,13 +81,39 @@ The rails are drawn only where looked at (y 3880-4392) and are **named from stru
 carries the pull-downs' boxes (`vss`), RB the loads' boxes (`vcc`). Neither is followed to a
 supply yet.
 
+### The NOR at y 3012-3222 and the inverter at y 3781-3911 (traced 2026-11-17, second run)
+
+Both are `tl1`'s geometry (its NOR at 2540-2842 x 3558-3742, its inverter at 2535-2835 x
+4215-4345; plain items there, not cells), moved by 2125,-520 and 2125,-434 and laid over the
+clean shot at 3.8x (`n1.png`, `i1.png`): columns, node boxes, gate bands, strips, plates, tie
+boxes and VCC boxes sit on the features. Read here:
+- **NOR.** The VSS box above the column (4722-4777, 3012-3062) with a contact (4742,3036) and
+  the one below with (4747,3202) (`textmap.py 4730 3014 4770 3046 4`). Rows (`n2.png`,
+  `n3.png`: clean and metal, 2.7x): gate 1 `tl4_w3070`, y 3062-3082, from a pad (4320,3070) on
+  the metal x 4318; gate 2 `tl4_w3178`, y 3148-3168, from a pad (4413,3178) at the north end
+  of the metal x 4410; output `tl4_w3113`, the node's box poly west along y 3105-3125 to a pad
+  (4410,3113) at the south end of a metal x 4408. Between the two pads on x 4410 there is no
+  metal (y 3130-3160 bare in both views; `follow.py 4414 3140 S`: no metal).
+- **Inverter.** Output `tl4_w3808`: the node box's poly west along y 3797-3815 to a pad
+  (4495,3808) at the south end of the metal x 4496. Gate `tl4_w3850`: row y 3841-3859 across
+  RA from a pad (4455,3850), whose metal runs west along y 3852 and turns south at x 4402-4422
+  (`i2.png`, `i3.png`). One VCC contact, a ring with a bright centre at (4926,3838)
+  (`textmap.py 4908 3800 4952 3912 4`); `tl1`'s second contact has no counterpart here. The
+  load's tie is `tl1`'s `?` item.
+- The rows pass under the metals x 4537, 4580 and 4625 at constant width without pads.
+
 ## Ports
 
-None yet: no wire of this piece is drawn to the strip's edge (`ports.d/tl4.txt` is empty). The
-four tracks leave the piece inside the strip:
+None yet: no wire is drawn to the strip's edge (`ports.d/tl4.txt` is empty). The tracks leave
+the pieces inside the strip; each is drawn only inside the views named above:
 
 | Name | Track | Followed (`tools/follow.py`, not looked at) |
 |---|---|---|
+| `tl4_w3070` | metal x 4318 | from the pad (4320,3070) south to a corner (4315,4252), west to (4231,4246): leaves the strip west; candidate (4323,3392) |
+| `tl4_w3178` | metal x 4410 | from the pad (4413,3178) south to y 3599 |
+| `tl4_w3113` | metal x 4408 | from the pad (4410,3113) north to a corner (4421,2858), east to (4455,2856) |
+| `tl4_w3808` | metal x 4496 | from the pad (4495,3808) north to a corner (4495,2723), west to (4273,2727) |
+| `tl4_w3850` | metal x 4412 | from the corner (4412,3852) south to y 4336 |
 | `tl4_w4025` | metal x 4452 | from the pad (4455,4025) south to y 5202 |
 | `tl4_w4068` | metal x 4625 | north of the pad (4625,4068) to a corner (4630,2988), east to (4694,2989); candidate (4626,4054) is the pad |
 | `tl4_w4198` | metal x 4537 | y 2938 to y 4814; candidates (4538,3782), (4535,3447), (4540,4215) |
@@ -135,9 +166,9 @@ Round 1: no findings that change a connection.
 
 ## Not done
 
-- The four tracks of the latch beyond y 3890-4395 (table under Ports), and the tracks' other
-  pads.
-- RA and RB outside y 3880-4392, and where they are fed.
-- The rest of the gate column (Inventory): the top unit y 3000-3220, y 3220-3780, the inverter
-  copy y 3781-3911 (its output should be the row of `tl4_w4025`: not checked), y 4390-5400.
+- The nine tracks beyond the views (table under Ports), and their other pads.
+- RA and RB between the drawn pieces (y 3232-3770) and south of y 4392, and where they are fed.
+- The rest of the gate column: y 3220-3780 (no findcell match), y 4390-5400 (findcell: `tl1`'s
+  inverter at 2126,955, score 0.75; weaker hits for the NOR at 2125,912 and the wide NOR at
+  2126,174).
 - The bus field, the rows north of y 2960 and south of y 5400.
