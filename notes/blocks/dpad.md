@@ -5,7 +5,7 @@ Trace: `trace/dpad.txt`. Scratch images: `cache/scratch/dpad/` (names in bracket
 
 ## Status
 
-2026-11-17 15:55 +0000. Traced and extracting (full extraction 2143 nets, 3701 transistors, 0 errors, 0 warnings):
+2026-11-17 16:10 +0000. The second review cycle's round 1 (after the series strip was drawn) is clean: no findings. Traced and extracting (full extraction 2143 nets, 3701 transistors, 0 errors, 0 warnings):
 
 - the output cell `dpad_cell` (output fingers, extra pull-down fingers, the two-NOR
   pre-driver under the VCC band, the two straps), master D0, placed on D1-D7, each copy
@@ -270,7 +270,9 @@ Evidence (images in `cache/scratch/dpad/`):
 ## Not done
 
 - The pad's series strip is drawn (D0-D6 to the node, D7 to its protection's edge) and
-  waits for a review round.
+  reviewed (second cycle, round 1).
+- D7's strip west of x 17920: it continues west to a neck at x ~17838-17858 that runs
+  south into D7's protection node (seen by the second cycle's reviewer); not drawn.
 - Protection: the comb; D7's variant (its strip enters from the top near 17850,17538).
 - Input lines of D2-D7 from the protection nodes to the column (`d#_in_u`).
 - `d#_out_n` outside the cells and the driver of `d_hiz`: `dbus`'s channel wiring. Lead (review round 1, confirmed): at (17630,17085) a metal leaves `d_hiz` west along y 17073-17095 to x 17355 and turns south along x 17350-17370 past y 17237 (`metal` at 2.4-3x): almost certainly its feed. It lies in `dbus`'s claimed region, so it is not drawn here.
@@ -324,3 +326,21 @@ Round 3 is the last round the project allows; it had a confirmed finding (the om
 above), so this package is not ready to merge: it waits for the series strip to be drawn
 and reviewed.
 
+Second cycle, round 1 (full review, 2026-11-17 16:10 +0000, a fresh agent on claude-fable-5-2, before commit 1741a5d): told to
+suspect the strip-to-neck join in every copy, the strip's corners and top run under the VCC
+band, the pad metal across the contact box's east edge, D7's strip, and the frame's rail
+contacts. It checked those at 2.2-4.6x in acid1b, acid, metal and metal1 with row profiles
+in all seven copies (the neck's east side has no diffusion edge; the strip under the band
+matches the neck's colour, not the poly's), the corners and legs, the pad metal in all
+eight copies, D7's strip (it continues west to a neck at x ~17838-17858 that runs south
+into the node), the frame rail contacts in all seven copies, `d_hiz` (follower unbroken;
+cross-under symmetric), the VSS rail and VCC band (metal test), D0's input line, the cell
+copies by overlay, and the extraction (2143 nets, 3701 transistors, 0 errors; no net joined
+only through uncertain items). Two cosmetic offsets, no connection change, left as drawn:
+the frame's top run is about 8 px lower in the photo (y 5967-5989 in D0) than drawn
+(5975-5995), still overlapping by about 14 px; the VCC band's west edge is at about
+x 17925, drawn at 17900, with no contact in the extra 25 px. Not checked: the pre-driver
+above 0.76x (covered by the first cycle), D1's input join, D0's pad metal under the
+bond-ball shadow, the undrawn comb and D7's protection (in Not done).
+
+Round 1: no findings.
