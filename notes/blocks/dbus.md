@@ -800,7 +800,7 @@ No finding changes a connection. Two points:
   the rails in chip 2 (fringes; read in the clean shot); `r9c`'s `?B` boxes; the VCC metal
   north of y 4520.
 
-**Round 2: no findings.** Fix check (reported 2026-11-17 19:44 +0000, a fresh Fable 5.2
+**Round 2: no findings.** Fix check (reported 2026-11-17 19:38 +0000, a fresh Fable 5.2
 agent; images in `cache/scratch/dbus/review-8/`) of the two rectangles added to `dbus_in`
 since commit 0e53e80. It measured the outline at all twelve sites (G1 and G4, chains 0-5)
 in all four shots (west edge x 17311-17316, top 19-23 px above the band; the drawn edges
