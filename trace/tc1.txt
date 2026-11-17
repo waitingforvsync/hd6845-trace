@@ -725,31 +725,31 @@ N M 6716,3710 vcc
 D 6848,3627:6918,3897              # under the rail: contact region / gate 1 / output / gate 2 / contact region
 C 6880,3658 s=30x24                # rail contact, top (ring 6870-6895 x 3652-3670; two pits in the clean shot)
 C 6880,3845 s=24x30                # rail contact, bottom (ring 6868-6885 x 3835-3855; pits at y 3825, 3860, 3875)
+D 6914,3627:6972,3722              # the top contact region runs on east of the rail to an edge at x 6969-6978, and gate 1's band is over diffusion there too (no edge at x 6914-6930 or at y 3675-3683 in either metal shot; red minus green 17-27 in the chip-2 stripped shot: review of run 6). What looked like a closed box is the metal's protection boundary (trap 2)
+D 6914,3760:6952,3810              # diffusion under gate 2's band east of the rail, between the two open parts (single edge lines either side of the band)
 D 6914,3868:6936,3897              # the bottom region's foot under the widened rail
 D 6914,3803:6952,3866              # ... and its open part east of the rail (bright green: diffusion)
 D 6950,3722:6976,3897              # the column under the thin metal x 6968: output (box) / gate 2 / bottom region
 D 6914,3718:6952,3766              # the output node's open part east of the rail, to the box
-D 6800,3668:6824,3706              # the column under the thin metal x 6817, beside gate 1's leg
-D 6800,3700:6836,3780              # ... between the legs (the output node's west part)
-D 6800,3774:6824,3852              # ... beside gate 2's leg
+D 6800,3627:6820,3897              # the column under the thin metal x 6817, end to end: both arms cross it (channels: bright salmon under the thin metal like the bands under the rail; review of run 6)
+D 6800,3712:6836,3772              # ... wider between the legs (the output node's west part)
 D 6830,3716:6852,3768              # the output node across the gap between the metals (redder than the field of the same gap in three shots, row y 3740)
-D 6800,3627:6836,3645              # the column north of gate 1's arm
-?D 6830,3627:6852,3645             # ... to the top contact region across the gap (not seen: a dark bar)
-?D 6820,3668:6852,3690             # under gate 1's leg and across the gap to the top contact region (not seen): makes the leg a gate; width only
-D 6800,3878:6836,3897              # the column south of gate 2's arm
-?D 6830,3880:6852,3897             # ... to the bottom contact region across the gap (not seen)
-?D 6820,3800:6852,3850             # under gate 2's leg and across the gap (neutral in the clean shot at y 3820): width only
+D 6800,3627:6852,3643              # the column north of gate 1's arm, on east to the top contact region (visible diffusion: red minus green 25-35 in the chip-2 stripped shot against 1-4 on field)
+?D 6760,3627:6802,3643             # ... and west to an edge at x 6754-6760 (review of run 6); no channel comes of it
+?D 6818,3670:6852,3686             # under gate 1's leg (not visible: under poly): makes the leg a gate; width only
+D 6800,3880:6852,3897              # the column south of gate 2's arm, on east to the bottom contact region
+?D 6818,3800:6852,3850             # under gate 2's leg (not visible): width only
 
 # ---- gate 1
-P 6823,3688:6968,3708              # band; east of the rail it lies over field and stops at x 6968
-P 6823,3645:6836,3708              # leg
+P 6824,3688:6986,3708              # band; east of the rail it is still over diffusion and ends at x 6986, just past the diffusion's edge
+P 6824,3645:6849,3708              # leg, x 6824-6849 (orange in the gap in three shots)
 P 6725,3645:6836,3668              # arm: salmon under the thin metal, orange in the open in three shots to the vertical poly (the two dark lines across it at x 6741 and x 6757 are the rail's edge and its etch line: no poly at x 6746-6752 26 px further north)
 P 6725,3600:6740,3668              # the vertical poly under the supply rail's east edge, from the north
 N P 6732,3610 tc1_p3698
 
 # ---- gate 2
-P 6823,3776:7000,3798              # band
-P 6823,3776:6836,3878              # leg
+P 6824,3776:7000,3798              # band
+P 6824,3776:6849,3878              # leg, x 6824-6849
 P 6778,3852:6836,3878              # arm
 P 6995,3772:7032,3804              # pad
 C 7009,3789                        # ring 6998-7030 x 3768-3808 with a bright centre in both metal shots, green hole in the clean shot
@@ -761,7 +761,7 @@ B 6943,3724:6980,3764
 P 6950,3728:7030,3750
 P 6995,3706:7030,3750
 C 7010,3722                        # ring and bright centre in both metal shots, green hole
-M 7010,3600 y3732 w=14             # north (run 2: from the contact (7010,3092)): NOT FOLLOWED
+M 7010,3732 y3659 x6948 y3600 w=13  # north to y 3659, west along y 3653-3665, north along x 6941-6956 (the follower, and review of run 6: bare ground at x 7010 north of y 3644); it goes on north to about (6947,3547): NOT FOLLOWED. It passes over the top contact region's east part without contact (no ring, no hole)
 N P 6985,3739 tc1_o3740
 
 # ---- load
