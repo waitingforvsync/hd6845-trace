@@ -119,7 +119,7 @@ C 18240,7500:18332,7525
 M 18270,7250:18592,7300            # H (vss)
 C 18282,7263:18580,7288
 M 18270,7250:18300,7445            # joins H and J
-M 18270,7400:18760,7445            # J (vss), leaves right
+M 18270,7400:18812,7445            # J (vss): runs on to x ~18812 and merges north into the I' metal across x 18745-18812 (metal1 at 2.5x; review round 1); the merge is not drawn
 C 18282,7412:18455,7437
 N M 18700,7422 vss
 M 18325,7325:18722,7372            # I (pd node), to the column of the right group
@@ -180,7 +180,7 @@ D 17822,6490:17852,6546            # the node's neck
 @inst dpad_prot 3,9911 tag=d6
 
 # rail and trunk: metal-continuous with dbus's VSS rail (both metal shots, 0.82x)
-M 17690,6068:17765,18080
+M 17690,6068:17765,18850            # runs on past D7 (seen at y 18850, review round 1); a wide west branch at y 18175-18255 (over d_hiz's cross-under) is not drawn
 M 17355,6625:17765,6708
 M 17355,6625:17400,8040
 

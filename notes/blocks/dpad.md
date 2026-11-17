@@ -117,7 +117,11 @@ How the nodes are made up:
 
 Traced: everything in the table above, in the composite and in each copy.
 
-Believed, not seen directly:
+Not seen directly, but drawn firm (so `tools/unsure.py --equations` reports FIRM for them):
+the evidence below was re-checked by review round 1 at 4.5x in three shots, which found the
+bars sit exactly in the metal gaps, vanish over poly, and are absent in rows A and E where
+the metal is continuous: the signature of a metal-gap artefact (guide trap 2), not of a
+diffusion break. If a later reading disproves one of them, the item becomes `?D`:
 
 - That the diffusion is continuous where a metal gap leaves a dark bar across it in
   acid1b (trap 2): at the band's west edge x 17890-17900 (the three tabs) and at x
@@ -194,9 +198,22 @@ reaches the node another way. In both readings the clamp is off in normal operat
 - Protection: comb, strips, the series strip from each bond pad (lengths differ per
   pad), D7's variant; the bond pads.
 - Input lines of D2-D7 from the protection nodes to the column (`d#_in_u`).
-- `d#_out_n` outside the cells and the driver of `d_hiz`: `dbus`'s channel wiring.
+- `d#_out_n` outside the cells and the driver of `d_hiz`: `dbus`'s channel wiring. Lead (review round 1, confirmed): at (17630,17085) a metal leaves `d_hiz` west along y 17073-17095 to x 17355 and turns south along x 17350-17370 past y 17237 (`metal` at 2.4-3x): almost certainly its feed. It lies in `dbus`'s claimed region, so it is not drawn here.
 - The straps' metal was checked per copy only at 0.42x [U_a, U_b]; the rows' metal of
   D1-D6 at 1.05x [Rm_all], D7 at 1.5x.
 
 ## Review
+
+Round 1 (2026-11-17 15:18 +0000, a fresh agent briefed with `/trace6845`'s reviewer text; told to suspect
+the diffusion continuity across the dark gap bars, row F to gr1 to G', each copy's strap and
+row metal, the `d_hiz` cross-under ends and D0's exit contacts; checked those at 4-5x in
+three shots, the pre-driver, the extra fingers, the straps and contacts in all eight
+copies, the joins and the `d_hiz` line). No wrong connection. Findings, each checked by the
+tracer in the photos: (1) an undrawn metal branch of `d_hiz` at (17630,17085) going west
+and south: confirmed; it is in `dbus`'s claimed region, so it is recorded under Not done
+as a lead, not drawn; (2) the VSS rail x 17690-17765 runs on past D7: confirmed, drawn to
+y 18850; (3) row J's metal runs on to x ~18812 and merges north into I': confirmed for
+the extension (drawn), the merge left undrawn (both are `vss`); (4) believed continuities
+drawn firm: the notes now say why.
+
 
