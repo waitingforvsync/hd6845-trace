@@ -43,6 +43,12 @@ the buffers, the two top comb cells, and the wiring below the buffer row.
 
 ## Data pad (D0-D7): in progress
 
+**Superseded (coordinator, from the 2026-11-17 handoffs) by `notes/blocks/dpad.md`**, which traces the cell (AMB-003 closed). Several
+readings below are wrong: rows G and K are the pull-up gate node, not VCC; H and J are VSS; I is
+the pull-down node; the "green shapes" are field islands; the boxes at 18597-18632 x 7250-7298,
+17835-17858 x 7440-7460 and strip 4's end are not buried contacts; "gate 7170" is a field strip
+(items 3, 5 and 7 below). Kept as the record of the first reading.
+
 Eight instances at dy = 0, 1735, 3470, 5054, 6637, 8242, 9847, 11452 from D0 (D0 at
 the top, D7 at the bottom). Master rectangle 17600,5950:19200,7600. A median composite
 of the eight (`tools/composite.py dpad ...`, view with `--comp dpad`) removes the etch

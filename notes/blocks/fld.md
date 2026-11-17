@@ -220,3 +220,9 @@ block, not chased line by line.
 
 Everything under "Followed, not drawn"; the routing field y 4720-4990 (seven horizontal
 polys with pads at both ends).
+
+## Note from `tc1` (coordinator, from the 2026-11-17 handoffs)
+
+The thin metal that arrives from the north along x 6621 and ends at about (6622,5006) is
+`tc1_p4308`, the input of the inverter `tc1_o4280` (`notes/blocks/tc1.md`). What it lands on in
+this block's upper group is the source of that input.

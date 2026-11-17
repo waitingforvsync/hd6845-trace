@@ -6,8 +6,8 @@ merged, or by `tools/claim.py release` if it is abandoned.
 | Field | Value |
 |---|---|
 | Who | tom-seddon |
-| Claimed | 2026-11-17 18:44 +0000 |
+| Claimed | 2026-11-17 19:55 +0000 |
 | Region | 16950-17700 x 5300-17000 |
-| What | continue dbus from its Not done list: the logic above D0 (17200-17700 x 5250-5900), then the left-hand wiring of chains 1-5 (capacitor taps, input lines of D2-D5) as far as the session reaches |
+| What | continue dbus from its Not done list: d2_out_n..d7_out_n from the pad cells to where they leave the column, then the chains' line 2, the capacitor taps, d7_in |
 | Branch | dbus |
 | Status | tracing |

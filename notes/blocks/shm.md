@@ -75,3 +75,10 @@ whatever else lies west.
 ## Not done
 
 The other three lines; R8's bit lines to the data pads (the bit order).
+
+## Notes from `tc1` (coordinator, from the 2026-11-17 handoffs)
+
+- The top bus field has more lines over the datapath than the five at y 2768-2945: the bus
+  metal y 2641 east of the VSS rail carries `tc1_o4020` from (7900,2640) to about (9098,2639).
+- This block's `?B` joining its third inverter's output to the `tc1_x1` poly is one of the
+  three joins of AMB-020 (J3): to be looked at again (R12).

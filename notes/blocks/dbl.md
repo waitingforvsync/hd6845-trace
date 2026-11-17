@@ -48,9 +48,10 @@ Evidence:
   to the pins when the clusters are traced.
 - Each end's poly runs east to a heavy-outlined box of about 25 x 25 px at x 17300-17325
   with no poly beyond it (independent review, 5x in three shots): the look of a buried
-  contact. In unit 0 it sits at the corner of `dbus`'s node N2. Whether the data line
-  drives a gate or ties to a diffusion node, and so which way the unit uses it, is open
-  until the cluster is traced.
+  contact. In unit 0 it sits at the corner of `dbus`'s node N2. It ties to a diffusion: the
+  output node of `dbus_drv` in every unit (a buried contact at each node's south-west tab,
+  (17314,9466) in unit 0), so **the unit drives the data line** (`dbus`, 2026-11-17, review
+  rounds 1, 2 and 4).
 
 ## Review
 

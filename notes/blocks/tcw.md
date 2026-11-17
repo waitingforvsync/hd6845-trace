@@ -247,3 +247,11 @@ the polys of `tcw_a` and `tcw_c` going west along y 4000 and y 4130.
 Suggested order: calibrate `tools/classmap.py --open` on the load of the traced gate
 (known poly over channel at (6628-6668, 3808-3836), known diffusion arm, known field),
 then take the column in 300 px tiles from y 3690 upwards.
+
+## Notes from `tc1` (coordinator, from the 2026-11-17 handoffs)
+
+Two poly rows enter this region from `tc1` at x 6750: y 4385-4405 (`tc1_x1_u`, seen to about
+x 6445, passing under the ground rail x 6505-6560, not checked for a channel there) and
+y 4428-4448 (`tc1_p4308`, ending on a pad with a contact at (6620,4436); metal south along
+x 6621). `tc1_p3698` comes down a poly under the supply rail's edge at x 6725-6740. These are
+this block's to follow.

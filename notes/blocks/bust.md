@@ -6,7 +6,7 @@ Wiring drawn (`trace/bust.txt`): twelve of the fourteen lines of `cdp1`'s big ch
 from its east edge (x 10845) through the cross-under at x 11230-11700 and east as metal
 to their ends at x 12000-16926, and five of the east ends joined to what they feed. No
 transistors. (The thirteenth, `cdp1_l4676`, is drawn by `r9m` the same way; the
-fourteenth, `cdp1_l4544`, does not drop: it is `amr` c0's outer output, below.)
+fourteenth, `cdp1_l4544`, does not drop: it is `amr` c0's outer line, below: an input, the counter bit `c4l0`.)
 
 
 **Names (refresh 2026-11-17).** The data bus lines are now one name per bit, `db_b0`..`db_b7`. The tables below were written when the central datapath's slice lines and the right datapath's `ubus`/`rbus` lines had names of their own; where a row now shows the same name on both sides, read the left as the line of the slice it names and the right as its continuation in the right datapath.
@@ -24,19 +24,19 @@ default gap bridges). East of the staircase: metal, `tools/follow.py` from each 
 
 | cdp1 line (x 10845) | metal y | east end | joined to |
 |---|---|---|---|
-| `cdp1_l4588` | 4655 | 12000 | `amr` c1's outer output (alias of `amr_ob_c1`); drop seen end to end at 3x (`c0a.png`) |
-| `cdp1_l4632` | 4697 | 12390 | `amr` c2's outer output (`amr_ob_c2`) |
-| `cdp1_l4676` | 4740 | 12782 | `amr` c3's outer output (drawn by `r9m`) |
+| `cdp1_l4588` | 4655 | 12000 | `amr` c1's outer line, an input (`c4l1`; alias of `amr_ob_c1`); drop seen end to end at 3x (`c0a.png`) |
+| `cdp1_l4632` | 4697 | 12390 | `amr` c2's outer line, an input (`c4l2`; `amr_ob_c2`) |
+| `cdp1_l4676` | 4740 | 12782 | `amr` c3's outer line, an input (`c4l3`; drawn by `r9m`) |
 | `sl_eq_r5` | 4787 | pad (13540,4787) | **R5's match**: poly south to `rdp1`'s poly x 13533-13556 from y 5450 (alias of `sl_eq_r5`) |
 | `db_b0` | 4830 / 4850 | pad (13715,4850) | **`db_b0`**: poly south at x 13706 to a pad (13705,5628) (it ends there, above `rdp1`'s eq-line load), metal west along y 5632 and down as `db_b0` (2.7x in four shots, `c5.png`; follower) |
 | `db_b1` | 4873 / 4894 | 13848 | **`db_b1`** (poly x 13845 to the data line's top, 5635) |
 | `db_b2` | 4916 / 4937 | 14238 | **`db_b2`** |
 | `db_b3` | 4959 / 4981 | 14630 | **`db_b3`** |
 | `db_b4` | 5002 / 5024 | 15020 | **`db_b4`** |
-| `db_b5` | 5045 / 5068 | 15280 | `amr` c1's inner output; **`db_b5`**: poly to a pad (15275,5628), metal down x 15277 to a pad (15277,6826), poly east under the VCC rail to a pad (15405,6826), `db_b5`'s metal south (3x, `b5.png`) |
+| `db_b5` | 5045 / 5068 | 15280 | `amr` c1's inner line (data bit 5 into R3); **`db_b5`**: poly to a pad (15275,5628), metal down x 15277 to a pad (15277,6826), poly east under the VCC rail to a pad (15405,6826), `db_b5`'s metal south (3x, `b5.png`) |
 | `cdp1_lw1` | 5088 / 5110 | 15584 | a poly south at x 15580 (not drawn) |
-| `db_b6` | 5131 / 5153 | 16146 | `amr` c2's inner output; **`db_b6`**: poly to a pad (16146,5625), metal down x 16144 and west to a pad (16005,6825), poly west under the VCC rail to a pad (15870,6825), metal to `db_b6` (2.5x, `b6.png`) |
-| `db_b7` | 5175 / 5196 | 16926 | `amr` c3's inner output; **`db_b7`**: poly to a pad (16922,5625), metal down x 16926, west to x 16839 and south: the through line on slice s7's strap track that `rdp2`/`rdp3` already identified as `db_b7`'s branch "to the upper array" (drawn from y 9440) |
+| `db_b6` | 5131 / 5153 | 16146 | `amr` c2's inner line (data bit 6 into R3); **`db_b6`**: poly to a pad (16146,5625), metal down x 16144 and west to a pad (16005,6825), poly west under the VCC rail to a pad (15870,6825), metal to `db_b6` (2.5x, `b6.png`) |
+| `db_b7` | 5175 / 5196 | 16926 | `amr` c3's inner line (data bit 7 into R3); **`db_b7`**: poly to a pad (16922,5625), metal down x 16926, west to x 16839 and south: the through line on slice s7's strap track that `rdp2`/`rdp3` already identified as `db_b7`'s branch "to the upper array" (drawn from y 9440) |
 
 ## What this establishes
 
@@ -90,7 +90,7 @@ skew bit). The eight data lines now joined across the chip:
 | 6 | `db_b6` (slice 3, row A) = `db_b6` (enters from the west) | `db_b6` |
 | 7 | `db_b7` (slice 2, row A) | `db_b7` |
 
-`amr`'s inner outputs drive bits 5, 6 and 7 (c1, c2, c3).
+`amr`'s inner lines take bits 5, 6 and 7 (c1, c2, c3) into R3's high nibble.
 
 ## West of the central datapath (corrected 2026-11-17 07:15)
 
@@ -121,12 +121,12 @@ pads at matching y on both sides: (6960,4655)/(6460,4657) and (6923,4695)/(6470,
 (3.4x, `cfe.png`; `hop3.png`). The polys across are drawn `?P` (not seen end to end).
 West of it they run along y 4660 / 4702, south along x 5972 / 6016, and end on contacts
 onto poly pads (5885,5893) and (5922,5935) into the untraced top-left logic (2.7x,
-`we.png`). So **`amr` c2's and c3's outer outputs** (by the corrected mapping) go to the
+`we.png`). So **`amr` c2's and c3's outer lines** (by the corrected mapping; inputs, the counter `c4l`) come from the
 top-left logic near (5900,5900); c1's ends at (7535,4619) (not looked at) and c0's west
 end is not followed. None of them is `ra_eq_r9` (that is R9's match:
 `notes/blocks/r9m.md`, correction).
 
-## `amr`'s partial slice c0: its two outputs drawn
+## `amr`'s slice c0: its two lines drawn (inputs: see `notes/blocks/amr.md`)
 
 c0's top contacts are at (11523,5585) and (11607,5585), each with a metal down the slice
 to y 6302-6312 as in c1-c3 (follower; 3x, `cache/scratch/bust/c0t.png`). Its polys run
@@ -221,3 +221,10 @@ on east, below). Independent review (2026-11-17) confirmed every stretch and the
 - The register-width check cannot detect a swap of bits 1 and 4, 2 and 3, or 5 and 6
   (identical strobe sets); the order within those pairs rests on the geometry, which the
   review checked. "Exactly the datasheet" leaves out R3 (`wr_r3` reaches no data line yet).
+
+**Correction (coordinator, from the 2026-11-17 handoffs).** Where this file calls `amr`'s lines outputs (the c0 section above,
+"an outer output on a through-line into the west logic"), they are inputs: the outer lines are
+the left array's 4-bit counter `c4l0`..`c4l3`, run from `urch`'s ends to the slices, and the inner
+lines are data bits into R3's high nibble (`notes/blocks/amr.md`). c1's west end "(7535,4619)
+(not looked at)" is a corner and goes on west (drawn in `trace/amrw.txt`). The two `?P` rows at
+y 4657 and 4700 were seen end to end in both stripped shots by two reviews and can be made firm.

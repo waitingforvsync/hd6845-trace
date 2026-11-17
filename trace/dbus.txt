@@ -30,6 +30,12 @@ D 17440,8280:17462,8330            # the output node's column under the thin met
                                    # gate band under the rail). So G1 has a second pull-down on
                                    # the same gate, W about 22 (found 2026-11-17, run 3)
 D 17350,8287:17410,8386            # VSS land, channel, output
+D 17316,8310:17352,8358            # the land's tab west of the rail, above the band, and the channel under
+                                   # the band down to the output band: a closed outline 17312-17350 x
+                                   # 8305-8328 whose inside is green (open diffusion) in the clean shot
+                                   # in chain 0 (mauve in chains 1-4; pinker than field in chip 2 in all),
+                                   # and its west edge crosses the band at x 17310-17316 in all shots.
+                                   # So G1 is about 94 wide, not 60 (review round 1 of run 4)
 C 17385,8308 s=30x30               # VSS
 D 17305,8356:17462,8386            # output band
 D 17436,8324:17462,8404            # output, under the thin metal
@@ -87,6 +93,7 @@ C 17553,8680 s=30x34
 P 17255,8781:17425,8804            # gate band, fed by G3; the line also runs on left
 N P 17275,8792 d{}_c
 D 17350,8742:17410,8841
+D 17316,8766:17352,8813            # the same tab and channel west of the rail as in G1 (W about 94)
 C 17385,8763 s=30x30
 D 17305,8811:17462,8841            # output band
 D 17436,8779:17462,8859
@@ -549,11 +556,15 @@ P 16950,14688:17167,14704          # leaves the region at x 16950
 # end of the VSS rail (source: the land it shares with chain 7's stage 1), its output node
 # runs east to a diffusion strip under the thin metal, which ends on that strip's pad
 # (17452,16564). So the thin metal x 17438-17459 that crosses every cell of the column is
-# this inverter's output. Input: a poly from the west along y 16444-16463.
+# this inverter's output. Input: a poly along y 16444-16463 from a pad (16993,16451).
 D 17354,16390:17403,16497          # VSS land (runs on into chain 7's), channel, output node
 C 17372,16414 s=30x30              # VSS contact on that land (ring in both metal shots; review round 1)
-P 16950,16444:17418,16463          # gate band; comes in from the west edge of the region
-N P 17000,16453 dbus_do0_in
+P 16985,16444:17418,16463          # gate band; its west end is a pad (run 4: it does NOT come in from
+N P 17100,16453 dbus_do0_in        # the west edge; nothing lies west of the pad at this y)
+P 16977,16435:17012,16468          # pad
+C 16993,16451 s=26x26
+M 16993,16440 y16712 x16950 w=19   # metal south from the pad, west at y 16702-16722 out of the region
+                                   # (follow.py: on west to x 16795, then south to (16797,17434))
 D 17325,16478:17360,16499          # node's west tab ...
 ?D 17294,16476:17330,16500         # ... into a heavy-outlined box whose west end lies under the d6_in
                                    # metal: kind not settled (Ambiguity 9); nothing is drawn joining
@@ -586,3 +597,143 @@ P 17512,8095:17600,8113
 P 17586,8089:17614,8117            # pad
 C 17600,8103 s=26x26
 M 17600,7560 y8116 w=18
+
+# ==== the loads of the five units that make R9's compare value (r9c's units, AMB-012) ====
+# y 5260-5870, east of the units' rail x 17440-17495. r9c drew each unit's pull-down under
+# that rail and left the east half. Each has a depletion load: the output band under the
+# rail runs on east as a 20 px diffusion strip, widens to 30 px under a poly block
+# (x 17558-17611, 66 tall) and ends on a land with a contact to the rail x 17616-17667.
+# West of the block an arm of the strip turns back beside the block to a heavy-outlined box
+# (17557-17583, 22 tall) where a tab of the block lands on it: the load's gate is tied to
+# the output side. So the east rail is the loads' supply and the units are inverters.
+# Edges measured in the chip-2 stripped shot (tools/dbus_dark.py, cuts at x 17515, 17541,
+# 17568, 17592, 17640 and fourteen rows): units 1-4 repeat at 130.0 +- 1; unit 0 is unit 1
+# mirrored about y 5370 (as r9c found for its pull-down).
+#
+# The east rail: followed north (follow.py) to y 4592, where it runs into a horizontal band
+# (y 4592-4635) that enters the wide metal x 17890-18190, which pads_out has as vcc from
+# y 4810 (cuts along y 4600 and x 17640 in both metal shots: metal throughout, the dark
+# spots are pits). Its south end is at y 5902.
+M 17641,4600 y5900 w=50
+N M 17641,5000 vcc
+@cell dbus_r9l tag=1
+D 17480,5435:17545,5453            # output strip coming east from r9c's band under the VSS rail
+N D 17500,5444 ra{}_cmp
+D 17538,5431:17616,5461            # wider under the load gate, to the land
+D 17612,5398:17670,5462            # VCC land
+C 17641,5430 s=30x34
+P 17558,5412:17611,5478            # load gate: W 30 / L 53
+P 17558,5386:17583,5420            # its tab north onto the arm's end
+D 17532,5387:17552,5442            # arm of the output strip, north beside the block
+D 17545,5387:17583,5407            # ... and east under the tab
+B 17555,5384:17585,5409            # the box: load gate tied to the output
+@end
+@inst dbus_r9l 0,0 my=5370 tag=0
+@inst dbus_r9l 0,130 tag=2
+@inst dbus_r9l 0,260 tag=3
+@inst dbus_r9l 0,390 tag=4
+
+# ==== the input lines of D2, D3, D4, D5: from each pin's protection node (dpad) to the
+# first gate of its buffer chain ====
+# All four start like D1's: the node's metal (x 17824-17848; dpad draws it to 70 px below
+# the protection) comes down to a contact on a poly pad; the poly runs west under dpad's
+# VSS trunk (x 17690-17765) and the d_hiz metal (x 17633-17652), no contact, turns and runs
+# along the channel to "line 1" of its chain (cell y 8180-8201), which goes west under the
+# VCC rail, the thin metal (d0_out_n) and the VSS rail (no contacts: tla_contacts.py finds
+# only the open gaps between the metals, the same four in every line) to a pad. A metal
+# jumper over "line 2" (the poly 42 px below line 1) joins that pad to a second pad on the
+# chain's first gate band.
+# Edges: tools/dbus_dark.py in the chip-2 stripped shot, each run cut across every 60-120
+# px and along its centre (no edge line crosses any of them between its two corners).
+#
+# D2: chain 2. The same shape as D1's, 1366 lower at the chain end.
+M 17824,10020:17848,10155          # node metal down to the contact
+P 17820,10124:17856,10158          # pad
+C 17837,10141 s=26x26
+P 17592,10131:17840,10152          # west, under the trunk and the d_hiz metal
+P 17592,10131:17613,10932          # down the channel between the VCC rail and the d_hiz metal
+P 17285,10912:17613,10931          # line 1
+P 17278,10905:17314,10937          # pad
+C 17295,10920 s=26x26
+M 17294,10908 y11020 w=18          # jumper over line 2 (y 10952-10975)
+P 17279,10992:17314,11026          # pad
+C 17295,11008 s=26x26
+P 17276,11018:17302,11083          # down to G1's gate band
+@alias d2 d2_in
+#
+# D3: chain 3. The same again; here line 2 (y 12322-12343) turns south at x 17592-17612.
+M 17824,11670:17848,11742
+P 17821,11710:17858,11743          # pad
+C 17838,11727 s=26x26
+P 17592,11714:17840,11736
+P 17592,11714:17614,12299
+P 17285,12278:17614,12298          # line 1
+P 17280,12271:17314,12304          # pad
+C 17295,12287 s=26x26
+M 17294,12274 y12388 w=18          # jumper over line 2
+P 17278,12358:17315,12395          # pad
+C 17295,12376 s=26x26
+P 17276,12388:17302,12449          # down to G1's gate band
+@alias d3 d3_in
+#
+# D4: chain 4. Line 1 ends on a pad east of the others' (17316,13655); the jumper is an L:
+# west to x 17266 and south over line 2 (y 13687-13710; dim over the poly in chip 2,
+# 137/119/58, yellow in chip 1, 191/177/85: metal, trap 19) to a pad at the west end of
+# G1's gate band itself.
+M 17824,13275:17848,13345
+P 17820,13308:17857,13350          # pad
+C 17838,13329 s=26x26
+P 17592,13318:17840,13340
+P 17592,13318:17614,13666
+P 17300,13645:17614,13666          # line 1
+P 17300,13638:17337,13676          # pad
+C 17316,13655 s=26x26
+M 17266,13650:17326,13682          # jumper, west
+M 17266,13650:17286,13816          # ... and south
+P 17257,13790:17298,13824          # pad on the west end of G1's gate band
+C 17275,13806 s=26x26
+@alias d4 d4_in
+#
+# D5: chain 5 lies above D5's protection, so the line goes up: from the pad west only to
+# x 17631, then north in a poly 26 wide directly under the d_hiz metal for 480 px (no
+# contact: no pad or ring in either metal shot, salmon throughout in the clean shot; the
+# dark nick at (17650,14592) is in the metal's edge in chip 2 only) to line 1, y 14403.
+M 17824,14858:17848,14900
+P 17817,14868:17853,14906          # pad
+C 17835,14887 s=26x26
+P 17631,14878:17840,14899          # west under the trunk
+P 17631,14403:17657,14899          # north under the d_hiz metal
+P 17300,14403:17657,14424          # line 1, west under the rails
+P 17300,14396:17338,14432          # pad
+C 17316,14412 s=26x26
+M 17266,14402:17326,14430          # jumper, west
+M 17267,14402:17287,14512          # ... and south over line 2 (y 14445-14468)
+P 17258,14483:17293,14518          # pad
+C 17275,14500 s=26x26
+P 17266,14512:17290,14576          # down ...
+P 17266,14553:17300,14576          # ... and east into G1's gate band
+@alias d5 d5_in
+
+# ==== d1_out_n: D1's output data line, from the D1 pad cell to the region's west edge ====
+# From the west end of dpad's strip 4 (17800, y 9201-9227) the poly runs west under the
+# trunk (y 9219-9240), turns south at x 17635-17657 under the d_hiz metal (no contact; the
+# clean shot is salmon down to y 9606 and field pink from 9612), and at y 9589 turns west as
+# chain 1's "line 2" under the rails and under D1's input jumper. At x 17225-17243 it steps
+# down 22 px (one poly: the clean shot shows the Z at 6x, d1o_jog.png) and ends on a pad
+# (17120,9620). From there a metal runs south for 6,140 px (follow.py: one piece; its seven
+# contact candidates are a poly crossing, chain 3's line 2, and two plain diffusion
+# rectangles passing under it: no pad, ring or speck at any), steps west at y 15751-15770
+# to x 17026-17046 and ends on a pad (17034,16343). A poly leaves that pad west along
+# y 16334-16355 and crosses the region's edge: the driver is west of x 16950.
+P 17635,9219:17805,9240            # from the pad cell, west under the trunk
+P 17635,9219:17657,9609            # south under the d_hiz metal
+P 17225,9589:17657,9609            # line 2, west under the rails
+P 17225,9589:17243,9632            # the step down
+P 17107,9612:17243,9631            # west to the pad
+P 17107,9605:17137,9636            # pad
+C 17120,9620 s=26x26
+M 17122,9608 y15760 x17036 y16356 w=19
+P 17016,16322:17052,16365          # pad
+C 17034,16343 s=26x26
+P 16950,16334:17040,16355          # west, out of the region
+N P 16960,16344 d1_out_n

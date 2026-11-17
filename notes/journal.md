@@ -1388,3 +1388,70 @@ were already questions in its handoffs of `3c0efe1` and `48b43dd`). Done on a br
   ("Review ...", "Fix check ..."). On this machine's transcripts, run back to back: review
   $57.55 before, $68.79 after, of $152.69. The committed cost reports are not regenerated
   here: the next `tools/costs.py` run will show the higher figure.
+## 2026-11-17 20:46  Thirteen handoffs processed; PR #17 held
+
+Handoffs taken in (all merged to main earlier today by their tracers): `dpad` (dp111, e3b6adf),
+`areg` (dp111, 0d5e402), `tla` (dp111, 0cbaceb), `ral` (dp111, 8667009), `amr` (dp111, 8171755),
+`dbus` runs 2 and 3 (Tom Seddon, c492bf6, c034e51), `tc1` runs 3-9 (Matt Godbolt, six handoffs,
+3c0efe1 to 8650cb8). Extraction 2,169 nets, 3,849 transistors, 0 errors, 0 warnings; 773 of 1,119
+equations firm; traced 60.0 % of the die, 0.0 % in no package.
+
+- **Master list.** `dpad`, `areg`, `ral`, `mal`, `amr` done; `tla`, `dbus`, `tc1` partial (claims of
+  `dbus` and `tc1` kept by their tracers). New package **`dlat`** (16450-16950 x 13900-15800, the
+  input latches of data bits 4-7, proposed by `dbus` and `areg`), replacing the queue row `areg
+  (continue)`. Notes for `tcw` (two poly rows from `tc1` at x 6750) and `tc2` (where `tc1`'s cell B
+  output lands). Open join `tc1_x1_u` listed.
+- **Re-read list** R21-R27 (after Matt Godbolt's R19, R20, which already cover `tc1`'s two lessons:
+  bright green in the open, and a thin metal dark over a buried contact): `pads`' data pad readings
+  (R21), pass-transistor widths on a widened land (R22), pull-downs on both sides of a rail (R23),
+  gap artefacts not checked in the chip-2 shots (R24), the input inverters' L arm (R25), follower
+  jumps at pads beside wide metal (R26), mixed medians (R27).
+- **Ambiguities.** AMB-003 resolved (the data pad cell, `dpad`); AMB-004 changed (the L arm is a second
+  pull-down in the data bus column); AMB-005 extended; AMB-017 reading B struck; AMB-018 resolved (the
+  `ral` cell is a latch with a force line, FIRM in all 19 copies). New: AMB-020 (`tc1_x1`'s three
+  joins), AMB-021 (D6's line and the `d0_out_n` inverter, assumed no contact), AMB-022 (`rcs_iso2958`),
+  AMB-023 (`amr` c0's box, assumed buried).
+- **Tracing guide.** Trap 2 extended (check a gap artefact in both chip-2 shots); traps 23 (the L arm) and
+  24 (medians, widened lands, rails) new, after Matt's traps 21 and 22.
+- **Other blocks' notes.** `rdp3` (T1 70/28), `dbl` (the unit drives the data line; the poly U is
+  `dl1_q_n`), `bd2` (the metal at (16772,15800) is `dbus_le`), `bust` (`amr`'s lines are inputs),
+  `mal` (the latch is traced; 98 transistors), `pads` (data pad section superseded by `dpad`), `dpad`
+  (D6's line drawn by `dbus`), `tcw`, `fld`, `shm` (notes from `tc1`); glossary rows `db_b#`, `tc1_x1`,
+  `d#_in_u`, `dbus_le`; `operation.md`'s RA and MA rows (the latch is firm). `trace/dpad.txt`: the labels
+  `d2_in_u`..`d6_in_u` and their aliases dropped (Tom's run 4, which landed during this work, draws
+  D2-D5's lines; D6's was drawn in run 3); `trace/mal.txt` header.
+- **Not applied.** `notes/blocks/dbus.md`'s "depletion load on P_x / P_y" (from `dpad`): left to Tom,
+  whose claim is active and whose run 3 already names P_x `d_hiz`. `bust`'s two `?P` rows (made firm
+  only by tracing, noted in the `amr` row). Renaming `tla_w3461` away (an alias of `amr_eq_r3`): `tla`'s
+  region is inside dp111's `tl1` claim, so it waits for the next refresh.
+- **PR #17** (dp111's bits 4-7 latches) is kept open on purpose (user): an independent trace of what
+  `dlat` covers, to compare when that package lands. Checked against main today: 222 of main's 236
+  transistors in x 16300-17760 matched within 20 px, 81 nets mapped with 0 inconsistencies; #17 has 48
+  transistors main has not (bits 4-7) and predates the `rdp3_lat` width fix.
+- Two runs merged over the coordinator's earlier Opus session (`amr`, `ral`: mergecheck 8b) with the
+  contributor's approval; the tracing and reviews were Fable 5.2.
+- Matt's questions in the `tc1` handoffs (the colour trap, the review limit) were answered by his
+  process change of 13:33 -0600 above; the `shm` `?B` re-look is in AMB-020 and `shm.md`; the west
+  boundary at x 6750 is `tcw`'s (its row).
+- `/refresh6845` step 0 now points at `tools/claim.py handoffs`.
+
+## 2026-11-17 20:53  Handoff `dbus` run 4 (Tom Seddon, 9302a30); claim released
+
+Arrived while the thirteen above were being pushed. Extraction 2,165 nets, 3,854 transistors, 0
+errors, 0 warnings; 777 of 1,124 equations firm.
+
+- **Master list.** `dbus` partial, 127 transistors, claim released by its tracer; the queue row
+  `dbus (continue)` now lists only the wiring left (`d2_out_n`..`d7_out_n`, the drivers of
+  `dbus_do0_in` and `d1_out_n`, `d7_in`, the capacitor taps, `d_hiz`'s driver, AMB-021). `r9c`: its
+  units' loads are traced (in `trace/dbus.txt`, cell `dbus_r9l`).
+- **AMB-012** resolved for the loads and the rails (the east rail is VCC): `ra#_cmp` = NOT `ra#_drv_in`.
+  Left: `r9c`'s `?B` ties at the units' west ends. Notes of `r9c`, its floor-plan line, the glossary
+  row `ra#_cmp` updated.
+- **Re-read.** R22 widened to pull-downs drawn from the land under a rail (`dbus_in`'s G1, G4: 60 ->
+  94; `inrow`, `dbus_in`'s G2/G3, first-session blocks). New R28 (ports drawn to a region's edge
+  without looking at the edge; `dbus`'s `d4_d`..`d7_d`, `dbus_le`, `d7_c` at x 16950, for `dlat`)
+  with trap 25. Guide section 2: tools must load the aligned arrays, not `cache/acid.npy`.
+- `dpad.md`: D2-D6's node contacts and D1's `d1_out_n` recorded. The `d#_in_u` aliases had already
+  gone in the entry above.
+- **PR #17** stays open: Tom's run 4 confirms the bits 4-7 latches are not in `dbus`'s region, so
+  the comparison waits for `dlat`.
