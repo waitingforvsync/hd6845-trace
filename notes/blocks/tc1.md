@@ -555,7 +555,7 @@ this much without a metal contact. No contact is drawn at either (Ambiguity 18).
 **Not drawn, seen:** cell A (y 3240-3410): its east side is cell B's shifted by -172 (the
 C-shaped poly is its output; its lower gate row y 3385-3408 is the poly of `tc1_l4_out`'s
 contact (7100,3395), drawn in run 1; its upper gate row at about y 3300-3320 not looked
-at); its load side is not a copy (block y 3332-3400, ladder (6800-6835, 3377-3428)). A dark
+at); its load side is not a copy (block y 3332-3415, ladder (6800-6835, 3377-3428)). A dark
 loop at (7150-7165, 3495-3510) in the clean shot only, just outside the C-shaped poly's
 corner: nothing there in either metal shot (taken as a blemish of chip 1).
 
@@ -966,6 +966,42 @@ and the column one piece, the neck 6 px clear of the band; the netlist differing
 that channel's width (20 to 62) on the same nets.
 
 Round 3: no findings.
+
+### Run 7's review
+
+**Round 1** (2026-11-17 12:47 -0600; full review of cell B, x 6690-7160, y 3405-3625, and of its output's
+route south to y 4450, by a fresh agent: views at 4-8.5x in two to four shots in
+`cache/scratch/tc1/review-12/`, colour profiles, text maps, the extraction and
+`tools/unsure.py`). Told to suspect: `tc1_m6817` over the ladder and the thin metal x 6948
+over the box (contact, break or neither); the ladder's build; the band under the rail and its
+joins across the two gaps; the pad's join to `tc1_p3698`'s vertical poly; the field slot and
+the fingers' joins; the column's width; the C-shaped poly and the metal x 7133-7152 over it;
+the output poly's run under the metal x 7048-7068 and into its pad; the two pieces of the
+channel metal x 7003-7023; the contacts (6887,3606) and (6710,3530); anything left out.
+
+Checked and found correct: no metal contact and no break at either buried contact (the clean
+shot is protected tan under both, ladder cells 204/168/130 and box 196/167/122, where the pad
+contacts 100 px away read green, 152/173/98; neither metal widens; the darkness is a
+lengthwise edge under the metal's centre with half-bright flanks, in both chips). The arm is
+y 3462-3480 only and the stub joins the region below it. The band is diffusion under the rail
+and in both gaps, with no edge across it at x 6838 or x 6929. The pad's join is poly in the
+gap at y 3586-3598 in three shots, field above and below. All three fingers cross the gap
+x 6914-6930; both slots are field. The column is x 6928-6968 and both rows cross it. The
+C-shaped poly is continuous, with no hole or ring under any of the four channel metals (the
+loop at (7150-7165, 3495-3510) is in the chip-1 clean shot only). The output poly has no hole
+along its run; the notch at (7048-7056, 3710-3724) is in both metal shots but the poly under
+it is uniform and there is no pad. The channel metal's north piece ends at (7011,3571) and its
+south piece has no ring or hole from y 3870 to y 4450. All six contacts are real and placed
+within 4 px.
+
+Three remarks that change no connection, **not applied to the trace** (so that what is merged
+is what was reviewed): the stub's east edge is at about x 6838 (drawn 6834); the south
+channel metal steps about 4 px east and narrows to about 14 px near y 4300 (drawn straight,
+20 wide); cell A's load block reaches about y 3415 (these notes said 3400: corrected).
+Not checked by the reviewer: cell A's end of `tc1_o3353`, the metals north of y 3405, the
+contact near (6965,4480).
+
+Round 1: no findings.
 
 ## Not done
 
