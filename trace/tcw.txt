@@ -56,15 +56,15 @@ C 6646,3986 s=14x14
 # --- fld_a_in: the top node of fld's stack (y 3956-3985 under the rail) has an arm east
 # (y 3960-3974) to a vertical strip x 6603-6622, y 3904-4075
 D 6553,3960:6622,3974
-D 6603,3904:6622,4022
+D 6600,3904:6622,4022
 # north end: the strip's head, with the buried contact box (6580-6600, 3903-3925) (heavy outline
 # in both stripped shots, outline in both metal shots) where gate 3's poly comes down onto it
 D 6580,3903:6622,3930
 P 6575,3845:6600,3900                 # gate 3's poly: south from the gate's east end ...
 P 6578,3890:6600,3922                 # ... into the box
 B 6576,3898:6603,3926
-P 6575,3872:6672,3900                 # ... and east along y 3872-3900 to under the thin metal x 6645
-P 6632,3872:6670,3948                 # where it turns south over the load's channel (y 3904-3932) and ends at y 3948
+P 6575,3872:6677,3900                 # ... and east along y 3872-3900 to under the thin metal x 6645
+P 6632,3872:6677,3948                 # where it turns south over the load's channel (y 3904-3932) and ends at y 3948
 # the load: from the strip's head east under that poly to the supply pocket under the rail
 # (pale tan x 6686-6730 at y 3917 in the clean shot; contact ring x 6698-6718 in the metal shot)
 D 6618,3906:6692,3930
@@ -74,7 +74,7 @@ M 6715,3895 y4000 w=50
 # south end: the strip passes under the poly block (6600-6680, 4028-4056), which is one poly with
 # the pad (6646,3986) of tcw_o3820, and ends on a strip y 4062-4080 that runs west to the rail's
 # contact node (vss): a third pull-down of fld_a_in, gate tcw_o3820
-D 6603,4015:6628,4075
+D 6603,4015:6645,4075                 # the channel is about 40 wide (review 1: the diffusion's edges cross the block at x 6601-6604 and x 6643-6646)
 P 6600,4028:6680,4056
 P 6648,4000:6676,4032
 D 6553,4062:6645,4080
@@ -85,7 +85,7 @@ D 6553,4062:6645,4080
 D 6553,4156:6708,4178
 D 6600,4108:6620,4160
 D 6600,4108:6652,4132
-P 6626,4134:6676,4184
+P 6626,4134:6676,4198                 # to y 4198 (review 1: diffusion edges at y 4152 and y 4183, poly again to y 4195)
 P 6628,4108:6652,4138
 B 6625,4106:6654,4132
 
@@ -294,6 +294,7 @@ D 6688,4245:6735,4322
 C 6706,4286 s=20x40
 M 6712,4190 y4455 w=50
 N M 6712,4400 vcc
+M 6507,4388:6586,4455                 # the ground rail widens east to x 6586 south of y 4388 (review 1; both metal shots)
 # the load's gate tie: a tab of the block (6620-6650, 4238-4262) on a finger of the output's
 # diffusion (x 6598-6622, y 4240-4300); buried contact box, heavy in both stripped shots
 D 6598,4240:6619,4300

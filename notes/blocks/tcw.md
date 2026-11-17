@@ -353,6 +353,52 @@ the rail), not through a boundary of this package.
 
 ## Review
 
+### Run 2's review (2026-11-17 15:25 -0600)
+
+Round 1, full review of run 2's two pieces (the last inverter with the two rows from `tc1`,
+x 6430-6760, y 4190-4455; the loads and the third pull-down east of the rail, x 6545-6760,
+y 3840-4200), by a fresh agent on Claude Fable 5.2, at commit `b197dbb`; 13 images in
+`cache/scratch/tcw/review-1/`. The older geometry north of y 3660 was not under review.
+
+Told to suspect: the buried contact (6576-6603, 3898-3926) that makes the pair cross-coupled;
+whether the poly y 3872-3900 and the rectangle under the thin metal are one poly, and the
+diffusion under it; whether the strip x 6603-6622 passes under the block (6600-6680, 4028-4056)
+to the strip y 4062-4080; the block's link to the pad (6646,3986); the east end of the strip
+y 4062-4080; the row y 4383-4401 under both rails; the buried contact (6455-6478, 4294-4320);
+the thresholds of `tools/tcw_cls.py`.
+
+Checked and found correct (views at 3-5x in two or more shots, `tools/px.py` profiles, the
+follower): every item above. The buried contact: row y 3915 of the chip-2 stripped shot reads
+box interior x 6583-6596, a 12 px dark line, the strip x 6613-6620, the same form as the two
+load ties (rows y 4120 and y 4250); field west and south of the box; the poly continuous down
+x 6590 into it. The poly and the rectangle are one (the lines at y 3902 and y 3933 are the
+diffusion's edges and continue at x 6674). Pad, link and block are one poly. The strip
+y 4062-4080 has no top edge of its own at x 6612-6638 (the diffusion comes out from under the
+block) and a closed east end. Row y 4392 continuous from x 6443 to x 6764 over field under
+both rails. The thin metal x 6645 runs pad to pad (214 px).
+
+Findings, all geometry only, all confirmed by me (`px.py row 4042`, `col 6650`, `row 4420`,
+`row 3917`) and fixed:
+
+1. The pull-down of `fld_a_in` under the block is about 40 wide, not 25 (diffusion edges cross
+   the block at x 6601-6604 and x 6643-6646).
+2. `fld_a_in`'s load poly reaches x 6677, not 6670.
+3. `fld_y_b`'s load block reaches y 4198, not 4184.
+4. The strip is x 6600-6614 at y 3933-3958 (drawn from x 6600 now).
+5. The ground rail widens east to x 6586 south of y 4388 (drawn).
+
+Not checked by the reviewer: the arms where they cross the rails' edge lines (x 6556-6572,
+x 6676-6686: hidden by the edge line in every shot, inferred from matching edges on both
+sides); `tc1`'s rail and contact (6730,4158); a patch `tools/opendiff.py` reports at
+(6711-6732, 3943-3987) under `tc1`'s rail; `tc1_x1_u` being `tc1_x1` (that is `tc1`'s alias).
+The reviewer also notes that `tools/tcw_cls.py` misreads poly under the thin metal's ghost and
+strip edges; `tools/px.py` profiles decide.
+
+    tools/t.sh tcw sameconn.py b197dbb          -> connections identical
+    .venv/bin/python tools/sameconn.py b197dbb  -> connections identical
+
+Round 1: no findings that change a connection.
+
 ## Not done
 
 North of y 3660 the loads and outputs. What run 2 saw there, not drawn (views `b1.png`, `b2.png`,
