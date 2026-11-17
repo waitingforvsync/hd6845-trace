@@ -15,6 +15,13 @@ tl3_w3896   P  3533,3886-3906  in   NOR 2 gate 1; on west to a pad (3497,3890)
 tl3_w3939   P  3533,3929-3949  out  NOR 2 output
 tl3_w3982   P  3533,3972-3992  in   NOR 2 gate 2; on west to a pad (3497,3978)
 tl3_w4763   P  3533,4753-4773  in   NOR 4 gate 2
-tl3_w3803   P  3540,4068       ?    pad of the metal x 3540 (gates of NOR 1 and NOR 4); its row goes east into units not read
+# rows of the cross-coupled pair (y 4046-4330), the inverter (y 4345-4490) and NOR 3
+tl3_w4112   P  3533,4101-4120  in   the pair: gate of the upper unit (resets tl3_w3803)
+tl3_w4200   P  3533,4191-4209  in   the pair: lower unit gate 1
+tl3_w4290   P  3533,4281-4299  in   the pair: lower unit gate 2
+tl3_w4373   P  3533,4363-4383  out  the inverter's output
+tl3_w4414   P  3533,4405-4423  in   the inverter's input
+tl3_w4503   P  3533,4493-4513  in   NOR 3 gate 1
+tl3_w4546   P  3533,4536-4556  out  NOR 3 output
 tl3_w4720   P  3540,4912       out  NOR 4's output: pad at the south end of its metal; the poly goes on east along y 4930-4948, not drawn
 vss         M  3645-3695,4850  -    the west rail, drawn to y 4850; it goes on south
