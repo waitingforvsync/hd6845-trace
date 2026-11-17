@@ -181,7 +181,9 @@ that its regions cover the whole die, because every transistor must be traced (`
 M7); an area of the die that no package covers is a gap in the list, and should be
 reported to the coordinator, not traced on the side.
 
-Active claims are not in that file but in `claims/` on main: `tools/claim.py list`.
+Active claims are not in that file but in `claims/` on main: `tools/claim.py list`, or the
+dashboard at https://waitingforvsync.github.io/hd6845-trace/ (claims, the master list on the
+die, who did each package, progress), which is rebuilt on every push.
 
 ## Concurrency
 
