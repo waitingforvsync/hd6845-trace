@@ -1219,7 +1219,7 @@ north end, both accepted (I had no measurement that contradicts either):
 | Finding | Outcome |
 |---|---|
 | 1. That the thin metal x 6941-6956 ends at the contact (6948,2977) is not established: north of it both metal shots read as dim as over the output box, where the metal continues; the follower's stop is not evidence. The metal y 2933-2948 does not start at x 6820 (it would cross the rail): the follower takes it from (7056,2850) to an end at (6974,2939), and a dim strip carries it to about x 6940, above the thin metal | **Accepted.** Notes and comments corrected; the metal stays drawn up to the contact only. Ambiguity 20 |
-| 2. The "believed" join of gate row 1 to `tc1_o3740` is weaker than the notes said: the poly ends on the box's east outline; the box is the east end of a band that runs west under the rail to what looks like a load of its own. Leaving it unjoined is right, but it should be called open | **Accepted.** The poly renamed from the open-join name `tc1_o3740_u` to the place name `tc1_p3051`; notes, glossary and comments say "open". No geometry changed |
+| 2. The "believed" join of gate row 1 to `tc1_o3740` is weaker than the notes said: the poly ends on the box's east outline; the box is the east end of a band that runs west under the rail to what looks like a load of its own. Leaving it unjoined is right, but it should be called open | **Accepted.** The poly renamed from its open-join name (the `_u` form of the second driver's output) to the place name `tc1_p3051`; notes, glossary and comments say "open". No geometry changed |
 
 Checked and found correct: strip and both bands are diffusion and one shape round the corner,
 continuous in both gaps; the column is one piece y 3021-3219, all three gates cross it, field
