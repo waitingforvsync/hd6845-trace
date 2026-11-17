@@ -2,7 +2,7 @@
 
 This is the short version. The block notes (`notes/blocks/`) are the reference; the
 glossary of names is `notes/signals.md`. Last checked against the extraction on
-2026-11-17 (2,165 nets, 3,854 transistors; after the handoffs of the evening).
+2026-11-17 (2,191 nets, 3,890 transistors; third refresh).
 
 ## How to read this page
 
@@ -10,7 +10,7 @@ Every statement carries one of three marks.
 
 | Mark | Meaning |
 |---|---|
-| **Firm** | The extracted netlist says it, and still says it when every item marked uncertain (`?`) is deleted from the trace. `tools/unsure.py --equations NAME` prints this for any equation: 777 of the 1,124 extracted equations are firm. |
+| **Firm** | The extracted netlist says it, and still says it when every item marked uncertain (`?`) is deleted from the trace. `tools/unsure.py --equations NAME` prints this for any equation: 779 of the 1,136 extracted equations are firm. |
 | **Marked** | Extracted, but it depends on at least one uncertain item or on a join that is believed and not drawn. The assumption is named. |
 | **Open** | Not traced. Nothing is claimed. |
 
