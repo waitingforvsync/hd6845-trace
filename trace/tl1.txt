@@ -182,6 +182,40 @@ M 2565,4352 y4775 w=14
 P 2548,4347:2588,4376
 C 2562,4361
 P 2580,4353:2660,4372                 # the top pad's poly east under R1 (over field there), to a small box at (2660-2680, 4352-4372): not traced beyond
+# ---- east of R1: a third pull-down and the load (third pass, 2026-11-17; g1-g8 in
+# cache/scratch/tl1/, 3.3-5.5x in four shots, master and copy each; profiles in the notes).
+# The node goes on under thin metal W as a box (x 2683-2716, y 4651-4697) and as a strip
+# x 2697-2716 north to y 4622 and south to y 4734, where it widens to x 2700-2743.
+D 2683,4651:2716,4698
+D 2697,4622:2716,4740
+D 2700,4734:2743,4797
+# Third pull-down: the band y 4744-4766 crosses the wide part (bright orange over the channel
+# where W protected it, x 2700-2713). South of it the diffusion (to y 4797, heavy U outline)
+# runs west along y 4782-4796 under W and through the gap onto the rail's VSS box (the wide
+# NOR's in the master, the copy's own): chip-2 stripped shot red over green without a break
+# from x 2660 to x 2702 on those rows, field on the rows above and below.
+D 2640,4782:2745,4796
+# Its gate is one poly with the pad (2742,4703) of the thin metal x 2742: pad, a stem down the
+# east side (x 2750-2772) and the band west to a rounded end at x 2682 under W. The pad's top
+# edge (y 4682) is closed: field between it and the plate above (y 4667-4682).
+P 2725,4683:2772,4724
+P 2750,4720:2772,4766
+P 2682,4744:2772,4766
+# Load: a strip y 4622-4648 from the north end of the node's strip east to the VCC box under
+# R2 (x 2778-2838, y 4565-4648), under a plate x 2722-2772, y 4587-4666 (three salmon bars
+# under the thin metal x 2742 with single edge lines between them at y 4618 and y 4650: the
+# strip's edges; the middle bar is the bright one, 237-254/160-180/118-133 against
+# 215-225/160-165/120 for the bars over field).
+D 2697,4622:2790,4648
+D 2778,4565:2838,4648
+P 2722,4587:2772,4666
+# The plate's top bar runs on west under W to x 2678 (salmon, poly over field). Below its
+# west end a heavy-outlined box (2673-2697, 4622-4648) beside the top of the node's strip:
+# taken as the tie (tab, buried contact). Not resolved: drawn uncertain.
+P 2678,4587:2724,4612
+?P 2676,4608:2694,4648
+?D 2676,4624:2705,4648
+?B 2672,4620:2696,4650
 @end
 N P 2620,4362 tl1_w4360
 # The same unit 608 px higher (findcell on the clean shot: 2535-2790 x 4590-4780 recurs at
@@ -192,6 +226,10 @@ N P 2620,4362 tl1_w4360
 @inst tl1_ub 0,-608
 D 2600,4170:2655,4215
 C 2622,4188
+# the copy's VCC box (x 2778-2838, y 3948-4042) is not tla's: its contact, an elongated ring
+# (2793-2817, 3972-4022) in both metal shots, specks in the clean shot (g7_cvcc.png, 4x)
+D 2778,3948:2838,3960
+C 2805,3997 s=24x44
 N P 2620,3754 tl1_w3752
 N P 2545,4070 tl1_w4070
 
