@@ -753,6 +753,17 @@ two nets separate in the extraction. Could not check: the thin metal x 6968 acro
 y 4276-4298 (dark in both chips; unbroken is inferred); the supply-rail crossing other than
 by text map; anything west of x 6750.
 
+**Round 2** (2026-11-17 10:58 -0600; a fix check of the one change since commit `b44998b`, the thin metal
+x 6968's south end: per-pixel profiles of both metal shots, an 8x view and a text map in
+`cache/scratch/tc1/review-8/`, the extraction before and after, alone and with every file).
+It checked the line's last stretch (lit at x 6970-6979, ending at y 4404-4405 in both
+chips), the foot (a metal stripe at x 6957-6965, y 4382-4409, and the contact's centre at
+(6940-6952, 4390-4402), one piece with the line: the dark line between them is the pad's
+east edge), that no other drawn metal is within 30 px, and that no net or transistor
+changed.
+
+Round 2: no findings.
+
 ## Not done
 
 - **Gate columns x 6400-7000, y 2650-4450**: nothing drawn. Dense random logic with large
