@@ -183,7 +183,7 @@ unbroken metal, would decide the break.
   (pad, sampled with --max). The metal beyond the hop was not found from x 5420-5520 at
   y 2727.
 - From the bus side (`notes/blocks/bust.md`): `amr`'s outer outputs c1 and c2 run west on
-  `cdp1_l4588` and `cdp1_l4632`, along the bus metals above the row address selector to
+  `c4l1` and `cdp1_l4632`, along the bus metals above the row address selector to
   x 6913-6921. Whether those are lines 3 and 4 is not established; given line 3's route
   south at x 5842, probably not.
 

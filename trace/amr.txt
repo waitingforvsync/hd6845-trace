@@ -71,7 +71,7 @@ M 11870,5047 x11940
 N M 12693,6000 db_b7
 N M 12390,6000 amr_ob_c2
 N M 12304,6000 db_b6
-N M 12001,6000 amr_ob_c1
+N M 12001,6000 c4l1
 N M 11916,6000 db_b5
 
 # --- R3's write strobe reaches amr. rdp1: "wr_r3: the line from the north at x 13327 ends on

@@ -24,7 +24,7 @@ c1         = NOR(a2, b1)                 east column, top of the cluster        
 b1         = NOR(x1, a2, rcs_u3425)      east column; third pull-down west of the rail (3046,3590), (2920,3628)
 rcs_u3425  = NOR(rcs_bc3460, rcs_iso2958) inverter; its output goes by a strap to b1's third gate. rcs_iso2958 is a
                                          gate poly with no connection found (2958,3481): see "The west column" below
-tla_w3417  = NOT(rcs_thin_e AND tla_w3376 OR tla_w3505 AND tla_w3461)   west column, selector (2626,3418)
+tla_w3417  = NOT(rcs_thin_e AND tla_w3376 OR tla_w3505 AND amr_eq_r3)   west column, selector (2626,3418)
 tla_w3505  = NOT rcs_thin_e              west column, rail gate under R1               (2626,3243)
 rcs_u3288_n = NOT rcs_u3288              west column, top unit: rail gate with a strong load; drives thin metal W (2626,3112)
 rcs_bc3460 = NOR(e3, e4)                 a second copy of in3's function               (3046,3892)
@@ -222,14 +222,14 @@ one diffusion x 2558-2693, y 3300-3535. Four poly lines from the west cross all 
 
 ```
 VSS (2620,3277) - gate rcs_thin_e (y 3319-3343) - gate tla_w3376 (y 3364-3387) - NODE
-                - gate tla_w3461 (y 3451-3473) - gate tla_w3505 (y 3494-3515) - VSS (2612,3550)
+                - gate amr_eq_r3 (y 3451-3473) - gate tla_w3505 (y 3494-3515) - VSS (2612,3550)
 
-tla_w3417 = NOT( rcs_thin_e AND tla_w3376  OR  tla_w3505 AND tla_w3461 )      firm
+tla_w3417 = NOT( rcs_thin_e AND tla_w3376  OR  tla_w3505 AND amr_eq_r3 )      firm
 tla_w3505 = NOT rcs_thin_e                                                    marked (load tie)
 ```
 
 So the unit is an inverting **two-way selector**: while `rcs_thin_e` is high the output is
-NOT `tla_w3376`, while it is low NOT `tla_w3461`.
+NOT `tla_w3376`, while it is low NOT `amr_eq_r3`.
 
 - Between the gates of each pair there is plain diffusion only (no contact, three shots).
   The dark ovals at x 2665-2680 between the polys are the 35 px gap between R1 and thin
@@ -259,7 +259,7 @@ The four gate lines:
 |---|---|---|
 | 1, y 3331 | `rcs_thin_e` | pad contact (2326,3333) at the bottom of a metal x 2326 (y 2754-3347). The same metal has a contact (2326,3243) on the pad of the inverter's gate poly, and its top contact (2326,2768) is on a poly that runs east along y 2759-2777 to a pad with a contact (2695,2768). From there a thin metal goes south at x 2688-2705 and at y 2975-2997 turns east: **it is thin metal E** (one bright L at 4x; the earlier trace began E at x 2740 and said it came from the west). So thin E's north end is these two gates. Its driver is not found: thin E runs south over the east loads to about y 6036 (follow.py; contact candidate (2912,5983)), into the small cluster below |
 | 2, y 3376 | `tla_w3376` | pad contact (2239,3376); metal west to x 2199 and south to a contact (2199,5502); poly east along y 5492-5508, straight under R1 and R2 (3.5x, 5.6x), to a pad with a contact (2870,5502); metal south at x 2865-2877 to about y 5977 (follow.py; that end not looked at): from the small cluster below |
-| 3, y 3462 | `tla_w3461` | pad contact (2239,3463); metal x 2239 south to a contact (2239,5632) on the pad of a poly that leaves east along y 5622-5642 (seen to x 3450 at 1.45x, drawn only at the pad). **Believed** to be the vertical sync width match `amr_eq_r3`: an unmerged branch follows that line here from `amr`. Not joined on this branch, so the name is a place name |
+| 3, y 3462 | `amr_eq_r3` | pad contact (2239,3463); metal x 2239 south to a contact (2239,5632) on the pad of a poly that leaves east along y 5622-5642 (seen to x 3450 at 1.45x, drawn only at the pad). **Believed** to be the vertical sync width match `amr_eq_r3`: an unmerged branch follows that line here from `amr`. Not joined on this branch, so the name is a place name |
 | 4, y 3505 | `tla_w3505` | pad contact (2283,3506) at the bottom of a metal x 2283 (y 3188-3518); its top contact (2283,3202) is on the output poly of the inverter |
 
 **The inverter** (y 3170-3255) is a "rail gate" like `rcs_w2`'s. Node: diffusion under R1 at
@@ -298,7 +298,7 @@ metal W.** (traced 2026-11-17)
 - Not resolved: a heavy-outlined box west of the rail below the gate (2545-2598, 3128-3150).
   If it is diffusion joined to the VSS box, the gate is twice as wide; the logic is the same.
 
-**If `tla_w3461` is the vertical sync width match**, this unit chooses between it and a signal
+**If `amr_eq_r3` is the vertical sync width match**, this unit chooses between it and a signal
 from the small cluster below, under control of the net on thin metal E, which runs the length
 of the cluster. Nothing more is claimed.
 
@@ -440,7 +440,7 @@ for `e4`, and it would arrive up the left bus field, which is where `e4` comes f
 - The top unit's box west of the rail (2545-2598, 3128-3150), and the boxes without a poly at
   (2545-2575, 3062-3092) and (3045-3070, 3415-3440).
 - `tla_w3417`'s poly east of (4520,4461), into the right cluster; `tla_w3376`'s metal south of (2871,5975);
-  `tla_w3461`'s poly east of (2300,5632) (to be joined to `amr_eq_r3` when that branch is
+  `amr_eq_r3`'s poly east of (2300,5632) (to be joined to `amr_eq_r3` when that branch is
   merged); thin E south of y 5400 (to about y 6036). All lead into the small cluster below
   (y 5450-6330), which is not traced, or east along the foot.
 - `rcs_iso2958`'s connection (see "The west column"): look for a rail contact on the stub
@@ -486,3 +486,8 @@ extraction of both versions differs only in that transistor (105/19 -> 134/19); 
 and `vss` stay separate.
 
 Round 3: no findings.
+
+**Note from `tl1` (coordinator, 2026-11-17).** Thin metal W's "end at y 4002" is probably a
+follower stop: `tl1` found no stretch of it fully dark for more than 20 px from y 3030 to y 5952.
+`rcs_e4`'s driver is the wide NOR in `tl1` (`notes/blocks/tl1.md`). Two VCC boxes here need
+correcting (master list, `tla` row; R29).

@@ -344,6 +344,11 @@ ends on is open: if on the same node as `fld_a_in`'s poly, the bus net `tcw_m623
 `fld_a_in` (and `tcw_o3550` its inverse). Not drawn; next thing to read there, at 5x in
 the chip-2 stripped shot.
 
+Updated 2026-11-17 by `tcw` (run 2): the loads of `fld_a_in` and `fld_y_b` are traced
+(`trace/tcw.txt`, on the east rail, as the assumed supply assignment requires), and
+`fld_a_in` has a third pull-down, gate `tcw_o3820` (a latch with `tcw_o3820`). Still open:
+whether `tcw_m6232`'s poly (ending at the rail's west edge at y 3912) is on `fld_a_in`'s node.
+
 ## AMB-015: three joins on the east side of the gate column's middle stretch (2026-11-16)
 
 `notes/blocks/tcw.md`, "Stretch B, east side". All three are in the trace as `?` items:
@@ -375,6 +380,9 @@ alternative reading is out). Still open: at y 3440 a dark line (x 6580-6588) lie
 the lower arm and the strip, and a dark line cannot show whether two regions meet. So
 item 1 stands as "a diffusion strip runs between the two arms; that it joins them is
 assumed".
+
+Note 2026-11-17 from `tcw` (run 2): the tie of `tcw_o3550`'s load is probably a tab up to a box
+at (6585-6650, 3495-3520) rather than the `?B` at the block's west end; the same net either way.
 
 ## AMB-016: two buried contacts in the gate column's top stretch (2026-11-16)
 
@@ -463,6 +471,17 @@ adopted**; J1 is left out so that `tc1_x1`'s equation does not change on a guess
 in the clean shot (a re-read under R12), the thin metal x 6968's other ends, `tc1_p4308`'s
 source. Open join `tc1_x1_u`.
 
+Updated 2026-11-17 (evening). `tc1` is done (runs 10-11): twice in its gate column a small gate's
+output runs up to a contact of a line a larger gate already drives (`tc1_o4280` on `tc1_x1`;
+`tc1_o2950` on `tc1_o3740`, the notes' J5), and both joins are left out; if one is ever shown,
+the other becomes likely. J4 and J6 are drawn `?`. Then `tcw` (run 2) found that the row
+`tc1_x1_u` (y 4383-4401) is the output of `tcw`'s last inverter, `tc1_x1_u` = NOT `tcw_m6362c`.
+Because `trace/tc1.txt` aliases `tc1_x1_u` to `tc1_x1` (through J2, `?P`), the extraction now
+gives **`tc1_x1` = NOR(`ras_o0_sel1`, `tcw_m6362c`)**: two inverters with their outputs on one
+line, i.e. a wired NOR with two loads (DEPENDS: without the `?` items it falls apart). Either
+that is the design, or J2 (or `shm`'s `?B`, J3) is wrong. First to re-read: the joins at `tc1`'s
+pads (6962,4268) and (6968,3905).
+
 ## AMB-021: a contact from pin D6's input line to the `d0_out_n` inverter? (2026-11-17)
 
 Proposed by `dbus` (Tom Seddon, the notes' Ambiguity 9). A possible contact between `d6_in`'s
@@ -490,3 +509,29 @@ Measured against known buried and metal contacts, it is a **buried contact** on 
 diffusion line; a metal contact would make c0's compared bit (`c4l0`) the comparator's own output.
 **Assumed: buried** (measured; `notes/blocks/amr.md`). It corrects #14's lead of a "third
 connection" of c0's outer line.
+
+## AMB-024: the wide NOR of `rcs_e4` across R1's west edge (2026-11-17)
+
+Proposed by `tl1` (dp111, `notes/blocks/tl1.md`). The diffusion of the wide NOR that drives
+`rcs_e4` crosses the west edge of rail R1 at x 2600, where an etch line sits on the rail's edge,
+so its continuity is not seen directly. **Drawn firm.** A break would cut the output contact off
+from the load. To settle: the spot in both chip-2 shots, or the load's other connections.
+
+## AMB-025: the source of `tl1_w4678` (2026-11-17)
+
+Proposed by `tl1` (dp111). A tan box (2553-2573, 4655-4690) under the metal x 2557-2573 is either
+the end of a buried contact or a pass transistor gated by `tl1_w4025`. In the second case
+`rcs_e4`'s first input (`tl1_w4678`) is a latched value. Two passes, **not resolved; nothing
+adopted**. Also open there: whether thin metal W contacts `tl1_w4678` near (2693,4688) (a widened
+head, no ring in either metal shot; not drawn).
+
+## AMB-026: the load-plate ties of `tl1`'s two latches (2026-11-17)
+
+Proposed by `tl1` (dp111, third run). Four boxes, (2673-2697, 4622-4648), (2683-2708, 4500-4524)
+and both 608 px higher, tie the load plates of the two cross-coupled pairs in the west column
+(cells `tl1_ub`, `tl1_ua`). They have a buried-contact look (the same colour gradient as two
+known buried contacts of the column; interiors 12-15 px) and are drawn `?`. The four latch
+equations and the cross-coupling's last step rest on them (marked in `operation.md`); every
+pull-down is firm, and the cross-coupling paths were seen in both copies independently. Thin
+metal W lies over the lower ties, dark for 38 px, neither metal nor bare ground; W's pieces are
+not drawn. To settle: profiles of the boxes against known buried and metal contacts.

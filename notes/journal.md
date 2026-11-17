@@ -1422,7 +1422,7 @@ equations firm; traced 60.0 % of the die, 0.0 % in no package.
   D2-D5's lines; D6's was drawn in run 3); `trace/mal.txt` header.
 - **Not applied.** `notes/blocks/dbus.md`'s "depletion load on P_x / P_y" (from `dpad`): left to Tom,
   whose claim is active and whose run 3 already names P_x `d_hiz`. `bust`'s two `?P` rows (made firm
-  only by tracing, noted in the `amr` row). Renaming `tla_w3461` away (an alias of `amr_eq_r3`): `tla`'s
+  only by tracing, noted in the `amr` row). Dropping `amr_eq_r3`'s redundant alias from `tla` (done in the refresh below): `tla`'s
   region is inside dp111's `tl1` claim, so it waits for the next refresh.
 - **PR #17** (dp111's bits 4-7 latches) is kept open on purpose (user): an independent trace of what
   `dlat` covers, to compare when that package lands. Checked against main today: 222 of main's 236
@@ -1455,3 +1455,40 @@ errors, 0 warnings; 777 of 1,124 equations firm.
   gone in the entry above.
 - **PR #17** stays open: Tom's run 4 confirms the bits 4-7 latches are not in `dbus`'s region, so
   the comparison waits for `dlat`.
+
+## 2026-11-17 22:45  Eight handoffs processed; Refresh
+
+**Handoffs** (e125938, da0d0fd): `dbus` runs 5-6 (Tom Seddon; claim released), `tc1` runs 10-11
+(Matt Godbolt; **done**, claim released), `tcw` run 2 (Matt Godbolt), `tl1` three runs (dp111;
+claim kept).
+
+- Master list: `dbus` down to AMB-021 and a look along `d_hiz` inside its region; what leaves it
+  went to `busC` (`d6_out_n`, `d7_out_n`, `d7_in`, `d7_c`, `d_hiz`'s driver) and `bd2` (rest) (the
+  drivers of `d1_out_n`..`d5_out_n` and `dbus_do0_in`, a second staircase of pads). `tc1` done
+  (54 transistors, 41 nets). `tcw`'s south end complete; its region is now x 6380-6760. `tl1`: the
+  west column is two latches in series in front of `rcs_e4`'s NOR (marked).
+- **AMB-020** grew: `tcw` drives the row `tc1_x1_u`, and with `tc1`'s alias the extraction gives
+  `tc1_x1` = NOR(`ras_o0_sel1`, `tcw_m6362c`) (DEPENDS): two inverters wired onto one line. Either
+  the design or a wrong join (J2, J3); the pads (6962,4268) and (6968,3905) are first to re-read.
+- AMB-014 (loads found by `tcw`), AMB-015 (a note); new AMB-024 (the wide NOR across R1's edge),
+  AMB-025 (`tl1_w4678`'s source), AMB-026 (`tl1`'s load-plate ties). Re-read R29 (`tla`: track
+  tool's false breaks, abutting VCC boxes, gate polys past the rail) and R30 (a "load" that
+  reaches the VSS box is a pull-down; a thin metal's edge taken for a poly edge).
+- Notes: `fld` (loads in `tcw`), `tc1` (the pointer to `tcw`'s driver), `dpad` (D2-D7 output
+  lines), `tla` (thin W's "end" a follower stop; two VCC boxes to correct). Floor plan: the
+  coarse top-centre block trimmed to its lower half (`tc2`).
+- Not taken up: Matt's suggestions for the shared tools (`sameconn.py` telling "input renamed"
+  from "logic changed"; asking that a gate's inputs be followed before it is merged). For the
+  user. `build.py --help` was already fixed by Matt (f98bb29), and `build.py` now needs
+  `HD_COORD=1`.
+- **Tom claimed `dlat`** (22:3x): the independent trace of bits 4-7 that PR #17 (held) will be
+  compared with.
+
+**Refresh.** Renames (`names.py compare`: only names changed): the counter's lines on firm
+geometry, `cdp1_l4544` -> `c4l0`, `cdp1_l4588` -> `c4l1`, `amr_ob_c1` -> `c4l1`; `tla_w3461` ->
+`amr_eq_r3` (the alias in `trace/amrw.txt` dropped). Left on purpose: `c4l2`, `c4l3` (joined only
+through `bust`'s two `?P` rows), and the deliberate aliases (`ar#_q`, `*_tab`, `d#_in`,
+`cdp2_c_s#_bus` under AMB-019). Branches using the old names need `tools/rename.py` after merging
+main. `operation.md`: the tracers had already added their rows (`tl1`'s latches, `tcw`'s field
+latch); header and count updated. Extraction 2,191 nets, 3,890 transistors, 0 errors, 0 warnings;
+779 of 1,136 equations firm. Coverage: traced 60.3 %, in a package 99.3 %, in neither 0.0 %.

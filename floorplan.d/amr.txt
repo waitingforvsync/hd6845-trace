@@ -20,4 +20,4 @@
 5438,5950:5602,6140    route  c4l0-c4l3 nested metals | the four metals x 5450, 5495, 5540, 5582 going north from the corners to the pads of the rows
 5440,5790:5940,5950    route  c4l0-c4l3 rows | four poly rows between the nested metals
 5880,4560:6500,5800    route  c4l0, c4l1 north | two nested metals to the crossing field (beside bust's two for c4l2, c4l3)
-6440,4482:7882,4625    route  c4l0, c4l1 to cdp1 | rows across the crossing field, metals east and north to the pads of the rows that enter cdp1 as cdp1_l4544 / cdp1_l4588
+6440,4482:7882,4625    route  c4l0, c4l1 to cdp1 | rows across the crossing field, metals east and north to the pads of the rows that enter cdp1 as c4l0 / c4l1
