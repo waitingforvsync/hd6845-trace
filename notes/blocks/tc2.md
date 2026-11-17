@@ -3,7 +3,7 @@
 Trace: `trace/tc2.txt`. Ports: `ports.d/tc2.txt`. Views: `cache/scratch/tc2/`.
 Tool: `tools/tc2_runs.py` (dark runs along a straight metal in both metal shots).
 
-## Status (2026-11-17 22:50 +0000, dp111's session, run 1)
+## Status (2026-11-17 22:51 +0000, dp111's session, run 1)
 
 Most of this region was already drawn by other packages (`ras`, `rax`, `fld`, and the
 crossing lines of `bust`, `amr`'s west route, `r9m`, `rde`): see the inventory. This package
@@ -39,7 +39,7 @@ Not done: see the end.
 
 | Where | What | Drawn by |
 |---|---|---|
-| x 6430-6990, y 4450-4850 | crossing field: horizontal poly rows under vertical metals (the rail x 6537-6583, thin metals x 6400-6417, 6612-6634, wide ones x 6680-6740, 6790-6800, 6830, the rail x 6858-6908), a pad at each end of each row | rows y 4527 (`r9m`), 4568, 4613 (`amr`'s west route), 4657, 4700 (`bust`, `?P`), 4745 (`r9m`); **row y 4482: piece 1; rows y 4786 and y 4829: piece 2**. The VCC rail x 6687-6737: **piece 3**. Of the vertical metals the one at x 6830 is not drawn |
+| x 6430-6990, y 4450-4850 | crossing field: horizontal poly rows under vertical metals (the rail x 6537-6583, thin metals x 6400-6417, 6612-6634, wide ones x 6680-6740, 6790-6800, 6830, the rail x 6858-6908), a pad at each end of each row | rows y 4527 (`r9m`), 4568, 4613 (`amr`'s west route), 4657, 4700 (`bust`, `?P`), 4745 (`r9m`); **row y 4482: piece 1; rows y 4786 and y 4829: piece 2**. The VCC rail x 6687-6737: **piece 3**. The ground rail x 6838-6892 on the east side is not drawn (Not done) |
 | x 6920-7900, y 4450-4800 | six bus metals and the fan of diagonal polys down to the selector | `r9m`, `amr`'s west route, `bust`, `ras`, `tc1`'s ends |
 | x 6420-6710, y 5020-5290 | one NOR with its load (two pull-downs under the west edge of the rail x 6537-6583) | **piece 1** |
 | x 6600-7050, y 5020-5275 | two inverters (`tc1_g`, `tc1_i`) | `fld` |
@@ -240,7 +240,13 @@ None in piece 1.
 ## Not done
 
 - `tc2_o5175`, `tc1_p4308`, `tc1_o3527`, `ras_o0_alt2` west of x 6400; `tc1_m6817` south of y 6400.
-- The metal x 6830 of the crossing field.
+- The ground rail of the crossing field's east side, between `tc1`'s piece (x 6858-6908, to
+  y 4380) and `fld`'s (x 6879-6925, from y 4990). Seen once at 1.9x (`vssE.png`, both metal
+  shots and the clean shot), nothing drawn: bright metal x 6860-6905 at y 4380-4430, x 6838-6892
+  from y 4440 to about y 4900, x 6880-6925 below; small dark dots on it at about (6860,4585),
+  (6860,4610), (6862,4628), (6865,4780), (6870,4890) in **both** metal shots, not resolved
+  (blemishes would not repeat on two chips: look at each at 4x or more before drawing the rail
+  through). So `fld`'s VSS rail is still "VSS by the layout rule".
 - The pad (6485,6110) and its poly x 6480-6500 going south; the other metals of the nest
   x 6400-6580, y 5350-6100.
 - The logic at x 7880-8250, y 5980-6320 (seen once at 1.7x, `br1.png`: a column of five or six
