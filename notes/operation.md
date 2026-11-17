@@ -141,6 +141,7 @@ counter.
 | One of those two signals is NOT(row counter bit 0) XOR another signal. | Marked; the other signal is open |
 | In shift mode the R9 comparator does not compare R9's bit 0; the comparator's input is switched to another signal. | Firm that it is switched; what it is switched to is marked and its source open |
 | Where the field (odd/even) signal is made. | **Open**: expected in the gate column west of the nine-gate island, which is being traced. Marked, from that column (`notes/blocks/tcw.md`, run 2): the input of `tc1_g`'s inverter is one half of a cross-coupled pair gated by `tcw_a` (`fld_a_in` = NOT((`tcw_a` AND `tcw_b`) OR `tcw_o3820`), `tcw_o3820` = NOT(`fld_a_in` OR (`tcw_a` AND `tcw_c`))), a latch; `fld_y_b` = NOT `tcw_c`. What `tcw_a`, `tcw_b` and `tcw_c` are is not traced |
+| West of the selector a NOR takes two of the same signals: `tc2_o5175` = NOR(`tc1_x1`, `fld_b_in`), where `fld_b_in` is the line whose inverse is `tc1_i` (`notes/blocks/tc2.md`). With `tc1_x1` = NOT `ras_o0_sel1` (see AMB-020: a second inverter drives that line) this is `ras_o0_sel1` AND `tc1_i`. Its output leaves west on a poly along y 5173. | Firm for the NOR's equation; the reading through `tc1_x1` is marked (AMB-020). Where the output goes: open |
 
 ## The data pins (D0-D7) as outputs
 

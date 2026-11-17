@@ -1,0 +1,5 @@
+# tl3: top-left random logic, strip 3 (the middle cluster of the row counter's step logic)
+3575,3212:3880,3462   logic   latch A, upper half | tl3_w3233 = NOT tl3_w3333; tl3_w3419 = NOT(tl3_w3333 AND tl3_w3373 OR tl3_w3550): copy of tl1's unit tl1_ua
+3575,3462:3880,3720   logic   latch A, lower half | tl3_w3550 = NOT(tl3_w3506 OR tl3_w3373 AND tl3_w3233 OR tl3_w3419): open while tl3_w3373 is high, data tl3_w3333, cleared by tl3_w3506; copy of tl1_ub
+3645,2595:3695,4060   power   west VSS rail of the middle cluster | one metal with the east VSS rail through the link along y 2595-2648
+3695,2595:4045,2648   power   VSS link above the middle cluster | joins the cluster's two VSS rails
