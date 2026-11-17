@@ -1,0 +1,63 @@
+# tc1: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+# X or Y may be a range A-B: the wire's extent where it crosses. DIR: in / out / ? / - (supply),
+# as seen from this package.
+# Transcribed 2026-11-17 from the Ports tables of notes/blocks/tc1.md as merged at 2ea375a.
+# Only rows with a definite place. Left out: the VSS right rail x 7771-7819 on the north side
+# (drawn y 3000-4000, no crossing given). Some lines of "run 3's ports" are the edge of the
+# piece drawn in that run, inside the package's region: they are where the drawing stopped.
+
+# East side (the datapath, or the logic at its slice-0 position x 8290-8750)
+r8_b1_q      P  8350,2846-2868  ?    north end of ns5, from contact (8271,2857)
+tc1_ns3      M  8350,2720-2734  ?    ns3 arrives from the east over the top of the datapath
+ral_stb      M  8350,2764-2778  ?    ns4, arrives from the east over the top of the datapath
+r8_b0_q      M  8350,2807-2821  ?    ns6, arrives from the east over the top of the datapath
+tc1_f        P  8250,3348-3362  out  R3 output; runs on under ns1..ns6 without contact, in the channel between cdp1's rows A and B
+tc1_a        P  8250,3387-3402  in   believed; same channel, 40 px below tc1_f
+r8_b0_q      P  8350,3516-3539  ?    from contact (8313,3527)
+tc1_ns2      P  8250,3556-3578  ?    from contact (8139,3567); reaches x 8332 and turns south there
+tc1_w1       P  8250,3691-3712  in   = ns1 (seen to x 8350); its only other end is L4's gate; from contact (8139,3704)
+r8_b1_q      P  8350,3728-3751  ?    from contact (8270,3739)
+r8_b1_q      P  8350,3822-3844  ?    from contact (8270,3833)
+r8_b0_q      P  8350,3859-3881  ?    from contact (8313,3870), the south end of ns6
+ras_o0_sel1  P  8250,4212-4228  out  a AND b, to the datapath just above cdp1's row C; drawn to x 8350
+tc1_x1       P  8250,4255-4275  ?    passes through (drawn to x 8350)
+db_b6        P  8250,4365-4383  ?    passes through (drawn to x 8350); see the south side, x 8075
+tc1_o4020    M  8350,2634-2648  out  the bus line y 2641, going east; NOR(tc1_g, tc1_x1); the follower gives its end at (9098,2639), not looked at
+
+# South side (tc2), west to east
+tc1_o3527    M  7003-7023,4450  out  NOR(tc1_o3353, tc1_o3095), cell B's output, from contact (7011,3852); south of y 4450 it turns west along y 4465-4495 (seen, not drawn)
+tc1_x1       M  7049-7068,4450  ?    from contact (7056,4352)
+tc1_g        P  7134-7153,4450  in   believed: every other end of g is a gate; from contact (7315,4395)
+tc1_i        P  7179-7196,4450  in   its only other end; from contact (7270,4437)
+ras_straight M  7220-7240,4450  out  NOT b (W2 lower)
+ras_o0_sel2  P  7422-7438,4450  out  NOT a AND b; from the tap on track T2
+ras_o0_sel1  P  7465-7481,4450  out  a AND b; from the tap on track T1
+ras_shift    P  7503-7522,4450  in   believed: its only other end; from contact (7511,4417)
+tc1_ns3      M  7894-7909,4450  ?    from contact (7905,4370)
+vss          M  7943-7990,4450  -    the VSS bus (y 4288-4335, from the foot of the left rail) turns south
+db_b6        M  8067-8082,4450  ?    to contact (8075,4372)
+vcc          M  8116-8165,4450  -    the VCC bus (y 4198-4250, from the foot of the centre rail) turns south
+ral_stb      M  8198-8212,4450  ?    ns4 has no contact in this block
+
+# West side of the island (drawn to x 6960) and of the channel
+tc1_l4_out   P  6960,3388-3403  out  NOR(l2_out, w1), going west; ends at x 6931
+tc1_g        P  6960,3995-4014  out  out of this wire, going west: it is a gate there (the structure at x 6750-6940, y 3930-4200)
+tc1_ns2      P  7180,2867-2883  ?    far end of ns2, going west (1.5x view)
+
+# The gate columns x 6690-7160 (runs 3-8): where each drawn wire stops
+tc1_m6817    M  6811-6823,3905  ?    thin metal over the driver's west column, no contact drawn (Ambiguity 12)
+tc1_m6817    M  6788-6806,4380  ?    the same metal going south after its foot and jog; not followed
+tc1_x1_u     M  6962-6974,3905  ?    the thin metal x 6968 (alias of tc1_x1); Ambiguity 13
+tc1_x1_u     M  6962-6974,4300  ?    the same
+tc1_p4308    P  6750,4428-4448  in   input of the inverter, going west; ends on the pad (6620,4436), whose metal goes south along x 6621 (seen, not drawn)
+tc1_x1_u     P  6750,4385-4405  ?    the poly row from the thin metal x 6968's south pad (6947,4396), going west; seen to about x 6445
+tc1_p3698    M  6765-6785,3000  in   gate 1 of the second driver, thin metal going north; drawn to y 3000
+tc1_m7100    M  7091-7110,3140  in   upper piece of the channel metal, going north from contact (7100,3180); follower: north to y 2766, west to x 6947, north to (6949,2677)
+tc1_o3740    M  6941-6956,2977  out  NOR(tc1_p3698, tc1_x1_u); drawn north to its contact (6948,2977); what the contact joins and whether the metal goes on north is open (Ambiguity 20)
+tc1_p3051    P  6980,2950-2962  in   gate row 1 of cell C; its poly ends on a box (6936-6974, 2944-2970); source open (Ambiguity 20)
+vss          M  6858-6906,2985  -    the rail; goes on both ways, not followed
+vss          M  6861-6932,3905  -    the same rail
+vss          M  6858-6908,4380  -    the same rail (it narrows at y 4238)
+vcc          M  6688-6736,4330  -    the supply rail, narrower here than at the driver; goes on south
+vcc          M  6690-6748,3990  -    the same rail; tcw draws it at y 3440-3900
+vcc          M  6690-6748,4228  -    the same rail

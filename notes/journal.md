@@ -1323,3 +1323,68 @@ claim kept between them). Twelve handoffs wait in `handoffs/`.
   `c4l0`-`c4l3`; `amr_eq_r3` drawn to `tla`), #16 (`ral`'s inverter 1: the RA/MA output
   cell is a latch with a force line; AMB-017/018, R14), #17 (`dbus`: all eight input latches,
   D6/D7 buffers, `dlat_en`'s driver). **#17 overlaps Tom Seddon's active `dbus` claim.**
+
+## 2026-11-17 13:33 -0600  Process changes from a tracer's suggestions: batched reviews, the round rule, ports, shared tools
+
+User: apply the suggestions of the `tc1` tracing session (eight runs, 2026-11-17; two of them
+were already questions in its handoffs of `3c0efe1` and `48b43dd`). Done on a branch
+(`process-suggestions`), not traced: no trace file changed.
+
+- **Small pieces share a review.** One reviewer used about 250,000 tokens on a three-transistor
+  NOR, most of it the fixed cost of reading the guide and calibrating. Two or three small
+  cells of the same build may now be traced, each shipped as it is finished, and reviewed in
+  one full round: at most three pieces and about a dozen transistors, one brief listing every
+  piece's claims and suspicions (`notes/workflow.md` step 6, `/trace6845` steps 5 and 6).
+- **Only findings that change a connection count against the three rounds.** `tc1`'s run 3
+  was kept out of main by a third round of a rail's width, a diffusion's width and a comment.
+  A geometry-only finding is fixed and recorded, and needs no further round if
+  `tools/sameconn.py COMMIT` (new) ends `connections identical` for the package and for every
+  file: it compares the nets' names, each transistor's three nets and the equations between
+  a commit and the working tree, ignoring sizes and positions. (`tools/names.py compare` is
+  the test for renames and fails when any transistor's size moves, so it could not serve.)
+  Run on `tc1`'s history, the run-3 round-3 fixes (`92b9dcf` to `937a48b`) and run 6's width
+  fix (`6b214a1` to `61e6cf2`) both read `connections identical`. A moved port is a changed
+  connection that the extraction cannot see; the rule says so.
+  The gate (`tools/mergecheck.py`, check 5) now reads the **last** `Round N:` line of the
+  Review section: `Round N: no findings.`, or `Round N: no findings that change a connection.`
+  with the words `connections identical` in the section. Before, "no findings" anywhere in the
+  section passed, so an unfinished later cycle passed on an earlier one's clean round. Notes
+  with no `Round N:` line pass as before. `--review-test FILE` runs that check alone.
+  The gate now also **fails when the last `Round N:` line is not a clean one**
+  (`STRICT_LAST_ROUND` in `tools/mergecheck.py`). This is stricter than before for every
+  collaborator and was not among the suggestions; it was pushed switched off, and the user
+  turned it on the same day ("yeah let's turn that on").
+- **Ports are machine-readable**: `ports.d/PREFIX.txt`, one line per port (name, layer, place
+  or range, direction, note), a tracer's own file (workflow step 3, guide sections 8-10, the
+  gate, the pull request template; `tools/rename.py` and `tools/signals.py --docs` cover it).
+  `tools/ports.py` lists the ports of different packages that meet within 40 px and whether
+  names, layers and directions agree, names used by two packages at places that do not meet,
+  and ports with no partner; `--near X,Y`, `--prefix P`. Seeded with `ports.d/tc1.txt`, 50
+  lines transcribed from the tables in `notes/blocks/tc1.md`; with one file, nothing meets yet.
+  Optional for blocks already traced, expected for new work.
+- **Two traps** (guide, section 4): 21, bright green in the open is a large diffusion, which
+  the class map paints as field; 22, a thin metal is dark for 35-80 px over a buried contact
+  and that is not a contact. Both can have misled earlier blocks, so both are on the Re-read
+  list: **R19** (areas called field from green or from the class map without `--open`: `tcw`
+  first, then the rest of the top-centre and top-left logic) and **R20** (contacts on thin metals accepted from a dark stretch: `tcw`'s bus
+  metals first). The layer tables did not need changing: they already give open diffusion as
+  green and open field as khaki.
+- **Shared measuring tools**, since six packages had each written their own: `tools/px.py`
+  (colour profiles: rows, columns, points, any shots, composites), `tools/textmap.py` (text
+  maps; `--acid` adds the chip-2 stripped shot), `tools/opendiff.py` (large open diffusions).
+  Each prints the same as the tool it came from (`tc1_px.py`, `tc1_hex.py`, `tc1_green.py`) on
+  the calls tried; the per-block tools stay, because notes cite them.
+- **`/trace6845`**: the survey and a draft of the geometry are written to
+  `cache/scratch/PREFIX/` before anything is drawn (it made resuming after a compaction a
+  matter of reading two files); the point to compact or start afresh is right after a merge
+  and handoff. The reviewer briefs carry the lines tracers had been adding by hand: `cd` into
+  the worktree in every command, `--out cache/scratch/PREFIX/review-N/NAME.png` (a bare name
+  lands in the tracer's folder), which N, do not read the Review section, no agents, no web.
+- **`tools/costs.py` missed reviewers whose brief had been edited.** It matched two fixed
+  phrases; the run-7 reviewer's brief began "You are reviewing one piece of a die trace" and
+  two fix checks "You are checking one correction to a die trace", so three review agents
+  counted as tracing (the review figure stood at $51.08 across run 7's review).
+  It now goes by how the brief opens and by the description the agent was started with
+  ("Review ...", "Fix check ..."). On this machine's transcripts, run back to back: review
+  $57.55 before, $68.79 after, of $152.69. The committed cost reports are not regenerated
+  here: the next `tools/costs.py` run will show the higher figure.
