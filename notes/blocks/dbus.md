@@ -42,6 +42,13 @@ Traced, extracting (127 transistors, 0 errors, 0 warnings), overlay-checked:
     pin's protection node in `dpad` to the first gate of its buffer chain: `d2_in`..
     `d5_in` are now aliases of the pins `d2`..`d5` (wiring only, no transistors), so all
     of D0-D6 are joined to their buffers.
+  - **`d1_out_n`, D1's output data line** (2026-11-17 19:15 +0000), from the D1 pad cell
+    down the channel, west on chain 1's "line 2" and south on a 6,140 px metal to a poly
+    that leaves the region west at (16950,16344): its driver is west of the column, not at
+    the column's foot like D0's.
+  - **correction to run 3**: `dbus_do0_in` does not come from the west edge. Its poly ends
+    on a pad (16993,16451), and a metal from that pad runs south and then west out of the
+    region at (16950,16712).
 
 Not traced: the latches of bits 4-7 (west of this region, see "Where bits 4-7 go"), the
 capacitor taps of chains 1-5, D7's input line south of y 17000, the other seven
@@ -330,8 +337,43 @@ Traced (run 3; `g9.png`, `g9b.png` at 3-3.3x, overlay `ov9.png`):
   buried-contact box under it, repeating with the cells; review round 1 of run 2 found
   it continuous, 16 px wide, with no pad from y 8110 to 13700.
 
-What `dbus_do0_in` is: a poly from the west along y 16444-16463, not followed. It is the
-data that the chip puts on D0, in true sense (the pad is NOT `d0_out_n`).
+What `dbus_do0_in` is: the data that the chip puts on D0, in true sense (the pad is NOT
+`d0_out_n`). Its poly (y 16444-16463) starts on a pad (16993,16451), box 16977-17012 x
+16435-16468, with a bright contact centre in the metal shot; the stripped shot has no edge
+at x 16960 on that y, so nothing goes on west (run 3 drew the poly to the region's edge:
+wrong, corrected in run 4). A metal x 16983-17002 leaves the pad south, turns west at
+y 16702-16722 (a plain corner, no pad near it: `do0_pad.png`, 4x) and leaves the region at
+(16950,16712). `tools/follow.py` takes it on west to x 16795 and south to (16797,17434),
+with contact candidates at y 17259, 17295, 17324: outside this region, not looked at.
+
+### `d1_out_n`: D1's output data line (traced 2026-11-17, run 4; wiring only)
+
+One net, in this order:
+
+1. `dpad`'s strip 4 of D1's cell (west end 17800, y 9201-9227) runs on west as a poly
+   y 9219-9240 under the trunk (`d1o_top.png`: one orange shape with the cell's block);
+2. south at x 17635-17657, directly under the `d_hiz` metal, 390 px. No contact: the clean
+   shot under the metal is salmon to y 9606 and field pink from y 9612 (colours along
+   x 17647), so the poly ends in the corner;
+3. west along y 9589-9609, chain 1's "line 2", under the VCC rail, the thin metal, the VSS
+   rail and D1's input jumper;
+4. a step down of 22 px at x 17225-17243 to y 9612-9631. One poly: the clean shot at 6x
+   shows the Z (`d1o_jog.png`). The chip-2 cuts alone were ambiguous here (at x 17270 they
+   show three edges, the middle one being the top of D1's input pad);
+5. a pad (17120,9620) and a metal x 17113-17132 south from it for 6,140 px
+   (`tools/follow.py`: one piece). Its seven contact candidates were looked at in the
+   metal and clean shots at 3x (`d1o_cand_metal.png`, `d1o_cand_acid1b.png`): at y 11021
+   nothing; at y 12314-12384 chain 3's line 2 passes under (the clean shot is covered by
+   residue there; no ring or pad in the metal shot); at y 14165 and y 14849-14911 the plain
+   diffusion rectangles of chains 4 and 5 pass under it (tan, no specks, no ring). No tap;
+6. a step west at y 15751-15770 to x 17026-17046 (`d1o_jogm.png`, both chips, 4x; the
+   metal that turns the same way 25 px north-west of it is a separate line);
+7. a pad (17034,16343) and a poly west along y 16334-16355, which passes under a vertical
+   metal x 16940-16960 and leaves the region at x 16950.
+
+Extraction (full): the net is `d1_out_n`, gate of D1's pad cell (`d1_pu` =
+NOR(`d1_out_n`, `d_hiz`)). Its driver is not in this region.
+
 
 ### The loads of R9's compare units (cell `dbus_r9l`), traced 2026-11-17 (run 4)
 
@@ -461,12 +503,13 @@ table) and are not drawn.
 | `d6_in` | poly | pad (17838,16519) under the metal from D6's protection node | in | pin D6 (alias of `d6`) |
 | `d7_in` | poly under the VCC rail, x 17531-17548 | leaves south at (17540,17000) | in | believed pin D7; not followed to the pad |
 | `d7_c` | metal | leaves west at (16950,16758) | - | chain 7's c tap, probably to a capacitor; not followed |
-| `dbus_do0_in` | poly y 16444-16463 | enters at (16950,16453) | in | input of the inverter that drives `d0_out_n` |
+| `dbus_do0_in` | metal | leaves west at (16950,16712), from the pad (16993,16451) at the west end of the poly y 16444-16463 | in | input of the inverter that drives `d0_out_n` |
+| `d1_out_n` | poly y 16334-16355 | leaves west at (16950,16344) | in | D1's output data line; drawn from here to D1's pad cell |
 | `d0_out_n` | metal x 17591-17609 | joins `dpad`'s metal at (17600,7565) | out | D0's output data line (the thin metal) |
 | `db_b0`..`db_b3` | poly | pads under `dbl`'s contacts (17207,9467), (17077,10832), (17165,12200), (17208,13563) | out | the internal data bus bits, driven here by `dbus_drv` |
 | `dbus_le` | metal | leaves west at (16950,13614) | believed in | latch enable; see above for where it goes |
 | P_y of D0 | now `d0_out_n` (row above): drawn | | | |
-| P_y of D1 | poly y 9225-9240 from the pad cell to x 17650, down x 17640-17655 (under the P_x metal) to line 2 (y 9590-9610), left to a contact at 17120,9620, metal x 17110-17130 downward | - | to the pad | not drawn |
+| P_y of D1 | now `d1_out_n` (row above): drawn | | | |
 | P_x | metal x 17633-17650, y 7380-18835 | contacts listed above | to the pads | common enable-type line, not drawn |
 | lines from the core | metal | two wide metals arrive from the left at y 9520-9545 and 9565-9585 and turn down at x 17195-17215 and 17155-17175: `dbl`'s `db_b3` and `db_b2`; the one at y 9460-9480 to the contact (17207,9467) is `db_b0` | - | drawn in `trace/dbl.txt` |
 
@@ -709,10 +752,14 @@ drawn 20 (a size; Ambiguity 10).
   is `areg`'s right-hand column down to y 14700 and `bd2`'s below; `db_b4`..`db_b7` are
   expected to be driven there. First thing to try: `findcell` with `dbus_lat`
   (17230 8885 17590 9370) and `dbus_drv` restricted to 16450,13900:16850,15750.
-- `dbus_do0_in` west of x 16950 (poly along y 16453), and the drivers of `d1_out_n`..
-  `d7_out_n` (D1's rises on a metal x 17110-17130 to a contact (17120,9620)): the five to
-  seven vertical metals at x 16945-17130 left of chains 4-7 are probably these lines and
-  `dbl`-like bus lines; none is drawn.
+- `dbus_do0_in` west of (16950,16712) (metal; see its section) and `d1_out_n` west of
+  (16950,16344) (poly): both drivers are outside the region.
+- `d2_out_n`..`d7_out_n`: not drawn. Method that worked for D1's (about ten images): cuts
+  with `tools/dbus_dark.py` for the poly parts, `tools/follow.py` for the metal, then a
+  look at each contact candidate and at the end. The vertical metals at x 16945-17260 left
+  of chains 4-7 (x about 16950, 17075, 17160, 17207, 17250 at y 16300) are probably these
+  lines; the one that jogs 25 px north-west of `d1_out_n`'s jog (y 15715-15730, then south
+  at x 16985-17005) is a neighbour of the same kind.
 - `d7_in` south of y 17000 to D7's protection; `d7_c`'s metal west of x 16950.
 - The capacitor taps of chains 1-5 (`d#_b`, `d#_c`; in unit 1 a poly
   comes down x 17181-17197 and turns west along y 10325-10345, probably `d1_c`'s; chain 4:

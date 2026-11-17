@@ -145,8 +145,8 @@ counter, and whatever the 4-bit counter `c4l` is compared with.
 |---|---|
 | Each data pin has a push-pull driver whose two gates are made by two NOR gates in the pad cell: `d#_pu` = NOR(`d_hiz`, `d#_out_n`), `d#_pd` = NOR(`d_hiz`, `d#_pu`) (`notes/blocks/dpad.md`). While `d_hiz` is high both gates are low and the pin floats; while it is low the pin is the inverse of `d#_out_n`. | Firm (all sixteen equations) |
 | `d_hiz` is one line common to the eight pad cells. | Firm (drawn end to end) |
-| `d0_out_n` = NOT `dbus_do0_in`: an inverter at the foot of the data bus column drives D0's line up the whole column on one thin metal. `dbus_do0_in`, the bit read out on D0 in true sense, arrives from the west and is not followed. | Firm (the equation and the join into D0's pad cell) |
-| What drives `d_hiz` and the other seven `d#_out_n` lines, and so when the chip drives the bus and with what. | Open |
+| `d0_out_n` = NOT `dbus_do0_in`: an inverter at the foot of the data bus column drives D0's line up the whole column on one thin metal. `dbus_do0_in`, the bit read out on D0 in true sense, arrives by a metal that leaves the column west at (16950,16712) and is not followed. D1's line `d1_out_n` is drawn from its pad cell to a poly that leaves the column west at (16950,16344): its driver is not at the column's foot. | Firm (the equation and the join into D0's pad cell) |
+| What drives `d_hiz` and the `d#_out_n` lines of D1-D7, and so when the chip drives the bus and with what. | Open |
 | The pull-up fingers are ordinary transistors with their drain on VCC (source followers), so a driven high level is below VCC by a threshold. | Firm for the connection; that they are enhancement devices is not visible in the photos |
 
 ## Not established at all

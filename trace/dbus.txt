@@ -549,11 +549,15 @@ P 16950,14688:17167,14704          # leaves the region at x 16950
 # end of the VSS rail (source: the land it shares with chain 7's stage 1), its output node
 # runs east to a diffusion strip under the thin metal, which ends on that strip's pad
 # (17452,16564). So the thin metal x 17438-17459 that crosses every cell of the column is
-# this inverter's output. Input: a poly from the west along y 16444-16463.
+# this inverter's output. Input: a poly along y 16444-16463 from a pad (16993,16451).
 D 17354,16390:17403,16497          # VSS land (runs on into chain 7's), channel, output node
 C 17372,16414 s=30x30              # VSS contact on that land (ring in both metal shots; review round 1)
-P 16950,16444:17418,16463          # gate band; comes in from the west edge of the region
-N P 17000,16453 dbus_do0_in
+P 16985,16444:17418,16463          # gate band; its west end is a pad (run 4: it does NOT come in from
+N P 17100,16453 dbus_do0_in        # the west edge; nothing lies west of the pad at this y)
+P 16977,16435:17012,16468          # pad
+C 16993,16451 s=26x26
+M 16993,16440 y16712 x16950 w=19   # metal south from the pad, west at y 16702-16722 out of the region
+                                   # (follow.py: on west to x 16795, then south to (16797,17434))
 D 17325,16478:17360,16499          # node's west tab ...
 ?D 17294,16476:17330,16500         # ... into a heavy-outlined box whose west end lies under the d6_in
                                    # metal: kind not settled (Ambiguity 9); nothing is drawn joining
@@ -702,3 +706,27 @@ C 17275,14500 s=26x26
 P 17266,14512:17290,14576          # down ...
 P 17266,14553:17300,14576          # ... and east into G1's gate band
 @alias d5 d5_in
+
+# ==== d1_out_n: D1's output data line, from the D1 pad cell to the region's west edge ====
+# From the west end of dpad's strip 4 (17800, y 9201-9227) the poly runs west under the
+# trunk (y 9219-9240), turns south at x 17635-17657 under the d_hiz metal (no contact; the
+# clean shot is salmon down to y 9606 and field pink from 9612), and at y 9589 turns west as
+# chain 1's "line 2" under the rails and under D1's input jumper. At x 17225-17243 it steps
+# down 22 px (one poly: the clean shot shows the Z at 6x, d1o_jog.png) and ends on a pad
+# (17120,9620). From there a metal runs south for 6,140 px (follow.py: one piece; its seven
+# contact candidates are a poly crossing, chain 3's line 2, and two plain diffusion
+# rectangles passing under it: no pad, ring or speck at any), steps west at y 15751-15770
+# to x 17026-17046 and ends on a pad (17034,16343). A poly leaves that pad west along
+# y 16334-16355 and crosses the region's edge: the driver is west of x 16950.
+P 17635,9219:17805,9240            # from the pad cell, west under the trunk
+P 17635,9219:17657,9609            # south under the d_hiz metal
+P 17225,9589:17657,9609            # line 2, west under the rails
+P 17225,9589:17243,9632            # the step down
+P 17107,9612:17243,9631            # west to the pad
+P 17107,9605:17137,9636            # pad
+C 17120,9620 s=26x26
+M 17122,9608 y15760 x17036 y16356 w=19
+P 17016,16322:17052,16365          # pad
+C 17034,16343 s=26x26
+P 16950,16334:17040,16355          # west, out of the region
+N P 16960,16344 d1_out_n
