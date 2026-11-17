@@ -355,3 +355,13 @@ each confirmed by the tracer in the reviewer's images:
 3. R0's row is in the open like AR's (the notes had it among the covered rows): corrected.
 Not checked: the hold strip's ends (stays `?D`), the riser of the non-AR copies beyond the
 nine viewed.
+
+Round 2 (fix check, 2026-11-17 17:55 +0000, a fresh agent on claude-fable-5-2; no geometry changed since
+a0069a7, only these notes). It checked the three corrected statements at 4.6x in metal,
+metal1 and acid1b in ar1-ar4 and four register cells: the box (5a) is closed in both metal
+shots, has no metal over its interior (not a metal contact), and is separated from stub
+M5, the `n2` band and T_a's gate by straight edges, field and plain diffusion, so no
+reading of it changes a net; L2's left edge (5b) at x 15864-15866, 16-19 px from the
+diffusion corner; R0's row in the open like AR.
+
+Round 2: no findings.
