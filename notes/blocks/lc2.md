@@ -161,3 +161,25 @@ geometry only). Not checked: the loads' width profiles; where the thin metal end
 
 Round 1: no findings that change a drawn connection; one net (the thin metal) is missing
 and is listed in Not done.
+
+### Latch C (also traced and reviewed on claude-opus)
+
+Round 1 (full review of latch C, added in 4dbf2e4; 2026-11-18 08:45 +0000, a fresh agent on claude-opus).
+Checked at 4-5x in the clean and both metal shots with profiles: each of the five rows from
+x 6120 to its own pad only, none joining a neighbour; the enable, Na and data pads closed
+on the east; the enable metal joining its two pads, ending at y about 8872 and touching no
+other pad; the clear and Na metals separate (field at x 6257, y 8772-8796 in both metal
+shots); both cell copies (every gate over diffusion, every contact on a box); the thin
+metal x 5928 with its two contacts; the extraction (0 errors; t1140-t1150 give the stated
+equations; internal nodes are latch C's own; nothing merged with latch B).
+No finding changes a connection. Geometry only, not changed: the VCC long contact at
+(5858,8781) probably sits 5-8 px further east (x about 5850-5878; it is on latch C's box);
+the VSS rail's west edge is about x 6014-6017 and the rail runs on south past y 9030; the
+strip at x 6066-6090 is not metal. Recorded in Not done: clear's poly goes on south-east
+from (6260,8752) toward (6350,8850), not followed; Na's metal turns west at y about 8935;
+the undrawn thin metal at x about 5971 through the latch is continuous with no contact on
+it (the counterpart of the one through latch B). Only roughly checked: gate widths of
+t1142/t1143 and t1148/t1149; not checked: the other widths, and where the four pad metals
+go beyond what is drawn.
+
+Round 1 (latch C): no findings.
