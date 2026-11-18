@@ -416,3 +416,14 @@ both metal shots, green hole on a salmon pad in the clean shot): confirmed by th
 tc1_x1)` is on r9m's line 3).
 Not checked: tc2's rows east of its pads, `r9m_l3` west of x 5683, tl5's side of its
 ports, the undrawn pad at (6413,2617) on U11 (13 px outside the strip).
+
+Round 2 (fix check, 2026-11-18 03:40 +0000, a fresh agent on claude-fable-5-2, against commit e83f200). The
+contact is real (centre bright in both metal shots, green in the clean shot, pitted box in
+the chip-2 stripped shot; profile along y 5046); the pad is the west end of row y 5045 and
+of no other poly; only one metal lands on the ring, followed north to a corner at
+(5842,2684) and west: r9m's line; U3 is empty from y 5066 to bw's pad near y 5585.
+`tools/sameconn.py`: the only difference is `r9m_l3` and `tc2_o5175` becoming one net, with
+one driver (tc2's NOR); `r9m_l3` had none before.
+
+Round 2: no findings.
+
