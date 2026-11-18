@@ -50,12 +50,12 @@ P 4930,7170 x5098 w=24                      # gate row y 7158-7182, east to its 
 C 5082,7170 s=24x24
 N P 5040,7170 lc1_w7170
 M 5082,7160 y7226 w=18                      # from the pad south,
-M 5091,7215 x5030 w=22                      # west,
-M 5038,7204 y8067 w=16                      # and south as thin metal T1 (leaves the strip south)
+M 5091,7215 x5035 w=22                      # west,
+M 5043,7204 y7380 x5038 y8067 w=16          # and south as thin metal T1 (steps 5 px west at y 7380; leaves the strip south)
 D 5008,7118:5046,7152                       # under the output box
 P 5008,7116:5048,7156                       # output box
 B 5006,7114:5050,7157
-P 5046,7137 x5070 w=20                      # east to the pad
+P 5046,7127 x5070 w=18                      # east to the pad (y 7118-7136)
 P 5063,7093:5100,7137
 C 5082,7105 s=26x26
 M 5080,6900 y7118 w=20                      # metal M_a north out of the strip
@@ -71,11 +71,11 @@ P 4813,7275:4873,7367                       # load gate
 P 4870,7322:4887,7350                       # extension
 P 4882,7342:4908,7370                       # into the tie box
 B 4880,7340:4914,7376
-D 5022,7228:5040,7374                       # diffusion column under T1
+D 5002,7228:5040,7374                       # diffusion column, its east half under T1 (west edge x 5000: a dark line across both rows)
 D 4985,7228:5024,7244                       # its top west to gate 2's VSS box
-P 5000,7257 x5140 w=19                      # row R3a (from the east)
+P 4984,7257 x5140 w=19                      # row R3a (from the east; end cap at x 4984)
 N P 5120,7257 lc1_w7257
-P 5000,7343 x5140 w=18                      # row R3b (from the east)
+P 4984,7343 x5140 w=18                      # row R3b (from the east; end cap at x 4984)
 N P 5120,7343 lc1_w7343
 D 4980,7358:5040,7374                       # below R3b west to gate 4's VSS box
 D 5010,7286:5040,7318                       # under the output box
@@ -102,7 +102,7 @@ D 4917,7402:4985,7420                       # the source side reaches 25 px west
 D 4985,7404:5040,7478                       # the same device east of the rail
 C 4960,7388 s=30x34                         # VSS
 P 4892,7433 x5093 w=27                      # gate row y 7420-7447
-P 5053,7402:5095,7446                       # up to the pad
+P 5070,7400:5097,7446                       # up to the pad (the inside corner west of x 5070 is field)
 P 5063,7372:5100,7405
 P 5024,7464:5050,7490                       # output box
 B 5022,7462:5052,7480
@@ -193,3 +193,99 @@ P 5012,7983:5048,8012                       # output box
 B 5010,7981:5050,8014
 P 5046,8000 x5082 y8067 w=20                # east, then south under M_c2 (leaves the strip south)
 N P 5082,8040 lc1_w7990
+
+# ================================================================ where the gate column's wires go
+
+# ---------------------------------------------------------------- gate 3's two inputs
+# each row ends on a pad of a metal that comes down from the north
+P 5140,7257 x5250 w=19
+P 5218,7242:5252,7274
+C 5235,7258 s=26x26
+M 5235,6900 y7272 w=22                      # V3, north out of the strip
+N M 5235,6950 lc1_w7257
+P 5140,7343 x5205 w=18
+P 5173,7328:5207,7362
+C 5190,7345 s=26x26
+M 5190,6900 y7360 w=20                      # V2, north out of the strip
+N M 5190,6950 lc1_w7343
+
+# ---------------------------------------------------------------- gate 1's input (the inverse of lc_step)
+# the row turns south-east as the lowest line of the diagonal bundle, east again along y 7344 across the
+# crossing field (under a dozen metals, two of them lengthwise, no tap) to a pad; metal east 130 px, south
+# along x 6472 (just outside the strip) to a pad; poly west along y 7953 back into the strip
+P 5138,7040 x5141 5445,7344 x6325 w=20
+P 6322,7328:6360,7362
+C 6341,7345 s=26x26
+N P 5800,7344 lc1_w7040
+M 6330,7346 x6472 y7942 w=18
+P 6455,7913:6492,7958
+C 6471,7930 s=26x26
+P 6486,7953 x6108 w=18                      # west toward gate cluster E (drawn to x 6108; not followed further)
+
+# ---------------------------------------------------------------- gate 3's output also runs east
+P 5096,7388 x6450 w=18                      # from the pad (5082,7388) east along y 7379-7397 out of the strip
+N P 6400,7388 lc1_w7304
+
+# ---------------------------------------------------------------- gate 5's output
+P 5108,7588:5145,7620                       # the row's end pad
+C 5124,7605 s=26x26
+M 5125,6900 y7620 w=20                      # M_b (V1), north out of the strip
+N M 5125,6950 lc1_w7606
+
+# ---------------------------------------------------------------- gate 6's output
+P 5108,7718:5145,7752                       # the row's end pad
+C 5126,7735 s=26x26
+M 5112,7735 x5170 y7436 x5299 y6900 w=22    # east, north, east, north as V4 out of the strip
+N M 5299,6950 lc1_w7734
+
+# ---------------------------------------------------------------- gate 7's output
+P 5108,7850:5145,7883                       # the row's end pad
+C 5126,7866 s=26x26
+M 5112,7870 x5212 y7520 x5312 w=20          # east, north, east to a pad
+P 5286,7504:5328,7536
+C 5299,7520 s=26x26
+P 5320,7519 x5420 w=19                      # poly link under the metal V5 (no contact)
+P 5412,7503:5448,7537
+C 5429,7520 s=26x26
+M 5416,7520 x5596 w=16                      # metal east to a pad
+P 5568,7503:5602,7536
+C 5583,7519 s=26x26
+P 5596,7518 x5640 w=18                      # poly row on east (drawn to x 5640)
+M 5429,7508 y8003 x5476 y8067 w=20          # and metal south, a jog east, out of the strip
+N M 5429,7700 lc1_w7864
+
+# ================================================================ gate cluster E (x 5650-6320, y 7550-8067)
+# Rails: x 5840-5892 VCC (loads either side), x 6015-6063 VSS (pull-downs under it). Only the first gate is drawn.
+M 5866,7682 y8067 w=52                      # cluster's VCC rail (top at y 7682; runs on south)
+N M 5866,7900 vcc
+M 6039,7560 y8067 w=48                      # cluster's east VSS rail (runs on north and south)
+N M 6039,7600 vss
+
+# ---------------------------------------------------------------- gate E1: lc1_w7780 = NOT lc1_w7733
+D 5843,7745:5898,7793                       # VCC contact box
+C 5862,7768 s=30x34
+D 5895,7750:5945,7776                       # load channel
+D 5935,7748:6105,7777                       # output band, east under the thin metal x 5965-5982 and the VSS rail
+D 5961,7713:5981,7750                       # stub up under the load tie
+P 5900,7713:5942,7799                       # load gate
+P 5940,7713:5980,7743                       # its extension east at the top
+B 5959,7711:5983,7745                       # load gate tied to the output
+D 6027,7677:6077,7777                       # under the rail: VSS box, channel, drain
+D 6073,7707:6100,7777                       # the same device east of the rail
+C 6043,7702 s=30x34                         # VSS
+P 6015,7734 x6312 w=20                      # gate row y 7724-7744, east to its pad
+P 6282,7699:6314,7744
+C 6298,7713 s=26x26
+N P 6200,7734 lc1_w7733
+M 6298,7548 y7726 w=20                      # metal north to the pad at the east end of the poly row y 7561
+P 6280,7545:6314,7578
+C 6297,7561 s=26x26
+P 6290,7561 x6240 w=18                      # that row, west (drawn to x 6240; not followed)
+D 6098,7762:6134,7790                       # under the output box
+P 6105,7760:6134,7792                       # output box
+B 6103,7758:6136,7794
+P 6130,7780 x6450 w=16                      # output row y 7772-7788 east through its pad and out of the strip
+P 6280,7764:6314,7797
+C 6296,7781 s=26x26
+N P 6400,7780 lc1_w7780
+M 6297,7768 y8067 w=20                      # and metal south from the pad out of the strip

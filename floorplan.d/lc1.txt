@@ -1,4 +1,6 @@
 # lc1: left-centre random logic, top strip
 4750,6940:5100,7100   logic   scan line step driver | lc_step = NOT lc1_w7040: the inverter whose output is the step pulse of the scan line counter and the 4-bit counter c4l
 4750,7100:5100,7250   logic   inverter in the left-centre gate column | lc1_w7140 = NOT lc1_w7170; input from the south on a thin metal, output north by the metal x 5080
-4750,7250:5100,8020   logic   NOR and buffer tree in the left-centre gate column | lc1_w7304 = NOR(lc1_w7257, lc1_w7343); lc1_w7468 = NOT of it; lc1_w7606, lc1_w7734, lc1_w7864 = three inverters of lc1_w7468, each leaving east; lc1_w7990 = NOT lc1_w7864, leaving south
+4750,7250:5100,8020   logic   NOR and buffer tree in the left-centre gate column | lc1_w7304 = NOR(lc1_w7257, lc1_w7343); lc1_w7468 = NOT of it; lc1_w7606, lc1_w7734, lc1_w7864 = three inverters of lc1_w7468 (outputs north, north, east and south); lc1_w7990 = NOT lc1_w7864, leaving south
+5840,7680:6320,7800   logic   inverter in the left-centre cluster E | lc1_w7780 = NOT lc1_w7733; output east on a poly row and south by the metal x 6297
+5650,7800:6320,8067   ?logic  left-centre cluster E, rest | not traced; lc_step's inverse (lc1_w7040) is made here
