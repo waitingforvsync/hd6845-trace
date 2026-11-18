@@ -3,7 +3,7 @@
 Trace: `trace/tc2.txt`. Ports: `ports.d/tc2.txt`. Views: `cache/scratch/tc2/`.
 Tool: `tools/tc2_runs.py` (dark runs along a straight metal in both metal shots).
 
-## Status (2026-11-18 00:40 +0000, dp111's session, run 3)
+## Status (2026-11-18 00:41 +0000, dp111's session, run 3)
 
 Most of this region was already drawn by other packages (`ras`, `rax`, `fld`, and the
 crossing lines of `bust`, `amr`'s west route, `r9m`, `rde`): see the inventory. This package
@@ -804,8 +804,7 @@ None in pieces 1 to 3.
   (8490,5262). Seen (`e_rows56.png`, `e_rows56w.png`, `e_pads_e.png`, `e_east2.png`), nothing drawn.
 - Dark dots on the ground rail at about (8012,5765), (8015,5830), (8013,5880), where
   `ras`'s comb rows pass under it: not looked at.
-- `tc2_m6490` and `tc2_m6447` west of x 6400 and south of y 6400. The fourth pad of the nest,
-  (6404,6108), on the region's west edge, with its metal from the west along y 6015-6040.
+- `tc2_m6490` and `tc2_m6447` west of x 6400 and south of y 6400.
 - East of `rax`'s units: the L at the east end of `r9m_l1w`'s row (from (8192,4676) south
   along x 8176-8196 and east along y 4707-4725 to the pad (8245,4716), contact; its metal
   goes east to x 8293 and south to a pad (8292,4850), follower). Seen at 2.4-5.8x
@@ -816,7 +815,15 @@ None in pieces 1 to 3.
   as far as x 7640) and a band y 6195-6245 that turns south at x 7570-7620; dark dots on the
   second at (7415,6230), (7508,6218), (7603,6232). Which supply each is, and their contacts:
   not traced. The metal y 6316-6340 west of x 7500 is not a supply: it is `ral_stb` (piece 9).
-  The fourth pad of the nest, (6404,6108): not looked at in run 3.
+- The fourth pad of the nest, (6404,6108) (`e_p6404.png`, 3x, both metal shots and the clean
+  shot): a contact (ring and bright centre in both metal shots, hole in the pad); its metal
+  comes down x 6397-6415 from a corner at y 6015-6040, where it arrives from the west (it is
+  not `tc2_m6447`'s vertical, which turns east 24 px further north at y 5981: the follower
+  jumps that gap); its poly goes south along x 6393-6413 past y 6400, under the wide metal
+  y 6195-6245, `ral_stb`'s metal and `tc2_sr_c`'s metal. Under the wide metal y 6195-6245 this
+  poly and the one of the next pad west, (6360,6150), look darker and speckled where
+  `tc2_m6447`'s is plain salmon: whether either has a contact to that metal was not settled
+  (one view at 3x). Nothing drawn.
 - The independent review of pieces 7, 8, 9 and 10 (the Review section below covers pieces 1 to 6).
 
 ## Review
