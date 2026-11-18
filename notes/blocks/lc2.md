@@ -102,15 +102,31 @@ followed); the rails vss and vcc at y 8060/8067 and y 8560.
 
 1. Latch B's tracks: clear from the pad (5472,8254), Na from (5514,8341), data south from
    (5558,8450); enable north of y 8067 is `lc1`'s region.
-2. Latch C and the inverter below it (overlay the `findcell` hits first). Not started: no
-   geometry, no overlay. The hits are `tl1_ub` 3352,3999 rot=180 (0.76) and `tl1_ua` 3351,4439
-   rot=180 (0.68), inverter 3306,4809 rot=180 (0.73), all WITHOUT `mx`, whereas latch B's
-   copies carry `mx=2662.5`: if the hits are right, latch C is laid out as latch B's mirror
-   image, so its input rows and pads lie on the opposite side; do not copy latch B's hand-drawn
-   rows across. The scores are lower than latch B's (0.85 / 0.82): overlay each copy at 4x
-   before placing it. Look for the counterpart of the thin vertical metal (x 5748-5764 in
-   latch B) through latch C and record it; take gate-width profiles (`tools/px.py`) for every
-   transistor, which latch B lacks for t133-t135.
+2. Latch C (x 5887-6142, y 8589-9029) and the inverter below it. **Overlay done, nothing
+   drawn** (2026-11-18 04:28 +0000, on claude-opus, not Fable; time box ran out before the
+   hand-drawn parts). The copies, as `findcell` gives them (o = the master rectangle's centre):
+   `@inst tl1_ub 3352,3999 rot=180 o=2662.5,4685` and `@inst tl1_ua 3352,4439 rot=180
+   o=2662.5,4465` (the `ua` hit says dx 3351; 3352 was used so both share one map). Both map
+   master (x, y) to (8677 - x, 13369 - y): latch B turned left-right, so its rows and pads lie
+   EAST of the cells. Overlays `cache/scratch/lc2/c1_acid1b.png`, `c1_metal.png` (4x, y
+   8580-8810), `c2_acid1b.png`, `c2_metal.png` (4x, y 8800-9040), `cm.png` (2x metal, all):
+   every poly outline on a salmon strip, diffusion edges on the dark outlines, the contacts
+   (6110,8600), (6049,8759), (6057,8949), (6117,9005), (5874,8922) each on a ring or speck,
+   to about 5 px; read by eye only, no reviewer yet.
+   With only the two lines the extraction gives 3 errors, the cell's supply contacts with no
+   metal over them: (6049,8759), (6057,8949) (the stack's VSS side) and (5874,8922) (VCC).
+   - VCC: the rail x 5840-5890 (latch B's VCC rail) runs on south through latch C without a
+     break (`px.py row 8700/8860/8990 5820 5910 4 metal`: bright 5840-5888, dark edge 5892);
+     drawing `M 5865,8560 y9030 w=50` would cover (5874,8922). Not drawn.
+   - VSS: expected by the map at x about 6031-6077 (latch B's rail x 5682). The metal shot is
+     bright there at y 8860 (x 6022-6062) but dark at y 8700 and y 8990 (60-110, not metal
+     brightness): the VSS metal's shape here is NOT read; look at it at 4x before drawing.
+   - Still to do: the input rows from the cells' east ends (x > ~6140) to their pads, the
+     copy's own VSS box (latch B's D 5659-5714, 8062-8115 maps, through the master, to about
+     x 6022-6077, y 8538-8591: look there), the thin metal of latch B's x 5801 (maps to about
+     x 5935, y 8655-8885 by the map: check against the photo), gate-width profiles (none taken), and the
+     counterpart of latch B's undrawn thin metal x 5748-5764 (not looked for). The inverter
+     hit 3306,4809 rot=180 (0.73) was not overlaid.
 3. The west gate cluster (x 4480-5330, y 8380-9160): the largest piece; not a known cell.
 4. The bus fields and the unit halves on the north and south edges (with `lc1` / `lc3`).
 
