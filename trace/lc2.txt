@@ -259,4 +259,4 @@ P 5419,8939:5441,8980
 P 5419,8939:5545,8958
 # review round 3: a poly leaves latch C's clear pad (6257,8731) south and runs diagonally south-east under three
 # metals (no pad on any) out of the strip at x 6450: a further branch of lc1_w7864
-P 6258,8742 y8758 6450,8936 w=18
+P 6258,8742 y8758 x6285 6450,8923 w=20      # east along y 8750-8768 to x 6285, then at 45 degrees (centre y = x + 2473: fix check)

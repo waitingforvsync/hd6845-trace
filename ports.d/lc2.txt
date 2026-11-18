@@ -31,4 +31,4 @@ lc2_w8474   P  5400,8509-8526  ?    drawn end: the poly from the pad (5428,8516)
 lc2_w8474   M  5379-5391,8440  ?    drawn end (review round 3): the metal of the pads (5428,8516), (5428,8648), (5429,8994) runs on north-west
 lc2_w8474   M  5421-5437,9233  ?    the same metal runs on south into lc3
 lc2_w8474   P  5545,8939-8958  out  the row from the pad (5429,8994), east into the gate column south of latch B
-lc1_w7864   P  6450,8926-8946  out  the poly from latch C's clear pad (6257,8731), diagonally south-east out of the strip
+lc1_w7864   P  6450,8911-8936  out  the poly from latch C's clear pad (6257,8731), diagonally south-east out of the strip

@@ -216,7 +216,7 @@ Run 3 (latch D's lower unit and the bus field):
 | `lc2_w8474` | M | 5379-5391, 8440 | ? | drawn end (round 3): the metal runs on north-west (`follow.py 5400 8478 W`: north to y 8384, west to x 5338, north to y 8215, west to x 5228) |
 | `lc2_w8474` | M | 5421-5437, 9233 | ? | round 3: the metal runs on south into `lc3` |
 | `lc2_w8474` | P | 5545, 8939-8958 | out | round 3: the row from the pad (5429,8994), east into the gate column south of latch B (its first gate row) |
-| `lc1_w7864` | P | 6450, 8926-8946 | out | round 3: the poly from latch C's clear pad, south-east out of the strip |
+| `lc1_w7864` | P | 6450, 8911-8936 | out | round 3: the poly from latch C's clear pad, south-east out of the strip |
 | `lc2_w8341` | M | 5508-5524, 8067 | out | run 4: latch B's output Na, north into `lc1` |
 | `lc1_w7864` | M | 5466-5486, 8067 | in | run 4: latch B's clear (meets `lc1`'s port) |
 | `lc2_w8172` | M | 6422-6440, 8067 | ? | from the north |
@@ -448,7 +448,7 @@ six metals. Findings, each checked by the tracer:
 2. **A poly leaves latch C's clear pad (6257,8731)** south and diagonally south-east under three metals, out of
    the strip at x 6450 (changes a connection: a further branch of `lc1_w7864` leaves the strip). Confirmed on
    `r3_clr.png` (2.5x, clean and metal: one poly from the pad to the view's edge at (6470,8950), no pad where the
-   three metals cross it). Fixed: drawn to (6450,8936).
+   three metals cross it). Fixed: drawn to the strip's edge (path corrected by the fix check, round 4).
 3. Geometry only: latch C's copy of the cell's thin metal `lc2_w9005` lies at x 6096-6110 (drawn 6105-6119), its
    contacts at (6104,9002) and (6117,8600) against (6115,9008) and (6122,8602) drawn; on the same pads. The cell's
    items in this copy: not changed (as lc1's copy, round 2).
@@ -459,3 +459,20 @@ Not checked by the reviewer: whether the thin metal is continuous across its thr
 supply each rail is.
 
 Round 3: two findings that change a connection, fixed (a fix check follows).
+
+Round 4 (fix check of round 3's fixes, 2026-11-18 17:54 -0600, a fresh agent on claude-fable-5-2, against commit 9c85272, at
+commit b14ffdb; images in `cache/scratch/lc2/review-4/`). Checked: the metal's corner (one metal x 5381-5437 along
+y 8476 and up x 5385; bare ground x 5437-5466); its run y 8660-9233 (no branch; the only holes at y 8648 and y 8994);
+the contact (5429,8994) (ring and bright centre in both chips, green hole) and its poly (north to the row
+y 8939-8958 only, field between that row and the row y 8895-8915); the row y 8939-8958 (west end x 5425, one poly east
+past x 5545 over field, no contact under the metals x 5472 and x 5560); the diagonal poly (leaves the pad itself,
+one poly to x 6450, no hole, ring or pad where the three metals cross it); the second label; `sameconn.py` both ways.
+One finding, geometry only, checked by the tracer:
+1. The diagonal poly was drawn beside the real one: it runs east from the pad's foot along y 8750-8768 to about
+   x 6285 and then at 45 degrees (centre y = x + 2473), 14-24 px north of the drawn line. Confirmed (`px.py col 6350`:
+   the poly at y 8814-8834; `px.py row 8760`). Fixed: `P 6258,8742 y8758 x6285 6450,8923 w=20`; the port moved to
+   (6450, 8911-8936).
+After the fix: `tools/t.sh lc2 sameconn.py b14ffdb`: `connections identical`;
+`.venv/bin/python tools/sameconn.py b14ffdb`: `connections identical`.
+
+Round 4: no findings that change a connection.
