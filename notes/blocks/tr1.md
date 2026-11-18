@@ -2,9 +2,9 @@
 
 ## Status
 
-Inverter A drawn (2026-11-18, traced on claude-opus): `trace/tr1.txt`, 2 transistors, extraction
-0 errors 0 warnings (`TRACE=tr1` and full). Its look-alikes at +130 and +260 px (x 12075-12195,
-12205-12330) are NOT drawn: not overlaid or read at 4x yet. Survey views:
+Inverter A and gate B drawn (2026-11-18, traced on claude-opus): `trace/tr1.txt`, 4 transistors, extraction
+0 errors 0 warnings (`TRACE=tr1` and full). Gate B (x 12065-12200) read at 3x in three shots, its
+extra box not drawn. Gate C (x 12205-12330) is NOT drawn. Survey views:
 `cache/scratch/tr1/survey.png` (0.57x), `row_11900.png`, `row_12650.png`, `row_13400.png`
 (1.65x), `cellA*.png`; drawing views `a.png` (3.5x, clean / chip-2 stripped / chip-2 metal),
 `a_tr.png` (3x, trace over clean and stripped shots).
@@ -28,6 +28,20 @@ Inverter A, x 11940-12065 (drawn; `tr1_w11960 = NOT tr1_w12005`; `unsure.py --eq
 |---|---|---|---|---|
 | pull-down | `tr1_w12005` | `vss` - `tr1_w11960` | 47/22 | channel (12005,3758): diffusion box 11966-12062 x 3735-3782, source contact (12042,3758) on the upper rail |
 | load (depletion) | `tr1_w11960` (?) | `tr1_w11960` - `vcc` | 21/52 | channel (11972,3879): textured poly 11942-12003 x 3853-3905 over the strip x 11962-11983; drain in the box 11960-12020 x 3912-3962, contact (11988,3938) on the lower rail |
+
+Gate B, x 12065-12200 (drawn by hand from `b5.png`, 3x clean / chip-2 stripped / metal; `tr1_w12090 = NOT tr1_w12135`; DEPENDS on its own two `?` tie items):
+
+| Transistor | Gate | Between | W/L | Where |
+|---|---|---|---|---|
+| pull-down | `tr1_w12135` | `vss` - `tr1_w12090` | 50/22 | channel (12135,3757): box 12092-12195 x 3732-3782, source contact (12165,3755) (ring in the metal shot); `px.py col 12135 3715 3805`: bright y 3740-3775, poly end about 3795 |
+| load (depletion) | `tr1_w12090` (?) | `tr1_w12090` - `vcc` | 21/52 | channel (12102,3879): textured poly 12072-12133 x 3853-3905 over the strip x 12092-12113; drain box 12090-12150 x 3912-3962, contact (12117,3937) |
+
+B's extra box: 12168-12195 x 3850-3905, east of the tie lobe and separated from it by a dark edge
+at x 12162-12170 (`px.py row 3865 12120 12200 4`: bright x 12172-12192 in both shots, dark
+x 12136-12148 at the tie and 12164-12168 at the edge); clean shot shows a dot at (12183,3880).
+It is NOT drawn: no layer or contact was settled for it. It touches neither the load strip nor the
+pull-down box as seen at 3x; if it is a diffusion box with a contact to the thin metal or the lower
+rail, it belongs to the next gate east and does not change B.
 
 Bit cell's gates in full: one enhancement pull-down to VSS and one depletion load to VCC whose
 gate is (believed) tied to the output: an inverter.
@@ -58,7 +72,7 @@ poly at x 11960-11975 north of y 3650 and the poly x 12000 north of y 3650 (not 
 
 ## Not done
 
-Resume with inverter A's look-alikes (view `bc.png`, 3.5x clean shot only: B's gate poly at x 12125-12145 and C's at 12255-12275, exactly +130/+260 from A's, but B has an extra diffusion box about 12150-12195 x 3850-3905 with a dot near (12185,3875) and C's pull-down box runs on east past x 12320 into the next gate, so neither is yet shown to be a true copy; draw each on its own),
+Gate B is drawn (its extra box 12168-12195 x 3850-3905 is not: read it at 5x). Resume with gate C (view `bc.png`: gate poly 12255-12275, pull-down box runs on east past x 12320 into the next gate; draw it on its own),
 then A's copies at +130 and +260 (read each copy's inputs on the photo), then follow
 the two polys north into the track field; then the gates east of x 12330, the track
 field's ends and contacts, the thin metal y 3827-3839, the rails' supplies, and the
