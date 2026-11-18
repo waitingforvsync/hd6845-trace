@@ -12,8 +12,8 @@ d7_d       P  16955,15638-15660   in   buffered pin D7
 dbus_le    M  16765-16783,15935   in   the metal runs on south along x 16774 (over the box ends of d5_out_n, d4_out_n, d3_out_n without contact; followed to y 16104): believed the driver's side
 
 # West and north-west: the latch outputs where they run into areg's drawing
-dl6_q_n    P  16354-16374,14695   out  joins areg's poly (areg_w7) at y 14700; it runs north to y 13453 and east
-dl7_q_n    M  16333-16348,14695   out  joins areg's metal (areg_w6) at y 14700; north to its contact (16337,13264)
+dl6_q_n    P  16354-16374,14695   out  joins areg's poly (dl6_q_n) at y 14700; it runs north to y 13453 and east
+dl7_q_n    M  16333-16348,14695   out  joins areg's metal (dl7_q_n) at y 14700; north to its contact (16337,13264)
 dl6_q_n    P  16470,13451-13469   in   areg's row arriving at inverter k2 (areg draws it to x 16480)
 dl7_q_n    P  16470,13256-13274   in   areg's row arriving at inverter k1
 

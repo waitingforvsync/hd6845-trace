@@ -84,7 +84,7 @@ Central datapath (registers identified by their write strobes, `notes/blocks/wrs
 | `dbus_do0_in` | input of the inverter at the foot of the data bus column that drives `d0_out_n` (`d0_out_n` = NOT `dbus_do0_in`): a poly along y 16444-16463 from a pad (16993,16451), fed by a metal that leaves the column west at (16950,16712), not followed. The bit the chip puts on D0, in true sense |
 | `dbus_cap#b` | # = 0-5: a plain diffusion rectangle beside data input buffer # with a contact that carries only a dot of metal, joined to nothing. The capacitor that a metal strap would have put on `d#_b` (whose pad nearby also has only a dot): a metal option not taken (`notes/blocks/dbus.md`, "The capacitor taps of chains 1-5") |
 | `d#_d_n` | NOT `d#_d`: the inverter inside data input latch # (`notes/blocks/dbus.md`; bits 4-7: `notes/blocks/dlat.md`) |
-| `dl#_q`, `dl#_q_n` | the data input latch of bit # in the data bus column: two cross-coupled AND-OR-invert gates, transparent while `dbus_le` is high. `dl#_q` follows pin D#; `db_b#` = NOT `dl#_q_n` (a static inverter drives the bus bit). Bits 4-7 are the same latch in the column west of it (cell `dlat_lat`), and their `dl#_q_n` run west and north to four inverters above the latches (cell `dlat_drv`) that drive `db_b4`..`db_b7` (`notes/blocks/dlat.md`); `areg_w6` and `areg_w7` are `dl7_q_n` and `dl6_q_n` (aliases in `trace/dlat.txt`) |
+| `dl#_q`, `dl#_q_n` | the data input latch of bit # in the data bus column: two cross-coupled AND-OR-invert gates, transparent while `dbus_le` is high. `dl#_q` follows pin D#; `db_b#` = NOT `dl#_q_n` (a static inverter drives the bus bit). Bits 4-7 are the same latch in the column west of it (cell `dlat_lat`), and their `dl#_q_n` run west and north to four inverters above the latches (cell `dlat_drv`) that drive `db_b4`..`db_b7` (`notes/blocks/dlat.md`); `dl7_q_n` and `dl6_q_n` are `dl7_q_n` and `dl6_q_n` (aliases in `trace/dlat.txt`) |
 | `dbus_le` | enable of the data input latches: a vertical metal x 17243-17262 down the data bus column from y 8988 (to y 13614, then west); west of x 16950 it is the metal that runs south along x 16819 past the latches of bits 4-7 (a pad on each of their two gate bands) then turns west at y 15802 and runs on south along x 16774, out of that column, passing over the box ends of `d5_out_n`, `d4_out_n` and `d3_out_n` without contact (`notes/blocks/dlat.md`; followed to y 16104). Source not traced |
 
 ## Clocks
@@ -1032,3 +1032,5 @@ datapath s1...s7, s0 became b0...b6, b7.
 | cdp1_l4588 | c4l1 | |
 | amr_ob_c1 | c4l1 | |
 | tla_w3461 | amr_eq_r3 | |
+| areg_w6 | dl7_q_n | |
+| areg_w7 | dl6_q_n | |
