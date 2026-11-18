@@ -1663,6 +1663,59 @@ Connections before and after the change of marking:
 
 Round 1: no findings that change a connection.
 
+### Run 11: south of the foot, y 5660-6350, and three corrections to `trace/ur.txt`
+
+**Round 1 (full review), 2026-11-18 22:43 +0000**, a fresh agent on Claude Fable 5.2, commit before the
+round 1ce8e16, 14 images in `cache/scratch/tl3/review-14/` (its report says 16). One piece: the
+wiring of pieces S1-S5 (x 3533-4250, y 5660-6350) with the three lines of `trace/ur.txt` changed
+in a1c5d8b (y 6330-6700).
+
+Told to suspect: the cut of `ur`'s poly between the pads (3757,6410) and (3968,6410), decided
+from text maps only; the bare stretch x 4004-4064 on the row y 6327; pad A's contact (dim centre
+in chip 2) and the pad (3607,5938); the L3 metal from its pad to the step (a break, a contact on
+a row, the diagonal, anything at x 3780); the gab metal's shift; the chip-2 blob on the VSS band
+over the vertical poly; the specks on the rails; the 8 px between the horizontal metal and
+`tla`'s row and the two corners; the pass-overs (x 4236 over the row y 5718, x 4042 over `tla`'s
+row in particular); anything undrawn (the outlined areas, the strip y 6167-6182).
+
+What it checked and found as drawn. (a) The cut: x 3780-3950, y 6400-6420 is bare ground in both
+metal shots and both stripped shots, field under the L3 metal and the VSS leg; the poly reaches
+the pad (3757,6410) from the west only; the pad (3968,6410)'s poly leaves east, unbroken to
+x 4260 with no hole under the gab metal or the VCC leg; no metal between the pads (3968,6410) and
+(3968,6520) (`U.png`, 4.4x four shots). (b) The gap between pad A and pad B is bare in all four
+shots (`padAB.png`, 5.3x). (c) Pad A is a contact: bright centre in chip 1, green hole in the
+clean shot, a pit in the chip-2 stripped shot; the pad (3607,5938) too (chip 2's centre is split
+by a dark bar: `s2padw.png`); the other five pads have a bright centre in both chips and a hole.
+(d) The L3 metal is one metal at x 3794-3808 from its pad to y ~6670 and a diagonal to x 3780, in
+both chips, with no pad or hole on any row it crosses and nothing at x 3780 north of the step
+(`l3run.png`, `l3step.png`); the gab metal shifts east at y ~6597-6606 in both chips
+(`gabstep.png`). (e) The blob at (3808,6222) is in chip 2 only, over plain protected poly with no
+hole and no pad (`s3poly.png`). (f) The rails' specks differ between the chips and the clean shot
+under both Ls is field; `railprof.py` calls y 6091-6118 under the VCC rail "diffusion", which is
+the grey-green centre band (the same colour at (3846,5800)), with no outline in either metal shot
+(`Ls.png`). (g) The strip y 6167-6182 is bare in both chip-2 shots. (h) Field under the
+horizontal metal y 5866-5882, no hole, corners as drawn (`s3corners.png`). (i) Pass-overs: x 4236,
+4192, 4042, 3608 and both rails over the row y 5718; x 3608, 4042, 4192 and both rails over
+`tla`'s row; x 3912 over the rows y 5936 and y 5979; the L3 metal and both legs over the row
+y 6327: bright over the row, no hole. (j) S2's poly ends at the pad (3954,5938); the metal east is
+unbroken (`follow.py`, 500 px) and separate from `amrw`'s. (k) Nothing undrawn (`sv.png`,
+`sv2.png`; `opendiff.py`: none). (l) Extraction 2,342 nets, 4,200 transistors, 0 errors;
+`unsure.py` lists none of the run's nets; `sameconn.py` on `ur`: connections identical.
+
+Findings: none. One thing it saw outside this run's lines, geometry only, in `ur`: `sl_l3`'s
+metal steps west at y ~6665-6700, not at y 6560 as drawn (`l3run.png`); not changed here (it is
+in the handoff, with `ur`'s `vcc` line x 3630).
+
+It could not check: where the pad (3968,6410)'s poly goes east of x 4260 (not drawn:
+`rcs_thin_e`'s far end); `ur`'s cells south of y 6700; and a dark mark in the chip-2 metal shot
+at (3536-3545, 5704-5716), beside S1's pad, which it judged from chip 1 and the clean shot only.
+The last, checked after the round: `tools/t.sh tl3 px.py pt 3540,5710 3540,5760 3540,5680
+acid,acid1b,metal,metal1`: chip-2 metal 52/34/15 at the mark against 152-158/128-131/77-87 beside
+it, chip 1 the same at all three (138-142/114-129/77-80), the clean shot green open field
+(123/158/82): dirt on chip 2, nothing drawn there.
+
+Round 1: no findings.
+
 ## Not done
 
 - Next: the rows above y 2890 (y 2580-2880: `r9m`'s and `tla`'s lines cross here; the row y 2857
