@@ -657,9 +657,10 @@ N M 3042,4300 rcs_cond_lat
 #   rcs_cond = NOT rcs_cond_n: node y 4558-4622, pull-down E0 (gate rcs_cond_n) to the VSS box below,
 #     standard load west of the rail, buried contact to band 2, whose pad (contact (3105,4590))
 #     is the bottom end of bus line A's piece A3.
-#   pass transistor (band 1, gate clk_tl) from that node up to the column's top end, which
-#     is tied by a buried contact to the poly pad (contact (3045,4485)) at the bottom of the
-#     metal rcs_cond_lat. So rcs_cond_lat takes rcs_cond while clk_tl is high: a dynamic latch.
+#   pass transistor (band 1, gate tl3_w3982: NOT clk_tl, see band 1 below) from that node up to
+#     the column's top end, which is tied by a buried contact to the poly pad (contact (3045,4485))
+#     at the bottom of the metal rcs_cond_lat. So rcs_cond_lat takes rcs_cond while tl3_w3982 is
+#     high: a dynamic latch.
 #     The buried contact is drawn uncertain: see AMB-009 (the other reading ties the column top
 #     to the VSS box under the rail, which makes the AOI unit above degenerate).
 D 3028,4512:3063,4610
