@@ -136,9 +136,11 @@ C 3322,3722
 P 3100,3713:3310,3731
 N M 3326,3200 tl2_w3722
 
-# ---- track F, middle piece (y 4278-4470) = clk_tl: bottom pad (3322,4460), poly row west along
-# y 4461 to x 3105, south UNDER track A (x 3105-3125, no contact to A) into tla's row y 4535-4558
-# (clk_tl's gate row, contact (3152,4548) on track B). Top pad (3325,4287), poly row east along
+# ---- track F, middle piece (y 4278-4470) = tl3_w3982: bottom pad (3322,4460), poly row west along
+# y 4461 to x 3105, south UNDER track A (x 3105-3125, no contact to A) into the east end of tla's
+# row y 4535-4558, the gate row of tla's pass transistor at (3046,4546). That row ends there: it
+# does not reach track B's pad (3152,4548), so this net is NOT clk_tl (review round 1; tla's row
+# was drawn through to the pad and is corrected). Top pad (3325,4287), poly row east along
 # y 4285 through the pad of a tap on track J (3497,4287) and on east out of the strip.
 M 3326,4278 y4470 w=18
 P 3302,4443:3344,4477
@@ -157,8 +159,7 @@ M 3499,3972 y5374 x3533 w=18
 P 3477,3965:3519,3999
 C 3497,3982
 P 3510,3973:3540,3991
-N M 3499,4700 clk_tl
-@alias clk_tl tl3_w3982
+N M 3499,4700 tl3_w3982
 
 # ---- track F, lower piece (y 4538-5496, then east along y 5496) = tl2_w4547: top pad (3322,4548)
 # with a row east along y 4547 out of the strip; the arm ends on a pad with a contact (3518,5498)

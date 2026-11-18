@@ -11,20 +11,21 @@ what `tla`, `tl1`, `r9m` and `ur` did not. Nothing of theirs is redrawn.
 bus field east of the first cluster: the ten undrawn metal pieces of its tracks D and F-J with
 their 24 contacts, and the poly row from every pad, drawn to the strip's edges or onto tla's,
 tl1's and tl3's ends (no transistor). Five joins between names of other packages came out of it,
-all on geometry without `?` (see "The bus field's east tracks"):
+all on geometry without `?`, and one correction to `tla`'s trace (see "The bus field's east tracks"):
 
 ```
 rcs_x1 = rcs_g4240 = tl1_w4025 = tl3_w3506       one net: track I (y 3494-5380)
-clk_tl = tl3_w3982                                tracks F (middle piece) and J (lower piece)
+tl3_w3982 = the gate of tla's pass transistor     tracks F (middle piece) and J (lower piece); NOT clk_tl
 tl1_w3594 = tl3_w3722                             track H (upper piece)
 tl1_w2637 = tl3_w3333                             track D (upper piece) and the row y 3202
 rcs_a2 = tl3_w3765, tl3_w3419 = tl3_w3896         tla's row y 3761; track J (upper piece)
 ```
 
-so that the full extraction now reads `rcs_a2 = NOR(tl1_w3594, tl3_w3803)` and
-`tl3_w3939 = NOR(clk_tl, tl3_w3419)` (both FIRM in `tools/unsure.py --equations`), and the clear
+so that the full extraction now reads `rcs_a2 = NOR(tl1_w3594, tl3_w3803)` (FIRM in
+`tools/unsure.py --equations`), `rcs_cond_lat` is `rcs_cond` passed while `tl3_w3982` is high
+(not while `clk_tl` is: the review found that `tla`'s gate row does not reach `clk_tl`'s pad), and the clear
 of tl1's two latches, the clear of tl3's latch, `rcs_b1`'s input x1 and `rcs_n4200`'s input are
-one signal. Full extraction: 2243 nets, 3993 transistors, 0 errors, 0 warnings.
+one signal. Full extraction: 2244 nets, 3993 transistors, 0 errors, 0 warnings.
 
 Run 1, 2026-11-17 16:30 -0600 (Matt Godbolt). **One piece.** The east half of the small cluster below the
 step logic (x 2817-3180, y 5900-6300) is traced: two inverters in series (4 transistors), which
@@ -150,7 +151,7 @@ pad.
 | `tl1_w2637` = `tl3_w3333` | track D upper: tl1's metal from the pad (2827,2637) east along y 2640, south at x 3241 to y 3214 | pad (3240,3204); row east along y 3202 to x 3522, south (poly in the open) to y 3334, east into tl3's row y 3333: **the data of tl3's latch** |
 | `rcs_bd3330` (tla) | track D middle (tla's, y 3314-4390) | its bottom pad (3237,4376), not drawn by tla; row west along y 4374 to x 3072 and on into the gate column (not traced) |
 | `tl2_w3722` | track F upper, y 2630-3732 | top pad (3324,2639), row east along y 2639 out of the strip; bottom pad (3322,3722), row west along y 3722, drawn to x 3100 (it goes on west under track A into the gate column: not traced) |
-| `clk_tl` = `tl3_w3982` | track F middle, y 4278-4470; track J lower, y 3972-5374 and east along y 5374 out of the strip (the follower: on to x 3607, south to (3608,5942), in tl3's strip) | F's bottom pad (3322,4460): row west along y 4461 to x 3105-3125, **south under track A** to tla's row y 4535-4558, which is `clk_tl`'s gate row with its contact (3152,4548) on track B. F's top pad (3325,4287): row east along y 4285 through the pad of J's tap (3497,4287) and on out of the strip. J's top pad (3497,3982): row east into tl3's row y 3982, **gate 2 of tl3's NOR 2** |
+| `tl3_w3982` | track F middle, y 4278-4470; track J lower, y 3972-5374 and east along y 5374 out of the strip (the follower: on to x 3607, south to (3608,5942), in tl3's strip) | F's bottom pad (3322,4460): row west along y 4461 to x 3105-3125, **south under track A** into the east end of tla's row y 4535-4558, **the gate row of tla's pass transistor at (3046,4546)** (`rcs_cond` to `rcs_cond_lat`). That row ends at x 3122 as the foot of this poly; it does **not** reach track B's pad (3152,4548), 14 px of field between, so this net is not `clk_tl` (review round 1; `tla`'s row corrected, commit 1915f94). F's top pad (3325,4287): row east along y 4285 through the pad of J's tap (3497,4287) and on out of the strip. J's top pad (3497,3982): row east into tl3's row y 3982, gate 2 of tl3's NOR 2. **Driver not found**: the net's two open ends are the row y 4285 at x 3533 and J's arm |
 | `tl2_w4547` | track F lower, y 4538-5496, east along y 5496 | top pad (3322,4548), row east along y 4547 out of the strip; the arm's end pad (3518,5498), whose poly goes on east |
 | `rcs_in1` (tla) | track G upper (tla's) | - |
 | `tl2_w5025` | track G lower, y 5014-5424 | top pad (3368,5025), row east along y 5025; bottom pad (3368,5414), row east along y 5415; both out of the strip |
@@ -169,7 +170,8 @@ What follows from the joins (extracted, all on geometry without `?`):
 
 ```
 rcs_a2    = NOR(tl1_w3594, tl3_w3803)       FIRM   (tl3's NOR 1; rcs_a2 is an input of rcs_c1, rcs_b1)
-tl3_w3939 = NOR(clk_tl, tl3_w3419)          FIRM   (tl3's NOR 2: NOT clk_tl AND the latch's true output)
+tl3_w3939 = NOR(tl3_w3419, tl3_w3982)       as in tl3 (NOR 2); tl3_w3982 is also the gate of the pass transistor
+                                            rcs_cond -> rcs_cond_lat at (3046,4546), which tla had on clk_tl
 rcs_b1    = NOR(rcs_a2, rcs_u3425, rcs_x1)         x1 is the common clear
 rcs_n4200 = NOT((clk_tl AND rcs_cond) OR rcs_x1)
 tl3_w3550 = NOT(rcs_x1 OR (tl3_w3233 AND tl3_w3373) OR tl3_w3419)     tl3's latch, cleared by x1
@@ -195,8 +197,15 @@ The junctions that decide these joins, each looked at above 4x in two shots or m
   (`px.py row 4198 3396 3472 4 acid1b,acid`): the edge of the metal pad's protected area, not
   two outlines with field between (see Ambiguities).
 - **The poly under track A** (`c1.png`, `c3.png`, 3.8x and 4.2x, three shots; `px.py col 3115
-  4440 4570 6`): salmon 220/170/122 without a break from y 4458 to 4548, into tla's row; pink
-  field above y 4452 and below y 4558.
+  4440 4570 6`): salmon 220/170/122 without a break from y 4458 to 4548, into the east end of tla's
+  row; pink field above y 4452 and below y 4558.
+- **That row and track B's pad (3152,4548) are apart** (review round 1, confirmed by the tracer):
+  `px.py col 3129 4436 4576 5 all` down the gap between tracks A and B: both metal shots are
+  plain ground, R = G = 104-116, from y 4481 to 4556, with no edge line at y 4535 or y 4558
+  (the row y 4461 in the same gap is orange, 151-170/119-126/55-62, between two dark lines);
+  the clean shot is green, 136-144/161-165/90, like the field above and below.
+  `px.py row 4547 3096 3172 4 all`: salmon to x 3116, green at x 3120-3132, the pad's rim from
+  x 3136. `review-2/j_band1gap.png` (7x, four shots): the pad's outline is closed on its west side.
 - **The row y 4285 between F's pad and J's pad** (`c2.png`, 5x, three shots): one band; dark
   and speckled where no metal lies over it (x 3388-3440), orange with a continuous outline in
   the chip-2 stripped shot.
@@ -209,7 +218,8 @@ The junctions that decide these joins, each looked at above 4x in two shots or m
 Not drawn by `tla` and seen here, in the part of its gate column that nobody has traced
 (x 2860-3100, y 3700-4620): track B's contacts at (3150,3812) and (3150,4418), each on a pad
 whose row runs west into the column (`o2.png`, `o3.png`). `tla`'s notes list them as gate
-contacts of `clk_tl`; they are not in its trace.
+contacts of `clk_tl`; they are not in its trace. (Its fourth, (3152,4548), gates nothing: the
+pad's only poly goes east to track D's pad (3228,4548).)
 
 ## Ports
 
@@ -238,10 +248,10 @@ contacts of `clk_tl`; they are not in its trace.
 | `rcs_a2` | P | x 3540, y 3755-3773 | in | tl3's row y 3765 (tl3_w3765, NOR 1's output) onto tla's row y 3761: alias |
 | `tl3_w3419` | P | x 3540, y 3886-3904 | out | from track J's upper piece onto tl3's row y 3896 (tl3_w3896, NOR 2 gate 1): alias |
 | `tl3_w3939` | P | x 3540, y 3930-3948 | in | tl3's row y 3939 (NOR 2's output), west to x 3460, south under track I |
-| `clk_tl` | P | x 3540, y 3973-3991 | out | from track J's lower piece onto tl3's row y 3982 (tl3_w3982, NOR 2 gate 2): alias |
+| `tl3_w3982` | P | x 3540, y 3973-3991 | out | from track J's lower piece onto tl3's row y 3982 (NOR 2 gate 2) |
 | `tl3_w3939` | P | x 3533, y 4102-4120 | out | the same poly back east along y 4111 |
 | `rcs_x1` | P | x 3533, y 4192-4210 | ? | row y 4201 east from track I's tap (3452,4199) |
-| `clk_tl` | P | x 3533, y 4276-4294 | out | row y 4285 east of track J's tap (3497,4287) |
+| `tl3_w3982` | P | x 3533, y 4276-4294 | ? | row y 4285 east of track J's tap (3497,4287) |
 | `tl2_w4374` | P | x 3533, y 4365-4383 | ? | upper arm of the U-shaped poly under track G |
 | `tl3_w4763` | P | x 3533, y 4408-4426 | ? | row y 4417 east from track H's lower top pad (3410,4418) |
 | `tl2_w4374` | P | x 3533, y 4494-4512 | ? | lower arm of the U-shaped poly |
@@ -250,7 +260,7 @@ contacts of `clk_tl`; they are not in its trace.
 | `tl2_w5025` | P | x 3533, y 5016-5034 | ? | row y 5025 east from track G's lower top pad (3368,5025) |
 | `rcs_x1` | P | x 3533, y 5101-5119 | ? | row y 5110 east from track I's tap (3452,5112) |
 | `rcs_x1` | P | x 3533, y 5362-5380 | ? | row y 5371 (tl1_w4025's) east of track I's bottom pad, under track J's arm |
-| `clk_tl` | M | x 3533, y 5365-5383 | out | track J's arm east along y 5374 (follow.py: to x 3607, then south to (3608,5942)) |
+| `tl3_w3982` | M | x 3533, y 5365-5383 | ? | track J's arm east along y 5374 (follow.py: to x 3607, then south to (3608,5942)) |
 | `tl2_w5025` | P | x 3533, y 5406-5424 | ? | row y 5415 east from track G's bottom pad (3368,5414) |
 | `tl3_w4763` | M | x 3533, y 5426-5444 | ? | track H's arm east along y 5435 (follow.py: to (3571,5435)) |
 | `tl1_w4937` | P | x 3533, y 5449-5467 | in | row y 5458, straight through |
@@ -323,6 +333,43 @@ x 3200-3533 north of y 6215 was not surveyed.
 `.venv/bin/python tools/sameconn.py 7886411`: `connections identical`.
 
 Round 1: no findings that change a connection.
+
+### Run 2 (the bus field's east tracks)
+
+Round 1 (full review, 2026-11-18 00:58 +0000, a fresh agent on claude-fable-5-2, at commit 132750c; 14 images in
+`cache/scratch/tl2/review-2/`). Piece: the bus field's east tracks (everything run 2 added to
+`trace/tl2.txt`). Told to suspect: the step from the tap (3452,4199) to the row y 4240 (one poly
+or two that abut); the poly under track A (does it reach tla's row, does it contact A); the top
+pad (3454,3504) and the end of the row y 3547; the row y 4285 between F's and J's pads; the pad
+(3368,5025) against the poly under track F; the two U-shaped polys; the four mid-piece taps and
+hidden breaks or undrawn contacts on the long pieces; taps on the rows where other tracks cross
+them; whether each row drawn to x 3533 reaches it; track D's upper piece and the row y 3202's
+corner.
+It checked, with text maps and profiles throughout and the junctions at 4-7x in three or four
+shots: every metal end, corner and gap (all gaps bare); all 24 contacts (real, none missing on
+any track, the four taps one metal through); the step at (3452,4199) (one poly: orange up to the
+ring in both metal shots, the dark line at x 3430-3436 is the pad-edge line, the same at x 3474);
+the pad (3454,3504) (its poly reaches the row y 3547, which ends at x 3470); the row y 4285
+(continuous); the pad (3368,5025) (apart from the poly under F: green field at x 3340-3350); both
+U polys (corners joined, no contact to G or I, J's pad (3497,3982) 15 px clear); the F and H pads
+on y 3722 and the D and F pads on y 4548 (apart); J's arm over the row y 5371 (no contact); no
+tap under any crossing track; every row drawn to x 3533 reaches x 3540 or beyond; the joins
+into tl3 at y 3334, 3419, 3506, 3722, 3765, 3896, 3982, 4763; nothing undrawn in x 3085-3540.
+One finding, which **changes a connection**:
+1. `tla`'s row `P 3018,4535:3140,4558` (the gate row of the pass transistor at (3046,4546)) was
+   drawn through to track B's pad (3152,4548), which is `clk_tl`. The row ends at x ~3121 as the
+   foot of the poly under track A; the gap x 3122-3138 is field. So the poly under track A,
+   track F's middle piece, track J's lower piece and `tl3_w3982` are not `clk_tl`, and neither
+   is the pass transistor's gate. **Confirmed by the tracer** (`px.py col 3129 4436 4576 5 all`,
+   `px.py row 4547 3096 3172 4 all`, `review-2/j_band1gap.png`: see "The junctions that decide
+   these joins"). Fixed: `tla`'s row cut at x 3122 in a commit of its own (1915f94); in
+   `trace/tl2.txt` the alias `clk_tl` = `tl3_w3982` removed and the net labelled `tl3_w3982`;
+   notes, ports, glossary and `notes/operation.md` corrected. The pass transistor
+   `rcs_cond` -> `rcs_cond_lat` is now gated by `tl3_w3982`.
+Could not be checked: anything east of x 3547 (where J's arm goes); the rows y 3722 and y 4374
+west of x 3085 and x 3072; tla's row between x 3018 and x 3085.
+
+Round 1: one finding, fixed.
 
 ## Not done
 
