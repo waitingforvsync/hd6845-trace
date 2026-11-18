@@ -3,3 +3,6 @@
 2950,5320:3000,6292   power   R3 (VSS) over the foot and the small cluster | one rail with tla's piece above
 2950,6238:3305,6350   power   VSS metal from R3's foot | east along y 6250-6292, south at x 3257-3305 out of the strip
 2895,6312:3533,6342   route   rcs_thin_e, south end | pad (2913,6327) at the end of thin metal E; poly row east out of the strip
+3085,2630:3533,5520   route   bus field east of the first cluster | ten vertical metal positions in pieces, each piece ending on pads with poly rows to tl1's column (west) and tl3's column (east); carries rcs_x1 (the common clear), tl3_w3982 (the gate of the step condition's pass transistor), rcs_a2, the latches' data and enables
+2845,2631:3250,3214   route   tl1_w2637 to tl3's latch | metal east along y 2640, south at x 3241, then the row y 3202 east and south into the data row of tl3's latch
+2817,5362:3533,5467   route   rows under the foot: rcs_x1 (y 5371) and tl1_w4937 (y 5458) | from tl1's column east through the strip; y 5371 has the bottom contact of the bus metal x 3456
