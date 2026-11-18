@@ -6,8 +6,8 @@ merged, or by `tools/claim.py release` if it is abandoned.
 | Field | Value |
 |---|---|
 | Who | dp111 |
-| Claimed | 2026-11-18 03:44 +0000 |
+| Claimed | 2026-11-18 04:28 +0000 |
 | Region | 9000-11000 x 14050-16300 |
-| What | bottom-centre random logic (bc2): survey, then gates working outward from the ports of bc1 and the neighbouring blocks |
+| What | bottom-centre random logic: continuing from the survey on branch bc2 (on claude-opus; Fable allowance exhausted) |
 | Branch | bc2 |
 | Status | tracing |
