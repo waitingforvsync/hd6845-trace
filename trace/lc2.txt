@@ -57,3 +57,61 @@ N P 5585,8432 lc2_w8450
 N P 5615,8215 lc2_w8215
 # the inverter output (NOT data): the cell's thin metal x 5624 to the third pull-down of the upper unit
 N M 5624,8300 lc2_w8532
+
+# ====================================================================
+# Latch C (x 5887-6142, y 8589-9029): latch B turned left-right (master (x,y) -> (8677-x, 13369-y))
+@inst tl1_ub 3352,3999 rot=180 o=2662.5,4685
+@inst tl1_ua 3352,4439 rot=180 o=2662.5,4465
+# the copy's own VSS box at the north end of tl1_ub's stack (diffusion outline in the clean shot,
+# contact ring in both metal shots at about (6048,8566), specks in the clean shot)
+D 6026,8543:6076,8592
+C 6048,8566
+# rails, named by structure only (pull-down boxes on the east one, loads on the west one, as latch B):
+# east rail x 6019-6061, bright in both metal shots from y 8525 to 9025 apart from the dark bands
+# where it steps over poly (px.py rows 8560-9010: dark edge at x 6065 every row)
+M 6040,8530 y9030 w=42
+N M 6040,8830 vss
+# west rail x 5840-5890 (latch B's VCC rail continuing south, unbroken in both metal shots)
+M 5865,8560 y9030 w=50
+N M 5865,8700 vcc
+# VCC: one long contact ring x 5848-5868, y 8736-8826 in both metal shots (the two units' shared box)
+C 5858,8781 s=20x88
+# thin metal x 5928 between the two poly plates, contact rings at (5928,8665) and (5928,8862) in both
+# metal shots, bright column x ~5920-5937 between them in both (latch B's x 5801 mirrored)
+M 5928,8655 y8872 w=12
+C 5928,8665
+C 5928,8862
+# ---- rows east of the cells (x ~6127) to their pads; px.py col 6145 (chip-2 stripped):
+# poly y 8638-8653, 8725-8742, 8812-8828, 8857-8869, 8899-8914; col 6235: y 8721-8742, 8811-8829
+# enable: two pads on the metal x 6160-6175, which runs north out of the latch and ends on the lower pad
+P 6120,8638:6155,8654
+P 6152,8630:6185,8662
+C 6168,8646
+P 6120,8856:6155,8870
+P 6152,8848:6185,8878
+C 6168,8862
+M 6167,8580 y8880 w=16
+N M 6167,8760 lc2_w8646
+# clear: row y 8725-8742 east to the pad (6257,8731) under the metal x ~6248-6266 (drawn over the pad only)
+P 6120,8724:6245,8742
+P 6240,8716:6274,8748
+C 6257,8731
+M 6257,8716 y8746 w=20
+N P 6200,8733 lc2_w8731
+# output Na: row y 8812-8828 east to the pad (6257,8822) under the same-looking metal x ~6248-6266
+# (drawn over the pad only; a separate metal from the clear pad's: field between y ~8750 and ~8800)
+P 6120,8812:6245,8829
+P 6240,8807:6274,8838
+C 6257,8822
+M 6257,8807 y8837 w=20
+N P 6200,8820 lc2_w8822
+# data: row y 8899-8914 east to the pad (6214,8906) on the metal x ~6203-6222 (drawn over the pad only)
+P 6120,8899:6205,8914
+P 6200,8888:6232,8925
+C 6214,8906
+M 6213,8890 y8922 w=20
+N P 6160,8906 lc2_w8906
+# the box poly on Nb (latch B's lc2_w8215): the buried-contact stub at the cells' east edge
+N P 6105,8688 lc2_w8688
+# the inverter output (NOT data): the cell's thin metal x 6106 (latch B's lc2_w8532)
+N M 6106,8960 lc2_w9005
