@@ -3,3 +3,4 @@
 4290,3012:4967,3222   ?logic  NOR at the top of the right cluster | tl4_w3113 = NOR(tl4_w3070, tl4_w3178); output north by the metal x 4408
 4400,3781:4967,3911   ?logic  inverter in the right cluster | tl4_w3808 = NOT tl4_w3850; output north by the metal x 4496
 4250,4410:4967,4645   ?logic  three-input NOR in the right cluster | tl4_w4545 = NOR(tla_w3417, tl4_w4501, tl4_w4590); output south by the metal x 4626
+4347,4645:4967,5000   ?logic  cross-coupled pair in the right cluster | tl4_w4686 = NOT(tl4_w4718 AND tl4_w4590 OR tl4_w4850), tl4_w4850 = NOT(tl4_w4198 OR tl4_w4545 AND tl4_w4935 OR tl4_w4686); tl4_w4850 leaves south on the track x 4581
