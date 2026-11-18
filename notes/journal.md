@@ -1612,3 +1612,11 @@ holds the follow tasks that block the end-of-frame sequence, in order: where R4'
 latch pairs and the field latch path); the driver of `rcs_x1` (beyond `tl5`'s bus line x 5107).
 `bd1`-`bd3` moves up to second. `tl4_w4590`'s driver (in `tl3`'s strip) and `lc2`'s latch D data wait
 for their claims.
+
+## 2026-11-19 00:16  The left bus field second in the queue
+
+On the user's request, `busL` (4780-7550 x 10400-15000) is split from the `busL`, `busB`, `busT` row
+and placed second in the queue, after `eof`. It is wiring with few or no transistors expected; the point
+is the joins between the left array and the central datapath, so that names can be carried across the
+two halves of the die. The row asks for `ports.d/busL.txt` at both edges and points at trap 10 and
+R1-R4 (poly under the tracks). The floor plan's label names the package.
