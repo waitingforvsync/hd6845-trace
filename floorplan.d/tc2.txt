@@ -42,3 +42,24 @@
 7783,5710:7812,6168    route   tc2_r5718 | metal south to the pad (7791,6152)
 7513,6134:7812,6342    route   tc2_r5718 | poly west, south and west to the pad (7530,6324)
 7522,6316:7544,6400    route   tc2_r5718 | metal south
+7894,4445:7909,5640    route   tc1_ns3 | thin metal from the bus field over the row address units (no contact) to its end pad (7899,5633)
+7597,5616:7918,5649    route   tc1_ns3 | poly row y 5632 west from the pad
+7595,5640:7614,6203    route   tc1_ns3 | poly south to the pad (7660,6193)
+7595,6177:7678,6400    route   tc1_ns3 | pad (7660,6193) and its metal going south
+8230,5246:8275,5606    route   tc2_r5589 | pad (8248,5262), metal south to the pad (8246,5589)
+7472,5570:8266,5606    route   tc2_r5589 | poly row y 5589
+7405,5580:7508,6082    route   tc2_r5589 | metal south and west to the pad (7422,6065)
+7368,6048:7440,6300    route   tc2_r5589 | poly west and south to the pad (7384,6282)
+6825,6264:7402,6300    route   tc2_r5589 | metal west along y 6283 to the pad (6840,6282)
+6833,6282:6853,6400    route   tc2_r5589 | poly south
+8170,4668:8352,4867    route   east end of r9m_l1w | the row y 4676 turns south and east to the pad (8246,4716); metal to the pad (8290,4850); poly east to a box at the datapath's west edge
+6387,6012:6423,6400    route   tc2_m6404 | fourth line of the nest: metal from the west, pad (6404,6107), poly south
+6795,6030:6848,6155    power   VCC | the XOR cells' VCC rail turning east
+6795,6105:7752,6155    power   VCC band | wide metal y 6105-6155; no contact under it here
+7695,6105:7752,6400    power   VCC | the band's south leg
+6577,6100:6623,6243    power   ground | the XOR cells' west ground rail meeting the band
+6400,6198:7620,6243    power   ground band | wide metal y 6198-6243; no contact under it here
+7572,6198:7620,6400    power   ground | the band's south leg
+6745,5237:6840,5405    power   VCC link | from the bit-0 inverters' VCC rail to the XOR cells' VCC rail
+6800,5685:6840,5765    power   VCC | the XOR cells' VCC rail between its two cells
+6881,5285:7012,5440    power   ground link | from the bit-0 inverters' east ground rail to the XOR cells' east ground rail
