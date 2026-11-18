@@ -5,6 +5,7 @@
 # metal tracks east of it: T0 x 5233, T1 5277 (res_b, trunks), T2 5320 (lpstb_b, trunks),
 # T3 5364, T4 5407, T5 5451, T6 5494, T7 5538, T8 5581, T9 5625, T10 5667.
 @requires tl1
+@requires tl4                      # for its rail RB and the VCC contacts the two columns share
 @block tl5
 @w M=12 P=20
 
@@ -71,11 +72,11 @@ P 5474,3705:5514,3740
 C 5494,3722
 N M 5494,3610 tl5_w3505
 # the three-input gate's node: its box poly runs east along y 3541-3560 to the pad (5580,3550),
-# the south end of a piece of T8 (bare ground south of the pad); drawn to y 3535 only
+# the south end of the piece of T8 from the NOR's gate 2 pad (5580,3290) (bare ground south of
+# the pad); that metal is drawn with the NOR
 P 5205,3541:5566,3560
 P 5560,3533:5602,3568
 C 5580,3550
-M 5581,3535 y3562
 N P 5400,3550 tl5_w3550
 # clear: row y 3627-3646 from the pad (5233,3636) on T0, which runs on through the pad both ways
 P 5195,3627:5220,3646
@@ -113,12 +114,11 @@ P 5195,4104:5220,4123
 P 5212,4096:5254,4131
 C 5233,4113
 M 5233,3622 y4127
-# output: row y 4147-4167 east to the pad (5622,4160), the south end of a piece of T9 (bare
-# ground south); drawn to y 4145 only
+# output: row y 4147-4167 east to the pad (5622,4160), the south end of T9 (bare ground south),
+# which comes from the NOR's gate 1 pad (5580,3200): drawn with the NOR
 P 5195,4147:5608,4167
 P 5602,4142:5644,4178
 C 5622,4160
-M 5625,4145 y4172
 N P 5400,4157 tl5_w4160
 N P 5120,3842 tl5_w3841
 
@@ -182,3 +182,58 @@ N M 5494,4250 tl5_w4590
 P 5195,4623:5683,4643
 N P 5400,4633 tl5_w4633
 N P 5120,4319 tl5_w4318
+
+# ====================================================================
+# The NOR at y 3142-3352: tl1's NOR (2540-2842 x 3558-3742, plain items there) mirrored and moved
+# (x' = 7741 - x, y' = y - 390; findcell on the clean shot: 2359,-390 mx=2691, score 0.74).
+#   tl5_w3245 = NOR(tl5_w4160, tl5_w3550)
+# Overlay nor_a.png (4x clean), nor_c2.png (4x chip-2 stripped: poly orange), n_a.png, n_m.png
+# (2.75x clean and metal); pads pn1.png, pn2.png (4x, two shots); profiles in the notes.
+# Column east of RC, x 5150-5192, in the open, between the rail's VSS boxes above (contact
+# (5112,3168)) and below (contact (5119,3332)), an arm onto each
+D 5097,3148:5140,3195                 # VSS box above
+C 5112,3168
+D 5130,3168:5192,3188                 # top arm
+D 5150,3168:5192,3330                 # the column
+D 5130,3310:5192,3330                 # bottom arm
+D 5089,3307:5143,3352                 # VSS box below
+C 5119,3332
+# output: buried contact (concentric box) on the node between the gates, poly east along
+# y 3235-3255 to the pad (5452,3245), the south end of a piece of T5 (bare ground south)
+B 5164,3230:5194,3262
+P 5166,3235:5438,3255
+P 5432,3228:5474,3263
+C 5452,3245
+M 5451,3257 y2925                     # T5 north of the pad: drawn as far as looked at (r1_a.png)
+N P 5300,3245 tl5_w3245
+# gate 1: row y 3192-3212 from the pad (5580,3200). The pad's metal is an arm east (y 3194-3210)
+# to the north end of T9 (x 5625), which runs south without a pad to latch b's output pad
+# (5622,4160): one metal (textmap.py 5556 3176 5644 3240 3: 6 px of ring between the pad's
+# centre and the arm; the clean shot is pink, never open, from the pad's east edge to T9)
+P 5143,3192:5566,3212
+P 5560,3184:5602,3218
+C 5580,3200
+M 5580,3202 x5625 y4172
+# gate 2: row y 3278-3298 from the pad (5580,3290), the north end of the piece of T8 that ends
+# on latch a's pad (5580,3550); the row crosses T5's position in the open (no metal there)
+P 5143,3278:5566,3298
+P 5560,3273:5602,3308
+C 5580,3290
+M 5581,3278 y3562
+# load: strip west under RC to a box under the thin metal x 5028-5046, strip under the plate
+# (x 4967-5020; its edges are the lines across the plate at y 3238 and y 3265 in the chip-2
+# stripped shot) to the VCC box under RB (two rings, (4932,3254) and (4932,3305)); tail and
+# buried-contact tie (ringed box at the tab's end in both stripped shots, as in the master)
+D 5042,3241:5172,3255
+D 5028,3244:5066,3266
+D 5034,3262:5050,3308
+D 4956,3241:5036,3264
+P 4967,3218:5020,3312
+P 5012,3288:5052,3310
+B 5034,3285:5058,3310
+D 4910,3232:4963,3332
+C 4932,3254
+C 4932,3305
+# rails over the unit (RC's top end is at about y 3000: not drawn north of y 3140)
+M 5104,3140 y3335 w=46
+M 4928,3232 y3335 w=44
