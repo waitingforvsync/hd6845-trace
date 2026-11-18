@@ -22,6 +22,9 @@ tl3_e5240   P  4250,5403-5422  ?    the row of the pad (4279,5413), the south en
 tl4_w5455   P  4250,5447-5467  out  the strong inverter's row, on west
 tcw_a       P  4250,5621-5641  ?    the row y 5631 (tl5_w5631), across the whole strip; on west to tl3's pad (4104,5633) (seen, tl3's to draw)
 tc1_o3527   P  4250,5708-5727  ?    the row of the pad (4497,5720), the south end of the jumper x 4497: on west
+rcs_x1      M  4250,5889-5901  in   tl3's metal of its latch C's clear (tl3_e4808), east to the pad (4629,5891)
+tl5_w5936   M  4250,5933-5945  ?    the metal of the pad (4583,5936), on west
+tl5_w4590   P  4250,6313-6333  ?    the row of the pad (4929,6323), on west
 
 # East side (x 4967)
 tl4_w2512   P  4967,2542-2560  ?    the row of the pad (4908,2551), the east end of bus line 1
@@ -38,6 +41,16 @@ tcw_a       P  4967,5621-5641  ?    the row y 5631 (tl5_w5631), across the whole
 tl4_w4590   P  4967,5665-5684  ?    the row of the pad (4411,5676) at the south end of the track x 4366 (tl5_w5674)
 rcs_mv      P  4967,5708-5728  out  the row y 5718's east piece, from the pad (4410,5764) (tl5_w5717)
 tl4_w3850   P  4967,5752-5772  in   the row of the pad (4626,5762) at the south end of the metal x 4538/4583 (tl5_w5761)
+rcs_x1      P  4967,5880-5900  out  the row of the pad (4629,5891): tl5_w5890, tl5's bus line x 5107
+tl5_w5936   P  4967,5926-5946  ?    the row of the pad (4583,5936): tl5's bus line x 5063
+tl5_w4590   M  4967,5977-5991  ?    tl5's thin metal (the clear of its latch c), in along y 5984
+vss         M  4967,5882-5942  -    tl5's rail RC, turned west; it turns south at x 4841-4888
 
 # North side (y 2500)
 tl4_w4068   P  4534-4550,2500  ?    the poly column north of pad E (4539,2768), on north under the wide band to y ~2165
+
+# South side (y 6350)
+tl5_w4590   M  4922-4936,6350  ?    the thin metal x 4929, on south past its pad (4929,6323)
+vss         M  4667-4715,6350  -    RA's leg, on south
+vcc         M  4754-4801,6350  -    RB's leg, on south
+vss         M  4841-4888,6350  -    RC's leg, on south
