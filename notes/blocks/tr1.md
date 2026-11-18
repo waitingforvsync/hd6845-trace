@@ -4,7 +4,7 @@
 
 Inverter A, gates B and C drawn (2026-11-18, traced on claude-opus): `trace/tr1.txt`, 6 transistors,
 extraction 0 errors 0 warnings (`TRACE=tr1` and full). Gate B (x 12065-12200) read at 3x in three
-shots, its extra box not drawn. Gate C (x 12195-12330) read at 2.5x and its east end at 5x; the
+shots, its extra box (isolated, read at 5x) not drawn. Gate C (x 12195-12330) read at 2.5x and its east end at 5x; the
 diffusion east of its source contact (next gate's) not drawn. All three load ties are `?`. Survey views:
 `cache/scratch/tr1/survey.png` (0.57x), `row_11900.png`, `row_12650.png`, `row_13400.png`
 (1.65x), `cellA*.png`; drawing views `a.png` (3.5x, clean / chip-2 stripped / chip-2 metal),
@@ -40,9 +40,14 @@ Gate B, x 12065-12200 (drawn by hand from `b5.png`, 3x clean / chip-2 stripped /
 B's extra box: 12168-12195 x 3850-3905, east of the tie lobe and separated from it by a dark edge
 at x 12162-12170 (`px.py row 3865 12120 12200 4`: bright x 12172-12192 in both shots, dark
 x 12136-12148 at the tie and 12164-12168 at the edge); clean shot shows a dot at (12183,3880).
-It is NOT drawn: no layer or contact was settled for it. It touches neither the load strip nor the
-pull-down box as seen at 3x; if it is a diffusion box with a contact to the thin metal or the lower
-rail, it belongs to the next gate east and does not change B.
+At 5x (`b_box.png`, clean / chip-2 stripped / metal) it is an L: x 12168-12195 x 3850-3900 plus a
+foot west under the tie lobe, x 12140-12195 x 3880-3900. It is flat and featureless in all three
+shots (`px.py pt`: clean 162,146,102; chip-2 154,150,91; metal 162,136,84, the same at (12160,3892)),
+outlined by a dark edge on every side, which separates it from the tie lobe, the load poly's end and
+the drain box (y 3900-3905). The clean-shot dot at (12183,3880) is about 5 px and only in chip 1
+(at r=2 it is not darker than the box: 152 against 162); contacts here are about 15 px and show
+in every shot (C's at (12305,3756): clean 50), so it is not a contact. Layer unsettled (an isolated
+diffusion or a field opening); either way it joins nothing of B, so it is NOT drawn. Open.
 
 Gate C, x 12195-12330 (drawn by hand from `c5.png` 2.5x and `c_east.png` 5x, clean / chip-2 stripped / metal; overlay `c_tr.png`; `tr1_w12220 = NOT tr1_w12265`; DEPENDS on its own two `?` tie items):
 
@@ -87,7 +92,7 @@ poly at x 11960-11975 north of y 3650 and the poly x 12000 north of y 3650 (not 
 
 ## Not done
 
-Gate B is drawn (its extra box 12168-12195 x 3850-3905 is not: read it at 5x). Gate C is drawn. Resume with the next gate east (x 12318-12450: shares C's VSS contact (12305,3756); its poly x 12340-12365 and the diffusion turning south at x 12318-12340),
+Gate B is drawn (its extra box 12140-12195 x 3850-3900 is not: read at 5x, isolated, layer unsettled). Gate C is drawn. Resume with the next gate east (x 12318-12450: shares C's VSS contact (12305,3756); its poly x 12340-12365 and the diffusion turning south at x 12318-12340),
 then A's copies at +130 and +260 (read each copy's inputs on the photo), then follow
 the two polys north into the track field; then the gates east of x 12330, the track
 field's ends and contacts, the thin metal y 3827-3839, the rails' supplies, and the
