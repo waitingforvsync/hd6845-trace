@@ -7,9 +7,10 @@ image of the first cluster's west column: `tl1`'s units, here on the rails RC an
 
 ## Status
 
-2026-11-18 01:53 +0000. **Partial: three latches and a NOR** (36 transistors). The latches are mirrored copies
-of `tl1`'s cells `tl1_ua` and `tl1_ub`, the NOR a mirrored copy of `tl1`'s NOR; every row that
-feeds or leaves them is read here. Full extraction: 0 errors, 0 warnings.
+2026-11-18 01:56 +0000. **Partial: three latches, a NOR and two inverters** (40 transistors). The latches are
+mirrored copies of `tl1`'s cells `tl1_ua` and `tl1_ub`, the NOR and the inverters mirrored copies
+of `tl1`'s NOR and inverter; every row that feeds or leaves them is read here. Full extraction:
+0 errors, 0 warnings.
 
 ```
 tl5_w3245 = NOR( tl5_w4160, tl5_w3550 )                              firm
@@ -22,6 +23,8 @@ tl5_w4160 = NOT( tl5_w3636  OR  tl5_w3982 AND tl5_w3841  OR  tl5_w4027 )   marke
 tl5_w4318 = NOT tl5_w4395                                            firm
 tl5_w4503 = NOT( tl5_w4395 AND tl5_w4458  OR  tl5_w4633 )            marked
 tl5_w4633 = NOT( tl5_w4590  OR  tl5_w4458 AND tl5_w4318  OR  tl5_w4503 )   marked
+tl5_w4807 = NOT tl5_w4850                                            marked: the load's tie (`?`, as in tl1)
+tl5_w4937 = NOT tl5_w3982                                            marked likewise
 ```
 
 - **Latch a** (y 3343-3803): open while `tl5_w3505` is high, takes `tl5_w3461`, cleared
@@ -35,6 +38,10 @@ tl5_w4633 = NOT( tl5_w4590  OR  tl5_w4458 AND tl5_w4318  OR  tl5_w4503 )   marke
 - **The NOR** (y 3142-3352) takes latch b's output (`tl5_w4160`, by the track T9) and latch a's
   inverse output (`tl5_w3550`, by T8): `tl5_w3245` is high only while b's output is low and a's
   output is high. It leaves north on T5.
+
+- **Two inverters** below latch c: `tl5_w4807` = NOT `tl5_w4850` (input and output both on rows
+  that leave the strip east) and `tl5_w4937` = NOT `tl5_w3982`, the inverse of latch b's enable
+  (T7 ends on its gate pad), out south on a piece of T4.
 
 So a and b are two latches in series with one clear, the build of the two latches in front of
 `rcs_e4` in the first cluster (`notes/blocks/tl1.md`), and the NOR picks out the state "a set,
@@ -64,7 +71,7 @@ pieces; a piece ends on a pad or plainly.
 | x 4901-5203, y 3343-3803 | **latch a** (findcell: `tl1_ua` 2361,-997 mx 0.70; `tl1_ub` 2361,-998 mx 0.78) | traced |
 | x 4901-5203, y 3820-4280 | **latch b** (`tl1_ua` 2361,-520 0.71; `tl1_ub` 2361,-521 0.74) | traced |
 | x 4901-5203, y 4297-4757 | **latch c** (`tl1_ua` 2361,-43 0.75; `tl1_ub` 2361,-43 0.75) | traced |
-| x 4967-5210, y 4780-5040 | two units (findcell: `tl1`'s inverter at 2373,565 mx 0.78 and 2373,695 mx 0.77) | not drawn |
+| x 4951-5213, y 4786-4912 and y 4916-5042 | **two inverters** (findcell: `tl1`'s inverter at 2373,565 mx 0.78 and 2373,695 mx 0.77) | traced |
 | x 4967-5210, y 5040-5330 | the column's foot (`sv2.png`): RC runs on to about y 5300; a pad (5040,5237) with a row east to a pad (5407,5237) | not drawn |
 | x 5200-5683, y 2540-5800 | the bus field: rows of the column to pads on the tracks (the latches' are drawn), rows that pass east out of the strip, pads of the east neighbour's rows (x 5560-5683, y 4380-4530) | the latches' rows and the track pieces between their pads drawn |
 | x 4967-5683, y 5330-5800 | rows under the foot (y 5440-5760), `bw`'s row y 5585 among them; pads at x 5490-5560 | not drawn |
@@ -141,6 +148,25 @@ Widths: both gate rows end west at RC's east edge (x 5143; field under RC betwee
 the strip: pink on `nor_a.png`) and cross the whole column (W 42); east of the column they are
 over field to their pads.
 
+### The two inverters at y 4786-4912 and y 4916-5042 (traced 2026-11-18 01:56 +0000: `tl1`'s inverter, mirrored)
+
+`tl1`'s inverter (2535-2835 x 4215-4345, a "rail gate": the pull-down lies under the rail between
+the node and the VSS box) mirrored and moved (x' = 7743 - x, y' = y + 565 and y + 695), as a
+cell `tl5_inv` placed twice, laid over the clean shot and the chip-2 stripped shot at 4x
+(`inv_a.png`, `inv_c2.png`): node box east of RC with its buried contact, the strip west under
+RC, gate band, VSS box, plate, tail and tie box sit on the features in both units.
+
+| Item | Inverter 1 | Inverter 2 | Seen |
+|---|---|---|---|
+| gate | row y 4840-4858 from the east: under every track without a pad, out of the strip (`tl5_w4850`) | row y 4970-4988 from the pad (5538,4980), the south end of T7 (`tl5_w3982`, latch b's enable); the row runs on east through the pad, out of the strip | `rd_a.png` 2.35x; `pi1.png` 4x (the pads; the rows at x 5610-5690; bare ground south of the T7 pad) |
+| the gate under RC | `px.py row 4849 5046 5216 6 acid1b,acid`: west end at x 5075, poly over a channel (229/166/120) x 5082-5136, open poly east of RC | `row 4979`: the same | `px.py col 5112 4800 4916 4`: node (tan) y 4820-4836, gate y 4844-4856, VSS box from y 4868 |
+| east of RC the gate row lies on field | no diffusion edge across the band east of x 5145 in the chip-2 stripped shot; the node box above ends at y 4833 | the same | `inv_c2.png` |
+| output | buried contact on the node box (5161-5205, 4794-4830), poly y 4798-4818 east out of the strip (`tl5_w4807`) | poly y 4928-4948 east to the pad (5407,4937), the north end of a piece of T4 (`tl5_w4937`) | `rd_a.png`, `pi1.png` |
+| both rows of inverter 1 cross T4's position in the open (T4 has no metal y 4690-4925) | two unbroken orange bands in the metal shot | | `pi2.png` |
+| VSS box | (5091-5145, 4860-4910), contact (5114,4884) | 130 lower, contact (5116,5013) | `pi2.png`: rings |
+| VCC box | `tl4`'s (4908-4960, 4805-4878), its contact | of its own (4912-4962, 4935-4995), one ring (4918-4945, 4940-4985) | `pi2.png`, `inv_c2.png` |
+| load tie | the master's `?` items: a ringed box (5000-5040, 4855-4885) at the tab's end | the same | `inv_c2.png`; not measured |
+
 ## Ports
 
 | Name | Layer | Where | Direction | What |
@@ -149,6 +175,9 @@ over field to their pads.
 | `tl5_w4590` | poly | (5683, 3862-3882) | ? | latch c's clear: the row from the north pad of T6's lower piece |
 | `tl5_w4503` | poly | (5683, 4580-4600) | out | latch c's inverse output |
 | `tl5_w4633` | poly | (5683, 4623-4643) | out | latch c's output |
+| `tl5_w4807` | poly | (5683, 4798-4818) | out | inverter 1's output |
+| `tl5_w4850` | poly | (5683, 4840-4858) | in | inverter 1's gate |
+| `tl5_w3982` | poly | (5683, 4970-4988) | ? | latch b's enable: the row of T7's south pad (5538,4980) runs on east |
 
 ## Ambiguities
 
@@ -163,13 +192,13 @@ over field to their pads.
 - The tracks beyond the drawn pieces: T5's north piece north of (5451,2925) (`tl5_w3245`; a pad
   about (5452,2900) and a row west), T5 south of (5451,3482) (`tl5_w3461`), T6 north of
   (5494,3490) (`tl5_w3505`; to the pad (5494,2985) and a row west along y 2985), T0 beyond y 3622-4127
-  (`tl5_w3636`), T7 beyond y 3968-4214 (`tl5_w3982`; `follow.py`: north to a corner (5532,2772)
-  and west to a pad (5452,2767); south to y 4984), T10 north of (5667,4380) (`tl5_w4395`; `follow.py`: to a corner (5677,3660) and
+  (`tl5_w3636`), T7 north of (5538,3968) (`tl5_w3982`; `follow.py`: north to a corner (5532,2772)
+  and west to a pad (5452,2767)), T4's south piece south of (5407,4950) (`tl5_w4937`), T10 north of (5667,4380) (`tl5_w4395`; `follow.py`: to a corner (5677,3660) and
   east out of the strip at y 3657), T4 north of (5407,4444) (`tl5_w4458`), T6's lower piece south
   of (5494,4604) (`tl5_w4590`).
 - The thin metal x 5028-5046 over the column ("thin W" of the master): `follow.py 5035 3450 N`
   runs to (5037,2680), south it is dim over the tie boxes. Not drawn; its contacts are not found.
-- The rest of the column: the units at y 2920-3142 and y 4780-5330 (inventory).
+- The rest of the column: the unit at y 2920-3142 and the foot y 5045-5330 (inventory).
 - The rest of the bus field, the rows north of y 2920 and under the foot.
 
 ## Review

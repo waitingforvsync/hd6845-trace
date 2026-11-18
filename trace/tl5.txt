@@ -98,14 +98,14 @@ P 5195,3928:5566,3947
 P 5560,3921:5602,3956
 C 5580,3938
 # enable: T7 with two pads, (5538,3982) and (5538,4200), and a row from each; the metal runs on
-# through both pads, north and south
+# through both pads, north (not drawn) and south
 P 5195,3971:5524,3990
 P 5518,3965:5560,4000
 C 5538,3982
 P 5195,4189:5524,4208
 P 5518,4183:5560,4218
 C 5538,4200
-M 5538,3968 y4214
+M 5538,3968 y4992                     # south of the lower pad it runs on, without a pad, to the pad (5538,4980): the gate of the inverter at y 4910-5040 (below)
 N M 5538,4090 tl5_w3982
 # the three-input gate's node: here the box poly is a stub with a closed round end at x 5212
 N P 5200,4027 tl5_w4027
@@ -237,3 +237,53 @@ C 4932,3305
 # rails over the unit (RC's top end is at about y 3000: not drawn north of y 3140)
 M 5104,3140 y3335 w=46
 M 4928,3232 y3335 w=44
+
+# ====================================================================
+# Two inverters below latch c, y 4786-4912 and y 4916-5042: tl1's inverter (2535-2835 x 4215-4345,
+# a "rail gate": plain items there) mirrored and moved (x' = 7743 - x, y' = y + 565 and y + 695;
+# findcell on the clean shot: 2373,565 mx=2685 score 0.78, 2373,695 mx=2685 score 0.77).
+#   tl5_w4807 = NOT tl5_w4850
+#   tl5_w4937 = NOT tl5_w3982
+# Overlays inv_a.png (4x clean), inv_c2.png (4x chip-2 stripped); rows rd_a.png (2.35x clean);
+# pads and contacts pi1.png, pi2.png (4x, two shots). The ties of the plates' tabs are the
+# master's uncertain items.
+@cell tl5_inv
+D 5088,4813:5145,4864                 # node under RC (y 4813-4838), the gate, down to the VSS box
+D 5091,4860:5145,4910                 # VSS box
+C 5114,4884
+D 5141,4796:5203,4833                 # node, the part east of the rail, with the buried contact
+B 5161,4794:5205,4830
+P 5165,4798:5213,4818                 # output poly, on east
+P 5073,4840:5213,4858                 # gate: across the rail (rounded west end at x 5073), on east
+D 5018,4811:5093,4834                 # load: strip west under RC and under the thin metal x 5028-5046
+D 4951,4806:5023,4831                 # under the plate to the VCC box
+D 5024,4831:5044,4882                 # tail
+P 4967,4786:5021,4858                 # plate
+?P 4991,4854:5027,4886                # tab and tie (ringed box 5000-5040, 4855-4885)
+?B 4989,4852:5037,4888
+@end
+@inst tl5_inv 0,130 tag=i2
+# inverter 1 (y 4786-4912): its VCC box is tl4's (4908-4960, 4805-4878, contact (4928,4838)).
+# Output: poly y 4798-4818 east under every track, out of the strip; gate: row y 4840-4858 from
+# the east, likewise without a pad in the strip. Both cross T4's position in the open.
+P 5205,4798:5683,4818
+N P 5400,4808 tl5_w4807
+P 5205,4840:5683,4858
+N P 5400,4849 tl5_w4850
+# inverter 2 (y 4916-5042): VCC box of its own under RB, one ring (4918-4945, 4940-4985)
+D 4912,4935:4962,4995
+C 4931,4962 s=24x44
+# output: poly y 4928-4948 east to the pad (5407,4937), the north end of a piece of T4 (bare
+# ground north); drawn to y 4950 only
+P 5205,4928:5393,4948
+P 5387,4920:5429,4955
+C 5407,4937
+M 5407,4925 y4950
+N P 5300,4938 tl5_w4937
+# gate: row y 4970-4988 from the pad (5538,4980), the south end of T7 (latch b's enable); the row
+# runs on east through the pad and out of the strip
+P 5205,4970:5683,4988
+P 5518,4963:5560,4998
+C 5538,4980
+# RC over the two units
+M 5104,4790 y5045 w=46

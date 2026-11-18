@@ -3,3 +3,5 @@
 4967,3343:5600,3803   ?logic  latch a east of RB | tl5_w3680 = NOT(tl5_w3636 OR tl5_w3505 AND NOT tl5_w3461 OR tl5_w3550): open while tl5_w3505 is high, data tl5_w3461, cleared by tl5_w3636; a mirrored copy of tl1's latch
 4967,3820:5645,4280   ?logic  latch b east of RB | tl5_w4160: open while tl5_w3982 is high, data latch a's output tl5_w3680, cleared by tl5_w3636
 4967,4297:5683,4757   ?logic  latch c east of RB | tl5_w4633: open while tl5_w4458 is high, data tl5_w4395, cleared by tl5_w4590; both outputs leave east
+4951,4786:5683,4912   ?logic  inverter east of RB | tl5_w4807 = NOT tl5_w4850; both on rows that leave east
+4951,4916:5683,5042   ?logic  inverter east of RB | tl5_w4937 = NOT tl5_w3982 (latch b's enable); out south on the track x 5407
