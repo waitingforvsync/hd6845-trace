@@ -1152,6 +1152,31 @@ them); the thin metal x 3948-3962 beyond these crossings; the inside of gate mu'
 
 Round 1: one finding that changes a connection, fixed; one geometry finding, fixed.
 
+**Round 2, fix check** (2026-11-18 18:07 +0000, a fresh Fable 5.2 agent, images in
+`cache/scratch/tl3/review-11/`; changes since 9754c80 in `trace/tl3.txt` and the split line of
+`trace/tla.txt`). Told what the three changes were for and to be hard on the first: the stripe's
+continuity with the load strip and the band, the band as diffusion (not poly) and unbroken to
+east of the rail, whether x 4055-4090, y 3990-4060 is field or a colourless diffusion wire,
+what is left on `rcs_in1`'s node, whether the transistor under gate `rcs_mu` is there.
+
+It found the three fixes right as drawn: the stripe x 3954-3970 protected tan with edges at
+x 3953 and 3971 and no edge across at y 3864 or y 3966 in any shot, ending at y 3984; the band
+diffusion and not poly (185/173/128 against gate mv under the same rail, 240/176/130), both its
+edge lines unbroken from the stripe to east of the rail, the dark bar at x 3976 the gap's
+artefact (the same on the load strip at y 3850, absent in both metal shots), no gate across
+it, field between it and the VSS box above and everything below; x 4055-4090, y 3990-4060
+field (flat in four shots, no inner edges, edge lines across at y 3986 and y 4064); no contact
+of either thin metal onto the node; findings 2 and 3 as drawn. `sameconn.py 9754c80`, the
+package alone and every file: only the intended differences.
+
+No finding on the changes. Two observations on `tla`'s older geometry, not checked by me and
+passed on in the handoff (same nets either way; `trace/tla.txt` is not changed for them):
+gate `rcs_mu`'s channel is x ~4072-4108, not 4052-4110, and the piece below it an L; the
+pull-down of `rcs_in1` under gate `rcs_mv` is under the rail, and east of the rail below that
+gate reads field, so `D 4052,4066:4090,4135` should stop at y ~4096.
+
+Round 2: no findings.
+
 ## Not done
 
 - Next: the foot of the cluster (y 5300-5560), with `tl3_e4808`'s row and the pad (3953,5459)
