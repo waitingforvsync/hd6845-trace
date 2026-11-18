@@ -70,7 +70,7 @@ M 6820,5400 y5690 w=40
 M 6820,5760 y6040 w=40                # (the rail widens east between the two cells: not drawn)
 N M 6820,5900 vcc
 N M 6820,5450 vcc
-M 7003,5400 y6110 w=50
+M 7003,5400 y6037 w=50                 # ends at y 6037 (was drawn to y 6110): both metal shots show the rounded end and bare ground south of it; the clean shot is open field from y 6042 (tc2 run 4, cache/scratch/tc2/s_fldE.png 3.6x, s_A_w.png 4x)
 N M 7003,5500 vss
 D 6967,5458:7030,5660
 D 6949,5622:6990,5658
