@@ -235,7 +235,7 @@ B 5034,3285:5058,3310
 D 4910,3232:4963,3332
 C 4932,3254
 C 4932,3305
-# rails over the unit (RC's top end is at about y 3000: not drawn north of y 3140)
+# rails over the unit (RC is drawn from y 3140; it runs on north into an undrawn metal at y 2200-2500: vss by structure only)
 M 5104,3140 y3335 w=46
 M 4928,3232 y3335 w=44
 

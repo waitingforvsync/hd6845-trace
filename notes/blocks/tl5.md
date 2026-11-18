@@ -137,7 +137,7 @@ beyond is bare in the metal shot and khaki (never under metal) in the clean shot
 that leave east were looked at at x 5610-5690 (`pc3.png`): constant width, no pad.
 
 **Rails.** RC is drawn y 3140-4790 (looked at on `n_m.png`, `a_m.png` and the overlays; its
-top end is at about y 3000, and it runs on south) and is named `vss` **from structure** (it
+drawn from y 3140; it runs on north unbroken into a large undrawn metal at y 2200-2500, and on south) and is named `vss` **from structure** (it
 carries the pull-downs' boxes); RB is `tl4`'s (drawn here only y 3232-3772, where `tl4` has not
 drawn it).
 
