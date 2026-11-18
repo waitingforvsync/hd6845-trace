@@ -771,7 +771,7 @@ P 4090,2981:4110,2999
 # here) under a plate x 3884-3938, y 2968-3030 to a VCC box (x 3828-3880, y 2982-3042) with a
 # contact ring about 20 x 30 px at (3846,3010) (e1_a.png; the strip's edges cross the plate at
 # y 2982 and y 3010 in the chip-2 metal shot)
-D 3876,2984:4016,3008
+D 3876,2988:4016,3010                 # y 2988-3010 (review 10: px.py col 3978 2974 3018 3, col 3910 2974 3018 3; first drawn 2984-3008)
 P 3884,2968:3938,3030
 D 3828,2982:3880,3042
 C 3846,3010 s=20x30
@@ -795,7 +795,7 @@ P 3916,3026:3938,3052
 ?B 3912,3032:3944,3058
 # ====================================================================
 # The load of tla's unit rcs_mn3852 (run 8): with it the extraction prints
-#   rcs_mn3852 = NOR(tl3_e3712, rcs_in1)
+#   rcs_mn3852 = NOR(tl3_e3712, rcs_in1, rcs_mu)     (the third input: the branch at the end of this section)
 # The VCC diffusion under the VCC rail is one box from NOR 1's (cell tl3_nor, y 3757-3797) down
 # to y ~3866, with a second contact ring at (3846,3838) (mn_a.png, 3.0x three shots: ring
 # x 3835-3858, y 3824-3852 in the metal shot; px.py row 3856 3816 4110 4)
@@ -810,9 +810,21 @@ D 3876,3838:3992,3863
 D 3986,3846:4056,3862
 P 3882,3788:3938,3882
 # the tie: a heavy box under the thin metal at (3945-3972, 3784-3815), beside the plate's top
-# right corner, and diffusion colour under the thin metal from it down to the strip (mn_tie.png,
-# 4.3x three shots; px.py row 3826 3936 3992 3). The same colour goes on south of the strip under
-# the metal's east edge, so it does not show a tail. Read from outlines only: uncertain.
-?D 3948,3794:3966,3842
+# right corner, and a diffusion under the thin metal from it down to the strip (mn_tie.png,
+# 4.3x three shots; px.py row 3826 3936 3992 3). The box and the plate's tab into it are read
+# from outlines only: uncertain.
+?D 3948,3794:3966,3820
 ?P 3930,3786:3962,3802
 ?B 3944,3784:3972,3814
+# THE DIFFUSION UNDER THE THIN METAL IS REAL AND GOES ON SOUTH (review 10, confirmed): px.py col 3962
+# 3832 3996 4 reads tan 196-205/168-181/129-141 in the clean shot without a break from y 3832 to
+# y 3976 (no edge at the strip's lower side, y 3864) and pink field from y 3992; its edges are
+# at x 3952 and x 3972 (px.py row 3900 3936 3992 3). North of the strip it is the tie's tail.
+# South of it, it turns east at y 3966-3984 and runs as a band under the whole VSS rail (px.py
+# row 3976 3940 4096 4: tan x 3984-4048 where y 4020 is pink; edge lines across the rail at
+# y 3966 and y 3984 in both metal shots: textmap 3940 3934 4124 4064 4 --acid; fx_a.png, 3.4x)
+# onto the diffusion below tla's gate rcs_mu (x 4052-4092, y 3955-3984). So that transistor is a
+# THIRD PULL-DOWN OF rcs_mn3852:   rcs_mn3852 = NOR(tl3_e3712, rcs_in1, rcs_mu)
+D 3954,3816:3970,3842                 # the tail north of the strip, up to the tie's box
+D 3954,3860:3970,3984                 # south of the strip, under the thin metal
+D 3954,3966:4056,3984                 # the band: through the gap and under the rail, onto tla's D 4052,3955:4092,3984

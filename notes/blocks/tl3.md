@@ -40,8 +40,10 @@ Traced, extracting (69 transistors of its own, 0 errors), the west column and pi
 - **the top unit E1 of the east column, y 2950-3090** (2): an inverter under the rail whose load
   plate is one poly with the row of `tl3_w3373`: **it drives latch A's enable** (run 8,
   2026-11-18 17:16 +0000).
-- **the load of `tla`'s unit `rcs_mn3852`** (1), so that the extraction now prints that unit's
-  equation (run 8).
+- **the load of `tla`'s unit `rcs_mn3852`** (1), **and a third pull-down of that unit**: a
+  diffusion branch from its load strip leads to the transistor under gate `rcs_mu`, which
+  `tla` had on `rcs_in1`. `rcs_mn3852` = NOR(`tl3_e3712`, `rcs_in1`, `rcs_mu`) and `rcs_in1` =
+  NOT `rcs_mv` (run 8; found by its review; one line of `trace/tla.txt` corrected).
 
 Everything else in the strip is surveyed only (Inventory).
 
@@ -477,9 +479,37 @@ Overlay `rg_ov.png` (2.9x, metal and clean shot).
 
 ### The load of `rcs_mn3852`'s unit (y 3788-3882): traced; its tie uncertain
 
-    rcs_mn3852 = NOR(tl3_e3712, rcs_in1)      (now printed by the extraction)
+    rcs_mn3852 = NOR(tl3_e3712, rcs_in1, rcs_mu)      (now printed by the extraction)
+    rcs_in1    = NOT rcs_mv                           (was NOR(rcs_mu, rcs_mv) in `tla`'s drawing)
 
 `tla` drew this unit's node and lower gate, run 7 its upper gate; the load was drawn by nobody.
+
+**The third pull-down (found by review 10, confirmed by the tracer).** The diffusion under the
+thin metal x 3948-3962 beside the plate is real and does not end at the load strip:
+
+- `px.py col 3962 3832 3996 4`: the clean shot is tan (196-205/168-181/129-141) without a break
+  from y 3832 to y 3976, with no edge where the strip's lower side would cross it (y 3864),
+  and pink field from y 3992. Its edges are at x 3952 and x 3972 (`px.py row 3900 3936 3992 3`).
+  (I had first taken this stripe for an effect of the metal's edge, because it goes on south
+  of the strip: that was the error.)
+- At y 3966-3984 it turns east as a band through the gap and **under the whole VSS rail**:
+  `px.py row 3976 3940 4096 4` reads tan from x 3984 to x 4048 where the same row at y 4020 is
+  pink, both metal shots have edge lines right across the rail at y 3966 and y 3984 (`textmap.py
+  3940 3934 4124 4064 4 --acid`), and east of the rail the band is open diffusion to x 4084
+  (chip-2 stripped shot 172-186/131-145/103-109). Views `fx_a.png` (3.4x), `fx_ov.png` (2.9x,
+  overlay), the reviewer's `review-10/c_south.png`, `c_wide.png`, `c_band.png`.
+- Its east end is the diffusion below `tla`'s gate `rcs_mu` (x 4052-4092, y 3955-3984).
+  **Below y 3988 `tla`'s column is field**: `px.py col 4070 3944 4112 4` reads 151-158/135-143/
+  97-106 (clean) and 156-160/147-158/97-103 (chip-2 stripped) from y 3992 to y 4056, the values
+  of open field (`pt 3930,3080`), with an edge line across at y 3984-3988 in both metal shots,
+  and diffusion again only from y 4080 (the strip to `rcs_in1`'s box). `trace/tla.txt`'s
+  `D 4052,3955:4090,4135` is split there (commit e22fb03, a commit of its own).
+- So the transistor under gate `rcs_mu` (4081,3940) is between VSS and `rcs_mn3852`, and
+  `rcs_in1`'s only pull-down is the one under gate `rcs_mv`. In words: `rcs_mn3852` =
+  `tc2_o5175` AND `rcs_mv` AND R9's match; `rcs_in1` = NOT `rcs_mv`.
+- Not resolved: the inside of gate mu's transistor (`fx_mu.png`, 4.6x: an edge at x ~4072 runs
+  through the gate, so its channel may be x 4072-4095 and not `tla`'s 58 px: a width); what
+  gate mv's row does under the rail (`tla`'s note).
 
 - The VCC diffusion under the VCC rail is **one box** from NOR 1's (cell `tl3_nor`, y 3757-3797)
   down to y ~3866, with a second contact ring at (3846,3838) (`mn_a.png`, 3.0x three shots: ring
@@ -493,10 +523,9 @@ Overlay `rg_ov.png` (2.9x, metal and clean shot).
   (x 4052-4110) across the rail's east edge line. W/L 25/56.
 - The tie (`?`): a heavy box under the thin metal at (3945-3972, 3784-3815), beside the plate's
   top right corner, with diffusion colour under the metal from it down to the strip
-  (`mn_tie.png`, 4.3x three shots; `px.py row 3826 3936 3992 3`). **That colour is not evidence
-  of a tail here**: the same bright tan stripe (x 3957-3967) goes on south of the strip to
-  y ~3980 (`px.py row 3900 3936 3992 3`, `col 3956 3760 3960 4`, `col 3956 3960 4130 10`), where
-  the metal is narrow and shifted east in the chip-2 shot. Tail, tab and box are all drawn `?`.
+  (`mn_tie.png`, 4.3x three shots; `px.py row 3826 3936 3992 3`). The tail is drawn firm from
+  the strip up to the box (the same diffusion as the branch above); the box and the plate's
+  tab into it are drawn `?`.
 
 Overlay `mn_ov.png` (2.9x, metal and clean shot).
 
@@ -1079,6 +1108,50 @@ contacts. Nothing left out in either window. Not checked: the three load ties (u
 
 Round 1: no findings that change a connection.
 
+**Round 1, full review of run 8's three pieces** (A the inverter at y 5180-5300, B the top unit
+E1, C the load of `rcs_mn3852`'s unit; 2026-11-18 17:51 +0000, a fresh Fable 5.2 agent, 84 tool uses, 19 images
+in `cache/scratch/tl3/review-10/`; commit reviewed 9754c80). Told to suspect: A: the thin metal
+over the box at (4101,5202), the box's join of node and row, field or diffusion east of the
+rail below the gate, the strip through the gap, contacts under the tracks; B: anything leaving
+the box at (4076-4114, 2972-3010), the row y 2956-2973 under both rails and its joins to the
+plate and the pad, the VCC rail over the contact; C: what the strip touches under the VSS rail,
+the VCC box as one diffusion, the join onto `tla`'s node box; all: widths (a second patch
+beyond the rail), contacts, anything left out. It used profiles, text maps, the follower,
+`opendiff.py`, `unsure.py` and 4x-5x views.
+
+Findings, each checked by the tracer:
+
+1. **Changes a connection. Confirmed.** Piece C leaves out a diffusion branch of the node: from
+   the load strip south under the thin metal (x ~3952-3968, y 3863-3982), east as a band
+   y 3966-3984 under the VSS rail, onto the diffusion below `tla`'s gate `rcs_mu`; and `tla`'s
+   column from there down to `rcs_in1`'s node is field at y 3988-4052. Checked: `px.py col 3962
+   3832 3996 4`, `row 3976 3940 4096 4`, `col 4070 3944 4112 4`, `textmap.py 3940 3934 4124 4064
+   4 --acid`, `fx_a.png`, `fx_mu.png`, `fx_ov.png` (Logic, "The third pull-down"). Fixed in two
+   commits: `trace/tla.txt`'s column split (e22fb03), the branch drawn here. Result:
+   `rcs_mn3852` = NOR(`rcs_in1`, `rcs_mu`, `tl3_e3712`), `rcs_in1` = NOT `rcs_mv`.
+2. Geometry only. Confirmed. B's strip in the open is y ~2989-3010 (drawn 2984-3008): `px.py col
+   3978 2974 3018 3`, `col 3910 2974 3018 3`. Fixed: y 2988-3010.
+
+Found correct: A: no contact at (4101,5202) (a 9 px half-bright spot, no hole, no widening,
+against the real contact (4104,5633)); the row y 5190-5205 ends in the box; both rows pass every
+track and the thin metal without hole or ring; field east of the rail below the gate (clean
+shot as field; the chip-2 stripped shot slightly redder, 8-13 against 2 for field and 24 for
+diffusion); the strip continuous through the gap with no poly across; channel x 4010-4056; the
+two pads in `tl4`'s strip are real contacts and the follower joins them (text only). B: no
+hole at the box in either stripped shot, nothing leaves it, a field band y 3008-3017 between
+it and the gate row; the row y 2956-2973 one poly from pad to plate under both rails; plate and
+row one poly; the VCC rail continuous y 2924-3048; field east of the rail; the gate row on past
+x 4250. C: the VCC box one diffusion y 3757-3866 with a real contact (3846,3838); the strip
+under the rail y 3845-3865 with field above and below; the join at x 4048-4058 a single line
+in each shot; no thin-metal contact at the tie box. Overlays fit; no open diffusion left out
+in the three rectangles. Not checked: the three ties (uncertain; all three equations depend on
+them); the thin metal x 3948-3962 beyond these crossings; the inside of gate mu's transistor.
+
+    .venv/bin/python tools/sameconn.py 9754c80     -> CONNECTIONS DIFFER (6 differences): the transistor
+        under gate rcs_mu moves from rcs_in1 to rcs_mn3852, and the two equations change as above
+
+Round 1: one finding that changes a connection, fixed; one geometry finding, fixed.
+
 ## Not done
 
 - Next: the foot of the cluster (y 5300-5560), with `tl3_e4808`'s row and the pad (3953,5459)
@@ -1090,6 +1163,10 @@ Round 1: no findings that change a connection.
   goes to in the foot); the clear's metal east of (4250,5895) is `tl4`'s. `tl3_e4635` and
   `rcs_mv`'s poly east of x 4250 are `tl4`'s, and `tl3_e3028`'s row (E1's gate).
 
+- In `tla`'s units around the branch: the inside of gate mu's transistor (its channel is
+  probably x 4072-4095, not 58 px); what gate `rcs_mv`'s row does under the rail; and whether
+  any other of `tla`'s columns east of the rail is drawn through field (the unit at y 4165-4335
+  was re-drawn by `tl3` as `tl3_enor`; `rcs_mu`'s inverter at y 3320-3436 was not re-read).
 - **For `tl4`** (its strip, claimed; not drawn here): the pad with a contact (4278,5198), the metal
   x 4279 north from it to the pad with a contact (4278,4636) on `tl3_e4635`'s row (which closes
   the open join `tl3_e4635_u`), and `tl3_e5240`'s row east of x 4250, which turns south at
