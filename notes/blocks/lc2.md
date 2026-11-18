@@ -3,10 +3,13 @@
 ## Status
 
 2026-11-18 03:53 +0000. **Latch B traced** (`trace/lc2.txt`, 11 transistors, all in `tl1`'s
-cells); the rest of the region is surveyed only (inventory below). This piece was traced on
+cells). 2026-11-18 04:35 +0000. **Latch C traced** (11 transistors, t1140-t1150, all in two
+`tl1` cell copies; hand-drawn: the rails, the VSS box and contact, the long VCC contact, the thin
+metal x 5928 with its two contacts, the five input rows with their pads); no reviewer yet. The
+rest of the region is surveyed only (inventory below). Both pieces were traced on
 **claude-opus** (Opus 5.5), not Fable 5.2: the project's rule is Fable; the coordinator
-discloses it. Latch C and the inverter below it were not started (scope cut by the
-coordinator). Two equations are DEPENDS only because of `tl1`'s `?` load ties in the cells.
+discloses it. The inverter below latch C was not started. Four equations (two per latch) are
+DEPENDS only because of `tl1`'s `?` load ties in the cells.
 
 Before this package only `urch` had geometry in the region: the tracks of `sl0`..`sl4` at
 x 4258-4640, y 8067-8200 (north-west corner) and the pads (4420,8590), (4380,9066) at the west
@@ -21,7 +24,7 @@ edge.
 | x 4450-5350, y 8180-8330 | horizontal poly rows / metals above that cluster with pads at x 4500-4530 and 5130-5220 | not traced |
 | x 5200-5600, y 8067-9233 | vertical bus (metals and polys), staircases at y 8380-8480 and y 8700-8780 | not traced |
 | x 5590-5895, y 8055-8560 | **latch B**: `tl1_ub` + `tl1_ua` upside down (below) | **traced** (`trace/lc2.txt`) |
-| x 5887-6142, y 8589-9029 | **latch C** (believed): `findcell` `tl1_ub` at 3352,3999 rot=180 (0.76, centre 6014,8684) and `tl1_ua` at 3351,4439 rot=180 (0.68, centre 6014,8904) | not overlaid, not checked |
+| x 5840-6275, y 8525-9030 | **latch C**: `tl1_ub` at 3352,3999 rot=180 and `tl1_ua` at 3352,4439 rot=180 (latch B turned left-right), rows and pads east | **traced** (`trace/lc2.txt`), not reviewed |
 | x 5840-6140, y 9025-9155 | inverter (believed): `tl1`'s inverter (2535 4215 2835 4345) at 3306,4809 rot=180 (0.73, centre 5991,9089); `tla`'s in1 unit (3820 4040 4120 4150) also hits there (0.79) | not checked |
 | x 5890-6140, y 8067-8290 | south end of a unit that lies mostly in `lc1` (`tl1_ua` at 3351,3703 rot=180, 0.68, centre 6014,8168); rail x 6010-6060 | not checked |
 | x 5600-5900, y 8880-9233 | gate cluster that runs on south into `lc3` (weak hits: `tl1` inverter 3059,4663 unturned 0.59; `tla` in1 0.53) | not traced |
@@ -79,7 +82,10 @@ the cell (not the latch's, not followed).
 `ports.d/lc2.txt`: enable `lc2_w8169` north on metal x 5560 at y 8067 (into `lc1`; believed
 to run to (5558,7646)); clear `lc2_w8254`, output `lc2_w8341` and data `lc2_w8450` end on
 stubs of their metals (pads (5472,8254), (5514,8341), (5558,8450): the metals run on, not
-followed); the rails vss and vcc at y 8060/8067 and y 8560.
+followed); the rails vss and vcc at y 8060/8067 and y 8560. Latch C: enable `lc2_w8646` on metal
+x 6167 at y 8580 (runs on north); clear `lc2_w8731`, Na `lc2_w8822`, data `lc2_w8906` on stubs
+over their pads (6257,8731), (6257,8822), (6214,8906); its vss rail (x 6019-6061) at y 8530 and
+9030, and vcc (x 5840-5890) at y 9030.
 
 ## Ambiguities
 
@@ -102,7 +108,31 @@ followed); the rails vss and vcc at y 8060/8067 and y 8560.
 
 1. Latch B's tracks: clear from the pad (5472,8254), Na from (5514,8341), data south from
    (5558,8450); enable north of y 8067 is `lc1`'s region.
-2. Latch C and the inverter below it (overlay the `findcell` hits first).
+2. Latch C (x 5840-6275, y 8525-9030): **traced 2026-11-18 04:35 +0000 on claude-opus, not
+   reviewed.** Cells: `@inst tl1_ub 3352,3999 rot=180 o=2662.5,4685`, `@inst tl1_ua 3352,4439
+   rot=180 o=2662.5,4465` (master (x, y) -> (8677 - x, 13369 - y)), overlaid at 4x. Hand-drawn,
+   each seen in both metal shots (`cache/scratch/lc2/vss.png`, `vbox.png`, `vcc.png`, `thin.png`,
+   `east.png`, `mid.png`): east rail x 6019-6061, y 8530-9030 (VSS by structure: the pull-downs'
+   boxes; the "dark" readings at y 8700 / 8990 of the earlier session are the dark bands where
+   the metal steps over poly; a dark line at x 6065 in every row is its edge or a diffusion edge
+   under it); its box D 6026-6076, 8543-8592 with the contact ring (6048,8566); west rail x
+   5840-5890 (VCC by structure) through y 9030; the long VCC contact ring x 5848-5868, y
+   8736-8826; the thin metal x 5928, y 8655-8872 with rings (5928,8665), (5928,8862). Rows (px.py
+   col 6145 / 6235, chip-2 stripped) east from x 6120: enable y 8638-8654 and 8856-8870 to the
+   pads (6168,8646), (6168,8862) on the metal x 6160-6175 (drawn y 8580-8880; north of 8580 not
+   followed); clear y 8724-8742 to the pad (6257,8731); Na y 8812-8829 to the pad (6257,8822);
+   data y 8899-8914 to the pad (6214,8906). Topology and equations match latch B's one for one.
+   Still to do:
+   - The pads (6257,8731) and (6257,8822) are on two separate metals (4x, `pads.png`: field,
+     no metal, at x 6250 between y ~8750 and ~8800 in both metal shots): clear's metal runs on
+     north from its pad, Na's south (x ~6250-6265). The data pad's metal x ~6203-6222 runs on
+     north. A poly also leaves the clear pad to the south-east (acid1b, ~(6265,8755)): not followed.
+   - Where the clear, Na, data and enable metals go (not followed).
+   - An undrawn thin metal x ~5970-5985 runs through latch C from y 8525 to 9025, bright in both
+     metal shots (`mid.png`): latch B's undrawn x 5748-5764 mirrored; no contact on it seen.
+   - A bright strip x ~6066-6090 east of the VSS rail (segmented, `mid.png`): part of the rail
+     or a separate metal: not read; nothing connects there in what is drawn.
+   - Gate-width profiles (none taken); the inverter hit 3306,4809 rot=180 (0.73) not overlaid.
 3. The west gate cluster (x 4480-5330, y 8380-9160): the largest piece; not a known cell.
 4. The bus fields and the unit halves on the north and south edges (with `lc1` / `lc3`).
 
@@ -131,3 +161,25 @@ geometry only). Not checked: the loads' width profiles; where the thin metal end
 
 Round 1: no findings that change a drawn connection; one net (the thin metal) is missing
 and is listed in Not done.
+
+### Latch C (also traced and reviewed on claude-opus)
+
+Round 1 (full review of latch C, added in 4dbf2e4; 2026-11-18 08:45 +0000, a fresh agent on claude-opus).
+Checked at 4-5x in the clean and both metal shots with profiles: each of the five rows from
+x 6120 to its own pad only, none joining a neighbour; the enable, Na and data pads closed
+on the east; the enable metal joining its two pads, ending at y about 8872 and touching no
+other pad; the clear and Na metals separate (field at x 6257, y 8772-8796 in both metal
+shots); both cell copies (every gate over diffusion, every contact on a box); the thin
+metal x 5928 with its two contacts; the extraction (0 errors; t1140-t1150 give the stated
+equations; internal nodes are latch C's own; nothing merged with latch B).
+No finding changes a connection. Geometry only, not changed: the VCC long contact at
+(5858,8781) probably sits 5-8 px further east (x about 5850-5878; it is on latch C's box);
+the VSS rail's west edge is about x 6014-6017 and the rail runs on south past y 9030; the
+strip at x 6066-6090 is not metal. Recorded in Not done: clear's poly goes on south-east
+from (6260,8752) toward (6350,8850), not followed; Na's metal turns west at y about 8935;
+the undrawn thin metal at x about 5971 through the latch is continuous with no contact on
+it (the counterpart of the one through latch B). Only roughly checked: gate widths of
+t1142/t1143 and t1148/t1149; not checked: the other widths, and where the four pad metals
+go beyond what is drawn.
+
+Round 1 (latch C): no findings.

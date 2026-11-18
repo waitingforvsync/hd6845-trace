@@ -1,0 +1,13 @@
+# lc3: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+# The package's region is x 4400-6450, y 9233-10400. Only the gate pair (x 5540-5900, y 9255-9520) is drawn.
+
+lc3_w9470   M  5549-5571,9520  in   lower inverter's input: metal x 5560 from the pad (5560,9470) runs on south (not followed)
+lc3_w9299   M  5549-5571,9255  in   upper inverter's input: metal x 5560 from the pad (5560,9299) runs on north (not followed)
+lc3_w9432   P  5540,9418-9440  out  lower inverter's output: poly row y 9429 runs on west past x 5480 (not followed)
+lc3_w9337   P  5540,9329-9351  out  upper inverter's output: poly row y 9340 runs west to a pad near (5515,9338) (not drawn)
+vss         M  5665-5711,9255-9520  -  pull-down rail, runs on north and south (not followed)
+vcc         M  5840-5890,9255-9520  -  wide metal, the loads' rail by structure; runs on (not followed)
+lc3_m5626   M  5614-5638,9255  -    metal x 5626 passing over the pair, no contact in it; runs on north (not followed)
+lc3_m5626   M  5614-5638,9520  -    the same track; runs on south (not followed)
+lc3_m5756   M  5746-5766,9255  -    metal x 5756 passing over the pair, no contact in it; runs on north (not followed)
+lc3_m5756   M  5746-5766,9520  -    the same track; runs on south (not followed)
