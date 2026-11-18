@@ -496,6 +496,50 @@ polys cross their whole legs (edges about 4812 and 4848). `sameconn` (tl4 alone 
 
 Round 5: no findings.
 
+### Round 6: full review of the NOR and the two inverters (2026-11-17, commit dd64e0f, images `review-6/`)
+
+Covered: the three pieces at x 4437-4967, y 4990-5465 (one batch: 7 transistors). Told to
+suspect: in the NOR, the pad (4583,5108) and the end of the track x 4581, the L of
+`tl4_w4545`'s poly, the pad (4625,5068) and its buried contact, row 2's east end against the
+tail, a third gate; in the inverter, the overlay of the copied body, the two long tracks
+(x 4452, x 4496) and the output row's way under three metals; in the strong inverter, the
+diffusion between x 4853 and the plate, the leg east of RA, the column west of RA, the corner
+of the track x 4496 on the pad (4537,5325) beside the metal x 4583, the T into the row
+y 5445-5465, and the dark spots on RA. Checked with 15 images (4.2x to 6x, `acid`, `acid1b`,
+`metal`, the master of the inverter beside the copy) and with `px.py`, `textmap.py`,
+`follow.py`, `railprof.py`, `tla_contacts.py`, `opendiff.py`, `unsure.py`.
+
+Found correct: every item of the list. In particular: the track x 4581 is one metal from the pad
+at y 4850 and ends on the pad (4583,5108); the metal x 4625 has contacts only at y 5068, y 5240
+and its end pad (4627,5503); row 2's end abuts the tail's west edge and does not cross it; no
+third gate; the copied body fits in both stripped shots; the tracks x 4452 and x 4496 are
+straight with no pad or contact from y 4395 to their south ends; the output row has no contact
+under the metals x 4496, x 4537 and x 4625; the corner of x 4496 lands on the pad (4537,5325)
+with 15 px of bare ground to the metal x 4583 in both chips; diffusion edges cross the plate at
+y 5306 and y 5376 (`px.py col 4888`), so the lower load is the wide transistor drawn; the leg
+east of RA is outlined in three shots; the T has no line across it; the dark spots (4768,5195),
+(4758,5337), (4755,5393) on RA and (4932,5285) on RB are not contacts.
+
+Findings, both geometry only, both confirmed and fixed:
+1. The upper inverter's arm `D 4666,5186:4728,5223`: next to RA the diffusion is only
+   y 5205-5219 (my check: `px.py col 4714 5176 5230 3 acid1b,acid`, field to y 5185, edge
+   y 5188-5200, diffusion y 5209-5217, edge y 5221). Drawn now as the box part to x 4708 and a
+   neck y 5203-5223 to RA.
+2. The upper inverter's tie box: the photo's box is about 4847-4875 x 5250-5283, against
+   `?B 4832,5242:4880,5278`. Moved to `?B 4840,5244:4879,5282` with its `?P`.
+
+`tools/t.sh tl4 sameconn.py dd64e0f`: `connections identical`.
+`.venv/bin/python tools/sameconn.py dd64e0f`: `connections identical`.
+
+Not checkable (reviewer): the three load ties (`?`, AMB-026: all the new equations stay
+marked); whether the west columns join the diffusion under RA (RA's edge line hides x 4722-4732
+in every shot; the reading does not depend on it); the leg's top and the 17 px strip west of
+the lower plate by colour (read from outlines); the long tracks were looked at at 2.7x in the
+chip-2 metal shot and otherwise with the text tools; the NOR's first input still rests on the
+earlier `?P 4620,4908:4642,4924`.
+
+Round 6: no findings that change a connection.
+
 ## Not done
 
 - The nine tracks beyond the views (table under Ports), and their other pads.
