@@ -49,9 +49,9 @@ Traced, extracting (69 transistors of its own, 0 errors), the west column and pi
   `tl2`'s strip and `tl4`'s, two pads, the metals that cross it. It closes four joins: latch C's
   clear is `rcs_x1`; the inverter that makes latch C's data takes latch B's inverted output; gate 1
   of `rcs_mv`'s NOR is NOR 3's output; track A (latch C's enable) is `tcw_a` (run 9, Tom Seddon,
-  2026-11-18 19:20 +0000).
+  2026-11-18 19:14 +0000).
 
-- **the thin metal x 3948-3962, end to end** (run 9, 2026-11-18 19:45 +0000): from its north pad
+- **the thin metal x 3948-3962, end to end** (run 9, 2026-11-18 19:25 +0000): from its north pad
   on the load plate of `tl3_e3550`'s unit to its south pad (3953,5458) on `tl1_w4937`'s row, firm
   but for six stretches over load-tie boxes, drawn uncertain. With it **`rcs_e4` =
   NOR(`tl1_w4678`, `tl3_e3550`)**: R9's match (AND NOT `tc2_o5175`) reaches the step logic
