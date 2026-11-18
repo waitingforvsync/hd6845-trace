@@ -56,6 +56,11 @@ Gate C, x 12195-12330 (drawn by hand from `c5.png` 2.5x and `c_east.png` 5x, cle
 | pull-down | `tr1_w12265` | `vss` - `tr1_w12220` | 50/22 | channel (12265,3757): box 12222-12318 x 3732-3782, source contact (12305,3756) (dark dot, clean shot 5x); `px.py col 12265 3720 3805 5 acid1b,acid`: bright y 3740-3775 in both, poly end about 3795 |
 | load (depletion) | `tr1_w12220` (?) | `tr1_w12220` - `vcc` | 21/52 | channel (12232,3879): textured poly 12202-12263 x 3853-3905 over the strip x 12222-12243; drain box 12220-12280 x 3912-3962, contact (12245,3937) |
 
+5x crops of B's and C's buried contacts and ties (`b_bc5.png`, `b_tie5.png`, `c_bc5.png`,
+`c_tie5.png`, clean and chip-2 stripped, trace over): the buried contacts' dark rings fill the drawn
+boxes 12077-12116 / 12207-12246 x 3672-3705; the ties are dark patches beside the load poly's
+north-east corner as in A, nothing sharper than at 3x, so the ties stay `?`.
+
 C's diffusion east: at 5x (`c_east.png`) the pull-down box runs on east past the source contact
 to x 12340, where a poly x 12340-12365 (orange in the clean shot) crosses it, and turns south along
 x 12318-12340 past y 3800. So the next gate east shares C's VSS source contact. Only C's part (to
