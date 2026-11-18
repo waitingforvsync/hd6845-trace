@@ -6,7 +6,7 @@ metal-shot pixels.
 ## Status
 
 Survey only, traced on claude-opus (Fable allowance exhausted). Nothing of this block is
-drawn yet. Survey views: `cache/scratch/bc4/survey.png` (whole region, metal | acid1b,
+drawn yet (`trace/bc4.txt` does not exist; no ports, no signals). Survey views: `cache/scratch/bc4/survey.png` (whole region, metal | acid1b,
 0.57x, all blocks' geometry overlaid), `cache/scratch/bc4/left.png` (acid1b, 1x,
 x 9050-10050, y 16350-17600).
 
@@ -70,6 +70,26 @@ These are other packages' routing ends; this block must join, not redraw, them.
 Only the `tl1_ub` hit at 0.79 is worth checking first; the others are below 0.7 and the
 `bc1_drv` hit lies on the bottom supply band, so it is probably not a real copy. None
 has been checked against the photos.
+
+## Checks after the survey
+
+- **`tl1_ub` hit at (9542,16673) rejected** (`cache/scratch/bc4/ub.png` against the
+  master `ubm.png`, 2x, acid1b and metal, cell overlaid): the master's thin vertical metal
+  (x 2557-2573, copy x 9413-9429) and its top pad/contact have no counterpart, the poly
+  and diffusion between copy x 9500 and 9560 differ, and the master's VCC box contact
+  (2808,4600) falls on the copy's rail metal without a matching contact seen. Not a copy;
+  the score 0.79 comes from the rail and column rhythm. The other hits (0.60-0.65) were
+  not drawn either.
+- **Right gate column, x 10460-10760, y 16480-16780** (`right.png` 1.3x,
+  `r1.png` 2.2x, acid1b | metal): a unit repeated at about y +170 to +180
+  (16500, 16680, 16850, ...): a wide diffusion area x 10600-10700 between the rails
+  x 10565-10595 and x 10720-10760 (metal), with a dark (depletion) channel
+  x 10655-10700 at y 16500-16570 and again at y 16680-16760, each under a poly plate
+  that ends in a pad with a round contact at about (10740,16535) / (10740,16705), which
+  lies at the west edge of the rail x 10720+. If that contact is to the rail, the load
+  gate would be on a supply, not on its own node; this must be read at 5x in `acid`,
+  `acid1b` and `metal` before anything is drawn (open question, not recorded as a fact).
+  This repeated unit is the best first piece: once one copy is read, it can be a cell.
 
 ## Not done
 
