@@ -301,7 +301,7 @@ P 4967,2675:5025,2694
 P 5020,2668:5058,2702
 C 5038,2685
 # y 2722: to the pad (5364,2722), the north end of T3. T3 is one metal to (5363,6114) (follow.py
-# 5365 2900 N/S) with a pad (5364,3070) on a row of the unit at y 3040-3142 (not drawn); drawn
+# 5365 2900 N/S) with a pad (5364,3070) on the output row of the inverter at y 3040-3150; drawn
 # as far as looked at
 P 4967,2714:5350,2733
 P 5346,2705:5384,2740
@@ -316,13 +316,12 @@ C 5452,2767
 P 4967,2801:5393,2820
 P 5387,2793:5429,2828
 C 5407,2810
-# y 2855: to the pad (5580,2855), the north end of a piece of T8 that ends on a pad (5580,3113)
-# on a row of the unit at y 3040-3142 (follow.py 5582 3000 N/S: (5582,2852)-(5581,3120); the
-# pad and its row are not drawn: the metal is drawn to y 3098)
+# y 2855: to the pad (5580,2855), the north end of a piece of T8 that ends on the pad (5580,3113)
+# of the gate row of the inverter at y 3040-3150 (follow.py 5582 3000 N/S: (5582,2852)-(5581,3120))
 P 4967,2846:5566,2865
 P 5560,2838:5602,2873
 C 5580,2855
-M 5581,2843 y3098
+M 5581,2843 y3125
 N P 5300,2856 tl5_w2855
 # y 2900: to the pad (5452,2900), the north end of T5's north piece (the NOR's output)
 P 4967,2890:5438,2909
@@ -353,3 +352,46 @@ C 5038,5237
 P 5050,5227:5393,5247
 P 5387,5220:5429,5254
 C 5407,5237
+
+# ====================================================================
+# The inverter at the top of the column, y 3040-3150 (hand-traced: not a copy; findcell gives
+# tl1's inverter mirrored at 2371,-1171 with 0.54). A wide "rail gate" with a strong load:
+#   tl5_w2722 = NOT tl5_w2855
+# u1_a.png, u1_c2.png, u1_m.png (4.8x: clean, chip-2 stripped, chip-2 metal); pads pu1.png (4x);
+# profiles with tools/px.py in the notes.
+# The gate row y 3103-3122 comes from the pad (5580,3113) (south end of T8's north piece), runs
+# west across RC and ends at x 5048 (field under the thin metal W west of that). Under it one
+# diffusion from x 5068 (west edge between W and RC) to x 5190 (the line across the gate band at
+# x 5188-5196 in both chip-2 shots): under RC and on east of it in the open.
+# North of the gate the node: under RC y 3080-3103, east of RC a neck y 3084-3098 and a box
+# (5152-5192, 3058-3098) with a buried contact (concentric rings) and the output poly east along
+# y 3063-3082 to the pad (5364,3070) on T3. South of the gate VSS: under RC a region y 3124-3150
+# that runs on into the NOR's VSS box (5097-5140, 3148-3195; contact (5112,3168)), and east of
+# RC a wing y 3130-3147 (diffusion in the chip-2 stripped shot, field south and east of it).
+D 5068,3080:5136,3156
+D 5130,3084:5190,3147
+D 5152,3058:5192,3098
+B 5160,3060:5192,3094
+P 5164,3063:5350,3082
+P 5346,3053:5384,3088
+C 5364,3070
+P 5048,3103:5566,3122
+P 5560,3096:5602,3131
+C 5580,3113
+# Load: the node's strip y 3077-3095 runs west under W and under the plate (x 4964-4999,
+# y 3042-3140, in the open east of RB) onto tl4's VCC box (4905-4965, 3068-3148). One edge line
+# crosses the plate, at y 3066-3074 (the diffusion's top edge), and none lower in three shots,
+# while east of the plate the strip's bottom edge (y 3095) runs into the plate's east edge and
+# down it: the diffusion very probably fills the plate down to y 3138 (a strong load, about
+# 66/35). The narrow strip is drawn firm and the widening uncertain.
+D 4960,3077:5075,3095
+?D 4960,3072:5001,3138
+P 4964,3042:4999,3140
+# Tie: a bar from the plate's top east along y 3041-3053 to x 5056, and under W a small box with
+# a heavy outline (5033-5052, 3056-3076) between the bar and the strip: taken as the plate's tie
+# to the node (tab, buried contact, a tab of the strip). Not resolved: all uncertain. W is dark
+# over it (y 3045-3100), with no pad and no bright centre.
+?P 4995,3041:5056,3053
+?P 5036,3050:5050,3072
+?D 5033,3062:5052,3080
+?B 5033,3056:5052,3076
