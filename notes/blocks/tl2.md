@@ -7,6 +7,20 @@ what `tla`, `tl1`, `r9m` and `ur` did not. Nothing of theirs is redrawn.
 
 ## Status
 
+2026-11-18 01:58 +0000 (run 3, Tom Seddon). **Partial: the gate column begun.** Run 3 traces the
+gate column east of R3 where `tla` left it (y 3690-4620). Piece 1, the unit at y 3690-3840
+(2 transistors): two pull-downs with no load of their own, whose node is `tla`'s `rcs_bc3460`
+by a diffusion strip under the rail and thin metal E. So, extracted, on geometry without `?`:
+
+```
+rcs_bc3460 = NOR(rcs_e3, rcs_e4, tl2_w3722, clk_tl)      tla had NOR(rcs_e3, rcs_e4)
+```
+
+and `rcs_u3425` = NOT `rcs_bc3460` = `rcs_e3` OR `rcs_e4` OR `tl2_w3722` OR `clk_tl`. The
+step formula of `tla` does not change (the two new terms cancel out of it, as `rcs_x1` does:
+see "The gate column east of R3"); `rcs_c1` does. Full extraction: 2270 nets, 4045 transistors,
+0 errors, 0 warnings.
+
 2026-11-18 00:25 +0000 (run 2, Tom Seddon). **Partial: two pieces.** Run 2 added the wiring of the
 bus field east of the first cluster: the ten undrawn metal pieces of its tracks D and F-J with
 their 24 contacts, and the poly row from every pad, drawn to the strip's edges or onto tla's,
@@ -49,7 +63,8 @@ undrawn contacts (see Not done).
 |---|---|
 | x 2860-3100, y 2940-5300 | `tla`'s east gate column on R3 (traced by `tla`) |
 | x 3085-3533, y 2630-5700 | bus field: ten vertical metal positions (pitch 43.5: A 3108, B 3152, C 3196, D 3240, E 3283, F 3326, G 3369, H 3413, I 3456, J 3499), in pieces, with poly rows and pads. `tla` drew A-E and G's upper piece; **run 2 drew the rest** (D upper, F x3, G lower, H x2, I x2, J x2) |
-| x 2860-3100, y 3700-4620 | `tla`'s east gate column where `tla` did not trace it (its Not done: "y 3700-4590 on the east side"): units with gates on the rows y 3722, 3812, 4374, 4418. **Not traced** |
+| x 2860-3100, y 3690-3840 | **run 3, piece 1**: two pull-downs on `rcs_bc3460` (gates: the rows y 3722 and y 3808) between `tla`'s VSS boxes, with the node's strip west under R3 and south under thin metal E |
+| x 2860-3100, y 4320-4620 | `tla`'s east gate column where `tla` did not trace it: gates on the rows y 4374, 4418, 4470 |
 | y 2500-2940 | horizontal metal tracks and rows north of the cluster, partly `r9m`'s and `tla`'s |
 | x 2817-3180, y 5900-6300 | the small cluster's east half: **this piece** |
 | x 2890-3533, y 6300-6350 | `rcs_thin_e`'s pad (2913,6327) and its poly row east (drawn); `lc_step`'s row y 6268-6290 is `ur`'s |
@@ -253,6 +268,85 @@ whose row runs west into the column (`o2.png`, `o3.png`). `tla`'s notes list the
 contacts of `clk_tl`; they are not in its trace. (Its fourth, (3152,4548), gates nothing: the
 pad's only poly goes east to track D's pad (3228,4548).)
 
+### The gate column east of R3 (run 3)
+
+#### Piece 1: two more pull-downs on `rcs_bc3460` (traced 2026-11-18; 2 transistors)
+
+Between `tla`'s VSS box at y 3655-3725 (contact (2985,3690)) and its VSS box at y 3795-3835
+(contact (2978,3815)) the column east of the rail (x 3022-3068) holds one more unit of the
+cluster's kind, but without a load:
+
+- **VSS link.** A diffusion strip y 3696-3709 from the upper VSS box east across the rail's edge
+  to the top of the column.
+- **Gate 1, `tl2_w3722`** (the row y 3712-3733 from track F's bottom pad (3322,3722)): on west
+  under track A without a contact, across the column, west end at x 3012-3018. W/L 46/21.
+- **Node box**, x 3022-3068, y 3737-3793.
+- **Gate 2, `clk_tl`** (the row y 3798-3817 from track B's top pad (3150,3812), contact on
+  `tla`'s metal): across the column, west end x 3010. W/L 46/19. Below it the column meets
+  `tla`'s VSS arm (y 3818-3836) of the lower box.
+- **The node's strip.** From the node box an arm runs west under R3 (y 3757-3777) to x 2915,
+  turns south and runs along x 2915-2935, under the east margin of thin metal E, to y 3882,
+  where it enters `tla`'s node box of `rcs_bc3460` (x 2898-2932, y 3882-3915). The strip and
+  that box are one diffusion; the box ends at y 3910.
+
+So the unit is the second half of a four-input NOR whose first half and load are `tla`'s unit
+at y 3892: `rcs_bc3460` = NOR(`rcs_e3`, `rcs_e4`, `tl2_w3722`, `clk_tl`) (extracted; no `?`
+item of this package on it). What follows for `tla`'s step formula, with u = `rcs_u3425` =
+NOT `rcs_bc3460`: `rcs_b1` = NOR(`rcs_x1`, `rcs_a2`, u), `rcs_c1` = NOT `rcs_a2` AND (`rcs_x1`
+OR u), `rcs_in2` = `rcs_c1` AND NOT `rcs_e4`, `rcs_in3` = NOR(`rcs_e3`, `rcs_e4`), and step =
+`rcs_in1` OR `rcs_in2` OR `rcs_in3`. While `rcs_e3` is high u is high whatever the new inputs
+are, and while it is low `rcs_in3` decides: the step is still `rcs_in1` OR (NOT `rcs_e4` AND
+NOT (`rcs_e3` AND `rcs_a2`)). The new inputs matter only for `rcs_c1` (which also leaves the
+cluster west on the poly y 2985) and for `rcs_b1`. **Believed, not traced**: nothing about what
+`tl2_w3722` is (its other end is the row y 2639 east out of the strip).
+
+Evidence (views in `cache/scratch/tl2/`, all with `TRACE=tl2,tla,tl1`):
+
+- The column in the open, decided in the chip-2 stripped shot (trap 18):
+  `tools/t.sh tl2 px.py col 3046 3640 3850 5 acid1b,acid,metal`: diffusion (166/146/93) at
+  y 3655-3660 (`tla`'s arm), **field** (151/149/87) at y 3675-3685, diffusion (160/140/92) at
+  y 3698-3708, orange poly y 3712-3733, diffusion (163-167/139-146/92-99) y 3742-3792, poly
+  y 3798-3819, a narrow band y 3828-3837, then `tla`'s gate of `rcs_e3`. So the diffusion above
+  gate 1 is not the column of `rcs_b1`'s unit continued: it is a strip of its own, 12 px high.
+  Views: `p1_col.png` (4.6x, chip-2 stripped, clean, metal), `p1_rows.png` (4.4x, chip-2 stripped
+  over metal, x 3000-3190): both gate bands cross the column's two edge lines (x 3020, x 3070).
+- **The two joins across the rail's east edge** (the VSS link at y 3700, the node arm at y 3766)
+  are each crossed by one dark line, the rail-edge line of that shot, and the two chips have it
+  at different x, so each shot shows diffusion where the other is dark:
+  `px.py row 3766 2996 3030 2 acid1b,acid,metal,metal1`: clean shot tan (199-203/173-176/129-135)
+  to x 3008 and dark at x 3012-3018; chip-2 stripped dark at x 3006-3010 and diffusion
+  (144-172/103-144/90-102) from x 3014. `px.py row 3700 2996 3074 4 acid,metal,acid1b`: clean
+  shot tan to x 3008, dark x 3012-3024; chip-2 stripped dark x 3008-3012, diffusion
+  (140-165/121-145/86-97) from x 3016 to x 3060; `px.py col 3018 3684 3716 2 acid,metal,acid1b`:
+  the link is y 3695-3703 there in both chip-2 shots. On `p1_col.png` the node box's outline
+  opens west into the arm (rounded corners at (3018,3752) and (3018,3780)).
+- **The strip under the rail and under thin E is diffusion, not poly** (`railprof.py` calls it
+  poly over field): `px.py row 3766 2896 3080 6`: clean shot 195-202/173-178/127-135 from x 2944
+  to x 3004 (diffusion under metal here is 200/178/137, poly 220/170/122, field 208/130/116);
+  `px.py col 2975 3736 3800 4`: the band is y 3758-3774 between dark lines; `px.py col 2925
+  3740 3920 6` and `px.py col 2924 3866 3900 2 acid1b,acid,metal,metal1`: tan
+  (198-209/167-185/130-139) from y 3764 to y 3900 without a dark sample, into `tla`'s box; the
+  box's bottom edge is the dark line at y 3910. Views: `p1_L.png` (4.4x, three shots, x 2850-2950,
+  y 3740-3920), `p1_tie.png` (the same lower down, no overlay).
+- **No contact of track A on gate 1's row**: `textmap.py 3084 3700 3132 3745 3`: the metal is
+  bright (A-D) over the row's whole height in both chips, the clean shot is protected poly
+  (5-8) with no `g` hole; dark bars only at the row's two edges.
+- **Track B's top pad (3150,3812)**: a bright centre in a dark ring at the metal's end in the
+  metal shot, a rounded box with pits in the chip-2 stripped shot (`p1_rows.png`), and the row's
+  outline runs into the pad's.
+- Overlay: `p1_ov.png` (2.2x, chip-2 stripped | clean with the trace).
+
+Seen beside the piece and not drawn (they are `tla`'s): the load plate of `rcs_bc3460`
+(x 2850-2897, y 3862-3925) has a tab at its **top** right (x 2868-2900, y 3830-3862) that ends
+in a heavy-outlined oval box (x 2898-2925, y 3850-3878) on the node's strip: the load's tie.
+`tla` draws that tie at the plate's **bottom** (`B 2908,3932:2932,3959`, with a tail
+`D 2913,3911:2929,3957` and the plate down to y 3960), where both stripped shots show field
+(`p1_tie.png`). The connection is the same (plate on its node); the geometry is not. Thin metal
+E over the oval is bright and wide at y 3844-3856, dark at y 3832-3841 and y 3874-3880
+(`textmap.py 2884 3790 2944 3915 3 --acid`), like `tla`'s other ties under it (compared with
+`textmap.py 2884 4600 2944 4672 3` and `2884 5222 2944 5282 3`): read, as `tla` does, as passing
+over.
+
 ## Ports
 
 | Name | Layer | Where | Dir | What |
@@ -297,7 +391,6 @@ pad's only poly goes east to track D's pad (3228,4548).)
 | `tl3_w4763` | M | x 3533, y 5426-5444 | ? | track H's arm east along y 5435 (follow.py: to (3571,5435)) |
 | `tl1_w4937` | P | x 3533, y 5449-5467 | in | row y 5458, straight through |
 | `tl3_w4546` | P | x 3538, y 5482-5514 | ? | the pad (3518,5498) at the end of track F's arm; its poly goes on east |
-| `tl2_w3722` | P | x 3100, y 3713-3731 | ? | row y 3722 west from track F's pad (3322,3722); on west under track A into the gate column |
 | `rcs_bd3330` | P | x 3072, y 4365-4383 | ? | row y 4374 west from track D's pad (3237,4376); on west into the gate column |
 
 ## Ambiguities
@@ -448,13 +541,14 @@ Round 3: no findings.
 
 ## Not done
 
-- **The gate column x 2860-3100, y 3700-4620** (`tla`'s east column where `tla` did not trace
-  it): the units whose gates are the rows y 3722 (`tl2_w3722`, from track F's pad, drawn to
-  x 3100), y 4374 (`rcs_bd3330`, from track D's pad (3237,4376), drawn to x 3072), and the rows
-  from track B's two undrawn contacts (3150,3812) and (3150,4418) (`clk_tl`, by `tla`'s notes;
-  each pad's row runs west). View: `col_e.png` (1.4x, with what is drawn). `tla`'s notes call
-  y 4235-4620 "diffusion strips under the thin metal with gates across them (pass transistors
-  or a latch)". This is the next piece: transistors.
+- **The gate column x 2860-3100, y 4320-4620** (`tla`'s east column where `tla` did not trace
+  it; run 3's piece 1 did y 3690-3840): gates on the row y 4374 (`rcs_bd3330`, from track D's pad
+  (3237,4376), drawn to x 3072), the row y 4418 from track B's undrawn contact (3150,4418)
+  (`clk_tl`, by `tla`'s notes), and a band y 4458-4480 under R3 west of `rcs_cond_lat`'s pad
+  (3045,4485); an undrawn pad with a green hole at (2862,4385) under the south end of
+  `rcs_n4200`'s thin metal. `tools/t.sh tl2 railprof.py 2953 3001 3650 4680`: diffusion
+  y 4449-4463, gate y 4464-4488, diffusion y 4489-4508 under the rail, drawn by nobody. Views:
+  `s3_b.png` (2.1x), `s3_b2.png` (3.3x, both stripped shots).
 - **North of y 2630**: the horizontal metals along y 2556 and y 2598 and the plane above them
   (`tools/follow.py` from (3326,2602) and (3326,2560): corners in `cache/scratch/tl2/survey.md`),
   tl1's metals east of (2852,2553) (`tl1_w3333`) and the pad at about (2867,2595) (`tl1_w2592`),

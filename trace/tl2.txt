@@ -126,7 +126,7 @@ P 3072,4365:3230,4383
 
 # ---- track F, upper piece (y 2630-3732) = tl2_w3722: top pad (3324,2639) with a row east along
 # y 2639 out of the strip; bottom pad (3322,3722) with a row west along y 3722 into the gate
-# column east of R3 (not traced there)
+# column east of R3 (gate 1 of run 3's piece 1, at the end of this file)
 M 3326,2630 y3732 w=18
 P 3304,2622:3346,2656
 C 3324,2639
@@ -289,3 +289,26 @@ N P 3372,4440 tl3_w4373
 # (tl3_w3765, the output of tl3's NOR 1)
 P 3395,3755:3540,3773
 @alias rcs_a2 tl3_w3765
+
+# ====================================================================
+# Run 3 (2026-11-18): the gate column east of R3 where tla did not trace it (y 3690-4620)
+
+# ---- run 3, piece 1: the unit east of R3 between tla's VSS boxes at y 3690 and y 3815: two
+# pull-downs with no load of their own. Their node box (x 3022-3068, y 3737-3793) has an arm
+# west under the rail (y 3757-3777) that turns south at x 2915-2935, under the east margin of
+# thin metal E, and runs into tla's node box of rcs_bc3460 (D 2898,3882:2932,3915). So
+#   rcs_bc3460 = NOR(rcs_e3, rcs_e4, tl2_w3722, clk_tl)      (tla had NOR(rcs_e3, rcs_e4))
+# VSS link: a strip y 3696-3709 from tla's VSS box (2966-3014 x 3655-3725) east to the column's top
+D 3000,3696:3068,3709
+# the column: under gate 1, the node box, under gate 2, onto tla's VSS arm (D 2995,3818:3063,3836)
+D 3022,3696:3068,3836
+# gate 1: tl2_w3722's row (from track F's pad (3322,3722)) on west under track A (no contact:
+# textmap 3084 3700 3132 3745) across the column; west end x 3012-3018 at the rail's edge
+P 3018,3712:3105,3733
+# gate 2: the row from track B's top pad (3150,3812), contact on tla's metal (clk_tl)
+P 3010,3798:3140,3817
+P 3132,3795:3172,3830
+C 3150,3812
+# node arm west under R3 and the strip south into tla's box
+D 2915,3757:3030,3777
+D 2915,3757:2935,3890
