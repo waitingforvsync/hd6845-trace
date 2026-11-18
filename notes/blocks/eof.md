@@ -7,16 +7,23 @@ images are in `cache/scratch/eof/`.
 
 ## Status
 
-Run 1 (Tom Seddon's session, Claude Fable 5.2; 2026-11-18 23:30 +0000).
+Run 1 (Tom Seddon's session, Claude Fable 5.2; 2026-11-18 23:30 to 23:50 +0000).
+Three pieces, 2 transistors, no uncertain items.
 
-- **Task 1, where R4's match goes: done** (piece `r4`, wiring only, no transistors, no uncertain
-  items). `rc_eq_r4` is drawn end to end from R4's comparator to its loads: it is the net that
-  `rdp3` called `rdp3_n7s9` and `bd1` called `bd1_a`, **the data input of the latch in the gate
-  column beside the strobe channel and the input of inverter A there**.
-- Tasks 2-4 of the queue row (`sl_eq_r5` west of x 8340; `tcw_a`'s source; `rcs_x1`'s driver):
-  not started.
+- **Task 1, where R4's match goes: done** (piece `r4`, wiring only). `rc_eq_r4` is drawn end to
+  end from R4's comparator to its loads: it is the net that `rdp3` called `rdp3_n7s9` and `bd1`
+  called `bd1_a`, **the data input of the latch in the gate column beside the strobe channel
+  and the input of inverter A there**.
+- **Task 2, where R5's match goes: its first gate found and traced** (piece `r5inv`): at the
+  west end of its row in the central datapath's channel `sl_eq_r5` is the only input of an
+  inverter that nobody had drawn, **`r9m_l1w` = NOT `sl_eq_r5`**; the output is the line that
+  `r9m` and `tc2` had drawn without a driver. Piece `r5w` (wiring only) carries that line on
+  west: `r9m_l1w` is `tl4`'s bus line 1 (`tl4_w2512`) and `tl1`/`tl2`'s `tl1_w2592`, which
+  leaves the top-left strips north at (2493-2508,2500) into the band y 2180-2500 (package
+  `tlb`, not drawn by anyone). **No load of it is drawn yet.**
+- Tasks 3 and 4 of the queue row (`tcw_a`'s source; `rcs_x1`'s driver): not started.
 
-Full extraction with this file: 2,359 nets, 4,230 transistors, 0 errors, 0 warnings; the package
+Full extraction with this file: 2,357 nets, 4,232 transistors, 0 errors, 0 warnings; the package
 by itself (it loads `rdp3`): 0 errors, 0 warnings.
 
 ## Inventory
@@ -25,6 +32,10 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 |---|---|---|
 | `r4`, link A | x 13416-13667, y 9647-10705 | from `mrach`'s poly end (13425,9663): pad and contact (13433,9665), the upper piece of bundle track L2 (y 9652-9938), pad and contact (13432,9925), poly bar y 9916-9934 east under L3-L6, pad and contact (13650,9925), track L7 south to `rdp3`'s piece at y 10700 |
 | `r4`, link B | x 13729-13747, y 13475-14695 | bundle track L9, straight, from `rdp3`'s end (13738,13480) to `bd1`'s track k15 (13738,14690) |
+
+| `r5inv` | x 8330-8650, y 4700-4880 | an inverter in the slice-0 position of `cdp1`'s channel: C-shaped input poly (the west end of the row y 4719), pull-down under slice 0's VSS rail (contact (8431,4770)), node strip y 4824-4848 with a buried contact to the output's poly at its west end (box x 8358-8392), load block x 8534-8592 with its tie box x 8508-8538, y 4783-4815, VCC contact (8615,4838) |
+| `r5w`, link C | x 4962-5183, y 2542-2560 | the poly row from `r9m`'s corner (5175,2550) west under rail RC and the supply metal x 4948-4997 to `tl4`'s row end (4967,2551) |
+| `r5w`, link D | x 3528-4255, y 2494-2526 | `tl2`'s metal on to a pad with a contact (3606,2510), a poly bar under the wide metal x 3648-3760, a pad with a contact (3800,2510), a straight metal east to `tl4`'s bus line 1 at (4250,2512) |
 
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
 
@@ -60,6 +71,48 @@ end of the frame goes through this latch**; the latch's lower half (its load, th
 | **link B** | `eof` | L9, one straight metal y 13480-14690; crosses `hc5`'s poly (y 13880-13908) and `hc4`'s band (y 14010-14038) without a pad | `b_l9_m.png`, `b_l9_c.png` (2x strips, metal and clean shot, every package's trace outlined); follower positions every 200 px; text maps of the band crossing and of the one contact candidate (y 14222: field under whole metal) |
 | k15 to the gates | `bd1` | k15 from y 14690, jog west at y 15087 to x 13652, contact (13655,15391), poly to gate P2 (in series with `inh_lat`'s P3 on node `bd1_n1`) and P4 (inverter A) | `tools/follow.py 13738 14700 S` gives the jog and the end as drawn; `d_bd1.png` (2.35x, all traces): the overlay sits on the features. The gate column itself was not re-read (`bd1`'s re-read item R1 stays) |
 
+### Piece `r5inv`: the inverter on R5's match (traced)
+
+```
+sl_eq_r5 = NOR(r5c_b0_x .. r5c_b4_x)        rdp1: high when the scan line counter equals R5
+r9m_l1w  = NOT sl_eq_r5                      this piece (firm)
+```
+
+| Device | Where | W/L | Gate | Between |
+|---|---|---|---|---|
+| pull-down | (8427,4806) | 62/20 | `sl_eq_r5` (the C's lower arm, y 4796-4816) | `vss` (contact (8431,4770) of slice 0's rail) and the node |
+| load | (8563,4839) | 38/58 | the node (tie box at the block's north-west corner) | the node and `vcc` (contact (8615,4838) of slice 0's rail) |
+
+- **Input.** `cdp1` draws `sl_eq_r5`'s poly row y 4719 from x 10850 to x 8340 (one straight poly
+  with no pad and no step in the clean shot at 2x, `t2_row.png`). At its west end the row turns
+  south (x 8331-8351) and comes back east as a lower arm y 4796-4816: a C whose inside is
+  field. The arm runs under the VSS rail and ends in a rounded end at x 8474; it does not reach
+  the tie box 35 px further east (nothing orange at x 8480-8500 in either chip-2 shot).
+- **Output.** The node strip's west end lies in a heavy-outlined box (x 8358-8392, y 4836-4864)
+  with the end of the poly row that `tc2` drew from the pad (8290,4850): a buried contact. From
+  there the net is `r9m_l1w` (`tc2`'s piece 13 and `r9m`).
+- **Supplies.** The two rails are slice 0's of the central datapath (`cdp1`'s notes: VSS
+  x 8395-8440 widening here, VCC x 8620; `shm` labels both at y 3950); only the pieces over the
+  gate are drawn here. The load hangs from the east rail and the pull-down from the west one,
+  which agrees.
+- Evidence: `t2_s1.png` (2.3x, all traces), `t2_g1.png` and `t2_g2.png` (3.6x, four shots),
+  `t2_wbox.png`, `t2_tie.png` (4.2x, three shots), overlay `t2_ov.png`; profiles and text maps
+  named in `trace/eof.txt`. `tools/opendiff.py 8320 4700 8670 4890`: no undrawn open diffusion;
+  the two pockets (8372,4762) and (8555,4758) are field (chip-2 stripped shot red minus green -2).
+
+### Piece `r5w`: the inverter's output on west (traced; wiring only)
+
+| Stretch | Drawn by | What | Evidence |
+|---|---|---|---|
+| inverter to the top-left corner of `tl6` | `tc2`, `r9m` | the pads (8290,4850), (8246,4716), the row y 4676, the pad (7855,4676), the crossing field, the metal x 6022 / y 2599, the pad (5400,2596), a poly west along y 2596 and north at x 5175 to y 2550 | their notes; not re-read |
+| **link C** | `eof` | from that corner the poly is a row y 2542-2560 running west under rail RC (x 5078-5127) and the wide supply metal (x 4948-4997), no contact to either, to `tl4`'s row end (4967,2551) | `t2_w2.png` (4x, three shots, all traces), overlay `ov_c.png`; text map of the row |
+| bus line 1 | `tl4` | the pad (4908,2551), the metal along y 2555, a diagonal at x 4669-4712, y 2512 west to x 4250 | its notes |
+| **link D** | `eof` | the metal runs on west, straight over plain field, to a pad with a contact (3800,2510); a poly bar y 2501-2517 under the wide vertical metal x 3648-3760 (no contact); a pad with a contact (3606,2510); the metal on west to `tl2`'s end (3533,2509) | `t2_w3.png` (4.4x, three shots), `t2_w4.png` (1.75x, the whole stretch), overlay `ov_d.png`; text map of both pads and the bar |
+| to the band | `tl2`, `tl1` | `tl1_w2592`: the metal x 3503 / y 2598, the pad (2868,2596), the row y 2591, a poly north out of the strips at (2493-2508,2500) | their notes |
+
+The full extraction has one net with the three names and no gate on it but the inverter's own
+load: **where NOT `sl_eq_r5` is used is north of y 2500** (or at a tap nobody has drawn).
+
 ## Ports
 
 The net is driven outside the package (by `rdp2`'s NOR). `in` marks the port beyond which the
@@ -71,6 +124,15 @@ driver lies; the other three lead to the loads.
 | `rc_eq_r4` | metal | (13641-13659, 10705) | to loads | track L7, on into `rdp3`'s piece (`rdp3_n7s9`) |
 | `rc_eq_r4` | metal | (13729-13747, 13475) | from `rdp3` | track L9, `rdp3`'s end |
 | `rc_eq_r4` | metal | (13729-13747, 14695) | to loads | track L9, on into `bd1`'s track k15 (`bd1_a`) |
+
+| `sl_eq_r5` | poly | (8352, 4709-4729) | in | `cdp1`'s row y 4719 (its file ends it at x 8340) |
+| `r9m_l1w` | poly | (8348, 4840-4862) | out | the inverter's output, onto `tc2`'s poly from the pad (8290,4850) |
+| `vss` | metal | (8399-8469, 4700) and (8399-8469, 4880) | - | slice 0's VSS rail, on north and south |
+| `vcc` | metal | (8595-8645, 4700) and (8595-8645, 4880) | - | slice 0's VCC rail, on north and south |
+| `tl4_w2512` | poly | (5183, 2542-2560) | in | link C's east end on `r9m`'s corner (5175,2550); the net is `r9m_l1w` |
+| `tl4_w2512` | poly | (4962, 2542-2560) | to loads | link C's west end on `tl4`'s row (4967,2551) |
+| `tl1_w2592` | metal | (4255, 2506-2518) | in | link D's east end on `tl4`'s bus line 1; the net is `r9m_l1w` |
+| `tl1_w2592` | metal | (3528, 2505-2519) | to loads | link D's west end on `tl2`'s metal (3533,2509) |
 
 ## Ambiguities
 
@@ -85,16 +147,43 @@ driver lies; the other three lead to the loads.
    ends on one pad. Working assumption: (a), as `rdp3` drew it. What would settle it: the pad in
    `acid1` (chip 1's other stripped shot), or an independent reader.
 
+2. **`cdp1`'s thin metal x 8501-8517 over the inverter's tie box** (8508-8538, 4783-4815). The
+   metal (the data line of R8's slice 0, drawn by `cdp1` as one line from y 3382 to its contact
+   (8509,4940)) is dark from y 4780 to 4815 in both metal shots, with a half-bright patch at
+   y 4795-4798 on chip 2 only, and the clean shot is greenish under it there (a strip 9 px wide
+   and 28 tall, not a round hole): `textmap.py 8484 4762 8600 4875 3 --acid`. That is the look of
+   a thin metal over a box (traps 22, 26, 27): no widened pad, no full-bright centre in chip 1.
+   Readings: (a) it passes over; (b) it makes a contact with the node, which would short a data
+   bus line to this inverter's output. Working assumption: (a), nothing drawn. By trap 27 the
+   photos cannot show the metal continuous over the box either; that is `cdp1`'s item (handoff).
+   `tools/follow.py 8620 4720 N` joins this thin metal to the VCC rail at y 4078-4086: a false
+   path along bare ground that is as bright as the follower's threshold in chip 2
+   (`textmap.py 8494 4062 8640 4100 3`: 9-B, where metal is C-E).
+3. **The two buried contacts of `r5inv`** are read from heavy-outlined boxes: the node's west end
+   (8358-8392, 4836-4864), which `tc2` read the same way at 4.3x in four shots, and the load's tie
+   (8508-8538, 4783-4815), which lies half under the thin metal. Inside each box the edges of the
+   poly and of the diffusion cannot be seen, so the rectangles in the trace are placed to overlap
+   within the box. Drawn without `?`: for the tie, the tan column from the box down into the
+   strip (`px.py col 8521 4772 4852 3`) and the box at the load's corner; for the west box, the
+   poly row ending on it and the strip leaving it. What would settle either: nothing more in
+   these photos.
+4. **A nub on link C's top edge** at (5044-5065, 2530-2542), in both chips (a small loop in the
+   chip-2 stripped shot), over field between the two metals: not drawn, no connection possible.
+
 ## Review
 
 (none yet)
 
 ## Not done
 
-- Task 2: `sl_eq_r5` west of x 8340 (`notes/blocks/bust.md`): the row that turns south near
-  x 8190 or the pad near (8245,4718), then on to its gates.
+- **Task 2, the loads of `r9m_l1w` (= NOT `sl_eq_r5`)**: the net's only undrawn end is the poly
+  that leaves `tl1`'s strip north at (2493-2508,2500) into the band y 2180-2500 (package `tlb`).
+  Not checked here: taps along `r9m`'s, `tc2`'s, `tl4`'s, `tl2`'s and `tl1`'s stretches of it
+  (each was read by its own package).
 - Task 3: `tcw_a`'s source: its thin metal comes from the north to the pad (6400,4005) (`tcw`);
   its row y 5631 crosses `tl4`'s strip and goes on south across y 6350.
 - Task 4: the driver of `rcs_x1`: beyond `tl5`'s bus line x 5107 (the row y 5890).
 - For `bd1` (queue row `bd1`-`bd3`): the latch's lower half and where `bd1_n1`, `bd1_n2`,
   `bd1_an` go now decide what R4's match does.
+- The rest of the slice-0 logic of `cdp1`'s channel around the inverter was not traced; the
+  inverter's own rectangle (x 8330-8650, y 4700-4880) has nothing else in it.

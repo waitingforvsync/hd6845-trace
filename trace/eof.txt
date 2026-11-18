@@ -67,3 +67,104 @@ N M 13738,14100 rc_eq_r4
 # With both links drawn the three names are one net.
 @alias rc_eq_r4 rdp3_n7s9
 @alias rc_eq_r4 bd1_a
+
+# ============================================================================================
+# Piece r5inv: the inverter at the west end of R5's match line (2 transistors).
+#   r9m_l1w = NOT sl_eq_r5
+# x 8330-8650, y 4700-4880, in the slice-0 position of cdp1's channel (cdp1's "logic at
+# y 4740-4870", not drawn by anyone). cdp1 draws sl_eq_r5's poly row y 4719 to x 8340; tc2 draws
+# the output's poly from the pad (8290,4850) east to x 8352 (its piece 13, net r9m_l1w).
+#
+# Evidence: t2_s1.png (2.3x, every package's trace), t2_g1.png (3.6x, chip-2 metal and clean),
+# t2_g2.png (3.6x, chip-2 stripped and chip-1 metal), t2_wbox.png, t2_tie.png (4.2x, three
+# shots), t2_row.png (cdp1's row y 4719 from x 8340 to 10850 at 2x in the clean shot: one
+# straight poly, no pad, no step).
+#  - Input. The row y 4719 turns south at its west end and comes back east: a C-shaped poly,
+#    left side x 8331-8351 (px col 8341 4698 4826 4: orange in the chip-2 stripped shot without
+#    a break from y 4714 to 4810), lower arm y 4796-4816 east under the VSS rail to a rounded
+#    end at x 8474 (px row 4806 8322 8540 6). Inside the C is field.
+#  - Pull-down. Under the rail the arm crosses a diffusion x 8396-8458 (clean shot: the arm is
+#    bright salmon, 227-251/164-181/114-133, from x 8400 to 8454: poly over a channel; px col
+#    8430 4740 4864 3: tan y 4750-4794, gate y 4797-4816, tan y 4821-4842). Above the gate the
+#    diffusion has the rail's contact (8431,4770) (bright centre in a ring in the metal shot,
+#    pit in the stripped shot); it is narrower above y 4775 (x 8418-8458, px row 4762).
+#    The rail is slice 0's VSS rail (cdp1's notes; shm labels it vss at y 3950).
+#  - Node. Below the gate the diffusion runs on as a strip y 4824-4848: west to a
+#    heavy-outlined box x 8358-8392, y 4836-4864, where the output's poly row (y 4840-4862, from
+#    tc2's pad (8290,4850)) ends on it: a buried contact; east past the thin metal x 8509 to
+#    the load.
+#  - Load. A poly block x 8534-8592, y 4783-4872 in the open (orange in both chip-2 shots) over
+#    the strip, which is y 4820-4858 under it; east of it the strip's land has the contact
+#    (8615,4838) of slice 0's VCC rail (x 8595-8645; shm labels it vcc at y 3950).
+#  - Tie. At the block's north-west corner a heavy-outlined box x 8508-8538, y 4783-4815 (both
+#    chip-2 shots), and under it in the clean shot a tan column x 8513-8529 that runs from the
+#    box down into the strip without a break (px col 8521 4772 4852 3: 195/160-180/130 from
+#    y 4790 to 4841; px row 4799 8494 8562 3): the load's gate tied to the node by a buried
+#    contact on a tab of the strip.
+#  - cdp1's thin metal x 8501-8517 (the data line of R8's slice 0) passes over the tie box and
+#    the strip. It is dark from y 4780 to 4815 in both metal shots and the clean shot is
+#    greenish under it there (textmap 8484 4762 8600 4875 3 --acid): what a thin metal over a
+#    box looks like (traps 22, 26, 27). No widened pad, no full-bright centre in chip 1: taken
+#    to make no contact (notes, Ambiguity 2).
+P 8352,4719 x8341 y4806 x8473 w=20  # C: from cdp1's row end, south, east under the rail: the gate
+N P 8341,4760 sl_eq_r5
+M 8434,4700 y4880 w=70              # slice 0's VSS rail, the piece over the gate
+N M 8434,4712 vss
+C 8431,4770 s=30x30
+D 8420,4750:8458,4790               # source: upper part with the contact
+D 8396,4775:8458,4846               # source, channel, drain (W 62)
+D 8392,4824:8532,4848               # node strip
+D 8362,4838:8400,4862               # its west end in the box
+P 8348,4840:8390,4862               # the output's poly row, on from tc2's end (x 8352)
+B 8356,4834:8396,4866               # buried contact: node to the output's poly
+N D 8490,4836 r9m_l1w
+D 8513,4788:8529,4830               # tab up from the strip into the tie box
+P 8508,4785:8540,4814               # the load gate's arm over the tab
+B 8506,4783:8532,4817               # buried contact: load gate to node
+P 8534,4783:8592,4872               # load gate (L 58)
+D 8526,4820:8650,4858               # strip under the load (W 38) and the land east of it
+C 8615,4838 s=30x30
+M 8620,4700 y4880 w=50              # slice 0's VCC rail, the piece over the contact
+N M 8620,4712 vcc
+
+# ============================================================================================
+# Piece r5w: r9m_l1w (= NOT sl_eq_r5) on west along the top of the top-left logic. Wiring only.
+#
+# From the inverter the net runs west on other packages' geometry: tc2's L (pads (8290,4850),
+# (8246,4716)), r9m's row y 4676, the crossing field, the metal x 6022 / y 2599, the pad
+# (5400,2596) and a poly west and north to (5175,2550), where r9m's file ends it.
+#   LINK C (here, in tl5's strip): from that corner the poly runs west as a row y 2542-2560,
+#     under rail RC (x 5078-5127) and the wide supply metal x 4948-4997 without a contact, to
+#     tl4's row end (4967,2551), the row of the pad (4908,2551) of tl4's bus line 1
+#     (tl4_w2512: metal along y 2555 / y 2512 west to x 4250).
+#   LINK D (here, in tl3's strip): that metal runs on west, straight, to a pad with a contact
+#     (3800,2510); a poly bar goes under the wide vertical metal x 3648-3760 to a pad with a
+#     contact (3606,2510), where tl2's metal of tl1_w2592 arrives (drawn there to x 3533).
+#   tl2, tl1: tl1_w2592's metal x 3503 / y 2598, the pad (2868,2596), the row y 2591 and the
+#     poly that leaves the strips north at (2493-2508,2500), into the band nobody has drawn.
+#
+# Evidence for link C: t2_w2.png (4x, chip-2 metal / chip-2 stripped / clean, every package's
+# trace): one row between two unbroken edge lines from tl4's pad to the corner, orange in both
+# chip-2 shots in the open (x 5003-5072, x 5130-5172); textmap 4900 2530 5200 2572 3: under
+# both metals the clean shot is poly (6-9) without a hole, both metals whole. A nub on the
+# row's top edge at (5044-5065, 2530-2542), over field: not drawn.
+# Evidence for link D: t2_w3.png (4.4x, three shots), t2_w4.png (1.75x, x 3530-4260, metal and
+# clean); textmap 3575 2492 3830 2528 3: each pad has a bright centre in a dark ring in both
+# metal shots and a green hole in the clean shot ((3602-3611, 2507-2513) and (3791-3806,
+# 2507-2513)); the bar between is poly (6-7) with no hole under the wide metal. East of the
+# pad the metal is straight over plain field: follower from (4240,2512) west: y 2511-2512 at
+# x 4140, 4040, 3940, 3840, end (3798,2509); tla_contacts.py 3830 4250 2510 --horizontal: none.
+P 4962,2551 x5183                   # link C: the row, tl4's end to r9m's corner
+N P 5050,2551 tl4_w2512                # tl4's name for this row (its bus line 1); one net with r9m_l1w
+M 3528,2512 x3610 w=14              # link D: tl2's metal (ends x 3533) on east to the pad
+P 3590,2494:3624,2526               # west pad
+C 3606,2510
+P 3606,2509 x3800 w=16              # bar under the wide metal x 3648-3760: no contact
+P 3784,2494:3820,2526               # east pad
+C 3800,2510
+M 3798,2512 x4255 w=12              # east to tl4's bus line 1 (M 4250,2512 ...)
+N M 3560,2512 tl1_w2592                # tl2's name for the metal that arrives here
+# With both links drawn the three names are one net (in the full extraction; read by itself
+# this file holds three pieces of it, each under the name its neighbour uses there).
+@alias r9m_l1w tl4_w2512
+@alias r9m_l1w tl1_w2592

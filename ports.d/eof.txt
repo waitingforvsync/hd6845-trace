@@ -7,3 +7,17 @@ rc_eq_r4   P  13420,9654-9672    in  from mrach's poly row y 9663 (its file ends
 rc_eq_r4   M  13641-13659,10705  ?   track L7 on into rdp3's piece (its name rdp3_n7s9): towards the loads
 rc_eq_r4   M  13729-13747,13475  ?   track L9: rdp3's end (13738,13480)
 rc_eq_r4   M  13729-13747,14695  ?   track L9 on into bd1's track k15 (its name bd1_a): the latch's data and inverter A
+
+# Piece r5inv: the inverter on R5's match
+sl_eq_r5   P  8352,4709-4729     in  cdp1's row y 4719 (its file ends it at x 8340): the inverter's input
+r9m_l1w    P  8348,4840-4862     out the inverter's output onto tc2's poly from the pad (8290,4850)
+vss        M  8399-8469,4700     -   slice 0's VSS rail, on north (shm draws it at y 4130-4300)
+vss        M  8399-8469,4880     -   slice 0's VSS rail, on south
+vcc        M  8595-8645,4700     -   slice 0's VCC rail, on north
+vcc        M  8595-8645,4880     -   slice 0's VCC rail, on south
+
+# Piece r5w: the inverter's output on west (one net with r9m_l1w)
+tl4_w2512  P  5183,2542-2560     in  link C's east end on r9m's corner (5175,2550); driver: the inverter
+tl4_w2512  P  4962,2542-2560     ?   link C's west end on tl4's row (4967,2551): towards the loads
+tl1_w2592  M  4255,2506-2518     in  link D's east end on tl4's bus line 1 (4250,2512)
+tl1_w2592  M  3528,2505-2519     ?   link D's west end on tl2's metal (3533,2509): towards the loads
