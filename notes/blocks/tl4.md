@@ -373,7 +373,7 @@ The diffusion of the upper stack is wider than RA: x 4700-4776 from y 3300 (the 
 two metals, x 4705-4722, is green field at y 3255-3300 and at y 3510-3560 and has no green
 at y 3300-3440 and y 3490-3508; row 2 is a gate at x 4712, 234/165/123).
 
-**The data inverter** is east of RA, y 3229-3360. A diffusion band y 3283-3314 runs from VSS box
+**The data inverter** is east of RA, y 3229-3360. A diffusion band y 3283-3320 (y 3283-3314 under the plate) runs from VSS box
 1 east under a vertical poly (x 4788-4812, y 3265-3357, joined at its south end to the data row's
 east end: salmon to x 4786 under RA's margin, then open poly, `px.py row 3340 4756 4880 3`), to
 a patch at x 4813-4845 (the node), under the plate (x 4847-4898) and into the VCC box under RB
@@ -391,7 +391,7 @@ plate and the plate's tie (drawn `?`: the plate's lower band hooks down onto a h
 and two side by side under the row y 3452-3472, which is **two polys**: all three stripped
 shots show field in a box (4722-4752, 3442-3488) between them (pink 199/124/125 in the clean
 shot, green in both chip-2 and chip-1 stripped shots; `px.py row 3462 4660 4800 4`), and RA has
-a notch or an elongated ring there in both metal shots. The west piece comes from the pad
+a notch or an elongated ring there in both metal shots. The west piece (it ends at x 4724; field to x 4743) comes from the pad
 (4540,3462) on the track x 4537 (`tl4_w4198`) and gates a column under the metal x 4680-4707
 (bright gate salmon 249/181/124 at (4690,3462)); the east piece (x 4747-4800) comes from a
 vertical poly east of RA (x 4793-4825, y 3449-3515) that is the foot of the lower load's plate
@@ -441,7 +441,7 @@ only inside the views named above:
 | `tl4_w3070` | metal x 4318 | from the pad (4320,3070) south to a corner (4315,4252), west to (4231,4246): leaves the strip west; the pad (4320,3372) is the second latch's data row. Drawn y 3058-3390 |
 | `tl4_w3178` | metal x 4410 | from the pad (4413,3178) south to the pad (4413,3592), the second latch's output row: drawn whole |
 | `tl5_w3505` | metal x 4452 (north piece) | from the pad (4452,2985) south through the pad (4455,3415) to the pad (4455,3635): drawn whole, with the row east from the north pad to the strip's edge |
-| `tl4_w3245` | metal x 4680-4707 | from the pad (4690,3247) to the pad (4690,3703): drawn whole; a ring at (4684,3420) on it (Ambiguities 4) |
+| `tl4_w3245` | metal x 4680-4707 | from the pad (4690,3247) to the pad (4690,3703): drawn whole; it passes over two heavy boxes, (4684,3420) (Ambiguities 4) and the buried contact at y 3593, with no contact |
 | `tl4_w3390` | metal x 4851-4881 | from the plate's contact (4863,3390) to the pad (4863,3612): drawn whole |
 | `tl4_w3113` | metal x 4408 | from the pad (4410,3113) north to a corner (4421,2858), east to (4455,2856) |
 | `tl4_w3808` | metal x 4496 | from the pad (4495,3808) north to a corner (4495,2723), west to (4273,2727) |
@@ -466,19 +466,23 @@ only inside the views named above:
 2. **The supplies of RA and RB** are named from structure only.
 3. A copy checked by overlay at 4x and 2.5x; the cells' small items (the third pull-down's
    diffusion to the VSS box, the gate caps) were not each measured here.
-4. **The ring at (4684,3420) on the metal of `tl4_w3245`** (second latch). Both metal shots show
-   what the metal's two end contacts show: a bright centre about 12 px across (x 4677-4689,
-   y 3414-3426) in a dark ring (x 4662-4704, y 3403-3438), the metal widened west
-   (`tools/textmap.py 4662 3396 4712 3446 3`, against `4662 3226 4712 3270` and `4662 3680 4712
-   3726`). The stripped shots show nested outlines, an inner heavy box (4677-4698, 3408-3432);
-   the clean shot reads 4-7 around the centre (like poly over field) and 0-2 in the centre, with
-   no green hole such as the end pads have. It lies against the west edge of the node
-   `tl4_w3390`'s diffusion (x 4700). Drawn as an uncertain poly pad with an uncertain contact and
-   **no connection to the node**: a contact from this metal to the node would make `tl4_w3245`
-   and `tl4_w3390` one net, which the rest of the circuit contradicts (the node would then gate
-   its own pull-down, and carry two loads). The pad is not joined to the enable row above it
-   (pink field at (4680-4686, 3396-3399)) nor to the clear row below it (rows y 3438-3444 read
-   0-3, not poly). What the pad is for is not known.
+4. **The heavy box at (4684,3420) under the metal of `tl4_w3245`** (second latch): inner box
+   (4677-4698, 3408-3432) in nested outlines, against the west edge of the node `tl4_w3390`'s
+   diffusion. Both metal shots show a bright centre about 12 px across (x 4677-4689,
+   y 3414-3426) in a dark ring (x 4662-4704, y 3403-3438) (`tools/textmap.py 4662 3396 4712 3446
+   3`), which I first drew as an uncertain contact on an uncertain poly pad. Review round 7:
+   **not a contact**. The clean shot has no hole there (centre 203/176/131, against
+   161-178/180-193/98-108 in the four real poly contacts of the two metals), the chip-2
+   stripped shot no pits; in both stripped shots it is the same kind of object as the
+   buried-contact box at (4673-4709, 3578-3607), over which chip 1's metal shot shows the same
+   bright centre (`textmap.py 4662 3572 4712 3614 3`: chip 1 A-E at x 4680-4689, y 3587-3599);
+   the "widening" west of the metal is the box's outline (dark, not metal). Its boundary to
+   the node's diffusion is one weak line. Drawn now as an uncertain lobe of the node's
+   diffusion (`?D 4662,3404:4703,3438`), with no contact. No poly was seen leaving it (pink
+   field at (4680-4686, 3396-3399) towards the enable row, rows y 3438-3444 read 0-3 towards
+   the clear row), so what it is for is not known. **If it were a contact of the metal, it
+   would short `tl4_w3245` to `tl4_w3390`** (the node would gate its own pull-down and carry two
+   loads): anyone who re-reads it as one must explain the rest of the latch.
 5. **The field box (4722-4752, 3442-3488) in the row y 3452-3472** may be a substrate contact of
    RA (elongated ring in both metal shots, bright sliver x 4740-4748). Not drawn. Either way
    there is no poly and no diffusion in it, which is what makes the row two nets.
@@ -687,6 +691,51 @@ chip-2 metal shot and otherwise with the text tools; the NOR's first input still
 earlier `?P 4620,4908:4642,4924`.
 
 Round 6: no findings that change a connection.
+
+### Round 7: full review of the second latch (2026-11-18, commit cf49979, images `review-7/`)
+
+A fresh reviewer (Fable 5.2), briefed with the claims (the three equations, every row with its
+pad and track, each diffusion and plate, the two strap metals with their four contacts, the
+three ties, the enable row to the strip's edge) and told to suspect: the ring at (4684,3420);
+whether the row y 3452-3472 is two polys and what the box (4722-4752, 3442-3488) is; the
+vertical poly east of RA and its band; the diffusion across the gap between the two metals; the
+row y 3587-3610 and the J; the ties and the plates' other connections; the buried contact at
+y 3593 and the follower's contact candidates on the strap; the enable row y 2976-2996 and the
+metals over it; which rows are gates over which diffusions; anything left out. 20 images
+(4.8x and more, the three shots and chip 1's metal), profiles and text maps.
+
+Checked and found correct: two polys in the row y 3452-3472, the box is field; diffusion
+crosses the metal gap at y 3356, 3412, 3420, 3496, 3612, 3655 (thin dark bar; the field gaps at
+y 3482, 3520, 3552, 3590 read green); no poly crosses RA at y 3587-3610, the J is diffusion
+into the third VSS box, no way round either gate end; the box at y 3593 is a buried contact;
+the strap x 4680-4707 is one metal and the candidates y 3439, 3499, 3619, 3676 are edges
+underneath; the east strap has only its two contacts and (4868,3435) is a blemish of chip 2;
+the enable row is continuous to x 4967 with no taps; the node's band is continuous across RA's
+edge; all four rows cross their diffusions fully; the five bus-field pads are real contacts,
+no taps at the track crossings; RA has only its three VSS contacts; nothing undrawn
+(`opendiff.py`). All eleven transistors and the three equations stand.
+
+Findings, none changing a connection, all confirmed and fixed:
+1. (4684,3420) is not a metal contact on a poly pad (Ambiguities 4 has the evidence; my check:
+   `textmap.py 4662 3572 4712 3614 3` shows chip 1's bright centre over the y 3593 box too, and
+   my own profiles had found no hole). The `?P` pad and `?C` were joined to nothing; replaced by
+   `?D 4662,3404:4703,3438`, a lobe of the node's diffusion, no contact.
+2. The clear row's west piece ends at x 4724, not 4718 (`px.py row 3462`: salmon to x 4720).
+3. The inverter's band under the vertical gate reaches y 3320, not 3314 (`px.py col 4800 3272
+   3332 3`: edges at y 3281-3284 and y 3317-3323). Drawn y 3283-3320 west of x 4832.
+4. The second VSS box's west edge below y 3510 is x 4724, not 4705 (`px.py row 3520 4696 4736
+   3`: pink to x 4708, green, tan from x 4729).
+5. The row y 3587-3610 ends at x 4788, not 4797 (`px.py row 3598 4770 4812 3 acid1b,acid`).
+
+`tools/t.sh tl4 sameconn.py cf49979`: `connections identical`.
+`.venv/bin/python tools/sameconn.py cf49979`: `connections identical`.
+
+Not checkable (reviewer): the three ties (each a heavy-outlined box at the drawn place; poly
+over diffusion inside not resolvable: `?` stays, Ambiguities 6); the junction of the data row
+with the vertical poly x 4788-4812 lies on RA's edge line (indirect evidence only: no field
+colour between them in the clean shot, one continuous south edge).
+
+Round 7: no findings that change a connection.
 
 ## Not done
 

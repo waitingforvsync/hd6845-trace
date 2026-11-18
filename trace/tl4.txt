@@ -443,12 +443,12 @@ P 4712,3376:4790,3396
 P 4438,3619:4474,3652
 C 4455,3635
 P 4465,3625:4772,3645
-# clear: pad (4540,3462) on the track x 4537 (tl4_w4198); row y 3452-3472 east to x 4718 (west
+# clear: pad (4540,3462) on the track x 4537 (tl4_w4198); row y 3452-3472 east to x 4724 (west
 # piece of the row; the east piece is another net)
 M 4537,3440 y3900
 P 4522,3446:4560,3478
 C 4540,3462
-P 4550,3452:4718,3472
+P 4550,3452:4724,3472
 # output tl4_w3178 (the NOR's second input): the track x 4410 ends on the pad (4413,3592); row
 # y 3582-3602 east onto a heavy box (4673-4707, 3578-3607) at the top of the lower stack's west column
 M 4410,3225 y3606
@@ -458,11 +458,12 @@ P 4425,3582:4705,3602
 B 4673,3578:4709,3607
 
 # ---- the data inverter, east of RA at y 3229-3360.  tl4_w3245 = NOT tl4_w3070
-# RA's VSS box (contact ring (4745,3285)); a diffusion band y 3283-3314 from it east: under the
+# RA's VSS box (contact ring (4745,3285)); a diffusion band y 3283-3320 (3314 under the plate) from it east: under the
 # vertical gate (x 4788-4812), a patch (the node), under the plate, to the VCC box under RB
 D 4725,3265:4778,3322
 C 4745,3285
-D 4770,3283:4912,3314
+D 4770,3283:4832,3320
+D 4826,3283:4912,3314
 D 4905,3240:4958,3338
 C 4930,3257 4926,3305
 # plate, and its poly north and west (bar y 3229-3249 over field under RA) to a pad with a
@@ -484,10 +485,11 @@ N M 4693,3320 tl4_w3245
 P 4678,3684:4712,3716
 C 4690,3703
 P 4700,3681:4812,3700
-# a ring at (4684,3420) on the same metal: bright centre in a dark ring in both metal shots, the
-# metal widened west; a poly pad beside the stack with nothing else on it (Ambiguities)
-?P 4664,3404:4695,3436
-?C 4684,3420
+# a heavy box (4677-4698, 3408-3432) under the same metal at the node's west edge, like the
+# buried-contact box at y 3593 but with no poly leaving it: NOT a contact of the metal (no hole
+# in the clean shot; review round 7). Drawn as a lobe of the node's diffusion (Ambiguities 4):
+# a contact here would short tl4_w3245 to tl4_w3390
+?D 4662,3404:4703,3438
 
 # ---- the upper stack under RA and its node tl4_w3390 (y 3300-3545)
 # VSS box - data row - d1 - enable row - node. The diffusion is wider than RA: x 4700-4776.
@@ -496,7 +498,8 @@ D 4700,3300:4776,3447
 # them, each under its own piece of the row y 3452-3472, both onto RA's second VSS box
 D 4675,3441:4714,3510
 D 4753,3436:4790,3500
-D 4705,3490:4778,3542
+D 4705,3490:4778,3510
+D 4724,3490:4778,3542
 C 4745,3512
 # east piece of the row: from a vertical poly east of RA (x 4793-4825), which is the foot of the
 # lower load's plate (tl4_w3178)
@@ -520,7 +523,7 @@ N M 4866,3480 tl4_w3390
 # the lower node's east column
 P 4846,3592:4890,3630
 C 4863,3612
-P 4797,3587:4852,3610
+P 4788,3587:4852,3610
 
 # ---- the lower node tl4_w3178 (y 3497-3765)
 # east of RA: patch (4800-4843, 3520-3582), load band y 3523-3551 east under the plate
