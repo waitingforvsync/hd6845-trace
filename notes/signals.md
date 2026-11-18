@@ -239,7 +239,6 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | `ar#`, `ar#_n` | address register bit # and its inverse (rows of the decode array) |
 | `ar#_a`, `ar#_n2`, `ar#_q`, `ar#_trk` | nodes of address register bit #: storage node, its inverse, output, and the track that takes it to the decode |
 | `ar_load`, `ar_load_n` | load strobe of the address register and its inverse |
-| `areg_w#` | lines 6 and 7 of the bundle beside the address row inverters; not identified |
 
 ## Bus control
 
