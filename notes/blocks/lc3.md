@@ -123,3 +123,32 @@ Everything. Suggested order:
 5. Whose the drawn piece near (4800-4975, 9737) is.
 
 ## Review
+
+**Model note: the inverter pair was traced AND reviewed on claude-opus, not
+claude-fable-5-2** (the contributor's Fable allowance is exhausted). The survey was on
+Fable.
+
+Round 1 (full review at commit ac7f681, a fresh agent on claude-opus; the tracer had
+checked the pair only on one 1.6x overlay, so every item was treated as unverified).
+Three findings, each then seen by the tracer on its own 5x views before it was applied:
+1. The boxes (5625,9432) and (5625,9335) are buried contacts, not metal contacts: the
+   metal x 5615-5638 runs unbroken over both in both metal shots. The `?C`/`?M` items were
+   deleted and the metal drawn as a through net `lc3_m5626`. This changes connections: the
+   two outputs are not joined (two inverters, not one gate).
+2. The load's gate tie was drawn in the wrong place: it is a box x 5780-5812, y 9468-9500
+   at the load poly's south end, met by a diffusion strip from the band. Redrawn, firm
+   (same connection: gate tied to the output).
+3. An undrawn second through metal x 5746-5766: drawn as `lc3_m5756`.
+Checked and correct: pull-down column, input rows and pads, the VSS and VCC contacts on
+their rails, the mirror about y 9384.5, the load's x position.
+
+Round 2 (fix check, 2026-11-18 08:42 +0000, a fresh agent on claude-opus, against ac7f681): all three changes
+match the photos in `metal`, `metal1`, `acid1b` and `acid`, at the lower inverter and at
+the mirrored one: no contact on either through metal over the boxes or over the strip;
+the buried contact where poly and strip overlap; bare field east of the tie box (nothing
+joins VCC). Extraction 0 errors; both equations FIRM; outputs and both through metals
+separate nets. Geometry only: the strip's west edge is about x 5754 in the photo against
+5744 drawn. Not checked in either round: gate widths past the channel ends by profile;
+50 px beyond the west ends of the output rows.
+
+Round 2: no findings.
