@@ -25,12 +25,12 @@ tl4_w4113 = NOT( tl4_w4025 AND tl4_w4068  OR  tl4_w4243 )         marked: the tw
 tl4_w4243 = NOT( tl4_w4198  OR  tl4_w4068 AND tl4_w3928  OR  tl4_w4113 )   marked: the two load ties
 tl4_w4545 = NOR( tla_w3417, tl4_w4501, tl4_w4590 )                marked: the load's tie
 tl4_w4686 = NOT( tl4_w4718 AND tl4_w4590  OR  tl4_w4850 )         marked: the lower load's tie carries tl4_w4850 to this gate
-tl4_w4850 = NOT( tl4_w4198  OR  tl4_w4545 AND tl4_w4935  OR  tl4_w4686 )   marked: the load ties
+tl4_w4850 = NOT( tl4_w4198  OR  tl4_w4545  OR  tl4_w4686 )        marked: the load ties; tl4_w4545 on two gates in series (one join `?`)
 ```
 
 The pair at y 4645-5000 is a set/reset latch: `tl4_w4718` AND `tl4_w4590` both high pull
 `tl4_w4686` low, which lets `tl4_w4850` rise; `tl4_w4198` (the clear of the latch above as well)
-or `tl4_w4545` AND `tl4_w4935` pull `tl4_w4850` low again. `tl4_w4850` leaves south on the
+or `tl4_w4545` pull `tl4_w4850` low again. `tl4_w4850` leaves south on the
 track x 4581; `tl4_w4686` goes no further than the pair (its thin metal ends on the lower gate's pad).
 
 A latch: open while `tl4_w4068` is high, it takes `tl4_w4025`; `tl4_w4198` high forces
@@ -174,7 +174,7 @@ field), `k1.png`; overlays `ob1.png`, `ob2.png` (3.6x), `ob3.png` (2.8x).
   y 4910 and y 4955. So each row is one gate about 85 px wide. Down the stack
   (`px.py col 4745 4640 4925 5 acid1b`: tan = diffusion, salmon = gate): node `tl4_w4686`
   (y 4668-4706), gate 1 (y 4708-4728), middle, gate 2 (y 4752-4772), VSS (y 4776-4795, with a box
-  under RA, 4735-4792 x 4790-4826, contact (4750,4812)).
+  under RA, 4735-4792 x 4790-4826, contact (4758,4806)).
 - **Gate 3 (y 4797-4815) is on the column only**: its row ends at RA's edge (x 4730), west of
   the VSS box. South of it the column is the node `tl4_w4850`: a buried contact (ringed box
   4675-4712 x 4828-4872) onto a poly west along y 4840-4860 to a pad with a contact (4580,4850)
@@ -212,14 +212,14 @@ field), `k1.png`; overlays `ob1.png`, `ob2.png` (3.6x), `ob3.png` (2.8x).
     from y 3895 to y 4816. The upper latch's equation is unchanged.
   - gate 4 is `tl4_w4545`, the three-input NOR's output: the pad (4623,4893) where its metal
     x 4626 ends.
-  - gate 5, `tl4_w4935`: its row comes from a vertical poly x 4620-4642 that starts just below
-    that pad and runs south to about y 5030, where it turns east as a row y 5005-5030
-    (`k1.png`; not drawn south of y 4992). **Read as not joined to the pad above it**: a dark
-    line lies between them in every shot (`px.py col 4631 4896 4934 2 acid1b,acid,acid1`:
-    dark at y 4914-4918), but the same line lies between the pad and gate 4's row
-    (`px.py row 4893 4630 4664 2`), so the photos alone do not decide which of the two the pad
-    feeds. Gate 4's row has no other source, and one signal on two gates in series would do
-    nothing, so the pad is given to gate 4.
+  - gate 5 is `tl4_w4545` as well: its row comes from a vertical poly x 4620-4642 that starts
+    under that pad and runs south to about y 5030, where it turns east as a row y 5005-5030
+    (`k1.png`, `s1.png`, `s2.png`: that row is a gate of the unit below, under RA at x 4725-4780;
+    not drawn south of y 4992). First drawn as a net of its own (`tl4_w4935`), because one
+    signal on two gates in series does nothing; review round 4 showed the junction has no gap
+    in any shot and looks like the known joins, and the poly has no other driver in view. The
+    join is drawn `?P` (the pad's outline hides it). Why the pull-down has two gates on one
+    net is not understood.
 
 ## Ports
 
@@ -242,7 +242,7 @@ only inside the views named above:
 | `tl4_w4545` | metal x 4626 | from the pad (4620,4545) south to the pad (4623,4893): drawn whole |
 | `tl4_w4718` | metal x 4581 (north part) | from the pad (4580,4718) north to a corner (4586,2896), east to (4652,2902). A stub is drawn |
 | `tl4_w4850` | metal x 4581 (south part) | from the pad (4580,4850) south to y 5116 (a pad with a contact at about (4583,5108), `k1.png`). Drawn to y 5110 |
-| `tl4_w4935` | poly x 4620-4642 | from gate 5's row south to about y 5030, then east as a row y 5005-5030 into the column. Drawn to y 4992 |
+| `tl4_w4545` (poly) | poly x 4620-4642 | from the pad (4623,4893) south past gate 5's row to about y 5030, then east as a row y 5005-5030, a gate of the unit below. Drawn to y 4992 |
 
 ## Ambiguities
 
@@ -353,6 +353,40 @@ the diffusion; row 2 west of x 4250; the track x 4362 beyond the stub.
 
 Round 3: no findings that change a connection.
 
+### Round 4: full review of the cross-coupled pair (2026-11-17, commit 541081e, images `review-4/`)
+
+Told to suspect: which of gate 4's row and the vertical poly the pad (4623,4893) feeds; the
+stack's continuity between the open column and the part under RA; the three joins across RA's
+east edge; the crossing poly's join to the stub and its separation from gate 2's row (and the
+lower pad poly from gate 5's row); where the rows end; the buried contact on the upper leg; the
+contacts on the tracks; whether the thin metal touches the lower plate.
+Checked at 6-10x with `px.py`, `textmap.py --acid`, `follow.py` (13 images).
+
+- **Finding 1, changes a connection, confirmed.** Pad (4623,4893) to the vertical poly: the
+  trace had a gap (gate 5 a net of its own, `tl4_w4935`). No gap in any of four shots; the dips
+  between pad and poly are at different y in the two stripped shots (y 4914-4918 `acid`,
+  y 4920-4924 `acid1b`), as at the known-joined pad (4580,4850). Checked here from the south
+  (`s1.png`, `s2.png`): the poly's far end is only a gate row, so it has no other driver.
+  Fixed: `?P 4620,4908:4642,4924` joins them, the name `tl4_w4935` is gone, and
+  `tl4_w4850 = NOT(tl4_w4198 OR tl4_w4545 OR tl4_w4686)` with `tl4_w4545` on gates 4 and 5.
+- Geometry only, fixed: VSS contact centre (4758,4806); rows 4/5 end near x 4786; the crossing
+  poly and the lower pad poly start near x 4800. Not changed: the thin metal is about 24 px wide
+  over the lower plate (no contact there); the node segment enters the open box through an
+  opening about 10 px high.
+- Found correct: nine transistors; the six contacts; rows cross the other tracks without
+  contacts; metals x 4537 and x 4364 continuous; no metal at x 4581 between its pads; field
+  between gate 2's row and the crossing poly, gate 5's row and the lower pad poly, pad and
+  stub, closed stub and gate 1's row; stub joined to the lower plate; foot joined to the VSS
+  box; gate 3's row stops short of the box; the `?P` plate-to-pad join supported.
+- Could not be checked: the column's continuity under RA and the three joins across RA's east
+  edge (the rail-edge line is there over field too: inferred); crossing poly to stub rests on
+  the clean shot alone; the lower tie stays `?`.
+
+`tools/t.sh tl4 sameconn.py 541081e`: `CONNECTIONS DIFFER (7 differences)`, all of them gate 5's
+net (`tl4_w4935` gone, two transistors and one equation renamed).
+
+Round 4: one finding that changes a connection, fixed.
+
 ## Not done
 
 - The nine tracks beyond the views (table under Ports), and their other pads.
@@ -360,8 +394,9 @@ Round 3: no findings that change a connection.
 - The rest of the gate column: y 3220-3780 (no findcell match), y 5000-5400 (findcell: `tl1`'s
   inverter at 2126,955, score 0.75; weaker hits for the NOR at 2125,912 and the wide NOR at
   2126,174). The unit below the pair shares its lower VSS box (contact (4747,4975)); the row
-  y 5005-5030 at the south end of `tl4_w4935`'s poly is its first.
-- Where `tl4_w4935` comes from (the unit below), where `tl4_w4850` goes (track x 4581 south, pad
+  y 5005-5030 at the south end of `tl4_w4545`'s poly is its first gate (an outlined box at
+  about (4700-4722, 4985-5040) beside it is not read).
+- Where `tl4_w4850` goes (track x 4581 south, pad
   about (4583,5108)) and where `tl4_w4718` comes from (track x 4581 north).
 - In the bus field at the pair: a row y 4880-4900 from a pad with a contact (4537,4892) on the
   south part of the metal x 4537 west to about x 4335. A pad with a contact at about (4278,4571).

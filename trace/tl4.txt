@@ -203,7 +203,7 @@ P 4812,4590:4850,4612
 # under RA and in the open west of it as ONE diffusion (x 4677-4764: no edge between the column
 # and the part under RA, px.py row 4740/4785/4910/4955), so each row is one wide gate.
 #   tl4_w4686 = NOT( tl4_w4718 AND tl4_w4590  OR  tl4_w4850 )
-#   tl4_w4850 = NOT( tl4_w4198  OR  tl4_w4545 AND tl4_w4935  OR  tl4_w4686 )
+#   tl4_w4850 = NOT( tl4_w4198  OR  tl4_w4545  OR  tl4_w4686 )   (tl4_w4545 on two gates in series)
 # Read on b_*.png (3.3x), c_/d_/e_/f_*.png (5-5.6x), g1/g2.png (8x, four shots), h_*.png (4x),
 # j1/j2.png (6x, four shots), t2a/t2b.png (9x), w_*.png (2.8x), k1.png; profiles in the notes.
 M 4759,4650 y5005 w=54                # RA goes on south
@@ -232,7 +232,7 @@ N M 4868,4790 tl4_w4686
 # VSS: box under RA with a contact, an arm east into the open, and a band (y 4788-4801) onto
 # the foot of the node's east leg; the lower plate's poly crosses the leg (y 4752-4776)
 D 4735,4790:4792,4826
-C 4750,4812
+C 4758,4806
 D 4788,4788:4848,4801
 # gate 1: row from a pad with a contact (4580,4718) at the south end of the track x 4581
 P 4563,4700:4598,4735
@@ -260,7 +260,7 @@ D 4908,4805:4960,4878                 # VCC box
 C 4928,4838 s=22x40
 P 4850,4820:4900,4878                 # lower load plate
 P 4855,4750:4878,4825                 # its stub north, under the thin metal ...
-P 4795,4752:4860,4776                 # ... and west across the upper node's leg
+P 4800,4752:4860,4776                 # ... and west across the upper node's leg
 # the plate's tail west onto a heavy box on a tail of the node: the tie, uncertain as in the
 # other loads (AMB-026). The gate across the upper node's leg hangs on it.
 P 4828,4820:4852,4842
@@ -280,11 +280,14 @@ D 4775,4950:4850,4965                 # VSS band east, onto the foot of the node
 # gate 4: tl4_w4545, from the pad at the south end of the metal x 4626
 P 4610,4878:4648,4912
 C 4623,4893
-P 4640,4880:4776,4900
-# gate 5: a row from a vertical poly that goes on south (to a row at y 5005-5030, not drawn)
+P 4640,4880:4786,4900
+# gate 5: a row from a vertical poly that goes on south (to a row at y 5005-5030, a gate of the
+# unit below, not drawn). The poly starts under the pad of gate 4: joined to it (review round 4:
+# no gap in any shot, and no other driver on the poly), so gates 4 and 5 are one net. `?`
+# because the pad's outline hides the join itself.
 P 4620,4920:4642,4992
-P 4640,4925:4776,4946
-N P 4700,4935 tl4_w4935
+?P 4620,4908:4642,4924
+P 4640,4925:4786,4946
 # the upper node (thin metal, pad contact (4868,4930)) gates the lower node's east leg
-P 4790,4918:4892,4946
+P 4800,4918:4892,4946
 C 4868,4930
