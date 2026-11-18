@@ -84,3 +84,11 @@ M 10682,15416 y15644 w=12
 # y ~15706-15752 in the clean shot (dark edge from y 15752), contact ring (10558,15731) in the metal shot
 D 10540,15706:10596,15752
 C 10558,15731
+# the metal x 10441 (x 10430-10450) on south from unit a's lower enable pad: continuous in the metal
+# shot y 15172-15665 (b_x441.png, b_en.png 3x, metal + clean); copy b's two enable pads on it, rings in
+# the metal shot, pale poly pads in the clean shot. Their rows east to copy b's cells are held with the cells.
+M 10441,15180 y15665 w=20
+P 10426,15418:10456,15446
+C 10441,15432
+P 10426,15636:10456,15664
+C 10441,15650
