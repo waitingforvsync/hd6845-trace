@@ -15,6 +15,13 @@ of the strip at y 8067: the counterpart of `tl1`'s thin metal W. Over three tie 
 metal shot shows it for 33-40 px; it is drawn uncertain there and taken to pass over (Ambiguity 6). Full extraction:
 2362 nets, 4232 transistors, 0 errors, 0 warnings. Run 3's piece is on main (b2a42d5).
 
+Same run, piece F (wiring only): **latch B's clear is `lc1_w7864` too** (`lc1`'s metal x 5466-5486 comes south
+without a break to the clear pad), so one signal clears latches B, C and D; latch B's output Na leaves north on
+the metal x 5508-5524; `lc2_w8474`'s row is drawn on west to a pad (5428,8648), a metal jumper north and a second
+pad (5428,8516), whose poly runs on west. One merged equation prints another name: `lc2_w8215` (latch B's Nb)
+reads `lc1_w7864` where it read `lc2_w8254` (input identified; no logic changed). Full extraction: 2361 nets,
+4232 transistors, 0 errors, 0 warnings.
+
 2026-11-18 16:28 -0600 (run 3, Matt Godbolt, on Fable 5.2). **Partial: the lower unit of latch D and the bus field
 east of the latches drawn** (piece D: 6 transistors in one copy of `tl1_ua`, and wiring). Latch D is the latch
 whose upper unit `lc1` drew: its output's inverse is `lc_step`, the step pulse of the scan line counter. With
@@ -172,6 +179,16 @@ contact lies on the ring (6047,9051) under the rail, the gate on the row y 9072-
 | output | the cell's output poly east to a pad (6168,9124), the end of the thin metal | `v 6169 9100 9225`: ring, hole at y 9124; `h 9126 6130 6195` |
 | the thin metal | from the pad south on x 6162-6176, west along y 9205-9219 round the VSS rail's end, north on x 5967-5981 to y 8067 and on into `lc1` | `h 9212 5960 6185`: no break; `tl5_tracks.py h Y 5945 6005 --half 1` at ten heights from y 8170 to y 9150: metal at x 5966-5981 in every one; `v 5972 8060 9215`: the stretches without metal in both chips are 8-15 px (edges underneath) except three (Ambiguity 6) |
 
+## Latch B's clear and output, and the west end of `lc2_w8474` (run 4, piece F): traced
+
+Wiring only. Views `g1_m.png`, `g1_a.png` (1.9x, every package's trace), overlay `o4_m.png` (2x).
+
+| Wire | Reading | Seen |
+|---|---|---|
+| latch B's clear | `lc1`'s metal x 5466-5486 (`lc1_w7864`, drawn by `lc1` to y 8067) runs on south to the clear pad (5472,8254): **latch B's clear is `lc1_w7864`** | `tl5_tracks.py v 5476 8055 8262`: metal without a break to the pad's ring (y 8234-8257), hole at y 8255; `follow.py 5474 8100 S` ends at the pad |
+| latch B's output Na | the metal x 5508-5524 runs north from the pad (5514,8341) out of the strip; the clear's row passes under it without a contact | `v 5516 8055 8350`: two 8 px bars at y 8241-8249 and y 8265-8273 (the row's edges), no hole; the ring at y 8321-8338 |
+| `lc2_w8474` | the row y 8634-8652 from under the VCC rail west under five metals (no pad, no hole) to a pad (5428,8648); a metal x 5421-5437 north to a pad (5428,8516); poly west from it along y 8509-8526 (drawn to x 5400; `tl5_tracks.py rows row 5150 5445 4 8515`: poly to x 5150 and beyond) | `h 8643 5420 5845`: the only hole is the pad's; `v 5429 8500 8660`: metal between the two rings; `textmap.py 5404 8626 5452 8666 --acid`: ring, bright centre and green hole at the lower pad; `textmap.py 5398 8494 5452 8536 --acid`: at the upper pad a ring with a bright centre in chip 1, a weak centre (6-7) in chip 2, no green hole, a pit in the chip-2 stripped shot |
+
 ## Ports
 
 `ports.d/lc2.txt` (kept in step with this). Latch B: enable `lc2_w8169` north on metal x 5560 at y 8067 (into
@@ -194,7 +211,9 @@ Run 3 (latch D's lower unit and the bus field):
 | `lc1_w7864` | M | 6248-6264, 8067 | in | latch D's and latch C's clear (meets `lc1`'s port) |
 | `lc1_w7780` | M | 6287-6307, 8067 | in | latch D's data (meets `lc1`'s port) |
 | `lc2_w8474` | M | 6332-6350, 8067 | ? | the metal of the pad (6341,8214) |
-| `lc2_w8474` | P | 5835, 8634-8652 | ? | drawn end: the poly runs on west |
+| `lc2_w8474` | P | 5400, 8509-8526 | ? | drawn end (run 4): the poly from the pad (5428,8516) runs on west |
+| `lc2_w8341` | M | 5508-5524, 8067 | out | run 4: latch B's output Na, north into `lc1` |
+| `lc1_w7864` | M | 5466-5486, 8067 | in | run 4: latch B's clear (meets `lc1`'s port) |
 | `lc2_w8172` | M | 6422-6440, 8067 | ? | from the north |
 | `lc2_w8172` | M | 6450, 8163-8181 | ? | on east |
 | `lc2_w8906` | M | 6462-6480, 8067 | in | latch C's data, north (20 px east of the strip) |
@@ -247,7 +266,7 @@ Run 3 (2026-11-18 16:28 -0600):
   through `lc1`'s upper unit (not drawn there). **A poly passes under the VCC rail at y 9178-9196** (salmon from
   x 5830 to x 5890) and goes on east in the open to x 5945, where it turns south (`o3_a.png`, `o3_m.png`): not drawn,
   part of the cluster that runs on into `lc3`.
-- **`lc2_w8474`'s poly west of (5835,8643)**: it runs on west along y 8634-8652 past x 5560 (not followed), and its
+- **`lc2_w8474`'s poly west of (5400,8517)** (run 4: drawn to there; it runs on west past x 5150), and its
   metal x 6332-6350 north of y 8067 (`lc1` has no port there).
 - North of y 8067 (in `lc1`'s strip, not drawn by it): latch C's enable metal x 6159-6177, the node's row
   x 6401-6415 (`lc2_w8083`), the metal x 6422-6440 (`lc2_w8172`), latch C's data metal x 6462-6480.
@@ -271,8 +290,15 @@ Run 3 (2026-11-18 16:28 -0600):
   at x about 5708-5727 (about 18 px). Geometry only; the cell copy was not changed.
 - Gate-width profiles of the three loads (t133-t135) were not taken.
 
-1. Latch B's tracks: clear from the pad (5472,8254), Na from (5514,8341), data south from
-   (5558,8450); enable north of y 8067 is `lc1`'s region.
+1. Latch B's tracks: clear and Na are drawn (run 4). **Data**: the metal from the pad (5558,8450) goes south to
+   y 8607, east to x 5626 and south to a ring at about (5621,8908) at the top of the gate column under the VSS
+   rail (x 5625-5760, y 8915-9240: five gate rows at y 8942-8955, 9028-9041, 9072-9085, 9159-9171, 9202-9214,
+   `railprof.py 5662 5702 8880 9240`; two loads at (5800-5838, 8905-8968) and (5800-5840, 9060-9130) on the VCC
+   boxes that latch C's cell and the inverter use): not drawn; it is the next piece. The thin metal x 5750-5763
+   through latch B (dim and 5 px west of its line inside the latch, `textmap.py 5738 8108 5774 8206`) runs on
+   south over that column's load tab at about (5770,8960) and on to y 9240: not drawn. The staircase of metals
+   west of the latch (x 5400-5560) is not drawn (`follow.py 5421 8100 S`: south, east at y 8308, south, east at
+   y 8387, south on x 5517 to y 8785, east, south on x 5559 to y 9142).
 2. Latch C (x 5840-6275, y 8525-9030): **traced 2026-11-18 04:35 +0000 on claude-opus, not
    reviewed.** Cells: `@inst tl1_ub 3352,3999 rot=180 o=2662.5,4685`, `@inst tl1_ua 3352,4439
    rot=180 o=2662.5,4465` (master (x, y) -> (8677 - x, 13369 - y)), overlaid at 4x. Hand-drawn,

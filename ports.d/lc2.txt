@@ -2,8 +2,6 @@
 # The package's region is x 4400-6450, y 8067-9233. Latch B (x 5590-5895, y 8055-8560) and latch C (x 5840-6275, y 8525-9030) are drawn.
 
 lc2_w8169   M  5549-5571,8067  in   latch B's enable: the metal x 5560 from its two pads (5558,8169), (5558,8386) runs on north into lc1 (believed to (5558,7646); not drawn north of y 8067)
-lc2_w8254   M  5461-5487,8238-8272  in   latch B's clear: drawn only over the pad (5472,8254); the metal x 5460-5490 runs on (not followed)
-lc2_w8341   M  5503-5525,8326-8357  out  latch B's output Na: drawn only over the pad (5514,8341); the metal runs on (not followed)
 lc2_w8450   M  5547-5569,8480  in   latch B's data: the metal from the pad (5558,8450) runs on south (not followed)
 vss         M  5659-5705,8060  -    rail over latch B, runs on north into lc1 (the copy's VSS box reaches y 8062)
 vss         M  5659-5705,8560  -    rail runs on south (not drawn further)
@@ -20,7 +18,6 @@ lc1_w7908   M  6450,8250-8268  out  on east (metal A)
 lc1_w7864   M  6248-6264,8067  in   latch D's clear, and by a cross-under and a metal latch C's
 lc1_w7780   M  6287-6307,8067  in   latch D's data, to the pad (6297,8170)
 lc2_w8474   M  6332-6350,8067  ?    the metal of the pad (6341,8214)
-lc2_w8474   P  5835,8634-8652  ?    drawn end: the poly runs on west (seen to x 5560)
 lc2_w8172   M  6422-6440,8067  ?    a metal from the north that turns east
 lc2_w8172   M  6450,8163-8181  ?    on east
 lc2_w8906   M  6462-6480,8067  in   latch C's data: the metal of the pad (6470,8127), 20 px east of the strip
@@ -28,3 +25,6 @@ lc2_w8906   M  6462-6480,8067  in   latch C's data: the metal of the pad (6470,8
 # Run 4: the inverter below latch C and its thin metal
 lc2_w9124   M  5967-5981,8067  out  the thin metal: NOT lc2_w8822 (latch C's Na), from the inverter below latch C north through latches C and D into lc1
 vcc         M  5840-5890,9233  -    the rail (by structure) runs on south out of the strip
+lc1_w7864   M  5466-5486,8067  in   latch B's clear: lc1's metal on south to the pad (5472,8254)
+lc2_w8341   M  5508-5524,8067  out  latch B's output Na: the metal from the pad (5514,8341) runs north out of the strip
+lc2_w8474   P  5400,8509-8526  ?    drawn end: the poly from the pad (5428,8516) runs on west (seen to x 5150)

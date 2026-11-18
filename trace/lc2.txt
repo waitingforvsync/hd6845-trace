@@ -229,3 +229,23 @@ M 5974,8727 y8136 w=14
 ?M 5974,8136 y8097 w=14
 M 5974,8097 y8067 w=14
 N M 5974,9000 lc2_w9124
+
+# ====================================================================
+# Latch B's clear and output, and the west end of lc2_w8474 (wiring only).
+# Views g1_m.png, g1_a.png (1.9x); tl5_tracks.py v/h along each metal; textmap.py on the pads (survey.md).
+# clear: lc1's metal x 5466-5486 (lc1_w7864, gate 7's output) comes south without a break to the clear pad:
+# latch B's clear is lc1_w7864, as latch C's and latch D's
+M 5476,8067 y8240 w=20
+@alias lc1_w7864 lc2_w8254
+# output Na: the metal x 5508-5524 runs north from its pad out of the strip, over the clear's row (no contact)
+M 5516,8067 y8330 w=16
+# lc2_w8474: the row y 8634-8652 on west from under the VCC rail, under the thin metals and the VSS rail (no pad
+# on it), to a pad (5428,8648); a metal x 5421-5437 north to a second pad (5428,8516); poly west from there
+# (drawn to x 5400: it runs on)
+P 5440,8634:5835,8652
+P 5412,8630:5448,8663
+C 5428,8648
+M 5429,8504 y8660 w=16
+P 5412,8499:5446,8531
+C 5428,8516
+P 5400,8509:5420,8526
