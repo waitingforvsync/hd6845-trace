@@ -83,4 +83,17 @@ metal south of y 17660 are not drawn.
   metal north of y 16640 and south of y 17660.
 - Overlay the other findcell hits at 3x before placing any.
 
+## Claims for the reviewer
+
+1. Inverter i1 is a copy of `tl5_inv` at offset 2562,12797 (box 7475-7860 x 17575-17705):
+   load from the VCC box (contact (7490,17620)), pull-down to the VSS box (contact
+   (7676,17681)), gate row y 17637-17655, output node with buried contact 7723-7767 x
+   17591-17627; tab tie 7551-7599 x 17649-17685 `?` as in the master.
+2. The rails x 7470-7520 (VCC) and x 7641-7691 (VSS) are continuous from y 16290 to the
+   inverter.
+3. Output poly pad and contact (7795,17605); input row on east to the pad and contact
+   (7840,17648).
+4. Output metal x 7783-7806 continuous y 17150-17617; input metal x 7828-7850 continuous
+   y 16640-17660.
+
 ## Review
