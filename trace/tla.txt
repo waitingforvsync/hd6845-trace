@@ -669,16 +669,19 @@ N M 3042,4300 rcs_cond_lat
 #   rcs_cond = NOT rcs_cond_n: node y 4558-4622, pull-down E0 (gate rcs_cond_n) to the VSS box below,
 #     standard load west of the rail, buried contact to band 2, whose pad (contact (3105,4590))
 #     is the bottom end of bus line A's piece A3.
-#   pass transistor (band 1, gate tl3_w3982: NOT clk_tl, see band 1 below) from that node up to
-#     the column's top end, which is tied by a buried contact to the poly pad (contact (3045,4485))
-#     at the bottom of the metal rcs_cond_lat. So rcs_cond_lat takes rcs_cond while tl3_w3982 is
-#     high: a dynamic latch.
-#     The buried contact is drawn uncertain: see AMB-009 (the other reading ties the column top
-#     to the VSS box under the rail, which makes the AOI unit above degenerate).
-D 3028,4512:3063,4610
-P 3024,4455:3066,4522
+#   second pull-down (band 1, gate tl3_w3982: not clk_tl, see band 1 below) from that node up to
+#     the column's top end, which is a diffusion band y 4514-4530 running west to the VSS box
+#     under the rail (contact (2990,4513); drawn in trace/tl2.txt, run 4). So
+#     rcs_cond = NOR(rcs_cond_n, tl3_w3982).
+#     AMB-009, corrected 2026-11-18 (tl2 run 4): this was drawn as a pass transistor, with a ?B
+#     (3026,4508:3066,4526) tying the column's top to the poly pad (contact (3045,4485)) at the
+#     bottom of the metal rcs_cond_lat. Between the pad's lower outline (y 4496-4504) and the
+#     band's upper outline (y 4512-4516) lies a strip of field in both metal shots and the chip-2
+#     stripped shot, and the band is 20 px wider to the west than the column (notes/blocks/tl2.md,
+#     "The top of tla's column"). rcs_cond_lat is driven by an inverter of rcs_cond (trace/tl2.txt).
+D 3028,4514:3063,4610
+P 3024,4455:3066,4504
 C 3045,4485
-?B 3026,4508:3066,4526
 # band 1: the row ends at x ~3121 as the foot of a poly that runs north under bus line A (drawn in
 # trace/tl2.txt); it does NOT reach bus line B's pad (3152,4548): the gap x 3122-3138 is field in
 # all four shots (tl2 run 2's review, 2026-11-18). So the pass transistor's gate is not clk_tl.
