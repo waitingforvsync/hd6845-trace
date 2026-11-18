@@ -32,5 +32,13 @@ P 7775,17637:7822,17655
 P 7820,17633:7860,17663
 C 7840,17648
 M 7828,17636:7852,17660
+# The two metals, read on v1.png, v2.png (2x, metal and chip-1 metal) and a metal profile in both
+# shots (no stretch without metal over 19 px; the dark bands at y 17284-17410 are poly rows
+# printing through and a contact ring at (7795,17335)). Drawn only as far as seen continuous:
+# the output's x 7783-7806 north to y 17150 (it goes on north to a box near (7795,17130));
+# the input's x 7828-7850 north to y 16640 (it goes on to pads near (7835,16590)) and it also
+# continues south of y 17660. Contacts along them are not drawn (the ring at (7795,17335)).
+M 7795,17150 y17617 w=22
+M 7839,16640 y17660 w=22
 N P 7760,17605 bc3_w17605
 N P 7760,17646 bc3_w17646

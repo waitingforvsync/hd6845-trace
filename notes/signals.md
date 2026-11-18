@@ -352,7 +352,7 @@ Row tags `s0` ... `s13` are rows from the top; which MA bit each is has not been
 | `bc1_dec#_n` | decoder outputs, active low (00, 10, 01) |
 | `bc1_ld_in#`, `bc1_ld_n`, `bc1_ld_a` | inputs, NAND output and twin output of the driver of cdp4's row D strobe |
 | `bc1_d#` | data lines 3-6 into cdp4's row D |
-| `bc3_w#` | a wire of the bottom-centre logic package bc3 (`notes/blocks/bc3.md`), by the y of its row (or the x of its rail). `bc3_w17605` = NOT `bc3_w17646` (inverter at x 7475-7775, y 17575-17705, a copy of `tl5_inv`; each row ends east in a contact to metal, at (7795,17605) and (7840,17648)); its load box is on VCC (bc1's rail RL2, x 7470-7520), its pull-down box on VSS (RL3, x 7641-7691) |
+| `bc3_w#` | a wire of the bottom-centre logic package bc3 (`notes/blocks/bc3.md`), by the y of its row (or the x of its rail). `bc3_w17605` = NOT `bc3_w17646` (inverter at x 7475-7775, y 17575-17705, a copy of `tl5_inv`; each row ends east in a contact to metal, at (7795,17605) and (7840,17648); the output metal runs north on x 7795, the input on a vertical metal x 7839); its load box is on VCC (bc1's rail RL2, x 7470-7520), its pull-down box on VSS (RL3, x 7641-7691) |
 | `bc1_g#_in`, `bc1_g#_out` | input and output of inverter 6 |
 
 ## Odd ones

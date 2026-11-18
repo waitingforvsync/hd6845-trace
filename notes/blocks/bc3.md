@@ -58,14 +58,18 @@ shots). Overlay `i1.png` (3x, metal and clean). The cell's tab tie (buried conta
 contact (7795,17605) to metal, the gate row in a pad with a contact (7840,17648) to metal
 (`x5.png`, 5x, three shots); only the metal over each contact is drawn. `follow.py` takes
 the output's metal north along x 7795 (to y 17328 at least) and the input's along a vertical
-x 7839 (y 16588 to 17694): not checked, not drawn.
+x 7839. Both metals are drawn as far as seen continuous (`v1.png`, `v2.png`, 2x, two
+metal shots, plus a metal profile: no gap over 19 px): the output's x 7783-7806 north to
+y 17150, the input's x 7828-7850 north to y 16640. Their contacts on the way (a ring at
+(7795,17335)), their ends (a box near (7795,17130); pads near (7835,16590)) and the input
+metal south of y 17660 are not drawn.
 
 ## Ports
 
 | Net | Where | Dir | Note |
 |---|---|---|---|
-| `bc3_w17605` | M over the contact (7795,17605) | out | inverter output; its metal runs north along x 7795 (not drawn) |
-| `bc3_w17646` | M over the contact (7840,17648) | in | inverter input; a vertical metal x 7839 (not drawn) |
+| `bc3_w17605` | M x 7783-7806, north end y 17150 | out | inverter output; goes on north to a box near (7795,17130) |
+| `bc3_w17646` | M x 7828-7850, y 16640 and y 17660 | in | inverter input; goes on north to pads near (7835,16590) and on south |
 | vcc | M rail x 7470-7520, from y 16290 (bc1's RL2) to 17700 | - | the rail's south end not followed |
 | vss | M rail x 7641-7691, from y 16290 (bc1's RL3) to 17705 | - | the rail's south end not followed |
 
@@ -75,7 +79,8 @@ x 7839 (y 16588 to 17694): not checked, not drawn.
   routing field.
 - The rails' contacts between y 16300 and 17560 (the gate units' boxes), and the rails
   south of y 17705.
-- Follow the inverter's output metal (north along x 7795) and input metal (x 7839).
+- The inverter's output metal north of y 17150 and its contact at (7795,17335); the input
+  metal north of y 16640 and south of y 17660.
 - Overlay the other findcell hits at 3x before placing any.
 
 ## Review
