@@ -238,7 +238,7 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | `h_eq_r#` | high when the horizontal counter equals R# (R0: end of line; R1: displayed width; R2: sync position) |
 | `h_eq_r#half` | high when the horizontal counter equals R0/2 |
 | `h_eq_r#_u` | a piece believed to be `h_eq_r#` whose join is not drawn (tracks k7, k8 of the strobe channel) |
-| `rc_eq_r#` | high when the row counter `rc` (its seven lines through the upper right array, joined by `ucz`) equals R4 (vertical total), R6 (vertical displayed) or R7 (vertical sync position). `rc_eq_r6` goes down the wiring channel to the strobe channel (its track k4); `rc_eq_r7` leaves west along y 6820 |
+| `rc_eq_r#` | high when the row counter `rc` (its seven lines through the upper right array, joined by `ucz`) equals R4 (vertical total), R6 (vertical displayed) or R7 (vertical sync position). `rc_eq_r6` goes down the wiring channel to the strobe channel (its track k4); `rc_eq_r7` leaves west along y 6820. `rc_eq_r4` is drawn end to end (`notes/blocks/eof.md`): down bundle tracks L2, L7, L6, L5, L9 to the strobe channel's track k15, where it is the data input of the latch gated by `inh_lat` and the input of inverter A (`rdp3_n7s9` and `bd1_a` are aliases of it in `trace/eof.txt`) |
 | `hc#_u` | the horizontal counter line at the comparators, where its join to `hc#` is not drawn |
 | `db_b#` | **the internal data bus, bit #** (0-7). One net per bit across the chip: the right datapath's data lines (formerly `ubus_b#` in the upper array and `rbus_b#` in the lower one), the central datapath's bit lines (`notes/blocks/bust.md`), R3's data lines, `amr`'s inner lines. It writes R0-R11 by the register widths of the datasheet (`tools/bust_fanout.py`). The bit numbers rest on the counters' carry direction (the comparators) and on that fan-out; bits 0 and 1 also end in the D0 and D1 units of `dbus` (`notes/blocks/dbl.md`). Bits 0-3 are driven onto the bus by the input latches of pins D0-D3 in the data bus column (`dbus`: `db_b#` = NOT `dl#_q_n`), bits 4-7 the same way by the latches and inverters of `dlat` (`notes/blocks/dlat.md`). Bits 0-4 continue to R10 and R11 only through `?M` (AMB-019): the names `cdp2_a_s#_bus`, `cdp2_c_s#_bus` stay aliases there |
 | `ar#`, `ar#_n` | address register bit # and its inverse (rows of the decode array) |
@@ -262,7 +262,7 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | Name | What it is |
 |---|---|
 | `bd1_k#` | tracks of the channel not yet identified (`rc_eq_r6`, `hc1`) |
-| `bd1_a`, `bd1_an` | input and output of inverter A |
+| `bd1_a`, `bd1_an` | input and output of inverter A. `bd1_a` is `rc_eq_r4`, R4's match (joined by `eof`; an alias until it is renamed), so `bd1_an` = NOT `rc_eq_r4` |
 | `bd1_n#`, `bd1_q`, `bd1_k` | nodes of the latch gated by `inh_lat` (upper half node, lower half node, output, and the node pulled low by `inh_src`'s line) |
 
 ## Central datapath (`notes/blocks/cdp1.md` ... `cdp4.md`)

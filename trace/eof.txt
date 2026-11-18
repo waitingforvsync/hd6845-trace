@@ -1,0 +1,69 @@
+# eof: the end-of-frame lead group. Follow-the-wire pieces that no other package draws
+# (queue row `eof` of notes/work-packages.md). Notes: notes/blocks/eof.md.
+# All coordinates are metal-shot pixels. Images named here are in cache/scratch/eof/.
+@block eof
+# rdp3 draws the stretch between this file's two links (L7 at y 10700 to L9 at y 13480); it is
+# loaded so that the package extracts as one net when read by itself (TRACE=eof).
+@requires rdp3
+@w M=18 P=18
+@s 26x26
+
+# ============================================================================================
+# Piece r4: R4's match (rc_eq_r4) from the counter channel to bd1's latch. Wiring only.
+#
+# The line's path, north to south (bundle tracks L0..L11 at x 13348 + 43.4 k):
+#   rdp2 makes it; mrach brings it down track T6 (= L0) to the contact (13349,9663) and draws
+#   the poly east along y 9663 as far as x 13425;
+#   LINK A (here): the poly ends on a pad with a contact (13433,9665), the top of an upper
+#     piece of track L2; that metal ends on a pad with a contact (13432,9925); a poly bar runs
+#     east along y 9925 under L3, L4, L5, L6 to a pad with a contact (13650,9925), the top of
+#     track L7, which rdp3 draws from y 10700 (its net rdp3_n7s9);
+#   rdp3: L7, jog onto L6 (y 11507), jog onto L5 (y 12313), poly link y 12826, L9 to y 13480;
+#   LINK B (here): L9 straight from y 13480 to bd1's track k15 at y 14690 (its net bd1_a);
+#   bd1: k15, jog west at y 15087, contact (13655,15391), the poly of gate P2 (the latch's
+#     upper half, in series with inh_lat) and of P4 (inverter A).
+#
+# Evidence for link A:
+#  - a_top.png (2.8x, metal / chip-2 stripped / clean): the poly row from L0's contact runs
+#    under L1 (x 13391, wr_r4: metal whole, poly plain, no hole) to a rounded pad x 13416-13450.
+#    textmap 13325 9640 13465 9685 3 --acid: bar (clean 5-9) rows 9655-9670, x 13337-13440; in
+#    the pad a hole of 'g' x 13427-13439, y 9658-9670, and a bright centre in a dark ring at the
+#    same place in both metal shots.
+#  - L2's upper piece: follow.py 13433 9800 N ends 13431,9662; S ends 13430,9930; no contact
+#    candidate between. px row 9800: bright x 13426-13438, dark edges at 13423 and 13443.
+#  - a_bar.png (4x, three shots) and textmap 13405 9903 13680 9945 3: the bar is continuous
+#    (clean 4-9, rows 9918-9930) from x 13447 to 13645; 'g' holes only in the two end pads
+#    (x 13426-13441 and x 13645-13660), each with a bright centre in a ring in both metal shots.
+#    L3 (h_eq_r2), L4, L5 (rc1), L6 pass over it: metal bright across, no pad, no hole.
+#    The ring-like dark spot on L6 at (13605,9924) is on chip 2 only (chip-1 metal B-E there,
+#    clean 5-6 with no hole): dirt.
+#  - L7 below the pad: follow.py 13651 10300 N ends 13649,9920; S runs on past y 10800 (rdp3's
+#    piece). px row 10300: bright x 13646-13656.
+P 13420,9663 x13440                 # the row of mrach's poly, on from x 13425 to the pad
+P 13416,9647:13450,9681             # pad at L2's top
+C 13433,9665
+M 13432,9652 y9938                  # L2, upper piece (L2 below y 9996 is rdp2's h_eq_r0: another net)
+P 13416,9908:13450,9942             # pad at the piece's foot
+C 13432,9925
+P 13432,9925 x13650                 # bar east under L3, L4, L5, L6: no contact on the way
+P 13633,9908:13667,9942             # pad at L7's top
+C 13650,9925
+M 13650,9912 y10705                 # L7 south to rdp3's piece (M 13651,10700 ...)
+N M 13432,9800 rc_eq_r4
+
+# Evidence for link B:
+#  - b_l9_m.png, b_l9_c.png (2x strips of x 13680-13800, y 13460-14710, metal and clean shot,
+#    every package's trace outlined): L9 is one straight metal; under it the clean shot is
+#    protected field except at the two poly crossings.
+#  - follow.py 13738 13600 N ends 13736,12826 (rdp3's contact); S: x 13738 at y 13700, 13737 at
+#    13900, 13739 at 14100, 13737 at 14800. px row 14400: bright x 13732-13742.
+#  - crossings: hc5's poly y 13880-13908 and hc4's band y 14010-14038: textmap 13714 13998
+#    13764 14042 3: metal bright through in both chips, clean 5-8 with no hole. No pad.
+#  - the one contact candidate (tla_contacts.py 13470 14700 13738: y 14222): textmap 13708
+#    14195 13770 14250 3 --acid: metal bright through in both chips, field under it. Not one.
+M 13738,13475 y14695                # L9: rdp3's end (13738,13480) to bd1's k15 (13738,14690)
+N M 13738,14100 rc_eq_r4
+
+# With both links drawn the three names are one net.
+@alias rc_eq_r4 rdp3_n7s9
+@alias rc_eq_r4 bd1_a

@@ -1,0 +1,3 @@
+# eof: follow-the-wire pieces of the end-of-frame lead group
+13416,9647:13667,10705   route  R4 match, L2 to L7 | rc_eq_r4 from the counter channel: upper piece of bundle track L2, poly bar y 9925, track L7 down to rdp3's piece
+13729,13475:13747,14695  route  R4 match, track L9 | rc_eq_r4 straight from rdp3's bundle to bd1's track k15: the data of the latch gated by inh_lat

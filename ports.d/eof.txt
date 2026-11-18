@@ -1,0 +1,9 @@
+# eof: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+# The package is follow-the-wire pieces, not a region. DIR is `in` where the driver lies beyond
+# that port, `?` where the port leads on towards the loads or back to another package's stretch.
+
+# Piece r4: R4's match
+rc_eq_r4   P  13420,9654-9672    in  from mrach's poly row y 9663 (its file ends it at x 13425); driver: rdp2's NOR
+rc_eq_r4   M  13641-13659,10705  ?   track L7 on into rdp3's piece (its name rdp3_n7s9): towards the loads
+rc_eq_r4   M  13729-13747,13475  ?   track L9: rdp3's end (13738,13480)
+rc_eq_r4   M  13729-13747,14695  ?   track L9 on into bd1's track k15 (its name bd1_a): the latch's data and inverter A

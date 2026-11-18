@@ -26,7 +26,8 @@ has been simulated: nothing has been.
   logic (below, "Reset").
 - *What happens when each comparator fires?* **Open for every comparator.** Each
   comparator's output is traced some way; none is traced into the logic that uses it,
-  except that the row counter's step logic is partly known.
+  except that the row counter's step logic is partly known and that R4's match is traced
+  to the data input of a latch gated by `inh_lat` (the table below).
 
 ## Clocks
 
@@ -147,7 +148,7 @@ throughout.
 | `h_eq_r2` | `hc` with R2 | as above | runs west of the counters on bus line G (joined, `notes/blocks/ucz.md`). **Use: open** |
 | `hsw_eq_r3` | `hsw` with the R3 nibble (4 bits) | drawn | not followed. **Use: open** |
 | `amr_eq_r3` | R3 bits 4-7 (the vertical sync width, `amr`) with the 4-bit counter `c4l0`..`c4l3` (drawn through `c4l0`..`cdp1_l4676`; `c4l2`, `c4l3` over two `?P` rows of `bust`) | drawn | leaves through a buried contact at c0 (marked) and runs about 12,000 px west to `tla`'s west column, where it is a data input of the selector `tla_w3417 = NOT(rcs_thin_e·tla_w3376 + tla_w3505·amr_eq_r3)`. Per bit XOR and the NOR marked (`?` items in the cell). **Use: the selector's output, to the right cluster, not followed** |
-| `rc_eq_r4`, `rc_eq_r6`, `rc_eq_r7` | the row counter `rc` with R4, R6, R7 | drawn: the seven lines of the upper array are `rc0`..`rc6`, joined on firm geometry (`notes/blocks/ucz.md`) | R6's goes to the strobe channel, R7's leaves west; not followed. **Use: open** |
+| `rc_eq_r4`, `rc_eq_r6`, `rc_eq_r7` | the row counter `rc` with R4, R6, R7 | drawn: the seven lines of the upper array are `rc0`..`rc6`, joined on firm geometry (`notes/blocks/ucz.md`) | R6's goes to the strobe channel, R7's leaves west; not followed. **R4's is drawn end to end** (`notes/blocks/eof.md`): down the bundle left of the right datapath (tracks L2, L7, L6, L5, L9) to the gate column beside the strobe channel, where it has two loads: the inverter `bd1_an` = NOT `rc_eq_r4` (firm) and the data gate of a latch gated by `inh_lat`, `bd1_n1` = NOT(`bd1_q` OR (`inh_lat` AND `rc_eq_r4`)) (marked: `bd1`'s uncertain items; the latch's lower half has no load traced and its output's use is open). Firm for the join (no uncertain item on the wire from the comparator's NOR to the two gates). **Use: R4's through that latch, not followed further; R6's and R7's open** |
 | `sl_eq_r5` | scan line counter with R5 (5 bits) | drawn | leaves north and runs west on `sl_eq_r5` through the central datapath's channel (`notes/blocks/bust.md`); not followed west of it. **Use: open** |
 | R9's (`ra_eq_r9`) | **the row address as it goes to the RA pins** with R9 (5 bits) | the five lines are `ra#_cmp` = NOT `ra#_drv_in`: an inverter per bit on the RA pad driver's input line, loads traced (`notes/blocks/dbus.md`). Firm for bits 0-3; bit 4 marked (one uncertain poly on its input, the open join `ra4_drv_in_u`). The comparator's own cells are marked | drawn to the row counter's step logic: it is the input of the inverter that makes `rcs_mu` (AMB-013, resolved). **Use: `rcs_mn3852` = `tc2_o5175` AND `rcs_mv` AND this match (where it goes is open), and `tl3_e3550` = this match AND NOT `tc2_o5175`, which is the second input of `rcs_e4`'s NOR (marked, `tl3`'s run 9: it lets the row counter step)** |
 | R10's (central datapath) | the row address one stage earlier with R10 bits 0-4; gives "equal" and "greater" | marked | not followed. **Use: open** |
