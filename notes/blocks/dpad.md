@@ -344,3 +344,9 @@ above 0.76x (covered by the first cycle), D1's input join, D0's pad metal under 
 bond-ball shadow, the undrawn comb and D7's protection (in Not done).
 
 Round 1: no findings.
+
+## Note (coordinator, from the handoffs of 2026-11-17/18)
+
+`d_hiz`'s contact candidates along it (y 9290-9573, 11168, 14500, 14798, 16754, 16827) are looked at
+by `dbus` run 7: none is a contact. The west branch at (17630,17085) is at y 17085, south of
+`dbus`'s region, in `busC`'s.

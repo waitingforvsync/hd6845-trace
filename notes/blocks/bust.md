@@ -228,3 +228,9 @@ the left array's 4-bit counter `c4l0`..`c4l3`, run from `urch`'s ends to the sli
 lines are data bits into R3's high nibble (`notes/blocks/amr.md`). c1's west end "(7535,4619)
 (not looked at)" is a corner and goes on west (drawn in `trace/amrw.txt`). The two `?P` rows at
 y 4657 and 4700 were seen end to end in both stripped shots by two reviews and can be made firm.
+
+## Note (coordinator, from the handoffs of 2026-11-17/18)
+
+From `tc2`'s review: the `?P` pads on rows y 4657 and y 4700 are drawn about 30 px off the
+photographed pads (real: x ~6490 and ~6447); connectivity unaffected
+(`cache/scratch/tc2/review-1/w1.png`).

@@ -659,3 +659,6 @@ rows.
 
 Round 1: no findings.
 
+## Note (coordinator, from the handoffs of 2026-11-17/18)
+
+From `tl6`: latch c's outputs reach `ras_o0_alt2` (through its inverter) and `tcw_c`.

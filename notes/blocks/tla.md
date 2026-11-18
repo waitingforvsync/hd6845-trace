@@ -491,3 +491,31 @@ Round 3: no findings.
 follower stop: `tl1` found no stretch of it fully dark for more than 20 px from y 3030 to y 5952.
 `rcs_e4`'s driver is the wide NOR in `tl1` (`notes/blocks/tl1.md`). Two VCC boxes here need
 correcting (master list, `tla` row; R29).
+
+## Corrections from `tl1`-`tl4` (coordinator, from the handoffs of 2026-11-17/18)
+
+Each is in the named block's notes in full; the trace fixes are on main.
+- `rcs_c1`'s poly is drawn (by `tl1`). `ck_out`'s row y 5849 ends at R1's east edge (x ~2658), not on
+  the pad (2745,5842), which is the top of thin metal x 2742 (fixed, ee9c0d0).
+- The middle cluster's east VSS rail runs up to y 2595 and joins the west rail there (`tl3` draws
+  y 2622-3060).
+- The pass transistor of `rcs_cond_lat` is gated by `tl3_w3982`, not `clk_tl` (fixed, 1915f94,
+  fa2a849; AMB-009). So "`rcs_cond_lat` <- `rcs_cond` while `clk_tl`" and "the step condition is
+  sampled while CLK is high" are not supported. `clk_tl`'s gate contacts: (3150,3812) and
+  (3150,4418) are pads with rows west into what `tl2` traced; (3152,4548) gates nothing.
+- `x1`'s row ends at x 3470 on the pad (3454,3504) of the bus metal x 3456 (which also carries
+  `rcs_g4240`, `tl1_w4025`, `tl3_w3506`); the poly that leaves east along y 3752-3770 (`a2`) is the
+  output of `tl3`'s NOR 1.
+- Bus pieces: D upper and F are drawn by `tl2`, as is D middle's bottom contact (3237,4376).
+- `rcs_bc3460` = NOR(`rcs_e3`, `rcs_e4`, `tl2_w3722`, `clk_tl`): two inputs more than this file says
+  (so `rcs_u3425` is not simply `rcs_e3` OR `rcs_e4`); the step formula stands. `rcs_bd3330` has its
+  driver (`tl2`'s piece 2, AMB-029). `rcs_n4200` has a third input, `rcs_bd3330` (marked), on the west
+  part of g3, which is two polys (fixed, 0239da7).
+- `tla_w3376`'s metal does not end in the small cluster: it passes over it and leaves the strip at
+  y 6350. Thin E south of y 5400 is drawn by `tl2` (to a pad (2913,6327), row east along y 6316-6337).
+- `tla_w3417`'s poly along y 4461 ends on gate 1 of `tl4_w4545` (`tl4`).
+- The right cluster (x 4650-5050) is the same column build as the first cluster's west column,
+  2125 px east and 434 px north; there is no thin metal at the place of thin metal W (`tl4`).
+- The buried-contact box at (3045-3070, 3415-3440): in `tl3`'s mirror of that unit it carries the poly
+  to a metal pad; part of the unit's pattern, used or not per copy (AMB-030).
+- Re-read items R29, R30, R32, R33 apply here.

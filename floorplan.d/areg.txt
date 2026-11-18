@@ -2,4 +2,3 @@
 15800,13290:16335,13500  route  address lines to the row inverters | four metal lines from the register cells above the decode array plus one poly line, as nested poly L shapes
 15745,13000:16150,13290  array  address register, bit 4 | transparent latch (rdp3_lat): follows data line db_b4 while ar_load is high, two inverters and a weak hold device; its output ar4 drives decode row pair 4
 16200,13500:16460,14700  route  address and load strobe bundle | ar1..ar4 feeds, the address register load strobe (metal x 16299, from below), two more lines to the right-hand column
-?16480,13050:16800,14700  unknown  cells right of the bundle (untraced) | four identical cells then larger ones; not traced

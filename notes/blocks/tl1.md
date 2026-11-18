@@ -851,3 +851,10 @@ equations unchanged); the ports file parses.
 
 Round 2: no findings.
 
+## Note (coordinator, from the handoffs of 2026-11-17/18)
+
+- From `tl2`: `tl1_w5936`'s port at (2817,6237) is driven from the east (`tl2`'s upper inverter), so
+  it is an input of `tl1` (`ports.d/tl1.txt` updated). The VCC box `D 2785,4255:2842,4338` "with three
+  contact rings": the lower contact (2805,4308) feeds `tl2`'s piece 2 load (the strip leaves the box
+  east at y 4307-4330).
+- The cells' geometry and the thin metal they omit: re-read item R35.

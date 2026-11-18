@@ -365,3 +365,12 @@ reading of it changes a net; L2's left edge (5b) at x 15864-15866, 16-19 px from
 diffusion corner; R0's row in the open like AR.
 
 Round 2: no findings.
+
+## Note (coordinator, from the handoffs of 2026-11-17/18)
+
+The right-hand column is traced in `dlat`: the "four identical cells" at x 16480-16800,
+y 13060-13840 are the bus inverters of data bits 7, 6, 5, 4 (top to bottom), the rows at y 13263,
+13453, 13657 and about 13850 their inputs; the "larger, different cells from y 13900 to 14700" are
+the latches of bits 4 and 5. `areg_w6` and `areg_w7` are the latch outputs `dl7_q_n` and `dl6_q_n` (on
+their way to the inverters); `areg_rail_r`'s "poly under the rail" and the lower of "the two arms of
+the poly" (y 14431) are `dl5_q_n`.

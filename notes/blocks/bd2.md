@@ -380,7 +380,7 @@ Diffusion column x 16312-16366 under the ground rail x 16312-16362
 | `vcc` | metal | x 15795-15890, y 14700 and y 17100 | supply | rail shared with `sel` |
 | `vcc` | metal | x 16142-16194, y 14700 (top) | supply | areg's inverter rail |
 | `vss` (`areg_rail_r`) | metal | x 16401-16450, y 14700 (top) | supply | ground |
-| `areg_w6` | metal | x 16341, y 14700 (top) | unknown | contact 16337,14866, poly down x 16330-16345 and on to the right-hand column (areg.md). Not drawn |
+| `areg_w6` | metal | x 16341, y 14700 (top) | unknown | contact 16337,14866, poly down x 16330-16345 to y 15240, then diagonally south-east to the bit-7 latch's output (16466,15389): `dl7_q_n` (`dlat`); `areg_w7` likewise from the bit-6 latch |
 | `areg_w7` | poly | x 16364, y 14700 (top) | unknown | to the right-hand column. Not drawn |
 | `e_b` | metal | x 16169, y 17100 (bottom) | from outside | E buffered; lower trunk |
 | `rw_d` | metal | x 16298, y 17100 | from outside | per trunks.md; ends at 16297,16040 |
@@ -507,3 +507,10 @@ Next step: the lower half of this group (x 16370-16490, y 15650-15860) at 3x, cl
 shot and chip-2 stripped shot side by side, following the poly from the lower pad; then
 the right-hand column x 16480-16800.
 
+## Note (coordinator, from the handoffs of 2026-11-17/18)
+
+The right-hand column x 16480-16800, y 14700-15770 is traced in `dlat` (the latches of data bits
+4-7). `dbus_le` does not end at about (16772,15800): it runs on south along x 16774 (seen to
+y 16104) over the west ends of `d5_out_n` (box 16756-16790 x 15807-15841), `d4_out_n` (y ~15957) and
+`d3_out_n` (y ~16087), buried contacts onto diffusions that leave west: the outputs of those lines'
+drivers, still to trace here. The enable's driver is further south.

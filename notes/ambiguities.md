@@ -235,6 +235,12 @@ with a term that can never be true. That is why this reading was not adopted.
 other end goes (poly west along y 4010-4030 from the pad at (3040,4028)): a latch node must
 end on a gate.
 
+**Correction 2026-11-18 (`tl2`, Tom Seddon).** The pass transistor's gate is not `clk_tl`: the gate row
+y 4535-4558 ends at x 3122, and the gate is `tl3_w3982` (`trace/tla.txt` fixed, 1915f94, fa2a849).
+So "`rcs_cond_lat` takes `rcs_cond` while `clk_tl` is high" above is not supported; it is
+sampled while `tl3_w3982` is high. The ambiguity itself (the `?B` at the column's top) is
+untouched. `rcs_n4200` keeps its `clk_tl` gate (contact (3150,4160)).
+
 ## AMB-010: is the strip S1 of the row address selector tied to the metal that crosses it at (7207,4955)? (2026-11-16)
 
 `notes/blocks/ras.md`. The metal of `ras_o0_alt2` comes down x 7207 over the left end of
@@ -349,6 +355,9 @@ Updated 2026-11-17 by `tcw` (run 2): the loads of `fld_a_in` and `fld_y_b` are t
 `fld_a_in` has a third pull-down, gate `tcw_o3820` (a latch with `tcw_o3820`). Still open:
 whether `tcw_m6232`'s poly (ending at the rail's west edge at y 3912) is on `fld_a_in`'s node.
 
+Updated 2026-11-18 by `tc2` (dp111): `fld`'s VCC rail is joined by drawn metal to `tcw`'s, and its VSS
+rail to `tc1`'s east ground rail. The supply identity of both is still by the layout rule.
+
 ## AMB-015: three joins on the east side of the gate column's middle stretch (2026-11-16)
 
 `notes/blocks/tcw.md`, "Stretch B, east side". All three are in the trace as `?` items:
@@ -383,6 +392,11 @@ assumed".
 
 Note 2026-11-17 from `tcw` (run 2): the tie of `tcw_o3550`'s load is probably a tab up to a box
 at (6585-6650, 3495-3520) rather than the `?B` at the block's west end; the same net either way.
+
+Updated 2026-11-18 by `tcw` (run 3): the first item (the strip joining the output arms at y 3326 and
+y 3437) is supported again (`px.py row 3340`, `row 3390`: red minus green 19-33 at x 6596-6604
+between dark edges) and stays `?`; the gate's equation `tcw_o3240` now rests on it. "The top node,
+whose connection is not found" is settled: it is the output `tcw_o3240`.
 
 ## AMB-016: two buried contacts in the gate column's top stretch (2026-11-16)
 
@@ -482,6 +496,8 @@ line, i.e. a wired NOR with two loads (DEPENDS: without the `?` items it falls a
 that is the design, or J2 (or `shm`'s `?B`, J3) is wrong. First to re-read: the joins at `tc1`'s
 pads (6962,4268) and (6968,3905).
 
+Updated 2026-11-18: `tc1_x1` has a further gate, an input of `tc2_o5175` (`tc2`).
+
 ## AMB-021: a contact from pin D6's input line to the `d0_out_n` inverter? (2026-11-17)
 
 Proposed by `dbus` (Tom Seddon, the notes' Ambiguity 9). A possible contact between `d6_in`'s
@@ -492,6 +508,13 @@ line. Against: no pad, no bright centre, no specks; the clean shot is field colo
 metal's west edge all the way; a contact would tie pin D6 to `d0_out_n`. Unexplained: the box's
 interior is black in the chip-2 stripped shot. **Assumed: no contact**; nothing drawn. To
 settle: a better photo of the spot, or behaviour (D6 and D0 would interfere on reads).
+
+Updated 2026-11-17 (evening) by `dbus` run 7 (Matt Godbolt) and an independent reviewer: read by
+two more readers side by side with chain 7's buried boxes (y 15975, 16130) and the real pad
+(17297,16662) on the same metal. The box has none of a contact's marks (no pad, no bright centre,
+no pit in the clean shot), the metal's west edge line is continuous through y 16480-16512 in both
+metal shots, and the structure matches the pass-overs at y 15958-91 and 16110-43. **Assumption
+(no contact) kept, now three readers.** Another look at these photos will not settle it.
 
 ## AMB-022: the gate `rcs_iso2958` on `rcs_u3425` (2026-11-17)
 
@@ -535,3 +558,57 @@ equations and the cross-coupling's last step rest on them (marked in `operation.
 pull-down is firm, and the cross-coupling paths were seen in both copies independently. Thin
 metal W lies over the lower ties, dark for 38 px, neither metal nor bare ground; W's pieces are
 not drawn. To settle: profiles of the boxes against known buried and metal contacts.
+
+Updated 2026-11-17/18. The same ties occur in every copy of the cells: `tl3`'s latch A at
+(3715-3745, 3375-3400) and (3713-3737, 3492-3522), **in the open** (no thin metal over them), so
+the chip-2 shots at 6x there may settle the tie for every copy (`tl3`'s reviewer's
+`cache/scratch/tl3/review-1/mid3.png` shows heavy boxes at both, which fits the drawn reading);
+`tl4`'s latch at (4801-4821, 4186-4216) and (4806-4834, 4065-4086), not readable there either;
+`tl5`'s three latches and three inverters. In `tl1`, thin metal W over the three `tl1_ub` tie boxes:
+the clean shot under W has contact-hole colour (red minus green -4 to +12, against about 30
+where W surely passes over) and the metal is dark for 34 px with no bare ground; a contact would
+join three latch outputs, a cut has no bare ground, a pass-over contradicts the clean shot.
+Undrawn.
+
+## AMB-027: the two `?P` joins of `tc2`'s set/reset latch `tc2_sr` (2026-11-18)
+
+Proposed by `tc2` (dp111, `notes/blocks/tc2.md`). The latch at x 7760-8250, y 5960-6300 (reset
+`cdp1_lw1`) is cross-coupled through two joins drawn `?P`, dark in every shot; the evidence is edge
+lines and the opening of the buried contact's rings. The latch rests on them (marked, not firm).
+`q_n`'s join to its pad poly is one of them. **Drawn `?P`.** Not resolvable in these photos.
+
+## AMB-028: `tc1_ns3`'s metal over `rax`'s five boxes, and `tc2_sr_r` through `rax` (2026-11-18)
+
+Proposed by `tc2` (dp111). (1) `tc1_ns3`'s metal crosses `rax`'s five unit boxes; drawn `?M` at the
+five crossings, resting partly on the electrical argument (as AMB-011). (2) North of (8031,5468) the
+follower takes `tc2_sr_r`'s thin metal 440 px through `rax`'s units 3-5 over six contact-like spots,
+while `rax`'s own profile says short straps: nothing drawn there. (3) `tc2_rxl`'s load tie (box
+x 8021-8048, y +38..+61 per unit) is under metal in units 2-4 and flush under the band in units 0
+and 1 (consistent, not proven); it decides the load's gate, not the equation. Also seen once: the
+box (8355-8385, 4835-4865) at the end of `r9m_l1w`'s L, read as a buried contact onto diffusion at
+`cdp1`'s west edge.
+
+## AMB-029: the feedback of the pair `rcs_n4200` / `rcs_bd3330` through one load tie (2026-11-18)
+
+Proposed by `tl2` (Tom Seddon, `notes/blocks/tl2.md`, Ambiguity 17). Firm: piece 2's node is
+`rcs_bd3330` (buried contact (3048-3072, 4362-4390); two readers), and `tl2_w4260` is one poly, the
+gate of piece 2's load and the west gate of `rcs_n4200`'s third pull-down. Assumed: the tie box
+(2926-2950, 4298-4334; heavy outline, paler centre, four shots, not resolved at 10x) joins that poly
+to the node, which makes the pair cross-coupled: `rcs_bd3330` = NOT(`rcs_n4200` OR (`clk_tl` AND
+`rcs_cond_lat`)), `rcs_n4200` = NOT((`clk_tl` AND `rcs_cond`) OR `rcs_x1` OR `rcs_bd3330`). For: the
+poly has no other end; without the tie two gates hang on an undriven net. Also in `tl2.md`: the
+node crosses a 24 px gap between two metals at (3006-3032, 4390-4403), drawn firm (two readers);
+`tla`'s VSS arm y 3818-3836 reads field-like in the chip-2 stripped shot, left as drawn (Ambiguity 18).
+
+## AMB-030: `tl3`'s vertical gate under the rail joined to the lower unit's load-plate arm (2026-11-18)
+
+Proposed by `tl3` (Matt Godbolt). A vertical poly x 3690-3712, y 4097-4196 (a second pull-down on the
+upper node) and the buried-contact box of the lower unit's plate arm have only dark lines between
+them for 10-12 px in all four shots at up to 6.6x. **Drawn joined, `?P 3704,4182:3728,4204`.** For: no
+two polys lie that close elsewhere here; the poly runs 43 px past its channel with no other use;
+without it the gate floats and the lower NOR drives nothing; with it the pair is a set/reset latch;
+the poly's east edge steps east at the arm's level in three shots. Against: nobody has seen poly
+continuous through the box's ring. `tl3_w3803` = NOR(`tl3_w3939`, `tl3_w4243`) rests on it. `tla` has
+the mirror image of this pair east of R3 (`rcs_u3425` and `rcs_b1`); in `tl3`'s mirror the box that
+`tla` could not place carries the poly to a metal pad, so these boxes are part of the unit's
+pattern and are used or not per copy.

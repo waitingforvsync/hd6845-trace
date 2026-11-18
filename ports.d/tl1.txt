@@ -27,7 +27,7 @@ rcs_e4      M  2494-2506,5232  out  the metal x 2500 runs into tla's pad (2497,5
 
 # South of the small cluster (rows straight east under the rails) and the south edge
 tl1_w6022   P  2817,6186-6204  out  the third latch's output (west column of the small cluster), row east under R1, thin W, R2
-tl1_w5936   P  2817,6228-6246  ?    row east under the rails; its other end is the poly from the pad-ring side (below)
+tl1_w5936   P  2817,6228-6246  in   row east under the rails; its other end is the poly from the pad-ring side (below)
 tl1_w5978   M  2320-2332,6350  in   metal x 2326 on south out of the strip; its other end is a gate (the third latch's clear)
 vss         M  2600-2650,6350  -    R1 on south
 vcc         M  2780-2832,6350  -    R2 on south
