@@ -15,3 +15,4 @@
 3880,3450:4215,3660   logic   NOR under the east rail, y 3450-3660 | tl3_e3550 = NOR(rcs_mu, tc2_o5175); its load plate carries the north end of the thin metal x 3948-3962
 3880,3655:4170,3745   logic   inverter under the east rail, y 3655-3745 | tl3_e3712 = NOT tc2_o5175; its output poly is the upper gate of rcs_mn3852's unit
 3826,5180:4250,5300   logic   inverter under the east rail's south end | tl3_e4635_u = NOT tl3_e5240: drives latch C's data row through a track in tl4's strip (join not drawn)
+3826,2950:4250,3090   logic   top unit E1: inverter that drives latch A's enable | tl3_w3373 = NOT tl3_e3028 (through its load plate, which is one poly with the row y 2957-2973)

@@ -7,7 +7,6 @@ tl3_w3333   P  3533,3324-3342  in   data of the latch; the row turns north at x 
 tl3_w3419   P  3533,3409-3429  out  the latch's inverted output; on west to a pad (3495,3418) under a metal going south
 tl3_w3506   P  3533,3497-3515  in   clear of the latch; on west to a pad (3455,3503)
 # drawn ends inside the strip
-tl3_w3373   P  3606,2985       ?    enable of the latch: pad at the north end of the metal x 3540; a poly row y 2955-2975 goes on east from the pad, not drawn
 # rows of the NOR units
 tl3_w3722   P  3533,3712-3732  in   NOR 1 gate 1
 tl3_w3765   P  3533,3755-3775  out  NOR 1 output
@@ -38,6 +37,7 @@ tl3_e4152   P  4250,4496-4510  ?    the row of track A's pad (4146,4510), on eas
 rcs_mv      P  4250,4736-4751  in   the poly of the pad (4192,4743) at the south end of rcs_mv's track, from the east
 tl3_e4915   P  4250,4904-4925  ?    the poly of the pad (4234,4918) on the track x 4236, on east
 tl3_e4915   M  4250,5760-5772  ?    the metal x 4236 from that pad, east out of the strip along y 5766
+tl3_e3028   P  4250,3018-3038  in   gate of the top unit E1 (which drives tl3_w3373, latch A's enable), from the east
 tl3_e5240   P  4250,5231-5250  in   gate of the inverter under the east rail's south end; in tl4's strip the row turns south at x ~4277
 tl3_e4635_u P  4250,5190-5205  out  that inverter's output row; in tl4's strip it ends on a pad (4278,5198) of a metal x 4279 whose north pad (4278,4636) is on tl3_e4635's row (not drawn)
 tl3_tm3955_u M 3954,3640       out  the thin metal x 3948-3962 from its north pad (3930,3614): drawn end, it goes on south (open join to tl3_tm3955)

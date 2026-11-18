@@ -741,3 +741,55 @@ D 3946,5222:3964,5272
 P 3915,5236:3938,5270
 ?D 3916,5248:3950,5272
 ?B 3912,5244:3944,5276
+# ====================================================================
+# East column, y 2950-3090: the top unit E1, an inverter under the VSS rail (run 8).
+#   node = NOT tl3_e3028; the node's way out is its load plate, which is one poly with the row
+#   of tl3_w3373, latch A's enable (through the plate's tie, uncertain as every load tie)
+# The same build as the inverter at y 5180-5300. One diffusion column under the rail, x 4012-4054:
+# the node (y 2990-3014), the gate (y 3018-3038) and a VSS box (y 3042-3088) with a contact
+# (4029,3064) (px.py col 4017 2940 3100 4; row 3063 3994 4064 4: bright x 4026-4034 in a ring in
+# both metal shots). East of the rail below the gate row is field (px.py pt 4075,3060 against
+# 3930,3080): the transistor is under the rail only. Read on e1_a.png (2.8x, three shots).
+D 4012,2990:4054,3088
+N D 4030,3002 tl3_e3000
+@alias tl3_w3373 tl3_e3000
+C 4029,3064
+# gate: a row y 3018-3038 from the east, under the thin metal x 4099-4111 and the metals x 4148,
+# 4190, 4234 without a contact, across x 4250 (textmap 4044 3008 4262 3052 5, 4216 3004 4330 3052 3)
+P 3994,3018:4250,3038
+N P 4200,3028 tl3_e3028
+# the node east of the rail: diffusion y 2993-3008 (px.py row 3000 4040 4124 4) into a heavy box
+# (4076-4114 x 2972-3010) under the thin metal x 4099-4111; inside it a pale square (4090-4106 x
+# 2983-2998), a stub of poly; nothing leaves the box (e1_box.png, 4.6x three shots). The thin
+# metal is taken to pass over it (Ambiguity 12: no green hole in the clean shot, dark in chip 2,
+# a spot of R 170 in chip 1).
+D 4050,2993:4084,3008
+B 4076,2972:4114,3010
+D 4080,2978:4108,3006
+P 4090,2981:4110,2999
+# load: the node's strip y 2984-3008 west under the rail and through the open (no thin metal
+# here) under a plate x 3884-3938, y 2968-3030 to a VCC box (x 3828-3880, y 2982-3042) with a
+# contact ring about 20 x 30 px at (3846,3010) (e1_a.png; the strip's edges cross the plate at
+# y 2982 and y 3010 in the chip-2 metal shot)
+D 3876,2984:4016,3008
+P 3884,2968:3938,3030
+D 3828,2982:3880,3042
+C 3846,3010 s=20x30
+# the VCC rail above tla's piece (which starts at y 3040): metal from y ~2922 down, bright but for
+# bars of 4-12 px where the row's and the box's edges pass under (px.py col 3858 2920 3056 4)
+M 3846,2922 y3044 w=44
+N M 3846,2940 vcc
+# THE PLATE IS ONE POLY WITH THE ROW y 2957-2973, which runs west under the VCC rail, through the
+# open and under the west rail to the pad (3606,2985) of tl3_w3373, latch A's enable (textmap
+# 3586 2944 3900 2996 5: poly continuous x 3606-3896, no hole and no break)
+P 3878,2956:3904,2974
+P 3596,2956:3884,2973
+P 3596,2956:3625,2990
+# the tie, in the open here (e1_tie.png, 5.5x three shots): a tail of the strip runs south
+# (x 3948-3964, to a closed end at y ~3054) and a tab of the plate runs south (x 3916-3938) into a
+# heavy box (3912-3944, 3032-3058; light centre 3920-3935 x 3040-3052) beside the tail. Between
+# the box and the tail both chip-2 shots show a 7 px dark wall: the link is not seen. Uncertain.
+D 3948,3004:3964,3054
+P 3916,3026:3938,3052
+?D 3918,3038:3952,3054
+?B 3912,3032:3944,3058

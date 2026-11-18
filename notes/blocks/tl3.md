@@ -37,6 +37,9 @@ Traced, extracting (69 transistors of its own, 0 errors), the west column and pi
 
 - **the inverter under the south end of the east rail, y 5180-5300** (2): it drives the row that
   runs, by a track in `tl4`'s strip, to latch C's data (run 8, Tom Seddon, 2026-11-18 17:40 +0000).
+- **the top unit E1 of the east column, y 2950-3090** (2): an inverter under the rail whose load
+  plate is one poly with the row of `tl3_w3373`: **it drives latch A's enable** (run 8,
+  2026-11-18 18:25 +0000).
 
 Everything else in the strip is surveyed only (Inventory).
 
@@ -61,8 +64,7 @@ Survey: `sv_top.png`, `sv_bot.png` (0.68x, metal and clean shot, all traces);
 | x 3948-3962, y 3616-5459 | a thin metal between the rails, over the east column's loads (the middle cluster's counterpart of `tla`'s thin metal E). **Its ends** (review 7, checked: `textmap.py 3906 3590 3972 3640 3`, `3920 5436 3980 5480 3`): north, it turns west at y ~3606 onto a pad with a contact (3930,3616), the foot of the load plate (x 3912-3950, y 3485-3600) of the rail unit at y 3440-3610; south, a pad with a contact (3953,5459) whose poly leaves west along y ~5450-5464. `follow.py 3955 4300 N` stops at y 3616 (its end), `S` at y 4454 (a stop only: it is there, bright, from y 4500 to 4960). Over latch C one contact-like spot, (3955,4541), taken as a pass-over (Ambiguity 6) | drawn y 4500-4960 only, no contact |
 | east column, y 3450-3660, 3655-3745, 4345-4514 | the units built under the rail (below) | traced |
 | east column, y 5180-5300 | the inverter under the rail's south end (below) | traced |
-| east column, the rest | the top unit E1 (next row) | not drawn |
-| (4020,3030), y 2956-3066 | top unit of the east column, read by hand and not drawn: a rail gate (node strip y 2992-3015 under the rail, gate row y 3018-3038, VSS box y 3042-3090 with contact (4025,3062)); the node goes east to a ringed box 4075-4110 x 2972-3005 under the metal x 4095-4115 and west to a load (VCC box 3822-3870 x 2985-3045, plate x 3875-3935, y 2955-3030). `e1_q.png`, `e1_top4.png`, `e1_z.png`, `e1_load.png` | read, not drawn |
+| east column, y 2950-3090 | the top unit E1 (below): an inverter under the rail; its load plate is one poly with the row y 2957-2973 to latch A's enable pad (3606,2985) | traced |
 | y 5300-5560 | horizontal bus rows (metal) under the cluster's foot | not traced |
 | y 5560-6350 | sparse wiring, a wide metal L at y 6100-6250 | not traced |
 
@@ -432,6 +434,45 @@ measured at both ends and not drawn, so the name carries `_u`).
 
 Overlay `rg_ov.png` (2.9x, metal and clean shot).
 
+### The top unit E1, y 2950-3090: traced; its tie uncertain
+
+    tl3_w3373 = NOT tl3_e3028        (the node is tl3_e3000; the join to tl3_w3373 is the plate's tie)
+
+**This is the driver of latch A's enable.** The same build as the inverter at y 5180-5300.
+
+- Column under the rail, x 4012-4054: the node (y 2990-3014), the gate (y 3018-3038, 214-246/
+  114-159 in the clean shot) and a VSS box (y 3042-3088) with a contact (4029,3064) (`px.py col
+  4017 2940 3100 4`; `row 3063 3994 4064 4`: bright x 4026-4034 in a ring in both metal shots).
+  East of the rail below the gate row is field (`px.py pt 4075,3060 3930,3080`: the same in four
+  shots): the transistor is under the rail only.
+- Gate, `tl3_e3028`: a row y 3018-3038 from the east, under the thin metal x 4099-4111 and the
+  metals x 4148, 4190, 4234 without a contact, across x 4250 and on beyond x 4327 (`textmap.py
+  4044 3008 4262 3052 5`, `4216 3004 4330 3052 3`: poly unbroken, no hole, bright metal over it
+  between edge bars). The ring at (4124,3027) in the clean shot lies in the gap between two
+  metals and is in neither chip-2 shot (trap 2).
+- The node east of the rail: diffusion y 2993-3008 (`px.py row 3000 4040 4124 4`: chip-2
+  stripped shot 169/148/97 at x 4060-4072) into a heavy box (4076-4114 x 2972-3010) under the
+  thin metal x 4099-4111. Inside it a pale square (4090-4106 x 2983-2998), drawn as a stub of
+  poly; **nothing leaves the box** (field under the thin metal north of it; `e1_box.png`, 4.6x
+  three shots), as at the box of `tl3_e3550`. The thin metal over it: Ambiguity 12.
+- Load: the node's strip y 2984-3008 runs west under the rail and through the open (the thin
+  metal x 3948-3962 does not reach this far north) under a plate x 3884-3938, y 2968-3030 to a
+  VCC box (x 3828-3880, y 2982-3042) with a contact ring about 20 x 30 px at (3846,3010)
+  (`e1_a.png`, 2.8x three shots: the strip's edges cross the plate at y 2982 and y 3010 in the
+  chip-2 metal shot). W/L 24/54. The VCC rail's metal is drawn here from y 2922 to `tla`'s
+  start at y 3040 (`px.py col 3858 2920 3056 4`: bright, with bars of 4-12 px where the row's
+  and the box's edges pass under).
+- **The plate is one poly with the row y 2957-2973**, which runs west under the VCC rail,
+  through the open and under the west rail to the pad (3606,2985) of `tl3_w3373` (`textmap.py
+  3586 2944 3900 2996 5`: poly continuous from x 3606 to x 3896, no hole, no break; overlay
+  `e1_ov.png`, 2.35x).
+- The tie (`?`), in the open here (`e1_tie.png`, 5.5x three shots): a tail of the strip runs
+  south (x 3948-3964, closed end at y ~3054) and a tab of the plate runs south (x 3916-3938)
+  into a heavy box (3912-3944 x 3032-3058, light centre 3920-3935 x 3040-3052) beside the tail.
+  Between the box and the tail both chip-2 shots show a dark wall 7 px wide; the diffusion's
+  way into the box is not seen even here, where no metal covers it. So `tl3_w3373` = the node
+  rests on this tie (`@alias tl3_w3373 tl3_e3000`; Ambiguity 10).
+
 ### The NOR units of the west column: traced
 
     tl3_w3765 = NOR(tl3_w3722, tl3_w3803)      NOR 1, y 3688-3872
@@ -576,7 +617,7 @@ plate's left end (`h_tail.png`, `h_tailm.png`, 5x four shots). The tab's tie is 
 | `tl3_w3333` | poly | (3533, 3324-3342) | in | data of latch A |
 | `tl3_w3419` | poly | (3533, 3409-3429) | out | latch A's inverted output |
 | `tl3_w3506` | poly | (3533, 3497-3515) | in | clear of latch A |
-| `tl3_w3373` | poly pad | (3606,2985) | ? | enable of latch A; a poly row y 2955-2975 goes on east from the pad, not drawn |
+| `tl3_e3028` | poly | (4250, 3018-3038) | in | gate of the top unit E1, from the east (seen on to x 4327) |
 | `tl3_w3722` | poly | (3533, 3712-3732) | in | NOR 1 gate 1 |
 | `tl3_w3765` | poly | (3533, 3755-3775) | out | NOR 1 output |
 | `tl3_w3896` | poly | (3533, 3886-3906) | in | NOR 2 gate 1 |
@@ -668,7 +709,7 @@ plate's left end (`h_tail.png`, `h_tailm.png`, 5x four shots). The tab's tie is 
    edge line at x 4080 is absent at y 4416-4426 in three shots (`review-9/a_link.png`).
 
 10. **The load ties of the rail units** ((3942-3976, 3500-3532), (3936-3966, 3656-3686),
-    (3950-3972, 4456-4488), and since run 8 (3912-3944, 5244-5276)) are drawn `?` from heavy boxes at the standard place of a tail-and-tab
+    (3950-3972, 4456-4488), and since run 8 (3912-3944, 5244-5276) and E1's (3912-3944, 3032-3058)) are drawn `?` from heavy boxes at the standard place of a tail-and-tab
     tie; none is resolved. For the NOR at y 3450-3660 the tie decides more than the load: the
     node's only exit is the plate (its foot carries the thin metal x 3948-3962), so
     `@alias tl3_e3550 tl3_tm3955_u` rests on it.
@@ -688,6 +729,12 @@ plate's left end (`h_tail.png`, `h_tailm.png`, 5x four shots). The tab's tie is 
     both; the same for (4101,3719), (4102,4074), (4100,5066): the other boxes this metal
     crosses). If it were a contact, latch C's data would be its own enable line. The same kind
     of spot as (4101,3719) (Logic, the inverter at y 3655-3745) and (4102,4074) (Inventory).
+    **And over E1's box, at (4104,2988)**, on the metal's north part: dark in chip 2
+    (84/73/26), a spot of 172/126/37 in chip 1, and a pale patch in the clean shot
+    (192/171/140, red over green, where the metal's real north contact (4102,2899) is green,
+    155/164/91, with 173 and 206 in the two metal shots: `px.py col 4104 2880 3060 4`,
+    `textmap.py 4060 2868 4150 2940 3 --acid`). E1's box holds only a stub, so a contact there
+    would make the thin metal E1's second output. Not drawn.
 
 ## Review
 
@@ -1007,7 +1054,7 @@ Round 1: no findings that change a connection.
 
 ## Not done
 
-- Next, in this order: the top unit E1 (Inventory); the load of
+- Next, in this order: the load of
   `tla`'s unit `rcs_mn3852` (not drawn by anyone; its two gates now are); the foot of the
   cluster (y 5260-5560).
 - The thin metal x 3948-3962 between y 3640 and y 4500 and south of y 4960 (to its pad
@@ -1015,7 +1062,7 @@ Round 1: no findings that change a connection.
 - `tl3_e4915`'s two ends east of x 4250 are `tl4`'s.
 - `tl3_e4808`'s row y 5366-5376 west of x 4124 (the clear of latch C: where it comes from or
   goes to in the foot); the clear's metal east of (4250,5895) is `tl4`'s. `tl3_e4635` and
-  `rcs_mv`'s poly east of x 4250 are `tl4`'s.
+  `rcs_mv`'s poly east of x 4250 are `tl4`'s, and `tl3_e3028`'s row (E1's gate).
 
 - **For `tl4`** (its strip, claimed; not drawn here): the pad with a contact (4278,5198), the metal
   x 4279 north from it to the pad with a contact (4278,4636) on `tl3_e4635`'s row (which closes
@@ -1029,8 +1076,13 @@ Round 1: no findings that change a connection.
 - Where the true outputs of latch A and latch B are taken (`tl3_w3550`, `tl3_w5156` end in
   stubs; only the inverted outputs leave west).
 - Where the seven rows of the pair, the inverter and NOR 3 go west of x 3533 is `tl2`'s.
-- The poly row y 2955-2975 east from the pad (3606,2985): `tl3_w3373`'s other end
-  (towards E1's load plate at x 3875-3935; not followed).
+- **The thin metal x 4099-4111's north pad (4102,2899) and its row** (run 8, measured, not
+  drawn): the pad has a real contact (ring, bright centre, green hole) and its poly is a row
+  y 2892-2905 that runs **west across the whole strip to x 3536** under all three rails
+  (`textmap.py 3536 2872 4136 2916 6`: poly unbroken). At x 2817-2900 a row at this height is
+  `tl1_w3594` (`tl1`'s and `tl2`'s notes). If it is the same row and the thin metal is one
+  metal over the four boxes it crosses, `tl3_e4152` = `tl1_w3594`. To draw: the row, the pad,
+  and the metal from y 2905 to y 4106 with each box crossing read (Ambiguity 12).
 - The west rail south of y 5330, and the metal north of the link (review round 1: wider
   metal x ~3648-3762 above y 2598, a supply feed, not drawn); the VCC rail's top (y 2918) is `tla`'s.
 - The VCC boxes of NOR 1 and NOR 4 run on south of the cell's box with more contacts (review:
