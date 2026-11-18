@@ -1070,6 +1070,17 @@ Looked at because of the sweep:
 
 ## Ambiguities
 
+- **`tc1_ns3`'s metal x 7902 over the five boxes of `rax`'s units** (x 7888-7916; unit 3 at
+  y 5292-5326; the others at -499, -369, -130, +130): one metal passing over without
+  contact is the reading drawn, with those five stretches `?M`. The photos are consistent
+  with it but do not establish it: the metal test fails across the full width for about
+  24 px at each box in both chips, with a blob of bare-ground brightness and a green band
+  in the clean shot under it; against a contact: no ring, no hole, no contact centre (9x,
+  four shots); against a break: it would leave dangling segments. So `tc1_ns3`'s join from
+  tc1 to the pad (7899,5633) and its row rests on `?M` items and on that electrical
+  argument (as AMB-011). An earlier note here said "dark for 16 px, not bare ground": that
+  held only for the west half of the line.
+
 None in pieces 1 to 3.
 
 1. **Piece 4: the west arm's join to `tc2_sr_q`'s load poly, x 8135-8152, y 6183-6202**
@@ -1219,5 +1230,23 @@ measures 12-17 px (it touches nothing). Could not be checked: the load tie's tab
 band in units 2-4 (under metal; in units 0 and 1 the box sits flush under the band:
 consistent, not proven; it decides the load's gate, not the equation `rax_o# = NOT ras_o#`).
 
-Round 1: no findings.
+Round 1 of the third round of work: clean (no findings).
+
+### Fourth round of work (pieces 11-16: `tc1_ns3`, `tc2_r5589`, `r9m_l1w`'s L, `tc2_m6404`, the supply bands; the fix to fld's rail)
+
+Round 1 (full review of what was added since 9599d13, 2026-11-18 01:33 +0000, a fresh agent on
+claude-fable-5-2). Told to suspect `tc1_ns3`'s metal over `rax`'s boxes, the pad (7488,5586),
+the two metals lying on rows without contact, the two supply bands 40 px apart (separate?
+each on the right rail, i.e. not swapped), the VCC south leg, the fld fix, the stretches
+read below 4x and the membership of the pads at x 7384-7490. Checked: the pad in both metal
+shots with the follower; the two Z-shaped metals at 4.5x; the bands (no metal in the gap
+y 6166-6188 over x 6640-7700 in either chip; each band's join to its fld rail at 4x in both
+metal shots; only field and crossing polys beneath); the VCC leg (straight; the poly
+beneath turns west); the fld rail's end at y 6036 by profile; the verticals, corners and
+all four pads' memberships (no swap); `r9m_l1w`'s L in three shots.
+No finding changes a connection. One point undecidable, now marked: `tc1_ns3`'s metal
+over the boxes (9x, four shots): the five stretches are `?M` and the Ambiguities entry
+states what is and is not shown. Not checked: beyond the ports; the four other units'
+boxes at 9x; a green mark at (7245-7280, 6120) under the VCC band (clean shot only, no ring
+in either metal shot).
 

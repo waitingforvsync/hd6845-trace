@@ -574,7 +574,23 @@ N M 7791,5900 tc2_r5718
 #   - the pad (7660,6193) (n3_pad2.png 4.6x, four shots: ring, bright centre, green hole); its
 #     metal x 7652-7670 goes south, 28 px east of the wide metal's end (x 7622), past y 6400
 #     (follow.py 7661 6230 S: end (7661,7088), not looked at).
-M 7902,4445 y5640 w=15
+# The metal over the five boxes of rax's units is not established by the photos: at each box
+# the metal test fails across the full width for about 24 px in both chips (unit 3: y 5310-5334),
+# with a bare-ground-bright blob and a green band in the clean shot under it; no ring, no
+# hole, no contact centre (review round 1 of the fourth round, 9x, four shots). Read as one
+# metal passing over (a break would leave dangling segments; tc1's accepted pass-over at
+# (6968,4027-4068) looks the same): those five stretches are drawn uncertain.
+M 7902,4445 y4809 w=15
+?M 7902,4807 y4839 w=15
+M 7902,4837 y4939 w=15
+?M 7902,4937 y4969 w=15
+M 7902,4967 y5178 w=15
+?M 7902,5176 y5208 w=15
+M 7902,5206 y5308 w=15
+?M 7902,5306 y5338 w=15
+M 7902,5336 y5438 w=15
+?M 7902,5436 y5468 w=15
+M 7902,5466 y5640 w=15
 P 7882,5616:7918,5649
 C 7899,5633
 P 7899,5632 x7605 y6193 x7660 w=19
