@@ -1,0 +1,55 @@
+# lc3: left-centre random logic, part 3 (x 4400-6450, y 9233-10400). Only the gate pair
+# x 5540-5900, y 9260-9520 is drawn: two inverters, mirror images about y 9384.5
+# (findcell 0.85), each a pull-down on the metal x 5665-5712 and a depletion load to the wide
+# metal x 5840-5890. Coordinates from the survey (3.4x) and 6x views bc_3, ld_3, bx_6 (acid1b,
+# acid, metal); traced on claude-opus. Rail names from the load's side (not followed to a pad).
+@block lc3
+@w M=22 P=22
+# rails, as far as the pair needs
+M 5688,9255 y9520 w=46
+N M 5688,9384 vss
+M 5865,9255 y9520 w=50
+N M 5865,9384 vcc
+@cell lc3_inv
+# pull-down column from the VSS contact (5680,9505) north to the output band
+D 5655,9428:5708,9515
+C 5680,9505
+# output band y 9428-9450 east through the load to the VCC contact ring (5865,9455)
+D 5606,9414:5655,9450
+D 5655,9428:5850,9450
+D 5843,9430:5885,9478
+C 5865,9455
+# input poly y 9458-9482 from the pad (5560,9470) east across the column to x 5733
+P 5545,9458:5733,9482
+# output: poly row y 9418-9440 from the west onto the box (5625,9432): a buried contact
+# (square outline in acid1b, x 5610-5640, y 9418-9446)
+P 5540,9418:5640,9440
+B 5606,9414:5645,9448
+# no metal contact on that box (review round 1): the metal x 5615-5638 runs over it unbroken
+# in both metal shots, the box only edged dark; acid1b pale inside, no contact spot.
+# depletion load: poly over the band x 5785-5835 (dense implant in acid x 5770-5835)
+P 5785,9418:5835,9460
+# its gate tie (review round 1): the load poly runs south x 5780-5812 onto a buried contact
+# box x 5780-5812, y 9468-9500 (square outline in metal and metal1, contact spots in acid1b),
+# met by a pale diffusion strip x 5744-5776 from the band south to y 9500 and east under the box
+P 5780,9455:5812,9500
+B 5780,9468:5812,9500
+D 5744,9445:5812,9502
+@end
+@inst lc3_inv 0,0
+@inst lc3_inv 0,0 my=9384.5
+# two metal tracks pass over the pair with no contact in it (review round 1): x 5615-5638 over
+# the output boxes, x 5746-5766 over the load tie strips; where they go is not followed.
+M 5626,9255 y9520 w=24
+N M 5626,9384 lc3_m5626
+M 5756,9255 y9520 w=20
+N M 5756,9384 lc3_m5756
+# inputs: pads on the track x 5560 (lower from the south, upper from the north)
+C 5560,9470
+M 5560,9458 y9520
+C 5560,9299
+M 5560,9255 y9311
+N M 5560,9500 lc3_w9470
+N M 5560,9270 lc3_w9299
+N P 5560,9429 lc3_w9432
+N P 5560,9340 lc3_w9337
