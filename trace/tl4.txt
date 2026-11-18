@@ -815,12 +815,12 @@ M 4967,5984 x4929 y6350 w=14
 P 4913,6309:4947,6337
 C 4929,6323
 P 4250,6313:4920,6333
-# --- the rails' legs. RA's leg x 4667-4715 on south; RB to a corner, west along y 5806-5833 and
-# south as a leg x 4754-4801; tl5's rail RC, turned west along y 5882-5942, turns south as a
-# leg x 4841-4888. All three leave the strip at y 6350. No contact on any of them here.
+# --- the rails' legs. RA's leg x 4667-4715 on south; RB to a corner, west along y 5806-5856 (it
+# lies on tla's row y 5838-5858 there, no contact) and south as a leg x 4754-4801; tl5's rail
+# RC, turned west along y 5891-5942, turns south as a leg x 4841-4888. All three leave the strip at y 6350. No contact on any of them here.
 M 4691,5785 y6350 w=48
-M 4928,5785 y5833 w=44
-M 4754,5806:4950,5833
+M 4928,5785 y5856 w=44
+M 4754,5806:4950,5856
 M 4777,5806 y6350 w=46
-M 4967,5912 x4865 w=60
-M 4865,5882 y6350 w=46
+M 4841,5891:4967,5942
+M 4865,5891 y6350 w=46

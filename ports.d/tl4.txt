@@ -44,7 +44,7 @@ tl4_w3850   P  4967,5752-5772  in   the row of the pad (4626,5762) at the south 
 rcs_x1      P  4967,5880-5900  out  the row of the pad (4629,5891): tl5_w5890, tl5's bus line x 5107
 tl5_w5936   P  4967,5926-5946  ?    the row of the pad (4583,5936): tl5's bus line x 5063
 tl5_w4590   M  4967,5977-5991  ?    tl5's thin metal (the clear of its latch c), in along y 5984
-vss         M  4967,5882-5942  -    tl5's rail RC, turned west; it turns south at x 4841-4888
+vss         M  4967,5891-5942  -    tl5's rail RC, turned west (top edge y 5891); it turns south at x 4841-4888
 
 # North side (y 2500)
 tl4_w4068   P  4534-4550,2500  ?    the poly column north of pad E (4539,2768), on north under the wide band to y ~2165
