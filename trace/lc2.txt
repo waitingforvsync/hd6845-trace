@@ -1,6 +1,7 @@
 # Left-centre random logic, middle strip (x 4400-6450, y 8067-9233). Notes: notes/blocks/lc2.md.
 @block lc2
 @requires tl1
+@requires tl5
 @w M=20 P=18
 @s 28x28
 
@@ -198,3 +199,33 @@ P 5859,8506:6096,8523
 P 5859,8506:5877,8652
 P 5835,8634:5877,8652
 N P 6200,8474 lc2_w8474
+
+# ====================================================================
+# The inverter below latch C (x 5836-6230, y 9040-9150) and the thin metal it drives.
+#   lc2_w9124 = NOT lc2_w8822        (latch C's output Na, inverted, onto the thin metal x 5967-5981)
+# The gate group is tl5's cell tl5_inv flipped top to bottom (findcell on the clean shot: 0.86; x' = x + 933,
+# y' = 13935 - y); overlay f2.png (3.1x, clean and chip-2 metal).
+@inst tl5_inv 933,4239 mx=5082 rot=180 o=5082,4848 tag=lc
+D 5840,9066:5896,9144                       # the load's VCC box under the rail (tan x 5842-5894, y 9070-9140)
+C 5858,9105 s=20x56                         # one long contact: ring y 9062-9148 in both metal shots, hole 51 px long in the clean shot
+M 5865,9030 y9233 w=50                      # the VCC rail on south (still metal at y 9245)
+M 6039,9030 y9176 w=48                      # the VSS rail on south over the cell's VSS contact (6047,9051) to its end
+# input: latch C's Na metal from its pad south, west along y 8946-8958 and south to a pad at the east end of the gate row
+M 6257,8837 y8952 x6213 y9096 w=16
+P 6140,9072:6202,9093
+P 6196,9066:6229,9097
+C 6211,9082
+# output: the cell's output poly east to a pad, the end of the thin metal: south, west along y 9205-9219 round the
+# VSS rail's end, north on x 5967-5981 through latch C and latch D's lower unit and out of the strip.
+# Over three tie boxes of the latches' cells neither metal shot shows it (drawn uncertain; notes, Ambiguity 6)
+P 6140,9117:6158,9137
+P 6151,9106:6187,9141
+C 6168,9124
+M 6169,9110 y9212 x5974 y8872 w=14
+?M 5974,8872 y8833 w=14
+M 5974,8833 y8759 w=14
+?M 5974,8759 y8727 w=14
+M 5974,8727 y8136 w=14
+?M 5974,8136 y8097 w=14
+M 5974,8097 y8067 w=14
+N M 5974,9000 lc2_w9124
