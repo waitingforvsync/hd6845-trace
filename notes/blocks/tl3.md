@@ -21,7 +21,7 @@ Traced, extracting (43 transistors of its own, 0 errors), all in the west column
   `tl3_w3803`; **the inverter at y 4345-4490** (2); **NOR 3** (y 4469-4653, 3), the fourth
   copy of `tl3_nor` (2026-11-17 17:48 -0600);
 - **latch B, y 4818-5258** (11), `tl1`'s two unit cells again, with its rows and metals
-  (2026-11-17 18:20 -0600).
+  (2026-11-17 18:09 -0600).
 
 Everything else in the strip is surveyed only (Inventory).
 
