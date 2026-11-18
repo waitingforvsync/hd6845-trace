@@ -1,24 +1,24 @@
 {
  "who": "Chris Evans",
- "generated": "2026-11-18T06:20:25+00:00",
+ "generated": "2026-11-18T21:41:55+00:00",
  "price_source": "Claude API list prices per million tokens, as of 2026-11-03",
  "unpriced_models": [],
- "responses": 556,
+ "responses": 574,
  "first": "2026-11-17T23:50:00.831000+00:00",
- "last": "2026-11-18T06:20:14.912000+00:00",
- "total_cost": 78.23,
+ "last": "2026-11-18T21:41:45.408000+00:00",
+ "total_cost": 80.43,
  "review_cost": 31.88,
  "tokens": {
-  "input": 1164,
-  "output": 757923,
+  "input": 1202,
+  "output": 770257,
   "cache_write_5m": 946112,
-  "cache_write_1h": 820768,
-  "cache_read": 126529515
+  "cache_write_1h": 885184,
+  "cache_read": 129930285
  },
  "by_model": {
   "claude-fable-5-2": {
-   "cost": 78.23,
-   "responses": 556
+   "cost": 80.43,
+   "responses": 574
   }
  },
  "by_package": {
@@ -31,16 +31,16 @@
    }
   },
   "(coordination)": {
-   "cost": 4.53,
+   "cost": 6.73,
    "review_cost": 0.0,
-   "responses": 42,
+   "responses": 60,
    "models": {
-    "claude-fable-5-2": 42
+    "claude-fable-5-2": 60
    }
   }
  },
  "by_day": {
   "2026-11-17": 2.62,
-  "2026-11-18": 75.6
+  "2026-11-18": 77.81
  }
 }
