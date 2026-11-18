@@ -326,6 +326,12 @@ the east neighbour's pads at x 5560-5683, y 4380-4530 are not drawn (Not done).
 1. **The load ties are `tl1`'s `?` items** (two per latch, in the cells). Until one is read the
    cross-coupling of each latch is an assumption, here as in `tl1` and `tl4` (AMB-026).
 2. **The supplies of RC and RB** are named from structure only.
+4. **The top inverter's load**: its width (the diffusion under the plate: 18 wide for certain,
+   read as 66) and its tie (four `?` items at (4995-5056, 3041-3080)). What would settle them: a
+   shot in which the plate is transparent, or the same build read elsewhere.
+5. **Thin metal W over the tie boxes**: dark there in both metal shots, read as a metal over a
+   buried contact (trap 22), in every unit. If one of these were a contact, `tl5_w4937` would be
+   shorted to that unit's output; none has a pad or a bright centre.
 3. The copies were checked by overlay (3.6x), block comparison and one rail profile; the cells'
    small items were not each measured in each copy.
 
@@ -337,8 +343,8 @@ the east neighbour's pads at x 5560-5683, y 4380-4530 are not drawn (Not done).
 - The column's foot: RC south of y 5045 and where it ends; RB south of `tl4`'s end.
 - The rows under the foot (y 5330-5800), the pads at x 5490-5560 there, the tracks T7-T10 south
   of y 5000, and everything at y 5800-6350 that `amrw`, `tla` and `trunks` have not drawn.
-- The east neighbour's pads in the bus field (x 5560-5683, y 4380-4530) and the rows y 3870 and
-  y 3657 east; the row y 2552 at the top; `r9m`'s open ends here (its poly from the pad
+- The east neighbour's pads in the bus field (x 5560-5683, y 4380-4530) and T10's metal east along
+  y 3657; the row y 2552 at the top; `r9m`'s open ends here (its poly from the pad
   (5400,2596) north at x 5175, said to turn west along y 2550).
 - The wide vertical metal at x 4900-4995, y 2540-2995 north of RB's top end (in both strips),
   and RC north of y 3140 (it runs on to about y 2650: `segs.py`).
