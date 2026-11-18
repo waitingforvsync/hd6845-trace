@@ -478,11 +478,14 @@ C 2868,2596
 M 2868,2598 x3503 y2509 x3533 w=16
 N M 3200,2598 tl1_w2592
 
-# ---- VSS: the east arm of tl1's wide metal x 2733-2785 (y 2915-2948; tl1 draws it to x 2817)
+# ---- VSS: the east arm of tl1's wide metal x 2733-2785 (y 2893-2948; tl1 draws it to x 2817)
 # runs on east without a break onto the top of R3 (tla draws R3 from y 2940): bright metal from
 # x 2776 to x 3000 along y 2930 in both chips (px.py row 2930 2776 3024 8). So R3 hangs from the
-# same plane as R1 and that wide metal
-M 2810,2915:3004,2948
+# same plane as R1 and that wide metal. The arm's top edge is y 2893: it lies OVER the poly row
+# y 2890-2908 (tl1_w3594), which is protected salmon in the clean shot up to the arm's east end
+# x 3004 and open poly beyond it; the dark line at y 2908-2913 across the arm is the row's lower
+# edge underneath, and there is no contact on the row (review round 1 of run 5)
+M 2810,2893:3004,2948
 N M 2900,2931 vss
 # the plane's lower edge east of tl1's piece: y 2507, east end x 3388 (px.py col 2900|3200|3370
 # 2484 2530 3, row 2490 3330 3420 5). It goes on north out of the strip; nothing in the strip

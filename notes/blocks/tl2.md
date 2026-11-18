@@ -16,7 +16,7 @@ tl1_w3333   metal y 2554 from tl1's pad (2826,2553) east to a pad (3453,2553); p
             x 3450-3470, out of the strip at y 2500: the third latch's data comes from the band north of the strips
 tl1_w2592   tl1's row y 2591 on east to a pad (2868,2596); metal east along y 2598, north at x 3503,
             east along y 2509 out of the strip at x 3533
-vss         the east arm (y 2915-2948) of tl1's wide metal x 2733-2785 is one metal with the top of R3
+vss         the east arm (y 2893-2948) of tl1's wide metal x 2733-2785 is one metal with the top of R3
 ```
 
 No uncertain item on any of them. R3 therefore hangs from the same VSS plane as R1 (`tl1`'s
@@ -129,7 +129,7 @@ undrawn contacts (see Not done).
 | x 2785-3175, y 4230-4530 | **run 3, piece 2**: the AND-OR-INVERT unit that drives `rcs_bd3330`, cross-coupled (through its load's tie) with `tla`'s `rcs_n4200`: load between R2 and thin E (y 4275-4349), the node's column under thin E and the gap, a wire under R3 (y 4344-4356), columns under R3's east edge and under the thin metal x 3025-3059, three gates (`rcs_n4200`'s band y 4370-4390, the `clk_tl` row y 4407-4424, the arm y 4462-4481 of `rcs_cond_lat`'s pad), a VSS box with a contact (2990,4513), the buried contact (3048-3072, 4362-4390) to the row y 4374 |
 | x 2786-2990, y 4005-4145 | **run 4, piece 3**: the inverter of `rcs_cond`: VCC box under R2 (contact (2804,4084)), load plate in the open (x 2843-2896, y 4048-4110) on `rcs_cond_lat`'s poly, node box under thin E with a narrow strip south to the tie, pull-down in the gap between thin E and R3 (gate: the west end of `tla`'s g1 band, turned north), source on `tla`'s VSS box (contact (2985,4070)) |
 | x 3004-3063, y 4504-4530 | **run 4, piece 4**: the top of `tla`'s column above the band of `tl3_w3982`: a diffusion band west to piece 2's VSS box; no tie to the pad above (AMB-009) |
-| y 2500-2960 | horizontal metal tracks and rows north of the cluster: `tla`'s (y 2728), run 2's (y 2640, 2812 and the rows), and **run 5, piece 5**: `tl1_w3333`'s metal y 2554 with its east pad (3453,2553) and the poly north from it; `tl1_w2592`'s pad (2868,2596) and metal y 2598 / x 3503 / y 2509; the VSS arm y 2915-2948 onto R3's top; the VSS plane's lower edge (y 2507, to x 3388) |
+| y 2500-2960 | horizontal metal tracks and rows north of the cluster: `tla`'s (y 2728), run 2's (y 2640, 2812 and the rows), and **run 5, piece 5**: `tl1_w3333`'s metal y 2554 with its east pad (3453,2553) and the poly north from it; `tl1_w2592`'s pad (2868,2596) and metal y 2598 / x 3503 / y 2509; the VSS arm y 2893-2948 onto R3's top; the VSS plane's lower edge (y 2507, to x 3388) |
 | x 2817-3180, y 5900-6300 | the small cluster's east half: **this piece** |
 | x 2890-3533, y 6300-6350 | `rcs_thin_e`'s pad (2913,6327) and its poly row east (drawn); `lc_step`'s row y 6268-6290 is `ur`'s |
 
@@ -694,12 +694,20 @@ band y 2690-2980 everything else already had an outline; the tops of tracks A, B
   (`follow.py 3000 2597 E`: corners (3506,2593) and (3504,2511), on east to x 3752). **At its
   corner it passes `tl1_w3333`'s pad without touching**: the pad's ring ends at x 3478, the metal
   begins at x 3492, bare ground between in both metal shots (`n5_a.png`; trap 16).
-- **VSS** (traced). The east arm of `tl1`'s wide metal x 2733-2785 is y 2915-2948 (`px.py col
-  2800|2825|2860|2940 2896 2968 4 metal,metal1`: bright from y 2916 to y 2944 at all four) and
-  runs without a break onto the top of R3 (`px.py row 2930 2776 3024 8`: bright from x 2776 to
-  x 3000 in both chips, one dark sample at x 2920 in chip 2 only; edge at x 3004). `tl1` drew the
-  arm y 2905-2955 at x 2785-2817: 10 px too wide at the top (the row y 2899 lies there), a width
-  only. The dark line across R3 at y 2970-2978 is not a gap: 6-10 px in both chips, it runs on
+- **VSS** (traced). The east arm of `tl1`'s wide metal x 2733-2785 is y 2893-2948 and runs
+  without a break onto the top of R3 (`px.py row 2930 2776 3024 8`: bright from x 2776 to
+  x 3000 in both chips, one dark sample at x 2920 in chip 2 only; edge at x 3004). **The arm
+  lies over the poly row y 2890-2908 (`tl1_w3594`), with no contact.** The tracer first drew it
+  y 2915-2948, from the bright stretch y 2916-2944 (`px.py col 2800|2825|2860|2940 2896 2968 4
+  metal,metal1`), taking the row to lie beside it; the review showed otherwise: the arm's east
+  edge line (x 3003-3008) runs up to y 2893 in both metal shots (`review-9/armtop.png`, 6x), the
+  row is protected salmon in the clean shot from y 2892 to y 2904, more than 20 px from the
+  bright stretch, as far east as x 3004 and open poly from x 3008 (`px.py row 2900 2960 3044 4`,
+  `px.py col 2990 2880 2924 3`), and over the row the chip-2 metal shot is dim with red equal to
+  green (87-133/67-125) where the open row east of the arm is orange (144-169/94-115/42-61).
+  The dark line y 2908-2913 across the arm is the row's lower edge underneath (trap 3). The row
+  is uniform under the arm, without a green hole. `tl1` drew the arm y 2905-2955 at
+  x 2785-2817: 12 px short at the top, a width only. The dark line across R3 at y 2970-2978 is not a gap: 6-10 px in both chips, it runs on
   beyond the rail on both sides (`px.py row 2974 2930 3030 5`) and the clean shot is protected
   through it (`px.py col 2978 2960 2992 2`): the top edge of the poly row under the rail there.
   The plane above: lower edge y 2507, east end x 3388 (`px.py col 2900|3200|3370 2484 2530 3`,
@@ -763,7 +771,7 @@ open field between the metal's protected margin and the row's green rim, with it
 | `tl1_w3333` | P | x 3450-3470, y 2500 | in | the poly north from the pad (3453,2553): the wire's source is north of the strips |
 | `tl1_w2592` | P | x 2817, y 2582-2600 | ? | tl1's row y 2591, on east to the pad (2868,2596) |
 | `tl1_w2592` | M | x 3533, y 2501-2518 | ? | the metal from that pad: y 2598, north at x 3503, east along y 2509 (follow.py: on to x 3752) |
-| `vss` | M | x 2817, y 2915-2948 | - | the east arm of tl1's wide metal, onto R3's top |
+| `vss` | M | x 2817, y 2893-2948 | - | the east arm of tl1's wide metal, onto R3's top; it lies over the row y 2899 without a contact |
 | `vss` | M | x 2832-3388, y 2500 | - | the plane's lower edge (y 2507), on north |
 
 ## Ambiguities
@@ -1119,6 +1127,49 @@ rests on the clean shot and the chip-1 metal shot only.
 Connections before and after the fixes:
 `tools/t.sh tl2 sameconn.py 57f4875`: `connections identical`;
 `.venv/bin/python tools/sameconn.py 57f4875`: `connections identical`.
+
+Round 1: no findings that change a connection.
+
+### Run 5 (the wiring north of y 2630: piece 5)
+
+Round 1 (full review of the piece, 2026-11-18 12:36-12:47 +0000, a fresh agent on claude-fable-5-2,
+at commit 89fb577; 8 images in `cache/scratch/tl2/review-9/`). Told to suspect: the corner of the
+y 2598 metal beside the pad (3453,2553) (trap 16) and whether the y 2554 metal ends on that pad;
+the join of `tl1_w2592`'s poly row to the pad (2868,2596) across the pad's dark outline; that
+what leaves the pad (3453,2553) north is poly and is on the pad; any contact or tap along the
+two long metals, and whether the upper piece y 2501-2517 touches anything; the arm's continuity
+into R3 and the dark line at y 2970-2978; anything undrawn in x 2817-3533, y 2500-2960; and the
+negative claim about the "poly bar" at y 5648-5662.
+It checked: the east pad at 4.4x in four shots and a 3 px text map (the metal ends on the pad;
+bare ground at x 3484 on every row y 2536-2581 in both chips and an open green strip x 3478-3484
+in the clean shot between the pad's ring and the vertical metal: two nets; `follow.py` from
+(3300,2553) stops at x 3460); the poly north of the pad (x 3447-3472, continuous into the pad in
+the clean and chip-2 stripped shots, straight north past y 2472); the west pad at 4.8x with
+`px.py` rows 2591 and 2597 and column 2846 (orange poly up to the ring at x 2852 in both metal
+shots; in the clean shot dark-red poly passes into salmon with no field between; the pad-to-metal
+join profiles like `tl1`'s two pads); text maps along both metals (protected field throughout, no
+ring present in both chips; single-chip blemishes at (3232,2596), (3060,2558), (3038,2602));
+`follow.py` along the y 2598 metal (corners (3506,2593), (3504,2511), on to x 3752; nothing
+touches the upper piece); the arm into R3 in both chips (one chip-2 blemish at (2920,2928)); the
+line at y 2974 (6-8 px, beyond the rail both sides, protected poly under R3 at y 2978-2992); the
+plane's edge (y 2507, east end x 3388); the bar at 4x in four shots (open field; a chip-2 blob at
+(3255,5656) is in neither chip-1 shot); the extraction (0 errors, no `?` item in the piece).
+Finding, checked by the tracer; geometry only:
+1. The VSS arm's top edge is at about y 2893, not y 2915: the arm lies over the poly row
+   y 2890-2908, and the notes' sentence that `tl1`'s y 2905 was too wide is wrong. **Confirmed**
+   (`review-9/armtop.png`, 6x: the arm's east edge line runs up to y 2893 in both metal shots;
+   `px.py row 2900 2960 3044 4` and `px.py col 2990 2880 2924 3`: the row is protected salmon in
+   the clean shot west of x 3004 and from y 2892, open poly from x 3008; dim metal with red equal
+   to green over the row, orange east of the arm). No contact on the row there. Redrawn
+   `M 2810,2893:3004,2948`; the notes, the ports and the floor-plan line corrected. Same
+   connections (the row was already drawn passing; a metal over a poly joins nothing without a
+   contact).
+It could not check: where the poly goes north of y 2470 (the plane extends east there, above
+y 2465, so the poly may pass under it); the band y 2640-2890 was looked at only at 1.7x; under
+the metals the chip-2 stripped shot is fringes and was not used.
+Connections before and after the fix:
+`tools/t.sh tl2 sameconn.py 89fb577`: `connections identical`;
+`.venv/bin/python tools/sameconn.py 89fb577`: `connections identical`.
 
 Round 1: no findings that change a connection.
 
