@@ -537,7 +537,7 @@ P 4118,4453:4225,4466
 # contact (textmap 4126 4486 4254 4520 3) and out of the strip: it is tl4's row tl4_w4501
 # (gate 2 of tl4's three-input NOR)
 P 4160,4496:4250,4510
-@alias tl3_e4152 tl4_w4501
+@alias tcw_a tl4_w4501                 # was an alias of tl3_e4152 until run 9 joined track A to tcw_a (the foot, below)
 # ---- rcs_mv's track (tla: x 4192, y 4098-4748) ends on a pad with a contact (4192,4743); the
 # pad's poly leaves east along y 4736-4751, under the metal x 4229-4243 without a contact, and
 # crosses x 4250 (textmap 4170 4722 4254 4762 3; lc_bf1.png)
@@ -828,3 +828,63 @@ P 3882,3788:3938,3882
 D 3954,3816:3970,3842                 # the tail north of the strip, up to the tie's box
 D 3954,3860:3970,3984                 # south of the strip, under the thin metal
 D 3954,3966:4056,3984                 # the band: through the gap and under the rail, onto tla's D 4052,3955:4092,3984
+
+# ====================================================================
+# The foot of the cluster, y 5345-5660 (run 9): a crossing field. Poly rows from tl2's strip
+# (x 3533) to tl4's (x 4250) under the cluster's metals; no diffusion (opendiff 3533 5300 4250
+# 5660: rims only). Every crossing of a row and a metal is a pass-over unless a pad is drawn
+# (textmap X-15 Y0 X+16 Y1 3 down each metal: bright over the row's middle, 6-9 px bars at its
+# edges, protected poly and no hole in the clean shot). Rows read from the clean shot at 3 px
+# (textmap 3530 Y-15 4258 Y+16 3); in the open stretches also in both metal shots (poly: chip-1
+# green 66-89; field 124-139).
+# ---- row y 5365-5378: rcs_x1 from tl2 (P 2810,5362:3533,5380) to the pad (4192,5373) of latch
+# C's clear metal: one poly, no pad on the way. Latch C's clear is rcs_x1.
+P 3533,5365:4130,5378
+N P 3740,5371 rcs_x1
+@alias rcs_x1 tl3_e4808
+# ---- row y 5408-5421: tl3_w5025 (latch B's inverted output, from tl2's track G) straight across
+# to x 4250, where tl4 draws it on to its pad (4279,5413) as tl3_e5240: the gate of the inverter
+# under the rail's south end is latch B's inverted output.
+P 3533,5408:4250,5421
+N P 3740,5415 tl3_w5025
+@alias tl3_w5025 tl3_e5240
+# ---- row y 5450-5465 west: tl1_w4937 from tl2 (P 2810,5449:3533,5467) to a pad with a contact
+# (3953,5458), the south end of the thin metal x 3948-3962 (textmap 3940 5300 3972 5480 3: ring,
+# centre x 3946-3958 y 5453-5462 in both metal shots, hole x 3949-3958 in the clean shot). Field
+# between this pad and the next (x 3975-4022, r9_pads.png 5x three shots).
+P 3533,5450:3945,5465
+P 3936,5442:3972,5474
+C 3953,5458 s=20x20
+M 3955,5300 y5468 w=13                # the thin metal's last stretch over rows y 5330, 5371, 5415 (no hole under it)
+N P 3740,5458 tl1_w4937
+# ---- row y 5450-5465 east: a pad with a contact (4040,5458) (textmap 4022 5440 4053 5600 3);
+# its poly runs east to x 4250 = tl4's tl4_w5455 (P 4250,5447:4967,5467); its metal x 4031-4043
+# goes south (drawn to y 5660; follow.py 4037 5520 S: on into the wide metal at y ~6100)
+P 4022,5442:4060,5474
+C 4040,5458 s=20x20
+P 4052,5450:4250,5465
+M 4037,5448 y5660 w=13
+N P 4150,5458 tl4_w5455
+# ---- row y 5493-5508: from tl2's pad (3518,5498) (tl3_w4546, NOR 3's output) straight across to
+# x 4250, where tl4 draws it on to its pad (4321,5504) as tl3_e4372: gate 1 of rcs_mv's NOR is
+# NOR 3's output.
+P 3530,5494:4250,5508
+N P 3740,5500 tl3_w4546
+@alias tl3_w4546 tl3_e4372
+# ---- row y 5621-5641 east of the pad (4104,5633): on to x 4250 = tl4's tcw_a. Track A, latch
+# C's enable, is tcw_a.
+P 4150,5621:4250,5641
+N P 4200,5631 tcw_a
+@alias tcw_a tl3_e4152
+# ---- two metals from tl2's strip that turn south through the foot (corners read from
+# textmap 3551 5425 3582 5600 3 and 3593 5360 3624 5600 3; no hole under either)
+M 3533,5373 x3608 y5660 w=13          # tl2's track J arm (tl3_w3982); follow.py: on south to (3608,5942)
+N M 3608,5600 tl3_w3982
+M 3533,5436 x3566 y5660 w=13          # tl2's track H arm (tl3_w4763); follow.py: on south to (3563,5724)
+N M 3566,5600 tl3_w4763
+# ---- the two rails go on south through the foot (textmap 3530 5300 4262 5664 6: bright x 3650-3692
+# and x 3824-3866 down to y 5660 and beyond; no contact on either in the foot: only poly under them)
+M 3670,5325 y5660 w=50                # west rail (VSS), on from the piece drawn to y 5330
+N M 3670,5600 vss
+M 3846,5490 y5660 w=44                # VCC rail, on from tla's piece (drawn to y 5497)
+N M 3846,5600 vcc
