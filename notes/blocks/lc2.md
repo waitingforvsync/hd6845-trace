@@ -90,6 +90,16 @@ followed); the rails vss and vcc at y 8060/8067 and y 8560.
 
 ## Not done
 
+- **An undrawn thin metal through latch B** (review round 1): x about 5748-5764, from north
+  of y 8040 to south of y 8560, the copy's counterpart of tl1's "thin metal W" (the cells
+  do not carry it). Continuous in both metal shots (`cache/scratch/lc2/review-1/m5750.png`,
+  `w_south.png`); no contact ring seen on it inside the latch (a dark speck at (5758,8438)
+  in the clean shot has no ring in either metal shot). Not drawn: follow it north into
+  lc1's region and south into lc3's, and look for its contacts, before drawing it.
+- t132 at (5716,8472): the cell gives L = 12 (poly x 5710-5722); the photo shows the poly
+  at x about 5708-5727 (about 18 px). Geometry only; the cell copy was not changed.
+- Gate-width profiles of the three loads (t133-t135) were not taken.
+
 1. Latch B's tracks: clear from the pad (5472,8254), Na from (5514,8341), data south from
    (5558,8450); enable north of y 8067 is `lc1`'s region.
 2. Latch C and the inverter below it (overlay the `findcell` hits first).
@@ -100,3 +110,24 @@ Tool note: `view.py` has no `--notrace`; images wider than about 1300 px (6x of 
 panels) are downscaled and wasted.
 
 ## Review
+
+**Model note: latch B was traced AND reviewed on claude-opus, not claude-fable-5-2** (the
+Fable allowance ran out; the survey before it was on Fable). The project's rule is Fable
+for both: this piece wants a Fable review before it is relied on.
+
+Round 1 (full review of latch B, 2026-11-18 04:02 +0000, a fresh agent on claude-opus). Told to suspect the gap
+on the metal x 5560 (enable against data), the five input rows to their pads, the two cell
+copies against the photo, the unmeasured gate widths, the VCC contact and VSS box. Checked:
+the gap in both metal shots (dark at y 8394-8406, no metal to the data pad's ring at
+y 8446: separate nets); all five rows unbroken to their pads with field between them and
+none continuing west; no west row on the Nb box and none drawn; both copies overlaid at 3x
+on the clean and a metal shot (every contact on a ring or box); widths within about 10 px
+for t129-t132 and t136-t139; the VSS box, its contact and the long VCC ring; the dark bars
+at x 5722-5740 not poly; the full extraction (0 errors, same 11 transistors, no merges).
+No finding changes a connection of what is drawn. Two findings, both recorded in Not done:
+an undrawn thin metal through the latch at x 5748-5764 (a net missing from the region; no
+contact to the latch seen), and t132's channel length (12 drawn, about 18 in the photo;
+geometry only). Not checked: the loads' width profiles; where the thin metal ends.
+
+Round 1: no findings that change a drawn connection; one net (the thin metal) is missing
+and is listed in Not done.
