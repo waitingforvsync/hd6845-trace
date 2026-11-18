@@ -162,3 +162,132 @@ P 6145,6324 x5755
 P 5738,6305:5773,6340
 C 5755,6322
 M 5755,6322 y6350
+
+# ====================================================================
+# Piece 2 (2026-11-18): the tracks U8-U11, the five polys x 6101-6275 of the crossing field
+# (x 6040-6420, y 4390-4890: eight vertical polys under eight bus metals; no contact between
+# them: tl5_tracks.py h along each of the eight metals, x 6080-6300, no hole; c_mid.png 2.3x,
+# clean and chip-2 stripped: seven straight polys at the same x in every gap), the metals south
+# of the field and their nest of corners (e_nest.png 2x; metal test of every piece in the notes).
+
+# ---- tl6_p6101: U8. North pad (6057,2595) (u4.png), its poly north out of the strip; the
+# metal south to y 4395 and a foot east onto the pad (6101,4398) (u1.png) at the top of the
+# field's poly x 6101; the poly south under the eight bus metals to a pad (6101,4830) (u3.png);
+# metal south, corner (6103,5790), east, corner (6233,5790), south, a foot east at y 6152 onto
+# a pad (6275,6152) (u6.png); the pad's poly south under the wide metal band y 6195-6243 and
+# ral_stb's metal (no hole: tl5_tracks.py v 6282 6170 6352) out of the strip (v2.png)
+P 6062,2595 y2500 w=20
+P 6040,2578:6075,2613
+C 6057,2595
+M 6059,2595 y4395 x6101
+P 6084,4381:6119,4416
+C 6101,4398
+P 6101,4398 y4830
+P 6084,4813:6119,4848
+C 6101,4830
+M 6103,4830 y5790 x6233 y6152 x6275
+P 6258,6135:6293,6170
+C 6275,6152
+P 6282,6152 y6350
+N M 6059,3500 tl6_p6101
+
+# ---- tl6_p6143: U9. North pad (6105,2552) (u4.png); the pad's poly runs north 25 px into a
+# poly that goes east along y 2518-2542 in the open (poly colour without a break from x 6100 to
+# x 6420 in both metal shots; px.py col 6104 2504 2548) out of the strip. The metal south,
+# a step east at y 4356 to x 6146 (u1.png), south to the pad (6143,4437); the field's poly
+# x 6143 to a pad (6144,4872) (u3.png); metal south, corner (6146,5746), east, corner
+# (6276,5746), south, a foot east at y 6110 onto a pad (6318,6110) (u6.png); poly south out of
+# the strip (v2.png)
+P 6400,2530 x6105 y2552 w=20
+P 6088,2535:6122,2570
+C 6105,2552
+M 6103,2552 y4356 x6146 y4437
+P 6126,4420:6161,4455
+C 6143,4437
+P 6143,4437 y4872
+P 6126,4855:6162,4890
+C 6144,4872
+M 6146,4872 y5746 x6276 y6110 x6318
+P 6301,6093:6336,6128
+C 6318,6110
+P 6322,6110 y6350
+N M 6103,3500 tl6_p6143
+
+# ---- tl6_p6187: U10. A metal from the east along y 2573 (across the strip's edge), corner
+# (6146,2573) (u5.png), south, a step east at y 4312 to x 6189 (u2.png), south to the pad
+# (6187,4397) (u1.png); the field's poly x 6187 to a pad (6187,4830) (u3.png); metal south,
+# corner (6190,5702), east, corner (6320,5702), south, corner (6320,6074), east, corner
+# (6363,6074), south to a pad (6360,6152) (u6.png); poly south out of the strip (v2.png)
+M 6400,2573 x6146 y4312 x6189 y4397
+P 6170,4380:6205,4415
+C 6187,4397
+P 6187,4397 y4830
+P 6170,4813:6205,4848
+C 6187,4830
+M 6190,4830 y5702 x6320 y6074 x6363 y6152
+P 6343,6135:6378,6170
+C 6360,6152
+P 6365,6152 y6350
+N M 6146,3500 tl6_p6187
+
+# ---- tc2_m6404: U11. A metal from the east along y 2619 (across the strip's edge), corner
+# (6190,2619) (u5.png), south, a step east at y 4272 to x 6233 (u2.png), south to the pad
+# (6229,4437); the field's poly x 6229 to a pad (6229,4872) (u3.png); metal south, corner
+# (6233,5659), east, corner (6363,5659), south, corner (6363,6032), east onto tc2's metal
+# (its pad (6404,6107)) (u7.png)
+M 6400,2619 x6190 y4272 x6233 y4437
+P 6212,4420:6247,4455
+C 6229,4437
+P 6229,4437 y4872
+P 6212,4855:6247,4890
+C 6229,4872
+M 6233,4872 y5659 x6363 y6032 x6403
+
+# ---- tcw_m6404 = tc2_m6447: tcw's pad (6275,4405) is the north end of the field's poly
+# x 6275; the poly south to a pad (6274,4832) (u3.png); metal south, corner (6276,5612), east
+# onto tc2's metal (u7.png)
+P 6275,4405 y4832
+P 6257,4815:6292,4850
+C 6274,4832
+M 6276,4832 y5612 x6400
+@alias tcw_m6404 tc2_m6447
+
+# ---- tc1_p4308 = tc2_m6490: tc2's row y 5003 runs on west to a pad (6317,5000) (u4.png: bare
+# ground north and west of the pad); metal south, corner (6320,5569), east onto tc2's metal
+P 6405,5003 x6317
+P 6300,4984:6335,5018
+C 6317,5000
+M 6320,5000 y5569 x6402
+@alias tc1_p4308 tc2_m6490
+
+# ---- tcw_m6278: tcw's track x 6276 runs on north of its drawn end (y 2700) to a corner
+# (6276,2665) and east across the strip's edge (u5.png)
+M 6276,2706 y2665 x6400
+
+# ====================================================================
+# Piece 3 (2026-11-18)
+
+# ---- tc2_o5175 = r9m_l3: tc2's row y 5173 (the NOR's output) runs on west under the metals
+# x 6320 and x 6276 to a corner at x 6250-6268 in the open, north to y 5045, and west along
+# y 5045 under the metals x 6233-5886 to r9m's pad (5845,5045) (v1.png 4x; px.py col 6260
+# 5022 5200 8: one poly colour from y 5038 to y 5182 in both metal shots)
+P 6405,5173 x6259 y5045 x5843 w=20
+@alias tc2_o5175 r9m_l3
+
+# ---- tl5_w5717: tl5's row y 6238 east under U0-U2, bw's metal, the wide metal and the metals
+# x 5972, 6016, 6105 to a corner at x 6226-6246 under the edge of the wide metal band, and
+# south in the open out of the strip (v2.png, v3.png 5x; px.py col 6236 6222 6290 4: the dark
+# line at y 6246-6250 is the band's rim, the same on the through poly x 6282, and the clean
+# shot is poly-coloured through it)
+P 5676,6238 x6236 y6350 w=20
+
+# ---- vss: the wide ground metal. tc2's vss piece (6400, 6198-6243) runs on west as a band
+# y 6193-6245 to a leg x 6141-6195, north to a band y 5977-6029, west to a leg x 5882-5934,
+# south out of the strip (segs in both metal shots: notes; d_se.png, d_sw.png, w1.png 4x).
+# No contact under it in the strip: the rows y 6065-6325 pass under the west leg at constant
+# width, the polys x 6282, 6322, 6365 under the south band (no hole: tl5_tracks.py).
+M 6402,6219 x6141 w=52
+M 6168,6245 y5977 w=54
+M 6195,6003 x5882 w=52
+M 5908,5977 y6350 w=52
+N M 6000,6004 vss
