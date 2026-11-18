@@ -106,8 +106,12 @@ has been checked against the photos.
   VCC if the band is; this agrees with the load reading above. The rail **x 10545-10595
   ends at y about 18555**, above a horizontal metal line y 18590-18605 and field, so it is
   **not** joined to the band: it is probably VSS (not followed). Rails x 9440-9480 and
-  x 9625-9690 not checked. Still assumptions until the band's join to `clock`'s `vcc`
-  is read at 2x+: no rail is named in a trace yet.
+  x 9625-9690 not checked. `j2.png` (metal | metal1, 1.5x, x 10550-10850,
+  y 18600-19160): the strip x 10668-10712 leaves the band at y 18790 and runs down to
+  `clock`'s `vcc` label at (10687,19100) unbroken in both metal shots (the dark line
+  across it at y 18935 is an edge underneath, trap of layers.md), so **the band and rail
+  x 10725-10770 are VCC** (firm enough to label when drawn; re-check at 4x then). Rail
+  x 10545-10595 still unnamed.
 
 ## Not done
 
