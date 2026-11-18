@@ -161,8 +161,8 @@ In order:
    the metals at the data, clear and output pads.
 1b. Copy b: fix unit a's VSS box south edge (15285 -> 15279), uncomment the cells and the three
    contacts, re-run the extraction; then draw its rows to their pads (table under "Latch unit b";
-   rows y 15563 and 15606 go on west, not followed), then draw the enable pads' rows east to the cells (y ~15431, ~15648) and check the metal x 10441
-   at 4x+ between y 15188 and 15400.
+   rows y 15563 and 15606 go on west, not followed), then draw the enable pads' rows east to the
+   cells (y ~15431, ~15648).
    Channel widths of b not profiled (three gate lengths were: above).
 2. Test the east column above y 14800 and below y 15750 for further copies; overlay the copy
    at 6857,11495 on the metal shot and the mirrored candidate at all.
