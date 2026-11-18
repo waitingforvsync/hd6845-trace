@@ -320,11 +320,14 @@ D 2915,3757:2935,3890
 ?D 2903,3845:2917,3890
 
 # ---- run 3, piece 2: a second AND-OR-INVERT unit at y 4270-4530, below tla's (rcs_n4200):
-#   X = NOT( rcs_n4200  OR  (clk_tl AND rcs_cond_lat) )
-# X is rcs_bd3330 (buried contact to the row y 4374, drawn firm) and, through the load's tie
-# (uncertain, below), rcs_x1: the poly that is the load's gate is tla's row of rcs_x1 itself.
-# With tla's rcs_n4200 = NOT((rcs_cond AND clk_tl) OR rcs_x1) the two units are then a
-# cross-coupled pair (review round 1 found the poly's north end)
+#   rcs_bd3330 = NOT( rcs_n4200  OR  (clk_tl AND rcs_cond_lat) )
+# The node is rcs_bd3330 (buried contact to the row y 4374, drawn firm). The poly that is the
+# load's gate (tl2_w4260) also runs north and is the WEST gate of rcs_n4200's third pull-down
+# (the band y 4230-4250 under R3, which tla had drawn as one poly with rcs_x1's row: review
+# rounds 1 and 2; tla's trace corrected, commit 0239da7). Through the load's tie (uncertain,
+# below) that poly is the node, so
+#   rcs_n4200 = NOT( (rcs_cond AND clk_tl) OR rcs_x1 OR rcs_bd3330 )
+# and the two units are a cross-coupled pair, with rcs_x1 a third input of rcs_n4200
 # Its node (called X in the notes) is one diffusion: a column under thin metal E, a narrow wire
 # under R3, a strip down R3's east edge, a band across the gap to a column under the thin metal
 # x 3025-3059, and there a buried contact to the row y 4374 (rcs_bd3330, track D's bottom pad).
@@ -336,17 +339,19 @@ P 2846,4275:2894,4349
 D 2898,4307:2936,4338
 # the plate's gate: an arm east from the plate's top (y 4275-4292, one salmon band under the
 # strap's margin and thin E: px.py row 4283 2876 2950 3) to a vertical poly in the gap between
-# thin E and R3 (x 2927-2947), which runs NORTH to y 4235 and turns east into the west end of
-# tla's row y 4230-4250 (rcs_g4240 = rcs_x1; px.py col 2938 4214 4340 6: poly colours in both
-# chip-2 shots from y 4238 to y 4292), and SOUTH into a heavy-outlined box (about x 2912-2950,
-# y 4298-4334) on the node's diffusion: the tie. The poly is firm; the tie is drawn uncertain,
-# as every load tie of this cluster is
+# thin E and R3 (x 2927-2947), which runs NORTH to y 4235 and turns east into the band
+# y 4230-4250 under R3 (tla's P 2945,4230:3000,4250, the west gate of rcs_n4200's unit; px.py
+# col 2938 4214 4340 6: poly colours in both chip-2 shots from y 4238 to y 4292), and SOUTH into
+# a heavy-outlined box (about x 2912-2950, y 4298-4334) on the node's diffusion: the tie. The
+# poly is firm; the tie is drawn uncertain, as every load tie of this cluster is. This poly net
+# has no other end: the plate, the west gate and the box
 P 2890,4275:2932,4292
 P 2927,4235:2948,4300
 ?P 2927,4296:2948,4332
 ?D 2929,4302:2947,4342
 ?B 2926,4298:2950,4334
-@alias rcs_x1 rcs_bd3330
+N P 2937,4260 tl2_w4260
+@alias rcs_bd3330 tl2_w4260
 # the node's column under thin E and in the gap, down through the gate of rcs_n4200 to the
 # stub below it; from the stub a strip goes on south under thin E and turns east along
 # y 4492-4510 into the VSS box under R3: the source of that pull-down
