@@ -97,7 +97,7 @@ poly at x 11960-11975 north of y 3650 and the poly x 12000 north of y 3650 (not 
 
 ## Not done
 
-Gate B is drawn (its extra box 12140-12195 x 3850-3900 is not: read at 5x, isolated, layer unsettled). Gate C is drawn. Resume with the next gate east (x 12318-12450: shares C's VSS contact (12305,3756); its poly x 12340-12365 and the diffusion turning south at x 12318-12340),
+Gate B is drawn (its extra box 12140-12195 x 3850-3900 is not: read at 5x, isolated, layer unsettled). Gate C is drawn. Resume with the next gate east (x 12318-12450, view `d5.png` 2.5x, not read closer: shares C's VSS contact (12305,3756); two vertical polys x about 12338-12362 and 12388-12410 cross diffusion at y 3730-3785 (the survey's pair with a jog at 12340-12400), the diffusion turns south at x 12318-12340, a textured box about 12395-12425 x 3855-3895, and no VCC contact box seen on x 12300-12450 at y 3912-3965 in the clean shot; draw by hand),
 then A's copies at +130 and +260 (read each copy's inputs on the photo), then follow
 the two polys north into the track field; then the gates east of x 12330, the track
 field's ends and contacts, the thin metal y 3827-3839, the rails' supplies, and the
