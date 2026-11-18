@@ -712,7 +712,7 @@ drawn `?M`; the rest firm:
 | y 3381-3444 | the box of `tla`'s inverter `rcs_mu` | dark y 3384-3440; a spot at (4101,3410-3419), A-B in both chips, clean 1-4, no hole |
 | y 3527-3574 | the node box of `tl3_e3550`'s NOR | dark y 3530-3568, no spot (run 7: stub only, pass-over) |
 | y 3686-3748 | the box of the inverter at y 3655-3745 | dark y 3689-3744; a spot at (4101,3716-3725), A-B; no hole |
-| y 3771-3969 | the tie box of `rcs_mn3852`'s unit's top (y 3783-3828: narrow and dim, bars of 10-12 px; marked from here since review 13), then `rcs_mn3852`'s node column, lengthwise | the line is 6-9 px wide and dim (A-B in chip 2, 8-A in chip 1, about bare ground's level) with four bars of 16-29 px; at 5x it is a metal-coloured line in both metal shots, and the clean shot has an unbroken protected strip x 4108-4120 beside it for the whole 150 px (`r10_tmE.png`) |
+| y 3771-3969 | the diffusion column x 4072-4106, y 3778-3842 east of the rail (run 7's; over it the line is narrow and dim from y ~3783, bars of 10-12 px: marked from here since review 13), then `rcs_mn3852`'s node column, lengthwise | the line is 6-9 px wide and dim (A-B in chip 2, 8-A in chip 1, about bare ground's level) with four bars of 16-29 px; at 5x it is a metal-coloured line in both metal shots, and the clean shot has an unbroken protected strip x 4108-4120 beside it for the whole 150 px (`r10_tmE.png`) |
 | y 4051-4108 | `rcs_in1`'s node box | dark y 4054-4104; a spot at (4102,4072-4078), B-D in chip 2, 8-9 in chip 1; clean 0-2 with a few green samples, no round hole |
 
 None of the six has a pad or a widening; the spots are those run 8 measured against this metal's
