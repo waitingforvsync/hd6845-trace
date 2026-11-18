@@ -31,19 +31,19 @@ tl3_w3982   P  3540,3973-3991   out  from track J's lower piece onto tl3's row y
 tl3_w3939   P  3533,4102-4120   out  the same poly back east along y 4111
 rcs_x1      P  3533,4192-4210   ?    row y 4201 east from track I's tap (3452,4199)
 tl3_w3982   P  3533,4276-4294   ?    row y 4285 east of track J's tap (3497,4287)
-tl2_w4374   P  3533,4365-4383   ?    upper arm of the U-shaped poly under track G
+tl3_w4373   P  3533,4365-4383   ?    upper arm of the U-shaped poly under track G
 tl3_w4763   P  3533,4408-4426   ?    row y 4417 east from track H's lower top pad (3410,4418)
-tl2_w4374   P  3533,4494-4512   ?    lower arm of the U-shaped poly
-tl2_w4547   P  3533,4538-4556   ?    row y 4547 east from track F's lower top pad (3322,4548)
+tl3_w4373   P  3533,4494-4512   ?    lower arm of the U-shaped poly
+tl3_w4546   P  3533,4538-4556   ?    row y 4547 east from track F's lower top pad (3322,4548)
 tl3_w4763   P  3540,4755-4773   out  from track H's tap (3410,4764) onto tl3's row y 4763 (NOR 4 gate 2)
-tl2_w5025   P  3533,5016-5034   ?    row y 5025 east from track G's lower top pad (3368,5025)
+tl3_w5025   P  3533,5016-5034   ?    row y 5025 east from track G's lower top pad (3368,5025)
 rcs_x1      P  3533,5101-5119   ?    row y 5110 east from track I's tap (3452,5112)
 rcs_x1      P  3533,5362-5380   ?    row y 5371 (tl1_w4025's) east of track I's bottom pad, under track J's arm
 tl3_w3982   M  3533,5365-5383   ?    track J's arm east along y 5374 (follow.py: to x 3607, then south to (3608,5942))
-tl2_w5025   P  3533,5406-5424   ?    row y 5415 east from track G's bottom pad (3368,5414)
+tl3_w5025   P  3533,5406-5424   ?    row y 5415 east from track G's bottom pad (3368,5414)
 tl3_w4763   M  3533,5426-5444   ?    track H's arm east along y 5435 (follow.py: to (3571,5435))
 tl1_w4937   P  3533,5449-5467   in   row y 5458, straight through
-tl2_w4547   P  3538,5482-5514   ?    the pad (3518,5498) at the end of track F's arm; its poly goes on east
+tl3_w4546   P  3538,5482-5514   ?    the pad (3518,5498) at the end of track F's arm; its poly goes on east
 # Ends of drawn wires inside the strip (where the drawing stopped: the gate column, not traced)
 tl2_w3722   P  3100,3713-3731   ?    row y 3722 west from track F's pad (3322,3722); on west under track A into the gate column
 rcs_bd3330  P  3072,4365-4383   ?    row y 4374 west from track D's pad (3237,4376); on west into the gate column

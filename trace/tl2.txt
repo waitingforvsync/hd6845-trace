@@ -160,8 +160,9 @@ P 3477,3965:3519,3999
 C 3497,3982
 P 3510,3973:3540,3991
 N M 3499,4700 tl3_w3982
+@alias tl3_w3982 tl3_w4290
 
-# ---- track F, lower piece (y 4538-5496, then east along y 5496) = tl2_w4547: top pad (3322,4548)
+# ---- track F, lower piece (y 4538-5496, then east along y 5496) = tl3_w4546: top pad (3322,4548)
 # with a row east along y 4547 out of the strip; the arm ends on a pad with a contact (3518,5498)
 # whose poly goes on east
 M 3326,4538 y5496 x3528 w=18
@@ -170,9 +171,9 @@ C 3322,4548
 P 3340,4538:3533,4556
 P 3498,5482:3538,5514
 C 3518,5498
-N M 3326,5000 tl2_w4547
+N M 3326,5000 tl3_w4546
 
-# ---- track G, lower piece (y 5014-5422) = tl2_w5025: top pad (3368,5025) with a row east along
+# ---- track G, lower piece (y 5014-5422) = tl3_w5025: top pad (3368,5025) with a row east along
 # y 5025 (the pad is 20 px east of rc_stepreq_n's poly under track F: not joined); bottom pad
 # (3368,5414) with a row east along y 5415
 M 3369,5014 y5424 w=18
@@ -182,7 +183,7 @@ P 3385,5016:3533,5034
 P 3348,5397:3390,5431
 C 3368,5414
 P 3385,5406:3533,5424
-N M 3369,5200 tl2_w5025
+N M 3369,5200 tl3_w5025
 
 # ---- track H, upper piece (y 2890-3732) = tl1_w3594: top pad (3410,2899) in the middle of
 # tl1's row y 2899, which runs on east out of the strip; bottom pad (3410,3722) with a row east
@@ -208,6 +209,7 @@ P 3390,4747:3432,4781
 C 3410,4764
 P 3425,4755:3540,4773
 N M 3413,5000 tl3_w4763
+@alias tl3_w4763 tl3_w4414
 
 # ---- track I, upper piece (y 2674-3256) = tla's rcs_g3245: bottom pad (3452,3246) at the east end
 # of tla's row y 3246; top pad (3454,2683) with a row east along y 2683 out of the strip
@@ -249,6 +251,10 @@ N M 3456,4700 rcs_x1
 @alias rcs_x1 rcs_g4240
 @alias rcs_x1 tl1_w4025
 @alias rcs_x1 tl3_w3506
+# after merging main (tl3's later runs): the rows y 4201 and y 5110 meet tl3's rows of the same y
+# at x 3533 (its pair's lower gate 1, and the clear of its latch B)
+@alias rcs_x1 tl3_w4200
+@alias rcs_x1 tl3_w5112
 
 # ---- track J, upper piece (y 3408-3904) = tl3_w3419: top pad (3497,3418) with a row east into tl3
 # (tl3_w3419, the inverted output of tl3's latch); bottom pad (3497,3894) with a row east into tl3
@@ -269,13 +275,15 @@ P 3451,3930:3540,3948
 P 3451,3930:3469,4120
 P 3451,4102:3533,4120
 N P 3460,4020 tl3_w3939
+@alias tl3_w3939 tl3_w4112
 
-# ---- poly only = tl2_w4374: a U open to the east: row y 4374 from x 3364 east out of the strip,
+# ---- poly only = tl3_w4373: a U open to the east: row y 4374 from x 3364 east out of the strip,
 # a vertical UNDER track G (x 3364-3380, no contact) to y 4503, row y 4503 east out of the strip
 P 3364,4365:3533,4383
 P 3364,4365:3380,4512
 P 3364,4494:3533,4512
-N P 3372,4440 tl2_w4374
+N P 3372,4440 tl3_w4373
+@alias tl3_w4373 tl3_w4503
 
 # ---- tla's row y 3761 (rcs_a2) from where tla's drawing stops (x 3400) on east into tl3
 # (tl3_w3765, the output of tl3's NOR 1)
