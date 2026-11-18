@@ -594,14 +594,17 @@ overlays `r4_ov1.png`, `r4_ov2.png`. The measurements, with their commands, are 
 - **Nothing else is on the node**: thin E has no contact on the box (`px.py col 2914 4056 4160 3`:
   bright in both metal shots from y 4068 to y 4131, no ring; the clean shot flat tan with no
   green hole), and a narrow strip (x 2907-2921) runs south from the box under thin E to y 4138.
-- **The tie** (`?P`, `?B`): below the plate a loop with a dark outline (x 2871-2899, y 4112-4140,
-  `r4_f.png`) holds poly-coloured ground at x 2878-2890, y 4126-4137 (170/140/97 stripped), and a
-  band of the same colour runs east along y 4130-4140 to the south end of the narrow strip
-  (`textmap.py 2860 4096 2930 4150 2 --acid`); between the plate's bottom edge (y 4112) and the
-  loop's poly lie 10 px of dark (y 4113-4123) that the photos do not resolve into one outline or
-  two. Read as the plate's arm and a buried contact onto the strip's end, as in `tla`'s units;
-  drawn uncertain, like every load tie of the cluster. Nothing else leaves the node, so if the
-  plate were not tied to it the unit would drive nothing.
+- **The tie** (`?P`, `?D`, `?B`): directly below the plate a box with a heavy outline
+  (x 2872-2900, y 4113-4141; lighter inside at x 2880-2893, y 4122-4136, 170/140/97 stripped) in
+  both metal shots and the chip-2 stripped shot (`r4_f.png`, `r4_ov4.png`; the review's
+  `review-8/tie_ma.png`), its top outline being the plate's bottom edge (the 10 px of dark at
+  y 4113-4123); its bottom outline runs on east as one line to x 2925, under thin E, past the
+  south end of the node's narrow strip (`textmap.py 2860 4096 2930 4150 2 --acid`). Read as a
+  buried contact of the plate's tab onto a diffusion that comes west from the strip's end, the
+  usual tie of a load at the end of its poly; neither link is resolved across the outlines, so
+  all three items are drawn uncertain, like every load tie of the cluster. (The first drawing
+  had the box 25 px east, on the strip's end; the review placed it.) Nothing else leaves the
+  node, so if the plate were not tied to it the unit would drive nothing.
 
 So `tl2_w4080` = NOT `rcs_cond` (the pull-down, the node and the plate's poly are drawn without
 `?`), and through the tie `rcs_cond_lat` = `tl2_w4080` (`@alias rcs_cond_lat tl2_w4080`;
@@ -635,6 +638,12 @@ finds the metal's other end on an inverter's load, so the pad needs no tie. Read
   x 3001-3010 (196-203/143-178/113-129) up to the pits of piece 2's VSS contact (2990,4513); the
   one dark line between (x 3008-3014 stripped, x 3013-3016 clean) is R3's edge line. (AMB-009's
   "two dark lines at x 2998 and x 3018" are the contact's pit and that edge line.)
+
+- **The join is also seen in the open** (review round 1): east of R3 the VSS box comes out from
+  under the rail as a strip x 3009-3019 from y 4490 down into the band, uniform in both metal
+  shots and the chip-2 stripped shot (`px.py col 3015 4480 4532 4`: 108-132/89-106/65-81
+  stripped from y 4492 to y 4524, no line across); the clean shot's dark line at x 3014-3022
+  is in neither metal shot. Drawn `D 3004,4490:3019,4530`.
 
 Drawn: `D 3004,4514:3063,4530` here; in `trace/tla.txt` the `?B` removed, the pad's poly ended at
 y 4504 and the column begun at y 4514. The band of `tl3_w3982` is then a pull-down from
@@ -792,10 +801,12 @@ AND NOT `tl3_w3982`. `tla`'s step formula does not use `rcs_cond` and does not c
    piece 2's VSS box across R3's east edge** (x 3004-3016): one edge line, tan on both sides. If
    the band did not reach the box, the column's top would be a dead end and the band of
    `tl3_w3982` would do nothing; it cannot be on the pad (Logic, piece 4).
-22. **The 10 px of dark between the plate's bottom and the tie's loop** (x 2872-2896, y 4113-4123):
-   see the tie, above. If the loop's poly is not the plate's, the tie is not there.
-23. Sizes (run 4): the pull-down of piece 3 is drawn 35/15 (the box's height by the poly's
-   width in the gap); the load 26/53. `tla` draws the diffusion under its g1 band from x 2990;
+22. **Piece 3's tie box** (x 2872-2900, y 4113-4141): that the plate's poly enters it across its
+   top outline, and that the diffusion under it is joined to the node's strip 7 px to the east,
+   are both read from the box's shape and place, not seen (Logic). If either is not so, the
+   tie is not there.
+23. Sizes (run 4): the pull-down of piece 3 is drawn 35/19 (the box's height by the poly's
+   width, x 2938-2957: its east edge is under R3's margin); the load 26/53. `tla` draws the diffusion under its g1 band from x 2990;
    its west edge line is at x 2968-2971 (`px.py row 4118`), so that transistor is about 20 px
    wider than drawn (`tla`'s geometry, left as it is: a width).
 
@@ -997,14 +1008,55 @@ edge of `tla`'s strip below the gate is at about x 2966 at y 4276, drawn 2950 (l
 
 Round 3: no findings.
 
+### Run 4 (the inverter of `rcs_cond`, the column top: pieces 3 and 4, and the edit to `trace/tla.txt`)
+
+Round 1 (full review of both pieces and of commit d64bc8c, 2026-11-18 11:27 +0000, a fresh agent on
+claude-fable-5-2, at commit 57f4875; 12 images in `cache/scratch/tl2/review-8/`). Told to suspect:
+whether there is field or one buried-contact box between `rcs_cond_lat`'s pad and the column top,
+and whether the band y 4514-4530 is diffusion and reaches the VSS contact (2990,4513); the
+junction of the gap poly with `tla`'s g1 band (an edge under one poly or a break), g1's run west
+under R3, and the gap poly's free north end against the row y 4011-4030 (the green ring at
+(2937,4039)); the vertical poly x 2878-2898 as one poly with the plate and the row; the node's
+diffusion across the gap and across R3's west edge; the contact (2804,4084) and what else is
+under R2; the tie; anything undrawn in x 2780-3070, y 4000-4150 and x 2990-3075, y 4490-4540.
+It checked each with `px.py` / `textmap.py` profiles in all four shots and views at 4x or more:
+the contact (ring with a bright centre in both metal shots, green hole; the pale patch at
+(2804,4054) has no ring), the plate (one poly, y 4050-4109, single edge lines at y 4064 and
+y 4094, tan boxes at both ends), the vertical poly (unbroken y 4015-4060 in both chip-2 shots)
+and the row to its pad (no contact of thin E or R3; the dot at (2976,4022) is in the chip-2
+metal shot only), the node across the gap (tan, channel-bright poly, one faint edge at x 2958,
+tan from x 2961), the field between the row and the gap poly (y 4036-4044, 154-168/151-153 in
+the metal shot against poly 170-183/125, the same in the chip-1 metal and chip-2 stripped
+shots), the line at y 4100-4104 (a single 6 px diffusion edge, like the one at y 4062), g1
+continuous from x 2947 to its contact (3105,4112), no contact of thin E on the node, the strip
+between pad and band (khaki in the clean shot, green in the chip-2 stripped shot, red equal to
+green in both metal shots, no poly across it), both extracted equations and `unsure.py`,
+`opendiff.py` in both regions (nothing undrawn), no VSS contact between g1 and g2.
+Findings, each checked by the tracer; all four are geometry only:
+1. The VSS diffusion east of R3 at x 3009-3020, y 4490-4514 is not drawn, and it runs into
+   piece 4's band with no edge. **Confirmed** (`px.py col 3015 4480 4532 4`, `px.py row 4502 3000
+   3030 3`): `D 3004,4490:3019,4530` added. Same nets (the band was already on the box).
+2. The tie's heavy-outlined box is at x 2872-2900, y 4113-4141, where the `?P` arm was drawn, not
+   25 px east. **Confirmed** on the reviewer's `tie_ma.png` and `r4_ov4.png`: the three `?` items
+   redrawn (`?P` tab, `?D` west from the strip's end, `?B` on the box). Same connection, still `?`.
+3. The pull-down's gate poly is x 2938-2957, drawn 15 wide. **Confirmed** (`px.py row 4080`: channel
+   colour to x 2951, the edge at x 2957-2960): drawn to x 2957.
+4. Two comments in `trace/tla.txt` still said "pass transistor"; the name `rcs_cond_lat` now
+   misleads. **Confirmed**: comments corrected; the rename is proposed in the handoff.
+It could not check: the tie itself (both links cross heavy outlines); g1 under R3 at x 2953-2972
+rests on the clean shot and the chip-1 metal shot only.
+Connections before and after the fixes:
+`tools/t.sh tl2 sameconn.py 57f4875`: `connections identical`;
+`.venv/bin/python tools/sameconn.py 57f4875`: `connections identical`.
+
+Round 1: no findings that change a connection.
+
 ## Not done
 
 - **What is left in the gate column** (run 3 traced y 3690-3840 and y 4230-4530, run 4
   y 4005-4145 and the column top at y 4504-4530): the lower-left corner of piece 2's VSS box
   (field at x 2952-2961, y 4520-4529; the box is drawn as a rectangle); `tla`'s tie of
-  `rcs_bc3460`'s load (Ambiguity 15); the diffusion east of R3 between piece 2's gate arm
-  (y 4481) and piece 4's band (x 3003-3022, y 4490-4514: light in the chip-2 stripped shot,
-  `r4_ov3.png`; part of the VSS box, not drawn). **Sweep** (run 4): the column x 2776-3086,
+  `rcs_bc3460`'s load (Ambiguity 15). **Sweep** (run 4): the column x 2776-3086,
   y 2940-5340 was looked over at 1.05x with every package's trace outlined (`r4_sw1.png`,
   `r4_sw2.png`, metal | clean): no other box, plate or contact ring without an outline was
   seen. That is a look at survey zoom, not a reading: narrow strips and polys under the rails

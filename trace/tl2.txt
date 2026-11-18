@@ -416,21 +416,24 @@ D 2907,4098:2921,4138
 N D 2915,4085 tl2_w4080
 # gate: the WEST END of tla's g1 band (rcs_cond; tla: P 2985,4103:3095,4128) runs on west under
 # R3 over field (px.py row 4118: salmon x 2947-2966, the diffusion's edge line x 2968-2971,
-# channel from x 2974) to the gap and turns NORTH in the gap (x 2938-2953) across the node's
+# channel from x 2974) to the gap and turns NORTH in the gap (x 2938-2957, the east edge under R3's margin) across the node's
 # diffusion to a free end at y 4052; 20 px of field between that end and rcs_cond_lat's row
 # (px.py col 2941 4026 4060 2: bare ground in both metal shots at y 4036-4042)
 P 2938,4107:2990,4130
-P 2938,4052:2953,4130
+P 2938,4052:2957,4130
 # the plate's gate: a vertical poly x 2878-2898 from the plate's top north to the row
 # y 4011-4030, which runs east under thin E and through the gap onto tla's piece under R3
 # (px.py col 2888 4000 4064 3: poly in both chip-2 shots from y 4015 to y 4060 without a break)
 P 2878,4011:2898,4052
 P 2878,4011:2955,4030
-# tie (uncertain): an arm from the plate's bottom south (x 2872-2890) and east along y 4126-4140
-# to a heavy-outlined box on the south end of the node's narrow strip
-?P 2872,4106:2890,4140
-?P 2872,4126:2916,4140
-?B 2896,4120:2922,4142
+# tie (uncertain): a heavy-outlined box directly below the plate (x 2872-2900, y 4113-4141,
+# lighter inside at x 2880-2893, y 4122-4136: both metal shots and the chip-2 stripped shot;
+# review round 1 placed it, the first drawing had it 25 px east), read as the plate's tab on a
+# diffusion that comes west from the south end of the node's narrow strip (the box's bottom
+# outline runs on as one line to x 2925 under thin E)
+?P 2872,4106:2896,4140
+?D 2876,4118:2921,4140
+?B 2872,4113:2900,4141
 @alias rcs_cond_lat tl2_w4080
 
 # ---- run 4, piece 4: the top of tla's column x 3028-3063 above the band of tl3_w3982 (AMB-009).
@@ -443,3 +446,7 @@ P 2878,4011:2955,4030
 # no buried contact (tla's ?B removed in trace/tla.txt). So the band of tl3_w3982 is a second
 # pull-down of rcs_cond's gate, not a pass transistor:  rcs_cond = NOR(rcs_cond_n, tl3_w3982)
 D 3004,4514:3063,4530
+# east of R3 the VSS box itself comes out into the open: a strip x 3009-3019 from y 4490 (below
+# piece 2's gate arm) down into the band, uniform in both metal shots and the chip-2 stripped
+# shot (px.py col 3015 4480 4532 4; review round 1), so the join to the box is seen in the open
+D 3004,4490:3019,4530
