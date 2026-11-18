@@ -98,6 +98,15 @@ has been checked against the photos.
   x 10565-10595 (contact (10555,16622) in the box x 10540-10590, y 16550-16640).
   This repeated unit is the best first piece: once one copy is read, it can be a cell.
 
+- **Supply band** (`rails.png`, metal 0.45x, all geometry): the wide speckled band at
+  the bottom (y about 18480-18700, x 9000-11000) is joined from below by the strip
+  x 10650-10700 that `clock` labels `vcc` at (10687,19100), and from above by the rails
+  x about 9640 and x about 10560. If those joins are real the band and both rails are
+  VCC, which conflicts with reading x 10720-10760 as the load's VCC rail beside a VSS
+  rail x 10560 (both rails would be VCC, leaving the pull-downs' VSS unexplained). Not
+  resolved at 0.45x: read the joins at 2x+ first; until then **no rail of this block is
+  named**.
+
 ## Not done
 
 Everything: rail identity (VSS/VCC), every gate, the track field, joins to the routes
