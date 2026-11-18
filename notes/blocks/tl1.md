@@ -950,6 +950,48 @@ equations unchanged); the ports file parses.
 
 Round 2: no findings.
 
+### Fifth round of work (run 5, Tom Seddon: `tl1_w5936` up the west margin; the inverter's gate length)
+
+Round 1 (full review of what was added since 0490f63, at commit 75d1136, 2026-11-18 12:13 +0000,
+a fresh agent on claude-fable-5-2; 21 images in `cache/scratch/tl1/review-5/`). Pieces: W1 (the
+wire `tl1_w5936`, x 1960-2400, y 2490-5950) and G1 (the inverter's gate in cell `tl1_ua`).
+Told to suspect, W1: the two corners in the open slivers at (2137,3200) and (2137,4198), the
+corners (2094,4958) and (2094,5935); at each of the four pads whether the thin metal ends on
+it (trap 16), whether the contact is real (trap 22) and whether the poly reaches it; the long
+poly stretches (profiled only; dark marks at y 5182-5188, 5240-5290); the two thin metals
+between their pads. G1: whether the gate's east edge is at x ~2672-2676 or ~2663.
+Checked, W1: the four pads with `tools/textmap.py` and 5x views (`p4957`, `p4200`, `p3200`,
+`p2507`): dark ring with a bright centre in both metal shots, green hole in the clean shot,
+the poly leaving each; bare ground beyond each metal end, and at y 3226-3244 between the pad
+(2068,3200) and `ma3_drv_in`'s (2063,3268) in both chips; `tools/follow.py` from mid-line stops
+at each pad; both thin metals at 3.3-3.5x in both chips with field under them end to end
+(`m1980a/b`, `m2064a/b`), (1978,4722) is debris on chip 1, no ring where x 1980 crosses the MA4
+poly; the corners at 6x (`c3200`, `c4198`) and with `tools/px.py` rows: poly-brown in both metal
+shots through each corner, field beyond the bar; the corner (2094,4958): the vertical ends at
+y ~4949 with green field at y 4928-4946, so it does not reach the MA4 poly; the corner
+(2094,5935) at 4x (`c5935`); the long stretches at 2.5x in three shots (`s1a/b`, `s2a/b`) and by
+a column scan of its own: the marks at y 5170-5192 and y 5236-5300 are on chip 1 only, a
+small bulge at (2147-2154, 4048-4066) is in the clean shot only, the metals x 2110 and x 2153
+are unbroken and ringless at all three places; no ring and no hole at any crossing under the
+MA metals; the north-edge poly to its corner and north (`north.png`); a sweep of the margin at
+1x with `tl1`, `tla` and `mal` outlined (`sv0`-`sv2`): nothing undrawn; `tools/sameconn.py
+0490f63`: one difference, the intended join; `tools/unsure.py`: nothing on this net.
+Checked, G1: its own `tools/tl1_band.py` runs at the master and both copies: in the gap
+x 2664-2672 the gate rows have poly colour in both metal shots (chip 1 red minus green about
++50, blue 38-49; chip 2 blue 53-65; the diffusion-only row blue 63-72 and 82-88); an edge dip
+at x 2674-2678 on the gate rows and on neither reference row; at the cap and the row's end
+the edge at about x 2670-2674, so x 2672 is within tolerance; the cap is free (field at
+y 4376-4384 between it and the output row, 16 px clear of the buried-contact box); 5.6x views
+of the master and the north copy (`g_master`, `g_copyN`).
+Findings: none.
+Could not be checked: the south copy of the cell (+1345) was profiled, not viewed; the long
+poly stretches were viewed at 2.5x, not 4x; the chip-2 stripped shot is unusable in the gaps
+between the MA metals, so the corners rest on the two metal shots and the clean shot; the
+clean shot alone cannot tell open poly from open narrow diffusion in G1's gap (that reading
+rests on the metal shots); where the wire goes north of y 2498; anything west of x 1945.
+
+Round 1: no findings.
+
 ## Note (coordinator, from the handoffs of 2026-11-17/18)
 
 - From `tl2`: `tl1_w5936`'s port at (2817,6237) is driven from the east (`tl2`'s upper inverter), so
