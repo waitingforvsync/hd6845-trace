@@ -700,3 +700,92 @@ N M 4279,5340 tl3_e5240
 # out of the strip along y 4235-4255
 M 4318,3385 y4246 x4250 w=14
 @alias tl3_e4243 tl4_w3070
+
+# ====================================================================
+# The tracks' north ends, the knot of pads y 2740-2910 and the bus lines y 2500-2740
+# (x 4250-4967). Wiring only, no device. Read on g2_*.png (3.1x, four shots), g4_*.png (5.6x,
+# three shots), g5_w.png, g8_pads.png (5x pad mosaics, four shots), g6_*.png (3.3x east pads);
+# every metal with tools/follow.py and tools/tl5_tracks.py (notes: "The tracks' north ends").
+# --- tl3_e4243: the track x 4321 runs on north from the pad (4318,3070) to a corner (4321,2771)
+# and east to pad A (4410,2767); A's poly: an arm east, south at x 4449-4468, east along
+# y 2801-2821 under the track x 4496 to pad B (4583,2811); metal east along y 2812 to the pad
+# (4866,2812), whose row runs east to x 4967: tl5's row of latch c's enable.
+M 4320,3064 y2771 x4412
+P 4398,2751:4425,2782
+C 4410,2767
+P 4420,2759:4468,2776
+P 4449,2759:4468,2821
+P 4449,2801:4572,2821
+P 4566,2796:4600,2826
+C 4584,2811
+M 4583,2813 x4866
+P 4852,2797:4885,2825
+C 4866,2812
+P 4878,2801:4967,2820
+@alias tl3_e4243 tl5_w4458
+# --- tl4_w4590: the track x 4366 from its drawn piece (y 4565) north to its end on the pad
+# (4366,2812), over the pad (4366,3030); both pads' rows run west across x 4250 (the south one
+# is tl3's tl3_e3028, the gate of its inverter E1)
+M 4366,2802 y4572
+P 4352,2797:4386,2826
+C 4366,2812
+P 4250,2801:4360,2820
+P 4352,3014:4386,3044
+C 4366,3030
+P 4250,3018:4360,3038
+@alias tl4_w4590 tl3_e3028
+# --- tl4_w3113: the track x 4408 north from its drawn piece to a corner (4411,2858), east to
+# pad C (4454,2857); poly east under the track x 4496 to pad D (4538,2857); metal east along
+# y 2857 to the pad (4823,2855), whose row runs east to x 4967 (tl5_w2855)
+M 4411,3036 y2858 x4456
+P 4441,2842:4469,2870
+C 4454,2857
+P 4463,2847:4532,2864
+P 4525,2842:4554,2870
+C 4538,2857
+M 4538,2857 x4822
+P 4810,2840:4842,2868
+C 4823,2855
+P 4835,2846:4967,2865
+@alias tl4_w3113 tl5_w2855
+# --- tl4_w3808: the track x 4496 north from its drawn piece (y 3775) to a corner (4496,2728)
+# and west as the sixth bus line to tla's pad (4270,2725)
+M 4496,3782 y2728 x4326
+# --- tl4_w4718: the track x 4581 north from its drawn piece (y 4690) to a corner (4582,2897),
+# east to the pad (4648,2898) on the row y 2890-2909, which runs east to x 4967 (tl5's)
+M 4582,4696 y2897 x4650
+P 4632,2884:4665,2913
+C 4648,2898
+P 4660,2890:4967,2909
+# --- tl4_w4068: tl5's pad (4910,2767) has a second metal, west along y 2770 to pad E
+# (4539,2768), whose poly runs north as a column x 4534-4550 under the bus lines and across
+# y 2500 (it goes on under the wide band to y ~2165: g8_col.png)
+M 4540,2771 x4905
+P 4528,2751:4557,2781
+C 4539,2768
+P 4534,2500:4550,2756
+# --- bus line 1: from x 4250 along y 2512, a diagonal (4669,2512)-(4712,2555), east to the pad
+# (4908,2551); its row runs east across x 4967. The pad's metal ends 25 px short of the wide
+# vertical supply metal x 4950-4995 (tl5_tracks.py h 2551 4700 4965)
+M 4250,2512 x4669 4712,2555 x4908 w=12
+P 4894,2537:4926,2565
+C 4908,2551
+P 4920,2542:4967,2560
+N M 4400,2512 tl4_w2512
+# --- bus line 4: from the pad (4279,2640), whose poly comes from the west, a diagonal
+# (4604,2641)-(4647,2684), east to the pad (4866,2681); its row runs east to x 4967 (tl5_w4937)
+P 4250,2632:4270,2650
+P 4263,2626:4297,2656
+C 4279,2640
+M 4281,2641 x4604 4647,2684 x4866 w=12
+P 4851,2667:4884,2695
+C 4866,2681
+P 4878,2675:4967,2694
+# --- bus line 5: from x 4250 along y 2685, a diagonal (4580,2685)-(4622,2727), east to the pad
+# (4822,2723); its row runs east to x 4967 (tl5_w2722)
+M 4250,2685 x4580 4622,2727 x4822 w=12
+P 4808,2709:4841,2738
+C 4822,2723
+P 4835,2714:4967,2733
+@alias rcs_e3 tl4_w3808
+@alias tl5_w3245 tl4_w4718

@@ -7,7 +7,35 @@ RA (x 4728-4775), loads between RA and a second rail RB (x 4905-4950).
 
 ## Status
 
-2026-11-18 12:20 -0600. **Partial: nine units and the wiring south and west of them.** Traced
+2026-11-18 15:01 -0600. **Partial: nine units and the wiring north, south and west of them.** Traced in the
+eighth run: **the tracks' north ends, the knot of pads at y 2740-2910 and the bus lines along
+y 2500-2740** (x 4250-4967: no device, 16 pads; still 47 transistors). The tracks of the bus
+field are now drawn to their north ends. **No gate changed.** It identifies five more inputs and
+outputs, and nine merged equations print another name for one net (listed under "The tracks'
+north ends" below):
+
+- **`rcs_e3` = NOT `tl4_w3850`**: the inverter at y 3781-3911 (`tl4_w3808`) drives the track
+  x 4496 north to the sixth bus line (y 2728) and west to `tla`'s pad (4270,2725), the top of
+  `tla`'s bus line E. `rcs_e3` was an unidentified input of the step logic; its source is
+  `tl4_w3850` = `tl5_w5761`, the south bus line x 5412.
+- **`tl4_w4590` is the gate of `tl3`'s inverter E1** (`tl3_e3028`): `tl3_w3373`, the enable of
+  `tl3`'s latch A, = NOT `tl4_w4590`. The track x 4366 ends in the north on two pads whose rows
+  both go west: (4366,3030), `tl3`'s row, and (4366,2812), a row on west at y 2801-2820
+  (not followed: `tl3`'s strip). What drives `tl4_w4590` is still not known.
+- **`tl4_w4718` is `tl5_w3245`** = NOR(`tl5_w3550`, `tl5_w4160`) (`tl5`'s NOR of its latches a
+  and b): the track x 4581 ends on a pad (4648,2898) of `tl5`'s row y 2900. It is the set
+  input of the pair here.
+- **`tl3_e4243` goes on to `tl5`**: the track x 4321 runs north of the top NOR's pad to a pad
+  (4410,2767), a poly link, a pad (4583,2811), a metal along y 2812, a pad (4866,2812) and
+  `tl5`'s row y 2810: it is `tl5_w4458`, the enable of `tl5`'s latch c.
+- `tl4_w3113` (the top NOR's output) goes to `tl5` the same way (two pads, a metal along
+  y 2857, `tl5`'s row y 2855): `tl5_w2722` = NOT `tl4_w3113`.
+- `tl4_w4068` (the upper latch's enable): `tl5`'s pad (4910,2767) has a second metal west
+  along y 2771 to a pad (4539,2768), whose poly runs north out of the strip at y 2500.
+- Passing: bus line 1 (`tl4_w2512`, new), line 4 (`tl5_w4937` = NOT `tl4_w4068`, west to a pad
+  (4279,2640) and a row on west), line 5 (`tl5_w2722`, west out of the strip as metal).
+
+Before that, 2026-11-18 12:20 -0600: **nine units and the wiring south and west of them.** Traced
 in the seventh run: **the bus field's wires west of the gate column and the routing channel south
 of it** (x 4250-4967, y 4300-5790: no device, 17 pads, eight poly rows; still 47 transistors).
 It joins seven nets of this strip to their names elsewhere. **No gate changed; three merged
@@ -60,12 +88,12 @@ tl4_w3113 = NOR(tl3_e4243, tl4_w3178)                             firm   (tl3_e4
 tl4_w3245 = NOT tl3_e4243                                         marked: the load's tie
 tl4_w3390 = NOT( tl3_e4243 AND tl5_w3505  OR  tl4_w4198  OR  tl4_w3178 )   marked: the load ties (the lower one carries tl4_w3178 to this gate)
 tl4_w3178 = NOT( tl4_w3245 AND tl5_w3505  OR  tl4_w3390 )         marked: the load ties (the upper one carries tl4_w3390 to this gate, the inverter's tl4_w3245)
-tl4_w3808 = NOT tl4_w3850                                         marked: the load's tie (`?`, as in tl1)
+rcs_e3    = NOT tl4_w3850                                         marked: the load's tie (`?`, as in tl1)   (rcs_e3: tl4_w3808 until the eighth run, an alias now)
 tl4_w3928 = NOT tl4_w4025                                         firm
 tl4_w4113 = NOT( tl4_w4025 AND tl4_w4068  OR  tl4_w4243 )         marked: the two load ties
 tl4_w4243 = NOT( tl4_w4198  OR  tl4_w4068 AND tl4_w3928  OR  tl4_w4113 )   marked: the two load ties
-tl4_w4545 = NOR( tla_w3417, tl4_w4501, tl4_w4590 )                marked: the load's tie
-tl4_w4686 = NOT( tl4_w4718 AND tl4_w4590  OR  tl4_w4850 )         marked: the lower load's tie carries tl4_w4850 to this gate
+tl4_w4545 = NOR( tla_w3417, tcw_a, tl4_w4590 )                    marked: the load's tie   (tcw_a: tl4_w4501, tl3's alias since its run 9)
+tl4_w4686 = NOT( tl5_w3245 AND tl4_w4590  OR  tl4_w4850 )         marked: the lower load's tie carries tl4_w4850 to this gate   (tl5_w3245: tl4_w4718 until the eighth run, an alias now)
 tl4_w4850 = NOT( tl4_w4198  OR  tl4_w4545  OR  tl4_w4686 )        marked: the load ties; tl4_w4545 on two gates in series (one join `?`)
 tl4_w5068 = NOR( tl4_w4545, tl4_w4850 )                           marked: the load's tie
 tl4_w4025 = NOT tl4_w5068                                         marked: the load's tie (`?`, as in the inverter above the latch)
@@ -101,7 +129,7 @@ the metal x 4496, and the latch's data `tl4_w4025` comes from the south on the m
 
 | Where | What |
 |---|---|
-| x 4250-4680, y 2700-5440 | bus field: about ten vertical metals, poly rows east into the column, pads. Drawn: the pieces at the units, and (seventh run) the wires of the tracks x 4279, 4321, 4366 (south part), 4410 (y 3895-4346), 4538/4583 (south part), 4625 (south end) |
+| x 4250-4680, y 2700-5440 | bus field: nine vertical metal tracks, poly rows east into the column, pads. Drawn whole (seventh and eighth runs; the track x 4279 north of y 4073 is `tla`'s, the tracks x 4537 and x 4625 north of the units `tl5`'s) |
 | x 4290-4967, y 3012-3222 | **the NOR** (`tl1`'s NOR at 2125,-520, findcell 0.77) |
 | x 4300-4967, y 3225-3765 | **the second latch and its data inverter** (hand-traced; no cell matches), with the enable track's north pad (4452,2985) and its row east to the strip's edge |
 | x 4400-4967, y 3781-3911 | **the inverter** (`tl1`'s inverter at 2125,-434, findcell 0.74) |
@@ -113,7 +141,8 @@ the metal x 4496, and the latch's data `tl4_w4025` comes from the south on the m
 | x 4520-4967, y 5297-5465 | **the strong inverter** on the latch's output (hand-traced) |
 | x 4250-4967, y 5440-5790 | **the routing channel**: eight poly rows (pitch 44) under the tracks' south ends and under RA and RB, eight pads. No diffusion: the green-rimmed strips between the rows in the clean shot are open field. Drawn (the row y 5585 is `bw`'s, the row y 5545 west and its pad `tla`'s) |
 | y 5790-5900 | more rows and wide metals south of the channel. Not drawn |
-| y 2500-2960 | rows and tracks north of the cluster (`r9m`'s lines along y 2560-2640) |
+| x 4250-4967, y 2500-2910 | **the top of the strip** (eighth run): six metal bus lines along y 2512-2728 that step down one pitch (43 px) at x 4580-4712 and end on pads at x 4822-4912, whose poly rows go on east; the knot of eight pads at y 2767-2898 where the tracks end. Drawn (lines 2 and 3 are `r9m`'s, the pads (4910,2767), (4537,2940) and (4270,2725) `tl5`'s and `tla`'s) |
+| x 4720-4995, y 2500-2997 | the supply of RA: a wide vertical metal x 4950-4995 from the band north of y 2500 to a wide foot along y 2940-2997. Not drawn |
 | y 5400-6350 | rows under the foot; the `c4l0`..`c4l3` rows y 6140-6270 |
 
 ## Logic
@@ -538,6 +567,74 @@ Extraction: `tools/t.sh tl4 netlist.py` 933 nets, 1590 transistors, 0 errors; ev
 2357 nets, 4195 transistors, 0 errors, 0 warnings. `tools/sameconn.py` against the commit
 before: the names joined above, the four equations that print another input name, nothing else.
 
+### The tracks' north ends, the knot and the bus lines, x 4250-4967, y 2500-3070 (traced 2026-11-18, eighth run)
+
+No device. Read on `g2_*.png` (3.1x, four shots, y 2740-3070), `g4_*.png` (5.6x, three shots:
+the knot), `g5_w.png` and `g8_pads.png` (5x mosaics of eight pads in four shots), `g6_*.png`
+(3.3x, the east pads), `g3_top.png` (the bus lines), `g8_col.png` (north of y 2500); overlays
+`og1_*.png` to `og5_w.png`. Every metal was followed (`tools/t.sh tl4 follow.py X Y DIR
+--trace`) and tested in both chips with a scan for contact holes (`tools/t.sh tl4
+tl5_tracks.py v|h ...`): no stretch without metal in both chips except at pad rings and row
+edges (under 20 px), and no hole except at the pads below.
+
+**The tracks.**
+
+| Net | Track | North of what was drawn |
+|---|---|---|
+| `tl3_e4243` | x 4321 | from the pad (4318,3070) north to a corner (4321,2771), east to pad A (4410,2767). `follow.py 4321 2900 N`; `tl5_tracks.py v 4321 2760 3075`: one hole, at y 3070 |
+| `tl4_w4590` | x 4366 | one metal from y 4572 north to its end on the pad (4366,2812), over the pad (4366,3030). `tl5_tracks.py v 4366 2795 4575`: holes at y 2815 and y 3031 only |
+| `tl4_w3113` | x 4408 | north to a corner (4411,2858), east to pad C (4454,2857). `follow.py 4408 2950 N` |
+| `rcs_e3` (`tl4_w3808`) | x 4496 | north from the inverter's pad to a corner (4496,2728), west as bus line 6 to `tla`'s pad (4270,2725). `follow.py 4350 2727 E` turns south at x 4496 and ends at (4494,3813); `tl5_tracks.py v 4496 2715 3790`: no hole |
+| `tl5_w3245` (`tl4_w4718`) | x 4581 | north from the pair's pad to a corner (4582,2897), east to the pad (4648,2898). `follow.py 4581 3030 N`; `tl5_tracks.py v 4581 2885 4700`: no hole |
+
+**The knot** (pads with a contact: a ring with a bright centre in both metal shots, a green
+hole in the clean shot, a cross in the chip-2 stripped shot):
+
+| Pad | Metal | Poly |
+|---|---|---|
+| A (4410,2767) | the track x 4321's corner piece, from the west | an arm east (y 2759-2776) to x 4468, south at x 4449-4468, east along y 2801-2821 under the track x 4496 to pad B |
+| B (4583,2811) | east along y 2812 to the pad (4866,2812) | the link from A; nothing east of the pad |
+| (4866,2812) | from B | a row east to x 4967: `tl5`'s row y 2801-2820 (`tl5_w4458`) |
+| C (4454,2857) | the track x 4408's corner piece | a link east (y 2847-2864) under the track x 4496 to pad D |
+| D (4538,2857) | east along y 2857 to the pad (4823,2855) | the link from C |
+| (4823,2855) | from D | a row east to x 4967: `tl5`'s row y 2846-2865 (`tl5_w2855`) |
+| E (4539,2768) | east along y 2771 to `tl5`'s pad (4910,2767), the top of `tl4_w4068`'s metal | a column x 4534-4550 north under the six bus lines and across y 2500; it goes on under the wide band to y ~2165 (`g8_col.png`) |
+| (4648,2898) | the track x 4581's corner piece | on the row y 2890-2909, which runs east to x 4967 (`tl5`'s row); nothing west of the pad |
+| (4366,2812) | the north end of the track x 4366 | a row west, y 2801-2820, across x 4250 |
+| (4366,3030) | the track x 4366 passes | a row west, y 3018-3038, across x 4250: `tl3_e3028` |
+
+The track x 4496 crosses both links (A-B and C-D) and the track x 4321 both rows of
+`tl4_w4590` without a contact. The clean shot is covered by debris at x 4560-4690,
+y 2770-2900 (pad B, the three metals east of the knot, the pad (4648,2898)): there the
+reading is from the two metal shots and the chip-2 stripped shot.
+
+**The bus lines** (metal, 13-20 px wide, pitch 43; each steps down one pitch on a 45-degree
+diagonal, the diagonals 25 px further west from line to line; placed by `tl5_tracks.py v X
+2495 2745` at ten columns x 4560-4740):
+
+| Line | West | Diagonal | East end |
+|---|---|---|---|
+| 1, `tl4_w2512` | across x 4250 at y 2512 | (4669,2512)-(4712,2555) | pad (4908,2551), row y 2542-2560 east across x 4967. The pad's metal ends 25 px short of the wide vertical supply metal x 4950-4995 (`tl5_tracks.py h 2551 4700 4965`: no metal at x 4911-4949 in either chip) |
+| 2, 3 | `r9m`'s (`ra_eq_r9`'s line and `r9m_l3`) | | pads (4867,2596), (4912,2641) |
+| 4, `tl5_w4937` | pad (4279,2640), whose poly row comes from the west across x 4250 (y 2632-2650) | (4604,2641)-(4647,2684) | pad (4866,2681), row y 2675-2694 = `tl5`'s |
+| 5, `tl5_w2722` | across x 4250 at y 2685 (the metal starts on a pad (4236,2683) in `tl3`'s strip, whose row goes on west: `og5_w.png`) | (4580,2685)-(4622,2727) | pad (4822,2723), row y 2714-2733 = `tl5`'s |
+| 6, `rcs_e3` | `tla`'s pad (4270,2725) | none: it turns south at x 4496 | the track x 4496 |
+
+**What it joins** (`.venv/bin/python tools/sameconn.py b4454bb`: only these joins; no
+transistor's own nets change otherwise). No gate's logic changed; nine merged equations print
+another name for one net:
+
+| Join | Equations that print differently |
+|---|---|
+| `tl4_w3808` = `rcs_e3` (`tla`'s bus line E) | `rcs_e3` = NOT `tl4_w3850` (was `tl4_w3808` = ...): the input `rcs_e3` of `rcs_in3` and `rcs_bc3460` has its driver |
+| `tl4_w4590` = `tl3_e3028` | `tl3_w3373` = NOT `tl4_w4590` (was NOT `tl3_e3028`) |
+| `tl4_w4718` = `tl5_w3245` | `tl4_w4686` = NOT(`tl4_w4590` AND `tl5_w3245` OR `tl4_w4850`); `tl5_w3245` = NOR(`tl5_w3550`, `tl5_w4160`) is unchanged |
+| `tl3_e4243` = `tl5_w4458` | `tcw_c` = NOT(`tcw_m6232` OR `tl3_e4243` AND `tl5_w4318` OR `tl5_w4503`); `tl5_w4503` = NOT(`tcw_c` OR `tcw_m6320` AND `tl3_e4243`) (both had `tl5_w4458`) |
+| `tl4_w3113` = `tl5_w2855` | `tl5_w2722` = NOT `tl4_w3113` (was NOT `tl5_w2855`) |
+
+So `tl5`'s latch c is open while `tl3_e4243` = NOR(`rcs_mv`, `tcw_a`) is high, the same signal
+that is the data of the second latch here and an input of the top NOR.
+
 ## Ports
 
 The wires drawn to the strip's edges (the same list is `ports.d/tl4.txt`; `tools/ports.py
@@ -559,6 +656,18 @@ The wires drawn to the strip's edges (the same list is `ports.d/tl4.txt`; `tools
 | `tl4_w5455` | poly | (4250, 5447-5467) | out | the strong inverter's row, on west, not followed |
 | `tcw_a` | poly | (4250, 5621-5641) | ? | the row y 5631, on west to `tl3`'s pad (4104,5633) |
 | `tc1_o3527` | poly | (4250, 5708-5727) | ? | the row of the pad (4497,5720), on west, not followed |
+| `tl4_w2512` | metal | (4250, 2506-2518) | ? | bus line 1, on west |
+| `tl5_w4937` | poly | (4250, 2632-2650) | out | the row of the pad (4279,2640), the west end of bus line 4, on west |
+| `tl5_w2722` | metal | (4250, 2679-2691) | out | bus line 5; it starts on a pad (4236,2683) in `tl3`'s strip |
+| `tl4_w4590` | poly | (4250, 2801-2820) | ? | the row of the pad (4366,2812), the north end of the track x 4366, on west |
+| `tl4_w4590` | poly | (4250, 3018-3038) | out | the row of the pad (4366,3030): `tl3_e3028`, the gate of `tl3`'s inverter E1 |
+| `tl4_w4068` | poly | (4534-4550, 2500) | ? | the column north of pad E (4539,2768), on north under the wide band |
+| `tl4_w2512` | poly | (4967, 2542-2560) | ? | the row of the pad (4908,2551), the east end of bus line 1 |
+| `tl5_w4937` | poly | (4967, 2675-2694) | in | the row of the pad (4866,2681), the east end of bus line 4: `tl5`'s inverter 2 output |
+| `tl5_w2722` | poly | (4967, 2714-2733) | in | the row of the pad (4822,2723), the east end of bus line 5 |
+| `tl3_e4243` | poly | (4967, 2801-2820) | out | the row of the pad (4866,2812): `tl5_w4458`, the enable of `tl5`'s latch c |
+| `tl4_w3113` | poly | (4967, 2846-2865) | out | the row of the pad (4823,2855): `tl5_w2855` |
+| `tl5_w3245` | poly | (4967, 2890-2909) | in | the row of the pad (4648,2898): `tl4_w4718`, from `tl5`'s NOR |
 | `tl5_w3505` | poly | (4967, 2976-2996) | in | the second latch's enable |
 | `tl4_w5455` | poly | (4967, 5447-5467) | out | `tl5_w5457` |
 | `tl4_w5068` | poly | (4967, 5490-5510) | out | `tl5_w5500` |
@@ -572,21 +681,21 @@ The tracks, as far as each is drawn:
 
 | Name | Track | Followed (`tools/follow.py`, not looked at) |
 |---|---|---|
-| `tl3_e4243` (`tl4_w3070`) | metal x 4318 | from the pad (4320,3070) south through the pad (4320,3372), the second latch's data row, to a corner (4318,4247) and west out of the strip at (4250,4246): drawn whole |
+| `tl3_e4243` (`tl4_w3070`) | metal x 4318 | north of the pad (4320,3070) to a corner (4321,2771) and east to pad A (4410,2767) (eighth run); from the pad (4320,3070) south through the pad (4320,3372), the second latch's data row, to a corner (4318,4247) and west out of the strip at (4250,4246): drawn whole |
 | `tl4_w3178` | metal x 4410 | from the pad (4413,3178) south to the pad (4413,3592), the second latch's output row: drawn whole |
 | `tl5_w3505` | metal x 4452 (north piece) | from the pad (4452,2985) south through the pad (4455,3415) to the pad (4455,3635): drawn whole, with the row east from the north pad to the strip's edge |
 | `tl4_w3245` | metal x 4680-4707 | from the pad (4690,3247) to the pad (4690,3703): drawn whole; it passes over two heavy boxes, (4684,3420) (Ambiguities 4) and the buried contact at y 3593, with no contact |
 | `tl4_w3390` | metal x 4851-4881 | from the plate's contact (4863,3390) to the pad (4863,3612): drawn whole |
-| `tl4_w3113` | metal x 4408 | from the pad (4410,3113) north to a corner (4421,2858), east to (4455,2856) |
-| `tl4_w3808` | metal x 4496 | from the pad (4495,3808) north to a corner (4495,2723), west to (4273,2727) |
+| `tl4_w3113` | metal x 4408 | from the pad (4410,3113) north to a corner (4411,2858), east to pad C (4454,2857): drawn whole (eighth run) |
+| `rcs_e3` (`tl4_w3808`) | metal x 4496 | from the pad (4495,3808) north to a corner (4496,2728), west to `tla`'s pad (4270,2725): drawn whole (eighth run) |
 | `tl4_w3850` | metal x 4410 | from the corner (4412,3852) south to the pad (4410,4332), and on by the wire in the table of the seventh run to (4967,5762): drawn whole |
 | `tl4_w4025` | metal x 4452 | from the pad (4455,4025) south to the pad (4455,5197), the inverter's output row: drawn whole (`y1.png`, `y2.png`) |
-| `tl4_w4068` | metal x 4625 | north of the pad (4625,4068) to a corner (4630,2988), east to (4694,2989); candidate (4626,4054) is the pad |
+| `tl4_w4068` | metal x 4625 | north of the pad (4625,4068) to a corner (4630,2988), east and north to `tl5`'s pad (4910,2767) (`tl5`'s drawing), and from that pad west along y 2771 to pad E (4539,2768) (eighth run) |
 | `tl4_w4198` | metal x 4537 | y 2938 to y 4814, where it ends on gate 3's pad of the pair (4537,4808); candidates (4538,3782), (4540,4215); the pad (4540,3462) is the second latch's clear row. Drawn y 3440-4816 |
 | `tl4_w4243` | metal x 4496 | from the pad (4490,4243) south to a corner at y 5327 and east onto the pad (4537,5325), the strong inverter's gate row: drawn whole (`y1.png`, `y2.png`) |
-| `tl4_w4590` | metal x 4362 | y 2810 to y 5682 through the pads (4364,4590), (4364,4762) and (4366,5112), ending on the pad (4411,5676); candidate (4364,3014). Drawn y 4565-5676; north of y 4565 not |
+| `tl4_w4590` | metal x 4362-4366 | y 2802 to y 5682 through the pads (4366,2812), (4366,3030), (4364,4590), (4364,4762) and (4366,5112), ending on the pad (4411,5676): drawn whole (eighth run) |
 | `tl4_w4545` | metal x 4626 | from the pad (4620,4545) south to the pad (4623,4893): drawn whole |
-| `tl4_w4718` | metal x 4581 (north part) | from the pad (4580,4718) north to a corner (4586,2896), east to (4652,2902). A stub is drawn |
+| `tl5_w3245` (`tl4_w4718`) | metal x 4581 (north part) | from the pad (4580,4718) north to a corner (4582,2897), east to the pad (4648,2898) on `tl5`'s row y 2900: drawn whole (eighth run) |
 | `tl4_w4850` | metal x 4581 (south part) | from the pad (4580,4850) south to the pad (4583,5108), the NOR's gate 2: drawn whole |
 | `tl4_w4545` (poly) | poly x 4619-4643 | from the pad (4623,4893) south past gate 5's row, then east as the row y 5011-5033, the NOR's gate 1: drawn whole |
 | `tl4_w5068` | metal x 4625 (south part) | from the pad (4625,5068) south through the pad (4625,5240) to the pad (4625,5504), whose row runs east out of the strip: drawn whole |
@@ -639,8 +748,9 @@ The tracks, as far as each is drawn:
    one dark line in the chip-2 stripped shot, taken as the pad's outline (above). Drawn joined,
    without `?`. If it were not, the pad would have a metal and no poly leaving it.
 9. **`tcw_a` and `tl3_e4152`**: the row y 5621-5641 is drawn here from x 4250 and by `tl3` up
-   to x 4160; the 90 px between are in `tl3`'s strip and look unbroken (`of7_r5.png`). Until
-   they are drawn, the extraction keeps `tcw_a` and `tl3_e4152` (= `tl4_w4501`) apart.
+   to x 4160; the 90 px between are in `tl3`'s strip and look unbroken (`of7_r5.png`).
+   **Closed**: `tl3`'s run 9 drew them, so `tcw_a` is track A, `tl3_e4152` and `tl4_w4501`
+   (gate 2 of the three-input NOR here).
 10. **Marks on the metals that are not drawn as contacts.** (4536,4992) on the metal x 4538
    (field under it) and the specks at (4761,5630) on RA and (4942,5765) on RB are in the chip-2
    metal shot only. **The mark at (4683,5767) on RA's leg is in both metal shots** (review round
@@ -649,6 +759,14 @@ The tracks, as far as each is drawn:
    hole, a pad or pits there (the clean shot is uniform salmon, 204-227/157-173/107-125, along
    the row), so it is not drawn. What it is is not known. If it were a contact it would tie
    `tl4_w3850` (and with it `tl5_w5761`) to RA.
+11. **Under the debris of the clean shot (x 4560-4690, y 2770-2900)** the clean shot cannot
+   show whether the three metals east of the knot (y 2771, 2812, 2857) have a contact:
+   `follow.py` lists candidates at (4650,2771), (4657,2815) and (4640,2858), all inside the
+   debris. Neither metal shot has a ring on those metals between their end pads, and the chip-2
+   stripped shot has no pad or poly under them there (`g2_acid.png`, `g2_metal.png`,
+   `g2_metal1.png`): none drawn. Pad B (4583,2811) and the pad (4648,2898) are under the
+   debris too: both read from the two metal shots (ring, bright centre) and the chip-2 stripped
+   shot (pad with a cross) (`g8_pads.png`).
 
 ## Review
 
@@ -940,22 +1058,20 @@ Round 8: no findings that change a connection.
 
 ## Not done
 
-- The tracks north of what is drawn: `tl4_w4590` north of y 4565 (candidate (4364,3014));
-  `tl4_w4718` (track x 4581 north to a corner (4586,2896) and east); `tl4_w3113` (track x 4408
-  north to (4421,2858) and east); `tl4_w3808` (track x 4496 north to (4495,2723) and west);
-  `tl4_w4068` and `tl4_w4198` north of their pads (both are `tl5`'s nets by the rows y 2767
-  and y 2940). The track x 4279 north of y 4320 (pieces with contact hits at y 2534-2753 and
-  y 3897, 4089, 4262: `tl5_tracks.py v 4279 2500 4580`).
-- West of x 4250 (`tl3`'s strip): where the rows y 5198, 5242, 5412, 5457, 5500 and 5718 go;
-  the 90 px of the row y 5631 between `tl3`'s drawn end and x 4250.
+- West of x 4250 (`tl3`'s strip): where the rows of `tl4_w4590` at y 2810, of `tl5_w4937` at
+  y 2641 and the metals of bus lines 1 (y 2512) and 5 (y 2685, with its pad (4236,2683)) go;
+  the rows y 5457 and y 5718.
+- North of y 2500: the poly column x 4534-4550 of `tl4_w4068` (seen to y ~2165 under the wide
+  band, `g8_col.png`). East of x 4967: the row y 2542-2560 of bus line 1 (`tl4_w2512`).
+- The supply of RA: a wide vertical metal x 4950-4995 from the band north of y 2500 to a wide
+  foot along y 2940-2997 (x 4720-4995) above RA's top end (`g7_sup.png`): not drawn, and
+  whether the foot joins RA is not read. RB's north end (y 3015) is clear of the foot.
 - South of y 5790: RA (x 4665-4718) and RB on south; `follow.py 4928 5150 S` takes RB to a
   corner (4920,5826) and west to (4756,5826). Rows and wide metals at y 5790-5960 (`n1_*.png`:
   a row y 5838-5858, which is another block's and drawn; a pad at about (4625,5893) on a wide
-  metal from the west along y 5895, `tl3`'s `tl3_e4808`; a row east from it), and everything
-  to y 6350 (the `c4l0`..`c4l3` rows y 6140-6270).
-- North of y 2960: the rows and tracks above the cluster. A wide metal runs east from x 4730
-  along y 2955-2997 above RA's top end (`m4.png`): whether RA joins it is not read.
+  metal from the west along y 5895, `tl3`'s `tl3_e4808` = `rcs_x1`; a row east from it), and
+  everything to y 6350 (the `c4l0`..`c4l3` rows y 6140-6270).
 - A VCC box under RB at (4905-4960, 3893-3955) with a contact about (4928,3922) and a strip
   east under a plate at about x 4962-5015, y 3890-3925: a load of the logic east of RB (`tl5`).
-- The tracks x 4453 and x 4496 between the units are drawn whole; the bus field's other
-  crossings were looked at only where a wire of this run passes.
+- The bus field's crossings were looked at only where a wire of the seventh or eighth run
+  passes; the tracks between y 4320 and y 5440 were tested as each unit's run needed them.

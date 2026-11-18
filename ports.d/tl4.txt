@@ -2,6 +2,11 @@
 # The package's region is x 4250-4967, y 2500-6350. 
 
 # West side (x 4250)
+tl4_w2512   M  4250,2506-2518  ?    bus line 1 (y 2512), on west
+tl5_w4937   P  4250,2632-2650  out  the row of the pad (4279,2640), the west end of bus line 4, on west
+tl5_w2722   M  4250,2679-2691  out  bus line 5 (y 2685); it starts on a pad (4236,2683) in tl3's strip
+tl4_w4590   P  4250,2801-2820  ?    the row of the pad (4366,2812), the north end of the track x 4366, on west
+tl4_w4590   P  4250,3018-3038  out  the row of the pad (4366,3030) on the track x 4366: tl3's tl3_e3028, the gate of its inverter E1
 tl3_e4243   M  4250,4236-4256  in   tl3's e3 output on the track x 4318 (alias tl4_w3070): the second latch's data and gate 1 of the top NOR
 tl3_e4372   P  4250,4364-4381  ?    the row of the pad (4321,4374), the north end of the metal x 4321: tl3's gate row of rcs_mv's NOR
 tl3_e4372   P  4250,5491-5510  ?    the row y 5500 of the pad (4321,5504), the south end of the same metal: on west
@@ -19,6 +24,12 @@ tcw_a       P  4250,5621-5641  ?    the row y 5631 (tl5_w5631), across the whole
 tc1_o3527   P  4250,5708-5727  ?    the row of the pad (4497,5720), the south end of the jumper x 4497: on west
 
 # East side (x 4967)
+tl4_w2512   P  4967,2542-2560  ?    the row of the pad (4908,2551), the east end of bus line 1
+tl5_w4937   P  4967,2675-2694  in   the row of the pad (4866,2681), the east end of bus line 4: tl5's inverter 2 output
+tl5_w2722   P  4967,2714-2733  in   the row of the pad (4822,2723), the east end of bus line 5
+tl3_e4243   P  4967,2801-2820  out  the row of the pad (4866,2812): tl5_w4458, the enable of tl5's latch c
+tl4_w3113   P  4967,2846-2865  out  the row of the pad (4823,2855): tl5_w2855
+tl5_w3245   P  4967,2890-2909  in   the row of the pad (4648,2898) at the north end of the track x 4581 (tl4_w4718)
 tl5_w3505   P  4967,2976-2996  in   the second latch's enable: the row of the north pad (4452,2985) of the track x 4452's north piece; tl5's row of the pad (5494,2985)
 tl4_w5455   P  4967,5447-5467  out  the strong inverter's row: tl5's row of the pad (5538,5457) (tl5_w5457)
 tl4_w5068   P  4967,5490-5510  out  the row of the pad (4625,5504): tl5's row of the pad (5493,5500) (tl5_w5500)
@@ -27,3 +38,6 @@ tcw_a       P  4967,5621-5641  ?    the row y 5631 (tl5_w5631), across the whole
 tl4_w4590   P  4967,5665-5684  ?    the row of the pad (4411,5676) at the south end of the track x 4366 (tl5_w5674)
 rcs_mv      P  4967,5708-5728  out  the row y 5718's east piece, from the pad (4410,5764) (tl5_w5717)
 tl4_w3850   P  4967,5752-5772  in   the row of the pad (4626,5762) at the south end of the metal x 4538/4583 (tl5_w5761)
+
+# North side (y 2500)
+tl4_w4068   P  4534-4550,2500  ?    the poly column north of pad E (4539,2768), on north under the wide band to y ~2165
