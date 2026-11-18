@@ -1,0 +1,6 @@
+# bc3: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+# Drawn ends of the one piece traced so far (inverter at x 7475-7775, y 17575-17705).
+bc3_w17605  P  7775,17595-17615  out  inverter output, poly east (not followed)
+bc3_w17646  P  7775,17637-17655  in   inverter input, poly row east (not followed)
+bc3_w7491   M  7463-7520,17560   -    rail piece, believed VCC (not followed)
+bc3_w7666   M  7641-7691,17560   -    rail piece, believed VSS (not followed)
