@@ -1,0 +1,3 @@
+# tr1: top-right logic rows, part 1 (survey only)
+11900,3400:14150,3650    route   track field, six metals | y 3420-3637, each in several pieces; polys drop into the gate row below (not traced)
+11900,3650:14150,3980    ?logic  gate row between two rails | about 16 gates, three inverters at x 11940-12330; rails y 3747-3785 (believed VSS) and y 3920-3964 (believed VCC); not traced
