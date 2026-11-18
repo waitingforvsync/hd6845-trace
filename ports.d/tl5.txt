@@ -4,7 +4,8 @@
 # West side (x 4967): the north rows, each from the pad of a track's north end
 tl5_w4937   P  4967,2675-2694  out  inverter 2's output (NOT tl5_w3982), from the thin metal W's north pad (5038,2685)
 tl5_w2722   P  4967,2714-2733  ?    the row of T3's north pad (5364,2722)
-tl5_w3982   P  4967,2758-2777  ?    latch b's enable: the row of the pad (5452,2767), T7
+tl5_w3982   P  4967,2758-2777  ?    latch b's enable: the row of the pad (5452,2767), T7; runs on 40 px to the pad (4910,2767), whose metal is tl4's track x 4625: the net is tl4_w4068
+tl5_w3982   M  4898,2760-2775  ?    the other metal of the pad (4910,2767), which runs west along y 2767 to a pad (4534,2769): not drawn west of the pad
 tl5_w4458   P  4967,2801-2820  in   latch c's enable: the row of the pad (5407,2810), T4's north piece
 tl5_w2855   P  4967,2846-2865  ?    the row of T8's north pad (5580,2855)
 tl5_w3245   P  4967,2890-2909  out  the NOR's output: the row of the pad (5452,2900), T5's north piece
@@ -13,6 +14,7 @@ tl5_w3505   P  4967,2975-2994  ?    latch a's enable: the row of the pad (5494,2
 
 # East side (x 5683)
 tl5_w3505   P  5683,3712-3732  ?    latch a's enable: the row of T6's lower pad (5494,3722) runs on east
+tl5_w4395   M  5683,3650-3668  in   latch c's data: T10's north piece, from the pad (5665,4395) north to a corner (5668,3659) and east
 tl5_w4590   P  5683,3862-3882  ?    latch c's clear: the row from the pad (5492,3872), north end of T6's lower piece
 tl5_w4503   P  5683,4580-4600  out  latch c's inverse output
 tl5_w4633   P  5683,4623-4643  out  latch c's output
@@ -37,6 +39,7 @@ tl5_w5761   P  4967,5751-5770  ?    a row without a pad in the strip; bus line x
 tl5_w5890   P  4967,5880-5900  ?    under RC's turned rail; bus line x 5107
 tl5_w5936   P  4967,5926-5946  ?    under RC's turned rail; bus line x 5063
 vss         M  4967,5882-5942  -    rail RC, turned west; vss by structure only
+vss         M  5081-5127,2505  -    rail RC's north end on the wide metal band y 2180-2500 (not drawn by any block)
 tl5_w4590   M  4967,5975-5989  ?    latch c's clear: T6's lower piece, the row y 5411, the metal x 5189
 
 # South side (y 6350): the poly bus

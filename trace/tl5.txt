@@ -147,7 +147,7 @@ P 5562,4386:5582,4423
 P 5562,4385:5650,4405
 P 5645,4378:5687,4413
 C 5665,4395
-M 5667,4380 y4407
+M 5683,3659 x5668 y4407 w=14           # T10's north piece: from the pad north without another pad to a corner (5668,3659) and east along y 3650-3668 out of the strip (t10_n.png 4x, two shots: bare ground north and west of the corner; follow.py 5667 4300 N: corner (5677,3660), east to (5801,3657); tl5_tracks.py v 5667 3630 4400: no stretch without metal over 11 px between the corner and the pad's ring, no hole but the pad's)
 N P 5400,4413 tl5_w4395
 # enable: T4 with two pads, (5407,4458) and (5407,4677), and a row from each; the metal ends on
 # the lower pad (bare ground south); north of the upper one it runs to its north pad (5407,2810)
@@ -235,8 +235,12 @@ B 5034,3285:5058,3310
 D 4910,3232:4963,3332
 C 4932,3254
 C 4932,3305
-# rails over the unit (RC is drawn from y 3140; it runs on north into an undrawn metal at y 2200-2500: vss by structure only)
-M 5104,3140 y3335 w=46
+# rails over the unit. RC runs on north over the north rows (poly over field under it: railprof.py
+# 5088 5122 2480 3150; olive field 148/143/107 at y 3000-3068, px.py col 5105) without a contact
+# and joins the lower edge of the wide metal band y 2180-2500 at y 2505 (tl5_tracks.py v 5104 2505
+# 3140 --half 10: no stretch without metal over 15 px; rc_n2.png 1.75x, rc_n.png 0.62x). No block
+# has drawn that band (no metal item on it from x 2200 to x 13000), so vss stays by structure only.
+M 5104,2505 y3335 w=46
 M 4928,3232 y3335 w=44
 
 # ====================================================================
@@ -521,3 +525,27 @@ P 5237,6150 y6350 w=20
 P 5346,6093:5381,6126
 C 5363,6108
 P 5365,6120 y6350 w=20
+
+# ====================================================================
+# Latch b's enable is tl4's tl4_w4068: the row y 2758-2777 runs on west of the strip's edge for
+# 40 px to a pad with a contact (4910,2767) (j_w2.png 4x, clean and chip-2 metal: ring with a
+# bright centre, green hole, closed west end of the pad). Two metals arrive on the pad: one from
+# the west along y 2767 (follow.py 4880 2767 W: to a pad (4534,2769); NOT drawn) and one from the
+# south (textmap.py 4876 2740 4942 2812 3: the ring between the pad's centre and the metal is
+# 9 px on the west side and 10-12 px on the south side in both chips, and the clean shot is pink
+# without an open strip from the pad to the metal south of it). That one runs south at
+# x 4900-4915 over the rows y 2810 and y 2855 (no hole) to a corner (4907,2901) (j_c2.png 4x),
+# west along y 2893-2909, lying on the row y 2900 without a contact, to a corner (4690,2901),
+# south to a corner (4690,2988), west to a corner (4625,2988) (j_c1.png, j_c1b.png 4x, four
+# shots) and south as tl4's track x 4625 to the pad (4625,4068) of tl4's latch (j_s1.png 1.2x,
+# three shots: one metal at x 4615-4635, one pink band, no pad). follow.py 4910 2830 S: corners
+# (4900,2900), (4690,2901), (4685,2987), (4625,2988), end (4625,4292). tl5_tracks.py v 4907 2775
+# 2905, h 2901 4685 4910, v 4689 2896 2995, h 2988 4620 4692, v 4625 2985 4060: no hole on any
+# piece, no stretch without metal in both chips over 17 px (row edges). The metal that ends on
+# the pad (4645,2900) from the west (tl4's x 4581 track) is not this one: 30 px without metal
+# between that pad's centre and the corner (4690,2901) against a 12 px ring on its west side.
+P 4898,2758:4967,2777
+P 4892,2751:4930,2785
+C 4910,2767
+M 4909,2755 y2901 x4690 y2988 x4625 y4062 w=14
+@alias tl4_w4068 tl5_w3982
