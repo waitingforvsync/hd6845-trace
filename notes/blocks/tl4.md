@@ -1056,6 +1056,42 @@ rows were in the round's claims 9 and 10 and were found to run to x 4250 as draw
 
 Round 8: no findings that change a connection.
 
+### Round 9: full review of the tracks' north ends, the knot and the bus lines (2026-11-18, commit d737383, images `review-9/`)
+
+A fresh reviewer (Claude Fable 5.2), 2026-11-18 15:20 -0600. One piece: the section "The tracks' north ends,
+the knot of pads y 2740-2910 and the bus lines y 2500-2740" of `trace/tl4.txt` (x 4250-4967,
+y 2500-3070, and the tracks it extends south to y 4700). It was given the thirteen claims
+(five tracks, the knot's pads and links, bus lines 1, 4 and 5) and told to look hardest at:
+the stretch under the clean shot's debris (pad B, the pad (4648,2898), the three metals
+y 2771/2812/2857 at x 4560-4690); pad A's poly path and its separation from pad E; the track
+x 4496 where it crosses the two links; which line each east pad belongs to; line 5's west
+end; contacts missed on the long tracks; the corner (4496,2728).
+
+Checked (16 images, 3.5x to 6x, with `follow.py`, `tl5_tracks.py`, `px.py`, `textmap.py`):
+each of the five tracks is one metal in both chips with holes only at the known pads (dark
+spots at (4496,3712), (4581,3345), (4581,3470) are chip-2 dirt or poly edges); the corner
+(4496,2728) turns west, bare ground between it and line 5 in both chips; no ring, widening or
+hole where the track x 4496 crosses the A-B and C-D links, poly continuous under it; pad A's
+poly is one Z-shaped poly, about 10 px of field from pad E in both stripped shots; pad E has
+nothing west or south and its column is continuous to y 2500; pad B and (4648,2898) are
+contacts (ring and bright centre in both chips, pitted pad in the chip-2 stripped shot), B's
+poly comes only from the west; under the three metals at x 4600-4810 the chip-2 stripped shot
+reads ghost over field, no rings; the pad (4648,2898) is separate from `tl5`'s metal corner
+(4690,2901) (no metal at x 4651-4683 in both chips); lines 1, 4 and 5 followed through their
+diagonals to their pads, rows separate; line 1's pad does not reach the supply metal (bare
+poly at x 4926-4941 in both chips); line 5 crosses x 4250 alone, line 4's pad poly comes from
+the west; both pads of the track x 4366 are contacts with rows west only. Two dark blobs at
+(4917-4935, 2784-2799) and (4908-4923, 2656-2668) are in the chip-2 shots only: not layout.
+
+Findings: none. Tool caveat it reported: `follow.py` at its default `--gap 24` jumps from line
+1's pad onto the supply metal and runs 33-46 px past pad A and line 5's pad over open poly
+(with `--gap 16` it ends on line 1's pad); the trace follows the two-chip metal test, not the
+follower's ends. Could not check: the clean shot under the debris (that stretch rests on the
+two metal shots and the chip-2 stripped shot: Ambiguity 11); the east pads and pads B, D and
+(4648,2898) were seen at 3.5x with text maps and profiles, not 4x.
+
+Round 9: no findings.
+
 ## Not done
 
 - West of x 4250 (`tl3`'s strip): where the rows of `tl4_w4590` at y 2810, of `tl5_w4937` at
