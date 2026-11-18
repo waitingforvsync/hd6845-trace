@@ -11,3 +11,6 @@
 3870,4764:4130,4970   logic   latch C, lower half | tl3_e4852 = NOT(tl3_e4808 OR tl3_e4152 AND tl3_e4537 OR tl3_e4720): open while tl3_e4152 (track A) is high, data tl3_e4635, cleared by tl3_e4808; tl1_ub mirrored
 4185,4800:4250,5902   route   metal x 4192, tl3_e4808 | latch C's clear: from the pad (4190,4808) south, a second contact at (4192,5373), east out of the strip along y 5895
 4229,4452:4244,4860   route   metal x 4236, tl3_e4852 | latch C's output up to the pad (4236,4461), whose row goes west to the unit at y 4350-4514
+3880,4345:4215,4514   logic   NOR under the east rail that drives rcs_mv | rcs_mv = NOR(tl3_e4372, tl3_e4852): latch C's output or a row from the east blocks rcs_mv
+3880,3450:4215,3660   logic   NOR under the east rail, y 3450-3660 | tl3_e3550 = NOR(rcs_mu, tc2_o5175); its load plate carries the north end of the thin metal x 3948-3962
+3880,3655:4170,3745   logic   inverter under the east rail, y 3655-3745 | tl3_e3712 = NOT tc2_o5175; its output poly is the upper gate of rcs_mn3852's unit
