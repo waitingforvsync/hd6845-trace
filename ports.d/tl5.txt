@@ -1,0 +1,8 @@
+# tl5: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+# The package's region is x 4967-5683, y 2500-6350.
+
+# East side (x 5683)
+tl5_w3505   P  5683,3712-3732  ?    latch a's enable: the row of T6's lower pad (5494,3722) runs on east
+tl5_w4590   P  5683,3862-3882  ?    latch c's clear: the row from the pad (5492,3872), north end of T6's lower piece
+tl5_w4503   P  5683,4580-4600  out  latch c's inverse output
+tl5_w4633   P  5683,4623-4643  out  latch c's output

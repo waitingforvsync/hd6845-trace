@@ -1,0 +1,184 @@
+# tl5: top-left random logic, fifth strip (x 4967-5683, y 2500-6350)
+# A gate column east of tl4's rail RB (x 4906-4951, VCC: both columns' loads end on boxes under
+# it) on a rail RC (x 5081-5127: the pull-downs' boxes, named vss from structure), mirror image
+# of the first cluster's west column (tl1's units on R1/R2), and a bus field of eleven vertical
+# metal tracks east of it: T0 x 5233, T1 5277 (res_b, trunks), T2 5320 (lpstb_b, trunks),
+# T3 5364, T4 5407, T5 5451, T6 5494, T7 5538, T8 5581, T9 5625, T10 5667.
+@requires tl1
+@block tl5
+@w M=12 P=20
+
+# ====================================================================
+# Latches a (y 3343-3803) and b (y 3820-4280): tl1's cells tl1_ua, tl1_ub mirrored.
+# findcell (clean shot, masters 2540-2842 x 4340-4590 and x 4590-4800, region 4940,2900:5260,5250):
+# tl1_ua at 2361,-997 mx=2691 (0.70), 2361,-520 (0.71); tl1_ub at 2361,-998 (0.78), 2361,-521 (0.74).
+# Overlays a_ua.png, a_ub.png, b_ua.png, b_ub.png (3.6x clean), a_m.png (2.7x metal);
+# tools/cellcheck.py tl1_ua / tl1_ub (clean shot): 8-11 % bad blocks, all under RB or dirt;
+# rdp3_cmp.py 4900,3340:5210,3810 --offsets "0,0 0,477 0,954": the copies differ only under RB.
+#   tl5_w3364 = NOT tl5_w3461
+#   tl5_w3550 = NOT( tl5_w3461 AND tl5_w3505  OR  tl5_w3680 )
+#   tl5_w3680 = NOT( tl5_w3636  OR  tl5_w3505 AND tl5_w3364  OR  tl5_w3550 )
+#   tl5_w3841 = NOT tl5_w3680
+#   tl5_w4027 = NOT( tl5_w3680 AND tl5_w3982  OR  tl5_w4160 )
+#   tl5_w4160 = NOT( tl5_w3636  OR  tl5_w3982 AND tl5_w3841  OR  tl5_w4027 )
+@inst tl1_ua 2361,-997 mx=2691 tag=a
+@inst tl1_ub 2361,-997 mx=2691 tag=a
+@inst tl1_ua 2361,-520 mx=2691 tag=b
+@inst tl1_ub 2361,-520 mx=2691 tag=b
+# ---- what the copies have of their own (pa1.png, pa2.png, pa3.png, pa4.png, pb1.png, pb2.png: 4x, chip-2 metal and clean shot)
+# rails over the two latches, drawn only where looked at (a_m.png; sv0.png, sv1.png at 0.9x show both
+# running on north and south)
+M 5104,3335 y4310 w=46
+N M 5104,3600 vss
+M 4928,3335 y3772 w=44
+N M 4928,3600 vcc
+# VSS boxes below each stack (the master has the wide NOR's box there): ring with a bright
+# centre on RC, specks on a tan box in the clean shot
+D 5092,3780:5145,3832
+C 5112,3802
+D 5095,4257:5150,4307
+C 5116,4282
+# VCC: the box of latch a's lower unit has one long ring on RB, x 4916-4944, y 3520-3636
+# (textmap.py 4900 3396 4960 3660 4); the inverter's ring is y 3416-3464 (the cell's contact).
+# Latch b's boxes are one with tl4's (its long contact (4930,4115) is drawn there).
+C 4930,3578 s=24x110
+# thin metal x 4984-4996 between two pads with contacts: the three-input gate's plate to the
+# third pull-down's gate, as in the master (follow.py 4989 3600: ends y 3500 and y 3706)
+M 4990,3488 y3716 w=12
+C 4990,3499
+C 4991,3705
+M 4990,3965 y4193 w=12
+C 4990,3976
+C 4991,4182
+# ---- latch a's rows, each from the column east to a pad with a contact on a track
+# data: row y 3452-3471 to the pad (5452,3461), the north end of a piece of T5 (bare ground north
+# of the pad; the metal goes on south)
+P 5195,3452:5440,3471
+P 5432,3444:5476,3479
+C 5452,3461
+M 5451,3450 y3482
+N P 5300,3461 tl5_w3461
+# enable: row y 3496-3514 to the pad (5494,3505) on T6; T6 runs on south to a second pad
+# (5494,3722), where it ends (bare ground south), on the row y 3712-3732 of the lower unit's
+# series gate; that row runs on east through the pad and out of the strip. North of the upper
+# pad T6 goes on (follow.py: to (5492,2984)): drawn to y 3490 only
+P 5195,3496:5480,3514
+P 5474,3488:5516,3523
+C 5494,3505
+M 5494,3490 y3734
+P 5195,3712:5683,3732
+P 5474,3705:5514,3740
+C 5494,3722
+N M 5494,3610 tl5_w3505
+# the three-input gate's node: its box poly runs east along y 3541-3560 to the pad (5580,3550),
+# the south end of a piece of T8 (bare ground south of the pad); drawn to y 3535 only
+P 5205,3541:5566,3560
+P 5560,3533:5602,3568
+C 5580,3550
+M 5581,3535 y3562
+N P 5400,3550 tl5_w3550
+# clear: row y 3627-3646 from the pad (5233,3636) on T0, which runs on through the pad both ways
+P 5195,3627:5220,3646
+P 5212,3619:5254,3654
+C 5233,3636
+N P 5205,3636 tl5_w3636
+# output: the lower node's box poly east along y 3670-3690 to the pad (5580,3680), the north end
+# of a piece of T8 that ends on latch b's data pad (5580,3938)
+P 5195,3670:5566,3690
+P 5560,3663:5602,3698
+C 5580,3680
+M 5581,3668 y3950
+N M 5581,3800 tl5_w3680
+# the inverter's output (the thin metal x 5171-5185 of the cell)
+N P 5120,3365 tl5_w3364
+# ---- latch b's rows
+# data: row y 3928-3947 from the pad (5580,3938)
+P 5195,3928:5566,3947
+P 5560,3921:5602,3956
+C 5580,3938
+# enable: T7 with two pads, (5538,3982) and (5538,4200), and a row from each; the metal runs on
+# through both pads, north and south
+P 5195,3971:5524,3990
+P 5518,3965:5560,4000
+C 5538,3982
+P 5195,4189:5524,4208
+P 5518,4183:5560,4218
+C 5538,4200
+M 5538,3968 y4214
+N M 5538,4090 tl5_w3982
+# the three-input gate's node: here the box poly is a stub with a closed round end at x 5212
+N P 5200,4027 tl5_w4027
+# clear: row y 4104-4123 from the pad (5233,4113) on T0, the same metal as latch a's clear pad
+P 5195,4104:5220,4123
+P 5212,4096:5254,4131
+C 5233,4113
+M 5233,3622 y4127
+# output: row y 4147-4167 east to the pad (5622,4160), the south end of a piece of T9 (bare
+# ground south); drawn to y 4145 only
+P 5195,4147:5608,4167
+P 5602,4142:5644,4178
+C 5622,4160
+M 5625,4145 y4172
+N P 5400,4157 tl5_w4160
+N P 5120,3842 tl5_w3841
+
+# ====================================================================
+# Latch c (y 4297-4757): the same two cells again (findcell: tl1_ua 2361,-43 0.75; tl1_ub 0.75)
+@inst tl1_ua 2361,-43 mx=2691 tag=c
+@inst tl1_ub 2361,-43 mx=2691 tag=c
+#   tl5_w4318 = NOT tl5_w4395
+#   tl5_w4503 = NOT( tl5_w4395 AND tl5_w4458  OR  tl5_w4633 )
+#   tl5_w4633 = NOT( tl5_w4590  OR  tl5_w4458 AND tl5_w4318  OR  tl5_w4503 )
+# Overlays c_ua.png, c_ub.png (3.6x clean); pads pc1.png, pc2.png, pc3.png (4x, chip-2 metal and clean shot).
+# RC over the latch (RB is drawn by tl4 here); the VSS box below the stack with its contact
+M 5104,4310 y4790 w=46
+D 5095,4735:5150,4785
+C 5120,4758
+# thin metal x 4984-4996 between the plate's pad and the third pull-down's pad
+M 4990,4442 y4670 w=12
+C 4990,4453
+C 4991,4659
+# data: row y 4404-4423 east under T0..T7; at x 5565-5580 it steps up 15 px in the open (one
+# orange poly with a notch in the chip-2 metal shot, pc1.png) and runs along y 4385-4405 to the
+# pad (5665,4395), the south end of a piece of T10 (bare ground south of the pad)
+P 5195,4404:5580,4423
+P 5562,4386:5582,4423
+P 5562,4385:5650,4405
+P 5645,4378:5687,4413
+C 5665,4395
+M 5667,4380 y4407
+N P 5400,4413 tl5_w4395
+# enable: T4 with two pads, (5407,4458) and (5407,4677), and a row from each; the metal ends on
+# the lower pad (bare ground south) and runs on north of the upper one
+P 5195,4448:5393,4467
+P 5387,4441:5429,4476
+C 5407,4458
+P 5195,4666:5393,4685
+P 5387,4660:5429,4695
+C 5407,4677
+M 5407,4444 y4689
+N M 5407,4570 tl5_w4458
+# the three-input gate's node: its box poly runs east along y 4494-4513 to x 5552, south down
+# x 5530-5552 (under T7, no contact: no ring in the metal shot, no green hole) and east along
+# y 4580-4600 out of the strip. The pad (5492,4590) west of the corner is not on it: 12 px of
+# field between the pad's east edge (x 5515) and the corner (pc2.png)
+P 5205,4494:5552,4513
+P 5530,4494:5552,4600
+P 5530,4580:5683,4600
+N P 5400,4503 tl5_w4503
+# clear: row y 4580-4600 from the pad (5492,4590) on T6's lower piece, which starts on a pad
+# (5492,3872) (bare ground north of it) with a row east along y 3862-3882 out of the strip, and
+# runs on south of the pad (5492,4590): drawn to y 4604 only
+P 5195,4580:5478,4600
+P 5472,4573:5514,4608
+C 5492,4590
+M 5494,3860 y4604
+P 5474,3855:5514,3890
+C 5492,3872
+P 5508,3862:5683,3882
+N M 5494,4250 tl5_w4590
+# output: the lower node's box poly east along y 4623-4643, under every track without a pad,
+# out of the strip
+P 5195,4623:5683,4643
+N P 5400,4633 tl5_w4633
+N P 5120,4319 tl5_w4318
