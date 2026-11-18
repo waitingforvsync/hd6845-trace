@@ -395,3 +395,155 @@ P 4873,5292:4908,5385
 P 4835,5380:4908,5402                 # the plate's foot, west to a heavy box on the node's strip:
 ?P 4812,5362:4840,5400                # the tie, uncertain as in the other loads (AMB-026)
 ?B 4808,5357:4842,5394
+
+# ====================================================================
+# The second latch, y 3225-3765: a transparent latch with its data inverter, the same circuit as
+# the latch at y 3906-4390 but laid out by hand (no findcell match), strapped by two short metals
+# (x 4680-4704, y 3235-3718; x 4851-4881, y 3380-3628).
+#   tl4_w3245 = NOT tl4_w3070                                              (data inverter)
+#   tl4_w3390 = NOT( tl4_w3070 AND tl5_w3505  OR  tl4_w4198  OR  tl4_w3178 )
+#   tl4_w3178 = NOT( tl4_w3245 AND tl5_w3505  OR  tl4_w3390 )
+# Views h1-h7_*.png (6x, three shots), k1/k2_*.png (bus field 2.75x); profiles in the notes.
+# In this column a diffusion's edges under a poly plate show as dark lines across the plate.
+# rails, between the pieces drawn above
+M 4752,3225 y3775 w=46
+M 4928,3225 y3775 w=44
+
+# ---- rows from the bus field, each from a pad with a contact on a track
+# data: pad (4320,3372) on the track x 4318 (tl4_w3070, one metal from the NOR's pad: follow.py);
+# row y 3362-3382 east, a riser x 4558-4578 north, row y 3322-3342 east: crosses the stack under
+# RA (gate), jogs 10 px south under RA, and ends in the vertical gate east of RA
+M 4318,3225 y3390
+P 4302,3357:4340,3388
+C 4320,3372
+P 4330,3362:4578,3382
+P 4558,3322:4578,3382
+P 4558,3322:4748,3342
+P 4738,3331:4800,3351
+P 4788,3265:4812,3357
+# enable: the track x 4452's north piece (follow.py: (4451,2984)-(4452,3640)), three pads.
+# Upper pad (4455,3415): row y 3406-3427 east, riser x 4602-4622 north, row y 3366-3386 east,
+# jogging 10 px south at RA's west edge: second gate of the stack; ends at x 4790.
+# Lower pad (4455,3635): row y 3625-3645 east across the lower stack; ends rounded at x 4772.
+M 4452,2975 y3648 w=14
+# its north end: a pad with a contact (4452,2985); the poly row y 2976-2996 goes on east from it,
+# under the corner of tl4_w4068's metal (no contact) and under the wide metal y 2955-2997 east
+# of x 4730, to the strip's east edge: tl5's row of latch a's enable, tl5_w3505 (m1-m4.png;
+# px.py row 2986 4700 4980 6 acid1b: salmon all the way)
+P 4436,2970:4472,3000
+C 4452,2985
+P 4462,2976:4972,2996
+N M 4452,3520 tl5_w3505
+P 4438,3400:4474,3430
+C 4455,3415
+P 4465,3406:4622,3427
+P 4602,3366:4622,3427
+P 4602,3366:4722,3386
+P 4712,3376:4790,3396
+P 4438,3619:4474,3652
+C 4455,3635
+P 4465,3625:4772,3645
+# clear: pad (4540,3462) on the track x 4537 (tl4_w4198); row y 3452-3472 east to x 4718 (west
+# piece of the row; the east piece is another net)
+M 4537,3440 y3900
+P 4522,3446:4560,3478
+C 4540,3462
+P 4550,3452:4718,3472
+# output tl4_w3178 (the NOR's second input): the track x 4410 ends on the pad (4413,3592); row
+# y 3582-3602 east onto a heavy box (4673-4707, 3578-3607) at the top of the lower stack's west column
+M 4410,3225 y3606
+P 4396,3576:4432,3608
+C 4413,3592
+P 4425,3582:4705,3602
+B 4673,3578:4709,3607
+
+# ---- the data inverter, east of RA at y 3229-3360.  tl4_w3245 = NOT tl4_w3070
+# RA's VSS box (contact ring (4745,3285)); a diffusion band y 3283-3314 from it east: under the
+# vertical gate (x 4788-4812), a patch (the node), under the plate, to the VCC box under RB
+D 4725,3265:4778,3322
+C 4745,3285
+D 4770,3283:4912,3314
+D 4905,3240:4958,3338
+C 4930,3257 4926,3305
+# plate, and its poly north and west (bar y 3229-3249 over field under RA) to a pad with a
+# contact (4690,3247): the top of the metal x 4680-4704
+P 4847,3262:4898,3330
+P 4847,3229:4870,3266
+P 4690,3229:4870,3249
+P 4672,3231:4708,3263
+C 4690,3247
+M 4693,3237 y3716 w=28
+N M 4693,3320 tl4_w3245
+# the plate's tie: its lower band's west end hooks down onto a heavy box (4838-4872, 3330-3360),
+# and a narrow strip leads there from the patch
+?D 4820,3310:4836,3352
+?D 4820,3338:4862,3356
+?P 4838,3320:4870,3358
+?B 4834,3334:4866,3360
+# bottom of the metal: pad with a contact (4690,3703), row y 3681-3700 east across the lower stack
+P 4678,3684:4712,3716
+C 4690,3703
+P 4700,3681:4812,3700
+# a ring at (4684,3420) on the same metal: bright centre in a dark ring in both metal shots, the
+# metal widened west; a poly pad beside the stack with nothing else on it (Ambiguities)
+?P 4664,3404:4695,3436
+?C 4684,3420
+
+# ---- the upper stack under RA and its node tl4_w3390 (y 3300-3545)
+# VSS box - data row - d1 - enable row - node. The diffusion is wider than RA: x 4700-4776.
+D 4700,3300:4776,3447
+# the node's two more pull-downs, side by side with a field box (4722-4752, 3442-3488) between
+# them, each under its own piece of the row y 3452-3472, both onto RA's second VSS box
+D 4675,3441:4714,3510
+D 4753,3436:4790,3500
+D 4705,3490:4778,3542
+C 4745,3512
+# east piece of the row: from a vertical poly east of RA (x 4793-4825), which is the foot of the
+# lower load's plate (tl4_w3178)
+P 4747,3452:4800,3472
+P 4793,3449:4825,3515
+P 4793,3492:4852,3515
+# load: band y 3423-3443 from the node east under the plate (x 4848-4900) to the VCC box under RB
+D 4785,3423:4912,3443
+D 4840,3423:4912,3448
+D 4905,3400:4960,3482
+C 4930,3443 s=24x50
+P 4848,3378:4900,3463
+C 4863,3390
+M 4866,3380 y3628 w=30
+N M 4866,3480 tl4_w3390
+# the plate's tie: small boxes north of the band, west of the plate
+?D 4805,3396:4822,3427
+?P 4803,3384:4850,3406
+?B 4801,3388:4826,3410
+# bottom of the metal x 4866: pad with a contact (4863,3612); row y 3587-3610 west = gate across
+# the lower node's east column
+P 4846,3592:4890,3630
+C 4863,3612
+P 4797,3587:4852,3610
+
+# ---- the lower node tl4_w3178 (y 3497-3765)
+# east of RA: patch (4800-4843, 3520-3582), load band y 3523-3551 east under the plate
+# (x 4847-4900, y 3497-3568) to the VCC box under RB; the column goes on south under the row of
+# tl4_w3390 and as a J (x 4820-4842 to y 3730, west along y 3707-3730) to RA's third VSS box
+D 4800,3520:4843,3640
+D 4838,3523:4912,3551
+D 4905,3500:4960,3652
+C 4930,3578 s=24x110
+P 4847,3497:4900,3568
+D 4820,3605:4842,3730
+D 4788,3707:4842,3730
+# the plate's tie
+?P 4803,3510:4824,3545
+?B 4801,3518:4826,3547
+# under RA: a bar west from the patch (y 3557-3582), a strip south (x 4740-4762), widening west
+# above the enable row to the west column (x 4687-4722); below the row the node d3, then the
+# row of tl4_w3245, then the VSS box (contact (4750,3725))
+D 4740,3557:4805,3582
+D 4740,3557:4762,3660
+D 4687,3590:4714,3664
+D 4705,3607:4745,3664
+D 4725,3650:4762,3680
+D 4725,3664:4792,3728
+D 4725,3700:4778,3755
+C 4750,3725
