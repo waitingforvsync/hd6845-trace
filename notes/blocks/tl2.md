@@ -7,25 +7,28 @@ what `tla`, `tl1`, `r9m` and `ur` did not. Nothing of theirs is redrawn.
 
 ## Status
 
-2026-11-18 02:19 +0000 (run 3, Tom Seddon). **Partial: the gate column east of R3 traced where
-`tla` had left it** (y 3690-3840 and y 4270-4530; 7 transistors in two pieces). Both pieces are
-gates whose outputs `tla` had named without finding their drivers or all their inputs:
+2026-11-18 02:46 +0000 (run 3, Tom Seddon). **Partial: the gate column east of R3 traced where
+`tla` had left it** (y 3690-3840 and y 4230-4530; 7 transistors in two pieces). Both pieces
+complete gates that `tla` had named without their drivers or all their inputs:
 
 ```
-rcs_bc3460 = NOR(rcs_e3, rcs_e4, tl2_w3722, clk_tl)            piece 1; tla had NOR(rcs_e3, rcs_e4). FIRM
-rcs_bd3330 = NOT( rcs_n4200 OR (clk_tl AND rcs_cond_lat) )     piece 2; no driver was known. Marked: the load's tie
+rcs_bc3460 = NOR(rcs_e3, rcs_e4, tl2_w3722, clk_tl)       piece 1; tla had NOR(rcs_e3, rcs_e4). FIRM
+rcs_x1     = NOT( rcs_n4200 OR (clk_tl AND rcs_cond_lat) ) piece 2. Marked: the load's tie (see below)
+rcs_n4200  = NOT( rcs_x1 OR (clk_tl AND rcs_cond) )        tla's, unchanged: the other half of the pair
 ```
 
 Piece 1 is two pull-downs with no load of their own, whose node is `tla`'s `rcs_bc3460` by a
 diffusion strip under the rail and thin metal E. Piece 2 is a second AND-OR-INVERT unit below
-`tla`'s (`rcs_n4200`): its load, a pull-down gated by `rcs_n4200`, and a pull-down gated by
-`clk_tl` in series with one gated by `rcs_cond_lat`; its output node goes by a buried contact
-onto the row y 4374 and track D's piece, which is `rcs_bd3330`. With `tla`'s equations:
-`rcs_n4200` = NOT((`rcs_cond` AND `clk_tl`) OR `rcs_x1`), so while `clk_tl` is high
-`rcs_bd3330` = (`rcs_cond` OR `rcs_x1`) AND NOT `rcs_cond_lat`, and while it is low
-`rcs_bd3330` = `rcs_x1`; `rcs_u3288` = NOR(`rcs_g3245`, `rcs_bd3330`) (see "The gate column
-east of R3"). `tla`'s step formula does not change. Full extraction: 2271 nets, 4050
-transistors, 0 errors, 0 warnings.
+`tla`'s `rcs_n4200`: a load, a pull-down gated by `rcs_n4200`, and a pull-down gated by
+`clk_tl` in series with one gated by `rcs_cond_lat`. Its node is `rcs_bd3330` (a buried contact
+onto the row y 4374, drawn without `?`). **Its load's gate poly is `tla`'s row of `rcs_x1`
+itself** (firm poly, found by the review), so that through the load's tie, which is `?` like
+every load tie of the cluster, the node is also `rcs_x1`: **the unit is then the driver of
+`rcs_x1`, the common clear of four latches, and with `rcs_n4200` it forms a cross-coupled
+pair**, a latch that can change only while `clk_tl` is high (it is set by `rcs_cond_lat`, reset
+by `rcs_cond`) and holds while it is low. `rcs_bd3330` and `rcs_x1` are joined only through
+that `?` tie (`tools/unsure.py --names rcs_x1`): an assumption, see Ambiguity 17. `tla`'s step
+formula does not change. Full extraction: 2270 nets, 4050 transistors, 0 errors, 0 warnings.
 
 2026-11-18 00:25 +0000 (run 2, Tom Seddon). **Partial: two pieces.** Run 2 added the wiring of the
 bus field east of the first cluster: the ten undrawn metal pieces of its tracks D and F-J with
@@ -70,7 +73,7 @@ undrawn contacts (see Not done).
 | x 2860-3100, y 2940-5300 | `tla`'s east gate column on R3 (traced by `tla`) |
 | x 3085-3533, y 2630-5700 | bus field: ten vertical metal positions (pitch 43.5: A 3108, B 3152, C 3196, D 3240, E 3283, F 3326, G 3369, H 3413, I 3456, J 3499), in pieces, with poly rows and pads. `tla` drew A-E and G's upper piece; **run 2 drew the rest** (D upper, F x3, G lower, H x2, I x2, J x2) |
 | x 2860-3100, y 3690-3840 | **run 3, piece 1**: two pull-downs on `rcs_bc3460` (gates: the rows y 3722 and y 3808) between `tla`'s VSS boxes, with the node's strip west under R3 and south under thin metal E |
-| x 2785-3175, y 4270-4530 | **run 3, piece 2**: the AND-OR-INVERT unit that drives `rcs_bd3330`: load between R2 and thin E (y 4275-4349), the node's column under thin E and the gap, a wire under R3 (y 4344-4356), columns under R3's east edge and under the thin metal x 3025-3059, three gates (`rcs_n4200`'s band y 4370-4390, the `clk_tl` row y 4407-4424, the arm y 4462-4481 of `rcs_cond_lat`'s pad), a VSS box with a contact (2990,4513), the buried contact (3048-3072, 4362-4390) to the row y 4374 |
+| x 2785-3175, y 4230-4530 | **run 3, piece 2**: the AND-OR-INVERT unit that drives `rcs_bd3330` and (through its load's tie) `rcs_x1`: load between R2 and thin E (y 4275-4349), the node's column under thin E and the gap, a wire under R3 (y 4344-4356), columns under R3's east edge and under the thin metal x 3025-3059, three gates (`rcs_n4200`'s band y 4370-4390, the `clk_tl` row y 4407-4424, the arm y 4462-4481 of `rcs_cond_lat`'s pad), a VSS box with a contact (2990,4513), the buried contact (3048-3072, 4362-4390) to the row y 4374 |
 | y 2500-2940 | horizontal metal tracks and rows north of the cluster, partly `r9m`'s and `tla`'s |
 | x 2817-3180, y 5900-6300 | the small cluster's east half: **this piece** |
 | x 2890-3533, y 6300-6350 | `rcs_thin_e`'s pad (2913,6327) and its poly row east (drawn); `lc_step`'s row y 6268-6290 is `ur`'s |
@@ -279,16 +282,18 @@ pad's only poly goes east to track D's pad (3228,4548).)
 #### Piece 1: two more pull-downs on `rcs_bc3460` (traced 2026-11-18; 2 transistors)
 
 Between `tla`'s VSS box at y 3655-3725 (contact (2985,3690)) and its VSS box at y 3795-3835
-(contact (2978,3815)) the column east of the rail (x 3022-3068) holds one more unit of the
+(contact (2978,3815)) the column east of the rail (x 3030-3068) holds one more unit of the
 cluster's kind, but without a load:
 
 - **VSS link.** A diffusion strip y 3696-3709 from the upper VSS box east across the rail's edge
   to the top of the column.
 - **Gate 1, `tl2_w3722`** (the row y 3712-3733 from track F's bottom pad (3322,3722)): on west
-  under track A without a contact, across the column, west end at x 3012-3018. W/L 46/21.
-- **Node box**, x 3022-3068, y 3737-3793.
+  under track A without a contact, across the column, west end at x 3012-3018. W/L 38/21.
+- **Node box**, x 3030-3068, y 3737-3793 (west of it, x 3014-3023, is field: chip-2 stripped
+  148-163/141-156/91, `px.py row 3745 3008 3080 3`; the first drawing had the edge at x 3022,
+  review round 1).
 - **Gate 2, `clk_tl`** (the row y 3798-3817 from track B's top pad (3150,3812), contact on
-  `tla`'s metal): across the column, west end x 3010. W/L 46/19. Below it the column meets
+  `tla`'s metal): across the column, west end x 3010. W/L 38/19. Below it the column meets
   `tla`'s VSS arm (y 3818-3836) of the lower box.
 - **The node's strip.** From the node box an arm runs west under R3 (y 3757-3777) to x 2915,
   turns south and runs along x 2915-2935, under the east margin of thin metal E, to y 3882,
@@ -342,31 +347,41 @@ Evidence (views in `cache/scratch/tl2/`, all with `TRACE=tl2,tla,tl1`):
   outline runs into the pad's.
 - Overlay: `p1_ov.png` (2.2x, chip-2 stripped | clean with the trace).
 
-Seen beside the piece and not drawn (they are `tla`'s): the load plate of `rcs_bc3460`
-(x 2850-2897, y 3862-3925) has a tab at its **top** right (x 2868-2900, y 3830-3862) that ends
-in a heavy-outlined oval box (x 2898-2925, y 3850-3878) on the node's strip: the load's tie.
-`tla` draws that tie at the plate's **bottom** (`B 2908,3932:2932,3959`, with a tail
-`D 2913,3911:2929,3957` and the plate down to y 3960), where both stripped shots show field
-(`p1_tie.png`). The connection is the same (plate on its node); the geometry is not. Thin metal
-E over the oval is bright and wide at y 3844-3856, dark at y 3832-3841 and y 3874-3880
-(`textmap.py 2884 3790 2944 3915 3 --acid`), like `tla`'s other ties under it (compared with
-`textmap.py 2884 4600 2944 4672 3` and `2884 5222 2944 5282 3`): read, as `tla` does, as passing
-over.
+Seen beside the piece (`tla`'s ground): the load plate of `rcs_bc3460` (x 2850-2897, y 3862-3925)
+has a tab at its **top** right (x 2868-2900, y 3830-3862) beside an oval with a heavy outline
+(x 2898-2925, y 3850-3878) on the node's strip, which is wider there (west to x 2900 from
+y 3845; drawn `?D`). This run read the oval as the load's tie box; the reviewer read it as an
+island of field with the strip round it (clean shot 174/132/121 inside, no green hole). Not
+settled (Ambiguity 15). `tla` draws the tie at the plate's **bottom** (`B 2908,3932:2932,3959`,
+with a tail `D 2913,3911:2929,3957` and the plate down to y 3960), where both stripped shots
+show field (`p1_tie.png`). Whichever it is, the plate is on its node and the connection is the
+same. Thin metal E over the oval is bright and wide at y 3844-3856, dark at y 3832-3841 and
+y 3874-3880 (`textmap.py 2884 3790 2944 3915 3 --acid`), like `tla`'s other ties under it
+(compared with `textmap.py 2884 4600 2944 4672 3` and `2884 5222 2944 5282 3`): read, as `tla`
+does and as the reviewer did, as passing over without a contact.
 
-#### Piece 2: the unit that drives `rcs_bd3330` (traced 2026-11-18; 5 transistors)
+#### Piece 2: the unit that drives `rcs_bd3330` and `rcs_x1` (traced 2026-11-18; 5 transistors)
 
 An AND-OR-INVERT unit of the same family as `tla`'s `rcs_n4200` directly above it, laid out
 round a rectangle of field under R3 (x 2953-2985, y 4358-4440: pink, 174-191/117-139/121-127,
-`px.py col 2965 4330 4530 5`). Its node is called X here; it is the net `rcs_bd3330`.
+`px.py col 2965 4330 4530 5`). Its node is called X here; it is the net `rcs_bd3330`, and through
+the load's tie the net `rcs_x1`.
 
 - **Load.** A strip y 4307-4330 from `tl1`'s VCC box under R2 (contact (2805,4308)) east under
   a poly plate (x 2846-2894, y 4275-4349, under `tla`'s strap) to a node box under thin metal E
   (x 2898-2936, y 4307-4338). W/L 23/48. The strap has no contact on the plate
   (`textmap.py 2838 4262 2895 4410 3`: bright A-D over the plate in both chips; its one contact
   is the pad below, bright centre (2866,4394) in a dark ring, green hole in the clean shot).
-  **Tie (uncertain, `?`)**: the plate's upper part runs east as an arm (y 4275-4292) to a
-  heavy-outlined dark box in the gap between thin E and R3 (x 2928-2950, y 4296-4330), which
-  sits on top of the node's diffusion there.
+  **The plate's gate is `rcs_x1`'s poly** (found by review round 1, confirmed by the tracer):
+  the plate's upper part runs east as an arm (y 4275-4292) into a vertical poly in the gap
+  between thin E and R3 (x 2927-2947). That poly runs **north** to y 4235 and turns east into the
+  west end of `tla`'s row y 4230-4250, which is `rcs_g4240` = `rcs_x1` (gate 3 of `rcs_n4200`'s
+  unit and, by track I, the clear of four latches), and **south** into a heavy-outlined box
+  (about x 2912-2950, y 4298-4334) that sits on the node's diffusion. The poly is drawn firm.
+  **The box, the tie, is drawn uncertain (`?P`, `?D`, `?B`)**, as every load tie of this cluster
+  is: it has a heavy outline and a paler centre in all four shots (`review-5/j12_tiebox.png`,
+  10x), which is how a buried contact looks, and a load whose gate is not on its own node would
+  be a pull-up switched by `rcs_x1`.
 - **X's diffusion**, one piece, west to east: the column under thin E and in the gap
   (x 2903-2950, y 4334-4366); a narrow wire under R3 along the top of the field rectangle
   (y 4344-4356, tan core 7 px between a dark line at y 4340 and the rectangle's outline at
@@ -394,20 +409,32 @@ round a rectangle of field under R3 (x 2953-2985, y 4358-4440: pink, 174-191/117
   Below it a VSS box (x 2957-3009, y 4482-4530) with a contact to R3 at (2990,4513), drawn by
   nobody before.
 
-Extracted:
+Extracted (the net carries both names; `@alias rcs_x1 rcs_bd3330` in the trace):
 
 ```
-rcs_bd3330 = NOT((clk_tl & rcs_cond_lat) | rcs_n4200)        DEPENDS (tools/unsure.py --equations): the load's tie
+rcs_x1    = NOT((clk_tl & rcs_cond_lat) | rcs_n4200)        DEPENDS (tools/unsure.py --equations): the load's tie
+rcs_n4200 = NOT((clk_tl & rcs_cond) | rcs_x1)               tla's unit, FIRM
 t62 (2870,4318) 23/48 load   t63 (2925,4380) 44/20 gate rcs_n4200   t64 (2983,4472) 52/19 gate rcs_cond_lat
-t65 (3041,4416) 26/17 and t71 (3000,4416) 20/17, gate clk_tl, rcs_bd3330 <-> tl2_w4452
+t65 (3041,4416) 26/17 and t71 (3000,4416) 20/17, gate clk_tl, between the node and tl2_w4452
 ```
 
-What it means with `tla`'s gates (traced equations, **believed** reading): `rcs_cond_lat` is
-`rcs_cond` as it was while `tl3_w3982` was last high. While `clk_tl` (CLK polarity) is high,
-`rcs_n4200` = NOR(`rcs_cond`, `rcs_x1`) and `rcs_bd3330` = (`rcs_cond` OR `rcs_x1`) AND NOT
-`rcs_cond_lat`: high when the step condition holds now and was not latched. While `clk_tl` is
-low, `rcs_bd3330` = `rcs_x1`. It feeds `rcs_u3288` = NOR(`rcs_g3245`, `rcs_bd3330`), whose
-inverse drives thin metal W.
+What is firm and what is not. Without the `?` tie the pull-downs and the buried contact still
+give a node `rcs_bd3330` pulled low by `rcs_n4200` OR (`clk_tl` AND `rcs_cond_lat`), with a
+plate gated by `rcs_x1` between it and VCC, and `rcs_x1` has no driver in the trace. With the
+tie, `rcs_x1` = `rcs_bd3330` and the two AND-OR-INVERT units are a **cross-coupled pair**:
+
+- while `clk_tl` (CLK polarity) is low, `rcs_x1` = NOT `rcs_n4200` and `rcs_n4200` = NOT
+  `rcs_x1`: the pair holds;
+- while `clk_tl` is high, `rcs_cond` high forces `rcs_n4200` low, so `rcs_x1` goes high unless
+  `rcs_cond_lat` holds it low; `rcs_cond_lat` high forces `rcs_x1` low, so `rcs_n4200` goes high
+  unless `rcs_cond` holds it low. `rcs_cond_lat` is `rcs_cond` as it was while `tl3_w3982` was
+  last high (`tla`'s pass transistor), so in steady state the two agree, and both outputs are
+  then low for as long as the clock is high: **believed**, from the equations; not simulated.
+
+`rcs_x1` is then: an input of `rcs_b1` and `rcs_u3288` = NOR(`rcs_g3245`, `rcs_x1`) (the row
+y 4374 and track D's piece are simply a second route of it to that gate), and the clear of
+tl1's two latches and tl3's two (run 2). Run 2's remark that `rcs_x1`'s driver "can now only be
+on the row y 5371 east of x 3533" is superseded: that row would be one more load.
 
 Evidence (views in `cache/scratch/tl2/`; text tools as cited; `tools/tl2_cmap.py` is new, the
 class map of `tools/classmap.py` as text, right only under metal):
@@ -416,13 +443,22 @@ class map of `tools/classmap.py` as text, right only under metal):
   120 ((2975,4020), (2990,4020)), plate over field 227/169/123, plate or gate over a channel
   241/170/122 and 238-247/158-186/117-131, diffusion 190-200/163-167/135-142 ((2998,4375),
   (2960,4452)), field 185/124/125. The narrow wire under R3 is 198/163/135: diffusion, not poly.
+- **The poly from the plate to `rcs_x1`'s row**: `px.py row 4283 2876 2950 3 acid1b,acid,metal`: one
+  salmon band 215-230/160-175/113-125 from x 2876 to x 2927 (the arm, under the strap's margin and
+  thin E), dark red-brown open poly from x 2936; `px.py col 2938 4214 4340 6 acid1b,acid,metal,metal1`:
+  in the gap, chip-2 metal 150-172/116-138/58-75 and chip-2 stripped 142-183/95-141/53-77 (orange,
+  blue low) at every sample from y 4238 to y 4292, between edges at y 4226-4232 and y 4298-4304;
+  the gap's bare field lower down is 159-170/137-147/78-86. View `r5_check1.png` (5.4x, three
+  shots, with `tla`'s row outlined); the reviewer's `review-5/j10_gap_poly.png`, `j11_corner.png`.
+  The poly's top (y 4233-4235) stays 5 px clear of `tla`'s node strip y 4203-4228.
 - **Load**: `tl2_cmap.py 2780 4252 2962 4350 3`: channel class at x 2846-2888, y 4312-4327 under
   the strap, the VCC box west of it, diffusion east of the plate to x 2936; `p2_load.png`
   (3.6x, three shots), overlay `p2_ov3.png` (4x).
 - **Gate of `rcs_n4200`**: `px.py row 4380 2884 2972 3 acid1b,acid,metal,metal1`: poly over
   field from the pad (218-231/164-168/123-127), channel-bright under thin E (230-247/139-173/
   81-125, x 2908-2926), dark red-brown open poly in the gap (x 2929-2944; orange in both metal
-  shots, 162-174/105-150/52-62), end at x 2950-2953, pink field under R3 from x 2959.
+  shots, 162-174/105-150/52-62), end at x 2953-2956 (under R3's edge; the reviewer's reading), pink field
+  under R3 from x 2959.
   `px.py col 2912 4296 4440 6`: under thin E tan above the band (y 4338-4362), the band
   238-245 red at y 4374-4386, tan below. Views `p2_gap.png` (5x, four shots), `p2_tl.png`.
 - **The source's path to VSS**: `p2_src.png` (5.6x, chip-2 stripped, chip-1 metal, clean): one tan
@@ -545,8 +581,9 @@ class map of `tools/classmap.py` as text, right only under metal):
    evidence listed under piece 2 (tan on both sides, the band's top edge crossing the gap in
    both metal shots). If it were field, the node's west part (load, the two pull-down paths)
    and its east part (the buried contact) would be two nets.
-11. **The same gap below the `clk_tl` row** (3006-3032, 4436-4450), drawn `?D`: no edge of its
-   own can be told from the two gates' edges there. If it is field, the column under the thin
+11. **The same gap below the `clk_tl` row** (3006-3032, 4436-4450): no edge of its own can be told
+   from the two gates' edges there; drawn `D` since the review (chip-2 stripped at x 3015 reads as
+   the band above the gate does, 151-158/108-120/91-95). If it is field, the column under the thin
    metal below the row (x 3028-3054, y 4425-4448) is a dead-end stub and the row's east channel
    does nothing; the equation is the same either way. What lies under the row itself in the gap
    cannot be read: drawn as two channels (20 and 26 wide); one channel about 64 wide is as
@@ -562,16 +599,35 @@ class map of `tools/classmap.py` as text, right only under metal):
    crosses (x 2947-2950) coincide within what the photos resolve (both at R3's west edge). If
    the diffusion passed the poly's end the gate would be bypassed. Drawn with the poly 5 px
    past the stub.
-14. **Piece 2's load tie** (`?P`, `?D`, `?B` at 2926-2950, 4275-4342): the arm from the plate's top
-   and the dark box in the gap are plain; that the box is a buried contact onto the node's
-   diffusion is read from its heavy outline and its place, as for the other loads of the cluster.
-15. **Piece 1: `tla`'s tie of `rcs_bc3460`'s load is drawn at the plate's bottom**, where the
-   photos show field; the tie is at the plate's top, on this package's strip (see piece 1).
-   Same connection. `tla`'s geometry is left as it is (proposed in the handoff).
+14. **Piece 2's load tie** (`?P`, `?D`, `?B` at 2926-2950, 4296-4342): the box at the south end
+   of `rcs_x1`'s poly in the gap. That it is a buried contact onto the node's diffusion is read
+   from its heavy outline, its paler centre and its place, as for the other loads of the cluster;
+   it is not resolved further at 10x. See Ambiguity 17 for what rests on it.
+15. **Piece 1: where the tie of `rcs_bc3460`'s load is.** `tla` draws it at the plate's bottom,
+   where the photos show field. At the plate's top an oval (2898-2925, 3850-3878) lies on this
+   package's strip: a tie box (the tracer) or an island of field inside a wider strip (the
+   reviewer). Not settled; `?D 2903,3845:2917,3890` is the widening. Same connection either way
+   (the plate must be on its node). `tla`'s geometry is left as it is (handoff).
 16. Under thin metal E the clean shot's colour is 200-207/161-166/135-141 from y 4398 to
    y 4500 (the source strip of piece 2), between this cluster's diffusion (190-200/163-167/
    135-142) and nothing else: read as diffusion on `p2_src.png`, where the strip has one outline
    with the turn east. Thin E has no contact on it (bright in both metal shots, `p2_gap.png`).
+
+17. **`rcs_x1` = `rcs_bd3330`: joined only through piece 2's `?` tie** (run 3; an assumption, tracing
+   guide trap 17). Firm: the node of piece 2 is `rcs_bd3330` (buried contact, Ambiguity 9); the
+   gate of piece 2's load is `rcs_x1` (one poly from the plate to `tla`'s row). Assumed: that
+   the box at the poly's south end ties it to the node, which makes the two names one net, the
+   unit the driver of `rcs_x1`, and the two AND-OR-INVERT units a latch. The names are aliased
+   in `trace/tl2.txt` (`@alias rcs_x1 rcs_bd3330`), not renamed. What would settle it: a second
+   driver of `rcs_x1` found elsewhere would refute it (its rows y 5371 east of x 3533 and y 3547
+   are the places to look; every end read so far is a gate), a better photo of the box would
+   confirm it.
+18. `tla`'s VSS arm (y 3818-3836) below piece 1's gate 2 is the source of that transistor. In the
+   chip-2 stripped shot the 10 px between the two gate rows read field-like there (150-156/141-153/
+   96-100 at x 3032-3060, `px.py row 3830 3008 3080 4 acid,metal`); the column's east edge line
+   (x 3068) is present and its west edge line (x 3030) absent at that y, as for an arm coming
+   from the west. Left as `tla` drew and had reviewed it; the reviewer of run 3 could not check
+   it either.
 
 ## Review
 
@@ -685,6 +741,50 @@ row y 4281-4299 sits about 4 px low (the band is y 4277-4294); `tl3_w3803` = NOR
 `tl3_w4243`) still rests on tl3's own `?P 3704,4182:3728,4204`, independently of these joins.
 
 Round 3: no findings.
+
+### Run 3 (the gate column east of R3: pieces 1 and 2)
+
+Round 1 (full review of both pieces, 2026-11-18 02:40 +0000, a fresh agent on claude-fable-5-2, at commit
+57acc95; 25 images in `cache/scratch/tl2/review-5/`). Told to suspect, in piece 2: the buried
+contact (3048-3072, 4362-4390) and whether the row y 4374 reaches it; the node's band across the
+gap between R3 and the thin metal; whether the band y 4462-4481 is one poly with `rcs_cond_lat`'s
+pad and its west end free; a tie between the column under the thin metal and that pad; whether
+`rcs_n4200`'s crossing is a gate and passes the diffusion's edge; the narrow wire under R3 and
+the strip under thin E. In piece 1: the node's strip (diffusion, continuous into `tla`'s box,
+nothing crossing) and the two joins across R3's east edge. In both: the two contacts on track B,
+the rows under track A, every gate crossing its diffusion, undrawn polys.
+It checked each at 4.3-6.5x in at least two shots with profiles: the buried contact (the same
+double outline as `tla`'s two on this column), the band across the gap (chip-2 stripped red
+minus green 26-50 against green field above y 4385), the lower band and the pad (poly colour in
+the gap in both metal shots, edges continuous; west end free in field), the column and the pad
+(a strip of field between them in both stripped shots: not tied), `rcs_n4200`'s crossing (a
+gate; the poly ends at x ~2956), the wire under R3 and the strip under thin E with its turn
+(diffusion; no contact of thin E: text map y 4336-4520), piece 1's arm, strip and joins, both
+track B contacts (bright centre, ring, green hole), no contact under track A at y 3722 or y 4414,
+all gates crossing fully, `tools/opendiff.py` (no undrawn diffusion).
+Findings, each checked by the tracer:
+1. **Changes a connection. Confirmed.** Piece 2's load-tie poly (`?P 2928,4275:2948,4330`) does
+   not start at y 4275: the poly in the gap x 2927-2946 runs on north to y 4233 and turns east
+   into `tla`'s row y 4230-4250 (`rcs_g4240` = `rcs_x1`). Tracer: `px.py col 2938 4214 4340 6`
+   (poly colours in both chip-2 shots from y 4238 to y 4292) and `r5_check1.png` (5.4x). Fixed:
+   `P 2927,4235:2948,4300` drawn firm, the box kept `?`; the node now carries `rcs_x1` and
+   `rcs_bd3330` (alias; Ambiguity 17), and the unit is the driver of `rcs_x1`.
+2. Geometry only. Confirmed. Piece 1: the column's west edge is x ~3030, not 3022 (`px.py row
+   3745 3008 3080 3`: field at x 3014-3023). Fixed (W 46 -> 38).
+3. Geometry only. Undecidable. Piece 1: the node strip widens west to x 2900 under thin E from
+   y ~3845 round an oval at (2909,3868), which the reviewer reads as an island of field and the
+   tracer had read as the load's tie box. Drawn `?D 2903,3845:2917,3890`; Ambiguity 15.
+4. Geometry only. Confirmed. `?D 3006,4436:3032,4450` reads as the band above the gate does: now
+   `D`. `rcs_n4200`'s poly ends at x ~2956: extended. The tie box is larger than drawn: `?B`
+   extended to y 4334.
+Could not be checked by the reviewer: the buried contact's poly directly under the thin metal's
+edge line (inferred by likeness to `tla`'s); `tla`'s VSS arm y 3818-3836, which reads field-like
+in the chip-2 stripped shot (Ambiguity 18).
+`tools/t.sh tl2 sameconn.py 57acc95` after the fixes: CONNECTIONS DIFFER (23 differences), every one
+of them the join of `rcs_bd3330` with `rcs_g4240`+`rcs_x1`+`tl1_w4025` (the gates of that net,
+the load's gate, the two equations): what finding 1 intends.
+
+Round 1: one finding that changes a connection, fixed.
 
 ## Not done
 
