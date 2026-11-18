@@ -726,6 +726,26 @@ centre and no hole there); the two load ties (`?`); the north unit's plate tie; 
 
 Round 1: two findings that change a connection, fixed.
 
+**Round 2, fix check** (2026-11-18 15:34 +0000, a fresh Fable 5.2 agent, 8 images in
+`cache/scratch/tl3/review-8/`; changes since b5c7392). Told what changed and to test: its own
+judgement of the spot (3955,4541) against real contacts of thin metals on pads, the master's
+box under thin W and a certain pass-over; `tl3_e4915`'s pad, its separation from the output pad,
+the metal's whole run south, the corner, where the pad's poly leaves; anything disturbed; both
+`sameconn.py` runs. It found both changes right. The spot: the metal shots do not decide it (a
+centre at full brightness, but between two straight bars along the poly row's edges, not in a
+round ring, and the metal keeps its 13 px width); in the clean shot a grey band 4 px high
+(y 4540-4543) across the box, red minus green 0-6, no pits, as in the master's boxes (-3..10 and
+5-20), where real contact holes are round, about 8 px, red minus green -5..-16: a pass-over.
+`tl3_e4915`: the pad closed west, north and south, its poly on east past x 4250 along
+y 4903-4928; bare ground y 4862-4898 between it and the output pad in both metal shots and no
+poly there in either stripped shot; uniform poly, no hole and no widening at every row the
+metal crosses (4x views of y 5040-5680); a plain corner. Not checked: that a contact would
+short two outputs (it rests on the undrawn end pads; (3930,3616) confirmed as a contact).
+`tools/t.sh tl3 sameconn.py b5c7392` and `.venv/bin/python tools/sameconn.py b5c7392` show only
+the intended differences (`tl3_tm3955` apart from `tl3_e4537`; the new net `tl3_e4915`).
+
+Round 2: no findings.
+
 ## Not done
 
 - Next, in this order: the east column's rail units (Inventory, run 6 survey): y 4350-4514 first
