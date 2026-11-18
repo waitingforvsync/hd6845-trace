@@ -164,8 +164,8 @@ paths to VSS:
 | Path | Device(s) | Gate |
 |---|---|---|
 | clear | (6106,7999), 35/18, to the VSS box of the contact (6049,8023) by the arm y 8017-8035 | row y 7988-8006, east to the pad (6255,7996) on the metal x 6247-6263, which comes from the pad (6253,7517) at the east end of `lc1_w7864`'s row and runs on south (followed to y 8218): **`lc1_w7864`** |
-| series pair | (6058,7918), 83/19, on the output side; (6058,7872), 81/21, on the VSS side (the copy's own VSS box y 7808-7858, contact (6047,7832)) | lower row y 7900-7918, east to the pad (6213,7908) on the metal x 6204-6221: **`lc1_w7908`**, the enable. Upper row y 7859-7881, east end the pad (6117,7862) on the thin metal x 6105-6118 (the cell's), which runs south out of the strip: **`lc1_w7862`** |
-| third | (5956,7878), 43/22, on the strip under the thin metal x 5965-5982 | the poly from the pad (5929,7929), which a thin metal x 5925-5937 joins to the south: **`lc1_w7928`** |
+| series pair | (6058,7918), 83/19, on the output side; (6058,7872), 81/21, on the VSS side (the copy's own VSS box y 7808-7858, contact (6047,7832)) | lower row y 7900-7918, east to the pad (6213,7908) on the metal x 6204-6221: **`lc1_w7908`**, the enable. Upper row y 7859-7881, east end the pad (6117,7862) on the thin metal x 6096-6110 (the cell's), which runs south out of the strip: **`lc1_w7862`** |
+| third | (5956,7878), 43/22, on the strip under the thin metal x 5965-5982 | the poly from the pad (5929,7929), which a thin metal x 5918-5932 joins to the south: **`lc1_w7928`** |
 
 `lc1_w7908`'s metal comes from the north: x 6007-6025 from beyond y 6900 (`follow.py 6012 7410 N`: straight to
 y 6150), east along y 7421-7439, south along x 6204-6221 through the pad and on south, where `lc2`'s lower unit
@@ -210,8 +210,8 @@ stops.
 | `lc1_w7780` | P | (6450, 7772-7788) | out | gate E1's output row, on east (seen to x 6710) |
 | `lc1_w7908` | M | x 6007-6025 at y 6900; x 6204-6221 at y 8067 | in | latch D's enable: from the north (followed to y 6150), through the pad (6213,7908) and on south to the lower unit |
 | `lc1_w7864` | M | x 6247-6263 at y 8067 | out | the clear's metal, on south from the pad (6255,7996) (followed to y 8218) |
-| `lc1_w7862` | M | x 6105-6118 at y 8067 | in | the cell's thin metal from the pad (6117,7862): from the lower unit in `lc2` (believed: the inverse of the latch's data) |
-| `lc1_w7928` | M | x 5925-5937 at y 8067 | in | thin metal from the pad (5929,7929): from the lower unit in `lc2` (believed: its output plate, pad about (5934,8133)) |
+| `lc1_w7862` | M | x 6096-6110 at y 8067 | in | the cell's thin metal from the pad (6117,7862): from the lower unit in `lc2` (believed: the inverse of the latch's data) |
+| `lc1_w7928` | M | x 5918-5932 at y 8067 | in | thin metal from the pad (5929,7929): from the lower unit in `lc2` (believed: its output plate, pad about (5934,8133)) |
 | `lc1_w7733` | P | (6240, 7552-7570) | in | drawn end of the row y 7561 west of the pad (6297,7561); its west end is a pad (5537,7561) |
 
 `lc1_w7040`'s metal leaves the strip at (6450, 7337-7355), turns south 22 px outside it and comes
@@ -354,11 +354,50 @@ The connections are the same before and after that fix:
 
 Round 3: no findings that change a connection.
 
+### Round 4: full review of one new piece, "latch D, upper unit" (2026-11-17 22:00 -0800)
+
+A fresh agent (Claude Fable 5.2), images in `cache/scratch/lc1/review-4/`. It covered only the new piece (the
+cell copy, its own contacts, the clear and enable wires, the two thin metals, the join of `lc1_w7040`'s row),
+at commit `51889ca`. Told to suspect: the arm from the clear device to the VSS box (clean shot dark), the strip
+y 7837-7854 (diffusion or poly), the rounded outline in the gap x 5978-6016 (one poly or two), the undrawn thin
+metal x 5965-5982 (a contact to the unit?), the row y 7517 through its two dark stretches, the enable metal's
+corners and pad, where the thin metal of `lc1_w7928` ends, the VCC contact's place.
+
+Checked and found correct (its words, shortened): the cell copy by overlay and side by side with the master
+turned 180 degrees; the arm (diffusion-coloured band between edges in both chip-2 shots, the same profile in the
+master and in `lc2`'s latch B; no evidence beyond that, the clean shot being dark there); the strip y 7837-7854
+is diffusion; field at x 5998 from y 7862 to 7930 in both metal shots, so `lc1_w7862` and `lc1_w7928` are
+separate polys; no contact on the thin metal x 5965-5982 at (5973,7856), (5971,7883), (5971,7905) or over the tie
+box; the row y 7517 is one poly from x 5596 to the pad (6253,7517), no tap; the enable metal is one metal
+through both corners and the pad (6213,7908) with no other hole from y 6900 to y 8067, and the metal
+x 6160-6180 is separate; the clear metal ends north on the pad (6253,7517) and passes through the pad
+(6255,7996); the thin metal of `lc1_w7928` stops at the pad (5929,7929); the VSS contact and its box, both
+series gates, the pad (6117,7862) apart from the enable row; the output box and the row's join; the equation
+and the devices. Not checked: the cell's interior line by line; anything south of y 8067.
+
+Findings, all geometry only, all confirmed and fixed:
+
+| Finding | Changes a connection? | Outcome |
+|---|---|---|
+| The two thin metals lie 6-9 px west of where drawn: `lc1_w7862`'s at x 6096-6110 (the cell has it at 6105-6119), `lc1_w7928`'s at x 5918-5932 (drawn 5925-5937) | no | confirmed (`px.py row 7980` and `8030`, metal shot: bright x 5918-5931 and x 6096-6108). `lc1_w7928`'s metal moved; for `lc1_w7862` a metal is drawn at the measured place beside the cell's; the ports follow |
+| The VCC contact is a long ring (y 8003 to the strip's edge and on), not a square at (5865,8027) | no | confirmed (`px.py col 5865`: specks at y 8021-8027 and 8057); drawn 16 x 60 |
+| The enable metal's east-west piece lies on the undrawn poly row y 7432 for all its length; no contact | no | a comment in the trace (trap 13) |
+| An undrawn T-shaped metal (bar y 7515-7548, x 5755-6062, arm x 5884-5930 from the north) lies on `lc1_w7864`'s row for 300 px; no contact | no | a comment in the trace; the metal is in Not done |
+
+Connections before and after the fixes:
+
+```
+tools/t.sh lc1 sameconn.py 51889ca            -> connections identical
+.venv/bin/python tools/sameconn.py 51889ca    -> connections identical
+```
+
+Round 4: no findings that change a connection.
+
 ## Not done
 
 - **Latch D's lower unit** is `lc2`'s (y 8043-8293): `@inst tl1_ua 3351,3703 rot=180 o=2662.5,4465` (findcell
   0.68; not overlaid), with the enable row's pad about (6212,8141), the data row, the plate's pad about
-  (5934,8133) on the thin metal x 5925-5937, and the unit's own contacts. Until it is drawn `lc1_w7862` and
+  (5934,8133) on the thin metal x 5918-5932, and the unit's own contacts. Until it is drawn `lc1_w7862` and
   `lc1_w7928` are open inputs.
 - **Cluster E, the rest**: the thin metal x 5965-5982 (through; contact candidates (5971,7883), (5973,7856)),
   the metal x 6160-6180 (from the row y 7475 south through a pad (6162,7650) and on to y 8866), the upper VCC
@@ -379,3 +418,5 @@ Round 3: no findings that change a connection.
 - x 4400-4750: the metal bus (`urch`'s channel), about eight thin metals and a wide one at
   x 4684-4716; `urch`'s pad (4400,7068) is here.
 - The ninth gate of column W at y 8040-8140 (`lc2`).
+- The T-shaped metal over `lc1_w7864`'s row (bar y 7515-7548, x 5755-6062; arm x 5884-5930 from the north) and the
+  poly row y 7432 under the enable metal's east-west piece: seen by review round 4, not drawn.

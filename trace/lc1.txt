@@ -251,7 +251,7 @@ C 5429,7520 s=26x26
 M 5416,7520 x5596 w=16                      # metal east to a pad
 P 5568,7503:5602,7536
 C 5583,7519 s=26x26
-P 5596,7518 x6240 w=18                      # poly row on east to the pad (6253,7517): dark where no metal is near it (x 5640-5750, 6065-6160), poly in both chip-2 shots
+P 5596,7518 x6240 w=18                      # poly row on east to the pad (6253,7517): dark where no metal is near it (x 5640-5750, 6065-6160), poly in both chip-2 shots; an undrawn T-shaped metal (bar y 7515-7548, x 5755-6062) lies on it for 300 px without contact
 M 5584,7524 y7346 x5668 y6976 x5713 y6900 w=16   # and a metal north from the same pad: it lies on lc1_w7040's row for 95 px (no contact), jogs east twice, and leaves the strip north
 M 5429,7508 y8003 x5476 y8067 w=20          # and metal south, a jog east, out of the strip
 N M 5429,7700 lc1_w7864
@@ -300,7 +300,7 @@ M 6297,7768 y8067 w=20                      # and metal south from the pad out o
 @inst tl1_ub 3352,3243 rot=180 o=2662.5,4695
 D 6030,7808:6082,7858                       # the copy's own VSS box above the stack (as lc2's latch B has)
 C 6047,7832
-C 5865,8027                                 # VCC contact of the load's box under the rail
+C 5865,8035 s=16x60                         # VCC contact of the load's box under the rail: a long ring, y 8003 to the strip's edge and on
 # clear: the unit's row y 7988-8006 east to a pad; metal north to the pad at the east end of lc1_w7864's row y 7517
 P 6130,7997 x6244 w=18
 P 6238,7980:6273,8013
@@ -314,11 +314,12 @@ N M 6255,7700 lc1_w7864
 P 6130,7909 x6204 w=18
 P 6197,7893:6230,7925
 C 6213,7908 s=26x26
-M 6016,6900 y7430 x6213 y8067 w=18
+M 6016,6900 y7430 x6213 y8067 w=18          # its east-west piece lies lengthwise on the poly row y 7432 (not drawn) for all its length: no contact (no ring, no hole)
 N M 6213,7700 lc1_w7908
 # the series gate under the rail (row y 7859-7881): its pad (6117,7862) and the thin metal south are the cell's
-N M 6111,8040 lc1_w7862
+M 6103,7868 y8067 w=14                      # the copy's thin metal measures x 6096-6110, 8 px west of the cell's (px.py row 7980, 8030)
+N M 6103,8040 lc1_w7862
 # third pull-down: the pad (5929,7929) and a thin metal south to the lower unit's output plate
 C 5929,7929 s=26x26
-M 5931,7918 y8067 w=12
-N M 5931,8030 lc1_w7928
+M 5925,7918 y8067 w=14                      # measured x 5918-5932 (px.py row 7980, 8030)
+N M 5925,8030 lc1_w7928

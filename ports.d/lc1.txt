@@ -21,9 +21,9 @@ lc1_w7468   M  5073-5093,8067   out  metal M_c2: NOT lc1_w7304, runs on south
 lc1_w7990   P  5072-5092,8067   out  poly under M_c2 (no contact): NOT lc1_w7864, to the ninth gate of the column (lc2)
 lc1_w7864   M  5466-5486,8067   out  gate 7's output, south; followed to y 8262
 vcc         M  5840-5892,8067   -    cluster E's VCC rail, runs on south
-lc1_w7928   M  5925-5937,8067   in   thin metal from the pad (5929,7929): from latch D's lower unit in lc2 (believed its output plate, pad about (5934,8133))
+lc1_w7928   M  5918-5932,8067   in   thin metal from the pad (5929,7929): from latch D's lower unit in lc2 (believed its output plate, pad about (5934,8133))
 vss         M  6015-6063,8067   -    cluster E's east VSS rail, runs on south
-lc1_w7862   M  6105-6118,8067   in   the cell's thin metal from the pad (6117,7862): from latch D's lower unit in lc2 (believed the inverse of its data)
+lc1_w7862   M  6096-6110,8067   in   the cell's thin metal from the pad (6117,7862): from latch D's lower unit in lc2 (believed the inverse of its data)
 lc1_w7908   M  6204-6221,8067   out  latch D's enable, on south to the lower unit's enable row (pad about (6212,8141))
 lc1_w7864   M  6247-6263,8067   out  latch D's clear, on south from the pad (6255,7996); followed to y 8218
 lc1_w7780   M  6287-6307,8067   out  gate E1's output, south from the pad (6296,7781); followed to y 8175
