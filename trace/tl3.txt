@@ -938,8 +938,9 @@ M 4105,3442 y3529 w=12
 ?M 4105,3527 y3574 w=12               # over the node box of tl3_e3550's NOR: dark y 3530-3568
 M 4105,3572 y3688 w=12
 ?M 4105,3686 y3748 w=12               # over the box of the inverter at y 3655-3745: dark y 3689-3744 (a spot at (4101,3719))
-M 4105,3746 y3828 w=12
-?M 4105,3826 y3969 w=12               # lengthwise over rcs_mn3852's node column: dim, 6-9 px wide, four bars of 16-29 px;
+M 4105,3746 y3773 w=12
+?M 4105,3771 y3969 w=12               # (from y 3771, not 3826: review 13) narrow and dim from y ~3783, then lengthwise over
+                                      # rcs_mn3852's node column: 6-9 px wide, bars of 10-12 px and four of 16-29 px;
                                       # a metal-coloured line in both metal shots and an unbroken protected strip
                                       # x 4108-4120 in the clean shot (r10_tmE.png, 5x)
 M 4105,3967 y4053 w=12

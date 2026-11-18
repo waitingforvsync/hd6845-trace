@@ -712,7 +712,7 @@ drawn `?M`; the rest firm:
 | y 3381-3444 | the box of `tla`'s inverter `rcs_mu` | dark y 3384-3440; a spot at (4101,3410-3419), A-B in both chips, clean 1-4, no hole |
 | y 3527-3574 | the node box of `tl3_e3550`'s NOR | dark y 3530-3568, no spot (run 7: stub only, pass-over) |
 | y 3686-3748 | the box of the inverter at y 3655-3745 | dark y 3689-3744; a spot at (4101,3716-3725), A-B; no hole |
-| y 3826-3969 | `rcs_mn3852`'s node column, lengthwise | the line is 6-9 px wide and dim (A-B in chip 2, 8-A in chip 1, about bare ground's level) with four bars of 16-29 px; at 5x it is a metal-coloured line in both metal shots, and the clean shot has an unbroken protected strip x 4108-4120 beside it for the whole 150 px (`r10_tmE.png`) |
+| y 3771-3969 | the tie box of `rcs_mn3852`'s unit's top (y 3783-3828: narrow and dim, bars of 10-12 px; marked from here since review 13), then `rcs_mn3852`'s node column, lengthwise | the line is 6-9 px wide and dim (A-B in chip 2, 8-A in chip 1, about bare ground's level) with four bars of 16-29 px; at 5x it is a metal-coloured line in both metal shots, and the clean shot has an unbroken protected strip x 4108-4120 beside it for the whole 150 px (`r10_tmE.png`) |
 | y 4051-4108 | `rcs_in1`'s node box | dark y 4054-4104; a spot at (4102,4072-4078), B-D in chip 2, 8-9 in chip 1; clean 0-2 with a few green samples, no round hole |
 
 None of the six has a pad or a widening; the spots are those run 8 measured against this metal's
@@ -998,14 +998,25 @@ new net):
 
 13. **Is the thin metal x 4099-4111 one metal, without a contact on the way, from its pad
     (4103,2899) to track A?** Working assumption since run 10: **yes**; drawn, with six stretches
-    over node boxes uncertain (`?M`: y 2964-3021, 3381-3444, 3527-3574, 3686-3748, 3826-3969,
+    over node boxes uncertain (`?M`: y 2964-3021, 3381-3444, 3527-3574, 3686-3748, 3771-3969,
     4051-4108; Logic, "The row y 2899 and the thin metal"). For: both ends are real contacts on
     pads and nothing between has a pad or a widening; the pad (4103,2899) has no other metal, and
     every known end of its row is a gate (`tl2`), so the row's driver must arrive by this metal;
-    a contact on any of the six boxes would short that unit's output to `tcw_a`, which has six
-    other loads and its own source to the east (for E1's box it would make latch B's enable
-    NOR(`tcw_a`, `tl4_w4590`) a constant); the dark stretches are trap 22's pass-over, as on the
-    other thin metal (Ambiguity 11). Against: the metal shots show nothing of the metal for
+    the boxes' interiors under the metal are red over green in the clean shot (194-207/172-174/
+    132-138 at (4103,2989), (4101,3414), (4101,3720)) where this metal's two real contact holes
+    are green over red with low blue (169/169/98, 158/172/102), and in the chip-2 stripped shot
+    they look like the boxes at (4097,4241) and (4097,4417) that no metal crosses (review 13:
+    `mosA.png`, `mosB.png`, `b3400.png`, `b3719.png`); for two of the boxes a contact would make
+    a gate constant (E1's: latch B's enable NOR(`tcw_a`, `tl4_w4590`) with `tcw_a` = NOT
+    `tl4_w4590`; `rcs_in1`'s: `tl3_e4243` = NOR(`rcs_mv`, `tcw_a`) with `tcw_a` = NOT `rcs_mv`);
+    the dark stretches are trap 22's pass-over, as on the
+    other thin metal (Ambiguity 11). Against: **`tcw_a`'s source is not traced** (in the full extraction it is
+    only ever a gate, eleven loads), so logic does not exclude that one of the other four units
+    drives it through a contact here (`rcs_mu`'s inverter, `tl3_e3550`'s NOR, the inverter
+    `tl3_e3712`, `rcs_mn3852`): the no-contact reading rests on the two stripped shots. The
+    most contact-like spot is (4103,4075), on `rcs_in1`'s box: as bright in chip 2 as a real
+    centre (187/181/85), not in chip 1 (152/135/49), and red equal to green in the clean shot
+    (172/172/132; the holes have blue 98-102). The metal shots show nothing of the metal for
     40-55 px over each box, and over y 3826-3969 it is at bare ground's brightness (the clean
     shot's protected strip and the line's colour at 5x are what show it there); four of the
     boxes have a small bright spot (Ambiguity 12). What it gives: `tl1_w3594` = `tcw_a` (the
@@ -1457,6 +1468,53 @@ Connections before and after the fix of finding 1:
 
     tools/t.sh tl3 sameconn.py 2e448e2             -> connections identical
     .venv/bin/python tools/sameconn.py 2e448e2     -> connections identical
+
+Round 1: no findings that change a connection.
+
+### Run 10: the row y 2899 and the thin metal x 4099-4111 north of track A
+
+**Round 1 (full review), 2026-11-18 21:53 +0000**, a fresh agent on Claude Fable 5.2, commit before the
+round d6e9b8a, 14 images in `cache/scratch/tl3/review-13/`. Piece N (x 3533-4130, y 2880-4108).
+
+Told to suspect: a contact between the thin metal and one of the six boxes it crosses (the
+bright spots at (4103,2986-2992), (4101,3410-3419), (4101,3716-3725), (4102,4072-4078)); a break
+(a pad or widening; whether the line is there at all over y 3826-3969); the firm stretches (a
+sideways step, another line); the pad (metal leaving another way, poly leaving north or east,
+the row passing under it); the row (a break or tap under the two rails, the two dips, the join
+at x 3533, a swap with the row y 2857).
+
+What it checked and found as drawn. (a) No contact on any box: the spots are 6-8 px by 12-15,
+on each box's floor; the metal shots alone do not settle it ((4103,4075) is as bright in chip 2
+as a real centre), but in the clean shot every box interior is cream, red over green
+(194-208/161-180/128-138), where the real holes at (4105,2899) and (4106,5633) are green over
+red (155-160/169-173/102), and in the chip-2 stripped shot the boxes under the metal look like
+the boxes at (4097,4241) and (4097,4417) that no metal crosses, while three real contacts
+nearby show an olive patch in a salmon pad (`mosA.png`, `mosB.png`, 4x four shots; `b3400.png`
+6x; `b3719.png` 5x). (b) No break: no pad or widening; over y 3826-3969 a 6-8 px strip at
+x 4100-4104, metal-coloured in both chips (177/148/71, 171/170/62) between dark edges, and the
+clean shot protected out to x ~4120 all the way (`dim.png`, 5x). (c) The firm stretches are
+straight at x 4105 with row-edge bars only; `follow.py` finds no corner; its candidate at
+(4101,3911) is a row-edge bar; it is the line that reaches (4105,4106). (d) The pad: ring and
+centre in both metal shots, hole in the clean shot, metal south only, the row runs into it,
+nothing leaves north or east (`pad.png`, 4x). (e) The row: one poly from x 3500 to the pad, at
+`tl2`'s y, field between it and the row y 2857 throughout, salmon without a hole under both
+rails (`wrail.png`, `erail.png`, 5x); two marks are dirt in one shot each; the VCC rail's top
+is at y ~2912.
+
+Findings: none. One remark, on marking only: the line is narrow and dim from y ~3783, where
+the trace was firm to y 3828. **Accepted**: `tl3_thin.py 4095 4115 3750 3830 --thr 176 --min 3`
+has three bars of 10-12 px there with one shot dark between them; the `?M` now starts at y 3771.
+It could not check: the "no contact" reading has no electrical cross-check, because `tcw_a` is
+only ever a gate in the extraction and its source is untraced, so a contact on one box would
+make that unit the driver (taken into Ambiguity 13, with my own measurement of the same six
+points: `px.py pt 4103,2989 4101,3414 4101,3720 4103,4075 4105,2900 4106,5633 4097,4241 4097,4417
+acid1b,acid,metal,metal1`); the middle of the row (x 3710-3790, 3870-3985) was read from text
+maps and 3x only.
+
+Connections before and after the change of marking:
+
+    tools/t.sh tl3 sameconn.py d6e9b8a             -> connections identical
+    .venv/bin/python tools/sameconn.py d6e9b8a     -> connections identical
 
 Round 1: no findings that change a connection.
 
