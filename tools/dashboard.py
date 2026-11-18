@@ -209,10 +209,9 @@ def read_master():
             section, cols = line[3:].strip(), None
             continue
         if not line.startswith('|'):
-            cols = None
-            continue
+            continue    # a blank line inside a table must not make its next row a header
         cells = [c.strip() for c in line.strip('|').split('|')]
-        if cols is None:
+        if [c.lower() for c in cells][:1] == ['prefix'] or cols is None:
             cols = [c.lower() for c in cells]
             continue
         if set(line.replace('|', '').strip()) <= set('-: ') or 'prefix' not in cols or 'region' not in cols:
