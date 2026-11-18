@@ -1,0 +1,23 @@
+# lc1: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+# The package's region is x 4400-6450, y 6900-8067.
+
+# North side (y 6900)
+vcc         M  4755-4803,6900   -    rail 1 (VCC by structure), runs on north
+vss         M  4842-4893,6900   -    rail 2's arm north
+lc_step     P  5012-5030,6890   out  gate 1's output; joins ur's poly, which ends at (5012,6900)
+lc1_w7140   M  5070-5090,6900   out  gate 2's output on the metal M_a; still metal at y 6840
+
+# South side (y 8067)
+vcc         M  4755-4803,8067   -    rail 1, runs on south
+vss         M  4928-4980,8067   -    rail 2, runs on south
+lc1_w7170   M  5030-5046,8067   in   thin metal T1: gate 2's input, from the south
+lc1_w7468   M  5073-5093,8067   out  metal M_c2: NOT lc1_w7304, runs on south
+lc1_w7990   P  5072-5092,8067   out  poly under M_c2 (no contact): NOT lc1_w7864, to the ninth gate of the column (lc2)
+
+# Drawn ends inside the strip (the wires go on east; not traced yet)
+lc1_w7040   P  5140,7030-7050   in   gate 1's row: its inverse is lc_step
+lc1_w7257   P  5140,7248-7267   in   gate 3's upper row
+lc1_w7343   P  5140,7334-7352   in   gate 3's lower row
+lc1_w7606   P  5140,7597-7615   out  gate 5's output row
+lc1_w7734   P  5110,7725-7743   out  gate 6's output row; a pad at about (5120,7735) not drawn
+lc1_w7864   P  5110,7855-7873   out  gate 7's output row; a pad at about (5120,7865) not drawn

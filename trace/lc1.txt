@@ -1,0 +1,195 @@
+# lc1: left-centre random logic, top strip (4400-6450 x 6900-8067).
+# Column W: the gate column between the supply rails x 4755-4803 (VCC, loads beside it) and
+# x 4928-4978 (VSS, pull-downs under it and just east of it). Gates are numbered from the top.
+# Names: lc1_w#### = a wire of this block, by the y of its defining row or band.
+@block lc1
+
+# ---------------------------------------------------------------- rails
+M 4779,6900 y8067 w=48                      # rail 1: VCC (by structure: every load hangs on it)
+N M 4779,6950 vcc
+# rail 2: VSS. Its top is a block with an arm west and north (leaves the strip north at x 4840-4895)
+M [ 4842,6900 x4893 y6975 x4927 y6948 x4980 y8067 x4928 y7028 x4842 ]
+N M 4953,7300 vss
+
+# ---------------------------------------------------------------- gate 1: lc_step = NOT lc1_w7040
+D 4760,6995:4805,7065                       # VCC contact box
+C 4777,7025 s=28x40
+D 4800,6997:4850,7027                       # load channel
+D 4845,6997:5046,7027                       # output band, east under the VSS arm and rail to the output box
+D 4880,6980:4908,7000                       # tab up under the load tie
+P 4808,6962:4845,7075                       # load gate
+P 4843,7030:4866,7066                       # wider below the band (over field)
+P 4840,6962:4904,6985                       # its arm east along the top
+P 4882,6975:4906,7008                       # arm down into the tie box
+B 4880,6973:4908,7008                       # load gate tied to the output band
+D 4908,7020:4985,7075                       # pull-down under the rail and 20 px west of it: band, channel, source
+D 4922,7050:4985,7100                       # VSS box
+D 4985,7020:5046,7072                       # the same device east of the rail
+C 4960,7075 s=30x34                         # VSS
+P 4893,7040 x5140 w=20                      # gate row y 7030-7050 from its west end (goes on east)
+N P 5120,7040 lc1_w7040
+D 5008,6987:5046,7000                       # under the output box
+P 5006,6985:5053,7022                       # output box (poly end)
+B 5004,6983:5050,7024
+P 5059,7010 y6955 5021,6906 y6890 w=18       # its wire: north beside the box, then north-west to ur's lc_step poly (ends at (5012,6900))
+N P 5059,6970 lc_step
+
+# ---------------------------------------------------------------- gate 2: lc1_w7140 = NOT lc1_w7170
+D 4762,7118:4812,7166                       # VCC contact box
+C 4777,7138 s=28x34
+D 4808,7125:4862,7162                       # load channel
+D 4855,7133:5046,7152                       # output band
+D 4868,7148:4895,7195                       # stub down under the load tie
+P 4814,7107:4858,7197                       # load gate
+P 4855,7166:4893,7197                       # its extension east at the bottom
+B 4866,7164:4897,7197                       # load gate tied to the output
+D 4945,7133:4985,7245                       # under the rail: drain, channel, VSS box
+D 4985,7133:5012,7200                       # the same device east of the rail (to the edge at x 5012)
+C 4960,7215 s=30x40                         # VSS
+P 4930,7170 x5098 w=24                      # gate row y 7158-7182, east to its pad
+C 5082,7170 s=24x24
+N P 5040,7170 lc1_w7170
+M 5082,7160 y7226 w=18                      # from the pad south,
+M 5091,7215 x5030 w=22                      # west,
+M 5038,7204 y8067 w=16                      # and south as thin metal T1 (leaves the strip south)
+D 5008,7118:5046,7152                       # under the output box
+P 5008,7116:5048,7156                       # output box
+B 5006,7114:5050,7157
+P 5046,7137 x5070 w=20                      # east to the pad
+P 5063,7093:5100,7137
+C 5082,7105 s=26x26
+M 5080,6900 y7118 w=20                      # metal M_a north out of the strip
+N M 5080,6950 lc1_w7140
+
+# ---------------------------------------------------------------- gate 3: lc1_w7304 = NOR(lc1_w7257, lc1_w7343)
+D 4762,7294:4808,7338                       # VCC contact box
+C 4777,7315 s=28x34
+D 4805,7296:4878,7321                       # load channel
+D 4873,7297:5024,7311                       # output band (under the rail without a device)
+D 4891,7308:4912,7374                       # stub down under the load tie
+P 4813,7275:4873,7367                       # load gate
+P 4870,7322:4887,7350                       # extension
+P 4882,7342:4908,7370                       # into the tie box
+B 4880,7340:4914,7376
+D 5022,7228:5040,7374                       # diffusion column under T1
+D 4985,7228:5024,7244                       # its top west to gate 2's VSS box
+P 5000,7257 x5140 w=19                      # row R3a (from the east)
+N P 5120,7257 lc1_w7257
+P 5000,7343 x5140 w=18                      # row R3b (from the east)
+N P 5120,7343 lc1_w7343
+D 4980,7358:5040,7374                       # below R3b west to gate 4's VSS box
+D 5010,7286:5040,7318                       # under the output box
+P 5010,7284:5046,7320                       # output box
+B 5008,7282:5048,7322
+P 5044,7301 x5070 w=22                      # east to the pad
+P 5052,7288:5100,7316
+C 5082,7302 s=26x26
+N P 5060,7301 lc1_w7304
+M 5082,7290 y7400 w=20                      # strap M_c1 down to gate 4's row
+C 5082,7388 s=26x26
+
+# ---------------------------------------------------------------- gate 4: lc1_w7468 = NOT lc1_w7304
+D 4762,7410:4808,7478                       # VCC contact box
+C 4777,7442 s=28x40
+D 4805,7412:4866,7478                       # load channel (full height) and the drain strip beside it
+D 4850,7453:5046,7478                       # drain, east under the rail to the output box
+P 4810,7402:4848,7505                       # load gate
+P 4810,7483:4905,7505                       # its foot
+P 4882,7465:4906,7505                       # foot's end up into the tie box
+B 4880,7463:4908,7480
+D 4942,7358:4985,7478                       # under the rail: VSS box, channel, drain
+D 4917,7402:4985,7420                       # the source side reaches 25 px west of the rail
+D 4985,7404:5040,7478                       # the same device east of the rail
+C 4960,7388 s=30x34                         # VSS
+P 4892,7433 x5093 w=27                      # gate row y 7420-7447
+P 5053,7402:5095,7446                       # up to the pad
+P 5063,7372:5100,7405
+P 5024,7464:5050,7490                       # output box
+B 5022,7462:5052,7480
+P 5046,7475 x5070 w=20
+P 5052,7460:5100,7490
+C 5083,7474 s=26x26
+N P 5060,7475 lc1_w7468
+M 5083,7462 y8067 w=20                      # M_c2 south (leaves the strip south)
+C 5082,7563 s=26x26                         # gate 5's row pad on M_c2
+
+# ---------------------------------------------------------------- gate 5: lc1_w7606 = NOT lc1_w7468
+D 4762,7537:4808,7603                       # VCC contact box
+C 4777,7572 s=28x40
+D 4805,7538:4866,7603                       # load channel and drain strip
+D 4850,7582:5046,7603                       # drain east
+P 4808,7525:4848,7632                       # load gate
+P 4808,7610:4905,7632                       # foot
+P 4882,7595:4906,7632                       # up into the tie box
+B 4880,7593:4908,7605
+D 4942,7502:4985,7603                       # under the rail
+D 4917,7527:4985,7552                       # the source side reaches 25 px west of the rail
+D 4985,7535:5040,7603                       # east of the rail
+C 4962,7525 s=30x34                         # VSS
+P 4892,7565 x5098 w=26                      # gate row y 7552-7578 to its pad on M_c2
+P 5024,7590:5050,7620                       # output box
+B 5022,7588:5052,7605
+P 5046,7606 x5140 w=18                      # output row east
+N P 5120,7606 lc1_w7606
+
+
+# ---------------------------------------------------------------- gate 6: lc1_w7734 = NOT lc1_w7468
+D 4763,7708:4812,7745                       # VCC contact box
+C 4777,7722 s=28x34
+D 4808,7705:4865,7745                       # load channel
+D 4860,7710:4990,7735                       # output band
+D 4880,7675:4895,7715                       # stub up under the load tie
+P 4813,7668:4860,7755                       # load gate
+P 4855,7668:4892,7697                       # its extension east at the top
+B 4876,7672:4897,7699                       # load gate tied to the output
+D 4945,7640:4985,7745                       # under the rail: VSS box, channel, drain
+D 4985,7660:5022,7740                       # the same device east of the rail
+C 4960,7655 s=30x34                         # VSS
+P 4922,7691 x5098 w=20                      # gate row y 7681-7701 to its pad on M_c2
+C 5082,7692 s=26x26
+D 5010,7715:5046,7740                       # under the output box
+P 5012,7713:5048,7747                       # output box
+B 5008,7711:5050,7749
+P 5046,7734 x5110 w=18                      # output row east (under M_c2, no contact)
+N P 5104,7734 lc1_w7734
+
+# ---------------------------------------------------------------- gate 7: lc1_w7864 = NOT lc1_w7468
+D 4763,7805:4808,7868                       # VCC contact box
+C 4777,7830 s=28x40
+D 4805,7800:4866,7868                       # load channel and drain strip
+D 4850,7843:5046,7868                       # drain east
+P 4808,7785:4848,7897                       # load gate
+P 4808,7875:4902,7897                       # foot
+P 4882,7857:4906,7897                       # up into the tie box
+B 4880,7855:4908,7870
+D 4942,7770:4985,7868                       # under the rail
+D 4918,7798:4985,7812                       # the source side reaches 25 px west of the rail
+D 4985,7797:5040,7868                       # east of the rail
+C 4958,7790 s=30x34                         # VSS
+P 4892,7822 x5098 w=26                      # gate row y 7809-7835 to its pad on M_c2
+C 5082,7822 s=26x26
+P 5012,7853:5048,7882                       # output box
+B 5010,7851:5050,7870
+P 5046,7864 x5110 w=18                      # output row east
+N P 5104,7864 lc1_w7864
+P 5082,7864 y7962 w=20                      # and south under M_c2 (no contact) to gate 8's row
+
+# ---------------------------------------------------------------- gate 8: lc1_w7990 = NOT lc1_w7864
+D 4763,7940:4812,7998                       # VCC contact box
+C 4777,7968 s=28x40
+D 4808,7973:4878,8000                       # load channel
+D 4873,7975:4990,7992                       # output band
+D 4880,7925:4897,7980                       # stub north from the band,
+D 4855,7927:4884,7945                       # and west under the load tie
+P 4813,7950:4873,8017                       # load gate
+P 4850,7923:4876,7955                       # its extension up
+B 4853,7925:4878,7947                       # load gate tied to the output
+D 4945,7902:4985,7992                       # under the rail: VSS box, channel, drain
+D 4985,7900:5022,7992                       # east of the rail
+C 4955,7910 s=30x34                         # VSS
+P 4923,7952 x5092 w=20                      # gate row y 7942-7962, east to the poly under M_c2
+D 5010,7975:5046,8008                       # under the output box
+P 5012,7983:5048,8012                       # output box
+B 5010,7981:5050,8014
+P 5046,8000 x5082 y8067 w=20                # east, then south under M_c2 (leaves the strip south)
+N P 5082,8040 lc1_w7990
