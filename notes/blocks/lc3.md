@@ -2,7 +2,7 @@
 
 ## Status
 
-2026-11-18 04:48 +0100. Survey only: **nothing is drawn** (no `trace/lc3.txt`, no ports file, no floor-plan
+2026-11-18 04:48 +0100. Survey only, plus a 6x look at the gate pair on claude-opus (section "Gate pair at 6x"): **nothing is drawn** (no `trace/lc3.txt`, no ports file, no floor-plan
 fragment). The inventory below was read at 0.62x and 1.22x (metal + acid1b), one gate pair
 at 3-3.4x; everything in it is "seen", not traced. Stopped early on the coordinator's
 instruction (budget). Views: `cache/scratch/lc3/` (`survey.png`, `qa`..`qd.png`,
@@ -41,7 +41,37 @@ x 5612-5640.
 
 None: nothing is drawn.
 
-## Ambiguities
+## Gate pair at 6x (2026-11-18, claude-opus, notes only)
+
+Views `bc_3.png` (5590-5675 x 9400-9465), `ld_3.png` (5750-5900 x 9400-9510), `bx_6.png`
+(5590-5710 x 9300-9460), each acid1b | acid | metal at 6x. Not drawn: the time box ran out
+before every connection could be read in two shots and the gates profiled.
+
+- Boxes (5625,9335) and (5625,9432): in acid1b each is a square outline about x 5610-5640,
+  y 9322-9348 and y 9418-9446, pale inside, at the meeting of a horizontal poly row (from the
+  west) and the vertical diffusion/poly edge at x about 5645 - the look of a buried contact.
+  In the metal shot both lie under the track x 5612-5640, which shows a brighter blob at each
+  (5625,9330), (5625,9432) but also bright grain between them (y 9380-9410); no clear dark
+  contact ring was seen at either. Leaning: buried contact only, metal passing over; **not
+  decided** (needs a profile along x 5625 in metal and a check whether the track x 5612-5640
+  is continuous over y 9300-9460).
+  Profiles (`px.py`, metal shot): column x 5626 is dark y 9308-9352 and y 9412-9456, bright
+  y 9356-9404 (and acid1b dark lines at y 9316, 9348, 9420, 9452: the box edges). Row y 9380:
+  bright x 5620-5630 between dark edges x 5615, 5635 (a narrow metal about x 5617-5633).
+  Rows y 9330 and y 9432: dark over x 5605-5635. So the metal track is visible only between
+  the boxes and each box is a dark square in the metal shot. That fits a metal contact ring
+  as well as a track hidden by step relief over a buried contact: **open**, and it decides
+  whether the two outputs are joined by metal (if both boxes are metal contacts on one track,
+  the gates' outputs are shorted, so at most one can be, or the track is cut between them).
+- Load of the lower gate (`ld_3.png`): metal contact ring (5865,9455) on the wide metal,
+  ring about x 5843-5885, y 9430-9475 (clear in acid1b and metal). West of it the diffusion
+  band y 9428-9450 runs from x 5760 to the contact; a box x 5770-5835, y 9435-9500 is dense
+  red/orange in acid (implant-looking: depletion load). Its gate tie: a poly/box shape
+  x 5770-5800, y 9470-9505 reaches the band's south edge near x 5785; whether it ties to the
+  output band (usual load) was not settled.
+- Diffusion column x about 5655-5710 (acid shot, pink): continuous y 9350-9420 between two
+  poly rows y about 9338 and 9430, which is the gap between the two gates' outputs.
+
 
 - (5625,9432) and its mirror (5625,9335): buried contact of the west poly row onto the output
   band with the metal track merely passing over, or a metal contact as well. If both were
