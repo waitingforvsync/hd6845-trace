@@ -4,8 +4,10 @@ Scratch: `cache/scratch/bc2/`. Coordinates are metal-shot pixels.
 
 ## Status
 
-2026-11-18 05:32 +0100: **one latch unit traced** (east gate column, unit a: `tl1_ua` + `tl1_ub` at
+2026-11-18 05:36 +0100: **one latch unit traced** (east gate column, unit a: `tl1_ua` + `tl1_ub` at
 7940,10454, 11 transistors), traced on claude-opus (Fable allowance exhausted). Not reviewed.
+**Unit b (7941,10930) placed, fitted, and held**: its lines are in `trace/bc2.txt` commented out
+(see "Latch unit b"), because with them the extraction has one error at the seam with unit a.
 Everything else in the region is still survey only (below).
 
 Earlier (2026-11-18 04:48 +0100, survey):
@@ -104,6 +106,39 @@ The same D latch with enable and clear as `tl5` and `lc2` place. Widths: `px.py 
 (acid) gives poly y 14905-14922 and y 14947-14966 at the two upper AND gates, matching the
 cell's L 18; the other transistors' sizes are the master's, not profiled.
 
+## Latch unit b (x 10300-10779, y 15277-15746): placed, held
+
+`@inst tl1_ua 7941,10930` and `@inst tl1_ub 7941,10930` (tag b). Overlay `b_top.png`, `b_bot.png`,
+`b_rail.png` (2.5x, clean and metal side by side): every gate of the cells lies on a poly row over
+diffusion and every contact on a box or ring. Drawn (active): the VSS rail x 10568 (w 56) and the
+VCC rail x 10746 (w 50) over y 15270-15746, and the thin metal x 10682 y 15416-15644. Written but
+commented out with the cells (a contact needs the cells' diffusion under it): the VCC long ring
+(10745,15505) (metal shot, ring y 15470-15550), the thin metal's contacts (10681,15429),
+(10681,15632) (rings in the metal shot).
+
+**Why held.** With the two `@inst` lines active, `netlist.py`: 1 error, "channel at 10558,15284: 1
+diffusion terminals". Copy b's top poly row (master y 4350-4367, here 15280-15297) crosses unit a's
+hand-drawn VSS box `D 10530,15235:10586,15285`. `px.py col 10535` (acid1b, acid): diffusion
+y 15258-15276, dark edge y 15279-15285, poly (acid orange) y 15288-15300. So the box ends at about
+y 15279 and the row starts at about 15287; both drawn items are about 5 px long into the gap (the
+same row at unit a reads 14809-14821 against the drawn 14804). Fix: unit a's box south edge to
+15279 (unit a's line; not changed here while it is under review), then uncomment the five lines.
+
+Rows west of copy b, read on `b_w.png` (2.4x, clean + metal; **not drawn**, positions to ~5 px):
+| Cell row (copy a's net) | Row y | Seen |
+|---|---|---|
+| data (a: `bc2_w14912`) | 15380-15397 | poly west to a pad (10352,15388), ring in the metal shot; a metal from the pad runs south at x ~10355 (and the L above it, y ~15300, x 10300-10350) |
+| enable (a: `bc2_w14955`) | ~15431 | pad (10441,15432), ring, on the vertical metal x 10441 |
+| enable again | ~15648 | pad (10441,15648), ring, on the same metal x 10441 (continuous y 15400-15720 in the metal shot) |
+| output (a: `bc2_w15000`) | ~15476 | no pad west of the cell's own contact (10479,15476) seen at 2.4x |
+| clear (a: `bc2_w15087`) | ~15563 | runs on west past x 10300 (under the metals x 10355, 10441) |
+| ? | ~15606 | runs on west past x 10300 |
+
+The metal x 10441 (x 10430-10450) is continuous in the metal shot from copy a's lower enable pad
+(10441,15172) to y 15400 (`b_x441.png`, 3x, metal + clean), and on to y 15720 (`b_w.png`): so units
+a and b very likely share the enable (believed; not yet drawn; whether it has a break or a contact
+between y 15188 and 15400 under copy b's data row y 15388 was looked at only at 3x).
+
 ## Not done
 
 In order:
@@ -112,8 +147,11 @@ In order:
    the cell's own thin metal x 10500 (the extra vertical seen in another copy). Not drawn
    beyond the pads; where it goes (and so where the enable comes from) is not followed. Likewise
    the metals at the data, clear and output pads.
-1b. Copy b at 7941,10930: place the same way; **its inputs differ** (survey above): read each
-   row on its own at 4x.
+1b. Copy b: fix unit a's VSS box south edge (15285 -> 15279), uncomment the cells and the three
+   contacts, re-run the extraction; then draw its rows to their pads (table under "Latch unit b";
+   rows y 15563 and 15606 go on west, not followed), its VSS box below the stack (expected
+   near (10558,15734), not seen yet), and draw the metal x 10441 on from y 15188 (seen continuous to y 15720, 3x).
+   No widths profiled for b.
 2. Test the east column above y 14800 and below y 15750 for further copies; overlay the copy
    at 6857,11495 on the metal shot and the mirrored candidate at all.
 3. West gate column; the routing (bus, L bundles, vertical tracks); joins to `bc1`'s bus ends

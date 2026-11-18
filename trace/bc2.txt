@@ -57,3 +57,26 @@ N P 10420,15001 bc2_w15000
 N M 10500,14850 bc2_w14876
 # the lower gate's node (latch output, the other side), seen at the pull-down gate row y 15029
 N P 10560,15028 bc2_w15029
+
+# ====================================================================
+# East gate column, latch unit b (x 10473-10779, y 15277-15727): tl1's unit one pitch (476) south
+# (findcell on the clean shot: tl1_ua 0.76, tl1_ub 0.77)
+# HELD (clash with unit a box, see notes): @inst tl1_ua 7941,10930 tag=b
+# HELD (clash with unit a box, see notes): @inst tl1_ub 7941,10930 tag=b
+# rails over copy b (b_top.png, b_rail.png 2.5x, metal shot: bands x 10540-10600 and x 10722-10775
+# continuous over the unit); VSS / VCC by structure as for a
+M 10568,15270 y15746 w=56
+M 10746,15270 y15746 w=50
+# VCC: the loads' long ring on the VCC rail (metal shot, b_rail.png: ring y 15470-15550)
+# HELD with the cells: C 10745,15505 s=24x82
+# thin metal x 10682 between its pads, rings at (10682,15430) and (10682,15632) in the metal shot
+M 10682,15416 y15644 w=12
+# HELD with the cells: C 10681,15429
+# HELD with the cells: C 10681,15632
+# Copy b is HELD: with both @inst lines active the full extraction gives 1 error, "channel at
+# 10558,15284: 1 diffusion terminals": copy b's top poly row (y 15280-15297, master row 4350-4367)
+# crosses unit a's hand-drawn VSS box D 10530,15235:10586,15285. On the photo (b_seam.png, 4x,
+# acid1b + acid) that box ends at about y 15272 with a dark edge, and the poly row runs below it:
+# the box's south edge wants 15272 (unit a's line, under review, not changed here). Once that
+# is fixed, uncomment the two @inst lines and the three contacts above (the overlay fitted:
+# b_top.png, b_bot.png, b_rail.png 2.5x, every gate on a row over diffusion, every contact on a box).
