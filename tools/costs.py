@@ -134,6 +134,37 @@ def traces(path):
     return False
 
 
+TRACE_WORK_RE = re.compile(r'(^|/)(trace/[a-z0-9_]+\.txt|notes/blocks/[a-z0-9_]+\.md)$')
+
+
+def trace_times(path):
+    """Times of this transcript's own tracing tool calls (tools/t.sh, tools/ship.sh, an edit of a
+    trace file or a block's notes). Used for a main session, which can trace in one hour and do
+    something else, such as a dashboard fix, in the next: a response with no tracing call between it
+    and the commit it would be attributed to is not that package's work."""
+    out = []
+    with open(path, errors='replace') as f:
+        for line in f:
+            if '"tool_use"' not in line:
+                continue
+            try:
+                e = json.loads(line)
+                c = (e.get('message') or {}).get('content')
+            except ValueError:
+                continue
+            for x in c if isinstance(c, list) else []:
+                if not isinstance(x, dict) or x.get('type') != 'tool_use':
+                    continue
+                inp = x.get('input') or {}
+                cmd = str(inp.get('command', ''))
+                if (x.get('name') == 'Bash' and ('tools/t.sh ' in cmd or 'tools/ship.sh' in cmd)) or \
+                        (x.get('name') in ('Edit', 'Write') and TRACE_WORK_RE.search(str(inp.get('file_path', '')))):
+                    if e.get('timestamp'):
+                        out.append(ts(e['timestamp']))
+    out.sort()
+    return out
+
+
 def is_side(path):
     """A subagent that is neither a reviewer nor doing tracing: a side task (a tool or CI fix, an
     investigation) that happened to run between two commits of a package. Its responses count
@@ -152,6 +183,7 @@ def responses():
         for path in glob.glob(os.path.join(d, '**', '*.jsonl'), recursive=True):
             review = is_review(path)
             side = is_side(path)
+            tt = None if os.sep + 'subagents' + os.sep in path else trace_times(path)
             with open(path, errors='replace') as f:
                 for line in f:
                     if '"usage"' not in line:
@@ -167,7 +199,7 @@ def responses():
                     if key in seen:
                         continue
                     seen.add(key)
-                    out.append((ts(e['timestamp']), e.get('sessionId', path), m.get('model', '?'), m['usage'], review, side))
+                    out.append((ts(e['timestamp']), e.get('sessionId', path), m.get('model', '?'), m['usage'], review, side, tt))
     out.sort(key=lambda r: r[0])
     return out
 
@@ -220,7 +252,7 @@ def main():
     tot = collections.Counter()
     total_cost, unknown = 0.0, set()
     rs = responses()
-    for t, sess, model, u, review, side in rs:
+    for t, sess, model, u, review, side, tt in rs:
         tok, cost, known = price(model, u)
         if not known:
             unknown.add(model)
@@ -235,6 +267,10 @@ def main():
         pk = []
         if not side and i < len(commits) and (commits[i][0] - t).total_seconds() <= 6 * 3600:
             pk = sorted(commits[i][1])
+            if tt is not None and not review:
+                j = bisect.bisect_left(tt, t)
+                if j >= len(tt) or tt[j] > commits[i][0]:
+                    pk = []    # this session did no tracing between this response and that commit
         for p in pk or ['(coordination)']:
             by_pkg[p]['cost'] += cost / max(1, len(pk))
             if review:
