@@ -2,6 +2,14 @@
 
 ## Status
 
+2026-11-18 16:54 -0600. **Paused; claim released. Run 3's piece is on branch `lc2` only, not on main.** It is reviewed
+(round 2, clean) and passes every check of `tools/mergecheck.py lc2` except 8b: the cost report shows nine
+Sonnet 5.5 responses against `lc2`, which are another session's (transcript of the worktree `hd6845-trace-2`,
+2026-11-18 16:40-16:49 -0600), assigned here by `tools/costs.py`'s time rule. To resume: take the claim, `tools/newwork.sh lc2`
+(it reuses this branch), settle 8b with the coordinator, then merge and hand off; the next piece (the inverter
+below latch C and the thin metal it drives) is surveyed in `cache/scratch/lc2/survey.md` on Matt Godbolt's machine
+and summarised under Not done.
+
 2026-11-18 16:28 -0600 (run 3, Matt Godbolt, on Fable 5.2). **Partial: the lower unit of latch D and the bus field
 east of the latches drawn** (piece D: 6 transistors in one copy of `tl1_ua`, and wiring). Latch D is the latch
 whose upper unit `lc1` drew: its output's inverse is `lc_step`, the step pulse of the scan line counter. With
@@ -194,6 +202,15 @@ Run 3 (latch D's lower unit and the bus field):
 
 Run 3 (2026-11-18 16:28 -0600):
 
+- **Next piece, surveyed only (run 3)**: the inverter below latch C is a copy of `tl5_inv`
+  (`@inst tl5_inv 933,4239 mx=5082 rot=180 o=5082,4848`, findcell 0.86, fits on a 3.1x overlay; needs
+  `@requires tl5`). Its gate row y 9072-9093 ends on a pad (6213,9082) of a metal x 6205-6223 that starts at
+  y 8946, where latch C's Na metal (x 6250-6262 from the pad (6257,8822)) turns west: one bright L in both chips,
+  so the input is `lc2_w8822`. Its output box (6094-6138, 9105-9141) has a poly east to a pad (6169,9124), the end
+  of the thin metal: south on x 6162-6176, west along y 9212, north on x 5966-5981 through latches C and D into
+  `lc1`. To draw by hand: the VCC box (5836-5895, 9062-9147) with its long ring (5858, 9066-9132), the VSS rail to
+  its end at about y 9178, the two pads, and the thin metal, uncertain over its dark stretches (y 8097-8136,
+  8727-8759, 8833-8872 in both chips).
 - **`lc2_w8474`'s poly west of (5835,8643)**: it runs on west along y 8634-8652 past x 5560 (not followed), and its
   metal x 6332-6350 north of y 8067 (`lc1` has no port there).
 - North of y 8067 (in `lc1`'s strip, not drawn by it): latch C's enable metal x 6159-6177, the node's row
