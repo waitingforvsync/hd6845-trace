@@ -248,6 +248,36 @@ at (4918-4940, 3878-3887) under RB with no ring in either metal shot.
 
 Round 2: no findings that change a connection.
 
+### Review of the three-input NOR (third run)
+
+Round 3, full review of one piece (the unit at y 4410-4645), 2026-11-17 18:22 -0600, at commit
+5775898, a fresh Fable agent, images in `cache/scratch/tl4/review-3/` (14). Told to suspect: the
+ring being one diffusion (top strip, leg, band under RA); the inner area being field and the VSS
+box touching the column only through the neck; the rows' east ends; the foot's join to the lower
+VSS box; the node's buried contact; the continuity of rows 1 and 2 and the pad (4364,4590); the
+load and its tie. It measured with `px.py` columns x 4712, 4744, 4780 and rows y 4453, 4495,
+4552, 4572, 4584, `textmap.py` on the pads and along row 2, and views at 4.2-6.5x.
+No finding changes a connection. Geometry only, all confirmed on `oa1.png`/`u4.png` and fixed:
+1. The three rows end at x 4726-4733 (RA's edge), not x 4722: drawn to x 4728.
+2. The foot's rectangle covered field at x 4712-4728, y 4630-4645: split into the foot
+   (y 4605-4628) and the box.
+It also reports the south end of the metal x 4626: a pad with a contact at about (4625,4892)
+(ring with a bright centre, green hole in the clean shot). Not drawn: it belongs to the next
+unit (Not done). And an undrawn pad with a contact at about (4278,4571) in the bus field, on
+none of the three rows (Not done).
+Found correct: the ring is one diffusion (the column's east edge line is open at exactly four
+places: y 4426-4435, 4480-4486, 4540-4555, 4609-4621; the band under RA reads 199/176/135
+against the VSS box's 200/175/140 and field's 175-200/120-135/120-130); the inner area is
+field; the rows do not run on under RA; the foot joins the lower box; both VSS contacts, the
+buried contact and the two pads' contacts; row 1 continuous from `tla`'s end, row 2 without a
+pad from x 4252 to x 4600; the load's strip reaches the VCC box; the tie kept `?`.
+Could not be checked: the stripped shot under RA (fringes); whether the tie box's poly overlaps
+the diffusion; row 2 west of x 4250; the track x 4362 beyond the stub.
+`tools/t.sh tl4 sameconn.py 5775898`: `connections identical`.
+`.venv/bin/python tools/sameconn.py 5775898`: `connections identical`.
+
+Round 3: no findings that change a connection.
+
 ## Not done
 
 - The nine tracks beyond the views (table under Ports), and their other pads.
@@ -258,6 +288,8 @@ Round 2: no findings that change a connection.
   `b_acid1b.png`; `cache/scratch/tl4/survey.md`): the column x 4677-4716 goes on south from a
   buried-contact box (4662-4700, 4660-4690) with rows crossing at y 4705-4725, 4750-4770,
   4795-4815, 4880-4900; the metal x 4626 from the three-input NOR ends among them.
+- The south end of the metal x 4626 (`tl4_w4545`): a pad with a contact at about (4625,4892), seen by
+  the reviewer, and the row it feeds. A pad with a contact at about (4278,4571) in the bus field.
 - The west end of `tl4_w4501`'s row (in `tl3`'s strip) and the other pads of the track x 4362.
 - A VCC box under RB at (4905-4960, 3893-3955) with a contact about (4928,3922) and a strip
   east under a plate at about x 4962-5015, y 3890-3925: a load of the logic east of RB (`tl5`).

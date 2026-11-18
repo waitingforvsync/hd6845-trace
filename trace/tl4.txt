@@ -163,19 +163,20 @@ D 4677,4537:4836,4558                 # the band under RA
 D 4735,4470:4790,4518                 # VSS box
 D 4712,4474:4740,4488                 # its neck onto the column
 C 4757,4495
-D 4712,4603:4777,4645                 # the foot and the lower VSS box
+D 4712,4605:4732,4628                 # the foot, east onto ...
+D 4728,4605:4777,4645                 # ... the lower VSS box
 C 4745,4627
 # gate 1: tla's row y 4452-4470 from its pad (4410,4460) (tla drew it to x 4520), on east
-P 4515,4452:4722,4470
+P 4515,4452:4728,4470
 # gate 2: a row from the west, across the whole bus field without a pad (r1.png)
-P 4250,4492:4722,4512
+P 4250,4492:4728,4512
 N P 4400,4502 tl4_w4501
 # gate 3: a row from a pad with a contact (4364,4590) on the track x 4362 (follow.py: one
 # metal from y 2810 to y 5682; only this stub of it is drawn so far)
 P 4347,4575:4385,4605
 C 4364,4590
 M 4364,4565 y4615 w=12
-P 4380,4578:4722,4598
+P 4380,4578:4728,4598
 N P 4500,4588 tl4_w4590
 # the node's buried contact west of the column's middle (concentric rings in the clean shot),
 # the poly west to a pad with a contact (4620,4545), and the metal x 4626 south from the pad
