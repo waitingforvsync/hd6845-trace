@@ -545,6 +545,27 @@ shot; the loads' VCC end beyond x 3877; whether the long row gates anything.
 
 Round 1: one finding that changes a connection, fixed.
 
+**Round 2, fix check** (2026-11-18 07:59 -0600, a fresh Fable 5.2 agent, images in
+`cache/scratch/tl3/review-6/`; changes since fe3aa04). Told what changed and to test: the
+arm's join to the pad (4147,5005) and its continuity to (4104,5633); a contact anywhere on the
+way (the node box at y 5050-5083, the boxed poly end at y 5188-5216, each row crossed); its
+separation from the metal x 4142-4155; the south contact and where its poly leaves; anything
+disturbed. It found the arm right (9 px of dark at the join against 15 px of ring where track
+A arrives; the same streak between every dark bar in both metal shots), no contact on the way
+(clean shot green only at the south pad; the two boxes read alike, tan centres 177/165/126 and
+185/164/139 with metal centre R ~118, against 162/178/105 and R 208 at the real contact), bare
+ground between the two metals on every row sampled, the contact (4104,5633) real with its poly
+leaving east only, no metal south of y ~5650, and the bottom arm right (y 4303-4317).
+
+Two notes, geometry only: the VSS box below the unit clipped gate 2 by 2x1 px (two sliver
+warnings): fixed, box top at y 4301. The arm peaks at x ~4111 for y 5010-5130, drawn
+4100-4112: not changed (same ends).
+
+`tools/t.sh tl3 sameconn.py 945a512`: `connections identical`.
+`.venv/bin/python tools/sameconn.py 945a512`: `connections identical`.
+
+Round 2: no findings that change a connection.
+
 ## Not done
 
 - Next, in this order: the east column's other units (y 3440-3830, 4350-4990, 5160-5300); the top unit E1 (read,

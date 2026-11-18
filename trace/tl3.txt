@@ -318,7 +318,7 @@ D 4008,4141:4056,4190                 # rail's VSS box above
 C 4027,4162 s=24x30
 D 4047,4166:4105,4186                 # top arm
 D 4072,4166:4105,4316                 # the column east of the rail
-D 4008,4299:4056,4361                 # rail's VSS box below
+D 4008,4301:4056,4361                 # rail's VSS box below
 C 4027,4327 s=24x40
 D 4042,4302:4105,4316                 # bottom arm (y 4303-4316: review)
 P 4054,4191:4112,4209                 # gate 1
