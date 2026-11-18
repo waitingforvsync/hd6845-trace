@@ -1,0 +1,11 @@
+# lc2: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+# The package's region is x 4400-6450, y 8067-9233. Only latch B (x 5590-5895, y 8055-8560) is drawn.
+
+lc2_w8169   M  5549-5571,8067  in   latch B's enable: the metal x 5560 from its two pads (5558,8169), (5558,8386) runs on north into lc1 (believed to (5558,7646); not drawn north of y 8067)
+lc2_w8254   M  5461-5487,8238-8272  in   latch B's clear: drawn only over the pad (5472,8254); the metal x 5460-5490 runs on (not followed)
+lc2_w8341   M  5503-5525,8326-8357  out  latch B's output Na: drawn only over the pad (5514,8341); the metal runs on (not followed)
+lc2_w8450   M  5547-5569,8480  in   latch B's data: the metal from the pad (5558,8450) runs on south (not followed)
+vss         M  5659-5705,8060  -    rail over latch B, runs on north into lc1 (the copy's VSS box reaches y 8062)
+vss         M  5659-5705,8560  -    rail runs on south (not drawn further)
+vcc         M  5840-5890,8067  -    rail runs on north
+vcc         M  5840-5890,8560  -    rail runs on south (not drawn further)

@@ -1,0 +1,59 @@
+# Left-centre random logic, middle strip (x 4400-6450, y 8067-9233). Notes: notes/blocks/lc2.md.
+@block lc2
+@requires tl1
+@w M=20 P=18
+@s 28x28
+
+# ====================================================================
+# Latch B (x 5590-5880, y 8090-8560): tl1's pair of units upside down
+@inst tl1_ub 3059,3523 mx=2662.5 rot=180 o=2662.5,4685
+@inst tl1_ua 3059,3963 mx=2662.5 rot=180 o=2662.5,4465
+# the copy's own VSS box above the stack of tl1_ub (contact ring in the rail, speck in the clean shot)
+D 5659,8062:5714,8115
+C 5680,8088
+# thin metal x 5801 between the plate of tl1_ua's gate and the third pull-down's gate of tl1_ub
+M 5801,8179 y8409 w=12
+P 5784,8381:5821,8411
+C 5802,8393
+P 5784,8167:5821,8205
+C 5802,8188
+# rails (by structure: the pull-downs' boxes on the west one, the loads' on the east one)
+M 5682,8060 y8560 w=46
+N M 5682,8300 vss
+M 5865,8067 y8560 w=50
+N M 5865,8300 vcc
+# VCC: one long contact ring x 5845-5870, y 8255-8350 (the two units' shared box)
+C 5857,8302 s=24x95
+# ---- rows west of the cells (x 5599) to their pads; px.py col 5585 (chip-2 stripped):
+# poly y 8162-8178, 8248-8264, 8336-8352, 8380-8394, 8424-8438; field y 8186-8238 (no row from the box)
+# enable: two pads on the metal x 5560, which runs north into lc1 and ends on the lower pad
+P 5570,8165:5600,8185
+P 5548,8154:5578,8184
+C 5558,8169
+P 5570,8383:5600,8401
+P 5548,8372:5578,8400
+C 5558,8386
+M 5560,8067 y8398 w=22
+N M 5560,8280 lc2_w8169
+# clear: row y 8247-8265 west to the pad (5472,8254) on a metal x 5460-5490 (not followed)
+P 5490,8247:5600,8266
+P 5458,8240:5496,8270
+C 5472,8254
+M 5474,8238 y8272 w=26
+N P 5540,8256 lc2_w8254
+# output Na: the box poly row y 8334-8354 west to the pad (5514,8341) on a metal x 5503-5525 (not followed)
+P 5525,8334:5600,8354
+P 5502,8327:5530,8356
+C 5514,8341
+M 5514,8326 y8357 w=22
+N P 5560,8344 lc2_w8341
+# data: row y 8423-8441 west to the L-shaped pad (5558,8450) on a metal that goes south (not followed)
+P 5570,8423:5600,8441
+P 5548,8422:5578,8468
+C 5558,8450
+M 5558,8436 y8480 w=22
+N P 5585,8432 lc2_w8450
+# the box poly on Nb: a stub with a closed round end at x ~5592 (no row west); the cell's poly covers it
+N P 5615,8215 lc2_w8215
+# the inverter output (NOT data): the cell's thin metal x 5624 to the third pull-down of the upper unit
+N M 5624,8300 lc2_w8532
