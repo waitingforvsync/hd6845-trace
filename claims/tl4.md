@@ -10,4 +10,4 @@ merged, or by `tools/claim.py release` if it is abandoned.
 | Region | 4250-4967 x 2500-6350 |
 | What | top-left random logic, part 4 of 6: the vertical control's right cluster (from x 4650; rich asked for end-of-frame logic first) and what no block has drawn in the strip, joined to tla's, tl3's and r9m's nets; first session of mattgodbolt (tl3 is the second's) |
 | Branch | tl4 |
-| Status | tracing (part merged 33f2eff at 2026-11-17 17:23 -0600) |
+| Status | tracing (part merged 9fa9551 at 2026-11-17 17:44 -0600) |
