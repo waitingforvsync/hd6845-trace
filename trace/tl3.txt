@@ -9,7 +9,7 @@
 # from y 3050). The WEST rail x 3645-3695 is the same metal as the east VSS rail: both run up
 # to one wide metal along y 2595-2648 (top_m.png, 2.2x metal; follow.py 3667 3400 N: corners
 # (3680,2638) E, (4028,2638) S). So the west rail is VSS, the mirror of tla's R1.
-M 3670,2622 y4850 w=50                # west rail; drawn to y 4850 (sv_top.png, sv_bot.png, n34_ov.png); it goes on south
+M 3670,2622 y5330 w=50                # west rail; drawn to y 5330 (sv_top.png, sv_bot.png, n34_ov.png, lb_row.png); it goes on south
 M 3670,2622 x4020 w=52                # the link along the top
 M 4020,2622 y3060 w=50                # the east VSS rail north of tla's piece
 N M 3670,3400 vss
@@ -254,3 +254,56 @@ N P 3560,4503 tl3_w4503
 P 3533,4536:3590,4556                 # output, west out of the strip
 N P 3560,4546 tl3_w4546
 P 3550,4579:3590,4599                 # gate 2: from the pad (3540,4590) of the metal x 3540
+
+# ====================================================================
+# West column, y 4818-5258: latch B, tl1_ua / tl1_ub again.
+# findcell (clean shot): 1042,478 (0.80, 0.82); cellcheck 6 of 61 and 5 of 52 blocks bad
+# (median 0.94). Overlays lb_ov1.png, lb_ov2.png (3.4x, clean shot). Its data is NOR 4's output.
+#   tl3_w4839 = NOT tl3_w4720
+#   tl3_w5025 = NOT( tl3_w4720 AND tl3_w4978  OR  tl3_w5156 )
+#   tl3_w5156 = NOT( tl3_w5112  OR  tl3_w4978 AND tl3_w4839  OR  tl3_w5025 )
+@inst tl1_ua 1042,478 tag=b
+@inst tl1_ub 1042,478 tag=b
+# the VSS box under the rail below the stack (railprof 3645 3690 4800 5400: diffusion from y 5255;
+# contact ring in the metal shot, lb_row.png)
+D 3642,5257:3699,5305
+C 3662,5284
+# the VCC box here is the cell's own (clean shot tan y 5008-5126 down x 3847: px.py col 3847 4950
+# 5200 6); its contact to the VCC rail (ring from y ~5000 in the metal shot, lb_m1.png, lb_m2.png)
+C 3847,5030 s=24x36
+# the thin metal x 3784 (follow.py 3783 5080: (3783,4972)-(3783,5182)), as in latch A
+M 3784,4962 y5192 w=12
+P 3767,4960:3804,4990
+C 3784,4974
+P 3767,5166:3804,5204
+C 3784,5181
+N M 3784,5076 tl3_w4974
+@alias tl3_w5025 tl3_w4974
+N M 3606,5056 tl3_w4839
+N P 3593,5156 tl3_w5156
+# ---- the rows from the west
+# data: the poly of the pad (3540,4912) (NOR 4's output, tl3_w4720) goes east along y 4930-4948
+P 3550,4930:3586,4948
+# enable: the metal x 3534-3549 (follow.py 3540 5080: (3542,4978)-(3542,5332)) has three contacts
+# on pads: (3541,4980) on the row y 4970-4988 (ua's gate 2), (3541,5199) on the row y 5186-5206
+# (ub's gate 1) and (3541,5328), whose poly runs east along y 5318-5342 under the rail and on
+# across the cluster's foot (ring, bright centre and green hole each: textmap 3520 4964 3562
+# 4992 2, 3520 5182 3562 5210 2, 3516 5310 3566 5350 2). That row is drawn to x 3640 only: it
+# goes on east over diffusions that are not read (lb_row.png).
+P 3545,4970:3586,4988
+P 3522,4964:3559,4994
+C 3541,4980
+P 3545,5186:3586,5206
+P 3522,5183:3559,5213
+C 3541,5199
+M 3541,4972 y5336 w=14
+P 3522,5313:3559,5343
+C 3541,5328
+P 3550,5318:3640,5342
+N M 3541,5080 tl3_w4978
+# ua's node (the inverted output): row y 5015-5035 west out of the strip (under the metal x 3540, no hole: textmap 3522 5008 3560 5042 3)
+P 3533,5015:3581,5035
+N P 3555,5025 tl3_w5025
+# clear: row y 5103-5121 from the west (under the metal x 3540, no hole: textmap 3522 5096 3560 5128 3)
+P 3533,5103:3586,5121
+N P 3560,5112 tl3_w5112

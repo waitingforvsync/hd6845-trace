@@ -23,5 +23,7 @@ tl3_w4373   P  3533,4363-4383  out  the inverter's output
 tl3_w4414   P  3533,4405-4423  in   the inverter's input
 tl3_w4503   P  3533,4493-4513  in   NOR 3 gate 1
 tl3_w4546   P  3533,4536-4556  out  NOR 3 output
-tl3_w4720   P  3540,4912       out  NOR 4's output: pad at the south end of its metal; the poly goes on east along y 4930-4948, not drawn
-vss         M  3645-3695,4850  -    the west rail, drawn to y 4850; it goes on south
+tl3_w5025   P  3533,5015-5035  out  latch B's inverted output
+tl3_w5112   P  3533,5103-5121  in   clear of latch B
+tl3_w4978   P  3640,5318-5342  ?    enable of latch B: pad (3540,5328) at the south end of its metal; the row goes on east under the rail, not drawn
+vss         M  3645-3695,5330  -    the west rail, drawn to y 5330; it goes on south
