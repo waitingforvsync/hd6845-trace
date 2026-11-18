@@ -25,21 +25,25 @@ P 5545,9458:5733,9482
 # (square outline in acid1b, x 5610-5640, y 9418-9446)
 P 5540,9418:5640,9440
 B 5606,9414:5645,9448
-# metal contact on that box as well? metal shot: the box is a dark square, the track
-# x 5617-5633 visible only between the boxes (px.py col 5626). Not settled.
-?C 5625,9432 s=20x20 butt=1
-?M 5614,9421:5636,9443
+# no metal contact on that box (review round 1): the metal x 5615-5638 runs over it unbroken
+# in both metal shots, the box only edged dark; acid1b pale inside, no contact spot.
 # depletion load: poly over the band x 5785-5835 (dense implant in acid x 5770-5835)
 P 5785,9418:5835,9460
-# its gate tie: a poly/box x 5770-5800, y 9470-9505 reaching the band near x 5785; tie to the
-# output (west) side not settled
-?P 5770,9455:5800,9505
-?B 5770,9432:5786,9448
+# its gate tie (review round 1): the load poly runs south x 5780-5812 onto a buried contact
+# box x 5780-5812, y 9468-9500 (square outline in metal and metal1, contact spots in acid1b),
+# met by a pale diffusion strip x 5744-5776 from the band south to y 9500 and east under the box
+P 5780,9455:5812,9500
+B 5780,9468:5812,9500
+D 5744,9445:5812,9502
 @end
 @inst lc3_inv 0,0
 @inst lc3_inv 0,0 my=9384.5
-# the metal track x 5617-5633 between the two boxes (bright only y 9356-9404 in metal) is not
-# drawn: with both ?C contacts it would short the two outputs; where it goes is not followed.
+# two metal tracks pass over the pair with no contact in it (review round 1): x 5615-5638 over
+# the output boxes, x 5746-5766 over the load tie strips; where they go is not followed.
+M 5626,9255 y9520 w=24
+N M 5626,9384 lc3_m5626
+M 5756,9255 y9520 w=20
+N M 5756,9384 lc3_m5756
 # inputs: pads on the track x 5560 (lower from the south, upper from the north)
 C 5560,9470
 M 5560,9458 y9520

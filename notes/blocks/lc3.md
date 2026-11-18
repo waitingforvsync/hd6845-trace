@@ -47,10 +47,23 @@ x 5612-5640.
 
 Drawn as one cell `lc3_inv` (the lower gate) and its mirror about y 9384.5. Extraction
 (4 transistors): `lc3_w9432 = NOT lc3_w9470`, `lc3_w9337 = NOT lc3_w9299`;
-`unsure.py --equations`: both DEPEND on `?` items (the loads' gate ties). `?` items: the
-metal contact on each box (5625,9432)/(5625,9335) with a small metal pad over it (the track
-x 5617-5633 between them is not drawn, since with both contacts it would short the outputs);
-the load gate's tie poly x 5770-5800, y 9455-9505 and buried contact x 5770-5786 on the band.
+`unsure.py --equations`: both FIRM after review round 1 (0 `?` items).
+
+Review round 1 fixes (checked by the tracer at 5x, metal | metal1 | acid1b | acid, `fix1.png`
+5590-5670 x 9240-9580, `fix2.png` 5720-5840 x 9240-9520):
+- Boxes (5625,9432)/(5625,9335): **no metal contact**. The metal x 5615-5638 runs unbroken
+  over the whole piece in both metal shots, the boxes only dark-edged; acid1b pale inside,
+  no contact spot. The `?C`/`?M` pads are deleted; the track is drawn as its own net
+  `lc3_m5626` (`M 5626,9255 y9520 w=24`, ports at both ends), touching no contact. The
+  boxes stay buried contacts (poly row onto the output band); outputs are separate nets.
+- Load gate tie: the load poly runs south `P 5780,9455:5812,9500` onto a buried contact
+  `B 5780,9468:5812,9500` (square outline in metal and metal1, contact spots in acid1b),
+  met by a pale diffusion strip from the band, `D 5744,9445:5812,9502` (x 5744-5776 south
+  to y 9500, then east under the box). Seen in both copies (upper at y 9268-9300). The old
+  `?P 5770,9455:5800,9505` and `?B 5770,9432:5786,9448` are deleted.
+- A second metal x 5746-5766 runs the full height with no contact seen where the tie strip
+  passes under it (y 9445-9502, both metal shots continuous): drawn as its own net
+  `lc3_m5756` (`M 5756,9255 y9520 w=20`, ports at both ends).
 Coordinates of the drawn pull-downs, load poly (x 5785-5835) and rows come from the survey and
 one 1.6x overlay (`ov.png`); the channel widths were not profiled and wire ends not viewed
 50 px beyond: to check in review.
@@ -99,9 +112,9 @@ before every connection could be read in two shots and the gates profiled.
 ## Not done
 
 Everything. Suggested order:
-1. Gate pair 5540-5900 x 9260-9520: resolve the two boxes above at 6x, the load's gate tie
-   (box about 5770-5810 x 9470-9505) and the channel width (profile poly y 9470 over
-   x 5640-5740); then follow the west row y 9428 to its end (a pad was seen near (5250,9440)
+1. Gate pair 5540-5900 x 9260-9520: boxes and load gate tie resolved (review round 1);
+   still the channel width (profile poly y 9470 over x 5640-5740), the tracks `lc3_m5626`
+   and `lc3_m5756` beyond the piece; then follow the west row y 9428 to its end (a pad was seen near (5250,9440)
    at 1.22x) and the tracks x 5560 and x 5517.
 2. Crossing field 5480-6450 x 9540-10050: which crossings are contacts.
 3. Logic columns A and B (4680-5240), rails first; try `findcell.py` with `tl1`/`tl5` cells
