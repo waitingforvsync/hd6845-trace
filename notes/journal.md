@@ -1584,3 +1584,21 @@ open join (`ck_a_u`). Claims now: `tl3` (Tom, run 11), `lc2` (Matt, continuing d
   responses are all coordination still fails 8b ("models seen: none"). Reported to the user, not
   changed. `lc2`'s claim was released, paused; run 3's piece is on its branch.
 
+
+## 2026-11-19 00:06  Refresh
+
+- **Renamed** (`names.py compare`: only names changed): `tl4_w3808` -> `rcs_e3`, `tl5_w5717` ->
+  `rcs_mv`, `tl5_w5890` -> `rcs_x1` (`tl4`'s firm joins, runs 7-9). Three tautologies that the rename
+  left in the prose ("`rcs_mv` = `rcs_mv`") were reworded by hand.
+- **Left on purpose.** `tl3`'s firm renames wait for Tom's active claim to end, because they would
+  rewrite `trace/tl3.txt` under his branch: `tl3_e4808` -> `rcs_x1`, `tl3_e5240` -> `tl3_w5025`,
+  `tl3_e4372` -> `tl3_w4546`, `tl3_e4152`/`tl4_w4501` -> `tcw_a`, `tl3_e4915` -> `rcs_mv`,
+  `tl3_e4635_u` -> `tl3_e4635`. The joins through `?M` stay as aliases (AMB-032, AMB-033), and so does
+  `rcs_cond_lat` (AMB-031). Placeholder-to-placeholder aliases such as `tl4_w3070` -> `tl3_e4243` are
+  not renamed. All of this is listed in the master list's `rename` row.
+- **`operation.md`.** The tracers had kept their rows current (AMB-009's resolution, `rcs_in1` = NOT
+  `rcs_mv`, the foot's joins, `tl1_w3594` = `tcw_a`, the top of `tl4`'s strip, `lc_step`). I updated
+  the header (2,363 nets, 4,224 transistors), the firm count (832 of 1,246 equations) and the ranges
+  (AMB-001 to AMB-035, R1-R42).
+- **`out/` rebuilt**: 0 errors, 0 warnings, 0 names outside the glossary; one open join (`ck_a_u`).
+  Coverage: 62.6% traced, 99.7% in a package, 0.0% in neither.
