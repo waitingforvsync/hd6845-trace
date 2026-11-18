@@ -884,5 +884,27 @@ input structure is firm; q_n to q rests on the `?P` at x 8138-8152, and q to q_n
 channel's east end) on the `?P` at (8133-8154, 6183-6202). `tools/unsure.py` printing
 `tc2_sr_q` as FIRM is a label artefact (the name's label is on the pad side of the join).
 
-Round 2: no findings.
+Round 2 of the second round of work: clean (no findings).
+
+### Third round of work (pieces 7-10: `tc2_sr_r` = `cdp1_lw1`, the loads of `rax`'s units, `ral_stb`, `tc2_r5718`)
+
+Round 1 (full review of what was added since ad84a3b, 2026-11-18 00:51 +0000, a fresh agent on
+claude-fable-5-2). Told to suspect every step of the join `tc2_sr_r` = `cdp1_lw1` (the thin
+metal as one piece where chip 2 is dark at unit 3, contacts at the end caps and boxes, the
+row y 5066, the corner and the pad, and whether the pad is on `cdp1_lw1` or on `db_b6`
+43 px away), the load cell and its five copies, the VCC rail, the stretches read below 4x,
+the two polys under one wide metal, and widths, ends and undrawn features. Checked: the
+thin metal at 5x in three shots (chip 1 reads the same at unit 3 as at units 2 and 4: not a
+break); the caps and boxes by colour against the two real contacts, and in units 0 and 1
+where no metal covers them; both pads and the row in four shots; the pad on `cdp1_lw1`'s
+own row at 4.7x (the y 5024 row stays separate); all five load copies by overlay at
+3.4-3.6x; the rail in both chips; `ral_stb`'s metal with the follower and its contact at
+5x; the rows y 5673 and y 5718 at 4.9x with profiles; the two polys at 4.3x (separate, not
+swapped); the metal y 6328 unbroken to x 6400.
+No finding. One geometry nit, not changed: the metal along y 6328 is drawn 23 wide and
+measures 12-17 px (it touches nothing). Could not be checked: the load tie's tab to the
+band in units 2-4 (under metal; in units 0 and 1 the box sits flush under the band:
+consistent, not proven; it decides the load's gate, not the equation `rax_o# = NOT ras_o#`).
+
+Round 1: no findings.
 
