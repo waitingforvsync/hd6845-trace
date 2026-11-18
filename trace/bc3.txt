@@ -9,11 +9,17 @@
 # (box 7475-7520 x 17575-17665, contact (7490,17620): dot in the clean shot, ring in metal).
 D 7475,17575:7520,17665
 C 7490,17620
-M 7491,17560 y17700 w=56                 # rail piece, believed VCC (not followed)
-N M 7491,17690 bc3_w7491
+M 7491,17560 y17700 w=56                 # rail piece
+N M 7491,17690 vcc
+# The rail x 7470-7520 is bc1's RL2 (VCC, drawn to y 16300) carried on: continuous metal in both
+# metal shots, y 16270-17580 (r1.png, r2.png, r3.png, 2.1-2.4x; contacts only inside it).
+M 7495,16290 y17560 w=50
 # The pull-down's box contacts the rail x 7641-7691 (contact (7676,17681), cell item).
-M 7666,17560 y17705 w=50                 # rail piece, believed VSS (not followed)
-N M 7666,17570 bc3_w7666
+M 7666,17560 y17705 w=50                 # rail piece
+N M 7666,17570 vss
+# The rail x 7641-7691 is bc1's RL3 (VSS, drawn to y 16300) carried on: continuous metal in both
+# metal shots, y 16270-17580 (same views).
+M 7666,16290 y17560 w=50
 # Ends: output poly and gate row both leave east at x 7775 (not followed further).
 N P 7760,17605 bc3_w17605
 N P 7760,17646 bc3_w17646

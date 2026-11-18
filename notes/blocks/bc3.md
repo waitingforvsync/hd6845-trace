@@ -6,8 +6,10 @@ Trace: `trace/bc3.txt`. Scratch: `cache/scratch/bc3/`. Coordinates are metal-sho
 
 2026-11-18 05:33 (UTC+1). Traced on claude-opus (the Fable allowance was used up); a
 survey and one small piece. Drawn: one inverter at x 7475-7775, y 17575-17705, a copy
-of `tl5_inv` (`bc3_w17605` = NOT `bc3_w17646`) with its two rail boxes; neither rail
-nor either row is followed beyond the piece. Extraction with the piece: 0 errors,
+of `tl5_inv` (`bc3_w17605` = NOT `bc3_w17646`) with its two rail boxes, and the
+two rails: `bc1`'s RL2 (VCC, x 7470-7520) and RL3 (VSS, x 7641-7691) carried on from
+y 16300 to the inverter (continuous metal in both metal shots). Neither row is followed
+beyond the piece. Extraction with the piece: 0 errors,
 0 warnings. Not reviewed yet.
 
 ## Inventory
@@ -18,8 +20,9 @@ every block's geometry). Read at 0.57x only: the coordinates below are within ab
 - **Vertical metal rails** (wide, bright): x ~7300-7330 (y 16300-17700), x 7463-7520
   (whole height; the inverter's VCC box is under it at y 17575-17665), x 7641-7691
   (whole height; the inverter's VSS box at y 17660-17705), x ~8350-8390 and x ~8520-8560
-  (whole height). Which is VCC and which VSS is not followed to a pad; believed from the
-  boxes only.
+  (whole height). x 7470-7520 is `bc1`'s RL2 (VCC) and x 7641-7691 its RL3 (VSS), both
+  drawn here from y 16290 to the inverter (`r1.png`, `r2.png`, `r3.png`, 2.1-2.4x, metal and
+  chip-1 metal: bright metal throughout, contacts only inside it). The others not followed.
 - **Left gate group**, x 7050-7850, y 16350-17700: a column of gate units on both sides
   of the rails x 7463 and x 7641 (diffusion and load plates seen in the clean shot at
   x 7270-7700), with buried contacts and metal crossovers; the traced inverter is the
@@ -47,9 +50,9 @@ every block's geometry). Read at 0.57x only: the coordinates below are within ab
 ## Logic
 
 Inverter i1 (x 7475-7775, y 17575-17705), `@inst tl5_inv 2562,12797 tag=i1`:
-`bc3_w17605` = NOT `bc3_w17646`. Load from the box under the rail x 7463-7520
+`bc3_w17605` = NOT `bc3_w17646`. Load from the box under the VCC rail x 7470-7520
 (contact (7490,17620): dot in the clean shot, ring in metal; `w5.png`, 5x three shots);
-pull-down to the box under the rail x 7641-7691 (contact (7676,17681); `e5.png`, 5x three
+pull-down to the box under the VSS rail x 7641-7691 (contact (7676,17681); `e5.png`, 5x three
 shots). Overlay `i1.png` (3x, metal and clean). The cell's tab tie (buried contact
 7551-7599 x 17649-17685) stays `?` as in the master. The output poly leaves east past a
 ringed metal pad at about (7795,17600), the gate row east at y 17646 to a pad at about
@@ -61,14 +64,15 @@ ringed metal pad at about (7795,17600), the gate row east at y 17646 to a pad at
 |---|---|---|---|
 | `bc3_w17605` | P 7775, y 17595-17615 | out | inverter output, east |
 | `bc3_w17646` | P 7775, y 17637-17655 | in | inverter input, east |
-| `bc3_w7491` | M rail x 7463-7520, y 17560-17700 | - | believed VCC |
-| `bc3_w7666` | M rail x 7641-7691, y 17560-17705 | - | believed VSS |
+| vcc | M rail x 7470-7520, from y 16290 (bc1's RL2) to 17700 | - | the rail's south end not followed |
+| vss | M rail x 7641-7691, from y 16290 (bc1's RL3) to 17705 | - | the rail's south end not followed |
 
 ## Not done
 
 - Everything else in the region: the left and right gate groups, the centre tracks, the
   routing field.
-- Follow the two rails to a named supply and rename `bc3_w7491` / `bc3_w7666` to vcc / vss.
+- The rails' contacts between y 16300 and 17560 (the gate units' boxes), and the rails
+  south of y 17705.
 - Follow the inverter's output and input east of x 7775.
 - Overlay the other findcell hits at 3x before placing any.
 

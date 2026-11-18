@@ -3,3 +3,5 @@
 7050,16350:7850,17575  ?logic  left gate group | gate units on both sides of the rails x 7463 and x 7641; not traced
 8150,16350:8950,17650  ?logic  right gate group | gate units on both sides of the rails x ~8350 and ~8540; not traced
 7000,17710:9000,18550  ?route  routing field | horizontal rows at pitch ~45, contact columns at x ~7400, 7550, 8380, 8600; not traced
+7470,16290:7520,17700  route  VCC rail RL2 | bc1's rail carried on south
+7641,16290:7691,17705  route  VSS rail RL3 | bc1's rail carried on south
