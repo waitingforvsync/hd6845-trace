@@ -881,12 +881,12 @@ N P 3740,5458 tl1_w4937
 @alias tl3_e3550 tl3_tm3955
 @alias tl3_e3550 tl1_w4937
 # ---- row y 5450-5465 east: a pad with a contact (4040,5458) (textmap 4022 5440 4053 5600 3);
-# its poly runs east to x 4250 = tl4's tl4_w5455 (P 4250,5447:4967,5467); its metal x 4031-4043
+# its poly runs east to x 4250 = tl4's tl4_w5455 (P 4250,5447:4967,5467); its metal x 4036-4048
 # goes south (drawn to y 5660; follow.py 4037 5520 S: on into the wide metal at y ~6100)
 P 4022,5442:4060,5474
 C 4040,5458 s=20x20
 P 4052,5450:4250,5465
-M 4037,5448 y5660 w=13
+M 4042,5448 y5660 w=13                # x 4036-4048 (px.py row 5565 4024 4054 3 metal,metal1; first drawn 5 px west: review 12)
 N P 4150,5458 tl4_w5455
 # ---- row y 5493-5508: from tl2's pad (3518,5498) (tl3_w4546, NOR 3's output) straight across to
 # x 4250, where tl4 draws it on to its pad (4321,5504) as tl3_e4372: gate 1 of rcs_mv's NOR is

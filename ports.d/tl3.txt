@@ -44,7 +44,7 @@ tl3_w5025   P  3533,5408-5421  out  latch B's inverted output again: the row fro
 tl3_w5025   P  4250,5408-5421  out  the same row, on east to tl4's pad (4279,5413) (tl4: tl3_e5240, the gate of the inverter at y 5180-5300)
 tl3_e3550   P  3533,5450-5465  out  the row of the pad (3953,5458) at the south end of the thin metal x 3948-3962 (tl2's tl1_w4937, an alias); on west to tl1's NOR of rcs_e4; driven here if the thin metal is one metal (six ?M)
 tl4_w5455   P  4250,5450-5465  in   the row of the pad (4040,5458), from tl4's strong inverter
-tl4_w5455   M  4031-4043,5660  ?    the metal from that pad: drawn end, it goes on south (follow.py: into the wide metal at y ~6100)
+tl4_w5455   M  4036-4048,5660  ?    the metal from that pad: drawn end, it goes on south (follow.py: into the wide metal at y ~6100)
 tl3_w4546   P  3530,5494-5508  out  NOR 3's output again: the row from tl2's pad (3518,5498), across the foot
 tl3_w4546   P  4250,5494-5508  out  the same row, on east to tl4's pad (4321,5504) (tl4: tl3_e4372, gate 1 of rcs_mv's NOR)
 tcw_a       P  4250,5621-5641  in   the row of track A's south pad (4104,5633), on east: tl4's tcw_a

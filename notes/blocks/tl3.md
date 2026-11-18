@@ -704,7 +704,7 @@ shot has a pale box under it) and `r9_tm_f.png` (e5's: bright spots at y 5088-51
 on the line's east half between two bars). The two stretches over latch C were drawn firm by run
 6; they are uncertain like the others now (same nets either way).
 
-What follows, **marked** (the six `?M` and the plate's tie, Ambiguities 10 and 11):
+What follows, **marked** (the six `?M` and the plate's tie, Ambiguities 10 and 11; and it assumes no contact at the spot (3955,4541), Ambiguity 6, the most contact-like place on the line):
 
     rcs_e4 = NOR(tl1_w4678, tl3_e3550)          (tl1's NOR; its second input was tl1_w4937)
     tl3_e3550 = NOR(rcs_mu, tc2_o5175)          = R9's match AND NOT tc2_o5175
@@ -742,7 +742,7 @@ at each edge of the row, and the clean shot under it is protected poly with no h
 | 5365-5378 | `tl2`'s row of `rcs_x1` at x 3533 | the pad with a contact (4192,5373) in mid-run of latch C's clear metal; field east of the pad | `rcs_x1` (alias of `tl3_e4808`) |
 | 5408-5421 | `tl2`'s row from track G's bottom pad (3368,5414): `tl3_w5025` | x 4250, where `tl4` draws it on to its pad (4279,5413) and a metal north to the gate row y 5240 of the inverter under the rail's south end | `tl3_w5025` (alias of `tl3_e5240`) |
 | 5450-5465, west | `tl2`'s row of `tl1_w4937` at x 3533 (5 px higher west of x 3551) | a pad with a contact (3953,5458): the south end of the thin metal x 3948-3962 | `tl1_w4937` |
-| 5450-5465, east | a pad with a contact (4040,5458), whose metal x 4031-4043 goes south | x 4250: `tl4`'s row of its strong inverter | `tl4_w5455` |
+| 5450-5465, east | a pad with a contact (4040,5458), whose metal x 4036-4048 goes south | x 4250: `tl4`'s row of its strong inverter | `tl4_w5455` |
 | 5493-5508 | `tl2`'s pad (3518,5498) at the end of track F's arm: `tl3_w4546` | x 4250, where `tl4` draws it on to its pad (4321,5504) and a metal north to gate 1 of `rcs_mv`'s NOR | `tl3_w4546` (alias of `tl3_e4372`) |
 | 5621-5641, east | track A's south pad (4104,5633) (run 6) | x 4250: `tl4`'s row `tcw_a` | `tcw_a` (alias of `tl3_e4152`, `tl4_w4501`) |
 
@@ -828,7 +828,7 @@ new net):
 | `tl3_w5025` | poly | (4250, 5408-5421) | out | the same row, on east to `tl4`'s pad (4279,5413) (`tl4`: `tl3_e5240`) |
 | `tl3_e3550` | poly | (3533, 5450-5465) | out | the row of the pad (3953,5458) at the south end of the thin metal x 3948-3962 (`tl2`'s and `tl1`'s `tl1_w4937`); on west to `tl1`'s NOR of `rcs_e4`. Driven here if the thin metal is one metal (Ambiguity 11) |
 | `tl4_w5455` | poly | (4250, 5450-5465) | in | the row of the pad (4040,5458), from `tl4`'s strong inverter |
-| `tl4_w5455` | metal | (4031-4043, 5660) | ? | the metal from that pad: drawn end, it goes on south |
+| `tl4_w5455` | metal | (4036-4048, 5660) | ? | the metal from that pad: drawn end, it goes on south |
 | `tl3_w4546` | poly | (3530, 5494-5508) | out | NOR 3's output again: the row from `tl2`'s pad (3518,5498), across the foot |
 | `tl3_w4546` | poly | (4250, 5494-5508) | out | the same row, on east to `tl4`'s pad (4321,5504) (`tl4`: `tl3_e4372`) |
 | `tcw_a` | poly | (4250, 5621-5641) | in | the row of track A's south pad (4104,5633), on east: `tl4`'s `tcw_a` |
@@ -913,7 +913,10 @@ new net):
     generator under a 50 px metal: dark for 12 px, partly bright, dark again for 10 px).
     Against: over the rail NOR's tie box neither metal shot shows any metal for 38 px
     (y 4455-4492) and the clean shot has a greenish band right across at y 4482-4487
-    (`r9_tm_c.png`); over the others the dark stretches are 14-23 px. If it were broken at one of
+    (`r9_tm_c.png`); over the others the dark stretches are 14-23 px. (Review 12: the same
+    band lies under the line at y 4300-4306, 3714-3723, 3860-3866 and 3978-3982, always at the
+    south edge of a diffusion feature and 16-40 px wide, wider than the metal: it is a feature
+    of the ground, not a contact hole, so the band is weak evidence either way.) If it were broken at one of
     them, `tl3_e3550` would not reach `tl1`'s NOR and the piece south of the break would be
     driven by a contact not found. What would settle it: a third chip's metal shot, or the
     simulation (does the row counter step at R9's match without this path?).
@@ -1319,6 +1322,68 @@ pull-down of `rcs_in1` under gate `rcs_mv` is under the rail, and east of the ra
 gate reads field, so `D 4052,4066:4090,4135` should stop at y ~4096.
 
 Round 2: no findings.
+
+### Run 9: the foot's rows and the thin metal x 3948-3962 (one review for both pieces)
+
+**Round 1 (full review), 2026-11-18 19:48 +0000**, a fresh agent on Claude Fable 5.2, commit before the
+round 2e448e2, 25 images in `cache/scratch/tl3/review-12/`. Pieces: F (the foot, x 3533-4250,
+y 5345-5660) and T (the thin metal x 3948-3962, y 3614-5468).
+
+Told to suspect, piece F: a row broken or stepping a track under a rail or metal; the dark
+stripe on row y 5371 at x 3881-3887; row y 5500 at x 3540-3556; poly between the two pads at
+y 5458; whether row y 5371 ends on the pad (4192,5373); the dim spot (3955,5411-5417); the two
+west metals' corners; the joins to `tl2`'s and `tl4`'s rows at x 3533 and x 4250; a tap under
+a rail; metal north of the pad (4040,5458). Piece T: each `?M` stretch for a break or a
+contact; the firm crossings ((3955,4541), y 3650, 3719, 4522, 4937); y 3864-3984 (one line or
+two); how the metal leaves its north pad.
+
+What it checked (4-6x views in the metal shots and the clean shot, `px.py`, `textmap.py`,
+`follow.py`, `tl3_thin.py`, the full extraction, `unsure.py`) and found as drawn: every row one
+poly at constant y, unbroken under every metal and both rails, uniform in height, no hole; the
+stripe a margin line (`f_c5500.png` for row y 5500's west end, 6x); field between the pads and
+no metal north of (4040,5458) (`f_pads.png`, 5x); row y 5371 ends on its pad (`f_east.png`);
+the dim spot in chip 2 only; both corners are corners (`f_corners.png`); the joins at both
+edges are the same polys (`f_west.png`, `f_east.png`, `f_tcwa.png`); no tap under either rail
+(`f_westrail.png`, `f_vccrow.png`: dark blotches on the rails over rows y 5371 and 5458 in chip
+2 only, no hole); the slots are field. Piece T: the north pad's metal leaves east then south
+only (`t_north.png`); one line with no step and no second line over y 3864-3984 (161-229 in
+chip 1 against 136-150 for bare ground); the 8-13 px bars need no `?M`; all six `?M` stretches
+at 5-6x have no pad, no widening and no round hole with pits, each with a small bright spot
+inside the box, like the reviewed pass-over at (4101,5200).
+
+Findings, each checked by me:
+
+1. `M 4037,5448 y5660` sits 4-5 px west of the metal, which is x 4036-4047. **Confirmed**
+   (`px.py row 5565 4024 4054 3 metal,metal1`: metal 4036-4048 in both shots; I had read the
+   columns of my text map one sample off). Geometry only: it overlapped the pad and contact
+   either way. Fixed: `M 4042,5448 y5660 w=13`; the notes and `ports.d/tl3.txt` say x 4036-4048.
+2. Ambiguity 11 named a greenish band in the clean shot only at y 4482-4487; the same
+   east-west band lies under the line at y 4300-4306 (147/151/86 at x 3957), 3714-3723,
+   3860-3866 and 3978-3982, each at the south edge of a diffusion feature and 16-40 px wide,
+   wider than the metal: not contact holes. **Accepted** (notes only): it weakens the one
+   point "against" in Ambiguity 11; added there.
+3. (3955,4541) is the most contact-like spot on the line (full metal brightness in both
+   chips, 219/194/98 and 236/193/82; clean shot 169/168/127; no pad, no pits; `t_4541.png`, 6x):
+   Ambiguity 6 stands, and what `rcs_e4` rests on should name it. **Accepted** (notes only):
+   added to the thin metal's section and to `notes/operation.md`.
+
+It could not check: whether the metal is unbroken and without contact over the six boxes
+(neither metal shot shows it: the `?M` stands); where the metal from (4040,5458) goes south
+of y 5660; and the slots between the rows y 5543 and y 5585, which read 13-14 (red minus
+green) in the chip-2 stripped shot against -1 to 6 in the slots further north, and khaki in
+the clean shot. I measured them (`px.py pt 3750,5563 3910,5563 4000,5563 4070,5563 3750,5392
+3910,5392 3750,5437 3950,5630 acid,acid1b,metal,metal1`): 8-25 in the stripped shot against 5-8
+elsewhere; in the clean shot 95/90-95/53-57, darker than the other slots (132-137/118-121/83)
+but not green (an open diffusion is 118/155/90 there); both metal shots as field
+(155-160/130-135). The slot is 26 px high, the others 29-30, so the rows' rims fill it. Taken
+as field; no poly crosses it, so it could not be a transistor either way.
+
+Connections before and after the fix of finding 1:
+
+    tools/t.sh tl3 sameconn.py 2e448e2             -> connections identical
+    .venv/bin/python tools/sameconn.py 2e448e2     -> connections identical
+
+Round 1: no findings that change a connection.
 
 ## Not done
 
