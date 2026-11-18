@@ -229,6 +229,7 @@ M 5974,8727 y8136 w=14
 ?M 5974,8136 y8097 w=14
 M 5974,8097 y8067 w=14
 N M 5974,9000 lc2_w9124
+N M 5974,8080 lc2_w9124                      # a second label north of the uncertain stretches, so that tools/unsure.py lists them
 
 # ====================================================================
 # Latch B's clear and output, and the west end of lc2_w8474 (wiring only).
@@ -240,12 +241,22 @@ M 5476,8067 y8240 w=20
 # output Na: the metal x 5508-5524 runs north from its pad out of the strip, over the clear's row (no contact)
 M 5516,8067 y8330 w=16
 # lc2_w8474: the row y 8634-8652 on west from under the VCC rail, under the thin metals and the VSS rail (no pad
-# on it), to a pad (5428,8648); a metal x 5421-5437 north to a second pad (5428,8516); poly west from there
-# (drawn to x 5400: it runs on)
+# on it), to a pad (5428,8648) in the run of a metal x 5421-5437. North, the metal passes a second pad (5428,8516)
+# (poly west from it, drawn to x 5400: it runs on), turns west along y 8468-8484 and north again on x 5379-5391
+# (drawn to y 8440: it runs on north-west). South, it runs through the strip's edge, with a third contact (5429,8994)
+# on a pad whose poly goes north under the metal to the row y 8939-8958 (the first gate row of the column south of
+# latch B, drawn here to x 5545)
 P 5440,8634:5835,8652
 P 5412,8630:5448,8663
 C 5428,8648
-M 5429,8504 y8660 w=16
+M 5385,8440 y8476 x5429 y9233 w=16           # review round 3: both pads lie in the run of this metal (below)
 P 5412,8499:5446,8531
 C 5428,8516
 P 5400,8509:5420,8526
+P 5414,8974:5447,9010
+C 5429,8994
+P 5419,8939:5441,8980
+P 5419,8939:5545,8958
+# review round 3: a poly leaves latch C's clear pad (6257,8731) south and runs diagonally south-east under three
+# metals (no pad on any) out of the strip at x 6450: a further branch of lc1_w7864
+P 6258,8742 y8758 6450,8936 w=18

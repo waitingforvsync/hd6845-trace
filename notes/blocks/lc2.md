@@ -17,8 +17,9 @@ metal shot shows it for 33-40 px; it is drawn uncertain there and taken to pass 
 
 Same run, piece F (wiring only): **latch B's clear is `lc1_w7864` too** (`lc1`'s metal x 5466-5486 comes south
 without a break to the clear pad), so one signal clears latches B, C and D; latch B's output Na leaves north on
-the metal x 5508-5524; `lc2_w8474`'s row is drawn on west to a pad (5428,8648), a metal jumper north and a second
-pad (5428,8516), whose poly runs on west. One merged equation prints another name: `lc2_w8215` (latch B's Nb)
+the metal x 5508-5524; `lc2_w8474`'s row is drawn on west to a pad (5428,8648) in the run of a metal x 5421-5437 (corrected by review
+round 3: the metal runs on both ways, has a pad (5428,8516) with a poly west and a third contact (5429,8994) whose poly is
+the first gate row of the column south of latch B); a poly from latch C's clear pad leaves the strip south-east. One merged equation prints another name: `lc2_w8215` (latch B's Nb)
 reads `lc1_w7864` where it read `lc2_w8254` (input identified; no logic changed). Full extraction: 2361 nets,
 4232 transistors, 0 errors, 0 warnings.
 
@@ -187,7 +188,7 @@ Wiring only. Views `g1_m.png`, `g1_a.png` (1.9x, every package's trace), overlay
 |---|---|---|
 | latch B's clear | `lc1`'s metal x 5466-5486 (`lc1_w7864`, drawn by `lc1` to y 8067) runs on south to the clear pad (5472,8254): **latch B's clear is `lc1_w7864`** | `tl5_tracks.py v 5476 8055 8262`: metal without a break to the pad's ring (y 8234-8257), hole at y 8255; `follow.py 5474 8100 S` ends at the pad |
 | latch B's output Na | the metal x 5508-5524 runs north from the pad (5514,8341) out of the strip; the clear's row passes under it without a contact | `v 5516 8055 8350`: two 8 px bars at y 8241-8249 and y 8265-8273 (the row's edges), no hole; the ring at y 8321-8338 |
-| `lc2_w8474` | the row y 8634-8652 from under the VCC rail west under five metals (no pad, no hole) to a pad (5428,8648); a metal x 5421-5437 north to a pad (5428,8516); poly west from it along y 8509-8526 (drawn to x 5400; `tl5_tracks.py rows row 5150 5445 4 8515`: poly to x 5150 and beyond) | `h 8643 5420 5845`: the only hole is the pad's; `v 5429 8500 8660`: metal between the two rings; `textmap.py 5404 8626 5452 8666 --acid`: ring, bright centre and green hole at the lower pad; `textmap.py 5398 8494 5452 8536 --acid`: at the upper pad a ring with a bright centre in chip 1, a weak centre (6-7) in chip 2, no green hole, a pit in the chip-2 stripped shot |
+| `lc2_w8474` | the row y 8634-8652 from under the VCC rail west under five metals (no pad, no hole) to a pad (5428,8648) **in the run of** a metal x 5421-5437 (review round 3). North the metal passes a pad (5428,8516), turns west along y 8468-8484 and north on x 5379-5391 (drawn to y 8440); south it runs through the strip's edge with a third contact (5429,8994), whose pad's poly goes north to the row y 8939-8958: **the first gate row of the column south of latch B is `lc2_w8474`**. Poly west from the pad (5428,8516) along y 8509-8526 (drawn to x 5400; `tl5_tracks.py rows row 5150 5445 4 8515`: poly to x 5150 and beyond) | `h 8643 5420 5845`: the only hole is the pad's; `v 5429 8500 8660`: metal between the two rings; `textmap.py 5404 8626 5452 8666 --acid`: ring, bright centre and green hole at the lower pad; `textmap.py 5398 8494 5452 8536 --acid`: at the upper pad a ring with a bright centre in chip 1, a weak centre (6-7) in chip 2, no green hole, a pit in the chip-2 stripped shot |
 
 ## Ports
 
@@ -212,6 +213,10 @@ Run 3 (latch D's lower unit and the bus field):
 | `lc1_w7780` | M | 6287-6307, 8067 | in | latch D's data (meets `lc1`'s port) |
 | `lc2_w8474` | M | 6332-6350, 8067 | ? | the metal of the pad (6341,8214) |
 | `lc2_w8474` | P | 5400, 8509-8526 | ? | drawn end (run 4): the poly from the pad (5428,8516) runs on west |
+| `lc2_w8474` | M | 5379-5391, 8440 | ? | drawn end (round 3): the metal runs on north-west (`follow.py 5400 8478 W`: north to y 8384, west to x 5338, north to y 8215, west to x 5228) |
+| `lc2_w8474` | M | 5421-5437, 9233 | ? | round 3: the metal runs on south into `lc3` |
+| `lc2_w8474` | P | 5545, 8939-8958 | out | round 3: the row from the pad (5429,8994), east into the gate column south of latch B (its first gate row) |
+| `lc1_w7864` | P | 6450, 8926-8946 | out | round 3: the poly from latch C's clear pad, south-east out of the strip |
 | `lc2_w8341` | M | 5508-5524, 8067 | out | run 4: latch B's output Na, north into `lc1` |
 | `lc1_w7864` | M | 5466-5486, 8067 | in | run 4: latch B's clear (meets `lc1`'s port) |
 | `lc2_w8172` | M | 6422-6440, 8067 | ? | from the north |
@@ -417,3 +422,40 @@ No trace file changed after the review, and the connections are as reviewed:
 `.venv/bin/python tools/sameconn.py bf266fb`: `connections identical`.
 
 Round 2: no findings that change a connection.
+
+Round 3 (full review of run 4's pieces E and F and the first review on Fable 5.2 of latch C, re-read item R31;
+2026-11-18 17:48 -0600, a fresh agent on claude-fable-5-2, at commit 9c85272; images in `cache/scratch/lc2/review-3/`). Told to
+suspect: a contact of the thin metal x 5967-5981 on any of the three tie boxes or a break in it; the corner of Na's
+metal and the gap between it and the data pad's metal; the inverter's copy; latch C's two copies, its five rows,
+the two contacts of its thin metal and whether its clear and Na pads share a metal; the pad (5428,8516), the metal
+x 5421-5437 between the two pads, taps on the row y 8634-8652; the metal x 5466-5486 to latch B's clear pad.
+Checked at 4-4.4x with `px.py`, `textmap.py`, `tl5_tracks.py`, `follow.py`: latch C's copies, rows (each to its own
+pad, no hole under the metals x 6167 and x 6212), thin metal x 5928 (two contacts, nothing between), clear and Na
+pads on separate metals (75 px of open ground), the equations; the inverter (gate row from the pad (6211,9082),
+output box joined to the pad (6168,9124), load strip into the VCC box, VSS rail's end y 9175); Na's metal one L,
+bare ground y 8929-8937 between it and the data pad; the thin metal x 5967-5981 without a green hole anywhere on
+its run (tie boxes 1 and 3 show a bright spot in chip 2 only, box 2 none); the metal x 5466-5486 unbroken to the
+clear pad; x 5508-5524 over the clear row without a hole; the row y 8634-8652 one poly without pad or hole under
+six metals. Findings, each checked by the tracer:
+1. **The metal x 5421-5437 has both pads in its run** (changes a connection: where `lc2_w8474` leaves, and one
+   more contact). Confirmed: `tl5_tracks.py v 5429 8440 8520` (metal at y 8470-8493 directly above the upper pad's
+   ring), `textmap.py 5370 8456 5448 8500` (the metal turns west along y 8468-8484 and north on x 5379-5391),
+   `v 5429 8640 9240` (metal to the strip's edge, a ring and a hole at y 8994), `textmap.py 5404 8972 5455 9016
+   --acid` (ring, bright centre, green hole and pit at (5429,8994) on a poly pad), `tl5_tracks.py rows` (the pad's
+   poly runs north under the metal to the row y 8939-8958, which runs east past x 5545: the first gate row of the
+   column south of latch B). Fixed: the metal drawn from (5385,8440) through both pads to y 9233, the third pad
+   and contact, its poly and the row to x 5545.
+2. **A poly leaves latch C's clear pad (6257,8731)** south and diagonally south-east under three metals, out of
+   the strip at x 6450 (changes a connection: a further branch of `lc1_w7864` leaves the strip). Confirmed on
+   `r3_clr.png` (2.5x, clean and metal: one poly from the pad to the view's edge at (6470,8950), no pad where the
+   three metals cross it). Fixed: drawn to (6450,8936).
+3. Geometry only: latch C's copy of the cell's thin metal `lc2_w9005` lies at x 6096-6110 (drawn 6105-6119), its
+   contacts at (6104,9002) and (6117,8600) against (6115,9008) and (6122,8602) drawn; on the same pads. The cell's
+   items in this copy: not changed (as lc1's copy, round 2).
+4. Recording: `lc2_w9124` had one label, so `tools/unsure.py` did not list its dependence on the three uncertain
+   stretches. Fixed: a second label at (5974,8080).
+Not checked by the reviewer: whether the thin metal is continuous across its three dark stretches; the pad
+(5428,8516) (ring in both chips, centre in chip 1 only, no green hole: probably a contact, not proven); which
+supply each rail is.
+
+Round 3: two findings that change a connection, fixed (a fix check follows).
