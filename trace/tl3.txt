@@ -317,10 +317,10 @@ N P 3560,5112 tl3_w5112
 D 4008,4141:4056,4190                 # rail's VSS box above
 C 4027,4162 s=24x30
 D 4047,4166:4105,4186                 # top arm
-D 4072,4166:4105,4310                 # the column east of the rail
+D 4072,4166:4105,4316                 # the column east of the rail
 D 4008,4299:4056,4361                 # rail's VSS box below
 C 4027,4327 s=24x40
-D 4042,4296:4105,4310                 # bottom arm
+D 4042,4302:4105,4316                 # bottom arm (y 4303-4316: review)
 P 4054,4191:4112,4209                 # gate 1
 P 4054,4280:4112,4300                 # gate 2
 B 4084,4225:4110,4258                 # output: buried contact on the node
@@ -372,6 +372,17 @@ N P 4170,4242 tl3_e4243
 P 4105,5016:4150,5034
 P 4130,4990:4166,5024
 C 4147,5005
+# The net does not end on that pad (review, confirmed on arm1.png, 5x both metal shots): a metal
+# arm leaves it west along y 4996-5008 to x ~4108 and runs south at x 4102-4114, beside the metal
+# x 4148 and apart from it, to a pad with a contact (4104,5633) (textmap 4084 5612 4130 5656 3:
+# ring, bright centre, green hole). On the way it passes over e5's node box (y 5050-5083) and
+# over a boxed poly end at 4088-4112 x 5188-5216: no hole in the clean shot at either (px.py col
+# 4104/4108/4112 5090 5622 3 acid1b: green only for 3-6 px at y 5183-5186, a rim), so both are
+# taken as pass-overs. The pad's poly at the south end is not followed.
+M 4147,5002 x4106 y5641 w=11
+P 4086,5617:4124,5649
+C 4104,5633
+P 4118,5620:4160,5645                 # the pad's poly leaves east along y 5620-5645 (arm_s.png): not followed
 # output: row east to a pad with a contact (4147,5070) at the north end of a metal x 4142-4155
 # (follow.py 4148 5090: y 5064-5332), whose south end has a contact (4148,5330) on the east pad
 # of latch B's enable row y 5318-5342 (textmap 4126 5300 4172 5352 3)

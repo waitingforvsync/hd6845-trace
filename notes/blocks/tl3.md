@@ -159,12 +159,12 @@ Wiring (`en_bus.png` 3x, `en_padA.png` 6x, `en_w1.png`, `en_w2.png` overlays):
 | e3 gate 1, y 4191-4209 | `tl3_e4152` | east to a pad with a contact (4148,4200) on **track A**, a metal x 4141-4155 that runs south to y 5008 (`follow.py 4148 4290 S`) with four more pads, (4146,4510), (4146,4681), (4146,4900), (4147,5005), each with a hole in the clean shot and a poly row leaving it (`textmap.py 4130 Y-14 4168 Y+14 3`). North of the pad it turns west along y 4152-4168 and north at x 4099-4111 (`follow.py 4148 4290 N`) as the thin metal of the Inventory. Drawn from y 4106 to y 5012 |
 | e3 gate 2, y 4280-4300 | `rcs_mv` | east under track A (no hole) to a pad with a contact (4190,4288) on `tla`'s track x 4192 |
 | e3 output, y 4232-4252 | `tl3_e4243` | east under both tracks (no hole: `textmap.py 4128 4184 4256 4304 3`) to a pad with a contact (4236,4246); its metal leaves east into `tl4`'s strip (it turns north at x 4323 and runs to y 2772: `follow.py 4270 4243 E`) |
-| e5 gate 1, y 5016-5034 | `tl3_e4152` | east to the pad (4147,5005), track A's south end |
+| e5 gate 1, y 5016-5034 | `tl3_e4152` | east to the pad (4147,5005), where track A arrives from the north. **The net goes on** (found by the review): a metal arm leaves the pad west along y 4996-5008 to x ~4106 and runs south at x 4100-4112, beside the metal x 4148 and apart from it, to a pad with a contact (4104,5633), whose poly leaves east along y 5620-5645, not followed (`arm1.png`, `arm_s.png`, 5x; `textmap.py 4084 5612 4130 5656 3`). It passes over e5's node box (y 5050-5083) and over a boxed poly end at 4088-4112 x 5188-5216 where the row y ~5195-5207 ends: neither has a hole in the clean shot (`px.py col 4104 5090 5622 3 acid1b`, and at x 4108, 4112: green only for 3-6 px at y 5183-5186), so both are taken as pass-overs (assumed, tracing guide trap 22) |
 | e5 output, y 5057-5077 | `tl3_w4978` | east to a pad with a contact (4147,5070) at the north end of a metal x 4142-4155 (`follow.py 4148 5090`: y 5064-5332), which crosses three rows without a hole (`textmap.py 4124 5098 4262 5130 3`, `4130 5186 4168 5252 3`) and ends on a contact (4148,5330) on the east pad of latch B's enable row (`textmap.py 4126 5300 4172 5352 3`). That row, y 5318-5342, is one poly from x 3550 to x 4132: no break and no other hole (`px.py row 5330 3560 4160 3 acid1b`) |
 | e5 gate 2, y 5105-5123 | `tl3_e5114` | from the east, across the bus field under four tracks without a contact; out of the strip at x 4250 |
 
 So latch B is open while `tl3_e4152` and `tl3_e5114` are both low. `tl3_e4152` is the east
-column's distributed line (five gate pads on track A).
+column's distributed line (five gate pads on track A, and a sixth pad at (4104,5633)).
 
 ### The NOR units of the west column: traced
 
@@ -329,6 +329,7 @@ plate's left end (`h_tail.png`, `h_tailm.png`, 5x four shots). The tab's tie is 
 | `tl3_e4243` | metal | (4250, 4235-4255) | out | e3's output, on east into `tl4`'s strip |
 | `tl3_e5114` | poly | (4250, 5105-5123) | in | e5's gate 2, from the east |
 | `tl3_e4152` | metal | (4105,4106) | ? | the thin metal x 4099-4111: drawn end; it goes on north |
+| `tl3_e4152` | poly | (4160, 5620-5645) | ? | the poly of its south pad (4104,5633): drawn end; it goes on east |
 | `vss` | metal | x 3645-3695, y 5330 | - | west rail, drawn to here |
 
 ## Ambiguities
@@ -510,6 +511,39 @@ x 3533-3575, y 4818-4895 by image; a green strip at x 3881-3885, y 4867-4920 on 
 `.venv/bin/python tools/sameconn.py 6f72ec6`: `connections identical`.
 
 Round 1: no findings that change a connection.
+
+**Round 1, full review of the two east NOR units and their wiring** (2026-11-18 07:55 -0600, a fresh
+Fable 5.2 agent, 52 tool uses, images in `cache/scratch/tl3/review-5/`; commit reviewed
+fe3aa04). Told to suspect: whether track A is one metal and the metal x 4148 below it a
+separate one; the L-shaped metal's join to the pad (4148,4200); every claimed contact and
+every crossing without one; the long row y 5318-5342 for a break or a contact; the two cell
+copies (gates, arms, the output box, the load under the rail and the thin metal x 3948-3962,
+the tab); further connections of the outputs and gates; anything left out at x 4045-4250,
+y 4130-4360 and 4960-5350. It checked with profiles, text maps and the follower, and 4x-6x
+views in two or more shots.
+
+Findings:
+
+1. **Changes a connection.** `tl3_e4152` does not end at the pad (4147,5005): a metal arm goes
+   on west and south to a contact (4104,5633) (above, in the wiring table). Confirmed by the
+   tracer (`arm1.png`, `arm_s.png`; the contact's hole in `textmap.py 4084 5612 4130 5656 3`).
+   Fixed: the metal, the pad, the contact and the start of the pad's poly are drawn. No
+   equation of the package changes; the net gains a sixth pad. The reviewer left one point to
+   the tracer: the boxed poly end at 4088-4112 x 5188-5216 under this metal. Read as a
+   pass-over (no hole: profiles above), recorded as an assumption.
+2. Geometry only: e3's bottom arm is at y ~4303-4316 (drawn 4296-4310). Fixed in the cell.
+
+Found correct: track A one metal from (4148,4200) to (4147,5005) (the dark bands are 8-10 px
+edge bars); the pad (4148,4200) is mid-metal and the L continuous with it, no contact along
+the L; all nine contacts (ring, bright centre in both metal shots, green hole); no metal at
+y 5010-5060, so the metal x 4148 is separate; no hole under track A, `rcs_mv` or the metal
+x 4148 except at the pads; e3's output and gate 2 cross the tracks without contact; the row
+y 5318-5342 one poly from x 3560 to 4132 with no hole under any metal; both cell copies at 4x
+(the thin metal x 3948-3962 passes the load strip and tail without contact). Not checked:
+north of y 4106; e5's gate 2 row inside the gaps between the tracks in the chip-2 stripped
+shot; the loads' VCC end beyond x 3877; whether the long row gates anything.
+
+Round 1: one finding that changes a connection, fixed.
 
 ## Not done
 
