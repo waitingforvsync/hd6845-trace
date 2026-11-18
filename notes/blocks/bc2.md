@@ -123,6 +123,13 @@ y 15258-15276, dark edge y 15279-15285, poly (acid orange) y 15288-15300. So the
 y 15279 and the row starts at about 15287; both drawn items are about 5 px long into the gap (the
 same row at unit a reads 14809-14821 against the drawn 14804). Fix: unit a's box south edge to
 15279 (unit a's line; not changed here while it is under review), then uncomment the five lines.
+Tested in the working tree only (not committed): with that edge at 15279 and the five lines
+active, the full extraction gives 0 errors, 0 warnings, 4126 transistors (11 more), and unit a's
+equations are unchanged.
+
+Copy b's own VSS box below its stack is drawn (active): `D 10540,15706:10596,15752` with the contact
+(10558,15731) on the VSS rail (`b_box.png`, 4x: pale box in the clean shot, dark edge from y 15752;
+ring in the metal shot).
 
 Rows west of copy b, read on `b_w.png` (2.4x, clean + metal; **not drawn**, positions to ~5 px):
 | Cell row (copy a's net) | Row y | Seen |
@@ -149,8 +156,7 @@ In order:
    the metals at the data, clear and output pads.
 1b. Copy b: fix unit a's VSS box south edge (15285 -> 15279), uncomment the cells and the three
    contacts, re-run the extraction; then draw its rows to their pads (table under "Latch unit b";
-   rows y 15563 and 15606 go on west, not followed), its VSS box below the stack (expected
-   near (10558,15734), not seen yet), and draw the metal x 10441 on from y 15188 (seen continuous to y 15720, 3x).
+   rows y 15563 and 15606 go on west, not followed), and draw the metal x 10441 on from y 15188 (seen continuous to y 15720, 3x).
    No widths profiled for b.
 2. Test the east column above y 14800 and below y 15750 for further copies; overlay the copy
    at 6857,11495 on the metal shot and the mirrored candidate at all.

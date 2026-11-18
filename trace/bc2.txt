@@ -80,3 +80,7 @@ M 10682,15416 y15644 w=12
 # the box's south edge wants 15272 (unit a's line, under review, not changed here). Once that
 # is fixed, uncomment the two @inst lines and the three contacts above (the overlay fitted:
 # b_top.png, b_bot.png, b_rail.png 2.5x, every gate on a row over diffusion, every contact on a box).
+# copy b's own VSS box below its stack (b_box.png, 4x, acid1b + metal): pale box x ~10540-10596,
+# y ~15706-15752 in the clean shot (dark edge from y 15752), contact ring (10558,15731) in the metal shot
+D 10540,15706:10596,15752
+C 10558,15731
