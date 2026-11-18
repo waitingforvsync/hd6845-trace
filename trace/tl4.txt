@@ -826,7 +826,7 @@ M 4841,5891:4967,5942
 M 4865,5891 y6350 w=46
 
 # ====================================================================
-# RA's supply (x 4732-4967, y 2500-3004). A wide metal "foot" along y 2955-2997 runs from RA's
+# RA's supply (x 4732-4967, y 2500-3004). A wide metal "foot" along y 2938-2997 runs from RA's
 # top end east across the strip's edge; RA (x 4729-4775) is its continuation south: the dark
 # line across RA's top at y 2994-3000 is the south edge of the row y 2976-2996 under the metal
 # (the same line as at the row's north edge, y 2973; pink field under metal on both sides of
@@ -835,9 +835,9 @@ M 4865,5891 y6350 w=46
 # from the foot north across all the rows, no contact, to the wide band north of y 2500, whose
 # corner (x 4910-4967, y 2500-2507) is inside the strip. Read on g7_sup.png (2.1x), i1_foot.png
 # (4.1x metal and clean shot); tools/px.py and tools/tl5_tracks.py (notes: "RA's supply").
-# Whether the foot's north edge is y 2955 or y 2937 (over the row y 2930-2950) is not settled
-# (notes, Ambiguity 12): drawn at 2955 as tl5 has it; no connection depends on it.
-M 4732,2955:4967,2997
+# The foot's north edge is y 2938: the row y 2930-2950 is under it too, no contact (review
+# round 11; notes, Ambiguity 12).
+M 4732,2938:4967,2997
 M 4732,2990:4775,3004
 M 4949,2500:4967,2960
 M 4910,2500:4967,2507
