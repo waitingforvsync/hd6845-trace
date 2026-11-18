@@ -493,10 +493,10 @@ main{max-width:1240px;margin:0 auto;padding:24px 16px 64px}h1{font-size:24px;mar
 .stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}.stat .v{font-size:24px;font-weight:600}.stat .l{color:var(--ink2);font-size:13px}
 .grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:28px}@media(max-width:900px){.grid{grid-template-columns:1fr}}
 .die{width:100%;height:auto;border-radius:8px;background:#000;display:block}
-.pk{stroke-width:45;fill-opacity:.16}.pk.todo{fill:none;stroke:var(--todo);stroke-dasharray:160 120;stroke-width:35}
+.pk{stroke-width:45;fill-opacity:.16}.pk.todo{fill:var(--todo);fill-opacity:.1;stroke:var(--todo);stroke-dasharray:160 120;stroke-width:35}.pk.wide{pointer-events:none;fill:none}
 .pk.partial{fill:var(--partial);stroke:var(--partial)}.pk.done{fill:var(--done);stroke:var(--done)}
 .pk.active{fill:var(--active);stroke:var(--active);stroke-width:110;fill-opacity:.32}
-.fb{fill:none;stroke:#fff;stroke-opacity:.7;stroke-width:25}a:hover .fb,a:hover .pk,.fb:hover{stroke-width:120;fill-opacity:.35}
+.fb{fill:none;stroke:#fff;stroke-opacity:.7;stroke-width:25}a:hover .fb,.fb:hover{stroke-width:120;fill-opacity:.35}a:hover .pk,.pk.todo:hover{stroke-width:130;fill-opacity:.6}svg[data-hl] .pk{fill-opacity:.04;stroke-opacity:.3}svg[data-hl=active] .pk.active,svg[data-hl=partial] .pk.partial,svg[data-hl=done] .pk.done,svg[data-hl=todo] .pk.todo{fill-opacity:.55;stroke-opacity:1;stroke-width:130}.key[data-state]{cursor:default}.key[data-state]:hover{text-decoration:underline}
 .lbl{fill:#fff;font:600 380px system-ui,sans-serif;paint-order:stroke;stroke:#000;stroke-width:60;pointer-events:none}
 .qm circle{fill:#fff;stroke:#111;stroke-width:40}.qm text{fill:#111;font:700 230px system-ui,sans-serif;text-anchor:middle;dominant-baseline:central}
 .qm.reread circle{fill:#111;stroke:#fff}.qm.reread text{fill:#fff}.qm:hover circle{stroke-width:90}
@@ -553,6 +553,8 @@ INDEX_JS = """
 function setLayer(l){document.querySelectorAll('.seg.layer button').forEach(x=>x.classList.toggle('on',x.dataset.layer===l));
  document.getElementById('die').dataset.layer=l;document.getElementById('key-pk').style.display=l==='blocks'?'none':'';
  try{sessionStorage.setItem('layer',l)}catch(e){}}
+document.querySelectorAll('.key[data-state]').forEach(k=>{const d=document.getElementById('die');
+ k.onmouseenter=()=>d.dataset.hl=k.dataset.state;k.onmouseleave=()=>d.removeAttribute('data-hl')});
 document.querySelectorAll('.seg.layer button').forEach(b=>b.onclick=()=>setLayer(b.dataset.layer));
 const qbox=document.getElementById('showq');function setQ(on){document.getElementById('die').dataset.q=on?'on':'off';qbox.checked=on;try{sessionStorage.setItem('q',on?'1':'0')}catch(e){}}
 qbox.onchange=()=>setQ(qbox.checked);
@@ -612,8 +614,9 @@ def die_svg(d, state, page_of, root, view=None, highlight=None):
             continue
         link = page_of.get(r['label'])
         for x0, x1, y0, y1 in regions(r['region']):
-            rect = ('<rect class="pk %s" x="%d" y="%d" width="%d" height="%d"><title>%s: %s\n%s</title></rect>'
-                    % (s, x0, y0, x1 - x0, y1 - y0, E(plain(r['label'])), STATE_NAME[s], E(short(plain(r['what']), 160))))
+            wide = ' wide' if x1 - x0 > 0.9 * W and y1 - y0 > 0.9 * H else ''
+            rect = ('<rect class="pk %s%s" x="%d" y="%d" width="%d" height="%d"><title>%s: %s\n%s</title></rect>'
+                    % (s, wide, x0, y0, x1 - x0, y1 - y0, E(plain(r['label'])), STATE_NAME[s], E(short(plain(r['what']), 160))))
             svg.append('<a href="%s%s">%s</a>' % (root, link, rect) if link else rect)
     if highlight is None:
         for c in d['claims']:
@@ -742,9 +745,9 @@ def index_page(d, state, page_of):
         stat(('$%.2f' % (spend / figs['transistors'])) if spend and figs.get('transistors') else '&ndash;', 'per transistor traced')])
     key = ('<div id="key-pk">%s<span class="key"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="#fff" stroke="#111" stroke-width="2"/></svg>ambiguity</span>'
            '<span class="key"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="#111" stroke="#fff" stroke-width="2"/></svg>re-read item</span></div>'
-           % ''.join('<span class="key"><i class="sw" style="%s"></i>%s</span>' % (st, lb) for st, lb in (
-               ('background:var(--active)', 'in progress'), ('background:var(--partial)', 'partly done'),
-               ('background:var(--done)', 'done'), ('border:2px dashed var(--todo)', 'to do'))))
+           % ''.join('<span class="key" data-state="%s"><i class="sw" style="%s"></i>%s</span>' % (k, st, lb) for k, st, lb in (
+               ('active', 'background:var(--active)', 'in progress'), ('partial', 'background:var(--partial)', 'partly done'),
+               ('done', 'background:var(--done)', 'done'), ('todo', 'border:2px dashed var(--todo)', 'to do'))))
     body = """<div class="top"><h1>HD6845S die trace</h1>%s</div>
 <p class="dim">Who is working on what, and how far the trace has got. Built %s. <span id="live" class="mut"></span></p>
 <div class="stats">%s</div>
