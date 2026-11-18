@@ -622,7 +622,7 @@ C 4190,3506 s=20x20
 P 3998,3582:4135,3600
 P 4130,3576:4166,3606
 C 4148,3592 s=20x20
-P 4146,3600:4158,3672
+P 4144,3600:4164,3672                 # x 4144-4164 (review 9; px.py row 3635 4132 4172 4)
 # the node's box east of the rail (4074-4110, 3534-3572): a buried contact whose poly is only a
 # stub ending at x ~4125 under and beyond the thin metal x 4099-4111 (which passes over it: dark
 # for 36 px, no bright centre in either metal shot, no hole: textmap 4050 3514 4130 3584 3;
@@ -649,7 +649,7 @@ N M 3954,3632 tl3_tm3955_u
 # the tie: between the plate's top bar and the strip, under the thin metal, both chip-2 shots
 # and the clean shot are heavy dark over x 3928-3972, y 3486-3530 (px.py row 3508 3900 3996 4,
 # col 3968 3480 3580 4): the box of a tail-and-tab tie, not resolved. Uncertain.
-?D 3954,3508:3972,3540
+D 3966,3486:3984,3540                 # the tail: diffusion in the gap from the strip up to y ~3486, no edge at y 3533 (review 9; px.py col 3977 3476 3548 6: chip-2 shots plain, pinker than field); field at (3958-3964, 3520)
 ?P 3944,3506:3970,3526
 ?B 3942,3500:3976,3532
 N D 4030,3550 tl3_e3550

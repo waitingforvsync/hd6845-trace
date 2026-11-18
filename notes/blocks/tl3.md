@@ -326,9 +326,11 @@ y 3468-3625); two gate rows from the bus field cross it and the node is between 
   x 3948-3962** (`textmap.py 3906 3590 3972 3640 3`: ring, bright centre, green hole; the metal
   leaves east and south, none north of y 3600). So the node's way out is its load plate and
   that thin metal, if the plate is tied to the node.
-- The tie (`?`): between the plate's top bar (y 3516-3528) and the strip, under the thin metal,
-  all shots are heavy dark over x 3928-3972, y 3486-3530 (`px.py row 3508 3900 3996 4`, `col
-  3968 3480 3580 4`). Drawn as a tail and tab with a buried contact, uncertain (Ambiguity 10).
+- The tie (`?`): a tail of the strip runs up the gap, x 3966-3984 to y ~3486 (diffusion: `px.py
+  col 3977 3476 3548 6`, no edge at y 3533; drawn firm since review 9), and beside it, under
+  the thin metal, all shots are heavy dark over x 3928-3972, y 3486-3530 (`px.py row 3508 3900
+  3996 4`, `col 3968 3480 3580 4`): the box where the plate's tab would meet the tail. The tab
+  and the buried contact are drawn uncertain (Ambiguity 10).
 
 **The thin metal x 3948-3962 is not drawn between y 3640 and y 4500.** Its north end is drawn
 (`tl3_tm3955_u`, on the plate) and its stretch over latch C (`tl3_tm3955`); they are believed
@@ -357,6 +359,11 @@ metal W over its tie boxes and could not decide in three passes. Ambiguity 11.
   column of `tla`'s unit `rcs_mn3852` as its upper gate, which `tla` had "not read yet"
   (`rn3_polys.png`, 4.6x: orange in both chip-2 shots; `rn3_bf2.png`; `px.py row 3808 4030 4130
   4`: the column's west edge at x 4070-4074 under the poly, bright salmon over the channel).
+- The thin metal x 4099-4111 passes over this box too, read as a pass-over (review 9): about
+  50 px of dark with a bright centre 8 px wide at (4101,3719) in both metal shots
+  (183/163/76, 155/130/56), where `follow.py` stops, but the clean shot there is tan
+  (200/169/132), not a contact's green hole (143/152/86, 154/166/99 at real contacts). The
+  same signature as the undecided spot (4102,4074) of Ambiguity 1; no contact drawn.
 - The top of that unit, drawn here: the rail's VSS box (contact (4027,3775): `textmap.py 4002
   3752 4062 3798 3`), an arm east y 3778-3794 (`px.py row 3786 4040 4124 4`) and the column
   x 4072-4106 down to `tla`'s node at y 3838 (`px.py col 4085 3764 3850 4`: arm, gate
@@ -600,7 +607,8 @@ plate's left end (`h_tail.png`, `h_tailm.png`, 5x four shots). The tab's tie is 
    two lighter samples at x 4079-4082 between the dark ones). For: a buried contact box holds
    diffusion, and the column is the only diffusion within 100 px; the same box sits on the
    column in e3, e5 and `tla`'s units. If it were not joined, `rcs_mv` would be driven only
-   from the east (the poly of its pad (4192,4743)).
+   from the east (the poly of its pad (4192,4743)). Review 9 adds for the join: the column's
+   edge line at x 4080 is absent at y 4416-4426 in three shots (`review-9/a_link.png`).
 
 10. **The load ties of the three rail units** ((3942-3976, 3500-3532), (3936-3966, 3656-3686),
     (3950-3972, 4456-4488)) are drawn `?` from heavy boxes at the standard place of a tail-and-tab
@@ -890,6 +898,45 @@ short two outputs (it rests on the undrawn end pads; (3930,3616) confirmed as a 
 the intended differences (`tl3_tm3955` apart from `tl3_e4537`; the new net `tl3_e4915`).
 
 Round 2: no findings.
+
+**Round 1, full review of the three units under the east rail** (pieces A y 4345-4514, B
+y 3450-3660, C y 3655-3845; 2026-11-18 16:39 +0000, a fresh Fable 5.2 agent, 90 tool uses, 19 images in
+`cache/scratch/tl3/review-9/`; commit reviewed 5629748). Told to suspect: A's `?D` link, the pad
+(4193,4420) and its track, whether the strip in the gap is diffusion or a vertical poly, the
+column's join to the VSS box above; B's diffusion east of the rail under both rows, the stub,
+the thin metal x 4099-4111 over the box, the two pads, the plate's foot pad; C's pad poly into
+the row, a second transistor east of the rail, the C-shaped poly (one line? touching the gate
+row? through the box? across the column?), the column's joins, the thin metal over the box and
+the band; the supply contacts; anything left out in x 3870-4215, y 3440-3850 and y 4340-4520.
+It checked with profiles, text maps, the follower and `opendiff.py`, and 4x-5x views.
+
+Findings, each checked by the tracer, all geometry only:
+
+1. B's tail was drawn `?D 3954,3508:3972,3540`; the diffusion is at x ~3967-3983 from the strip
+   up to y ~3485, with field at (3958-3964, 3520). Confirmed (`px.py col 3977 3476 3548 6`).
+   Fixed: `D 3966,3486:3984,3540`; the tie still rests on the `?P` and `?B`.
+2. C's pad poly was drawn 12 px wide; it is x ~4144-4164. Confirmed (`px.py row 3635 4132 4172
+   4`). Fixed.
+3. A gap in the notes: the thin metal x 4099-4111 over C's box (a bright centre at (4101,3719)
+   in 50 px of dark, clean shot tan): a pass-over, now written under the inverter.
+
+Found correct: A: two gates across the column with channel to x ~4077, the column continuous
+to both VSS contacts, no contact under either track on the three rows, the pad (4193,4420) a
+contact on a track that runs y 4112-4748, the gap strip and its tail diffusion, **the `?D` link
+supported** (the column's edge line at x 4080 is absent at y 4416-4426 in three shots,
+`a_link.png`; left `?` here). B: channel to x ~4077 under both rows, both pads contacts, the
+box a stub ending x ~4121, the thin metal over it a pass-over, plate, neck and foot pad one
+poly with the thin metal's north end on it. C: the pad's poly turns into the row as an L; 10 px
+of bare ground between the row and the C-shape's top band in three shots; field east of the
+rail above the row and under the rail between node and VSS box; the C-shape one poly, its
+bottom band ending at x ~4051 and gating the column between the arm and `tla`'s node; the
+contacts. Nothing left out in either window. Not checked: the three load ties (unresolved at
+5x); the continuity of the thin metals x 3948-3962 and x 4099-4111; `r9m`'s stub at y 3376.
+
+    tools/t.sh tl3 sameconn.py 5629748             -> connections identical
+    .venv/bin/python tools/sameconn.py 5629748     -> connections identical
+
+Round 1: no findings that change a connection.
 
 ## Not done
 
