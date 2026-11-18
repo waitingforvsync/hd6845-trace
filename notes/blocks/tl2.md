@@ -7,6 +7,37 @@ what `tla`, `tl1`, `r9m` and `ur` did not. Nothing of theirs is redrawn.
 
 ## Status
 
+2026-11-18 11:00 +0000 (run 4, Tom Seddon). **Partial: `rcs_cond_lat`'s poly followed to its end, and the
+junction of AMB-009 re-read** (pieces 3 and 4; 2 transistors added, one of `tla`'s changed
+from a pass transistor to a pull-down). The poly that `tla` left "not followed" west under R3
+at y 4010-4030 is the gate poly of the load of an undrawn inverter between R2 and R3
+(y 4005-4145), whose pull-down is gated by the west end of `rcs_cond`'s band:
+
+```
+tl2_w4080    = NOT rcs_cond                    piece 3: the inverter's node. Marked: only the load's tie is uncertain
+rcs_cond_lat = tl2_w4080                       through that tie (`?`, as every load tie of the cluster): an alias
+rcs_cond     = NOR(rcs_cond_n, tl3_w3982)      piece 4: tla had NOT rcs_cond_n and a pass transistor. FIRM
+```
+
+So `rcs_cond_lat` is not a dynamic latch node: it is the output of a static inverter,
+NOT `rcs_cond`. The junction that made it one (AMB-009: a buried contact from the top of
+`tla`'s column at (3045,4515) to the pad at the foot of `rcs_cond_lat`'s metal) is not there: the
+column's top is a diffusion band that runs west to the VSS box of piece 2, with a strip of
+field between it and the pad (both chip-2 shots and the chip-1 metal shot). The band of
+`tl3_w3982` is therefore a second pull-down of `rcs_cond`'s gate (`trace/tla.txt` corrected in a
+commit of its own). With these the pair of AND-OR-INVERT units of run 3 reads as a **transparent
+latch for `rcs_cond`**, with true and inverted data and `clk_tl` as its enable:
+
+```
+rcs_n4200  = NOT( (clk_tl AND rcs_cond)     OR rcs_x1 OR rcs_bd3330 )
+rcs_bd3330 = NOT( (clk_tl AND NOT rcs_cond) OR rcs_n4200 )
+```
+
+while `clk_tl` is high (CLK high) `rcs_bd3330` follows `rcs_cond` and `rcs_n4200` its inverse; while
+it is low the pair holds; `rcs_x1` high forces `rcs_n4200` low. (Marked: the pair's cross-coupling
+and `rcs_cond_lat` = NOT `rcs_cond` each run through one load tie.) Full extraction: 2347 nets,
+4158 transistors, 0 errors, 0 warnings.
+
 2026-11-18 03:02 +0000 (run 3, Tom Seddon). **Partial: the gate column east of R3 traced where
 `tla` had left it** (y 3690-3840 and y 4230-4530; 7 transistors in two pieces, and one of
 `tla`'s transistors found to be two). Both pieces complete gates that `tla` had named without
@@ -80,6 +111,8 @@ undrawn contacts (see Not done).
 | x 3085-3533, y 2630-5700 | bus field: ten vertical metal positions (pitch 43.5: A 3108, B 3152, C 3196, D 3240, E 3283, F 3326, G 3369, H 3413, I 3456, J 3499), in pieces, with poly rows and pads. `tla` drew A-E and G's upper piece; **run 2 drew the rest** (D upper, F x3, G lower, H x2, I x2, J x2) |
 | x 2860-3100, y 3690-3840 | **run 3, piece 1**: two pull-downs on `rcs_bc3460` (gates: the rows y 3722 and y 3808) between `tla`'s VSS boxes, with the node's strip west under R3 and south under thin metal E |
 | x 2785-3175, y 4230-4530 | **run 3, piece 2**: the AND-OR-INVERT unit that drives `rcs_bd3330`, cross-coupled (through its load's tie) with `tla`'s `rcs_n4200`: load between R2 and thin E (y 4275-4349), the node's column under thin E and the gap, a wire under R3 (y 4344-4356), columns under R3's east edge and under the thin metal x 3025-3059, three gates (`rcs_n4200`'s band y 4370-4390, the `clk_tl` row y 4407-4424, the arm y 4462-4481 of `rcs_cond_lat`'s pad), a VSS box with a contact (2990,4513), the buried contact (3048-3072, 4362-4390) to the row y 4374 |
+| x 2786-2990, y 4005-4145 | **run 4, piece 3**: the inverter of `rcs_cond`: VCC box under R2 (contact (2804,4084)), load plate in the open (x 2843-2896, y 4048-4110) on `rcs_cond_lat`'s poly, node box under thin E with a narrow strip south to the tie, pull-down in the gap between thin E and R3 (gate: the west end of `tla`'s g1 band, turned north), source on `tla`'s VSS box (contact (2985,4070)) |
+| x 3004-3063, y 4504-4530 | **run 4, piece 4**: the top of `tla`'s column above the band of `tl3_w3982`: a diffusion band west to piece 2's VSS box; no tie to the pad above (AMB-009) |
 | y 2500-2940 | horizontal metal tracks and rows north of the cluster, partly `r9m`'s and `tla`'s |
 | x 2817-3180, y 5900-6300 | the small cluster's east half: **this piece** |
 | x 2890-3533, y 6300-6350 | `rcs_thin_e`'s pad (2913,6327) and its poly row east (drawn); `lc_step`'s row y 6268-6290 is `ur`'s |
@@ -512,6 +545,102 @@ class map of `tools/classmap.py` as text, right only under metal):
 - Overlays: `p2_ov1.png` (2.5x, chip-2 stripped | clean with the trace), `p2_ov2.png`,
   `p2_ov3.png` (4x, clean shot).
 
+### The inverter of `rcs_cond` west of R3 (run 4, piece 3)
+
+Views: `r4_a.png` (2.05x), `r4_b.png`, `r4_c.png`, `r4_d.png` (4.5x, four shots), `r4_e.png`,
+`r4_f.png` (4.6x beside the standard load unit 182 px north: not a copy; `findcell.py` with
+`tla`'s load unit finds nothing above 0.56), `r4_g.png` (3.8x, the VCC box, four shots);
+overlays `r4_ov1.png`, `r4_ov2.png`. The measurements, with their commands, are in
+`cache/scratch/tl2/survey.md` (run 4).
+
+- **VCC box under R2** (x 2786-2840, y 4066-4112), drawn by nobody before: a dark outline in the
+  clean shot, a contact ring in both metal shots centred (2804,4084), a green hole in the clean
+  shot at x 2797-2811, y 4078-4087. Above it (y 4045-4063) the clean shot has an olive patch in
+  pink field and neither metal shot a ring: nothing.
+- **Load.** A strip y 4068-4094 runs east from the box under a poly plate in the open
+  (x 2843-2896, y 4048-4110: orange in the chip-2 stripped shot, 163-184/133-162/66-79; the
+  strip's edges cross it as dark lines at y 4064-4068 and y 4092-4096, and the band between them
+  is channel-bright in the clean shot, 193-222/101-152) into a box under thin metal E
+  (x 2897-2936, y 4067-4102, flat tan 197-209/176-186/135-146): the node, `tl2_w4080`.
+- **The plate is on `rcs_cond_lat`'s poly.** From the plate's top a vertical poly x 2878-2898 runs
+  north to the row y 4011-4030 (`px.py col 2888 4000 4064 3`: poly colours in both chip-2 shots
+  from y 4015 to y 4060 with no dark line across, 164-183/126-149/62-80 stripped); the row runs
+  east under thin E (salmon 216-228/165-177/110-124 in the clean shot: poly over field) and
+  through the gap (orange 132-163/105-128 stripped) onto `tla`'s piece under R3 and the pad
+  (3040,4028) of `rcs_cond_lat`'s metal. No contact of R3 on the row: a dim spot in the chip-2
+  metal shot at (2974,4023) has no dark ring, is not in the chip-1 metal shot, and the clean
+  shot has no green hole there (`textmap.py 2944 3996 3012 4052 2 --acid`).
+- **Pull-down.** The node's box goes on east through the 28 px gap between thin E and R3: its
+  edge lines (y 4064-4068 and y 4100-4104) cross the gap from x 2840 to x 2960 in both metal
+  shots (`r4_c.png`). A vertical poly lies in the gap (x 2938-2953; orange at x 2939-2945 in the
+  chip-2 stripped shot, channel-bright 247/154-175/110-126 at x 2948-2951 in the clean shot under
+  R3's margin, against 130-148/55-108 on the same poly at y 4108-4132 over field), and east of it
+  the diffusion runs under R3's west edge onto `tla`'s VSS box (D 2968,4045:3018,4105, contact
+  (2985,4070)): tan at x 2954 and from x 2963 in the clean shot, R3's edge line between them
+  (x 2957-2960); the chip-2 stripped shot has no dark line there (141-177/97-152 from x 2954 to
+  x 2966).
+- **The gate is `rcs_cond`.** The vertical poly's south end is the west end of `tla`'s g1 band
+  (P 2985,4103:3095,4128, from the contact (3105,4112) on bus line A's piece A3): the band runs
+  on west under R3 over field (`px.py row 4118 2926 3000 3`: salmon 224-228/155-169/112-123 at
+  x 2950-2965, one dark line x 2968-2971 where the diffusion under g1 begins, channel 240-253
+  from x 2974; `tla` draws that diffusion from x 2990) into the gap and turns north. Between the
+  band and the node's diffusion the poly has one dark line 6-8 px wide (y 4100-4106 at x 2941,
+  all four shots): the diffusion's lower edge under the poly. The poly's north end is free at
+  y 4052: 20 px of field lie between it and `rcs_cond_lat`'s row (`px.py col 2941 4026 4060 2`:
+  bare ground in both metal shots at y 4036-4042, 155/156/88 and 139/137/75; the row's lower
+  edge line at y 4030-4034, the end's at y 4048-4052). A green ring in the clean shot at
+  (2937,4039), in that field, is the patch enclosed by the two metals' margins, the row and the
+  poly's end: nothing is there in either chip-2 shot (tracing guide, trap 2).
+- **Nothing else is on the node**: thin E has no contact on the box (`px.py col 2914 4056 4160 3`:
+  bright in both metal shots from y 4068 to y 4131, no ring; the clean shot flat tan with no
+  green hole), and a narrow strip (x 2907-2921) runs south from the box under thin E to y 4138.
+- **The tie** (`?P`, `?B`): below the plate a loop with a dark outline (x 2871-2899, y 4112-4140,
+  `r4_f.png`) holds poly-coloured ground at x 2878-2890, y 4126-4137 (170/140/97 stripped), and a
+  band of the same colour runs east along y 4130-4140 to the south end of the narrow strip
+  (`textmap.py 2860 4096 2930 4150 2 --acid`); between the plate's bottom edge (y 4112) and the
+  loop's poly lie 10 px of dark (y 4113-4123) that the photos do not resolve into one outline or
+  two. Read as the plate's arm and a buried contact onto the strip's end, as in `tla`'s units;
+  drawn uncertain, like every load tie of the cluster. Nothing else leaves the node, so if the
+  plate were not tied to it the unit would drive nothing.
+
+So `tl2_w4080` = NOT `rcs_cond` (the pull-down, the node and the plate's poly are drawn without
+`?`), and through the tie `rcs_cond_lat` = `tl2_w4080` (`@alias rcs_cond_lat tl2_w4080`;
+Ambiguity 19). `tools/unsure.py --equations rcs_cond`: `rcs_cond_lat = NOT rcs_cond` DEPENDS (on
+the tie: without it the load's gate is not on its node), `rcs_cond = NOR(rcs_cond_n, tl3_w3982)`
+FIRM.
+
+### The top of `tla`'s column: AMB-009 re-read (run 4, piece 4)
+
+`tla` had the band of `tl3_w3982` (y 4535-4558) as a pass transistor from `rcs_cond`'s node up to
+the column's top end, and that end tied to the pad (3024-3066, 4455-4522) at the foot of
+`rcs_cond_lat`'s metal by a buried contact drawn `?B` (AMB-009), which made `rcs_cond_lat` a dynamic
+latch. AMB-009's reasons were the pad's heavy lower edge, that no other poly left the pad, and
+that the circuit made sense. Run 3 found the pad's west arm (a gate of piece 2) and piece 3
+finds the metal's other end on an inverter's load, so the pad needs no tie. Read again
+(`r4_amb9.png` 3.1x, `r4_amb9b.png` 9x, four shots each; overlay `r4_ov3.png`):
+
+- **Pad and column top are two features.** Down x 3044 (`px.py col 3044 4486 4540 2`): the pad's
+  lower outline at y 4496-4504, a lighter strip at y 4506-4510 whose red and green are equal in
+  the chip-2 metal shot (72/73/42, 120/104/60), the chip-1 metal shot (108/105/48) and the chip-2
+  stripped shot (66/72/26, 59/65/35), then a second outline at y 4512-4516, then the band. At 9x
+  the second outline runs east along y 4513 and turns south at x 3064 as the column's east edge;
+  at its west end it curves up to the pad's corner. A buried contact is one box where poly
+  overlaps diffusion; here there are two outlines with field between.
+- **The column's top is a band that runs west to R3.** `px.py row 4522 2962 3072 3`: from x 3016
+  to x 3055 the chip-2 stripped shot is 166-174/136-153/92-105 and the metal shot 170-179/
+  135-139/88-95, the colours of the open column at y 4568 (158-167/151-159/94-101 and 166-173/
+  140-145/84-92: `px.py row 4568 3004 3076 4 acid,metal`), where x 3012-3020 beside the column is
+  field (151/153/93 and 156/144-152/82-85). So at y 4514-4530 the diffusion is 20 px wider to the
+  west than the column and reaches R3's east edge. Under R3 the clean shot is tan at
+  x 3001-3010 (196-203/143-178/113-129) up to the pits of piece 2's VSS contact (2990,4513); the
+  one dark line between (x 3008-3014 stripped, x 3013-3016 clean) is R3's edge line. (AMB-009's
+  "two dark lines at x 2998 and x 3018" are the contact's pit and that edge line.)
+
+Drawn: `D 3004,4514:3063,4530` here; in `trace/tla.txt` the `?B` removed, the pad's poly ended at
+y 4504 and the column begun at y 4514. The band of `tl3_w3982` is then a pull-down from
+`rcs_cond`'s node to VSS: `rcs_cond` = NOR(`rcs_cond_n`, `tl3_w3982`), that is NOT `rcs_cond_n`
+AND NOT `tl3_w3982`. `tla`'s step formula does not use `rcs_cond` and does not change.
+
 ## Ports
 
 | Name | Layer | Where | Dir | What |
@@ -647,6 +776,28 @@ class map of `tools/classmap.py` as text, right only under metal):
    (x 3068) is present and its west edge line (x 3030) absent at that y, as for an arm coming
    from the west. Left as `tla` drew and had reviewed it; the reviewer of run 3 could not check
    it either.
+
+19. **`rcs_cond_lat` = `tl2_w4080`: joined only through piece 3's `?` tie** (run 4; an assumption,
+   tracing guide trap 17). Firm: the pull-down gated by `rcs_cond` on `tl2_w4080`; the load's plate is one poly with
+   `rcs_cond_lat`'s row, pad and metal. Assumed: that the plate is tied to the node (the loop
+   below the plate and the band to the strip's end, Logic). For it: the node has no other exit,
+   and `rcs_cond_lat` no other driver since piece 4. Aliased, not renamed.
+20. **The gate poly of piece 3 across the diffusion's lower edge** (x 2938-2953, y 4100-4106): one
+   dark line 6-8 px wide in all four shots, read as the diffusion's edge under one poly (two poly
+   ends would need two outlines and field, about 15 px). If it were a break, the poly in the gap
+   (y 4052-4098) would be a piece joined to nothing and the node would have no pull-down.
+21. **The join of piece 3's diffusion to `tla`'s VSS box across R3's west edge** (x 2953-2968):
+   hidden by the rail's edge line in the clean shot, as at every rail gate of the cluster; the
+   chip-2 stripped shot has no line there. Drawn joined. Likewise **the join of piece 4's band to
+   piece 2's VSS box across R3's east edge** (x 3004-3016): one edge line, tan on both sides. If
+   the band did not reach the box, the column's top would be a dead end and the band of
+   `tl3_w3982` would do nothing; it cannot be on the pad (Logic, piece 4).
+22. **The 10 px of dark between the plate's bottom and the tie's loop** (x 2872-2896, y 4113-4123):
+   see the tie, above. If the loop's poly is not the plate's, the tie is not there.
+23. Sizes (run 4): the pull-down of piece 3 is drawn 35/15 (the box's height by the poly's
+   width in the gap); the load 26/53. `tla` draws the diffusion under its g1 band from x 2990;
+   its west edge line is at x 2968-2971 (`px.py row 4118`), so that transistor is about 20 px
+   wider than drawn (`tla`'s geometry, left as it is: a width).
 
 ## Review
 
@@ -848,12 +999,13 @@ Round 3: no findings.
 
 ## Not done
 
-- **What is left in the gate column** (run 3 traced y 3690-3840 and y 4230-4530): the poly of
-  `rcs_cond_lat` that `tla` draws west under the rail at y 4010-4030 (`P 2950,4010:3030,4030`,
-  "not followed") and whatever it gates west of R3; the lower-left corner of piece 2's VSS box
+- **What is left in the gate column** (run 3 traced y 3690-3840 and y 4230-4530, run 4
+  y 4005-4145 and the column top at y 4504-4530): the lower-left corner of piece 2's VSS box
   (field at x 2952-2961, y 4520-4529; the box is drawn as a rectangle); `tla`'s tie of
-  `rcs_bc3460`'s load (Ambiguity 15). A sweep of the column for other undrawn features has not
-  been made.
+  `rcs_bc3460`'s load (Ambiguity 15); the diffusion east of R3 between piece 2's gate arm
+  (y 4481) and piece 4's band (x 3003-3022, y 4490-4514: light in the chip-2 stripped shot,
+  `r4_ov3.png`; part of the VSS box, not drawn). A sweep of the column for other undrawn
+  features has not been made: the VCC box of piece 3 was found only by following a poly.
 - **North of y 2630**: the horizontal metals along y 2556 and y 2598 and the plane above them
   (`tools/follow.py` from (3326,2602) and (3326,2560): corners in `cache/scratch/tl2/survey.md`),
   tl1's metals east of (2852,2553) (`tl1_w3333`) and the pad at about (2867,2595) (`tl1_w2592`),
