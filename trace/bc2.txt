@@ -1,0 +1,59 @@
+# Bottom-centre random logic (x 9000-11000, y 14050-16300). Notes: notes/blocks/bc2.md.
+@block bc2
+@requires tl1
+@w M=20 P=18
+@s 28x28
+
+# ====================================================================
+# East gate column, latch unit a (x 10472-10778, y 14801-15251): tl1's unit
+# (findcell on the clean shot: tl1_ua 0.76, tl1_ub 0.76)
+@inst tl1_ua 7940,10454 tag=a
+@inst tl1_ub 7940,10454 tag=a
+# rails over the copy (a_c.png, a_m.png 2.5x): VSS over the pull-downs' boxes, VCC over the loads'
+M 10568,14790 y15270 w=56
+N M 10568,15000 vss
+M 10746,14790 y15270 w=50
+N M 10746,15000 vcc
+# the copy's own VSS box below the stack, ring (10558,15258)
+D 10530,15235:10586,15285
+C 10558,15258
+# VCC: the loads' long ring on the VCC rail
+C 10745,15029 s=24x82
+# thin metal x 10682 between the plate's pad and the third pull-down's pad
+M 10682,14940 y15168 w=12
+C 10681,14953
+C 10681,15156
+# ---- copy a's rows west of the cell (x 10482) to their pads (a_c.png clean, a_m.png metal, 2.5x;
+# a_w.png 4x): each pad a ring in the metal shot
+# data: row y 14905-14922 to the pad (10395,14912) on a metal going west (not followed)
+P 10405,14905:10484,14922
+P 10378,14896:10414,14930
+C 10395,14912
+M 10385,14912 x10405 w=26
+N P 10450,14913 bc2_w14912
+# enable: rows y 14955 and y 15172 to pads (10441,14955), (10441,15172) on one vertical metal x 10441
+P 10450,14947:10484,14964
+P 10425,14940:10458,14972
+C 10441,14955
+P 10450,15163:10484,15180
+P 10425,15157:10458,15188
+C 10441,15172
+M 10441,14940 y15188 w=22
+N M 10441,15060 bc2_w14955
+# output: the cell's node row y 14992-15010 west to the pad (10395,15000); a metal from the north-west ends on it
+P 10405,14992:10484,15010
+P 10378,14984:10414,15016
+C 10395,15000
+M 10385,15000 x10405 w=26
+# clear: row y 15079-15096 to the pad (10395,15087), the north end of a metal x 10395 going south (not followed)
+P 10405,15079:10484,15096
+P 10378,15071:10414,15103
+C 10395,15087
+M 10395,15077 y15110 w=24
+N P 10450,15088 bc2_w15087
+# the output row carries the upper gate's node (with the thin metal x 10682)
+N P 10420,15001 bc2_w15000
+# NOT data (the inverter's output): the cell's thin metal x 10500 to the third pull-down of the lower gate
+N M 10500,14850 bc2_w14876
+# the lower gate's node (latch output, the other side), seen at the pull-down gate row y 15029
+N P 10560,15028 bc2_w15029
