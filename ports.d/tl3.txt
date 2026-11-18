@@ -44,13 +44,18 @@ tl3_w5025   P  3533,5408-5421  out  latch B's inverted output again: the row fro
 tl3_w5025   P  4250,5408-5421  out  the same row, on east to tl4's pad (4279,5413) (tl4: tl3_e5240, the gate of the inverter at y 5180-5300)
 tl3_e3550   P  3533,5450-5465  out  the row of the pad (3953,5458) at the south end of the thin metal x 3948-3962 (tl2's tl1_w4937, an alias); on west to tl1's NOR of rcs_e4; driven here if the thin metal is one metal (six ?M)
 tl4_w5455   P  4250,5450-5465  in   the row of the pad (4040,5458), from tl4's strong inverter
-tl4_w5455   M  4036-4048,5660  ?    the metal from that pad: drawn end, it goes on south (follow.py: into the wide metal at y ~6100)
 tl3_w4546   P  3530,5494-5508  out  NOR 3's output again: the row from tl2's pad (3518,5498), across the foot
 tl3_w4546   P  4250,5494-5508  out  the same row, on east to tl4's pad (4321,5504) (tl4: tl3_e4372, gate 1 of rcs_mv's NOR)
 tcw_a       P  4250,5621-5641  in   the row of track A's south pad (4104,5633), on east: tl4's tcw_a
 tl3_w3982   M  3533,5367-5380  in   tl2's track J arm; turns south at x 3608
-tl3_w3982   M  3602-3614,5660  ?    drawn end, it goes on south (follow.py: to (3608,5942))
 tl3_w4763   M  3533,5430-5442  ?    tl2's track H arm; turns south at x 3566
-tl3_w4763   M  3560-3572,5660  ?    drawn end, it goes on south (follow.py: to (3563,5724))
-vss         M  3645-3695,5660  -    the west rail, drawn to y 5660; it goes on south
-vcc         M  3824-3868,5660  -    the VCC rail, drawn to y 5660; it goes on south
+# south of the foot (y 5660-6350, run 11)
+tc1_o3527   P  4250,5708-5728  in   the row of the pad (3565,5720) at the south end of tl3_w4763's metal, on east: tl4's row of tc1_o3527 (tl3_w4763 is an alias)
+tl3_w3982   M  4250,5933-5945  ?    the thin metal from the pad (3954,5938) at the east end of the row y 5936 (from the pad (3607,5938) of tl3_w3982's metal), on east: tl4's metal y 5939 to tl5_w5936
+tl4_w5455   M  3794-3808,6350  out  the thin metal from the pad (3801,6286), south out of the strip: ur's c4l_l3 (an alias), the 4-bit counter's L3 line
+vss         M  3888-3934,6350  -    the west rail's leg after its turn east (y 6198-6244): ur's vss x 3913
+vcc         M  4126-4174,6350  -    the VCC rail's leg after its turn east (y 6109-6157): ur's vcc x 4150
+rcs_thin_e  P  3533,6317-6337  ?    the row y 6327 from tl2's pad (2913,6327), on east to pad A (3973,6329)
+rcs_thin_e  M  3967-3979,6350  ?    pad A's metal, south out of the strip to ur's pad (3968,6410), whose poly leaves east along y 6402-6422
+tcw_m6232   M  4077-4089,6350  ?    pad B's (4083,6327) thin metal, south out of the strip: ur's c4l_gab (an alias)
+tcw_m6232   P  4250,6316-6336  ?    pad B's row, on east: tl4's row to the pad (4929,6323) of tl5_w4590
