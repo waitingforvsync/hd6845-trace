@@ -11,7 +11,7 @@ x 3824-3868 and the east VSS rail x 3992-4041.
 
 ## Status
 
-Traced, extracting (32 transistors of its own, 0 errors), all in the west column:
+Traced, extracting (43 transistors of its own, 0 errors), all in the west column:
 
 - **latch A, y 3212-3652**, by placing `tl1`'s two unit cells, with its rows, its two thin
   metals and the cluster's west rail (merged 2026-11-17, db5ab84);
@@ -19,7 +19,9 @@ Traced, extracting (32 transistors of its own, 0 errors), all in the west column
   (y 3862-4046), NOR 4 (y 4643-4827), with their rows and two metals (2026-11-17 17:16 -0600);
 - **the pair at y 4046-4330** (7 transistors): a cross-coupled NOR pair, which drives
   `tl3_w3803`; **the inverter at y 4345-4490** (2); **NOR 3** (y 4469-4653, 3), the fourth
-  copy of `tl3_nor` (2026-11-17 17:48 -0600).
+  copy of `tl3_nor` (2026-11-17 17:48 -0600);
+- **latch B, y 4818-5258** (11), `tl1`'s two unit cells again, with its rows and metals
+  (2026-11-17 18:09 -0600).
 
 Everything else in the strip is surveyed only (Inventory).
 
@@ -36,7 +38,8 @@ Survey: `sv_top.png`, `sv_bot.png` (0.68x, metal and clean shot, all traces);
 | x 3575-3880, y 3688-4046 and 4469-4827 | NOR 1, NOR 2, NOR 3, NOR 4 (below) | traced |
 | x 3575-3880, y 4046-4330 | the cross-coupled pair (below): the mirror image of `tla`'s `rcs_u3425` and `rcs_b1` (`findcell` on the clean shot, window 3570 4040 3880 4345: -792,-651 mx=3725, 0.71) | traced |
 | x 3575-3880, y 4345-4490 | the inverter (below): `tl1`'s inverter (2535 4215 2835 4345) at 1041,130 (`findcell` 0.76) | traced |
-| x 3575-3880, y 4818-5258 | by `findcell`: `tl1_ua` and `tl1_ub` again at 1042,478 (0.80, 0.82): a second latch | not checked, not drawn |
+| x 3575-3880, y 4818-5258 | latch B (below): `tl1_ua` and `tl1_ub` again at 1042,478 (`findcell` 0.80, 0.82) | traced |
+| x 3540-4250, y 5318-5342 | a poly row east from the pad (3540,5328) of latch B's enable metal, under the rail and across the cluster's foot. It is textured over x 3560-3640 and 3710-3815, where there are outlined areas above and below it (y 5270-5310, 5345-5355): diffusions it may gate, not read (`lb_row.png`) | drawn to x 3640 |
 | east column (east of the rail x 3992-4041) | by `findcell`: `tla`'s `in3` unit (2840 5120 3070 5290) at 1041,-955 (0.91; y 4165-4335) and 1042,-130 (0.85; y 4990-5160); `tla`'s `in1` unit of this cluster (3820 4040 4120 4150) at 1,1129 (0.92), 0,-1084 (0.83), and turned at 0,-394, 0,-698; mirrored hits of the west cells at y 4514-4954 | not checked, not drawn |
 | (4020,3030), y 2956-3066 | top unit of the east column, read by hand and not drawn: a rail gate (node strip y 2992-3015 under the rail, gate row y 3018-3038, VSS box y 3042-3090 with contact (4025,3062)); the node goes east to a ringed box 4075-4110 x 2972-3005 under the metal x 4095-4115 and west to a load (VCC box 3822-3870 x 2985-3045, plate x 3875-3935, y 2955-3030). `e1_q.png`, `e1_top4.png`, `e1_z.png`, `e1_load.png` | read, not drawn |
 | y 5300-5560 | horizontal bus rows (metal) under the cluster's foot | not traced |
@@ -92,6 +95,39 @@ Rows and wiring outside the cells (`la_west.png` 2.4x, `la_rows.png` 3.5x in thr
 | y 3409-3429 | `tl3_w3419` (inverted output) | west under the metal x 3540 (no pad) out of the strip, to a pad (3495,3418) under a metal going south |
 | y 3497-3515 | `tl3_w3506` (clear) | west under the metal x 3540 (no pad) out of the strip, to a pad (3455,3503) |
 | y 3540-3560 | `tl3_w3550` (output) | a stub: rounded end at x ~3570. The true output is not taken west here |
+
+### Latch B (west column, y 4818-5258): traced
+
+    tl3_w4839 = NOT tl3_w4720
+    tl3_w5025 = NOT( tl3_w4720 AND tl3_w4978  OR  tl3_w5156 )
+    tl3_w5156 = NOT( tl3_w5112  OR  tl3_w4978 AND tl3_w4839  OR  tl3_w5025 )
+
+Latch A's circuit again, 1606 px lower: open while `tl3_w4978` is high, when `tl3_w5156` takes
+the data and `tl3_w5025` its inverse; `tl3_w5112` high clears it. **Its data is NOR 4's
+output**, `tl3_w4720` = NOR(`tl3_w3803`, `tl3_w4763`). Traced: the equations, by extraction.
+Believed: the two cross-couplings, which rest on the plates' ties as in latch A (AMB-026;
+`@alias tl3_w5025 tl3_w4974`).
+
+- `findcell` (clean shot): `tl1_ua` and `tl1_ub` at 1042,478 (0.80, 0.82). `cellcheck.py tl1_ua
+  --bbox 2535,4340:2840,4595 --layer acid1b --only b`: 6 of 61 blocks bad, median 0.94;
+  `tl1_ub --bbox 2535,4590:2840,4800`: 5 of 52, 0.94.
+- Overlays `lb_ov1.png`, `lb_ov2.png` (3.4x, clean shot), `lb_m1.png`, `lb_m2.png` (3.3x,
+  metal): the rail contacts, the pads, both thin metals (`follow.py 3605 5050`: y 4842-5256;
+  `follow.py 3783 5080`: y 4972-5182).
+- Under the rail (`railprof.py 3645 3690 4800 5400`): gates at y 4932-4953, 4975-4996,
+  5047-5066, 5184-5204, 5233-5247, the cells' stacks; the VSS box below from y 5255, with a
+  contact ring in the metal shot at (3662,5284).
+- The VCC box of the lower unit is the cell's own here (clean shot tan y 5008-5126 down
+  x 3847), not the longer box latch A has; one contact drawn at (3847,5030) (ring in both metal
+  shots: `textmap.py 3826 4996 3870 5050 3`).
+
+| Row | Net | Where it goes |
+|---|---|---|
+| y 4930-4948 | `tl3_w4720` (data) | the poly of the pad (3540,4912), NOR 4's output |
+| y 4970-4988 and y 5186-5206 | `tl3_w4978` (enable) | each ends on a pad with a contact under the metal x 3534-3549: (3541,4980), (3541,5199). The metal (`follow.py 3540 5080`: y 4978-5332) has a third contact on a pad (3541,5328), whose poly runs east along y 5318-5342 under the rail and on across the cluster's foot: drawn to x 3640 (`lb_en.png`, 3x metal and clean shot; `textmap.py 3520 4964 3562 4992 2`, `3520 5182 3562 5210 2`, `3516 5310 3566 5350 2`: ring, bright centre and green hole at each) |
+| y 5015-5035 | `tl3_w5025` (inverted output) | west under the metal x 3540 (no hole: `textmap.py 3522 5008 3560 5042 3`) out of the strip |
+| y 5103-5121 | `tl3_w5112` (clear) | from the west, under the metal x 3540 (no hole: `textmap.py 3522 5096 3560 5128 3`) |
+| y 5146-5166 | `tl3_w5156` (output) | a stub on the node's box, as in latch A |
 
 ### The NOR units of the west column: traced
 
@@ -251,8 +287,10 @@ plate's left end (`h_tail.png`, `h_tailm.png`, 5x four shots). The tab's tie is 
 | `tl3_w4414` | poly | (3533, 4405-4423) | in | the inverter's input |
 | `tl3_w4503` | poly | (3533, 4493-4513) | in | NOR 3 gate 1 |
 | `tl3_w4546` | poly | (3533, 4536-4556) | out | NOR 3 output |
-| `tl3_w4720` | poly pad | (3540,4912) | out | NOR 4's output; the pad's poly goes on east along y 4930-4948, not drawn |
-| `vss` | metal | x 3645-3695, y 4850 | - | west rail, drawn to here |
+| `tl3_w5025` | poly | (3533, 5015-5035) | out | latch B's inverted output |
+| `tl3_w5112` | poly | (3533, 5103-5121) | in | clear of latch B |
+| `tl3_w4978` | poly | (3640, 5318-5342) | ? | enable of latch B: the row goes on east under the rail, not drawn |
+| `vss` | metal | x 3645-3695, y 5330 | - | west rail, drawn to here |
 
 ## Ambiguities
 
@@ -394,17 +432,63 @@ from outlines); the rows west of x 3521; the plates east of the VCC rail at (388
 
 Round 1: no findings that change a connection.
 
+**Round 1, full review of latch B** (2026-11-17 18:21 -0600, a fresh Fable 5.2 agent, 52 tool
+uses, 20 images in `cache/scratch/tl3/review-4/`; commit reviewed 794186a). Told to suspect: a
+cell copy differing from its master by one contact, box or poly end (the inverter's
+pull-down, both third pull-downs, the buried boxes, the thin metal x 3605 and `follow.py`'s
+contact candidates on it); whether the metals on x 3540 around y 4920-4972 are two; the
+enable metal's three pads and any further contact on it; the data row and the pad (3540,4912)
+against the enable pad 13 px below; the VCC box and contact, the VSS box below the stack, the
+rail contacts; the stub reading of `tl3_w5156`; anything left out in x 3533-3885,
+y 4818-5310. It checked with master-against-copy mosaics (2.1x) and 4x slabs in the clean and
+chip-2 stripped shots, text maps and profiles at each pad and crossing, and 4x to 5.3x views
+in two to four shots.
+
+Findings, all geometry only or omissions, each checked by the tracer:
+
+1. A box under the VCC rail, x 3825-3872, y 5192-5258, with a metal contact near (3845,5222),
+   is not drawn. A strip leaves it east under a plate east of the rail: the VCC end of an
+   east-column load; nothing goes west from it. Added to Not done.
+2. The VCC contact (3847,5030), drawn 24x36, is one long ring y ~5025-5108 (the tracer's own
+   `textmap.py 3826 4996 3870 5050 3` has the ring from y 5017 on). Fixed: `C 3847,5066 s=24x84`.
+3. The stub of `tl3_w5156` is drawn from x 3582 (the cell's); the poly ends at the box's
+   outline, x ~3590-3597. The stub reading is right. Not changed (`tl1`'s cell).
+4. The cell's inverter gate is drawn x 3693-3705; the salmon runs x 3696-3706. The channel is
+   there (`px.py col 3700`). Not changed (`tl1`'s cell); passed on in the handoff.
+5. The VSS contact's ring is centred nearer (3663,5277) than (3662,5284). Fixed.
+
+Found correct: two metals on x 3541 (no metal at y 4940-4962; the pads (3540,4912) and
+(3541,4980) are separate polys with field between); the data row one poly with the pad
+(3540,4912); the enable metal's three contacts and no others, nothing at the crossings y 5025
+and 5112, both rows on west past x 3533; the thin metal x 3605 (contacts only at (3604,4839)
+and (3597,5245); over the two buried boxes it has no hole, as in the master); the thin metal
+x 3784 (two contacts); a field gap between gate 2's east end and the third pull-down band;
+the upper third gate one poly with the lower plate's top bar; the rail contacts and boxes; the
+rail to y 5325; the copies against the masters. Not checked: the plates' ties (AMB-026);
+x 3533-3575, y 4818-4895 by image; a green strip at x 3881-3885, y 4867-4920 on the east edge.
+
+`tools/t.sh tl3 sameconn.py 6f72ec6`: `connections identical`.
+`.venv/bin/python tools/sameconn.py 6f72ec6`: `connections identical`.
+
+Round 1: no findings that change a connection.
+
 ## Not done
 
-- Next, in this order: the second latch (y 4818-5258), whose data row starts at the pad
-  (3540,4912); the east column's units by the `findcell` hits; the top unit E1 (read, not drawn).
+- Next, in this order: the east column's units by the `findcell` hits; the top unit E1 (read,
+  not drawn); the foot of the cluster (y 5260-5560).
+- A box under the VCC rail, x 3825-3872, y 5192-5258, contact near (3845,5222), with a strip
+  east under a plate east of the rail (review of latch B): an east-column load's VCC end.
+- `tl3_w4978`'s row y 5318-5342 east of x 3640: where latch B's enable comes from, and what
+  the row gates on the way (Inventory).
+- Where the true outputs of latch A and latch B are taken (`tl3_w3550`, `tl3_w5156` end in
+  stubs; only the inverted outputs leave west).
 - Where the seven rows of the pair, the inverter and NOR 3 go west of x 3533 is `tl2`'s.
 - The poly row y 2955-2975 east from the pad (3606,2985): `tl3_w3373`'s other end
   (towards E1's load plate at x 3875-3935; not followed).
-- The west rail south of y 4850, and the metal north of the link (review round 1: wider
+- The west rail south of y 5330, and the metal north of the link (review round 1: wider
   metal x ~3648-3762 above y 2598, a supply feed, not drawn); the VCC rail's top (y 2918) is `tla`'s.
 - The VCC boxes of NOR 1 and NOR 4 run on south of the cell's box with more contacts (review:
   to about y 3880 with a contact near (3845,3840); y 4700-4810): not drawn. The inverter's VCC
   box has more contact marks than the one drawn.
-- The west rail is drawn to y 4850 from low-zoom views; its contacts between the drawn boxes are not read.
+- The west rail is drawn to y 5330 from low-zoom views; its contacts between the drawn boxes are not read.
 - The rows of latch A west of x 3533 are `tl2`'s.
