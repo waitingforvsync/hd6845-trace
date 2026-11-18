@@ -251,7 +251,7 @@ N P 2545,4070 tl1_w4070
 D 2600,4403:2650,4447
 C 2620,4420
 D 2645,4403:2716,4440
-P 2651,4388:2663,4470
+P 2651,4388:2672,4470                 # gate x 2651-2672, about 21 long (run 5, 2026-11-18; re-read item R35): the bright band x 2654-2662 of the clean shot is only the part R1's margin protected; the poly's east edge line is at x 2674-2676 in all four shots on the band, the cap and the row's end, and the gap x 2664-2672 has the third gate's poly colour in the chip-1 metal shot (tools/tl1_band.py; notes)
 # the inverter's node: wide part under thin W, a column north to y 4350, and at the column's
 # top a buried contact (heavy arch, tan inside where the row's poly lies on it) with the row
 # y 4353-4372 of the pad (2562,4361): the output, and the plate's stem
@@ -562,7 +562,7 @@ N P 2600,2591 tl1_w2592
 # metals to a corner at x 2372-2388, where it turns north out of the strip (n11.png, 3x, both
 # stripped shots). No connection in the strip.
 P 2100,2498:2388,2515
-N P 2250,2506 tl1_w2506
+N P 2250,2506 tl1_w5936
 # R1 north of tla's piece (which begins at y 3000): the same rail, x 2600-2650, without a
 # break from y 3005 up to the strip's north edge (n9.png 2.2x, n5.png, n3.png). No contact
 # under it here: the rows pass over field.
@@ -579,3 +579,37 @@ M [ 2733,2500 x2785 y2905 x2817 y2955 x2733 ]
 # the tracer on k2.png). So it is VSS, not a net of its own.
 M 2600,2470:2832,2508               # the plane's lower edge (it goes on north out of the strip)
 N M 2760,2700 vss
+
+# --- Run 5 (2026-11-18): the wire down the west margin. tl1_w5936 and the poly along the
+# strip's north edge (formerly tl1_w5936) are ONE net: the row y 5935 turns north at x 2094,
+# and by two cross-unders of the MA driver lines reaches the pad at the west end of the
+# north-edge poly. Stretches 1-3, 5-7 and part of 8 lie 0-140 px west of the strip (x < 2100),
+# in no other package's trace; they are drawn here because the wire is this strip's.
+# Views w_e, w_n, w_s, w_f, w_d, w_d2, w_g, w_h, sweep w_sv; profiles in the notes.
+# 9, 8: from the drawn row's west end (x 2110) west to the corner, north along x 2087-2100
+# (in the gap between ma3_drv_in's and ma1_drv_in's metals) to y 4950, west along y 4950-4966
+# to a pad with a contact (1978,4957).
+P 2087,5926:2112,5944
+P 2087,4950:2100,5944
+P 1996,4950:2100,4966
+P 1964,4942:1998,4973
+C 1978,4957
+# 6: metal x 1980 north to a pad with a contact (1979,4200). follow.py's contact candidate
+# (1978,4722) is dirt (no pad, no ring, field under it).
+M 1980,4957 y4200 w=12
+P 1962,4183:1998,4215
+C 1979,4200
+# 5, 4: poly east along y 4190-4206 under ma2, ma3, ma1 to x 2144, north along x 2129-2144 in
+# the gap between ma1_drv_in's and ma0_drv_in's metals to y 3193, west along y 3193-3208 to a
+# pad with a contact (2068,3200).
+P 1996,4190:2144,4206
+P 2129,3193:2144,4206
+P 2084,3193:2144,3208
+P 2052,3186:2086,3214
+C 2068,3200
+# 3, 2, 1: metal x 2064 north to the pad with a contact (2064,2507) on the west end of the
+# north-edge poly (drawn above from x 2100).
+M 2064,3200 y2507 w=12
+P 2050,2492:2088,2520
+C 2064,2507
+P 2086,2498:2102,2515

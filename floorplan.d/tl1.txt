@@ -14,9 +14,10 @@
 2250,2705:2425,3000   route   rcs_c1's poly line, west loop | from tla's row y 2986 west to x 2265, north, east along y 2720 to x 2413 and north
 2730,2500:2817,2960   route   wide metal tl1_w2930 | x 2733-2785 from the north, turning east along y 2905-2955; no contact in the strip; not R2
 2598,2500:2652,3005   power   R1 (VSS) north of the cluster | one rail with tla's piece below, on north out of the strip
-2100,5900:2545,6350   route   tracks beside the small cluster | rows into the third latch from the metals x 2326 (clear), 2414 (output), a second ck_out contact (2372,6061); the metal x 2500 passes a row from the pad-ring side (y 5935) to y 6237
+2100,5900:2545,6350   route   tracks beside the small cluster | rows into the third latch from the metals x 2326 (clear), 2414 (output), a second ck_out contact (2372,6061); the metal x 2500 takes tl1_w5936 from the row y 6237 (from the east) up to the row y 5935, which goes west to the margin wire
 2540,5690:2842,5935   logic   third latch, upper half | tl1_w5706 = NOT tl1_w3333; tl1_w5841 = NOT(tl1_w3333 AND ck_out OR tl1_w6022): second copy of the unit at y 4340-4590
 2540,5935:2842,6175   logic   third latch, lower half | tl1_w6022 = NOT(tl1_w5978 OR ck_out AND tl1_w5706 OR tl1_w5841): open while ck_out is high, data tl1_w3333, cleared by tl1_w5978; output east along y 6195
 2545,6180:2817,6300   route   rows south of the small cluster | y 6195 (tl1_w6022, the third latch's output), y 6237 (tl1_w5936), y 6282 (lc_step): straight east under the rails
 2598,5320:2652,6350   power   R1 (VSS) over the foot and the small cluster | one rail with tla's piece above; on south out of the strip
 2780,5320:2832,6350   power   R2 (VCC) over the foot and the small cluster | one rail with tla's piece above; on south out of the strip
+1960,2490:2150,5950   route   tl1_w5936 up the west margin | the third latch's buffered output from the row y 5935 north to the poly along y 2506: poly x 2094 (y 4958-5935), metal x 1980 (y 4200-4957), poly x 2137 (y 3200-4198), metal x 2064 (y 2507-3200): two cross-unders of the MA0-MA3 driver lines
