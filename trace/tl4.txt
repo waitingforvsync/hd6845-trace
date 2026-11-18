@@ -291,3 +291,107 @@ P 4640,4925:4786,4946
 # the upper node (thin metal, pad contact (4868,4930)) gates the lower node's east leg
 P 4800,4918:4892,4946
 C 4868,4930
+
+# ====================================================================
+# The NOR below the pair, y 4990-5170 (hand-traced):
+#   tl4_w5068 = NOR( tl4_w4545, tl4_w4850 )
+# Read on n_*.png (2.8x), p_*.png (6x, the load), q_*.png (5x, the west side); profiles in the
+# notes. The stack is one diffusion from the pair's lower VSS box (contact (4747,4975)) down to a
+# VSS box with a contact (4750,5145): under RA and in the open west of it (x 4703-4728), as in
+# the pair. Two rows cross it; the node between them (y 5038-5098) leaves west through a buried
+# contact onto the poly of a pad, and east as the strip under the load plate.
+M 4759,5005 y5180 w=54                # RA goes on south
+M 4928,5005 y5180 w=44                # RB likewise
+D 4703,4992:4780,5150                 # the stack: VSS, gate 1, node, gate 2, VSS
+D 4728,5122:4782,5170                 # the lower VSS box
+C 4750,5145
+# gate 1: tl4_w4545's vertical poly (from the pad (4623,4893)) turns east at its south end
+P 4619,4988:4643,5033
+P 4619,5011:4792,5033
+# gate 2: row from the pad with a contact (4583,5108) at the south end of the track x 4581
+# (tl4_w4850: the metal ends on this pad)
+P 4563,5092:4600,5128
+C 4583,5108
+P 4595,5100:4791,5122
+# the node's arm west with a buried contact (heavy box) onto the poly of a pad with a contact
+# (4625,5068): the north end of the track x 4625's south part (follow.py: (4626,5064)-(4624,5506),
+# contact candidate (4625,5257); drawn to y 5250 so far)
+D 4676,5055:4706,5083
+B 4674,5053:4703,5085
+P 4640,5057:4702,5082
+P 4608,5050:4645,5088
+C 4625,5068
+M 4625,5058 y5250 w=14
+N P 4655,5068 tl4_w5068
+# load: plate x 4832-4873 over the strip y 5050-5086 from the node to the VCC box under RB
+# (contact (4925,5068)). The node's tail runs south west of the plate (x 4799-4820) and east
+# under the plate's foot, where a heavy box sits: the tie, uncertain as in the other loads (AMB-026)
+D 4776,5050:4910,5086
+P 4832,5032:4873,5132
+D 4905,5040:4958,5092
+C 4925,5068 s=22x30
+?D 4799,5084:4820,5140
+?D 4815,5122:4856,5140
+?B 4829,5106:4858,5134
+
+# ====================================================================
+# The two inverters below the NOR, y 5175-5450.
+#   tl4_w4025 = NOT tl4_w5068        (the data of the latch at y 3906-4390)
+#   tl4_w5455 = NOT tl4_w4243        (the latch's output, through a strong inverter)
+# Read on n_*.png (2.8x), r_*.png and s_*.png (4.8x, three shots), v_*.png (7x, the lower
+# load), u_*.png (the rows' pads in the bus field), y1/y2.png (the two tracks), x_*.png (south).
+M 4759,5180 y5420 w=54                # RA goes on south
+M 4928,5180 y5420 w=44                # RB likewise
+# ---- the upper inverter, y 5175-5312: the body of the inverter at y 3781-3911 (tl1's inverter)
+# moved by 1,1389 (findcell: tl1's at 2126,955, clean shot, score 0.75); rows read here
+D 4724,5203:4781,5256
+D 4724,5250:4778,5312
+C 4748,5283 s=22x36
+D 4666,5186:4708,5223
+D 4700,5203:4728,5223                 # the arm is narrower next to RA (review round 6)
+B 4664,5184:4708,5220
+D 4776,5201:4851,5224
+D 4846,5196:4918,5221
+D 4906,5194:4958,5258
+C 4927,5229
+D 4825,5221:4845,5272
+P 4848,5176:4902,5248
+?P 4842,5246:4877,5280
+?B 4840,5244:4879,5282
+# output row y 5186-5206 from the node box west to a pad with a contact (4455,5197): the south
+# end of the track x 4452 (tl4_w4025; y1/y2.png: straight, no pad between y 4395 and here)
+P 4470,5186:4703,5206
+P 4437,5179:4474,5215
+C 4455,5197
+M 4452,4390 y5205
+# gate row y 5231-5251 across RA from the second pad of the track x 4625 (tl4_w5068)
+P 4640,5231:4797,5251
+P 4608,5222:4645,5258
+C 4625,5240
+# ---- the lower inverter, y 5297-5450 (hand-traced). One wide gate (x 4675-4808, in the open
+# west of RA, under it and east of it) between a VSS strip along the top (y 5297-5315, on the
+# upper inverter's VSS box) and the node (y 5340-5368).
+D 4675,5297:4808,5368
+# gate row y 5316-5338 from a pad with a contact (4537,5325); the track x 4496 (tl4_w4243)
+# turns east onto the pad (y1/y2.png: straight, no pad between y 4395 and here)
+P 4550,5316:4830,5338
+P 4520,5307:4556,5345
+C 4537,5325
+M 4495,4390 y5327 x4540
+# the node west: a buried contact (heavy box) onto a poly that runs south into a row
+# y 5445-5465 (x_metal.png: a T; the row crosses the whole strip, only a stub is drawn)
+D 4672,5360:4702,5390
+B 4664,5356:4702,5392
+P 4667,5362:4691,5450
+P 4650,5445:4710,5465
+N P 4679,5420 tl4_w5455
+# the node east: a strip (y 5348-5375) to a leg north (x 4853-4873), then under the load plate
+# (x 4873-4900: a short, wide load) to the VCC box under RB (ring (4925, 5320-5360))
+D 4800,5348:4860,5375
+D 4853,5303:4910,5375
+D 4905,5303:4958,5377
+C 4927,5340 s=22x44
+P 4873,5292:4908,5385
+P 4835,5380:4908,5402                 # the plate's foot, west to a heavy box on the node's strip:
+?P 4812,5362:4840,5400                # the tie, uncertain as in the other loads (AMB-026)
+?B 4808,5357:4842,5394
