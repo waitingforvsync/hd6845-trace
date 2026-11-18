@@ -9,7 +9,7 @@
 # from y 3050). The WEST rail x 3645-3695 is the same metal as the east VSS rail: both run up
 # to one wide metal along y 2595-2648 (top_m.png, 2.2x metal; follow.py 3667 3400 N: corners
 # (3680,2638) E, (4028,2638) S). So the west rail is VSS, the mirror of tla's R1.
-M 3670,2622 y4850 w=50                # west rail; drawn to y 4850 (sv_top.png, sv_bot.png, n34_ov.png); it goes on south
+M 3670,2622 y5330 w=50                # west rail; drawn to y 5330 (sv_top.png, sv_bot.png, n34_ov.png, lb_row.png); it goes on south
 M 3670,2622 x4020 w=52                # the link along the top
 M 4020,2622 y3060 w=50                # the east VSS rail north of tla's piece
 N M 3670,3400 vss
@@ -97,8 +97,7 @@ D 3822,3756:3882,3798                 # VCC box
 C 3845,3773
 @end
 @inst tl3_nor 0,174 tag=n2
-# (the unit at 0,781, y 4469-4653, is a copy too but is NOT placed yet: its top arm lands on the
-# diffusion under the rail at y 4433-4486, which belongs to the unit above and is not read)
+@inst tl3_nor 0,781 tag=n3
 @inst tl3_nor 0,955 tag=n4
 # ---- rows of NOR 1 (y 3688-3872):  tl3_w3765 = NOR(tl3_w3722, tl3_w3803)
 P 3533,3712:3590,3732                 # gate 1, from the west
@@ -148,3 +147,163 @@ N P 3565,4763 tl3_w4763
 # in the metal shot, n34_mov.png): NOR 4's top arm lands on it
 D 3640,4608:3694,4653
 C 3664,4633
+
+# ====================================================================
+# West column, y 4046-4330: a cross-coupled pair, the mirror image of tla's inverter rcs_u3425
+# and NOR rcs_b1 east of R3 (findcell, clean shot: -792,-651 mx=3725, 0.71; the parts are
+# drawn here from this cluster's own photos, g_c.png 3.4x, g_w2.png 4.4x, g_e2.png 3.6x, g_m.png).
+#   tl3_w3803 = NOR(tl3_w4112, tl3_w4243)            if the ?P below is right
+#   tl3_w4243 = NOR(tl3_w4200, tl3_w4290, tl3_w3803)
+# ---- upper unit: node tl3_w3803, pull-down gated by the row y 4101-4120 from the west
+D 3597,4055:3630,4133                 # the column (acid R-G 25 against 5 for the field west of it: px.py row 4150)
+P 3533,4101:3638,4120
+N P 3560,4111 tl3_w4112
+D 3605,4065:3712,4092                 # node strip east under the rail
+# the node's buried contact box; here its poly runs west to the pad (3540,4068) of the metal
+# x 3540 (in tla's mirror the same box has no poly leaving it)
+B 3582,4056:3612,4092
+P 3550,4059:3608,4079
+# the rail's VSS box below the gate (contact ring in the metal shot at (3655,4152)); the column
+# meets it along x 3628-3632, a weak line (px.py row 4160: 107/73/63 for one sample, against
+# 48/12/25 at the column's west edge)
+D 3632,4130:3678,4180                 # east edge x ~3678 at y 4160 (review round 3); the upper part reaches the poly
+D 3662,4113:3690,4153
+C 3658,4155 s=30x30
+D 3625,4130:3640,4180
+# a second pull-down on the node: the vertical poly x 3690-3710, y 4097-4196, under the rail's east
+# edge, over a channel y 4118-4153 (clean shot 230-244/165-177/115-125, against 178-194/155-175
+# over the field above: px.py row 4135 and row 4108) between the VSS box and the node's box
+# east of it. Its top is a cap 5 px below the node strip (no tie seen).
+D 3686,4118:3726,4153
+P 3690,4097:3712,4196                 # east edge x ~3712 (review round 3)
+# Its bottom end reaches the buried contact box of the lower unit's load plate arm: no field
+# colour between them in any shot, only dark lines for about 10 px (px.py rows 4184-4196;
+# g_j1.png, g_j2.png 6.6x). Taken as joined (uncertain): two polys cannot lie that close, the
+# 43 px of poly below the channel have no other purpose, and it makes the pair a latch.
+?P 3704,4182:3728,4204
+# load: VCC box, strip under plate A to the node's box east of the rail (acid R-G 22-28 down
+# x 3732, y 4070-4124); plate A and its pad are one poly, tied to the box by a buried contact
+# and contacted by the strap
+D 3819,4062:3879,4130
+C 3842,4100 s=24x30
+D 3704,4068:3824,4092
+D 3712,4065:3752,4151
+P 3760,4062:3812,4153
+C 3782,4137
+P 3728,4128:3766,4149
+B 3724,4122:3759,4152
+M 3782,4123 y4305 w=36                # the strap x 3765-3800: plate A's pad to the pad (3783,4290)
+# ---- lower unit: node tl3_w4243, three pull-downs
+D 3597,4129:3630,4313
+D 3597,4299:3650,4313                 # bottom arm to the rail's VSS box below
+D 3640,4306:3690,4348
+C 3663,4330 s=24x30
+P 3533,4191:3638,4209                 # gate 1, from the west
+N P 3560,4200 tl3_w4200
+P 3533,4281:3638,4299                 # gate 2, from the west (it passes under the metal x 3540 without a contact: no hole in the clean shot, textmap 3520 4270 3560 4300)
+N P 3560,4290 tl3_w4290
+# the node's buried contact box: a poly patch only, nothing leaves it (px.py row 4243: field
+# under the metal x 3531-3552 and field x 3558-3570)
+B 3580,4228:3614,4260
+P 3582,4232:3612,4254
+N D 3613,4245 tl3_w4243
+D 3605,4228:3716,4252                 # node strip east under the rail
+D 3712,4215:3752,4320                 # the box east of the rail (acid R-G 26-31 down x 3732, y 4218-4258 and 4298-4312)
+D 3684,4302:3716,4318                 # its part below the gate links west to the rail's VSS box (clean shot tan at (3700,4308))
+# third pull-down: the arm of the strap's bottom pad crosses the box at y 4268-4290
+P 3758,4268:3806,4308
+C 3783,4290
+P 3688,4268:3764,4290
+# load: VCC box, strip under plate B; the plate's pad (y 4180-4205) has an arm west tied to the
+# top of the box by a buried contact
+D 3819,4195:3879,4290
+C 3846,4222 s=24x30
+C 3843,4262                            # second contact ring in the metal shot (g_ov2m.png)
+D 3747,4213:3824,4243
+P 3760,4180:3812,4248
+P 3724,4183:3764,4205
+B 3716,4178:3747,4210
+D 3716,4179:3747,4217
+
+# ====================================================================
+# West column, y 4345-4490: an inverter, a "rail gate": tl1's inverter tl1_w4243 again
+# (findcell, clean shot: 1041,130, 0.76); its lines moved by 1041,130 and fitted on h_ov.png.
+#   tl3_w4373 = NOT tl3_w4414
+D 3639,4380:3696,4429                 # node under the rail (y 4382-4402), gate, down to the VSS box
+D 3639,4425:3693,4488                 # rail box below, VSS contact
+C 3663,4455
+D 3581,4361:3643,4398                 # node, part west of the rail
+B 3579,4359:3623,4395
+P 3533,4363:3619,4383                 # output poly, west out of the strip
+N P 3560,4373 tl3_w4373
+P 3533,4405:3711,4423                 # gate: from the west, across the rail
+N P 3560,4414 tl3_w4414
+# load
+D 3691,4376:3766,4399
+D 3761,4371:3833,4396
+D 3819,4368:3879,4470
+C 3845,4395
+D 3737,4396:3757,4447                 # tail down from the strip into the tab box (h_tail.png, h_tailm.png 5x, four shots)
+P 3763,4351:3817,4423
+?P 3757,4419:3793,4451
+?B 3747,4417:3795,4453
+# ---- rows of NOR 3 (y 4469-4653):  tl3_w4546 = NOR(tl3_w4503, tl3_w3803)
+# Its top arm lands on the inverter's VSS box (y 4425-4488, above).
+P 3533,4493:3590,4513                 # gate 1, from the west
+N P 3560,4503 tl3_w4503
+P 3533,4536:3590,4556                 # output, west out of the strip
+N P 3560,4546 tl3_w4546
+P 3550,4579:3590,4599                 # gate 2: from the pad (3540,4590) of the metal x 3540
+
+# ====================================================================
+# West column, y 4818-5258: latch B, tl1_ua / tl1_ub again.
+# findcell (clean shot): 1042,478 (0.80, 0.82); cellcheck 6 of 61 and 5 of 52 blocks bad
+# (median 0.94). Overlays lb_ov1.png, lb_ov2.png (3.4x, clean shot). Its data is NOR 4's output.
+#   tl3_w4839 = NOT tl3_w4720
+#   tl3_w5025 = NOT( tl3_w4720 AND tl3_w4978  OR  tl3_w5156 )
+#   tl3_w5156 = NOT( tl3_w5112  OR  tl3_w4978 AND tl3_w4839  OR  tl3_w5025 )
+@inst tl1_ua 1042,478 tag=b
+@inst tl1_ub 1042,478 tag=b
+# the VSS box under the rail below the stack (railprof 3645 3690 4800 5400: diffusion from y 5255;
+# contact ring in the metal shot, lb_row.png)
+D 3642,5257:3699,5305
+C 3663,5277                            # ring centre (review)
+# the VCC box here is the cell's own (clean shot tan y 5008-5126 down x 3847: px.py col 3847 4950
+# 5200 6); its contact to the VCC rail (ring from y ~5000 in the metal shot, lb_m1.png, lb_m2.png)
+C 3847,5066 s=24x84                    # one long ring y ~5025-5108 (review)
+# the thin metal x 3784 (follow.py 3783 5080: (3783,4972)-(3783,5182)), as in latch A
+M 3784,4962 y5192 w=12
+P 3767,4960:3804,4990
+C 3784,4974
+P 3767,5166:3804,5204
+C 3784,5181
+N M 3784,5076 tl3_w4974
+@alias tl3_w5025 tl3_w4974
+N M 3606,5056 tl3_w4839
+N P 3593,5156 tl3_w5156
+# ---- the rows from the west
+# data: the poly of the pad (3540,4912) (NOR 4's output, tl3_w4720) goes east along y 4930-4948
+P 3550,4930:3586,4948
+# enable: the metal x 3534-3549 (follow.py 3540 5080: (3542,4978)-(3542,5332)) has three contacts
+# on pads: (3541,4980) on the row y 4970-4988 (ua's gate 2), (3541,5199) on the row y 5186-5206
+# (ub's gate 1) and (3541,5328), whose poly runs east along y 5318-5342 under the rail and on
+# across the cluster's foot (ring, bright centre and green hole each: textmap 3520 4964 3562
+# 4992 2, 3520 5182 3562 5210 2, 3516 5310 3566 5350 2). That row is drawn to x 3640 only: it
+# goes on east over diffusions that are not read (lb_row.png).
+P 3545,4970:3586,4988
+P 3522,4964:3559,4994
+C 3541,4980
+P 3545,5186:3586,5206
+P 3522,5183:3559,5213
+C 3541,5199
+M 3541,4972 y5336 w=14
+P 3522,5313:3559,5343
+C 3541,5328
+P 3550,5318:3640,5342
+N M 3541,5080 tl3_w4978
+# ua's node (the inverted output): row y 5015-5035 west out of the strip (under the metal x 3540, no hole: textmap 3522 5008 3560 5042 3)
+P 3533,5015:3581,5035
+N P 3555,5025 tl3_w5025
+# clear: row y 5103-5121 from the west (under the metal x 3540, no hole: textmap 3522 5096 3560 5128 3)
+P 3533,5103:3586,5121
+N P 3560,5112 tl3_w5112
