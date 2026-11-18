@@ -33,7 +33,7 @@ tl3_e4152   P  4160,5620-5645  ?    the poly of its south pad (4104,5633): drawn
 tl3_e4635   P  4250,4627-4642  in   latch C's data, from the east
 tl3_e4808   M  4250,5889-5901  in   latch C's clear: the metal x 4192 from the pad (4190,4808), east along y 5895
 tl3_e4808   P  4124,5366-5377  ?    the row of the clear metal's second pad (4192,5373): drawn end, it goes on west across the foot
-tl3_e4852   P  4118,4453-4466  out  latch C's output, the row of the pad (4236,4461): drawn end, it goes on west under the rail
+tl3_e4372   P  4250,4366-4380  in   gate 1 of the NOR under the rail that drives rcs_mv, from the east
 tl3_e4152   P  4250,4496-4510  ?    the row of track A's pad (4146,4510), on east: tl4's tl4_w4501
 rcs_mv      P  4250,4736-4751  in   the poly of the pad (4192,4743) at the south end of rcs_mv's track, from the east
 tl3_e4915   P  4250,4904-4925  ?    the poly of the pad (4234,4918) on the track x 4236, on east

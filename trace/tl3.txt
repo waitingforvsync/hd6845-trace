@@ -554,3 +554,49 @@ P 4217,4902:4252,4930
 C 4234,4918 s=20x20
 M 4236,4910 y5766 x4250 w=13
 N M 4236,5300 tl3_e4915
+
+# ====================================================================
+# East column, y 4345-4514: a NOR built under the VSS rail, which DRIVES rcs_mv.
+#   rcs_mv = NOR(tl3_e4372, tl3_e4852)        (through the ?D link of the output box, below)
+# One diffusion column under the rail and east of it (x 4005-4076: clean shot flat tan under
+# the rail; chip-2 shots plain between the edge lines x 4046 and x 4078, rn1_out.png 4.2x), from
+# e3's lower VSS box down to a VSS box of its own. Two gate rows from the bus field cross it
+# (px.py col 4017 4340 4520 6: gates y 4365-4381 and y 4450-4470); the node is between them.
+# Read on rn1_a.png (2.4x), rn1_b.png (3.3x both stripped shots), rn1_out.png, rn1_load.png.
+D 4005,4345:4076,4496                 # the column: VSS above gate 1 (onto e3's lower box, contact (4027,4327)), node, VSS below gate 2
+D 4005,4490:4058,4512                 # the rail's VSS box below gate 2 (east of the rail the column ends at y ~4496)
+C 4028,4495                           # ring, bright centre, green hole (textmap 3996 4474 4084 4522 3)
+# gate 1: a row y 4366-4380 from the east, under track A and rcs_mv's track without a contact
+# (textmap 4086 4352 4262 4396 3: poly unbroken, no hole, no ring), across x 4250
+P 3998,4365:4250,4381
+N P 4220,4373 tl3_e4372
+# gate 2: latch C's output row (the row of the pad (4236,4461)), on west under the rail
+P 3998,4452:4120,4470
+# the node's output: a buried contact box east of the column (heavy frame 4083-4112 x 4402-4432,
+# light centre 4090-4101 x 4413-4425, in both chip-2 shots: px.py row 4420 4040 4146 3, col 4096
+# 4388 4446 3; rn1_box.png 6x four shots) with a poly row y 4410-4426 east to a pad with a
+# contact (4193,4420) ON rcs_mv's TRACK (ring, bright centre in both metal shots, green hole:
+# textmap 4104 4398 4262 4440 3; no contact under track A). The box's frame and the column's
+# edge line (x 4073-4078) merge into 15 px of dark; the 10 px of diffusion between them are
+# not resolved in any shot: uncertain.
+?D 4070,4408:4102,4428
+B 4083,4402:4112,4432
+P 4088,4410:4182,4426
+P 4175,4404:4212,4434
+C 4193,4420 s=20x20
+# load: the node's strip y 4402-4436 runs west under the rail, through the gap, under the thin
+# metal x 3948-3962 and under a plate x 3912-3948 to the VCC box of the west column's inverter
+# (px.py row 4420 3870 4012 4: open diffusion x 3890-3902, open poly x 3916-3936, protected
+# poly to x 3948, protected diffusion x 3956-3970 and from x 3990; in the gap x 3972-3986 the
+# clean shot is dark (trap 2) and the chip-2 metal shot plain, not orange). Plate y 4384-4444
+# (px.py col 3925 4368 4500 4), with a tab south to y ~4480.
+D 3877,4402:4010,4436
+P 3912,4384:3948,4444
+P 3916,4440:3938,4482
+# the tie: a tail of the strip down the gap (x 3966-3984 to y 4486: px.py col 3976 4380 4504 4,
+# chip-2 shots plain, pinker than field) and a heavy box (3927-3970, 4455-4488) where the tab
+# meets it, under the thin metal (dark over it, trap 22). Read from outlines: uncertain, as
+# the other load ties.
+D 3966,4430:3984,4486
+?P 3930,4460:3968,4484
+?B 3950,4456:3972,4488
