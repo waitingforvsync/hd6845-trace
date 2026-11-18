@@ -105,17 +105,17 @@ M 16299,13010 y14700 w=16
 N M 16299,14690 ar_load
 C 16297,13022
 P 16275,13006:16316,13037
-# areg_w6: metal x 16341 from the bottom of the region up to a contact at 16337,13264; poly
+# dl7_q_n: metal x 16341 from the bottom of the region up to a contact at 16337,13264; poly
 # from there to the right (towards the right-hand column), drawn to x 16480
 M 16341,13255 y14700 w=15
-N M 16341,14690 areg_w6
+N M 16341,14690 dl7_q_n
 C 16337,13264
 P 16322,13250:16353,13278
 P 16337,13263 x16480 w=16
-# areg_w7: poly x 16364 from the bottom of the region up to y 13453, then right (towards the
+# dl6_q_n: poly x 16364 from the bottom of the region up to y 13453, then right (towards the
 # right-hand column), drawn to x 16480
 P 16364,14700 y13453 x16480 w=20
-N P 16364,14690 areg_w7
+N P 16364,14690 dl6_q_n
 # wide metal rail x 16402-16451, full height of the region. Supply not identified.
 M 16426,12900 y14700 w=49
 N M 16426,13000 areg_rail_r

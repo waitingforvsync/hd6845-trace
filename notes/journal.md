@@ -1492,3 +1492,44 @@ through `bust`'s two `?P` rows), and the deliberate aliases (`ar#_q`, `*_tab`, `
 main. `operation.md`: the tracers had already added their rows (`tl1`'s latches, `tcw`'s field
 latch); header and count updated. Extraction 2,191 nets, 3,890 transistors, 0 errors, 0 warnings;
 779 of 1,136 equations firm. Coverage: traced 60.3 %, in a package 99.3 %, in neither 0.0 %.
+
+## 2026-11-18 11:26  32 handoffs processed (overnight); Refresh
+
+Merged overnight by their tracers: `dbus` run 7 (Matt Godbolt), `dlat` (Tom Seddon, done), `tc2`
+(dp111, four runs, done), `tcw` run 3 (Matt), `tl1` (dp111, fourth run, released), `tl2` (Matt run 1,
+Tom runs 2-3), `tl3` and `tl4` (Matt, claims kept), `tl5` and `tl6` (dp111, done), and five small
+packages by dp111 on Opus (below). Extraction 2,347 nets, 4,156 transistors, 0 errors, 0 warnings;
+822 of 1,222 equations firm; traced 62.2 %, in a package 99.3 %, in neither 0.0 %.
+
+- **Opus work.** dp111's Fable allowance ran out (about a week). `bc2` (22 transistors), `bc3` (2),
+  `lc2` (22), `lc3` (4) and `tr1` (6) were traced and reviewed on claude-opus and merged although the
+  gate's model check (8b) failed; the handoffs said so. The user (2026-11-18): **keep them on main,
+  have each reviewed on Fable (R31), and no more Opus merges** (dp111 to pause until Fable is back;
+  a message drafted for the user). `bc4` is a survey on its branch only.
+- **Master list.** `dbus` done (the `dbus (continue)` row dropped; AMB-021 kept by three readers);
+  `dlat` done, so **PR #17 can now be compared** with it; `tc2` done as far as the photos allow;
+  `tl1`-`tl6`, `lc1`-`lc3`, `bc2`-`bc4`, `tr1`/`tr2` now give each part's status; the `tcw` row's name
+  and region repaired (my edit of 2026-11-17 had overwritten the name). `lc1` is claimed by Matt for
+  scarybeasts (no write access yet). New in the `tl` row: the wide metal band y 2180-2500 north of the
+  strips is drawn by no block.
+- **Re-read** R31 (the Opus pieces, a Fable review), R32 (`tl2`'s five traps in the clusters: rows run
+  onto a pad across a gap, one poly drawn across a rail/thin-metal gap, load ties by analogy, load
+  gate polys stopped at the tie, NORs short of inputs), R33 (`railprof.py` under rails), R34
+  (mirrored `findcell` copies may be re-drawn layouts), R35 (`tl1`'s cells omit the thin metal
+  through each unit; their master geometry), R36 (rails drawn to a round coordinate), R37 (every
+  `@alias`: it joins nothing). R20 and R26 extended.
+- **Ambiguities.** AMB-009 corrected (the pass transistor's gate is `tl3_w3982`, not `clk_tl`);
+  AMB-014, 015, 020, 021, 026 updated; new AMB-027 (`tc2`'s latch joins), 028 (`tc1_ns3` over `rax`;
+  `tc2_sr_r`), 029 (`tl2`'s pair through one load tie), 030 (`tl3`'s gate to the lower unit's arm).
+- **Other blocks' notes**: `dbus`, `dpad`, `areg`, `bd2`, `rdp3`, `rax`, `fld`, `r9m`, `tc2`, `tl1`, `tl5`,
+  `bust`, `tla` (a corrections section from `tl1`-`tl4`); glossary rows `rcs_thin_e`, `tla_w#`, `r9m_l3`;
+  `ports.d/tl1.txt` (`tl1_w5936` is an input). Floor plan: `areg`'s untraced strip removed and
+  `bd2`'s right-hand column trimmed (both now `dlat`), the coarse lower top-centre block removed
+  (`tc2`). `tools/ports.py --near` no longer crashes on two ports at equal distance (from `tc2`).
+
+**Refresh.** Renamed (`names.py compare`: only names changed): `areg_w6` -> `dl7_q_n`, `areg_w7` ->
+`dl6_q_n` (the bit 7 and bit 6 latch outputs, proposed by `dlat`); the glossary row `areg_w#` dropped.
+Left on purpose: `rcs_a2` and `rcs_x1` gather placeholders of `tl1` and `tl3` but are themselves
+unidentified, and `tl3` is claimed; the deliberate aliases as before. `operation.md`: the tracers had
+added their rows (`tl2`'s step-logic gates, `rcs_x1` as the clear of four latches, `tl4`, `tl5`,
+`tc2`, `dlat`); header and count updated.

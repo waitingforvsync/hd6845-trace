@@ -37,6 +37,8 @@ access). In short:
   whose cost report (`tools/costs.py`, committed as `costs/<git name>.json`) shows any other
   model doing its work. The coordinator may use another model for coordination
   (`.claude/settings.local.json`).
+  Work merged anyway from another model (dp111's Opus pieces, 2026-11-18) stays on main
+  but gets a Fable review (re-read item R31); no more such merges (user, 2026-11-18).
 
 - Trace independently. Do not open Lance Ewing's HD6845 reverse-engineering work (on
   GitHub) or any other 6845 netlist/schematic effort until our own trace of the

@@ -1045,7 +1045,7 @@ Looked at because of the sweep:
 | `tc2_sr_c` | M | x 6400, y 6360-6380 | ? | going on west (follower: end (6184,6370) on a pad) |
 | `ral_stb` | M | x 8198-8212, y 4450 | ? | from `tc1` (its bus metal ns4) |
 | `ral_stb` | P | x 8250, y 5359-5379 | ? | the poly from the contact (8204,5371), going on east |
-| `ral_stb` | M | x 6400, y 6316-6340 | ? | going on west (follower: end (6012,6068)) |
+| `ral_stb` | M | x 6400, y 6316-6340 | ? | going on west: pad (6145,6322), row, pad (5755,6322), south (`tl6`; the follower's end (6012,6068) was a jump onto `tcw_a`'s metal x 6105) |
 | `tc2_r5718` | P | x 8250, y 5708-5728 | ? | the row going on east |
 | `tc2_r5718` | M | x 7522-7544, y 6400 | ? | going on south (follower: end (7353,7465)) |
 | `tc1_ns3` | M | x 7894-7909, y 4450 | ? | from `tc1` (its contact (7905,4370)) |
@@ -1127,7 +1127,7 @@ Lines that leave the region (each is drawn to the edge; the port table has the p
 - West of x 6400: `tc2_o5175` (poly y 5173), `tc1_p4308` (poly y 5003), `tc1_o3527` (metal
   y 4482; follower: end (6012,4484)), `ras_o0_alt2` (metal y 4788; follower: end (6059,4876)),
   `tc2_m6490` (metal y 5567), `tc2_m6447` (metal y 5611), `tc2_m6404` (metal y 6026, turning
-  north at x 6362), `ral_stb` (metal y 6328; follower: end (6012,6068)), `tc2_sr_c` (metal
+  north at x 6362), `ral_stb` (metal y 6328; west of the region by `tl6`'s route, not the follower's end (6012,6068)), `tc2_sr_c` (metal
   y 6370 to a pad (6184,6370)), the wide ground metal y 6198-6243.
 - South of y 6400: `tc1_m6817` (poly x 6534), `tc2_m6490` (poly x 6492), `tc2_m6447` (poly
   x 6451), `tc2_m6404` (poly x 6405), `tc2_r5589` (poly x 6843), `tc2_r5718` (metal x 7533;

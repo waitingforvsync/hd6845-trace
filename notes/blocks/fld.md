@@ -226,3 +226,8 @@ polys with pads at both ends).
 The thin metal that arrives from the north along x 6621 and ends at about (6622,5006) is
 `tc1_p4308`, the input of the inverter `tc1_o4280` (`notes/blocks/tc1.md`). What it lands on in
 this block's upper group is the source of that input.
+
+## Note (coordinator, from the handoffs of 2026-11-17/18)
+
+The east ground rail ends at y 6036, not y 6110 (the trace is fixed: e1a1151, by `tc2`); bare ground
+at y 6042-6096. `fld`'s VCC rail is joined by metal to `tcw`'s, its VSS rail to `tc1`'s (AMB-014).

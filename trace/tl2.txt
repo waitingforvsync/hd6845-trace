@@ -394,3 +394,101 @@ D 2957,4445:3009,4530
 N D 2983,4452 tl2_w4452
 P 2932,4462:3030,4481
 C 2990,4513 s=26x26
+
+# ---- run 4, piece 3: an inverter between R2 and R3 at y 4005-4145, where rcs_cond_lat's poly
+# (tla: P 2950,4010:3030,4030, "not followed") ends:
+#   tl2_w4080 = NOT rcs_cond
+# and the load's plate is ON rcs_cond_lat's poly, so through the load's tie (uncertain, as every
+# load tie of this cluster) tl2_w4080 is rcs_cond_lat: the line that tla read as a dynamic latch
+# node is driven by this inverter.
+# VCC box under R2 with its contact (ring in both metal shots, green hole in the clean shot)
+D 2788,4068:2842,4110
+C 2804,4084 s=24x24
+# load: strip y 4068-4094 east under the plate (open poly x 2843-2896, y 4048-4110; edge lines
+# y 4064-4068 and 4092-4096 across it, the band between them channel-bright in the clean shot)
+D 2836,4068:2902,4094
+P 2843,4048:2896,4110
+# the node: a box under thin E (x 2897-2936, y 4067-4102; no contact of thin E: px.py col 2914),
+# which goes on east through the gap under the gate and under R3's west edge onto tla's VSS box
+# (D 2968,4045:3018,4105, contact (2985,4070)); a narrow strip south under thin E to the tie
+D 2897,4067:2972,4102
+D 2907,4098:2921,4138
+N D 2915,4085 tl2_w4080
+# gate: the WEST END of tla's g1 band (rcs_cond; tla: P 2985,4103:3095,4128) runs on west under
+# R3 over field (px.py row 4118: salmon x 2947-2966, the diffusion's edge line x 2968-2971,
+# channel from x 2974) to the gap and turns NORTH in the gap (x 2938-2957, the east edge under R3's margin) across the node's
+# diffusion to a free end at y 4052; 20 px of field between that end and rcs_cond_lat's row
+# (px.py col 2941 4026 4060 2: bare ground in both metal shots at y 4036-4042)
+P 2938,4107:2990,4130
+P 2938,4052:2957,4130
+# the plate's gate: a vertical poly x 2878-2898 from the plate's top north to the row
+# y 4011-4030, which runs east under thin E and through the gap onto tla's piece under R3
+# (px.py col 2888 4000 4064 3: poly in both chip-2 shots from y 4015 to y 4060 without a break)
+P 2878,4011:2898,4052
+P 2878,4011:2955,4030
+# tie (uncertain): a heavy-outlined box directly below the plate (x 2872-2900, y 4113-4141,
+# lighter inside at x 2880-2893, y 4122-4136: both metal shots and the chip-2 stripped shot;
+# review round 1 placed it, the first drawing had it 25 px east), read as the plate's tab on a
+# diffusion that comes west from the south end of the node's narrow strip (the box's bottom
+# outline runs on as one line to x 2925 under thin E)
+?P 2872,4106:2896,4140
+?D 2876,4118:2921,4140
+?B 2872,4113:2900,4141
+@alias rcs_cond_lat tl2_w4080
+
+# ---- run 4, piece 4: the top of tla's column x 3028-3063 above the band of tl3_w3982 (AMB-009).
+# The column's top is a diffusion band y 4514-4530 that runs WEST past the column's west edge
+# to R3's east edge (chip-2 shots, px.py row 4522 2962 3072 3: 166-174/136-153/92-105 stripped,
+# 170-179/135-139/88-95 metal from x 3016 to x 3055, the colours of the open column at y 4568,
+# where x 3012-3020 is field) and under the edge line onto the VSS box of piece 2 (contact
+# (2990,4513)). Between it and rcs_cond_lat's pad above (lower outline y 4496-4504) a strip of
+# field, y 4505-4511, in both metal shots and the chip-2 stripped shot (px.py col 3044 4486 4540 2):
+# no buried contact (tla's ?B removed in trace/tla.txt). So the band of tl3_w3982 is a second
+# pull-down of rcs_cond's gate, not a pass transistor:  rcs_cond = NOR(rcs_cond_n, tl3_w3982)
+D 3004,4514:3063,4530
+# east of R3 the VSS box itself comes out into the open: a strip x 3009-3019 from y 4490 (below
+# piece 2's gate arm) down into the band, uniform in both metal shots and the chip-2 stripped
+# shot (px.py col 3015 4480 4532 4; review round 1), so the join to the box is seen in the open
+D 3004,4490:3019,4530
+
+# ====================================================================
+# Run 5 (2026-11-18): the wiring north of y 2630, east of tl1's pads. Wiring only: no diffusion
+# and no transistor (the clean shot shows protected field under every metal here).
+
+# ---- tl1_w3333: tl1's metal from the pad (2826,2553) on east along y 2554 to a pad with a
+# contact (3453,2553) (ring with a bright centre in both metal shots, green hole in a salmon pad
+# in the clean shot, pit in the chip-2 stripped shot: n5_a.png, 4.4x). A poly leaves the pad
+# north, x 3450-3470 (orange between two edge lines in both metal shots and the chip-2 stripped
+# shot), out of the strip at y 2500: where this wire comes from
+M 2848,2554 x3462 w=16
+P 3442,2536:3474,2570
+C 3453,2553
+P 3450,2498:3470,2545
+N P 3460,2515 tl1_w3333
+
+# ---- tl1_w2592: tl1's row y 2582-2600 on east to a pad with a contact (2868,2596) (ring with a
+# bright centre in both metal shots, green hole in the clean shot: n5_b.png, 5x; the row is
+# poly without a break up to the pad, px.py row 2591 2804 2900 4). A metal leaves the pad east
+# along y 2598, turns north at x 3503 and east again along y 2509, out of the strip at x 3533
+# (follow.py 3000 2597 E: on to x 3752). At its corner it passes the pad of tl1_w3333 with 14 px
+# of bare ground between (pad ring to x 3478, metal from x 3492: both metal shots)
+P 2810,2582:2860,2600
+P 2850,2578:2890,2614
+C 2868,2596
+M 2868,2598 x3503 y2509 x3533 w=16
+N M 3200,2598 tl1_w2592
+
+# ---- VSS: the east arm of tl1's wide metal x 2733-2785 (y 2893-2948; tl1 draws it to x 2817)
+# runs on east without a break onto the top of R3 (tla draws R3 from y 2940): bright metal from
+# x 2776 to x 3000 along y 2930 in both chips (px.py row 2930 2776 3024 8). So R3 hangs from the
+# same plane as R1 and that wide metal. The arm's top edge is y 2893: it lies OVER the poly row
+# y 2890-2908 (tl1_w3594), which is protected salmon in the clean shot up to the arm's east end
+# x 3004 and open poly beyond it; the dark line at y 2908-2913 across the arm is the row's lower
+# edge underneath, and there is no contact on the row (review round 1 of run 5)
+M 2810,2893:3004,2948
+N M 2900,2931 vss
+# the plane's lower edge east of tl1's piece: y 2507, east end x 3388 (px.py col 2900|3200|3370
+# 2484 2530 3, row 2490 3330 3420 5). It goes on north out of the strip; nothing in the strip
+# east of x 2832 joins it
+M 2825,2470:3388,2507
+N M 3100,2490 vss

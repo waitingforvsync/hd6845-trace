@@ -64,7 +64,6 @@
 
 # --- random logic
 2100,2500:6400,6350     ?logic  top-left logic | random logic
-6400,4450:8250,6400     ?logic  top-centre logic, lower half | random logic left of the central datapath (`tc2`); the upper half is `tc1` and `tcw`
 4400,6900:6450,10400    ?logic  left-centre logic | random logic between the left array and the central datapath
 11900,3400:16400,4210   ?logic  top-right logic rows | gates under the test structures, near the RA/HSYNC/VSYNC pads (the RA output stage below is ral)
 7000,14600:11000,18550  ?logic  bottom-centre logic | random logic below the central datapath

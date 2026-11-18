@@ -3,3 +3,7 @@
 # polys end at y 3650 where the drawing stops (inside the region; not followed north yet).
 tr1_w12005   P  11994-12016,3650  in   inverter A's input poly, from the track field to the north (not followed)
 tr1_w11960   P  11950-11972,3650  out  inverter A's output (NOT tr1_w12005), poly north from its buried contact (not followed)
+tr1_w12135   P  12124-12146,3650  in   gate B's input poly, from the track field to the north (not followed)
+tr1_w12090   P  12080-12102,3650  out  gate B's output (NOT tr1_w12135), poly north from its buried contact (not followed)
+tr1_w12265   P  12254-12276,3650  in   gate C's input poly, from the track field to the north (not followed)
+tr1_w12220   P  12210-12232,3650  out  gate C's output (NOT tr1_w12265), poly north from its buried contact (not followed)

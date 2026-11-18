@@ -529,7 +529,15 @@ D 3995,3885:4045,3935                 # VSS box under the rail, with an arm east
 C 4018,3910 s=30x34
 D 4040,3905:4110,3925
 D 4052,3920:4110,3960                 # column under gate mu
-D 4052,3955:4090,4135                 # the node, and on down under gate mv
+# (2026-11-18, tl3 run 8, found by its review: this was one column D 4052,3955:4090,4135. Between
+# y 3988 and y 4060 the column is FIELD: px.py col 4070 3944 4112 4 reads 151-158/135-143/97-106
+# in the clean shot and 156-160/147-158/97-103 in the chip-2 stripped shot there, the values of
+# open field, against 147/84/76 and 178/137/109 on the diffusion at y 3968-3980, and both metal
+# shots have an edge line across at y 3984-3988. So the diffusion below gate mu is NOT in1's node:
+# it goes west under the VSS rail as a band y 3966-3984, drawn in trace/tl3.txt, to the node of
+# rcs_mn3852.)
+D 4052,3955:4092,3984                 # below gate mu: ends at the edge line y ~3984
+D 4052,4066:4090,4135                 # in1's node (the load strip y 4070-4096 and the box), and on down under gate mv
 B 4076,4056:4114,4094
 D 4082,4060:4112,4092
 P 4085,4062:4135,4082                 # output poly to the pad of in1's metal
@@ -669,19 +677,22 @@ N M 3042,4300 rcs_cond_lat
 #   rcs_cond = NOT rcs_cond_n: node y 4558-4622, pull-down E0 (gate rcs_cond_n) to the VSS box below,
 #     standard load west of the rail, buried contact to band 2, whose pad (contact (3105,4590))
 #     is the bottom end of bus line A's piece A3.
-#   pass transistor (band 1, gate tl3_w3982: NOT clk_tl, see band 1 below) from that node up to
-#     the column's top end, which is tied by a buried contact to the poly pad (contact (3045,4485))
-#     at the bottom of the metal rcs_cond_lat. So rcs_cond_lat takes rcs_cond while tl3_w3982 is
-#     high: a dynamic latch.
-#     The buried contact is drawn uncertain: see AMB-009 (the other reading ties the column top
-#     to the VSS box under the rail, which makes the AOI unit above degenerate).
-D 3028,4512:3063,4610
-P 3024,4455:3066,4522
+#   second pull-down (band 1, gate tl3_w3982: not clk_tl, see band 1 below) from that node up to
+#     the column's top end, which is a diffusion band y 4514-4530 running west to the VSS box
+#     under the rail (contact (2990,4513); drawn in trace/tl2.txt, run 4). So
+#     rcs_cond = NOR(rcs_cond_n, tl3_w3982).
+#     AMB-009, corrected 2026-11-18 (tl2 run 4): this was drawn as a pass transistor, with a ?B
+#     (3026,4508:3066,4526) tying the column's top to the poly pad (contact (3045,4485)) at the
+#     bottom of the metal rcs_cond_lat. Between the pad's lower outline (y 4496-4504) and the
+#     band's upper outline (y 4512-4516) lies a strip of field in both metal shots and the chip-2
+#     stripped shot, and the band is 20 px wider to the west than the column (notes/blocks/tl2.md,
+#     "The top of tla's column"). rcs_cond_lat is driven by an inverter of rcs_cond (trace/tl2.txt).
+D 3028,4514:3063,4610
+P 3024,4455:3066,4504
 C 3045,4485
-?B 3026,4508:3066,4526
 # band 1: the row ends at x ~3121 as the foot of a poly that runs north under bus line A (drawn in
 # trace/tl2.txt); it does NOT reach bus line B's pad (3152,4548): the gap x 3122-3138 is field in
-# all four shots (tl2 run 2's review, 2026-11-18). So the pass transistor's gate is not clk_tl.
+# all four shots (tl2 run 2's review, 2026-11-18). So this pull-down's gate is not clk_tl.
 P 3018,4535:3122,4558
 P 3135,4530:3172,4568
 C 3152,4548
@@ -705,7 +716,7 @@ B 2908,4629:2932,4655
 # with a contact (3228,4548) at the top of a piece of bus line D, which runs down to a contact
 # (3240,5587); from that pad a poly leaves WEST along y 5576-5598 (seen to x 3175): towards
 # the small cluster below this one (y 5450-6300). Every contact on the net so far is a gate
-# (units at y 3765, 4160, 4410, and the pass transistor at y 4546): its driver is down there.
+# (units at y 3765, 4160, 4410; the band at y 4546 is NOT on it, see band 1): its driver is down there.
 P 3165,4535:3215,4558
 P 3208,4530:3250,4566
 C 3228,4548

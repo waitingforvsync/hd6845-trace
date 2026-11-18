@@ -244,7 +244,7 @@ metals (x about 17036, 17080, 17122), to the pad (16990,13612), where a metal ta
 
 Followed beyond the region, **not drawn** (`follow.py` and one strip image,
 `le_strip_m.png`): the metal goes west to x 16862, south to y 13810, west to x 16820 and
-south along x 16818 to y 15800, then west, ending at about (16772,15800). On the run south
+south along x 16819 to y 15800, then west, and on south along x 16774 (not ending at about (16772,15800), where the follower stops on `d5_out_n`'s buried contact: `dlat`, 2026-11-17). On the run south
 it carries **eight pads, each with a poly leaving west**, at about y 14040, 14260, 14435,
 14650, 14900, 15120, 15385 and 15605. So `dbus_le` is not private to the four latches: it
 also feeds eight things in the column x 16480-16800 (`areg`'s and `bd2`'s right-hand
@@ -323,8 +323,8 @@ Per copy, west of x 17265 (overlays `ov67.png`, `ov9.png`):
 
 **Believed, not traced**: the four lines go to four copies of the input latch in the gate
 column at x 16480-16800 (`areg`'s and `bd2`'s right-hand columns, outside this region).
-The eight tapped pads of `dbus_le` on its run down x 16818 are at about y 14040, 14260,
-14435, 14650, 14900, 15120, 15385, 15605: four pairs 215-220 apart, which is the distance
+The eight tapped pads of `dbus_le` on its run down x 16819 are at y 14046, 14264,
+14436, 14654, 14913, 15131, 15390, 15608 (measured by `dlat`): four pairs 215-220 apart, which is the distance
 between a latch's two `dbus_le` bands (218 in `dbus_lat`), and each of the four lines
 arrives about 45 px outside one pair (above the first pair, below the other three), where
 band E of the latch would be. A survey view at 0.42x (`s_wide.png`) shows four latch-like
@@ -1214,3 +1214,10 @@ there).
 
 **Inside the region nothing else is left** (run 7): every other item above leaves it, to
 `dlat`, `busC` or `bd2` (rest).
+
+## Note (coordinator, from the handoffs of 2026-11-17/18)
+
+- The "open-drain ... with a pull-up" reading of the lines "P_x" / "P_y" in the early part of
+  these notes is superseded by `dpad`: the pad cell has only gates on them; they are `d_hiz` and
+  `d#_out_n`.
+- `dbus_le`'s eight taps and the latches of bits 4-7 are traced in `dlat` (`notes/blocks/dlat.md`).

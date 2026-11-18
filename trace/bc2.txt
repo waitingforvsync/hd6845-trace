@@ -1,0 +1,141 @@
+# Bottom-centre random logic (x 9000-11000, y 14050-16300). Notes: notes/blocks/bc2.md.
+@block bc2
+@requires tl1
+@w M=20 P=18
+@s 28x28
+
+# ====================================================================
+# East gate column, latch unit a (x 10472-10778, y 14801-15251): tl1's unit
+# (findcell on the clean shot: tl1_ua 0.76, tl1_ub 0.76)
+@inst tl1_ua 7940,10454 tag=a
+@inst tl1_ub 7940,10454 tag=a
+# rails over the copy (a_c.png, a_m.png 2.5x): VSS over the pull-downs' boxes, VCC over the loads'
+M 10568,14790 y15270 w=56
+N M 10568,15000 vss
+M 10746,14790 y15270 w=50
+N M 10746,15000 vcc
+# the copy's own VSS box below the stack, ring (10558,15258); south edge 15279 (px.py col 10560/10580
+# acid1b: pale diffusion to y 15272, dark edge 15276-15284, copy b's top poly row from 15286; s1_seam.png 5x)
+D 10530,15235:10586,15279
+C 10558,15258
+# VCC: the loads' long ring on the VCC rail
+C 10745,15029 s=24x82
+# thin metal x 10682 between the plate's pad and the third pull-down's pad
+M 10682,14940 y15168 w=12
+C 10681,14953
+C 10681,15156
+# ---- copy a's rows west of the cell (x 10482) to their pads (a_c.png clean, a_m.png metal, 2.5x;
+# a_w.png 4x): each pad a ring in the metal shot
+# data: row y 14905-14922 to the pad (10395,14912) on a metal going west (not followed)
+P 10405,14905:10484,14922
+P 10378,14896:10414,14930
+C 10395,14912
+M 10385,14912 x10405 w=26
+N P 10450,14913 bc2_w14912
+# enable: rows y 14955 and y 15172 to pads (10441,14955), (10441,15172) on one vertical metal x 10441
+P 10450,14947:10484,14964
+P 10425,14940:10458,14972
+C 10441,14955
+P 10450,15163:10484,15180
+P 10425,15157:10458,15188
+C 10441,15172
+M 10441,14940 y15188 w=22
+N M 10441,15060 bc2_w14955
+# output: the cell's node row y 14992-15010 west to the pad (10395,15000); a metal from the north-west ends on it
+P 10405,14992:10484,15010
+P 10378,14984:10414,15016
+C 10395,15000
+M 10385,15000 x10405 w=26
+# clear: row y 15079-15096 to the pad (10395,15087), the north end of a metal x 10395 going south (not followed)
+P 10405,15079:10484,15096
+P 10378,15071:10414,15103
+C 10395,15087
+M 10395,15077 y15110 w=24
+N P 10450,15088 bc2_w15087
+# the output row carries the upper gate's node (with the thin metal x 10682)
+N P 10420,15001 bc2_w15000
+# NOT data (the inverter's output): the cell's thin metal x 10500 to the third pull-down of the lower gate
+N M 10500,14850 bc2_w14876
+# the lower gate's node (latch output, the other side), seen at the pull-down gate row y 15029
+N P 10560,15028 bc2_w15029
+
+# ====================================================================
+# East gate column, latch unit b (x 10473-10779, y 15277-15727): tl1's unit one pitch (476) south
+# (findcell on the clean shot: tl1_ua 0.76, tl1_ub 0.77)
+@inst tl1_ua 7941,10930 tag=b
+@inst tl1_ub 7941,10930 tag=b
+# rails over copy b (b_top.png, b_rail.png 2.5x, metal shot: bands x 10540-10600 and x 10722-10775
+# continuous over the unit); VSS / VCC by structure as for a
+M 10568,15270 y15746 w=56
+M 10746,15270 y15746 w=50
+# VCC: the loads' long ring on the VCC rail (metal shot, b_rail.png: ring y 15470-15550)
+C 10745,15505 s=24x82
+# thin metal x 10682 between its pads, rings at (10682,15430) and (10682,15632) in the metal shot
+M 10682,15416 y15644 w=12
+C 10681,15429
+C 10681,15632
+# (copy b was held until unit a's VSS box got its south edge 15279: then 0 errors, 0 warnings)
+# copy b's own VSS box below its stack (b_box.png, 4x, acid1b + metal): pale box x ~10540-10596,
+# y ~15706-15752 in the clean shot (dark edge from y 15752), contact ring (10558,15731) in the metal shot
+D 10540,15706:10596,15752
+C 10558,15731
+# ---- copy b's rows west of the cells (cell rows start at x 10481), each read from the gate to its pad
+# at 4.4-8x in acid1b + metal (+ acid, metal1): b_data.png, b_en1.png, b_clr.png, b_pads_w.png,
+# b_r606.png, b_out5.png, b_x441j.png, b_x441k.png, b_v8.png (cache/scratch/bc2/). Contacts: ring in
+# the metal shot and green centre on a pad in acid1b; colour scans of acid1b (G-R) along rows y 15389,
+# 15563, 15607 find no contact but the pads. The rows pass under the thin metals x 10310, 10355,
+# 10398, 10441 without contacts (dark bars there are the gaps between metals). b's inputs are not a's.
+# data: row y 15381-15399 (px.py col 10420) west to a round pad (10352,15388); metal x 10353 from the
+# pad south (not followed). The pad is NOT on the horizontal metal y 15392 just east of it: hstripe
+# profile, x 10374-10384 between the ring's outline and that metal's west edge reads as poly under
+# oxide (R+G ~270, like the bare row at x 10462-10480), metal reads 320-400.
+P 10360,15381:10484,15399
+P 10338,15374:10368,15404
+C 10352,15388
+M 10353,15372 y15440 w=18
+N P 10420,15390 bc2_w15388
+# enable: pads (10441,15432) and (10441,15650) on the metal x 10441, rows east to the cells
+# (px.py col 10466 acid: poly y 15426-15444 and 15642-15660)
+P 10450,15423:10484,15441
+P 10426,15418:10456,15446
+C 10441,15432
+P 10450,15640:10484,15658
+P 10426,15636:10456,15664
+C 10441,15650
+# the metal x 10441 under copy b: from the ring (10441,15432) south past the ring (10441,15650); it goes
+# on south (metal shot continuous to y 15718 at least; not followed). NOT joined to unit a's enable
+# metal: see below.
+M 10441,15418 y15665 w=20
+N P 10470,15432 bc2_w15432
+# unit a's enable metal x 10441 does not go on to copy b's pads. Coming south from a's pad (10441,15172)
+# it is continuous to y 15398 (stripe test, metal and metal1: the line 2-3x brighter than its own edges
+# down to y 15386, the dark band 15376-15384 being the data row's top edge), and there turns west
+# along y 15386-15398 to x 10390, into the metal x 10398 that runs on south (not followed; north of
+# y 15386 x 10398 is bare up to the L at y 15306). Between y 15400 and the pad ring's outline at
+# y 15414 there is no metal at x 10441: at y 15408-15412 the line, its edges and the flanks read alike
+# (R+G 246-285, bare oxide) in both metal shots, unlike a's pad (10441,15172) where the metal runs
+# straight into the ring's outline; the data row's bottom edge accounts only for y 15400-15406.
+M 10441,15180 y15392 w=20
+M 10441,15392 x10398 w=14
+M 10398,15386 y15440 w=16
+# clear: row y 15555-15573 west (px.py col 10300) to a pad (10226,15565), x 10212-10246; a metal x 10226
+# from the pad north (not followed); the metal ends on the pad (tan ground south of the ring).
+P 10240,15555:10484,15573
+P 10212,15549:10246,15580
+C 10226,15565
+M 10226,15515 y15580 w=16
+N P 10300,15564 bc2_w15565
+# the lower gate's node row (cell row y 15598-15618, buried contact at x 10492 in the cell) west to a
+# pad (10267,15607), x 10250-10288; metal x 10267 from the north (over the clear row, no contact
+# there) ends on it. Between this row and the enable pad (10441,15650) the clean shot shows a dark V
+# at x 10420-10445, y 15615-15635, but acid reads bare field there: not joined (no poly drawn).
+P 10285,15599:10484,15617
+P 10250,15591:10288,15623
+C 10267,15607
+M 10267,15515 y15622 w=18
+N P 10330,15608 bc2_w15607
+# the upper gate's node (cell stub x 10473-10516, y 15467-15487) ends in a rounded end at x ~10467
+# (b_out5.png, 6x): no row west, no pad (unlike unit a's output row y 15000). Its name, and the
+# inverter's output (the cell's thin metal x 10500):
+N P 10495,15477 bc2_w15476
+N M 10500,15326 bc2_w15352

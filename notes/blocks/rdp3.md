@@ -428,7 +428,7 @@ Lower right, y 12900 (x > 15800):
 | Name | Layer | x | What |
 |---|---|---|---|
 | `db_b7` | poly | 16798 | going south |
-| `db_b4`, `s6`, `s7` | metal | 16818, 16862, 16908 | going south |
+| `db_b4`, `s6`, `s7` | metal | 16818, 16862, 16908 | going south: each ends on the output of one of `dlat`'s bus inverters (as does `db_b7` above); none goes further |
 | `vcc` | metal | 16262 (diagonal), 16520 | |
 | `vss` | metal | 16428, 16690 | |
 

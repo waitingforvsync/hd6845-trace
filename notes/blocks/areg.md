@@ -40,7 +40,7 @@ Extracts with 0 errors, 0 warnings, no unnamed open nets.
 | VCC rail of the inverters | enters at (16282,12900), x 16142-16194, leaves at y 14700 | traced |
 | VCC rail of the register row | x 15925-15975 from y 12900 to 13578, then the wide rail x 15795-15890 down to y 14700; joins the decode array's VCC bus | traced |
 | Fifth register cell (`rdp3_lat` instance `ar4`, in `trace/rdp3.txt`) | 15745-16150 x 13000-13290 | traced, extracted, checked (see Logic) |
-| Bundle: `ar_load`, `areg_w6`, `areg_w7`, `areg_rail_r` | x 16291-16451 | traced as wires |
+| Bundle: `ar_load`, `dl7_q_n`, `dl6_q_n`, `areg_rail_r` | x 16291-16451 | traced as wires |
 | Right-hand column | x 16480-16800 | not traced |
 
 ## Logic
@@ -242,8 +242,8 @@ Followed `ar_load` past the boundary at 1-3x, without tracing:
   pull-downs, to the left of x 15985) was not looked at.
 - Warning for whoever joins the ports: `notes/blocks/trunks.md` has `rw_d` on a metal at
   x 16290-16308 from y 17558 up to "above 15900, not followed", and `rs_d` at
-  x 16333-16352. These are in line with `ar_load` (x 16299) and `areg_w6` (x 16341) but
-  **`ar_load` is not that metal continued**: its metal ends at (16255,15258). `areg_w6`
+  x 16333-16352. These are in line with `ar_load` (x 16299) and `dl7_q_n` (x 16341) but
+  **`ar_load` is not that metal continued**: its metal ends at (16255,15258). `dl7_q_n`
   likewise leaves metal at a contact at (16337,14862) and continues as a poly that runs
   down x 16340 to y 15255 and then diagonally down-right to about (16490,15390). Whether
   either trunk line reaches these by another route is open.
@@ -266,14 +266,14 @@ Followed `ar_load` past the boundary at 1-3x, without tracing:
 | `ar_load` | poly | x 15800, y 13061-13081 | passes on to the left | the same strobe continuing to the other four register cells |
 | `db_b4` | metal | x 15797, y 12900 | from outside (above) | data line of the fifth register cell (drawn in `trace/rdp3.txt`) |
 | `vss` | diffusion | x 15745, y 13150-13200 | - | source of T_b of the fifth cell: the VSS land under the rail at x 15735, contact (15725,13163) (in the cell) |
-| `areg_w6` | metal | x 16341, y 14700 | unknown | up the bundle to contact 16337,13264, then poly right along y 13263; drawn to x 16480, goes on to the right-hand column |
-| `areg_w7` | poly | x 16364, y 14700 | unknown | up the bundle to y 13453, then right; drawn to x 16480, goes on to the right-hand column |
+| `dl7_q_n` | metal | x 16341, y 14700 | unknown | up the bundle to contact 16337,13264, then poly right along y 13263; drawn to x 16480, goes on to the right-hand column |
+| `dl6_q_n` | poly | x 16364, y 14700 | unknown | up the bundle to y 13453, then right; drawn to x 16480, goes on to the right-hand column |
 | `areg_rail_r` | metal | x 16426, y 12900 and y 14700 | supply? | 49 px wide rail through the whole region; which supply is not established |
 | `vss` | metal | x 16122, y 12900 | supply | VSS rail entering from above |
 | `vcc` | metal | x 16282, y 12900 and x 16168, y 14700 | supply | VCC rail of the inverters |
 | `vcc` | metal | x 15950, y 12900 and x 15795-15890, y 14700 | supply | VCC rail of the register row / wide rail; also joins the decode VCC bus at x 15775, y 13518-13632 |
 
-No taps on `ar_load`, `areg_w6`, `areg_w7` between their ends: looked at in the clean and
+No taps on `ar_load`, `dl7_q_n`, `dl6_q_n` between their ends: looked at in the clean and
 metal shots over the full height.
 
 ## Ambiguities
@@ -334,7 +334,7 @@ metal shots over the full height.
   13270-13450, 13470-13640, 13660-13840 (pitch about 190, each with a contact near
   x 16540), then larger, different cells from y 13900 to 14700. Wide vertical metals at
   x 16490-16540 and x 16650-16700, thin ones at x 16790-16830. Horizontal poly lines
-  arrive from the bundle at y 13263 (`areg_w6`), y 13453 (`areg_w7`), y 13657 and y 14431
+  arrive from the bundle at y 13263 (`dl7_q_n`), y 13453 (`dl6_q_n`), y 13657 and y 14431
   (the two arms of the poly under `areg_rail_r`).
 - Region right of x 16800 (a block at 16860-16950 x 13820-13930, lines to the right edge).
 - The neighbouring items left of x 15800 that belong to this cell row are rdp3's.
@@ -365,3 +365,12 @@ reading of it changes a net; L2's left edge (5b) at x 15864-15866, 16-19 px from
 diffusion corner; R0's row in the open like AR.
 
 Round 2: no findings.
+
+## Note (coordinator, from the handoffs of 2026-11-17/18)
+
+The right-hand column is traced in `dlat`: the "four identical cells" at x 16480-16800,
+y 13060-13840 are the bus inverters of data bits 7, 6, 5, 4 (top to bottom), the rows at y 13263,
+13453, 13657 and about 13850 their inputs; the "larger, different cells from y 13900 to 14700" are
+the latches of bits 4 and 5. `dl7_q_n` and `dl6_q_n` are the latch outputs `dl7_q_n` and `dl6_q_n` (on
+their way to the inverters); `areg_rail_r`'s "poly under the rail" and the lower of "the two arms of
+the poly" (y 14431) are `dl5_q_n`.

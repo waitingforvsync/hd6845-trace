@@ -5,9 +5,9 @@ merged, or by `tools/claim.py release` if it is abandoned.
 
 | Field | Value |
 |---|---|
-| Who | mattgodbolt |
-| Claimed | 2026-11-17 16:44 -0600 |
+| Who | tom-seddon |
+| Claimed | 2026-11-18 21:30 +0000 |
 | Region | 3533-4250 x 2500-6350 |
-| What | top-left random logic, part 3 of 6: what no block has drawn in the strip yet (tla's middle cluster and the logic north and south of it), joined to tla's, tl2's and r9m's nets; second session of mattgodbolt |
+| What | top-left random logic, part 3 of 6 (continue, run 10): from the notes' Not done: the row y 2899 with the pad (4102,2899) and the thin metal x 4099-4111 north of y 4106 (track A's source); then the wiring south of y 5660 |
 | Branch | tl3 |
-| Status | tracing (part merged 896929a at 2026-11-17 18:23 -0600) |
+| Status | tracing |

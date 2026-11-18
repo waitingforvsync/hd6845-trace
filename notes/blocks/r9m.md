@@ -193,3 +193,8 @@ The first line's source: the logic block x 12600-12900, y 5600-6400, from the pa
 about (12786,5570); the split of track P proposed above (for the coordinator); where R9's match goes south of y 3596;
 the other two lines of the bundle; the pads (4270,2640) and (4232,2683) west into the cluster; `rcs_e3`'s metal
 beyond (4494,3813).
+
+## Note (coordinator, from the handoffs of 2026-11-17/18)
+
+`r9m_l1w`'s east end is drawn by `tc2` (not an open end). `r9m_l3` has a driver: `tc2_o5175`, joined
+by `tl6` (join 10, contact (5845,5043)).

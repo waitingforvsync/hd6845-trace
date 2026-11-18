@@ -228,20 +228,18 @@ P 16400,13646:16485,13664
 # bit 6: a diagonal north-west from the exit row (16466,14912) to (16364,14810) (centres
 #   (16451,14890), (16430,14870), (16411,14850), (16385,14830), (16367,14810):
 #   tools/dlat_polyruns.py), then north along x 16354-16374 into the poly that areg draws from
-#   y 14700 (its areg_w7), which runs up to y 13453 and east to x 16480: k2's input row
+#   y 14700 (its dl6_q_n), which runs up to y 13453 and east to x 16480: k2's input row
 P [ 16476,14904 16372,14800 16354,14800 16354,14808 16467,14921 16476,14921 ]
 P 16354,14695:16374,14812
-@alias dl6_q_n areg_w7
 # bit 7: a diagonal north-west from the exit row (16466,15389) through (16408,15330) to
 #   (16341,15240), north along x 16332-16350 to a pad and contact (16339,14868); metal north
 #   (tools/follow.py 16341 14780: one piece from y 14872 to 13262) into the metal that areg
-#   draws from y 14700 (its areg_w6): to its contact (16337,13264) and a poly east, k1's row
+#   draws from y 14700 (its dl7_q_n): to its contact (16337,13264) and a poly east, k1's row
 P [ 16480,15381 16420,15321 16350,15231 16332,15231 16332,15250 16396,15332 16462,15398 16480,15398 ]
 P 16332,14852:16350,15250
 P 16322,14852:16356,14884
 C 16339,14868 s=22x22
 M 16340,14695 y14880 w=15
-@alias dl7_q_n areg_w6
 # k1's and k2's input rows west of x 16480 are areg's (P 16337,13263 x16480 w=16;
 # P 16364,14700 y13453 x16480 w=20); a short overlap here joins them to the cells' rows
 P 16470,13256:16485,13274
