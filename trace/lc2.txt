@@ -115,3 +115,86 @@ N P 6160,8906 lc2_w8906
 N P 6105,8688 lc2_w8688
 # the inverter output (NOT data): the cell's thin metal x 6106 (latch B's lc2_w8532)
 N M 6106,8960 lc2_w9005
+
+# ====================================================================
+# Latch D's lower unit (x 5887-6142, y 8067-8290): tl1_ua turned 180 degrees, the lower half of the
+# latch whose upper unit is lc1's copy of tl1_ub (lc1_w7040, the input of lc_step's inverter).
+# Master (x,y) -> (8676-x, 12633-y). Overlay d2_a.png / d2_m.png (4x, clean and chip-2 metal).
+#   lc1_w7862 = NOT lc1_w7780                              (the inverter; its output row and pad are in lc1's cell)
+#   lc1_w7928 = NOT( lc1_w7780 AND lc1_w7908  OR  lc1_w7040 )   (through the plate's ? tie, as every copy)
+@inst tl1_ua 3351,3703 rot=180 o=2662.5,4465
+M 6039,8067 y8530 w=48                      # the east VSS rail on south from lc1 to latch C's piece (the unit's VSS contact (6056,8213) under it)
+M 5925,8067 y8141 w=14                      # lc1_w7928's thin metal x 5918-5932 on south to its pad on the load plate
+C 5927,8131                                 # ring with a bright centre in both metal shots, green hole in the clean shot (textmap)
+# the node's row (the poly on the buried contact of the node's east box): east along y 8075-8092 under five metals
+# (no pad, no ring, no hole on it) and north out of the strip at x 6401-6415
+P 6136,8075:6415,8092
+P 6401,8067:6415,8092
+N P 6300,8083 lc2_w8083
+@alias lc1_w7928 lc2_w8083                  # one net only through the cell's ? tie (plate to node): the names are kept apart
+# enable: gate 2's row y 8118-8135 east to a pad in the run of lc1_w7908's metal x 6203-6221, which goes on south
+# and turns east along y 8250-8268 (metal A) out of the strip
+P 6130,8118:6200,8135
+P 6192,8109:6230,8143
+C 6212,8128
+M 6212,8067 y8259 x6450 w=18
+# data: gate 1's row y 8161-8180 (also the inverter's gate) east under the metals x 6168, 6212, 6256 (no contact) to
+# the pad where lc1_w7780's metal ends
+P 6130,8161:6290,8180
+P 6282,8153:6314,8187
+C 6297,8170
+M 6297,8067 y8184 w=20
+
+# ====================================================================
+# The bus field east of the latches (x 6140-6490, y 8067-8560): wiring only.
+# Views e1.png (3.8x), e3_m.png / e3_a.png (3.6x), e4.png, e5.png; tl5_tracks.py v/h along every metal; textmap.py
+# on the pads (survey.md).
+# lc1_w7864 (latch D's clear) ends on a pad; a poly cross-under beneath the metals A and B to a second pad; metal
+# south to latch C's clear pad: latch C's clear is lc1_w7864
+M 6256,8067 y8228 w=16
+P 6240,8197:6273,8232
+C 6254,8214
+P 6247,8225:6270,8332
+P 6242,8326:6272,8360
+C 6256,8344
+M 6256,8330 y8716 w=20
+@alias lc1_w7864 lc2_w8731
+# latch C's enable: its metal x 6159-6177 runs on north through the field out of the strip; a branch east from it
+# along y 8292-8310 (metal B, a T with no dark line across the join) out of the strip
+M 6168,8067 y8580 w=18
+M 6168,8301 x6450 w=18
+# latch C's data: metal north from its pad to a pad (6212,8516); a poly link east to a second pad (6298,8516); metal
+# east, north-east on a diagonal and north to a pad (6429,8386); poly north under B and A (no pad on either) and
+# east at its top to a pad (6470,8127), 20 px east of the strip; metal north from there out at y 8067.
+# The metal x 6422-6440 (next item) lies on this poly for y 8117-8181: no contact (no ring, no hole: trap 13)
+M 6212,8502 y8890 w=20
+P 6196,8500:6229,8531
+C 6212,8516
+P 6222,8506:6290,8525
+P 6282,8499:6316,8532
+C 6298,8516
+M 6296,8518 x6402 6430,8490 y8372 w=20
+P 6412,8362:6446,8402
+C 6429,8386
+P 6420,8115:6443,8368
+P 6420,8115:6456,8140
+P 6452,8110:6490,8144
+C 6470,8127
+M 6471,8067 y8142 w=18
+# a metal x 6422-6440 from the north that turns east at y 8163-8181 and leaves the strip (not on anything here)
+M 6431,8067 y8172 x6450 w=18
+N M 6431,8090 lc2_w8172
+# a metal x 6332-6350 from the north ends on a pad (6341,8214); poly south under A and B, west along y 8462-8485
+# under the metals x 6256 and x 6168, down a link x 6078-6096, west along y 8506-8523 under the VSS rail and the
+# thin metals, south under the VCC rail (x 5859-5877) and west again from under it along y 8634-8652: drawn to
+# x 5835; it runs on west (seen to x 5560)
+M 6341,8067 y8228 w=18
+P 6325,8197:6359,8234
+C 6341,8214
+P 6333,8226:6357,8485
+P 6078,8462:6357,8485
+P 6078,8462:6096,8523
+P 5859,8506:6096,8523
+P 5859,8506:5877,8652
+P 5835,8634:5877,8652
+N P 6200,8474 lc2_w8474
