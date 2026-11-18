@@ -98,14 +98,16 @@ has been checked against the photos.
   x 10565-10595 (contact (10555,16622) in the box x 10540-10590, y 16550-16640).
   This repeated unit is the best first piece: once one copy is read, it can be a cell.
 
-- **Supply band** (`rails.png`, metal 0.45x, all geometry): the wide speckled band at
-  the bottom (y about 18480-18700, x 9000-11000) is joined from below by the strip
-  x 10650-10700 that `clock` labels `vcc` at (10687,19100), and from above by the rails
-  x about 9640 and x about 10560. If those joins are real the band and both rails are
-  VCC, which conflicts with reading x 10720-10760 as the load's VCC rail beside a VSS
-  rail x 10560 (both rails would be VCC, leaving the pull-downs' VSS unexplained). Not
-  resolved at 0.45x: read the joins at 2x+ first; until then **no rail of this block is
-  named**.
+- **Supply band** (`rails.png`, metal 0.45x; `j1.png`, metal | acid1b 1.6x,
+  x 10450-10850, y 18250-18800): the wide speckled band at the bottom (from y about
+  18640, x 9000-11000) is joined from below by the strip x 10650-10700 that `clock`
+  labels `vcc` at (10687,19100) (seen at 0.45x only). At 1.6x the rail **x 10725-10770
+  runs without a break into the band** (bright metal continuous y 18275-18650), so it is
+  VCC if the band is; this agrees with the load reading above. The rail **x 10545-10595
+  ends at y about 18555**, above a horizontal metal line y 18590-18605 and field, so it is
+  **not** joined to the band: it is probably VSS (not followed). Rails x 9440-9480 and
+  x 9625-9690 not checked. Still assumptions until the band's join to `clock`'s `vcc`
+  is read at 2x+: no rail is named in a trace yet.
 
 ## Not done
 
