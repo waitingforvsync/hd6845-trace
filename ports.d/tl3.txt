@@ -30,4 +30,12 @@ tl3_e4243   M  4250,4235-4255  out  output of the east NOR e3; the metal goes on
 tl3_e5114   P  4250,5105-5123  in   gate 2 of the east NOR e5 (which drives latch B's enable), from the east
 tl3_e4152   M  4105,4106       ?    the thin metal x 4099-4111 (track A's north part): drawn end, it goes on north
 tl3_e4152   P  4160,5620-5645  ?    the poly of its south pad (4104,5633): drawn end, it goes on east
+tl3_e4635   P  4250,4627-4642  in   latch C's data, from the east
+tl3_e4808   M  4250,5889-5901  in   latch C's clear: the metal x 4192 from the pad (4190,4808), east along y 5895
+tl3_e4808   P  4124,5366-5377  ?    the row of the clear metal's second pad (4192,5373): drawn end, it goes on west across the foot
+tl3_e4852   P  4118,4453-4466  out  latch C's output, the row of the pad (4236,4461): drawn end, it goes on west under the rail
+tl3_e4152   P  4250,4496-4510  ?    the row of track A's pad (4146,4510), on east: tl4's tl4_w4501
+rcs_mv      P  4250,4736-4751  in   the poly of the pad (4192,4743) at the south end of rcs_mv's track, from the east
+tl3_tm3955  M  3955,4500       ?    the thin metal x 3948-3962: drawn end, it goes on north
+tl3_tm3955  M  3955,4960       ?    the thin metal x 3948-3962: drawn end, it goes on south
 vss         M  3645-3695,5330  -    the west rail, drawn to y 5330; it goes on south

@@ -7,3 +7,7 @@
 3575,3872:3880,4046   logic   NOR 2 of the west column | tl3_w3939 = NOR(tl3_w3896, tl3_w3982)
 3575,4653:3880,4827   logic   NOR 4 of the west column | tl3_w4720 = NOR(tl3_w3803, tl3_w4763); its output is the data row of the unit below
 3530,3795:3552,4600   route   metal x 3540, tl3_w3803 | joins the gate rows of NOR 1 and NOR 4 and a row at y 4068
+3870,4514:4130,4764   logic   latch C, upper half | tl3_e4537 = NOT tl3_e4635; tl3_e4720 = NOT(tl3_e4635 AND tl3_e4152 OR tl3_e4852): tl1_ua mirrored
+3870,4764:4130,4970   logic   latch C, lower half | tl3_e4852 = NOT(tl3_e4808 OR tl3_e4152 AND tl3_e4537 OR tl3_e4720): open while tl3_e4152 (track A) is high, data tl3_e4635, cleared by tl3_e4808; tl1_ub mirrored
+4185,4800:4250,5902   route   metal x 4192, tl3_e4808 | latch C's clear: from the pad (4190,4808) south, a second contact at (4192,5373), east out of the strip along y 5895
+4229,4452:4244,4860   route   metal x 4236, tl3_e4852 | latch C's output up to the pad (4236,4461), whose row goes west to the unit at y 4350-4514
