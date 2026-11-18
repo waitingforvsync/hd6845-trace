@@ -911,3 +911,40 @@ M 3670,5325 y5660 w=50                # west rail (VSS), on from the piece drawn
 N M 3670,5600 vss
 M 3846,5490 y5660 w=44                # VCC rail, on from tla's piece (drawn to y 5497)
 N M 3846,5600 vcc
+# ====================================================================
+# Run 10: the row y 2899 and the north part of the thin metal x 4099-4111 (track A's source).
+# ---- row y 2892-2906: tl2's row of tl1_w3594 (from tl1's pad (2502,2899), through tl2's track H
+# pad (3410,2899)) runs on east across the whole strip, in the open but for the west rail and the
+# east rail, under which it is protected poly with no hole, and ends on a pad with a contact
+# (4103,2899): one poly, no other pad (textmap 3530 2881 4140 2918 3: clean and chip-2 metal maps;
+# the VCC rail's top is south of the row). The pad: poly x 4086-4126, y 2880-2913; ring, centre
+# x 4100-4109 in both metal shots, hole x 4100-4109, y 2896-2908 in the clean shot; field east of
+# it (textmap 4052 2866 4166 2962 3 --acid).
+P 3533,2892:4092,2906
+P 4086,2880:4126,2913
+C 4104,2900 s=20x20
+N P 3800,2899 tl1_w3594
+# ---- the thin metal x 4099-4111 from that pad south to track A (drawn from y 4106 by run 5): no
+# metal leaves the pad north, east or west. It lies over the node boxes of the column's units.
+# tools/tl3_thin.py 4095 4115 2905 4110 --thr 176 --min 8: fourteen stretches of 15-39 px dark in
+# both metal shots, in six groups, each over a box (or, y 3826-3968, lengthwise over the node
+# diffusion of rcs_mn3852's unit); those six are drawn UNCERTAIN (?M). The claim there: one metal,
+# no break and no contact (notes, Ambiguity 12). The rest is drawn firm (bars of 8-12 px only).
+M 4105,2896 y2966 w=12
+?M 4105,2964 y3021 w=12               # over E1's node box: dark y 2967-3018 (a spot at y 2986-2992 in chip 1)
+M 4105,3019 y3383 w=12                # over E1's gate row and on (bars 8-11 px)
+?M 4105,3381 y3444 w=12               # over the box of tla's inverter rcs_mu: dark y 3384-3440 (a spot at (4101,3413))
+M 4105,3442 y3529 w=12
+?M 4105,3527 y3574 w=12               # over the node box of tl3_e3550's NOR: dark y 3530-3568
+M 4105,3572 y3688 w=12
+?M 4105,3686 y3748 w=12               # over the box of the inverter at y 3655-3745: dark y 3689-3744 (a spot at (4101,3719))
+M 4105,3746 y3828 w=12
+?M 4105,3826 y3969 w=12               # lengthwise over rcs_mn3852's node column: dim, 6-9 px wide, four bars of 16-29 px;
+                                      # a metal-coloured line in both metal shots and an unbroken protected strip
+                                      # x 4108-4120 in the clean shot (r10_tmE.png, 5x)
+M 4105,3967 y4053 w=12
+?M 4105,4051 y4108 w=12               # over rcs_in1's node box: dark y 4054-4104 (a spot at (4102,4074))
+# the net: tcw_a (track A, by the foot's row y 5631) reaches the row y 2899 through these six ?M:
+# names gathered by alias, not merged (trap 17)
+@alias tcw_a tl1_w3594
+@alias tcw_a tl3_w3722                 # tl2 aliases tl3_w3722 (NOR 1's gate 1, on track H) to tl1_w3594
