@@ -58,7 +58,8 @@ poly at x 11960-11975 north of y 3650 and the poly x 12000 north of y 3650 (not 
 
 ## Not done
 
-Resume with inverter A's copies at +130 and +260 (read each copy's inputs on the photo), then follow
+Resume with inverter A's look-alikes (view `bc.png`, 3.5x clean shot only: B's gate poly at x 12125-12145 and C's at 12255-12275, exactly +130/+260 from A's, but B has an extra diffusion box about 12150-12195 x 3850-3905 with a dot near (12185,3875) and C's pull-down box runs on east past x 12320 into the next gate, so neither is yet shown to be a true copy; draw each on its own),
+then A's copies at +130 and +260 (read each copy's inputs on the photo), then follow
 the two polys north into the track field; then the gates east of x 12330, the track
 field's ends and contacts, the thin metal y 3827-3839, the rails' supplies, and the
 strip y 3400-3650 north boundary to `pads_in_top` / `inprot`. `tools/findcell.py` with
