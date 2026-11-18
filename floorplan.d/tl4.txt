@@ -8,3 +8,4 @@
 4437,5175:4967,5312   ?logic  inverter in the right cluster | tl4_w4025 = NOT tl4_w5068: the data of the latch at y 3906-4390, by the track x 4452 north
 4520,5297:4967,5465   ?logic  strong inverter in the right cluster | tl4_w5455 = NOT tl4_w4243 (the latch's output, by the track x 4496); output a poly row at y 5445-5465
 4300,3225:4967,3765   ?logic  second latch in the right cluster | tl4_w3390 = NOT(tl4_w3070 AND tl5_w3505 OR tl4_w4198 OR tl4_w3178), tl4_w3178 = NOT(NOT tl4_w3070 AND tl5_w3505 OR tl4_w3390): open while tl5_w3505 is high, data tl4_w3070, cleared by tl4_w4198; tl4_w3178 to the NOR above
+4250,5440:4967,5790   route  routing channel south of the right cluster | eight poly rows under the tracks' south ends, RA and RB: no device. tl4_w5455, tl4_w5068, tl4_w4590, tl4_w3850, rcs_mv, tc1_o3527 and tcw_a cross to tl5's rows at x 4967
