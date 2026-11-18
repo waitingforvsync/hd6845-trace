@@ -3,6 +3,7 @@
 # x 4928-4978 (VSS, pull-downs under it and just east of it). Gates are numbered from the top.
 # Names: lc1_w#### = a wire of this block, by the y of its defining row or band.
 @block lc1
+@requires tl1
 
 # ---------------------------------------------------------------- rails
 M 4779,6900 y8067 w=48                      # rail 1: VCC (by structure: every load hangs on it)
@@ -250,7 +251,7 @@ C 5429,7520 s=26x26
 M 5416,7520 x5596 w=16                      # metal east to a pad
 P 5568,7503:5602,7536
 C 5583,7519 s=26x26
-P 5596,7518 x5640 w=18                      # poly row on east (drawn to x 5640)
+P 5596,7518 x6240 w=18                      # poly row on east to the pad (6253,7517): dark where no metal is near it (x 5640-5750, 6065-6160), poly in both chip-2 shots
 M 5584,7524 y7346 x5668 y6976 x5713 y6900 w=16   # and a metal north from the same pad: it lies on lc1_w7040's row for 95 px (no contact), jogs east twice, and leaves the strip north
 M 5429,7508 y8003 x5476 y8067 w=20          # and metal south, a jog east, out of the strip
 N M 5429,7700 lc1_w7864
@@ -290,3 +291,34 @@ P 6280,7764:6314,7797
 C 6296,7781 s=26x26
 N P 6400,7780 lc1_w7780
 M 6297,7768 y8067 w=20                      # and metal south from the pad out of the strip
+
+# ---------------------------------------------------------------- latch D, upper unit: lc1_w7040 = NOT(lc1_w7864 OR lc1_w7908 AND lc1_w7862 OR lc1_w7928)
+# The gate group at x 5887-6142, y 7833-8043 is tl1's unit tl1_ub turned 180 degrees (findcell, clean shot: 0.75 on
+# the master, 0.78 on lc2's latch B mirrored). It is the upper half of a latch like lc2's latch B, back to back
+# with it on the VCC rail; the lower half (tl1_ua at 3351,3703 rot=180 o=2662.5,4465, centre (6014,8168)) lies
+# south of y 8067, in lc2. The unit's output node (the box (6100-6126, 7940-7968)) is where lc1_w7040's row ends.
+@inst tl1_ub 3352,3243 rot=180 o=2662.5,4695
+D 6030,7808:6082,7858                       # the copy's own VSS box above the stack (as lc2's latch B has)
+C 6047,7832
+C 5865,8027                                 # VCC contact of the load's box under the rail
+# clear: the unit's row y 7988-8006 east to a pad; metal north to the pad at the east end of lc1_w7864's row y 7517
+P 6130,7997 x6244 w=18
+P 6238,7980:6273,8013
+C 6255,7996 s=26x26
+M 6255,7504 y8067 w=16                      # metal x 6247-6263, from the pad (6253,7517) south through the pad (6255,7996) and out of the strip
+P 6236,7501:6271,7534
+C 6253,7517 s=26x26
+N M 6255,7700 lc1_w7864
+# enable: the unit's row y 7900-7918 east to a pad on the metal x 6204-6221, which comes from the north
+# (x 6016 from beyond y 6900, east along y 7430) and runs on south to the lower unit's enable row in lc2
+P 6130,7909 x6204 w=18
+P 6197,7893:6230,7925
+C 6213,7908 s=26x26
+M 6016,6900 y7430 x6213 y8067 w=18
+N M 6213,7700 lc1_w7908
+# the series gate under the rail (row y 7859-7881): its pad (6117,7862) and the thin metal south are the cell's
+N M 6111,8040 lc1_w7862
+# third pull-down: the pad (5929,7929) and a thin metal south to the lower unit's output plate
+C 5929,7929 s=26x26
+M 5931,7918 y8067 w=12
+N M 5931,8030 lc1_w7928
