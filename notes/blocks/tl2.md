@@ -1004,8 +1004,11 @@ Round 3: no findings.
   (field at x 2952-2961, y 4520-4529; the box is drawn as a rectangle); `tla`'s tie of
   `rcs_bc3460`'s load (Ambiguity 15); the diffusion east of R3 between piece 2's gate arm
   (y 4481) and piece 4's band (x 3003-3022, y 4490-4514: light in the chip-2 stripped shot,
-  `r4_ov3.png`; part of the VSS box, not drawn). A sweep of the column for other undrawn
-  features has not been made: the VCC box of piece 3 was found only by following a poly.
+  `r4_ov3.png`; part of the VSS box, not drawn). **Sweep** (run 4): the column x 2776-3086,
+  y 2940-5340 was looked over at 1.05x with every package's trace outlined (`r4_sw1.png`,
+  `r4_sw2.png`, metal | clean): no other box, plate or contact ring without an outline was
+  seen. That is a look at survey zoom, not a reading: narrow strips and polys under the rails
+  would not show (the VCC box of piece 3 had been missed by three packages).
 - **North of y 2630**: the horizontal metals along y 2556 and y 2598 and the plane above them
   (`tools/follow.py` from (3326,2602) and (3326,2560): corners in `cache/scratch/tl2/survey.md`),
   tl1's metals east of (2852,2553) (`tl1_w3333`) and the pad at about (2867,2595) (`tl1_w2592`),
