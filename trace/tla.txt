@@ -666,8 +666,10 @@ D 3028,4512:3063,4610
 P 3024,4455:3066,4522
 C 3045,4485
 ?B 3026,4508:3066,4526
-# band 1
-P 3018,4535:3140,4558
+# band 1: the row ends at x ~3121 as the foot of a poly that runs north under bus line A (drawn in
+# trace/tl2.txt); it does NOT reach bus line B's pad (3152,4548): the gap x 3122-3138 is field in
+# all four shots (tl2 run 2's review, 2026-11-18). So the pass transistor's gate is not clk_tl.
+P 3018,4535:3122,4558
 P 3135,4530:3172,4568
 C 3152,4548
 # band 2
