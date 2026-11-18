@@ -827,7 +827,7 @@ pad; `sameconn` showing only the merge) and one error in what they joined:
 
 Round 2: one finding that changes a connection, fixed.
 
-Round 3 (fix check, 2026-11-18 03:20 +0000, a fresh agent on claude-fable-5-2, against commit 41669bf, at
+Round 3 (fix check, 2026-11-18 03:12 +0000, a fresh agent on claude-fable-5-2, against commit 41669bf, at
 commit 733f03e; images in `cache/scratch/tl2/review-7/`). Told the one finding of round 2 and its
 fixes in `trace/tla.txt` and `trace/tl2.txt`, and asked: is the break in the row real and are
 the poly ends where drawn; does each gate piece cross its column, is there field between the
