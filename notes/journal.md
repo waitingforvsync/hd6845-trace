@@ -1602,3 +1602,13 @@ open join (`ck_a_u`). Claims now: `tl3` (Tom, run 11), `lc2` (Matt, continuing d
   (AMB-001 to AMB-035, R1-R42).
 - **`out/` rebuilt**: 0 errors, 0 warnings, 0 names outside the glossary; one open join (`ck_a_u`).
   Coverage: 62.6% traced, 99.7% in a package, 0.0% in neither.
+
+## 2026-11-19 00:12  End-of-frame lead group at the head of the queue
+
+On the user's request, a new queue row `eof` goes first, so `/trace6845` without a prefix takes it. It
+holds the follow tasks that block the end-of-frame sequence, in order: where R4's match
+`rc_eq_r4` goes (east of x 13425 at y 9663, from track T6 of the counter channel); where R5's match
+`sl_eq_r5` goes (west of x 8340); `tcw_a`'s source (eleven gate loads, among them the master/slave
+latch pairs and the field latch path); the driver of `rcs_x1` (beyond `tl5`'s bus line x 5107).
+`bd1`-`bd3` moves up to second. `tl4_w4590`'s driver (in `tl3`'s strip) and `lc2`'s latch D data wait
+for their claims.
