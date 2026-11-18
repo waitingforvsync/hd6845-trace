@@ -110,3 +110,10 @@ ends on something at about (5030,7000-7150)). Not traced there.
 What is left of the left column near the generator: the cell at y 7790-8000 is the
 `clk_tl` inverter (`notes/blocks/tla.md`); the cells below it are not traced.
 
+## Correction from `lc1` (coordinator, from pull request #20, 2026-11-18)
+
+- "Where `lc_step` comes from ... it ends on something at about (5030,7000-7150). Not traced there": it
+  ends on the output box of `lc1`'s gate 1 at (5006-5053, 6985-7022); `lc_step` = NOT `lc1_w7040`, the
+  output of latch D's upper unit (`notes/blocks/lc1.md`).
+- `trace/ur.txt`: the poly `P 3355,6368 x5012 y6900 w=20` is drawn about 9 px west of the photo's band
+  (x 5011-5031) over its last stretch. Geometry only; it still overlaps.

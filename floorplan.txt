@@ -63,7 +63,7 @@
 14140,13480:15800,14680 pla     register address decode (18 selects) | NOR array, 5-bit address to 18 register selects. Columns left to right select R7 R6 R4 R0 R2 R1 R10 R5 R3 R8 R9 R11 R13 R12 R14 R15 R17 R16. Nothing decodes addresses 18-31
 
 # --- random logic
-2100,2500:6400,6350     ?logic  top-left logic | random logic
+3533,2500:4250,6350     ?logic  top-left logic, strip 3 | what `tl3` has not drawn yet (strips 1, 2, 4-6 are in their floorplan.d fragments)
 4400,6900:6450,10400    ?logic  left-centre logic | random logic between the left array and the central datapath
 11900,3400:16400,4210   ?logic  top-right logic rows | gates under the test structures, near the RA/HSYNC/VSYNC pads (the RA output stage below is ral)
 7000,14600:11000,18550  ?logic  bottom-centre logic | random logic below the central datapath
@@ -71,7 +71,7 @@
 11600,2150:12080,2800   ?logic  small cell by die marking | isolated cell left of the HD46505S text
 
 # --- routing
-4850,10400:7550,15000   route   left bus field | dense horizontal wiring between the left array and the rest
+4850,10400:7550,15000   route   left bus field | dense horizontal wiring between the left array and the rest; package `busL`, second in the queue
 11000,3000:17000,5300   route   top-right bus field | horizontal buses under the test structures
 6500,17000:13300,18600  route   bottom bus field | wiring along the bottom of the core
 

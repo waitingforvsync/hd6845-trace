@@ -487,7 +487,7 @@ N P 5300,5674 tl5_w5674
 # metal x 5495 from y 5850) to a corner at y 6228-6248 and east, in the open from x 5600, out of
 # the strip (g_b.png, g_f.png, p2_d.png, p2_c.png 4x)
 P 4967,5717 x5497 y6238 x5683 w=20
-N P 5300,5717 tl5_w5717
+N P 5300,5717 rcs_mv
 # ---- row y 5751-5770: no pad. East to a corner at x 5402-5424, 12 px short of T5's south pad
 # (green field between in the clean shot, two dark edges with no orange between in the chip-2
 # stripped shot: px.py row 5760 5390 5475 4), and south as the bus line x 5412 (below)
@@ -509,7 +509,7 @@ P 5453,5770 y6350 w=20
 # ---- two polys from the west under RC's turned rail, each turning south (h_rc_acid1b.png 4x):
 # y 5880-5900 to a corner at x 5097-5117; y 5926-5946 to a corner at x 5053-5073
 P 4967,5890 x5107 y6350 w=20
-N P 5107,6300 tl5_w5890
+N P 5107,6300 rcs_x1
 P 4967,5936 x5063 y6350 w=20
 N P 5063,6300 tl5_w5936
 # ---- T0's south pad (5148,6108) and its line south (p2_a.png 4x: ring with a bright centre,

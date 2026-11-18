@@ -57,7 +57,7 @@ U10 6146, U11 6190, then `tcw`'s 6233, 6276, 6320, 6363.
 | the rows y 3659, 3872, 4003, 4134 | from `tl5`'s ports and from the pads (5800,3658), (5800,4002), (5798,4135) east to pads of `tcw` and `fld` | traced (piece 1) |
 | the rows y 4437-4979 | `tl5`'s nine ports there, to pads on U2, U4, U5, the pad (6010,4480) and the pad (6058,4872) | traced (piece 1) |
 | the rows y 5632, 6065, 6151, 6195, 6325 | to pads on U1 and to four pads at x 5972-6145, whose metals leave south or east | traced (piece 1) |
-| the row y 6238 (`tl5_w5717`) | east to a corner at x 6236, where it goes south | traced (piece 3) |
+| the row y 6238 (`rcs_mv`) | east to a corner at x 6236, where it goes south | traced (piece 3) |
 | x 5890-6190, y 5985-6240 | a wide metal: a band y 5985-6025, a leg x 5890-5925 south, a leg x 6150-6190 south to a band y 6195-6240 east (`tc2`'s `vss` port at (6400, 6198-6243)) | traced (piece 3) |
 | x 6230-6400, y 6100-6350 | three pads (6283,6150), (6323,6108), (6365,6150) with polys south, between them narrow outlined strips | traced (piece 2) |
 | x 5683-6400, y 2500-2700 | the tracks' north ends, a poly along y 2535 east of the pad (6102,2550), the rim of the wide metal band at y 2500 | traced (piece 2) |
@@ -223,7 +223,7 @@ y 5157-5193 are the edges of the rows y 5045 and y 5173 under the metals.
 | Item | Reading | Seen |
 |---|---|---|
 | **`tc2_o5175` = `r9m_l3`** | `tc2`'s row y 5173 (the output of its NOR(`tc1_x1`, `fld_b_in`)) runs on west under the metals x 6363, 6320 and 6276 to a corner at x 6250-6268, in the open between the metals x 6233 and x 6276; north to y 5045; west along y 5035-5057 under seven metals to `r9m`'s pad (5845,5045), the south end of `r9m_l3`'s metal x 5848 | `v1.png` (4x: the pad, both corners), `w2.png` (the row at x 6320-6420); `px.py col 6260 5022 5200 8 metal,metal1,acid`: one poly colour (124-153/84-119/38-59 in chip 2) from y 5038 to y 5182 with no dark line where the rows' edges would cross (y 5057, y 5163); `px.py row 5045 6226 6282 4`; the cream test along y 5045: cream under every metal from x 5851 to x 6247 |
-| `tl5_w5717` | `tl5`'s row y 6238 east under U0, U2, `bw`'s metal, the wide metal's west leg and the metals x 5972, 6016, 6105, along the south edge of the wide metal band from x 6141, to a corner at x 6226-6246; south in the open across y 6350 | `v2.png` 4x, `v3.png` 5x (chip-2 stripped, chip-1 metal, clean); `px.py col 6236 6222 6290 4`: the dark line at y 6246-6250 between the row and the poly below it is the band's rim (the through poly x 6282 has the same line, `col 6282`; where the row has only field below it, `col 6215`, the chip-2 stripped shot is green over red from y 6258); the clean shot is poly-coloured through the line (221/171/112, 191/162/105, then open poly) |
+| `rcs_mv` | `tl5`'s row y 6238 east under U0, U2, `bw`'s metal, the wide metal's west leg and the metals x 5972, 6016, 6105, along the south edge of the wide metal band from x 6141, to a corner at x 6226-6246; south in the open across y 6350 | `v2.png` 4x, `v3.png` 5x (chip-2 stripped, chip-1 metal, clean); `px.py col 6236 6222 6290 4`: the dark line at y 6246-6250 between the row and the poly below it is the band's rim (the through poly x 6282 has the same line, `col 6282`; where the row has only field below it, `col 6215`, the chip-2 stripped shot is green over red from y 6258); the clean shot is poly-coloured through the line (221/171/112, 191/162/105, then open poly) |
 | the wide metal (`vss`) | `tc2`'s `vss` piece at (6400, 6198-6243) runs on west as a band y 6193-6245 to a leg x 6141-6195, north to a band y 5977-6029, west to a leg x 5882-5934, south across y 6350. No contact under it in the strip | `w1.png` (4x: the two north corners and the south-east junction), `d_se.png`, `d_sw.png`; runs of the metal test in both metal shots at six rows and six columns (the test reads each edge 5 px inside the outline seen at 4x). The clean shot under it is pink with an olive centre line (40-140 px long, minimum red - green 1 to -9: the halo under a wide metal, not a hole) |
 
 ### What the joins of pieces 2 and 3 say
@@ -293,7 +293,7 @@ piece 1).
 *Weak spots.* (1) The field's polys between y 4460 and y 4800: read at 2.3x in two stripped
 shots, with the hole scan along each bus metal; not each of the 40 crossings at 4x. A contact
 there would have a pad (tracing guide, trap 15) and none is widened. (2) The nest's corners
-(above). (3) The two corners of `tc2_o5175`'s row and the corner of `tl5_w5717` are in the open
+(above). (3) The two corners of `tc2_o5175`'s row and the corner of `rcs_mv` are in the open
 or under a metal's rim: each decided by a colour profile in two or three shots (tables), not by
 the view alone. (4) U9's pad poly into the poly along y 2530: the same. (5) The rows y 5045 and
 y 6238 between their ends rest on the cream test under each metal and the 0.95x-2x views.
@@ -349,7 +349,7 @@ The same ports are in `ports.d/tl6.txt`. West-side ports carry `tl5`'s names (al
 | `tl5_w3505` | metal | (5966-5978, 6350) | ? | from the pad (5972,6193) |
 | `tl5_w5674` | metal | (6010-6022, 6350) | ? | from the pad (6016,6150) |
 | `tcw_a` | metal | (6099-6111, 6350) | ? | from the corner (6105,6066) |
-| `tl5_w5717` | poly | (5683, 6228-6248) | ? | `tl5`'s row y 6238 |
+| `rcs_mv` | poly | (5683, 6228-6248) | ? | `tl5`'s row y 6238 |
 | `tl6_p6101` | poly | (6052-6072, 2500) | ? | north from U8's pad (6057,2595); turns east under the band's rim at y 2475-2500 |
 | `tl6_p6143` | poly | (6400, 2520-2540) | ? | the poly along y 2530 from U9's pad (6105,2552) |
 | `tl6_p6187` | metal | (6400, 2567-2579) | ? | U10's north end, from the east |
@@ -363,7 +363,7 @@ The same ports are in `ports.d/tl6.txt`. West-side ports carry `tl5`'s names (al
 | `tc2_m6404` | metal | (6400, 6026-6038) | ? | onto `tc2`'s metal |
 | `vss` | metal | (6400, 6193-6245) | - | the wide ground metal, on east as `tc2`'s piece |
 | `vss` | metal | (5882-5934, 6350) | - | the wide ground metal's west leg |
-| `tl5_w5717` | poly | (6226-6246, 6350) | ? | from the row y 6238's corner |
+| `rcs_mv` | poly | (6226-6246, 6350) | ? | from the row y 6238's corner |
 | `tl6_p6101` | poly | (6273-6291, 6350) | ? | from the pad (6275,6152) |
 | `tl6_p6143` | poly | (6313-6331, 6350) | ? | from the pad (6318,6110) |
 | `tl6_p6187` | poly | (6356-6374, 6350) | ? | from the pad (6360,6152) |

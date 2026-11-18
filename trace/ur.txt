@@ -98,8 +98,13 @@ C 4212,6455
 P 3560,6445:4205,6465
 N M 4218,7300 lc_ck_s
 
-# L3 of the 4-bit counter: comes from the north, ends plainly in the channel at y 8500
-M 3780,6330 y8500 w=14
+# L3 of the 4-bit counter: comes from the north, ends plainly in the channel at y 8500.
+# North of the first row it runs at x 3794-3808, not on the L3 position: it steps west on a
+# diagonal at y 6674-6698 (tl3, run 11, 2026-11-18: px.py row Y 3764 3816 4 metal,metal1 for
+# Y = 6345..6740; textmap 3783 6345 3819 6700 3; r11_l3step.png, 5x three shots). It was drawn
+# straight at x 3780 from y 6330, where there is bare ground and an open poly beside the metal.
+# Its north end is tl3's pad (3801,6286).
+M 3801,6330 y6674 3781,6698 y8500 w=14
 N M 3780,7300 c4l_l3
 # L3 of the 5-bit counter: the line that passes the 4-bit rows on the L2 position (no contact
 # there) steps right in the channel (y 8525-8548) onto the L3 position. Top: contact
@@ -108,7 +113,14 @@ N M 3780,7300 c4l_l3
 M 3757,6396 y6560 x3736 y8537 x3780 y10915 w=14
 P 3740,6393:3776,6428
 C 3757,6410
-P 3560,6400:3985,6420
+# The poly along y 6400-6420 reaches the pad (3757,6410) from the west only. It was drawn on east
+# to the pad (3968,6410): there is no poly between the two pads (tl3, run 11, 2026-11-18:
+# textmap 3700 6384 4012 6440 4 --acid: no edge line at y 6400 or y 6424 in either metal shot
+# from x 3780 to x 3950, open field in the clean shot and in the chip-2 stripped shot at
+# x 3820-3880, field under the L3 metal x 3794-3808 and under the VSS leg). The pad (3968,6410)
+# is another net: its metal comes from tl3's pad (3973,6329) on the row y 6327 (rcs_thin_e), and
+# its poly leaves EAST along y 6402-6422 (seen to x 4256; not drawn).
+P 3560,6400:3760,6420
 P 3950,6393:3988,6428
 C 3968,6410
 M 3968,6330 y6426 w=20
@@ -116,7 +128,10 @@ N M 3780,9700 sl_l3
 
 # gate line of the m <-> mb pass gates ("gab"): the 4-bit counter's comes from the north and
 # ends plainly in the channel at y 8505
-M 4095,6330 y8505 w=13
+# North of the first row it runs at x 4077-4091 and steps 11 px east at y ~6602 (tl3, run 11,
+# 2026-11-18: px.py row Y 4066 4110 4 metal,metal1 for Y = 6352..7300; r11_gabstep.png, 5x). It
+# was drawn straight at x 4095 from y 6330. Its north end is tl3's pad (4083,6327).
+M 4084,6330 y6602 x4095 y8505 w=13
 N M 4095,7300 c4l_gab
 # the 5-bit counter's: the line that passes the 4-bit rows at x 3958-3978 (no contact there)
 # turns east in the channel (y 8525-8548) and comes down the gab position. Top: contact

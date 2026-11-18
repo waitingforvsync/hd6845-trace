@@ -999,3 +999,22 @@ Round 1: no findings.
   contact rings": the lower contact (2805,4308) feeds `tl2`'s piece 2 load (the strip leaves the box
   east at y 4307-4330).
 - The cells' geometry and the thin metal they omit: re-read item R35.
+
+## Corrections from `tl2`, `tl3` (coordinator, from the handoffs of 2026-11-18, second batch)
+
+- Not done: "`tl1_w3333`'s metal east of (2852,2553)" and "`tl1_w2592` east of x 2817" are done in `tl2`
+  (`notes/blocks/tl2.md`, "North of y 2630"): `tl1_w3333` comes from a poly that enters at
+  (3460,2500) from the band north of the strips; `tl1_w2592`'s metal leaves east at (3533,2509).
+  The wide VSS metal x 2733-2785's east arm is y 2893-2948 (it covers the row y 2899, no contact) and
+  is one metal with the top of R3; the arm is drawn 12 px short at the top (R36).
+- `tl1_w4937` ("enters on a poly row from the east, not identified") is the net of `tl3`'s thin metal
+  x 3948-3962 (firm: row and pad), and by that metal `tl3_e3550` (marked: AMB-032). So `rcs_e4` =
+  NOR(`tl1_w4678`, `tl3_e3550`).
+- `tl1_w3594` ("not identified; every known end is a gate") is `tcw_a`, marked, by `tl3`'s row y 2899 and
+  the thin metal x 4099-4111 (AMB-033). Then `tl1_w3636` = NOR(`tcw_a`, `tl1_w3678`) and `rcs_a2` =
+  NOR(`tcw_a`, `tl3_w3803`): the two latches in series are a master and a slave on `tcw_a`.
+- The master's inverter box under thin W "protected: 196-202/151-178/127-133" at (2704,4362): four px
+  lower, `px.py row 4366 2684 2722 3` gives 160-183/142-172/99-141 with a grey sample at x 2708, the
+  same grey band as in `tl3`'s latch C (`tl3`). Nothing drawn changes.
+- The VCC box (2785-2835, 6065-6130) is `tl2`'s, drawn there.
+- Re-read items R41 (thin metal W, with `tools/tl3_thin.py`) and R42 apply here.

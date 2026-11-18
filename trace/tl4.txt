@@ -137,7 +137,7 @@ P 4506,3797:4703,3815
 P 4478,3793:4514,3823
 C 4495,3808
 M 4496,3775 y3820
-N P 4600,3806 tl4_w3808
+N P 4600,3806 rcs_e3
 P 4468,3841:4795,3859
 P 4437,3835:4473,3866
 C 4455,3850
@@ -629,7 +629,7 @@ P 4425,5665:4967,5684
 # metal x 4279 (no contact), and west again along y 4904-4925 to tl3's pad (4234,4918), whose
 # metal x 4236 comes back in along y 5764 (tl3_e4915) to the pad (4410,5764); poly east along
 # y 5752-5772 to a corner at x 4533-4555, north to y 5708 and east as the row y 5708-5728 to
-# tl5 (tl5_w5717). 16 px of field between the corner and the pad (4497,5720) of tc1_o3527.
+# tl5 (rcs_mv). 16 px of field between the corner and the pad (4497,5720) of tc1_o3527.
 P 4250,4733:4292,4751
 P 4276,4733:4292,4925
 P 4250,4904:4292,4925
@@ -640,7 +640,6 @@ P 4425,5752:4555,5772
 P 4533,5708:4555,5772
 P 4533,5708:4967,5728
 @alias rcs_mv tl3_e4915
-@alias rcs_mv tl5_w5717
 
 # --- tl4_w3850 (the input of the inverter at y 3781-3911): its metal x 4410 runs south to
 # the pad (4410,4332); row y 4320-4338 west under the track x 4366 to the pad (4279,4332);
@@ -748,7 +747,7 @@ P 4810,2840:4842,2868
 C 4823,2855
 P 4835,2846:4967,2865
 @alias tl4_w3113 tl5_w2855
-# --- tl4_w3808: the track x 4496 north from its drawn piece (y 3775) to a corner (4496,2728)
+# --- rcs_e3: the track x 4496 north from its drawn piece (y 3775) to a corner (4496,2728)
 # and west as the sixth bus line to tla's pad (4270,2725)
 M 4496,3782 y2728 x4326
 # --- tl4_w4718: the track x 4581 north from its drawn piece (y 4690) to a corner (4582,2897),
@@ -787,7 +786,6 @@ M 4250,2685 x4580 4622,2727 x4822 w=12
 P 4808,2709:4841,2738
 C 4822,2723
 P 4835,2714:4967,2733
-@alias rcs_e3 tl4_w3808
 @alias tl5_w3245 tl4_w4718
 
 # ====================================================================
@@ -796,12 +794,11 @@ P 4835,2714:4967,2733
 # three rails. Wiring only, no device. Read on h1_m.png, h1_a.png (1.8x), h2_e.png (3.1x),
 # h2_s.png, h3_pads.png (5x, four shots); tools/tl5_tracks.py and tools/px.py (notes).
 # --- rcs_x1: tl3's metal (tl3_e4808, the clear of its latch C) runs on east along y 5895 to the
-# pad (4629,5891); its row runs east under RA's and RB's legs to x 4967 (tl5_w5890, bus line x 5107)
+# pad (4629,5891); its row runs east under RA's and RB's legs to x 4967 (rcs_x1, bus line x 5107)
 M 4250,5895 x4628
 P 4615,5877:4647,5905
 C 4629,5891
 P 4641,5880:4967,5900
-@alias rcs_x1 tl5_w5890
 # --- a second metal from the west along y 5939 to the pad (4583,5936); row east to x 4967
 # (tl5_w5936, bus line x 5063)
 M 4250,5939 x4582

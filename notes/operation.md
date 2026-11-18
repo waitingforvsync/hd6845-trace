@@ -2,7 +2,7 @@
 
 This is the short version. The block notes (`notes/blocks/`) are the reference; the
 glossary of names is `notes/signals.md`. Last checked against the extraction on
-2026-11-18 (2,347 nets, 4,156 transistors; fourth refresh).
+2026-11-19 (2,363 nets, 4,224 transistors; fifth refresh).
 
 ## How to read this page
 
@@ -10,7 +10,7 @@ Every statement carries one of three marks.
 
 | Mark | Meaning |
 |---|---|
-| **Firm** | The extracted netlist says it, and still says it when every item marked uncertain (`?`) is deleted from the trace. `tools/unsure.py --equations NAME` prints this for any equation: 822 of the 1,222 extracted equations are firm. |
+| **Firm** | The extracted netlist says it, and still says it when every item marked uncertain (`?`) is deleted from the trace. `tools/unsure.py --equations NAME` prints this for any equation: 832 of the 1,246 extracted equations are firm. |
 | **Marked** | Extracted, but it depends on at least one uncertain item or on a join that is believed and not drawn. The assumption is named. |
 | **Open** | Not traced. Nothing is claimed. |
 
@@ -21,7 +21,9 @@ has been simulated: nothing has been.
 
 - *What is each counter clocked on?* Known, and firm, for all five counters found so far.
 - *How is each counter reset?* **Open for every counter.** The cell's next-value network
-  is not fully extracted. One candidate mechanism is known (below).
+  is not fully extracted. One candidate mechanism is known (below), and for the 4-bit
+  counter `c4l` the line that would do it is traced to its driver, a latch in the top-left
+  logic (below, "Reset").
 - *What happens when each comparator fires?* **Open for every comparator.** Each
   comparator's output is traced some way; none is traced into the logic that uses it,
   except that the row counter's step logic is partly known.
@@ -70,7 +72,8 @@ How the two private clock pairs are made (the same cell twice):
 | **Two more inverters under the same rail** (`notes/blocks/tl3.md`, run 8). The top unit E1 (y 2950-3090): `tl3_w3373` = NOT `tl3_e3028`, **the enable of tl3's latch A** (the latch whose data is `tl1_w2637` and whose clear is `rcs_x1`): the inverter's load plate is one poly with the row that runs west to the enable's pad (3606,2985). And under the rail's south end (y 5180-5300): `tl3_e4635_u` = NOT `tl3_e5240`, whose output row leaves the strip east at (4250,5197) and ends on a pad (4278,5198) of a metal x 4279, the other end of which is a pad (4278,4636) on the row of `tl3_e4635`: **latch C's data is the inverse of `tl3_e5240`**. Both gate rows come from `tl4`'s strip. | Marked for both equations (each load's tie; for E1 the tie is also the node's only way to the row, so the join of the inverter to `tl3_w3373` rests on it). Firm for the row from E1's plate to the pad (no uncertain item on it). The join to `tl3_e4635` (the track x 4279 and its two pads in `tl4`'s strip) is drawn by `tl4` since its merge of 2026-11-18, an alias closing `tl3_e4635_u`. A thin metal (`tl3_e4152`'s) crosses the output boxes of both inverters and is taken not to make contact (`notes/blocks/tl3.md`, Ambiguity 12). **Open**: what `tl3_e3028` is (`tl3_e5240` is `tl3_w5025`, latch B's inverted output: run 9, next row) |
 | **The foot of the middle cluster and its thin metal close five joins** (`notes/blocks/tl3.md`, run 9; the foot is a crossing field of poly rows between `tl2`'s strip and `tl4`'s). (1) **Latch C's clear is `rcs_x1`**: the row y 5371 of `rcs_x1` ends on the pad (4192,5373) of the clear's metal; `rcs_x1` clears five latches. (2) **Latch C takes latch B's value**: the inverter that drives latch C's data is fed with latch B's inverted output (`tl3_e4635` = NOT `tl3_w5025`, by the row y 5415 and `tl4`'s jumper x 4279). (3) **Track A is `tcw_a`**: latch C is open while `tcw_a` is high and latch B while it is low (its enable is NOR(`tcw_a`, `tl4_w4590`)), so B and C are a master and a slave on the two levels of `tcw_a`, the signal that also opens `tcw`'s pair `fld_a_in` / `tcw_o3820`; `tl3_e4243` = NOR(`rcs_mv`, `tcw_a`) and `tl4_w4545` = NOR(`tcw_a`, `tl4_w4590`, `tla_w3417`). (4) **`rcs_mv` = NOR(`tl3_e4852`, `tl3_w4546`)**: gate 1 of its NOR is NOR 3's output, `tl3_w4546` = NOR(`tl3_w3803`, `tl3_w4373`) with `tl3_w4373` = NOT `tl3_w4763` (the row y 5500). (5) **`rcs_e4` = NOR(`tl1_w4678`, `tl3_e3550`)**: `tl1_w4937`, the second input of `tl1`'s NOR, is the net of the thin metal x 3948-3962, whose north pad is on the load plate of the unit that makes `tl3_e3550` = NOR(`rcs_mu`, `tc2_o5175`) = R9's match AND NOT `tc2_o5175`. So **R9's match does reach the step request, through `rcs_e4`**: `rcs_e4` is low, which lets the row counter step unless `rcs_e3` AND `rcs_a2`, while the row address equals R9 and `tc2_o5175` is low, or while `tl1`'s latch output `tl1_w4678` is high. | Firm for joins (1) to (4) and for both ends of the thin metal (rows, pads and crossings read from text maps of both metal shots and the clean shot; no uncertain item on them). **Marked** for (5): the thin metal is drawn firm except over six load-tie boxes, where neither metal shot shows it for 14-38 px (drawn uncertain; `notes/blocks/tl3.md`, Ambiguity 11), the plate's tie is uncertain like every load tie, and the metal is taken to make no contact where it crosses latch C's inverter box at (3955,4541) (Ambiguity 6). The equations named are marked as before (load ties; `rcs_mv`'s 10 px link). **Open**: what `tl4_w4590`, `tl3_w4763` and `tc2_o5175`'s mode are; `tl4_w5455` (the inverse of `tl4`'s latch) crosses the foot to a pad (4040,5458) and goes south on a metal, not followed |
 | **`tl1_w3594` is `tcw_a`** (`notes/blocks/tl3.md`, run 10). The row y 2899 of `tl1_w3594`, every known end of which is a gate, runs on across the middle cluster's strip to a pad with a contact (4103,2899), the north end of the thin metal x 4099-4111, whose other end is track A (`tcw_a`). So `tl1`'s two latches in series are a master and a slave on `tcw_a` (`tl1_w3636` = NOR(`tcw_a`, `tl1_w3678`) opens the first while `tcw_a` is low, the second is open while it is high), like latches B and C of the middle cluster, and `rcs_a2` = NOR(`tcw_a`, `tl3_w3803`). Wherever this page writes `tl1_w3594`, read `tcw_a` (marked). | Firm: the row is one poly from `tl2`'s strip to the pad, and the pad's contact and the metal's first 60 px (text maps of both metal shots and the clean shot). **Marked**: the thin metal runs over the node boxes of six units and is drawn uncertain there (neither metal shot shows it for 40-55 px over each; `notes/blocks/tl3.md`, Ambiguities 12, 13); it is taken to make no contact with any of them, on the evidence of the two stripped shots: `tcw_a`'s source is not traced, so logic excludes a contact (which would make that unit `tcw_a`'s driver) for two of the six boxes only. **Open**: what `tcw_a` is and where it is driven (east of the strips) |
-| **The top of `tl4`'s strip closes five joins** (`notes/blocks/tl4.md`, eighth run; wiring only: six bus lines along y 2512-2728 and the pads where the bus field's tracks end). (1) **`rcs_e3` = NOT `tl4_w3850`**: the right cluster's inverter at y 3781-3911 drives `tla`'s bus line E, so the input `rcs_e3` of `rcs_in3` and `rcs_bc3460` has its driver; `tl4_w3850` is `tl5_w5761`, the south bus line x 5412. (2) **Latch A's enable `tl3_w3373` = NOT `tl4_w4590`**: the gate row `tl3_e3028` of `tl3`'s inverter E1 ends on a pad of `tl4_w4590`'s track. (3) **`tl5`'s latch c is open while `tl3_e4243` = NOR(`rcs_mv`, `tcw_a`) is high** (`tl5_w4458` is that net). (4) The set input of `tl4`'s pair (`tl4_w4718`) is `tl5_w3245` = NOR(`tl5_w3550`, `tl5_w4160`). (5) `tl5_w2722` = NOT `tl4_w3113`. | Traced without `?` (every pad read in three or four shots); the equations named are marked as before (load ties), `tl5_w3245`'s is firm. **Open**: what drives `tl4_w4590` (a second row of it leaves west at y 2810) and `tl5_w5761`. Ninth run: `rcs_x1` goes on from latch C's clear metal across `tl4`'s strip (y 5895, a pad, a row) to `tl5`'s bus line x 5107 (`tl5_w5890`) |
+| **The top of `tl4`'s strip closes five joins** (`notes/blocks/tl4.md`, eighth run; wiring only: six bus lines along y 2512-2728 and the pads where the bus field's tracks end). (1) **`rcs_e3` = NOT `tl4_w3850`**: the right cluster's inverter at y 3781-3911 drives `tla`'s bus line E, so the input `rcs_e3` of `rcs_in3` and `rcs_bc3460` has its driver; `tl4_w3850` is `tl5_w5761`, the south bus line x 5412. (2) **Latch A's enable `tl3_w3373` = NOT `tl4_w4590`**: the gate row `tl3_e3028` of `tl3`'s inverter E1 ends on a pad of `tl4_w4590`'s track. (3) **`tl5`'s latch c is open while `tl3_e4243` = NOR(`rcs_mv`, `tcw_a`) is high** (`tl5_w4458` is that net). (4) The set input of `tl4`'s pair (`tl4_w4718`) is `tl5_w3245` = NOR(`tl5_w3550`, `tl5_w4160`). (5) `tl5_w2722` = NOT `tl4_w3113`. | Traced without `?` (every pad read in three or four shots); the equations named are marked as before (load ties), `tl5_w3245`'s is firm. **Open**: what drives `tl4_w4590` (a second row of it leaves west at y 2810) and `tl5_w5761`. Ninth run: `rcs_x1` goes on from latch C's clear metal across `tl4`'s strip (y 5895, a pad, a row) to `tl5`'s bus line x 5107 (`rcs_x1`) |
+| **South of the middle cluster, four joins** (`notes/blocks/tl3.md`, run 11; wiring only, y 5660-6350). (1) **`tl3_w4763` is `tc1_o3527`** = NOR(`tc1_o3095`, `tc1_o3353`), cell B of the top-centre gate column: so `tl3_w4373` = NOT `tc1_o3527`, `tl3_w4546` = NOR(`tl3_w3803`, NOT `tc1_o3527`) (gate 1 of `rcs_mv`'s NOR), and `tl3_w4720` = NOR(`tl3_w3803`, `tc1_o3527`). (2) **`tl3_w3982` is `tl5_w5936`**, a bus line that leaves `tl5`'s strip south across y 6350: the net that holds `rcs_cond` low comes from south of the top-left logic. (3) **`c4l_l3` is `tl4_w5455`** and (4) **`c4l_gab` is `tcw_m6232`** (the paragraph "Reset" below). Wherever this page writes `tl3_w4763`, read `tc1_o3527`. Also: `rcs_thin_e`, the select of `tla`'s selector, runs by the row y 6327 and a pad to `ur`'s pad (3968,6410), whose poly leaves east (not drawn); it is not `sl_l3`. | Firm for the four joins (rows, pads, metals and every crossing read from text maps of both metal shots, the clean shot and the chip-2 stripped shot; no uncertain item on any of them). The equations named are firm for `tl3_w4720`, marked for the others as before (load ties). **Open**: `tl5_w5936`'s source; `tcw_m6232`'s driver; where `rcs_thin_e` goes east of x 4256 |
 | `lc_step` = NOT `lc1_w7040`: the step pulse of the scan line counter and of `c4l` is the output of an inverter at the top of the left-centre gate column (`notes/blocks/lc1.md`); its input `lc1_w7040` is drawn back across the strip to the gate cluster at x 5650-6320, y 7550-8290, where it is one output of **a latch, latch D** (copies of `tl1_ub` and `tl1_ua`; the lower unit is in `lc2`, drawn 2026-11-18): `lc1_w7040` = NOT(`lc1_w7864` OR `lc1_w7908` AND `lc1_w7862` OR `lc1_w7928`), `lc1_w7928` = NOT(`lc1_w7040` OR `lc1_w7780` AND `lc1_w7908`), `lc1_w7862` = NOT `lc1_w7780`. The latch is open while `lc1_w7908` is high, takes `lc1_w7780` = NOT `lc1_w7733` (the gate E1 of the same cluster) and is cleared by `lc1_w7864`, the buffered NOR(`lc1_w7257`, `lc1_w7343`) of the gate column: **`lc_step` is the inverse of what the latch holds, and is high while the clear is high**. **The same clear clears latch C** of the strip below (`lc2_w8688` = NOT(`lc1_w7864` OR `lc2_w8646` AND NOT `lc2_w8906` OR `lc2_w8822`); `notes/blocks/lc2.md`). | Firm for the inverters, the join to the counters' clock generator, the route of `lc1_w7040` and the joins of the latch's enable, data and clear to their metals and of the clear to latch C (pads read in both metal shots and a stripped shot; no uncertain item on them). Marked for the two latch equations (the cells' `?` load ties). **Open**: the sources of `lc1_w7908` (a metal from far north of the strip, which goes on east along y 8259), `lc1_w7733`, `lc1_w7257`, `lc1_w7343`; latch C's enable and data (both come from north of y 8067) |
 | The memory address counter (14 bits, left array) and what clocks it. | Open (cells traced, control lines not) |
 
@@ -86,11 +89,26 @@ Inside a counter:
 
 **Reset.** Not established for any counter. What is known: in every bit the value on
 its way to the master passes a gate `NOR(L3, …)`, so while the counter's line "L3" is
-high the master is loaded with 0 (marked). For `rc`, `hsw`, `sl` and `c4l` that line
+high the master is loaded with 0 (marked). For `rc`, `hsw` and `sl` that line
 arrives from outside the counter and its source is open; it is the candidate for a
 synchronous clear. For `hc` the same line is believed to be `ck_a` (join not drawn),
 which would make it part of the clocking there and not a clear. So even the mechanism
 is not settled.
+
+**For `c4l` the line's source is traced** (`notes/blocks/tl3.md`, run 11): `c4l_l3` is
+`tl4_w5455` = NOT `tl4_w4243`, the inverse of the latch in the vertical control's right
+cluster (the row "In the vertical control's right cluster" above: open while `tl4_w4068`
+is high, takes `tl4_w4025`, cleared by `tl4_w4198`, the clear it shares with three other
+latches). So while that latch is clear the 4-bit counter's masters are loaded with 0 on
+every step, and the counter can count only while the latch is set. Firm for the join (one
+wire from the inverter's row to the counter's line, no uncertain item on it); marked for
+the two ends (the inverter's load tie; the counter cell's uncertain items). If `c4l` is the
+vertical sync width counter (believed, `notes/blocks/amr.md`), the latch is the "in
+vertical sync" state; what sets and clears it is open. The same counter's pass-gate line
+`c4l_gab` (the gates of the m/mb pass transistors in each bit) is `tcw_m6232`, the net that
+clears `tl5`'s latch c: firm for the join; its driver is open. `sl_l3`, the 5-bit
+counter's line, is fed by a poly from the west, not followed; it is **not** `rcs_thin_e`,
+which `ur`'s drawing had joined to it by a poly that is not there.
 
 ## Registers and writing
 
@@ -183,5 +201,5 @@ So that silence is not read as knowledge:
 - The memory address counter's control, and the cursor compare.
 
 The list of what is assumed, with the evidence for and against each, is
-`notes/ambiguities.md` (AMB-001 to AMB-030). Work still to re-check before anything is
-simulated is the "Re-read list" in `notes/work-packages.md` (R1-R37).
+`notes/ambiguities.md` (AMB-001 to AMB-035). Work still to re-check before anything is
+simulated is the "Re-read list" in `notes/work-packages.md` (R1-R42).
