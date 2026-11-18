@@ -1,0 +1,4 @@
+# tl4: top-left random logic, fourth strip (the vertical control's right cluster)
+4665,3906:4967,4390   logic   latch in the right cluster | tl4_w4243 = NOT(tl4_w4198 OR tl4_w4068 AND NOT tl4_w4025 OR tl4_w4113): open while tl4_w4068 is high, data tl4_w4025, cleared by tl4_w4198; a copy of the latches in front of rcs_e4
+4290,3012:4967,3222   ?logic  NOR at the top of the right cluster | tl4_w3113 = NOR(tl4_w3070, tl4_w3178); output north by the metal x 4408
+4400,3781:4967,3911   ?logic  inverter in the right cluster | tl4_w3808 = NOT tl4_w3850; output north by the metal x 4496

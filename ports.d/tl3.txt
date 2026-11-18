@@ -1,0 +1,20 @@
+# tl3: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+# The package's region is x 3533-4250, y 2500-6350. Kept in step with the Ports table of
+# notes/blocks/tl3.md.
+
+# West side (x 3533): rows of the latch at y 3212-3652
+tl3_w3333   P  3533,3324-3342  in   data of the latch; the row turns north at x 3510-3525 (tl2's strip)
+tl3_w3419   P  3533,3409-3429  out  the latch's inverted output; on west to a pad (3495,3418) under a metal going south
+tl3_w3506   P  3533,3497-3515  in   clear of the latch; on west to a pad (3455,3503)
+# drawn ends inside the strip
+tl3_w3373   P  3606,2985       ?    enable of the latch: pad at the north end of the metal x 3540; a poly row y 2955-2975 goes on east from the pad, not drawn
+# rows of the NOR units
+tl3_w3722   P  3533,3712-3732  in   NOR 1 gate 1
+tl3_w3765   P  3533,3755-3775  out  NOR 1 output
+tl3_w3896   P  3533,3886-3906  in   NOR 2 gate 1; on west to a pad (3497,3890)
+tl3_w3939   P  3533,3929-3949  out  NOR 2 output
+tl3_w3982   P  3533,3972-3992  in   NOR 2 gate 2; on west to a pad (3497,3978)
+tl3_w4763   P  3533,4753-4773  in   NOR 4 gate 2
+tl3_w3803   P  3540,4068       ?    pad of the metal x 3540 (gates of NOR 1 and NOR 4); its row goes east into units not read
+tl3_w4720   P  3540,4912       out  NOR 4's output: pad at the south end of its metal; the poly goes on east along y 4930-4948, not drawn
+vss         M  3645-3695,4850  -    the west rail, drawn to y 4850; it goes on south
