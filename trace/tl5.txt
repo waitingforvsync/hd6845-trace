@@ -57,16 +57,16 @@ C 4991,4182
 P 5195,3452:5440,3471
 P 5432,3444:5476,3479
 C 5452,3461
-M 5451,3450 y3482
+M 5451,3450 y5250                     # T5 south of the pad: one metal without a pad as far as looked at (y 5250); follow.py: to (5450,5766)
 N P 5300,3461 tl5_w3461
 # enable: row y 3496-3514 to the pad (5494,3505) on T6; T6 runs on south to a second pad
 # (5494,3722), where it ends (bare ground south), on the row y 3712-3732 of the lower unit's
 # series gate; that row runs on east through the pad and out of the strip. North of the upper
-# pad T6 goes on (follow.py: to (5492,2984)): drawn to y 3490 only
+# pad T6 runs to its north pad (5494,2985) (follow.py 5492 3600 N: to (5492,2984))
 P 5195,3496:5480,3514
 P 5474,3488:5516,3523
 C 5494,3505
-M 5494,3490 y3734
+M 5494,2973 y3734                     # T6 from its north pad (5494,2985), drawn with the north rows below
 P 5195,3712:5683,3732
 P 5474,3705:5514,3740
 C 5494,3722
@@ -105,7 +105,8 @@ C 5538,3982
 P 5195,4189:5524,4208
 P 5518,4183:5560,4218
 C 5538,4200
-M 5538,3968 y4992                     # south of the lower pad it runs on, without a pad, to the pad (5538,4980): the gate of the inverter at y 4910-5040 (below)
+M 5452,2769 x5538 y4992               # T7: from the pad (5452,2767) (north rows, below) an arm east, a corner (5538,2770) and south (follow.py 5535 3600 N: corner (5532,2772), west end (5446,2770))
+#                    # south of the lower pad it runs on, without a pad, to the pad (5538,4980): the gate of the inverter at y 4910-5040 (below)
 N M 5538,4090 tl5_w3982
 # the three-input gate's node: here the box poly is a stub with a closed round end at x 5212
 N P 5200,4027 tl5_w4027
@@ -113,7 +114,7 @@ N P 5200,4027 tl5_w4027
 P 5195,4104:5220,4123
 P 5212,4096:5254,4131
 C 5233,4113
-M 5233,3622 y4127
+M 5165,2945 x5233 y5250               # T0: from the pad (5165,2945) (north rows, below) an arm east and south through both clear pads; one metal without another pad as far as looked at (y 5250); follow.py 5234 4300 N/S: corner (5233,2944), west end (5161,2944); south to a corner (5231,6026), west, south to (5145,6113)
 # output: row y 4147-4167 east to the pad (5622,4160), the south end of T9 (bare ground south),
 # which comes from the NOR's gate 1 pad (5580,3200): drawn with the NOR
 P 5195,4147:5608,4167
@@ -149,14 +150,14 @@ C 5665,4395
 M 5667,4380 y4407
 N P 5400,4413 tl5_w4395
 # enable: T4 with two pads, (5407,4458) and (5407,4677), and a row from each; the metal ends on
-# the lower pad (bare ground south) and runs on north of the upper one
+# the lower pad (bare ground south); north of the upper one it runs to its north pad (5407,2810)
 P 5195,4448:5393,4467
 P 5387,4441:5429,4476
 C 5407,4458
 P 5195,4666:5393,4685
 P 5387,4660:5429,4695
 C 5407,4677
-M 5407,4444 y4689
+M 5407,2798 y4689                     # T4's north piece from its north pad (5407,2810) (follow.py 5408 3400 N/S: (5406,2810)-(5404,4682))
 N M 5407,4570 tl5_w4458
 # the three-input gate's node: its box poly runs east along y 4494-4513 to x 5552, south down
 # x 5530-5552 (under T7, no contact: no ring in the metal shot, no green hole) and east along
@@ -168,11 +169,11 @@ P 5530,4580:5683,4600
 N P 5400,4503 tl5_w4503
 # clear: row y 4580-4600 from the pad (5492,4590) on T6's lower piece, which starts on a pad
 # (5492,3872) (bare ground north of it) with a row east along y 3862-3882 out of the strip, and
-# runs on south of the pad (5492,4590): drawn to y 4604 only
+# runs on south of the pad (5492,4590)
 P 5195,4580:5478,4600
 P 5472,4573:5514,4608
 C 5492,4590
-M 5494,3860 y4604
+M 5494,3860 y5250                     # south of the pad (5492,4590) one metal without a pad as far as looked at (y 5250); follow.py: to (5494,5418)
 P 5474,3855:5514,3890
 C 5492,3872
 P 5508,3862:5683,3882
@@ -204,7 +205,7 @@ B 5164,3230:5194,3262
 P 5166,3235:5438,3255
 P 5432,3228:5474,3263
 C 5452,3245
-M 5451,3257 y2925                     # T5 north of the pad: drawn as far as looked at (r1_a.png)
+M 5451,3257 y2888                     # T5's north piece, to its north pad (5452,2900) (north rows, below)
 N P 5300,3245 tl5_w3245
 # gate 1: row y 3192-3212 from the pad (5580,3200). The pad's metal is an arm east (y 3194-3210)
 # to the north end of T9 (x 5625), which runs south without a pad to latch b's output pad
@@ -274,11 +275,11 @@ N P 5400,4849 tl5_w4850
 D 4912,4935:4962,4995
 C 4931,4962 s=24x44
 # output: poly y 4928-4948 east to the pad (5407,4937), the north end of a piece of T4 (bare
-# ground north); drawn to y 4950 only
+# ground north)
 P 5205,4928:5393,4948
 P 5387,4920:5429,4955
 C 5407,4937
-M 5407,4925 y4950
+M 5407,4925 y5249                     # T4's south piece: to the pad (5407,5237) (thin metal W, below)
 N P 5300,4938 tl5_w4937
 # gate: row y 4970-4988 from the pad (5538,4980), the south end of T7 (latch b's enable); the row
 # runs on east through the pad and out of the strip
@@ -287,3 +288,68 @@ P 5518,4963:5560,4998
 C 5538,4980
 # RC over the two units
 M 5104,4790 y5045 w=46
+
+# ====================================================================
+# The north rows: poly rows from the west (out of tl4's strip) to the pads of the tracks' north
+# ends. Under metal (salmon) as far as x 5135, in the open from there to the bus field.
+# north_a.png (3.1x clean, x 4955-5275), north_c2.png (4x chip-2 stripped and metal: five straight
+# orange rows; the blobs on them in the clean shot are dirt on chip 1), r0_a.png, r1_a.png (2.35x);
+# pads pt1.png, pt2.png, pw1.png (4x, two shots).
+# y 2685: to the north pad (5038,2685) of the thin metal W; the row ends on the pad (closed east
+# end at x 5058; r9m's poly r9m_l3 steps down past it at x 5075-5090, 17 px of field between)
+P 4967,2675:5025,2694
+P 5020,2668:5058,2702
+C 5038,2685
+# y 2722: to the pad (5364,2722), the north end of T3. T3 is one metal to (5363,6114) (follow.py
+# 5365 2900 N/S) with a pad (5364,3070) on a row of the unit at y 3040-3142 (not drawn); drawn
+# as far as looked at
+P 4967,2714:5350,2733
+P 5346,2705:5384,2740
+C 5364,2722
+M 5364,2710 y5250
+N M 5364,4000 tl5_w2722
+# y 2767: to the pad (5452,2767), whose metal is an arm east onto T7 (latch b's enable)
+P 4967,2758:5438,2777
+P 5432,2750:5474,2785
+C 5452,2767
+# y 2810: to the pad (5407,2810), the north end of T4's north piece (latch c's enable)
+P 4967,2801:5393,2820
+P 5387,2793:5429,2828
+C 5407,2810
+# y 2855: to the pad (5580,2855), the north end of a piece of T8 that ends on a pad (5580,3113)
+# on a row of the unit at y 3040-3142 (follow.py 5582 3000 N/S: (5582,2852)-(5581,3120); the
+# pad and its row are not drawn: the metal is drawn to y 3098)
+P 4967,2846:5566,2865
+P 5560,2838:5602,2873
+C 5580,2855
+M 5581,2843 y3098
+N P 5300,2856 tl5_w2855
+# y 2900: to the pad (5452,2900), the north end of T5's north piece (the NOR's output)
+P 4967,2890:5438,2909
+P 5432,2883:5474,2918
+C 5452,2900
+# y 2940: to the pad (5165,2945), whose metal is an arm east onto the north end of T0 (the
+# clear of latches a and b)
+P 4967,2930:5152,2950
+P 5146,2928:5186,2962
+C 5165,2945
+# y 2985: to the pad (5494,2985), the north end of T6 (latch a's enable)
+P 4967,2975:5480,2994
+P 5474,2968:5516,3003
+C 5494,2985
+
+# ====================================================================
+# Thin metal W, x 5031-5045, over the whole column: one metal from a pad with a contact
+# (5038,2685) on the row y 2685 to a pad with a contact (5038,5237), whose poly runs east along
+# y 5227-5247 (under RC over field, no box; under T0..T3 without a pad) to the pad (5407,5237)
+# where T4's south piece ends. So W carries inverter 2's output tl5_w4937 north and out west.
+# w_m.png, w_a.png (3.3x strips, metal and clean, end to end): constant width, no widened pad
+# and no ring with a bright centre between the two ends; it is dark where it lies over the
+# loads' tie boxes and tails (y 3265-3320, 3495-3530, 3590-3640 and the like: trap 22) and
+# over the unit at y 3045-3100, which is not traced. pw1.png, pw2.png (4x, two shots).
+M 5038,2673 y5249 w=12
+P 5020,5220:5058,5254
+C 5038,5237
+P 5050,5227:5393,5247
+P 5387,5220:5429,5254
+C 5407,5237

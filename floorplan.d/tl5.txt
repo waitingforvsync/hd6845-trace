@@ -5,3 +5,7 @@
 4967,4297:5683,4757   ?logic  latch c east of RB | tl5_w4633: open while tl5_w4458 is high, data tl5_w4395, cleared by tl5_w4590; both outputs leave east
 4951,4786:5683,4912   ?logic  inverter east of RB | tl5_w4807 = NOT tl5_w4850; both on rows that leave east
 4951,4916:5683,5042   ?logic  inverter east of RB | tl5_w4937 = NOT tl5_w3982 (latch b's enable); out south on the track x 5407
+4967,2665:5600,3003   route   north rows of the fifth strip | eight poly rows from tl4's strip to the north pads of the tracks: enables, clear, the NOR's output, tl5_w4937
+5026,2665:5050,5255   route   thin metal W | tl5_w4937 = NOT tl5_w3982 from the row y 5237 north over the whole column to the row y 2685
+5210,3003:5683,4770   route   bus field of the fifth strip | tracks T0-T10 (x 5233-5667) and the rows of the three latches and the NOR
+5050,5220:5430,5255   route   row y 5237 | tl5_w4937 from T4's south pad west to the thin metal W
