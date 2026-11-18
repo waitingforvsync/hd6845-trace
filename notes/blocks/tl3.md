@@ -1355,6 +1355,14 @@ Round 2: no findings.
   `tl1_w3594` (`tl1`'s and `tl2`'s notes). If it is the same row and the thin metal is one
   metal over the four boxes it crosses, `tl3_e4152` = `tl1_w3594`. To draw: the row, the pad,
   and the metal from y 2905 to y 4106 with each box crossing read (Ambiguity 12).
+  Run 9, measured, not drawn: `tl2`'s port for the row is `tl1_w3594` at (3533,2899), "every known
+  end is a gate", so this pad's metal is where the row's driver must arrive: drawing the row, the
+  pad and the metal down to track A would make `tl1_w3594` = `tcw_a`. But the metal lies over the
+  units' node boxes for most of its length: `tools/t.sh tl3 tl3_thin.py 4095 4115 2905 4110 --thr
+  176 --min 8` lists fourteen stretches of 15-39 px dark in both metal shots (y 2905-2919,
+  2967-2987, 2993-3018, 3384-3409, 3421-3440, 3530-3568, 3689-3715, 3725-3744, 3832-3851,
+  3861-3889, 3921-3941, 3947-3962, 4054-4071, 4081-4104) against six on the other thin metal.
+  Each needs a view at 5-6x in three shots, for a contact as much as for a break (Ambiguity 12).
 - The west rail south of y 5660, and the metal north of the link (review round 1: wider
   metal x ~3648-3762 above y 2598, a supply feed, not drawn); the VCC rail's top (y 2918) is `tla`'s.
 - The VCC box of NOR 4 runs on south of the cell's box with more contacts (review: y 4700-4810):
