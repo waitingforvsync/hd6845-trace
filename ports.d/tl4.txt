@@ -3,3 +3,6 @@
 
 # West side (x 4250)
 tl4_w4501   P  4250,4492-4512  in   row from the west across the bus field; gate 2 of the three-input NOR tl4_w4545
+
+# East side (x 4967)
+tl5_w3505   P  4967,2976-2996  in   the second latch's enable: the row of the north pad (4452,2985) of the track x 4452's north piece; tl5's row of the pad (5494,2985)
