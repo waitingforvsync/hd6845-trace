@@ -2,7 +2,7 @@
 
 ## Status
 
-2026-11-18 04:48 +0100. Survey only, plus a 6x look at the gate pair on claude-opus (section "Gate pair at 6x"): **nothing is drawn** (no `trace/lc3.txt`, no ports file, no floor-plan
+2026-11-18 04:48 +0100. Gate pair drawn on claude-opus (`trace/lc3.txt`, ports `ports.d/lc3.txt`; section "Gate pair at 6x"); the rest of the region is survey only, not drawn. Not yet reviewed. Earlier text: survey only, **nothing was drawn** (no `trace/lc3.txt`, no ports file, no floor-plan
 fragment). The inventory below was read at 0.62x and 1.22x (metal + acid1b), one gate pair
 at 3-3.4x; everything in it is "seen", not traced. Stopped early on the coordinator's
 instruction (budget). Views: `cache/scratch/lc3/` (`survey.png`, `qa`..`qd.png`,
@@ -39,9 +39,21 @@ x 5612-5640.
 
 ## Ports
 
-None: nothing is drawn.
+`ports.d/lc3.txt`: inputs `lc3_w9470` (metal x 5560, south edge y 9520) and `lc3_w9299`
+(metal x 5560, north edge y 9255); outputs `lc3_w9432`, `lc3_w9337` (poly rows at x 5540);
+`vss` (x 5665-5712), `vcc` (wide metal x 5840-5890, named from the loads).
 
-## Gate pair at 6x (2026-11-18, claude-opus, notes only)
+## Gate pair at 6x (2026-11-18, claude-opus)
+
+Drawn as one cell `lc3_inv` (the lower gate) and its mirror about y 9384.5. Extraction
+(4 transistors): `lc3_w9432 = NOT lc3_w9470`, `lc3_w9337 = NOT lc3_w9299`;
+`unsure.py --equations`: both DEPEND on `?` items (the loads' gate ties). `?` items: the
+metal contact on each box (5625,9432)/(5625,9335) with a small metal pad over it (the track
+x 5617-5633 between them is not drawn, since with both contacts it would short the outputs);
+the load gate's tie poly x 5770-5800, y 9455-9505 and buried contact x 5770-5786 on the band.
+Coordinates of the drawn pull-downs, load poly (x 5785-5835) and rows come from the survey and
+one 1.6x overlay (`ov.png`); the channel widths were not profiled and wire ends not viewed
+50 px beyond: to check in review.
 
 Views `bc_3.png` (5590-5675 x 9400-9465), `ld_3.png` (5750-5900 x 9400-9510), `bx_6.png`
 (5590-5710 x 9300-9460), each acid1b | acid | metal at 6x. Not drawn: the time box ran out
