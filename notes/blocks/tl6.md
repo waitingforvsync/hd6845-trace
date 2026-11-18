@@ -313,7 +313,7 @@ gives the same pairing. The three south pads (6275,6152), (6318,6110), (6360,615
 (`tc2_m6447`), `M ... y5567 x6400` (`tc2_m6490`), `P 6610,5003 x6400` (`tc1_p4308`),
 `P 6400,5161:6503,5185` (`tc2_o5175`), its `vss` metal at (6400, 6198-6243); `tcw`'s pad
 `P 6258,4388:6292,4422` (`tcw_m6404`) and its metal `M 6276,... y2700` (`tcw_m6278`); `r9m`'s
-pad `P` of (5845,5045) (`r9m_l3`). `tools/amr_at.py` gives the joined name on every piece.
+pad and contact at (5845,5043) under the south end of `r9m`'s metal x 5848 (`r9m_l3`); the pad and contact are drawn here (neither block had them: see Review round 1). `tools/amr_at.py` gives the joined name on every piece of ten of the joins at once and on this one after that contact was drawn. Note: an `@alias` does not connect anything: it only says which name a net keeps once the geometry makes it one net.
 *Copies.* None: no cell is placed.
 
 ## Ports
@@ -398,3 +398,21 @@ The same ports are in `ports.d/tl6.txt`. West-side ports carry `tl5`'s names (al
 - Everything that leaves the strip south (y 6350) or north is followed no further: Ports.
 
 ## Review
+
+Round 1 (full review, 2026-11-18 03:39 +0000, a fresh agent on claude-fable-5-2, at commit e83f200). Told to
+check each of the eleven joins at every step and that each end is the other block's net of
+that name; to suspect U2's three pieces, the pad (5757,5632) on U1, the crossing field (a
+step of one track), the three joins decided by colour profile, the nest's corners, and
+missed taps. It read every join's pads, rows and corners at 4-7x in two to four shots,
+confirmed U2's breaks in both metal shots (no metal at y 4641-4694 and y 4857-4976), U1 as
+one piece with no other hole from y 4002 to 6065, the eight polys at the same x under every
+bus metal with no hole on any, and scanned every drawn metal piece for undrawn contacts.
+Joins 1-9 and 11: confirmed. One finding, which changes the netlist: join 10
+(`tc2_o5175` = `r9m_l3`) was claimed but not in the extraction: at (5845,5045) the poly and
+the metal each just ended, with no pad and no contact drawn by either block, and the alias
+line connects nothing by itself. The photos show the contact (ring with a bright centre in
+both metal shots, green hole on a salmon pad in the clean shot): confirmed by the tracer at
+6x (`chk_j10.png`) and drawn; the two are now one net (0 errors; `tc2_o5175 = NOR(fld_b_in,
+tc1_x1)` is on r9m's line 3).
+Not checked: tc2's rows east of its pads, `r9m_l3` west of x 5683, tl5's side of its
+ports, the undrawn pad at (6413,2617) on U11 (13 px outside the strip).

@@ -272,6 +272,12 @@ M 6276,2706 y2665 x6400
 # y 5045 under the metals x 6233-5886 to r9m's pad (5845,5045) (v1.png 4x; px.py col 6260
 # 5022 5200 8: one poly colour from y 5038 to y 5182 in both metal shots)
 P 6405,5173 x6259 y5045 x5843 w=20
+# the row's west end is a pad with a contact under the south end of r9m's metal x 5848
+# (r9m_l3): ring with a bright centre at about (5842,5047) in both metal shots, green hole
+# on a salmon pad in the clean shot (review round 1; tracer: cache/scratch/tl6/chk_j10.png,
+# 6x). Neither block had drawn it, so the join was not in the extraction.
+P 5822,5030:5862,5066
+C 5845,5043
 @alias tc2_o5175 r9m_l3
 
 # ---- tl5_w5717: tl5's row y 6238 east under U0-U2, bw's metal, the wide metal and the metals
