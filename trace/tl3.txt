@@ -501,7 +501,26 @@ N D 4088,4830 tl3_e4852
 # and the master's box under thin W reads much the same (160-193/142-175/99-141: px.py row 4366
 # 2684 2722 3, row 3758), and a contact would short the inverter's output to the net of the two
 # end pads. Notes, Ambiguity 6.
-M 3955,4500 y4960 w=13
+# Run 9: the metal drawn end to end, from the north arm (y 3640) to the south pad (3953,5458).
+# tools/tl3_thin.py 3944 3966 3628 5450 --thr 176 --min 8 lists every stretch where neither metal
+# shot shows metal anywhere across its width: 33 stretches, 8-13 px at every edge that passes
+# under it (the same bars as over the foot's plain rows), and 14 px or more only over the six
+# load-tie boxes it crosses. Those six are drawn UNCERTAIN (?M): the metal is taken to pass over
+# them unbroken and without contact (trap 22; no pad, no widening, both real ends are pads), but
+# the photos do not show it there (notes, Ambiguity 11). Everything else is drawn firm.
+M 3955,3636 y3777 w=13
+?M 3955,3775 y3826 w=13               # over the tie box of rcs_mn3852's load: dark y 3780-3796 and 3802-3821
+M 3955,3824 y4274 w=13                # (y 3864-3984: over the edge of the diffusion wire under it, bright strip on its east half)
+?M 3955,4272 y4325 w=13               # over e3's tie box: dark y 4277-4291 and 4305-4320
+M 3955,4323 y4452 w=13
+?M 3955,4450 y4497 w=13               # over the rail NOR's tie box: dark y 4455-4492 (38 px, the longest), clean shot greenish at y 4482-4487
+M 3955,4495 y4670 w=13                # over latch C's inverter box at (3955,4541): pass-over (Ambiguity 6)
+?M 3955,4668 y4691 w=13               # over latch C's upper tie box: dark y 4673-4686 (chip 1 to y 4706)
+M 3955,4689 y4780 w=13
+?M 3955,4778 y4810 w=13               # over latch C's lower tie: dark y 4783-4805
+M 3955,4808 y5100 w=13
+?M 3955,5098 y5148 w=13               # over e5's tie box: dark y 5103-5116 and 5129-5143
+M 3955,5146 y5305 w=13                # over the tail of the tie of the inverter at y 5180-5300 (a diffusion, no box): bright but for 8-9 px bars
 N M 3955,4640 tl3_tm3955
 # ---- rows and tracks in the bus field east of the latch
 # data: the row y 4627-4642 comes from the east under three tracks without a contact (textmap
@@ -644,7 +663,7 @@ C 3930,3614 s=20x20
 # box it crosses it is dark in both metal shots and the clean shot is greenish (the boxes at
 # y 3660-3690, 3862, 4110-4140, 4262-4306, 4455-4490: textmap 3945 3625 3969 4500 3, 3930 4440
 # 3982 4506 2 --acid), so its continuity there is not shown. Open join.
-M 3930,3614 x3954 y3640 w=13
+M 3930,3614 x3954 y3640 w=13            # (run 9: drawn on south from here, with the stretch over latch C)
 N M 3954,3632 tl3_tm3955_u
 # the tie: between the plate's top bar and the strip, under the thin metal, both chip-2 shots
 # and the clean shot are heavy dark over x 3928-3972, y 3486-3530 (px.py row 3508 3900 3996 4,
@@ -857,6 +876,10 @@ P 3936,5442:3972,5474
 C 3953,5458 s=20x20
 M 3955,5300 y5468 w=13                # the thin metal's last stretch over rows y 5330, 5371, 5415 (no hole under it)
 N P 3740,5458 tl1_w4937
+# the thin metal is one net from the load plate of tl3_e3550's unit to this row, through the six ?M
+# stretches over the tie boxes and that plate's tie (?B): the names are gathered, not merged (trap 17)
+@alias tl3_e3550 tl3_tm3955
+@alias tl3_e3550 tl1_w4937
 # ---- row y 5450-5465 east: a pad with a contact (4040,5458) (textmap 4022 5440 4053 5600 3);
 # its poly runs east to x 4250 = tl4's tl4_w5455 (P 4250,5447:4967,5467); its metal x 4031-4043
 # goes south (drawn to y 5660; follow.py 4037 5520 S: on into the wide metal at y ~6100)
