@@ -45,3 +45,10 @@ tl3_w4763   M  3533,5426-5444   ?    track H's arm east along y 5435 (follow.py:
 tl1_w4937   P  3533,5449-5467   in   row y 5458, straight through
 tl3_w4546   P  3538,5482-5514   ?    the pad (3518,5498) at the end of track F's arm; its poly goes on east
 # Ends of drawn wires inside the strip (where the drawing stopped: the gate column, not traced)
+# ---- run 5: the wiring north of y 2630
+tl1_w3333   M  2848,2546-2562   out  tl1's metal from the pad (2826,2553), to tl1's third latch; comes through the strip from the pad (3453,2553)
+tl1_w3333   P  3450-3470,2500   in   the poly north from the pad (3453,2553): the wire's source is north of the strips
+tl1_w2592   P  2817,2582-2600   ?    tl1's row y 2591, on east to the pad (2868,2596)
+tl1_w2592   M  3533,2501-2518   ?    the metal from that pad: y 2598, north at x 3503, east along y 2509 (follow.py: on to x 3752)
+vss         M  2817,2915-2948   -    the east arm of tl1's wide metal x 2733-2785, onto R3's top
+vss         M  2832-3388,2500   -    the plane's lower edge (y 2507), on north
