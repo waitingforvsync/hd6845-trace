@@ -517,3 +517,29 @@ P 7476,6265:7512,6297
 C 7488,6282
 M 7489,6274 y6328 x6400 w=23
 N M 7749,5900 ral_stb
+
+# ===== Piece 10 (2026-11-18, run 3): the line of the pad (7790,6152) (wiring only), named
+# ===== tc2_r5718 for its row. From the east:
+#   - a poly row y 5708-5728 from past x 8250 west under the VCC rail's east leg, db_b6's
+#     metal, the ground rail and tc2_sr_r's metal (e_p10row.png 2.5x, three shots: one poly, no
+#     pad) to the pad (7791,5718) (e_p10a.png 4x, three shots: ring and bright centre, green
+#     hole; field west of it; ras's notes: "a pad at the channel's west end");
+#   - metal x 7783-7799 south over ras's comb rows without a pad (follow.py 7794 5760 S: end
+#     (7791,6158); tc2_runs.py col 7791 5735 6135: edges only; the clean-shot scan finds only the
+#     two end contacts) to the pad (7791,6152) (e_p9a.png 4.2x);
+#   - poly west along y 6140-6160 to x 7745, south along x 7745-7765 under the wide metal to
+#     y 6335, west along y 6315-6335 (e_p9a.png, e_p9b.png 4.2x, e_p10a.png second tile: the
+#     corner) to the pad (7530,6324) (e_p10a.png third tile: contact);
+#   - metal x 7522-7544 south over tc2_sr_c's row y 6367 (no pad there: run 2, g1_cpadw.png)
+#     past y 6400.
+P 7776,5702:7812,5736
+C 7791,5718
+P 7791,5718 x8250 w=20
+M 7791,5710 y6160 w=15
+P 7773,6134:7812,6168
+C 7791,6152
+P 7791,6150 x7755 y6325 x7535 w=20
+P 7513,6306:7550,6342
+C 7530,6324
+M 7533,6316 y6400 w=22
+N M 7791,5900 tc2_r5718

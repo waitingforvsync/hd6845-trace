@@ -38,3 +38,7 @@
 7700,6049:7770,6292    route   RA latch strobe | ral_stb: poly west and south under the wide metal
 7476,6265:7722,6297    route   RA latch strobe | ral_stb: poly row west to the pad (7488,6282)
 6400,6274:7502,6341    route   RA latch strobe | ral_stb: metal from the pad (7488,6282) south and west along y 6328, leaving west
+7776,5702:8250,5736    route   tc2_r5718 | poly row y 5718 from the east to the pad (7791,5718)
+7783,5710:7812,6168    route   tc2_r5718 | metal south to the pad (7791,6152)
+7513,6134:7812,6342    route   tc2_r5718 | poly west, south and west to the pad (7530,6324)
+7522,6316:7544,6400    route   tc2_r5718 | metal south

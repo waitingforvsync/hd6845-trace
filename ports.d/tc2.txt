@@ -31,3 +31,5 @@ vss          M  6882-6926,4990   -    east ground rail of the crossing field: me
 ral_stb      M  8198-8212,4450   ?    from tc1 (its bus metal ns4)
 ral_stb      P  8250,5359-5379   ?    the poly from the contact (8204,5371), going on east (to x 8425, seen)
 ral_stb      M  6400,6316-6340   ?    going on west (follower: end (6012,6068))
+tc2_r5718    P  8250,5708-5728   ?    poly row from the pad (7791,5718), going on east
+tc2_r5718    M  7522-7544,6400   ?    metal from the pad (7530,6324), going on south (follower: end (7353,7465))
