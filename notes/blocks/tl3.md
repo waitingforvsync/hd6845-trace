@@ -432,10 +432,52 @@ from outlines); the rows west of x 3521; the plates east of the VCC rail at (388
 
 Round 1: no findings that change a connection.
 
+**Round 1, full review of latch B** (2026-11-17 18:21 -0600, a fresh Fable 5.2 agent, 52 tool
+uses, 20 images in `cache/scratch/tl3/review-4/`; commit reviewed 794186a). Told to suspect: a
+cell copy differing from its master by one contact, box or poly end (the inverter's
+pull-down, both third pull-downs, the buried boxes, the thin metal x 3605 and `follow.py`'s
+contact candidates on it); whether the metals on x 3540 around y 4920-4972 are two; the
+enable metal's three pads and any further contact on it; the data row and the pad (3540,4912)
+against the enable pad 13 px below; the VCC box and contact, the VSS box below the stack, the
+rail contacts; the stub reading of `tl3_w5156`; anything left out in x 3533-3885,
+y 4818-5310. It checked with master-against-copy mosaics (2.1x) and 4x slabs in the clean and
+chip-2 stripped shots, text maps and profiles at each pad and crossing, and 4x to 5.3x views
+in two to four shots.
+
+Findings, all geometry only or omissions, each checked by the tracer:
+
+1. A box under the VCC rail, x 3825-3872, y 5192-5258, with a metal contact near (3845,5222),
+   is not drawn. A strip leaves it east under a plate east of the rail: the VCC end of an
+   east-column load; nothing goes west from it. Added to Not done.
+2. The VCC contact (3847,5030), drawn 24x36, is one long ring y ~5025-5108 (the tracer's own
+   `textmap.py 3826 4996 3870 5050 3` has the ring from y 5017 on). Fixed: `C 3847,5066 s=24x84`.
+3. The stub of `tl3_w5156` is drawn from x 3582 (the cell's); the poly ends at the box's
+   outline, x ~3590-3597. The stub reading is right. Not changed (`tl1`'s cell).
+4. The cell's inverter gate is drawn x 3693-3705; the salmon runs x 3696-3706. The channel is
+   there (`px.py col 3700`). Not changed (`tl1`'s cell); passed on in the handoff.
+5. The VSS contact's ring is centred nearer (3663,5277) than (3662,5284). Fixed.
+
+Found correct: two metals on x 3541 (no metal at y 4940-4962; the pads (3540,4912) and
+(3541,4980) are separate polys with field between); the data row one poly with the pad
+(3540,4912); the enable metal's three contacts and no others, nothing at the crossings y 5025
+and 5112, both rows on west past x 3533; the thin metal x 3605 (contacts only at (3604,4839)
+and (3597,5245); over the two buried boxes it has no hole, as in the master); the thin metal
+x 3784 (two contacts); a field gap between gate 2's east end and the third pull-down band;
+the upper third gate one poly with the lower plate's top bar; the rail contacts and boxes; the
+rail to y 5325; the copies against the masters. Not checked: the plates' ties (AMB-026);
+x 3533-3575, y 4818-4895 by image; a green strip at x 3881-3885, y 4867-4920 on the east edge.
+
+`tools/t.sh tl3 sameconn.py 6f72ec6`: `connections identical`.
+`.venv/bin/python tools/sameconn.py 6f72ec6`: `connections identical`.
+
+Round 1: no findings that change a connection.
+
 ## Not done
 
 - Next, in this order: the east column's units by the `findcell` hits; the top unit E1 (read,
   not drawn); the foot of the cluster (y 5260-5560).
+- A box under the VCC rail, x 3825-3872, y 5192-5258, contact near (3845,5222), with a strip
+  east under a plate east of the rail (review of latch B): an east-column load's VCC end.
 - `tl3_w4978`'s row y 5318-5342 east of x 3640: where latch B's enable comes from, and what
   the row gates on the way (Inventory).
 - Where the true outputs of latch A and latch B are taken (`tl3_w3550`, `tl3_w5156` end in

@@ -267,10 +267,10 @@ P 3550,4579:3590,4599                 # gate 2: from the pad (3540,4590) of the 
 # the VSS box under the rail below the stack (railprof 3645 3690 4800 5400: diffusion from y 5255;
 # contact ring in the metal shot, lb_row.png)
 D 3642,5257:3699,5305
-C 3662,5284
+C 3663,5277                            # ring centre (review)
 # the VCC box here is the cell's own (clean shot tan y 5008-5126 down x 3847: px.py col 3847 4950
 # 5200 6); its contact to the VCC rail (ring from y ~5000 in the metal shot, lb_m1.png, lb_m2.png)
-C 3847,5030 s=24x36
+C 3847,5066 s=24x84                    # one long ring y ~5025-5108 (review)
 # the thin metal x 3784 (follow.py 3783 5080: (3783,4972)-(3783,5182)), as in latch A
 M 3784,4962 y5192 w=12
 P 3767,4960:3804,4990
