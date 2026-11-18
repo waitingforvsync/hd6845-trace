@@ -387,6 +387,19 @@ net (`tl4_w4935` gone, two transistors and one equation renamed).
 
 Round 4: one finding that changes a connection, fixed.
 
+### Round 5: fix check of round 4's fixes (2026-11-17, against commit 541081e, images `review-5/`)
+
+Covered: the `?P` join of the pad (4623,4893) to the vertical poly, the VSS contact's new place,
+the rows lengthened to x 4786, the two polys now starting at x 4800. Checked at 5.3x in four
+shots and with `px.py`/`textmap.py` (8 images). The join is right (the poly comes straight out
+of the pad's ring; the dark stretch y 4912-4920 is a single outline, the same as at the pad's
+east exit); the reviewer did not re-check the poly's south end, and the `?` stays. The geometry
+items are right: the rows end at x 4774-4786 with field at x 4796 before the pad poly; both
+polys cross their whole legs (edges about 4812 and 4848). `sameconn` (tl4 alone and all files):
+7 differences, all intended.
+
+Round 5: no findings.
+
 ## Not done
 
 - The nine tracks beyond the views (table under Ports), and their other pads.
