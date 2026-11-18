@@ -3,7 +3,7 @@
 Trace: `trace/tc2.txt`. Ports: `ports.d/tc2.txt`. Views: `cache/scratch/tc2/`.
 Tool: `tools/tc2_runs.py` (dark runs along a straight metal in both metal shots).
 
-## Status (2026-11-18 01:20 +0000, dp111's session, run 4)
+## Status (2026-11-18 01:22 +0000, dp111's session, run 4)
 
 Most of this region was already drawn by other packages (`ras`, `rax`, `fld`, and the
 crossing lines of `bust`, `amr`'s west route, `r9m`, `rde`): see the inventory. This package
@@ -11,8 +11,9 @@ adds what they left. Traced and extracted so far: 17 transistors (one NOR, a nin
 latch, the loads of `rax`'s five units), 12 new named nets, 8 equations (the NOR and the five
 unit inverters FIRM, the latch's two marked), seven lines of other packages carried on, two
 lines of the nest west of the XOR cells (three now), the VCC rail of the units and the latch,
-and the two wide supply metals of y 6100-6400.
-Pieces 1 to 10 are through independent review; pieces 11 to 15 (run 4) are not.
+the two wide supply metals of y 6100-6400, and the supply metal that links `fld`'s rails.
+Pieces 1 to 10 are through independent review; pieces 11 to 16 (run 4) are not. After run 4
+and its sweep of the whole region the Not done list says exactly what is left.
 
 **Piece 1**
 
@@ -127,6 +128,15 @@ Pieces 1 to 10 are through independent review; pieces 11 to 15 (run 4) are not.
   x 7572-7620), each joined by drawn metal to a named rail. No contact and no diffusion under
   them here. `fld`'s east ground rail was drawn 73 px too far and is corrected in `fld`'s file.
 
+**Piece 16** (run 4, wiring only; not through a review round)
+
+- The supply metal between `fld`'s rails, which nobody had drawn: the inverters' VCC rail to
+  the XOR cells' VCC rail (and that rail's gap at y 5690-5760), and the inverters' east ground
+  rail to the XOR cells' east ground rail. Found by the sweep (a scan for undrawn metal).
+
+**The sweep** (run 4): the whole region with every block's geometry, in ten tiles and three
+scans: see "The sweep of the whole region".
+
 Not done: see the end.
 
 ## Inventory (survey at 0.68x in the metal and clean shots: `survey_m.png`, `survey_a.png`)
@@ -137,6 +147,7 @@ Not done: see the end.
 | x 6920-7900, y 4450-4800 | six bus metals and the fan of diagonal polys down to the selector | `r9m`, `amr`'s west route, `bust`, `ras`, `tc1`'s ends |
 | x 6420-6710, y 5020-5290 | one NOR with its load (two pull-downs under the west edge of the rail x 6537-6583) | **piece 1** |
 | x 6600-7050, y 5020-5275 | two inverters (`tc1_g`, `tc1_i`) | `fld` |
+| x 6708-6840, y 5235-5405; x 6795-6840, y 5690-5760; x 6881-7014, y 5290-5440 | the supply metal between the inverters' rails and the XOR cells' rails | **piece 16** |
 | x 6580-7030, y 5410-6100 | two copies of the comparator's XOR cell | `fld` |
 | x 6400-6580, y 5350-6170 | a nest of metals turning from south to east; field pockets between them (clean shot khaki, chip-2 stripped shot red minus green 2-7: `tools/px.py pt` at (6490,5420)); each ends on a pad with a poly going south | `fld`'s metal of `fld_y_b`; **`tc1_m6817`'s metal: piece 2; `tc2_m6490`, `tc2_m6447`: piece 5; the fourth pad (6404,6107), `tc2_m6404`: piece 14** |
 | x 7150-7420, y 4880-6000 | row address selector | `ras` |
@@ -943,6 +954,66 @@ Omissions: the dark dots on both metals in chip 2's metal shot (among them (6585
 (7607,6230)): pits in chip 2's wide metal; the clean shot under each is plain field. Chip 1
 has its own at other places. None has a ring with a bright centre.
 
+## Piece 16 (wiring only): the supply metal that links `fld`'s rails (run 4, 2026-11-18)
+
+Found by the sweep below (the only metal in the region that is bright in both metal shots and
+that no block had drawn). Views: `fr_m.png`, `fr_a.png` (3.3x, metal and clean, x 6680-7050,
+y 5225-5460, with every block's trace); overlay `ov_p16.png` (3.3x).
+
+| Net | From | Path | To |
+|---|---|---|---|
+| `vcc` | the VCC rail of `fld`'s two inverters (x 6700-6750, drawn there to y 5290) | its south end widens east to a block x 6708-6840 (y 5235-5290 west of x 6792, y 5258-5290 east of it); a rail x 6796-6840 south over the rows y 5300 and y 5345 | the XOR cells' VCC rail (x 6800-6840, drawn by `fld` from y 5400) |
+| `vcc` | that rail at y 5690 | the same metal x 6795-6840 across y 5690-5760, where `fld`'s drawing has a gap | the rail's lower piece (drawn by `fld` from y 5760) |
+| `vss` | the east ground rail of the inverters (x 6879-6925, drawn by `fld` to y 5290) | a rail x 6881-6925 south over the same two rows to y 5440; from y 5388 it widens east (a slanted edge from (6930,5370)) to a block x 6881-7014 | the XOR cells' east ground rail (x 6978-7028, drawn by `fld` from y 5400) |
+
+Joins: supplies only. `fld`'s inverter VCC rail (joined to `tcw`'s by piece 3), the XOR cells'
+VCC rail and the wide VCC metal of piece 15 are now one drawn metal; so are `tc1`'s ground rail
+(piece 6), the inverters' east ground rail and the XOR cells' east ground rail. The
+extraction's `vcc` goes from 114 to 112 separate pieces and `vss` from 166 to 165; nothing
+else changes (`tools/sameconn.py`: connections identical).
+
+| End or stretch | Seen | Result |
+|---|---|---|
+| the VCC block and its meeting with the inverters' rail | `fr_m.png`, `segs.py 6680 7050` at y 5245, 5262, 5280; `tc2_runs.py row 5262 6700 6845 4` | one metal x 6708-6839 at y 5262 in both chips, no dark run; at y 5245 it ends at x 6792 (east of that, `fld`'s box (6793-6827, 5230-5257) lies in bare ground) |
+| VCC rail x 6796-6840, y 5290-5400 | `fr_m.png`, `tc2_runs.py col 6818 5235 5420 5`, `segs.py` at y 5372, 5385, 5410 | one metal: runs of 10-16 px at the two rows' edges in both chips. A dark ring-like spot at (6810,5305) over the row y 5300 in chip 2 only (chip 1 bright D-E there; the clean shot has the row uniform, no hole: `textmap.py 6786 5286 6836 5324 3`): no contact |
+| VCC rail across y 5690-5760 | `segs.py 6760 6900 5695,5720,5745`, `tc2_runs.py col 6818 5670 5780 5` | metal x 6795-6840 at all three y in both chips; no dark run in that stretch. **Read by profile and at 1.3x (`sw_m_6400_5425.png`)** |
+| ground rail x 6881-6925, y 5290-5440 | `fr_m.png`, `tc2_runs.py col 6903 5270 5440 5`, `segs.py` at y 5372, 5385 | one metal: chip 2 is dark for 33 px at y 5333-5365 (the row y 5345; chip 1 has its two edges with metal between) and chip 1 for 35 px at y 5397-5431 (chip 2: 12 px): no dark stretch at one place in both |
+| the ground block and its meeting with the XOR rail | `fr_m.png`, `ov_p16.png`, `segs.py` at y 5410, 5430, `tc2_runs.py row 5410 6880 7030 4` | x 6882-7013 at y 5410; it ends at x 7014 (16 px of bare ground to x 7029 in both chips). `fld`'s rail below it is drawn to x 7028 and the metal's east edge is x 7013 all the way down (`segs.py 6940 7060 5400,5420,5470,5520,5600`): geometry only, not changed. The pad (7032,5345) of `fld_b_in`'s row is 14 px north of the block's corner and east of its edge: bare ground between |
+| under all of it | `fr_a.png` | pink field and the two poly rows, uniform: no pad, no hole, no diffusion |
+
+No transistor, no contact.
+
+## The sweep of the whole region (run 4, 2026-11-18)
+
+After piece 15 the region was looked over once more with every block's geometry laid on it
+(`TRACE=` empty): six tiles of the clean shot at 1.35x (`sw_a_6400_4450.png`,
+`sw_a_7325_4450.png`, `sw_a_6400_5100.png`, `sw_a_7325_5100.png`, `sw_a_6400_5750.png`,
+`sw_a_7325_5750.png`) and four of the chip-2 metal shot at 1.3x (`sw_m_6400_4450.png`,
+`sw_m_7325_4450.png`, `sw_m_6400_5425.png`, `sw_m_7325_5425.png`), and four scans:
+
+| Scan | What it looks for | Result |
+|---|---|---|
+| metal bright in both metal shots (the follower's test) more than 9 px from any drawn metal or contact (inline script; groups of 150 px2 or more) | undrawn metal | eight groups, all the links of piece 16 (now drawn); nothing else. Thin dim metals fail the test (trap 19): the four metal tiles were read for those, and none without an outline was seen |
+| `tools/tc2_undrawn.py 6400 4450 8250 6400 60` | protected poly colour or protected diffusion colour in the clean shot more than 8 px from a drawn item of that layer | poly: no group. Diffusion: five groups of 85-267 px2, all inside `ras`'s selector (below) |
+| chip-2 stripped shot red minus green 25 or more and chip-1 metal shot orange, in the open, more than 8 px from any drawn poly, diffusion or contact (inline script; it finds about half of the drawn open poly) | undrawn poly in the open | eight slivers of 120-180 px2 along the edges of drawn items; nothing with a width |
+| `tools/opendiff.py 6400 4450 8250 6400` | large open diffusion | thirty-odd green strips 8-16 px across beside rows and metals (gap rims, trap 3); none 25 px wide both ways |
+
+Two attempts to find undrawn contacts by rule (holes in the clean shot, rings in both metal
+shots) were of no use here (the first finds a fifth of the drawn contacts, the second fires at
+every crossing of a metal and a row): contacts were looked for on the tiles, as pads without
+a box, and none was seen.
+
+Looked at because of the sweep:
+
+| Where | Seen | What it is |
+|---|---|---|
+| dark dots on the ground rail at (8012,5765), (8015,5830), (8013,5880) (former Not done) | `dots_rail.png` (4.4x, both metal shots and the clean shot) | notches at the lower edge lines of `ras`'s comb rows in chip 2 ((8013,5790), (8012,5855)); chip 1 has specks at other places; the clean shot has the rows uniform and pink field between: no contact |
+| dark dots on `fld`'s east ground rail at (6990,5728), (6996,5880) | `textmap.py 6962 5704 7016 5746 3`, `6962 5858 7016 5900 3` | chip 2 only (chip 1 bright B-D there): blemishes |
+| `fld`'s comment "south to a pad at about (7032,5345) (NOT DRAWN further)" | `sw_7030.png` (3.6x, with every block's trace) | the pad is drawn (the east end of `fld_b_in`'s row y 5345) |
+| the vertical poly x 6397-6413, y 4437-4870 on the region's west edge | `tools/tc2_items.py` | drawn by `fld` |
+| tan under the metal x 7195-7215 at (7199-7224, 5711-5724) and (7198-7224, 5885-5898) | `cand_ras.png` (3.6x, clean and metal with every block's trace), `px.py pt 7205,5717 7205,5745 7205,5891 7205,5915` | **undrawn, not traced**: diffusion colour under the metal (198/174/127 and 198/174/129, against pink field 186/120/123 and 181/121/123 thirty px south under the same metal), just below `ras`'s two `?P` rows y 5685-5710 and y 5860-5885 and west of where `ras`'s drawn diffusion begins (x 7228). They are the west ends of the two lowest strips of `ras`'s selector, which its trace says were not seen clearly. Left to `ras` |
+| the three smaller diffusion-coloured groups (7392-7403, 5624-5637), (7266-7274, 5210-5224), (7266-7274, 5378-5391) | the scan only | 85-114 px2, inside `ras`'s drawn cells; not looked at |
+
 ## Ports
 
 | Name | Layer | Where | Direction | What |
@@ -1025,28 +1096,48 @@ None in pieces 1 to 3.
 
 ## Not done
 
-- `tc2_o5175`, `tc1_p4308`, `tc1_o3527`, `ras_o0_alt2` west of x 6400; `tc1_m6817` south of y 6400.
-- The lines of the latch (piece 4) beyond the region: `tc2_sr_g`, `tc2_sr_s`, `tc2_sr_q` south
-  of y 6400 (follower ends (7835,7218), (7791,6958), (7922,7046)); `tc2_sr_q`'s poly east of
-  x 8250 (y 6163-6180); `tc2_sr_c` east of x 8250 (the top line of `cdp2`'s channel 2) and west
-  of x 6400 (metal y 6370 to a pad (6184,6370)). `cdp1_lw1` (= `tc2_sr_r`) east of x 15584
-  (`bust`'s Not done): the latch's reset line is not identified until that end is followed.
-- `ral_stb` west of x 6400 (metal y 6328) and east of x 8250 (poly y 5369).
-- `tc2_r5718` east of x 8250 (poly row y 5718) and south of y 6400 (metal x 7533).
-- `tc1_ns3` south of y 6400 (metal x 7661; follower: end (7661,7088)).
-- `tc2_r5589` east of x 8275 (poly y 5262 to the pad (8490,5262), whose metal goes south to
-  (8491,5714)) and south of y 6400 (poly x 6843).
-- `r9m_l1w` east of (8352,4850): the box x 8355-8385, y 4835-4865 in which its poly ends, and
-  the diffusion east of it (`cdp1`'s west edge, x 8395 on: drawn by nobody; `l_box.png`).
-- Dark dots on the ground rail at about (8012,5765), (8015,5830), (8013,5880), where
-  `ras`'s comb rows pass under it: not looked at.
-- `tc2_m6490` and `tc2_m6447` west of x 6400 and south of y 6400.
-- `tc2_m6404` west of x 6400 (metal y 6026, turning north at x 6362) and south of y 6400.
-- The two wide supply metals beyond the region: VCC south of (7723,6400); VSS west of
-  (6400,6220) and south of (7596,6400).
-- West of the region, seen and not drawn: the nest's third metal and its pad (6360,6150)
-  with a poly going south (x 6355-6375).
-- The independent review of pieces 11 to 15 (the Review section below covers pieces 1 to 10).
+After run 4 (pieces 11 to 16 and the sweep) **nothing that the sweep could see is left
+undrawn inside the region except the two items under "Inside the region"**. What remains is
+where lines leave it, and the review.
+
+Inside the region:
+
+- In `ras`'s selector, the west ends of its two lowest strips: diffusion colour under the
+  metal x 7195-7215 at (7199-7224, 5711-5724) and (7198-7224, 5885-5898), west of `ras`'s
+  drawn diffusion (from x 7228) and below its `?P` rows y 5685-5710, y 5860-5885
+  (`cand_ras.png`; the sweep's table). Not traced: it is the part of `ras`'s cell that its
+  trace marks as not seen clearly. Three smaller diffusion-coloured spots inside `ras`'s drawn
+  cells, (7392-7403, 5624-5637), (7266-7274, 5210-5224), (7266-7274, 5378-5391): not looked at.
+- The latch's two `?P` joins (Ambiguity 1 and review round 1 of the second round of work):
+  the photos do not settle them.
+
+Lines that leave the region (each is drawn to the edge; the port table has the place):
+
+- West of x 6400: `tc2_o5175` (poly y 5173), `tc1_p4308` (poly y 5003), `tc1_o3527` (metal
+  y 4482; follower: end (6012,4484)), `ras_o0_alt2` (metal y 4788; follower: end (6059,4876)),
+  `tc2_m6490` (metal y 5567), `tc2_m6447` (metal y 5611), `tc2_m6404` (metal y 6026, turning
+  north at x 6362), `ral_stb` (metal y 6328; follower: end (6012,6068)), `tc2_sr_c` (metal
+  y 6370 to a pad (6184,6370)), the wide ground metal y 6198-6243.
+- South of y 6400: `tc1_m6817` (poly x 6534), `tc2_m6490` (poly x 6492), `tc2_m6447` (poly
+  x 6451), `tc2_m6404` (poly x 6405), `tc2_r5589` (poly x 6843), `tc2_r5718` (metal x 7533;
+  follower: end (7353,7465)), `tc1_ns3` (metal x 7661; follower: end (7661,7088)),
+  `tc2_sr_s`, `tc2_sr_g`, `tc2_sr_q` (metals x 7791, 7837, 7922; follower ends (7791,6958),
+  (7835,7218), (7922,7046)), the wide ground metal's leg x 7572-7620, the wide VCC metal's
+  leg x 7695-7752, the ground rail x 8030-8075 and the VCC rail x 8206-8248.
+- East of x 8250: `ral_stb` (poly y 5369, seen to x 8425), `tc2_r5718` (poly row y 5718),
+  `tc2_sr_q` (poly y 6172), `tc2_sr_c` (poly row y 6367, the top line of `cdp2`'s channel 2),
+  `tc2_r5589` (poly y 5262 from x 8275 to a pad (8490,5262), whose metal goes south to
+  (8491,5714)), `r9m_l1w` (from (8352,4850): the box x 8355-8385, y 4835-4865 in which its
+  poly ends, read as a buried contact, and the diffusion east of it at `cdp1`'s west edge,
+  drawn by nobody: `l_box.png`).
+- `cdp1_lw1` (= `tc2_sr_r`) east of x 15584 (`bust`'s Not done): the latch's reset line is
+  not identified until that end is followed.
+- West of the region, seen and not drawn: the nest's third metal and its pad (6360,6150) with
+  a poly going south (x 6355-6375).
+
+Not done as work:
+
+- The independent review of pieces 11 to 16 (the Review section below covers pieces 1 to 10).
 
 ## Review
 

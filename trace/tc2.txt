@@ -714,3 +714,29 @@ M 6600,6100 y6205 w=46
 M 6400,6198:7620,6243
 M 7572,6198:7620,6400
 N M 7100,6220 vss
+
+# ===== Piece 16 (2026-11-18, run 4): the supply metal that links fld's rails (wiring only).
+# Found by a scan for metal that is bright in both metal shots and that no block has drawn
+# (the only such metal in the region). fr_m.png, fr_a.png (3.3x, metal and clean with every
+# block's trace); segs.py 6680 7050 at nine y; tc2_runs.py col 6818 5235 5420, col 6903 5270
+# 5440, row 5262 6700 6845, row 5410 6880 7030, col 6818 5670 5780.
+# VCC: the rail of fld's two inverters (x 6700-6750, drawn there to y 5290) widens east at its
+# south end to a block x 6708-6840 (y 5235-5290 west of x 6792, y 5258-5290 east of it) and
+# runs on south as a rail x 6796-6840 over the rows y 5300 and y 5345 (no pad: the clean shot
+# has the rows uniform under it; a dark spot on the metal at (6810,5305) in chip 2 only) to
+# the XOR cells' VCC rail (drawn there from y 5400). The same rail is one metal across
+# y 5690-5760, where fld leaves a gap between its two pieces (segs.py 6760 6900: x 6795-6840
+# at y 5695, 5720, 5745 in both chips).
+# VSS: the east ground rail of the inverters (x 6879-6925, drawn there to y 5290) runs on
+# south over the same two rows to y 5440 and widens east from y 5388 (a slanted edge from (6930,5370)) to a block x 6881-7014,
+# which is the top of the XOR cells' east ground rail (x 6978-7028, drawn there from y 5400).
+# Under all of it the clean shot shows field and the two rows: no contact.
+M 6745,5237:6792,5290
+M 6788,5258:6840,5290
+M 6818,5285 y5405 w=44
+M 6820,5685 y5765 w=40
+M 6903,5285 y5440 w=44
+M 6881,5390:7012,5440
+N M 6818,5350 vcc
+N M 6820,5725 vcc
+N M 6903,5350 vss

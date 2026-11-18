@@ -60,3 +60,6 @@
 6577,6100:6623,6243    power   ground | the XOR cells' west ground rail meeting the band
 6400,6198:7620,6243    power   ground band | wide metal y 6198-6243; no contact under it here
 7572,6198:7620,6400    power   ground | the band's south leg
+6745,5237:6840,5405    power   VCC link | from the bit-0 inverters' VCC rail to the XOR cells' VCC rail
+6800,5685:6840,5765    power   VCC | the XOR cells' VCC rail between its two cells
+6881,5285:7012,5440    power   ground link | from the bit-0 inverters' east ground rail to the XOR cells' east ground rail
