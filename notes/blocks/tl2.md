@@ -371,6 +371,26 @@ west of x 3085 and x 3072; tla's row between x 3018 and x 3085.
 
 Round 1: one finding, fixed.
 
+Round 2 (fix check, 2026-11-18 01:10 +0000, a fresh agent on claude-fable-5-2, against commit 132750c; 8 images in
+`cache/scratch/tl2/review-3/`). Told what changed (tla's row cut at x 3122; the alias removed and
+the net labelled `tl3_w3982`) and the finding it fixes. It checked, like for like against the row
+y 4461 that does cross the same gap 85 px north: (a) no poly between x 3122 and the pad in any of
+the four shots (clean: continuous green 132/163/86 from y 4512 to 4572, then pink to the pad's
+outline at x ~3138; chip-2 stripped: the pad's outline at x 3132 unbroken from y 4520 to 4556;
+both metal shots: plain ground, no edge lines at y 4535 or 4558); (b) the shortened row is one
+poly from about x 3012 to 3122 and the foot of the poly under the bus metal is its east end
+(it ends at about y 4554, 22 px of field before the pad of (3105,4590)); (c) the pad (3152,4548)
+has no poly west, north or south, only the one east; (d) no other connection on the gate row: no
+ring in the metal x 3108 and no green hole from y 4452 to 4556, field on both sides, and the row
+does not go on west under the rail. `sameconn` against 132750c (3 differences for the package, 19
+with every file): all are the `clk_tl` / `tl3_w3982` split.
+One finding, geometry only (a comment): `trace/tla.txt`'s comment above the column still said
+"gate clk_tl" and "while clk_tl is high". Confirmed and corrected in a commit of its own (fa2a849).
+`tools/t.sh tl2 sameconn.py c260164`: `connections identical`.
+`.venv/bin/python tools/sameconn.py c260164`: `connections identical`.
+
+Round 2: no findings that change a connection.
+
 ## Not done
 
 - **The gate column x 2860-3100, y 3700-4620** (`tla`'s east column where `tla` did not trace
