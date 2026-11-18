@@ -223,7 +223,8 @@ from the west. Nine of them meet (y within 2 px, both sides drawn to the shared 
 extraction joins them. Each row was checked to be one poly across the edge
 (`tools/t.sh tl2 tl2_row.py row Y 3500 3600 --step 2` for y 4111, 4201, 4285, 4374, 4416, 4503,
 4547, 5025, 5110: poly without a break from x 3500 to x 3600; the first review had found that
-every row of this run reaches x 3540 or beyond). No `?` item lies on any of them. Names: where
+every row of this run reaches x 3540 or beyond). No `?` item lies on any of them, and an independent reviewer has since checked all nine against
+the photos (Review, run 2, round 3: no findings). Names: where
 this run had a placeholder of its own, tl3's name is used instead (`tl3_w4546`, `tl3_w5025`,
 `tl3_w4373`, which replace this run's first names for track F's lower piece, track G's lower
 piece and the U-shaped poly); the rest are aliases in `trace/tl2.txt`:
@@ -421,6 +422,29 @@ One finding, geometry only (a comment): `trace/tla.txt`'s comment above the colu
 `.venv/bin/python tools/sameconn.py c260164`: `connections identical`.
 
 Round 2: no findings that change a connection.
+
+Round 3 (check of the joins made at the merge, 2026-11-18 01:37 +0000, a fresh agent on claude-fable-5-2, against
+commit 754f269; 8 images in `cache/scratch/tl2/review-4/`; asked for by the user after the merge).
+No geometry of `tl2` had changed since round 2: what changed is that tl3's rows, drawn from x 3533
+east, now meet nine of this run's rows, so that the extraction joins the nets ("Joins made when
+main was merged"). Told to suspect: a break or an outline across a row under tl3's metal
+x 3532-3548, which lies right over the boundary; a row stepping one track under that metal; a
+contact from one of the rows to that metal; whether tl3's part of each row reaches the gate it
+is drawn to. It checked: each of the nine rows is one poly from x 3480 to its target in tl3 (an
+unbroken salmon band at constant y under the metal, x 3518-3562, in text maps at step 2 of all
+nine crossings; east of it continuous in the chip-2 metal shot and both stripped shots at 4x,
+with colour tables against field rows); no track step (column profiles at x 3520 and x 3575 show
+the same rows at the same y: 4111, 4201, 4285, 4374, 4415, 4503, 4547, 5025, 5111; none ends or
+starts under the metal); no contact to the metal x 3540 on any row, compared with the real
+contact (3540,4590) (three spots looked at and dismissed: (3544,4287), a ring in the chip-2
+metal shot only; (3540,4421), a paler patch in the clean shot with no ring in either metal shot;
+(3547,4545), dirt on chip 2); on tl3's side rows 1-3, 6 and 9 reach the diffusion edge near
+x 3595, rows 4, 7 and 8 their buried-contact boxes, and row 5 runs on past x 3640.
+No finding. Two notes of the reviewer's, neither in this package's files: tl3's rectangle for the
+row y 4281-4299 sits about 4 px low (the band is y 4277-4294); `tl3_w3803` = NOR(`tl3_w3939`,
+`tl3_w4243`) still rests on tl3's own `?P 3704,4182:3728,4204`, independently of these joins.
+
+Round 3: no findings.
 
 ## Not done
 
