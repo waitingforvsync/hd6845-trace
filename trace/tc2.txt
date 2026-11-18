@@ -474,3 +474,46 @@ N D 8072,5290 rax_o{}
 M 8140,4445 y5812 w=46
 M 8117,5754:8248,5812
 M 8205,5754:8248,5965
+
+# ===== Piece 9 (2026-11-18, run 3): ral_stb south of y 4450 (wiring only): the strobe of the RA
+# ===== latch cells comes through this region. tc1 draws its thin metal x 8198-8212 to y 4450.
+# From there, in order:
+#   - the metal runs on south to its end, the pad (8204,5672) (follow.py 8205 5000 S: end
+#     (8203,5680); e_rail.png 0.82x; segs.py: x 8199-8211 at every y sampled). It crosses the
+#     rows of the bus field, the L of r9m_l1w's row (y 4707-4725), db_b6's row y 5024 and
+#     cdp1_lw1's row y 5066 without a contact (textmap 8180 4694 8226 4736, 8192 5046 8222 5088:
+#     metal whole between two edge bars, the row uniform under it), and has ONE contact on the
+#     way, (8204,5371), on the west end pad of a poly that runs east along y 5359-5379 past
+#     x 8250 (e_pads_e.png 4x four shots, first tile; e_east2.png 2.4x: on to x 8425 through
+#     what stands east of the region, not drawn there). A scan of the clean shot down the
+#     metal (green over red) finds only the two contacts and a weak 15 px at y 4888-4902.
+#   - pad (8204,5672) (e_pads_e.png second tile: ring and bright centre, green hole): a poly
+#     row y 5663-5683 west under the VCC rail, db_b6's metal, cdp1_lw1's thin metal, the ground
+#     rail, tc1_ns3's and tc2_sr_r's metals (no pad on it: e_rows56.png 2.7x; the clean-shot
+#     scan along it finds nothing between its end pads) to the pad (7748,5673) (e_rows56w.png
+#     2.65x: ring and bright centre; ras's notes: "a pad at the channel's west end").
+#   - metal x 7742-7757 south (follow.py 7748 5700 S: end (7749,6070)) to the pad (7750,6065)
+#     (e_p9a.png 4.2x: green hole, ring).
+#   - poly from that pad west along y 6055-6075 to x 7703, south along x 7703-7721 under the
+#     wide metal x 7690-7770 to y 6292, west along y 6270-6292 to the pad (7488,6282)
+#     (e_p9a.png, e_p9b.png 4.2x, e_sw_a.png 2.4x: one poly, salmon under the metals, no pad).
+#   - metal from that pad south to y 6340 and west along y 6316-6340 (follow.py 7400 6327 W: to
+#     x 6104, north, end (6012,6068)) past x 6400. tc2_runs.py row 6328 6400 7480: no dark run
+#     over 14 px in chip 2 (the polys underneath); the clean-shot scan finds no hole.
+M 8205,4445 y5680 w=14
+P 8188,5355:8222,5386
+C 8204,5371
+P 8204,5369 x8250 w=20
+P 8190,5656:8224,5690
+C 8204,5672
+P 8204,5673 x7748 w=20
+P 7730,5657:7766,5690
+C 7748,5674
+M 7749,5666 y6072 w=15
+P 7730,6049:7770,6085
+C 7750,6065
+P 7750,6065 x7712 y6281 x7495 w=19
+P 7476,6265:7512,6297
+C 7488,6282
+M 7489,6274 y6328 x6400 w=23
+N M 7749,5900 ral_stb

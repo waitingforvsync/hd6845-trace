@@ -31,3 +31,10 @@
 6396,5557:6508,6170    route   tc2_m6490, tc2_m6447 | two metals of the nest from the west edge to their pads (6490,6108), (6447,6150)
 6443,6160:6501,6400    route   tc2_m6490, tc2_m6447 polys | from the two pads south under the supply metals
 6838,4375:6926,4996    power   ground rail east of the crossing field | joins the island's rail to the rail of the bit-0 inverters; no contact on it here
+8198,4445:8212,5690    route   RA latch strobe | ral_stb: thin metal from the bus field to its end pad (8204,5672); one contact (8204,5371)
+8188,5355:8250,5386    route   RA latch strobe | ral_stb: poly from the contact (8204,5371) east
+7730,5656:8224,5690    route   RA latch strobe | ral_stb: poly row y 5673 from the pad (8204,5672) west to the pad (7748,5673)
+7740,5666:7770,6085    route   RA latch strobe | ral_stb: metal south to the pad (7750,6065)
+7700,6049:7770,6292    route   RA latch strobe | ral_stb: poly west and south under the wide metal
+7476,6265:7722,6297    route   RA latch strobe | ral_stb: poly row west to the pad (7488,6282)
+6400,6274:7502,6341    route   RA latch strobe | ral_stb: metal from the pad (7488,6282) south and west along y 6328, leaving west

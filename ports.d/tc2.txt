@@ -28,3 +28,6 @@ tc2_m6447    M  6400,5601-5621   ?    metal of the nest, going on west (follower
 tc2_m6447    P  6443-6460,6400   ?    poly from the pad (6447,6150), going on south
 vss          M  6860-6907,4380   -    east ground rail of the crossing field: meets tc1's rail
 vss          M  6882-6926,4990   -    east ground rail of the crossing field: meets fld's rail
+ral_stb      M  8198-8212,4450   ?    from tc1 (its bus metal ns4)
+ral_stb      P  8250,5359-5379   ?    the poly from the contact (8204,5371), going on east (to x 8425, seen)
+ral_stb      M  6400,6316-6340   ?    going on west (follower: end (6012,6068))
