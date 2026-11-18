@@ -5,3 +5,45 @@ tl1_w5936   P  2817,6228-6247   out  output of the upper inverter (= tl1_w6022 t
 tla_w3376   M  2865-2877,6350   ?    thin metal x 2871 on south
 rcs_thin_e  P  3533,6316-6337   ?    row east from the pad (2913,6327) at the south end of thin metal E
 vss         M  3257-3305,6350   -    the metal from R3's foot, on south
+
+# ---- run 2: the bus field's east tracks and their rows
+# West side (x 2817 and tl1's metal ends): onto tl1's drawn pieces
+tl1_w2857   P  2817,2848-2866   out  row y 2857 to tl1's gates; comes through the strip from the east
+tl1_w3594   P  2817,2890-2908   out  row y 2899 to tl1's gates; pad (3410,2899) of track H's upper piece on it
+tl1_w3678   M  2848,2803-2821   out  tl1's metal from the pad (2830,2811), on east to a pad (3154,2813)
+tl1_w2637   M  2845,2631-2649   in   tl1's metal from the pad (2827,2637), on east and south (track D upper) to tl3's latch data
+tl1_w4025   P  2817,5362-5380   out  row y 5371 to tl1's metal x 2457 (the clear of tl1's two latches); one net with rcs_x1 (alias)
+tl1_w4937   P  2817,5449-5467   out  row y 5458 to tl1's metal x 2370; comes through the strip from the east
+# East side (x 3533, or x 3540 where tl3 has drawn the row's other part)
+tl2_w3722   P  3533,2630-2648   ?    row y 2639 east from track F's top pad (3324,2639)
+rcs_g3245   P  3533,2674-2692   in   row y 2683 east from track I's top pad (3454,2683); the net's known end is a gate in tla
+tl1_w3678   P  3533,2804-2822   in   row y 2813 east from the pad (3154,2813)
+tl1_w2857   P  3533,2848-2866   in   row y 2857, straight through
+tl1_w3594   P  3533,2890-2908   ?    row y 2899 east of track H's pad; every known end is a gate
+tl1_w2637   P  3540,3325-3343   out  onto tl3's row y 3333 (tl3_w3333, the latch's data): alias
+tl3_w3419   P  3540,3410-3428   in   tl3's row y 3419 (the latch's inverted output) to track J's upper piece
+rcs_x1      P  3540,3497-3515   out  onto tl3's row y 3506 (tl3_w3506, the latch's clear): alias
+tl1_w3594   P  3540,3713-3731   out  onto tl3's row y 3722 (tl3_w3722, NOR 1 gate 1): alias
+rcs_a2      P  3540,3755-3773   in   tl3's row y 3765 (tl3_w3765, NOR 1's output) onto tla's row y 3761: alias
+tl3_w3419   P  3540,3886-3904   out  from track J's upper piece onto tl3's row y 3896 (tl3_w3896, NOR 2 gate 1): alias
+tl3_w3939   P  3540,3930-3948   in   tl3's row y 3939 (NOR 2's output), west to x 3460, south under track I
+tl3_w3982   P  3540,3973-3991   out  from track J's lower piece onto tl3's row y 3982 (NOR 2 gate 2)
+tl3_w3939   P  3533,4102-4120   out  the same poly back east along y 4111
+rcs_x1      P  3533,4192-4210   ?    row y 4201 east from track I's tap (3452,4199)
+tl3_w3982   P  3533,4276-4294   ?    row y 4285 east of track J's tap (3497,4287)
+tl3_w4373   P  3533,4365-4383   ?    upper arm of the U-shaped poly under track G
+tl3_w4763   P  3533,4408-4426   ?    row y 4417 east from track H's lower top pad (3410,4418)
+tl3_w4373   P  3533,4494-4512   ?    lower arm of the U-shaped poly
+tl3_w4546   P  3533,4538-4556   ?    row y 4547 east from track F's lower top pad (3322,4548)
+tl3_w4763   P  3540,4755-4773   out  from track H's tap (3410,4764) onto tl3's row y 4763 (NOR 4 gate 2)
+tl3_w5025   P  3533,5016-5034   ?    row y 5025 east from track G's lower top pad (3368,5025)
+rcs_x1      P  3533,5101-5119   ?    row y 5110 east from track I's tap (3452,5112)
+rcs_x1      P  3533,5362-5380   ?    row y 5371 (tl1_w4025's) east of track I's bottom pad, under track J's arm
+tl3_w3982   M  3533,5365-5383   ?    track J's arm east along y 5374 (follow.py: to x 3607, then south to (3608,5942))
+tl3_w5025   P  3533,5406-5424   ?    row y 5415 east from track G's bottom pad (3368,5414)
+tl3_w4763   M  3533,5426-5444   ?    track H's arm east along y 5435 (follow.py: to (3571,5435))
+tl1_w4937   P  3533,5449-5467   in   row y 5458, straight through
+tl3_w4546   P  3538,5482-5514   ?    the pad (3518,5498) at the end of track F's arm; its poly goes on east
+# Ends of drawn wires inside the strip (where the drawing stopped: the gate column, not traced)
+tl2_w3722   P  3100,3713-3731   ?    row y 3722 west from track F's pad (3322,3722); on west under track A into the gate column
+rcs_bd3330  P  3072,4365-4383   ?    row y 4374 west from track D's pad (3237,4376); on west into the gate column
