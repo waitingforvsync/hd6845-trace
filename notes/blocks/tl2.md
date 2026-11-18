@@ -1126,12 +1126,25 @@ Round 1: no findings that change a connection.
 
 - **What is left in the gate column** (run 3 traced y 3690-3840 and y 4230-4530, run 4
   y 4005-4145 and the column top at y 4504-4530): the lower-left corner of piece 2's VSS box
-  (field at x 2952-2961, y 4520-4529; the box is drawn as a rectangle); `tla`'s tie of
-  `rcs_bc3460`'s load (Ambiguity 15). **Sweep** (run 4): the column x 2776-3086,
-  y 2940-5340 was looked over at 1.05x with every package's trace outlined (`r4_sw1.png`,
-  `r4_sw2.png`, metal | clean): no other box, plate or contact ring without an outline was
-  seen. That is a look at survey zoom, not a reading: narrow strips and polys under the rails
-  would not show (the VCC box of piece 3 had been missed by three packages).
+  (field at x 2952-2961, y 4520-4529; the box is drawn as a rectangle: a shape only); `tla`'s tie
+  of `rcs_bc3460`'s load (Ambiguity 15).
+  **Sweep at tracing zoom** (run 5; run 4's was at 1.05x): the column x 2776-3086, y 2940-5340 in
+  four views at 2.05x, metal | clean, with every package's trace outlined (`r5_col0.png`-
+  `r5_col3.png`): no box, plate, pad or contact ring without an outline, except the tab and oval
+  at the top of `rcs_bc3460`'s load plate ((2868-2902, 3832-3862); `r5_c1.png`, 5x, four shots),
+  which is Ambiguity 15. Five marks on R2 in the chip-2 metal shot ((2810,3170), (2805,4362),
+  (2806,4935), (2800,5130), (2820,5160)) are not contacts: chip 1's metal is bright at each, and
+  the clean shot under them has the colour of the rail's centre line where there is no mark
+  (`px.py pt ... metal,metal1,acid1b`: 139-174/131-150/106-122 at the marks, 150/144/111 at
+  (2805,3743); the known contact (2804,4084) is 91/115/75). **Under the middle of R2 the clean
+  shot is grey (red about equal to green), not pink**, between the boxes all the way down, so
+  `tools/tla_contacts.py` lists a candidate every 50-100 px there (32 on R2, 51 on R3 against 19
+  and 15 drawn contacts: `cache/scratch/tl2/railcontacts.py`); the comparison of candidates with
+  drawn contacts that run 4's handoff proposed does not work on these rails. `r5_rails.png` (both
+  rails, both metal shots, 1.1x, drawn contacts outlined) is too small to decide a ring.
+  The strip south of the foot (x 2800-3550, y 5640-6360, `r5_south.png`, 0.9x): east of the small
+  cluster there is only open field between `tla`'s metal (y 5677, x 3527) and the VSS metal
+  (y 6250-6292); everything there has an outline.
 - North of y 2630 is drawn (run 5, piece 5). Left there, all outside the strip: `tl1_w3333`'s poly
   north of (3460,2500) and the plane above y 2500 (the band y 2180-2500, in no package);
   `tl1_w2592`'s metal east of (3533,2509) (`follow.py`: east to x 3752, in `tl3`'s strip).
