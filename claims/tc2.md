@@ -10,4 +10,4 @@ merged, or by `tools/claim.py release` if it is abandoned.
 | Region | 6400-8250 x 4450-6400 |
 | What | top-centre random logic, lower half: survey, then the gates around the pad (6965,4480) where tc1's cell B output (tc1_o3527) lands, working outward; joins to tc1, cdp1 and tla nets |
 | Branch | tc2 |
-| Status | tracing (part merged 3298cb8 at 2026-11-17 23:06 +0000) |
+| Status | tracing (part merged b6444d6 at 2026-11-18 00:52 +0000) |
