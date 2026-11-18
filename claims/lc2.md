@@ -10,4 +10,4 @@ merged, or by `tools/claim.py release` if it is abandoned.
 | Region | 4400-6450 x 8067-9233 |
 | What | left-centre random logic, part 2 of 3: continuing from branch lc2 (latch B done; latch C, its inverter and the tracks next). Traced on claude-opus (Fable allowance exhausted): held on the branch for a Fable review |
 | Branch | lc2 |
-| Status | tracing |
+| Status | tracing (part merged fc6a42e at 2026-11-18 04:27 +0000) |
