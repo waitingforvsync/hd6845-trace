@@ -25,7 +25,10 @@ equations print a different input name** (`tl3_e4243` for `tl4_w3070`), and `tl3
   x 4236 (`tl3_e4915`), a pad and two rows to `tl5` (`tl5_w5717`).
 - Passing wires: `tc1_o3527` (`tl5_w5544`) by a jumper to the row y 5718 west; `tcw_a`
   (`tl5_w5631`) straight across; `tl3_e4372` and `tl3_e4635` each from a row in the south to
-  `tl3`'s gate row in the north; `tl4_w5243`, a row-metal-row loop that enters and leaves west.
+  `tl3`'s gate row in the north; `tl3_e5240`, a row-metal-row loop that enters and leaves west
+  (`tl3`'s run 8, merged while this piece was in review, has its north row as the gate of an
+  inverter whose output is the south row of `tl3_e4635`: so **`tl3_e4635` = NOT `tl3_e5240`**,
+  the join `tl3` left open as `tl3_e4635_u`, aliased here).
 - Seen, not drawn (it is in `tl3`'s strip): the row of `tcw_a` runs on west to `tl3`'s pad
   (4104,5633), which `tl3` has as `tl3_e4152` = `tl4_w4501`. If so, **`tcw_a` is `tl3`'s track A
   and gate 2 of the three-input NOR here.**
@@ -506,8 +509,8 @@ The wires (names as the full extraction prints them):
 | `tl4_w4590` (= `tl5_w5674` = `tl3_e5114`) | the track x 4366: south of the pad (4364,4762) a pad (4366,5112) whose row y 5102-5121 runs west to (4250,5112) (`tl3`'s gate 2 of e5), and at the south end an L east onto the pad (4411,5676); row y 5665-5684 east to (4967,5674) |
 | `rcs_mv` (= `tl3_e4915` = `tl5_w5717`) | `tl3`'s poly in at (4250, 4733-4751), south at x 4276-4292 under the metal x 4279 (no contact), west again along y 4904-4925 out at (4250,4915) into `tl3`'s pad (4234,4918); `tl3`'s metal x 4236 back in along y 5764 to the pad (4410,5764); poly east along y 5752-5772 to a corner at x 4533-4555, north to y 5708, east as the row y 5708-5728 to (4967,5718) |
 | `tl4_w3850` (= `tl5_w5761`) | from the inverter's gate metal x 4410 (corner (4412,3852)) south to the pad (4410,4332); row y 4320-4338 west under the track x 4366 to the pad (4279,4332); metal x 4279 south to the pad (4279,4571); an arm east y 4555-4580 onto a poly x 4319-4337 that runs south under the metal x 4321 (no contact) to y 4902; row y 4884-4902 east to the pad (4538,4895); metal x 4538 south, a jog east at y 5236-5250 to x 4583, south to y 5764 and east onto the pad (4626,5762); row y 5752-5772 east to (4967,5762): `tl5`'s line to the bus line x 5412 |
-| `tl3_e4635` | row y 4623-4642 from (4250,4633) to the pad (4279,4636); metal x 4279 south to the pad (4279,5200); row y 5189-5207 west to (4250,5198). `tl3`'s latch C data comes up this metal from the row y 5198 |
-| `tl4_w5243` | row y 5233-5251 from (4250,5242) ending over the top of the pad (4279,5265); metal x 4279 south to the pad (4279,5413); row y 5403-5422 west to (4250,5412). Enters and leaves west |
+| `tl3_e4635` | row y 4623-4642 from (4250,4633) to the pad (4279,4636); metal x 4279 south to the pad (4279,5200); row y 5189-5207 west to (4250,5198), which is the output row of `tl3`'s inverter at y 5180-5300 (`tl3_e4635_u` there, aliased in `trace/tl4.txt`): latch C's data is NOT `tl3_e5240` |
+| `tl3_e5240` | row y 5233-5251 from (4250,5242) ending over the top of the pad (4279,5265); metal x 4279 south to the pad (4279,5413); row y 5403-5422 west to (4250,5412). Enters and leaves west: the row y 5242 is the gate row of `tl3`'s inverter at y 5180-5300, so the signal arrives on the row y 5412 |
 | `tl3_e4243` (= `tl4_w3070`) | the track x 4318 from the second latch's data pad (4320,3372) south without a contact to a corner (4318,4247) and west to (4250,4246): `tl3`'s e3 output |
 
 Three metals lie one after another on the track x 4279 (y 4320-4585, 4622-5214, 5251-5427)
@@ -547,12 +550,12 @@ The wires drawn to the strip's edges (the same list is `ports.d/tl4.txt`; `tools
 | `tl3_e4372` | poly | (4250, 5491-5510) | ? | the row of the pad (4321,5504), the other end of the same metal: on west, not followed |
 | `tl4_w4501` | poly | (4250, 4492-4512) | in | gate 2 of the three-input NOR |
 | `tl3_e4635` | poly | (4250, 4623-4642) | ? | the row of the pad (4279,4636): `tl3`'s latch C data |
-| `tl3_e4635` | poly | (4250, 5189-5207) | ? | the row of the pad (4279,5200), the other end: on west, not followed |
+| `tl3_e4635` | poly | (4250, 5189-5207) | in | the row of the pad (4279,5200), the other end: `tl3`'s inverter output (`tl3_e4635_u`) |
 | `rcs_mv` | poly | (4250, 4733-4751) | in | from `tl3`'s pad (4192,4743) |
 | `rcs_mv` | poly | (4250, 4904-4925) | out | into `tl3`'s pad (4234,4918) |
 | `rcs_mv` | metal | (4250, 5754-5774) | in | `tl3`'s metal x 4236 along y 5764 |
 | `tl4_w4590` | poly | (4250, 5102-5121) | ? | the row of the pad (4366,5112): `tl3_e5114` |
-| `tl4_w5243` | poly | (4250, 5233-5251) and (4250, 5403-5422) | ? | both ends of the loop on the track x 4279 |
+| `tl3_e5240` | poly | (4250, 5233-5251) and (4250, 5403-5422) | ? | both ends of the loop on the track x 4279: the north one is `tl3`'s inverter's gate row, the south one goes on west |
 | `tl4_w5455` | poly | (4250, 5447-5467) | out | the strong inverter's row, on west, not followed |
 | `tcw_a` | poly | (4250, 5621-5641) | ? | the row y 5631, on west to `tl3`'s pad (4104,5633) |
 | `tc1_o3527` | poly | (4250, 5708-5727) | ? | the row of the pad (4497,5720), on west, not followed |
@@ -631,7 +634,7 @@ The tracks, as far as each is drawn:
    there); the band from the node `tl4_w3390` east across RA's edge line (x 4790-4797) to the
    load. A small ring at (4868,3435) on the metal of `tl4_w3390` lies over the load's channel and
    has no hole in the clean shot: not drawn as a contact.
-8. **The row y 5233-5251 onto the pad (4279,5265)** (`tl4_w5243`): the row ends over the pad's
+8. **The row y 5233-5251 onto the pad (4279,5265)** (`tl3_e5240`): the row ends over the pad's
    top edge instead of entering it from the side. No field between them in the clean shot;
    one dark line in the chip-2 stripped shot, taken as the pad's outline (above). Drawn joined,
    without `?`. If it were not, the pad would have a metal and no poly leaving it.
@@ -922,6 +925,16 @@ maps, the extraction, `sameconn.py`, `ports.py` (17 images).
 
 After the fixes: `tools/t.sh tl4 sameconn.py 90ec4f2` ends `connections identical`;
 `.venv/bin/python tools/sameconn.py 90ec4f2` ends `connections identical`.
+
+After the round, on merging main (2026-11-18 12:46): `tl3`'s run 8 had meanwhile drawn two rows
+up to x 4250 that are the west ends of two wires of this piece, the row y 5231-5250
+(`tl3_e5240`, the gate of its inverter at y 5180-5300) and the row y 5190-5205 (`tl3_e4635_u`,
+that inverter's output, which `tl3`'s notes take to this strip's pad (4278,5198) and metal
+x 4279 as an open join). No geometry of this piece changed: the wire named `tl4_w5243` in the
+reviewed commit is now labelled `tl3_e5240`, and `@alias tl3_e4635 tl3_e4635_u` was added; both
+rows were in the round's claims 9 and 10 and were found to run to x 4250 as drawn.
+`tools/sameconn.py origin/main` lists, beyond the joins of this piece, only `tl3_e4635` +
+`tl3_e4635_u` on one net (`tl3_e4635` = NOT `tl3_e5240`).
 
 Round 8: no findings that change a connection.
 

@@ -7,13 +7,13 @@ tl3_e4372   P  4250,4364-4381  ?    the row of the pad (4321,4374), the north en
 tl3_e4372   P  4250,5491-5510  ?    the row y 5500 of the pad (4321,5504), the south end of the same metal: on west
 tl4_w4501   P  4250,4492-4512  in   row from the west across the bus field; gate 2 of the three-input NOR tl4_w4545
 tl3_e4635   P  4250,4623-4642  ?    the row of the pad (4279,4636), the north end of the metal x 4279 (y 4622-5214): tl3's latch C data
-tl3_e4635   P  4250,5189-5207  ?    the row of the pad (4279,5200), the south end of the same metal: on west
+tl3_e4635   P  4250,5189-5207  in   the row of the pad (4279,5200), the south end of the same metal: tl3's inverter output (tl3_e4635_u)
 rcs_mv      P  4250,4733-4751  in   tl3's poly from its pad (4192,4743); an L in this strip, back out at y 4904-4925
 rcs_mv      P  4250,4904-4925  out  the same L, into tl3's pad (4234,4918) (tl3_e4915)
 rcs_mv      M  4250,5754-5774  in   tl3's metal x 4236 from that pad, along y 5764 to the pad (4410,5764) (tl3_e4915)
 tl4_w4590   P  4250,5102-5121  ?    the row of the pad (4366,5112) on the track x 4366: tl3's tl3_e5114 (gate 2 of its NOR e5)
-tl4_w5243   P  4250,5233-5251  ?    the row that ends over the pad (4279,5265), the north end of the metal x 4279 (y 5251-5427)
-tl4_w5243   P  4250,5403-5422  ?    the row of the pad (4279,5413), the south end of the same metal
+tl3_e5240   P  4250,5233-5251  ?    the row that ends over the pad (4279,5265), the north end of the metal x 4279 (y 5251-5427)
+tl3_e5240   P  4250,5403-5422  ?    the row of the pad (4279,5413), the south end of the same metal
 tl4_w5455   P  4250,5447-5467  out  the strong inverter's row, on west
 tcw_a       P  4250,5621-5641  ?    the row y 5631 (tl5_w5631), across the whole strip; on west to tl3's pad (4104,5633) (seen, tl3's to draw)
 tc1_o3527   P  4250,5708-5727  ?    the row of the pad (4497,5720), the south end of the jumper x 4497: on west

@@ -678,8 +678,12 @@ P 4261,5183:4299,5217
 C 4279,5200
 P 4250,5189:4268,5207
 N M 4279,4900 tl3_e4635
+# tl3 (run 8) drew the row y 5190-5205 up to x 4250 as tl3_e4635_u, the output of its inverter
+# at y 5180-5300 (= NOT tl3_e5240): the pad (4279,5200) and this metal are the join it left open
+@alias tl3_e4635 tl3_e4635_u
 
-# --- tl4_w5243: row y 5233-5251 from the west edge, ending over the top of the pad (4279,5265)
+# --- tl3_e5240 (tl3's name: the gate row of its inverter at y 5180-5300, drawn there to x 4250):
+# row y 5233-5251 from the west edge, ending over the top of the pad (4279,5265)
 # (no field between row and pad in the clean shot, n9_join.png); metal x 4279 south to the pad
 # (4279,5413); row y 5403-5422 west out of the strip. Both ends leave west.
 P 4250,5233:4300,5251
@@ -689,7 +693,7 @@ M 4279,5251 y5427
 P 4261,5396:4299,5430
 C 4279,5413
 P 4250,5403:4268,5422
-N M 4279,5340 tl4_w5243
+N M 4279,5340 tl3_e5240
 
 # --- tl4_w3070 is tl3's tl3_e4243 (= NOR(tl3_e4152, rcs_mv), e3's output): the track x 4318
 # runs on south from the pad (4320,3372) without a contact to a corner (4318,4247) and west
