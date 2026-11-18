@@ -4,3 +4,6 @@
 4400,3781:4967,3911   ?logic  inverter in the right cluster | tl4_w3808 = NOT tl4_w3850; output north by the metal x 4496
 4250,4410:4967,4645   ?logic  three-input NOR in the right cluster | tl4_w4545 = NOR(tla_w3417, tl4_w4501, tl4_w4590); output south by the metal x 4626
 4347,4645:4967,5000   ?logic  cross-coupled pair in the right cluster | tl4_w4686 = NOT(tl4_w4718 AND tl4_w4590 OR tl4_w4850), tl4_w4850 = NOT(tl4_w4198 OR tl4_w4545 OR tl4_w4686); tl4_w4850 leaves south on the track x 4581
+4560,4990:4967,5170   ?logic  two-input NOR in the right cluster | tl4_w5068 = NOR(tl4_w4545, tl4_w4850); output on the track x 4625 south
+4437,5175:4967,5312   ?logic  inverter in the right cluster | tl4_w4025 = NOT tl4_w5068: the data of the latch at y 3906-4390, by the track x 4452 north
+4520,5297:4967,5465   ?logic  strong inverter in the right cluster | tl4_w5455 = NOT tl4_w4243 (the latch's output, by the track x 4496); output a poly row at y 5445-5465
