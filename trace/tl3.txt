@@ -696,3 +696,48 @@ D 4008,3755:4056,3794
 C 4027,3775 s=20x24
 D 4050,3778:4106,3794
 D 4072,3778:4106,3842
+# ====================================================================
+# East column, y 5180-5300: an inverter under the south end of the VSS rail (run 8).
+#   tl3_e4635_u = NOT tl3_e5240
+# The rail ends at y ~5296 (textmap 3960 5176 4130 5316 4 --acid). Under it one diffusion column
+# x 4012-4054: the node (y 5202-5226), the gate row (y 5231-5250) and a VSS box (y 5254-5298) with
+# a contact (4028,5278) (px.py col 4017 5176 5330 4, row 5241 3984 4100 4, row 5270 3990 4110 4).
+# East of the rail below the gate row is field (px.py col 4075 5250 5326 3 against the field at
+# (3895,5270); rg_se.png 4.4x three shots): the transistor is under the rail only.
+D 4012,5202:4054,5298
+C 4028,5278                           # ring, bright centre x 4024-4032, y 5272-5284 in both metal shots
+# gate: a row y 5231-5250 from the east, under the metals x 4105, 4148, 4192, 4236 without a contact,
+# across x 4250 (it turns south at x ~4277 in tl4's strip: textmap 4110 5180 4480 5258 5 --acid)
+P 3994,5231:4250,5250
+N P 4200,5241 tl3_e5240
+# the node east of the rail: diffusion y 5203-5222 (px.py pt 4070,5213) into a buried contact box
+# (heavy frame 4079-4113 x 5187-5218, rg_box.png 4.7x three shots), whose poly row y 5190-5205
+# runs east under the same three tracks without a contact and across x 4250. In tl4's strip it
+# ends on a pad with a contact (4278,5198) at the south end of a metal x 4279, whose north end
+# is a pad with a contact (4278,4636) on the row of tl3_e4635, latch C's data (textmap 4246 5168
+# 4312 5232 3, 4240 4606 4312 4664 3; follow.py 4279 5165 N). That track is tl4's to draw: open join.
+# The thin metal x 4100-4112 (tl3_e4152's south arm) passes over the box: taken as no contact
+# (a 6 x 9 px spot of R 160-185 at (4101,5202) in a 45 px dark stretch, no hole in the clean shot;
+# its real contact (4104,5633) has R 190-220 over 12 x 12 px and a hole).
+D 4050,5203:4084,5222
+B 4079,5187:4113,5218
+D 4082,5192:4108,5216
+P 4086,5190:4250,5205
+N P 4200,5197 tl3_e4635_u
+# load: the node's strip y 5202-5226 west under the rail, through the gap (diffusion: px.py row 5214
+# 3816 4014 4), under the thin metal x 3948-3962 and under a plate x 3884-3936, y 5182-5240 (open
+# poly; the strip's edges show across it at y 5198 and y 5225 in both chip-2 shots, rg_load.png
+# 4.2x) to a VCC box under the VCC rail with a long contact (textmap 3816 5172 4000 5312 4 --acid:
+# tan x 3832-3876, y 5200-5260; bright centre x 3836-3852, y 5214-5238 in a ring)
+D 3876,5200:4016,5226
+P 3884,5182:3936,5240
+D 3828,5200:3880,5260
+C 3844,5226 s=16x24
+# the tie: a tail of the strip runs south UNDER the thin metal (x 3946-3964, to y ~5272: tan in the
+# clean shot, an outlined strip in the chip-2 stripped shot), and a tab of the plate runs south
+# (x 3915-3938) into a heavy box (3910-3944, 5244-5276) beside the tail's end. How the box meets
+# the tail is not resolved: uncertain, as the other load ties.
+D 3946,5222:3964,5272
+P 3915,5236:3938,5270
+?D 3916,5248:3950,5272
+?B 3912,5244:3944,5276
