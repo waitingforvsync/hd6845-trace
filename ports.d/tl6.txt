@@ -1,0 +1,38 @@
+# tl6: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+# The package's region is x 5683-6400, y 2500-6350. The strip has no gate: every net passes through.
+# DIR is `in` where the driver is known to lie beyond that port, `?` otherwise.
+
+# West side (x 5683): tl5's east ports, under tl5's names (each is an alias of the net named in the note)
+tl5_w4395    M  5683,3652-3666  ?    = tcw_m6320: tl5's T10 metal (latch c's data) runs on east to the pad (5800,3658)
+tl5_w3505    P  5683,3712-3732  ?    latch a's enable: the row ends on U0's north pad (5712,3722)
+tl5_w4590    P  5683,3862-3882  ?    = tcw_m6232: tl5's row y 3872 (latch c's clear)
+tl5_w5500    P  5683,4427-4447  ?    the row to U5's pad (5928,4437)
+tl5_w5544    P  5683,4470-4490  ?    = tc1_o3527: tl5's pad (5666,4480): the row to the pad (6010,4480) of the bus metal y 4482
+tl5_w5457    P  5683,4511-4531  ?    the row to U4's pad (5886,4522)
+tl5_w4503    P  5683,4580-4600  in   latch c's inverse output: the row to the pad (5797,4698)
+tl5_w4633    P  5683,4623-4643  in   = tcw_c: latch c's output: the row to the pad (5797,4633)
+tl5_w4807    P  5683,4798-4818  in   = ras_o0_alt2: inverter 1's output: the row to the pad (6058,4872)
+tl5_w4850    P  5683,4840-4858  ?    = tl5_w4503: inverter 1's gate: the row from the pad (5797,4850)
+tl5_w3982    P  5683,4970-4988  ?    = tl4_w4068: latch b's enable: the row to the pad (5798,4980)
+tl5_w5631    P  5683,5622-5642  ?    = tcw_a: tl5's pad (5666,5632): the row to the pad (5757,5632) on U1
+tl5_w5674    P  5683,6142-6160  ?    tl5's pad (5667,6150): the row to the pad (6016,6150)
+
+# North side (y 2500)
+tl5_w5457    P  5877-5897,2500  ?    poly north from U4's north pad (5887,2722), on under the wide metal band
+tl5_w5500    P  5918-5938,2500  ?    poly north from U5's north pad (5928,2680), on under the wide metal band
+
+# East side: joins onto drawn geometry of tcw, fld and tc2
+tcw_m6320    P  6212,3649-3667  ?    onto tcw's poly west of its pad (6315,3655)
+tcw_m6232    P  6225,3862-3882  ?    into tcw's pad (6232,3870)
+tcw_a        P  6392,3994-4012  ?    into fld's pad (6400,4005)
+tcw_c        P  6310,4125-4143  ?    into fld's pad (6318,4135)
+tc1_o3527    M  6400,4472-4492  in   the bus metal y 4482, on east as tc2's piece
+ras_o0_alt2  M  6400,4777-4797  ?    the bus metal y 4787, on east as tc2's piece
+ral_stb      M  6400,6318-6338  ?    the metal y 6328, on east as tc2's piece
+
+# South side (y 6350)
+ral_stb      M  5749-5761,6350  ?    from the pad (5755,6322)
+tl4_w4068    M  5793-5805,6350  ?    U2's south piece
+tl5_w3505    M  5966-5978,6350  ?    from the pad (5972,6193)
+tl5_w5674    M  6010-6022,6350  ?    from the pad (6016,6150)
+tcw_a        M  6099-6111,6350  ?    from the corner (6105,6066)
