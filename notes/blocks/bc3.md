@@ -75,6 +75,14 @@ metal south of y 17660 are not drawn.
 
 ## Not done
 
+- **An undrawn tap on the output `bc3_w17605`** (review round 1): the output metal
+  x 7783-7806 has a real contact at (7795,17337) (ring on a widened pad in both metal shots;
+  in the clean shot a pad about 7775-7810 x 17320-17360 with a green centre, between the
+  poly rows at y about 17295 and 17385). Whether poly or diffusion lies under it is not
+  read: an open continuation of the net. The drawn ends are not real ends either: the
+  output runs on to a contact near (7793,17125); the input goes north to a contact near
+  (7837,16605) and beyond, and south past y 17725.
+
 - Everything else in the region: the left and right gate groups, the centre tracks, the
   routing field.
 - The rails' contacts between y 16300 and 17560 (the gate units' boxes), and the rails
@@ -97,3 +105,23 @@ metal south of y 17660 are not drawn.
    y 16640-17660.
 
 ## Review
+
+**Model note: the survey and this inverter were traced AND reviewed on claude-opus, not
+claude-fable-5-2** (the contributor's Fable allowance is exhausted).
+
+Round 1 (full review, 2026-11-18 08:43 +0000, a fresh agent on claude-opus). Checked at 4-5x in the clean and
+both metal shots with profiles: the copy of `tl5_inv` on the photo (gate 7635-7775 x
+17637-17655 past both edges of the diffusion column x 7650-7707; load plate, buried contact
+and output poly in place); the load contact (7490,17620) in the VCC rail and the pull-down
+contact (7676,17681) in the VSS rail (not reversed); both rails bright metal from y 16240
+to 17610 in both chips (dark bands up to about 22 px are contact rings or edges beneath),
+starting on bc1's RL2 (vcc) and RL3 (vss); the output contact (7795,17605) and input
+contact (7840,17648) on their poly pads; the two long metals not swapped; the input metal
+without a contact between y 16640 and 17660; no metal south of the output contact; the
+extraction (0 errors; bc3's nets are `bc3_w17605`, `bc3_w17646`, vcc, vss; no merge with
+bc1's metals at x 7795 / 7838, which end at y 15447 / 15830).
+No finding changes a drawn connection. One omission, recorded in Not done: a real contact
+on the output metal at (7795,17337) is not drawn (an open tap). Not checked: the `?` tab
+tie (as in the master), the chip-2 stripped shot, gate edges by profile.
+
+Round 1: no findings in what is drawn; one undrawn tap on the output listed in Not done.
