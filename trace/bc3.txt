@@ -20,6 +20,17 @@ N M 7666,17570 vss
 # The rail x 7641-7691 is bc1's RL3 (VSS, drawn to y 16300) carried on: continuous metal in both
 # metal shots, y 16270-17580 (same views).
 M 7666,16290 y17560 w=50
-# Ends: output poly and gate row both leave east at x 7775 (not followed further).
+# Ends (x5.png, 5x metal, clean and chip-2 stripped shots): the output poly ends east in a pad
+# 7775-7820 x 17588-17625 with a contact (7795,17605) under metal; the gate row runs on east to a
+# pad 7820-7860 x 17632-17665 with a contact (7840,17648) under metal. Only the metal over each
+# contact is drawn: follow.py takes the output's metal north along x 7795 (to y 17328 at least)
+# and the input's along x 7839 (north to y 16588, south to y 17694): neither followed or drawn.
+P 7775,17590:7820,17625
+C 7795,17605
+M 7783,17593:7807,17617
+P 7775,17637:7822,17655
+P 7820,17633:7860,17663
+C 7840,17648
+M 7828,17636:7852,17660
 N P 7760,17605 bc3_w17605
 N P 7760,17646 bc3_w17646

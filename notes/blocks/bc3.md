@@ -54,16 +54,18 @@ Inverter i1 (x 7475-7775, y 17575-17705), `@inst tl5_inv 2562,12797 tag=i1`:
 (contact (7490,17620): dot in the clean shot, ring in metal; `w5.png`, 5x three shots);
 pull-down to the box under the VSS rail x 7641-7691 (contact (7676,17681); `e5.png`, 5x three
 shots). Overlay `i1.png` (3x, metal and clean). The cell's tab tie (buried contact
-7551-7599 x 17649-17685) stays `?` as in the master. The output poly leaves east past a
-ringed metal pad at about (7795,17600), the gate row east at y 17646 to a pad at about
-(7835,17645): neither followed.
+7551-7599 x 17649-17685) stays `?` as in the master. The output poly ends in a pad with a
+contact (7795,17605) to metal, the gate row in a pad with a contact (7840,17648) to metal
+(`x5.png`, 5x, three shots); only the metal over each contact is drawn. `follow.py` takes
+the output's metal north along x 7795 (to y 17328 at least) and the input's along a vertical
+x 7839 (y 16588 to 17694): not checked, not drawn.
 
 ## Ports
 
 | Net | Where | Dir | Note |
 |---|---|---|---|
-| `bc3_w17605` | P 7775, y 17595-17615 | out | inverter output, east |
-| `bc3_w17646` | P 7775, y 17637-17655 | in | inverter input, east |
+| `bc3_w17605` | M over the contact (7795,17605) | out | inverter output; its metal runs north along x 7795 (not drawn) |
+| `bc3_w17646` | M over the contact (7840,17648) | in | inverter input; a vertical metal x 7839 (not drawn) |
 | vcc | M rail x 7470-7520, from y 16290 (bc1's RL2) to 17700 | - | the rail's south end not followed |
 | vss | M rail x 7641-7691, from y 16290 (bc1's RL3) to 17705 | - | the rail's south end not followed |
 
@@ -73,7 +75,7 @@ ringed metal pad at about (7795,17600), the gate row east at y 17646 to a pad at
   routing field.
 - The rails' contacts between y 16300 and 17560 (the gate units' boxes), and the rails
   south of y 17705.
-- Follow the inverter's output and input east of x 7775.
+- Follow the inverter's output metal (north along x 7795) and input metal (x 7839).
 - Overlay the other findcell hits at 3x before placing any.
 
 ## Review

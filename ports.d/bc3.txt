@@ -1,6 +1,6 @@
 # bc3: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
 # Drawn ends of the one piece traced so far (inverter at x 7475-7775, y 17575-17705).
-bc3_w17605  P  7775,17595-17615  out  inverter output, poly east (not followed)
-bc3_w17646  P  7775,17637-17655  in   inverter input, poly row east (not followed)
+bc3_w17605  M  7795,17593  out  inverter output: metal over the contact (7795,17605); runs north along x 7795 (not drawn)
+bc3_w17646  M  7840,17636  in   inverter input: metal over the contact (7840,17648); a vertical metal x 7839 (not drawn)
 vcc         M  7470-7520,16290   -    bc1's RL2 carried on south to y 17700
 vss         M  7641-7691,16290   -    bc1's RL3 carried on south to y 17705
