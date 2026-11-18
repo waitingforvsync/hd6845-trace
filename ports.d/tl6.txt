@@ -15,7 +15,7 @@ tl5_w4807    P  5683,4798-4818  in   = ras_o0_alt2: inverter 1's output: the row
 tl5_w4850    P  5683,4840-4858  ?    = tl5_w4503: inverter 1's gate: the row from the pad (5797,4850)
 tl5_w3982    P  5683,4970-4988  ?    = tl4_w4068: latch b's enable: the row to the pad (5798,4980)
 tl5_w5631    P  5683,5622-5642  ?    = tcw_a: tl5's pad (5666,5632): the row to the pad (5757,5632) on U1
-tl5_w5717    P  5683,6228-6248  ?    tl5's row y 6238: east to a corner at x 6236 and south
+rcs_mv    P  5683,6228-6248  ?    tl5's row y 6238: east to a corner at x 6236 and south
 tl5_w5674    P  5683,6142-6160  ?    tl5's pad (5667,6150): the row to the pad (6016,6150)
 
 # North side (y 2500)
@@ -50,7 +50,7 @@ tl5_w3505    M  5966-5978,6350  ?    from the pad (5972,6193)
 tl5_w5674    M  6010-6022,6350  ?    from the pad (6016,6150)
 tcw_a        M  6099-6111,6350  ?    from the corner (6105,6066)
 vss          M  5882-5934,6350  -    the wide ground metal's west leg
-tl5_w5717    P  6226-6246,6350  ?    from the row y 6238's corner
+rcs_mv    P  6226-6246,6350  ?    from the row y 6238's corner
 tl6_p6101    P  6273-6291,6350  ?    from the pad (6275,6152)
 tl6_p6143    P  6313-6331,6350  ?    from the pad (6318,6110)
 tl6_p6187    P  6356-6374,6350  ?    from the pad (6360,6152)
