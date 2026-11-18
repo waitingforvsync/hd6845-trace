@@ -97,7 +97,7 @@ poly at x 11960-11975 north of y 3650 and the poly x 12000 north of y 3650 (not 
 
 ## Not done
 
-Gate B is drawn (its extra box 12140-12195 x 3850-3900 is not: read at 5x, isolated, layer unsettled). Gate C is drawn. Resume with the next gate east (x 12318-12450, view `d5.png` 2.5x, not read closer: shares C's VSS contact (12305,3756); two vertical polys x about 12338-12362 and 12388-12410 cross diffusion at y 3730-3785 (the survey's pair with a jog at 12340-12400), the diffusion turns south at x 12318-12340, a textured box about 12395-12425 x 3855-3895, and no VCC contact box seen on x 12300-12450 at y 3912-3965 in the clean shot; `px.py row 3757 12315 12440 5 acid1b,acid`: diffusion x 12320-12337, poly-over-diffusion x 12343-12366, diffusion 12375-12387, poly 12393-12412, diffusion 12420-12440+, dark edges at 12370 and 12415; `col 12397 3690 3810 6`: that channel bright y 3738-3782 (crop `d_top.png`, 3x); so two transistors in series along the box unless the dark edges are breaks; lower half `d_bot.png` (3x): a round contact at about (12400,3870) seen in all three shots, inside a box about 12385-12430 x 3850-3900, a textured (load?) region about 12345-12385 x 3875-3900, and the lower rail y 3905-3965 with no contact on x 12315-12445; draw by hand),
+Gate B is drawn (its extra box 12140-12195 x 3850-3900 is not: read at 5x, isolated, open field (review round 1 of B and C: not diffusion, not a transistor)). Gate C is drawn. Resume with the next gate east (x 12318-12450, view `d5.png` 2.5x, not read closer: shares C's VSS contact (12305,3756); two vertical polys x about 12338-12362 and 12388-12410 cross diffusion at y 3730-3785 (the survey's pair with a jog at 12340-12400), the diffusion turns south at x 12318-12340, a textured box about 12395-12425 x 3855-3895, and no VCC contact box seen on x 12300-12450 at y 3912-3965 in the clean shot; `px.py row 3757 12315 12440 5 acid1b,acid`: diffusion x 12320-12337, poly-over-diffusion x 12343-12366, diffusion 12375-12387, poly 12393-12412, diffusion 12420-12440+, dark edges at 12370 and 12415; `col 12397 3690 3810 6`: that channel bright y 3738-3782 (crop `d_top.png`, 3x); so two transistors in series along the box unless the dark edges are breaks; lower half `d_bot.png` (3x): a round contact at about (12400,3870) seen in all three shots, inside a box about 12385-12430 x 3850-3900, a textured (load?) region about 12345-12385 x 3875-3900, and the lower rail y 3905-3965 with no contact on x 12315-12445; draw by hand),
 then A's copies at +130 and +260 (read each copy's inputs on the photo), then follow
 the two polys north into the track field; then the gates east of x 12330, the track
 field's ends and contacts, the thin metal y 3827-3839, the rails' supplies, and the
@@ -105,3 +105,41 @@ strip y 3400-3650 north boundary to `pads_in_top` / `inprot`. `tools/findcell.py
 `ral_cell`, the pad-driver cells and those of `tl1`, `tl5` was not tried.
 
 ## Review
+
+**Model note: inverter A was traced AND reviewed on claude-opus, not claude-fable-5-2**
+(the contributor's Fable allowance is exhausted). The survey was on Fable.
+
+Round 1 (full review of inverter A at commit 3e8c5a7, 2026-11-18 04:33 +0000, a fresh agent on claude-opus).
+Checked at 5x in two or three shots with profiles: the load's gate tie box
+(12006-12022, 3853-3877) (a heavy-outlined box the load poly reaches: fits a tie to the
+output; stays `?`); the output buried contact (11945-11988, 3672-3705); the output strip at
+y 3800-3818 (no gate: field-coloured either side, the dark band is the edges of metal
+lines); the pull-down's gate poly x 11994-12016 crossing the whole diffusion y 3735-3782;
+the VSS contact (12042,3758) and VCC contact (11988,3938) inside their rails; input and
+output polys separate past y 3650; extraction 0 errors. Undrawn, no connection change: a
+metal line at y about 3828-3842 crossing the piece over the output arm, no ring on it
+(added to Not done). Not checked: the rails' names (by structure only), the depletion
+implant, the neighbouring diffusion at x 12036-12065, y 3850-3900.
+
+Round 1 (inverter A): no findings.
+
+### Gates B and C (also traced and reviewed on claude-opus)
+
+Round 1 (full review of gates B and C, added after 3e8c5a7; 2026-11-18 08:43 +0000, a fresh agent on
+claude-opus). Checked at 5x in two or three shots with profiles: the pull-downs' gate polys
+(B x 12124-12146, C x 12251-12278) crossing the whole diffusion and ending about 14 px past
+its edge; the source contacts (12165,3755), (12305,3756) on the VSS rail and the drains
+(12117,3937), (12245,3937) in their boxes on the VCC rail; both output buried contacts
+filling the drawn boxes; output and input polys separated by field at y 3660; no poly
+crossing either output strip between pull-down and load (row y 3808); no ring on the thin
+metal y 3827-3839 over the arms; C's east end (the diffusion at x 12320-12338 is
+diffusion, the next gate's poly starts at x 12341: nothing misattributed); both rails
+continuous in both metal shots (dark columns only at edges beneath); extraction 0 errors.
+Clarification, no change to the trace: B's "extra box" (12168-12195 x 3850-3900) and its
+twin at C are open field enclosed by the neighbouring features, not diffusion and not a
+transistor (R-G about 0-5 in the stripped shot against 13-17 for diffusion). Not settled:
+the load ties stay `?` (dark across x 12136-12148 at y 3865 in all shots: a buried-contact
+ring or two edges). Not drawn, nobody's yet: the thin metal y 3827-3839 across the row;
+the next gate's diffusion at x 12318-12338.
+
+Round 1 (gates B and C): no findings.
