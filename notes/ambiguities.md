@@ -208,7 +208,7 @@ line), so there it is a clock phase, not a clear. What the L3 lines of the row c
 (from the west along y 13005) and of the 4-bit counter (north) carry is open until their
 sources are traced.
 
-## AMB-009: the top of the column at (3045,4515) in the step logic cluster: buried contact or VSS? (2026-11-16)
+## AMB-009: the top of the column at (3045,4515) in the step logic cluster: buried contact or VSS? (2026-11-16)  (resolved 2026-11-18: VSS, the other reading)
 
 **Where.** `trace/tla.txt`, the column x 3028-3063 above gate E0. A poly band (gate
 `clk_tl`, y 4535-4558) crosses the column between the node `rcs_cond` and the column's
@@ -240,6 +240,19 @@ y 4535-4558 ends at x 3122, and the gate is `tl3_w3982` (`trace/tla.txt` fixed, 
 So "`rcs_cond_lat` takes `rcs_cond` while `clk_tl` is high" above is not supported; it is
 sampled while `tl3_w3982` is high. The ambiguity itself (the `?B` at the column's top) is
 untouched. `rcs_n4200` keeps its `clk_tl` gate (contact (3150,4160)).
+
+**Resolved 2026-11-18, the other way (`tl2` run 4, Tom Seddon; `notes/blocks/tl2.md`, "The top of
+`tla`'s column").** The column's top is a diffusion band y 4514-4530 that runs west to R3 and the VSS
+contact (2990,4513); a strip x 3009-3019 of the VSS box lies in the open east of R3 and runs into it
+without an edge. Between the pad's lower outline (y 4496-4504) and the band (y 4512-4516) the strip
+y 4505-4511 reads field (red equal to green) in both metal shots and the chip-2 stripped shot; an
+independent review confirmed the field strip and the band. Two of the three reasons for the tie no
+longer hold: the pad has other polys (its west arm gates `rcs_bd3330`'s unit; the metal's north end
+is on an inverter's load), and the "degenerate unit" argument assumed the gate was `clk_tl`. So the
+band of `tl3_w3982` is a second pull-down: **`rcs_cond` = NOR(`rcs_cond_n`, `tl3_w3982`)** (FIRM),
+and `rcs_cond_lat` is not a latch node: it is driven by an inverter of `rcs_cond` (AMB-031).
+`trace/tla.txt` fixed (d64bc8c: the `?B` removed, the pad's poly ended at y 4504, the column begun
+at y 4514).
 
 ## AMB-010: is the strip S1 of the row address selector tied to the metal that crosses it at (7207,4955)? (2026-11-16)
 
@@ -319,6 +332,17 @@ coordinator saw in the chip-2 stripped shot. With both corrections, **R9's match
 geometry, and `rcs_mu` = NOT R9's match. The stub and the lower piece of track P carry
 another line of the bundle (`r9m_l3`). The earlier statement that `amr` c3's outer output
 drives `ra_eq_r9` is withdrawn.
+
+**What follows from it, changed 2026-11-18 (`tl3` runs 8-9, Tom Seddon).** The join stands
+(`rcs_mu` = NOT R9's match); what `rcs_mu` gates does not. The transistor under gate `rcs_mu` is a
+pull-down of `rcs_mn3852`, not of `rcs_in1`: `trace/tla.txt`'s column `D 4052,3955:4090,4135` ran
+through 70 px of field (split, e22fb03), and a diffusion branch of `rcs_mn3852`'s node runs under the
+VSS rail onto that drain. So `rcs_in1` = NOT `rcs_mv` (was NOR(`rcs_mu`, `rcs_mv`)) and
+`rcs_mn3852` = NOR(`tl3_e3712`, `rcs_in1`, `rcs_mu`). "The row counter steps when the scan line
+equals R9, unless `rcs_mv`" is withdrawn. R9's match reaches the step request instead by
+`tl3_e3550` = NOR(`rcs_mu`, `tc2_o5175`) and `rcs_e4` = NOR(`tl1_w4678`, `tl3_e3550`), marked on
+AMB-032. `rcs_in1` = NOT `rcs_mv` rests on `tl3`'s split of `tla`'s column and on `tla`'s `?D` VSS
+land below gate `rcs_mv`, which `tl3`'s reviewer doubts (re-read item R40).
 
 ## AMB-014: the gate group that makes `fld_a_in` and `fld_y_b` (2026-11-16)
 
@@ -570,6 +594,13 @@ where W surely passes over) and the metal is dark for 34 px with no bare ground;
 join three latch outputs, a cut has no bare ground, a pass-over contradicts the clean shot.
 Undrawn.
 
+Updated 2026-11-18. More copies of the ties, all `?`: `tl4`'s second latch (y 3225-3765), where the
+ties carry the cross-coupling and the inverter's output (each signal is taken from a load's plate);
+`tl3`'s latch C ((3949-3977, 4673-4694), (3963-3987, 4794-4824)) and three more in `tl3`'s east
+column; `tl2`'s inverter of `rcs_cond` (AMB-031); `lc1`'s latch D (the cell's tie, inherited). The
+ties are not unreadable only because of the thin metals: `tl3`'s unit E1 has its tie in the open and
+both chip-2 shots show a 7 px dark wall between the tab's box and the tail.
+
 ## AMB-027: the two `?P` joins of `tc2`'s set/reset latch `tc2_sr` (2026-11-18)
 
 Proposed by `tc2` (dp111, `notes/blocks/tc2.md`). The latch at x 7760-8250, y 5960-6300 (reset
@@ -599,6 +630,8 @@ to the node, which makes the pair cross-coupled: `rcs_bd3330` = NOT(`rcs_n4200` 
 poly has no other end; without the tie two gates hang on an undriven net. Also in `tl2.md`: the
 node crosses a 24 px gap between two metals at (3006-3032, 4390-4403), drawn firm (two readers);
 `tla`'s VSS arm y 3818-3836 reads field-like in the chip-2 stripped shot, left as drawn (Ambiguity 18).
+Updated 2026-11-18 (`tl2` run 4): with `rcs_cond_lat` = NOT `rcs_cond` (AMB-031) the pair reads as a D
+latch for `rcs_cond` on `clk_tl`, with true and inverted data, open while `clk_tl` is high.
 
 ## AMB-030: `tl3`'s vertical gate under the rail joined to the lower unit's load-plate arm (2026-11-18)
 
@@ -612,3 +645,70 @@ continuous through the box's ring. `tl3_w3803` = NOR(`tl3_w3939`, `tl3_w4243`) r
 the mirror image of this pair east of R3 (`rcs_u3425` and `rcs_b1`); in `tl3`'s mirror the box that
 `tla` could not place carries the poly to a metal pad, so these boxes are part of the unit's
 pattern and are used or not per copy.
+
+## AMB-031: `rcs_cond_lat` is `tl2_w4080` only through a load tie (2026-11-18)
+
+Proposed by `tl2` (Tom Seddon, run 4; `notes/blocks/tl2.md`, Ambiguities 19 and 22). The inverter of
+`rcs_cond` between R2 and R3 at y 4005-4145 has its node `tl2_w4080` under thin metal E; its load's
+plate is one firm poly with `rcs_cond_lat`'s row, pad and metal. The two are joined only by a
+heavy-outlined box below the plate (x 2872-2900, y 4113-4141), drawn `?P`, `?D`, `?B`: that the
+plate's tab enters the box and that the diffusion under it joins the node's strip 7 px east are read
+from shape and place. **Aliased (`@alias rcs_cond_lat tl2_w4080`), not renamed.** For: the node has no
+other exit and `rcs_cond_lat` no other driver. If wrong, `rcs_cond_lat` is driven by nothing and
+`tl2_w4080` drives nothing. Rests on it: `rcs_cond_lat` = NOT `rcs_cond`, and AMB-029's reading as a
+D latch. The name `rcs_cond_lat` is kept until the tie is settled (it is no latch node; `tl2`
+suggests `rcs_cond_inv`).
+
+## AMB-032: is the middle cluster's thin metal x 3948-3962 one metal? (2026-11-18)
+
+Proposed by `tl3` (Tom Seddon, runs 6-9; `notes/blocks/tl3.md`, Ambiguities 6 and 11). The thin metal
+runs from a pad on the load plate of `tl3_e3550`'s unit (3930,3614) to a pad on `tl1_w4937`'s row
+(3953,5458). **Assumed one metal, drawn with six stretches `?M`** (over load-tie boxes at y 3775-3826,
+4272-4325, 4450-4497, 4668-4691, 4778-4810, 5098-5148), where neither metal shot shows metal for
+14-38 px; names gathered by alias (`tl3_tm3955`, `tl3_tm3955_u`, `tl1_w4937`). For: two real end pads
+and no pad or widening between; metal brightness everywhere else; the signature is trap 22's
+pass-over; `tools/tl3_thin.py` separates these stretches (14-38 px, all over tie boxes) from the
+8-13 px bars of plain edges. Against: at y 4455-4492 nothing at all for 38 px, and a greenish band
+across in the clean shot; the spot (3955,4541) over latch C's inverter node is taken as a pass-over
+(two reviewers). Also assumed: the plate's tie to `tl3_e3550`'s node (`?`, AMB-026's kind). **Rests on
+it: `rcs_e4` = NOR(`tl1_w4678`, `tl3_e3550`), i.e. R9's match in the row counter's step request**
+(AMB-013). Would settle it: a third chip's metal shot; the simulation.
+
+## AMB-033: is the middle cluster's thin metal x 4099-4111 one metal, without a contact on the way? (2026-11-18)
+
+Proposed by `tl3` (Matt Godbolt run 5, Tom Seddon runs 8 and 10; `notes/blocks/tl3.md`, Ambiguities 1,
+12 and 13). The thin metal runs from a pad with a contact (4103,2899) on the row y 2899 to track A
+(`tcw_a`). **Assumed one metal, no contact between its ends; six stretches drawn `?M`** (over node
+boxes at y 2964-3021, 3381-3444, 3527-3574, 3686-3748, 3771-3969, 4051-4108), where neither metal shot
+shows it for 40-55 px. For: two real end pads (full-bright centre 12 px across, green hole) and
+nothing pad-like between; the row y 2899 has only gates on it, so its driver must arrive by this
+metal; a contact on any box would short a unit's output to `tcw_a`; an unbroken pink protected strip
+beside the line in the clean shot where one side lies over field. Against: small bright centres over
+four boxes ((4104,2988), (4101,3719), (4102,4074), (4101,5202)). The most contact-like is (4102,4074),
+on `rcs_in1`'s box (clean shot 186/182/139, neither a contact's green nor a pass-over's tan): a contact
+there would make `tl3_e4243` constant; one at (4101,5202) would make latch C's data its own enable;
+one at (4104,2988) would make the metal E1's second output. `tcw_a`'s source is not traced, so four
+of the six have no electrical cross-check. **Rests on it: `tl1_w3594` = `tcw_a`** (`tl1`'s two latches
+in series a master and a slave on `tcw_a`). Would settle it: `tcw_a`'s source; a third chip's metal
+shot; the simulation.
+
+## AMB-034: three ring-like marks in `tl4` not drawn as contacts (2026-11-18)
+
+Proposed by `tl4` (Matt Godbolt, runs 6-7; `notes/blocks/tl4.md`, Ambiguities 4-7 and 10). (1) The
+heavy box at (4684,3420) under the metal of `tl4_w3245`: bright centre in a dark ring in both metal
+shots, no hole in the clean shot, no pits in the chip-2 stripped shot; drawn as an uncertain lobe of
+`tl4_w3390`'s diffusion, no contact. A contact would short `tl4_w3245` to `tl4_w3390`, which the rest
+of the latch contradicts; what the box is for is not known. (2) A mark at (4683,5767) on RA's leg,
+in both metal shots, right over the row of `tl4_w3850`; no hole under it in either stripped shot, so
+not drawn; a contact would tie `tl4_w3850` (and `rcs_e3`'s input) to VSS. (3) The field box
+(4722-4752, 3442-3488) under RA (an elongated ring in both metal shots): perhaps a substrate contact
+of RA; not drawn (no poly, no diffusion). The lesson (a metal about 25 px wide over a box shows a
+bright centre in a dark ring; the clean shot's hole decides) is trap 26.
+
+## AMB-035: `tc2_o5175` reaches the gates of `tl3_e3550` and `tl3_e3712` only through `r9m`'s stub join (2026-11-18)
+
+Proposed by `tl3` (Tom Seddon, run 7). The two gates are on the south end of `tla`'s lower piece of
+track P (pad (4148,3592)). That piece is `tc2_o5175` (`r9m`'s line 3) only through `r9m`'s stub join at
+y 3376: 5-6 px of dark, taken there as an edge under continuous metal (AMB-013's stub). If the join
+is wrong the two gates are on an unnamed track piece with no driver. Rests on it: `tl3_e3550` =
+NOR(`rcs_mu`, `tc2_o5175`), `tl3_e3712` = NOT `tc2_o5175`, and so `rcs_mn3852`'s first input.

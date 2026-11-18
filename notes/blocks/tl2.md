@@ -1210,3 +1210,15 @@ Round 1: no findings that change a connection.
 - `rcs_thin_e`'s row east of x 3533 (towards its driver) and `tla_w3376`'s metal south of
   y 6350.
 - The VSS metal south of (3281,6350).
+
+## Corrections from `tl1`, `tl3` (coordinator, from the handoffs of 2026-11-18, second batch)
+
+- Ports, the row of `tl1_w5936`: the wire goes on up the west margin and leaves north at (2380,2498)
+  (`tl1` run 5).
+- Ports: the rows at x 3533, y 5371 (`rcs_x1`), 5415 (`tl3_w5025`), 5458 (`tl1_w4937`), 5498
+  (`tl3_w4546`), the arms y 5374 (`tl3_w3982`) and 5435 (`tl3_w4763`), and the row y 2899 are drawn on
+  in `tl3`. "`rcs_x1`'s driver is east of x 3533 on the row y 5371" is not so: that row ends on latch C's
+  clear pad (4192,5373), whose metal goes on south and east to (4250,5895) and on into `tl5`'s row
+  y 5890; the driver is beyond that.
+- `tl1_w4937` is the net of `tl3`'s thin metal x 3948-3962, and by it `tl3_e3550` (AMB-032);
+  `tl1_w3594` is `tcw_a` (AMB-033).

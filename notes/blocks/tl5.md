@@ -662,3 +662,25 @@ Round 1: no findings.
 ## Note (coordinator, from the handoffs of 2026-11-17/18)
 
 From `tl6`: latch c's outputs reach `ras_o0_alt2` (through its inverter) and `tcw_c`.
+
+## Corrections from `tl4` (coordinator, from the handoffs of 2026-11-18, second batch)
+
+- `tl5_w3505`'s row y 2985 runs on west to the pad (4452,2985): the enable of `tl4`'s second latch.
+- `tl5_w3245`'s row y 2900 ends on the pad (4648,2898) of `tl4`'s track x 4581 = `tl4_w4718`, the set
+  input of `tl4`'s pair at y 4645-5000 (the probable join of this file's Not done is drawn).
+- `tl5_w4458` (latch c's enable) is `tl3_e4243` = NOR(`rcs_mv`, `tcw_a`); `tl5_w2855` is `tl4_w3113`.
+- `tl5_w3982`'s "other metal of the pad (4910,2767), not drawn west of the pad" is drawn, to the pad
+  (4539,2768) and a poly column north (`tl4_w4068`). `tl5_w4937` and `tl5_w2722` go west on `tl4`'s bus
+  lines 4 and 5.
+- `tl5_w5457` = `tl4_w5455` (NOT `tl4_w4243`); `tl5_w5500` = `tl4_w5068` (NOR(`tl4_w4545`,
+  `tl4_w4850`)); `tl5_w5674` = `tl4_w4590`; `tl5_w5717` = `rcs_mv`; `tl5_w5761` = `tl4_w3850`.
+- `tl5_w5890` (bus line x 5107) is `rcs_x1`; `tl5_w5936` (bus line x 5063) comes from a pad (4583,5936)
+  and a metal on west along y 5939; `tl5_w4590`'s metal x 5189 / y 5982 turns south at x 4929 to a pad
+  (4929,6323) and a row on west.
+- Geometry only: RC's turned rail `M 5127,5912 x4967 w=60` and the port `vss M 4967,5912` give
+  y 5882-5942; its top edge is y 5891. The comment at the row y 2930-2950 ("no metal over the row at
+  x 4694-4947") is wrong from x 4732 east: the row is under `tl4`'s wide metal foot there, no contact.
+- The wide metal band y 2180-2500 that RC's north end is on also feeds `tl4`'s RA, by the vertical
+  metal x 4949-4995 (its east part, x 4967-4995, lies in this strip, undrawn) and the foot. Package
+  `tlb` (queue).
+- Re-read items R41 (`tl5_w4937`'s thin metal) and R42 (`tl5_inv`) apply here.

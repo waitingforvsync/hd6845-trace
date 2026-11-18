@@ -1266,3 +1266,13 @@ Round 11: no findings that change a connection.
   the metal y 5939 (`tl5_w5936`) and the row y 6323 (`tl5_w4590`).
 - The bus field's crossings were looked at only where a wire of the seventh or eighth run
   passes; the tracks between y 4320 and y 5440 were tested as each unit's run needed them.
+
+## Corrections from `tl3` (coordinator, from the handoffs of 2026-11-18, second batch)
+
+- Where this file has `tl4_w4501` as a "row from the west across the bus field": it is the row of
+  `tl3`'s track A pad (4146,4510), net `tl3_e4152` = `tcw_a` (the east column's distributed line:
+  latch C's enable, an input of e3 and e5).
+- Ports: the rows at x 4250 (y 5412 `tl3_e5240`, 5457 `tl4_w5455`, 5500 `tl3_e4372`, 5631 `tcw_a`) are
+  drawn on in `tl3`; `tl3_e5240` is `tl3_w5025` (latch B's inverted output) and `tl3_e4372` is
+  `tl3_w4546` (`tl3`'s NOR 3); aliases in `trace/tl3.txt`.
+- AMB-034 records Ambiguities 4-7 and 10 of this file.

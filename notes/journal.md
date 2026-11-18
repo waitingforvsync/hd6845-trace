@@ -1533,3 +1533,54 @@ Left on purpose: `rcs_a2` and `rcs_x1` gather placeholders of `tl1` and `tl3` bu
 unidentified, and `tl3` is claimed; the deliberate aliases as before. `operation.md`: the tracers had
 added their rows (`tl2`'s step-logic gates, `rcs_x1` as the clear of four latches, `tl4`, `tl5`,
 `tc2`, `dlat`); header and count updated.
+
+## 2026-11-18 23:58  15 handoffs and pull request #20 processed
+
+Pulled 110 commits: `tl1` run 5, `tl2` runs 4-5, `tl3` runs 5-10, `tl4` runs 6-10 (Tom Seddon,
+Matt Godbolt), `lc1` (scarybeasts, pull request #20, merged by Matt as d1f70ac), and Matt's dashboard
+fixes. Full extraction before any change: 2,363 nets, 4,224 transistors, 0 errors, 0 warnings; one
+open join (`ck_a_u`). Claims now: `tl3` (Tom, run 11), `lc2` (Matt, continuing dp111's latches).
+
+- **Done.** `tl4`: the whole strip x 4250-4967 (47 transistors, all wiring and rails; claim released).
+  `tl2` done as far as its strip goes. `lc1` partial (24 transistors, Fable only): `lc_step` = NOT
+  `lc1_w7040`, the output of a latch whose lower half lies in `lc2`.
+- **What changed in the step logic.** AMB-009 resolved the other way: `rcs_cond` =
+  NOR(`rcs_cond_n`, `tl3_w3982`), and `rcs_cond_lat` is an inverter's output (AMB-031), not a latch
+  node. `rcs_in1` = NOT `rcs_mv` (`tla`'s column ran through field, split by `tl3`); R9's match is an
+  input of `rcs_mn3852` and reaches the step request through `tl3_e3550` and `rcs_e4` (marked,
+  AMB-032). `tl1_w3594` = `tcw_a` (marked, AMB-033): `tl1`'s two latches and `tl3`'s latches B and C
+  are master/slave pairs on `tcw_a`. Latch C's clear is `rcs_x1`.
+- **Master list.** Rows `tl1`-`tl6`, `lc1`-`lc3` and `tla` updated. New rows `decode`, `clock` and
+  `pads`: blocks traced early that had no row, so the dashboard and `coverage.py` could not show them
+  (Matt's handoff). New queue row `tlb`: the wide metal band y 2180-2500 north of the top-left strips,
+  carved out of `padring`. Six wires of `tl1`/`tl2` and the rails RA and RC end on it.
+- **Re-read** R38 (ends taken from `tools/follow.py`), R39 (poly stubs ending under rails; undrawn
+  units), R40 (`tla`'s units in the middle cluster's east column), R41 (thin metals across tie boxes:
+  `tools/tl3_thin.py`, `?M` with aliases), R42 (gates at a rail's edge from the clean shot). R20, R30,
+  R34, R35, R36 extended; R35(b)'s inverter gate done at the master.
+- **Traps 26-31** in the tracing guide: a bright centre without the hole; thin metals over boxes;
+  the rail/thin-metal gap; wires under rails; where the follower ends; half a cell at a package
+  boundary.
+- **Ambiguities.** AMB-009 resolved; AMB-013, 026 and 029 updated. New: AMB-031 (`rcs_cond_lat` through
+  a load tie), AMB-032 and AMB-033 (the middle cluster's two thin metals), AMB-034 (`tl4`'s ring-like
+  marks), AMB-035 (`tc2_o5175` to `tl3`'s gates through `r9m`'s stub).
+- **Other blocks' notes.** Corrections appended to `tla`, `tl1`, `tl2`, `tl4`, `tl5`, `r9m` and `ur`.
+  `ports.d/tl1.txt` gains the VSS arm at x 2817. Not edited, because they are under active claims:
+  `tl3.md` (`tl4`'s corrections on `rcs_mv`'s direction, `tl3_e3028`, the rows at x 4250) and `lc2.md`
+  (`lc1`'s latch D lower unit and the joins `lc2_w8254`, `lc2_w8169`). Both are listed in the master list
+  rows for their claimants.
+- **Floor plan.** The coarse top-left block is trimmed to strip 3 (`tl3`); the fragments of
+  `tl1`, `tl2` and `tl4`-`tl6` cover the rest.
+- **Dashboard.** Matt fixed `read_master()`: it dropped the first row after each blank line, so
+  eight packages were missing. It also gained legend hover. That was a Sonnet session doing tooling,
+  not tracing, so the Fable rule does not apply.
+- **`tools/costs.py` (Matt, 1add61d; with the user's approval).** A main session's response now counts
+  as coordination unless the same transcript made a tracing call (`tools/t.sh`, `tools/ship.sh`, or an
+  Edit/Write of `trace/*.txt` or `notes/blocks/*.md`) between it and the commit it would join. This is
+  so that a second session under one git name no longer lands on another package's gate (`lc2` failed
+  8b on nine Sonnet responses from dashboard work). Reviewed: the change is right for that case. One
+  gap: a session that writes trace files through Bash (a heredoc, `sed -i`, a Python script) without
+  `t.sh` or `ship.sh` is not seen as tracing, so another model's responses could pass 8b. A package whose
+  responses are all coordination still fails 8b ("models seen: none"). Reported to the user, not
+  changed. `lc2`'s claim was released, paused; run 3's piece is on its branch.
+

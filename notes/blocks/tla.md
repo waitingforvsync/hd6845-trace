@@ -519,3 +519,41 @@ Each is in the named block's notes in full; the trace fixes are on main.
 - The buried-contact box at (3045-3070, 3415-3440): in `tl3`'s mirror of that unit it carries the poly
   to a metal pad; part of the unit's pattern, used or not per copy (AMB-030).
 - Re-read items R29, R30, R32, R33 apply here.
+
+## Corrections from `tl2`-`tl4` (coordinator, from the handoffs of 2026-11-18, second batch)
+
+- **`rcs_cond` and `rcs_cond_lat`** (`tl2` run 4, Tom Seddon; AMB-009 resolved the other way): wherever
+  this file gives `rcs_cond` = NOT `rcs_cond_n` and `rcs_cond_lat` <- `rcs_cond` through a pass
+  transistor (AMB-009), "the step condition is sampled into `rcs_cond_lat` while CLK is high", and the
+  correction above that the pass transistor is gated by `tl3_w3982`: the band of `tl3_w3982` at
+  (3046,4546) is a pull-down to VSS, so **`rcs_cond` = NOR(`rcs_cond_n`, `tl3_w3982`)**, and
+  `rcs_cond_lat` = NOT `rcs_cond` by an inverter in `tl2`'s strip at y 4005-4145 (through its load's
+  tie, AMB-031). `trace/tla.txt` was fixed in `tl2`'s commits d64bc8c and d362cb4. The statement that
+  `rcs_cond` = NOT `e4` AND NOT (`e3` AND `a2`) gains the factor NOT `tl3_w3982`; the step formula does
+  not use `rcs_cond` and stands.
+- The unit of `rcs_n4200`: the diffusion under the g1 band is drawn from x 2990; its west edge is at
+  x 2968-2971, and g1's poly runs on west over field to the gap and north (drawn in `trace/tl2.txt`).
+  A width only.
+- **`rcs_in1` and `rcs_mn3852`** (`tl3` runs 7-8, Tom Seddon; AMB-013): `rcs_in1` = NOT `rcs_mv`, not
+  NOR(`rcs_mu`, `rcs_mv`); its node is the load strip y 4070-4096 and the box, its only pull-down under
+  gate `rcs_mv`. The transistor under gate `rcs_mu` belongs to `rcs_mn3852` = NOR(`tl3_e3712`,
+  `rcs_in1`, `rcs_mu`), by a diffusion branch under the thin metal x 3948-3962 and the VSS rail.
+  `D 4052,3955:4090,4135` ran through 70 px of field and was split (e22fb03). `rcs_mn3852`'s upper gate
+  (the bottom band of `tl3_e3712`'s poly), its VSS box, arm, column and load are drawn in
+  `trace/tl3.txt`; "its other gate (above the node) is not read yet" in this file and in
+  `trace/tla.txt` is out of date. Not checked, from `tl3`'s reviewer (R40): gate `rcs_mu`'s channel is
+  x ~4072-4108, not 4052-4110, and the piece below it an L; east of the rail below gate `rcs_mv` reads
+  field, so `D 4052,4066:4090,4135` may stop at y ~4096 and the `?D` VSS land may not exist.
+- **`rcs_mv`**: its track ends on a pad with a contact (4192,4743), whose poly leaves east (`tl3`), and
+  it is driven at (4193,4420) by `tl3`'s NOR `rcs_mv` = NOR(`tl3_e4852`, `tl3_w4546`) at y 4345-4514.
+  It has a second gate: `tl3`'s unit e3, pad (4190,4288).
+- `rcs_in1`'s unit: the VSS land below gate `rcs_mv`, drawn `?D 4005,4130:4092,4165` with
+  `?C 4018,4148`, is the rail's VSS box above `tl3`'s unit e3, which `tl3` draws firm (Matt Godbolt).
+- The bus piece `M 4148,3371 y3596`: its south end is a pad with a contact (4148,3592) (in
+  `trace/tl3.txt`), gate of `tl3_e3550`'s NOR and of `tl3_e3712`'s inverter.
+- **Bus line E is driven from `tl4`**: its top pad's poly to the pad (4270,2725) is under the sixth bus
+  line, which comes down the track x 4496 from `tl4`'s inverter: `rcs_e3` = NOT `tl4_w3850`. The pad
+  rectangle `P 4250,2708:4290,2742` is about 8 px west of the pad (x 4258-4298): geometry only.
+- The VCC rail `M 3846,3040 y5497` goes on north to y ~2922 (drawn in `trace/tl3.txt`, with E1's VCC
+  contact); the VSS rail `M 4017,3050 y5300`'s south end is at y ~5296, as drawn.
+- Re-read items R38 (the follower's ends here), R39, R40, R41 (thin metal E), R42 apply here.
