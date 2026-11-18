@@ -66,3 +66,20 @@ strip y 3400-3650 north boundary to `pads_in_top` / `inprot`. `tools/findcell.py
 `ral_cell`, the pad-driver cells and those of `tl1`, `tl5` was not tried.
 
 ## Review
+
+**Model note: inverter A was traced AND reviewed on claude-opus, not claude-fable-5-2**
+(the contributor's Fable allowance is exhausted). The survey was on Fable.
+
+Round 1 (full review of inverter A at commit 3e8c5a7, 2026-11-18 04:33 +0000, a fresh agent on claude-opus).
+Checked at 5x in two or three shots with profiles: the load's gate tie box
+(12006-12022, 3853-3877) (a heavy-outlined box the load poly reaches: fits a tie to the
+output; stays `?`); the output buried contact (11945-11988, 3672-3705); the output strip at
+y 3800-3818 (no gate: field-coloured either side, the dark band is the edges of metal
+lines); the pull-down's gate poly x 11994-12016 crossing the whole diffusion y 3735-3782;
+the VSS contact (12042,3758) and VCC contact (11988,3938) inside their rails; input and
+output polys separate past y 3650; extraction 0 errors. Undrawn, no connection change: a
+metal line at y about 3828-3842 crossing the piece over the output arm, no ring on it
+(added to Not done). Not checked: the rails' names (by structure only), the depletion
+implant, the neighbouring diffusion at x 12036-12065, y 3850-3900.
+
+Round 1: no findings.
