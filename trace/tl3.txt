@@ -166,7 +166,7 @@ P 3550,4059:3608,4079
 # the rail's VSS box below the gate (contact ring in the metal shot at (3655,4152)); the column
 # meets it along x 3628-3632, a weak line (px.py row 4160: 107/73/63 for one sample, against
 # 48/12/25 at the column's west edge)
-D 3632,4130:3688,4180
+D 3632,4130:3678,4180                 # east edge x ~3678 at y 4160 (review round 3); the upper part reaches the poly
 D 3662,4113:3690,4153
 C 3658,4155 s=30x30
 D 3625,4130:3640,4180
@@ -175,7 +175,7 @@ D 3625,4130:3640,4180
 # over the field above: px.py row 4135 and row 4108) between the VSS box and the node's box
 # east of it. Its top is a cap 5 px below the node strip (no tie seen).
 D 3686,4118:3726,4153
-P 3690,4097:3710,4196
+P 3690,4097:3712,4196                 # east edge x ~3712 (review round 3)
 # Its bottom end reaches the buried contact box of the lower unit's load plate arm: no field
 # colour between them in any shot, only dark lines for about 10 px (px.py rows 4184-4196;
 # g_j1.png, g_j2.png 6.6x). Taken as joined (uncertain): two polys cannot lie that close, the
@@ -209,7 +209,7 @@ P 3582,4232:3612,4254
 N D 3613,4245 tl3_w4243
 D 3605,4228:3716,4252                 # node strip east under the rail
 D 3712,4215:3752,4320                 # the box east of the rail (acid R-G 26-31 down x 3732, y 4218-4258 and 4298-4312)
-D 3684,4296:3716,4320                 # its part below the gate links west to the rail's VSS box (clean shot tan at (3700,4308))
+D 3684,4302:3716,4318                 # its part below the gate links west to the rail's VSS box (clean shot tan at (3700,4308))
 # third pull-down: the arm of the strap's bottom pad crosses the box at y 4268-4290
 P 3758,4268:3806,4308
 C 3783,4290
@@ -222,8 +222,8 @@ C 3843,4262                            # second contact ring in the metal shot (
 D 3747,4213:3824,4243
 P 3760,4180:3812,4248
 P 3724,4183:3764,4205
-B 3712,4178:3747,4210
-D 3714,4179:3747,4217
+B 3716,4178:3747,4210
+D 3716,4179:3747,4217
 
 # ====================================================================
 # West column, y 4345-4490: an inverter, a "rail gate": tl1's inverter tl1_w4243 again

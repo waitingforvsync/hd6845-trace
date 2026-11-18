@@ -348,6 +348,52 @@ at y ~4825-4850, which belong to units not drawn.
 
 Round 1: no findings that change a connection.
 
+**Round 1, full review of the pair, the inverter and NOR 3** (2026-11-17 18:04 -0600, a fresh
+Fable 5.2 agent, 78 tool uses, 21 images in `cache/scratch/tl3/review-3/`; commit reviewed
+b5bd64c). Told to suspect: the join at the vertical poly's bottom end and its top end; the
+poly from the pad (3540,4068) to the upper node's box; the column's join to the rail's VSS
+box and the link y 4296-4320; which areas east of the rail are diffusion; whether the lower
+node or plate B goes anywhere else; contacts where the metal x 3540 crosses the rows
+((3542,4286) above all); the inverter's node against the VSS box above it, its gate across the
+rail, its tab; NOR 3 by overlay and the box its top arm lands on; anything left out in
+x 3533-3885, y 4040-4660. It checked each at 4x to 6.5x in two or more shots with row
+profiles and text maps; `cellcheck` and master-against-copy mosaics for NOR 3; `follow.py`
+on the strap; `opendiff.py` (no large open diffusion).
+
+The join (Ambiguity 3) stays unproven: no shot shows a gap and none shows the poly passing
+through the box's ring. The reviewer adds, for the join (`px.py` rows 4165-4198, `j_bot.png`
+6.5x): above y 4178 the poly's east edge is a dark line at x 3712-3715 in both metal shots
+and the chip-2 stripped shot, and at y 4183-4193 those samples are poly-bright in all three,
+so the poly steps east at the arm's level; its bottom edge at y 4200 is in line with the
+arm's; and the dark band to the box's interior is 12 px with no tan strip in it, where the
+upper box (row 4138) has a tan strip between poly and ring.
+
+Findings, all geometry only, each checked by the tracer (`px.py row 4135`, `row 4160`, pt
+(3700,4308)):
+
+1. The vertical poly's east edge is about x 3712 (drawn 3710). Fixed (and the arm's box and
+   diffusion start at x 3716, so the join still rests on the `?P` alone).
+2. The link strip is y 4302-4318 at x 3700 (drawn 4296-4320). Fixed.
+3. The VSS box's east edge is about x 3678 at y 4160 (drawn 3688). Fixed; its upper part still
+   reaches the poly.
+
+Found correct: the vertical poly's top (a rounded cap at y 4094, a green rim between it and
+the strip, no contact on the poly); the pad (3540,4068) and its poly into the node's box; no
+contact at any of the seven crossings of the metal x 3540 ((3542,4286) and (3545,4548) are
+blemishes of chip 2); the column and the VSS box are one outline (the weak line is the rail's
+margin); the boxes east of the rail are diffusion, with diffusion east of the channel; the
+link; the third gate across the whole box; nothing leaves the lower node's box; the strap
+(no contact on plate B); three VCC contacts; the inverter (field y 4352-4376 above its node,
+gate across the rail's diffusion, tab as the NOR cell's); NOR 3 (1.7 % and 3.5 % bad blocks,
+top arm on a contacted VSS box). Not checked: whether any buried contact box ties (all read
+from outlines); the rows west of x 3521; the plates east of the VCC rail at (3882-3940,
+4215-4310), which are the east column's.
+
+`tools/t.sh tl3 sameconn.py b5bd64c`: `connections identical`.
+`.venv/bin/python tools/sameconn.py b5bd64c`: `connections identical`.
+
+Round 1: no findings that change a connection.
+
 ## Not done
 
 - Next, in this order: the second latch (y 4818-5258), whose data row starts at the pad
