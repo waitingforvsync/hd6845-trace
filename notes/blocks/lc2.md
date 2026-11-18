@@ -203,6 +203,11 @@ Run 3 (2026-11-18 16:28 -0600):
   through latch B and x ~5971 through latch C): bright from y 8040 to y 8600 in `d1_m.png`; not drawn, its
   contacts not looked for.
 - Latch C's clear, enable and data are followed (above); its Na metal south of the pad (6257,8822) is not.
+- From review round 2: the thin metal x 5962-5982 is dark for about 35 px over the `?` tie box of latch D's lower
+  unit at about (5978,8118), with a bright spot in chip 2 only (x 5975-5981, y 8109-8121), none in chip 1 and no
+  hole in the clean shot: to be measured as `tl1`'s thin W was when the metal is drawn. A strip under the VCC
+  rail at x 5857-5878, y 8110-8152 reads as diffusion and is not drawn (VCC to VCC). The copy's gate 2 lies
+  5-7 px north of where the cell puts it, and the copy's VCC contact about 8 px west (geometry of the cell copy).
 - **R31**: latches B and C were traced and reviewed on Opus and still want a Fable review; run 3's review covers
   only run 3's piece.
 
@@ -293,3 +298,46 @@ t1142/t1143 and t1148/t1149; not checked: the other widths, and where the four p
 go beyond what is drawn.
 
 Round 1 (latch C): no findings.
+
+### Run 3: latch D's lower unit and the bus field (traced and reviewed on Fable 5.2)
+
+Round 2 (full review of run 3's piece, 2026-11-18 16:47 -0600, a fresh agent on claude-fable-5-2, at commit bf266fb;
+images in `cache/scratch/lc2/review-2/`, 13 used). The rounds of this section are counted through the package:
+round 1 was each of the two Opus reviews above. Told to suspect: a contact of the metal x 6422-6440 on latch C's
+data poly (Ambiguity 3); the dark line at x 6439-6447 across that metal's turn; the four pads with no green hole;
+the T of metal B and the corner of metal A; the three cross-unders under A and B; `lc2_w8474`'s link, its row
+under the VSS rail and its path under the VCC rail; the cell copy and which row is which gate; the node's row;
+anything left out. Checked at 4-5.6x in the metal shots, the clean shot and the chip-2 stripped shot, with
+`px.py`, `textmap.py`, `railprof.py`:
+- Ambiguity 3: no contact (no ring or widening in either metal shot, no hole in the clean shot, no pit in the
+  chip-2 stripped shot, where the pad (6470,8127) beside it has one; the yellowish colour is not evidence: the
+  poly x 6258 is yellower still under A and B). The dark line at the turn is the poly's edge underneath (its
+  profile matches the same edge under A and B). The poly arm to the pad (6470,8127) is joined.
+- All ten pads: ring and bright centre in both metal shots and pits in the chip-2 stripped shot.
+- B is a T on the metal x 6168 with no line across; A starts at x 6203 with 25-30 px of bare ground to x 6168.
+- The three cross-unders are straight, pad to pad, without taps. `lc2_w8474`: the link is continuous, the lower
+  row has field between x 6104 and x 6148 (it does not reach the pad (6212,8516)), poly over field under the VSS
+  rail with field above latch C's box, plain salmon without a contact under the VCC rail, and on west.
+- The cell copy: every item on a feature; the inverter's gate is on the lower row (data), the upper row goes to
+  the pad (6212,8128). The node's row is one poly to x 6415 and north, with no contact under the five metals.
+  The VSS rail is one metal. Nothing left out but the known thin metal.
+
+Findings, all geometry only, each checked by the tracer:
+1. The copy's gate 2 is drawn at y 8123-8141 and lies at y 8116-8136 in the photo. Confirmed (`px.py col 6150`:
+   the row at y 8118-8134). It is the cell's item in this copy (5-7 px); the hand-drawn row y 8118-8135 east of it
+   is right. Not changed: a cell copy is not redrawn item by item (re-read item R35 covers the masters).
+2. The copy's VCC contact of the inverter's load is drawn at (5873,8186); the ring's centre is at x 5857-5872,
+   y 8173-8197. Confirmed (`textmap.py 5842 8164 5890 8206`); the drawn contact overlaps the ring and is on the rail
+   and the box. Not changed (the cell's item).
+3. In `lc1`'s instance, not this package: the pad of `lc1_w7862` has its hole at (6105,8265) against (6115,8272)
+   drawn. For the handoff.
+Notes from the reviewer, in Not done: the thin metal x 5962-5982 is dark for about 35 px over the cell's `?` tie box
+at about (5978,8118), with a bright spot in chip 2 only (read as a pass-over); a strip under the VCC rail at
+x 5857-5878, y 8110-8152 reads as diffusion and is not drawn (it would join VCC to VCC).
+Not checked by the reviewer: north of y 8067, east of x 6450, `lc2_w8474` west of x 5835.
+
+No trace file changed after the review, and the connections are as reviewed:
+`tools/t.sh lc2 sameconn.py bf266fb`: `connections identical`;
+`.venv/bin/python tools/sameconn.py bf266fb`: `connections identical`.
+
+Round 2: no findings that change a connection.
