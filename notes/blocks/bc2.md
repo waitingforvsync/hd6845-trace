@@ -120,3 +120,22 @@ In order:
    at x 9000, to `bw` and to `cdp4`; ports file and floor-plan fragment.
 
 ## Review
+
+**Model note: latch unit a was traced AND reviewed on claude-opus, not claude-fable-5-2**
+(the contributor's Fable allowance is exhausted). The survey was on Fable.
+
+Round 1 (full review of latch unit a at commit c4baf0a, 2026-11-18 08:39 +0000, a fresh agent on claude-opus).
+Checked at 3-5x in the clean, stripped and metal shots with profiles: each of the five rows
+(y 14912, 14955, 15000, 15087, 15172) one poly from its pad to the cell, field between
+neighbours, none continuing west past its pad; the pad (10395,15000) on `bc2_w15000` and
+not on `bc2_w15029`; the metal x 10441 continuous between the two enable pads (it runs on
+past both: drawn only between them) and touching no other pad; no further vertical metal
+through the unit besides the cell's own; the thin metal x 10682 and its contacts on rings;
+the VCC long ring on its rail; the VSS box and ring; the extraction (0 errors; the three
+equations as stated). Not checked: gate overhangs of ten of the eleven transistors; the
+copies' contact boxes one by one above 1.6x; the metal shot at 5x for x 10600-10800 above
+y 14920. Note from the tracer of unit b (not yet merged): this unit's VSS box
+`D 10530,15235:10586,15285` is about 5 px too long at its south edge (photo: y about
+15279); geometry only here, but it blocks unit b's top row.
+
+Round 1: no findings.
