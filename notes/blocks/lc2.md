@@ -6,7 +6,7 @@
 cells); the rest of the region is surveyed only (inventory below). This piece was traced on
 **claude-opus** (Opus 5.5), not Fable 5.2: the project's rule is Fable; the coordinator
 discloses it. Latch C and the inverter below it were not started (scope cut by the
-coordinator). Two equations are DEPENDS only because of `tl1`'s `?` load ties in the cells.
+coordinator; a second claude-opus session at 04:26 +0000 had a 12-minute drawing window, too short to place and self-check two cell copies, so it shipped notes only and drew nothing). Two equations are DEPENDS only because of `tl1`'s `?` load ties in the cells.
 
 Before this package only `urch` had geometry in the region: the tracks of `sl0`..`sl4` at
 x 4258-4640, y 8067-8200 (north-west corner) and the pads (4420,8590), (4380,9066) at the west
@@ -102,7 +102,15 @@ followed); the rails vss and vcc at y 8060/8067 and y 8560.
 
 1. Latch B's tracks: clear from the pad (5472,8254), Na from (5514,8341), data south from
    (5558,8450); enable north of y 8067 is `lc1`'s region.
-2. Latch C and the inverter below it (overlay the `findcell` hits first).
+2. Latch C and the inverter below it (overlay the `findcell` hits first). Not started: no
+   geometry, no overlay. The hits are `tl1_ub` 3352,3999 rot=180 (0.76) and `tl1_ua` 3351,4439
+   rot=180 (0.68), inverter 3306,4809 rot=180 (0.73), all WITHOUT `mx`, whereas latch B's
+   copies carry `mx=2662.5`: if the hits are right, latch C is laid out as latch B's mirror
+   image, so its input rows and pads lie on the opposite side; do not copy latch B's hand-drawn
+   rows across. The scores are lower than latch B's (0.85 / 0.82): overlay each copy at 4x
+   before placing it. Look for the counterpart of the thin vertical metal (x 5748-5764 in
+   latch B) through latch C and record it; take gate-width profiles (`tools/px.py`) for every
+   transistor, which latch B lacks for t133-t135.
 3. The west gate cluster (x 4480-5330, y 8380-9160): the largest piece; not a known cell.
 4. The bus fields and the unit halves on the north and south edges (with `lc1` / `lc3`).
 
