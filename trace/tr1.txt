@@ -1,0 +1,38 @@
+# tr1: top-right logic rows, part 1 (x 11900-14150, y 3400-4500)
+# Gate row y 3650-3980: upper rail y 3747-3785 (vss), lower rail y 3920-3964 (vcc), both named
+# from structure only (pull-down source contacts on the upper, load drains on the lower).
+# Traced on claude-opus. View: cache/scratch/tr1/a.png (3.5x, clean / chip-2 stripped / metal).
+@block tr1
+@w M=24 P=20
+
+# ---- rails, only the pieces inverter A needs
+M 11940,3766 x12065 w=38
+N M 11950,3766 vss
+M 11940,3942 x12065 w=44
+N M 11950,3942 vcc
+
+# ---- inverter A, x 11940-12065:  tr1_w11960 = NOT tr1_w12005
+# pull-down: diffusion box under the upper rail, source contact (12042,3758)
+D 11966,3735:12062,3782
+C 12042,3758
+# input poly from the north (leaves at y 3650), gate over the box, ends y 3795
+P 12005,3650 y3795 w=22
+N P 12005,3660 tr1_w12005
+# output: diffusion west of the gate, north to a buried contact and poly going north
+D 11965,3705:11983,3850
+D 11945,3672:11988,3705
+B 11945,3672:11988,3705
+P 11961,3650 y3700 w=22
+N P 11961,3660 tr1_w11960
+# arm east to the load's gate tie
+D 11965,3825:12030,3848
+D 12008,3825:12036,3878
+# load: depletion transistor, poly over the strip x 11962-11983, drain in the VCC box
+D 11962,3850:11983,3912
+P 11942,3853:12003,3905
+D 11960,3912:12020,3962
+C 11988,3938 s=36x24
+# gate tie: the load poly is believed to reach the box at x 12003-12010 (dark at x 12005-12017
+# on the y 3865 profile): uncertain
+?P 12000,3855:12020,3875
+?B 12006,3853:12022,3877

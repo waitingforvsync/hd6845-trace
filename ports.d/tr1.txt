@@ -1,0 +1,5 @@
+# tr1: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+# The package's region is x 11900-14150, y 3400-4500. Only inverter A is drawn so far: its two
+# polys end at y 3650 where the drawing stops (inside the region; not followed north yet).
+tr1_w12005   P  11994-12016,3650  in   inverter A's input poly, from the track field to the north (not followed)
+tr1_w11960   P  11950-11972,3650  out  inverter A's output (NOT tr1_w12005), poly north from its buried contact (not followed)
