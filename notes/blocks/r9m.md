@@ -198,3 +198,13 @@ beyond (4494,3813).
 
 `r9m_l1w`'s east end is drawn by `tc2` (not an open end). `r9m_l3` has a driver: `tc2_o5175`, joined
 by `tl6` (join 10, contact (5845,5043)).
+
+## Correction from `tl3` (coordinator, from the handoffs of 2026-11-18, second batch)
+
+- "The lower piece ends on a contact at about (4148,3588), whose poly runs west along y about 3583 into
+  the middle cluster's gate column, not traced": traced by `tl3` run 7: the pad (4148,3592) gates
+  `tl3_e3550` = NOR(`rcs_mu`, `tc2_o5175`) and `tl3_e3712` = NOT `tc2_o5175`; both rest on this block's
+  stub join at y 3376 (AMB-035).
+- What R9's match does in the step logic: "`rcs_mu` = NOT R9's match" stands; "term 1 = R9's match AND
+  NOT `rcs_mv`" does not. R9's match is an input of `rcs_mn3852`, and reaches the step request by
+  `tl3_e3550` and `rcs_e4` (marked: AMB-013, AMB-032).

@@ -280,7 +280,7 @@ P 5822,5030:5862,5066
 C 5845,5043
 @alias tc2_o5175 r9m_l3
 
-# ---- tl5_w5717: tl5's row y 6238 east under U0-U2, bw's metal, the wide metal and the metals
+# ---- rcs_mv: tl5's row y 6238 east under U0-U2, bw's metal, the wide metal and the metals
 # x 5972, 6016, 6105 to a corner at x 6226-6246 under the edge of the wide metal band, and
 # south in the open out of the strip (v2.png, v3.png 5x; px.py col 6236 6222 6290 4: the dark
 # line at y 6246-6250 is the band's rim, the same on the through poly x 6282, and the clean

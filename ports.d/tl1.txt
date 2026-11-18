@@ -20,6 +20,7 @@ tl1_w2592   P  2493-2508,2500  ?    the row's poly comes from the north
 rcs_c1      P  2405-2420,2500  out  rcs_c1's poly line (from tla's row y 2986, west, north, east along y 2720), on north
 tl1_w5936   P  2372-2388,2498  out  the north-edge poly turns north out of the strip: the far end of the wire down the west margin (run 5); its west end is a pad (2064,2507), 36 px west of the strip, drawn
 vss         M  2600-2650,2500  -    R1 on north
+vss         M  2817,2893-2948  -    the wide VSS metal's east arm, on into `tl2` and R3's top (coordinator, from `tl2`'s handoff 2026-11-18)
 
 # Onto tla's geometry
 rcs_e4      M  2494-2506,5232  out  the metal x 2500 runs into tla's pad (2497,5238)

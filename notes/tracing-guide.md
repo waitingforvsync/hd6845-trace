@@ -328,6 +328,58 @@ Traps, all of them real:
 25. **A port is drawn to the boundary only after the boundary itself has been looked at.** A
    line still there 50 px short of the edge may end on a pad. `dbus`'s `dbus_do0_in` was drawn
    to x 16950 and ends 40 px before it. Found 2026-11-17 (R28).
+26. **A bright centre is not a contact without the hole.** Over a buried-contact box a metal can
+   show a bright centre: a round one in a dark ring under a metal about 25 px wide (`tl4`, the box
+   at (4684,3420)), a small one in a dark stretch on a thin metal (`tl3`, four boxes on the thin
+   metal x 4099-4111), a round full-bright one between the two dark bars of a poly row crossing
+   the box (`tl3`'s latch C). None of these is a contact. What separates a real contact is the
+   clean shot's round green hole in a widened pad (red minus green -5 to -16; 140-178/150-193/
+   85-108 here, against 186-203/176-182/131-139 for these) and a full-bright centre about 12 px
+   across. Extends trap 22, whose "the pass-over has no bright centre" is not always so. Found
+   2026-11-18 (`tl4`, `tl3`; R20, AMB-034).
+27. **A thin metal over a load-tie or node box cannot be shown continuous from these photos;
+   record it so the tools see it.** Over each such box a thin metal is dark for 14-55 px in both
+   metal shots and the clean shot is greenish under it. Do not leave the stretch undrawn (an
+   undrawn stretch is a missing connection no tool lists) and do not draw it as plain metal:
+   draw it `?M` and gather the names by `@alias`, so `tools/unsure.py` and the gate list it.
+   `tools/tl3_thin.py X0 X1 Y0 Y1 --thr 176 --min 8` sorts a thin metal's dark stretches: 8-13 px
+   are the bars of any edge underneath, 14 px and more lie over boxes. Where one side of the
+   metal lies over field, an unbroken pink protected strip beside it in the clean shot shows the
+   metal was there. `tools/follow.py` running through such a stretch is not evidence (it bridges
+   24 px). Found 2026-11-18 (`tl3` runs 7-10; R41, AMB-032, AMB-033).
+28. **In the gap between a rail and a thin metal the clean shot misleads on poly and diffusion.**
+   It shows a poly only as far as the rail's protected margin (about 10 px), so a gate drawn from
+   "the bright band" there is too short (`tl1_ua`'s inverter gate: 12 drawn, 21 real); the far
+   edge comes from the edge line in the two metal shots. A diffusion strip there shows as a dark
+   red-brown bar that reads as open poly (`tl3`: 12 x 80 px taken for a vertical gate): the chip-2
+   metal shot decides (poly orange with blue under 75, diffusion plain with blue 85-95). And the
+   edge of a thin metal's protected margin can pass for a diffusion edge (`lc1`: a pull-down drawn
+   18 wide is 38; the true edge is the dark line across the gate poly in the chip-2 metal shot).
+   Found 2026-11-18 (`tl1`, `tl3`, `lc1`; R42, with R30).
+29. **A wire is not finished where it goes under a rail or a thin metal.** A stripe of diffusion
+   colour under a thin metal is a diffusion until both its ends are found (`tl3`: 170 px of tan
+   beside a load strip was a diffusion wire that turned under the rail to another transistor; a
+   column profile, `tools/px.py col`, shows its ends in one call). A poly stub drawn "not
+   followed" under a rail may end on a unit nobody has drawn (`tl2`: `rcs_cond_lat`'s poly, 70 px
+   on, is the plate of a load with its own VCC contact under R2). Look for undrawn units with views
+   at 2x or more with every package's trace outlined (four views cover a 2,400 px column); listing
+   contact candidates on a rail with `tools/tla_contacts.py` does not work (the grey under R2 and R3
+   gives a candidate every 50-100 px). Found 2026-11-18 (`tl2`, `tl3`; R39, R40).
+30. **Where `tools/follow.py` ends a metal is not where the metal ends.** It loses a narrow metal
+   where it goes dark over what lies beneath and reports an end there (`tl3`: track A and the thin
+   metal x 4101 run on); at its default `--gap 24` it runs 33-46 px past a pad over open poly and
+   jumps a 25 px gap from a pad onto a wide supply metal (`tl4`; `--gap 16` ends on the pad). Read
+   every followed end near a pad, a box or a wide rail with the two-chip metal test
+   (`tools/tl5_tracks.py h/v`) or a view. Also: a brightness profile across a wide metal beside a
+   poly row gives the metal 20 px too narrow (the metal over the row is dim; the clean shot's
+   protected row decides). Found 2026-11-18 (`tl3`, `tl4`, `tl2`; R38, R36).
+31. **A group near a package boundary that will not read may be half of a cell.** `lc1`'s cluster
+   E was read three times as a free-standing gate without a load; it is the upper unit of a
+   two-unit latch whose lower unit lies in `lc2`. Before a second pass over such a group, run
+   `findcell` with every cell of the neighbouring packages over a region that crosses the
+   boundary, and again after a neighbour merges. Likewise a port whose wire "goes on" into a strip
+   nobody has drawn is not yet a source (`tl3` took the two ends of one L in `tl4`'s strip for two
+   wires). Found 2026-11-18 (`lc1`, `tl4`).
 
 **When a trap turns out to affect work already done**, add the affected blocks to the
 "Re-read list" in `notes/work-packages.md` in the same commit that records the finding.

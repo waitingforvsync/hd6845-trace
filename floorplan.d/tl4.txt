@@ -1,7 +1,7 @@
 # tl4: top-left random logic, fourth strip (the vertical control's right cluster)
 4665,3906:4967,4390   logic   latch in the right cluster | tl4_w4243 = NOT(tl4_w4198 OR tl4_w4068 AND NOT tl4_w4025 OR tl4_w4113): open while tl4_w4068 is high, data tl4_w4025, cleared by tl4_w4198; a copy of the latches in front of rcs_e4
 4290,3012:4967,3222   ?logic  NOR at the top of the right cluster | tl4_w3113 = NOR(tl4_w3070, tl4_w3178); output north by the metal x 4408
-4400,3781:4967,3911   ?logic  inverter in the right cluster | rcs_e3 = NOT tl4_w3850 (tl4_w3808, an alias); output north by the metal x 4496 and west on the sixth bus line to tla's bus line E
+4400,3781:4967,3911   ?logic  inverter in the right cluster | rcs_e3 = NOT tl4_w3850 (rcs_e3, an alias); output north by the metal x 4496 and west on the sixth bus line to tla's bus line E
 4250,4410:4967,4645   ?logic  three-input NOR in the right cluster | tl4_w4545 = NOR(tla_w3417, tl4_w4501, tl4_w4590); output south by the metal x 4626
 4347,4645:4967,5000   ?logic  cross-coupled pair in the right cluster | tl4_w4686 = NOT(tl4_w4718 AND tl4_w4590 OR tl4_w4850), tl4_w4850 = NOT(tl4_w4198 OR tl4_w4545 OR tl4_w4686); tl4_w4850 leaves south on the track x 4581
 4560,4990:4967,5170   ?logic  two-input NOR in the right cluster | tl4_w5068 = NOR(tl4_w4545, tl4_w4850); output on the track x 4625 south
