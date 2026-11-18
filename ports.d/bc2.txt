@@ -1,6 +1,11 @@
 # bc2: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
-# East column latch unit a only (the rest of bc2 is not traced). Each is the pad where the drawn wire ends.
+# East column latch units a and b only (the rest of bc2 is not traced). Each is where the drawn wire ends.
 bc2_w14912    M  10385,14912   in   data of latch unit a: the metal at the pad goes west (not followed)
-bc2_w14955    M  10441,14940-15188  in   enable of latch unit a: vertical metal x 10441, drawn only between its two pads
+bc2_w14955    M  10441,14940   in   enable of latch unit a: metal x 10441 goes on north of a's upper pad (not followed)
+bc2_w14955    M  10398,15440   in   enable of latch unit a: the same metal jogs west at y 15392 to x 10398 and runs on south (not followed)
 bc2_w15087    M  10395,15110   in   clear of latch unit a: metal x 10395 going south from the pad (not followed)
 bc2_w15000    M  10385,15000   out  output of latch unit a: a metal from the north-west ends on the pad (not followed)
+bc2_w15388    M  10353,15440   in   data of latch unit b: metal x 10353 from the pad (10352,15388) south (not followed)
+bc2_w15432    M  10441,15665   in   enable of latch unit b: metal x 10441 from b's two enable pads on south (not followed)
+bc2_w15565    M  10226,15515   in   clear of latch unit b: metal x 10226 from the pad (10226,15565) north (not followed)
+bc2_w15607    M  10267,15515   out  latch unit b's lower node (a's bc2_w15029 side): metal x 10267 from the pad (10267,15607) north (not followed)

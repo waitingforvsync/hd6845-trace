@@ -4,10 +4,12 @@ Scratch: `cache/scratch/bc2/`. Coordinates are metal-shot pixels.
 
 ## Status
 
-2026-11-18 05:36 +0100: **one latch unit traced** (east gate column, unit a: `tl1_ua` + `tl1_ub` at
-7940,10454, 11 transistors), traced on claude-opus (Fable allowance exhausted). Not reviewed.
-**Unit b (7941,10930) placed, fitted, and held**: its lines are in `trace/bc2.txt` commented out
-(see "Latch unit b"), because with them the extraction has one error at the seam with unit a.
+2026-11-18 09:56 +0100: **two latch units traced** (east gate column: unit a, `tl1_ua` + `tl1_ub` at
+7940,10454, and unit b at 7941,10930; 11 transistors each, 22 in all), traced on claude-opus.
+Unit b is active (unit a's VSS box got its south edge 15279, which let copy b in with 0 errors), with
+its own input and output rows to their pads. Unit a's enable metal x 10441 does **not** reach unit b's
+enable pads (a break at y 15400-15414; it jogs west to x 10398 instead): units a and b have separate
+enables. Not reviewed.
 Everything else in the region is still survey only (below).
 
 Earlier (2026-11-18 04:48 +0100, survey):
@@ -85,7 +87,9 @@ Seen for the copies at 7940,10454 and 7941,10930 (`ma.png`, `mb.png`, and `w_aci
 `tl1`, `tl5`. Overlay `a_c.png` (clean) and `a_m.png` (metal), 2.5x: every gate of the cells lies
 on a poly row over diffusion, the cell's contacts sit on the rails (VSS x 10540-10597, VCC
 x 10718-10775) or on rings. Drawn by hand: both rails over the unit (by structure, not followed to
-a supply), the VSS box below the stack with its ring (10558,15258), the VCC long ring
+a supply), the VSS box below the stack with its ring (10558,15258) (south edge 15279: `px.py col 10560`
+and `col 10580` in acid1b, pale diffusion to y 15272, dark edge 15276-15284, copy b's top poly row from
+15286; `s1_seam.png`, 5x; `sameconn.py` against 7fdf5b3: connections identical), the VCC long ring
 (10745,14988-15070), the thin metal x 10682 between its pads (10681,14953), (10681,15156), and the
 rows west of x 10484 to their pads (`a_w.png`, 4x, clean and metal side by side: each pad a ring
 in the metal shot, each row continuous poly in the clean shot):
@@ -93,7 +97,7 @@ in the metal shot, each row continuous poly in the clean shot):
 | Net | Row | Pad | Metal at the pad |
 |---|---|---|---|
 | `bc2_w14912` data (inverter and upper AND) | y 14905-14922 | (10395,14912) | goes west, not followed |
-| `bc2_w14955` enable (both ANDs) | y 14947-14964 and y 15163-15180 | (10441,14955), (10441,15172) | one vertical metal x 10441 (drawn between the pads only) |
+| `bc2_w14955` enable (both ANDs) | y 14947-14964 and y 15163-15180 | (10441,14955), (10441,15172) | one vertical metal x 10441; north of y 14940 not followed; south it runs to y 15398, jogs west along y 15386-15398 to the metal x 10398, which runs on south (not followed); see "Latch unit b" |
 | `bc2_w15087` clear | y 15079-15096 | (10395,15087) | metal x 10395 south, not followed |
 | `bc2_w15000` output (upper gate's node) | y 14992-15010 | (10395,15000) | a metal from the north-west ends on it, not followed |
 
@@ -106,67 +110,80 @@ The same D latch with enable and clear as `tl5` and `lc2` place. Widths: `px.py 
 (acid) gives poly y 14905-14922 and y 14947-14966 at the two upper AND gates, matching the
 cell's L 18; the other transistors' sizes are the master's, not profiled.
 
-## Latch unit b (x 10300-10779, y 15277-15746): placed, held
+## Latch unit b (x 10212-10779, y 15277-15752)
 
 `@inst tl1_ua 7941,10930` and `@inst tl1_ub 7941,10930` (tag b). Overlay `b_top.png`, `b_bot.png`,
-`b_rail.png` (2.5x, clean and metal side by side): every gate of the cells lies on a poly row over
-diffusion and every contact on a box or ring. Drawn (active): the VSS rail x 10568 (w 56) and the
-VCC rail x 10746 (w 50) over y 15270-15746, and the thin metal x 10682 y 15416-15644. Written but
-commented out with the cells (a contact needs the cells' diffusion under it): the VCC long ring
-(10745,15505) (metal shot, ring y 15470-15550), the thin metal's contacts (10681,15429),
-(10681,15632) (rings in the metal shot).
+`b_rail.png` (2.5x) and `b_cells_ov.png` (2x, clean + metal): every gate of the cells lies on a poly row
+over diffusion and every contact on a box or ring. Drawn by hand: the VSS rail x 10568 (w 56) and the
+VCC rail x 10746 (w 50) over y 15270-15746, the VCC long ring (10745,15505) (ring y 15470-15550), the
+thin metal x 10682 y 15416-15644 with its contacts (10681,15429), (10681,15632), the copy's own VSS box
+below its stack `D 10540,15706:10596,15752` with the contact (10558,15731) (`b_box.png`, 4x), and the
+rows west of the cells to their pads.
 
-**Why held.** With the two `@inst` lines active, `netlist.py`: 1 error, "channel at 10558,15284: 1
-diffusion terminals". Copy b's top poly row (master y 4350-4367, here 15280-15297) crosses unit a's
-hand-drawn VSS box `D 10530,15235:10586,15285`. `px.py col 10535` (acid1b, acid): diffusion
-y 15258-15276, dark edge y 15279-15285, poly (acid orange) y 15288-15300. So the box ends at about
-y 15279 and the row starts at about 15287; both drawn items are about 5 px long into the gap (the
-same row at unit a reads 14809-14821 against the drawn 14804). Fix: unit a's box south edge to
-15279 (unit a's line; not changed here while it is under review), then uncomment the five lines.
-Tested in the working tree only (not committed): with that edge at 15279 and the five lines
-active, the full extraction gives 0 errors, 0 warnings, 4126 transistors (11 more), and unit a's
-equations are unchanged.
+Copy b was first held: copy b's top poly row (y 15280-15297) crossed unit a's VSS box, drawn to
+y 15285. With that box ending at 15279 (unit a, above), the full extraction is 0 errors, 0 warnings,
+4126 transistors (11 more).
 
-Widths (lengths) at copy b, `px.py col` in acid: x 10554 poly y 15383-15400 and y 15426-15442 (the two
-upper AND gates), x 10560 poly y 15497-15513 (the pull-down row; unit a's same row 15019-15036): each
-L 16-18, the cell's 18, and each 476 below unit a's. Channel widths not profiled.
+**Rows west of copy b** (each read from its gate to its pad at 4.4-8x in acid1b and a metal shot, and
+acid / metal1 where in doubt: `b_data.png`, `b_en1.png`, `b_clr.png`, `b_pads_w.png`, `b_r606.png`,
+`b_out5.png`, `b_v8.png`, `b_mnorth.png`). Each pad: a ring in the metal shot and a green centre on a
+poly pad in acid1b. Colour scans (acid1b G-R) along rows y 15389, 15563, 15607 find no contact but the
+pads. The rows pass under the thin metals x 10310, 10355, 10398, 10441 without contacts (the dark bars
+across them in the clean shot are the gaps between metals). **b's inputs are not a's.**
 
-Copy b's own VSS box below its stack is drawn (active): `D 10540,15706:10596,15752` with the contact
-(10558,15731) on the VSS rail (`b_box.png`, 4x: pale box in the clean shot, dark edge from y 15752;
-ring in the metal shot).
+| Net | Cell row | Row (drawn) | Pad | Metal at the pad |
+|---|---|---|---|---|
+| `bc2_w15388` data (inverter and upper AND) | master 4452-4470 | y 15381-15399 (`px.py col 10420`) | round, (10352,15388) | metal x 10353 south (not followed); the pad is NOT on the horizontal metal y 15392 just east of it (x 10374-10384 reads as poly under oxide: R+G ~270 like the bare row at x 10462-10480, metal 320-400) |
+| `bc2_w15432` enable (both ANDs) | 4492-4510 and 4708-4728 | y 15423-15441 and 15640-15658 (`px.py col 10466` acid) | (10441,15432), (10441,15650) | one metal x 10441 from y 15418 south past both pads, on south beyond y 15718 (not followed) |
+| `bc2_w15565` clear | 4625-4643 | y 15555-15573 (`col 10300`) | (10226,15565), x 10212-10246 | metal x 10226 north (not followed); it ends on the pad |
+| `bc2_w15607` lower gate's node (output) | 4668-4688 (buried contact at x 10492 in the cell) | y 15599-15617 | (10267,15607), x 10250-10288 | metal x 10267 from the north (crosses the clear row with no contact) ends on it |
 
-Rows west of copy b, read on `b_w.png` (2.4x, clean + metal; **not drawn**, positions to ~5 px):
-| Cell row (copy a's net) | Row y | Seen |
-|---|---|---|
-| data (a: `bc2_w14912`) | 15380-15397 | poly west to a pad (10352,15388), ring in the metal shot; a metal from the pad runs south at x ~10355 (and the L above it, y ~15300, x 10300-10350) |
-| enable (a: `bc2_w14955`) | ~15431 | pad (10441,15432), ring, on the vertical metal x 10441 |
-| enable again | ~15648 | pad (10441,15648), ring, on the same metal x 10441 (continuous y 15400-15720 in the metal shot) |
-| output (a: `bc2_w15000`) | ~15476 | no pad west of the cell's own contact (10479,15476) seen at 2.4x |
-| clear (a: `bc2_w15087`) | ~15563 | runs on west past x 10300 (under the metals x 10355, 10441) |
-| ? | ~15606 | runs on west past x 10300 |
+The upper gate's node (`bc2_w15476`, the cell's stub x 10473-10516, y 15467-15487) ends in a rounded
+end at x ~10467 (`b_out5.png`, 6x): no row west, no pad, unlike unit a's output row y 15000. So unit b
+takes out the other side of the latch from unit a.
 
-The metal x 10441 (x 10430-10450) is continuous in the metal shot from copy a's lower enable pad
-(10441,15172) to y 15400 (`b_x441.png`, 3x, metal + clean), and on to y 15720 (`b_w.png`): so units
-a and b very likely share the enable (believed; not yet drawn; whether it has a break or a contact
-between y 15188 and 15400 under copy b's data row y 15388 was looked at only at 3x).
+**Unit a's enable metal does not reach unit b.** The metal x 10441 from a's lower enable pad
+(10441,15172) is continuous south to y 15398 (stripe test, metal and metal1: the line 2-3x brighter
+than its own edges at every y down to 15386; the dark band 15376-15384 is the data row's top edge
+printing through, the line still brighter than its edges there). At y 15386-15398 it turns west to
+x 10390 (both metal shots), into the metal x 10398 that runs on south (north of y 15386 the track
+x 10398 is bare up to the L at y 15306). Between y 15400 and the outline of the pad ring (10441,15432)
+at y 15414 there is no metal: at y 15408-15412 the line's place, its edges and the flanks read alike
+(R+G 246-285, bare oxide) in both metal shots, whereas at a's pad (10441,15172) the metal runs straight
+into the ring's outline (`b_x441k.png` against `a_x441k.png`, 6x, metal + metal1 + acid1b). The data row's
+bottom edge accounts for y 15400-15406 only. So b's enable `bc2_w15432` is a net of its own (the
+previous drawing, one metal y 15180-15665, joined them).
+
+Equations (`unsure.py --equations`: the inverter FIRM, the two gates DEPENDS only by feedback, as for a):
+- `bc2_w15352` = NOT `bc2_w15388`
+- `bc2_w15476` = NOT( `bc2_w15388` AND `bc2_w15432` OR `bc2_w15607` )
+- `bc2_w15607` = NOT( `bc2_w15565` OR `bc2_w15432` AND `bc2_w15352` OR `bc2_w15476` )
+
+Sizes: the cells' (the master's). Checked against unit a rather than drawn anew: per transistor, the
+normalised correlation of a 100x60 patch around each of b's 11 gates with the same patch of unit a
+(476 px north) is 0.83-0.97 in acid1b, 0.74-0.93 in acid and 0.85-0.98 in the metal shot, all at one
+offset (b = a + (0..1, 477)). `px.py row 15411` (between b's two upper AND gates t1898, t1899) gives
+the diffusion x 10542-10580 between dark edges, the same as `row 14935` at unit a (x 10543-10580);
+gate lengths at x 10554 / 10560 (acid): y 15383-15400, 15426-15442, 15497-15513, each L 16-18. The
+channel widths of the master were not re-profiled here (t1898/t1899 are drawn W 72 over x 10519-10591;
+the tan between their gates spans x 10542-10580, with a lighter strip x 10516-10524 west of a dark line
+x 10528-10536: a question for `tl1`'s master, the same in a and b).
+
+Not drawn: a dark V in the clean shot at x 10420-10445, y 15615-15635, between the row `bc2_w15607` and
+the enable pad (10441,15650); acid reads bare field there (`b_v8.png`, 8x), so no poly joins them.
 
 ## Not done
 
 In order:
-1. **The metal x 10441 is not only the enable's link between its two pads**: in the metal shot
-   (`a_w.png`, `a_m.png`) it runs on north of y 14940 and south of y 15188, about 55 px west of
-   the cell's own thin metal x 10500 (the extra vertical seen in another copy). Drawn south
-   to copy b's pads (y 15665); north of y 14940 and south of y 15665 not drawn: where the enable
-   comes from is not followed. Likewise
-   the metals at the data, clear and output pads.
-1b. Copy b: fix unit a's VSS box south edge (15285 -> 15279), uncomment the cells and the three
-   contacts, re-run the extraction; then draw its rows to their pads (table under "Latch unit b";
-   rows y 15563 and 15606 go on west, not followed), then draw the enable pads' rows east to the
-   cells (y ~15431, ~15648).
-   Channel widths of b not profiled (three gate lengths were: above).
+1. Where the latch units' wires go: north of y 14940 on the metal x 10441 (a's enable), the metal
+   x 10398 south of y 15440 (a's enable again), the metals at a's data, clear and output pads, and
+   b's metals x 10353 (data, south of y 15440), x 10441 (enable, south of y 15665), x 10226 (clear,
+   north of y 15515), x 10267 (output, north of y 15515). None is followed.
 2. Test the east column above y 14800 and below y 15750 for further copies; overlay the copy
    at 6857,11495 on the metal shot and the mirrored candidate at all.
-3. West gate column; the routing (bus, L bundles, vertical tracks); joins to `bc1`'s bus ends
-   at x 9000, to `bw` and to `cdp4`; ports file and floor-plan fragment.
+3. The channel widths of the latch cell (the master's, see "Latch unit b"); not re-profiled here.
+4. West gate column; the routing (bus, L bundles, vertical tracks, among them the thin metals
+   x 10310, 10355, 10398 west of unit b); joins to `bc1`'s bus ends at x 9000, to `bw` and to `cdp4`;
+   floor-plan fragment.
 
 ## Review
