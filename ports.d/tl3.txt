@@ -25,5 +25,8 @@ tl3_w4503   P  3533,4493-4513  in   NOR 3 gate 1
 tl3_w4546   P  3533,4536-4556  out  NOR 3 output
 tl3_w5025   P  3533,5015-5035  out  latch B's inverted output
 tl3_w5112   P  3533,5103-5121  in   clear of latch B
-tl3_w4978   P  3640,5318-5342  ?    enable of latch B: pad (3540,5328) at the south end of its metal; the row goes on east under the rail, not drawn
+# east column
+tl3_e4243   M  4250,4235-4255  out  output of the east NOR e3; the metal goes on east and north at x 4323
+tl3_e5114   P  4250,5105-5123  in   gate 2 of the east NOR e5 (which drives latch B's enable), from the east
+tl3_e4152   M  4105,4106       ?    the thin metal x 4099-4111 (track A's north part): drawn end, it goes on north
 vss         M  3645-3695,5330  -    the west rail, drawn to y 5330; it goes on south

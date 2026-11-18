@@ -288,8 +288,9 @@ P 3550,4930:3586,4948
 # on pads: (3541,4980) on the row y 4970-4988 (ua's gate 2), (3541,5199) on the row y 5186-5206
 # (ub's gate 1) and (3541,5328), whose poly runs east along y 5318-5342 under the rail and on
 # across the cluster's foot (ring, bright centre and green hole each: textmap 3520 4964 3562
-# 4992 2, 3520 5182 3562 5210 2, 3516 5310 3566 5350 2). That row is drawn to x 3640 only: it
-# goes on east over diffusions that are not read (lb_row.png).
+# 4992 2, 3520 5182 3562 5210 2, 3516 5310 3566 5350 2). The row ends on a pad (4148,5330) of
+# the metal that brings the output of the east column's lower NOR (below): that NOR drives this
+# enable. On the way the row lies over areas that are not read (lb_row.png): it may gate things.
 P 3545,4970:3586,4988
 P 3522,4964:3559,4994
 C 3541,4980
@@ -299,7 +300,7 @@ C 3541,5199
 M 3541,4972 y5336 w=14
 P 3522,5313:3559,5343
 C 3541,5328
-P 3550,5318:3640,5342
+P 3550,5318:4132,5342                 # the whole row to its east pad: one poly, no break and no other hole (px.py row 5330 3560 4160 3 acid1b)
 N M 3541,5080 tl3_w4978
 # ua's node (the inverted output): row y 5015-5035 west out of the strip (under the metal x 3540, no hole: textmap 3522 5008 3560 5042 3)
 P 3533,5015:3581,5035
@@ -307,3 +308,80 @@ N P 3555,5025 tl3_w5025
 # clear: row y 5103-5121 from the west (under the metal x 3540, no hole: textmap 3522 5096 3560 5128 3)
 P 3533,5103:3586,5121
 N P 3560,5112 tl3_w5112
+
+# ====================================================================
+# East column (east of the VSS rail x 3995-4045): the standard NOR unit of tla's east column
+# (rcs_c1's, 2778 3030 3088 3200) again: findcell (clean shot) 1042,1127 (0.88) and 1042,1952
+# (0.71). Cell tl3_enor: tla's lines for rcs_c1's unit moved by 1042,1127, fitted on en_ov.png.
+@cell tl3_enor
+D 4008,4141:4056,4190                 # rail's VSS box above
+C 4027,4162 s=24x30
+D 4047,4166:4105,4186                 # top arm
+D 4072,4166:4105,4310                 # the column east of the rail
+D 4008,4299:4056,4361                 # rail's VSS box below
+C 4027,4327 s=24x40
+D 4042,4296:4105,4310                 # bottom arm
+P 4054,4191:4112,4209                 # gate 1
+P 4054,4280:4112,4300                 # gate 2
+B 4084,4225:4110,4258                 # output: buried contact on the node
+P 4087,4232:4125,4252
+D 3967,4232:4090,4251                 # load: node strip west under the rail
+D 3940,4232:3974,4265
+D 3955,4261:3971,4307                 # tail
+D 3877,4232:3947,4259                 # under the plate, to the VCC box
+P 3884,4217:3939,4310                 # plate
+P 3932,4285:3968,4307                 # its tab, tied to the tail
+B 3950,4282:3974,4309
+@end
+@inst tl3_enor 0,0 tag=e3
+@inst tl3_enor 0,825 tag=e5
+# ---- wiring of the upper unit e3 (y 4165-4335):  tl3_e4243 = NOR(tl3_e4152, rcs_mv)
+# gate 1: row east to a pad with a contact (4148,4200) on track A, a metal x 4141-4155 that runs
+# south to y 5008 (follow.py 4148 4290 S) with pads at (4146,4510), (4146,4681), (4146,4900) and
+# (4147,5005) (textmap 4130 Y-14 4168 Y+14 3 at each: hole in the clean shot, bright centre in
+# both metal shots; a poly row leaves each pad: only the last is drawn) and north of the pad
+# turns west along y 4152-4168 and north at x 4099-4111 (follow.py 4148 4290 N). That thin
+# metal runs on north over tla's units to about y 3020 (px.py col 4101 3000 3880 20); it is drawn
+# to y 4106 only: whether it contacts rcs_in1's node box at (4102,4074) is not decided.
+P 4105,4191:4140,4209
+P 4130,4184:4166,4216
+C 4148,4200
+M 4105,4106 y4160 x4148 y5012 w=13
+P 4130,4496:4166,4524
+C 4146,4510
+P 4130,4667:4166,4695
+C 4146,4681
+P 4130,4886:4166,4914
+C 4146,4900
+N M 4148,4400 tl3_e4152
+# gate 2: row east under track A (no hole: textmap 4128 4184 4256 4304 3) to a pad with a
+# contact (4190,4288) on tla's track x 4192, rcs_mv
+P 4105,4280:4180,4300
+P 4172,4272:4208,4306
+C 4190,4288
+# output: row east under both tracks (no hole) to a pad with a contact (4236,4246); its metal
+# leaves east along y 4235-4255 into tl4's strip (follow.py 4270 4243 E: it turns north at
+# x 4323 and runs to y 2772)
+P 4120,4232:4225,4252
+P 4218,4226:4256,4262
+C 4236,4246
+M 4236,4245 x4250 w=20
+N P 4170,4242 tl3_e4243
+# ---- wiring of the lower unit e5 (y 4990-5160):  tl3_w4978 = NOR(tl3_e4152, tl3_e5114)
+# gate 1: row east to the pad (4147,5005), the south end of track A
+P 4105,5016:4150,5034
+P 4130,4990:4166,5024
+C 4147,5005
+# output: row east to a pad with a contact (4147,5070) at the north end of a metal x 4142-4155
+# (follow.py 4148 5090: y 5064-5332), whose south end has a contact (4148,5330) on the east pad
+# of latch B's enable row y 5318-5342 (textmap 4126 5300 4172 5352 3)
+P 4120,5057:4140,5077
+P 4130,5054:4166,5084
+C 4147,5070
+M 4148,5062 y5338 w=13
+P 4130,5314:4166,5346
+C 4148,5330
+# gate 2: a row y 5105-5123 from the east, across the bus field under four tracks without a
+# contact (textmap 4124 5098 4262 5130 3): from tl4's strip
+P 4105,5105:4250,5123
+N P 4200,5114 tl3_e5114
