@@ -2,10 +2,12 @@
 
 ## Status
 
-Survey only (2026-11-18 04:48 +0100). Nothing is drawn: there is no `trace/tr1.txt` yet. One inverter was
-read on the photos but not drawn or self-checked (see Logic). Views:
-`cache/scratch/tr1/survey.png` (0.57x), `row_11900.png`, `row_12650.png`,
-`row_13400.png` (1.65x, metal over clean shot), `cellA*.png` (3.6-5x).
+Inverter A drawn (2026-11-18, traced on claude-opus): `trace/tr1.txt`, 2 transistors, extraction
+0 errors 0 warnings (`TRACE=tr1` and full). Its look-alikes at +130 and +260 px (x 12075-12195,
+12205-12330) are NOT drawn: not overlaid or read at 4x yet. Survey views:
+`cache/scratch/tr1/survey.png` (0.57x), `row_11900.png`, `row_12650.png`, `row_13400.png`
+(1.65x), `cellA*.png`; drawing views `a.png` (3.5x, clean / chip-2 stripped / chip-2 metal),
+`a_tr.png` (3x, trace over clean and stripped shots).
 
 ## Inventory
 
@@ -20,35 +22,43 @@ read on the photos but not drawn or self-checked (see Logic). Views:
 
 ## Logic
 
-Read, NOT drawn, not self-checked (one pass, clean shot and chip-2 stripped shot at 5x,
-colour profiles with `tools/px.py`):
+Inverter A, x 11940-12065 (drawn; `tr1_w11960 = NOT tr1_w12005`; `unsure.py --equations`: DEPENDS on the two `?` items of the load tie, not firm):
 
-Inverter A, x 11940-12065. Pull-down: gate poly x 11994-12016 coming from the north
-(y 3650) and ending at y 3795; diffusion y 3735-3780 from x 11968 to 12062, source
-contact at (12042,3758) on the upper rail; W about 43, L about 22. Output: diffusion
-west of the gate, north along x 11965-11982 to a buried-contact box 11945-11988 x
-3672-3705 and a poly going north along x 11950-11972; south along x 11965-11988 to the
-load. Load: poly 11942-12003 x 3853-3905 over a diffusion strip x 11962-11983 (W about
-21, L about 52), south end in the contact box on the lower rail; gate tied to the
-output by an arm of diffusion east along y 3825-3848 to a buried-contact box about
-12008-12036 x 3850-3878. Equation if this stands: out = NOT in. Where the two polys go
-north of y 3650 was not followed.
+| Transistor | Gate | Between | W/L | Where |
+|---|---|---|---|---|
+| pull-down | `tr1_w12005` | `vss` - `tr1_w11960` | 47/22 | channel (12005,3758): diffusion box 11966-12062 x 3735-3782, source contact (12042,3758) on the upper rail |
+| load (depletion) | `tr1_w11960` (?) | `tr1_w11960` - `vcc` | 21/52 | channel (11972,3879): textured poly 11942-12003 x 3853-3905 over the strip x 11962-11983; drain in the box 11960-12020 x 3912-3962, contact (11988,3938) on the lower rail |
 
+Bit cell's gates in full: one enhancement pull-down to VSS and one depletion load to VCC whose
+gate is (believed) tied to the output: an inverter.
+
+Wires: the output diffusion runs north from the gate's west side along x 11965-11983 to a
+buried contact 11945-11988 x 3672-3705 and a poly x 11950-11972 north to y 3650 (end of
+drawing); south along the same strip, crossing two dark lines at y 3800-3812 and the thin metal
+without contact, to the load; an arm east along y 3825-3848 to a lobe 12008-12036 x 3825-3878.
+Gate profile (`px.py col 12005 3720 3805`): bright channel y 3736-3780 in both shots, poly end
+about y 3795, dark field from y 3800.
+
+Rings/boxes in the piece with no drawn item: the two dark lines at y 3800-3812 crossing the
+output strip (thin metal or a field edge; not a contact on the strip, not drawn); the bright
+poly at x 11960-11975 north of y 3650 and the poly x 12000 north of y 3650 (not followed).
 ## Ports
 
-None yet (nothing drawn; `ports.d/tr1.txt` not created).
+`ports.d/tr1.txt`: `tr1_w12005` (in) and `tr1_w11960` (out), both poly ends at y 3650 where the drawing stops; neither followed north.
 
 ## Ambiguities
 
 - Which rail is which is from structure only.
-- Whether the load poly reaches the buried-contact box at x 12003-12010, y 3855-3875:
-  the profile along y 3865 is dark at x 12005-12017. Needs a 5x look in both stripped
-  shots before the load's tie is drawn.
+- The load's gate tie is drawn as `?P 12000,3855:12020,3875` and `?B 12006,3853:12022,3877`.
+  `px.py row 3865 11995 12030 3`: both stripped shots dark at x 12004-12019 (clean 44-86,
+  chip-2 81-149), lighter both sides; the lobe 12008-12036 x 3825-3878 has its own dark ring
+  in both shots. A dark spot in a diffusion lobe beside the load's poly fits a buried contact,
+  and a depletion load's gate is normally tied to its source, but this was not confirmed at
+  5x. If wrong, the load's gate is something else and the gate is not a plain inverter.
 
 ## Not done
 
-Everything: resume by drawing inverter A (check each end and both gate widths first),
-then its copies at +130 and +260 (read each copy's inputs on the photo), then follow
+Resume with inverter A's copies at +130 and +260 (read each copy's inputs on the photo), then follow
 the two polys north into the track field; then the gates east of x 12330, the track
 field's ends and contacts, the thin metal y 3827-3839, the rails' supplies, and the
 strip y 3400-3650 north boundary to `pads_in_top` / `inprot`. `tools/findcell.py` with
