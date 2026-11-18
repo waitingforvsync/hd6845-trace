@@ -309,7 +309,7 @@ So **`tl4`'s latch (y 3906-4390) and latch b here are open at the same time**, a
 | Item | Reading | Seen |
 |---|---|---|
 | the pad (4537,2940) | ring with a bright centre, green hole on a cream pad; bare ground north of it, the metal goes on south: the north end of the track x 4537 | `j2_a.png` 4x, clean, chip-2 stripped, chip-2 metal; `tl5_tracks.py v 4537 2925 3900`: hole at y 2946 |
-| the row y 2930-2950, x 4553-4967 | one poly, at the same y in every cut: under the wide metal foot y 2935-2995 from x 4950 to x 4725, a gap mark at x 4704-4708, under the metal x 4690, in the open x 4604-4672, under the metal x 4581, a gap mark at x 4556-4566, the pad | `j2_b.png` (4x, clean and chip-2 stripped: x 4700-4970), `j_c1.png`, `j_c1b.png` (4x, four shots: x 4565-4725), `j2_a.png` (x 4495-4655); `px.py row 2940 4548 4736 4 acid1b,acid`: cream or open poly (red over green by 40-60) at every sample but the three marks, no sample green or pink; `tl5_tracks.py rows col 2880 3004 3` at 23 cuts x 4960-4430; overlay `ov_j2.png` 2.7x |
+| the row y 2930-2950, x 4553-4967 | one poly, at the same y in every cut: along the north edge of the wide metal foot (no metal over the row at x 4694-4947 in either chip) y 2935-2995 from x 4950 to x 4725, a gap mark at x 4704-4708, under the metal x 4690, in the open x 4604-4672, under the metal x 4581, a gap mark at x 4556-4566, the pad | `j2_b.png` (4x, clean and chip-2 stripped: x 4700-4970), `j_c1.png`, `j_c1b.png` (4x, four shots: x 4565-4725), `j2_a.png` (x 4495-4655); `px.py row 2940 4548 4736 4 acid1b,acid`: cream or open poly (red over green by 40-60) at every sample but the three marks, no sample green or pink; `tl5_tracks.py rows col 2880 3004 3` at 23 cuts x 4960-4430; overlay `ov_j2.png` 2.7x |
 | the mark beside the pad (4556-4566, 2932-2945) | a dark blob in the 17 px gap between the pad's metal and the metal x 4581, with cream above and below it inside the row (181/142/112 at y 2935, 165/143/116 at y 2947) and poly-coloured in both metal shots (chip 2 120-137/86-103/38-50, chip 1 114-140/62-77/30-40, against bare ground 147/130/67 and 117/93/74 at y 2920) | `px.py col 4560 2920 2960 3 acid1b,acid,metal,metal1`; `col 4564` |
 | the track x 4537, y 2940-3900 | one metal x 4528-4545; no stretch without metal in both chips over 16 px; holes only at the north pad and at (4537,3463) | `tl5_tracks.py v 4537 2925 3900`; `j2_s.png` (1.3x, three shots); `tl4`'s notes (`follow.py`: y 2938 to y 4814) |
 | not drawn | the second pad (4537,3463) of the track: a ring in both metal shots, its poly east along y 3450-3470 (`tl4`'s field) | `j2_s.png` |
@@ -591,6 +591,14 @@ lies outside it).
 
 ## Not done
 
+- **An undrawn tap on `tl5_w3636` = `tl4_w4198` (in tl4's strip):** track x 4537 has a second
+  pad at (4537,3463); its poly row y 3450-3470 runs east over two gate-coloured stretches
+  at x 4670-4720 and x 4755-4790, in ground nobody has drawn (x 4640-4960, y 3400-3520;
+  review, 2.5-3x). So the shared clear drives devices not yet traced. It does not reach
+  tl5's row y 3461 (which starts at x 5195).
+- RC's turned rail at the strip's south is drawn from y 5882; both chips put its north
+  edge at about y 5894 (12 px; one rail either way).
+
 - The north rows west of x 4967 (table "West of the edge"): six of the eight are not drawn
   there. The probable join `tl5_w3245` = `tl4_w4718` lacks the 12 px dark gap at (4664-4680,
   2900) between the pad (4645,2900) and the row, and a look at the track x 4581 south of y 4080.
@@ -626,4 +634,28 @@ end is not an end (said so in Not done); a port's direction. Not checked: the ce
 item by item above 2.9x, the `?` load ties, RB's supply, the west ports against tl4's rows,
 anything south of y 5260.
 
+Round 1 of the first round of work: clean (no findings).
+
+### Second round of work (the tracks to both ends, the rows south of the column, two joins to tl4)
+
+Round 1 (full review of what was added since 3cd7985, 2026-11-18 02:59 +0000, a fresh agent on
+claude-fable-5-2). Told to suspect the two joins to tl4 step by step (the gap mark on row
+y 2940, the pads (4537,2940) and (4910,2767), the four corners, the tracks x 4537 and
+x 4625 as single metals among tl4's parallel tracks, and the tl4 nets they meet), T3 over
+`bw`'s row at (5362,5590), T5's south pad against row y 5761, the rows and bus lines read at
+1.7x, the east-edge pads, the counter metals over the bus, and RC. Checked: JOIN 2's pad at
+4.4x in four shots, the gap mark by colour in both metal shots (poly-coloured: a trap-2
+bar), the track x 4537 to tl4's pad (4533,4198) at 2.5-3x (no dark stretch over 16 px; one
+other pad); JOIN 1's pad at 5.5x with a text map and the follower, its four corners at 4.6x
+in four shots, the track x 4625 to tl4's pad (4625,4068) with no pad or hole; T3 at 5.5x
+(no contact); T5's pad in four shots; the edge pads and south pads; the bus polys and
+corners; RC as one metal in both chips; the full extraction (no unintended merge;
+`tl5_w2722` apart from `rc_stepreq_n`).
+No finding changes a connection. Three notes, recorded: an undrawn tap on the shared clear
+in tl4's strip (Not done; for tl4's tracer), a comment's wording (fixed), RC's turned
+rail's north edge 12 px off (recorded). Not checked: the two tracks above 3x at each row
+crossing, T10's north corner beyond the follower, the west-edge crossings of the south
+rows.
+
 Round 1: no findings.
+

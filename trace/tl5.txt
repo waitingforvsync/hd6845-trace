@@ -554,7 +554,7 @@ M 4909,2755 y2901 x4690 y2988 x4625 y4062 w=14
 # The clear of latches a and b is tl4's tl4_w4198: the row y 2930-2950 runs on west of the edge
 # for 415 px to a pad with a contact (4537,2940), the north end of tl4's track x 4537 (j2_a.png
 # 4x, three shots: ring with a bright centre, green hole; bare ground north of the pad, the
-# metal goes on south). The row between: under the wide metal foot y 2935-2995 from x 4950 to
+# metal goes on south). The row between: along the north edge of the wide metal foot (no metal over the row at x 4694-4947 in either chip) y 2935-2995 from x 4950 to
 # x 4725 (j2_b.png 4x, clean and chip-2 stripped: one cream band, no pad), in the open or under
 # the metals x 4690 and x 4581 from there to the pad (j_c1.png, j_c1b.png 4x, four shots; px.py
 # row 2940 4548 4736 4 acid1b,acid: cream or open poly at every sample but three gap marks, at
