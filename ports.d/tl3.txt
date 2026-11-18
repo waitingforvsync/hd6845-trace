@@ -36,6 +36,8 @@ tl3_e4808   P  4124,5366-5377  ?    the row of the clear metal's second pad (419
 tl3_e4852   P  4118,4453-4466  out  latch C's output, the row of the pad (4236,4461): drawn end, it goes on west under the rail
 tl3_e4152   P  4250,4496-4510  ?    the row of track A's pad (4146,4510), on east: tl4's tl4_w4501
 rcs_mv      P  4250,4736-4751  in   the poly of the pad (4192,4743) at the south end of rcs_mv's track, from the east
+tl3_e4915   P  4250,4904-4925  ?    the poly of the pad (4234,4918) on the track x 4236, on east
+tl3_e4915   M  4250,5760-5772  ?    the metal x 4236 from that pad, east out of the strip along y 5766
 tl3_tm3955  M  3955,4500       ?    the thin metal x 3948-3962: drawn end, it goes on north
 tl3_tm3955  M  3955,4960       ?    the thin metal x 3948-3962: drawn end, it goes on south
 vss         M  3645-3695,5330  -    the west rail, drawn to y 5330; it goes on south

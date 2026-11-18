@@ -491,17 +491,18 @@ N D 4070,4720 tl3_e4720
 @alias tl3_e4720 tl3_e4675
 N D 4088,4830 tl3_e4852
 # ---- the thin metal x 3948-3962, which runs the length of the column between the rails over
-# the loads (not drawn by any block). Drawn here only over the latch. At (3955,4541), over the
-# buried contact box of the inverter's node, it looks like a CONTACT: bright centre 10-12 px
-# across in a dark ring x 3940-3970, y 4523-4550 in both metal shots, and in the clean shot a
-# grey-green patch 12 x 9 px (169-177/161-169/112-139, red minus green 0-8) exactly under the
-# metal, where every protected surface nearby has red minus green over 16 and the pass-over at
-# e3's tie box (3958,4296) reads 173-185/140-157/94-100 (px.py col 3955 4514 4562 3, row 4540
-# 3934 3980 3; tm_inv.png, tm_e3tie.png, tm_pad.png, 5x four shots). No widened pad. Uncertain.
+# the loads (not drawn by any block). Drawn here only over the latch; its ends are a pad with a
+# contact (3930,3616) on the foot of the load plate of the rail unit at y 3440-3610 (not drawn)
+# and a pad with a contact (3953,5459) whose poly leaves west (review 7; textmap 3906 3590 3972
+# 3640 3, 3920 5436 3980 5480 3). At (3955,4541), over the buried contact box of the inverter's
+# node, it has a round bright centre in a dark ring in both metal shots and a grey-green band in
+# the clean shot (152-161/147-160/102-127), which the first drawing took for a contact (?C).
+# Taken as a PASS-OVER since review 7: no pad, the band runs the box's full width (x 3944-3966)
+# and the master's box under thin W reads much the same (160-193/142-175/99-141: px.py row 4366
+# 2684 2722 3, row 3758), and a contact would short the inverter's output to the net of the two
+# end pads. Notes, Ambiguity 6.
 M 3955,4500 y4960 w=13
 N M 3955,4640 tl3_tm3955
-?C 3955,4541 s=12x10 butt=1
-@alias tl3_e4537 tl3_tm3955
 # ---- rows and tracks in the bus field east of the latch
 # data: the row y 4627-4642 comes from the east under three tracks without a contact (textmap
 # 4120 4618 4252 4652 3) and crosses x 4250
@@ -543,3 +544,13 @@ P 4160,4496:4250,4510
 P 4174,4728:4210,4758
 C 4192,4743 s=20x20
 P 4204,4736:4250,4751
+# ---- a wire that only passes through (review 7): a pad with a contact (4234,4918) below latch
+# C's output pad (bare ground between them, y 4877-4892); the pad's poly leaves east across
+# x 4250 along y 4904-4925; a metal x 4229-4243 runs south from the contact to y 5766 and turns
+# east out of the strip (follow.py 4236 4990 S: corner (4245,5770) E, on to (4411,5762); no hole
+# under it on the way and a plain corner: textmap 4204 4868 4264 4940 3, 4224 4930 4251 5790 3,
+# 4216 5744 4264 5790 3)
+P 4217,4902:4252,4930
+C 4234,4918 s=20x20
+M 4236,4910 y5766 x4250 w=13
+N M 4236,5300 tl3_e4915
