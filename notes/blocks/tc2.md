@@ -627,3 +627,14 @@ No finding changes a connection. Three minor points:
 Not checked: `tc2_sr_r` north of y 5468 (left open by the trace), `tc2_sr_c`'s metal
 y 6315-6338 (follower only), the VCC rail north of y 5960.
 
+Round 2 (fix check, 2026-11-18 00:01 +0000, a fresh agent on claude-fable-5-2, against commit c9f19a2). The
+split is placed right (row profiles in all shots: the poly is seen to x 8136-8138, a dark
+band hides x 8138-8150, the pad's poly starts at x 8152); the firm part lies wholly inside
+the buried-contact box, so no channel forms; `tools/sameconn.py`: connections identical.
+The marking of the latch, stated exactly: **the latch is marked, not firm.** Only q's NOR
+input structure is firm; q_n to q rests on the `?P` at x 8138-8152, and q to q_n (and that
+channel's east end) on the `?P` at (8133-8154, 6183-6202). `tools/unsure.py` printing
+`tc2_sr_q` as FIRM is a label artefact (the name's label is on the pad side of the join).
+
+Round 2: no findings.
+
