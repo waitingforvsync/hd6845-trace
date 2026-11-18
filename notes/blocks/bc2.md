@@ -155,12 +155,13 @@ between y 15188 and 15400 under copy b's data row y 15388 was looked at only at 
 In order:
 1. **The metal x 10441 is not only the enable's link between its two pads**: in the metal shot
    (`a_w.png`, `a_m.png`) it runs on north of y 14940 and south of y 15188, about 55 px west of
-   the cell's own thin metal x 10500 (the extra vertical seen in another copy). Not drawn
-   beyond the pads; where it goes (and so where the enable comes from) is not followed. Likewise
+   the cell's own thin metal x 10500 (the extra vertical seen in another copy). Drawn south
+   to copy b's pads (y 15665); north of y 14940 and south of y 15665 not drawn: where the enable
+   comes from is not followed. Likewise
    the metals at the data, clear and output pads.
 1b. Copy b: fix unit a's VSS box south edge (15285 -> 15279), uncomment the cells and the three
    contacts, re-run the extraction; then draw its rows to their pads (table under "Latch unit b";
-   rows y 15563 and 15606 go on west, not followed),, then draw the enable pads' rows east to the cells (y ~15431, ~15648) and check the metal x 10441
+   rows y 15563 and 15606 go on west, not followed), then draw the enable pads' rows east to the cells (y ~15431, ~15648) and check the metal x 10441
    at 4x+ between y 15188 and 15400.
    Channel widths of b not profiled (three gate lengths were: above).
 2. Test the east column above y 14800 and below y 15750 for further copies; overlay the copy
