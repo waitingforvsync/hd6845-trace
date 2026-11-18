@@ -33,3 +33,8 @@ ral_stb      P  8250,5359-5379   ?    the poly from the contact (8204,5371), goi
 ral_stb      M  6400,6316-6340   ?    going on west (follower: end (6012,6068))
 tc2_r5718    P  8250,5708-5728   ?    poly row from the pad (7791,5718), going on east
 tc2_r5718    M  7522-7544,6400   ?    metal from the pad (7530,6324), going on south (follower: end (7353,7465))
+tc1_ns3      M  7894-7909,4450   ?    from tc1 (its contact (7905,4370))
+tc1_ns3      M  7652-7670,6400   ?    metal from the pad (7660,6193), going on south (follower: end (7661,7088))
+tc2_r5589    P  8275,5252-5272   ?    poly from the pad (8248,5262), going on east to a pad (8490,5262), seen
+tc2_r5589    P  6835-6851,6400   ?    poly from the pad (6840,6282), going on south
+r9m_l1w      P  8352,4840-4860   ?    poly from the pad (8290,4850); ends in a box at (8370,4850) at cdp1's west edge, not traced

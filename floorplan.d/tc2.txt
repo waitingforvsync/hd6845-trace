@@ -42,3 +42,14 @@
 7783,5710:7812,6168    route   tc2_r5718 | metal south to the pad (7791,6152)
 7513,6134:7812,6342    route   tc2_r5718 | poly west, south and west to the pad (7530,6324)
 7522,6316:7544,6400    route   tc2_r5718 | metal south
+7894,4445:7909,5640    route   tc1_ns3 | thin metal from the bus field over the row address units (no contact) to its end pad (7899,5633)
+7597,5616:7918,5649    route   tc1_ns3 | poly row y 5632 west from the pad
+7595,5640:7614,6203    route   tc1_ns3 | poly south to the pad (7660,6193)
+7595,6177:7678,6400    route   tc1_ns3 | pad (7660,6193) and its metal going south
+8230,5246:8275,5606    route   tc2_r5589 | pad (8248,5262), metal south to the pad (8246,5589)
+7472,5570:8266,5606    route   tc2_r5589 | poly row y 5589
+7405,5580:7508,6082    route   tc2_r5589 | metal south and west to the pad (7422,6065)
+7368,6048:7440,6300    route   tc2_r5589 | poly west and south to the pad (7384,6282)
+6825,6264:7402,6300    route   tc2_r5589 | metal west along y 6283 to the pad (6840,6282)
+6833,6282:6853,6400    route   tc2_r5589 | poly south
+8170,4668:8352,4867    route   east end of r9m_l1w | the row y 4676 turns south and east to the pad (8246,4716); metal to the pad (8290,4850); poly east to a box at the datapath's west edge

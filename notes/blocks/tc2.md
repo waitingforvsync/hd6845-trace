@@ -3,14 +3,15 @@
 Trace: `trace/tc2.txt`. Ports: `ports.d/tc2.txt`. Views: `cache/scratch/tc2/`.
 Tool: `tools/tc2_runs.py` (dark runs along a straight metal in both metal shots).
 
-## Status (2026-11-18 00:41 +0000, dp111's session, run 3)
+## Status (2026-11-18 01:20 +0000, dp111's session, run 4)
 
 Most of this region was already drawn by other packages (`ras`, `rax`, `fld`, and the
 crossing lines of `bust`, `amr`'s west route, `r9m`, `rde`): see the inventory. This package
 adds what they left. Traced and extracted so far: 17 transistors (one NOR, a nine-transistor
-latch, the loads of `rax`'s five units), 10 new named nets, 8 equations (the NOR and the five
-unit inverters FIRM, the latch's two marked), five lines of other packages carried on, two
+latch, the loads of `rax`'s five units), 11 new named nets, 8 equations (the NOR and the five
+unit inverters FIRM, the latch's two marked), seven lines of other packages carried on, two
 lines of the nest west of the XOR cells, and the VCC rail of the units and the latch.
+Pieces 1 to 10 are through independent review; pieces 11 to 13 (run 4) are not.
 
 **Piece 1**
 
@@ -93,6 +94,26 @@ lines of the nest west of the XOR cells, and the VCC rail of the units and the l
   pad (7791,5718), a metal south to the pad (7791,6152), a poly west, south and west to the pad
   (7530,6324), a metal south past y 6400. Neither end is followed.
 
+**Piece 11** (run 4, wiring only; not through a review round)
+
+- `tc1_ns3` south of `tc1`'s end (7902,4450): its thin metal over `rax`'s five units, with no
+  contact to their output boxes (measured against the line's own end contact), to the pad
+  (7899,5633); a poly row west along y 5632, a poly south along x 7605, the pad (7660,6193),
+  a metal south past y 6400. No transistor in this region.
+
+**Piece 12** (run 4, wiring only; not through a review round)
+
+- `tc2_r5589`: the line of the row y 5589: from the pad (8248,5262) (whose poly goes on east)
+  a metal south, the pad (8246,5589), the row west, the pad (7488,5586), a metal south and
+  west, the pad (7422,6065), a poly, the pad (7384,6282), a metal west along y 6283, the pad
+  (6840,6282), a poly south past y 6400. No gate on it in this region.
+
+**Piece 13** (run 4, wiring only; not through a review round)
+
+- The L at the east end of `r9m_l1w`'s row y 4676: south, east to the pad (8246,4716), a metal
+  to the pad (8290,4850), a poly east that ends in a box at `cdp1`'s west edge (8370,4850),
+  read as a buried contact onto a diffusion there (not traced). It joins no named net.
+
 Not done: see the end.
 
 ## Inventory (survey at 0.68x in the metal and clean shots: `survey_m.png`, `survey_a.png`)
@@ -114,8 +135,10 @@ Not done: see the end.
 | x 8068-8082 | `db_b6`'s thin metal over the loads' output side, no contact | `bust`, `rde` |
 | x 8198-8212, y 4450-5680 | `ral_stb`'s thin metal: a contact (8204,5371) with a poly going east, an end pad (8204,5672) | `tc1` to y 4450; **the rest: piece 9** |
 | y 5663-5683, x 7730-8224; x 7742-7757, y 5666-6072; x 7476-7770, y 6049-6297; y 6316-6340, x 6400-7500 | `ral_stb` on: a poly row, a metal, a poly in three legs, a metal going west | **piece 9** |
-| x 8170-8262, y 4676-4730 | the east end of `r9m_l1w`'s row y 4676: it turns south at x 8190 and east to a pad (8245,4716), whose metal goes east and south to a pad (8292,4850) | not drawn (`r9m`'s comment) |
-| x 8235-8262, y 5250-5600 | a pad (8250,5262) and a thin metal x 8240-8258 south to a pad (8245,5590) on the row y 5578-5600 | not drawn |
+| x 8170-8262, y 4676-4730 | the east end of `r9m_l1w`'s row y 4676: it turns south at x 8186 and east to a pad (8246,4716), whose metal goes east and south to a pad (8290,4850) | **piece 13** |
+| x 8235-8262, y 5250-5600 | a pad (8248,5262) and a thin metal x 8240-8258 south to a pad (8246,5589) on the row y 5578-5598 | **piece 12** (`tc2_r5589`) |
+| x 7894-7909, y 4450-5640; y 5622-5643, x 7597-7918; x 7597-7612, y 5622-6203; x 7643-7678, y 6177-6400 | `tc1_ns3`: thin metal over `rax`'s units to the pad (7899,5633), a poly row west, a poly south, the pad (7660,6193), a metal south | `tc1` to y 4450; **the rest: piece 11** |
+| y 5578-5598, x 7472-8266; x 7480-7500, y 5580-6075; x 7378-7440, y 6048-6300; y 6274-6292, x 6825-7402; x 6835-6851, y 6264-6400 | `tc2_r5589` west of its east pad: the row, a metal south and west, a poly west and south, a metal west, a poly south | **piece 12** |
 | x 7830-8010, y 5770-5990 | comb of poly rows with a pad each (the five lines to `cdp2`'s comparator) | `ras` |
 | x 7760-8250, y 5960-6300 | a latch: two cross-coupled gates (a diffusion stack of five gates x 7977-8073, two columns x 8106-8136, two loads x 8148-8198) and the pads of its lines | **piece 4** |
 | x 7730-7810, y 6040-6170 | two pads, (7750,6065) and (7790,6152), at the south ends of metals from `ras`'s channel pads (7748,5673) and (7790,5718); each has a poly going west and south | (7750,6065) is `ral_stb`'s: **piece 9**; (7791,6152) is `tc2_r5718`'s: **piece 10** |
@@ -715,6 +738,125 @@ not known).
 
 No transistor. Omissions: as piece 9's.
 
+## Piece 11 (wiring only): `tc1_ns3` from (7902,4450) to the region's south edge (run 4, 2026-11-18)
+
+Views: `n3_u3.png` (5.5x, unit 3's box under the metal, four shots), `n3_pad.png` (4.6x, four
+shots), `n3_rowW.png` (4x, clean, chip-2 stripped, chip-2 metal; x 7580-7890), `n3_vert.png`
+(2x, three shots, the vertical leg), `n3_pad2.png` (4.6x, four shots), `n3_south.png` (4x,
+metal and clean, y 6200-6415); overlay `ov_p11.png` (1.9x).
+
+| Net | From | Path | To |
+|---|---|---|---|
+| `tc1_ns3` | `tc1`'s thin metal x 7894-7909 at y 4450 | the metal south over the bus field's rows and `rax`'s five units (no contact); pad (7899,5633); poly row y 5622-5643 west; corner at x 7597-7612; poly south along x 7597-7612 to y 6203; east along y 6183-6203; pad (7660,6193); metal x 7652-7670 south | the region's edge (7661,6400), going on south (follower: end (7661,7088), not looked at) |
+
+Joins between named nets: none (`tc1_ns3` only carried on). No transistor: the poly crosses no
+diffusion (pink field on both sides wherever it is under metal; in the open stretch y 5950-6100
+the two outlined khaki areas beside it are field: `px.py pt` at nine points in them, red minus
+green -4..+5 in the chip-2 stripped shot at seven, +19 and +32 at two that lie on pinkish curls
+which only that shot has; `opendiff.py 7400 5940 7800 6110`: none). Which end drives is not known: `tc1`'s notes bring ns3 in from the east over the
+top of the datapath.
+
+**No contact to `rax`'s output boxes** (`rax`'s AMB-011, point 2; this package's former Not
+done). The metal passes over the box of each unit (x 7888-7916; y 5292-5314 in unit 3).
+
+| | At each box (all five: `textmap.py 7876 5270 7926 5330 3 --acid`, and `7879 Y0 7923 Y1` at dy -498, -369, -130, +130) | At the line's own end contact (7899,5633) (`textmap.py 7874 5605 7926 5660 3 --acid`) |
+|---|---|---|
+| clean shot | diffusion-tan (0-3) over the whole box, no hole; a green band 9 px tall and 18 px wide directly BELOW the box (y 5315-5324 in unit 3; 79-124/115-138/88-97, `px.py col 7901 5300 5332 2`) | a hole 12 x 12 px inside the poly pad (6-9 around it) |
+| chip-2 metal | bright (B-E) only over the metal's west half, x 7894-7900, y 5297-5309; the east half dark; below it a dark stretch of 16 px (R 38-86) which is not bare ground (bare ground in the gap beside it: R 143-163) | bright centre (B-E) 12 px across inside a dark ring 40 px across |
+| chip-1 metal | the same (unit 1 is dirty in chip 2, plain in chip 1) | the same |
+
+So each spot is the box's edge lengthwise under a thin metal (tracing guide, trap 22), and the
+green band is at the box's lower outline, where a contact's hole would be in the middle of
+the box. The clean-shot scan down the metal (green over red, x 7897-7905, y 4450-5650) finds
+those five bands, a 5 px speck at y 4788-4792 (unit 0's poly edge) and the end contact, nothing
+else. Five contacts would short `rax_o0`..`rax_o4`.
+
+### Self-check: ends
+
+| End or crossing | Seen | Result |
+|---|---|---|
+| meeting `tc1`'s metal at y 4450 | `textmap.py 7880 4435 7925 4470 3` (both metal shots, clean) | one metal: bright (B-E) x 7895-7907 above and below; 6 px dark at y 4447-4450, the upper edge of the bus field's first poly row (y 4453-4462 in the clean shot) |
+| the metal y 4450-5636 | `follow.py 7901 4460 S` (end (7899,5636)), `tc2_runs.py col 7901 4450 5630 2`, the clean-shot scan | one metal; the runs over 25 px are the five boxes (above) and y 4728-4756 in chip 2 only (chip 1: two edges of 9 and 18 px: `ras_o0`'s poly and the ground box). **Between the boxes read by profile only** |
+| the rows it crosses: bus field y 4460-4700, `ras_o0`..`ras_o4` (gates of `rax`'s pull-downs, under it), `tc2_sr_r`'s poly y 5520, the row y 5589 | the scan; `r89_E.png` (3.3x) for y 5589 | no hole on any |
+| pad (7899,5633) | `n3_pad.png`, the text map above | contact (ring, bright centre, green hole). The metal ends on it (bare ground south). Field east of the pad (khaki, then the ground rail's edge); the poly leaves west only |
+| row y 5622-5643, x 7612-7882 | `n3_rowW.png`; scan along y 5628-5636, x 7600-7890: no green over red; `textmap.py 7795 5612 7830 5652 3 --acid` | one poly, salmon under the metals, dark red in the bare stretch x 7850-7880 (orange in both metal shots there). `rax_o4`'s metal lies on it lengthwise from x 7705 to 7792 (trap 13): no hole, no pad. The dark rings on the row at x 7645, 7687, 7812 are where the gaps between the vertical metals cross it (clean shot only; the row is whole poly through the ring at x 7812 in the text map) |
+| corner (7605,5632) | `n3_rowW.png` (4x) | plain L; pink field west and north of it |
+| vertical x 7597-7612, y 5643-6183 | `n3_vert.png` (2x, three shots), scan down x 7601-7609: no green over red; `textmap.py 7585 5895 7625 5930 3 --acid` | one poly: salmon in the 25 px gap between `rax_o1`'s and `rax_o2`'s metals and under the horizontal metals y 5894, 5937 and the wide one y 6105-6150; dark red with a green rim in the open (y 5950-6100), orange in the chip-2 stripped shot. The ring at (7603,5912) is the gap between the metals y 5894 and y 5937 (poly whole through it). **Read at 2x and by profile** |
+| foot and pad (7660,6193) | `n3_pad2.png` | the vertical ends in a foot x 7593-7612, y 6183-6203; the poly runs east into the pad; contact (ring, bright centre, green hole 15 px). Pink field west and south of the foot. A small ring on the poly at (7634,6192) in the clean shot only (the 28 px gap between the wide metal's end and the pad's metal): poly-orange and no ring in both metal shots |
+| the pad's metal against the wide metal y 6195-6245 | `n3_pad2.png` | separate: the wide metal ends at x 7622; bare ground x 7622-7650 in both metal shots; the pad's metal x 7652-7670 |
+| metal x 7652-7670, y 6205-6400 | `n3_south.png` (4x), `follow.py 7661 6230 S` | one metal on past y 6400; the three rows under it (`ral_stb`'s y 6282, `tc2_r5718`'s y 6324, `tc2_sr_c`'s y 6367) are uniform salmon under it: no pad, no hole. The rings on those rows at x 7637 and x 7687 stand in the gaps either side of it |
+
+Omissions: a dark dot on the wide metal y 6195-6245 at (7607,6230), in both metal shots (round
+in chip 2, a small triangle in chip 1): the clean shot under it is plain pink field
+(159/129/110), so no contact; what it is was not settled. The two green-rimmed dark ovals at
+(7862,5610) and (7862,5655) in the clean shot: field between the rows (plain ground in both
+metal shots).
+
+## Piece 12 (wiring only): `tc2_r5589`, the line of the row y 5589 (run 4, 2026-11-18)
+
+Views: `r89_E.png` (3.3x, four shots, x 7880-8270), `r89_pads.png` (3.9x tiles, three shots:
+(8246,5589), (8248,5262), (8490,5262)), `r89_W.png` (4x, three shots), `r89_m7490.png` (2.4x),
+`r89_sw.png`, `r89_p6283.png`, `r89_wend.png` (4.3x, four shots), `r89_s2.png` (3x, three
+shots); overlay `ov_p12.png` (2.1x tiles at the six pads).
+
+| Net | From | Path | To |
+|---|---|---|---|
+| `tc2_r5589` | the pad (8248,5262), whose poly leaves east along y 5252-5272 (drawn to x 8275) | metal x 8240-8258 south; pad (8246,5589); poly row y 5578-5598 west; pad (7488,5586); metal x 7480-7500 south, corner at y 6055-6075, west; pad (7422,6065); poly west to x 7387, south along x 7378-7396; pad (7384,6282); metal west along y 6274-6292; pad (6840,6282); poly south x 6835-6851 | the region's edge (6843,6400), going on south (still there at y 6440) |
+
+East of the region the poly from the pad (8248,5262) runs to a pad with a contact at
+(8490,5262), whose metal goes south (follower: end (8491,5714)): seen (`r89_pads.png`), not
+drawn. Joins between named nets: none (one new name). No transistor: the row and the two
+vertical polys have field on both sides (pink under the metals). Which end drives is not known.
+
+### Self-check: ends
+
+| End or crossing | Seen | Result |
+|---|---|---|
+| pad (8248,5262) | `r89_pads.png` second tile | ring, bright centre in both metal shots, green hole; the metal leaves south only; the poly leaves east only (orange in the bare ground of both metal shots); field west |
+| the poly at x 8275 | `r89_pads.png` second and third tiles | goes on east to the pad (8490,5262), passing under a metal at x 8440-8452 |
+| metal x 8240-8258, y 5272-5580 | `follow.py 8249 5400 N` and `S`, scan down x 8245-8253: only the two end contacts; run 3's `e_east2.png` (2.4x) | one metal; `ral_stb`'s poly y 5369 passes under it without a pad. **Read below 4x between the pads** |
+| pad (8246,5589) | `r89_pads.png` first tile, `r89_E.png` | ring, bright centre, green hole; the metal ends on it (bare ground south); khaki field east of the pad; the poly leaves west only |
+| row y 5578-5598, x 7505-8230 | `r89_E.png` (3.3x), `n3_rowW.png` (4x), `r89_W.png` (4x); scan along y 5584-5592, x 7460-8270 | one poly. Only the east pad's hole in the scan (and the green gap strip west of the west pad). `rax_o3`'s metal lies on it from x 7662 to 7750 (trap 13): no hole. Rings in the clean shot only, at the gaps between the vertical metals (x 7600, 7643, 7773, 7812, 7860, 7880, 7925, 8052, 8100, 8180): not in either metal shot or the chip-2 stripped shot. Dark specks on the ground rail's edge at (7966,5577) and (8160,5578) in chip 2's metal shot only. **x 7880-8230 read at 3.3x** |
+| pad (7488,5586) | `r89_W.png`, `textmap.py 7456 5538 7520 5612 3 --acid`, `follow.py 7490 5700 N` (end (7488,5582)) | contact by both metal shots (bright centre B-E 12 px across at (7486,5587) in a ring 40 px across). **The clean shot shows no hole**: the pad is under a red-orange blob there (residue on chip 1); the chip-2 stripped shot has the pad with a lighter centre. Field west of the pad. `ras_o4`'s metal corner (x 7452-7495, y 5538-5553) passes north of it: 6-9 px of bare ground (8-9 chip 2, 7 chip 1) between that metal's edge (y 5556-5559) and the ring (from y 5571), open colours in the clean shot at y 5562-5571: separate (trap 16) |
+| metal x 7480-7500, y 5600-6055 | `r89_m7490.png` (2.4x, clean and both metal shots), `tc2_runs.py col 7490 5600 6060 3`, scan | one metal over pink field only; chip 1 alone is dirty at y 5813-5838. **Read at 2.4x** |
+| corner (7490,6065) and pad (7422,6065) | `r89_sw.png` | plain corner; contact (ring, bright centre, green hole); the metal ends on the pad; the poly leaves west |
+| poly x 7378-7396, y 6075-6265 | `r89_s2.png` (3x), scan down x 7383-7391 | corner at (7387,6065); salmon under the two wide metals, no pad, pink field both sides; `ras`'s poly x 7337 and its pad (7337,6065) are 30 px west (field between). **Read at 3x** |
+| pad (7384,6282) | `r89_p6283.png` | contact (ring, bright centre, green hole); the poly ends in it (pink field south); the metal leaves west only (chip 1's metal shot is dirty just north of the pad) |
+| metal y 6274-6292, x 6850-7370 | `follow.py 7310 6284 W` (end (6834,6280)) and `E` (end (7384,6282)), `tc2_runs.py row 6284 6400 7370 3`, scan along y 6279-6287 | one metal; runs of 8-17 px at the polys underneath; no hole. **Read by profile** |
+| pad (6840,6282) | `r89_wend.png` | contact (ring, bright centre in both metal shots; the hole in the clean shot is a dark mark with green); the metal ends on it (bare ground west); the poly leaves south only; `fld`'s vertical poly x 6873-6891 is 20 px east (field between) |
+| poly x 6835-6851, y 6300-6400 | `r89_wend.png`, `px.py row 6340 6815 6870 3`, `row 6398`, `row 6440` | salmon under `ral_stb`'s and `tc2_sr_c`'s metals (no hole: scan), still there at y 6440 |
+
+Omissions: the pad (7337,6065) and the poly x 7328-7346 are `ras`'s (drawn there).
+
+## Piece 13 (wiring only): the L at the east end of `r9m_l1w` (run 4, 2026-11-18)
+
+Views: `l_a.png` (4.5x, clean and chip-2 stripped), `l_m.png` (4.5x, both metal shots),
+`l_p4850.png` (4.3x, four shots), `l_join_a.png`, `l_join_m.png` (4.4x), `l_box.png` (4.3x,
+four shots); overlay `ov_p13.png` (2.8x).
+
+| Net | From | Path | To |
+|---|---|---|---|
+| `r9m_l1w` | the end of `r9m`'s row y 4676 at x 8192 | poly south x 8179-8192, y 4668-4728, in the gap between the VCC rail and `ral_stb`'s metal; east along y 4707-4727 under `ral_stb`'s metal; pad (8246,4716); metal east, south along x 8279-8299; pad (8290,4850); poly east along y 4840-4860 | (8352,4850), 100 px east of the region. The poly ends 5 px further on in a heavy-outlined box x 8355-8385, y 4835-4865, read as a buried contact onto a diffusion that goes on east under the metals from x 8395 (`l_box.png`: one view, four shots): `cdp1`'s west edge, drawn by nobody, **not traced** |
+
+Joins between named nets: none (`r9m_l1w` only carried on; the extraction's net count does
+not change with this piece). So `r9m_l1w` does not become a line of `cdp1`'s channel: it ends
+on a diffusion at the datapath's west edge (a source or drain there, or a gate's input by a
+buried contact: not known). The C-shaped poly beside the metal (from the east along
+y 4712-4728 to x 8330, south, east again along y 4795-4815) is the west end of `cdp1`'s line
+y 4719, 30 px east of this metal with bare ground between: not joined, not drawn here.
+
+| End or crossing | Seen | Result |
+|---|---|---|
+| the row's corner (8186,4676) | `l_a.png`, `l_m.png`; `px.py col 8187 4634 4740 4` (four shots), `row 4700 8160 8215 3` | poly-coloured without a break from y 4670 to 4726 (chip 1's metal shot 111-159/60-100; clean red over green by 30-70); a dark edge at y 4730 and field below; field (green over red, khaki in chip 1) at y 4650-4658 between the row and the row y 4635 above. The leg is x 8179-8192 between the rail's edge line and `ral_stb`'s |
+| under `ral_stb`'s metal (8205,4716) | `l_a.png`, `l_m.png`, run 3's `textmap.py 8180 4694 8226 4736` | uniform salmon, the metal whole between two edge bars: no pad |
+| pad (8246,4716) | `l_a.png`, `l_m.png` | ring, bright centre in both metal shots, green hole. Field east of the pad under the metal's arm (pink); the poly arrives from the west only; the metal leaves east only |
+| the metal's corner (8289,4716) and leg | `l_m.png`, `l_join_m.png`, `follow.py 8286 4760 N` (corners (8293,4723), (8285,4724)) and `S` (end (8288,4856)) | plain corner; one metal x 8279-8299 over pink field; it does not go on north or east of the corner (bare ground; `bust`'s row y 4676 is 25 px north) |
+| pad (8290,4850) | `l_p4850.png` | ring, bright centre, green hole; the metal ends on it (bare ground south, to y 4900); bare ground west; the poly leaves east only |
+| the poly's east end | `l_join_a.png`, `l_join_m.png`, `l_box.png` | orange in the bare ground of both metal shots to x 8352, then the box. **The box and what lies east of it: one view; not traced** |
+
+No transistor in the region. Omissions: none inside the piece (the ring at (8183,4655) in the
+clean shot is on the row y 4635, in the same gap: `bust`'s row).
+
 ## Ports
 
 | Name | Layer | Where | Direction | What |
@@ -749,6 +891,12 @@ No transistor. Omissions: as piece 9's.
 | `ral_stb` | M | x 6400, y 6316-6340 | ? | going on west (follower: end (6012,6068)) |
 | `tc2_r5718` | P | x 8250, y 5708-5728 | ? | the row going on east |
 | `tc2_r5718` | M | x 7522-7544, y 6400 | ? | going on south (follower: end (7353,7465)) |
+| `tc1_ns3` | M | x 7894-7909, y 4450 | ? | from `tc1` (its contact (7905,4370)) |
+| `tc1_ns3` | M | x 7652-7670, y 6400 | ? | going on south (follower: end (7661,7088)) |
+| `tc2_r5589` | P | x 8275, y 5252-5272 | ? | the poly from the pad (8248,5262), going on east to a pad (8490,5262) (25 px east of the region) |
+| `tc2_r5589` | P | x 6835-6851, y 6400 | ? | the poly from the pad (6840,6282), going on south |
+| `r9m_l1w` | P | x 8170-8192, y 4670-4682 | in (believed) | not a port: where this package's drawing meets `r9m`'s row (inside the region) |
+| `r9m_l1w` | P | x 8352, y 4840-4860 | ? | the poly from the pad (8290,4850), 100 px east of the region: it ends in a box at (8370,4850) at `cdp1`'s west edge |
 | `vss` | M | x 6860-6907, y 4380 | - | meets `tc1`'s rail (70 px north of the edge) |
 | `vss` | M | x 6882-6926, y 4990 | - | meets `fld`'s rail (inside the region) |
 | `vss` | M | x 7990-8040, y 5625-5650 | - | meets `rax`'s rail step |
@@ -792,24 +940,14 @@ None in pieces 1 to 3.
   (`bust`'s Not done): the latch's reset line is not identified until that end is followed.
 - `ral_stb` west of x 6400 (metal y 6328) and east of x 8250 (poly y 5369).
 - `tc2_r5718` east of x 8250 (poly row y 5718) and south of y 6400 (metal x 7533).
-- `tc1_ns3`'s thin metal x 7894-7909 from y 4450 through `rax`'s units to the pad (7899,5634);
-  its poly row y 5625-5645 west to x 7607, south along x 7598-7615 to y 6195, east to a pad
-  (7655,6193), whose metal goes south past y 6400 (`e_rows56w.png`, `e_sw_a.png`, `e_sw_m.png`).
-  A scan of the clean shot down that metal finds green spots at each of `rax`'s output boxes
-  (y 4809-4826, 4948-4956, 5186-5195, 5314-5324, 5447-5455; `rax`'s AMB-011, point 2).
-  Nothing drawn.
-- The row y 5578-5598 from the pad (7486,5586) (a metal south from it along x 7480-7500 to a
-  corner at y 6075 and west to a pad (7420,6065)) east to the pad (8246,5589); the thin metal
-  x 8240-8258 from there north to the pad (8248,5262), whose poly goes east to a pad
-  (8490,5262). Seen (`e_rows56.png`, `e_rows56w.png`, `e_pads_e.png`, `e_east2.png`), nothing drawn.
+- `tc1_ns3` south of y 6400 (metal x 7661; follower: end (7661,7088)).
+- `tc2_r5589` east of x 8275 (poly y 5262 to the pad (8490,5262), whose metal goes south to
+  (8491,5714)) and south of y 6400 (poly x 6843).
+- `r9m_l1w` east of (8352,4850): the box x 8355-8385, y 4835-4865 in which its poly ends, and
+  the diffusion east of it (`cdp1`'s west edge, x 8395 on: drawn by nobody; `l_box.png`).
 - Dark dots on the ground rail at about (8012,5765), (8015,5830), (8013,5880), where
   `ras`'s comb rows pass under it: not looked at.
 - `tc2_m6490` and `tc2_m6447` west of x 6400 and south of y 6400.
-- East of `rax`'s units: the L at the east end of `r9m_l1w`'s row (from (8192,4676) south
-  along x 8176-8196 and east along y 4707-4725 to the pad (8245,4716), contact; its metal
-  goes east to x 8293 and south to a pad (8292,4850), follower). Seen at 2.4-5.8x
-  (`e_l1w.png`, `e_p4716.png`), nothing drawn. No diffusion stands east of the units besides
-  the loads (`e_eastA.png`, `e_eastB.png`).
 - The wide metals y 6100-6400 west of x 7770 (`e_sw_m.png`, 2.4x, x 7300-7830): a band
   y 6105-6150 that turns south at x 7690-7770 (to y 6340, where it turns west along y 6305-6340
   as far as x 7640) and a band y 6195-6245 that turns south at x 7570-7620; dark dots on the
@@ -824,7 +962,7 @@ None in pieces 1 to 3.
   poly and the one of the next pad west, (6360,6150), look darker and speckled where
   `tc2_m6447`'s is plain salmon: whether either has a contact to that metal was not settled
   (one view at 3x). Nothing drawn.
-- The independent review of pieces 7, 8, 9 and 10 (the Review section below covers pieces 1 to 6).
+- The independent review of pieces 11, 12 and 13 (the Review section below covers pieces 1 to 10).
 
 ## Review
 
