@@ -827,6 +827,25 @@ pad; `sameconn` showing only the merge) and one error in what they joined:
 
 Round 2: one finding that changes a connection, fixed.
 
+Round 3 (fix check, 2026-11-18 03:20 +0000, a fresh agent on claude-fable-5-2, against commit 41669bf, at
+commit 733f03e; images in `cache/scratch/tl2/review-7/`). Told the one finding of round 2 and its
+fixes in `trace/tla.txt` and `trace/tl2.txt`, and asked: is the break in the row real and are
+the poly ends where drawn; does each gate piece cross its column, is there field between the
+columns under and beside the gate, is the diffusion joined above and below; does the west band
+join anything but the vertical poly; does the east row still reach its gate. Checked at 6-8x in
+all four shots with profiles: the break is real in both chips (row y 4241: poly to x ~3001,
+field x 3004-3016, poly from x ~3019; down x 3015 the clean shot green without interruption
+y 4228-4261; both metal shots dim 87/79/43 in the gap where the rows y 4114, 4162, 4416 are
+orange 170/125/55); the columns' edges are dark lines at x 2950/2990 and x 3028/3066, the island
+field from y ~4220 to ~4267 with both poly ends inside it, diffusion across the gap above
+(y <= 4216) and below (y 4274-4288); the west band joins only the vertical poly, no contact to
+R3 and no other poly; the east row continuous from x 3020 to x 3400. `sameconn` against 41669bf
+(26 and 32 differences): all intended; `rcs_u3288` is `tla`'s own NOR(`rcs_g3245`,
+`rcs_bd3330`) again. No finding. Remarked, older than this change and geometry only: the west
+edge of `tla`'s strip below the gate is at about x 2966 at y 4276, drawn 2950 (left; handoff).
+
+Round 3: no findings.
+
 ## Not done
 
 - **What is left in the gate column** (run 3 traced y 3690-3840 and y 4230-4530): the poly of
