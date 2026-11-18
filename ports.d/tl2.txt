@@ -45,4 +45,3 @@ tl3_w4763   M  3533,5426-5444   ?    track H's arm east along y 5435 (follow.py:
 tl1_w4937   P  3533,5449-5467   in   row y 5458, straight through
 tl3_w4546   P  3538,5482-5514   ?    the pad (3518,5498) at the end of track F's arm; its poly goes on east
 # Ends of drawn wires inside the strip (where the drawing stopped: the gate column, not traced)
-rcs_bd3330  P  3072,4365-4383   ?    row y 4374 west from track D's pad (3237,4376); on west into the gate column

@@ -7,3 +7,4 @@
 2845,2631:3250,3214   route   tl1_w2637 to tl3's latch | metal east along y 2640, south at x 3241, then the row y 3202 east and south into the data row of tl3's latch
 2817,5362:3533,5467   route   rows under the foot: rcs_x1 (y 5371) and tl1_w4937 (y 5458) | from tl1's column east through the strip; y 5371 has the bottom contact of the bus metal x 3456
 2900,3690:3175,3890   logic   two more pull-downs of rcs_bc3460 | gates tl2_w3722 (row y 3722) and clk_tl (row y 3808) on the column east of R3; the node's strip runs west under R3 and south under thin metal E into tla's unit: rcs_bc3460 = NOR(rcs_e3, rcs_e4, tl2_w3722, clk_tl)
+2785,4270:3175,4530   logic   driver of rcs_bd3330 | AND-OR-INVERT: rcs_bd3330 = NOT(rcs_n4200 OR (clk_tl AND rcs_cond_lat)); load between R2 and thin metal E, pull-downs under thin E, R3 and the thin metal of rcs_cond_lat, output by a buried contact onto the row y 4374

@@ -119,7 +119,8 @@ N P 3400,3202 tl1_w2637
 @alias tl1_w2637 tl3_w3333
 
 # ---- track D, middle piece (tla's rcs_bd3330, y 3314-4390): its bottom contact (3237,4376) and
-# the poly row west from the pad along y 4374
+# the poly row west from the pad along y 4374 (to the buried contact on the output node of run 3's
+# piece 2, at the end of this file: this net's driver)
 P 3217,4359:3259,4393
 C 3237,4376
 P 3072,4365:3230,4383
@@ -312,3 +313,64 @@ C 3150,3812
 # node arm west under R3 and the strip south into tla's box
 D 2915,3757:3030,3777
 D 2915,3757:2935,3890
+
+# ---- run 3, piece 2: a second AND-OR-INVERT unit at y 4270-4530, below tla's (rcs_n4200):
+#   rcs_bd3330 = NOT( rcs_n4200  OR  (clk_tl AND rcs_cond_lat) )
+# Its node (called X in the notes) is one diffusion: a column under thin metal E, a narrow wire
+# under R3, a strip down R3's east edge, a band across the gap to a column under the thin metal
+# x 3025-3059, and there a buried contact to the row y 4374 (rcs_bd3330, track D's bottom pad).
+# load: strip y 4307-4330 from tl1's VCC box (2785-2842 x 4255-4338, contact (2805,4308)) east
+# under the plate (x 2846-2894, under tla's strap x 2846-2884: no contact of the strap on it,
+# textmap 2838 4262 2895 4410) to the node box under thin E
+D 2836,4307:2905,4330
+P 2846,4275:2894,4349
+D 2898,4307:2936,4338
+# the plate's tie: an arm east from the plate's top (y 4275-4292) to a heavy-outlined box in the
+# gap between thin E and R3 (x 2928-2950, y 4296-4330), above the node's diffusion there.
+# Uncertain, as every load tie of this cluster is drawn
+P 2890,4275:2932,4292
+?P 2928,4275:2948,4330
+?D 2929,4302:2947,4342
+?B 2926,4298:2950,4332
+# the node's column under thin E and in the gap, down through the gate of rcs_n4200 to the
+# stub below it; from the stub a strip goes on south under thin E and turns east along
+# y 4492-4510 into the VSS box under R3: the source of that pull-down
+D 2903,4334:2950,4366
+D 2903,4334:2947,4418
+D 2905,4410:2924,4510
+D 2905,4492:2962,4510
+# gate: rcs_n4200's poly, from the pad at the south end of tla's strap (contact (2866,4394))
+# east along y 4370-4390, under thin E (channel-bright there) and through the gap; ends at
+# R3's west edge (x 2950-2953)
+P 2850,4368:2892,4408
+C 2866,4394
+P 2885,4370:2952,4390
+# the node's wire under R3 (y 4344-4356, 13 px), the strip down R3's east side, and the column
+# under the thin metal; the band y 4390-4403 joins the two across the 24 px gap between R3 and
+# the thin metal (a dark bar in both stripped shots; tan at the same y on both sides, and both
+# metal shots show the band's top edge crossing the gap at y 4386-4389: px.py col 3014)
+D 2945,4344:2994,4356
+D 2990,4344:3010,4460
+D 3028,4362:3054,4448
+D 3028,4362:3070,4402
+D 3006,4390:3032,4403
+# output: buried contact (box x 3048-3072, y 4362-4390, under the thin metal's east edge) to the
+# west end of the row y 4374 = rcs_bd3330
+B 3048,4362:3072,4390
+P 3050,4365:3078,4383
+# gate row y 4407-4424 from track B's pad (3150,4418) (clk_tl; contact on tla's metal), under
+# track A (no contact: textmap 3090 4396 3132 4436) and the thin metal, to x 2977 under R3: it
+# crosses both columns (two channels, x 2990-3010 and x 3028-3054; what is under it in the gap
+# between them cannot be read)
+P 2977,4407:3140,4424
+P 3130,4401:3172,4435
+C 3150,4418
+# below that gate the two columns join again (this gap link is uncertain: no edge of its own
+# can be told from the gates' edges in the gap), widen west to
+# x 2957 under R3 and run under the second gate, the west arm of rcs_cond_lat's pad
+# (tla: P 3024,4455:3066,4522), into a VSS box with its own contact to R3
+?D 3006,4436:3032,4450
+D 2957,4445:3009,4530
+N D 2983,4452 tl2_w4452
+P 2932,4462:3030,4481
+C 2990,4513 s=26x26
