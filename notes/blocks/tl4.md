@@ -7,7 +7,9 @@ RA (x 4728-4775), loads between RA and a second rail RB (x 4905-4950).
 
 ## Status
 
-2026-11-17 17:35 -0600. **Partial: three units.** The gate column repeats the first cluster's west column
+2026-11-17 18:15 -0600. **Partial: four units** (the fourth, a three-input NOR at y 4410-4645,
+`tl4_w4545` = NOR(`tla_w3417`, `tl4_w4501`, `tl4_w4590`), traced in the third run: 4 transistors, 20 in all).
+Before that: **three units.** The gate column repeats the first cluster's west column
 (`tl1`'s units on R1/R2) 2125 px east and 434 px north (the top unit 520 px north). Traced:
 the NOR at the top (y 3012-3222), the inverter above the latch (y 3781-3911) and the latch
 (y 3906-4390): 16 transistors, each unit with the rows that feed it, read here. Full
@@ -19,6 +21,7 @@ tl4_w3808 = NOT tl4_w3850                                         marked: the lo
 tl4_w3928 = NOT tl4_w4025                                         firm
 tl4_w4113 = NOT( tl4_w4025 AND tl4_w4068  OR  tl4_w4243 )         marked: the two load ties
 tl4_w4243 = NOT( tl4_w4198  OR  tl4_w4068 AND tl4_w3928  OR  tl4_w4113 )   marked: the two load ties
+tl4_w4545 = NOR( tla_w3417, tl4_w4501, tl4_w4590 )                marked: the load's tie
 ```
 
 A latch: open while `tl4_w4068` is high, it takes `tl4_w4025`; `tl4_w4198` high forces
@@ -37,7 +40,9 @@ What the signals are is not known: their tracks are not followed yet.
 | x 4690-4967, y 3220-3780 | units not matched by `tl1`'s first latch (findcell under 0.5). Not drawn |
 | x 4400-4967, y 3781-3911 | **the inverter** (`tl1`'s inverter at 2125,-434, findcell 0.74) |
 | x 4665-4967, y 3906-4390 | **the latch: this piece** |
-| x 4690-4967, y 4390-5400 | further units (findcell: the NOR at 2125,912 score 0.56; the inverter at 2126,955 score 0.75; the wide NOR at 2126,174 score 0.53). Not drawn |
+| x 4250-4967, y 4410-4645 | **the three-input NOR** (hand-traced; no cell matches) |
+| x 4640-4967, y 4645-4920 | two or three units of a denser build on the same column (rows y 4705-4900, buried-contact boxes at (4685,4675) and (4688,4850), a thin metal x 4860-4885). Surveyed, not drawn |
+| x 4690-4967, y 4920-5400 | further units (findcell: the NOR at 2125,912 score 0.56; the inverter at 2126,955 score 0.75; the wide NOR at 2126,174 score 0.53). Not drawn |
 | y 2500-2960 | rows and tracks north of the cluster (`r9m`'s lines along y 2560-2640) |
 | y 5400-6350 | rows under the foot; the `c4l0`..`c4l3` rows y 6140-6270 |
 
@@ -102,10 +107,53 @@ boxes and VCC boxes sit on the features. Read here:
   load's tie is `tl1`'s `?` item.
 - The rows pass under the metals x 4537, 4580 and 4625 at constant width without pads.
 
+### The three-input NOR at y 4410-4645 (traced 2026-11-17, third run)
+
+Not a copy of anything in the first cluster (`findcell`: `tla`'s unit at 2124,-651 scores 0.61;
+the first cluster has `tla`'s wide NOR at the matching place, `c1.png`). Read by hand on
+`u2.png` (clean), `u3.png` (chip-2 stripped), `u4.png` (chip-2 metal), `u5.png` (chip-1
+stripped), all 3.9x of 4648-4968 x 4395-4645; the tie on `tie1.png`, `tie2.png` (9x, four
+shots); the rows on `r1.png` (2.7x of 4250-4700 x 4400-4650, stripped and metal); overlays
+`oa1.png`, `oa2.png` (3.3x).
+
+- **The stack is a column of diffusion in the open west of RA** (x 4677-4716, y 4420-4628),
+  crossed by three poly rows from the bus field (orange in the stripped shot, each ending at
+  x 4722): y 4452-4470, y 4492-4512, y 4578-4598.
+- **The output node is a ring of diffusion**: the column's top (above gate 1), a strip east
+  under RA (y 4420-4440), a leg south in the open (x 4808-4830), and a band back west under RA
+  (y 4537-4558) onto the column between gates 2 and 3. In the metal shot the ring is the space
+  between two nested outlines (outer 4675-4832 x 4418-4540, inner 4715-4805 x 4440-4535).
+- **VSS**: inside the ring, under RA, a box (4735-4790, 4470-4518) with a contact (4757,4495)
+  (ring with a bright centre in the metal shot, specks in the clean shot), joined to the
+  column between gates 1 and 2 by a neck (y 4474-4488: two edge lines running from the column
+  into the box's west side in the clean shot). Below gate 3 the column's foot (y 4603-4628)
+  runs east onto a second VSS box under RA (4728-4777, 4605-4645, contact (4745,4627)).
+  So each of the three gates lies between the node and VSS: a NOR.
+- **The node's wire**: a buried contact on the column's middle (heavy box 4675-4702 x
+  4530-4562, concentric rings in the clean shot), poly west along y 4537-4558 to a pad with a
+  contact (4620,4545), and the metal x 4626 south from the pad (`follow.py 4625 4620 S`: ends
+  (4623,4900); `N`: ends (4623,4544)). Its south end is not read yet.
+- **Load**: plate x 4845-4900, y 4520-4610 over a strip y 4543-4566 from the leg's foot to a
+  VCC box under RB (4908-4962, 4480-4608; one long ring x 4915-4940, y 4495-4590). The plate's
+  tail runs west along y 4590-4612 onto a heavy box (4812-4838, 4588-4615) at the end of a tail
+  of the node (x 4814-4836): the tie, drawn `?` as in the other loads.
+- **Inputs**:
+  - gate 1 is `tla_w3417`: `tla`'s row y 4452-4470 from its pad (4410,4460), which `tla` drew
+    to x 4520, runs on east without a break to the column (`r1.png`). **Input identified**: the
+    selector's output (`notes/blocks/tla.md`) now has a destination; `tla`'s equation is unchanged.
+  - gate 2, `tl4_w4501`: a row y 4492-4512 from the west, across the whole bus field under every
+    track without a pad, and out of the strip at x 4250 (`r1.png`).
+  - gate 3, `tl4_w4590`: a row y 4578-4598 from a pad with a contact (4364,4590) on the track
+    x 4362. `follow.py 4362 4500 N/S`: one metal from y 2810 to y 5682, with contact candidates
+    (4364,3014), (4362,4607), (4367,4779), (4366,5125). Only a stub of it is drawn.
+- **RA is wider from y 4392 south**: x 4732-4786 (`px.py row 4405 4715 4800 3 metal,metal1`),
+  against x 4734-4776 at y 4300.
+
 ## Ports
 
-None yet: no wire is drawn to the strip's edge (`ports.d/tl4.txt` is empty). The tracks leave
-the pieces inside the strip; each is drawn only inside the views named above:
+One wire is drawn to the strip's edge: `tl4_w4501`, poly, west at (4250, 4492-4512), an input
+(gate 2 of the three-input NOR). The tracks leave the pieces inside the strip; each is drawn
+only inside the views named above:
 
 | Name | Track | Followed (`tools/follow.py`, not looked at) |
 |---|---|---|
@@ -118,6 +166,8 @@ the pieces inside the strip; each is drawn only inside the views named above:
 | `tl4_w4068` | metal x 4625 | north of the pad (4625,4068) to a corner (4630,2988), east to (4694,2989); candidate (4626,4054) is the pad |
 | `tl4_w4198` | metal x 4537 | y 2938 to y 4814; candidates (4538,3782), (4535,3447), (4540,4215) |
 | `tl4_w4243` | metal x 4494 | from the pad (4490,4243) south to (4507,5336) |
+| `tl4_w4590` | metal x 4362 | y 2810 to y 5682 through the pad (4364,4590); candidates (4364,3014), (4367,4779), (4366,5125) |
+| `tl4_w4545` | metal x 4626 | from the pad (4620,4545) south to (4623,4900): drawn whole, its south end not read |
 
 ## Ambiguities
 
@@ -202,9 +252,13 @@ Round 2: no findings that change a connection.
 
 - The nine tracks beyond the views (table under Ports), and their other pads.
 - RA and RB between the drawn pieces (y 3232-3770) and south of y 4392, and where they are fed.
-- The rest of the gate column: y 3220-3780 (no findcell match), y 4390-5400 (findcell: `tl1`'s
+- The rest of the gate column: y 3220-3780 (no findcell match), y 4645-5400 (findcell: `tl1`'s
   inverter at 2126,955, score 0.75; weaker hits for the NOR at 2125,912 and the wide NOR at
-  2126,174).
+  2126,174). The units at y 4645-4920 are surveyed (`b_metal.png`, `b_acid.png`,
+  `b_acid1b.png`; `cache/scratch/tl4/survey.md`): the column x 4677-4716 goes on south from a
+  buried-contact box (4662-4700, 4660-4690) with rows crossing at y 4705-4725, 4750-4770,
+  4795-4815, 4880-4900; the metal x 4626 from the three-input NOR ends among them.
+- The west end of `tl4_w4501`'s row (in `tl3`'s strip) and the other pads of the track x 4362.
 - A VCC box under RB at (4905-4960, 3893-3955) with a contact about (4928,3922) and a strip
   east under a plate at about x 4962-5015, y 3890-3925: a load of the logic east of RB (`tl5`).
 - The bus field, the rows north of y 2960 and south of y 5400.

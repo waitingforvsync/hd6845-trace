@@ -1,2 +1,5 @@
 # tl4: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
-# The package's region is x 4250-4967, y 2500-6350. No wire is drawn to the strip's edge yet.
+# The package's region is x 4250-4967, y 2500-6350. 
+
+# West side (x 4250)
+tl4_w4501   P  4250,4492-4512  in   row from the west across the bus field; gate 2 of the three-input NOR tl4_w4545

@@ -143,3 +143,56 @@ P 4437,3835:4473,3866
 C 4455,3850
 M 4462,3852 x4412 y3900 w=20
 N P 4600,3850 tl4_w3850
+
+# ====================================================================
+# Unit (a), y 4410-4640: a three-input NOR.   tl4_w4545 = NOR(tla_w3417, tl4_w4501, tl4_w4590)
+# Read on u2.png (clean), u3.png (chip-2 stripped), u4.png (metal), u5.png (chip-1 stripped), all
+# 3.9x; tie1.png, tie2.png (9x, four shots); rows on r1.png (2.7x, stripped and metal).
+# A column of diffusion in the open west of RA (x 4677-4716) crossed by three poly rows from
+# the bus field. Its top (y 4420-4450), a strip east under RA (y 4420-4440), a leg south
+# (x 4812-4832) and a band back west under RA (y 4537-4558) to the column between gates 2
+# and 3 make one ring of diffusion: the output node. Inside the ring, under RA, a VSS box with
+# a contact, joined to the column between gates 1 and 2 by a neck (y 4474-4488). Below gate 3
+# the column's foot runs east onto a second VSS box under RA.
+M 4759,4392 y4650 w=54                # RA goes on south, wider here (x 4732-4786: px.py row 4405)
+M 4928,4392 y4650 w=44                # RB likewise
+D 4677,4420:4716,4628                 # the column
+D 4677,4420:4830,4440                 # top strip, under RA
+D 4808,4420:4830,4560                 # leg
+D 4677,4537:4836,4558                 # the band under RA
+D 4735,4470:4790,4518                 # VSS box
+D 4712,4474:4740,4488                 # its neck onto the column
+C 4757,4495
+D 4712,4603:4777,4645                 # the foot and the lower VSS box
+C 4745,4627
+# gate 1: tla's row y 4452-4470 from its pad (4410,4460) (tla drew it to x 4520), on east
+P 4515,4452:4722,4470
+# gate 2: a row from the west, across the whole bus field without a pad (r1.png)
+P 4250,4492:4722,4512
+N P 4400,4502 tl4_w4501
+# gate 3: a row from a pad with a contact (4364,4590) on the track x 4362 (follow.py: one
+# metal from y 2810 to y 5682; only this stub of it is drawn so far)
+P 4347,4575:4385,4605
+C 4364,4590
+M 4364,4565 y4615 w=12
+P 4380,4578:4722,4598
+N P 4500,4588 tl4_w4590
+# the node's buried contact west of the column's middle (concentric rings in the clean shot),
+# the poly west to a pad with a contact (4620,4545), and the metal x 4626 south from the pad
+# (follow.py: (4623,4544)-(4623,4900))
+B 4675,4530:4702,4562
+P 4635,4537:4700,4558
+P 4602,4530:4640,4562
+C 4620,4545
+M 4626,4535 y4900 w=14
+N P 4650,4547 tl4_w4545
+# load: plate x 4845-4900 over the strip y 4543-4566 from the node to the VCC box under RB (one
+# long ring x 4915-4940, y 4495-4590); the plate's tail runs west onto a heavy box
+# (4812-4838, 4588-4615) on the end of a tail of the node: the tie, uncertain as in the other loads
+D 4830,4543:4915,4566
+P 4845,4520:4900,4610
+D 4908,4480:4962,4608
+C 4927,4542 s=22x90
+P 4812,4590:4850,4612
+?D 4814,4555:4836,4612
+?B 4810,4588:4840,4614
