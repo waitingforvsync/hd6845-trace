@@ -789,3 +789,55 @@ C 4822,2723
 P 4835,2714:4967,2733
 @alias rcs_e3 tl4_w3808
 @alias tl5_w3245 tl4_w4718
+
+# ====================================================================
+# South of the routing channel (x 4250-4967, y 5790-6350): two metals from the west with a pad
+# each and their rows east, tl5's thin metal to a pad on the row y 6323, and the legs of the
+# three rails. Wiring only, no device. Read on h1_m.png, h1_a.png (1.8x), h2_e.png (3.1x),
+# h2_s.png, h3_pads.png (5x, four shots); tools/tl5_tracks.py and tools/px.py (notes).
+# --- rcs_x1: tl3's metal (tl3_e4808, the clear of its latch C) runs on east along y 5895 to the
+# pad (4629,5891); its row runs east under RA's and RB's legs to x 4967 (tl5_w5890, bus line x 5107)
+M 4250,5895 x4628
+P 4615,5877:4647,5905
+C 4629,5891
+P 4641,5880:4967,5900
+@alias rcs_x1 tl5_w5890
+# --- a second metal from the west along y 5939 to the pad (4583,5936); row east to x 4967
+# (tl5_w5936, bus line x 5063)
+M 4250,5939 x4582
+P 4573,5921:4602,5949
+C 4583,5936
+P 4596,5926:4967,5946
+# --- tl5's thin metal (tl5_w4590, the clear of its latch c) comes from the east along y 5984,
+# turns south at x 4929, has a contact on the pad (4929,6323) and runs on south out of the
+# strip; the pad's row runs west across the whole strip (y 6313-6333)
+M 4967,5984 x4929 y6350 w=14
+P 4913,6309:4947,6337
+C 4929,6323
+P 4250,6313:4920,6333
+# --- the rails' legs. RA's leg x 4667-4715 on south; RB to a corner, west along y 5806-5856 (it
+# lies on tla's row y 5838-5858 there, no contact) and south as a leg x 4754-4801; tl5's rail
+# RC, turned west along y 5891-5942, turns south as a leg x 4841-4888. All three leave the strip at y 6350. No contact on any of them here.
+M 4691,5785 y6350 w=48
+M 4928,5785 y5856 w=44
+M 4754,5806:4950,5856
+M 4777,5806 y6350 w=46
+M 4841,5891:4967,5942
+M 4865,5891 y6350 w=46
+
+# ====================================================================
+# RA's supply (x 4732-4967, y 2500-3004). A wide metal "foot" along y 2938-2997 runs from RA's
+# top end east across the strip's edge; RA (x 4729-4775) is its continuation south: the dark
+# line across RA's top at y 2994-3000 is the south edge of the row y 2976-2996 under the metal
+# (the same line as at the row's north edge, y 2973; pink field under metal on both sides of
+# the row in the clean shot at x 4729-4775, open field south of the row east of x 4781). At
+# the strip's east edge a wide vertical metal (x 4949-4995, its east part in tl5's strip) runs
+# from the foot north across all the rows, no contact, to the wide band north of y 2500, whose
+# corner (x 4910-4967, y 2500-2507) is inside the strip. Read on g7_sup.png (2.1x), i1_foot.png
+# (4.1x metal and clean shot); tools/px.py and tools/tl5_tracks.py (notes: "RA's supply").
+# The foot's north edge is y 2938: the row y 2930-2950 is under it too, no contact (review
+# round 11; notes, Ambiguity 12).
+M 4732,2938:4967,2997
+M 4732,2990:4775,3004
+M 4949,2500:4967,2960
+M 4910,2500:4967,2507
