@@ -94,7 +94,7 @@ has been checked against the photos.
   (assumption: rail identity not yet followed to a pad). The earlier reading "dark =
   depletion" was wrong; layers.md says the implant is not visible. Not yet read: the
   load gate's buried tie to the output, the output band (x 10600-10700, y 16550-16700,
-  tan, with a contact (10642,16632)), and the pull-downs west of it under the rail
+  tan; a ring at (10642,16632) in `acid1b` has no contact in the metal shot at 2.7x, `r7.png`: not a contact unless a 5x read shows one), and the pull-downs west of it under the rail
   x 10565-10595 (contact (10555,16622) in the box x 10540-10590, y 16550-16640).
   This repeated unit is the best first piece: once one copy is read, it can be a cell.
 
