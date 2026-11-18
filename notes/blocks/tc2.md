@@ -8,10 +8,11 @@ Tool: `tools/tc2_runs.py` (dark runs along a straight metal in both metal shots)
 Most of this region was already drawn by other packages (`ras`, `rax`, `fld`, and the
 crossing lines of `bust`, `amr`'s west route, `r9m`, `rde`): see the inventory. This package
 adds what they left. Traced and extracted so far: 17 transistors (one NOR, a nine-transistor
-latch, the loads of `rax`'s five units), 11 new named nets, 8 equations (the NOR and the five
+latch, the loads of `rax`'s five units), 12 new named nets, 8 equations (the NOR and the five
 unit inverters FIRM, the latch's two marked), seven lines of other packages carried on, two
-lines of the nest west of the XOR cells, and the VCC rail of the units and the latch.
-Pieces 1 to 10 are through independent review; pieces 11 to 13 (run 4) are not.
+lines of the nest west of the XOR cells (three now), the VCC rail of the units and the latch,
+and the two wide supply metals of y 6100-6400.
+Pieces 1 to 10 are through independent review; pieces 11 to 15 (run 4) are not.
 
 **Piece 1**
 
@@ -114,6 +115,18 @@ Pieces 1 to 10 are through independent review; pieces 11 to 13 (run 4) are not.
   to the pad (8290,4850), a poly east that ends in a box at `cdp1`'s west edge (8370,4850),
   read as a buried contact onto a diffusion there (not traced). It joins no named net.
 
+**Piece 14** (run 4, wiring only; not through a review round)
+
+- `tc2_m6404`: the fourth pad of the nest, (6404,6107): its metal from the west edge, its poly
+  south past y 6400; no contact to the ground metal or the two thin metals it passes under.
+
+**Piece 15** (run 4, wiring only; not through a review round)
+
+- The two wide supply metals of y 6100-6400: VCC (`fld`'s VCC rail, a band y 6105-6155, a
+  south leg x 7695-7752) and VSS (`fld`'s west ground rail, a band y 6198-6243, a south leg
+  x 7572-7620), each joined by drawn metal to a named rail. No contact and no diffusion under
+  them here. `fld`'s east ground rail was drawn 73 px too far and is corrected in `fld`'s file.
+
 Not done: see the end.
 
 ## Inventory (survey at 0.68x in the metal and clean shots: `survey_m.png`, `survey_a.png`)
@@ -125,7 +138,7 @@ Not done: see the end.
 | x 6420-6710, y 5020-5290 | one NOR with its load (two pull-downs under the west edge of the rail x 6537-6583) | **piece 1** |
 | x 6600-7050, y 5020-5275 | two inverters (`tc1_g`, `tc1_i`) | `fld` |
 | x 6580-7030, y 5410-6100 | two copies of the comparator's XOR cell | `fld` |
-| x 6400-6580, y 5350-6170 | a nest of metals turning from south to east; field pockets between them (clean shot khaki, chip-2 stripped shot red minus green 2-7: `tools/px.py pt` at (6490,5420)); each ends on a pad with a poly going south | `fld`'s metal of `fld_y_b`; **`tc1_m6817`'s metal: piece 2; `tc2_m6490`, `tc2_m6447`: piece 5**; a fourth pad (6404,6108) on the west edge not drawn |
+| x 6400-6580, y 5350-6170 | a nest of metals turning from south to east; field pockets between them (clean shot khaki, chip-2 stripped shot red minus green 2-7: `tools/px.py pt` at (6490,5420)); each ends on a pad with a poly going south | `fld`'s metal of `fld_y_b`; **`tc1_m6817`'s metal: piece 2; `tc2_m6490`, `tc2_m6447`: piece 5; the fourth pad (6404,6107), `tc2_m6404`: piece 14** |
 | x 7150-7420, y 4880-6000 | row address selector | `ras` |
 | x 7430-7900, y 4500-6100 | nest of metals between the selector and its units | `ras`, `rde` |
 | x 7860-8110, y 4700-5470 | five units, one per selector output | `rax` (pull-downs only) |
@@ -142,7 +155,7 @@ Not done: see the end.
 | x 7830-8010, y 5770-5990 | comb of poly rows with a pad each (the five lines to `cdp2`'s comparator) | `ras` |
 | x 7760-8250, y 5960-6300 | a latch: two cross-coupled gates (a diffusion stack of five gates x 7977-8073, two columns x 8106-8136, two loads x 8148-8198) and the pads of its lines | **piece 4** |
 | x 7730-7810, y 6040-6170 | two pads, (7750,6065) and (7790,6152), at the south ends of metals from `ras`'s channel pads (7748,5673) and (7790,5718); each has a poly going west and south | (7750,6065) is `ral_stb`'s: **piece 9**; (7791,6152) is `tc2_r5718`'s: **piece 10** |
-| y 6100-6400 | wide horizontal supply metals with cross-unders; polys crossing south | a few polys (`fld`, `ras`, `amr`'s west route); the metals not drawn |
+| y 6100-6400 | two wide supply metals: VCC (from `fld`'s VCC rail, band y 6105-6155, south leg x 7695-7752) and VSS (from `fld`'s west ground rail, band y 6198-6243, south leg x 7572-7620); vertical polys crossing under them; no contact, no diffusion | **piece 15**; the polys: `fld`, `ras`, `amr`'s west route, pieces 2, 5, 9-12, 14 |
 
 `tools/findcell.py` was not run: nothing in the undrawn parts repeats (one NOR; one latch,
 whose two halves are not copies of each other: the upper has three pull-down paths and the
@@ -857,6 +870,79 @@ y 4719, 30 px east of this metal with bare ground between: not joined, not drawn
 No transistor in the region. Omissions: none inside the piece (the ring at (8183,4655) in the
 clean shot is on the row y 4635, in the same gap: `bust`'s row).
 
+## Piece 14 (wiring only): `tc2_m6404`, the fourth pad of the nest west of the XOR cells (run 4, 2026-11-18)
+
+Views: `p6404.png` (3.6x, four shots, x 6350-6460, y 6085-6260), `p6404n.png` (3.7x, four
+shots, the staircase), `p6404t.png` (4.4x tiles, both metal shots and the clean shot: the pad,
+the corner, the poly at y 6340-6430); overlay `ov_p15w.png` (1.35x).
+
+| Net | From | Path | To |
+|---|---|---|---|
+| `tc2_m6404` | the region's edge (6400,6026), a metal arriving from the west | metal east along y 6012-6040 to x 6417, south x 6395-6417; pad (6404,6107); poly south x 6395-6415 | the region's edge (6405,6400), going on south |
+
+West of the region the metal turns north at x 6352-6372 (seen to y 5955 in `p6404n.png`; the
+follower from (6406,6070) gives north to y 5654, west along y 5649, north along x 6230, end
+(6230,4870): not looked at, and the follower has jumped between the nest's metals before).
+Joins between named nets: none (one new name). No transistor. Which end drives is not known.
+
+| End or crossing | Seen | Result |
+|---|---|---|
+| the staircase of the nest's three western metals | `p6404n.png`, `p6404t.png` second tile | three separate metals, bare ground of 20 px or more between them at every step: `tc2_m6447`'s (east at y 5971-5991), this one (east at y 6012-6040), and a third west of the region (x 6310-6330, east at y 6055-6085, south at x 6345-6365 to a pad (6360,6150)). Plain corners, no pad |
+| pad (6404,6107) | `p6404t.png` first tile (4.4x), `p6404.png` | ring and bright centre in both metal shots, a hole with a dark mark in the pad in the clean shot; the metal ends on it (bare ground south: the poly is orange-brown there in both metal shots); the poly leaves south only |
+| the poly under the ground metal y 6198-6243 | `p6404.png`, `textmap.py 6376 6186 6432 6256 3 --acid` | no contact: the metal is bright (B-E) over x 6397-6415 for its whole height in both chips, with only the poly's two edge lines (x 6394, x 6418-6421) dark; no ring; the clean shot is poly-coloured (3-7) without a hole. The clean shot shows this stretch mottled orange and olive where the three neighbours are plain salmon: residue on chip 1 (the chip-2 stripped shot has a plain band with a fringe across it). Former Not done item, settled |
+| the poly under `ral_stb`'s metal y 6316-6340 and `tc2_sr_c`'s metal y 6360-6380 | `textmap.py 6384 6300 6426 6390 3`, `p6404t.png` third tile, scan down x 6400-6408, y 6080-6420 (no green over red) | no contact at either: metal whole across the poly, the clean shot poly-coloured (5-A) throughout |
+| the poly at y 6400 | `p6404t.png` third tile, `px.py col 6404 6250 6440 10` | goes on past y 6440 |
+
+Omissions: the pad (6360,6150), its metal and its poly (x 6355-6375) are 40 px west of the
+region: not drawn. A dark ring on the ground metal at (6368,6218) in chip 1's metal shot only
+(over that western poly): dirt.
+
+## Piece 15 (wiring only): the two wide supply metals of y 6100-6400 (run 4, 2026-11-18)
+
+Views: `s_w_m.png`, `s_e_m.png` (1.35x, metal with every block's trace), `s_A_w.png` (4x, metal
+and clean: the VCC metal's west end), `s_B_w.png` (4x: `fld`'s ground rail meeting the band),
+`s_fldE.png` (3.6x, three shots: the end of `fld`'s east ground rail), `s_cl1.png`, `s_cl2.png`
+(2x, clean over metal, x 6380-7640), `s_AE.png` (2.4x, metal and clean, x 7540-7800);
+overlays `ov_p15w.png` (1.35x), `ov_p15e.png` (2.5x). Tool: `tools/tc2_band.py` (the clean
+shot's class along a cut under a wide metal; **it is of no use in the middle of these bands**,
+where the protected field drifts from pink to olive-green: only the image settles it).
+
+| Net | From | Path | To |
+|---|---|---|---|
+| `vcc` | `fld`'s VCC rail (x 6800-6840, drawn there to y 6040) | one metal x 6795-6848 south to y 6155; east as a band y 6105-6155 to x 7695; south as a metal x 7695-7752 | the region's edge (7723,6400), going on south |
+| `vss` | `fld`'s west ground rail (x 6575-6625, drawn there to y 6110) | the same metal south to y 6198; a band y 6198-6243 west to the region's edge and east to x 7620; south as a metal x 7572-7620 | the region's edges (6400,6220), going on west, and (7596,6400), going on south |
+
+Joins: each band is joined by drawn metal to a rail of `fld` that carries that supply's name
+(the names there follow the XOR cell's loads and pull-downs; the west ground rail is also
+joined north to `tcw`'s by piece 1). No `?` item. **`fld`'s east ground rail
+(x 6978-7028) does not reach the VCC band**: it ends at y 6037 (fixed in `trace/fld.txt` in a
+commit of its own; it was drawn to y 6110, which would have shorted the supplies).
+
+**No contact and no diffusion under either band between x 6400 and x 7752** (`s_cl1.png`,
+`s_cl2.png`, `s_AE.png`): the clean shot shows field (pink at the edges, olive in the middle)
+and the vertical polys that cross: under the VSS band `tc2_m6404`, `tc2_m6447`, `tc2_m6490`,
+`tc1_m6817`; under both the polys at x 6873-6891 and x 6921-6939 (`fld`'s), x 7111-7129,
+7155-7173, 7199-7217, 7263-7281, 7328-7346 (`ras`'s), x 7378-7396 (`tc2_r5589`) and x 7597-7612
+(`tc1_ns3`, under the VCC band only); under the VCC metal's south leg `ral_stb`'s and
+`tc2_r5718`'s vertical polys lengthwise and their rows, `tc2_sr_c`'s row; under the VSS
+metal's south leg the same three rows. The supplies only pass through here.
+
+| End or stretch | Seen | Result |
+|---|---|---|
+| `fld`'s VCC rail to the band (x 6795-6848, y 6040-6105) | `s_A_w.png` (4x), `tc2_runs.py col 6821 6000 6160 4` | one metal; no dark run at one place in both chips. A dark dot at (6815,6088) in chip 2 only; the clean shot under it is field |
+| the VCC band's west end and corner | `s_A_w.png` | the L's outer corner at (6795,6155); nothing west of x 6790 or south of y 6157 (bare ground) |
+| VCC band y 6105-6155, x 6850-7695 | `tc2_runs.py row 6130 6790 7730 4`, `s_cl1.png`, `s_cl2.png` (2x) | one metal: runs of 9-21 px at the polys' edges; the two longer ones (34 px at x 7151-7184 in chip 2, 33 px at x 7108-7140 in chip 1) are each two edges in the other chip. **Read at 2x and by profile** |
+| VCC south leg x 7695-7752, y 6105-6400 | `s_AE.png` (2.4x), `ov_p15e.png` (2.5x), `tc2_runs.py col 7735 6100 6440 3`, `col 7712`, `segs.py 7660 7800` at seven y | one metal on past y 6400: no dark run of 25 px at one place in both chips at x 7735; at x 7712 chip 2 is dark for 27 px at y 6272-6298 (`ral_stb`'s poly corner lengthwise under it; chip 1 bright). It does not go on north of y 6105 (bare ground; `ral_stb`'s pad (7750,6065) is 27 px north of its corner). The dark lines lengthwise in it are the edges of the two vertical polys. **Read at 2.5x and by profile** |
+| `fld`'s west ground rail to the band (x 6577-6623, y 6110-6198) | `s_B_w.png` (4x), `tc2_runs.py col 6600 6090 6230 4`, `textmap.py 6566 6080 6636 6120 3`, `segs.py 6530 6660 6120,6160,6185` | one metal x 6579-6624: a dark bar of 8 px at y 6095-6102 across it in both chips is the lower edge of `fld`'s poly row y 6076-6094 underneath (the clean shot: poly, then field); metal B-E above and below. The rail flares west to x 6555 at y 6160-6198 (not drawn) |
+| VSS band y 6198-6243, x 6400-7620 | `tc2_runs.py row 6220 6385 7600 4`, `s_cl1.png`, `s_cl2.png`, `p6404.png` | one metal: runs of 7-22 px at the polys' edges in chip 2; chip 1 is dark for 35 px over the polys x 7337 and x 7387 (two edges each in chip 2). West of x 6400 it goes on (bright at x 6385) |
+| VSS south leg x 7572-7620, y 6243-6400 | `s_AE.png`, `ov_p15e.png`, `tc2_runs.py col 7590 6200 6440 3`, `segs.py 7540 7650` at five y | one metal on past y 6400; `tc1_ns3`'s pad (7660,6193) and metal are 30 px east (bare ground, piece 11) |
+| the end of `fld`'s east ground rail | `s_fldE.png` (3.6x, three shots), `s_A_w.png` (4x), `tc2_runs.py col 7003 5980 6120 6`, `px.py col 7000 6020 6070 5` | rounded end at y 6037 in both metal shots; no metal from y 6031 to 6111 in either chip (bare ground 168/138/88, 138/113/73); open field in the clean shot from y 6042 |
+
+Omissions: the dark dots on both metals in chip 2's metal shot (among them (6585,6215),
+(6608,6200), (6608,6228), (6645,6232), (6815,6088), (7415,6230), (7508,6218), (7603,6232),
+(7607,6230)): pits in chip 2's wide metal; the clean shot under each is plain field. Chip 1
+has its own at other places. None has a ring with a bright centre.
+
 ## Ports
 
 | Name | Layer | Where | Direction | What |
@@ -897,6 +983,13 @@ clean shot is on the row y 4635, in the same gap: `bust`'s row).
 | `tc2_r5589` | P | x 6835-6851, y 6400 | ? | the poly from the pad (6840,6282), going on south |
 | `r9m_l1w` | P | x 8170-8192, y 4670-4682 | in (believed) | not a port: where this package's drawing meets `r9m`'s row (inside the region) |
 | `r9m_l1w` | P | x 8352, y 4840-4860 | ? | the poly from the pad (8290,4850), 100 px east of the region: it ends in a box at (8370,4850) at `cdp1`'s west edge |
+| `tc2_m6404` | M | x 6400, y 6012-6040 | ? | going on west, then north at x 6352-6372 (seen to y 5955) |
+| `tc2_m6404` | P | x 6395-6415, y 6400 | ? | going on south |
+| `vcc` | M | x 6795-6848, y 6040 | - | meets `fld`'s VCC rail (inside the region) |
+| `vcc` | M | x 7695-7752, y 6400 | - | the wide VCC metal's south leg, going on south |
+| `vss` | M | x 6577-6623, y 6110 | - | meets `fld`'s west ground rail (inside the region) |
+| `vss` | M | x 6400, y 6198-6243 | - | the wide ground metal, going on west |
+| `vss` | M | x 7572-7620, y 6400 | - | the wide ground metal's south leg, going on south |
 | `vss` | M | x 6860-6907, y 4380 | - | meets `tc1`'s rail (70 px north of the edge) |
 | `vss` | M | x 6882-6926, y 4990 | - | meets `fld`'s rail (inside the region) |
 | `vss` | M | x 7990-8040, y 5625-5650 | - | meets `rax`'s rail step |
@@ -948,21 +1041,12 @@ None in pieces 1 to 3.
 - Dark dots on the ground rail at about (8012,5765), (8015,5830), (8013,5880), where
   `ras`'s comb rows pass under it: not looked at.
 - `tc2_m6490` and `tc2_m6447` west of x 6400 and south of y 6400.
-- The wide metals y 6100-6400 west of x 7770 (`e_sw_m.png`, 2.4x, x 7300-7830): a band
-  y 6105-6150 that turns south at x 7690-7770 (to y 6340, where it turns west along y 6305-6340
-  as far as x 7640) and a band y 6195-6245 that turns south at x 7570-7620; dark dots on the
-  second at (7415,6230), (7508,6218), (7603,6232). Which supply each is, and their contacts:
-  not traced. The metal y 6316-6340 west of x 7500 is not a supply: it is `ral_stb` (piece 9).
-- The fourth pad of the nest, (6404,6108) (`e_p6404.png`, 3x, both metal shots and the clean
-  shot): a contact (ring and bright centre in both metal shots, hole in the pad); its metal
-  comes down x 6397-6415 from a corner at y 6015-6040, where it arrives from the west (it is
-  not `tc2_m6447`'s vertical, which turns east 24 px further north at y 5981: the follower
-  jumps that gap); its poly goes south along x 6393-6413 past y 6400, under the wide metal
-  y 6195-6245, `ral_stb`'s metal and `tc2_sr_c`'s metal. Under the wide metal y 6195-6245 this
-  poly and the one of the next pad west, (6360,6150), look darker and speckled where
-  `tc2_m6447`'s is plain salmon: whether either has a contact to that metal was not settled
-  (one view at 3x). Nothing drawn.
-- The independent review of pieces 11, 12 and 13 (the Review section below covers pieces 1 to 10).
+- `tc2_m6404` west of x 6400 (metal y 6026, turning north at x 6362) and south of y 6400.
+- The two wide supply metals beyond the region: VCC south of (7723,6400); VSS west of
+  (6400,6220) and south of (7596,6400).
+- West of the region, seen and not drawn: the nest's third metal and its pad (6360,6150)
+  with a poly going south (x 6355-6375).
+- The independent review of pieces 11 to 15 (the Review section below covers pieces 1 to 10).
 
 ## Review
 

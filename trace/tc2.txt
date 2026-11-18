@@ -666,3 +666,51 @@ M 8246,4716 x8289 y4856 w=20
 P 8272,4833:8308,4867
 C 8290,4850
 P 8290,4850 x8352 w=20
+
+# ===== Piece 14 (2026-11-18, run 4): the fourth pad of the nest west of the XOR cells, (6404,6107)
+# ===== (wiring only), named tc2_m6404 like its neighbours.
+#   - the nest is a staircase of three metals (p6404n.png 3.7x, four shots): tc2_m6447's
+#     turns east at y 5971-5991; THIS one comes from the north along x 6352-6372 (west of the
+#     region; follow.py from (6406,6070) N: north to y 5654, west, north, end (6230,4870), not
+#     looked at), turns east at y 6012-6040 and south at x 6395-6417; a third (x 6310-6330,
+#     east at y 6055-6085, south at x 6345-6365 to a pad (6360,6150)) lies west of the region.
+#     Bare ground of 20 px or more between the three at every step. Drawn from x 6400.
+#   - pad (6404,6107) (p6404.png 3.6x, four shots: ring, bright centre in both metal shots,
+#     hole in the pad): the metal ends on it;
+#   - poly south x 6395-6415, in the open to y 6190 (orange-brown in both metal shots), then
+#     under the ground metal y 6198-6243, ral_stb's metal y 6316-6340 and tc2_sr_c's metal
+#     y 6360-6380, past y 6400. No contact to any of the three: textmap.py 6376 6186 6432 6256
+#     and 6384 6300 6426 6390 (each metal bright B-E across the poly between the poly's two
+#     edge lines in both chips, no ring; the clean shot poly-coloured 3-A with no hole; the
+#     scan down x 6400-6408 finds no green over red). Under the ground metal the clean shot
+#     shows this poly mottled orange and olive where its neighbours are plain salmon: residue
+#     on chip 1 (the chip-2 stripped shot has the plain band).
+M 6400,6026 x6406 y6112 w=22
+P 6387,6090:6423,6126
+C 6404,6107
+P 6405,6108 y6400 w=18
+N M 6406,6060 tc2_m6404
+
+# ===== Piece 15 (2026-11-18, run 4): the two wide supply metals of y 6100-6400.
+# VCC: fld's VCC rail (drawn there to y 6040, x 6800-6840) runs on south as one metal
+# x 6795-6848 (tc2_runs.py col 6821 6000 6160: no dark run at one place in both chips;
+# s_A_w.png 4x) and turns east as the band y 6105-6155, which runs to x 7695 (tc2_runs.py row
+# 6130 6790 7730: only the edges of the polys underneath) and turns south as a metal
+# x 7695-7752 past y 6400 (s_AE.png 2.4x; tc2_runs.py col 7735 6100 6440; the dark lines
+# lengthwise in it are the edges of ral_stb's and tc2_r5718's vertical polys underneath).
+# VSS: fld's west ground rail (drawn there to y 6110, x 6575-6625) runs on south
+# (tc2_runs.py col 6600 6090 6230: one 13-15 px bar at y 6093-6107, the lower edge of fld's poly
+# row y 6076-6094 underneath; s_B_w.png 4x) into the band y 6198-6243, which runs west past
+# x 6400 and east to x 7620 (tc2_runs.py row 6220 6385 7600) and turns south as a metal
+# x 7572-7620 past y 6400 (tc2_runs.py col 7590 6200 6440).
+# Under both bands, between x 6400 and x 7752, the clean shot shows only field and the
+# vertical polys that cross (s_cl1.png, s_cl2.png 2x; s_AE.png): NO contact and no diffusion.
+# The many dark dots on the two metals in chip 2's metal shot have nothing under them.
+M 6821,6030 y6110 w=52
+M 6795,6105:7723,6155
+M 7695,6105:7752,6400
+N M 7100,6130 vcc
+M 6600,6100 y6205 w=46
+M 6400,6198:7620,6243
+M 7572,6198:7620,6400
+N M 7100,6220 vss
