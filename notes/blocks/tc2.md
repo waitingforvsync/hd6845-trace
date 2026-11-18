@@ -1250,3 +1250,15 @@ states what is and is not shown. Not checked: beyond the ports; the four other u
 boxes at 9x; a green mark at (7245-7280, 6120) under the VCC band (clean shot only, no ring
 in either metal shot).
 
+Round 2 (fix check, 2026-11-18 01:35 +0000, a fresh agent on claude-fable-5-2, against commit c63b34b). It
+measured the dark part at each of the five units with the follower's metal test down
+x 7895-7909 (dark in both chips: y 4810-4828, 4940-4958, 5178-5197, 5310-5327, 5439-5457,
+about 19 px each): every `?M` stretch covers its dark part (they sit about 4 px south of
+centre: the north margin is nil, the south 9-11 px; not changed). Every other dark run on
+the line is 6-12 px (poly-edge bars), except y 5609-5625 just north of the end pad
+(7899,5633): the pad's ring on the arriving side, already reviewed; left firm.
+`tools/sameconn.py`: connections identical; `tools/unsure.py` lists `tc1_ns3` as resting
+on the uncertain items.
+
+Round 2: no findings.
+
