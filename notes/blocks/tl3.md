@@ -764,8 +764,9 @@ Round 2: no findings.
   east under a plate east of the rail (review of latch B): an east-column load's VCC end.
 - What latch B's enable row y 5318-5342 gates on its way (it lies over unread areas at
   x 3560-3640 and 3710-3815, Inventory).
-- The thin metal x 4099-4111 north of y 4106 and its contacts (`tl3_e4152`'s source), and the
-  rows of track A's pads at y 4510, 4681 and 4900.
+- The thin metal x 4099-4111 north of y 4106 and its contacts (`tl3_e4152`'s source). (The rows
+  of track A's pads at y 4510, 4681 and 4900 are drawn since run 6: `tl4`'s row and latch C's
+  two enable rows.)
 - Where the true outputs of latch A and latch B are taken (`tl3_w3550`, `tl3_w5156` end in
   stubs; only the inverted outputs leave west).
 - Where the seven rows of the pair, the inverter and NOR 3 go west of x 3533 is `tl2`'s.
