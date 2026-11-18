@@ -7,7 +7,14 @@ RA (x 4728-4775), loads between RA and a second rail RB (x 4905-4950).
 
 ## Status
 
-2026-11-18 15:24 -0600. **Partial: nine units and all the wiring of the strip around them.** Traced in the
+2026-11-18 15:39 -0600. **Everything in the strip is drawn** (nine units, 47 transistors, and the wiring
+around them). Last piece, tenth run: **RA's supply**: the wide foot along y 2955-2997 runs into
+RA's top end, and a wide vertical metal on the strip's east edge (x 4949-4995) takes it north
+across all the rows to the band north of y 2500, the band that `tl5`'s rail RC ends on. So RA
+is on the same supply as RC (both named vss from their boxes). No connection changes
+(`tools/sameconn.py`: identical). What is open now lies outside the strip (Not done).
+
+Before that, 2026-11-18 15:24 -0600: **the wiring south of the routing channel.** Traced in the
 ninth run: **the strip south of the routing channel** (x 4250-4967, y 5790-6350: no device,
 three pads). No gate changed and no equation prints differently. One join: **`rcs_x1` goes on
 to `tl5`** (`tl5_w5890`, its bus line x 5107): `tl3`'s metal of latch C's clear (`tl3_e4808`)
@@ -153,7 +160,7 @@ the metal x 4496, and the latch's data `tl4_w4025` comes from the south on the m
 | x 4250-4967, y 5440-5790 | **the routing channel**: eight poly rows (pitch 44) under the tracks' south ends and under RA and RB, eight pads. No diffusion: the green-rimmed strips between the rows in the clean shot are open field. Drawn (the row y 5585 is `bw`'s, the row y 5545 west and its pad `tla`'s) |
 | x 4250-4967, y 5790-6350 | **south of the channel** (ninth run): two metals from the west (y 5895 `rcs_x1`, y 5939) ending on pads whose rows go east to `tl5`; `tl5`'s thin metal x 4929 and its pad (4929,6323) on the row y 6323; the legs of RA (x 4667-4715), RB (x 4754-4801, after a turn west along y 5806-5856) and RC (x 4841-4888, from `tl5`'s turned rail y 5891-5942). No diffusion. Drawn (the row y 5847 is `tla`'s, the metal L y 5982 / x 4628 `amrw`'s, the four rows y 6157-6281 and their pads `urch`'s and `amrw`'s) |
 | x 4250-4967, y 2500-2910 | **the top of the strip** (eighth run): six metal bus lines along y 2512-2728 that step down one pitch (43 px) at x 4580-4712 and end on pads at x 4822-4912, whose poly rows go on east; the knot of eight pads at y 2767-2898 where the tracks end. Drawn (lines 2 and 3 are `r9m`'s, the pads (4910,2767), (4537,2940) and (4270,2725) `tl5`'s and `tla`'s) |
-| x 4720-4995, y 2500-2997 | the supply of RA: a wide vertical metal x 4950-4995 from the band north of y 2500 to a wide foot along y 2940-2997. Not drawn |
+| x 4732-4995, y 2500-3004 | **the supply of RA** (tenth run): a wide vertical metal x 4949-4995 from the band north of y 2500 to a wide foot along y 2955-2997, which runs into RA's top end. Drawn as far as the strip's edge x 4967 |
 
 ## Logic
 
@@ -667,6 +674,35 @@ The clean-shot scan lists a weak mark at y 6043-6045 on all three legs (red minu
 `.venv/bin/python tools/sameconn.py 83d70d4`: the only names joined are `rcs_x1`'s net and
 `tl5_w5890`; no equation differs.
 
+### RA's supply, x 4732-4967, y 2500-3004 (traced 2026-11-18, tenth run)
+
+Read on `g7_sup.png` (2.1x, every package's shapes), `i1_foot.png` (4.1x, metal and clean
+shot); overlay `oi1.png`.
+
+- **The foot**: a wide metal along y 2955-2997 from x 4732 east across x 4967.
+  `tl5_tracks.py h 2962 4732 4967` and `h 2985 4732 4967`: metal in both chips at every sample,
+  no hole. It lies on the row y 2976-2996 (`tl5_w3505`) without a contact.
+- **The foot runs into RA.** RA's metal (x 4729-4775, drawn from y 3000) is the foot's
+  continuation south: `px.py col 4752 2925 3030 3 metal,metal1,acid1b` has metal in both chips
+  from y 2958 to y 3009 except two dark lines of 6 px, at y 2973-2976 and y 2994-2997, which
+  are the north and south edges of the row y 2976-2996 under the metal (the same in both);
+  the clean shot at x 4729-4775 is pink (field that was under metal) on both sides of the row,
+  y 2950-2975 and y 2998-3010, while east of x 4781 it is open field south of the row
+  (`px.py row 3004 4718 4790 4 metal,metal1,acid1b`: metal x 4734-4778). Against that, RB's top
+  end (y 3020) is 23 px of bare ground south of the foot. Drawn with a joint rectangle
+  (4732-4775, 2990-3004).
+- **The vertical**: x 4949-4995 (west edge `px.py row 2700 4930 4966 3 metal,metal1`: bright
+  from x 4951), from the foot north to the band; its east part is in `tl5`'s strip.
+  `tl5_tracks.py v 4958 2500 3000`: stretches without metal in both chips of 8-14 px at every
+  row edge (the rows of the bus lines' pads and of the knot cross under it), none longer; no
+  hole (the mark at y 2995 is the green rim of the foot's south edge in the clean shot). The
+  pad (4908,2551) of bus line 1 ends 25 px short of it (eighth run).
+- **The band's corner**: the band north of y 2500 comes down to y 2507 for x 4910-4948
+  (`px.py col 4930 2488 2530 3 metal,metal1`, `px.py row 2507 4880 4966 4 metal,metal1`).
+
+`.venv/bin/python tools/sameconn.py f3357ad`: `connections identical` (the new metal joins
+only RA's net, which already has the name vss).
+
 ## Ports
 
 The wires drawn to the strip's edges (the same list is `ports.d/tl4.txt`; `tools/ports.py
@@ -710,6 +746,7 @@ The wires drawn to the strip's edges (the same list is `ports.d/tl4.txt`; `tools
 | `vss` | metal | (4667-4715, 6350) | - | RA's leg, on south |
 | `vcc` | metal | (4754-4801, 6350) | - | RB's leg, on south |
 | `vss` | metal | (4841-4888, 6350) | - | RC's leg, on south |
+| `vss` | metal | (4967, 2955-2997) and (4949-4967, 2500) | - | RA's supply: the foot, on east, and the vertical x 4949-4995, on north to the band |
 | `tl5_w3505` | poly | (4967, 2976-2996) | in | the second latch's enable |
 | `tl4_w5455` | poly | (4967, 5447-5467) | out | `tl5_w5457` |
 | `tl4_w5068` | poly | (4967, 5490-5510) | out | `tl5_w5500` |
@@ -809,6 +846,14 @@ The tracks, as far as each is drawn:
    `g2_metal1.png`): none drawn. Pad B (4583,2811) and the pad (4648,2898) are under the
    debris too: both read from the two metal shots (ring, bright centre) and the chip-2 stripped
    shot (pad with a cross) (`g8_pads.png`).
+12. **The foot's north edge** (RA's supply): y 2955, or y 2937 with the row y 2930-2950
+   (`tl4_w4198`) under the metal. For 2937: the clean shot shows that row cream, like a row
+   under metal, for x 4728-4995 and with gap marks west of x 4728, and the dark outline of the
+   metal shots turns its top-left corner around the band y 2942-2949 (`i1_foot.png`). For 2955:
+   the two-chip metal test fails along y 2946 for most of x 4749-4947 in chip 1 and in patches
+   in chip 2 (`tl5_tracks.py h 2946 4690 4967`), and `tl5`'s notes read the row as lying along
+   the foot's north edge with no metal over it. Drawn at y 2955. No connection depends on it:
+   the row has no contact there either way.
 
 ## Review
 
@@ -1182,12 +1227,9 @@ Round 10: no findings that change a connection.
   the rows y 5457 and y 5718.
 - North of y 2500: the poly column x 4534-4550 of `tl4_w4068` (seen to y ~2165 under the wide
   band, `g8_col.png`). East of x 4967: the row y 2542-2560 of bus line 1 (`tl4_w2512`).
-- The supply of RA: a wide vertical metal x 4950-4995 from the band north of y 2500 to a wide
-  foot along y 2940-2997 (x 4720-4995) above RA's top end (`g7_sup.png`): not drawn, and
-  whether the foot joins RA is not read. RB's north end (y 3015) is clear of the foot.
+- RA's supply east of x 4967 and north of y 2500: the east part of the vertical metal
+  (x 4967-4995, `tl5`'s strip) and the band (y 2180-2507).
 - South of y 6350: the three rails' legs and `tl5_w4590`'s thin metal go on. West of x 4250:
   the metal y 5939 (`tl5_w5936`) and the row y 6323 (`tl5_w4590`).
-- A VCC box under RB at (4905-4960, 3893-3955) with a contact about (4928,3922) and a strip
-  east under a plate at about x 4962-5015, y 3890-3925: a load of the logic east of RB (`tl5`).
 - The bus field's crossings were looked at only where a wire of the seventh or eighth run
   passes; the tracks between y 4320 and y 5440 were tested as each unit's run needed them.
