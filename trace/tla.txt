@@ -610,7 +610,12 @@ D 2968,4045:3018,4105
 C 2985,4070 s=26x30
 D 2990,4098:3046,4182                 # under g1 and g2 (the bands' west ends bend, so the stack is drawn from x 2990)
 D 2950,4176:3072,4230                 # node N
-D 2950,4226:3066,4288                 # under g3 and down to the VSS strip
+# under g3 the diffusion is two columns with an island of field between them in the gap between
+# R3 and the thin metal (x 2990-3030, y 4222-4265; tl2 run 3, review round 2): the clean shot is
+# green (open field, 110-132/163-174/85-98) down x 3014 from y 4228 to y 4260. Joined again below
+D 2950,4226:2990,4288                 # under g3, west column (under R3)
+D 3030,4226:3066,4288                 # under g3, east column (under the thin metal)
+D 2950,4266:3066,4288                 # down to the VSS strip
 D 2965,4270:3016,4320
 C 2985,4292 s=26x26
 # g1: poly y 4103-4128 from the pad (contact (3105,4112)) at the top of bus line A's piece A3
@@ -625,8 +630,15 @@ P 3132,4142:3172,4180
 C 3150,4160
 M 3152,3807 y4566 w=20
 N M 3152,4300 clk_tl
-# g3: one long poly y 4230-4250 from the east, across the whole bus without a contact
-P 2945,4230:3400,4250
+# g3: a poly y 4230-4250 from the east, across the whole bus without a contact, over the east
+# column. It ENDS at x 3020 in the gap between the thin metal and R3. The band on the same y under
+# R3 (x 2945-3000, over the west column) is another poly: its west end turns south (trace/tl2.txt,
+# run 3) to the load of the unit below, so that gate is on that unit's node, not on rcs_g4240.
+# px.py row 4241 2984 3040 3: poly to x 2999, pink field x 3002-3008, green open field
+# x 3011-3017, poly from x 3020; both metal shots plain in the gap there where the rows y 4162,
+# 4116 and 4416 are orange (review-6/gap_m.png of tl2's scratch folder)
+P 2945,4230:3000,4250
+P 3020,4230:3400,4250
 N P 3300,4240 rcs_g4240
 # load: VCC box (contact (2806,4205)), strip y 4203-4228 under the plate, box under thin metal E,
 # on east to N. The plate is the lower part of a poly pad; the pad's arm east is tied to the
