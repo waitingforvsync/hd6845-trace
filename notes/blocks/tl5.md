@@ -306,7 +306,7 @@ the east neighbour's pads at x 5560-5683, y 4380-4530 are not drawn (Not done).
 | Name | Layer | Where | Direction | What |
 |---|---|---|---|---|
 | `tl5_w4937` | poly | (4967, 2675-2694) | out | inverter 2's output, from the thin metal W's north pad |
-| `tl5_w2722` | poly | (4967, 2714-2733) | ? | the row of T3's north pad |
+| `tl5_w2722` | poly | (4967, 2714-2733) | out | the row of T3's north pad |
 | `tl5_w3982` | poly | (4967, 2758-2777) | ? | latch b's enable (T7) |
 | `tl5_w4458` | poly | (4967, 2801-2820) | in | latch c's enable (T4's north piece: only gates on it) |
 | `tl5_w2855` | poly | (4967, 2846-2865) | ? | the row of T8's north pad |
@@ -339,7 +339,7 @@ the east neighbour's pads at x 5560-5683, y 4380-4530 are not drawn (Not done).
 
 - The tracks south of y 5250: T0 (`tl5_w3636`, to (5145,6113)), T3 (`tl5_w2722`, to (5363,6114)),
   T5 (`tl5_w3461`, to (5450,5766)), T6's lower piece (`tl5_w4590`, to (5494,5418)); T10 north of
-  (5667,4380) (`tl5_w4395`; `follow.py`: to a corner (5677,3660) and east out of the strip at y 3657).
+  (5667,4380) (`tl5_w4395`; only a 27 px stub of T10 is drawn, y 4380-4407; its north end is NOT an end: the metal runs y 3654-4402 and leaves east near y 3657 (`follow.py`; review round 1), so `tl5_w4395` has no port row yet).
 - The column's foot: RC south of y 5045 and where it ends; RB south of `tl4`'s end.
 - The rows under the foot (y 5330-5800), the pads at x 5490-5560 there, the tracks T7-T10 south
   of y 5000, and everything at y 5800-6350 that `amrw`, `tla` and `trunks` have not drawn.
@@ -347,7 +347,29 @@ the east neighbour's pads at x 5560-5683, y 4380-4530 are not drawn (Not done).
   y 3657; the row y 2552 at the top; `r9m`'s open ends here (its poly from the pad
   (5400,2596) north at x 5175, said to turn west along y 2550).
 - The wide vertical metal at x 4900-4995, y 2540-2995 north of RB's top end (in both strips),
-  and RC north of y 3140 (it runs on to about y 2650: `segs.py`).
+  and RC north of y 3140 (it runs on north unbroken into a large undrawn metal at y 2200-2500 (review round 1: follower corners (5185,2505), (4559,2399), (5262,2217)); no drawn or named metal is there, so `vss` is by structure only).
 - The joins to `tl4`'s tracks listed as believed under "The north rows".
 
 ## Review
+
+Round 1 (full review, 2026-11-18 02:20 +0000, a fresh agent on claude-fable-5-2, at commit 82a5d8e). Told to
+suspect the track field (piece ends, a pad one track off, a missing contact), the three
+arms, each mirrored copy's inputs (rows read from gate to pad on the photo), thin metal W
+over the tie boxes, the top inverter, latch c's data row and corner, row y 2685's end, rail
+RC's supply, the copies, and widths, ends and undrawn features. Checked: a metal test in
+both metal shots along all eleven tracks over y 2600-5350 (every drawn piece end within
+8 px; the one 32 px gap, on T7 at y 3948-3980, is a row edge plus a pad ring, 6x); a
+clean-shot contact scan along each track (only the drawn contacts); the ground one gap
+beyond each of 23 pads in three shots; every row's pad assignment for the three latches and
+the inverters; the three arms at 3.6x; latch c's step (one poly) and corner (separate from
+the pad, green field between); row y 2685's closed end; W at 4.8x with text maps (dark up
+to 30 px over the tie boxes in both chips, edge lines continuing, no bright centre,
+widening or hole: pass-over); the top inverter at 4.5x; the NOR and inverters at 4x; the
+rail profile under RC.
+No finding in the trace. Three points in the documents, fixed: RC's north end (it runs on
+north into an undrawn metal; `vss` by structure only); T10 is drawn as a stub whose north
+end is not an end (said so in Not done); a port's direction. Not checked: the cell copies
+item by item above 2.9x, the `?` load ties, RB's supply, the west ports against tl4's rows,
+anything south of y 5260.
+
+Round 1: no findings.
