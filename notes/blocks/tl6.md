@@ -130,6 +130,7 @@ tcw / fld:       fld_y_b = NOT tcw_c ;  tcw_o3820 = NOT( fld_a_in OR (tcw_a AND 
 | pad (5757,5632) on U1 | ring with a bright centre in both metal shots, green hole; the row from `tl5`'s pad (5666,5632) passes under U0 (no widening) and ends on it (closed east end x 5775); U1 runs through | `t10.png` (4x, three shots); found by `tl5_tracks.py v 5755 4012 6052` (hole at y 5634) |
 | pads (5712,6192), (5972,6193), (5755,6065) | U0 ends on the first; the row y 6195 ends on the second (closed east end x 5990), metal south; U1 ends on the third, poly east | `t8.png` |
 | pads (6016,6066), (6016,6150), (5755,6322) | the row y 6065 ends on the first, metal east; the row y 6151 ends on the second, metal south; the third's poly goes east, its metal south | `t9.png` |
+| the corner (6105,6066) of `tcw_a`'s metal | one plain L from the pad's metal to the metal x 6105, bare ground north and east of it, 30 px to the wide metal's band | `w3.png` |
 | pad (6145,6322) and the metal x 6105 | the row y 6325 ends on the pad, whose metal goes east (`ral_stb`); the metal x 6105 crosses the row 40 px west of the pad at constant width without a ring | `t11.png` (4x, three shots) |
 | the south edge at x 5725-6045, the north edge at x 5855-5960 | the metals x 5755, 5799, 5972, 6016 and the two polys run on across the edge | `t12.png` |
 | the east edge at y 4482, 4787, 6328 | each metal runs on into `tc2`'s drawn piece (its `tc1_o3527`, `ras_o0_alt2`, `ral_stb`) | `t13.png` |
@@ -201,7 +202,7 @@ east onto `tc2`'s metal of its pad (6490,6108): **`tc1_p4308` = `tc2_m6490`**. S
 | pads (6057,2595), (6105,2552) | north ends of U8 and U9 (bare ground north of each metal); U8's poly north in the open; U9's pad poly into the poly along y 2530: `px.py col 6104 2504 2548 4`: poly colour in the chip-2 metal shot (169/115/58) from y 2524 to the pad's ring, salmon in the clean shot from y 2528; `px.py row 2530`: poly from x 6100 east, bare ground west of x 6094 | `u4.png`, `w2.png` |
 | the poly along y 2530, x 6100-6420 | poly colour (red - green > 30) at every sample in the chip-2 metal shot, at all but 3 in chip 1's; band y 2518-2542 at x 6150, 6250, 6350, 6398 | text; `n_top.png` 1.8x, `u5.png` |
 | corners (6146,2573), (6190,2619), (6276,2665); the east edge at y 2520-2630 and at y 2665 | plain corners; each metal runs on across x 6400 | `u5.png`, `w2.png` |
-| the nest of corners, x 6090-6400, y 5540-5820 | six nested L's, separate pink bands | `e_nest.png` 2x, two shots; overlay `ov3.png` 1.55x |
+| the nest of corners, x 6090-6400, y 5540-5820 | six nested L's, separate pink bands | `e_nest.png` 2x, two shots; `w3.png` 4x (four corners); overlay `ov3.png` 1.55x |
 | pads (6275,6152), (6318,6110), (6360,6152) | V2's and V3's metals arrive by a foot from the west, V4's from the north; each pad's poly leaves south | `u6.png` |
 | joins to `tc2`'s metals at (6400,6032), (6400,5612), (6400,5569) | each metal runs on into `tc2`'s drawn piece | `u7.png` |
 | the polys x 6282, 6322, 6365 at y 6180-6350 | straight, under the wide metal band and `ral_stb`'s metal without a pad (`tl5_tracks.py v X 6170 6352 --half 4`: no hole), on across y 6350; narrow outlined ovals between them are open field | `v2.png`, `u7.png` |
@@ -277,9 +278,10 @@ piece.
 
 **Pieces 2 and 3 (2026-11-18 03:21 +0000).**
 *Ends.* Every pad and corner drawn is in the two "Seen" tables: 14 pads at 4x in two shots,
-the three steps, the three north corners, the pads' feet; the nest's twelve corners only at 2x
-in two shots (`e_nest.png`) and on the 1.55x overlay (**below 4x**: plain nested L's with pink
-between them in the clean shot, and each piece passes the metal test from pad to pad). Edges:
+the three steps, the three north corners, the pads' feet; of the nest's twelve corners four at 4x (`w3.png`: (6103,5790), (6233,5790), (6146,5746),
+(6276,5746)) and the rest at 2x in two shots (`e_nest.png`) and on the 1.55x overlay (**below
+4x**: plain nested L's with pink between them in the clean shot, and each piece passes the
+metal test from pad to pad). Edges:
 north at x 6058 (`w2.png`: the poly runs on and turns east 12 px beyond the edge); east at
 y 2530, 2573, 2619 (`u5.png`), y 2665 (`w2.png`), y 5003 (`u4.png`), y 5173 (`w2.png`), y 5569,
 5612, 6032 (`u7.png`); south at x 6236, 6282 (`u7.png`), x 6322, 6365 (`v2.png`). The wide
