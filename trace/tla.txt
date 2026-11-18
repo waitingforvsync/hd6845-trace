@@ -529,7 +529,15 @@ D 3995,3885:4045,3935                 # VSS box under the rail, with an arm east
 C 4018,3910 s=30x34
 D 4040,3905:4110,3925
 D 4052,3920:4110,3960                 # column under gate mu
-D 4052,3955:4090,4135                 # the node, and on down under gate mv
+# (2026-11-18, tl3 run 8, found by its review: this was one column D 4052,3955:4090,4135. Between
+# y 3988 and y 4060 the column is FIELD: px.py col 4070 3944 4112 4 reads 151-158/135-143/97-106
+# in the clean shot and 156-160/147-158/97-103 in the chip-2 stripped shot there, the values of
+# open field, against 147/84/76 and 178/137/109 on the diffusion at y 3968-3980, and both metal
+# shots have an edge line across at y 3984-3988. So the diffusion below gate mu is NOT in1's node:
+# it goes west under the VSS rail as a band y 3966-3984, drawn in trace/tl3.txt, to the node of
+# rcs_mn3852.)
+D 4052,3955:4092,3984                 # below gate mu: ends at the edge line y ~3984
+D 4052,4066:4090,4135                 # in1's node (the load strip y 4070-4096 and the box), and on down under gate mv
 B 4076,4056:4114,4094
 D 4082,4060:4112,4092
 P 4085,4062:4135,4082                 # output poly to the pad of in1's metal
