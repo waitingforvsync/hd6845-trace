@@ -127,6 +127,10 @@ Tested in the working tree only (not committed): with that edge at 15279 and the
 active, the full extraction gives 0 errors, 0 warnings, 4126 transistors (11 more), and unit a's
 equations are unchanged.
 
+Widths (lengths) at copy b, `px.py col` in acid: x 10554 poly y 15383-15400 and y 15426-15442 (the two
+upper AND gates), x 10560 poly y 15497-15513 (the pull-down row; unit a's same row 15019-15036): each
+L 16-18, the cell's 18, and each 476 below unit a's. Channel widths not profiled.
+
 Copy b's own VSS box below its stack is drawn (active): `D 10540,15706:10596,15752` with the contact
 (10558,15731) on the VSS rail (`b_box.png`, 4x: pale box in the clean shot, dark edge from y 15752;
 ring in the metal shot).
@@ -157,7 +161,7 @@ In order:
 1b. Copy b: fix unit a's VSS box south edge (15285 -> 15279), uncomment the cells and the three
    contacts, re-run the extraction; then draw its rows to their pads (table under "Latch unit b";
    rows y 15563 and 15606 go on west, not followed), and draw the metal x 10441 on from y 15188 (seen continuous to y 15720, 3x).
-   No widths profiled for b.
+   Channel widths of b not profiled (three gate lengths were: above).
 2. Test the east column above y 14800 and below y 15750 for further copies; overlay the copy
    at 6857,11495 on the metal shot and the mirrored candidate at all.
 3. West gate column; the routing (bus, L bundles, vertical tracks); joins to `bc1`'s bus ends
