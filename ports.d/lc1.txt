@@ -10,6 +10,7 @@ lc1_w7606   M  5117-5133,6900   out  gate 5's output on the metal M_b; followed 
 lc1_w7343   M  5180-5200,6900   in   gate 3's lower input on the metal V2; followed to y 6844
 lc1_w7257   M  5224-5246,6900   in   gate 3's upper input on the metal V3; followed to y 6800
 lc1_w7734   M  5288-5310,6900   out  gate 6's output on the metal V4; followed to y 6720, where it turns east
+lc1_w7864   M  5705-5721,6900   out  gate 7's output, the branch north from the pad (5583,7519); followed to y 6365
 
 # South side (y 8067)
 vcc         M  4755-4803,8067   -    rail 1, runs on south
@@ -27,6 +28,6 @@ lc1_w7304   P  6450,7379-7397   out  gate 3's output on a long poly row; seen to
 lc1_w7780   P  6450,7772-7788   out  gate E1's output row; seen to x 6710
 
 # Drawn ends inside the strip (the wires go on; not traced yet)
-lc1_w7040   P  6108,7944-7962   in   lc_step's inverse: the row ends at about x 6128 in gate cluster E (not resolved)
+lc1_w7040   P  6126,7944-7962   in   lc_step's inverse: the row's west end, against a diffusion of gate cluster E (not drawn, not resolved)
 lc1_w7864   P  5640,7509-7527   out  row east of the pad (5583,7519); runs on to a pad at about (6250,7517)
 lc1_w7733   P  6240,7552-7570   in   gate E1's input: the row y 7561 west of the pad (6297,7561); its west end is a pad (5537,7561)

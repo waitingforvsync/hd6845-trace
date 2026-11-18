@@ -213,14 +213,14 @@ N M 5190,6950 lc1_w7343
 # the row turns south-east as the lowest line of the diagonal bundle, east again along y 7344 across the
 # crossing field (under a dozen metals, two of them lengthwise, no tap) to a pad; metal east 130 px, south
 # along x 6472 (just outside the strip) to a pad; poly west along y 7953 back into the strip
-P 5138,7040 x5141 5445,7344 x6325 w=20
+P 5128,7040 x5131 5435,7344 x6325 w=20
 P 6322,7328:6360,7362
 C 6341,7345 s=26x26
 N P 5800,7344 lc1_w7040
 M 6330,7346 x6472 y7942 w=18
 P 6455,7913:6492,7958
 C 6471,7930 s=26x26
-P 6486,7953 x6108 w=18                      # west toward gate cluster E (drawn to x 6108; not followed further)
+P 6486,7953 x6126 w=18                      # west into gate cluster E: the poly ends at x 6126 against a diffusion (not drawn)
 
 # ---------------------------------------------------------------- gate 3's output also runs east
 P 5096,7388 x6450 w=18                      # from the pad (5082,7388) east along y 7379-7397 out of the strip
@@ -251,6 +251,7 @@ M 5416,7520 x5596 w=16                      # metal east to a pad
 P 5568,7503:5602,7536
 C 5583,7519 s=26x26
 P 5596,7518 x5640 w=18                      # poly row on east (drawn to x 5640)
+M 5584,7524 y7346 x5668 y6976 x5713 y6900 w=16   # and a metal north from the same pad: it lies on lc1_w7040's row for 95 px (no contact), jogs east twice, and leaves the strip north
 M 5429,7508 y8003 x5476 y8067 w=20          # and metal south, a jog east, out of the strip
 N M 5429,7700 lc1_w7864
 
@@ -268,7 +269,7 @@ D 5895,7750:5945,7776                       # load channel
 D 5935,7748:6105,7777                       # output band, east under the thin metal x 5965-5982 and the VSS rail
 D 5961,7713:5981,7750                       # stub up under the load tie
 P 5900,7713:5942,7799                       # load gate
-P 5940,7713:5980,7743                       # its extension east at the top
+P 5940,7713:5980,7731                       # its extension east at the top (y 7713-7730)
 B 5959,7711:5983,7745                       # load gate tied to the output
 D 6027,7677:6077,7777                       # under the rail: VSS box, channel, drain
 D 6073,7707:6100,7777                       # the same device east of the rail

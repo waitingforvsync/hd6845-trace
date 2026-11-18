@@ -113,13 +113,13 @@ Traced (the equations above are what `tools/netlist.py` recovers):
 
 | Net | Route (all drawn) |
 |---|---|
-| `lc1_w7040` (gate 1's input, the inverse of `lc_step`) | row y 7030-7050 east to x 5141; south-east as the lowest line of the diagonal poly bundle to (5445,7344); east as a poly row y 7334-7354 across the crossing field (under a dozen vertical metals; two metals lie on it lengthwise, x 5575-5678 and x 6098-6307, without contact) to a pad with a contact (6341,7345); metal east along y 7337-7355 to x 6472 (22 px outside the strip), south along x 6463-6481 to a pad with a contact (6471,7930); poly west along y 7944-7962, drawn to x 6108: it ends at about x 6128 beside a diffusion in gate cluster E (not resolved) |
+| `lc1_w7040` (gate 1's input, the inverse of `lc_step`) | row y 7030-7050 east to x 5141; south-east as the lowest line of the diagonal poly bundle to (5445,7344); east as a poly row y 7334-7354 across the crossing field (under a dozen vertical metals; two metals lie on it lengthwise without contact: x 5575-5678, which is `lc1_w7864`'s own branch north, and x 6098-6307) to a pad with a contact (6341,7345); metal east along y 7337-7355 to x 6472 (22 px outside the strip), south along x 6463-6481 to a pad with a contact (6471,7930); poly west along y 7944-7962 to its end at x 6126, against a diffusion in gate cluster E (not drawn, not resolved) |
 | `lc1_w7257` (gate 3) | row east to a pad (5235,7258); metal V3 (x 5224-5246) north out of the strip |
 | `lc1_w7343` (gate 3) | row east to a pad (5190,7345); metal V2 (x 5180-5200) north out of the strip |
 | `lc1_w7304` (gate 3's output) | besides gate 4: a poly row y 7379-7397 from the pad (5082,7388) east across the whole strip and out at x 6450 (seen to x 6710) |
 | `lc1_w7606` (gate 5's output) | row east to a pad (5124,7605); metal M_b (x 5115-5135) north out of the strip |
 | `lc1_w7734` (gate 6's output) | row east to a pad (5126,7735); metal east, north along x 5159-5181, east along y 7425-7447, north as V4 (x 5288-5310) out of the strip |
-| `lc1_w7864` (gate 7's output) | row east to a pad (5126,7866); metal east, north along x 5202-5222, east along y 7510-7530 to a pad (5299,7520); poly east under the metal V5 to a pad (5429,7520); from it metal east to a pad (5583,7519) with a poly row on east (drawn to x 5640), and metal south along x 5419-5439, a jog east at y 8003, out of the strip at x 5466-5486 |
+| `lc1_w7864` (gate 7's output) | row east to a pad (5126,7866); metal east, north along x 5202-5222, east along y 7510-7530 to a pad (5299,7520); poly east under the metal V5 to a pad (5429,7520); from it metal east to a pad (5583,7519), from which a poly row goes on east (drawn to x 5640) and a metal goes north (x 5576-5592 to y 7346, east along y 7338-7354 to x 5668, lying on `lc1_w7040`'s row without contact, north along x 5660-5676 to y 6976, east to x 5713, north out of the strip); and from the pad (5429,7520) metal south along x 5419-5439, a jog east at y 8003, out of the strip at x 5466-5486 |
 
 ### Gate E1 (cluster E), traced
 
@@ -152,6 +152,7 @@ stops.
 | `lc1_w7343` | M | x 5180-5200 at y 6900 | in | V2, from the north (followed to y 6844) |
 | `lc1_w7257` | M | x 5224-5246 at y 6900 | in | V3, from the north (followed to y 6800) |
 | `lc1_w7734` | M | x 5288-5310 at y 6900 | out | V4, north (followed to y 6720, where it turns east) |
+| `lc1_w7864` | M | x 5705-5721 at y 6900 | out | the branch north from the pad (5583,7519) (followed to y 6365) |
 | `lc1_w7170` | M | x 5030-5046 at y 8067 | in | T1, south (gate 2's input) |
 | `lc1_w7468` | M | x 5073-5093 at y 8067 | out | M_c2, south |
 | `lc1_w7990` | P | x 5072-5092 at y 8067 | out | under M_c2, south |
@@ -159,7 +160,7 @@ stops.
 | `lc1_w7780` | M | x 6287-6307 at y 8067 | out | south from the pad (6296,7781) (followed to y 8175) |
 | `lc1_w7304` | P | (6450, 7379-7397) | out | the long row, on east (seen to x 6710) |
 | `lc1_w7780` | P | (6450, 7772-7788) | out | gate E1's output row, on east (seen to x 6710) |
-| `lc1_w7040` | P | (6108, 7944-7962) | in | drawn end of the row from the pad (6471,7930); it ends at about x 6128 in cluster E |
+| `lc1_w7040` | P | (6126, 7944-7962) | in | the west end of the row from the pad (6471,7930), against a diffusion of cluster E that is not drawn |
 | `lc1_w7864` | P | (5640, 7509-7527) | out | drawn end of the row east of the pad (5583,7519); it runs on to a pad at about (6250,7517) |
 | `lc1_w7733` | P | (6240, 7552-7570) | in | drawn end of the row y 7561 west of the pad (6297,7561); its west end is a pad (5537,7561) |
 
@@ -228,6 +229,46 @@ gate added since (`lc1_w7780 = NOT lc1_w7733`, its two transistors and two names
 column differs. Because finding 1 changes a connection, a second round follows.
 
 Round 1: one finding that changes a connection, fixed.
+
+**Round 2: fix check of round 1 and full review of two new pieces, 2026-11-17 18:00 -0800.** `trace/lc1.txt` at
+commit 3107183. Reviewer: a fresh Claude Fable 5.2 agent, images in `cache/scratch/lc1/review-2/`
+(33). Part A: the three fixes of round 1. Part B: the pieces "wires" (where the column's wires go)
+and "E1". Told to suspect: `lc1_w7040`'s route (the turn into the diagonal, a one-line slip in the
+bundle, which row it becomes, taps, the nest of L-shaped metals at x 6472, the pad (6471,7930));
+`lc1_w7304`'s long row (the join in the metal gap at x 5100-5112, breaks, steps, taps);
+`lc1_w7864`'s poly link under V5 and its two arms; `lc1_w7734`'s corners; E1's tie under the thin
+metal, other devices on its row, its three pads, the two metals at x 6297; the rail names.
+
+Part A: all three fixes right (the pad (5124,7605) has a ring and a green hole and M_b runs north
+only, without contact on the rows it crosses; the column's west edge lies between x 4992 and 5010;
+T1, the exit poly and the corner right; the 12 px join at x 5100-5112 is poly in both metal shots).
+Both `sameconn` runs against d0eb7d7 differed only by gate E1.
+
+Part B, checked and found correct (4x or more, sheared text maps along the diagonal, text maps,
+the follower): `lc1_w7040` end to end (the turn at x 5141, the lowest band at constant offset from
+x 5130 to 5466, the row y 7344, no taps, the metal x 6098-6307 separate from the pad, the corner
+at x 6472, the pad (6471,7930), the row west); `lc1_w7304`'s row straight and unbroken with no
+taps; `lc1_w7864`'s link and both arms at (5429,7520); `lc1_w7734`'s corners; both pads of gate
+3's inputs; all of E1 (the tie the least certain: read as a pass-over of the thin metal, which is
+not widened and shows no pits). Not checked: the rail names; the row y 7561 west of x 6240 and the
+row east of x 5640; whether E1's pull-down reaches east of the rail (width only).
+
+Findings, each checked by the tracer:
+
+1. `lc1_w7864` has a metal branch north from the pad (5583,7519) that the trace lacked: x 5575-5593
+   north to y 7347, east to x 5670, north to y 6975, east to x 5712, north out of the strip. It is
+   the "lengthwise metal x 5575-5678" on `lc1_w7040`'s row. **Changes a connection** (a wire
+   leaves the package at a place the trace did not have). Confirmed (`pad5583.png`, 6x, both
+   metal shots: the metal from the north ends on the pad's ring as the one from the west does;
+   `textmap 5556 7476 5612 7540`: the ring is about 15 px on the north side and 12 px on the
+   west; `follow.py 5584 7480 N` and `5666 7300 N`; `br_top.png` for the jog at y 6976). Fixed:
+   the metal drawn, the port added.
+2. The row y 7953 was drawn 18 px past the poly's end. Geometry only. Fixed (ends at x 6126).
+3. E1's load extension is y 7713-7730, not to 7743. Geometry only. Fixed.
+4. `lc1_w7040`'s diagonal was drawn 6-8 px north-east of the band. Geometry only. Fixed (10 px
+   west).
+
+Round 2: one finding that changes a connection, fixed.
 
 ## Not done
 
