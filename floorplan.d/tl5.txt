@@ -17,3 +17,4 @@
 5060,2505:5150,3040   power   ?rail RC north of the column | from the wide metal band y 2180-2500 over the north rows (vss by structure only)
 4610,2745:4967,3000   route   latch b's enable to tl4's track | tl4_w4068: from the pad (4910,2767) of the row y 2767 by metal south, west, south, west to the track x 4625 of tl4's latch
 5655,3645:5683,4410   route   track T10, north piece | tl5_w4395, latch c's data, from the east along y 3659 and south to the pad (5665,4395)
+4520,2924:4967,2957   route   clear of the latches to tl4's track | tl4_w4198: the row y 2940 from the fifth strip's latches a and b west to the north pad (4537,2940) of the track x 4537, the clear of tl4's latch and pair

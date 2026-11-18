@@ -549,3 +549,28 @@ P 4892,2751:4930,2785
 C 4910,2767
 M 4909,2755 y2901 x4690 y2988 x4625 y4062 w=14
 @alias tl4_w4068 tl5_w3982
+
+# ====================================================================
+# The clear of latches a and b is tl4's tl4_w4198: the row y 2930-2950 runs on west of the edge
+# for 415 px to a pad with a contact (4537,2940), the north end of tl4's track x 4537 (j2_a.png
+# 4x, three shots: ring with a bright centre, green hole; bare ground north of the pad, the
+# metal goes on south). The row between: under the wide metal foot y 2935-2995 from x 4950 to
+# x 4725 (j2_b.png 4x, clean and chip-2 stripped: one cream band, no pad), in the open or under
+# the metals x 4690 and x 4581 from there to the pad (j_c1.png, j_c1b.png 4x, four shots; px.py
+# row 2940 4548 4736 4 acid1b,acid: cream or open poly at every sample but three gap marks, at
+# x 4556-4564, 4600 and 4704-4708, none green or pink). The mark beside the pad (4556-4566, in
+# the 17 px gap between the pad's metal and the metal x 4581) is a dark blob with cream above and
+# below it within the row (px.py col 4560 2920 2960 3: clean shot 181/142/112 at y 2935 and
+# 165/143/116 at y 2947) and poly-coloured in both metal shots (chip 2 120-137/86-103/38-50,
+# chip 1 114-140/62-77/30-40 at y 2935-2947, against bare ground 147/130/67 and 117/93/74 at
+# y 2920): one poly. tl5_tracks.py rows col 2880 3004 3 at 23 cuts x 4960-4430: the row at the
+# same y in every cut (no step). The track: follow.py (tl4's notes): one metal from y 2938 to
+# y 4814; tl5_tracks.py v 4537 2925 3900: no stretch without metal in both chips over 16 px,
+# holes at the pad and at (4537,3463), a second pad of the same track whose poly runs east along
+# y 3450-3470 (NOT drawn: tl4's field); j2_s.png (1.3x, three shots: one metal x 4528-4545 from
+# the pad to tl4's drawn piece at y 3895).
+P 4553,2930:4967,2950
+P 4520,2924:4560,2957
+C 4537,2940
+M 4537,2928 y3900 w=14
+@alias tl4_w4198 tl5_w3636

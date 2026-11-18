@@ -9,7 +9,7 @@ tl5_w3982   M  4898,2760-2775  ?    the other metal of the pad (4910,2767), whic
 tl5_w4458   P  4967,2801-2820  in   latch c's enable: the row of the pad (5407,2810), T4's north piece
 tl5_w2855   P  4967,2846-2865  ?    the row of T8's north pad (5580,2855)
 tl5_w3245   P  4967,2890-2909  out  the NOR's output: the row of the pad (5452,2900), T5's north piece
-tl5_w3636   P  4967,2930-2950  ?    the clear of latches a and b: the row of the pad (5165,2945), T0
+tl5_w3636   P  4967,2930-2950  ?    the clear of latches a and b: the row of the pad (5165,2945), T0; runs on west to the pad (4537,2940) of tl4's track x 4537: the net is tl4_w4198
 tl5_w3505   P  4967,2975-2994  ?    latch a's enable: the row of the pad (5494,2985), T6
 
 # East side (x 5683)
