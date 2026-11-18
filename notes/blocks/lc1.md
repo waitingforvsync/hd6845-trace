@@ -113,7 +113,7 @@ Traced (the equations above are what `tools/netlist.py` recovers):
 
 | Net | Route (all drawn) |
 |---|---|
-| `lc1_w7040` (gate 1's input, the inverse of `lc_step`) | row y 7030-7050 east to x 5141; south-east as the lowest line of the diagonal poly bundle to (5445,7344); east as a poly row y 7334-7354 across the crossing field (under a dozen vertical metals; two metals lie on it lengthwise without contact: x 5575-5678, which is `lc1_w7864`'s own branch north, and x 6098-6307) to a pad with a contact (6341,7345); metal east along y 7337-7355 to x 6472 (22 px outside the strip), south along x 6463-6481 to a pad with a contact (6471,7930); poly west along y 7944-7962 to its end at x 6126, against a diffusion in gate cluster E (not drawn, not resolved) |
+| `lc1_w7040` (gate 1's input, the inverse of `lc_step`) | row y 7030-7050 east to x 5150; south-east as the lowest line of the diagonal poly bundle (centre line x = y - 1890) to (5454,7344); east as a poly row y 7334-7354 across the crossing field (under a dozen vertical metals; two metals lie on it lengthwise without contact: x 5575-5678, which is `lc1_w7864`'s own branch north, and x 6098-6307) to a pad with a contact (6341,7345); metal east along y 7337-7355 to x 6472 (22 px outside the strip), south along x 6463-6481 to a pad with a contact (6471,7930); poly west along y 7944-7962 to its end at x 6126, against a diffusion in gate cluster E (not drawn, not resolved) |
 | `lc1_w7257` (gate 3) | row east to a pad (5235,7258); metal V3 (x 5224-5246) north out of the strip |
 | `lc1_w7343` (gate 3) | row east to a pad (5190,7345); metal V2 (x 5180-5200) north out of the strip |
 | `lc1_w7304` (gate 3's output) | besides gate 4: a poly row y 7379-7397 from the pad (5082,7388) east across the whole strip and out at x 6450 (seen to x 6710) |
@@ -269,6 +269,30 @@ Findings, each checked by the tracer:
    west).
 
 Round 2: one finding that changes a connection, fixed.
+
+**Round 3: fix check, 2026-11-17 18:12 -0800.** The changes from commit 3107183 to a5daf42 (round 2's four fixes).
+Reviewer: a fresh Claude Fable 5.2 agent, images in `cache/scratch/lc1/review-3/`. It checked each
+change at 4x or more in two shots with row profiles and text maps, and both `sameconn` runs
+against 3107183 (`connections identical`).
+
+- Change 1 (`lc1_w7864`'s metal north): right. One piece through all four corners in both metal
+  shots; on the pad (ring 15 px on the north side against 13 px on the west, a green hole in the
+  clean shot); no pad, ring or hole under it anywhere, the 95 px on `lc1_w7040`'s row included;
+  separate from the parallel metals x 5700-5722 and x 5615-5635; still metal at y 6900 and y 6820.
+- Change 2 (the row y 7953 ends at x 6126): right.
+- Change 3 (E1's load extension): right.
+- Change 4 (the diagonal moved 10 px west): **wrong way. Geometry only.** The poly's centre line
+  is x = y - 1890; the trace had it at x = y - 1909 (and at y - 1899 before round 2's fix), mostly
+  on the field beside the band, though it still met both rows and touched nothing. Confirmed
+  (`px.py row 7160 5240 5300 4 metal`: orange x 5260-5276; `px.py row 7310 5390 5450 4 metal`:
+  orange x 5410-5426). Fixed: `P 5128,7040 x5150 5454,7344 x6325 w=18`.
+
+The connections are the same before and after that fix:
+
+    tools/t.sh lc1 sameconn.py a5daf42            ->  connections identical
+    .venv/bin/python tools/sameconn.py a5daf42    ->  connections identical
+
+Round 3: no findings that change a connection.
 
 ## Not done
 

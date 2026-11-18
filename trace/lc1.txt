@@ -213,7 +213,7 @@ N M 5190,6950 lc1_w7343
 # the row turns south-east as the lowest line of the diagonal bundle, east again along y 7344 across the
 # crossing field (under a dozen metals, two of them lengthwise, no tap) to a pad; metal east 130 px, south
 # along x 6472 (just outside the strip) to a pad; poly west along y 7953 back into the strip
-P 5128,7040 x5131 5435,7344 x6325 w=20
+P 5128,7040 x5150 5454,7344 x6325 w=18
 P 6322,7328:6360,7362
 C 6341,7345 s=26x26
 N P 5800,7344 lc1_w7040
