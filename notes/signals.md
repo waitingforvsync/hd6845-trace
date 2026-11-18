@@ -352,6 +352,7 @@ Row tags `s0` ... `s13` are rows from the top; which MA bit each is has not been
 | `bc1_dec#_n` | decoder outputs, active low (00, 10, 01) |
 | `bc1_ld_in#`, `bc1_ld_n`, `bc1_ld_a` | inputs, NAND output and twin output of the driver of cdp4's row D strobe |
 | `bc1_d#` | data lines 3-6 into cdp4's row D |
+| `bc2_w#` | a wire of the bottom-centre logic (`notes/blocks/bc2.md`), by the y of its pad or defining row. East column latch unit a (x 10380-10778, y 14800-15285, `tl1`'s unit at 7940,10454): `bc2_w14912` data (pad (10395,14912), metal west), `bc2_w14955` enable (metal x 10441, pads (10441,14955), (10441,15172)), `bc2_w15087` clear (pad (10395,15087), metal x 10395 south), `bc2_w14876` = NOT `bc2_w14912` (the cell's thin metal x 10500), `bc2_w15000` = NOT(`bc2_w14912` AND `bc2_w14955` OR `bc2_w15029`): output, pad (10395,15000), metal from the north-west; `bc2_w15029` = NOT(`bc2_w15087` OR `bc2_w14955` AND `bc2_w14876` OR `bc2_w15000`): the other side, not taken out. Sources and destinations not followed |
 | `bc1_g#_in`, `bc1_g#_out` | input and output of inverter 6 |
 
 ## Odd ones

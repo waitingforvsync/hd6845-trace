@@ -4,6 +4,11 @@ Scratch: `cache/scratch/bc2/`. Coordinates are metal-shot pixels.
 
 ## Status
 
+2026-11-18 05:32 +0100: **one latch unit traced** (east gate column, unit a: `tl1_ua` + `tl1_ub` at
+7940,10454, 11 transistors), traced on claude-opus (Fable allowance exhausted). Not reviewed.
+Everything else in the region is still survey only (below).
+
+Earlier (2026-11-18 04:48 +0100, survey):
 2026-11-18 04:48 +0100: **survey only. Nothing is traced; there is no trace file, no ports file and no
 floor-plan fragment yet.** The run was stopped (budget) after the survey and the cell search.
 Everything below was read at 0.57-0.9x (`survey.png`, `colL.png`, `colR.png`: metal and
@@ -70,15 +75,45 @@ Seen for the copies at 7940,10454 and 7941,10930 (`ma.png`, `mb.png`, and `w_aci
 
 ## Ambiguities
 
-None recorded: nothing was traced.
+- The rails over latch unit a are named VSS (x 10568) and VCC (x 10746) by structure (the pull-downs' boxes and the loads' boxes, as in `tl1`), not followed to a supply.
+
+## Latch unit a (x 10380-10778, y 14800-15285)
+
+`@inst tl1_ua 7940,10454` and `@inst tl1_ub 7940,10454` (tag a): both cells at one offset, as in
+`tl1`, `tl5`. Overlay `a_c.png` (clean) and `a_m.png` (metal), 2.5x: every gate of the cells lies
+on a poly row over diffusion, the cell's contacts sit on the rails (VSS x 10540-10597, VCC
+x 10718-10775) or on rings. Drawn by hand: both rails over the unit (by structure, not followed to
+a supply), the VSS box below the stack with its ring (10558,15258), the VCC long ring
+(10745,14988-15070), the thin metal x 10682 between its pads (10681,14953), (10681,15156), and the
+rows west of x 10484 to their pads (`a_w.png`, 4x, clean and metal side by side: each pad a ring
+in the metal shot, each row continuous poly in the clean shot):
+
+| Net | Row | Pad | Metal at the pad |
+|---|---|---|---|
+| `bc2_w14912` data (inverter and upper AND) | y 14905-14922 | (10395,14912) | goes west, not followed |
+| `bc2_w14955` enable (both ANDs) | y 14947-14964 and y 15163-15180 | (10441,14955), (10441,15172) | one vertical metal x 10441 (drawn between the pads only) |
+| `bc2_w15087` clear | y 15079-15096 | (10395,15087) | metal x 10395 south, not followed |
+| `bc2_w15000` output (upper gate's node) | y 14992-15010 | (10395,15000) | a metal from the north-west ends on it, not followed |
+
+Equations (`unsure.py --equations`: the inverter FIRM, the two gates DEPENDS only by feedback):
+- `bc2_w14876` = NOT `bc2_w14912`
+- `bc2_w15000` = NOT( `bc2_w14912` AND `bc2_w14955` OR `bc2_w15029` )
+- `bc2_w15029` = NOT( `bc2_w15087` OR `bc2_w14955` AND `bc2_w14876` OR `bc2_w15000` )
+
+The same D latch with enable and clear as `tl5` and `lc2` place. Widths: `px.py col 10554`
+(acid) gives poly y 14905-14922 and y 14947-14966 at the two upper AND gates, matching the
+cell's L 18; the other transistors' sizes are the master's, not profiled.
 
 ## Not done
 
-Everything. In order:
-1. Place `tl1_ua` / `tl1_ub` at 7940,10454 and 7941,10930 (`@requires tl1`), each with its
-   own rails, VSS box and contact below the stack, VCC ring, thin metal x 10682 with its pads,
-   and its input rows and pads (listed above: verify each at 4x in two shots first; widths by
-   `tools/px.py`). The cell's own contacts report "no metal over it" until the rails are drawn.
+In order:
+1. **The metal x 10441 is not only the enable's link between its two pads**: in the metal shot
+   (`a_w.png`, `a_m.png`) it runs on north of y 14940 and south of y 15188, about 55 px west of
+   the cell's own thin metal x 10500 (the extra vertical seen in another copy). Not drawn
+   beyond the pads; where it goes (and so where the enable comes from) is not followed. Likewise
+   the metals at the data, clear and output pads.
+1b. Copy b at 7941,10930: place the same way; **its inputs differ** (survey above): read each
+   row on its own at 4x.
 2. Test the east column above y 14800 and below y 15750 for further copies; overlay the copy
    at 6857,11495 on the metal shot and the mirrored candidate at all.
 3. West gate column; the routing (bus, L bundles, vertical tracks); joins to `bc1`'s bus ends

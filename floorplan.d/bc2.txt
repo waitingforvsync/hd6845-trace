@@ -1,0 +1,2 @@
+# bc2: bottom-centre random logic
+10380,14800:10780,15285  logic  latch (tl1 unit) | east gate column, unit a: data bc2_w14912, enable bc2_w14955, clear bc2_w15087, output bc2_w15000
