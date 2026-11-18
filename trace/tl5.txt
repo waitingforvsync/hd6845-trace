@@ -57,7 +57,7 @@ C 4991,4182
 P 5195,3452:5440,3471
 P 5432,3444:5476,3479
 C 5452,3461
-M 5451,3450 y5250                     # T5 south of the pad: one metal without a pad as far as looked at (y 5250); follow.py: to (5450,5766)
+M 5451,3450 y5771                     # T5 south of the pad: one metal without another pad to its south pad (5451,5759) (the foot, below)
 N P 5300,3461 tl5_w3461
 # enable: row y 3496-3514 to the pad (5494,3505) on T6; T6 runs on south to a second pad
 # (5494,3722), where it ends (bare ground south), on the row y 3712-3732 of the lower unit's
@@ -114,7 +114,7 @@ N P 5200,4027 tl5_w4027
 P 5195,4104:5220,4123
 P 5212,4096:5254,4131
 C 5233,4113
-M 5165,2945 x5233 y5250               # T0: from the pad (5165,2945) (north rows, below) an arm east and south through both clear pads; one metal without another pad as far as looked at (y 5250); follow.py 5234 4300 N/S: corner (5233,2944), west end (5161,2944); south to a corner (5231,6026), west, south to (5145,6113)
+M 5165,2945 x5233 y6027 x5150 y6120   # T0: from the pad (5165,2945) (north rows, below) an arm east and south through both clear pads; one metal without another pad to a corner (5233,6027), west along y 6020-6035 and south at x 5142-5160 to its south pad (5148,6108) (the bus, below); follow.py 5234 4300 N/S: corner (5233,2944), west end (5161,2944); south to a corner (5231,6026), west, south to (5145,6113)
 # output: row y 4147-4167 east to the pad (5622,4160), the south end of T9 (bare ground south),
 # which comes from the NOR's gate 1 pad (5580,3200): drawn with the NOR
 P 5195,4147:5608,4167
@@ -173,7 +173,7 @@ N P 5400,4503 tl5_w4503
 P 5195,4580:5478,4600
 P 5472,4573:5514,4608
 C 5492,4590
-M 5494,3860 y5250                     # south of the pad (5492,4590) one metal without a pad as far as looked at (y 5250); follow.py: to (5494,5418)
+M 5494,3860 y5423                     # south of the pad (5492,4590) one metal without a pad to its south pad (5493,5411) (the foot, below)
 P 5474,3855:5514,3890
 C 5492,3872
 P 5508,3862:5683,3882
@@ -301,12 +301,12 @@ P 4967,2675:5025,2694
 P 5020,2668:5058,2702
 C 5038,2685
 # y 2722: to the pad (5364,2722), the north end of T3. T3 is one metal to (5363,6114) (follow.py
-# 5365 2900 N/S) with a pad (5364,3070) on the output row of the inverter at y 3040-3150; drawn
-# as far as looked at
+# 5365 2900 N/S) with a pad (5364,3070) on the output row of the inverter at y 3040-3150 and its
+# south pad (5363,6108) (the bus, below)
 P 4967,2714:5350,2733
 P 5346,2705:5384,2740
 C 5364,2722
-M 5364,2710 y5250
+M 5364,2710 y6120
 N M 5364,4000 tl5_w2722
 # y 2767: to the pad (5452,2767), whose metal is an arm east onto T7 (latch b's enable)
 P 4967,2758:5438,2777
@@ -395,3 +395,129 @@ P 4964,3042:4999,3140
 ?P 5036,3050:5050,3072
 ?D 5033,3062:5052,3080
 ?B 5033,3056:5052,3076
+
+# ====================================================================
+# The column's foot, y 5045-5440: nothing but RC and the tracks. f_foot.png (2.1x, clean and
+# chip-2 metal), f_sv1.png (0.85x). px.py col 5105 5000 5450 10: olive field (140/146/106) under
+# RC from y 5050 to y 5440 without a dark line, against 192/161/137 on the VSS box at y 5000; the
+# rail's dark specks at (5090,5165), (5088,5280), (5110,5335), (5105,5370) have no box under them.
+# RC runs on south across the rows to y 5942 and turns west: one rail y 5882-5942 (px.py col 5000
+# 5856 5960 4: bare ground 160-172/142/86 at y 5868-5872 and from y 5956, metal between with the
+# edges of the two polys under it as dark lines; h_rc_metal.png, h_rc_acid1b.png 4x), out of the
+# strip west. Still vss by structure only.
+M 5104,5045 y5942 w=46
+M 5127,5912 x4967 w=60
+
+# ====================================================================
+# The rows under the foot, y 5400-5780: wiring only (no diffusion under any row: railprof.py 5088
+# 5122 5030 5830 gives every row as poly over field under RC; the rows are in the open or under
+# the tracks elsewhere, on khaki or pink). Eight rows cross the west edge x 4967 (g_w1.png 3.2x,
+# clean and chip-2 stripped: eight straight rows, bw's rc_stepreq_n row y 5576-5594 the fourth)
+# and run straight under RC and the tracks (tl5_tracks.py rows col 5396 5780 3 at 21 cuts from
+# x 4975 to x 5538: every row at the same y in every cut). f_r1_acid1b.png, f_r1_metal.png (1.7x);
+# pads g_a.png, g_b.png, g_c.png, g_d.png, g_e.png, g_f.png, g_n.png (4x, two shots each).
+# ---- row y 5402-5421: not from the west. From a pad (5190,5411), the north end of the metal
+# x 5189 (bare ground north and west of the pad), east under T0..T5 to the pad (5493,5411), the
+# south end of T6's lower piece (bare ground south and east). The metal x 5189 runs south to a
+# corner (5189,5982) and west along y 5975-5989 out of the strip (follow.py 5187 5500 S: corner
+# (5182,5982), west to (4924,5992), south, east along y 6370; tl5_tracks.py: no hole on it)
+P 5170,5396:5212,5428
+C 5190,5411
+P 5205,5402:5482,5421
+P 5476,5396:5514,5428
+C 5493,5411
+M 5189,5399 y5982 x4967 w=14
+# ---- row y 5447-5467: from the west edge to the pad (5538,5457); the pad's metal runs east to a
+# corner (5581,5457) and north as T8's south piece to its north pad (5580,4521) (bare ground
+# north), whose poly row runs east along y 4510-4530 under T9 and T10 and out of the strip
+P 4967,5447:5526,5467
+P 5520,5441:5558,5475
+C 5538,5457
+M 5526,5457 x5581 y4509
+P 5563,4504:5601,4538
+C 5580,4521
+P 5595,4510:5683,4530
+N P 5300,5457 tl5_w5457
+# ---- row y 5490-5510: to the pad (5493,5500); metal east to a corner (5625,5501) and north as
+# T9's south piece to its north pad (5623,4437) (bare ground north), whose row runs east along
+# y 4427-4447 out of the strip
+P 4967,5490:5482,5510
+P 5476,5484:5514,5518
+C 5493,5500
+M 5481,5501 x5625 y4425
+P 5606,4421:5646,4453
+C 5623,4437
+P 5640,4427:5683,4447
+N P 5300,5500 tl5_w5500
+# ---- row y 5534-5553: to the pad (5538,5544); metal east to a corner (5667,5545) and north as
+# T10's south piece to its north pad (5666,4480) (bare ground between it and the pad (5665,4395)
+# of T10's north piece). That pad lies on the strip's east edge (x 5650-5690) and its poly
+# leaves east from it
+P 4967,5534:5526,5553
+P 5520,5528:5558,5562
+C 5538,5544
+M 5526,5545 x5667 y4468
+P 5648,4464:5683,4496
+C 5666,4480
+N P 5300,5544 tl5_w5544
+# ---- row y 5621-5641: to the pad (5538,5631); metal east along y 5625-5639 to a pad (5666,5632)
+# on the strip's east edge, whose poly leaves east from it
+P 4967,5621:5526,5641
+P 5520,5615:5558,5647
+C 5538,5631
+M 5526,5632 x5678
+P 5648,5616:5683,5649
+C 5666,5632
+N P 5300,5631 tl5_w5631
+# ---- row y 5665-5684: to the pad (5493,5674); metal east to a corner (5627,5676), south at
+# x 5618-5637 over amrw's four rows (no pad, no hole) to a corner (5627,6150) and east to a pad
+# (5667,6150) on the strip's east edge, whose poly leaves east from it (p2_c.png 4x)
+P 4967,5665:5482,5684
+P 5476,5658:5514,5692
+C 5493,5674
+M 5481,5676 x5627 y6150 x5680
+P 5650,6134:5683,6166
+C 5667,6150
+N P 5300,5674 tl5_w5674
+# ---- row y 5708-5727: no pad. East under T5 to a corner at x 5485-5507 and south (under amrw's
+# metal x 5495 from y 5850) to a corner at y 6228-6248 and east, in the open from x 5600, out of
+# the strip (g_b.png, g_f.png, p2_d.png, p2_c.png 4x)
+P 4967,5717 x5497 y6238 x5683 w=20
+N P 5300,5717 tl5_w5717
+# ---- row y 5751-5770: no pad. East to a corner at x 5402-5424, 12 px short of T5's south pad
+# (green field between in the clean shot, two dark edges with no orange between in the chip-2
+# stripped shot: px.py row 5760 5390 5475 4), and south as the bus line x 5412 (below)
+P 4967,5761 x5412 y6350 w=20
+N P 5300,5761 tl5_w5761
+# ---- T5's south pad (5451,5759): the metal ends on it; the pad's poly runs south from it as the
+# bus line x 5453, under amrw's metal x 5450 (no row meets the pad: g_f.png)
+P 5435,5743:5470,5777
+C 5451,5759
+P 5453,5770 y6350 w=20
+
+# ====================================================================
+# The poly bus going south, y 5880-6350: ten vertical polys, by x at y 6350: 5063, 5107, 5150,
+# 5193 (res_b), 5237 (lpstb_b), 5281 (tla's rcs_e4, drawn there), 5365, 5412, 5453, and the line
+# x 5497 that turns east at y 6238 (above). All cross the south edge y 6350 straight, in the open
+# (p2_e.png 3x, three shots); amrw's four counter metals y 6153-6283 cross them without a pad or
+# a hole (tl5_tracks.py h 6153 / 6196 / 6240 / 6283). f_s1_acid1b.png, f_s1_metal.png (1.7x);
+# tl5_tracks.py rows row 5040 5520 3 at 13 cuts y 5800-6348: every line at the same x.
+# ---- two polys from the west under RC's turned rail, each turning south (h_rc_acid1b.png 4x):
+# y 5880-5900 to a corner at x 5097-5117; y 5926-5946 to a corner at x 5053-5073
+P 4967,5890 x5107 y6350 w=20
+N P 5107,6300 tl5_w5890
+P 4967,5936 x5063 y6350 w=20
+N P 5063,6300 tl5_w5936
+# ---- T0's south pad (5148,6108) and its line south (p2_a.png 4x: ring with a bright centre,
+# green hole on the pad; the metal comes down x 5142-5160 from the corner at y 6027)
+P 5130,6092:5168,6126
+C 5148,6108
+P 5150,6120 y6350 w=20
+# ---- the lines of trunks' pads (5190,6065) res_b and (5232,6105) lpstb_b, drawn there to
+# y 6160, on south
+P 5192,6150 y6350 w=20
+P 5237,6150 y6350 w=20
+# ---- T3's south pad (5363,6108) and its line south (p2_b.png 4x)
+P 5346,6093:5381,6126
+C 5363,6108
+P 5365,6120 y6350 w=20
