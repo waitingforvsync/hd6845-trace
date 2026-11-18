@@ -793,3 +793,26 @@ D 3948,3004:3964,3054
 P 3916,3026:3938,3052
 ?D 3918,3038:3952,3054
 ?B 3912,3032:3944,3058
+# ====================================================================
+# The load of tla's unit rcs_mn3852 (run 8): with it the extraction prints
+#   rcs_mn3852 = NOR(tl3_e3712, rcs_in1)
+# The VCC diffusion under the VCC rail is one box from NOR 1's (cell tl3_nor, y 3757-3797) down
+# to y ~3866, with a second contact ring at (3846,3838) (mn_a.png, 3.0x three shots: ring
+# x 3835-3858, y 3824-3852 in the metal shot; px.py row 3856 3816 4110 4)
+D 3828,3795:3880,3866
+C 3846,3838 s=20x24
+# the strip y 3838-3863 east under a plate x 3882-3938, y 3788-3882 (px.py col 3912 3790 3960 4:
+# poly in both chip-2 shots, the strip's edges across it at y 3836 and y 3864), under the thin
+# metal x 3948-3962, through the gap and under the VSS rail, where it is narrower (y 3846-3862:
+# px.py col 4017 3786 3950 4), onto tla's node (D 4052,3838:4110,3910) across the rail's east
+# edge line
+D 3876,3838:3992,3863
+D 3986,3846:4056,3862
+P 3882,3788:3938,3882
+# the tie: a heavy box under the thin metal at (3945-3972, 3784-3815), beside the plate's top
+# right corner, and diffusion colour under the thin metal from it down to the strip (mn_tie.png,
+# 4.3x three shots; px.py row 3826 3936 3992 3). The same colour goes on south of the strip under
+# the metal's east edge, so it does not show a tail. Read from outlines only: uncertain.
+?D 3948,3794:3966,3842
+?P 3930,3786:3962,3802
+?B 3944,3784:3972,3814
