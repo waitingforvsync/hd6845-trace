@@ -83,19 +83,28 @@ has been checked against the photos.
 - **Right gate column, x 10460-10760, y 16480-16780** (`right.png` 1.3x,
   `r1.png` 2.2x, acid1b | metal): a unit repeated at about y +170 to +180
   (16500, 16680, 16850, ...): a wide diffusion area x 10600-10700 between the rails
-  x 10565-10595 and x 10720-10760 (metal), with a dark (depletion) channel
-  x 10655-10700 at y 16500-16570 and again at y 16680-16760, each under a poly plate
-  that ends in a pad with a round contact at about (10740,16535) / (10740,16705), which
-  lies at the west edge of the rail x 10720+. If that contact is to the rail, the load
-  gate would be on a supply, not on its own node; this must be read at 5x in `acid`,
-  `acid1b` and `metal` before anything is drawn (open question, not recorded as a fact).
+  x 10565-10595 and x 10720-10760 (metal), with a dark area
+  x 10655-10700 at y 16500-16570 and again at y 16680-16760, each next to a pad with a round contact at about (10737,16530) / (10740,16705).
+  Read at 4x (`r5a.png` acid1b | metal, `r5b.png` acid | metal1, `r4.png` acid1b):
+  the pad x 10715-10755, y 16510-16550 is tan with a dark outline under the rail metal
+  (x 10720 and east) with a contact ring in both metal shots, so by the `acid1b` legend
+  it is a **diffusion box contacted to the rail x 10720-10760**, and the dark red-brown
+  textured area x 10668-10712, y 16500-16575 is poly in the open over the band from that
+  box: the **load** of a gate, which makes the rail x 10720-10760 most likely **VCC**
+  (assumption: rail identity not yet followed to a pad). The earlier reading "dark =
+  depletion" was wrong; layers.md says the implant is not visible. Not yet read: the
+  load gate's buried tie to the output, the output band (x 10600-10700, y 16550-16700,
+  tan, with a contact (10642,16632)), and the pull-downs west of it under the rail
+  x 10565-10595 (contact (10555,16622) in the box x 10540-10590, y 16550-16640).
   This repeated unit is the best first piece: once one copy is read, it can be a cell.
 
 ## Not done
 
 Everything: rail identity (VSS/VCC), every gate, the track field, joins to the routes
-already drawn listed above. Start with the `tl1_ub` hit at (9542,16673): crop
-x 9380-9700, y 16440-16900 at `--scale 5` in acid1b and metal, compare with `tl1`'s
-cell, and draw it as `@inst` only if every transistor and contact matches.
+already drawn listed above. Resume with the load unit of the right gate column at
+(10460-10760, 16480-16640): read the load's buried tie, the output band and the
+pull-downs at 5x in `acid1b`, `acid`, `metal` and `metal1`, draw it as a cell, then
+place its copies at y about 16680 and 16850 after checking each. The `tl1_ub` hit was
+rejected (see Checks); no cell copy of another block is known here.
 
 ## Review
