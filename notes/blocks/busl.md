@@ -91,7 +91,7 @@ with `tools/follow.py --gap 16`; every row is poly, 23-24 px between its edge li
 | `cdp4_bus_s3` | y 12052, pad (5668,12053) | track x 5668 south, west along y 12622 to x 5627, south, west along y 12860 to x 5540, south to a pad (5537,13157); poly from the pad's top east, south along x 5563, west along y 13266, south along x 5497 into the channel-2 row at (5497,13462) | y 13397; at x 5389 it runs diagonally south-east into the channel-2 row at x 5454 (one poly) | y 13462 |
 | `cdp4_bus_s2` | y 12096, to x 6412 | the row turns into a diagonal poly, 770 px south-west under about eighteen tracks, to a pad (5624,12898); track x 5626 south through the channel-2 row's pad to the array row's pad | y 13874, pad (5625,13874) | y 13418, pad (5625,13419) |
 | `cdp4_bus_s1` | y 12138, pad (7510,12138) at its west end | track x 7511 south to a pad (7511,12745); poly row y 12745 west to x 5945, diagonal south-west, row y 12941 to a pad (5582,12941); track x 5584 south, west along y 13286 to x 5540, south through the channel-2 row's pad, a diagonal step (y 13900-13944) to x 5496, south, west along y 14353 | y 14351, pad (5407,14351) | y 13375, pad (5538,13375) |
-| `cdp4_bus_s0` | y 12182, pad (7554,12183) at its west end | track x 7555 south to a pad (7554,12919); poly west and south along x 7513 (410 px) into the channel-2 row at (7513,13332) | none in the region: from the channel-2 row's pad a track x 5582 south, a diagonal step (y 13900-13943) to x 5539, west along y 14398 to x 5451, south across y 15000; it ends on a pad (5365,15042) of a poly row from the west (view `j6.png`; not drawn, `bl0`'s region) | y 13332, pad (5582,13333) |
+| `cdp4_bus_s0` | y 12182, pad (7554,12183) at its west end | track x 7555 south to a pad (7554,12919); poly west and south along x 7513 (410 px) into the channel-2 row at (7513,13332) | none in the region: from the channel-2 row's pad a track x 5582 south, a diagonal step (y 13916-13959) to x 5539, west along y 14398 to x 5451, south across y 15000; it ends on a pad (5365,15042) of a poly row from the west (view `j6.png`; not drawn, `bl0`'s region) | y 13332, pad (5582,13333) |
 
 What was checked beyond the overlays (`o4.png` .. `o8.png`):
 
@@ -173,7 +173,7 @@ latches on `cdp4_ld` and what row R1 takes from channel 1.
    no buried-contact box. The poly L itself is not drawn (not this piece's).
 
 4. **Metal lying on a poly row without a pad** (the steps of the staircase x 6790-7140 over channel 2's
-   rows; the track x 7511 over s0's poly column, y 12920-13332; a track x 5843 that begins 35 px south
+   rows; the steps of a second staircase at x 6290-6740 over channel 1's rows, about 180 px each; the track x 7511 over s0's poly column, y 12920-13332; a track x 5843 that begins 35 px south
    of s4's pad (5843,12335) and lies on s4's poly for about 100 px). Readings: a contact somewhere
    along the overlap; or none. Assumed none: no pad, no ring, no green hole in the clean shot on any
    (measurements under piece `ch1` above; guide, trap 13). A contact would join one of these eight
@@ -206,6 +206,41 @@ Findings: none. Could not check: (a) whether the poly L south and east of c3's p
 Nothing changed in the trace.
 
 Round 1: no findings.
+
+**Run 2, piece `ch1`. Round 1: full review** (2026-11-19 14:39 +0100; a fresh Fable 5.2 reviewer agent;
+commit 44a0f6d; images in `cache/scratch/busl/review-2/`, 22 used).
+Told to suspect: tracks claimed to run through a pad or to end on one, the T at (5800,11880), the near
+misses (s3's corners above s2's and s4's pads, the metal that begins south of s4's pad), track identity
+through the bends and diagonal steps, s3's pad-to-poly joint and its L beside `cdp3_hw_c3`'s pad, the
+three diagonals, s0's poly column under the track x 7511, the staircase steps lying on channel 2's
+rows, the rows' identity at x 7600 and row 11922's continuity, the coloured patches.
+Checked: every track piece with `tools/tl5_tracks.py` and `tools/follow.py --gap 16` from every pad;
+the four through pads (rings symmetric, 15-18 px each side in both chips, metal beyond on both
+sides); the T (view and text map: one metal in both chips); every end pad (no metal beyond; s4's pad
+has 32 px without metal and open poly before the other metal starts, which has no contact down to
+y 12500); the near misses (40, 52 and 30 px apart); s3's L (joined to its pad in both stripped shots,
+joined to row 13462, about 12 px clear of `cdp3_hw_c3`'s pad on both sides); the three diagonals
+(single, separate, no pads); s0's column (leaves the pad, joins row 13332, ends there, no hole under
+the metal); the rows (eight and eight at x 7600 within 3 px of `cdp4`'s, no step; row 11922 continuous
+through its pad; the seven array rows to x 4780 and row 12745 without another pad); six contact-hole
+candidates from the text scans (none has a ring or pad in the metal shots); the extraction,
+`tools/unsure.py`, `tools/padjoin.py` (nothing listed).
+Findings, both geometry only, both confirmed:
+1. s0's diagonal step was drawn 16 px too far north (y 13900-13943). Tracer's check, the metal test in
+   both chips every 10 px (`tools/px.py row Y 5486 5600 6 metal,metal1`): the east track is at
+   x 5582-5588 at y 13905, 5564-5576 at 13935, 5540-5552 at 13955; s1's step is as drawn. Redrawn
+   y 13916-13959. The two tracks stay 33 px or more apart.
+2. Channel 1 also has a metal staircase lying on its rows (x about 6290-6740, y 11878-12138, about
+   180 px a step), which the notes named only for channel 2. No pad or ring on any step (reviewer's
+   views `ch1w.png`, `ch1e.png`). Now covered by Ambiguity 4.
+`tools/t.sh busl sameconn.py 44a0f6d`: `connections identical`.
+`.venv/bin/python tools/sameconn.py 44a0f6d`: `connections identical`.
+Could not check, or only weakly: the joint of s3's pad to its L is under the pad's metal and rests on
+the two stripped shots; the row and staircase crossings were judged at 1.3x in the metal shots and
+by text scans, not each at 4x; s0 south of y 15000 was not viewed by the reviewer (the tracer's view
+`j6.png`).
+
+Round 1: no findings that change a connection.
 
 ## Not done
 
