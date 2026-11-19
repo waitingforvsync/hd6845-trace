@@ -926,7 +926,7 @@ N M 6514,7600 tl3_w3982
 #       eof_w8298  = NOT eof_w8168      unit U3 (y 8198-8326), a copy of U2 130 px lower
 #       tl3_w3982  = NOT eof_w8298      unit U4 (y 8330-8448), tl5's inverter turned 180 degrees
 #   The input is lc2's poly of lc1_w7928 (latch D's lower node; lc2's port P 6408,8067): a row
-#   y 8030-8050 from its corner (6408,8040) 1,010 px east under twenty tracks, with no pad and
+#   y 8030-8050 from its corner (6408,8040) 1,010 px east under twenty-one tracks, with no pad and
 #   no contact, to a band x 7416-7440 that turns down into U2's gate row. Each unit's output
 #   leaves by a buried contact west of the rail (boxes at x 7487-7523); U2's and U3's poly goes
 #   west, south and east as the next unit's gate row; U4's is the poly of piece w5936.
@@ -953,11 +953,11 @@ B 7486,8152:7524,8188                 # the output's buried contact (box 7487-75
 P 7416,8158:7520,8180                 # the output's poly: the row west from the box,
 P 7416,8158:7440,8266                 # south on the band x 7416-7440,
 P 7416,8244:7446,8266                 # and east onto the next unit's gate row (130 px lower)
-D 7594,8152:7628,8184                 # node east, out from under the rail
+D 7594,8154:7628,8174                 # node east, out from under the rail (y 8154-8174; review round 14)
 D 7612,8118:7628,8184                 # the arm north
 D 7612,8118:7742,8145                 # the load's strip: under the plate, to the VCC box
 D 7736,8112:7778,8175                 # VCC box
-C 7751,8136
+C 7748,8143                            # ring centre (7747,8143) in both metal shots (review round 14)
 P 7634,8100:7730,8166                 # the plate (channel 96 long, 27 wide)
 P 7650,8160:7676,8190                 # its tab, down into the tie box
 D 7612,8172:7680,8194                 # the node on east, under the tie box

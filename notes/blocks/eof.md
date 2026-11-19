@@ -276,7 +276,7 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `w5936`, to latch C | x 5054-6540, y 6876-8072 | poly from piece `x1`'s end (5063,6880): the bend at y 6892, a diagonal (centre x = y - 1829) to (5471,7300), row y 7291-7309 east to a pad with a contact (6146,7301); metal y 7303 east to a corner (6514,7303), south on x 6508-6520 **through** a pad with a contact (6513,7889) to a corner (6514,7978), west to (6471,7978), south onto `lc2`'s metal x 6471 at y 8067 (its pad (6470,8127): latch C's data) |
 | `w5936`, to the box | x 6494-7522, y 7868-8444 | the pad's poly row y 7878-7898 east under seventeen tracks to a pad with a contact (7401,7888); metal south on x 7396-7408 to a pad with a contact (7401,8425); poly y 8417-8439 east to the west edge of a heavy-outlined box (7490-7520, 8410-8442), not drawn |
 | `d3982`, U4 | x 7440-7778, y 8330-8448 | the inverter that drives `tl3_w3982` (cell `eof_dinv`, `tl5_inv` turned 180 degrees, drawn from this copy): VSS box y 8330-8373 with a contact (7568,8348) under the rail x 7552-7598, gate row y 8376-8396 directly below it (from the band x 7416-7440 to a rounded end at x 7614), node y 8398-8426; the node west on a strip y 8404-8428 to the output's buried contact (box 7490-7520, 8410-8442), on which piece `w5936`'s poly ends; east on a strip y 8405-8432 under the plate (x 7666-7722, y 8383-8448) to the VCC box (7728-7778, 8374-8432, contact (7750,8408)) under the wide metal x 7722-7776; a tail x 7640-7660 from the strip up to a hook under the tie box (7655-7697, 8352-8385), into which the plate's tab comes |
-| `d3982`, U2 and U3 | x 7416-7778, y 8068-8196 and 130 px lower | two inverters of a larger build (cell `eof_dly`, master U2; U3 = `@inst eof_dly 0,130`, findcell 0.93): VSS box y 8068-8110, contact (7568,8086), gate row y 8114-8136 (to x 7606), node y 8137-8180; west on a strip y 8156-8176 to the output's buried contact (box 7487-7523, 8153-8187); east out from under the rail at y 8152-8184, a diffusion arm x 7612-7628 north to y 8118, the load's strip y 8118-8145 east under a long plate (x 7634-7730, y 8100-8166) to the VCC box (7736-7778, 8112-8175, contact (7751,8136)); the node also on east to the tie box (7645-7680, 8170-8195) under the plate's tab. The output's poly: from the box a row y 8158-8180 west to a band x 7416-7440, south, and east as the next unit's gate row (U3's y 8244-8266, U4's y 8376-8396) |
+| `d3982`, U2 and U3 | x 7416-7778, y 8068-8196 and 130 px lower | two inverters of a larger build (cell `eof_dly`, master U2; U3 = `@inst eof_dly 0,130`, findcell 0.93): VSS box y 8068-8110, contact (7568,8086), gate row y 8114-8136 (to x 7606), node y 8137-8180; west on a strip y 8156-8176 to the output's buried contact (box 7487-7523, 8153-8187); east out from under the rail at y 8154-8174, a diffusion arm x 7612-7628 north to y 8118, the load's strip y 8118-8145 east under a long plate (x 7634-7730, y 8100-8166) to the VCC box (7736-7778, 8112-8175, contact (7748,8143)); the node also on east to the tie box (7645-7680, 8170-8195) under the plate's tab. The output's poly: from the box a row y 8158-8180 west to a band x 7416-7440, south, and east as the next unit's gate row (U3's y 8244-8266, U4's y 8376-8396) |
 | `d3982`, the input | x 6401-7440, y 8030-8136 | from `lc2`'s poly (`P 6401,8067:6415,8092`, `lc2_w8083`) north on x 6401-6416 to a corner, the row y 8030-8050 east 1,010 px under twenty-one tracks (x 6430 `inh_ck`, 6471 `tl3_w3982`, 6514 `rst_a`, 6601 `res_b`, 6645 `lpstb_b`, 6688, 6731, 6775 `rcs_e4`, 6818, 6861, 6905, 6948, 6991, 7078, 7121, 7164, 7208, 7273, 7316, 7359, 7403 `tl3_w3982`), the band x 7416-7440 south from y 8030 into U2's gate row |
 | `d3982`, the rails | x 7552-7598 and 7722-7776, y 7855-8460 | piece `g7700`'s VSS rail and wide VCC metal on south over the four units |
 
@@ -653,12 +653,12 @@ metal crosses it; here every tie box lies in the open.
 | U4's load strip is diffusion | in the open between the rail and the plate the strip reads orange in the chip-2 shots near its edges (trap 28); at its centre the chip-2 metal shot has blue 87-91 (diffusion and field; open poly 53-70) | `px.py col 7640 8006 8050 3` (U1's strip, the same build), `col 7625 8396 8440 4` |
 | U2, the pull-down and the rows | gate row y 8114-8136 from the band to the rail and under it, ending at x 7605; green field y 8140-8152 between it and the output row y 8158-8180, **which reaches the band x 7416-7440 too: the field band between the two rows runs to the band's west edge, so the rows are apart** | `m_u2w.png` (4x, four shots); `px.py col 7480 8104 8182 3 acid,metal` (rows at 8113-8137 and 8157-8180) |
 | U2, the output box | heavy-outlined box x 7487-7523, y 8153-8187 at the row's east end, on the node's strip (y 8156-8174, chip-2 blue 86-93) from the rail | `m_u2w.png`; `px.py col 7535 8146 8190 3` |
-| **U2, the node east of the rail** | the node leaves from under the rail at y 8152-8182: the clean shot is protected-diffusion colour without a break from under the rail to x 7630 on the rows y 8155-8176 (the green rim stripe at x 7609-7612, which separates the gate's end from the arm, is there only for y up to 8143 and from 8191); a diffusion band (chip-2 metal 171/141/85, clean 160/100/93: not poly, which is 160/117/53) goes north as an arm x 7612-7633 to y 8116, where its top edge runs on east as the top edge of the strip under the plate, and on east to the tie box | `m_u2z.png` (5x, four shots), `m_u2e.png` (3.8x, three shots); `textmap.py 7576 8098 7660 8204 3 --acid`; `px.py pt 7620,8165 7618,8140 7670,8108 7670,8130 7640,8030 7625,8075 ...` |
-| U2, the load | plate x 7633-7730 (the last 18 px salmon under the wide metal's margin), y 8100-8170; under it the strip y 8118-8145 (two dark lines through the plate in both chip-2 shots); VCC box x 7733-7778 with a ring (7750,8135) in both metal shots; the plate's tab down into a heavy-outlined box (7645-7680, 8170-8195) on the node: the tie | `m_u2e.png`, `m_u2z.png`; `px.py col 7665 8094 8202 3 acid1b,metal`, `row 8131 7604 7796 4` |
+| **U2, the node east of the rail** | the node leaves from under the rail at y 8154-8174 (`px.py col 7606 8140 8194 3`, review round 14): the clean shot is protected-diffusion colour without a break from under the rail to x 7630 on the rows y 8155-8176 (the green rim stripe at x 7609-7612, which separates the gate's end from the arm, is there only for y up to 8143 and from 8191); a diffusion band (chip-2 metal 171/141/85, clean 160/100/93: not poly, which is 160/117/53) goes north as an arm x 7612-7633 to y 8116, where its top edge runs on east as the top edge of the strip under the plate, and on east to the tie box | `m_u2z.png` (5x, four shots), `m_u2e.png` (3.8x, three shots); `textmap.py 7576 8098 7660 8204 3 --acid`; `px.py pt 7620,8165 7618,8140 7670,8108 7670,8130 7640,8030 7625,8075 ...` |
+| U2, the load | plate x 7633-7730 (the last 18 px salmon under the wide metal's margin), y 8100-8170; under it the strip y 8118-8145 (two dark lines through the plate in both chip-2 shots); VCC box x 7733-7778 with a ring (7747,8143) in both metal shots; the plate's tab down into a heavy-outlined box (7645-7680, 8170-8195) on the node: the tie | `m_u2e.png`, `m_u2z.png`; `px.py col 7665 8094 8202 3 acid1b,metal`, `row 8131 7604 7796 4` |
 | U3 | U2's cell 130 px lower: every outline on its feature | `m_o1.png` (2.85x, chip-2 stripped and clean), `m_o2.png` (2.95x, metal and clean); `px.py col 7460 8236 8318 3` (rows y 8244-8267 and 8288-8310) |
 | the chain | U2's output row, the band and U3's gate row are one poly (a C round a field island x 7443-7550, y 8182-8240); the same from U3's box to U4's gate row | `m_w1.png` (2.55x, three shots), `m_u2w.png`, `m_o1.png`, `m_o3.png` |
 | **U2's input: not U1's output** | the band x 7416-7440 above U2's gate row ends at y 8030 by turning west; U1's output box (7480-7520, 8022-8055) stands 40 px east of it with field between (x 7442-7478) in all four shots, and no poly leaves that box | `m_u1w.png` (3.5x, four shots); `px.py row 8090 7406 7450 3` (band x 7416-7440) |
-| the row y 8030-8050 | from the band west, under twenty-one tracks, to a corner at x 6401-6416. One poly at every cut; no pad, no widening, no ring on it in either metal shot. Clean-shot stretches under 24 lie only in the open gaps between tracks (x 6574, 6619, 6751, 6794, 6837, 6879: trap 2) | `eof_rows.py diag 7436 8037 6480 8037 --step 40 --reach 30`; `m_in1.png` (2.8x, metal and chip-2 stripped, x 6990-7445), `m_row2.png` (2.2x, metal and clean, x 6425-7000); `eof_mrun.py row 8040 6410 7420 8012 8062` (the tracks); `tl5_tracks.py h 8040 6420 7414` |
+| the row y 8030-8050 | from the band west, under twenty-one tracks, to a corner at x 6401-6416. One poly at every cut; no pad, no widening, no ring on it in either metal shot. At x 6520-6590 it lies in the open, in the 30 px gap between the horizontal arms of two Ls (`rst_a`'s y 8012-8024, `res_b`'s y 8059-8071), not under them. Clean-shot stretches under 24 lie only in the open gaps between tracks (x 6574, 6619, 6751, 6794, 6837, 6879: trap 2) | `eof_rows.py diag 7436 8037 6480 8037 --step 40 --reach 30`; `m_in1.png` (2.8x, metal and chip-2 stripped, x 6990-7445), `m_row2.png` (2.2x, metal and clean, x 6425-7000); `eof_mrun.py row 8040 6410 7420 8012 8062` (the tracks); `tl5_tracks.py h 8040 6420 7414` |
 | the crossings that matter | under `tl3_w3982`'s own thin metal x 7396-7408: two bars of 6-9 px (the row's edges), whole bright metal between, salmon with no hole in the clean shot; under the track x 7078 a dim spot in chip 2 only (chip 1 bright, no hole); under `inh_ck`'s metal x 6431 and the tracks x 6471 (`tl3_w3982`), 6514 (`rst_a`): bars and bright metal, no ring (Ambiguity 41) | `textmap.py 7380 8014 7428 8066 3`, `7052 8014 7100 8062 3`; `m_w8038.png` (4x, metal and chip-2 stripped), `m_o4.png` (5x, three shots) |
 | the corner onto `lc2`'s poly | the row turns south at x 6401-6416 (chip-2 stripped orange at x 6406-6409, dark edges 6400 and 6415-6418) and is orange without a break from y 8032 to 8088, through `lc2`'s `P 6401,8067:6415,8092` | `px.py row 8060 6388 6430 3 acid,acid1b`, `col 6408 8020 8090 4`; `m_w8038.png`, `m_o4.png` |
 
@@ -1993,6 +1993,59 @@ tools/t.sh eof sameconn.py ba2a174               connections identical
 ```
 
 Round 13: no findings that change a connection.
+
+### Round 14 (full review of piece `d3982`; 2026-11-19 19:24 to 19:43 +0000)
+
+One fresh reviewer agent (Claude Fable 5.2), at commit `33ff44e`, images in `cache/scratch/eof/review-14/`
+(26). Told to suspect: U2's and U3's node east of the rail (that the diffusion under the rail joins the
+arm and the strip); the top of the band x 7416-7440 (that it turns west and touches neither U1's output
+box nor U1's gate row); that each unit's gate row and output row are two polys at the band; a contact of
+the row y 8030-8050 to any of the tracks it crosses, above all x 6431, 6471, 7396-7408, 6514, 6601, 6645
+and the dim spot at (7075,8035); the corner onto `lc2`'s poly; the three ties drawn without `?` and any
+other connection of a plate; field under the rail between the units and south of U4; U3 as a copy of U2;
+anything left out in x 7410-7790, y 8060-8460.
+
+What it checked, and found correct: the node east of the rail (`b1_u2node.png` 4.8x, `k_u2u3_*.png`,
+`textmap.py 7570 8094 7666 8206 3 --acid`: diffusion tan without a break from under the rail to x 7610,
+where rows with field show a pink stripe and a green rim; the arm unbroken from the plate's west end to
+the tie box in three shots; the clean shot alone changes colour along the arm at y 8150, olive above and
+salmon below, taken as an artefact; the gate poly does not cross the arm); the band's top
+(`d1_bandtop.png` 4.5x: it turns west, field to U1's box and to U1's gate row in all four shots); the field
+stripes at the band, and between U4's gate row and the pad (7401,8425) (`i1_u4pad.png` 5x: field reaches
+x 7420 in three shots; a reddish line at x 7416-7422 in the chip-2 stripped shot is the thin metal's ghost
+boundary); the row (`e1`-`e3` 4x, `f_spots_*` 5.5x, `m2_x7359.png` 5x, text maps of all 1,010 px: one poly,
+no pad, ring or hole at any of the 21 crossings; chip-2 dim spots at x 7078, 6645 and 6514 are bright in
+chip 1 with no hole; a blob at (6925,8030-8058) is in the clean shot only); the corner (`g1_corner.png`
+5.5x); field under the rail between the units and south of U4 (`c1`, `c2` 6x); the tie boxes, plates and
+VCC boxes (`j1`, `j2` 3.55x, `m1_u4south.png`: no hole and no poly leaving any plate); U3 as a copy of U2
+(overlay); nothing left out in the region but U1 (`opendiff.py`: only a sliver at x 7784-7790, a separate
+poly east of the VCC metal). Not checked: the VCC metal and the rail to a supply; `lc2`'s uncertain tie
+behind the alias; the `findcell` scores; U3's tie box was seen at 2.85x only.
+
+Findings, each checked by the tracer:
+
+1. **Not a connection change (geometry)**: the node's exit east of the rail is y 8154-8174 (U3:
+   8284-8302), drawn 8152-8184. **Confirmed** (`px.py col 7606 8140 8194 3 acid1b,metal1`: tan y 8158-8170
+   between edges at 8149-8152 and 8173-8176; `col 7606 8270 8324 3`: the same 130 px lower). Fixed:
+   `D 7594,8154:7628,8174` in cell `eof_dly`.
+2. **Not a connection change (geometry)**: U2's VCC contact centre is about (7747,8143), drawn
+   (7751,8136). **Confirmed** (`textmap.py 7726 8116 7774 8170 3`: bright centre x 7741-7753, y 8134-8155
+   in both chips; U3's the same 130 px lower, `textmap.py 7726 8246 7774 8300 3`). Fixed: `C 7748,8143`.
+3. **Not a connection change (a comment)**: the trace's comment said "twenty tracks"; there are
+   twenty-one. **Confirmed**; corrected.
+4. **Not a connection change (a comment)**: at x 6520-6590 the row lies in the 30 px gap between two
+   horizontal metals (edges y about 8025 and 8055: the arms of `rst_a`'s and `res_b`'s Ls), not under
+   them. **Confirmed** (`eof_mrun.py row 8012 ... 8062`: 6556(17) at y 8012 and 6580(57) at y 8062, nothing
+   at y 8040 between x 6521 and 6595). The Logic table's row says so now.
+
+The proof that no connection changed:
+
+```
+tools/t.sh eof sameconn.py 33ff44e               connections identical
+.venv/bin/python tools/sameconn.py 33ff44e       connections identical
+```
+
+Round 14: no findings that change a connection.
 
 ## Not done
 
