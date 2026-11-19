@@ -444,7 +444,7 @@ M 4562,8330 y8301 x4626 w=18
 N P 4900,8298 lc2_w8298
 
 # ====================================================================
-# The west gate cluster (x 4580-5330, y 8330-9240): its supplies and its first gate.
+# The west gate cluster (x 4580-5330, y 8330-9240): its supplies and its first latch.
 # Supplies (x4_m.png, 2.3x; review round 10 read the jogs in both chips): the cluster is two gate columns that share
 # a VCC rail in the middle, with VSS rails outside.
 #   rail 1 (VCC, lc1's x 4755-4803) jogs east above the cluster and comes down the MIDDLE (x 4924-4980);
@@ -455,33 +455,36 @@ M 4779,8160 y8238 w=48
 M 4755,8205:4892,8270
 M 4840,8205:4892,8350
 M 4840,8324:4980,8400
-M 4952,8324 y8620 w=56                      # the middle rail (drawn to y 8620: it runs on south)
+M 4952,8324 y8770 w=56                      # the middle rail (drawn to y 8770: it runs on south)
 N M 4952,8500 vcc
 M 4954,8160 y8283 w=52
 M 4928,8228:5150,8283
-M 5127,8228 y8620 w=46                      # the east rail (drawn to y 8620: it runs on south)
+M 5127,8228 y8770 w=46                      # the east rail (drawn to y 8770: it runs on south)
 N M 5127,8500 vss
 M 4668,8067:4712,8348
 M 4666,8300:4803,8348
-M 4777,8300 y8620 w=50                      # the west rail (drawn to y 8620: it runs on south)
+M 4777,8300 y8770 w=50                      # the west rail (drawn to y 8770: it runs on south)
 N M 4777,8500 vss
-# -- gate K1 (x 4588-4985, y 8350-8595): lc2_w8552 = NOT( lc2_w8475 AND lc2_w8298 )
-# Under the west rail (railprof.py 4758 4796 8340 8640): the rail's contact column y 8352-8465, row 1, a node
-# y 8493-8515, row 2, the output node y 8539-8564. Views x1, x2, x5, x6, x7; survey.md.
+# -- latch K (x 4578-4985, y 8350-8750): two AND-OR-INVERT gates, cross-coupled:
+#      lc2_w8552 = NOT( lc2_w8475 AND lc2_w8298  OR  lc2_w8725  OR  lc2_w8450 )   (gate K1, y 8350-8615)
+#      lc2_w8725 = NOT( lc2_w8475 AND lc2_w8692  OR  lc2_w8552 )        (gate K2, y 8594-8750)
+# Each gate: a VSS node under the west rail, two rows in series below it, the output node; the rows END at the
+# rail's east edge. East of the rail a finger of the VSS node, and between it and the output's open diffusion a
+# third pull-down whose gate is the OTHER gate's load poly; a load to a VCC box under the middle rail.
+# Views x1-x8, y1-y14; survey.md.
+# K1, under the west rail (railprof.py 4758 4796 8340 8640): contact column y 8352-8465, row 1, a node
+# y 8493-8515, row 2, the output node y 8539-8564.
 D 4752,8352:4800,8566
 C 4775,8362
 C 4775,8420 s=24x44
 D 4588,8354:4756,8424                       # a large open diffusion west of the contact column (opendiff.py), taken as one with it
 ?D 4702,8444:4756,8540                      # the column seems to run on west of the rail to x 4702 (chip-2 stripped: diffusion-like above row 1, mixed between the rows): uncertain; it only widens the two channels
-P 4634,8459:4664,8490                       # row 1's west pad, on the thin metal x 4641-4655
+P 4634,8459:4664,8490                       # row 1's pad, on the thin metal x 4641-4655
 C 4648,8474
-M 4648,8468 y8630 w=14                      # that thin metal south (drawn to y 8630; its next pad is at (4648,8647))
-P 4660,8466:4884,8490                       # row 1: across the column, under the rail, and on east to a second pad
-P 4881,8467:4908,8494
-C 4892,8481
-M 4892,8474 y8590 w=14                      # the thin metal of the east pad, south (drawn to y 8590; it runs on at x 4881-4893)
+M 4648,8468 y8700 w=14                      # that thin metal south, through K2's row a's pad (drawn to y 8700: it runs on)
+P 4660,8466:4812,8490                       # row 1: across the column, under the rail; ends at the rail's east edge
 N P 4720,8478 lc2_w8475
-M 4562,8330 y8524 w=18                      # track C south to its end pad
+M 4562,8330 y8700 w=18                      # track C south, through the pad of row 2 (drawn to y 8700: it runs on)
 P 4546,8502:4580,8530
 C 4561,8516
 P 4575,8506:4760,8526                       # row 2 (lc2_w8298), from track C's pad
@@ -494,11 +497,21 @@ B 4698,8538:4732,8578
 P 4618,8552:4704,8572                       # output row west to the pad of the thin metal x 4598-4611
 P 4590,8545:4622,8576
 C 4604,8560
-M 4604,8553 y8630 w=14                      # that thin metal south (drawn to y 8630: it runs on)
+M 4604,8553 y8700 w=14                      # that thin metal south (drawn to y 8700: it runs on)
 N P 4660,8562 lc2_w8552
-# load: a plate between the output's open diffusion and a VCC box under the middle rail; its foot runs west onto a
-# ringed box on the output diffusion (the tie)
-P 4868,8525:4922,8590
+# K1's third pull-down: a finger of the VSS node east at y 8443-8462, a tongue of the output's open diffusion up to
+# it, and across the tongue the poly of the pad (4892,8481), which the thin metal x 4885-4899 brings from K2's load
+D 4796,8443:4878,8462
+D 4842,8458:4872,8502
+P 4822,8466:4884,8492                       # its west end (x 4822-4842, a ringed end) is beside the tongue, over field
+P 4881,8467:4908,8494
+C 4892,8481
+M 4892,8474 y8598 x4889 y8700 w=14          # thin metal from K2's load poly (pad (4892,8694))
+N M 4889,8640 lc2_w8725
+# K1's load: its poly (x 4868-4922, y 8520-8590) crosses a diffusion strip (y 8537-8565) between the output's open
+# diffusion and a VCC box under the middle rail; a foot west onto a ringed box on the output diffusion (the tie);
+# and a tail south (x 4873-4897 to y 8656) that turns west as the gate of K2's third pull-down
+P 4868,8520:4922,8590
 D 4860,8537:4930,8565
 D 4925,8540:4985,8595
 C 4955,8580
@@ -506,3 +519,46 @@ P 4850,8568:4870,8590
 P 4830,8555:4862,8587
 D 4826,8553:4866,8589
 B 4828,8553:4868,8589
+P 4873,8588:4897,8656
+P 4832,8630:4876,8658
+# K1's fourth pull-down (a clear): the row from track B's pad (4517,8604) crosses the column west of the rail between
+# K1's output box and K2's VSS node, and ends at x 4758. The column there is drawn uncertain (as above).
+M 4517,8330 y8700 w=18                      # track B south, through the pad (drawn to y 8700: it runs on)
+P 4503,8590:4533,8618
+C 4517,8604
+P 4530,8596:4756,8612
+N P 4640,8604 lc2_w8907
+?D 4702,8570:4740,8634
+# K2, under the west rail (railprof.py 4756 4768 8590 8950): VSS node y 8594-8638 (contact (4783,8605)), row a
+# y 8639-8660, a node, row b y 8681-8703, the output node y 8704-8747
+D 4764,8594:4800,8630
+C 4783,8605
+D 4752,8618:4788,8747
+?D 4702,8630:4756,8712                      # as in K1: the column seems to run on west of the rail; uncertain, only widens the channels
+P 4634,8632:4666,8662                       # row a's pad, on the thin metal x 4641-4655 (lc2_w8475)
+C 4648,8647
+P 4660,8637:4800,8660                       # row a
+P 4580,8682:4800,8703                       # row b
+P 4578,8682:4596,8770                       # ... which comes up a vertical poly from the south (drawn to y 8770: it runs on to y 8900)
+N P 4660,8692 lc2_w8692
+D 4784,8712:4814,8745                       # output node east of the rail
+D 4810,8712:4866,8745                       # into an open diffusion
+D 4716,8712:4756,8745                       # and west of the rail to the output box
+P 4706,8711:4736,8747                       # output box
+B 4704,8709:4738,8749
+P 4622,8726:4710,8744                       # from it a poly west and then south (drawn to y 8770: it runs on to the row y 8813-8829)
+P 4622,8726:4640,8770
+# K2's third pull-down: finger of the VSS node east at y 8606-8628, tongue down to the open diffusion, K1's load
+# poly's end across it (x 4832-4876, y 8630-8658)
+D 4796,8606:4868,8628
+D 4836,8624:4866,8714
+# K2's load: the poly of the pad (4892,8694) runs south across a diffusion strip (y 8722-8745) between the open
+# diffusion and a VCC box under the middle rail, and west onto a ringed box on the tongue (the tie)
+P 4872,8674:4920,8716
+C 4892,8694
+P 4872,8714:4922,8750
+D 4862,8722:4932,8745
+D 4930,8665:4985,8745
+C 4948,8689
+P 4842,8677:4876,8703
+B 4840,8673:4874,8707

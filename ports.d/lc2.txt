@@ -59,11 +59,14 @@ lc2_w8450   M  4508-4526,8330  ?    drawn end: row B's track (label lc2_w8907) r
 lc2_w8298   M  5249-5265,8334  ?    drawn end: the fifth staircase line runs on south (to about y 9056)
 vss         M  4928-4980,8067  -    rail 2 from lc1
 
-# Run 8: the west cluster's supplies and gate K1
-vcc         M  4924-4980,8620  -    the cluster's middle rail (lc1's rail 1 after its jog): drawn end, runs on south
-vss         M  5104-5150,8620  -    the cluster's east rail (lc1's rail 2 after its jog): drawn end, runs on south
-vss         M  4752-4803,8620  -    the cluster's west rail (VSS by structure): drawn end, runs on south
+# Run 8: the west cluster's supplies and latch K
+vcc         M  4924-4980,8770  -    the cluster's middle rail (lc1's rail 1 after its jog): drawn end, runs on south
+vss         M  5104-5150,8770  -    the cluster's east rail (lc1's rail 2 after its jog): drawn end, runs on south
+vss         M  4752-4803,8770  -    the cluster's west rail (VSS by structure): drawn end, runs on south
 vss         M  4668-4712,8067  -    the west rail's feed, north into lc1
-lc2_w8475   M  4641-4655,8630  ?    gate K1's row 1: the thin metal of its west pad, drawn end (next pad at (4648,8647))
-lc2_w8475   M  4885-4899,8590  ?    gate K1's row 1: the thin metal of its east pad, drawn end (runs on south at x 4881-4893)
-lc2_w8552   M  4597-4611,8630  out  gate K1's output on its thin metal: drawn end, runs on south
+lc2_w8907   M  4508-4526,8700  ?    track B, drawn end: runs on south past the pad (4517,8604) of K1's clear row
+lc2_w8298   M  4553-4571,8700  ?    track C, drawn end: runs on south past the pad (4561,8516) of K1's row 2
+lc2_w8475   M  4641-4655,8700  ?    the latch's enable on its thin metal, drawn end (next pad about (4648,8865))
+lc2_w8552   M  4597-4611,8700  out  K1's output on its thin metal: drawn end, runs on south
+lc2_w8692   P  4578-4596,8770  in   K2's data row comes up this vertical poly from about y 8900: drawn end
+lc2_w8725   P  4622-4640,8770  out  K2's output on its poly, on south to a row y 8813-8829: drawn end
