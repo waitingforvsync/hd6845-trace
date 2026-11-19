@@ -1,4 +1,4 @@
-# bust: the bus between the central datapath and the right datapath (queue: busT)
+# bust: the bus between the central datapath and the right datapath (queue: bustop)
 
 ## Status (2026-11-17 08:31, contributor session; corrected after independent review; bit 0 joined)
 

@@ -5,7 +5,7 @@
 <text x="7016" y="14758" font-family="sans-serif" font-size="150" fill="#ffffff" stroke="#000000" stroke-width="15" paint-order="stroke">bottom-centre logic ?</text>
 <rect x="11000" y="3000" width="6000" height="2300" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>top-right bus field: horizontal buses under the test structures</title></rect>
 <text x="11016" y="3158" font-family="sans-serif" font-size="150" fill="#ffffff" stroke="#000000" stroke-width="15" paint-order="stroke">top-right bus field</text>
-<rect x="4850" y="10400" width="2700" height="4600" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>left bus field: dense horizontal wiring between the left array and the rest; package `busL`, second in the queue</title></rect>
+<rect x="4850" y="10400" width="2700" height="4600" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>left bus field: dense horizontal wiring between the left array and the rest; package `busl`, second in the queue</title></rect>
 <text x="4866" y="10558" font-family="sans-serif" font-size="150" fill="#ffffff" stroke="#000000" stroke-width="15" paint-order="stroke">left bus field</text>
 <rect x="6500" y="17000" width="6800" height="1600" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>bottom bus field: wiring along the bottom of the core</title></rect>
 <text x="6516" y="17158" font-family="sans-serif" font-size="150" fill="#ffffff" stroke="#000000" stroke-width="15" paint-order="stroke">bottom bus field</text>
@@ -895,6 +895,8 @@
 <text x="2556" y="4010" font-family="sans-serif" font-size="20" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">first latch, lower half</text>
 <rect x="3880" y="3450" width="335" height="210" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>NOR under the east rail, y 3450-3660: tl3_e3550 = NOR(rcs_mu, tc2_o5175); its load plate carries the north end of the thin metal x 3948-3962</title></rect>
 <text x="3896" y="3473" font-family="sans-serif" font-size="15" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">NOR under the east rail, y 3450-3660</text>
+<rect x="6450" y="7767" width="1091" height="64" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>eof_w7777, the gate's third input: poly row west through the crossing field, one track down at (6886,7777), into the left-centre strip at (6450,7821)</title></rect>
+<text x="6466" y="7796" font-family="sans-serif" font-size="21" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">eof_w7777, the gate's third input</text>
 <rect x="5683" y="6228" width="563" height="122" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>rcs_mv: row y 6238 east to a corner at x 6236 and south</title></rect>
 <text x="5699" y="6276" font-family="sans-serif" font-size="40" fill="#ffffff" stroke="#000000" stroke-width="4" paint-order="stroke">rcs_mv</text>
 <rect x="6396" y="5557" width="112" height="613" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>tc2_m6490, tc2_m6447: two metals of the nest from the west edge to their pads (6490,6108), (6447,6150)</title></rect>
@@ -911,6 +913,8 @@
 <text x="3886" y="4543" font-family="sans-serif" font-size="21" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">latch C, upper half</text>
 <rect x="6040" y="2500" width="360" height="180" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>north ends of the tracks U8-U11 and tcw's x 6276: pads (6057,2595), (6105,2552) with polys north and east; three metals from the east along y 2573, 2619, 2665</title></rect>
 <text x="6056" y="2522" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">north ends of the tracks U8-U11 and tcw's x 6276</text>
+<rect x="7541" y="7585" width="234" height="275" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>gate on inh_ck, eof_w7818: eof_w7818 = NOT(eof_w7777 AND (inh_ck OR eof_w7718)): two pull-downs side by side under column 0's VSS rail, a third in series, load east; output west and north by two pads to a pad (7272,6912)</title></rect>
+<text x="7557" y="7607" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">gate on inh_ck, eof_w7818</text>
 <rect x="5650" y="7800" width="237" height="267" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10" stroke-dasharray="60 40"><title>left-centre cluster E, west half: not traced</title></rect>
 <text x="5666" y="7822" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">left-centre cluster E, west half ?</text>
 <rect x="5700" y="3700" width="25" height="2510" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>track U0: latch a's enable: tl5_w3505 from the row y 3722 south to the row y 6195 and out south at x 5972</title></rect>
