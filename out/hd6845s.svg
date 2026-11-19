@@ -46170,7 +46170,7 @@
 <text x="2116" y="5931" font-family="sans-serif" font-size="23" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">tracks beside the small cluster</text>
 <rect x="10840" y="4660" width="1960" height="100" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>cdp1_l4676, east: diagonal at x 11465-11530, metal y 4742 to x 12782</title></rect>
 <text x="10856" y="4701" font-family="sans-serif" font-size="33" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">cdp1_l4676, east</text>
-<rect x="10380" y="14800" width="400" height="485" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>latch (tl1 unit): east gate column, unit a: data bc2_w14912, enable bc2_w14955, clear bc2_w15087, output bc2_w15000</title></rect>
+<rect x="10380" y="14800" width="400" height="485" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>latch (tl1 unit): east gate column, unit a: data bc2_w14912, enable bc2_w14955, clear inh_src, output bc2_w15000</title></rect>
 <text x="10396" y="14848" font-family="sans-serif" font-size="40" fill="#ffffff" stroke="#000000" stroke-width="4" paint-order="stroke">latch (tl1 unit)</text>
 <rect x="4500" y="8350" width="485" height="400" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>latch K: lc2_w8552 = NOT(lc2_w8475 &amp; lc2_w8298 | lc2_w8450 | lc2_w8725), lc2_w8725 = NOT(lc2_w8475 &amp; lc2_w8692 | lc2_w8552)</title></rect>
 <text x="4516" y="8470" font-family="sans-serif" font-size="112" fill="#ffffff" stroke="#000000" stroke-width="11" paint-order="stroke">latch K</text>
