@@ -19,7 +19,7 @@
 #   which is the end of the metal y 6840-6858 above it (no contact between the two).
 #   West along y 6861-6879 in the open (px.py row 6870 6820 7300 8 metal,acid: poly colour at every
 #   sample from x 6836 to 7276; edges y 6857 and 6879) to a corner (6843,6870) (s17_outcorner.png: nothing
-#   goes on west), then north at x 6834-6852 under ten bus metals without a pad (s18_x6842_a.png,
+#   goes on west), then north at x 6834-6852 under eleven bus metals without a pad (s18_x6842_a.png,
 #   s18_x6842_c.png: two continuous edge lines, no hole, no widening) to tc2's P 6843,6282 y6400 w=17.
 P 7276,6900 y6870 x6843 y6395 w=18
 N P 7000,6870 tc2_r5589

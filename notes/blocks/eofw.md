@@ -39,7 +39,7 @@ Extraction: the package by itself 4 nets, 0 transistors, 0 errors, 0 warnings. E
 
 | Wire | From (`eof`'s end) | Path | To |
 |---|---|---|---|
-| Y, the output | `eof`'s poly north of the pad (7272,6912), x 7266-7286 | poly north to y 6870; west along y 6861-6879 (430 px, in the open); a corner (6843,6870); north at x 6834-6852 under ten bus metals, no pad (465 px) | `tc2`'s poly `P 6843,6282 y6400` (`tc2_r5589`) |
+| Y, the output | `eof`'s poly north of the pad (7272,6912), x 7266-7286 | poly north to y 6870; west along y 6861-6879 (430 px, in the open); a corner (6843,6870); north at x 6834-6852 under eleven bus metals, no pad (465 px) | `tc2`'s poly `P 6843,6282 y6400` (`tc2_r5589`) |
 | 2, north branch | `eof`'s poly row y 7204-7225 east of the pad (7313,7215), at x 7400 | the row east under `bw`'s metals x 7410-7432 and 7456-7478, a metal x 7520-7540, the VSS rail (x 7572-7620) and the VCC rail (x 7725-7775), no pad; a pad with a contact (7836,7215); metal x 7829-7843 north (820 px) | `tc2`'s metal `M ... x7837 y6400` (`tc2_sr_g`) |
 | 2, south branch | `eof`'s metal south of row 2's pad (7267,7736), x 7266-7280 | metal south to a T (7273,8710) on a horizontal metal y 8703-8716; west of the T a staircase: (7190,8710), (7190,8672), (7060,8672), (7060,8585), (6883,8585), (6883,8498), (6710,8498), (6710,8411), (6515,8411), (6515,8259), west | `lc2`'s metal `M 6212,8067 y8259 x6450` (`lc1_w7908`) |
 | 2, east of the T | the T (7273,8710) | metal y 8703-8715 east to a corner pad x 7426-7476, y 8703-8750 with a contact (7446,8732) on a poly pad x 7428-7482, y 8716-8750 | two open ends: the poly on east at (7490,8722-8745); the metal on south at (7458-7474,8800) |
@@ -73,7 +73,7 @@ The evidence for each stretch (every command is in `cache/scratch/eofw/survey.md
 | corner (7276,6870) | the poly from the pad (7272,6912) turns west; it does not go on east to the pad (7335,6845), which ends the metal y 6840-6858 above | `s14_T_ma.png`, `s14_T_cm.png` (5x, four shots): an orange L in both chip-2 shots and chip 1's metal shot, plain ground east of x 7290; `px.py row 6892 7256 7296 2 metal,acid` (edge lines x 7264, 7288) |
 | row y 6861-6879, x 6852-7267 | one poly in the open | `px.py row 6870 6820 7300 8 metal,acid`: R-G 41-57, blue 44-65 at every sample from x 6836 to 7276; edges y 6857 and 6879; `o3_w1north.png` |
 | corner (6843,6870) | turns north; nothing goes on west | `s17_outcorner.png` (3.6x, metal and clean) |
-| poly x 6834-6852, y 6400-6860 | one straight poly under ten bus metals, no pad | `s18_x6842_c.png` (clean), `s18_x6842_a.png` (chip-2 stripped), strips at 3x: two continuous edge lines, no hole, no widening |
+| poly x 6834-6852, y 6400-6860 | one straight poly under eleven bus metals, no pad | `s18_x6842_c.png` (clean), `s18_x6842_a.png` (chip-2 stripped), strips at 3x: two continuous edge lines, no hole, no widening |
 | (6843,6400) | meets `tc2`'s poly, same x, same width | overlay `join2.png`; `ports.py --prefix eofw`: 5 px, same name |
 | row y 7204-7225, x 7400-7818 | one poly under five metals, no pad | `px.py col 7405 7194 7234 2 metal,acid`; `px.py row 7214 7330 7700 10 metal,acid`, `row 7214 7600 7830 6 metal,acid1b`: poly colour in every open stretch, salmon under the rails; `o4_w2north.png`, `o7_pad7836.png` (4x) |
 | pad (7836,7215) | contact; metal leaves north only | `textmap.py 7806 7186 7870 7240 3 --acid`: ring, bright centre in both chips, hole in the clean shot; `o7_pad7836.png` |
@@ -142,7 +142,57 @@ more away (`lc1_w7780` at (6297,8067) and (6450,7780), `lc2_w8646` at (6450,8301
 
 ## Review
 
-(to follow)
+**Round 1: full review** (2026-11-19 15:41 to 15:59 +0100; one fresh reviewer agent on Claude Fable
+5.2 at high effort, started for this round only; commit reviewed e99cd11; 25 images in
+`cache/scratch/eofw/review-1/`). It was given the four joins and the equation as claims, and told to
+suspect the staircase's ten corners (text tools and low zoom only), the corner (6515,8259), the
+south metal at the pad (7267,7736), the T and the corner pad, the metal x 7836, the two polys under
+metals, the corner (7276,6870), the pad (6339,7824) and the lower row.
+
+What it checked, and how:
+
+- **The staircase**: `follow.py` from both ends (the same ten corners); `tl5_tracks.py` on all twelve
+  stretches (bars of 15 px or less; 20 px or more of no metal beyond each corner); every corner seen
+  in both metal shots (`b1`, `b2`, `q1`, `q2` at 4x, `r1` at 5x, `c1`, `c2` at 2.9x with the outline).
+  Each is an L of one metal; the nested neighbour stays 24-30 px away.
+- **The corner (6515,8259)** (`d1`, 5x, four shots): one metal. The 8 px dark line at x 6503-6509
+  continues north of the metal's top edge in both metal shots, as the west edge of the poly column
+  the vertical arm lies on; the top edge line y 8246-8249 is continuous across both arms; `lc2`'s
+  piece is the same metal (bars of 8-9 px only, x 6206-6500); no contact on the arm.
+- **The pad (7267,7736)** (`f1`, 6x): the south metal is on the pad (ring 14-16 px against 12 px on
+  the east side; wire 3's pad has 16 px on its own line; the clean shot's pink runs unbroken from
+  pad to metal).
+- **The T and the corner pad** (`b1`, `g1`, `p1`): one metal; the contact exists (ring and centre in
+  both chips, a 12 px green hole); metal leaves south and poly east, nothing else; the pad's poly is
+  separate from the poly column x 7399-7423 (10 px of field).
+- **The metal x 7836** (`h1_a`, `h1_b`, 3x): one straight metal, bars of 13 px or less, no hole, no
+  pad; the pad (7836,7215) (`i1`, 6x) is closed south and east.
+- **The row y 7214** (`j1_a`, `j1_b`, 4.4x, three shots): one poly, no widening, no hole (a dark patch
+  on the VCC rail at (7750,7214) is on chip 1 only; a small ring at (7752,7202) on chip 2 only).
+- **The corner (7276,6870)** (`k1`): the poly turns west only. **The row y 6870, the corner
+  (6843,6870), the poly x 6843** (`l1`, `m1_a`, `m1_b`): continuous, nothing leaves west or south.
+- **The pad (6339,7824)** (`n1`): contact by ring and centre in both metal shots and a pale patch in
+  the chip-2 stripped shot; bare ground west and north; the row to x 6455 is one poly; the metal
+  x 6418-6435 crosses it without contact. **The metal x 6341** (`o1`) runs to `lc2`'s pad.
+- The extraction: 4 nets alone; 2,395 nets and 0 errors with every package; the equation as claimed.
+
+Findings: one, a comment. The poly x 6834-6852 passes under **eleven** bus metals between y 6400 and
+6860, not ten (its metal test at x 6815 in both chips: y 6410-6422, 6453, 6496, 6540, 6584, 6626,
+6669, 6711, 6756, 6802, 6842-6855); all eleven crossings are clean. Corrected in the trace file's
+comment and in these notes. Proof that no connection changed (the trace file differs only in that
+comment):
+
+```
+tools/t.sh eofw sameconn.py e99cd11            ->  connections identical
+.venv/bin/python tools/sameconn.py e99cd11     ->  connections identical
+```
+
+Could not check: the clean-shot hole at the pad (6339,7824) (residue; chip 2's centre there is dim,
+R 171-186); the two open ends beyond their stubs; `tc2`'s and `lc2`'s own geometry (the name
+`lc1_w7170` rests on `lc2`'s `?` items); and that the corner (6515,8259) and the pad (7267,7736)
+rest on measurements, since a photo cannot show metal continuity directly.
+
+Round 1: no findings that change a connection.
 
 ## Not done
 
