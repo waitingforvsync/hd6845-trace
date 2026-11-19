@@ -33,7 +33,6 @@ lc2_w8450   M  5618-5634,9256  out  latch B's data: the west thin metal on south
 vss         M  5659-5705,9256  -    latch B's rail on south (meets lc3's)
 vcc         M  5840-5890,9256  -    the rail on south (meets lc3's)
 lc3_w9299   M  5550-5568,9256  out  row 4's metal on south to lc3's pad (5560,9299)
-lc2_w9034   P  5545,9024-9044  in   gate row 2: drawn end, runs on west
 lc2_w9079   P  5545,9068-9090  in   gate row 3: drawn end, runs on west
 lc2_w9210   P  5545,9200-9220  in   gate row 5: drawn end, runs on west
 lc3_m5756   M  5749-5763,8067  ?    the east thin metal, north through latch B into lc1; no contact found on it in the strip
@@ -67,6 +66,18 @@ lc2_w8475   M  4553-4575,9190  in   the clock of the flip-flop: an L-shaped meta
 # Run 9: gates K3 and K4
 lc1_w7170   M  4466-4484,9060  ?    track A, drawn end: runs on south past the pad (4473,9038) of K4's row
 # Run 10: the east column (second flip-flop)
-vss         M  5104-5150,9160  -    the cluster's east rail: drawn end
-lc2_w9038   M  5247-5263,9233  out  the second flip-flop's slave output, south into lc3
-lc2_w9038   P  5215,9200-9220  out  the poly of its pad (5254,9208), on west: drawn end
+lc2_w9034   M  5247-5263,9233  out  the second flip-flop's slave output, south into lc3
+vss         M  5084-5148,9256  -    the east rail on south into lc3
+lc2_w9171   D  5104-5158,9256  ?    the stack under the east rail south of the east column, on into lc3
+lc2_w9171   D  5062-5078,9256  ?    the strip beside that rail (uncertain diffusion), on into lc3
+# Run 10, piece P: through lines and row ends
+lc2_x6299   M  6450,8630       ?    through line, east edge
+lc2_x6299   M  6299,9233       ?    through line, south edge
+lc2_x6342   M  6450,8692       ?    through line, east edge
+lc2_x6342   M  6342,9233       ?    through line, south edge
+lc2_x6387   M  6450,8756       ?    through line, east edge
+lc2_x6387   M  6387,9233       ?    through line, south edge
+lc2_x6432   M  6450,9165       ?    through line, east edge
+lc2_x6432   M  6432,9233       ?    through line, south edge
+lc2_w9079   M  5509-5527,9233  in   row 3's thin metal from its pad (5520,9081), south into lc3
+lc2_w9210   M  5334-5350,9233  in   row 5's metal from its pad (5341,9211), south into lc3
