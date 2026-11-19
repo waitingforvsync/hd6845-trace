@@ -172,3 +172,150 @@ N M 3560,2512 tl1_w2592                # tl2's name for the metal that arrives h
 # this file holds three pieces of it, each under the name its neighbour uses there).
 @alias r9m_l1w tl4_w2512
 @alias r9m_l1w tl1_w2592
+
+# ============================================================================================
+# Piece tcwa (run 2): tcw_a from tl6's end (6105,6350) to trunks' line S (inh_ck), and a tap.
+# Wiring only.
+#
+# The line's path:
+#   tl6 draws tcw_a's metal x 6105 south to (6105,6350);
+#   LINK E (here): the metal runs on south, straight, to a corner (6105,7346); east along y 7346,
+#     lying on lc1_w7040's poly row without a contact, to a corner (6298,7346), 20 px short of the
+#     ring of lc1's pad (6341,7345); south to a corner (6298,7432); east along y 7432 (on another
+#     poly row, no contact) to a corner (6430,7432); south along x 6430, through a pad with a
+#     contact (6427,7648) (the tap, below), to y 8067, where lc2 draws it on (lc2_w8172:
+#     M 6431,8067 y8172 x6450);
+#   lc2: the corner (6431,8172) and east to x 6450;
+#   LINK F (here): east along y 8172 to a corner (6559,8172), 18 px south of the ring of another
+#     net's pad (6558,8127) whose poly runs south under the metal; south along x 6559 on that poly
+#     (no contact) to a corner (6559,8367); east along y 8367 over the poly columns of the crossing
+#     field to x 6690, where trunks' drawing of line S begins (M 7047,8536 x6930 y8452 x6757 y8366
+#     x6690: "continues left (not followed)");
+#   trunks: the staircase to the contact (7034,8535), a poly under-pass to the contact (7034,8797),
+#     the metal down the left bus field (x 6862, x 6798), the bottom bus line y 18428 and line L4
+#     to the output of the lone inverter of the input buffer row: the net inh_ck (= NOT inh_n).
+#   THE TAP: from the pad (6427,7648) a poly row y 7640-7656 runs east across the crossing field,
+#     under two dozen vertical metals without a pad, to a gate group nobody has drawn under the wide
+#     metal x 7550-7600 (its diffusion from x 7540): drawn to x 7530 (notes, Not done).
+#
+# Evidence (images in cache/scratch/eof/; text tools as named):
+#  - x 6105, y 6350-7335: tl3_thin.py 6098 6113 6350 7335 --thr 144 --min 8: one 8 px bar (y 6701);
+#    tl5_tracks.py v 6105 6350 7335: bars of 8-10 px only (rows crossing under), no hole in the
+#    clean shot. follow.py 6105 6300 S: corner 6116,7344 -> E, end 6304,7348, no candidate.
+#  - corner (6105,7346): textmap 6074 7306 6150 7376 3 --acid: the vertical ends in a 6 px bar
+#    (the row's upper edge, y 7330-7336) on the horizontal y 7339-7351; bare ground west of it.
+#  - corner (6298,7346) and lc1's pad: k1_corner.png (4x, four shots); textmap 6270 7318 6380 7374
+#    3 and 6270 7330 6330 7600 3 --acid: the horizontal is C-D to x 6303 in both chips, then open
+#    poly (7-A) x 6315-6324 with open ground ('g') below it in the clean shot, then the pad's ring;
+#    the vertical x 6292-6305 is B-D from y 7363 to 7438 with bars at the row edges (y 7354-7360,
+#    7375, 7399, 7418) and bare ground from y 7447 to 7540: it does not reach lc1's pad (6297,7561).
+#  - corner (6430,7432): textmap 6360 7408 6470 7462 3: the horizontal ends at x 6435; bare ground
+#    north of it; the vertical x 6420-6435 from y 7447.
+#  - x 6430, y 7445-8160: tl5_tracks.py v 6431 7445 8160: bars only, except y 7627-7669.
+#  - the pad (6427,7648): k2_x6431.png (4x, four shots); textmap 6392 7606 6476 7690 3 --acid: ring
+#    y 7627-7668 with a bright centre y 7642-7654 in both chips, a pitted box in the chip-2
+#    stripped shot, a dull hole (x 6422-6425, y 7645-7657) in a poly pad in the clean shot, the
+#    pad's poly leaving east; eof_cchk.py: hole -4, centre 208 / 181.
+#  - the row: k6_rowA.png, k6_rowB.png (2.3x, clean and metal, x 6430-7550): one band, salmon
+#    under the metals and dark red-brown in the open, no pad; its end: k3_rowend.png, k7_group.png.
+#  - lc2's corner (6431,8172): textmap 6398 8090 6500 8200 3 (lc2's Ambiguity 3: no contact).
+#  - link F: tl5_tracks.py h 8172 6450 6545, v 6559 8190 8355, h 8367 6575 6760: bars only, no
+#    hole. Corner (6559,8172) and the pad north of it: textmap 6515 8060 6602 8200 3 --acid: the
+#    pad's centre y 8123-8132 and ring to y 8144; bare ground / open poly y 8147-8156 (9-A in chip
+#    2, 6-9 in chip 1; open ground beside the poly in the clean shot); the corner's metal from
+#    y 8165. Corner (6559,8367): textmap 6521 8322 6608 8400 3. k4_stair_m.png (1.9x, every
+#    package's trace), k5_nestW.png (2.3x, metal and clean).
+#  - trunks' end: textmap 6950 8506 7070 8566 3 --acid: the contact (7034,8539), ring, bright
+#    centre, hole; the staircase: tl5_tracks.py v 6757 8380 8440, h 8452 6770 6920, v 6930 8465
+#    8525, h 8536 6945 7030: bars only; follow.py 6330 7432 E gives every corner as drawn.
+M 6105,6345 y7346 x6298 y7432 x6430 y8072 w=14     # link E
+N M 6105,6800 tcw_a
+P 6412,7632:6446,7664               # the tap's pad
+C 6427,7648
+P 6427,7648 x7530 w=16              # the row east, to 10 px short of the gate group's diffusion
+M 6445,8172 x6559 y8367 x6695 w=14  # link F: lc2's end (x 6450) to trunks' end (x 6690)
+N M 6559,8300 lc2_w8172                # lc2's name for the metal that arrives here
+# In the full extraction tcw_a, lc2_w8172 and inh_ck (the clock block's and inrow's name for the
+# net of trunks' line S) are one net. Read by itself this file holds two pieces of it.
+# tcw_a is kept as the name the net is shown under only because tl3 and tl6 alias five other
+# names to it and the extractor wants every alias to point straight at the one shown name; the
+# net IS inh_ck, and the rename tcw_a -> inh_ck is proposed in the handoff (notes, Logic).
+@alias tcw_a inh_ck
+@alias tcw_a lc2_w8172
+
+# ============================================================================================
+# Piece x1 (run 2): the poly bus that leaves tl5's strip south across y 6350, down to its pads,
+# and the pads' metals to lc1's wires at y 6900. Wiring only. It joins rcs_x1, the clear
+# tl5_w3636, res_b and lpstb_b to the left-centre gate column (lc1).
+#
+#   tl5 draws ten vertical polys to y 6350; the five western ones are, by x: 5063 (tl5_w5936),
+#   5107 (rcs_x1), 5150 (tl5_w3636), 5192 (res_b), 5237 (lpstb_b);
+#   HERE: each runs on south, straight, under the nine horizontal metals of y 6360-6725 without
+#   a contact; four end on a pad with a contact, from which a metal goes on south:
+#     x 5107  pad (5105,6761)  metal west to x 5083, south = lc1's M_a (lc1_w7140, gate 2's output)
+#     x 5150  pad (5147,6803)  metal west to x 5123, south = lc1's M_b (lc1_w7606, gate 5's output)
+#     x 5192  pad (5190,6845)  metal south              = lc1's V2  (lc1_w7343, gate 3's lower input)
+#     x 5237  pad (5237,6803)  metal south              = lc1's V3  (lc1_w7257, gate 3's upper input)
+#   the fifth, x 5063, has no pad: it runs on south in the open beside M_a and under it from
+#   y ~6890 (not followed: notes, Not done);
+#   THREE OF THE PADS ARE NOT THE POLYS' ENDS (review round 1): below the pads of x 5150, x 5192
+#   and x 5237 the poly goes on south (in the open at x 5139-5155; under V2; under V3) and bends
+#   south-east at y 6875-6910 into the diagonal poly bundle of lc1's strip, which lc1 has not
+#   drawn. Drawn here to the strip's edge (y 6900; lpstb_b's to y 6872, where it starts to bend
+#   under V3). Only the pad of x 5107 (rcs_x1) is an end: open field below it.
+#   lc1 draws the four metals from y 6900 (M 5080,6900 / M 5125,6900 / M 5190,6900 / M 5235,6900).
+#
+# Evidence:
+#  - x1_survey.png (1.17x, metal and clean, x 4960-5500, y 6340-6920, every package's trace);
+#    x2_pads.png (2.1x, metal and clean, x 5030-5330, y 6690-6910).
+#  - no line steps a track: tl5_tracks.py rows row 5040 5262 3 at thirty heights y 6340-6744
+#    (every 14 px, through each metal and each gap): the five columns stand at x 5061-5067,
+#    5103-5115, 5148-5154, 5190-5199, 5235-5241 at every height, poly under each metal.
+#  - no tap on the way: tl5_tracks.py v X 6350 6900 for each column: in the clean shot only dips
+#    of 6-7 px (red minus green 7-18) at the gaps between the metals, the same heights on
+#    several columns (y 6433, 6563, 6650, 6692: the dark bars of trap 2); the only holes are the
+#    four pads (16-17 px, red minus green -6 to -21).
+#  - the pads: eof_cchk.py 5104,6758 5145,6802 5190,6845 5237,6803: hole -29 / -17 / -36 / -17,
+#    centre 218 / 212 / 189 / 203 in chip 2 and 194 / 182 / 205 / 201 in chip 1.
+#  - the metals: textmap 5050 6728 5260 6906 3: M_a's head (x 5077-5089, from y 6756) and M_b's
+#    (x 5116-5128, from y 6798) each stand 6-9 px (the ring) west of their pad's centre and
+#    nothing is above them; V2 (x 5185-5194) and V3 (x 5230-5242) hang from their pads; all four
+#    are bright in both chips down to y 6905. M_a shifts 6 px west at y 6885-6895.
+#  - the polys below the pads: the reviewer's k_pads234.png (4.4x, four shots), j_bundle.png
+#    (cache/scratch/eof/review-2/); textmap 5128 6812 5275 6918 3 --acid: chip-2 stripped F (poly)
+#    at x 5143-5155 from y 6824 to 6917; clean shot poly (6-9) under V2 at x 5188-5203 down to
+#    y 6884, shifting to x 5197-5209 at y 6902; under V3 at x 5233-5245 down to y 6875, shifting
+#    east below; px col 5146 6776 6916 10 acid: red over green by 40-80 from y 6826 down
+#    (px col 5104, below rcs_x1's pad: 150/130/88, field).
+P 5107,6345 y6765 w=20              # rcs_x1's line
+P 5090,6742:5122,6778
+C 5105,6761
+M 5106,6762 x5083 y6890 5080,6905 w=14      # onto lc1's M_a
+N P 5107,6500 rcs_x1
+P 5150,6345 y6808 w=20              # tl5_w3636's line
+P 5132,6786:5164,6820
+C 5147,6803
+M 5147,6803 x5123 y6905 w=14        # onto lc1's M_b
+P 5150,6815 y6900 w=18              # the poly on south of the pad, in the open, to lc1's strip (edges x 5140 / 5161
+                                    # in both metal shots, px row 6860 5130 5170 3: review round 3)
+N P 5150,6500 tl5_w3636
+P 5192,6345 y6850 w=20              # res_b's line
+P 5174,6828:5206,6862
+C 5190,6845
+M 5190,6845 y6905 w=14              # onto lc1's V2
+P 5194,6858 5195,6884 5203,6900 w=14        # the poly on south under V2, bending south-east
+N P 5192,6500 res_b
+P 5237,6345 y6808 w=20              # lpstb_b's line
+P 5221,6786:5253,6820
+C 5237,6803
+M 5236,6803 y6905 w=14              # onto lc1's V3
+P 5240,6815 y6872 w=16              # the poly on south under V3: x 5232-5250 to y 6872, then it bends
+                                    # south-east (review round 3)
+N P 5237,6500 lpstb_b
+P 5063,6345 y6880 w=18              # tl5_w5936's line, on south (no pad; not followed below y 6880)
+N P 5063,6500 tl5_w5936
+# The joins, in the full extraction (each pair is one net; the first name is the one shown):
+@alias rcs_x1 lc1_w7140
+@alias tl4_w4198 lc1_w7606
+@alias res_b lc1_w7343
+@alias lpstb_b lc1_w7257

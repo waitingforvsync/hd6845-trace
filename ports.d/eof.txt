@@ -21,3 +21,25 @@ tl4_w2512  P  5183,2542-2560     in  link C's east end on r9m's corner (5175,255
 tl4_w2512  P  4962,2542-2560     ?   link C's west end on tl4's row (4967,2551): towards the loads
 tl1_w2592  M  4255,2506-2518     in  link D's east end on tl4's bus line 1 (4250,2512)
 tl1_w2592  M  3528,2505-2519     ?   link D's west end on tl2's metal (3533,2509): towards the loads
+
+# Piece tcwa (run 2): tcw_a = inh_ck. The driver (the inverter of the input buffer row) lies beyond link F's east end.
+tcw_a      M  6098-6112,6345     ?   link E's north end on tl6's metal (6105,6350): towards the loads
+tcw_a      M  6422-6438,8072     in  link E's south end on lc2's piece (lc2_w8172, M 6431,8067)
+tcw_a      P  7530,7640-7656     ?   the tap's row (pad (6427,7648)): on east a gate of the undrawn group under the metal x 7550-7600
+lc2_w8172  M  6445,8165-8179     ?   link F's west end on lc2's end (6450,8172): towards the loads
+lc2_w8172  M  6695,8360-8374     in  link F's east end on trunks' line S (its end x 6690): the net is inh_ck
+
+# Piece x1 (run 2): tl5's south poly bus down to its pads, the pads' metals onto lc1's wires
+rcs_x1     P  5097-5117,6345     ?   from tl5's bus line x 5107: towards the loads
+rcs_x1     M  5070-5090,6905     in  onto lc1's M_a (lc1_w7140, gate 2's output: the driver)
+tl5_w3636  P  5140-5160,6345     ?   from tl5's bus line x 5150 (= tl4_w4198, the clear of four latches)
+tl5_w3636  M  5116-5130,6905     in  onto lc1's M_b (lc1_w7606, gate 5's output: a buffered copy of the reset NOR)
+res_b      P  5182-5202,6345     in  from tl5's bus line x 5192
+res_b      M  5183-5197,6905     ?   onto lc1's V2 (lc1_w7343: the NOR's lower input)
+lpstb_b    P  5227-5247,6345     in  from tl5's bus line x 5237
+lpstb_b    M  5229-5243,6905     ?   onto lc1's V3 (lc1_w7257: the NOR's upper input)
+tl5_w3636  P  5141-5159,6900     ?   the poly on south of the pad (5147,6803): into lc1's diagonal bundle (bends south-east at about (5150,6910))
+res_b      P  5196-5210,6900     ?   the poly on south of the pad (5190,6845), under V2, bending south-east: into lc1's diagonal bundle
+lpstb_b    P  5232-5248,6872     ?   the poly on south of the pad (5237,6803), under V3; bends south-east from here (about (5266,6900)): into lc1's diagonal bundle
+tl5_w5936  P  5053-5073,6345     ?   from tl5's bus line x 5063
+tl5_w5936  P  5054-5072,6880     ?   on south beside lc1's M_a and under it from y ~6890 (not followed)
