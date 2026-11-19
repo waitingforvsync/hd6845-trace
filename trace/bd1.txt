@@ -305,11 +305,11 @@ M 13435,15942 y16769 w=20            # ... and south on k8's position (scan: met
 #   N2 - G5[xn2] - N3 - G6[an] - vss(13842,15832)
 # East of the rail are the loads; the supply land x 14000-14048 feeds them.
 
-# --- bd1_a: enters from the north on track k15, jogs west to k13's position (x 13652) and runs to a contact
+# --- rc_eq_r4: enters from the north on track k15, jogs west to k13's position (x 13652) and runs to a contact
 # at 13655,15391; poly east, south along x 13723 under xn2's metal, east along y 15498 across the
 # column (P2) and north again east of the rail (P4), ending in a rounded cap at y 15427.
 M 13738,14690 y15087 x13652 y15404 w=20   # track k15 jogs west at y 15087 to k13's position (3.1x metal view)
-N M 13738,14700 bd1_a
+N M 13738,14700 rc_eq_r4
 P 13640,15377:13670,15405
 C 13655,15391
 P 13655,15392 x13723 w=14
@@ -317,7 +317,7 @@ P 13711,15385:13735,15508          # P1: south along x 13723
 P 13711,15488:13890,15508          # P2: gate across the column, y 15488-15508
 P 13868,15427:13890,15508          # P4: gate between the ground diffusion and inverter A's output
 
-# --- inverter A: bd1_an = NOT bd1_a. Pull-down P4 (W/L 38/22), load block x 13936-13992.
+# --- inverter A: bd1_an = NOT rc_eq_r4. Pull-down P4 (W/L 38/22), load block x 13936-13992.
 D 13815,15439:13867,15490          # ground diffusion under the rail
 C 13832,15461 s=26x30
 D 13861,15440:13929,15478          # under P4 and on east: the output node
@@ -412,7 +412,7 @@ P 13902,15782:13958,15806          # the block
 
 # ================================================================ tracks k7, k8, k9, k11 (second run)
 # Nested jogs at y 15087-15176 (3.1x metal view): each steps one track east after the track
-# east of it has ended. k15 steps west and is bd1_a (drawn with the gate column).
+# east of it has ended. k15 steps west and is rc_eq_r4 (drawn with the gate column).
 # k7: east at y 15176 to k8's position, south to a contact at 13432,15888; poly east along y 15889
 # under five lines into the gate column (seen to x 13695; what it does there is not traced).
 M 13391,14690 y15176 x13435 y15901 w=20

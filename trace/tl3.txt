@@ -22,7 +22,7 @@ N M 3670,3400 vss
 # Checked on la_ov.png (1.9x), la_mid1.png, la_mid2.png (4x, three shots), la_rows.png (3.5x).
 #   tl3_w3233 = NOT tl3_w3333
 #   tl3_w3419 = NOT( tl3_w3333 AND tl3_w3373  OR  tl3_w3550 )
-#   tl3_w3550 = NOT( tl3_w3506  OR  tl3_w3373 AND tl3_w3233  OR  tl3_w3419 )
+#   tl3_w3550 = NOT( rcs_x1  OR  tl3_w3373 AND tl3_w3233  OR  tl3_w3419 )
 @inst tl1_ua 1041,-1128 tag=a
 @inst tl1_ub 1041,-1128 tag=a
 # the VSS box under the rail below the stack (railprof 3645 3690: diffusion y 3651-3719)
@@ -70,7 +70,7 @@ P 3533,3409:3580,3429
 N P 3555,3419 tl3_w3419
 # clear: row y 3497-3515 from the west
 P 3533,3497:3585,3515
-N P 3560,3506 tl3_w3506
+N P 3560,3506 rcs_x1
 
 # ====================================================================
 # West column, four NOR units: tla's in2 unit / tl1's NOR (tl1_w3636) again.
@@ -99,11 +99,11 @@ C 3845,3773
 @inst tl3_nor 0,174 tag=n2
 @inst tl3_nor 0,781 tag=n3
 @inst tl3_nor 0,955 tag=n4
-# ---- rows of NOR 1 (y 3688-3872):  tl3_w3765 = NOR(tl3_w3722, tl3_w3803)
+# ---- rows of NOR 1 (y 3688-3872):  rcs_a2 = NOR(tl3_w3722, tl3_w3803)
 P 3533,3712:3590,3732                 # gate 1, from the west
 N P 3560,3722 tl3_w3722
 P 3533,3755:3590,3775                 # output, west out of the strip
-N P 3560,3765 tl3_w3765
+N P 3560,3765 rcs_a2
 # gate 2: its row ends on a pad with a contact (3540,3803) at the north end of a metal
 # x 3533-3548 (follow.py 3541 3850: (3543,3806)-(3542,4596)) that has two more contacts on
 # pads, (3540,4068) and (3540,4590) (trk_both.png, 4x four shots: ring and bright centre in
@@ -153,7 +153,7 @@ C 3664,4633
 # and NOR rcs_b1 east of R3 (findcell, clean shot: -792,-651 mx=3725, 0.71; the parts are
 # drawn here from this cluster's own photos, g_c.png 3.4x, g_w2.png 4.4x, g_e2.png 3.6x, g_m.png).
 #   tl3_w3803 = NOR(tl3_w4112, tl3_w4243)            if the ?P below is right
-#   tl3_w4243 = NOR(tl3_w4200, tl3_w4290, tl3_w3803)
+#   tl3_w4243 = NOR(rcs_x1, tl3_w4290, tl3_w3803)
 # ---- upper unit: node tl3_w3803, pull-down gated by the row y 4101-4120 from the west
 D 3597,4055:3630,4133                 # the column (acid R-G 25 against 5 for the field west of it: px.py row 4150)
 P 3533,4101:3638,4120
@@ -199,7 +199,7 @@ D 3597,4299:3650,4313                 # bottom arm to the rail's VSS box below
 D 3640,4306:3690,4348
 C 3663,4330 s=24x30
 P 3533,4191:3638,4209                 # gate 1, from the west
-N P 3560,4200 tl3_w4200
+N P 3560,4200 rcs_x1
 P 3533,4281:3638,4299                 # gate 2, from the west (it passes under the metal x 3540 without a contact: no hole in the clean shot, textmap 3520 4270 3560 4300)
 N P 3560,4290 tl3_w4290
 # the node's buried contact box: a poly patch only, nothing leaves it (px.py row 4243: field
@@ -261,7 +261,7 @@ P 3550,4579:3590,4599                 # gate 2: from the pad (3540,4590) of the 
 # (median 0.94). Overlays lb_ov1.png, lb_ov2.png (3.4x, clean shot). Its data is NOR 4's output.
 #   tl3_w4839 = NOT tl3_w4720
 #   tl3_w5025 = NOT( tl3_w4720 AND tl3_w4978  OR  tl3_w5156 )
-#   tl3_w5156 = NOT( tl3_w5112  OR  tl3_w4978 AND tl3_w4839  OR  tl3_w5025 )
+#   tl3_w5156 = NOT( rcs_x1  OR  tl3_w4978 AND tl3_w4839  OR  tl3_w5025 )
 @inst tl1_ua 1042,478 tag=b
 @inst tl1_ub 1042,478 tag=b
 # the VSS box under the rail below the stack (railprof 3645 3690 4800 5400: diffusion from y 5255;
@@ -307,7 +307,7 @@ P 3533,5015:3581,5035
 N P 3555,5025 tl3_w5025
 # clear: row y 5103-5121 from the west (under the metal x 3540, no hole: textmap 3522 5096 3560 5128 3)
 P 3533,5103:3586,5121
-N P 3560,5112 tl3_w5112
+N P 3560,5112 rcs_x1
 
 # ====================================================================
 # East column (east of the VSS rail x 3995-4045): the standard NOR unit of tla's east column
@@ -408,7 +408,7 @@ N P 4200,5114 tl3_e5114
 # units are written out here, not instanced.
 #   tl3_e4537 = NOT tl3_e4635
 #   tl3_e4720 = NOT( tl3_e4635 AND inh_ck  OR  tl3_e4852 )
-#   tl3_e4852 = NOT( tl3_e4808  OR  inh_ck AND tl3_e4537  OR  tl3_e4720 )
+#   tl3_e4852 = NOT( rcs_x1  OR  inh_ck AND tl3_e4537  OR  tl3_e4720 )
 # ---- upper unit (y 4514-4775)
 D 4008,4577:4058,4621                 # rail's VSS box
 C 4031,4599                           # ring centre in both metal shots (textmap 4000 4570 4064 4626 3)
@@ -539,7 +539,7 @@ M 4192,4800 y5895 x4250 w=13
 P 4172,5362:4211,5386
 C 4192,5373 s=20x20
 P 4124,5366:4180,5377                 # its row west: drawn to x 4124, it goes on (the foot, not traced)
-N M 4192,5100 tl3_e4808
+N M 4192,5100 rcs_x1
 # output: the row y 4843-4859 runs east under track A and the clear's metal (no hole: textmap
 # 4120 4834 4252 4870 3) to a pad with a contact (4234,4852) at the south end of a metal
 # x 4229-4243 (follow.py 4238 4700: (4234,4432)-(4235,4856); bare ground north of y 4440), whose
@@ -571,7 +571,7 @@ P 4204,4736:4250,4751
 P 4217,4902:4252,4930
 C 4234,4918 s=20x20
 M 4236,4910 y5766 x4250 w=13
-N M 4236,5300 tl3_e4915
+N M 4236,5300 rcs_mv
 
 # ====================================================================
 # East column, y 4345-4514: a NOR built under the VSS rail, which DRIVES rcs_mv.
@@ -859,7 +859,6 @@ D 3954,3966:4056,3984                 # the band: through the gap and under the 
 # C's clear metal: one poly, no pad on the way. Latch C's clear is rcs_x1.
 P 3533,5365:4130,5378
 N P 3740,5371 rcs_x1
-@alias rcs_x1 tl3_e4808
 # ---- row y 5408-5421: tl3_w5025 (latch B's inverted output, from tl2's track G) straight across
 # to x 4250, where tl4 draws it on to its pad (4279,5413) as tl3_e5240: the gate of the inverter
 # under the rail's south end is latch B's inverted output.
@@ -880,13 +879,13 @@ N P 3740,5458 tl1_w4937
 @alias tl3_e3550 tl3_tm3955
 @alias tl3_e3550 tl1_w4937
 # ---- row y 5450-5465 east: a pad with a contact (4040,5458) (textmap 4022 5440 4053 5600 3);
-# its poly runs east to x 4250 = tl4's tl4_w5455 (P 4250,5447:4967,5467); its metal x 4036-4048
+# its poly runs east to x 4250 = tl4's c4l_l3 (P 4250,5447:4967,5467); its metal x 4036-4048
 # goes south (drawn to y 5660; follow.py 4037 5520 S: on into the wide metal at y ~6100)
 P 4022,5442:4060,5474
 C 4040,5458 s=20x20
 P 4052,5450:4250,5465
 M 4042,5448 y5660 w=13                # x 4036-4048 (px.py row 5565 4024 4054 3 metal,metal1; first drawn 5 px west: review 12)
-N P 4150,5458 tl4_w5455
+N P 4150,5458 c4l_l3
 # ---- row y 5493-5508: from tl2's pad (3518,5498) (tl3_w4546, NOR 3's output) straight across to
 # x 4250, where tl4 draws it on to its pad (4321,5504) as tl3_e4372: gate 1 of rcs_mv's NOR is
 # NOR 3's output.
@@ -978,7 +977,7 @@ P 3937,5919:3977,5953
 C 3954,5938 s=20x20
 M 3954,5939 x4250 w=13
 @alias tl3_w3982 tl5_w5936
-# ---- S3: the metal from the pad (4040,5458) (tl4_w5455) on south to y 5882, west along
+# ---- S3: the metal from the pad (4040,5458) (c4l_l3) on south to y 5882, west along
 # y 5866-5882 (just south of tla's row y 5838-5858, which it does not touch) to x 3904, south at
 # x 3904-3920 over the rows y 5936 and y 5979 (no hole) to a pad with a contact (3910,6068); the
 # pad's poly runs west under the VCC rail (no hole) to x 3797, turns south at x 3797-3817, passes
@@ -996,7 +995,6 @@ P 3797,6054:3817,6270
 P 3783,6264:3827,6300
 C 3801,6286 s=20x20
 M 3801,6278 y6350 w=13
-@alias tl4_w5455 c4l_l3                   # ur's name for the line; tl4's name stays the net's (tl4 aliases tl5_w5457 to it)
 # ---- S4: the two rails. West rail (VSS) on south to y 6244, east along y 6198-6244 to x 3934 and
 # south as a leg x 3888-3934 out of the strip (ur's vss, M 3913,6330 ...). VCC rail on south to
 # y 6157, east along y 6109-6157 to x 4174 and south as a leg x 4126-4174 out of the strip (ur's
@@ -1016,7 +1014,7 @@ N M 4000,6133 vcc
 # x 4064 (no edge line in either metal shot, field in both stripped shots). East piece: a pad with
 # a contact (4083,6327), whose thin metal x 4077-4089 runs south out of the strip (ur's c4l_gab)
 # and whose poly runs east under the VCC leg (no hole) to x 4250, where tl4 draws it on
-# (P 4250,6313:4920,6333) to the pad (4929,6323) of tl5_w4590
+# (P 4250,6313:4920,6333) to the pad (4929,6323) of c4l_gab
 # (textmap 3533 6300 3790 6346 4; 3812 6300 3970 6348 4 --acid; 3930 6290 4262 6352 4 --acid;
 # 3948 6296 4002 6548 3; 4056 6296 4128 6356 3 --acid)
 P 3533,6317:3966,6337
@@ -1028,4 +1026,3 @@ P 4069,6306:4107,6343
 C 4083,6327 s=20x20
 M 4083,6319 y6350 w=13
 P 4100,6316:4250,6336
-@alias tcw_m6232 c4l_gab                  # ur's name for the line; tl6 aliases tl5_w4590 (the clear of tl5's latch c) to tcw_m6232

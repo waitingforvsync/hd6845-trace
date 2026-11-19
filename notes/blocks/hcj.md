@@ -94,7 +94,7 @@ and r17 (by geometry; the bit order itself is mra's) confirmed. Its wording fixe
 
 ## Not done
 
-- L9 (x 13738, rdp3's `rdp3_n7s9` to bd1's `bd1_a`): straight and unbroken in the same
+- L9 (x 13738, rdp3's `rc_eq_r4` to bd1's `rc_eq_r4`): straight and unbroken in the same
   views and profiles as wrj reported, not drawn (not this package).
 - L0..L2 (x 13348-13434: `inh_rc`, rdp3's `h_eq_r0` / `h_eq_r1` to bd1's k7 / k8):
   seen straight on the surveys, not profiled, not drawn.

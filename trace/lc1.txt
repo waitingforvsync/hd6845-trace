@@ -35,7 +35,7 @@ B 5004,6983:5050,7024
 P 5059,7010 y6955 5021,6906 y6890 w=18       # its wire: north beside the box, then north-west to ur's lc_step poly (ends at (5012,6900))
 N P 5059,6970 lc_step
 
-# ---------------------------------------------------------------- gate 2: lc1_w7140 = NOT lc1_w7170
+# ---------------------------------------------------------------- gate 2: rcs_x1 = NOT lc1_w7170
 D 4762,7118:4812,7166                       # VCC contact box
 C 4777,7138 s=28x34
 D 4808,7125:4862,7162                       # load channel
@@ -60,9 +60,9 @@ P 5046,7127 x5070 w=18                      # east to the pad (y 7118-7136)
 P 5063,7093:5100,7137
 C 5082,7105 s=26x26
 M 5080,6900 y7118 w=20                      # metal M_a north out of the strip
-N M 5080,6950 lc1_w7140
+N M 5080,6950 rcs_x1
 
-# ---------------------------------------------------------------- gate 3: lc1_w7304 = NOR(lc1_w7257, lc1_w7343)
+# ---------------------------------------------------------------- gate 3: lc1_w7304 = NOR(lpstb_b, res_b)
 D 4762,7294:4808,7338                       # VCC contact box
 C 4777,7315 s=28x34
 D 4805,7296:4878,7321                       # load channel
@@ -75,9 +75,9 @@ B 4880,7340:4914,7376
 D 5002,7228:5040,7374                       # diffusion column, its east half under T1 (west edge x 5000: a dark line across both rows)
 D 4985,7228:5024,7244                       # its top west to gate 2's VSS box
 P 4984,7257 x5140 w=19                      # row R3a (from the east; end cap at x 4984)
-N P 5120,7257 lc1_w7257
+N P 5120,7257 lpstb_b
 P 4984,7343 x5140 w=18                      # row R3b (from the east; end cap at x 4984)
-N P 5120,7343 lc1_w7343
+N P 5120,7343 res_b
 D 4980,7358:5040,7374                       # below R3b west to gate 4's VSS box
 D 5010,7286:5040,7318                       # under the output box
 P 5010,7284:5046,7320                       # output box
@@ -203,12 +203,12 @@ P 5140,7257 x5250 w=19
 P 5218,7242:5252,7274
 C 5235,7258 s=26x26
 M 5235,6900 y7272 w=22                      # V3, north out of the strip
-N M 5235,6950 lc1_w7257
+N M 5235,6950 lpstb_b
 P 5140,7343 x5205 w=18
 P 5173,7328:5207,7362
 C 5190,7345 s=26x26
 M 5190,6900 y7360 w=20                      # V2, north out of the strip
-N M 5190,6950 lc1_w7343
+N M 5190,6950 res_b
 
 # ---------------------------------------------------------------- gate 1's input (the inverse of lc_step)
 # the row turns south-east as the lowest line of the diagonal bundle, east again along y 7344 across the

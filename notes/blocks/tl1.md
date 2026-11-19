@@ -36,7 +36,7 @@ is traced from y 3558 to y 5000** (above and below it is `tla`'s) **and from y 5
 y 6175** (the small cluster's west half). Main results: **the
 driver of `rcs_e4` is found**, a wide two-input NOR at y 4778-5000; **its first input
 `tl1_w4678` is one side of a cross-coupled pair of gates** (y 4340-4800: a latch that is
-open while `tl1_w3594` is high and then takes `tl1_w4243`, with `tl1_w4025` forcing it
+open while `tl1_w3594` is high and then takes `tl1_w4243`, with `rcs_x1` forcing it
 low); **the column y 3732-4215 is a copy of y 4340-4800**, 608 px higher, a second latch
 of the same build (open while `tl1_w3636` is high, data `tl1_w2857`), whose output through
 the inverter `tl1_w4243` is the first latch's data. `tl1_w3636` = NOR(`tl1_w3594`,
@@ -57,11 +57,11 @@ tl1_w4243 = NOT tl1_w4287                 (2626,4284)                marked: onl
 second latch (y 4340-4800):
 tl1_w4360 = NOT tl1_w4243                                            (2660,4422)   firm
 tl1_w4703 = NOT(tl1_w4243 AND tl1_w3594 OR tl1_w4678)                (2614,4461), (2614,4501), (2631,4575)   marked: the ties of the two loads
-tl1_w4678 = NOT(tl1_w4025 OR tl1_w3594 AND tl1_w4360 OR tl1_w4703)   (2570,4634), (2618,4715), (2618,4761), (2722,4755)   marked: the ties of the two loads
+tl1_w4678 = NOT(rcs_x1 OR tl1_w3594 AND tl1_w4360 OR tl1_w4703)   (2570,4634), (2618,4715), (2618,4761), (2722,4755)   marked: the ties of the two loads
 first latch (y 3732-4215, the copy):
 tl1_w3752 = NOT tl1_w2857                                            (2660,3814)   firm
 tl1_w4287 = NOT(tl1_w2857 AND tl1_w3636 OR tl1_w4070)                (2614,3853), (2614,3893), (2631,3967)   marked likewise; = tl1_w4095 by an alias
-tl1_w4070 = NOT(tl1_w4025 OR tl1_w3636 AND tl1_w3752 OR tl1_w4287)   (2570,4026), (2618,4107), (2618,4153), (2722,4147)   marked likewise
+tl1_w4070 = NOT(rcs_x1 OR tl1_w3636 AND tl1_w3752 OR tl1_w4287)   (2570,4026), (2618,4107), (2618,4153), (2722,4147)   marked likewise
 third latch (y 5690-6175, the second copy, in the small cluster):
 tl1_w5706 = NOT tl1_w3333                                            (2657,5766)   firm
 tl1_w5841 = NOT(tl1_w3333 AND ck_out OR tl1_w6022)                   (2614,5806), (2614,5846), (2631,5920)   marked likewise
@@ -100,7 +100,7 @@ kind (wide diffusions under R1 with several gates across), traced as the cells `
 | 3982-4215 | **a copy of the unit at y 4590-4800** (findcell: 2535-2790 x 4590-4780 recurs at 0,-608, score 0.94) | **traced** (`tl1_w4070`), with its load |
 | 4215-4345 | inverter (rail gate), a copy of `tla_w3505`'s | **traced**: `tl1_w4243` |
 | 4340-4590 | an inverter (`tl1_w4360`: pull-down on a vertical poly at the rail's east edge, y 4403-4440; load plate in the open x 2722-2775, y 4352-4460) and a three-input gate (`tl1_w4703`: two series gates and a third gate under R1; load plate under the thin metal x 2742, y 4487-4568), cell `tl1_ua` | **traced** |
-| 4590-4800 | VSS box, a column west of R1 with `tl1_w4025`'s gate, the node with a buried contact to `tl1_w4678`'s row, under R1 two gates in series (`tl1_w3594`, `tl1_w4360`) down to the VSS box of the wide NOR; east of R1 the node's strip under thin metal W, a third pull-down (`tl1_w4703`) at its south end and the load at its north end | **traced**: the node is `tl1_w4678` |
+| 4590-4800 | VSS box, a column west of R1 with `rcs_x1`'s gate, the node with a buried contact to `tl1_w4678`'s row, under R1 two gates in series (`tl1_w3594`, `tl1_w4360`) down to the VSS box of the wide NOR; east of R1 the node's strip under thin metal W, a third pull-down (`tl1_w4703`) at its south end and the load at its north end | **traced**: the node is `tl1_w4678` |
 | 4778-5000 | wide NOR | **traced**: drives `rcs_e4` |
 | 5000-5330 | `rcs_w2`, `rcs_in2` | `tla` |
 
@@ -116,7 +116,7 @@ kind (wide diffusions under R1 with several gates across), traced as the cells `
 | 2326 | `rcs_thin_e` y 2754-3347, `tla_w3417` y 3404-5551 (`tla`); **from a pad (2326,5978) south out of the strip: `tl1_w5978`**. The poly that lies under it y 4533-4988 is **`tl1_w3333`** (below) |
 | 2370 | **y 2843-3863 `tl1_w2857`**; **y 3925-4300 `tl1_w4287`**; **y 4925-5459 and east to (2521,5459) `tl1_w4937`**; from (2365,5847) south it is `ck_out`'s trunk (`tla`), with **a second contact (2372,6061)** found here |
 | 2414 | `rcs_c1` y 2972-5082, `rcs_in2` y 5182-5411 (`tla`); **y 6010-6207 `tl1_w6022`**; `lc_step` from (2412,6278) (`ur`) |
-| 2457 | **y 2800-3690 `tl1_w3678`**; **y 4012-5372 and east to (2521,5372) `tl1_w4025`**; `clk_tl` from (2458,5587) (`tla`) |
+| 2457 | **y 2800-3690 `tl1_w3678`**; **y 4012-5372 and east to (2521,5372) `rcs_x1`**; `clk_tl` from (2458,5587) (`tla`) |
 | 2500 | **y 2886-4730 `tl1_w3594`**; **y 4882-5232 `rcs_e4`**, continuing as `tla`'s metal round to bus line C; **y 5924-6252 `tl1_w5936`** |
 
 **North of y 2790** (traced: wiring only; `n3.png` 1.75x, `n4.png`-`n11.png` 2.2-4x, overlay
@@ -180,27 +180,27 @@ rcs_e4 = NOR(tl1_w4678, tl1_w4937)
   `u8d.png`) are not resolved: `?`.
 
 So `rcs_e4` is high only while both `tl1_w4678` and `tl1_w4937` are low. `tl1_w4678` is the
-output of the unit above (low when `tl1_w4025` is high, or `tl1_w3594` and `tl1_w4360` are
+output of the unit above (low when `rcs_x1` is high, or `tl1_w3594` and `tl1_w4360` are
 both high, or `tl1_w4703` is high), so
-`rcs_e4 = (tl1_w4025 OR tl1_w3594 AND tl1_w4360 OR tl1_w4703) AND NOT tl1_w4937`;
+`rcs_e4 = (rcs_x1 OR tl1_w3594 AND tl1_w4360 OR tl1_w4703) AND NOT tl1_w4937`;
 what those inputs are is not known.
 
 ### The unit that drives `tl1_w4678` (y 4590-4800) and its copy (y 3982-4215): traced
 
 ```
-tl1_w4678 = NOT( tl1_w4025  OR  tl1_w3594 AND tl1_w4360  OR  tl1_w4703 )
-tl1_w4070 = NOT( tl1_w4025  OR  tl1_w3636 AND tl1_w3752  OR  tl1_w4095 )      (the copy)
+tl1_w4678 = NOT( rcs_x1  OR  tl1_w3594 AND tl1_w4360  OR  tl1_w4703 )
+tl1_w4070 = NOT( rcs_x1  OR  tl1_w3636 AND tl1_w3752  OR  tl1_w4095 )      (the copy)
 ```
 
 **The question left by the first round** (is the tan rectangle at the east end of
-`tl1_w4678`'s row a buried contact, or does `tl1_w4025`'s row make a pass transistor there?)
+`tl1_w4678`'s row a buried contact, or does `rcs_x1`'s row make a pass transistor there?)
 **is decided: both features are there, and the transistor is a pull-down to VSS.**
 What lies under the thin metal x 2557-2573 is a column of diffusion like the NOR units'
 column, x 2553-2588:
 
 - Profile down x 2563 in four shots (`tools/px.py col 2563 4525 4700 3 all`), clean shot:
   pink = field y 4567-4591 (188/121/128); a dark edge at y 4594-4597 in all four shots; tan
-  y 4600-4618 (195/175/140); the salmon row of `tl1_w4025` y 4624-4642 (240/170/126); tan
+  y 4600-4618 (195/175/140); the salmon row of `rcs_x1` y 4624-4642 (240/170/126); tan
   y 4648-4657; a dark line y 4660-4666 (the top edge of the row `tl1_w4678` on the box); tan
   y 4669-4684 (200/178/134); the heavy bottom y 4687-4696; pink again from y 4700 and the row
   of `tl1_w3594` at y 4711-4726. So the row crosses a diffusion (tan directly above and
@@ -214,7 +214,7 @@ column, x 2553-2588:
   (2628,4610): ring in the metal, speck in the clean shot, `p4.png`).
 - East edge of the column: a dark line at x 2586-2591, y 4620-4670 in both metal shots and the
   chip-2 stripped shot, with field east of it (stripped shot at x 2595, y 4652-4664: green
-  over red). `tl1_w4025`'s row runs on over it to x 2598 and ends at the VSS box's edge.
+  over red). `rcs_x1`'s row runs on over it to x 2598 and ends at the VSS box's edge.
 - The node: below the row the column runs to y 4692. The row of `tl1_w4678` (y 4668-4688)
   ends on it in a box with a heavy outline on the west and south sides, x 2551-2575,
   y 4663-4692 (`p2a.png` 6.8x, `p3.png`): a buried contact. The thin metal above has no ring
@@ -251,7 +251,7 @@ inverter of the unit above (next section): `tl1_w4360` = NOT `tl1_w4243`.
 **The copy.** `tools/findcell.py 2535 4590 2790 4780` (clean shot) finds the unit again at
 0,-608 with score 0.94, and the unit above it (2535-2790 x 4345-4585) at 0,-608 with 0.93. The
 geometry is a cell (`tl1_ub`) placed twice; the overlay of the copy was checked on `o7.png`
-(2.9x, clean shot and metal): VSS box with a contact (2620,4002), arm, `tl1_w4025`'s row
+(2.9x, clean shot and metal): VSS box with a contact (2620,4002), arm, `rcs_x1`'s row
 y 4017-4036 (from the pad (2458,4026)), the box (2551-2575, 4055-4084), the two gates
 (`tl1_w3636`'s row y 4104-4122 from the pad (2283,4113); the pad with a contact (2555,4159)),
 the VSS box below with its own contact (2622,4188). Differences from the master, both at the
@@ -402,19 +402,19 @@ through its plate's top bar onto the third gate here. With `tl1_w4360` = NOT `tl
 
 ```
 tl1_w4703 = NOT( tl1_w3594 AND tl1_w4243      OR  tl1_w4678 )
-tl1_w4678 = NOT( tl1_w3594 AND NOT tl1_w4243  OR  tl1_w4703  OR  tl1_w4025 )
+tl1_w4678 = NOT( tl1_w3594 AND NOT tl1_w4243  OR  tl1_w4703  OR  rcs_x1 )
 ```
 
 While `tl1_w3594` is high, `tl1_w4678` follows `tl1_w4243` and `tl1_w4703` is its inverse;
-while it is low the pair holds; `tl1_w4025` high forces `tl1_w4678` low. The copy is the
+while it is low the pair holds; `rcs_x1` high forces `tl1_w4678` low. The copy is the
 same with `tl1_w3636` for `tl1_w3594`, `tl1_w2857` for `tl1_w4243`, and its inverse output
 `tl1_w4287` goes through the inverter at y 4215-4345 to be this pair's data: `tl1_w4243`
 is the copy's `tl1_w4070` again. Since `tl1_w3636` = NOR(`tl1_w3594`, `tl1_w3678`), the first
 latch is open only while `tl1_w3594` and `tl1_w3678` are both low and the second while
 `tl1_w3594` is high: **`tl1_w4678` is `tl1_w2857` taken through two latches in turn, with
-`tl1_w4025` clearing both** (traced, marked by the four `?` ties), and
+`rcs_x1` clearing both** (traced, marked by the four `?` ties), and
 `rcs_e4` = NOT `tl1_w4678` AND NOT `tl1_w4937`. What `tl1_w2857`, `tl1_w3594`, `tl1_w3678`,
-`tl1_w4025`, `tl1_w4937` are is not known: all five come from the east on poly rows.
+`rcs_x1`, `tl1_w4937` are is not known: all five come from the east on poly rows.
 
 **`tl1_w4287` and `tl1_w4095` are one net in the drawing** (the copy's node has the row of
 `tl1_w4287` on its west box and its plate carries the thin metal `tl1_w4095`), but only
@@ -489,7 +489,7 @@ y 6124-6175: the master's stack 1345 lower; overlays of the placed cells on four
 |---|---|---|
 | `tl1_w4243` (data: gate 1 of the three-input gate, and the inverter's gate) | **`tl1_w3333`** | the row y 5793-5810 from the long wire down the west side |
 | `tl1_w3594` (enable: gate 2 of the three-input gate; series gate of the lower unit) | **`ck_out`** | `tla`'s row y 5839-5859 from the trunk contact (2365,5847), and the row y 6054-6072 from the second trunk contact (2372,6061) |
-| `tl1_w4025` (clear: the pull-down west of the rail) | **`tl1_w5978`** | the row y 5969-5987 from the pad (2326,5978) |
+| `rcs_x1` (clear: the pull-down west of the rail) | **`tl1_w5978`** | the row y 5969-5987 from the pad (2326,5978) |
 | `tl1_w4678` (output, on the buried contact of the node's west box) | **`tl1_w6022`** | the row y 6013-6031 to the pad (2414,6022) |
 | `tl1_w4360` (inverter's output, thin metal x 2557-2573) | **`tl1_w5706`** | follow.py: one metal (2563,5708)-(2568,6124), pad with a contact (2562,5706) to the pad (2555,6112) |
 | `tl1_w4703` (other side, thin metal x 2742) | **`tl1_w5841`** | follow.py: (2740,5842)-(2742,6052); contacts (2742,5841) and (2742,6048) |
@@ -670,7 +670,7 @@ shots). Sizes only: `tools/sameconn.py` shows no connection changed by it.
 |---|---|---|---|---|
 | `rcs_e4` | M | (2500,5232), onto `tla`'s metal | driven here | the long control line of the step logic |
 | `tl1_w4937` | P | (2817,5460), east | into the block | gate 2 of `rcs_e4`'s NOR; row under the foot, on east past x 3400 |
-| `tl1_w4025` | P | (2817,5372), east | not known | row under the foot, on east past x 3400; on the same metal x 2457 the pads (2458,4026) and (2458,4635), each the gate of a pull-down (units at y 3982 and y 4590) |
+| `rcs_x1` | P | (2817,5372), east | not known | row under the foot, on east past x 3400; on the same metal x 2457 the pads (2458,4026) and (2458,4635), each the gate of a pull-down (units at y 3982 and y 4590) |
 | `tl1_w2857` | P | (2817,2857), east | into the block (its other ends are gates) | row above the cluster; the data of the first latch (gate 1 of `tl1_w4287`, and the inverter `tl1_w3752`) |
 | `tl1_w3678` | M | (2856,2811), east, from the pad (2830,2811) | into the block (a gate is its only other end) | gate 2 of the NOR |
 | `tl1_w3594` | P | (2817,2899), east | into the block (its other ends are four gates) | gate 1 of the NOR `tl1_w3636`; the enable of the second latch (a series gate in each of its two gates) |
@@ -712,7 +712,7 @@ the way; the row y 2812 ends on a pad (2830,2811) (`n10.png`).
   across R1's west edge (x 2590-2600) are covered by the rail's edge line, as in every unit
   here; both are drawn without `?` on the evidence in the Logic section (tan to x 2588 in the
   clean shot, diffusion at x 2589-2595 in the chip-2 stripped shot, edge lines running into
-  the rail in both metal shots). If the arm were not joined, `tl1_w4025`'s transistor would
+  the rail in both metal shots). If the arm were not joined, `rcs_x1`'s transistor would
   hang; if the node were not, `tl1_w4678` would have that one pull-down only.
 - **Is thin metal W on the node `tl1_w4678` at about (2693,4688)?** No ring, no green hole,
   in either copy (Logic, "East of R1"): not drawn.
@@ -801,7 +801,7 @@ the way; the row y 2812 ends on a pad (2830,2811) (`n10.png`).
     193-202/150-176/115-140 at x 2694-2698 and greyer, 156-166/138-156/116-125, at x 2702. So
     a tie box under W does not by itself make W dark for 34 px: the three `tl1_ub` boxes
     remain different from every other box W passes. Nothing decided, nothing drawn.
-- The far ends of the rows `tl1_w4937`, `tl1_w4025` (east of x 2817, past x 3400) and of
+- The far ends of the rows `tl1_w4937`, `rcs_x1` (east of x 2817, past x 3400) and of
   `tl1_w2857`, `tl1_w3594` (east of x 2817 along y 2857, y 2899).
 - `tl1_w3333`'s metal east of (2852,2553); `tl1_w2637`'s east of (2852,2637); `tl1_w3678`'s
   east of (2856,2811); `tl1_w2592` east of x 2817 (pad at about (2867,2595)); the three polys

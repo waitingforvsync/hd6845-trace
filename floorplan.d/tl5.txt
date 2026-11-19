@@ -3,7 +3,7 @@
 4967,3142:5645,3352   ?logic  NOR east of RB | tl5_w3245 = NOR(tl5_w4160, tl5_w3550): latch b's output and latch a's inverse output; out north on the track x 5451
 4967,3343:5600,3803   ?logic  latch a east of RB | tl5_w3680 = NOT(tl5_w3636 OR tl5_w3505 AND NOT tl5_w3461 OR tl5_w3550): open while tl5_w3505 is high, data tl5_w3461, cleared by tl5_w3636; a mirrored copy of tl1's latch
 4967,3820:5645,4280   ?logic  latch b east of RB | tl5_w4160: open while tl5_w3982 is high, data latch a's output tl5_w3680, cleared by tl5_w3636
-4967,4297:5683,4757   ?logic  latch c east of RB | tl5_w4633: open while tl5_w4458 is high, data tl5_w4395, cleared by tl5_w4590; both outputs leave east
+4967,4297:5683,4757   ?logic  latch c east of RB | tl5_w4633: open while tl5_w4458 is high, data tl5_w4395, cleared by c4l_gab; both outputs leave east
 4951,4786:5683,4912   ?logic  inverter east of RB | tl5_w4807 = NOT tl5_w4850; both on rows that leave east
 4951,4916:5683,5042   ?logic  inverter east of RB | tl5_w4937 = NOT tl5_w3982 (latch b's enable); out south on the track x 5407
 4967,2665:5600,3003   route   north rows of the fifth strip | eight poly rows from tl4's strip to the north pads of the tracks: enables, clear, the NOR's output, tl5_w4937
@@ -11,8 +11,8 @@
 5210,3003:5683,5400   route   bus field of the fifth strip | tracks T0-T10 (x 5233-5667) and the rows of the three latches and the NOR; south of y 4420 three rows from the east come down T8-T10 to the rows under the foot
 5050,5220:5430,5255   route   row y 5237 | tl5_w4937 from T4's south pad west to the thin metal W
 5060,5045:5150,5880   power   ?rail RC south of the column | no device under it; turns west at y 5882-5942 (vss by structure only)
-4967,5390:5683,5780   route   rows under the foot | eight poly rows from the west edge to pads of T8-T10's south pieces and two east pads, or on into the poly bus; tl5_w4590 (latch c's clear) from the track x 5494 to the metal x 5189; no transistor
-4967,5870:5200,5995   route   turn of RC and of the metal x 5189 | RC and tl5_w4590 leave west; two polys from the west turn south under the rail
+4967,5390:5683,5780   route   rows under the foot | eight poly rows from the west edge to pads of T8-T10's south pieces and two east pads, or on into the poly bus; c4l_gab (latch c's clear) from the track x 5494 to the metal x 5189; no transistor
+4967,5870:5200,5995   route   turn of RC and of the metal x 5189 | RC and c4l_gab leave west; two polys from the west turn south under the rail
 5040,5995:5683,6350   route   poly bus going south | ten vertical polys: the clear of latches a and b, res_b, lpstb_b, rcs_e4, the strong inverter's output, latch a's data and four unidentified lines; the counter lines c4l0-c4l3 cross in metal without a contact
 5060,2505:5150,3040   power   ?rail RC north of the column | from the wide metal band y 2180-2500 over the north rows (vss by structure only)
 4610,2745:4967,3000   route   latch b's enable to tl4's track | tl4_w4068: from the pad (4910,2767) of the row y 2767 by metal south, west, south, west to the track x 4625 of tl4's latch

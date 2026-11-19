@@ -84,7 +84,7 @@ Earlier:
 drawn** (piece H, wiring only). Two joins to `lc1`, without an uncertain item:
 
 - **`lc2_w8474` is `lc1_w7170`**, the input of `lc1`'s gate 2: its metal runs on from the pad (5232,8214), north, west
-  along y 8172 and north as `lc1`'s thin metal T1. So latch B's data `lc2_w8450` = NOT `lc1_w7170`, and `lc1_w7140`
+  along y 8172 and north as `lc1`'s thin metal T1. So latch B's data `lc2_w8450` = NOT `lc1_w7170`, and `rcs_x1`
   is the same inverse made a second time. The extraction prints `lc1_w7170` for the net.
 - **`lc1_w7468`** (`lc1`'s metal M_c2) comes down the staircase and runs south through the whole strip without a
   contact, into `lc3`.

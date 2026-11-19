@@ -80,7 +80,7 @@ Names: the pieces in rdp2, rdp3 and bd1 carry the same names `wr_r0`, `wr_r1`, `
 
 - The x 13868 line (`hc0`): metal seen from the contact (13868,13630) to
   (13825,14700), contact and poly not read at high zoom, not drawn.
-- L5, L8, L9 (rdp3's `hc1`, `hc3`, `rdp3_n7s9`; bd1's `hc1`, `hc3`, `bd1_a`):
+- L5, L8, L9 (rdp3's `hc1`, `hc3`, `rc_eq_r4`; bd1's `hc1`, `hc3`, `rc_eq_r4`):
   straight and unbroken in the same views and profiles, not drawn (not this package).
 - L0..L3 (x 13348-13478): not read here.
 - The poly from L10's contact going west (y 13893) and the poly band at y 14010-14038 with

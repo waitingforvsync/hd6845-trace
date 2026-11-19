@@ -47,7 +47,7 @@ and is the quickest check.
 | Ground rail of the gate column | x 13826-13870, y 15100 to about 16760 | between y 15833 and 15991 it is replaced by two narrow lines (not traced), so the lower part is named `vss` from its pull-downs only |
 | Supply rail of the gate column | x 13997-14044, y < 16960 | `vcc`: every load of the column ends on it. By scan it is continuous from y 14600 to 16960, where bd3's wide rail (y 16907-16954) arrives |
 | Inverter pair on X | x 13765-14050, y 15120-15350 | two inverters, one ground contact between them (13838,15237) |
-| Inverter A | x 13860-14045, y 15385-15512 | `bd1_an` = NOT `bd1_a`; pull-down east of the rail (gate P4), load block x 13936-13992 |
+| Inverter A | x 13860-14045, y 15385-15512 | `bd1_an` = NOT `rc_eq_r4`; pull-down east of the rail (gate P4), load block x 13936-13992 |
 | Latch, upper half | x 13700-14050, y 15468-15690 | node `bd1_n1`; pull-downs under the rail (P2, P3, G4), load block x 13938-13992, y 15523-15608 |
 | Pull-down of `bd1_k` | x 13773-13804, y 15634-15730 | strip under `bd1_an`'s metal, gate = `inh_src` |
 | Latch, lower half | x 13797-13990, y 15705-15852 | node `bd1_n2`; pull-downs G5, G6 under the rail and a third (gate `bd1_n1`) east of it |
@@ -147,20 +147,20 @@ three inverters here are the same size.
 ### Gate column, y 15385-15850: an inverter and a latch gated by `inh_lat` (traced, second run)
 
 ```
-bd1_an = NOT bd1_a
-bd1_n1 = NOT( bd1_a . inh_lat  +  bd1_q )                     upper half, complete
+bd1_an = NOT rc_eq_r4
+bd1_n1 = NOT( rc_eq_r4 . inh_lat  +  bd1_q )                     upper half, complete
 bd1_n2 : pull-downs  bd1_an . inh_lat  +  bd1_n1  to vss       lower half; its load is not traced
 bd1_k  : pull-down  inh_src  to vss (source connection uncertain; its load is not in view)
 ```
 
 Under the ground rail one diffusion column carries, top to bottom: vss contact (13832,15461),
-gate P2 (y 15488-15508, `bd1_a`), a strip 18 px tall with no contact, gate P3 (y 15530-15550,
+gate P2 (y 15488-15508, `rc_eq_r4`), a strip 18 px tall with no contact, gate P3 (y 15530-15550,
 `inh_lat`), node N1 (y 15552-15601), gate G4 (y 15602-15623, `bd1_q`), vss contact
 (13845,15657); then field (y 15682-15706); then node N2 (y 15709-15745), gate G5
 (y 15746-15766, `inh_lat`), a strip, gate G6 (y 15791-15810, `bd1_an`), vss contact
 (13842,15832).
 
-- **`bd1_a`** enters from the north on track k15, jogs west at y 15087 to k13's position
+- **`rc_eq_r4`** enters from the north on track k15, jogs west at y 15087 to k13's position
   (x 13652), contact (13655,15391), poly east and south along x 13723 under
   `inh_lat`'s metal, east along y 15498 across the column (P2) and north again east of
   the rail (P4, x 13868-13890, ending in a rounded cap at y 15427). P2 and P4 are one
@@ -207,8 +207,8 @@ gate P2 (y 15488-15508, `bd1_a`), a strip 18 px tall with no contact, gate P3 (y
 
 Believed (not traced): `bd1_q` = `bd1_n2` (so `bd1_n2` = NOT(`bd1_an` . `inh_lat` + `bd1_n1`)
 with `bd1_q`'s band as its load gate).
-That makes the pair a transparent latch of `bd1_a`: while `inh_lat` is high (X low,
-`inh_src` high) `bd1_n1` = NOT `bd1_a` and `bd1_n2` = `bd1_a`; while it is low both hold.
+That makes the pair a transparent latch of `rc_eq_r4`: while `inh_lat` is high (X low,
+`inh_src` high) `bd1_n1` = NOT `rc_eq_r4` and `bd1_n2` = `rc_eq_r4`; while it is low both hold.
 The layout supports it (the two halves mirror each other; `bd1_n1`'s line ends beside
 N2; the band of `bd1_q` lies where N2's load would be), but the wiring that would prove
 it (N2's load and the buried contact beside `bd1_q`'s band) is the untraced part. Neither `ck_out` nor any trunk clock reaches this latch: its
@@ -233,7 +233,7 @@ gate is `inh_lat`, the inverse of line X.
 | k12 13608 | wr_r2 | ends at contact (13609,14956) |
 | k13 13652 | wr_r0 | ends at contact (13652,15000) |
 | k14 13694 | hc3 | ends at contact (13692,14913); poly west into the mid-right array at y 15020 |
-| k15 13738 | **bd1_a** | jogs **west** to x 13652 at y 15087, down to contact (13655,15391): the latch's data input |
+| k15 13738 | **rc_eq_r4** | jogs **west** to x 13652 at y 15087, down to contact (13655,15391): the latch's data input |
 | k16 13782 | wr_r1 | ends at contact (13785,14913) |
 | k17 13826 | hc0 | jogs to x 13782 at y 14975, down to y 15131, west to x 13696, contact (13697,15239); poly west along y 15238 to contact (13131,15235); metal south on x 13131 to contact (13131,16413); poly on into the mid-right array (trunks: along y 16440-16462) |
 
@@ -283,7 +283,7 @@ X's lines, contact (13522,15999), metal south on x 13521 to about y 16273.
 | wr_r0 | metal | 13652,14700 (north) | out | track k13 |
 | hc3 | metal | 13694,14700 (north) | ? | track k14 |
 | hc3 | poly | 13000,15020 (west) | ? | into the mid-right array's routing channel, under the `ck_a` rail |
-| bd1_a | metal | 13738,14700 (north) | in | track k15: data input of the latch and input of inverter A |
+| rc_eq_r4 | metal | 13738,14700 (north) | in | track k15: data input of the latch and input of inverter A |
 | wr_r1 | metal | 13782,14700 (north) | out | track k16 |
 | hc0 | metal | 13826,14700 (north) | ? | track k17 |
 | hc0 | poly | 12970,16451 (west) | ? | into the mid-right array (this last poly is `?`: from trunks' notes, not checked here) |
@@ -440,7 +440,7 @@ x 13806), which means a gap of field or a diffusion edge is being misread there.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19)
 
-- `bd1_a` is `rc_eq_r4` (`eof` run 1, firm join): R4's match is the data of the latch gated by
+- `rc_eq_r4` is `rc_eq_r4` (`eof` run 1, firm join): R4's match is the data of the latch gated by
   `inh_lat` (`bd1_n1` = NOT(`bd1_q` OR (`inh_lat` AND `rc_eq_r4`))) and the input of inverter A
   (`bd1_an` = NOT `rc_eq_r4`). The latch's lower half, `bd1_q`'s driver and where `bd1_n1`, `bd1_n2`,
   `bd1_an` go are in the end-of-frame lead group (`eof` (e)).

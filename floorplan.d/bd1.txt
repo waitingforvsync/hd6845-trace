@@ -1,8 +1,8 @@
 13040,14700:13850,15100  route  write strobes turning north | wr_r6 w1 w2 w0 w4 arrive in poly and each ends on a contact under a track of the 18-line bundle (x 13088-13826) that carries it north
 13040,15100:13700,17100  route  strobe track channel | 18 vertical metal tracks with poly cross-unders; wr_r5 and wr_r7 climb it from the bottom and leave north on tracks k1, k2; other lines go into the mid-right array
 13760,15120:14055,15350  logic  two inverters on line X | both driven by X (the input of input-row gate 0); outputs NOT X leave north on track k6 and south on x 13716
-13860,15385:14050,15515  logic  inverter | bd1_an = NOT bd1_a; output goes south on a metal line (x 13783) to the latch's lower half
-13700,15468:14050,15700  logic  latch gated by NOT X (upper half) | bd1_n1 = NOT(bd1_a.inh_lat + bd1_q); output on a metal line x 13957
+13860,15385:14050,15515  logic  inverter | bd1_an = NOT rc_eq_r4; output goes south on a metal line (x 13783) to the latch's lower half
+13700,15468:14050,15700  logic  latch gated by NOT X (upper half) | bd1_n1 = NOT(rc_eq_r4.inh_lat + bd1_q); output on a metal line x 13957
 13770,15634:13806,15735  logic  pull-down | gate inh_src (the input of X's driver)
 13700,15700:14050,15860  logic  latch gated by NOT X (lower half) | bd1_n2: pull-downs bd1_an.inh_lat and bd1_n1 traced; its load (north-east, y 15640-15705) not traced
 13700,15860:14080,16125  ?logic gate column (untraced) | gates under the ground rail x 13848; ck_out tap at y 15930

@@ -122,7 +122,7 @@ What is left of the left column near the generator: the cell at y 7790-8000 is t
 
 - From `tl3` run 11 (trace corrected, a1c5d8b): the 5-bit counter's L3 line is fed only from the west
   (the poly along y 6410 west of the pad (3757,6410)); the pad (3968,6410) is `rcs_thin_e`'s, with a poly
-  leaving east. The 4-bit counter's L3 is `tl4_w5455` (`tl4`'s latch inverted), its gab is
-  `tcw_m6232`. `c4l_l3` and `c4l_gab` are drawn 10-21 px off north of y 6700 in the old reading
+  leaving east. The 4-bit counter's L3 is `c4l_l3` (`tl4`'s latch inverted), its gab is
+  `c4l_gab`. `c4l_l3` and `c4l_gab` are drawn 10-21 px off north of y 6700 in the old reading
   (corrected); `sl_l3`'s metal steps at y ~6665-6700 (drawn at 6560) and the `vcc` line x 3630 has no
   metal from y 6330 to about 6570 (not corrected: R44).

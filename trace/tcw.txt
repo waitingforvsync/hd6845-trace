@@ -96,7 +96,7 @@ B 6625,4106:6654,4132
 #   tcw_o3326 : low through tcw_m6362a, or through tcw_m6320 AND tcw_m6362b in series to the top
 #               node (y 3232-3250), which is the gate's OUTPUT tcw_o3240 (run 3, below)
 #   tcw_o3437 : low through tcw_m6404
-#   tcw_o3550 : low through tcw_m6232
+#   tcw_o3550 : low through c4l_gab
 M 6532,3200 y3660 w=50
 # stack 1: top node | gate | node | gate | OUT | gate | rail contact (two pits)
 D 6503,3232:6560,3400
@@ -132,7 +132,7 @@ P 6222,3520:6572,3540                 # gate at y 3520-3540
 # --- the bus metals, from tools/tla_tracks.py (runs with gaps under 34 px bridged). Their ends and
 # any other taps along them have NOT been looked at: uncertain as nets.
 M 6232,2875 y3872 w=12
-N M 6232,3700 tcw_m6232
+N M 6232,3700 c4l_gab
 M 6316,2787 y3662 w=12
 N M 6320,3500 tcw_m6320
 P 6298,3638:6334,3672                 # its lower pad (6315,3655); poly on west along y 3655 (not followed)
@@ -276,7 +276,7 @@ N M 6276,3050 tcw_m6278
 P 6255,3161:6289,3195
 C 6272,3178
 P 6272,3172:6462,3190
-# --- the top end of tcw_m6232: pad (6230,2875) with a poly east along y 2877 to the rail's west edge
+# --- the top end of c4l_gab: pad (6230,2875) with a poly east along y 2877 to the rail's west edge
 # (what it does there is not resolved)
 P 6212,2858:6248,2892
 C 6230,2875
@@ -291,7 +291,7 @@ P 6230,2868:6497,2886
 M 6404,3702 y3708 x6275 y3919 x6233 y4231 x6282 y4410 w=12
 P 6258,4388:6292,4422
 C 6275,4405
-# tcw_m6232: lower pad (6232,3870); poly from it east along y 3912 to the ground rail, which it
+# c4l_gab: lower pad (6232,3870); poly from it east along y 3912 to the ground rail, which it
 # reaches between the rail contact (6535,3905) and the node of fld_a_in. Whether it only crosses
 # or gates a third pull-down of that node is NOT RESOLVED (AMB-014): drawn to the rail's edge only.
 P 6214,3853:6250,3888

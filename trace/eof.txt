@@ -17,9 +17,9 @@
 #   LINK A (here): the poly ends on a pad with a contact (13433,9665), the top of an upper
 #     piece of track L2; that metal ends on a pad with a contact (13432,9925); a poly bar runs
 #     east along y 9925 under L3, L4, L5, L6 to a pad with a contact (13650,9925), the top of
-#     track L7, which rdp3 draws from y 10700 (its net rdp3_n7s9);
+#     track L7, which rdp3 draws from y 10700 (its net rc_eq_r4);
 #   rdp3: L7, jog onto L6 (y 11507), jog onto L5 (y 12313), poly link y 12826, L9 to y 13480;
-#   LINK B (here): L9 straight from y 13480 to bd1's track k15 at y 14690 (its net bd1_a);
+#   LINK B (here): L9 straight from y 13480 to bd1's track k15 at y 14690 (its net rc_eq_r4);
 #   bd1: k15, jog west at y 15087, contact (13655,15391), the poly of gate P2 (the latch's
 #     upper half, in series with inh_lat) and of P4 (inverter A).
 #
@@ -65,8 +65,6 @@ M 13738,13475 y14695                # L9: rdp3's end (13738,13480) to bd1's k15 
 N M 13738,14100 rc_eq_r4
 
 # With both links drawn the three names are one net.
-@alias rc_eq_r4 rdp3_n7s9
-@alias rc_eq_r4 bd1_a
 
 # ============================================================================================
 # Piece r5inv: the inverter at the west end of R5's match line (2 transistors).
@@ -250,10 +248,10 @@ N M 6559,8300 inh_ck                # lc2's name for the metal that arrives here
 #   5107 (rcs_x1), 5150 (tl5_w3636), 5192 (res_b), 5237 (lpstb_b);
 #   HERE: each runs on south, straight, under the nine horizontal metals of y 6360-6725 without
 #   a contact; four end on a pad with a contact, from which a metal goes on south:
-#     x 5107  pad (5105,6761)  metal west to x 5083, south = lc1's M_a (lc1_w7140, gate 2's output)
+#     x 5107  pad (5105,6761)  metal west to x 5083, south = lc1's M_a (rcs_x1, gate 2's output)
 #     x 5150  pad (5147,6803)  metal west to x 5123, south = lc1's M_b (lc1_w7606, gate 5's output)
-#     x 5192  pad (5190,6845)  metal south              = lc1's V2  (lc1_w7343, gate 3's lower input)
-#     x 5237  pad (5237,6803)  metal south              = lc1's V3  (lc1_w7257, gate 3's upper input)
+#     x 5192  pad (5190,6845)  metal south              = lc1's V2  (res_b, gate 3's lower input)
+#     x 5237  pad (5237,6803)  metal south              = lc1's V3  (lpstb_b, gate 3's upper input)
 #   the fifth, x 5063, has no pad: it runs on south in the open beside M_a and under it from
 #   y ~6890 (not followed: notes, Not done);
 #   THREE OF THE PADS ARE NOT THE POLYS' ENDS (review round 1): below the pads of x 5150, x 5192
@@ -313,7 +311,4 @@ N P 5237,6500 lpstb_b
 P 5063,6345 y6880 w=18              # tl5_w5936's line, on south (no pad; not followed below y 6880)
 N P 5063,6500 tl5_w5936
 # The joins, in the full extraction (each pair is one net; the first name is the one shown):
-@alias rcs_x1 lc1_w7140
 @alias tl4_w4198 lc1_w7606
-@alias res_b lc1_w7343
-@alias lpstb_b lc1_w7257

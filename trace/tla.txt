@@ -610,7 +610,7 @@ M 4148,3371 y3596 w=20                #   no metal at y 3341-3371 in either meta
 N M 4148,3330 ra_eq_r9
 
 # ====================================================================
-# AOI unit of the first cluster, y 4045-4320: rcs_n4200 = NOT( rcs_cond . clk_tl + rcs_g4240 ).
+# AOI unit of the first cluster, y 4045-4320: rcs_n4200 = NOT( rcs_cond . clk_tl + rcs_x1 ).
 # Here the diffusion is one wide area under the VSS rail AND under a second metal beside it
 # (x 3025-3060, a signal line that only passes over). From the top: VSS box (contact
 # (2985,4070)), gate g1, gate g2 (in series), node N, gate g3, VSS (contact (2985,4292)).
@@ -641,13 +641,13 @@ N M 3152,4300 clk_tl
 # g3: a poly y 4230-4250 from the east, across the whole bus without a contact, over the east
 # column. It ENDS at x 3020 in the gap between the thin metal and R3. The band on the same y under
 # R3 (x 2945-3000, over the west column) is another poly: its west end turns south (trace/tl2.txt,
-# run 3) to the load of the unit below, so that gate is on that unit's node, not on rcs_g4240.
+# run 3) to the load of the unit below, so that gate is on that unit's node, not on rcs_x1.
 # px.py row 4241 2984 3040 3: poly to x 2999, pink field x 3002-3008, green open field
 # x 3011-3017, poly from x 3020; both metal shots plain in the gap there where the rows y 4162,
 # 4116 and 4416 are orange (review-6/gap_m.png of tl2's scratch folder)
 P 2945,4230:3000,4250
 P 3020,4230:3400,4250
-N P 3300,4240 rcs_g4240
+N P 3300,4240 rcs_x1
 # load: VCC box (contact (2806,4205)), strip y 4203-4228 under the plate, box under thin metal E,
 # on east to N. The plate is the lower part of a poly pad; the pad's arm east is tied to the
 # box by a buried contact, and the pad has a METAL contact (2862,4172) to a strap x 2845-2885

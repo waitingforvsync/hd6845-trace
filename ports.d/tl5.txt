@@ -15,7 +15,7 @@ tl5_w3505   P  4967,2975-2994  ?    latch a's enable: the row of the pad (5494,2
 # East side (x 5683)
 tl5_w3505   P  5683,3712-3732  ?    latch a's enable: the row of T6's lower pad (5494,3722) runs on east
 tl5_w4395   M  5683,3650-3668  in   latch c's data: T10's north piece, from the pad (5665,4395) north to a corner (5668,3659) and east
-tl5_w4590   P  5683,3862-3882  ?    latch c's clear: the row from the pad (5492,3872), north end of T6's lower piece
+c4l_gab   P  5683,3862-3882  ?    latch c's clear: the row from the pad (5492,3872), north end of T6's lower piece
 tl5_w4503   P  5683,4580-4600  out  latch c's inverse output
 tl5_w4633   P  5683,4623-4643  out  latch c's output
 tl5_w4807   P  5683,4798-4818  out  inverter 1's output
@@ -23,13 +23,13 @@ tl5_w4850   P  5683,4840-4858  in   inverter 1's gate
 tl5_w3982   P  5683,4970-4988  ?    latch b's enable: the row of T7's south pad (5538,4980) runs on east
 tl5_w5500   P  5683,4427-4447  ?    the row of the north pad (5623,4437) of T9's south piece
 tl5_w5544   P  5683,4464-4496  ?    the pad (5666,4480) of T10's south piece lies on the edge; its poly leaves east
-tl5_w5457   P  5683,4510-4530  ?    the row of the north pad (5580,4521) of T8's south piece
+c4l_l3   P  5683,4510-4530  ?    the row of the north pad (5580,4521) of T8's south piece
 inh_ck   P  5683,5616-5649  ?    the pad (5666,5632) lies on the edge; its poly leaves east
 tl5_w5674   P  5683,6134-6166  ?    the pad (5667,6150) lies on the edge; its poly leaves east
 rcs_mv   P  5683,6228-6248  ?    the row y 5717 after its corners (5497,5717) and (5497,6238)
 
 # West side, south part: the rows under the foot and what turns west at y 5880-5990
-tl5_w5457   P  4967,5447-5467  ?    the row of the pad (5538,5457): T8's south piece
+c4l_l3   P  4967,5447-5467  ?    the row of the pad (5538,5457): T8's south piece
 tl5_w5500   P  4967,5490-5510  ?    the row of the pad (5493,5500): T9's south piece
 tl5_w5544   P  4967,5534-5553  ?    the row of the pad (5538,5544): T10's south piece
 inh_ck   P  4967,5621-5641  ?    the row of the pad (5538,5631)
@@ -40,7 +40,7 @@ rcs_x1   P  4967,5880-5900  ?    under RC's turned rail; bus line x 5107
 tl5_w5936   P  4967,5926-5946  ?    under RC's turned rail; bus line x 5063
 vss         M  4967,5882-5942  -    rail RC, turned west; vss by structure only
 vss         M  5081-5127,2505  -    rail RC's north end on the wide metal band y 2180-2500 (not drawn by any block)
-tl5_w4590   M  4967,5975-5989  ?    latch c's clear: T6's lower piece, the row y 5411, the metal x 5189
+c4l_gab   M  4967,5975-5989  ?    latch c's clear: T6's lower piece, the row y 5411, the metal x 5189
 
 # South side (y 6350): the poly bus
 tl5_w5936   P  5053-5073,6350  ?    bus line x 5063

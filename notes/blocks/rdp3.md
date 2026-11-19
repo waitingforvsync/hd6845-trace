@@ -294,7 +294,7 @@ a net. Each net, from north to south (all drawn; overlay `ov_bun1.png`):
 | `rc0` | L4 at y 10700 | L4 to contact (13522,12375); poly west y 12387-12407 under L3..L0 | leaves west at (13330,12397) |
 | `rc1` | L5 at y 10700 | L5 to contact (13565,11920); poly west y 11910-11931 | leaves west at (13330,11920) |
 | `rc2` | L6 at y 10700 | L6 to contact (13608,11438); poly west y 11429-11452 | leaves west at (13330,11440) |
-| `rdp3_n7s9` | L7 at y 10700 | L7, jog left at y 11507, L6, jog left at y 12313, L5 to contact (13565,12826); poly link east y 12815-12837 under L6, L7, L8; contact (13736,12826); L9 | L9 at y 13480 (bd1's k15, untraced there) |
+| `rc_eq_r4` | L7 at y 10700 | L7, jog left at y 11507, L6, jog left at y 12313, L5 to contact (13565,12826); poly link east y 12815-12837 under L6, L7, L8; contact (13736,12826); L9 | L9 at y 13480 (bd1's k15, untraced there) |
 | `rc3` | L8 at y 10700 | L8 to contact (13692,10745); poly west y 10737-10758, down between L1 and L2 (x 13413), west y 10954-10976 | leaves west at (13330,10965) |
 | `wr_r0` | contact (13690,10815) on RC's strobe poly | L8, jog left at y 12400, L7 | L7 at y 13480 = bd1's k13 = **`wr_r0`** |
 | `wr_r2` | contact (13648,11571) on RB's strobe poly | L7, jog left at y 12357, L6 | L6 at y 13480 = bd1's k12 = **`wr_r2`** |
@@ -378,7 +378,7 @@ North edge, y 10700 (all metal, all continue into rdp2):
 | `rc0` | 13521 (L4) | ? | turns west at y 12397 |
 | `rc1` | 13565 (L5) | ? | turns west at y 11920 |
 | `rc2` | 13608 (L6) | ? | turns west at y 11440 |
-| `rdp3_n7s9` | 13651 (L7) | ? | leaves south on L9; rdp2: its top is a contact at (13649,9919), poly bar from L2's upper piece |
+| `rc_eq_r4` | 13651 (L7) | ? | leaves south on L9; rdp2: its top is a contact at (13649,9919), poly bar from L2's upper piece |
 | `rc3` | 13694 (L8) | ? | turns west at y 10965 |
 | `vss` | 13783 + 390 k (9 rails) | - | |
 | `vcc` | 13990 + 390 k (8 rails) | - | |
@@ -412,7 +412,7 @@ South edge, y 13480 (metal unless noted):
 | `wr_r2` | 13608 (L6) | k12 `wr_r2` | in: RB's load strobe |
 | `wr_r0` | 13651 (L7) | k13 `wr_r0` | in: RC's load strobe |
 | `hc3` | 13694 (L8) | k14 `hc3` | |
-| `rdp3_n7s9` | 13738 (L9) | k15 (untraced) | |
+| `rc_eq_r4` | 13738 (L9) | k15 (untraced) | |
 | `hc5` | 13782 (L10) | (ends at 13782,13893 on poly going west) | |
 | `wr_r1` | 13825 (L11) | jogs to L10 at y 14000: k16 `wr_r1` | in: RA's load strobe |
 | `hc0` | 13871 (poly) | by scan: metal x 13868 from y 13630, k17 `hc0` | |
@@ -484,6 +484,6 @@ seen) and not drawn.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19)
 
-- `rdp3_n7s9` (lines 297, 381, 415) is `rc_eq_r4` (`eof`): its top is the contact (13650,9925); the
+- `rc_eq_r4` (lines 297, 381, 415) is `rc_eq_r4` (`eof`): its top is the contact (13650,9925); the
   bar comes from L2's upper piece, which starts at the contact (13433,9665). The contact (13736,12826)
   at the top of L9 is on that path (AMB-036).

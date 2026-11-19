@@ -42,10 +42,9 @@ P 5955,6176:5990,6210
 C 5972,6193
 M 5972,6193 y6350
 
-# ---- tl5_w4590 (latch c's clear) = tcw_m6232: the row y 3872 east under U0 (no pad: a_w.png)
+# ---- c4l_gab (latch c's clear) = c4l_gab: the row y 3872 east under U0 (no pad: a_w.png)
 # and U3..U11 into tcw's lower pad (6232,3870) of its track x 6232 (t6.png)
 P 5676,3872 x6225 w=20
-@alias tcw_m6232 tl5_w4590
 
 # ---- inh_ck: fld's pad (6400,4005): its poly west along y 4003 to a pad (5800,4002) (t1.png,
 # t7.png); metal west, corner (5755,4002), U1 south with a pad (5757,5632) (t10.png) to its
@@ -100,7 +99,7 @@ C 6010,4480
 M 6010,4482 x6400 w=20
 @alias tc1_o3527 tl5_w5544
 
-# ---- tl5_w5457: the row y 4521 east under U0-U3 to a pad (5886,4522) (t2.png: closed east
+# ---- c4l_l3: the row y 4521 east under U0-U3 to a pad (5886,4522) (t2.png: closed east
 # end x 5905, no metal south of it), the south end of U4's north piece; the metal north to its
 # pad (5887,2722) (t7.png); that pad's poly north out of the strip
 P 5676,4521 x5886 w=20

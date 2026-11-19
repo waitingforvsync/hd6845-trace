@@ -129,7 +129,7 @@ N P 5120,3842 tl5_w3841
 @inst tl1_ub 2361,-43 mx=2691 tag=c
 #   tl5_w4318 = NOT tl5_w4395
 #   tl5_w4503 = NOT( tl5_w4395 AND tl5_w4458  OR  tl5_w4633 )
-#   tl5_w4633 = NOT( tl5_w4590  OR  tl5_w4458 AND tl5_w4318  OR  tl5_w4503 )
+#   tl5_w4633 = NOT( c4l_gab  OR  tl5_w4458 AND tl5_w4318  OR  tl5_w4503 )
 # Overlays c_ua.png, c_ub.png (3.6x clean); pads pc1.png, pc2.png, pc3.png (4x, chip-2 metal and clean shot).
 # RC over the latch (RB is drawn by tl4 here); the VSS box below the stack with its contact
 M 5104,4310 y4790 w=46
@@ -177,7 +177,7 @@ M 5494,3860 y5423                     # south of the pad (5492,4590) one metal w
 P 5474,3855:5514,3890
 C 5492,3872
 P 5508,3862:5683,3882
-N M 5494,4250 tl5_w4590
+N M 5494,4250 c4l_gab
 # output: the lower node's box poly east along y 4623-4643, under every track without a pad,
 # out of the strip
 P 5195,4623:5683,4643
@@ -441,7 +441,7 @@ M 5526,5457 x5581 y4509
 P 5563,4504:5601,4538
 C 5580,4521
 P 5595,4510:5683,4530
-N P 5300,5457 tl5_w5457
+N P 5300,5457 c4l_l3
 # ---- row y 5490-5510: to the pad (5493,5500); metal east to a corner (5625,5501) and north as
 # T9's south piece to its north pad (5623,4437) (bare ground north), whose row runs east along
 # y 4427-4447 out of the strip

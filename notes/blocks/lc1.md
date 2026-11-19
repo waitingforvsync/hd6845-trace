@@ -17,8 +17,8 @@ west of x 4750.
 
 ```
 lc_step   = NOT lc1_w7040                      firm (and the join to ur's lc_step poly is drawn)
-lc1_w7140 = NOT lc1_w7170                      firm
-lc1_w7304 = NOR(lc1_w7257, lc1_w7343)          firm
+rcs_x1 = NOT lc1_w7170                      firm
+lc1_w7304 = NOR(lpstb_b, res_b)          firm
 lc1_w7468 = NOT lc1_w7304                      firm
 lc1_w7606 = NOT lc1_w7468                      firm
 lc1_w7734 = NOT lc1_w7468                      firm
@@ -78,8 +78,8 @@ The column's build (calibrated on gate 2, in the open; `survey.md`, "Vocabulary 
 | Gate | y | VCC contact | VSS contact | Gate row (poly) | Output |
 |---|---|---|---|---|---|
 | 1 | 6960-7100 | (4777,7025) | (4960,7075) | y 7030-7050, from x 4893 east past x 5140: `lc1_w7040` | box (5006-5053, 6985-7022), poly north beside it and north-west to (5021,6890): `lc_step` |
-| 2 | 7107-7245 | (4777,7138) | (4960,7215) | y 7158-7182 to the pad (5082,7170); metal south and west to the thin metal T1 (x 5030-5046), which runs south out of the strip: `lc1_w7170` | box (5008-5048, 7116-7156), poly east to the pad (5082,7105), metal M_a (x 5070-5090) north out of the strip: `lc1_w7140` |
-| 3 | 7275-7375 | (4777,7315) | (4960,7215) and (4960,7388) | two rows from the east crossing a diffusion column under T1 (x 5022-5040): `lc1_w7257` (y 7248-7267), `lc1_w7343` (y 7334-7352) | box (5010-5046, 7284-7320) on the column between the rows, poly east to the pad (5082,7302), strap M_c1 south to the pad (5082,7388): `lc1_w7304` |
+| 2 | 7107-7245 | (4777,7138) | (4960,7215) | y 7158-7182 to the pad (5082,7170); metal south and west to the thin metal T1 (x 5030-5046), which runs south out of the strip: `lc1_w7170` | box (5008-5048, 7116-7156), poly east to the pad (5082,7105), metal M_a (x 5070-5090) north out of the strip: `rcs_x1` |
+| 3 | 7275-7375 | (4777,7315) | (4960,7215) and (4960,7388) | two rows from the east crossing a diffusion column under T1 (x 5022-5040): `lpstb_b` (y 7248-7267), `res_b` (y 7334-7352) | box (5010-5046, 7284-7320) on the column between the rows, poly east to the pad (5082,7302), strap M_c1 south to the pad (5082,7388): `lc1_w7304` |
 | 4 | 7402-7505 | (4777,7442) | (4960,7388) | y 7420-7447 from x 4892, east and up to the pad (5082,7388): `lc1_w7304` | box (5024-5050, 7464-7490), poly east to the pad (5083,7474) on the metal M_c2 (x 5073-5093), which runs south out of the strip: `lc1_w7468` |
 | 5 | 7525-7632 | (4777,7572) | (4962,7525) | y 7552-7578 from x 4892 to the pad (5082,7563) on M_c2 | box (5024-5050, 7590-7620), poly row east along y 7597-7615: `lc1_w7606` |
 | 6 | 7668-7755 | (4777,7722) | (4960,7655) | y 7681-7701 to the pad (5082,7692) on M_c2 | box (5012-5048, 7713-7747), poly row east along y 7725-7743: `lc1_w7734` |
@@ -108,7 +108,7 @@ Traced (the equations above are what `tools/netlist.py` recovers):
   column and the boxes: traps 19, 22) but the clean shot is protected under it all the way,
   and it is bright again from y 7380 to the south boundary. No pad on it inside the strip.
 - M_c2 carries `lc1_w7468` from gate 4's output pad to the row pads of gates 5, 6, 7 and on
-  south. Four poly rows pass under M_c1 / M_c2 without contact: `lc1_w7343` under M_c1,
+  south. Four poly rows pass under M_c1 / M_c2 without contact: `res_b` under M_c1,
   `lc1_w7606` and `lc1_w7734` under M_c2, and the two vertical polys of `lc1_w7864` and
   `lc1_w7990` lie under M_c2 lengthwise (text maps against the known pad (5082,7563): bright
   metal, protected poly, no green hole; `survey.md`).
@@ -123,8 +123,8 @@ Traced (the equations above are what `tools/netlist.py` recovers):
 | Net | Route (all drawn) |
 |---|---|
 | `lc1_w7040` (gate 1's input, the inverse of `lc_step`) | row y 7030-7050 east to x 5150; south-east as the lowest line of the diagonal poly bundle (centre line x = y - 1890) to (5454,7344); east as a poly row y 7334-7354 across the crossing field (under a dozen vertical metals; two metals lie on it lengthwise without contact: x 5575-5678, which is `lc1_w7864`'s own branch north, and x 6098-6307) to a pad with a contact (6341,7345); metal east along y 7337-7355 to x 6472 (22 px outside the strip), south along x 6463-6481 to a pad with a contact (6471,7930); poly west along y 7944-7962 to its end at x 6126, against a diffusion in gate cluster E (not drawn, not resolved) |
-| `lc1_w7257` (gate 3) | row east to a pad (5235,7258); metal V3 (x 5224-5246) north out of the strip |
-| `lc1_w7343` (gate 3) | row east to a pad (5190,7345); metal V2 (x 5180-5200) north out of the strip |
+| `lpstb_b` (gate 3) | row east to a pad (5235,7258); metal V3 (x 5224-5246) north out of the strip |
+| `res_b` (gate 3) | row east to a pad (5190,7345); metal V2 (x 5180-5200) north out of the strip |
 | `lc1_w7304` (gate 3's output) | besides gate 4: a poly row y 7379-7397 from the pad (5082,7388) east across the whole strip and out at x 6450 (seen to x 6710) |
 | `lc1_w7606` (gate 5's output) | row east to a pad (5124,7605); metal M_b (x 5115-5135) north out of the strip |
 | `lc1_w7734` (gate 6's output) | row east to a pad (5126,7735); metal east, north along x 5159-5181, east along y 7425-7447, north as V4 (x 5288-5310) out of the strip |
@@ -195,10 +195,10 @@ stops.
 | `vcc` | M | x 5840-5892 at y 8067 | - | cluster E's VCC rail (its top is at y 7682), runs on south |
 | `vss` | M | x 6015-6063 at y 8067 | - | cluster E's east VSS rail, runs on south (drawn north to y 7560, where it goes on) |
 | `lc_step` | P | (5012-5030, 6890) | out | joins `ur`'s poly, which ends at (5012,6900) |
-| `lc1_w7140` | M | x 5070-5090 at y 6900 | out | M_a, north; still metal at y 6840 |
+| `rcs_x1` | M | x 5070-5090 at y 6900 | out | M_a, north; still metal at y 6840 |
 | `lc1_w7606` | M | x 5117-5133 at y 6900 | out | M_b, north (followed to y 6800) |
-| `lc1_w7343` | M | x 5180-5200 at y 6900 | in | V2, from the north (followed to y 6844) |
-| `lc1_w7257` | M | x 5224-5246 at y 6900 | in | V3, from the north (followed to y 6800) |
+| `res_b` | M | x 5180-5200 at y 6900 | in | V2, from the north (followed to y 6844) |
+| `lpstb_b` | M | x 5224-5246 at y 6900 | in | V3, from the north (followed to y 6800) |
 | `lc1_w7734` | M | x 5288-5310 at y 6900 | out | V4, north (followed to y 6720, where it turns east) |
 | `lc1_w7864` | M | x 5705-5721 at y 6900 | out | the branch north from the pad (5583,7519) (followed to y 6365) |
 | `lc1_w7170` | M | x 5030-5046 at y 8067 | in | T1, south (gate 2's input) |
@@ -424,7 +424,7 @@ Round 4: no findings that change a connection.
 ## Corrections (coordinator, from the handoffs of 2026-11-19)
 
 - "Two metals lie on [`lc1_w7040`'s row] lengthwise without contact: ... x 6098-6307": that metal is
-  `inh_ck` (`eof` run 2). Ports: `lc1_w7343` is `res_b`, `lc1_w7257` is `lpstb_b`, `lc1_w7140`
+  `inh_ck` (`eof` run 2). Ports: `res_b` is `res_b`, `lpstb_b` is `lpstb_b`, `rcs_x1`
   drives `rcs_x1`, `lc1_w7606` is `tl5_w3636`. "Believed, from the user: ... `lc1_w7864` a chip-wide reset
   of some kind": traced, it is a buffered NOR(`lpstb_b`, `res_b`); the believed "three buffered copies ...
   the pattern of `inh_ck`, `inh_rc`, `inh_lat`" does not hold: they are copies of the reset. Not in the

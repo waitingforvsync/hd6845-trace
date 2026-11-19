@@ -11,8 +11,8 @@ Run 1 (Tom Seddon's session, Claude Fable 5.2; 2026-11-18 23:30 to 23:50 +0000).
 Three pieces, 2 transistors, no uncertain items.
 
 - **Task 1, where R4's match goes: done** (piece `r4`, wiring only). `rc_eq_r4` is drawn end to
-  end from R4's comparator to its loads: it is the net that `rdp3` called `rdp3_n7s9` and `bd1`
-  called `bd1_a`, **the data input of the latch in the gate column beside the strobe channel
+  end from R4's comparator to its loads: it is the net that `rdp3` called `rc_eq_r4` and `bd1`
+  called `rc_eq_r4`, **the data input of the latch in the gate column beside the strobe channel
   and the input of inverter A there**.
 - **Task 2, where R5's match goes: its first gate found and traced** (piece `r5inv`): at the
   west end of its row in the central datapath's channel `sl_eq_r5` is the only input of an
@@ -147,7 +147,7 @@ ck_b   = NOR(ck_clkn, ck_g4, inh_ck)    the clock block (firm)
 ```
 
 The full extraction has one net carrying `inh_ck` (the clock block's and `inrow`'s label),
-`inh_ck` and `inh_ck`, with thirteen gates on it: the clock block's (`ck_b`'s NOR), the
+`inh_ck`, with thirteen gates on it: the clock block's (`ck_b`'s NOR), the
 inverter's own load, and the eleven that were known as `inh_ck`'s (`tl1`'s two latches and the
 NOR `tl1_w3636`, `rcs_a2`'s NOR, `tl3`'s latches B and C and the NOR `tl3_e4243`, `tl4`'s NOR
 `tl4_w4545`, `tcw`'s pair `fld_a_in` / `tcw_o3820`). `tools/unsure.py`: the labelled pieces of
@@ -194,7 +194,7 @@ lc1_w7468 = NOT lc1_w7304                gate 4                               (f
 tl4_w4198 = NOT lc1_w7468                gate 5: lc1_w7606 = tl5_w3636 = tl4_w4198   (firm)
 lc1_w7734 = NOT lc1_w7468                gate 6                               (firm)
 lc1_w7864 = NOT lc1_w7468                gate 7                               (firm)
-rcs_x1    = NOT lc1_w7170                gate 2: lc1_w7140 = rcs_x1           (firm)
+rcs_x1    = NOT lc1_w7170                gate 2: rcs_x1           (firm)
 ```
 
 Traced: the four joins (each pad, each column and each metal read as below), and with them the
@@ -243,9 +243,9 @@ driver lies; the other three lead to the loads.
 | Name | Layer | Where | Direction | What |
 |---|---|---|---|---|
 | `rc_eq_r4` | poly | (13420, 9654-9672) | in | from `mrach`'s poly row (its file ends it at x 13425) |
-| `rc_eq_r4` | metal | (13641-13659, 10705) | to loads | track L7, on into `rdp3`'s piece (`rdp3_n7s9`) |
+| `rc_eq_r4` | metal | (13641-13659, 10705) | to loads | track L7, on into `rdp3`'s piece (`rc_eq_r4`) |
 | `rc_eq_r4` | metal | (13729-13747, 13475) | from `rdp3` | track L9, `rdp3`'s end |
-| `rc_eq_r4` | metal | (13729-13747, 14695) | to loads | track L9, on into `bd1`'s track k15 (`bd1_a`) |
+| `rc_eq_r4` | metal | (13729-13747, 14695) | to loads | track L9, on into `bd1`'s track k15 (`rc_eq_r4`) |
 
 | `sl_eq_r5` | poly | (8352, 4709-4729) | in | `cdp1`'s row y 4719 (its file ends it at x 8340) |
 | `r9m_l1w` | poly | (8348, 4840-4862) | out | the inverter's output, onto `tc2`'s poly from the pad (8290,4850) |
@@ -262,13 +262,13 @@ driver lies; the other three lead to the loads.
 | `inh_ck` | metal | (6445, 8165-8179) | to loads | link F's west end on `lc2`'s end (6450,8172) |
 | `inh_ck` | metal | (6695, 8360-8374) | in | link F's east end on `trunks`' line S (its end x 6690): the net is `inh_ck` |
 | `rcs_x1` | poly | (5097-5117, 6345) | to loads | from `tl5`'s bus line x 5107 |
-| `rcs_x1` | metal | (5070-5090, 6905) | in | onto `lc1`'s M_a (`lc1_w7140`, gate 2's output) |
+| `rcs_x1` | metal | (5070-5090, 6905) | in | onto `lc1`'s M_a (`rcs_x1`, gate 2's output) |
 | `tl5_w3636` | poly | (5140-5160, 6345) | to loads | from `tl5`'s bus line x 5150 (the clear of four latches) |
 | `tl5_w3636` | metal | (5116-5130, 6905) | in | onto `lc1`'s M_b (`lc1_w7606`, gate 5's output) |
 | `res_b` | poly | (5182-5202, 6345) | in | from `tl5`'s bus line x 5192 (`trunks`' pad (5190,6065)) |
-| `res_b` | metal | (5183-5197, 6905) | to loads | onto `lc1`'s V2 (`lc1_w7343`, the NOR's lower input) |
+| `res_b` | metal | (5183-5197, 6905) | to loads | onto `lc1`'s V2 (`res_b`, the NOR's lower input) |
 | `lpstb_b` | poly | (5227-5247, 6345) | in | from `tl5`'s bus line x 5237 (`trunks`' pad (5232,6105)) |
-| `lpstb_b` | metal | (5229-5243, 6905) | to loads | onto `lc1`'s V3 (`lc1_w7257`, the NOR's upper input) |
+| `lpstb_b` | metal | (5229-5243, 6905) | to loads | onto `lc1`'s V3 (`lpstb_b`, the NOR's upper input) |
 | `tl5_w3636` | poly | (5141-5159, 6900) | to loads | the poly on south of the pad (5147,6803): into `lc1`'s diagonal bundle (bends south-east at about (5150,6910)) |
 | `res_b` | poly | (5196-5210, 6900) | to loads | the poly on south of the pad (5190,6845), under V2, bending south-east: into `lc1`'s diagonal bundle |
 | `lpstb_b` | poly | (5232-5248, 6872) | to loads | the poly on south of the pad (5237,6803), under V3; from here it bends south-east (about (5266,6900)): into `lc1`'s diagonal bundle |

@@ -83,7 +83,7 @@ confirmed, and no two lines are swapped. The identity `rcK` rests on `mrach`'s a
 
 - cnt_bus_a, cnt_bus_b east of x 13425 (both go north through the nest; seen, above).
 - The bars of L0/L2 at
-  y 9663 and of L2/L7 at y 9920; L7's lower piece (`rdp3_n7s9`) north of y 10700.
+  y 9663 and of L2/L7 at y 9920; L7's lower piece (`rc_eq_r4`) north of y 10700.
 - Renaming `uc_b#` to `rc#` (`tools/rename.py`): the joins are firm, aliases are used for
   now; `rdp2`'s notes still say "believed" (corrections listed below).
 

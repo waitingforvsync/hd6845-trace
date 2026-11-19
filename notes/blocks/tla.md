@@ -32,7 +32,7 @@ rcs_cond_n = NOR(in2, in3)               "m2": the step condition inverted      
 rcs_cond   = NOT rcs_cond_n              inverter on the column above; on bus piece A3   (3046,4636)
 rcs_cond_lat <- rcs_cond while clk_tl  pass transistor latch (AMB-009)                (3046,4546)
 rcs_u3288  = NOR(rcs_g3245, rcs_bd3330)                                                (3046,3288)
-rcs_n4200  = NOT(rcs_cond AND clk_tl OR rcs_g4240)   AND-OR-INVERT under the rail (3008,4200)
+rcs_n4200  = NOT(rcs_cond AND clk_tl OR rcs_x1)   AND-OR-INVERT under the rail (3008,4200)
 in1        = NOR(rcs_mu, rcs_mv)         middle cluster                                (4081,4072)
 rcs_mu     = NOT ra_eq_r9              middle cluster, inverter                      (4050,3374)
 rcs_mn3852 = NOR(?, in1)                 middle cluster; second gate not read
@@ -97,7 +97,7 @@ y 3805: towards the **right cluster** (x 4650-5050).
 ```
 rcs_cond     = NOT rcs_cond_n           = NOT e4 AND NOT (e3 AND a2): the bracket of the step formula
 rcs_cond_lat <- rcs_cond while clk_tl is high      pass transistor: a dynamic latch
-rcs_n4200    = NOT( rcs_cond AND clk_tl  OR  rcs_g4240 )
+rcs_n4200    = NOT( rcs_cond AND clk_tl  OR  rcs_x1 )
 ```
 
 `clk_tl` is **the clock**: NOT `ck_out`, i.e. CLK polarity (identified 2026-11-16 by
@@ -504,7 +504,7 @@ Each is in the named block's notes in full; the trace fixes are on main.
   sampled while CLK is high" are not supported. `clk_tl`'s gate contacts: (3150,3812) and
   (3150,4418) are pads with rows west into what `tl2` traced; (3152,4548) gates nothing.
 - `x1`'s row ends at x 3470 on the pad (3454,3504) of the bus metal x 3456 (which also carries
-  `rcs_g4240`, `tl1_w4025`, `tl3_w3506`); the poly that leaves east along y 3752-3770 (`a2`) is the
+  `rcs_x1`); the poly that leaves east along y 3752-3770 (`a2`) is the
   output of `tl3`'s NOR 1.
 - Bus pieces: D upper and F are drawn by `tl2`, as is D middle's bottom contact (3237,4376).
 - `rcs_bc3460` = NOR(`rcs_e3`, `rcs_e4`, `tl2_w3722`, `clk_tl`): two inputs more than this file says

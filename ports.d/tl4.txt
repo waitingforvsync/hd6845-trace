@@ -14,17 +14,17 @@ inh_ck   P  4250,4492-4512  in   row from the west across the bus field; gate 2 
 tl3_e4635   P  4250,4623-4642  ?    the row of the pad (4279,4636), the north end of the metal x 4279 (y 4622-5214): tl3's latch C data
 tl3_e4635   P  4250,5189-5207  in   the row of the pad (4279,5200), the south end of the same metal: tl3's inverter output (tl3_e4635_u)
 rcs_mv      P  4250,4733-4751  in   tl3's poly from its pad (4192,4743); an L in this strip, back out at y 4904-4925
-rcs_mv      P  4250,4904-4925  out  the same L, into tl3's pad (4234,4918) (tl3_e4915)
-rcs_mv      M  4250,5754-5774  in   tl3's metal x 4236 from that pad, along y 5764 to the pad (4410,5764) (tl3_e4915)
+rcs_mv      P  4250,4904-4925  out  the same L, into tl3's pad (4234,4918) (rcs_mv)
+rcs_mv      M  4250,5754-5774  in   tl3's metal x 4236 from that pad, along y 5764 to the pad (4410,5764) (rcs_mv)
 tl4_w4590   P  4250,5102-5121  ?    the row of the pad (4366,5112) on the track x 4366: tl3's tl3_e5114 (gate 2 of its NOR e5)
 tl3_e5240   P  4250,5233-5251  ?    the row that ends over the pad (4279,5265), the north end of the metal x 4279 (y 5251-5427)
 tl3_e5240   P  4250,5403-5422  ?    the row of the pad (4279,5413), the south end of the same metal
-tl4_w5455   P  4250,5447-5467  out  the strong inverter's row, on west
+c4l_l3   P  4250,5447-5467  out  the strong inverter's row, on west
 inh_ck       P  4250,5621-5641  ?    the row y 5631 (inh_ck), across the whole strip; on west to tl3's pad (4104,5633) (seen, tl3's to draw)
 tc1_o3527   P  4250,5708-5727  ?    the row of the pad (4497,5720), the south end of the jumper x 4497: on west
-rcs_x1      M  4250,5889-5901  in   tl3's metal of its latch C's clear (tl3_e4808), east to the pad (4629,5891)
+rcs_x1      M  4250,5889-5901  in   tl3's metal of its latch C's clear (rcs_x1), east to the pad (4629,5891)
 tl5_w5936   M  4250,5933-5945  ?    the metal of the pad (4583,5936), on west
-tl5_w4590   P  4250,6313-6333  ?    the row of the pad (4929,6323), on west
+c4l_gab   P  4250,6313-6333  ?    the row of the pad (4929,6323), on west
 
 # East side (x 4967)
 tl4_w2512   P  4967,2542-2560  ?    the row of the pad (4908,2551), the east end of bus line 1
@@ -34,7 +34,7 @@ tl3_e4243   P  4967,2801-2820  out  the row of the pad (4866,2812): tl5_w4458, t
 tl4_w3113   P  4967,2846-2865  out  the row of the pad (4823,2855): tl5_w2855
 tl5_w3245   P  4967,2890-2909  in   the row of the pad (4648,2898) at the north end of the track x 4581 (tl4_w4718)
 tl5_w3505   P  4967,2976-2996  in   the second latch's enable: the row of the north pad (4452,2985) of the track x 4452's north piece; tl5's row of the pad (5494,2985)
-tl4_w5455   P  4967,5447-5467  out  the strong inverter's row: tl5's row of the pad (5538,5457) (tl5_w5457)
+c4l_l3   P  4967,5447-5467  out  the strong inverter's row: tl5's row of the pad (5538,5457) (c4l_l3)
 tl4_w5068   P  4967,5490-5510  out  the row of the pad (4625,5504): tl5's row of the pad (5493,5500) (tl5_w5500)
 tc1_o3527   P  4967,5534-5553  in   the row of the pad (4497,5547), the north end of the jumper x 4497 (tl5_w5544)
 inh_ck       P  4967,5621-5641  ?    the row y 5631 (inh_ck), across the whole strip without a contact
@@ -43,7 +43,7 @@ rcs_mv      P  4967,5708-5728  out  the row y 5718's east piece, from the pad (4
 tl4_w3850   P  4967,5752-5772  in   the row of the pad (4626,5762) at the south end of the metal x 4538/4583 (tl5_w5761)
 rcs_x1      P  4967,5880-5900  out  the row of the pad (4629,5891): rcs_x1, tl5's bus line x 5107
 tl5_w5936   P  4967,5926-5946  ?    the row of the pad (4583,5936): tl5's bus line x 5063
-tl5_w4590   M  4967,5977-5991  ?    tl5's thin metal (the clear of its latch c), in along y 5984
+c4l_gab   M  4967,5977-5991  ?    tl5's thin metal (the clear of its latch c), in along y 5984
 vss         M  4967,5891-5942  -    tl5's rail RC, turned west (top edge y 5891); it turns south at x 4841-4888
 vss         M  4967,2938-2997  -    RA's supply: the wide foot (y 2938-2997), on east
 
@@ -52,7 +52,7 @@ vss         M  4910-4967,2500  -    RA's supply: the vertical x 4949-4995 and th
 tl4_w4068   P  4534-4550,2500  ?    the poly column north of pad E (4539,2768), on north under the wide band to y ~2165
 
 # South side (y 6350)
-tl5_w4590   M  4922-4936,6350  ?    the thin metal x 4929, on south past its pad (4929,6323)
+c4l_gab   M  4922-4936,6350  ?    the thin metal x 4929, on south past its pad (4929,6323)
 vss         M  4667-4715,6350  -    RA's leg, on south
 vcc         M  4754-4801,6350  -    RB's leg, on south
 vss         M  4841-4888,6350  -    RC's leg, on south

@@ -126,7 +126,7 @@ transistors. From the extraction:
     tcw_o3326 : to the rail through tcw_m6362a; and through tcw_m6362b, then tcw_m6320, to
                 the top node of the stack (y 3232-3250), whose connection is not found
     tcw_o3437 : to the rail through tcw_m6404
-    tcw_o3550 : to the rail through tcw_m6232
+    tcw_o3550 : to the rail through c4l_gab
 
 Each gate poly runs west to a pad on one of the bus metals (pads at (6315,3263),
 (6378,3355), (6408,3393), (6222,3526); the second gate's poly goes round by x 6289 to a
@@ -137,7 +137,7 @@ Read but not drawn as joins:
 
 - `tcw_m6362b` has a lower pad (6385,3567) whose poly goes east to the foot of the third
   stack's output (`tcw_o3550`): probably that output's way out (then the second gate of
-  the first stack is NOT `tcw_m6232`). The join itself is not read.
+  the first stack is NOT `c4l_gab`). The join itself is not read.
 - `tcw_m6320` has a lower pad (6315,3655) with a poly going west along y 3655.
 - If the first stack's top node is on ground, `tcw_o3326` = NOT(`tcw_m6362a` OR
   (`tcw_m6320` AND `tcw_m6362b`)), the same shape as `tcw_o3820`.
@@ -156,14 +156,14 @@ things; each is in the trace with a `?` and in AMB-015:
 
 - The output arms of stacks 1 and 2 are joined by a diffusion strip along x 6588-6612, so
   the two stacks are one gate with the rail contact in its middle.
-- Stack 3 is a complete inverter: `tcw_o3550` = NOT `tcw_m6232` (extracted), load under the
+- Stack 3 is a complete inverter: `tcw_o3550` = NOT `c4l_gab` (extracted), load under the
   block (6625-6680, 3540-3570), supply contact (6700,3545).
 - Its output goes west through a buried contact onto the poly of the pad (6385,3567), up
   the bus metal `tcw_m6362b` and round to the middle gate of stack 1.
 
 So, as extracted:
 
-    tcw_o3550 = NOT tcw_m6232
+    tcw_o3550 = NOT c4l_gab
     tcw_o3326 : low through tcw_m6362a, or through tcw_m6404, or through
                 (tcw_o3550 AND tcw_m6320) to the top node of stack 1 (connection not found)
 
@@ -221,7 +221,7 @@ Corrections to what I wrote on 2026-11-16, when I held this stretch back:
   under it. The metal shots are the evidence for the bus metals, not that profile.
 
 Not resolved in this stretch: where `tcw_m6278`'s poly along y 3180 ends; what the poly
-from `tcw_m6232`'s top pad (6230,2875) does at the rail's west edge (it arrives at the
+from `c4l_gab`'s top pad (6230,2875) does at the rail's west edge (it arrives at the
 height of the first contact box); the loads; everything east of the rail.
 
 ### The bus metals south of the column, and the last gate (2026-11-16; drawn)
@@ -233,13 +233,13 @@ height of the first contact box); the loads; everything east of the rail.
   x 6233), back east at y 4231 and south along x 6282 to a pad (6275,4405) at the top of
   the vertical poly x 6275 of the field under the six bus metals. That poly goes on south
   to a pad (6275,4825) (`w1a.png`) and beyond: not drawn.
-- **`tcw_m6232`** ends in the south on a pad (6232,3870); from it a poly runs east along
+- **`c4l_gab`** ends in the south on a pad (6232,3870); from it a poly runs east along
   y 3912 to the ground rail, which it reaches between the rail contact (6535,3905) and
   the node of `fld_a_in`. The rail profile reported a dull "poly over field" at exactly
   y 3910-3934. Whether the poly only crosses, or gates a third pull-down of `fld_a_in`'s
   node, was open; a colour check the same day shows it does not cross the rail (AMB-014): it
   ends at the rail's west edge, 30 px above the end of `fld_a_in`'s poly, possibly on the
-  same node (then `tcw_m6232` would be `fld_a_in`). Drawn to the rail's west edge only.
+  same node (then `c4l_gab` would be `fld_a_in`). Drawn to the rail's west edge only.
 - **A third metal on the x 6362 track**, `tcw_m6362c`, from a pad (6362,3832) to a pad
   (6362,4266). The upper pad's poly goes east towards the west side of `tcw_o3820`'s
   output node (drawn to x 6440; the join is not read). The lower pad's poly is the gate
@@ -551,4 +551,4 @@ this block's to follow.
 ## Corrections (coordinator, from the handoffs of 2026-11-19)
 
 - `inh_ck` is `inh_ck` (`eof` run 2, firm): the output of the lone inverter of the input buffer row.
-- `tcw_m6232` is also the 4-bit counter's pass-gate line `c4l_gab` (`tl3` run 11).
+- `c4l_gab` is also the 4-bit counter's pass-gate line `c4l_gab` (`tl3` run 11).

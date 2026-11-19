@@ -1071,7 +1071,7 @@ That is three images for five transistors, against six or more by views alone.
 The two shots not used there before (chip 1's metal shot and its fringed stripped shot)
 gave three joins, all drawn as uncertain items (AMB-015): the two upper stacks are one
 gate; the inverter below them has its load; its output goes back up a bus metal to the
-middle gate of the first stack. Extracted: `tcw_o3550` = NOT `tcw_m6232`; `tcw_o3326` low
+middle gate of the first stack. Extracted: `tcw_o3550` = NOT `c4l_gab`; `tcw_o3326` low
 through `tcw_m6362a`, `tcw_m6404`, or `tcw_o3550` AND `tcw_m6320`. 2,041 nets, 3,423
 transistors. Not found: the top node's connection, the load of `tcw_o3326`, where it goes.
 
@@ -1099,11 +1099,11 @@ bus, look at the metal shots; the profile is not evidence either way.
 
 1. East of the rail for the whole column (loads, output arms), now that every node on
    the rail is named: start with pair 3's middle node and stretch B's big gate.
-2. The sources of `tcw_m6404`, `tcw_m6320`, `tcw_m6278`, `tcw_m6232` (their far ends).
+2. The sources of `tcw_m6404`, `tcw_m6320`, `tcw_m6278`, `c4l_gab` (their far ends).
 3. The second column; then the standing list (R8, `ras_o0_alt2`, `r9m`, `ral`, `bd2`).
 
 **Same day, later.** The bus metals followed south: the common enable `tcw_m6404` comes up
-from the vertical poly field under the six bus metals (pad (6275,4405)); `tcw_m6232`'s
+from the vertical poly field under the six bus metals (pad (6275,4405)); `c4l_gab`'s
 lower pad sends a poly to the rail at the height where the profile had reported a dull
 poly, right beside `fld_a_in`'s node (AMB-014 extended: possibly a third pull-down). A
 third metal on the x 6362 track gates the column's last pull-down. 2,050 nets, 3,430
@@ -1589,10 +1589,10 @@ open join (`ck_a_u`). Claims now: `tl3` (Tom, run 11), `lc2` (Matt, continuing d
 
 - **Renamed** (`names.py compare`: only names changed): `tl4_w3808` -> `rcs_e3`, `tl5_w5717` ->
   `rcs_mv`, `tl5_w5890` -> `rcs_x1` (`tl4`'s firm joins, runs 7-9). Three tautologies that the rename
-  left in the prose ("`rcs_mv` = `rcs_mv`") were reworded by hand.
+  left in the prose (a name set equal to itself) were reworded by hand.
 - **Left on purpose.** `tl3`'s firm renames wait for Tom's active claim to end, because they would
-  rewrite `trace/tl3.txt` under his branch: `tl3_e4808` -> `rcs_x1`, `tl3_e5240` -> `tl3_w5025`,
-  `tl3_e4372` -> `tl3_w4546`, `tl3_e4915` -> `rcs_mv`,
+  rewrite `trace/tl3.txt` under his branch: `tl3_e5240` -> `tl3_w5025`,
+  `tl3_e4372` -> `tl3_w4546`,
   `tl3_e4635_u` -> `tl3_e4635`. The joins through `?M` stay as aliases (AMB-032, AMB-033), and so does
   `rcs_cond_lat` (AMB-031). Placeholder-to-placeholder aliases such as `tl4_w3070` -> `tl3_e4243` are
   not renamed. All of this is listed in the master list's `rename` row.
@@ -1642,7 +1642,7 @@ nets, 4,282 transistors, 0 errors, 0 warnings. No active claims.
   line counter's step latch is a candidate for counting the first cycles of a line (believed only).
   R31 done for `lc2`.
 - **`tl3` run 11**: the 4-bit counter's L3 line is `tl4`'s strong inverter (`c4l_l3`; the first counter
-  L3 with a traced driver), its gab is `tcw_m6232`; `rcs_thin_e` is not `sl_l3` (`trace/ur.txt`
+  L3 with a traced driver), its gab is `c4l_gab`; `rcs_thin_e` is not `sl_l3` (`trace/ur.txt`
   corrected).
 - **Master list.** The `eof` row gives the lead group's state and next steps in order: `tlb` (moved up
   to third), `inh_src`'s source, the gate group at `inh_ck`'s tap (7540-7780, 7600-7820), `lc3` (the

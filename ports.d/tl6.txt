@@ -5,10 +5,10 @@
 # West side (x 5683): tl5's east ports, under tl5's names (each is an alias of the net named in the note)
 tl5_w4395    M  5683,3652-3666  ?    = tcw_m6320: tl5's T10 metal (latch c's data) runs on east to the pad (5800,3658)
 tl5_w3505    P  5683,3712-3732  ?    latch a's enable: the row ends on U0's north pad (5712,3722)
-tl5_w4590    P  5683,3862-3882  ?    = tcw_m6232: tl5's row y 3872 (latch c's clear)
+c4l_gab    P  5683,3862-3882  ?    = c4l_gab: tl5's row y 3872 (latch c's clear)
 tl5_w5500    P  5683,4427-4447  ?    the row to U5's pad (5928,4437)
 tl5_w5544    P  5683,4470-4490  ?    = tc1_o3527: tl5's pad (5666,4480): the row to the pad (6010,4480) of the bus metal y 4482
-tl5_w5457    P  5683,4511-4531  ?    the row to U4's pad (5886,4522)
+c4l_l3    P  5683,4511-4531  ?    the row to U4's pad (5886,4522)
 tl5_w4503    P  5683,4580-4600  in   latch c's inverse output: the row to the pad (5797,4698)
 tl5_w4633    P  5683,4623-4643  in   = tcw_c: latch c's output: the row to the pad (5797,4633)
 tl5_w4807    P  5683,4798-4818  in   = ras_o0_alt2: inverter 1's output: the row to the pad (6058,4872)
@@ -19,7 +19,7 @@ rcs_mv    P  5683,6228-6248  ?    tl5's row y 6238: east to a corner at x 6236 a
 tl5_w5674    P  5683,6142-6160  ?    tl5's pad (5667,6150): the row to the pad (6016,6150)
 
 # North side (y 2500)
-tl5_w5457    P  5877-5897,2500  ?    poly north from U4's north pad (5887,2722), on under the wide metal band
+c4l_l3    P  5877-5897,2500  ?    poly north from U4's north pad (5887,2722), on under the wide metal band
 tl5_w5500    P  5918-5938,2500  ?    poly north from U5's north pad (5928,2680), on under the wide metal band
 
 tl6_p6101    P  6052-6072,2500  ?    poly north from U8's north pad (6057,2595); turns east under the band's rim at y 2475-2500
@@ -30,7 +30,7 @@ tl6_p6187    M  6400,2567-2579  ?    U10's north end, from the east
 tc2_m6404    M  6400,2613-2625  ?    U11's north end; ends on a pad at about (6413,2617), not drawn
 tcw_m6278    M  6400,2659-2671  ?    tcw's track x 6276 from its corner (6276,2665)
 tcw_m6320    P  6212,3649-3667  ?    onto tcw's poly west of its pad (6315,3655)
-tcw_m6232    P  6225,3862-3882  ?    into tcw's pad (6232,3870)
+c4l_gab    P  6225,3862-3882  ?    into tcw's pad (6232,3870)
 inh_ck        P  6392,3994-4012  ?    into fld's pad (6400,4005)
 tcw_c        P  6310,4125-4143  ?    into fld's pad (6318,4135)
 tc1_o3527    M  6400,4472-4492  in   the bus metal y 4482, on east as tc2's piece

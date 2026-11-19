@@ -224,11 +224,11 @@ P 3395,3237:3440,3255
 
 # ---- track I, lower piece (y 3494-5380) = rcs_x1: one metal with four contacts.
 # Top pad (3454,3504): its poly runs south (x 3446-3470) into the east end of tla's row y 3547
-# (rcs_x1, which ends there) and east along y 3506 into tl3 (tl3_w3506, the clear of tl3's latch).
+# (rcs_x1, which ends there) and east along y 3506 into tl3 (rcs_x1, the clear of tl3's latch).
 # Tap (3452,4199): the pad's poly goes west by a step (north end of a short vertical x 3402-3426)
-# down to tla's row y 4240 (rcs_g4240), and east along y 4201 out of the strip.
+# down to tla's row y 4240 (rcs_x1), and east along y 4201 out of the strip.
 # Tap (3452,5112): row east along y 5110 out of the strip.
-# Bottom pad (3454,5371): in the middle of tl1's row y 5371 (tl1_w4025, the clear of tl1's two
+# Bottom pad (3454,5371): in the middle of tl1's row y 5371 (rcs_x1, the clear of tl1's two
 # latches), which runs on east under track J's arm out of the strip.
 M 3456,3494 y5380 w=18
 P 3434,3487:3476,3521
@@ -249,13 +249,8 @@ P 3434,5354:3476,5388
 C 3454,5371
 P 2810,5362:3533,5380
 N M 3456,4700 rcs_x1
-@alias rcs_x1 rcs_g4240
-@alias rcs_x1 tl1_w4025
-@alias rcs_x1 tl3_w3506
 # after merging main (tl3's later runs): the rows y 4201 and y 5110 meet tl3's rows of the same y
 # at x 3533 (its pair's lower gate 1, and the clear of its latch B)
-@alias rcs_x1 tl3_w4200
-@alias rcs_x1 tl3_w5112
 
 # ---- track J, upper piece (y 3408-3904) = tl3_w3419: top pad (3497,3418) with a row east into tl3
 # (tl3_w3419, the inverted output of tl3's latch); bottom pad (3497,3894) with a row east into tl3
@@ -287,9 +282,8 @@ N P 3372,4440 tl3_w4373
 @alias tl3_w4373 tl3_w4503
 
 # ---- tla's row y 3761 (rcs_a2) from where tla's drawing stops (x 3400) on east into tl3
-# (tl3_w3765, the output of tl3's NOR 1)
+# (rcs_a2, the output of tl3's NOR 1)
 P 3395,3755:3540,3773
-@alias rcs_a2 tl3_w3765
 
 # ====================================================================
 # Run 3 (2026-11-18): the gate column east of R3 where tla did not trace it (y 3690-4620)

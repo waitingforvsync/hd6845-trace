@@ -228,7 +228,7 @@ x 2998 and x 3018 between them that could be the rail's etch boundary rather tha
 and a 5 px strip between pad and column measures as field (green; it lies in the margin
 of the metal's end, so it may be an artefact). Then the band would be a second pull-down:
 `rcs_cond` = NOR(`clk_tl`, `rcs_cond_n`), and the unit above,
-NOT(`rcs_cond` AND `clk_tl` OR `rcs_g4240`), would reduce to NOT `rcs_g4240`: a gate
+NOT(`rcs_cond` AND `clk_tl` OR `rcs_x1`), would reduce to NOT `rcs_x1`: a gate
 with a term that can never be true. That is why this reading was not adopted.
 
 **To settle it.** Simulation will not distinguish them easily; find where `rcs_cond_lat`'s
@@ -354,12 +354,12 @@ at y 3905; that the dark spot (6548,4188) is not a contact (if it were, `fld_y_b
 would sit on the rail). **Adopted** as drawn: `fld_a_in` = NAND(`inh_ck`, `tcw_b`),
 `fld_y_b` = NOT `tcw_c`. Settle when the region west of the island is traced as a block.
 
-Added 2026-11-16: a poly from the lower pad (6232,3870) of the bus metal `tcw_m6232` runs
+Added 2026-11-16: a poly from the lower pad (6232,3870) of the bus metal `c4l_gab` runs
 east along y 3912 and reaches the rail at y 3910-3934, between the rail contact
 (6535,3905) and the node of `fld_a_in` (which starts at y 3956 below a strip of field at
 y 3948-3956; the clean shot is dull tan at y 3935-3947). If diffusion is continuous
-under that poly, `fld_a_in` has a third pull-down gated by `tcw_m6232`
-(`fld_a_in` = NOT(`tcw_m6232` OR (`inh_ck` AND `tcw_b`))); if the poly only passes over
+under that poly, `fld_a_in` has a third pull-down gated by `c4l_gab`
+(`fld_a_in` = NOT(`c4l_gab` OR (`inh_ck` AND `tcw_b`))); if the poly only passes over
 field there, it goes on to the east side. Not decided; the trace stops the poly at the
 rail's west edge.
 
@@ -370,14 +370,14 @@ tan-green there (the contact box reaches down to about y 3925). Across the rail 
 y 3920 the bright salmon of the poly is at x 6480-6489 only, then dark, then the box. So
 the poly **does not cross the rail and gates nothing under it**: the third pull-down is
 out. It ends at the rail's west edge, 30 px above the end of `fld_a_in`'s poly. What it
-ends on is open: if on the same node as `fld_a_in`'s poly, the bus net `tcw_m6232` *is*
+ends on is open: if on the same node as `fld_a_in`'s poly, the bus net `c4l_gab` *is*
 `fld_a_in` (and `tcw_o3550` its inverse). Not drawn; next thing to read there, at 5x in
 the chip-2 stripped shot.
 
 Updated 2026-11-17 by `tcw` (run 2): the loads of `fld_a_in` and `fld_y_b` are traced
 (`trace/tcw.txt`, on the east rail, as the assumed supply assignment requires), and
 `fld_a_in` has a third pull-down, gate `tcw_o3820` (a latch with `tcw_o3820`). Still open:
-whether `tcw_m6232`'s poly (ending at the rail's west edge at y 3912) is on `fld_a_in`'s node.
+whether `c4l_gab`'s poly (ending at the rail's west edge at y 3912) is on `fld_a_in`'s node.
 
 Updated 2026-11-18 by `tc2` (dp111): `fld`'s VCC rail is joined by drawn metal to `tcw`'s, and its VSS
 rail to `tc1`'s east ground rail. The supply identity of both is still by the layout rule.
@@ -401,7 +401,7 @@ rail to `tc1`'s east ground rail. The supply identity of both is still by the la
    of the poly from the pad (6385,3567). Both ends are seen (class map); the buried
    contact is not.
 
-**Adopted as drawn.** With them: `tcw_o3550` = NOT `tcw_m6232`, and it is the middle gate
+**Adopted as drawn.** With them: `tcw_o3550` = NOT `c4l_gab`, and it is the middle gate
 of the first stack. Settle 1 with a profile across the strip in the chip-2 shots at
 several y, and by finding the load of `tcw_o3326` (one load or two decides it).
 
@@ -567,7 +567,7 @@ from the load. To settle: the spot in both chip-2 shots, or the load's other con
 ## AMB-025: the source of `tl1_w4678` (2026-11-17)
 
 Proposed by `tl1` (dp111). A tan box (2553-2573, 4655-4690) under the metal x 2557-2573 is either
-the end of a buried contact or a pass transistor gated by `tl1_w4025`. In the second case
+the end of a buried contact or a pass transistor gated by `rcs_x1`. In the second case
 `rcs_e4`'s first input (`tl1_w4678`) is a latched value. Two passes, **not resolved; nothing
 adopted**. Also open there: whether thin metal W contacts `tl1_w4678` near (2693,4688) (a widened
 head, no ring in either metal shot; not drawn).

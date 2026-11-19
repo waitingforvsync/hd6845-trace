@@ -140,13 +140,13 @@ P 2732,4848:2770,4914
 
 # ====================================================================
 # West column, y 4590-4800: the gate that drives tl1_w4678 (first input of rcs_e4's NOR).
-#   tl1_w4678 = NOT( tl1_w4025  OR  tl1_w3594 AND tl1_w4360  OR  tl1_w4703 )
+#   tl1_w4678 = NOT( rcs_x1  OR  tl1_w3594 AND tl1_w4360  OR  tl1_w4703 )
 # The third pull-down and the load are east of R1 (end of the cell).
 # Read on p2a.png (6.8x acid1b), p2m.png (3.4x both metal shots), p4.png (3.75x), profiles
 # with tools/px.py and tools/textmap.py --acid (notes: "The gate that drives tl1_w4678").
 # A column of diffusion west of R1, x 2553-2588, mostly under the thin metal x 2557-2573, as
 # in the NOR units: an arm at its top (y 4598-4616) onto the rail's VSS box (y 4590-4640,
-# contact (2628,4610)); the row of tl1_w4025 (y 4625-4643, from the pad (2458,4635)) crosses
+# contact (2628,4610)); the row of rcs_x1 (y 4625-4643, from the pad (2458,4635)) crosses
 # it and ends at x 2598; below the row the node, with a buried contact (heavy box 2551-2575,
 # 4663-4692) onto the east end of tl1_w4678's row. From y 4670 the node widens east, across
 # the gap between the thin metal and R1, to the diffusion under R1 (y 4668-4700).
@@ -155,7 +155,7 @@ D 2600,4590:2655,4640                 # rail box, VSS contact
 C 2628,4610
 D 2553,4598:2604,4616                 # arm
 D 2553,4598:2588,4692                 # the column
-P 2540,4625:2598,4643                 # tl1_w4025's row, on east across the column
+P 2540,4625:2598,4643                 # rcs_x1's row, on east across the column
 B 2551,4663:2575,4692
 P 2540,4668:2573,4688                 # east end of tl1_w4678's row, on the box
 # The stack under R1 and in the gap west of it (x 2580-2657): node (y 4668-4700; it goes on
@@ -221,7 +221,7 @@ N P 2620,4362 tl1_w4360
 # The same unit 608 px higher (findcell on the clean shot: 2535-2790 x 4590-4780 recurs at
 # 0,-608 with score 0.94; the unit above it, 2535-2790 x 4345-4585, at 0,-608 with 0.93), with
 # the north piece of the thin metal x 2557-2573 (follow.py: (2563,3756)-(2566,4172)):
-#   tl1_w4070 = NOT( tl1_w4025  OR  tl1_w3636 AND tl1_w3752  OR  tl1_w4095 )
+#   tl1_w4070 = NOT( rcs_x1  OR  tl1_w3636 AND tl1_w3752  OR  tl1_w4095 )
 # Its own VSS box below the stack (y 4170-4215), where the master has the NOR's.
 @inst tl1_ub 0,-608
 D 2600,4170:2655,4215
@@ -384,7 +384,7 @@ P 2512,4494:2545,4512
 P 2482,4703:2520,4733
 C 2499,4718
 P 2512,4708:2545,4728
-# tl1_w4025: metal x 2457 from a pad (2458,4026) south, 1,350 px, to y 5372 and east to a
+# rcs_x1: metal x 2457 from a pad (2458,4026) south, 1,350 px, to y 5372 and east to a
 # pad (2521,5372), whose poly row runs east along y 5362-5382 under the foot (seen straight
 # to x 3400, f2.png; drawn to the strip's edge). Contact on the way at (2458,4635). The pads'
 # rows go east into the units at y 4000-4200 and y 4590-4800 (cell tl1_ub). follow.py: one
@@ -394,7 +394,7 @@ M 2457,4012 y5372 x2532
 P 2440,4011:2478,4041
 C 2458,4026
 P 2470,4017:2545,4036
-N P 2520,4026 tl1_w4025
+N P 2520,4026 rcs_x1
 P 2440,4620:2478,4650
 C 2458,4635
 P 2470,4625:2545,4643

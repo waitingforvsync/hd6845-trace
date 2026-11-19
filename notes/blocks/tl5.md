@@ -35,7 +35,7 @@ tl5_w4027 = NOT( tl5_w3680 AND tl5_w3982  OR  tl5_w4160 )            marked
 tl5_w4160 = NOT( tl5_w3636  OR  tl5_w3982 AND tl5_w3841  OR  tl5_w4027 )   marked
 tl5_w4318 = NOT tl5_w4395                                            firm
 tl5_w4503 = NOT( tl5_w4395 AND tl5_w4458  OR  tl5_w4633 )            marked
-tl5_w4633 = NOT( tl5_w4590  OR  tl5_w4458 AND tl5_w4318  OR  tl5_w4503 )   marked
+tl5_w4633 = NOT( c4l_gab  OR  tl5_w4458 AND tl5_w4318  OR  tl5_w4503 )   marked
 tl5_w4807 = NOT tl5_w4850                                            marked: the load's tie (`?`, as in tl1)
 tl5_w4937 = NOT tl5_w3982                                            marked likewise
 ```
@@ -49,7 +49,7 @@ tl5_w4937 = NOT tl5_w3982                                            marked like
   (`tl5_w3680`: the track T8 joins a's output pad to b's data pad), cleared by the same
   `tl5_w3636` (one metal, T0, with both clear pads). Output `tl5_w4160`.
 - **Latch c** (y 4297-4757): open while `tl5_w4458` is high, takes `tl5_w4395`, cleared by
-  `tl5_w4590`. Output `tl5_w4633` and inverse output `tl5_w4503` both leave the strip east.
+  `c4l_gab`. Output `tl5_w4633` and inverse output `tl5_w4503` both leave the strip east.
 
 - **The NOR** (y 3142-3352) takes latch b's output (`tl5_w4160`, by the track T9) and latch a's
   inverse output (`tl5_w3550`, by T8): `tl5_w3245` is high only while b's output is low and a's
@@ -250,17 +250,17 @@ those listed):
 | T5 x 5451 | y 2888-3257 | (5452,2900), (5452,3245) | `tl5_w3245` |
 | T5 | y 3450-5771 | (5452,3461), (5451,5759) | `tl5_w3461` |
 | T6 x 5494 | y 2973-3734 | (5494,2985), (5494,3505), (5494,3722) | `tl5_w3505` |
-| T6 | y 3860-5423 | (5492,3872), (5492,4590), (5493,5411) | `tl5_w4590` |
+| T6 | y 3860-5423 | (5492,3872), (5492,4590), (5493,5411) | `c4l_gab` |
 | T7 x 5538 | from the arm at y 2769 to y 4992 | (5452,2767), (5538,3982), (5538,4200), (5538,4980) | `tl5_w3982` |
 | T8 x 5581 | y 2843-3125 | (5580,2855), (5580,3113) | `tl5_w2855` |
 | T8 | y 3278-3562 | (5580,3290), (5580,3550) | `tl5_w3550` |
 | T8 | y 3668-3950 | (5580,3680), (5580,3938) | `tl5_w3680` |
-| T8 | y 4509-5457, a corner (5581,5457) and west | (5580,4521), (5538,5457) | `tl5_w5457` |
+| T8 | y 4509-5457, a corner (5581,5457) and west | (5580,4521), (5538,5457) | `c4l_l3` |
 | T9 x 5625 | from the arm at y 3202 to y 4172 | (5580,3200), (5622,4160) | `tl5_w4160` |
 | T9 | y 4425-5501, a corner (5625,5501) and west | (5623,4437), (5493,5500) | `tl5_w5500` |
 | T10 x 5667 | from the strip's east edge along y 3650-3668 to a corner (5668,3659), south to y 4407 | (5665,4395) | `tl5_w4395` |
 | T10 | y 4468-5545, a corner (5667,5545) and west | (5666,4480), (5538,5544) | `tl5_w5544` |
-| x 5189 | y 5399-5982, a corner (5189,5982) and west out of the strip | (5190,5411) | `tl5_w4590` |
+| x 5189 | y 5399-5982, a corner (5189,5982) and west out of the strip | (5190,5411) | `c4l_gab` |
 | x 5627 | from the pad (5493,5674) east along y 5676, a corner (5627,5676), south, a corner (5627,6150), east | (5493,5674), (5667,6150) | `tl5_w5674` |
 
 T1 (`res_b`) and T2 (`lpstb_b`) are `trunks`' (to their pads (5190,6065) and (5232,6105)); T7 ends on
@@ -377,8 +377,8 @@ east under RC, the metal x 5189 and the tracks. None crosses a diffusion.
 
 | Row | West | East end | Then | Net |
 |---|---|---|---|---|
-| y 5402-5421 | starts on a pad (5190,5411), the north end of the metal x 5189 (bare ground north and west of the pad) | pad (5493,5411), the south end of T6's lower piece (bare ground south and east) | the metal x 5189 south to a corner (5189,5982), west along y 5975-5989 out of the strip (`follow.py 5187 5500 S`: on to (4924,5992), south, east along y 6370) | `tl5_w4590` (latch c's clear) |
-| y 5447-5467 | edge | pad (5538,5457) | metal east, corner (5581,5457), north as T8's south piece to its north pad (5580,4521); that pad's row east along y 4510-4530 out of the strip | `tl5_w5457` |
+| y 5402-5421 | starts on a pad (5190,5411), the north end of the metal x 5189 (bare ground north and west of the pad) | pad (5493,5411), the south end of T6's lower piece (bare ground south and east) | the metal x 5189 south to a corner (5189,5982), west along y 5975-5989 out of the strip (`follow.py 5187 5500 S`: on to (4924,5992), south, east along y 6370) | `c4l_gab` (latch c's clear) |
+| y 5447-5467 | edge | pad (5538,5457) | metal east, corner (5581,5457), north as T8's south piece to its north pad (5580,4521); that pad's row east along y 4510-4530 out of the strip | `c4l_l3` |
 | y 5490-5510 | edge | pad (5493,5500) | metal east, corner (5625,5501), T9's south piece north to its pad (5623,4437); row east along y 4427-4447 out of the strip | `tl5_w5500` |
 | y 5534-5553 | edge | pad (5538,5544) | metal east, corner (5667,5545), T10's south piece north to its pad (5666,4480), which lies on the strip's east edge (x 5650-5690); its poly leaves east | `tl5_w5544` |
 | y 5576-5594 | `bw`'s `rc_stepreq_n` row: through the strip without a pad (theirs) | | | |
@@ -542,7 +542,7 @@ lies outside it).
 | `tl5_w3505` | poly | (4967, 2975-2994) | ? | latch a's enable (T6) |
 | `tl5_w3505` | poly | (5683, 3712-3732) | ? | latch a's enable: the row of its second pad runs on east |
 | `tl5_w4395` | metal | (5683, 3650-3668) | in | latch c's data: T10's north piece leaves east |
-| `tl5_w4590` | poly | (5683, 3862-3882) | ? | latch c's clear: the row from the north pad of T6's lower piece |
+| `c4l_gab` | poly | (5683, 3862-3882) | ? | latch c's clear: the row from the north pad of T6's lower piece |
 | `tl5_w4503` | poly | (5683, 4580-4600) | out | latch c's inverse output |
 | `tl5_w4633` | poly | (5683, 4623-4643) | out | latch c's output |
 | `tl5_w4807` | poly | (5683, 4798-4818) | out | inverter 1's output |
@@ -550,8 +550,8 @@ lies outside it).
 | `tl5_w3982` | poly | (5683, 4970-4988) | ? | latch b's enable: the row of T7's south pad (5538,4980) runs on east |
 | `tl5_w5500` | poly | (5683, 4427-4447) | ? | the row of T9's south piece's north pad (5623,4437) |
 | `tl5_w5544` | poly | (5683, 4464-4496) | ? | the pad (5666,4480) of T10's south piece, on the edge |
-| `tl5_w5457` | poly | (5683, 4510-4530) | ? | the row of T8's south piece's north pad (5580,4521) |
-| `tl5_w5457` | poly | (4967, 5447-5467) | ? | the row of the pad (5538,5457) |
+| `c4l_l3` | poly | (5683, 4510-4530) | ? | the row of T8's south piece's north pad (5580,4521) |
+| `c4l_l3` | poly | (4967, 5447-5467) | ? | the row of the pad (5538,5457) |
 | `tl5_w5500` | poly | (4967, 5490-5510) | ? | the row of the pad (5493,5500) |
 | `tl5_w5544` | poly | (4967, 5534-5553) | ? | the row of the pad (5538,5544) |
 | `inh_ck` | poly | (4967, 5621-5641) | ? | the row of the pad (5538,5631) |
@@ -568,7 +568,7 @@ lies outside it).
 | `tl5_w5936` | poly | (5053-5073, 6350) | ? | the same line, bus line x 5063 |
 | `vss` | metal | (4967, 5882-5942) | - | RC, turned west; vss by structure only |
 | `vss` | metal | (5081-5127, 2505) | - | RC's north end, on the lower edge of the wide metal band y 2180-2500 (not drawn by any block) |
-| `tl5_w4590` | metal | (4967, 5975-5989) | ? | latch c's clear: from T6's lower piece by the row y 5411 and the metal x 5189 |
+| `c4l_gab` | metal | (4967, 5975-5989) | ? | latch c's clear: from T6's lower piece by the row y 5411 and the metal x 5189 |
 | `tl5_w3636` | poly | (5140-5160, 6350) | ? | the clear of latches a and b: bus line x 5150 from T0's south pad |
 | `res_b` | poly | (5182-5202, 6350) | in | bus line x 5193 from `trunks`' pad |
 | `lpstb_b` | poly | (5227-5247, 6350) | in | bus line x 5237 from `trunks`' pad |
@@ -672,10 +672,10 @@ From `tl6`: latch c's outputs reach `ras_o0_alt2` (through its inverter) and `tc
 - `tl5_w3982`'s "other metal of the pad (4910,2767), not drawn west of the pad" is drawn, to the pad
   (4539,2768) and a poly column north (`tl4_w4068`). `tl5_w4937` and `tl5_w2722` go west on `tl4`'s bus
   lines 4 and 5.
-- `tl5_w5457` = `tl4_w5455` (NOT `tl4_w4243`); `tl5_w5500` = `tl4_w5068` (NOR(`tl4_w4545`,
+- `c4l_l3` (NOT `tl4_w4243`); `tl5_w5500` = `tl4_w5068` (NOR(`tl4_w4545`,
   `tl4_w4850`)); `tl5_w5674` = `tl4_w4590`; this file's bus line x 5717 is `rcs_mv`; `tl5_w5761` = `tl4_w3850`.
 - The bus line x 5107 is `rcs_x1` (renamed 2026-11-19); `tl5_w5936` (bus line x 5063) comes from a pad (4583,5936)
-  and a metal on west along y 5939; `tl5_w4590`'s metal x 5189 / y 5982 turns south at x 4929 to a pad
+  and a metal on west along y 5939; `c4l_gab`'s metal x 5189 / y 5982 turns south at x 4929 to a pad
   (4929,6323) and a row on west.
 - Geometry only: RC's turned rail `M 5127,5912 x4967 w=60` and the port `vss M 4967,5912` give
   y 5882-5942; its top edge is y 5891. The comment at the row y 2930-2950 ("no metal over the row at
@@ -689,6 +689,6 @@ From `tl6`: latch c's outputs reach `ras_o0_alt2` (through its inverter) and `tc
 
 - `tl5_w3636` (= `tl4_w4198`, the clear of four latches) is a buffered copy of the reset
   NOR(`lpstb_b`, `res_b`) (`lc1_w7606`); `rcs_x1`'s driver is `lc1`'s gate 2 (`eof` run 2).
-- `tl5_w4590` / `tcw_m6232` is also the 4-bit counter's pass-gate line `c4l_gab`; `tl5_w5936` is
+- This file's clear of latch c is also the 4-bit counter's pass-gate line `c4l_gab`; `tl5_w5936` is
   `tl3_w3982` (`tl3` run 11).
 - R43: the south bus's pads T0, T3, T5 (y 5759-6108): the polys go on below them (`eof`).

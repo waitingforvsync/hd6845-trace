@@ -15,7 +15,7 @@ y 4787, `ral_stb`. Piece 2: the tracks U8-U11, the five undrawn polys of the cro
 the six metals south of it with their nest of corners, `tcw`'s track x 6276 north of y 2700.
 Piece 3: the row y 5045 / y 5173, the row y 6238, the wide ground metal. **Eleven joins between
 named nets, all without a `?` item** (`tools/unsure.py`): `tl5_w4395` = `tcw_m6320`,
-`tl5_w4590` = `tcw_m6232`, `tl5_w4633` = `tcw_c`, `tl5_w4503` = `tl5_w4850`, `tl5_w4807` =
+`c4l_gab`, `tl5_w4633` = `tcw_c`, `tl5_w4503` = `tl5_w4850`, `tl5_w4807` =
 `ras_o0_alt2`, `tl5_w5544` = `tc1_o3527`, `inh_ck`, `tcw_m6404` = `tc2_m6447`,
 `tc1_p4308` = `tc2_m6490`, `tc2_o5175` = `r9m_l3`, and U11 = `tc2_m6404`; `ral_stb` is taken
 from `tc2`'s port to the south edge. Full extraction: 2299 nets, 4085 transistors (none
@@ -73,10 +73,10 @@ No transistor. What the wiring joins (every join below is drawn without a `?` it
 |---|---|---|
 | `tl5_w4395`, metal y 3659 (latch c's data) | the metal runs on 115 px to a pad (5800,3658); the pad's poly east along y 3650-3668 under U3-U11 and `tcw`'s track x 6233 onto `tcw`'s drawn poly (from x 6205) and its pad (6315,3655) | **`tl5_w4395` = `tcw_m6320`** |
 | `tl5_w3505`, row y 3722 (latch a's enable) | ends on a pad (5712,3722), the north end of U0; U0 south to its pad (5712,6192); poly east along y 6195 to a pad (5972,6193); metal south across y 6350 | leaves south at (5972,6350) |
-| `tl5_w4590`, row y 3872 (latch c's clear) | east under U0 (no pad) and U3-U11 into `tcw`'s pad (6232,3870) | **`tl5_w4590` = `tcw_m6232`** |
+| `c4l_gab`, row y 3872 (latch c's clear) | east under U0 (no pad) and U3-U11 into `tcw`'s pad (6232,3870) | **`c4l_gab`** |
 | `tl5_w5500`, row y 4437 | pad (5928,4437), U5's north piece north to its pad (5928,2680); poly north across y 2500 | leaves north at (5928,2500) |
 | `tl5_w5544`, pad (5666,4480) | poly east to a pad (6010,4480), the west end of the bus metal y 4482, which crosses the field to `tc2`'s port | **`tl5_w5544` = `tc1_o3527`** |
-| `tl5_w5457`, row y 4521 | pad (5886,4522), U4's north piece north to its pad (5887,2722); poly north across y 2500 | leaves north at (5887,2500) |
+| `c4l_l3`, row y 4521 | pad (5886,4522), U4's north piece north to its pad (5887,2722); poly north across y 2500 | leaves north at (5887,2500) |
 | `tl5_w4503`, row y 4590 (latch c's inverse output) | east to a corner at x 5867 (in the open between U3 and U4), south, west along y 4699 to a pad (5797,4698); U2's middle piece south to a pad (5797,4850); the row y 4849 west | **`tl5_w4503` = `tl5_w4850`**: inverter 1's input is latch c's inverse output |
 | `tl5_w4633`, row y 4633 (latch c's output) | pad (5797,4633), U2's upper piece north to a pad (5798,4135); poly east along y 4134 into `fld`'s pad (6318,4135) | **`tl5_w4633` = `tcw_c`** |
 | `tl5_w4807`, row y 4808 (inverter 1's output) | east under U0-U7, south at x 6058 to a pad (6058,4872); metal north to the west end of the bus metal y 4787, which crosses the field to `tc2`'s port | **`tl5_w4807` = `ras_o0_alt2`** |
@@ -96,7 +96,7 @@ And from the east:
 names joined here):
 
 ```
-latch c (tl5):   tl5_w4633 = NOT( tcw_m6232  OR  tl5_w4458 AND NOT tcw_m6320  OR  tl5_w4503 )     = tcw_c
+latch c (tl5):   tl5_w4633 = NOT( c4l_gab  OR  tl5_w4458 AND NOT tcw_m6320  OR  tl5_w4503 )     = tcw_c
                  tl5_w4503 = NOT( tcw_m6320 AND tl5_w4458  OR  tl5_w4633 )
 inverter 1:      ras_o0_alt2 = NOT tl5_w4503
 tcw / fld:       fld_y_b = NOT tcw_c ;  tcw_o3820 = NOT( fld_a_in OR (inh_ck AND tcw_c) ) ;  fld_a_in = NOT( (inh_ck AND tcw_b) OR tcw_o3820 )
@@ -106,7 +106,7 @@ tcw / fld:       fld_y_b = NOT tcw_c ;  tcw_o3820 = NOT( fld_a_in OR (inh_ck AND
   when R9's bit 0 is clear, is latch c of `tl5`'s column, buffered**: `ras_o0_alt2` = NOT
   `tl5_w4503`, and `tl5_w4503` is the latch's inverse output. Latch c is open while
   `tl5_w4458` is high, takes `tcw_m6320` (from `tcw`'s gate column) and is cleared by
-  `tcw_m6232`.
+  `c4l_gab`.
 - **The same latch's output is `tcw_c`**: the data of `tcw`'s latch (the cross-coupled pair
   `fld_a_in` / `tcw_o3820`, gated by `inh_ck`) and, inverted, `fld_y_b`, the second input of the
   XOR that makes `ras_o0_alt1`. So both sources of row address bit 0 in that mode come from
@@ -270,7 +270,7 @@ westmost tracks and each of their pads has its metal seen leaving it at 4x; the 
 (5886,4522) is on U4 and (5928,4437) on U5 (`t2.png`: the metal over each pad, U3 `r9m`'s
 drawn line beside the first).
 *Joins to other blocks.* `tcw`'s poly `P 6315,3655 x6205` (its pad (6315,3655), net
-`tcw_m6320`); `tcw`'s pad `P 6214,3853:6250,3888` (`tcw_m6232`); `fld`'s pads
+`tcw_m6320`); `tcw`'s pad `P 6214,3853:6250,3888` (`c4l_gab`); `fld`'s pads
 `P 6383,3988:6418,4022` (`inh_ck`) and `P 6300,4118:6336,4152` (`tcw_c`); `tc2`'s metals
 `M 6400,4482...` (`tc1_o3527`), its `ras_o0_alt2` row metal and `M 7489,6274 y6328 x6400`
 (`ral_stb`); `tl5`'s rows and pads at x 5683. `tools/amr_at.py` gives the joined name on every
@@ -324,10 +324,10 @@ The same ports are in `ports.d/tl6.txt`. West-side ports carry `tl5`'s names (al
 |---|---|---|---|---|
 | `tl5_w4395` | metal | (5683, 3652-3666) | ? | = `tcw_m6320`; latch c's data |
 | `tl5_w3505` | poly | (5683, 3712-3732) | ? | latch a's enable, to U0 |
-| `tl5_w4590` | poly | (5683, 3862-3882) | ? | = `tcw_m6232`; latch c's clear |
+| `c4l_gab` | poly | (5683, 3862-3882) | ? | = `c4l_gab`; latch c's clear |
 | `tl5_w5500` | poly | (5683, 4427-4447) | ? | to U5's north piece |
 | `tl5_w5544` | poly | (5683, 4470-4490) | ? | = `tc1_o3527` |
-| `tl5_w5457` | poly | (5683, 4511-4531) | ? | to U4's north piece |
+| `c4l_l3` | poly | (5683, 4511-4531) | ? | to U4's north piece |
 | `tl5_w4503` | poly | (5683, 4580-4600) | in | latch c's inverse output |
 | `tl5_w4633` | poly | (5683, 4623-4643) | in | = `tcw_c`; latch c's output |
 | `tl5_w4807` | poly | (5683, 4798-4818) | in | = `ras_o0_alt2`; inverter 1's output |
@@ -335,10 +335,10 @@ The same ports are in `ports.d/tl6.txt`. West-side ports carry `tl5`'s names (al
 | `tl5_w3982` | poly | (5683, 4970-4988) | ? | = `tl4_w4068`; to U2's south piece |
 | `inh_ck` | poly | (5683, 5622-5642) | ? | = `inh_ck` |
 | `tl5_w5674` | poly | (5683, 6142-6160) | ? | to the pad (6016,6150) |
-| `tl5_w5457` | poly | (5877-5897, 2500) | ? | north from U4's north pad |
+| `c4l_l3` | poly | (5877-5897, 2500) | ? | north from U4's north pad |
 | `tl5_w5500` | poly | (5918-5938, 2500) | ? | north from U5's north pad |
 | `tcw_m6320` | poly | (6212, 3649-3667) | ? | onto `tcw`'s poly |
-| `tcw_m6232` | poly | (6225, 3862-3882) | ? | into `tcw`'s pad (6232,3870) |
+| `c4l_gab` | poly | (6225, 3862-3882) | ? | into `tcw`'s pad (6232,3870) |
 | `inh_ck` | poly | (6392, 3994-4012) | ? | into `fld`'s pad (6400,4005) |
 | `tcw_c` | poly | (6310, 4125-4143) | ? | into `fld`'s pad (6318,4135) |
 | `tc1_o3527` | metal | (6400, 4472-4492) | in | bus metal y 4482 |
@@ -389,7 +389,7 @@ The same ports are in `ports.d/tl6.txt`. West-side ports carry `tl5`'s names (al
   strip's east edge: seen on `w2.png` (a ring at the metal's end), not drawn; its poly is not
   followed. It is in `tcw`'s region.
 - U8's poly (`tl6_p6101`) north of y 2500: turns east under the rim of the wide metal band at
-  y 2475-2500 (`w2.png`); the polys of U4 and U5 (`tl5_w5457`, `tl5_w5500`) run on north under
+  y 2475-2500 (`w2.png`); the polys of U4 and U5 (`c4l_l3`, `tl5_w5500`) run on north under
   the band (`t12.png`). The band (y 2180-2500) is drawn by no block.
 - `tcw`'s bus at x 6205-6400, y 2700-4420 (its tracks x 6233, 6276, 6320, 6363, their pads and
   rows) was not re-read: the 0.95x and 2.4x views show nothing there without an outline, and
@@ -431,4 +431,4 @@ Round 2: no findings.
 
 - `ports.d/tl6.txt`, `inh_ck M 6099-6111,6350 ?`: driven from the south (`inh_ck`, `eof` run 2): `in`.
   `tl5_w5674` (x 6016 at y 6350) is probably `lc1_w7908` (`lc1`: "followed straight to y 6150"): not checked.
-- `tl5_w4590` / `tcw_m6232` is also the 4-bit counter's pass-gate line `c4l_gab` (`tl3` run 11).
+- The net that clears `tl5`'s latch c is also the 4-bit counter's pass-gate line `c4l_gab` (`tl3` run 11).
