@@ -208,7 +208,7 @@ N P 6200,8474 lc2_w8474
 @inst tl5_inv 933,4239 mx=5082 rot=180 o=5082,4848 tag=lc
 D 5840,9066:5896,9144                       # the load's VCC box under the rail (tan x 5842-5894, y 9070-9140)
 C 5858,9105 s=20x56                         # one long contact: ring y 9062-9148 in both metal shots, hole 51 px long in the clean shot
-M 5865,9030 y9233 w=50                      # the VCC rail on south (still metal at y 9245)
+M 5865,9030 y9256 w=50                      # the VCC rail on south (still metal at y 9245)
 M 6039,9030 y9176 w=48                      # the VSS rail on south over the cell's VSS contact (6047,9051) to its end
 # input: latch C's Na metal from its pad south, west along y 8946-8958 and south to a pad at the east end of the gate row
 M 6257,8837 y8952 x6213 y9096 w=16
@@ -260,3 +260,87 @@ P 5419,8939:5545,8958
 # review round 3: a poly leaves latch C's clear pad (6257,8731) south and runs diagonally south-east under three
 # metals (no pad on any) out of the strip at x 6450: a further branch of lc1_w7864
 P 6258,8742 y8758 x6285 6450,8923 w=20      # east along y 8750-8768 to x 6285, then at 45 degrees (centre y = x + 2473: fix check)
+
+# ====================================================================
+# The wide NOR south of latch B (x 5545-5848, y 8880-9233): one gate, five inputs, whose output is latch B's data.
+#   lc2_w8450 = NOR( lc2_w8474, lc2_w9034, lc2_w9079, lc3_w9299, lc2_w9210 )
+# A column of diffusion x 5620-5756 under the VSS rail and the two thin metals beside it, crossed by five gate rows
+# from the west. Sources: node B (y 8962-9027) and node D (y 9092-9156), each with one long contact under the rail,
+# and node F (south of row 5, on into lc3). Drains: node A (top), node C (between rows 2 and 3), node E (between rows
+# 4 and 5), strapped by the two thin metals. Views h1-h13, overlays o5_a, o6_a; contacts read from textmap.py --acid
+# (pits in the chip-2 stripped shot); survey.md.
+# -- the two thin metals, both on the output
+M 5558,8480 y8607 x5626 y9256 w=16          # west: latch B's data metal, through the pad (5622,8910) and on south out of the strip
+M 5756,8067 y8114 w=14                      # east: from lc1 through latch B (dim and 5 px west of its line there: uncertain)
+?M 5756,8114 y8548 w=14
+M 5756,8548 y8932 w=14
+?M 5756,8932 y8984 w=14                     # over the upper load's tie box
+M 5756,8984 y9007 w=14
+?M 5756,9007 y9050 w=14                     # over rows 2, 3 and 4, 5 neither metal shot passes the metal test except at the contacts
+M 5756,9050 y9066 w=14
+?M 5756,9066 y9110 w=14
+M 5756,9110 y9140 w=14
+?M 5756,9140 y9180 w=14
+M 5756,9180 y9198 w=14
+?M 5756,9198 y9256 w=14
+# -- drain A: a band under the rail above row 1, with a narrow arm west to a contact box under the west thin metal
+# and a narrow arm east through the gap to a contact pad under the east thin metal
+D 5608,8904:5640,8930
+C 5622,8910 s=16x14
+D 5630,8913:5762,8929
+D 5650,8913:5708,8970                       # the band, the channel under row 1, into node B
+D 5752,8911:5776,8936
+C 5758,8923 s=12x12
+P 5540,8939:5722,8958                       # row 1: lc2_w8474's row (drawn to x 5545 with its pad) on east; rounded end at x 5722
+# -- node B (VSS)
+D 5640,8962:5745,9027
+D 5620,9005:5650,9027
+C 5682,8990 s=24x44
+M 5682,8560 y9256 w=46                      # the VSS rail on south from latch B through the strip's edge
+# -- the column through rows 2-5
+D 5620,9020:5756,9256
+P 5545,9024:5768,9044                       # row 2
+N P 5560,9034 lc2_w9034
+P 5545,9068:5768,9090                       # row 3
+N P 5560,9079 lc2_w9079
+C 5682,9125 s=24x50                         # node D (VSS)
+P 5545,9156:5770,9176                       # row 4, with a pad where the metal x 5550-5568 from the north ends
+P 5545,9151:5578,9182
+C 5560,9166
+M 5559,9100 y9256 w=18                      # the pad lies in the run of this metal: it goes on south to lc3's pad (5560,9299)
+N P 5600,9166 lc2_w9166
+P 5545,9200:5768,9220                       # row 5
+N P 5560,9210 lc2_w9210
+# drains C and E: contacts to the east thin metal at the column's east edge; E also to the west thin metal
+D 5750,9048:5766,9066
+C 5757,9058 s=10x12
+D 5750,9180:5766,9198
+C 5759,9189 s=12x12
+C 5626,9189 s=14x12
+# -- upper load: the east pad's tail south to a ringed box where the plate's foot lies on it (the tie: uncertain, as
+# in every such load); strip from the pad east under the plate's bar and the plate to latch C's cell's VCC box
+D 5762,8930:5776,8972
+D 5770,8911:5848,8940
+P 5776,8909:5800,8942
+P 5798,8887:5837,8972
+P 5780,8945:5800,8972
+?P 5757,8945:5782,8972
+?B 5755,8943:5779,8974
+# -- lower load: tail x 5775-5791, strip under the plate to the inverter's VCC box, the plate's neck and top bar; the
+# bar lies on the tail's top (tie, uncertain) and is taken to reach west to node C's contact (uncertain)
+D 5775,9040:5791,9145
+D 5775,9104:5848,9142
+P 5795,9060:5831,9146
+P 5793,9050:5815,9085
+P 5778,9034:5820,9062
+?B 5773,9036:5797,9078
+?P 5762,9048:5780,9062
+?B 5760,9046:5768,9066
+# -- across the strip's south edge. lc3's drawn shapes begin at y 9255; the two rails, the two thin metals, the metal
+# x 5550-5568 and the column are drawn 23 px into lc3's strip to meet them, each seen without a break across
+# y 9233-9255 (tl5_tracks.py v; railprof.py 5662 5702 9195 9320: one diffusion y 9227-9282 under the rail):
+# node F is the VSS box of lc3's upper inverter (contact (5680,9264)); lc3's two "passing" metals are this gate's
+# output; lc3's upper inverter's input is row 4's net
+@alias lc2_w8450 lc3_m5626
+@alias lc2_w8450 lc3_m5756
+@alias lc3_w9299 lc2_w9166

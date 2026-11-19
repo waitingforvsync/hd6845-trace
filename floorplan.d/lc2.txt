@@ -4,3 +4,4 @@
 4480,8380:5330,9160  ?logic  west gate cluster | three rails, two gate columns; not traced
 5887,8067:6142,8290  logic  latch D, lower unit | with lc1's upper unit the latch whose inverse is lc_step: open while lc1_w7908, data lc1_w7780, clear lc1_w7864
 6142,8067:6490,8560  route  bus field east of the latches | enable, clear and data of latches C and D from the north; two metals east
+5545,8880:5848,9256  logic  NOR that makes latch B's data | lc2_w8450 = NOR of five rows (lc2_w8474, lc2_w9034, lc2_w9079, lc3_w9299, lc2_w9210); output on both thin metals

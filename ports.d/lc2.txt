@@ -2,9 +2,7 @@
 # The package's region is x 4400-6450, y 8067-9233. Latch B (x 5590-5895, y 8055-8560) and latch C (x 5840-6275, y 8525-9030) are drawn.
 
 lc2_w8169   M  5549-5571,8067  in   latch B's enable: the metal x 5560 from its two pads (5558,8169), (5558,8386) runs on north into lc1 (believed to (5558,7646); not drawn north of y 8067)
-lc2_w8450   M  5547-5569,8480  in   latch B's data: the metal from the pad (5558,8450) runs on south (not followed)
 vss         M  5659-5705,8060  -    rail over latch B, runs on north into lc1 (the copy's VSS box reaches y 8062)
-vss         M  5659-5705,8560  -    rail runs on south (not drawn further)
 vcc         M  5840-5890,8067  -    rail runs on north
 
 # Run 3: latch D's lower unit and the bus field east of the latches (x 6140-6490, y 8067-8560)
@@ -24,11 +22,21 @@ lc2_w8906   M  6462-6480,8067  in   latch C's data: the metal of the pad (6470,8
 
 # Run 4: the inverter below latch C and its thin metal
 lc2_w9124   M  5967-5981,8067  out  the thin metal: NOT lc2_w8822 (latch C's Na), from the inverter below latch C north through latches C and D into lc1
-vcc         M  5840-5890,9233  -    the rail (by structure) runs on south out of the strip
 lc1_w7864   M  5466-5486,8067  in   latch B's clear: lc1's metal on south to the pad (5472,8254)
 lc2_w8341   M  5508-5524,8067  out  latch B's output Na: the metal from the pad (5514,8341) runs north out of the strip
 lc2_w8474   P  5400,8509-8526  ?    drawn end: the poly from the pad (5428,8516) runs on west (seen to x 5150)
 lc2_w8474   M  5379-5391,8440  ?    drawn end (review round 3): the metal of the pads (5428,8516), (5428,8648), (5429,8994) runs on north-west
 lc2_w8474   M  5421-5437,9233  ?    the same metal runs on south into lc3
-lc2_w8474   P  5545,8939-8958  out  the row from the pad (5429,8994), east into the gate column south of latch B
 lc1_w7864   P  6450,8911-8936  out  the poly from latch C's clear pad (6257,8731), diagonally south-east out of the strip
+
+# Run 5: the wide NOR south of latch B (latch B's data)
+lc2_w8450   M  5749-5763,8067  out  the NOR's output on the east thin metal, north through latch B into lc1
+lc2_w8450   M  5618-5634,9256  out  the west thin metal on south (meets lc3_m5626)
+lc2_w8450   M  5749-5763,9256  out  the east thin metal on south (meets lc3_m5756)
+vss         M  5659-5705,9256  -    latch B's rail on south (meets lc3's)
+vcc         M  5840-5890,9256  -    the rail on south (meets lc3's)
+lc3_w9299   M  5550-5568,9256  out  row 4's metal on south to lc3's pad (5560,9299)
+lc3_w9299   M  5550-5568,9100  in   the same metal: drawn end, it comes from the north
+lc2_w9034   P  5545,9024-9044  in   gate row 2: drawn end, runs on west
+lc2_w9079   P  5545,9068-9090  in   gate row 3: drawn end, runs on west
+lc2_w9210   P  5545,9200-9220  in   gate row 5: drawn end, runs on west
