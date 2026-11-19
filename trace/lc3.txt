@@ -13,7 +13,7 @@ M 5865,9255 y9520 w=50
 N M 5865,9384 vcc
 @cell lc3_inv
 # pull-down column from the VSS contact (5680,9505) north to the output band
-D 5655,9428:5708,9515
+D 5660,9428:5708,9515                       # (round 5: the column's edges are at x 5660 and x 5708)
 C 5680,9505
 # output band y 9428-9450 east through the load to the VCC contact ring (5865,9455)
 D 5606,9414:5655,9450
@@ -26,16 +26,18 @@ P 5545,9458:5733,9482
 # (square outline in acid1b, x 5610-5640, y 9418-9446)
 P 5540,9418:5640,9440
 B 5606,9414:5645,9448
-# no metal contact on that box (review round 1): the metal x 5615-5638 runs over it unbroken
-# in both metal shots, the box only edged dark; acid1b pale inside, no contact spot.
+# no metal contact on that box (review rounds 1 and 5): the metal x 5615-5638 over it is dim in both metal shots (half-bright,
+# about 6 px, for y 9409-9460), so they do not show it whole; the clean shot does: protected cream across the box, red minus
+# green +11 to +28 and no hole (a pad's hole reads -16 to -27).
 # depletion load: poly over the band x 5785-5835 (dense implant in acid x 5770-5835)
-P 5785,9418:5835,9460
+P 5785,9406:5835,9472                       # (round 5: the load poly is y 9406-9472; the band under it is about 24 wide)
 # its gate tie (review round 1): the load poly runs south x 5780-5812 onto a buried contact
 # box x 5780-5812, y 9468-9500 (square outline in metal and metal1, contact spots in acid1b),
 # met by a pale diffusion strip x 5744-5776 from the band south to y 9500 and east under the box
 P 5780,9455:5812,9500
 B 5780,9468:5812,9500
-D 5744,9445:5812,9502
+D 5744,9445:5776,9502                       # (round 5: drawn as the two arms of an L; the ground at x 5776-5812, y 9450-9468 is field under the load poly)
+D 5770,9470:5812,9502
 @end
 @inst lc3_inv 0,0
 @inst lc3_inv 0,0 my=9384.5

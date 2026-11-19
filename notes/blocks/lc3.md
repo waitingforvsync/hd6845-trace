@@ -3,15 +3,14 @@
 ## Status
 
 2026-11-19 08:15 -0600, run 2b: **the gate pair's wires, the track field and the crossing field are drawn** (wiring only, no
-transistor; section "The wiring east of the counter"; not yet reviewed, and the gate pair has its Fable review
-(R31) in the same round). Three joins come out of it: the pair's lower inverter drives `lc1_w7170`, its upper
+transistor; section "The wiring east of the counter"), reviewed with the gate pair (round 5, which is the pair's
+Fable review: R31 done for `lc3`). **The strip is drawn but for its edges.** Three joins come out of it: the pair's lower inverter drives `lc1_w7170`, its upper
 inverter drives `lc2_w9079`, and stage B0's clock is `lc2`'s through line `lc2_x6432`.
 
 2026-11-19 07:44 -0600, run 2 (Matt Godbolt, on Claude Fable 5.2). **Two stages of `lc2`'s ripple counter are drawn
 here**: stage E4 (a copy of `lc2`'s flip-flop cell `lc2_ff`, turned) and stage B0 (the same four
 gates folded over both columns, drawn by hand), both reviewed (rounds 3 and 4), 37 new transistors (E4's top one is also in `lc2`'s drawing). With `eof`'s piece `ff3` (stage
-W3, on main since 2026-11-19) the counter has five stages and its order is known. Still open: everything east of x 5480 but the gate pair
-(the crossing field, where stage B0's clock and the clear come from), the gate pair's Fable review (R31).
+W3, on main since 2026-11-19) the counter has five stages and its order is known. What was open then (everything east of x 5480) is run 2b's.
 
 Split with `eof` (Tom Seddon, run 6, whose claim covers the corner x 4400-4750, y 9100-9700): the west copy,
 stage W3, was drawn by both of us within minutes; `eof`'s `ff3` reached its branch first, so this file's drawing of
@@ -19,7 +18,7 @@ it was removed (it was in this package's review round 1, which found it as `eof`
 here: track B from `lc2`'s end to its END pad, and the middle rail.
 
 Run 1 (dp111, 2026-11-18 04:48 +0100): the gate pair drawn on claude-opus (section "Gate pair at 6x"), reviewed
-on claude-opus; it still needs its Fable review (re-read item R31). The inventory below was read at 0.62x and
+on claude-opus, and on Fable in round 5. The inventory below was read at 0.62x and
 1.22x; everything in it that is not in a later section is "seen", not traced.
 
 ## The counter: order of the stages (traced)
@@ -46,7 +45,7 @@ All five stages have the same clear (`lc2_w8450`, by tracks B and B') and the sa
 `lc1_w7170` (tracks A and A').
 
 Believed, not established: a divider by 16 or by 32 of whatever `lc3_w9947` carries, chosen by `lc3_w9299`, is what
-a cursor blink of 1/16 or 1/32 of the field rate needs. Read but not yet drawn (next pieces): the clock's row
+a cursor blink of 1/16 or 1/32 of the field rate needs. Drawn in run 2b (section "The wiring east of the counter"): the clock's row
 ends on a pad (6211,9948) of a metal that is `lc2`'s through line `lc2_x6432` four tracks further west (from
 `lc2`'s east edge at (6450,9165)); the upper inverter of the gate pair drives `lc2_w9079` (so the two selects of
 `lc2_w9125` are complements) and the lower one drives `lc1_w7170`.
@@ -446,6 +445,42 @@ For the three fixes: `tools/t.sh lc3 sameconn.py 49d3495` ends `connections iden
 `.venv/bin/python tools/sameconn.py 49d3495` ends `connections identical`.
 
 Round 4: no findings that change a connection.
+
+Round 5 (run 2b, Fable; full review of the gate pair, which is its R31 review, and of the wiring east of the
+counter; 2026-11-19 08:35 -0600, a fresh agent on Claude Fable 5.2, against a9f60e4; images `cache/scratch/lc3/review-3/`,
+24 used). Told to suspect, for the pair: whether each output box is a buried contact only; the load tie; the
+pull-downs' widths and gate ends; the mirror copy at every pad and edge; the supply contacts; anything undrawn.
+For the wiring: every pad (contact? does its metal end or run on? a second poly?); taps without a pad in the
+crossing field (the follower's candidates on x 6082); rows stepping a track; the output row under the two metals
+and the pad (5517,9340); the corner bundle's steps and corners (an off-by-one would change three nets) and whether
+the fifth line enters from the east; the diagonals; the VCC metal over the polys; `lc2_w9125`'s poly under the
+metal; anything undrawn. Findings, all geometry only:
+1. The load tie strip was one rectangle that also covered x 5776-5812, y 9450-9468, field under the load poly
+   (the loads printed as W/L 50/33); the load poly is y 9406-9472 (drawn 9418-9460). Redrawn as the two arms of an
+   L, the poly lengthened: the loads now print 22/50.
+2. The pull-down column is x 5660-5708, not 5655-5708. Changed (48/24).
+3. A comment said the metal x 5615-5638 is seen unbroken over the output boxes in both metal shots; it is dim
+   there in both (`tl5_tracks.py v 5626` fails at y 9315-9361 and 9409-9460), and what shows metal present and
+   no contact is the clean shot (protected cream across each box, red minus green +11 to +28, no hole). Reworded.
+Checked and found correct. The pair: both output boxes are buried contacts only; each load's gate joins the
+output side only, nothing on VCC east of the tie box; the four supply contacts; gate polys end at x 5728-5733; the
+mirror copy at every pad and edge, no second poly on either input pad; nothing undrawn. The wiring: every named
+pad is a contact (ring and 12 px centre in both metal shots at 4-5.6x; (5558,9882), (6211,9948), (5993,9623) are
+red, not green-holed, in the clean shot, but chip 1's metal shot shows them); END pads end their metals, the
+through pads (5517,9340), (6211,9948), (6298,9884) carry them on; no pad has a second poly; the VCC metal has no
+contact over rows 7-11 or the two polys; `lc2_w9125`'s poly is continuous with no contact under the metal; the
+corner bundle's four steps and corners (no off-by-one), the fifth line crossing x 6450 at y 9455 (it turns north
+at x 6465-6480, just outside); rows 9, 10, 11 are the rows at x 5480 and at the pad (5646,9992), every row keeps
+its track; the six diagonals cross y 10400 at x 5588, 5653, 5719, 5786, 5852, 5915; no taps (x 6082 at y 9620,
+9664, 9747 and five other candidates: no ring in either chip, no widened row); no diffusion under the rows; the
+two fields claimed empty are empty. `busl`'s pad (6039,10359) and its row y 10350-10372 lie inside the region,
+drawn by `busl` only; the row passes under the nine metals x 6082-6428 with no contact.
+Not checked: the corner bundle's steps in a chip-1 view (the follower's two-chip test only); anything beyond
+x 6450 or y 10400; the rails' identities to a pad.
+For the fixes: `tools/t.sh lc3 sameconn.py a9f60e4` ends `connections identical`;
+`.venv/bin/python tools/sameconn.py a9f60e4` ends `connections identical`.
+
+Round 5: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19)
 
