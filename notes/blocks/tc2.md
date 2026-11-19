@@ -1267,3 +1267,16 @@ Round 2: no findings.
 - Piece 13: the box (8355-8385, 4835-4865) "onto a diffusion ... not traced" is the output node of
   `eof`'s inverter `sl_eq_r5_n` = NOT `sl_eq_r5`; the C-shaped poly "not joined" is its input gate.
   `ports.d/tc2.txt`'s `sl_eq_r5_n` is driven from there (direction `in`).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, second batch)
+
+- `tc2_sr_g` ("metal x 7837 going south past y 6400, not followed") **is followed** (`eofw`): the metal
+  runs 820 px south to a pad with a contact (7836,7215), whose poly row runs west under both rails to
+  the pad (7313,7215) of row 2 of `eof`'s gate `g7700`; from that row's pad (7267,7736) a metal goes on
+  south to a T (7273,8710) and by a staircase to `lc2`'s `lc1_w7908`, **the enable of latch D**, with a
+  corner pad (7446,8732) into `cdp3`'s gate column. So the latch `tc2_sr_q` / `tc2_sr_q_n` and latch D
+  are gated by one line. Its driver is not found.
+- `tc2_r5589`'s poly x 6843 south of y 6400 ("still there at y 6440") **is followed** (`eofw`): south
+  to a corner (6843,6870), east along y 6870, to the pad (7272,6912) of the output of `eof`'s gate
+  `g7700`. **`tc2_r5589` is driven by that gate**: `tc2_r5589` = NOT(`lc1_w7170` AND (`inh_ck` OR
+  `tc2_sr_g`)). Its loads lie east of the pad (8248,5262).

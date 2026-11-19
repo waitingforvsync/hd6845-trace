@@ -255,3 +255,12 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
 - Below y 14060: where the six in tracks of row D, `cdp4_ld6` and the rails go (fan-out
   at y 14060-14700). The s0 VCC rail's bend below y 13540 and the wide metal at
   x 7700-7990, y 13650-14060 left of row D. The s7 VSS rail between y 13300 and 13694.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, second batch)
+
+- Ports, `cdp4_bus_s0`..`s7` ("unknown, per-slice line between row R1 and the left") and
+  `cdp4_in_s0`..`s7` ("from outside, data into the row C latch") **are the same eight nets** (`busl`, piece
+  `ch1`): for each slice the channel-1 row and the channel-2 row are joined in the left bus field by a
+  metal track between poly pads, and the same net ends on one poly row of the left array (s7 .. s1 at
+  y 11488, 11922, 12442, 12984, 13397, 13874, 14351; s0 just south of `busl`'s region). The field holds
+  no transistor; which end drives is not traced.

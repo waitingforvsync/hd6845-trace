@@ -374,7 +374,10 @@ Traps, all of them real:
    poly row gives the metal 20 px too narrow (the metal over the row is dim; the clean shot's
    protected row decides). In chip 2 some bare ground is bright enough (R 176-191) to pass the
    follower's metal test (R > 177) where chip 1 shows it dark (`eof`, `cdp1`'s slice-0 logic): check
-   an arm between two metals in chip 1. Found 2026-11-18/19 (`tl3`, `tl4`, `tl2`, `eof`; R38, R36, R26).
+   an arm between two metals in chip 1. And `tools/tl5_tracks.py`'s "hole" where a line has stepped
+   off its track is open ground, not a pad (`lc3`'s corner bundle: four through lines each step one
+   track west, and the vacated positions read as 17 px holes at (6299,9298), (6342,9341),
+   (6386,9385), (6428,9428)). Found 2026-11-18/19 (`tl3`, `tl4`, `tl2`, `eof`, `lc3`; R38, R36, R26).
 31. **A group near a package boundary that will not read may be half of a cell.** `lc1`'s cluster
    E was read three times as a free-standing gate without a load; it is the upper unit of a
    two-unit latch whose lower unit lies in `lc2`. Before a second pass over such a group, run
@@ -417,6 +420,13 @@ Traps, all of them real:
    hole; under a rail compare with a known contact of the same rail by `tools/textmap.py`. And a
    rail that seems to end at a dark bar may go on: two bars 20 px apart can be edges beneath it
    (`tools/railprof.py` past it). Found 2026-11-18/19 (`lc2`; with traps 22, 26).
+37. **A second copy of a cell may be folded, and its pads then sit a track off.** `lc3`'s counter
+   stage B0 is `lc2`'s flip-flop with its two halves in different columns: `tools/findcell.py`
+   finds each half (0.89, 0.71) and the whole cell only weakly (0.52-0.56). The halves' gates are the
+   cell's, but every row END differs (pads one track further east, two end pads absent, an output
+   leaving south instead of west). When a full-cell hit is weak, try the cell's halves, and then
+   read every row end rather than trusting the half's lines (with trap 32). Found 2026-11-19
+   (`lc3`); no earlier block is known to be affected.
 
 **When a trap turns out to affect work already done**, add the affected blocks to the
 "Re-read list" in `notes/work-packages.md` in the same commit that records the finding.
@@ -454,6 +464,19 @@ A 100,100:150,150 kind=clamp           # mark a transistor here: clamp, field (b
   placeholder is identified, `tools/rename.py OLD NEW` renames it in every trace file and
   note. A wire you believe is net X but have not joined to it is labelled `X_u`.
   `tools/t.sh BLOCK signals.py` lists your names that the glossary does not cover.
+- **Aliases.** When your wire joins two nets that already have names, say so with `@alias CANON
+  OTHER`. A net has one canonical name, and every other name on it must be an alias of that one
+  directly: a chain (`@alias a b`, `@alias b c`) gives "net carries several names", so alias the
+  new name to the canonical name the net already has (`eofw`: `lc2` had `@alias lc1_w7170
+  lc2_w8474`, so the third name went in as `@alias lc1_w7170 eof_w7777`). A net whose labels in your
+  file are all aliases gives the same error when the file is extracted by itself, because the
+  canonical name's label is in a file that is not loaded: put one label of the canonical name on
+  your own geometry (`lc3`: `N P 5490,9429 lc1_w7170`). The renames are the coordinator's refresh.
+- **Follow tasks** (a queue row that says "follow X to its driver" or "to its loads"): a wire is
+  finished when it reaches a net another package has drawn, or the edge of a claimed package's
+  region, not at the first pad whose continuation leaves the neighbourhood. `tools/ports.py --near
+  X,Y` on a stub's end shows whether a drawn net is near (`eof`'s gate `g7700`: each of its three
+  wires was left at a port within 1,200 px, and a named net lay 350-2,500 px further on: `eofw`).
 - Edge positions are uncertain by about 3 px. Draw shapes that must connect with a
   clear overlap, and shapes that must not with a clear gap (5 px or more). Slivers
   where edges nearly coincide produce warnings.

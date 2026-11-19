@@ -1408,3 +1408,28 @@ After the fix: `tools/t.sh lc2 sameconn.py ed86acc`: `connections identical`;
 `.venv/bin/python tools/sameconn.py ed86acc`: `connections identical`.
 
 Round 18: no findings that change a connection.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, second batch)
+
+- "The clock's source ... an L-shaped metal ... then south at x 4553-4575 (drawn to y 9190)" and the
+  port `lc2_w8475` (in): the metal is the slave-output track of a third copy of `lc2_ff`, `eof`'s piece
+  `ff3` (x 4440-4990, y 9185-9990); the driver is that flip-flop's gate K3 (`eof` run 6).
+- Not done, "tracks A and B south of their drawn ends (y 9060, 8700)": track A (`lc1_w7170`) ends on
+  the pad (4473,9818); track B (`lc2_w8907`) has a pad (4517,9384) and runs on to about (4518,10170)
+  (`eof` run 6).
+- **The ripple counter has five stages**, in the order B0, W3, this strip's first, its second, E4
+  (`lc3` run 2; W3 is `eof`'s `ff3`). `lc2_w9210` ("row 5's metal, south into `lc3`", an input) is stage
+  E4's slave output. The "stack under the east rail south of the east column" with the node `lc2_w9171`
+  is the top of stage E4 (its gate K4's clock row and VSS node); this file's hand-drawn lines there
+  duplicate `lc3`'s instance and extract as one transistor with it (left as they are).
+- `lc2_w9079` ("row 3's thin metal from its pad (5520,9081), south into `lc3`", an input) is the output
+  of `lc3`'s upper inverter: `lc2_w9079` = NOT `lc3_w9299`. So `lc2_w9125` = NOT(`lc2_w9034` AND NOT
+  `lc3_w9299` OR `lc2_w9210` AND `lc3_w9299`): a choice between the counter's fourth and fifth outputs.
+- `lc2_x6432` is the ripple counter's clock (`lc3_w9947`, by a poly row and one pad in `lc3`).
+- `lc2_w8474` / `lc1_w7170` ("its driver is not found"): driven by `lc3`'s lower inverter, `lc1_w7170`
+  = NOT `lc3_w9470`. Its metal north of (6341,8067) ends on a pad (6339,7824) whose poly is row 3 of
+  `eof`'s gate `g7700`: a load (`eofw`).
+- `lc1_w7908`'s metal east of (6450,8259) is drawn by `eofw`: it is `tc2_sr_g` (see `lc1`'s corrections).
+- `rst_n`'s metal ends on a pad (5473,10207) with a poly south; `lc2_w8450`'s metal (`lc3_m5626`) ends
+  on a pad (5540,10165) with a poly south; `lc3_m5756` ends on a pad (5646,9992) whose poly row runs
+  east out of `lc3` (`lc3` run 2b).

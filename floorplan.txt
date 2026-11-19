@@ -65,12 +65,11 @@
 # --- random logic
 2600,2180:6400,2500     ?power  wide metal band north of the top-left strips | the VSS plane the strips' rails hang from; the data of tl1's third latch (tl1_w3333) enters it and is not followed: package tlb (its west end, a NOR on R5's inverted match, is eof's)
 3533,2500:4250,2890     ?logic  top-left logic, strip 3, rows above y 2890 | what `tl3` has not drawn yet (the rest of the strips is in their floorplan.d fragments)
-7460,7580:7800,8440     ?logic  gate column west of the large cells | about six gate units with loads, below the gate group that inh_ck's tap row reaches (eof (c)); not traced: package cdp3 (continue)
+7460,7860:7800,8440     ?logic  gate column west of the large cells | about five gate units with loads, below the gate on inh_ck's tap row (eof's g7700, drawn); two wires of tc2_sr_g enter it from the corner pad (7446,8732); not traced: package cdp3 (continue)
 7850,8260:8300,8800     ?logic  logic beside the large cells (row A) | gates between channel 3 and channel B, west of the six large cells; lines from the gate beside row C come up into it (x 7880, 8076, 8290, 8327); not traced: package cdp3 (continue)
 7460,8620:7800,8800     ?logic  gates below the column west of the large cells | not traced: package cdp3 (continue)
 7550,13640:7870,14040   ?logic  gate group at cdp4's bottom-left corner | pull-downs with loads beside bc1_ld_a; not traced: package cdp4 (continue)
 4400,6900:6450,8067     ?logic  left-centre logic, strip 1 | what `lc1` has not drawn yet (cluster E's west half, the diagonal bundle, the crossing field)
-4400,9233:6450,10400    ?logic  left-centre logic, strip 3 | `lc3`: the clock and consumers of `lc2`'s ripple counter (strip 2 is `lc2`'s fragment)
 11900,3400:16400,4210   ?logic  top-right logic rows | gates under the test structures, near the RA/HSYNC/VSYNC pads (the RA output stage below is ral)
 7000,14600:11000,18550  ?logic  bottom-centre logic | random logic below the central datapath
 4800,15800:6500,18650   ?logic  bottom-left logic | random logic near DISPTMG/CUDISP pads

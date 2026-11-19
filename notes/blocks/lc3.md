@@ -493,3 +493,9 @@ Round 5: no findings that change a connection.
   y 9160-9300 has its top gate in `lc2` (`lc2_w9034`, node `lc2_w9171`), its second gate and load here.
   The clock of `lc2`'s ripple counter, `lc2_w8475`, comes from the south (an L-shaped metal at
   x 4553-4575, y 9190): this strip is in the end-of-frame lead group (`eof` (d)).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, second batch)
+
+- Inventory, "one drawn item, a short horizontal piece near (4800-4975, 9737), owner not looked up":
+  nobody's. It is a green stripe in the chip-2 metal photograph itself, absent from chip 1's metal shot
+  and from both stripped shots (`eof` run 6, whose reviewer looked round every pad of `ff3`).

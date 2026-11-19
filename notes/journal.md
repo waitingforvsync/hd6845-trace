@@ -1954,3 +1954,72 @@ which must not differ only by case, so the names changed, not the tool:
 
 **Handoffs:** one waiting (`eof` run 5). **Claims:** `eof` (tom-seddon), `tlb` (this session; to be
 released for `busl`, which the user wants done next).
+
+## 2026-11-19 16:18  Handoffs: eof runs 5 and 6, busl runs 1 and 2, lc3 runs 2 and 2b, eofw; a test of effort
+
+At the user's request ("apply waiting handoffs"). Seven handoffs, applied together.
+
+**What came in**
+
+- `eof` run 5 (richtw1; piece `g7700`, 4 transistors): the gate at the end of `inh_ck`'s tap row, one
+  AND-OR-INVERT under column 0's VSS rail (firm).
+- `eof` run 6 (Tom Seddon; piece `ff3`, 19 transistors): the clock of `lc2`'s first flip-flop is the
+  slave output of a third copy of `lc2_ff` in `lc3`'s column A; `lc2_w8475` = NOT(`eof_w9472` AND
+  (`eof_w9255` OR `eof_w9505`)) (firm).
+- `lc3` runs 2 and 2b (Matt Godbolt; 37 transistors and the wiring): two more counter stages (E4 a
+  turned copy, B0 folded over both columns, by hand): **the ripple counter has five stages**, clocked by
+  `lc2`'s through line `lc2_x6432`; the gate pair: **`lc1_w7170` = NOT `lc3_w9470`** (the driver `eof`
+  (f) asked for) and `lc2_w9079` = NOT `lc3_w9299`, so `lc2_w9125` chooses between the counter's fourth
+  and fifth outputs. R31 done for `lc3`. Released: done but for its edges.
+- `busl` runs 1 and 2 (richtw1; wiring, 16 nets): `cdp3`'s row H west outputs reach eight diffusion rows
+  of the left array (piece `h8`); `cdp4_bus_s#` = `cdp4_in_s#` for all eight slices, each also on a poly
+  row of the left array (piece `ch1`). Claimed, continuing.
+- `eofw` (richtw1; wiring, new package): the three wires of `g7700` followed to named nets:
+  **`tc2_r5589` = NOT(`lc1_w7170` AND (`inh_ck` OR `tc2_sr_g`))**, and **`tc2_sr_g` is `lc1_w7908`**, the
+  enable of latch D. Two open ends at a corner pad (7446,8732) into `cdp3`'s gate column.
+
+**The test of effort** (user: "test the results against a high effort trace"). `g7700` had been traced
+in a 15-minute run. A fresh agent at high effort traced the gate again from the commit before that
+run, without sight of it (39 minutes). On the gate the two agree in every connection: the same four
+transistors and equation, and drawn together they merge net for net with no short (coordinates within
+4 px; where they differ at the wires' ends the second is nearer the photos by 3-5 px). The difference
+was how far the wires were followed: the first run left each at a port within 1,200 px, the second
+reached a named net on each. That part became `eofw`, reviewed by a fresh reviewer at high effort
+(round 1: no findings that change a connection). The user then asked for a high-effort review of the
+other pieces claimed that day: `eof`'s `r5nor` and `isrc`, `busl`'s `h8` and `ch1`, each by a fresh
+Fable reviewer at high effort. **None found anything that changes a connection**; the geometry and
+notes items they found are in the master list's `eof` and `busl` rows for the claims' holders. One
+sample, and the two tracing runs had different briefs, so "followed further" cannot be put down to
+effort alone; the lesson taken is a rule for follow tasks (below).
+
+**Checks:** overlays at 1.15-1.5x of `ff3` (`cache/scratch/handoff/h_ff3.png`), `lc3`'s stage B0 and its
+wiring east of the counter (`h_b0.png`, `h_lc3e.png`): on the features; `eofw`'s joins at 3-4x
+(`cache/scratch/eofw/join1.png`, `join2.png`). Full extraction 2,400 nets, 4,344 transistors, 0 errors,
+0 warnings; `tools/unsure.py`: 90 nets joined only through uncertain items (none of them from these
+packages' own geometry: the cell copies carry `lc2`'s `?D`).
+
+**Applied:**
+- Master list: `eof` row ((c) done, (d) done as far as `eof` goes, (f)'s driver found by `lc3`; what is
+  left; the geometry fixes waiting in `trace/eof.txt`; the follow-task rule); `busl` row (status, what
+  arrives from `lc3`, what `eofw` draws in the northern part, the second-look review's notes);
+  `lc1`-`lc3` row (`lc3` done but for its edges; `lc1`'s corrections); `cdp3` (continue), `bl0`,
+  `urch` (continue) rows; R31 (done for `lc3`), R45 (applied by `eof` run 6 and `lc3`). `eofw`'s row,
+  added to the Queue at 15:25 so that it could be claimed, is moved to the contributor table as done.
+- `notes/tracing-guide.md`: trap 30 gets `tl5_tracks.py`'s "hole" where a line has stepped off its
+  track; new **trap 37** (a second copy of a cell may be folded: try the halves, read every row end);
+  section 5 gets a paragraph on `@alias` (one canonical name per net, no chains; a label of the
+  canonical name in one's own file) and one on follow tasks (finished at a drawn net, not at the first
+  pad). No Re-read item: no earlier block is known to be affected by trap 37, and the first run of
+  `g7700` misread nothing.
+- `trace/cdp3.txt`: column 0's VSS rail `M 7623,8450 y11200 w=46` began 106 px too far north (bare
+  ground at x 7612-7660 down to y 8548 in both metal shots; seen independently by both tracers of
+  `g7700`); now from y 8556, its label moved onto it. `tools/sameconn.py HEAD`: connections identical.
+- Corrections sections added to `notes/blocks/lc1.md`, `lc2.md`, `lc3.md`, `cdp3.md`, `cdp4.md`,
+  `larr.md`, `tc2.md`. Not edited: `notes/blocks/eof.md` (claimed: Tom Seddon) and `busl.md` (claimed);
+  what concerns them is in their master-list rows.
+- `floorplan.txt`: the coarse block for the left-centre strip 3 removed (`lc3`'s and `eof`'s fragments
+  cover it); the gate column west of the large cells trimmed to start below `eof`'s gate (y 7860).
+- No new AMB entry (none proposed).
+- `out/` rebuilt. Coverage: 65.5% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
+
+**Handoffs:** none waiting. **Claims:** `busl` (waitingforvsync), `eof` (tom-seddon).

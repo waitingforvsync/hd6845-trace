@@ -441,3 +441,19 @@ Round 4: no findings that change a connection.
   x 6422-6440), `lc2_w8341` (x 5508-5524), `lc2_w9124` (thin metal x 5967-5981), row 4's metal
   (x 5422-5438). Geometry: in the `tl1_ub` instance the pad of `lc1_w7862` has its hole at (6105,8265)
   against (6115,8272) drawn.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, second batch)
+
+- Ports, `lc1_w7780` P (6450, 7772-7788) "seen to x 6710" (`eof` run 5): the row ends on a pad with a
+  contact (6815,7778), whose metal goes south (drawn by nobody). The poly one track down at
+  (6450, 7812-7832) is another net: row 3 of `eof`'s gate `g7700` (`eof_w7777`).
+- That poly runs on west inside this strip to a pad with a contact (6339,7824), whose metal x 6333-6349
+  goes south onto `lc2`'s metal of `lc2_w8474`: drawn by `eofw` (`trace/eofw.txt`, wire 3). So the gate
+  on `inh_ck`'s tap row is one more load of `lc1_w7170`.
+- **`lc1_w7908`, latch D's enable, is `tc2_sr_g`**, the gate line of `tc2`'s latch (`eofw`: a metal
+  staircase from `lc2`'s end (6450,8259) to a T (7273,8710), north to row 2 of `eof`'s gate and on to
+  `tc2`'s metal (7837,6400); firm, resting on two joins read without `?`: `notes/blocks/eofw.md`,
+  Ambiguities 1 and 2). No driver was met on any of it; "believed a chip-wide inverted clock" stands
+  untested.
+- **`lc1_w7170`'s driver is found** (`lc3`, run 2b): `lc1_w7170` = NOT `lc3_w9470`, the lower inverter of
+  `lc3`'s gate pair; `lc3_w9470` comes from a metal that enters `lc3` at (6450,9455).

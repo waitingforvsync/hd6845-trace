@@ -344,3 +344,14 @@ traced.
 - **Upper section** (9 rows) and the block at 4450-4780 x 8250-10500.
 - The lines right of Vm6 at full length; where Vm1, Vm2, Vm3, Vm5, Vm6 go in the
   routing channel below the array (y 18100-18480); the trunk of rail E up to a pad.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, second batch)
+
+- Rows that enter the region at its east edge x 4780 (`busl`, pieces `h8` and `ch1`; `larr` draws nothing
+  east of x 3900):
+  - eight **diffusion** rows at y 11338, 11815, 12291, 12768, 13247, 13725, 14202, 14894 carrying
+    `cdp3_hw_c7` .. `cdp3_hw_c0` (NOT q1 of `cdp3`'s register row H, bit by bit; driven in `cdp3`);
+  - seven **poly** rows at y 11488, 11922, 12442, 12984, 13397, 13874, 14351 carrying `cdp4_bus_s7` ..
+    `cdp4_bus_s1` (each is also `cdp4`'s row C latch input of that slice; which end drives is not known);
+    an eighth, y 15042 with its east end pad (5365,15042), carries `cdp4_bus_s0` once the last 45 px of
+    its track are drawn (south of `busl`'s region).

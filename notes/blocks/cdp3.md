@@ -360,3 +360,19 @@ Into parts not yet traced (the labels sit on the stubs):
   mirrored top to bottom, which the first run's search (two orientations) missed.
 - `tools/cdp3_prof.py --mode metal` needs `--thr 150`; with a lower threshold plain field
   counts as metal.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, second batch)
+
+- The channel G west pieces (`cdp3_hw_c7` .. `cdp3_hw_c0`, x 7600, y 10361 .. 10664) have their far
+  ends (`busl`, piece `h8`): each runs across the left bus field to a diffusion row of the left array at
+  x 4780, y 11338, 11815, 12291, 12768, 13247, 13725, 14202, 14894 (c7 northernmost).
+- The top unit of the gate column x 7460-7800 (y 7585-7860) is drawn by `eof` (piece `g7700`):
+  `tc2_r5589` = NOT(`lc1_w7170` AND (`inh_ck` OR `tc2_sr_g`)) in the names `eofw` joined it to.
+- Two wires of `tc2_sr_g` enter the gate column from a corner pad with a contact (7446,8732) (`eofw`): a
+  poly east at (7490, 8722-8745) and a metal south at (7458-7474, 8800). Not followed.
+- **Trace corrected** (geometry only): column 0's VSS rail `M 7623,8450 y11200 w=46` began 106 px too far
+  north. At y 8500 the ground at x 7612-7660 is bare in both metal shots (163/135/85, 139/113/74) and the
+  rail is the metal x 7552-7600; at x 7623 the metal begins at y 8556-8560 (`tools/px.py row 8500 7540
+  7660 8 metal,metal1`, `col 7623 8500 8590 8 metal,metal1`; seen independently by `eof`'s run 5 and by
+  `eofw`'s tracer). Now `M 7623,8556 y11200 w=46`; `tools/sameconn.py`: connections identical. The rail
+  north of there is the metal x 7552-7598, drawn by `eof` for y 7585-7860 and by nobody between.
