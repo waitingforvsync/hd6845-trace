@@ -4,7 +4,7 @@ import { buildSteps } from './steps.js';
 
 const $ = id => document.getElementById(id);
 // three.js comes from a CDN. If it cannot load, the viewers say so and everything else still works.
-let THREE, PhotoViewer, PhotoViewer2D, StackViewer, LAYER_COLOUR, pointInRing;
+let THREE, PhotoViewer, PhotoViewer2D, GL, StackViewer, LAYER_COLOUR, pointInRing;
 const LAYER_NAME = { M: 'Metal', P: 'Poly', D: 'Diffusion', C: 'Metal contact', B: 'Buried contact', T: 'Transistor channel' };
 class Stub {
   constructor(el, why) {
@@ -17,7 +17,7 @@ class Stub {
 }
 try {
   THREE = await import('three');
-  ({ PhotoViewer, PhotoViewer2D, LAYER_COLOUR, pointInRing } = await import('./photo.js'));
+  ({ PhotoViewer, PhotoViewer2D, GL, LAYER_COLOUR, pointInRing } = await import('./photo.js'));
   ({ StackViewer } = await import('./stack.js'));
 } catch (err) {
   console.warn('three.js unavailable:', err);
@@ -26,12 +26,23 @@ try {
   pointInRing = () => false;
 }
 // A viewer that cannot start (no WebGL, say) must not take the rest of the page down with it.
+// Some older GPUs refuse a context that asks for antialiasing (WebGL elsewhere on the machine still works):
+// retry once without it, and keep that setting for every later viewer.
+function construct(C, el, o) {
+  try { return new C(el, o); } catch (err) {
+    if (!GL || !GL.antialias) throw err;
+    console.warn('WebGL failed, retrying without antialiasing:', err);
+    el.querySelectorAll(':scope > .pv-canvas, :scope > canvas').forEach(n => n.remove());
+    GL.antialias = false;
+    return new C(el, o);
+  }
+}
 const guard = C => C === Stub ? C : function (el, o) {
-  try { return new C(el, o); } catch (err) { console.warn('viewer failed:', err); return new Stub(el, String(err && err.message || err).split('\n')[0]); }
+  try { return construct(C, el, o); } catch (err) { console.warn('viewer failed:', err); return new Stub(el, String(err && err.message || err).split('\n')[0]); }
 };
 // No WebGL: the photo views fall back to a 2D canvas; the 3D stacks say they cannot start.
 const guardPhoto = C => C === Stub ? C : function (el, o) {
-  try { if (/[?&]canvas2d\b/.test(location.search)) throw new Error('2D canvas requested'); return new C(el, o); } catch (err) {
+  try { if (/[?&]canvas2d\b/.test(location.search)) throw new Error('2D canvas requested'); return construct(C, el, o); } catch (err) {
     console.warn('WebGL unavailable, using a 2D canvas:', err);
     el.querySelectorAll(':scope > .pv-canvas').forEach(n => n.remove());
     try { return new PhotoViewer2D(el, o); } catch (e2) { return new Stub(el, String(e2.message).split('\n')[0]); }

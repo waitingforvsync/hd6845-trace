@@ -19,6 +19,8 @@ export function pointInRing(x, y, ring) {
   return inside;
 }
 
+/** Context options shared by every viewer; the page drops antialiasing and retries if the first attempt fails. */
+export const GL = { antialias: true };
 const loader = new THREE.TextureLoader();
 const texCache = new Map();
 // One texture per URL, shared by every viewer; each viewer that asks hears when it has loaded.
@@ -87,7 +89,7 @@ export class PhotoViewer {
   }
 
   _gfx(tiles) {
-    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, preserveDrawingBuffer: true });
+    this.renderer = new THREE.WebGLRenderer({ antialias: GL.antialias, alpha: false, preserveDrawingBuffer: true });
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     this.renderer.setClearColor(0x14130f, 1);
     this.canvasBox.appendChild(this.renderer.domElement);
