@@ -86,7 +86,30 @@ and salmon colour persisting along a cut: a diffusion without poly under the pla
 
 ## Review
 
-(to come)
+**Round 1: full review** (2026-11-19 13:23 -0600; a fresh Claude Fable 5.2 reviewer; trace at commit 5748a9e; images
+`cache/scratch/tlb/review-1/`, 21 used). Covered the whole package. Told to suspect: the 1,300 px rows under the
+plane (a step, a swap, a tap), the corners at both ends of each row, the junctions with the neighbours' stubs
+at y 2500-2506, the two crossings under the metal y 2142 and the metal y 2098 (the candidate at x 4370),
+anything else under the plane, the plane's lower edge and the tab.
+
+Checked: the rows with `tlb_scan.py v` at 70 cuts (every 20 px, x 5860-7240) and in the clean shot at 3.2x
+end to end, chip 1's metal at 1x for the edge lines printing through; both corners at 4.5x in both stripped
+shots; every junction with a neighbour's stub at 5x in three shots with all traces outlined (the ring at
+(7210,2510) and one at (4540,2480) are in the clean shot only: not contacts); both pads (bright centre in both
+metal shots, green hole in the clean shot); both crossings under y 2142 (two edge lines only, text map); the
+metal y 2098 at 2.2x in both metal shots and with the follower; the field round both pads (the other
+package's poly pad north of (3458,2096) ends at y 2062, a field stripe y 2068-2074 in all four shots); under
+the plane with four 1x views and about 96 scan cuts; the rims; the tab at 5x (metal continuous with the plane,
+`sl_eq_r5_n` passes under it in poly); the extraction and `unsure.py`.
+
+Findings: none.
+
+Not checked: the rows between the corners at 4x in a chip-2 shot (fringed there: their straightness rests on
+the clean shot and chip 1's metal print-through); a diffusion with no poly under the plane (excluded only by
+the absence of outlines in chip 1's metal at 1x); the neighbours' own naming of their stubs; the plane east of
+x 7430.
+
+Round 1: no findings.
 
 ## Not done
 
