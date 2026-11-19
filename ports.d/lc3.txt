@@ -23,12 +23,12 @@ lc2_w9079   M  6379-6393,10400   out  the same net: crossing row 7 to the pad (6
 lc2_w8450   P  5530-5552,10400   ?    the poly of the END pad (5540,10165) of lc2_w8450's metal runs on south
 lc2_w9125   P  6450,9526-9548    out  lc2's AND-OR-INVERT's output: poly south and east, under the corner bundle's first metal
 lc3_m5756   P  6450,9979-10001   ?    crossing row 10, from the END pad (5646,9992) of lc3_m5756, east
-lc3_w9470   M  6450,9448-9462    in   the fifth line of the corner bundle: the lower inverter's input (by crossing row 8 and the pad (6298,9884))
-lc3_w9470   M  6292-6306,10400   ?    the same metal runs on south through its pad
+rst_c   M  6450,9448-9462    in   the fifth line of the corner bundle: the lower inverter's input (by crossing row 8 and the pad (6298,9884))
+rst_c   M  6292-6306,10400   ?    the same metal runs on south through its pad
 lc3_w9947   M  6205-6219,10400   ?    stage B0's clock (lc2_x6432) runs on south through its pad (6211,9948)
-inh_src   M  6075-6089,10400   ?    lc2's first through line, south on x 6082
-lc2_x6342   M  6118-6132,10400   ?    lc2's second through line, south on x 6125
-lc2_x6387   M  6162-6176,10400   ?    lc2's third through line, south on x 6169
+rst_a   M  6075-6089,10400   ?    lc2's first through line, south on x 6082
+res_b   M  6118-6132,10400   ?    lc2's second through line, south on x 6125
+lpstb_b   M  6162-6176,10400   ?    lc2's third through line, south on x 6169
 lc2_w8907   M  6250-6264,10400   ?    the clear: crossing row 11 to the pad (6257,10036), metal south
 lc3_e9756   M  6450,9749-9763    ?    a metal from the east, south on x 6342
 lc3_e9756   M  6335-6349,10400   ?    the same

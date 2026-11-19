@@ -222,10 +222,10 @@ M 13711,17082 x13467 w=18           # metal west along y 17082
 C 13480,17083
 P 13464,17067:13496,17098
 P 13480,17083 y17150 w=18           # poly south, leaving the region (seen to y 17145)
-N P 13480,17145 inh_src
+N P 13480,17145 rst_a
 P [ 13640,16220 13802,16220 13846,16184 13890,16184 13890,16205 13853,16205 13812,16243 13640,16243 ]
 P 13886,16183:13926,16258          # the block at its east end
-N P 13700,16232 inh_src
+N P 13700,16232 rst_a
 # --- diffusion under the rail: X above the gate, ground below
 D 13817,16154:13888,16275
 C 13855,16250 s=22x34              # ground rail to source
@@ -372,7 +372,7 @@ N M 13957,15650 bd1_n1
 ?B 13894,15558:13926,15576
 ?D 13896,15560:13924,15570
 
-# --- pull-down of bd1_k gated by inh_src, on a strip under bd1_an's metal
+# --- pull-down of bd1_k gated by rst_a, on a strip under bd1_an's metal
 D 13773,15634:13804,15730          # strip: top segment, channel under g (y 15661-15681), lower segment
 ?D 13800,15634:13830,15650         # top segment to the ground diffusion through the gap between the two metals (see notes)
 B 13768,15699:13792,15733          # lower segment to the poly from the west
@@ -383,7 +383,7 @@ M 13674,15702 y15988 w=20          # bd1_k south on x 13674 to a contact at 1367
 N M 13674,15800 bd1_k
 C 13674,15975
 P 13658,15960:13692,16008
-P 13522,15997 x13690 w=20          # poly west under inh_src's and X's metal (4.3x metal view)
+P 13522,15997 x13690 w=20          # poly west under rst_a's and X's metal (4.3x metal view)
 P 13506,15982:13540,16014
 C 13522,15999
 M 13521,15986 y16273 w=20          # ... and south on k10's position (scan: metal to y 16273; lower end not traced)

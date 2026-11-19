@@ -42,11 +42,11 @@ only, no uncertain items:
   keep their order through two staircases (y 11491-11880 and y 12380-12772) and turn east along
   y 14916-14528, the westernmost lowest. Seven end on a poly pad (x 6320-6409) whose poly row runs east
   under the next thirty tracks: `lc3_e9798` on the row y 14567, `lc2_w9079` on 14611, `lc3_e9756` on
-  14654, **`lc3_w9470` (the input of the inverter that drives `lc1_w7170`) on 14697**, `lc2_w8450`
+  14654, **`rst_c` (the input of the inverter that drives `lc1_w7170`) on 14697**, `lc2_w8450`
   (the ripple counter's clear) on 14740, **`lc3_w9947` (the ripple counter's clock, `lc2_x6432`) on
-  14784**, and `inh_src` on 14914. The rows are drawn to the region's edge at x 7550; they run on
+  14784**, and `rst_a` on 14914. The rows are drawn to the region's edge at x 7550; they run on
   240-290 px to pads at x about 7790 and 7835, the west ends of `bc1`'s 13 bus metals (seen, not drawn:
-  `bc1`'s region). `lc2_x6342` and `lc2_x6387` turn south instead (x 6366, x 6408) and leave the
+  `bc1`'s region). `res_b` and `lpstb_b` turn south instead (x 6366, x 6408) and leave the
   region at y 15000. No line has a pad or contact between y 10400 and its end.
 
 Run 4 (richtw1's session, Claude Fable 5.2; 2026-11-19 17:02 to 17:20 +0100). One piece, `ctl`, wiring
@@ -246,12 +246,12 @@ wide, drawn 14; all rows poly, 23-24 px between their edge lines):
 
 | Line | Net | x from y 10400 | Step west at y | x | Step west at y | x | East along y | End |
 |---|---|---|---|---|---|---|---|---|
-| 1 | `inh_src` | 6082 | 11491 | 5908 | 12380 | 5844 | 14916 | pad, contact (6320,14914); poly row y 14914 east |
-| 2 | `lc2_x6342` | 6126 | 11534 | 5953 | 12424 | 5888 | 14874 | turns south at x 6366; leaves the region at (6366,15000) |
-| 3 | `lc2_x6387` | 6169 | 11577 | 5996 | 12466 | 5932 | 14830 | turns south at x 6408; leaves the region at (6408,15000) (the follower runs on to y 15150) |
+| 1 | `rst_a` | 6082 | 11491 | 5908 | 12380 | 5844 | 14916 | pad, contact (6320,14914); poly row y 14914 east |
+| 2 | `res_b` | 6126 | 11534 | 5953 | 12424 | 5888 | 14874 | turns south at x 6366; leaves the region at (6366,15000) |
+| 3 | `lpstb_b` | 6169 | 11577 | 5996 | 12466 | 5932 | 14830 | turns south at x 6408; leaves the region at (6408,15000) (the follower runs on to y 15150) |
 | 4 | `lc3_w9947` | 6212 | 11622 | 6040 | 12506 | 5975 | 14787 | pad (6406,14784); row y 14784 |
 | 5 | `lc2_w8450` | 6256 | 11664 | 6083 | 12553 | 6018 | 14744 | pad (6365,14741); row y 14740 |
-| 6 | `lc3_w9470` | 6299 | 11708 | 6126 | 12596 | 6061 | 14700 | pad (6408,14696); row y 14697 |
+| 6 | `rst_c` | 6299 | 11708 | 6126 | 12596 | 6061 | 14700 | pad (6408,14696); row y 14697 |
 | 7 | `lc3_e9756` | 6342 | 11752 | 6169 | 12640 | 6105 | 14656 | pad (6365,14655); row y 14654 |
 | 8 | `lc2_w9079` | 6386 | 11794 | 6212 | 12683 | 6148 | 14613 | pad (6409,14612); row y 14611 |
 | 9 | `lc3_e9798` | 6429 | 11838 | 6256 | 12726 | 6191 | 14570 | pad (6363,14568); row y 14567 |
@@ -300,7 +300,7 @@ wide, drawn 14; all rows poly, 23-24 px between their edge lines):
   14654 to (7790,14654), 14697 to (7835,14697), 14740 to (7790,14740), 14784 to (7835,14784), 14827 to
   (7790,14827), 14870 to (7835,14870); row 14914 goes on to a pad with a contact (7880,14914), from which
   `bc1`'s track x 7969 runs south: drawn by `eof` (piece `isrc4`, 2026-11-19), which finds that **line 1 is
-  `inh_src`** (its name here until the refresh of 2026-11-19 is under Former names in the glossary). These are the west ends of
+  `rst_a`** (its name here until the refresh of 2026-11-19 is under Former names in the glossary). These are the west ends of
   `bc1`'s thirteen bus metals (`notes/blocks/bc1.md`: y 14354 .. 14873, x 7780-8280).
 
 Piece `ctl` (pad contacts with `tools/busl_padc.py` in both metal shots; row centres with
@@ -591,13 +591,13 @@ Piece `lc9`. Traced (no uncertain item of this package on any of the nine nets; 
 `lc2_w8450` rests on an uncertain box of `lc2`'s, Ambiguity 8): each line is one metal from
 `lc3`'s south edge to its end, with no contact on the way, so nothing in the field drives or loads
 them. Seven go on as poly rows toward the bottom-centre logic's bus: **the ripple counter's clock
-`lc3_w9947` (row y 14784), `lc3_w9470`, whose inverse is `lc1_w7170` (row y 14697), the counter's
+`lc3_w9947` (row y 14784), `rst_c`, whose inverse is `lc1_w7170` (row y 14697), the counter's
 clear `lc2_w8450` = NOT `lc1_w7170` (row y 14740), `lc2_w9079` = NOT `lc3_w9299` (row y 14611),
-`lc3_e9756` (14654), `lc3_e9798` (14567) and `inh_src` (14914)**; `rcs_e4` (the step logic's NOR,
-`tla`) is the row above them (14523). Two (`lc2_x6342`, `lc2_x6387`) go on south into `bl0`'s ground.
+`lc3_e9756` (14654), `lc3_e9798` (14567) and `rst_a` (14914)**; `rcs_e4` (the step logic's NOR,
+`tla`) is the row above them (14523). Two (`res_b`, `lpstb_b`) go on south into `bl0`'s ground.
 Not traced: what is at the far end of any of them (the rows' pads at x 7790/7835 and the bus metals are
-`bc1`'s; `lc3_w9470` and `lc3_e9756`, `lc3_e9798` also have ends east of `lc3` in the northern part).
-Believed: the clock of the ripple counter and `lc3_w9470` are driven in the bottom-centre logic, and
+`bc1`'s; `rst_c` and `lc3_e9756`, `lc3_e9798` also have ends east of `lc3` in the northern part).
+Believed: the clock of the ripple counter and `rst_c` are driven in the bottom-centre logic, and
 `lc2_w8450` and `lc2_w9079`, which have their drivers in the left-centre strips (`lc2_w8450`'s through
 `lc2`'s uncertain box), are inputs there.
 
@@ -662,9 +662,9 @@ not known: named for their place (`busl_x6820`, `busl_x6906`).
 | `cdp4_bus_s7` .. `cdp4_bus_s1` | P | x 4780, y 11488, 11922, 12442, 12984, 13397, 13874, 14351 | not known | poly rows on west into the left array (`larr` draws nothing east of x 3900) |
 | `cdp4_bus_s0` | M | (5451,15000), 16 px wide | not known | the track goes on 45 px to a pad (5365,15042) on a poly row from the west (`bl0`) |
 | `cdp3_hw_c7` .. `cdp3_hw_c0` | D | x 4780, y 11338, 11815, 12291, 12768, 13247, 13725, 14202, 14894 (20 px wide) | in (driven in `cdp3`) | on west into the left array's rows; `larr` draws nothing east of x 3900 |
-| `inh_src`, `lc2_x6342`, `lc2_x6387`, `lc3_w9947`, `lc2_w8450`, `lc3_w9470`, `lc3_e9756`, `lc2_w9079`, `lc3_e9798` | M | y 10400, x 6082, 6126, 6169, 6212, 6256, 6299, 6342, 6386, 6429 (14 px wide) | `lc2_w8450`, `lc2_w9079`: in (driven in `lc2`, `lc3`; for `lc2_w8450` through `lc2`'s uncertain box, Ambiguity 8); the others not known | `lc3`'s nine metals at its south edge (its file ends them at y 10400; it calls the fifth `lc2_w8907`) |
-| `lc3_e9798`, `lc2_w9079`, `lc3_e9756`, `lc3_w9470`, `lc2_w8450`, `lc3_w9947`, `inh_src` | P | x 7550, y 14567, 14611, 14654, 14697, 14740, 14784, 14914 (24 px wide) | as above | poly rows on east 240-290 px to pads at x about 7790 / 7835 under `bc1`'s 13-line bus metals (not drawn) |
-| `lc2_x6342`, `lc2_x6387` | M | (6366,15000), (6408,15000), 14 px wide | not known | tracks on south into `bl0`'s ground (line 3 seen to y 15150) |
+| `rst_a`, `res_b`, `lpstb_b`, `lc3_w9947`, `lc2_w8450`, `rst_c`, `lc3_e9756`, `lc2_w9079`, `lc3_e9798` | M | y 10400, x 6082, 6126, 6169, 6212, 6256, 6299, 6342, 6386, 6429 (14 px wide) | `lc2_w8450`, `lc2_w9079`: in (driven in `lc2`, `lc3`; for `lc2_w8450` through `lc2`'s uncertain box, Ambiguity 8); the others not known | `lc3`'s nine metals at its south edge (its file ends them at y 10400; it calls the fifth `lc2_w8907`) |
+| `lc3_e9798`, `lc2_w9079`, `lc3_e9756`, `rst_c`, `lc2_w8450`, `lc3_w9947`, `rst_a` | P | x 7550, y 14567, 14611, 14654, 14697, 14740, 14784, 14914 (24 px wide) | as above | poly rows on east 240-290 px to pads at x about 7790 / 7835 under `bc1`'s 13-line bus metals (not drawn) |
+| `res_b`, `lpstb_b` | M | (6366,15000), (6408,15000), 14 px wide | not known | tracks on south into `bl0`'s ground (line 3 seen to y 15150) |
 | `cdp4_sel1`, `cdp4_sel2`, `cdp4_sel3`, `cdp4_sel4` | P | x 7600, y 12225, 12485, 12528, 12788 (23 px wide) | in (driven from south of y 15000) | `cdp4`'s select rows, drawn there from x 7600 |
 | `cdp4_sel1`, `cdp4_sel3`, `cdp4_sel4`, `cdp4_sel2` | P | x 7550, y 13701, 13809, 13961, 14004 (24 px wide) | in | poly rows on east 40-100 px to gate bands on the diffusion column of `cdp4`'s corner gate group (not drawn; sel1's steps 12 px north at x 7548) |
 | `cdp4_sel1`, `cdp4_sel2`, `cdp4_sel3`, `cdp4_sel4` | M | y 15000, x 6538, 6581, 6624, 6668 (14 px wide) | in | tracks on south into `bl0`'s ground (followed to y about 16150-16190) |
@@ -708,7 +708,7 @@ not known: named for their place (`busl_x6820`, `busl_x6906`).
 4. **Metal lying on a poly row without a pad** (the steps of the staircase x 6790-7140 over channel 2's
    rows; the steps of a second staircase at x 6290-6740 over channel 1's rows, about 180 px each; the track x 7511 over s0's poly column, y 12920-13332; a track x 5843 that begins 35 px south
    of s4's pad (5843,12335) and lies on s4's poly for about 100 px: it is line 1 of piece `lc9`,
-   `inh_src`, after its second step; one step of the staircase x 7130-7440, 80 px on `cdp4_sel3`'s row y 13809 at x 7267-7347, piece `ctl`: it is line 3 of piece `d6`, `cdp3_g_c4`; line 4's arm, `cdp3_g_c5`, lies the same way on the undrawn row y 13852 at x 7310-7390). Readings: a contact somewhere
+   `rst_a`, after its second step; one step of the staircase x 7130-7440, 80 px on `cdp4_sel3`'s row y 13809 at x 7267-7347, piece `ctl`: it is line 3 of piece `d6`, `cdp3_g_c4`; line 4's arm, `cdp3_g_c5`, lies the same way on the undrawn row y 13852 at x 7310-7390). Readings: a contact somewhere
    along the overlap; or none. Assumed none: no pad, no ring, no green hole in the clean shot on any
    (measurements under piece `ch1` above; guide, trap 13). A contact would join one of these eight
    nets to another track's net.

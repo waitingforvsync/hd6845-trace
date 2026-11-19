@@ -166,11 +166,11 @@ the cell's four equations, with `lc3_w9947` as the clock.
 
 **What the gate pair does** (its two inverters were drawn in run 1; their wires are followed here):
 
-- `lc1_w7170` = NOT `lc3_w9470`. The lower inverter's output row (y 9418-9440) runs west from its box under the
+- `lc1_w7170` = NOT `rst_c`. The lower inverter's output row (y 9418-9440) runs west from its box under the
   tracks x 5509-5527 and x 5465-5481 (no pad on either; both metals whole) to the second pad (5428,9428) of track
   A' (`gp_*.png`, 4x, three shots). Track A' is `lc1_w7170` (`lc2`'s staircase line `lc2_w8474`): **this inverter
   is the driver of `lc1_w7170`** (`eof`'s task (f)), the line that gates the slaves of all five counter stages,
-  whose inverse `lc2_w8450` clears their masters and whose other inverse is `rcs_x1`. Its input `lc3_w9470`: the
+  whose inverse `lc2_w8450` clears their masters and whose other inverse is `rcs_x1`. Its input `rst_c`: the
   metal x 5549-5571 runs south from the pad (5560,9470) to an END pad (5558,9882); the pad's poly is crossing row
   8, which ends on a pad (6298,9884) of the "fifth line" of the corner bundle (below): a metal that enters the
   strip from the east at y 9455 and runs on south.
@@ -183,8 +183,8 @@ the cell's four equations, with `lc3_w9947` as the clock.
   `lc2_w9125`'s own poly (x 5922-5944 from `lc2`) runs south to y 9537 and east along y 9526-9548, under the first
   metal of the corner bundle from x 6070 (`xp2.png`, 4x, three shots), and leaves east.
 
-Equations on main: `lc3_w9432 = NOT lc3_w9470` and `lc3_w9337 = NOT lc3_w9299` now print as `lc1_w7170 = NOT
-lc3_w9470` and `lc2_w9079 = NOT lc3_w9299` (**outputs identified; no logic changed**, no transistor added or
+Equations on main: `lc3_w9432 = NOT rst_c` and `lc3_w9337 = NOT lc3_w9299` now print as `lc1_w7170 = NOT
+rst_c` and `lc2_w9079 = NOT lc3_w9299` (**outputs identified; no logic changed**, no transistor added or
 removed: `tools/sameconn.py 74d0d5a` lists only the three name joins and their consequences). Stage B0's four
 equations keep the name `lc3_w9947` for its clock (`lc2_x6432` is its alias).
 
@@ -194,7 +194,7 @@ equations keep the name `lc3_w9947` for its clock (`lc2_x6432` is its alias).
 |---|---|---|
 | `rst_n` | metal x 5465-5481 from `lc2`, straight south | END pad (5473,10207); its poly runs on south (x 5464-5486), drawn to y 10400 |
 | `lc2_w9079` | metal x 5509-5527 from `lc2`, pad (5517,9340) (the upper inverter's output) | END pad (5517,9838), row 7 east |
-| `lc3_w9470` | metal x 5549-5571 south from the pad (5560,9470) | END pad (5558,9882), row 8 from the east |
+| `rst_c` | metal x 5549-5571 south from the pad (5560,9470) | END pad (5558,9882), row 8 from the east |
 | `lc2_w8450` (label `lc3_m5626`) | metal x 5617-5635 from `lc2` over the pair, a step west at y 9600 to x 5595-5613, south to y 10078, west to x 5531-5549 | END pad (5540,10165); its poly runs on south (x 5530-5552), drawn to y 10400 |
 | `lc3_m5756` | metal x 5747-5765 from `lc2` over the pair, diagonal south-west (y 9555-9664) to x 5638-5656 | END pad (5646,9992), row 10 east |
 | `vss` | the pair's rail x 5665-5711 | ends at y 9530 below its contact (5680,9505) |
@@ -207,16 +207,16 @@ in from the east edge.
 
 | Line | Enters | Step west | Turns west at y | South on x | Pad on it |
 |---|---|---|---|---|---|
-| `inh_src` | (6299,9233) | y 9280 to x 6255 | 9538 | 6082 | none |
-| `lc2_x6342` | (6342,9233) | y 9322 to x 6299 | 9581 | 6125 | none |
-| `lc2_x6387` | (6386,9233) | y 9366 to x 6342 | 9626 | 6169 | none |
+| `rst_a` | (6299,9233) | y 9280 to x 6255 | 9538 | 6082 | none |
+| `res_b` | (6342,9233) | y 9322 to x 6299 | 9581 | 6125 | none |
+| `lpstb_b` | (6386,9233) | y 9366 to x 6342 | 9626 | 6169 | none |
 | `lc2_x6432` | (6430,9233) | y 9410 to x 6386 | 9669 | 6212 | (6211,9948): row 9, **stage B0's clock** |
-| `lc3_w9470` (the fifth line) | (6450,9455) | to x 6429 | 9712 | 6299 | (6298,9884): row 8, the lower inverter's input |
+| `rst_c` (the fifth line) | (6450,9455) | to x 6429 | 9712 | 6299 | (6298,9884): row 8, the lower inverter's input |
 | `lc3_e9756` | (6450,9756) | - | - | 6342 | none |
 | `lc3_e9798` | (6450,9798) | - | - | 6428 | none |
 
 The metal runs on through each of the two pads (`xp1.png`, 4x: metal north and south of both), so
-`lc2_x6432`/`lc3_w9947` and `lc3_w9470` also leave south. The vacated track positions north of each step read as
+`lc2_x6432`/`lc3_w9947` and `rst_c` also leave south. The vacated track positions north of each step read as
 17 px "holes" in `tl5_tracks.py` ((6299,9298), (6342,9341), (6386,9385), (6428,9428)): open ground, not pads.
 
 **The crossing field** (x 5480-6450, y 9560-10050): eleven poly rows under the vertical metals, all poly over
@@ -228,7 +228,7 @@ contacts (`textmap.py 6060 9728 6106 9772 3 --acid`: metal whole in both chips, 
 |---|---|---|---|
 | 1-6 | 9577, 9621, 9665, 9708, 9750, 9793 | pads (6037,9581), (5993,9623), (5950,9667), (5908,9711), (5865,9754), (5822,9797): the tops of six vertical metals (a staircase) | the east edge (`lc3_e9577` ... `lc3_e9793`) |
 | 7 | 9838 | END pad (5517,9838) of `lc2_w9079`'s track | pad (6386,9840), metal x 6379-6393 south |
-| 8 | 9880 | END pad (5558,9882) of `lc3_w9470`'s track | pad (6298,9884) on the fifth line |
+| 8 | 9880 | END pad (5558,9882) of `rst_c`'s track | pad (6298,9884) on the fifth line |
 | 9 | 9947 | stage B0's clock pad (5298,9990) | pad (6211,9948) on `lc2_x6432` |
 | 10 | 9990 | END pad (5646,9992) of `lc3_m5756` | the east edge |
 | 11 | 10033 | END pad (5386,9990) of track B' (the clear, `lc2_w8907`) | pad (6257,10036), metal x 6250-6264 south |
@@ -266,7 +266,7 @@ x 5612-5640.
 
 ## Ports
 
-`ports.d/lc3.txt` has every port with its place. Gate pair: inputs `lc3_w9470` (metal x 5560, south edge y 9520)
+`ports.d/lc3.txt` has every port with its place. Gate pair: inputs `rst_c` (metal x 5560, south edge y 9520)
 and `lc3_w9299` (metal x 5560, north edge y 9255); outputs `lc3_w9432`, `lc3_w9337` (poly rows at x 5540); `vss`
 (x 5665-5712), `vcc` (wide metal x 5840-5890, named from the loads). Counter stages: the joins to `lc2` at
 y 9180-9256 and to `eof`'s `ff3` (track C at y 9970-9990, track B) are made by overlapping metal; stage B0's
@@ -276,7 +276,7 @@ clock and the clear cross the field east to their pads; the wires that leave the
 ## Gate pair at 6x (2026-11-18, claude-opus)
 
 Drawn as one cell `lc3_inv` (the lower gate) and its mirror about y 9384.5. Extraction
-(4 transistors): `lc3_w9432 = NOT lc3_w9470`, `lc3_w9337 = NOT lc3_w9299`;
+(4 transistors): `lc3_w9432 = NOT rst_c`, `lc3_w9337 = NOT lc3_w9299`;
 `unsure.py --equations`: both FIRM after review round 1 (0 `?` items).
 
 Review round 1 fixes (checked by the tracer at 5x, metal | metal1 | acid1b | acid, `fix1.png`
@@ -342,7 +342,7 @@ before every connection could be read in two shots and the gates profiled.
 ## Not done
 
 1. Where the wires drawn to the strip's edges go: east (rows 1-6 and 10, `lc2_w9125`'s poly, the fifth line
-   `lc3_w9470`, `lc3_e9756`, `lc3_e9798`: `busl`'s northern part) and south (every vertical of the crossing
+   `rst_c`, `lc3_e9756`, `lc3_e9798`: `busl`'s northern part) and south (every vertical of the crossing
    field, the six diagonals, the polys of `rst_n` and `lc2_w8450`, the VCC metal, the three rails: `busl`).
 2. `lc3_w9299`'s source (north, through `lc2` into `lc1`).
 3. West of x 4580 (`urch`'s channel and `eof`'s corner): the metal x 4420-4442, the tan boxes under track A
@@ -502,7 +502,7 @@ Round 5: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, third batch)
 
-- Line 1 of the nine metals at y 10400 (x 6082) **is `inh_src`** (`eof` run 9; renamed by the refresh
+- Line 1 of the nine metals at y 10400 (x 6082) **is `rst_a`** (`eof` run 9; renamed by the refresh
   of 2026-11-19).
 - `lc3_e9798`, "a metal from the east" at (6450,9798) (`ports.d/lc3.txt`): the metal runs east only to
   x about 6515 and turns north there on a track x 6514 (followed to y 9532, end not read;

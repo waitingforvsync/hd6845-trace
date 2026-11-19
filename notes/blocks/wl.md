@@ -68,7 +68,7 @@ inverse, made by input-row gate 0, is the clock block's `inh_ck`: so `a` and `in
 two copies of one signal, `NOT X`). In the clock block a high `inh_ck` holds `ck_b` low.
 Here a high `a` holds `p` low. So **one core signal stops both the horizontal counter's
 master clock and the row counter's step**; what it is has still to be found at its source
-(bd1's `inh_src`, which comes from the bottom bus field). While `a` is low, `p = NOT b`: the
+(bd1's `rst_a`, which comes from the bottom bus field). While `a` is low, `p = NOT b`: the
 row counter steps on a low pulse of `b`.
 
 ## The two inverters

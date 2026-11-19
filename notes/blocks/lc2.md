@@ -603,9 +603,9 @@ their x at the south edge.
 
 | Line | Enters (east edge) | Path | Leaves (south edge) |
 |---|---|---|---|
-| `inh_src` | y 8630 | diagonal south-west to x 6342 at y 8738, south, west at y 9034 | x 6299 |
-| `lc2_x6342` | y 8692 | diagonal to x 6385 at y 8757, south, west at y 9076 | x 6342 |
-| `lc2_x6387` | y 8756 | diagonal to x 6428 at y 8778, south, west at y 9121 | x 6387 |
+| `rst_a` | y 8630 | diagonal south-west to x 6342 at y 8738, south, west at y 9034 | x 6299 |
+| `res_b` | y 8692 | diagonal to x 6385 at y 8757, south, west at y 9076 | x 6342 |
+| `lpstb_b` | y 8756 | diagonal to x 6428 at y 8778, south, west at y 9121 | x 6387 |
 | `lc2_x6432` | y 9165 | west to x 6432, south | x 6432 |
 
 `tl5_tracks.py h Y 6280 6450 --half 2` at y 8600, 8640 ... 9150 (14 heights: the metals' x at each);
@@ -675,7 +675,7 @@ Run 3 (latch D's lower unit and the bus field):
 | `lc2_w8907` | M | 4508-4526, 8700 | ? | run 8: drawn end: track B runs on south (no pad to y 9150) |
 | `lc2_w8475` | M | 4553-4575, 9190 | in | run 9: drawn end: the clock's L-shaped metal, from the south |
 | `lc2_w9034` | M | 5247-5263, 9233 | out | run 10: the second flip-flop's slave output, south into `lc3` |
-| `inh_src`, `lc2_x6342`, `lc2_x6387`, `lc2_x6432` | M | 6450, y 8630, 8692, 8756, 9165 | ? | run 10: the four through lines at the east edge |
+| `rst_a`, `res_b`, `lpstb_b`, `lc2_x6432` | M | 6450, y 8630, 8692, 8756, 9165 | ? | run 10: the four through lines at the east edge |
 | the same four | M | x 6299, 6342, 6387, 6432; 9233 | ? | run 10: at the south edge, into `lc3` |
 | `lc2_w9079` | M | 5509-5527, 9233 | in | run 10: row 3's thin metal, from `lc3` |
 | `lc2_w9210` | M | 5334-5350, 9233 | in | run 10: row 5's metal, from `lc3` |
@@ -1427,7 +1427,7 @@ Round 18: no findings that change a connection.
   `lc3_w9299` OR `lc2_w9210` AND `lc3_w9299`): a choice between the counter's fourth and fifth outputs.
 - `lc2_x6432` is the ripple counter's clock (`lc3_w9947`, by a poly row and one pad in `lc3`).
 - `lc2_w8474` / `lc1_w7170` ("its driver is not found"): driven by `lc3`'s lower inverter, `lc1_w7170`
-  = NOT `lc3_w9470`. Its metal north of (6341,8067) ends on a pad (6339,7824) whose poly is row 3 of
+  = NOT `rst_c`. Its metal north of (6341,8067) ends on a pad (6339,7824) whose poly is row 3 of
   `eof`'s gate `g7700`: a load (`eofw`).
 - `lc1_w7908`'s metal east of (6450,8259) is drawn by `eofw`: it is `tc2_sr_g` (see `lc1`'s corrections).
 - `rst_n`'s metal ends on a pad (5473,10207) with a poly south; `lc2_w8450`'s metal (`lc3_m5626`) ends
@@ -1436,7 +1436,7 @@ Round 18: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, third batch)
 
-- The first through line (x 6299 at the south edge; "through line", direction `?`) **is `inh_src`** (`eof` run 9, piece `isrc4`; renamed by
+- The first through line (x 6299 at the south edge; "through line", direction `?`) **is `rst_a`** (`eof` run 9, piece `isrc4`; renamed by
   the refresh of 2026-11-19): from `lc3`'s south edge it runs down the left bus field (`busl`, piece
   `lc9`) to the row y 14914 and `bc1`'s track x 7969. In the bottom-centre logic and `bd1` it only feeds
   gates, so its driver is at or beyond this block's east edge (6450,8630).

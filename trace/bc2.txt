@@ -51,7 +51,7 @@ P 10405,15079:10484,15096
 P 10378,15071:10414,15103
 C 10395,15087
 M 10395,15077 y15110 w=24
-N P 10450,15088 inh_src
+N P 10450,15088 rst_a
 # the output row carries the upper gate's node (with the thin metal x 10682)
 N P 10420,15001 bc2_w15000
 # NOT data (the inverter's output): the cell's thin metal x 10500 to the third pull-down of the lower gate

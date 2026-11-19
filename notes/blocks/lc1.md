@@ -424,8 +424,8 @@ Round 4: no findings that change a connection.
 ## Corrections (coordinator, from the handoffs of 2026-11-19)
 
 - "Two metals lie on [`lc1_w7040`'s row] lengthwise without contact: ... x 6098-6307": that metal is
-  `inh_ck` (`eof` run 2). Ports: `res_b` is `res_b`, `lpstb_b` is `lpstb_b`, `rcs_x1`
-  drives `rcs_x1`, `rst_a` is `rst_a`. "Believed, from the user: ... `rst_c` a chip-wide reset
+  `inh_ck` (`eof` run 2). Ports: the second through line is `res_b`, the third through line is `lpstb_b`, `rcs_x1`
+  drives `rcs_x1`, line X (the first through line of the left-centre strips) is `rst_a`. "Believed, from the user: ... `rst_c` a chip-wide reset
   of some kind": traced, it is a buffered NOR(`lpstb_b`, `res_b`); the believed "three buffered copies ...
   the pattern of `inh_ck`, `inh_rc`, `inh_lat`" does not hold: they are copies of the reset. Not in the
   ports: an undrawn poly (`tl5_w5936`) enters at about (5065-5083, 6900), beside and under M_a. The
@@ -455,8 +455,8 @@ Round 4: no findings that change a connection.
   `tc2`'s metal (7837,6400); firm, resting on two joins read without `?`: `notes/blocks/eofw.md`,
   Ambiguities 1 and 2). No driver was met on any of it; "believed a chip-wide inverted clock" stands
   untested.
-- **`lc1_w7170`'s driver is found** (`lc3`, run 2b): `lc1_w7170` = NOT `lc3_w9470`, the lower inverter of
-  `lc3`'s gate pair; `lc3_w9470` comes from a metal that enters `lc3` at (6450,9455).
+- **`lc1_w7170`'s driver is found** (`lc3`, run 2b): `lc1_w7170` = NOT `rst_c`, the lower inverter of
+  `lc3`'s gate pair; `rst_c` comes from a metal that enters `lc3` at (6450,9455).
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
 

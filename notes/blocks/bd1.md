@@ -8,7 +8,7 @@ Trace: `trace/bd1.txt` (`@requires sel`, `@requires bd3`). Coordinates are metal
   strobe that enters the region (R0 to R7 leave north on the track bundle, R8 west in poly);
   the two big inverters on line X; X's driver; and, new in the second run, **the gate column
   from y 15385 to 15850**: an inverter, the pull-down networks of both halves of a latch
-  (one half complete with its load and output line), and the pull-down that `inh_src` gates.
+  (one half complete with its load and output line), and the pull-down that `rst_a` gates.
 - **The region is mostly a routing channel**: 18 vertical metal tracks (x 13088-13826) with
   poly cross-unders. The gates are a single column at x 13700-14080, y 15100-16900.
 - NOT traced: the second latch half's load east of the ground rail (y 15640-15705), the
@@ -49,7 +49,7 @@ and is the quickest check.
 | Inverter pair on X | x 13765-14050, y 15120-15350 | two inverters, one ground contact between them (13838,15237) |
 | Inverter A | x 13860-14045, y 15385-15512 | `bd1_an` = NOT `rc_eq_r4`; pull-down east of the rail (gate P4), load block x 13936-13992 |
 | Latch, upper half | x 13700-14050, y 15468-15690 | node `bd1_n1`; pull-downs under the rail (P2, P3, G4), load block x 13938-13992, y 15523-15608 |
-| Pull-down of `bd1_k` | x 13773-13804, y 15634-15730 | strip under `bd1_an`'s metal, gate = `inh_src` |
+| Pull-down of `bd1_k` | x 13773-13804, y 15634-15730 | strip under `bd1_an`'s metal, gate = `rst_a` |
 | Latch, lower half | x 13797-13990, y 15705-15852 | node `bd1_n2`; pull-downs G5, G6 under the rail and a third (gate `bd1_n1`) east of it |
 | (not traced) | x 13876-13995, y 15640-15705 | N2's load and the driver of `bd1_q` |
 | (not traced) dense group | x 13740-13960, y 15880-16125 | `ck_out`'s tap at (13716,15930) enters here; several gate bars 20 px apart under the rail; a metal from X's driver ends here at a contact near (13928,15916) |
@@ -97,12 +97,12 @@ X is the line of `notes/blocks/trunks.md` (input of input-row gate 0, whose outp
 is distributed over the whole die). Here it is `inh_n`.
 
 ```
-inh_n   = NOT inh_src       X's driver, y 16125-16280
+inh_n   = NOT rst_a       X's driver, y 16125-16280
 inh_rc = NOT inh_n       upper inverter, gate bar y 15183-15203
 inh_lat = NOT inh_n       lower inverter, gate bar y 15271-15291
 ```
 
-- **X's driver** is one inverter. Pull-down: gate poly `inh_src` crossing the diffusion
+- **X's driver** is one inverter. Pull-down: gate poly `rst_a` crossing the diffusion
   under the ground rail diagonally (x 13817-13888), ground contact at (13855,16250).
   Output diffusion above the gate; it reaches X three ways: a buried contact at
   (13762-13800, 16170-16210) to the tap poly that runs west to the contact (13672,16190)
@@ -112,7 +112,7 @@ inh_lat = NOT inh_n       lower inverter, gate bar y 15271-15291
   a buried contact at its top (13953-13985, 16142-16174), supply contact (14017,16228).
   W/L of the load 68/37; of the pull-down 90/24 as certain, up to 188/26 with the two
   uncertain pieces (Ambiguities).
-- `inh_src` is on a metal line at x 13630 with a contact at each end. Top end,
+- `rst_a` is on a metal line at x 13630 with a contact at each end. Top end,
   (13629,15673): a poly goes east into the gate column along y 15671, crosses a 30 px
   wide diffusion strip (x 13772-13802, lying under the metal line on x 13782) and ends
   at x 13805 (5x view): so g is the **gate** of a small transistor there (the pull-down of
@@ -141,7 +141,7 @@ inh_lat = NOT inh_n       lower inverter, gate bar y 15271-15291
   latch below (next section).
 
 Believed: X, S (= NOT X, made by input-row gate 0), `inh_rc` and `inh_lat` are four
-separately buffered copies of one clock-like signal `NOT inh_src` and its inverse; all
+separately buffered copies of one clock-like signal `NOT rst_a` and its inverse; all
 three inverters here are the same size.
 
 ### Gate column, y 15385-15850: an inverter and a latch gated by `inh_lat` (traced, second run)
@@ -150,7 +150,7 @@ three inverters here are the same size.
 bd1_an = NOT rc_eq_r4
 bd1_n1 = NOT( rc_eq_r4 . inh_lat  +  bd1_q )                     upper half, complete
 bd1_n2 : pull-downs  bd1_an . inh_lat  +  bd1_n1  to vss       lower half; its load is not traced
-bd1_k  : pull-down  inh_src  to vss (source connection uncertain; its load is not in view)
+bd1_k  : pull-down  rst_a  to vss (source connection uncertain; its load is not in view)
 ```
 
 Under the ground rail one diffusion column carries, top to bottom: vss contact (13832,15461),
@@ -197,7 +197,7 @@ gate P2 (y 15488-15508, `rc_eq_r4`), a strip 18 px tall with no contact, gate P3
   across it; below the block a diffusion band y 15815-15833 runs back west to the vss
   contact's diffusion. Not traced: N2's load and its tie to `bd1_q` (north of the arm,
   x 13880-13995, y 15640-15705).
-- **`inh_src`'s transistor.** The poly along y 15671 crosses a diffusion strip x 13773-13804
+- **`rst_a`'s transistor.** The poly along y 15671 crosses a diffusion strip x 13773-13804
   that lies under `bd1_an`'s metal without touching it (31/20) and ends at x 13805. Below
   the gate the strip has a buried contact (13768-13792, 15699-15733) to a poly that goes west
   along y 15713 to a contact at (13674,15715): `bd1_k`, a metal line on x 13674 south to a
@@ -208,7 +208,7 @@ gate P2 (y 15488-15508, `rc_eq_r4`), a strip 18 px tall with no contact, gate P3
 Believed (not traced): `bd1_q` = `bd1_n2` (so `bd1_n2` = NOT(`bd1_an` . `inh_lat` + `bd1_n1`)
 with `bd1_q`'s band as its load gate).
 That makes the pair a transparent latch of `rc_eq_r4`: while `inh_lat` is high (X low,
-`inh_src` high) `bd1_n1` = NOT `rc_eq_r4` and `bd1_n2` = `rc_eq_r4`; while it is low both hold.
+`rst_a` high) `bd1_n1` = NOT `rc_eq_r4` and `bd1_n2` = `rc_eq_r4`; while it is low both hold.
 The layout supports it (the two halves mirror each other; `bd1_n1`'s line ends beside
 N2; the band of `bd1_q` lies where N2's load would be), but the wiring that would prove
 it (N2's load and the buried contact beside `bd1_q`'s band) is the untraced part. Neither `ck_out` nor any trunk clock reaches this latch: its
@@ -254,7 +254,7 @@ arm contact (13655,15453), poly west, contact (13520,15458), metal south on x 13
 contact (13520,15931), poly pad with a tail west along y 15959 under k8's line, contact
 (13432,15955), metal south on x 13435 towards y 16769.
 
-**Where `bd1_k` goes**: contact (13674,15975), poly west along y 15997 under `inh_src`'s and
+**Where `bd1_k` goes**: contact (13674,15975), poly west along y 15997 under `rst_a`'s and
 X's lines, contact (13522,15999), metal south on x 13521 to about y 16273.
 
 ## Ports
@@ -290,8 +290,8 @@ X's lines, contact (13522,15999), metal south on x 13521 to about y 16273.
 | wr_r8 | poly | 12985,17125 (west) | out | goes on west below the array's bottom row |
 | inh_n | metal | 13672,16610 (drawn to there) | out | line X; trunks.txt draws it from y 16600 south. Not labelled in trunks.txt: it reaches inrow's `inh_n` |
 | inh_n | metal | 13922,15905 (`?`) | ? | from the driver's output north into the dense group |
-| inh_src | poly | 13805,15671 | - | ends as the gate of `bd1_k`'s pull-down (inside the block) |
-| inh_src | poly | 13480,17150 (south) | in (believed) | X = NOT g; g has no driver in this region. Seen to y 17145, going south |
+| rst_a | poly | 13805,15671 | - | ends as the gate of `bd1_k`'s pull-down (inside the block) |
+| rst_a | poly | 13480,17150 (south) | in (believed) | X = NOT g; g has no driver in this region. Seen to y 17145, going south |
 | bd1_q | poly | 13996,15640 | in (believed) | east end of the band y 15630-15650; driver not traced (believed `bd1_n2`) |
 | bd1_n2 | diffusion | 13930,15705 | ? | N2's arm east of the rail, continuing north to its load (not traced) |
 | vss | metal | 13910-13958, 14700 (north) | - | wide rail; named from the pull-downs it feeds |
@@ -339,12 +339,12 @@ X's lines, contact (13522,15999), metal south on x 13521 to about y 16273.
   the line's other end; nothing was seen that would drive it. Working assumption: tied
   (drawn `?`). To settle: follow the poly from the pad at (13957,15740).
 - **Source of `bd1_k`'s pull-down** (13800-13830, 15634-15650). The strip segment above
-  `inh_src`'s gate has no contact (metal 19 px wide there, no ring, `acid1b` smooth). In the
+  `rst_a`'s gate has no contact (metal 19 px wide there, no ring, `acid1b` smooth). In the
   28 px gap between `bd1_an`'s metal and the rail, at y 15634-15650 the colour map shows
   khaki with a dark blob and no green strip, as at the strip between P2 and P3 where
   diffusion certainly crosses the same gap; from y 15652 down the green strip of open field
   appears. So the segment is read as joined to the ground diffusion (drawn `?D`). If it is
-  not, the device is only a capacitor between `inh_src` and `bd1_k`.
+  not, the device is only a capacitor between `rst_a` and `bd1_k`.
 - **The dead-end poly on N1's west buried contact** (13749-13799, 15575-15597). Poly in
   the open, 24 x 27, with nothing leaving it (three shots at 6x). A C-shaped outline round
   it reaches up to P3's lower edge at (13768,15560); P3 is `inh_lat`, an inverter output,
@@ -467,22 +467,22 @@ x 13806), which means a gap of field or a diffusion edge is being misread there.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, third batch)
 
-- Logic ("`bd1_k` : pull-down `inh_src` to vss (source connection uncertain; its load is not in view)";
-  "`inh_src`'s transistor ... `bd1_k`, a metal line on x 13674"), Inventory ("Pull-down of `bd1_k`") and
+- Logic ("`bd1_k` : pull-down `rst_a` to vss (source connection uncertain; its load is not in view)";
+  "`rst_a`'s transistor ... `bd1_k`, a metal line on x 13674"), Inventory ("Pull-down of `bd1_k`") and
   Ambiguities ("Source of `bd1_k`'s pull-down ... If it is not, the device is only a capacitor"): the
   strip is **N2's third pull-down, and `bd1_k` is `bd1_n2`, the latch's output** (`eof` run 8, piece
   `n2out`). The strip's lower segment (with the buried contact) is one diffusion with N2 through the gap
   at y 15712-15736, and its top segment reaches the ground diffusion through the gap at y 15638-15652.
-  `bd1_n2` = NOT((`bd1_an` AND `inh_lat`) OR `bd1_n1` OR `inh_src`).
+  `bd1_n2` = NOT((`bd1_an` AND `inh_lat`) OR `bd1_n1` OR `rst_a`).
 - "Where `bd1_k` goes: ... metal south on x 13521 to about y 16273" and Not done ("`bd1_k` on x 13521 (to
   y 16273)", "Lines on ... x 13565 at y 16251-16572 (scan only)"): the metal turns east at y 16264 and
   runs south on x 13564 to a pad (13562,16604); the line on x 13565 is this net (`eof`, piece `n2w`, which
   follows it 11,900 px to (6711,15000)).
-- "`inh_src` is on a metal line at x 13630 ... a metal runs south on x 13630 to a contact at
+- "`rst_a` is on a metal line at x 13630 ... a metal runs south on x 13630 to a contact at
   (13631,16758)": on the way it has a contact at (13627,16626) (ring and bright centre in both metal
   shots; `tools/textmap.py 13600 16598 13660 16652 3`), whose pad's poly runs east along y 16622 into the
-  gate column (not drawn by anyone): one more load of `inh_src`.
-- `trace/bd1.txt`: the gate poly of `inh_src`, `P 13640,15671 x13805 w=20`, lengthened to x 13812 (poly
+  gate column (not drawn by anyone): one more load of `rst_a`.
+- `trace/bd1.txt`: the gate poly of `rst_a`, `P 13640,15671 x13805 w=20`, lengthened to x 13812 (poly
   orange at x 13806-13809 in the chip-2 metal shot; `eof`'s review round 10; geometry only,
   `tools/sameconn.py HEAD`: connections identical).
 

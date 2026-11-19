@@ -292,7 +292,7 @@ N M 12400,17692 inh_lat
 M 2504,18310 2500,7990 w=18
 
 # ====================================================================
-# inh_src, followed from where trace/bd1.txt leaves it (13480,17150), 2026-11-16. It is a line of
+# rst_a, followed from where trace/bd1.txt leaves it (13480,17150), 2026-11-16. It is a line of
 # the bottom bus field, not something made near the strobe channel. Notes: notes/blocks/trunks.md.
 # Poly south under the horizontal metals to y 17650, south-west on a diagonal, west along y 17815
 # under the vertical trunks to a pad (12805,17815).
@@ -334,5 +334,5 @@ P 10470,16950 10225,16950 10225,16820 w=18
 P 10208,16803:10242,16837
 C 10225,16820
 M 10225,16830 10225,15905 w=13          # ends on the ring of the pad (10226,15912), eof's (was drawn to y 15886, over the open poly of the hop: eof's review round 5)
-N M 12400,17822 inh_src
-N M 10225,16400 inh_src
+N M 12400,17822 rst_a
+N M 10225,16400 rst_a

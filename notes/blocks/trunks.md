@@ -526,7 +526,7 @@ x 8580: 17,238 px, the same line. Drawn in `trace/trunks.txt`.
   (y 8360, 8965, 9573, 10181, 10831, 11440, 12142 ...): the trunk's taps into the left
   column cells of the left array. Not looked at.
 
-## `inh_src` followed west (2026-11-16)
+## `rst_a` followed west (2026-11-16)
 
 Drawn in `trace/trunks.txt` (last section); views `cache/scratch/bd1/inh1.png` ...
 `inh17.png`. From where `trace/bd1.txt` left it at (13480,17150):
@@ -545,7 +545,7 @@ Drawn in `trace/trunks.txt` (last section); views `cache/scratch/bd1/inh1.png` .
 **All three ends are followed since 2026-11-19** (`notes/blocks/eof.md`, piece `isrc`): the first is the clear of `bc2`'s latch unit a, the third feeds a metal x 8968 with taps into the gate column x 8650-8800, the second is a gate row at x 10540-10585; no driver on any. As written then, three ends are open: the metal x 10225 north of y 15886; the poly along y 16950 east of
 x 10470, into the bottom-centre logic; the bus line west of the pad (9770,18081) (poly
 under two vertical metals to a pad at about x 9562, then metal to x 8978 at least). So
-`inh_src` is a widely distributed line of the bottom bus, and its driver is at none of
+`rst_a` is a widely distributed line of the bottom bus, and its driver is at none of
 the places looked at so far. The full extraction is unchanged by the new geometry
 (one net, no new joins).
 
@@ -585,7 +585,7 @@ along the top of the central datapath) is the gap.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, third batch)
 
-- "source of X": X (`inh_src`) is `lc2`'s first through line (`eof` run 9): the driver
+- "source of X": X (`rst_a`) is `lc2`'s first through line (`eof` run 9): the driver
   is at or beyond `lc2`'s east edge (6450,8630).
 - `trace/trunks.txt`, `ck_out #1` (`M 10320,17908 x10230`, "followed to x 10230 only"): it lies for 96 px
   on `bd1_n2`'s poly row without a contact and runs on west to a pad at about (9770,17910), with a poly

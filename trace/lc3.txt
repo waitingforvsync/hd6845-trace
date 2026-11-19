@@ -52,7 +52,7 @@ C 5560,9470
 M 5560,9458 y9520
 C 5560,9299
 M 5560,9255 y9311
-N M 5560,9500 lc3_w9470
+N M 5560,9500 rst_c
 N M 5560,9270 lc3_w9299
 N P 5560,9429 lc3_w9432
 N P 5560,9340 lc3_w9337
@@ -391,11 +391,11 @@ N P 5475,10300 rst_n
 # v at nine cuts): lc2's four through lines each step one track west (y 9280, 9322, 9366, 9410), turn west (y 9538, 9581, 9626,
 # 9669) and run south four tracks further west; a fifth line enters from the east at y 9455 and does the same (y 9712); two more
 # enter at y 9756 and y 9798 and turn south. No contact on any of them but the pads of the rows below.
-M 6299,9225 y9280 x6255 y9538 x6082 y10400 w=14# inh_src: to x 6082
-M 6342,9225 y9322 x6299 y9581 x6125 y10400 w=14# lc2_x6342: to x 6125
-M 6386,9225 y9366 x6342 y9626 x6169 y10400 w=14# lc2_x6387: to x 6169
+M 6299,9225 y9280 x6255 y9538 x6082 y10400 w=14# rst_a: to x 6082
+M 6342,9225 y9322 x6299 y9581 x6125 y10400 w=14# res_b: to x 6125
+M 6386,9225 y9366 x6342 y9626 x6169 y10400 w=14# lpstb_b: to x 6169
 M 6430,9225 y9410 x6386 y9669 x6212 y10400 w=14# lc2_x6432: to x 6212, through the pad (6211,9948) of stage B0's clock row
-M 6450,9455 x6429 y9712 x6299 y10400 w=14   # the fifth line: to x 6299, through the pad (6298,9884) of the row of lc3_w9470
+M 6450,9455 x6429 y9712 x6299 y10400 w=14   # the fifth line: to x 6299, through the pad (6298,9884) of the row of rst_c
 M 6450,9756 x6342 y10400 w=14               # to x 6342
 M 6450,9798 x6428 y10400 w=14               # to x 6428
 N M 6342,10200 lc3_e9756
@@ -453,6 +453,6 @@ P 6241,10020:6273,10052
 C 6257,10036
 M 6257,10030 y10400 w=14
 # (row 7 is the row of the track x 5509-5527, lc2_w9079: its pad (6386,9840) is the top of the metal x 6379-6393, which runs south;
-#  row 8 is the row of the lower inverter's input, lc3_w9470: its pad (6298,9884) is on the fifth line;
+#  row 8 is the row of the lower inverter's input, rst_c: its pad (6298,9884) is on the fifth line;
 #  row 9 is stage B0's clock; row 10 comes from the END pad (5646,9992) of lc3_m5756 and runs on east;
 #  row 11 is the clear, lc2_w8907: its pad (6257,10036) is the top of the metal x 6250-6264, which runs south)

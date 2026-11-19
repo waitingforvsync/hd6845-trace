@@ -98,13 +98,13 @@ in the metal shot, each row continuous poly in the clean shot):
 |---|---|---|---|
 | `bc2_w14912` data (inverter and upper AND) | y 14905-14922 | (10395,14912) | goes west, not followed |
 | `bc2_w14955` enable (both ANDs) | y 14947-14964 and y 15163-15180 | (10441,14955), (10441,15172) | one vertical metal x 10441; north of y 14940 not followed; south it runs to y 15398, jogs west along y 15386-15398 to the metal x 10398, which runs on south (not followed); see "Latch unit b" |
-| `inh_src` clear | y 15079-15096 | (10395,15087) | metal x 10395 south, joined by `eof`'s piece `isrc` (2026-11-19) to the net that `trunks` and `bd1` call `inh_src`; renamed in the refresh of 2026-11-19 (glossary, Former names) |
+| `rst_a` clear | y 15079-15096 | (10395,15087) | metal x 10395 south, joined by `eof`'s piece `isrc` (2026-11-19) to the net that `trunks` and `bd1` call `rst_a`; renamed in the refresh of 2026-11-19 (glossary, Former names) |
 | `bc2_w15000` output (upper gate's node) | y 14992-15010 | (10395,15000) | a metal from the north-west ends on it, not followed |
 
 Equations (`unsure.py --equations`: the inverter FIRM, the two gates DEPENDS only by feedback):
 - `bc2_w14876` = NOT `bc2_w14912`
 - `bc2_w15000` = NOT( `bc2_w14912` AND `bc2_w14955` OR `bc2_w15029` )
-- `bc2_w15029` = NOT( `inh_src` OR `bc2_w14955` AND `bc2_w14876` OR `bc2_w15000` )
+- `bc2_w15029` = NOT( `rst_a` OR `bc2_w14955` AND `bc2_w14876` OR `bc2_w15000` )
 
 The same D latch with enable and clear as `tl5` and `lc2` place. Widths: `px.py col 10554`
 (acid) gives poly y 14905-14922 and y 14947-14966 at the two upper AND gates, matching the

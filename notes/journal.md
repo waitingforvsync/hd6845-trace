@@ -419,7 +419,7 @@ earlier work goes on that list in the same commit; a remark in a report does not
 
 1. The source of `b`: the metal x 5841 north of y 6300 (top-left logic, `tl`). That is
    where the row counter's step is decided (scan line count, end of line): M4.
-2. What `a` / `inh_ck` is: bd1's `inh_src`, which comes from the bottom bus field.
+2. What `a` / `inh_ck` is: bd1's `rst_a`, which comes from the bottom bus field.
 3. Re-read R8/R9 in the counters (the line x 12285 and node `z`), then the rest of the bit
    cell (node `m`'s pull-up, B3/B4): the counters' next-state and clear are still not
    extracted.
@@ -759,7 +759,7 @@ registers (central datapath), R3's other nibble, R8.
    `rc_eq_r6` and `h_eq_r0` (strobe channel gate column), `h_eq_r1` (bottom-centre).
 4. The rest of the step-logic clusters; the 4-bit left counter's outputs; `e4`.
 
-## 2026-11-16 10:48  the row address selector; `inh_src` is a bus line
+## 2026-11-16 10:48  the row address selector; `rst_a` is a bus line
 
 Questions from the user: is the scan line counter put out directly as RA0-4; how do the
 R5 and R9 compares work; what makes VSYNC width 0 special. And two sets of questions on
@@ -774,7 +774,7 @@ what `inh` does).
   k to output k+1, and output 0 has two more gated sources. A shift by one bit with a
   separate bit 0: the shape of interlace sync and video. 3,375 transistors, 2,025 nets,
   no errors.
-- `inh_src` followed 3,700 px west from the strobe channel and drawn: a bottom-bus line
+- `rst_a` followed 3,700 px west from the strobe channel and drawn: a bottom-bus line
   with four branches, three still open (`notes/blocks/trunks.md`). Not made locally.
 - RA0's and RA1's pad driver inputs followed from the pads to x 15300, y 4140-4800,
   where they meet metals from the west (not drawn; `notes/blocks/trunks.md`).
@@ -802,7 +802,7 @@ what `inh` does).
 1. The selector's five outputs to their ends, and the nest of metals at x 7530-7715 into
    channel 1; then the two gate lines and bit 0's extra sources (interlace logic).
 2. Where `lc_step` is made; where `sl_eq_r5` goes.
-3. `inh_src`'s three open ends.
+3. `rst_a`'s three open ends.
 4. As before: `rdp2`'s routing zone; the other match lines; the step-logic clusters;
    `c4l`'s outputs and R3's high nibble; `e4`.
 
@@ -862,7 +862,7 @@ strap between two poly pads, destination not read.
 2. `bd2`'s gate group east of the rail: `wr_data_e_n`'s destination.
 3. `rax`: the load and the east half of the unit.
 4. The selector's two gate lines and bit 0's extra sources (interlace logic).
-5. As before: `lc_step`; `sl_eq_r5`; `inh_src`'s three ends; `rdp2`'s routing zone; R3's
+5. As before: `lc_step`; `sl_eq_r5`; `rst_a`'s three ends; `rdp2`'s routing zone; R3's
    high nibble and `c4l`; `e4`.
 
 ## 2026-11-16 13:15  R8, R9, R10, R11 identified by their write strobes
@@ -1645,7 +1645,7 @@ nets, 4,282 transistors, 0 errors, 0 warnings. No active claims.
   L3 with a traced driver), its gab is `c4l_gab`; `rcs_thin_e` is not `sl_l3` (`trace/ur.txt`
   corrected).
 - **Master list.** The `eof` row gives the lead group's state and next steps in order: `tlb` (moved up
-  to third), `inh_src`'s source, the gate group at `inh_ck`'s tap (7540-7780, 7600-7820), `lc3` (the
+  to third), `rst_a`'s source, the gate group at `inh_ck`'s tap (7540-7780, 7600-7820), `lc3` (the
   counter's clock), `bd1`'s latch, `lc1_w7170`'s driver. Rows `tl1`-`tl6` (`tl3` released), `lc1`-`lc3`,
   `ur`, `r9m`, `trunks` (continue) updated. Re-read R43 (polys that go on below a pad), R44 (`ur`'s
   through lines and rows between pads), R45 (copies' pads); R4, R26, R31 (done for `lc2`), R36, R41
@@ -1887,22 +1887,22 @@ items, none of them this piece's.
 
 **Handoffs:** none waiting. **Claims:** none.
 
-## 2026-11-19 12:50  Handoff: eof run 4, inh_src's open ends (driver not found)
+## 2026-11-19 12:50  Handoff: eof run 4, rst_a's open ends (driver not found)
 
 Traced by this session with `/trace6845` (claim 54fc826, merged a4d06bc, claim released); the handoff
 processed at the user's request.
 
 **What came in** (`notes/blocks/eof.md`, piece `isrc`; wiring only, no uncertain items):
-- `inh_src` is the clear of `bc2`'s latch unit a (joined to that unit's clear pad by an alias; the unit still waits for R31).
+- `rst_a` is the clear of `bc2`'s latch unit a (joined to that unit's clear pad by an alias; the unit still waits for R31).
 - Its west bus line is drawn on from the pad (9770,18081) to a pad (8967,17735), from which a metal runs
   north along x 8968 for 2,470 px with two tap pads and an end pad, and a second metal west. Four polys
   leave those pads west into the gate column x 8650-8800: stubs and ports, not followed.
-- The task's goal, `inh_src`'s driver, is **not found**: every end seen is a gate.
+- The task's goal, `rst_a`'s driver, is **not found**: every end seen is a gate.
 - Review: one full round on Fable, no finding that changes a connection; three geometry or comment fixes.
 
 **Checks:** overlay of the metal x 8968 and its two tap pads at 1.3x
 (`cache/scratch/eof_handoff_ov2.png`): on the features. Full extraction 2,378 nets (one fewer: the
-join), 4,286 transistors, 0 errors, 0 warnings; `tools/unsure.py` does not list `inh_src`.
+join), 4,286 transistors, 0 errors, 0 warnings; `tools/unsure.py` does not list `rst_a`.
 
 **Applied:**
 - `trace/trunks.txt`: the metal x 10225 shortened from y 15886 to y 15905 (it ends on the ring of the
@@ -1911,7 +1911,7 @@ join), 4,286 transistors, 0 errors, 0 warnings; `tools/unsure.py` does not list 
   added to the `trunks` (continue), `bc1` (continue) and `bc2`/`bc3`/`bc4` rows.
 - `notes/blocks/trunks.md` and `bc2.md`: the ends that are now followed.
 - `notes/operation.md`: the net count.
-- No Re-read item, no new AMB entry. The clear pad's placeholder name is left as an alias of `inh_src` for the next refresh.
+- No Re-read item, no new AMB entry. The clear pad's placeholder name is left as an alias of `rst_a` for the next refresh.
 - `out/` rebuilt.
 
 **Handoffs:** none waiting. **Claims:** none.
@@ -1921,7 +1921,7 @@ join), 4,286 transistors, 0 errors, 0 warnings; `tools/unsure.py` does not list 
 At the user's request, after the two `eof` handoffs of today. **Handoffs:** none waiting. **Claims:** none.
 
 **Renamed** (`names.py compare`: only names changed; one batch):
-- the clear of `bc2`'s latch unit a (its placeholder is under Former names in the glossary) -> `inh_src`:
+- the clear of `bc2`'s latch unit a (its placeholder is under Former names in the glossary) -> `rst_a`:
   a firm join, `eof`'s piece `isrc`, link G; the alias in `trace/eof.txt` is dropped by the rename.
 
 **Left on purpose** (`names.py candidates`, section 1): `ar#_q`, `d#_in`, the `*_tab` cell pins (a
@@ -1929,7 +1929,7 @@ cell's own name for a pin), `cdp2_c_s1_bus`/`cdp2_c_s2_bus` (kept with their row
 Section 2 (joins through uncertain geometry) untouched, as the rule says.
 
 **`operation.md`** (seventh refresh): header (2,378 nets, 4,286 transistors; 840 of 1,262 equations
-firm, unchanged since `eof`'s run 3); the `inh_src` row now gives the equation of the latch it clears
+firm, unchanged since `eof`'s run 3); the `rst_a` row now gives the equation of the latch it clears
 (marked); R5's path (the NOR into latch A's data) was taken in with run 3. No equation changed status
 (`eq_before` against `eq_after`). AMB-001 to AMB-037 and R1-R45 unchanged.
 
@@ -1968,7 +1968,7 @@ At the user's request ("apply waiting handoffs"). Seven handoffs, applied togeth
   (`eof_w9255` OR `eof_w9505`)) (firm).
 - `lc3` runs 2 and 2b (Matt Godbolt; 37 transistors and the wiring): two more counter stages (E4 a
   turned copy, B0 folded over both columns, by hand): **the ripple counter has five stages**, clocked by
-  `lc2`'s through line `lc2_x6432`; the gate pair: **`lc1_w7170` = NOT `lc3_w9470`** (the driver `eof`
+  `lc2`'s through line `lc2_x6432`; the gate pair: **`lc1_w7170` = NOT `rst_c`** (the driver `eof`
   (f) asked for) and `lc2_w9079` = NOT `lc3_w9299`, so `lc2_w9125` chooses between the counter's fourth
   and fifth outputs. R31 done for `lc3`. Released: done but for its edges.
 - `busl` runs 1 and 2 (richtw1; wiring, 16 nets): `cdp3`'s row H west outputs reach eight diffusion rows
@@ -2092,18 +2092,18 @@ was merged (d911059). Six handoffs, applied together.
 **What came in**
 
 - `eof` run 8 (Tom Seddon; pieces `n2out`, `n2w`; no transistor): the exit of the latch on R4's match.
-  `bd1_k` is `bd1_n2` (alias): the strip under `inh_src`'s gate is a third pull-down of N2, so
-  **`bd1_n2` = NOT((`bd1_an` AND `inh_lat`) OR `bd1_n1` OR `inh_src`)** (marked: the load's tie): R4's
-  match as latched, shown only while `inh_src` is low. The output is drawn 11,900 px, no gate and no
+  `bd1_k` is `bd1_n2` (alias): the strip under `rst_a`'s gate is a third pull-down of N2, so
+  **`bd1_n2` = NOT((`bd1_an` AND `inh_lat`) OR `bd1_n1` OR `rst_a`)** (marked: the load's tie): R4's
+  match as latched, shown only while `rst_a` is low. The output is drawn 11,900 px, no gate and no
   tap, along the bottom bus field and up the left bus field to (6711,15000). Review round 10: no
   finding that changes a connection.
-- `eof` run 9 (Tom Seddon; piece `isrc4`; wiring): **`inh_src` is `lc2`'s through line x 6299** (firm), by a poly row,
+- `eof` run 9 (Tom Seddon; piece `isrc4`; wiring): **`rst_a` is `lc2`'s through line x 6299** (firm), by a poly row,
   `bc3`'s track bundle, `bc1`'s track 7969 and the row y 14914 onto `busl`'s row end. So the driver of
-  `inh_src` is not in the bottom-centre logic: the line enters `lc2` from the east at (6450,8630).
+  `rst_a` is not in the bottom-centre logic: the line enters `lc2` from the east at (6450,8630).
   Review round 11: no findings.
 - `busl` run 3 (richtw1; piece `lc9`): `lc3`'s nine metals at y 10400 down the field with `rcs_e4`;
-  seven onto poly rows toward `bc1`'s 13-line bus (the ripple counter's clock, `lc3_w9470`, the clear,
-  `lc2_w9079`, `inh_src`'s line among them).
+  seven onto poly rows toward `bc1`'s 13-line bus (the ripple counter's clock, `rst_c`, the clear,
+  `lc2_w9079`, `rst_a`'s line among them).
 - `busl` run 4 (piece `ctl`): `cdp4`'s four selects come from south of y 15000 and each also feeds the
   corner gate group; `cdp4_rst` ends on a box of that group; **`cdp4_ld` = `bc1_ld_a`** (marked: one
   `?M` over the box), so latch rows C and D load together.
@@ -2120,7 +2120,7 @@ transistors, 0 errors, 0 warnings; `tools/unsure.py`: 92 nets joined only throug
 
 **Applied:**
 - Master list: `eof` row (runs 8 and 9; what is left of (b) and (e)); `busl` row (status to run 6;
-  next: `bd1_n2`'s metal north of (6711,15000), then `inh_src`'s line east of (6450,8630)); `bd1`,
+  next: `bd1_n2`'s metal north of (6711,15000), then `rst_a`'s line east of (6450,8630)); `bd1`,
   `bd1`-`bd3`, `bc1` (continue), `bc2`-`bc4`, `bl0`, `cdp4` (continue), `cdp3` (continue), `trunks`
   (continue), `lc1`-`lc3` rows; R4 (`ck_out #1` runs on west of x 10230, and lies on `bd1_n2`'s row).
   No new Re-read item (none proposed: the handoffs' cases fall under traps 2, 13, 30, 32 as written).
@@ -2129,7 +2129,7 @@ transistors, 0 errors, 0 warnings; `tools/unsure.py`: 92 nets joined only throug
   crossing).
 - Corrections sections (third batch) in `notes/blocks/bd1.md`, `bc1.md`, `bc3.md`, `cdp3.md`, `cdp4.md`,
   `lc2.md`, `lc3.md`, `trunks.md`, `eofw.md`. `notes/blocks/eof.md` is not edited (claimed: Tom Seddon).
-- `trace/bd1.txt`: the gate poly of `inh_src` lengthened from x 13805 to x 13812 (orange to x 13810 in
+- `trace/bd1.txt`: the gate poly of `rst_a` lengthened from x 13805 to x 13812 (orange to x 13810 in
   the chip-2 metal shot, `tools/px.py row 15671 13796 13822 2`; `eof`'s review round 10);
   `tools/sameconn.py HEAD`: connections identical.
 - `floorplan.txt`: nothing trimmed (the new fragments are routes inside coarse blocks that stay).
@@ -2144,7 +2144,7 @@ At the user's request, after the six handoffs above. **Handoffs:** none waiting.
 (waitingforvsync), `eof` (tom-seddon).
 
 **Renamed** (one batch; `names.py compare`: only names changed, 1 net): the first through line of the
-left-centre strips -> `inh_src` (`eof`'s piece `isrc4`: a firm join, 4,700 px with no uncertain item, and
+left-centre strips -> `rst_a` (`eof`'s piece `isrc4`: a firm join, 4,700 px with no uncertain item, and
 none on `busl`'s, `lc3`'s and `lc2`'s stretches). The old name is under Former names in the glossary;
 the `@alias` in `trace/eof.txt` is gone. Sentences the rename made circular ("X is X") were reworded in
 `notes/blocks/eof.md`, `busl.md`, `lc2.md`, `lc3.md`, `trunks.md`, the glossary, the master list,
@@ -2156,10 +2156,10 @@ merging main, `tools/rename.py` with the old and new names (as `/trace6845` step
 through an uncertain metal, AMB-038: section 2, not renamed); the earlier deliberate aliases, as before.
 
 **`operation.md`** (ninth refresh): header (2,390 nets, 4,345 transistors; 847 of 1,276 equations firm,
-unchanged). The tracers had already written the afternoon's results (`inh_src`'s line, the latch's
+unchanged). The tracers had already written the afternoon's results (`rst_a`'s line, the latch's
 third pull-down, rows C and D loading together, row D's data from line g). Added: `tc2_sr_g`'s third
 branch down the left bus field into the bottom-centre logic's ground (marked: AMB-039). Against the last
-refresh's equations: one changed, `bd1_n2` = NOT((`bd1_an` AND `inh_lat`) OR `bd1_n1` OR `inh_src`)
+refresh's equations: one changed, `bd1_n2` = NOT((`bd1_an` AND `inh_lat`) OR `bd1_n1` OR `rst_a`)
 (still marked: the load's tie); none changed status. AMB-001 to AMB-039; R1-R45 unchanged in range (R4
 edited).
 
