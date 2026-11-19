@@ -1,0 +1,19 @@
+# eofw: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+# Three wires, not a region. DIR is `in` where the driver lies beyond that port, `?` where the
+# port leads on towards loads or onto another package's stretch of the same net.
+
+# Wire Y: the output of eof's gate g7700
+tc2_r5589   P  7267-7285,6900     in   eof's poly north of the pad (7272,6912) (its name eof_w7818): the gate's output
+tc2_r5589   P  6834-6852,6395     ?    onto tc2's poly P 6843,6282 y6400 (tc2_r5589)
+
+# Wire 2: the gate's row 2
+tc2_sr_g    P  7395,7204-7224     ?    eof's poly row east of the pad (7313,7215) (its name eof_w7718)
+tc2_sr_g    M  7829-7843,6395     ?    onto tc2's metal M 7837,6400 (tc2_sr_g: the gate line of tc2's latch)
+lc1_w7908   M  7266-7280,7790     ?    eof's metal south of row 2's pad (7267,7736) (its name eof_w7718)
+lc1_w7908   M  6445,8252-8266     ?    onto lc2's metal M 6450,8259 (lc1_w7908: latch D's enable)
+lc1_w7908   P  7490,8722-8745     ?    open end: the poly east of the corner pad (7446,8732), into cdp3 (continue)'s ground
+lc1_w7908   M  7458-7474,8800     ?    open end: the corner pad's metal on south (seen to y 8850), cdp3 (continue)'s ground
+
+# Wire 3: the gate's row 3
+lc2_w8474   P  6455,7812-7832     ?    eof's poly row at lc1's east edge (its name eof_w7777): a gate input, no driver this way
+lc2_w8474   M  6333-6349,8072     ?    onto lc2's metal M 6341,8067 (lc2_w8474, the pad (6341,8214))

@@ -1,0 +1,89 @@
+# eofw: the three wires of eof's gate g7700 beyond eof's ports (end-of-frame lead group). Wiring
+# only, no transistor. The gate itself (x 7541-7775, y 7585-7860) and the first stretch of each wire
+# are eof's (trace/eof.txt, piece g7700); each wire here starts on eof's drawn end and runs to a net
+# another package drew:
+#     eof_w7818 (the gate's output) = tc2_r5589
+#     eof_w7718 (row 2)             = tc2_sr_g = lc1_w7908    (one net: tc2's latch gate line IS latch D's enable)
+#     eof_w7777 (row 3)             = lc2_w8474 (= lc1_w7170 by lc2's alias)
+# so the gate is   tc2_r5589 = NOT( lc1_w7170 AND ( inh_ck OR tc2_sr_g ) ).
+# The names are joined by @alias here; the placeholders are renamed by the next refresh.
+# From a second, independent trace of the gate (a test of method, 2026-11-19: notes/blocks/eofw.md),
+# which agreed with eof's on the gate and followed each wire on. Evidence: cache/scratch/eofw/
+# (survey.md, report.md, s*.png looks, o*.png overlays, adj_*.png); every command is in survey.md.
+@w M=14 P=20
+
+# ---- Wire Y: eof_w7818, from eof's poly north of the pad (7272,6912) to tc2's poly (6843,6400).
+#   The pad's poly (x 7266-7286 between its edge lines: px.py row 6892 7256 7296 2 metal,acid) runs north
+#   to y 6870 and turns WEST: an orange L in both chip-2 shots and chip 1's metal shot, plain ground east
+#   of x 7290 (s14_T_ma.png, s14_T_cm.png, 5x four shots). It does not go on east to the pad (7335,6845),
+#   which is the end of the metal y 6840-6858 above it (no contact between the two).
+#   West along y 6861-6879 in the open (px.py row 6870 6820 7300 8 metal,acid: poly colour at every
+#   sample from x 6836 to 7276; edges y 6857 and 6879) to a corner (6843,6870) (s17_outcorner.png: nothing
+#   goes on west), then north at x 6834-6852 under ten bus metals without a pad (s18_x6842_a.png,
+#   s18_x6842_c.png: two continuous edge lines, no hole, no widening) to tc2's P 6843,6282 y6400 w=17.
+P 7276,6900 y6870 x6843 y6395 w=18
+N P 7000,6870 tc2_r5589
+@alias tc2_r5589 eof_w7818
+
+# ---- Wire 2, north branch: eof_w7718, from eof's poly row east of the pad (7313,7215) to tc2's metal
+#   of tc2_sr_g (7837,6400).
+#   The row y 7204-7225 (px.py col 7405 7194 7234 2 metal,acid: edge lines y 7203 and 7225) runs east
+#   under bw's two metals x 7410-7432 and x 7456-7478, a metal x 7520-7540, the VSS rail (here
+#   x 7572-7620) and the VCC rail (x 7725-7775) without a pad (px.py row 7214 7330 7700 10 metal,acid and
+#   row 7214 7600 7830 6 metal,acid1b: poly colour in every open stretch, salmon under the metals;
+#   o4_w2north.png) to a pad with a contact (7836,7215) (textmap.py 7806 7186 7870 7240 3 --acid: ring,
+#   bright centre in both chips, hole in the clean shot; o7_pad7836.png 4x). The pad's metal x 7829-7843
+#   leaves north only and runs to tc2's M 7880,6012 y6111 x7837 y6400 (tl5_tracks.py v 7836 6400 7195:
+#   23 bars of 8-13 px at the rows it crosses, no hole; follow.py 7835 7185 N runs on into tc2's L;
+#   adj_x7836.png 1.5x three shots: one metal from the pad to y 6400). tc2's own follower from the north
+#   ended on this pad (tc2's port note).
+P 7395,7214 x7836 w=20
+P 7818,7198:7854,7232                  # pad (in cdp2's ground; nobody draws it)
+C 7836,7215
+M 7836,7229 y6395 w=14
+N M 7836,6800 tc2_sr_g
+@alias tc2_sr_g eof_w7718
+
+# ---- Wire 2, south branch: from eof's metal south of row 2's pad (7267,7736) to lc2's metal of
+#   lc1_w7908 (6450,8259), latch D's enable.
+#   The metal (x 7266-7280: px.py row 7795 7252 7292 2 metal,metal1, edge lines x 7263 and 7284) runs
+#   south 910 px (tl5_tracks.py v 7273 7760 8700: bars of 8-10 px; chip 2 alone dim at y 8173-8192, dirt:
+#   textmap.py 7246 8160 7300 8206 3 --acid) into a T at (7273,8710) on a horizontal metal y 8703-8716
+#   (s27_T7273.png 5x both metal shots: no line between them; railgap.py: no metal south of y 8720).
+#   West of the T a staircase of ten corners to (6515,8259) and west onto lc2's M 6212,8067 y8259 x6450:
+#   follow.py from either end gives the same corners; railgap.py across each: metal on two arms, 29-41 px
+#   of no metal beyond; tl5_tracks.py on each stretch: bars of 7-15 px, no hole; s19_stair.png,
+#   adj_stair.png (overlays). The last corner (6515,8259) has a dark line 6-8 px wide across the metal at
+#   x 6503-6509: the west edge of a poly x 6510-6528 that lies under the vertical arm (seen in the clean
+#   shot; both arms have their top edge at y 8250): s25_c6515.png 5x three shots, px.py row 8259 6470 6530 2.
+#   That the south metal is on row 2's pad at all is eof's Ambiguity 14 (the pad (7267,7736) has two
+#   metals; 12 px of ring between its centre and this one).
+M 7273,7790 y8710 x7190 y8672 x7060 y8585 x6883 y8498 x6710 y8411 x6515 y8259 x6445 w=14
+N M 6883,8540 lc1_w7908
+@alias tc2_sr_g lc1_w7908
+#   East of the T the metal runs to a corner pad (x 7426-7476, y 8703-8750) with a contact (7446,8732) on
+#   a poly pad; the poly leaves east and the metal goes on south at x 7458-7474 (textmap.py 7410 8684
+#   7500 8740 3; s20_eastend.png 3.4x, s26_c7466.png 6x, o6_ecorner.png). Both are drawn as stubs: ports
+#   into cdp3 (continue)'s ground. On the run from the T, tl5_tracks.py h 8712 7200 7470 lists 15 px
+#   without metal at x 7322-7336 (the west edge of a poly crossing under it) and 30 px at x 7432-7461
+#   (the lower half of the run over the contact's ring; bright along y 8705-8710).
+M 7273,8709 x7440 w=12
+M 7426,8703:7476,8750                  # the corner pad
+P 7428,8716:7482,8750                  # its poly pad
+C 7446,8732
+P 7475,8722:7490,8745                  # the poly on east (a dark line crosses it at x 7492-7498; not read beyond)
+M 7466,8745 y8800 w=16                 # the metal on south (seen to y 8850; not followed)
+
+# ---- Wire 3: eof_w7777, from eof's row at lc1's east edge (6450,7821) to lc2's metal of lc2_w8474.
+#   The row y 7812-7832 (px.py col 6460 7802 7842 2 metal,acid: edge lines y 7811 and 7833) runs on west
+#   to a pad with a contact (6339,7824): ring and bright centre in both metal shots, a pale centre in the
+#   chip-2 stripped shot; residue hides the hole in the clean shot (s24_pad6339.png 3.2x four shots;
+#   textmap.py 6300 7786 6384 7860 3 --acid). Nothing leaves the pad west; its metal x 6333-6349 runs
+#   south onto lc2's M 6341,8067 y8228 w=18 (tl5_tracks.py v 6340 7845 8070: bars at y 7938-7946 and
+#   7959-7968, lc1's row y 7953 under it, no hole).
+P 6339,7822 x6455 w=20
+P 6322,7806:6356,7842                  # pad (in lc1's ground; nobody draws it)
+C 6339,7824
+M 6341,7811 y8072 w=16
+N M 6341,7950 lc2_w8474
+@alias lc1_w7170 eof_w7777              # lc2 aliases lc2_w8474 to lc1_w7170 (trace/lc2.txt, across ? items of its own): one name per net
