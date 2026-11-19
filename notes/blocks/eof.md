@@ -2367,9 +2367,10 @@ Findings, each checked by the tracer:
    8800`: 6646, 6688, 6732, 6775 at y 9000 and three diagonals at x + y = 15532-15544, 15597, 15662).
    Fixed: the table.
 3. **The package extracted by itself reports two "several names" errors**, at (4724,2813) and (4497,5634),
-   neither on this net. Not a finding against the piece: they are `tl4`'s and `tl5`'s aliases seen without
-   the files that hold their canonical labels, as in every run since run 6 (the Status section's counts);
-   the full extraction has 0 errors and 0 warnings. Nothing changed.
+   neither on this net. Not a finding against the piece: the two errors were there before it (the Status
+   section's counts since run 11: 2 errors and 47 warnings; `tools/t.sh eof sameconn.py 61d3be5` differs
+   only by this piece's join), names of other packages' nets seen with only some trace files loaded; the
+   full extraction has 0 errors and 0 warnings. Nothing changed.
 
 The proof that no connection changed (the fixes are comments and notes; the geometry is as reviewed):
 
