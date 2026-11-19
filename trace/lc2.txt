@@ -655,7 +655,7 @@ D 4884,8924:4902,8972
 ?D 4886,8970:4900,9020                      # the strip beside the pad box: 14 px between two poly edges (uniform down its length in all four shots; tan in the clean shot at its east side): uncertain
 D 4878,9018:4900,9104                       # ... and on under the plate to the VCC open diffusion
 P 4904,8925:4926,9100                       # the gate poly: over FIELD from the ringed box south (round 14) ...
-P 4864,9040:4926,9098                       # ... to the load's plate, one poly with it
+P 4857,9040:4926,9098                       # ... to the load's plate, one poly with it (round 15: its west edge is x 4857)
 P 4874,8925:4908,8945                       # at its head it is one with K3's arm (lc2_w8930) over the ringed box
 B 4880,8922:4905,8950
 D 4878,9102:4985,9132                       # open diffusion at the plate's foot, to a VCC box under the middle rail
