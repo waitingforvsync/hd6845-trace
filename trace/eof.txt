@@ -1003,9 +1003,9 @@ N P 7428,8350 eof_w8298
 #     lc3_w9947 (the clock of stage B0, lc2_x6432) IS tcw_m6404 (the line of tcw's bus that gates four
 #     pull-downs of the gate column west of the island).
 # Built like res_b's and lpstb_b's lines (piece rl), one lane further east; from the north:
-#   tc2's poly x 6443-6460 on south from y 6400, 725 px under thirteen horizontal metals -> pad with a
+#   tc2's poly x 6443-6460 on south from y 6400, 725 px under fourteen horizontal metals -> pad with a
 #   contact (6450,7127) -> metal east along y 7128 -> the track x 6687 south, 1,030 px -> an L one track
-#   west at y 8156 -> pad with a contact (6645,8276) -> poly column south under three horizontal metals ->
+#   west at y 8151 -> pad with a contact (6645,8276) -> poly column south under three horizontal metals ->
 #   pad with a contact (6645,8580) -> metal south, a 45-degree diagonal south-west (x + y = 15272) to
 #   (6472,8800), south on x 6472 to y 9167 and west onto lc2's metal end at x 6450.
 # One net, four names. The canonical name is lc3_w9947: lc3 already has `@alias lc3_w9947 lc2_x6432`, and the
@@ -1017,7 +1017,7 @@ N P 7428,8350 eof_w8298
 P 6451,7127 y6390 w=17
 P 6432,7107:6470,7147
 C 6450,7127
-M 6450,7128 x6688 y8156 x6644 y8276 w=13
+M 6450,7128 x6688 y8151 x6644 y8276 w=13
 N M 6688,7600 lc3_w9947
 P 6626,8257:6664,8296
 C 6645,8276

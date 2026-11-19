@@ -46,7 +46,7 @@
 7382,7870:7492,8444      route  step-condition hold tl3_w3982, metal x 7402 and poly | south to the pad (7401,8425) and east to the output box of its driver, the last of three inverters
 7416,8068:7778,8448      logic  inverter chain driving the step-condition hold tl3_w3982 | three inverters in series under the gate column's VSS rail: tl3_w3982 = NOT eof_w8298, eof_w8298 = NOT eof_w8168, eof_w8168 = NOT lc1_w7928 (latch D's lower node); the first two have long loads
 6401,8030:7440,8136      route  latch D's second output lc1_w7928, poly row y 8040 | from lc2's poly at (6408,8067) 1,010 px east under twenty-one tracks to the first inverter of the delay chain
-6434,6390:6470,7147      route  ripple counter clock lc3_w9947 (= tcw_m6404), poly x 6451 | from tc2's poly at y 6400 south under thirteen horizontal metals to the pad (6450,7127)
+6434,6390:6470,7147      route  ripple counter clock lc3_w9947 (= tcw_m6404), poly x 6451 | from tc2's poly at y 6400 south under fourteen horizontal metals to the pad (6450,7127)
 6444,7121:6695,8296      route  ripple counter clock lc3_w9947, metal y 7128 and track x 6688 | east from the pad (6450,7127), 1,030 px south and by an L to the pad (6645,8276)
 6626,8257:6665,8600      route  ripple counter clock lc3_w9947, poly column x 6645 | under three metals to the pad (6645,8580)
 6433,8580:6652,9174      route  ripple counter clock lc3_w9947, diagonal metal and x 6472 | onto lc2's fourth through line at (6450,9165)

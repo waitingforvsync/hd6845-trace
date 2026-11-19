@@ -244,7 +244,7 @@ transistor, no uncertain items.
   west gate column (piece `ck5`). `lc2`'s fourth through line (`lc2_x6432` = `lc3_w9947`, the clock of
   stage B0) was followed back from `lc2`'s east edge (6450,9165): a metal north on x 6472 and a diagonal
   to a pad (6645,8580), a poly column to a pad (6645,8276), an L and the track x 6688, 1,030 px north, a
-  metal west along y 7128 to a pad (6450,7127), and that pad's poly 725 px north under thirteen
+  metal west along y 7128 to a pad (6450,7127), and that pad's poly 725 px north under fourteen
   horizontal metals onto **the poly that `tc2` drew south of its pad (6447,6150): `tc2_m6447`, which
   `tl6` joined to `tcw_m6404`**. Three pads with contacts, no transistor. So the five-stage counter and
   the four pull-downs that `tcw_m6404` gates in `tcw`'s column have one clock; neither end is its driver
@@ -327,8 +327,8 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `n2w`, E-F | x 10205-12850, y 17586-18010 | metal west along y 17779, the outer of three nested Z bends (north on x 11722 over four poly diagonals, west along y 17606) to a pad with a contact (11287,17603); a poly west to x 11137, a diagonal south-west to (10835,17905), west along y 17905 (its last 96 px under `ck_out`'s metal, no contact), south on x 10224 to a pad with a contact (10222,17993) |
 | `n2w`, G-L | x 7405-10239, y 17990-18099 | metal south and west along y 18039 to a pad (9813,18037); poly under two metals to a pad (9594,18038); metal west (over `isrc`'s poly x 8964, no contact) to a pad (8643,18038); poly under two metals to a pad (8424,18039); metal west, a step south at x 8182 to y 18083, west to a pad (7600,18082); poly under `bc1`'s rail RL2 to a pad (7422,18081) |
 | `n2w`, M-O | x 6692-7424, y 15000-18090 | metal west along y 18083 to a corner (6712,18083), north on x 6712 to a pad with a contact (6708,16519); a poly link x 6712 north under the supply buses to a pad with a contact (6710,16173); metal on north on x 6711, drawn to y 15000 |
-| `ck5`, the poly from `tc2` | x 6442-6470, y 6390-7147 | `tc2`'s poly x 6443-6460 on south from y 6400 under thirteen horizontal metals to a pad with a contact (6450,7127) |
-| `ck5`, the track | x 6444-6695, y 7121-8296 | metal east along y 7128 to a corner (6688,7128), the track x 6688 south over twelve poly rows to a corner (6688,8156), west to (6644,8156), south to a pad with a contact (6645,8276) |
+| `ck5`, the poly from `tc2` | x 6442-6470, y 6390-7147 | `tc2`'s poly x 6443-6460 on south from y 6400 under fourteen horizontal metals to a pad with a contact (6450,7127) |
+| `ck5`, the track | x 6444-6695, y 7121-8296 | metal east along y 7128 to a corner (6688,7128), the track x 6688 south over twelve poly rows to a corner (6688,8151), west to (6644,8151), south to a pad with a contact (6645,8276) |
 | `ck5`, the column and the diagonal | x 6433-6665, y 8257-9174 | poly column x 6636-6654 under three horizontal metals to a pad with a contact (6645,8580); metal south to (6645,8628), a diagonal (x + y = 15272) to (6472,8801), south on x 6472 to y 9167, west onto `lc2`'s metal end at x 6450 |
 | `rc` | x 6440-6489, y 8905-9459 | `rst_c`'s poly from `lc2`'s end (6450,8923) on at 45 degrees to (6472,8945), south under `ck5`'s metal to a pad with a contact (6469,9209); metal south on x 6472 to (6471,9452), west onto `lc3`'s metal end at x 6450 |
 
@@ -1025,10 +1025,10 @@ The path, from `tc2`'s poly to `lc2`'s metal end:
 | Stretch | What | Evidence |
 |---|---|---|
 | `tc2`'s poly | `P 6451,6160 y6400 w=17` from `tc2`'s pad (6447,6150), `tc2_m6447`; `tl6`: its metal is `tcw_m6404`'s | `notes/blocks/tc2.md` (piece 5), `notes/blocks/tl6.md` |
-| the poly x 6443-6460 | on south from y 6400, 725 px, to a pad. It is the middle one of three vertical polys (x 6408, `tc2_m6404`'s, runs on south past the pad; x 6492, `tc2_m6490`'s, ends on a pad (6490,6755)) and keeps its lane: a run within 6 px of x 6452 at 41 of 49 cuts in the clean shot, the others in the open gaps between metals, where the chip-2 stripped shot has it. Thirteen horizontal metals cross it (y 6408-6422, 6453-6465, 6498-6507, 6539-6551, 6584-6596, 6625-6639, 6799-6811, 6842-6855, 6908-6920, 6952-6964, 6994-7006, 7037-7049, 7080-7093: the last four are the three rows' metals and `rcs_e4`'s), none with a pad, a ring or a hole (Ambiguity 46) | `eof_rows.py diag 6452 7105 6452 6385 --step 15 --reach 28`; `tl5_tracks.py v 6452 6400 7105 --half 2` (clean-shot dips only in the open gaps between the metals: y 6519, 6822, 6974, 7017, 7060); `n_p1.png` (2.5x, metal and chip-2 stripped), overlay `n_o3.png` (1.6x, both stripped shots) |
+| the poly x 6443-6460 | on south from y 6400, 725 px, to a pad. It is the middle one of three vertical polys (x 6408, `tc2_m6404`'s, runs on south past the pad; x 6492, `tc2_m6490`'s, ends on a pad (6490,6755)) and keeps its lane: a run within 6 px of x 6452 at 41 of 49 cuts in the clean shot, the others in the open gaps between metals, where the chip-2 stripped shot has it. Fourteen horizontal metals cross it (y 6408-6422, 6453-6465, 6498-6507, 6539-6551, 6584-6596, 6625-6639, 6668-6682, 6799-6811, 6842-6855, 6908-6920, 6952-6964, 6994-7006, 7037-7049, 7080-7093: the last four are the three rows' metals and `rcs_e4`'s), none with a pad, a ring or a hole (Ambiguity 46) | `eof_rows.py diag 6452 7105 6452 6385 --step 15 --reach 28`; `tl5_tracks.py v 6452 6400 7105 --half 2` (clean-shot dips only in the open gaps between the metals: y 6519, 6822, 6974, 7017, 7060); `n_p1.png` (2.5x, metal and chip-2 stripped), overlay `n_o3.png` (1.6x, both stripped shots) |
 | the pad (6450,7127) | a poly pad x 6432-6470, y 7107-7147: ring and bright centre in both metal shots, a pitted box in the chip-2 stripped shot, a green hole in the clean shot. The poly arrives from the north, the metal leaves east; field south and west (the poly x 6408 passes 15 px west of the pad) | `eof_cchk.py 6450,7125` (hole -28; centre 216 / 223; the east ring not dark); `n_pA.png` (5.6x, four shots) |
 | the metal and the track | east along y 7122-7134 to a corner (6688,7128), south on x 6682-6694 for 1,030 px. Twelve pairs of 8-12 px bars, the edges of the poly rows it crosses (y 7158-7182, 7202-7226, 7246-7269, 7288-7313, 7375-7399, 7418-7443, 7505-7529, 7637-7660, 7768-7791, 7811-7835, 7879-7900, 8028-8052); no break, no hole. No poly under the metal y 7128 (the clean shot has none along it) | `follow.py 6690 7600 N --gap 16` (corner (6683,7130), end (6445,7128)) and `S` (corners (6686,8156), (6644,8153), end (6644,8253)); `tl5_tracks.py v 6687 7140 8150 --half 2`, `h 7128 6465 6680`; `eof_rows.py row 7128 6470 6700`; `n_s3.png` (1.7x), overlay `n_o2a.png` (3.6x, both metal shots) |
-| the L and the second pad | corner (6688,8156), west to (6644,8156), south to a pad with a contact (6645,8276): pad x 6626-6664, y 8257-8296. 30 px of bare ground between this arm and line Q's (the track x 6730's L at y 8190) | `eof_cchk.py 6645,8275` (hole 8; centre 235 / 170); overlay `n_o2b.png` (3.6x, both metal shots and the clean shot); `n_pB.png` (3.1x, four shots) |
+| the L and the second pad | corner (6688,8151), west to (6644,8151), south to a pad with a contact (6645,8276): pad x 6626-6664, y 8257-8296. 30 px of bare ground between this arm and line Q's (the track x 6730's L at y 8190) | `eof_mrun.py col 6666 8120 8190 6660 6672` (the arm's centre y 8151 in both chips); `eof_cchk.py 6645,8275` (hole 8; centre 235 / 170); overlay `n_o2b.png` (3.6x, both metal shots and the clean shot); `n_pB.png` (3.1x, four shots) |
 | the poly column | x 6636-6654, y 8276-8580, salmon and whole in the clean shot from pad to pad, under the horizontal metals y 8362-8374, 8403-8416 and 8449-8460 with no ring and no hole. A metal of another net (x 6663-6678, y 8455-8545) runs beside it 9 px east | `tl5_tracks.py v 6645 8290 8565 --half 2` (no clean-shot dip); `n_pB.png` |
 | the third pad, the diagonal and the run south | pad (6645,8580), x 6626-6665, y 8560-8600. The metal leaves south, bends at (6645,8628), runs at 45 degrees (x + y = 15272: 6632 at y 8640, 6593 at 8680, 6552 at 8720, 6511 at 8760, 6473 at 8800) between `lpstb_b`'s diagonal (x + y = 15206) and line Q's (15337), and south on x 6466-6478 from y 8800. From y 8945 it lies on `rst_c`'s poly (Ambiguities 43, 44) | `eof_cchk.py 6645,8580` (hole 0; centre 228 / 165); `eof_mrun.py row 8600 6430 6760 8620 ... 9180`; `tl5_tracks.py v 6472 8805 9175 --half 2` (one bar, y 8923-8936, where the poly's diagonal passes under); overlay `n_o1.png` (1.9x, metal) |
 | the corner onto `lc2`'s metal | at y 9161-9174 the metal turns west: an arm x 6422-6458 onto `lc2`'s `M 6450,9165 x6432 y9233`. The vertical ends there; it is **not** on the pad (6469,9209) 35 px further south (Ambiguity 45) | `eof_mrun.py row 9140 6400 6570 9150 ... 9260`; `textmap.py 6416 9146 6500 9250 3 --acid`; `n_c9170.png` (3.6x, three shots, every trace) |
@@ -1479,11 +1479,15 @@ driver lies; the other three lead to the loads.
     underneath, which runs on up the vertical's west side; bare ground between two metals is 25 px or
     more everywhere in this bundle. If (a) were wrong the clock, `rst_c` and `lc3_w9470` would be one
     net; if (b) were wrong `lc2`'s through line would end on nothing.
-46. **Crossings without pads** (piece `ck5`; trap 15): the poly x 6451 under thirteen horizontal metals,
+46. **Crossings without pads** (piece `ck5`; trap 15): the poly x 6451 under fourteen horizontal metals,
     the track x 6688 over twelve poly rows (chip 1 dark for 20 px or more at four of them, y 7437-7461,
     7775-7797, 7820-7840, 7872-7904, where chip 2 is bright; chip 2 dark at y 7168-7187, where chip 1 is
     bright), the column x 6645 under three metals. No pad, no ring in both chips and no clean-shot hole
-    at any of them: no contact.
+    at any of them: no contact. The seventh metal over the poly (y 6668-6682) was missed by the cut along
+    x 6452 and found by review round 15: chip 2's metal is dim over the poly there (125-147 at x 6444-6460,
+    against 210-240 at the other crossings) and chip 1's is bright through (183-211), the clean shot is
+    salmon like the others (229/170/128), no ring, no hole (`eof_mrun.py col 6474 6390 7110 6430`;
+    `px.py row 6675 6436 6468 4 metal,metal1,acid1b`).
 
 ## Review
 
@@ -2183,6 +2187,51 @@ tools/t.sh eof sameconn.py 33ff44e               connections identical
 ```
 
 Round 14: no findings that change a connection.
+
+### Round 15 (full review of pieces `ck5` and `rc`; 2026-11-19 20:13 to 20:26 +0000)
+
+One fresh reviewer (Claude Fable 5.2), started for this round, at commit a9233e9; 15 images in
+`cache/scratch/eof/review-15/`. It was given the two pieces' claims (each route stretch by stretch, the
+four pads, the two joins) and told to suspect: the knot at (6472,9150-9235) (whether `ck5`'s vertical is
+joined to the west arm and separate from the pad (6469,9209), with the follower running straight
+through); the 225 px where `ck5`'s metal lies on `rc`'s poly and the dull patch at (6471,9045); the bend
+of `rc`'s poly at (6472,8945); the poly x 6451 between y 6400 and 7107 (a step to a neighbour, a contact
+under a metal, which poly the pad (6450,7127) is on); all round each of the four pads; a one-track slip
+in the nested Ls at y 8156 and in the diagonal bundle; the track x 6688 over its rows and the corner
+(6688,7128); the corner (6471,9452).
+
+What it checked: the knot at 6x in four shots with profiles (the dip at x 6463 between arm and vertical
+is one edge line, `rc`'s poly edge; no metal from y 9176 to 9202, the patch at y 9184-9192 open poly:
+chip 1 161/83/36 against 233/159/79 for metal; the pad's metal leaves south only); the overlap y 8945-9172
+(no ring, widening or hole; the patch at (6471,9045) is dirt on chip 2, chip 1 bright there); the bend at
+4.8x in four shots (one diagonal turning south, no branch, field beyond); the poly x 6451 at 2.6x in three
+shots (one lane, no step); the pads (6450,7127), (6645,8276), (6645,8580) at 5x in four shots (one poly
+and one metal each; the first 15 px clear of the poly x 6408); the nested Ls and the diagonal (`ck5` is
+the middle line; no slip); the track x 6688 and the corners (6688,7128), (6471,9452) (plain Ls at 5x in
+both chips); the full extraction and `tools/unsure.py`. Not checked: `tc2`'s poly north of y 6400; `lc2`'s
+and `lc3`'s own lines beyond the joins; the twelve row crossings of the track x 6688 one by one at 4x
+(text tools and a 1.2x view only); the diagonal above 2.1x.
+
+Findings, each checked by the tracer:
+
+1. **Fourteen metals cross the poly x 6451, not thirteen**: the notes and the trace comment left out the
+   one at y 6668-6682, where chip 2's metal is dim over the poly. No contact (chip 1's metal bright
+   through, no ring, the clean shot salmon like the other crossings, the poly unwidened). Notes and a
+   comment only: does not change a connection. **Confirmed** (`eof_mrun.py col 6474 6390 7110 6430`: 14
+   runs in both chips, the seventh at y 6675; `px.py row 6675 6436 6468 4 metal,metal1,acid1b`: chip 2
+   125-147, chip 1 183-211, clean 229/170/128). Fixed: the comment, the path table, Ambiguity 46.
+2. **The arm of the L was drawn 4-5 px south**: the metal is y 8144-8158 in both chips, the trace had
+   y 8149.5-8162.5. Geometry only. **Confirmed** (`eof_mrun.py col 6666 8120 8190 6660 6672`: centre
+   y 8150-8152, 9-14 px). Fixed: `M 6450,7128 x6688 y8151 x6644 y8276 w=13`.
+
+The proof that no connection changed:
+
+```
+tools/t.sh eof sameconn.py a9233e9               connections identical
+.venv/bin/python tools/sameconn.py a9233e9       connections identical
+```
+
+Round 15: no findings that change a connection.
 
 ## Not done
 
