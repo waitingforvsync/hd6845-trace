@@ -207,7 +207,7 @@ in from the east edge.
 
 | Line | Enters | Step west | Turns west at y | South on x | Pad on it |
 |---|---|---|---|---|---|
-| `lc2_x6299` | (6299,9233) | y 9280 to x 6255 | 9538 | 6082 | none |
+| `inh_src` | (6299,9233) | y 9280 to x 6255 | 9538 | 6082 | none |
 | `lc2_x6342` | (6342,9233) | y 9322 to x 6299 | 9581 | 6125 | none |
 | `lc2_x6387` | (6386,9233) | y 9366 to x 6342 | 9626 | 6169 | none |
 | `lc2_x6432` | (6430,9233) | y 9410 to x 6386 | 9669 | 6212 | (6211,9948): row 9, **stage B0's clock** |
@@ -502,7 +502,7 @@ Round 5: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, third batch)
 
-- `lc2_x6299` (line 1 of the nine metals at y 10400) **is `inh_src`** (`eof` run 9; renamed by the refresh
+- Line 1 of the nine metals at y 10400 (x 6082) **is `inh_src`** (`eof` run 9; renamed by the refresh
   of 2026-11-19).
 - `lc3_e9798`, "a metal from the east" at (6450,9798) (`ports.d/lc3.txt`): the metal runs east only to
   x about 6515 and turns north there on a track x 6514 (followed to y 9532, end not read;

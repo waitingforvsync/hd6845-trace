@@ -259,13 +259,13 @@ N M 5451,14990 cdp4_bus_s0
 # and leave the region at y 15000. No pad on any line between y 10400 and its end; every
 # crossing of a poly row or diagonal is without contact.
 
-# line 1: lc2_x6299 (lc2's first through line)
+# line 1: inh_src (lc2's first through line)
 M 6082,10394 y11491 x5908 y12380 x5844 y14916 x6330 w=14
 P 6300,14896:6342,14932                 # pad at the row's west end
 C 6320,14914 s=24x24
 P 6332,14914 x7550 w=24                 # poly row east (runs on to a pad at x ~7880)
-N M 6082,10800 lc2_x6299
-N P 7400,14914 lc2_x6299
+N M 6082,10800 inh_src
+N P 7400,14914 inh_src
 
 # line 2: lc2_x6342 (lc2's second through line); south out of the region
 M 6126,10394 y11534 x5953 y12424 x5888 y14874 x6366 y15000 w=14

@@ -142,7 +142,7 @@ Full extraction with run 8: 2,398 nets (one fewer: `bd1_k` is an alias), 4,345 t
 Run 9 (Tom Seddon's session, Claude Fable 5.2; 2026-11-19 16:17 +0000 on). One piece, wiring only, no
 uncertain items.
 
-- **Task (b), `inh_src`'s source: it is not in the bottom-centre logic. `inh_src` is `lc2_x6299`**, the first
+- **Task (b), `inh_src`'s source: it is not in the bottom-centre logic. `inh_src` is `lc2`'s through line x 6299**, the first
   through line of the left-centre strips (piece `isrc4`). The fourth open end of piece `isrc`, the poly west
   of the pad (8688,17737), was followed 4,700 px: a poly row to a pad (8053,17735), a metal up the track
   bundle x 8057-8185 by two steps to a pad (8185,16303), a poly row west to a pad (7968,16303), `bc1`'s
@@ -150,7 +150,7 @@ uncertain items.
   end of `busl`'s row y 14914 at x 7550, which `busl` and `lc3` bring down the left bus field from `lc2`'s
   through line (it enters `lc2` from the east at (6450,8630)). No uncertain item on the path; no transistor.
   So the signal whose copies stop `ck_b` (`inh_ck`), the row counter's step (`inh_rc`) and open the latch
-  on R4's match (`inh_lat`) **arrives from the north-west**, from whatever drives `lc2_x6299` east of
+  on R4's match (`inh_lat`) **arrives from the north-west**, from whatever drives `inh_src` east of
   (6450,8630): the strip between the left-centre logic and the central datapath (`busl`'s northern part,
   free), where the latch's output `bd1_n2` is also heading.
 - **The other three open ends are gates, and so are two more on the new path** (looked at, not drawn): the
@@ -160,7 +160,7 @@ uncertain items.
   under the rail x 8336-8384. With `bc2`'s unit a, **`inh_src` is the clear of at least five latches of the
   bottom-centre logic** (believed for four: the cells are not placed).
 
-Full extraction with run 9: 2,397 nets (one fewer: `lc2_x6299` is an alias of `inh_src`), 4,345 transistors,
+Full extraction with run 9: 2,397 nets (one fewer: the through line's name became an alias of `inh_src`), 4,345 transistors,
 0 errors, 0 warnings.
 
 Full extraction after run 2: 2,351 nets, 4,232 transistors, 0 errors, 0 warnings; the package
@@ -380,15 +380,15 @@ traced on another model and waits for its Fable review (re-read item R31); the j
 Not drawn, looked at (`c1.png`-`c3.png`): `trunks`' poly y 16940-16958 east of x 10470 runs on under two
 thin metals into the unit under the rail x 10540-10585 and crosses it as a gate row.
 
-### Piece `isrc4`: `inh_src` is `lc2_x6299` (traced; wiring only)
+### Piece `isrc4`: `inh_src` is `lc2`'s through line x 6299 (traced; wiring only)
 
 ```
-inh_src = lc2_x6299        one net: lc2's first through line, lc3's and busl's line 1, this piece, piece isrc, trunks
+inh_src = lc2's line x 6299        one net: lc2's first through line, lc3's and busl's line 1, this piece, piece isrc, trunks
 ```
 
-The full extraction has one net fewer (2,397) and no net `lc2_x6299`; `inh_src` keeps its three gates
+The full extraction has one net fewer (2,397) and no separate net for `lc2`'s through line x 6299; `inh_src` keeps its three gates
 (`bd1`'s two, `bc2`'s clear). `tools/unsure.py` lists neither name: no uncertain item on the path. The
-alias is `@alias inh_src lc2_x6299` in `trace/eof.txt` (the rename is the coordinator's refresh).
+alias in `trace/eof.txt` was dropped by the rename of 2026-11-19.
 
 The path, from the open end of piece `isrc` back to `busl`'s row:
 
@@ -408,7 +408,7 @@ The path, from the open end of piece `isrc` back to `busl`'s row:
 
 What the join says (believed, not traced): `inh_src` is made north-west of where it is used, and the three
 copies of it that go to the clock block, the row counter's step and the latch on R4's match are made at
-the far end of a line that crosses half the die. Its driver is whatever feeds `lc2_x6299` east of
+the far end of a line that crosses half the die. Its driver is whatever feeds `inh_src` east of
 (6450,8630).
 
 The gates it was seen to drive on the way (none drawn: the diffusion under each row belongs to units of
@@ -771,7 +771,7 @@ driver lies; the other three lead to the loads.
 | `inh_src` | poly | (8930, 16728-16746) | ? | the row west of the tap pad (8966,16737): into the gate column |
 | `inh_src` | poly | (8930, 16163-16181) | ? | the row west of the tap pad (8962,16172): into the gate column |
 | `inh_src` | poly | (8930, 15248-15266) | ? | the row west of the end pad (8966,15260) |
-| `inh_src` | poly | (7550, 14904-14924) | ? | piece `isrc4`: onto the east end of `busl`'s poly row of `lc2_x6299` (its port (7550,14902-14926)); the driver lies somewhere beyond it, north |
+| `inh_src` | poly | (7550, 14904-14924) | ? | piece `isrc4`: onto the east end of `busl`'s poly row of `inh_src` (its port (7550,14902-14926)); the driver lies somewhere beyond it, north |
 | `inh_src` | poly | (8326, 16294-16312) | to a load | piece `isrc4`: the row's east end, a gate at x 8283-8311 over an undrawn diffusion column (`bc1` (continue) / `bc3`) |
 | `inh_src` | poly | (8326, 16900-16918) | to a load | piece `isrc4`: the tap row's east end, a gate at x 8283-8311 over an undrawn diffusion column (`bc3`) |
 
@@ -1560,7 +1560,7 @@ Round 11: no findings.
   its top and the pad (7313,7215)): `bw`'s crossing field / `busl`'s northern part.
 - The units below the gate in the same column (x 7460-7800, y 7860-8440; `cdp3` (continue)): the
   rail and the wide metal are drawn to y 7860 only.
-- **`inh_src`'s source** (what `inh_ck` is; task (b)): since run 9 (piece `isrc4`) the net is `lc2_x6299`,
+- **`inh_src`'s source** (what `inh_ck` is; task (b)): since run 9 (piece `isrc4`) the net is `inh_src`,
   and every end in the bottom-centre logic and `bd1` that has been looked at is a gate. **Where to go on:
   `lc2`'s through line at its east edge (6450,8630)**, eastwards into the strip between the left-centre logic
   and the central datapath (`busl`'s northern part, 6450-7600 x 6750-10400, which its claim leaves free): find

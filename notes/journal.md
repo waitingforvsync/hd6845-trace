@@ -2097,7 +2097,7 @@ was merged (d911059). Six handoffs, applied together.
   match as latched, shown only while `inh_src` is low. The output is drawn 11,900 px, no gate and no
   tap, along the bottom bus field and up the left bus field to (6711,15000). Review round 10: no
   finding that changes a connection.
-- `eof` run 9 (Tom Seddon; piece `isrc4`; wiring): **`inh_src` is `lc2_x6299`** (firm), by a poly row,
+- `eof` run 9 (Tom Seddon; piece `isrc4`; wiring): **`inh_src` is `lc2`'s through line x 6299** (firm), by a poly row,
   `bc3`'s track bundle, `bc1`'s track 7969 and the row y 14914 onto `busl`'s row end. So the driver of
   `inh_src` is not in the bottom-centre logic: the line enters `lc2` from the east at (6450,8630).
   Review round 11: no findings.

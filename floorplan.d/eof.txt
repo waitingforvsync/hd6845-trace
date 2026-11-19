@@ -20,7 +20,7 @@
 10205,17586:13234,18010  route  latched R4 match, bottom bus | bd1_n2 west: poly row y 17776, metal y 17779, the outer Z bend at x 11722, a poly diagonal to the row y 17905, pad (10222,17993)
 7405,18020:10239,18099   route  latched R4 match, through the bottom-centre routing field | bd1_n2 west along y 18039 and y 18083 by three poly cross-unders; no tap
 6692,15000:7424,18090    route  latched R4 match, up the left bus field | bd1_n2 from the corner (6712,18083) north on x 6712, a poly link under the supply buses, on north (drawn to y 15000)
-7540,14896:7986,14930    route  inh_src, poly row y 14914 | inh_src is the left-centre through line lc2_x6299: from the left bus field's row east to the pad (7880,14914) and the corner of the track x 7967
+7540,14896:7986,14930    route  inh_src, poly row y 14914 | inh_src is the left-centre through line (x 6299 at lc2's south edge): from the left bus field's row east to the pad (7880,14914) and the corner of the track x 7967
 7958,14930:7986,16322    route  inh_src, track x 7967 | straight south, 1,390 px, to the pad (7968,16303)
 7950,16286:8326,16322    route  inh_src, poly row y 16303 | between the pads (7968,16303) and (8185,16303), on east to a latch's clear gate at x 8283-8311
 8050,16322:8203,17718    route  inh_src, bundle track | from the pad (8185,16303) south on x 8185, x 8103 and x 8057 by two steps; a tap pad (8100,16910)

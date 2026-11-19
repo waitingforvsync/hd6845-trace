@@ -60,8 +60,8 @@ inh_src     P  8930,16728-16746   ?    the row west of the tap pad (8966,16737):
 inh_src     P  8930,16163-16181   ?    the row west of the tap pad (8962,16172): into the gate column
 inh_src     P  8930,15248-15266   ?    the row west of the end pad (8966,15260)
 
-# Piece isrc4: inh_src is lc2_x6299 (run 9)
-inh_src     P  7550,14904-14924   ?    onto the east end of busl's poly row of lc2_x6299 (one net: @alias inh_src lc2_x6299); the driver is beyond it
+# Piece isrc4: inh_src is lc2's through line x 6299 (run 9)
+inh_src     P  7550,14904-14924   ?    onto the east end of busl's poly row of inh_src (one net); the driver is beyond it
 inh_src     P  8326,16294-16312   out  the row's east end: a gate at x 8283-8311 over an undrawn diffusion column (the clear row of a latch unit: bc1 / bc3)
 inh_src     P  8326,16900-16918   out  the tap row's east end: the same 606 px lower (bc3)
 

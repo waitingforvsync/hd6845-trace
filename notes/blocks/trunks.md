@@ -585,7 +585,7 @@ along the top of the central datapath) is the gap.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, third batch)
 
-- "source of X": X (`inh_src`) is `lc2`'s first through line (`eof` run 9; was `lc2_x6299`): the driver
+- "source of X": X (`inh_src`) is `lc2`'s first through line (`eof` run 9): the driver
   is at or beyond `lc2`'s east edge (6450,8630).
 - `trace/trunks.txt`, `ck_out #1` (`M 10320,17908 x10230`, "followed to x 10230 only"): it lies for 96 px
   on `bd1_n2`'s poly row without a contact and runs on west to a pad at about (9770,17910), with a poly

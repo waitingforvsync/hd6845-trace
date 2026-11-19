@@ -47,7 +47,7 @@ cdp4_bus_s1  P  4780,14341-14361   ?  poly row on west into the left array, y 14
 cdp4_bus_s0  M  5443-5459,15000    ?  track on south 45 px to a pad (5365,15042) on a poly row from the west (bl0)
 
 # Piece lc9: the nine metals from lc3's south edge, and the poly rows seven of them end on
-lc2_x6299    M  6075-6089,10400    ?   joins lc3's metal x 6082 (lc2's first through line)
+inh_src    M  6075-6089,10400    ?   joins lc3's metal x 6082 (lc2's first through line)
 lc2_x6342    M  6119-6133,10400    ?   joins lc3's metal x 6125 (lc2's second through line)
 lc2_x6387    M  6162-6176,10400    ?   joins lc3's metal x 6169 (lc2's third through line)
 lc3_w9947    M  6205-6219,10400    ?   joins lc3's metal x 6212 (lc2_x6432: the ripple counter's clock)
@@ -62,7 +62,7 @@ lc3_e9756    P  7550,14642-14666   ?   poly row on east to a pad (7790,14654) (n
 lc3_w9470    P  7550,14685-14709   ?   poly row on east to a pad (7835,14697) (not drawn)
 lc2_w8450    P  7550,14728-14752   in  poly row on east to a pad (7790,14740) (not drawn)
 lc3_w9947    P  7550,14772-14796   ?   poly row on east to a pad (7835,14784) (not drawn)
-lc2_x6299    P  7550,14902-14926   ?   poly row on east past x 7860 (end not seen)
+inh_src    P  7550,14902-14926   ?   poly row on east past x 7860 (end not seen)
 lc2_x6342    M  6359-6373,15000    ?   track on south into bl0's ground
 lc2_x6387    M  6401-6415,15000    ?   track on south into bl0's ground (seen to y 15150)
 
