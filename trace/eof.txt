@@ -774,7 +774,10 @@ N M 6711,15600 bd1_n2
 #      y 7985 and the metal x 6558 south of y 8057 are other nets. Where the track crosses the row of
 #      the pad (6513,7888) the clean shot is olive green under it (notes, Ambiguity 33: no ring, no
 #      widening: no contact). From x 6313 east to the corner the metal y 7257 lies on another net's poly
-#      row (its west end at x 6313: j_c6313.png; no contact: Ambiguity 34);
+#      (it comes from the north on x 6313-6333 and turns east under the metal: j_c6313.png, review round
+#      12; no contact: Ambiguity 34). Chip 1's metal shot has a 13 px dark bar across the metal at
+#      x 6544-6556, just west of the corner; chip 2 is whole there and chip 1's clean shot is protected
+#      through: a blemish of chip 1's photo (Ambiguity 36);
 #   D  the pad's poly row y 7248-7266 west through lc1's crossing field (under a dozen vertical metals,
 #      none with a pad on it) and in the open to x 5494, a 45-degree diagonal north-west under V5, V4,
 #      V3 (lpstb_b) and V2 (res_b) to (5149,6912), and north onto piece x1's poly P 5150,6815 y6900
