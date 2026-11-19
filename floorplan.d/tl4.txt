@@ -1,13 +1,13 @@
 # tl4: top-left random logic, fourth strip (the vertical control's right cluster)
-4665,3906:4967,4390   logic   latch in the right cluster | tl4_w4243 = NOT(rst_a OR tl4_w4068 AND NOT tl4_w4025 OR tl4_w4113): open while tl4_w4068 is high, data tl4_w4025, cleared by rst_a; a copy of the latches in front of rcs_e4
-4290,3012:4967,3222   ?logic  NOR at the top of the right cluster | tl4_w3113 = NOR(tl4_w3070, tl4_w3178); output north by the metal x 4408
-4400,3781:4967,3911   ?logic  inverter in the right cluster | rcs_e3 = NOT tl4_w3850 (rcs_e3, an alias); output north by the metal x 4496 and west on the sixth bus line to tla's bus line E
-4250,4410:4967,4645   ?logic  three-input NOR in the right cluster | tl4_w4545 = NOR(tla_w3417, inh_ck, tl4_w4590); output south by the metal x 4626
-4347,4645:4967,5000   ?logic  cross-coupled pair in the right cluster | tl4_w4686 = NOT(tl4_w4718 AND tl4_w4590 OR tl4_w4850), tl4_w4850 = NOT(rst_a OR tl4_w4545 OR tl4_w4686); tl4_w4850 leaves south on the track x 4581
-4560,4990:4967,5170   ?logic  two-input NOR in the right cluster | tl4_w5068 = NOR(tl4_w4545, tl4_w4850); output on the track x 4625 south
-4437,5175:4967,5312   ?logic  inverter in the right cluster | tl4_w4025 = NOT tl4_w5068: the data of the latch at y 3906-4390, by the track x 4452 north
-4520,5297:4967,5465   ?logic  strong inverter in the right cluster | c4l_l3 = NOT tl4_w4243 (the latch's output, by the track x 4496); output a poly row at y 5445-5465
-4300,3225:4967,3765   ?logic  second latch in the right cluster | tl4_w3390 = NOT(tl4_w3070 AND tl5_w3505 OR rst_a OR tl4_w3178), tl4_w3178 = NOT(NOT tl4_w3070 AND tl5_w3505 OR tl4_w3390): open while tl5_w3505 is high, data tl4_w3070, cleared by rst_a; tl4_w3178 to the NOR above
+4665,3906:4967,4390   logic   latch that drives the 4-bit counter's L3 line | tl4_w4243 = NOT(rst_a OR tl4_w4068 AND NOT tl4_w4025 OR tl4_w4113): open while tl4_w4068 is high, data tl4_w4025, cleared by rst_a; a copy of the latches in front of rcs_e4
+4290,3012:4967,3222   logic   NOR at the top of the right cluster | tl4_w3113 = NOR(tl4_w3070, tl4_w3178); output north by the metal x 4408
+4400,3781:4967,3911   logic   inverter that makes rcs_e3 | rcs_e3 = NOT tl4_w3850 (a step-logic input); output north by the metal x 4496 and west on the sixth bus line to tla's bus line E
+4250,4410:4967,4645   logic    three-input NOR in the right cluster | tl4_w4545 = NOR(tla_w3417, inh_ck, tl4_w4590); output south by the metal x 4626
+4347,4645:4967,5000   logic    cross-coupled pair in the right cluster | tl4_w4686 = NOT(tl4_w4718 AND tl4_w4590 OR tl4_w4850), tl4_w4850 = NOT(rst_a OR tl4_w4545 OR tl4_w4686); tl4_w4850 leaves south on the track x 4581
+4560,4990:4967,5170   logic    two-input NOR in the right cluster | tl4_w5068 = NOR(tl4_w4545, tl4_w4850); output on the track x 4625 south
+4437,5175:4967,5312   logic   data inverter of the c4l_l3 latch | tl4_w4025 = NOT tl4_w5068: the data of the latch at y 3906-4390, by the track x 4452 north
+4520,5297:4967,5465   logic   c4l_l3 driver (the 4-bit counter's L3) | c4l_l3 = NOT tl4_w4243 (the latch's output, by the track x 4496); output a poly row at y 5445-5465
+4300,3225:4967,3765   logic    second latch in the right cluster | tl4_w3390 = NOT(tl4_w3070 AND tl5_w3505 OR rst_a OR tl4_w3178), tl4_w3178 = NOT(NOT tl4_w3070 AND tl5_w3505 OR tl4_w3390): open while tl5_w3505 is high, data tl4_w3070, cleared by rst_a; tl4_w3178 to the NOR above
 4250,5440:4967,5790   route  routing channel south of the right cluster | eight poly rows under the tracks' south ends, RA and RB: no device. c4l_l3, tl4_w5068, tl4_w4590, tl4_w3850, rcs_mv, tc1_o3527 and inh_ck cross to tl5's rows at x 4967
 4250,2500:4967,2910   route  top of strip 4: bus lines and the tracks' north ends | six metal bus lines along y 2512-2728 (lines 2 and 3 are r9m's) ending on pads whose rows go east to tl5; eight pads where the bus field's tracks end: tl3_e4243 to tl5's latch c enable, tl4_w3113, tl5_w3245 and tl4_w4068 to tl5's rows, rcs_e3 (the inverter's output) west on line 6. No device
 4250,5790:4967,6350   route  south of the routing channel | rcs_x1 (tl3's latch C clear metal) to a pad and tl5's row y 5890; a second metal to a pad and tl5's row y 5936; c4l_gab's thin metal to a pad on the row y 6323; the legs of the rails RA, RB and RC south. No device

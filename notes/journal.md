@@ -1699,3 +1699,20 @@ nets, 4,282 transistors, 0 errors, 0 warnings. No active claims.
   Coverage: 63.0% traced, 99.7% in a package, 0.0% in neither.
 - **Pushed in two pushes** (handoffs, then the refresh), following `tl3`'s request to spare the
   tracers' gate runs.
+
+## 2026-11-19 10:32  Floor plan of the top-left logic brought up to date
+
+The user asked whether the floor plan reflects the latest top-left findings. Every traced piece had
+its box, but the labels lagged:
+- `tl4`'s and `tl5`'s blocks were still drawn provisional although both packages are done. The
+  `?` is dropped on all of them except `tl5`'s rail RC, which is VSS by structure only.
+- Labels now say what is known: "latch that drives the 4-bit counter's L3 line", "c4l_l3 driver",
+  "data inverter of the c4l_l3 latch", "inverter that makes rcs_e3", "latch c: field flip-flop
+  candidate".
+- `tla`'s fragment predated `tl1`-`tl5`. It drew coarse provisional blocks over the middle and
+  right clusters ("not traced"), the second bus field and the small cluster; these are removed, since
+  the strips' own fragments cover them. Its step-logic cluster, vertical bus and second crossing
+  field are no longer provisional. The poly bus label now names its five lines (`eof`).
+- Still provisional, rightly: `tla`'s rows along the top (y 2620-2900, `tl3`'s last item) and the
+  diagonal fan in `lc1`'s strip.
+- `out/` rebuilt.
