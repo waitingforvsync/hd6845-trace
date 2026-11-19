@@ -135,7 +135,7 @@
 -	array	R9 register (5 bit)	8750,4232:10790,4524	five static register bits, same cell as the row above; outputs go up to the comparator. R9 by its write strobe
 -	route	R9 compare lines into the comparator	10840,3985:11720,4195	five polys under the supply metal and the strobe lines
 -	route	R9 compare lines, long run	11630,3985:15140,4195	five metals along y 4005-4179
--	?logic	RA output stage (5 cells)	13990,4210:16330,4570	rax_o0-4 in through a pass transistor on the strobe y 4548, out to the RA drivers; a pull-down per cell on the line y 4350; believed a latch per bit (partly traced)
+-	logic	RA output stage (5 cells)	13990,4210:16330,4570	a static latch per bit (cell ral, firm in all 19 copies): rax_o0-4 in through a pass transistor on the strobe ral_stb (y 4548), out to the RA drivers; forced high by the force line cnt_gab (y 4350, AMB-017: its driver is open)
 84	route	R9 compare lines under the RA driver lines	14930,3895:15450,4110	five polys
 85	route	RA2 driver input, end	15235,3855:15440,4200	poly under RA0/RA1's metals, south along x 15255 towards the ral band
 -	route	R9 compare lines, nest	15360,3900:16580,4200	five metals between two cross-unders

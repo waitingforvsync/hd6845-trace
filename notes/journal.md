@@ -1716,3 +1716,20 @@ its box, but the labels lagged:
 - Still provisional, rightly: `tla`'s rows along the top (y 2620-2900, `tl3`'s last item) and the
   diagonal fan in `lc1`'s strip.
 - `out/` rebuilt.
+
+## 2026-11-19 10:59  Queue: the central column's registers and the rest of the top left
+
+The user asked for priority on the top-left random logic and on the registers and latches down the
+central column (R12-R17). After `eof`, `busL` and `tlb` the queue now runs:
+1. `regs`: a follow lead group. It takes `wr_r14`, `wr_r15`, `rsel12`, `rsel13` and the four read
+   selects from `sel`'s bottom edge to the rows they strobe, to say which row is which register.
+2. `tl3` (continue): the rows above y 2890, which hold the only way left to `tl4_w4590`'s driver.
+3. `cdp4` (continue), moved up.
+4. `cdp3` (continue): row A's six large cells, with `cdp2`'s row D, the top of the same cells.
+5. `tla` (continue): its Left list and R38-R42.
+6. `cdp2` (continue).
+7. `cdp1` (continue).
+
+Floor plan: `ral`'s label was still "believed a latch per bit (partly traced)" and provisional,
+although `ral` has been done since 2026-11-17 (a static latch per bit, firm in all 19 copies). The
+label is corrected. `out/` rebuilt.
