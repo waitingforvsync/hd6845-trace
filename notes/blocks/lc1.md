@@ -424,7 +424,7 @@ Round 4: no findings that change a connection.
 ## Corrections (coordinator, from the handoffs of 2026-11-19)
 
 - "Two metals lie on [`lc1_w7040`'s row] lengthwise without contact: ... x 6098-6307": that metal is
-  `tcw_a` = `inh_ck` (`eof` run 2). Ports: `lc1_w7343` is `res_b`, `lc1_w7257` is `lpstb_b`, `lc1_w7140`
+  `inh_ck` (`eof` run 2). Ports: `lc1_w7343` is `res_b`, `lc1_w7257` is `lpstb_b`, `lc1_w7140`
   drives `rcs_x1`, `lc1_w7606` is `tl5_w3636`. "Believed, from the user: ... `lc1_w7864` a chip-wide reset
   of some kind": traced, it is a buffered NOR(`lpstb_b`, `res_b`); the believed "three buffered copies ...
   the pattern of `inh_ck`, `inh_rc`, `inh_lat`" does not hold: they are copies of the reset. Not in the
@@ -437,7 +437,7 @@ Round 4: no findings that change a connection.
   metal T1 runs on to a pad (5232,8214) and a row west to a track down `lc2`'s west cluster: it is
   `lc2_w8474`, the clear of `lc2`'s counter. `lc1_w7990` drives `lc2`'s gate 9, whose output metal
   re-enters at x 5118-5136 and runs far north. Wires crossing y 8067 with no port here: `lc2_w8646`
-  (x 6159-6177), `lc2_w8083` (poly x 6401-6415), `lc2_w8474` (x 6332-6350), `lc2_w8172` (= `inh_ck`,
+  (x 6159-6177), `lc2_w8083` (poly x 6401-6415), `lc2_w8474` (x 6332-6350), `inh_ck` (
   x 6422-6440), `lc2_w8341` (x 5508-5524), `lc2_w9124` (thin metal x 5967-5981), row 4's metal
   (x 5422-5438). Geometry: in the `tl1_ub` instance the pad of `lc1_w7862` has its hole at (6105,8265)
   against (6115,8272) drawn.

@@ -1010,9 +1010,9 @@ Round 1: no findings.
 - `tl1_w4937` ("enters on a poly row from the east, not identified") is the net of `tl3`'s thin metal
   x 3948-3962 (firm: row and pad), and by that metal `tl3_e3550` (marked: AMB-032). So `rcs_e4` =
   NOR(`tl1_w4678`, `tl3_e3550`).
-- `tl1_w3594` ("not identified; every known end is a gate") is `tcw_a`, marked, by `tl3`'s row y 2899 and
-  the thin metal x 4099-4111 (AMB-033). Then `tl1_w3636` = NOR(`tcw_a`, `tl1_w3678`) and `rcs_a2` =
-  NOR(`tcw_a`, `tl3_w3803`): the two latches in series are a master and a slave on `tcw_a`.
+- `tl1_w3594` ("not identified; every known end is a gate") is `inh_ck`, marked, by `tl3`'s row y 2899 and
+  the thin metal x 4099-4111 (AMB-033). Then `tl1_w3636` = NOR(`inh_ck`, `tl1_w3678`) and `rcs_a2` =
+  NOR(`inh_ck`, `tl3_w3803`): the two latches in series are a master and a slave on `inh_ck`.
 - The master's inverter box under thin W "protected: 196-202/151-178/127-133" at (2704,4362): four px
   lower, `px.py row 4366 2684 2722 3` gives 160-183/142-172/99-141 with a grey sample at x 2708, the
   same grey band as in `tl3`'s latch C (`tl3`). Nothing drawn changes.
@@ -1023,4 +1023,4 @@ Round 1: no findings.
 
 - `tl1_w2592` is NOT `sl_eq_r5` (`r9m_l1w`), driven from the east by `eof`'s inverter in `cdp1`'s
   slice-0 position, and leaves north into the band `tlb`.
-- `tcw_a` (and so `tl1_w3594`, marked) is `inh_ck` (`eof` run 2).
+- `inh_ck` (and so `tl1_w3594`, marked) is `inh_ck` (`eof` run 2).

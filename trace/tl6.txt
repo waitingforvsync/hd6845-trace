@@ -47,10 +47,10 @@ M 5972,6193 y6350
 P 5676,3872 x6225 w=20
 @alias tcw_m6232 tl5_w4590
 
-# ---- tcw_a: fld's pad (6400,4005): its poly west along y 4003 to a pad (5800,4002) (t1.png,
+# ---- inh_ck: fld's pad (6400,4005): its poly west along y 4003 to a pad (5800,4002) (t1.png,
 # t7.png); metal west, corner (5755,4002), U1 south with a pad (5757,5632) (t10.png) to its
 # south pad (5755,6065) (t8.png). The pad (5757,5632) is the east end of the row from tl5's
-# pad (5666,5632): tl5_w5631 = tcw_a. The south pad's poly east along y 6065 under U2, bw's
+# pad (5666,5632): the net is inh_ck. The south pad's poly east along y 6065 under U2, bw's
 # metal and the wide metal to a pad (6016,6066) (t9.png); metal east, corner (6105,6066),
 # south over the rows y 6238 and y 6325 (no contact: t11.png) out of the strip
 P 5800,4003 x6392
@@ -60,7 +60,6 @@ M 5800,4002 x5755 y6065
 P 5676,5632 x5757 w=20
 P 5740,5615:5775,5650
 C 5757,5632
-@alias tcw_a tl5_w5631
 P 5738,6048:5772,6082
 C 5755,6065
 P 5755,6065 x6016

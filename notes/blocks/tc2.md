@@ -1045,7 +1045,7 @@ Looked at because of the sweep:
 | `tc2_sr_c` | M | x 6400, y 6360-6380 | ? | going on west (follower: end (6184,6370) on a pad) |
 | `ral_stb` | M | x 8198-8212, y 4450 | ? | from `tc1` (its bus metal ns4) |
 | `ral_stb` | P | x 8250, y 5359-5379 | ? | the poly from the contact (8204,5371), going on east |
-| `ral_stb` | M | x 6400, y 6316-6340 | ? | going on west: pad (6145,6322), row, pad (5755,6322), south (`tl6`; the follower's end (6012,6068) was a jump onto `tcw_a`'s metal x 6105) |
+| `ral_stb` | M | x 6400, y 6316-6340 | ? | going on west: pad (6145,6322), row, pad (5755,6322), south (`tl6`; the follower's end (6012,6068) was a jump onto `inh_ck`'s metal x 6105) |
 | `tc2_r5718` | P | x 8250, y 5708-5728 | ? | the row going on east |
 | `tc2_r5718` | M | x 7522-7544, y 6400 | ? | going on south (follower: end (7353,7465)) |
 | `tc1_ns3` | M | x 7894-7909, y 4450 | ? | from `tc1` (its contact (7905,4370)) |

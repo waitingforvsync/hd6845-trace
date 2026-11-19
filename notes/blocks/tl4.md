@@ -61,7 +61,7 @@ equations print a different input name** (`tl3_e4243` for `tl4_w3070`), and `tl3
 `tl3_w4978` prints `tl4_w4590` for `tl3_e5114`:
 
 - `tl4_w3070` (the second latch's data, the top NOR's gate 1) **is `tl3`'s `tl3_e4243`** =
-  NOR(`tl3_e4152`, `rcs_mv`): the track x 4318 leaves the strip west at (4250, 4236-4256).
+  NOR(`inh_ck`, `rcs_mv`): the track x 4318 leaves the strip west at (4250, 4236-4256).
 - `tl4_w3850` (the input of the inverter `rcs_e3`) **comes from the south bus**: `tl5_w5761`.
 - `tl4_w4590` (an input of the three-input NOR and of the pair) is `tl3_e5114` (gate 2 of
   `tl3`'s NOR e5, which makes its latch B's enable) and `tl5_w5674`.
@@ -69,14 +69,14 @@ equations print a different input name** (`tl3_e4243` for `tl4_w3070`), and `tl3
   inverter's row) as `tl5_w5457`, and west.
 - **`rcs_mv` passes through**: from `tl3`'s pad by a poly L in this strip, `tl3`'s metal
   x 4236 (`tl3_e4915`), a pad and two rows to `tl5` (`rcs_mv`).
-- Passing wires: `tc1_o3527` (`tl5_w5544`) by a jumper to the row y 5718 west; `tcw_a`
-  (`tl5_w5631`) straight across; `tl3_e4372` and `tl3_e4635` each from a row in the south to
+- Passing wires: `tc1_o3527` (`tl5_w5544`) by a jumper to the row y 5718 west; `inh_ck`
+  (`inh_ck`) straight across; `tl3_e4372` and `tl3_e4635` each from a row in the south to
   `tl3`'s gate row in the north; `tl3_e5240`, a row-metal-row loop that enters and leaves west
   (`tl3`'s run 8, merged while this piece was in review, has its north row as the gate of an
   inverter whose output is the south row of `tl3_e4635`: so **`tl3_e4635` = NOT `tl3_e5240`**,
   the join `tl3` left open as `tl3_e4635_u`, aliased here).
-- Seen, not drawn (it is in `tl3`'s strip): the row of `tcw_a` runs on west to `tl3`'s pad
-  (4104,5633), which `tl3` has as `tl3_e4152` = `tl4_w4501`. If so, **`tcw_a` is `tl3`'s track A
+- Seen, not drawn (it is in `tl3`'s strip): the row of `inh_ck` runs on west to `tl3`'s pad
+  (4104,5633), which `tl3` has as `inh_ck`. If so, **`inh_ck` is `tl3`'s track A
   and gate 2 of the three-input NOR here.**
 
 Before that, 2026-11-18 07:24 -0600: **nine units.** Traced in the sixth run: the rest of the gate
@@ -94,7 +94,7 @@ upper latch's output (`tl4_w5455`). No merged equation changed.
 Before that: **five units.** The fifth, traced in the fourth run, is a
 cross-coupled pair at y 4645-5000 (9 transistors, 29 in all): `tl4_w4686` and `tl4_w4850` below.
 Before that: **four units** (the fourth, a three-input NOR at y 4410-4645,
-`tl4_w4545` = NOR(`tla_w3417`, `tl4_w4501`, `tl4_w4590`), traced in the third run: 4 transistors, 20 in all).
+`tl4_w4545` = NOR(`tla_w3417`, `inh_ck`, `tl4_w4590`), traced in the third run: 4 transistors, 20 in all).
 Before that: **three units.** The gate column repeats the first cluster's west column
 (`tl1`'s units on R1/R2) 2125 px east and 434 px north (the top unit 520 px north). Traced:
 the NOR at the top (y 3012-3222), the inverter above the latch (y 3781-3911) and the latch
@@ -110,7 +110,7 @@ rcs_e3    = NOT tl4_w3850                                         marked: the lo
 tl4_w3928 = NOT tl4_w4025                                         firm
 tl4_w4113 = NOT( tl4_w4025 AND tl4_w4068  OR  tl4_w4243 )         marked: the two load ties
 tl4_w4243 = NOT( tl4_w4198  OR  tl4_w4068 AND tl4_w3928  OR  tl4_w4113 )   marked: the two load ties
-tl4_w4545 = NOR( tla_w3417, tcw_a, tl4_w4590 )                    marked: the load's tie   (tcw_a: tl4_w4501, tl3's alias since its run 9)
+tl4_w4545 = NOR( tla_w3417, inh_ck, tl4_w4590 )                    marked: the load's tie   (inh_ck, tl3's alias since its run 9)
 tl4_w4686 = NOT( tl5_w3245 AND tl4_w4590  OR  tl4_w4850 )         marked: the lower load's tie carries tl4_w4850 to this gate   (tl5_w3245: tl4_w4718 until the eighth run, an alias now)
 tl4_w4850 = NOT( tl4_w4198  OR  tl4_w4545  OR  tl4_w4686 )        marked: the load ties; tl4_w4545 on two gates in series (one join `?`)
 tl4_w5068 = NOR( tl4_w4545, tl4_w4850 )                           marked: the load's tie
@@ -257,7 +257,7 @@ shots); the rows on `r1.png` (2.7x of 4250-4700 x 4400-4650, stripped and metal)
   - gate 1 is `tla_w3417`: `tla`'s row y 4452-4470 from its pad (4410,4460), which `tla` drew
     to x 4520, runs on east without a break to the column (`r1.png`). **Input identified**: the
     selector's output (`notes/blocks/tla.md`) now has a destination; `tla`'s equation is unchanged.
-  - gate 2, `tl4_w4501`: a row y 4492-4512 from the west, across the whole bus field under every
+  - gate 2, `inh_ck`: a row y 4492-4512 from the west, across the whole bus field under every
     track without a pad, and out of the strip at x 4250 (`r1.png`).
   - gate 3, `tl4_w4590`: a row y 4578-4598 from a pad with a contact (4364,4590) on the track
     x 4362. `follow.py 4362 4500 N/S`: one metal from y 2810 to y 5682, with contact candidates
@@ -551,7 +551,7 @@ The wires (names as the full extraction prints them):
 | `tl4_w5068` (= `tl5_w5500`) | the track x 4625's south part ends on the pad (4625,5504); row y 5490-5510 east to (4967,5500): `tl5`'s row to the pad (5493,5500) |
 | `tl3_e4372` | row y 5491-5510 from (4250,5500) to the pad (4321,5504); metal x 4321 north, one piece, to the pad (4321,4374); row y 4364-4381 west to (4250,4373): `tl3`'s gate row of the NOR that makes `rcs_mv`. (The other metal on this track, north of a 100 px gap, is `tl3_e4243`'s) |
 | `tc1_o3527` (`tl5_w5544`) | row y 5534-5553 from (4967,5543) west to the pad (4497,5547); metal x 4497 south over three rows to the pad (4497,5720); row y 5708-5727 west to (4250,5718). 45 px of bare ground between the pad (4497,5547) and `tla`'s pad (4408,5545) on the same line |
-| `tcw_a` (`tl5_w5631`) | row y 5621-5641 from (4967,5631) to (4250,5631), no pad in the strip. On west it reaches `tl3`'s pad (4104,5633) (`of7_r5.png`, 6x, three shots: unbroken under `tl3`'s two metals) |
+| `inh_ck` | row y 5621-5641 from (4967,5631) to (4250,5631), no pad in the strip. On west it reaches `tl3`'s pad (4104,5633) (`of7_r5.png`, 6x, three shots: unbroken under `tl3`'s two metals) |
 | `tl4_w4590` (= `tl5_w5674` = `tl3_e5114`) | the track x 4366: south of the pad (4364,4762) a pad (4366,5112) whose row y 5102-5121 runs west to (4250,5112) (`tl3`'s gate 2 of e5), and at the south end an L east onto the pad (4411,5676); row y 5665-5684 east to (4967,5674) |
 | `rcs_mv` (= `tl3_e4915` = `rcs_mv`) | `tl3`'s poly in at (4250, 4733-4751), south at x 4276-4292 under the metal x 4279 (no contact), west again along y 4904-4925 out at (4250,4915) into `tl3`'s pad (4234,4918); `tl3`'s metal x 4236 back in along y 5764 to the pad (4410,5764); poly east along y 5752-5772 to a corner at x 4533-4555, north to y 5708, east as the row y 5708-5728 to (4967,5718) |
 | `tl4_w3850` (= `tl5_w5761`) | from the inverter's gate metal x 4410 (corner (4412,3852)) south to the pad (4410,4332); row y 4320-4338 west under the track x 4366 to the pad (4279,4332); metal x 4279 south to the pad (4279,4571); an arm east y 4555-4580 onto a poly x 4319-4337 that runs south under the metal x 4321 (no contact) to y 4902; row y 4884-4902 east to the pad (4538,4895); metal x 4538 south, a jog east at y 5236-5250 to x 4583, south to y 5764 and east onto the pad (4626,5762); row y 5752-5772 east to (4967,5762): `tl5`'s line to the bus line x 5412 |
@@ -649,7 +649,7 @@ another name for one net:
 | `tl3_e4243` = `tl5_w4458` | `tcw_c` = NOT(`tcw_m6232` OR `tl3_e4243` AND `tl5_w4318` OR `tl5_w4503`); `tl5_w4503` = NOT(`tcw_c` OR `tcw_m6320` AND `tl3_e4243`) (both had `tl5_w4458`) |
 | `tl4_w3113` = `tl5_w2855` | `tl5_w2722` = NOT `tl4_w3113` (was NOT `tl5_w2855`) |
 
-So `tl5`'s latch c is open while `tl3_e4243` = NOR(`rcs_mv`, `tcw_a`) is high, the same signal
+So `tl5`'s latch c is open while `tl3_e4243` = NOR(`rcs_mv`, `inh_ck`) is high, the same signal
 that is the data of the second latch here and an input of the top NOR.
 
 ### South of the routing channel, x 4250-4967, y 5790-6350 (traced 2026-11-18, ninth run)
@@ -713,7 +713,7 @@ The wires drawn to the strip's edges (the same list is `ports.d/tl4.txt`; `tools
 | `tl3_e4243` | metal | (4250, 4236-4256) | in | `tl3`'s e3 output on the track x 4318 (alias `tl4_w3070`): the second latch's data, the top NOR's gate 1 |
 | `tl3_e4372` | poly | (4250, 4364-4381) | ? | the row of the pad (4321,4374): `tl3`'s gate row |
 | `tl3_e4372` | poly | (4250, 5491-5510) | ? | the row of the pad (4321,5504), the other end of the same metal: on west, not followed |
-| `tl4_w4501` | poly | (4250, 4492-4512) | in | gate 2 of the three-input NOR |
+| `inh_ck` | poly | (4250, 4492-4512) | in | gate 2 of the three-input NOR |
 | `tl3_e4635` | poly | (4250, 4623-4642) | ? | the row of the pad (4279,4636): `tl3`'s latch C data |
 | `tl3_e4635` | poly | (4250, 5189-5207) | in | the row of the pad (4279,5200), the other end: `tl3`'s inverter output (`tl3_e4635_u`) |
 | `rcs_mv` | poly | (4250, 4733-4751) | in | from `tl3`'s pad (4192,4743) |
@@ -722,7 +722,7 @@ The wires drawn to the strip's edges (the same list is `ports.d/tl4.txt`; `tools
 | `tl4_w4590` | poly | (4250, 5102-5121) | ? | the row of the pad (4366,5112): `tl3_e5114` |
 | `tl3_e5240` | poly | (4250, 5233-5251) and (4250, 5403-5422) | ? | both ends of the loop on the track x 4279: the north one is `tl3`'s inverter's gate row, the south one goes on west |
 | `tl4_w5455` | poly | (4250, 5447-5467) | out | the strong inverter's row, on west, not followed |
-| `tcw_a` | poly | (4250, 5621-5641) | ? | the row y 5631, on west to `tl3`'s pad (4104,5633) |
+| `inh_ck` | poly | (4250, 5621-5641) | ? | the row y 5631, on west to `tl3`'s pad (4104,5633) |
 | `tc1_o3527` | poly | (4250, 5708-5727) | ? | the row of the pad (4497,5720), on west, not followed |
 | `tl4_w2512` | metal | (4250, 2506-2518) | ? | bus line 1, on west |
 | `tl5_w4937` | poly | (4250, 2632-2650) | out | the row of the pad (4279,2640), the west end of bus line 4, on west |
@@ -751,7 +751,7 @@ The wires drawn to the strip's edges (the same list is `ports.d/tl4.txt`; `tools
 | `tl4_w5455` | poly | (4967, 5447-5467) | out | `tl5_w5457` |
 | `tl4_w5068` | poly | (4967, 5490-5510) | out | `tl5_w5500` |
 | `tc1_o3527` | poly | (4967, 5534-5553) | in | `tl5_w5544` |
-| `tcw_a` | poly | (4967, 5621-5641) | ? | `tl5_w5631` |
+| `inh_ck` | poly | (4967, 5621-5641) | ? | `inh_ck` |
 | `tl4_w4590` | poly | (4967, 5665-5684) | ? | `tl5_w5674` |
 | `rcs_mv` | poly | (4967, 5708-5728) | out | `rcs_mv` |
 | `tl4_w3850` | poly | (4967, 5752-5772) | in | `tl5_w5761` |
@@ -826,9 +826,9 @@ The tracks, as far as each is drawn:
    top edge instead of entering it from the side. No field between them in the clean shot;
    one dark line in the chip-2 stripped shot, taken as the pad's outline (above). Drawn joined,
    without `?`. If it were not, the pad would have a metal and no poly leaving it.
-9. **`tcw_a` and `tl3_e4152`**: the row y 5621-5641 is drawn here from x 4250 and by `tl3` up
+9. **`inh_ck` and `inh_ck`**: the row y 5621-5641 is drawn here from x 4250 and by `tl3` up
    to x 4160; the 90 px between are in `tl3`'s strip and look unbroken (`of7_r5.png`).
-   **Closed**: `tl3`'s run 9 drew them, so `tcw_a` is track A, `tl3_e4152` and `tl4_w4501`
+   **Closed**: `tl3`'s run 9 drew them, so `inh_ck` is track A, `inh_ck` and `inh_ck`
    (gate 2 of the three-input NOR here).
 10. **Marks on the metals that are not drawn as contacts.** (4536,4992) on the metal x 4538
    (field under it) and the specks at (4761,5630) on RA and (4942,5765) on RB are in the chip-2
@@ -1269,10 +1269,10 @@ Round 11: no findings that change a connection.
 
 ## Corrections from `tl3` (coordinator, from the handoffs of 2026-11-18, second batch)
 
-- Where this file has `tl4_w4501` as a "row from the west across the bus field": it is the row of
-  `tl3`'s track A pad (4146,4510), net `tl3_e4152` = `tcw_a` (the east column's distributed line:
+- Where this file has `inh_ck` as a "row from the west across the bus field": it is the row of
+  `tl3`'s track A pad (4146,4510), net `inh_ck` (the east column's distributed line:
   latch C's enable, an input of e3 and e5).
-- Ports: the rows at x 4250 (y 5412 `tl3_e5240`, 5457 `tl4_w5455`, 5500 `tl3_e4372`, 5631 `tcw_a`) are
+- Ports: the rows at x 4250 (y 5412 `tl3_e5240`, 5457 `tl4_w5455`, 5500 `tl3_e4372`, 5631 `inh_ck`) are
   drawn on in `tl3`; `tl3_e5240` is `tl3_w5025` (latch B's inverted output) and `tl3_e4372` is
   `tl3_w4546` (`tl3`'s NOR 3); aliases in `trace/tl3.txt`.
 - AMB-034 records Ambiguities 4-7 and 10 of this file.

@@ -580,5 +580,5 @@ along the top of the central datapath) is the gap.
 
 - Line S (lines 16, 106, 340, 454) does not end in the left-centre logic: from (6690,8366) it runs west
   to (6559,8367), north, west and north through `lc2`'s and `lc1`'s strips without a gate, with one tap
-  at (6427,7648), and on into the top-left logic as `tcw_a` (`eof` run 2). S = `inh_ck` = `tcw_a`.
+  at (6427,7648), and on into the top-left logic as `inh_ck` (`eof` run 2). S = `inh_ck`.
   R4: part done there (`eof`); chip 1 is damaged on line S at y 16570-16650, 16822, 17483.

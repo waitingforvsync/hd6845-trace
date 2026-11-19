@@ -25,9 +25,9 @@ Three pieces, 2 transistors, no uncertain items.
 Run 2 (Tom Seddon's session, Claude Fable 5.2; 2026-11-19 00:13 +0000 on). Two more pieces, wiring
 only, no uncertain items.
 
-- **Task 3, `tcw_a`'s source: found** (piece `tcwa`). `tcw_a`'s metal, which `tl6` drew to
+- **Task 3, `inh_ck`'s source: found** (piece `tcwa`). `inh_ck`'s metal, which `tl6` drew to
   (6105,6350), is drawn on south and east down a staircase of five corners to the west end of
-  `trunks`' line "S" at (6690,8366): **`tcw_a` is `inh_ck`**, the output of the lone inverter of
+  `trunks`' line "S" at (6690,8366): **`inh_ck` is `inh_ck`**, the output of the lone inverter of
   the input buffer row (`inh_ck` = NOT `inh_n`, `inh_n` = NOT `inh_src`), the net that holds
   `ck_b` low in the clock block. No uncertain item lies on the path (`tools/unsure.py`). On the
   way the metal has **one tap**, a contact (6427,7648) onto a poly row that runs 1,100 px east
@@ -56,7 +56,7 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `r5w`, link C | x 4962-5183, y 2542-2560 | the poly row from `r9m`'s corner (5175,2550) west under rail RC and the supply metal x 4948-4997 to `tl4`'s row end (4967,2551) |
 | `r5w`, link D | x 3528-4255, y 2494-2526 | `tl2`'s metal on to a pad with a contact (3606,2510), a poly bar under the wide metal x 3648-3760, a pad with a contact (3800,2510), a straight metal east to `tl4`'s bus line 1 at (4250,2512) |
 
-| `tcwa`, link E | x 6098-6438, y 6345-8072 | `tcw_a`'s metal on from `tl6`'s end (6105,6350): south to a corner (6105,7346), east (on `lc1_w7040`'s poly row, no contact) to a corner (6298,7346), south to a corner (6298,7432), east (on another row) to a corner (6430,7432), south through the tap's pad to y 8067, where `lc2`'s piece (`lc2_w8172`) takes over |
+| `tcwa`, link E | x 6098-6438, y 6345-8072 | `inh_ck`'s metal on from `tl6`'s end (6105,6350): south to a corner (6105,7346), east (on `lc1_w7040`'s poly row, no contact) to a corner (6298,7346), south to a corner (6298,7432), east (on another row) to a corner (6430,7432), south through the tap's pad to y 8067, where `lc2`'s piece (`inh_ck`) takes over |
 | `tcwa`, the tap | x 6412-7530, y 7632-7664 | a pad with a contact (6427,7648) on that metal; its poly row y 7640-7656 east across the crossing field to the gate group at x 7540 (drawn to x 7530) |
 | `tcwa`, link F | x 6445-6695, y 8165-8374 | from `lc2`'s end (6450,8172): east to a corner (6559,8172), south (on the poly of another net's pad (6558,8127), no contact) to a corner (6559,8367), east to `trunks`' end (6690,8366) |
 | `x1` | x 5053-5253, y 6345-6905 | five vertical polys of `tl5`'s bus on south from y 6350 (x 5063, 5107, 5150, 5192, 5237), straight under nine horizontal metals; four end on pads with contacts (5105,6761), (5147,6803), (5190,6845), (5237,6803), each with a metal on south to one of `lc1`'s wires at y 6900 (M_a, M_b, V2, V3); the fifth (x 5063) has no pad and runs on south. **Below three of the pads the poly goes on** (x 5150 in the open; x 5192 under V2; x 5237 under V3) and bends south-east into `lc1`'s diagonal poly bundle: drawn to y 6900 (the last to y 6872) |
@@ -137,23 +137,23 @@ r9m_l1w  = NOT sl_eq_r5                      this piece (firm)
 The full extraction has one net with the three names and no gate on it but the inverter's own
 load: **where NOT `sl_eq_r5` is used is north of y 2500** (or at a tap nobody has drawn).
 
-### Piece `tcwa`: `tcw_a` is `inh_ck` (traced; wiring only)
+### Piece `tcwa`: `inh_ck` is `inh_ck` (traced; wiring only)
 
 ```
 inh_n  = NOT inh_src                    the driver of "line X" (bd1, trunks)
 inh_ck = NOT inh_n                      the lone inverter of the input buffer row (inrow)
-tcw_a  = inh_ck                         one net: this piece, lc2's piece, trunks' line S
+inh_ck                                   one net: this piece, lc2's piece, trunks' line S
 ck_b   = NOR(ck_clkn, ck_g4, inh_ck)    the clock block (firm)
 ```
 
 The full extraction has one net carrying `inh_ck` (the clock block's and `inrow`'s label),
-`tcw_a` and `lc2_w8172`, with thirteen gates on it: the clock block's (`ck_b`'s NOR), the
-inverter's own load, and the eleven that were known as `tcw_a`'s (`tl1`'s two latches and the
+`inh_ck` and `inh_ck`, with thirteen gates on it: the clock block's (`ck_b`'s NOR), the
+inverter's own load, and the eleven that were known as `inh_ck`'s (`tl1`'s two latches and the
 NOR `tl1_w3636`, `rcs_a2`'s NOR, `tl3`'s latches B and C and the NOR `tl3_e4243`, `tl4`'s NOR
 `tl4_w4545`, `tcw`'s pair `fld_a_in` / `tcw_o3820`). `tools/unsure.py`: the labelled pieces of
-`inh_ck`, `tcw_a` and `lc2_w8172` in `clock`, `inrow`, `eof`, `fld`, `lc2`, `tl3`'s foot and
+`inh_ck` (then under three names) in `clock`, `inrow`, `eof`, `fld`, `lc2`, `tl3`'s foot and
 `tl4` stay one piece when every uncertain item is deleted (the second piece it lists is
-`tl1_w3594`'s, across `tl3`'s `?M` thin metal: AMB-033, as before). `tcw_a` is kept as the name
+`tl1_w3594`'s, across `tl3`'s `?M` thin metal: AMB-033, as before). `inh_ck` is kept as the name
 the net is shown under (an alias in `trace/eof.txt`; the rename is proposed in the handoff).
 
 Believed, not traced: what this says about the signal. The net that stops the horizontal
@@ -172,19 +172,19 @@ followed into the bottom-centre logic (`notes/blocks/trunks.md`, `bd1.md`).
 | **link E**, corners (6298,7432), (6430,7432) | `eof` | east on a second poly row (y 7426-7440), no pad; south at x 6420-6436 | `textmap.py 6360 7408 6470 7462 3`; `tl5_tracks.py h 7432 6310 6425`; overlay `ov_e.png` |
 | **link E**, x 6430 with **the tap** | `eof` | south to y 8067; at (6427,7648) a pad with a contact: ring y 7627-7668 with a bright centre in both metal shots, a pitted box in the chip-2 stripped shot, a dull hole in a poly pad in the clean shot; the metal passes through the pad and goes on | `k2_x6431.png` (4x, four shots); `textmap.py 6392 7606 6476 7690 3 --acid`; `tl5_tracks.py v 6431 7445 8160`: otherwise bars only |
 | the tap's row | `eof` | from the pad a poly row y 7640-7656 east under two dozen vertical metals, no pad on it, to x 7540, where it becomes a gate over a diffusion under the wide metal x 7550-7600 (below) | `k6_rowA.png`, `k6_rowB.png` (2.3x, clean and metal); `tl5_tracks.py rows row 6440 7700 6 7630 ... 7666`; `k3_rowend.png`, `k7_group.png` |
-| x 6431, y 8067-8172, corner, to x 6450 | `lc2` | its `lc2_w8172`: the metal lies on latch C's data poly for 64 px without a contact (its Ambiguity 3) and turns east | `textmap.py 6398 8090 6500 8200 3`: one 6 px bar at the poly's top edge, no ring, no hole; an L |
+| x 6431, y 8067-8172, corner, to x 6450 | `lc2` | its `inh_ck`: the metal lies on latch C's data poly for 64 px without a contact (its Ambiguity 3) and turns east | `textmap.py 6398 8090 6500 8200 3`: one 6 px bar at the poly's top edge, no ring, no hole; an L |
 | **link F** | `eof` | east along y 8172 to a corner (6559,8172); south on the poly that leaves the pad (6558,8127) of another net (the pad's own metal arrives from the north; 18 px of open poly between its ring and this corner); corner (6559,8367); east over five poly columns to x 6690 | `textmap.py 6515 8060 6602 8200 3 --acid`, `6521 8322 6608 8400 3`; `tl5_tracks.py h 8172 6450 6545`, `v 6559 8190 8355`, `h 8367 6575 6760`: bars only, no hole; `k4_stair_m.png`, `k5_nestW.png`; overlay `ov_f.png` |
 | the staircase to the contact (7034,8535) | `trunks` | corners (6757,8366), (6757,8452), (6930,8452), (6930,8536); the contact | `follow.py 6330 7432 E` gives every corner from (6430,7432) to the end (7038,8536) as drawn; `tl5_tracks.py` on each piece: bars only; `textmap.py 6950 8506 7070 8566 3 --acid`: ring, bright centre, hole |
 | line S to the inverter | `trunks`, `clock`, `inrow` | poly (7034,8535)-(7034,8797), the metal down the left bus field (x 6862, step at y 13331, x 6798), poly under the supply buses, metal, poly under nine bus lines, the bottom bus line y 18428 (three poly hops), the turn at x 10268, the link to L4 and L6, L4 east, poly, metal to the inverter's output (13849,18590) | read by its package at 1x (re-read item R4). Here, by text only: `eof_cchk.py` on its nineteen contacts: seventeen have a hole in the clean shot (red minus green under 25), the other two, (7034,8797) and (8382,18428), a dull hole beside the centre on a text map; the centre is bright (over 150) in both metal shots at fifteen and in one shot at four ((9777,18425): chip 2 91; (6798,17990), (8602,18428), (12849,18384): chip 1 124-132), which were not looked at further; `follow.py 7032 8826 S` gives the diagonal, the step at y 13332 and the end (6797,16176) as drawn. The follower's contact candidates and the clean shot's dips on the two long metals are crossings without a pad (trap 15: `textmap.py 6826 9680 6900 9740 3 --acid`, `6762 14500 6836 14596 3`), and three long green stretches (y 16530-16690, 16822, 17483) are damage on chip 1 only (chip 2's metal is whole: `textmap.py 6768 16500 6834 16700 5 --acid`). **Taps of line S in poly under neighbouring lines were not looked for (R4 stays open).** |
 
 **The gate group at the tap row's end (not traced).** `k7_group.png` (1.95x, metal and clean),
 `k3_rowend.png` (2.7x, four shots): a wide vertical metal x 7550-7600 over a diffusion column
-(x 7545-7610, y 7610-7810) crossed by three poly rows, y 7640-7656 (this row, `tcw_a`), y 7705-7725
+(x 7545-7610, y 7610-7810) crossed by three poly rows, y 7640-7656 (this row, `inh_ck`), y 7705-7725
 and y 7765-7785 (both from the west), with a metal contact (7575,7680) on the diffusion between
 the first two; east of the metal an outline x 7610-7660, y 7610-7740 in which rows 1 and 2 appear
-to meet (a U: if so both gates are `tcw_a`, two fingers round the contact), a strip east at
+to meet (a U: if so both gates are `inh_ck`, two fingers round the contact), a strip east at
 y ~7800 and what looks like a load with a contact (7745,7780) under a second wide metal
-x 7722-7770. So `tcw_a` (= `inh_ck`) is a gate there. Nothing of it is drawn.
+x 7722-7770. So `inh_ck` is a gate there. Nothing of it is drawn.
 
 ### Piece `x1`: the reset NOR's inputs, a clear, and `rcs_x1`'s driver (traced; wiring only)
 
@@ -256,11 +256,11 @@ driver lies; the other three lead to the loads.
 | `tl1_w2592` | metal | (4255, 2506-2518) | in | link D's east end on `tl4`'s bus line 1; the net is `r9m_l1w` |
 | `tl1_w2592` | metal | (3528, 2505-2519) | to loads | link D's west end on `tl2`'s metal (3533,2509) |
 
-| `tcw_a` | metal | (6098-6112, 6345) | to loads | link E's north end on `tl6`'s metal (6105,6350) |
-| `tcw_a` | metal | (6422-6438, 8072) | in | link E's south end on `lc2`'s piece (`lc2_w8172`, M 6431,8067); the driver (`inh_ck`'s inverter) lies beyond |
-| `tcw_a` | poly | (7530, 7640-7656) | to loads | the tap's row: on east it is a gate of the undrawn group under the metal x 7550-7600 |
-| `lc2_w8172` | metal | (6445, 8165-8179) | to loads | link F's west end on `lc2`'s end (6450,8172) |
-| `lc2_w8172` | metal | (6695, 8360-8374) | in | link F's east end on `trunks`' line S (its end x 6690): the net is `inh_ck` |
+| `inh_ck` | metal | (6098-6112, 6345) | to loads | link E's north end on `tl6`'s metal (6105,6350) |
+| `inh_ck` | metal | (6422-6438, 8072) | in | link E's south end on `lc2`'s piece (`inh_ck`, M 6431,8067); the driver (`inh_ck`'s inverter) lies beyond |
+| `inh_ck` | poly | (7530, 7640-7656) | to loads | the tap's row: on east it is a gate of the undrawn group under the metal x 7550-7600 |
+| `inh_ck` | metal | (6445, 8165-8179) | to loads | link F's west end on `lc2`'s end (6450,8172) |
+| `inh_ck` | metal | (6695, 8360-8374) | in | link F's east end on `trunks`' line S (its end x 6690): the net is `inh_ck` |
 | `rcs_x1` | poly | (5097-5117, 6345) | to loads | from `tl5`'s bus line x 5107 |
 | `rcs_x1` | metal | (5070-5090, 6905) | in | onto `lc1`'s M_a (`lc1_w7140`, gate 2's output) |
 | `tl5_w3636` | poly | (5140-5160, 6345) | to loads | from `tl5`'s bus line x 5150 (the clear of four latches) |
@@ -311,7 +311,7 @@ driver lies; the other three lead to the loads.
 4. **A nub on link C's top edge** at (5044-5065, 2530-2542), in both chips (a small loop in the
    chip-2 stripped shot), over field between the two metals: not drawn, no connection possible.
 
-5. **The staircase of `tcw_a` lies on other nets' poly for four of its stretches** (trap 13):
+5. **The staircase of `inh_ck` lies on other nets' poly for four of its stretches** (trap 13):
    on `lc1_w7040`'s row (y 7346, 190 px), on a second row (y 7432, 130 px), on `lc2`'s latch C
    data poly (x 6431, 64 px, `lc2`'s Ambiguity 3) and on the poly of the pad (6558,8127)
    (x 6559, 200 px). At none is there a pad, a ring or a hole in the clean shot (the scans named
@@ -411,7 +411,7 @@ Checked and found correct (5x views in two or more shots, text maps, profiles, t
   with one 10 px dim stretch at y 8318-8327 beside a neighbour's pad (6600,8323), bare strip
   between; the tap row one band to x 7530, then a gate under the wide metal; y 8367 one straight
   metal from x 6560 to `trunks`' corner (6757,8367), the follower agreeing both ways. Full
-  extraction: `tcw_a`, `lc2_w8172`, `inh_ck` one net, `lc1_w7040` separate, 0 errors.
+  extraction: `inh_ck` one net, `lc1_w7040` separate, 0 errors.
 - `x1`: the five columns straight at 35 heights, no pad or ring under the nine metals; the heads
   of M_a and M_b over field, ending at their pads' height (follower ends (5081,6758),
   (5122,6800)), bare ground between pad 1's ring and M_b's head, so the pairing is as drawn; all
@@ -474,11 +474,11 @@ Round 3: no findings that change a connection.
   that leaves `tl1`'s strip north at (2493-2508,2500) into the band y 2180-2500 (package `tlb`).
   Not checked here: taps along `r9m`'s, `tc2`'s, `tl4`'s, `tl2`'s and `tl1`'s stretches of it
   (each was read by its own package).
-- **The gate group at the end of `tcw_a`'s tap row**: x 7540-7780, y 7600-7820 (Logic, piece
+- **The gate group at the end of `inh_ck`'s tap row**: x 7540-7780, y 7600-7820 (Logic, piece
   `tcwa`): three poly rows over a diffusion column under the wide metal x 7550-7600, a contact
   (7575,7680), a load-like block with a contact (7745,7780); rows 2 and 3 arrive from the west
   at (7500,7735) and (7500,7775). `trace/eof.txt` ends the row at x 7530.
-- **`inh_src`'s source** (what `tcw_a` = `inh_ck` is): `trunks`' line X into the bottom-centre
+- **`inh_src`'s source** (what `inh_ck` is): `trunks`' line X into the bottom-centre
   logic (`notes/blocks/trunks.md`), not followed here.
 - **`lc1_w7170`, the input of the inverter that drives `rcs_x1`**: the thin metal T1 leaves
   `lc1`'s strip south at (5030-5046,8067), into `lc2`'s (claimed).

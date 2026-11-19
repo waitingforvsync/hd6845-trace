@@ -13,8 +13,8 @@ M 6715,3660 y3900 w=50
 N M 6715,3680 vcc
 
 # ===== AND-OR-invert, y 3690-3905 (views cache/scratch/rax/t1a.png, t1m.png, t1cm.png, t1load.png) =====
-#   tcw_o3820 = NOT( fld_a_in OR (tcw_a AND tcw_c) )     (gate 3 identified in run 2)
-# diffusion column under the rail: rail contact | gate tcw_c | node | gate tcw_a | OUT | gate x | rail contact
+#   tcw_o3820 = NOT( fld_a_in OR (inh_ck AND tcw_c) )     (gate 3 identified in run 2)
+# diffusion column under the rail: rail contact | gate tcw_c | node | gate inh_ck | OUT | gate x | rail contact
 D 6500,3695:6545,3925
 C 6512,3708
 D 6500,3870:6560,3925
@@ -23,7 +23,7 @@ C 6535,3905
 P 6300,3723:6336,3757
 C 6318,3740
 P 6318,3732:6550,3750
-# gate 2: tcw_a, from the pad (6400,3788) at the top of the metal x 6403
+# gate 2: inh_ck, from the pad (6400,3788) at the top of the metal x 6403
 P 6383,3771:6418,3805
 C 6400,3788
 P 6400,3777:6550,3795
@@ -51,7 +51,7 @@ C 6646,3986 s=14x14
 # d2m.png (both metal shots), d3.png (6x); class of the open areas from tools/tcw_cls.py (the
 # chip-2 stripped shot: diffusion red-green 16+, field under 10, poly blue under 84) and
 # tools/px.py profiles (notes).
-#   fld_a_in = NOT( (tcw_a AND tcw_b) OR tcw_o3820 )      tcw_o3820 = NOT( fld_a_in OR (tcw_a AND tcw_c) )
+#   fld_a_in = NOT( (inh_ck AND tcw_b) OR tcw_o3820 )      tcw_o3820 = NOT( fld_a_in OR (inh_ck AND tcw_c) )
 #   fld_y_b  = NOT tcw_c
 # --- fld_a_in: the top node of fld's stack (y 3956-3985 under the rail) has an arm east
 # (y 3960-3974) to a vertical strip x 6603-6622, y 3904-4075

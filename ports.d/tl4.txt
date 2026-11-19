@@ -10,7 +10,7 @@ tl4_w4590   P  4250,3018-3038  out  the row of the pad (4366,3030) on the track 
 tl3_e4243   M  4250,4236-4256  in   tl3's e3 output on the track x 4318 (alias tl4_w3070): the second latch's data and gate 1 of the top NOR
 tl3_e4372   P  4250,4364-4381  ?    the row of the pad (4321,4374), the north end of the metal x 4321: tl3's gate row of rcs_mv's NOR
 tl3_e4372   P  4250,5491-5510  ?    the row y 5500 of the pad (4321,5504), the south end of the same metal: on west
-tl4_w4501   P  4250,4492-4512  in   row from the west across the bus field; gate 2 of the three-input NOR tl4_w4545
+inh_ck   P  4250,4492-4512  in   row from the west across the bus field; gate 2 of the three-input NOR tl4_w4545
 tl3_e4635   P  4250,4623-4642  ?    the row of the pad (4279,4636), the north end of the metal x 4279 (y 4622-5214): tl3's latch C data
 tl3_e4635   P  4250,5189-5207  in   the row of the pad (4279,5200), the south end of the same metal: tl3's inverter output (tl3_e4635_u)
 rcs_mv      P  4250,4733-4751  in   tl3's poly from its pad (4192,4743); an L in this strip, back out at y 4904-4925
@@ -20,7 +20,7 @@ tl4_w4590   P  4250,5102-5121  ?    the row of the pad (4366,5112) on the track 
 tl3_e5240   P  4250,5233-5251  ?    the row that ends over the pad (4279,5265), the north end of the metal x 4279 (y 5251-5427)
 tl3_e5240   P  4250,5403-5422  ?    the row of the pad (4279,5413), the south end of the same metal
 tl4_w5455   P  4250,5447-5467  out  the strong inverter's row, on west
-tcw_a       P  4250,5621-5641  ?    the row y 5631 (tl5_w5631), across the whole strip; on west to tl3's pad (4104,5633) (seen, tl3's to draw)
+inh_ck       P  4250,5621-5641  ?    the row y 5631 (inh_ck), across the whole strip; on west to tl3's pad (4104,5633) (seen, tl3's to draw)
 tc1_o3527   P  4250,5708-5727  ?    the row of the pad (4497,5720), the south end of the jumper x 4497: on west
 rcs_x1      M  4250,5889-5901  in   tl3's metal of its latch C's clear (tl3_e4808), east to the pad (4629,5891)
 tl5_w5936   M  4250,5933-5945  ?    the metal of the pad (4583,5936), on west
@@ -37,7 +37,7 @@ tl5_w3505   P  4967,2976-2996  in   the second latch's enable: the row of the no
 tl4_w5455   P  4967,5447-5467  out  the strong inverter's row: tl5's row of the pad (5538,5457) (tl5_w5457)
 tl4_w5068   P  4967,5490-5510  out  the row of the pad (4625,5504): tl5's row of the pad (5493,5500) (tl5_w5500)
 tc1_o3527   P  4967,5534-5553  in   the row of the pad (4497,5547), the north end of the jumper x 4497 (tl5_w5544)
-tcw_a       P  4967,5621-5641  ?    the row y 5631 (tl5_w5631), across the whole strip without a contact
+inh_ck       P  4967,5621-5641  ?    the row y 5631 (inh_ck), across the whole strip without a contact
 tl4_w4590   P  4967,5665-5684  ?    the row of the pad (4411,5676) at the south end of the track x 4366 (tl5_w5674)
 rcs_mv      P  4967,5708-5728  out  the row y 5718's east piece, from the pad (4410,5764) (rcs_mv)
 tl4_w3850   P  4967,5752-5772  in   the row of the pad (4626,5762) at the south end of the metal x 4538/4583 (tl5_w5761)

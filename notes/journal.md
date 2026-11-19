@@ -1014,7 +1014,7 @@ join `tc1_x1` to `fld_a_in` although the first view suggested it: they are two l
 - `fld_a_in` and `fld_y_b` drawn end to end (1,500 and 2,300 px, two poly cross-unders
   of the six-line bus each) to one gate group at x 6380-6700, y 3880-4220: a series pair
   pulls `fld_a_in` low, a single gate pulls `fld_y_b` low (loads untraced, AMB-014).
-- The three inputs of that group (`tcw_a`, `tcw_b`, `tcw_c`) come on thin metals from the
+- The three inputs of that group (`inh_ck`, `tcw_b`, `tcw_c`) come on thin metals from the
   next rows north. The region west of the island is one untraced block (`tcw` in the
   queue); it is where the field flip-flop has to be, and it should be traced as a block.
 
@@ -1034,7 +1034,7 @@ Method: before joining the line along y 4937/4915 I looked at its unclear 80 px 
 - `tools/findcell.py` with six known cells: nothing in the column but weak matches of
   `fld`'s inverter. It is hand work.
 - The row above the bit-0 source gates is an AND-OR-invert:
-  `tcw_o3820` = NOT(`tcw_x3855` OR (`tcw_a` AND `tcw_c`)). `tcw_a` and `tcw_c` are shared
+  `tcw_o3820` = NOT(`tcw_x3855` OR (`inh_ck` AND `tcw_c`)). `inh_ck` and `tcw_c` are shared
   with the group below, so the same two signals gate both the bit-0 source lines and
   this gate; neither is driven in the part traced.
 - The class map with `--open` is not usable east of the rail at y 3940-4200 as it stands
@@ -1548,8 +1548,8 @@ open join (`ck_a_u`). Claims now: `tl3` (Tom, run 11), `lc2` (Matt, continuing d
   NOR(`rcs_cond_n`, `tl3_w3982`), and `rcs_cond_lat` is an inverter's output (AMB-031), not a latch
   node. `rcs_in1` = NOT `rcs_mv` (`tla`'s column ran through field, split by `tl3`); R9's match is an
   input of `rcs_mn3852` and reaches the step request through `tl3_e3550` and `rcs_e4` (marked,
-  AMB-032). `tl1_w3594` = `tcw_a` (marked, AMB-033): `tl1`'s two latches and `tl3`'s latches B and C
-  are master/slave pairs on `tcw_a`. Latch C's clear is `rcs_x1`.
+  AMB-032). `tl1_w3594` = `inh_ck` (marked, AMB-033): `tl1`'s two latches and `tl3`'s latches B and C
+  are master/slave pairs on `inh_ck`. Latch C's clear is `rcs_x1`.
 - **Master list.** Rows `tl1`-`tl6`, `lc1`-`lc3` and `tla` updated. New rows `decode`, `clock` and
   `pads`: blocks traced early that had no row, so the dashboard and `coverage.py` could not show them
   (Matt's handoff). New queue row `tlb`: the wide metal band y 2180-2500 north of the top-left strips,
@@ -1592,12 +1592,12 @@ open join (`ck_a_u`). Claims now: `tl3` (Tom, run 11), `lc2` (Matt, continuing d
   left in the prose ("`rcs_mv` = `rcs_mv`") were reworded by hand.
 - **Left on purpose.** `tl3`'s firm renames wait for Tom's active claim to end, because they would
   rewrite `trace/tl3.txt` under his branch: `tl3_e4808` -> `rcs_x1`, `tl3_e5240` -> `tl3_w5025`,
-  `tl3_e4372` -> `tl3_w4546`, `tl3_e4152`/`tl4_w4501` -> `tcw_a`, `tl3_e4915` -> `rcs_mv`,
+  `tl3_e4372` -> `tl3_w4546`, `tl3_e4915` -> `rcs_mv`,
   `tl3_e4635_u` -> `tl3_e4635`. The joins through `?M` stay as aliases (AMB-032, AMB-033), and so does
   `rcs_cond_lat` (AMB-031). Placeholder-to-placeholder aliases such as `tl4_w3070` -> `tl3_e4243` are
   not renamed. All of this is listed in the master list's `rename` row.
 - **`operation.md`.** The tracers had kept their rows current (AMB-009's resolution, `rcs_in1` = NOT
-  `rcs_mv`, the foot's joins, `tl1_w3594` = `tcw_a`, the top of `tl4`'s strip, `lc_step`). I updated
+  `rcs_mv`, the foot's joins, `tl1_w3594` = `inh_ck`, the top of `tl4`'s strip, `lc_step`). I updated
   the header (2,363 nets, 4,224 transistors), the firm count (832 of 1,246 equations) and the ranges
   (AMB-001 to AMB-035, R1-R42).
 - **`out/` rebuilt**: 0 errors, 0 warnings, 0 names outside the glossary; one open join (`ck_a_u`).
@@ -1608,7 +1608,7 @@ open join (`ck_a_u`). Claims now: `tl3` (Tom, run 11), `lc2` (Matt, continuing d
 On the user's request, a new queue row `eof` goes first, so `/trace6845` without a prefix takes it. It
 holds the follow tasks that block the end-of-frame sequence, in order: where R4's match
 `rc_eq_r4` goes (east of x 13425 at y 9663, from track T6 of the counter channel); where R5's match
-`sl_eq_r5` goes (west of x 8340); `tcw_a`'s source (eleven gate loads, among them the master/slave
+`sl_eq_r5` goes (west of x 8340); `inh_ck`'s source (eleven gate loads, among them the master/slave
 latch pairs and the field latch path); the driver of `rcs_x1` (beyond `tl5`'s bus line x 5107).
 `bd1`-`bd3` moves up to second. `tl4_w4590`'s driver (in `tl3`'s strip) and `lc2`'s latch D data wait
 for their claims.
@@ -1631,7 +1631,7 @@ nets, 4,282 transistors, 0 errors, 0 warnings. No active claims.
   and is the data of `bd1`'s latch gated by `inh_lat` and the input of `bd1`'s inverter A (firm join;
   AMB-036 on one contact). R5's match `sl_eq_r5` drives one inverter in `cdp1`'s slice-0 position
   (`r9m_l1w` = NOT `sl_eq_r5`, firm), whose output runs west through the top-left strips into the band
-  `tlb`, where its loads must be. **`tcw_a` is `inh_ck`** (firm): `trunks`' line S climbs on to the top
+  `tlb`, where its loads must be. **`inh_ck` is `inh_ck`** (firm): `trunks`' line S climbs on to the top
   left, so the inhibit/strobe of the input buffer row is what opens the vertical control's master/slave
   latch pairs and the field latch path. **`rcs_x1` = NOT `lc1_w7170`**, and **`lc1_w7304` =
   NOR(`lpstb_b`, `res_b`)** (firm; believed the reset), whose buffered copies clear `tl4`'s and `tl5`'s
@@ -1651,12 +1651,12 @@ nets, 4,282 transistors, 0 errors, 0 warnings. No active claims.
   through lines and rows between pads), R45 (copies' pads); R4, R26, R31 (done for `lc2`), R36, R41
   extended. Traps 32-36 (look all round every pad; two pads on a line; rows beyond a rail's edge; a
   load's plate away from its output; bright stretches that are diffusion), trap 30 extended.
-- **Ambiguities.** AMB-033 updated (`tcw_a` = `inh_ck`); new AMB-036 (`rdp3`'s contact on R4's path),
+- **Ambiguities.** AMB-033 updated (track A is `inh_ck`); new AMB-036 (`rdp3`'s contact on R4's path),
   AMB-037 (`inh_ck`'s staircase over other nets).
 - **Other blocks' notes**: corrections appended to `bust`, `cdp1`, `tc2`, `r9m`, `tl1`, `tl2`, `tl4`, `tl5`,
   `tl6`, `rdp2`, `rdp3`, `bd1`, `hcj`, `ucz`, `mrach`, `lc1`, `lc3`, `trunks`, `tcw`, `fld`, `ur`, `tla`,
   `urch`; `tl3.md` now that its claim has ended (including `tl4`'s corrections of 2026-11-18).
-  `ports.d/tl6.txt` (`tcw_a` in) and `ports.d/tc2.txt` (`r9m_l1w` in). Not changed: comments in
+  `ports.d/tl6.txt` (`inh_ck` in) and `ports.d/tc2.txt` (`r9m_l1w` in). Not changed: comments in
   `trace/bust.txt` and `trace/tc2.txt` that the notes now correct.
 - **Floor plan.** The coarse left-centre block is split into what `lc1` and `lc3` have not drawn
   (`lc2` is its fragment); the top-left strip 3 block is cut to the rows above y 2890.

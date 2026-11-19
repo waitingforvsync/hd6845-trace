@@ -22,12 +22,12 @@ tl4_w2512  P  4962,2542-2560     ?   link C's west end on tl4's row (4967,2551):
 tl1_w2592  M  4255,2506-2518     in  link D's east end on tl4's bus line 1 (4250,2512)
 tl1_w2592  M  3528,2505-2519     ?   link D's west end on tl2's metal (3533,2509): towards the loads
 
-# Piece tcwa (run 2): tcw_a = inh_ck. The driver (the inverter of the input buffer row) lies beyond link F's east end.
-tcw_a      M  6098-6112,6345     ?   link E's north end on tl6's metal (6105,6350): towards the loads
-tcw_a      M  6422-6438,8072     in  link E's south end on lc2's piece (lc2_w8172, M 6431,8067)
-tcw_a      P  7530,7640-7656     ?   the tap's row (pad (6427,7648)): on east a gate of the undrawn group under the metal x 7550-7600
-lc2_w8172  M  6445,8165-8179     ?   link F's west end on lc2's end (6450,8172): towards the loads
-lc2_w8172  M  6695,8360-8374     in  link F's east end on trunks' line S (its end x 6690): the net is inh_ck
+# Piece tcwa (run 2): the net is inh_ck. The driver (the inverter of the input buffer row) lies beyond link F's east end.
+inh_ck      M  6098-6112,6345     ?   link E's north end on tl6's metal (6105,6350): towards the loads
+inh_ck      M  6422-6438,8072     in  link E's south end on lc2's piece (inh_ck, M 6431,8067)
+inh_ck      P  7530,7640-7656     ?   the tap's row (pad (6427,7648)): on east a gate of the undrawn group under the metal x 7550-7600
+inh_ck  M  6445,8165-8179     ?   link F's west end on lc2's end (6450,8172): towards the loads
+inh_ck  M  6695,8360-8374     in  link F's east end on trunks' line S (its end x 6690): the net is inh_ck
 
 # Piece x1 (run 2): tl5's south poly bus down to its pads, the pads' metals onto lc1's wires
 rcs_x1     P  5097-5117,6345     ?   from tl5's bus line x 5107: towards the loads

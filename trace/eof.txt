@@ -174,16 +174,16 @@ N M 3560,2512 tl1_w2592                # tl2's name for the metal that arrives h
 @alias r9m_l1w tl1_w2592
 
 # ============================================================================================
-# Piece tcwa (run 2): tcw_a from tl6's end (6105,6350) to trunks' line S (inh_ck), and a tap.
+# Piece tcwa (run 2): inh_ck from tl6's end (6105,6350) to trunks' line S (inh_ck), and a tap.
 # Wiring only.
 #
 # The line's path:
-#   tl6 draws tcw_a's metal x 6105 south to (6105,6350);
+#   tl6 draws inh_ck's metal x 6105 south to (6105,6350);
 #   LINK E (here): the metal runs on south, straight, to a corner (6105,7346); east along y 7346,
 #     lying on lc1_w7040's poly row without a contact, to a corner (6298,7346), 20 px short of the
 #     ring of lc1's pad (6341,7345); south to a corner (6298,7432); east along y 7432 (on another
 #     poly row, no contact) to a corner (6430,7432); south along x 6430, through a pad with a
-#     contact (6427,7648) (the tap, below), to y 8067, where lc2 draws it on (lc2_w8172:
+#     contact (6427,7648) (the tap, below), to y 8067, where lc2 draws it on (inh_ck:
 #     M 6431,8067 y8172 x6450);
 #   lc2: the corner (6431,8172) and east to x 6450;
 #   LINK F (here): east along y 8172 to a corner (6559,8172), 18 px south of the ring of another
@@ -229,19 +229,17 @@ N M 3560,2512 tl1_w2592                # tl2's name for the metal that arrives h
 #    centre, hole; the staircase: tl5_tracks.py v 6757 8380 8440, h 8452 6770 6920, v 6930 8465
 #    8525, h 8536 6945 7030: bars only; follow.py 6330 7432 E gives every corner as drawn.
 M 6105,6345 y7346 x6298 y7432 x6430 y8072 w=14     # link E
-N M 6105,6800 tcw_a
+N M 6105,6800 inh_ck
 P 6412,7632:6446,7664               # the tap's pad
 C 6427,7648
 P 6427,7648 x7530 w=16              # the row east, to 10 px short of the gate group's diffusion
 M 6445,8172 x6559 y8367 x6695 w=14  # link F: lc2's end (x 6450) to trunks' end (x 6690)
-N M 6559,8300 lc2_w8172                # lc2's name for the metal that arrives here
-# In the full extraction tcw_a, lc2_w8172 and inh_ck (the clock block's and inrow's name for the
+N M 6559,8300 inh_ck                # lc2's name for the metal that arrives here
+# In the full extraction inh_ck (then under three names; the clock block's and inrow's name for the
 # net of trunks' line S) are one net. Read by itself this file holds two pieces of it.
-# tcw_a is kept as the name the net is shown under only because tl3 and tl6 alias five other
+# inh_ck is kept as the name the net is shown under only because tl3 and tl6 alias five other
 # names to it and the extractor wants every alias to point straight at the one shown name; the
-# net IS inh_ck, and the rename tcw_a -> inh_ck is proposed in the handoff (notes, Logic).
-@alias tcw_a inh_ck
-@alias tcw_a lc2_w8172
+# net IS inh_ck, and the rename to inh_ck was proposed (done 2026-11-19) in the handoff (notes, Logic).
 
 # ============================================================================================
 # Piece x1 (run 2): the poly bus that leaves tl5's strip south across y 6350, down to its pads,
