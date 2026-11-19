@@ -35,7 +35,7 @@ tl5_w5544   P  4967,5534-5553  ?    the row of the pad (5538,5544): T10's south 
 inh_ck   P  4967,5621-5641  ?    the row of the pad (5538,5631)
 tl5_w5674   P  4967,5665-5684  ?    the row of the pad (5493,5674)
 rcs_mv   P  4967,5708-5727  ?    a row without a pad in the strip
-tl5_w5761   P  4967,5751-5770  ?    a row without a pad in the strip; bus line x 5412
+bd1_n2   P  4967,5751-5770  ?    a row without a pad in the strip; bus line x 5412
 rcs_x1   P  4967,5880-5900  ?    under RC's turned rail; bus line x 5107
 tl5_w5936   P  4967,5926-5946  ?    under RC's turned rail; bus line x 5063
 vss         M  4967,5882-5942  -    rail RC, turned west; vss by structure only
@@ -49,5 +49,5 @@ rst_a   P  5140-5160,6350  ?    the clear of latches a and b: from T0's south pa
 res_b       P  5182-5202,6350  in   from trunks' pad (5190,6065)
 lpstb_b     P  5227-5247,6350  in   from trunks' pad (5232,6105)
 tl5_w2722   P  5355-5375,6350  out  the strong inverter's output: from T3's south pad (5363,6108)
-tl5_w5761   P  5402-5422,6350  ?    the row y 5761
+bd1_n2   P  5402-5422,6350  ?    the row y 5761
 tl5_w3461   P  5443-5463,6350  in   latch a's data: from T5's south pad (5451,5759)

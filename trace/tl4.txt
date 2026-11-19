@@ -142,7 +142,7 @@ P 4468,3841:4795,3859
 P 4437,3835:4473,3866
 C 4455,3850
 M 4462,3852 x4412 y3900 w=20
-N P 4600,3850 tl4_w3850
+N P 4600,3850 bd1_n2
 
 # ====================================================================
 # Unit (a), y 4410-4640: a three-input NOR.   tl4_w4545 = NOR(tla_w3417, inh_ck, tl4_w4590)
@@ -639,12 +639,12 @@ P 4425,5752:4555,5772
 P 4533,5708:4555,5772
 P 4533,5708:4967,5728
 
-# --- tl4_w3850 (the input of the inverter at y 3781-3911): its metal x 4410 runs south to
+# --- bd1_n2 (the input of the inverter at y 3781-3911): its metal x 4410 runs south to
 # the pad (4410,4332); row y 4320-4338 west under the track x 4366 to the pad (4279,4332);
 # metal x 4279 south to the pad (4279,4571); an arm east y 4555-4580 onto a poly x 4319-4337
 # that runs south under the metal x 4321 (no contact) to y 4902; row y 4884-4902 east to the
 # pad (4538,4895); metal x 4538 south, a jog east at y 5236-5250, x 4583 south to y 5764 and
-# east onto the pad (4626,5762); row y 5752-5772 east to tl5 (tl5_w5761: its bus line x 5412).
+# east onto the pad (4626,5762); row y 5752-5772 east to tl5 (bd1_n2: its bus line x 5412).
 M 4411,3895 y4346
 P 4392,4314:4430,4348
 C 4410,4332
@@ -663,7 +663,6 @@ M 4538,4881 y5243 x4583 y5764 x4640
 P 4607,5746:4646,5780
 C 4626,5762
 P 4640,5752:4967,5772
-@alias tl4_w3850 tl5_w5761
 
 # --- tl3_e4635 (the data of tl3's latch C): row y 4623-4642 from the west edge to the pad
 # (4279,4636); metal x 4279 south to the pad (4279,5200); row y 5189-5207 west out of the strip

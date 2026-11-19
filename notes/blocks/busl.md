@@ -116,12 +116,12 @@ Run 7 (richtw1's session, Claude Fable 5.2; 2026-11-19 22:30 to 22:56 +0100). Th
 - **The latch on R4's match drives the row counter's step logic: `rcs_e3` = NOT `bd1_n2`** (piece
   `n2`). `eof` had drawn `bd1_n2` (the output of `bd1`'s latch on `rc_eq_r4`) from the latch to this
   region's south edge at (6711,15000), and the track that leaves the region north at (6775,10400) on
-  to `tl5`'s bus poly x 5412, which is `tl4_w3850`, the input of the inverter that makes `rcs_e3`
-  (its pieces `n2w`, `n2n`; the join between them was the open `bd1_n2_u`). Between the two ports it
+  to `tl5`'s bus poly x 5412, which is `bd1_n2`, the input of the inverter that makes `rcs_e3`
+  (its pieces `n2w`, `n2n`; the join between them was the open `bd1_n2`). Between the two ports it
   is one thin metal: 1,753 px north at x 6711, east along y 13247, 2,847 px north at x 6776. No pad,
   no contact, no tap. The join holds without any uncertain item (`tools/unsure.py`, all files: the
-  labels of `bd1_n2`, `bd1_k`, `bd1_n2_u`, `tl4_w3850`, `tl5_w5761` are on one piece; only `bd1_q`,
-  the load's tie in `bd1`, is apart, as before). The names are gathered by `@alias bd1_n2 tl4_w3850`;
+  labels of `bd1_n2`, `bd1_k`, `bd1_n2`, `bd1_n2`, `bd1_n2` are on one piece; only `bd1_q`,
+  the load's tie in `bd1`, is apart, as before). The names are gathered by an alias (dropped at the rename);
   the renames are the coordinator's.
 - **Two through lines** (pieces `x68`, `x69`): the tracks next east, on either side of `trunks`' line,
   cross the whole region with one step each and no pad or contact in it: `busl_x6820` (x 6820 north
@@ -132,7 +132,7 @@ Run 7 (richtw1's session, Claude Fable 5.2; 2026-11-19 22:30 to 22:56 +0100). Th
 
 Full extraction with run 7: 2,379 nets (main had 2,378: two new through lines, one join), 4,351
 transistors, 0 errors, 0 warnings; 849 of 1,279 equations firm, as on main (`rcs_e3` = NOT `bd1_n2`
-depends on uncertain items, as `rcs_e3` = NOT `tl4_w3850` did). The package by itself: 42 nets,
+depends on uncertain items, as `rcs_e3` = NOT `bd1_n2` did). The package by itself: 42 nets,
 0 errors, 0 warnings.
 
 Full extraction with run 6: 2,390 nets (unchanged: the two wires lengthen `eofw`'s and `cdp3`'s nets),
@@ -641,7 +641,7 @@ the net that can drive it.
 
 Piece `n2`. Traced (no uncertain item of this package or on the join): `bd1_n2`, the output of
 `bd1`'s latch on R4's match (`bd1_n2` = NOT((`bd1_an` AND `inh_lat`) OR `bd1_n1` OR `rst_a`):
-`notes/blocks/eof.md`, pieces `r4lat`, `isrc5`), is one net with `tl4_w3850` (= `tl5_w5761`), the input of
+`notes/blocks/eof.md`, pieces `r4lat`, `isrc5`), is one net with `tl5`'s bus line x 5412 (the row y 3850 of `tl4`; both renamed `bd1_n2` by the refresh of 2026-11-19), the input of
 the inverter of `tl4`'s right cluster that makes `rcs_e3`. So **`rcs_e3` = NOT `bd1_n2`**: the step
 logic's `rcs_cond_n` = `rcs_e4` OR (`rcs_e3` AND `rcs_a2`) takes R4's latched match inverted. Between
 the latch and that inverter the net is wire only (about 23,000 px: the bottom bus field, this field,
@@ -679,7 +679,7 @@ not known: named for their place (`busl_x6820`, `busl_x6906`).
 | `cdp3_k_b` | P | x 7600, y 9438-9460 (22 px wide) | out (driven from the diffusion at its south end; received by `cdp3`'s gate 1) | `cdp3`'s row y 9450, drawn there from x 7600 |
 | `cdp3_k_b` | D | x 7600, y 11092-11127 | in | the diffusion band goes on east under column 0's VSS rail (x 7600-7646) into `cdp3`'s ground (not drawn) |
 | `bd1_n2` | M | (6704-6718,15000), 14 px wide | in (driven by `bd1`'s latch) | onto `eof`'s metal from the bottom bus field (piece `n2w`, `M 6711,15000 ..`) |
-| `bd1_n2` | M | (6769-6783,10400), 14 px wide | out | onto `eof`'s metal north (piece `n2n`, `M .. 6775,10400`, labelled `bd1_n2_u`): to `tl4_w3850` and the inverter that makes `rcs_e3` |
+| `bd1_n2` | M | (6769-6783,10400), 14 px wide | out | onto `eof`'s metal north (piece `n2n`, `M .. 6775,10400`, then labelled as an open join): to `tl5`'s bus line x 5412 and the inverter that makes `rcs_e3` |
 | `busl_x6820` | M | (6813-6827,10400) | not known | the track goes on north; the follower ends at (6817,9988), not read |
 | `busl_x6820` | M | (6747-6761,15000) | not known | on south into `bl0`'s ground; the follower ends at (6754,16220), not read |
 | `busl_x6906` | M | (6899-6913,10400) | not known | on north; the follower ends at (7078,8778) (candidates (6905,10057), (6908,9798)), not read |

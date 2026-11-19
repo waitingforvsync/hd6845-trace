@@ -52,7 +52,7 @@
 6433,8580:6652,9174      route  ripple counter clock lc3_w9947, diagonal metal and x 6472 | onto lc2's fourth through line at (6450,9165)
 6440,8905:6489,9227      route  reset copy rst_c, poly under the clock's metal | from lc2's diagonal poly south to the pad (6469,9209), no contact with the metal above it
 6440,9209:6478,9459      route  reset copy rst_c, metal x 6472 | from the pad (6469,9209) onto lc3's line rst_c: the input of the inverter that makes lc1_w7170
-6768,8703:6954,10400     route  ?latched R4 match (bd1_n2_u), track x 6775 and diagonal | from the left bus field's north edge to the pad (6947,8710); its join to bd1_n2 south of y 10400 is not drawn
-6934,8409:7009,8727      route  ?latched R4 match (bd1_n2_u), poly column x 6951 | under three metals to the pad (6988,8427)
-6139,6993:6998,8427      route  ?latched R4 match (bd1_n2_u), track x 6991 and row y 7000 | north over ten poly rows, west over five polys to the pad (6146,6997)
-5403,6345:6166,7015      route  ?latched R4 match (bd1_n2_u), poly row y 6996, diagonal and column x 5412 | onto tl5's bus poly tl5_w5761 = tl4_w3850, the input of the inverter that makes rcs_e3
+6768,8703:6954,10400     route  ?latched R4 match (bd1_n2), track x 6775 and diagonal | from the left bus field's north edge to the pad (6947,8710); its join to bd1_n2 south of y 10400 is not drawn
+6934,8409:7009,8727      route  ?latched R4 match (bd1_n2), poly column x 6951 | under three metals to the pad (6988,8427)
+6139,6993:6998,8427      route  ?latched R4 match (bd1_n2), track x 6991 and row y 7000 | north over ten poly rows, west over five polys to the pad (6146,6997)
+5403,6345:6166,7015      route  ?latched R4 match (bd1_n2), poly row y 6996, diagonal and column x 5412 | onto tl5's bus poly the bus line x 5412 of tl5 = `bd1_n2`, the input of the inverter that makes rcs_e3

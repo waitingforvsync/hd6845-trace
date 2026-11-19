@@ -435,6 +435,6 @@ Round 2: no findings.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
 
-- The ports `c4l_l3`, `tl5_w5500`, `tl6_p6101` ("on under the wide metal band") go to `tc1`'s `tc1_bus2554`, `tc1_bus2684`, `tc1_bus2814` by three nested polys under the plane (`tlb` run 1).
+- The ports `c4l_l3`, `tl5_w5500`, `tl6_p6101` ("on under the wide metal band") go to `tc1`'s `c4l_l3`, `tc1_bus2684`, `tc1_bus2814` by three nested polys under the plane (`tlb` run 1).
 - `tc2_m6447` / `tcw_m6404` ("not followed further"): followed south (`eof` run 13, piece `ck5`): it is the clock of the left-centre ripple counter; the net's canonical name is `lc3_w9947`, and `trace/tl6.txt`'s alias line was changed for that by `eof` (commit a9233e9, no geometry).
 - The signal on track A / line X / the first through line of the left-centre strips, which these notes call a clock, a strobe "once per scan line" or leave without a source, **is the reset**: `rst_a`, the buffered copy of `rst` = NOR(`lpstb_b`, `res_b`) made by `lc1`'s gate 5 (`eof` run 10, piece `isrc5`, firm). `inh_ck`, `inh_rc` and `inh_lat` are further buffered copies of it: high while the RES and LPSTB pins are both low, and only then. The belief "a strobe once per scan line" is withdrawn.

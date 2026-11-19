@@ -524,7 +524,7 @@ N M 7555,10300 cdp3_k_b
 # through the field. trace/eof.txt draws it from the latch along the bottom bus field and up
 # to this region's south edge at (6711,15000) (piece n2w), and from this region's north edge
 # at (6775,10400) on north to tl5's bus poly x 5412 and the inverter that makes rcs_e3 (piece
-# n2n, labelled bd1_n2_u = tl4_w3850). Between the two it is one thin metal: north on x 6711,
+# n2n, then labelled as an open join). Between the two it is one thin metal: north on x 6711,
 # east along y 13247 (the third of six nested Ls: sel3's, sel4's, this one, x68's, trunks' line,
 # x69's), north on x 6776. No pad, no contact, no tap (scan cache/scratch/busl/n2_scan.txt). At
 # some row crossings the clean shot is greenish under it (which ones differs from track to
@@ -532,7 +532,6 @@ N M 7555,10300 cdp3_k_b
 # =====================================================================================
 M 6711,15000 y13247 x6776 y10400 w=14
 N M 6711,14000 bd1_n2
-@alias bd1_n2 tl4_w3850                # the join: eof's north piece carries tl4's name
 
 # =====================================================================================
 # Pieces x68, x69 (run 7): the two tracks of the same nest east of bd1_n2's, on either side of

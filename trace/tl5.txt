@@ -492,7 +492,7 @@ N P 5300,5717 rcs_mv
 # (green field between in the clean shot, two dark edges with no orange between in the chip-2
 # stripped shot: px.py row 5760 5390 5475 4), and south as the bus line x 5412 (below)
 P 4967,5761 x5412 y6350 w=20
-N P 5300,5761 tl5_w5761
+N P 5300,5761 bd1_n2
 # ---- T5's south pad (5451,5759): the metal ends on it; the pad's poly runs south from it as the
 # bus line x 5453, under amrw's metal x 5450 (no row meets the pad: g_f.png)
 P 5435,5743:5470,5777

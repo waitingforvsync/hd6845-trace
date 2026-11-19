@@ -40,7 +40,7 @@ tc1_o3527   P  4967,5534-5553  in   the row of the pad (4497,5547), the north en
 inh_ck       P  4967,5621-5641  ?    the row y 5631 (inh_ck), across the whole strip without a contact
 tl4_w4590   P  4967,5665-5684  ?    the row of the pad (4411,5676) at the south end of the track x 4366 (tl5_w5674)
 rcs_mv      P  4967,5708-5728  out  the row y 5718's east piece, from the pad (4410,5764) (rcs_mv)
-tl4_w3850   P  4967,5752-5772  in   the row of the pad (4626,5762) at the south end of the metal x 4538/4583 (tl5_w5761)
+bd1_n2   P  4967,5752-5772  in   the row of the pad (4626,5762) at the south end of the metal x 4538/4583 (bd1_n2)
 rcs_x1      P  4967,5880-5900  out  the row of the pad (4629,5891): rcs_x1, tl5's bus line x 5107
 tl5_w5936   P  4967,5926-5946  ?    the row of the pad (4583,5936): tl5's bus line x 5063
 c4l_gab   M  4967,5977-5991  ?    tl5's thin metal (the clear of its latch c), in along y 5984

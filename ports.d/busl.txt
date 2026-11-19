@@ -105,7 +105,7 @@ cdp3_k_b     P  7600,9438-9460     out cdp3's row y 9450 (gate 1 of the NAND bes
 cdp3_k_b     D  7600,11092-11127   in  the diffusion band goes on east under column 0's VSS rail into cdp3's ground (not drawn)
 # piece n2 (run 7): bd1_n2's track between eof's two ports
 bd1_n2       M  6704-6718,15000    in  onto eof's metal from the bottom bus field (piece n2w): the output of bd1's latch on R4's match
-bd1_n2       M  6769-6783,10400    out onto eof's metal north (piece n2n, labelled bd1_n2_u = tl4_w3850): to the inverter that makes rcs_e3
+bd1_n2       M  6769-6783,10400    out onto eof's metal north (piece n2n, then labelled as an open join): to the inverter that makes rcs_e3
 # pieces x68, x69 (run 7): two through lines beside it
 busl_x6820   M  6813-6827,10400    ?   the track goes on north; follower ends (6817,9988), not read
 busl_x6820   M  6747-6761,15000    ?   on south into bl0's ground; follower ends (6754,16220), not read

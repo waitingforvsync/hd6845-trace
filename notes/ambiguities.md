@@ -700,8 +700,8 @@ heavy box at (4684,3420) under the metal of `tl4_w3245`: bright centre in a dark
 shots, no hole in the clean shot, no pits in the chip-2 stripped shot; drawn as an uncertain lobe of
 `tl4_w3390`'s diffusion, no contact. A contact would short `tl4_w3245` to `tl4_w3390`, which the rest
 of the latch contradicts; what the box is for is not known. (2) A mark at (4683,5767) on RA's leg,
-in both metal shots, right over the row of `tl4_w3850`; no hole under it in either stripped shot, so
-not drawn; a contact would tie `tl4_w3850` (and `rcs_e3`'s input) to VSS. (3) The field box
+in both metal shots, right over the row of `bd1_n2`; no hole under it in either stripped shot, so
+not drawn; a contact would tie `bd1_n2` (and `rcs_e3`'s input) to VSS. (3) The field box
 (4722-4752, 3442-3488) under RA (an elongated ring in both metal shots): perhaps a substrate contact
 of RA; not drawn (no poly, no diffusion). The lesson (a metal about 25 px wide over a box shows a
 bright centre in a dark ring; the clean shot's hole decides) is trap 26.

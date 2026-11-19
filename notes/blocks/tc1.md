@@ -835,7 +835,7 @@ has not drawn them yet.
 |---|---|---|---|
 | `tc1_bus2814` | x 7117-7133 | (7104-7140, 2577-2612), contact (7120,2596) | metal east along y 2597 to x 7322, south at x 7308-7320, east on track y 2814; pad, contact (7706,2814); poly east to x 8195, south lengthwise under ns3's metal to y 2907, east to x 8350 |
 | `tc1_bus2684` | x 7160-7176, then east as a strip y 2585-2603 | (7348-7378, 2580-2612), contact (7361,2596) | metal south at x 7353-7367, east on track y 2684; cross-under at the island's right VSS rail (contacts (7661,2684) and (7859,2684)); metal east to x 8350 |
-| `tc1_bus2554` | x 7201-7218 | (7192-7226, 2535-2568), contact (7206,2551) | metal east on track y 2554; cross-under (contacts (7706,2553) and (7901,2553)); metal east to x 8350 |
+| `c4l_l3` | x 7201-7218 | (7192-7226, 2535-2568), contact (7206,2551) | metal east on track y 2554; cross-under (contacts (7706,2553) and (7901,2553)); metal east to x 8350 |
 
 `tc1_bus2814`'s metal lies **lengthwise over `tc1_bus2684`'s poly strip** from x 7160 to x 7322
 without contact (the same arrangement as the metal on y 2641 over `tc1_o3740`'s poly). The
@@ -846,7 +846,7 @@ end), then the line (`tools/textmap.py 7100 2576 7190 2616 2`: chip 1 A-C there 
 bare ground; chip 2 only 9-A). The pad has no other way out. Because chip 2 does not show it, that piece is drawn `?M`
 (x 7140-7164): `tc1_bus2814`'s north poly and its track are joined only through it.
 
-A small spot on `tc1_bus2554`'s poly at (7208-7212, 2506-2510), ring-like in the clean shot at
+A small spot on `c4l_l3`'s poly at (7208-7212, 2506-2510), ring-like in the clean shot at
 4x, is not a contact: `tools/textmap.py 7150 2490 7230 2526 2` shows no 'g' hole (R-G drops to
 1-2 over 6 px) and unbroken bright metal in both metal shots.
 
@@ -936,7 +936,7 @@ Run 3's ports (the driver; region edges as drawn):
 | `tc1_bus2858` | P | x 6750, y 2520-2540 (west); x 8350, y 2933-2950 (east) | ? | through line on the bus track y 2858 |
 | `tc1_bus2814` | P | x 7117-7133, y 2500 (north); x 8350, y 2890-2907 (east) | ? | through line on the bus track y 2814 |
 | `tc1_bus2684` | P / M | poly x 7160-7176 at y 2500 (north); metal x 8350, y 2677-2691 (east) | ? | through line on the bus track y 2684 |
-| `tc1_bus2554` | P / M | poly x 7201-7218 at y 2500 (north); metal x 8350, y 2546-2560 (east) | ? | through line on the bus track y 2554 |
+| `c4l_l3` | P / M | poly x 7201-7218 at y 2500 (north); metal x 8350, y 2546-2560 (east) | ? | through line on the bus track y 2554 |
 | `vss` | M | the rail x 6858-6906 at y 2500 (it goes on north under a wide metal); its branch y 2614-2666 at x 6750, going west (over the rows of `r8_b5_q` and `tc1_m7100`, no contact) | | |
 | `tc1_m6817` | M | north end on the contact (6815,2833) (run 10) | ? | its gate is cell D's pull-down; its source is at its other end |
 | `vss` | M | rail x 6858-6906 at y 2800 (run 10); x 6861-6932 at y 3905; x 6858-6908 at y 4380 (it narrows at y 4238) | | goes on both ways, not followed |
@@ -1587,4 +1587,4 @@ Round 1: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
 
-- `tc1_bus2554`, `tc1_bus2684`, `tc1_bus2814` ("a poly from the north") come from `tl6`'s strip: they are `c4l_l3`, `tl4_w5068` (`tl5_w5500`) and `tl6_p6101` (`tlb` run 1; the last still through `tc1`'s own `?M` at (7140-7164, 2597)).
+- `c4l_l3`, `tc1_bus2684`, `tc1_bus2814` ("a poly from the north") come from `tl6`'s strip: they are `c4l_l3`, `tl4_w5068` (`tl5_w5500`) and `tl6_p6101` (`tlb` run 1; the last still through `tc1`'s own `?M` at (7140-7164, 2597)).

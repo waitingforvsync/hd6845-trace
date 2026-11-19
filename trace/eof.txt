@@ -1040,14 +1040,14 @@ N M 6471,9330 rst_c
 # ============================================================================================
 # Piece n2n (run 14, 2026-11-19): the north end of the track that carries bd1_n2 (the latch on R4's
 # match) up the left bus field, from busl's north edge (6775,10400) to tl5's south bus poly x 5412
-# (tl5_w5761 = tl4_w3850, the input of the inverter that makes rcs_e3). Wiring only, no transistor,
+# (the bus line x 5412 of tl5 = `bd1_n2`, the input of the inverter that makes rcs_e3). Wiring only, no transistor,
 # no uncertain item:
-#     the track x 6775 (bd1_n2_u) IS tl4_w3850, so, if the track is bd1_n2,  rcs_e3 = NOT bd1_n2.
+#     the track x 6775 IS tl5's bus line x 5412 (the input of tl4's inverter), so, since the track is bd1_n2 (busl, piece n2),  rcs_e3 = NOT bd1_n2.
 # The join to bd1_n2 itself is NOT drawn: piece n2w ends at (6711,15000), busl's south edge, and the
 # 4,600 px between (x 6711 north to a corner (6711,13249), east to (6777,13249), north on x 6776) lie in
 # busl's claimed region. Read there by text and one view, not drawn: the step is a plain nested L
 # (o_step.png), the metal is 9-15 px wide at every one of the follower's contact candidates (no pad).
-# Hence the name bd1_n2_u (an open join, a task).
+# Hence the name bd1_n2 (an open join, a task).
 # A. Metal north on x 6775 (11-14 px wide; bars of the poly rows beneath, none over 14 px, no pad: two
 #    crossing fields, y 9560-9810 and y 10300-10400, and two single rows, y 9984-9998 and y 10048-10064,
 #    the rows of the neighbours' pads (6818,9988) and (6730,10050); the first pad's ring is 18 px from
@@ -1065,10 +1065,8 @@ N M 6471,9330 rst_c
 #    neighbours at -1306 and -1439 are the lines of tl5's polys x 5455 and x 5368) to a bend
 #    (5412,6784), north on x 5403-5421 under nine horizontal metals (no pad, no hole) onto tl5's poly
 #    end `P 4967,5761 x5412 y6350 w=20`.
-@alias tl4_w3850 bd1_n2_u
-@alias tl4_w3850 tl5_w5761                    # tl4's own alias, repeated so that this file extracts by itself
 M 6775,10400 y8952 6947,8780 y8708 w=13
-N M 6775,9900 bd1_n2_u
+N M 6775,9900 bd1_n2
 P 6934,8690:6962,8727
 C 6947,8710
 P 6951,8708 y8428 x6990 w=19
@@ -1078,4 +1076,4 @@ M 6991,8427 y7000 x6146 w=13
 P 6127,6978:6166,7015
 C 6146,6997
 P 6148,6996 x5624 5412,6784 y6345 w=17
-N P 5412,6500 tl4_w3850
+N P 5412,6500 bd1_n2

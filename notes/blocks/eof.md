@@ -277,11 +277,11 @@ transistor, no uncertain items.
   edge (6775,10400): north on x 6775, a diagonal to a pad (6947,8710), a poly column north to a pad
   (6988,8427), a metal 1,410 px north on x 6991 and 845 px west along y 7000 to a pad (6146,6997), and that
   pad's poly row west: **the middle one of the three undrawn rows of `lc1`'s diagonal bundle**, which runs up
-  the diagonal onto `tl5`'s south bus poly x 5412, `tl5_w5761` = `tl4_w3850`. So the drawn wire is named
-  `bd1_n2_u` (an open join: its 4,600 px in `busl`'s region are not drawn by anyone yet) and is one net with
-  `tl4_w3850` (firm): **`rcs_e3` = NOT `tl4_w3850`, and `tl4_w3850` is, believed, `bd1_n2`**, R4's match as
+  the diagonal onto `tl5`'s south bus poly x 5412, the bus line x 5412 of tl5 = `bd1_n2`. So the drawn wire is named
+  `bd1_n2` (an open join: its 4,600 px in `busl`'s region are not drawn by anyone yet) and is one net with
+  `bd1_n2` (firm): **`rcs_e3` = NOT `bd1_n2`, and `bd1_n2` is, believed, `bd1_n2`**, R4's match as
   the latch beside the strobe channel holds it. Three pads with contacts, no transistor, no tap.
-- With it `tl4_w3850` has its source as a place: every drawn end of the net is now this wire or the gate
+- With it `bd1_n2` has its source as a place: every drawn end of the net is now this wire or the gate
   of `tl4`'s inverter.
 
 Full extraction with run 14: 2,382 nets, 4,351 transistors, 0 errors, 0 warnings (the same counts as
@@ -354,7 +354,7 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `n2n`, the track | x 6768-6954, y 8703-10400 | metal north on x 6775 from `busl`'s north edge (the track is drawn by no one south of it), a 45-degree diagonal (x + y = 15727) from (6775,8952) to (6947,8780), north to a pad with a contact (6947,8710), the last of a staircase of four pads |
 | `n2n`, the column | x 6934-7009, y 8409-8727 | the pad's poly x 6941-6961 north under three horizontal metals to y 8428, east along y 8416-8440 to a pad with a contact (6988,8427) |
 | `n2n`, the metal | x 6139-6998, y 6993-8427 | north on x 6991 over ten poly rows to an L corner (6991,7000), the middle of three nested corners; west along y 7000 over five vertical polys to a pad with a contact (6146,6997) |
-| `n2n`, the row and the diagonal | x 5403-6166, y 6345-7015 | the pad's poly row y 6988-7004 west under the crossing field's tracks to (5624,6996), a 45-degree diagonal (x - y = -1372) to a bend (5412,6784), north on x 5403-5421 under nine horizontal metals onto `tl5`'s poly end at y 6350 (`tl5_w5761`) |
+| `n2n`, the row and the diagonal | x 5403-6166, y 6345-7015 | the pad's poly row y 6988-7004 west under the crossing field's tracks to (5624,6996), a 45-degree diagonal (x - y = -1372) to a bend (5412,6784), north on x 5403-5421 under nine horizontal metals onto `tl5`'s poly end at y 6350 (`bd1_n2`) |
 
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
 
@@ -1095,17 +1095,17 @@ What the join says. Traced (firm): the input of `lc3`'s lower inverter is the th
 
 `rst_c` also runs down the left bus field (`lc3`, `busl`: the row y 14697, drawn to x 7550).
 
-### Piece `n2n`: the latched R4 match's track ends on `tl4_w3850`, the input of `rcs_e3`'s inverter (traced; wiring only; the join to `bd1_n2` open)
+### Piece `n2n`: the latched R4 match's track ends on `bd1_n2`, the input of `rcs_e3`'s inverter (traced; wiring only; the join to `bd1_n2` open)
 
 ```
-rcs_e3    = NOT tl4_w3850                  tl4's inverter at y 3781-3911 (its load tie uncertain, as before)
-tl4_w3850 = bd1_n2_u                       this piece: one net (alias), no uncertain item
-bd1_n2_u  ?= bd1_n2                        believed: the track through busl's region, read and not drawn
+rcs_e3    = NOT bd1_n2                  tl4's inverter at y 3781-3911 (its load tie uncertain, as before)
+the bus line x 5412 of tl5 = `bd1_n2`                       this piece: one net (alias), no uncertain item
+the track x 6775  ?= bd1_n2                        believed: the track through busl's region, read and not drawn
 bd1_n2    = NOT((bd1_an & inh_lat) | bd1_n1 | rst_a)      the latch on R4's match (pieces r4lat, n2out)
 ```
 
-From the full extraction (`rcs_e3 = NOT tl4_w3850`; `t1068` at (4752,3850), 57/18, is the net's only gate).
-The aliases are `@alias tl4_w3850 bd1_n2_u` and `tl4`'s own `@alias tl4_w3850 tl5_w5761`.
+From the full extraction (`rcs_e3 = NOT bd1_n2`; `t1068` at (4752,3850), 57/18, is the net's only gate).
+The aliases are an alias (dropped at the rename) and `tl4`'s own an alias (dropped at the rename).
 
 | Stretch | What | Evidence |
 |---|---|---|
@@ -1120,14 +1120,14 @@ The aliases are `@alias tl4_w3850 bd1_n2_u` and `tl4`'s own `@alias tl4_w3850 tl
 | the pad (6146,6997) | x 6127-6166, y 6978-7015: ring and bright centre (198 / 212), green hole (-25). East of it under the metal the clean shot is protected field (190-197/117/125, the chip-2 stripped shot red minus green about 0): the poly ends on the pad | `eof_cchk.py 6145,6996`; `px.py row 6998 6100 6230 5 acid,acid1b,metal`; `o_r1.png` (2.15x, three shots) |
 | the row | y 6988-7004 from the pad west to (5624,6996), salmon without a break in the clean shot, under about ten vertical metals (x 5668-6104, among them `rc_stepreq_n`'s x 5843 and `inh_ck`'s x 6105), field between it and the rows y 6953 and 7040 (`eof_rows.py row 6975 5600 6220`: nothing between the diagonal and the pads) | `o_r1.png`; `eof_rows.py row 6996 5600 6220`, `col` cuts x 5650-6120 |
 | the diagonal | centre x - y = -1372 from (5624,6996) to the bend (5412,6784); the other two undrawn lines of the bundle run parallel at x - y = -1306 (from `tl5`'s poly x 5455 to the row y 6953) and -1439 (x 5368, row y 7040), 46 px away on either side, and none of the three crosses another; under one horizontal metal y 6830-6850 (no pad) | cuts in the chip-2 stripped shot, `eof_rows.py row` y 6790-6980 (three runs at each: 5460/5527/5593 at y 6900, 5491/5559/5627 at 6930, 5521/5590/5652 at 6960); `eof_rows.py diag 5412 6770 5640 6998 --step 20 --reach 110` (the line at offset 5-11 at every step); `o_b2.png` (2.1x), overlay `o_ov3.png` (1.85x), stripped and clean |
-| the column | x 5403-5421 from the bend north to `tl5`'s poly end (`P 4967,5761 x5412 y6350 w=20`, its port `tl5_w5761 P 5402-5422,6350`), under nine horizontal metals (y 6372, 6415, 6460, 6502, 6545, 6589, 6632, 6675, 6719): only the 3-6 px bars of the gaps between them, no hole | `px.py col 5412 6345 6790 3 acid1b,metal,metal1`; `eof_mrun.py col 5390 6340 6880 5434`; `o_b1.png` (1.45x clean) |
+| the column | x 5403-5421 from the bend north to `tl5`'s poly end (`P 4967,5761 x5412 y6350 w=20`, its port `bd1_n2 P 5402-5422,6350`), under nine horizontal metals (y 6372, 6415, 6460, 6502, 6545, 6589, 6632, 6675, 6719): only the 3-6 px bars of the gaps between them, no hole | `px.py col 5412 6345 6790 3 acid1b,metal,metal1`; `eof_mrun.py col 5390 6340 6880 5434`; `o_b1.png` (1.45x clean) |
 
-What the join says. Traced (firm, no uncertain item on the drawn wire): the net `tl4_w3850`, whose one gate
+What the join says. Traced (firm, no uncertain item on the drawn wire): the net `bd1_n2`, whose one gate
 is the pull-down of the inverter that makes `rcs_e3` (an input of `rcs_in3` = NOR(`rcs_e3`, `rcs_e4`) and of
 `rcs_bc3460` in the row counter's step logic), comes from the south: out of `tl5`'s poly bus, through
 `lc1`'s diagonal bundle and the crossing field, down the track x 6991 and the poly column to the track
 x 6775, which leaves north of `busl`'s region at (6775,10400). Believed (the open join): that track is the
-one piece `n2w` drew to (6711,15000), so `tl4_w3850` is `bd1_n2` and **`rcs_e3` = NOT (R4's match as
+one piece `n2w` drew to (6711,15000), so the bus line x 5412 of tl5 is `bd1_n2` and **`rcs_e3` = NOT (R4's match as
 latched)**. If so the latch on R4's match has one load, 23,000 px away, in the row counter's step logic,
 and no gate on the way. What that does in the step logic is `tla`'s, `tl1`'s and `tl2`'s equations
 (`notes/operation.md`); nothing new about them is traced here.
@@ -1218,8 +1218,8 @@ driver lies; the other three lead to the loads.
 | `lc3_w9947` | metal | (6440-6450, 9161-9174) | ? | piece `ck5`: onto `lc2`'s metal end (its fourth through line, `lc2_x6432`: its port (6450,9165)): the ripple counter's clock |
 | `rst_c` | poly | (6450, 8911-8936) | in | piece `rc`: from `lc2`'s diagonal poly (its port there), from latch C's clear pad |
 | `rst_c` | metal | (6440-6450, 9445-9459) | out | piece `rc`: onto `lc3`'s metal end (its fifth corner-bundle line, `rst_c`: its port (6450,9448-9462)) |
-| `bd1_n2_u` | metal | (6769-6782, 10400) | in | piece `n2n`: the track x 6775 from `busl`'s region (believed `bd1_n2`, from the port (6711,15000): 4,600 px drawn by no one) |
-| `tl4_w3850` | poly | (5403-5421, 6345) | out | piece `n2n`: onto `tl5`'s poly end (its port `tl5_w5761` (5402-5422,6350)): the input of `tl4`'s inverter that makes `rcs_e3` |
+| `bd1_n2` | metal | (6769-6782, 10400) | in | piece `n2n`: the track x 6775 from `busl`'s region (believed `bd1_n2`, from the port (6711,15000): 4,600 px drawn by no one) |
+| `bd1_n2` | poly | (5403-5421, 6345) | out | piece `n2n`: onto `tl5`'s poly end (its port `bd1_n2` (5402-5422,6350)): the input of `tl4`'s inverter that makes `rcs_e3` |
 
 ## Ambiguities
 
@@ -1552,11 +1552,11 @@ driver lies; the other three lead to the loads.
     salmon like the others (229/170/128), no ring, no hole (`eof_mrun.py col 6474 6390 7110 6430`;
     `px.py row 6675 6436 6468 4 metal,metal1,acid1b`).
 
-47. **The join of piece `n2n`'s track to `bd1_n2` is not drawn** (the name `bd1_n2_u`). Between piece
+47. **The join of piece `n2n`'s track to `bd1_n2` is not drawn** (the name `bd1_n2`). Between piece
     `n2w`'s end (6711,15000) and piece `n2n`'s start (6775,10400) the metal lies in `busl`'s claimed region.
     It was read by text and one view (the table of piece `n2n`, first row): one metal, one nested L step at
     y 13243-13255, no pad at any of the follower's sixteen contact candidates (9-15 px wide at each). Not
-    reviewed. (a) One wire, as read: `tl4_w3850` is `bd1_n2`. (b) A break or a tap in the 4,600 px that a
+    reviewed. (a) One wire, as read: the bus line x 5412 of tl5 is `bd1_n2`. (b) A break or a tap in the 4,600 px that a
     text reading missed. Working assumption (a), carried by the name only: the two ends are separate nets in
     the extraction until someone draws the stretch (`busl`'s holder: the handoff of run 14 gives the
     coordinates). What would settle it: the stretch drawn and reviewed.
@@ -2344,7 +2344,7 @@ y 6996 (continuous; the notch at x 5692 is a metal-gap artefact; no contact unde
 x 5907 nor under x 6016); the three diagonals at the bends and at the arrivals (parallel, no crossing, the
 trace on the middle one; no contact under the thin metal y 6848); the column x 5412 (no hole on any of
 the nine metals, continuous across y 6350 onto `tl5`'s middle poly end); the extraction (`rcs_e3` = NOT
-`tl4_w3850`) and `tools/unsure.py` (nothing for the net). Not checked: "field beyond the pad" rests on
+`bd1_n2`) and `tools/unsure.py` (nothing for the net). Not checked: "field beyond the pad" rests on
 the clean shot alone (the chip-2 stripped shot shows only fringes under the metal ghosts there);
 `follow.py` was not run; south of y 10400; the two neighbouring lines of the diagonal bundle.
 
@@ -2427,7 +2427,7 @@ Round 16: no findings that change a connection.
 - Under the same rail between `g7700` and U1 (y 7849-7907): `railprof.py 7552 7598 7560 8600` gives a
   diffusion with no gate; not looked at (`cdp3` (continue)).
 - **The last two rows of `lc1`'s diagonal bundle** (y 6953 and 7040; the middle one, y 6996, is piece
-  `n2n`'s: `tl4_w3850`). They come from `tl5`'s south bus polys x 5455 (`tl5_w3461`, latch a's data) and
+  `n2n`'s: `bd1_n2`). They come from `tl5`'s south bus polys x 5455 (`tl5_w3461`, latch a's data) and
   x 5368 (`tl5_w2722`, the strong inverter's output), by diagonals at x - y = -1306 and -1439 (measured in
   run 14 with the middle one: the table of piece `n2n`; not drawn). Their pads (6188,6953), (6188,7040)
   each have a metal east along the row: the row y 6957 turns south at (7035,6957) on the track x 7035 and
@@ -2497,7 +2497,7 @@ Round 16: no findings that change a connection.
   at y 6720" (`lc1`); `rst_c`'s branch north at x 5713 (followed by `lc1` to y 6365).
 - The other five polys of `tl5`'s south bus (x 5365, 5412, 5453 and two more) south of y 6350.
 - **Where the latch's output `bd1_n2` goes north of (6711,15000)** (task (e)): **found, but for one
-  stretch that is not drawn** (run 14, piece `n2n`): the track ends on `tl4_w3850`, the input of the
+  stretch that is not drawn** (run 14, piece `n2n`): the track ends on `bd1_n2`, the input of the
   inverter that makes `rcs_e3`. **Left: the 4,600 px in `busl`'s region** (claimed: waitingforvsync,
   4780-7550 x 10400-15000), from (6711,15000) north on x 6711 to a corner (6711,13249), east to
   (6777,13249), north on x 6776 to (6775,10400); as a trace line, `M 6711,15000 y13249 x6776 y10400 w=13`.
@@ -2505,7 +2505,7 @@ Round 16: no findings that change a connection.
   (6711,14526), (6710,14429), (6712,14299), (6711,14222), (6711,14179), (6710,13996), (6710,13690),
   (6711,13635), (6712,13584), (6711,13541), (6711,13506), (6775,12168) are bars of the poly rows beneath
   (the metal 9-15 px wide at each). Whoever draws it (`busl`'s holder, or this package when `busl` is
-  released) labels it `bd1_n2`, and `bd1_n2_u` in `trace/eof.txt` then becomes an alias to drop
+  released) labels it `bd1_n2`, and `bd1_n2` in `trace/eof.txt` then becomes an alias to drop
   (`tools/rename.py`, the coordinator's refresh).
 - `bd1_n1` and `bd1_an` have no other exit (run 7: `bd1_an` ends on G6's pad; `bd1_n1`'s metal ends on the
   pad of N2's third pull-down; N1's west buried contact (13766-13802, 15572-15600) carries a 24 x 27 px poly

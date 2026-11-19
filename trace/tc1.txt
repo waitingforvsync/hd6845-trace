@@ -1090,7 +1090,7 @@ M 7850,2597 x8350 w=13             # on east over the datapath (follower: end (9
 #   row y 2520-2540 -> P1 -> metal -> track y 2858 -> poly east         tc1_bus2858
 #   poly x 7117-7133 from the north -> pad -> metal -> track y 2814     tc1_bus2814
 #   poly x 7160-7176 from the north -> strip y 2585-2603 -> pad -> metal -> track y 2684   tc1_bus2684
-#   poly x 7201-7218 from the north -> pad -> metal track y 2554        tc1_bus2554
+#   poly x 7201-7218 from the north -> pad -> metal track y 2554        c4l_l3
 # and tc1_p3698's thin metal ends on a pad whose poly is the west end of tc1_ns2.
 # Views cache/scratch/tc1/run11/.
 # =====================================================================================
@@ -1170,7 +1170,7 @@ C 7859,2684 s=14x14
 M 7852,2684 x8350 w=13             # on east over the datapath; drawn to x 8350
 N M 7500,2684 tc1_bus2684
 
-# ---- tc1_bus2554: poly from the north, pad (7206,2551), bus track y 2554
+# ---- c4l_l3: poly from the north, pad (7206,2551), bus track y 2554
 P 7201,2500:7218,2540              # from the north
 P 7192,2535:7226,2568              # pad
 C 7206,2551 s=14x14
@@ -1181,7 +1181,7 @@ P 7700,2545:7912,2562              # under the island's right VSS rail
 P 7887,2537:7917,2569              # pad
 C 7901,2553 s=14x14
 M 7894,2553 x8350 w=13             # on east over the datapath; drawn to x 8350
-N M 7500,2554 tc1_bus2554
+N M 7500,2554 c4l_l3
 
 # ---- tc1_p3698 is the west end of tc1_ns2
 M 6775,2784 y2800 w=20             # the thin metal's north end

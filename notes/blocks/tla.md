@@ -552,7 +552,7 @@ Each is in the named block's notes in full; the trace fixes are on main.
 - The bus piece `M 4148,3371 y3596`: its south end is a pad with a contact (4148,3592) (in
   `trace/tl3.txt`), gate of `tl3_e3550`'s NOR and of `tl3_e3712`'s inverter.
 - **Bus line E is driven from `tl4`**: its top pad's poly to the pad (4270,2725) is under the sixth bus
-  line, which comes down the track x 4496 from `tl4`'s inverter: `rcs_e3` = NOT `tl4_w3850`. The pad
+  line, which comes down the track x 4496 from `tl4`'s inverter: `rcs_e3` = NOT `bd1_n2`. The pad
   rectangle `P 4250,2708:4290,2742` is about 8 px west of the pad (x 4258-4298): geometry only.
 - The VCC rail `M 3846,3040 y5497` goes on north to y ~2922 (drawn in `trace/tl3.txt`, with E1's VCC
   contact); the VSS rail `M 4017,3050 y5300`'s south end is at y ~5296, as drawn.

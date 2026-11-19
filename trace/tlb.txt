@@ -31,9 +31,8 @@ N P 3460,2300 tl4_w4068
 # ---- Three polys under the plane's south-east part, nested: each comes north from tl6's strip, turns east,
 # runs 1,100-1,300 px and turns south onto tc1's bus fan. Rows from tlb_scan.py v at ten x (y 2394-2406,
 # 2437-2450, 2480-2495, straight); corners in b1.png (west) and b3.png (east), both stripped shots.
-P 5887,2506 y2400 x7209 y2506 w=18   # c4l_l3: tl6's (5877-5897, 2500) to tc1_bus2554's (7201-7218, 2500)
+P 5887,2506 y2400 x7209 y2506 w=18   # c4l_l3: tl6's (5877-5897, 2500) to c4l_l3's (7201-7218, 2500)
 N P 6500,2400 c4l_l3
-@alias c4l_l3 tc1_bus2554
 P 5928,2506 y2444 x7168 y2506 w=18   # tl6's tl5_w5500 (5918-5938, 2500) to tc1_bus2684's (7160-7176, 2500)
 N P 6500,2444 tl4_w5068
 @alias tl4_w5068 tc1_bus2684
