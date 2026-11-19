@@ -50,7 +50,8 @@ C 12850,17345
 M 12850,17346 x11418 y14824 x11331 11331,10709 10895,10273 10895,8819
 N M 11418,16000 wr_r14
 # Possible contact onto the box of the top unit (mirror of wr_r12's): ring and bright centre
-# in both metal shots, the clean shot borderline (red minus green 0-18). Uncertain.
+# in both metal shots, but the clean shot has no green hole (red minus green +6 to +30) and the
+# chip-2 stripped shot is poly-red there: it leans toward a pass-over (trap 26). Uncertain.
 ?P 11325,11798:11343,11820
 ?C 11331,11810
 P 10876,8802:10910,8836

@@ -77,7 +77,9 @@ shot: poly all the way, field on both sides).
      on `wr_r12`. The plate itself is not drawn.
    - **`wr_r14` may contact the top box at (11331,11810): drawn `?C` on a `?P` box.** The same ring
      and bright centre in both metal shots; the clean shot reads 152-178 / 146-160 / 95-103 (red
-     minus green 6-18), between a hole and a pass-over (trap 26).
+     minus green 6-18, never greener than red; +6 to +30 by the fix check), and the chip-2 stripped
+     shot is red over green by 35-50 at the centre, where the real contact on `wr_r12` is
+     grey-green: it leans toward a pass-over (trap 26), not a contact.
    - **`wr_r12` at y 11757-11905: drawn `?M`.** The line's two edge lines (x 11364, 11386) run
      through in both chips, the interior is dim (red 100-160 against 215-240 north and south of
      it), and the clean shot east of the centre line is protected without a break (`px.py col
@@ -116,6 +118,18 @@ Findings:
 8e1aa03`: `connections identical` (the plate the new contact lands on is not drawn, so the
 extraction does not change; the finding still counts, because a contact was added).
 Round 1: three findings, fixed (one contact added, one marked uncertain, one geometry).
+
+**Round 2, fix check, 2026-11-19 15:30 -0600** (fresh Fable reviewer; the changes since 8e1aa03, at
+commit 81387d1; three images in `cache/scratch/regs/review-2/`). Change 1 (contact on `wr_r12`):
+right; bright centre red 214-229 in both metal shots, green hole red minus green -9 to -18 (the
+pad (11243,11830) reads -8 to -25), box is poly as drawn. Change 2 (`?C` on `wr_r14`): uncertain is
+the right call, and the photos lean against a contact (no green hole; poly-red in the chip-2
+stripped shot); the trace's comment and Ambiguities 1 now say so. Geometry only (a comment).
+Change 3 (`?M` 14 px): right, inside the two edge lines, 25 px clear of the `?P` box and of the
+metal on x 11331. `tools/t.sh regs sameconn.py 8e1aa03`: `connections identical`.
+`.venv/bin/python tools/sameconn.py 8e1aa03`: `connections identical`. After the comment fix,
+against 81387d1: both `connections identical` again.
+Round 2: no findings that change a connection.
 
 ## Not done
 
