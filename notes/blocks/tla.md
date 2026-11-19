@@ -557,3 +557,8 @@ Each is in the named block's notes in full; the trace fixes are on main.
 - The VCC rail `M 3846,3040 y5497` goes on north to y ~2922 (drawn in `trace/tl3.txt`, with E1's VCC
   contact); the VSS rail `M 4017,3050 y5300`'s south end is at y ~5296, as drawn.
 - Re-read items R38 (the follower's ends here), R39, R40, R41 (thin metal E), R42 apply here.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- `rcs_thin_e`'s south end: its row y 6327 ends on the pad (3973,6329), whose metal goes south to `ur`'s
+  pad (3968,6410) and a poly east along y 6402-6422 (`tl3` run 11; not `sl_l3`).

@@ -372,7 +372,9 @@ Traps, all of them real:
    every followed end near a pad, a box or a wide rail with the two-chip metal test
    (`tools/tl5_tracks.py h/v`) or a view. Also: a brightness profile across a wide metal beside a
    poly row gives the metal 20 px too narrow (the metal over the row is dim; the clean shot's
-   protected row decides). Found 2026-11-18 (`tl3`, `tl4`, `tl2`; R38, R36).
+   protected row decides). In chip 2 some bare ground is bright enough (R 176-191) to pass the
+   follower's metal test (R > 177) where chip 1 shows it dark (`eof`, `cdp1`'s slice-0 logic): check
+   an arm between two metals in chip 1. Found 2026-11-18/19 (`tl3`, `tl4`, `tl2`, `eof`; R38, R36, R26).
 31. **A group near a package boundary that will not read may be half of a cell.** `lc1`'s cluster
    E was read three times as a free-standing gate without a load; it is the upper unit of a
    two-unit latch whose lower unit lies in `lc2`. Before a second pass over such a group, run
@@ -380,6 +382,41 @@ Traps, all of them real:
    boundary, and again after a neighbour merges. Likewise a port whose wire "goes on" into a strip
    nobody has drawn is not yet a source (`tl3` took the two ends of one L in `tl4`'s strip for two
    wires). Found 2026-11-18 (`lc1`, `tl4`).
+32. **Look all round every pad.** A pad is not the end of what reaches it. A metal can run on
+   through a pad (the follower stops at the ring: `lc2_w8474` had two pads in its run, `lc1_w7908`
+   one); a pad can carry a second poly (`lc2`'s pad (5386,8951)); a poly drawn as ending on a pad
+   whose metal carries the net on can go on below the pad (`eof`: RES, LPSTB and a reset copy ran on
+   south into `lc1`'s bundle); a copy's pad can have a poly on a side the master's pad has none
+   (`lc2`'s turned flip-flop). After a follower stop on a pad, test the metal beyond the ring
+   (`tools/tl5_tracks.py v` across the pad and 60 px either side); a pad ends a poly only if field
+   is seen beyond it (`tools/px.py col` in the chip-2 stripped shot: poly red over green by 40-80,
+   field under 25). Found 2026-11-18/19 (`lc2`, `eof`; R26, R43, R45).
+33. **Two pads on one line of sight are not thereby on one poly, and a through line is not
+   straight because it is straight further on.** `ur` joined two pads 210 px apart at the same y
+   across open field (it would have joined two unrelated nets), and drew the left array's through
+   lines straight up from their row positions, where north of the first row they lie 10-21 px off
+   and step across at y 6600-6700. A row between two pads must be seen in the open stretch (its two
+   edge lines in the metal shots, or poly colour in the stripped shots); a line near a block's edge
+   must be measured there (R36). Found 2026-11-19 (`tl3`; R44).
+34. **A row that lines up with a poly beyond a rail's edge is not thereby the same poly.** In
+   `lc2`'s west cluster the gate rows end at the rail's east edge and a different poly (the gate of
+   a pull-down east of the rail) starts 20-30 px further on, in line. At 2.8x they look like one
+   row: look for the field stripe between them at 5x in two shots. And in the chip-2 stripped shot
+   dark edge pixels read near zero in red minus green, like field: a "field gap" under about 10 px
+   measured that way between two dark lines is evidence of nothing. Found 2026-11-18 (`lc2`).
+35. **A load's plate is not always beside its output: follow the plate's poly to its tie first.**
+   In `lc2` a load sits under another net's landing pad, 100 px from its own output, its gate round
+   by a long poly over field. A W/L like 14/175 is itself the warning that a plate has been misread.
+   Also: a "ring" in the clean shot in the open gap between two metals can be an artefact (absent
+   from both chip-2 shots and both metal shots): check a ring in a second chip before calling it a
+   buried contact. Found 2026-11-18 (`lc2`).
+36. **A bright stretch of a thin metal between two dark bars, with a greenish patch in the chip-2
+   stripped shot, is not a contact**: it is what a 20 px diffusion band under the metal looks like.
+   Likewise `tools/tl5_tracks.py`'s "hole" lengths under the middle of a wide rail are the
+   diffusion itself (a node 55 px long read as a 55 px contact). A contact has a ring and a pad or a
+   hole; under a rail compare with a known contact of the same rail by `tools/textmap.py`. And a
+   rail that seems to end at a dark bar may go on: two bars 20 px apart can be edges beneath it
+   (`tools/railprof.py` past it). Found 2026-11-18/19 (`lc2`; with traps 22, 26).
 
 **When a trap turns out to affect work already done**, add the affected blocks to the
 "Re-read list" in `notes/work-packages.md` in the same commit that records the finding.

@@ -1262,3 +1262,8 @@ on the uncertain items.
 
 Round 2: no findings.
 
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- Piece 13: the box (8355-8385, 4835-4865) "onto a diffusion ... not traced" is the output node of
+  `eof`'s inverter `r9m_l1w` = NOT `sl_eq_r5`; the C-shaped poly "not joined" is its input gate.
+  `ports.d/tc2.txt`'s `r9m_l1w` is driven from there (direction `in`).

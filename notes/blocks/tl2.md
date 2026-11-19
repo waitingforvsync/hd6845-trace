@@ -1222,3 +1222,11 @@ Round 1: no findings that change a connection.
   y 5890; the driver is beyond that.
 - `tl1_w4937` is the net of `tl3`'s thin metal x 3948-3962, and by it `tl3_e3550` (AMB-032);
   `tl1_w3594` is `tcw_a` (AMB-033).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- `tl1_w2592` is NOT `sl_eq_r5` (`r9m_l1w`), driven from the east (`eof`); "follow.py: on to x 3752"
+  was the follower turning onto the wide metal x 3648-3760; the metal ends on the pad (3606,2510).
+- `rcs_thin_e`'s row east of x 3533 ends on the pad (3973,6329), whose metal goes south to `ur`'s pad
+  (3968,6410) (`tl3` run 11); `tl3_w3982`'s driver "on track J's arm": the arm leads to `tl5_w5936`;
+  `tl3_w4763` is `tc1_o3527`.

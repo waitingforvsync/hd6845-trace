@@ -1620,3 +1620,52 @@ and placed second in the queue, after `eof`. It is wiring with few or no transis
 is the joins between the left array and the central datapath, so that names can be carried across the
 two halves of the die. The row asks for `ports.d/busL.txt` at both edges and points at trap 10 and
 R1-R4 (poly under the tracks). The floor plan's label names the package.
+
+## 2026-11-19 10:11  Nine handoffs processed (eof, tl3, lc2, costs.py)
+
+Pulled: `eof` runs 1-2 (Tom Seddon), `tl3` run 11 (Tom), `lc2` runs 3-10 (Matt Godbolt), and a second
+change to `tools/costs.py` (Matt, at the user's instruction). Full extraction before any change: 2,379
+nets, 4,282 transistors, 0 errors, 0 warnings. No active claims.
+
+- **End of frame (`eof`, the lead group's first two runs).** R4's match `rc_eq_r4` is drawn end to end
+  and is the data of `bd1`'s latch gated by `inh_lat` and the input of `bd1`'s inverter A (firm join;
+  AMB-036 on one contact). R5's match `sl_eq_r5` drives one inverter in `cdp1`'s slice-0 position
+  (`r9m_l1w` = NOT `sl_eq_r5`, firm), whose output runs west through the top-left strips into the band
+  `tlb`, where its loads must be. **`tcw_a` is `inh_ck`** (firm): `trunks`' line S climbs on to the top
+  left, so the inhibit/strobe of the input buffer row is what opens the vertical control's master/slave
+  latch pairs and the field latch path. **`rcs_x1` = NOT `lc1_w7170`**, and **`lc1_w7304` =
+  NOR(`lpstb_b`, `res_b`)** (firm; believed the reset), whose buffered copies clear `tl4`'s and `tl5`'s
+  latches and latch D.
+- **`lc2` is done but for its edges** (80 transistors, Fable): latch D, the `lc_step` latch, is
+  complete (data `lc1_w7780`); and the west gate cluster is **a two-stage ripple counter** (two toggle
+  flip-flops), held clear with `rcs_x1`'s input, clocked from `lc3`. A 2-bit counter beside the scan
+  line counter's step latch is a candidate for counting the first cycles of a line (believed only).
+  R31 done for `lc2`.
+- **`tl3` run 11**: the 4-bit counter's L3 line is `tl4`'s strong inverter (`c4l_l3`; the first counter
+  L3 with a traced driver), its gab is `tcw_m6232`; `rcs_thin_e` is not `sl_l3` (`trace/ur.txt`
+  corrected).
+- **Master list.** The `eof` row gives the lead group's state and next steps in order: `tlb` (moved up
+  to third), `inh_src`'s source, the gate group at `inh_ck`'s tap (7540-7780, 7600-7820), `lc3` (the
+  counter's clock), `bd1`'s latch, `lc1_w7170`'s driver. Rows `tl1`-`tl6` (`tl3` released), `lc1`-`lc3`,
+  `ur`, `r9m`, `trunks` (continue) updated. Re-read R43 (polys that go on below a pad), R44 (`ur`'s
+  through lines and rows between pads), R45 (copies' pads); R4, R26, R31 (done for `lc2`), R36, R41
+  extended. Traps 32-36 (look all round every pad; two pads on a line; rows beyond a rail's edge; a
+  load's plate away from its output; bright stretches that are diffusion), trap 30 extended.
+- **Ambiguities.** AMB-033 updated (`tcw_a` = `inh_ck`); new AMB-036 (`rdp3`'s contact on R4's path),
+  AMB-037 (`inh_ck`'s staircase over other nets).
+- **Other blocks' notes**: corrections appended to `bust`, `cdp1`, `tc2`, `r9m`, `tl1`, `tl2`, `tl4`, `tl5`,
+  `tl6`, `rdp2`, `rdp3`, `bd1`, `hcj`, `ucz`, `mrach`, `lc1`, `lc3`, `trunks`, `tcw`, `fld`, `ur`, `tla`,
+  `urch`; `tl3.md` now that its claim has ended (including `tl4`'s corrections of 2026-11-18).
+  `ports.d/tl6.txt` (`tcw_a` in) and `ports.d/tc2.txt` (`r9m_l1w` in). Not changed: comments in
+  `trace/bust.txt` and `trace/tc2.txt` that the notes now correct.
+- **Floor plan.** The coarse left-centre block is split into what `lc1` and `lc3` have not drawn
+  (`lc2` is its fragment); the top-left strip 3 block is cut to the rows above y 2890.
+- **`tools/costs.py`, second change** (Matt, e836694, at the user's instruction): a main session is
+  credited with a package only for its own calls on that package (`tools/t.sh PACKAGE`, `ship.sh` of its
+  files, Edit/Write of them). It fixes the cross-session case. The gap noted on 2026-11-18 remains: a
+  session that edits trace files through Bash is not seen as working on the package.
+- **From `tl3`'s handoff, on the merge step:** main moved under the gate six times in a row during the
+  last handoff pass and refresh. Each move meant a re-merge and a fresh cost-report commit. Proposal:
+  the coordinator pushes its series as one push where it can, or `mergecheck.py` says at once that main
+  has moved. Taken: from this pass the handoff work goes in one push and the refresh in as few as its
+  steps allow.

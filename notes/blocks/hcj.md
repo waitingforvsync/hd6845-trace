@@ -100,3 +100,7 @@ and r17 (by geometry; the bit order itself is mra's) confirmed. Its wording fixe
   seen straight on the surveys, not profiled, not drawn.
 - bd1's `?` poly of `hc2` from k9's contact (13520,15390) into the mid-right array: not
   re-read.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- Not done, L9: drawn by `eof` (piece `r4`), as part of `rc_eq_r4`.

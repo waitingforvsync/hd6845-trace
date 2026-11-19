@@ -576,3 +576,9 @@ None of these has been joined to the row address selector's outputs (`notes/bloc
 which were followed only to x 7860. The stretch between (x 7860 to 11650, y 4450-4800,
 along the top of the central datapath) is the gap.
 
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- Line S (lines 16, 106, 340, 454) does not end in the left-centre logic: from (6690,8366) it runs west
+  to (6559,8367), north, west and north through `lc2`'s and `lc1`'s strips without a gate, with one tap
+  at (6427,7648), and on into the top-left logic as `tcw_a` (`eof` run 2). S = `inh_ck` = `tcw_a`.
+  R4: part done there (`eof`); chip 1 is damaged on line S at y 16570-16650, 16822, 17483.

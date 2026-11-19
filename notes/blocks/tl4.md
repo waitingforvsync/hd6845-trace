@@ -1276,3 +1276,12 @@ Round 11: no findings that change a connection.
   drawn on in `tl3`; `tl3_e5240` is `tl3_w5025` (latch B's inverted output) and `tl3_e4372` is
   `tl3_w4546` (`tl3`'s NOR 3); aliases in `trace/tl3.txt`.
 - AMB-034 records Ambiguities 4-7 and 10 of this file.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- Bus line 1 (`tl4_w2512`), "source and loads not known": it is `r9m_l1w` = NOT `sl_eq_r5` (`eof`);
+  west of x 4250 it is `tl1_w2592`.
+- `tl4_w5455` ("crosses the foot to a pad (4040,5458) and goes south on a metal, not followed") is the
+  4-bit counter's L3 line `c4l_l3` (`tl3` run 11).
+- `tl4_w4198` (the clear of four latches) is a buffered copy of the reset NOR(`lpstb_b`, `res_b`)
+  (`lc1_w7606`; `eof` run 2).

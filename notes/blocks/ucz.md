@@ -97,3 +97,8 @@ confirmed, and no two lines are swapped. The identity `rcK` rests on `mrach`'s a
   9101 (b1), 9360 (b2), 9273 (b3), 9230 (b4), 9187 (b5), 9143 (b6).
 - `rdp2.md`: the metal on x 13890 ("T2 track position, metal y 9398-9629") starts at the
   foot of `rc1`'s pad (13932,9231), not at y 9398.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- Not done, "the bars of L0/L2 at y 9663 and of L2/L7 at y 9920": drawn by `eof` (piece `r4`); the bar
+  is at y 9916-9934, the contacts at (13433,9665), (13432,9925), (13650,9925).

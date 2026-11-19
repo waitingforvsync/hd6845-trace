@@ -684,3 +684,11 @@ From `tl6`: latch c's outputs reach `ras_o0_alt2` (through its inverter) and `tc
   metal x 4949-4995 (its east part, x 4967-4995, lies in this strip, undrawn) and the foot. Package
   `tlb` (queue).
 - Re-read items R41 (`tl5_w4937`'s thin metal) and R42 (`tl5_inv`) apply here.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- `tl5_w3636` (= `tl4_w4198`, the clear of four latches) is a buffered copy of the reset
+  NOR(`lpstb_b`, `res_b`) (`lc1_w7606`); `rcs_x1`'s driver is `lc1`'s gate 2 (`eof` run 2).
+- `tl5_w4590` / `tcw_m6232` is also the 4-bit counter's pass-gate line `c4l_gab`; `tl5_w5936` is
+  `tl3_w3982` (`tl3` run 11).
+- R43: the south bus's pads T0, T3, T5 (y 5759-6108): the polys go on below them (`eof`).

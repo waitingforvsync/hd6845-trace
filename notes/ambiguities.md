@@ -689,7 +689,8 @@ on `rcs_in1`'s box (clean shot 186/182/139, neither a contact's green nor a pass
 there would make `tl3_e4243` constant; one at (4101,5202) would make latch C's data its own enable;
 one at (4104,2988) would make the metal E1's second output. `tcw_a`'s source is not traced, so four
 of the six have no electrical cross-check. **Rests on it: `tl1_w3594` = `tcw_a`** (`tl1`'s two latches
-in series a master and a slave on `tcw_a`). Would settle it: `tcw_a`'s source; a third chip's metal
+in series a master and a slave on `tcw_a`). Since `eof` run 2 (2026-11-19) `tcw_a` is `inh_ck` (firm), so `tl1_w3594` = `inh_ck` rests on this entry, and
+`tcw_a`'s source is known: the cross-check this entry lacked is now possible from the driver's side. Would settle it: `tcw_a`'s source; a third chip's metal
 shot; the simulation.
 
 ## AMB-034: three ring-like marks in `tl4` not drawn as contacts (2026-11-18)
@@ -712,3 +713,20 @@ track P (pad (4148,3592)). That piece is `tc2_o5175` (`r9m`'s line 3) only throu
 y 3376: 5-6 px of dark, taken there as an edge under continuous metal (AMB-013's stub). If the join
 is wrong the two gates are on an unnamed track piece with no driver. Rests on it: `tl3_e3550` =
 NOR(`rcs_mu`, `tc2_o5175`), `tl3_e3712` = NOT `tc2_o5175`, and so `rcs_mn3852`'s first input.
+
+## AMB-036: `rdp3`'s contact (13736,12826) on R4's match path (2026-11-19)
+
+Proposed by `eof` (Tom Seddon, run 1). The top of track L9 on the east pad of the poly link y 12826:
+ring and bright centre in both metal shots, the metal ends on the pad, a pale patch in the chip-2
+stripped shot; but the clean shot shows a mottled red centre and no green hole (the link's west pad
+has the usual hole). Tracer and reviewer both read a contact. **Drawn as a contact (as `rdp3` drew
+it).** If it is not one, R4's match (`rc_eq_r4`) does not reach `bd1`'s latch and inverter A.
+
+## AMB-037: `inh_ck`'s staircase over other nets without contact (2026-11-19)
+
+Proposed from `eof` run 2 (`notes/blocks/eof.md`, Ambiguities 5-7) and `lc2` (its Ambiguity 3). The
+metal that carries `inh_ck` (= `tcw_a`) from `trunks`' line S north to the top-left logic lies on other
+nets' poly at four places, and `lc2`'s metal x 6422-6440 lies 64 px along latch C's data poly
+(6431, 8117-8181); none is drawn as a contact (trap 13; read from text maps by two packages). A contact
+at the first would join `inh_ck` to latch D's output `lc1_w7040`; the one in `lc2` would join it to
+latch C's data `lc2_w8906`. The join to line S also rests on `trunks`' reading of that line (R4).

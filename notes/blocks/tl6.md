@@ -427,3 +427,8 @@ one driver (tc2's NOR); `r9m_l3` had none before.
 
 Round 2: no findings.
 
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- `ports.d/tl6.txt`, `tcw_a M 6099-6111,6350 ?`: driven from the south (`inh_ck`, `eof` run 2): `in`.
+  `tl5_w5674` (x 6016 at y 6350) is probably `lc1_w7908` (`lc1`: "followed straight to y 6150"): not checked.
+- `tl5_w4590` / `tcw_m6232` is also the 4-bit counter's pass-gate line `c4l_gab` (`tl3` run 11).

@@ -455,3 +455,10 @@ By their write lines, followed to the strobe tracks and joined in the extraction
 comparator. The five compare-value lines of channel B/C leave east along y 4003-4176 and
 were followed 3,300 px east to the RA pad drivers' input lines (not drawn).
 
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- The "more [logic] at y 4740-4870" in the slice-0 position is an inverter, `r9m_l1w` = NOT `sl_eq_r5`
+  (x 8330-8650, y 4700-4880; drawn by `eof` with slice 0's rails there). The row y 4719 does not end at
+  x 8340, and it is 22-25 px wide, not 12 (R36).
+- The slice-0 data line `M 8466,3325 8466,3350 8509,3382 y4952 w=16` crosses that inverter's tie box at
+  (8508-8538, 4783-4815), dark in both metal shots: by trap 27 it should be `?M` there (R41).

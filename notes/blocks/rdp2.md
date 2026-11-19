@@ -282,3 +282,7 @@ rc_eq_r4  = NOR(the seven x)              high when the seven uc lines equal RE
   all twelve (gap 8) is in the run's log, not kept.
 - The upper pad (13692,10748) on L8 is in rdp3's file (`rc3`).
 - Which slice is which data bit (needs the data bus followed to the D pads).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- Not done, the left bundle's L2 piece and the bar to L7: drawn by `eof` (piece `r4`), as `rc_eq_r4`.

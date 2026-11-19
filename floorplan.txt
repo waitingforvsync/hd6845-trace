@@ -63,8 +63,9 @@
 14140,13480:15800,14680 pla     register address decode (18 selects) | NOR array, 5-bit address to 18 register selects. Columns left to right select R7 R6 R4 R0 R2 R1 R10 R5 R3 R8 R9 R11 R13 R12 R14 R15 R17 R16. Nothing decodes addresses 18-31
 
 # --- random logic
-3533,2500:4250,6350     ?logic  top-left logic, strip 3 | what `tl3` has not drawn yet (strips 1, 2, 4-6 are in their floorplan.d fragments)
-4400,6900:6450,10400    ?logic  left-centre logic | random logic between the left array and the central datapath
+3533,2500:4250,2890     ?logic  top-left logic, strip 3, rows above y 2890 | what `tl3` has not drawn yet (the rest of the strips is in their floorplan.d fragments)
+4400,6900:6450,8067     ?logic  left-centre logic, strip 1 | what `lc1` has not drawn yet (cluster E's west half, the diagonal bundle, the crossing field)
+4400,9233:6450,10400    ?logic  left-centre logic, strip 3 | `lc3`: the clock and consumers of `lc2`'s ripple counter (strip 2 is `lc2`'s fragment)
 11900,3400:16400,4210   ?logic  top-right logic rows | gates under the test structures, near the RA/HSYNC/VSYNC pads (the RA output stage below is ral)
 7000,14600:11000,18550  ?logic  bottom-centre logic | random logic below the central datapath
 4800,15800:6500,18650   ?logic  bottom-left logic | random logic near DISPTMG/CUDISP pads

@@ -152,3 +152,15 @@ separate nets. Geometry only: the strip's west edge is about x 5754 in the photo
 50 px beyond the west ends of the output rows.
 
 Round 2: no findings.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- From `lc2`: `lc3_m5626` is `lc2_w8450` (latch B's data); `lc3_m5756` runs north through `lc2` and latch B
+  into `lc1` with no contact found; `lc3_w9299`'s metal x 5560 passes through the pad (5560,9166) of
+  `lc2`'s gate row 4 and on north into `lc1`. `lc3`'s shapes start at y 9255: the joins are made by
+  `lc2`'s items drawn to y 9256. `lc2_w9185` (x 5924-5940) enters at y 9233 and runs to about y 9540,
+  then east along y 9525-9545 (undrawn here). At y 9233: `lc2_w9034` (x 5255), `lc2_w9210` (x 5342),
+  `lc2_w9079` (x 5518) and the rails have ports in `ports.d/lc2.txt`; the stack under the east rail at
+  y 9160-9300 has its top gate in `lc2` (`lc2_w9034`, node `lc2_w9171`), its second gate and load here.
+  The clock of `lc2`'s ripple counter, `lc2_w8475`, comes from the south (an L-shaped metal at
+  x 4553-4575, y 9190): this strip is in the end-of-frame lead group (`eof` (d)).

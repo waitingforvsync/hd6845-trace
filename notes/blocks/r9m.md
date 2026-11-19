@@ -208,3 +208,9 @@ by `tl6` (join 10, contact (5845,5043)).
 - What R9's match does in the step logic: "`rcs_mu` = NOT R9's match" stands; "term 1 = R9's match AND
   NOT `rcs_mv`" does not. R9's match is an input of `rcs_mn3852`, and reaches the step request by
   `tl3_e3550` and `rcs_e4` (marked: AMB-013, AMB-032).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- `r9m_l1w` has a driver: NOT `sl_eq_r5` (`eof`). "Pad (5400,2596) ... its poly turns north at x 5175
+  and ends near y 2545 (not followed)": it turns west there and is `tl4`'s row of the pad (4908,2551)
+  (bus line 1), which `eof` joins on west through `tl3`'s strip to `tl1_w2592` and north into `tlb`.

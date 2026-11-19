@@ -234,3 +234,10 @@ y 4657 and 4700 were seen end to end in both stripped shots by two reviews and c
 From `tc2`'s review: the `?P` pads on rows y 4657 and y 4700 are drawn about 30 px off the
 photographed pads (real: x ~6490 and ~6447); connectivity unaffected
 (`cache/scratch/tc2/review-1/w1.png`).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- `sl_eq_r5` (lines 50 and 113, and the comment in `trace/bust.txt`, line 191): its row y 4719 ends at
+  x 8331 in a C-shaped poly that is the gate of an inverter (`eof`): `r9m_l1w` = NOT `sl_eq_r5`. The row
+  that turns south at x 8190 and the pad (8246,4716) are that inverter's output, not `sl_eq_r5`; the
+  metal from the pad (7782,4766) is another net, not looked at.

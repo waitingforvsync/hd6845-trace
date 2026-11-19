@@ -84,3 +84,7 @@ datapath, which compares it with R4 and R6: the character-row counter.
 - The z stubs: in every row the poly of net `z` ends free about 12 px east of the rail. In
   no row of this channel does it go on.
 - Row r17's output, and the lower channel y 14700-17000 beyond what bd1 drew.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- T6's row "poly east again at y 9663": drawn by `eof`: it is `rc_eq_r4`, on to `bd1`'s latch.

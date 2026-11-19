@@ -48,7 +48,7 @@ ral_stb      M  5749-5761,6350  ?    from the pad (5755,6322)
 tl4_w4068    M  5793-5805,6350  ?    U2's south piece
 tl5_w3505    M  5966-5978,6350  ?    from the pad (5972,6193)
 tl5_w5674    M  6010-6022,6350  ?    from the pad (6016,6150)
-tcw_a        M  6099-6111,6350  ?    from the corner (6105,6066)
+tcw_a        M  6099-6111,6350  in   from the corner (6105,6066); driven from the south (inh_ck, eof run 2)
 vss          M  5882-5934,6350  -    the wide ground metal's west leg
 rcs_mv    P  6226-6246,6350  ?    from the row y 6238's corner
 tl6_p6101    P  6273-6291,6350  ?    from the pad (6275,6152)

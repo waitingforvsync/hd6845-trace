@@ -547,3 +547,8 @@ x 6445, passing under the ground rail x 6505-6560, not checked for a channel the
 y 4428-4448 (`tc1_p4308`, ending on a pad with a contact at (6620,4436); metal south along
 x 6621). `tc1_p3698` comes down a poly under the supply rail's edge at x 6725-6740. These are
 this block's to follow.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- `tcw_a` is `inh_ck` (`eof` run 2, firm): the output of the lone inverter of the input buffer row.
+- `tcw_m6232` is also the 4-bit counter's pass-gate line `c4l_gab` (`tl3` run 11).

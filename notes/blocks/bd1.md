@@ -438,3 +438,9 @@ What to settle first when this is traced: whether `ck_out`'s poly and the VSS-ti
 two pieces (they must be: one is a clock, the other is at VSS, yet at 5.6x they touch at
 x 13806), which means a gap of field or a diffusion edge is being misread there.
 
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- `bd1_a` is `rc_eq_r4` (`eof` run 1, firm join): R4's match is the data of the latch gated by
+  `inh_lat` (`bd1_n1` = NOT(`bd1_q` OR (`inh_lat` AND `rc_eq_r4`))) and the input of inverter A
+  (`bd1_an` = NOT `rc_eq_r4`). The latch's lower half, `bd1_q`'s driver and where `bd1_n1`, `bd1_n2`,
+  `bd1_an` go are in the end-of-frame lead group (`eof` (e)).

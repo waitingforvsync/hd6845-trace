@@ -481,3 +481,9 @@ seen) and not drawn.
 - The stretch y 13480-14700 of the bundle (no package): followed by measurement only.
 - AMB-3 (T2 and the strap).
 - Which slice is which data bit.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- `rdp3_n7s9` (lines 297, 381, 415) is `rc_eq_r4` (`eof`): its top is the contact (13650,9925); the
+  bar comes from L2's upper piece, which starts at the contact (13433,9665). The contact (13736,12826)
+  at the top of L9 is on that path (AMB-036).

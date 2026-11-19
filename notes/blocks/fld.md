@@ -231,3 +231,7 @@ this block's upper group is the source of that input.
 
 The east ground rail ends at y 6036, not y 6110 (the trace is fixed: e1a1151, by `tc2`); bare ground
 at y 6042-6096. `fld`'s VCC rail is joined by metal to `tcw`'s, its VSS rail to `tc1`'s (AMB-014).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- `tcw_a` is `inh_ck` (`eof` run 2, firm).

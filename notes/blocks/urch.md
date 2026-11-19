@@ -57,3 +57,9 @@ the vertical metals at x 4670-4720. Not followed.
 The 5-bit counter is the **scan line counter**: its five lines are now drawn to the R5
 comparator (`notes/blocks/slbus.md`). The 4-bit counter's four lines (y 6157-6280) are
 not followed.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- From `lc2`: `sl4`'s horizontal is drawn 10 px south of the metal (photo y 8164-8180). A vertical metal
+  x 4420-4442 with pads (4432,8708) and (4432,9186) lies just south of `sl4`'s pad (4420,8590); the
+  upper pad's poly leaves west along y 8693-8710. Drawn by neither package.

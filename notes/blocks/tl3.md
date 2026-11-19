@@ -1752,3 +1752,13 @@ Round 1: no findings.
   box has more contact marks than the one drawn.
 - The west rail is drawn to y 5330 from low-zoom views; its contacts between the drawn boxes are not read.
 - The rows of latch A west of x 3533 are `tl2`'s.
+
+## Corrections (coordinator, from the handoffs of 2026-11-18/19)
+
+- `tcw_a` (track A) is `inh_ck` (`eof` run 2, firm): latches B and C, and through AMB-033 `tl1`'s two
+  latches, are master/slave pairs on `inh_ck`.
+- `rcs_x1` = NOT `lc1_w7170` (`lc1`'s gate 2; `eof` run 2).
+- From `tl4` (2026-11-18), where this file still says so: `rcs_mv`'s poly at (4250,4736-4751) is an
+  output (it leaves and comes straight back as `tl3_e4915`, one L in `tl4`'s strip); `tl3_e3028`, "gate
+  of the top unit E1 ... from the east", is `tl4_w4590`, which crosses x 4250 again at y 2801-2820 (the
+  pad (4366,2812)): that row is the only way left to `tl4_w4590`'s driver.

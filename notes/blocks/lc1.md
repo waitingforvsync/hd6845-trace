@@ -420,3 +420,24 @@ Round 4: no findings that change a connection.
 - The ninth gate of column W at y 8040-8140 (`lc2`).
 - The T-shaped metal over `lc1_w7864`'s row (bar y 7515-7548, x 5755-6062; arm x 5884-5930 from the north) and the
   poly row y 7432 under the enable metal's east-west piece: seen by review round 4, not drawn.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- "Two metals lie on [`lc1_w7040`'s row] lengthwise without contact: ... x 6098-6307": that metal is
+  `tcw_a` = `inh_ck` (`eof` run 2). Ports: `lc1_w7343` is `res_b`, `lc1_w7257` is `lpstb_b`, `lc1_w7140`
+  drives `rcs_x1`, `lc1_w7606` is `tl5_w3636`. "Believed, from the user: ... `lc1_w7864` a chip-wide reset
+  of some kind": traced, it is a buffered NOR(`lpstb_b`, `res_b`); the believed "three buffered copies ...
+  the pattern of `inh_ck`, `inh_rc`, `inh_lat`" does not hold: they are copies of the reset. Not in the
+  ports: an undrawn poly (`tl5_w5936`) enters at about (5065-5083, 6900), beside and under M_a. The
+  polys of `res_b`, `lpstb_b` and the reset copy run on south below their pads into the diagonal bundle
+  at (5150,6900), (5203,6900), (5266,6900): three of the bundle's undrawn lines.
+- From `lc2`: `lc1_w7928`'s pad is at (5927,8131) on the lower unit's load plate; `lc1_w7908`'s pad is
+  at (6212,8128) and the metal runs on through it, south and east along y 8250-8268; `lc1_w7864` ends on
+  the pad (6254,8214) and is latch C's (and B's) clear; **latch D's data is `lc1_w7780`**. `lc1_w7170`'s
+  metal T1 runs on to a pad (5232,8214) and a row west to a track down `lc2`'s west cluster: it is
+  `lc2_w8474`, the clear of `lc2`'s counter. `lc1_w7990` drives `lc2`'s gate 9, whose output metal
+  re-enters at x 5118-5136 and runs far north. Wires crossing y 8067 with no port here: `lc2_w8646`
+  (x 6159-6177), `lc2_w8083` (poly x 6401-6415), `lc2_w8474` (x 6332-6350), `lc2_w8172` (= `inh_ck`,
+  x 6422-6440), `lc2_w8341` (x 5508-5524), `lc2_w9124` (thin metal x 5967-5981), row 4's metal
+  (x 5422-5438). Geometry: in the `tl1_ub` instance the pad of `lc1_w7862` has its hole at (6105,8265)
+  against (6115,8272) drawn.

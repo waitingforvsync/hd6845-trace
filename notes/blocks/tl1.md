@@ -1018,3 +1018,9 @@ Round 1: no findings.
   same grey band as in `tl3`'s latch C (`tl3`). Nothing drawn changes.
 - The VCC box (2785-2835, 6065-6130) is `tl2`'s, drawn there.
 - Re-read items R41 (thin metal W, with `tools/tl3_thin.py`) and R42 apply here.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- `tl1_w2592` is NOT `sl_eq_r5` (`r9m_l1w`), driven from the east by `eof`'s inverter in `cdp1`'s
+  slice-0 position, and leaves north into the band `tlb`.
+- `tcw_a` (and so `tl1_w3594`, marked) is `inh_ck` (`eof` run 2).
