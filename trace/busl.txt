@@ -1,0 +1,93 @@
+@block busl
+# ---- piece h8: the eight west outputs of cdp3 row H (cdp3_hw_c7..c0) across the field to the
+# left array. Per net: poly row from cdp3 (x 7600) west to a pad; contact; metal track south,
+# west along a staircase step, south to a pad on a diffusion row; the row west to x 4780.
+
+# c7
+P 6031,10361 x7606 w=18              # poly row, from its pad to cdp3's piece at x 7600
+P 6017,10345:6061,10377               # the row's west end pad
+C 6039,10359 s=24x24
+M 5690,11341 y11272 x6039 y10351 w=16
+C 5690,11335 s=24x24
+D 5664,11308:5717,11362               # pad at the diffusion row's east end
+D 4780,11338 x5670 w=20            # diffusion row west to the left array
+N P 7000,10361 cdp3_hw_c7
+N D 4800,11338 cdp3_hw_c7
+
+# c6
+P 5988,10404 x7606 w=18              # poly row, from its pad to cdp3's piece at x 7600
+P 5974,10388:6018,10420               # the row's west end pad
+C 5996,10402 s=24x24
+M 5647,11816 5626,11790 y11230 x5996 y10394 w=16   # the track leans east into the pad
+C 5647,11812 s=24x24
+D 5621,11785:5674,11839               # pad at the diffusion row's east end
+D 4780,11815 x5627 w=20            # diffusion row west to the left array
+N P 7000,10404 cdp3_hw_c6
+N D 4800,11815 cdp3_hw_c6
+
+# c5
+P 5945,10447 x7606 w=18              # poly row, from its pad to cdp3's piece at x 7600
+P 5931,10431:5975,10463               # the row's west end pad
+C 5953,10445 s=24x24
+M 5605,12294 5583,12268 y11186 x5953 y10437 w=16   # the track leans east into the pad
+C 5605,12290 s=24x24
+D 5579,12263:5632,12317               # pad at the diffusion row's east end
+D 4780,12291 x5585 w=20            # diffusion row west to the left array
+N P 7000,10447 cdp3_hw_c5
+N D 4800,12291 cdp3_hw_c5
+
+# c4
+P 5901,10490 x7606 w=18              # poly row, from its pad to cdp3's piece at x 7600
+P 5887,10474:5931,10506               # the row's west end pad
+C 5909,10488 s=24x24
+M 5562,12770 5540,12744 y11142 x5909 y10480 w=16   # the track leans east into the pad
+C 5562,12766 s=24x24
+D 5536,12739:5589,12793               # pad at the diffusion row's east end
+D 4780,12768 x5542 w=20            # diffusion row west to the left array
+N P 7000,10490 cdp3_hw_c4
+N D 4800,12768 cdp3_hw_c4
+
+# c3
+P 5858,10535 x7606 w=18              # poly row, from its pad to cdp3's piece at x 7600
+P 5844,10519:5888,10551               # the row's west end pad
+C 5866,10533 s=24x24
+M 5514,13226 5496,13200 y11100 x5866 y10525 w=16   # the track leans east into the pad
+C 5514,13222 s=24x24
+D 5488,13195:5541,13249               # pad at the diffusion row's east end
+D 4780,13247 x5432 y13220 x5494 w=20   # the row steps north 27 px at x 5432
+N P 7000,10535 cdp3_hw_c3
+N D 4800,13247 cdp3_hw_c3
+
+# c2
+P 5814,10577 x7606 w=18              # poly row, from its pad to cdp3's piece at x 7600
+P 5800,10561:5844,10593               # the row's west end pad
+C 5822,10575 s=24x24
+M 5474,13726 5452,13700 y11054 x5822 y10567 w=16   # the track leans east into the pad
+C 5474,13722 s=24x24
+D 5448,13695:5501,13749               # pad at the diffusion row's east end
+D 4780,13725 x5454 w=20            # diffusion row west to the left array
+N P 7000,10577 cdp3_hw_c2
+N D 4800,13725 cdp3_hw_c2
+
+# c1
+P 5770,10621 x7606 w=18              # poly row, from its pad to cdp3's piece at x 7600
+P 5756,10605:5800,10637               # the row's west end pad
+C 5778,10619 s=24x24
+M 5427,14201 5409,14172 y11012 x5778 y10611 w=16   # the track leans east into the pad
+C 5427,14197 s=24x24
+D 5401,14170:5454,14224               # pad at the diffusion row's east end
+D 4780,14202 x5407 w=20            # diffusion row west to the left array
+N P 7000,10621 cdp3_hw_c1
+N D 4800,14202 cdp3_hw_c1
+
+# c0
+P 5727,10664 x7606 w=18              # poly row, from its pad to cdp3's piece at x 7600
+P 5713,10648:5757,10680               # the row's west end pad
+C 5735,10662 s=24x24
+M 5385,14892 5366,14866 y10966 x5735 y10654 w=16   # the track leans east into the pad
+C 5385,14888 s=24x24
+D 5359,14861:5412,14915               # pad at the diffusion row's east end
+D 4780,14894 x5365 w=20            # diffusion row west to the left array
+N P 7000,10664 cdp3_hw_c0
+N D 4800,14894 cdp3_hw_c0
+
