@@ -2590,6 +2590,31 @@ reviewed.
 
 Round 17: two findings that change a connection, both in piece `ck7`, which is withdrawn; one geometry-only finding in piece `ck6`, fixed.
 
+### Round 18 (fix check of round 17's changes; 2026-11-19, after commit b7624fd)
+
+A fresh reviewer (Claude Fable 5.2), briefed with the three findings of round 17 and with what changed
+since commit 05563d2: the removal of piece `ck7`, the widened pad (7837,14784), and in `ck6`'s lines the
+gate-pad metal x 8838 with its south pad (8833,15127), the two shortened rail pieces and the label. Five
+images in `cache/scratch/eof/review-18/`, with column profiles and text maps.
+
+- `tools/t.sh eof sameconn.py 05563d2` and `.venv/bin/python tools/sameconn.py 05563d2`: the same five
+  differences, all intended (the name `eof_w15172`, unit V's three transistors, the equation of
+  `eof_w15127`); `lc3_w9947` = NOT `eof_w15127` stays.
+- Round 17's finding 1 confirmed again (`c_find1.png`, column x 8643: diffusion tan at y 15190-15203 and
+  y 15232-15252 south of the tie box, a poly band y 15206-15228 across it at channel colour, field
+  186/126/128 on the same column) and finding 2 (`d_find2.png`, column x 8788: a diffusion-coloured strip
+  from the output box to about y 15420, crossed by five salmon bands and passing a second box at
+  y 15290-15315): the removal was warranted.
+- The inverter is not affected: field under both thin metals between it and unit V (x 8643, y 15048-15108;
+  x 8793, y 15066-15110).
+- The pad (7837,14784): salmon to x 7857, outline to x 7862, field from x 7864; nothing else near it.
+- The gate-pad metal: one metal, x 8829-8846, bare ground both sides and beyond both pads; over the row
+  y 15034-15050 two edge bars, bright between, no hole, no widening; the pad (8833,15127) is a contact
+  (ring and bright centre in both chips, green hole in the clean shot).
+- Both shortened rail pieces cover their contacts ((8712,14965), (8534,15033)); the label lies on the metal.
+
+Round 18: no findings.
+
 ## Not done
 
 - **Task 2, the loads of `sl_eq_r5_n` (= NOT `sl_eq_r5`)**: one load is drawn (piece `r5nor`,
