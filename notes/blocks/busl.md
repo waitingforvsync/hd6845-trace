@@ -4,7 +4,7 @@ Queue row `busl` of `notes/work-packages.md` (written busL until 2026-11-19): th
 left array (`larr`, rows end at x 4780) and the central datapath (`cdp3`, `cdp4`, from x 7600).
 Claimed region: x 4780-7550, y 10400-15000 (the main part; the northern part 6450-7600 x 6750-10400
 is not started). Coordinates are metal-shot pixels; images are in `cache/scratch/busl/`. Wiring only:
-no transistor has been found in the field so far. Seven pieces are drawn: `h8`, `ch1`, `lc9`, `ctl`, `d6`, `sr`, `kb`.
+no transistor has been found in the field so far. Ten pieces are drawn: `h8`, `ch1`, `lc9`, `ctl`, `d6`, `sr`, `kb`, `n2`, `x68`, `x69`.
 Pieces `d6`, `sr` and `kb` begin in the northern part (x 7180-7600, y 8795-10400), drawn there as far
 as their pads or, for `sr`, the end of `eofw`'s metal; nothing else of the northern part is.
 
@@ -108,6 +108,32 @@ wiring only, no uncertain items:
 - Looked at and not this package's: **`cdp4_ld8b`'s row y 11837 does not enter the field**: west of
   x 7598 there is bare field at that height in both metal shots and the clean shot (view `b_ends.png`,
   3x); the row's west end is at about x 7603-7640 under `cdp4`'s metal x 7600-7645 (`cdp4` (continue)).
+
+Run 7 (richtw1's session, Claude Fable 5.2; 2026-11-19, from 22:30 +0100). Three pieces, `n2`,
+`x68` and `x69`, wiring only, no uncertain items: three of the five nested Ls east of the selects'
+staircase (the corners at y 13247-13376; the fourth is `trunks`' line).
+
+- **The latch on R4's match drives the row counter's step logic: `rcs_e3` = NOT `bd1_n2`** (piece
+  `n2`). `eof` had drawn `bd1_n2` (the output of `bd1`'s latch on `rc_eq_r4`) from the latch to this
+  region's south edge at (6711,15000), and the track that leaves the region north at (6775,10400) on
+  to `tl5`'s bus poly x 5412, which is `tl4_w3850`, the input of the inverter that makes `rcs_e3`
+  (its pieces `n2w`, `n2n`; the join between them was the open `bd1_n2_u`). Between the two ports it
+  is one thin metal: 1,753 px north at x 6711, east along y 13247, 2,847 px north at x 6776. No pad,
+  no contact, no tap. The join holds without any uncertain item (`tools/unsure.py`, all files: the
+  labels of `bd1_n2`, `bd1_k`, `bd1_n2_u`, `tl4_w3850`, `tl5_w5761` are on one piece; only `bd1_q`,
+  the load's tie in `bd1`, is apart, as before). The names are gathered by `@alias bd1_n2 tl4_w3850`;
+  the renames are the coordinator's.
+- **Two through lines** (pieces `x68`, `x69`): the tracks next east, on either side of `trunks`' line,
+  cross the whole region with one step each and no pad or contact in it: `busl_x6820` (x 6820 north
+  of its arm y 13290, x 6754 south) and `busl_x6906` (x 6906 north of its arm y 13376, x 6841 south).
+  Neither end is in the region (follower: `busl_x6820` from (6817,9988) to (6754,16220);
+  `busl_x6906` from (7078,8778) to (6839,16219)). `busl_x6906`'s arm lies for 65 px on the poly row
+  y 13375 (`cdp4_in_s1`'s, piece `ch1`): no contact (below).
+
+Full extraction with run 7: 2,379 nets (main had 2,378: two new through lines, one join), 4,351
+transistors, 0 errors, 0 warnings; 849 of 1,279 equations firm, as on main (`rcs_e3` = NOT `bd1_n2`
+depends on uncertain items, as `rcs_e3` = NOT `tl4_w3850` did). The package by itself: 42 nets,
+0 errors, 0 warnings.
 
 Full extraction with run 6: 2,390 nets (unchanged: the two wires lengthen `eofw`'s and `cdp3`'s nets),
 4,345 transistors, 0 errors, 0 warnings. The package by itself: 39 nets, 0 errors, 0 warnings.
@@ -494,6 +520,48 @@ Piece `kb` (pad contacts with `tools/busl_padc.py` in both metal shots; the row 
   in either chip-2 shot (metal 160-168, stripped 121-153 at x 7580-7585): the mark of the gap between
   the pad's metal and the rail (guide, trap 2). Ambiguity 14.
 
+Piece `n2`, `x68`, `x69` (each line with `tools/follow.py --gap 16`, piece `n2` in stages `--max 300` ..
+`4700`; track centres with `tools/sel_cut.py h Y` at seven heights north of the step and five south;
+arm heights with `sel_cut.py v`; the two-chip metal test `tools/tl5_tracks.py v/h` on all nine
+segments, kept in `cache/scratch/busl/n2_scan.txt`; views `n2_step.png` (3.4x metal), overlays
+`n2_o1.png` (the step), `n2_o2.png`, `n2_o3.png` (both edges, 4x, every package's trace)):
+
+| Piece | Net | South edge | South run x | Arm y | North run x | North edge |
+|---|---|---|---|---|---|---|
+| `n2` | `bd1_n2` | (6711,15000), onto `eof`'s `M 6711,15000 ..` (piece `n2w`) | 6711 | 13247 | 6776 | (6776,10400), onto `eof`'s `M .. 6775,10400` (piece `n2n`) |
+| `x68` | `busl_x6820` | (6754,15000), on south | 6754 | 13290 | 6820 | (6820,10400), on north |
+| `x69` | `busl_x6906` | (6841,15000), on south | 6841 | 13376 | 6906 | (6906,10400), on north |
+
+All three are 14-16 px wide throughout (`sel_cut.py`). The nest, from the west: `cdp4_sel3`'s L (arm
+y 13160), `cdp4_sel4`'s (13208), `n2`'s, `x68`'s, `trunks`' line (x 6862 north, arm y 13332, x 6798
+south), `x69`'s. What the scan flagged, all looked at (tiles `n2_c2.png`, `n2_c3.png`, `n2_c4.png` at
+3.2x in four shots):
+
+- No stretch of 18 px or more without metal in both chips on any segment: the longest is 16 px
+  ((6906,12034-12050)), the rest are the 8-13 px edge bars of the poly rows crossed (about 100 on
+  each line).
+- Stretches of 20-38 px where one chip alone fails the metal test, fourteen places: `n2` (6776,10553),
+  (6776,11956), (6776,12101), (6776,12528), (6711,14256); `x68` (6754,13330), (6754,13461),
+  (6754,13801), (6754,13960), (6754,14184), (6754,14560), (6754,14590), (6820,10469), (6820,12224),
+  (6820,12655), (6820,12766); `x69` (6906,10619), (6906,11900), (6841,14566), (6841,14212). In each
+  the other chip shows the metal bright and of the same width, with no ring; (6820,12655) is a speck
+  on chip 2.
+- The clean shot is greenish (red minus green under 24, down to -30) under the tracks on the rows
+  y 13417, 13548, 13590, 13633, 13699, 14004, 14089, 14178, 14220, 14437, 14698, 14910. These are rows
+  whose colour under metal is the yellow-green kind: each is greenish under every track it passes
+  (`tools/textmap.py 6690 13524 6780 13572 3 --acid`: row y 13548 under x 6711 and x 6754 alike;
+  `textmap.py 6822 13400 6862 13434`, `6822 14074 6862 14104`: under x 6841), and both metal shots
+  show the track bright and 12-15 px wide across them (guide, trap 15: colour without a pad is not a
+  tap). View `n2_c5.png`.
+- `x69`'s arm lies on the poly row y 13375 (piece `ch1`: `cdp4_in_s1`) from x 6841 to x 6906
+  (`textmap.py 6824 13354 6924 13400 3 --acid`; view `n2_c6.png`, 5x, three shots): the metal is a
+  plain bar 14 px tall in both chips with no ring and no pad (a notch at x 6882 in chip 2 only), and
+  the clean shot under it has no hole (olive-yellow from x 6835 to 6890, red-orange under the
+  corner). Two nets (guide, trap 13). `trunks`' arm lies the same way on the row y 13332.
+- The four corners nearest to pads: `cdp4_sel1`'s and `cdp4_sel2`'s pads at x 6736 (y 12225, 12485)
+  are 40 px west of `n2`'s north run; the metal test at both heights shows the gap
+  (`sel_cut.py h 12300`: 6776 w15, no run between 6740 and 6769).
+
 ## Logic
 
 Wiring only. Traced: the eight joins above (no uncertain item on any). From `cdp3`'s notes:
@@ -565,6 +633,19 @@ net with a diffusion pad at (7555,11118) and the band east of it. Not traced: wh
 (a source or drain under or east of column 0's VSS rail, `cdp3` (continue)); it is the only drawn end of
 the net that can drive it.
 
+Piece `n2`. Traced (no uncertain item of this package or on the join): `bd1_n2`, the output of
+`bd1`'s latch on R4's match (`bd1_n2` = NOT((`bd1_an` AND `inh_lat`) OR `bd1_n1` OR `rst_a`):
+`notes/blocks/eof.md`, pieces `r4lat`, `isrc5`), is one net with `tl4_w3850` (= `tl5_w5761`), the input of
+the inverter of `tl4`'s right cluster that makes `rcs_e3`. So **`rcs_e3` = NOT `bd1_n2`**: the step
+logic's `rcs_cond_n` = `rcs_e4` OR (`rcs_e3` AND `rcs_a2`) takes R4's latched match inverted. Between
+the latch and that inverter the net is wire only (about 23,000 px: the bottom bus field, this field,
+`lc1`'s diagonal bundle, `tl5`'s bus); no other gate is on it in what is drawn. The equation is
+marked, not firm, for reasons outside this package (the latch's load tie in `bd1`, an uncertain item
+at `tl4`'s inverter).
+
+Pieces `x68`, `x69`. Traced: two through lines with no connection in the region. What they are is
+not known: named for their place (`busl_x6820`, `busl_x6906`).
+
 ## Ports
 
 | Name | Layer | Where | Direction | What |
@@ -591,6 +672,12 @@ the net that can drive it.
 | `tc2_sr_g` | M | (7180-7194,15000), 14 px wide | not known (believed in: driven in `bc1`'s group) | the track goes on south in `bc1`'s ground: to y 15482, west to x 7103, south; the follower ends at (7100,16279) (not read) |
 | `cdp3_k_b` | P | x 7600, y 9438-9460 (22 px wide) | out (driven from the diffusion at its south end; received by `cdp3`'s gate 1) | `cdp3`'s row y 9450, drawn there from x 7600 |
 | `cdp3_k_b` | D | x 7600, y 11092-11127 | in | the diffusion band goes on east under column 0's VSS rail (x 7600-7646) into `cdp3`'s ground (not drawn) |
+| `bd1_n2` | M | (6704-6718,15000), 14 px wide | in (driven by `bd1`'s latch) | onto `eof`'s metal from the bottom bus field (piece `n2w`, `M 6711,15000 ..`) |
+| `bd1_n2` | M | (6769-6783,10400), 14 px wide | out | onto `eof`'s metal north (piece `n2n`, `M .. 6775,10400`, labelled `bd1_n2_u`): to `tl4_w3850` and the inverter that makes `rcs_e3` |
+| `busl_x6820` | M | (6813-6827,10400) | not known | the track goes on north; the follower ends at (6817,9988), not read |
+| `busl_x6820` | M | (6747-6761,15000) | not known | on south into `bl0`'s ground; the follower ends at (6754,16220), not read |
+| `busl_x6906` | M | (6899-6913,10400) | not known | on north; the follower ends at (7078,8778) (candidates (6905,10057), (6908,9798)), not read |
+| `busl_x6906` | M | (6834-6848,15000) | not known | on south into `bl0`'s ground; the follower ends at (6839,16219), not read |
 
 ## Ambiguities
 
@@ -974,3 +1061,9 @@ Round 1: no findings that change a connection.
   north from (6126,10426) it steps from line 2 onto line 3 at y 9775, in `lc3`: ground bright in chip 2
   only, guide trap 30).
 - `trunks`' two lines in the field: taps not checked (R4).
+- The ends of the two through lines of run 7: `busl_x6820` north of y 10400 (follower end (6817,9988),
+  in the northern part) and south of y 15000 (end (6754,16220), `bl0`); `busl_x6906` north (end
+  (7078,8778), the northern part) and south (end (6839,16219), `bl0`). And the tracks east of them:
+  x 6952 and x 6992 at y 13100 (`tools/sel_cut.py h 13100 6780 7000`), not followed.
+- What the rows y 13417, 13548, 13590, 13633, 13699, 14004, 14178, 14220, 14437, 14698 are (greenish
+  under every track in the clean shot; rows of the bands y 13300-13700 and 14050-14950, undrawn).
