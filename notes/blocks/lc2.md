@@ -381,7 +381,8 @@ Run 5:
 
 - (Done: the gate column south of latch B, latch B's data wire, the thin metal through latch B.)
 - The ringed box (5813-5831, 9156-9178) in the output's poly block and what lies under it (Ambiguity 8); the box on
-  node D's west lobe (Ambiguity 9); a diffusion (5785-5830, 9200-9265) below the block, on south into `lc3`.
+  node D's west lobe (Ambiguity 9); the area (5785-5830, 9200-9265) below the block is field (round 6: red minus green 0-2 in the chip-2 stripped shot).
+- The output poly's leg x 5924-5940 runs on south in `lc3`'s strip to about y 9540 and turns east along y 9525-9545 (round 6; not drawn by `lc3`).
 - Rows 2, 3 and 5 west of x 5545; row 4's metal north of y 9100 (the staircase from `lc1`'s strip).
 - Geometry noted by review round 5 and not re-measured: the upper load's channel may be y 8889-8935 (drawn
   8911-8940).
@@ -628,3 +629,17 @@ D or the west one node C; Ambiguity 7 (diffusion). Not checked: the thin metal t
 view; the upper load's tie and strip end; the rails across y 9233 above 3.3x.
 
 Round 5: three findings that change a connection, fixed (a fix check follows).
+
+Round 6 (fix check of round 5's fixes, 2026-11-18 18:44 -0600, a fresh agent on claude-fable-5-2, against commit ea007da, at commit
+7930f31; images in `cache/scratch/lc2/review-6/`, 8 used). Checked: node D (rail plain bright over it in both chips,
+node B's contact with ring and holes; the strip unbroken tan x 5744-5768 at y 9120, its south edge line unbroken
+x 5764-5836, its north edge open only at x 5774-5788 where the tail joins; the tail is diffusion); the four removed
+contacts (no hole, ring or widening at any; nodes C and E end at x 5754 east and x 5617 west with field beyond;
+rows 2/3 and 4/5 not joined at their east ends); the new output poly (block, row and leg one poly; the leg runs on
+south to about y 9540 and turns east; no contact under the VCC rail; the dark line at y 9143 has the same place and
+width inside the poly as the strip's edge beside it, so it is the diffusion's edge under one poly, which supports the
+uncertain join; the ringed box has a plain centre with nothing visible under it or leading to it; the area below
+the block is field; rows 4 and 5 end 20 px short of the block); the geometry changes; the labels and aliases; both
+`sameconn.py` runs (only the intended differences).
+
+Round 6: no findings.
