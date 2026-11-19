@@ -1,0 +1,11 @@
+# NAME        LAYER  X,Y              DIR  note
+tl4_w4068     P      3450-3470,2506   ?    onto tl2's poly tl1_w3333 (joined north of the plane to the column x 4542)
+tl4_w4068     P      4533-4551,2506   ?    onto tl4's column
+c4l_l3        P      5878-5896,2506   in   from tl6's poly; row y 2400 under the plane
+c4l_l3        P      7200-7218,2506   out  onto tc1_bus2554's poly
+tl4_w5068     P      5919-5937,2506   in   from tl6's poly tl5_w5500; row y 2444 under the plane
+tl4_w5068     P      7159-7177,2506   out  onto tc1_bus2684's poly
+tl6_p6101     P      6053-6071,2506   ?    onto tl6's poly; row y 2488 under the plane
+tl6_p6101     P      7116-7134,2506   ?    onto tc1_bus2814's poly
+vss           M      7240,2193-2505   -    the plane goes on east
+vss           M      3645-3770,2500   -    the tab south onto tl3's west rail
