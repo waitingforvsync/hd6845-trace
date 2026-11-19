@@ -83,7 +83,13 @@ the corners at y 12050-12170, `q5.png`): x 6452 north to (6454,12986), east to (
 to (6521,12099), east along y 12095 **on top of `busl`'s poly row `cdp4_bus_s2`** (no pad, no
 contact seen: trap 13), a corner north at x 6690, and north to y 10400. x 6494 north to
 (6501,13024), east to (6565,13023), north to (6562,12141), east along y 12140, north at x 6735 to
-y 10400. North of y 10400 (drawn): x 6690 steps east at y 10270 to x 6733 and ends on the pad
+y 10400. **Each track has one tap on the way** (found by review round 4, confirmed by `textmap.py`:
+a bright centre, red 176-220, in a dark ring about 34 px across in both metal shots, on a widened
+poly pad): track x 6494 (`rsel13_buf`) at (6492,13744), the west end of the poly row y 13744, and
+track x 6452 (`rsel12_buf`) at (6450,13852), the west end of the poly row y 13852. Both rows run
+east to about x 7545 beside the four `cdp4_sel` rows and, by `busl`'s notes, end as gate bands in
+the gate group at `cdp4`'s bottom-left corner (not read here). So that group takes six select
+rows (R12-R17's), not four. North of y 10400 (drawn): x 6690 steps east at y 10270 to x 6733 and ends on the pad
 (6730,10055); x 6733 ends on the pad (6730,10317); each pad's poly row runs east to `cdp3`'s edge
 (x 7600) under about twenty vertical metals without a pad (1.36x, both stripped shots).
 
@@ -228,6 +234,25 @@ metal piece (no stretch over 18 px without metal in both chips); the green stret
 colour, unbroken metal, no ring); no taps (about 1x metal); both ends. Not checked: the second
 diagonals under metal at 4x except one passage; the long runs at high zoom; `metal1` as an image.
 Round 3: no findings.
+
+**Round 4, full review of piece 3, 2026-11-19 15:53 -0600** (fresh Fable reviewer; at commit 49ae634; images
+in `cache/scratch/regs/review-4/`). Told to suspect: which wire is which through the second and
+third diagonals, the two metal diagonals, every hop, the two poly columns from `bd3`, the undrawn
+middle stretch, the north ends, missed taps and the green stretches. Checked at 4-4.6x in two or
+three shots: the poly columns (contacts only at the end pads), the rail hop, the second and third
+diagonals (no band swapped or shared), the three row hops and the vertical hop, the north ends
+(both pads are contacts; the step at y 10270 is 10 px clear of the lower pad; rows continuous to
+x 7615, no pad); at 2.8-3.1x the trunk cross-under and the metal diagonals; the green stretches (no
+ring). Not checked: the north rows above 2.8x; the long runs except by `tl5_tracks.py`.
+Drawn geometry: no findings. The undrawn middle stretch (notes only): the route holds, and
+1. two taps were missing from the notes: (6492,13744) on `rsel13_buf`'s track and (6450,13852) on
+   `rsel12_buf`'s, each the west end pad of a poly row toward `cdp4`'s corner gate group. A
+   connection, in geometry this package does not draw (`busl`'s region). Confirmed by the tracer
+   (`textmap.py 6470 13724 6518 13766`, `6428 13832 6476 13872`); the notes' Logic now has them and
+   the handoff carries them to `busl`. No trace line changed:
+   `tools/t.sh regs sameconn.py 49ae634`: `connections identical`;
+   `.venv/bin/python tools/sameconn.py 49ae634`: `connections identical`.
+Round 4: no findings that change a connection.
 
 ## Not done
 
