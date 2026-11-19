@@ -59,3 +59,5 @@ lc1_w7170   M  4466-4484,8330  ?    drawn end: row A's track runs on south down 
 lc2_w8450   M  4508-4526,8330  ?    drawn end: row B's track (label lc2_w8907) runs on south (to about y 9360)
 lc2_w8298   M  4553-4571,8330  ?    drawn end: row C's track runs on south (to about y 8520)
 lc2_w8298   M  5249-5265,8334  ?    drawn end: the fifth staircase line runs on south (to about y 9056)
+vss         M  4928-4980,8067  -    rail 2 from lc1
+vss         M  4928-4980,8160  -    rail 2: drawn end, it jogs east at y 8228-8290 and runs on south at x 5105-5147
