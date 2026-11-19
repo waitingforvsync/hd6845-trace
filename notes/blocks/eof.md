@@ -58,7 +58,7 @@ uncertain items.
 
 - **Task (b), `inh_src`'s source: not found; two of its three open ends followed** (piece `isrc`).
   `inh_src` (the signal whose copies are `inh_ck`, `inh_rc`, `inh_lat`) is a widely fanned-out line of
-  the bottom-centre logic. **One end is the clear of `bc2`'s latch unit a** (`bc2_w15087`, joined:
+  the bottom-centre logic. **One end is the clear of `bc2`'s latch unit a** (its own name for the pad is under Former names in the glossary; joined:
   `bc2_w15029` = NOT((`bc2_w14876` AND `bc2_w14955`) OR `bc2_w15000` OR `inh_src`)). The bus line
   west of the pad (9770,18081) feeds a 2,470 px metal x 8968 with three pads and a west branch,
   each on a poly that goes on west into the gate column x 8650-8800 (repeated units; not followed).
@@ -403,7 +403,7 @@ driver lies; the other three lead to the loads.
 | `vcc` | metal | (2250-2590, 1900) | - | the supply plane over the strap's head, on north, east and west (`padring`) |
 
 | `inh_src` | poly | (10218-10234, 15912) | in or out | piece `isrc`, link G: the pad under the north end of `trunks`' metal x 10225 |
-| `inh_src` | metal | (10390-10402, 15083) | to a load | onto `bc2`'s pad (10395,15087): `bc2_w15087`, the clear of latch unit a |
+| `inh_src` | metal | (10390-10402, 15083) | to a load | onto `bc2`'s pad (10395,15087): the clear of latch unit a |
 | `inh_src` | poly | (9770, 18072-18090) | in or out | link H: from `trunks`' pad (9770,18081) |
 | `inh_src` | poly | (8930, 16728-16746) | ? | the row west of the tap pad (8966,16737): into the gate column |
 | `inh_src` | poly | (8930, 16163-16181) | ? | the row west of the tap pad (8962,16172): into the gate column |

@@ -1893,7 +1893,7 @@ Traced by this session with `/trace6845` (claim 54fc826, merged a4d06bc, claim r
 processed at the user's request.
 
 **What came in** (`notes/blocks/eof.md`, piece `isrc`; wiring only, no uncertain items):
-- `inh_src` is the clear of `bc2`'s latch unit a (`bc2_w15087`, aliased; that unit still waits for R31).
+- `inh_src` is the clear of `bc2`'s latch unit a (joined to that unit's clear pad by an alias; the unit still waits for R31).
 - Its west bus line is drawn on from the pad (9770,18081) to a pad (8967,17735), from which a metal runs
   north along x 8968 for 2,470 px with two tap pads and an end pad, and a second metal west. Four polys
   leave those pads west into the gate column x 8650-8800: stubs and ports, not followed.
@@ -1911,7 +1911,7 @@ join), 4,286 transistors, 0 errors, 0 warnings; `tools/unsure.py` does not list 
   added to the `trunks` (continue), `bc1` (continue) and `bc2`/`bc3`/`bc4` rows.
 - `notes/blocks/trunks.md` and `bc2.md`: the ends that are now followed.
 - `notes/operation.md`: the net count.
-- No Re-read item, no new AMB entry. `bc2_w15087` is left as an alias of `inh_src` for the next refresh.
+- No Re-read item, no new AMB entry. The clear pad's placeholder name is left as an alias of `inh_src` for the next refresh.
 - `out/` rebuilt.
 
 **Handoffs:** none waiting. **Claims:** none.

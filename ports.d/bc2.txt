@@ -3,7 +3,7 @@
 bc2_w14912    M  10385,14912   in   data of latch unit a: the metal at the pad goes west (not followed)
 bc2_w14955    M  10441,14940   in   enable of latch unit a: metal x 10441 goes on north of a's upper pad (not followed)
 bc2_w14955    M  10398,15440   in   enable of latch unit a: the same metal jogs west at y 15392 to x 10398 and runs on south (not followed)
-bc2_w15087    M  10395,15110   in   clear of latch unit a: metal x 10395 going south from the pad (not followed)
+inh_src    M  10395,15110   in   clear of latch unit a: metal x 10395 going south from the pad: eof's piece isrc joins it to trunks' line
 bc2_w15000    M  10385,15000   out  output of latch unit a: a metal from the north-west ends on the pad (not followed)
 bc2_w15388    M  10353,15440   in   data of latch unit b: metal x 10353 from the pad (10352,15388) south (not followed)
 bc2_w15432    M  10441,15665   in   enable of latch unit b: metal x 10441 from b's two enable pads on south (not followed)

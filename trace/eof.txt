@@ -381,7 +381,7 @@ N P 2462,2485 tl1_w2637
 # LINK G: trunks' metal x 10225 (drawn to y 15886) ends on a pad with a contact (10226,15912);
 #   poly north under a horizontal metal (y 15822-15834, no hole) to a pad with a contact
 #   (10226,15783); metal north, east along y 15654, north along x 10312, east along y 15308,
-#   north along x 10396 to bc2's pad (10395,15087): bc2_w15087, the clear of its latch unit a.
+#   north along x 10396 to bc2's pad (10395,15087): the clear of its latch unit a (bc2's label there, renamed since).
 #   textmap 10190 15750 10262 15930 3 (both pads: bright centre in a ring, hole in the clean
 #   shot; poly 5-8 between); follow.py 10224 15720 N (corners as drawn, end (10396,15083));
 #   textmap 10195 15630 10345 15700 3, 10285 15285 10425 15330 3, 10366 15055 10430 15120 3;
@@ -436,4 +436,3 @@ M 8967,17737 x8688 w=13              # the west branch
 P 8671,17720:8705,17754
 C 8688,17737
 P 8650,17722:8680,17742              # its poly on west (not followed)
-@alias inh_src bc2_w15087               # link G: one net (the clear of bc2's latch unit a)

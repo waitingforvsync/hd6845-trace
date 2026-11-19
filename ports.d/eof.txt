@@ -54,7 +54,7 @@ vcc         M  2250-2590,1900    -    the supply plane over the strap's head, on
 
 # Piece isrc: inh_src on from two of its open ends (run 4)
 inh_src     P  10218-10234,15912  ?    link G: the pad under the north end of trunks' metal x 10225
-inh_src     M  10390-10402,15083  out  onto bc2's pad (10395,15087): bc2_w15087, the clear of latch unit a (a load)
+inh_src     M  10390-10402,15083  out  onto bc2's pad (10395,15087): the clear of latch unit a (a load)
 inh_src     P  9770,18072-18090   ?    link H: from trunks' pad (9770,18081)
 inh_src     P  8930,16728-16746   ?    the row west of the tap pad (8966,16737): into the gate column x 8650-8800
 inh_src     P  8930,16163-16181   ?    the row west of the tap pad (8962,16172): into the gate column
