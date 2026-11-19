@@ -67,7 +67,7 @@ M 4952,9180 y9970 w=56                      # the middle rail (shared with stage
 N M 4952,9400 vcc
 M 5086,9250:5150,9300                       # the east rail on south from lc2's piece (to y 9256 there)
 M 5102,9290:5150,9945
-M 5084,9925:5150,9945                       # (review round 1: a foot west to x 5084 at its end; it runs on into stage B0's rail)
+M 5084,9931:5150,9945                       # (review round 1: a foot west to x 5084 at its end; it runs on into stage B0's rail)
 M 5084,9395:5162,9552                       # ... wider where the stage's VSS contacts are
 N M 5126,9600 vss
 D 5112,9880:5160,9922                       # the bottom of its column: the VSS node of gate K1, with a contact
@@ -205,8 +205,8 @@ D 4981,10249:5051,10271
 D 4928,10232:4983,10312
 C 4967,10287
 P 4988,10213:5045,10245
-C 5031,10227
-M 5031,10233 y10223 5047,10211 y10142 w=14   # the output's thin metal: from the pad's south-west corner south (drawn to y 8975; it ends on a pad (4862,8998))
+C 5023,10226                                # (round 4: the pad's contact and K3's output metal lie 8-9 px west of the turned cell's)
+M 5023,10233 y10223 5038,10211 y10142 w=14   # the output's thin metal: from the pad's south-west corner south (drawn to y 8975; it ends on a pad (4862,8998))
 #N M 5047,10177 lc2_w8857
 
 # -- gate K4 (x 4440-4990, y 8900-9190): lc2_w8930 = NOT( lc2_w8857 AND lc1_w7170 AND ( lc2_w8552 OR lc2_w8475 ) )
@@ -223,15 +223,12 @@ D 5061,9942:5075,10074   # ... the strip round the VSS node and the two rows' en
 D 5061,9942:5113,9959   # ... and Z's lower part
 # the rows
 P 5033,10105:5068,10142   # pad box of K3's output metal (round 14: its poly ends at x 4880, y 9012)
-C 5051,10119
-M 5047,10142 y10113 w=14
+C 5043,10120 s=20x24
+M 5038,10142 y10113 w=14
 P 5066,10123:5339,10140   # its row west across the column to the END pad of track C
-P 5337,10107:5367,10135
 P 5087,10079:5425,10097   # its row east across the column
-P 5291,10021:5323,10053   # the END pad of the thin metal x 4597-4611 (lc2_w8552)
 P 5168,10025:5295,10051   # its row east; under the rail it lies higher
 P 5088,10033:5178,10054
-P 5247,9977:5279,10009   # the END pad of the thin metal x 4641-4655 (lc2_w8475)
 P 5168,9977:5253,10001   # its row east; under the rail it lies lower
 P 5088,9965:5178,9984
 # node T: a band east above the top row, to a ringed box where its load's gate poly is tied; from the band's end a

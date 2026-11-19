@@ -3,8 +3,8 @@
 ## Status
 
 2026-11-19 07:44 -0600, run 2 (Matt Godbolt, on Claude Fable 5.2). **Two stages of `lc2`'s ripple counter are drawn
-here**: stage E4 (a copy of `lc2`'s flip-flop cell `lc2_ff`, turned; reviewed, round 1) and stage B0 (the same four
-gates folded over both columns, drawn by hand; not yet reviewed), 37 new transistors (E4's top one is also in `lc2`'s drawing). With `eof`'s piece `ff3` (stage
+here**: stage E4 (a copy of `lc2`'s flip-flop cell `lc2_ff`, turned) and stage B0 (the same four
+gates folded over both columns, drawn by hand), both reviewed (rounds 3 and 4), 37 new transistors (E4's top one is also in `lc2`'s drawing). With `eof`'s piece `ff3` (stage
 W3) the counter has five stages and its order is known. Still open: everything east of x 5480 but the gate pair
 (the crossing field, where stage B0's clock and the clear come from), the gate pair's Fable review (R31).
 
@@ -272,7 +272,9 @@ before every connection could be read in two shots and the gates profiled.
    turn west and south round the corner (nested L-shaped metals), so `lc2_x6432` is the metal of the pad
    (6211,9948); a fifth line enters at about (6450,9450). Stage B0's clock row and the clear's row are drawn to
    x 5480.
-3. The track field x 5440-5760 south of y 9540: `rst_n`'s metal ends on a pad (5475,10207), poly south;
+3. The wide VCC metal's diagonal and foot (it crosses stage B0's south-east corner: from about (5460,10320)
+   south-west, then south on x 5338-5393 from y 10450; no contact on the three polys under it: round 4). The track
+   field x 5440-5760 south of y 9540: `rst_n`'s metal ends on a pad (5475,10207), poly south;
    `lc2_w8450`'s metal (x 5626, then x 5604) to a pad (5540,10165), poly south; the wide metal's diagonal.
 4. The south bundle (y 10050-10400): the verticals on south, six of them diagonal.
 5. West of x 4580 (`urch`'s channel and `eof`'s corner): the metal x 4420-4442, the tan boxes under track A
@@ -341,6 +343,38 @@ ended `connections identical` (the full-extraction command was not run at that p
 `.venv/bin/python tools/sameconn.py b7bcf40` differs only by stage W3 removed and stage B0 added, no line of E4).
 
 Round 3: one finding that adds a connection (track B''s END pad), drawn with stage B0; three geometry only, fixed. A fix check follows with stage B0's review.
+
+Round 4 (run 2, Fable; full review of stage B0, and the fix check of round 3's changes to stage E4; 2026-11-19 08:07 -0600,
+a fresh agent on Claude Fable 5.2, against 49d3495; images `cache/scratch/lc3/review-2/`, 24 used). Told to
+suspect: which row or metal each of the five crossing rows joins at each end; every pad (the dark-red ones above
+all; metals running on through pads; second polys); the three polys north under the diagonal metals; the gap at
+x 5367-5378; the contacts absent at (5309,10037), (5353,10121) and present at (5298,10294), (5342,10036),
+(5386,10122); the hand-copied gates against the master and against `lc2`'s turned copy; K2's output; anything
+undrawn. For E4: the 6 px move, the rail's foot, track B''s END pad. It looked at all ten row ends at 3.9x in
+three shots, every metal's ends with `tl5_tracks.py`, every pad in both metal shots and both stripped shots, both
+halves by mosaic. Findings, all geometry only:
+1. K3's output thin metal and its two contacts were drawn 8-9 px east of the photo (centres (5042,10120),
+   (5023,10226), metal x 5032-5044). Confirmed (`k3m.png`, 6x) and moved.
+2. Three pad boxes left over from the cell, with no contact (at (5263,9993), (5307,10037), (5352,10121)): the
+   rows are plain there. Removed.
+3. E4's rail foot starts at y 9931, not 9925. Changed.
+Seen and not drawn (Not done, 3): the wide metal crossing the piece's south-east corner (from about (5460,10320)
+south-west, then south on x 5338-5393 from y 10450), over the three polys with no contact on them (no ring in
+either metal shot, no hole, the polys' width uniform); `rst_n`'s pad (5472,10208), 8-10 px east of K4's
+output-row corner and apart from it in three shots.
+Checked and found correct: the pairing of the crossing rows (both nestings are planar); every metal's ends; every
+pad a contact (the seven dark-red ones and (5345,10336) have no green hole in the clean shot but are pitted in
+the chip-2 stripped shot, with ring and bright centre in both metal shots); H3's arm one poly; the gap at
+x 5367-5378 is field in three shots; no contact at (5309,10037), (5353,10121) or any row crossing; K2's output
+leaves south only, field under the west rail down to H1; 19 transistors and the four equations; E4's contacts
+now within 1-4 px, its equations intact, track B' ends on (5386,9990), the east rail continuous into B0.
+Not checked: the cell's uncertain diffusion at the clear's pull-down (4721,10165) (its outline shows in chip 2,
+the colour reads as field, as in the master); K3's thin metal is dark at y 10122-10148 in both chips, as in
+`lc2`'s copy and the master (its END pad's ring), drawn plain; the two rows east of x 5480.
+For the three fixes: `tools/t.sh lc3 sameconn.py 49d3495` ends `connections identical`;
+`.venv/bin/python tools/sameconn.py 49d3495` ends `connections identical`.
+
+Round 4: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19)
 
