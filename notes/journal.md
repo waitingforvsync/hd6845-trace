@@ -2166,3 +2166,84 @@ edited).
 **`out/`** rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 668 floor-plan blocks; the floor
 plan looked at beside the central datapath (`cache/scratch/refresh/fp_crop.png`): no label over another.
 Coverage: 66.5% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
+
+## 2026-11-19 23:01  Handoffs: eof runs 10-14, regs runs 1-3, tlb, busl run 7
+
+Eleven handoff files, ten pieces of work (one of `eof`'s, written 17:51 +0000, repeated run 8's, which
+was applied at 18:36). Full extraction after them 2,375 nets, 4,351 transistors, 0 errors, 0 warnings;
+849 of 1,279 equations firm. Spot checks: `busl`'s three tracks at the step and at both edges
+(`cache/scratch/busl/n2_o1.png` .. `n2_o3.png`), `eof`'s inverter chain (`cache/scratch/refresh/spot_d3982.png`).
+
+What they establish (each from the tracers' notes; marks as there):
+
+- **The signal the notes called a strobe "once per scan line" is the reset** (`eof` run 10, firm): line
+  X / track A is `rst_a`, the buffered NOR(`lpstb_b`, `res_b`) of `lc1`'s gate 5; `inh_ck`, `inh_rc`,
+  `inh_lat` are further copies. The belief is withdrawn in `notes/operation.md` (by the tracer) and in
+  eleven block notes (corrections sections).
+- **The buffered pins RES and LPSTB** run down the left-centre strips and the left bus field as the
+  second and third through lines and leave south at (6366,15000), (6408,15000) (`eof` run 11, firm).
+- **`tl3_w3982`**, which holds the step condition low, is latch C's data and is driven by three
+  inverters in series from latch D's lower node (`eof` runs 11-12; 6 transistors).
+- **The left-centre ripple counter's clock is `tcw_m6404`'s net** (driver not found), and the fifth
+  corner-bundle line is `rst_c`, so `rcs_x1`, the clear of the step logic's five latches, is the reset
+  two inverters later (`eof` run 13, firm).
+- **`rcs_e3` = NOT `bd1_n2`**: the latch on R4's match drives the step logic's inverter, wire only
+  between (`eof` runs 8 and 14 and `busl` run 7, which drew the last 4,600 px: x 6711, an arm at
+  y 13247, x 6776; no tap; the join has no uncertain item, the equation stays marked for the latch's
+  load tie and an item at the inverter).
+- **Registers** (`regs`, Matt Godbolt, runs 1-3; released): the write strobes of R13, R14, R15 reach
+  `cdp3`'s row H, the line into row A's cells and `cdp4`'s row R1 lower half (firm), R12's reaches row
+  C through one `?M` (marked); `cdp4`'s four-way selector is the read multiplexer of R14-R17 (firm);
+  R12 and R13 are read through `cdp3`'s rows E and F by two tracks that cross `busl`'s region (read, not
+  drawn: two open joins, now first in `busl`'s row).
+- `tlb` (Matt Godbolt; done): the VSS plane north of the top-left strips and four joins under it.
+
+Applied: master list rows `eof`, `busl`, `tlb`, `regs`, `bw` (continue), `tcw` (continue), `trunks`
+(continue), `bl0`, `lc1`-`lc3`, `cdp3` (continue), `tl1`-`tl6`, `bd1`. Ambiguities: AMB-040 (the
+structure on R12's write strobe, `bw`), AMB-041 (`rst_a`'s track over latch C's data row at
+(6558,7886)), AMB-042 (the ripple counter's clock lying on `rst_c`'s poly, and the knot at
+(6472,9161-9227)); AMB-039 annotated (row y 13744 is read by `regs` as R13's read select). No new
+Re-read item. Guide: trap 26 gains "a real contact need not show the green hole in chip 1's clean
+shot" (`eof`). Corrections sections in 23 block notes. No coarse floor-plan block trimmed (all pieces
+are wiring inside regions that stay).
+
+**A shared tool changed** (c4411de, 22:35): `tools/netlist.py` accepts an alias that reaches the net's
+canonical name through another alias. Two packages met the case the same evening (a wire joining two
+nets that each had aliases in other packages' files): `eof` run 13 worked round it by editing
+`trace/tl6.txt`'s alias line, `busl` run 7 could not. The guide's section 5 says what to write now.
+Not changed: `tools/signals.py` counts open joins by canonical names only (`eof`'s remark), so an
+aliased `_u` name is not in its count.
+
+## 2026-11-19 23:10  Refresh
+
+Tenth refresh. Renames, in three batches, each checked with `tools/names.py compare` ("only names
+changed"), `tools/signals.py` (0 outside the glossary) and `signals.py --docs` (no former names):
+
+| Old | New | On what |
+|---|---|---|
+| `inh_src` | `rst_a` | `eof` run 10, firm |
+| `lc2_x6342`, `lc2_x6387` | `res_b`, `lpstb_b` | `eof` run 11, firm |
+| `lc3_w9470` | `rst_c` | `eof` run 13, firm |
+| `cdp4_sel1`, `cdp4_sel2`, `cdp4_sel3`, `cdp4_sel4` | `rsel14_buf`, `rsel15_buf`, `rsel17_buf`, `rsel16_buf` | `regs` run 2, firm |
+| `cdp3_h_wr`, `cdp3_l8819`, `cdp4_ld8b` | `wr_r13`, `wr_r14`, `wr_r15` | `regs` run 1, firm |
+| `bd1_n2_u`, `tl4_w3850`, `tl5_w5761` | `bd1_n2` | `busl` run 7 with `eof` run 14, no uncertain item |
+| `tc1_bus2554` | `c4l_l3` | `tlb` run 1, firm |
+
+**Branches in flight** (`eof`, tom-seddon; `busl`) must run `tools/rename.py` with these pairs after
+merging main. Left on purpose (the master list's `rename` row has the reasons): `cdp3_c_wr` (R12's
+strobe through one `?M`), `cdp3_gate_e` / `cdp3_gate_f` (open joins), the ripple counter's clock
+(four placeholder names, driver not found), `tl3_w3982`'s and `tl1_w3333`'s families (placeholder to
+placeholder), `bd1_k`, `bd1_q`, and **`inh_ck`, `inh_rc`, `inh_lat`, `inh_n`**: they are now known to be
+copies of the reset and their names say "inhibit"; they are distinct nets, so no rename is forced, and
+better names are the user's call. The renames left about sixty circular sentences ("X is X") in notes,
+glossary, master list and trace comments; each was reworded to name the old wire by what it was (the
+first through line, the select of `cdp4`, the bus line x 5412 of `tl5`).
+
+**`operation.md`** (tenth refresh): header (2,375 nets, 4,351 transistors; 849 of 1,279 equations firm);
+the tracers had written their own rows (the reset identity, R12-R17, the ripple counter's clock);
+`busl` run 7 changed three passages (R4's latched match is drawn to `rcs_e3`'s inverter). No equation
+changed status against the baseline taken before the renames. AMB-001 to AMB-042; R1-R45.
+
+**`out/`** rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 707
+floor-plan blocks. Coverage: 67.9% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%.
