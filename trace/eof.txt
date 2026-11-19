@@ -917,3 +917,81 @@ P 7382,8406:7420,8444
 C 7401,8425
 P 7400,8428 x7492 w=22                      # to the box's west edge (the box and what it joins: Not done)
 N M 6514,7600 tl3_w3982
+
+# ============================================================================================
+# Piece d3982 (run 12, 2026-11-19): the driver of tl3_w3982 (= tl5_w5936, lc2_w8906): three
+# inverters in series at the foot of the gate column west of the central datapath, under the
+# VSS rail x 7552-7598 (piece g7700's rail, on south) and the wide VCC metal x 7722-7776:
+#       eof_w8168  = NOT lc1_w7928      unit U2 (y 8068-8196), a long load (plate 96 long)
+#       eof_w8298  = NOT eof_w8168      unit U3 (y 8198-8326), a copy of U2 130 px lower
+#       tl3_w3982  = NOT eof_w8298      unit U4 (y 8330-8448), tl5's inverter turned 180 degrees
+#   The input is lc2's poly of lc1_w7928 (latch D's lower node; lc2's port P 6408,8067): a row
+#   y 8030-8050 from its corner (6408,8040) 1,010 px east under twenty tracks, with no pad and
+#   no contact, to a band x 7416-7440 that turns down into U2's gate row. Each unit's output
+#   leaves by a buried contact west of the rail (boxes at x 7487-7523); U2's and U3's poly goes
+#   west, south and east as the next unit's gate row; U4's is the poly of piece w5936.
+#   Each unit: VSS box and contact under the rail, the gate row directly below it, the node
+#   below the gate; the node goes west on a strip to the box and east to the load.
+#   Evidence (cache/scratch/eof/): m_s1.png (1.39x), m_rail.png (2.5x under the rail),
+#   m_w1.png (2.55x, three shots, the west side), m_e1.png (2.3x, the loads), m_u2e.png (3.8x),
+#   m_u2z.png (5x, four shots: U2's node east of the rail), m_u2w.png (4x four shots: U2's box
+#   and both rows), m_u4a.png (3.3x three shots: U4), m_u1w.png (the band's top and the row),
+#   m_in1.png, m_row2.png (the row, 2.8x and 2.2x), m_w8038.png (4x: the corner onto lc2's poly);
+#   the measurements are in the notes (piece d3982) and the survey.
+#   The unit above (U1, y 7940-8060: another copy of U4's build, 390 px higher) is NOT on this
+#   path and is not drawn: its gate row ends on a pad (7313,7995), its box has no poly leaving
+#   it, its plate goes east to a pad (7838,8062). See the notes' Not done.
+@cell eof_dly
+# U2's build (master: U2). Load: a diffusion arm from the node north to a strip that runs east
+# under a long plate to the VCC box; the plate's tab comes down onto the node at the tie box.
+D 7546,8068:7603,8180                 # under the rail: VSS box (y 8068-8110), the gate, the node
+C 7568,8086
+P 7440,8114:7606,8136                 # gate row, to its end just east of the rail
+D 7488,8156:7556,8176                 # node west: the strip to the box
+D 7488,8156:7522,8186                 # under the box
+B 7486,8152:7524,8188                 # the output's buried contact (box 7487-7523, 8153-8187)
+P 7416,8158:7520,8180                 # the output's poly: the row west from the box,
+P 7416,8158:7440,8266                 # south on the band x 7416-7440,
+P 7416,8244:7446,8266                 # and east onto the next unit's gate row (130 px lower)
+D 7594,8152:7628,8184                 # node east, out from under the rail
+D 7612,8118:7628,8184                 # the arm north
+D 7612,8118:7742,8145                 # the load's strip: under the plate, to the VCC box
+D 7736,8112:7778,8175                 # VCC box
+C 7751,8136
+P 7634,8100:7730,8166                 # the plate (channel 96 long, 27 wide)
+P 7650,8160:7676,8190                 # its tab, down into the tie box
+D 7612,8172:7680,8194                 # the node on east, under the tie box
+B 7646,8168:7680,8196                 # the tie: plate to node (box 7645-7680, 8170-8195)
+@end
+@cell eof_dinv
+# U4's build (master: U4): tl5_inv turned 180 degrees (x' = 12691 - x, y' = 13241 - y;
+# findcell on the clean shot 0.70), drawn again here from this copy's own measurements.
+D 7546,8330:7603,8426                 # under the rail: VSS box (y 8330-8373), the gate, the node
+C 7568,8348
+P 7440,8376:7614,8396                 # gate row, to its rounded end east of the rail
+D 7488,8404:7556,8428                 # node west: the strip to the box
+D 7488,8404:7522,8442                 # under the box
+B 7486,8402:7524,8444                 # the output's buried contact (box 7490-7520, 8410-8442)
+P 7480,8418:7520,8439                 # the output's poly end in the box
+D 7594,8405:7734,8432                 # the load's strip: in the open, under the plate, to the VCC box
+D 7728,8374:7778,8432                 # VCC box
+C 7750,8408
+P 7666,8383:7722,8448                 # the plate (channel 56 long, 27 wide)
+D 7640,8357:7660,8410                 # the tail up from the strip
+D 7640,8357:7690,8377                 # its hook east, under the tie box
+P 7666,8360:7690,8390                 # the plate's tab up into the tie box
+B 7662,8355:7694,8381                 # the tie: plate to node (box 7655-7697, 8352-8385)
+@end
+@inst eof_dly 0,0 tag=u2
+@inst eof_dly 0,130 tag=u3
+@inst eof_dinv 0,0 tag=u4
+M 7575,7855 y8460 w=46               # the VSS rail on south from piece g7700's end
+M 7749,7855 y8460 w=54               # the wide VCC metal on south (x 7722-7776)
+# the input: from lc2's poly (P 6401,8067:6415,8092, lc1_w7928) north to the row, east, and
+# down the band into U2's gate row
+P 6401,8030:6416,8072
+P 6401,8040 x7440 w=20
+P 7416,8030:7440,8136
+N P 7000,8040 lc2_w8083                  # lc2's name for this poly: latch D's lower node (lc1_w7928 through that cell's ? tie)
+N P 7428,8220 eof_w8168
+N P 7428,8350 eof_w8298

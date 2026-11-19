@@ -67,9 +67,7 @@ eof_w7718   P  7400,7203-7221    ?    the poly row east of the pad (7313,7215)
 eof_w7718   M  7262-7274,7800    ?    the metal south of row 2's pad (7267,7736)
 eof_w7818   P  7272-7285,6875    out  the gate's output: the poly north of the pad (7272,6912)
 vss         M  7552-7598,7585    -    column 0's VSS rail, on north
-vss         M  7552-7598,7860    -    the same, on south (joins cdp3's rail at y 8555)
 vcc         M  7725-7775,7720    -    the wide metal east of the load, on north
-vcc         M  7725-7775,7860    -    the same, on south
 
 # Piece ff3: the flip-flop that clocks lc2's ripple counter (run 6)
 lc2_w8475   M  4553-4575,9190    out  the copy's slave output on track C, onto lc2's L-shaped metal: the clock of lc2's first flip-flop
@@ -98,4 +96,7 @@ rst_a       M  6450,8623-8637     out  onto lc2's diagonal metal end (its first 
 res_b       M  6450,8685-8699     out  onto lc2's metal end (its second through line, lc2_x6342: its port (6450,8692)): one net, down the left-centre strips and the left bus field to (6366,15000)
 lpstb_b     M  6450,8749-8763     out  onto lc2's metal end (its third through line, lc2_x6387: its port (6450,8756)): one net, to (6408,15000)
 tl3_w3982   M  6465-6477,8067     out  onto lc2's metal x 6471 of lc2_w8906 (pad (6470,8127)): latch C's data
-tl3_w3982   P  7492,8417-8439     in   the poly's end on the west edge of the box (7490-7520,8410-8442), a buried contact onto a strip east under the gate column's VSS rail (undrawn, cdp3 (continue)); the driver, believed
+# Piece d3982 (run 12): the three inverters that drive tl3_w3982 (the port tl3_w3982 P 7492,8417-8439 is gone: U4's output box)
+lc1_w7928   P  6401-6416,8067     in   from lc2's poly P 6401,8067:6415,8092 (its port there; both label the poly lc2_w8083, an alias): latch D's lower node, the input of the three inverters
+vss         M  7552-7598,8460     -    the gate column's VSS rail on south (cdp3's c0 rail)
+vcc         M  7722-7776,8460     -    the wide metal east of the column on south (VCC by the loads' contacts)

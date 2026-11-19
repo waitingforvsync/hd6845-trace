@@ -43,4 +43,6 @@
 5471,7282:6168,7320      route  step-condition hold tl3_w3982, poly row y 7300 | east through the crossing field to the pad (6146,7301)
 6146,7296:6534,8072      route  step-condition hold tl3_w3982, metal y 7303 and track x 6514 | through the pad (6513,7889) and by an L onto lc2's metal x 6471: the data of latch C
 6494,7868:7420,7908      route  step-condition hold tl3_w3982, poly row y 7888 | from the pad (6513,7889) east under seventeen tracks to the pad (7401,7888)
-7382,7870:7492,8444      route  step-condition hold tl3_w3982, metal x 7402 and poly | south to the pad (7401,8425) and east to a buried-contact box at the foot of the gate column: its driver (believed)
+7382,7870:7492,8444      route  step-condition hold tl3_w3982, metal x 7402 and poly | south to the pad (7401,8425) and east to the output box of its driver, the last of three inverters
+7416,8068:7778,8448      logic  inverter chain driving the step-condition hold tl3_w3982 | three inverters in series under the gate column's VSS rail: tl3_w3982 = NOT eof_w8298, eof_w8298 = NOT eof_w8168, eof_w8168 = NOT lc1_w7928 (latch D's lower node); the first two have long loads
+6401,8030:7440,8136      route  latch D's second output lc1_w7928, poly row y 8040 | from lc2's poly at (6408,8067) 1,010 px east under twenty-one tracks to the first inverter of the delay chain
