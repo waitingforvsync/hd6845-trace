@@ -59,7 +59,7 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `tcwa`, link E | x 6098-6438, y 6345-8072 | `tcw_a`'s metal on from `tl6`'s end (6105,6350): south to a corner (6105,7346), east (on `lc1_w7040`'s poly row, no contact) to a corner (6298,7346), south to a corner (6298,7432), east (on another row) to a corner (6430,7432), south through the tap's pad to y 8067, where `lc2`'s piece (`lc2_w8172`) takes over |
 | `tcwa`, the tap | x 6412-7530, y 7632-7664 | a pad with a contact (6427,7648) on that metal; its poly row y 7640-7656 east across the crossing field to the gate group at x 7540 (drawn to x 7530) |
 | `tcwa`, link F | x 6445-6695, y 8165-8374 | from `lc2`'s end (6450,8172): east to a corner (6559,8172), south (on the poly of another net's pad (6558,8127), no contact) to a corner (6559,8367), east to `trunks`' end (6690,8366) |
-| `x1` | x 5053-5253, y 6345-6905 | five vertical polys of `tl5`'s bus on south from y 6350 (x 5063, 5107, 5150, 5192, 5237), straight under nine horizontal metals; four end on pads with contacts (5105,6761), (5147,6803), (5190,6845), (5237,6803), each with a metal on south to one of `lc1`'s wires at y 6900 (M_a, M_b, V2, V3); the fifth (x 5063) has no pad and runs on south |
+| `x1` | x 5053-5253, y 6345-6905 | five vertical polys of `tl5`'s bus on south from y 6350 (x 5063, 5107, 5150, 5192, 5237), straight under nine horizontal metals; four end on pads with contacts (5105,6761), (5147,6803), (5190,6845), (5237,6803), each with a metal on south to one of `lc1`'s wires at y 6900 (M_a, M_b, V2, V3); the fifth (x 5063) has no pad and runs on south. **Below three of the pads the poly goes on** (x 5150 in the open; x 5192 under V2; x 5237 under V3) and bends south-east into `lc1`'s diagonal poly bundle: drawn to y 6900 (the last to y 6878) |
 
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
 
@@ -214,6 +214,12 @@ equations, which are `lc1`'s with the new names.
   T1, which leaves `lc1`'s strip at (5030-5046,8067) into `lc2`'s (claimed; not followed here).
   What clears the five latches of the step logic is therefore decided in `lc2`'s west gate
   cluster or beyond.
+- **The pads are not the ends of three of the lines** (found by the review, round 2): `res_b`,
+  `lpstb_b` and the reset copy `tl5_w3636` each go on in poly below their pad and turn
+  south-east into the diagonal poly bundle of `lc1`'s strip (`lc1`'s Not done: "the diagonal
+  bundle's other nine lines"). So the NOR and the four latch clears are not all that these
+  three nets reach: **where the two pin lines and this copy of the reset go beyond the gate
+  column is open** (three lines of that bundle). `rcs_x1`'s pad is an end (open field below it).
 
 | Stretch | Drawn by | What | Evidence |
 |---|---|---|---|
@@ -221,6 +227,7 @@ equations, which are `lc1`'s with the new names.
 | **five columns, y 6350-6740** | `eof` | straight, under nine horizontal metals (`slbus`'s and others), no pad; no line steps a track | `x1_survey.png` (1.17x, metal and clean, all traces); `tl5_tracks.py rows row 5040 5262 3` at thirty heights (every 14 px, y 6340-6744): the columns stand at x 5061-5067, 5103-5115, 5148-5154, 5190-5199, 5235-5241 at every height; `tl5_tracks.py v X 6350 6900` per column: only 6-7 px dips at the gaps between metals (trap 2), the same heights on several columns |
 | **four pads** | `eof` | (5105,6761), (5147,6803), (5190,6845), (5237,6803): each a ring with a bright centre in both metal shots and a green hole 16-17 px across in the clean shot | `x2_pads.png` (2.1x, metal and clean); `eof_cchk.py`; `textmap.py 5050 6728 5260 6906 3` |
 | **four metals to y 6905** | `eof` | from pad 1 the metal's head stands 6-9 px (the ring) west of the centre and runs south at x 5077-5089 (M_a, shifting 6 px west at y 6890); from pad 2 the same, south at x 5116-5128 (M_b); V2 (x 5185-5194) and V3 (x 5230-5242) hang straight from pads 3 and 4 | the same text map: nothing above either head, bright in both chips to y 6905; the image |
+| **the polys below pads 2, 3, 4** | `eof` | pad (5147,6803): open poly x 5139-5155 south to y 6900, bending south-east at about (5150,6910); pad (5190,6845): poly under V2, x 5188-5203 to y 6884, x 5197-5209 at y 6900; pad (5237,6803): poly under V3, x 5233-5245 to y 6878, then bending east (seen to about (5259,6900)) | the reviewer's `review-2/k_pads234.png` (4.4x, four shots), `j_bundle.png`; `textmap.py 5128 6812 5275 6918 3 --acid`; `px.py col 5146 6776 6916 10 acid` against `col 5104` (field below pad 1); overlay `ov_x1fix.png` (4x, both stripped shots) |
 | the gate column | `lc1` | M_a = gate 2's output; M_b = gate 5's output; V2, V3 = the NOR's inputs | its notes ("followed to y 6840 / 6800 / 6844 / 6800": the pads' heights) |
 
 The fifth line, `tl5_w5936` (= `tl3_w3982`, the net that holds `rcs_cond` low), has no pad: its
@@ -262,6 +269,9 @@ driver lies; the other three lead to the loads.
 | `res_b` | metal | (5183-5197, 6905) | to loads | onto `lc1`'s V2 (`lc1_w7343`, the NOR's lower input) |
 | `lpstb_b` | poly | (5227-5247, 6345) | in | from `tl5`'s bus line x 5237 (`trunks`' pad (5232,6105)) |
 | `lpstb_b` | metal | (5229-5243, 6905) | to loads | onto `lc1`'s V3 (`lc1_w7257`, the NOR's upper input) |
+| `tl5_w3636` | poly | (5139-5155, 6900) | to loads | the poly on south of the pad (5147,6803): into `lc1`'s diagonal bundle (bends south-east at about (5150,6910)) |
+| `res_b` | poly | (5196-5210, 6900) | to loads | the poly on south of the pad (5190,6845), under V2, bending south-east: into `lc1`'s diagonal bundle |
+| `lpstb_b` | poly | (5232-5246, 6878) | to loads | the poly on south of the pad (5237,6803), under V3; from here it bends south-east (seen to about (5259,6900)): into `lc1`'s diagonal bundle |
 | `tl5_w5936` | poly | (5053-5073, 6345) | ? | from `tl5`'s bus line x 5063 |
 | `tl5_w5936` | poly | (5054-5072, 6880) | ? | on south beside M_a and under it (not followed) |
 
@@ -377,6 +387,60 @@ clean shot, `t2_row.png`); other packages' geometry on `r9m_l1w` between the inv
 
 Round 1: no findings that change a connection.
 
+**Round 2: full review of run 2's two pieces** (2026-11-19 00:45 to 01:05 +0000; one fresh reviewer agent on Claude
+Fable 5.2, read from the photos alone; trace at commit 9f99dc2; its images in
+`cache/scratch/eof/review-2/`, 17 used). Pieces: `tcwa`, `x1`.
+
+Told to suspect: in `tcwa` the corner (6298,7346) and whether the metal reaches the pad
+(6341,7345), the dark bar between the horizontal and the vertical there, the other four corners,
+a contact where the metal lies lengthwise on a poly (y 7346, y 7432, x 6559), the junction
+(6559,8172) with the pad (6558,8127) and the follower's three contact candidates on x 6559, the
+tap (6427,7648) and other pads on x 6430 and x 6105, the row y 7648 (a break, a pad, a second
+row), a one-track slip in the nest of staircase metals; in `x1` a column stepping a track or
+tapped by one of the nine metals, the heads of M_a and M_b beside their pads and the pairing of
+pads and metals, the meeting with `lc1`'s four metals, a pad on the fifth line.
+
+Checked and found correct (5x views in two or more shots, text maps, profiles, the follower):
+- `tcwa`: the corner (6298,7346) is an L (the metal ends at x 6305; the 9 px patch at x 6313-6322
+  is open-poly colour in both chips, 143/114/51 and 140/78/38, not metal 222/177/97; the dark
+  line x 6308 unbroken y 7335-7410); the pad (6558,8127) is another metal's (9 px of open poly at
+  y 8150-8156 in both chips, the horizontal's north edge line unbroken across x 6500-6570); the
+  corners (6105,7346), (6430,7432), (6559,8367) and `lc2`'s (6431,8172) without ring or hole; the
+  tap a contact on this metal, which goes on through it; x 6105 and x 6430 with bars of 12 px or
+  less and no hole (a bare strip x 6120-6126 separates x 6105 from every pad east of it); x 6559
+  with one 10 px dim stretch at y 8318-8327 beside a neighbour's pad (6600,8323), bare strip
+  between; the tap row one band to x 7530, then a gate under the wide metal; y 8367 one straight
+  metal from x 6560 to `trunks`' corner (6757,8367), the follower agreeing both ways. Full
+  extraction: `tcw_a`, `lc2_w8172`, `inh_ck` one net, `lc1_w7040` separate, 0 errors.
+- `x1`: the five columns straight at 35 heights, no pad or ring under the nine metals; the heads
+  of M_a and M_b over field, ending at their pads' height (follower ends (5081,6758),
+  (5122,6800)), bare ground between pad 1's ring and M_b's head, so the pairing is as drawn; all
+  four metals reach y 6905 on `lc1`'s tracks (each dims 6-16 px and shifts about 6 px where a
+  diagonal poly passes under: no ring, no hole); no pad on the fifth line; both equations.
+
+Finding (one; it changes where wires leave the package, so it counts as changing a connection):
+1. **Three of the four pad polys do not end on their pads.** The trace ended each column at its
+   pad. Below the pads (5147,6803), (5190,6845), (5237,6803) the poly goes on south (open poly
+   x 5137-5155, y 6824-6912; salmon under V2; salmon under V3) and bends south-east into `lc1`'s
+   undrawn diagonal bundle. **Confirmed** by the tracer: `textmap.py 5128 6812 5275 6918 3
+   --acid` (chip-2 stripped F at x 5143-5155 from y 6824 to 6917; clean-shot poly 6-9 under V2 at
+   x 5188-5203, shifting to x 5197-5209 at y 6902, and under V3 at x 5233-5245 to y 6875, shifting
+   east below); `px.py col 5146 6776 6916 10 acid` (red over green by 40-80 below the pad) against
+   `col 5104` (field below `rcs_x1`'s pad); the reviewer's `k_pads234.png`, `j_bundle.png`.
+   **Fixed**: three poly pieces added (`P 5147,6815 y6900`, `P 5194,6858 5195,6884 5203,6900`,
+   `P 5239,6815 y6878`), three ports added, and the notes and `notes/operation.md` now say that
+   the three nets go on beyond the gate column. The four joins and the equations are unchanged (`tools/t.sh eof sameconn.py
+   9f99dc2` and `.venv/bin/python tools/sameconn.py 9f99dc2` both end `connections identical`:
+   the extraction cannot see a port), overlay `ov_x1fix.png`.
+   The method that misled: a column was taken to end where its pad and metal were found; the
+   pad of a poly under a metal that carries on (trap 29's "a wire is not finished where it goes
+   under a thin metal") was not looked below. Handoff, Re-read.
+
+Not checked by the reviewer: where the three diagonals end; `trunks`' line S beyond (6930,8536);
+y 7346 at x 6150-6260 other than by scan; `tools/unsure.py` for `lc1_w7304`.
+
+Round 2: one finding, fixed.
+
 ## Not done
 
 - **Task 2, the loads of `r9m_l1w` (= NOT `sl_eq_r5`)**: the net's only undrawn end is the poly
@@ -391,6 +455,9 @@ Round 1: no findings that change a connection.
   logic (`notes/blocks/trunks.md`), not followed here.
 - **`lc1_w7170`, the input of the inverter that drives `rcs_x1`**: the thin metal T1 leaves
   `lc1`'s strip south at (5030-5046,8067), into `lc2`'s (claimed).
+- **`res_b`, `lpstb_b` and `tl5_w3636` beyond the gate column**: three lines of the diagonal poly
+  bundle of `lc1`'s strip, entering it at (5147,6900), (5203,6900) and about (5259,6900)
+  (`lc1`'s Not done: the bundle's other nine lines).
 - `tl5_w5936`'s poly south of (5063,6880): beside and under `lc1`'s M_a, into `lc1`'s strip.
 - `lc1_w7734` (a buffered copy of the reset) north of `lc1`'s strip: V4, x 5288-5310, "turns east
   at y 6720" (`lc1`); `lc1_w7864`'s branch north at x 5713 (followed by `lc1` to y 6365).

@@ -258,6 +258,11 @@ N M 6559,8300 lc2_w8172                # lc2's name for the metal that arrives h
 #     x 5237  pad (5237,6803)  metal south              = lc1's V3  (lc1_w7257, gate 3's upper input)
 #   the fifth, x 5063, has no pad: it runs on south in the open beside M_a and under it from
 #   y ~6890 (not followed: notes, Not done);
+#   THREE OF THE PADS ARE NOT THE POLYS' ENDS (review round 1): below the pads of x 5150, x 5192
+#   and x 5237 the poly goes on south (in the open at x 5139-5155; under V2; under V3) and bends
+#   south-east at y 6875-6910 into the diagonal poly bundle of lc1's strip, which lc1 has not
+#   drawn. Drawn here to the strip's edge (y 6900; lpstb_b's to y 6878, where it starts to bend
+#   under V3). Only the pad of x 5107 (rcs_x1) is an end: open field below it.
 #   lc1 draws the four metals from y 6900 (M 5080,6900 / M 5125,6900 / M 5190,6900 / M 5235,6900).
 #
 # Evidence:
@@ -276,6 +281,12 @@ N M 6559,8300 lc2_w8172                # lc2's name for the metal that arrives h
 #    (x 5116-5128, from y 6798) each stand 6-9 px (the ring) west of their pad's centre and
 #    nothing is above them; V2 (x 5185-5194) and V3 (x 5230-5242) hang from their pads; all four
 #    are bright in both chips down to y 6905. M_a shifts 6 px west at y 6885-6895.
+#  - the polys below the pads: the reviewer's k_pads234.png (4.4x, four shots), j_bundle.png
+#    (cache/scratch/eof/review-2/); textmap 5128 6812 5275 6918 3 --acid: chip-2 stripped F (poly)
+#    at x 5143-5155 from y 6824 to 6917; clean shot poly (6-9) under V2 at x 5188-5203 down to
+#    y 6884, shifting to x 5197-5209 at y 6902; under V3 at x 5233-5245 down to y 6875, shifting
+#    east below; px col 5146 6776 6916 10 acid: red over green by 40-80 from y 6826 down
+#    (px col 5104, below rcs_x1's pad: 150/130/88, field).
 P 5107,6345 y6765 w=20              # rcs_x1's line
 P 5090,6742:5122,6778
 C 5105,6761
@@ -285,16 +296,19 @@ P 5150,6345 y6808 w=20              # tl5_w3636's line
 P 5132,6786:5164,6820
 C 5147,6803
 M 5147,6803 x5123 y6905 w=14        # onto lc1's M_b
+P 5147,6815 y6900 w=16              # the poly on south of the pad, in the open, to lc1's strip
 N P 5150,6500 tl5_w3636
 P 5192,6345 y6850 w=20              # res_b's line
 P 5174,6828:5206,6862
 C 5190,6845
 M 5190,6845 y6905 w=14              # onto lc1's V2
+P 5194,6858 5195,6884 5203,6900 w=14        # the poly on south under V2, bending south-east
 N P 5192,6500 res_b
 P 5237,6345 y6808 w=20              # lpstb_b's line
 P 5221,6786:5253,6820
 C 5237,6803
 M 5236,6803 y6905 w=14              # onto lc1's V3
+P 5239,6815 y6878 w=14              # the poly on south under V3 (it bends south-east from y ~6878)
 N P 5237,6500 lpstb_b
 P 5063,6345 y6880 w=18              # tl5_w5936's line, on south (no pad; not followed below y 6880)
 N P 5063,6500 tl5_w5936

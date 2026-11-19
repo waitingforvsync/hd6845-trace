@@ -38,5 +38,8 @@ res_b      P  5182-5202,6345     in  from tl5's bus line x 5192
 res_b      M  5183-5197,6905     ?   onto lc1's V2 (lc1_w7343: the NOR's lower input)
 lpstb_b    P  5227-5247,6345     in  from tl5's bus line x 5237
 lpstb_b    M  5229-5243,6905     ?   onto lc1's V3 (lc1_w7257: the NOR's upper input)
+tl5_w3636  P  5139-5155,6900     ?   the poly on south of the pad (5147,6803): into lc1's diagonal bundle (bends south-east at about (5150,6910))
+res_b      P  5196-5210,6900     ?   the poly on south of the pad (5190,6845), under V2, bending south-east: into lc1's diagonal bundle
+lpstb_b    P  5232-5246,6878     ?   the poly on south of the pad (5237,6803), under V3; bends south-east from here (seen to about (5259,6900)): into lc1's diagonal bundle
 tl5_w5936  P  5053-5073,6345     ?   from tl5's bus line x 5063
 tl5_w5936  P  5054-5072,6880     ?   on south beside lc1's M_a and under it from y ~6890 (not followed)

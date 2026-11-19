@@ -124,6 +124,10 @@ inputs of the NOR at the top of the left-centre gate column: **`lc1_w7304` = NOR
   masters load 0 while reset holds that latch clear) and of `tl4`'s cross-coupled pair;
 - `lc1_w7734` leaves the gate column north and turns east (not followed).
 
+Below their pads the two pin lines and this copy of the reset each go on in poly into the
+diagonal bundle of the left-centre strip (three of its undrawn lines): the NOR and these clears
+are not all they reach.
+
 Firm for the NOR, its three copies and the four joins (no uncertain item on them); the latches'
 own equations are marked as before. Believed: this is the datasheet's reset, which RES gives
 only while LPSTB is low (the datasheet's wording was not re-read). **`rcs_x1`, the clear of the
