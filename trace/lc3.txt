@@ -391,7 +391,7 @@ N P 5475,10300 rst_n
 # v at nine cuts): lc2's four through lines each step one track west (y 9280, 9322, 9366, 9410), turn west (y 9538, 9581, 9626,
 # 9669) and run south four tracks further west; a fifth line enters from the east at y 9455 and does the same (y 9712); two more
 # enter at y 9756 and y 9798 and turn south. No contact on any of them but the pads of the rows below.
-M 6299,9225 y9280 x6255 y9538 x6082 y10400 w=14# lc2_x6299: to x 6082
+M 6299,9225 y9280 x6255 y9538 x6082 y10400 w=14# inh_src: to x 6082
 M 6342,9225 y9322 x6299 y9581 x6125 y10400 w=14# lc2_x6342: to x 6125
 M 6386,9225 y9366 x6342 y9626 x6169 y10400 w=14# lc2_x6387: to x 6169
 M 6430,9225 y9410 x6386 y9669 x6212 y10400 w=14# lc2_x6432: to x 6212, through the pad (6211,9948) of stage B0's clock row

@@ -59,8 +59,8 @@ inh_src     P  8930,16728-16746   ?    the row west of the tap pad (8966,16737):
 inh_src     P  8930,16163-16181   ?    the row west of the tap pad (8962,16172): into the gate column
 inh_src     P  8930,15248-15266   ?    the row west of the end pad (8966,15260)
 
-# Piece isrc4: inh_src is lc2_x6299 (run 9)
-inh_src     P  7550,14904-14924   in   onto the east end of busl's poly row of lc2_x6299 (one net); the driver is beyond it: lc1's gate 5, rst_a (piece isrc5)
+# Piece isrc4: inh_src is lc2's through line x 6299 (run 9)
+inh_src     P  7550,14904-14924   in   onto the east end of busl's poly row of inh_src (one net); the driver is beyond it: lc1's gate 5, rst_a (piece isrc5)
 inh_src     P  8326,16294-16312   out  the row's east end: a gate at x 8283-8311 over an undrawn diffusion column (the clear row of a latch unit: bc1 / bc3)
 inh_src     P  8326,16900-16918   out  the tap row's east end: the same 606 px lower (bc3)
 
@@ -95,4 +95,4 @@ bd1_n2        M      13515-13527,16260        in   piece n2w: from bd1's metal x
 bd1_n2        M      6705-6718,15000          out  piece n2w: on north up the left bus field into busl's region (follower: to (6948,8707), not read)
 
 # Piece isrc5: inh_src is rst_a (run 10). The poly south of rst_a's pad (5147,6803) is drawn on to lc2's metal end.
-rst_a       M  6450,8623-8637     out  onto lc2's diagonal metal end (lc2_x6299, its port (6450,8630)): one net, down the left-centre strips to inh_src's loads
+rst_a       M  6450,8623-8637     out  onto lc2's diagonal metal end (its first through line, inh_src: its port (6450,8630)): one net, down the left-centre strips to inh_src's loads

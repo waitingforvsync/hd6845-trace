@@ -319,3 +319,23 @@ In order of value:
 - Routing field: the 13-line bus (where `bc1_s0`, `bc1_s1` and the other 11 lines come
   from and go), data lines 3-6 east of x 8040, the supply joints.
 - Channel tracks x 7924, 7969 and 8012 below y 15865.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, third batch)
+
+- "Believed, not traced: `bc1_ld_a` goes up the bundle left of `cdp4` to the strobe of its 8-bit row C
+  latch (`cdp4_ld`)" and Not done "Where `bc1_ld_a` goes above y 14050": traced (`busl`, piece `ctl`):
+  x 7448 north to y 13982, east to x 7556, north over a box to the pad (7556,12983) on `cdp4_ld`'s row.
+  Marked (one `?M`; AMB-038).
+- "the 13 bus lines at their left ends (x 7790)": the poly rows arriving there are identified for seven
+  (`busl`, piece `lc9`): row y 14567 `lc3_e9798`, 14611 `lc2_w9079`, 14654 `lc3_e9756`, 14697 `lc3_w9470`,
+  14740 `lc2_w8450`, 14784 `lc3_w9947` (the ripple counter's clock), 14914 `inh_src`; row y 14523 is two
+  nets (`rcs_e4` to the pad (7012,14522), another from the pad (7100,14522) east), as R10 says.
+- Survey ("Not traced: track 7969 (from a contact at (7880,14910) via a horizontal at y 14912, down the
+  whole channel to a contact at (7968,16300))") and Not done ("Channel tracks x 7924, 7969 and 8012 below
+  y 15865"): track 7969 is drawn by `eof` (piece `isrc4`) and is `inh_src`; its top contact (7880,14914)
+  is on the poly row y 14914 that `busl` brings from the west.
+- The six verticals "from above ending on the lines" (x 7189 .. 7404, drawn from y 14040) are
+  `cdp3_g_c2` .. `c7`, line g of `cdp3`'s row A cells (`busl`, piece `d6`).
+- A seventh track (x 7145 / 7187 / 7231 between y 13680 and 15000, running on to about (7100,16279)) is
+  `tc2_sr_g` (`busl`, piece `sr`): it lies on line 3 at y 14176 (x 7145-7187) and crosses line 6 at
+  (7231,14304) without a contact. Its driver is expected in the group x 7000-7860, y 15000-16300.

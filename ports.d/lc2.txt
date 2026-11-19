@@ -69,8 +69,8 @@ vss         M  5084-5148,9256  -    the east rail on south into lc3
 vss         D  5104-5158,9250  -    the VSS node (contact (5124,9224)) of the stack under the east rail south of the east column, on into lc3
 lc2_w9171   D  5062-5078,9256  ?    the stack's top node leaves by the diffusion strip beside that rail, on into lc3 (it ends about y 9290)
 # Run 10, piece P: through lines and row ends
-lc2_x6299   M  6450,8630       ?    through line, east edge
-lc2_x6299   M  6299,9233       ?    through line, south edge
+inh_src   M  6450,8630       ?    through line, east edge
+inh_src   M  6299,9233       ?    through line, south edge
 lc2_x6342   M  6450,8692       ?    through line, east edge
 lc2_x6342   M  6342,9233       ?    through line, south edge
 lc2_x6387   M  6450,8756       ?    through line, east edge

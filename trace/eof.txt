@@ -444,8 +444,8 @@ C 8688,17737
 
 # ============================================================================================
 # Piece isrc4 (run 9, 2026-11-19): inh_src on from its fourth open end, the poly west of the pad
-# (8688,17737). Wiring only, no uncertain item. It ends on busl's poly row of lc2_x6299:
-#     inh_src IS lc2_x6299, the first through line of the left-centre strips
+# (8688,17737). Wiring only, no uncertain item. It ends on busl's poly row of inh_src:
+#     inh_src IS lc2's through line x 6299, the first through line of the left-centre strips
 # (lc2's metal from its east edge (6450,8630); lc3 and busl bring it down the left bus field to the
 # row y 14914). On the way two more gate rows (the clear rows of two undrawn latch units under the
 # rail x 8336-8384: bc1 column A / bc3; copies of tl1's cells by findcell, not placed here).
@@ -478,8 +478,6 @@ C 8688,17737
 #      with a contact (7880,14914);
 #   E  the pad's poly row y 14904-14924 west, under bc1's metal x 7752-7795 (it lies on the row for
 #      43 px; no pad, no hole), RL3 and two more metals, to busl's row end at x 7550.
-@alias rst_a lc2_x6299                # since piece isrc5 (below) the net's canonical name is rst_a: this
-                                      # line read "@alias inh_src lc2_x6299" until run 10
 # A
 P 8053,17736 x8680 w=16
 P 8036,17718:8070,17752
@@ -750,7 +748,7 @@ M 6711,16185 y15000 w=13
 N M 6711,15600 bd1_n2
 
 # ============================================================================================
-# Piece isrc5 (run 10, 2026-11-19): inh_src (lc2's through line lc2_x6299) followed from lc2's
+# Piece isrc5 (run 10, 2026-11-19): inh_src (lc2's first through line) followed from lc2's
 # east edge (6450,8630) back to its source. Wiring only, no uncertain item. It ends on this file's
 # own poly of piece x1, rst_a's line below its pad (5147,6803):
 #     inh_src IS rst_a, the buffered NOR(lpstb_b, res_b) of lc1's gate 5
