@@ -270,7 +270,7 @@ data row. Its own wiring, drawn by hand:
 | x 6248-6264 | `rst_c`, latch D's clear | ends on a pad (6254,8214); a poly cross-under x 6247-6270 south beneath A and B to a pad (6256,8344); a metal x 6246-6266 south from it, continuous to latch C's clear pad (6257,8731) (`v 6256 8325 8750`). **Latch C's clear is `rst_c`** |
 | x 6287-6307 | `lc1_w7780`, latch D's data | ends on the data row's pad |
 | x 6332-6350 | `lc2_w8474` | ends on a pad (6341,8214); poly south under A and B (x 6333-6357), west along y 8462-8485 under the metals x 6256 and x 6168, down a link x 6078-6096, west along y 8506-8523 under the VSS rail and the thin metals, south under the VCC rail (x 5859-5877, salmon in the clean shot to y 8652: `px.py col 5868`) and west again from under it along y 8634-8652. Drawn to x 5835; **it runs on west** (`tl5_tracks.py rows row 5560 5900 4 8642`: poly to x 5560 and beyond) |
-| x 6422-6440 | `inh_ck` | lies on the poly of the next line from y 8117, turns east at y 8163-8181 and leaves the strip. Not on anything here (Ambiguity 3) |
+| x 6422-6440 | `rst_ck` | lies on the poly of the next line from y 8117, turns east at y 8163-8181 and leaves the strip. Not on anything here (Ambiguity 3) |
 | x 6462-6480 (20 px east of the strip) | **latch C's data `tl3_w3982`** | ends on a pad (6470,8127); its poly goes west 25 px and south (x 6420-6443) under A and B to a pad (6429,8386); a metal south, south-west on a diagonal and west along y 8508-8528 to a pad (6298,8516); a poly link west to a pad (6212,8516); a metal x 6202-6222 south to latch C's data pad (6214,8906) (`v 6212 8500 8925`, `h 8518 6285 6415`, `v 6430 8375 8505`) |
 
 The ten pads: each has a dark ring with a bright centre in both metal shots. Six have a hole of `g` in the
@@ -659,8 +659,8 @@ Run 3 (latch D's lower unit and the bus field):
 | `rst_c` | P | 6450, 8911-8936 | out | round 3: the poly from latch C's clear pad, south-east out of the strip |
 | `lc2_w8341` | M | 5508-5524, 8067 | out | run 4: latch B's output Na, north into `lc1` |
 | `rst_c` | M | 5466-5486, 8067 | in | run 4: latch B's clear (meets `lc1`'s port) |
-| `inh_ck` | M | 6422-6440, 8067 | ? | from the north |
-| `inh_ck` | M | 6450, 8163-8181 | ? | on east |
+| `rst_ck` | M | 6422-6440, 8067 | ? | from the north |
+| `rst_ck` | M | 6450, 8163-8181 | ? | on east |
 | `tl3_w3982` | M | 6462-6480, 8067 | in | latch C's data, north (20 px east of the strip) |
 | `lc2_w9124` | M | 5967-5981, 8067 | out | run 4: the thin metal, NOT latch C's Na, north into `lc1` (`lc1`'s notes, Ambiguity 8: it crosses the upper unit) |
 | `vcc`, `vss` | M | 5840-5890 and 5659-5705, 9256 | - | run 5: both rails drawn on to `lc3`'s pieces |
@@ -692,7 +692,7 @@ Run 3 (latch D's lower unit and the bus field):
 
 3. **The metal x 6422-6440 over the top of latch C's data poly (y 8117-8181): no contact** (run 3). The metal
    comes from the north, lies on the poly x 6420-6443 for 64 px and turns east at y 8163-8181; the poly's top
-   turns east to its own pad (6470,8127), on the metal x 6462-6480. A contact here would join `inh_ck` and
+   turns east to its own pad (6470,8127), on the metal x 6462-6480. A contact here would join `rst_ck` and
    `tl3_w3982`. Against one: both metal shots are bright along the 64 px with one dark bar at y 8110-8120 (the
    poly's top edge) and none below it, so no ring (`textmap.py 6396 8030 6462 8204 3 --acid`); the clean shot
    under it has values 3-5 and no hole; the poly is not a stub (it has its pad). For one: the clean shot under
@@ -819,8 +819,8 @@ Run 3 (2026-11-18 16:28 -0600):
 - **`lc2_w8474`'s poly west of (5400,8517)** (run 4: drawn to there; it runs on west past x 5150), and its
   metal x 6332-6350 north of y 8067 (`lc1` has no port there).
 - North of y 8067 (in `lc1`'s strip, not drawn by it): latch C's enable metal x 6159-6177, the node's row
-  x 6401-6415 (`lc2_w8083`), the metal x 6422-6440 (`inh_ck`), latch C's data metal x 6462-6480.
-- East of x 6450: metals A (`tc2_sr_g`), B (`lc2_w8646`) and the turn of `inh_ck` (y 8163-8181).
+  x 6401-6415 (`lc2_w8083`), the metal x 6422-6440 (`rst_ck`), latch C's data metal x 6462-6480.
+- East of x 6450: metals A (`tc2_sr_g`), B (`lc2_w8646`) and the turn of `rst_ck` (y 8163-8181).
 - The thin metals through latch B (x 5748-5764) and the one drawn `?` here: R41's question (Ambiguity 6).
 - From review round 2: the thin metal x 5962-5982 is dark for about 35 px over the `?` tie box of latch D's lower
   unit at about (5978,8118), with a bright spot in chip 2 only (x 5975-5981, y 8109-8121), none in chip 1 and no

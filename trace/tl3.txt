@@ -335,7 +335,7 @@ B 3950,4282:3974,4309
 @end
 @inst tl3_enor 0,0 tag=e3
 @inst tl3_enor 0,825 tag=e5
-# ---- wiring of the upper unit e3 (y 4165-4335):  tl3_e4243 = NOR(inh_ck, rcs_mv)
+# ---- wiring of the upper unit e3 (y 4165-4335):  tl3_e4243 = NOR(rst_ck, rcs_mv)
 # gate 1: row east to a pad with a contact (4148,4200) on track A, a metal x 4141-4155 that runs
 # south to y 5008 (follow.py 4148 4290 S) with pads at (4146,4510), (4146,4681), (4146,4900) and
 # (4147,5005) (textmap 4130 Y-14 4168 Y+14 3 at each: hole in the clean shot, bright centre in
@@ -353,7 +353,7 @@ P 4130,4667:4166,4695
 C 4146,4681
 P 4130,4886:4166,4914
 C 4146,4900
-N M 4148,4400 inh_ck
+N M 4148,4400 rst_ck
 # gate 2: row east under track A (no hole: textmap 4128 4184 4256 4304 3) to a pad with a
 # contact (4190,4288) on tla's track x 4192, rcs_mv
 P 4105,4280:4180,4300
@@ -367,7 +367,7 @@ P 4218,4226:4256,4262
 C 4236,4246
 M 4236,4245 x4250 w=20
 N P 4170,4242 tl3_e4243
-# ---- wiring of the lower unit e5 (y 4990-5160):  tl3_w4978 = NOR(inh_ck, tl4_w4590)
+# ---- wiring of the lower unit e5 (y 4990-5160):  tl3_w4978 = NOR(rst_ck, tl4_w4590)
 # gate 1: row east to the pad (4147,5005), the south end of track A
 P 4105,5016:4150,5034
 P 4130,4990:4166,5024
@@ -407,8 +407,8 @@ N P 4200,5114 tl4_w4590
 # was drawn again, re-read item R34), so they are placed from text maps of this copy and the
 # units are written out here, not instanced.
 #   tl3_e4537 = NOT tl3_e4635
-#   tl3_e4720 = NOT( tl3_e4635 AND inh_ck  OR  tl3_e4852 )
-#   tl3_e4852 = NOT( rcs_x1  OR  inh_ck AND tl3_e4537  OR  tl3_e4720 )
+#   tl3_e4720 = NOT( tl3_e4635 AND rst_ck  OR  tl3_e4852 )
+#   tl3_e4852 = NOT( rcs_x1  OR  rst_ck AND tl3_e4537  OR  tl3_e4720 )
 # ---- upper unit (y 4514-4775)
 D 4008,4577:4058,4621                 # rail's VSS box
 C 4031,4599                           # ring centre in both metal shots (textmap 4000 4570 4064 4626 3)
@@ -552,8 +552,8 @@ M 4236,4860 y4452 w=13
 P 4218,4446:4254,4474
 C 4236,4461 s=20x20
 P 4118,4453:4225,4466
-# ---- inh_ck's pad (4146,4510): its row y 4496-4510 runs east under two tracks without a
-# contact (textmap 4126 4486 4254 4520 3) and out of the strip: it is tl4's row inh_ck
+# ---- rst_ck's pad (4146,4510): its row y 4496-4510 runs east under two tracks without a
+# contact (textmap 4126 4486 4254 4520 3) and out of the strip: it is tl4's row rst_ck
 # (gate 2 of tl4's three-input NOR)
 P 4160,4496:4250,4510
 # ---- rcs_mv's track (tla: x 4192, y 4098-4748) ends on a pad with a contact (4192,4743); the
@@ -734,7 +734,7 @@ N P 4200,5241 tl3_e5240
 # ends on a pad with a contact (4278,5198) at the south end of a metal x 4279, whose north end
 # is a pad with a contact (4278,4636) on the row of tl3_e4635, latch C's data (textmap 4246 5168
 # 4312 5232 3, 4240 4606 4312 4664 3; follow.py 4279 5165 N). That track is tl4's to draw: open join.
-# The thin metal x 4100-4112 (inh_ck's south arm) passes over the box: taken as no contact
+# The thin metal x 4100-4112 (rst_ck's south arm) passes over the box: taken as no contact
 # (a 6 x 9 px spot of R 160-185 at (4101,5202) in a 45 px dark stretch, no hole in the clean shot;
 # its real contact (4104,5633) has R 190-220 over 12 x 12 px and a hole).
 D 4050,5203:4084,5222
@@ -891,10 +891,10 @@ N P 4150,5458 c4l_l3
 # NOR 3's output.
 P 3530,5494:4250,5508
 N P 3740,5500 tl3_w4546
-# ---- row y 5621-5641 east of the pad (4104,5633): on to x 4250 = tl4's inh_ck. Track A, latch
-# C's enable, is inh_ck.
+# ---- row y 5621-5641 east of the pad (4104,5633): on to x 4250 = tl4's rst_ck. Track A, latch
+# C's enable, is rst_ck.
 P 4150,5621:4250,5641
-N P 4200,5631 inh_ck
+N P 4200,5631 rst_ck
 # ---- two metals from tl2's strip that turn south through the foot (corners read from
 # textmap 3551 5425 3582 5600 3 and 3593 5360 3624 5600 3; no hole under either)
 M 3533,5373 x3608 y5660 w=13          # tl2's track J arm (tl3_w3982); follow.py: on south to (3608,5942)
@@ -941,10 +941,10 @@ M 4105,3746 y3773 w=12
                                       # x 4108-4120 in the clean shot (r10_tmE.png, 5x)
 M 4105,3967 y4053 w=12
 ?M 4105,4051 y4108 w=12               # over rcs_in1's node box: dark y 4054-4104 (a spot at (4102,4074))
-# the net: inh_ck (track A, by the foot's row y 5631) reaches the row y 2899 through these six ?M:
+# the net: rst_ck (track A, by the foot's row y 5631) reaches the row y 2899 through these six ?M:
 # names gathered by alias, not merged (trap 17)
-@alias inh_ck tl1_w3594
-@alias inh_ck tl3_w3722                 # tl2 aliases tl3_w3722 (NOR 1's gate 1, on track H) to tl1_w3594
+@alias rst_ck tl1_w3594
+@alias rst_ck tl3_w3722                 # tl2 aliases tl3_w3722 (NOR 1's gate 1, on track H) to tl1_w3594
 # ====================================================================
 # Run 11: south of the foot, y 5660-6350. Wiring only: no device and no diffusion
 # (opendiff 3533 5660 4250 6350: none). Read from text maps of both metal shots, the clean shot

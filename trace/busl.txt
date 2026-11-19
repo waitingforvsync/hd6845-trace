@@ -470,7 +470,7 @@ N M 7468,11000 cdp3_g_c7
 
 # =====================================================================================
 # Piece sr (run 6, 2026-11-19): tc2_sr_g (= the wire `lc1` called w7908, the enable of latch D; = tc2_sr_g, row 2
-# of the gate on inh_ck's tap row) runs on from eofw's corner pad (7446,8732) down the whole
+# of the gate on rst_ck's tap row) runs on from eofw's corner pad (7446,8732) down the whole
 # field. trace/eofw.txt draws the metal south of the pad to y 8800 (M 7466,8745 y8800); from
 # there one metal: south to y 8910, a diagonal south-west along x+y = 16377 (the south-east line
 # of the diagonal bundle, 57 px north-west of piece d6's row-end pads) to (7209,9168), south

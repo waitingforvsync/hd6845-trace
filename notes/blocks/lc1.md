@@ -48,8 +48,8 @@ from the east), its inverse `rst_n`, and three inverters of that (`rst_a`,
 `rst_b`, `rst_c`: three copies of NOR's output, each leaving east on its own row),
 then `lc1_w7990` = NOT `rst_c`, which leaves south. Gate 2 is a separate inverter whose
 input arrives from the south on a thin metal and whose output leaves north on a metal.
-Believed, not traced: three buffered copies of one signal is the pattern of `inh_ck`,
-`inh_rc`, `inh_lat` (`notes/operation.md`).
+Believed, not traced: three buffered copies of one signal is the pattern of `rst_ck`,
+`rst_rc`, `rst_lat` (`notes/operation.md`).
 
 ## Inventory
 
@@ -424,10 +424,10 @@ Round 4: no findings that change a connection.
 ## Corrections (coordinator, from the handoffs of 2026-11-19)
 
 - "Two metals lie on [`lc1_w7040`'s row] lengthwise without contact: ... x 6098-6307": that metal is
-  `inh_ck` (`eof` run 2). Ports: the second through line is `res_b`, the third through line is `lpstb_b`, `rcs_x1`
+  `rst_ck` (`eof` run 2). Ports: the second through line is `res_b`, the third through line is `lpstb_b`, `rcs_x1`
   drives `rcs_x1`, line X (the first through line of the left-centre strips) is `rst_a`. "Believed, from the user: ... `rst_c` a chip-wide reset
   of some kind": traced, it is a buffered NOR(`lpstb_b`, `res_b`); the believed "three buffered copies ...
-  the pattern of `inh_ck`, `inh_rc`, `inh_lat`" does not hold: they are copies of the reset. Not in the
+  the pattern of `rst_ck`, `rst_rc`, `rst_lat`" does not hold: they are copies of the reset. Not in the
   ports: an undrawn poly (`tl3_w3982`) enters at about (5065-5083, 6900), beside and under M_a. The
   polys of `res_b`, `lpstb_b` and the reset copy run on south below their pads into the diagonal bundle
   at (5150,6900), (5203,6900), (5266,6900): three of the bundle's undrawn lines.
@@ -437,7 +437,7 @@ Round 4: no findings that change a connection.
   metal T1 runs on to a pad (5232,8214) and a row west to a track down `lc2`'s west cluster: it is
   `lc2_w8474`, the clear of `lc2`'s counter. `lc1_w7990` drives `lc2`'s gate 9, whose output metal
   re-enters at x 5118-5136 and runs far north. Wires crossing y 8067 with no port here: `lc2_w8646`
-  (x 6159-6177), `lc2_w8083` (poly x 6401-6415), `lc2_w8474` (x 6332-6350), `inh_ck` (
+  (x 6159-6177), `lc2_w8083` (poly x 6401-6415), `lc2_w8474` (x 6332-6350), `rst_ck` (
   x 6422-6440), `lc2_w8341` (x 5508-5524), `lc2_w9124` (thin metal x 5967-5981), row 4's metal
   (x 5422-5438). Geometry: in the `tl1_ub` instance the pad of `lc1_w7862` has its hole at (6105,8265)
   against (6115,8272) drawn.
@@ -449,7 +449,7 @@ Round 4: no findings that change a connection.
   (6450, 7812-7832) is another net: row 3 of `eof`'s gate `g7700` (`eof_w7777`).
 - That poly runs on west inside this strip to a pad with a contact (6339,7824), whose metal x 6333-6349
   goes south onto `lc2`'s metal of `lc2_w8474`: drawn by `eofw` (`trace/eofw.txt`, wire 3). So the gate
-  on `inh_ck`'s tap row is one more load of `lc1_w7170`.
+  on `rst_ck`'s tap row is one more load of `lc1_w7170`.
 - **`tc2_sr_g`, latch D's enable, is `tc2_sr_g`**, the gate line of `tc2`'s latch (`eofw`: a metal
   staircase from `lc2`'s end (6450,8259) to a T (7273,8710), north to row 2 of `eof`'s gate and on to
   `tc2`'s metal (7837,6400); firm, resting on two joins read without `?`: `notes/blocks/eofw.md`,

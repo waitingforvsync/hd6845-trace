@@ -1,6 +1,6 @@
 # tl1: top-left random logic, westmost strip (what tla did not draw)
 2540,4778:2835,5000   logic   driver of rcs_e4 | rcs_e4 = NOR(tl1_w4678, tl1_w4937): wide two-input NOR under and west of rail R1, output by the metal x 2500 into the step logic's e4 pad (2497,5238)
-2540,3558:2842,3742   logic   NOR in the west column | tl1_w3636 = NOR(tl1_w3594, tl1_w3678), tl1_w3594 = inh_ck (marked, AMB-033); output by the metal x 2283: the first latch's enable
+2540,3558:2842,3742   logic   NOR in the west column | tl1_w3636 = NOR(tl1_w3594, tl1_w3678), tl1_w3594 = rst_ck (marked, AMB-033); output by the metal x 2283: the first latch's enable
 2535,4215:2835,4345   logic   inverter in the west column | tl1_w4243 = NOT tl1_w4287 (rail gate under R1); output by the metal x 2283 to the second latch (its data)
 2540,3732:2842,3982   logic   first latch, upper half | tl1_w3752 = NOT tl1_w2857; tl1_w4287 = NOT(tl1_w2857 AND tl1_w3636 OR tl1_w4070): copy of the unit at y 4340-4590
 2540,3982:2842,4215   logic   first latch, lower half | tl1_w4070 = NOT(rcs_x1 OR tl1_w3636 AND tl1_w3752 OR tl1_w4287): open while tl1_w3636 is high, data tl1_w2857, cleared by rcs_x1; copy of the unit at y 4590-4800

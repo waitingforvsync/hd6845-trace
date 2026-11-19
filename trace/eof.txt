@@ -26,7 +26,7 @@
 #   rdp3: L7, jog onto L6 (y 11507), jog onto L5 (y 12313), poly link y 12826, L9 to y 13480;
 #   LINK B (here): L9 straight from y 13480 to bd1's track k15 at y 14690 (its net rc_eq_r4);
 #   bd1: k15, jog west at y 15087, contact (13655,15391), the poly of gate P2 (the latch's
-#     upper half, in series with inh_lat) and of P4 (inverter A).
+#     upper half, in series with rst_lat) and of P4 (inverter A).
 #
 # Evidence for link A:
 #  - a_top.png (2.8x, metal / chip-2 stripped / clean): the poly row from L0's contact runs
@@ -175,16 +175,16 @@ N M 3560,2512 sl_eq_r5_n                # tl2's name for the metal that arrives 
 # this file holds three pieces of it, each under the name its neighbour uses there).
 
 # ============================================================================================
-# Piece tcwa (run 2): inh_ck from tl6's end (6105,6350) to trunks' line S (inh_ck), and a tap.
+# Piece tcwa (run 2): rst_ck from tl6's end (6105,6350) to trunks' line S (rst_ck), and a tap.
 # Wiring only.
 #
 # The line's path:
-#   tl6 draws inh_ck's metal x 6105 south to (6105,6350);
+#   tl6 draws rst_ck's metal x 6105 south to (6105,6350);
 #   LINK E (here): the metal runs on south, straight, to a corner (6105,7346); east along y 7346,
 #     lying on lc1_w7040's poly row without a contact, to a corner (6298,7346), 20 px short of the
 #     ring of lc1's pad (6341,7345); south to a corner (6298,7432); east along y 7432 (on another
 #     poly row, no contact) to a corner (6430,7432); south along x 6430, through a pad with a
-#     contact (6427,7648) (the tap, below), to y 8067, where lc2 draws it on (inh_ck:
+#     contact (6427,7648) (the tap, below), to y 8067, where lc2 draws it on (rst_ck:
 #     M 6431,8067 y8172 x6450);
 #   lc2: the corner (6431,8172) and east to x 6450;
 #   LINK F (here): east along y 8172 to a corner (6559,8172), 18 px south of the ring of another
@@ -194,7 +194,7 @@ N M 3560,2512 sl_eq_r5_n                # tl2's name for the metal that arrives 
 #     x6690: "continues left (not followed)");
 #   trunks: the staircase to the contact (7034,8535), a poly under-pass to the contact (7034,8797),
 #     the metal down the left bus field (x 6862, x 6798), the bottom bus line y 18428 and line L4
-#     to the output of the lone inverter of the input buffer row: the net inh_ck (= NOT inh_n).
+#     to the output of the lone inverter of the input buffer row: the net rst_ck (= NOT rst_a_n).
 #   THE TAP: from the pad (6427,7648) a poly row y 7640-7656 runs east across the crossing field,
 #     under two dozen vertical metals without a pad, to a gate group nobody has drawn under the wide
 #     metal x 7550-7600 (its diffusion from x 7540): drawn to x 7530 (notes, Not done).
@@ -230,17 +230,17 @@ N M 3560,2512 sl_eq_r5_n                # tl2's name for the metal that arrives 
 #    centre, hole; the staircase: tl5_tracks.py v 6757 8380 8440, h 8452 6770 6920, v 6930 8465
 #    8525, h 8536 6945 7030: bars only; follow.py 6330 7432 E gives every corner as drawn.
 M 6105,6345 y7346 x6298 y7432 x6430 y8072 w=14     # link E
-N M 6105,6800 inh_ck
+N M 6105,6800 rst_ck
 P 6412,7632:6446,7664               # the tap's pad
 C 6427,7648
 P 6427,7648 x7530 w=16              # the row east; it goes on as row 1 of the gate (piece g7700, below)
 M 6445,8172 x6559 y8367 x6695 w=14  # link F: lc2's end (x 6450) to trunks' end (x 6690)
-N M 6559,8300 inh_ck                # lc2's name for the metal that arrives here
-# In the full extraction inh_ck (then under three names; the clock block's and inrow's name for the
+N M 6559,8300 rst_ck                # lc2's name for the metal that arrives here
+# In the full extraction rst_ck (then under three names; the clock block's and inrow's name for the
 # net of trunks' line S) are one net. Read by itself this file holds two pieces of it.
-# inh_ck is kept as the name the net is shown under only because tl3 and tl6 alias five other
+# rst_ck is kept as the name the net is shown under only because tl3 and tl6 alias five other
 # names to it and the extractor wants every alias to point straight at the one shown name; the
-# net IS inh_ck, and the rename to inh_ck was proposed (done 2026-11-19) in the handoff (notes, Logic).
+# net IS rst_ck, and the rename to rst_ck was proposed (done 2026-11-19) in the handoff (notes, Logic).
 
 # ============================================================================================
 # Piece x1 (run 2): the poly bus that leaves tl5's strip south across y 6350, down to its pads,
@@ -504,12 +504,12 @@ P 7540,14914 x7880 w=20
 N P 7700,14914 rst_a
 
 # ============================================================================================
-# Piece g7700 (run 5): the gate at the end of inh_ck's tap row (task (c) of the queue row).
+# Piece g7700 (run 5): the gate at the end of rst_ck's tap row (task (c) of the queue row).
 #   One gate between the VSS rail of the central datapath's column 0 (here x 7552-7598) and the
 #   wide metal x 7725-7775 (VCC, by the load):
-#       tc2_r5589 = NOT( eof_w7777 AND (inh_ck OR tc2_sr_g) )
+#       tc2_r5589 = NOT( eof_w7777 AND (rst_ck OR tc2_sr_g) )
 #   A diffusion column under the rail (x 7541-7611, y 7613-7820) is crossed by three poly rows:
-#   row 1 (inh_ck, the tap row), row 2 (tc2_sr_g) and row 3 (eof_w7777). Between rows 1 and 2
+#   row 1 (rst_ck, the tap row), row 2 (tc2_sr_g) and row 3 (eof_w7777). Between rows 1 and 2
 #   the rail's one contact (7572,7684): the source of both. The drain north of row 1 and the
 #   drain south of row 2 are joined east of the rail by a diffusion ring (top strip, strap
 #   x 7637-7654, bottom strip) round a field island on which rows 1 and 2 end (they are NOT
@@ -535,7 +535,7 @@ C 7572,7684                          # the one contact, in S (ring in both chips
 D 7600,7613:7654,7628                # ring: top strip, from A east
 D 7637,7613:7654,7757                # ring: the strap
 D 7600,7745:7654,7757                # ring: bottom strip, back to B
-P 7525,7638:7632,7656                # row 1 (inh_ck) on from the tap row's drawn end, to its end cap on the island
+P 7525,7638:7632,7656                # row 1 (rst_ck) on from the tap row's drawn end, to its end cap on the island
 P 7500,7718 x7632 w=20               # row 2 over the column to its end cap (y 7708-7728)
 P 7500,7708:7527,7745                # row 2's widened step
 P 7262,7735 x7527 w=19               # row 2 west (y 7726-7745) to its pad
@@ -644,8 +644,8 @@ N P 4660,9472 eof_w9472
 # read in the chip-2 metal and stripped shots and chip 1's metal shot, which agree; the clean shot is used only where
 # metal protected it (under bd1_n1's metal and beside the VCC rail), because in the open gap it shows edges light and
 # plain features dark (tracing guide, trap 28). Measurements: cache/scratch/eof/survey.md, "Task (e)".
-#     bd1_n2 = NOT( bd1_an AND inh_lat  OR  bd1_n1 )        with bd1_q = bd1_n2 through the tie (uncertain items)
-#     bd1_n1 = NOT( rc_eq_r4 AND inh_lat  OR  bd1_n2 )
+#     bd1_n2 = NOT( bd1_an AND rst_lat  OR  bd1_n1 )        with bd1_q = bd1_n2 through the tie (uncertain items)
+#     bd1_n1 = NOT( rc_eq_r4 AND rst_lat  OR  bd1_n2 )
 # -- the load: a poly block x 13937-13992 from bd1's band (P 13896,15630:13996,15650, the net bd1_q) down over a strip
 # y 15659-15689 that comes west from the VCC land (bd1's D 14000,15567:14048,15687). The same profile as the upper
 # half's load 97 px above (px.py col 13962 15520 15720 4 acid1b,metal1: poly, a dark line, the bright channel, a dark
@@ -678,7 +678,7 @@ P 13895,15618:13909,15640
 # y 15519) and no green field strip (as at y 15657-15703). So bd1_k is bd1_n2: the latch's output leaves west on
 # bd1_k's poly. The top segment joins the ground diffusion under the rail the same way at y 15638-15652 (bd1's ?D,
 # firm here on the same three tests), so rst_a gates a third pull-down of N2:
-#     bd1_n2 = NOT( bd1_an AND inh_lat  OR  bd1_n1  OR  rst_a )
+#     bd1_n2 = NOT( bd1_an AND rst_lat  OR  bd1_n1  OR  rst_a )
 D 13795,15712:13830,15736          # N2 west of the rail, in the gap: onto the strip's lower segment (13 px over bd1's N2; review round 10)
 D 13795,15638:13840,15652          # the strip's top segment east through the gap onto the ground diffusion (vss contact 13845,15657)
 @alias bd1_n2 bd1_k
@@ -735,11 +735,11 @@ C 7600,18082
 P 7422,18081 x7598 w=16
 P 7405,18064:7439,18098
 C 7422,18081
-# --- M: metal west to a corner (6712,18083), north up the left bus field (two tracks west of inh_ck's x 6797)
+# --- M: metal west to a corner (6712,18083), north up the left bus field (two tracks west of rst_ck's x 6797)
 M 7424,18083 x6712 y16517 w=13
 P 6692,16502:6726,16536
 C 6708,16519
-# --- N: poly link under the supply buses y 16230-16490 (like inh_ck's beside it)
+# --- N: poly link under the supply buses y 16230-16490 (like rst_ck's beside it)
 P 6712,16519 y16173 w=18
 P 6694,16156:6728,16190
 C 6710,16173
@@ -760,7 +760,7 @@ N M 6711,15600 bd1_n2
 #      pad with a contact (6513,8538) (textmap.py 6480 8505 6545 8575 3 --acid: ring x 6495-6535,
 #      y 8523-8556, bright centre in both chips);
 #   B  the pad's poly, x 6508-6528, 450 px north to a pad with a contact (6513,8087) (textmap.py
-#      6486 8085 6540 8530 3 --acid; 6486 8000 6580 8100 3). It passes under inh_ck's link F (metal
+#      6486 8085 6540 8530 3 --acid; 6486 8000 6580 8100 3). It passes under rst_ck's link F (metal
 #      y 8166-8178), under eofw's metal of tc2_sr_g, whose vertical arm x 6508-6522, y 8259-8411 LIES ON
 #      IT for 150 px (no ring, no pad, no dark stretch in either chip: tl5_tracks.py v 6515 8262 8408
 #      --half 2), and under an undrawn metal y 8448-8460: no contact with any;
@@ -826,7 +826,7 @@ N P 5800,7257 rst_a
 #    8-17 px at the rows they cross, no break; follow.py --gap 16; eof_mrun.py for the centre lines and the
 #    two diagonals (row cuts y 8510-8750 every 20 px: x + y = 15142 and 15206); overlays k_o3.png (2.2x,
 #    both metal shots), k_o4.png (1.75x, metal and clean);
-#  - the columns: tl5_tracks.py v 6558 8140 8480 and v 6602 8335 8520: no clean-shot hole; inh_ck's link F
+#  - the columns: tl5_tracks.py v 6558 8140 8480 and v 6602 8335 8520: no clean-shot hole; rst_ck's link F
 #    (x 6552-6565, y 8166-8367) LIES ON res_b's column for 200 px without a contact (notes, Ambiguity 5),
 #    and both columns pass under the horizontal metals y 8362-8374 (link F), 8405-8417, 8448-8460;
 #    textmap.py 6528 8438 6630 8524 3 --acid: 18 px of open poly between the metal y 8448-8460 and the

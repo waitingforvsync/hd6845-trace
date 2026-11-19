@@ -183,7 +183,7 @@ C 6470,8127
 M 6471,8067 y8142 w=18
 # a metal x 6422-6440 from the north that turns east at y 8163-8181 and leaves the strip (not on anything here)
 M 6431,8067 y8172 x6450 w=18
-N M 6431,8090 inh_ck
+N M 6431,8090 rst_ck
 # a metal x 6332-6350 from the north ends on a pad (6341,8214); poly south under A and B, west along y 8462-8485
 # under the metals x 6256 and x 6168, down a link x 6078-6096, west along y 8506-8523 under the VSS rail and the
 # thin metals, south under the VCC rail (x 5859-5877) and west again from under it along y 8634-8652: drawn to

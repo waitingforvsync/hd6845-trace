@@ -10,11 +10,11 @@ Run 1 (richtw1's session, Claude Fable 5.2; 2026-11-19 14:47 to 15:45 +0100). Wi
 transistor, no uncertain item. **Done**: each of the three wires that `eof`'s piece `g7700` left at a
 port is followed to a net another package drew.
 
-- **The gate on `inh_ck`'s tap row is now named on every side** (`eof`'s gate, x 7541-7775,
+- **The gate on `rst_ck`'s tap row is now named on every side** (`eof`'s gate, x 7541-7775,
   y 7585-7860):
 
   ```
-  tc2_r5589 = NOT( lc1_w7170 AND ( inh_ck OR tc2_sr_g ) )
+  tc2_r5589 = NOT( lc1_w7170 AND ( rst_ck OR tc2_sr_g ) )
   ```
 
   with the wire `eof` called w7818 = `tc2_r5589` (the output), the wire `eof` called w7718 = `tc2_sr_g` = the wire `lc1` called w7908 (row 2) and
@@ -50,11 +50,11 @@ Extraction: the package by itself 4 nets, 0 transistors, 0 errors, 0 warnings. E
 No transistor. Traced: the four joins, each by one drawn wire with no `?` item, and with them the
 gate's equation in the names above.
 
-- `tools/unsure.py --equations tc2_r5589`: **DEPENDS**, "without ?: NOT((eof_w7777 & inh_ck) |
+- `tools/unsure.py --equations tc2_r5589`: **DEPENDS**, "without ?: NOT((eof_w7777 & rst_ck) |
   (eof_w7777 & tc2_sr_g))". The gate and the joins to `tc2_r5589`, `tc2_sr_g` and `lc2_w8474` are
   firm; only the *name* `lc1_w7170` for row 3's net depends on uncertain items, and they are `lc2`'s
   (`trace/lc2.txt` aliases `lc2_w8474` to `lc1_w7170` across `?` geometry of its staircase).
-- With `inh_ck` high the output is NOT `lc1_w7170`; with it low, NAND(`lc1_w7170`, `tc2_sr_g`).
+- With `rst_ck` high the output is NOT `lc1_w7170`; with it low, NAND(`lc1_w7170`, `tc2_sr_g`).
 - From other packages' notes (not traced here): `lc1_w7170` is the input of `lc1`'s inverter that
   makes `rcs_x1` (`rcs_x1` = NOT `lc1_w7170`) and holds `lc2`'s ripple counter clear while low;
   `tc2_sr_g` is the enable of latch D (`lc1_w7040` = NOT(`rst_c` OR `tc2_sr_g` AND `lc1_w7862` OR

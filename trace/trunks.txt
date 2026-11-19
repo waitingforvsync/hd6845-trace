@@ -94,10 +94,10 @@ M 13120,18471 x13066 y16952 x13025 y12921 w=21   # the rail up the right edge of
 N M 13066,17500 ck_a
 
 # ====================================================================
-# S: output of input-row gate 0 (inrow's inh_ck). Metal down and left, poly under the
+# S: output of input-row gate 0 (inrow's rst_ck). Metal down and left, poly under the
 # diagonal supply metals, up at x 13200, left in poly under the vertical metals, then
 # bus line L4 to the left. At its left end a poly T joins it to bus line L6's left
-# piece (the clock trace's inh_ck: gate g5's input) and to the contact at (10810,18470)
+# piece (the clock trace's rst_ck: gate g5's input) and to the contact at (10810,18470)
 # from which the run to the left of the die starts (clock.md; not yet re-followed).
 M 13849,18590 y18775 x13508 w=18
 C 13522,18774
@@ -267,7 +267,7 @@ C 11240,17475
 P 11222,17460:11262,17492
 P 11250,17476 11062,17476 10940,17598 w=18
 N M 12400,17648 h_eq_r1
-# inh_lat likewise: x 13435 turns south-west at y 16770, runs down x 13300 to a contact
+# rst_lat likewise: x 13435 turns south-west at y 16770, runs down x 13300 to a contact
 # (13303,17688); poly west along y 17691 to a contact (12850,17691); metal west to x 11810,
 # north to y 17514, west to a contact (11288,17517); poly west and south-west. Not followed.
 M 13435,16750 13435,16761 13305,16891 13303,17702 w=13
@@ -279,7 +279,7 @@ M 12862,17692 x11810 y17514 x11274 w=13
 C 11288,17517
 P 11270,17502:11308,17534
 P 11298,17518 11102,17518 10980,17640 w=18
-N M 12400,17692 inh_lat
+N M 12400,17692 rst_lat
 
 # ====================================================================
 # ck_out, the left-edge trunk above y 18300: tools/follow.py from (2500,7960) south follows one
@@ -300,7 +300,7 @@ P 13480,17150 13480,17662 13328,17815 12805,17815 w=18
 P 12788,17798:12824,17832
 C 12805,17815
 # Metal west along y 17822; the middle one of three nested Z bends at x 11640-11725 (the same
-# braid that h_eq_r1 and inh_lat pass, the four poly diagonals from the south-west under it);
+# braid that h_eq_r1 and rst_lat pass, the four poly diagonals from the south-west under it);
 # west along y 17650 to a pad (11245,17650).
 M 12818,17822 x11682 y17650 x11232 w=13
 C 11245,17650

@@ -286,7 +286,7 @@ a net. Each net, from north to south (all drawn; overlay `ov_bun1.png`):
 | Net | North end | Path | South end |
 |---|---|---|---|
 | `h_eq_r0half` | L0 at y 10700 | straight down L0 to y 12789, steps left to x 13307 | leaves the region west/south at (13307,12850); the track at x 13307 above y 12745 is another line, which turns west there |
-| `inh_rc` | poly pad from the west, contact (13346,12829) | L0 | L0 at y 13480 (bd1's k6 = `inh_rc`) |
+| `rst_rc` | poly pad from the west, contact (13346,12829) | L0 | L0 at y 13480 (bd1's k6 = `rst_rc`) |
 | `wr_r4` | L1 at y 10700 | L1 to contact (13390,12438); poly link east y 12426-12454 under L2, L3; contact (13522,12440); L4 | L4 at y 13480 = bd1's k10 = **`wr_r4`** (so R4's write strobe goes north on L1) |
 | `h_eq_r0` | L2 at y 10700 | L2, jog left at y 12486, L1 | L1 at y 13480 (bd1's k7, untraced there) |
 | `h_eq_r2` | L3 at y 10700 | L3 down to contact (13477,10857) | (poly east to comparator B) |
@@ -395,7 +395,7 @@ West edge, x 13330 (all poly, going west):
 | `rc1` | 11920 | from L5 north |
 | `rc0` | 12397 | from L4 north |
 | `h_eq_r0half` | 12789 (metal, stepping to x 13307) | from L0 north |
-| `inh_rc` | 12829 (pad at 13328-13364) | to L0 south (`inh_rc`); the pad's poly comes from the west, not followed |
+| `rst_rc` | 12829 (pad at 13328-13364) | to L0 south (`rst_rc`); the pad's poly comes from the west, not followed |
 | `hc7` | 13004 | c line of slice s0 |
 | `hc6` | 13418 | c line of slice s7 |
 
@@ -403,7 +403,7 @@ South edge, y 13480 (metal unless noted):
 
 | Name | x | bd1's track at y 14700 | What |
 |---|---|---|---|
-| `inh_rc` | 13347 (L0) | k6 `inh_rc` | |
+| `rst_rc` | 13347 (L0) | k6 `rst_rc` | |
 | `h_eq_r0` | 13391 (L1) | k7 (untraced) | **R0 = c** (`h_eq_r0`), out |
 | `h_eq_r1` | 13434 (L2) | k8 (untraced) | **R1 = c**, out |
 | `hc2` | 13478 (L3) | k9 (untraced) | |
@@ -477,7 +477,7 @@ seen) and not drawn.
   goes from (13478,10700) (by scan to about y 9960) and the nine other bundle lines.
 - `h_eq_r1` south of y 13480: bd1's track k8, untraced there. By scan the metal on
   x 13434 runs to about y 15139, with a jog between L2 and L3 at y 15126-15136.
-- The poly pad of `inh_rc` at (13328-13364,12829): where its poly goes west.
+- The poly pad of `rst_rc` at (13328-13364,12829): where its poly goes west.
 - The stretch y 13480-14700 of the bundle (no package): followed by measurement only.
 - AMB-3 (T2 and the strap).
 - Which slice is which data bit.

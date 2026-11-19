@@ -13,7 +13,7 @@ State at the end of the first session (2026-11-15). Everything below is in
 | `ck_out` | all four routes out of the clock block, to their entry points | top end of the left-edge trunk (x 2504; seen only at 0.5x above y 18300); `ck_out` #1 beyond x 10230; the taps |
 | `ck_a` | rail up the right edge of the mid-right array to its end; second entry at the array's bottom row | nothing outside the array |
 | `ck_b` | bottom row of the mid-right array (its only route) | nothing outside the array |
-| S (`inh_ck`, the clock notes' `inh_ck`) | gate g5; the long run along the bottom and up the left bus field to (6690,8366), still running | where it ends; its taps |
+| S (`rst_ck`, the clock notes' `rst_ck`) | gate g5; the long run along the bottom and up the left bus field to (6690,8366), still running | where it ends; its taps |
 | X (input of gate 0, so S = NOT X) | back to (13566,15880) in the channel right of the mid-right array | **its source** (most likely `ck_b`, not shown) |
 | `e_b` | entry below the decode logic at (16170,17690); seen running up to y 16400 | where it ends |
 | `rw_d`, `rs_d`, `cs_d` | entry below the decode logic; verticals to about y 16200 | upper ends of `rw_d`, `rs_d` |
@@ -21,7 +21,7 @@ State at the end of the first session (2026-11-15). Everything below is in
 | `clk` | contact (7500,18772) on a cell row by the CUDISP pad | that row |
 | `clk_b` | not looked at (it enters the clock driver logic; whether it also leaves the clock block is not known) | all |
 
-The line the clock notes call `inh_ck` is **not** `ck_a` (Ambiguities A1).
+The line the clock notes call `rst_ck` is **not** `ck_a` (Ambiguities A1).
 
 ## How to use this file
 
@@ -307,7 +307,7 @@ above y 15900 into dense logic; not followed.
 The metal lines at y 18703-18722 and y 18742-18760 below the row are the RS and CS pin
 nodes arriving from their protection cells, not outputs.
 
-## S: output of input-row gate 0 (`inh_ck`; the clock notes' `inh_ck`)
+## S: output of input-row gate 0 (`rst_ck`; the clock notes' `rst_ck`)
 
 Source: the single inverter at the left end of the input row (gate 0, x 13730-13925).
 S = NOT X. It is one of the most widely distributed lines on the die and behaves like
@@ -395,10 +395,10 @@ whether a branch leaves the block was not checked.
 
 ## Ambiguities
 
-### A1. `inh_ck` is not `ck_a`: trace/clock.txt has a wrong link
+### A1. `rst_ck` is not `ck_a`: trace/clock.txt has a wrong link
 
 `trace/clock.txt` ends with eight uncertain shapes ("seen at 1.1x; drawn roughly") and
-`@alias ck_a inh_ck`. They say that the bus piece feeding gate g5 (L6 left piece) is
+`@alias ck_a rst_ck`. They say that the bus piece feeding gate g5 (L6 left piece) is
 joined to gate g6's output through a line at y 18335-18358 with contacts at
 (12741,18347) and (11852,18347). Checked at 2.25x-6x in all four shots:
 
@@ -416,9 +416,9 @@ the other way: L4, the poly at x 13200, and the metal at y 18775 lead to the out
 of input-row gate 0.
 
 Consequence for the extraction: with `clock.txt` as it stands, `ck_out`, `ck_a` and
-`inh_ck` are shorted (reported as one error by `netlist.py`). Fix in `clock.txt`:
-delete the eight `?` shapes after "line A is also the line first labelled inh_ck"
-and the `@alias ck_a inh_ck`.
+`rst_ck` are shorted (reported as one error by `netlist.py`). Fix in `clock.txt`:
+delete the eight `?` shapes after "line A is also the line first labelled rst_ck"
+and the `@alias ck_a rst_ck`.
 
 Consequence for the clock block's logic (not re-traced here): gate g5's input is S,
 not `ck_a`. The clock notes have g5's output on line B and g6 (input line B) driving
@@ -484,7 +484,7 @@ contact at (5145,6110) under a metal from the north). All five lines go south to
 fan out diagonally and become horizontal metals going east from pads at x 6130-6165,
 y 6950-7350. Not followed beyond the pads except `rcs_e4`.
 
-## `h_eq_r0`, `h_eq_r1` and `inh_lat` (coordinating session, 2026-11-16)
+## `h_eq_r0`, `h_eq_r1` and `rst_lat` (coordinating session, 2026-11-16)
 
 - **Joins closed.** The R0 and R1 match lines are single straight metals between the right
   datapath's bundle (y 13480) and the strobe channel's tracks k7 and k8 (y 14690):
@@ -496,7 +496,7 @@ y 6950-7350. Not followed beyond the pads except `rcs_e4`.
   under the wide VCC rail to a contact (12805,17647); metal west to x 11851, north to
   y 17476, west to a contact (11240,17475); poly west and then diagonally south-west
   (seen to (10940,17598)): **into the bottom-centre logic**. Not followed further.
-- **`inh_lat`** takes the parallel route one line over: x 13435 turns south-west at
+- **`rst_lat`** takes the parallel route one line over: x 13435 turns south-west at
   y 16761, down x 13303 to a contact (13303,17688), poly west along y 17691, contact
   (12850,17691), metal west to x 11810, north to y 17514, west to a contact (11288,17517),
   poly west and south-west (seen to (10980,17640)).
@@ -549,7 +549,7 @@ under two vertical metals to a pad at about x 9562, then metal to x 8978 at leas
 the places looked at so far. The full extraction is unchanged by the new geometry
 (one net, no new joins).
 
-On the way: `inh_lat`'s poly from the pad (11288,17517) goes west along y 17515,
+On the way: `rst_lat`'s poly from the pad (11288,17517) goes west along y 17515,
 south-west to (10960,17640), west along y 17645 over a pad at (10850,17645) on the
 vertical metal x 10850, and on west. `h_eq_r1`'s goes west along y 17600 past x 10800.
 Neither drawn beyond what the trace had.
@@ -580,7 +580,7 @@ along the top of the central datapath) is the gap.
 
 - Line S (lines 16, 106, 340, 454) does not end in the left-centre logic: from (6690,8366) it runs west
   to (6559,8367), north, west and north through `lc2`'s and `lc1`'s strips without a gate, with one tap
-  at (6427,7648), and on into the top-left logic as `inh_ck` (`eof` run 2). S = `inh_ck`.
+  at (6427,7648), and on into the top-left logic as `rst_ck` (`eof` run 2). S = `rst_ck`.
   R4: part done there (`eof`); chip 1 is damaged on line S at y 16570-16650, 16822, 17483.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, third batch)
@@ -593,5 +593,5 @@ along the top of the central datapath) is the gap.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
 
-- The signal on track A / line X / the first through line of the left-centre strips, which these notes call a clock, a strobe "once per scan line" or leave without a source, **is the reset**: `rst_a`, the buffered copy of `rst` = NOR(`lpstb_b`, `res_b`) made by `lc1`'s gate 5 (`eof` run 10, piece `isrc5`, firm). `inh_ck`, `inh_rc` and `inh_lat` are further buffered copies of it: high while the RES and LPSTB pins are both low, and only then. The belief "a strobe once per scan line" is withdrawn. So "source of X" is found.
+- The signal on track A / line X / the first through line of the left-centre strips, which these notes call a clock, a strobe "once per scan line" or leave without a source, **is the reset**: `rst_a`, the buffered copy of `rst` = NOR(`lpstb_b`, `res_b`) made by `lc1`'s gate 5 (`eof` run 10, piece `isrc5`, firm). `rst_ck`, `rst_rc` and `rst_lat` are further buffered copies of it: high while the RES and LPSTB pins are both low, and only then. The belief "a strobe once per scan line" is withdrawn. So "source of X" is found.
 - `res_b` and `lpstb_b` do not end at `lc1`'s NOR: they run on down the left-centre strips and the left bus field to (6366,15000) and (6408,15000) (`eof` run 11, piece `rl`).

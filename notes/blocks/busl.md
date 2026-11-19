@@ -94,7 +94,7 @@ wiring only, no uncertain items:
 
 - **`tc2_sr_g` runs down the whole field** (piece `sr`). The metal that `eofw` left as an open end south
   of its corner pad (7446,8732) (net `tc2_sr_g` = the wire `lc1` called w7908, the enable of latch D, = `tc2_sr_g`,
-  row 2 of the gate on `inh_ck`'s tap row) is one metal from there to the south edge of the region:
+  row 2 of the gate on `rst_ck`'s tap row) is one metal from there to the south edge of the region:
   south to y 8910, a diagonal south-west (the south-east line of the diagonal bundle) to (7209,9168),
   4,500 px south at x 7209 (the track west of piece `d6`'s line 1), the seventh step of the lower
   staircase (west along y 13680 to x 7145), three more jogs (y 14176, 14285, 14588) and out at
@@ -627,7 +627,7 @@ so what line g is; a latch's data input does not drive, so the cells must (belie
 
 Piece `sr`. Traced (no uncertain item of this package; the net's other joins are `eofw`'s): `tc2_sr_g`,
 which is also `tc2_sr_g` (the enable of latch D, the latch that makes `lc_step`) and row 2 of the gate
-`tc2_r5589` = NOT(`lc1_w7170` AND (`inh_ck` OR `tc2_sr_g`)), runs from `eofw`'s corner pad down the
+`tc2_r5589` = NOT(`lc1_w7170` AND (`rst_ck` OR `tc2_sr_g`)), runs from `eofw`'s corner pad down the
 field and out at (7187,15000), with no contact in the field. So the net has a third branch, into the
 bottom-centre logic. Not traced: its end (in `bc1`'s group x 7000-7860, y 15000-16300). Believed: the
 driver of `tc2_sr_g`, which no package has found, is there (the net's three drawn ends, `tc2`'s latch,
@@ -640,7 +640,7 @@ net with a diffusion pad at (7555,11118) and the band east of it. Not traced: wh
 the net that can drive it.
 
 Piece `n2`. Traced (no uncertain item of this package or on the join): `bd1_n2`, the output of
-`bd1`'s latch on R4's match (`bd1_n2` = NOT((`bd1_an` AND `inh_lat`) OR `bd1_n1` OR `rst_a`):
+`bd1`'s latch on R4's match (`bd1_n2` = NOT((`bd1_an` AND `rst_lat`) OR `bd1_n1` OR `rst_a`):
 `notes/blocks/eof.md`, pieces `r4lat`, `isrc5`), is one net with `tl5`'s bus line x 5412 (the row y 3850 of `tl4`; both renamed `bd1_n2` by the refresh of 2026-11-19), the input of
 the inverter of `tl4`'s right cluster that makes `rcs_e3`. So **`rcs_e3` = NOT `bd1_n2`**: the step
 logic's `rcs_cond_n` = `rcs_e4` OR (`rcs_e3` AND `rcs_a2`) takes R4's latched match inverted. Between

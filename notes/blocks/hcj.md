@@ -47,7 +47,7 @@ column, both chips), so that no jog can hide between views:
   14710; x 13782 has none from 13480 to 13873, then none of metal to 13986; x 13868 is
   metal from y 13630 to 14052 only; x 13825 has no metal from y 14008 to 14041; x 14108 is
   metal down to y 14003 (chip 1) / 14029 (chip 2: the pad).
-- For bd1's k11: x 13565 has no metal from y 15008 to 15191 (below that it is inh_n's
+- For bd1's k11: x 13565 has no metal from y 15008 to 15191 (below that it is rst_a_n's
   metal), x 13608 none from 14961 to 14995 (between k12's pad and k11's arm) and no run
   over 19 px from there to the pad at y 15585; the gap columns x 13586 and x 13630 are
   empty on chip 1 except the arm (y 14997-15006).
@@ -58,7 +58,7 @@ k12's pad, 18 px (`k11_jog.png`); hc5's pad (to x 13800) and L11 (from x 13816).
 
 Crossings without contact (looked at, no pad or ring on the metal, poly plain in acid1b):
 hc5's poly under L2..L9; hc4's band under vcc, vss, x 13868 (hc0), x 13782 (wr_r1), L9..L6;
-hc4's diagonal under L5 (hc1), L4, L3 (hc2), L2; hc1's poly under x 13565 (inh_n), 13521,
+hc4's diagonal under L5 (hc1), L4, L3 (hc2), L2; hc1's poly under x 13565 (rst_a_n), 13521,
 13478 and the nine tracks x 13435..13131 (the last is hc0's metal). The dark rings on
 these polys in `acid1b` all sit in the gaps between tracks (guide trap 2).
 
@@ -96,7 +96,7 @@ and r17 (by geometry; the bit order itself is mra's) confirmed. Its wording fixe
 
 - L9 (x 13738, rdp3's `rc_eq_r4` to bd1's `rc_eq_r4`): straight and unbroken in the same
   views and profiles as wrj reported, not drawn (not this package).
-- L0..L2 (x 13348-13434: `inh_rc`, rdp3's `h_eq_r0` / `h_eq_r1` to bd1's k7 / k8):
+- L0..L2 (x 13348-13434: `rst_rc`, rdp3's `h_eq_r0` / `h_eq_r1` to bd1's k7 / k8):
   seen straight on the surveys, not profiled, not drawn.
 - bd1's `?` poly of `hc2` from k9's contact (13520,15390) into the mid-right array: not
   re-read.

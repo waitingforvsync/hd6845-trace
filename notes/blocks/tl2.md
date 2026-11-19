@@ -1221,7 +1221,7 @@ Round 1: no findings that change a connection.
   clear pad (4192,5373), whose metal goes on south and east to (4250,5895) and on into `tl5`'s row
   y 5890; the driver is beyond that.
 - `tl1_w4937` is the net of `tl3`'s thin metal x 3948-3962, and by it `tl3_e3550` (AMB-032);
-  `tl1_w3594` is `inh_ck` (AMB-033).
+  `tl1_w3594` is `rst_ck` (AMB-033).
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19)
 

@@ -5,7 +5,7 @@
 #     tc2_r5589 (the gate's output) = tc2_r5589
 #     tc2_sr_g (row 2)             = tc2_sr_g = the wire `lc1` called w7908    (one net: tc2's latch gate line IS latch D's enable)
 #     eof_w7777 (row 3)             = lc2_w8474 (= lc1_w7170 by lc2's alias)
-# so the gate is   tc2_r5589 = NOT( lc1_w7170 AND ( inh_ck OR tc2_sr_g ) ).
+# so the gate is   tc2_r5589 = NOT( lc1_w7170 AND ( rst_ck OR tc2_sr_g ) ).
 # The names are joined by @alias here; the placeholders are renamed by the next refresh.
 # From a second, independent trace of the gate (a test of method, 2026-11-19: notes/blocks/eofw.md),
 # which agreed with eof's on the gate and followed each wire on. Evidence: cache/scratch/eofw/

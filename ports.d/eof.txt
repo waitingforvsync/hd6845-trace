@@ -22,12 +22,12 @@ sl_eq_r5_n  P  4962,2542-2560     ?   link C's west end on tl4's row (4967,2551)
 sl_eq_r5_n  M  4255,2506-2518     in  link D's east end on tl4's bus line 1 (4250,2512)
 sl_eq_r5_n  M  3528,2505-2519     ?   link D's west end on tl2's metal (3533,2509): towards the loads
 
-# Piece tcwa (run 2): the net is inh_ck. The driver (the inverter of the input buffer row) lies beyond link F's east end.
-inh_ck      M  6098-6112,6345     ?   link E's north end on tl6's metal (6105,6350): towards the loads
-inh_ck      M  6422-6438,8072     in  link E's south end on lc2's piece (inh_ck, M 6431,8067)
+# Piece tcwa (run 2): the net is rst_ck. The driver (the inverter of the input buffer row) lies beyond link F's east end.
+rst_ck      M  6098-6112,6345     ?   link E's north end on tl6's metal (6105,6350): towards the loads
+rst_ck      M  6422-6438,8072     in  link E's south end on lc2's piece (rst_ck, M 6431,8067)
 # (the tap row now ends as row 1 of the gate: piece g7700, below)
-inh_ck  M  6445,8165-8179     ?   link F's west end on lc2's end (6450,8172): towards the loads
-inh_ck  M  6695,8360-8374     in  link F's east end on trunks' line S (its end x 6690): the net is inh_ck
+rst_ck  M  6445,8165-8179     ?   link F's west end on lc2's end (6450,8172): towards the loads
+rst_ck  M  6695,8360-8374     in  link F's east end on trunks' line S (its end x 6690): the net is rst_ck
 
 # Piece x1 (run 2): tl5's south poly bus down to its pads, the pads' metals onto lc1's wires
 rcs_x1     P  5097-5117,6345     ?   from tl5's bus line x 5107: towards the loads
@@ -61,7 +61,7 @@ rst_a     P  7550,14904-14924   in   onto the east end of busl's poly row of rst
 rst_a     P  8326,16294-16312   out  the row's east end: a gate at x 8283-8311 over an undrawn diffusion column (the clear row of a latch unit: bc1 / bc3)
 rst_a     P  8326,16900-16918   out  the tap row's east end: the same 606 px lower (bc3)
 
-# Piece g7700: the gate on inh_ck's tap row (run 5)
+# Piece g7700: the gate on rst_ck's tap row (run 5)
 eof_w7777   P  6450,7812-7830    in   row 3 of the gate, on west into lc1's strip (cluster E's undrawn west half)
 tc2_sr_g   P  7400,7203-7221    ?    the poly row east of the pad (7313,7215)
 tc2_sr_g   M  7262-7274,7800    ?    the metal south of row 2's pad (7267,7736)

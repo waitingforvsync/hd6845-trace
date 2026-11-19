@@ -24,7 +24,7 @@ tl4_w4068   P  5683,4970-4988  ?    latch b's enable: the row of T7's south pad 
 tl4_w5068   P  5683,4427-4447  ?    the row of the north pad (5623,4437) of T9's south piece
 tc1_o3527   P  5683,4464-4496  ?    the pad (5666,4480) of T10's south piece lies on the edge; its poly leaves east
 c4l_l3   P  5683,4510-4530  ?    the row of the north pad (5580,4521) of T8's south piece
-inh_ck   P  5683,5616-5649  ?    the pad (5666,5632) lies on the edge; its poly leaves east
+rst_ck   P  5683,5616-5649  ?    the pad (5666,5632) lies on the edge; its poly leaves east
 tl4_w4590   P  5683,6134-6166  ?    the pad (5667,6150) lies on the edge; its poly leaves east
 rcs_mv   P  5683,6228-6248  ?    the row y 5717 after its corners (5497,5717) and (5497,6238)
 
@@ -32,7 +32,7 @@ rcs_mv   P  5683,6228-6248  ?    the row y 5717 after its corners (5497,5717) an
 c4l_l3   P  4967,5447-5467  ?    the row of the pad (5538,5457): T8's south piece
 tl4_w5068   P  4967,5490-5510  ?    the row of the pad (5493,5500): T9's south piece
 tc1_o3527   P  4967,5534-5553  ?    the row of the pad (5538,5544): T10's south piece
-inh_ck   P  4967,5621-5641  ?    the row of the pad (5538,5631)
+rst_ck   P  4967,5621-5641  ?    the row of the pad (5538,5631)
 tl4_w4590   P  4967,5665-5684  ?    the row of the pad (5493,5674)
 rcs_mv   P  4967,5708-5727  ?    a row without a pad in the strip
 bd1_n2   P  4967,5751-5770  ?    a row without a pad in the strip; bus line x 5412

@@ -351,7 +351,7 @@ drawn from a class map and 3.6-4.6x views in both stripped shots. Not establishe
 the rail is VSS; the loads; the two buried contacts (`?B`) that put the two output lines
 on their nodes; that the node above the series pair is separate from the rail contact
 at y 3905; that the dark spot (6548,4188) is not a contact (if it were, `fld_y_b`'s node
-would sit on the rail). **Adopted** as drawn: `fld_a_in` = NAND(`inh_ck`, `tcw_b`),
+would sit on the rail). **Adopted** as drawn: `fld_a_in` = NAND(`rst_ck`, `tcw_b`),
 `fld_y_b` = NOT `tcw_c`. Settle when the region west of the island is traced as a block.
 
 Added 2026-11-16: a poly from the lower pad (6232,3870) of the bus metal `c4l_gab` runs
@@ -359,7 +359,7 @@ east along y 3912 and reaches the rail at y 3910-3934, between the rail contact
 (6535,3905) and the node of `fld_a_in` (which starts at y 3956 below a strip of field at
 y 3948-3956; the clean shot is dull tan at y 3935-3947). If diffusion is continuous
 under that poly, `fld_a_in` has a third pull-down gated by `c4l_gab`
-(`fld_a_in` = NOT(`c4l_gab` OR (`inh_ck` AND `tcw_b`))); if the poly only passes over
+(`fld_a_in` = NOT(`c4l_gab` OR (`rst_ck` AND `tcw_b`))); if the poly only passes over
 field there, it goes on to the east side. Not decided; the trace stops the poly at the
 rail's west edge.
 
@@ -678,19 +678,19 @@ it: `rcs_e4` = NOR(`tl1_w4678`, `tl3_e3550`), i.e. R9's match in the row counter
 
 Proposed by `tl3` (Matt Godbolt run 5, Tom Seddon runs 8 and 10; `notes/blocks/tl3.md`, Ambiguities 1,
 12 and 13). The thin metal runs from a pad with a contact (4103,2899) on the row y 2899 to track A
-(`inh_ck`). **Assumed one metal, no contact between its ends; six stretches drawn `?M`** (over node
+(`rst_ck`). **Assumed one metal, no contact between its ends; six stretches drawn `?M`** (over node
 boxes at y 2964-3021, 3381-3444, 3527-3574, 3686-3748, 3771-3969, 4051-4108), where neither metal shot
 shows it for 40-55 px. For: two real end pads (full-bright centre 12 px across, green hole) and
 nothing pad-like between; the row y 2899 has only gates on it, so its driver must arrive by this
-metal; a contact on any box would short a unit's output to `inh_ck`; an unbroken pink protected strip
+metal; a contact on any box would short a unit's output to `rst_ck`; an unbroken pink protected strip
 beside the line in the clean shot where one side lies over field. Against: small bright centres over
 four boxes ((4104,2988), (4101,3719), (4102,4074), (4101,5202)). The most contact-like is (4102,4074),
 on `rcs_in1`'s box (clean shot 186/182/139, neither a contact's green nor a pass-over's tan): a contact
 there would make `tl3_e4243` constant; one at (4101,5202) would make latch C's data its own enable;
-one at (4104,2988) would make the metal E1's second output. `inh_ck`'s source is not traced, so four
-of the six have no electrical cross-check. **Rests on it: `tl1_w3594` = `inh_ck`** (`tl1`'s two latches
-in series a master and a slave on `inh_ck`). Since `eof` run 2 (2026-11-19) `inh_ck` is `inh_ck` (firm), so `tl1_w3594` = `inh_ck` rests on this entry, and
-`inh_ck`'s source is known: the cross-check this entry lacked is now possible from the driver's side. Would settle it: `inh_ck`'s source; a third chip's metal
+one at (4104,2988) would make the metal E1's second output. `rst_ck`'s source is not traced, so four
+of the six have no electrical cross-check. **Rests on it: `tl1_w3594` = `rst_ck`** (`tl1`'s two latches
+in series a master and a slave on `rst_ck`). Since `eof` run 2 (2026-11-19) `rst_ck` is `rst_ck` (firm), so `tl1_w3594` = `rst_ck` rests on this entry, and
+`rst_ck`'s source is known: the cross-check this entry lacked is now possible from the driver's side. Would settle it: `rst_ck`'s source; a third chip's metal
 shot; the simulation.
 
 ## AMB-034: three ring-like marks in `tl4` not drawn as contacts (2026-11-18)
@@ -722,13 +722,13 @@ stripped shot; but the clean shot shows a mottled red centre and no green hole (
 has the usual hole). Tracer and reviewer both read a contact. **Drawn as a contact (as `rdp3` drew
 it).** If it is not one, R4's match (`rc_eq_r4`) does not reach `bd1`'s latch and inverter A.
 
-## AMB-037: `inh_ck`'s staircase over other nets without contact (2026-11-19)
+## AMB-037: `rst_ck`'s staircase over other nets without contact (2026-11-19)
 
 Proposed from `eof` run 2 (`notes/blocks/eof.md`, Ambiguities 5-7) and `lc2` (its Ambiguity 3). The
-metal that carries `inh_ck` from `trunks`' line S north to the top-left logic lies on other
+metal that carries `rst_ck` from `trunks`' line S north to the top-left logic lies on other
 nets' poly at four places, and `lc2`'s metal x 6422-6440 lies 64 px along latch C's data poly
 (6431, 8117-8181); none is drawn as a contact (trap 13; read from text maps by two packages). A contact
-at the first would join `inh_ck` to latch D's output `lc1_w7040`; the one in `lc2` would join it to
+at the first would join `rst_ck` to latch D's output `lc1_w7040`; the one in `lc2` would join it to
 latch C's data `tl3_w3982`. The join to line S also rests on `trunks`' reading of that line (R4).
 
 ## AMB-038: the box at (7535-7580, 13903-13940) under `cdp4_ld`'s metal (2026-11-19)

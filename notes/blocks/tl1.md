@@ -1012,9 +1012,9 @@ Round 1: no findings.
 - `tl1_w4937` ("enters on a poly row from the east, not identified") is the net of `tl3`'s thin metal
   x 3948-3962 (firm: row and pad), and by that metal `tl3_e3550` (marked: AMB-032). So `rcs_e4` =
   NOR(`tl1_w4678`, `tl3_e3550`).
-- `tl1_w3594` ("not identified; every known end is a gate") is `inh_ck`, marked, by `tl3`'s row y 2899 and
-  the thin metal x 4099-4111 (AMB-033). Then `tl1_w3636` = NOR(`inh_ck`, `tl1_w3678`) and `rcs_a2` =
-  NOR(`inh_ck`, `tl3_w3803`): the two latches in series are a master and a slave on `inh_ck`.
+- `tl1_w3594` ("not identified; every known end is a gate") is `rst_ck`, marked, by `tl3`'s row y 2899 and
+  the thin metal x 4099-4111 (AMB-033). Then `tl1_w3636` = NOR(`rst_ck`, `tl1_w3678`) and `rcs_a2` =
+  NOR(`rst_ck`, `tl3_w3803`): the two latches in series are a master and a slave on `rst_ck`.
 - The master's inverter box under thin W "protected: 196-202/151-178/127-133" at (2704,4362): four px
   lower, `px.py row 4366 2684 2722 3` gives 160-183/142-172/99-141 with a grey sample at x 2708, the
   same grey band as in `tl3`'s latch C (`tl3`). Nothing drawn changes.
@@ -1025,9 +1025,9 @@ Round 1: no findings.
 
 - `sl_eq_r5_n` is NOT `sl_eq_r5` (`sl_eq_r5_n`), driven from the east by `eof`'s inverter in `cdp1`'s
   slice-0 position, and leaves north into the band `tlb`.
-- `inh_ck` (and so `tl1_w3594`, marked) is `inh_ck` (`eof` run 2).
+- `rst_ck` (and so `tl1_w3594`, marked) is `rst_ck` (`eof` run 2).
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
 
-- The signal on track A / line X / the first through line of the left-centre strips, which these notes call a clock, a strobe "once per scan line" or leave without a source, **is the reset**: `rst_a`, the buffered copy of `rst` = NOR(`lpstb_b`, `res_b`) made by `lc1`'s gate 5 (`eof` run 10, piece `isrc5`, firm). `inh_ck`, `inh_rc` and `inh_lat` are further buffered copies of it: high while the RES and LPSTB pins are both low, and only then. The belief "a strobe once per scan line" is withdrawn.
+- The signal on track A / line X / the first through line of the left-centre strips, which these notes call a clock, a strobe "once per scan line" or leave without a source, **is the reset**: `rst_a`, the buffered copy of `rst` = NOR(`lpstb_b`, `res_b`) made by `lc1`'s gate 5 (`eof` run 10, piece `isrc5`, firm). `rst_ck`, `rst_rc` and `rst_lat` are further buffered copies of it: high while the RES and LPSTB pins are both low, and only then. The belief "a strobe once per scan line" is withdrawn.
 - `rcs_x1` = NOT `lc1_w7170`, and `lc1_w7170` = NOT `rst_c` (`eof` run 13, piece `rc`, firm): the clear of the step logic's five latches is the reset, two inverters later. Where these notes call its source open, it is found.

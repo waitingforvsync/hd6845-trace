@@ -16,8 +16,8 @@ tc2_sr_g   M  6450,8250-8268  out  on east (metal A)
 rst_c   M  6248-6264,8067  in   latch D's clear, and by a cross-under and a metal latch C's
 lc1_w7780   M  6287-6307,8067  in   latch D's data, to the pad (6297,8170)
 lc2_w8474   M  6332-6350,8067  ?    the metal of the pad (6341,8214)
-inh_ck   M  6422-6440,8067  ?    a metal from the north that turns east
-inh_ck   M  6450,8163-8181  ?    on east
+rst_ck   M  6422-6440,8067  ?    a metal from the north that turns east
+rst_ck   M  6450,8163-8181  ?    on east
 tl3_w3982   M  6462-6480,8067  in   latch C's data: the metal of the pad (6470,8127), 20 px east of the strip
 
 # Run 4: the inverter below latch C and its thin metal

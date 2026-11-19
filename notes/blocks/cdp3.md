@@ -367,7 +367,7 @@ Into parts not yet traced (the labels sit on the stubs):
   ends (`busl`, piece `h8`): each runs across the left bus field to a diffusion row of the left array at
   x 4780, y 11338, 11815, 12291, 12768, 13247, 13725, 14202, 14894 (c7 northernmost).
 - The top unit of the gate column x 7460-7800 (y 7585-7860) is drawn by `eof` (piece `g7700`):
-  `tc2_r5589` = NOT(`lc1_w7170` AND (`inh_ck` OR `tc2_sr_g`)) in the names `eofw` joined it to.
+  `tc2_r5589` = NOT(`lc1_w7170` AND (`rst_ck` OR `tc2_sr_g`)) in the names `eofw` joined it to.
 - Two wires of `tc2_sr_g` enter the gate column from a corner pad with a contact (7446,8732) (`eofw`): a
   poly east at (7490, 8722-8745) and a metal south at (7458-7474, 8800). Not followed.
 - **Trace corrected** (geometry only): column 0's VSS rail `M 7623,8450 y11200 w=46` began 106 px too far

@@ -127,7 +127,7 @@ P 11760,18455:11786,18957
 P 11760,18931:11866,18957
 C 11772,18467 s=24x24
 M 11600,18455:11877,18480          # bus line, leaves left (not yet followed)
-N M 11650,18467 inh_ck
+N M 11650,18467 rst_ck
 
 # ====================================================================
 # Wiring between the gate row, the input row and the driver logic,
@@ -529,11 +529,11 @@ D 11551,19505:11821,19548
 N P 11884,19400 ck_b_pu
 
 # ---- CORRECTION (trunks block, checked at 6x): the link once drawn here between line A
-# and the inh_ck bus piece does not exist. The line at y 18335-18358 is ck_out, and
-# neither contact is there. inh_ck is the output of input-row gate 0 (see
+# and the rst_ck bus piece does not exist. The line at y 18335-18358 is ck_out, and
+# neither contact is there. rst_ck is the output of input-row gate 0 (see
 # notes/blocks/trunks.md). Gate 6's output does go up at x 12110 to the bus line below,
 # which is ck_a. The old (wrong) description is left for the record:
-# ---- line A is also the line first labelled inh_ck: gate 6's output goes up at
+# ---- line A is also the line first labelled rst_ck: gate 6's output goes up at
 # x 12110 to the bus line at y 18455-18480, right to x 12740, up in poly to a line at
 # y 18345, left to x 11850 and down in poly to the bus piece that feeds gate 5 and the
 # long run to the left bus field. Seen at 1.1x; drawn roughly.

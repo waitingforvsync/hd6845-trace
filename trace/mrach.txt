@@ -37,11 +37,11 @@ M 13348,9346 y9678                        # T6, upper piece: a link in the R4 ma
 C 13348,9360
 C 13349,9663
 M 13306,12845 y14695                      # T5 below the staircase: continues h_eq_r0half (k5)
-M 13348,13475 y14695                      # T6 below rdp3's piece: inh_rc (k6 = inh_rc)
+M 13348,13475 y14695                      # T6 below rdp3's piece: rst_rc (k6 = rst_rc)
 
 # ---------------------------------------------------------------------------
 # Top: the band that crosses the array above row r0 (y 7162-7178) comes down beside T5 and
-# reaches T1 south. Via the staircase and rdp3's contact this is inh_rc.
+# reaches T1 south. Via the staircase and rdp3's contact this is rst_rc.
 P 12910,7170 x13308 y7410 x13122
 P 11690,7162:12915,7178                   # ... west across the array (west end not followed)
 P 13114,7402:13148,7448

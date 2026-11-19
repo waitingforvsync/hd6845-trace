@@ -145,7 +145,7 @@ M 4462,3852 x4412 y3900 w=20
 N P 4600,3850 bd1_n2
 
 # ====================================================================
-# Unit (a), y 4410-4640: a three-input NOR.   tl4_w4545 = NOR(tla_w3417, inh_ck, tl4_w4590)
+# Unit (a), y 4410-4640: a three-input NOR.   tl4_w4545 = NOR(tla_w3417, rst_ck, tl4_w4590)
 # Read on u2.png (clean), u3.png (chip-2 stripped), u4.png (metal), u5.png (chip-1 stripped), all
 # 3.9x; tie1.png, tie2.png (9x, four shots); rows on r1.png (2.7x, stripped and metal).
 # A column of diffusion in the open west of RA (x 4677-4716) crossed by three poly rows from
@@ -170,7 +170,7 @@ C 4745,4627
 P 4515,4452:4728,4470
 # gate 2: a row from the west, across the whole bus field without a pad (r1.png)
 P 4250,4492:4728,4512
-N P 4400,4502 inh_ck
+N P 4400,4502 rst_ck
 # gate 3: a row from a pad with a contact (4364,4590) on the track x 4362 (follow.py: one
 # metal from y 2810 to y 5682; only this stub of it is drawn so far)
 P 4347,4575:4385,4605
@@ -603,11 +603,11 @@ C 4497,5720
 P 4250,5708:4485,5727
 N M 4497,5630 tc1_o3527
 
-# --- inh_ck (tl5's inh_ck, aliased in trace/tl6.txt): row y 5621-5641 across the whole strip,
+# --- rst_ck (tl5's rst_ck, aliased in trace/tl6.txt): row y 5621-5641 across the whole strip,
 # under every metal without a contact. West of x 4250 it runs on to tl3's pad (4104,5633)
-# (of7_r5.png, three shots: unbroken); tl3 has drawn it to x 4160 only (inh_ck).
+# (of7_r5.png, three shots: unbroken); tl3 has drawn it to x 4160 only (rst_ck).
 P 4250,5621:4967,5641
-N P 4700,5631 inh_ck
+N P 4700,5631 rst_ck
 
 # --- tl4_w4590: the track x 4366 runs on south from the pad (4364,4762): a pad with a contact
 # (4366,5112) whose row leaves west along y 5102-5121 (tl3's tl4_w4590, gate 2 of its NOR e5),
@@ -687,7 +687,7 @@ C 4279,5413
 P 4250,5403:4268,5422
 N M 4279,5340 tl3_e5240
 
-# --- the wire `tl4` called w3070 is tl3's tl3_e4243 (= NOR(inh_ck, rcs_mv), e3's output): the track x 4318
+# --- the wire `tl4` called w3070 is tl3's tl3_e4243 (= NOR(rst_ck, rcs_mv), e3's output): the track x 4318
 # runs on south from the pad (4320,3372) without a contact to a corner (4318,4247) and west
 # out of the strip along y 4235-4255
 M 4318,3385 y4246 x4250 w=14

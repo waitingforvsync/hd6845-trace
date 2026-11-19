@@ -130,7 +130,7 @@ M 13567,15180 y16188 x13672 w=20   # X: track k11, then east along y 16188 (trun
 P 13657,16176:13688,16204          # X's tap: a poly leaves east from here (see the gate column)
 C 13672,16190
 M 13672,16178 y16610 w=20          # X south on x 13672 (drawn in trunks.txt from y 16600)
-N M 13567,15600 inh_n
+N M 13567,15600 rst_a_n
 
 # --- inverter 1 (gate bar y 15183-15203)
 P 13567,15193 x13900 w=20          # gate bar 1, from X's upper contact
@@ -145,7 +145,7 @@ P 13782,15151 x13333 w=14          # output 1 west along y 15151, under tracks k
 P 13331,15135:13363,15167
 C 13347,15150                      # ... to track k6, which ends here
 M 13348,14690 y15163 w=20
-N M 13348,14700 inh_rc          # inverter 1's output leaves north on track k6
+N M 13348,14700 rst_rc          # inverter 1's output leaves north on track k6
 D 13898,15157:13962,15177          # output band 1 east to the load
 D 13905,15130:13927,15160          # bump up under the load's gate tie
 B 13904,15128:13928,15154
@@ -154,7 +154,7 @@ P 13925,15122:13970,15138          # ... east to the load block
 P 13962,15122:14000,15226          # load gate
 D 13945,15150:14050,15220          # load: strip west of the gate, channel, supply land
 C 14022,15185 s=26x36
-N D 13860,15170 inh_rc
+N D 13860,15170 rst_rc
 
 # --- inverter 2 (gate bar y 15271-15291)
 P 13567,15281 x13917 w=20          # gate bar 2, from X's lower contact
@@ -172,7 +172,7 @@ P 13925,15333:14000,15349          # ... east along y 15341 to the foot of the l
 P 13959,15250:14000,15340          # load gate
 D 13926,15257:14049,15326          # load: strip west of the gate, channel, supply land
 C 14022,15289 14035,15311
-N D 13860,15305 inh_lat
+N D 13860,15305 rst_lat
 
 # ================================================================ track k17 into the mid-right array
 # k17 jogs west to k16's track at y 14975 (k16 having ended at wr_r1's contact), runs

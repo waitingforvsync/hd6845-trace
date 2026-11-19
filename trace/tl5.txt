@@ -472,7 +472,7 @@ C 5538,5631
 M 5526,5632 x5678
 P 5648,5616:5683,5649
 C 5666,5632
-N P 5300,5631 inh_ck
+N P 5300,5631 rst_ck
 # ---- row y 5665-5684: to the pad (5493,5674); metal east to a corner (5627,5676), south at
 # x 5618-5637 over amrw's four rows (no pad, no hole) to a corner (5627,6150) and east to a pad
 # (5667,6150) on the strip's east edge, whose poly leaves east from it (p2_c.png 4x)
