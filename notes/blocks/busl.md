@@ -89,7 +89,7 @@ piece, `d6`, wiring only, no uncertain items:
   long track that the earlier runs met at x 7468 / 7511. The names are gathered by `@alias`
   (`cdp3_g_c#` canonical).
 
-Run 6 (richtw1's session, Claude Fable 5.2; 2026-11-19 18:06 to 18:20 +0100). Two pieces, `sr` and `kb`,
+Run 6 (richtw1's session, Claude Fable 5.2; 2026-11-19 18:06 to 18:30 +0100). Two pieces, `sr` and `kb`,
 wiring only, no uncertain items:
 
 - **`tc2_sr_g` runs down the whole field** (piece `sr`). The metal that `eofw` left as an open end south
