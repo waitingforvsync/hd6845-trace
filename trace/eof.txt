@@ -1083,3 +1083,103 @@ P 6127,6978:6166,7015
 C 6146,6997
 P 6148,6996 x5624 5412,6784 y6345 w=17
 N P 5412,6500 tl4_w3850
+# ============================================================================================
+# Piece ck6 (run 15, 2026-11-19): the ripple counter's clock lc3_w9947 from busl's row end
+# (7550,14784) east to its driver, an inverter under the bottom-centre logic's east VSS rail.
+#   lc3_w9947 = NOT eof_w15127
+# Path: busl's poly row y 14784 on east to a pad (7837,14784); bus metal y 14784 (the eleventh of
+# bc1's 13 bus lines) to a pad (8293,14785); a poly L south and east along y 14825 under R1, the
+# VCC vertical and the VSS band, in the open from x 8735, south at x 8968 to a pad (8967,14870);
+# a metal south on x 8968 to a pad (8962,15040); a poly row west along y 15042 into the output
+# box of the inverter (8768-8797, 15030-15052).
+# Five pads with contacts (ring and bright centre in both metal shots, green hole in the clean
+# shot: p_pad1.png, p_e1.png, p_o3.png, p_o4ab.png); no gate and no tap on the way. The VSS band
+# y 14816-14878 lies on the row from x 8508 to 8735, and the metal of the neighbouring pad
+# (9008,14828) on its last 60 px: no contact at either (notes, Ambiguity 51).
+P 7550,14784 x7826 w=24              # busl's row on east (busl: P 6418,14784 x7550 w=24)
+P 7820,14768:7854,14800              # pad
+C 7837,14784
+M 7837,14784 x8293 w=14              # bus metal y 14784 (y 14776-14792)
+P 8276,14768:8312,14802              # pad
+C 8293,14785
+P 8286,14795:8310,14836              # the L: south from the pad
+P 8286,14825 x8968 w=18              # east along y 14816-14834
+P 8957,14816:8980,14860              # south
+P 8950,14852:8986,14888              # pad
+C 8967,14870
+M 8968,14870 y15040 w=16             # metal south
+P 8945,15024:8982,15058              # pad
+C 8962,15040
+P 8780,15042 x8950 w=16              # row west, y 15034-15050, into the box
+N P 7700,14784 lc3_w9947
+N M 8968,14950 lc3_w9947
+# --- the inverter U (x 8508-8854, y 14942-15062), drawn by hand (findcell: tl5_inv turned, 0.62)
+# Overlay p_o1.png (3.4x, metal and clean); p_g2.png (clean 4.1x), p_g3.png (chip-2 stripped 4.1x).
+# Two thin metals of bc1's cross the unit and are not drawn here: x 8637-8650 over the tie box and
+# the strip, x 8789-8801 over the output box; neither makes contact (notes, Ambiguities 49, 50).
+M 8712,14900 y15300 w=50             # column B's VSS rail, x 8687-8737 (the piece over units U and V)
+N M 8712,14910 vss
+M 8534,14990 y15180 w=48             # R2 (bc1 draws it: M 8534,14990 y16300 w=48), the piece over the two VCC boxes
+N M 8534,15000 vcc
+D 8698,14942:8742,15040              # under the rail: VSS box, the gate, the node
+C 8712,14965
+D 8738,14968:8768,15040              # the same east of the rail, in the gap to the thin metal x 8789-8801
+P 8682,14990:8826,15010              # gate row, rounded west end x 8682, east to its pad
+P 8820,14984:8854,15016              # pad
+C 8836,15000
+D 8738,15018:8800,15058              # node east: the pad round the box
+B 8768,15030:8802,15052              # the output's buried contact
+P 8772,15034:8792,15050              # the output poly's end in the box
+D 8650,15021:8700,15043              # node west: the strip from the rail (y 15021-15043),
+D 8628,15012:8656,15043              # wider (from y 15012) under the thin metal x 8637-8650
+D 8560,15011:8632,15047              # under the plate to the VCC box
+D 8508,15008:8562,15056              # VCC box
+C 8534,15033
+P 8568,14978:8607,15062              # the plate (channel 39 long, 34 wide)
+P 8600,14975:8620,15003              # its tab east along the top (poly seen to x 8619: px row 14988)
+D 8628,14975:8650,15016              # the tail up from the strip, under the tie box
+?P 8616,14977:8648,15001             # the tab's end in the tie box, under bc1's thin metal x 8637-8650
+?B 8626,14973:8650,15003             # the tie: plate to node (box 8628-8648, 14977-15000 in the clean shot)
+# ============================================================================================
+# Piece ck7 (run 15): the unit below, which drives the inverter's gate, and its input's wire.
+#   eof_w15127 = NOT eof_w15172   (two pull-downs in series on one hairpin poly)
+# The unit V (x 8508-8897, y 15100-15285), by hand. Rows A and B are one poly, joined at the east
+# end by the pad (8880,15172) (p_v5.png, 4.9x, four shots); between them under the rail a closed
+# diffusion; the channels are 35 wide (the strip between the arms is field east of the rail).
+# Overlay p_o2.png (3.0x, metal and clean). The same two thin metals cross it.
+D 8707,15111:8742,15250              # under the rail: the node, gate A, the series node, gate B, down to the VSS box
+D 8683,15240:8728,15285              # VSS box
+C 8705,15262
+D 8738,15118:8770,15158              # node east: the gap column (to y 15158, just above row A)
+D 8760,15113:8798,15146              # and the pad round the box
+B 8765,15116:8800,15140              # the output's buried contact
+P 8770,15120:8826,15138              # output row east to its pad
+P 8816,15110:8850,15144              # pad
+C 8833,15127
+M 8838,15127 y15000 w=16             # metal north to the inverter's gate pad
+N M 8838,15060 eof_w15127
+P 8694,15163:8870,15187              # row A
+P 8694,15204:8897,15228              # row B
+P 8866,15152:8897,15228              # the bend, with the pad
+C 8880,15172
+D 8628,15120:8712,15146              # node west: the strip, under the thin metal
+D 8560,15120:8632,15146              # under the plate to the VCC box
+D 8508,15116:8562,15166              # VCC box
+C 8534,15146 s=24x40
+P 8570,15100:8622,15148              # the plate (channel 52 long, 26 wide)
+P 8563,15146:8620,15184              # the plate's poly on south: a pad with a metal contact
+C 8592,15168
+D 8628,15140:8650,15186              # the tail down from the strip, under the tie box
+?P 8612,15160:8648,15184             # the pad's poly on east into the tie box, under bc1's thin metal x 8637-8650
+?B 8626,15160:8650,15187             # the tie: plate to node (box 8627-8650, 15160-15187 in the clean shot)
+M 8592,15168 y15383 w=24             # the output's second way out (through the tie): a metal south
+N M 8592,15280 eof_w15127
+P 8578,15365:8616,15397              # pad; its poly goes on east along y 15375-15395 (not drawn)
+C 8592,15383
+# the input: from the bend's pad north and east to a pad, a poly north and east
+M 8882,15172 y14785 x9054 w=14
+P 9038,14768:9070,14802              # pad
+C 9054,14785
+P 9053,14790 y14653 x9150 w=17       # north x 9044-9062, east along y 14645-14662 (goes on east)
+N M 8882,15000 eof_w15172
+N P 9120,14653 eof_w15172

@@ -108,3 +108,10 @@ rst_c       M  6440-6450,9445-9459  out  onto lc3's metal end (its fifth corner-
 # Piece n2n (run 14): the latched R4 match's track from busl's north edge to tl5's bus poly (tl4_w3850)
 bd1_n2_u      M      6769-6782,10400          in   the track x 6775 from busl's region: believed bd1_n2, from the port (6711,15000); the 4,600 px between are drawn by no one
 tl4_w3850     P      5403-5421,6345           out  onto tl5's poly end (its port tl5_w5761 (5402-5422,6350)): the input of tl4's inverter that makes rcs_e3
+# Pieces ck6, ck7 (run 15): the ripple counter's clock to its driver, and the unit that feeds the driver
+lc3_w9947     P      7550,14772-14796         out  onto busl's row end (its port there): the ripple counter's clock, driven by the inverter U at (8733,15000)
+eof_w15172    P      9150,14645-14662         in   the input of the unit V: the poly row runs on east into bc2's ground (poly at every sample to x 9700); its driver is not found
+eof_w15127    P      8616,15375-15395         out  V's output by its load plate's pad and a metal south (through the uncertain tie) to the pad (8592,15383); the pad's poly on east toward the next unit's gate row (not read)
+vss           M      8687-8737,14900          -    column B's VSS rail north of the two units (it turns west as a band y 14816-14878 to the rail x 8510-8560)
+vss           M      8687-8737,15300          -    column B's VSS rail on south
+vcc           M      8510-8558,15180          -    R2 (bc1's M 8534,14990 y16300), drawn again over the two VCC boxes
