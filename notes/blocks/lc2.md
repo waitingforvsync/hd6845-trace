@@ -1359,7 +1359,7 @@ metal shot (accepted from chip 1 and both stripped shots); load-tie junctions se
 
 Round 16: two findings that change connections (a row, a transistor), fixed; geometry fixed.
 
-Round 17 (2026-11-19 00:05 -0600, a fresh agent on claude-fable-5-2, changes since d197845; images
+Round 17 (2026-11-18 23:56 -0600, a fresh agent on claude-fable-5-2, changes since d197845; images
 `cache/scratch/lc2/review-17/`, 16 of them): a fix check of round 16's fixes to piece N, and the first review of
 piece P (the four through lines, the west ends of rows 2, 3, 5).
 
