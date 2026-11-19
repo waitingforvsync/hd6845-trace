@@ -700,7 +700,7 @@ N P 5250,8862 lc2_w8862                     # the copy's lc2_w8692 (slave, secon
 # the second flip-flop's output, a VSS node with a contact (5124,9224), and (in lc3) a second gate y 9252-9266.
 # railprof.py 5114 5148 9080 9300; views s1.png (3.6x), s2_a.png, s2_c.png (6.4x), s3.png (10x).
 M 5084,9160:5148,9256
-D 5104,9163:5158,9256
+D 5104,9163:5158,9250                       # (round 18: to y 9250, the VSS node's end; lc3's second gate starts at y 9252)
 C 5124,9224
 D 5076,9163:5110,9180                       # the top node runs west past the rail's edge ...
 D 5154,9163:5202,9176                       # round 17: and east of the rail to x ~5202, a dead-end tab above the gate's diagonal poly

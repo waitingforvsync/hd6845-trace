@@ -680,7 +680,7 @@ Run 3 (latch D's lower unit and the bus field):
 | `lc2_w9079` | M | 5509-5527, 9233 | in | run 10: row 3's thin metal, from `lc3` |
 | `lc2_w9210` | M | 5334-5350, 9233 | in | run 10: row 5's metal, from `lc3` |
 | `lc2_w9171` | D | 5062-5078, 9256 | ? | rounds 16-17: the top node of the stack south of the east column leaves by its strip, on into `lc3` |
-| `vss` | D | 5104-5158, 9256 | - | round 17: that stack's VSS node, on into `lc3` |
+| `vss` | D | 5104-5158, 9250 | - | rounds 17-18: that stack's VSS node, drawn to its end; `lc3`'s second gate starts at y 9252 |
 | `vss` | M | 5084-5148, 9256 | - | round 16: the east rail on south into `lc3` |
 
 ## Ambiguities
@@ -1389,3 +1389,22 @@ Findings:
 Not checked: the ringed box (5020,9203) and the VCC box (4950,9225) (Not done: with that stack's load).
 
 Round 17: one finding on a port's name, fixed; one geometry-only.
+
+Round 18 (fix check of round 17's two fixes, 2026-11-19 00:08 -0600, a fresh agent on claude-fable-5-2, changes since 2e4732c; images
+`cache/scratch/lc2/review-18/`, 4 of them). (a) One transistor in the box, gate `lc2_w9034`: `lc2_w9171` <-> `vss`;
+both port lines match the drawn nets; under the rail the order is node 9167-9181, gate 9182-9195, diffusion 9205-9251
+with the contact (ring in the metal shot, specks in the clean shot), so the column's port is `vss`. (b) The tab is
+diffusion (chip-2 stripped red minus green about +20 against about 0 on the field east of it), its top edge
+continuous with the node's; south of the diagonal poly is field in both chip-2 shots: no transistor; it touches
+nothing else. (c) The strip has two edges (x 5058 and 5077) in all four shots and no poly on it, reads plain down to
+y 9288, and the node band runs into it at y 9170 without an edge. Both `sameconn.py 2e4732c` runs:
+`connections identical`.
+
+Geometry only: the real tab deepens eastward to the poly's edge (about y 9190 at x 5195; drawn to 9176, kept clear
+of the poly); the drawn column ended at y 9256, 4 px inside `lc3`'s second gate (9252-9266): now y 9250; a single edge
+line at x 5203-5207 runs south through the poly to about y 9290 with field on both sides, unexplained: for `lc3`.
+
+After the fix: `tools/t.sh lc2 sameconn.py ed86acc`: `connections identical`;
+`.venv/bin/python tools/sameconn.py ed86acc`: `connections identical`.
+
+Round 18: no findings that change a connection.
