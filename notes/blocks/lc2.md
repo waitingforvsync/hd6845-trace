@@ -330,6 +330,7 @@ Run 3 (latch D's lower unit and the bus field):
 | `lc2_w8474` | P | 5196, 8205-8220 | ? | run 6: drawn end: the poly of the pad (5232,8214) runs on west |
 | `lc2_w8907` (`lc2_w8450`) | M | 5378-5394, 9233 | ? | round 7: the staircase's fourth line on south into `lc3` (to y 9707 by the follower) |
 | `lc2_w8907` | P | 5160, 8250-8268 | ? | round 7: drawn end: the poly of the pad (5190,8258) runs on west |
+| `lc2_w8907` | P | 5240, 8941-8958 | ? | round 8: drawn end: a second poly of the pad (5386,8951) runs on west into the gate cluster at x 5150-5240 |
 | `lc1_w7468` | M | 5073-5093, 8067 and 5465-5481, 9233 | in, out | run 6: `lc1`'s M_c2 down the staircase and through the strip into `lc3` |
 | `lc3_w9299` | M | 5422-5438, 8067 | in | run 6: row 4's metal, north into `lc1` (`follow.py`: to about (5541,7433)) |
 | `lc2_w8474` | M | 5421-5437, 9233 | ? | round 3: the metal runs on south into `lc3` |
@@ -718,3 +719,20 @@ Not checked by the reviewer: gate widths inside the cells; poly under the rails 
 the row of finding 1 goes south (followed by the tracer, above); the thin metal x 5749-5763.
 
 Round 7: one finding that changes a connection, fixed (a fix check follows).
+
+Round 8 (fix check of round 7's fixes, 2026-11-18 19:21 -0600, a fresh agent on claude-fable-5-2, against commit 5d95658, at commit
+98f72a2; images in `cache/scratch/lc2/review-8/`). Confirmed: the fourth line one metal with every corner intact and
+open ground to each neighbour; its west pad (5190,8258) a contact where the metal ends; (5386,8951) its only contact
+from y 8520 to y 9233, and the metal running on south; the row y 8898-8915 one poly from x 5377 to x 5600 with field
+on both sides and no pad or hole under the three metals; its east end abutting the box behind one 8 px edge line,
+with no field or green rim, not passing on ("buried contact is likely; uncertain is fair"); T1's `?M`; both
+`sameconn.py` runs (only the name `lc2_w8907` added). Findings, each checked by the tracer:
+1. **The pad (5386,8951) has a second poly, west** (changes a connection: another branch of the net leaves): a row
+   y 8943-8958 joins the pad with no outline at x 5372 and runs under the metals x 5342, 5300 and 5258 and on as
+   open poly to at least x 5152, into the undrawn gate cluster. Confirmed (`q1.png`, 3.9x; `px.py col 5280` and
+   `col 5240`: dark red-brown at y 8943-8955; `tl5_tracks.py rows row 5040 5380 4 8950`). Fixed: drawn from the pad to
+   x 5240, a drawn end.
+2. Geometry only: the fourth line's step drawn along y 8439 lies at y 8425-8441 (the 12 px dark stretch was its
+   south edge). Confirmed (`tl5_tracks.py h 8432 5290 5352`: no gap). Fixed: redrawn at y 8432.
+
+Round 8: one finding that changes a connection, fixed (a fix check follows).

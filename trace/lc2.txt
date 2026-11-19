@@ -369,18 +369,19 @@ C 5232,8214
 P 5196,8205:5224,8220
 # review round 7: a fourth line of the staircase and the poly row that joins it to the inverter's output box.
 # Metal: a pad (5190,8258) (its poly leaves west, drawn to x 5160), east along y 8251-8267 to x 5300, south, east
-# along y 8431-8447 to x 5343, south, east along y 8512-8528 to x 5386, south through the strip's edge, with a contact
+# along y 8424-8440 to x 5343, south, east along y 8512-8528 to x 5386, south through the strip's edge, with a contact
 # (5386,8951) on a pad. That pad's poly goes north under the metal to y 8898 and east as a row y 8898-8915 under
 # three metals (no pad on it) to the west side of the box (5608-5640, 8904-8930) on drain A, where lc2_w8450's
 # metal has its contact. The row ends on the box behind a 7 px dark line: read as a buried contact, drawn uncertain
 # (notes, Ambiguity 11). If it is one, this line carries lc2_w8450.
-M 5190,8259 x5300 y8439 x5343 y8520 x5386 y9233 w=16
+M 5190,8259 x5300 y8432 x5343 y8520 x5386 y9233 w=16
 P 5175,8243:5215,8273
 C 5190,8258
 P 5160,8250:5180,8268
 P 5372,8936:5402,8968
 C 5386,8951
 P 5377,8898:5401,8962
+P 5240,8941:5380,8958                       # fix check, round 8: the pad's poly also leaves west as a row y 8941-8958 under the metals x 5342, 5300, 5258 (drawn to x 5240: it runs on into the gate cluster at x 5150-5240)
 P 5377,8898:5604,8915
 N P 5500,8907 lc2_w8907
 ?P 5598,8899:5612,8914

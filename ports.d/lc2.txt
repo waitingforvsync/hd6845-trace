@@ -48,3 +48,4 @@ lc1_w7468   M  5465-5481,9233  out  the same metal on south into lc3 (no contact
 lc3_w9299   M  5422-5438,8067  in   row 4's metal, north into lc1
 lc2_w8450   M  5378-5394,9233  ?    the staircase's fourth line (label lc2_w8907; lc2_w8450 through an uncertain buried contact) on south into lc3
 lc2_w8450   P  5160,8250-8268  ?    drawn end: the poly of that line's west pad (5190,8258) runs on west
+lc2_w8450   P  5240,8941-8958  ?    drawn end: the second poly of the pad (5386,8951) (label lc2_w8907) runs on west into the gate cluster
