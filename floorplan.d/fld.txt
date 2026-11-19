@@ -1,8 +1,6 @@
 # fld: the logic west of the row address selector
 6690,5010:7060,5285    logic   bit-0 compare inverters | two inverters: outputs are the island's inputs g and i (the R9 comparator's bit 0 in shift mode)
-?6380,4720:6690,5300   logic   field logic, upper group (untraced) | routing field and gates: the sources of row address bit 0 in interlace sync+video lead here
 6560,5400:7040,6110    logic   bit-0 XOR cells | two copies of the comparator's XOR cell: one makes the R9 comparator's bit-0 input, the other the row address bit-0 source
-6380,3880:6700,4220    logic   bit-0 source gates | partial: a series pair and a single pull-down under one rail make the two lines that feed the bit-0 inverter and XOR cell; loads untraced
 6250,3940:6430,4460    route   bit-0 source lines, top | metals from the gate group down to the pads of two vertical polys
 6300,4430:7050,5000    route   bit-0 source lines | two vertical polys under the six bus metals, then east along y 4937/4915
 6390,4860:6580,6100    route   fld_y_b | metal and poly down the west side to the second XOR cell

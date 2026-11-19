@@ -1,10 +1,10 @@
 # cdp1: central datapath, top rows. x0,y0:x1,y1  kind  name | description
 8340,2950:10790,3040   power  VSS feeds and band | three feeds from the VSS plane and the band joining the slice rails; row A's outputs leave upward here
-8340,3040:10790,3330   array  R8 register (6 bit) | six static register bits (write pass transistor, two inverters, grounded-gate feedback). Each output leaves upward on its own wire. Three bits share a bit line with the register below, three do not; R8 is believed from that and the width
+8340,3040:10790,3330   array  R8 register (6 bit) | six static register bits (write pass transistor, two inverters, grounded-gate feedback). Each output leaves upward on its own wire. Three bits share a bit line with the register below, three do not; R8 by its data bus joins and its strobe (slice = 5 - bit)
 8340,3335:10700,3412   route  compare bit 5 detour | two poly lines: the 5-bit register's fifth bit goes west to the island at x 7330-7900 and comes back, modified, to the comparator
 8750,3440:10790,3650   array  R9 comparator: equality NOR | one pull-down per slice on a diffusion line along the row, load in the left slice; output leaves west along y 4459. High when the register below equals the compare value
 8750,3650:10790,3990   array  R9 comparator: XOR (5 bits) | per bit NOR(A,B) and an AND-OR-invert: differs = A XOR B, A the register bit, B a line from the channel below
 8750,3990:10850,4230   route  compare value (5 lines) | five poly lines from the east, one per comparator bit; also the feed of one bit line of the 6-bit register from the west
 8750,4232:10790,4524   array  R9 register (5 bit) | five static register bits, same cell as the row above; outputs go up to the comparator. R9 by its write strobe
-8340,4530:10850,5150   route  data bus channel | fourteen poly lines; each bit line of the two registers meets one line that runs east (believed the data bus), seven lines pass through
+8340,4530:10850,5150   route  data bus channel | fourteen poly lines; each bit line of the two registers meets one line that runs east: the data bus db_b0..db_b7 (bust), seven lines pass through
 8750,5150:10790,5700   ?array rows D and E (5 cells) | not traced

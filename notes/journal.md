@@ -1733,3 +1733,46 @@ central column (R12-R17). After `eof`, `busL` and `tlb` the queue now runs:
 Floor plan: `ral`'s label was still "believed a latch per bit (partly traced)" and provisional,
 although `ral` has been done since 2026-11-17 (a static latch per bit, firm in all 19 copies). The
 label is corrected. `out/` rebuilt.
+
+## 2026-11-19 11:08  Floor plan: a sweep for stale labels
+
+The user asked for every stale label to go and for everything now identified to be named.
+
+**Method.**
+- Every block (628) that was provisional or whose text said "not traced", "believed", "unknown" or the
+  like was checked against the master list and the notes.
+- Every signal name in a label was checked against the netlist.
+
+**Changed.**
+- `mal`: was "believed a latch per bit (partly traced)"; now a static latch per bit, firm (as `ral`).
+- `bd1`: its labels now name R4's match (`rc_eq_r4`), the latch gated by `inh_lat`, and the `inh_rc` /
+  `inh_lat` inverters and `inh_n`'s driver, instead of "line X" and "NOT X".
+- `cdp1`: R8 by its data bus joins, not "believed"; the data bus channel names `db_b0`..`db_b7`.
+- `rdp2`: R4's comparator is against the row counter `rc0`..`rc6` (firm), not "believed the row
+  counter", and its output goes to `bd1`.
+- `amr`: the compared lines are `c4l0`..`c4l3`, not `cdp1`'s old line names.
+- `dbus`: D7's input buffer is no longer provisional.
+- `tl1`: two gates no longer provisional; the wide metal is labelled as the VSS arm onto R3's top.
+- `tl3`: latch C's data join is drawn now.
+- `tla`, `bw`: "the step signal b" is now `rc_stepreq_n`; the step formula uses the `rcs_` names.
+- `tc1`: `l2_out`/`l3_out` are now `ras_o0_sel2`/`ras_o0_sel1`.
+- `tcw`: its latch is marked as the field latch path.
+- The input buffer row's extra inverter is named as `inh_ck`'s.
+- New provisional block for the metal band north of the top-left strips (`tlb`).
+
+**Removed as superseded** (another fragment now covers them):
+- `tc1`'s four "gate columns, not traced" blocks at x 6400-6750 (`tcw`'s);
+- `fld`'s "upper group (untraced)" (`tc2`'s);
+- `fld`'s "bit-0 source gates, partial" (`tcw`'s latch).
+
+**`operation.md`**: "`amr_eq_r3` is believed to be `amr_eq_r3` ... not joined" corrected: `amr` joined it
+firmly on 2026-11-17.
+
+**Still provisional, rightly** (not traced):
+- the top-left's last rows, `lc1`'s rest and `lc3`, `tr1`/`tr2`;
+- the bottom-centre and bottom-left logic;
+- `bc3`'s groups, `bd1`'s two lower gate columns, `bd2`'s lower part;
+- `cdp1`'s rows D/E and the large cells of `cdp2`/`cdp3`;
+- `larr`'s middle and right columns and carry gaps;
+- `tla`'s top lines and the diagonal fan, D7's protection;
+- the comb cells by LPSTB/RES, the small cell by the die marking.

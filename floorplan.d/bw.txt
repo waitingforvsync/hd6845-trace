@@ -2,4 +2,4 @@
 10640,9420:11480,17200  ?route  bus field (datapath to counters) | about twenty vertical metal lines; an eight-line bus joins the central datapath's rows at y 10345-10650 and y 13300-13620. Surveyed, not traced
 7950,7780:11040,8040    route   channel 3 (five control lines) | five poly lines from the block west of the counters: bus line B, ck_a, the row counter's step b, band H1's line, the R2 match; no contact on the way
 7700,7230:7950,7990     route   channel 3 bundle turning north | the first four of those lines turn north here, bend twice and go west
-6330,7150:7700,7700     ?route  crossing field west of the datapath | horizontal poly lines over vertical metals; each of the lines ends here on one metal. The step signal b leaves north on the metal x 5841 towards the top-left logic
+6330,7150:7700,7700     ?route  crossing field west of the datapath | horizontal poly lines over vertical metals; each of the lines ends here on one metal. rc_stepreq_n leaves north on the metal x 5841 towards the top-left logic
