@@ -22,6 +22,11 @@ export function pointInRing(x, y, ring) {
 const loader = new THREE.TextureLoader();
 const texCache = new Map();
 // One texture per URL, shared by every viewer; each viewer that asks hears when it has loaded.
+export function releaseTexture(url) {
+  const e = texCache.get(url);
+  if (e) { e.tex.dispose(); texCache.delete(url); }
+}
+function texLoaded(url) { const e = texCache.get(url); return !!(e && e.loaded); }
 function texture(url, onLoad) {
   let e = texCache.get(url);
   if (!e) {
@@ -101,7 +106,8 @@ export class PhotoViewer {
     const mesh = new THREE.Mesh(g, mat);
     mesh.renderOrder = i;
     this.scene.add(mesh);
-    return { def: t, mat, mesh };
+    if (t.lazy) mesh.visible = false;
+    return { def: t, mat, mesh, curA: null, curB: null, used: 0 };
   }
 
   urlFor(tile, shot) {
@@ -112,6 +118,7 @@ export class PhotoViewer {
   setShots(a, b = a, mix = 0) {
     this.shots = [a, b]; this.mixv = mix;
     for (const t of this.tiles) {
+      if (t.def.lazy) { t.mat.uniforms.mixv.value = mix; continue; }     // loaded in _draw, when in view
       t.mat.uniforms.tA.value = texture(this.urlFor(t, a), () => (this.dirty = true));
       t.mat.uniforms.tB.value = texture(this.urlFor(t, b), () => (this.dirty = true));
       t.mat.uniforms.mixv.value = mix;
@@ -272,6 +279,21 @@ export class PhotoViewer {
       const f = t.def.fade;
       t.mat.uniforms.opacity.value = f ? Math.min(1, Math.max(0, (z - f[0]) / (f[1] - f[0]))) : 1;
       t.mesh.visible = t.mat.uniforms.opacity.value > 0.001;
+      if (t.def.lazy) {
+        const d = t.def, inView = d.x < this.cx + this.half && d.x + d.w > this.cx - this.half && d.y < this.cy + hh && d.y + d.h > this.cy - hh;
+        if (!(t.mesh.visible && inView)) { t.mesh.visible = false; continue; }
+        t.used = performance.now();
+        const ua = this.urlFor(t, this.shots[0]), ub = this.urlFor(t, this.shots[1]);
+        if (t.curA !== ua) { t.curA = ua; t.mat.uniforms.tA.value = texture(ua, () => (this.dirty = true)); }
+        if (t.curB !== ub) { t.curB = ub; t.mat.uniforms.tB.value = texture(ub, () => (this.dirty = true)); }
+        t.mesh.visible = texLoaded(ua) && texLoaded(ub);
+      }
+    }
+    // keep memory bounded: drop the textures of the least recently seen lazy tiles
+    const held = this.tiles.filter(t => t.def.lazy && t.curA).sort((p, q) => q.used - p.used);
+    for (const t of held.slice(10)) {
+      for (const u of new Set([t.curA, t.curB])) releaseTexture(u);
+      t.curA = t.curB = null; t.mat.uniforms.tA.value = t.mat.uniforms.tB.value = null; t.mesh.visible = false;
     }
     this.renderer.render(this.scene, this.camera);
     // notes

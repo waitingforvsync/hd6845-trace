@@ -30,8 +30,16 @@ const syncPressed = () => document.querySelectorAll('button.tgl').forEach(b => b
 new MutationObserver(syncPressed).observe(document.body, { subtree: true, attributes: true, attributeFilter: ['class'] });
 const ex = await (await fetch('data/example.json')).json();
 const EX = [ex.origin[0], ex.origin[1], ex.size[0], ex.size[1]];
-const MID = [13300, 13900, 2400, 2400];
-const QTR = [9700, 10300, 9600, 9600];
+const MID = [13300, 13900, 2400, 2400];     // the neighbourhood the "block of logic" button flies to
+// The whole die at 1/4 and 1/2 of the photo's size, in tiles that load when they come into view.
+function lazyTiles(step, size, fade) {
+  const out = [];
+  for (let r = 0, y = 0; y < 21025; r++, y += size) for (let c = 0, x = 0; x < 19838; c++, x += size) {
+    out.push({ x, y, w: Math.min(size, 19838 - x), h: Math.min(size, 21025 - y), lazy: true, fade,
+      urls: { metal: D(`L${step}_metal_${c}_${r}.jpg`), acid1b: D(`L${step}_acid1b_${c}_${r}.jpg`) } });
+  }
+  return out;
+}
 const DIE = [0, 0, 19838, 21025];
 const D = f => 'data/' + f;
 const SHOTS = ['metal', 'metal1', 'acid', 'acid1b'];
@@ -86,9 +94,9 @@ document.querySelectorAll('section[id]').forEach(sec => {
     bounds: DIE, minHalf: 50,
     tiles: [
       { x: 0, y: 0, w: 19838, h: 21025, urls: { metal: D('die_metal.jpg'), acid1b: D('die_acid1b.jpg') } },
-      { x: QTR[0], y: QTR[1], w: QTR[2], h: QTR[3], urls: { metal: D('qtr_metal.jpg'), acid1b: D('qtr_acid1b.jpg') }, fade: [0.08, 0.16] },
-      { x: MID[0], y: MID[1], w: MID[2], h: MID[3], urls: { metal: D('mid_metal.jpg'), acid1b: D('mid_acid1b.jpg') }, fade: [0.18, 0.32] },
-      { x: EX[0], y: EX[1], w: EX[2], h: EX[3], urls: { metal: D('ex_metal.jpg'), acid1b: D('ex_acid1b.jpg') }, fade: [0.4, 0.8] },
+      ...lazyTiles(4, 8192, [0.07, 0.14]),
+      ...lazyTiles(2, 4096, [0.18, 0.3]),
+      { x: EX[0], y: EX[1], w: EX[2], h: EX[3], urls: { metal: D('ex_metal.jpg'), acid1b: D('ex_acid1b.jpg') }, fade: [0.42, 0.8] },
     ],
   });
   v.setShots('metal'); v.reset();
