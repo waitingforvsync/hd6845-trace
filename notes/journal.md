@@ -2331,3 +2331,21 @@ tools/rename.py inh_n rst_a_n inh_ck rst_ck inh_rc rst_rc inh_lat rst_lat    # p
 Until that is done such a branch fails the gate (a net carries two names where main dropped the alias;
 former names in its documents). Work that reaches main with old names anyway is put right by running
 the same commands on main. `out/` rebuilt.
+
+## 2026-11-19 23:45  Floor plan labels; the data sheet on RES and LPSTB
+
+Asked by the user. **Floor plan**: labels brought up to the day's identifications: `cdp3`'s row H is
+"R13 register", row C "?R12 register" (marked), the six large cells "R14's cells" (both halves), rows
+E and F "?read gates of R12 and R13"; `cdp4`'s rows are "R15 register (8-bit latch)", "read multiplexer
+of R14-R17", "R17: 8-bit latch (?light pen, low byte)", "R16: 6-bit latch (?light pen, high bits)"; the
+blocks on the reset copies say so (`bd1`, `wl`, `eof`). Coarse blocks: the band north of the top-left
+strips removed (`floorplan.d/tlb.txt` replaces it; missed when `tlb`'s handoff was applied at 23:01); the
+gate column west of the large cells trimmed to its one undrawn unit (U1); the left bus field, `lc1`'s
+strip, `cdp4`'s corner group and the RES/LPSTB buffers reworded. `out/` rebuilt (706 blocks); the
+central datapath looked at (`cache/scratch/refresh/fp_cdp2.png`): every new label fits its box.
+
+**RES and LPSTB**: the Hitachi data sheet (`cache/ds/p-08.png`, "Reset (RES)") says "RES has capability
+of reset function only when LPSTB is at Low level", which is what the trace has: `rst` = NOR(`lpstb_b`,
+`res_b`), firm. It names no test mode. Added to `notes/operation.md`, "Reset from the pins", with the
+belief (not traced, not in this data sheet) that RES low with LPSTB high is a test mode, and where to
+look: the loads of the two buffered pins in the bottom-left logic.

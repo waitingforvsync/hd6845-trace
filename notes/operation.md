@@ -117,7 +117,7 @@ which `ur`'s drawing had joined to it by a poly that is not there.
 **Reset from the pins** (`notes/blocks/eof.md`, piece `x1`; the gates are `lc1`'s). The buffered
 RES and LPSTB lines run south out of the top-left logic in its poly bus and end on the two
 inputs of the NOR at the top of the left-centre gate column: **`rst` = NOR(`lpstb_b`,
-`res_b`)**, high while both pins are low. Its inverse `rst_n` is buffered three times:
+`res_b`)**, high while both pins are low. **The data sheet says the same** (`cache/ds/p-08.png`, "Reset (RES)": "RES has capability of reset function only when LPSTB is at Low level"; it gives no reason and names no test mode. Believed, from other 6845 data sheets and not from anything traced: RES low with LPSTB high is a test mode. The buffered pins run on separately to the bottom-left logic, `res_b` and `lpstb_b` at (6366,15000) and (6408,15000), where their loads are not traced: the place to look for it). Its inverse `rst_n` is buffered three times:
 
 - `rst_c` clears latch D, so `lc_step` (the step pulse of the scan line counter and of
   `c4l`) is held high during reset, and clears the left-centre latch C; inverted twice more it is

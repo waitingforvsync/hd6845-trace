@@ -1,6 +1,6 @@
 # wl: logic west of the 4-bit counter
 11090,7890:11665,8900   logic   row counter clock generator | makes the character-row counter's two non-overlapping clocks from one step pulse p: slave clock = NOR(buffered master clock, p), master clock = NOR(NOT p, buffered slave clock); two NOR drivers 350 px wide
-11215,7650:11665,7860   logic   row counter step gate | p = NOR(a, b): a is the core signal that also stops ck_b (rst_rc), b comes from the bus field in the west
+11215,7650:11665,7860   logic   row counter step gate | p = NOR(a, b): a is rst_rc, a copy of the reset (RES low with LPSTB low), b comes from the bus field in the west
 11260,7265:11665,7555   logic   two inverters | upper: inverse of the line that runs down through all counter rows (x 12285), sent north; lower: inverter for a bus-field signal
 11040,7020:11700,7230   route   bands above the counters | four horizontal poly lines that go on east over the top of the mid-right array: H3 is rst_rc, H4 feeds the counters' line x 12902
 11040,9160:11670,9420   route   bus channel, west end | ck_a, the R2 match and bus line B turn north here and cross the block to poly lines into the bus field
