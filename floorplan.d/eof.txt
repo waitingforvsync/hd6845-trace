@@ -11,3 +11,5 @@
 2250,1900:2600,2506      logic  NOR on NOT R5 match | tl1_w2637 = NOR(tl1_w5936, rcs_c1, sl_eq_r5_n): R5's match gated into the data of the middle cluster's latch A; load fed by a diffusion strap from the VCC plane
 10209,15083:10405,15929  route  inh_src to bc2's latch clear | from the metal x 10225 by a poly hop and an L-shaped metal to the clear pad of the east column's latch unit a
 8650,15244:9770,18098    route  inh_src, west bus line and the metal x 8968 | poly hop, metal y 18083, poly north, then a 2,470 px metal with two taps and a west branch: four polys into the bottom-centre gate columns (not followed)
+7541,7585:7775,7860      logic  gate on inh_ck, eof_w7818 | eof_w7818 = NOT(eof_w7777 AND (inh_ck OR eof_w7718)): two pull-downs side by side under column 0's VSS rail, a third in series, load east; output west and north by two pads to a pad (7272,6912)
+6450,7767:7541,7831      route  eof_w7777, the gate's third input | poly row west through the crossing field, one track down at (6886,7777), into the left-centre strip at (6450,7821)

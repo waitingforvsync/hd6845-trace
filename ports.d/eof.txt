@@ -25,7 +25,7 @@ sl_eq_r5_n  M  3528,2505-2519     ?   link D's west end on tl2's metal (3533,250
 # Piece tcwa (run 2): the net is inh_ck. The driver (the inverter of the input buffer row) lies beyond link F's east end.
 inh_ck      M  6098-6112,6345     ?   link E's north end on tl6's metal (6105,6350): towards the loads
 inh_ck      M  6422-6438,8072     in  link E's south end on lc2's piece (inh_ck, M 6431,8067)
-inh_ck      P  7530,7640-7656     ?   the tap's row (pad (6427,7648)): on east a gate of the undrawn group under the metal x 7550-7600
+# (the tap row now ends as row 1 of the gate: piece g7700, below)
 inh_ck  M  6445,8165-8179     ?   link F's west end on lc2's end (6450,8172): towards the loads
 inh_ck  M  6695,8360-8374     in  link F's east end on trunks' line S (its end x 6690): the net is inh_ck
 
@@ -60,3 +60,14 @@ inh_src     P  8930,16728-16746   ?    the row west of the tap pad (8966,16737):
 inh_src     P  8930,16163-16181   ?    the row west of the tap pad (8962,16172): into the gate column
 inh_src     P  8930,15248-15266   ?    the row west of the end pad (8966,15260)
 inh_src     P  8650,17722-17742   ?    the poly west of the pad (8688,17737)
+
+# Piece g7700: the gate on inh_ck's tap row (run 5)
+inh_ck      P  7525,7638-7656    in   the tap row (pad (6427,7648)): row 1 of the gate
+eof_w7777   P  6450,7812-7830    in   row 3 of the gate, on west into lc1's strip (cluster E's undrawn west half)
+eof_w7718   P  7400,7203-7221    ?    the poly row east of the pad (7313,7215)
+eof_w7718   M  7262-7274,7800    ?    the metal south of row 2's pad (7267,7736)
+eof_w7818   P  7272-7285,6875    out  the gate's output: the poly north of the pad (7272,6912)
+vss         M  7552-7598,7585    -    column 0's VSS rail, on north
+vss         M  7552-7598,7860    -    the same, on south (joins cdp3's rail at y 8555)
+vcc         M  7725-7775,7720    -    the wide metal east of the load, on north
+vcc         M  7725-7775,7860    -    the same, on south

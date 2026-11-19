@@ -228,7 +228,7 @@ M 6105,6345 y7346 x6298 y7432 x6430 y8072 w=14     # link E
 N M 6105,6800 inh_ck
 P 6412,7632:6446,7664               # the tap's pad
 C 6427,7648
-P 6427,7648 x7530 w=16              # the row east, to 10 px short of the gate group's diffusion
+P 6427,7648 x7530 w=16              # the row east; it goes on as row 1 of the gate (piece g7700, below)
 M 6445,8172 x6559 y8367 x6695 w=14  # link F: lc2's end (x 6450) to trunks' end (x 6690)
 N M 6559,8300 inh_ck                # lc2's name for the metal that arrives here
 # In the full extraction inh_ck (then under three names; the clock block's and inrow's name for the
@@ -436,3 +436,82 @@ M 8967,17737 x8688 w=13              # the west branch
 P 8671,17720:8705,17754
 C 8688,17737
 P 8650,17722:8680,17742              # its poly on west (not followed)
+
+# ============================================================================================
+# Piece g7700 (run 5): the gate at the end of inh_ck's tap row (task (c) of the queue row).
+#   One gate between the VSS rail of the central datapath's column 0 (here x 7552-7598) and the
+#   wide metal x 7725-7775 (VCC, by the load):
+#       eof_w7818 = NOT( eof_w7777 AND (inh_ck OR eof_w7718) )
+#   A diffusion column under the rail (x 7541-7611, y 7613-7820) is crossed by three poly rows:
+#   row 1 (inh_ck, the tap row), row 2 (eof_w7718) and row 3 (eof_w7777). Between rows 1 and 2
+#   the rail's one contact (7572,7684): the source of both. The drain north of row 1 and the
+#   drain south of row 2 are joined east of the rail by a diffusion ring (top strip, strap
+#   x 7637-7654, bottom strip) round a field island on which rows 1 and 2 end (they are NOT
+#   joined to each other: the patch between their end caps is field). Row 3 is in series below;
+#   south of it the output node goes east (a T-shaped diffusion wire to the load's strip and to
+#   the load's tie box) and west (a diffusion wire to a buried contact on the poly row y 7821).
+#   Load: poly block x 7666-7721 over the strip y 7783-7809, VCC contact (7748,7779).
+#   Evidence (cache/scratch/eof/): t2.png (2.25x four shots), t4.png (4x, the ring and the row
+#   ends), t6.png / t7.png (4.7x, the load), t10.png (the tie box), t11.png (3.4x, west side);
+#   textmap.py 7530 7596 7620 7836 3 (the column: one ring only, in S); px.py col 7622 7604 7750 3
+#   and row 7680 7596 7670 3 (the island is field: clean 153/151/90 as the field east of the
+#   strap, 152/146/93; strap and top strip 159/126/90: a diffusion wire in the open);
+#   the cuts listed in the survey (row 7810, col 7651, col 7690, row 7795, row 7842, row 7818,
+#   col 7520, col 7500, col 7460, col 7625, col 7530, col 7646, col 7676, row 7770, col 7748).
+#   The rail is cdp3's c0 VSS rail: it widens at y 8555 into the metal that cdp3 labels vss
+#   (t8.png, t9.png). The east metal is called VCC from the load's orientation only.
+M 7575,7585 y7860 w=46               # the VSS rail (x 7552-7598)
+N M 7575,7600 vss
+M 7750,7720 y7860 w=50               # the wide metal east (x 7725-7775); north of y 7720 not drawn
+N M 7750,7840 vcc
+D 7541,7613:7611,7820                # the column under the rail: A, S, B, C between the rows
+C 7572,7684                          # the one contact, in S (ring in both chips, specks in the clean shot)
+D 7600,7613:7654,7628                # ring: top strip, from A east
+D 7637,7613:7654,7757                # ring: the strap
+D 7600,7745:7654,7757                # ring: bottom strip, back to B
+P 7525,7638:7632,7656                # row 1 (inh_ck) on from the tap row's drawn end, to its end cap on the island
+P 7500,7718 x7632 w=20               # row 2 over the column to its end cap (y 7708-7728)
+P 7500,7708:7527,7745                # row 2's widened step
+P 7262,7735 x7527 w=19               # row 2 west (y 7726-7745) to its pad
+N P 7400,7735 eof_w7718
+P 7634,7777 x6886 y7821 x6450 w=19   # row 3: west through the crossing field, a corner (6886,7777), down one
+                                     # track, west on the row y 7812-7830 to lc1's east edge (not followed further)
+N P 7300,7777 eof_w7777
+D 7600,7803:7658,7817                # the output node C east: west arm of the T
+D 7643,7783:7658,7854                # the T's vertical arm
+D 7643,7832:7690,7854                # its foot, under the tie box
+D 7643,7783:7730,7809                # the strip under the load, to the VCC box
+D 7726,7759:7773,7808                # VCC box under the wide metal
+C 7748,7779
+P 7666,7761:7721,7827                # the load's plate (channel 55 long, 26 wide)
+P 7664,7822:7690,7856                # its tab down to the tie box
+B 7664,7832:7690,7854                # the tie: plate to the output node
+D 7513,7803:7545,7822                # the output node C west: diffusion wire from the column
+D 7490,7805:7520,7832                # under the box
+B 7490,7805:7518,7832                # buried contact onto the poly row y 7821
+P 7402,7821 x7518 w=19               # the output's poly row west (y 7812-7831)
+P 7385,7803:7420,7839                # its pad
+C 7402,7822
+M 7401,7600 y7828 w=12               # the output's thin metal north (over rows 3, 2 and 1 without contact)
+P 7384,7590:7420,7622                # the north pad
+C 7401,7606
+P 7273,7604 x7401 w=16               # its poly west under two metals (x 7309-7322: row 2's; x 7345-7362), no contact
+P 7255,7589:7291,7623                # a second pad
+C 7273,7606
+M 7272,6912 y7610 w=12               # a thin metal north, 690 px over the crossing field's rows (bars only, no hole)
+P 7254,6893:7291,6928                # its north pad
+C 7272,6912
+P 7278,6875 y6912 w=13               # the pad's poly leaves north towards a row y 6862 (not followed)
+N M 7401,7700 eof_w7818
+# row 2's pad (7267,7736) and its two metals: east then north to a pad (7313,7215); south (a long
+# run, followed by follow.py to (6514,8254), not drawn beyond the stub)
+#   t14.png, t18.png, t19.png, t20.png; textmap.py 7222 7696 7336 7800 3 (row 2's pad: ring of 8-10 px on
+#   the east and on the south side alike), 7285 7180 7345 7240 3, 7372 7570 7436 7640 3, 7376 7790 7436 7850 3,
+#   7228 7576 7300 7630 3, 7243 7480 7300 7582 3, 7237 6868 7309 6934 3; tl5_tracks.py v 7272 6930 7590.
+P 7244,7717:7290,7752
+C 7267,7736
+M 7267,7736 x7315 y7215 w=13
+P 7296,7198:7331,7232                # the north pad
+C 7313,7215
+P 7313,7212 x7400 w=18               # its poly row leaves east (y 7203-7221; not followed)
+M 7268,7736 y7800 w=12               # the south metal's first 60 px
