@@ -370,6 +370,14 @@ metals 13-17 px wide, drawn 14; every row is poly, 22-25 px between its edge lin
   is 20 px west of `cdp4_rst`'s south pad: `tools/px.py row 13898 7424 7470 3 metal,metal1,acid1b`:
   metal to x 7431, a dark edge, bare ground at x 7442-7449 (red 124-156 in both chips, the clean shot
   green 120/159/82), the pad's ring from x 7451.
+- Chip 2 alone shows dark notches on the metal at (7366,13853), (7512,13066-13076) and
+  (7512,13270-13282) (round-5 reviewer; `tools/px.py pt 7366,13853 7512,13071 7512,13276 7512,13150
+  all`: chip-2 metal 116/76/22, 43/22/16, 72/40/29 against 164/115/62 on the plain track; chip-1 metal
+  157/115/31, 211/148/97, 184/140/82; the clean shot protected, 216-218/160-166/112-121, no hole):
+  marks on chip 2's metal, not contacts. In the clean shot the row-end pads of lines 1 and 2 are
+  stained red (142/40/28, 139/40/27 at the contact) and show no green hole; their contacts rest on the
+  ring and bright centre in both metal shots (`tools/busl_padc.py`: red 225/179 and 220/212) and, for
+  pad 1, the hole in the chip-2 stripped shot.
 - The south ends (view `d6_o3.png`, 3x, chip-2 metal shot with every package's trace): each track
   ends on the pad of its own line of `bc1`'s, in a staircase; `tools/tl5_tracks.py v` from each pad on
   south: no metal in either chip for 60 px or more beyond any of the six. Line 1's track is dark for
@@ -682,6 +690,39 @@ at 4x; the clean shot's hole test is weak in this field (sure contacts read red 
 to +61); anything south of y 15000, east of the drawn ends, or `bc1`'s metal beyond y 14060.
 
 Round 1: no findings that change a connection.
+
+**Run 5, piece `d6`. Round 1: full review** (2026-11-19 18:02 +0100; a fresh Fable 5.2 reviewer agent;
+commit d9c6e0e; images in `cache/scratch/busl/review-5/`, 15 read).
+Told to suspect: a swap or bridge in either staircase (the upper read at 2.3x, the lower at 3.6x, in
+the chip-2 metal shot; the follower leaves lines 1, 2 and 4 at their lower arms), the long runs (a
+step of one track, a pad, a contact or a break; line 6's detour at y 12835), a track running on
+through either end, a second poly on a row-end pad, the rows from the pads to x 7600, each lower track
+on the right line of `bc1`'s, the dismissed spots (six named, the crossings of row y 12745, the 20 px
+dark stretch north of line 1's contact), the two near misses beside `cdp4_rst`'s pads, the arms lying
+on the rows y 13809 and y 13852.
+Checked: the six north pads at 4x in the chip-2 metal shot and both stripped shots (each on its own
+row's west end, field west and north, no second poly, no metal for 55 px or more north of any in
+either chip); the rows to x 7600 (unbroken, onto `cdp3`'s rows at the same y); the upper staircase at
+3.6x in both metal shots (six nested right-angle steps over field, order kept; the pad (7554,9450) of
+another net 8-10 px of open ground below line 6's arm); the long runs by a scan of its own of all
+nineteen vertical segments in both metal shots (no widening to 21 px in both chips, no 14 px without
+metal in both, a steady centre per 300 px) and strips at 1.12x in the metal and clean shots (no pad,
+no poly under a track); line 6's detour at 4x in three shots with text maps (the track x 7512 from
+the north ends on its own pad (7510,12742), no metal at y 12766-12820; open ground at y 12848-12854
+between the arm and `cdp4_rst`'s north pad); the lower staircase at 3.2x in both metal shots and arms 3
+and 4 at 4x in four shots (order kept; no ring or hole on either arm; open ground at x 7440-7448
+between line 5's corner and `cdp4_rst`'s south pad; line 6's arm clear of the box at x 7535); the south
+ends (each track on the claimed pad of `bc1`'s, no metal on south; line 1's dark stretch is ring plus
+row edge); the seventh track where it crosses `bc1`'s rows (no ring, widening or hole); the dismissed
+spots by text map and the y 12745 crossings at 4x; the extraction and `tools/unsure.py` (none of the
+six nets listed).
+Findings: none. Two comments for the notes, both checked by the tracer and added under the piece
+(chip 2's dark notches on the metal at three places; the red stain on pads 1 and 2 in the clean shot).
+The trace is unchanged since the reviewed commit.
+Could not check, or only weakly: the long runs end to end at 2x or more (they rest on the 1.12x
+strips and the two numeric scans); `bc1`'s rows east of the pads and `cdp3`'s rows east of x 7780.
+
+Round 1: no findings.
 
 ## Not done
 
