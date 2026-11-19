@@ -11,6 +11,11 @@ drawn** (piece H, wiring only). Two joins to `lc1`, without an uncertain item:
 - **`lc1_w7468`** (`lc1`'s metal M_c2) comes down the staircase and runs south through the whole strip without a
   contact, into `lc3`.
 - Row 4's metal (`lc3_w9299`) is drawn up the staircase to `lc1`'s strip at x 5422-5438.
+- After review round 7: a fourth line of the staircase (from a pad (5190,8258) to the strip's south edge on x 5386) and
+  a poly row y 8898-8915 from its contact (5386,8951) to the output box of the inverter that makes latch B's data. The row
+  ends on the box behind a dark line: read as a buried contact, drawn uncertain (Ambiguity 11). If it is one, the
+  fourth line carries `lc2_w8450`. `lc1`'s T1 between y 8067 and y 8150 is now marked uncertain, so `lc2_w8474` =
+  `lc1_w7170` rests on it.
 
 Full extraction: 2361 nets, 4241 transistors, 0 errors, 0 warnings.
 
@@ -295,6 +300,7 @@ a time (`b1_m.png` 1.1x, `b2_m.png` 3x, overlay `o9_m.png` 2.25x). Each leg was 
 |---|---|---|
 | row 4's metal, `lc3_w9299` | from `lc1` at x 5422-5438 south to y 8303; east to x 5475; south to y 8385; east to x 5518; south to y 8785; east to x 5560; south to the pad of gate row 4 (and on into `lc3`) | every leg without a break or a hole (`v 5426 8040 8306`, `h 8302`, `v 5474 8296 8396`, `h 8392`, `v 5517 8388 8792`, `h 8785`, `v 5561 8780 9150`: only the 8-15 px bars of the rows under it). It passes 26 px below latch B's clear pad and below its Na pad: bare ground between |
 | `lc1_w7468` | `lc1`'s metal M_c2 (x 5073-5093) south to y 8128; east along y 8120-8136 to x 5387; south to y 8340; east to x 5425; south to y 8430; east to x 5473; south through the strip's edge | `textmap.py 5062 8100 5160 8146`: the vertical ends in a dark bar y 8112-8118 (darker than bare ground: an edge underneath) and the horizontal starts flush with its west edge: an L; `h 8128 5076 5395 --half 5`: one 12 px dip; `v 5473 8425 9260`: no hole. A pad (5123,8080) beside the corner is on another metal: no metal between it and the horizontal (values 8-9 at y 8103-8112) |
+| the fourth line, `lc2_w8907` (`lc2_w8450` if Ambiguity 11's box is a contact) | a pad (5190,8258) (poly west from it), east along y 8251-8267 to x 5300; south to y 8439; east to x 5343; south to y 8520; east to x 5386; south through the strip's edge, with a contact (5386,8951) on a pad whose poly goes north under the metal and east as the row y 8898-8915 to drain A's box | `tl5_tracks.py h 8259 5150 5312`, `v 5300 8250 8446`, `h 8439`, `v 5343 8430 8530`, `h 8520`, `v 5386 8510 9256`: no break, one hole at y 8951; `textmap.py 5172 8236 5232 8282 --acid` (west pad: ring, centre, hole); `textmap.py 5362 8888 5416 8976 --acid` (the contact: centre in chip 1, hole 12 px, pit; the poly under the metal from y 8897 to y 8962); `tl5_tracks.py rows row 5360 5612 4 8907` (one poly x 5376-5612); `follow.py 5300 8300 S` (the metal runs on to y 9707 in `lc3`) |
 | `lc2_w8474` = `lc1_w7170` | from (5385,8440) north to y 8385; west to x 5341; north to y 8214; west to the pad (5232,8214), which lies in its run; north to y 8172; west along y 8164-8180 to x 5037; north as `lc1`'s thin metal T1 | `v 5341 8208 8392`, `h 8386`, `h 8215`: no break; pad: `textmap.py 5196 8192 5262 8236 --acid` (ring, bright centre, green hole, pit; its poly leaves west along y 8205-8220); `textmap.py 5196 8150 5262 8204` (the metal y 8165-8180 turns south at x 5223-5238 into the pad); `h 8170 4960 5260` (metal x 5031-5241); `textmap.py 5016 8140 5074 8190` (an L at x 5031-5043); T1 above it is thin and dim (values 9-B, with dark bars where rows pass under it) and fails the metal test (`v 5038 8055 8190`), as `lc1` found |
 
 ## Ports
@@ -322,6 +328,8 @@ Run 3 (latch D's lower unit and the bus field):
 | `lc2_w8474` | P | 5400, 8509-8526 | ? | drawn end (run 4): the poly from the pad (5428,8516) runs on west |
 | `lc1_w7170` (`lc2_w8474`) | M | 5030-5046, 8067 | ? | run 6: the metal of the pads (5232,8214), (5428,8516), (5428,8648), (5429,8994), north as `lc1`'s T1 (meets `lc1`'s port) |
 | `lc2_w8474` | P | 5196, 8205-8220 | ? | run 6: drawn end: the poly of the pad (5232,8214) runs on west |
+| `lc2_w8907` (`lc2_w8450`) | M | 5378-5394, 9233 | ? | round 7: the staircase's fourth line on south into `lc3` (to y 9707 by the follower) |
+| `lc2_w8907` | P | 5160, 8250-8268 | ? | round 7: drawn end: the poly of the pad (5190,8258) runs on west |
 | `lc1_w7468` | M | 5073-5093, 8067 and 5465-5481, 9233 | in, out | run 6: `lc1`'s M_c2 down the staircase and through the strip into `lc3` |
 | `lc3_w9299` | M | 5422-5438, 8067 | in | run 6: row 4's metal, north into `lc1` (`follow.py`: to about (5541,7433)) |
 | `lc2_w8474` | M | 5421-5437, 9233 | ? | round 3: the metal runs on south into `lc3` |
@@ -403,6 +411,14 @@ Run 3 (latch D's lower unit and the bus field):
    passes the metal test (`tl5_tracks.py v 5757 8920 9245 --half 6`). No contact was found on it anywhere in the
    strip, so its net is not known here.
 
+11. **The row y 8898-8915 at drain A's box: a buried contact, drawn uncertain** (review round 7). The row comes from
+   the pad (5386,8951) of the staircase's fourth line and ends at the west side of the box (5608-5640, 8904-8930),
+   on which `lc2_w8450`'s metal has its contact. The chip-2 stripped shot shows poly colour up to x 5596, a 3 px dip
+   at x 5599 and tan-to-poly values on to the pit (`textmap.py 5590 8886 5626 8934 --acid`); the clean shot a dark
+   line 7 px wide at x 5600-5607. A row that ends on a diffusion box behind the box's outline is how the outputs of
+   `lc1`'s column leave their boxes, and the row has no other end here. Drawn `?P`/`?B`. If it is not a contact,
+   the fourth line and the row are a net of their own with the pad (5190,8258)'s poly as their only other end.
+
 ## Not done
 
 Run 5:
@@ -411,7 +427,9 @@ Run 5:
 - The ringed box (5813-5831, 9156-9178) in the output's poly block and what lies under it (Ambiguity 8); the box on
   node D's west lobe (Ambiguity 9); the area (5785-5830, 9200-9265) below the block is field (round 6: red minus green 0-2 in the chip-2 stripped shot).
 - The output poly's leg x 5924-5940 runs on south in `lc3`'s strip to about y 9540 and turns east along y 9525-9545 (round 6; not drawn by `lc3`).
-- Rows 2, 3 and 5 west of x 5545. The other lines of the staircase (run 6 drew three): one from a pad (5200,8258) east along y 8259 and south on x 5300, x 5343, x 5386 (`follow.py 5300 8300 S`: to y 9707); one from a pad (5235,8298) south on x 5260; pads (5257,8425), (5295,8472), (5341,8539), (5341,8562), (5341,9038); the pad (5123,8080) and its metal.
+- Rows 2, 3 and 5 west of x 5545. The other lines of the staircase (four are drawn): one from a pad (5235,8298) south on x 5260; pads (5257,8425), (5295,8472), (5341,8539), (5341,8562), (5341,9038).
+- **Gate 9 of `lc1`'s column** (review round 7 looked at it): `lc1_w7990`'s poly (x 5072-5092 at y 8067, `lc1`'s port) runs under `lc1_w7468`'s metal to y 8088 and west as a row y 8068-8092 under T1 to a gate under the rail x 4928-4980; that gate's output row y 8118-8136 lies under `lc1_w7468`'s horizontal for x 5075-5140 (no ring, no hole) and reaches the pad (5123,8080) by a poly neck. Not drawn: the next piece (survey: `n1.png`).
+- Geometry from round 7, not changed: latch B's VSS box's diffusion runs on north of y 8062 (tan to y 8050 at x 5682); a green patch (5858-5872, 8228-8236) under the VCC rail between two VCC boxes, no ring.
 - Geometry noted by review round 5 and not re-measured: the upper load's channel may be y 8889-8935 (drawn
   8911-8940).
 
@@ -671,3 +689,32 @@ the block is field; rows 4 and 5 end 20 px short of the block); the geometry cha
 `sameconn.py` runs (only the intended differences).
 
 Round 6: no findings.
+
+Round 7 (full review of run 6's piece H and the first review on Fable 5.2 of latch B, re-read item R31; 2026-11-18 19:10 -0600,
+a fresh agent on claude-fable-5-2, at commit 5d95658; images in `cache/scratch/lc2/review-7/`, 18 used). Told to
+suspect every corner of the three staircase lines, the corner (5083,8128) and the pad beside it, the corner
+(5037,8172) and the dim T1, the turn at the pad (5232,8214), contacts in mid-run; latch B's copies, rows, pads,
+the end of the enable metal, the clear pad, the Nb stub. Found correct: every corner and step (no bridge, no
+swap); the corner (5083,8128) an L (the bar y 8110-8118 is the top edge of the row beneath) with no metal from the
+pad (5123,8080) to the horizontal; both metals arriving on the pad (5232,8214); row 4's metal apart from
+`lc1_w7864`'s jog at the north edge; the long runs without pad or hole; latch B's two copies (clean shot 3.9x,
+metal 2.75x) and its three equations; its five rows each to its own pad; no row from the Nb stub; the enable
+metal ending on the lower pad (no metal y 8404-8436); the clear metal ending on its pad; the thin metals x 5801
+and x 5624 (holes only at their pads). Findings, each checked by the tracer:
+1. **An undrawn poly row y 8898-8915** from drain A's contact box west to x 5377, south under the metal x 5378-5394
+   (changes a connection if its join is one: `lc2_w8450` gets a branch). Confirmed, and followed: it ends on a
+   pad with a contact (5386,8951) in the run of the staircase's fourth line (`textmap.py 5362 8888 5416 8976
+   --acid`), which was read leg by leg from its west pad (5190,8258) to the strip's edge. Fixed: the row, the pad,
+   the contact and the fourth line drawn; the row's end on the box drawn uncertain (Ambiguity 11).
+2. **T1 between y 8067 and y 8150 should be marked uncertain** (no netlist change): it is bright only at x 5032-5037
+   and dark for 19 px at y 8130-8148 over an undrawn diffusion box, with green under it in the clean shot; the
+   reviewer reads one metal with no contact (same width and brightness either side, unbroken east edge line, no
+   bright centre, no hole, the same signature over `lc1`'s gate 8 box). Fixed: that stretch is `?M`.
+3. Omissions near piece H, no connection of the three lines changed: gate 9 of `lc1`'s column and its output row
+   under `lc1_w7468`'s horizontal to the pad (5123,8080). Listed in Not done as the next piece.
+4. Geometry only, not changed: latch B's VSS box's diffusion runs on north of y 8062; a green patch
+   (5858-5872, 8228-8236) under the VCC rail.
+Not checked by the reviewer: gate widths inside the cells; poly under the rails in the chip-2 stripped shot; where
+the row of finding 1 goes south (followed by the tracer, above); the thin metal x 5749-5763.
+
+Round 7: one finding that changes a connection, fixed (a fix check follows).

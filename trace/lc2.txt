@@ -361,8 +361,28 @@ M 5083,8067 y8128 x5387 y8340 x5425 y8430 x5473 y9233 w=16
 # (5232,8214) in its run (the pad's poly leaves west along y 8205-8220, drawn to x 5196: it runs on); from the pad
 # north to y 8172, west along y 8164-8180 to x 5037 and north as lc1's thin metal T1 (x 5030-5046, dim: it fails the
 # metal test, as in lc1): lc2_w8474 is lc1_w7170, the input of lc1's gate 2
-M 5385,8442 y8385 x5341 y8214 x5232 y8172 x5037 y8067 w=16
+M 5385,8442 y8385 x5341 y8214 x5232 y8172 x5037 y8150 w=16
+?M 5037,8150 y8067 w=16                     # T1 here is bright only at x 5032-5037 and dark for 19 px at y 8130-8148 over an undrawn box (review round 7): uncertain
 @alias lc1_w7170 lc2_w8474
 P 5218,8199:5260,8229
 C 5232,8214
 P 5196,8205:5224,8220
+# review round 7: a fourth line of the staircase and the poly row that joins it to the inverter's output box.
+# Metal: a pad (5190,8258) (its poly leaves west, drawn to x 5160), east along y 8251-8267 to x 5300, south, east
+# along y 8431-8447 to x 5343, south, east along y 8512-8528 to x 5386, south through the strip's edge, with a contact
+# (5386,8951) on a pad. That pad's poly goes north under the metal to y 8898 and east as a row y 8898-8915 under
+# three metals (no pad on it) to the west side of the box (5608-5640, 8904-8930) on drain A, where lc2_w8450's
+# metal has its contact. The row ends on the box behind a 7 px dark line: read as a buried contact, drawn uncertain
+# (notes, Ambiguity 11). If it is one, this line carries lc2_w8450.
+M 5190,8259 x5300 y8439 x5343 y8520 x5386 y9233 w=16
+P 5175,8243:5215,8273
+C 5190,8258
+P 5160,8250:5180,8268
+P 5372,8936:5402,8968
+C 5386,8951
+P 5377,8898:5401,8962
+P 5377,8898:5604,8915
+N P 5500,8907 lc2_w8907
+?P 5598,8899:5612,8914
+?B 5604,8897:5614,8916
+@alias lc2_w8450 lc2_w8907
