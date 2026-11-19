@@ -84,3 +84,9 @@ vcc         M  4924-4980,9970    -    the same, on south
 bd1_n2        D      13868,15712-15728        out  piece r4lat: the lower half's load node onto bd1's N2 under the ground rail (bd1 has the link as ?D)
 bd1_n2        P      13895-13909,15618        in   from bd1's gate G4 block (bd1's bd1_q) to the band, the load's gate
 vcc           D      14004,15659-15689        -    the load's strip onto bd1's VCC land
+
+# Pieces n2out, n2w: the latch's output bd1_n2 (bd1's bd1_k) to the left bus field (run 8)
+bd1_n2        D      13795,15712-15736        in   piece n2out: N2 in the gap onto the lower segment of bd1's strip (bd1's bd1_k)
+vss           D      13832,15638-15652        -    piece n2out: the strip's top segment onto bd1's ground diffusion (bd1 has the link as ?D)
+bd1_n2        M      13515-13527,16260        in   piece n2w: from bd1's metal x 13521 (its bd1_k, drawn to y 16273)
+bd1_n2        M      6705-6718,15000          out  piece n2w: on north up the left bus field into busl's region (follower: to (6948,8707), not read)

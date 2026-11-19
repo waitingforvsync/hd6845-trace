@@ -606,3 +606,82 @@ D 13868,15712:13930,15728
 # 15716 3 all: 150-170/97-130/42-72 in the chip-2 metal shot, orange in its stripped shot); bd1 has it as ?P
 P 13895,15618:13909,15640
 @alias bd1_n2 bd1_q
+
+# ================================================================ piece n2out (task (e), run 8): the latch's output
+# bd1 drew a strip under bd1_an's metal (D 13773,15634:13804,15730: top segment, the channel under inh_src's gate
+# y 15661-15681, lower segment with the buried contact to bd1_k's poly) as "the pull-down of bd1_k", 8-13 px clear
+# of N2. In the open gap between bd1_an's metal (east edge x 13793) and the ground rail (west edge x 13822) the
+# lower segment IS N2: at y 15712-15736 the bare ground is one plain area from the metal's edge to the rail's, with
+# no edge line at x 13801-13806 (there is one at y 15657-15703, where a field island lies in the gap), in both metal
+# shots; the clean shot has the dark bar of a diffusion crossing there (as at N1, y 15580, and between P2 and P3,
+# y 15519) and no green field strip (as at y 15657-15703). So bd1_k is bd1_n2: the latch's output leaves west on
+# bd1_k's poly. The top segment joins the ground diffusion under the rail the same way at y 15638-15652 (bd1's ?D,
+# firm here on the same three tests), so inh_src gates a third pull-down of N2:
+#     bd1_n2 = NOT( bd1_an AND inh_lat  OR  bd1_n1  OR  inh_src )
+D 13795,15712:13822,15736          # N2 west of the rail, in the gap: onto the strip's lower segment
+D 13795,15638:13832,15652          # the strip's top segment east through the gap onto the ground diffusion (vss contact 13845,15657)
+@alias bd1_n2 bd1_k
+
+# ================================================================ piece n2w (run 8): bd1_n2 (bd1's bd1_k) on from bd1's
+# end (13521,16273), through the bottom bus field and bc3's routing field, to the left bus field. Wiring only:
+# fourteen pads with contacts, seven poly links under other nets' metals, no gate and no tap on the way.
+# Pads: ring and bright centre in both metal shots (textmap.py); metal corners from follow.py, each seen on a view.
+# --- A: bd1's metal x 13521 turns east at y 16264 and south on x 13564 to a pad
+M 13521,16250 y16264 x13564 y16606 w=13
+P 13546,16587:13582,16621
+C 13562,16604
+# --- B: poly row west under three tracks (x 13521, 13478, 13435)
+P 13348,16604 x13562 w=16
+P 13331,16587:13365,16621
+C 13348,16604
+# --- C: metal south, a 45-degree diagonal south-west (over wr_r7's poly diagonal, no contact), south on x 13218
+M 13347,16600 13347,16712 13220,16839 13218,17778 w=13
+P 13200,17759:13234,17793
+C 13217,17776
+# --- D: poly row west under the vertical trunks and the wide VCC rail x 12890-12985
+P 12848,17776 x13217 w=16
+P 12831,17760:12865,17794
+C 12848,17777
+# --- E: metal west, the outer one of three nested Z bends (north on x 11722 over four poly diagonals), west
+M 12850,17779 x11722 y17606 x11287 w=13
+P 11270,17586:11304,17620
+C 11287,17603
+# --- F: poly west, a diagonal south-west, west along y 17905 (under ck_out's metal x 10224-10320, no contact), south
+P 11287,17603 11137,17603 10835,17905 10224,17905 10224,17992 w=16
+P 10205,17976:10239,18010
+C 10222,17993
+# --- G: metal south and west
+M 10224,17990 y18039 x9811 w=13
+P 9796,18020:9830,18054
+C 9813,18037
+# --- H: poly under two vertical metals (x 9650, 9710)
+P 9594,18037 x9813 w=16
+P 9577,18021:9611,18055
+C 9594,18038
+# --- I: metal west (over isrc's poly x 8964, no contact)
+M 9596,18039 x8641 w=13
+P 8626,18021:8660,18055
+C 8643,18038
+# --- J: poly under the metals x 8460 and x 8510-8560
+P 8424,18037 x8643 w=16
+P 8407,18022:8441,18056
+C 8424,18039
+# --- K: metal west, a step south at x 8182, west
+M 8426,18039 x8182 y18083 x7597 w=13
+P 7583,18065:7617,18099
+C 7600,18082
+# --- L: poly under bc1's rail RL2 (x 7463-7520)
+P 7422,18081 x7598 w=16
+P 7405,18064:7439,18098
+C 7422,18081
+# --- M: metal west to a corner (6712,18083), north up the left bus field (two tracks west of inh_ck's x 6797)
+M 7424,18083 x6712 y16517 w=13
+P 6692,16502:6726,16536
+C 6708,16519
+# --- N: poly link under the supply buses y 16230-16490 (like inh_ck's beside it)
+P 6712,16519 y16173 w=18
+P 6694,16156:6728,16190
+C 6710,16173
+# --- O: metal on north; drawn to busl's south edge (y 15000). The follower takes it on to (6948,8707): not read.
+M 6711,16185 y15000 w=13
+N M 6711,15600 bd1_n2

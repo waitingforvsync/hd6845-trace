@@ -267,7 +267,7 @@ Eleven pass transistors between the scan line counter and five output nodes.
 |---|---|
 | `bd1_k#` | tracks of the channel not yet identified (`rc_eq_r6`, `hc1`) |
 | `rc_eq_r4`, `bd1_an` | input and output of inverter A. `rc_eq_r4` is `rc_eq_r4`, R4's match (joined by `eof`; an alias until it is renamed), so `bd1_an` = NOT `rc_eq_r4` |
-| `bd1_n#`, `bd1_q`, `bd1_k` | nodes of the latch on R4's match gated by `inh_lat`: `bd1_n1` the upper half's node (NOT the match while open), `bd1_n2` the lower half's (the match as latched); `bd1_q`, the poly of the upper half's gate G4 and of the lower half's load, is `bd1_n2` (`eof`'s piece `r4lat`: an alias, through the load's uncertain tie); `bd1_k` the node pulled low by `inh_src`'s line |
+| `bd1_n#`, `bd1_q`, `bd1_k` | nodes of the latch on R4's match gated by `inh_lat`: `bd1_n1` the upper half's node (NOT the match while open), `bd1_n2` the lower half's (the match as latched); `bd1_q`, the poly of the upper half's gate G4 and of the lower half's load, is `bd1_n2` (`eof`'s piece `r4lat`: an alias, through the load's uncertain tie); `bd1_k`, the wire that leaves the latch west, is `bd1_n2` too (`eof`'s piece `n2out`, 2026-11-19: an alias on firm geometry; the strip under `inh_src`'s gate is a third pull-down of N2, so `bd1_n2` = NOT((`bd1_an` AND `inh_lat`) OR `bd1_n1` OR `inh_src`)): the latch's output, followed by piece `n2w` to (6711,15000) in the left bus field |
 
 ## Central datapath (`notes/blocks/cdp1.md` ... `cdp4.md`)
 
