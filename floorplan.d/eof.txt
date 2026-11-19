@@ -31,3 +31,16 @@
 6187,7250:6566,7266      route  reset copy rst_a, metal y 7258 | from the pad east to the corner of the track x 6558 (it lies on another net's poly row from x 6313)
 6506,7258:6566,8104      route  reset copy rst_a, track x 6558 | 760 px south, an L one track west at y 8018, to the pad (6513,8087)
 6437,8066:6536,8643      route  reset copy rst_a, poly x 6518 and the diagonal metal | from the pad (6513,8087) south under three metals to the pad (6513,8538), then lc2's first through line: this is inh_src
+5190,6890:5530,7225      route  RES buffered (res_b), diagonal poly | one line of the left-centre diagonal bundle, from the poly below the pad (5190,6845) south-east under four metals to the row y 7214
+5516,7195:6168,7232      route  RES buffered (res_b), poly row y 7214 | east through the crossing field to the pad (6146,7214)
+6146,7209:6609,8146      route  RES buffered (res_b), metal y 7216 and track x 6602 | from the pad east, 850 px south, an L one track west at y 8065, to the pad (6558,8125)
+6444,8108:6578,8700      route  RES buffered (res_b), poly x 6558 and the diagonal metal | from the pad (6558,8125) south under inh_ck's metal to the pad (6556,8493), then lc2's second through line
+5230,6866:5552,7180      route  LPSTB buffered (lpstb_b), diagonal poly | one line of the left-centre diagonal bundle, from the poly below the pad (5237,6803) to the row y 7170
+5538,7151:6210,7188      route  LPSTB buffered (lpstb_b), poly row y 7170 | east through the crossing field to the pad (6188,7170)
+6188,7166:6652,8340      route  LPSTB buffered (lpstb_b), metal y 7173 and track x 6645 | from the pad east, 935 px south, an L one track west at y 8108, to the pad (6602,8320)
+6444,8302:6622,8765      route  LPSTB buffered (lpstb_b), poly x 6602 and the diagonal metal | from the pad (6602,8320) south under three metals to the pad (6602,8536), then lc2's third through line
+5054,6876:5485,7310      route  step-condition hold tl3_w3982, diagonal poly | the lowest undrawn line of the left-centre diagonal bundle, from tl5's bus line x 5063 to the row y 7300
+5471,7282:6168,7320      route  step-condition hold tl3_w3982, poly row y 7300 | east through the crossing field to the pad (6146,7301)
+6146,7296:6534,8072      route  step-condition hold tl3_w3982, metal y 7303 and track x 6514 | through the pad (6513,7889) and by an L onto lc2's metal x 6471: the data of latch C
+6494,7868:7420,7908      route  step-condition hold tl3_w3982, poly row y 7888 | from the pad (6513,7889) east under seventeen tracks to the pad (7401,7888)
+7382,7870:7492,8444      route  step-condition hold tl3_w3982, metal x 7402 and poly | south to the pad (7401,8425) and east to a buried-contact box at the foot of the gate column: its driver (believed)
