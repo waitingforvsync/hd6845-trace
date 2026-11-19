@@ -1756,6 +1756,23 @@ it, chip 1 the same at all three (138-142/114-129/77-80), the clean shot green o
 
 Round 1: no findings.
 
+### Run 12 (the rows y 2639, 2683, 2813, 2857)
+
+**Round 1, full review, 2026-11-19 16:51 -0600** (fresh Fable reviewer; at commit 0889f34; eight images in
+`cache/scratch/tl3/review-7/`). Told to suspect: that each row is one row under both rails (a step,
+an end, another poly in line); a contact from the rails' link to the row y 2639; the east ends and
+their two pads; contacts from the thin metals; the west ends; anything undrawn. Checked: the rows
+under each rail at 4.5x in `acid1b`, `acid` and `metal1` (six in, six out, same y); the row y 2639
+under the link at 3x in four shots with a profile every 10 px (uniform, no pad, ring or hole); the
+open stretches at 3-5x; the west ends at 3x; the east ends at 5x in `metal` and `acid1b` and 3.6x
+in `metal1` and `acid` (both pads are contacts, each with one metal, east and south as drawn; the
+rows y 2639 and y 2813 run on without a pad); the thin metals by `tl5_tracks.py v` (no contact);
+an all-package overlay at 1.7x (nothing undrawn). The thin metals here are at x 4147 and x 4190
+(none at x 4103 north of the pad (4103,2899)). Not checked: other packages' geometry beyond
+x 3533 and x 4262; `acid1`.
+
+Round 1: no findings.
+
 ## Not done
 
 - (Done, run 12: the rows above y 2890.) `tl4_w4590`'s driver is still not found (Logic, run 12).
