@@ -199,7 +199,7 @@ NOT `rcs_a2` AND (`rcs_x1` OR `rcs_u3425`) is `tla`'s. So the end-of-frame path 
 - **VCC.** Above the load the strip widens (x 2447-2497) into a wide diffusion (x 2288-2549)
   that runs north, in the open (bright green in the clean shot, y 1965-2075; `px.py row 2020`),
   under two MA driver lines (`mal`'s, y 2092-2106 and 2136-2150; no ring, no hole:
-  `textmap.py 2280 2080 2556 2160 6`) to a head (x 2262-2562, y 1915-1962) with seven contacts
+  `textmap.py 2280 2080 2556 2160 6`) to a head (x 2262-2572, y 1915-1962) with seven contacts
   under the wide supply plane north of y 1963 (`s4.png`, `s5.png`, overlay `ov2.png`). **That the
   plane is VCC is taken from the load hanging from it** (tracing guide, section 3); the plane is
   not drawn by anyone (`padring`), only a piece over the head is in `trace/eof.txt`. The metal
@@ -358,7 +358,7 @@ driver lies; the other three lead to the loads.
 | `sl_eq_r5_n` | poly | (2493-2515, 2506) | in | from `tl1`'s poly (2493-2508,2500); a gate of the NOR (the net's first load) |
 | `tl1_w2637` | poly | (2452-2472, 2506) | out | the NOR's output, onto `tl1`'s poly (2448-2463,2500) |
 | `vss` | metal | (2596, 2347-2404) | - | the arm, into the VSS plane (`tl1`'s, not drawn north of y 2500) |
-| `vcc` | metal | (2250-2580, 1900) | - | the supply plane over the strap's head, on north, east and west (`padring`) |
+| `vcc` | metal | (2250-2590, 1900) | - | the supply plane over the strap's head, on north, east and west (`padring`) |
 
 ## Ambiguities
 
@@ -570,6 +570,62 @@ tools/t.sh eof sameconn.py cd291ee             ->  connections identical
 ```
 
 Round 3: no findings that change a connection.
+
+**Round 4: full review of run 3's piece** (2026-11-19 12:10 to 12:16 +0100; one fresh reviewer agent on
+Claude Fable 5.2, read from the photos alone; trace at commit dcd8d8d; its images in
+`cache/scratch/eof/review-4/`, 14 used). Piece: `r5nor`.
+
+Told to suspect: whether the strip round the west side is diffusion joined at both ends (or poly, or
+stops short, or goes on elsewhere); the box at the top of `tl1_w2637`'s poly (a buried contact or a
+rounded end on field); the load as one block or several polys, its foot and tie box, a poly leaving
+the block or box; whether the three gate polys end at y ~2402 or go on under the wide metal, and
+whether `rcs_c1`'s top touches the west pad; the pockets beside the poly tops; a contact of the arm
+onto the output strip or the west strip, the two VSS contacts, a second contact on the island, contacts
+of the two thin metals onto the strap; the arm's join to the plane and the island's separation; a
+one-track slip among the four polys at y 2500; anything undrawn at x 2250-2330 and x 2550-2600.
+
+Checked and found correct (5-5.5x in two to four shots, profiles, text maps, the extraction):
+- the west strip is diffusion, unbroken, joined at both ends (`px.py row 2318`, `col 2341`: chip-2
+  stripped red minus green 13-23, chip-2 metal blue 86-99; constant tan under the arm); nothing leaves
+  it west of x 2331 or south of y 2465;
+- the box on the band is a buried contact (its centre in the chip-2 stripped shot 142/155/89, the tie
+  box's 137/156/91; the gate polys orange);
+- the load is one poly block (all three stripes poly at y 2265, the middle one brighter in the clean
+  shot); foot, tie box and spur join; no poly leaves the block or the box or goes north under the island;
+- the gate poly tops end at y 2400-2405 with field above; `rcs_c1`'s top stops about 5 px short of the
+  pad, no poly lies on either pad; the pockets are field and the band's top edge is continuous across
+  each gate;
+- no contact from the arm onto the output strip or the west strip (a dim patch at (2345,2390) on chip 2
+  only); both VSS contacts real; the island has exactly one contact; none from the two thin metals;
+- the arm joins the plane at x 2565-2590 with no edge line in either chip; the island is separate
+  (bare ground x 2548-2580 east of it, y 2154-2184 north of it);
+- the four polys at y 2500 are straight, in order, each on `tl1`'s matching poly;
+- nothing undrawn at x 2250-2330 or x 2550-2600; the half-dome of Ambiguity 11 is absent in chip 2;
+- 0 errors, four transistors, the equation FIRM.
+
+Findings, all three geometry only, all confirmed by the tracer and fixed:
+1. **The west VSS pad's east edge** is x ~2430, not 2416: `px.py row 2380 2404 2440 3 metal1,acid1b`
+   has the clean shot's dark line at x 2428-2431; the dark line at x 2410-2413 that the tracer took for
+   the edge is the contact's ring. Now `D 2383,2362:2430,2398`.
+2. **The east VSS pad's east edge** is x ~2565, not 2548 (`px.py row 2395 2540 2575 3`: dark at
+   x 2561-2564 in the clean shot). Now `D 2520,2364:2565,2412`.
+3. **The head** runs to x ~2572, not 2562 (`px.py row 1938 2552 2584 3`: dark at x 2570-2573), and the
+   seven rings sit about 7 px east of the drawn contacts (`px.py row 1940 2256 2300 3 metal,metal1`: the
+   first ring's centre at x 2283). Contacts moved 7 px east, the head and the plane piece widened.
+
+Proof that the fixes changed no connection (commit before the fixes: dcd8d8d):
+
+```
+tools/t.sh eof sameconn.py dcd8d8d             ->  connections identical
+.venv/bin/python tools/sameconn.py dcd8d8d     ->  connections identical
+```
+
+Not checked by the reviewer: which supply the north plane is (Ambiguity 8); the field under the arm at
+x 2355-2380 and 2480-2510, which reads grey-green in the clean shot instead of pink (taken as field:
+no outline in any shot; the chip-2 stripped shot shows only fringes there); the edges inside the two
+buried-contact boxes.
+
+Round 4: no findings that change a connection.
 
 ## Not done
 

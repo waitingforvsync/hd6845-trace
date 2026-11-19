@@ -50,4 +50,4 @@ rcs_c1      P  2405-2427,2506    in   from tl1's poly (2405-2420,2500): a gate o
 sl_eq_r5_n  P  2493-2515,2506    in   from tl1's poly (2493-2508,2500): a gate of the NOR, the net's first load
 tl1_w2637   P  2452-2472,2506    out  the NOR's output onto tl1's poly (2448-2463,2500)
 vss         M  2596,2347-2404    -    the arm into the VSS plane
-vcc         M  2250-2580,1900    -    the supply plane over the strap's head, on north (padring)
+vcc         M  2250-2590,1900    -    the supply plane over the strap's head, on north (padring)

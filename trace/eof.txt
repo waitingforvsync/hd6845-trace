@@ -338,10 +338,10 @@ N P 5063,6500 tl5_w5936
 #    with one contact (2467,2205) (textmap 2262 2174 2560 2240 4): a strap, nothing else on it.
 #  - VSS: an arm of tl1's plane, x 2270-2590, y 2347-2404 (joins the plane with no edge line
 #    between: textmap 2540 2326 2620 2416 4), with a contact on each pad.
-M 2250,1900:2580,1963                  # a piece of the supply plane over the head (the plane goes on north, east and west: padring)
+M 2250,1900:2590,1963                  # a piece of the supply plane over the head (the plane goes on north, east and west: padring)
 N M 2400,1915 vcc
-D 2262,1915:2562,1962                  # the head
-C 2275,1940 2318,1940 2362,1940 2405,1940 2450,1940 2493,1940 2535,1940
+D 2262,1915:2572,1962                  # the head (east edge x 2572: px row 1938, review round 4)
+C 2282,1940 2325,1940 2369,1940 2412,1940 2457,1940 2500,1940 2542,1940     # rings 7 px east of the first drawing (review round 4)
 D 2288,1955:2549,2208                  # the strap
 M 2272,2184:2543,2232                  # the island
 C 2467,2205
@@ -355,10 +355,10 @@ D 2331,2309:2460,2328                  # the output's branch west
 D 2331,2309:2351,2440                  # and south, under the VSS arm, to the band's west end
 D 2331,2428:2540,2465                  # the band
 D 2391,2390:2401,2435                  # finger to the west VSS pad (bright x 2392-2398 between the two gates' edge lines)
-D 2383,2362:2416,2398                  # west VSS pad
+D 2383,2362:2430,2398                  # west VSS pad (east edge x 2430: the dark line at x 2413 is the ring; review round 4)
 C 2397,2376
 D 2518,2405:2537,2435                  # finger to the east VSS pad
-D 2520,2364:2548,2412                  # east VSS pad
+D 2520,2364:2565,2412                  # east VSS pad (east edge x 2565: review round 4)
 C 2532,2384
 M 2270,2347:2596,2404                  # the VSS arm, into tl1's plane
 N M 2450,2392 vss
