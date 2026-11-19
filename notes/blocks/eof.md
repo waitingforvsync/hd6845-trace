@@ -59,7 +59,7 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `tcwa`, link E | x 6098-6438, y 6345-8072 | `tcw_a`'s metal on from `tl6`'s end (6105,6350): south to a corner (6105,7346), east (on `lc1_w7040`'s poly row, no contact) to a corner (6298,7346), south to a corner (6298,7432), east (on another row) to a corner (6430,7432), south through the tap's pad to y 8067, where `lc2`'s piece (`lc2_w8172`) takes over |
 | `tcwa`, the tap | x 6412-7530, y 7632-7664 | a pad with a contact (6427,7648) on that metal; its poly row y 7640-7656 east across the crossing field to the gate group at x 7540 (drawn to x 7530) |
 | `tcwa`, link F | x 6445-6695, y 8165-8374 | from `lc2`'s end (6450,8172): east to a corner (6559,8172), south (on the poly of another net's pad (6558,8127), no contact) to a corner (6559,8367), east to `trunks`' end (6690,8366) |
-| `x1` | x 5053-5253, y 6345-6905 | five vertical polys of `tl5`'s bus on south from y 6350 (x 5063, 5107, 5150, 5192, 5237), straight under nine horizontal metals; four end on pads with contacts (5105,6761), (5147,6803), (5190,6845), (5237,6803), each with a metal on south to one of `lc1`'s wires at y 6900 (M_a, M_b, V2, V3); the fifth (x 5063) has no pad and runs on south. **Below three of the pads the poly goes on** (x 5150 in the open; x 5192 under V2; x 5237 under V3) and bends south-east into `lc1`'s diagonal poly bundle: drawn to y 6900 (the last to y 6878) |
+| `x1` | x 5053-5253, y 6345-6905 | five vertical polys of `tl5`'s bus on south from y 6350 (x 5063, 5107, 5150, 5192, 5237), straight under nine horizontal metals; four end on pads with contacts (5105,6761), (5147,6803), (5190,6845), (5237,6803), each with a metal on south to one of `lc1`'s wires at y 6900 (M_a, M_b, V2, V3); the fifth (x 5063) has no pad and runs on south. **Below three of the pads the poly goes on** (x 5150 in the open; x 5192 under V2; x 5237 under V3) and bends south-east into `lc1`'s diagonal poly bundle: drawn to y 6900 (the last to y 6872) |
 
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
 
@@ -227,7 +227,7 @@ equations, which are `lc1`'s with the new names.
 | **five columns, y 6350-6740** | `eof` | straight, under nine horizontal metals (`slbus`'s and others), no pad; no line steps a track | `x1_survey.png` (1.17x, metal and clean, all traces); `tl5_tracks.py rows row 5040 5262 3` at thirty heights (every 14 px, y 6340-6744): the columns stand at x 5061-5067, 5103-5115, 5148-5154, 5190-5199, 5235-5241 at every height; `tl5_tracks.py v X 6350 6900` per column: only 6-7 px dips at the gaps between metals (trap 2), the same heights on several columns |
 | **four pads** | `eof` | (5105,6761), (5147,6803), (5190,6845), (5237,6803): each a ring with a bright centre in both metal shots and a green hole 16-17 px across in the clean shot | `x2_pads.png` (2.1x, metal and clean); `eof_cchk.py`; `textmap.py 5050 6728 5260 6906 3` |
 | **four metals to y 6905** | `eof` | from pad 1 the metal's head stands 6-9 px (the ring) west of the centre and runs south at x 5077-5089 (M_a, shifting 6 px west at y 6890); from pad 2 the same, south at x 5116-5128 (M_b); V2 (x 5185-5194) and V3 (x 5230-5242) hang straight from pads 3 and 4 | the same text map: nothing above either head, bright in both chips to y 6905; the image |
-| **the polys below pads 2, 3, 4** | `eof` | pad (5147,6803): open poly x 5139-5155 south to y 6900, bending south-east at about (5150,6910); pad (5190,6845): poly under V2, x 5188-5203 to y 6884, x 5197-5209 at y 6900; pad (5237,6803): poly under V3, x 5233-5245 to y 6878, then bending east (seen to about (5259,6900)) | the reviewer's `review-2/k_pads234.png` (4.4x, four shots), `j_bundle.png`; `textmap.py 5128 6812 5275 6918 3 --acid`; `px.py col 5146 6776 6916 10 acid` against `col 5104` (field below pad 1); overlay `ov_x1fix.png` (4x, both stripped shots) |
+| **the polys below pads 2, 3, 4** | `eof` | pad (5147,6803): open poly x 5141-5160 south to y 6900, bending south-east at about (5150,6910); pad (5190,6845): poly under V2, x 5188-5203 to y 6884, x 5197-5209 at y 6900; pad (5237,6803): poly under V3, x 5232-5250 to y 6872, then bending east (x 5247-5266 at y 6884, about (5266,6900)) | the reviewer's `review-2/k_pads234.png` (4.4x, four shots), `j_bundle.png`; `textmap.py 5128 6812 5275 6918 3 --acid`; `px.py col 5146 6776 6916 10 acid` against `col 5104` (field below pad 1); overlay `ov_x1fix.png` (4x, both stripped shots) |
 | the gate column | `lc1` | M_a = gate 2's output; M_b = gate 5's output; V2, V3 = the NOR's inputs | its notes ("followed to y 6840 / 6800 / 6844 / 6800": the pads' heights) |
 
 The fifth line, `tl5_w5936` (= `tl3_w3982`, the net that holds `rcs_cond` low), has no pad: its
@@ -269,9 +269,9 @@ driver lies; the other three lead to the loads.
 | `res_b` | metal | (5183-5197, 6905) | to loads | onto `lc1`'s V2 (`lc1_w7343`, the NOR's lower input) |
 | `lpstb_b` | poly | (5227-5247, 6345) | in | from `tl5`'s bus line x 5237 (`trunks`' pad (5232,6105)) |
 | `lpstb_b` | metal | (5229-5243, 6905) | to loads | onto `lc1`'s V3 (`lc1_w7257`, the NOR's upper input) |
-| `tl5_w3636` | poly | (5139-5155, 6900) | to loads | the poly on south of the pad (5147,6803): into `lc1`'s diagonal bundle (bends south-east at about (5150,6910)) |
+| `tl5_w3636` | poly | (5141-5159, 6900) | to loads | the poly on south of the pad (5147,6803): into `lc1`'s diagonal bundle (bends south-east at about (5150,6910)) |
 | `res_b` | poly | (5196-5210, 6900) | to loads | the poly on south of the pad (5190,6845), under V2, bending south-east: into `lc1`'s diagonal bundle |
-| `lpstb_b` | poly | (5232-5246, 6878) | to loads | the poly on south of the pad (5237,6803), under V3; from here it bends south-east (seen to about (5259,6900)): into `lc1`'s diagonal bundle |
+| `lpstb_b` | poly | (5232-5248, 6872) | to loads | the poly on south of the pad (5237,6803), under V3; from here it bends south-east (about (5266,6900)): into `lc1`'s diagonal bundle |
 | `tl5_w5936` | poly | (5053-5073, 6345) | ? | from `tl5`'s bus line x 5063 |
 | `tl5_w5936` | poly | (5054-5072, 6880) | ? | on south beside M_a and under it (not followed) |
 
@@ -441,6 +441,33 @@ y 7346 at x 6150-6260 other than by scan; `tools/unsure.py` for `lc1_w7304`.
 
 Round 2: one finding, fixed.
 
+**Round 3: fix check of round 2's fix** (2026-11-19 01:10 to 01:20 +0000; one fresh reviewer agent
+on Claude Fable 5.2; trace at commit cd291ee, changes since 9f99dc2; its images in
+`cache/scratch/eof/review-3/`, 7 used; 4.2-5.3x in four shots, text maps, profiles). Checked: each
+of the three added polys is poly, continuous out of its pad and on the feature, with field on
+both sides and no touch on a neighbour; `rcs_x1`'s pad (5105,6761) is an end (plain field at
+x 5097-5113 down to y 6900 in all four shots, the pad's outline closed at y ~6780); the fifth
+line (x 5063) stays separate from the other four (20 px of field to `rcs_x1`'s pad; it lies
+against M_a's edge only as metal over it, no contact; it starts to bend at y ~6880); both
+`sameconn` runs against 9f99dc2 end `connections identical`; 0 errors, 0 warnings.
+
+Findings, both geometry only, both confirmed by the tracer and fixed:
+1. `tl5_w3636`'s added poly was drawn x 5139-5155; the feature's edges are x 5140 and 5161 in both
+   metal shots (`px.py row 6860 5130 5170 3 metal,acid`: dark at 5139 and 5160-5163). Now
+   `P 5150,6815 y6900 w=18`. Same ends.
+2. `lpstb_b`'s added poly ran 6 px past where the bend starts (salmon x 5232-5250 to y 6872; at
+   y 6884 it has moved east), and the port's note put the diagonal at about (5259,6900) where it
+   is centred about x 5266. Now `P 5240,6815 y6872 w=16`, the port at (5232-5248,6872).
+
+Proof that these fixes changed no connection (commit before them: cd291ee):
+
+```
+tools/t.sh eof sameconn.py cd291ee             ->  connections identical
+.venv/bin/python tools/sameconn.py cd291ee     ->  connections identical
+```
+
+Round 3: no findings that change a connection.
+
 ## Not done
 
 - **Task 2, the loads of `r9m_l1w` (= NOT `sl_eq_r5`)**: the net's only undrawn end is the poly
@@ -456,7 +483,7 @@ Round 2: one finding, fixed.
 - **`lc1_w7170`, the input of the inverter that drives `rcs_x1`**: the thin metal T1 leaves
   `lc1`'s strip south at (5030-5046,8067), into `lc2`'s (claimed).
 - **`res_b`, `lpstb_b` and `tl5_w3636` beyond the gate column**: three lines of the diagonal poly
-  bundle of `lc1`'s strip, entering it at (5147,6900), (5203,6900) and about (5259,6900)
+  bundle of `lc1`'s strip, entering it at (5150,6900), (5203,6900) and about (5266,6900)
   (`lc1`'s Not done: the bundle's other nine lines).
 - `tl5_w5936`'s poly south of (5063,6880): beside and under `lc1`'s M_a, into `lc1`'s strip.
 - `lc1_w7734` (a buffered copy of the reset) north of `lc1`'s strip: V4, x 5288-5310, "turns east

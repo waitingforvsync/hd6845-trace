@@ -261,7 +261,7 @@ N M 6559,8300 lc2_w8172                # lc2's name for the metal that arrives h
 #   THREE OF THE PADS ARE NOT THE POLYS' ENDS (review round 1): below the pads of x 5150, x 5192
 #   and x 5237 the poly goes on south (in the open at x 5139-5155; under V2; under V3) and bends
 #   south-east at y 6875-6910 into the diagonal poly bundle of lc1's strip, which lc1 has not
-#   drawn. Drawn here to the strip's edge (y 6900; lpstb_b's to y 6878, where it starts to bend
+#   drawn. Drawn here to the strip's edge (y 6900; lpstb_b's to y 6872, where it starts to bend
 #   under V3). Only the pad of x 5107 (rcs_x1) is an end: open field below it.
 #   lc1 draws the four metals from y 6900 (M 5080,6900 / M 5125,6900 / M 5190,6900 / M 5235,6900).
 #
@@ -296,7 +296,8 @@ P 5150,6345 y6808 w=20              # tl5_w3636's line
 P 5132,6786:5164,6820
 C 5147,6803
 M 5147,6803 x5123 y6905 w=14        # onto lc1's M_b
-P 5147,6815 y6900 w=16              # the poly on south of the pad, in the open, to lc1's strip
+P 5150,6815 y6900 w=18              # the poly on south of the pad, in the open, to lc1's strip (edges x 5140 / 5161
+                                    # in both metal shots, px row 6860 5130 5170 3: review round 3)
 N P 5150,6500 tl5_w3636
 P 5192,6345 y6850 w=20              # res_b's line
 P 5174,6828:5206,6862
@@ -308,7 +309,8 @@ P 5237,6345 y6808 w=20              # lpstb_b's line
 P 5221,6786:5253,6820
 C 5237,6803
 M 5236,6803 y6905 w=14              # onto lc1's V3
-P 5239,6815 y6878 w=14              # the poly on south under V3 (it bends south-east from y ~6878)
+P 5240,6815 y6872 w=16              # the poly on south under V3: x 5232-5250 to y 6872, then it bends
+                                    # south-east (review round 3)
 N P 5237,6500 lpstb_b
 P 5063,6345 y6880 w=18              # tl5_w5936's line, on south (no pad; not followed below y 6880)
 N P 5063,6500 tl5_w5936
