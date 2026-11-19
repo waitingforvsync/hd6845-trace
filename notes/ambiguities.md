@@ -757,3 +757,42 @@ field has a pad), the clean shot shows protected poly with no hole, the chip-2 s
 the plain crossing 60 px north; tracer and reviewer agree. Against: both chips are dim at the same spot,
 which dirt on one chip does not explain. Settled by the far ends of row y 13744 (`busl`) and the corner
 gate group (`cdp4` (continue)).
+**2026-11-19, later**: `regs` (run 3) reads row y 13744 as the read select of R13 (`rsel13_buf`), tapped at
+(6492,13744) from the track x 6494 (read, not drawn). Under reading (b) latch D's enable would be on a
+register read select: a further reason for (a). Still open until the row is drawn.
+
+## AMB-040: the structure at x 10530-11400, y 11740-12350 on the write strobes of R12 and R14 (2026-11-19)
+
+Proposed by `regs` (Matt Godbolt, run 1; its Ambiguities 1). In `bw`'s region, undrawn: a wide
+diffusion-coloured rectangle x 10530-11400, y 11915-12185 with seven contacts at x 10540 and two
+mirrored units at its east end (plates y 11838-11893 and 12205-12260, a strip from the top unit north to
+y 11757 and east along y 11748, a U-shaped strip below the bottom unit). `wr_r12`'s metal has a contact
+at (11378,12297) onto the bottom unit's box (drawn); whether `wr_r14` has the mirror contact at
+(11331,11810) onto the top unit's is open (drawn `?C`; the photos lean against it); `wr_r12`'s metal over
+the top unit is `?M` (x 11376, y 11757-11905), so `wr_r12` = row C's write line is marked. Readings and
+what would settle them: `notes/blocks/regs.md`, Ambiguities 1. Settled by tracing the structure (`bw`
+(continue)).
+
+## AMB-041: the reset copy's track over latch C's data row, at (6558,7886) (2026-11-19)
+
+Proposed by `eof` (Tom Seddon, runs 10-11; its Ambiguity 33). Where `rst_a`'s track x 6558 crosses the
+poly row y 7878-7898 the clean shot has a hole-like olive patch (32 px, red minus green down to -3). The
+row is `tl3_w3982` (latch C's data), so a contact there would short the reset copy to it. **Assumed: no
+contact** (the tracer and two reviewers, rounds 12 and 13): no ring, bright centre or pad in either metal
+shot, no pitted box in the chip-2 stripped shot, and the patch is wider than the metal. Against: on the
+same row the pad (6513,7889), a real contact, shows no green hole in the clean shot either (the row's
+colours there are abnormal from x 6500 to 6840), so the clean shot decides nothing on this row.
+
+## AMB-042: the ripple counter's clock on `rst_c`'s poly, x 6466-6478, y 8945-9227 (2026-11-19)
+
+Proposed by `eof` (Tom Seddon, run 13; its Ambiguities 43-45). Piece `ck5`'s metal (the clock of the
+left-centre ripple counter, `lc3_w9947` = `tcw_m6404`) lies on `rst_c`'s poly for 225 px (y 8945-9172),
+and its corner stands 35 px north of the pad (6469,9209) of `rst_c`'s own metal on the same x. Readings:
+(a) two nets, no contact along the overlap and two metals at the knot; (b) a contact or one metal, which
+would make the ripple counter's clock the reset copy. **Assumed (a)**: no ring, widening or dark stretch
+along the overlap in either chip; at the knot 27 px without metal in both chips north of the pad's
+centre against a 13 px ring on the south, where the pad's own metal leaves. A dull patch at (6471,9045)
+(clean shot dull over x 6456-6495, wider than the poly; chip 2's metal dim for 9 px, chip 1's whole) is
+read as a stain. Three nets depend on it (`lc3_w9947`, `rst_c`, `lc1_w7170` = NOT `rst_c`). Settled by
+the driver of the clock (`eof`: the row y 14784 east of x 7550), which must not be the reset.
+

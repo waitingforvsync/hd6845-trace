@@ -337,6 +337,10 @@ Traps, all of them real:
    85-108 here, against 186-203/176-182/131-139 for these) and a full-bright centre about 12 px
    across. Extends trap 22, whose "the pass-over has no bright centre" is not always so. Found
    2026-11-18 (`tl4`, `tl3`; R20, AMB-034).
+   The converse also fails: **a real contact need not show the green hole in chip 1's clean shot.** The pad
+   (6513,7889) is vivid red-orange there with no hole, while both metal shots show ring and bright centre and
+   the chip-2 stripped shot a pitted box. On a widened pad with a ring, "no green hole" does not refute a
+   contact: the chip-2 stripped shot is the second look (`eof`, 2026-11-19; AMB-041).
 27. **A thin metal over a load-tie or node box cannot be shown continuous from these photos;
    record it so the tools see it.** Over each such box a thin metal is dark for 14-55 px in both
    metal shots and the clean shot is greenish under it. Do not leave the stretch undrawn (an

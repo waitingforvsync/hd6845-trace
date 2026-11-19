@@ -2525,3 +2525,7 @@ Round 16: no findings that change a connection.
   not on the latch's path after all: `bd1_k`'s pad (13674,15975) only passes it. It stays with `bd1`-`bd3`.
 - The rest of the slice-0 logic of `cdp1`'s channel around the inverter was not traced; the
   inverter's own rectangle (x 8330-8650, y 4700-4880) has nothing else in it.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- Piece `n2n`, Ambiguity 47 and Not done ("the 4,600 px ... read and not drawn", "believed"): the stretch is drawn and reviewed (`busl` run 7, piece `n2`: x 6711, an arm at y 13247, x 6776; no pad, no tap). `rcs_e3` = NOT `bd1_n2` is traced.

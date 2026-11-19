@@ -249,3 +249,4 @@ turn west, at y 17302, 17346, 17388, 17432, and cross the supply rail the same w
 ## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
 
 - Not done, the four strobe tracks south of y 17100: followed by `regs` (run 1: the write strobes of R12-R15 to their rows).
+- `rsel12_buf` and `rsel13_buf` are followed by `regs` (run 3; pads (14195,17730), (15512,17688)).

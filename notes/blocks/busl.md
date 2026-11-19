@@ -1112,3 +1112,9 @@ Round 1: no findings that change a connection.
 - The undrawn rows of the bands y 13300-13700 and 14050-14950 that these tracks cross (y 13417, 13548,
   13590, 13633, 13699, 14178, 14220, 14437, 14698 among them): their ends would confirm, from another
   direction, that none of the greenish crossings of run 7 is a tap.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- The four select tracks of piece `ctl` are driven by `sel`'s buffers: they are the read selects of R14-R17 (`regs` run 2: the tracks hop in poly at y 16168-16558 and turn east along rows y 18168-18299).
+- The "two undrawn rows of other nets" y 13744 and y 13852 are, as read by `regs` (run 3, not drawn), the read selects of R13 and R12, tapped at (6492,13744) and (6450,13852) from the tracks x 6494 and x 6452. For Ambiguity 13: a contact at (7145,13728-13749) would put latch D's enable `tc2_sr_g` on a register read select.
+- Lines 1-3 of piece `lc9` are the reset copy `rst_a` and the buffered pins RES and LPSTB; line 6 is `rst_c` (`eof` runs 10, 11, 13).
