@@ -247,9 +247,9 @@ traced on another model and waits for its Fable review (re-read item R31); the j
 | **link G**, two pads and a hop | `eof` | the metal ends on a pad with a contact (10226,15912); poly north (x 10218-10235) under the horizontal metal y 15822-15834, no hole, to a pad with a contact (10226,15783) | `b1.png` (1.5x, all traces); `textmap.py 10190 15750 10262 15930 3`: each pad a bright centre in a ring and a hole in the clean shot, poly 5-8 between |
 | **link G**, the metal | `eof` | north to a corner (10228,15654), east to (10312,15654), north to (10312,15308), east to (10396,15308), north to `bc2`'s pad (10395,15087) (ring, bright centre in both chips, hole) | `follow.py 10224 15720 N`; `textmap.py 10195 15630 10345 15700 3`, `10285 15285 10425 15330 3`, `10366 15055 10430 15120 3`; `tl5_tracks.py v 10312 15320 15640`, `v 10397 15100 15300` (bars of 8-12 px: `bc2`'s rows, which its notes say pass under x 10310 without contact; no hole); overlay `ovg1.png` |
 | the follower's candidate (10258,15655) | - | a blemish: dark on chip 2's metal, a speck in the clean shot, absent from chip 1's metal and chip 2's stripped shot; the L lies on field | `b3.png`, `b4.png` (4x, four shots) |
-| **link H**, the hop | `eof` | from `trunks`' pad (9770,18081) the poly runs west under the metals x 9650, 9700 to a pad with a contact (9554,18081) | `d2.png`; `tl5_tracks.py rows row 9560 9765 5 18074 18081 18088`; `textmap.py 9530 18056 9590 18104 3 --acid` |
+| **link H**, the hop | `eof` | from `trunks`' pad (9770,18081) the poly runs west under the metals x 9640-9684 and 9716-9732 to a pad with a contact (9554,18081) | `d2.png`; `tl5_tracks.py rows row 9560 9765 5 18074 18081 18088`; `textmap.py 9530 18056 9590 18104 3 --acid` |
 | **link H**, y 18083 | `eof` | metal west, straight, to a pad with a contact (8964,18081) | `follow.py 9500 18082 W`; `tl5_tracks.py h 18083 8975 9545`: no hole; `textmap.py 8936 18056 8996 18104 3 --acid`; `d1.png` |
-| **link H**, poly north | `eof` | from that pad north (x 8955-8973) under three horizontal metals and the through metal y 17781 (no hole) to a pad with a contact (8967,17735) | `d3.png` (1.45x), `textmap.py 8938 17700 8998 17800 3 --acid`; overlay `ovh1.png` |
+| **link H**, poly north | `eof` | from that pad north (x 8955-8973) under four horizontal metals (y ~17822, 17862, 17905, 18040) and the through metal y 17781 (no hole) to a pad with a contact (8967,17735) | `d3.png` (1.45x), `textmap.py 8938 17700 8998 17800 3 --acid`; overlay `ovh1.png` |
 | **link H**, x 8968 | `eof` | metal north from the pad, 2,470 px, over the rows of the gate columns; it passes through two pads with contacts, (8966,16737) and (8962,16172), and ends on a pad with a contact (8966,15260) | `follow.py 8966 17650 N`; `tl5_tracks.py v 8968 15270 17715`: bars under 16 px, clean-shot holes only at y 16174 and 16738 (a 105 px stretch at y 16544 is plain tan under the metal, no hole; chip 1 dim at y 17209-17234 over a wide poly band); `textmap.py` of each pad (`8930 16715 8996 16760`, `8930 16150 8996 16195`, `8938 15234 8998 15285`, all `3 --acid`) |
 | **link H**, the west branch | `eof` | from the pad (8967,17735) a second metal runs west along y 17737 to a pad with a contact (8688,17737); the ring between its end and the pad's centre is 12 px, as on the north side | `g1.png` (4.8x, both metal shots); `px.py row 17738 8926 8980 2 metal,metal1`; `follow.py 8850 17738 W`; `tl5_tracks.py h 17737 8700 8940`; `textmap.py 8650 17705 8722 17765 3 --acid` |
 | the four polys beyond their pads | nobody | each goes on west: y 16737 and y 16165 into repeated units of the gate column x 8650-8800 (pitch 565; `f1.png`, `f2.png`), y 15258 into the column's north part (`f3.png`), y 17732 west of x 8650 | drawn as stubs of 20-25 px; ports |
@@ -402,11 +402,11 @@ driver lies; the other three lead to the loads.
 | `vss` | metal | (2596, 2347-2404) | - | the arm, into the VSS plane (`tl1`'s, not drawn north of y 2500) |
 | `vcc` | metal | (2250-2590, 1900) | - | the supply plane over the strap's head, on north, east and west (`padring`) |
 
-| `inh_src` | metal | (10219-10231, 15880) | in or out | piece `isrc`, link G: onto `trunks`' metal x 10225 |
+| `inh_src` | poly | (10218-10234, 15912) | in or out | piece `isrc`, link G: the pad under the north end of `trunks`' metal x 10225 |
 | `inh_src` | metal | (10390-10402, 15083) | to a load | onto `bc2`'s pad (10395,15087): `bc2_w15087`, the clear of latch unit a |
 | `inh_src` | poly | (9770, 18072-18090) | in or out | link H: from `trunks`' pad (9770,18081) |
 | `inh_src` | poly | (8930, 16728-16746) | ? | the row west of the tap pad (8966,16737): into the gate column |
-| `inh_src` | poly | (8930, 16158-16176) | ? | the row west of the tap pad (8962,16172): into the gate column |
+| `inh_src` | poly | (8930, 16163-16181) | ? | the row west of the tap pad (8962,16172): into the gate column |
 | `inh_src` | poly | (8930, 15248-15266) | ? | the row west of the end pad (8966,15260) |
 | `inh_src` | poly | (8650, 17722-17742) | ? | the poly west of the pad (8688,17737) |
 
@@ -685,6 +685,58 @@ no outline in any shot; the chip-2 stripped shot shows only fringes there); the 
 buried-contact boxes.
 
 Round 4: no findings that change a connection.
+
+**Round 5: full review of run 4's piece** (2026-11-19 12:41 to 12:47 +0100; one fresh reviewer agent on
+Claude Fable 5.2, read from the photos alone; trace at commit 7fe8566; its images in
+`cache/scratch/eof/review-5/`). Piece: `isrc` (links G and H).
+
+Told to suspect: whether the west and the north metal are both on the pad (8967,17735); whether the
+metal x 8968 is one metal through its two tap pads and whether those are contacts; other taps, side
+arms or a track step on its 2,470 px, the tan stretch at y 16490-16600 and the chip-1 dim stretch at
+y 17209-17234; link G's corners, its end on `bc2`'s pad, contacts of x 10312 onto the rows it crosses,
+anything else leaving its two pads; the three poly hops (straight, one poly, no contact from above);
+a second poly or a metal running on at the pads (9554,18081), (8964,18081), (8688,17737), (8966,15260);
+the direction of the four stubs.
+
+Checked and found correct (4.8x in four shots, text maps, the two-chip metal test, a flank scan):
+- the pad (8967,17735): both metals joined (bright to the pad's own edge, 12-15 px of ring, against
+  16 px of ring and then bare ground on the east side where nothing arrives); south of it open poly,
+  no metal; the metal y 17781 crosses with no ring and no hole;
+- x 8968 one straight metal y 15260-17735, no break over 16 px but the pad rings, no side arm at
+  +-13 and +-16 px in either chip, clean-shot holes only at the three pads; both tap pads contacts
+  with the metal joined on both sides, their rows leaving west only; nothing north of the end pad;
+  y 16478-16606 a wide diffusion band passing under without a ring; the chip-1 dim patch, the bars at
+  y 15507-15539 and a chip-2 dark spot (8972,16692) pass-overs or blemishes;
+- the pads (8688,17737), (8964,18081), (9554,18081): each metal ends on its pad, nothing runs on west
+  of x 8964, no poly south there, the poly at (8688,17737) leaves west only;
+- the three hops straight, one poly each, no contact at any crossing;
+- link G: corners as drawn, the spot (10258,15655) a blemish over field, x 10312 without contact onto
+  `bc2`'s rows and clear of the pad (10352,15385), the end on `bc2`'s pad (10395,15087) with nothing
+  north of it;
+- extraction: three gates on `inh_src`, 0 errors, not listed by `tools/unsure.py`.
+
+Findings, all geometry or comments only, all confirmed by the tracer and fixed:
+1. **No metal at y 15835-15907 on x 10226.** The trace had `M 10225,15880 y15914`; the stretch is the
+   hop's open poly (`px.py col 10226 15878 15962 4`: 164/116/60 to y 15894, ring y 15898-15902, centre
+   y 15906-15914, ring to y 15930, metal from y 15934). The line is removed; `trunks`' own metal, which
+   is drawn 48 px too far north (to y 15886), still covers the contact (handoff).
+2. The stub at the tap pad (8962,16172) was y 16158-16176; the row is y 16163-16181 (`px.py col 8940
+   16150 16190 3 acid1b`). Moved.
+3. Comments: the hop north of (8964,18081) passes under four horizontal metals, not three; the two
+   metals over the east hop are at x 9640-9684 and 9716-9732. Corrected.
+
+Proof that the fixes changed no connection (commit before the fixes: 7fe8566):
+
+```
+tools/t.sh eof sameconn.py 7fe8566             ->  connections identical
+.venv/bin/python tools/sameconn.py 7fe8566     ->  connections identical
+```
+
+Not checked by the reviewer: where the four stubs lead; `bc2`'s unit; the metal x 10225 south of
+y 16000. The chip-2 stripped shot is fringed at several pads, so the holes rest on the clean shot and
+the two metal shots.
+
+Round 5: no findings that change a connection.
 
 ## Not done
 
