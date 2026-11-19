@@ -13,14 +13,11 @@ lc3_m5626   M  5614-5638,9520  -    the same track; runs on south (not followed)
 lc3_m5756   M  5746-5766,9255  -    metal x 5756 passing over the pair, no contact in it; runs on north (not followed)
 lc3_m5756   M  5746-5766,9520  -    the same track; runs on south (not followed)
 
-# -- counter stages W3 and E4 (run 2). The joins to lc2 at y 9180-9256 are made by overlap with lc2's items
-# (rails, the L-shaped metal x 4553-4575, the pads (5254,9208) and (5341,9211), the staircase lines).
-lc3_w9904   M  4554-4572,9970   in   stage W3's clock: the L-shaped metal from its end pad (4648,9904) runs on south (past a pad (4561,10080), beyond y 10420)
-lc2_w8907   M  4508-4526,9392   ?    track B (lc2_w8450 through lc2's uncertain buried contact) on south from the pad (4517,9384) of W3's clear row (to a pad at y 10166)
-lc2_w8907   M  5378-5394,9969   ?    track B' (lc2's staircase line): it ends here, 235 px south of the pad (5386,9735) of E4's clear row
-lc1_w7170   M  5422-5438,9440   ?    track A' on south from the pads (5430,9298), (5428,9428) (to a pad at about y 10084-10104)
-lc1_w7170   P  5446,9418-9440   ?    the poly of the pad (5428,9428) leaves east (in line with lc3_w9432's row; not followed)
-vss         M  4752-4820,9970   -    the west rail on south
-vcc         M  4924-4980,9970   -    the middle rail on south
-vss         M  5102-5150,9945   -    the east rail on south
-
+# -- counter stages E4 and B0 (run 2). The joins to lc2 at y 9180-9256 are made by overlap with lc2's items (rails, the pads
+# (5254,9208) and (5341,9211), the staircase lines, track B at y 8700); the joins to eof's piece ff3 (stage W3) likewise:
+# track C at (4554-4572, 9970-9990), track B along x 4508-4526, the west and middle rails at y 9965-9970.
+lc3_w9947   P  5480,9936-9958    in   stage B0's clock: a poly row east from the pad (5298,9990) (read: to a pad (6211,9948) on a metal that is lc2_x6432)
+lc2_w8907   P  5480,10022-10045  ?    the clear: the poly of track B''s END pad (5386,9990) runs east as a row (read: to a pad (6257,10036), metal south)
+lc1_w7170   P  5446,9418-9440    ?    the poly of track A''s second pad (5428,9428) leaves east (read: the lower inverter's output row; not drawn)
+vss         M  4752-4802,10600   -    the west rail on south
+vcc         M  4924-4980,10600   -    the middle rail on south

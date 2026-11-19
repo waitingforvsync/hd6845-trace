@@ -1,3 +1,3 @@
-4580,9180:4990,9960  logic  counter stage W3 | the cell lc2_ff 780 px south of lc2's: a toggle flip-flop clocked by lc3_w9904 (from the south); its slave output is lc2_w8475, the clock of lc2's first stage
-4990,9150:5450,9930  logic  counter stage E4 | the cell lc2_ff turned 180 degrees: a toggle flip-flop clocked by lc2_w9034; its slave output is lc2_w9210 (an input of lc2_w9125)
+4440,9940:5480,10580  logic  counter stage B0 | the counter's first flip-flop, folded: lc2_ff's latch K in the west column, its gates K3, K4 turned in the east one, five crossing rows below; clock lc3_w9947 (from the east); its slave output clocks stage W3 (eof's ff3)
+4990,9150:5450,9945  logic  counter stage E4 | the cell lc2_ff turned 180 degrees: a toggle flip-flop clocked by lc2_w9034; its slave output is lc2_w9210 (an input of lc2_w9125)
 5540,9255:5900,9520  logic  gate pair | two inverters, mirror images: lc3_w9432 = NOT lc3_w9470, lc3_w9337 = NOT lc3_w9299
