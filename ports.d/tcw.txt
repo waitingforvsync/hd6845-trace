@@ -4,7 +4,7 @@
 tc1_x1_u     P  6750,4383-4401   out  output of the last inverter (NOT tcw_m6362c), going east: tc1's row to the pad (6947,4396)
 tc1_p4308    P  6750,4428-4448   in   from tc1; ends on the pad (6622,4440)
 tc1_p4308    M  6615-6627,4450   ?    the thin metal from the pad (6622,4440), going south into fld
-tcw_m6404    P  6258-6292,4422   in   pad (6275,4405) at the top of a vertical poly going south (the common gate input of four pull-downs)
+lc3_w9947    P  6258-6292,4422   in   pad (6275,4405) at the top of a vertical poly going south (the common gate input of four pull-downs)
 tcw_m6320    P  6205,3646-3664   ?    poly going west from the pad (6315,3655)
 tcw_m6278    M  6270-6282,2700   ?    the bus metal x 6276, drawn end; not followed north
 vss          M  6507-6557,4450   -    the ground rail of the column

@@ -1,6 +1,6 @@
 # tl6: top-left random logic, sixth strip (x 5683-6400, y 2500-6350)
 # A track field: no gate and no diffusion in the strip (notes/blocks/tl6.md). Vertical metal
-# tracks at a 43.5 px pitch: U0 x 5712, U1 5755, U2 5799, U3 5843 (r9m_l3 north of y 5045, bw's
+# tracks at a 43.5 px pitch: U0 x 5712, U1 5755, U2 5799, U3 5843 (tc2_o5175 north of y 5045, bw's
 # rc_stepreq_n south of y 5585), U4 5886, U5 5930, U6 5973 (ra_eq_r9), U7 6016 (sl_eq_r5_n), U8 6059,
 # U9 6103, U10 6146, U11 6190, then tcw's x 6233, 6276, 6320, 6363. South of y 4565 the tracks
 # U4-U7 are amrw's and bust's c4l0..c4l3. Poly rows from tl5's strip (ports at x 5683) end on
@@ -17,14 +17,13 @@
 # Piece 1 (2026-11-18): the rows of tl5's east ports y 3659-4979 and the tracks U0, U1, U2, U4
 # north, U5 north; the bus metals y 4482 and y 4787 to tc2's ports.
 
-# ---- tl5_w4395 (latch c's data) = tcw_m6320: tl5's T10 metal east along y 3659 to a pad
+# ---- tcw_m6320 (latch c's data) = tcw_m6320: tl5's T10 metal east along y 3659 to a pad
 # (5800,3658); the pad's poly east under U3..U11 and tcw's x 6233 (no pad: constant width,
 # cream under every track) onto tcw's poly west of its pad (6315,3655) (t1.png, t6.png 4x; a_e.png)
 M 5676,3659 x5802 w=14
 P 5783,3641:5818,3676
 C 5800,3658
 P 5800,3658 x6212
-@alias tcw_m6320 tl5_w4395
 
 # ---- tl5_w3505 (latch a's enable): the row y 3722 ends on a pad (5712,3722), the north end of
 # U0 (t1.png: closed east end x 5733, bare ground north); U0 south without a pad
@@ -66,7 +65,7 @@ P 5999,6049:6034,6083
 C 6016,6066
 M 6016,6066 x6105 y6350
 
-# ---- tcw_c = tl5_w4633 (latch c's output): fld's pad (6318,4135): its poly west along y 4134
+# ---- tcw_c = the wire `tl5` called w4633 (latch c's output): fld's pad (6318,4135): its poly west along y 4134
 # to a pad (5798,4135) (t2.png, t6.png), the north end of U2's upper piece; that metal south to
 # a pad (5797,4633) (t3.png: no metal south of it), the east end of tl5's row y 4633
 P 5798,4134 x6310
@@ -76,9 +75,8 @@ M 5798,4135 y4633
 P 5780,4616:5815,4650
 C 5797,4633
 P 5676,4633 x5797 w=20
-@alias tcw_c tl5_w4633
 
-# ---- tl5_w5500: the row y 4437 east under U0-U4 to a pad (5928,4437) (t2.png: closed east end
+# ---- tl4_w5068: the row y 4437 east under U0-U4 to a pad (5928,4437) (t2.png: closed east end
 # x 5947), the south end of U5's north piece; the metal north to its pad (5928,2680) (t7.png);
 # that pad's poly north out of the strip
 P 5676,4437 x5928 w=20
@@ -89,7 +87,7 @@ P 5911,2663:5946,2698
 C 5928,2680
 P 5928,2680 y2500 w=20
 
-# ---- tl5_w5544 = tc1_o3527: the row y 4480 from tl5's pad (5666,4480) east under U0-U6 to a
+# ---- the wire `tl5` called w5544 = tc1_o3527: the row y 4480 from tl5's pad (5666,4480) east under U0-U6 to a
 # pad (6010,4480) (q1.png 4x, three shots); the pad is the west end of the bus metal y 4482,
 # which runs east over the eight vertical polys of the field (no pad on it:
 # tl5_tracks.py h 4483 6025 6405, no hole) to tc2's port (6400, 4470-4494)
@@ -97,7 +95,6 @@ P 5676,4480 x6010 w=20
 P 5992,4463:6028,4498
 C 6010,4480
 M 6010,4482 x6400 w=20
-@alias tc1_o3527 tl5_w5544
 
 # ---- c4l_l3: the row y 4521 east under U0-U3 to a pad (5886,4522) (t2.png: closed east
 # end x 5905, no metal south of it), the south end of U4's north piece; the metal north to its
@@ -110,7 +107,7 @@ P 5869,2705:5905,2740
 C 5887,2722
 P 5887,2722 y2500 w=20
 
-# ---- tl5_w4503 (latch c's inverse output) = tl5_w4850 (inverter 1's gate): the row y 4590 east
+# ---- tl5_w4503 (latch c's inverse output) = tl5_w4503 (inverter 1's gate): the row y 4590 east
 # under U0-U3, a corner at x 5857-5877 in the open between U3 and U4, south to y 4708, west
 # under U3 to a pad (5797,4698), the north end of U2's middle piece (t3.png, t4.png; the strip
 # x 5866 is one poly colour from y 4584 to y 4704 in the chip-2 metal shot, px.py col 5866);
@@ -122,9 +119,8 @@ M 5797,4698 y4850
 P 5780,4833:5815,4868
 C 5797,4850
 P 5676,4849 x5797 w=18
-@alias tl5_w4503 tl5_w4850
 
-# ---- tl5_w4807 (inverter 1's output) = ras_o0_alt2: the row y 4808 east under U0-U7, south at
+# ---- ras_o0_alt2 (inverter 1's output) = ras_o0_alt2: the row y 4808 east under U0-U7, south at
 # x 6046-6070 to a pad (6058,4872) (t5.png); metal north from the pad to the bus metal y 4787,
 # whose west end this is, and east over the field to tc2's port (6400, 4778-4798)
 P 5676,4808 x6058 y4880 w=20
@@ -132,9 +128,8 @@ P 6041,4855:6076,4890
 C 6058,4872
 M 6058,4872 y4787 w=14
 M 6051,4787 x6400 w=20
-@alias ras_o0_alt2 tl5_w4807
 
-# ---- tl4_w4068 (tl5_w3982, latch b's enable): the row y 4979 ends on a pad (5798,4980)
+# ---- tl4_w4068 (the wire `tl5` called w3982, latch b's enable): the row y 4979 ends on a pad (5798,4980)
 # (t5.png), the north end of U2's south piece, which runs south out of the strip without a pad
 # (tl5_tracks.py v 5800 4992 6350: no hole)
 P 5676,4979 x5798 w=18
@@ -142,7 +137,7 @@ P 5780,4963:5816,4998
 C 5798,4980
 M 5799,4980 y6350
 
-# ---- tl5_w5674: tl5's pad (5667,6150): its poly east along y 6151 under U0 (no pad), U1's
+# ---- tl4_w4590: tl5's pad (5667,6150): its poly east along y 6151 under U0 (no pad), U1's
 # position (no metal there), U2, bw's metal and the wide metal to a pad (6016,6150) (t9.png);
 # metal south out of the strip
 P 5676,6151 x6016
@@ -241,22 +236,20 @@ P 6212,4855:6247,4890
 C 6229,4872
 M 6233,4872 y5659 x6363 y6032 x6403
 
-# ---- tcw_m6404 = tc2_m6447: tcw's pad (6275,4405) is the north end of the field's poly
+# ---- lc3_w9947 (tcw's gate line = tc2's metal x 6447): tcw's pad (6275,4405) is the north end of the field's poly
 # x 6275; the poly south to a pad (6274,4832) (u3.png); metal south, corner (6276,5612), east
 # onto tc2's metal (u7.png)
 P 6275,4405 y4832
 P 6257,4815:6292,4850
 C 6274,4832
 M 6276,4832 y5612 x6400
-@alias lc3_w9947 tc2_m6447                 # was `@alias tcw_m6404 tc2_m6447` until eof's piece ck5 (2026-11-19) joined this net to lc3_w9947, the left-centre ripple counter's clock: tcw_m6404 is now an alias of lc3_w9947 (trace/eof.txt), and an alias must name the canonical name directly
 
-# ---- tc1_p4308 = tc2_m6490: tc2's row y 5003 runs on west to a pad (6317,5000) (u4.png: bare
+# ---- tc1_p4308 = the wire `tc2` called m6490: tc2's row y 5003 runs on west to a pad (6317,5000) (u4.png: bare
 # ground north and west of the pad); metal south, corner (6320,5569), east onto tc2's metal
 P 6405,5003 x6317
 P 6300,4984:6335,5018
 C 6317,5000
 M 6320,5000 y5569 x6402
-@alias tc1_p4308 tc2_m6490
 
 # ---- tcw_m6278: tcw's track x 6276 runs on north of its drawn end (y 2700) to a corner
 # (6276,2665) and east across the strip's edge (u5.png)
@@ -265,18 +258,17 @@ M 6276,2706 y2665 x6400
 # ====================================================================
 # Piece 3 (2026-11-18)
 
-# ---- tc2_o5175 = r9m_l3: tc2's row y 5173 (the NOR's output) runs on west under the metals
+# ---- tc2_o5175 = the wire `r9m` called l3: tc2's row y 5173 (the NOR's output) runs on west under the metals
 # x 6320 and x 6276 to a corner at x 6250-6268 in the open, north to y 5045, and west along
 # y 5045 under the metals x 6233-5886 to r9m's pad (5845,5045) (v1.png 4x; px.py col 6260
 # 5022 5200 8: one poly colour from y 5038 to y 5182 in both metal shots)
 P 6405,5173 x6259 y5045 x5843 w=20
 # the row's west end is a pad with a contact under the south end of r9m's metal x 5848
-# (r9m_l3): ring with a bright centre at about (5842,5047) in both metal shots, green hole
+# (tc2_o5175): ring with a bright centre at about (5842,5047) in both metal shots, green hole
 # on a salmon pad in the clean shot (review round 1; tracer: cache/scratch/tl6/chk_j10.png,
 # 6x). Neither block had drawn it, so the join was not in the extraction.
 P 5822,5030:5862,5066
 C 5845,5043
-@alias tc2_o5175 r9m_l3
 
 # ---- rcs_mv: tl5's row y 6238 east under U0-U2, bw's metal, the wide metal and the metals
 # x 5972, 6016, 6105 to a corner at x 6226-6246 under the edge of the wide metal band, and

@@ -20,7 +20,7 @@ rcs_g3245   P  3533,2674-2692   in   row y 2683 east from track I's top pad (345
 tl1_w3678   P  3533,2804-2822   in   row y 2813 east from the pad (3154,2813)
 tl1_w2857   P  3533,2848-2866   in   row y 2857, straight through
 tl1_w3594   P  3533,2890-2908   ?    row y 2899 east of track H's pad; every known end is a gate
-tl1_w2637   P  3540,3325-3343   out  onto tl3's row y 3333 (tl3_w3333, the latch's data): alias
+tl1_w2637   P  3540,3325-3343   out  onto tl3's row y 3333 (tl1_w2637, the latch's data): alias
 tl3_w3419   P  3540,3410-3428   in   tl3's row y 3419 (the latch's inverted output) to track J's upper piece
 rcs_x1      P  3540,3497-3515   out  onto tl3's row y 3506 (rcs_x1, the latch's clear): alias
 tl1_w3594   P  3540,3713-3731   out  onto tl3's row y 3722 (tl3_w3722, NOR 1 gate 1): alias
@@ -32,22 +32,22 @@ tl3_w3939   P  3533,4102-4120   out  the same poly back east along y 4111
 rcs_x1      P  3533,4192-4210   ?    row y 4201 east from track I's tap (3452,4199)
 tl3_w3982   P  3533,4276-4294   ?    row y 4285 east of track J's tap (3497,4287)
 tl3_w4373   P  3533,4365-4383   ?    upper arm of the U-shaped poly under track G
-tl3_w4763   P  3533,4408-4426   ?    row y 4417 east from track H's lower top pad (3410,4418)
+tc1_o3527   P  3533,4408-4426   ?    row y 4417 east from track H's lower top pad (3410,4418)
 tl3_w4373   P  3533,4494-4512   ?    lower arm of the U-shaped poly
 tl3_w4546   P  3533,4538-4556   ?    row y 4547 east from track F's lower top pad (3322,4548)
-tl3_w4763   P  3540,4755-4773   out  from track H's tap (3410,4764) onto tl3's row y 4763 (NOR 4 gate 2)
+tc1_o3527   P  3540,4755-4773   out  from track H's tap (3410,4764) onto tl3's row y 4763 (NOR 4 gate 2)
 tl3_w5025   P  3533,5016-5034   ?    row y 5025 east from track G's lower top pad (3368,5025)
 rcs_x1      P  3533,5101-5119   ?    row y 5110 east from track I's tap (3452,5112)
 rcs_x1      P  3533,5362-5380   ?    row y 5371 (rcs_x1's) east of track I's bottom pad, under track J's arm
 tl3_w3982   M  3533,5365-5383   ?    track J's arm east along y 5374 (follow.py: to x 3607, then south to (3608,5942))
 tl3_w5025   P  3533,5406-5424   ?    row y 5415 east from track G's bottom pad (3368,5414)
-tl3_w4763   M  3533,5426-5444   ?    track H's arm east along y 5435 (follow.py: to (3571,5435))
+tc1_o3527   M  3533,5426-5444   ?    track H's arm east along y 5435 (follow.py: to (3571,5435))
 tl1_w4937   P  3533,5449-5467   in   row y 5458, straight through
 tl3_w4546   P  3538,5482-5514   ?    the pad (3518,5498) at the end of track F's arm; its poly goes on east
 # Ends of drawn wires inside the strip (where the drawing stopped: the gate column, not traced)
 # ---- run 5: the wiring north of y 2630
-tl1_w3333   M  2848,2546-2562   out  tl1's metal from the pad (2826,2553), to tl1's third latch; comes through the strip from the pad (3453,2553)
-tl1_w3333   P  3450-3470,2500   in   the poly north from the pad (3453,2553): the wire's source is north of the strips
+tl4_w4068   M  2848,2546-2562   out  tl1's metal from the pad (2826,2553), to tl1's third latch; comes through the strip from the pad (3453,2553)
+tl4_w4068   P  3450-3470,2500   in   the poly north from the pad (3453,2553): the wire's source is north of the strips
 sl_eq_r5_n   P  2817,2582-2600   ?    tl1's row y 2591, on east to the pad (2868,2596)
 sl_eq_r5_n   M  3533,2501-2518   ?    the metal from that pad: y 2598, north at x 3503, east along y 2509 (follow.py: on to x 3752)
 vss         M  2817,2893-2948   -    the east arm of tl1's wide metal x 2733-2785, onto R3's top (over the row y 2899, no contact)

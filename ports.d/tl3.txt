@@ -3,7 +3,7 @@
 # notes/blocks/tl3.md.
 
 # West side (x 3533): rows of the latch at y 3212-3652
-tl3_w3333   P  3533,3324-3342  in   data of the latch; the row turns north at x 3510-3525 (tl2's strip)
+tl1_w2637   P  3533,3324-3342  in   data of the latch; the row turns north at x 3510-3525 (tl2's strip)
 tl3_w3419   P  3533,3409-3429  out  the latch's inverted output; on west to a pad (3495,3418) under a metal going south
 rcs_x1   P  3533,3497-3515  in   clear of the latch; on west to a pad (3455,3503)
 # drawn ends inside the strip
@@ -13,29 +13,29 @@ rcs_a2   P  3533,3755-3775  out  NOR 1 output
 tl3_w3896   P  3533,3886-3906  in   NOR 2 gate 1; on west to a pad (3497,3890)
 tl3_w3939   P  3533,3929-3949  out  NOR 2 output
 tl3_w3982   P  3533,3972-3992  in   NOR 2 gate 2; on west to a pad (3497,3978)
-tl3_w4763   P  3533,4753-4773  in   NOR 4 gate 2
+tc1_o3527   P  3533,4753-4773  in   NOR 4 gate 2
 # rows of the cross-coupled pair (y 4046-4330), the inverter (y 4345-4490) and NOR 3
-tl3_w4112   P  3533,4101-4120  in   the pair: gate of the upper unit (resets tl3_w3803)
+tl3_w3939   P  3533,4101-4120  in   the pair: gate of the upper unit (resets tl3_w3803)
 rcs_x1   P  3533,4191-4209  in   the pair: lower unit gate 1
-tl3_w4290   P  3533,4281-4299  in   the pair: lower unit gate 2
+tl3_w3982   P  3533,4281-4299  in   the pair: lower unit gate 2
 tl3_w4373   P  3533,4363-4383  out  the inverter's output
-tl3_w4414   P  3533,4405-4423  in   the inverter's input
-tl3_w4503   P  3533,4493-4513  in   NOR 3 gate 1
+tc1_o3527   P  3533,4405-4423  in   the inverter's input
+tl3_w4373   P  3533,4493-4513  in   NOR 3 gate 1
 tl3_w4546   P  3533,4536-4556  out  NOR 3 output
 tl3_w5025   P  3533,5015-5035  out  latch B's inverted output
 rcs_x1   P  3533,5103-5121  in   clear of latch B
 # east column
 tl3_e4243   M  4250,4235-4255  out  output of the east NOR e3; the metal goes on east and north at x 4323
-tl3_e5114   P  4250,5105-5123  in   gate 2 of the east NOR e5 (which drives latch B's enable), from the east
+tl4_w4590   P  4250,5105-5123  in   gate 2 of the east NOR e5 (which drives latch B's enable), from the east
 inh_ck       P  3533,2892-2906  ?    the row y 2899 from the pad (4103,2899) at the north end of the thin metal x 4099-4111 (track A's net), on west: tl2's tl1_w3594 (an alias, across six ?M)
 tl3_e4635   P  4250,4627-4642  in   latch C's data, from the east
 rcs_x1   M  4250,5889-5901  in   latch C's clear: the metal x 4192 from the pad (4190,4808), east along y 5895
-tl3_e4372   P  4250,4366-4380  in   gate 1 of the NOR under the rail that drives rcs_mv, from the east
+tl3_w4546   P  4250,4366-4380  in   gate 1 of the NOR under the rail that drives rcs_mv, from the east
 inh_ck   P  4250,4496-4510  ?    the row of track A's pad (4146,4510), on east: tl4's inh_ck
 rcs_mv      P  4250,4736-4751  in   the poly of the pad (4192,4743) at the south end of rcs_mv's track, from the east
 rcs_mv   P  4250,4904-4925  ?    the poly of the pad (4234,4918) on the track x 4236, on east
 rcs_mv   M  4250,5760-5772  ?    the metal x 4236 from that pad, east out of the strip along y 5766
-tl3_e3028   P  4250,3018-3038  in   gate of the top unit E1 (which drives tl3_w3373, latch A's enable), from the east
+tl4_w4590   P  4250,3018-3038  in   gate of the top unit E1 (which drives tl3_w3373, latch A's enable), from the east
 tl3_e5240   P  4250,5231-5250  in   gate of the inverter under the east rail's south end; in tl4's strip the row turns south at x ~4277
 tl3_e4635 P  4250,5190-5205  out  that inverter's output row; in tl4's strip it ends on a pad (4278,5198) of a metal x 4279 whose north pad (4278,4636) is on tl3_e4635's row (not drawn)
 # the foot (y 5345-5660, run 9): rows between tl2's strip and tl4's, and the metals that go on south
@@ -45,13 +45,13 @@ tl3_w5025   P  4250,5408-5421  out  the same row, on east to tl4's pad (4279,541
 tl3_e3550   P  3533,5450-5465  out  the row of the pad (3953,5458) at the south end of the thin metal x 3948-3962 (tl2's tl1_w4937, an alias); on west to tl1's NOR of rcs_e4; driven here if the thin metal is one metal (six ?M)
 c4l_l3   P  4250,5450-5465  in   the row of the pad (4040,5458), from tl4's strong inverter
 tl3_w4546   P  3530,5494-5508  out  NOR 3's output again: the row from tl2's pad (3518,5498), across the foot
-tl3_w4546   P  4250,5494-5508  out  the same row, on east to tl4's pad (4321,5504) (tl4: tl3_e4372, gate 1 of rcs_mv's NOR)
+tl3_w4546   P  4250,5494-5508  out  the same row, on east to tl4's pad (4321,5504) (tl4: tl3_w4546, gate 1 of rcs_mv's NOR)
 inh_ck       P  4250,5621-5641  in   the row of track A's south pad (4104,5633), on east: tl4's inh_ck
 tl3_w3982   M  3533,5367-5380  in   tl2's track J arm; turns south at x 3608
-tl3_w4763   M  3533,5430-5442  ?    tl2's track H arm; turns south at x 3566
+tc1_o3527   M  3533,5430-5442  ?    tl2's track H arm; turns south at x 3566
 # south of the foot (y 5660-6350, run 11)
-tc1_o3527   P  4250,5708-5728  in   the row of the pad (3565,5720) at the south end of tl3_w4763's metal, on east: tl4's row of tc1_o3527 (tl3_w4763 is an alias)
-tl3_w3982   M  4250,5933-5945  ?    the thin metal from the pad (3954,5938) at the east end of the row y 5936 (from the pad (3607,5938) of tl3_w3982's metal), on east: tl4's metal y 5939 to tl5_w5936
+tc1_o3527   P  4250,5708-5728  in   the row of the pad (3565,5720) at the south end of tc1_o3527's metal, on east: tl4's row of tc1_o3527 (the wire `tl3` called w4763 is an alias)
+tl3_w3982   M  4250,5933-5945  ?    the thin metal from the pad (3954,5938) at the east end of the row y 5936 (from the pad (3607,5938) of tl3_w3982's metal), on east: tl4's metal y 5939 to tl3_w3982
 c4l_l3   M  3794-3808,6350  out  the thin metal from the pad (3801,6286), south out of the strip: ur's c4l_l3 (an alias), the 4-bit counter's L3 line
 vss         M  3888-3934,6350  -    the west rail's leg after its turn east (y 6198-6244): ur's vss x 3913
 vcc         M  4126-4174,6350  -    the VCC rail's leg after its turn east (y 6109-6157): ur's vcc x 4150

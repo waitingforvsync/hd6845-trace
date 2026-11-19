@@ -3,7 +3,7 @@
 # (both chips' metal shots), diagonals placed by sampling the follower with --max.
 # CORRECTED 2026-11-17 after independent review: two poly hops under the metals x 5078-5127
 # step down one track, so R9's match ends on the contact (4148,3335) (ra_eq_r9), and the
-# metal x 4194 with the stub is another net (r9m_l3). See notes/blocks/r9m.md, correction.
+# metal x 4194 with the stub is another net (tc2_o5175). See notes/blocks/r9m.md, correction.
 @block r9m
 @w M=12 P=16
 @s 24x24
@@ -58,7 +58,7 @@ M 4194,3376 x4142 w=17
 # both metal shots, notes AMB-013). Drawn with tla's split of track P (separate commit).
 
 N M 7600,4462 ra_eq_r9
-N M 4194,3000 r9m_l3
+N M 4194,3000 tc2_o5175
 
 # =====================================================================================
 # The bundle's first line: from the contact (4148,3335) of ra_eq_r9 (trace/tla.txt)

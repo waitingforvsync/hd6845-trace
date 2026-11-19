@@ -12,7 +12,7 @@ wiring only, no transistor), and the "poly bar" of Not done looked at (nothing t
 things were undrawn north of the cluster, east of `tl1`'s pads:
 
 ```
-tl1_w3333   metal y 2554 from tl1's pad (2826,2553) east to a pad (3453,2553); poly NORTH from the pad,
+tl4_w4068   metal y 2554 from tl1's pad (2826,2553) east to a pad (3453,2553); poly NORTH from the pad,
             x 3450-3470, out of the strip at y 2500: the third latch's data comes from the band north of the strips
 sl_eq_r5_n   tl1's row y 2591 on east to a pad (2868,2596); metal east along y 2598, north at x 3503,
             east along y 2509 out of the strip at x 3533
@@ -93,7 +93,7 @@ all on geometry without `?`, and one correction to `tla`'s trace (see "The bus f
 rcs_x1       one net: track I (y 3494-5380)
 tl3_w3982 = the gate of tla's pass transistor     tracks F (middle piece) and J (lower piece); NOT clk_tl
 tl1_w3594 = tl3_w3722                             track H (upper piece)
-tl1_w2637 = tl3_w3333                             track D (upper piece) and the row y 3202
+tl1_w2637 = the wire `tl3` called w3333                             track D (upper piece) and the row y 3202
 rcs_a2, tl3_w3419 = tl3_w3896         tla's row y 3761; track J (upper piece)
 ```
 
@@ -129,7 +129,7 @@ undrawn contacts (see Not done).
 | x 2785-3175, y 4230-4530 | **run 3, piece 2**: the AND-OR-INVERT unit that drives `rcs_bd3330`, cross-coupled (through its load's tie) with `tla`'s `rcs_n4200`: load between R2 and thin E (y 4275-4349), the node's column under thin E and the gap, a wire under R3 (y 4344-4356), columns under R3's east edge and under the thin metal x 3025-3059, three gates (`rcs_n4200`'s band y 4370-4390, the `clk_tl` row y 4407-4424, the arm y 4462-4481 of `rcs_cond_lat`'s pad), a VSS box with a contact (2990,4513), the buried contact (3048-3072, 4362-4390) to the row y 4374 |
 | x 2786-2990, y 4005-4145 | **run 4, piece 3**: the inverter of `rcs_cond`: VCC box under R2 (contact (2804,4084)), load plate in the open (x 2843-2896, y 4048-4110) on `rcs_cond_lat`'s poly, node box under thin E with a narrow strip south to the tie, pull-down in the gap between thin E and R3 (gate: the west end of `tla`'s g1 band, turned north), source on `tla`'s VSS box (contact (2985,4070)) |
 | x 3004-3063, y 4504-4530 | **run 4, piece 4**: the top of `tla`'s column above the band of `tl3_w3982`: a diffusion band west to piece 2's VSS box; no tie to the pad above (AMB-009) |
-| y 2500-2960 | horizontal metal tracks and rows north of the cluster: `tla`'s (y 2728), run 2's (y 2640, 2812 and the rows), and **run 5, piece 5**: `tl1_w3333`'s metal y 2554 with its east pad (3453,2553) and the poly north from it; `sl_eq_r5_n`'s pad (2868,2596) and metal y 2598 / x 3503 / y 2509; the VSS arm y 2893-2948 onto R3's top; the VSS plane's lower edge (y 2507, to x 3388) |
+| y 2500-2960 | horizontal metal tracks and rows north of the cluster: `tla`'s (y 2728), run 2's (y 2640, 2812 and the rows), and **run 5, piece 5**: `tl4_w4068`'s metal y 2554 with its east pad (3453,2553) and the poly north from it; `sl_eq_r5_n`'s pad (2868,2596) and metal y 2598 / x 3503 / y 2509; the VSS arm y 2893-2948 onto R3's top; the VSS plane's lower edge (y 2507, to x 3388) |
 | x 2817-3180, y 5900-6300 | the small cluster's east half: **this piece** |
 | x 2890-3533, y 6300-6350 | `rcs_thin_e`'s pad (2913,6327) and its poly row east (drawn); `lc_step`'s row y 6268-6290 is `ur`'s |
 
@@ -229,7 +229,7 @@ pad.
 | Net | Metal | Pads and rows |
 |---|---|---|
 | `tl1_w3678` | tl1's metal from the pad (2830,2811) east along y 2812 | pad (3154,2813); row east along y 2813 out of the strip (x 3533) |
-| `tl1_w2637` = `tl3_w3333` | track D upper: tl1's metal from the pad (2827,2637) east along y 2640, south at x 3241 to y 3214 | pad (3240,3204); row east along y 3202 to x 3522, south (poly in the open) to y 3334, east into tl3's row y 3333: **the data of tl3's latch** |
+| `tl1_w2637` = the wire `tl3` called w3333 | track D upper: tl1's metal from the pad (2827,2637) east along y 2640, south at x 3241 to y 3214 | pad (3240,3204); row east along y 3202 to x 3522, south (poly in the open) to y 3334, east into tl3's row y 3333: **the data of tl3's latch** |
 | `rcs_bd3330` (tla) | track D middle (tla's, y 3314-4390) | its bottom pad (3237,4376), not drawn by tla; row west along y 4374 to x 3072 and on into the gate column (not traced) |
 | `tl2_w3722` | track F upper, y 2630-3732 | top pad (3324,2639), row east along y 2639 out of the strip; bottom pad (3322,3722), row west along y 3722, drawn to x 3100 (it goes on west under track A into the gate column: not traced) |
 | `tl3_w3982` | track F middle, y 4278-4470; track J lower, y 3972-5374 and east along y 5374 out of the strip (the follower: on to x 3607, south to (3608,5942), in tl3's strip) | F's bottom pad (3322,4460): row west along y 4461 to x 3105-3125, **south under track A** into the east end of tla's row y 4535-4558, **the gate row of tla's pass transistor at (3046,4546)** (`rcs_cond` to `rcs_cond_lat`). That row ends at x 3122 as the foot of this poly; it does **not** reach track B's pad (3152,4548), 14 px of field between, so this net is not `clk_tl` (review round 1; `tla`'s row corrected, commit 1915f94). F's top pad (3325,4287): row east along y 4285 through the pad of J's tap (3497,4287) and on out of the strip. J's top pad (3497,3982): row east into tl3's row y 3982, gate 2 of tl3's NOR 2. **Driver not found**: the net's two open ends are the row y 4285 at x 3533 and J's arm |
@@ -237,7 +237,7 @@ pad.
 | `rcs_in1` (tla) | track G upper (tla's) | - |
 | `tl3_w5025` | track G lower, y 5014-5424 | top pad (3368,5025), row east along y 5025; bottom pad (3368,5414), row east along y 5415; both out of the strip |
 | `tl1_w3594` = `tl3_w3722` | track H upper, y 2890-3732 | top pad (3410,2899) in the middle of tl1's row y 2899, which runs on east out of the strip; bottom pad (3410,3722), row east into tl3's row y 3722: **gate 1 of tl3's NOR 1** |
-| `tl3_w4763` | track H lower, y 4408-5435, east along y 5435 out of the strip (the follower: to (3571,5435)) | top pad (3410,4418), row east along y 4417 out of the strip; tap (3410,4764), row east into tl3's row y 4763 (gate 2 of tl3's NOR 4) |
+| `tc1_o3527` | track H lower, y 4408-5435, east along y 5435 out of the strip (the follower: to (3571,5435)) | top pad (3410,4418), row east along y 4417 out of the strip; tap (3410,4764), row east into tl3's row y 4763 (gate 2 of tl3's NOR 4) |
 | `rcs_g3245` (tla) | track I upper, y 2674-3256 | bottom pad (3452,3246) at the east end of tla's row y 3246; top pad (3454,2683), row east along y 2683 out of the strip |
 | `rcs_x1` | track I lower, y 3494-5380: one metal, four contacts | top pad (3454,3504): its poly runs south (x 3446-3470) into the east end of tla's row y 3547 (`rcs_x1`; the row ends there) and east into tl3's row y 3506 (**the clear of tl3's latch**). Tap (3452,4199): poly west by a step (x 3402-3426, in the open) down to tla's row y 4240 (`rcs_x1`), and east along y 4201 out of the strip. Tap (3452,5112): row east along y 5110 out of the strip. Bottom pad (3454,5371) in the middle of tl1's row y 5371 (`rcs_x1`, **the clear of tl1's two latches**), which runs on east under J's arm out of the strip |
 | `tl3_w3419` = `tl3_w3896` | track J upper, y 3408-3904 | top pad (3497,3418), row east into tl3's row y 3419 (the inverted output of tl3's latch); bottom pad (3497,3894), row east into tl3's row y 3896 (gate 1 of tl3's NOR 2) |
@@ -310,12 +310,12 @@ piece and the U-shaped poly); the rest are aliases in `trace/tl2.txt`:
 
 | tl2's row (x 3533) | tl3's row | So |
 |---|---|---|
-| y 4111, lower arm of `tl3_w3939`'s loop | `tl3_w4112`, gate of the pair's upper unit | `tl3_w3803` = NOR(`tl3_w3939`, `tl3_w4243`): NOR 2's output resets the pair |
+| y 4111, lower arm of `tl3_w3939`'s loop | `tl3_w3939`, gate of the pair's upper unit | `tl3_w3803` = NOR(`tl3_w3939`, `tl3_w4243`): NOR 2's output resets the pair |
 | y 4201, from track I's tap (`rcs_x1`) | `rcs_x1`, the pair's lower unit, gate 1 | `tl3_w4243` = NOR(`rcs_x1`, `tl3_w3803`, `tl3_w3982`) |
-| y 4285, from track J's tap (`tl3_w3982`) | `tl3_w4290`, the pair's lower unit, gate 2 | the same equation |
+| y 4285, from track J's tap (`tl3_w3982`) | `tl3_w3982`, the pair's lower unit, gate 2 | the same equation |
 | y 4374, upper arm of the U | `tl3_w4373`, the inverter's output | the U takes it to the row y 4503 |
-| y 4417, from track H's lower top pad (`tl3_w4763`) | `tl3_w4414`, the inverter's input | `tl3_w4373` = NOT `tl3_w4763` |
-| y 4503, lower arm of the U | `tl3_w4503`, NOR 3 gate 1 | `tl3_w4546` = NOR(`tl3_w3803`, `tl3_w4373`) |
+| y 4417, from track H's lower top pad (`tc1_o3527`) | `tc1_o3527`, the inverter's input | `tl3_w4373` = NOT `tc1_o3527` |
+| y 4503, lower arm of the U | `tl3_w4373`, NOR 3 gate 1 | `tl3_w4546` = NOR(`tl3_w3803`, `tl3_w4373`) |
 | y 4547, from track F's lower top pad | `tl3_w4546`, NOR 3's output | it goes down track F's lower piece to the pad (3518,5498) and on east |
 | y 5025, from track G's lower top pad | `tl3_w5025`, latch B's inverted output | it goes down track G's lower piece to the row y 5415 and on east |
 | y 5110, from track I's tap (`rcs_x1`) | `rcs_x1`, the clear of latch B | **`rcs_x1` clears a fourth latch**, and resets the cross-coupled pair that makes `tl3_w3803` |
@@ -675,7 +675,7 @@ every metal here the clean shot is protected field (pink): no diffusion, no tran
 band y 2690-2980 everything else already had an outline; the tops of tracks A, B and C are
 `tla`'s (pads (3108,2985), (3150,3067); C turns west along y 2728).
 
-- **`tl1_w3333`** (traced). `tl1`'s metal from its pad (2826,2553) runs east along y 2546-2562
+- **`tl4_w4068`** (traced). `tl1`'s metal from its pad (2826,2553) runs east along y 2546-2562
   (`follow.py 3000 2553 E`: end (3460,2556); `W`: end (2822,2556)) to a pad: ring x 3440-3478,
   y 2535-2572 with a bright centre at (3455,2553) in chip 2 and (3452,2553) in chip 1, a salmon
   pad x 3446-3472, y 2536-2568 with a green hole in the clean shot and a pit in the chip-2
@@ -692,7 +692,7 @@ band y 2690-2980 everything else already had an outline; the tops of tracks A, B
   shot is the pad's outline at the metal's edge). The metal leaves the pad east along y 2590-2607,
   turns north at x 3494-3512 and east again along y 2501-2518, out of the strip at x 3533
   (`follow.py 3000 2597 E`: corners (3506,2593) and (3504,2511), on east to x 3752). **At its
-  corner it passes `tl1_w3333`'s pad without touching**: the pad's ring ends at x 3478, the metal
+  corner it passes `tl4_w4068`'s pad without touching**: the pad's ring ends at x 3478, the metal
   begins at x 3492, bare ground between in both metal shots (`n5_a.png`; trap 16).
 - **VSS** (traced). The east arm of `tl1`'s wide metal x 2733-2785 is y 2893-2948 and runs
   without a break onto the top of R3 (`px.py row 2930 2776 3024 8`: bright from x 2776 to
@@ -743,7 +743,7 @@ open field between the metal's protected margin and the row's green rim, with it
 | `tl1_w3678` | P | x 3533, y 2804-2822 | in | row y 2813 east from the pad (3154,2813) |
 | `tl1_w2857` | P | x 3533, y 2848-2866 | in | row y 2857, straight through |
 | `tl1_w3594` | P | x 3533, y 2890-2908 | ? | row y 2899 east of track H's pad; every known end is a gate |
-| `tl1_w2637` | P | x 3540, y 3325-3343 | out | onto tl3's row y 3333 (tl3_w3333, the latch's data): alias |
+| `tl1_w2637` | P | x 3540, y 3325-3343 | out | onto tl3's row y 3333 (tl1_w2637, the latch's data): alias |
 | `tl3_w3419` | P | x 3540, y 3410-3428 | in | tl3's row y 3419 (the latch's inverted output) to track J's upper piece |
 | `rcs_x1` | P | x 3540, y 3497-3515 | out | onto tl3's row y 3506 (rcs_x1, the latch's clear): alias |
 | `tl1_w3594` | P | x 3540, y 3713-3731 | out | onto tl3's row y 3722 (tl3_w3722, NOR 1 gate 1): alias |
@@ -755,20 +755,20 @@ open field between the metal's protected margin and the row's green rim, with it
 | `rcs_x1` | P | x 3533, y 4192-4210 | ? | row y 4201 east from track I's tap (3452,4199) |
 | `tl3_w3982` | P | x 3533, y 4276-4294 | ? | row y 4285 east of track J's tap (3497,4287) |
 | `tl3_w4373` | P | x 3533, y 4365-4383 | ? | upper arm of the U-shaped poly under track G |
-| `tl3_w4763` | P | x 3533, y 4408-4426 | ? | row y 4417 east from track H's lower top pad (3410,4418) |
+| `tc1_o3527` | P | x 3533, y 4408-4426 | ? | row y 4417 east from track H's lower top pad (3410,4418) |
 | `tl3_w4373` | P | x 3533, y 4494-4512 | ? | lower arm of the U-shaped poly |
 | `tl3_w4546` | P | x 3533, y 4538-4556 | ? | row y 4547 east from track F's lower top pad (3322,4548) |
-| `tl3_w4763` | P | x 3540, y 4755-4773 | out | from track H's tap (3410,4764) onto tl3's row y 4763 (NOR 4 gate 2) |
+| `tc1_o3527` | P | x 3540, y 4755-4773 | out | from track H's tap (3410,4764) onto tl3's row y 4763 (NOR 4 gate 2) |
 | `tl3_w5025` | P | x 3533, y 5016-5034 | ? | row y 5025 east from track G's lower top pad (3368,5025) |
 | `rcs_x1` | P | x 3533, y 5101-5119 | ? | row y 5110 east from track I's tap (3452,5112) |
 | `rcs_x1` | P | x 3533, y 5362-5380 | ? | row y 5371 (rcs_x1's) east of track I's bottom pad, under track J's arm |
 | `tl3_w3982` | M | x 3533, y 5365-5383 | ? | track J's arm east along y 5374 (follow.py: to x 3607, then south to (3608,5942)) |
 | `tl3_w5025` | P | x 3533, y 5406-5424 | ? | row y 5415 east from track G's bottom pad (3368,5414) |
-| `tl3_w4763` | M | x 3533, y 5426-5444 | ? | track H's arm east along y 5435 (follow.py: to (3571,5435)) |
+| `tc1_o3527` | M | x 3533, y 5426-5444 | ? | track H's arm east along y 5435 (follow.py: to (3571,5435)) |
 | `tl1_w4937` | P | x 3533, y 5449-5467 | in | row y 5458, straight through |
 | `tl3_w4546` | P | x 3538, y 5482-5514 | ? | the pad (3518,5498) at the end of track F's arm; its poly goes on east |
-| `tl1_w3333` | M | x 2848, y 2546-2562 | out | tl1's metal from the pad (2826,2553), to tl1's third latch; comes through the strip from the pad (3453,2553) |
-| `tl1_w3333` | P | x 3450-3470, y 2500 | in | the poly north from the pad (3453,2553): the wire's source is north of the strips |
+| `tl4_w4068` | M | x 2848, y 2546-2562 | out | tl1's metal from the pad (2826,2553), to tl1's third latch; comes through the strip from the pad (3453,2553) |
+| `tl4_w4068` | P | x 3450-3470, y 2500 | in | the poly north from the pad (3453,2553): the wire's source is north of the strips |
 | `sl_eq_r5_n` | P | x 2817, y 2582-2600 | ? | tl1's row y 2591, on east to the pad (2868,2596) |
 | `sl_eq_r5_n` | M | x 3533, y 2501-2518 | ? | the metal from that pad: y 2598, north at x 3503, east along y 2509 (follow.py: on to x 3752) |
 | `vss` | M | x 2817, y 2893-2948 | - | the east arm of tl1's wide metal, onto R3's top; it lies over the row y 2899 without a contact |
@@ -1196,7 +1196,7 @@ Round 1: no findings that change a connection.
   The strip south of the foot (x 2800-3550, y 5640-6360, `r5_south.png`, 0.9x): east of the small
   cluster there is only open field between `tla`'s metal (y 5677, x 3527) and the VSS metal
   (y 6250-6292); everything there has an outline.
-- North of y 2630 is drawn (run 5, piece 5). Left there, all outside the strip: `tl1_w3333`'s poly
+- North of y 2630 is drawn (run 5, piece 5). Left there, all outside the strip: `tl4_w4068`'s poly
   north of (3460,2500) and the plane above y 2500 (the band y 2180-2500, in no package);
   `sl_eq_r5_n`'s metal east of (3533,2509) (`follow.py`: east to x 3752, in `tl3`'s strip).
 - The rows that leave east at x 3533 and the two metal arms (ports table): their far ends are
@@ -1216,7 +1216,7 @@ Round 1: no findings that change a connection.
 - Ports, the row of `tl1_w5936`: the wire goes on up the west margin and leaves north at (2380,2498)
   (`tl1` run 5).
 - Ports: the rows at x 3533, y 5371 (`rcs_x1`), 5415 (`tl3_w5025`), 5458 (`tl1_w4937`), 5498
-  (`tl3_w4546`), the arms y 5374 (`tl3_w3982`) and 5435 (`tl3_w4763`), and the row y 2899 are drawn on
+  (`tl3_w4546`), the arms y 5374 (`tl3_w3982`) and 5435 (`tc1_o3527`), and the row y 2899 are drawn on
   in `tl3`. "`rcs_x1`'s driver is east of x 3533 on the row y 5371" is not so: that row ends on latch C's
   clear pad (4192,5373), whose metal goes on south and east to (4250,5895) and on into `tl5`'s row
   y 5890; the driver is beyond that.
@@ -1228,11 +1228,11 @@ Round 1: no findings that change a connection.
 - `sl_eq_r5_n` is NOT `sl_eq_r5` (`sl_eq_r5_n`), driven from the east (`eof`); "follow.py: on to x 3752"
   was the follower turning onto the wide metal x 3648-3760; the metal ends on the pad (3606,2510).
 - `rcs_thin_e`'s row east of x 3533 ends on the pad (3973,6329), whose metal goes south to `ur`'s pad
-  (3968,6410) (`tl3` run 11); `tl3_w3982`'s driver "on track J's arm": the arm leads to `tl5_w5936`;
-  `tl3_w4763` is `tc1_o3527`.
+  (3968,6410) (`tl3` run 11); `tl3_w3982`'s driver "on track J's arm": the arm leads to `tl3_w3982`;
+  the wire `tl3` called w4763 is `tc1_o3527`.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
 
-- `tl1_w3333` ("the wire's source is north of the strips"): it is the net of `tl4`'s latch enable (`tlb` run 1: poly north under the plane, pad (3458,2096), metal y 2098, pad (4540,2098)); no gate is north of the strips.
+- `tl4_w4068` ("the wire's source is north of the strips"): it is the net of `tl4`'s latch enable (`tlb` run 1: poly north under the plane, pad (3458,2096), metal y 2098, pad (4540,2098)); no gate is north of the strips.
 - `tl3_w3982`'s driver ("not found"): `eof`'s inverter U4 at (7575,8386) (run 12).
 - `rcs_x1` = NOT `lc1_w7170`, and `lc1_w7170` = NOT `rst_c` (`eof` run 13, piece `rc`, firm): the clear of the step logic's five latches is the reset, two inverters later. Where these notes call its source open, it is found.

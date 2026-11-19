@@ -299,8 +299,8 @@ D 10719,7699:10745,7728
 C 10744,7659 s=28x46
 
 # --- labels of row C
-N M 8075,7600 cdp2_c_s1_bus
-N M 8465,7600 cdp2_c_s2_bus
+N M 8075,7600 db_b6
+N M 8465,7600 db_b5
 N M 8855,7600 cdp2_c_s3_bus
 N M 9246,7600 cdp2_c_s4_bus
 N M 9636,7600 cdp2_c_s5_bus

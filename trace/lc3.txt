@@ -55,7 +55,7 @@ M 5560,9255 y9311
 N M 5560,9500 rst_c
 N M 5560,9270 lc3_w9299
 N P 5560,9429 lc3_w9432
-N P 5560,9340 lc3_w9337
+N P 5560,9340 lc2_w9079
 
 # ====================================================================
 # The counter of lc2's west cluster goes on south in this strip: three more stages (notes: "The counter").
@@ -173,7 +173,7 @@ P 4842,10238:4876,10264
 B 4840,10234:4874,10268
 
 # -- east column: gates K3 and K4, turned
-# -- gate K3 (x 4620-4985, y 8760-8945): lc2_w8857 = NOT( lc2_w8930 AND ( lc2_w8725 OR lc2_w8475 ) )
+# -- gate K3 (x 4620-4985, y 8760-8945): lc2_w8298 = NOT( lc2_w8692 AND ( lc2_w8725 OR lc2_w8475 ) )
 # Under the west rail (railprof.py 4758 4796 8750 9245), which is wider here (x 4741-4812 from y 8800): VSS box
 # y 8773-8805, row c y 8812-8825, node N y 8835-8860, row d y 8867-8889, box S y 8890-8940 (VSS again). N runs on east
 # under the rail's east part (E, x 4785-4816, to y 8900); a vertical poly strip x 4818-4838 lies between E and an open
@@ -194,7 +194,7 @@ P 5124,10227:5167,10253   # ... and ends at x 4789 in a plain end cap (round 12:
 # the strip and X
 P 5075,10174:5095,10305   # the vertical poly strip; it ends at y 8943 (round 12) ...
 P 5037,10172:5095,10192   # ... and leaves by an arm east, under the output's thin metal (no contact), to the ringed box at the head of gate K4's load (K4's section)
-#N P 5085,10187 lc2_w8930
+#N P 5085,10187 lc2_w8692
 D 5065,10217:5103,10279   # the diffusion under it, from E to X
 D 5047,10217:5071,10312   # X
 D 5017,10283:5071,10312   # ... and under the tie box
@@ -209,12 +209,12 @@ C 4967,10287
 P 4988,10213:5045,10245
 C 5023,10226                                # (round 4: the pad's contact and K3's output metal lie 8-9 px west of the turned cell's)
 M 5023,10233 y10223 5038,10211 y10142 w=14   # the output's thin metal: from the pad's south-west corner south (drawn to y 8975; it ends on a pad (4862,8998))
-#N M 5047,10177 lc2_w8857
+#N M 5047,10177 lc2_w8298
 
-# -- gate K4 (x 4440-4990, y 8900-9190): lc2_w8930 = NOT( lc2_w8857 AND lc1_w7170 AND ( lc2_w8552 OR lc2_w8475 ) )
-# With gate K3 it is a cross-coupled pair (the slave latch); lc2_w8857 goes back to latch K on track C.
+# -- gate K4 (x 4440-4990, y 8900-9190): lc2_w8692 = NOT( lc2_w8298 AND lc1_w7170 AND ( lc2_w8552 OR lc2_w8475 ) )
+# With gate K3 it is a cross-coupled pair (the slave latch); lc2_w8298 goes back to latch K on track C.
 # Under the west rail (railprof.py 4758 4796 8750 9245; x 4757-4808, from y 9045 x 4757-4820): node T y 8961-8976,
-# row y 8977-8991 (lc2_w8857), node, row y 9020-9034 (lc1_w7170), node Z y 9043-9062, row y 9063-9078 (lc2_w8552),
+# row y 8977-8991 (lc2_w8298), node, row y 9020-9034 (lc1_w7170), node Z y 9043-9062, row y 9063-9078 (lc2_w8552),
 # VSS node y 9087-9128 (contact (4775,9100)), row y 9135-9148 (lc2_w8475), node y 9158-9174, which is Z again: a
 # diffusion strip x 4838-4852 east of the rail joins the two. Views z8-z15; survey.md.
 D 5105,9942:5163,10161   # the column under the rail
@@ -241,7 +241,7 @@ D 5011,10145:5029,10193
 D 5013,10013:5035,10099   # ... and on under the plate to the VCC open diffusion
 P 4987,10017:5009,10192   # the gate poly: over FIELD from the ringed box south (round 14) ...
 P 4987,10019:5056,10077   # ... to the load's plate, one poly with it (round 15: its west edge is x 4857)
-P 5005,10172:5039,10192   # at its head it is one with K3's arm (lc2_w8930) over the ringed box
+P 5005,10172:5039,10192   # at its head it is one with K3's arm (lc2_w8692) over the ringed box
 B 5008,10167:5033,10195
 D 4928,9985:5035,10015   # open diffusion at the plate's foot, to a VCC box under the middle rail
 D 4928,9985:4981,10032
@@ -372,7 +372,6 @@ C 5558,9882
 P 5570,9870:5760,9894                       # ... whose poly arrives from the east as a row (the crossing field; drawn to x 5760)
 @alias lc1_w7170 lc3_w9432                  # the lower inverter's output is on track A': it DRIVES lc1_w7170
 N P 5490,9429 lc1_w7170                     # (the net's own name, labelled here so that this file extracts by itself: lc1 carries the other label)
-@alias lc2_w9079 lc3_w9337                  # the upper inverter's output is on the track x 5509-5527, lc2's lc2_w9079
 # -- the track field south of the gate pair
 M 5756,9520 y9555 5647,9664 y9998 w=18      # lc3_m5756 on south: diagonal south-west to x 5647, to its END pad (5646,9992)
 M 5626,9520 y9600 x5604 y10078 x5540 y10172 w=18   # lc2_w8450's metal: a step west at y 9600, south, west at y 10078 to x 5540 and its END pad (5540,10165)
@@ -394,13 +393,12 @@ N P 5475,10300 rst_n
 M 6299,9225 y9280 x6255 y9538 x6082 y10400 w=14# rst_a: to x 6082
 M 6342,9225 y9322 x6299 y9581 x6125 y10400 w=14# res_b: to x 6125
 M 6386,9225 y9366 x6342 y9626 x6169 y10400 w=14# lpstb_b: to x 6169
-M 6430,9225 y9410 x6386 y9669 x6212 y10400 w=14# lc2_x6432: to x 6212, through the pad (6211,9948) of stage B0's clock row
+M 6430,9225 y9410 x6386 y9669 x6212 y10400 w=14# lc3_w9947: to x 6212, through the pad (6211,9948) of stage B0's clock row
 M 6450,9455 x6429 y9712 x6299 y10400 w=14   # the fifth line: to x 6299, through the pad (6298,9884) of the row of rst_c
 M 6450,9756 x6342 y10400 w=14               # to x 6342
 M 6450,9798 x6428 y10400 w=14               # to x 6428
 N M 6342,10200 lc3_e9756
 N M 6428,10200 lc3_e9798
-@alias lc3_w9947 lc2_x6432                  # stage B0's clock is lc2's fourth through line
 # -- the crossing field: eleven poly rows under the vertical metals, pads only at their ends (railprof.py 6160 6178 9550 10060: poly
 # over field at each; tl5_tracks.py v down every metal; textmap.py of each pad; xf_*.png, xp1.png). Rows 1-6 come from the east edge and
 # each ends on a pad at the top of a vertical metal (a staircase); those six metals run south and turn diagonal south-west (sb_*.png,

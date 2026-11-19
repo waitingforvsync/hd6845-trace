@@ -381,7 +381,7 @@ Into parts not yet traced (the labels sit on the stubs):
 
 - Ports, "`cdp3_g_c7` .. `cdp3_g_c2` | 8907 .. 9123 | ? | one line into each row A cell": the other end of
   each is traced (`busl`, piece `d6`): a row-end pad just west of x 7600 (x 7336-7553), a track down the
-  left bus field, and `bc1`'s row D data line of the same order (c2 to `cdp4_in6_s1`). So line g is what
+  left bus field, and `bc1`'s row D data line of the same order (c2 to `cdp3_g_c2`). So line g is what
   `cdp4`'s 6-bit latch row D latches on `cdp4_ld6`; believed an output of the row A cell, not "a line in
   from the west".
 - `cdp3_k_b` ("in", gate 1 of the NAND beside row C): its row y 9450 ends west on a pad (7554,9450)

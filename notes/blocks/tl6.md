@@ -14,10 +14,10 @@ their ends, the tracks U0, U1, U2 and the north pieces of U4 and U5, the bus met
 y 4787, `ral_stb`. Piece 2: the tracks U8-U11, the five undrawn polys of the crossing field,
 the six metals south of it with their nest of corners, `tcw`'s track x 6276 north of y 2700.
 Piece 3: the row y 5045 / y 5173, the row y 6238, the wide ground metal. **Eleven joins between
-named nets, all without a `?` item** (`tools/unsure.py`): `tl5_w4395` = `tcw_m6320`,
-`c4l_gab`, `tl5_w4633` = `tcw_c`, `tl5_w4503` = `tl5_w4850`, `tl5_w4807` =
-`ras_o0_alt2`, `tl5_w5544` = `tc1_o3527`, `inh_ck`, `tcw_m6404` = `tc2_m6447`,
-`tc1_p4308` = `tc2_m6490`, `tc2_o5175` = `r9m_l3`, and U11 = `tc2_m6404`; `ral_stb` is taken
+named nets, all without a `?` item** (`tools/unsure.py`): the wire `tl5` called w4395 = `tcw_m6320`,
+`c4l_gab`, the wire `tl5` called w4633 = `tcw_c`, `tl5_w4503` = the wire `tl5` called w4850, `ras_o0_alt2` =
+`ras_o0_alt2`, the wire `tl5` called w5544 = `tc1_o3527`, `inh_ck`, `lc3_w9947` (`tcw`'s gate line and `tc2`'s metal x 6447),
+`tc1_p4308` = the wire `tc2` called m6490, `tc2_o5175` = the wire `r9m` called l3, and U11 = `tc2_m6404`; `ral_stb` is taken
 from `tc2`'s port to the south edge. Full extraction: 2299 nets, 4085 transistors (none
 added), 0 errors, 0 warnings. Not traced: Not done (one pad 13 px beyond the east edge;
 `tcw`'s own bus at x 6205-6400, y 2700-4420 was not re-read).
@@ -47,7 +47,7 @@ U10 6146, U11 6190, then `tcw`'s 6233, 6276, 6320, 6363.
 | U0 x 5712, y 3722-6192 | one metal, pads at both ends | traced (piece 1) |
 | U1 x 5755, y 4002-6065 | one metal from an arm at y 4002; pads (5800,4002), (5757,5632), (5755,6065) | traced (piece 1) |
 | U2 x 5799 | three pieces: y 4135-4633, y 4698-4850, y 4980 to the south edge | traced (piece 1) |
-| U3 x 5843 | `r9m`'s `r9m_l3` north of its pad (5845,5045); `bw`'s `rc_stepreq_n` south of the pad (5838,5585) | theirs; the pad (5845,5045)'s poly east along y 5045: traced (piece 3) |
+| U3 x 5843 | `r9m`'s `tc2_o5175` north of its pad (5845,5045); `bw`'s `rc_stepreq_n` south of the pad (5838,5585) | theirs; the pad (5845,5045)'s poly east along y 5045: traced (piece 3) |
 | U4 x 5886, U5 x 5930, north pieces | y 2722-4522 and y 2680-4437, pads at both ends, polys north out of the strip | traced (piece 1) |
 | U4-U7 south of y 4565 | `amrw`'s and `bust`'s `c4l0`..`c4l3` | theirs |
 | U6 x 5973, U7 x 6022 north | `r9m`'s `ra_eq_r9` and `sl_eq_r5_n` | theirs |
@@ -71,19 +71,19 @@ No transistor. What the wiring joins (every join below is drawn without a `?` it
 
 | `tl5`'s port | Path (all read at 4x in the chip-2 metal shot and the clean shot unless noted) | Result |
 |---|---|---|
-| `tl5_w4395`, metal y 3659 (latch c's data) | the metal runs on 115 px to a pad (5800,3658); the pad's poly east along y 3650-3668 under U3-U11 and `tcw`'s track x 6233 onto `tcw`'s drawn poly (from x 6205) and its pad (6315,3655) | **`tl5_w4395` = `tcw_m6320`** |
+| `tcw_m6320`, metal y 3659 (latch c's data) | the metal runs on 115 px to a pad (5800,3658); the pad's poly east along y 3650-3668 under U3-U11 and `tcw`'s track x 6233 onto `tcw`'s drawn poly (from x 6205) and its pad (6315,3655) | **the wire `tl5` called w4395 = `tcw_m6320`** |
 | `tl5_w3505`, row y 3722 (latch a's enable) | ends on a pad (5712,3722), the north end of U0; U0 south to its pad (5712,6192); poly east along y 6195 to a pad (5972,6193); metal south across y 6350 | leaves south at (5972,6350) |
 | `c4l_gab`, row y 3872 (latch c's clear) | east under U0 (no pad) and U3-U11 into `tcw`'s pad (6232,3870) | **`c4l_gab`** |
-| `tl5_w5500`, row y 4437 | pad (5928,4437), U5's north piece north to its pad (5928,2680); poly north across y 2500 | leaves north at (5928,2500) |
-| `tl5_w5544`, pad (5666,4480) | poly east to a pad (6010,4480), the west end of the bus metal y 4482, which crosses the field to `tc2`'s port | **`tl5_w5544` = `tc1_o3527`** |
+| `tl4_w5068`, row y 4437 | pad (5928,4437), U5's north piece north to its pad (5928,2680); poly north across y 2500 | leaves north at (5928,2500) |
+| `tc1_o3527`, pad (5666,4480) | poly east to a pad (6010,4480), the west end of the bus metal y 4482, which crosses the field to `tc2`'s port | **the wire `tl5` called w5544 = `tc1_o3527`** |
 | `c4l_l3`, row y 4521 | pad (5886,4522), U4's north piece north to its pad (5887,2722); poly north across y 2500 | leaves north at (5887,2500) |
-| `tl5_w4503`, row y 4590 (latch c's inverse output) | east to a corner at x 5867 (in the open between U3 and U4), south, west along y 4699 to a pad (5797,4698); U2's middle piece south to a pad (5797,4850); the row y 4849 west | **`tl5_w4503` = `tl5_w4850`**: inverter 1's input is latch c's inverse output |
-| `tl5_w4633`, row y 4633 (latch c's output) | pad (5797,4633), U2's upper piece north to a pad (5798,4135); poly east along y 4134 into `fld`'s pad (6318,4135) | **`tl5_w4633` = `tcw_c`** |
-| `tl5_w4807`, row y 4808 (inverter 1's output) | east under U0-U7, south at x 6058 to a pad (6058,4872); metal north to the west end of the bus metal y 4787, which crosses the field to `tc2`'s port | **`tl5_w4807` = `ras_o0_alt2`** |
-| `tl5_w4850`, row y 4849 | the pad (5797,4850) above | |
-| `tl5_w3982` (`tl4_w4068`), row y 4979 | pad (5798,4980), U2's south piece south across y 6350 | leaves south at (5799,6350) |
+| `tl5_w4503`, row y 4590 (latch c's inverse output) | east to a corner at x 5867 (in the open between U3 and U4), south, west along y 4699 to a pad (5797,4698); U2's middle piece south to a pad (5797,4850); the row y 4849 west | **`tl5_w4503` = the wire `tl5` called w4850**: inverter 1's input is latch c's inverse output |
+| `tcw_c`, row y 4633 (latch c's output) | pad (5797,4633), U2's upper piece north to a pad (5798,4135); poly east along y 4134 into `fld`'s pad (6318,4135) | **the wire `tl5` called w4633 = `tcw_c`** |
+| `ras_o0_alt2`, row y 4808 (inverter 1's output) | east under U0-U7, south at x 6058 to a pad (6058,4872); metal north to the west end of the bus metal y 4787, which crosses the field to `tc2`'s port | **the wire `tl5` called w4807 = `ras_o0_alt2`** |
+| `tl5_w4503`, row y 4849 | the pad (5797,4850) above | |
+| the wire `tl5` called w3982 (`tl4_w4068`), row y 4979 | pad (5798,4980), U2's south piece south across y 6350 | leaves south at (5799,6350) |
 | `inh_ck`, pad (5666,5632) | poly east under U0 to a pad (5757,5632) **on U1** | **`inh_ck`** |
-| `tl5_w5674`, pad (5667,6150) | poly east along y 6151 to a pad (6016,6150); metal south across y 6350 | leaves south at (6016,6350) |
+| `tl4_w4590`, pad (5667,6150) | poly east along y 6151 to a pad (6016,6150); metal south across y 6350 | leaves south at (6016,6350) |
 
 And from the east:
 
@@ -96,8 +96,8 @@ And from the east:
 names joined here):
 
 ```
-latch c (tl5):   tl5_w4633 = NOT( c4l_gab  OR  tl5_w4458 AND NOT tcw_m6320  OR  tl5_w4503 )     = tcw_c
-                 tl5_w4503 = NOT( tcw_m6320 AND tl5_w4458  OR  tl5_w4633 )
+latch c (tl5):   tcw_c = NOT( c4l_gab  OR  tl3_e4243 AND NOT tcw_m6320  OR  tl5_w4503 )     = tcw_c
+                 tl5_w4503 = NOT( tcw_m6320 AND tl3_e4243  OR  tcw_c )
 inverter 1:      ras_o0_alt2 = NOT tl5_w4503
 tcw / fld:       fld_y_b = NOT tcw_c ;  tcw_o3820 = NOT( fld_a_in OR (inh_ck AND tcw_c) ) ;  fld_a_in = NOT( (inh_ck AND tcw_b) OR tcw_o3820 )
 ```
@@ -105,7 +105,7 @@ tcw / fld:       fld_y_b = NOT tcw_c ;  tcw_o3820 = NOT( fld_a_in OR (inh_ck AND
 - **`ras_o0_alt2`, the signal that drives row address bit 0 in interlace sync-and-video mode
   when R9's bit 0 is clear, is latch c of `tl5`'s column, buffered**: `ras_o0_alt2` = NOT
   `tl5_w4503`, and `tl5_w4503` is the latch's inverse output. Latch c is open while
-  `tl5_w4458` is high, takes `tcw_m6320` (from `tcw`'s gate column) and is cleared by
+  `tl3_e4243` is high, takes `tcw_m6320` (from `tcw`'s gate column) and is cleared by
   `c4l_gab`.
 - **The same latch's output is `tcw_c`**: the data of `tcw`'s latch (the cross-coupled pair
   `fld_a_in` / `tcw_o3820`, gated by `inh_ck`) and, inverted, `fld_y_b`, the second input of the
@@ -172,7 +172,7 @@ shot, y 4455-4745) shows seven straight polys at the same x in every gap between
 | x 6143 | (6143,4437): U9, by a step east at y 4356 from x 6103 to x 6146 | (6144,4872): metal south, corner (6146,5746), east, corner (6276,5746), south, a foot east at y 6110 onto a pad (6318,6110); poly south along x 6322 across y 6350 | `tl6_p6143` |
 | x 6187 | (6187,4397): U10, by a step east at y 4312 from x 6146 to x 6189 | (6187,4830): metal south, corner (6190,5702), east, corner (6320,5702), south, corner (6320,6074), east, corner (6363,6074), south to a pad (6360,6152); poly south along x 6365 across y 6350 | `tl6_p6187` |
 | x 6229 | (6229,4437): U11, by a step east at y 4272 from x 6190 to x 6233 | (6229,4872): metal south, corner (6233,5659), east, corner (6363,5659), south, corner (6363,6032), east onto `tc2`'s metal of its pad (6404,6107) | **`tc2_m6404`** |
-| x 6275 | `tcw`'s (6275,4405): `tcw_m6404` | (6274,4832): metal south, corner (6276,5612), east onto `tc2`'s metal (its `tc2_m6447`) | **`tcw_m6404` = `tc2_m6447`** |
+| x 6275 | `tcw`'s (6275,4405): `lc3_w9947` | (6274,4832): metal south, corner (6276,5612), east onto `tc2`'s metal (its `lc3_w9947`) | **`tcw`'s gate line = `tc2`'s metal x 6447: one net, `lc3_w9947`** |
 | x 6316 | `fld`'s (6316,4437): `fld_a_in` | none: the poly turns east at y 4937 (`fld`'s) | theirs |
 | x 6405 | `fld`'s (6405,4437) | `fld`'s (6400,4870) | theirs (`fld_y_b`) |
 
@@ -187,9 +187,9 @@ drawn). `tcw`'s track x 6276 (`tcw_m6278`, drawn by `tcw` to y 2700) runs on nor
 
 **South of the field**, one more metal of the nest: `tc2`'s row y 5003 (`tc1_p4308`) runs on
 west to a pad (6317,5000); the pad's metal goes south along x 6320 to a corner (6320,5569) and
-east onto `tc2`'s metal of its pad (6490,6108): **`tc1_p4308` = `tc2_m6490`**. So three of
-`tc2`'s nest metals are identified from here: `tc2_m6404` is U11, `tc2_m6447` is `tcw_m6404`
-(the common gate input of four pull-downs of `tcw`'s column), `tc2_m6490` is `tc1_p4308`.
+east onto `tc2`'s metal of its pad (6490,6108): **`tc1_p4308` = the wire `tc2` called m6490**. So three of
+`tc2`'s nest metals are identified from here: `tc2_m6404` is U11, the metal x 6447 is `lc3_w9947` (`tcw`'s gate line)
+(the common gate input of four pull-downs of `tcw`'s column), the wire `tc2` called m6490 is `tc1_p4308`.
 
 **Seen** (4x tiles as in piece 1):
 
@@ -222,7 +222,7 @@ y 5157-5193 are the edges of the rows y 5045 and y 5173 under the metals.
 
 | Item | Reading | Seen |
 |---|---|---|
-| **`tc2_o5175` = `r9m_l3`** | `tc2`'s row y 5173 (the output of its NOR(`tc1_x1`, `fld_b_in`)) runs on west under the metals x 6363, 6320 and 6276 to a corner at x 6250-6268, in the open between the metals x 6233 and x 6276; north to y 5045; west along y 5035-5057 under seven metals to `r9m`'s pad (5845,5045), the south end of `r9m_l3`'s metal x 5848 | `v1.png` (4x: the pad, both corners), `w2.png` (the row at x 6320-6420); `px.py col 6260 5022 5200 8 metal,metal1,acid`: one poly colour (124-153/84-119/38-59 in chip 2) from y 5038 to y 5182 with no dark line where the rows' edges would cross (y 5057, y 5163); `px.py row 5045 6226 6282 4`; the cream test along y 5045: cream under every metal from x 5851 to x 6247 |
+| **`tc2_o5175` = the wire `r9m` called l3** | `tc2`'s row y 5173 (the output of its NOR(`tc1_x1`, `fld_b_in`)) runs on west under the metals x 6363, 6320 and 6276 to a corner at x 6250-6268, in the open between the metals x 6233 and x 6276; north to y 5045; west along y 5035-5057 under seven metals to `r9m`'s pad (5845,5045), the south end of `tc2_o5175`'s metal x 5848 | `v1.png` (4x: the pad, both corners), `w2.png` (the row at x 6320-6420); `px.py col 6260 5022 5200 8 metal,metal1,acid`: one poly colour (124-153/84-119/38-59 in chip 2) from y 5038 to y 5182 with no dark line where the rows' edges would cross (y 5057, y 5163); `px.py row 5045 6226 6282 4`; the cream test along y 5045: cream under every metal from x 5851 to x 6247 |
 | `rcs_mv` | `tl5`'s row y 6238 east under U0, U2, `bw`'s metal, the wide metal's west leg and the metals x 5972, 6016, 6105, along the south edge of the wide metal band from x 6141, to a corner at x 6226-6246; south in the open across y 6350 | `v2.png` 4x, `v3.png` 5x (chip-2 stripped, chip-1 metal, clean); `px.py col 6236 6222 6290 4`: the dark line at y 6246-6250 between the row and the poly below it is the band's rim (the through poly x 6282 has the same line, `col 6282`; where the row has only field below it, `col 6215`, the chip-2 stripped shot is green over red from y 6258); the clean shot is poly-coloured through the line (221/171/112, 191/162/105, then open poly) |
 | the wide metal (`vss`) | `tc2`'s `vss` piece at (6400, 6198-6243) runs on west as a band y 6193-6245 to a leg x 6141-6195, north to a band y 5977-6029, west to a leg x 5882-5934, south across y 6350. No contact under it in the strip | `w1.png` (4x: the two north corners and the south-east junction), `d_se.png`, `d_sw.png`; runs of the metal test in both metal shots at six rows and six columns (the test reads each edge 5 px inside the outline seen at 4x). The clean shot under it is pink with an olive centre line (40-140 px long, minimum red - green 1 to -9: the halo under a wide metal, not a hole) |
 
@@ -231,7 +231,7 @@ y 5157-5193 are the edges of the rows y 5045 and y 5173 under the metals.
 - `tc2_o5175` = NOR(`tc1_x1`, `fld_b_in`) is the net `r9m` followed as "line 3" from `tla`'s
   track P (the middle cluster of the vertical control) round the top of `tl5`'s strip: so the
   NOR's output goes to the row counter's step logic area, 2,100 px west.
-- `tcw_m6404`, the common gate input of four pull-downs of `tcw`'s column (a clock or enable by
+- `lc3_w9947`, the common gate input of four pull-downs of `tcw`'s column (a clock or enable by
   its use), comes up from the south: down the field's poly x 6275, the nest, `tc2`'s pad
   (6447,6150) and a poly south across y 6400.
 - `tc1_p4308` (the input of an inverter in `tc1`'s west columns) likewise comes up from the
@@ -310,10 +310,10 @@ and each metal is seen arriving on its own pad at 4x (`u1.png`, `u2.png`); the f
 gives the same pairing. The three south pads (6275,6152), (6318,6110), (6360,6152) and
 `tc2`'s three: `u6.png`, `u7.png`.
 *Joins to other blocks.* `tc2`'s `M 6400,6026 x6406 y6112` (`tc2_m6404`), `M ... y5611 x6396`
-(`tc2_m6447`), `M ... y5567 x6400` (`tc2_m6490`), `P 6610,5003 x6400` (`tc1_p4308`),
+(`lc3_w9947`), `M ... y5567 x6400` (`tc1_p4308`), `P 6610,5003 x6400` (`tc1_p4308`),
 `P 6400,5161:6503,5185` (`tc2_o5175`), its `vss` metal at (6400, 6198-6243); `tcw`'s pad
-`P 6258,4388:6292,4422` (`tcw_m6404`) and its metal `M 6276,... y2700` (`tcw_m6278`); `r9m`'s
-pad and contact at (5845,5043) under the south end of `r9m`'s metal x 5848 (`r9m_l3`); the pad and contact are drawn here (neither block had them: see Review round 1). `tools/amr_at.py` gives the joined name on every piece of ten of the joins at once and on this one after that contact was drawn. Note: an `@alias` does not connect anything: it only says which name a net keeps once the geometry makes it one net.
+`P 6258,4388:6292,4422` (`lc3_w9947`) and its metal `M 6276,... y2700` (`tcw_m6278`); `r9m`'s
+pad and contact at (5845,5043) under the south end of `r9m`'s metal x 5848 (`tc2_o5175`); the pad and contact are drawn here (neither block had them: see Review round 1). `tools/amr_at.py` gives the joined name on every piece of ten of the joins at once and on this one after that contact was drawn. Note: an `@alias` does not connect anything: it only says which name a net keeps once the geometry makes it one net.
 *Copies.* None: no cell is placed.
 
 ## Ports
@@ -322,21 +322,21 @@ The same ports are in `ports.d/tl6.txt`. West-side ports carry `tl5`'s names (al
 
 | Name | Layer | Where | Direction | What |
 |---|---|---|---|---|
-| `tl5_w4395` | metal | (5683, 3652-3666) | ? | = `tcw_m6320`; latch c's data |
+| `tcw_m6320` | metal | (5683, 3652-3666) | ? | = `tcw_m6320`; latch c's data |
 | `tl5_w3505` | poly | (5683, 3712-3732) | ? | latch a's enable, to U0 |
 | `c4l_gab` | poly | (5683, 3862-3882) | ? | = `c4l_gab`; latch c's clear |
-| `tl5_w5500` | poly | (5683, 4427-4447) | ? | to U5's north piece |
-| `tl5_w5544` | poly | (5683, 4470-4490) | ? | = `tc1_o3527` |
+| `tl4_w5068` | poly | (5683, 4427-4447) | ? | to U5's north piece |
+| `tc1_o3527` | poly | (5683, 4470-4490) | ? | = `tc1_o3527` |
 | `c4l_l3` | poly | (5683, 4511-4531) | ? | to U4's north piece |
 | `tl5_w4503` | poly | (5683, 4580-4600) | in | latch c's inverse output |
-| `tl5_w4633` | poly | (5683, 4623-4643) | in | = `tcw_c`; latch c's output |
-| `tl5_w4807` | poly | (5683, 4798-4818) | in | = `ras_o0_alt2`; inverter 1's output |
-| `tl5_w4850` | poly | (5683, 4840-4858) | ? | = `tl5_w4503`; inverter 1's gate |
-| `tl5_w3982` | poly | (5683, 4970-4988) | ? | = `tl4_w4068`; to U2's south piece |
+| `tcw_c` | poly | (5683, 4623-4643) | in | = `tcw_c`; latch c's output |
+| `ras_o0_alt2` | poly | (5683, 4798-4818) | in | = `ras_o0_alt2`; inverter 1's output |
+| `tl5_w4503` | poly | (5683, 4840-4858) | ? | = `tl5_w4503`; inverter 1's gate |
+| `tl4_w4068` | poly | (5683, 4970-4988) | ? | = `tl4_w4068`; to U2's south piece |
 | `inh_ck` | poly | (5683, 5622-5642) | ? | = `inh_ck` |
-| `tl5_w5674` | poly | (5683, 6142-6160) | ? | to the pad (6016,6150) |
+| `tl4_w4590` | poly | (5683, 6142-6160) | ? | to the pad (6016,6150) |
 | `c4l_l3` | poly | (5877-5897, 2500) | ? | north from U4's north pad |
-| `tl5_w5500` | poly | (5918-5938, 2500) | ? | north from U5's north pad |
+| `tl4_w5068` | poly | (5918-5938, 2500) | ? | north from U5's north pad |
 | `tcw_m6320` | poly | (6212, 3649-3667) | ? | onto `tcw`'s poly |
 | `c4l_gab` | poly | (6225, 3862-3882) | ? | into `tcw`'s pad (6232,3870) |
 | `inh_ck` | poly | (6392, 3994-4012) | ? | into `fld`'s pad (6400,4005) |
@@ -347,7 +347,7 @@ The same ports are in `ports.d/tl6.txt`. West-side ports carry `tl5`'s names (al
 | `ral_stb` | metal | (5749-5761, 6350) | ? | from the pad (5755,6322) |
 | `tl4_w4068` | metal | (5793-5805, 6350) | ? | U2's south piece |
 | `tl5_w3505` | metal | (5966-5978, 6350) | ? | from the pad (5972,6193) |
-| `tl5_w5674` | metal | (6010-6022, 6350) | ? | from the pad (6016,6150) |
+| `tl4_w4590` | metal | (6010-6022, 6350) | ? | from the pad (6016,6150) |
 | `inh_ck` | metal | (6099-6111, 6350) | ? | from the corner (6105,6066) |
 | `rcs_mv` | poly | (5683, 6228-6248) | ? | `tl5`'s row y 6238 |
 | `tl6_p6101` | poly | (6052-6072, 2500) | ? | north from U8's pad (6057,2595); turns east under the band's rim at y 2475-2500 |
@@ -357,9 +357,9 @@ The same ports are in `ports.d/tl6.txt`. West-side ports carry `tl5`'s names (al
 | `tcw_m6278` | metal | (6400, 2659-2671) | ? | `tcw`'s track x 6276, from its corner (6276,2665) |
 | `tc1_p4308` | poly | (6400, 4994-5012) | ? | onto `tc2`'s row y 5003 |
 | `tc2_o5175` | poly | (6400, 5163-5183) | in | onto `tc2`'s row y 5173 (its NOR's output) |
-| `tc2_o5175` | poly | (5843, 5035-5055) | ? | into `r9m`'s pad (5845,5045) (`r9m_l3`) |
-| `tc2_m6490` | metal | (6400, 5563-5575) | ? | = `tc1_p4308`; onto `tc2`'s metal |
-| `tc2_m6447` | metal | (6400, 5606-5618) | ? | = `tcw_m6404`; onto `tc2`'s metal |
+| `tc2_o5175` | poly | (5843, 5035-5055) | ? | into `r9m`'s pad (5845,5045) (`tc2_o5175`) |
+| `tc1_p4308` | metal | (6400, 5563-5575) | ? | = `tc1_p4308`; onto `tc2`'s metal |
+| `lc3_w9947` | metal | (6400, 5606-5618) | ? | = `lc3_w9947`; onto `tc2`'s metal |
 | `tc2_m6404` | metal | (6400, 6026-6038) | ? | onto `tc2`'s metal |
 | `vss` | metal | (6400, 6193-6245) | - | the wide ground metal, on east as `tc2`'s piece |
 | `vss` | metal | (5882-5934, 6350) | - | the wide ground metal's west leg |
@@ -389,7 +389,7 @@ The same ports are in `ports.d/tl6.txt`. West-side ports carry `tl5`'s names (al
   strip's east edge: seen on `w2.png` (a ring at the metal's end), not drawn; its poly is not
   followed. It is in `tcw`'s region.
 - U8's poly (`tl6_p6101`) north of y 2500: turns east under the rim of the wide metal band at
-  y 2475-2500 (`w2.png`); the polys of U4 and U5 (`c4l_l3`, `tl5_w5500`) run on north under
+  y 2475-2500 (`w2.png`); the polys of U4 and U5 (`c4l_l3`, `tl4_w5068`) run on north under
   the band (`t12.png`). The band (y 2180-2500) is drawn by no block.
 - `tcw`'s bus at x 6205-6400, y 2700-4420 (its tracks x 6233, 6276, 6320, 6363, their pads and
   rows) was not re-read: the 0.95x and 2.4x views show nothing there without an outline, and
@@ -408,13 +408,13 @@ confirmed U2's breaks in both metal shots (no metal at y 4641-4694 and y 4857-49
 one piece with no other hole from y 4002 to 6065, the eight polys at the same x under every
 bus metal with no hole on any, and scanned every drawn metal piece for undrawn contacts.
 Joins 1-9 and 11: confirmed. One finding, which changes the netlist: join 10
-(`tc2_o5175` = `r9m_l3`) was claimed but not in the extraction: at (5845,5045) the poly and
+(`tc2_o5175` = the wire `r9m` called l3) was claimed but not in the extraction: at (5845,5045) the poly and
 the metal each just ended, with no pad and no contact drawn by either block, and the alias
 line connects nothing by itself. The photos show the contact (ring with a bright centre in
 both metal shots, green hole on a salmon pad in the clean shot): confirmed by the tracer at
 6x (`chk_j10.png`) and drawn; the two are now one net (0 errors; `tc2_o5175 = NOR(fld_b_in,
 tc1_x1)` is on r9m's line 3).
-Not checked: tc2's rows east of its pads, `r9m_l3` west of x 5683, tl5's side of its
+Not checked: tc2's rows east of its pads, `tc2_o5175` west of x 5683, tl5's side of its
 ports, the undrawn pad at (6413,2617) on U11 (13 px outside the strip).
 
 Round 2 (fix check, 2026-11-18 03:40 +0000, a fresh agent on claude-fable-5-2, against commit e83f200). The
@@ -422,19 +422,19 @@ contact is real (centre bright in both metal shots, green in the clean shot, pit
 the chip-2 stripped shot; profile along y 5046); the pad is the west end of row y 5045 and
 of no other poly; only one metal lands on the ring, followed north to a corner at
 (5842,2684) and west: r9m's line; U3 is empty from y 5066 to bw's pad near y 5585.
-`tools/sameconn.py`: the only difference is `r9m_l3` and `tc2_o5175` becoming one net, with
-one driver (tc2's NOR); `r9m_l3` had none before.
+`tools/sameconn.py`: the only difference is the wire `r9m` called l3 and `tc2_o5175` becoming one net, with
+one driver (tc2's NOR); `tc2_o5175` had none before.
 
 Round 2: no findings.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19)
 
 - `ports.d/tl6.txt`, `inh_ck M 6099-6111,6350 ?`: driven from the south (`inh_ck`, `eof` run 2): `in`.
-  `tl5_w5674` (x 6016 at y 6350) is probably `lc1_w7908` (`lc1`: "followed straight to y 6150"): not checked.
+  `tl4_w4590` (x 6016 at y 6350) is probably `tc2_sr_g` (`lc1`: "followed straight to y 6150"): not checked.
 - The net that clears `tl5`'s latch c is also the 4-bit counter's pass-gate line `c4l_gab` (`tl3` run 11).
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
 
-- The ports `c4l_l3`, `tl5_w5500`, `tl6_p6101` ("on under the wide metal band") go to `tc1`'s `c4l_l3`, `tc1_bus2684`, `tc1_bus2814` by three nested polys under the plane (`tlb` run 1).
-- `tc2_m6447` / `tcw_m6404` ("not followed further"): followed south (`eof` run 13, piece `ck5`): it is the clock of the left-centre ripple counter; the net's canonical name is `lc3_w9947`, and `trace/tl6.txt`'s alias line was changed for that by `eof` (commit a9233e9, no geometry).
+- The ports `c4l_l3`, `tl4_w5068`, `tl6_p6101` ("on under the wide metal band") go to `tc1`'s `c4l_l3`, `tl4_w5068`, `tc1_bus2814` by three nested polys under the plane (`tlb` run 1).
+- `lc3_w9947` (`tc2`'s metal x 6447 / `tcw`'s gate line; "not followed further"): followed south (`eof` run 13, piece `ck5`): it is the clock of the left-centre ripple counter; the net's canonical name is `lc3_w9947`, and `trace/tl6.txt`'s alias line was changed for that by `eof` (commit a9233e9, no geometry).
 - The signal on track A / line X / the first through line of the left-centre strips, which these notes call a clock, a strobe "once per scan line" or leave without a source, **is the reset**: `rst_a`, the buffered copy of `rst` = NOR(`lpstb_b`, `res_b`) made by `lc1`'s gate 5 (`eof` run 10, piece `isrc5`, firm). `inh_ck`, `inh_rc` and `inh_lat` are further buffered copies of it: high while the RES and LPSTB pins are both low, and only then. The belief "a strobe once per scan line" is withdrawn.

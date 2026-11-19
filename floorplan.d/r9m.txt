@@ -2,7 +2,7 @@
 6440,4440:8350,4545    route   R9 match line, east | from the R9 comparator west along y 4460 / 4528 (two poly hops)
 5950,2620:6460,4545    route   R9 match line, north | north along x 5974
 4130,2540:5980,2660    route   R9 match line, west | west along y 2641, steps up one track at x 5127, to pad (4867,2596), along y 2598 / 2555 and down x 4149 to the contact (4148,3335): the input of rcs_mu's inverter
-4150,2580:5860,5050    route   bundle line 3 (r9m_l3) | from the step logic's track P (lower piece) up x 4194, east along y 2641, down a step to y 2681, east and south along x 5848 to (5845,5045)
+4150,2580:5860,5050    route   bundle line 3 (tc2_o5175) | from the step logic's track P (lower piece) up x 4194, east along y 2641, down a step to y 2681, east and south along x 5848 to (5845,5045)
 5170,2540:6080,4460    route   line sl_eq_r5_n | from a poly going north at x 5175 (not followed), east along y 2599, south along x 6022 (beside R9's line)
 6040,4420:8200,4760    route   line sl_eq_r5_n, crossing field | x 6058 poly, bus metal y 4742, poly y 4740, metal y 4744/4673 to the row y 4676, which turns south near x 8190 (not into cdp1)
 10840,4660:12800,4760  route   cdp1_l4676, east | diagonal at x 11465-11530, metal y 4742 to x 12782

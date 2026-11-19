@@ -25,7 +25,7 @@ lc2_w9125   P  6450,9526-9548    out  lc2's AND-OR-INVERT's output: poly south a
 lc3_m5756   P  6450,9979-10001   ?    crossing row 10, from the END pad (5646,9992) of lc3_m5756, east
 rst_c   M  6450,9448-9462    in   the fifth line of the corner bundle: the lower inverter's input (by crossing row 8 and the pad (6298,9884))
 rst_c   M  6292-6306,10400   ?    the same metal runs on south through its pad
-lc3_w9947   M  6205-6219,10400   ?    stage B0's clock (lc2_x6432) runs on south through its pad (6211,9948)
+lc3_w9947   M  6205-6219,10400   ?    stage B0's clock (lc3_w9947) runs on south through its pad (6211,9948)
 rst_a   M  6075-6089,10400   ?    lc2's first through line, south on x 6082
 res_b   M  6118-6132,10400   ?    lc2's second through line, south on x 6125
 lpstb_b   M  6162-6176,10400   ?    lc2's third through line, south on x 6169

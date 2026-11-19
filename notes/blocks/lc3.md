@@ -5,7 +5,7 @@
 2026-11-19 08:15 -0600, run 2b: **the gate pair's wires, the track field and the crossing field are drawn** (wiring only, no
 transistor; section "The wiring east of the counter"), reviewed with the gate pair (round 5, which is the pair's
 Fable review: R31 done for `lc3`). **The strip is drawn but for its edges.** Three joins come out of it: the pair's lower inverter drives `lc1_w7170`, its upper
-inverter drives `lc2_w9079`, and stage B0's clock is `lc2`'s through line `lc2_x6432`.
+inverter drives `lc2_w9079`, and stage B0's clock is `lc2`'s through line `lc3_w9947`.
 
 2026-11-19 07:44 -0600, run 2 (Matt Godbolt, on Claude Fable 5.2). **Two stages of `lc2`'s ripple counter are drawn
 here**: stage E4 (a copy of `lc2`'s flip-flop cell `lc2_ff`, turned) and stage B0 (the same four
@@ -46,7 +46,7 @@ All five stages have the same clear (`lc2_w8450`, by tracks B and B') and the sa
 
 Believed, not established: a divider by 16 or by 32 of whatever `lc3_w9947` carries, chosen by `lc3_w9299`, is what
 a cursor blink of 1/16 or 1/32 of the field rate needs. Drawn in run 2b (section "The wiring east of the counter"): the clock's row
-ends on a pad (6211,9948) of a metal that is `lc2`'s through line `lc2_x6432` four tracks further west (from
+ends on a pad (6211,9948) of a metal that is `lc2`'s through line `lc3_w9947` four tracks further west (from
 `lc2`'s east edge at (6450,9165)); the upper inverter of the gate pair drives `lc2_w9079` (so the two selects of
 `lc2_w9125` are complements) and the lower one drives `lc1_w7170`.
 
@@ -183,10 +183,10 @@ the cell's four equations, with `lc3_w9947` as the clock.
   `lc2_w9125`'s own poly (x 5922-5944 from `lc2`) runs south to y 9537 and east along y 9526-9548, under the first
   metal of the corner bundle from x 6070 (`xp2.png`, 4x, three shots), and leaves east.
 
-Equations on main: `lc3_w9432 = NOT rst_c` and `lc3_w9337 = NOT lc3_w9299` now print as `lc1_w7170 = NOT
+Equations on main: `lc3_w9432 = NOT rst_c` and `lc2_w9079 = NOT lc3_w9299` now print as `lc1_w7170 = NOT
 rst_c` and `lc2_w9079 = NOT lc3_w9299` (**outputs identified; no logic changed**, no transistor added or
 removed: `tools/sameconn.py 74d0d5a` lists only the three name joins and their consequences). Stage B0's four
-equations keep the name `lc3_w9947` for its clock (`lc2_x6432` is its alias).
+equations keep the name `lc3_w9947` for its clock (the wire `lc2` called x6432 is its alias).
 
 **The track field** (overlay `p6a_*.png`, 2.1x; `dg_*.png` 3.8x; `rn_*.png` 4.5x; `tools/tl5_tracks.py v` down each):
 
@@ -210,13 +210,13 @@ in from the east edge.
 | `rst_a` | (6299,9233) | y 9280 to x 6255 | 9538 | 6082 | none |
 | `res_b` | (6342,9233) | y 9322 to x 6299 | 9581 | 6125 | none |
 | `lpstb_b` | (6386,9233) | y 9366 to x 6342 | 9626 | 6169 | none |
-| `lc2_x6432` | (6430,9233) | y 9410 to x 6386 | 9669 | 6212 | (6211,9948): row 9, **stage B0's clock** |
+| `lc3_w9947` | (6430,9233) | y 9410 to x 6386 | 9669 | 6212 | (6211,9948): row 9, **stage B0's clock** |
 | `rst_c` (the fifth line) | (6450,9455) | to x 6429 | 9712 | 6299 | (6298,9884): row 8, the lower inverter's input |
 | `lc3_e9756` | (6450,9756) | - | - | 6342 | none |
 | `lc3_e9798` | (6450,9798) | - | - | 6428 | none |
 
 The metal runs on through each of the two pads (`xp1.png`, 4x: metal north and south of both), so
-`lc2_x6432`/`lc3_w9947` and `rst_c` also leave south. The vacated track positions north of each step read as
+the wire `lc2` called x6432/`lc3_w9947` and `rst_c` also leave south. The vacated track positions north of each step read as
 17 px "holes" in `tl5_tracks.py` ((6299,9298), (6342,9341), (6386,9385), (6428,9428)): open ground, not pads.
 
 **The crossing field** (x 5480-6450, y 9560-10050): eleven poly rows under the vertical metals, all poly over
@@ -229,7 +229,7 @@ contacts (`textmap.py 6060 9728 6106 9772 3 --acid`: metal whole in both chips, 
 | 1-6 | 9577, 9621, 9665, 9708, 9750, 9793 | pads (6037,9581), (5993,9623), (5950,9667), (5908,9711), (5865,9754), (5822,9797): the tops of six vertical metals (a staircase) | the east edge (`lc3_e9577` ... `lc3_e9793`) |
 | 7 | 9838 | END pad (5517,9838) of `lc2_w9079`'s track | pad (6386,9840), metal x 6379-6393 south |
 | 8 | 9880 | END pad (5558,9882) of `rst_c`'s track | pad (6298,9884) on the fifth line |
-| 9 | 9947 | stage B0's clock pad (5298,9990) | pad (6211,9948) on `lc2_x6432` |
+| 9 | 9947 | stage B0's clock pad (5298,9990) | pad (6211,9948) on `lc3_w9947` |
 | 10 | 9990 | END pad (5646,9992) of `lc3_m5756` | the east edge |
 | 11 | 10033 | END pad (5386,9990) of track B' (the clear, `lc2_w8907`) | pad (6257,10036), metal x 6250-6264 south |
 
@@ -267,7 +267,7 @@ x 5612-5640.
 ## Ports
 
 `ports.d/lc3.txt` has every port with its place. Gate pair: inputs `rst_c` (metal x 5560, south edge y 9520)
-and `lc3_w9299` (metal x 5560, north edge y 9255); outputs `lc3_w9432`, `lc3_w9337` (poly rows at x 5540); `vss`
+and `lc3_w9299` (metal x 5560, north edge y 9255); outputs `lc3_w9432`, `lc2_w9079` (poly rows at x 5540); `vss`
 (x 5665-5712), `vcc` (wide metal x 5840-5890, named from the loads). Counter stages: the joins to `lc2` at
 y 9180-9256 and to `eof`'s `ff3` (track C at y 9970-9990, track B) are made by overlapping metal; stage B0's
 clock and the clear cross the field east to their pads; the wires that leave the strip east (x 6450) and south
@@ -276,7 +276,7 @@ clock and the clear cross the field east to their pads; the wires that leave the
 ## Gate pair at 6x (2026-11-18, claude-opus)
 
 Drawn as one cell `lc3_inv` (the lower gate) and its mirror about y 9384.5. Extraction
-(4 transistors): `lc3_w9432 = NOT rst_c`, `lc3_w9337 = NOT lc3_w9299`;
+(4 transistors): `lc3_w9432 = NOT rst_c`, `lc2_w9079 = NOT lc3_w9299`;
 `unsure.py --equations`: both FIRM after review round 1 (0 `?` items).
 
 Review round 1 fixes (checked by the tracer at 5x, metal | metal1 | acid1b | acid, `fix1.png`
@@ -510,4 +510,4 @@ Round 5: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
 
-- The fifth corner-bundle line ("comes from a metal that enters from the east at (6450,9455)") is `rst_c` (`eof` run 13, piece `rc`); the ripple counter's clock comes from `tcw_m6404` (piece `ck5`). The lines 2 and 3 of the nine that leave south are `res_b` and `lpstb_b`, the first is `rst_a` (`eof` runs 10-11). `lc3_e9756` and `lc3_e9798` are still not followed east of x 6450 (R26).
+- The fifth corner-bundle line ("comes from a metal that enters from the east at (6450,9455)") is `rst_c` (`eof` run 13, piece `rc`); the ripple counter's clock comes from `lc3_w9947` (piece `ck5`). The lines 2 and 3 of the nine that leave south are `res_b` and `lpstb_b`, the first is `rst_a` (`eof` runs 10-11). `lc3_e9756` and `lc3_e9798` are still not followed east of x 6450 (R26).

@@ -396,7 +396,7 @@ Traps, all of them real:
    nobody has drawn is not yet a source (`tl3` took the two ends of one L in `tl4`'s strip for two
    wires). Found 2026-11-18 (`lc1`, `tl4`).
 32. **Look all round every pad.** A pad is not the end of what reaches it. A metal can run on
-   through a pad (the follower stops at the ring: `lc2_w8474` had two pads in its run, `lc1_w7908`
+   through a pad (the follower stops at the ring: `lc2_w8474` had two pads in its run, `tc2_sr_g`
    one); a pad can carry a second poly (`lc2`'s pad (5386,8951)); a poly drawn as ending on a pad
    whose metal carries the net on can go on below the pad (`eof`: RES, LPSTB and a reset copy ran on
    south into `lc1`'s bundle); a copy's pad can have a poly on a side the master's pad has none
@@ -618,7 +618,7 @@ Most of the die is repeated cells. Trace a cell once.
 
   ```
   # NAME        LAYER  X,Y              DIR  note
-  tc1_f         P      8250,3348-3362   out  R3 output; runs on under ns1..ns6 without contact
+  cdp1_b5_a         P      8250,3348-3362   out  R3 output; runs on under ns1..ns6 without contact
   ras_straight  M      7220-7240,4450   out  NOT b (W2 lower)
   vss           M      7943-7990,4450   -    the VSS bus turns south
   ```

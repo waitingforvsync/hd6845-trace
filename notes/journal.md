@@ -1072,7 +1072,7 @@ The two shots not used there before (chip 1's metal shot and its fringed strippe
 gave three joins, all drawn as uncertain items (AMB-015): the two upper stacks are one
 gate; the inverter below them has its load; its output goes back up a bus metal to the
 middle gate of the first stack. Extracted: `tcw_o3550` = NOT `c4l_gab`; `tcw_o3326` low
-through `tcw_m6362a`, `tcw_m6404`, or `tcw_o3550` AND `tcw_m6320`. 2,041 nets, 3,423
+through `tcw_m6362a`, `lc3_w9947`, or `tcw_o3550` AND `tcw_m6320`. 2,041 nets, 3,423
 transistors. Not found: the top node's connection, the load of `tcw_o3326`, where it goes.
 
 Method: the chip-2 stripped shot's legend (diffusion tan, field greener, poly orange) is
@@ -1086,7 +1086,7 @@ used as evidence.
 three pairs) is drawn with its pads, polys and bus metals; the overlay sits on every pad
 ring. The first column of `tcw` now has sixteen of its seventeen gates in the trace.
 
-- The bus metal `tcw_m6404` gates four pull-downs of the column: a common enable.
+- The bus metal `lc3_w9947` gates four pull-downs of the column: a common enable.
 - The top pair's output is the bus net that gates stretch B's big gate (AMB-016).
 - What I held this stretch back for yesterday (two NANDs feeding each other) came from
   assuming a poly reached a node; the class map shows 30 px of field between. Not drawn.
@@ -1099,10 +1099,10 @@ bus, look at the metal shots; the profile is not evidence either way.
 
 1. East of the rail for the whole column (loads, output arms), now that every node on
    the rail is named: start with pair 3's middle node and stretch B's big gate.
-2. The sources of `tcw_m6404`, `tcw_m6320`, `tcw_m6278`, `c4l_gab` (their far ends).
+2. The sources of `lc3_w9947`, `tcw_m6320`, `tcw_m6278`, `c4l_gab` (their far ends).
 3. The second column; then the standing list (R8, `ras_o0_alt2`, `r9m`, `ral`, `bd2`).
 
-**Same day, later.** The bus metals followed south: the common enable `tcw_m6404` comes up
+**Same day, later.** The bus metals followed south: the common enable `lc3_w9947` comes up
 from the vertical poly field under the six bus metals (pad (6275,4405)); `c4l_gab`'s
 lower pad sends a poly to the rail at the height where the profile had reported a dull
 poly, right beside `fld_a_in`'s node (AMB-014 extended: possibly a third pull-down). A
@@ -1520,9 +1520,9 @@ packages by dp111 on Opus (below). Extraction 2,347 nets, 4,156 transistors, 0 e
   `@alias`: it joins nothing). R20 and R26 extended.
 - **Ambiguities.** AMB-009 corrected (the pass transistor's gate is `tl3_w3982`, not `clk_tl`);
   AMB-014, 015, 020, 021, 026 updated; new AMB-027 (`tc2`'s latch joins), 028 (`tc1_ns3` over `rax`;
-  `tc2_sr_r`), 029 (`tl2`'s pair through one load tie), 030 (`tl3`'s gate to the lower unit's arm).
+  `cdp1_lw1`), 029 (`tl2`'s pair through one load tie), 030 (`tl3`'s gate to the lower unit's arm).
 - **Other blocks' notes**: `dbus`, `dpad`, `areg`, `bd2`, `rdp3`, `rax`, `fld`, `r9m`, `tc2`, `tl1`, `tl5`,
-  `bust`, `tla` (a corrections section from `tl1`-`tl4`); glossary rows `rcs_thin_e`, `tla_w#`, `r9m_l3`;
+  `bust`, `tla` (a corrections section from `tl1`-`tl4`); glossary rows `rcs_thin_e`, `tla_w#`, `tc2_o5175`;
   `ports.d/tl1.txt` (`tl1_w5936` is an input). Floor plan: `areg`'s untraced strip removed and
   `bd2`'s right-hand column trimmed (both now `dlat`), the coarse lower top-centre block removed
   (`tc2`). `tools/ports.py --near` no longer crashes on two ports at equal distance (from `tc2`).
@@ -1566,7 +1566,7 @@ open join (`ck_a_u`). Claims now: `tl3` (Tom, run 11), `lc2` (Matt, continuing d
   marks), AMB-035 (`tc2_o5175` to `tl3`'s gates through `r9m`'s stub).
 - **Other blocks' notes.** Corrections appended to `tla`, `tl1`, `tl2`, `tl4`, `tl5`, `r9m` and `ur`.
   `ports.d/tl1.txt` gains the VSS arm at x 2817. Not edited, because they are under active claims:
-  `tl3.md` (`tl4`'s corrections on `rcs_mv`'s direction, `tl3_e3028`, the rows at x 4250) and `lc2.md`
+  `tl3.md` (`tl4`'s corrections on `rcs_mv`'s direction, `tl4_w4590`, the rows at x 4250) and `lc2.md`
   (`lc1`'s latch D lower unit and the joins `rst_c`, `lc2_w8169`). Both are listed in the master list
   rows for their claimants.
 - **Floor plan.** The coarse top-left block is trimmed to strip 3 (`tl3`); the fragments of
@@ -1925,7 +1925,7 @@ At the user's request, after the two `eof` handoffs of today. **Handoffs:** none
   a firm join, `eof`'s piece `isrc`, link G; the alias in `trace/eof.txt` is dropped by the rename.
 
 **Left on purpose** (`names.py candidates`, section 1): `ar#_q`, `d#_in`, the `*_tab` cell pins (a
-cell's own name for a pin), `cdp2_c_s1_bus`/`cdp2_c_s2_bus` (kept with their row under AMB-019).
+cell's own name for a pin), `db_b6`/`db_b5` (kept with their row under AMB-019).
 Section 2 (joins through uncertain geometry) untouched, as the rule says.
 
 **`operation.md`** (seventh refresh): header (2,378 nets, 4,286 transistors; 840 of 1,262 equations
@@ -1968,14 +1968,14 @@ At the user's request ("apply waiting handoffs"). Seven handoffs, applied togeth
   (`eof_w9255` OR `eof_w9505`)) (firm).
 - `lc3` runs 2 and 2b (Matt Godbolt; 37 transistors and the wiring): two more counter stages (E4 a
   turned copy, B0 folded over both columns, by hand): **the ripple counter has five stages**, clocked by
-  `lc2`'s through line `lc2_x6432`; the gate pair: **`lc1_w7170` = NOT `rst_c`** (the driver `eof`
+  `lc2`'s through line `lc3_w9947`; the gate pair: **`lc1_w7170` = NOT `rst_c`** (the driver `eof`
   (f) asked for) and `lc2_w9079` = NOT `lc3_w9299`, so `lc2_w9125` chooses between the counter's fourth
   and fifth outputs. R31 done for `lc3`. Released: done but for its edges.
 - `busl` runs 1 and 2 (richtw1; wiring, 16 nets): `cdp3`'s row H west outputs reach eight diffusion rows
   of the left array (piece `h8`); `cdp4_bus_s#` = `cdp4_in_s#` for all eight slices, each also on a poly
   row of the left array (piece `ch1`). Claimed, continuing.
 - `eofw` (richtw1; wiring, new package): the three wires of `g7700` followed to named nets:
-  **`tc2_r5589` = NOT(`lc1_w7170` AND (`inh_ck` OR `tc2_sr_g`))**, and **`tc2_sr_g` is `lc1_w7908`**, the
+  **`tc2_r5589` = NOT(`lc1_w7170` AND (`inh_ck` OR `tc2_sr_g`))**, and **`tc2_sr_g` is the wire `lc1` called w7908**, the
   enable of latch D. Two open ends at a corner pad (7446,8732) into `cdp3`'s gate column.
 
 **The test of effort** (user: "test the results against a high effort trace"). `g7700` had been traced
@@ -2059,24 +2059,24 @@ At the user's request, after the eight handoffs above. **Handoffs:** none waitin
 (waitingforvsync), `eof` (tom-seddon).
 
 **Renamed:** nothing. `names.py candidates`, section 1, lists only the deliberate aliases, as before
-(`ar#_q`, `d#_in`, the `*_tab` cell pins, `cdp2_c_s1_bus`/`cdp2_c_s2_bus` under AMB-019).
+(`ar#_q`, `d#_in`, the `*_tab` cell pins, `db_b6`/`db_b5` under AMB-019).
 
 **Left on purpose:** the day's new joins are placeholder to placeholder, kept as `@alias` until one
-side has a functional name: `tc2_r5589` / `eof_w7818`; `tc2_sr_g` / `eof_w7718` / `lc1_w7908`;
-`lc1_w7170` / `lc2_w8474` / `eof_w7777` / `lc3_w9432`; `lc2_w9079` / `lc3_w9337`; `lc3_w9947` /
-`lc2_x6432`; `cdp4_bus_s#` / `cdp4_in_s#` (eight); `bd1_n2` / `bd1_q` (through an uncertain tie).
+side has a functional name: `tc2_r5589` / the wire `eof` called w7818; `tc2_sr_g` / the wire `eof` called w7718 / `tc2_sr_g`;
+`lc1_w7170` / `lc2_w8474` / `eof_w7777` / `lc3_w9432`; `lc2_w9079` / the wire `lc3` called w9337; `lc3_w9947` /
+`lc3_w9947`; `cdp4_bus_s#` / `cdp4_in_s#` (eight); `bd1_n2` / `bd1_q` (through an uncertain tie).
 Section 2 (joins through uncertain geometry) untouched, as the rule says. The glossary rows of
 `tc2_sr_g` and `tc2_r#` now say where those two lines go.
 
 **`operation.md`** (eighth refresh): header (2,399 nets, 4,345 transistors; 847 of 1,276 equations
 firm, from 840 of 1,262). Taken in: the gate on `inh_ck`'s tap row is named on every side,
 `tc2_r5589` = NOT(`lc1_w7170` AND (`inh_ck` OR `tc2_sr_g`)) (firm, now also in the name `lc1_w7170`:
-`lc3`'s gate pair ends on the same line); latch D's enable `lc1_w7908` is `tc2_sr_g`; "Not
+`lc3`'s gate pair ends on the same line); latch D's enable the wire `lc1` called w7908 is `tc2_sr_g`; "Not
 established at all" no longer says the ripple counter's length and consumers are untraced (five
-stages, clock `lc2_x6432` with its source open, `lc2_w9125` choosing between the fourth and fifth
+stages, clock `lc3_w9947` with its source open, `lc2_w9125` choosing between the fourth and fifth
 outputs). The tracers had already written the counter's table, `lc1_w7170`'s driver and the latch on
 R4's match. Against the last refresh's equations: 16 new (9 firm), two gone by name (`lc3_w9432`,
-`lc3_w9337`, now `lc1_w7170` and `lc2_w9079`), none changed status. AMB-001 to AMB-037 and R1-R45
+`lc2_w9079`, now `lc1_w7170` and `lc2_w9079`), none changed status. AMB-001 to AMB-037 and R1-R45
 unchanged in range (R31, R42, R45 edited).
 
 **`out/`** rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 647 floor-plan blocks; the
@@ -2151,8 +2151,8 @@ the `@alias` in `trace/eof.txt` is gone. Sentences the rename made circular ("X 
 `floorplan.d/eof.txt` and `ports.d/eof.txt`. **Tom Seddon's `eof` branch** uses the old name: after
 merging main, `tools/rename.py` with the old and new names (as `/trace6845` step 7 says).
 
-**Left on purpose:** `bd1_n2` / `bd1_k`, `cdp3_g_c2`, `c3` / `cdp4_in6_s1`, `s2`, `cdp3_g_c4`..`c7` /
-`bc1_d3`..`bc1_d6` (placeholder to placeholder, kept as `@alias`); `bc1_ld_a` / `cdp4_ld` (joined
+**Left on purpose:** `bd1_n2` / `bd1_k`, `cdp3_g_c2`, `c3` / `cdp3_g_c2`, `s2`, `cdp3_g_c4`..`c7` /
+`cdp3_g_c4`..`cdp3_g_c7` (placeholder to placeholder, kept as `@alias`); `bc1_ld_a` / `cdp4_ld` (joined
 through an uncertain metal, AMB-038: section 2, not renamed); the earlier deliberate aliases, as before.
 
 **`operation.md`** (ninth refresh): header (2,390 nets, 4,345 transistors; 847 of 1,276 equations firm,
@@ -2184,7 +2184,7 @@ What they establish (each from the tracers' notes; marks as there):
   second and third through lines and leave south at (6366,15000), (6408,15000) (`eof` run 11, firm).
 - **`tl3_w3982`**, which holds the step condition low, is latch C's data and is driven by three
   inverters in series from latch D's lower node (`eof` runs 11-12; 6 transistors).
-- **The left-centre ripple counter's clock is `tcw_m6404`'s net** (driver not found), and the fifth
+- **The left-centre ripple counter's clock is `lc3_w9947`'s net** (driver not found), and the fifth
   corner-bundle line is `rst_c`, so `rcs_x1`, the clear of the step logic's five latches, is the reset
   two inverters later (`eof` run 13, firm).
 - **`rcs_e3` = NOT `bd1_n2`**: the latch on R4's match drives the step logic's inverter, wire only
@@ -2230,7 +2230,7 @@ changed"), `tools/signals.py` (0 outside the glossary) and `signals.py --docs` (
 **Branches in flight** (`eof`, tom-seddon; `busl`) must run `tools/rename.py` with these pairs after
 merging main. Left on purpose (the master list's `rename` row has the reasons): `cdp3_c_wr` (R12's
 strobe through one `?M`), `cdp3_gate_e` / `cdp3_gate_f` (open joins), the ripple counter's clock
-(four placeholder names, driver not found), `tl3_w3982`'s and `tl1_w3333`'s families (placeholder to
+(four placeholder names, driver not found), `tl3_w3982`'s and `tl4_w4068`'s families (placeholder to
 placeholder), `bd1_k`, `bd1_q`, and **`inh_ck`, `inh_rc`, `inh_lat`, `inh_n`**: they are now known to be
 copies of the reset and their names say "inhibit"; they are distinct nets, so no rename is forced, and
 better names are the user's call. The renames left about sixty circular sentences ("X is X") in notes,

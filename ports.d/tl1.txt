@@ -12,7 +12,7 @@ rcs_x1   P  2817,5362-5382  ?    row under the foot, on east past x 3400; gates 
 tl1_w4937   P  2817,5450-5470  in   row under the foot, on east past x 3400; gate 2 of rcs_e4's NOR
 
 # North of y 2790 (wiring)
-tl1_w3333   M  2852,2545-2562  in   metal east from the pad (2826,2553) at the end of the row y 2551; the wire's other ends are two gates of the third latch
+tl4_w4068   M  2852,2545-2562  in   metal east from the pad (2826,2553) at the end of the row y 2551; the wire's other ends are two gates of the third latch
 tl1_w2637   M  2852,2630-2645  ?    metal east from the pad (2827,2637) at the end of the row y 2636
 tl1_w2637   P  2448-2463,2500  ?    the row's poly comes from the north
 sl_eq_r5_n   P  2817,2582-2600  ?    row y 2591, on east to a pad at about (2867,2595)

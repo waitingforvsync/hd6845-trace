@@ -19,7 +19,6 @@
 # output comes back as that slice's comparator input. Both blocks drew the lines to meet.
 @alias r9_b0_q tc1_a
 @alias r9_b0_q r9_b0_m6
-@alias cdp1_b5_a tc1_f
 
 # bd1's line X is the input of the lone inverter in the pad buffer row (inrow gate 0),
 # whose output is the clock block's inh_ck. Joined by geometry at about (13567,15679).

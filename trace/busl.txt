@@ -96,14 +96,6 @@ N D 4800,14894 cdp3_hw_c0
 # Each is ONE net with cdp4's row C latch input cdp4_in_s# (the poly rows of channel 2 at x 7600,
 # y 13636..13332) and with one poly row of the left array (x 4780), joined by metal tracks between
 # poly pads. s0's track leaves the region south at (5451,15000).
-@alias cdp4_bus_s0 cdp4_in_s0
-@alias cdp4_bus_s1 cdp4_in_s1
-@alias cdp4_bus_s2 cdp4_in_s2
-@alias cdp4_bus_s3 cdp4_in_s3
-@alias cdp4_bus_s4 cdp4_in_s4
-@alias cdp4_bus_s5 cdp4_in_s5
-@alias cdp4_bus_s6 cdp4_in_s6
-@alias cdp4_bus_s7 cdp4_in_s7
 
 # s7: row 11878 west to its pad; metal arm west to the track x 5800 (a T); the track north to the pad
 # of the array's row y 11488 and south to the pad of channel 2's row y 13636
@@ -275,7 +267,7 @@ N M 6126,10800 res_b
 M 6169,10394 y11577 x5996 y12466 x5932 y14830 x6408 y15000 w=14
 N M 6169,10800 lpstb_b
 
-# line 4: lc3_w9947 (lc2_x6432: the clock of the left-centre ripple counter's first stage B0)
+# line 4: lc3_w9947 (the wire `lc2` called x6432: the clock of the left-centre ripple counter's first stage B0)
 M 6212,10394 y11622 x6040 y12506 x5975 y14787 x6414 w=14
 P 6386,14766:6428,14802
 C 6406,14784 s=24x24
@@ -416,12 +408,12 @@ N M 7448,14020 bc1_ld_a
 # south, steps 86 px west (y 9190 .. 9407), runs 4,300 px down the field, steps 65 px west in
 # a second staircase (y 13722 .. 13938) and joins the metal that trace/bc1.txt draws from
 # y 14040 onto the contact of one of bc1's six poly lines (y 14089 .. 14304), which run east to
-# the feet of cdp4_in6_s1 .. s6. Line 6 (c7) is the long track: x 7468 as far as y 12835, then
+# the feet of cdp3_g_c2 .. s6. Line 6 (c7) is the long track: x 7468 as far as y 12835, then
 # east to x 7512 (above cdp4_rst's pad) and south. No pad or contact on the way (scan
 # cache/scratch/busl/d6_scan.txt). North of y 10400 the tracks lie in the package's northern part.
 # =====================================================================================
 
-# line 1: cdp3_g_c2 (row y 9123) -> bc1's line 1 (y 14089, the foot of cdp4_in6_s1)
+# line 1: cdp3_g_c2 (row y 9123) -> bc1's line 1 (y 14089, the foot of cdp3_g_c2)
 P 7336,9123 x7606 w=23
 P 7316,9104:7358,9142                 # the row's west end pad
 C 7336,9122 s=24x24
@@ -429,7 +421,7 @@ M 7338,9118 y9190 x7252 y13722 x7189 y14050 w=14
 N P 7590,9123 cdp3_g_c2
 N M 7252,11000 cdp3_g_c2
 
-# line 2: cdp3_g_c3 (row y 9080) -> bc1's line 2 (y 14132, the foot of cdp4_in6_s2)
+# line 2: cdp3_g_c3 (row y 9080) -> bc1's line 2 (y 14132, the foot of cdp3_g_c3)
 P 7380,9080 x7606 w=23
 P 7360,9061:7402,9099
 C 7380,9080 s=24x24
@@ -437,7 +429,7 @@ M 7382,9076 y9234 x7296 y13766 x7231 y14050 w=14
 N P 7590,9080 cdp3_g_c3
 N M 7296,11000 cdp3_g_c3
 
-# line 3: cdp3_g_c4 (row y 9036) -> bc1's line 3 (y 14175, bc1_d3). Its lower arm lies on
+# line 3: cdp3_g_c4 (row y 9036) -> bc1's line 3 (y 14175, cdp3_g_c4). Its lower arm lies on
 # rsel17_buf's row y 13809 for 80 px without a contact (notes, Ambiguity 4).
 P 7423,9036 x7606 w=23
 P 7403,9017:7445,9055
@@ -446,7 +438,7 @@ M 7426,9032 y9276 x7339 y13810 x7274 y14050 w=14
 N P 7590,9036 cdp3_g_c4
 N M 7339,11000 cdp3_g_c4
 
-# line 4: cdp3_g_c5 (row y 8993) -> bc1's line 4 (y 14218, bc1_d4). Its lower arm lies on the
+# line 4: cdp3_g_c5 (row y 8993) -> bc1's line 4 (y 14218, cdp3_g_c5). Its lower arm lies on the
 # undrawn row y 13852 without a contact.
 P 7467,8993 x7606 w=23
 P 7447,8975:7489,9013
@@ -455,7 +447,7 @@ M 7468,8990 y9320 x7382 y13855 x7317 y14050 w=14
 N P 7590,8993 cdp3_g_c5
 N M 7382,11000 cdp3_g_c5
 
-# line 5: cdp3_g_c6 (row y 8949) -> bc1's line 5 (y 14261, bc1_d5). Its lower corner (7426,13898)
+# line 5: cdp3_g_c6 (row y 8949) -> bc1's line 5 (y 14261, cdp3_g_c6). Its lower corner (7426,13898)
 # is 20 px west of cdp4_rst's south pad: apart.
 P 7510,8949 x7606 w=23
 P 7490,8931:7532,8969
@@ -464,7 +456,7 @@ M 7512,8946 y9363 x7426 y13898 x7360 y14050 w=14
 N P 7590,8949 cdp3_g_c6
 N M 7426,11000 cdp3_g_c6
 
-# line 6: cdp3_g_c7 (row y 8906) -> bc1's line 6 (y 14304, bc1_d6): the long track. Its arm
+# line 6: cdp3_g_c7 (row y 8906) -> bc1's line 6 (y 14304, cdp3_g_c7): the long track. Its arm
 # y 12835 ends 16 px above cdp4_rst's north pad; x 7512 then lies over cdp4_bus_s0's poly column
 # (y 12920-13332) and crosses cdp4_rst's poly (y 13906-13927) without a contact.
 P 7553,8906 x7606 w=23
@@ -475,15 +467,9 @@ N P 7590,8906 cdp3_g_c7
 N M 7468,11000 cdp3_g_c7
 
 # the six joins: one net each with what bc1's line reaches
-@alias cdp3_g_c2 cdp4_in6_s1
-@alias cdp3_g_c3 cdp4_in6_s2
-@alias cdp3_g_c4 bc1_d3
-@alias cdp3_g_c5 bc1_d4
-@alias cdp3_g_c6 bc1_d5
-@alias cdp3_g_c7 bc1_d6
 
 # =====================================================================================
-# Piece sr (run 6, 2026-11-19): tc2_sr_g (= lc1_w7908, the enable of latch D; = eof_w7718, row 2
+# Piece sr (run 6, 2026-11-19): tc2_sr_g (= the wire `lc1` called w7908, the enable of latch D; = tc2_sr_g, row 2
 # of the gate on inh_ck's tap row) runs on from eofw's corner pad (7446,8732) down the whole
 # field. trace/eofw.txt draws the metal south of the pad to y 8800 (M 7466,8745 y8800); from
 # there one metal: south to y 8910, a diagonal south-west along x+y = 16377 (the south-east line

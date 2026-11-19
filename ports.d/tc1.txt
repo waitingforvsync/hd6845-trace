@@ -11,8 +11,8 @@ r8_b1_q      P  8350,2846-2868  ?    north end of ns5, from contact (8271,2857)
 tc1_ns3      M  8350,2720-2734  ?    ns3 arrives from the east over the top of the datapath
 ral_stb      M  8350,2764-2778  ?    ns4, arrives from the east over the top of the datapath
 r8_b0_q      M  8350,2807-2821  ?    ns6, arrives from the east over the top of the datapath
-tc1_f        P  8250,3348-3362  out  R3 output; runs on under ns1..ns6 without contact, in the channel between cdp1's rows A and B
-tc1_a        P  8250,3387-3402  in   believed; same channel, 40 px below tc1_f
+cdp1_b5_a        P  8250,3348-3362  out  R3 output; runs on under ns1..ns6 without contact, in the channel between cdp1's rows A and B
+tc1_a        P  8250,3387-3402  in   believed; same channel, 40 px below cdp1_b5_a
 r8_b0_q      P  8350,3516-3539  ?    from contact (8313,3527)
 tc1_ns2      P  8250,3556-3578  ?    from contact (8139,3567); reaches x 8332 and turns south there
 tc1_w1       P  8250,3691-3712  in   = ns1 (seen to x 8350); its only other end is L4's gate; from contact (8139,3704)
@@ -66,10 +66,10 @@ tc1_bus2858    P  6750,2520-2540  ?    west end of the through line on the bus t
 vss          M  6750,2614-2666  -    the rail's branch west (follower: end (6514,2639)); it lies over the poly rows of r8_b5_q and tc1_m7100 here, without contact
 vss          M  6858-6906,2500  -    the rail x 6858-6906; it goes on north under a wide metal
 tc1_bus2814    P  7117-7133,2500  ?    north end of the through line on the bus track y 2814
-tc1_bus2684    P  7160-7176,2500  ?    north end of the through line on the bus track y 2684
+tl4_w5068    P  7160-7176,2500  ?    north end of the through line on the bus track y 2684
 c4l_l3    P  7201-7218,2500  ?    north end of the through line on the bus track y 2554
 c4l_l3    M  8350,2546-2560  ?    east end, the bus metal y 2554 going east over the datapath
-tc1_bus2684    M  8350,2677-2691  ?    east end, the bus metal y 2684 going east over the datapath
+tl4_w5068    M  8350,2677-2691  ?    east end, the bus metal y 2684 going east over the datapath
 tc1_bus2814    P  8350,2890-2907  ?    east end, poly (the next of the nest above r8_b4_q)
 tc1_bus2858    P  8350,2933-2950  ?    east end, poly
 r8_b4_q      P  8350,2976-2992  in   from cdp1 (trace/cdp1.txt draws it along y 2985 to x 8340)

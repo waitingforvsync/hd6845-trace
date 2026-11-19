@@ -330,7 +330,7 @@ x 5078-5127 each step down one track, which an independent review found at 4-5x 
 coordinator saw in the chip-2 stripped shot. With both corrections, **R9's match
 (`ra_eq_r9`) reaches the contact (4148,3335): `ra_eq_r9` is R9's match**, by firm
 geometry, and `rcs_mu` = NOT R9's match. The stub and the lower piece of track P carry
-another line of the bundle (`r9m_l3`). The earlier statement that `amr` c3's outer output
+another line of the bundle (`tc2_o5175`). The earlier statement that `amr` c3's outer output
 drives `ra_eq_r9` is withdrawn.
 
 **What follows from it, changed 2026-11-18 (`tl3` runs 8-9, Tom Seddon).** The join stands
@@ -608,11 +608,11 @@ Proposed by `tc2` (dp111, `notes/blocks/tc2.md`). The latch at x 7760-8250, y 59
 lines and the opening of the buried contact's rings. The latch rests on them (marked, not firm).
 `q_n`'s join to its pad poly is one of them. **Drawn `?P`.** Not resolvable in these photos.
 
-## AMB-028: `tc1_ns3`'s metal over `rax`'s five boxes, and `tc2_sr_r` through `rax` (2026-11-18)
+## AMB-028: `tc1_ns3`'s metal over `rax`'s five boxes, and `cdp1_lw1` through `rax` (2026-11-18)
 
 Proposed by `tc2` (dp111). (1) `tc1_ns3`'s metal crosses `rax`'s five unit boxes; drawn `?M` at the
 five crossings, resting partly on the electrical argument (as AMB-011). (2) North of (8031,5468) the
-follower takes `tc2_sr_r`'s thin metal 440 px through `rax`'s units 3-5 over six contact-like spots,
+follower takes `cdp1_lw1`'s thin metal 440 px through `rax`'s units 3-5 over six contact-like spots,
 while `rax`'s own profile says short straps: nothing drawn there. (3) `tc2_rxl`'s load tie (box
 x 8021-8048, y +38..+61 per unit) is under metal in units 2-4 and flush under the band in units 0
 and 1 (consistent, not proven); it decides the load's gate, not the equation. Also seen once: the
@@ -729,7 +729,7 @@ metal that carries `inh_ck` from `trunks`' line S north to the top-left logic li
 nets' poly at four places, and `lc2`'s metal x 6422-6440 lies 64 px along latch C's data poly
 (6431, 8117-8181); none is drawn as a contact (trap 13; read from text maps by two packages). A contact
 at the first would join `inh_ck` to latch D's output `lc1_w7040`; the one in `lc2` would join it to
-latch C's data `lc2_w8906`. The join to line S also rests on `trunks`' reading of that line (R4).
+latch C's data `tl3_w3982`. The join to line S also rests on `trunks`' reading of that line (R4).
 
 ## AMB-038: the box at (7535-7580, 13903-13940) under `cdp4_ld`'s metal (2026-11-19)
 
@@ -786,7 +786,7 @@ colours there are abnormal from x 6500 to 6840), so the clean shot decides nothi
 ## AMB-042: the ripple counter's clock on `rst_c`'s poly, x 6466-6478, y 8945-9227 (2026-11-19)
 
 Proposed by `eof` (Tom Seddon, run 13; its Ambiguities 43-45). Piece `ck5`'s metal (the clock of the
-left-centre ripple counter, `lc3_w9947` = `tcw_m6404`) lies on `rst_c`'s poly for 225 px (y 8945-9172),
+left-centre ripple counter, `lc3_w9947` = the wire `tcw` called m6404) lies on `rst_c`'s poly for 225 px (y 8945-9172),
 and its corner stands 35 px north of the pad (6469,9209) of `rst_c`'s own metal on the same x. Readings:
 (a) two nets, no contact along the overlap and two metals at the knot; (b) a contact or one metal, which
 would make the ripple counter's clock the reset copy. **Assumed (a)**: no ring, widening or dark stretch

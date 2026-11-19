@@ -444,7 +444,7 @@ C 2500,6239
 P 2514,6228:2817,6246                 # likewise (sc11.png)
 
 # ====================================================================
-# tl1_w3333: a long wire down the west side, from the top of the strip to the small cluster.
+# tl4_w4068: a long wire down the west side, from the top of the strip to the small cluster.
 #   - metal: from a pad with a contact (2563,2550) west along y 2553 to a corner (2199,2556)
 #     and south at x 2199 to a contact (2197,3333) (follow.py: one piece, 836 + 362 px;
 #     ends on w1.png 3.1x, w2.png 2.4x). The top pad's poly goes on east under R1 (seen to
@@ -466,7 +466,7 @@ M 2826,2553 x2852 w=16
 P 2170,3282:2187,3360
 P 2180,3318:2215,3350
 C 2197,3333
-N P 2178,3300 tl1_w3333
+N P 2178,3300 tl4_w4068
 P 2170,3355:2187,4535
 P 2170,4530:2187,4550
 P 2170,4533:2333,4550
@@ -485,10 +485,10 @@ P 2134,5793:2545,5810
 # tools/railprof.py 2604 2646 5650 6350 gives the same stack as the master's, 1345 lower.
 # Overlay of the copy on four shots, 4x: sc3Aa/sc3Am, sc3Ba/sc3Bm, sc3Ca/sc3Cm.png;
 # cellcheck.py: median ncc 0.95-0.97 in the clean shot and 0.94-0.95 in the metal shot.
-#   tl1_w5706 = NOT tl1_w3333
-#   tl1_w5841 = NOT( tl1_w3333 AND ck_out  OR  tl1_w6022 )
+#   tl1_w5706 = NOT tl4_w4068
+#   tl1_w5841 = NOT( tl4_w4068 AND ck_out  OR  tl1_w6022 )
 #   tl1_w6022 = NOT( tl1_w5978  OR  ck_out AND tl1_w5706  OR  tl1_w5841 )
-# The rows that enter the copy from the west are the ones drawn above to x 2545: tl1_w3333
+# The rows that enter the copy from the west are the ones drawn above to x 2545: tl4_w4068
 # (y 5793-5810: gate 1 and the inverter's gate), tla's ck_out row from (2365,5847) (gate 2;
 # it ends at the rail's east edge like the master's: see the correction in trace/tla.txt),
 # tl1_w5978 (y 5969-5987: the pull-down west of the rail), tl1_w6022 (y 6013-6031: on the

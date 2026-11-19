@@ -38,7 +38,7 @@ res_b      P  5182-5202,6345     in  from tl5's bus line x 5192
 res_b      M  5183-5197,6905     ?   onto lc1's V2 (res_b: the NOR's lower input)
 lpstb_b    P  5227-5247,6345     in  from tl5's bus line x 5237
 lpstb_b    M  5229-5243,6905     ?   onto lc1's V3 (lpstb_b: the NOR's upper input)
-tl5_w5936  P  5053-5073,6345     ?   from tl5's bus line x 5063
+tl3_w3982  P  5053-5073,6345     ?   from tl5's bus line x 5063
 
 # Piece r5nor: the NOR on NOT R5's match (run 3)
 tl1_w5936   P  2362-2386,2506    in   from tl1's row y 2498-2515: a gate of the NOR
@@ -63,9 +63,9 @@ rst_a     P  8326,16900-16918   out  the tap row's east end: the same 606 px low
 
 # Piece g7700: the gate on inh_ck's tap row (run 5)
 eof_w7777   P  6450,7812-7830    in   row 3 of the gate, on west into lc1's strip (cluster E's undrawn west half)
-eof_w7718   P  7400,7203-7221    ?    the poly row east of the pad (7313,7215)
-eof_w7718   M  7262-7274,7800    ?    the metal south of row 2's pad (7267,7736)
-eof_w7818   P  7272-7285,6875    out  the gate's output: the poly north of the pad (7272,6912)
+tc2_sr_g   P  7400,7203-7221    ?    the poly row east of the pad (7313,7215)
+tc2_sr_g   M  7262-7274,7800    ?    the metal south of row 2's pad (7267,7736)
+tc2_r5589   P  7272-7285,6875    out  the gate's output: the poly north of the pad (7272,6912)
 vss         M  7552-7598,7585    -    column 0's VSS rail, on north
 vcc         M  7725-7775,7720    -    the wide metal east of the load, on north
 
@@ -91,18 +91,18 @@ bd1_n2        M      6705-6718,15000          out  piece n2w: on north up the le
 
 # Piece isrc5: line X (the first through line of the left-centre strips) is `rst_a` (run 10). The poly south of rst_a's pad (5147,6803) is drawn on to lc2's metal end.
 rst_a       M  6450,8623-8637     out  onto lc2's diagonal metal end (its first through line, rst_a: its port (6450,8630)): one net, down the left-centre strips to rst_a's loads
-# Pieces rl and w5936 (run 11): res_b, lpstb_b and tl5_w5936 (= tl3_w3982) drawn on from piece x1's poly ends
+# Pieces rl and w5936 (run 11): res_b, lpstb_b and the wire `tl5` called w5936 (= tl3_w3982) drawn on from piece x1's poly ends
 # (their ports at (5196-5210,6900), (5232-5248,6872), (5054-5072,6880) are gone)
 res_b       M  6450,8685-8699     out  onto lc2's metal end (its second through line, res_b: its port (6450,8692)): one net, down the left-centre strips and the left bus field to (6366,15000)
 lpstb_b     M  6450,8749-8763     out  onto lc2's metal end (its third through line, lpstb_b: its port (6450,8756)): one net, to (6408,15000)
-tl3_w3982   M  6465-6477,8067     out  onto lc2's metal x 6471 of lc2_w8906 (pad (6470,8127)): latch C's data
+tl3_w3982   M  6465-6477,8067     out  onto lc2's metal x 6471 of tl3_w3982 (pad (6470,8127)): latch C's data
 # Piece d3982 (run 12): the three inverters that drive tl3_w3982 (the port tl3_w3982 P 7492,8417-8439 is gone: U4's output box)
 lc1_w7928   P  6401-6416,8067     in   from lc2's poly P 6401,8067:6415,8092 (its port there; both label the poly lc2_w8083, an alias): latch D's lower node, the input of the three inverters
 vss         M  7552-7598,8460     -    the gate column's VSS rail on south (cdp3's c0 rail)
 vcc         M  7722-7776,8460     -    the wide metal east of the column on south (VCC by the loads' contacts)
 # Pieces ck5 and rc (run 13): the ripple counter's clock, and the fifth corner-bundle line of `lc3` on to `rst_c`
-lc3_w9947   P  6443-6460,6390     ?    onto tc2's poly of tc2_m6447 (its port (6451,6400)), tcw_m6404's line: one net; gates in tcw
-lc3_w9947   M  6440-6450,9161-9174  ?  onto lc2's metal end (its fourth through line, lc2_x6432: its port (6450,9165)): the ripple counter's clock
+lc3_w9947   P  6443-6460,6390     ?    onto tc2's poly of lc3_w9947 (its port (6451,6400)), lc3_w9947's line: one net; gates in tcw
+lc3_w9947   M  6440-6450,9161-9174  ?  onto lc2's metal end (its fourth through line, lc3_w9947: its port (6450,9165)): the ripple counter's clock
 rst_c       P  6450,8911-8936     in   from lc2's diagonal poly (its port there), from latch C's clear pad
 rst_c       M  6440-6450,9445-9459  out  onto lc3's metal end (its fifth corner-bundle line, rst_c: its port (6450,9448-9462))
 # Piece n2n (run 14): the latched R4 match's track from busl's north edge to tl5's bus poly (bd1_n2)

@@ -8,15 +8,15 @@
 2540,4590:2842,4778   logic   second latch, lower half: first input of rcs_e4's NOR | tl1_w4678 = NOT(rcs_x1 OR tl1_w3594 AND tl1_w4360 OR tl1_w4703): open while tl1_w3594 is high, data tl1_w4243 (the first latch's output), cleared by rcs_x1
 2260,2790:2540,5480   route   vertical metals west of the first cluster | tracks x 2283, 2370, 2457, 2500 (43 px pitch): pieces joining pads of poly rows that run east into the west column, and to rows under the foot (y 5372, y 5459)
 2330,2795:2817,2915   route   three poly rows above the cluster | y 2812, 2857, 2899: from the top pads of the metals x 2457, 2370, 2500 east under R1 and out of the strip
-2125,2535:2600,2570   route   tl1_w3333, metal along the top | from a pad (2563,2550) west and down x 2199 to a contact (2197,3333)
-2125,3280:2340,5815   route   tl1_w3333, poly down the west side | from the contact (2197,3333) south, round under the metal x 2326, south again and east along y 5800 into the small cluster
-2400,2500:2817,2650   route   rows from the north | rcs_c1's poly (x 2413) and two L's (tl1_w2637, sl_eq_r5_n) from the north; rows y 2551 (tl1_w3333), 2591, 2636 east under R1 and the wide metal to pads at the strip's edge
+2125,2535:2600,2570   route   tl4_w4068, metal along the top | from a pad (2563,2550) west and down x 2199 to a contact (2197,3333)
+2125,3280:2340,5815   route   tl4_w4068, poly down the west side | from the contact (2197,3333) south, round under the metal x 2326, south again and east along y 5800 into the small cluster
+2400,2500:2817,2650   route   rows from the north | rcs_c1's poly (x 2413) and two L's (tl1_w2637, sl_eq_r5_n) from the north; rows y 2551 (tl4_w4068), 2591, 2636 east under R1 and the wide metal to pads at the strip's edge
 2250,2705:2425,3000   route   rcs_c1's poly line, west loop | from tla's row y 2986 west to x 2265, north, east along y 2720 to x 2413 and north
 2730,2500:2817,2960   power   wide VSS metal onto R3's top | x 2733-2785 from the VSS plane north of the strips, turning east along y 2893-2948 into tl2's strip, one metal with the top of R3 (tl2 run 5); no contact in the strip
 2598,2500:2652,3005   power   R1 (VSS) north of the cluster | one rail with tla's piece below, on north out of the strip
 2100,5900:2545,6350   route   tracks beside the small cluster | rows into the third latch from the metals x 2326 (clear), 2414 (output), a second ck_out contact (2372,6061); the metal x 2500 takes tl1_w5936 from the row y 6237 (from the east) up to the row y 5935, which goes west to the margin wire
-2540,5690:2842,5935   logic   third latch, upper half | tl1_w5706 = NOT tl1_w3333; tl1_w5841 = NOT(tl1_w3333 AND ck_out OR tl1_w6022): second copy of the unit at y 4340-4590
-2540,5935:2842,6175   logic   third latch, lower half | tl1_w6022 = NOT(tl1_w5978 OR ck_out AND tl1_w5706 OR tl1_w5841): open while ck_out is high, data tl1_w3333, cleared by tl1_w5978; output east along y 6195
+2540,5690:2842,5935   logic   third latch, upper half | tl1_w5706 = NOT tl4_w4068; tl1_w5841 = NOT(tl4_w4068 AND ck_out OR tl1_w6022): second copy of the unit at y 4340-4590
+2540,5935:2842,6175   logic   third latch, lower half | tl1_w6022 = NOT(tl1_w5978 OR ck_out AND tl1_w5706 OR tl1_w5841): open while ck_out is high, data tl4_w4068, cleared by tl1_w5978; output east along y 6195
 2545,6180:2817,6300   route   rows south of the small cluster | y 6195 (tl1_w6022, the third latch's output), y 6237 (tl1_w5936), y 6282 (lc_step): straight east under the rails
 2598,5320:2652,6350   power   R1 (VSS) over the foot and the small cluster | one rail with tla's piece above; on south out of the strip
 2780,5320:2832,6350   power   R2 (VCC) over the foot and the small cluster | one rail with tla's piece above; on south out of the strip

@@ -66,7 +66,7 @@ N M 10414,5300 db_b0
 # db_b6 at (8078,5020)) runs on south along x 8075 to y 5848, steps east along
 # y 5840-5856 to x 8118 (the step lies on one of channel 1's poly lines, no contact:
 # uniform salmon under it, 4.5x in three shots, s1jog.png) and runs south along x 8118 to
-# cdp2's drawn top of cdp2_c_s1_bus (y 7395). Seen end to end: b6a.png (2.9x, y 5030-5855),
+# cdp2's drawn top of db_b6 (y 7395). Seen end to end: b6a.png (2.9x, y 5030-5855),
 # s1a.png (2.3x, y 5790-6340), s1b.png (2.3x, y 6320-7400), both metal shots. Dark
 # stretches of at most 16 px, none in both shots at one place except poly crossings
 # (tools/rde_dim.py). tools/follow.py takes it from (8075,4990) to the step, and from
@@ -76,7 +76,6 @@ N M 10414,5300 db_b0
 # over three diffusion regions (pitch 130): no pad or ring seen at any of them.
 M 8075,5030 y5848 x8118 y7400 w=12
 N M 8118,6500 db_b6
-@alias db_b6 cdp2_c_s1_bus
 
 # --- Data bit 5 to R10's slice s2 (cdp2 row C, bus line at x 8535/8465) ---------------
 # The tap metal of db_b5 at x 8727 (cdp1 drew it to y 5150) runs straight down to a
@@ -85,7 +84,7 @@ N M 8118,6500 db_b6
 # pad with the contact (8485,6087) (ring, green patch); 4x in three shots, s2top.png.
 # The pad's metal has its line on the west side (one outline round line and pad, 6x,
 # s2c.png): south along x 8464 to y 6999, east to x 8532, south to cdp2's drawn top of
-# cdp2_c_s2_bus (y 7395). tools/follow.py takes both metals whole; dark stretches of at
+# db_b5 (y 7395). tools/follow.py takes both metals whole; dark stretches of at
 # most 14 px (tools/rde_dim.py).
 M 8727,5140 y6094 w=12
 C 8728,6088 s=22x22
@@ -96,4 +95,3 @@ C 8485,6087 s=22x22
 M 8494,6088 x8464 y6999 x8532 y7400 w=13
 N M 8464,6500 db_b5
 N P 8600,6087 db_b5
-@alias db_b5 cdp2_c_s2_bus

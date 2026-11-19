@@ -159,7 +159,7 @@ overlay of s6.
 - Strobe `cdp4_ld6`: poly line y 13721 from a contact at (7946,13720), left of the s1
   cell, to the last cell (x 10330). A metal line goes down from the contact (x 7947,
   seen to y 13840).
-- Data: in tracks `cdp4_in6_s1`..`s6` (x 8465 + dx) start just above each cell's in
+- Data: in tracks `cdp3_g_c2`..`s6` (x 8465 + dx) start just above each cell's in
   contact and run down through the cell and **out of the bottom of the array**.
 - Output: the buffered output (d land) of the cell under slice K goes up in metal to a
   poly contact at (8727 + dx, 13677); a poly link runs right from there to a contact
@@ -190,13 +190,13 @@ lie left of x 7600.
 | `cdp4_rst` | poly | x 7600, y 12874; right end x 10705 | from outside | pulls every n low |
 | `cdp4_ld` | poly | x 7600, y 12962; right end about x 10600 | from outside | row C latch strobe |
 | `cdp4_bus_s0`..`s7` | poly | x 7600, y 12180, 12137, 12093, 12052, 12008, 11964, 11922, 11877 | unknown | per-slice line between row R1 and the left |
-| `cdp4_in_s0`..`s7` | poly | x 7600, y 13333, 13376, 13420, 13463, 13505, 13548, 13590, 13633 | from outside | data into the row C latch |
+| `cdp4_bus_s0`..`s7` | poly | x 7600, y 13333, 13376, 13420, 13463, 13505, 13548, 13590, 13633 | from outside | data into the row C latch |
 | `cdp4_n_s0`..`s7` | poly | x 10850, same y as `in` of the same slice | driven inside | selector output |
 | `cdp4_a_s2`..`s7` | metal | x 8509 + offset, y 11790 (drawn end; the track continues up through the R1 latch) | from R1 upper | selector input a (6 bits) |
 | (bus tap) | metal | x 8555 + offset, y 11790 (drawn end; continues up through the R1 latch) | to/from R1 upper | joins `cdp4_bus_sK` |
 | `cdp4_in8b_s0`..`s7` | metal | x 8465 + offset, y 11499 (drawn end; continues up) | from R1 upper | data into the R1 latch |
 | `wr_r15` | poly | y 11837; believed to cross x 7600 (ends not examined) | from outside | R1 latch strobe |
-| `cdp4_in6_s1`..`s6` | metal | x 8073, 8465, 8855, 9245, 9635, 10025 at y 14059 (drawn end; continues down) | from outside (below) | data into the row D latch |
+| `cdp3_g_c2`..`s6` | metal | x 8073, 8465, 8855, 9245, 9635, 10025 at y 14059 (drawn end; continues down) | from outside (below) | data into the row D latch |
 | `cdp4_ld6` | metal | x 7947, y 13840 (drawn end; continues down) | from outside (below) | row D latch strobe |
 | `vss` | metal | x 7622, 8013, 8404, 8795, 9185, 9574, 9964, 10355, 10746 at y 11480; x 8013..10355 at y 14062; 7622 drawn to y 13650 | - | rails |
 | `vcc` | metal | x 7837, 8228, 8619, 9010, 9400, 9789, 10179, 10570 at y 11480; x 8228..10179 at y 14062; 7837 drawn to y 13530, 10570 to y 13650 | - | rails |
@@ -259,7 +259,7 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
 ## Corrections (coordinator, from the handoffs of 2026-11-19, second batch)
 
 - Ports, `cdp4_bus_s0`..`s7` ("unknown, per-slice line between row R1 and the left") and
-  `cdp4_in_s0`..`s7` ("from outside, data into the row C latch") **are the same eight nets** (`busl`, piece
+  `cdp4_bus_s0`..`s7` ("from outside, data into the row C latch") **are the same eight nets** (`busl`, piece
   `ch1`): for each slice the channel-1 row and the channel-2 row are joined in the left bus field by a
   metal track between poly pads, and the same net ends on one poly row of the left array (s7 .. s1 at
   y 11488, 11922, 12442, 12984, 13397, 13874, 14351; s0 just south of `busl`'s region). The field holds
@@ -271,7 +271,7 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
   on tracks x 6538-6668 and each also feeds a gate band of the corner gate group; `cdp4_rst` from the
   corner gate group (believed); `cdp4_ld` from `bc1`'s strobe driver (`bc1_ld_a`, marked: AMB-038). The
   "contact near that strobe line at (7557,12975)" is the pad (7556,12983) (`busl`, piece `ctl`).
-- Ports, `cdp4_in6_s1`, `cdp4_in6_s2` "from outside (below)": from `cdp3`'s row A cells, columns c2 and
+- Ports, `cdp3_g_c2`, `cdp3_g_c3` "from outside (below)": from `cdp3`'s row A cells, columns c2 and
   c3, by line g (`cdp3_g_c2`, `cdp3_g_c3`; `busl`, piece `d6`).
 - `wr_r15` ("ends not examined"): the row does not enter the left bus field; its west end is at about
   x 7603-7640, y 11825-11850, under the metal x 7600-7645 (`busl`, run 6).

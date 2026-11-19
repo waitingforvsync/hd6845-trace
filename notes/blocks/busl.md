@@ -43,7 +43,7 @@ only, no uncertain items:
   y 14916-14528, the westernmost lowest. Seven end on a poly pad (x 6320-6409) whose poly row runs east
   under the next thirty tracks: `lc3_e9798` on the row y 14567, `lc2_w9079` on 14611, `lc3_e9756` on
   14654, **`rst_c` (the input of the inverter that drives `lc1_w7170`) on 14697**, `lc2_w8450`
-  (the ripple counter's clear) on 14740, **`lc3_w9947` (the ripple counter's clock, `lc2_x6432`) on
+  (the ripple counter's clear) on 14740, **`lc3_w9947` (the ripple counter's clock, `lc3_w9947`) on
   14784**, and `rst_a` on 14914. The rows are drawn to the region's edge at x 7550; they run on
   240-290 px to pads at x about 7790 and 7835, the west ends of `bc1`'s 13 bus metals (seen, not drawn:
   `bc1`'s region). `res_b` and `lpstb_b` turn south instead (x 6366, x 6408) and leave the
@@ -84,8 +84,8 @@ piece, `d6`, wiring only, no uncertain items:
   (y 9190 .. 9407), runs 4,300 px down the east side of the field with no pad or contact, steps 65 px
   west in a second staircase (y 13722 .. 13938) and becomes the metal that `bc1` draws from y 14040
   onto the contact of one of its six poly lines (y 14089 .. 14304). The order is kept: c2 goes to line 1
-  (the foot of `cdp4_in6_s1`), c3 to line 2 (`cdp4_in6_s2`), c4 .. c7 to lines 3 .. 6 (`bc1_d3` ..
-  `bc1_d6`, which `bc1` follows east only to x 8040; believed `cdp4_in6_s3` .. `s6`). Line 6 (c7) is the
+  (the foot of `cdp3_g_c2`), c3 to line 2 (`cdp3_g_c3`), c4 .. c7 to lines 3 .. 6 (`cdp3_g_c4` ..
+  `cdp3_g_c7`, which `bc1` follows east only to x 8040; believed `cdp4_in6_s3` .. `s6`). Line 6 (c7) is the
   long track that the earlier runs met at x 7468 / 7511. The names are gathered by `@alias`
   (`cdp3_g_c#` canonical).
 
@@ -93,7 +93,7 @@ Run 6 (richtw1's session, Claude Fable 5.2; 2026-11-19 18:06 to 18:30 +0100). Tw
 wiring only, no uncertain items:
 
 - **`tc2_sr_g` runs down the whole field** (piece `sr`). The metal that `eofw` left as an open end south
-  of its corner pad (7446,8732) (net `tc2_sr_g` = `lc1_w7908`, the enable of latch D, = `eof_w7718`,
+  of its corner pad (7446,8732) (net `tc2_sr_g` = the wire `lc1` called w7908, the enable of latch D, = `tc2_sr_g`,
   row 2 of the gate on `inh_ck`'s tap row) is one metal from there to the south edge of the region:
   south to y 8910, a diagonal south-west (the south-east line of the diagonal bundle) to (7209,9168),
   4,500 px south at x 7209 (the track west of piece `d6`'s line 1), the seventh step of the lower
@@ -128,7 +128,7 @@ Run 7 (richtw1's session, Claude Fable 5.2; 2026-11-19 22:30 to 22:56 +0100). Th
   of its arm y 13290, x 6754 south) and `busl_x6906` (x 6906 north of its arm y 13376, x 6841 south).
   Neither end is in the region (follower: `busl_x6820` from (6817,9988) to (6754,16220);
   `busl_x6906` from (7078,8778) to (6839,16219)). `busl_x6906`'s arm lies for 65 px on the poly row
-  y 13375 (`cdp4_in_s1`'s, piece `ch1`): no contact (below).
+  y 13375 (`cdp4_bus_s1`'s, piece `ch1`): no contact (below).
 
 Full extraction with run 7: 2,379 nets (main had 2,378: two new through lines, one join), 4,351
 transistors, 0 errors, 0 warnings; 849 of 1,279 equations firm, as on main (`rcs_e3` = NOT `bd1_n2`
@@ -257,7 +257,7 @@ wide, drawn 14; all rows poly, 23-24 px between their edge lines):
 | 9 | `lc3_e9798` | 6429 | 11838 | 6256 | 12726 | 6191 | 14570 | pad (6363,14568); row y 14567 |
 | 10 | `rcs_e4` (`trace/tla.txt`, not this piece) | 6472 | 11880 | 6300 | 12772 | 6235 | 14528 | contact (6407,14526); row y 14523 to the pad (7012,14522) |
 
-- Names are `lc3`'s at its south edge (`ports.d/lc3.txt`); line 4's `lc3_w9947` gathers `lc2_x6432`.
+- Names are `lc3`'s at its south edge (`ports.d/lc3.txt`); line 4's `lc3_w9947` gathers the wire `lc2` called x6432.
   **Line 5 is firmly `lc2_w8907`'s metal** (`lc3`'s name for it; the gates of the ripple counter's clear
   transistors are on that piece); it is `lc2_w8450`, the output of the inverter of `lc1_w7170`, only
   through `lc2`'s uncertain box (`?P 5598,8899:5612,8914`, `?B 5604,8897:5614,8916`, with its
@@ -381,12 +381,12 @@ metals 13-17 px wide, drawn 14; every row is poly, 22-25 px between its edge lin
 
 | Line | Net | Row at x 7600 (y) | Pad at its west end | Track from the pad | Step west at y | Long run x | Lower step west at y | Lower x, onto `bc1`'s metal at y 14040-14050 | `bc1`'s line and contact |
 |---|---|---|---|---|---|---|---|---|---|
-| 1 | `cdp3_g_c2` | 9123 | (7336,9122) | 7338 | 9190 | 7252 | 13722 | 7189 | line 1, y 14089, (7188,14091): the foot of `cdp4_in6_s1` |
-| 2 | `cdp3_g_c3` | 9080 | (7380,9080) | 7382 | 9234 | 7296 | 13766 | 7231 | line 2, y 14132, (7230,14131): the foot of `cdp4_in6_s2` |
-| 3 | `cdp3_g_c4` | 9036 | (7423,9036) | 7426 | 9276 | 7339 | 13810 | 7274 | line 3, y 14175, (7274,14172): `bc1_d3` |
-| 4 | `cdp3_g_c5` | 8993 | (7467,8994) | 7468 | 9320 | 7382 | 13855 | 7317 | line 4, y 14218, (7317,14217): `bc1_d4` |
-| 5 | `cdp3_g_c6` | 8949 | (7510,8950) | 7512 | 9363 | 7426 | 13898 | 7360 | line 5, y 14261, (7361,14260): `bc1_d5` |
-| 6 | `cdp3_g_c7` | 8906 | (7553,8905) | 7556 | 9407 | 7468 to y 12835; east to 7512; south | 13938 | 7404 | line 6, y 14304, (7405,14304): `bc1_d6` |
+| 1 | `cdp3_g_c2` | 9123 | (7336,9122) | 7338 | 9190 | 7252 | 13722 | 7189 | line 1, y 14089, (7188,14091): the foot of `cdp3_g_c2` |
+| 2 | `cdp3_g_c3` | 9080 | (7380,9080) | 7382 | 9234 | 7296 | 13766 | 7231 | line 2, y 14132, (7230,14131): the foot of `cdp3_g_c3` |
+| 3 | `cdp3_g_c4` | 9036 | (7423,9036) | 7426 | 9276 | 7339 | 13810 | 7274 | line 3, y 14175, (7274,14172): `cdp3_g_c4` |
+| 4 | `cdp3_g_c5` | 8993 | (7467,8994) | 7468 | 9320 | 7382 | 13855 | 7317 | line 4, y 14218, (7317,14217): `cdp3_g_c5` |
+| 5 | `cdp3_g_c6` | 8949 | (7510,8950) | 7512 | 9363 | 7426 | 13898 | 7360 | line 5, y 14261, (7361,14260): `cdp3_g_c6` |
+| 6 | `cdp3_g_c7` | 8906 | (7553,8905) | 7556 | 9407 | 7468 to y 12835; east to 7512; south | 13938 | 7404 | line 6, y 14304, (7405,14304): `cdp3_g_c7` |
 
 - The north end (view `d6_north_m.png`, 2.3x, chip-2 metal shot with every package's trace; overlay
   `d6_o1.png`, 1.65x, metal and clean shots): six pads in a staircase, 43 px apart both ways, each a
@@ -559,7 +559,7 @@ south), `x69`'s. What the scan flagged, all looked at (tiles `n2_c2.png`, `n2_c3
   row's height, wider than the metal, where a contact's hole is about 12 px inside a pad; and `n2` is
   greenish over both `rsel14_buf`'s row (y 13701) and `rsel15_buf`'s (y 14004), where contacts would
   short the two selects (guide, trap 15). View `n2_c5.png`.
-- `x69`'s arm lies on the poly row y 13375 (piece `ch1`: `cdp4_in_s1`) from x 6841 to x 6906
+- `x69`'s arm lies on the poly row y 13375 (piece `ch1`: `cdp4_bus_s1`) from x 6841 to x 6906
   (`textmap.py 6824 13354 6924 13400 3 --acid`; view `n2_c6.png`, 5x, three shots): the metal is a
   plain bar 14 px tall in both chips with no ring and no pad (a notch at x 6882 in chip 2 only), and
   the clean shot under it has no hole (olive-yellow from x 6835 to 6890, red-orange under the
@@ -619,14 +619,14 @@ Piece `d6`. Traced (no uncertain item on any of the six nets): `cdp3_g_c2` .. `c
 that `cdp3` follows from a contact on line g of each row A cell west to x 7600, are one metal each from
 their row-end pads to `bc1`'s six row D data lines. So in the extraction **the data input of `cdp4`'s
 row D latch bit under slice s1 (the pass transistor gated by `cdp4_ld6`) is `cdp3_g_c2`, and under s2
-`cdp3_g_c3`**; `cdp3_g_c4` .. `c7` are `bc1_d3` .. `bc1_d6`, which `bc1` draws only as far as x 8040.
+`cdp3_g_c3`**; `cdp3_g_c4` .. `c7` are `cdp3_g_c4` .. `cdp3_g_c7`, which `bc1` draws only as far as x 8040.
 Believed: these run on to `cdp4_in6_s3` .. `s6` in the same order, so that the 6-bit latch row D takes
 line g of the six large cells of `cdp3`'s row A, column c(k+1) into the bit under slice sk. Nothing in
 the field drives or loads the six. Not traced: the row A cells (`cdp3` (continue), `cdp2` (continue)),
 so what line g is; a latch's data input does not drive, so the cells must (believed).
 
 Piece `sr`. Traced (no uncertain item of this package; the net's other joins are `eofw`'s): `tc2_sr_g`,
-which is also `lc1_w7908` (the enable of latch D, the latch that makes `lc_step`) and row 2 of the gate
+which is also `tc2_sr_g` (the enable of latch D, the latch that makes `lc_step`) and row 2 of the gate
 `tc2_r5589` = NOT(`lc1_w7170` AND (`inh_ck` OR `tc2_sr_g`)), runs from `eofw`'s corner pad down the
 field and out at (7187,15000), with no contact in the field. So the net has a third branch, into the
 bottom-centre logic. Not traced: its end (in `bc1`'s group x 7000-7860, y 15000-16300). Believed: the
@@ -673,8 +673,8 @@ not known: named for their place (`busl_x6820`, `busl_x6906`).
 | `bc1_ld_a` (`cdp4`'s name: `cdp4_ld`) | P | x 7600, y 12962 (22 px wide) | in (driven in `bc1`, through the `?M`) | `cdp4`'s strobe row of latch row C, drawn there from x 7600 |
 | `bc1_ld_a` | M | (7448,14050), 14 px wide | in | joins `bc1`'s metal of the strobe driver's twin output |
 | `cdp3_g_c2` .. `cdp3_g_c7` | P | x 7600, y 9123, 9080, 9036, 8993, 8949, 8906 (23 px wide) | not known (believed in: driven by `cdp3`'s row A cells) | `cdp3`'s channel B tracks onto line g, drawn there from x 7600 |
-| `cdp3_g_c2` .. `cdp3_g_c7` | M | y 14050, x 7189, 7231, 7274, 7317, 7360, 7404 (14 px wide) | as above | each joins `bc1`'s metal (drawn there from y 14040) onto the contact of its line 1 .. 6 (`cdp4_in6_s1`, `cdp4_in6_s2`, `bc1_d3` .. `bc1_d6`) |
-| `tc2_sr_g` | M | (7460-7474,8795), 14 px wide | not known | onto `eofw`'s metal south of the corner pad (7446,8732) (`M 7466,8745 y8800`; `eofw`'s port there is named `lc1_w7908`, an alias) |
+| `cdp3_g_c2` .. `cdp3_g_c7` | M | y 14050, x 7189, 7231, 7274, 7317, 7360, 7404 (14 px wide) | as above | each joins `bc1`'s metal (drawn there from y 14040) onto the contact of its line 1 .. 6 (`cdp3_g_c2`, `cdp3_g_c3`, `cdp3_g_c4` .. `cdp3_g_c7`) |
+| `tc2_sr_g` | M | (7460-7474,8795), 14 px wide | not known | onto `eofw`'s metal south of the corner pad (7446,8732) (`M 7466,8745 y8800`; `eofw`'s port there is named `tc2_sr_g`, an alias) |
 | `tc2_sr_g` | M | (7180-7194,15000), 14 px wide | not known (believed in: driven in `bc1`'s group) | the track goes on south in `bc1`'s ground: to y 15482, west to x 7103, south; the follower ends at (7100,16279) (not read) |
 | `cdp3_k_b` | P | x 7600, y 9438-9460 (22 px wide) | out (driven from the diffusion at its south end; received by `cdp3`'s gate 1) | `cdp3`'s row y 9450, drawn there from x 7600 |
 | `cdp3_k_b` | D | x 7600, y 11092-11127 | in | the diffusion band goes on east under column 0's VSS rail (x 7600-7646) into `cdp3`'s ground (not drawn) |
@@ -762,7 +762,7 @@ not known: named for their place (`busl_x6820`, `busl_x6906`).
 11. **Which end drives `cdp3_g_c#`** (piece `d6`): the field holds no transistor. One end is the data
    input of `cdp4`'s row D latch (a pass transistor: it does not drive), the other `cdp3`'s row A cell,
    untraced. Settled by tracing that cell (`cdp3` (continue)).
-12. **`bc1_d3` .. `bc1_d6` and `cdp4_in6_s3` .. `s6`** (piece `d6`): `bc1` draws lines 3-6 only to
+12. **`cdp3_g_c4` .. `cdp3_g_c7` and `cdp4_in6_s3` .. `s6`** (piece `d6`): `bc1` draws lines 3-6 only to
    x 8040 ("continues right: staircase, then beyond x 8500"), so the extraction does not join
    `cdp3_g_c4` .. `c7` to row D's bits s3 .. s6. Working assumption: joined in order, as lines 1 and 2
    are. Settled by `bc1` (continue).
