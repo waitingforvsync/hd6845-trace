@@ -193,12 +193,12 @@ The gate group, as far as drawn: under the rail x 6505-6560 one diffusion column
 three gates (class map: poly over channel at y 3986-4004, 4031-4052, 4126-4143, diffusion
 between; two contact pits to the rail at y 4078 and 4100). From the extraction:
 
-    fld_a_in : pulled to the rail through two gates in series, inh_ck AND tcw_b
+    fld_a_in : pulled to the rail through two gates in series, rst_ck AND tcw_b
     fld_y_b  : pulled to the rail through one gate, tcw_c
 
-With loads (traced by `tcw`, run 2, 2026-11-17, in `trace/tcw.txt`; `fld_a_in` has a third pull-down there, gate `tcw_o3820`) and the rail being VSS: `fld_a_in` = NAND(`inh_ck`, `tcw_b`),
+With loads (traced by `tcw`, run 2, 2026-11-17, in `trace/tcw.txt`; `fld_a_in` has a third pull-down there, gate `tcw_o3820`) and the rail being VSS: `fld_a_in` = NAND(`rst_ck`, `tcw_b`),
 `fld_y_b` = NOT `tcw_c`. The three inputs arrive on pads with thin metals from the
-north: `inh_ck` pad (6400,4005), metal x 6403 to y 3786, and a poly on west along y 4000;
+north: `rst_ck` pad (6400,4005), metal x 6403 to y 3786, and a poly on west along y 4000;
 `tcw_b` pad (6455,4045), metal x 6465 (not followed); `tcw_c` pad (6318,4135), metal
 x 6319 to y 3740, and a poly on west along y 4130. They end in the next rows of the same
 untraced region (x 6200-6700, y 3600-3800).
@@ -210,9 +210,9 @@ pair is cut off from the rail contact at y 3905 (a strip of field at y 3948-3956
 class map); a 12 px dark spot on the rail at (6548,4188) is not a contact.
 
 So the chain for the comparator's bit-0 input in interlace sync and video now reads, as
-extracted: `tc1_g` = NOT `fld_a_in`; `fld_a_in` pulled low by `inh_ck` AND `tcw_b`; and for
+extracted: `tc1_g` = NOT `fld_a_in`; `fld_a_in` pulled low by `rst_ck` AND `tcw_b`; and for
 row address bit 0 (R9 bit 0 set): `ras_o0_alt1` = `rc0_n` XOR `fld_y_b`, `fld_y_b` pulled
-low by `tcw_c`. **`inh_ck`, `tcw_b`, `tcw_c` are the open ends**, and the whole region
+low by `tcw_c`. **`rst_ck`, `tcw_b`, `tcw_c` are the open ends**, and the whole region
 west of the island (x 6200-6700, y 2500-4450) is untraced logic: it has to be taken as a
 block, not chased line by line.
 
@@ -234,4 +234,8 @@ at y 6042-6096. `fld`'s VCC rail is joined by metal to `tcw`'s, its VSS rail to 
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19)
 
-- `inh_ck` is `inh_ck` (`eof` run 2, firm).
+- `rst_ck` is `rst_ck` (`eof` run 2, firm).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- The signal on track A / line X / the first through line of the left-centre strips, which these notes call a clock, a strobe "once per scan line" or leave without a source, **is the reset**: `rst_a`, the buffered copy of `rst` = NOR(`lpstb_b`, `res_b`) made by `lc1`'s gate 5 (`eof` run 10, piece `isrc5`, firm). `rst_ck`, `rst_rc` and `rst_lat` are further buffered copies of it: high while the RES and LPSTB pins are both low, and only then. The belief "a strobe once per scan line" is withdrawn.

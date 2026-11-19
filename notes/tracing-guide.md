@@ -337,6 +337,10 @@ Traps, all of them real:
    85-108 here, against 186-203/176-182/131-139 for these) and a full-bright centre about 12 px
    across. Extends trap 22, whose "the pass-over has no bright centre" is not always so. Found
    2026-11-18 (`tl4`, `tl3`; R20, AMB-034).
+   The converse also fails: **a real contact need not show the green hole in chip 1's clean shot.** The pad
+   (6513,7889) is vivid red-orange there with no hole, while both metal shots show ring and bright centre and
+   the chip-2 stripped shot a pitted box. On a widened pad with a ring, "no green hole" does not refute a
+   contact: the chip-2 stripped shot is the second look (`eof`, 2026-11-19; AMB-041).
 27. **A thin metal over a load-tie or node box cannot be shown continuous from these photos;
    record it so the tools see it.** Over each such box a thin metal is dark for 14-55 px in both
    metal shots and the clean shot is greenish under it. Do not leave the stretch undrawn (an
@@ -392,7 +396,7 @@ Traps, all of them real:
    nobody has drawn is not yet a source (`tl3` took the two ends of one L in `tl4`'s strip for two
    wires). Found 2026-11-18 (`lc1`, `tl4`).
 32. **Look all round every pad.** A pad is not the end of what reaches it. A metal can run on
-   through a pad (the follower stops at the ring: `lc2_w8474` had two pads in its run, `lc1_w7908`
+   through a pad (the follower stops at the ring: `lc2_w8474` had two pads in its run, `tc2_sr_g`
    one); a pad can carry a second poly (`lc2`'s pad (5386,8951)); a poly drawn as ending on a pad
    whose metal carries the net on can go on below the pad (`eof`: RES, LPSTB and a reset copy ran on
    south into `lc1`'s bundle); a copy's pad can have a poly on a side the master's pad has none
@@ -471,8 +475,10 @@ A 100,100:150,150 kind=clamp           # mark a transistor here: clamp, field (b
   note. A wire you believe is net X but have not joined to it is labelled `X_u`.
   `tools/t.sh BLOCK signals.py` lists your names that the glossary does not cover.
 - **Aliases.** When your wire joins two nets that already have names, say so with `@alias CANON
-  OTHER`. A net has one canonical name, and every other name on it must be an alias of that one
-  directly: a chain (`@alias a b`, `@alias b c`) gives "net carries several names", so alias the
+  OTHER`. A net has one canonical name, and every other name on it must be an alias of that one,
+  directly or through another alias (a chain `@alias a b`, `@alias b c` is accepted since
+  2026-11-19: when a wire joins two nets that each have aliases in other packages' files, one line
+  `@alias CANON-OF-ONE CANON-OF-THE-OTHER` in your file is enough). Where you can, alias the
   new name to the canonical name the net already has (`eofw`: `lc2` had `@alias lc1_w7170
   lc2_w8474`, so the third name went in as `@alias lc1_w7170 eof_w7777`). A net whose labels in your
   file are all aliases gives the same error when the file is extracted by itself, because the
@@ -612,7 +618,7 @@ Most of the die is repeated cells. Trace a cell once.
 
   ```
   # NAME        LAYER  X,Y              DIR  note
-  tc1_f         P      8250,3348-3362   out  R3 output; runs on under ns1..ns6 without contact
+  cdp1_b5_a         P      8250,3348-3362   out  R3 output; runs on under ns1..ns6 without contact
   ras_straight  M      7220-7240,4450   out  NOT b (W2 lower)
   vss           M      7943-7990,4450   -    the VSS bus turns south
   ```

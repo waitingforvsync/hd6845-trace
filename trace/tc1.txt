@@ -133,7 +133,7 @@ M 7954,3510 x8054 y3343 w=19       # over the poly at x 8004-8024 without contac
 C 8054,3354 s=24x24
 P 8040,3342:8076,3368
 P 8060,3348:8290,3362              # runs on right under the datapath's vertical metals (seen to x 8290)
-N M 8054,3450 tc1_f
+N M 8054,3450 cdp1_b5_a
 
 # ---- R4: inverter. Input band e from contact (7922,3679) = R5 output. Output: under
 #      the rail, then right to a buried contact on the foot of R3's band d.
@@ -696,11 +696,11 @@ N M 6968,3915 tc1_x1_u
 # =====================================================================================
 # The second driver, north of the first (x 6690-7035, y 3600-3900).  Run 6, 2026-11-17.
 # A wide 2-input NOR of the same build:
-#     tc1_o3740 = NOR(tc1_p3698, tc1_x1_u)
+#     tc1_o3740 = NOR(tc1_ns2, tc1_x1_u)
 # Under the rail x 6858-6906: rail-contact region / gate 1 / output node / gate 2 /
 # rail-contact region. Each gate also turns along the west side of its rail region and
 # crosses the column under the thin metal x 6817 (the output node's west part).
-#   gate 1 (tc1_p3698): band y 3688-3708; leg x 6824-6849 north to y 3645; arm y 3645-3668
+#   gate 1 (tc1_ns2): band y 3688-3708; leg x 6824-6849 north to y 3645; arm y 3645-3668
 #     west across the column and the diffusion west of it (to its edge at x 6756), and on to
 #     a vertical poly under the supply rail's east edge (x 6725-6740), which comes from the
 #     north: from a pad at (6772,3591) under the thin metal x 6765-6785 (section "Cell B").
@@ -749,7 +749,7 @@ P 6824,3688:6986,3708              # band; east of the rail it is still over dif
 P 6824,3645:6849,3708              # leg, x 6824-6849 (orange in the gap in three shots)
 P 6725,3645:6836,3668              # arm: salmon under the thin metal, orange in the open in three shots to the vertical poly (of the two dark lines across it, x 6741 is the rail's edge and x 6757 the west edge of the diffusion it crosses; no poly at x 6746-6752 26 px further north)
 P 6725,3600:6740,3668              # the vertical poly under the supply rail's east edge, from the north
-N P 6732,3610 tc1_p3698
+N P 6732,3610 tc1_ns2
 
 # ---- gate 2
 P 6824,3776:7000,3798              # band
@@ -798,7 +798,7 @@ B 6757,3686:6795,3722
 #     block's arm (y 3462-3480) ends on a stub of that region: buried contact (the
 #     "ladder", 6808-6838 x 3458-3497).
 # The thin metal x 6765-6785 comes from the north and ends on a poly pad (contact
-# (6772,3591)) joined west to the top of the vertical poly x 6725-6740: it is tc1_p3698.
+# (6772,3591)) joined west to the top of the vertical poly x 6725-6740: it is tc1_ns2.
 # Views cache/scratch/tc1/run7/ (survey.md there lists them).
 # =====================================================================================
 M 6882,3405 y3605 w=48             # the rail (x 6858-6906), on north: not followed
@@ -852,7 +852,7 @@ P 6748,3460:6798,3554              # the block (salmon under the thin metal x 67
 P 6748,3462:6834,3480              # its arm east (orange in the gap x 6800-6812 at y 3466-3476, not at y 3486-3495)
 B 6808,3458:6838,3484
 
-# ---- tc1_p3698's source
+# ---- tc1_ns2's source
 P 6755,3578:6795,3605              # pad
 C 6772,3591                        # ring with a bright centre in both metal shots, green hole in the clean shot
 P 6725,3578:6760,3605              # joined west to the top of the vertical poly: orange in the gap x 6743-6752 at y 3588-3594 in the chip-1 metal shot (red minus green 40-70, green 72-94; bare ground above and below 12-17, green 120-140). The clean shot is dark there (the gap between the rail's edge and the thin metal: trap)
@@ -886,7 +886,7 @@ M 6882,3240 y3410 w=48             # the rail (x 6858-6906), on north: not follo
 M 6716,3330 y3410 w=52             # the supply rail (x 6690-6742); on north: not followed
 M 6817,3300 y3410 w=12             # tc1_m6817, on north: not followed. Bright over the region; dim over the stub and the arm (y 3374-3422), bright only at x 6818-6824, y 3404-3414 in both chips (B-D of 16): as over cell B's ladder, no contact drawn (no green hole in the clean shot; Ambiguity 18)
 M 6948,3250 y3410 w=13             # tc1_o3740's metal, on north: not followed. Over the finger (y 3280-3296) it is bright between the finger's two edge bars, which run on either side of it: no ring, no hole. Dim over the box y 3338-3371 as over cell B's: no contact drawn
-M 6775,3300 y3410 w=20             # tc1_p3698's thin metal x 6765-6785, on north: not followed (its west edge is dim at y 3257-3263 in both chips: not looked at)
+M 6775,3300 y3410 w=20             # tc1_ns2's thin metal x 6765-6785, on north: not followed (its west edge is dim at y 3257-3263 in both chips: not looked at)
 M 7013,3160 y3410 w=20             # tc1_o3095, on north: only dark bars where it crosses the edges of the poly rows (y 3168, 3190, 3341, 3365, 3383), no ring in either chip, field under it in the clean shot
 M 7058,3320 y3410 w=20             # tc1_x1's channel metal, on north: bars at the same poly edges, no ring
 
@@ -950,7 +950,7 @@ B 6808,3394:6838,3420
 M 6882,2985 y3245 w=48             # the rail, on north: not followed
 M 6716,3040 y3335 w=52             # the supply rail, on north: not followed
 M 6817,3000 y3305 w=12             # tc1_m6817, on north: not followed. No contact drawn over the stub and the arm (Ambiguity 18)
-M 6775,3000 y3305 w=20             # tc1_p3698's thin metal, on north: not followed. Its west edge is dim at y 3257-3263 in both chips over plain field in the clean shot: nothing under it to contact
+M 6775,3000 y3305 w=20             # tc1_ns2's thin metal, on north: not followed. Its west edge is dim at y 3257-3263 in both chips over plain field in the clean shot: nothing under it to contact
 M 6948,2972 y3255 w=13             # tc1_o3740's metal up to the contact (6948,2977); whether it goes on north of it is not established (drawn to the contact only). No ring or hole over the bottom region (bright y 3200-3216 between the region's two edge bars), dim over the box y 3077-3113 as over the other boxes: no contact drawn
 M 7013,3085 y3165 w=20             # the channel metal x 7003-7023 from its north end on the contact (7010,3093); only edge bars where gate row 2 passes under it
 M 7058,3128 y3325 w=20             # tc1_x1's channel metal from its north end on the contact (7056,3138) (the follower: ends at (7054,3134); bare ground north of the pad)
@@ -1014,7 +1014,7 @@ B 6804,3024:6834,3052
 #   J4 (`?B`): the box is a buried contact of the band onto tc1_p3051, so cell C's gate
 #      row 1 is NOT tc1_m6817 (assumed; tc1_p3051 aliased to tc1_o2950);
 #   J5 (NOT DRAWN): the thin metal's contact (6948,2977) on the same diffusion. With it
-#      tc1_o3740 would be NOR(tc1_p3698, tc1_x1_u, tc1_m6817) with two loads;
+#      tc1_o3740 would be NOR(tc1_ns2, tc1_x1_u, tc1_m6817) with two loads;
 #   J6 (`?M`): the thin metal goes on north over the box into the L-shaped metal
 #      y 2933-2948 / x 7056, so tc1_o3740 leaves east on the bus metal y 2598 (assumed;
 #      tc1_m7056 aliased to tc1_o3740).
@@ -1022,7 +1022,7 @@ B 6804,3024:6834,3052
 # =====================================================================================
 M 6882,2800 y2990 w=48             # the rail, on north: not followed
 M 6716,2895 y3045 w=52             # the supply rail, on north: not followed
-M 6775,2800 y3005 w=20             # tc1_p3698's thin metal, on north: not followed. Dark over the gate-tie box y 2885-2915 in the chip-2 metal shot (a buried contact under a thin metal, trap 22): no contact drawn
+M 6775,2800 y3005 w=20             # tc1_ns2's thin metal, on north: not followed. Dark over the gate-tie box y 2885-2915 in the chip-2 metal shot (a buried contact under a thin metal, trap 22): no contact drawn
 M 6816,2826 y3005 w=13             # tc1_m6817 to its north end on the contact (6815,2833): bare ground north of the pad in both metal shots
 
 # ---- gate: the C-shaped poly from tc1_m6817's pad
@@ -1089,9 +1089,9 @@ M 7850,2597 x8350 w=13             # on east over the datapath (follower: end (9
 #   metal y 2575 -> pad -> row y 2566-2582 -> P2 -> metal -> track y 2899   r8_b4_q (the same)
 #   row y 2520-2540 -> P1 -> metal -> track y 2858 -> poly east         tc1_bus2858
 #   poly x 7117-7133 from the north -> pad -> metal -> track y 2814     tc1_bus2814
-#   poly x 7160-7176 from the north -> strip y 2585-2603 -> pad -> metal -> track y 2684   tc1_bus2684
-#   poly x 7201-7218 from the north -> pad -> metal track y 2554        tc1_bus2554
-# and tc1_p3698's thin metal ends on a pad whose poly is the west end of tc1_ns2.
+#   poly x 7160-7176 from the north -> strip y 2585-2603 -> pad -> metal -> track y 2684   tl4_w5068
+#   poly x 7201-7218 from the north -> pad -> metal track y 2554        c4l_l3
+# and tc1_ns2's thin metal ends on a pad whose poly is the west end of tc1_ns2.
 # Views cache/scratch/tc1/run11/.
 # =====================================================================================
 M 6882,2500 y2800 w=48             # the rail (vss), on north to the region's edge, where a wide horizontal metal lies (y < 2512: pink across x 6840-6925 at y 2505)
@@ -1147,7 +1147,7 @@ P 7117,2500:7133,2582              # from the north (open poly y 2518-2572, salm
 P 7104,2577:7140,2612              # pad
 C 7120,2596 s=14x14
 M 7114,2597 x7142 w=13             # on the pad, to its east edge
-?M 7140,2597 x7164 w=13            # across the gap between the pad's east edge and the west end of tc1_bus2684's strip: a bright piece at x 7146-7154 between two dark bars. Chip 1 reads metal there (A-C against 7-9 for bare ground), chip 2 only 9-A, which is bare-ground level; the clean shot is protected either way. Drawn because the follower runs through and the pad has no other way out; the review could not confirm it in chip 2
+?M 7140,2597 x7164 w=13            # across the gap between the pad's east edge and the west end of tl4_w5068's strip: a bright piece at x 7146-7154 between two dark bars. Chip 1 reads metal there (A-C against 7-9 for bare ground), chip 2 only 9-A, which is bare-ground level; the clean shot is protected either way. Drawn because the follower runs through and the pad has no other way out; the review could not confirm it in chip 2
 M 7162,2597 x7314 y2814 x7714 w=13 # east, lengthwise over that strip without contact, south at x 7308-7320, east on the track y 2814
 P 7692,2798:7722,2830              # pad
 C 7706,2814 s=14x14
@@ -1156,7 +1156,7 @@ P 8178,2805:8195,2907              # south, lengthwise under ns3's metal
 P 8178,2890:8350,2907              # east under ns4..ns6 without contact
 N M 7314,2700 tc1_bus2814
 
-# ---- tc1_bus2684: poly from the north, strip y 2585-2603, pad (7361,2596), metal, bus track y 2684
+# ---- tl4_w5068: poly from the north, strip y 2585-2603, pad (7361,2596), metal, bus track y 2684
 P 7160,2500:7176,2603              # from the north
 P 7160,2585:7378,2603              # the strip east (salmon under tc1_bus2814's metal); NOT joined to the pad (7104-7140): field between, x 7140-7160
 P 7348,2580:7378,2612              # pad
@@ -1168,9 +1168,9 @@ P 7655,2676:7872,2693              # under the island's right VSS rail
 P 7845,2668:7875,2700              # pad
 C 7859,2684 s=14x14
 M 7852,2684 x8350 w=13             # on east over the datapath; drawn to x 8350
-N M 7500,2684 tc1_bus2684
+N M 7500,2684 tl4_w5068
 
-# ---- tc1_bus2554: poly from the north, pad (7206,2551), bus track y 2554
+# ---- c4l_l3: poly from the north, pad (7206,2551), bus track y 2554
 P 7201,2500:7218,2540              # from the north
 P 7192,2535:7226,2568              # pad
 C 7206,2551 s=14x14
@@ -1181,13 +1181,12 @@ P 7700,2545:7912,2562              # under the island's right VSS rail
 P 7887,2537:7917,2569              # pad
 C 7901,2553 s=14x14
 M 7894,2553 x8350 w=13             # on east over the datapath; drawn to x 8350
-N M 7500,2554 tc1_bus2554
+N M 7500,2554 c4l_l3
 
-# ---- tc1_p3698 is the west end of tc1_ns2
+# ---- tc1_ns2 is the west end of tc1_ns2
 M 6775,2784 y2800 w=20             # the thin metal's north end
 P 6758,2772:6792,2802              # pad: salmon with a green hole (6768-6782, 2786-2798) in the clean shot
 C 6773,2790 s=14x14                # bright centre (6766-6780, 2784-2796) in a dark ring in the chip-2 metal shot
 P 6785,2782:7026,2798              # row east: open poly x 6802-6850, salmon under the rail, on to x 7026. NOT joined to the row on the same y east of x 7048 (run 10)
 P 7008,2782:7026,2887              # south in the open (column x 7017: poly from y 2780 to y 2884)
 P 7008,2867:7185,2885              # east under tc1_o3740's, tc1_m7100's and tc1_o4020's metals without contact, into ns2's west poly (drawn from x 7180 in run 2)
-@alias tc1_ns2 tc1_p3698

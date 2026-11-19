@@ -11,9 +11,9 @@ drawn here (two of trunks' pass through, already drawn; the west end is `eof`'s 
 
 | Join | What it says |
 |---|---|
-| `tl1_w3333` = `tl4_w4068` | the data of `tl1`'s third latch is the enable of `tl4`'s latch (which is also `tl5_w3982`, the enable of `tl5`'s latch b) |
-| `c4l_l3` = `tc1_bus2554` | the 4-bit counter's L3 line (= NOT `tl4_w4243`) also goes east on `tc1`'s top bus track y 2554 |
-| `tl4_w5068` (`tl5_w5500`) = `tc1_bus2684` | `tl4`'s NOR(`tl4_w4545`, `tl4_w4850`) goes east on `tc1`'s track y 2684 |
+| the wire `tl1` called w3333 = `tl4_w4068` | the data of `tl1`'s third latch is the enable of `tl4`'s latch (which is also `tl4_w4068`, the enable of `tl5`'s latch b) |
+| the bus-fan line y 2554 of `tc1` = `c4l_l3` | the 4-bit counter's L3 line (= NOT `tl4_w4243`) also goes east on `tc1`'s top bus track y 2554 |
+| `tl4_w5068` (the wire `tl5` called w5500) = `tl4_w5068` | `tl4`'s NOR(`tl4_w4545`, `tl4_w4850`) goes east on `tc1`'s track y 2684 |
 | `tl6_p6101` = `tc1_bus2814` | `tl6`'s track x 6059 and `tc1`'s north poly x 7117-7133 are one poly (the track y 2814 itself hangs on `tc1`'s `?M` at x 7140-7164) |
 
 The three rows to `tc1` run on east of the region's edge x 6400 to x 7218, in ground no package holds
@@ -45,8 +45,8 @@ The three rows to `tc1` run on east of the region's edge x 6400 to x 7218, in gr
 
   | Net | From (`tl6`, y 2500) | Row y | To (`tc1`, y 2500) |
   |---|---|---|---|
-  | `c4l_l3` | x 5877-5897 | 2394-2406 | x 7201-7218 (`tc1_bus2554`) |
-  | `tl4_w5068` | x 5918-5938 (`tl5_w5500`) | 2437-2450 | x 7160-7176 (`tc1_bus2684`) |
+  | `c4l_l3` | x 5877-5897 | 2394-2406 | x 7201-7218 (`c4l_l3`) |
+  | `tl4_w5068` | x 5918-5938 (`tl4_w5068`) | 2437-2450 | x 7160-7176 (`tl4_w5068`) |
   | `tl6_p6101` | x 6052-6072 | 2480-2495 | x 7117-7133 (`tc1_bus2814`) |
 
   Rows: `tools/tlb_scan.py v 2370 2515 5980 6100 6250 6400 6550 6700 6800 6950 7050 7090` (the same three
@@ -67,12 +67,12 @@ None of its own. With the joins: `tl1_w5841` = NOT((`ck_out` AND `tl4_w4068`) OR
 
 | Name | Layer | Place | Dir | Note |
 |---|---|---|---|---|
-| `tl4_w4068` | P | (3450-3470, 2506) | ? | onto `tl2`'s poly `tl1_w3333` |
+| `tl4_w4068` | P | (3450-3470, 2506) | ? | onto `tl2`'s poly `tl4_w4068` |
 | `tl4_w4068` | P | (4533-4551, 2506) | ? | onto `tl4`'s column |
 | `c4l_l3` | P | (5878-5896, 2506) | in | from `tl6`'s poly |
-| `c4l_l3` | P | (7200-7218, 2506) | out | onto `tc1_bus2554`'s poly |
-| `tl4_w5068` | P | (5919-5937, 2506) | in | from `tl6`'s poly `tl5_w5500` |
-| `tl4_w5068` | P | (7159-7177, 2506) | out | onto `tc1_bus2684`'s poly |
+| `c4l_l3` | P | (7200-7218, 2506) | out | onto `c4l_l3`'s poly |
+| `tl4_w5068` | P | (5919-5937, 2506) | in | from `tl6`'s poly `tl4_w5068` |
+| `tl4_w5068` | P | (7159-7177, 2506) | out | onto `tl4_w5068`'s poly |
 | `tl6_p6101` | P | (6053-6071, 2506) | ? | onto `tl6`'s poly |
 | `tl6_p6101` | P | (7116-7134, 2506) | ? | onto `tc1_bus2814`'s poly |
 | `vss` | M | (7240, 2193-2505) | - | the plane goes on east |

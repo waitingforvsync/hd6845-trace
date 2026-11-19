@@ -552,7 +552,7 @@ Each is in the named block's notes in full; the trace fixes are on main.
 - The bus piece `M 4148,3371 y3596`: its south end is a pad with a contact (4148,3592) (in
   `trace/tl3.txt`), gate of `tl3_e3550`'s NOR and of `tl3_e3712`'s inverter.
 - **Bus line E is driven from `tl4`**: its top pad's poly to the pad (4270,2725) is under the sixth bus
-  line, which comes down the track x 4496 from `tl4`'s inverter: `rcs_e3` = NOT `tl4_w3850`. The pad
+  line, which comes down the track x 4496 from `tl4`'s inverter: `rcs_e3` = NOT `bd1_n2`. The pad
   rectangle `P 4250,2708:4290,2742` is about 8 px west of the pad (x 4258-4298): geometry only.
 - The VCC rail `M 3846,3040 y5497` goes on north to y ~2922 (drawn in `trace/tl3.txt`, with E1's VCC
   contact); the VSS rail `M 4017,3050 y5300`'s south end is at y ~5296, as drawn.
@@ -562,3 +562,7 @@ Each is in the named block's notes in full; the trace fixes are on main.
 
 - `rcs_thin_e`'s south end: its row y 6327 ends on the pad (3973,6329), whose metal goes south to `ur`'s
   pad (3968,6410) and a poly east along y 6402-6422 (`tl3` run 11; not `sl_l3`).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- `tl3_w3982`'s driver is `eof`'s inverter U4 at (7575,8386) (run 12). For the reader of `rcs_e4`'s line through the nest at y 7888-8275: the tracks west of it are named (x 6645 `lpstb_b`, 6602 `res_b`, 6558 `rst_a`, 6514 `tl3_w3982`; `eof` runs 10-11).

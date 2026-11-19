@@ -13,7 +13,7 @@ M 3645,2455:3770,2500                # the tab; it runs on south to tl3's rail (
 M 4914,2455:7240,2505
 N M 3000,2300 vss
 
-# ---- tl1_w3333 is tl4_w4068. tl2's poly (3450-3470, 2500) runs north under the plane (tlb_scan.py: x 3453-3466
+# ---- the wire `tl1` called w3333 is tl4_w4068. tl2's poly (3450-3470, 2500) runs north under the plane (tlb_scan.py: x 3453-3466
 # at seven cuts) and under mal's metal y 2142 (no pad) to a pad with a contact (3458,2096); a metal y 2091-2105
 # east to a pad with a contact (4540,2098) (follow.py --gap 16: 3452 to 4540, no tap; the candidate at x 4370
 # is a speck in the clean shot only); the poly from that pad south under mal's metal and the plane
@@ -26,17 +26,14 @@ P 4522,2080:4560,2115                # pad
 C 4540,2098
 P 4542,2105 y2506 w=18
 N P 3460,2300 tl4_w4068
-@alias tl4_w4068 tl1_w3333
 
 # ---- Three polys under the plane's south-east part, nested: each comes north from tl6's strip, turns east,
 # runs 1,100-1,300 px and turns south onto tc1's bus fan. Rows from tlb_scan.py v at ten x (y 2394-2406,
 # 2437-2450, 2480-2495, straight); corners in b1.png (west) and b3.png (east), both stripped shots.
-P 5887,2506 y2400 x7209 y2506 w=18   # c4l_l3: tl6's (5877-5897, 2500) to tc1_bus2554's (7201-7218, 2500)
+P 5887,2506 y2400 x7209 y2506 w=18   # c4l_l3: tl6's (5877-5897, 2500) to c4l_l3's (7201-7218, 2500)
 N P 6500,2400 c4l_l3
-@alias c4l_l3 tc1_bus2554
-P 5928,2506 y2444 x7168 y2506 w=18   # tl6's tl5_w5500 (5918-5938, 2500) to tc1_bus2684's (7160-7176, 2500)
+P 5928,2506 y2444 x7168 y2506 w=18   # tl6's tl4_w5068 (5918-5938, 2500) to tl4_w5068's (7160-7176, 2500)
 N P 6500,2444 tl4_w5068
-@alias tl4_w5068 tc1_bus2684
 P 6062,2506 y2488 x7125 y2506 w=18   # tl6_p6101 (6052-6072, 2500) to tc1_bus2814's (7117-7133, 2500)
 N P 6500,2488 tl6_p6101
 @alias tl6_p6101 tc1_bus2814

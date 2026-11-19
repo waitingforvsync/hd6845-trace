@@ -223,7 +223,7 @@ c's lower end over the strobe line has no contact.
   slice from above y 5700 to below y 7821; `cdp2_c_sK_bus` is an alias of
   `cdp2_a_sK_bus`). The first run saw it "interrupted" inside row B2 at y 7190-7240 and
   7317-7371: there it runs over poly blocks and only looks narrow (Conventions). s1 and
-  s2 have their own lines (`cdp2_c_s1_bus`, `cdp2_c_s2_bus`).
+  s2 have their own lines (`db_b6`, `db_b5`).
 
 Believed: a 7-bit register of which two bits (s1, s2) are used to the left of the array
 and five (s3..s7) are compared in rows B with the 5-bit value on the through tracks.
@@ -346,7 +346,7 @@ How the nets are made (coordinates of the master):
 | Name | Layer | Where it crosses | Direction | What |
 |---|---|---|---|---|
 | `cdp2_a_sK_bus` (K=3..7) = `cdp2_c_sK_bus` | metal | x 8856, 9246, 9636, 10026, 10416 at y 5700 (top edge, no contact in channel 1) and at y 7821 (down below row C: they cross channel 3 without contact in s4, s5 and enter row D; drawn to y 7821 only) | into the rows | data bus bit lines; one line per slice through rows A, B and C |
-| `cdp2_c_s1_bus`, `cdp2_c_s2_bus` | metal | x 8118 and x 8535 at y 7395, going up; x 8075, 8465 at y 7821 going down | in | bus lines of row C's s1, s2 (jog at the cell top) |
+| `db_b6`, `db_b5` | metal | x 8118 and x 8535 at y 7395, going up; x 8075, 8465 at y 7821 going down | in | bus lines of row C's s1, s2 (jog at the cell top) |
 | `cdp2_a_sK_q` (K=3..7) | metal, contact at y 5740 | (9118,5740), (9508,5740), (9897,5740), (10287,5740), (10677,5740); beyond the contact not traced | out, to the rows above | row A latch output, same sense as the bus |
 | `cdp2_trk_s3` | metal | x 9334, y 5700 (the metal in s4's column, via the jumper y 5783) | ? | through track of s3, upper end |
 | `cdp2_trk_s3` | metal | (8335,6066) going down | ? | same net, via line 6042, to the logic left of row A |

@@ -1,17 +1,17 @@
 # tl6: top-left random logic, sixth strip (a track field; no gate)
 5700,3640:6230,3890   route  latch c's data and clear from tcw | rows y 3659 (tcw_m6320) and y 3872 (c4l_gab) from tl5's ports to tcw's pads
 5700,3700:5725,6210   route  track U0: latch a's enable | tl5_w3505 from the row y 3722 south to the row y 6195 and out south at x 5972
-5743,3990:6400,4015   route  inh_ck row | from fld's pad (6400,4005) west to the track U1 (x 5755), which runs south to y 6065
+5743,3990:6400,4015   route  rst_ck row | from fld's pad (6400,4005) west to the track U1 (x 5755), which runs south to y 6065
 5786,4120:6320,4650   route  latch c's output to tcw_c | tl5's row y 4633, track U2's upper piece, row y 4134 to fld's pad
-5683,4425:5945,4535   route  rows to the tracks U4 and U5 | tl5_w5500 and c4l_l3, north on x 5930 and x 5886 and out north
+5683,4425:5945,4535   route  rows to the tracks U4 and U5 | tl4_w5068 and c4l_l3, north on x 5930 and x 5886 and out north
 5683,4465:6400,4495   route  tc1_o3527 west | bus metal y 4482 from tc2, pad (6010,4480), row to tl5's track T10
 5683,4580:5880,4860   route  latch c's inverse output to inverter 1 | tl5_w4503: row y 4590, track U2's middle piece, row y 4849
 5683,4775:6400,4890   route  ras_o0_alt2 from inverter 1 | tl5's row y 4808, pad (6058,4872), bus metal y 4787 east to tc2
-5740,6045:6115,6350   route  inh_ck, tl5_w5674, tl5_w3505, ral_stb going south | rows y 6065-6325 between pads; ral_stb from tc2's metal y 6328 to the pad (5755,6322)
+5740,6045:6115,6350   route  rst_ck, tl4_w4590, tl5_w3505, ral_stb going south | rows y 6065-6325 between pads; ral_stb from tc2's metal y 6328 to the pad (5755,6322)
 6040,2500:6400,2680   route  north ends of the tracks U8-U11 and tcw's x 6276 | pads (6057,2595), (6105,2552) with polys north and east; three metals from the east along y 2573, 2619, 2665
 6050,2680:6200,4390   route  tracks U8-U11 | tl6_p6101, tl6_p6143, tl6_p6187 and tc2_m6404 from the north ends down to the crossing field's north pads
-6040,4390:6300,4890   route  crossing field: five polys under eight bus metals | the polys x 6101-6275 (tl6_p6101, tl6_p6143, tl6_p6187, tc2_m6404, tcw_m6404) pass under tc1_o3527, ra_eq_r9, c4l0..c4l3, sl_eq_r5_n's line and ras_o0_alt2 without a contact
-6090,4890:6400,6170   route  six metals from the field's foot to tc2's nest and to three pads | nested corners at y 5569-5790; tc2_m6404, tcw_m6404 (= tc2_m6447) and tc1_p4308 (= tc2_m6490) east into tc2; three polys south from the pads (6275,6152), (6318,6110), (6360,6152)
+6040,4390:6300,4890   route  crossing field: five polys under eight bus metals | the polys x 6101-6275 (tl6_p6101, tl6_p6143, tl6_p6187, tc2_m6404, lc3_w9947) pass under tc1_o3527, ra_eq_r9, c4l0..c4l3, sl_eq_r5_n's line and ras_o0_alt2 without a contact
+6090,4890:6400,6170   route  six metals from the field's foot to tc2's nest and to three pads | nested corners at y 5569-5790; tc2_m6404, lc3_w9947 (the gate line of tcw's column and tc2's metal x 6447) and tc1_p4308 (= the wire `tc2` called m6490) east into tc2; three polys south from the pads (6275,6152), (6318,6110), (6360,6152)
 5843,5035:6400,5185   route  tc2_o5175 going west | the NOR's output row y 5173, a corner at x 6259, row y 5045 to r9m's pad (5845,5045): r9m's line 3
 5882,5977:6400,6245   power  wide ground metal | vss band from tc2's piece west, north, west and south (no contact in the strip)
 5683,6228:6246,6350   route  rcs_mv | row y 6238 east to a corner at x 6236 and south

@@ -18,7 +18,7 @@ poly steps down one track going east. The trace was redrawn accordingly:
   `rcs_mv`". Firm geometry (no `?` on the path).
 - Pad (4912,2641), with the metal down x 4194, the stub and track P's lower piece, belongs
   to the poly that steps down to a pad (5405,2681) and the metal along y 2685 to x 5848
-  and south to (5845,5045): "bundle line 3", named `r9m_l3`. Track P's split (AMB-013)
+  and south to (5845,5045): "bundle line 3", named `tc2_o5175`. Track P's split (AMB-013)
   stands, confirmed by the review's measurements, but the two pieces carry the opposite
   nets to what the earlier text below says.
 - Pad (5400,2596) does not join line 1's west part: its poly turns north at x 5175 and
@@ -196,7 +196,7 @@ beyond (4494,3813).
 
 ## Note (coordinator, from the handoffs of 2026-11-17/18)
 
-`sl_eq_r5_n`'s east end is drawn by `tc2` (not an open end). `r9m_l3` has a driver: `tc2_o5175`, joined
+`sl_eq_r5_n`'s east end is drawn by `tc2` (not an open end). the wire `r9m` called l3 has a driver: `tc2_o5175`, joined
 by `tl6` (join 10, contact (5845,5043)).
 
 ## Correction from `tl3` (coordinator, from the handoffs of 2026-11-18, second batch)

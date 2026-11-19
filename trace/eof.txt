@@ -26,7 +26,7 @@
 #   rdp3: L7, jog onto L6 (y 11507), jog onto L5 (y 12313), poly link y 12826, L9 to y 13480;
 #   LINK B (here): L9 straight from y 13480 to bd1's track k15 at y 14690 (its net rc_eq_r4);
 #   bd1: k15, jog west at y 15087, contact (13655,15391), the poly of gate P2 (the latch's
-#     upper half, in series with inh_lat) and of P4 (inverter A).
+#     upper half, in series with rst_lat) and of P4 (inverter A).
 #
 # Evidence for link A:
 #  - a_top.png (2.8x, metal / chip-2 stripped / clean): the poly row from L0's contact runs
@@ -175,16 +175,16 @@ N M 3560,2512 sl_eq_r5_n                # tl2's name for the metal that arrives 
 # this file holds three pieces of it, each under the name its neighbour uses there).
 
 # ============================================================================================
-# Piece tcwa (run 2): inh_ck from tl6's end (6105,6350) to trunks' line S (inh_ck), and a tap.
+# Piece tcwa (run 2): rst_ck from tl6's end (6105,6350) to trunks' line S (rst_ck), and a tap.
 # Wiring only.
 #
 # The line's path:
-#   tl6 draws inh_ck's metal x 6105 south to (6105,6350);
+#   tl6 draws rst_ck's metal x 6105 south to (6105,6350);
 #   LINK E (here): the metal runs on south, straight, to a corner (6105,7346); east along y 7346,
 #     lying on lc1_w7040's poly row without a contact, to a corner (6298,7346), 20 px short of the
 #     ring of lc1's pad (6341,7345); south to a corner (6298,7432); east along y 7432 (on another
 #     poly row, no contact) to a corner (6430,7432); south along x 6430, through a pad with a
-#     contact (6427,7648) (the tap, below), to y 8067, where lc2 draws it on (inh_ck:
+#     contact (6427,7648) (the tap, below), to y 8067, where lc2 draws it on (rst_ck:
 #     M 6431,8067 y8172 x6450);
 #   lc2: the corner (6431,8172) and east to x 6450;
 #   LINK F (here): east along y 8172 to a corner (6559,8172), 18 px south of the ring of another
@@ -194,7 +194,7 @@ N M 3560,2512 sl_eq_r5_n                # tl2's name for the metal that arrives 
 #     x6690: "continues left (not followed)");
 #   trunks: the staircase to the contact (7034,8535), a poly under-pass to the contact (7034,8797),
 #     the metal down the left bus field (x 6862, x 6798), the bottom bus line y 18428 and line L4
-#     to the output of the lone inverter of the input buffer row: the net inh_ck (= NOT inh_n).
+#     to the output of the lone inverter of the input buffer row: the net rst_ck (= NOT rst_a_n).
 #   THE TAP: from the pad (6427,7648) a poly row y 7640-7656 runs east across the crossing field,
 #     under two dozen vertical metals without a pad, to a gate group nobody has drawn under the wide
 #     metal x 7550-7600 (its diffusion from x 7540): drawn to x 7530 (notes, Not done).
@@ -230,24 +230,24 @@ N M 3560,2512 sl_eq_r5_n                # tl2's name for the metal that arrives 
 #    centre, hole; the staircase: tl5_tracks.py v 6757 8380 8440, h 8452 6770 6920, v 6930 8465
 #    8525, h 8536 6945 7030: bars only; follow.py 6330 7432 E gives every corner as drawn.
 M 6105,6345 y7346 x6298 y7432 x6430 y8072 w=14     # link E
-N M 6105,6800 inh_ck
+N M 6105,6800 rst_ck
 P 6412,7632:6446,7664               # the tap's pad
 C 6427,7648
 P 6427,7648 x7530 w=16              # the row east; it goes on as row 1 of the gate (piece g7700, below)
 M 6445,8172 x6559 y8367 x6695 w=14  # link F: lc2's end (x 6450) to trunks' end (x 6690)
-N M 6559,8300 inh_ck                # lc2's name for the metal that arrives here
-# In the full extraction inh_ck (then under three names; the clock block's and inrow's name for the
+N M 6559,8300 rst_ck                # lc2's name for the metal that arrives here
+# In the full extraction rst_ck (then under three names; the clock block's and inrow's name for the
 # net of trunks' line S) are one net. Read by itself this file holds two pieces of it.
-# inh_ck is kept as the name the net is shown under only because tl3 and tl6 alias five other
+# rst_ck is kept as the name the net is shown under only because tl3 and tl6 alias five other
 # names to it and the extractor wants every alias to point straight at the one shown name; the
-# net IS inh_ck, and the rename to inh_ck was proposed (done 2026-11-19) in the handoff (notes, Logic).
+# net IS rst_ck, and the rename to rst_ck was proposed (done 2026-11-19) in the handoff (notes, Logic).
 
 # ============================================================================================
 # Piece x1 (run 2): the poly bus that leaves tl5's strip south across y 6350, down to its pads,
 # and the pads' metals to lc1's wires at y 6900. Wiring only. It joins rcs_x1, the clear
 # rst_a, res_b and lpstb_b to the left-centre gate column (lc1).
 #
-#   tl5 draws ten vertical polys to y 6350; the five western ones are, by x: 5063 (tl5_w5936),
+#   tl5 draws ten vertical polys to y 6350; the five western ones are, by x: 5063 (tl3_w3982),
 #   5107 (rcs_x1), 5150 (rst_a), 5192 (res_b), 5237 (lpstb_b);
 #   HERE: each runs on south, straight, under the nine horizontal metals of y 6360-6725 without
 #   a contact; four end on a pad with a contact, from which a metal goes on south:
@@ -311,8 +311,8 @@ M 5236,6803 y6905 w=14              # onto lc1's V3
 P 5240,6815 y6872 w=16              # the poly on south under V3: x 5232-5250 to y 6872, then it bends
                                     # south-east (review round 3)
 N P 5237,6500 lpstb_b
-P 5063,6345 y6880 w=18              # tl5_w5936's line, on south (no pad; not followed below y 6880)
-N P 5063,6500 tl5_w5936
+P 5063,6345 y6880 w=18              # tl3_w3982's line, on south (no pad; not followed below y 6880)
+N P 5063,6500 tl3_w3982
 # The joins, in the full extraction (each pair is one net; the first name is the one shown):
 
 # ============================================================================================
@@ -378,8 +378,8 @@ B 2446,2440:2474,2466
 N P 2462,2485 tl1_w2637
 
 # ============================================================================================
-# Piece isrc (run 4, 2026-11-19): inh_src on from two of the three ends that trunks left open
-# (notes/blocks/trunks.md, "inh_src followed west"). Wiring only. Its driver is NOT on these
+# Piece isrc (run 4, 2026-11-19): rst_a on from two of the three ends that trunks left open
+# (notes/blocks/trunks.md, "rst_a followed west"). Wiring only. Its driver is NOT on these
 # branches as far as they are drawn: every end reached so far is a pad whose poly goes on
 # into the gate columns of the bottom-centre logic.
 #
@@ -401,7 +401,7 @@ P 10226,15912 y15783 w=16
 P 10209,15766:10243,15800
 C 10226,15783
 M 10226,15788 y15654 x10312 y15308 x10396 y15083 w=13
-N M 10312,15500 inh_src
+N M 10312,15500 rst_a
 #
 # LINK H: west of trunks' pad (9770,18081) the bus line goes on: poly under two vertical
 #   metals (x ~9640-9684 and ~9716-9732) to a pad with a contact (9554,18081); metal west along y 18083 to a pad with a
@@ -427,7 +427,7 @@ P 8970,18081 8970,17900 8970,17735 w=18
 P 8949,17718:8983,17752
 C 8967,17735
 M 8968,17740 y15255 w=13
-N M 8968,16400 inh_src
+N M 8968,16400 rst_a
 P 8949,16721:8983,16753              # tap pad; its row goes on west (not followed)
 C 8966,16737
 P 8930,16728:8955,16746
@@ -443,9 +443,9 @@ C 8688,17737
 # (its poly on west: piece isrc4, below)
 
 # ============================================================================================
-# Piece isrc4 (run 9, 2026-11-19): inh_src on from its fourth open end, the poly west of the pad
-# (8688,17737). Wiring only, no uncertain item. It ends on busl's poly row of inh_src:
-#     inh_src IS lc2's through line x 6299, the first through line of the left-centre strips
+# Piece isrc4 (run 9, 2026-11-19): rst_a on from its fourth open end, the poly west of the pad
+# (8688,17737). Wiring only, no uncertain item. It ends on busl's poly row of rst_a:
+#     rst_a IS lc2's through line x 6299, the first through line of the left-centre strips
 # (lc2's metal from its east edge (6450,8630); lc3 and busl bring it down the left bus field to the
 # row y 14914). On the way two more gate rows (the clear rows of two undrawn latch units under the
 # rail x 8336-8384: bc1 column A / bc3; copies of tl1's cells by findcell, not placed here).
@@ -484,7 +484,7 @@ P 8036,17718:8070,17752
 C 8053,17735
 # B
 M 8057,17735 y17301 x8103 y16697 x8185 y16303 w=13
-N M 8103,17100 inh_src
+N M 8103,17100 rst_a
 P 8084,16892:8120,16926              # the tap pad on the track x 8103
 C 8100,16910
 P 8100,16909 x8326 w=18              # the tap's row: a gate at x 8283-8311 (the diffusion under it is not drawn)
@@ -496,20 +496,20 @@ P 7950,16286:7986,16322
 C 7968,16303
 # D
 M 7967,16303 y14914 x7880 w=13
-N M 7967,15600 inh_src
+N M 7967,15600 rst_a
 P 7862,14896:7897,14930
 C 7880,14914
 # E
 P 7540,14914 x7880 w=20
-N P 7700,14914 inh_src
+N P 7700,14914 rst_a
 
 # ============================================================================================
-# Piece g7700 (run 5): the gate at the end of inh_ck's tap row (task (c) of the queue row).
+# Piece g7700 (run 5): the gate at the end of rst_ck's tap row (task (c) of the queue row).
 #   One gate between the VSS rail of the central datapath's column 0 (here x 7552-7598) and the
 #   wide metal x 7725-7775 (VCC, by the load):
-#       eof_w7818 = NOT( eof_w7777 AND (inh_ck OR eof_w7718) )
+#       tc2_r5589 = NOT( eof_w7777 AND (rst_ck OR tc2_sr_g) )
 #   A diffusion column under the rail (x 7541-7611, y 7613-7820) is crossed by three poly rows:
-#   row 1 (inh_ck, the tap row), row 2 (eof_w7718) and row 3 (eof_w7777). Between rows 1 and 2
+#   row 1 (rst_ck, the tap row), row 2 (tc2_sr_g) and row 3 (eof_w7777). Between rows 1 and 2
 #   the rail's one contact (7572,7684): the source of both. The drain north of row 1 and the
 #   drain south of row 2 are joined east of the rail by a diffusion ring (top strip, strap
 #   x 7637-7654, bottom strip) round a field island on which rows 1 and 2 end (they are NOT
@@ -535,11 +535,11 @@ C 7572,7684                          # the one contact, in S (ring in both chips
 D 7600,7613:7654,7628                # ring: top strip, from A east
 D 7637,7613:7654,7757                # ring: the strap
 D 7600,7745:7654,7757                # ring: bottom strip, back to B
-P 7525,7638:7632,7656                # row 1 (inh_ck) on from the tap row's drawn end, to its end cap on the island
+P 7525,7638:7632,7656                # row 1 (rst_ck) on from the tap row's drawn end, to its end cap on the island
 P 7500,7718 x7632 w=20               # row 2 over the column to its end cap (y 7708-7728)
 P 7500,7708:7527,7745                # row 2's widened step
 P 7262,7735 x7527 w=19               # row 2 west (y 7726-7745) to its pad
-N P 7400,7735 eof_w7718
+N P 7400,7735 tc2_sr_g
 P 7634,7777 x6886 y7821 x6450 w=19   # row 3: west through the crossing field, a corner (6886,7777), down one
                                      # track, west on the row y 7812-7830 to lc1's east edge (not followed further)
 N P 7300,7777 eof_w7777
@@ -568,7 +568,7 @@ M 7272,6912 y7610 w=12               # a thin metal north, 690 px: over bare fie
 P 7254,6893:7291,6928                # its north pad
 C 7272,6912
 P 7277,6875 y6912 w=18               # the pad's poly leaves north towards a row y 6862 (not followed)
-N M 7401,7700 eof_w7818
+N M 7401,7700 tc2_r5589
 # row 2's pad (7267,7736) and its two metals: east then north to a pad (7313,7215); south (a long
 # run, followed by follow.py to (6514,8254), not drawn beyond the stub)
 #   t14.png, t18.png, t19.png, t20.png; textmap.py 7222 7696 7336 7800 3 (row 2's pad: ring of 8-10 px on
@@ -588,7 +588,7 @@ M 7273,7736 y7800 w=12               # the south metal's first 60 px
 # Its slave output, on the copy's track C (x 4553-4571), is the L-shaped metal that lc2 drew as the clock of its
 # first flip-flop: lc2_w8475. Master (x,y) is at (x, y+780) in the copy. The copy's nets (master's name -> here):
 #   lc2_w8475 (clock) -> eof_w9255      lc2_w8552 (master latch, K1) -> eof_w9332     lc2_w8725 (K2) -> eof_w9505
-#   lc2_w8857 = lc2_w8298 (slave, K3) -> lc2_w8475      lc2_w8930 = lc2_w8692 (K4) -> eof_w9472
+#   the wire `lc2` called w8857 = lc2_w8298 (slave, K3) -> lc2_w8475      the wire `lc2` called w8930 = lc2_w8692 (K4) -> eof_w9472
 #   clear lc2_w8907 (track B) and lc1_w7170 (track A): the same two tracks run on down from lc2's flip-flop
 #     eof_w9332 = NOT( eof_w9255 AND lc2_w8475  OR  eof_w9505  OR  lc2_w8907 )     K1
 #     eof_w9505 = NOT( eof_w9255 AND eof_w9472  OR  eof_w9332 )                    K2
@@ -644,8 +644,8 @@ N P 4660,9472 eof_w9472
 # read in the chip-2 metal and stripped shots and chip 1's metal shot, which agree; the clean shot is used only where
 # metal protected it (under bd1_n1's metal and beside the VCC rail), because in the open gap it shows edges light and
 # plain features dark (tracing guide, trap 28). Measurements: cache/scratch/eof/survey.md, "Task (e)".
-#     bd1_n2 = NOT( bd1_an AND inh_lat  OR  bd1_n1 )        with bd1_q = bd1_n2 through the tie (uncertain items)
-#     bd1_n1 = NOT( rc_eq_r4 AND inh_lat  OR  bd1_n2 )
+#     bd1_n2 = NOT( bd1_an AND rst_lat  OR  bd1_n1 )        with bd1_q = bd1_n2 through the tie (uncertain items)
+#     bd1_n1 = NOT( rc_eq_r4 AND rst_lat  OR  bd1_n2 )
 # -- the load: a poly block x 13937-13992 from bd1's band (P 13896,15630:13996,15650, the net bd1_q) down over a strip
 # y 15659-15689 that comes west from the VCC land (bd1's D 14000,15567:14048,15687). The same profile as the upper
 # half's load 97 px above (px.py col 13962 15520 15720 4 acid1b,metal1: poly, a dark line, the bright channel, a dark
@@ -669,7 +669,7 @@ P 13895,15618:13909,15640
 @alias bd1_n2 bd1_q
 
 # ================================================================ piece n2out (task (e), run 8): the latch's output
-# bd1 drew a strip under bd1_an's metal (D 13773,15634:13804,15730: top segment, the channel under inh_src's gate
+# bd1 drew a strip under bd1_an's metal (D 13773,15634:13804,15730: top segment, the channel under rst_a's gate
 # y 15661-15681, lower segment with the buried contact to bd1_k's poly) as "the pull-down of bd1_k", 8-13 px clear
 # of N2. In the open gap between bd1_an's metal (east edge x 13793) and the ground rail (west edge x 13822) the
 # lower segment IS N2: at y 15712-15736 the bare ground is one plain area from the metal's edge to the rail's, with
@@ -677,8 +677,8 @@ P 13895,15618:13909,15640
 # shots; the clean shot has the dark bar of a diffusion crossing there (as at N1, y 15580, and between P2 and P3,
 # y 15519) and no green field strip (as at y 15657-15703). So bd1_k is bd1_n2: the latch's output leaves west on
 # bd1_k's poly. The top segment joins the ground diffusion under the rail the same way at y 15638-15652 (bd1's ?D,
-# firm here on the same three tests), so inh_src gates a third pull-down of N2:
-#     bd1_n2 = NOT( bd1_an AND inh_lat  OR  bd1_n1  OR  inh_src )
+# firm here on the same three tests), so rst_a gates a third pull-down of N2:
+#     bd1_n2 = NOT( bd1_an AND rst_lat  OR  bd1_n1  OR  rst_a )
 D 13795,15712:13830,15736          # N2 west of the rail, in the gap: onto the strip's lower segment (13 px over bd1's N2; review round 10)
 D 13795,15638:13840,15652          # the strip's top segment east through the gap onto the ground diffusion (vss contact 13845,15657)
 @alias bd1_n2 bd1_k
@@ -735,11 +735,11 @@ C 7600,18082
 P 7422,18081 x7598 w=16
 P 7405,18064:7439,18098
 C 7422,18081
-# --- M: metal west to a corner (6712,18083), north up the left bus field (two tracks west of inh_ck's x 6797)
+# --- M: metal west to a corner (6712,18083), north up the left bus field (two tracks west of rst_ck's x 6797)
 M 7424,18083 x6712 y16517 w=13
 P 6692,16502:6726,16536
 C 6708,16519
-# --- N: poly link under the supply buses y 16230-16490 (like inh_ck's beside it)
+# --- N: poly link under the supply buses y 16230-16490 (like rst_ck's beside it)
 P 6712,16519 y16173 w=18
 P 6694,16156:6728,16190
 C 6710,16173
@@ -748,10 +748,10 @@ M 6711,16185 y15000 w=13
 N M 6711,15600 bd1_n2
 
 # ============================================================================================
-# Piece isrc5 (run 10, 2026-11-19): inh_src (lc2's first through line) followed from lc2's
+# Piece isrc5 (run 10, 2026-11-19): rst_a (lc2's first through line) followed from lc2's
 # east edge (6450,8630) back to its source. Wiring only, no uncertain item. It ends on this file's
 # own poly of piece x1, rst_a's line below its pad (5147,6803):
-#     inh_src IS rst_a, the buffered NOR(lpstb_b, res_b) of lc1's gate 5
+#     line X (the first through line of the left-centre strips) is `rst_a`, the buffered NOR(lpstb_b, res_b) of lc1's gate 5
 # (rst_a = NOT rst_n, rst_n = NOT rst, rst = NOR(lpstb_b, res_b): lc1's gates 3-5).
 #
 # The path, from lc2's metal end back to rst_a's poly:
@@ -760,8 +760,8 @@ N M 6711,15600 bd1_n2
 #      pad with a contact (6513,8538) (textmap.py 6480 8505 6545 8575 3 --acid: ring x 6495-6535,
 #      y 8523-8556, bright centre in both chips);
 #   B  the pad's poly, x 6508-6528, 450 px north to a pad with a contact (6513,8087) (textmap.py
-#      6486 8085 6540 8530 3 --acid; 6486 8000 6580 8100 3). It passes under inh_ck's link F (metal
-#      y 8166-8178), under eofw's metal of lc1_w7908, whose vertical arm x 6508-6522, y 8259-8411 LIES ON
+#      6486 8085 6540 8530 3 --acid; 6486 8000 6580 8100 3). It passes under rst_ck's link F (metal
+#      y 8166-8178), under eofw's metal of tc2_sr_g, whose vertical arm x 6508-6522, y 8259-8411 LIES ON
 #      IT for 150 px (no ring, no pad, no dark stretch in either chip: tl5_tracks.py v 6515 8262 8408
 #      --half 2), and under an undrawn metal y 8448-8460: no contact with any;
 #   C  metal from the pad north over a poly row (y 8027-8054) to a corner (6513,8018), east to a corner
@@ -782,7 +782,6 @@ N M 6711,15600 bd1_n2
 #      (rst_a). The row and the diagonal keep their lane (tools/eof_rows.py diag 5490 7258 6170 7257
 #      --step 20 --reach 56; diag 5497 7259 5140 6902 --step 14: the line at offset -5..+9 at every cut,
 #      its neighbours 43-47 px either side; row cuts y 6890-6930: the bend is at y 6912).
-@alias rst_a inh_src
 # A
 M 6444,8636 6509,8571 6513,8560 y8538 w=14
 P 6494,8521:6536,8557
@@ -803,8 +802,8 @@ N P 5800,7257 rst_a
 # Piece rl (run 11, 2026-11-19): res_b and lpstb_b on from piece x1's ends (the polys below their
 # pads (5190,6845), (5237,6803)) through lc1's diagonal poly bundle and the crossing field to lc2's
 # second and third through lines. Wiring only, no transistor, no uncertain item:
-#     res_b   IS lc2_x6342 (lc2's through line 2, M 6450,8692 ...; lc3 and busl take it to (6366,15000))
-#     lpstb_b IS lc2_x6387 (lc2's through line 3, M 6450,8756 ...; to (6408,15000))
+#     the second through line is res_b (lc2's through line 2, M 6450,8692 ...; lc3 and busl take it to (6366,15000))
+#     the third through line is `lpstb_b` (lc2's through line 3, M 6450,8756 ...; to (6408,15000))
 # Each line is built like rst_a's (piece isrc5), one lane north of it:
 #   poly diagonal (45 degrees, under V2..V5) -> poly row east through the crossing field -> pad with a
 #   contact -> metal east -> a track south (760-930 px) -> an L one track west -> pad with a contact ->
@@ -827,7 +826,7 @@ N P 5800,7257 rst_a
 #    8-17 px at the rows they cross, no break; follow.py --gap 16; eof_mrun.py for the centre lines and the
 #    two diagonals (row cuts y 8510-8750 every 20 px: x + y = 15142 and 15206); overlays k_o3.png (2.2x,
 #    both metal shots), k_o4.png (1.75x, metal and clean);
-#  - the columns: tl5_tracks.py v 6558 8140 8480 and v 6602 8335 8520: no clean-shot hole; inh_ck's link F
+#  - the columns: tl5_tracks.py v 6558 8140 8480 and v 6602 8335 8520: no clean-shot hole; rst_ck's link F
 #    (x 6552-6565, y 8166-8367) LIES ON res_b's column for 200 px without a contact (notes, Ambiguity 5),
 #    and both columns pass under the horizontal metals y 8362-8374 (link F), 8405-8417, 8448-8460;
 #    textmap.py 6528 8438 6630 8524 3 --acid: 18 px of open poly between the metal y 8448-8460 and the
@@ -840,8 +839,6 @@ N P 5800,7257 rst_a
 #  - (5665,7212): chip 2's metal shot has a ring-like dark circle on the vertical metal x 5660-5675 over
 #    res_b's row; chip 1's metal is bright there and the row is unwidened with no hole: a blemish, no
 #    contact (review round 13; notes, Ambiguity 40).
-@alias res_b lc2_x6342
-@alias lpstb_b lc2_x6387
 # res_b: diagonal (centre x = y - 1698), row y 7214, pad, metal y 7216 / track x 6602 / L at y 8065 /
 # x 6558, pad (6558,8125), poly column x 6549-6567, pad (6556,8493), metal south and diagonal
 P 5200,6897 5516,7214 x6148 w=18
@@ -867,9 +864,9 @@ P 6584,8517:6622,8555
 C 6602,8536
 M 6601,8536 y8605 6444,8762 w=13
 # ============================================================================================
-# Piece w5936 (run 11, 2026-11-19): tl5_w5936 (= tl3_w3982, the net that holds rcs_cond low) on from
+# Piece w5936 (run 11, 2026-11-19): the wire `tl5` called w5936 (= tl3_w3982, the net that holds rcs_cond low) on from
 # piece x1's end (5063,6880). Wiring only, no transistor, no uncertain item:
-#     tl3_w3982 IS lc2_w8906, the data of the left-centre latch C (lc2's metal M 6471,8067 y8142),
+#     tl3_w3982 IS the wire `lc2` called w8906, the data of the left-centre latch C (lc2's metal M 6471,8067 y8142),
 #     and runs on east to a buried-contact box at (7490-7520, 8410-8442) at the foot of the gate column
 #     west of the central datapath (undrawn: cdp3 (continue)): believed its driver's output.
 # The path: poly diagonal (centre x = y - 1829; under M_a, M_b, V2..V5) -> row y 7300 -> pad with a
@@ -901,8 +898,6 @@ M 6601,8536 y8605 6444,8762 w=13
 #    7888 6535 7380: one clean-shot hole, 6558(32,-3), where rst_a's track crosses (notes, Ambiguity 33:
 #    no ring, no pad: no contact; the row's colour drifts red / olive / brown from x 6500 to 6840 in the
 #    clean shot and is plain in the other three); overlays k_o5a.png, k_o5b.png (2.7x, metal and clean).
-@alias tl3_w3982 lc2_w8906
-@alias tl3_w3982 tl5_w5936                   # tl3's own alias, repeated so that this file extracts by itself
 P 5063,6876 y6892 5471,7300 x6148 w=18
 P 6130,7282:6168,7320
 C 6146,7301
@@ -919,7 +914,7 @@ P 7400,8428 x7492 w=22                      # to the box's west edge (the box an
 N M 6514,7600 tl3_w3982
 
 # ============================================================================================
-# Piece d3982 (run 12, 2026-11-19): the driver of tl3_w3982 (= tl5_w5936, lc2_w8906): three
+# Piece d3982 (run 12, 2026-11-19): the driver of tl3_w3982 (= the wire `tl5` called w5936, tl3_w3982): three
 # inverters in series at the foot of the gate column west of the central datapath, under the
 # VSS rail x 7552-7598 (piece g7700's rail, on south) and the wide VCC metal x 7722-7776:
 #       eof_w8168  = NOT lc1_w7928      unit U2 (y 8068-8196), a long load (plate 96 long)
@@ -997,10 +992,10 @@ N P 7428,8220 eof_w8168
 N P 7428,8350 eof_w8298
 # ============================================================================================
 # Piece ck5 (run 13, 2026-11-19): the clock of the left-centre ripple counter followed back from lc2's
-# fourth through line (lc2_x6432 = lc3_w9947, `M 6450,9165 x6432 y9233` in trace/lc2.txt) to the poly
-# that tc2 drew south of its pad (6447,6150) (tc2_m6447 = tcw_m6404, `P 6451,6160 y6400`).
+# fourth through line (the wire `lc2` called x6432 = lc3_w9947, `M 6450,9165 x6432 y9233` in trace/lc2.txt) to the poly
+# that tc2 drew south of its pad (6447,6150) (tc2's metal x 6447 = tcw's gate line, `P 6451,6160 y6400`).
 # Wiring only, no transistor, no uncertain item:
-#     lc3_w9947 (the clock of stage B0, lc2_x6432) IS tcw_m6404 (the line of tcw's bus that gates four
+#     lc3_w9947 (the clock of stage B0, lc2's fourth through line) IS the line of tcw's bus (the one that gates four
 #     pull-downs of the gate column west of the island).
 # Built like res_b's and lpstb_b's lines (piece rl), one lane further east; from the north:
 #   tc2's poly x 6443-6460 on south from y 6400, 725 px under fourteen horizontal metals -> pad with a
@@ -1008,12 +1003,9 @@ N P 7428,8350 eof_w8298
 #   west at y 8151 -> pad with a contact (6645,8276) -> poly column south under three horizontal metals ->
 #   pad with a contact (6645,8580) -> metal south, a 45-degree diagonal south-west (x + y = 15272) to
 #   (6472,8800), south on x 6472 to y 9167 and west onto lc2's metal end at x 6450.
-# One net, four names. The canonical name is lc3_w9947: lc3 already has `@alias lc3_w9947 lc2_x6432`, and the
-# extractor wants every other name aliased to the canonical one directly. tl6's `@alias tcw_m6404 tc2_m6447`
-# therefore became `@alias lc3_w9947 tc2_m6447` in trace/tl6.txt (a commit of its own; handoff of run 13).
-@alias lc3_w9947 tcw_m6404
-@alias lc3_w9947 tc2_m6447                    # as in trace/tl6.txt
-@alias lc3_w9947 lc2_x6432                    # lc3's own alias, repeated so that this file extracts by itself
+# One net, which had four names until the rename of 2026-11-19; the canonical name was lc3_w9947, and the
+# extractor then wanted every other name aliased to the canonical one directly, so tl6's alias line
+# was changed in trace/tl6.txt (a commit of its own; handoff of run 13). All of it is one name now.
 P 6451,7127 y6390 w=17
 P 6432,7107:6470,7147
 C 6450,7127
@@ -1027,15 +1019,14 @@ C 6645,8580
 M 6645,8580 y8628 6472,8801 y9167 x6440 w=13
 # ============================================================================================
 # Piece rc (run 13, 2026-11-19): rst_c's poly on from lc2's east edge (6450,8923) to lc3's fifth
-# corner-bundle line (lc3_w9470, `M 6450,9455 x6429 ...` in trace/lc3.txt). Wiring only, no transistor,
+# corner-bundle line (rst_c, `M 6450,9455 x6429 ...` in trace/lc3.txt). Wiring only, no transistor,
 # no uncertain item:
-#     lc3_w9470 (the input of lc3's lower inverter, whose output is lc1_w7170) IS rst_c.
+#     rst_c (the input of lc3's lower inverter, whose output is lc1_w7170) IS rst_c.
 # lc2's diagonal poly (`P 6258,8742 y8758 x6285 6450,8923`, from latch C's clear pad) runs on south-east
 # under lpstb_b's metal x 6432, bends south at (6472,8945) and then lies UNDER the metal of piece ck5
 # (x 6466-6478, another net: the ripple counter's clock) lengthwise for 225 px, with no contact; it
 # comes out south of that metal's corner (y 9175) and ends on a pad with a contact (6469,9209); the
 # pad's own metal leaves south on x 6472 and turns west at y 9452 onto lc3's metal end at x 6450.
-@alias rst_c lc3_w9470
 P 6440,8913 6472,8945 y9209 w=19
 P 6451,9189:6489,9227
 C 6469,9209
@@ -1044,14 +1035,14 @@ N M 6471,9330 rst_c
 # ============================================================================================
 # Piece n2n (run 14, 2026-11-19): the north end of the track that carries bd1_n2 (the latch on R4's
 # match) up the left bus field, from busl's north edge (6775,10400) to tl5's south bus poly x 5412
-# (tl5_w5761 = tl4_w3850, the input of the inverter that makes rcs_e3). Wiring only, no transistor,
+# (the bus line x 5412 of tl5 = `bd1_n2`, the input of the inverter that makes rcs_e3). Wiring only, no transistor,
 # no uncertain item:
-#     the track x 6775 (bd1_n2_u) IS tl4_w3850, so, if the track is bd1_n2,  rcs_e3 = NOT bd1_n2.
+#     the track x 6775 IS tl5's bus line x 5412 (the input of tl4's inverter), so, since the track is bd1_n2 (busl, piece n2),  rcs_e3 = NOT bd1_n2.
 # The join to bd1_n2 itself is NOT drawn: piece n2w ends at (6711,15000), busl's south edge, and the
 # 4,600 px between (x 6711 north to a corner (6711,13249), east to (6777,13249), north on x 6776) lie in
 # busl's claimed region. Read there by text and one view, not drawn: the step is a plain nested L
 # (o_step.png), the metal is 9-15 px wide at every one of the follower's contact candidates (no pad).
-# Hence the name bd1_n2_u (an open join, a task).
+# Hence the name bd1_n2 (an open join, a task).
 # A. Metal north on x 6775 (11-14 px wide; bars of the poly rows beneath, none over 14 px, no pad: two
 #    crossing fields, y 9560-9810 and y 10300-10400, and two single rows, y 9984-9998 and y 10048-10064,
 #    the rows of the neighbours' pads (6818,9988) and (6730,10050); the first pad's ring is 18 px from
@@ -1069,10 +1060,8 @@ N M 6471,9330 rst_c
 #    neighbours at -1306 and -1439 are the lines of tl5's polys x 5455 and x 5368) to a bend
 #    (5412,6784), north on x 5403-5421 under nine horizontal metals (no pad, no hole) onto tl5's poly
 #    end `P 4967,5761 x5412 y6350 w=20`.
-@alias tl4_w3850 bd1_n2_u
-@alias tl4_w3850 tl5_w5761                    # tl4's own alias, repeated so that this file extracts by itself
 M 6775,10400 y8952 6947,8780 y8708 w=13
-N M 6775,9900 bd1_n2_u
+N M 6775,9900 bd1_n2
 P 6934,8690:6962,8727
 C 6947,8710
 P 6951,8708 y8428 x6990 w=19
@@ -1082,7 +1071,7 @@ M 6991,8427 y7000 x6146 w=13
 P 6127,6978:6166,7015
 C 6146,6997
 P 6148,6996 x5624 5412,6784 y6345 w=17
-N P 5412,6500 tl4_w3850
+N P 5412,6500 bd1_n2
 # ============================================================================================
 # Piece ck6 (run 15, 2026-11-19): the ripple counter's clock lc3_w9947 from busl's row end
 # (7550,14784) east to its driver, an inverter under the bottom-centre logic's east VSS rail.

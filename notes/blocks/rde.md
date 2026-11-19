@@ -5,8 +5,8 @@
 Wiring only (`trace/rde.txt`), no transistors. Drawn: the five slice bit lines of `cdp1`
 (`db_b4`..`db_b0`, data bits 4..0) from `cdp1`'s drawn ends (y 5150) through
 rows D and E to `cdp2`'s bus lines (`cdp2_a_s3_bus`..`cdp2_a_s7_bus`, y 5700); data bit 6
-from (8075,5040) to `cdp2_c_s1_bus`; data bit 5 from `db_b5`'s tap (8727,5150) to
-`cdp2_c_s2_bus`. **One 54 px stretch of each of the five lines (y 5542-5596) is drawn
+from (8075,5040) to `db_b6`; data bit 5 from `db_b5`'s tap (8727,5150) to
+`db_b5`. **One 54 px stretch of each of the five lines (y 5542-5596) is drawn
 `?M`: an assumption, see below.** Rows D and E themselves are still not traced.
 
 Slices: `cdp1` c1..c5 = `cdp2` s3..s7, x = 8856 + 390 k (k = 0..4), data bits 4, 3, 2, 1, 0.
@@ -106,7 +106,7 @@ side of the bar) is not excluded. Settling it needs row E's cell traced.
 
 `bust` drew the metal (data bit 6: `db_b6`'s metal, with the contact (8078,5020) onto
 `db_b6`) to (8075,5040). It runs on south along x 8075 to y 5848, steps east to x 8118
-along y 5840-5856 and runs south along x 8118 to `cdp2_c_s1_bus`'s drawn top (y 7395).
+along y 5840-5856 and runs south along x 8118 to `db_b6`'s drawn top (y 7395).
 The step lies on one of channel 1's poly lines with no contact (uniform salmon under it;
 `cdp2` found the same at the line's lower jog). Views: `b6a.png`, `s1a.png`, `s1b.png`,
 `s1jog.png`. Firm.
@@ -127,7 +127,7 @@ Possible taps, not established and not drawn:
 (8728,6088) on a poly pad; the poly runs west along y 6079-6095, under the metals at
 x 8687, 8620 (a VSS rail) and 8553 with no pad on any, to a pad with the contact
 (8485,6087); that pad's metal has its line on the west side and goes south along x 8464
-to y 6999, east to x 8532 and south to `cdp2_c_s2_bus`'s drawn top (y 7395). Views:
+to y 6999, east to x 8532 and south to `db_b5`'s drawn top (y 7395). Views:
 `s2top.png` (4x, three shots: both rings, both green patches, the poly end to end),
 confirmed by the review. The poly under the x 8532 leg (y 6965-7135) is another net (from
 a pad (8530,6950) on the x 8505 metal, turning west at y 7125), with no contact to this
@@ -141,8 +141,8 @@ poly under the line, no pad (`tap.png`).
 | Net | Layer | Where | Note |
 |---|---|---|---|
 | `db_b4`..`db_b0` | M | x 8856 + 390 k: joins `cdp1` at y 5140-5150 and `cdp2` at y 5700-5710 | data bits 4..0; `cdp2_a_sK_bus` / `cdp2_c_sK_bus` (K = 3..7) are aliases |
-| `db_b6` | M | joins `bust` at (8075,5030-5040), `cdp2` at (8118,7395-7400) | data bit 6; `cdp2_c_s1_bus` is an alias |
-| `db_b5` | M, P | joins `cdp1` at (8727,5140-5150), `cdp2` at (8532,7395-7400) | data bit 5; `cdp2_c_s2_bus` is an alias |
+| `db_b6` | M | joins `bust` at (8075,5030-5040), `cdp2` at (8118,7395-7400) | data bit 6; `db_b6` is an alias |
+| `db_b5` | M, P | joins `cdp1` at (8727,5140-5150), `cdp2` at (8532,7395-7400) | data bit 5; `db_b5` is an alias |
 
 ## Ambiguities
 

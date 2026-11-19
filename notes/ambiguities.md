@@ -330,7 +330,7 @@ x 5078-5127 each step down one track, which an independent review found at 4-5x 
 coordinator saw in the chip-2 stripped shot. With both corrections, **R9's match
 (`ra_eq_r9`) reaches the contact (4148,3335): `ra_eq_r9` is R9's match**, by firm
 geometry, and `rcs_mu` = NOT R9's match. The stub and the lower piece of track P carry
-another line of the bundle (`r9m_l3`). The earlier statement that `amr` c3's outer output
+another line of the bundle (`tc2_o5175`). The earlier statement that `amr` c3's outer output
 drives `ra_eq_r9` is withdrawn.
 
 **What follows from it, changed 2026-11-18 (`tl3` runs 8-9, Tom Seddon).** The join stands
@@ -351,7 +351,7 @@ drawn from a class map and 3.6-4.6x views in both stripped shots. Not establishe
 the rail is VSS; the loads; the two buried contacts (`?B`) that put the two output lines
 on their nodes; that the node above the series pair is separate from the rail contact
 at y 3905; that the dark spot (6548,4188) is not a contact (if it were, `fld_y_b`'s node
-would sit on the rail). **Adopted** as drawn: `fld_a_in` = NAND(`inh_ck`, `tcw_b`),
+would sit on the rail). **Adopted** as drawn: `fld_a_in` = NAND(`rst_ck`, `tcw_b`),
 `fld_y_b` = NOT `tcw_c`. Settle when the region west of the island is traced as a block.
 
 Added 2026-11-16: a poly from the lower pad (6232,3870) of the bus metal `c4l_gab` runs
@@ -359,7 +359,7 @@ east along y 3912 and reaches the rail at y 3910-3934, between the rail contact
 (6535,3905) and the node of `fld_a_in` (which starts at y 3956 below a strip of field at
 y 3948-3956; the clean shot is dull tan at y 3935-3947). If diffusion is continuous
 under that poly, `fld_a_in` has a third pull-down gated by `c4l_gab`
-(`fld_a_in` = NOT(`c4l_gab` OR (`inh_ck` AND `tcw_b`))); if the poly only passes over
+(`fld_a_in` = NOT(`c4l_gab` OR (`rst_ck` AND `tcw_b`))); if the poly only passes over
 field there, it goes on to the east side. Not decided; the trace stops the poly at the
 rail's west edge.
 
@@ -608,11 +608,11 @@ Proposed by `tc2` (dp111, `notes/blocks/tc2.md`). The latch at x 7760-8250, y 59
 lines and the opening of the buried contact's rings. The latch rests on them (marked, not firm).
 `q_n`'s join to its pad poly is one of them. **Drawn `?P`.** Not resolvable in these photos.
 
-## AMB-028: `tc1_ns3`'s metal over `rax`'s five boxes, and `tc2_sr_r` through `rax` (2026-11-18)
+## AMB-028: `tc1_ns3`'s metal over `rax`'s five boxes, and `cdp1_lw1` through `rax` (2026-11-18)
 
 Proposed by `tc2` (dp111). (1) `tc1_ns3`'s metal crosses `rax`'s five unit boxes; drawn `?M` at the
 five crossings, resting partly on the electrical argument (as AMB-011). (2) North of (8031,5468) the
-follower takes `tc2_sr_r`'s thin metal 440 px through `rax`'s units 3-5 over six contact-like spots,
+follower takes `cdp1_lw1`'s thin metal 440 px through `rax`'s units 3-5 over six contact-like spots,
 while `rax`'s own profile says short straps: nothing drawn there. (3) `tc2_rxl`'s load tie (box
 x 8021-8048, y +38..+61 per unit) is under metal in units 2-4 and flush under the band in units 0
 and 1 (consistent, not proven); it decides the load's gate, not the equation. Also seen once: the
@@ -678,19 +678,19 @@ it: `rcs_e4` = NOR(`tl1_w4678`, `tl3_e3550`), i.e. R9's match in the row counter
 
 Proposed by `tl3` (Matt Godbolt run 5, Tom Seddon runs 8 and 10; `notes/blocks/tl3.md`, Ambiguities 1,
 12 and 13). The thin metal runs from a pad with a contact (4103,2899) on the row y 2899 to track A
-(`inh_ck`). **Assumed one metal, no contact between its ends; six stretches drawn `?M`** (over node
+(`rst_ck`). **Assumed one metal, no contact between its ends; six stretches drawn `?M`** (over node
 boxes at y 2964-3021, 3381-3444, 3527-3574, 3686-3748, 3771-3969, 4051-4108), where neither metal shot
 shows it for 40-55 px. For: two real end pads (full-bright centre 12 px across, green hole) and
 nothing pad-like between; the row y 2899 has only gates on it, so its driver must arrive by this
-metal; a contact on any box would short a unit's output to `inh_ck`; an unbroken pink protected strip
+metal; a contact on any box would short a unit's output to `rst_ck`; an unbroken pink protected strip
 beside the line in the clean shot where one side lies over field. Against: small bright centres over
 four boxes ((4104,2988), (4101,3719), (4102,4074), (4101,5202)). The most contact-like is (4102,4074),
 on `rcs_in1`'s box (clean shot 186/182/139, neither a contact's green nor a pass-over's tan): a contact
 there would make `tl3_e4243` constant; one at (4101,5202) would make latch C's data its own enable;
-one at (4104,2988) would make the metal E1's second output. `inh_ck`'s source is not traced, so four
-of the six have no electrical cross-check. **Rests on it: `tl1_w3594` = `inh_ck`** (`tl1`'s two latches
-in series a master and a slave on `inh_ck`). Since `eof` run 2 (2026-11-19) `inh_ck` is `inh_ck` (firm), so `tl1_w3594` = `inh_ck` rests on this entry, and
-`inh_ck`'s source is known: the cross-check this entry lacked is now possible from the driver's side. Would settle it: `inh_ck`'s source; a third chip's metal
+one at (4104,2988) would make the metal E1's second output. `rst_ck`'s source is not traced, so four
+of the six have no electrical cross-check. **Rests on it: `tl1_w3594` = `rst_ck`** (`tl1`'s two latches
+in series a master and a slave on `rst_ck`). Since `eof` run 2 (2026-11-19) `rst_ck` is `rst_ck` (firm), so `tl1_w3594` = `rst_ck` rests on this entry, and
+`rst_ck`'s source is known: the cross-check this entry lacked is now possible from the driver's side. Would settle it: `rst_ck`'s source; a third chip's metal
 shot; the simulation.
 
 ## AMB-034: three ring-like marks in `tl4` not drawn as contacts (2026-11-18)
@@ -700,8 +700,8 @@ heavy box at (4684,3420) under the metal of `tl4_w3245`: bright centre in a dark
 shots, no hole in the clean shot, no pits in the chip-2 stripped shot; drawn as an uncertain lobe of
 `tl4_w3390`'s diffusion, no contact. A contact would short `tl4_w3245` to `tl4_w3390`, which the rest
 of the latch contradicts; what the box is for is not known. (2) A mark at (4683,5767) on RA's leg,
-in both metal shots, right over the row of `tl4_w3850`; no hole under it in either stripped shot, so
-not drawn; a contact would tie `tl4_w3850` (and `rcs_e3`'s input) to VSS. (3) The field box
+in both metal shots, right over the row of `bd1_n2`; no hole under it in either stripped shot, so
+not drawn; a contact would tie `bd1_n2` (and `rcs_e3`'s input) to VSS. (3) The field box
 (4722-4752, 3442-3488) under RA (an elongated ring in both metal shots): perhaps a substrate contact
 of RA; not drawn (no poly, no diffusion). The lesson (a metal about 25 px wide over a box shows a
 bright centre in a dark ring; the clean shot's hole decides) is trap 26.
@@ -722,14 +722,14 @@ stripped shot; but the clean shot shows a mottled red centre and no green hole (
 has the usual hole). Tracer and reviewer both read a contact. **Drawn as a contact (as `rdp3` drew
 it).** If it is not one, R4's match (`rc_eq_r4`) does not reach `bd1`'s latch and inverter A.
 
-## AMB-037: `inh_ck`'s staircase over other nets without contact (2026-11-19)
+## AMB-037: `rst_ck`'s staircase over other nets without contact (2026-11-19)
 
 Proposed from `eof` run 2 (`notes/blocks/eof.md`, Ambiguities 5-7) and `lc2` (its Ambiguity 3). The
-metal that carries `inh_ck` from `trunks`' line S north to the top-left logic lies on other
+metal that carries `rst_ck` from `trunks`' line S north to the top-left logic lies on other
 nets' poly at four places, and `lc2`'s metal x 6422-6440 lies 64 px along latch C's data poly
 (6431, 8117-8181); none is drawn as a contact (trap 13; read from text maps by two packages). A contact
-at the first would join `inh_ck` to latch D's output `lc1_w7040`; the one in `lc2` would join it to
-latch C's data `lc2_w8906`. The join to line S also rests on `trunks`' reading of that line (R4).
+at the first would join `rst_ck` to latch D's output `lc1_w7040`; the one in `lc2` would join it to
+latch C's data `tl3_w3982`. The join to line S also rests on `trunks`' reading of that line (R4).
 
 ## AMB-038: the box at (7535-7580, 13903-13940) under `cdp4_ld`'s metal (2026-11-19)
 
@@ -757,3 +757,42 @@ field has a pad), the clean shot shows protected poly with no hole, the chip-2 s
 the plain crossing 60 px north; tracer and reviewer agree. Against: both chips are dim at the same spot,
 which dirt on one chip does not explain. Settled by the far ends of row y 13744 (`busl`) and the corner
 gate group (`cdp4` (continue)).
+**2026-11-19, later**: `regs` (run 3) reads row y 13744 as the read select of R13 (`rsel13_buf`), tapped at
+(6492,13744) from the track x 6494 (read, not drawn). Under reading (b) latch D's enable would be on a
+register read select: a further reason for (a). Still open until the row is drawn.
+
+## AMB-040: the structure at x 10530-11400, y 11740-12350 on the write strobes of R12 and R14 (2026-11-19)
+
+Proposed by `regs` (Matt Godbolt, run 1; its Ambiguities 1). In `bw`'s region, undrawn: a wide
+diffusion-coloured rectangle x 10530-11400, y 11915-12185 with seven contacts at x 10540 and two
+mirrored units at its east end (plates y 11838-11893 and 12205-12260, a strip from the top unit north to
+y 11757 and east along y 11748, a U-shaped strip below the bottom unit). `wr_r12`'s metal has a contact
+at (11378,12297) onto the bottom unit's box (drawn); whether `wr_r14` has the mirror contact at
+(11331,11810) onto the top unit's is open (drawn `?C`; the photos lean against it); `wr_r12`'s metal over
+the top unit is `?M` (x 11376, y 11757-11905), so `wr_r12` = row C's write line is marked. Readings and
+what would settle them: `notes/blocks/regs.md`, Ambiguities 1. Settled by tracing the structure (`bw`
+(continue)).
+
+## AMB-041: the reset copy's track over latch C's data row, at (6558,7886) (2026-11-19)
+
+Proposed by `eof` (Tom Seddon, runs 10-11; its Ambiguity 33). Where `rst_a`'s track x 6558 crosses the
+poly row y 7878-7898 the clean shot has a hole-like olive patch (32 px, red minus green down to -3). The
+row is `tl3_w3982` (latch C's data), so a contact there would short the reset copy to it. **Assumed: no
+contact** (the tracer and two reviewers, rounds 12 and 13): no ring, bright centre or pad in either metal
+shot, no pitted box in the chip-2 stripped shot, and the patch is wider than the metal. Against: on the
+same row the pad (6513,7889), a real contact, shows no green hole in the clean shot either (the row's
+colours there are abnormal from x 6500 to 6840), so the clean shot decides nothing on this row.
+
+## AMB-042: the ripple counter's clock on `rst_c`'s poly, x 6466-6478, y 8945-9227 (2026-11-19)
+
+Proposed by `eof` (Tom Seddon, run 13; its Ambiguities 43-45). Piece `ck5`'s metal (the clock of the
+left-centre ripple counter, `lc3_w9947` = the wire `tcw` called m6404) lies on `rst_c`'s poly for 225 px (y 8945-9172),
+and its corner stands 35 px north of the pad (6469,9209) of `rst_c`'s own metal on the same x. Readings:
+(a) two nets, no contact along the overlap and two metals at the knot; (b) a contact or one metal, which
+would make the ripple counter's clock the reset copy. **Assumed (a)**: no ring, widening or dark stretch
+along the overlap in either chip; at the knot 27 px without metal in both chips north of the pad's
+centre against a 13 px ring on the south, where the pad's own metal leaves. A dull patch at (6471,9045)
+(clean shot dull over x 6456-6495, wider than the poly; chip 2's metal dim for 9 px, chip 1's whole) is
+read as a stain. Three nets depend on it (`lc3_w9947`, `rst_c`, `lc1_w7170` = NOT `rst_c`). Settled by
+the driver of the clock (`eof`: the row y 14784 east of x 7550), which must not be the reset.
+

@@ -130,5 +130,5 @@ Round 1: no findings in what is drawn; one undrawn tap on the output listed in N
 
 - Survey, "Centre, x 7850-8150: vertical metal tracks": the tracks step one position east going north
   at y 17250-17350 and again (two positions) at y 16640-16750; the track that is x 8057 at y 17700 is
-  `inh_src` (`eof` run 9, piece `isrc4`), and the track x 8098 lies on `inh_src`'s poly row y 17736 from
+  `rst_a` (`eof` run 9, piece `isrc4`), and the track x 8098 lies on `rst_a`'s poly row y 17736 from
   x 8096 to 8388 without a contact.

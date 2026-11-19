@@ -15,17 +15,17 @@ tc2_sr_g     M  7827-7847,6400   in   the latch's gate line (rows A and D), goin
 tc2_sr_s     M  7782-7800,6400   in   row E's line, going on south (follower: end (7791,6958))
 tc2_sr_q     M  7913-7931,6400   out  the latch's node q, going on south (follower: end (7922,7046))
 tc2_sr_q     P  8250,6163-6180   out  the arm of q's load poly, going on east under the VCC rail
-cdp1_lw1     P  8340-8375,4975-4987  ?    the pad (8353,4981): tc2_sr_r (an alias) meets cdp1's poly; the line goes on east through cdp1 to x 15584
+cdp1_lw1     P  8340-8375,4975-4987  ?    the pad (8353,4981): cdp1_lw1 (an alias) meets cdp1's poly; the line goes on east through cdp1 to x 15584
 tc2_sr_c     P  8250,6358-6376   ?    top line of cdp2's channel 2, going on east
 tc2_sr_c     M  6400,6360-6380   ?    metal from the pad (7490,6367), going on west (follower: end (6184,6370))
 vss          M  7990-8040,5625   -    meets rax's rail step (x 7945-8035, y 5600-5650)
 vss          M  8030-8075,6400   -    the ground rail going on south
 vcc          M  8206-8248,6400   -    going on south (cdp2's vcc rail x 8229 from y 7425)
 vcc          M  8117-8163,4450   -    meets tc1's VCC rail (x 8116-8165)
-tc2_m6490    M  6400,5557-5577   ?    metal of the nest, going on west (follower: end (6318,4999))
-tc2_m6490    P  6483-6501,6400   ?    poly from the pad (6490,6108), going on south
-tc2_m6447    M  6400,5601-5621   ?    metal of the nest, going on west (follower: end (6276,4825))
-tc2_m6447    P  6443-6460,6400   ?    poly from the pad (6447,6150), going on south
+tc1_p4308    M  6400,5557-5577   ?    metal of the nest, going on west (follower: end (6318,4999))
+tc1_p4308    P  6483-6501,6400   ?    poly from the pad (6490,6108), going on south
+lc3_w9947    M  6400,5601-5621   ?    metal of the nest, going on west (follower: end (6276,4825))
+lc3_w9947    P  6443-6460,6400   ?    poly from the pad (6447,6150), going on south
 vss          M  6860-6907,4380   -    east ground rail of the crossing field: meets tc1's rail
 vss          M  6882-6926,4990   -    east ground rail of the crossing field: meets fld's rail
 ral_stb      M  8198-8212,4450   ?    from tc1 (its bus metal ns4)

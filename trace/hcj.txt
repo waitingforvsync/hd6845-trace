@@ -52,7 +52,7 @@ N M 13565,14300 hc1
 # the track with the gap rings either side: continuous.
 # k11_pad.png (4x): x 13608 ends on a pad (13592-13628, y 15590-15642) with a ring at
 # (13606,15608) in both chips; the poly leaves the pad's foot west along y 15620-15640
-# under the inh_n track (x 13565, which carries on south: no pad), under x 13521 and
+# under the rst_a_n track (x 13565, which carries on south: no pad), under x 13521 and
 # x 13478, turns south-west at x 13454 and runs diagonally under nine tracks to
 # (13111,15973), then west along y 15964-15986 into the mid-right array's piece of hc1
 # (which ended at x 13053). hc1_sv_acid1b.png, hc1_sv_metal.png (2x, whole run),

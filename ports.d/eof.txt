@@ -22,12 +22,12 @@ sl_eq_r5_n  P  4962,2542-2560     ?   link C's west end on tl4's row (4967,2551)
 sl_eq_r5_n  M  4255,2506-2518     in  link D's east end on tl4's bus line 1 (4250,2512)
 sl_eq_r5_n  M  3528,2505-2519     ?   link D's west end on tl2's metal (3533,2509): towards the loads
 
-# Piece tcwa (run 2): the net is inh_ck. The driver (the inverter of the input buffer row) lies beyond link F's east end.
-inh_ck      M  6098-6112,6345     ?   link E's north end on tl6's metal (6105,6350): towards the loads
-inh_ck      M  6422-6438,8072     in  link E's south end on lc2's piece (inh_ck, M 6431,8067)
+# Piece tcwa (run 2): the net is rst_ck. The driver (the inverter of the input buffer row) lies beyond link F's east end.
+rst_ck      M  6098-6112,6345     ?   link E's north end on tl6's metal (6105,6350): towards the loads
+rst_ck      M  6422-6438,8072     in  link E's south end on lc2's piece (rst_ck, M 6431,8067)
 # (the tap row now ends as row 1 of the gate: piece g7700, below)
-inh_ck  M  6445,8165-8179     ?   link F's west end on lc2's end (6450,8172): towards the loads
-inh_ck  M  6695,8360-8374     in  link F's east end on trunks' line S (its end x 6690): the net is inh_ck
+rst_ck  M  6445,8165-8179     ?   link F's west end on lc2's end (6450,8172): towards the loads
+rst_ck  M  6695,8360-8374     in  link F's east end on trunks' line S (its end x 6690): the net is rst_ck
 
 # Piece x1 (run 2): tl5's south poly bus down to its pads, the pads' metals onto lc1's wires
 rcs_x1     P  5097-5117,6345     ?   from tl5's bus line x 5107: towards the loads
@@ -38,7 +38,7 @@ res_b      P  5182-5202,6345     in  from tl5's bus line x 5192
 res_b      M  5183-5197,6905     ?   onto lc1's V2 (res_b: the NOR's lower input)
 lpstb_b    P  5227-5247,6345     in  from tl5's bus line x 5237
 lpstb_b    M  5229-5243,6905     ?   onto lc1's V3 (lpstb_b: the NOR's upper input)
-tl5_w5936  P  5053-5073,6345     ?   from tl5's bus line x 5063
+tl3_w3982  P  5053-5073,6345     ?   from tl5's bus line x 5063
 
 # Piece r5nor: the NOR on NOT R5's match (run 3)
 tl1_w5936   P  2362-2386,2506    in   from tl1's row y 2498-2515: a gate of the NOR
@@ -48,24 +48,24 @@ tl1_w2637   P  2452-2472,2506    out  the NOR's output onto tl1's poly (2448-246
 vss         M  2596,2347-2404    -    the arm into the VSS plane
 vcc         M  2250-2590,1900    -    the supply plane over the strap's head, on north (padring)
 
-# Piece isrc: inh_src on from two of its open ends (run 4)
-inh_src     P  10218-10234,15912  ?    link G: the pad under the north end of trunks' metal x 10225
-inh_src     M  10390-10402,15083  out  onto bc2's pad (10395,15087): the clear of latch unit a (a load)
-inh_src     P  9770,18072-18090   ?    link H: from trunks' pad (9770,18081)
-inh_src     P  8930,16728-16746   ?    the row west of the tap pad (8966,16737): into the gate column x 8650-8800
-inh_src     P  8930,16163-16181   ?    the row west of the tap pad (8962,16172): into the gate column
-inh_src     P  8930,15248-15266   ?    the row west of the end pad (8966,15260)
+# Piece isrc: rst_a on from two of its open ends (run 4)
+rst_a     P  10218-10234,15912  ?    link G: the pad under the north end of trunks' metal x 10225
+rst_a     M  10390-10402,15083  out  onto bc2's pad (10395,15087): the clear of latch unit a (a load)
+rst_a     P  9770,18072-18090   ?    link H: from trunks' pad (9770,18081)
+rst_a     P  8930,16728-16746   ?    the row west of the tap pad (8966,16737): into the gate column x 8650-8800
+rst_a     P  8930,16163-16181   ?    the row west of the tap pad (8962,16172): into the gate column
+rst_a     P  8930,15248-15266   ?    the row west of the end pad (8966,15260)
 
-# Piece isrc4: inh_src is lc2's through line x 6299 (run 9)
-inh_src     P  7550,14904-14924   in   onto the east end of busl's poly row of inh_src (one net); the driver is beyond it: lc1's gate 5, rst_a (piece isrc5)
-inh_src     P  8326,16294-16312   out  the row's east end: a gate at x 8283-8311 over an undrawn diffusion column (the clear row of a latch unit: bc1 / bc3)
-inh_src     P  8326,16900-16918   out  the tap row's east end: the same 606 px lower (bc3)
+# Piece isrc4: rst_a is lc2's through line x 6299 (run 9)
+rst_a     P  7550,14904-14924   in   onto the east end of busl's poly row of rst_a (one net); the driver is beyond it: lc1's gate 5, rst_a (piece isrc5)
+rst_a     P  8326,16294-16312   out  the row's east end: a gate at x 8283-8311 over an undrawn diffusion column (the clear row of a latch unit: bc1 / bc3)
+rst_a     P  8326,16900-16918   out  the tap row's east end: the same 606 px lower (bc3)
 
-# Piece g7700: the gate on inh_ck's tap row (run 5)
+# Piece g7700: the gate on rst_ck's tap row (run 5)
 eof_w7777   P  6450,7812-7830    in   row 3 of the gate, on west into lc1's strip (cluster E's undrawn west half)
-eof_w7718   P  7400,7203-7221    ?    the poly row east of the pad (7313,7215)
-eof_w7718   M  7262-7274,7800    ?    the metal south of row 2's pad (7267,7736)
-eof_w7818   P  7272-7285,6875    out  the gate's output: the poly north of the pad (7272,6912)
+tc2_sr_g   P  7400,7203-7221    ?    the poly row east of the pad (7313,7215)
+tc2_sr_g   M  7262-7274,7800    ?    the metal south of row 2's pad (7267,7736)
+tc2_r5589   P  7272-7285,6875    out  the gate's output: the poly north of the pad (7272,6912)
 vss         M  7552-7598,7585    -    column 0's VSS rail, on north
 vcc         M  7725-7775,7720    -    the wide metal east of the load, on north
 
@@ -87,27 +87,27 @@ vcc           D      14004,15659-15689        -    the load's strip onto bd1's V
 bd1_n2        D      13795,15712-15736        in   piece n2out: N2 in the gap onto the lower segment of bd1's strip (bd1's bd1_k)
 vss           D      13832,15638-15652        -    piece n2out: the strip's top segment onto bd1's ground diffusion (bd1 has the link as ?D)
 bd1_n2        M      13515-13527,16260        in   piece n2w: from bd1's metal x 13521 (its bd1_k, drawn to y 16273)
-bd1_n2        M      6705-6718,15000          out  piece n2w: on north up the left bus field into busl's region; read there by text (run 14: x 6711 to a corner (6711,13249), east to (6777,13249), north), not drawn; it comes out at bd1_n2_u's port (6775,10400)
+bd1_n2        M      6705-6718,15000          out  piece n2w: on north up the left bus field into busl's region; read there by text (run 14: x 6711 to a corner (6711,13249), east to (6777,13249), north), not drawn; it comes out at bd1_n2's port (6775,10400)
 
-# Piece isrc5: inh_src is rst_a (run 10). The poly south of rst_a's pad (5147,6803) is drawn on to lc2's metal end.
-rst_a       M  6450,8623-8637     out  onto lc2's diagonal metal end (its first through line, inh_src: its port (6450,8630)): one net, down the left-centre strips to inh_src's loads
-# Pieces rl and w5936 (run 11): res_b, lpstb_b and tl5_w5936 (= tl3_w3982) drawn on from piece x1's poly ends
+# Piece isrc5: line X (the first through line of the left-centre strips) is `rst_a` (run 10). The poly south of rst_a's pad (5147,6803) is drawn on to lc2's metal end.
+rst_a       M  6450,8623-8637     out  onto lc2's diagonal metal end (its first through line, rst_a: its port (6450,8630)): one net, down the left-centre strips to rst_a's loads
+# Pieces rl and w5936 (run 11): res_b, lpstb_b and the wire `tl5` called w5936 (= tl3_w3982) drawn on from piece x1's poly ends
 # (their ports at (5196-5210,6900), (5232-5248,6872), (5054-5072,6880) are gone)
-res_b       M  6450,8685-8699     out  onto lc2's metal end (its second through line, lc2_x6342: its port (6450,8692)): one net, down the left-centre strips and the left bus field to (6366,15000)
-lpstb_b     M  6450,8749-8763     out  onto lc2's metal end (its third through line, lc2_x6387: its port (6450,8756)): one net, to (6408,15000)
-tl3_w3982   M  6465-6477,8067     out  onto lc2's metal x 6471 of lc2_w8906 (pad (6470,8127)): latch C's data
+res_b       M  6450,8685-8699     out  onto lc2's metal end (its second through line, res_b: its port (6450,8692)): one net, down the left-centre strips and the left bus field to (6366,15000)
+lpstb_b     M  6450,8749-8763     out  onto lc2's metal end (its third through line, lpstb_b: its port (6450,8756)): one net, to (6408,15000)
+tl3_w3982   M  6465-6477,8067     out  onto lc2's metal x 6471 of tl3_w3982 (pad (6470,8127)): latch C's data
 # Piece d3982 (run 12): the three inverters that drive tl3_w3982 (the port tl3_w3982 P 7492,8417-8439 is gone: U4's output box)
 lc1_w7928   P  6401-6416,8067     in   from lc2's poly P 6401,8067:6415,8092 (its port there; both label the poly lc2_w8083, an alias): latch D's lower node, the input of the three inverters
 vss         M  7552-7598,8460     -    the gate column's VSS rail on south (cdp3's c0 rail)
 vcc         M  7722-7776,8460     -    the wide metal east of the column on south (VCC by the loads' contacts)
-# Pieces ck5 and rc (run 13): the ripple counter's clock, and rst_c on to lc3_w9470
-lc3_w9947   P  6443-6460,6390     ?    onto tc2's poly of tc2_m6447 (its port (6451,6400)), tcw_m6404's line: one net; gates in tcw
-lc3_w9947   M  6440-6450,9161-9174  ?  onto lc2's metal end (its fourth through line, lc2_x6432: its port (6450,9165)): the ripple counter's clock
+# Pieces ck5 and rc (run 13): the ripple counter's clock, and the fifth corner-bundle line of `lc3` on to `rst_c`
+lc3_w9947   P  6443-6460,6390     ?    onto tc2's poly of lc3_w9947 (its port (6451,6400)), lc3_w9947's line: one net; gates in tcw
+lc3_w9947   M  6440-6450,9161-9174  ?  onto lc2's metal end (its fourth through line, lc3_w9947: its port (6450,9165)): the ripple counter's clock
 rst_c       P  6450,8911-8936     in   from lc2's diagonal poly (its port there), from latch C's clear pad
-rst_c       M  6440-6450,9445-9459  out  onto lc3's metal end (its fifth corner-bundle line, lc3_w9470: its port (6450,9448-9462))
-# Piece n2n (run 14): the latched R4 match's track from busl's north edge to tl5's bus poly (tl4_w3850)
-bd1_n2_u      M      6769-6782,10400          in   the track x 6775 from busl's region: believed bd1_n2, from the port (6711,15000); the 4,600 px between are drawn by no one
-tl4_w3850     P      5403-5421,6345           out  onto tl5's poly end (its port tl5_w5761 (5402-5422,6350)): the input of tl4's inverter that makes rcs_e3
+rst_c       M  6440-6450,9445-9459  out  onto lc3's metal end (its fifth corner-bundle line, rst_c: its port (6450,9448-9462))
+# Piece n2n (run 14): the latched R4 match's track from busl's north edge to tl5's bus poly (bd1_n2)
+bd1_n2      M      6769-6782,10400          in   the track x 6775 from busl's region: believed bd1_n2, from the port (6711,15000); the 4,600 px between are drawn by no one
+bd1_n2     P      5403-5421,6345           out  onto tl5's poly end (its port bd1_n2 (5402-5422,6350)): the input of tl4's inverter that makes rcs_e3
 # Piece ck6 (run 15): the ripple counter's clock to its driver, the inverter U
 lc3_w9947     P      7550,14772-14796         out  onto busl's row end (its port there): the ripple counter's clock, driven by the inverter U at (8733,15000)
 eof_w15127    P      8816,15120-15138         in   the inverter's input at the pad (8833,15127) of its metal; the pad's row goes west into the output box (8765-8795,15118-15140) of the unit below (read, not drawn)

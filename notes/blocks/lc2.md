@@ -37,8 +37,8 @@ lc2_w8692 = NOT( lc1_w7170 & lc2_w8298 & ( lc2_w8475 | lc2_w8552 ) )      slave,
 `lc2_w8475` is the clock: the master follows the slave while it is high, the slave follows the master while it is
 low, and each takes the other's outputs crossed, so the pair changes state once per pulse. `lc1_w7170` low clears it
 (`lc2_w8450` = NOT `lc1_w7170` on the master, `lc1_w7170` itself in series in the slave: cleared, `lc2_w8552` = 0,
-`lc2_w8692` = 1, `lc2_w8298` = 0). **Two names became one net each**: K3's output (`lc2_w8857`) is track C,
-`lc2_w8298`; K4's output (`lc2_w8930`) is K2's data row, `lc2_w8692`. The older names are kept (`@alias`). The clock
+`lc2_w8692` = 1, `lc2_w8298` = 0). **Two names became one net each**: K3's output (`lc2_w8298`) is track C,
+`lc2_w8298`; K4's output (`lc2_w8692`) is K2's data row, `lc2_w8692`. The older names are kept (`@alias`). The clock
 arrives from the south-west on an L-shaped metal (not followed). Full extraction: 2366 nets, 4262 transistors,
 0 errors, 0 warnings.
 
@@ -149,16 +149,16 @@ the lower unit it extracts in full (full extraction: 2365 nets, 4230 transistors
 
 ```
 lc1_w7862 = NOT lc1_w7780                                         FIRM (the data's inverse)
-lc1_w7928 = NOT( lc1_w7040  OR  lc1_w7780 AND lc1_w7908 )          DEPENDS (the cell's ? load tie)
-lc1_w7040 = NOT( lc1_w7862 AND lc1_w7908  OR  rst_c  OR  lc1_w7928 )   DEPENDS (as before, in lc1)
+lc1_w7928 = NOT( lc1_w7040  OR  lc1_w7780 AND tc2_sr_g )          DEPENDS (the cell's ? load tie)
+lc1_w7040 = NOT( lc1_w7862 AND tc2_sr_g  OR  rst_c  OR  lc1_w7928 )   DEPENDS (as before, in lc1)
 lc_step   = NOT lc1_w7040
 ```
 
-So latch D is open while `lc1_w7908` is high, takes `lc1_w7780` (= NOT `lc1_w7733`, `lc1`'s gate E1) and is
+So latch D is open while `tc2_sr_g` is high, takes `lc1_w7780` (= NOT `lc1_w7733`, `lc1`'s gate E1) and is
 cleared by `rst_c`: `lc_step` is the inverse of what it holds, and high while the clear is high. The bus
 field gives three joins, none through an uncertain item: **latch C's clear is `rst_c`**, the clear of latch D
 (a poly cross-under and a metal); latch C's enable `lc2_w8646` runs north out of the strip and has a branch
-east; latch C's data `lc2_w8906` comes from the north on a metal 20 px east of the strip (Logic, "Latch D's
+east; latch C's data `tl3_w3982` comes from the north on a metal 20 px east of the strip (Logic, "Latch D's
 lower unit and the bus field"). One merged equation prints another name for one net: `lc2_w8688` (latch C's
 Nb) now reads `rst_c` where it read `rst_c` (input identified; no logic changed).
 
@@ -257,7 +257,7 @@ data row. Its own wiring, drawn by hand:
 |---|---|---|
 | `lc1_w7928`'s thin metal x 5918-5932 | on south from `lc1` to a pad with a contact (5927,8131) on the unit's load plate; ends there | `textmap.py 5900 8090 5960 8160`: dark ring with a bright centre in both metal shots, a hole of `g` in the clean shot; no bright metal south of y 8144 |
 | the node's row (the poly on the buried contact of the node's east box, the cell's stub) | east along y 8075-8092 under five metals, no pad, to x 6415; north along x 6401-6415 out of the strip at y 8067 | `e1.png`; `px.py col 6276` and `col 6385` (orange in the chip-2 stripped shot at y 8078-8090), `px.py row 8050 6385 6425` (poly x 6403-6412); the dark dots on it at x 6190, 6234, 6276, 6321 lie in the gaps between the metals and have no ring (trap 2) |
-| enable: gate 2's row | east to a pad (6212,8128) **in the run** of `lc1_w7908`'s metal x 6203-6221, which goes on south and turns east along y 8250-8268 (metal A) out of the strip | `textmap.py 6180 8090 6330 8200`: ring, bright centre, `g` hole; bright metal on both sides of the pad; `tl5_tracks.py v 6212 8060 8275`, `h 8259 6195 6462` (A begins at x 6206: bare ground between it and the metal x 6168) |
+| enable: gate 2's row | east to a pad (6212,8128) **in the run** of `tc2_sr_g`'s metal x 6203-6221, which goes on south and turns east along y 8250-8268 (metal A) out of the strip | `textmap.py 6180 8090 6330 8200`: ring, bright centre, `g` hole; bright metal on both sides of the pad; `tl5_tracks.py v 6212 8060 8275`, `h 8259 6195 6462` (A begins at x 6206: bare ground between it and the metal x 6168) |
 | data: gate 1's row (also the inverter's gate) | east under the metals x 6168, x 6212, x 6256 to the pad (6297,8170) where `lc1_w7780`'s metal ends | the same text map: ring, centre, hole at the pad; under the three metals the clean shot has poly values and no hole, and the metals no ring; `px.py col 6150`, `col 6240` |
 | VSS rail x 6015-6063 | one metal from `lc1`'s piece (y 8067) to latch C's (y 8530) | `tl5_tracks.py v 6039 8060 8540`: no stretch without metal longer than 21 px (the rows and boxes under it) |
 
@@ -266,12 +266,12 @@ data row. Its own wiring, drawn by hand:
 | Metal | What it is | Where it goes |
 |---|---|---|
 | x 6159-6177 | **latch C's enable `lc2_w8646`** | one metal from y 8067 to latch C's two pads (`tl5_tracks.py v 6168 8060 8590`: only the 8-12 px bars where rows pass under it; no hole); at y 8292-8310 a branch east (metal B), a T with no dark line across the join (`h 8301 6155 6462`), out of the strip at x 6450 |
-| x 6203-6221 | `lc1_w7908`, latch D's enable | through latch D's pad, then east as metal A (above) |
+| x 6203-6221 | `tc2_sr_g`, latch D's enable | through latch D's pad, then east as metal A (above) |
 | x 6248-6264 | `rst_c`, latch D's clear | ends on a pad (6254,8214); a poly cross-under x 6247-6270 south beneath A and B to a pad (6256,8344); a metal x 6246-6266 south from it, continuous to latch C's clear pad (6257,8731) (`v 6256 8325 8750`). **Latch C's clear is `rst_c`** |
 | x 6287-6307 | `lc1_w7780`, latch D's data | ends on the data row's pad |
 | x 6332-6350 | `lc2_w8474` | ends on a pad (6341,8214); poly south under A and B (x 6333-6357), west along y 8462-8485 under the metals x 6256 and x 6168, down a link x 6078-6096, west along y 8506-8523 under the VSS rail and the thin metals, south under the VCC rail (x 5859-5877, salmon in the clean shot to y 8652: `px.py col 5868`) and west again from under it along y 8634-8652. Drawn to x 5835; **it runs on west** (`tl5_tracks.py rows row 5560 5900 4 8642`: poly to x 5560 and beyond) |
-| x 6422-6440 | `inh_ck` | lies on the poly of the next line from y 8117, turns east at y 8163-8181 and leaves the strip. Not on anything here (Ambiguity 3) |
-| x 6462-6480 (20 px east of the strip) | **latch C's data `lc2_w8906`** | ends on a pad (6470,8127); its poly goes west 25 px and south (x 6420-6443) under A and B to a pad (6429,8386); a metal south, south-west on a diagonal and west along y 8508-8528 to a pad (6298,8516); a poly link west to a pad (6212,8516); a metal x 6202-6222 south to latch C's data pad (6214,8906) (`v 6212 8500 8925`, `h 8518 6285 6415`, `v 6430 8375 8505`) |
+| x 6422-6440 | `rst_ck` | lies on the poly of the next line from y 8117, turns east at y 8163-8181 and leaves the strip. Not on anything here (Ambiguity 3) |
+| x 6462-6480 (20 px east of the strip) | **latch C's data `tl3_w3982`** | ends on a pad (6470,8127); its poly goes west 25 px and south (x 6420-6443) under A and B to a pad (6429,8386); a metal south, south-west on a diagonal and west along y 8508-8528 to a pad (6298,8516); a poly link west to a pad (6212,8516); a metal x 6202-6222 south to latch C's data pad (6214,8906) (`v 6212 8500 8925`, `h 8518 6285 6415`, `v 6430 8375 8505`) |
 
 The ten pads: each has a dark ring with a bright centre in both metal shots. Six have a hole of `g` in the
 clean shot ((5927,8131), (6212,8128), (6297,8170), (6429,8386), (6298,8516), (6212,8516)); four do not
@@ -366,7 +366,7 @@ x 5940 and south on x 5924-5940 through the strip's edge (`tl5_tracks.py rows ro
 each seen without a break across y 9233-9255: the two rails, the two thin metals, the column (one diffusion
 y 9227-9282 under the rail) and the metal x 5550-5568 (`tl5_tracks.py v 5560 9100 9320`: rings at y 9142-9187 and
 y 9274-9293 with metal between: row 4's pad lies in its run). Two aliases record the joins: `lc3_m5626` is
-`lc2_w8450`; `lc2_w9166` is `lc3_w9299`. The east thin metal carries `lc3`'s name `lc3_m5756`.
+`lc2_w8450`; the wire `lc2` called w9166 is `lc3_w9299`. The east thin metal carries `lc3`'s name `lc3_m5756`.
 
 ## The staircase of metals west of latch B (run 6, piece H): three lines traced
 
@@ -474,7 +474,7 @@ other pad turned out to be on K2's load poly.
 
 ## The west gate cluster: gate K3 (run 9, piece L): traced
 
-(Piece M found that this section's `lc2_w8857` is track C's net `lc2_w8298`, and `lc2_w8930` is `lc2_w8692`: the
+(Piece M found that this section's the wire `lc2` called w8857 is track C's net `lc2_w8298`, and the wire `lc2` called w8930 is `lc2_w8692`: the
 extraction prints the older names; the two labels stay in the trace as aliases, and are used below for the places.)
 
 Views `z1_a.png`, `z1_m.png` (2.9x), `z2_a.png`, `z2_m.png` (6x, east side), `z3_a.png`, `z3_m.png` (6x, the stack),
@@ -482,7 +482,7 @@ Views `z1_a.png`, `z1_m.png` (2.9x), `z2_a.png`, `z2_m.png` (6x, east side), `z3
 `z7_m.png` (6.3x, south of it); overlays `o16_a.png`, `o16_m.png` (4.3x); measurements in `cache/scratch/lc2/survey.md`.
 
 ```
-lc2_w8857 = NOT( lc2_w8930 & ( lc2_w8725 | lc2_w8475 ) )
+lc2_w8298 = NOT( lc2_w8692 & ( lc2_w8725 | lc2_w8475 ) )
 ```
 
 The west rail is wider here: x 4741-4812 from y 8800 (`tl5_tracks.py h 8848 4690 4850 --half 2`: metal x 4753-4812;
@@ -500,7 +500,7 @@ N is between two VSS nodes, so it is not an end of a stack by itself: its only w
 
 | Item | Reading | Seen |
 |---|---|---|
-| the strip, `lc2_w8930` | a vertical poly x 4818-4838 from y 8812 to y 8943, where it ends (round 12: `px.py col 4828 8920 8962`: peach to y 8941, pink from 8944) and leaves by an arm east at y 8925-8945 (drawn to x 4876; under the output's thin metal without a contact). It lies along E's east edge; beyond it an open diffusion X (4842-4866, 8805-8900: a plain pinkish lens in both metal shots). Taken as a gate between E and X (channel y 8838-8900) | `z4_m.png`, `z4_a.png`, `z4_c.png`; `tl5_tracks.py rows col 8796 8960 4 4828`. **Not seen directly**: Ambiguity 15 |
+| the strip, `lc2_w8692` | a vertical poly x 4818-4838 from y 8812 to y 8943, where it ends (round 12: `px.py col 4828 8920 8962`: peach to y 8941, pink from 8944) and leaves by an arm east at y 8925-8945 (drawn to x 4876; under the output's thin metal without a contact). It lies along E's east edge; beyond it an open diffusion X (4842-4866, 8805-8900: a plain pinkish lens in both metal shots). Taken as a gate between E and X (channel y 8838-8900) | `z4_m.png`, `z4_a.png`, `z4_c.png`; `tl5_tracks.py rows col 8796 8960 4 4828`. **Not seen directly**: Ambiguity 15 |
 | load | one poly: a ringed box (4865-4895, 8803-8832) on X (the tie), a plate (4868-4925, 8836-8876) over a diffusion strip y 8846-8868 from X to a VCC box (4930-4985, 8805-8885, contact (4946,8830)), and a pad box (4868-4900, 8872-8904) | `z2_m.png` (6x), `o16_m.png`; `textmap.py 4932 8812 4962 8842` |
 | ... a second strip | the poly east of the ringed box (x 4898-4925, y 8805-8836) is as red as the plate (`px.py col 4912 8798 8884`: clean 130-187/58-104/28-84 against the plate's 132-178/81-115/46-65 and a pad box's 232/159/128): drawn as an uncertain second load strip. It only strengthens the load | |
 | output | the pad (4882,8890) (`textmap.py 4864 8872 4900 8904`) on a thin metal that steps west to x 4859-4873 and runs south to a pad (4862,8998) (drawn to y 8975) | `z7_m.png` (6.3x) |
@@ -539,7 +539,7 @@ Under it (`railprof.py 4758 4796 8750 9245`):
 | the clock's source | at the pad (4648,9124) an L-shaped metal arrives: y 9112-9132 from x 4560, then south at x 4553-4575 (drawn to y 9190) | `z14_m.png`, `z8_m.png` |
 | node T east | a pale band y 8956-8972 from under the rail east to x ~4900; at its end a ringed box (4880-4905, 8922-8950) to the north and a diffusion strip to the south | `z15.png` (5.5x, three shots), `z11.png`, `z13.png`; review round 14: `tband.png`, `head.png` |
 | T's load | the strip runs south from the band's end, x 4886-4900 beside the pad box (14 px between two poly edges: drawn uncertain) and x 4878-4900 below it, under a plate (4857-4926, 9040-9098; channel colour, `px.py col 4890 9040 9100`: 157-197/81-134/40-69) into an open diffusion (4878-4985, 9102-9132; `opendiff.py`: 4883-4909 x 9108-9130) joined to a VCC box (4932-4985, 9085-9132, contact (4952,9108)). W/L 22/58 | review round 14 (`neck.png`, `east_strip.png`, `east_strip2.png`); `px.py row 9014 4846 4906` (pink field south of the pad box: no neck), `col 4894 8950 9046` (uniform y 8962-9034) |
-| the load's gate, T's tie, and K3's gate | the plate is one poly with a long poly x 4904-4926 that runs north over field (`px.py col 4914`: 71-140/38-91, darker than the plate's channel) to the ringed box, where it is tied to T and is one with the arm of K3's strip (`lc2_w8930`): so K3's series gate is T | `z13.png`, `z13_m.png`; round 14: the green rim at x 4903 runs y 8960-9036 and is absent at y 9040-9092; one bottom outline at y ~9096 |
+| the load's gate, T's tie, and K3's gate | the plate is one poly with a long poly x 4904-4926 that runs north over field (`px.py col 4914`: 71-140/38-91, darker than the plate's channel) to the ringed box, where it is tied to T and is one with the arm of K3's strip (`lc2_w8692`): so K3's series gate is T | `z13.png`, `z13_m.png`; round 14: the green rim at x 4903 runs y 8960-9036 and is absent at y 9040-9092; one bottom outline at y ~9096 |
 | node T west, and K2's data row | T's band runs west of the rail to a ringed box (4694-4724, 8920-8954); on it ends the row y 8897-8916 that comes from the vertical poly x 4578-4596, K2's row b (`lc2_w8692`) | `z14_m.png` (the box with its ring), `z15.png` |
 
 **What the four gates are.** With `c` = `lc2_w8475`: while `c` is high the master is open (`lc2_w8552` = NOT
@@ -603,10 +603,10 @@ their x at the south edge.
 
 | Line | Enters (east edge) | Path | Leaves (south edge) |
 |---|---|---|---|
-| `inh_src` | y 8630 | diagonal south-west to x 6342 at y 8738, south, west at y 9034 | x 6299 |
-| `lc2_x6342` | y 8692 | diagonal to x 6385 at y 8757, south, west at y 9076 | x 6342 |
-| `lc2_x6387` | y 8756 | diagonal to x 6428 at y 8778, south, west at y 9121 | x 6387 |
-| `lc2_x6432` | y 9165 | west to x 6432, south | x 6432 |
+| `rst_a` | y 8630 | diagonal south-west to x 6342 at y 8738, south, west at y 9034 | x 6299 |
+| `res_b` | y 8692 | diagonal to x 6385 at y 8757, south, west at y 9076 | x 6342 |
+| `lpstb_b` | y 8756 | diagonal to x 6428 at y 8778, south, west at y 9121 | x 6387 |
+| `lc3_w9947` | y 9165 | west to x 6432, south | x 6432 |
 
 `tl5_tracks.py h Y 6280 6450 --half 2` at y 8600, 8640 ... 9150 (14 heights: the metals' x at each);
 `follow.py 6298|6342|6385|6430 9220 N --gap 16` (corners at (6299,9034), (6346,9076), (6393,9120), (6436,9168)). The
@@ -639,8 +639,8 @@ Run 3 (latch D's lower unit and the bus field):
 | `vss` | M | 6015-6063, 8067 | - | the east rail (meets `lc1`'s) |
 | `lc2_w8646` | M | 6159-6177, 8067 | in | latch C's enable, north into `lc1`'s strip (no port of `lc1` there) |
 | `lc2_w8646` | M | 6450, 8292-8310 | ? | its branch east (metal B) |
-| `lc1_w7908` | M | 6203-6221, 8067 | in | latch D's enable (meets `lc1`'s port) |
-| `lc1_w7908` | M | 6450, 8250-8268 | out | on east (metal A) |
+| `tc2_sr_g` | M | 6203-6221, 8067 | in | latch D's enable (meets `lc1`'s port) |
+| `tc2_sr_g` | M | 6450, 8250-8268 | out | on east (metal A) |
 | `rst_c` | M | 6248-6264, 8067 | in | latch D's and latch C's clear (meets `lc1`'s port) |
 | `lc1_w7780` | M | 6287-6307, 8067 | in | latch D's data (meets `lc1`'s port) |
 | `lc2_w8474` | M | 6332-6350, 8067 | ? | the metal of the pad (6341,8214) |
@@ -659,9 +659,9 @@ Run 3 (latch D's lower unit and the bus field):
 | `rst_c` | P | 6450, 8911-8936 | out | round 3: the poly from latch C's clear pad, south-east out of the strip |
 | `lc2_w8341` | M | 5508-5524, 8067 | out | run 4: latch B's output Na, north into `lc1` |
 | `rst_c` | M | 5466-5486, 8067 | in | run 4: latch B's clear (meets `lc1`'s port) |
-| `inh_ck` | M | 6422-6440, 8067 | ? | from the north |
-| `inh_ck` | M | 6450, 8163-8181 | ? | on east |
-| `lc2_w8906` | M | 6462-6480, 8067 | in | latch C's data, north (20 px east of the strip) |
+| `rst_ck` | M | 6422-6440, 8067 | ? | from the north |
+| `rst_ck` | M | 6450, 8163-8181 | ? | on east |
+| `tl3_w3982` | M | 6462-6480, 8067 | in | latch C's data, north (20 px east of the strip) |
 | `lc2_w9124` | M | 5967-5981, 8067 | out | run 4: the thin metal, NOT latch C's Na, north into `lc1` (`lc1`'s notes, Ambiguity 8: it crosses the upper unit) |
 | `vcc`, `vss` | M | 5840-5890 and 5659-5705, 9256 | - | run 5: both rails drawn on to `lc3`'s pieces |
 | `lc3_m5756` | M | 5749-5763, 8067 | ? | run 5: the east thin metal, north through latch B into `lc1`; no contact found in the strip |
@@ -675,7 +675,7 @@ Run 3 (latch D's lower unit and the bus field):
 | `lc2_w8907` | M | 4508-4526, 8700 | ? | run 8: drawn end: track B runs on south (no pad to y 9150) |
 | `lc2_w8475` | M | 4553-4575, 9190 | in | run 9: drawn end: the clock's L-shaped metal, from the south |
 | `lc2_w9034` | M | 5247-5263, 9233 | out | run 10: the second flip-flop's slave output, south into `lc3` |
-| `inh_src`, `lc2_x6342`, `lc2_x6387`, `lc2_x6432` | M | 6450, y 8630, 8692, 8756, 9165 | ? | run 10: the four through lines at the east edge |
+| `rst_a`, `res_b`, `lpstb_b`, `lc3_w9947` | M | 6450, y 8630, 8692, 8756, 9165 | ? | run 10: the four through lines at the east edge |
 | the same four | M | x 6299, 6342, 6387, 6432; 9233 | ? | run 10: at the south edge, into `lc3` |
 | `lc2_w9079` | M | 5509-5527, 9233 | in | run 10: row 3's thin metal, from `lc3` |
 | `lc2_w9210` | M | 5334-5350, 9233 | in | run 10: row 5's metal, from `lc3` |
@@ -692,8 +692,8 @@ Run 3 (latch D's lower unit and the bus field):
 
 3. **The metal x 6422-6440 over the top of latch C's data poly (y 8117-8181): no contact** (run 3). The metal
    comes from the north, lies on the poly x 6420-6443 for 64 px and turns east at y 8163-8181; the poly's top
-   turns east to its own pad (6470,8127), on the metal x 6462-6480. A contact here would join `inh_ck` and
-   `lc2_w8906`. Against one: both metal shots are bright along the 64 px with one dark bar at y 8110-8120 (the
+   turns east to its own pad (6470,8127), on the metal x 6462-6480. A contact here would join `rst_ck` and
+   `tl3_w3982`. Against one: both metal shots are bright along the 64 px with one dark bar at y 8110-8120 (the
    poly's top edge) and none below it, so no ring (`textmap.py 6396 8030 6462 8204 3 --acid`); the clean shot
    under it has values 3-5 and no hole; the poly is not a stub (it has its pad). For one: the clean shot under
    the metal is yellowish and speckled, not salmon (the clear's cross-under is the same colour under A and B,
@@ -819,8 +819,8 @@ Run 3 (2026-11-18 16:28 -0600):
 - **`lc2_w8474`'s poly west of (5400,8517)** (run 4: drawn to there; it runs on west past x 5150), and its
   metal x 6332-6350 north of y 8067 (`lc1` has no port there).
 - North of y 8067 (in `lc1`'s strip, not drawn by it): latch C's enable metal x 6159-6177, the node's row
-  x 6401-6415 (`lc2_w8083`), the metal x 6422-6440 (`inh_ck`), latch C's data metal x 6462-6480.
-- East of x 6450: metals A (`lc1_w7908`), B (`lc2_w8646`) and the turn of `inh_ck` (y 8163-8181).
+  x 6401-6415 (`lc2_w8083`), the metal x 6422-6440 (`rst_ck`), latch C's data metal x 6462-6480.
+- East of x 6450: metals A (`tc2_sr_g`), B (`lc2_w8646`) and the turn of `rst_ck` (y 8163-8181).
 - The thin metals through latch B (x 5748-5764) and the one drawn `?` here: R41's question (Ambiguity 6).
 - From review round 2: the thin metal x 5962-5982 is dark for about 35 px over the `?` tie box of latch D's lower
   unit at about (5978,8118), with a bright spot in chip 2 only (x 5975-5981, y 8109-8121), none in chip 1 and no
@@ -1219,7 +1219,7 @@ is one poly, the VCC contact real, no other contact on the thin metal to y 8975 
 
 Findings, each confirmed by my own measurement and fixed:
 
-1. **Where a wire goes on** (not the equation): `lc2_w8930` does not come from the south. The strip ends at y ~8943
+1. **Where a wire goes on** (not the equation): `lc2_w8692` does not come from the south. The strip ends at y ~8943
    (`px.py col 4828 8920 8962`: clean peach to y 8941, pink from 8944; `z11.png` 9x) and leaves by an arm east at
    y 8925-8945, one poly with the strip in both chip-2 shots (reviewer: `px.py row 8935`, `i1.png`), under the output's
    thin metal without a contact. Drawn now, to x 4876; the port moved from (4818-4838, 8950) to (4876, 8925-8945).
@@ -1242,7 +1242,7 @@ polys at (4880-4925, 8925-8960), a line at y 8954.
 After the fixes: `tools/t.sh lc2 sameconn.py 8c767ac`: `connections identical`;
 `.venv/bin/python tools/sameconn.py 8c767ac`: `connections identical`.
 
-Round 12: one finding that changes where a wire leaves (the port of `lc2_w8930`), fixed; seven geometry-only, fixed.
+Round 12: one finding that changes where a wire leaves (the port of `lc2_w8692`), fixed; seven geometry-only, fixed.
 
 Round 13 (fix check of round 12's fixes to gate K3, 2026-11-18 22:13 -0600, a fresh agent on claude-fable-5-2, changes
 since 8c767ac; images `cache/scratch/lc2/review-13/`, 9 of them). All seven corrections hold in the photos and none
@@ -1425,18 +1425,23 @@ Round 18: no findings that change a connection.
 - `lc2_w9079` ("row 3's thin metal from its pad (5520,9081), south into `lc3`", an input) is the output
   of `lc3`'s upper inverter: `lc2_w9079` = NOT `lc3_w9299`. So `lc2_w9125` = NOT(`lc2_w9034` AND NOT
   `lc3_w9299` OR `lc2_w9210` AND `lc3_w9299`): a choice between the counter's fourth and fifth outputs.
-- `lc2_x6432` is the ripple counter's clock (`lc3_w9947`, by a poly row and one pad in `lc3`).
+- `lc3_w9947` is the ripple counter's clock (`lc3_w9947`, by a poly row and one pad in `lc3`).
 - `lc2_w8474` / `lc1_w7170` ("its driver is not found"): driven by `lc3`'s lower inverter, `lc1_w7170`
-  = NOT `lc3_w9470`. Its metal north of (6341,8067) ends on a pad (6339,7824) whose poly is row 3 of
+  = NOT `rst_c`. Its metal north of (6341,8067) ends on a pad (6339,7824) whose poly is row 3 of
   `eof`'s gate `g7700`: a load (`eofw`).
-- `lc1_w7908`'s metal east of (6450,8259) is drawn by `eofw`: it is `tc2_sr_g` (see `lc1`'s corrections).
+- `tc2_sr_g`'s metal east of (6450,8259) is drawn by `eofw`: it is `tc2_sr_g` (see `lc1`'s corrections).
 - `rst_n`'s metal ends on a pad (5473,10207) with a poly south; `lc2_w8450`'s metal (`lc3_m5626`) ends
   on a pad (5540,10165) with a poly south; `lc3_m5756` ends on a pad (5646,9992) whose poly row runs
   east out of `lc3` (`lc3` run 2b).
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, third batch)
 
-- The first through line (x 6299 at the south edge; "through line", direction `?`) **is `inh_src`** (`eof` run 9, piece `isrc4`; renamed by
+- The first through line (x 6299 at the south edge; "through line", direction `?`) **is `rst_a`** (`eof` run 9, piece `isrc4`; renamed by
   the refresh of 2026-11-19): from `lc3`'s south edge it runs down the left bus field (`busl`, piece
   `lc9`) to the row y 14914 and `bc1`'s track x 7969. In the bottom-centre logic and `bd1` it only feeds
   gates, so its driver is at or beyond this block's east edge (6450,8630).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- Latch C's data the wire `lc2` called w8906 is `tl3_w3982` (`eof` run 11, piece `w5936`: the metal x 6471 runs on north to an L at y 7978 and the track x 6514), and that is latch D's lower node inverted three times (`eof` run 12). The second and third through lines are the buffered pins RES and LPSTB (`res_b`, `lpstb_b`; `eof` run 11, piece `rl`). The first is `rst_a` (run 10).
+- The fourth through line (the ripple counter's clock, "enters at the east edge at y 9165") comes from `lc3_w9947` (`eof` run 13, piece `ck5`). The reset copy `rst_c`'s diagonal poly out of the strip at (6450,8923) ends on a pad (6469,9209) whose metal turns west at y 9452 onto `lc3`'s fifth corner-bundle line: that line is `rst_c` (piece `rc`).

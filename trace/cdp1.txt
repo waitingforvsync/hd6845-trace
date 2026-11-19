@@ -364,7 +364,7 @@ C 10677,3958 s=24x26
 M 10679,3344 y3972 w=20
 C 10680,3354 s=24x26
 P 10660,3340:10694,3364                # pad on the upper line
-P 8285,3351 x10692 w=22                # upper line (cdp1_b5_a): west to meet tc1's poly (its output tc1_f, drawn to x 8290)
+P 8285,3351 x10692 w=22                # upper line (cdp1_b5_a): west to meet tc1's poly (its output cdp1_b5_a, drawn to x 8290)
 C 10634,3396 s=24x26
 P 10612,3384:10652,3410                # pad on the lower line
 P 8285,3396 x10650 w=22                # lower line (= r9_b0_q): west to meet tc1's poly (its input tc1_a, drawn to x 8290)

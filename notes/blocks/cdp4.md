@@ -41,7 +41,7 @@ below y 14060.
 | y | What | Slices | State |
 |---|---|---|---|
 | ~11100-11500 | row R1 upper: complex cell | 8 | not traced |
-| 11490-11850 | row R1 lower: the row C latch cell upside down, strobe `cdp4_ld8b` (poly line y 11837) | 8 | traced |
+| 11490-11850 | row R1 lower: the row C latch cell upside down, strobe `wr_r15` (poly line y 11837) | 8 | traced |
 | 11860-12190 | channel 1: eight poly bus lines from the left edge, one per slice | 8 | traced |
 | 12200-12800 | rows A and B: four pass transistors per slice onto node n | 8 | traced |
 | 12800-12950 | row C top: contact of n, pull-down of n gated by `cdp4_rst` | 8 | traced |
@@ -139,7 +139,7 @@ Eight copies of `cdp4_lat` mirrored top to bottom (`lr_s0`..`lr_s7`: `dx,-1466 m
 rot=180 o=8610,13132.5`, s7 dy -1467). Checked: cellcheck median 0.92-0.93 with 1-5
 differing blocks of 132, metal overlay of s1, s2, s3, both layers of s7.
 
-- Strobe `cdp4_ld8b`: the poly line at y 11837 along the bottom edge of the row. Its
+- Strobe `wr_r15`: the poly line at y 11837 along the bottom edge of the row. Its
   ends were not examined (drawn x 7600-10600).
 - Data: in tracks `cdp4_in8b_sK` (x 8465 + dx), contact at (8466 + dx, 11809), run **up**
   through the cell and on into the upper half of R1.
@@ -159,7 +159,7 @@ overlay of s6.
 - Strobe `cdp4_ld6`: poly line y 13721 from a contact at (7946,13720), left of the s1
   cell, to the last cell (x 10330). A metal line goes down from the contact (x 7947,
   seen to y 13840).
-- Data: in tracks `cdp4_in6_s1`..`s6` (x 8465 + dx) start just above each cell's in
+- Data: in tracks `cdp3_g_c2`..`s6` (x 8465 + dx) start just above each cell's in
   contact and run down through the cell and **out of the bottom of the array**.
 - Output: the buffered output (d land) of the cell under slice K goes up in metal to a
   poly contact at (8727 + dx, 13677); a poly link runs right from there to a contact
@@ -183,20 +183,20 @@ lie left of x 7600.
 
 | Name | Layer | Where it crosses | Direction | What |
 |---|---|---|---|---|
-| `cdp4_sel1` | poly | x 7600, y 12223 | from outside | select n <-> a |
-| `cdp4_sel2` | poly | x 7600, y 12481 | from outside | select n <-> b |
-| `cdp4_sel3` | poly | x 7600, y 12530 | from outside | select n <-> d (row C latch) |
-| `cdp4_sel4` | poly | x 7600, y 12786 | from outside | select n <-> c |
+| `rsel14_buf` | poly | x 7600, y 12223 | from outside | select n <-> a |
+| `rsel15_buf` | poly | x 7600, y 12481 | from outside | select n <-> b |
+| `rsel17_buf` | poly | x 7600, y 12530 | from outside | select n <-> d (row C latch) |
+| `rsel16_buf` | poly | x 7600, y 12786 | from outside | select n <-> c |
 | `cdp4_rst` | poly | x 7600, y 12874; right end x 10705 | from outside | pulls every n low |
 | `cdp4_ld` | poly | x 7600, y 12962; right end about x 10600 | from outside | row C latch strobe |
 | `cdp4_bus_s0`..`s7` | poly | x 7600, y 12180, 12137, 12093, 12052, 12008, 11964, 11922, 11877 | unknown | per-slice line between row R1 and the left |
-| `cdp4_in_s0`..`s7` | poly | x 7600, y 13333, 13376, 13420, 13463, 13505, 13548, 13590, 13633 | from outside | data into the row C latch |
+| `cdp4_bus_s0`..`s7` | poly | x 7600, y 13333, 13376, 13420, 13463, 13505, 13548, 13590, 13633 | from outside | data into the row C latch |
 | `cdp4_n_s0`..`s7` | poly | x 10850, same y as `in` of the same slice | driven inside | selector output |
 | `cdp4_a_s2`..`s7` | metal | x 8509 + offset, y 11790 (drawn end; the track continues up through the R1 latch) | from R1 upper | selector input a (6 bits) |
 | (bus tap) | metal | x 8555 + offset, y 11790 (drawn end; continues up through the R1 latch) | to/from R1 upper | joins `cdp4_bus_sK` |
 | `cdp4_in8b_s0`..`s7` | metal | x 8465 + offset, y 11499 (drawn end; continues up) | from R1 upper | data into the R1 latch |
-| `cdp4_ld8b` | poly | y 11837; believed to cross x 7600 (ends not examined) | from outside | R1 latch strobe |
-| `cdp4_in6_s1`..`s6` | metal | x 8073, 8465, 8855, 9245, 9635, 10025 at y 14059 (drawn end; continues down) | from outside (below) | data into the row D latch |
+| `wr_r15` | poly | y 11837; believed to cross x 7600 (ends not examined) | from outside | R1 latch strobe |
+| `cdp3_g_c2`..`s6` | metal | x 8073, 8465, 8855, 9245, 9635, 10025 at y 14059 (drawn end; continues down) | from outside (below) | data into the row D latch |
 | `cdp4_ld6` | metal | x 7947, y 13840 (drawn end; continues down) | from outside (below) | row D latch strobe |
 | `vss` | metal | x 7622, 8013, 8404, 8795, 9185, 9574, 9964, 10355, 10746 at y 11480; x 8013..10355 at y 14062; 7622 drawn to y 13650 | - | rails |
 | `vcc` | metal | x 7837, 8228, 8619, 9010, 9400, 9789, 10179, 10570 at y 11480; x 8228..10179 at y 14062; 7837 drawn to y 13530, 10570 to y 13650 | - | rails |
@@ -249,7 +249,7 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
   (x 8509, s2..s7), the bus taps (x 8555) and the in tracks of the R1 latch (x 8465)
   come from there. Expect a 6-bit source for a; what the bus taps and channel 1 carry
   is unknown.
-- Ends of `cdp4_ld8b` (poly, y 11837).
+- Ends of `wr_r15` (poly, y 11837).
 - Right of x 10600: the n lines' contacts beyond x 10850, thin vertical metals at
   x 10795-10905, the end of the s7 VCC rail.
 - Below y 14060: where the six in tracks of row D, `cdp4_ld6` and the rails go (fan-out
@@ -259,7 +259,7 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
 ## Corrections (coordinator, from the handoffs of 2026-11-19, second batch)
 
 - Ports, `cdp4_bus_s0`..`s7` ("unknown, per-slice line between row R1 and the left") and
-  `cdp4_in_s0`..`s7` ("from outside, data into the row C latch") **are the same eight nets** (`busl`, piece
+  `cdp4_bus_s0`..`s7` ("from outside, data into the row C latch") **are the same eight nets** (`busl`, piece
   `ch1`): for each slice the channel-1 row and the channel-2 row are joined in the left bus field by a
   metal track between poly pads, and the same net ends on one poly row of the left array (s7 .. s1 at
   y 11488, 11922, 12442, 12984, 13397, 13874, 14351; s0 just south of `busl`'s region). The field holds
@@ -267,11 +267,16 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, third batch)
 
-- Ports, `cdp4_sel1`..`4`, `cdp4_rst`, `cdp4_ld` "from outside": the selects come from south of y 15000
+- Ports, `rsel14_buf`, `rsel15_buf`, `rsel17_buf`, `rsel16_buf` (`cdp4`'s selects 1-4), `cdp4_rst`, `cdp4_ld` "from outside": the selects come from south of y 15000
   on tracks x 6538-6668 and each also feeds a gate band of the corner gate group; `cdp4_rst` from the
   corner gate group (believed); `cdp4_ld` from `bc1`'s strobe driver (`bc1_ld_a`, marked: AMB-038). The
   "contact near that strobe line at (7557,12975)" is the pad (7556,12983) (`busl`, piece `ctl`).
-- Ports, `cdp4_in6_s1`, `cdp4_in6_s2` "from outside (below)": from `cdp3`'s row A cells, columns c2 and
+- Ports, `cdp3_g_c2`, `cdp3_g_c3` "from outside (below)": from `cdp3`'s row A cells, columns c2 and
   c3, by line g (`cdp3_g_c2`, `cdp3_g_c3`; `busl`, piece `d6`).
-- `cdp4_ld8b` ("ends not examined"): the row does not enter the left bus field; its west end is at about
+- `wr_r15` ("ends not examined"): the row does not enter the left bus field; its west end is at about
   x 7603-7640, y 11825-11850, under the metal x 7600-7645 (`busl`, run 6).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- The strobe of row R1's lower half ("ends not examined") runs east as one poly row y 11824-11844 to a pad (11243,11830) on the write strobe of R15 (`regs` run 1, firm): **row R1's lower half is R15**. Its west end is at about (7603-7640, 11825-11850) (`busl` run 6).
+- The four selects are the read selects of R14-R17 (`regs` run 2, firm: sel1 R14's, sel2 R15's, sel3 R17's, sel4 R16's): the four-way selector is the read multiplexer of R14-R17. Source a is what R14 reads, row R1's lower half is R15, latch row C is what R17 reads, latch row D what R16 reads. The corner gate group takes two more select rows, y 13744 and y 13852 (believed R13's and R12's read selects, by taps at (6492,13744) and (6450,13852): `regs` run 3).

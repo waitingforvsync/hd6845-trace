@@ -11,14 +11,14 @@ lc1_w7928   P  6401-6415,8067  out  the same node's row (label lc2_w8083), north
 vss         M  6015-6063,8067  -    the east rail, one metal from lc1's piece to latch C's
 lc2_w8646   M  6159-6177,8067  in   latch C's enable: the metal runs north out of the strip (lc1 has no port there)
 lc2_w8646   M  6450,8292-8310  ?    its branch east (metal B)
-lc1_w7908   M  6203-6221,8067  in   latch D's enable, through the pad (6212,8128)
-lc1_w7908   M  6450,8250-8268  out  on east (metal A)
+tc2_sr_g   M  6203-6221,8067  in   latch D's enable, through the pad (6212,8128)
+tc2_sr_g   M  6450,8250-8268  out  on east (metal A)
 rst_c   M  6248-6264,8067  in   latch D's clear, and by a cross-under and a metal latch C's
 lc1_w7780   M  6287-6307,8067  in   latch D's data, to the pad (6297,8170)
 lc2_w8474   M  6332-6350,8067  ?    the metal of the pad (6341,8214)
-inh_ck   M  6422-6440,8067  ?    a metal from the north that turns east
-inh_ck   M  6450,8163-8181  ?    on east
-lc2_w8906   M  6462-6480,8067  in   latch C's data: the metal of the pad (6470,8127), 20 px east of the strip
+rst_ck   M  6422-6440,8067  ?    a metal from the north that turns east
+rst_ck   M  6450,8163-8181  ?    on east
+tl3_w3982   M  6462-6480,8067  in   latch C's data: the metal of the pad (6470,8127), 20 px east of the strip
 
 # Run 4: the inverter below latch C and its thin metal
 lc2_w9124   M  5967-5981,8067  out  the thin metal: NOT lc2_w8822 (latch C's Na), from the inverter below latch C north through latches C and D into lc1
@@ -69,13 +69,13 @@ vss         M  5084-5148,9256  -    the east rail on south into lc3
 vss         D  5104-5158,9250  -    the VSS node (contact (5124,9224)) of the stack under the east rail south of the east column, on into lc3
 lc2_w9171   D  5062-5078,9256  ?    the stack's top node leaves by the diffusion strip beside that rail, on into lc3 (it ends about y 9290)
 # Run 10, piece P: through lines and row ends
-inh_src   M  6450,8630       ?    through line, east edge
-inh_src   M  6299,9233       ?    through line, south edge
-lc2_x6342   M  6450,8692       ?    through line, east edge
-lc2_x6342   M  6342,9233       ?    through line, south edge
-lc2_x6387   M  6450,8756       ?    through line, east edge
-lc2_x6387   M  6387,9233       ?    through line, south edge
-lc2_x6432   M  6450,9165       ?    through line, east edge
-lc2_x6432   M  6432,9233       ?    through line, south edge
+rst_a   M  6450,8630       ?    through line, east edge
+rst_a   M  6299,9233       ?    through line, south edge
+res_b   M  6450,8692       ?    through line, east edge
+res_b   M  6342,9233       ?    through line, south edge
+lpstb_b   M  6450,8756       ?    through line, east edge
+lpstb_b   M  6387,9233       ?    through line, south edge
+lc3_w9947   M  6450,9165       ?    through line, east edge
+lc3_w9947   M  6432,9233       ?    through line, south edge
 lc2_w9079   M  5509-5527,9233  in   row 3's thin metal from its pad (5520,9081), south into lc3
 lc2_w9210   M  5334-5350,9233  in   row 5's metal from its pad (5341,9211), south into lc3

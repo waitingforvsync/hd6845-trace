@@ -274,8 +274,8 @@ B 11524,7792:11549,7821
 # ====================================================================
 # Horizontal poly bands across the top of the block (they go on east over the top of the
 # mid-right array) and the metals that hang from them.
-# H3, y 7158-7178: the band of inh_rc (mrach). Its west end is a pad with the contact
-# (11240,7168): the metal x 11232-11252 down to gate a of the p NOR. So a = inh_rc.
+# H3, y 7158-7178: the band of rst_rc (mrach). Its west end is a pad with the contact
+# (11240,7168): the metal x 11232-11252 down to gate a of the p NOR. So a = rst_rc.
 P 11220,7150:11260,7187
 C 11240,7168
 P 11250,7158:11700,7178

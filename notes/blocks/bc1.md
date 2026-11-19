@@ -17,7 +17,7 @@ overlays checked on the clean, stripped and metal shots):
    four one-of-four lines (active low), plus one inverter with a weak load. All their
    wiring in the channel is traced.
 3. **Routing field**: the six data lines of `cdp4` row D as far as they were followed
-   (lines 1 and 2 joined to `cdp4_in6_s1`, `cdp4_in6_s2`).
+   (lines 1 and 2 joined to `cdp3_g_c2`, `cdp3_g_c3`).
 
 Not traced: the sources of `bc1_ld_in1` / `bc1_ld_in2` (lower left gate group), the
 left column of the left group, the dense column B right of the VCC rail x 8534, the
@@ -184,9 +184,9 @@ Recorded so the next agent can start here; none of it is in the trace.
 ### Row D data lines (traced in part)
 
 Six poly lines at y 14089, 14132, 14175, 14218, 14261, 14304 from x 7000 eastwards.
-Line 1 ends on the foot contact of `cdp4_in6_s1` at (8075,14084). Line 2 steps up at
-x 8118 to y 14087 and ends on the foot contact of `cdp4_in6_s2` at (8463,14083). Lines
-3-6 (`bc1_d3`..`bc1_d6`) step up in the same nested way (x 8150-8200) and continue
+Line 1 ends on the foot contact of `cdp3_g_c2` at (8075,14084). Line 2 steps up at
+x 8118 to y 14087 and ends on the foot contact of `cdp3_g_c3` at (8463,14083). Lines
+3-6 (`cdp3_g_c4`..`cdp3_g_c7`) step up in the same nested way (x 8150-8200) and continue
 right past x 8500, in order, presumably to `cdp4_in6_s3`..`s6` (not followed). Each
 line also has a contact to a vertical metal that arrives from above and ends on it:
 (7188,14091), (7230,14131), (7274,14172), (7317,14217), (7361,14260), (7405,14304).
@@ -246,9 +246,9 @@ The vertical x 8837 has further contacts at about y 15127, 15300, 15455, 15520.
 | `bc1_ld_a` | metal | x 7448, y 14050 (continues up) | driven inside | twin of the strobe; believed to go to `cdp4_ld` |
 | `bc1_ld_in1` | poly | y 15822, drawn to x 7750 (continues left into the lower left group) | from the lower left group | NAND input next to the output |
 | `bc1_ld_in2` | metal | x 7882, y 16300 (continues down); tap poly y 16258 drawn to x 7750 | unknown | NAND input next to VSS |
-| `cdp4_in6_s1` | poly | y 14089, x 7000; metal x 7189, y 14040 | unknown | row D data line 1 |
-| `cdp4_in6_s2` | poly | y 14132, x 7000; metal x 7231, y 14040 | unknown | row D data line 2 |
-| `bc1_d3`..`bc1_d6` | poly | y 14175, 14218, 14261, 14304 at x 7000; drawn east to x 8040 (continue); metal x 7274, 7317, 7360, 7404 at y 14040 | unknown | row D data lines 3-6 (believed `cdp4_in6_s3`..`s6`) |
+| `cdp3_g_c2` | poly | y 14089, x 7000; metal x 7189, y 14040 | unknown | row D data line 1 |
+| `cdp3_g_c3` | poly | y 14132, x 7000; metal x 7231, y 14040 | unknown | row D data line 2 |
+| `cdp3_g_c4`..`cdp3_g_c7` | poly | y 14175, 14218, 14261, 14304 at x 7000; drawn east to x 8040 (continue); metal x 7274, 7317, 7360, 7404 at y 14040 | unknown | row D data lines 3-6 (believed `cdp4_in6_s3`..`s6`) |
 | `bc1_s0` | metal | bus line y 14832, drawn from x 8040 (the line continues left to about x 7790) | from outside | decoder input, low bit |
 | `bc1_s1` | metal | bus line y 14873, drawn from x 8040 (continues left to about x 7790) | from outside | decoder input, high bit |
 | `bc1_dec01_n` | metal | x 8056, y 16300 (continues down) | driven inside | low when s1=0, s0=1 |
@@ -327,12 +327,12 @@ In order of value:
   x 7448 north to y 13982, east to x 7556, north over a box to the pad (7556,12983) on `cdp4_ld`'s row.
   Marked (one `?M`; AMB-038).
 - "the 13 bus lines at their left ends (x 7790)": the poly rows arriving there are identified for seven
-  (`busl`, piece `lc9`): row y 14567 `lc3_e9798`, 14611 `lc2_w9079`, 14654 `lc3_e9756`, 14697 `lc3_w9470`,
-  14740 `lc2_w8450`, 14784 `lc3_w9947` (the ripple counter's clock), 14914 `inh_src`; row y 14523 is two
+  (`busl`, piece `lc9`): row y 14567 `lc3_e9798`, 14611 `lc2_w9079`, 14654 `lc3_e9756`, 14697 `rst_c`,
+  14740 `lc2_w8450`, 14784 `lc3_w9947` (the ripple counter's clock), 14914 `rst_a`; row y 14523 is two
   nets (`rcs_e4` to the pad (7012,14522), another from the pad (7100,14522) east), as R10 says.
 - Survey ("Not traced: track 7969 (from a contact at (7880,14910) via a horizontal at y 14912, down the
   whole channel to a contact at (7968,16300))") and Not done ("Channel tracks x 7924, 7969 and 8012 below
-  y 15865"): track 7969 is drawn by `eof` (piece `isrc4`) and is `inh_src`; its top contact (7880,14914)
+  y 15865"): track 7969 is drawn by `eof` (piece `isrc4`) and is `rst_a`; its top contact (7880,14914)
   is on the poly row y 14914 that `busl` brings from the west.
 - The six verticals "from above ending on the lines" (x 7189 .. 7404, drawn from y 14040) are
   `cdp3_g_c2` .. `c7`, line g of `cdp3`'s row A cells (`busl`, piece `d6`).
