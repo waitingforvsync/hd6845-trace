@@ -41,7 +41,10 @@ STALE_HOURS = 24
 
 
 def git(*args):
-    r = subprocess.run(['git', *args], cwd=ROOT, capture_output=True, text=True)
+    # TZ=UTC with the *-local date formats: a plain %ad shows each author's own offset, so a
+    # timeline of several people's commits would mix timezones.
+    r = subprocess.run(['git', *args], cwd=ROOT, capture_output=True, text=True,
+                       env=dict(os.environ, TZ='UTC'))
     return r.stdout if r.returncode == 0 else ''
 
 
@@ -168,7 +171,7 @@ def read_claims():
         br = field(t, 'Branch') or name
         last = ''
         for ref in ('origin/' + br, br):
-            last = git('log', '-1', '--format=%ad', '--date=format:%Y-%m-%d %H:%M %z', ref).strip()
+            last = git('log', '-1', '--format=%ad', '--date=format-local:%Y-%m-%d %H:%M %z', ref).strip()
             if last:
                 break
         st = field(t, 'Status') or 'tracing'
@@ -284,7 +287,7 @@ def report_figures():
 
 def progress_series():
     pts = []
-    for line in git('log', '--format=%H\t%ad', '--date=format:%Y-%m-%d %H:%M', '--', 'out/report.txt').splitlines():
+    for line in git('log', '--format=%H\t%ad', '--date=format-local:%Y-%m-%d %H:%M', '--', 'out/report.txt').splitlines():
         h, d = line.split('\t')
         m = re.search(r'(\d+) nets, (\d+) transistors', git('show', '%s:out/report.txt' % h)[:300])
         if m:
@@ -321,14 +324,19 @@ def read_commits():
     return out
 
 
+def utc_minute(iso):
+    """An ISO date with its author's offset -> 'YYYY-MM-DD HH:MM' in UTC, for display."""
+    return datetime.datetime.fromisoformat(iso).astimezone(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M')
+
+
 def package_history(prefixes, commits):
     pats = [re.compile(r'^(trace/%s(_[^/]*)?\.txt|notes/blocks/%s\.md|floorplan\.d/%s\.txt)$' % (p, p, p)) for p in prefixes]
     rows = [c for c in commits if any(any(pt.match(f) for pt in pats) for f in c['files'])]
     if not rows:
         return {}
     who = collections.Counter(c['author'] for c in rows)
-    return dict(who=who.most_common(), first=rows[-1]['date'][:10], last=rows[0]['date'][:10], commits=len(rows),
-                recent=[(c['date'][:16].replace('T', ' '), c['author'], c['subject']) for c in rows[:12]])
+    return dict(who=who.most_common(), first=utc_minute(rows[-1]['date'])[:10], last=utc_minute(rows[0]['date'])[:10], commits=len(rows),
+                recent=[(utc_minute(c['date']), c['author'], c['subject']) for c in rows[:12]])
 
 
 MODEL_NAME = {'claude-fable-5-2': 'Fable 5.2', 'claude-opus-5-5': 'Opus 5.5', 'claude-sonnet-5-5': 'Sonnet 5.5',
@@ -755,7 +763,7 @@ def index_page(d, state, page_of):
 %s%s<p class="mut">Click a package for its page; hover any region or marker for its name. Package regions overlap where wiring crosses blocks.</p></section>
 <section><h2>Transistors traced</h2><div class="chart"><svg id="prog" viewBox="0 0 760 260" role="img" aria-label="Transistors traced over time"></svg><div class="tip" id="tip"></div></div>
 <p class="mut">From each version of <code>out/report.txt</code> on main.</p>
-<h2>Recent commits on main</h2>%s</section></div>
+<h2>Recent commits on main (UTC)</h2>%s</section></div>
 <h2>Packages</h2>%s
 <h3 style="margin-top:20px">Handoffs awaiting the coordinator (%d)</h3>%s
 <h2>Open questions</h2><p class="dim">Ambiguities (A) from <code>notes/ambiguities.md</code> and re-read items (R) from the master list, placed on the die where their notes give a place.</p>%s
@@ -806,7 +814,7 @@ def package_page(prefix, row, d, state, page_of):
                                              else '<span class="mut">no cost report covers it</span>'))
     if links:
         facts.append('<p class="dim">%s<br>%s</p>' % (links, hist_links))
-    recent = ('<h2>Recent commits</h2><ul class="commits">%s</ul>' % ''.join(
+    recent = ('<h2>Recent commits (UTC)</h2><ul class="commits">%s</ul>' % ''.join(
         '<li><span class="mut">%s</span> <b>%s</b> %s</li>' % (E(dt), E(a), E(sub)) for dt, a, sub in h['recent'])) if h else ''
     body = """<div class="top"><p class="crumb"><a href="../index.html">&larr; Dashboard</a></p>%s</div>
 <h1><code>%s</code></h1><p class="mut" id="live"></p>
@@ -838,8 +846,8 @@ def main():
     claims = read_claims()
     claimed = {c['prefix'] for c in claims}
     state = lambda r: 'active' if any(x in claimed for x in r['prefixes']) else r['kind']
-    log = git('log', '-30', '--first-parent', '--format=%ad\t%an\t%s', '--date=format:%Y-%m-%d %H:%M', 'HEAD')
-    head = git('log', '-1', '--format=%h, %ad', '--date=format:%Y-%m-%d %H:%M %z', 'HEAD').strip()
+    log = git('log', '-30', '--first-parent', '--format=%ad\t%an\t%s', '--date=format-local:%Y-%m-%d %H:%M', 'HEAD')
+    head = git('log', '-1', '--format=%h, %ad', '--date=format-local:%Y-%m-%d %H:%M %z', 'HEAD').strip()
     built = '%s from commit %s' % (datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC'), head)
     d = dict(claims=claims, master=master, figs=report_figures(), hist=hist, tcount=tcount, commits=commits, costs=read_costs(), handoffs=read_handoffs(),
              blocks=floor_blocks(), series=progress_series(),
