@@ -142,7 +142,7 @@ coordinating session, the owner's.
   identified (checked with `tools/names.py compare`: only names may change), bring
   `notes/operation.md` up to date, rebuild `out/`, journal. Run it after a batch of merges.
 - Keep the master list covering the whole die: after changing it, `tools/coverage.py`
-  must show no red (untraced and in no package) except empty field and supply metal. Stacked pull requests: merge the tips (the first round's notes are in
+  must show no red (untraced and in no package) except empty field and supply metal. Its stricter line, "untraced and in no Queue row", must also hold only empty field, supply metal and the die marking: a partial package or an untraced spot that no Queue row names is picked by no one (2026-11-19). Stacked pull requests: merge the tips (the first round's notes are in
   the journal, 2026-11-17).
 - Every tracer, whoever: `notes/tracing-guide.md`. Tools run through `tools/t.sh PREFIX
   tool.py ...` (sets `TRACE=PREFIX` so other blocks' unfinished files are not loaded).

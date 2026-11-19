@@ -46188,6 +46188,8 @@
 <text x="6056" y="4412" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">crossing field: five polys under eight bus metals</text>
 <rect x="6436" y="4864" width="637" height="204" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>tc1_x1 to the NOR: from the contact (7055,4478) by poly and metal to the gate at (6500,5132)</title></rect>
 <text x="6452" y="4934" font-family="sans-serif" font-size="62" fill="#ffffff" stroke="#000000" stroke-width="6" paint-order="stroke">tc1_x1 to the NOR</text>
+<rect x="7550" y="13640" width="320" height="400" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10" stroke-dasharray="60 40"><title>gate group at cdp4's bottom-left corner: pull-downs with loads beside bc1_ld_a; not traced: package cdp4 (continue)</title></rect>
+<text x="7566" y="13662" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">gate group at cdp4's bottom-left corner ?</text>
 <rect x="16950" y="14683" width="320" height="396" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>d5_d: buffered D5 leaves the column west along y 14696</title></rect>
 <text x="16966" y="14816" font-family="sans-serif" font-size="125" fill="#ffffff" stroke="#000000" stroke-width="13" paint-order="stroke">d5_d</text>
 <rect x="8300" y="3760" width="360" height="350" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>interlace sync+video gates: NAND of two R8 bits and an inverter: the mode line of the row address selector</title></rect>

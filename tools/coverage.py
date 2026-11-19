@@ -66,15 +66,29 @@ def main():
         traced_g = traced
     metal = raster(tr.by_layer('M'))
 
+    master = open(os.path.join(ROOT, 'notes', 'work-packages.md')).read()
     pk = np.zeros_like(traced)
-    for x0, x1, y0, y1 in (tuple(int(v) for v in m.groups()) for m in
-                           REGION_RE.finditer(open(os.path.join(ROOT, 'notes', 'work-packages.md')).read())):
+    for x0, x1, y0, y1 in (tuple(int(v) for v in m.groups()) for m in REGION_RE.finditer(master)):
         pk[y0 // S:y1 // S + 1, x0 // S:x1 // S + 1] = True
+    # The stricter test: only the regions of rows in the Queue, which is what /trace6845 picks
+    # from. A region named only by a done or partial row with no queue row is picked by no one
+    # (2026-11-19: twelve partial packages and a strip west of the datapath were in that state).
+    qtext = master.split('\n## Queue', 1)[1] if '\n## Queue' in master else ''
+    qk = np.zeros_like(traced)
+    for line in qtext.split('\n'):
+        if not line.startswith('| `'):
+            continue
+        cells = line.split('|')
+        for m in REGION_RE.finditer(cells[2] if len(cells) > 2 else ''):
+            x0, x1, y0, y1 = (int(v) for v in m.groups())
+            qk[y0 // S:y1 // S + 1, x0 // S:x1 // S + 1] = True
 
     gh, gw = traced.shape
     print('traced (grown 100 px): %.1f %% of the die rectangle' % (100 * traced_g.mean()))
     print('in some package region: %.1f %%' % (100 * pk.mean()))
     print('neither: %.1f %%' % (100 * (~traced_g & ~pk).mean()))
+    print('in a Queue row\'s region: %.1f %%; untraced and in no Queue row: %.1f %%'
+          % (100 * qk.mean(), 100 * (~traced_g & ~qk).mean()))
 
     photo = np.load(os.path.join(ROOT, 'cache', 'metal.npy'), mmap_mode='r') \
         if os.path.exists(os.path.join(ROOT, 'cache', 'metal.npy')) else None

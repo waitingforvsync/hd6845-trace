@@ -1794,3 +1794,33 @@ the two packages' boundary. They are now labelled "six large cells, upper part (
 "... lower part (cdp3's row A)".
 
 `out/` rebuilt.
+
+## 2026-11-19 11:23  Die coverage: a stricter check, and the gaps it found
+
+The user asked for confirmation of full die coverage. `tools/coverage.py` said 0.0% "in neither", but
+it counts a spot as covered if any region anywhere in the master list contains it, done packages
+included. `/trace6845` picks only from the Queue, so a gap can hide inside a done or partial
+package's region. That is how the logic beside the large cells went unnamed.
+
+**The tool.** `coverage.py` now also prints "in a Queue row's region" and "untraced and in no Queue
+row" (CLAUDE.md: the latter must hold only empty field, supply metal and the die marking). The first
+run gave 0.8%.
+
+**Fixed.**
+- Twelve partial packages had no Queue row: `larr`, `bc1`, `rdp2`, `fld`, `tcw`, `bw`, `rdp1`, `ur`,
+  `urch`, `mra`, `rax`, `clock`. Each now has a "(continue)" row at the end of the queue, with its
+  Left list. `fld`'s old 6250-12480 x 3880-12480 blanket is cut to 6250-7100 x 3880-6200.
+- `busL` gains its northern part, 6450-7600 x 6750-10400: the strip between the left-centre logic and
+  the central datapath, with `bw`'s crossing field.
+- `lc1`-`lc3` gains the band 4400-6450 x 6350-6900 above `lc1`.
+- `mra` (continue) starts at y 6850, for three small gates at the counter array's top.
+- `padring`'s west region now reaches x 2400, closing a 50 px sliver beside `larr`.
+- `teststr` names the die marking.
+- An untraced gate group at `cdp4`'s bottom-left corner (x 7560-7860, y 13650-14030) goes to `cdp4`
+  (continue) and gets a floor-plan block.
+
+**Now 0.4% is untraced and in no Queue row.** I looked at each piece:
+- the wide supply plates east of the right datapath (x 16950-17700, y 2675-8375);
+- the supply band at y 5325-5525;
+- empty field east of `wl` and at `cdp4`'s bottom-right;
+- a few slivers of wiring under 100 px.
