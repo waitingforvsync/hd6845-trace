@@ -248,7 +248,7 @@ P 6275,4405 y4832
 P 6257,4815:6292,4850
 C 6274,4832
 M 6276,4832 y5612 x6400
-@alias tcw_m6404 tc2_m6447
+@alias lc3_w9947 tc2_m6447                 # was `@alias tcw_m6404 tc2_m6447` until eof's piece ck5 (2026-11-19) joined this net to lc3_w9947, the left-centre ripple counter's clock: tcw_m6404 is now an alias of lc3_w9947 (trace/eof.txt), and an alias must name the canonical name directly
 
 # ---- tc1_p4308 = tc2_m6490: tc2's row y 5003 runs on west to a pad (6317,5000) (u4.png: bare
 # ground north and west of the pad); metal south, corner (6320,5569), east onto tc2's metal
