@@ -100,3 +100,8 @@ tl3_w3982   M  6465-6477,8067     out  onto lc2's metal x 6471 of lc2_w8906 (pad
 lc1_w7928   P  6401-6416,8067     in   from lc2's poly P 6401,8067:6415,8092 (its port there; both label the poly lc2_w8083, an alias): latch D's lower node, the input of the three inverters
 vss         M  7552-7598,8460     -    the gate column's VSS rail on south (cdp3's c0 rail)
 vcc         M  7722-7776,8460     -    the wide metal east of the column on south (VCC by the loads' contacts)
+# Pieces ck5 and rc (run 13): the ripple counter's clock, and rst_c on to lc3_w9470
+lc3_w9947   P  6443-6460,6390     ?    onto tc2's poly of tc2_m6447 (its port (6451,6400)), tcw_m6404's line: one net; gates in tcw
+lc3_w9947   M  6440-6450,9161-9174  ?  onto lc2's metal end (its fourth through line, lc2_x6432: its port (6450,9165)): the ripple counter's clock
+rst_c       P  6450,8911-8936     in   from lc2's diagonal poly (its port there), from latch C's clear pad
+rst_c       M  6440-6450,9445-9459  out  onto lc3's metal end (its fifth corner-bundle line, lc3_w9470: its port (6450,9448-9462))

@@ -995,3 +995,49 @@ P 7416,8030:7440,8136
 N P 7000,8040 lc2_w8083                  # lc2's name for this poly: latch D's lower node (lc1_w7928 through that cell's ? tie)
 N P 7428,8220 eof_w8168
 N P 7428,8350 eof_w8298
+# ============================================================================================
+# Piece ck5 (run 13, 2026-11-19): the clock of the left-centre ripple counter followed back from lc2's
+# fourth through line (lc2_x6432 = lc3_w9947, `M 6450,9165 x6432 y9233` in trace/lc2.txt) to the poly
+# that tc2 drew south of its pad (6447,6150) (tc2_m6447 = tcw_m6404, `P 6451,6160 y6400`).
+# Wiring only, no transistor, no uncertain item:
+#     lc3_w9947 (the clock of stage B0, lc2_x6432) IS tcw_m6404 (the line of tcw's bus that gates four
+#     pull-downs of the gate column west of the island).
+# Built like res_b's and lpstb_b's lines (piece rl), one lane further east; from the north:
+#   tc2's poly x 6443-6460 on south from y 6400, 725 px under thirteen horizontal metals -> pad with a
+#   contact (6450,7127) -> metal east along y 7128 -> the track x 6687 south, 1,030 px -> an L one track
+#   west at y 8156 -> pad with a contact (6645,8276) -> poly column south under three horizontal metals ->
+#   pad with a contact (6645,8580) -> metal south, a 45-degree diagonal south-west (x + y = 15272) to
+#   (6472,8800), south on x 6472 to y 9167 and west onto lc2's metal end at x 6450.
+# One net, four names. The canonical name is lc3_w9947: lc3 already has `@alias lc3_w9947 lc2_x6432`, and the
+# extractor wants every other name aliased to the canonical one directly. tl6's `@alias tcw_m6404 tc2_m6447`
+# therefore became `@alias lc3_w9947 tc2_m6447` in trace/tl6.txt (a commit of its own; handoff of run 13).
+@alias lc3_w9947 tcw_m6404
+@alias lc3_w9947 tc2_m6447                    # as in trace/tl6.txt
+@alias lc3_w9947 lc2_x6432                    # lc3's own alias, repeated so that this file extracts by itself
+P 6451,7127 y6390 w=17
+P 6432,7107:6470,7147
+C 6450,7127
+M 6450,7128 x6688 y8156 x6644 y8276 w=13
+N M 6688,7600 lc3_w9947
+P 6626,8257:6664,8296
+C 6645,8276
+P 6645,8276 y8580 w=18
+P 6626,8560:6665,8600
+C 6645,8580
+M 6645,8580 y8628 6472,8801 y9167 x6440 w=13
+# ============================================================================================
+# Piece rc (run 13, 2026-11-19): rst_c's poly on from lc2's east edge (6450,8923) to lc3's fifth
+# corner-bundle line (lc3_w9470, `M 6450,9455 x6429 ...` in trace/lc3.txt). Wiring only, no transistor,
+# no uncertain item:
+#     lc3_w9470 (the input of lc3's lower inverter, whose output is lc1_w7170) IS rst_c.
+# lc2's diagonal poly (`P 6258,8742 y8758 x6285 6450,8923`, from latch C's clear pad) runs on south-east
+# under lpstb_b's metal x 6432, bends south at (6472,8945) and then lies UNDER the metal of piece ck5
+# (x 6466-6478, another net: the ripple counter's clock) lengthwise for 225 px, with no contact; it
+# comes out south of that metal's corner (y 9175) and ends on a pad with a contact (6469,9209); the
+# pad's own metal leaves south on x 6472 and turns west at y 9452 onto lc3's metal end at x 6450.
+@alias rst_c lc3_w9470
+P 6440,8913 6472,8945 y9209 w=19
+P 6451,9189:6489,9227
+C 6469,9209
+M 6471,9209 y9452 x6440 w=13
+N M 6471,9330 rst_c
