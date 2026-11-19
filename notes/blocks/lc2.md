@@ -2,6 +2,18 @@
 
 ## Status
 
+2026-11-18 19:28 -0600 (run 7, Matt Godbolt, on Fable 5.2). **Partial: gate 9 of `lc1`'s gate column drawn** (piece I, 2 transistors,
+hand-drawn on the pattern of `lc1`'s gates 7 and 8; 40 in the package; not yet reviewed):
+
+```
+lc2_w8127 = NOT lc1_w7990          FIRM
+```
+
+Its output row runs east under `lc1_w7468`'s horizontal metal to a pad (5127,8080), whose metal goes back north
+into `lc1`'s strip (not drawn there). Full extraction: 2362 nets, 4243 transistors, 0 errors, 0 warnings.
+
+Earlier:
+
 2026-11-18 18:47 -0600 (run 6, Matt Godbolt, on Fable 5.2). **Partial: three lines of the staircase of metals west of latch B
 drawn** (piece H, wiring only). Two joins to `lc1`, without an uncertain item:
 
@@ -303,6 +315,24 @@ a time (`b1_m.png` 1.1x, `b2_m.png` 3x, overlay `o9_m.png` 2.25x). Each leg was 
 | the fourth line, `lc2_w8907` (`lc2_w8450` if Ambiguity 11's box is a contact) | a pad (5190,8258) (poly west from it), east along y 8251-8267 to x 5300; south to y 8439; east to x 5343; south to y 8520; east to x 5386; south through the strip's edge, with a contact (5386,8951) on a pad whose poly goes north under the metal and east as the row y 8898-8915 to drain A's box | `tl5_tracks.py h 8259 5150 5312`, `v 5300 8250 8446`, `h 8439`, `v 5343 8430 8530`, `h 8520`, `v 5386 8510 9256`: no break, one hole at y 8951; `textmap.py 5172 8236 5232 8282 --acid` (west pad: ring, centre, hole); `textmap.py 5362 8888 5416 8976 --acid` (the contact: centre in chip 1, hole 12 px, pit; the poly under the metal from y 8897 to y 8962); `tl5_tracks.py rows row 5360 5612 4 8907` (one poly x 5376-5612); `follow.py 5300 8300 S` (the metal runs on to y 9707 in `lc3`) |
 | `lc2_w8474` = `lc1_w7170` | from (5385,8440) north to y 8385; west to x 5341; north to y 8214; west to the pad (5232,8214), which lies in its run; north to y 8172; west along y 8164-8180 to x 5037; north as `lc1`'s thin metal T1 | `v 5341 8208 8392`, `h 8386`, `h 8215`: no break; pad: `textmap.py 5196 8192 5262 8236 --acid` (ring, bright centre, green hole, pit; its poly leaves west along y 8205-8220); `textmap.py 5196 8150 5262 8204` (the metal y 8165-8180 turns south at x 5223-5238 into the pad); `h 8170 4960 5260` (metal x 5031-5241); `textmap.py 5016 8140 5074 8190` (an L at x 5031-5043); T1 above it is thin and dim (values 9-B, with dark bars where rows pass under it) and fails the metal test (`v 5038 8055 8190`), as `lc1` found |
 
+## Gate 9 of `lc1`'s gate column (run 7, piece I): traced
+
+The ninth gate of the column that `lc1` drew (its notes, "Inventory": VCC rail x 4755-4803, VSS rail x 4928-4980,
+the column's build) straddles the strips' boundary. Views `n1.png` (3.3x), `n2.png`, `n3.png` (5.2x, clean and chip-2
+stripped), overlay `o11_a.png` (3x).
+
+| Item | Where | Seen |
+|---|---|---|
+| VCC contact box under rail 1 | (4758-4806, 8058-8132), contact (4777,8092) | tan box with specks in the clean shot, pitted in the chip-2 stripped shot |
+| load | plate x 4808-4848, y 8045-8160, with a foot east along y 8132-8160 to a ringed box (4878-4905, 8115-8150): the tie | orange in the chip-2 stripped shot, nested outlines at the box in both shots |
+| drain | a strip (4803-4866, 8060-8102) from the VCC box under the plate, then a band y 8102-8128 east under rail 2 to the output box | outlines in both shots |
+| pull-down | the gate row y 8071-8092 crosses the band's column under rail 2 (VSS contact (4955,8045) north of it, under `lc1`'s piece of the rail); the row runs from a rounded end at x 4893 east to `lc1_w7990`'s poly under the metal M_c2 (x 5072-5092) | `n2.png`: one salmon row into the poly from the north; 8 px of outline between it and the output's pad at x 5105 |
+| output | box (4990-5032, 8100-8140), partly under the thin metal T1 (no contact: review round 7); a row east along y 8118-8136 under `lc1_w7468`'s horizontal metal (no ring, no hole) to x 5140; a neck north (x 5118-5132) to a pad (5127,8080) with a green centre; metal north out of the strip | `n2.png`; `tl5_tracks.py v 5127 7900 8100` (ring y 8059-8099, hole at y 8084); `follow.py 5127 8050 N` (the metal runs far north into `lc1`'s strip, to about (5669,6848)) |
+
+Rail 1 is drawn on to y 8160 only: `tl5_tracks.py v 4779 8060 9240 --half 12` shows it with short bars to y 8198 and
+then many bars and a 44 px stretch without metal at y 8259-8303; the rails through the west cluster are to be read
+with the cluster.
+
 ## Ports
 
 `ports.d/lc2.txt` (kept in step with this). Latch B: enable `lc2_w8169` north on metal x 5560 at y 8067 (into
@@ -331,6 +361,9 @@ Run 3 (latch D's lower unit and the bus field):
 | `lc2_w8907` (`lc2_w8450`) | M | 5378-5394, 9233 | ? | round 7: the staircase's fourth line on south into `lc3` (to y 9707 by the follower) |
 | `lc2_w8907` | P | 5160, 8250-8268 | ? | round 7: drawn end: the poly of the pad (5190,8258) runs on west |
 | `lc2_w8907` | P | 5240, 8941-8958 | ? | round 8: drawn end: a second poly of the pad (5386,8951) runs on west into the gate cluster at x 5150-5240 |
+| `lc2_w8127` | M | 5118-5136, 8067 | out | run 7: gate 9's output, north into `lc1` (no port of `lc1` there) |
+| `lc1_w7990` | P | 5072-5092, 8067 | in | run 7: gate 9's input (meets `lc1`'s port) |
+| `vcc` | M | 4755-4803, 8067 and 8160 | - | run 7: rail 1 from `lc1`, drawn to y 8160 (it runs on) |
 | `lc1_w7468` | M | 5073-5093, 8067 and 5465-5481, 9233 | in, out | run 6: `lc1`'s M_c2 down the staircase and through the strip into `lc3` |
 | `lc3_w9299` | M | 5422-5438, 8067 | in | run 6: row 4's metal, north into `lc1` (`follow.py`: to about (5541,7433)) |
 | `lc2_w8474` | M | 5421-5437, 9233 | ? | round 3: the metal runs on south into `lc3` |
@@ -429,7 +462,7 @@ Run 5:
   node D's west lobe (Ambiguity 9); the area (5785-5830, 9200-9265) below the block is field (round 6: red minus green 0-2 in the chip-2 stripped shot).
 - The output poly's leg x 5924-5940 runs on south in `lc3`'s strip to about y 9540 and turns east along y 9525-9545 (round 6; not drawn by `lc3`).
 - Rows 2, 3 and 5 west of x 5545. The other lines of the staircase (four are drawn): one from a pad (5235,8298) south on x 5260; pads (5257,8425), (5295,8472), (5341,8539), (5341,8562), (5341,9038).
-- **Gate 9 of `lc1`'s column** (review round 7 looked at it): `lc1_w7990`'s poly (x 5072-5092 at y 8067, `lc1`'s port) runs under `lc1_w7468`'s metal to y 8088 and west as a row y 8068-8092 under T1 to a gate under the rail x 4928-4980; that gate's output row y 8118-8136 lies under `lc1_w7468`'s horizontal for x 5075-5140 (no ring, no hole) and reaches the pad (5123,8080) by a poly neck. Not drawn: the next piece (survey: `n1.png`).
+- (Done, run 7: gate 9 of `lc1`'s column.) Its output's metal north of y 8067; rail 1 south of y 8160 and rail 2 south of y 8067.
 - Geometry from round 7, not changed: latch B's VSS box's diffusion runs on north of y 8062 (tan to y 8050 at x 5682); a green patch (5858-5872, 8228-8236) under the VCC rail between two VCC boxes, no ring.
 - Geometry noted by review round 5 and not re-measured: the upper load's channel may be y 8889-8935 (drawn
   8911-8940).

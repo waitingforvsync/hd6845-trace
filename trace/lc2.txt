@@ -387,3 +387,30 @@ N P 5500,8907 lc2_w8907
 ?P 5598,8899:5612,8914
 ?B 5604,8897:5614,8916
 @alias lc2_w8450 lc2_w8907
+
+# ====================================================================
+# Gate 9 of lc1's gate column (x 4755-5145, y 8030-8160): an inverter of the same build as lc1's gates 7 and 8.
+#   lc2_w8127 = NOT lc1_w7990
+# Views n1.png (3.3x), n2.png, n3.png (5.2x, clean and chip-2 stripped); survey.md.
+D 4758,8058:4806,8132                       # VCC contact box under rail 1
+C 4777,8092 s=28x40
+M 4779,8067 y8160 w=48                      # rail 1 on south (DRAFT: extent to be scanned)
+D 4803,8060:4866,8102                       # load channel and drain strip
+D 4850,8102:5030,8128                       # drain east under rail 2 to the output box
+P 4808,8045:4848,8160                       # load gate
+P 4808,8132:4905,8160                       # foot
+P 4880,8115:4905,8160                       # up into the tie box
+B 4878,8113:4907,8130
+D 4942,8030:4985,8128                       # under rail 2: VSS box, channel, drain
+C 4955,8045 s=30x34                         # VSS (under lc1's piece of the rail)
+P 4893,8071:5092,8092                       # gate row, east to the poly under M_c2
+P 5072,8060:5092,8092                       # lc1_w7990's poly from lc1 onto the row
+D 4990,8102:5030,8140                       # under the output box
+P 4990,8100:5032,8140                       # output box
+B 4988,8098:5034,8142
+P 5030,8118:5140,8136                       # output row east under lc1_w7468's horizontal metal (no contact)
+P 5118,8090:5132,8136                       # neck north
+P 5105,8062:5142,8100                       # pad
+C 5127,8080
+M 5127,8067 y8094 w=18                      # metal north into lc1
+N P 5100,8127 lc2_w8127

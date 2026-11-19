@@ -49,3 +49,9 @@ lc3_w9299   M  5422-5438,8067  in   row 4's metal, north into lc1
 lc2_w8450   M  5378-5394,9233  ?    the staircase's fourth line (label lc2_w8907; lc2_w8450 through an uncertain buried contact) on south into lc3
 lc2_w8450   P  5160,8250-8268  ?    drawn end: the poly of that line's west pad (5190,8258) runs on west
 lc2_w8450   P  5240,8941-8958  ?    drawn end: the second poly of the pad (5386,8951) (label lc2_w8907) runs on west into the gate cluster
+
+# Run 7: gate 9 of lc1's gate column
+lc2_w8127   M  5118-5136,8067  out  gate 9's output: metal from the pad (5127,8080) north into lc1
+lc1_w7990   P  5072-5092,8067  in   gate 9's input: lc1's poly under M_c2
+vcc         M  4755-4803,8067  -    rail 1 from lc1
+vcc         M  4755-4803,8160  -    rail 1: drawn end, it runs on south
