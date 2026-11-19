@@ -498,7 +498,7 @@ C 7401,7606
 P 7273,7604 x7401 w=16               # its poly west under two metals (x 7309-7322: row 2's; x 7345-7362), no contact
 P 7255,7589:7291,7623                # a second pad
 C 7273,7606
-M 7272,6912 y7610 w=12               # a thin metal north, 690 px over the crossing field's rows (bars only, no hole)
+M 7272,6912 y7610 w=12               # a thin metal north, 690 px: over bare field from y 6930 to about 7410, then over four rows at y 7420-7570 (bars only, no hole)
 P 7254,6893:7291,6928                # its north pad
 C 7272,6912
 P 7278,6875 y6912 w=13               # the pad's poly leaves north towards a row y 6862 (not followed)

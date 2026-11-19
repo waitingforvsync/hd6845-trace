@@ -359,7 +359,7 @@ NAND(`eof_w7777`, `eof_w7718`).
 
 | Wire | Followed to | Evidence |
 |---|---|---|
-| `eof_w7818` (output) | pad (7402,7822); a thin metal x 7395-7407 north over rows 3, 2 and 1 (bars only) to a pad with a contact (7401,7606), no metal beyond; that pad's poly west along y 7596-7612 under the metals x 7309-7322 (row 2's) and x 7345-7362 without a contact, to a pad with a contact (7273,7606); a thin metal x 7266-7278 north for 690 px over the rows of the crossing field to a pad with a contact (7272,6912); **the pad's poly goes on north** towards a row y ~6862 (drawn to y 6875; `bw`'s crossing field, not followed) | `follow.py 7400 7818 N` (end 7403,7602), `7270 7560 N --gap 16` (end 7272,6910); `textmap.py 7372 7570 7436 7640 3`, `7228 7576 7300 7630 3`, `7243 7480 7300 7582 3`, `7237 6868 7309 6934 3`; `tl5_tracks.py v 7272 6930 7590` (bars of 8-13 px, no hole); `px.py row 7604 7285 7400 5`; `t18.png`, `t20.png` |
+| `eof_w7818` (output) | pad (7402,7822); a thin metal x 7395-7407 north over rows 3, 2 and 1 (bars only) to a pad with a contact (7401,7606), no metal beyond; that pad's poly west along y 7596-7612 under the metals x 7309-7322 (row 2's) and x 7345-7362 without a contact, to a pad with a contact (7273,7606); a thin metal x 7266-7278 north for 690 px (over four rows of the crossing field at y 7420-7570, then over bare field from about y 7410) to a pad with a contact (7272,6912); **the pad's poly goes on north** towards a row y ~6862 (drawn to y 6875; `bw`'s crossing field, not followed) | `follow.py 7400 7818 N` (end 7403,7602), `7270 7560 N --gap 16` (end 7272,6910); `textmap.py 7372 7570 7436 7640 3`, `7228 7576 7300 7630 3`, `7243 7480 7300 7582 3`, `7237 6868 7309 6934 3`; `tl5_tracks.py v 7272 6930 7590` (bars of 8-13 px, no hole); `px.py row 7604 7285 7400 5`; `t18.png`, `t20.png` |
 | `eof_w7718` (row 2) | west under the output's metal x 7401 and the metal x 7345-7362 (no ring) to a pad with a contact (7267,7736). **Two metals on the pad** (Ambiguity 14): one east along the row and north (corner (7315,7736)) to a pad with a contact (7313,7215), whose poly row leaves east along y 7203-7221 (drawn to x 7400); one south from the pad (x 7262-7274), which `follow.py` takes 2,160 px to (6514,8254) (not checked, drawn to y 7800) | `t14.png` (3.1x, four shots), `t19.png`; `textmap.py 7222 7696 7336 7800 3`, `7285 7180 7345 7240 3`; `follow.py 7290 7735 E --gap 16`, `7270 7780 N --gap 16`, `7270 7780 S --gap 16` |
 | `eof_w7777` (row 3) | west across the crossing field, no pad, to x 6877, where the poly turns south (x 6878-6895) and joins the row y 7812-7830, which runs on west to `lc1`'s edge x 6450 and beyond. **`lc1_w7780` is another poly**: its row y 7770-7790 ends from the west on a pad with a contact (6815,7778) (pad's east edge x 6835; field to 6877), whose metal goes south (not drawn by anyone) | `t12.png`, `t17.png` (1.9x, three shots: the whole row), `t13.png` (3.7x, the pad), `t15.png` (4.2x, the corner), `t16.png` (2.4x, the row y 7820); `px.py col 6886 7752 7846 3 metal1,acid1b` (one poly from y 7770 to 7828), `row 7777 6830 6900 3`, `row 7800 6860 6912 3`, `row 7820 6444 6900 6`, `col 6660 7795 7845 3` |
 
@@ -568,6 +568,12 @@ driver lies; the other three lead to the loads.
    `trace/cdp3.txt` has `M 7623,8450 y11200 w=46`, but from y 8450 to 8555 the ground at
    x 7600-7646 is bare; the rail there is the metal x 7552-7598 drawn here, which widens to
    x 7550-7645 at y 8555 (`t9.png`). Geometry only: both are `vss`.
+
+17. **The three joins of the ring and the T's arm to the column at x 7600-7611** (piece `g7700`): the
+   rail's east edge line lies over each junction in every shot, so that the top strip (y 7613-7628),
+   the bottom strip (y 7745-7757) and the arm (y 7803-7817) are continuous with the column rests on
+   their edge lines running through to it (tracer and reviewer). If one were cut the gate would have
+   no path there; drawn without `?`.
 
 ## Review
 
@@ -815,6 +821,73 @@ the two metal shots.
 
 Round 5: no findings that change a connection.
 
+**Round 6: full review of run 5's piece, read twice** (2026-11-19 13:18 to 13:30 and 13:21 to 13:30
++0100; two fresh reviewer agents on Claude Fable 5.2, each alone and from the photos alone, with the
+same brief; trace at commit 0002b90. The first was started before the session was cleared and taken
+for lost, so a second was started for the round; both finished. Images: `cache/scratch/eof/review-6/`
+(18) and `review-7/` (16)). Piece: `g7700`.
+
+Told to suspect (both): whether rows 1 and 2 are apart east of the rail and whether the strap is
+diffusion (trap 28); the ring's two corners, its joins to the column, and the bottom strip against row
+3's cap; the join of the T's vertical arm to the strip under the load plate, and of the arm to the
+column; the plate's tab and tie box, and the plate's upper part; both metals on row 2's pad
+(7267,7736) and the corner (7315,7736); the two buried contacts and the pads of the output route, and
+the hop along y 7604 under the metal x 7309-7322; row 3's corner at (6886,7777)-(6886,7821) (one poly
+or two in line, trap 34) and pads on the row y 7821; contacts of the crossing field's vertical metals
+onto the rows; a second contact on the rail or anything else on the column (the follower's candidate
+(7571,7756)).
+
+Checked and found correct by both (4-7x in two or more shots, profiles, text maps, the extraction):
+- rows 1 and 2 apart: the patch between the caps is field in both metal shots (chip 2 160/143/84,
+  blue 85 against 58-65 on the caps; chip 1 145/115/80), in the clean shot (153/151/90) and in the
+  chip-2 stripped shot (154/147/93); no vertical poly east or west of the caps;
+- the strap is diffusion (chip-2 metal blue 80-92), the ring continuous (`px.py col 7644`, `col 7646`:
+  no dark line from y 7616 to 7752; rows 7620 and 7751 unbroken into the rail's edge) and separate
+  from the T (field at y 7764-7772); the bottom strip and row 3's cap share one 10 px dark band
+  (width only);
+- the T and the load's strip join: the dark line at x 7660-7668 is 9 px wide at rows 7790 and 7800, as
+  the plate's edge alone at row 7772 (15 px at row 7822): no second edge, in both metal shots; the arm
+  and the west wire run into the column (at row 7810 the column's edge line is absent, against 16 px of
+  dark at row 7756);
+- the plate, its tab and the tie box are one poly (three orange bands split only by the strip's edges),
+  no other poly reaches the box, field south of it; the VCC box closed, one contact;
+- one contact on the column, (7572,7684); the candidate (7571,7756) has no ring in chip 1 and no hole;
+- both buried contacts; the pads (7402,7822), (7401,7606), (7273,7606), (7272,6912), (7267,7736),
+  (7313,7215) each with a ring and a clean-shot hole, no metal beyond the output's four; the hop along
+  y 7604 continuous poly in all three gaps (blue 50-58), no ring under either metal (a dark ring at
+  (7338,7605) in the clean shot only);
+- row 2's pad: both metals on it (the south ring's 12 px includes the pad's edge, no bare ground; the
+  second reviewer: consistent with Ambiguity 14, not proof); the corner (7315,7736) joined;
+- row 3: one poly round the corner (`col 6886`: one poly from y 7773 to 7827, both metal shots); field
+  x 6841-6877 between it and `lc1_w7780`'s pad; no pad or tap on row 3 or on the row y 7821 (the
+  clean shot's rings in the gaps are absent from the chip-2 shots and the metal shots: traps 2, 15);
+- the rail unbroken to the widening at y 8555, onto `cdp3`'s `vss`;
+- full extraction: the four transistors and the equation, firm.
+
+Findings: none by the second reviewer. The first reported "no findings" with two notes:
+1. A comment (geometry only; confirmed from its `b2.png`, `b3.png`, fixed): the thin metal x 7272 was
+   described as running "690 px over the crossing field's rows"; from y 6930 to about 7410 it lies over
+   bare field, and four rows cross it at y 7420-7570. The trace comment and the wires table now say so.
+2. Outside the piece (not a finding on it): an undrawn poly lies under row 2's metal x 7308-7327 from
+   y ~7250 to ~7428, with field between its top and the pad (7313,7215), and no contact onto the metal
+   (`textmap.py 7296 7236 7340 7430 4`: no hole, no ring). No package draws it: Not done, handoff.
+
+Proof that the comment fix changed no connection (commit before it: 0002b90):
+
+```
+tools/t.sh eof sameconn.py 0002b90             ->  connections identical
+.venv/bin/python tools/sameconn.py 0002b90     ->  connections identical
+```
+
+Not checked, or weak: where the top strip, the bottom strip and the T's arm enter the column
+(x 7600-7611) the rail's edge line covers the junction (Ambiguity 17; the first reviewer measured the
+edge line absent at row 7810); the chip-2 stripped shot is unreadable at row 3's corner; the clean shot
+sits about 5 px east of the metal frame here (the trace follows the metal frame); the row y 7821 under
+each metal only at 2.7x (first reviewer); the wide east metal's supply (Ambiguity 15); the south metal
+beyond y 7800; the poly north of y 6875.
+
+Round 6: no findings that change a connection.
+
 ## Not done
 
 - **Task 2, the loads of `sl_eq_r5_n` (= NOT `sl_eq_r5`)**: one load is drawn (piece `r5nor`,
@@ -830,6 +903,8 @@ Round 5: no findings that change a connection.
   (7268,7800) (the follower runs it to (6514,8254): unchecked); (3) `eof_w7777`: the row y 7821 west
   of x 6450, into the undrawn west half of `lc1`'s cluster E. Also undrawn there: `lc1_w7780`'s row
   from x 6450 to its pad (6815,7778) and that pad's metal south.
+- An undrawn poly under row 2's metal x 7308-7327, y ~7250-7428 (no contact onto the metal; field between
+  its top and the pad (7313,7215)): `bw`'s crossing field / `busL`'s northern part.
 - The units below the gate in the same column (x 7460-7800, y 7860-8440; `cdp3` (continue)): the
   rail and the wide metal are drawn to y 7860 only.
 - **`inh_src`'s source** (what `inh_ck` is): still open after run 4 (piece `isrc`). Where to go on,
