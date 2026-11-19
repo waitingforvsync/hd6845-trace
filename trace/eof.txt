@@ -1052,7 +1052,11 @@ N M 6471,9330 rst_c
 # busl's claimed region. Read there by text and one view, not drawn: the step is a plain nested L
 # (o_step.png), the metal is 9-15 px wide at every one of the follower's contact candidates (no pad).
 # Hence the name bd1_n2_u (an open join, a task).
-# A. Metal north on x 6775 (11-14 px wide; bars of the poly rows beneath, none over 14 px, no pad),
+# A. Metal north on x 6775 (11-14 px wide; bars of the poly rows beneath, none over 14 px, no pad: two
+#    crossing fields, y 9560-9810 and y 10300-10400, and two single rows, y 9984-9998 and y 10048-10064,
+#    the rows of the neighbours' pads (6818,9988) and (6730,10050); the first pad's ring is 18 px from
+#    this metal with open poly, not metal, between; the clean shot is greenish under the metal at
+#    (6775,9797), as under the neighbouring tracks on the same rows: trap 15, no contact),
 #    a 45-degree diagonal (x + y = 15727) from (6775,8952) to (6947,8780), north to a pad with a contact
 #    (6947,8710) (ring and bright centre in both chips, green hole in the clean shot; field south of it).
 # B. The pad's poly column x 6941-6961 north under three horizontal metals (y 8530-8632, no pad, no
