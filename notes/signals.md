@@ -312,7 +312,7 @@ None of these rows has a register number yet, so all names are by place. Columns
 | `cdp4_a_s#`, `cdp4_b_s#`, `cdp4_c_s#`, `cdp4_d_s#` | the selector's four sources per slice |
 | `cdp4_sel#` | the four select lines of the selector |
 | `cdp4_rst` | gate of the pull-down on the selector node |
-| `cdp4_bus_s#` | the eight poly lines of channel 1 |
+| `cdp4_bus_s#` | the eight poly lines of channel 1; each is one net with `cdp4_in_s#` (the row C latch input of the same slice) and with one poly row of the left array, joined in the left bus field (`busl`, piece `ch1`; `@alias` in `trace/busl.txt` until the rename) |
 
 ## Left array (`notes/blocks/larr.md`): the 14-bit memory address counter
 
