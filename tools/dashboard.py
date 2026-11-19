@@ -329,6 +329,18 @@ def tm(utc):
     return '<time class="lt" datetime="%sZ">%s UTC</time>' % (utc.replace(' ', 'T'), E(utc))
 
 
+STAMP = re.compile(r'(\d{4}-\d\d-\d\d \d\d:\d\d) ([+-]\d{4})')
+
+
+def localize(h):
+    """In HTML, every 'YYYY-MM-DD HH:MM +ZZZZ' (the claim files' stamps, in their writer's own zone)
+    becomes a <time> that the page script shows in the viewer's zone."""
+    def one(m):
+        d = datetime.datetime.strptime(m.group(0), '%Y-%m-%d %H:%M %z').astimezone(datetime.timezone.utc)
+        return tm(d.strftime('%Y-%m-%d %H:%M'))
+    return STAMP.sub(one, h)
+
+
 def utc_minute(iso):
     """An ISO date with its author's offset -> 'YYYY-MM-DD HH:MM' in UTC, for display."""
     return datetime.datetime.fromisoformat(iso).astimezone(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M')
@@ -594,7 +606,7 @@ def shell(title, body, version, root, extra_js=''):
     return """<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>%s</title><style>%s</style></head><body><div class="viz-root"><main>%s</main></div>
 <script>const VERSION=%s,VROOT=%s,STALE_MS=%d;%s%s</script></body></html>""" % (
-        E(title), CSS, body, json.dumps(version), json.dumps(root), STALE_HOURS * 3600 * 1000, THEME_JS, extra_js)
+        E(title), CSS, localize(body), json.dumps(version), json.dumps(root), STALE_HOURS * 3600 * 1000, THEME_JS, extra_js)
 
 
 THEME_BTNS = ('<div class="seg theme" role="group" aria-label="Colour theme"><button data-theme="auto" class="on">Auto</button>'
@@ -612,7 +624,7 @@ def whos(h):
 
 
 def claim_item(c, link):
-    return ('<div class="item" data-activity="%d"><div class="h"><a href="%s"><code>%s</code></a> <b>%s</b> %s <span class="stale">stale</span></div>'
+    return localize('<div class="item" data-activity="%d"><div class="h"><a href="%s"><code>%s</code></a> <b>%s</b> %s <span class="stale">stale</span></div>'
             '<div class="dim">%s</div><div class="mut">claimed %s; last commit %s</div></div>'
             % (c['activity'], link, E(c['prefix']), E(c['who']),
                tag('active', 'merged, awaiting coordinator' if c['merged'] else c['status']),
