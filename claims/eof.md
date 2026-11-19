@@ -6,8 +6,8 @@ merged, or by `tools/claim.py release` if it is abandoned.
 | Field | Value |
 |---|---|
 | Who | tom-seddon |
-| Claimed | 2026-11-18 23:19 +0000 |
-| Region | 13425-14100 x 9300-10700 |
-| What | end-of-frame lead group, task 1 first: follow rc_eq_r4 (R4's match) east of (13425,9663) to its gates, drawing only what no package draws; the region is where the wire starts and will be extended by where it leads; then tasks 2-4 of the queue row (sl_eq_r5 west of x 8340, tcw_a's source, rcs_x1's driver) |
+| Claimed | 2026-11-19 00:14 +0000 |
+| Region | 4967-6400 x 6350-6900 |
+| What | end-of-frame lead group, run 2: task 3 (tcw_a's source: its metal x 6105 south of (6105,6350)) and task 4 (rcs_x1's driver: the poly bus line x 5107 south of (5107,6350)), drawing only what no package draws; the region is where the two wires start and will be extended by where they lead |
 | Branch | eof |
 | Status | tracing |

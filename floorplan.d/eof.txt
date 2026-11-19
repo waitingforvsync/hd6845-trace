@@ -1,0 +1,6 @@
+# eof: follow-the-wire pieces of the end-of-frame lead group
+13416,9647:13667,10705   route  R4 match, L2 to L7 | rc_eq_r4 from the counter channel: upper piece of bundle track L2, poly bar y 9925, track L7 down to rdp3's piece
+13729,13475:13747,14695  route  R4 match, track L9 | rc_eq_r4 straight from rdp3's bundle to bd1's track k15: the data of the latch gated by inh_lat
+8330,4700:8650,4880      logic  inverter on R5's match | r9m_l1w = NOT sl_eq_r5: pull-down under slice 0's VSS rail, load to its VCC rail, output west on r9m's line
+4962,2542:5183,2560      route  NOT R5 match, row y 2551 | r9m_l1w from r9m's corner west under rail RC to tl4's bus line 1
+3528,2494:4255,2526      route  NOT R5 match, cross-under | tl4's bus line 1 west to a poly hop under the wide metal x 3648-3760 and on to tl2's metal (tl1_w2592)
