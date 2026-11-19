@@ -170,6 +170,20 @@ metal on x 11331. `tools/t.sh regs sameconn.py 8e1aa03`: `connections identical`
 against 81387d1: both `connections identical` again.
 Round 2: no findings that change a connection.
 
+**Round 3, full review of piece 2, 2026-11-19 15:35 -0600** (fresh Fable reviewer; the four read selects, at
+commit 1c5b259; 28 images in `cache/scratch/regs/review-3/`). Told to suspect: the third diagonals
+(seven rows, an off-by-one), the second and first diagonals, every straight hop, the vertical hop,
+the corners, the tracks to y 14990 and the green stretches of Ambiguities 2, the ends on `bd3`'s and
+`busl`'s metals, missed taps. Checked: the third diagonals at 4x in `acid1b` and `acid` (five
+separate bands to five pads, ours bands 2-5, no off-by-one); the poly rows x 10440-10920 on 13
+cuts; the second diagonals at 2.8-4x (six from six pads, ours the upper four); the first diagonals
+at 2.4x in three shots (separate in the chip-2 stripped shot, where the debris is absent); all hops
+at 2-4x with text rows; the vertical hop at 2.8x; the corners; `tl5_tracks.py` on every straight
+metal piece (no stretch over 18 px without metal in both chips); the green stretches (interference
+colour, unbroken metal, no ring); no taps (about 1x metal); both ends. Not checked: the second
+diagonals under metal at 4x except one passage; the long runs at high zoom; `metal1` as an image.
+Round 3: no findings.
+
 ## Not done
 
 - `rsel12_buf` (poly x 14199, south of y 17320) and `rsel13_buf` (poly x 15512, south of y 17700):
