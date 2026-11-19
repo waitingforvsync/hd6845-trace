@@ -2,6 +2,26 @@
 
 ## Status
 
+2026-11-18 23:15 -0600 (run 10, Matt Godbolt, on Fable 5.2). **Partial: the west cluster's east column: a second
+toggle flip-flop, clocked by the first** (piece N, 19 transistors; 79 in the package; not yet reviewed). Run 9 is on
+main (87cff0c).
+
+```
+lc2_w8992 = NOT( lc2_w8298 & lc2_w9038 | lc2_w8450 | lc2_w8914 )          master   (depends: the lc2_w8450 term, as in the first)
+lc2_w8914 = NOT( lc2_w8298 & lc2_w8862 | lc2_w8992 )                      master   FIRM
+lc2_w9038 = NOT( lc2_w8862 & ( lc2_w8298 | lc2_w8914 ) )                  slave    FIRM
+lc2_w8862 = NOT( lc1_w7170 & lc2_w9038 & ( lc2_w8298 | lc2_w8992 ) )      slave    (depends only on old uncertain metal of lc1_w7170)
+```
+
+The east column is the west column turned 180 degrees: the west column's own geometry is now the cell `lc2_ff`
+(nothing of it changed: `sameconn.py`), and the east column is a copy of it with its own supplies and bus wiring.
+Its clock is `lc2_w8298`, the first flip-flop's slave output (track C north to row C, then the fifth staircase line
+south to the copy's clock pad): **the two are a two-stage ripple counter**, both cleared while `lc1_w7170` is low. The
+second stage's output `lc2_w9038` leaves south into `lc3`. Full extraction: 2375 nets, 4281 transistors, 0 errors,
+0 warnings.
+
+Earlier:
+
 2026-11-18 22:15 -0600 (run 9, Matt Godbolt, on Fable 5.2). **Partial: the west column of the west cluster is
 traced: gates K3 and K4** (pieces L and M, 11 transistors; 60 in the package; L reviewed, rounds 12-13; M reviewed, rounds 14-15). Run 8 is on main (bd81e81). **With latch K they are a toggle flip-flop**:
 
@@ -527,6 +547,39 @@ NOT(`lc2_w8298` & `lc2_w8552`)). Stepped by hand from `lc2_w8552` = 1: `c` low g
 `c` high then gives `lc2_w8552` = 0, `lc2_w8725` = 1: it toggles. Outputs seen leaving: `lc2_w8298` on track C north to
 row C and the fifth staircase line (pad (5234,8300)); the rest not followed.
 
+## The west gate cluster: the east column, a second flip-flop (run 10, piece N): traced
+
+Views `e1_a.png`, `e2_a.png` (2.9x, the first overlay of the turned west geometry on the clean shot), `e3_m.png`,
+`e4_m.png`, `e5_m.png` (3.4x, the copy on the metal shot, in three parts), `e6_m.png` (5.5x, where the output leaves),
+`e7_a.png` (6x), `e8_m.png` (5x, the clock's join); measurements in `cache/scratch/lc2/survey.md`.
+
+**The copy.** `tools/t.sh lc2 findcell.py 4700 8440 4952 9180 --region 4900,8250:5400,9260 --min 0.3`:
+`rot=180 o=4826,8810`, moved by 258,-66, score 0.62 (the K1/K2 east side alone: 0.64). A point (x,y) of the master is
+at (9910-x, 17554-y). The west column's sections were rewritten as the cell `lc2_ff` (192 lines; the master stands
+where it stood) plus the master's own lines (supplies, the bus tracks north of the cell, the clock's L-shaped metal,
+the top of K1's contact column with its two contacts, the large open diffusion): `tools/t.sh lc2 sameconn.py 87cff0c`
+and `.venv/bin/python tools/sameconn.py 87cff0c` both ended `connections identical` after the rewrite and before the
+copy was added. One edge of the master moved for the copy's sake: K1's VCC box, east edge 4985 to 4978 (its copy
+then stays clear of the master's long poly x 4904-4926, as the box (4932-4985, 8958-9018) does in the photo).
+
+What the copy lands on (metal shot, 3.4x): the VSS contact (5135,8454) on a ring at (5130,8448); contact
+(5142,8774) on a ring (5135,8770); pads (5262,8430), (5306,8474), (5350,8558), (5261,8689), (5261,8907),
+(5306,8994), (5350,9038), (5262,9080) on pads within 4-10 px; the rows, the boxes, the load plates and the VCC boxes
+under the middle rail on theirs. The middle rail is shared; the copy's VSS rail is the cluster's east rail
+(x 5097-5150, drawn on to y 9160: `tl5_tracks.py h` at y 8800, 8900, 9000, 9120).
+
+**The copy's own wiring.**
+
+| Item | Reading | Seen |
+|---|---|---|
+| clock | the fifth staircase line: from row C's pad (5234,8300) (`lc2_w8298`) the metal goes east and then south at x 5247-5263 to the copy's clock pad (5260,8431) | `e8_m.png` (5x): one bright strip from the pad (5232,8300) to the pad; `tl5_tracks.py v 5260 8300 8440`: hole at y 8431 |
+| the clear's two forms | the copy's row of the slave's series input ends on the pad (5428,8516) of the metal x 5421-5437 (`lc1_w7170`, drawn in run 5); the copy's clear row meets the row y 8941-8958 from the pad (5386,8951) on the fourth staircase line (`lc2_w8907` = `lc2_w8450`, drawn in runs 6-7) | `e3_m.png`, `e5_m.png` |
+| the bottom of the column | the master's stack hangs from K1's contact column; the copy's ends in a box with a contact (5133,9105) to the east rail | `e5_m.png`: ring (5115-5150, 9090-9125) |
+| output `lc2_w9038` | track C' (x 5335-5352) runs on south from its end pad (5340,9035), turns west along y 9160-9178 to x 5248-5262 and south across y 9233 into `lc3`; in its run a pad (5254,9208) whose poly leaves west along y 9200-9220 (drawn to x 5215) | `e6_m.png` (5.5x), `e7_a.png` (6x) |
+
+**The counter.** Stage 1 (west) changes state once per pulse of `lc2_w8475`; its slave output `lc2_w8298` is stage 2's
+clock, so stage 2 changes once per two pulses. Both are held clear while `lc1_w7170` is low.
+
 ## Ports
 
 `ports.d/lc2.txt` (kept in step with this). Latch B: enable `lc2_w8169` north on metal x 5560 at y 8067 (into
@@ -574,12 +627,14 @@ Run 3 (latch D's lower unit and the bus field):
 | `lc2_w8450` | M | 5618-5634, 9256 | out | run 5: latch B's data, the west thin metal on south (joined to `lc3_m5626`) |
 | `lc2_w9125` (`lc2_w9185`) | P | 5924-5940, 9256 | out | run 5: the AND-OR-INVERT's output poly, south into `lc3` (joined to the node through uncertain items) |
 | `lc2_w9034`, `lc2_w9079`, `lc2_w9210` | P | 5545; y 9024-9044, 9068-9090, 9200-9220 | in | run 5: gate rows 2, 3, 5, drawn ends: they run on west |
-| `vss` | M | 5084-5150, 8770 | - | run 8: the cluster's east rail, drawn end (it runs on south) |
 | `vcc`, `vss` | M | 4924-4980, 4757-4820; y 9190 | - | run 9: the middle and west rails, drawn ends (they run on south into `lc3`) |
 | `vss` | M | 4668-4712, 8067 | - | run 8: the west rail's feed, north into `lc1` (no port of `lc1` there); VSS by structure |
 | `lc1_w7170` | M | 4466-4484, 9060 | ? | run 9: drawn end: track A runs on south past the pad (4473,9038) |
 | `lc2_w8907` | M | 4508-4526, 8700 | ? | run 8: drawn end: track B runs on south (no pad to y 9150) |
 | `lc2_w8475` | M | 4553-4575, 9190 | in | run 9: drawn end: the clock's L-shaped metal, from the south |
+| `lc2_w9038` | M | 5247-5263, 9233 | out | run 10: the second flip-flop's slave output, south into `lc3` |
+| `lc2_w9038` | P | 5215, 9200-9220 | out | run 10: drawn end: the poly of its pad (5254,9208), on west |
+| `vss` | M | 5104-5150, 9160 | - | run 10: the east rail, drawn end |
 
 ## Ambiguities
 
@@ -686,6 +741,11 @@ Run 3 (latch D's lower unit and the bus field):
    (b) What is under the ringed box's outline (T's band, the gate poly, K3's arm) is not seen. (c) My first reading
    (shipped as 514d86b) had the plate as a second load on `lc2_w8298` and the long poly as a 14/175 load: wrong.
 
+17. **The east column as a copy** (run 10). The copy is exact geometry turned, so it carries the master's uncertain items
+   to the same places (the diffusion west of the rail, here east of it; the strip to the slave's second load) and
+   its fit is to within 4-10 px. Not separately read: every transistor of the copy. Read separately: its pads, its
+   contacts, its clock, its clears' pads, its output's way out, the bottom of its column.
+
 ## Not done
 
 Run 5:
@@ -695,8 +755,8 @@ Run 5:
   node D's west lobe (Ambiguity 9); the area (5785-5830, 9200-9265) below the block is field (round 6: red minus green 0-2 in the chip-2 stripped shot).
 - The output poly's leg x 5924-5940 runs on south in `lc3`'s strip to about y 9540 and turns east along y 9525-9545 (round 6; not drawn by `lc3`).
 - Rows 2, 3 and 5 west of x 5545. The fifth staircase line south of (5257,8334) (pads on it near (5257,8425)?); pads (5295,8472), (5341,8539), (5341,8562), (5341,9038).
-- Seen by review round 14, not drawn: a VCC box (4932-4985, 8958-9018) with a contact (4950,8990) under the middle rail (the east column's: it is where the turned copy's first load would be); a diffusion under track A from y 9083 south (no contact to the track down to y 9199).
-- (Done: the west column of the west cluster: latch K, gates K3 and K4.) Left in the cluster: **the whole east column** (x 4990-5330) and the east rail south of y 8770; tracks A and B south of their drawn ends (y 9060, 8700) and the clock's metal south of y 9190 (all on into `lc3`); what else `lc2_w8552`, `lc2_w8725`, `lc2_w8692` reach.
+- (The VCC box (4932-4985, 8958-9018) seen by review round 14 is the copy's: drawn in run 10.) Seen by review round 14, not drawn: a diffusion under track A from y 9083 south (no contact to the track down to y 9199).
+- (Done: both columns of the west cluster: two toggle flip-flops.) Left there: tracks A and B south of their drawn ends (y 9060, 8700) and the first stage's clock metal south of y 9190 (into `lc3`); a second pad (5340,9208) beside the output's, on a metal that starts there and runs south, with a poly east (not drawn); what the other six outputs of the two stages reach, if anything.
 - **The diffusion under tracks A, B, C** (Ambiguity 13): pale tan under the three tracks from y 8340, to y 8430 (C), 8540 (B) and on south (A); what it joins and whether any poly crosses it is not read.
 - (Done, run 7: gate 9 of `lc1`'s column.) Its output's metal north of y 8067; rail 1 south of y 8160 and rail 2 south of y 8067.
 - Geometry from round 7, not changed: latch B's VSS box's diffusion runs on north of y 8062 (tan to y 8050 at x 5682); a green patch (5858-5872, 8228-8236) under the VCC rail between two VCC boxes, no ring.

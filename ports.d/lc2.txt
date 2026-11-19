@@ -60,11 +60,13 @@ vss         M  4928-4980,8067  -    rail 2 from lc1
 
 # Run 8: the west cluster's supplies and latch K
 vcc         M  4924-4980,9190  -    the cluster's middle rail: drawn end, runs on south into lc3
-vss         M  5084-5150,8770  -    the cluster's east rail (lc1's rail 2 after its jog): drawn end, runs on south
 vss         M  4757-4820,9190  -    the cluster's west rail (VSS by structure): drawn end, runs on south into lc3
 vss         M  4668-4712,8067  -    the west rail's feed, north into lc1
 lc2_w8907   M  4508-4526,8700  ?    track B, drawn end: runs on south past the pad (4517,8604) of K1's clear row
 lc2_w8475   M  4553-4575,9190  in   the clock of the flip-flop: an L-shaped metal from the south, to the pad (4648,9124): drawn end
 # Run 9: gates K3 and K4
 lc1_w7170   M  4466-4484,9060  ?    track A, drawn end: runs on south past the pad (4473,9038) of K4's row
-
+# Run 10: the east column (second flip-flop)
+vss         M  5104-5150,9160  -    the cluster's east rail: drawn end
+lc2_w9038   M  5247-5263,9233  out  the second flip-flop's slave output, south into lc3
+lc2_w9038   P  5215,9200-9220  out  the poly of its pad (5254,9208), on west: drawn end
