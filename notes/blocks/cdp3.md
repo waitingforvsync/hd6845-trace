@@ -376,3 +376,17 @@ Into parts not yet traced (the labels sit on the stubs):
   7660 8 metal,metal1`, `col 7623 8500 8590 8 metal,metal1`; seen independently by `eof`'s run 5 and by
   `eofw`'s tracer). Now `M 7623,8556 y11200 w=46`; `tools/sameconn.py`: connections identical. The rail
   north of there is the metal x 7552-7598, drawn by `eof` for y 7585-7860 and by nobody between.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, third batch)
+
+- Ports, "`cdp3_g_c7` .. `cdp3_g_c2` | 8907 .. 9123 | ? | one line into each row A cell": the other end of
+  each is traced (`busl`, piece `d6`): a row-end pad just west of x 7600 (x 7336-7553), a track down the
+  left bus field, and `bc1`'s row D data line of the same order (c2 to `cdp4_in6_s1`). So line g is what
+  `cdp4`'s 6-bit latch row D latches on `cdp4_ld6`; believed an output of the row A cell, not "a line in
+  from the west".
+- `cdp3_k_b` ("in", gate 1 of the NAND beside row C): its row y 9450 ends west on a pad (7554,9450)
+  whose metal track runs south on x 7555 to a contact (7555,11118) on a diffusion pad; the diffusion
+  runs east under column 0's VSS rail at y 11092-11127 (`busl`, piece `kb`; not drawn in `cdp3`). That
+  diffusion is the net's only possible driver drawn so far.
+- The metal south of `eofw`'s corner pad (7446,8732) does not enter the gate column: it is `tc2_sr_g`'s
+  branch down the left bus field (`busl`, piece `sr`). The pad's poly on east is still open.

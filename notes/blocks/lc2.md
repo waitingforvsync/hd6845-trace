@@ -1433,3 +1433,10 @@ Round 18: no findings that change a connection.
 - `rst_n`'s metal ends on a pad (5473,10207) with a poly south; `lc2_w8450`'s metal (`lc3_m5626`) ends
   on a pad (5540,10165) with a poly south; `lc3_m5756` ends on a pad (5646,9992) whose poly row runs
   east out of `lc3` (`lc3` run 2b).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, third batch)
+
+- `lc2_x6299` ("through line", direction `?`) **is `inh_src`** (`eof` run 9, piece `isrc4`; renamed by
+  the refresh of 2026-11-19): from `lc3`'s south edge it runs down the left bus field (`busl`, piece
+  `lc9`) to the row y 14914 and `bc1`'s track x 7969. In the bottom-centre logic and `bd1` it only feeds
+  gates, so its driver is at or beyond this block's east edge (6450,8630).

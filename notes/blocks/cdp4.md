@@ -264,3 +264,14 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
   metal track between poly pads, and the same net ends on one poly row of the left array (s7 .. s1 at
   y 11488, 11922, 12442, 12984, 13397, 13874, 14351; s0 just south of `busl`'s region). The field holds
   no transistor; which end drives is not traced.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, third batch)
+
+- Ports, `cdp4_sel1`..`4`, `cdp4_rst`, `cdp4_ld` "from outside": the selects come from south of y 15000
+  on tracks x 6538-6668 and each also feeds a gate band of the corner gate group; `cdp4_rst` from the
+  corner gate group (believed); `cdp4_ld` from `bc1`'s strobe driver (`bc1_ld_a`, marked: AMB-038). The
+  "contact near that strobe line at (7557,12975)" is the pad (7556,12983) (`busl`, piece `ctl`).
+- Ports, `cdp4_in6_s1`, `cdp4_in6_s2` "from outside (below)": from `cdp3`'s row A cells, columns c2 and
+  c3, by line g (`cdp3_g_c2`, `cdp3_g_c3`; `busl`, piece `d6`).
+- `cdp4_ld8b` ("ends not examined"): the row does not enter the left bus field; its west end is at about
+  x 7603-7640, y 11825-11850, under the metal x 7600-7645 (`busl`, run 6).

@@ -2083,3 +2083,57 @@ unchanged in range (R31, R42, R45 edited).
 floor plan looked at round the left-centre strips and the new routes (`cache/scratch/refresh/fp_crop.png`):
 no label over another. Coverage: 65.5% traced; in some package region 99.9%; untraced and in no Queue
 row 0.4%.
+
+## 2026-11-19 18:37  Handoffs: eof runs 8 and 9, busl runs 3 to 6
+
+At the user's request ("when this lands, please apply the handoffs and refresh"), after `busl` run 6
+was merged (d911059). Six handoffs, applied together.
+
+**What came in**
+
+- `eof` run 8 (Tom Seddon; pieces `n2out`, `n2w`; no transistor): the exit of the latch on R4's match.
+  `bd1_k` is `bd1_n2` (alias): the strip under `inh_src`'s gate is a third pull-down of N2, so
+  **`bd1_n2` = NOT((`bd1_an` AND `inh_lat`) OR `bd1_n1` OR `inh_src`)** (marked: the load's tie): R4's
+  match as latched, shown only while `inh_src` is low. The output is drawn 11,900 px, no gate and no
+  tap, along the bottom bus field and up the left bus field to (6711,15000). Review round 10: no
+  finding that changes a connection.
+- `eof` run 9 (Tom Seddon; piece `isrc4`; wiring): **`inh_src` is `lc2_x6299`** (firm), by a poly row,
+  `bc3`'s track bundle, `bc1`'s track 7969 and the row y 14914 onto `busl`'s row end. So the driver of
+  `inh_src` is not in the bottom-centre logic: the line enters `lc2` from the east at (6450,8630).
+  Review round 11: no findings.
+- `busl` run 3 (richtw1; piece `lc9`): `lc3`'s nine metals at y 10400 down the field with `rcs_e4`;
+  seven onto poly rows toward `bc1`'s 13-line bus (the ripple counter's clock, `lc3_w9470`, the clear,
+  `lc2_w9079`, `inh_src`'s line among them).
+- `busl` run 4 (piece `ctl`): `cdp4`'s four selects come from south of y 15000 and each also feeds the
+  corner gate group; `cdp4_rst` ends on a box of that group; **`cdp4_ld` = `bc1_ld_a`** (marked: one
+  `?M` over the box), so latch rows C and D load together.
+- `busl` run 5 (piece `d6`): **line g of `cdp3`'s row A cells is the data of `cdp4`'s 6-bit latch row
+  D** (`cdp3_g_c2`..`c7` onto `bc1`'s lines 1-6; firm).
+- `busl` run 6 (pieces `sr`, `kb`): **`tc2_sr_g` runs from `eofw`'s corner pad down the whole field
+  into `bc1`'s ground** (no tap; its driver is expected there); `cdp3_k_b` comes from a diffusion under
+  `cdp3`'s column 0 rail. Review: no finding that changes a connection.
+
+**Checks:** overlays of `isrc4`'s join on row y 14914 at 3x and of `n2out`'s links at 4.5x, metal and
+clean shots (`cache/scratch/handoff/h_isrc4.png`, `h_n2out.png`): on the features; `busl`'s own overlays
+(`cache/scratch/busl/sr_o1.png`, `sr_o2.png`, `kb_o1.png`). Full extraction 2,390 nets, 4,345
+transistors, 0 errors, 0 warnings; `tools/unsure.py`: 92 nets joined only through uncertain items.
+
+**Applied:**
+- Master list: `eof` row (runs 8 and 9; what is left of (b) and (e)); `busl` row (status to run 6;
+  next: `bd1_n2`'s metal north of (6711,15000), then `inh_src`'s line east of (6450,8630)); `bd1`,
+  `bd1`-`bd3`, `bc1` (continue), `bc2`-`bc4`, `bl0`, `cdp4` (continue), `cdp3` (continue), `trunks`
+  (continue), `lc1`-`lc3` rows; R4 (`ck_out #1` runs on west of x 10230, and lies on `bd1_n2`'s row).
+  No new Re-read item (none proposed: the handoffs' cases fall under traps 2, 13, 30, 32 as written).
+- `notes/ambiguities.md`: **AMB-038** (the box under `cdp4_ld`'s metal at (7535-7580, 13903-13940)),
+  **AMB-039** (`tc2_sr_g`'s track dark over the poly row y 13744 in both metal shots; drawn as a plain
+  crossing).
+- Corrections sections (third batch) in `notes/blocks/bd1.md`, `bc1.md`, `bc3.md`, `cdp3.md`, `cdp4.md`,
+  `lc2.md`, `lc3.md`, `trunks.md`, `eofw.md`. `notes/blocks/eof.md` is not edited (claimed: Tom Seddon).
+- `trace/bd1.txt`: the gate poly of `inh_src` lengthened from x 13805 to x 13812 (orange to x 13810 in
+  the chip-2 metal shot, `tools/px.py row 15671 13796 13822 2`; `eof`'s review round 10);
+  `tools/sameconn.py HEAD`: connections identical.
+- `floorplan.txt`: nothing trimmed (the new fragments are routes inside coarse blocks that stay).
+- `out/` rebuilt: 668 floor-plan blocks. Coverage: 66.5% traced; in some package region 99.9%;
+  untraced and in no Queue row 0.4%.
+
+**Handoffs:** none waiting. **Claims:** `busl` (waitingforvsync), `eof` (tom-seddon).

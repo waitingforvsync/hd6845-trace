@@ -582,3 +582,11 @@ along the top of the central datapath) is the gap.
   to (6559,8367), north, west and north through `lc2`'s and `lc1`'s strips without a gate, with one tap
   at (6427,7648), and on into the top-left logic as `inh_ck` (`eof` run 2). S = `inh_ck`.
   R4: part done there (`eof`); chip 1 is damaged on line S at y 16570-16650, 16822, 17483.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, third batch)
+
+- "source of X": X (`inh_src`) is `lc2`'s first through line (`eof` run 9; was `lc2_x6299`): the driver
+  is at or beyond `lc2`'s east edge (6450,8630).
+- `trace/trunks.txt`, `ck_out #1` (`M 10320,17908 x10230`, "followed to x 10230 only"): it lies for 96 px
+  on `bd1_n2`'s poly row without a contact and runs on west to a pad at about (9770,17910), with a poly
+  beyond to a pad (9595,17905); its end is not drawn (`eof` run 8; R4).

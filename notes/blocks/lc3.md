@@ -499,3 +499,11 @@ Round 5: no findings that change a connection.
 - Inventory, "one drawn item, a short horizontal piece near (4800-4975, 9737), owner not looked up":
   nobody's. It is a green stripe in the chip-2 metal photograph itself, absent from chip 1's metal shot
   and from both stripped shots (`eof` run 6, whose reviewer looked round every pad of `ff3`).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, third batch)
+
+- `lc2_x6299` (line 1 of the nine metals at y 10400) **is `inh_src`** (`eof` run 9; renamed by the refresh
+  of 2026-11-19).
+- `lc3_e9798`, "a metal from the east" at (6450,9798) (`ports.d/lc3.txt`): the metal runs east only to
+  x about 6515 and turns north there on a track x 6514 (followed to y 9532, end not read;
+  `tools/follow.py 6480 9798 E --gap 16`). It does not touch `rcs_e4`'s metal x 6552-6564 (`busl`, run 3).
