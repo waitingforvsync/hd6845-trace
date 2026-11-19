@@ -371,3 +371,68 @@ N P 2504,2480 sl_eq_r5_n
 P 2452,2460:2472,2506                  # tl1_w2637's poly, ending in the box on the band
 B 2446,2440:2474,2466
 N P 2462,2485 tl1_w2637
+
+# ============================================================================================
+# Piece isrc (run 4, 2026-11-19): inh_src on from two of the three ends that trunks left open
+# (notes/blocks/trunks.md, "inh_src followed west"). Wiring only. Its driver is NOT on these
+# branches as far as they are drawn: every end reached so far is a pad whose poly goes on
+# into the gate columns of the bottom-centre logic.
+#
+# LINK G: trunks' metal x 10225 (drawn to y 15886) ends on a pad with a contact (10226,15912);
+#   poly north under a horizontal metal (y 15822-15834, no hole) to a pad with a contact
+#   (10226,15783); metal north, east along y 15654, north along x 10312, east along y 15308,
+#   north along x 10396 to bc2's pad (10395,15087): bc2_w15087, the clear of its latch unit a.
+#   textmap 10190 15750 10262 15930 3 (both pads: bright centre in a ring, hole in the clean
+#   shot; poly 5-8 between); follow.py 10224 15720 N (corners as drawn, end (10396,15083));
+#   textmap 10195 15630 10345 15700 3, 10285 15285 10425 15330 3, 10366 15055 10430 15120 3;
+#   tl5_tracks.py v 10312 15320 15640 and v 10397 15100 15300: bars of 8-12 px (bc2's rows
+#   under it), no hole. The follower's candidate (10258,15655) is a blemish on chip 2 and a
+#   speck in the clean shot, absent from chip 1's metal and chip 2's stripped shot (b3, b4).
+M 10225,15880 y15914 w=13
+P 10209,15895:10243,15929
+C 10226,15912
+P 10226,15912 y15783 w=16
+P 10209,15766:10243,15800
+C 10226,15783
+M 10226,15788 y15654 x10312 y15308 x10396 y15083 w=13
+N M 10312,15500 inh_src
+#
+# LINK H: west of trunks' pad (9770,18081) the bus line goes on: poly under two vertical
+#   metals to a pad with a contact (9554,18081); metal west along y 18083 to a pad with a
+#   contact (8964,18081); poly north under three horizontal metals (and the through metal
+#   y 17781, no hole) to a pad with a contact (8967,17735). Two metals leave that pad:
+#   - north along x 8968, 2,470 px, through two pads with contacts (8966,16737), (8962,16172),
+#     each on a poly row that goes west, to an end pad with a contact (8966,15260), whose
+#     poly row goes west;
+#   - west along y 17737 to a pad with a contact (8688,17737), whose poly goes on west.
+#   textmaps (3 px, --acid) of each pad: 9530 18056 9590 18104; 8936 18056 8996 18104;
+#   8938 17700 8998 17800; 8930 16715 8996 16760; 8930 16150 8996 16195; 8938 15234 8998 15285;
+#   8650 17705 8722 17765. tl5_tracks.py v 8968 15270 17715: bars under 16 px (rows), clean-shot
+#   holes only at the two tap pads; h 18083 8975 9545 and h 17737 8700 8940: no hole.
+#   The west metal at the pad (8967,17735): 12 px of ring between its end and the centre, the
+#   same as on the north side (px row 17738 8926 8980 2; g1.png, 4.8x, both metal shots).
+P 9554,18081 x9770 w=18
+P 9537,18064:9571,18098
+C 9554,18081
+M 9554,18083 x8964 w=13
+P 8947,18064:8981,18098
+C 8964,18081
+P 8964,18081 8964,17900 8966,17735 w=18
+P 8949,17718:8983,17752
+C 8967,17735
+M 8968,17740 y15255 w=13
+N M 8968,16400 inh_src
+P 8949,16721:8983,16753              # tap pad; its row goes on west (not followed)
+C 8966,16737
+P 8930,16728:8955,16746
+P 8945,16156:8980,16188              # tap pad; its row goes on west (not followed)
+C 8962,16172
+P 8930,16158:8950,16176
+P 8949,15244:8983,15276              # the north end's pad; its row goes on west (not followed)
+C 8966,15260
+P 8930,15248:8955,15266
+M 8967,17737 x8688 w=13              # the west branch
+P 8671,17720:8705,17754
+C 8688,17737
+P 8650,17722:8680,17742              # its poly on west (not followed)
+@alias inh_src bc2_w15087               # link G: one net (the clear of bc2's latch unit a)
