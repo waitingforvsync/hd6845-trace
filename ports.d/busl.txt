@@ -83,3 +83,17 @@ cdp4_rst     P  7600,12863-12885   ?   cdp4's row of the selector nodes' pull-do
 cdp4_rst     P  7532,13906-13927   ?   the poly ends on the west outline of a box (7535-7580,13903-13940) of cdp4's corner gate group: read as a buried contact onto its node diffusion, not drawn (notes, Ambiguity 9)
 bc1_ld_a     P  7600,12951-12973   in  cdp4's strobe row of latch row C (cdp4_ld; one net with bc1_ld_a through a ?M, @alias)
 bc1_ld_a     M  7441-7455,14050    in  joins bc1's metal of the strobe driver's twin output (bc1 draws it from y 14050 south)
+
+# Piece d6: cdp3's six line-g rows = the six data lines of cdp4's latch row D (by bc1's lines 1-6)
+cdp3_g_c2    P  7600,9112-9135     ?   cdp3's channel B track onto line g of column c2 (its file starts it at x 7600); the other end is cdp4's row D data input under s1
+cdp3_g_c3    P  7600,9069-9092     ?   cdp3's track onto line g of c3; row D's data input under s2
+cdp3_g_c4    P  7600,9025-9048     ?   cdp3's track onto line g of c4
+cdp3_g_c5    P  7600,8982-9005     ?   cdp3's track onto line g of c5
+cdp3_g_c6    P  7600,8938-8961     ?   cdp3's track onto line g of c6
+cdp3_g_c7    P  7600,8895-8918     ?   cdp3's track onto line g of c7
+cdp3_g_c2    M  7182-7196,14050    ?   joins bc1's metal x 7189 onto its line 1 (y 14089; the foot of cdp4_in6_s1)
+cdp3_g_c3    M  7224-7238,14050    ?   joins bc1's metal x 7231 onto its line 2 (y 14132; the foot of cdp4_in6_s2)
+cdp3_g_c4    M  7267-7281,14050    ?   joins bc1's metal x 7274 onto its line 3 (y 14175; bc1_d3)
+cdp3_g_c5    M  7310-7324,14050    ?   joins bc1's metal x 7317 onto its line 4 (y 14218; bc1_d4)
+cdp3_g_c6    M  7353-7367,14050    ?   joins bc1's metal x 7360 onto its line 5 (y 14261; bc1_d5)
+cdp3_g_c7    M  7397-7411,14050    ?   joins bc1's metal x 7404 onto its line 6 (y 14304; bc1_d6)

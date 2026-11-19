@@ -4,7 +4,9 @@ Queue row `busl` of `notes/work-packages.md` (written busL until 2026-11-19): th
 left array (`larr`, rows end at x 4780) and the central datapath (`cdp3`, `cdp4`, from x 7600).
 Claimed region: x 4780-7550, y 10400-15000 (the main part; the northern part 6450-7600 x 6750-10400
 is not started). Coordinates are metal-shot pixels; images are in `cache/scratch/busl/`. Wiring only:
-no transistor has been found in the field so far. Four pieces are drawn: `h8`, `ch1`, `lc9`, `ctl`.
+no transistor has been found in the field so far. Five pieces are drawn: `h8`, `ch1`, `lc9`, `ctl`, `d6`.
+Piece `d6`'s six tracks begin in the northern part (x 7240-7600, y 8880-10400), drawn there as far
+as their pads; nothing else of the northern part is.
 
 ## Status
 
@@ -71,6 +73,24 @@ only, one uncertain item (a metal over a box):
     south of it, turns west along y 13982 to x 7448 and runs south onto `bc1`'s metal at (7448,14050).
     The two names are gathered by `@alias bc1_ld_a cdp4_ld`; `tools/unsure.py` lists the net as two
     pieces without the uncertain item.
+
+Run 5 (richtw1's session, Claude Fable 5.2; 2026-11-19, after the run-4 handoff of 17:42 +0100). One
+piece, `d6`, wiring only, no uncertain items:
+
+- **The six data lines of `cdp4`'s 6-bit latch row D are the six "line g" rows of `cdp3`'s row A
+  cells** (piece `d6`). Each poly row `cdp3_g_c#` (# = 2..7; x 7600, y 9123 .. 8907: `cdp3` follows it
+  east to a contact on line g, which comes down from the large cell of row A in column c#) ends west on
+  a pad of a staircase (x 7336 .. 7553). The pad's metal track runs south, steps 86 px west
+  (y 9190 .. 9407), runs 4,300 px down the east side of the field with no pad or contact, steps 65 px
+  west in a second staircase (y 13722 .. 13938) and becomes the metal that `bc1` draws from y 14040
+  onto the contact of one of its six poly lines (y 14089 .. 14304). The order is kept: c2 goes to line 1
+  (the foot of `cdp4_in6_s1`), c3 to line 2 (`cdp4_in6_s2`), c4 .. c7 to lines 3 .. 6 (`bc1_d3` ..
+  `bc1_d6`, which `bc1` follows east only to x 8040; believed `cdp4_in6_s3` .. `s6`). Line 6 (c7) is the
+  long track that the earlier runs met at x 7468 / 7511. The names are gathered by `@alias`
+  (`cdp3_g_c#` canonical).
+
+Full extraction with run 5: 2,391 nets (six fewer: the six joins), 4,345 transistors, 0 errors,
+0 warnings. The package by itself: 37 nets, 0 errors, 0 warnings.
 
 Full extraction with run 4: 2,398 nets (one fewer: `cdp4_ld` and `bc1_ld_a`), 4,345 transistors,
 0 errors, 0 warnings; 847 of 1,276 equations firm, as before. The package by itself: 31 nets, 0 errors,
@@ -303,6 +323,60 @@ metals 13-16 px wide, drawn 14; every row is poly, 23-24 px between its edge lin
   between the rows y 13961 and y 14004; the track x 7448 crosses row y 14004 without a pad
   (`ct_o4.png`). `bc1` draws the same metal from (7448,14050) south (`trace/bc1.txt` line 214).
 
+Piece `d6` (pad contacts with `tools/busl_padc.py` in both metal shots; row centres with
+`tools/busl_rowy.py 7578 8880 9145` in the open column east of the last track; arm heights with
+`tools/sel_cut.py v` between the tracks; track centres with `tools/sel_cut.py h` at fifteen heights;
+metals 13-17 px wide, drawn 14; every row is poly, 22-25 px between its edge lines):
+
+| Line | Net | Row at x 7600 (y) | Pad at its west end | Track from the pad | Step west at y | Long run x | Lower step west at y | Lower x, onto `bc1`'s metal at y 14040-14050 | `bc1`'s line and contact |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | `cdp3_g_c2` | 9123 | (7336,9122) | 7338 | 9190 | 7252 | 13722 | 7189 | line 1, y 14089, (7188,14091): the foot of `cdp4_in6_s1` |
+| 2 | `cdp3_g_c3` | 9080 | (7380,9080) | 7382 | 9234 | 7296 | 13766 | 7231 | line 2, y 14132, (7230,14131): the foot of `cdp4_in6_s2` |
+| 3 | `cdp3_g_c4` | 9036 | (7423,9036) | 7426 | 9276 | 7339 | 13810 | 7274 | line 3, y 14175, (7274,14172): `bc1_d3` |
+| 4 | `cdp3_g_c5` | 8993 | (7467,8994) | 7468 | 9320 | 7382 | 13855 | 7317 | line 4, y 14218, (7317,14217): `bc1_d4` |
+| 5 | `cdp3_g_c6` | 8949 | (7510,8950) | 7512 | 9363 | 7426 | 13898 | 7360 | line 5, y 14261, (7361,14260): `bc1_d5` |
+| 6 | `cdp3_g_c7` | 8906 | (7553,8905) | 7556 | 9407 | 7468 to y 12835; east to 7512; south | 13938 | 7404 | line 6, y 14304, (7405,14304): `bc1_d6` |
+
+- The north end (view `d6_north_m.png`, 2.3x, chip-2 metal shot with every package's trace; overlay
+  `d6_o1.png`, 1.65x, metal and clean shots): six pads in a staircase, 43 px apart both ways, each a
+  ring with a bright centre on the widened west end of its row; one metal leaves each pad south; the
+  rows run east under the tracks of the lines north of them (plain crossings: `tools/tl5_tracks.py v`
+  down the six upper tracks shows only 8-13 px edge bars) to x 7600, where `trace/cdp3.txt` draws them
+  on (lines 215-235; its y within 1 px of these). The six upper arms are plain right-angle steps over
+  field. North-west of the pads lies the diagonal bundle (not this piece).
+- The long runs: `tools/sel_cut.py h` gives 7252, 7296, 7339, 7382, 7426, 7468 at y 9450, 9800, 10400,
+  11000, 11600, 12700 (no step). `tools/tl5_tracks.py v` down all nineteen vertical segments
+  (`cache/scratch/busl/d6_scan.txt`): no stretch of 18 px or more without metal in both chips; only
+  the 8-16 px edge bars of the rows crossed (`lc3`'s
+  rows y 9561-9814, two rows y 10041-10072, the top band y 10300-10680, channel 1, the rows
+  y 12210-12241, 12469-12543 and 12728-12804, channel 2, the rows y 13685-13870). `tools/tl5_tracks.py
+  h` along all thirteen arms: no gap, no hole.
+- No pad or contact on the way. `tools/follow.py`'s contact candidates and the scan's greenish
+  stretches of the clean shot, as tiles at 3.4x in three or four shots (`d6_c1.png`, `d6_c3.png`):
+  (7382,11275), (7252,12579), (7253,10992), (7295,10986), (7338,9382), (7427,11596) are spots at the
+  edge of a plain track over field (nothing beneath to tap); (7296,10057), (7382,9666), (7426,9667),
+  (7468,9709), (7467,9699), (7512,13600) are plain crossings of a poly row, the track at its own
+  width, no ring. The six tracks cross `cdp4_bus_s1`'s poly row y 12745 without a pad (`d6_c2.png`,
+  4x, both metal shots and the clean shot).
+- Line 6's corner at y 12835 (x 7468 to 7512) ends 16 px above `cdp4_rst`'s north pad, with open
+  ground between (piece `ctl`'s text map); from there the track lies over `cdp4_bus_s0`'s poly column
+  (y 12920-13332) and crosses `cdp4_rst`'s poly (y 13906-13927), without a contact on either
+  (`tools/tl5_tracks.py v 7512 12845 13930`: edge bars only).
+- The lower staircase (view `d6_stair_m.png`, 3.6x, chip-2 metal shot; overlay `d6_o2.png`, 1.85x,
+  metal and clean shots): six right-angle steps, each arm 65 px long; no track goes on south of its
+  arm and no lower track north of it. A seventh track west of them (x 7210, stepping along y 13678 to
+  x 7142; another net, not drawn) has the same shape. Line 3's arm lies on `cdp4_sel3`'s row y 13809
+  and line 4's on the undrawn row y 13852, each for 80 px (Ambiguity 4). Line 5's corner (7426,13898)
+  is 20 px west of `cdp4_rst`'s south pad: `tools/px.py row 13898 7424 7470 3 metal,metal1,acid1b`:
+  metal to x 7431, a dark edge, bare ground at x 7442-7449 (red 124-156 in both chips, the clean shot
+  green 120/159/82), the pad's ring from x 7451.
+- The south ends (view `d6_o3.png`, 3x, chip-2 metal shot with every package's trace): each track
+  ends on the pad of its own line of `bc1`'s, in a staircase; `tools/tl5_tracks.py v` from each pad on
+  south: no metal in either chip for 60 px or more beyond any of the six. Line 1's track is dark for
+  20 px (y 14067-14087) just north of its contact, the others for 15-19 px: the pad's ring with the
+  row's north edge. Another metal turns south at about (7187,14165), 70 px below line 1's pad
+  (`tools/textmap.py 7160 14080 7216 14180 4`: no metal between them in either chip): not joined.
+
 ## Logic
 
 Wiring only. Traced: the eight joins above (no uncertain item on any). From `cdp3`'s notes:
@@ -350,6 +424,16 @@ select lies on its diffusion column, and `cdp4_rst`'s poly is tied to a node of 
 the selector's nodes are pulled low when no select is high; and rows C and D together are one 14-bit
 register loaded from the selector's bus lines.
 
+Piece `d6`. Traced (no uncertain item on any of the six nets): `cdp3_g_c2` .. `cdp3_g_c7`, the lines
+that `cdp3` follows from a contact on line g of each row A cell west to x 7600, are one metal each from
+their row-end pads to `bc1`'s six row D data lines. So in the extraction **the data input of `cdp4`'s
+row D latch bit under slice s1 (the pass transistor gated by `cdp4_ld6`) is `cdp3_g_c2`, and under s2
+`cdp3_g_c3`**; `cdp3_g_c4` .. `c7` are `bc1_d3` .. `bc1_d6`, which `bc1` draws only as far as x 8040.
+Believed: these run on to `cdp4_in6_s3` .. `s6` in the same order, so that the 6-bit latch row D takes
+line g of the six large cells of `cdp3`'s row A, column c(k+1) into the bit under slice sk. Nothing in
+the field drives or loads the six. Not traced: the row A cells (`cdp3` (continue), `cdp2` (continue)),
+so what line g is; a latch's data input does not drive, so the cells must (believed).
+
 ## Ports
 
 | Name | Layer | Where | Direction | What |
@@ -370,6 +454,8 @@ register loaded from the selector's bus lines.
 | `cdp4_rst` | P | (7532, 13906-13927) | not known | the poly ends on the west outline of the box (7535-7580, 13903-13940), not drawn (Ambiguity 9) |
 | `bc1_ld_a` (`cdp4`'s name: `cdp4_ld`) | P | x 7600, y 12962 (22 px wide) | in (driven in `bc1`, through the `?M`) | `cdp4`'s strobe row of latch row C, drawn there from x 7600 |
 | `bc1_ld_a` | M | (7448,14050), 14 px wide | in | joins `bc1`'s metal of the strobe driver's twin output |
+| `cdp3_g_c2` .. `cdp3_g_c7` | P | x 7600, y 9123, 9080, 9036, 8993, 8949, 8906 (23 px wide) | not known (believed in: driven by `cdp3`'s row A cells) | `cdp3`'s channel B tracks onto line g, drawn there from x 7600 |
+| `cdp3_g_c2` .. `cdp3_g_c7` | M | y 14050, x 7189, 7231, 7274, 7317, 7360, 7404 (14 px wide) | as above | each joins `bc1`'s metal (drawn there from y 14040) onto the contact of its line 1 .. 6 (`cdp4_in6_s1`, `cdp4_in6_s2`, `bc1_d3` .. `bc1_d6`) |
 
 ## Ambiguities
 
@@ -394,7 +480,7 @@ register loaded from the selector's bus lines.
 4. **Metal lying on a poly row without a pad** (the steps of the staircase x 6790-7140 over channel 2's
    rows; the steps of a second staircase at x 6290-6740 over channel 1's rows, about 180 px each; the track x 7511 over s0's poly column, y 12920-13332; a track x 5843 that begins 35 px south
    of s4's pad (5843,12335) and lies on s4's poly for about 100 px: it is line 1 of piece `lc9`,
-   `lc2_x6299`, after its second step; one step of the staircase x 7130-7440, 80 px on `cdp4_sel3`'s row y 13809 at x 7267-7347, piece `ctl`). Readings: a contact somewhere
+   `lc2_x6299`, after its second step; one step of the staircase x 7130-7440, 80 px on `cdp4_sel3`'s row y 13809 at x 7267-7347, piece `ctl`: it is line 3 of piece `d6`, `cdp3_g_c4`; line 4's arm, `cdp3_g_c5`, lies the same way on the undrawn row y 13852 at x 7310-7390). Readings: a contact somewhere
    along the overlap; or none. Assumed none: no pad, no ring, no green hole in the clean shot on any
    (measurements under piece `ch1` above; guide, trap 13). A contact would join one of these eight
    nets to another track's net.
@@ -445,6 +531,13 @@ register loaded from the selector's bus lines.
    protected colours, a metal line does not end without a contact, and under reading (b) or (c) of
    Ambiguity 9 the two pieces are joined through the contact all the same. So `cdp4_ld` = `bc1_ld_a`
    holds under every reading; what differs is whether `cdp4_rst` or the group's node is on it too.
+11. **Which end drives `cdp3_g_c#`** (piece `d6`): the field holds no transistor. One end is the data
+   input of `cdp4`'s row D latch (a pass transistor: it does not drive), the other `cdp3`'s row A cell,
+   untraced. Settled by tracing that cell (`cdp3` (continue)).
+12. **`bc1_d3` .. `bc1_d6` and `cdp4_in6_s3` .. `s6`** (piece `d6`): `bc1` draws lines 3-6 only to
+   x 8040 ("continues right: staircase, then beyond x 8500"), so the extraction does not join
+   `cdp3_g_c4` .. `c7` to row D's bits s3 .. s6. Working assumption: joined in order, as lines 1 and 2
+   are. Settled by `bc1` (continue).
 6. **Which end drives `cdp4_bus_s#`**: not decidable in the field (it holds no transistor). Settled by
    `larr`'s rows east of x 3900 and `cdp4`'s row R1 upper.
 
@@ -592,25 +685,26 @@ Round 1: no findings that change a connection.
 
 ## Not done
 
-- Everything else in the field: about 25 more tracks and the other rows. Next pieces, in the
-  order they join things: (1) **the six data lines of `cdp4`'s row D** (`bc1`'s lines 1-6, y 14089-14304,
-  each with a contact to a track that `bc1` draws from y 14040: x 7189, 7231, 7274, 7317, 7360, 7404):
-  five come down the metal staircase x 7130-7440, y 13670-13900 (steps at y about 13678, 13722, 13766,
-  13809, 13853, 13897), and the sixth (x 7404, `bc1_d6`) is the long track: from (7554,8902) south on
-  x 7556 to y 9400, west to x 7474, south on x 7468 to y 12835, east to x 7511, south (over
-  `cdp4_bus_s0`'s poly column) to y 13938, west to x 7404, south (`tools/follow.py 7511 13000 N` / `S`;
-  its part north of y 10400 is in the northern part); `cdp4_ld8b` (the row y 11837: no row is seen at
-  that y in the gaps at x 6600-7600 in `n1_metal.png`; its west end is east of there or not a row; not
-  looked at closer); (2) the rows y 13744 and y 13852 (from west of x 6500 to gate bands of `cdp4`'s
-  corner gate group) and the two tracks that step west of the selects' staircase (x 6516, x 6559 at
-  y 12700); (3) what else arrives from `lc3` at y 10400 (`ports.d/lc3.txt`): the six diagonal metals at
-  x 5915, 5851, 5785, 5722, 5655, 5588 (`lc3_e9577` .. `lc3_e9793`), the polys at x 5475 (`rst_n`) and
-  x 5541 (`lc2_w8450` again), the VCC metal x 5340-5390; (4) the top band's ninth row (y 10317,
-  `cdp3_gate_f`) and the three poly rows at the top left (y 10560, 10686, 10736); (5) the staircases at
-  x 5100-5700, y 10600-10960 west of piece `h8`'s; (6) the bands at y 11850-12150 and below; (7) the
-  foot of the field: rows y 14827 and 14870 from their pads (6915,14828), (6872,14868) and those pads'
-  tracks north (x 6927, x 6885); the net that starts on row y 14523 at the pad (7100,14522); the rows above y 14523
-  (`bc1`'s bus has four more, y 14354-14482); the track x 6452 beside piece `lc9`'s pads.
+- Everything else in the field: about 20 more tracks and the other rows. Next pieces, in the
+  order they join things: (1) `cdp4_ld8b` (the row y 11837: no row is seen at that y in the gaps at
+  x 6600-7600 in `n1_metal.png`; its west end is east of there or not a row; not looked at closer);
+  the seventh track of the lower staircase (x 7210 from the north, west along y 13678 to x 7142, south
+  past y 14060; `tools/follow.py 7210 13200 N` takes it north to y about 8666 and then west by a
+  staircase to (6514,8254), not read); the pad at about (7558,9432) and its track x 7555 south (it
+  begins 25 px south of line 6's upper arm; `tools/sel_cut.py h` sees it at y 9450-11000); (2) the rows
+  y 13744 and y 13852 (from west of x 6500 to gate bands of `cdp4`'s corner gate group) and the two
+  tracks that step west of the selects' staircase (x 6516, x 6559 at y 12700); (3) what else arrives
+  from `lc3` at y 10400 (`ports.d/lc3.txt`): the six diagonal metals at x 5915, 5851, 5785, 5722, 5655,
+  5588 (`lc3_e9577` .. `lc3_e9793`), the polys at x 5475 (`rst_n`) and x 5541 (`lc2_w8450` again), the
+  VCC metal x 5340-5390; (4) the top band's ninth row (y 10317, `cdp3_gate_f`) and the three poly rows
+  at the top left (y 10560, 10686, 10736); (5) the staircases at x 5100-5700, y 10600-10960 west of
+  piece `h8`'s; (6) the bands at y 11850-12150 and below; (7) the foot of the field: rows y 14827 and
+  14870 from their pads (6915,14828), (6872,14868) and those pads' tracks north (x 6927, x 6885); the
+  net that starts on row y 14523 at the pad (7100,14522); the rows above y 14523 (`bc1`'s bus has four
+  more, y 14354-14482); the track x 6452 beside piece `lc9`'s pads; the metal that turns south at
+  about (7187,14165) below line 1's end pad.
+- Piece `d6`'s ends: `bc1`'s lines 3-6 east of x 8040 to the feet of `cdp4_in6_s3` .. `s6` (`bc1`
+  (continue); Ambiguity 12); the row A cells of `cdp3` on line g (`cdp3` (continue)).
 - Piece `ctl`'s ends: the four select tracks south of y 15000 (x 6538, 6581, 6624, 6668; to y about
   16150-16190: `bl0`, `bl1`), where their drivers must be; **the gate group at `cdp4`'s bottom-left
   corner** (`cdp4` (continue), x 7550-7870, y 13640-14040): the box (7535-7580, 13903-13940) on which
