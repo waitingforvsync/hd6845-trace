@@ -1226,8 +1226,9 @@ driver lies; the other three lead to the loads.
     contact: a ring with a bright centre in both metal shots (`textmap.py 6484 7858 6546 7926 3 --acid`:
     ring y 7867-7906, centre B-E at y 7885-7894 in chip 2 and chip 1) and a hole in the chip-2 stripped
     shot (red minus green 0-18 at x 6508-6523, y 7888-7894, on a poly that reads over 30; a pitted box in
-    `k_L6513.png`). The pads (6558,8125) and (6513,8087) nearby have a reddish centre in the clean shot
-    too. **Assumed: a contact** (the pad is widened, 40 px, as only a contact pad is; three shots agree;
+    `k_L6513.png`). The pad (6558,8125) nearby has a small red spot (red minus green 56-80, about 8 px)
+    inside its dull hole in the clean shot (`textmap.py 6543 8110 6575 8140 3`); (6513,8087) has a plain
+    dull hole. **Assumed: a contact** (the pad is widened, 40 px, as only a contact pad is; three shots agree;
     the row's colours in the clean shot are abnormal as far as x 6840: Ambiguity 33). If there were none,
     the track x 6514 would pass over the row's end without touching it: the row and its two pads east
     would be a wire with no source, and latch C's data would have no driver either.
