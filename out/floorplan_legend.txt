@@ -384,7 +384,7 @@
 -	logic	latch K	4500,8350:4985,8750	lc2_w8552 = NOT(lc2_w8475 & lc2_w8298 | lc2_w8450 | lc2_w8725), lc2_w8725 = NOT(lc2_w8475 & lc2_w8692 | lc2_w8552)
 -	logic	flip-flop 2	4990,8370:5365,9233	the cell lc2_ff turned 180 degrees: a toggle flip-flop clocked by lc2_w8298 (flip-flop 1: latch K, gates K3, K4); outputs lc2_w8992, lc2_w8914, lc2_w9034, lc2_w8862
 -	logic	latch C	5887,8589:6142,9029	tl1's latch turned left-right; clear rst_c (shared with latch D)
-254	route	through lines	6280,8600:6450,9233	four metal lines from the east edge to the south edge, no contact in the strip (lc2_x6299, lc2_x6342, lc2_x6387, lc2_x6432)
+254	route	through lines	6280,8600:6450,9233	four metal lines from the east edge to the south edge, no contact in the strip (inh_src, lc2_x6342, lc2_x6387, lc2_x6432)
 256	?logic	gates below the column west of the large cells	7460,8620:7800,8800	not traced: package cdp3 (continue)
 -	?logic	logic beside the large cells (row A)	7850,8260:8300,8800	gates between channel 3 and channel B, west of the six large cells; lines from the gate beside row C come up into it (x 7880, 8076, 8290, 8327); not traced: package cdp3 (continue)
 -	?array	six large cells, lower part (cdp3's row A)	8380,8450:10770,8790	the same six cells as cdp2's row D, one per column c2..c7, on the same bit lines as the two registers, with one line each from the west and one output (line f) going south; not traced
@@ -562,7 +562,7 @@
 320	io	D5 input protection	17687,14366:17962,14856	clamp from the node d5_in to the VSS rail, comb and frame; the series strip from the bond pad is not drawn
 326	route	latched R4 match, up the left bus field	6692,15000:7424,18090	bd1_n2 from the corner (6712,18083) north on x 6712, a poly link under the supply buses, on north (drawn to y 15000)
 -	logic	latch strobe drivers	7520,14950:7860,15400	two strong inverters with one input: one drives cdp4_ld6 (strobe of the 6-bit latch row D), the other a twin line going up at x 7448
-321	route	inh_src, poly row y 14914	7540,14896:7986,14930	inh_src is the left-centre through line lc2_x6299: from the left bus field's row east to the pad (7880,14914) and the corner of the track x 7967
+321	route	inh_src, poly row y 14914	7540,14896:7986,14930	inh_src is the left-centre through line (x 6299 at lc2's south edge): from the left bus field's row east to the pad (7880,14914) and the corner of the track x 7967
 322	route	inh_src, track x 7967	7958,14930:7986,16322	straight south, 1,390 px, to the pad (7968,16303)
 -	logic	2-bit decoder	8040,15060:8565,15860	two bus lines (y 14832, 14873) inverted and decoded by three NANDs into active-low lines for 00, 10 and 01
 -	route	inh_src, west bus line and the metal x 8968	8650,15244:9770,18098	poly hop, metal y 18083, poly north, then a 2,470 px metal with two taps and a west branch: four polys into the bottom-centre gate columns (not followed)
