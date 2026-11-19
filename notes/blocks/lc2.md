@@ -139,7 +139,7 @@ without a break to the clear pad), so one signal clears latches B, C and D; latc
 the metal x 5508-5524; `lc2_w8474`'s row is drawn on west to a pad (5428,8648) in the run of a metal x 5421-5437 (corrected by review
 round 3: the metal runs on both ways, has a pad (5428,8516) with a poly west and a third contact (5429,8994) whose poly is
 the first gate row of the column south of latch B); a poly from latch C's clear pad leaves the strip south-east. One merged equation prints another name: `lc2_w8215` (latch B's Nb)
-reads `rst_c` where it read `lc2_w8254` (input identified; no logic changed). Full extraction: 2361 nets,
+reads `rst_c` where it read `rst_c` (input identified; no logic changed). Full extraction: 2361 nets,
 4232 transistors, 0 errors, 0 warnings.
 
 2026-11-18 16:28 -0600 (run 3, Matt Godbolt, on Fable 5.2). **Partial: the lower unit of latch D and the bus field
@@ -160,7 +160,7 @@ field gives three joins, none through an uncertain item: **latch C's clear is `r
 (a poly cross-under and a metal); latch C's enable `lc2_w8646` runs north out of the strip and has a branch
 east; latch C's data `lc2_w8906` comes from the north on a metal 20 px east of the strip (Logic, "Latch D's
 lower unit and the bus field"). One merged equation prints another name for one net: `lc2_w8688` (latch C's
-Nb) now reads `rst_c` where it read `lc2_w8731` (input identified; no logic changed).
+Nb) now reads `rst_c` where it read `rst_c` (input identified; no logic changed).
 
 Earlier runs (dp111):
 
@@ -211,10 +211,10 @@ clean): every outline lies on a feature within about 5 px.
 ```
 lc2_w8532 = NOT lc2_w8450                                              FIRM
 lc2_w8341 = NOT( lc2_w8450 AND lc2_w8169  OR  lc2_w8215 )              DEPENDS (tl1's ? load tie)
-lc2_w8215 = NOT( lc2_w8254  OR  lc2_w8169 AND lc2_w8532  OR  lc2_w8341 )  DEPENDS (tl1's ? load tie)
+lc2_w8215 = NOT( rst_c  OR  lc2_w8169 AND lc2_w8532  OR  lc2_w8341 )  DEPENDS (tl1's ? load tie)
 ```
 
-A latch open while the enable `lc2_w8169` is high: data `lc2_w8450`, clear `lc2_w8254`
+A latch open while the enable `lc2_w8169` is high: data `lc2_w8450`, clear `rst_c`
 (forces `lc2_w8215` low, so `lc2_w8341` high), outputs `lc2_w8341` (Na, taken west) and
 `lc2_w8215` (Nb, not taken out: see (a)). Transistors (extraction): t129-t139 at
 (5630-5808, 8132-8472); widths are the cell's (W/L 72/18 and 81-83/19-21 for the series
@@ -625,7 +625,7 @@ candidates at (6384,8858) and (6471,9051): the first is that crossing, the secon
 ## Ports
 
 `ports.d/lc2.txt` (kept in step with this). Latch B: enable `lc2_w8169` north on metal x 5560 at y 8067 (into
-`lc1`; believed to run to (5558,7646)); clear `lc2_w8254`, output `lc2_w8341` and data `lc2_w8450` end on stubs
+`lc1`; believed to run to (5558,7646)); clear `rst_c`, output `lc2_w8341` and data `lc2_w8450` end on stubs
 of their metals (pads (5472,8254), (5514,8341), (5558,8450): the metals run on, not followed); the rails vss
 and vcc at y 8060/8067 and y 8560. Latch C's output Na `lc2_w8822` no longer leaves
 the strip (run 4: it ends on the inverter below the latch); the VSS rail ends at y 9176.

@@ -1567,7 +1567,7 @@ open join (`ck_a_u`). Claims now: `tl3` (Tom, run 11), `lc2` (Matt, continuing d
 - **Other blocks' notes.** Corrections appended to `tla`, `tl1`, `tl2`, `tl4`, `tl5`, `r9m` and `ur`.
   `ports.d/tl1.txt` gains the VSS arm at x 2817. Not edited, because they are under active claims:
   `tl3.md` (`tl4`'s corrections on `rcs_mv`'s direction, `tl3_e3028`, the rows at x 4250) and `lc2.md`
-  (`lc1`'s latch D lower unit and the joins `lc2_w8254`, `lc2_w8169`). Both are listed in the master list
+  (`lc1`'s latch D lower unit and the joins `rst_c`, `lc2_w8169`). Both are listed in the master list
   rows for their claimants.
 - **Floor plan.** The coarse top-left block is trimmed to strip 3 (`tl3`); the fragments of
   `tl1`, `tl2` and `tl4`-`tl6` cover the rest.
@@ -1824,3 +1824,32 @@ run gave 0.8%.
 - the supply band at y 5325-5525;
 - empty field east of `wl` and at `cdp4`'s bottom-right;
 - a few slivers of wiring under 100 px.
+
+## 2026-11-19 11:38  Pull requests #17 and #19; Refresh
+
+Both reviewed at the user's request, and closed with the user's approval.
+
+**#19** (Tom Seddon): adds a missing count ("29 meetings, 16 ports without a partner") to a `tl3`
+handoff that was processed and removed on 2026-11-18. Merging it would have brought the file back.
+Closed with the count noted in the comment.
+
+**#17** (dp111, dbus-cont, open since 2026-11-17): compared with main as planned.
+- The bits 4-7 latches and bus drivers (its `trace/dbus_h.txt`) against Tom's `dlat`: all 40
+  transistors pair up within 25 px, and every gate and channel terminal is on the same named net. That
+  is an independent confirmation of `dlat`.
+- Its `dbus_n9` is `dbus`'s `d0_out_n` = NOT `dbus_do0_in`, the same two transistors.
+- Not merged:
+  - it rewrites `dbus`'s files, which Tom has since traced;
+  - dp111's cost report shows part of this work on Opus (Fable-only rule; no further non-Fable merges).
+- Its one new piece is `dbus_le`'s route south from (16774,15935) to a NOR under `bd2`'s VSS rail,
+  `dbus_le` = NOR(`cs_d`, X). It is recorded as a lead in the `bd1`-`bd3` row, to be traced again on
+  Fable, and as "believed" in `operation.md`'s `dbus_le` row.
+- The `dlat` row and `operation.md`'s data bits 4-7 row now note the confirmation.
+
+**Handoffs:** none waiting. **Claims:** none.
+
+**Refresh:**
+- Renamed (`names.py compare`: only names changed): `lc2_w8254`, `lc2_w8731` -> `rst_c`.
+- `operation.md`: totals unchanged (2,379 nets, 4,282 transistors; 839 of 1,261 equations firm).
+- `out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary.
+- Coverage: 63.0% traced; untraced and in no Queue row 0.4% (supply plates and empty field).

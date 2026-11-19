@@ -41,7 +41,7 @@ P 5490,8247:5600,8266
 P 5458,8240:5496,8270
 C 5472,8254
 M 5474,8238 y8272 w=26
-N P 5540,8256 lc2_w8254
+N P 5540,8256 rst_c
 # output Na: the box poly row y 8334-8354 west to the pad (5514,8341) on a metal x 5503-5525 (not followed)
 P 5525,8334:5600,8354
 P 5502,8327:5530,8356
@@ -98,7 +98,7 @@ P 6120,8724:6245,8742
 P 6240,8716:6274,8748
 C 6257,8731
 M 6257,8716 y8746 w=20
-N P 6200,8733 lc2_w8731
+N P 6200,8733 rst_c
 # output Na: row y 8812-8828 east to the pad (6257,8822) under the same-looking metal x ~6248-6266
 # (drawn over the pad only; a separate metal from the clear pad's: field between y ~8750 and ~8800)
 P 6120,8812:6245,8829
@@ -159,7 +159,6 @@ P 6247,8225:6270,8332
 P 6242,8326:6272,8360
 C 6256,8344
 M 6256,8330 y8716 w=20
-@alias rst_c lc2_w8731
 # latch C's enable: its metal x 6159-6177 runs on north through the field out of the strip; a branch east from it
 # along y 8292-8310 (metal B, a T with no dark line across the join) out of the strip
 M 6168,8067 y8580 w=18
@@ -237,7 +236,6 @@ N M 5974,8080 lc2_w9124                      # a second label north of the uncer
 # clear: lc1's metal x 5466-5486 (rst_c, gate 7's output) comes south without a break to the clear pad:
 # latch B's clear is rst_c, as latch C's and latch D's
 M 5476,8067 y8240 w=20
-@alias rst_c lc2_w8254
 # output Na: the metal x 5508-5524 runs north from its pad out of the strip, over the clear's row (no contact)
 M 5516,8067 y8330 w=16
 # lc2_w8474: the row y 8634-8652 on west from under the VCC rail, under the thin metals and the VSS rail (no pad
