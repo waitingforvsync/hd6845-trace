@@ -2052,3 +2052,34 @@ Full extraction 2,399 nets (one fewer: the alias), 4,345 transistors, 0 errors, 
 - No new AMB entry. `out/` rebuilt.
 
 **Handoffs:** none waiting. **Claims:** `busl` (waitingforvsync), `eof` (tom-seddon).
+
+## 2026-11-19 16:26  Refresh
+
+At the user's request, after the eight handoffs above. **Handoffs:** none waiting. **Claims:** `busl`
+(waitingforvsync), `eof` (tom-seddon).
+
+**Renamed:** nothing. `names.py candidates`, section 1, lists only the deliberate aliases, as before
+(`ar#_q`, `d#_in`, the `*_tab` cell pins, `cdp2_c_s1_bus`/`cdp2_c_s2_bus` under AMB-019).
+
+**Left on purpose:** the day's new joins are placeholder to placeholder, kept as `@alias` until one
+side has a functional name: `tc2_r5589` / `eof_w7818`; `tc2_sr_g` / `eof_w7718` / `lc1_w7908`;
+`lc1_w7170` / `lc2_w8474` / `eof_w7777` / `lc3_w9432`; `lc2_w9079` / `lc3_w9337`; `lc3_w9947` /
+`lc2_x6432`; `cdp4_bus_s#` / `cdp4_in_s#` (eight); `bd1_n2` / `bd1_q` (through an uncertain tie).
+Section 2 (joins through uncertain geometry) untouched, as the rule says. The glossary rows of
+`tc2_sr_g` and `tc2_r#` now say where those two lines go.
+
+**`operation.md`** (eighth refresh): header (2,399 nets, 4,345 transistors; 847 of 1,276 equations
+firm, from 840 of 1,262). Taken in: the gate on `inh_ck`'s tap row is named on every side,
+`tc2_r5589` = NOT(`lc1_w7170` AND (`inh_ck` OR `tc2_sr_g`)) (firm, now also in the name `lc1_w7170`:
+`lc3`'s gate pair ends on the same line); latch D's enable `lc1_w7908` is `tc2_sr_g`; "Not
+established at all" no longer says the ripple counter's length and consumers are untraced (five
+stages, clock `lc2_x6432` with its source open, `lc2_w9125` choosing between the fourth and fifth
+outputs). The tracers had already written the counter's table, `lc1_w7170`'s driver and the latch on
+R4's match. Against the last refresh's equations: 16 new (9 firm), two gone by name (`lc3_w9432`,
+`lc3_w9337`, now `lc1_w7170` and `lc2_w9079`), none changed status. AMB-001 to AMB-037 and R1-R45
+unchanged in range (R31, R42, R45 edited).
+
+**`out/`** rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 647 floor-plan blocks; the
+floor plan looked at round the left-centre strips and the new routes (`cache/scratch/refresh/fp_crop.png`):
+no label over another. Coverage: 65.5% traced; in some package region 99.9%; untraced and in no Queue
+row 0.4%.
