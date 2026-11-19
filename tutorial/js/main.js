@@ -4,19 +4,20 @@ import { buildSteps } from './steps.js';
 
 const $ = id => document.getElementById(id);
 // three.js comes from a CDN. If it cannot load, the viewers say so and everything else still works.
-let THREE, PhotoViewer, StackViewer, LAYER_COLOUR, pointInRing;
+let THREE, PhotoViewer, PhotoViewer2D, GL, StackViewer, LAYER_COLOUR, pointInRing;
 const LAYER_NAME = { M: 'Metal', P: 'Poly', D: 'Diffusion', C: 'Metal contact', B: 'Buried contact', T: 'Transistor channel' };
 class Stub {
-  constructor(el) {
+  constructor(el, why) {
     const d = document.createElement('div'); d.className = 'pv-fail';
-    d.textContent = 'The 3D / photo viewer needs the three.js library, which could not be loaded (offline, or the CDN is blocked). The text and diagrams on this page still work.';
+    d.textContent = why ? `This view could not start: ${why}. The text, diagrams and simulations on this page still work.`
+      : 'The 3D / photo viewer needs the three.js library, which could not be loaded (offline, or the CDN is blocked). The text and diagrams on this page still work.';
     el.appendChild(d);
     return new Proxy(this, { get: (t, k) => (k in t ? t[k] : (k === 'items' ? [] : () => {})), set: () => true });
   }
 }
 try {
   THREE = await import('three');
-  ({ PhotoViewer, LAYER_COLOUR, pointInRing } = await import('./photo.js'));
+  ({ PhotoViewer, PhotoViewer2D, GL, LAYER_COLOUR, pointInRing } = await import('./photo.js'));
   ({ StackViewer } = await import('./stack.js'));
 } catch (err) {
   console.warn('three.js unavailable:', err);
@@ -24,6 +25,30 @@ try {
   LAYER_COLOUR = { M: 0x4aa3ff, P: 0xff5a4d, D: 0x2fd36b, C: 0xffd23f, B: 0xd96bff, T: 0xffffff };
   pointInRing = () => false;
 }
+// A viewer that cannot start (no WebGL, say) must not take the rest of the page down with it.
+// Some older GPUs refuse a context that asks for antialiasing (WebGL elsewhere on the machine still works):
+// retry once without it, and keep that setting for every later viewer.
+function construct(C, el, o) {
+  try { return new C(el, o); } catch (err) {
+    if (!GL || !GL.antialias) throw err;
+    console.warn('WebGL failed, retrying without antialiasing:', err);
+    el.querySelectorAll(':scope > .pv-canvas, :scope > canvas').forEach(n => n.remove());
+    GL.antialias = false;
+    return new C(el, o);
+  }
+}
+const guard = C => C === Stub ? C : function (el, o) {
+  try { return construct(C, el, o); } catch (err) { console.warn('viewer failed:', err); return new Stub(el, String(err && err.message || err).split('\n')[0]); }
+};
+// No WebGL: the photo views fall back to a 2D canvas; the 3D stacks say they cannot start.
+const guardPhoto = C => C === Stub ? C : function (el, o) {
+  try { if (/[?&]canvas2d\b/.test(location.search)) throw new Error('2D canvas requested'); return construct(C, el, o); } catch (err) {
+    console.warn('WebGL unavailable, using a 2D canvas:', err);
+    el.querySelectorAll(':scope > .pv-canvas').forEach(n => n.remove());
+    try { return new PhotoViewer2D(el, o); } catch (e2) { return new Stub(el, String(e2.message).split('\n')[0]); }
+  }
+};
+PhotoViewer = guardPhoto(PhotoViewer); StackViewer = guard(StackViewer);
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 // toggle buttons announce their state
 const syncPressed = () => document.querySelectorAll('button.tgl').forEach(b => b.setAttribute('aria-pressed', b.classList.contains('on')));

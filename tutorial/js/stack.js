@@ -1,7 +1,7 @@
 // The traced worked example as a 3D layer stack, built from the extracted polygons.
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { LAYER_COLOUR } from './photo.js';
+import { LAYER_COLOUR, GL } from './photo.js';
 
 function renderer_touch(cv) { cv.style.touchAction = 'pan-y'; cv.tabIndex = 0; cv.setAttribute('role', 'img'); cv.setAttribute('aria-label', '3D view of the traced layers; drag to rotate, scroll or pinch to zoom'); }
 const T = { D: 6, P: 8, M: 9, B: 10 };          // thickness in die pixels, for looks only
@@ -14,7 +14,7 @@ export class StackViewer {
     this.sel = null;                              // {nets:Set, tid}
     this.paintFn = null;
     this.onPick = null;
-    this.renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+    this.renderer = new THREE.WebGLRenderer({ antialias: GL.antialias, preserveDrawingBuffer: true });
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     this.renderer.setClearColor(0x14130f, 1);
     this.box = document.createElement('div'); this.box.className = 'pv-canvas';

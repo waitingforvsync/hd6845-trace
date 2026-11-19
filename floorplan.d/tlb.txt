@@ -1,0 +1,3 @@
+2593,2193:7240,2506  power  VSS plane | the ground plane north of the top-left logic; its rails hang from it; seven poly lines pass under it, no transistor
+3440,2076:4560,2115  route  tl4_w4068 link | metal joining two polys that pass under the plane: the data of tl1's third latch is tl4's latch enable
+5878,2390:7218,2506  route  three polys to tc1's bus | c4l_l3, tl4_w5068 and tl6_p6101 under the plane's south-east part, from tl6's strip to tc1's top bus field
