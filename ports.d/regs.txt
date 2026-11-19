@@ -1,0 +1,9 @@
+# NAME        LAYER  X,Y              DIR  note
+wr_r12        M      15214,17290      in   from bd3's line (T7's position)
+wr_r14        M      15258,17290      in   from bd3
+wr_r15        M      15301,17290      in   from bd3
+wr_r13        M      15344,17290      in   from bd3
+wr_r12        P      10835,9522-9544  out  onto cdp3_c_wr (row C's write line); marked: one ?M on the way
+wr_r14        P      10835,8810-8826  out  onto cdp3_l8819 (line into row A)
+wr_r13        P      10835,10699-10719 out onto cdp3_h_wr (row H's write line)
+wr_r15        P      10590,11825-11845 out onto cdp4_ld8b (row R1 lower half's strobe)

@@ -1,0 +1,97 @@
+# regs: which central-column row is which register. Follow tasks from sel / bd3's tracks.
+# Piece 1: the write strobes of R12, R13, R14, R15 from where bd3 leaves them (y 17300)
+# to the write lines of the rows they strobe. No transistors.
+@block regs
+@w M=12 P=18
+@s 26x26
+
+# --- wr_r12: T7's line -> row y 17302 -> cdp3's row C write line (cdp3_c_wr) ----------
+M 15214,17290 y17302 x14714 w=14
+P 14697,17285:14731,17319            # pad east of the supply rail
+C 14714,17302
+P 14714,17302 x14497                 # under trunks' X and the VCC rail x 14584-14634
+P 14480,17285:14514,17319
+C 14497,17302
+M 14497,17302 x13386 w=14
+P 13369,17285:13403,17319
+C 13386,17302
+P 13386,17302 x12805                 # under the vertical trunks
+P 12788,17285:12822,17319
+C 12805,17302
+M 12805,17303 x11463 y14785 x11376 y11905
+N M 11463,16000 wr_r12
+# y 11757-11905: the full-width metal stops at both ends; between them both metal shots
+# show only a thin bright line (x 11370-11380) over a load-like unit that is not drawn
+# (notes, Ambiguities 1). Drawn uncertain.
+?M 11376,11905 y11757 w=8
+M 11376,11757 11375,10688 10938,10251 10938,9532
+P 10918,9515:10952,9549              # pad at the east end of row C's write line
+C 10935,9532
+P 10835,9533 x10935 w=20
+@alias wr_r12 cdp3_c_wr
+
+# --- wr_r14: row y 17345 -> cdp3_l8819 (the line into row A's cells) -----------------
+M 15258,17290 y17345 x14672 w=14
+P 14655,17328:14689,17362
+C 14672,17345
+P 14672,17345 x14456
+P 14439,17328:14473,17362
+C 14456,17345
+M 14456,17345 x13430 w=14
+P 13413,17328:13447,17362
+C 13430,17345
+P 13430,17345 x12850
+P 12833,17328:12867,17362
+C 12850,17345
+M 12850,17346 x11418 y14824 x11331 11331,10709 10895,10273 10895,8819
+N M 11418,16000 wr_r14
+P 10876,8802:10910,8836
+C 10893,8819
+P 10835,8818 x10893 w=16
+@alias wr_r14 cdp3_l8819
+
+# --- wr_r15: row y 17388 -> cdp4's 8-bit latch row R1, lower half (cdp4_ld8b) --------
+M 15301,17290 y17388 x14714 w=14
+P 14697,17371:14731,17405
+C 14714,17388
+P 14714,17388 x14497
+P 14480,17371:14514,17405
+C 14497,17388
+M 14497,17388 x13386 w=14
+P 13369,17371:13403,17405
+C 13386,17388
+P 13386,17388 x12805
+P 12788,17371:12822,17405
+C 12805,17388
+M 12805,17389 x11331 y14915 x11245 y11830
+N M 11331,16000 wr_r15
+P 11226,11813:11260,11847
+C 11243,11830
+P 10590,11835 x11243 w=20            # the row runs on west as cdp4's strobe (drawn there to x 10600)
+@alias wr_r15 cdp4_ld8b
+
+# --- wr_r13: row y 17432 -> cdp3's row H write line (cdp3_h_wr) -----------------------
+M 15344,17290 y17432 x14672 w=14
+P 14655,17415:14689,17449
+C 14672,17432
+P 14672,17432 x14456
+P 14439,17415:14473,17449
+C 14456,17432
+M 14456,17432 x13430 w=14
+P 13413,17415:13447,17449
+C 13430,17432
+P 13430,17432 x12850
+P 12833,17415:12867,17449
+C 12850,17432
+M 12850,17433 x11375
+P 11358,17411:11392,17445            # hop north under wr_r15's row
+C 11375,17428
+P 11375,17428 y17340
+P 11358,17323:11392,17357
+C 11375,17340
+M 11375,17340 y14868 x11287 11287,10882 11244,10840 11244,10705
+N M 11375,16000 wr_r13
+P 11226,10688:11260,10722
+C 11243,10705
+P 10835,10709 x11243 w=20
+@alias wr_r13 cdp3_h_wr
