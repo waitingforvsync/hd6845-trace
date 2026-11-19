@@ -1915,3 +1915,23 @@ join), 4,286 transistors, 0 errors, 0 warnings; `tools/unsure.py` does not list 
 - `out/` rebuilt.
 
 **Handoffs:** none waiting. **Claims:** none.
+
+## 2026-11-19 12:59  Refresh
+
+At the user's request, after the two `eof` handoffs of today. **Handoffs:** none waiting. **Claims:** none.
+
+**Renamed** (`names.py compare`: only names changed; one batch):
+- the clear of `bc2`'s latch unit a (its placeholder is under Former names in the glossary) -> `inh_src`:
+  a firm join, `eof`'s piece `isrc`, link G; the alias in `trace/eof.txt` is dropped by the rename.
+
+**Left on purpose** (`names.py candidates`, section 1): `ar#_q`, `d#_in`, the `*_tab` cell pins (a
+cell's own name for a pin), `cdp2_c_s1_bus`/`cdp2_c_s2_bus` (kept with their row under AMB-019).
+Section 2 (joins through uncertain geometry) untouched, as the rule says.
+
+**`operation.md`** (seventh refresh): header (2,378 nets, 4,286 transistors; 840 of 1,262 equations
+firm, unchanged since `eof`'s run 3); the `inh_src` row now gives the equation of the latch it clears
+(marked); R5's path (the NOR into latch A's data) was taken in with run 3. No equation changed status
+(`eq_before` against `eq_after`). AMB-001 to AMB-037 and R1-R45 unchanged.
+
+**`out/`** rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 630 floor-plan blocks.
+Coverage: 63.3% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
