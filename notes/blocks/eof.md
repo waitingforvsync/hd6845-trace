@@ -1491,6 +1491,56 @@ tools/t.sh eof sameconn.py 278b6ae              ->  connections identical
 
 Round 10: no findings that change a connection.
 
+### Round 11 (full review of piece `isrc4`; 2026-11-19 16:39 to 16:52 +0000)
+
+A fresh Claude Fable 5.2 reviewer agent, briefed with the piece's seven claims and nothing of the tracer's
+reasoning; the commit under review was b3a8392. Images in `cache/scratch/eof/review-11/` (17).
+
+**Told to suspect**: the two steps of the metal inside the bundle (a neighbouring track taken; the 9 px bar
+at x 8164-8172 on the step y 16697); whether the track runs on through the tap pad (8100,16910); the pad
+(8185,16303) against `bc1_g6_in`'s jog; the pad (8053,17735) against the other net's metal on the row
+y 17736, and that metal's ends; the dark bars across that row in the gaps between metals; the L corner
+(7967,14914) and the pad (7880,14914); the row y 14914 as one poly to x 7550 and `bc1`'s metal on it; all
+round each of the five new pads; the rows' east ends under the rail x 8336-8384; pads or contacts along
+the 1,390 px of x 7967 and the chip-1 blemishes on x 8057.
+
+**Checked** (4-4.4x in two to four shots, with text maps and the extraction):
+
+- The extraction: 2,397 nets, 0 errors, 0 warnings; `unsure.py` lists neither name; `inh_src` keeps its
+  three gates and `bc1_g6_in` is a separate net.
+- The step y 17301 (`step1.png`): three tracks each step one position; this one goes x 8057 to x 8103 in
+  one piece. The step y 16697 (`step2.png`, `diff32.png`): three tracks each step two positions; this one
+  x 8103 to x 8185; the bar at x 8164-8172 is one vertical line that also crosses the neighbouring track
+  and the bare ground between them, an edge underneath; no ring or hole on the metal over the tan area.
+- The tap pad (`tap.png`, four shots): ring and bright centre in both chips, hole in the clean shot, the
+  track bright above and below; the row ends on the pad to the west and at about x 8325 to the east
+  (`tap_e.png`), with no poly band across the diffusion box under the rail.
+- The pad (8185,16303) against the jog (`pad3.png`, text map): bare ground y 16275-16283 in both chips,
+  open field in the clean shot: separate.
+- Row C (`rowc_w.png`, `rowc_e.png`, `pad4ctx.png`): no ring or hole under the four tracks; field between
+  the pad (7968,16303) and the poly under the track x 7925; the east end as the tap row's.
+- The track x 7967 (`trk7967.png`): straight, bars only at the row y 15868; a dark spot at (7966,15057) is
+  on chip 2 only. The L corner and the pad (7880,14914) (`Lcorner.png`, four shots): a plain L; the row ends
+  on the pad (pink east of it).
+- Row E (`rowE.png`, `rowE_ctx.png`): orange poly in both open stretches (chip 2: 155/111/58 against field
+  162/139/87); no ring or hole under `bc1`'s metal, RL3 or the rail x 7552-7598; the same y either side of
+  x 7550, no step or pad.
+- Row A (`rowA.png`, `padA_w.png`, `cornerE.png`): orange poly at the centre of every gap in both chips; no
+  ring under the five vertical metals or along the lying metal (the dark stretch x 8267-8293 is on chip 1
+  only); that metal is a through line with a corner at each end. The chip-1 blemishes on x 8057: chip 2
+  whole in both its shots.
+
+**Findings**: none. **The reviewer's closest call** (no finding): the pad (8053,17735) against the lying
+metal, about 18 px between their edge lines (x 8072-8090); both chips read non-metal there (chip 2 red
+151-157 against metal above 200), the level of the bare gap further north, and the other metal's west
+edge runs straight through its corner with no stub: separate, as drawn (Ambiguity 29).
+
+**Could not check**: the 4-6 px under each metal edge line on the rows; the chip-2 stripped shot under the
+rails (fringes: those stretches rest on the clean shot and the two metal shots); the feature at
+(8025,16632), not on this net's metal; `busl`'s, `lc3`'s and `lc2`'s part of the net west of x 7540.
+
+Round 11: no findings.
+
 ## Not done
 
 - **Task 2, the loads of `sl_eq_r5_n` (= NOT `sl_eq_r5`)**: one load is drawn (piece `r5nor`,
