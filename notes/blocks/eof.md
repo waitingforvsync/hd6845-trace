@@ -387,7 +387,7 @@ clean shot, `t2_row.png`); other packages' geometry on `r9m_l1w` between the inv
 
 Round 1: no findings that change a connection.
 
-**Round 2: full review of run 2's two pieces** (2026-11-19 00:45 to 01:05 +0000; one fresh reviewer agent on Claude
+**Round 2: full review of run 2's two pieces** (2026-11-19 00:44 to 01:04 +0000; one fresh reviewer agent on Claude
 Fable 5.2, read from the photos alone; trace at commit 9f99dc2; its images in
 `cache/scratch/eof/review-2/`, 17 used). Pieces: `tcwa`, `x1`.
 
@@ -441,7 +441,7 @@ y 7346 at x 6150-6260 other than by scan; `tools/unsure.py` for `lc1_w7304`.
 
 Round 2: one finding, fixed.
 
-**Round 3: fix check of round 2's fix** (2026-11-19 01:10 to 01:20 +0000; one fresh reviewer agent
+**Round 3: fix check of round 2's fix** (2026-11-19 01:08 to 01:17 +0000; one fresh reviewer agent
 on Claude Fable 5.2; trace at commit cd291ee, changes since 9f99dc2; its images in
 `cache/scratch/eof/review-3/`, 7 used; 4.2-5.3x in four shots, text maps, profiles). Checked: each
 of the three added polys is poly, continuous out of its pad and on the feature, with field on
