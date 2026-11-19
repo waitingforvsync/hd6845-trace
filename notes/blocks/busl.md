@@ -53,15 +53,15 @@ Run 4 (richtw1's session, Claude Fable 5.2; 2026-11-19 17:02 to 17:20 +0100). On
 only, one uncertain item (a metal over a box):
 
 - **`cdp4`'s six control rows are followed across the field** (piece `ctl`). Each of the poly rows
-  `cdp4_sel1` .. `cdp4_sel4` (the selector's four select lines), `cdp4_rst` (the gate line of the
+  `rsel14_buf`, `rsel15_buf`, `rsel17_buf`, `rsel16_buf` (`cdp4`'s selects 1-4) (the selector's four select lines), `cdp4_rst` (the gate line of the
   pull-downs on the selector nodes) and `cdp4_ld` (the strobe of the 8-bit latch row C) runs west from
   x 7600 to a pad with a metal track.
   - **The four selects come from the south.** Their tracks step west in one nested staircase
     (y 13073-13204) and run on south out of the region at (6538,15000), (6581,15000), (6624,15000),
     (6668,15000) (the follower runs each to y about 16150-16190, in `bl0`'s ground). On the way each
     runs through one more pad, the west end of a poly row that goes back east to the gate group at the
-    bottom-left corner of `cdp4` (x 7560-7650, y 13650-14030, not drawn): `cdp4_sel1` on the row
-    y 13701, `cdp4_sel3` on 13809, `cdp4_sel4` on 13961, `cdp4_sel2` on 14004. So each select is also
+    bottom-left corner of `cdp4` (x 7560-7650, y 13650-14030, not drawn): `rsel14_buf` on the row
+    y 13701, `rsel17_buf` on 13809, `rsel16_buf` on 13961, `rsel15_buf` on 14004. So each select is also
     an input of that group.
   - **`cdp4_rst` ends on that group.** Its track (x 7468) ends on a pad (7467,13897); a poly from the
     pad runs 70 px east, under one track, to a heavy-outlined box (7535-7580, 13903-13940) at the
@@ -105,13 +105,13 @@ wiring only, no uncertain items:
   (7554,9450); the pad's metal track runs 1,670 px south at x 7555 with no pad or contact and ends on a
   contact (7555,11118) on a diffusion pad, from which a diffusion band (y 11095-11127) runs east under
   column 0's VSS rail into `cdp3`'s ground (drawn to x 7600).
-- Looked at and not this package's: **`cdp4_ld8b`'s row y 11837 does not enter the field**: west of
+- Looked at and not this package's: **`wr_r15`'s row y 11837 does not enter the field**: west of
   x 7598 there is bare field at that height in both metal shots and the clean shot (view `b_ends.png`,
   3x); the row's west end is at about x 7603-7640 under `cdp4`'s metal x 7600-7645 (`cdp4` (continue)).
 
 Run 7 (richtw1's session, Claude Fable 5.2; 2026-11-19 22:30 to 22:56 +0100). Three pieces, `n2`,
-`x68` and `x69`, wiring only, no uncertain items: three of the six nested Ls at the selects' staircase (`cdp4_sel3`'s,
-`cdp4_sel4`'s, these three with corners at y 13247-13376, and `trunks`' line between the last two).
+`x68` and `x69`, wiring only, no uncertain items: three of the six nested Ls at the selects' staircase (`rsel17_buf`'s,
+`rsel16_buf`'s, these three with corners at y 13247-13376, and `trunks`' line between the last two).
 
 - **The latch on R4's match drives the row counter's step logic: `rcs_e3` = NOT `bd1_n2`** (piece
   `n2`). `eof` had drawn `bd1_n2` (the output of `bd1`'s latch on `rc_eq_r4`) from the latch to this
@@ -309,10 +309,10 @@ metals 13-16 px wide, drawn 14; every row is poly, 23-24 px between its edge lin
 
 | Net | Row at x 7600 (y) | Pad at its west end | Track | Second pad, and its row east to x 7550 | Leaves |
 |---|---|---|---|---|---|
-| `cdp4_sel1` | 12225 | (6732,12226) | arm west along y 12228 to x 6602; south; west along y 13073 to x 6538; south | (6537,13701): row y 13701 | south, (6538,15000) |
-| `cdp4_sel2` | 12485 | (6732,12485) | arm west along y 12488 to x 6646; south; west along y 13116 to x 6581; south | (6580,14004): row y 14004 | south, (6581,15000) |
-| `cdp4_sel3` | 12528 | (6687,12528) | x 6689 south; west along y 13160 to x 6624; south | (6623,13809): row y 13809 | south, (6624,15000) |
-| `cdp4_sel4` | 12788 | (6731,12788) | x 6733 south; west along y 13204 to x 6668; south | (6666,13961): row y 13961 | south, (6668,15000) |
+| `rsel14_buf` | 12225 | (6732,12226) | arm west along y 12228 to x 6602; south; west along y 13073 to x 6538; south | (6537,13701): row y 13701 | south, (6538,15000) |
+| `rsel15_buf` | 12485 | (6732,12485) | arm west along y 12488 to x 6646; south; west along y 13116 to x 6581; south | (6580,14004): row y 14004 | south, (6581,15000) |
+| `rsel17_buf` | 12528 | (6687,12528) | x 6689 south; west along y 13160 to x 6624; south | (6623,13809): row y 13809 | south, (6624,15000) |
+| `rsel16_buf` | 12788 | (6731,12788) | x 6733 south; west along y 13204 to x 6668; south | (6666,13961): row y 13961 | south, (6668,15000) |
 | `cdp4_rst` | 12874 | (7467,12875) | x 7468 south to a pad (7467,13897) | from that pad a poly 20 px wide east along y 13916 to x 7532 | on the box (7535-7580, 13903-13940) |
 | `cdp4_ld` | 12962 | (7556,12983), below the row's end | x 7556 south; over the box y 13899-13949 (`?M`); south to y 13982; west to x 7448; south | none | onto `bc1`'s metal of `bc1_ld_a` at (7448,14050) |
 
@@ -346,7 +346,7 @@ metals 13-16 px wide, drawn 14; every row is poly, 23-24 px between its edge lin
   each, no pad on any. Two more rows of other nets lie between them (y 13744 and y 13852, both from
   west of x 6500; not drawn). A metal staircase (the six data lines of `cdp4`'s row D on their way to
   `bc1`'s lines y 14089-14304; not drawn) crosses the band, and **one of its steps lies on
-  `cdp4_sel3`'s row y 13809 for 80 px** (x 7267-7347; the other steps lie between rows or on row
+  `rsel17_buf`'s row y 13809 for 80 px** (x 7267-7347; the other steps lie between rows or on row
   y 13852): no pad, no ring, the clean shot's row unbroken under it (tile 5 of `ct_c1.png`, 3.6x, four
   shots): no contact (Ambiguity 4).
 - `tools/tl5_tracks.py h` along the ten row stretches lists greenish stretches in the clean shot
@@ -416,7 +416,7 @@ metals 13-17 px wide, drawn 14; every row is poly, 22-25 px between its edge lin
 - The lower staircase (view `d6_stair_m.png`, 3.6x, chip-2 metal shot; overlay `d6_o2.png`, 1.85x,
   metal and clean shots): six right-angle steps, each arm 65 px long; no track goes on south of its
   arm and no lower track north of it. A seventh track west of them (x 7210, stepping along y 13678 to
-  x 7142; another net, not drawn) has the same shape. Line 3's arm lies on `cdp4_sel3`'s row y 13809
+  x 7142; another net, not drawn) has the same shape. Line 3's arm lies on `rsel17_buf`'s row y 13809
   and line 4's on the undrawn row y 13852, each for 80 px (Ambiguity 4). Line 5's corner (7426,13898)
   is 20 px west of `cdp4_rst`'s south pad: `tools/px.py row 13898 7424 7470 3 metal,metal1,acid1b`:
   metal to x 7431, a dark edge, bare ground at x 7442-7449 (red 124-156 in both chips, the clean shot
@@ -447,7 +447,7 @@ one metal 13-18 px wide, drawn 14):
 | diagonal, x + y = 16377 | (7467,8910) | (7209,9168) | field; 57 px north-west of piece `d6`'s row-end pads |
 | south, x 7209 | y 9168 | y 13680 | `lc3`'s rows y 9561-9814, the rows y 10041-10072, the top band, channel 1, the bands y 12210-12241, 12469-12543, 12728-12804, channel 2 |
 | west, y 13680 | x 7209 | x 7145 | field (between channel 2's last row and row y 13701) |
-| south, x 7145 | y 13680 | y 14176 | rows y 13701 (`cdp4_sel1`), 13744, 13809 (`cdp4_sel3`), 13852, 13961, 14004, `bc1`'s lines 1 and 2 (y 14089, 14132) |
+| south, x 7145 | y 13680 | y 14176 | rows y 13701 (`rsel14_buf`), 13744, 13809 (`rsel17_buf`), 13852, 13961, 14004, `bc1`'s lines 1 and 2 (y 14089, 14132) |
 | east, y 14176 | x 7145 | x 7187 | lies on `bc1`'s line 3 (the poly row y 14175, `cdp3_g_c4`) for 45 px |
 | south, x 7187 | y 14176 | y 14285 | `bc1`'s lines 4 and 5 (y 14218, 14261) |
 | east, y 14285 | x 7187 | x 7231 | between line 5 and line 6 (y 14304) |
@@ -532,8 +532,8 @@ segments, kept in `cache/scratch/busl/n2_scan.txt`; views `n2_step.png` (3.4x me
 | `x68` | `busl_x6820` | (6754,15000), on south | 6754 | 13290 | 6820 | (6820,10400), on north |
 | `x69` | `busl_x6906` | (6841,15000), on south | 6841 | 13376 | 6906 | (6906,10400), on north |
 
-All three are 14-16 px wide throughout (`sel_cut.py`). The nest, from the west: `cdp4_sel3`'s L (arm
-y 13160), `cdp4_sel4`'s (13208), `n2`'s, `x68`'s, `trunks`' line (x 6862 north, arm y 13332, x 6798
+All three are 14-16 px wide throughout (`sel_cut.py`). The nest, from the west: `rsel17_buf`'s L (arm
+y 13160), `rsel16_buf`'s (13208), `n2`'s, `x68`'s, `trunks`' line (x 6862 north, arm y 13332, x 6798
 south), `x69`'s. What the scan flagged, all looked at (tiles `n2_c2.png`, `n2_c3.png`, `n2_c4.png` at
 3.2x in four shots):
 
@@ -557,14 +557,14 @@ south), `x69`'s. What the scan flagged, all looked at (tiles `n2_c2.png`, `n2_c3
   --acid`, `6822 13400 6862 13434`, `6822 14074 6862 14104`; tiles and the reviewer's `green_rows.png`,
   `green_13417.png` at 4.5-5.8x); the green patch is the whole protected width (about 25 px) by the
   row's height, wider than the metal, where a contact's hole is about 12 px inside a pad; and `n2` is
-  greenish over both `cdp4_sel1`'s row (y 13701) and `cdp4_sel2`'s (y 14004), where contacts would
+  greenish over both `rsel14_buf`'s row (y 13701) and `rsel15_buf`'s (y 14004), where contacts would
   short the two selects (guide, trap 15). View `n2_c5.png`.
 - `x69`'s arm lies on the poly row y 13375 (piece `ch1`: `cdp4_in_s1`) from x 6841 to x 6906
   (`textmap.py 6824 13354 6924 13400 3 --acid`; view `n2_c6.png`, 5x, three shots): the metal is a
   plain bar 14 px tall in both chips with no ring and no pad (a notch at x 6882 in chip 2 only), and
   the clean shot under it has no hole (olive-yellow from x 6835 to 6890, red-orange under the
   corner). Two nets (guide, trap 13). `trunks`' arm lies the same way on the row y 13332.
-- The four corners nearest to pads: `cdp4_sel1`'s and `cdp4_sel2`'s pads at x 6736 (y 12225, 12485)
+- The four corners nearest to pads: `rsel14_buf`'s and `rsel15_buf`'s pads at x 6736 (y 12225, 12485)
   are 40 px west of `n2`'s north run; the metal test at both heights shows the gap
   (`sel_cut.py h 12300`: 6776 w15, no run between 6740 and 6769).
 
@@ -601,7 +601,7 @@ Believed: the clock of the ripple counter and `rst_c` are driven in the bottom-c
 `lc2_w8450` and `lc2_w9079`, which have their drivers in the left-centre strips (`lc2_w8450`'s through
 `lc2`'s uncertain box), are inputs there.
 
-Piece `ctl`. Traced: `cdp4_sel1` .. `cdp4_sel4` each reach, on one metal track from the south,
+Piece `ctl`. Traced: `rsel14_buf`, `rsel15_buf`, `rsel17_buf`, `rsel16_buf` (`cdp4`'s selects 1-4) each reach, on one metal track from the south,
 both the selector's gate row in `cdp4` and one poly row into the gate group at `cdp4`'s bottom-left
 corner (no uncertain item on any of the four). `cdp4_rst` runs from its gate row to a poly that ends on
 a box of that group (no uncertain item on what is drawn; the box itself is not drawn). **`cdp4_ld` =
@@ -665,9 +665,9 @@ not known: named for their place (`busl_x6820`, `busl_x6906`).
 | `rst_a`, `res_b`, `lpstb_b`, `lc3_w9947`, `lc2_w8450`, `rst_c`, `lc3_e9756`, `lc2_w9079`, `lc3_e9798` | M | y 10400, x 6082, 6126, 6169, 6212, 6256, 6299, 6342, 6386, 6429 (14 px wide) | `lc2_w8450`, `lc2_w9079`: in (driven in `lc2`, `lc3`; for `lc2_w8450` through `lc2`'s uncertain box, Ambiguity 8); the others not known | `lc3`'s nine metals at its south edge (its file ends them at y 10400; it calls the fifth `lc2_w8907`) |
 | `lc3_e9798`, `lc2_w9079`, `lc3_e9756`, `rst_c`, `lc2_w8450`, `lc3_w9947`, `rst_a` | P | x 7550, y 14567, 14611, 14654, 14697, 14740, 14784, 14914 (24 px wide) | as above | poly rows on east 240-290 px to pads at x about 7790 / 7835 under `bc1`'s 13-line bus metals (not drawn) |
 | `res_b`, `lpstb_b` | M | (6366,15000), (6408,15000), 14 px wide | not known | tracks on south into `bl0`'s ground (line 3 seen to y 15150) |
-| `cdp4_sel1`, `cdp4_sel2`, `cdp4_sel3`, `cdp4_sel4` | P | x 7600, y 12225, 12485, 12528, 12788 (23 px wide) | in (driven from south of y 15000) | `cdp4`'s select rows, drawn there from x 7600 |
-| `cdp4_sel1`, `cdp4_sel3`, `cdp4_sel4`, `cdp4_sel2` | P | x 7550, y 13701, 13809, 13961, 14004 (24 px wide) | in | poly rows on east 40-100 px to gate bands on the diffusion column of `cdp4`'s corner gate group (not drawn; sel1's steps 12 px north at x 7548) |
-| `cdp4_sel1`, `cdp4_sel2`, `cdp4_sel3`, `cdp4_sel4` | M | y 15000, x 6538, 6581, 6624, 6668 (14 px wide) | in | tracks on south into `bl0`'s ground (followed to y about 16150-16190) |
+| `rsel14_buf`, `rsel15_buf`, `rsel17_buf`, `rsel16_buf` | P | x 7600, y 12225, 12485, 12528, 12788 (23 px wide) | in (driven from south of y 15000) | `cdp4`'s select rows, drawn there from x 7600 |
+| `rsel14_buf`, `rsel17_buf`, `rsel16_buf`, `rsel15_buf` | P | x 7550, y 13701, 13809, 13961, 14004 (24 px wide) | in | poly rows on east 40-100 px to gate bands on the diffusion column of `cdp4`'s corner gate group (not drawn; sel1's steps 12 px north at x 7548) |
+| `rsel14_buf`, `rsel15_buf`, `rsel17_buf`, `rsel16_buf` | M | y 15000, x 6538, 6581, 6624, 6668 (14 px wide) | in | tracks on south into `bl0`'s ground (followed to y about 16150-16190) |
 | `cdp4_rst` | P | x 7600, y 12874 (22 px wide) | not known (believed in: driven by the corner gate group) | `cdp4`'s row, drawn there from x 7600 |
 | `cdp4_rst` | P | (7532, 13906-13927) | not known | the poly ends on the west outline of the box (7535-7580, 13903-13940), not drawn (Ambiguity 9) |
 | `bc1_ld_a` (`cdp4`'s name: `cdp4_ld`) | P | x 7600, y 12962 (22 px wide) | in (driven in `bc1`, through the `?M`) | `cdp4`'s strobe row of latch row C, drawn there from x 7600 |
@@ -708,7 +708,7 @@ not known: named for their place (`busl_x6820`, `busl_x6906`).
 4. **Metal lying on a poly row without a pad** (the steps of the staircase x 6790-7140 over channel 2's
    rows; the steps of a second staircase at x 6290-6740 over channel 1's rows, about 180 px each; the track x 7511 over s0's poly column, y 12920-13332; a track x 5843 that begins 35 px south
    of s4's pad (5843,12335) and lies on s4's poly for about 100 px: it is line 1 of piece `lc9`,
-   `rst_a`, after its second step; one step of the staircase x 7130-7440, 80 px on `cdp4_sel3`'s row y 13809 at x 7267-7347, piece `ctl`: it is line 3 of piece `d6`, `cdp3_g_c4`; line 4's arm, `cdp3_g_c5`, lies the same way on the undrawn row y 13852 at x 7310-7390). Readings: a contact somewhere
+   `rst_a`, after its second step; one step of the staircase x 7130-7440, 80 px on `rsel17_buf`'s row y 13809 at x 7267-7347, piece `ctl`: it is line 3 of piece `d6`, `cdp3_g_c4`; line 4's arm, `cdp3_g_c5`, lies the same way on the undrawn row y 13852 at x 7310-7390). Readings: a contact somewhere
    along the overlap; or none. Assumed none: no pad, no ring, no green hole in the clean shot on any
    (measurements under piece `ch1` above; guide, trap 13). A contact would join one of these eight
    nets to another track's net.
@@ -1047,7 +1047,7 @@ Findings: two, both wording only (no geometry changed), both confirmed by the tr
    Tracer's check: `tools/px.py pt 6668,13417 6711,13417 6841,13417 6711,14089 6841,14089 acid1b` gives
    221/166/113, 222/167/120, 126/158/99, 183/111/74, 142/161/102. The no-contact reading stands on the
    other grounds (no ring and no pad in either metal shot; the patch is the whole protected width; `n2`
-   is greenish over both `cdp4_sel1`'s and `cdp4_sel2`'s rows). Reworded in the trace comment, the
+   is greenish over both `rsel14_buf`'s and `rsel15_buf`'s rows). Reworded in the trace comment, the
    Inventory and Not done.
 2. The trace comment said "the third of the five nested Ls" and listed six. Reworded.
 `tools/t.sh busl sameconn.py 85f1dfb`: `connections identical`.
@@ -1061,7 +1061,7 @@ Round 1: no findings that change a connection.
 ## Not done
 
 - Everything else in the field: about 20 more tracks and the other rows. Next pieces, in the
-  order they join things: (1) done in run 6 (pieces `sr`, `kb`; `cdp4_ld8b`'s row does not enter the field); (2) the rows
+  order they join things: (1) done in run 6 (pieces `sr`, `kb`; `wr_r15`'s row does not enter the field); (2) the rows
   y 13744 and y 13852 (from west of x 6500 to gate bands of `cdp4`'s corner gate group) and the two
   tracks that step west of the selects' staircase (x 6516, x 6559 at y 12700); (3) what else arrives
   from `lc3` at y 10400 (`ports.d/lc3.txt`): the six diagonal metals at x 5915, 5851, 5785, 5722, 5655,
@@ -1081,7 +1081,7 @@ Round 1: no findings that change a connection.
 - Piece `kb`'s south end: the diffusion band east of x 7600 at y 11095-11127, under column 0's VSS
   rail (`cdp3` (continue)); the three other diagonals of the bundle north-west of `sr`'s (one ends on
   the pad (7425,8862), whose poly runs east along y 8850-8875 under `sr`'s track; the northern part).
-- `cdp4_ld8b`'s west end at about x 7603-7640, y 11825-11850, under the metal x 7600-7645 (`cdp4`
+- `wr_r15`'s west end at about x 7603-7640, y 11825-11850, under the metal x 7600-7645 (`cdp4`
   (continue); view `b_ends.png`, tile 3).
 - Piece `d6`'s ends: `bc1`'s lines 3-6 east of x 8040 to the feet of `cdp4_in6_s3` .. `s6` (`bc1`
   (continue); Ambiguity 12); the row A cells of `cdp3` on line g (`cdp3` (continue)).

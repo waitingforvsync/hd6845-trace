@@ -14,10 +14,10 @@ P 7600,12223 x10588 w=23           # sel1: gates T1 of row A (branch down at eac
 P 7600,12481 x10592 w=23           # sel2: gates T2 of row A
 P 7600,12530 x10592 w=23           # sel3: gates T2 of row B
 P 7600,12786 x10586 w=23           # sel4: gates T1 of row B
-N P 7610,12223 cdp4_sel1
-N P 7610,12481 cdp4_sel2
-N P 7610,12530 cdp4_sel3
-N P 7610,12786 cdp4_sel4
+N P 7610,12223 rsel14_buf
+N P 7610,12481 rsel15_buf
+N P 7610,12530 rsel17_buf
+N P 7610,12786 rsel16_buf
 
 @cell cdp4_mux tag=s2
 # --- row A, T1: a -> n, gate = sel1
@@ -421,12 +421,12 @@ C 10354,13906 s=28x40
 
 # ======================================================================
 # Row R1, lower half (y 11490-11850): eight more latches of the same cell, upside down
-# (findcell: dy -1466, mirrored top to bottom, score 0.82-0.83). Strobe cdp4_ld8b.
+# (findcell: dy -1466, mirrored top to bottom, score 0.82-0.83). Strobe wr_r15.
 # Its buffered output is the selector's b input: the d land's contact falls at
 # (8712 + dx, 11772), under the top end of the b track.
 # ======================================================================
 P 7600,11837 x10600 w=22           # strobe (poly line seen under all slices; ends not examined)
-N P 7610,11837 cdp4_ld8b
+N P 7610,11837 wr_r15
 @inst cdp4_lat -782,-1466 mx=8610 rot=180 o=8610,13132.5 tag=lr_s0
 N M 7683,11510 cdp4_in8b_s0
 @inst cdp4_lat -392,-1466 mx=8610 rot=180 o=8610,13132.5 tag=lr_s1

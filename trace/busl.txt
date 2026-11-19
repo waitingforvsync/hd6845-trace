@@ -338,9 +338,9 @@ M 6736,12228 x6602 y13073 x6538 y15000 w=14
 P 6515,13684:6559,13718               # west end pad of the row y 13701; the track runs on through it
 C 6537,13701 s=24x24
 P 6537,13701 x7550 w=24               # row east to cdp4's corner group (steps 12 px north at x 7548, beyond)
-N P 7000,12225 cdp4_sel1
-N P 7000,13701 cdp4_sel1
-N M 6538,14500 cdp4_sel1
+N P 7000,12225 rsel14_buf
+N P 7000,13701 rsel14_buf
+N M 6538,14500 rsel14_buf
 
 # sel2: row 12485 to its pad (6732,12485); metal west along y 12488 to x 6646, south, west along
 # y 13116 to x 6581, south THROUGH the pad (6580,14004) of the row y 14004, and on south
@@ -351,9 +351,9 @@ M 6736,12488 x6646 y13116 x6581 y15000 w=14
 P 6558,13987:6602,14021               # west end pad of the row y 14004; the track runs on through it
 C 6580,14004 s=24x24
 P 6580,14004 x7550 w=24
-N P 7000,12485 cdp4_sel2
-N P 7000,14004 cdp4_sel2
-N M 6581,14500 cdp4_sel2
+N P 7000,12485 rsel15_buf
+N P 7000,14004 rsel15_buf
+N M 6581,14500 rsel15_buf
 
 # sel3: row 12528 to its pad (6687,12528); track x 6689 south, west along y 13160 to x 6624, south
 # THROUGH the pad (6623,13809) of the row y 13809, and on south
@@ -364,9 +364,9 @@ M 6689,12524 y13160 x6624 y15000 w=14
 P 6601,13792:6645,13826               # west end pad of the row y 13809; the track runs on through it
 C 6623,13809 s=24x24
 P 6623,13809 x7550 w=24
-N P 7000,12528 cdp4_sel3
-N P 7000,13809 cdp4_sel3
-N M 6624,14500 cdp4_sel3
+N P 7000,12528 rsel17_buf
+N P 7000,13809 rsel17_buf
+N M 6624,14500 rsel17_buf
 
 # sel4: row 12788 to its pad (6731,12788); track x 6733 south, west along y 13204 to x 6668, south
 # THROUGH the pad (6666,13961) of the row y 13961, and on south
@@ -377,9 +377,9 @@ M 6733,12784 y13204 x6668 y15000 w=14
 P 6644,13944:6688,13978               # west end pad of the row y 13961; the track runs on through it
 C 6666,13961 s=24x24
 P 6666,13961 x7550 w=24
-N P 7000,12788 cdp4_sel4
-N P 7000,13961 cdp4_sel4
-N M 6668,14500 cdp4_sel4
+N P 7000,12788 rsel16_buf
+N P 7000,13961 rsel16_buf
+N M 6668,14500 rsel16_buf
 
 # rst: row 12874 to its pad (7467,12875); track x 7468 south to a pad (7467,13897); from the pad a
 # poly east along y 13916, under the track x 7511, to the west edge of a heavy-outlined box
@@ -438,7 +438,7 @@ N P 7590,9080 cdp3_g_c3
 N M 7296,11000 cdp3_g_c3
 
 # line 3: cdp3_g_c4 (row y 9036) -> bc1's line 3 (y 14175, bc1_d3). Its lower arm lies on
-# cdp4_sel3's row y 13809 for 80 px without a contact (notes, Ambiguity 4).
+# rsel17_buf's row y 13809 for 80 px without a contact (notes, Ambiguity 4).
 P 7423,9036 x7606 w=23
 P 7403,9017:7445,9055
 C 7423,9036 s=24x24

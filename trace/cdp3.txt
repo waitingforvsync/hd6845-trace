@@ -426,7 +426,7 @@ C 10736,9322 10736,9365 10736,9437
 @inst cdp3_reg 0,1549 my=9347.5 tag=h_c5
 @inst cdp3_reg 390,1549 my=9347.5 tag=h_c6
 @inst cdp3_reg 781,1549 my=9347.5 tag=h_c7
-N P 9650,10757 cdp3_h_wr
+N P 9650,10757 wr_r13
 @inst cdp3_c_vss -1562,1549 my=9347.5 tag=h_c1
 @inst cdp3_c_vss -1172,1549 my=9347.5 tag=h_c2
 @inst cdp3_c_vss -781,1549 my=9347.5 tag=h_c3
@@ -482,7 +482,7 @@ P 10705,9533 x10850 w=22              # row C's: runs on east
 # x 8528 in c2. Seen unbroken in the clean shot at 1.5x. It passes just below the bit-line
 # contact of every row A cell; its branches into those cells are not traced.
 P 8528,8818 x10850 w=16
-N P 10840,8818 cdp3_l8819
+N P 10840,8818 wr_r14
 
 # --- VSS rails c0..c8 over the full height (straight; contacts are drawn with the cells)
 M 7623,8556 y11200 w=46              # from y 8556: above it the ground at x 7600-7646 is bare and the rail is the metal x 7552-7598 (coordinator, 2026-11-19; px.py row 8500, col 7623)

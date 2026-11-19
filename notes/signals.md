@@ -229,9 +229,9 @@ Eleven pass transistors between the scan line counter and five output nodes.
 |---|---|
 | `rsel#` | select line of register # from the address decode (high when the address register holds #) |
 | `rsel#_n` | NOT `rsel#` |
-| `rsel#_bn`, `rsel#_buf`, `rsel#_bufn` | buffer of a select line: first inverter and output (`rsel12_bufn` is the first inverter of R12's separately built buffer) |
+| `rsel#_bn`, `rsel#_buf`, `rsel#_bufn` | buffer of a select line: first inverter and output (`rsel12_bufn` is the first inverter of R12's separately built buffer). **`rsel14_buf`, `rsel15_buf`, `rsel17_buf`, `rsel16_buf` are the four select lines of `cdp4`'s selector, in that order (selects 1-4)** (`regs` run 2, firm; renamed by the refresh of 2026-11-19): each comes up the left bus field on a metal track from south of y 15000 and also feeds a poly row into the gate group at `cdp4`'s bottom-left corner (`busl`, piece `ctl`). So that selector is the read multiplexer of R14-R17 |
 | `wr_stb_n` | common write strobe, active low |
-| `wr_r#` | write strobe of register #: `rsel#` AND NOT `wr_stb_n` |
+| `wr_r#` | write strobe of register #: `rsel#` AND NOT `wr_stb_n`. Followed to their rows by `regs` (run 1): `wr_r13` is the write line of `cdp3`'s row H (so row H is R13), `wr_r14` the line into `cdp3`'s row A (six large cells), `wr_r15` the strobe of `cdp4`'s row R1 lower half (R15), all firm; `wr_r12` reaches `cdp3`'s row C through one `?M` (marked) |
 | `wr_r#_u` | the load strobe line at the register's latch row, where its join to `wr_r#` is not drawn |
 | `r#_b#_a`, `r#_b#_n2`, `r#_b#_q` | register R#, bit #: storage node (loaded from the bus while the strobe is high), its inverse, and the output (= the stored bit) |
 | `r#_b#_m#` | the metal straps of a register bit cell (in `cdp1`'s rows: `_m3`, `_m6`; `_m6` is also the output `_q` in row C) |
@@ -300,7 +300,7 @@ None of these rows has a register number yet, so all names are by place. Columns
 | `cdp2_trk_s#` | the value that row B compares row C against, per slice (through track). s7, s6, s5, s4 are aliases of `rax_o0`, `rax_o1`, `rax_o2`, `rax_o3`; `rax_o4`'s line (y 5826) has no through track tied to it as traced (slice s3 is wired differently) |
 | `cdp2_ch#_#` | a line of channel 1, named by its y |
 | `cdp3_c_c#_*`, `cdp3_h_c#_*` | cdp3 rows C (6 bit) and H (8 bit), static register bit in column #: `_x`, `_q1`, `_q` as in cdp1 |
-| `cdp3_c_wr`, `cdp3_h_wr` | write lines of rows C and H |
+| `cdp3_c_wr` | write line of `cdp3`'s row C; it is on R12's write strobe `wr_r12` through one `?M` (`regs` run 1: marked, AMB-040), so the name stays as an alias. Row H's write line is `wr_r13` (firm; renamed by the refresh of 2026-11-19) |
 | `cdp3_cw_c#`, `cdp3_hw_c#` | west outputs of those bits |
 | `cdp3_cq_c#`, `cdp3_hq_c#` | read outputs of those bits, to the pass transistors onto bus N |
 | `cdp3_n_c#` | bus N, column # |
@@ -309,11 +309,10 @@ None of these rows has a register number yet, so all names are by place. Columns
 | `cdp3_k_a`, `cdp3_k_b`, `cdp3_k_c` | lines of the NAND beside row C. `cdp3_k_b` (the poly row y 9450) comes from a pad (7554,9450) west of x 7600, whose metal track runs south at x 7555 to a contact (7555,11118) on a diffusion that goes east under column 0's VSS rail (`busl`, piece `kb`) |
 | `cdp3_l#` | a line of channel B, named by its y |
 | `cdp4_lc_s#_*`, `cdp4_lr_s#_*`, `cdp4_ldr_s#_*` | cdp4 latch rows C (8 bit), R1-lower (8 bit, upside down) and D (6 bit), slice #: `_a` storage node, `_n2` inverse, `_q` output, `_x2` internal strap |
-| `cdp4_ld`, `cdp4_ld#b`, `cdp4_ld#` | load strobes of those rows (C, R1-lower, D) |
+| `cdp4_ld`, `cdp4_ld#` | load strobes of latch rows C and D. The strobe of row R1's lower half is R15's write strobe `wr_r15` (`regs` run 1, firm; renamed by the refresh of 2026-11-19) |
 | `cdp4_in_s#`, `cdp4_in#b_s#`, `cdp4_in#_s#` | data inputs of those rows |
 | `cdp4_n_s#` | output node of the 4-way selector, slice # |
 | `cdp4_a_s#`, `cdp4_b_s#`, `cdp4_c_s#`, `cdp4_d_s#` | the selector's four sources per slice |
-| `cdp4_sel#` | the four select lines of the selector; each comes up the left bus field on a metal track from south of y 15000 and also feeds a poly row into the gate group at `cdp4`'s bottom-left corner (`busl`, piece `ctl`); drivers not traced |
 | `cdp4_rst` | gate of the pull-down on the selector node; its poly ends on a box of the gate group at `cdp4`'s bottom-left corner, believed its driver (`busl`, piece `ctl`, Ambiguity 9) |
 | `cdp4_bus_s#` | the eight poly lines of channel 1; each is one net with `cdp4_in_s#` (the row C latch input of the same slice) and with one poly row of the left array, joined in the left bus field (`busl`, piece `ch1`; `@alias` in `trace/busl.txt` until the rename) |
 
@@ -1089,3 +1088,10 @@ datapath s1...s7, s0 became b0...b6, b7.
 | lc2_x6387 | lpstb_b | |
 | inh_src | rst_a | |
 | lc3_w9470 | rst_c | |
+| cdp4_sel1 | rsel14_buf | |
+| cdp4_sel2 | rsel15_buf | |
+| cdp4_sel3 | rsel17_buf | |
+| cdp4_sel4 | rsel16_buf | |
+| cdp3_h_wr | wr_r13 | |
+| cdp3_l8819 | wr_r14 | |
+| cdp4_ld8b | wr_r15 | |

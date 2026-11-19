@@ -6,7 +6,7 @@
 5370,13320:7600,13650   route  row C latch inputs (channel 2) | the west pieces of cdp4's channel 2 (cdp4_in_s#), each the same net as the channel-1 line of its slice
 5830,10400:6450,14930   route  left-centre lines down the field | nine metals from the left-centre logic (the ripple counter's clock and clear, the input of the inverter that drives the step logic's clear, six more) in one staircase bundle with rcs_e4, to the foot of the field
 6300,14550:7550,14930   route  rows to the bottom-centre bus | seven of the nine end on pads of poly rows that run east to the 13-line bus of the bottom-centre logic
-6520,12200:7600,12810   route  selector select lines | cdp4_sel1..sel4: four poly rows from the selector's gates west to pads; their metal tracks step west and run south out of the field (the selects are driven from the bottom-left logic)
+6520,12200:7600,12810   route  selector select lines | rsel14_buf..sel4: four poly rows from the selector's gates west to pads; their metal tracks step west and run south out of the field (the selects are driven from the bottom-left logic)
 6520,13680:7550,14020   route  selects into the corner gate group | each select track has a second pad, on a poly row that runs back east to the gate group at the bottom-left corner of the central datapath
 7440,12850:7600,14060   route  selector reset and row C strobe | cdp4_rst: track to a poly that ends on the corner gate group; cdp4_ld: track south onto the bottom-centre strobe driver's twin output (bc1_ld_a), so latch rows C and D load together
 7240,8880:7600,9420   route  row D data lines, north end | the six "line g" rows of the central datapath's row A cells (cdp3_g_c2..c7) end on a staircase of pads; six metal tracks leave south
