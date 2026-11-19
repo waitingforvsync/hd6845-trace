@@ -15,3 +15,8 @@
 6450,7767:7541,7831      route  eof_w7777, the gate's third input | poly row west through the crossing field, one track down at (6886,7777), into the left-centre strip at (6450,7821)
 4440,9185:4990,9990       logic  toggle flip-flop, clocks lc2's counter | a third copy of lc2's flip-flop cell: its slave output lc2_w8475 is the clock of lc2's first flip-flop; clock eof_w9255 from the south, cleared with the others by lc1_w7170
 13885,15618:14005,15730  logic  latch on R4's match: load of the lower half | the load and tie that close bd1's latch: bd1_n2 = NOT((bd1_an AND inh_lat) OR bd1_n1), cross-coupled with bd1_n1; a transparent latch of rc_eq_r4, open while inh_lat is high
+13770,15634:13832,15740  logic  latch on R4's match: output gate | N2's third pull-down, gated by inh_src, folded round a field island under bd1_an's metal; N2's buried contact puts the latch's output bd1_n2 on the wire that leaves west
+13331,16250:13582,17794  route  latched R4 match, strobe channel | bd1_n2 from bd1's metal: pad, poly row y 16604, metal south by a diagonal to a pad (13217,17776)
+10205,17586:13234,18010  route  latched R4 match, bottom bus | bd1_n2 west: poly row y 17776, metal y 17779, the outer Z bend at x 11722, a poly diagonal to the row y 17905, pad (10222,17993)
+7405,18020:10239,18099   route  latched R4 match, through the bottom-centre routing field | bd1_n2 west along y 18039 and y 18083 by three poly cross-unders; no tap
+6692,15000:7424,18090    route  latched R4 match, up the left bus field | bd1_n2 from the corner (6712,18083) north on x 6712, a poly link under the supply buses, on north (drawn to y 15000)
