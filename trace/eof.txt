@@ -339,7 +339,7 @@ N P 5063,6500 tl5_w5936
 #    runs north (open, bright green in the clean shot; px row 2020) under mal's two MA lines
 #    (no contact: textmap 2280 2080 2556 2160 6) to a head with seven contacts under the metal
 #    plane y < 1963. The plane is not drawn by anyone (padring); it is named vcc from the load
-#    hanging from it. A metal island (x 2272-2543, y 2184-2232) lies on the strap's south end
+#    hanging from it. A metal island (x 2272-2554, y 2184-2232) lies on the strap's south end
 #    with one contact (2467,2205) (textmap 2262 2174 2560 2240 4): a strap, nothing else on it.
 #  - VSS: an arm of tl1's plane, x 2270-2590, y 2347-2404 (joins the plane with no edge line
 #    between: textmap 2540 2326 2620 2416 4), with a contact on each pad.
@@ -348,7 +348,7 @@ N M 2400,1915 vcc
 D 2262,1915:2572,1962                  # the head (east edge x 2572: px row 1938, review round 4)
 C 2282,1940 2325,1940 2369,1940 2412,1940 2457,1940 2500,1940 2542,1940     # rings 7 px east of the first drawing (review round 4)
 D 2288,1955:2549,2208                  # the strap
-M 2272,2184:2543,2232                  # the island
+M 2272,2184:2554,2232                  # the island
 C 2467,2205
 D 2447,2200:2497,2236                  # the stem above the load
 D 2450,2228:2478,2440                  # under the load, then the output strip down to the band
@@ -360,7 +360,7 @@ D 2331,2309:2460,2328                  # the output's branch west
 D 2331,2309:2351,2440                  # and south, under the VSS arm, to the band's west end
 D 2331,2428:2540,2465                  # the band
 D 2391,2390:2401,2435                  # finger to the west VSS pad (bright x 2392-2398 between the two gates' edge lines)
-D 2383,2362:2430,2398                  # west VSS pad (east edge x 2430: the dark line at x 2413 is the ring; review round 4)
+D 2383,2355:2430,2398                  # west VSS pad (east edge x 2430: the dark line at x 2413 is the ring; review round 4)
 C 2397,2376
 D 2518,2405:2537,2435                  # finger to the east VSS pad
 D 2520,2364:2565,2412                  # east VSS pad (east edge x 2565: review round 4)
@@ -421,9 +421,9 @@ P 9554,18081 x9770 w=18
 P 9537,18064:9571,18098
 C 9554,18081
 M 9554,18083 x8964 w=13
-P 8947,18064:8981,18098
+P 8950,18064:8988,18098
 C 8964,18081
-P 8964,18081 8964,17900 8966,17735 w=18
+P 8970,18081 8970,17900 8970,17735 w=18
 P 8949,17718:8983,17752
 C 8967,17735
 M 8968,17740 y15255 w=13
@@ -432,7 +432,7 @@ P 8949,16721:8983,16753              # tap pad; its row goes on west (not follow
 C 8966,16737
 P 8930,16728:8955,16746
 P 8945,16156:8980,16188              # tap pad; its row goes on west (not followed)
-C 8962,16172
+C 8966,16172
 P 8930,16163:8950,16181              # the row is y 16163-16181 (px col 8940 16150 16190 3 acid1b; review round 5)
 P 8949,15244:8983,15276              # the north end's pad; its row goes on west (not followed)
 C 8966,15260
@@ -506,7 +506,7 @@ C 7273,7606
 M 7272,6912 y7610 w=12               # a thin metal north, 690 px: over bare field from y 6930 to about 7410, then over four rows at y 7420-7570 (bars only, no hole)
 P 7254,6893:7291,6928                # its north pad
 C 7272,6912
-P 7278,6875 y6912 w=13               # the pad's poly leaves north towards a row y 6862 (not followed)
+P 7277,6875 y6912 w=18               # the pad's poly leaves north towards a row y 6862 (not followed)
 N M 7401,7700 eof_w7818
 # row 2's pad (7267,7736) and its two metals: east then north to a pad (7313,7215); south (a long
 # run, followed by follow.py to (6514,8254), not drawn beyond the stub)
@@ -519,7 +519,7 @@ M 7267,7736 x7315 y7215 w=13
 P 7296,7198:7331,7232                # the north pad
 C 7313,7215
 P 7313,7212 x7400 w=18               # its poly row leaves east (y 7203-7221; not followed)
-M 7268,7736 y7800 w=12               # the south metal's first 60 px
+M 7273,7736 y7800 w=12               # the south metal's first 60 px
 
 # ====================================================================
 # Piece ff3 (run 6): a third flip-flop of lc2's cell lc2_ff in lc3's column A (x 4440-4990, y 9185-9990), 780 px
@@ -618,8 +618,8 @@ P 13895,15618:13909,15640
 # bd1_k's poly. The top segment joins the ground diffusion under the rail the same way at y 15638-15652 (bd1's ?D,
 # firm here on the same three tests), so inh_src gates a third pull-down of N2:
 #     bd1_n2 = NOT( bd1_an AND inh_lat  OR  bd1_n1  OR  inh_src )
-D 13795,15712:13822,15736          # N2 west of the rail, in the gap: onto the strip's lower segment
-D 13795,15638:13832,15652          # the strip's top segment east through the gap onto the ground diffusion (vss contact 13845,15657)
+D 13795,15712:13830,15736          # N2 west of the rail, in the gap: onto the strip's lower segment (13 px over bd1's N2; review round 10)
+D 13795,15638:13840,15652          # the strip's top segment east through the gap onto the ground diffusion (vss contact 13845,15657)
 @alias bd1_n2 bd1_k
 
 # ================================================================ piece n2w (run 8): bd1_n2 (bd1's bd1_k) on from bd1's
