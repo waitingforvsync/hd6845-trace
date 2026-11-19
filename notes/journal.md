@@ -2245,3 +2245,89 @@ changed status against the baseline taken before the renames. AMB-001 to AMB-042
 **`out/`** rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 707
 floor-plan blocks. Coverage: 67.9% traced; in some package region 99.9%; untraced and in no Queue row
 0.4%.
+
+## 2026-11-19 23:27  Refresh, second pass: names consolidated
+
+The user, on the refresh of 23:10: "rename / consolidate any signals which are known to be the same
+with their proper name. I thought that was the point in the rename step." The first pass had renamed
+only placeholders that sat beside a functional name and had left placeholder-to-placeholder aliases
+and the "inhibit" names. Done now, each batch checked with `tools/names.py compare` ("only names
+changed"), `tools/signals.py`, `signals.py --docs` and the extraction (2,375 nets, 4,351 transistors,
+0 errors, 0 warnings; 849 of 1,279 equations firm, unchanged):
+
+**Every net with several names on firm geometry has one name, its canonical one** (56 names, 44 nets):
+
+- `tc1_f` -> `cdp1_b5_a`
+- `tc2_sr_r` -> `cdp1_lw1`
+- `cdp4_in6_s1` -> `cdp3_g_c2`
+- `cdp4_in6_s2` -> `cdp3_g_c3`
+- `bc1_d3` -> `cdp3_g_c4`
+- `bc1_d4` -> `cdp3_g_c5`
+- `bc1_d5` -> `cdp3_g_c6`
+- `bc1_d6` -> `cdp3_g_c7`
+- `cdp4_in_s0` -> `cdp4_bus_s0`
+- `cdp4_in_s1` -> `cdp4_bus_s1`
+- `cdp4_in_s2` -> `cdp4_bus_s2`
+- `cdp4_in_s3` -> `cdp4_bus_s3`
+- `cdp4_in_s4` -> `cdp4_bus_s4`
+- `cdp4_in_s5` -> `cdp4_bus_s5`
+- `cdp4_in_s6` -> `cdp4_bus_s6`
+- `cdp4_in_s7` -> `cdp4_bus_s7`
+- `cdp2_c_s2_bus` -> `db_b5`
+- `cdp2_c_s1_bus` -> `db_b6`
+- `lc2_w8857` -> `lc2_w8298`
+- `lc2_w8930` -> `lc2_w8692`
+- `lc3_w9337` -> `lc2_w9079`
+- `lc2_w9166` -> `lc3_w9299`
+- `lc2_x6432` -> `lc3_w9947`, `tc2_m6447` -> `lc3_w9947`, `tcw_m6404` -> `lc3_w9947`
+- `tl5_w4807` -> `ras_o0_alt2`
+- `tc1_p3698` -> `tc1_ns2`
+- `tl3_w4763` -> `tc1_o3527`, `tl3_w4414` -> `tc1_o3527`, `tl5_w5544` -> `tc1_o3527`
+- `tc2_m6490` -> `tc1_p4308`
+- `r9m_l3` -> `tc2_o5175`
+- `eof_w7818` -> `tc2_r5589`
+- `eof_w7718` -> `tc2_sr_g`, `lc1_w7908` -> `tc2_sr_g`
+- `tl5_w4633` -> `tcw_c`
+- `tl5_w4395` -> `tcw_m6320`
+- `tl3_w3333` -> `tl1_w2637`
+- `tl4_w3070` -> `tl3_e4243`, `tl5_w4458` -> `tl3_e4243`
+- `tl3_w4112` -> `tl3_w3939`
+- `tl5_w5936` -> `tl3_w3982`, `lc2_w8906` -> `tl3_w3982`, `tl3_w4290` -> `tl3_w3982`
+- `tl3_w4503` -> `tl3_w4373`
+- `tl3_e4372` -> `tl3_w4546`
+- `tl5_w2855` -> `tl4_w3113`
+- `tl1_w3333` -> `tl4_w4068`, `tl5_w3982` -> `tl4_w4068`
+- `tl3_e5114` -> `tl4_w4590`, `tl3_e3028` -> `tl4_w4590`, `tl5_w5674` -> `tl4_w4590`
+- `tc1_bus2684` -> `tl4_w5068`, `tl5_w5500` -> `tl4_w5068`
+- `tl4_w4718` -> `tl5_w3245`
+- `tl5_w4850` -> `tl5_w4503`
+
+**The four nets that said "inhibit" are named as the reset copies they are** (distinct nets, so four
+names; the roles kept as suffixes):
+
+- `inh_n` -> `rst_a_n` (NOT `rst_a`), `inh_ck` -> `rst_ck` (the copy that holds `ck_b` low and is the
+  top-left logic's track A), `inh_rc` -> `rst_rc` (the copy at the row counter's step gate),
+  `inh_lat` -> `rst_lat` (the copy that gates the latch on R4's match)
+
+Left, each for a reason (the master list's `rename` row): 46 nets whose names meet only through an
+uncertain item (trap 17: renamed when the item is settled); 17 where the second name is a cell's own
+pin name made from a template; `cdp3_gate_e` / `cdp3_gate_f` (open joins). 98 `@alias` lines remain in
+the trace files, all of those two kinds.
+
+How the sentences were kept readable: where a note said "A is B" and both are now one name, the old
+wire is described by its former owner ("the wire `tl5` called w5936 is `tl3_w3982`"); alias lines
+quoted in notes read "an alias (dropped at the rename of 2026-11-19)"; rename records in this journal
+(lines with an arrow) were left as written.
+
+**Branches in flight** (`eof`, tom-seddon): after merging main, run these three commands in the branch
+(each changes only what is still old there; then the extraction and `tools/signals.py --docs`):
+
+```
+tools/rename.py inh_src rst_a lc2_x6342 res_b lc2_x6387 lpstb_b lc3_w9470 rst_c cdp4_sel1 rsel14_buf cdp4_sel2 rsel15_buf cdp4_sel3 rsel17_buf cdp4_sel4 rsel16_buf cdp3_h_wr wr_r13 cdp3_l8819 wr_r14 cdp4_ld8b wr_r15 bd1_n2_u bd1_n2 tl4_w3850 bd1_n2 tl5_w5761 bd1_n2 tc1_bus2554 c4l_l3
+tools/rename.py tc1_f cdp1_b5_a tc2_sr_r cdp1_lw1 cdp4_in6_s1 cdp3_g_c2 cdp4_in6_s2 cdp3_g_c3 bc1_d3 cdp3_g_c4 bc1_d4 cdp3_g_c5 bc1_d5 cdp3_g_c6 bc1_d6 cdp3_g_c7 cdp4_in_s0 cdp4_bus_s0 cdp4_in_s1 cdp4_bus_s1 cdp4_in_s2 cdp4_bus_s2 cdp4_in_s3 cdp4_bus_s3 cdp4_in_s4 cdp4_bus_s4 cdp4_in_s5 cdp4_bus_s5 cdp4_in_s6 cdp4_bus_s6 cdp4_in_s7 cdp4_bus_s7 cdp2_c_s2_bus db_b5 cdp2_c_s1_bus db_b6 lc2_w8857 lc2_w8298 lc2_w8930 lc2_w8692 lc3_w9337 lc2_w9079 lc2_w9166 lc3_w9299 lc2_x6432 lc3_w9947 tc2_m6447 lc3_w9947 tcw_m6404 lc3_w9947 tl5_w4807 ras_o0_alt2 tc1_p3698 tc1_ns2 tl3_w4763 tc1_o3527 tl3_w4414 tc1_o3527 tl5_w5544 tc1_o3527 tc2_m6490 tc1_p4308 r9m_l3 tc2_o5175 eof_w7818 tc2_r5589 eof_w7718 tc2_sr_g lc1_w7908 tc2_sr_g tl5_w4633 tcw_c tl5_w4395 tcw_m6320 tl3_w3333 tl1_w2637 tl4_w3070 tl3_e4243 tl5_w4458 tl3_e4243 tl3_w4112 tl3_w3939 tl5_w5936 tl3_w3982 lc2_w8906 tl3_w3982 tl3_w4290 tl3_w3982 tl3_w4503 tl3_w4373 tl3_e4372 tl3_w4546 tl5_w2855 tl4_w3113 tl1_w3333 tl4_w4068 tl5_w3982 tl4_w4068 tl3_e5114 tl4_w4590 tl3_e3028 tl4_w4590 tl5_w5674 tl4_w4590 tc1_bus2684 tl4_w5068 tl5_w5500 tl4_w5068 tl4_w4718 tl5_w3245 tl5_w4850 tl5_w4503
+tools/rename.py inh_n rst_a_n inh_ck rst_ck inh_rc rst_rc inh_lat rst_lat
+```
+
+Until that is done such a branch fails the gate (a net carries two names where main dropped the alias;
+former names in its documents). Work that reaches main with old names anyway is put right by running
+the same commands on main. `out/` rebuilt.

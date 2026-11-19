@@ -370,7 +370,7 @@
   },
   {
    "id": 46,
-   "name": "inh_ck",
+   "name": "rst_ck",
    "named": true,
    "x": 6105,
    "y": 6842,
@@ -5498,7 +5498,7 @@
   },
   {
    "id": 687,
-   "name": "inh_rc",
+   "name": "rst_rc",
    "named": true,
    "x": 11242,
    "y": 7439,
@@ -6818,7 +6818,7 @@
   },
   {
    "id": 852,
-   "name": "inh_lat",
+   "name": "rst_lat",
    "named": true,
    "x": 13980,
    "y": 15281,
@@ -7626,7 +7626,7 @@
   },
   {
    "id": 953,
-   "name": "inh_n",
+   "name": "rst_a_n",
    "named": true,
    "x": 13567,
    "y": 15679,
