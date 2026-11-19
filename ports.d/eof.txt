@@ -70,3 +70,14 @@ vss         M  7552-7598,7585    -    column 0's VSS rail, on north
 vss         M  7552-7598,7860    -    the same, on south (joins cdp3's rail at y 8555)
 vcc         M  7725-7775,7720    -    the wide metal east of the load, on north
 vcc         M  7725-7775,7860    -    the same, on south
+
+# Piece ff3: the flip-flop that clocks lc2's ripple counter (run 6)
+lc2_w8475   M  4553-4575,9190    out  the copy's slave output on track C, onto lc2's L-shaped metal: the clock of lc2's first flip-flop
+eof_w9255   M  4553-4575,9990    in   the copy's clock: the L-shaped metal from the END pad (4648,9904), on south
+lc1_w7170   M  4466-4484,9060    in   track A on from lc2's drawn end; ends on the copy's pad (4473,9818)
+lc2_w8907   M  4508-4526,8700    in   track B (the clear) on from lc2's drawn end
+lc2_w8907   M  4508-4526,9420    ?    track B runs on south past the copy's pad (4517,9384)
+vss         M  4757-4808,9190    -    the west rail, from lc2's end
+vss         M  4757-4820,9970    -    the same, on south
+vcc         M  4924-4980,9190    -    the middle rail, from lc2's end
+vcc         M  4924-4980,9970    -    the same, on south

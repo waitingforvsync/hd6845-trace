@@ -81,6 +81,25 @@ no uncertain items.
 
 Full extraction with run 5: 2,382 nets, 4,290 transistors, 0 errors, 0 warnings.
 
+Run 6 (Tom Seddon's session, Claude Fable 5.2; 2026-11-19 12:47 +0000 on). One piece, 19 transistors (a cell
+copy), the cell's own four uncertain diffusion items copied with it.
+
+- **Task (d), the clock of `lc2`'s ripple counter: it is another flip-flop's output** (piece `ff3`). The
+  L-shaped metal that `lc2` drew as the clock of its first flip-flop (`lc2_w8475`, from the south at
+  (4553-4575,9190)) is the slave-output track of **a third copy of the flip-flop cell `lc2_ff`**, 780 px
+  below `lc2`'s first, in `lc3`'s logic column A (x 4440-4990, y 9185-9990; `findcell` score 0.86, every
+  pad and box of the copy on its feature). So **`lc2_w8475` = NOT(`eof_w9472` AND (`eof_w9255` OR
+  `eof_w9505`))** (firm): the counter that `lc2` found has at least three stages, and this one is the
+  stage *before* `lc2`'s first. It has the same clear lines (track A, `lc1_w7170`, ends on this copy's
+  pad; track B, `lc2_w8907`, runs on south). **Its own clock, `eof_w9255`, again arrives by an L-shaped
+  metal from the south** on the same track position (x 4553-4575): the chain goes on down the column
+  (`findcell` has a weaker hit 781 px further down, score 0.52, and a turned copy in column B, 0.70:
+  neither looked at).
+
+Full extraction with run 6: 2,391 nets, 4,309 transistors, 0 errors, 0 warnings. The package by itself
+now loads `lc2` and `lc1` (for the cell), whose own partial-load messages appear (2 errors, 46 warnings,
+none on this package's lines).
+
 Full extraction after run 2: 2,351 nets, 4,232 transistors, 0 errors, 0 warnings; the package
 by itself (it loads `rdp3`): 0 errors, 0 warnings.
 
@@ -109,6 +128,9 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `g7700`, the output | x 7254-7545, y 6875-7839 | diffusion wire west from the column (y 7803-7822) to a buried contact (7490-7518, 7805-7832); poly row y 7812-7831 west to a pad with contact (7402,7822); thin metal x 7401 north to a pad with contact (7401,7606); poly west along y 7604 under two metals to a pad with contact (7273,7606); thin metal x 7272 north to a pad with contact (7272,6912); the pad's poly on north (drawn to y 6875) |
 | `g7700`, row 2 | x 7244-7632, y 7198-7800 | poly y 7726-7745 west (a widened step at x 7500-7527) to a pad with contact (7267,7736); from the pad a metal east and north (corner (7315,7736)) to a pad with contact (7313,7215), whose poly row leaves east (drawn to x 7400), and a metal south (x 7268, drawn to y 7800) |
 | `g7700`, row 3 | x 6450-7634, y 7767-7831 | poly y 7767-7787 west from its end cap (x 7634) across the crossing field to a corner (6886,7777), south one track, west along y 7812-7830 to `lc1`'s east edge x 6450 |
+
+| `ff3`, the flip-flop | x 4578-4985, y 9220-9955 | `@inst lc2_ff 0,780`: `lc2`'s cell (gates K1-K4, 19 transistors) 780 px lower, under the same west rail (x 4752-4820) and middle rail (x 4924-4980). Under the west rail (`railprof.py 4752 4798 9200 9860`): K1's rows y 9245-9271, 9296-9309; K2's 9418-9442, 9461-9485; K3's 9592-9616, 9647-9671; K4's 9758-9781, 9801-9824, 9844-9859 and one more (y 9913-9932) |
+| `ff3`, the copy's own | x 4458-4980, y 8695-9990 | K1's VSS node, a short box y 9196-9242 under the west rail with one contact (4765,9211) (the master has a long contact column there); both rails y 9185-9970; track C (x 4553-4571) from `lc2`'s end (y 9190) to the copy's row-2 pad (4561,9296); track A (x 4466-4484) from `lc2`'s end (y 9060) to its END pad with a contact (4473,9818); track B (x 4508-4526) from `lc2`'s end (y 8700) through the pad with a contact (4517,9384) of the clear row, drawn to y 9420; the clock's L-shaped metal from the END pad (4648,9904) west along y 9897-9919 and south on x 4553-4575, drawn to y 9990 |
 
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
 
@@ -363,6 +385,48 @@ NAND(`eof_w7777`, `eof_w7718`).
 | `eof_w7718` (row 2) | west under the output's metal x 7401 and the metal x 7345-7362 (no ring) to a pad with a contact (7267,7736). **Two metals on the pad** (Ambiguity 14): one east along the row and north (corner (7315,7736)) to a pad with a contact (7313,7215), whose poly row leaves east along y 7203-7221 (drawn to x 7400); one south from the pad (x 7262-7274), which `follow.py` takes 2,160 px to (6514,8254) (not checked, drawn to y 7800) | `t14.png` (3.1x, four shots), `t19.png`; `textmap.py 7222 7696 7336 7800 3`, `7285 7180 7345 7240 3`; `follow.py 7290 7735 E --gap 16`, `7270 7780 N --gap 16`, `7270 7780 S --gap 16` |
 | `eof_w7777` (row 3) | west across the crossing field, no pad, to x 6877, where the poly turns south (x 6878-6895) and joins the row y 7812-7830, which runs on west to `lc1`'s edge x 6450 and beyond. **`lc1_w7780` is another poly**: its row y 7770-7790 ends from the west on a pad with a contact (6815,7778) (pad's east edge x 6835; field to 6877), whose metal goes south (not drawn by anyone) | `t12.png`, `t17.png` (1.9x, three shots: the whole row), `t13.png` (3.7x, the pad), `t15.png` (4.2x, the corner), `t16.png` (2.4x, the row y 7820); `px.py col 6886 7752 7846 3 metal1,acid1b` (one poly from y 7770 to 7828), `row 7777 6830 6900 3`, `row 7800 6860 6912 3`, `row 7820 6444 6900 6`, `col 6660 7795 7845 3` |
 
+### Piece `ff3`: the flip-flop that clocks `lc2`'s ripple counter (traced: a cell copy)
+
+```
+eof_w9332 = NOT( eof_w9255 AND lc2_w8475  OR  eof_w9505  OR  lc2_w8450 )      K1, master latch   depends (the clear's term: the cell's ?D)
+eof_w9505 = NOT( eof_w9255 AND eof_w9472  OR  eof_w9332 )                     K2                 FIRM
+lc2_w8475 = NOT( eof_w9472 AND ( eof_w9255 OR eof_w9505 ) )                   K3, slave latch    FIRM
+eof_w9472 = NOT( lc2_w8475 AND lc1_w7170 AND ( eof_w9255 OR eof_w9332 ) )     K4                 depends (the cell's ?D beside K4's pad box)
+```
+
+(`tools/unsure.py --equations NAME`, full extraction; `lc2_w8450` is `lc2_w8907`, track B, through `lc2`'s
+uncertain buried contact, as in `lc2`'s first flip-flop.) Nineteen transistors, the cell's.
+
+**Traced.** The four gates are `lc2`'s toggle flip-flop again (`notes/blocks/lc2.md`, "The counter"): with
+`c` = `eof_w9255`, the master pair K1/K2 is open while `c` is high and takes the slave's outputs crossed,
+the slave pair K3/K4 is open while `c` is low: one change of state per pulse of `c`. **Its slave output is
+`lc2_w8475`, the clock of `lc2`'s first flip-flop**: the copy's track C (the metal x 4553-4571 that carries
+K3's output back to K1's row 2 and K4's top row) is one metal with the L-shaped piece that `lc2` drew from
+the END pad (4648,9124) of its own clock's thin metal. So the three flip-flops are a ripple chain in this
+order: this one (clock `eof_w9255`), then `lc2`'s first (clock `lc2_w8475`), then `lc2`'s second (clock
+`lc2_w8298`); each changes on the falling half of the one before. All three are held clear together:
+track A (`lc1_w7170`, low = clear, the slave's K4) and track B (`lc2_w8907` = NOT `lc1_w7170`, the
+master's K1) run down from `lc2`'s flip-flop to this one's pads.
+
+**Believed, not traced.** That the chain goes on: this copy's clock arrives exactly as `lc2`'s did, by an
+L-shaped metal from the south on the track-C position, with a contact at about (4563,10080) where the next
+unit's row-2 pad would be (the follower; not looked at). What the counter counts and what it is for:
+nothing traced says. A guess to test, not a finding: a chain of five or so toggle stages whose last two
+outputs go into an AND-OR-INVERT (`lc2_w9125`, selected by two other lines) is what the cursor blink
+divider of R10 bits 5-6 (1/16 or 1/32 of the field rate) would look like.
+
+| Part | What the photos show | Evidence |
+|---|---|---|
+| the copy | every outline of `@inst lc2_ff 0,780` on its feature in the clean shot and the chip-2 metal shot: the ten pads, the two output boxes, the four tie boxes, the node box west of K4, the load plates, the vertical poly x 4578-4596, the thin metals x 4604, 4648, 4889 and K3's output metal | `findcell.py 4600 8350 4990 9190 --min 0.5 --region 4400,9100:5400,10500 --layer acid1b --cell lc2_ff` (0.86 at 0,780); `d_ov1.png` (1.38x, both shots), `d_ov2_1.png`, `d_ov2_2.png`, `d_ov2_3.png` (2.5x, clean and metal); `railprof.py 4752 4798 9200 9860` (the stack = the master's + 780, to 2 px) |
+| **track C is `lc2`'s clock metal** | the metal x 4553-4571 is unbroken from the corner (4562,9122) of `lc2`'s L to a pad with a contact (4563,9296) (bright centre in a dark ring in both chips, green hole x 4556-4570, y 9292-9304 in the clean shot), whose poly leaves east only (K1's row 2), and on to an END pad with a contact (4560,9776) (K4's top row); no metal south of y 9780 | `follow.py 4564 9200 S` (end 4561,9780), `4562 9200 N` (corner 4569,9126 -> E, end 4651,9124); `tl5_tracks.py v 4562 9130 9840` (dark only at the two pads' rings and two 9 px bars where the clear row passes under; holes 9298, 9775); `textmap.py 4540 9272 4592 9324 2 --acid`; `d_s1.png` (1.7x), `d_r1.png`, `d_r2.png` (3x, three shots) |
+| the thin clock metal x 4641-4655 | from row 1's pad (4648,9254) to the END pad (4648,9905) through the pads of rows a and d ((4648,9428), (4648,9645)); no metal between `lc2`'s END pad (4648,9124) and this one's top pad (y 9140-9249 bare in both chips) | `tl5_tracks.py v 4648 9140 9960` (holes 9254, 9428, 9645, 9905; no metal 9140-9249 and from 9912) |
+| **the copy's clock feed** | an L-shaped metal from the END pad (4648,9905) west along y 9897-9919 and south on x 4553-4575: one metal into the pad's ring, the same picture as the master's L 780 px up | `textmap.py 4540 9890 4664 9936 3 --acid` against `4540 9110 4664 9156`; `d_padA.png` (2.8x, three shots); `follow.py 4564 9940 N` (corner (4570,9908) -> E, end (4652,9905)), `S` (a contact candidate (4563,10093), on to a corner (4568,10520)) |
+| K1's VSS node | **differs from the master**: a box x 4752-4800, y 9196-9242 under the rail with one contact at (4765,9211) (a pit in the clean shot, a ring in both metal shots); field between it and `lc2`'s K4 column (y 9175-9196). The finger east (y 9223-9242) and the tongue are as in the master | `d_top.png` (4x, four shots); `textmap.py 4744 9186 4900 9262 4 --acid` against the master's `4744 8406 4900 8482`; `px.py col 4776 9150 9260 4` |
+| track A | one metal from `lc2`'s pad (4473,9038) to an END pad with a contact (4473,9818) (ring 9796-9813, hole 9819; no metal 9823-9899); the pad's poly leaves east only (K4's second row). Two greenish stretches under it (y 9233, 9709) are not contacts: metal C-E in both chips, no ring | `tl5_tracks.py v 4475 9040 9900`; `textmap.py 4455 9212 4497 9258 3`, `4455 9690 4497 9732 3`; `d_padA.png` |
+| track B | one metal from `lc2`'s end to (4518,10170); a pad with a contact (4517,9384) (ring 9361-9378, hole 9385), poly east only (the clear row y 9376-9392; pink field west of the pad); no other hole from y 8690 | `follow.py 4517 8690 S`; `tl5_tracks.py v 4517 8690 9380`, `v 4517 9200 9500`; `d_padB.png` (4x, three shots) |
+| the rails | the west rail has the master's outline 780 px lower (x 4752-4802; wider, x 4741-4812, at y 9580-9718; x 4757-4808, then 4757-4820 from y 9825); the middle rail x 4924-4980; both run on south of y 9970 | `d_ov3_m.png` (1.65x, the whole piece on the metal shot) |
+| under the rail east of box S | the field at (4781-4811, 9672-9732) is green in the clean shot where the master's is pink: the same outlines in both (a colour drift, trap 15), metal whole over it in both chips | `opendiff.py 4540 9180 4990 9990`; `textmap.py 4730 9660 4830 9750 3 --acid` against `4730 8880 4830 8970`; `d_mS_c.png`, `d_mS_m.png` (4.5x, copy beside master) |
+
 ### Piece `x1`: the reset NOR's inputs, a clear, and `rcs_x1`'s driver (traced; wiring only)
 
 ```
@@ -473,6 +537,14 @@ driver lies; the other three lead to the loads.
 | `vss` | metal | (7552-7598, 7585) and (7552-7598, 7860) | - | column 0's VSS rail, on north and south |
 | `vcc` | metal | (7725-7775, 7720) and (7725-7775, 7860) | - | the wide metal east of the load, on north and south |
 
+| `lc2_w8475` | metal | (4553-4575, 9190) | out | piece `ff3`: the copy's slave output on track C, onto `lc2`'s L-shaped metal (its port there, `in`): the clock of `lc2`'s first flip-flop |
+| `eof_w9255` | metal | (4553-4575, 9990) | in | the copy's clock: the L-shaped metal from the END pad (4648,9904), on south (the next unit's track-C position; the follower: a contact near (4563,10080), on to y 10520) |
+| `lc1_w7170` | metal | (4466-4484, 9060) | in | track A, on from `lc2`'s drawn end; it ends on the copy's pad (4473,9818) |
+| `lc2_w8907` | metal | (4508-4526, 8700) | in | track B (the clear), on from `lc2`'s drawn end |
+| `lc2_w8907` | metal | (4508-4526, 9420) | ? | track B runs on south past the copy's pad (the follower: to (4518,10170)) |
+| `vss` | metal | (4757-4808, 9190) and (4757-4820, 9970) | - | the west rail, from `lc2`'s end and on south |
+| `vcc` | metal | (4924-4980, 9190) and (4924-4980, 9970) | - | the middle rail, from `lc2`'s end and on south |
+
 ## Ambiguities
 
 1. **`rdp3`'s contact (13736,12826)**, the top of L9 on the east pad of its poly link (not this
@@ -574,6 +646,28 @@ driver lies; the other three lead to the loads.
    the bottom strip (y 7745-7757) and the arm (y 7803-7817) are continuous with the column rests on
    their edge lines running through to it (tracer and reviewer). If one were cut the gate would have
    no path there; drawn without `?`.
+
+18. **The copy carries the cell's four uncertain diffusions** (piece `ff3`): the column's run west of the
+    rail at K1 and K2 (`?D`, three items; they only widen channels, and at K1 carry the clear's pull-down)
+    and the 14 px strip beside K4's pad box (`?D`; K4's node to its load). They were not read again at the
+    copy beyond the overlay (`d_ov2_1.png`, `d_ov2_3.png`: the copy shows what the master shows). So
+    `eof_w9332`'s clear term and `eof_w9472`'s load rest on them, exactly as `lc2_w8552` and `lc2_w8692` do
+    in the master (`notes/blocks/lc2.md`, Ambiguities). Settled when the master's are.
+19. **The clear's identity at this copy rests on two long tracks read by text only.** Track A (760 px from
+    `lc2`'s end to its END pad) and track B (680 px to its pad) were followed with `tl5_tracks.py` and
+    `follow.py`, and seen at 1.7x from y 9100 south (`d_s1.png`); their stretch through `lc2`'s strip
+    (y 8700-9100) lies beside `lc2`'s flip-flop, whose reviewers looked at that cluster but not at these
+    two metals south of where `lc2` stops them. No hole and no ring on either between the pads.
+20. **K1's VSS contact (4765,9211)** is read from a pit in the clean shot and a ring in both metal shots
+    (`d_top.png`); the box around it is the only part of the copy that differs from the master. The
+    finger of K1's third pull-down hangs from this box, so this one contact is what grounds K1's stack and
+    its third pull-down.
+21. **The cell's VCC contacts sit about 12-15 px north of where the cell draws them** (K1's: dimple at
+    (4951,9349), drawn (4955,9360); the master's own is the same, (4953,8565) against (4955,8580)). Inside
+    the box either way; geometry of `lc2`'s cell, not changed here.
+22. **What lies in the copy's rectangle that the cell does not draw**: nothing found on the overlays; the
+    green stripe at y 9730-9745, x 4800-4975 is in the chip-2 metal photograph only (an image artefact:
+    not in chip 1's metal shot nor in either stripped shot; `lc3`'s survey listed it as a drawn item).
 
 ## Review
 
@@ -914,6 +1008,14 @@ Round 6: no findings that change a connection.
   `trunks`' poly y 16950 east of x 10470, a gate row of the unit under the rail x 10540-10585 (`bc4`);
   (6) `trunks`' Not done item 1, the two contacts (13565,15275), (13565,15190) in `bd1`. Other taps of
   the long stretches that `trunks` drew were not looked for (R4).
+- **The ripple chain below piece `ff3`** (task (d), the rest; all in `lc3`'s ground, x 4440-5450,
+  y 9900-10750): (1) the copy's clock `eof_w9255` south of (4553-4575,9990): the next unit's track-C
+  position, a contact near (4563,10080), a corner (4568,10520) east to about (4674,10510) (the follower,
+  unchecked); `findcell.py 4600 8350 4990 9190 --region 4400,9100:5400,10500` gives `@inst lc2_ff 0,1561`
+  at only 0.52, so that unit is not a plain copy: overlay it first, then read what differs; (2) the turned
+  copy in column B, `@inst lc2_ff 322,796 rot=180 o=4795,8770` (score 0.70, centre (5117,9566)): not looked
+  at; `lc2`'s second flip-flop's output `lc2_w9034` and its stack (`lc2_w9171`) lead into that column; (3)
+  track B south of y 9420 (to (4518,10170)); (4) both rails south of y 9970.
 - **`lc1_w7170`, the input of the inverter that drives `rcs_x1`**: the thin metal T1 leaves
   `lc1`'s strip south at (5030-5046,8067), into `lc2`'s (claimed).
 - **`res_b`, `lpstb_b` and `rst_a` beyond the gate column**: three lines of the diagonal poly
