@@ -2,7 +2,7 @@
 
 ## Status
 
-2026-11-18 22:08 -0600 (run 9, Matt Godbolt, on Fable 5.2). **Partial: the west cluster's third gate** (piece L,
+2026-11-18 21:28 -0600 (run 9, Matt Godbolt, on Fable 5.2). **Partial: the west cluster's third gate** (piece L,
 5 transistors; 54 in the package; not yet reviewed). Run 8 is on main (bd81e81).
 
 ```
