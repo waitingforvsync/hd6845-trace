@@ -8,6 +8,8 @@
 # lc2 holds the cell lc2_ff, placed again in piece ff3 (and lc1 the rails and names lc2 hangs from)
 @requires lc2
 @requires lc1
+# bd1 holds the latch on R4's match, whose lower half's load is piece r4lat
+@requires bd1
 @w M=18 P=18
 @s 26x26
 
@@ -574,3 +576,33 @@ N P 4720,9258 eof_w9255
 N P 4660,9342 eof_w9332
 N M 4889,9420 eof_w9505
 N P 4660,9472 eof_w9472
+
+# ================================================================ piece r4lat (task (e), run 7): the load and the tie
+# of the lower half of bd1's latch on R4's match (bd1's "not traced: N2's load and the driver of bd1_q").
+# East of the ground rail the ground is open but for bd1_n1's metal (x 13954-13970) and the VCC rail (from x 13997):
+# read in the chip-2 metal and stripped shots and chip 1's metal shot, which agree; the clean shot is used only where
+# metal protected it (under bd1_n1's metal and beside the VCC rail), because in the open gap it shows edges light and
+# plain features dark (tracing guide, trap 28). Measurements: cache/scratch/eof/survey.md, "Task (e)".
+#     bd1_n2 = NOT( bd1_an AND inh_lat  OR  bd1_n1 )        with bd1_q = bd1_n2 through the tie (uncertain items)
+#     bd1_n1 = NOT( rc_eq_r4 AND inh_lat  OR  bd1_n2 )
+# -- the load: a poly block x 13937-13992 from bd1's band (P 13896,15630:13996,15650, the net bd1_q) down over a strip
+# y 15661-15687 that comes west from the VCC land (bd1's D 14000,15567:14048,15687). The same profile as the upper
+# half's load 97 px above (px.py col 13962 15520 15720 4 acid1b,metal1: poly, a dark line, the bright channel, a dark
+# line, 10 px of poly, pink field), and both strip edges and the block's foot are bars across bd1_n1's metal in both chips.
+P 13937,15644:13992,15702
+D 13916,15661:14004,15687
+# -- the node: the strip's west end turns south (tan in both chip-2 shots and chip 1's metal shot: px.py col 13918
+# 15650 15740 3) and west along y 15712-15728 to N2 under the rail (px.py row 15720 13860 13944 4 all: tan from the rail
+# to x 13928 in one chip or the other; bd1 has this link as ?D 13870,15705:13936,15728)
+D 13913,15680:13930,15728
+D 13868,15712:13930,15728
+# -- the tie: a heavy-outlined box with a light centre (13890-13906, 15661-15678) below the band's west end and west of
+# the strip's end, in both metal shots and the chip-2 stripped shot; no metal over it. Inside the outline (10 px of
+# dark towards the band, 8-10 px towards the strip) neither the poly nor the diffusion can be followed: uncertain.
+?B 13889,15660:13913,15682
+?P 13893,15644:13908,15676
+?D 13893,15663:13922,15685
+# -- from gate G4's block to the band: poly in three shots at x 13900 from y 15626 to 15650 (px.py col 13900 15626
+# 15716 3 all: 150-170/97-130/42-72 in the chip-2 metal shot, orange in its stripped shot); bd1 has it as ?P
+P 13895,15618:13909,15640
+@alias bd1_n2 bd1_q

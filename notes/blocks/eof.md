@@ -100,6 +100,24 @@ Full extraction with run 6: 2,391 nets, 4,309 transistors, 0 errors, 0 warnings.
 now loads `lc2` and `lc1` (for the cell), whose own partial-load messages appear (2 errors, 46 warnings,
 none on this package's lines).
 
+Run 7 (Tom Seddon's session, Claude Fable 5.2; 2026-11-19 14:28 +0000 on). One piece, 1 transistor, three
+uncertain items (the load's tie).
+
+- **Task (e), `bd1`'s latch on R4's match: its lower half's load found, and the latch closes** (piece `r4lat`).
+  East of the ground rail, where `bd1` had left "N2's load and the driver of `bd1_q`" untraced
+  (x 13876-13995, y 15640-15705), the band that `bd1` drew as `bd1_q` is the top of a load block of the
+  same build as the upper half's, 97 px below it: a poly block x 13937-13992 over a strip from the VCC land,
+  whose west end turns south to N2. A heavy-outlined box at the band's west end is its tie, so **`bd1_q`
+  is `bd1_n2`** and the two halves are a cross-coupled pair: **`bd1_n1` = NOT(`bd1_n2` OR (`inh_lat` AND
+  `rc_eq_r4`)), `bd1_n2` = NOT((`bd1_an` AND `inh_lat`) OR `bd1_n1`)**: a transparent latch of R4's match,
+  open while `inh_lat` is high, with `bd1_n2` the match as latched and `bd1_n1` its inverse (marked: both
+  loads' ties are uncertain items). **Where the latch's outputs go is still open**: nothing leaves the
+  lower half east or south (seen, `e_s2.png`); the one candidate is `bd1`'s old question at N1's west end
+  (Not done).
+
+Full extraction with run 7: 2,398 nets, 4,345 transistors, 0 errors, 0 warnings (the package by itself now
+also loads `bd1`, with `sel` and `bd3`).
+
 Full extraction after run 2: 2,351 nets, 4,232 transistors, 0 errors, 0 warnings; the package
 by itself (it loads `rdp3`): 0 errors, 0 warnings.
 
@@ -132,6 +150,8 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `ff3`, the flip-flop | x 4578-4985, y 9220-9955 | `@inst lc2_ff 0,780`: `lc2`'s cell (gates K1-K4, 19 transistors) 780 px lower, under the same west rail (x 4752-4820) and middle rail (x 4924-4980). Under the west rail (`railprof.py 4752 4798 9200 9860`): K1's rows y 9245-9271, 9296-9309; K2's 9418-9442, 9461-9485; K3's 9592-9616, 9647-9671; K4's 9758-9781, 9801-9824, 9844-9859 and one more (y 9913-9932) |
 | `ff3`, the copy's own | x 4458-4980, y 8695-9990 | K1's VSS node, a short box y 9196-9242 under the west rail with one contact (4765,9211) (the master has a long contact column there); both rails y 9185-9970; track C (x 4553-4571) from `lc2`'s end (y 9190) to the copy's row-2 pad (4561,9296); track A (x 4466-4484) from `lc2`'s end (y 9060) to its END pad with a contact (4473,9818); track B (x 4508-4526) from `lc2`'s end (y 8700) through the pad with a contact (4517,9384) of the clear row, drawn to y 9420; the clock's L-shaped metal from the END pad (4648,9904) west along y 9897-9919 and south on x 4553-4575, drawn to y 9990 |
 
+| `r4lat` | x 13868-14004, y 15618-15728 | the load of the lower half of `bd1`'s latch: a poly block x 13937-13992, y 15644-15702 below `bd1`'s band (y 15630-15650, the net `bd1_q`), over a diffusion strip y 15661-15687 from the VCC land (x 14000) west to x 13916; the strip's west end south as an arm x 13913-13930 to y 15728 and west along y 15712-15728 to N2 under the ground rail; the tie, a heavy-outlined box (13889-13913, 15660-15682) below the band's west end (uncertain); the poly from gate G4's block to the band (x 13895-13909, y 15618-15640) |
+
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
 
 ## Logic
@@ -141,20 +161,22 @@ Wiring only. What the join gives (traced; equations from the full extraction):
 ```
 rc_eq_r4 = NOR(r4c_b0_x .. r4c_b6_x)                 rdp2: high when the row counter equals R4
 bd1_an   = NOT rc_eq_r4                              bd1's inverter A            (firm)
-bd1_n1   = NOT(bd1_q OR (inh_lat AND rc_eq_r4))      upper half of bd1's latch   (depends on bd1's ? items)
-bd1_n2   : pull-downs (bd1_an AND inh_lat), bd1_n1   lower half; its load is not traced (bd1)
+bd1_n1   = NOT(bd1_n2 OR (inh_lat AND rc_eq_r4))     upper half of bd1's latch   (depends on bd1's ? items)
+bd1_n2   = NOT((bd1_an AND inh_lat) OR bd1_n1)       lower half; its load is piece r4lat (run 7; depends: the tie)
 ```
+
+(Until run 7 the lower half had no load and the first equation read `bd1_q` for `bd1_n2`: piece `r4lat`,
+below, shows they are one net.)
 
 `tools/unsure.py --equations`: `rc_eq_r4` FIRM, `bd1_an` FIRM, `bd1_n1` DEPENDS (on `bd1`'s
 uncertain items, none of them on this wire). `tools/unsure.py` does not list `rc_eq_r4`: no
 uncertain item lies on the path from the comparator's NOR to the two gates.
 
-Believed, not traced (from `notes/blocks/bd1.md`): the two halves are a transparent latch of this
-signal, open while `inh_lat` is high; `inh_lat` is a copy of `inh_src`, the signal that also
+Traced since run 7 (piece `r4lat`; marked, the two load ties): the two halves are a transparent latch
+of this signal, open while `inh_lat` is high; `inh_lat` is a copy of `inh_src`, the signal that also
 stops `ck_b` (`inh_ck`) and the row counter's step (`inh_rc`). So **what R4's match does at the
-end of the frame goes through this latch**; the latch's lower half (its load, the driver of
-`bd1_q`) and where `bd1_n1`, `bd1_n2` and `bd1_an` go are `bd1`'s untraced part (the queue's
-`bd1`-`bd3` row).
+end of the frame goes through this latch**. Where `bd1_n1`, `bd1_n2` and `bd1_an` go from the latch
+is not found (Not done).
 
 ### The path, north to south
 
@@ -476,6 +498,51 @@ poly runs on south in the open at x 5056-5072, beside M_a, and from y ~6890 shif
 it (`textmap.py 5050 6728 5260 6906 3`, the clean shot's column x 5059-5083). Drawn to y 6880.
 `lc1` does not draw a poly there.
 
+### Piece `r4lat`: the lower half of the latch on R4's match gets its load (traced; the tie uncertain)
+
+```
+bd1_n1 = NOT( bd1_n2  OR  inh_lat AND rc_eq_r4 )        upper half (bd1's)         depends (bd1's tie of N1's load)
+bd1_n2 = NOT( bd1_an AND inh_lat  OR  bd1_n1 )          lower half; load: r4lat    depends (the tie drawn here; bd1's ?D, ?P)
+bd1_an = NOT rc_eq_r4                                   bd1's inverter A           FIRM
+```
+
+(`tools/unsure.py --equations NAME`, full extraction. `bd1_q`, the gate of `bd1`'s pull-down G4, is an alias of
+`bd1_n2` since this piece; `tools/unsure.py` lists `bd1_n2` as two pieces joined only through the tie.)
+
+**Traced.** The load of the lower half: one transistor, 26/55, gate `bd1_n2` (the band), between the VCC land
+and N2. With it the lower half is a complete gate, and with the tie the pair is cross-coupled: while
+`inh_lat` is high `bd1_n1` = NOT `rc_eq_r4` and `bd1_n2` = `rc_eq_r4`; while it is low each holds the other.
+So the pair is **a transparent latch of R4's match, open while `inh_lat` is high** (`inh_lat` is a copy of
+`inh_src`), as `bd1`'s notes believed from the layout.
+
+**Believed, not traced.** That the tie is what the box is (next table, last row; Ambiguity 23): the
+equations are the extraction's with the tie drawn uncertain. What the latch is for: nothing traced says
+where either output goes (Not done).
+
+**How it was read.** East of the ground rail (x 13826-13870) the ground is open, but for `bd1_n1`'s metal
+(x 13954-13970) and the VCC rail (from x 13997). There the clean shot shows edge lines light and plain
+features dark (Ambiguity 24; trap 28), which is why `bd1` found that "the two chips do not line up within
+10 px": they do (the contact (13957,15740) is at the same place in all four shots, and chip 1's *metal*
+shot shows what chip 2's shots show). So the open part is read from the chip-2 metal and stripped shots
+and chip 1's metal shot, and the clean shot is used where metal protected it.
+
+| Part | What the photos show | Evidence |
+|---|---|---|
+| **the load block** | under `bd1_n1`'s metal the clean shot has, top to bottom: poly (salmon, y 15632-15648), a dark line (15656-15660), the bright channel (233-243/148-175, y 15664-15680), a dark line (15688), 10 px of poly (15692-15700), pink field (from 15704): **the profile of the upper half's load 97 px above** (poly 15524-15556, line 15560-15564, channel 15568-15584, line 15592-15596, poly 15600-15604, field from 15612). East of the metal the same bands in three shots. The two strip edges and the block's foot are 6-9 px dark bars across `bd1_n1`'s metal at y 15657-15663, 15687-15690 and 15705-15708 in both chips (edges underneath; no ring, no contact) | `px.py col 13962 15520 15720 4 acid1b,metal1`; `px.py col 13984 15616 15716 4 acid1b,acid,metal`; `textmap.py 13864 15618 14008 15722 3 --acid`; `e_a1.png`, `e_a2.png` (4.5x sharpened, four shots) |
+| the block's sides | west edge x 13936 (a dark line between the strip's end, tan, and the poly, 172/114/54 in the chip-2 metal shot), east edge x 13992 (a dark line, then the land's tan from x 13996): the same junction with the land as the upper half's strip | `px.py row 15676 13872 14004 4 metal,acid,acid1b`; `px.py row 15674 13976 14024 4` against `row 15578` |
+| the VCC land | tan under the rail to y 15684, a dark line at 15688, pink field from 15696: `bd1`'s `D 14000,15567:14048,15687`, with its contact (14022,15668) beside the strip | `px.py col 14012 15640 15720 4 acid1b,metal1` |
+| **the strip west of the block and the arm** | plain tan, blue 77-91, red minus green 15-40 (diffusion; the band's poly beside it is 160/110/55) at x 13920-13932, y 15665-15686, then south without a break at x 13912-13926 to y 15728; in the clean shot this open strip is a dark red-brown bar (trap 28) | `px.py col 13926 15626 15716 3 all`, `col 13918 15650 15740 3 metal,acid,metal1`, `row 15696` and `row 15706 13872 14004 4` |
+| **the arm to N2 under the rail** | along y 15720 the chip-2 shots are tan from x 13880 to 13928 with the rail's edge line at x 13872-13876, and the clean shot is protected tan (198/178/138: diffusion, not the pink of field) from x 13860 to 13880 with its own margin line at 13884: every x is tan in one chip or the other. `bd1` has this link as `?D 13870,15705:13936,15728`; its top edge is at about y 15712 | `px.py row 15720 13860 13944 4 all`; `px.py col 13900 15626 15716 3 all` (dark 15704-15710, tan from 15713) |
+| the band is not on the strip west of the block | at x 13926 the band ends at y 15648 and the strip starts at 15662; between them the clean shot is bright green (field) | `px.py col 13926 15626 15716 3 all`; `e_box1.png` |
+| **from G4's block to the band** | poly without a break at x 13900 from y 15626 to 15650 in three shots (chip-2 metal 150-170/97-130/42-72, chip-2 stripped orange, clean shot red-brown). `bd1` has it as `?P 13896,15618:13908,15642`; drawn here without `?` | `px.py col 13900 15626 15716 3 all` |
+| **the tie** (uncertain) | a box with a light centre (13890-13906, 15661-15678) and a heavy outline, in both metal shots and the chip-2 stripped shot; its centre is tan with blue 75-95 (not the green of the field island below it, 139/152/88); no metal over it. Above it 10 px of dark, then the band's west end; east of it 8-10 px of dark, then the strip; west of it its outline, a field strip (green in the clean shot the whole way from y 15640 to 15685), then the rail. In the clean shot the box does not read (Ambiguity 24) | `e_box1.png`, `e_box2.png` (5.8x, five shots); `px.py row 15671 13872 14004 3 all`; `px.py col 13900 ...`; overlay `e_ov1.png` (4.2x, chip-2 metal and stripped) |
+
+Also looked at (not drawn; for `bd1`): **the strip of `bd1_k`'s pull-down is not joined to N1 from above.**
+Between N1's west box (to y 15600) and the strip's top segment (from y 15634) the clean shot, protected
+there by `bd1_an`'s metal, is pink field (x 13770-13800, y 15602-15630; `e_k2.png`, 4.4x). So the transistor
+under `inh_src`'s gate is not a pass transistor from the latch's node N1; whether its top segment reaches
+the ground diffusion under the rail (`bd1`'s `?D`) was not settled (`e_k1.png`, `e_k2.png`).
+
 ## Ports
 
 The net is driven outside the package (by `rdp2`'s NOR). `in` marks the port beyond which the
@@ -544,6 +611,10 @@ driver lies; the other three lead to the loads.
 | `lc2_w8907` | metal | (4508-4526, 9420) | ? | track B runs on south past the copy's pad (the follower: to (4518,10170)) |
 | `vss` | metal | (4757-4808, 9190) and (4757-4820, 9970) | - | the west rail, from `lc2`'s end and on south |
 | `vcc` | metal | (4924-4980, 9190) and (4924-4980, 9970) | - | the middle rail, from `lc2`'s end and on south |
+
+| `bd1_n2` | diffusion | (13868, 15712-15728) | out | piece `r4lat`: the load's node onto `bd1`'s N2 under the ground rail (inside `bd1`'s region; `bd1` has the link as `?D`) |
+| `bd1_n2` | poly | (13895-13909, 15618) | in | the poly from `bd1`'s gate G4 block (the net it called `bd1_q`) down to the band and the load's gate |
+| `vcc` | diffusion | (14004, 15661-15687) | - | the load's strip onto `bd1`'s VCC land (x 14000-14048, contact (14022,15668)) |
 
 ## Ambiguities
 
@@ -674,6 +745,32 @@ driver lies; the other three lead to the loads.
     (4932-4985, 9738-9800) with a contact (4955,9768): the turned flip-flop of column B's (`lc3`'s stage
     E4), drawn by `lc3`; (c) the green stripe at y 9730-9745, x 4800-4975 is in the chip-2 metal photograph
     only (an image artefact: not in chip 1's metal shot nor in either stripped shot).
+
+23. **The tie of the lower half's load** (piece `r4lat`; box (13889-13913, 15660-15682)). Seen: a
+    heavy-outlined box with a light centre at the west end of the band, in both metal shots and the chip-2
+    stripped shot, with no metal over it: the look of a buried contact (`notes/layers.md`). Not seen:
+    the poly from the band into the box (10 px of dark outline between, y 15650-15660) and the diffusion from
+    the strip's end into it (8-10 px of dark, x 13908-13916); and the clean shot, which settles other boxes,
+    does not show this one as a box (Ambiguity 24). Readings: (a) a buried contact of the band's poly onto
+    the west end of the strip, the load's tie: `bd1_q` = `bd1_n2`, the latch closes; (b) the box's diffusion
+    is not the strip's, which would leave the band (the gate of G4 and of this load) with no driver at all,
+    and the box with a diffusion that goes nowhere (field west of it, the field island south). Working
+    assumption: (a), drawn `?B` with `?P` and `?D` inside it, the names gathered by `@alias bd1_n2 bd1_q`
+    (not renamed: trap 17). It is the mirror of the upper half's tie, which `bd1` drew uncertain for the
+    same reason. What would settle it: a sharper photograph; nothing more in these.
+24. **In the open ground east of `bd1`'s ground rail the clean shot is inverted against the other three
+    shots** (x 13885-13950, y 15625-15700): where the chip-2 shots and chip 1's metal shot have a dark edge
+    line (x 13908-13916, 13932-13936) it is light tan, and where they have the box's light centre and the
+    plain strip it is near black or dark red-brown (`px.py row 15671 13872 14004 3 all`). It is not a
+    registration error: the island below (y 15686-15701), the band's west end (x 13894) and the contact
+    (13957,15740) are at the same place in all shots. Trap 28's case (a diffusion strip in an open gap reads
+    as open poly in the clean shot), here for a whole group. Nothing in the piece rests on the clean shot in
+    the open; under `bd1_n1`'s metal and beside the rails it is the main evidence.
+25. **`bd1`'s uncertain items on this latch that the piece re-read**: `?P 13896,15618:13908,15642` (poly in
+    three shots: drawn here without `?`, over it) and `?D 13870,15705:13936,15728` (diffusion in both chips:
+    drawn here without `?`, over it). `bd1`'s other uncertain items there were not re-read: the upper
+    half's tie, N2's third pull-down (`?D`, `?P` at x 13919-13986, y 15720-15833; its outlines are as `bd1`
+    describes in `e_s2.png`, 3.8x chip-2 stripped), the source of `bd1_k`'s pull-down.
 
 ## Review
 
@@ -1095,7 +1192,20 @@ Round 7: no findings that change a connection.
 - `rst_b` (a buffered copy of the reset) north of `lc1`'s strip: V4, x 5288-5310, "turns east
   at y 6720" (`lc1`); `rst_c`'s branch north at x 5713 (followed by `lc1` to y 6365).
 - The other five polys of `tl5`'s south bus (x 5365, 5412, 5453 and two more) south of y 6350.
-- For `bd1` (queue row `bd1`-`bd3`): the latch's lower half and where `bd1_n1`, `bd1_n2`,
-  `bd1_an` go now decide what R4's match does.
+- **Where the outputs of the latch on R4's match go** (task (e), the rest; all in `bd1`'s region). The
+  latch is complete since run 7 (piece `r4lat`), and no wire is known to leave it: `bd1_an` ends on gate
+  G6's pad (13768,15806) (khaki field west of the pad, `e_s2.png`); `bd1_n1`'s metal x 13957 ends on the
+  contact (13957,15740), whose poly is the gate of N2's third pull-down; `bd1_n2`'s poly (the band) ends at
+  the load block's east edge x 13992 beside the VCC land; south of the lower half (y 15840-15880) is open
+  field as far as the dense group. Where to look, in order: (1) **N1's west buried contact**
+  (13766-13802, 15572-15600) and its "dead-end" poly pad (13749-13799, 15575-15597) under `bd1_an`'s
+  metal (`bd1`'s Ambiguities): a poly leaving that pad under a metal is the likely exit of `bd1_n1`;
+  under `inh_lat`'s metal x 13706-13726 the clean shot is field at y 15559-15616 (`textmap.py 13640 15556
+  13812 15616 3 --acid`), so not west at that height; (2) the source of `bd1_k`'s pull-down (the strip's
+  top segment, x 13773-13830, y 15634-15660): not from N1 (field between, piece `r4lat`'s last
+  paragraph), so `bd1_k` is not the latch's output through that transistor; (3) `bd1_k` itself south of
+  (13521,16273) and the dense group y 15880-16125, where `h_eq_r0`, `ck_out` and `inh_n` meet (`bd1`'s
+  Not done). Read this group in the chip-2 shots and chip 1's metal shot, not in the clean shot
+  (Ambiguity 24).
 - The rest of the slice-0 logic of `cdp1`'s channel around the inverter was not traced; the
   inverter's own rectangle (x 8330-8650, y 4700-4880) has nothing else in it.
