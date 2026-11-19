@@ -471,8 +471,10 @@ A 100,100:150,150 kind=clamp           # mark a transistor here: clamp, field (b
   note. A wire you believe is net X but have not joined to it is labelled `X_u`.
   `tools/t.sh BLOCK signals.py` lists your names that the glossary does not cover.
 - **Aliases.** When your wire joins two nets that already have names, say so with `@alias CANON
-  OTHER`. A net has one canonical name, and every other name on it must be an alias of that one
-  directly: a chain (`@alias a b`, `@alias b c`) gives "net carries several names", so alias the
+  OTHER`. A net has one canonical name, and every other name on it must be an alias of that one,
+  directly or through another alias (a chain `@alias a b`, `@alias b c` is accepted since
+  2026-11-19: when a wire joins two nets that each have aliases in other packages' files, one line
+  `@alias CANON-OF-ONE CANON-OF-THE-OTHER` in your file is enough). Where you can, alias the
   new name to the canonical name the net already has (`eofw`: `lc2` had `@alias lc1_w7170
   lc2_w8474`, so the third name went in as `@alias lc1_w7170 eof_w7777`). A net whose labels in your
   file are all aliases gives the same error when the file is extracted by itself, because the
