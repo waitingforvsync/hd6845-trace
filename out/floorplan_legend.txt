@@ -12,7 +12,8 @@
 -	?io	LPSTB and RES input protection	6380,833:6918,1280	two mirrored comb cells; left serves LPSTB, right serves RES
 -	pad	2 RES	7070,770:7830,1530	pin 2, RES
 -	io	LPSTB and RES input buffers	6950,1640:8000,2060	left cell LPSTB, right cell RES; each a small inverter then a two-finger inverter, so the core sees the pin level
--	?power	wide metal band north of the top-left strips	2100,2180:6400,2500	the VSS plane the strips' rails hang from; R5's inverted match (sl_eq_r5_n) and tl1's third latch's data and output enter it and are not followed: package tlb
+-	logic	NOR on NOT R5 match	2250,1900:2600,2506	tl1_w2637 = NOR(tl1_w5936, rcs_c1, sl_eq_r5_n): R5's match gated into the data of the middle cluster's latch A; load fed by a diffusion strap from the VCC plane
+-	?power	wide metal band north of the top-left strips	2600,2180:6400,2500	the VSS plane the strips' rails hang from; the data of tl1's third latch (tl1_w3333) enters it and is not followed: package tlb (its west end, a NOR on R5's inverted match, is eof's)
 1	route	RES and LPSTB to the core	5250,2080:6730,2160	res_b (y 2140) and lpstb_b (y 2095), then down a channel at x 5277 / 5320
 -	test	die marking	11150,2150:14700,3050	HD46505S and mask revision marks
 -	?logic	small cell by die marking	11600,2150:12080,2800	isolated cell left of the HD46505S text

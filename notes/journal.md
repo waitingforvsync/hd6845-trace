@@ -1853,3 +1853,36 @@ Closed with the count noted in the comment.
 - `operation.md`: totals unchanged (2,379 nets, 4,282 transistors; 839 of 1,261 equations firm).
 - `out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary.
 - Coverage: 63.0% traced; untraced and in no Queue row 0.4% (supply plates and empty field).
+
+## 2026-11-19 12:26  Handoff: eof run 3, the NOR on R5's inverted match
+
+Traced by this session with `/trace6845` (claim 6a6bfba, merged 17714ea, claim released); the handoff
+processed at the user's request.
+
+**What came in** (`notes/blocks/eof.md`, piece `r5nor`; 4 transistors, no uncertain items):
+- The four polys that leave `tl1`'s strip north at x 2362-2515 end on one gate in the band, at
+  x 2330-2550, y 2180-2470: `tl1_w2637` = NOR(`tl1_w5936`, `rcs_c1`, `sl_eq_r5_n`) (firm).
+- So R5's match, inverted once, is gated by `rcs_c1` and `tl1_w5936` into the data of the middle
+  cluster's latch A. It is the first load of `sl_eq_r5_n` that is drawn; its poly ends there.
+- The load is fed by a diffusion strap from seven contacts under the plane north of y 1963, named
+  `vcc` from the load's orientation only (its Ambiguity 8; for `padring`).
+- Review: one full round on Fable, no finding that changes a connection; three geometry fixes (two
+  pad edges, the head and its contacts), both `sameconn` runs identical.
+
+**Checks:** overlay of the merged piece at 1.7x on the chip-2 metal and clean shots
+(`cache/scratch/eof_handoff_ov.png`): every outline on its feature. Full extraction 2,379 nets,
+4,286 transistors, 0 errors, 0 warnings; `tools/unsure.py`: 90 nets joined only through uncertain
+items, none of them this piece's.
+
+**Applied:**
+- Master list: the `eof` row's task (a) marked done as a gate, with what is next on that path
+  (latch A's enable `tl4_w4590`, by `tl3` (continue)'s row (4250,2810)); the `tlb` row no longer
+  leads the end-of-frame group and lists what is left of the band (four of its six edge wires closed).
+- `notes/blocks/tl1.md`: the three ports north and the Not done entry now say where the polys end.
+- `floorplan.txt`: the band's coarse block trimmed to x 2600-6400.
+- `notes/operation.md`: totals (4,286 transistors; 840 of 1,262 equations firm).
+- No Re-read item, no new AMB entry.
+- `out/` rebuilt: 0 names outside the glossary. Coverage: 63.1% traced; untraced and in no Queue
+  row 0.4%, as before.
+
+**Handoffs:** none waiting. **Claims:** none.

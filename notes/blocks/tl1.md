@@ -675,9 +675,9 @@ shots). Sizes only: `tools/sameconn.py` shows no connection changed by it.
 | `tl1_w3678` | M | (2856,2811), east, from the pad (2830,2811) | into the block (a gate is its only other end) | gate 2 of the NOR |
 | `tl1_w3594` | P | (2817,2899), east | into the block (its other ends are four gates) | gate 1 of the NOR `tl1_w3636`; the enable of the second latch (a series gate in each of its two gates) |
 | `tl1_w3333` | M | (2852,2553), east, from the pad (2826,2553) | into the block (its other ends are two gates of the third latch) | long wire down the west side; the third latch's data |
-| `rcs_c1` | P | (2405-2420,2500), north | driven in `tla` | `rcs_c1`'s poly line, on north |
-| `tl1_w2637` | P, M | (2448-2463,2500) north; (2852,2637) east, from the pad (2827,2637) | not known | passes: poly from the north, row y 2636, metal east |
-| `sl_eq_r5_n` | P | (2493-2508,2500) north; (2817,2591) east | not known | passes: poly from the north, row y 2591, on to a pad (2867,2595) |
+| `rcs_c1` | P | (2405-2420,2500), north | driven in `tla` | `rcs_c1`'s poly line, on north: a gate of `eof`'s NOR `r5nor` (coordinator, 2026-11-19) |
+| `tl1_w2637` | P, M | (2448-2463,2500) north; (2852,2637) east, from the pad (2827,2637) | driven from the north: the output of `eof`'s NOR `r5nor`, `tl1_w2637` = NOR(`tl1_w5936`, `rcs_c1`, `sl_eq_r5_n`) (coordinator, 2026-11-19) | passes: poly from the north, row y 2636, metal east |
+| `sl_eq_r5_n` | P | (2493-2508,2500) north; (2817,2591) east | driven from the east (`eof`'s inverter on R5's match); its poly north ends as a gate of `eof`'s NOR `r5nor` (coordinator, 2026-11-19) | passes: poly from the north, row y 2591, on to a pad (2867,2595) |
 | `tl1_w5936` | P | (2372-2388,2498) north | driven outside (`tl2`'s upper inverter, by the row y 6237) | the far end of the wire up the west margin: the north-edge poly turns north out of the strip |
 | `vss` | M | (2600-2650,2500) north | - | R1, on north |
 | `ck_out` | M, P | trunk contacts (2365,5847) (`tla`'s) and (2372,6061) | from `tla`'s trunk | the third latch's enable: two gate rows |
@@ -809,6 +809,8 @@ the way; the row y 2812 ends on a pad (2830,2811) (`n10.png`).
   where the wide VSS metal x 2733-2785's east arm (y 2905-2955) goes.
 - **`tl1_w5936` north of (2380,2498)** (run 5): the fourth poly that leaves north, 33 px west of
   `rcs_c1`'s. All four go into the band y 2180-2500, which no package has drawn.
+  **Done since** (coordinator, 2026-11-19): all four end on one NOR drawn by `eof` (piece `r5nor`,
+  `notes/blocks/eof.md`): `tl1_w2637` = NOR(`tl1_w5936`, `rcs_c1`, `sl_eq_r5_n`).
 - `tl1_w5978`'s metal south of y 6350.
 - (Done since: the "second vertical poly x 2137-2147" and `tl1_w5936`'s poly north of its corner
   are the wire of run 5; the VCC box under R2 at (2785-2835, 6065-6130) is drawn by `tl2`, as the

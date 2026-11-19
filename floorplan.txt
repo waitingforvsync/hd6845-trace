@@ -63,7 +63,7 @@
 14140,13480:15800,14680 pla     register address decode (18 selects) | NOR array, 5-bit address to 18 register selects. Columns left to right select R7 R6 R4 R0 R2 R1 R10 R5 R3 R8 R9 R11 R13 R12 R14 R15 R17 R16. Nothing decodes addresses 18-31
 
 # --- random logic
-2100,2180:6400,2500     ?power  wide metal band north of the top-left strips | the VSS plane the strips' rails hang from; R5's inverted match (sl_eq_r5_n) and tl1's third latch's data and output enter it and are not followed: package tlb
+2600,2180:6400,2500     ?power  wide metal band north of the top-left strips | the VSS plane the strips' rails hang from; the data of tl1's third latch (tl1_w3333) enters it and is not followed: package tlb (its west end, a NOR on R5's inverted match, is eof's)
 3533,2500:4250,2890     ?logic  top-left logic, strip 3, rows above y 2890 | what `tl3` has not drawn yet (the rest of the strips is in their floorplan.d fragments)
 7460,7580:7800,8440     ?logic  gate column west of the large cells | about six gate units with loads, below the gate group that inh_ck's tap row reaches (eof (c)); not traced: package cdp3 (continue)
 7850,8260:8300,8800     ?logic  logic beside the large cells (row A) | gates between channel 3 and channel B, west of the six large cells; lines from the gate beside row C come up into it (x 7880, 8076, 8290, 8327); not traced: package cdp3 (continue)
