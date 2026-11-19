@@ -586,15 +586,15 @@ N P 4660,9472 eof_w9472
 #     bd1_n2 = NOT( bd1_an AND inh_lat  OR  bd1_n1 )        with bd1_q = bd1_n2 through the tie (uncertain items)
 #     bd1_n1 = NOT( rc_eq_r4 AND inh_lat  OR  bd1_n2 )
 # -- the load: a poly block x 13937-13992 from bd1's band (P 13896,15630:13996,15650, the net bd1_q) down over a strip
-# y 15661-15687 that comes west from the VCC land (bd1's D 14000,15567:14048,15687). The same profile as the upper
+# y 15659-15689 that comes west from the VCC land (bd1's D 14000,15567:14048,15687). The same profile as the upper
 # half's load 97 px above (px.py col 13962 15520 15720 4 acid1b,metal1: poly, a dark line, the bright channel, a dark
 # line, 10 px of poly, pink field), and both strip edges and the block's foot are bars across bd1_n1's metal in both chips.
-P 13937,15644:13992,15702
-D 13916,15661:14004,15687
+P 13937,15644:13992,15704          # review round 9: the foot's lower edge is at y 15703-15704
+D 13916,15659:14004,15689          # review round 9: the strip's edge lines are centred on y 15658-15660 and 15688-15689 (px.py col 13941 / 13982, step 2): W 30
 # -- the node: the strip's west end turns south (tan in both chip-2 shots and chip 1's metal shot: px.py col 13918
 # 15650 15740 3) and west along y 15712-15728 to N2 under the rail (px.py row 15720 13860 13944 4 all: tan from the rail
 # to x 13928 in one chip or the other; bd1 has this link as ?D 13870,15705:13936,15728)
-D 13913,15680:13930,15728
+D 13908,15684:13929,15728          # review round 9: a dogleg: below the strip the arm is x 13908-13929 (px.py row 15700 13900 13936 2), the strip's west part above it x 13919-13934
 D 13868,15712:13930,15728
 # -- the tie: a heavy-outlined box with a light centre (13890-13906, 15661-15678) below the band's west end and west of
 # the strip's end, in both metal shots and the chip-2 stripped shot; no metal over it. Inside the outline (10 px of

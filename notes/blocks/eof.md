@@ -150,7 +150,7 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `ff3`, the flip-flop | x 4578-4985, y 9220-9955 | `@inst lc2_ff 0,780`: `lc2`'s cell (gates K1-K4, 19 transistors) 780 px lower, under the same west rail (x 4752-4820) and middle rail (x 4924-4980). Under the west rail (`railprof.py 4752 4798 9200 9860`): K1's rows y 9245-9271, 9296-9309; K2's 9418-9442, 9461-9485; K3's 9592-9616, 9647-9671; K4's 9758-9781, 9801-9824, 9844-9859 and one more (y 9913-9932) |
 | `ff3`, the copy's own | x 4458-4980, y 8695-9990 | K1's VSS node, a short box y 9196-9242 under the west rail with one contact (4765,9211) (the master has a long contact column there); both rails y 9185-9970; track C (x 4553-4571) from `lc2`'s end (y 9190) to the copy's row-2 pad (4561,9296); track A (x 4466-4484) from `lc2`'s end (y 9060) to its END pad with a contact (4473,9818); track B (x 4508-4526) from `lc2`'s end (y 8700) through the pad with a contact (4517,9384) of the clear row, drawn to y 9420; the clock's L-shaped metal from the END pad (4648,9904) west along y 9897-9919 and south on x 4553-4575, drawn to y 9990 |
 
-| `r4lat` | x 13868-14004, y 15618-15728 | the load of the lower half of `bd1`'s latch: a poly block x 13937-13992, y 15644-15702 below `bd1`'s band (y 15630-15650, the net `bd1_q`), over a diffusion strip y 15661-15687 from the VCC land (x 14000) west to x 13916; the strip's west end south as an arm x 13913-13930 to y 15728 and west along y 15712-15728 to N2 under the ground rail; the tie, a heavy-outlined box (13889-13913, 15660-15682) below the band's west end (uncertain); the poly from gate G4's block to the band (x 13895-13909, y 15618-15640) |
+| `r4lat` | x 13868-14004, y 15618-15728 | the load of the lower half of `bd1`'s latch: a poly block x 13937-13992, y 15644-15704 below `bd1`'s band (y 15630-15650, the net `bd1_q`), over a diffusion strip y 15659-15689 from the VCC land (x 14000) west to x 13916; the strip's west end (x 13919-13934) south by a dogleg as an arm x 13908-13929 to y 15728 and west along y 15712-15728 to N2 under the ground rail; the tie, a heavy-outlined box (13889-13913, 15660-15682) below the band's west end (uncertain); the poly from gate G4's block to the band (x 13895-13909, y 15618-15640) |
 
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
 
@@ -509,7 +509,7 @@ bd1_an = NOT rc_eq_r4                                   bd1's inverter A        
 (`tools/unsure.py --equations NAME`, full extraction. `bd1_q`, the gate of `bd1`'s pull-down G4, is an alias of
 `bd1_n2` since this piece; `tools/unsure.py` lists `bd1_n2` as two pieces joined only through the tie.)
 
-**Traced.** The load of the lower half: one transistor, 26/55, gate `bd1_n2` (the band), between the VCC land
+**Traced.** The load of the lower half: one transistor, 30/55, gate `bd1_n2` (the band), between the VCC land
 and N2. With it the lower half is a complete gate, and with the tie the pair is cross-coupled: while
 `inh_lat` is high `bd1_n1` = NOT `rc_eq_r4` and `bd1_n2` = `rc_eq_r4`; while it is low each holds the other.
 So the pair is **a transparent latch of R4's match, open while `inh_lat` is high** (`inh_lat` is a copy of
@@ -614,7 +614,7 @@ driver lies; the other three lead to the loads.
 
 | `bd1_n2` | diffusion | (13868, 15712-15728) | out | piece `r4lat`: the load's node onto `bd1`'s N2 under the ground rail (inside `bd1`'s region; `bd1` has the link as `?D`) |
 | `bd1_n2` | poly | (13895-13909, 15618) | in | the poly from `bd1`'s gate G4 block (the net it called `bd1_q`) down to the band and the load's gate |
-| `vcc` | diffusion | (14004, 15661-15687) | - | the load's strip onto `bd1`'s VCC land (x 14000-14048, contact (14022,15668)) |
+| `vcc` | diffusion | (14004, 15659-15689) | - | the load's strip onto `bd1`'s VCC land (x 14000-14048, contact (14022,15668)) |
 
 ## Ambiguities
 
@@ -1142,6 +1142,58 @@ tools/t.sh eof sameconn.py 8d0843b              ->  connections identical
 ```
 
 Round 7: no findings that change a connection.
+
+### Round 9 (full review of piece `r4lat`; 2026-11-19 14:45 to 14:59 +0000)
+
+One fresh reviewer (general-purpose agent, Claude Fable 5.2), at commit 3b08008. Its images are in
+`cache/scratch/eof/review-9/`. (There is no round 8: the number follows the image folder, since
+`review-8` held round 7's second run.)
+
+**Told to suspect**: the tie box (whether it is a buried contact, whether the band's poly enters it and
+the strip's diffusion is in it, or whether it joins the ground diffusion to the west); the link to N2
+under the rail's east edge; the strip's edges and the block's foot, taken from two columns; whether the
+band and the block are one poly, and how far down the block reaches; the block's west edge against the
+arm (a wider gate, or an arm of poly); the poly link from G4's block, taken from one column; anything
+leaving east under the VCC rail or south of the block.
+
+**Checked and found correct** (ten images at 4x or more, the rest `px.py` and `textmap.py`): claim 1 (poly
+over the strip: orange in the open at x 13941, bright salmon under the metal, east edge x 13992; band and
+block one poly: the band's lower edge exists at x 13926 and is absent at x 13941); claim 2 (the strip runs
+tan onto the land with no edge at x 13996-14044); claim 3 (N2, link and arm one diffusion: the clean shot
+tan under the rail to x 13880, chip 2 tan from 13880; the clean shot's dark line at x 13884 is also on the
+field row y 15696, so it is the margin line); claim 4 (field between band and strip at x 13926; the strip
+west of x 13934 is bare diffusion, the arm is not poly); claim 5 (the box looks like `bd1`'s firm buried
+contacts in the same column; field west and south of it, the ground diffusion's edge at x 13872 visible in
+the clean shot; the dark towards the band and towards the strip is one 10-12 px line each, no room for a
+field gap; "still not followable through the outline, so `?` is right"); claim 6 (poly unbroken at x 13898
+from y 15606 to 15648 in three shots; G4 crosses the rail's east edge without a field stripe); claim 7 (no
+ring, pad or hole on `bd1_n1`'s metal at y 15630-15705); claim 8 (0 errors, 0 warnings, both equations;
+`unsure.py` shows `bd1_n2` joined only through the tie); claim 9 (nothing east under the VCC rail, nothing
+south of the block; `opendiff.py` finds nothing). **Not checked**: the tie beyond its look (the clean shot
+is unusable there); `bd1`'s other uncertain items (the upper tie, N2's third pull-down).
+
+**Findings**, each checked by the tracer; none changes a connection:
+
+1. **Geometry only**: the strip's edge lines are centred on y 15658-15660 and 15688-15689 (drawn 15661,
+   15687), the foot's lower edge on 15703-15704 (drawn 15702). **Confirmed** (`px.py col 13941 15650 15710 2
+   metal,acid`: minima at y 15660 and 15688-15690, the foot's at 15704-15706; `col 13982 15652 15708 2
+   acid1b,metal`: 15658-15660 and 15688-15690). **Fixed**: `D 13916,15659:14004,15689`,
+   `P 13937,15644:13992,15704`; the load is 30/55.
+2. **Geometry only**: the arm is a dogleg: x 13908-13927 at y 15690-15710 (drawn 13913-13930), the
+   strip's west part above it x 13919-13934. **Confirmed** (`px.py row 15700 13900 13936 2
+   metal,acid,metal1`: edge lines at x 13906-13908 and 13930-13932, tan 13912-13924). **Fixed**:
+   `D 13908,15684:13929,15728`.
+3. **Geometry only, `bd1`'s**: its band is drawn to x 13996 and ends at x 13993, 7-8 px short of the land's
+   edge at 14001. Not this package's item; not changed (handoff). No connection: field between.
+
+Connections before and after the fixes:
+
+```
+tools/t.sh eof sameconn.py 3b08008              ->  connections identical
+.venv/bin/python tools/sameconn.py 3b08008      ->  connections identical
+```
+
+Round 9: no findings that change a connection.
 
 ## Not done
 

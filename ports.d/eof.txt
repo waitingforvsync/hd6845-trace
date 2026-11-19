@@ -83,4 +83,4 @@ vcc         M  4924-4980,9190    -    the middle rail, from lc2's end
 vcc         M  4924-4980,9970    -    the same, on south
 bd1_n2        D      13868,15712-15728        out  piece r4lat: the lower half's load node onto bd1's N2 under the ground rail (bd1 has the link as ?D)
 bd1_n2        P      13895-13909,15618        in   from bd1's gate G4 block (bd1's bd1_q) to the band, the load's gate
-vcc           D      14004,15661-15687        -    the load's strip onto bd1's VCC land
+vcc           D      14004,15659-15689        -    the load's strip onto bd1's VCC land
