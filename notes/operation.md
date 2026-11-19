@@ -2,7 +2,7 @@
 
 This is the short version. The block notes (`notes/blocks/`) are the reference; the
 glossary of names is `notes/signals.md`. Last checked against the extraction on
-2026-11-19 (2,378 nets, 4,286 transistors; sixth refresh, and `eof`'s run 3).
+2026-11-19 (2,378 nets, 4,286 transistors; seventh refresh).
 
 ## How to read this page
 
@@ -36,7 +36,7 @@ has been simulated: nothing has been.
 | Two phases are made from CLK. `ck_b` can be high only while CLK is high; `ck_a` only while CLK is low. Each waits for the other to fall (cross-coupled NORs with two-inverter delays), so they never overlap. | Firm |
 | `ck_b` is also held low whenever `inh_ck` is high. | Firm (the gate); the inverter that makes `inh_ck` has one uncertain item |
 | `inh_ck`, `inh_rc` and `inh_lat` are three copies of one signal, `inh_src`. | Firm |
-| Where `inh_src` comes from, and so what it means. | Open. It is a widely fanned-out line of the bottom-centre logic (`notes/blocks/eof.md`, piece `isrc`): one end is the clear of `bc2`'s latch unit a (firm for the join; that unit waits for its review, R31), and a 2,470 px metal x 8968 taps it onto four polys into the gate columns at x 8650-8800, not followed. No driver is on what is drawn |
+| Where `inh_src` comes from, and so what it means. | Open. It is a widely fanned-out line of the bottom-centre logic (`notes/blocks/eof.md`, piece `isrc`): one end is the clear of `bc2`'s latch unit a, `bc2_w15029` = NOT((`bc2_w14876` AND `bc2_w14955`) OR `bc2_w15000` OR `inh_src`): the latch in the bottom-centre logic's east column is held clear while `inh_src` is high (firm for the join; the equation is marked: the unit's load ties, and the unit waits for its review, R31), and a 2,470 px metal x 8968 taps it onto four polys into the gate columns at x 8650-8800, not followed. No driver is on what is drawn |
 | **`inh_ck` is also the top-left logic's track A** (`notes/blocks/eof.md`, run 2; the name there until the refresh of 2026-11-19 is under Former names in the glossary). The trunk line that carries `inh_ck` up the left bus field runs on from (6690,8366) by a staircase of thin metals north-west to the metal x 6105 that enters the top-left logic at (6105,6350). So the signal that holds `ck_b` low is also the enable of the vertical control's master/slave latch pairs (`tl1`'s two latches, `tl3`'s latches B and C: one of each pair open on each of its levels), an input of the NORs `rcs_a2`, `tl3_e4243` and `tl4_w4545`, and the gate of the field latch path of `tcw`. Wherever this page writes `inh_ck`, read `inh_ck` (the extraction shows the net as `inh_ck` until the rename). A contact (6427,7648) on the way taps it onto a poly row that runs east to a gate group at the west edge of the central datapath's row C (x 7540-7670, y 7600-7750), not traced. | Firm for the join (no uncertain item on the path from the inverter to the top-left logic). The trunk line's 12,000 px were read by `trunks` at 1x and re-read here by text only (re-read item R4); the staircase lies on other nets' poly at four places without a contact (`notes/blocks/eof.md`, Ambiguity 5). **Open**: what `inh_src` is. Believed: a strobe once per scan line, since the vertical logic's latch pairs step on it |
 | A separate large buffer makes `ck_out` = NOT CLK for the rest of the chip; `clk_tl` = NOT `ck_out` is used in the top-left logic. | Firm, except the join from the CLK pad to the buffer (one uncertain item in the pad's input network) |
 
