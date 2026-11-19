@@ -57,7 +57,4 @@
 6139,6993:6998,8427      route  ?latched R4 match (bd1_n2_u), track x 6991 and row y 7000 | north over ten poly rows, west over five polys to the pad (6146,6997)
 5403,6345:6166,7015      route  ?latched R4 match (bd1_n2_u), poly row y 6996, diagonal and column x 5412 | onto tl5's bus poly tl5_w5761 = tl4_w3850, the input of the inverter that makes rcs_e3
 7550,14768:8986,15058    route  ripple counter clock (lc3_w9947), from its driver | bus metal y 14784, poly row y 14825 under the rails, metal x 8968 and row y 15042 into the inverter's output box
-8508,14942:8854,15062    logic  clock driver inverter U | lc3_w9947 = NOT eof_w15127: drives the left-centre ripple counter's clock and four gates of the top-centre west column
-8508,15100:8897,15285    logic  slow inverter V, hairpin pull-down | eof_w15127 = NOT eof_w15172: two pull-downs in series on one poly; feeds the clock driver and a metal south
-8872,14644:9150,15192    route  clock source eof_w15172, metal x 8882 and poly row y 14653 | from the east (driver not found) to the hairpin's pad (8880,15172)
-8580,15148:8616,15397    route  slow inverter's output (eof_w15127), metal x 8592 south | from the load plate's pad to the pad (8592,15383) beside the next unit
+8508,14942:8854,15144    logic  clock driver inverter U | lc3_w9947 = NOT eof_w15127: drives the left-centre ripple counter's clock and four gates of the top-centre west column; its input comes from the unit below (not drawn)
