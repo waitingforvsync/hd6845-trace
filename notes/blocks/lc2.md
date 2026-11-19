@@ -736,3 +736,12 @@ with no field or green rim, not passing on ("buried contact is likely; uncertain
    south edge). Confirmed (`tl5_tracks.py h 8432 5290 5352`: no gap). Fixed: redrawn at y 8432.
 
 Round 8: one finding that changes a connection, fixed (a fix check follows).
+
+Round 9 (fix check of round 8's fixes, 2026-11-18 19:26 -0600, a fresh agent on claude-fable-5-2, against commit 98f72a2, at commit
+499c804; images in `cache/scratch/lc2/review-9/`). Checked: the row y 8941-8958 (one poly, joined to the pad's contact
+hole with no line between; salmon under the three metals and orange between two edges in the three gaps; no tap
+where the metals x 5258, 5300, 5342 cross it; green field at x 5406-5416 between the pad and `lc1_w7170`'s row; no
+other poly from the pad: pink field south of it; open poly on west of x 5240, as declared); the step at y 8432 (metal
+bright y 8426-8438, clear of the line above and the pad ring below); both `sameconn.py` runs (connections identical).
+
+Round 9: no findings.
