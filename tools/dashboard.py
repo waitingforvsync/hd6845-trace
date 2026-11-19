@@ -41,7 +41,10 @@ STALE_HOURS = 24
 
 
 def git(*args):
-    r = subprocess.run(['git', *args], cwd=ROOT, capture_output=True, text=True)
+    # TZ=UTC with the *-local date formats: a plain %ad shows each author's own offset, so a
+    # timeline of several people's commits would mix timezones.
+    r = subprocess.run(['git', *args], cwd=ROOT, capture_output=True, text=True,
+                       env=dict(os.environ, TZ='UTC'))
     return r.stdout if r.returncode == 0 else ''
 
 
@@ -168,7 +171,7 @@ def read_claims():
         br = field(t, 'Branch') or name
         last = ''
         for ref in ('origin/' + br, br):
-            last = git('log', '-1', '--format=%ad', '--date=format:%Y-%m-%d %H:%M %z', ref).strip()
+            last = git('log', '-1', '--format=%ad', '--date=format-local:%Y-%m-%d %H:%M %z', ref).strip()
             if last:
                 break
         st = field(t, 'Status') or 'tracing'
@@ -284,7 +287,7 @@ def report_figures():
 
 def progress_series():
     pts = []
-    for line in git('log', '--format=%H\t%ad', '--date=format:%Y-%m-%d %H:%M', '--', 'out/report.txt').splitlines():
+    for line in git('log', '--format=%H\t%ad', '--date=format-local:%Y-%m-%dT%H:%MZ', '--', 'out/report.txt').splitlines():
         h, d = line.split('\t')
         m = re.search(r'(\d+) nets, (\d+) transistors', git('show', '%s:out/report.txt' % h)[:300])
         if m:
@@ -321,14 +324,36 @@ def read_commits():
     return out
 
 
+def tm(utc):
+    """'YYYY-MM-DD HH:MM' (UTC) -> a <time> the page script shows in the viewer's own timezone."""
+    return '<time class="lt" datetime="%sZ">%s UTC</time>' % (utc.replace(' ', 'T'), E(utc))
+
+
+STAMP = re.compile(r'(\d{4}-\d\d-\d\d \d\d:\d\d) ([+-]\d{4})')
+
+
+def localize(h):
+    """In HTML, every 'YYYY-MM-DD HH:MM +ZZZZ' (the claim files' stamps, in their writer's own zone)
+    becomes a <time> that the page script shows in the viewer's zone."""
+    def one(m):
+        d = datetime.datetime.strptime(m.group(0), '%Y-%m-%d %H:%M %z').astimezone(datetime.timezone.utc)
+        return tm(d.strftime('%Y-%m-%d %H:%M'))
+    return STAMP.sub(one, h)
+
+
+def utc_minute(iso):
+    """An ISO date with its author's offset -> 'YYYY-MM-DD HH:MM' in UTC, for display."""
+    return datetime.datetime.fromisoformat(iso).astimezone(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M')
+
+
 def package_history(prefixes, commits):
     pats = [re.compile(r'^(trace/%s(_[^/]*)?\.txt|notes/blocks/%s\.md|floorplan\.d/%s\.txt)$' % (p, p, p)) for p in prefixes]
     rows = [c for c in commits if any(any(pt.match(f) for pt in pats) for f in c['files'])]
     if not rows:
         return {}
     who = collections.Counter(c['author'] for c in rows)
-    return dict(who=who.most_common(), first=rows[-1]['date'][:10], last=rows[0]['date'][:10], commits=len(rows),
-                recent=[(c['date'][:16].replace('T', ' '), c['author'], c['subject']) for c in rows[:12]])
+    return dict(who=who.most_common(), first=utc_minute(rows[-1]['date'])[:10], last=utc_minute(rows[0]['date'])[:10], commits=len(rows),
+                recent=[(utc_minute(c['date']), c['author'], c['subject']) for c in rows[:12]])
 
 
 MODEL_NAME = {'claude-fable-5-2': 'Fable 5.2', 'claude-opus-5-5': 'Opus 5.5', 'claude-sonnet-5-5': 'Sonnet 5.5',
@@ -528,6 +553,8 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
 """
 
 THEME_JS = """
+document.querySelectorAll('time.lt').forEach(t=>{const d=new Date(t.dateTime);if(!isNaN(d)){t.title=t.textContent;
+ t.textContent=d.toLocaleString([],{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})}});
 function setTheme(t){if(t==='auto')delete document.documentElement.dataset.theme;else document.documentElement.dataset.theme=t;
  document.querySelectorAll('.theme button').forEach(x=>x.classList.toggle('on',x.dataset.theme===t));try{localStorage.setItem('theme',t)}catch(e){}}
 document.querySelectorAll('.theme button').forEach(b=>b.onclick=()=>setTheme(b.dataset.theme));
@@ -559,17 +586,17 @@ const qbox=document.getElementById('showq');function setQ(on){document.getElemen
 qbox.onchange=()=>setQ(qbox.checked);
 try{const l=sessionStorage.getItem('layer');if(l)setLayer(l);const q=sessionStorage.getItem('q');if(q!==null)setQ(q==='1')}catch(e){}
 const P=JSON.parse(document.getElementById('series').textContent),svg=document.getElementById('prog'),tip=document.getElementById('tip');
-if(P.length){const W=760,H=260,L=56,R=16,T=12,B=28,t0=Date.parse(P[0][0].replace(' ','T')),t1=Date.parse(P[P.length-1][0].replace(' ','T'))||t0+1,
+if(P.length){const W=760,H=260,L=56,R=16,T=12,B=28,t0=Date.parse(P[0][0]),t1=Date.parse(P[P.length-1][0])||t0+1,
  ymax=Math.ceil(Math.max(...P.map(p=>p[1]))/500)*500||500,X=t=>L+(W-L-R)*((t-t0)/Math.max(1,t1-t0)),Y=v=>H-B-(H-T-B)*v/ymax;
  let g='';for(let v=0;v<=ymax;v+=ymax/5){g+=`<line class="gridl" x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}"/><text class="axis" x="${L-8}" y="${Y(v)+4}" text-anchor="end">${v.toLocaleString()}</text>`}
- const days=[...new Set(P.map(p=>p[0].slice(0,10)))];days.forEach(d=>{const x=X(Date.parse(d+'T00:00'));if(x>=L&&x<=W-R)g+=`<text class="axis" x="${x}" y="${H-8}" text-anchor="middle">${d.slice(5)}</text>`});
- const pts=P.map(p=>[X(Date.parse(p[0].replace(' ','T'))),Y(p[1])]);
+ for(let d=new Date(t0);;d.setDate(d.getDate()+1)){d.setHours(0,0,0,0);if(+d>t1)break;const x=X(+d);if(x>=L&&x<=W-R)g+=`<text class="axis" x="${x}" y="${H-8}" text-anchor="middle">${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}</text>`}
+ const pts=P.map(p=>[X(Date.parse(p[0])),Y(p[1])]);
  g+=`<path class="line" d="M${pts.map(p=>p.join(',')).join('L')}"/><line class="xh" id="xh" y1="${T}" y2="${H-B}" style="display:none"/><circle class="dot" id="dot" r="4" style="display:none"/>`;
  g+=`<rect x="${L}" y="${T}" width="${W-L-R}" height="${H-T-B}" fill="transparent" id="hit"/>`;svg.innerHTML=g;
  const hit=document.getElementById('hit'),xh=document.getElementById('xh'),dot=document.getElementById('dot');
  hit.onmousemove=e=>{const r=svg.getBoundingClientRect(),mx=(e.clientX-r.left)*W/r.width;let i=0,b=1e9;pts.forEach((p,j)=>{const d=Math.abs(p[0]-mx);if(d<b){b=d;i=j}});
   xh.setAttribute('x1',pts[i][0]);xh.setAttribute('x2',pts[i][0]);xh.style.display='';dot.setAttribute('cx',pts[i][0]);dot.setAttribute('cy',pts[i][1]);dot.style.display='';
-  tip.innerHTML=`<b>${P[i][1].toLocaleString()}</b> transistors<br><span class="mut">${P[i][0]}</span>`;tip.style.display='block';
+  tip.innerHTML=`<b>${P[i][1].toLocaleString()}</b> transistors<br><span class="mut">${new Date(P[i][0]).toLocaleString([],{dateStyle:'short',timeStyle:'short'})}</span>`;tip.style.display='block';
   tip.style.left=Math.min(r.width-150,pts[i][0]*r.width/W+12)+'px';tip.style.top=(pts[i][1]*r.height/H-50)+'px'};
  hit.onmouseleave=()=>{tip.style.display='none';xh.style.display='none';dot.style.display='none'}}
 """
@@ -579,7 +606,7 @@ def shell(title, body, version, root, extra_js=''):
     return """<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>%s</title><style>%s</style></head><body><div class="viz-root"><main>%s</main></div>
 <script>const VERSION=%s,VROOT=%s,STALE_MS=%d;%s%s</script></body></html>""" % (
-        E(title), CSS, body, json.dumps(version), json.dumps(root), STALE_HOURS * 3600 * 1000, THEME_JS, extra_js)
+        E(title), CSS, localize(body), json.dumps(version), json.dumps(root), STALE_HOURS * 3600 * 1000, THEME_JS, extra_js)
 
 
 THEME_BTNS = ('<div class="seg theme" role="group" aria-label="Colour theme"><button data-theme="auto" class="on">Auto</button>'
@@ -597,7 +624,7 @@ def whos(h):
 
 
 def claim_item(c, link):
-    return ('<div class="item" data-activity="%d"><div class="h"><a href="%s"><code>%s</code></a> <b>%s</b> %s <span class="stale">stale</span></div>'
+    return localize('<div class="item" data-activity="%d"><div class="h"><a href="%s"><code>%s</code></a> <b>%s</b> %s <span class="stale">stale</span></div>'
             '<div class="dim">%s</div><div class="mut">claimed %s; last commit %s</div></div>'
             % (c['activity'], link, E(c['prefix']), E(c['who']),
                tag('active', 'merged, awaiting coordinator' if c['merged'] else c['status']),
@@ -699,7 +726,7 @@ def index_page(d, state, page_of):
         for i, p in enumerate(d['xp']))
 
     contrib_commits = '<ul class="commits">%s</ul>' % ''.join(
-        '<li><span class="mut">%s</span> <b>%s</b> %s</li>' % (E(dt), E(a), E(s)) for dt, a, s in d['recent'])
+        '<li><span class="mut">%s</span> <b>%s</b> %s</li>' % (tm(dt), E(a), E(s)) for dt, a, s in d['recent'])
     handoff_html = ('<div class="tw"><table><thead><tr><th>Package</th><th>Who</th><th>Merged</th><th>Written</th><th>Claim</th>'
                     '<th></th></tr></thead><tbody>%s</tbody></table></div>' % ''.join(
                         '<tr><td><a href="p/%s.html"><code>%s</code></a></td><td>%s</td><td><a href="%s/commit/%s"><code>%s</code></a></td>'
@@ -807,7 +834,7 @@ def package_page(prefix, row, d, state, page_of):
     if links:
         facts.append('<p class="dim">%s<br>%s</p>' % (links, hist_links))
     recent = ('<h2>Recent commits</h2><ul class="commits">%s</ul>' % ''.join(
-        '<li><span class="mut">%s</span> <b>%s</b> %s</li>' % (E(dt), E(a), E(sub)) for dt, a, sub in h['recent'])) if h else ''
+        '<li><span class="mut">%s</span> <b>%s</b> %s</li>' % (tm(dt), E(a), E(sub)) for dt, a, sub in h['recent'])) if h else ''
     body = """<div class="top"><p class="crumb"><a href="../index.html">&larr; Dashboard</a></p>%s</div>
 <h1><code>%s</code></h1><p class="mut" id="live"></p>
 <div class="grid"><section>%s</section><section>%s</section></div>%s
@@ -838,8 +865,8 @@ def main():
     claims = read_claims()
     claimed = {c['prefix'] for c in claims}
     state = lambda r: 'active' if any(x in claimed for x in r['prefixes']) else r['kind']
-    log = git('log', '-30', '--first-parent', '--format=%ad\t%an\t%s', '--date=format:%Y-%m-%d %H:%M', 'HEAD')
-    head = git('log', '-1', '--format=%h, %ad', '--date=format:%Y-%m-%d %H:%M %z', 'HEAD').strip()
+    log = git('log', '-30', '--first-parent', '--format=%ad\t%an\t%s', '--date=format-local:%Y-%m-%d %H:%M', 'HEAD')
+    head = git('log', '-1', '--format=%h, %ad', '--date=format-local:%Y-%m-%d %H:%M %z', 'HEAD').strip()
     built = '%s from commit %s' % (datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC'), head)
     d = dict(claims=claims, master=master, figs=report_figures(), hist=hist, tcount=tcount, commits=commits, costs=read_costs(), handoffs=read_handoffs(),
              blocks=floor_blocks(), series=progress_series(),
