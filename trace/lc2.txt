@@ -414,3 +414,29 @@ P 5105,8062:5142,8100                       # pad
 C 5127,8080
 M 5127,8067 y8094 w=18                      # metal north into lc1
 N P 5100,8127 lc2_w8127
+
+# ====================================================================
+# The three poly rows above the west cluster (y 8205-8306, x 4580-5250): each runs from the west pad of a staircase
+# line to a pad on a metal track that comes up the west side of the cluster and turns east (wiring only).
+# Views w2.png (1.42x), w3.png (4x); tl5_tracks.py rows / h along each row (the only holes are the end pads'); survey.md.
+# row A: lc1_w7170's (lc2_w8474's) pad (5232,8214) west to a pad (4626,8213) on the track x 4466-4484
+P 4640,8205:5200,8220
+P 4610,8199:4646,8229
+C 4626,8213
+M 4475,8330 y8212 x4626 w=18                # the track: drawn from y 8330 (it runs on south down the cluster's west side)
+# row B: the fourth staircase line's pad (5190,8258) west to a pad (4583,8258) on the track x 4508-4526. A metal
+# lies along this row from x 4757 to x 5147 (not drawn): no hole, no pad on the row there
+P 4600,8248:5165,8263
+P 4568,8243:4606,8273
+C 4583,8258
+M 4517,8330 y8259 x4583 w=18
+# row C: from a pad (5234,8300), where a fifth staircase line begins (its metal goes east and south: a stub drawn),
+# west to a pad (4626,8301) on the track x 4553-4571
+P 4642,8291:5222,8306
+P 5216,8285:5250,8315
+C 5234,8300
+M 5234,8300 x5257 y8334 w=16
+P 4612,8286:4648,8315
+C 4626,8301
+M 4562,8330 y8301 x4626 w=18
+N P 4900,8298 lc2_w8298

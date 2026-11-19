@@ -10,7 +10,12 @@ lc2_w8127 = NOT lc1_w7990          FIRM
 ```
 
 Its output row runs east under `lc1_w7468`'s horizontal metal to a pad (5127,8080), whose metal goes back north
-into `lc1`'s strip (not drawn there). Full extraction: 2362 nets, 4243 transistors, 0 errors, 0 warnings.
+into `lc1`'s strip (not drawn there). Same run (2026-11-18 19:31 -0600), piece J (wiring only): **the three poly rows above the west
+cluster** (y 8205-8306). Each runs from the west pad of a staircase line to a pad on a metal track that comes up
+the west side of the cluster: `lc1_w7170` (`lc2_w8474`) goes to the track x 4466-4484, which runs down the cluster to
+about y 9794; the fourth staircase line (`lc2_w8907`) to the track x 4508-4526; a fifth line (`lc2_w8298`, begun at
+its pad (5234,8300)) to the track x 4553-4571. So the signals that go to latch B's inverter and to `lc1`'s gate 2
+come from, or go to, the west gate cluster. Full extraction: 2362 nets, 4243 transistors, 0 errors, 0 warnings.
 
 Earlier:
 
@@ -333,6 +338,22 @@ Rail 1 is drawn on to y 8160 only: `tl5_tracks.py v 4779 8060 9240 --half 12` sh
 then many bars and a 44 px stretch without metal at y 8259-8303; the rails through the west cluster are to be read
 with the cluster.
 
+## The three rows above the west cluster (run 7, piece J): traced
+
+Wiring only. Views `w2.png` (1.42x, clean over metal), `w3.png` (4x, the west pads), overlay `o12.png` (1.5x).
+
+| Row | From (east) | To (west) | Seen |
+|---|---|---|---|
+| A, y 8205-8220, `lc1_w7170` | the pad (5232,8214) in the run of `lc2_w8474`'s metal | a pad (4626,8213) on a metal that comes east along y 8203-8221 from a corner (4475,8212) of the track x 4466-4484 | `tl5_tracks.py rows row 4560 5260 5 8212` (poly all the way); `h 8212 4590 5240`: holes only at x 4627 and x 5232 (the pads); the row passes under a metal x 4668-4712 and both rails |
+| B, y 8248-8263, `lc2_w8907` | the west pad (5190,8258) of the fourth staircase line | a pad (4583,8258) on the metal y 8250-8268 from the corner (4517,8259) of the track x 4508-4526 | `rows ... 8254`; `h 8254 4560 5200`: holes only at x 4584 and x 5190. **A metal lies along this row from x 4757 to x 5147** (not drawn): no hole and no pad on the row under it (trap 13) |
+| C, y 8291-8306, `lc2_w8298` | a pad (5234,8300), where a fifth staircase line begins (metal east 15 px and south on x 5249-5265; a stub drawn) | a pad (4626,8301) on the metal y 8292-8310 from the corner (4562,8301) of the track x 4553-4571 | `rows ... 8298`; `h 8298 4600 5250`: holes only at x 4627 and x 5233 |
+
+The five pads: `textmap.py 4598 8194 4650 8232`, `4562 8238 4614 8276`, `4604 8280 4656 8318`, `5214 8278 5280 8334` (ring and
+bright centre in both chips, green hole in the clean shot at each). The three tracks are drawn from y 8330: they run
+on south down the west side of the cluster (`follow.py 4475 8400 S`: to y 9794, with eight contact candidates;
+`4517 8400 S`: to y 9360; `4562 8400 S`: to y 8520). They are inside `urch`'s `sl4` track, which turns east 11 px north
+of the first of them.
+
 ## Ports
 
 `ports.d/lc2.txt` (kept in step with this). Latch B: enable `lc2_w8169` north on metal x 5560 at y 8067 (into
@@ -357,10 +378,10 @@ Run 3 (latch D's lower unit and the bus field):
 | `lc2_w8474` | M | 6332-6350, 8067 | ? | the metal of the pad (6341,8214) |
 | `lc2_w8474` | P | 5400, 8509-8526 | ? | drawn end (run 4): the poly from the pad (5428,8516) runs on west |
 | `lc1_w7170` (`lc2_w8474`) | M | 5030-5046, 8067 | ? | run 6: the metal of the pads (5232,8214), (5428,8516), (5428,8648), (5429,8994), north as `lc1`'s T1 (meets `lc1`'s port) |
-| `lc2_w8474` | P | 5196, 8205-8220 | ? | run 6: drawn end: the poly of the pad (5232,8214) runs on west |
 | `lc2_w8907` (`lc2_w8450`) | M | 5378-5394, 9233 | ? | round 7: the staircase's fourth line on south into `lc3` (to y 9707 by the follower) |
-| `lc2_w8907` | P | 5160, 8250-8268 | ? | round 7: drawn end: the poly of the pad (5190,8258) runs on west |
 | `lc2_w8907` | P | 5240, 8941-8958 | ? | round 8: drawn end: a second poly of the pad (5386,8951) runs on west into the gate cluster at x 5150-5240 |
+| `lc1_w7170`, `lc2_w8907`, `lc2_w8298` | M | 4466-4484, 4508-4526, 4553-4571; y 8330 | ? | run 7: drawn ends: the three tracks of rows A, B, C run on south down the cluster's west side |
+| `lc2_w8298` | M | 5249-5265, 8334 | ? | run 7: drawn end: the fifth staircase line runs on south (`follow.py 5260 8350 S`: to y 9056) |
 | `lc2_w8127` | M | 5118-5136, 8067 | out | run 7: gate 9's output, north into `lc1` (no port of `lc1` there) |
 | `lc1_w7990` | P | 5072-5092, 8067 | in | run 7: gate 9's input (meets `lc1`'s port) |
 | `vcc` | M | 4755-4803, 8067 and 8160 | - | run 7: rail 1 from `lc1`, drawn to y 8160 (it runs on) |
@@ -461,7 +482,8 @@ Run 5:
 - The ringed box (5813-5831, 9156-9178) in the output's poly block and what lies under it (Ambiguity 8); the box on
   node D's west lobe (Ambiguity 9); the area (5785-5830, 9200-9265) below the block is field (round 6: red minus green 0-2 in the chip-2 stripped shot).
 - The output poly's leg x 5924-5940 runs on south in `lc3`'s strip to about y 9540 and turns east along y 9525-9545 (round 6; not drawn by `lc3`).
-- Rows 2, 3 and 5 west of x 5545. The other lines of the staircase (four are drawn): one from a pad (5235,8298) south on x 5260; pads (5257,8425), (5295,8472), (5341,8539), (5341,8562), (5341,9038).
+- Rows 2, 3 and 5 west of x 5545. The fifth staircase line south of (5257,8334) (pads on it near (5257,8425)?); pads (5295,8472), (5341,8539), (5341,8562), (5341,9038).
+- Between and over the three rows above the cluster: horizontal metals at about y 8215-8235 (x 4760-4950), y 8245-8265 (x 4757-5147, along row B) and y 8275-8290 (x 4700-5080), and a wide vertical metal x 4668-4712: not drawn (the cluster's supplies, probably).
 - (Done, run 7: gate 9 of `lc1`'s column.) Its output's metal north of y 8067; rail 1 south of y 8160 and rail 2 south of y 8067.
 - Geometry from round 7, not changed: latch B's VSS box's diffusion runs on north of y 8062 (tan to y 8050 at x 5682); a green patch (5858-5872, 8228-8236) under the VCC rail between two VCC boxes, no ring.
 - Geometry noted by review round 5 and not re-measured: the upper load's channel may be y 8889-8935 (drawn
