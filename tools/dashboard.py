@@ -287,7 +287,7 @@ def report_figures():
 
 def progress_series():
     pts = []
-    for line in git('log', '--format=%H\t%ad', '--date=format-local:%Y-%m-%d %H:%M', '--', 'out/report.txt').splitlines():
+    for line in git('log', '--format=%H\t%ad', '--date=format-local:%Y-%m-%dT%H:%MZ', '--', 'out/report.txt').splitlines():
         h, d = line.split('\t')
         m = re.search(r'(\d+) nets, (\d+) transistors', git('show', '%s:out/report.txt' % h)[:300])
         if m:
@@ -322,6 +322,11 @@ def read_commits():
         elif line.strip() and cur:
             cur['files'].append(line.strip())
     return out
+
+
+def tm(utc):
+    """'YYYY-MM-DD HH:MM' (UTC) -> a <time> the page script shows in the viewer's own timezone."""
+    return '<time class="lt" datetime="%sZ">%s UTC</time>' % (utc.replace(' ', 'T'), E(utc))
 
 
 def utc_minute(iso):
@@ -536,6 +541,8 @@ td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
 """
 
 THEME_JS = """
+document.querySelectorAll('time.lt').forEach(t=>{const d=new Date(t.dateTime);if(!isNaN(d)){t.title=t.textContent;
+ t.textContent=d.toLocaleString([],{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})}});
 function setTheme(t){if(t==='auto')delete document.documentElement.dataset.theme;else document.documentElement.dataset.theme=t;
  document.querySelectorAll('.theme button').forEach(x=>x.classList.toggle('on',x.dataset.theme===t));try{localStorage.setItem('theme',t)}catch(e){}}
 document.querySelectorAll('.theme button').forEach(b=>b.onclick=()=>setTheme(b.dataset.theme));
@@ -567,17 +574,17 @@ const qbox=document.getElementById('showq');function setQ(on){document.getElemen
 qbox.onchange=()=>setQ(qbox.checked);
 try{const l=sessionStorage.getItem('layer');if(l)setLayer(l);const q=sessionStorage.getItem('q');if(q!==null)setQ(q==='1')}catch(e){}
 const P=JSON.parse(document.getElementById('series').textContent),svg=document.getElementById('prog'),tip=document.getElementById('tip');
-if(P.length){const W=760,H=260,L=56,R=16,T=12,B=28,t0=Date.parse(P[0][0].replace(' ','T')),t1=Date.parse(P[P.length-1][0].replace(' ','T'))||t0+1,
+if(P.length){const W=760,H=260,L=56,R=16,T=12,B=28,t0=Date.parse(P[0][0]),t1=Date.parse(P[P.length-1][0])||t0+1,
  ymax=Math.ceil(Math.max(...P.map(p=>p[1]))/500)*500||500,X=t=>L+(W-L-R)*((t-t0)/Math.max(1,t1-t0)),Y=v=>H-B-(H-T-B)*v/ymax;
  let g='';for(let v=0;v<=ymax;v+=ymax/5){g+=`<line class="gridl" x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}"/><text class="axis" x="${L-8}" y="${Y(v)+4}" text-anchor="end">${v.toLocaleString()}</text>`}
- const days=[...new Set(P.map(p=>p[0].slice(0,10)))];days.forEach(d=>{const x=X(Date.parse(d+'T00:00'));if(x>=L&&x<=W-R)g+=`<text class="axis" x="${x}" y="${H-8}" text-anchor="middle">${d.slice(5)}</text>`});
- const pts=P.map(p=>[X(Date.parse(p[0].replace(' ','T'))),Y(p[1])]);
+ for(let d=new Date(t0);;d.setDate(d.getDate()+1)){d.setHours(0,0,0,0);if(+d>t1)break;const x=X(+d);if(x>=L&&x<=W-R)g+=`<text class="axis" x="${x}" y="${H-8}" text-anchor="middle">${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}</text>`}
+ const pts=P.map(p=>[X(Date.parse(p[0])),Y(p[1])]);
  g+=`<path class="line" d="M${pts.map(p=>p.join(',')).join('L')}"/><line class="xh" id="xh" y1="${T}" y2="${H-B}" style="display:none"/><circle class="dot" id="dot" r="4" style="display:none"/>`;
  g+=`<rect x="${L}" y="${T}" width="${W-L-R}" height="${H-T-B}" fill="transparent" id="hit"/>`;svg.innerHTML=g;
  const hit=document.getElementById('hit'),xh=document.getElementById('xh'),dot=document.getElementById('dot');
  hit.onmousemove=e=>{const r=svg.getBoundingClientRect(),mx=(e.clientX-r.left)*W/r.width;let i=0,b=1e9;pts.forEach((p,j)=>{const d=Math.abs(p[0]-mx);if(d<b){b=d;i=j}});
   xh.setAttribute('x1',pts[i][0]);xh.setAttribute('x2',pts[i][0]);xh.style.display='';dot.setAttribute('cx',pts[i][0]);dot.setAttribute('cy',pts[i][1]);dot.style.display='';
-  tip.innerHTML=`<b>${P[i][1].toLocaleString()}</b> transistors<br><span class="mut">${P[i][0]}</span>`;tip.style.display='block';
+  tip.innerHTML=`<b>${P[i][1].toLocaleString()}</b> transistors<br><span class="mut">${new Date(P[i][0]).toLocaleString([],{dateStyle:'short',timeStyle:'short'})}</span>`;tip.style.display='block';
   tip.style.left=Math.min(r.width-150,pts[i][0]*r.width/W+12)+'px';tip.style.top=(pts[i][1]*r.height/H-50)+'px'};
  hit.onmouseleave=()=>{tip.style.display='none';xh.style.display='none';dot.style.display='none'}}
 """
@@ -707,7 +714,7 @@ def index_page(d, state, page_of):
         for i, p in enumerate(d['xp']))
 
     contrib_commits = '<ul class="commits">%s</ul>' % ''.join(
-        '<li><span class="mut">%s</span> <b>%s</b> %s</li>' % (E(dt), E(a), E(s)) for dt, a, s in d['recent'])
+        '<li><span class="mut">%s</span> <b>%s</b> %s</li>' % (tm(dt), E(a), E(s)) for dt, a, s in d['recent'])
     handoff_html = ('<div class="tw"><table><thead><tr><th>Package</th><th>Who</th><th>Merged</th><th>Written</th><th>Claim</th>'
                     '<th></th></tr></thead><tbody>%s</tbody></table></div>' % ''.join(
                         '<tr><td><a href="p/%s.html"><code>%s</code></a></td><td>%s</td><td><a href="%s/commit/%s"><code>%s</code></a></td>'
@@ -763,7 +770,7 @@ def index_page(d, state, page_of):
 %s%s<p class="mut">Click a package for its page; hover any region or marker for its name. Package regions overlap where wiring crosses blocks.</p></section>
 <section><h2>Transistors traced</h2><div class="chart"><svg id="prog" viewBox="0 0 760 260" role="img" aria-label="Transistors traced over time"></svg><div class="tip" id="tip"></div></div>
 <p class="mut">From each version of <code>out/report.txt</code> on main.</p>
-<h2>Recent commits on main (UTC)</h2>%s</section></div>
+<h2>Recent commits on main</h2>%s</section></div>
 <h2>Packages</h2>%s
 <h3 style="margin-top:20px">Handoffs awaiting the coordinator (%d)</h3>%s
 <h2>Open questions</h2><p class="dim">Ambiguities (A) from <code>notes/ambiguities.md</code> and re-read items (R) from the master list, placed on the die where their notes give a place.</p>%s
@@ -814,8 +821,8 @@ def package_page(prefix, row, d, state, page_of):
                                              else '<span class="mut">no cost report covers it</span>'))
     if links:
         facts.append('<p class="dim">%s<br>%s</p>' % (links, hist_links))
-    recent = ('<h2>Recent commits (UTC)</h2><ul class="commits">%s</ul>' % ''.join(
-        '<li><span class="mut">%s</span> <b>%s</b> %s</li>' % (E(dt), E(a), E(sub)) for dt, a, sub in h['recent'])) if h else ''
+    recent = ('<h2>Recent commits</h2><ul class="commits">%s</ul>' % ''.join(
+        '<li><span class="mut">%s</span> <b>%s</b> %s</li>' % (tm(dt), E(a), E(sub)) for dt, a, sub in h['recent'])) if h else ''
     body = """<div class="top"><p class="crumb"><a href="../index.html">&larr; Dashboard</a></p>%s</div>
 <h1><code>%s</code></h1><p class="mut" id="live"></p>
 <div class="grid"><section>%s</section><section>%s</section></div>%s
