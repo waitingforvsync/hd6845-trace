@@ -799,3 +799,112 @@ C 6187,7257
 # D
 P 6190,7257 x5494 5149,6912 y6890 w=18
 N P 5800,7257 rst_a
+# ============================================================================================
+# Piece rl (run 11, 2026-11-19): res_b and lpstb_b on from piece x1's ends (the polys below their
+# pads (5190,6845), (5237,6803)) through lc1's diagonal poly bundle and the crossing field to lc2's
+# second and third through lines. Wiring only, no transistor, no uncertain item:
+#     res_b   IS lc2_x6342 (lc2's through line 2, M 6450,8692 ...; lc3 and busl take it to (6366,15000))
+#     lpstb_b IS lc2_x6387 (lc2's through line 3, M 6450,8756 ...; to (6408,15000))
+# Each line is built like rst_a's (piece isrc5), one lane north of it:
+#   poly diagonal (45 degrees, under V2..V5) -> poly row east through the crossing field -> pad with a
+#   contact -> metal east -> a track south (760-930 px) -> an L one track west -> pad with a contact ->
+#   poly column south (under horizontal metals) -> pad with a contact -> metal south, then a 45-degree
+#   diagonal south-west onto lc2's metal end at x 6450.
+# Evidence (images in cache/scratch/eof/):
+#  - the lanes: tools/eof_rows.py diag 5196 6894 5518 7216 --step 14 --reach 56 (res_b: a run at offset
+#    0 / -5 at every cut, neighbours 43-51 px either side) and diag 5238 6870 5540 7172 --step 14
+#    (lpstb_b); col cuts x 5450-5600 (the diagonals at x - y = -1698 and -1632, the rows at y 7214,
+#    7170); overlay k_o1.png (2.4x, clean shot);
+#  - the rows: eof_rows.py diag 5522 7215 6140 7213 --step 20 / diag 5545 7171 6180 7169 --step 20 (a run
+#    at every cut but six, which are poly in the open: px.py row, 141-170/96-126/39-60 in the chip-2 metal
+#    shot); no pad on either row in the field: tl5_tracks.py h 7214 5525 6128 / h 7170 5545 6170 (clean
+#    shot dips of 6-10 px only, the gaps between the metals); overlay k_o2.png (1.8x, metal and clean);
+#  - the pads (6146,7214), (6188,7170), (6558,8125), (6602,8320), (6556,8493), (6602,8536):
+#    eof_cchk.py (bright centre 177-222 in a dark ring in both chips, clean-shot hole -36 .. 12);
+#    k_pads3.png (3.4x, both metal shots and the clean shot), k_cols.png (2.9x, four shots);
+#  - the metals: tl5_tracks.py h 7215 6170 6595, v 6600 7228 8056, h 8068 6566 6594, v 6558 8076 8112
+#    (res_b) and h 7174 6212 6636, v 6645 7186 8098, h 8110 6608 6634, v 6601 8124 8300 (lpstb_b): bars of
+#    8-17 px at the rows they cross, no break; follow.py --gap 16; eof_mrun.py for the centre lines and the
+#    two diagonals (row cuts y 8510-8750 every 20 px: x + y = 15142 and 15206); overlays k_o3.png (2.2x,
+#    both metal shots), k_o4.png (1.75x, metal and clean);
+#  - the columns: tl5_tracks.py v 6558 8140 8480 and v 6602 8335 8520: no clean-shot hole; inh_ck's link F
+#    (x 6552-6565, y 8166-8367) LIES ON res_b's column for 200 px without a contact (notes, Ambiguity 5),
+#    and both columns pass under the horizontal metals y 8362-8374 (link F), 8405-8417, 8448-8460;
+#    textmap.py 6528 8438 6630 8524 3 --acid: 18 px of open poly between the metal y 8448-8460 and the
+#    ring of the pad (6556,8493) in both chips (the follower jumps it in chip 2: trap 30).
+#  - (6645,7822), where lpstb_b's track crosses the poly row y 7812-7830 (eofw's lc1_w7170): the clean
+#    shot is dull under it (red minus green 0-30), no ring, no pad: no contact (notes, Ambiguity 37).
+@alias res_b lc2_x6342
+@alias lpstb_b lc2_x6387
+# res_b: diagonal (centre x = y - 1698), row y 7214, pad, metal y 7216 / track x 6602 / L at y 8065 /
+# x 6558, pad (6558,8125), poly column x 6549-6567, pad (6556,8493), metal south and diagonal
+P 5200,6897 5516,7214 x6148 w=18
+P 6130,7195:6168,7232
+C 6146,7214
+M 6146,7216 x6602 y8065 x6558 y8125 w=13
+P 6541,8108:6578,8146
+C 6558,8125
+P 6558,8127 y8493 w=18
+P 6538,8474:6576,8512
+C 6556,8493
+M 6557,8493 y8585 6444,8698 w=13
+# lpstb_b: diagonal (centre x = y - 1632), row y 7170, pad, metal y 7173 / track x 6645 / L at y 8108 /
+# x 6601, pad (6602,8320), poly column x 6593-6611, pad (6602,8536), metal south and diagonal
+P 5240,6866 y6872 5538,7170 x6190 w=18
+P 6172,7151:6210,7188
+C 6188,7170
+M 6188,7173 x6645 y8108 x6601 y8320 w=13
+P 6584,8302:6622,8340
+C 6602,8320
+P 6602,8320 y8536 w=18
+P 6584,8517:6622,8555
+C 6602,8536
+M 6601,8536 y8605 6444,8762 w=13
+# ============================================================================================
+# Piece w5936 (run 11, 2026-11-19): tl5_w5936 (= tl3_w3982, the net that holds rcs_cond low) on from
+# piece x1's end (5063,6880). Wiring only, no transistor, no uncertain item:
+#     tl3_w3982 IS lc2_w8906, the data of the left-centre latch C (lc2's metal M 6471,8067 y8142),
+#     and runs on east to a buried-contact box at (7490-7520, 8410-8442) at the foot of the gate column
+#     west of the central datapath (undrawn: cdp3 (continue)): believed its driver's output.
+# The path: poly diagonal (centre x = y - 1829; under M_a, M_b, V2..V5) -> row y 7300 -> pad with a
+#   contact (6146,7301) -> metal y 7303 east -> track x 6514 south -> a pad with a contact (6513,7889) IN
+#   THE RUN OF THE METAL (trap 32: the metal is bright again from y 7909 in both chips) -> on south to an
+#   L at y 7978, west to x 6471, south onto lc2's metal and its pad (6470,8127).
+#   From the pad (6513,7889) a poly row y 7878-7898 runs 890 px east under sixteen tracks (rst_a's x 6558,
+#   res_b's, lpstb_b's, rcs_e4's among them; no pad on any) to a pad with a contact (7401,7888); metal
+#   south on x 7402 to a pad with a contact (7401,8425); poly east y 8417-8439 to the box.
+# Evidence:
+#  - the lane: eof_rows.py diag 5063 6892 5471 7300 --step 14 (offset -1 / -5); row cuts y 6870-6950
+#    (the bend at y ~6890); diag 5475 7300 6140 7300 --step 20; overlay k_o1.png, k_o2.png;
+#  - the pads: eof_cchk.py 6148,7300 6513,7888 7400,7888 7400,8425; k_pads3.png; k_L6513.png (2.75x, four
+#    shots: the pad (6513,7889), the track on south of it, the L, and lc1_w7040's pad (6471,7930) 25 px
+#    north of the L's arm with bare ground between); textmap.py 6484 7858 6546 7926 3 --acid (ring y
+#    7867-7906 with a bright centre y 7885-7894 in both chips, metal north of 7864 and south of 7909; the
+#    chip-2 stripped shot has the hole; chip 1's clean shot shows the pad vivid red with no green hole:
+#    notes, Ambiguity 38); k_p7400a.png (3.5x, four shots), k_p7400b.png (3.6x, four shots: the pad
+#    (7401,8425), the poly and the box);
+#  - the metals: tl5_tracks.py v 6514 7310 7990 (bars 7-19 px, the pad's ring 7867-7883 / 7895-7909),
+#    eof_mrun.py row cuts y 7920-8060 (the L: x 6514 to y 7966, the arm y 7972-7984 from x 6465 to 6521,
+#    x 6471 from y 7984) and col 6471 7880 8140 (no metal y 7938-7970: lc1_w7040's pad is apart);
+#    tl5_tracks.py v 7402 7905 8405 (four bars of 8-10 px, no break, no hole; the follower's candidate
+#    (7403,8066) is field under whole metal: textmap.py 7380 7990 7425 8140 3); overlay k_o3.png;
+#  - the row y 7888: eof_rows.py diag 6540 7888 7560 7888 --step 30 (a run to x 7410); tl5_tracks.py h
+#    7888 6535 7380: one clean-shot hole, 6558(32,-3), where rst_a's track crosses (notes, Ambiguity 33:
+#    no ring, no pad: no contact; the row's colour drifts red / olive / brown from x 6500 to 6840 in the
+#    clean shot and is plain in the other three); overlays k_o5a.png, k_o5b.png (2.7x, metal and clean).
+@alias tl3_w3982 lc2_w8906
+@alias tl3_w3982 tl5_w5936                   # tl3's own alias, repeated so that this file extracts by itself
+P 5063,6876 y6892 5471,7300 x6148 w=18
+P 6130,7282:6168,7320
+C 6146,7301
+M 6146,7303 x6514 y7978 x6471 y8072 w=13
+P 6494,7868:6534,7908                       # the pad in the track's run
+C 6513,7889
+P 6513,7888 x7400 w=20                      # the pad's poly row east
+P 7382,7870:7420,7908
+C 7401,7888
+M 7402,7888 y8425 w=13
+P 7382,8406:7420,8444
+C 7401,8425
+P 7400,8428 x7492 w=22                      # to the box's west edge (the box and what it joins: Not done)
+N M 6514,7600 tl3_w3982
