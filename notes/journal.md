@@ -1776,3 +1776,21 @@ firmly on 2026-11-17.
 - `larr`'s middle and right columns and carry gaps;
 - `tla`'s top lines and the diagonal fan, D7's protection;
 - the comb cells by LPSTB/RES, the small cell by the die marking.
+
+## 2026-11-19 11:17  Floor plan: the logic west of the large cells
+
+The user saw untraced logic left of the row A cells with no block on the floor plan.
+
+**New provisional blocks in `floorplan.txt`**, from views of the clean shot:
+- a gate column x 7460-7800, y 7580-8440: about six units with loads; its top is the gate group at
+  the end of `inh_ck`'s tap row, `eof` (c);
+- gates below it at y 8620-8800;
+- the cluster x 7850-8300, y 8260-8800 ("the logic beside row A" of `cdp3`'s notes).
+
+**Master list.** The `cdp3` (continue) row now covers them: region 7460-10850 x 7580-8800.
+
+**Labels.** `cdp2`'s "row of large cells" and `cdp3`'s "row A cells" are the same six cells cut by
+the two packages' boundary. They are now labelled "six large cells, upper part (cdp2's row D)" and
+"... lower part (cdp3's row A)".
+
+`out/` rebuilt.
