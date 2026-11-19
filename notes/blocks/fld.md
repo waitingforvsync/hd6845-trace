@@ -235,3 +235,7 @@ at y 6042-6096. `fld`'s VCC rail is joined by metal to `tcw`'s, its VSS rail to 
 ## Corrections (coordinator, from the handoffs of 2026-11-19)
 
 - `inh_ck` is `inh_ck` (`eof` run 2, firm).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- The signal on track A / line X / the first through line of the left-centre strips, which these notes call a clock, a strobe "once per scan line" or leave without a source, **is the reset**: `rst_a`, the buffered copy of `rst` = NOR(`lpstb_b`, `res_b`) made by `lc1`'s gate 5 (`eof` run 10, piece `isrc5`, firm). `inh_ck`, `inh_rc` and `inh_lat` are further buffered copies of it: high while the RES and LPSTB pins are both low, and only then. The belief "a strobe once per scan line" is withdrawn.

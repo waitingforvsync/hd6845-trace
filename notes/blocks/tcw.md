@@ -552,3 +552,8 @@ this block's to follow.
 
 - `inh_ck` is `inh_ck` (`eof` run 2, firm): the output of the lone inverter of the input buffer row.
 - `c4l_gab` is also the 4-bit counter's pass-gate line `c4l_gab` (`tl3` run 11).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- The signal on track A / line X / the first through line of the left-centre strips, which these notes call a clock, a strobe "once per scan line" or leave without a source, **is the reset**: `rst_a`, the buffered copy of `rst` = NOR(`lpstb_b`, `res_b`) made by `lc1`'s gate 5 (`eof` run 10, piece `isrc5`, firm). `inh_ck`, `inh_rc` and `inh_lat` are further buffered copies of it: high while the RES and LPSTB pins are both low, and only then. The belief "a strobe once per scan line" is withdrawn.
+- `tcw_m6404` ("a common enable or clock") is the clock net of the left-centre ripple counter (`eof` run 13, piece `ck5`); its driver is not in this block's drawn part nor in the left-centre strips. South of y 2500 between x 6400 and 6750 the pad (6413,2617) with its poly east, `tl6_p6143`'s poly along y 2530 and the metals y 2575-2620 are undrawn (`tlb` run 1).

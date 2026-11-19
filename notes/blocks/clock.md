@@ -220,3 +220,7 @@ bottom bus field: poly links under vertical metals at x 9740-9840, 8440-8560 and
 7470-7510, ending at a contact at 6800,18420. A poly line runs up from there to a
 contact at 6800,17990 at the foot of the innermost vertical line (x about 6790) of
 the bundle that climbs the left bus field. Seen at 1x; not in the trace.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- The signal on track A / line X / the first through line of the left-centre strips, which these notes call a clock, a strobe "once per scan line" or leave without a source, **is the reset**: `rst_a`, the buffered copy of `rst` = NOR(`lpstb_b`, `res_b`) made by `lc1`'s gate 5 (`eof` run 10, piece `isrc5`, firm). `inh_ck`, `inh_rc` and `inh_lat` are further buffered copies of it: high while the RES and LPSTB pins are both low, and only then. The belief "a strobe once per scan line" is withdrawn. (`inh_ck`'s source was open here.)

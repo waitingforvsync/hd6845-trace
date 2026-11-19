@@ -562,3 +562,7 @@ Each is in the named block's notes in full; the trace fixes are on main.
 
 - `rcs_thin_e`'s south end: its row y 6327 ends on the pad (3973,6329), whose metal goes south to `ur`'s
   pad (3968,6410) and a poly east along y 6402-6422 (`tl3` run 11; not `sl_l3`).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- `tl3_w3982`'s driver is `eof`'s inverter U4 at (7575,8386) (run 12). For the reader of `rcs_e4`'s line through the nest at y 7888-8275: the tracks west of it are named (x 6645 `lpstb_b`, 6602 `res_b`, 6558 `rst_a`, 6514 `tl3_w3982`; `eof` runs 10-11).

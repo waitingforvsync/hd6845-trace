@@ -1440,3 +1440,8 @@ Round 18: no findings that change a connection.
   the refresh of 2026-11-19): from `lc3`'s south edge it runs down the left bus field (`busl`, piece
   `lc9`) to the row y 14914 and `bc1`'s track x 7969. In the bottom-centre logic and `bd1` it only feeds
   gates, so its driver is at or beyond this block's east edge (6450,8630).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- Latch C's data `lc2_w8906` is `tl3_w3982` (`eof` run 11, piece `w5936`: the metal x 6471 runs on north to an L at y 7978 and the track x 6514), and that is latch D's lower node inverted three times (`eof` run 12). The second and third through lines are the buffered pins RES and LPSTB (`res_b`, `lpstb_b`; `eof` run 11, piece `rl`). The first is `rst_a` (run 10).
+- The fourth through line (the ripple counter's clock, "enters at the east edge at y 9165") comes from `tcw_m6404` (`eof` run 13, piece `ck5`). The reset copy `rst_c`'s diagonal poly out of the strip at (6450,8923) ends on a pad (6469,9209) whose metal turns west at y 9452 onto `lc3`'s fifth corner-bundle line: that line is `rst_c` (piece `rc`).

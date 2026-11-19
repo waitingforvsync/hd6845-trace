@@ -1280,3 +1280,7 @@ Round 2: no findings.
   to a corner (6843,6870), east along y 6870, to the pad (7272,6912) of the output of `eof`'s gate
   `g7700`. **`tc2_r5589` is driven by that gate**: `tc2_r5589` = NOT(`lc1_w7170` AND (`inh_ck` OR
   `tc2_sr_g`)). Its loads lie east of the pad (8248,5262).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- `tc2_m6447` ("neither end is followed"): followed south from y 6400 by `eof` (run 13, piece `ck5`: a pad (6450,7127), the track x 6688, pads (6645,8276), (6645,8580)) to the clock of the left-centre ripple counter; the net's canonical name is `lc3_w9947`.

@@ -1026,3 +1026,8 @@ Round 1: no findings.
 - `sl_eq_r5_n` is NOT `sl_eq_r5` (`sl_eq_r5_n`), driven from the east by `eof`'s inverter in `cdp1`'s
   slice-0 position, and leaves north into the band `tlb`.
 - `inh_ck` (and so `tl1_w3594`, marked) is `inh_ck` (`eof` run 2).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- The signal on track A / line X / the first through line of the left-centre strips, which these notes call a clock, a strobe "once per scan line" or leave without a source, **is the reset**: `rst_a`, the buffered copy of `rst` = NOR(`lpstb_b`, `res_b`) made by `lc1`'s gate 5 (`eof` run 10, piece `isrc5`, firm). `inh_ck`, `inh_rc` and `inh_lat` are further buffered copies of it: high while the RES and LPSTB pins are both low, and only then. The belief "a strobe once per scan line" is withdrawn.
+- `rcs_x1` = NOT `lc1_w7170`, and `lc1_w7170` = NOT `rst_c` (`eof` run 13, piece `rc`, firm): the clear of the step logic's five latches is the reset, two inverters later. Where these notes call its source open, it is found.

@@ -590,3 +590,8 @@ along the top of the central datapath) is the gap.
 - `trace/trunks.txt`, `ck_out #1` (`M 10320,17908 x10230`, "followed to x 10230 only"): it lies for 96 px
   on `bd1_n2`'s poly row without a contact and runs on west to a pad at about (9770,17910), with a poly
   beyond to a pad (9595,17905); its end is not drawn (`eof` run 8; R4).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- The signal on track A / line X / the first through line of the left-centre strips, which these notes call a clock, a strobe "once per scan line" or leave without a source, **is the reset**: `rst_a`, the buffered copy of `rst` = NOR(`lpstb_b`, `res_b`) made by `lc1`'s gate 5 (`eof` run 10, piece `isrc5`, firm). `inh_ck`, `inh_rc` and `inh_lat` are further buffered copies of it: high while the RES and LPSTB pins are both low, and only then. The belief "a strobe once per scan line" is withdrawn. So "source of X" is found.
+- `res_b` and `lpstb_b` do not end at `lc1`'s NOR: they run on down the left-centre strips and the left bus field to (6366,15000) and (6408,15000) (`eof` run 11, piece `rl`).

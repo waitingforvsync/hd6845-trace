@@ -507,3 +507,7 @@ Round 5: no findings that change a connection.
 - `lc3_e9798`, "a metal from the east" at (6450,9798) (`ports.d/lc3.txt`): the metal runs east only to
   x about 6515 and turns north there on a track x 6514 (followed to y 9532, end not read;
   `tools/follow.py 6480 9798 E --gap 16`). It does not touch `rcs_e4`'s metal x 6552-6564 (`busl`, run 3).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- The fifth corner-bundle line ("comes from a metal that enters from the east at (6450,9455)") is `rst_c` (`eof` run 13, piece `rc`); the ripple counter's clock comes from `tcw_m6404` (piece `ck5`). The lines 2 and 3 of the nine that leave south are `res_b` and `lpstb_b`, the first is `rst_a` (`eof` runs 10-11). `lc3_e9756` and `lc3_e9798` are still not followed east of x 6450 (R26).

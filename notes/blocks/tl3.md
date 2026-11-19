@@ -1762,3 +1762,9 @@ Round 1: no findings.
   output (it leaves and comes straight back as `rcs_mv`, one L in `tl4`'s strip); `tl3_e3028`, "gate
   of the top unit E1 ... from the east", is `tl4_w4590`, which crosses x 4250 again at y 2801-2820 (the
   pad (4366,2812)): that row is the only way left to `tl4_w4590`'s driver.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- The signal on track A / line X / the first through line of the left-centre strips, which these notes call a clock, a strobe "once per scan line" or leave without a source, **is the reset**: `rst_a`, the buffered copy of `rst` = NOR(`lpstb_b`, `res_b`) made by `lc1`'s gate 5 (`eof` run 10, piece `isrc5`, firm). `inh_ck`, `inh_rc` and `inh_lat` are further buffered copies of it: high while the RES and LPSTB pins are both low, and only then. The belief "a strobe once per scan line" is withdrawn.
+- `rcs_x1` = NOT `lc1_w7170`, and `lc1_w7170` = NOT `rst_c` (`eof` run 13, piece `rc`, firm): the clear of the step logic's five latches is the reset, two inverters later. Where these notes call its source open, it is found.
+- `tl3_w3982` (= `tl5_w5936`) is followed (`eof` runs 11-12): it is latch C's data in `lc2` (`lc2_w8906`) and is driven by the inverter U4 at (7575,8386): `tl3_w3982` = NOT `eof_w8298`, three inverters after latch D's lower node `lc1_w7928`.
