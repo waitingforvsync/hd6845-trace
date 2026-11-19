@@ -1,7 +1,8 @@
 5590,8055:5895,8560  logic  latch B | tl1's latch (tl1_ub + tl1_ua upside down): lc2_w8341 = NOT(lc2_w8450 AND lc2_w8169 OR lc2_w8215); traced
 5887,8589:6142,9029  logic  latch C | tl1's latch turned left-right; clear lc1_w7864 (shared with latch D)
 5836,9040:6230,9150  logic  inverter of latch C's output | lc2_w9124 = NOT lc2_w8822, onto the thin metal that runs north through latches C and D
-4480,8380:5330,9160  ?logic  west gate cluster | three rails, two gate columns; not traced
+4580,8600:5330,9240  ?logic  west gate cluster | two gate columns sharing a middle VCC rail; not traced below its first gate
+4588,8350:4985,8600  logic  NAND K1 | lc2_w8552 = NAND(lc2_w8298, lc2_w8475)
 5887,8067:6142,8290  logic  latch D, lower unit | with lc1's upper unit the latch whose inverse is lc_step: open while lc1_w7908, data lc1_w7780, clear lc1_w7864
 6142,8067:6490,8560  route  bus field east of the latches | enable, clear and data of latches C and D from the north; two metals east
 5545,8880:5848,9000  logic  inverter of latch B's data | lc2_w8450 = NOT lc2_w8474, on the thin metal x 5626

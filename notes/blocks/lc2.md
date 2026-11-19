@@ -2,6 +2,22 @@
 
 ## Status
 
+2026-11-18 20:35 -0600 (run 8, Matt Godbolt, on Fable 5.2). **Partial: the west gate cluster begun: its supplies and its
+first gate** (piece K, 3 transistors; 43 in the package; not yet reviewed). Runs 4-7 are on main (a243a9d).
+
+```
+lc2_w8552 = NAND( lc2_w8298, lc2_w8475 )        FIRM
+```
+
+The cluster (x 4580-5330, y 8330-9240) is two gate columns that share a VCC rail in the middle (x 4924-4980: `lc1`'s
+rail 1, which jogs east above the cluster) with VSS rails outside (east, x 5104-5150: `lc1`'s rail 2 after its jog;
+west, x 4752-4803: named by structure). Gate K1 at the top of the west column is a two-input NAND: two rows in
+series under the west rail (`lc2_w8475`, which joins two thin metals; `lc2_w8298`, the fifth staircase line by
+track C), output on a row west to the thin metal x 4598-4611. Full extraction: 2360 nets, 4246 transistors,
+0 errors, 0 warnings.
+
+Earlier:
+
 2026-11-18 19:28 -0600 (run 7, Matt Godbolt, on Fable 5.2). **Partial: gate 9 of `lc1`'s gate column drawn** (piece I, 2 transistors,
 hand-drawn on the pattern of `lc1`'s gates 7 and 8; 40 in the package; not yet reviewed):
 
@@ -354,6 +370,39 @@ on south down the west side of the cluster (`follow.py 4475 8400 S`: to y 9794, 
 `4517 8400 S`: to y 9360; `4562 8400 S`: to y 8520). They are inside `urch`'s `sl4` track, which turns east 11 px north
 of the first of them.
 
+## The west gate cluster: supplies and gate K1 (run 8, piece K): traced
+
+Views `w1_a.png`, `w1_m.png` (1.15x), `x3_c2.png` (the chip-2 stripped shot, 1.38x), `x4_m.png` (2.3x, the feeds),
+`x1_a.png`, `x1_m.png` (2.6x), `x2.png`, `x5.png`-`x8.png` (3.8-6x, clean and chip-2 stripped), overlays `o13_a.png`
+(2.8x), `o13_m.png` (2.3x); measurements in `cache/scratch/lc2/survey.md`.
+
+**Supplies.** Three wide metals run down the cluster:
+
+| Metal | Supply | How it is fed |
+|---|---|---|
+| middle, x 4924-4980 | VCC | `lc1`'s rail 1 (x 4755-4803) comes down to y 8205, jogs east (a band y 8205-8270 to x 4892), down x 4840-4892 to y 8350, east in a block (x 4840-4980, y 8324-8400) and south. `tl5_tracks.py v 4954 8230 8420 --half 12`: 41 px without metal (y 8283-8324, open ground in the clean shot) between this block and rail 2's piece above it |
+| east, x 5104-5150 | VSS | `lc1`'s rail 2 (x 4928-4980) comes down to y 8283 and jogs east (y 8228-8283, to x 5150) onto it. `h 8300 4920 5160 --half 2`: at y 8300 the only metal is x 5104-5148 |
+| west, x 4752-4803 | VSS **by structure** | a block (x 4666-4803, y 8300-8348) joins it to a wide vertical metal x 4668-4712 that comes from the north through `lc1`'s strip (not drawn there). The pull-down stacks' top nodes are on it; the loads are on the middle rail |
+
+The three are drawn to y 8620 (they run on south). The contact boxes under the middle rail at x ~4935
+(y 8440, 8565, 8700, 8840, 8985, 9110, 9225) are the loads' VCC contacts.
+
+**Gate K1** (x 4588-4985, y 8350-8595). Under the west rail (`railprof.py 4758 4796 8340 8640`): the rail's contact
+column y 8352-8465 (contacts (4775,8362) and (4775,8398-8442)), row 1 (gate, y 8466-8492), a node y 8493-8515,
+row 2 (gate, y 8516-8538), the output node y 8539-8564.
+
+| Item | Reading | Seen |
+|---|---|---|
+| row 1, `lc2_w8475` | from a pad (4648,8474) on the thin metal x 4641-4655 east across the column and under the rail, out east to a second pad (4892,8481) on the thin metal x 4885-4899 | `textmap.py 4634 8456 4668 8496`, `4878 8464 4912 8500` (ring, centre, green hole at each pad); `tl5_tracks.py rows row 4540 4920 4 8475`; `x8.png` (6x): the row east of the rail, its bend at x 4815-4838 |
+| row 2, `lc2_w8298` | from track C's end pad (4561,8516) east; under the rail it lies 10 px lower; it ends at x 4812 | `textmap.py 4546 8496 4582 8534`; `v 4562 8320 8540` (the track ends on the pad); `x6.png` |
+| output node | under the rail y 8539-8564; east into an open diffusion (4820-4868, 8500-8562; `opendiff.py`: green; chip-2 stripped red minus green 8-25); west of the rail to a ringed box (4700-4730, 8540-8576) | `px.py col 4806`, `col 4830`, `col 4850`, `col 4722` |
+| output | the box's poly row west (y 8552-8572) to a pad (4604,8560) on the thin metal x 4598-4611, which runs south | `textmap.py 4590 8542 4624 8580`; `rows ... 8562`; `v 4605 8520 8760` |
+| load | a plate (4868-4922, 8525-8590) between the output's open diffusion and a VCC box (4925-4985, 8540-8595, contact (4955,8580)) under the middle rail; bright (over the channel) at y 8537-8565; its foot runs west onto a ringed box (4830-4862, 8555-8587) on the output diffusion: the tie | `x7.png` (3.8x) |
+
+East of the rail **row 1 has no channel**: between its south edge (y 8490) and the output diffusion (from y 8502-8508)
+is field (chip-2 stripped red minus green -8 to 0 at x 4830, y 8494-8502; -3 at x 4850, y 8498). So the gate is a
+plain series pair: `lc2_w8552` = NAND(`lc2_w8298`, `lc2_w8475`).
+
 ## Ports
 
 `ports.d/lc2.txt` (kept in step with this). Latch B: enable `lc2_w8169` north on metal x 5560 at y 8067 (into
@@ -380,12 +429,16 @@ Run 3 (latch D's lower unit and the bus field):
 | `lc1_w7170` (`lc2_w8474`) | M | 5030-5046, 8067 | ? | run 6: the metal of the pads (5232,8214), (5428,8516), (5428,8648), (5429,8994), north as `lc1`'s T1 (meets `lc1`'s port) |
 | `lc2_w8907` (`lc2_w8450`) | M | 5378-5394, 9233 | ? | round 7: the staircase's fourth line on south into `lc3` (to y 9707 by the follower) |
 | `lc2_w8907` | P | 5240, 8941-8958 | ? | round 8: drawn end: a second poly of the pad (5386,8951) runs on west into the gate cluster at x 5150-5240 |
-| `lc1_w7170`, `lc2_w8907`, `lc2_w8298` | M | 4466-4484, 4508-4526, 4553-4571; y 8330 | ? | run 7: drawn ends: the three tracks of rows A, B, C run on south down the cluster's west side |
+| `lc1_w7170`, `lc2_w8907` | M | 4466-4484, 4508-4526; y 8330 | ? | run 7: drawn ends: the tracks of rows A and B run on south down the cluster's west side (track C ends on gate K1's row 2: run 8) |
+| `vcc`, `vss`, `vss` | M | 4924-4980, 5104-5150, 4752-4803; y 8620 | - | run 8: the cluster's three rails, drawn ends (they run on south) |
+| `vss` | M | 4668-4712, 8067 | - | run 8: the west rail's feed, north into `lc1` (no port of `lc1` there); VSS by structure |
+| `lc2_w8475` | M | 4641-4655, 8630 and 4885-4899, 8590 | ? | run 8: drawn ends: the two thin metals of gate K1's row 1 run on south |
+| `lc2_w8552` | M | 4597-4611, 8630 | out | run 8: drawn end: gate K1's output on its thin metal, on south |
 | `lc2_w8298` | M | 5249-5265, 8334 | ? | run 7: drawn end: the fifth staircase line runs on south (`follow.py 5260 8350 S`: to y 9056) |
 | `lc2_w8127` | M | 5118-5136, 8067 | out | run 7: gate 9's output, north into `lc1` (no port of `lc1` there) |
 | `lc1_w7990` | P | 5072-5092, 8067 | in | run 7: gate 9's input (meets `lc1`'s port) |
-| `vcc` | M | 4755-4803, 8067 and 8160 | - | run 7: rail 1 from `lc1`, drawn to y 8160 (it runs on) |
-| `vss` | M | 4928-4980, 8067 and 8160 | - | round 10: rail 2 from `lc1`, drawn to y 8160 (it runs on) |
+| `vcc` | M | 4755-4803, 8067 | - | run 7: rail 1 from `lc1` (run 8: on to the cluster's middle rail) |
+| `vss` | M | 4928-4980, 8067 | - | round 10: rail 2 from `lc1` (run 8: on to the cluster's east rail) |
 | `lc1_w7468` | M | 5073-5093, 8067 and 5465-5481, 9233 | in, out | run 6: `lc1`'s M_c2 down the staircase and through the strip into `lc3` |
 | `lc3_w9299` | M | 5422-5438, 8067 | in | run 6: row 4's metal, north into `lc1` (`follow.py`: to about (5541,7433)) |
 | `lc2_w8474` | M | 5421-5437, 9233 | ? | round 3: the metal runs on south into `lc3` |
@@ -475,6 +528,17 @@ Run 3 (latch D's lower unit and the bus field):
    `lc1`'s column leave their boxes, and the row has no other end here. Drawn `?P`/`?B`. If it is not a contact,
    the fourth line and the row are a net of their own with the pad (5190,8258)'s poly as their only other end.
 
+12. **Gate K1: does the stack's diffusion run on west of the rail?** (run 8). Under the rail (x 4752-4800) the two
+   gates are certain (`railprof.py`). West of it, x 4702-4752, the chip-2 stripped shot is diffusion-like above
+   row 1 (red minus green 10-33 at y 8452) and mixed between the rows (13-24 at x 4706-4722, 1-6 at x 4726-4734,
+   14-17 at x 4738-4746, y 8497). Drawn as an uncertain diffusion: it only widens the two channels (98 and 108
+   against about 48). The node below row 2 does run west to the output box (tan at x 4722, y 8546-8570).
+13. **The west rail is VSS by structure only** (run 8): its feed x 4668-4712 comes from north of the strip. Also by
+   the rail: a large open diffusion (4588-4741, 8354-8424; `opendiff.py`; chip-2 stripped 160/143/88) beside the
+   contact column, drawn as one with it (only the rail's etch line lies between them); and a diffusion-like patch
+   (4815-4865, 8448-8463) north of row 1 east of the rail (red minus green 9-21), not drawn: with field south of
+   row 1 there it makes no transistor.
+
 ## Not done
 
 Run 5:
@@ -484,7 +548,7 @@ Run 5:
   node D's west lobe (Ambiguity 9); the area (5785-5830, 9200-9265) below the block is field (round 6: red minus green 0-2 in the chip-2 stripped shot).
 - The output poly's leg x 5924-5940 runs on south in `lc3`'s strip to about y 9540 and turns east along y 9525-9545 (round 6; not drawn by `lc3`).
 - Rows 2, 3 and 5 west of x 5545. The fifth staircase line south of (5257,8334) (pads on it near (5257,8425)?); pads (5295,8472), (5341,8539), (5341,8562), (5341,9038).
-- **The rails south of y 8160** (review round 10 read them at 3x in both chips; not drawn): rail 1 (VCC) jogs east over the rows, x 4757-4888 at y 8208-8265, and runs on south at x 4840-4888; rail 2 (VSS) jogs east, x 4929-5147 at y 8228-8290, and runs on south at x 5105-5147 across row C; no metal at x 4888-4929. A wide vertical metal x 4668-4712 crosses the three rows: not drawn.
+- (Done, run 8: the rails' jogs and the cluster's three rails to y 8620; gate K1.) The rest of the west cluster: the rails south of y 8620, the thin metals of K1's rows and output south of their drawn ends, the gates below K1 and the whole east column.
 - (Done, run 7: gate 9 of `lc1`'s column.) Its output's metal north of y 8067; rail 1 south of y 8160 and rail 2 south of y 8067.
 - Geometry from round 7, not changed: latch B's VSS box's diffusion runs on north of y 8062 (tan to y 8050 at x 5682); a green patch (5858-5872, 8228-8236) under the VCC rail between two VCC boxes, no ring.
 - Geometry noted by review round 5 and not re-measured: the upper load's channel may be y 8889-8935 (drawn

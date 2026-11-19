@@ -52,12 +52,18 @@ lc2_w8450   P  5240,8941-8958  ?    drawn end: the second poly of the pad (5386,
 lc2_w8127   M  5118-5136,8067  out  gate 9's output: metal from the pad (5127,8080) north into lc1
 lc1_w7990   P  5072-5092,8067  in   gate 9's input: lc1's poly under M_c2
 vcc         M  4755-4803,8067  -    rail 1 from lc1
-vcc         M  4755-4803,8160  -    rail 1: drawn end, it runs on south
 
 # Run 7: the three rows above the west cluster and their tracks
 lc1_w7170   M  4466-4484,8330  ?    drawn end: row A's track runs on south down the cluster's west side (to about y 9794)
 lc2_w8450   M  4508-4526,8330  ?    drawn end: row B's track (label lc2_w8907) runs on south (to about y 9360)
-lc2_w8298   M  4553-4571,8330  ?    drawn end: row C's track runs on south (to about y 8520)
 lc2_w8298   M  5249-5265,8334  ?    drawn end: the fifth staircase line runs on south (to about y 9056)
 vss         M  4928-4980,8067  -    rail 2 from lc1
-vss         M  4928-4980,8160  -    rail 2: drawn end, it jogs east at y 8228-8290 and runs on south at x 5105-5147
+
+# Run 8: the west cluster's supplies and gate K1
+vcc         M  4924-4980,8620  -    the cluster's middle rail (lc1's rail 1 after its jog): drawn end, runs on south
+vss         M  5104-5150,8620  -    the cluster's east rail (lc1's rail 2 after its jog): drawn end, runs on south
+vss         M  4752-4803,8620  -    the cluster's west rail (VSS by structure): drawn end, runs on south
+vss         M  4668-4712,8067  -    the west rail's feed, north into lc1
+lc2_w8475   M  4641-4655,8630  ?    gate K1's row 1: the thin metal of its west pad, drawn end (next pad at (4648,8647))
+lc2_w8475   M  4885-4899,8590  ?    gate K1's row 1: the thin metal of its east pad, drawn end (runs on south at x 4881-4893)
+lc2_w8552   M  4597-4611,8630  out  gate K1's output on its thin metal: drawn end, runs on south
