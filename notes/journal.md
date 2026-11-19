@@ -2332,7 +2332,7 @@ Until that is done such a branch fails the gate (a net carries two names where m
 former names in its documents). Work that reaches main with old names anyway is put right by running
 the same commands on main. `out/` rebuilt.
 
-## 2026-11-19 23:45  Floor plan labels; the data sheet on RES and LPSTB
+## 2026-11-19 23:41  Floor plan labels; the data sheet on RES and LPSTB
 
 Asked by the user. **Floor plan**: labels brought up to the day's identifications: `cdp3`'s row H is
 "R13 register", row C "?R12 register" (marked), the six large cells "R14's cells" (both halves), rows
