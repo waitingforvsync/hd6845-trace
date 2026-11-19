@@ -3,7 +3,7 @@
 ## Status
 
 2026-11-18 20:56 -0600 (run 8, Matt Godbolt, on Fable 5.2). **Partial: the west gate cluster begun: its supplies and its
-first latch** (piece K, 9 transistors; 49 in the package; not yet reviewed). Runs 4-7 are on main (a243a9d).
+first latch** (piece K, 9 transistors; 49 in the package; reviewed, round 11: no findings that change a connection). Runs 4-7 are on main (a243a9d).
 
 ```
 lc2_w8552 = NOT( lc2_w8475 & lc2_w8298  |  lc2_w8450  |  lc2_w8725 )     depends on uncertain items (the lc2_w8450 term)
@@ -386,7 +386,7 @@ overlays `o14_a.png`, `o14_c.png` (4x, clean and chip-2 stripped), `o15_a.png`, 
 | Metal | Supply | How it is fed |
 |---|---|---|
 | middle, x 4924-4980 | VCC | `lc1`'s rail 1 (x 4755-4803) comes down to y 8205, jogs east (a band y 8205-8270 to x 4892), down x 4840-4892 to y 8350, east in a block (x 4840-4980, y 8324-8400) and south. `tl5_tracks.py v 4954 8230 8420 --half 12`: 41 px without metal (y 8283-8324, open ground in the clean shot) between this block and rail 2's piece above it |
-| east, x 5104-5150 | VSS | `lc1`'s rail 2 (x 4928-4980) comes down to y 8283 and jogs east (y 8228-8283, to x 5150) onto it. `h 8300 4920 5160 --half 2`: at y 8300 the only metal is x 5104-5148 |
+| east, x 5104-5150 (x 5084-5150 from y 8368) | VSS | `lc1`'s rail 2 (x 4928-4980) comes down to y 8283 and jogs east (y 8228-8283, to x 5150) onto it. `h 8300 4920 5160 --half 2`: at y 8300 the only metal is x 5104-5148 |
 | west, x 4752-4803 | VSS **by structure** | a block (x 4666-4803, y 8300-8348) joins it to a wide vertical metal x 4668-4712 that comes from the north through `lc1`'s strip (not drawn there). The pull-down stacks' top nodes are on it; the loads are on the middle rail |
 
 The three are drawn to y 8770 (they run on south). The contact boxes under the middle rail at x ~4935-4955
@@ -407,7 +407,7 @@ Under the west rail (`railprof.py 4758 4796 8340 8640`, `4756 4768 8590 8950`):
 | 8466-8492 | row 1, `lc2_w8475` | 8639-8660 | row a, `lc2_w8475` |
 | 8493-8515 | node | 8661-8680 | node |
 | 8516-8538 | row 2, `lc2_w8298` | 8681-8703 | row b, `lc2_w8692` |
-| 8539-8564 | output node `lc2_w8552` | 8704-8747 | output node `lc2_w8725` |
+| 8539-8564 | output node `lc2_w8552` | 8704-8740 | output node `lc2_w8725` |
 
 | Item | Reading | Seen |
 |---|---|---|
@@ -946,3 +946,44 @@ After the fixes: `tools/t.sh lc2 sameconn.py d00fad9`: `connections identical`;
 `.venv/bin/python tools/sameconn.py d00fad9`: `connections identical`.
 
 Round 10: no findings that change a connection.
+
+Round 11 (full review of run 8's piece K: the west cluster's supplies and latch K, 2026-11-18 21:15 -0600, a fresh agent
+on claude-fable-5-2, at commit 5145fc0; images `cache/scratch/lc2/review-11/`, 19 of them). Told to suspect: the VSS
+fingers east of the rail and whether the polys across the tongues are gates; whether rows 1, 2, a, b end at the rail's
+edge; the thin metal x 4882-4899 between its two pads; the pad (4892,8694)'s poly and K2's load; the row from track B
+and the column west of the rail; the two outlined shapes taken as field; the large open diffusion; whether the west
+rail is VSS; anything left out.
+
+Checked and found correct (4-6.5x in two or more shots, with `px.py`, `textmap.py`, `follow.py`): both equations, all
+nine transistors, the three rail feeds. Rows 1, 2, a, b end at the rail's east edge (row 1: a field stripe x 4814-4822
+in both chip-2 shots and chip-1 metal, on four rows, `j1_k1east.png`; row a: pink field x 4802-4816). The fingers: tan
+unbroken past the rail's edge at y 8452 and 8617, stopping 5 px short at y 8415 where field lies outside; chip-2
+stripped red minus green 13-20 on the fingers, 0-2 on field; neither reaches the middle rail. Both tongue gates are
+orange like the row gates, not olive like the tie boxes. The gate to the pad (4892,8481): one piece. The arm to the
+tail: one piece (`j3_k2east.png`). The thin metal x 4882-4899 ends on both pads, no ring or hole between, bare ground
+north of 8461 and south of 8704 (`j2_thin.png`). The pad (4892,8694): one line to the load poly below and one to the
+tie box (`j5_k2load.png`); K1's tie and foot likewise (`j9_k1tie.png`). The track-B row: the column's edge lines at
+x 4700 and 4736-4740 run through every gap; its east end overhangs a field pocket and stops short of K2's VSS box
+(`j6_clear.png`). Both outlined shapes are field. The large open diffusion: only the rail's margin line between it and
+the contact column. Pads on tracks B, C and both thin metals real; no contact at any crossing, none on tracks A-C over
+the pale diffusion (`w1_tracks.png`, `w2_tracktop.png`). Nothing left out beyond the Not done list.
+
+Findings, all geometry only, all confirmed by my own measurements and fixed:
+
+1. K2's third pull-down gate: the poly's west end is at x ~4817 (drawn 4832), the tongue's west edge ~4830 (drawn 4836)
+   (`px.py row 8646 4808 4842`: poly stripe x 4817-4826 in the clean shot and chip-2 metal, edge line 4829-4832).
+2. The VCC block `M 4840,8324:4980,8400`: west of x 4924 the metal ends at y ~8368 (`tl5_tracks.py v 4880 8320 8420
+   --half 4`: no metal 8368-8419). Now to y 8370.
+3. The east rail is wider from y 8368: x ~5084-5150 (`tl5_tracks.py h 8500 5060 5170`: metal from x 5084). Added.
+4. K2's output node under the rail ends at y ~8740 (drawn 8747) (`px.py col 4770`: tan to y 8736, pink from 8748).
+
+Could not check: the 12 px gap at y 8578-8590 between K1's output box and the track-B row reads field-like in colour
+(fringe), so the clear transistor's north end rests on the column's edge lines alone: `?D` stays (Ambiguity 12). West
+rail as VSS: its feed runs north to y ~5741 (`follow.py`), drawn by no package; nothing in view contradicts it. Track A
+at y 8560-8696 seen only at 3x. The extent of the diffusion under tracks A-C, the east column and everything south of
+y 8750 were not reviewed.
+
+After the fixes: `tools/t.sh lc2 sameconn.py 5145fc0`: `connections identical`;
+`.venv/bin/python tools/sameconn.py 5145fc0`: `connections identical`.
+
+Round 11: no findings that change a connection.

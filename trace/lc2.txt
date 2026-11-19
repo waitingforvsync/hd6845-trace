@@ -454,12 +454,13 @@ N P 4900,8298 lc2_w8298
 M 4779,8160 y8238 w=48
 M 4755,8205:4892,8270
 M 4840,8205:4892,8350
-M 4840,8324:4980,8400
+M 4840,8324:4980,8370                       # round 11: west of the middle rail this block ends at y 8368
 M 4952,8324 y8770 w=56                      # the middle rail (drawn to y 8770: it runs on south)
 N M 4952,8500 vcc
 M 4954,8160 y8283 w=52
 M 4928,8228:5150,8283
 M 5127,8228 y8770 w=46                      # the east rail (drawn to y 8770: it runs on south)
+M 5084,8368:5150,8770                       # round 11: from y 8368 it is wider, x 5084-5150
 N M 5127,8500 vss
 M 4668,8067:4712,8348
 M 4666,8300:4803,8348
@@ -520,7 +521,7 @@ P 4830,8555:4862,8587
 D 4826,8553:4866,8589
 B 4828,8553:4868,8589
 P 4873,8588:4897,8656
-P 4832,8630:4876,8658
+P 4817,8630:4876,8658                       # round 11: its west end is at x 4817 (a poly stripe x 4817-4826 beside the tongue)
 # K1's fourth pull-down (a clear): the row from track B's pad (4517,8604) crosses the column west of the rail between
 # K1's output box and K2's VSS node, and ends at x 4758. The column there is drawn uncertain (as above).
 M 4517,8330 y8700 w=18                      # track B south, through the pad (drawn to y 8700: it runs on)
@@ -533,7 +534,7 @@ N P 4640,8604 lc2_w8907
 # y 8639-8660, a node, row b y 8681-8703, the output node y 8704-8747
 D 4764,8594:4800,8630
 C 4783,8605
-D 4752,8618:4788,8747
+D 4752,8618:4788,8741
 ?D 4702,8630:4756,8712                      # as in K1: the column seems to run on west of the rail; uncertain, only widens the channels
 P 4634,8632:4666,8662                       # row a's pad, on the thin metal x 4641-4655 (lc2_w8475)
 C 4648,8647
@@ -551,7 +552,7 @@ P 4622,8726:4640,8770
 # K2's third pull-down: finger of the VSS node east at y 8606-8628, tongue down to the open diffusion, K1's load
 # poly's end across it (x 4832-4876, y 8630-8658)
 D 4796,8606:4868,8628
-D 4836,8624:4866,8714
+D 4830,8624:4866,8714
 # K2's load: the poly of the pad (4892,8694) runs south across a diffusion strip (y 8722-8745) between the open
 # diffusion and a VCC box under the middle rail, and west onto a ringed box on the tongue (the tie)
 P 4872,8674:4920,8716
