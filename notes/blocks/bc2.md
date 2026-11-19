@@ -98,7 +98,7 @@ in the metal shot, each row continuous poly in the clean shot):
 |---|---|---|---|
 | `bc2_w14912` data (inverter and upper AND) | y 14905-14922 | (10395,14912) | goes west, not followed |
 | `bc2_w14955` enable (both ANDs) | y 14947-14964 and y 15163-15180 | (10441,14955), (10441,15172) | one vertical metal x 10441; north of y 14940 not followed; south it runs to y 15398, jogs west along y 15386-15398 to the metal x 10398, which runs on south (not followed); see "Latch unit b" |
-| `bc2_w15087` clear | y 15079-15096 | (10395,15087) | metal x 10395 south, not followed |
+| `bc2_w15087` clear | y 15079-15096 | (10395,15087) | metal x 10395 south: it is `inh_src` (`eof`, piece `isrc`, 2026-11-19; aliased in `trace/eof.txt`) |
 | `bc2_w15000` output (upper gate's node) | y 14992-15010 | (10395,15000) | a metal from the north-west ends on it, not followed |
 
 Equations (`unsure.py --equations`: the inverter FIRM, the two gates DEPENDS only by feedback):

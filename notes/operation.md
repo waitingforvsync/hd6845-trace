@@ -2,7 +2,7 @@
 
 This is the short version. The block notes (`notes/blocks/`) are the reference; the
 glossary of names is `notes/signals.md`. Last checked against the extraction on
-2026-11-19 (2,379 nets, 4,286 transistors; sixth refresh, and `eof`'s run 3).
+2026-11-19 (2,378 nets, 4,286 transistors; sixth refresh, and `eof`'s run 3).
 
 ## How to read this page
 

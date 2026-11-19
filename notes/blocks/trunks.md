@@ -540,9 +540,9 @@ Drawn in `trace/trunks.txt` (last section); views `cache/scratch/bd1/inh1.png` .
 | from the pad (10075,18080): north along x 10075, east along y 17770 | poly | pad (10262,17770) |
 | north along x 10266, jog at y 17428, north along x 10312 | metal | pad (10310,16950) |
 | from that pad west along y 16950 and north | poly | pad (10225,16820) |
-| north along x 10225 | metal | y 15886 at least (follower); end not looked at |
+| north along x 10225 | metal | ends on a pad with a contact (10226,15912) (`eof`, piece `isrc`, 2026-11-19; the drawing shortened from y 15886) |
 
-Three ends are open: the metal x 10225 north of y 15886; the poly along y 16950 east of
+**All three ends are followed since 2026-11-19** (`notes/blocks/eof.md`, piece `isrc`): the first is the clear of `bc2`'s latch unit a, the third feeds a metal x 8968 with taps into the gate column x 8650-8800, the second is a gate row at x 10540-10585; no driver on any. As written then, three ends are open: the metal x 10225 north of y 15886; the poly along y 16950 east of
 x 10470, into the bottom-centre logic; the bus line west of the pad (9770,18081) (poly
 under two vertical metals to a pad at about x 9562, then metal to x 8978 at least). So
 `inh_src` is a widely distributed line of the bottom bus, and its driver is at none of

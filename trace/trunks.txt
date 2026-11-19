@@ -333,6 +333,6 @@ P 10293,16933:10327,16967
 P 10470,16950 10225,16950 10225,16820 w=18
 P 10208,16803:10242,16837
 C 10225,16820
-M 10225,16830 10225,15886 w=13
+M 10225,16830 10225,15905 w=13          # ends on the ring of the pad (10226,15912), eof's (was drawn to y 15886, over the open poly of the hop: eof's review round 5)
 N M 12400,17822 inh_src
 N M 10225,16400 inh_src

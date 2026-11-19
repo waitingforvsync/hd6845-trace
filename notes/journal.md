@@ -1886,3 +1886,32 @@ items, none of them this piece's.
   row 0.4%, as before.
 
 **Handoffs:** none waiting. **Claims:** none.
+
+## 2026-11-19 12:50  Handoff: eof run 4, inh_src's open ends (driver not found)
+
+Traced by this session with `/trace6845` (claim 54fc826, merged a4d06bc, claim released); the handoff
+processed at the user's request.
+
+**What came in** (`notes/blocks/eof.md`, piece `isrc`; wiring only, no uncertain items):
+- `inh_src` is the clear of `bc2`'s latch unit a (`bc2_w15087`, aliased; that unit still waits for R31).
+- Its west bus line is drawn on from the pad (9770,18081) to a pad (8967,17735), from which a metal runs
+  north along x 8968 for 2,470 px with two tap pads and an end pad, and a second metal west. Four polys
+  leave those pads west into the gate column x 8650-8800: stubs and ports, not followed.
+- The task's goal, `inh_src`'s driver, is **not found**: every end seen is a gate.
+- Review: one full round on Fable, no finding that changes a connection; three geometry or comment fixes.
+
+**Checks:** overlay of the metal x 8968 and its two tap pads at 1.3x
+(`cache/scratch/eof_handoff_ov2.png`): on the features. Full extraction 2,378 nets (one fewer: the
+join), 4,286 transistors, 0 errors, 0 warnings; `tools/unsure.py` does not list `inh_src`.
+
+**Applied:**
+- `trace/trunks.txt`: the metal x 10225 shortened from y 15886 to y 15905 (it ends on the ring of the
+  pad (10226,15912); it was drawn 48 px over open poly). `tools/sameconn.py HEAD`: connections identical.
+- Master list: the `eof` row's task (b) marked not found, with the six places to go on from; notes
+  added to the `trunks` (continue), `bc1` (continue) and `bc2`/`bc3`/`bc4` rows.
+- `notes/blocks/trunks.md` and `bc2.md`: the ends that are now followed.
+- `notes/operation.md`: the net count.
+- No Re-read item, no new AMB entry. `bc2_w15087` is left as an alias of `inh_src` for the next refresh.
+- `out/` rebuilt.
+
+**Handoffs:** none waiting. **Claims:** none.
