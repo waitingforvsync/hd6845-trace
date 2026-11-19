@@ -33,8 +33,6 @@ lc2_w8450   M  5618-5634,9256  out  latch B's data: the west thin metal on south
 vss         M  5659-5705,9256  -    latch B's rail on south (meets lc3's)
 vcc         M  5840-5890,9256  -    the rail on south (meets lc3's)
 lc3_w9299   M  5550-5568,9256  out  row 4's metal on south to lc3's pad (5560,9299)
-lc2_w9079   P  5545,9068-9090  in   gate row 3: drawn end, runs on west
-lc2_w9210   P  5545,9200-9220  in   gate row 5: drawn end, runs on west
 lc3_m5756   M  5749-5763,8067  ?    the east thin metal, north through latch B into lc1; no contact found on it in the strip
 lc3_m5756   M  5749-5763,9256  ?    the same metal on south (meets lc3's)
 lc2_w9125   P  5924-5940,9256  out  the AND-OR-INVERT's output poly (label lc2_w9185), south into lc3
