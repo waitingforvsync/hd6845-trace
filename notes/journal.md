@@ -2219,15 +2219,13 @@ aliased `_u` name is not in its count.
 Tenth refresh. Renames, in three batches, each checked with `tools/names.py compare` ("only names
 changed"), `tools/signals.py` (0 outside the glossary) and `signals.py --docs` (no former names):
 
-| Old | New | On what |
-|---|---|---|
-| `inh_src` | `rst_a` | `eof` run 10, firm |
-| `lc2_x6342`, `lc2_x6387` | `res_b`, `lpstb_b` | `eof` run 11, firm |
-| `lc3_w9470` | `rst_c` | `eof` run 13, firm |
-| `cdp4_sel1`, `cdp4_sel2`, `cdp4_sel3`, `cdp4_sel4` | `rsel14_buf`, `rsel15_buf`, `rsel17_buf`, `rsel16_buf` | `regs` run 2, firm |
-| `cdp3_h_wr`, `cdp3_l8819`, `cdp4_ld8b` | `wr_r13`, `wr_r14`, `wr_r15` | `regs` run 1, firm |
-| `bd1_n2_u`, `tl4_w3850`, `tl5_w5761` | `bd1_n2` | `busl` run 7 with `eof` run 14, no uncertain item |
-| `tc1_bus2554` | `c4l_l3` | `tlb` run 1, firm |
+- `inh_src` -> `rst_a` (`eof` run 10, firm)
+- `lc2_x6342` -> `res_b`, `lc2_x6387` -> `lpstb_b` (`eof` run 11, firm)
+- `lc3_w9470` -> `rst_c` (`eof` run 13, firm)
+- `cdp4_sel1` -> `rsel14_buf`, `cdp4_sel2` -> `rsel15_buf`, `cdp4_sel3` -> `rsel17_buf`, `cdp4_sel4` -> `rsel16_buf` (`regs` run 2, firm)
+- `cdp3_h_wr` -> `wr_r13`, `cdp3_l8819` -> `wr_r14`, `cdp4_ld8b` -> `wr_r15` (`regs` run 1, firm)
+- `bd1_n2_u` -> `bd1_n2`, `tl4_w3850` -> `bd1_n2`, `tl5_w5761` -> `bd1_n2` (`busl` run 7 with `eof` run 14, no uncertain item)
+- `tc1_bus2554` -> `c4l_l3` (`tlb` run 1, firm)
 
 **Branches in flight** (`eof`, tom-seddon; `busl`) must run `tools/rename.py` with these pairs after
 merging main. Left on purpose (the master list's `rename` row has the reasons): `cdp3_c_wr` (R12's
