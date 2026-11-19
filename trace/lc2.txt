@@ -345,3 +345,24 @@ N P 5932,9230 lc2_w9185
 # strip's lc2_w8450; lc3's upper inverter's input is row 4's net
 @alias lc2_w8450 lc3_m5626
 @alias lc3_w9299 lc2_w9166
+
+# ====================================================================
+# The staircase of metals west of latch B: three lines (wiring only). A bundle of metals comes from the north-west
+# and steps east at right angles; views b1_m.png (1.1x), b2_m.png (3x); tl5_tracks.py v/h on every leg (survey.md).
+# row 4's metal (lc3_w9299): from lc1 at x 5422-5438, east along y 8295-8311 to x 5475 (26 px of bare ground below
+# latch B's clear pad), south, east along y 8377-8393 to x 5518 (below the Na pad), south, east along y 8777-8793 to
+# x 5560, south to the pad of gate row 4 and on (drawn above)
+M 5430,8067 y8303 x5475 y8385 x5518 y8785 x5560 y9100 w=16
+# lc1_w7468 (lc1's metal M_c2, x 5073-5093): south from lc1 to y 8128, east along y 8120-8136 to x 5387, south,
+# east along y 8332-8348 to x 5425, south, east along y 8422-8438 to x 5473, and south through the strip without a
+# contact (no hole from y 8425 to y 9260) into lc3
+M 5083,8067 y8128 x5387 y8340 x5425 y8430 x5473 y9233 w=16
+# lc2_w8474's metal north-west of (5385,8440): north to y 8385, west to x 5341, north to y 8214, west to a pad
+# (5232,8214) in its run (the pad's poly leaves west along y 8205-8220, drawn to x 5196: it runs on); from the pad
+# north to y 8172, west along y 8164-8180 to x 5037 and north as lc1's thin metal T1 (x 5030-5046, dim: it fails the
+# metal test, as in lc1): lc2_w8474 is lc1_w7170, the input of lc1's gate 2
+M 5385,8442 y8385 x5341 y8214 x5232 y8172 x5037 y8067 w=16
+@alias lc1_w7170 lc2_w8474
+P 5218,8199:5260,8229
+C 5232,8214
+P 5196,8205:5224,8220

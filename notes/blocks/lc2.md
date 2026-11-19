@@ -2,6 +2,20 @@
 
 ## Status
 
+2026-11-18 18:47 -0600 (run 6, Matt Godbolt, on Fable 5.2). **Partial: three lines of the staircase of metals west of latch B
+drawn** (piece H, wiring only). Two joins to `lc1`, without an uncertain item:
+
+- **`lc2_w8474` is `lc1_w7170`**, the input of `lc1`'s gate 2: its metal runs on from the pad (5232,8214), north, west
+  along y 8172 and north as `lc1`'s thin metal T1. So latch B's data `lc2_w8450` = NOT `lc1_w7170`, and `lc1_w7140`
+  is the same inverse made a second time. The extraction prints `lc1_w7170` for the net.
+- **`lc1_w7468`** (`lc1`'s metal M_c2) comes down the staircase and runs south through the whole strip without a
+  contact, into `lc3`.
+- Row 4's metal (`lc3_w9299`) is drawn up the staircase to `lc1`'s strip at x 5422-5438.
+
+Full extraction: 2361 nets, 4241 transistors, 0 errors, 0 warnings.
+
+Earlier:
+
 2026-11-18 18:28 -0600 (run 5, Matt Godbolt, on Fable 5.2). **Partial: the gate column south of latch B drawn** (piece G:
 8 transistors, hand-drawn; 38 in the package), **as corrected by review round 5**. Under latch B's VSS rail
 (x 5545-5848, y 8880-9256) are two gates on one column of diffusion:
@@ -271,6 +285,18 @@ y 9227-9282 under the rail) and the metal x 5550-5568 (`tl5_tracks.py v 5560 910
 y 9274-9293 with metal between: row 4's pad lies in its run). Two aliases record the joins: `lc3_m5626` is
 `lc2_w8450`; `lc2_w9166` is `lc3_w9299`. The east thin metal carries `lc3`'s name `lc3_m5756`.
 
+## The staircase of metals west of latch B (run 6, piece H): three lines traced
+
+Wiring only. A bundle of metals comes from the north-west and steps east at right angles, each line one track at
+a time (`b1_m.png` 1.1x, `b2_m.png` 3x, overlay `o9_m.png` 2.25x). Each leg was scanned with `tools/tl5_tracks.py v`
+/ `h` (metal in both chips, holes in the clean shot); the commands and results are in `cache/scratch/lc2/survey.md`.
+
+| Line | Path | Seen |
+|---|---|---|
+| row 4's metal, `lc3_w9299` | from `lc1` at x 5422-5438 south to y 8303; east to x 5475; south to y 8385; east to x 5518; south to y 8785; east to x 5560; south to the pad of gate row 4 (and on into `lc3`) | every leg without a break or a hole (`v 5426 8040 8306`, `h 8302`, `v 5474 8296 8396`, `h 8392`, `v 5517 8388 8792`, `h 8785`, `v 5561 8780 9150`: only the 8-15 px bars of the rows under it). It passes 26 px below latch B's clear pad and below its Na pad: bare ground between |
+| `lc1_w7468` | `lc1`'s metal M_c2 (x 5073-5093) south to y 8128; east along y 8120-8136 to x 5387; south to y 8340; east to x 5425; south to y 8430; east to x 5473; south through the strip's edge | `textmap.py 5062 8100 5160 8146`: the vertical ends in a dark bar y 8112-8118 (darker than bare ground: an edge underneath) and the horizontal starts flush with its west edge: an L; `h 8128 5076 5395 --half 5`: one 12 px dip; `v 5473 8425 9260`: no hole. A pad (5123,8080) beside the corner is on another metal: no metal between it and the horizontal (values 8-9 at y 8103-8112) |
+| `lc2_w8474` = `lc1_w7170` | from (5385,8440) north to y 8385; west to x 5341; north to y 8214; west to the pad (5232,8214), which lies in its run; north to y 8172; west along y 8164-8180 to x 5037; north as `lc1`'s thin metal T1 | `v 5341 8208 8392`, `h 8386`, `h 8215`: no break; pad: `textmap.py 5196 8192 5262 8236 --acid` (ring, bright centre, green hole, pit; its poly leaves west along y 8205-8220); `textmap.py 5196 8150 5262 8204` (the metal y 8165-8180 turns south at x 5223-5238 into the pad); `h 8170 4960 5260` (metal x 5031-5241); `textmap.py 5016 8140 5074 8190` (an L at x 5031-5043); T1 above it is thin and dim (values 9-B, with dark bars where rows pass under it) and fails the metal test (`v 5038 8055 8190`), as `lc1` found |
+
 ## Ports
 
 `ports.d/lc2.txt` (kept in step with this). Latch B: enable `lc2_w8169` north on metal x 5560 at y 8067 (into
@@ -294,7 +320,10 @@ Run 3 (latch D's lower unit and the bus field):
 | `lc1_w7780` | M | 6287-6307, 8067 | in | latch D's data (meets `lc1`'s port) |
 | `lc2_w8474` | M | 6332-6350, 8067 | ? | the metal of the pad (6341,8214) |
 | `lc2_w8474` | P | 5400, 8509-8526 | ? | drawn end (run 4): the poly from the pad (5428,8516) runs on west |
-| `lc2_w8474` | M | 5379-5391, 8440 | ? | drawn end (round 3): the metal runs on north-west (`follow.py 5400 8478 W`: north to y 8384, west to x 5338, north to y 8215, west to x 5228) |
+| `lc1_w7170` (`lc2_w8474`) | M | 5030-5046, 8067 | out | run 6: the metal of the pads (5232,8214), (5428,8516), (5428,8648), (5429,8994), north as `lc1`'s T1 (meets `lc1`'s port) |
+| `lc2_w8474` | P | 5196, 8205-8220 | ? | run 6: drawn end: the poly of the pad (5232,8214) runs on west |
+| `lc1_w7468` | M | 5073-5093, 8067 and 5465-5481, 9233 | in, out | run 6: `lc1`'s M_c2 down the staircase and through the strip into `lc3` |
+| `lc3_w9299` | M | 5422-5438, 8067 | in | run 6: row 4's metal, north into `lc1` (`follow.py`: to about (5541,7433)) |
 | `lc2_w8474` | M | 5421-5437, 9233 | ? | round 3: the metal runs on south into `lc3` |
 | `lc1_w7864` | P | 6450, 8911-8936 | out | round 3: the poly from latch C's clear pad, south-east out of the strip |
 | `lc2_w8341` | M | 5508-5524, 8067 | out | run 4: latch B's output Na, north into `lc1` |
@@ -309,7 +338,6 @@ Run 3 (latch D's lower unit and the bus field):
 | `lc2_w8450` | M | 5618-5634, 9256 | out | run 5: latch B's data, the west thin metal on south (joined to `lc3_m5626`) |
 | `lc2_w9125` (`lc2_w9185`) | P | 5924-5940, 9256 | out | run 5: the AND-OR-INVERT's output poly, south into `lc3` (joined to the node through uncertain items) |
 | `lc2_w9034`, `lc2_w9079`, `lc2_w9210` | P | 5545; y 9024-9044, 9068-9090, 9200-9220 | in | run 5: gate rows 2, 3, 5, drawn ends: they run on west |
-| `lc3_w9299` | M | 5550-5568, 9100 | in | run 5: row 4's metal, drawn end: it comes from the north (`follow.py 5421 8100 S` ends on it: the staircase) |
 
 ## Ambiguities
 
@@ -383,7 +411,7 @@ Run 5:
 - The ringed box (5813-5831, 9156-9178) in the output's poly block and what lies under it (Ambiguity 8); the box on
   node D's west lobe (Ambiguity 9); the area (5785-5830, 9200-9265) below the block is field (round 6: red minus green 0-2 in the chip-2 stripped shot).
 - The output poly's leg x 5924-5940 runs on south in `lc3`'s strip to about y 9540 and turns east along y 9525-9545 (round 6; not drawn by `lc3`).
-- Rows 2, 3 and 5 west of x 5545; row 4's metal north of y 9100 (the staircase from `lc1`'s strip).
+- Rows 2, 3 and 5 west of x 5545. The other lines of the staircase (run 6 drew three): one from a pad (5200,8258) east along y 8259 and south on x 5300, x 5343, x 5386 (`follow.py 5300 8300 S`: to y 9707); one from a pad (5235,8298) south on x 5260; pads (5257,8425), (5295,8472), (5341,8539), (5341,8562), (5341,9038); the pad (5123,8080) and its metal.
 - Geometry noted by review round 5 and not re-measured: the upper load's channel may be y 8889-8935 (drawn
   8911-8940).
 

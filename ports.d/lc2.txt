@@ -25,7 +25,6 @@ lc2_w9124   M  5967-5981,8067  out  the thin metal: NOT lc2_w8822 (latch C's Na)
 lc1_w7864   M  5466-5486,8067  in   latch B's clear: lc1's metal on south to the pad (5472,8254)
 lc2_w8341   M  5508-5524,8067  out  latch B's output Na: the metal from the pad (5514,8341) runs north out of the strip
 lc2_w8474   P  5400,8509-8526  ?    drawn end: the poly from the pad (5428,8516) runs on west (seen to x 5150)
-lc2_w8474   M  5379-5391,8440  ?    drawn end (review round 3): the metal of the pads (5428,8516), (5428,8648), (5429,8994) runs on north-west
 lc2_w8474   M  5421-5437,9233  ?    the same metal runs on south into lc3
 lc1_w7864   P  6450,8911-8936  out  the poly from latch C's clear pad (6257,8731), diagonally south-east out of the strip
 
@@ -34,10 +33,16 @@ lc2_w8450   M  5618-5634,9256  out  latch B's data: the west thin metal on south
 vss         M  5659-5705,9256  -    latch B's rail on south (meets lc3's)
 vcc         M  5840-5890,9256  -    the rail on south (meets lc3's)
 lc3_w9299   M  5550-5568,9256  out  row 4's metal on south to lc3's pad (5560,9299)
-lc3_w9299   M  5550-5568,9100  in   the same metal: drawn end, it comes from the north
 lc2_w9034   P  5545,9024-9044  in   gate row 2: drawn end, runs on west
 lc2_w9079   P  5545,9068-9090  in   gate row 3: drawn end, runs on west
 lc2_w9210   P  5545,9200-9220  in   gate row 5: drawn end, runs on west
 lc3_m5756   M  5749-5763,8067  ?    the east thin metal, north through latch B into lc1; no contact found on it in the strip
 lc3_m5756   M  5749-5763,9256  ?    the same metal on south (meets lc3's)
 lc2_w9125   P  5924-5940,9256  out  the AND-OR-INVERT's output poly (label lc2_w9185), south into lc3
+
+# Run 6: three lines of the staircase west of latch B
+lc1_w7170   M  5030-5046,8067  out  lc2_w8474's metal north as lc1's thin metal T1 (the input of lc1's gate 2)
+lc2_w8474   P  5196,8205-8220  ?    drawn end: the poly of the pad (5232,8214) runs on west
+lc1_w7468   M  5073-5093,8067  in   lc1's metal M_c2, down the staircase
+lc1_w7468   M  5465-5481,9233  out  the same metal on south into lc3 (no contact in the strip)
+lc3_w9299   M  5422-5438,8067  in   row 4's metal, north into lc1
