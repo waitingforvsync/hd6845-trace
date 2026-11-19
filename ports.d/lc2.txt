@@ -41,7 +41,7 @@ lc3_m5756   M  5749-5763,9256  ?    the same metal on south (meets lc3's)
 lc2_w9125   P  5924-5940,9256  out  the AND-OR-INVERT's output poly (label lc2_w9185), south into lc3
 
 # Run 6: three lines of the staircase west of latch B
-lc1_w7170   M  5030-5046,8067  out  lc2_w8474's metal north as lc1's thin metal T1 (the input of lc1's gate 2)
+lc1_w7170   M  5030-5046,8067  ?    lc2_w8474's metal north as lc1's thin metal T1 (the input of lc1's gate 2)
 lc2_w8474   P  5196,8205-8220  ?    drawn end: the poly of the pad (5232,8214) runs on west
 lc1_w7468   M  5073-5093,8067  in   lc1's metal M_c2, down the staircase
 lc1_w7468   M  5465-5481,9233  out  the same metal on south into lc3 (no contact in the strip)
