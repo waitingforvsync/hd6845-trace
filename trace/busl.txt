@@ -322,3 +322,89 @@ C 6363,14568 s=24x24
 P 6375,14567 x7550 w=24
 N M 6429,10800 lc3_e9798
 N P 7400,14567 lc3_e9798
+
+# ---- piece ctl: cdp4's six control rows (the four selects, the reset gate line, the row C strobe)
+# from x 7600 across the field. Each row runs west to a pad at its end and a metal track from it.
+# The four select tracks step west in one nested staircase (y 13073-13204) and run on south out of
+# the region (to y about 16150-16190, bl0); each has one more pad on the way, the west end of a
+# poly row that runs back east to cdp4's corner gate group (x 7560-7650, y 13650-14030, not drawn).
+
+# sel1: row 12225 to its pad (6732,12226); metal west along y 12228 to x 6602, south, west along
+# y 13073 to x 6538, south THROUGH the pad (6537,13701) of the row y 13701, and on south
+P 6732,12225 x7606 w=23
+P 6710,12209:6754,12243               # the row's west end pad
+C 6732,12226 s=24x24
+M 6736,12228 x6602 y13073 x6538 y15000 w=14
+P 6515,13684:6559,13718               # west end pad of the row y 13701; the track runs on through it
+C 6537,13701 s=24x24
+P 6537,13701 x7550 w=24               # row east to cdp4's corner group (steps 12 px north at x 7548, beyond)
+N P 7000,12225 cdp4_sel1
+N P 7000,13701 cdp4_sel1
+N M 6538,14500 cdp4_sel1
+
+# sel2: row 12485 to its pad (6732,12485); metal west along y 12488 to x 6646, south, west along
+# y 13116 to x 6581, south THROUGH the pad (6580,14004) of the row y 14004, and on south
+P 6732,12485 x7606 w=23
+P 6710,12468:6754,12502
+C 6732,12485 s=24x24
+M 6736,12488 x6646 y13116 x6581 y15000 w=14
+P 6558,13987:6602,14021               # west end pad of the row y 14004; the track runs on through it
+C 6580,14004 s=24x24
+P 6580,14004 x7550 w=24
+N P 7000,12485 cdp4_sel2
+N P 7000,14004 cdp4_sel2
+N M 6581,14500 cdp4_sel2
+
+# sel3: row 12528 to its pad (6687,12528); track x 6689 south, west along y 13160 to x 6624, south
+# THROUGH the pad (6623,13809) of the row y 13809, and on south
+P 6687,12528 x7606 w=23
+P 6665,12511:6709,12545
+C 6687,12528 s=24x24
+M 6689,12524 y13160 x6624 y15000 w=14
+P 6601,13792:6645,13826               # west end pad of the row y 13809; the track runs on through it
+C 6623,13809 s=24x24
+P 6623,13809 x7550 w=24
+N P 7000,12528 cdp4_sel3
+N P 7000,13809 cdp4_sel3
+N M 6624,14500 cdp4_sel3
+
+# sel4: row 12788 to its pad (6731,12788); track x 6733 south, west along y 13204 to x 6668, south
+# THROUGH the pad (6666,13961) of the row y 13961, and on south
+P 6731,12788 x7606 w=23
+P 6709,12771:6753,12805
+C 6731,12788 s=24x24
+M 6733,12784 y13204 x6668 y15000 w=14
+P 6644,13944:6688,13978               # west end pad of the row y 13961; the track runs on through it
+C 6666,13961 s=24x24
+P 6666,13961 x7550 w=24
+N P 7000,12788 cdp4_sel4
+N P 7000,13961 cdp4_sel4
+N M 6668,14500 cdp4_sel4
+
+# rst: row 12874 to its pad (7467,12875); track x 7468 south to a pad (7467,13897); from the pad a
+# poly east along y 13916, under the track x 7511, to the west edge of a heavy-outlined box
+# (7535-7580, 13903-13940) at the corner of cdp4's gate group. The box is not drawn (notes,
+# Ambiguity 9): read as a buried contact onto that group's node diffusion.
+P 7467,12874 x7606 w=22
+P 7445,12858:7489,12892
+C 7467,12875 s=24x24
+M 7468,12871 y13901 w=14
+P 7452,13878:7490,13910               # the south pad
+C 7467,13897 s=24x24
+P 7462,13906:7532,13927               # poly east to the box's west edge
+N P 7550,12874 cdp4_rst
+N P 7520,13916 cdp4_rst
+
+# ld: row 12962 to a pad below its west end (7556,12983); track x 7556 south. It passes over the
+# box at y 13899-13949, where neither metal shot shows it (drawn uncertain, guide trap 27), comes
+# out south of it, turns west along y 13982 to x 7448 and south onto bc1's metal of bc1_ld_a
+# (trace/bc1.txt draws it from y 14050 down to the strobe driver's inverter cell 1).
+P 7556,12962 x7606 w=22
+P 7540,12951:7576,13000               # the pad; the row enters at its top right
+C 7556,12983 s=24x24
+M 7556,12979 y13899 w=14
+?M 7556,13895 y13953 w=14             # over the box: dark for 51 px in both metal shots
+M 7556,13949 y13982 x7448 y14060 w=14
+N P 7590,12962 cdp4_ld
+N M 7448,14020 bc1_ld_a
+@alias bc1_ld_a cdp4_ld

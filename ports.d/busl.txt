@@ -65,3 +65,21 @@ lc3_w9947    P  7550,14772-14796   ?   poly row on east to a pad (7835,14784) (n
 lc2_x6299    P  7550,14902-14926   ?   poly row on east past x 7860 (end not seen)
 lc2_x6342    M  6359-6373,15000    ?   track on south into bl0's ground
 lc2_x6387    M  6401-6415,15000    ?   track on south into bl0's ground (seen to y 15150)
+
+# Piece ctl: cdp4's six control rows (selects from the south; rst to cdp4's corner gate group; ld = bc1_ld_a)
+cdp4_sel1    P  7600,12214-12237   in  cdp4's select row sel1 (its file starts it at x 7600); driven from south of y 15000
+cdp4_sel2    P  7600,12474-12497   in  cdp4's select row sel2
+cdp4_sel3    P  7600,12517-12540   in  cdp4's select row sel3
+cdp4_sel4    P  7600,12777-12800   in  cdp4's select row sel4
+cdp4_sel1    P  7550,13689-13713   in  poly row on east to a gate band (y 13677-13698: it steps 12 px north at x 7548) of cdp4's corner gate group (not drawn)
+cdp4_sel3    P  7550,13797-13821   in  poly row on east to a gate band (y 13792-13812) of cdp4's corner gate group (not drawn)
+cdp4_sel4    P  7550,13949-13973   in  poly row on east to a gate band of cdp4's corner gate group (not drawn)
+cdp4_sel2    P  7550,13992-14016   in  poly row on east into cdp4's corner gate group (not drawn)
+cdp4_sel1    M  6531-6545,15000    in  track on south into bl0's ground (followed to y 16150)
+cdp4_sel2    M  6574-6588,15000    in  track on south into bl0's ground (followed to y 16192)
+cdp4_sel3    M  6617-6631,15000    in  track on south into bl0's ground (followed to y 16178)
+cdp4_sel4    M  6661-6675,15000    in  track on south into bl0's ground (followed to y 16191)
+cdp4_rst     P  7600,12863-12885   ?   cdp4's row of the selector nodes' pull-down gates
+cdp4_rst     P  7532,13906-13927   ?   the poly ends on the west outline of a box (7535-7580,13903-13940) of cdp4's corner gate group: read as a buried contact onto its node diffusion, not drawn (notes, Ambiguity 9)
+bc1_ld_a     P  7600,12951-12973   in  cdp4's strobe row of latch row C (cdp4_ld; one net with bc1_ld_a through a ?M, @alias)
+bc1_ld_a     M  7441-7455,14050    in  joins bc1's metal of the strobe driver's twin output (bc1 draws it from y 14050 south)
