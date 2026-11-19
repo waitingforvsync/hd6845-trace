@@ -12,3 +12,5 @@
 7240,8880:7600,9420   route  row D data lines, north end | the six "line g" rows of the central datapath's row A cells (cdp3_g_c2..c7) end on a staircase of pads; six metal tracks leave south
 7240,9420:7530,13670   route  row D data lines | the six tracks run down the east side of the left bus field without a tap
 7170,13670:7530,14060   route  row D data lines, lower staircase | each track steps west onto the bottom-centre logic's poly line that feeds one bit of the 6-bit latch row D
+7130,8795:7480,15000   route  latch D enable down the field | tc2_sr_g (the enable of the latch that makes the row counter's step, also the gate line of the top-centre latch) on one metal track from the corner pad north of the datapath's row A to the bottom-centre logic, without a tap
+7530,9430:7600,11145   route  NAND input from column 0's foot | cdp3_k_b: a poly row, a pad, a metal track south to a diffusion pad whose diffusion runs east under column 0's ground rail

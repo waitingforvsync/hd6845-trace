@@ -481,3 +481,40 @@ N M 7468,11000 cdp3_g_c7
 @alias cdp3_g_c5 bc1_d4
 @alias cdp3_g_c6 bc1_d5
 @alias cdp3_g_c7 bc1_d6
+
+# =====================================================================================
+# Piece sr (run 6, 2026-11-19): tc2_sr_g (= lc1_w7908, the enable of latch D; = eof_w7718, row 2
+# of the gate on inh_ck's tap row) runs on from eofw's corner pad (7446,8732) down the whole
+# field. trace/eofw.txt draws the metal south of the pad to y 8800 (M 7466,8745 y8800); from
+# there one metal: south to y 8910, a diagonal south-west along x+y = 16377 (the south-east line
+# of the diagonal bundle, 57 px north-west of piece d6's row-end pads) to (7209,9168), south
+# 4,500 px at x 7209 (the track west of d6's line 1), west along y 13680 to x 7145 (the seventh
+# step of the lower staircase), south, east along y 14176 to x 7187 (the arm lies on bc1's line 3,
+# the poly row y 14175, for 45 px: no contact), south, east along y 14285 to x 7231, south, west
+# along y 14588 to x 7187, south out of the region at y 15000 (it runs on in bc1's ground to
+# y 15482, west to x 7103 and south; the follower ends at (7100,16279): not drawn).
+# No pad or contact on the way (scan cache/scratch/busl/sr_scan.txt). Where it crosses the
+# undrawn poly row y 13744 neither metal shot shows the metal for 22 px (y 13728-13749): read
+# as a plain crossing (no pad on the metal or the row, no hole; notes, Ambiguity 13).
+# =====================================================================================
+M 7467,8795 y8910 7209,9168 y13680 x7145 y14176 x7187 y14285 x7231 y14588 x7187 y15000 w=14
+N M 7209,11000 tc2_sr_g
+
+# =====================================================================================
+# Piece kb (run 6, 2026-11-19): cdp3_k_b, the poly row y 9450 that trace/cdp3.txt draws from
+# x 7600 east to gate 1 of the NAND beside its row C. West of x 7600 the row ends on a pad
+# (7554,9450), 25 px south of the upper arm of d6's line 6; the pad's metal track runs 1,670 px
+# south at x 7555 (the easternmost track of the field, east of d6's line 6) with no pad or
+# contact on the way, and ends on a contact (7555,11118) on a diffusion pad; a diffusion band
+# (y 11100-11126) leaves the pad east, under column 0's VSS rail (x 7600-7646) into cdp3's ground
+# (not drawn there).
+# =====================================================================================
+P 7554,9449 x7606 w=22                # the row, onto cdp3's P 7600,9450
+P 7534,9430:7576,9468                 # its west end pad
+C 7554,9450 s=24x24
+M 7555,9446 y11122 w=14
+C 7555,11118 s=24x24
+D 7538,11096:7584,11144               # the diffusion pad
+D 7575,11100:7600,11127               # the band east, to the VSS rail's west edge
+N P 7590,9449 cdp3_k_b
+N M 7555,10300 cdp3_k_b
