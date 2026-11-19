@@ -10,8 +10,8 @@ lc2_w8857 = NOT( lc2_w8930 & ( lc2_w8725 | lc2_w8475 ) )        FIRM (as drawn)
 ```
 
 Gate K3, below latch K in the west column: `lc2_w8725` (latch K's second output) and `lc2_w8475` (its enable) in
-parallel under the west rail, in series with `lc2_w8930`, a vertical poly strip east of the rail whose source is to
-the south (not traced). Its output leaves on a thin metal south to a pad (4862,8998), which is on the top row of the
+parallel under the west rail, in series with `lc2_w8930`, a vertical poly strip east of the rail that leaves by an
+arm east at y 8925-8945 into the polys at x 4880-4925 (not traced). Its output leaves on a thin metal south to a pad (4862,8998), which is on the top row of the
 next gate. Full extraction: 2366 nets, 4257 transistors, 0 errors, 0 warnings.
 
 Earlier:
@@ -462,14 +462,14 @@ The west rail is wider here: x 4741-4812 from y 8800 (`tl5_tracks.py h 8848 4690
 | 8773-8805 | VSS box (4752-4798, 8762-8806), contact (4768,8780) (`textmap.py 4752 8764 4790 8800`) |
 | 8812-8825 | row c, `lc2_w8725`: K2's output poly (x 4622-4640 south from its box) turns east at y 8810-8829; it ends at x 4797 (pink under the rail at x 4800-4815) |
 | 8835-8860 | node N; it runs on east under the rail's east part (E: x 4802-4816, down to y 8900; pale and continuous at y 8838-8856, `z3_a.png`) |
-| 8867-8889 | row d, `lc2_w8475`: from a pad (4649,8865) on the thin metal x 4641-4655 (`textmap.py 4632 8848 4668 8884`); under the rail it steps down and ends in a hook up the column's east side (4778-4798, 8856-8890) |
+| 8867-8889 | row d, `lc2_w8475`: from a pad (4649,8865) on the thin metal x 4641-4655 (`textmap.py 4632 8848 4668 8884`); under the rail it steps down and ends at x 4789 (round 12: a plain end cap, no hook) |
 | 8890-8940 | box S: contact (4752,8908) to the rail, so VSS (`textmap.py 4732 8840 4816 8950`, `z6_m.png`: the metal over the box is the rail's; the lines in it are R/16 = 7 dips, the features beneath) |
 
 N is between two VSS nodes, so it is not an end of a stack by itself: its only way out is east.
 
 | Item | Reading | Seen |
 |---|---|---|
-| the strip, `lc2_w8930` | a vertical poly x 4818-4838 from y 8812 south (past y 8950; an arm east at y 8925-8945) lies along E's east edge; beyond it an open diffusion X (4842-4866, 8805-8880: a plain pinkish lens in both metal shots). Taken as a gate between E and X (channel y 8838-8880) | `z4_m.png`, `z4_a.png`, `z4_c.png`; `tl5_tracks.py rows col 8796 8960 4 4828`. **Not seen directly**: Ambiguity 15 |
+| the strip, `lc2_w8930` | a vertical poly x 4818-4838 from y 8812 to y 8943, where it ends (round 12: `px.py col 4828 8920 8962`: peach to y 8941, pink from 8944) and leaves by an arm east at y 8925-8945 (drawn to x 4876; under the output's thin metal without a contact). It lies along E's east edge; beyond it an open diffusion X (4842-4866, 8805-8900: a plain pinkish lens in both metal shots). Taken as a gate between E and X (channel y 8838-8900) | `z4_m.png`, `z4_a.png`, `z4_c.png`; `tl5_tracks.py rows col 8796 8960 4 4828`. **Not seen directly**: Ambiguity 15 |
 | load | one poly: a ringed box (4865-4895, 8803-8832) on X (the tie), a plate (4868-4925, 8836-8876) over a diffusion strip y 8846-8868 from X to a VCC box (4930-4985, 8805-8885, contact (4946,8830)), and a pad box (4868-4900, 8872-8904) | `z2_m.png` (6x), `o16_m.png`; `textmap.py 4932 8812 4962 8842` |
 | ... a second strip | the poly east of the ringed box (x 4898-4925, y 8805-8836) is as red as the plate (`px.py col 4912 8798 8884`: clean 130-187/58-104/28-84 against the plate's 132-178/81-115/46-65 and a pad box's 232/159/128): drawn as an uncertain second load strip. It only strengthens the load | |
 | output | the pad (4882,8890) (`textmap.py 4864 8872 4900 8904`) on a thin metal that steps west to x 4859-4873 and runs south to a pad (4862,8998) (drawn to y 8975) | `z7_m.png` (6.3x) |
@@ -529,7 +529,7 @@ Run 3 (latch D's lower unit and the bus field):
 | `lc2_w8475` | M | 4641-4655, 8880 | ? | run 9: drawn end: the enable on its thin metal, on south past the pad (4649,8865) (it ends on a pad about (4648,9122)) |
 | `lc2_w8552` | M | 4597-4611, 8700 | out | run 8: drawn end: K1's output on its thin metal, on south |
 | `lc2_w8692` | P | 4578-4596, 8770 | in | run 8: drawn end: K2's data row comes up this vertical poly from about y 8900 |
-| `lc2_w8930` | P | 4818-4838, 8950 | in | run 9: drawn end: K3's series gate, a vertical poly from the south |
+| `lc2_w8930` | P | 4876, 8925-8945 | in | run 9, round 12: drawn end: the arm east of K3's series gate, on into the polys at x 4880-4925 |
 | `lc2_w8857` | M | 4859-4873, 8975 | out | run 9: drawn end: K3's output on its thin metal, south to a pad (4862,8998) |
 
 ## Ambiguities
@@ -638,7 +638,7 @@ Run 5:
   node D's west lobe (Ambiguity 9); the area (5785-5830, 9200-9265) below the block is field (round 6: red minus green 0-2 in the chip-2 stripped shot).
 - The output poly's leg x 5924-5940 runs on south in `lc3`'s strip to about y 9540 and turns east along y 9525-9545 (round 6; not drawn by `lc3`).
 - Rows 2, 3 and 5 west of x 5545. The fifth staircase line south of (5257,8334) (pads on it near (5257,8425)?); pads (5295,8472), (5341,8539), (5341,8562), (5341,9038).
-- (Done: the rails' jogs, latch K, gate K3.) The rest of the west cluster: the rails south of y 8960 (east rail: of y 8770); tracks A, B, C south of y 8700; the thin metal x 4604 (`lc2_w8552`) south of y 8700 (it ends on a pad (4604,9075)) and x 4648 (`lc2_w8475`) south of y 8880 (it ends on a pad (4648,9122), where an L-shaped metal arrives from the south-west); the source of `lc2_w8692` (vertical poly x 4578-4596 from y ~8900) and of `lc2_w8930` (the strip, on south); the gates below y 8945 (under the west rail: gates y 8977-8991 (`lc2_w8857`), 9020-9034, 9063-9078 (`lc2_w8552`), a VSS node with contact (4775,9100), gate 9135-9148 (`lc2_w8475`)) and the whole east column.
+- (Done: the rails' jogs, latch K, gate K3.) The rest of the west cluster: the rails south of y 8960 (east rail: of y 8770); tracks A, B, C south of y 8700; the thin metal x 4604 (`lc2_w8552`) south of y 8700 (it ends on a pad (4604,9075)) and x 4648 (`lc2_w8475`) south of y 8880 (it ends on a pad (4648,9122), where an L-shaped metal arrives from the south-west); the source of `lc2_w8692` (vertical poly x 4578-4596 from y ~8900; a poly row y 8898-8920 that ends at x ~4705 by a box (4698-4712, 8928-8948), seen by review round 12) and of `lc2_w8930` (its arm east at y 8925-8945 runs into polys at (4880-4925, 8925-8960)); the gates below y 8945 (under the west rail: gates y 8977-8991 (`lc2_w8857`), 9020-9034, 9063-9078 (`lc2_w8552`), a VSS node with contact (4775,9100), gate 9135-9148 (`lc2_w8475`)) and the whole east column.
 - **The diffusion under tracks A, B, C** (Ambiguity 13): pale tan under the three tracks from y 8340, to y 8430 (C), 8540 (B) and on south (A); what it joins and whether any poly crosses it is not read.
 - (Done, run 7: gate 9 of `lc1`'s column.) Its output's metal north of y 8067; rail 1 south of y 8160 and rail 2 south of y 8067.
 - Geometry from round 7, not changed: latch B's VSS box's diffusion runs on north of y 8062 (tan to y 8050 at x 5682); a green patch (5858-5872, 8228-8236) under the VCC rail between two VCC boxes, no ring.
@@ -1039,3 +1039,42 @@ After the fixes: `tools/t.sh lc2 sameconn.py 5145fc0`: `connections identical`;
 `.venv/bin/python tools/sameconn.py 5145fc0`: `connections identical`.
 
 Round 11: no findings that change a connection.
+
+Round 12 (full review of run 9's piece L: gate K3, 2026-11-18 22:00 -0600, a fresh agent on claude-fable-5-2, at commit
+8c767ac; images `cache/scratch/lc2/review-12/`, 16 of them). Told to suspect: the strip x 4818-4838 as a gate and
+whether X is diffusion; N one with E; box S's contact and the rail; row d's hook and row c's end; the load poly, its
+ringed box and second strip; the output's thin metal; the column west of the rail; anything left out.
+
+Checked and found correct: the equation and all five transistors. The strip is a gate (clean-shot means 247/176/122
+beside E against 229/170/120 and 227/166/115 over field; row c reads 242/172/120 on its gate and 220/157/117 on its
+end cap); lower X is diffusion (`b2.png`, `e1.png`). N is one with E (tan continuous at y 8838-8852, x 4735-4815, no
+contact on either; `d1.png`). Row c ends at x 4797 (20 px of pink field before the strip's top; `k1.png`). Box S and
+the VSS box contact the same rail (`h1.png`, `k1.png`). The contacts at (4646,8865) and (4881,8890) are real. The load
+is one poly, the VCC contact real, no other contact on the thin metal to y 8975 (`g1.png`).
+
+Findings, each confirmed by my own measurement and fixed:
+
+1. **Where a wire goes on** (not the equation): `lc2_w8930` does not come from the south. The strip ends at y ~8943
+   (`px.py col 4828 8920 8962`: clean peach to y 8941, pink from 8944; `z11.png` 9x) and leaves by an arm east at
+   y 8925-8945, one poly with the strip in both chip-2 shots (reviewer: `px.py row 8935`, `i1.png`), under the output's
+   thin metal without a contact. Drawn now, to x 4876; the port moved from (4818-4838, 8950) to (4876, 8925-8945).
+   In the clean shot a ringed outline (4832-4850, 8920-8942) lies between strip and arm: taken with the reviewer as
+   one poly.
+2. Geometry: the stack's diffusion runs west to x ~4707 from y 8786 to 8895 (rows c and d about 72 wide). Added.
+3. Geometry: K2's output poly south was drawn at x 4613-4631; it is x 4622-4640.
+4. Geometry: the strip's channel and X reach y 8900, not 8880.
+5. Geometry: the load poly's lower part (the pad box) reaches x 4925, not 4900.
+6. Geometry: row d ends at x ~4789 in a plain end cap; no hook.
+7. Geometry: the rail's corner (4741-4757, 8938-8960) is bare; the output metal leaves the pad's south-west corner.
+8. The second load strip's evidence does not discriminate (poly over field at (4912, 8877-8901) is as red): stays `?D`.
+
+Could not check: X's upper part (4846-4858, 8806-8838) reads like field in chip-1 metal and chip-2 stripped, though
+closed by an edge at y 8801 with no edge against lower X: the ringed box rests on its outline. A long buried contact
+under the strip cannot be excluded by colour alone (Ambiguity 15). Metal continuity over y 8971-8990, beyond the drawn
+end. Undrawn and not followed (Not done): a poly row y 8898-8920 ending at x ~4705, a box (4698-4712, 8928-8948),
+polys at (4880-4925, 8925-8960), a line at y 8954.
+
+After the fixes: `tools/t.sh lc2 sameconn.py 8c767ac`: `connections identical`;
+`.venv/bin/python tools/sameconn.py 8c767ac`: `connections identical`.
+
+Round 12: one finding that changes where a wire leaves (the port of `lc2_w8930`), fixed; seven geometry-only, fixed.

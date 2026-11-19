@@ -570,27 +570,30 @@ B 4840,8673:4874,8707
 # under the rail's east part (E, x 4785-4816, to y 8900); a vertical poly strip x 4818-4838 lies between E and an open
 # diffusion X (x 4842-4866), which has the load. Views z1-z7; survey.md.
 M 4777,8770 y8960 w=50                      # the west rail on south (drawn to y 8960)
-M 4741,8800:4812,8960                       # ... wider from y 8800
+M 4741,8800:4812,8938                       # ... wider from y 8800
+M 4757,8938:4812,8960                       # round 12: its south-west corner (4741-4757, 8938-8960) is bare
 M 4952,8770 y8960 w=56                      # the middle rail on south (drawn to y 8960)
 D 4752,8762:4798,8806                       # VSS box
 C 4768,8780
 D 4737,8800:4780,8940                       # the column under the rail
+D 4707,8786:4780,8895                       # round 12: it is wider, west to x 4707 past the rail's edge (no edge between x 4712 and 4760: px.py row 8843)
 C 4752,8908                                 # box S: VSS
 D 4772,8836:4816,8854                       # node N east ...
 D 4802,8836:4816,8900                       # ... and down the rail's east part (E)
-P 4622,8770 y8820 w=18                      # K2's output poly on south (x 4622-4640) ...
+P 4622,8770:4640,8829                       # K2's output poly on south (x 4622-4640) ...
 P 4622,8810:4797,8829                       # ... and east as row c; it ends at x 4797
 P 4634,8850:4666,8880                       # row d's pad, on the thin metal x 4641-4655 (lc2_w8475)
 C 4649,8865
 M 4648,8700 y8880 w=14                      # that thin metal on south (drawn to y 8880: it runs on)
 P 4660,8855:4752,8880                       # row d; under the rail it steps down ...
-P 4746,8864:4798,8890                       # ... and ends in a hook up the column's east side
+P 4746,8864:4789,8890                       # ... and ends at x 4789 in a plain end cap (round 12: no hook)
 N M 4648,8800 lc2_w8475
 # the strip and X
-P 4818,8812:4838,8950                       # the vertical poly strip (drawn to y 8950: it runs on south)
+P 4818,8812:4838,8943                       # the vertical poly strip; it ends at y 8943 (round 12) ...
+P 4818,8925:4876,8945                       # ... and leaves by an arm east, under the output's thin metal (no contact), into the polys at x 4880-4925 (drawn to x 4876)
 N P 4828,8930 lc2_w8930
-D 4810,8838:4848,8880                       # the diffusion under it, from E to X
-D 4842,8805:4866,8880                       # X
+D 4810,8838:4848,8900                       # the diffusion under it, from E to X
+D 4842,8805:4866,8900                       # X
 D 4842,8805:4896,8834                       # ... and under the tie box
 ?D 4894,8805:4932,8836                      # the poly east of the tie box is as red as the plate below (clean shot; px.py col 4912): a second strip of the load, uncertain (it only strengthens the load)
 # load: one poly: tie box, the plate over the strip y 8846-8868, and the pad (4882,8890) of a thin metal that runs south
@@ -600,7 +603,7 @@ P 4868,8836:4925,8876
 D 4862,8846:4932,8868
 D 4930,8805:4985,8885
 C 4946,8830
-P 4868,8872:4900,8904
+P 4868,8872:4925,8904
 C 4882,8890
-M 4882,8884 y8908 x4866 y8975 w=14          # the output's thin metal south (drawn to y 8975; it ends on a pad (4862,8998))
+M 4882,8884 y8894 4866,8906 y8975 w=14      # the output's thin metal: from the pad's south-west corner south (drawn to y 8975; it ends on a pad (4862,8998))
 N M 4866,8940 lc2_w8857

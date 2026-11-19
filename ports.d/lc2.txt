@@ -70,5 +70,5 @@ lc2_w8475   M  4641-4655,8880  ?    the enable on its thin metal, drawn end (it 
 lc2_w8552   M  4597-4611,8700  out  K1's output on its thin metal: drawn end, runs on south
 lc2_w8692   P  4578-4596,8770  in   K2's data row comes up this vertical poly from about y 8900: drawn end
 # Run 9: gate K3
-lc2_w8930   P  4818-4838,8950  in   K3's series gate, a vertical poly strip from the south: drawn end
+lc2_w8930   P  4876,8925-8945  in   the arm east of K3's series gate (a vertical poly strip x 4818-4838), on into the polys at x 4880-4925: drawn end
 lc2_w8857   M  4859-4873,8975  out  K3's output on its thin metal, south to a pad (4862,8998): drawn end
