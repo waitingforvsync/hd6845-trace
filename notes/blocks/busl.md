@@ -90,7 +90,36 @@ What the rows do with the bit is `larr`'s untraced part (x 3900-4720).
 2. **The rows' layer.** Taken as diffusion from the colours above; a poly row would make no
    difference to any connection here (nothing crosses the rows but metal).
 
+3. **The poly L round c3's south pad** (the pad (5514,13222); a poly runs east along y 13258-13272
+   and north along x 5545-5560, at minimum spacing from the pad's south and east edges). The round-1
+   reviewer could not resolve the two outlines at 6x in the clean shot. Read by the tracer in the
+   chip-2 shots at 5x (`c3s.png`): the pad's outline is closed and a pale strip 3-4 px wide lies
+   between it and the poly's outline on both sides; `tools/px.py col 5515 13236 13276 2`: pad to
+   y 13244, dark to 13258, poly (chip-2 stripped shot 157/116/63) from 13260. Taken as apart; there is
+   no buried-contact box. The poly L itself is not drawn (not this piece's).
+
 ## Review
+
+**Round 1: full review** (2026-11-19 14:05 +0100; a fresh Fable 5.2 reviewer agent; commit 59157c2; piece `h8`).
+Told to suspect: the track staircase's order, the north pad staircase, the poly rows (a step, a
+break, a tap, the red patches), each south pad (which track is on it, whether it ends), the lower
+tracks' crossings, the diffusion rows (straight, their layer, c3's step), a shift by one row at x 7600.
+Checked (25 images in `cache/scratch/busl/review-1/`): both pad staircases and the track staircase at
+3.4x in the metal and clean shots, with `tools/follow.py --gap 16` on every track; the poly rows by an
+edge-pair measurement every 7 px on the chip-2 metal shot to x 7618 (offset 0 to -2 px, width 23, no
+step, no break) and views at 1.6x (no pad on any track); two red patches by `tools/textmap.py --acid`
+(colour only); the nine rows at x 7600 (the ninth, y 10317, ends on its own pad near (6730,10315);
+the eight drawn are the southern eight); each south pad at 4x in two shots; c3's step in three shots;
+the lower tracks by `tools/tl5_tracks.py v`; a diagonal poly under c1 and c2 at (5400-5470,13395-13465)
+and a pad (5408,14347) beside c0's track (neither touches); the diffusion rows in three shots (chip-2
+metal blue 78-87: diffusion).
+Findings: none. Could not check: (a) whether the poly L south and east of c3's pad touches the pad
+(would change a connection): read afterwards by the tracer in the chip-2 shots, apart (Ambiguity 3);
+(b) the diffusion rows and lower-track crossings were read at 1.4x and by text tools, not at 4x;
+(c) `cdp3` has no `ports.d` file, so the join at x 7600 rests on the photos and the rows' y.
+Nothing changed in the trace.
+
+Round 1: no findings.
 
 ## Not done
 
