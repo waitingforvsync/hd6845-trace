@@ -8,7 +8,8 @@ Trace: `trace/regs.txt`. Scratch: `cache/scratch/regs/` (`survey.md`). Started 2
   transistor, from where `bd3` leaves them (y 17300) to the write line of one register row each.
   Full extraction: 2378 nets (four joins), 4351 transistors, 0 errors, 0 warnings.
 - `wr_r12`'s join rests on one uncertain item (a `?M`, Ambiguities 1); the other three joins have
-  none (`tools/unsure.py` lists only `wr_r12`).
+  none (`tools/unsure.py` lists only `wr_r12`). `wr_r12` has a contact onto an undrawn structure in
+  `bw`'s region, and `wr_r14` possibly one (Ambiguities 1).
 - Not done: the read selects (`rsel14_buf` .. `rsel17_buf`, `rsel12_buf`, `rsel13_buf`), see Not done.
 
 ## Inventory
@@ -61,42 +62,60 @@ shot: poly all the way, field on both sides).
 
 ## Ambiguities
 
-1. **`wr_r12` across the structure at x 11320-11400, y 11740-12350** (in `bw`'s region; nobody has
-   drawn it). The full-width metal from the south stops at (11373,11905); a full-width metal
-   starts at (11376,11757) and runs north to row C's pad. Between them `tl5_tracks.py v 11376`
-   finds no metal by the follower's test, and profiles (`px.py row` at y 11780-11890) give at most
-   red 150-165 in a 6 px peak at x 11380, which is bare-ground level. Sharpened views of both metal
-   shots (`rdp3_sharp.py`, `g5.png`) show a thin bright speckled line x 11370-11380 joining the two
-   ends, in both chips. Drawn `?M`, 8 px wide.
-   What lies beneath (sharpened clean shot, `g4.png`, `g6.png`): a wide diffusion-coloured
-   rectangle x 10530-11400, y 11915-12185 with seven contacts in a column at x 10540 (west end,
-   beside `cdp4`'s s7 supply rail); at its east end two mirrored units. Top unit: a poly plate
-   x 11325-11393, y 11838-11893 over the neck of the rectangle; a strip of the rectangle's colour
+1. **The structure at x 11320-11400, y 11740-12350 on `wr_r12`'s and `wr_r14`'s lines** (in `bw`'s
+   region; nobody has drawn it). A wide diffusion-coloured rectangle x 10530-11400, y 11915-12185
+   with seven contacts in a column at x 10540 (west end, beside `cdp4`'s s7 supply rail) has two
+   mirrored units at its east end (sharpened clean shot, `g4.png`, `g6.png`). Top unit: a poly
+   plate x 11325-11393, y 11838-11893 over the rectangle's neck; a strip of the rectangle's colour
    x 11358-11375 from the plate north to y 11757, turning east along y 11742-11756 (seen to
    x 11480, not followed); a heavy-outlined box (11325-11343, 11798-11820) joined to the plate's
    west part, under `wr_r14`'s metal. Bottom unit: plate y 12205-12260, a U-shaped strip down to
-   y 12342, box (11373-11392, 12283-12298) under `wr_r12`'s metal. Both boxes show a bright centre
-   in a dark ring in both metal shots, and the clean shot reads 163/156/101 at (11330,11812),
-   which is the value of the four end pads' contacts (152-169 / 141-166 / 79-101) and not of a
-   pass-over (trap 26: 186-203 / 176-182 / 131-139); the L's corner reads 156/152/101 at
-   (11380,11752).
-   Readings: (a) two depletion loads fed from the rectangle (a supply cross-under), the top one's
-   output strip contacted by `wr_r12`'s metal along y 11757-11835, so that the "thin line" is the
-   metal in a long contact: an extra pull-up on the long strobe line. Then `wr_r12` is one net
-   through the structure, as drawn. (b) Two transistors whose plates are contacted by `wr_r14`
-   (top) and `wr_r12` (bottom), with `wr_r12`'s south metal ending on the bottom plate's box: then
-   row C's write line would be driven from the top unit's strip and **not be `wr_r12`**.
-   Working assumption (a): the thin line is seen in both chips, a metal cannot end at (11373,11905)
-   without a contact, and the row widths fit (row C is six bits, as R12). What would settle it:
-   tracing the two units (`bw`), following the strip east along y 11748, and finding what the
-   column of contacts at x 10540 is on.
-   Whether `wr_r14`'s metal contacts the top box at (11331,11808) is likewise open: not drawn.
-   `tl5_tracks.py v 11331` shows no break of 25 px there, so `wr_r14`'s own continuity does not
-   depend on it.
+   y 12342, box (11373-11392, 12283-12300) joined to the plate's east part, under `wr_r12`'s metal.
+   - **`wr_r12` contacts the bottom box at (11378,12297): drawn** (found by review round 1). Both
+     metal shots have a bright centre 12 px across (red 220) in a dark ring; the clean shot has a
+     green hole (154/168/117; `textmap.py 11356 12274 11404 12320`). So the bottom unit's plate is
+     on `wr_r12`. The plate itself is not drawn.
+   - **`wr_r14` may contact the top box at (11331,11810): drawn `?C` on a `?P` box.** The same ring
+     and bright centre in both metal shots; the clean shot reads 152-178 / 146-160 / 95-103 (red
+     minus green 6-18), between a hole and a pass-over (trap 26).
+   - **`wr_r12` at y 11757-11905: drawn `?M`.** The line's two edge lines (x 11364, 11386) run
+     through in both chips, the interior is dim (red 100-160 against 215-240 north and south of
+     it), and the clean shot east of the centre line is protected without a break (`px.py col
+     11383`). So the metal is there, and one net is the better reading (reviewer and tracer); it
+     cannot be shown unbroken from these photos (traps 22, 27). No contact is seen at the north
+     end (11376,11750): bright metal between the two edge bars of the strip's east arm, no hole.
+   What the units are is not read. With the plate on the strobe that passes over its box, each
+   looks like an extra pull-up on one long strobe line (a depletion load whose plate is its
+   output, fed from the rectangle as a supply cross-under): believed only. If instead they are
+   transistors gated by the strobes, the strips are two more nets (the top one leaves east along
+   y 11748). Either way `wr_r12` reaches row C's write line by its own metal; what would settle
+   the rest is tracing the two units, the strip east along y 11748 and the contact column at
+   x 10540 (`bw`).
 
 ## Review
 
-(none yet)
+**Round 1, full review, 2026-11-19 15:16 -0600** (fresh Fable reviewer; piece 1, at commit 8e1aa03; 24
+images in `cache/scratch/regs/review-1/`). Told to suspect: `wr_r12` across the structure and
+over its mirrored unit, `wr_r14`'s metal there, the order of the nests at the corners y 14785-14915
+and the turns, the two diagonals, both poly hops, the four end pads and their rows, `wr_r13`'s hop.
+Checked at 3.2-5x in `metal`, `metal1`, `acid1b` (hops not in `acid`), with `px.py`, `textmap.py`,
+`tl5_tracks.py` and 0.9x views of the long runs: corners, turns, diagonals, the 44 px step, both
+hops (eight rows straight), the end pads (a hole each, no metal beyond), the rows y 10709 and
+y 11835 (continuous, no pads under the crossing metals), no contact where `wr_r14` crosses row C or
+at a poly end beside `wr_r12` at y 12905; a ring at (13218,17425) is in chip 2 only, not a contact.
+Could not check: what the two units are; `bd3`'s names; the rows west of x 10570 / 10825.
+Findings:
+1. Undrawn contact on `wr_r12` at (11378,12297). **Changes a connection** (a contact exists).
+   Confirmed by the tracer (`px.py pt`, `textmap.py`): drawn, with the box.
+2. Probable contact on `wr_r14` at (11331,11810), borderline in the clean shot. Would change a
+   connection. Undecidable: drawn `?C` on a `?P` box, Ambiguities 1.
+3. `wr_r12` at y 11757-11905: the metal is there (edge lines through, interior dim); the notes'
+   "no metal" was wrong and the `?M` too narrow. Geometry only: `?M` widened to 14 px, notes
+   corrected.
+`tools/t.sh regs sameconn.py 8e1aa03`: `connections identical`. `.venv/bin/python tools/sameconn.py
+8e1aa03`: `connections identical` (the plate the new contact lands on is not drawn, so the
+extraction does not change; the finding still counts, because a contact was added).
+Round 1: three findings, fixed (one contact added, one marked uncertain, one geometry).
 
 ## Not done
 
