@@ -59,7 +59,11 @@ inh_src     P  9770,18072-18090   ?    link H: from trunks' pad (9770,18081)
 inh_src     P  8930,16728-16746   ?    the row west of the tap pad (8966,16737): into the gate column x 8650-8800
 inh_src     P  8930,16163-16181   ?    the row west of the tap pad (8962,16172): into the gate column
 inh_src     P  8930,15248-15266   ?    the row west of the end pad (8966,15260)
-inh_src     P  8650,17722-17742   ?    the poly west of the pad (8688,17737)
+
+# Piece isrc4: inh_src is lc2_x6299 (run 9)
+inh_src     P  7550,14904-14924   ?    onto the east end of busl's poly row of lc2_x6299 (one net: @alias inh_src lc2_x6299); the driver is beyond it
+inh_src     P  8326,16294-16312   out  the row's east end: a gate at x 8283-8311 over an undrawn diffusion column (the clear row of a latch unit: bc1 / bc3)
+inh_src     P  8326,16900-16918   out  the tap row's east end: the same 606 px lower (bc3)
 
 # Piece g7700: the gate on inh_ck's tap row (run 5)
 eof_w7777   P  6450,7812-7830    in   row 3 of the gate, on west into lc1's strip (cluster E's undrawn west half)
