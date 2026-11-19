@@ -87,7 +87,7 @@ vcc           D      14004,15659-15689        -    the load's strip onto bd1's V
 bd1_n2        D      13795,15712-15736        in   piece n2out: N2 in the gap onto the lower segment of bd1's strip (bd1's bd1_k)
 vss           D      13832,15638-15652        -    piece n2out: the strip's top segment onto bd1's ground diffusion (bd1 has the link as ?D)
 bd1_n2        M      13515-13527,16260        in   piece n2w: from bd1's metal x 13521 (its bd1_k, drawn to y 16273)
-bd1_n2        M      6705-6718,15000          out  piece n2w: on north up the left bus field into busl's region (follower: to (6948,8707), not read)
+bd1_n2        M      6705-6718,15000          out  piece n2w: on north up the left bus field into busl's region; read there by text (run 14: x 6711 to a corner (6711,13249), east to (6777,13249), north), not drawn; it comes out at bd1_n2_u's port (6775,10400)
 
 # Piece isrc5: inh_src is rst_a (run 10). The poly south of rst_a's pad (5147,6803) is drawn on to lc2's metal end.
 rst_a       M  6450,8623-8637     out  onto lc2's diagonal metal end (its first through line, inh_src: its port (6450,8630)): one net, down the left-centre strips to inh_src's loads
@@ -105,3 +105,6 @@ lc3_w9947   P  6443-6460,6390     ?    onto tc2's poly of tc2_m6447 (its port (6
 lc3_w9947   M  6440-6450,9161-9174  ?  onto lc2's metal end (its fourth through line, lc2_x6432: its port (6450,9165)): the ripple counter's clock
 rst_c       P  6450,8911-8936     in   from lc2's diagonal poly (its port there), from latch C's clear pad
 rst_c       M  6440-6450,9445-9459  out  onto lc3's metal end (its fifth corner-bundle line, lc3_w9470: its port (6450,9448-9462))
+# Piece n2n (run 14): the latched R4 match's track from busl's north edge to tl5's bus poly (tl4_w3850)
+bd1_n2_u      M      6769-6782,10400          in   the track x 6775 from busl's region: believed bd1_n2, from the port (6711,15000); the 4,600 px between are drawn by no one
+tl4_w3850     P      5403-5421,6345           out  onto tl5's poly end (its port tl5_w5761 (5402-5422,6350)): the input of tl4's inverter that makes rcs_e3
