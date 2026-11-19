@@ -33,7 +33,7 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `r4`, link A | x 13416-13667, y 9647-10705 | from `mrach`'s poly end (13425,9663): pad and contact (13433,9665), the upper piece of bundle track L2 (y 9652-9938), pad and contact (13432,9925), poly bar y 9916-9934 east under L3-L6, pad and contact (13650,9925), track L7 south to `rdp3`'s piece at y 10700 |
 | `r4`, link B | x 13729-13747, y 13475-14695 | bundle track L9, straight, from `rdp3`'s end (13738,13480) to `bd1`'s track k15 (13738,14690) |
 
-| `r5inv` | x 8330-8650, y 4700-4880 | an inverter in the slice-0 position of `cdp1`'s channel: C-shaped input poly (the west end of the row y 4719), pull-down under slice 0's VSS rail (contact (8431,4770)), node strip y 4824-4848 with a buried contact to the output's poly at its west end (box x 8358-8392), load block x 8534-8592 with its tie box x 8508-8538, y 4783-4815, VCC contact (8615,4838) |
+| `r5inv` | x 8330-8650, y 4700-4880 | an inverter in the slice-0 position of `cdp1`'s channel: C-shaped input poly (the west end of the row y 4719), pull-down under slice 0's VSS rail (contact (8431,4770)), node strip y 4824-4848 with a buried contact to the output's poly at its west end (box x 8358-8392), load block x 8550-8590 (an arm from its top west to the tie box) with its tie box x 8508-8538, y 4783-4815, VCC contact (8615,4838) |
 | `r5w`, link C | x 4962-5183, y 2542-2560 | the poly row from `r9m`'s corner (5175,2550) west under rail RC and the supply metal x 4948-4997 to `tl4`'s row end (4967,2551) |
 | `r5w`, link D | x 3528-4255, y 2494-2526 | `tl2`'s metal on to a pad with a contact (3606,2510), a poly bar under the wide metal x 3648-3760, a pad with a contact (3800,2510), a straight metal east to `tl4`'s bus line 1 at (4250,2512) |
 
@@ -81,7 +81,7 @@ r9m_l1w  = NOT sl_eq_r5                      this piece (firm)
 | Device | Where | W/L | Gate | Between |
 |---|---|---|---|---|
 | pull-down | (8427,4806) | 62/20 | `sl_eq_r5` (the C's lower arm, y 4796-4816) | `vss` (contact (8431,4770) of slice 0's rail) and the node |
-| load | (8563,4839) | 38/58 | the node (tie box at the block's north-west corner) | the node and `vcc` (contact (8615,4838) of slice 0's rail) |
+| load | (8570,4839) | 38/40 | the node (tie box at the block's north-west corner) | the node and `vcc` (contact (8615,4838) of slice 0's rail) |
 
 - **Input.** `cdp1` draws `sl_eq_r5`'s poly row y 4719 from x 10850 to x 8340 (one straight poly
   with no pad and no step in the clean shot at 2x, `t2_row.png`). At its west end the row turns
@@ -172,7 +172,60 @@ driver lies; the other three lead to the loads.
 
 ## Review
 
-(none yet)
+**Round 1: full review** (2026-11-19 00:15 +0000; one fresh reviewer agent on Claude Fable 5.2, read
+from the photos alone; trace at commit 576ed4d; its images in `cache/scratch/eof/review-1/`, 22
+used). Pieces: `r4`, `r5inv`, `r5w`.
+
+Told to suspect: the pad at L2's top and the row under the metal x 13391; a contact from the bar
+y 9925 onto any of the four metals over it (the ring-like spot at (13605,9924)); taps or track steps
+on L2's piece, L7 and L9; `rdp3`'s contact (13736,12826) with no green hole; in `r5inv` the load's
+tie and its tab, the thin metal over the tie box and the strip, the west box, the gate arm's east
+end, a second pull-down or another poly on the node strip, which rail is which, the C's join to the
+row y 4719; in `r5w` whether link C is one row, contacts under the wide metals, link D's pads and the
+metal east of them.
+
+Checked and found correct (4.8-6x in two or more shots, text maps, profiles, the follower):
+- `r4` link A: the three pads (ring with bright centre in both metal shots, green hole in the clean
+  shot); the row under x 13391 and the bar under its four metals plain poly with no hole; the spot at
+  (13605,9924) on chip 2 only; L2's piece and L7 straight with no tap. Link B: straight, no pad or
+  step; the row at y 13893 ends on a pad of the track x 13782, not on this metal; dark spots at
+  y 13487 and 14222 on chip 2 only. `rdp3`'s stretch: the two jogs and the end as drawn, its contact
+  candidates chip-2 blemishes. **`rdp3`'s contact (13736,12826)**: the metal ends on a rounded pad
+  with a ring and bright centre in both metal shots and a pale patch in the chip-2 stripped shot; the
+  clean shot has a mottled red centre and no green hole; read as a contact (Ambiguity 1 stays as an
+  assumption with two readers agreeing).
+- `r5inv`: the C continuous with the row y 4719; the arm ends at x 8473 with field at x 8482-8494;
+  one pull-down only, no other poly on the strip; the west box and the tie box heavy-outlined in both
+  chip-2 shots, the diffusion running into each in the clean shot (tab tan y 4790-4840 at x 8521);
+  the thin metal with no pad, no bright centre in chip 1, no green hole, bright over the strip: no
+  contact, within trap 27's limit; both rails continuous north to `shm`'s `vss` and `vcc` pieces.
+- `r5w`: link C one row, no hole under either metal; link D's pads both contacts, the bar plain under
+  the wide metal, the metals straight with no tap.
+- Extraction: 0 errors, the claimed equations; `tools/unsure.py` lists none of these nets.
+
+Findings, both geometry only, both confirmed by the tracer and fixed:
+1. **The load's gate was drawn too long** (`P 8534,4783:8592,4872`, L 58). Over the strip the poly's
+   west edge is x 8550: `px.py row 4836 8518 8600 3`: chip-2 metal blue 82-94 at x 8527-8545
+   (diffusion) against 52-76 at x 8554-8587 (poly), dark edge at x 8548-8551 in the metal and stripped
+   shots; `px.py row 4864`: field (green over red) at x 8532-8544, poly from x 8556; and at y 4807 the
+   pocket x 8540-8548 is field. The arm to the tie box is only the block's top, y 4785-4801. Now
+   `P 8550,4783:8590,4872` and `P 8508,4785:8554,4801`: W/L 38/40. Same transistor, same nets.
+2. **The VSS rail was drawn too wide above the contact** (x 8399-8469 throughout). Its east edge is
+   x 8444 at y 4721 and x 8466 from the contact's pad down (rows 4721, 4760, 4802, 4835, 4870 in both
+   metal shots). Now a polygon, x 8399-8445 above y 4742. No contact involved.
+
+Proof that the fixes changed no connection (commit before the fixes: 576ed4d):
+
+```
+tools/t.sh eof sameconn.py 576ed4d             ->  connections identical
+.venv/bin/python tools/sameconn.py 576ed4d     ->  connections identical
+```
+
+Not checked by the reviewer: `cdp1`'s row y 4719 east of x 8660 (the tracer looked at it at 2x in the
+clean shot, `t2_row.png`); other packages' geometry on `r9m_l1w` between the inverter and
+(5175,2550); `bd1` south of y 14700; `mrach` west of x 13340.
+
+Round 1: no findings that change a connection.
 
 ## Not done
 

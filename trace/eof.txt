@@ -93,7 +93,7 @@ N M 13738,14100 rc_eq_r4
 #    heavy-outlined box x 8358-8392, y 4836-4864, where the output's poly row (y 4840-4862, from
 #    tc2's pad (8290,4850)) ends on it: a buried contact; east past the thin metal x 8509 to
 #    the load.
-#  - Load. A poly block x 8534-8592, y 4783-4872 in the open (orange in both chip-2 shots) over
+#  - Load. A poly block x 8550-8590, y 4783-4872 in the open (orange in both chip-2 shots) over
 #    the strip, which is y 4820-4858 under it; east of it the strip's land has the contact
 #    (8615,4838) of slice 0's VCC rail (x 8595-8645; shm labels it vcc at y 3950).
 #  - Tie. At the block's north-west corner a heavy-outlined box x 8508-8538, y 4783-4815 (both
@@ -108,7 +108,9 @@ N M 13738,14100 rc_eq_r4
 #    to make no contact (notes, Ambiguity 2).
 P 8352,4719 x8341 y4806 x8473 w=20  # C: from cdp1's row end, south, east under the rail: the gate
 N P 8341,4760 sl_eq_r5
-M 8434,4700 y4880 w=70              # slice 0's VSS rail, the piece over the gate
+M [ 8399,4700 x8445 y4742 x8469 y4880 x8399 ]   # slice 0's VSS rail, the piece over the gate: x 8399-8445
+                                    # above y 4742, widened to x 8469 from the contact's pad down
+                                    # (px rows 4721, 4802, 4835, 4870 in both metal shots; review 1)
 N M 8434,4712 vss
 C 8431,4770 s=30x30
 D 8420,4750:8458,4790               # source: upper part with the contact
@@ -119,10 +121,12 @@ P 8348,4840:8390,4862               # the output's poly row, on from tc2's end (
 B 8356,4834:8396,4866               # buried contact: node to the output's poly
 N D 8490,4836 r9m_l1w
 D 8513,4788:8529,4830               # tab up from the strip into the tie box
-P 8508,4785:8540,4814               # the load gate's arm over the tab
+P 8508,4785:8554,4801               # the load gate's arm: from the block's top west over the tab
 B 8506,4783:8532,4817               # buried contact: load gate to node
-P 8534,4783:8592,4872               # load gate (L 58)
-D 8526,4820:8650,4858               # strip under the load (W 38) and the land east of it
+P 8550,4783:8590,4872               # load gate (L 40): its west edge over the strip is x 8550 (chip-2
+                                    # metal blue 82-94 at x 8527-8545, 52-76 at x 8554-8587, px row 4836;
+                                    # field west of it at y 4864 and in the pocket (8532-8548, 4802-4815); review 1)
+D 8526,4820:8650,4858               # strip, widened from x 8526, under the load (W 38), and the land east of it
 C 8615,4838 s=30x30
 M 8620,4700 y4880 w=50              # slice 0's VCC rail, the piece over the contact
 N M 8620,4712 vcc
