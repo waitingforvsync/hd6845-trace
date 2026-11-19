@@ -2084,7 +2084,7 @@ floor plan looked at round the left-centre strips and the new routes (`cache/scr
 no label over another. Coverage: 65.5% traced; in some package region 99.9%; untraced and in no Queue
 row 0.4%.
 
-## 2026-11-19 18:37  Handoffs: eof runs 8 and 9, busl runs 3 to 6
+## 2026-11-19 18:36  Handoffs: eof runs 8 and 9, busl runs 3 to 6
 
 At the user's request ("when this lands, please apply the handoffs and refresh"), after `busl` run 6
 was merged (d911059). Six handoffs, applied together.
@@ -2138,7 +2138,7 @@ transistors, 0 errors, 0 warnings; `tools/unsure.py`: 92 nets joined only throug
 
 **Handoffs:** none waiting. **Claims:** `busl` (waitingforvsync), `eof` (tom-seddon).
 
-## 2026-11-19 18:47  Refresh
+## 2026-11-19 18:42  Refresh
 
 At the user's request, after the six handoffs above. **Handoffs:** none waiting. **Claims:** `busl`
 (waitingforvsync), `eof` (tom-seddon).
