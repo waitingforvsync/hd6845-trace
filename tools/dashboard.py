@@ -775,6 +775,7 @@ def index_page(d, state, page_of):
                ('active', 'background:var(--active)', 'in progress'), ('partial', 'background:var(--partial)', 'partly done'),
                ('done', 'background:var(--done)', 'done'), ('todo', 'border:2px dashed var(--todo)', 'to do'))))
     body = """<div class="top"><h1>HD6845S die trace</h1>%s</div>
+<p class="dim"><a href="../tutorial/">New to this? How the tracing works: an interactive tutorial &rarr;</a></p>
 <p class="dim">Who is working on what, and how far the trace has got. Built %s. <span id="live" class="mut"></span></p>
 <div class="stats">%s</div>
 <div class="grid"><section><h2>The die</h2><div class="seg layer"><button class="on" data-layer="packages">Tracing packages</button><button data-layer="blocks">Functional blocks</button>

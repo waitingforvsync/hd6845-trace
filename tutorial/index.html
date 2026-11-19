@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>From Photo to Netlist</title>
+<meta name="description" content="An interactive tutorial: how a chip's circuit is recovered from photographs of its die, with a worked example from the HD6845S.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+</script>
+</head>
+<body>
+<noscript><p style="padding:16px;background:#fde;color:#400">This page is interactive and needs JavaScript. Without it you can read the text but the photo viewers, 3D views and simulations will not run.</p></noscript>
+<nav class="top"><div class="wrap">
+  <a href="../dashboard/">&larr; Dashboard</a><b>From photo to netlist</b>
+  <a href="#photos">Photographs</a><a href="#technology">The technology</a><a href="#gates">Gates</a><a href="#reading">Reading layers</a><a href="#example">Worked example</a><a href="#alive">Running it</a><a href="#checking">Checking</a><a href="#latch">Memory</a>
+  <span class="sp"></span><button id="theme" title="Switch between light and dark">Theme</button>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <h1>From photo to netlist</h1>
+  <p class="lead">A chip is a few layers of shapes. If you can see the shapes, you can read off the circuit. This page walks through how we do that for the Hitachi HD6845S, a CRT controller of the 1980s, starting from nothing but photographs of its die, and ends with a real piece of its logic running again from the shapes we traced.</p>
+  <p>Everything below is interactive: drag to pan, scroll to zoom, hover to see what a shape is, click to follow a wire. The 3D views are drawn from the same polygons the tracing project uses, not from a drawing of what they ought to be.</p>
+</div></header>
+
+<!-- 1 ------------------------------------------------------------------------------------------>
+<section id="photos"><div class="wrap">
+  <h2>1. What we start with: photographs</h2>
+  <p>A die is the chip itself, a sliver of silicon, once the plastic or ceramic package is taken away. This one was photographed through a microscope in many overlapping tiles that were stitched into a single image, <b>19,838 by 21,025 pixels</b>. Every position on this page is a pixel of that image, counted from the top-left corner: the tracing project names every feature by its pixel coordinates.</p>
+  <p>There are five photographs in the project, of two copies of the chip. Some show the chip as it left the factory: the top layer, <span class="tm">metal</span>, hides most of what lies beneath. In others the metal was etched away with acid, so the layers below, <span class="tp">polysilicon</span> (poly) and <span class="td">diffusion</span>, can be seen. Section 2 says what each layer is for; for now, they are three layers of wiring-and-switch shapes, stacked. We use the photographs together.</p>
+  <div class="viewer" id="journey">
+    <div class="vtop"><div class="seg" id="j-shots"><button data-s="metal" class="on">Metal intact</button><button data-s="acid1b">Metal etched away</button></div></div>
+    <div class="vbar"><button class="vbtn" id="j-die">Whole die</button><button class="vbtn" id="j-mid">Zoom on a block of logic</button><button class="vbtn" id="j-ex">Go to the worked example</button><span class="readout" id="j-info"></span></div>
+  </div>
+  <p class="hint">Click the picture, then scroll to zoom; drag to pan; double-click to go back to the whole die. The tag marks where the rest of the page goes. The bond pads, where the pins connect, ring the edge; the dense stripes inside are repeated arrays of the same cell.</p>
+  <p>Zoom all the way in and the neat picture is a landscape of rectangles: the same few shapes repeated, wired together. Reading them is the whole job. The rest of this page is what those shapes mean and how they become a circuit.</p>
+</div></section>
+
+<!-- 2 ------------------------------------------------------------------------------------------>
+<section id="technology"><div class="wrap">
+  <h2>2. The technology: a switch you can see</h2>
+  <p>The HD6845S is built in <b>silicon-gate NMOS</b> (n-channel: the current is carried by electrons; the gates are polysilicon), the process of the late 1970s and early 80s. Almost its only component is the MOS transistor, a voltage-controlled switch (a few resistors and capacitors aside). Everything else (gates, latches, counters) is switches wired together.</p>
+  <div class="cols">
+    <div>
+      <h3>One transistor</h3>
+      <p>Two islands of n-type silicon (<span class="td">diffusion</span>) sit in a p-type wafer, with a narrow gap between them. The two islands are the transistor's <b>source</b> and <b>drain</b>: current flows from one to the other when the switch is closed. Above the gap, separated by a thin insulating oxide, lies the <b>gate</b>, made of polysilicon (<span class="tp">poly</span>). With the gate at low voltage nothing joins the islands, so the switch is open. Raise the gate and its electric field draws electrons into the gap, forming a thin conducting <b>channel</b> that closes the switch.</p>
+      <p><b>So a transistor is exactly the place where a poly wire crosses a diffusion wire.</b> That one fact is why the layout is readable from a photograph: find every crossing and you have found every transistor. The width of the crossing (<i>W</i>, across the current) and its length (<i>L</i>, along the current) set how strong the switch is: wide and short is strong, narrow and long is weak.</p>
+      <div class="toggles"><button class="tgl" id="xs-btn">Gate: low</button><span class="hint" style="margin:0" id="xs-cap"></span></div>
+    </div>
+    <div class="card">
+      <svg class="xsec" id="xsec" viewBox="0 0 460 250" role="img" aria-label="Cross-section of an n-channel transistor"></svg>
+    </div>
+  </div>
+
+  <h3>The same thing, built from the traced shapes</h3>
+  <p>The model below is not a drawing from a textbook. It is the polygons we traced for a small piece of the chip (the worked example of section 5), lifted into three dimensions. The photograph it was traced from is laid underneath as the ground. Build it up layer by layer, pull the layers apart, and click any shape to light up everything it is wired to (a connected set of shapes like that is called a <b>net</b>).</p>
+  <div class="viewer sq" id="stack1">
+    <div class="vtop"><div class="seg" id="s1-build"></div></div>
+    <div class="vbar">
+      <span class="slide">Pull apart <input type="range" id="s1-explode" min="0" max="100" value="35"></span>
+      <span class="seg" id="s1-photo"><button data-v="on" class="on">Photo under it</button><button data-v="off">No photo</button></span>
+    </div>
+  </div>
+  <p class="hint" id="s1-caption"></p>
+  <div class="legend"><span><i style="background:var(--diff)"></i>Diffusion: n-type silicon, wires and transistor ends</span><span><i style="background:var(--poly)"></i>Poly: gates, and wires</span><span><i style="background:var(--metal)"></i>Metal: long wires and the power rails</span><span><i style="background:var(--contact)"></i>Contact cut: metal reaches poly or diffusion</span><span><i style="background:var(--buried)"></i>Buried contact: poly joins diffusion directly</span><span><i style="background:#fff;border:1px solid #888"></i>Channel: where poly crosses diffusion</span></div>
+  <p>Layers connect only where something says so. Metal lying over poly is <i>not</i> joined to it unless a <span class="tc">contact cut</span> goes down through the oxide between them. Poly and diffusion are joined by a <span class="tb">buried contact</span> (or, rarely, by a metal contact that lands on both). Where poly merely crosses diffusion, the result is a transistor, not a connection. With just one layer of metal, wires cross each other by ducking through poly or diffusion under the metal.</p>
+  <div class="callout">The 3D view builds the layers up in the order they sit in the layout, bottom to top. The real manufacturing process is more subtle (for one thing, the source and drain are formed after the gate, aligned to it), but the order of the shapes you see in a photograph is this one.</div>
+</div></section>
+
+<!-- 3 ------------------------------------------------------------------------------------------>
+<section id="gates"><div class="wrap">
+  <h2>3. Switches make logic</h2>
+  <p>In this process a logic gate has a fixed shape: a <b>load</b> at the top, <b>pull-down</b> switches at the bottom, and the output node between them.</p>
+  <ul>
+    <li>The <b>load</b> is a <i>depletion-mode</i> transistor: one made, by an extra implant, to conduct even with its gate at the same voltage as its source. So it is always a little on. It connects the output to the positive supply (<b>VCC</b>) through a weak path, so the output sits high unless something pulls it down. Its gate is wired to its own output, and in the layout that wire, a tiny <span class="tb">buried contact</span> between the load's poly and the output's diffusion, is how a load gives itself away. (The implant itself cannot be seen in the photographs, so the tie is what we go by.)</li>
+    <li>The <b>pull-downs</b> are ordinary switches to ground (<b>VSS</b>). If a pull-down conducts, it overpowers the weak load and drags the output low.</li>
+  </ul>
+  <p>One pull-down is an <b>inverter</b>. Two side by side, either of which can pull the output low, make a <b>NOR</b> gate. Pull-downs in series would make a NAND. Click the buttons to flip the inputs:</p>
+  <div class="cols even">
+    <div class="card"><h3 style="margin-top:0">Inverter</h3>
+      <div class="toggles"><button class="tgl" data-in="inv-a">in = 0</button> <span>out = <span class="lamp" id="inv-out">1</span></span></div>
+      <svg class="sch" id="sch-inv" viewBox="0 0 300 260"></svg></div>
+    <div class="card"><h3 style="margin-top:0">NOR</h3>
+      <div class="toggles"><button class="tgl" data-in="nor-a">A = 0</button><button class="tgl" data-in="nor-b">B = 0</button> <span>out = <span class="lamp" id="nor-out">1</span></span></div>
+      <svg class="sch" id="sch-nor" viewBox="0 0 300 260"></svg></div>
+  </div>
+  <p class="hint">Orange wires are high, blue are low. The load is drawn with a thick channel line: it is always conducting.</p>
+  <p>That is all the logic there is. A chip like the 6845 is thousands of these, plus clocked switches that let a stored value ride on a gate's capacitance. What makes it hard is purely that the shapes must be read off the photograph without a single mistake.</p>
+</div></section>
+
+<!-- 4 ------------------------------------------------------------------------------------------>
+<section id="reading"><div class="wrap">
+  <h2>4. Reading the layers in the photographs</h2>
+  <p>Here is a 390 x 440 pixel patch of the die, the one the worked example uses, in four of the five shots. Switch between them, or pick a second shot in the bottom bar and slide to blend the two.</p>
+  <div class="viewer" id="read">
+    <div class="vtop"><div class="seg" id="r-a"></div></div>
+    <div class="vbar"><span class="slide">Blend in <span class="seg" id="r-b" style="border:0"></span><input type="range" id="r-mix" min="0" max="100" value="0"></span><button class="vbtn" id="r-reset">Reset view</button></div>
+  </div>
+  <h3 style="margin-top:14px">Try it: find the feature</h3>
+  <div class="try" id="quiz">
+    <div class="quiz-q" id="quiz-q"></div>
+    <div class="quiz-res" id="quiz-res" aria-live="polite"></div>
+    <div class="toggles"><button class="act" id="quiz-hint">Show me a hint</button><button class="act" id="quiz-next">Next question</button><span class="hint" id="quiz-score" style="margin:0"></span></div>
+  </div>
+  <p class="hint">Click in the picture above (the question and your result stay here). Use the shot switch: some features are obvious in one shot and invisible in another.</p>
+  <div class="cols" style="margin-top:18px">
+    <div>
+      <h3>What each shot is good for</h3>
+      <table>
+        <tr><th>Shot</th><th>What it is</th><th>Use it for</th></tr>
+        <tr><td>Metal (chip 2)</td><td>chip 2, metal intact</td><td>metal wires and their contacts</td></tr>
+        <tr><td>Metal (chip 1)</td><td>chip 1, metal intact</td><td>a second opinion on any metal join</td></tr>
+        <tr><td>Etched (chip 2)</td><td>chip 2, metal etched off</td><td>poly in the open (orange)</td></tr>
+        <tr><td>Etched, clean (chip 1)</td><td>chip 1, metal etched off, the cleanest</td><td>poly and diffusion, even where metal was above</td></tr>
+      </table>
+      <p>Two copies of the chip means every doubtful junction can be looked at twice, by independent photographs.</p>
+    </div>
+    <div>
+      <h3>What each layer looks like</h3>
+      <table>
+        <tr><th>Layer</th><th>Metal shot</th><th>Etched shot</th></tr>
+        <tr><td class="tm">Metal</td><td>bright yellow, speckled, with a dark edge line</td><td>gone; leaves pale or rainbow fringes on the oxide</td></tr>
+        <tr><td class="tp">Poly</td><td>orange-brown where metal does not cover it</td><td>salmon with a sharp outline under where metal was; dark red-brown in the open</td></tr>
+        <tr><td class="td">Diffusion</td><td>plain area inside a dark outline</td><td>tan inside a dark outline under where metal was; bright green or pink in the open</td></tr>
+        <tr><td class="tc">Contact</td><td>a ring or oval in the metal</td><td>dark specks on the diffusion</td></tr>
+        <tr><td class="tb">Buried contact</td><td>small box with a heavy dark outline</td><td>the same, tan inside</td></tr>
+      </table>
+    </div>
+  </div>
+  <p>The hard part is that the picture lies in specific, learnable ways. The colour of a layer changes across the die; metal protects a margin of about 10 pixels beyond its own edge, so a gap between two wires looks like a dark bar that is not a feature; and a dark line across a metal wire is usually the edge of something <i>underneath</i>, not a break in the wire. Our <i>tracing guide</i> records every such trap we have fallen into, more than thirty, because each one cost a wrong connection once.</p>
+  <p><b>Why not let software segment it?</b> We tried. In dense logic the edges of poly and diffusion print through the metal as dark lines and cut every wire into fragments; bridging the gaps would also bridge real gaps between neighbouring wires. So the shapes are entered by hand, as polygons in plain-text files, and image processing is kept for checking: comparing repeated cells, measuring colours across a doubtful junction.</p>
+</div></section>
+
+<!-- 5 ------------------------------------------------------------------------------------------>
+<section id="example"><div class="wrap">
+  <h2>5. A worked example: two gates, from photograph to equation</h2>
+  <p>The patch is two rows of gates beside a power rail. It is a verified calibration example the project keeps for exactly this purpose (<code>trace/examples/pilot.txt</code>), so we can follow every step. The project's "trace" is a text file of shapes in pixel coordinates, and a program, the extraction tool, turns it into transistors and nets; the example's file is small enough to follow whole. We know nothing at the start: not which rail is ground, not what the gates do. Scroll through the steps. The picture on the right follows you.</p>
+  <div class="steps">
+    <div id="steps"></div>
+    <div class="stick">
+      <div class="viewer sq" id="ex">
+        <div class="vtop"><div class="seg" id="e-shots"></div></div>
+        <div class="vbar"><span class="slide" id="e-info"></span><button class="vbtn" id="e-reset">Show the whole patch</button><button class="vbtn" id="e-ovl">Hide the tracing</button></div>
+      </div>
+      <div class="legend" id="e-legend" style="margin-top:8px"><span><i style="background:var(--metal)"></i>Metal</span><span><i style="background:var(--poly)"></i>Poly</span><span><i style="background:var(--diff)"></i>Diffusion</span><span><i style="background:var(--contact)"></i>Contact</span><span><i style="background:var(--buried)"></i>Buried contact</span></div>
+      <p class="hint">Hover over a shape to see what it is. Click it to light up its whole net.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- 6 ------------------------------------------------------------------------------------------>
+<section id="alive"><div class="wrap">
+  <h2>6. Running the traced circuit</h2>
+  <p>The proof of a trace is that it behaves. The simulation below uses no gate equations typed in by hand: it takes the five transistors the extraction found, with their gates and their two channel ends, and plays them as switches. A node is pulled low if a chain of conducting pull-downs joins it to VSS, and otherwise rests high through its load. Click the two input buttons to flip them. (On a wide screen the buttons stay in view as you scroll; the truth table and schematic are further down.)</p>
+  <div class="toggles sticky"><button class="tgl" data-sim="in_a_L">in_a = 0</button><button class="tgl" data-sim="in_c_L">in_c = 0</button>
+    <span>a_out = <span class="lamp" id="v-a">1</span></span><span>b_out = <span class="lamp" id="v-b">1</span></span></div>
+  <div class="cols even">
+    <div class="viewer sq" id="sim-photo"><div class="vtop"><span class="slide" style="font-size:12px">Orange = high, blue = low. Click a transistor.</span></div></div>
+    <div class="viewer sq" id="stack2"><div class="vbar"><span class="slide">Pull apart <input type="range" id="s2-explode" min="0" max="100" value="60"></span></div></div>
+  </div>
+  <div class="cols" style="margin-top:18px">
+    <div>
+      <h3>What the extraction recovered</h3>
+      <table class="truth" id="tt"></table>
+      <p>Row A inverts <code>in_a</code>. Row B is a NOR whose inputs are row A's output and <code>in_c</code>. Chained, they compute <b>b_out = in_a AND NOT in_c</b>, so the pair is a small gate on its own: it passes <code>in_a</code> unless <code>in_c</code> blocks it. The extraction tool derives these equations from the transistor list alone.</p>
+    </div>
+    <div><h3>As a schematic</h3><div class="card"><svg class="sch" id="sch-ex" viewBox="0 0 440 300"></svg></div></div>
+  </div>
+</div></section>
+
+<!-- 7 ------------------------------------------------------------------------------------------>
+<section id="checking"><div class="wrap">
+  <h2>7. Checking: how we know it is right</h2>
+  <p>The end product is a circuit exact enough to emulate behaviour no datasheet documents, so <b>a wrong connection is worse than a missing one</b>. Several habits follow from that.</p>
+  <ul>
+    <li><b>Trace what the photos show.</b> Never fill a gap with what a circuit "should" be. If a junction cannot be read, it is marked uncertain with a <code>?</code> in the trace and written up as an ambiguity, and the work goes on so that it may be settled from another direction.</li>
+    <li><b>Measure, do not just look.</b> Most wrong readings so far were junctions judged by eye at too low a zoom. A colour profile across the junction in two photographs settles it.</li>
+    <li><b>Independent review.</b> A second reader, who did not trace the block, checks every junction that decides a connection against the photographs. Only findings that change a connection count against a limit of three rounds; geometry-only fixes are shown harmless by a tool that proves every connection is unchanged.</li>
+    <li><b>Layout is checked by machine.</b> The extraction counts nets and transistors, flags a contact with nothing under it, a gate that does not fully cross its diffusion, a net with two names.</li>
+    <li><b>Repeated cells are checked against each other.</b> A cell copied a hundred times must look the same a hundred times, which catches both tracing slips and genuine differences.</li>
+  </ul>
+  <p>Step 11 of the example is one such trap, and a good one to look at again with the net highlighted: a metal wire that lies over four poly wires and connects to none of them.</p>
+</div></section>
+
+<!-- 8 ------------------------------------------------------------------------------------------>
+<section id="latch"><div class="wrap">
+  <h2>8. Memory: gates that remember</h2>
+  <p>Chain two gates back to front and the circuit can hold a value. This is the latch at the data bus input of the 6845, as the project recovered it. It is built from the same family of gates as section 5: each half is a load with pull-downs: two in series, in parallel with a third that the other half drives (an AND-OR-invert gate). Each half's output feeds the other half.</p>
+  <p>Click <b>d</b> and <b>le</b> (latch enable). While <code>le</code> is 1 the pair follows <code>d</code>; when <code>le</code> falls to 0 the pair holds its last value, whatever <code>d</code> does next. The question marks are there because, until <code>le</code> has been 1 once, the circuit's state is not determined.</p>
+  <div class="cols even">
+    <div class="card"><div class="toggles"><button class="tgl" id="l-d">d = 0</button><button class="tgl" id="l-le">le = 0</button><span>q = <span class="lamp" id="l-q">?</span> q_n = <span class="lamp" id="l-qn">?</span> out = <span class="lamp" id="l-out">?</span></span></div>
+      <svg class="sch" id="sch-latch" viewBox="0 0 420 220"></svg></div>
+    <div class="card"><svg class="timing" id="timing" viewBox="0 0 420 220"></svg><p class="hint" style="margin-top:0">History of the last few changes.</p></div>
+  </div>
+  <p>The equations the project recovered (<code>d_n</code> is just NOT <code>d</code>, made by an inverter):</p>
+  <pre><code>q   = NOT( (d_n AND le) OR q_n )
+q_n = NOT( (d   AND le) OR q   )
+out = NOT q_n</code></pre>
+  <p class="hint">In the chip this latch is the input of data bit 0; its equations are marked firm in the project's notes (<code>notes/operation.md</code>, from <code>notes/blocks/dbus.md</code>). The page's example cell, by contrast, is a calibration piece the project keeps for teaching.</p>
+</div></section>
+
+<section id="glossary"><div class="wrap">
+  <h2>Glossary</h2>
+  <dl class="gloss">
+    <dt>Die</dt><dd>The silicon chip itself, without its package.</dd>
+    <dt>Metal, poly, diffusion</dt><dd>The three wiring layers of this process, top to bottom. Metal and poly cross over each other freely; poly over diffusion makes a transistor.</dd>
+    <dt>Contact cut / buried contact</dt><dd>The two ways layers are joined: metal to poly or diffusion through a hole in the oxide; poly directly to diffusion.</dd>
+    <dt>Source, drain, gate</dt><dd>A transistor's three terminals: the two ends of its channel (source and drain, diffusion) and the control terminal (gate, poly).</dd>
+    <dt>Channel, W and L</dt><dd>The strip under the gate where current can flow. W is its width across the current, L its length along it; wide and short conducts more.</dd>
+    <dt>Field</dt><dd>The thick oxide over bare silicon between the features; the background of the photographs.</dd>
+    <dt>Rail</dt><dd>A wide metal wire that carries VCC or VSS along a row of gates.</dd>
+    <dt>Inverter, NOR, latch</dt><dd>A gate whose output is NOT its input; a gate whose output is high only when all inputs are low; a pair of gates that holds a bit.</dd>
+    <dt>Depletion load</dt><dd>The always-on weak pull-up transistor of a gate.</dd>
+    <dt>Net</dt><dd>A set of shapes that are all electrically one wire.</dd>
+    <dt>Pull-down</dt><dd>A switch from a gate's output to VSS.</dd>
+    <dt>VCC / VSS</dt><dd>The positive supply and ground.</dd>
+    <dt>Trace file</dt><dd>A text file of shapes (rectangles, polygons, wires drawn as a path with a width, contacts), one item per line, in die-photo pixel coordinates, with names on some nets. The extraction tool turns it into a netlist.</dd>
+    <dt>Netlist</dt><dd>The list of transistors and which nets their gate and two channel ends touch: the circuit without the geometry.</dd>
+  </dl>
+</div></section>
+<footer><div class="wrap">Built from the HD6845S die trace (<code>tutorial/</code>). The photographs and polygons are the project's; the page computes everything it shows from <code>data/example.json</code>, which <code>tutorial/export.py</code> writes from the trace.</div></footer>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
