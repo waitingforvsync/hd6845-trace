@@ -4,7 +4,7 @@ Queue row `busl` of `notes/work-packages.md` (written busL until 2026-11-19): th
 left array (`larr`, rows end at x 4780) and the central datapath (`cdp3`, `cdp4`, from x 7600).
 Claimed region: x 4780-7550, y 10400-15000 (the main part; the northern part 6450-7600 x 6750-10400
 is not started). Coordinates are metal-shot pixels; images are in `cache/scratch/busl/`. Wiring only:
-no transistor has been found in the field so far.
+no transistor has been found in the field so far. Three pieces are drawn: `h8`, `ch1`, `lc9`.
 
 ## Status
 
@@ -30,6 +30,25 @@ only, no uncertain items:
   leaves the region south at (5451,15000) and ends 45 px on, on the pad of the next such row
   (y 15042, in `bl0`'s region, not drawn). The two names are gathered by `@alias` in `trace/busl.txt`
   (shown as `cdp4_bus_s#`); the rename is the coordinator's.
+
+Run 3 (richtw1's session, Claude Fable 5.2; 2026-11-19 16:30 to 16:42 +0100). One piece, `lc9`, wiring
+only, no uncertain items:
+
+- **The nine metal lines that leave `lc3` south at y 10400 run down the whole field as one staircase
+  bundle and end at its foot on the poly rows of the bottom-centre logic's 13-line bus** (piece `lc9`).
+  With `tla`'s metal of `rcs_e4` (the tenth and easternmost line, drawn in `trace/tla.txt`) the lines
+  keep their order through two staircases (y 11491-11880 and y 12380-12772) and turn east along
+  y 14916-14528, the westernmost lowest. Seven end on a poly pad (x 6320-6409) whose poly row runs east
+  under the next thirty tracks: `lc3_e9798` on the row y 14567, `lc2_w9079` on 14611, `lc3_e9756` on
+  14654, **`lc3_w9470` (the input of the inverter that drives `lc1_w7170`) on 14697**, `lc2_w8450`
+  (the ripple counter's clear) on 14740, **`lc3_w9947` (the ripple counter's clock, `lc2_x6432`) on
+  14784**, and `lc2_x6299` on 14914. The rows are drawn to the region's edge at x 7550; they run on
+  240-290 px to pads at x about 7790 and 7835, the west ends of `bc1`'s 13 bus metals (seen, not drawn:
+  `bc1`'s region). `lc2_x6342` and `lc2_x6387` turn south instead (x 6366, x 6408) and leave the
+  region at y 15000. No line has a pad or contact between y 10400 and its end.
+
+Full extraction with run 3: 2,399 nets (unchanged: the nine lines lengthen `lc3`'s and `lc2`'s nets),
+4,345 transistors, 0 errors, 0 warnings. The package by itself: 25 nets, 0 errors, 0 warnings.
 
 Full extraction with run 2: 2,374 nets (eight fewer: the eight joins), 4,290 transistors, 0 errors,
 0 warnings. The package by itself: 16 nets, 0 errors, 0 warnings.
@@ -122,6 +141,63 @@ What was checked beyond the overlays (`o4.png` .. `o8.png`):
   and the chip-2 stripped shot shows poly colour there with no hole
   (`tools/textmap.py 6820 13355 6915 13397 3 --acid`). No contact (Ambiguity 4).
 
+Piece `lc9` (track centres with `tools/sel_cut.py h Y` at twelve heights and `sel_cut.py v` in the
+middle of each horizontal run; every line with `tools/follow.py --gap 16`; pad contacts with
+`tools/busl_padc.py` in both metal shots; row centres with `tools/busl_rowy.py`; all metals 12-15 px
+wide, drawn 14; all rows poly, 23-24 px between their edge lines):
+
+| Line | Net | x from y 10400 | Step west at y | x | Step west at y | x | East along y | End |
+|---|---|---|---|---|---|---|---|---|
+| 1 | `lc2_x6299` | 6082 | 11491 | 5908 | 12380 | 5844 | 14916 | pad, contact (6320,14914); poly row y 14914 east |
+| 2 | `lc2_x6342` | 6126 | 11534 | 5953 | 12424 | 5888 | 14874 | turns south at x 6366; leaves the region at (6366,15000) |
+| 3 | `lc2_x6387` | 6169 | 11577 | 5996 | 12466 | 5932 | 14830 | turns south at x 6408; leaves the region at (6408,15000) (the follower runs on to y 15150) |
+| 4 | `lc3_w9947` | 6212 | 11622 | 6040 | 12506 | 5975 | 14787 | pad (6406,14784); row y 14784 |
+| 5 | `lc2_w8450` | 6256 | 11664 | 6083 | 12553 | 6018 | 14744 | pad (6365,14741); row y 14740 |
+| 6 | `lc3_w9470` | 6299 | 11708 | 6126 | 12596 | 6061 | 14700 | pad (6408,14696); row y 14697 |
+| 7 | `lc3_e9756` | 6342 | 11752 | 6169 | 12640 | 6105 | 14656 | pad (6365,14655); row y 14654 |
+| 8 | `lc2_w9079` | 6386 | 11794 | 6212 | 12683 | 6148 | 14613 | pad (6409,14612); row y 14611 |
+| 9 | `lc3_e9798` | 6429 | 11838 | 6256 | 12726 | 6191 | 14570 | pad (6363,14568); row y 14567 |
+| 10 | `rcs_e4` (`trace/tla.txt`, not this piece) | 6472 | 11880 | 6300 | 12772 | 6235 | 14528 | contact (6407,14526); row y 14523 to the pad (7012,14522) |
+
+- Names are `lc3`'s at its south edge (`ports.d/lc3.txt`); line 5 is drawn there as `lc2_w8907`, an
+  alias of `lc2_w8450` in `trace/lc2.txt`, and line 4's `lc3_w9947` gathers `lc2_x6432`.
+- The staircases are plain right-angle steps over field, nothing underneath (views `l9_s2.png`,
+  `l9_s3.png`, overlays `l9_o1.png`, `l9_o2.png` at 1.5x). Two of `ch1`'s diagonal polys cross the second
+  staircase.
+- No break: `tools/tl5_tracks.py v` down all thirty vertical segments (`cache/scratch/busl/l9_scan.txt`)
+  finds no stretch of 18 px or more without metal in both chips, only the 8-17 px edge bars of the rows
+  crossed. No pad along any line: every "wide" stretch `tools/follow.py` reports is at a corner. The
+  follower loses line 4 at its second step (the diagonal poly of `cdp4_bus_s2` crosses the corner) and
+  line 9 at its first corner; each was picked up again beyond ((5975,12560), (6256,11900)) and followed
+  both ways.
+- The tracks cross, without contact, `cdp3_hw_c#`'s poly rows (y 10361-10664), `cdp4_bus_s#`'s rows
+  and diagonals (y 11878-12182, 12290-12480, 12745, 13332-13636) and the undrawn rows of the bands at
+  y 12550-12900, 14050-14300 and 14450-14570. Where a track crosses a poly the clean shot is greenish
+  for 6-13 px under it at many crossings (red minus green down to -5: (6126,12387), (6342,10577),
+  (6169,10446), (6212,10449), `rcs_e4`'s (6472,10490)): tiles at 4x in four shots beside the contact
+  (6409,14697) (`l9_c1.png`) show the track at its own width with the row's two edge bars and no ring
+  in either metal shot at all five (guide, trap 15).
+- The end pads (view `l9_o3.png`, 3.2x, metal and clean shots with the trace): each has the metal
+  arriving from the west and one poly leaving east; no metal beyond the ring (`follow.py`: none for
+  16 px), field north and south. Lines 2 and 3 cross line 1's row y 14914 on their way south:
+  `tools/tl5_tracks.py v 6365 14890 15060` and `v 6408 14845 15060`: two edge bars each, no hole.
+- The rows (views `l9_e1.png` at 1.05x, `l9_e2.png`, `l9_e3.png` at 1.5x, clean and metal shots): ten
+  poly rows at y 14523, 14567, 14611, 14654, 14697, 14740, 14784, 14827, 14870, 14914, the same y
+  within 1 px at x 6450, 6583, 6710, 6884, 6972, 7080, 7146, 7300, 7390 (no step). Seven are this
+  piece's. Row 14523 is `rcs_e4`'s as far as the pad (7012,14522), and another net starts on it at the
+  pad (7100,14522) (`bc1`'s R10); rows 14827 and 14870 begin at pads (6915,14828) and (6870,14872) of
+  two tracks that come from the south (other nets, not drawn). `tools/tl5_tracks.py h Y 6432 7552`
+  along each of the seven lists greenish stretches in the clean shot; the eight strongest ((6665,14567),
+  40 px long, (6846,14914), (6621,14567), (6715,14697), (6886,14740), (6804,14784), (7533,14784),
+  (6502,14784)) as tiles at 3.5x in four shots (`l9_c2.png`): in both metal shots every track crosses
+  at its own width, no pad, no ring; the chip-2 stripped shot shows plain poly: colour of chip 1's
+  stripped shot only (Ambiguity 5).
+- East of x 7550 (seen, `l9_e3.png`; not drawn): the ten rows run on under four more metals to pads
+  with contacts in two columns, row 14523 to (7835,14520), 14567 to (7790,14567), 14611 to (7835,14610),
+  14654 to (7790,14654), 14697 to (7835,14697), 14740 to (7790,14740), 14784 to (7835,14784), 14827 to
+  (7790,14827), 14870 to (7835,14870); row 14914 goes on past x 7860. These are the west ends of
+  `bc1`'s thirteen bus metals (`notes/blocks/bc1.md`: y 14354 .. 14873, x 7780-8280).
+
 ## Logic
 
 Wiring only. Traced: the eight joins above (no uncertain item on any). From `cdp3`'s notes:
@@ -141,6 +217,18 @@ traced: which end drives (the array's rows, or `cdp4`'s row R1 upper, both untra
 arrive). Believed: the array's rows drive, i.e. eight bits of the memory address counter are what row C
 latches on `cdp4_ld` and what row R1 takes from channel 1.
 
+Piece `lc9`. Traced (no uncertain item on any of the nine nets): each line is one metal from
+`lc3`'s south edge to its end, with no contact on the way, so nothing in the field drives or loads
+them. Seven go on as poly rows toward the bottom-centre logic's bus: **the ripple counter's clock
+`lc3_w9947` (row y 14784), `lc3_w9470`, whose inverse is `lc1_w7170` (row y 14697), the counter's
+clear `lc2_w8450` = NOT `lc1_w7170` (row y 14740), `lc2_w9079` = NOT `lc3_w9299` (row y 14611),
+`lc3_e9756` (14654), `lc3_e9798` (14567) and `lc2_x6299` (14914)**; `rcs_e4` (the step logic's NOR,
+`tla`) is the row above them (14523). Two (`lc2_x6342`, `lc2_x6387`) go on south into `bl0`'s ground.
+Not traced: what is at the far end of any of them (the rows' pads at x 7790/7835 and the bus metals are
+`bc1`'s; `lc3_w9470` and `lc3_e9756`, `lc3_e9798` also have ends east of `lc3` in the northern part).
+Believed: the clock of the ripple counter and `lc3_w9470` are driven in the bottom-centre logic, and
+`lc2_w8450` and `lc2_w9079`, which have their drivers in the left-centre strips, are inputs there.
+
 ## Ports
 
 | Name | Layer | Where | Direction | What |
@@ -151,6 +239,9 @@ latches on `cdp4_ld` and what row R1 takes from channel 1.
 | `cdp4_bus_s7` .. `cdp4_bus_s1` | P | x 4780, y 11488, 11922, 12442, 12984, 13397, 13874, 14351 | not known | poly rows on west into the left array (`larr` draws nothing east of x 3900) |
 | `cdp4_bus_s0` | M | (5451,15000), 16 px wide | not known | the track goes on 45 px to a pad (5365,15042) on a poly row from the west (`bl0`) |
 | `cdp3_hw_c7` .. `cdp3_hw_c0` | D | x 4780, y 11338, 11815, 12291, 12768, 13247, 13725, 14202, 14894 (20 px wide) | in (driven in `cdp3`) | on west into the left array's rows; `larr` draws nothing east of x 3900 |
+| `lc2_x6299`, `lc2_x6342`, `lc2_x6387`, `lc3_w9947`, `lc2_w8450`, `lc3_w9470`, `lc3_e9756`, `lc2_w9079`, `lc3_e9798` | M | y 10400, x 6082, 6126, 6169, 6212, 6256, 6299, 6342, 6386, 6429 (14 px wide) | `lc2_w8450`, `lc2_w9079`: in (driven in `lc2`, `lc3`); the others not known | `lc3`'s nine metals at its south edge (its file ends them at y 10400; it calls the fifth `lc2_w8907`) |
+| `lc3_e9798`, `lc2_w9079`, `lc3_e9756`, `lc3_w9470`, `lc2_w8450`, `lc3_w9947`, `lc2_x6299` | P | x 7550, y 14567, 14611, 14654, 14697, 14740, 14784, 14914 (24 px wide) | as above | poly rows on east 240-290 px to pads at x about 7790 / 7835 under `bc1`'s 13-line bus metals (not drawn) |
+| `lc2_x6342`, `lc2_x6387` | M | (6366,15000), (6408,15000), 14 px wide | not known | tracks on south into `bl0`'s ground (line 3 seen to y 15150) |
 
 ## Ambiguities
 
@@ -174,13 +265,23 @@ latches on `cdp4_ld` and what row R1 takes from channel 1.
 
 4. **Metal lying on a poly row without a pad** (the steps of the staircase x 6790-7140 over channel 2's
    rows; the steps of a second staircase at x 6290-6740 over channel 1's rows, about 180 px each; the track x 7511 over s0's poly column, y 12920-13332; a track x 5843 that begins 35 px south
-   of s4's pad (5843,12335) and lies on s4's poly for about 100 px). Readings: a contact somewhere
+   of s4's pad (5843,12335) and lies on s4's poly for about 100 px: it is line 1 of piece `lc9`,
+   `lc2_x6299`, after its second step). Readings: a contact somewhere
    along the overlap; or none. Assumed none: no pad, no ring, no green hole in the clean shot on any
    (measurements under piece `ch1` above; guide, trap 13). A contact would join one of these eight
    nets to another track's net.
 5. **Red and yellowish patches on the poly rows and diagonals in the clean shot** (channel 2 at
    x 6600-6900, the diagonals at (5700,12610), (6250,12250)): as Ambiguity 1, colour only; the chip-2
-   shots show nothing there.
+   shots show nothing there. The same on piece `lc9`'s seven rows at x 6450-6900 (red, dark and
+   green patches one track wide; the eight strongest are listed under the piece) and, greenish, where
+   its tracks cross `cdp3_hw_c5`'s row y 10447 (five tracks in a row: a tap on each would short five
+   nets to one register bit). A contact on any would join one of the nine nets to the net of the track
+   above; none has a pad or a ring in either metal shot.
+7. **A ring on `cdp4_bus_s2`'s diagonal poly at (6012,12480)** (clean shot, in the gap between lines 3
+   and 4 of piece `lc9`, just east of line 3's corner (5996,12466); view `l9_s3.png`). Readings: a
+   buried contact or a contact; or the clean shot's mark where a gap between two metals crosses a poly
+   (guide, trap 2). Assumed the second: no metal is over the spot (the metal shot shows the poly bare in
+   the gap) and nothing but the poly is there for a contact to join; so no connection depends on it.
 6. **Which end drives `cdp4_bus_s#`**: not decidable in the field (it holds no transistor). Settled by
    `larr`'s rows east of x 3900 and `cdp4`'s row R1 upper.
 
@@ -244,18 +345,29 @@ Round 1: no findings that change a connection.
 
 ## Not done
 
-- Everything else in the field: about 40 more tracks and the other rows. Next pieces, in the
+- Everything else in the field: about 30 more tracks and the other rows. Next pieces, in the
   order they join things: (1) `cdp4`'s other lines at x 7600, each of which ends on a pad with a track
   (seen, not drawn): `cdp4_sel1` (y 12223, pad about (6735,12213)), `cdp4_sel2` (12481, pad
   (6735,12470)), `cdp4_sel3` (12530, pad (6690,12515)), `cdp4_sel4` (12788, pad (6735,12775)),
   `cdp4_rst` (12874, pad (7465,12872), track x 7465 south), `cdp4_ld` (12962, pad (7555,12985), track
   x 7556 south), `cdp4_ld8b` (11837, not looked at); the metal L from x 7465 that turns south at
   x 7511 (y 12830; the long track x 7511 from y 8902 to 14284, west along y 13940 to x 7404, to
-  y 14284); the track that begins at (5843,12375) from an arm from the east; (2) the top band's ninth row (y 10317, `cdp3_gate_f`) and
-  the three poly rows at the top left (y 10560, 10686, 10736); (3) the staircases at x 5100-5700,
-  y 10600-10960 west of piece `h8`'s; (4) the bands at y 11850-12150 and below.
+  y 14284); (2) what else arrives from `lc3` at y 10400 (`ports.d/lc3.txt`): the six diagonal metals at
+  x 5915, 5851, 5785, 5722, 5655, 5588 (`lc3_e9577` .. `lc3_e9793`), the polys at x 5475 (`rst_n`) and
+  x 5541 (`lc2_w8450` again), the VCC metal x 5340-5390; (3) the top band's ninth row (y 10317,
+  `cdp3_gate_f`) and the three poly rows at the top left (y 10560, 10686, 10736); (4) the staircases at
+  x 5100-5700, y 10600-10960 west of piece `h8`'s; (5) the bands at y 11850-12150 and below; (6) the
+  foot of the field: rows y 14827 and 14870 from their pads (6915,14828), (6870,14872) and those pads'
+  tracks south; the net that starts on row y 14523 at the pad (7100,14522); the rows above y 14523
+  (`bc1`'s bus has four more, y 14354-14482); the track x 6452 beside piece `lc9`'s pads.
+- Piece `lc9`'s rows east of x 7550: 240-290 px more of each to its pad at x about 7790 or 7835 (the
+  pads are listed under the piece), and from there `bc1`'s 13 bus metals east (`bc1` (continue), or
+  this package with its region extended to x 7860). Lines 2 and 3 south of y 15000 (`bl0`).
 - s0's last 45 px: the track from (5451,15000) to the pad (5365,15042) and the poly row west of it
   (`bl0`, or this package if its region is extended to y 15060).
 - The diffusion rows and the poly rows west of x 4780 (`larr` (continue)).
-- The northern part (6450-7600 x 6750-10400).
+- The northern part (6450-7600 x 6750-10400). Seen from this run: `lc3_e9798`'s metal along y 9798 ends
+  at x about 6522, 28 px short of `rcs_e4`'s metal x 6552-6564 (`tools/textmap.py 6420 9770 6600 9870 4`:
+  a dark edge, bare ground with red 128-160, a dark edge, in both chips: not joined; `tools/follow.py`
+  jumps it going north from (6429,10426)); what it ends on was not looked at.
 - `trunks`' two lines in the field: taps not checked (R4).
