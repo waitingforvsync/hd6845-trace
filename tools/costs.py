@@ -134,14 +134,37 @@ def traces(path):
     return False
 
 
-TRACE_WORK_RE = re.compile(r'(^|/)(trace/[a-z0-9_]+\.txt|notes/blocks/[a-z0-9_]+\.md)$')
+# What a tracing call works on. A main session is credited with a package's commit only for the
+# stretch in which it was itself working on THAT package: it ran the tracing wrapper for it
+# (tools/t.sh PACKAGE tool.py ...), shipped its files (tools/ship.sh "subject" trace/PACKAGE.txt ...)
+# or edited them. A command that merely mentions the scripts (cat tools/t.sh, a heredoc that edits
+# this file) names no package and counts for none, so a second session under the same git name that
+# is doing something else does not land on the package's gate (lc2, 2026-11-18: a second session's
+# coordination on another model was counted against a package traced on Fable, twice).
+T_RUN_RE = re.compile(r'tools/t\.sh\s+([a-z][a-z0-9_]*)\s+\S+\.py')
+SHIP_RUN_RE = re.compile(r'tools/ship\.sh\s+["\']')
+PKG_FILE_RE = re.compile(r'(?:^|[\s/"\'=])(?:trace/([a-z][a-z0-9_]*)\.txt|notes/blocks/([a-z][a-z0-9_]*)\.md|'
+                         r'floorplan\.d/([a-z][a-z0-9_]*)\.txt|ports\.d/([a-z][a-z0-9_]*)\.txt)')
+
+
+def call_packages(name, inp):
+    """The packages one tool call works on (empty: not a tracing call)."""
+    if name == 'Bash':
+        cmd = str(inp.get('command', ''))
+        pk = set(T_RUN_RE.findall(cmd))
+        if SHIP_RUN_RE.search(cmd):
+            pk.update(g for m in PKG_FILE_RE.finditer(cmd) for g in m.groups() if g)
+        return pk
+    if name in ('Edit', 'Write'):
+        return {g for m in PKG_FILE_RE.finditer(str(inp.get('file_path', ''))) for g in m.groups() if g}
+    return set()
 
 
 def trace_times(path):
-    """Times of this transcript's own tracing tool calls (tools/t.sh, tools/ship.sh, an edit of a
-    trace file or a block's notes). Used for a main session, which can trace in one hour and do
-    something else, such as a dashboard fix, in the next: a response with no tracing call between it
-    and the commit it would be attributed to is not that package's work."""
+    """This transcript's own tracing tool calls, as (time, packages) in time order. Used for a main
+    session, which can trace one package in one hour and do something else, such as a dashboard fix
+    or another package, in the next: a response with no tracing call FOR THAT PACKAGE between it and
+    the commit it would be attributed to is not that package's work."""
     out = []
     with open(path, errors='replace') as f:
         for line in f:
@@ -155,13 +178,10 @@ def trace_times(path):
             for x in c if isinstance(c, list) else []:
                 if not isinstance(x, dict) or x.get('type') != 'tool_use':
                     continue
-                inp = x.get('input') or {}
-                cmd = str(inp.get('command', ''))
-                if (x.get('name') == 'Bash' and ('tools/t.sh ' in cmd or 'tools/ship.sh' in cmd)) or \
-                        (x.get('name') in ('Edit', 'Write') and TRACE_WORK_RE.search(str(inp.get('file_path', '')))):
-                    if e.get('timestamp'):
-                        out.append(ts(e['timestamp']))
-    out.sort()
+                pk = call_packages(x.get('name'), x.get('input') or {})
+                if pk and e.get('timestamp'):
+                    out.append((ts(e['timestamp']), frozenset(pk)))
+    out.sort(key=lambda r: r[0])
     return out
 
 
@@ -268,9 +288,13 @@ def main():
         if not side and i < len(commits) and (commits[i][0] - t).total_seconds() <= 6 * 3600:
             pk = sorted(commits[i][1])
             if tt is not None and not review:
-                j = bisect.bisect_left(tt, t)
-                if j >= len(tt) or tt[j] > commits[i][0]:
-                    pk = []    # this session did no tracing between this response and that commit
+                # the packages this session itself worked on between this response and that commit
+                j = bisect.bisect_left(tt, (t, frozenset()))
+                mine = set()
+                while j < len(tt) and tt[j][0] <= commits[i][0]:
+                    mine |= tt[j][1]
+                    j += 1
+                pk = [p for p in pk if p in mine]
         for p in pk or ['(coordination)']:
             by_pkg[p]['cost'] += cost / max(1, len(pk))
             if review:
