@@ -3,7 +3,8 @@
 Run from the repository root with the project's Python (shapely, opencv):
     TRACE=examples/pilot ../hd6845-trace/.venv/bin/python tutorial/export.py
 Reads the aligned die photos from cache/ (or HD_CACHE) and trace/examples/pilot.txt, writes
-  data/die_<shot>.jpg      the whole die, shrunk
+  data/die_<shot>.jpg      the whole die at 1/8
+  data/qtr_<shot>.jpg      9600 px around the example at 1/4
   data/mid_<shot>.jpg      about 2400 px around the example, shrunk to half
   data/ex_<shot>.jpg       the example's rectangle at the photo's own resolution
   data/example.json        polygons by layer, channels, nets, transistors, recovered gates
@@ -29,6 +30,7 @@ OUT = os.path.join(HERE, 'data')
 SHOTS = {'metal': 'metal.npy', 'metal1': 'metal1.npy', 'acid': 'acid_aligned.npy', 'acid1b': 'acid1b.npy'}
 EX = (14260, 14860, 390, 440)          # x y w h: the example, with a margin
 MID = (13300, 13900, 2400, 2400)       # x y w h: the neighbourhood
+QTR = (9700, 10300, 9600, 9600)        # x y w h: the wider area, at a quarter
 
 
 def save(path, rgb, q=88):
@@ -44,8 +46,11 @@ def photos():
         sub = np.array(a[y:y + h, x:x + w])
         save(os.path.join(OUT, 'mid_%s.jpg' % shot), cv2.resize(sub, (w // 2, h // 2), interpolation=cv2.INTER_AREA), 84)
         if shot in ('metal', 'acid1b'):
-            small = cv2.resize(np.array(a[::4, ::4]), (1240, 1315), interpolation=cv2.INTER_AREA)
-            save(os.path.join(OUT, 'die_%s.jpg' % shot), small, 80)
+            small = cv2.resize(np.array(a[::2, ::2]), (2480, 2630), interpolation=cv2.INTER_AREA)
+            save(os.path.join(OUT, 'die_%s.jpg' % shot), small, 78)
+            x, y, w, h = QTR
+            sub = np.array(a[y:y + h, x:x + w])
+            save(os.path.join(OUT, 'qtr_%s.jpg' % shot), cv2.resize(sub, (w // 4, h // 4), interpolation=cv2.INTER_AREA), 78)
         print('photos', shot, flush=True)
 
 

@@ -31,6 +31,7 @@ new MutationObserver(syncPressed).observe(document.body, { subtree: true, attrib
 const ex = await (await fetch('data/example.json')).json();
 const EX = [ex.origin[0], ex.origin[1], ex.size[0], ex.size[1]];
 const MID = [13300, 13900, 2400, 2400];
+const QTR = [9700, 10300, 9600, 9600];
 const DIE = [0, 0, 19838, 21025];
 const D = f => 'data/' + f;
 const SHOTS = ['metal', 'metal1', 'acid', 'acid1b'];
@@ -85,8 +86,9 @@ document.querySelectorAll('section[id]').forEach(sec => {
     bounds: DIE, minHalf: 50,
     tiles: [
       { x: 0, y: 0, w: 19838, h: 21025, urls: { metal: D('die_metal.jpg'), acid1b: D('die_acid1b.jpg') } },
-      { x: MID[0], y: MID[1], w: MID[2], h: MID[3], urls: { metal: D('mid_metal.jpg'), acid1b: D('mid_acid1b.jpg') }, fade: [0.07, 0.14] },
-      { x: EX[0], y: EX[1], w: EX[2], h: EX[3], urls: { metal: D('ex_metal.jpg'), acid1b: D('ex_acid1b.jpg') }, fade: [0.5, 1.0] },
+      { x: QTR[0], y: QTR[1], w: QTR[2], h: QTR[3], urls: { metal: D('qtr_metal.jpg'), acid1b: D('qtr_acid1b.jpg') }, fade: [0.08, 0.16] },
+      { x: MID[0], y: MID[1], w: MID[2], h: MID[3], urls: { metal: D('mid_metal.jpg'), acid1b: D('mid_acid1b.jpg') }, fade: [0.18, 0.32] },
+      { x: EX[0], y: EX[1], w: EX[2], h: EX[3], urls: { metal: D('ex_metal.jpg'), acid1b: D('ex_acid1b.jpg') }, fade: [0.4, 0.8] },
     ],
   });
   v.setShots('metal'); v.reset();
