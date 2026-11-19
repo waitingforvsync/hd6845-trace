@@ -349,7 +349,7 @@ C 13845,15657 s=26x30
 P 13804,15602:13912,15623          # G4: gate y 15602-15623, rounded west end at x 13804; east of the rail a block
 N P 13890,15612 bd1_q
 ?P 13896,15618:13908,15642         # ... from the block south (colour profile; 4.85x)
-P 13896,15630:13996,15650          # ... into a band going east to the edge of the supply land (what it does there: not traced)
+P 13896,15630:13993,15650          # ... into a band going east to the edge of the supply land (what it does there: not traced)
 # N1's west end: buried contact to a poly pad that ends 20 px further west (nothing else joins it)
 D 13770,15575:13800,15597
 B 13766,15572:13802,15600

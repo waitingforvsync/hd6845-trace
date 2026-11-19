@@ -356,6 +356,12 @@ Traps, all of them real:
    edge of a thin metal's protected margin can pass for a diffusion edge (`lc1`: a pull-down drawn
    18 wide is 38; the true edge is the dark line across the gate poly in the chip-2 metal shot).
    Found 2026-11-18 (`tl1`, `tl3`, `lc1`; R42, with R30).
+   Also: in an open group of several features beside a rail the clean shot can be **inverted as a
+   whole** against the other three shots (edge lines light, plain features and box centres dark).
+   It reads as a 10 px misregistration between the chips and is not one (`bd1`'s latch on R4's
+   match, east of its ground rail: left undrawn for that reason, then read by `eof`). Test: chip
+   1's *metal* shot against chip 2's, and a contact nearby in all four shots. Found 2026-11-19
+   (`eof`, piece `r4lat`; R42).
 29. **A wire is not finished where it goes under a rail or a thin metal.** A stripe of diffusion
    colour under a thin metal is a diffusion until both its ends are found (`tl3`: 170 px of tan
    beside a load strip was a diffusion wire that turned under the rail to another transistor; a

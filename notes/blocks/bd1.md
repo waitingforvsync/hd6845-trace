@@ -444,3 +444,23 @@ x 13806), which means a gap of field or a diffusion edge is being misread there.
   `inh_lat` (`bd1_n1` = NOT(`bd1_q` OR (`inh_lat` AND `rc_eq_r4`))) and the input of inverter A
   (`bd1_an` = NOT `rc_eq_r4`). The latch's lower half, `bd1_q`'s driver and where `bd1_n1`, `bd1_n2`,
   `bd1_an` go are in the end-of-frame lead group (`eof` (e)).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, second batch)
+
+- Status "NOT traced: the second latch half's load east of the ground rail", Inventory "(not traced)
+  x 13876-13995, y 15640-15705: N2's load and the driver of `bd1_q`", Logic "Believed (not traced):
+  `bd1_q` = `bd1_n2`", Not done (first item) and the port `bd1_q` (in, believed): **traced by `eof`**
+  (run 7, piece `r4lat`). The band is N2's load gate (block x 13937-13992, y 15630-15702 over a strip
+  y 15661-15687 from the VCC land), tied to N2 by a box at (13889-13913, 15660-15682), drawn uncertain.
+  `bd1_q` is an alias of `bd1_n2`, and the pair is cross-coupled: `bd1_n1` = NOT(`bd1_n2` OR (`inh_lat`
+  AND `rc_eq_r4`)), `bd1_n2` = NOT((`bd1_an` AND `inh_lat`) OR `bd1_n1`) (both depend on the two load
+  ties): a transparent latch of R4's match, open while `inh_lat` is high.
+- Not done, "the features of the two chips do not line up within 10 px there": they do. The clean shot
+  is inverted as a whole in that open group (tracing guide, trap 28; R42).
+- Ambiguities, "Source of `bd1_k`'s pull-down": one reading is excluded: the strip's top segment is not
+  joined to N1 from above (pink field under `bd1_an`'s metal at x 13770-13800, y 15602-15630 in the
+  clean shot). Whether it reaches the ground diffusion is as open as before.
+- Trace: the band `P 13896,15630:13996,15650` ends at x 13993, not 13996 (`eof`'s review round 9; field
+  between it and the land): corrected, `tools/sameconn.py`: connections identical. Its `?P
+  13896,15618:13908,15642` and `?D 13870,15705:13936,15728` are left marked: `trace/eof.txt` draws firm
+  items over both, so the extraction does not depend on them.

@@ -981,7 +981,7 @@
 <text x="3896" y="4367" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">NOR under the east rail that drives rcs_mv</text>
 <rect x="3575" y="3688" width="305" height="184" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>NOR 1 of the west column: rcs_a2 = NOR(tl3_w3722, tl3_w3803)</title></rect>
 <text x="3591" y="3716" font-family="sans-serif" font-size="20" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">NOR 1 of the west column</text>
-<rect x="13700" y="15700" width="350" height="160" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>latch on R4's match, gated by inh_lat (lower half): bd1_n2: pull-downs bd1_an.inh_lat and bd1_n1 traced; its load (north-east, y 15640-15705) not traced</title></rect>
+<rect x="13700" y="15700" width="350" height="160" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>latch on R4's match, gated by inh_lat (lower half): bd1_n2: pull-downs bd1_an.inh_lat and bd1_n1 traced; its load (north-east, y 15630-15702) is drawn by eof (piece r4lat): bd1_q is bd1_n2, the latch is complete</title></rect>
 <text x="13716" y="15722" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">latch on R4's match, gated by inh_lat (lower half)</text>
 <rect x="4750" y="6940" width="350" height="160" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>scan line step driver: lc_step = NOT lc1_w7040: the inverter whose output is the step pulse of the scan line counter and the 4-bit counter c4l</title></rect>
 <text x="4766" y="6974" font-family="sans-serif" font-size="26" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">scan line step driver</text>
@@ -1215,6 +1215,8 @@
 <text x="6459" y="6182" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">tc2_m6490, tc2_m6447 polys</text>
 <rect x="6477" y="4808" width="342" height="40" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>tc1_m6817 row: from tc1's thin metal x 6797 to the pad (6492,4828)</title></rect>
 <text x="6493" y="4830" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">tc1_m6817 row</text>
+<rect x="13885" y="15618" width="120" height="112" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>latch on R4's match: load of the lower half: the load and tie that close bd1's latch: bd1_n2 = NOT((bd1_an AND inh_lat) OR bd1_n1), cross-coupled with bd1_n1; a transparent latch of rc_eq_r4, open while inh_lat is high</title></rect>
+<text x="13901" y="15640" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">latch on R4's match: load of the lower half</text>
 <rect x="13612" y="14012" width="512" height="26" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>hc4 poly band: west under the vcc and vss rails and the bundle</title></rect>
 <text x="13628" y="14034" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">hc4 poly band</text>
 <rect x="5050" y="5220" width="380" height="35" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>row y 5237: tl5_w4937 from T4's south pad west to the thin metal W</title></rect>

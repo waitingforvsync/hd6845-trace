@@ -4,7 +4,7 @@
 13860,15385:14050,15515  logic  inverter of R4's match | bd1_an = NOT rc_eq_r4; output goes south on a metal line (x 13783) to the latch's lower half
 13700,15468:14050,15700  logic  latch on R4's match, gated by inh_lat (upper half) | bd1_n1 = NOT(rc_eq_r4.inh_lat + bd1_q); output on a metal line x 13957
 13770,15634:13806,15735  logic  pull-down | gate inh_src (the input of X's driver)
-13700,15700:14050,15860  logic  latch on R4's match, gated by inh_lat (lower half) | bd1_n2: pull-downs bd1_an.inh_lat and bd1_n1 traced; its load (north-east, y 15640-15705) not traced
+13700,15700:14050,15860  logic  latch on R4's match, gated by inh_lat (lower half) | bd1_n2: pull-downs bd1_an.inh_lat and bd1_n1 traced; its load (north-east, y 15630-15702) is drawn by eof (piece r4lat): bd1_q is bd1_n2, the latch is complete
 13700,15860:14080,16125  ?logic gate column (untraced) | gates under the ground rail x 13848; ck_out tap at y 15930
 13760,16125:14055,16280  logic  driver of inh_n (line X) | one inverter, inh_n = NOT inh_src; inh_src arrives in poly along y 16231 from a line at x 13630
 13700,16280:14080,16900  ?logic gate column (untraced) | gates; ck_out taps at y 16490, 16565, 16711

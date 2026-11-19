@@ -2023,3 +2023,32 @@ packages' own geometry: the cell copies carry `lc2`'s `?D`).
 - `out/` rebuilt. Coverage: 65.5% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
 
 **Handoffs:** none waiting. **Claims:** `busl` (waitingforvsync), `eof` (tom-seddon).
+
+## 2026-11-19 16:20  Handoff: eof run 7, the latch on R4's match closes
+
+It arrived (bb9af14) while the entry above was being pushed; applied in the same sitting.
+
+**What came in** (Tom Seddon; piece `r4lat`, 1 transistor, three uncertain items): the load of the lower
+half of `bd1`'s latch on R4's match, a block under `bd1`'s band east of the ground rail
+(x 13937-13992, y 15630-15702), with a tie box (13889-13913, 15660-15682) drawn uncertain. With it
+`bd1_q` is `bd1_n2` (alias) and the pair is cross-coupled: `bd1_n1` = NOT(`bd1_n2` OR (`inh_lat` AND
+`rc_eq_r4`)), `bd1_n2` = NOT((`bd1_an` AND `inh_lat`) OR `bd1_n1`) (marked: the two load ties): a
+transparent latch of R4's match, open while `inh_lat` is high. Where its outputs go is not found.
+Review: round 9 on Fable, no finding that changes a connection.
+
+**Checks:** overlay at 4x, metal and clean (`cache/scratch/handoff/h_r4lat.png`): on the features.
+Full extraction 2,399 nets (one fewer: the alias), 4,345 transistors, 0 errors, 0 warnings.
+
+**Applied:**
+- Master list: `eof` row ((e): the latch complete, what is left of it); `bd1` row and the `bd1`-`bd3`
+  queue row; **R42 extended** in this commit: in an open group beside a rail the clean shot can be
+  inverted as a whole and read as a misregistration; to re-read with that in mind: `bd1`'s gate column
+  y 15850-16125, `bd2` (rest).
+- `notes/tracing-guide.md`: trap 28 gets the same.
+- `notes/blocks/bd1.md`: a corrections section; `floorplan.d/bd1.txt`: the lower half's line.
+- `trace/bd1.txt`: the band `P 13896,15630:13996,15650` ends at x 13993 (`eof`'s review round 9);
+  `tools/sameconn.py HEAD`: connections identical. Its two `?` items that `eof` re-read are left
+  marked (`trace/eof.txt` draws firm items over both).
+- No new AMB entry. `out/` rebuilt.
+
+**Handoffs:** none waiting. **Claims:** `busl` (waitingforvsync), `eof` (tom-seddon).
