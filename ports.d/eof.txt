@@ -38,7 +38,6 @@ res_b      P  5182-5202,6345     in  from tl5's bus line x 5192
 res_b      M  5183-5197,6905     ?   onto lc1's V2 (res_b: the NOR's lower input)
 lpstb_b    P  5227-5247,6345     in  from tl5's bus line x 5237
 lpstb_b    M  5229-5243,6905     ?   onto lc1's V3 (lpstb_b: the NOR's upper input)
-rst_a  P  5141-5159,6900     ?   the poly on south of the pad (5147,6803): into lc1's diagonal bundle (bends south-east at about (5150,6910))
 res_b      P  5196-5210,6900     ?   the poly on south of the pad (5190,6845), under V2, bending south-east: into lc1's diagonal bundle
 lpstb_b    P  5232-5248,6872     ?   the poly on south of the pad (5237,6803), under V3; bends south-east from here (about (5266,6900)): into lc1's diagonal bundle
 tl5_w5936  P  5053-5073,6345     ?   from tl5's bus line x 5063
@@ -61,7 +60,7 @@ inh_src     P  8930,16163-16181   ?    the row west of the tap pad (8962,16172):
 inh_src     P  8930,15248-15266   ?    the row west of the end pad (8966,15260)
 
 # Piece isrc4: inh_src is lc2_x6299 (run 9)
-inh_src     P  7550,14904-14924   ?    onto the east end of busl's poly row of lc2_x6299 (one net: @alias inh_src lc2_x6299); the driver is beyond it
+inh_src     P  7550,14904-14924   in   onto the east end of busl's poly row of lc2_x6299 (one net); the driver is beyond it: lc1's gate 5, rst_a (piece isrc5)
 inh_src     P  8326,16294-16312   out  the row's east end: a gate at x 8283-8311 over an undrawn diffusion column (the clear row of a latch unit: bc1 / bc3)
 inh_src     P  8326,16900-16918   out  the tap row's east end: the same 606 px lower (bc3)
 
@@ -94,3 +93,6 @@ bd1_n2        D      13795,15712-15736        in   piece n2out: N2 in the gap on
 vss           D      13832,15638-15652        -    piece n2out: the strip's top segment onto bd1's ground diffusion (bd1 has the link as ?D)
 bd1_n2        M      13515-13527,16260        in   piece n2w: from bd1's metal x 13521 (its bd1_k, drawn to y 16273)
 bd1_n2        M      6705-6718,15000          out  piece n2w: on north up the left bus field into busl's region (follower: to (6948,8707), not read)
+
+# Piece isrc5: inh_src is rst_a (run 10). The poly south of rst_a's pad (5147,6803) is drawn on to lc2's metal end.
+rst_a       M  6450,8623-8637     out  onto lc2's diagonal metal end (lc2_x6299, its port (6450,8630)): one net, down the left-centre strips to inh_src's loads

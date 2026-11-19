@@ -478,7 +478,8 @@ C 8688,17737
 #      with a contact (7880,14914);
 #   E  the pad's poly row y 14904-14924 west, under bc1's metal x 7752-7795 (it lies on the row for
 #      43 px; no pad, no hole), RL3 and two more metals, to busl's row end at x 7550.
-@alias inh_src lc2_x6299
+@alias rst_a lc2_x6299                # since piece isrc5 (below) the net's canonical name is rst_a: this
+                                      # line read "@alias inh_src lc2_x6299" until run 10
 # A
 P 8053,17736 x8680 w=16
 P 8036,17718:8070,17752
@@ -747,3 +748,53 @@ C 6710,16173
 # --- O: metal on north; drawn to busl's south edge (y 15000). The follower takes it on to (6948,8707): not read.
 M 6711,16185 y15000 w=13
 N M 6711,15600 bd1_n2
+
+# ============================================================================================
+# Piece isrc5 (run 10, 2026-11-19): inh_src (lc2's through line lc2_x6299) followed from lc2's
+# east edge (6450,8630) back to its source. Wiring only, no uncertain item. It ends on this file's
+# own poly of piece x1, rst_a's line below its pad (5147,6803):
+#     inh_src IS rst_a, the buffered NOR(lpstb_b, res_b) of lc1's gate 5
+# (rst_a = NOT rst_n, rst_n = NOT rst, rst = NOR(lpstb_b, res_b): lc1's gates 3-5).
+#
+# The path, from lc2's metal end back to rst_a's poly:
+#   A  lc2's diagonal metal goes on north-east from (6450,8630) to (6509,8571) (tl5_tracks.py h Y 6430
+#      6560 --half 2 at y 8640 .. 8560: centre x 6440, 6459, 6478, 6488, 6498, 6508, 6513) and north to a
+#      pad with a contact (6513,8538) (textmap.py 6480 8505 6545 8575 3 --acid: ring x 6495-6535,
+#      y 8523-8556, bright centre in both chips);
+#   B  the pad's poly, x 6508-6528, 450 px north to a pad with a contact (6513,8087) (textmap.py
+#      6486 8085 6540 8530 3 --acid; 6486 8000 6580 8100 3). It passes under inh_ck's link F (metal
+#      y 8166-8178), under eofw's metal of lc1_w7908, whose vertical arm x 6508-6522, y 8259-8411 LIES ON
+#      IT for 150 px (no ring, no pad, no dark stretch in either chip: tl5_tracks.py v 6515 8262 8408
+#      --half 2), and under an undrawn metal y 8448-8460: no contact with any;
+#   C  metal from the pad north over a poly row (y 8027-8054) to a corner (6513,8018), east to a corner
+#      (6558,8018), north on x 6552-6565 for 760 px (tl5_tracks.py v 6559 7270 8010 --half 2: fourteen
+#      bars of 8-10 px, the edges of the rows it crosses; no break) to a corner (6558,7258), west along
+#      y 7252-7265 to a pad with a contact (6187,7257) (j_p6190.png, 5x four shots). The tracks of this
+#      bundle step one track west going south at y 7982-8105 (nested Ls): the track x 6513 north of
+#      y 7985 and the metal x 6558 south of y 8057 are other nets. Where the track crosses the row of
+#      the pad (6513,7888) the clean shot is olive green under it (notes, Ambiguity 33: no ring, no
+#      widening: no contact). From x 6313 east to the corner the metal y 7257 lies on another net's poly
+#      row (its west end at x 6313: j_c6313.png; no contact: Ambiguity 34);
+#   D  the pad's poly row y 7248-7266 west through lc1's crossing field (under a dozen vertical metals,
+#      none with a pad on it) and in the open to x 5494, a 45-degree diagonal north-west under V5, V4,
+#      V3 (lpstb_b) and V2 (res_b) to (5149,6912), and north onto piece x1's poly P 5150,6815 y6900
+#      (rst_a). The row and the diagonal keep their lane (tools/eof_rows.py diag 5490 7258 6170 7257
+#      --step 20 --reach 56; diag 5497 7259 5140 6902 --step 14: the line at offset -5..+9 at every cut,
+#      its neighbours 43-47 px either side; row cuts y 6890-6930: the bend is at y 6912).
+@alias rst_a inh_src
+# A
+M 6444,8636 6509,8571 6513,8560 y8538 w=14
+P 6494,8521:6536,8557
+C 6513,8538
+# B
+P 6518,8540 y8086 w=18
+P 6496,8066:6536,8104
+C 6513,8087
+# C
+M 6513,8087 y8018 x6558 y7258 x6187 w=13
+N M 6558,7600 rst_a
+P 6170,7238:6210,7278
+C 6187,7257
+# D
+P 6190,7257 x5494 5149,6912 y6890 w=18
+N P 5800,7257 rst_a
