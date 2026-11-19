@@ -1,0 +1,6 @@
+# busl: the left bus field. Pieces traced so far.
+5700,10335:7600,10675   route  register row H outputs, poly rows | cdp3_hw_c7..c0 (the west outputs of the 8-bit register row H of the central datapath) run west as eight poly rows to a staircase of pads
+5355,10335:6050,11345   route  row H outputs, track staircase | eight metal tracks from the pads south, each 370 px west on its own step, then south to its row of the left array
+4780,11325:5720,14920   route  row H outputs into the MA counter rows | each track ends on a pad of a diffusion row that runs west into one of eight rows of the left array (477 px apart): bit c7 at y 11338 down to c0 at y 14894
+5370,11470:7600,12200   route  channel-1 lines to the array and the row C latch | cdp4_bus_s7..s0: eight poly rows from cdp4's channel 1, each to a pad and a metal track (s2 and s1 by a diagonal poly) that reaches one poly row of the left array and the same slice's row C latch input
+5370,13320:7600,13650   route  row C latch inputs (channel 2) | the west pieces of cdp4's channel 2 (cdp4_in_s#), each the same net as the channel-1 line of its slice

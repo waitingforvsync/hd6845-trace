@@ -5,6 +5,9 @@
 # rdp3 draws the stretch between this file's two links (L7 at y 10700 to L9 at y 13480); it is
 # loaded so that the package extracts as one net when read by itself (TRACE=eof).
 @requires rdp3
+# lc2 holds the cell lc2_ff, placed again in piece ff3 (and lc1 the rails and names lc2 hangs from)
+@requires lc2
+@requires lc1
 @w M=18 P=18
 @s 26x26
 
@@ -515,3 +518,59 @@ P 7296,7198:7331,7232                # the north pad
 C 7313,7215
 P 7313,7212 x7400 w=18               # its poly row leaves east (y 7203-7221; not followed)
 M 7268,7736 y7800 w=12               # the south metal's first 60 px
+
+# ====================================================================
+# Piece ff3 (run 6): a third flip-flop of lc2's cell lc2_ff in lc3's column A (x 4440-4990, y 9185-9990), 780 px
+# below lc2's first (findcell.py 4600 8350 4990 9190 --region 4400,9100:5400,10500 --layer acid1b: score 0.86).
+# Its slave output, on the copy's track C (x 4553-4571), is the L-shaped metal that lc2 drew as the clock of its
+# first flip-flop: lc2_w8475. Master (x,y) is at (x, y+780) in the copy. The copy's nets (master's name -> here):
+#   lc2_w8475 (clock) -> eof_w9255      lc2_w8552 (master latch, K1) -> eof_w9332     lc2_w8725 (K2) -> eof_w9505
+#   lc2_w8857 = lc2_w8298 (slave, K3) -> lc2_w8475      lc2_w8930 = lc2_w8692 (K4) -> eof_w9472
+#   clear lc2_w8907 (track B) and lc1_w7170 (track A): the same two tracks run on down from lc2's flip-flop
+#     eof_w9332 = NOT( eof_w9255 AND lc2_w8475  OR  eof_w9505  OR  lc2_w8907 )     K1
+#     eof_w9505 = NOT( eof_w9255 AND eof_w9472  OR  eof_w9332 )                    K2
+#     lc2_w8475 = NOT( eof_w9472 AND ( eof_w9505 OR eof_w9255 ) )                  K3
+#     eof_w9472 = NOT( lc2_w8475 AND lc1_w7170 AND ( eof_w9332 OR eof_w9255 ) )    K4
+# Views d_ov1.png (1.38x), d_ov2_1..3.png (2.5x, clean and metal), d_top.png, d_padA.png, d_padB.png; survey.md.
+@inst lc2_ff 0,780 tag=s3
+# -- the copy's own (what the master has outside its cell, read again here)
+# K1's VSS node: a short box under the west rail, y 9196-9242, one contact (the master has a long contact column;
+# here lc2's gate K4 lies above). textmap.py 4744 9186 4900 9262 4 --acid; d_top.png (4x, four shots).
+D 4752,9196:4800,9242
+C 4765,9211
+# the west rail on south from lc2's end (y 9190): the master's pieces + 780
+M 4752,9185:4802,9550
+M 4777,9550 y9740 w=50
+M 4741,9580:4812,9718
+M 4757,9718:4812,9740
+M 4757,9740:4808,9970
+M 4757,9825:4820,9970
+M 4757,9740:4820,9748
+N M 4777,9400 vss
+# the middle rail on south
+M 4952,9185 y9970 w=56
+N M 4952,9400 vcc
+# track C (x 4553-4571): lc2's L-shaped metal (lc2_w8475, drawn there to y 9190) on south to the copy's row-2 pad
+# (4561,9296); the cell carries it on to its END pad (4560,9776). tl5_tracks.py v 4562 9130 9840: metal throughout,
+# holes only at the two pads; no metal south of y 9780.
+M 4562,9185 y9296 w=18
+# track A (x 4466-4484, lc1_w7170) on south from lc2's end (y 9060) to its END pad (4473,9818), from which the
+# copy's K4 row leaves east. tl5_tracks.py v 4475 9040 9900: no hole between the pads; no metal south of y 9823.
+M 4475,9055 y9826 w=18
+P 4458,9804:4490,9832
+C 4473,9818
+P 4478,9808:4700,9827                       # review round 7: west of the rail the pad's row lies at y 9808-9827 (px.py col 4510 / 4640 / 4700 9792 9838 3), 8 px below the cell's row (y 9800-9818), which met the pad by 2 px only; one poly with it. Stopped short of the column (x 4708), so the channel is the cell's
+# track B (x 4508-4526, lc2_w8907: the clear) on south from lc2's end (y 8700) through the pad (4517,9384) of the
+# copy's clear row; it runs on south (follow.py: to (4518,10170)); drawn to y 9420
+M 4517,8695 y9420 w=18
+P 4503,9370:4533,9398
+C 4517,9384
+# the copy's clock: an L-shaped metal from the END pad (4648,9904) of the thin metal x 4641-4655 west along
+# y 9897-9919 and south on x 4553-4575 (the next unit's track C; follow.py: a contact at (4563,10080), on to
+# y 10520). Drawn to y 9990. textmap.py 4540 9890 4664 9936 3 --acid: one metal into the pad's ring, like the master's.
+M 4560,9897:4652,9919
+M 4553,9897:4575,9990
+N P 4720,9258 eof_w9255
+N P 4660,9342 eof_w9332
+N M 4889,9420 eof_w9505
+N P 4660,9472 eof_w9472

@@ -5,7 +5,7 @@
 2026-11-19 07:44 -0600, run 2 (Matt Godbolt, on Claude Fable 5.2). **Two stages of `lc2`'s ripple counter are drawn
 here**: stage E4 (a copy of `lc2`'s flip-flop cell `lc2_ff`, turned) and stage B0 (the same four
 gates folded over both columns, drawn by hand), both reviewed (rounds 3 and 4), 37 new transistors (E4's top one is also in `lc2`'s drawing). With `eof`'s piece `ff3` (stage
-W3) the counter has five stages and its order is known. Still open: everything east of x 5480 but the gate pair
+W3, on main since 2026-11-19) the counter has five stages and its order is known. Still open: everything east of x 5480 but the gate pair
 (the crossing field, where stage B0's clock and the clear come from), the gate pair's Fable review (R31).
 
 Split with `eof` (Tom Seddon, run 6, whose claim covers the corner x 4400-4750, y 9100-9700): the west copy,
@@ -24,7 +24,7 @@ same four gates stand three more times directly south of them, in this strip:
 
 | Stage | Where | Drawn as | Clock | Slave output (the next stage's clock) |
 |---|---|---|---|---|
-| B0 | x 4440-5480, y 9940-10580 | by hand: latch K west, gates K3, K4 turned east, five crossing rows (this file) | `lc3_w9947`, a poly row from the east | `eof_w9255` (unnamed in this file) |
+| B0 | x 4440-5480, y 9940-10580 | by hand: latch K west, gates K3, K4 turned east, five crossing rows (this file) | `lc3_w9947`, a poly row from the east | `eof_w9255` |
 | W3 | x 4580-4990, y 9180-9960 | `@inst lc2_ff 0,780` (`eof`'s piece `ff3`) | `eof_w9255` | `lc2_w8475` |
 | `lc2`'s first (the master) | x 4580-4990, y 8350-9190 | the cell | `lc2_w8475` | `lc2_w8298` |
 | `lc2`'s second | x 4990-5450, y 8370-9200 | turned copy | `lc2_w8298` | `lc2_w9034` |
@@ -134,8 +134,9 @@ something in the west column to a pad east of the middle rail (`bsw_*.png` 3.4x,
 
 Track C (x 4554-4572) is the metal that `eof`'s piece `ff3` draws south from stage W3's L (its port at y 9990): one
 metal from there through the pad (4561,10077) of K1's row 2 to the foot at y 10511 (`tl5_tracks.py v 4562 8690
-10420`, `v 4563 10230 10600`). So **this stage's slave output is stage W3's clock**. The net has no name in this
-file: `eof` names it `eof_w9255`, and it takes that name when `ff3` is on main (below it is written K3).
+10420`, `v 4563 10230 10600`). So **this stage's slave output is stage W3's clock**. The net has no label in this
+file: it is `eof`'s `eof_w9255`, and the full extraction prints it so now that `ff3` is on main (the package
+by itself prints an `n` number; below it is written `eof_w9255`).
 
 **Its clock** is on the metal x 5292-5308 and the thin metal x 4641-4655, joined by row H2: four gates and no
 driver in the unit. From the pad (5298,9990) the poly runs on north (x 5292-5314) and east as a row y 9936-9958
@@ -150,10 +151,10 @@ east to a pad (6257,10035), whose metal x 6245-6265 runs south. Drawn to x 5480.
 
 Extraction (`tools/t.sh lc3 netlist.py`):
 
-- `lc3_w10123` = NOT(`lc2_w8450` OR `K3` AND `lc3_w9947` OR `lc3_w10201`)
+- `lc3_w10123` = NOT(`lc2_w8450` OR `eof_w9255` AND `lc3_w9947` OR `lc3_w10201`)
 - `lc3_w10201` = NOT(`lc3_w10123` OR `lc3_w10210` AND `lc3_w9947`)
-- `K3` = NOT(`lc3_w10210` AND (`lc3_w10201` OR `lc3_w9947`))
-- `lc3_w10210` = NOT(`lc1_w7170` AND `K3` AND (`lc3_w10123` OR `lc3_w9947`))
+- `eof_w9255` = NOT(`lc3_w10210` AND (`lc3_w10201` OR `lc3_w9947`))
+- `lc3_w10210` = NOT(`lc1_w7170` AND `eof_w9255` AND (`lc3_w10123` OR `lc3_w9947`))
 
 the cell's four equations, with `lc3_w9947` as the clock.
 

@@ -1,0 +1,251 @@
+@block busl
+# ---- piece h8: the eight west outputs of cdp3 row H (cdp3_hw_c7..c0) across the field to the
+# left array. Per net: poly row from cdp3 (x 7600) west to a pad; contact; metal track south,
+# west along a staircase step, south to a pad on a diffusion row; the row west to x 4780.
+
+# c7
+P 6031,10361 x7606 w=18              # poly row, from its pad to cdp3's piece at x 7600
+P 6017,10345:6061,10377               # the row's west end pad
+C 6039,10359 s=24x24
+M 5690,11341 y11272 x6039 y10351 w=16
+C 5690,11335 s=24x24
+D 5664,11308:5717,11362               # pad at the diffusion row's east end
+D 4780,11338 x5670 w=20            # diffusion row west to the left array
+N P 7000,10361 cdp3_hw_c7
+N D 4800,11338 cdp3_hw_c7
+
+# c6
+P 5988,10404 x7606 w=18              # poly row, from its pad to cdp3's piece at x 7600
+P 5974,10388:6018,10420               # the row's west end pad
+C 5996,10402 s=24x24
+M 5647,11816 5626,11790 y11230 x5996 y10394 w=16   # the track leans east into the pad
+C 5647,11812 s=24x24
+D 5621,11785:5674,11839               # pad at the diffusion row's east end
+D 4780,11815 x5627 w=20            # diffusion row west to the left array
+N P 7000,10404 cdp3_hw_c6
+N D 4800,11815 cdp3_hw_c6
+
+# c5
+P 5945,10447 x7606 w=18              # poly row, from its pad to cdp3's piece at x 7600
+P 5931,10431:5975,10463               # the row's west end pad
+C 5953,10445 s=24x24
+M 5605,12294 5583,12268 y11186 x5953 y10437 w=16   # the track leans east into the pad
+C 5605,12290 s=24x24
+D 5579,12263:5632,12317               # pad at the diffusion row's east end
+D 4780,12291 x5585 w=20            # diffusion row west to the left array
+N P 7000,10447 cdp3_hw_c5
+N D 4800,12291 cdp3_hw_c5
+
+# c4
+P 5901,10490 x7606 w=18              # poly row, from its pad to cdp3's piece at x 7600
+P 5887,10474:5931,10506               # the row's west end pad
+C 5909,10488 s=24x24
+M 5562,12770 5540,12744 y11142 x5909 y10480 w=16   # the track leans east into the pad
+C 5562,12766 s=24x24
+D 5536,12739:5589,12793               # pad at the diffusion row's east end
+D 4780,12768 x5542 w=20            # diffusion row west to the left array
+N P 7000,10490 cdp3_hw_c4
+N D 4800,12768 cdp3_hw_c4
+
+# c3
+P 5858,10535 x7606 w=18              # poly row, from its pad to cdp3's piece at x 7600
+P 5844,10519:5888,10551               # the row's west end pad
+C 5866,10533 s=24x24
+M 5514,13226 5496,13200 y11100 x5866 y10525 w=16   # the track leans east into the pad
+C 5514,13222 s=24x24
+D 5488,13195:5541,13249               # pad at the diffusion row's east end
+D 4780,13247 x5432 y13220 x5494 w=20   # the row steps north 27 px at x 5432
+N P 7000,10535 cdp3_hw_c3
+N D 4800,13247 cdp3_hw_c3
+
+# c2
+P 5814,10577 x7606 w=18              # poly row, from its pad to cdp3's piece at x 7600
+P 5800,10561:5844,10593               # the row's west end pad
+C 5822,10575 s=24x24
+M 5474,13726 5452,13700 y11054 x5822 y10567 w=16   # the track leans east into the pad
+C 5474,13722 s=24x24
+D 5448,13695:5501,13749               # pad at the diffusion row's east end
+D 4780,13725 x5454 w=20            # diffusion row west to the left array
+N P 7000,10577 cdp3_hw_c2
+N D 4800,13725 cdp3_hw_c2
+
+# c1
+P 5770,10621 x7606 w=18              # poly row, from its pad to cdp3's piece at x 7600
+P 5756,10605:5800,10637               # the row's west end pad
+C 5778,10619 s=24x24
+M 5427,14201 5409,14172 y11012 x5778 y10611 w=16   # the track leans east into the pad
+C 5427,14197 s=24x24
+D 5401,14170:5454,14224               # pad at the diffusion row's east end
+D 4780,14202 x5407 w=20            # diffusion row west to the left array
+N P 7000,10621 cdp3_hw_c1
+N D 4800,14202 cdp3_hw_c1
+
+# c0
+P 5727,10664 x7606 w=18              # poly row, from its pad to cdp3's piece at x 7600
+P 5713,10648:5757,10680               # the row's west end pad
+C 5735,10662 s=24x24
+M 5385,14892 5366,14866 y10966 x5735 y10654 w=16   # the track leans east into the pad
+C 5385,14888 s=24x24
+D 5359,14861:5412,14915               # pad at the diffusion row's east end
+D 4780,14894 x5365 w=20            # diffusion row west to the left array
+N P 7000,10664 cdp3_hw_c0
+N D 4800,14894 cdp3_hw_c0
+
+
+# ---- piece ch1: cdp4's eight channel-1 lines cdp4_bus_s7..s0 (poly rows at x 7600, y 11878..12182).
+# Each is ONE net with cdp4's row C latch input cdp4_in_s# (the poly rows of channel 2 at x 7600,
+# y 13636..13332) and with one poly row of the left array (x 4780), joined by metal tracks between
+# poly pads. s0's track leaves the region south at (5451,15000).
+@alias cdp4_bus_s0 cdp4_in_s0
+@alias cdp4_bus_s1 cdp4_in_s1
+@alias cdp4_bus_s2 cdp4_in_s2
+@alias cdp4_bus_s3 cdp4_in_s3
+@alias cdp4_bus_s4 cdp4_in_s4
+@alias cdp4_bus_s5 cdp4_in_s5
+@alias cdp4_bus_s6 cdp4_in_s6
+@alias cdp4_bus_s7 cdp4_in_s7
+
+# s7: row 11878 west to its pad; metal arm west to the track x 5800 (a T); the track north to the pad
+# of the array's row y 11488 and south to the pad of channel 2's row y 13636
+P 5857,11878 x7606 w=20
+P 5835,11861:5879,11895               # west end pad of the row
+C 5857,11878 s=24x24
+M 5800,11484 y13640 w=16
+M 5800,11880 x5861 w=16                # the arm of the T
+P 5777,11471:5821,11505               # east end pad of the array row
+C 5799,11488 s=24x24
+P 4780,11488 x5799 w=20                # the left array's row
+P 5778,13619:5822,13653               # west end pad of the channel-2 row
+C 5800,13636 s=24x24
+P 5800,13636 x7606 w=20
+N P 7000,11878 cdp4_bus_s7
+N P 4800,11488 cdp4_bus_s7
+N P 7000,13636 cdp4_bus_s7
+
+# s6: row 11922 runs from the array (x 4780) through a pad at x 5757 to cdp4; the track x 5757 from
+# that pad south to the pad of channel 2's row y 13592
+P 4780,11922 x7606 w=20
+P 5735,11905:5779,11939               # pad in the row
+C 5757,11922 s=24x24
+M 5757,11918 y13596 w=16
+P 5734,13575:5778,13609
+C 5756,13592 s=24x24
+P 5756,13592 x7606 w=20
+N P 7000,11922 cdp4_bus_s6
+N P 4800,11922 cdp4_bus_s6
+N P 7000,13592 cdp4_bus_s6
+
+# s5: row 11966 from its pad; track x 5713 south THROUGH the pad of the array's row y 12442 to the
+# pad of channel 2's row y 13549
+P 5713,11966 x7606 w=20
+P 5691,11949:5735,11983
+C 5713,11966 s=24x24
+M 5713,11962 y13554 w=16
+P 5691,12426:5735,12460               # east end pad of the array row; the track runs on through it
+C 5713,12443 s=24x24
+P 4780,12442 x5713 w=20
+P 5690,13533:5734,13567
+C 5712,13550 s=24x24
+P 5712,13549 x7606 w=20
+N P 7000,11966 cdp4_bus_s5
+N P 4800,12442 cdp4_bus_s5
+N P 7000,13549 cdp4_bus_s5
+
+# s4: row 12009 from its pad; track x 5842 south to a pad (5843,12335); from that pad a poly south
+# and diagonally south-west to a pad (5668,12681); track x 5669 south THROUGH the pad of the array's
+# row y 12984 to the pad of channel 2's row y 13506
+P 5841,12009 x7606 w=20
+P 5819,11993:5863,12027
+C 5841,12010 s=24x24
+M 5842,12006 y12339 w=16
+P 5821,12318:5865,12352
+C 5843,12335 s=24x24
+P 5846,12335 y12483 5672,12657 5668,12681 w=20   # the poly, with its diagonal
+P 5646,12664:5690,12698
+C 5668,12681 s=24x24
+M 5669,12677 y13512 w=16
+P 5648,12967:5692,13001               # east end pad of the array row; the track runs on through it
+C 5670,12984 s=24x24
+P 4780,12984 x5670 w=20
+P 5646,13491:5690,13525
+C 5668,13508 s=24x24
+P 5668,13506 x7606 w=20
+N P 7000,12009 cdp4_bus_s4
+N P 4800,12984 cdp4_bus_s4
+N P 7000,13506 cdp4_bus_s4
+
+# s3: row 12052 from its pad; track x 5668 south, west at y 12622 to x 5627, south, west at y 12860
+# to x 5540, south to a pad (5537,13157); from the pad's top a poly east, south along x 5563, west
+# along y 13266, south along x 5497 into channel 2's row y 13462. That row runs on west of the
+# junction and climbs diagonally to the array's row y 13397
+P 5668,12052 x7606 w=20
+P 5646,12036:5690,12070
+C 5668,12053 s=24x24
+M 5668,12049 y12622 x5627 y12860 x5539 y13161 w=16
+P 5515,13140:5559,13174
+C 5537,13157 s=24x24
+P 5545,13150 x5563 y13266 x5497 y13462 w=14       # the poly L from the pad to the row
+P 4780,13397 x5389 5454,13462 x7606 w=20   # array row, diagonal, channel-2 row
+N P 7000,12052 cdp4_bus_s3
+N P 4800,13397 cdp4_bus_s3
+N P 7000,13462 cdp4_bus_s3
+
+# s2: row 12096 west to x 6412, then a diagonal poly south-west under about eighteen tracks to a pad
+# (5624,12898); track x 5626 south THROUGH the pad of channel 2's row y 13418 to the pad of the
+# array's row y 13874
+P 7606,12096 x6412 5646,12862 5626,12894 w=20
+P 5602,12881:5646,12915
+C 5624,12898 s=24x24
+M 5626,12894 y13878 w=16
+P 5603,13402:5647,13436               # west end pad of the channel-2 row; the track runs on through it
+C 5625,13419 s=24x24
+P 5625,13418 x7606 w=20
+P 5603,13857:5647,13891
+C 5625,13874 s=24x24
+P 4780,13874 x5625 w=20
+N P 7000,12096 cdp4_bus_s2
+N P 4800,13874 cdp4_bus_s2
+N P 7000,13418 cdp4_bus_s2
+
+# s1: row 12138 from its pad (7510); track x 7511 south to a pad (7511,12745); poly row y 12745 west
+# to x 5945, diagonal south-west, row y 12941 west to a pad (5582,12941); track south, west at
+# y 13286 to x 5540, south THROUGH the pad of channel 2's row y 13375, a diagonal step to x 5496,
+# south, west at y 14353 to the pad of the array's row y 14351
+P 7510,12138 x7606 w=20
+P 7488,12121:7532,12155
+C 7510,12138 s=24x24
+M 7511,12134 y12749 w=16
+P 7489,12728:7533,12762
+C 7511,12745 s=24x24
+P 7511,12745 x5945 5749,12941 x5582 w=20
+P 5560,12924:5604,12958
+C 5582,12941 s=24x24
+M 5584,12937 y13286 x5540 y13900 5496,13944 y14353 x5403 w=16
+P 5516,13358:5560,13392               # west end pad of the channel-2 row; the track runs on through it
+C 5538,13375 s=24x24
+P 5538,13375 x7606 w=20
+P 5385,14334:5429,14368
+C 5407,14351 s=24x24
+P 4780,14351 x5407 w=20
+N P 7590,12138 cdp4_bus_s1
+N P 4800,14351 cdp4_bus_s1
+N P 7000,13375 cdp4_bus_s1
+
+# s0: row 12182 from its pad (7554); track x 7555 south to a pad (7554,12919); from it a poly west
+# and south along x 7513 into channel 2's row y 13332; that row west to its pad (5582,13333); track
+# south, a diagonal step to x 5539, west at y 14398 to x 5451, south out of the region (it ends 45 px
+# on, on the pad (5365,15042) of a poly row of the array: bl0's region, not drawn)
+P 7554,12182 x7606 w=20
+P 7532,12166:7576,12200
+C 7554,12183 s=24x24
+M 7555,12179 y12923 w=16
+P 7532,12902:7576,12936
+C 7554,12919 s=24x24
+P 7554,12919 x7513 y13332 w=18
+P 5582,13332 x7606 w=20
+P 5560,13316:5604,13350
+C 5582,13333 s=24x24
+M 5582,13329 y13916 5539,13959 y14398 x5451 y15000 w=16
+N P 7590,12182 cdp4_bus_s0
+N P 7000,13332 cdp4_bus_s0
+N M 5451,14990 cdp4_bus_s0

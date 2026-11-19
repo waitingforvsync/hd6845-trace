@@ -1,28 +1,28 @@
 {
  "who": "Tom Seddon",
- "generated": "2026-11-19T01:18:52+00:00",
+ "generated": "2026-11-19T13:51:51+00:00",
  "price_source": "Claude API list prices per million tokens, as of 2026-11-03",
  "unpriced_models": [],
- "responses": 3982,
+ "responses": 4317,
  "first": "2026-11-17T14:22:35.769000+00:00",
- "last": "2026-11-19T01:18:42.653000+00:00",
- "total_cost": 576.92,
- "review_cost": 227.53,
+ "last": "2026-11-19T13:51:28.926000+00:00",
+ "total_cost": 616.55,
+ "review_cost": 239.15,
  "tokens": {
-  "input": 8084,
-  "output": 5003204,
-  "cache_write_5m": 7330490,
-  "cache_write_1h": 7206784,
-  "cache_read": 952636486
+  "input": 8837,
+  "output": 5348294,
+  "cache_write_5m": 7726050,
+  "cache_write_1h": 7980162,
+  "cache_read": 1023557981
  },
  "by_model": {
   "claude-opus-5-5": {
-   "cost": 3.88,
-   "responses": 56
+   "cost": 15.37,
+   "responses": 181
   },
   "claude-fable-5-2": {
-   "cost": 573.03,
-   "responses": 3926
+   "cost": 601.18,
+   "responses": 4136
   }
  },
  "by_package": {
@@ -34,6 +34,15 @@
     "claude-fable-5-2": 1196
    }
   },
+  "(coordination)": {
+   "cost": 114.74,
+   "review_cost": 4.69,
+   "responses": 749,
+   "models": {
+    "claude-opus-5-5": 181,
+    "claude-fable-5-2": 568
+   }
+  },
   "tl3": {
    "cost": 106.22,
    "review_cost": 48.49,
@@ -42,13 +51,12 @@
     "claude-fable-5-2": 726
    }
   },
-  "(coordination)": {
-   "cost": 90.82,
-   "review_cost": 0.0,
-   "responses": 543,
+  "eof": {
+   "cost": 63.67,
+   "review_cost": 24.64,
+   "responses": 460,
    "models": {
-    "claude-opus-5-5": 56,
-    "claude-fable-5-2": 487
+    "claude-fable-5-2": 460
    }
   },
   "tl2": {
@@ -65,14 +73,6 @@
    "responses": 346,
    "models": {
     "claude-fable-5-2": 346
-   }
-  },
-  "eof": {
-   "cost": 47.95,
-   "review_cost": 17.72,
-   "responses": 331,
-   "models": {
-    "claude-fable-5-2": 331
    }
   },
   "dlat": {
@@ -103,6 +103,6 @@
  "by_day": {
   "2026-11-17": 221.37,
   "2026-11-18": 320.72,
-  "2026-11-19": 34.82
+  "2026-11-19": 74.46
  }
 }
