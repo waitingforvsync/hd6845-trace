@@ -254,6 +254,8 @@ metals 13-16 px wide, drawn 14; every row is poly, 23-24 px between its edge lin
   y 12835 just above `cdp4_rst`'s pad and goes on south along x 7511. It is not on the pad:
   `tools/textmap.py 7444 12816 7500 12884 3`: the corner's metal ends at y 12842, then open ground in
   the clean shot for 12 px (y 12849-12858, both metal shots at ground level), then the pad's ring.
+- Another net's metal corner at about (7430,13897) (a step of the staircase of `cdp4`'s row D data
+  lines) lies 10-16 px west of `cdp4_rst`'s south pad: separated by ground (round-4 reviewer, 4x).
 - The nested staircase (view `n10_stair.png`, 2.4x, metal and clean shots; overlay `ct_o1.png`): six
   tracks step west one after another, the two westernmost of other nets (x 6516 at y about 12995,
   x 6559 at 13033), then sel1, sel2, sel3, sel4; plain right-angle steps over field, nothing beneath.
@@ -294,7 +296,7 @@ metals 13-16 px wide, drawn 14; every row is poly, 23-24 px between its edge lin
   7590 13955 3`, against the known through pad (5713,12443) and `cdp4_rst`'s pad in the same form;
   `tools/tl5_tracks.py v 7556 13860 13990`): neither metal shot shows metal for 51 px (y 13898-13949);
   no bright centre in either (chip 2 reaches ground level at one spot west of the track's line, chip 1
-  does not); the clean shot shows a heavy outline with a plain tan inside and no green hole, in
+  at one spot on it, (7557,13929): Ambiguity 9); the clean shot shows a heavy outline with a plain tan inside and no green hole, in
   protected colours (so metal was over it). The track is at full brightness to y 13897 and again from
   y 13949, where it runs on to the corner (7556,13982) (`tools/follow.py 7556 13960 S`: west to
   x 7442; `7452 14040 N`: the same piece from the other end). The arm y 13975-13989 lies over field
@@ -427,8 +429,14 @@ register loaded from the selector's bus lines.
    assumption: (a). For it: the box has a heavy outline and a plain inside, unlike the pad at the
    other end of the same poly 90 px west (widened, green hole, ring with a bright centre: a contact);
    no bright centre in either metal shot and no green hole in the clean shot (guide, traps 22, 26); a
-   metal is dark for 35-80 px over such a box. Against: nothing; but a pass-over cannot be told from
-   these photos with certainty, which is why the stretch is `?M`. The box and the diffusion are not
+   metal is dark for 35-80 px over such a box. Against: one spot of 9 x 10 px on the track's line at
+   (7557,13929), found by the round-4 reviewer (`tools/px.py pt 7557,13929 all`: chip-1 metal
+   140/122/62, the brightness of bare ground there and well under the track's 160-190; chip-2 metal
+   97/89/51, dark; chip-2 stripped shot 136/154/83, greenish like the ghosts of this piece's real
+   contacts; clean shot 196/169/118, not green). It has no ring of its own, is not bright in chip 2
+   and sits off-centre in the dark stretch, so it is not a contact by the usual tests; `tl3`'s node
+   boxes under its thin metal show brighter spots than this (guide, trap 26). A pass-over cannot be
+   told from these photos with certainty, which is why the stretch is `?M`. The box and the diffusion are not
    drawn here: they are the gate group's (`cdp4` (continue)), whose tracing settles it (if the node is
    the output of a gate whose inputs are the selects, (a) is right).
 10. **`cdp4_ld`'s metal over the box** (the `?M` at x 7556, y 13895-13953): no metal in either metal
@@ -539,6 +547,46 @@ The trace is unchanged since the reviewed commit.
 Could not check, or only weakly: anything east of x 7550; the rows at x 6985-7320 seen only in the
 chip-2 metal shot at 2.2x (the other shots by text); the plain staircase and foot corners at 2.1-2.5x,
 not 4x; of the eight named row patches three were viewed, the rest covered by the scans.
+
+Round 1: no findings that change a connection.
+
+**Run 4, piece `ctl`. Round 1: full review** (2026-11-19 17:39 +0100; a fresh Fable 5.2 reviewer agent;
+commit 01aa682; images in `cache/scratch/busl/review-4/`, 33 used).
+Told to suspect: the box (7535-7580, 13903-13940) and the metal x 7556 across it (a contact, two metals
+or one, whether `cdp4_rst`'s poly reaches it); the four through pads (the right track, running on, the
+right row); the nested staircase (read at 2.4x); the near misses (sel2's arm above sel3's pad, the
+corner north of `cdp4_rst`'s pad, `cdp4_ld`'s pad below `cdp4_bus_s0`'s, the arms y 13938 and 13982
+beside the rows); the staircase step on row y 13809 and the one north of row y 13701; the ten row
+stretches (a break, a step, an early end, a tapped track, whether the four lower ones go on past
+x 7550); the rows' identity at x 7600; taps on the six tracks; eight coloured stretches and the dot
+(7558,13792).
+Checked: the box at 4x and 7x in four shots (protected colours in the clean shot up to its north and
+south outlines on the track's line, open ground beside; poly colour on both sides of its west outline
+in the chip-2 stripped shot; the pad (7467,13897) and the band one poly; no metal between that pad and
+the arm y 13938); the staircase at 4.4x in both metal shots (four right-angle steps, order kept, no
+bridge; a green patch under sel2 at (6583,13120-13170) in chip 1 only); all eleven pads at 4.2-4.5x in
+both chips (ring and bright centre, each on its claimed track; the four through tracks carry on south);
+the near misses (ground or bare poly between, and one more: another net's corner (7430,13897) 10-16 px
+west of `cdp4_rst`'s south pad); the rows (six at x 7600, matching `cdp4`; all ten stretches
+continuous, poly colour in every open gap in chip 2; the four lower rows run on past x 7550); the
+crossings on all six tracks (edge bars only); the step on row y 13809 at 5x and the greenish spots (no
+ring, pad or widening); the join to `bc1` (the corner (7448,13982), the crossing of row y 14004, one
+metal on to y 14636); the extraction and `tools/unsure.py`.
+Findings: one, a comment only, confirmed by the tracer:
+1. Ambiguity 9 said "Against: nothing" and the inventory "no bright centre in either": there is a
+   9 x 10 px spot at (7557,13929) on the track's line inside the box, at ground brightness in chip 1's
+   metal shot and greenish in the chip-2 stripped shot. Tracer: confirmed (`tools/px.py pt 7557,13929
+   7557,13915 7556,13880 7535,13929 all`: 97/89/51, 140/122/62, 136/154/83, 196/169/118 at the spot;
+   the track at (7556,13880) 205/134/59 and 199/159/98). Not a contact by the tests (no ring, dark in
+   chip 2, off-centre); recorded in Ambiguity 9 and under the piece. Nothing drawn changes: the stretch
+   stays `?M` and the box undrawn.
+The trace is unchanged since the reviewed commit.
+`tools/t.sh busl sameconn.py 01aa682`: `connections identical`.
+`.venv/bin/python tools/sameconn.py 01aa682`: `connections identical`.
+Could not check, or only weakly: whether the metal is continuous over the box and what the box is (the
+corner gate group settles it); most row crossings by the two-chip metal test and text maps, not each
+at 4x; the clean shot's hole test is weak in this field (sure contacts read red minus green from -12
+to +61); anything south of y 15000, east of the drawn ends, or `bc1`'s metal beyond y 14060.
 
 Round 1: no findings that change a connection.
 
