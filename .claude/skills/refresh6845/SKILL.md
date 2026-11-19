@@ -57,6 +57,15 @@ as an `@alias`) is renamed when the trace establishes what the signal is:
   a register's bits found by its write strobe and the data bus, a counter's bits by
   their joins, a comparator's output by both of its inputs.
 
+- **or two or more names on one net, on firm geometry, whatever kind of names they are** (user,
+  2026-11-19: "rename / consolidate any signals which are known to be the same with their proper
+  name. I thought that was the point in the rename step"). `names.py candidates` lists only nets
+  with a functional name; placeholder-to-placeholder aliases are consolidated too, onto the net's
+  canonical name (the first word of its `@alias` lines), so that after a refresh the only `@alias`
+  lines left are joins through an uncertain item and cell pin names made from a template. A signal
+  on several nets that is known to be one signal (buffered copies) gets names that say what it is
+  (`rst_ck`, `rst_rc`, `rst_lat`), not what it was once believed to be.
+
 Leave alone: identities that are "believed", "by position", "from the datasheet" or
 marked in `operation.md`; aliases whose glossary row says why both names are kept (for
 example a cell's own name for a pin it shares); and supply nets. When in doubt, do not
@@ -71,6 +80,10 @@ the names the glossary already uses for that bit. Bit numbers must come from the
 
 **How.**
 
+- Before renaming an alias onto its canonical name, reword the sentences that name both ("A is B"
+  becomes "B is B"): describe the old wire ("the wire `tl5` called w5936 is `tl3_w3982`"). Keep the
+  journal's rename records (lines with `->`) as written; put the catch-up `tools/rename.py` commands
+  for branches in flight into the journal entry.
 - Labels drawn in trace files: `tools/rename.py OLD NEW [OLD NEW ...]`. It renames in
   trace files, notes, plan and floor plan, drops `@alias` lines that become self-aliases,
   and adds rows to "Former names".
