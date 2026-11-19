@@ -525,10 +525,10 @@ N M 7555,10300 cdp3_k_b
 # to this region's south edge at (6711,15000) (piece n2w), and from this region's north edge
 # at (6775,10400) on north to tl5's bus poly x 5412 and the inverter that makes rcs_e3 (piece
 # n2n, labelled bd1_n2_u = tl4_w3850). Between the two it is one thin metal: north on x 6711,
-# east along y 13247 (the third of the five nested Ls east of the selects' staircase: sel3's,
-# sel4's, this one, x68's, trunks' line, x69's), north on x 6776. No pad, no contact, no tap
-# (scan cache/scratch/busl/n2_scan.txt; the rows whose colour is greenish under it in the clean
-# shot are greenish under every track: guide, trap 15).
+# east along y 13247 (the third of six nested Ls: sel3's, sel4's, this one, x68's, trunks' line,
+# x69's), north on x 6776. No pad, no contact, no tap (scan cache/scratch/busl/n2_scan.txt). At
+# some row crossings the clean shot is greenish under it (which ones differs from track to
+# track): no ring, pad or widening in either metal shot at any of them (guide, trap 15).
 # =====================================================================================
 M 6711,15000 y13247 x6776 y10400 w=14
 N M 6711,14000 bd1_n2

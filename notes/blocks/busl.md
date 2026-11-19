@@ -109,9 +109,9 @@ wiring only, no uncertain items:
   x 7598 there is bare field at that height in both metal shots and the clean shot (view `b_ends.png`,
   3x); the row's west end is at about x 7603-7640 under `cdp4`'s metal x 7600-7645 (`cdp4` (continue)).
 
-Run 7 (richtw1's session, Claude Fable 5.2; 2026-11-19, from 22:30 +0100). Three pieces, `n2`,
-`x68` and `x69`, wiring only, no uncertain items: three of the five nested Ls east of the selects'
-staircase (the corners at y 13247-13376; the fourth is `trunks`' line).
+Run 7 (richtw1's session, Claude Fable 5.2; 2026-11-19 22:30 to 22:56 +0100). Three pieces, `n2`,
+`x68` and `x69`, wiring only, no uncertain items: three of the six nested Ls at the selects' staircase (`cdp4_sel3`'s,
+`cdp4_sel4`'s, these three with corners at y 13247-13376, and `trunks`' line between the last two).
 
 - **The latch on R4's match drives the row counter's step logic: `rcs_e3` = NOT `bd1_n2`** (piece
   `n2`). `eof` had drawn `bd1_n2` (the output of `bd1`'s latch on `rc_eq_r4`) from the latch to this
@@ -546,13 +546,19 @@ south), `x69`'s. What the scan flagged, all looked at (tiles `n2_c2.png`, `n2_c3
   (6820,12655), (6820,12766); `x69` (6906,10619), (6906,11900), (6841,14566), (6841,14212). In each
   the other chip shows the metal bright and of the same width, with no ring; (6820,12655) is a speck
   on chip 2.
-- The clean shot is greenish (red minus green under 24, down to -30) under the tracks on the rows
-  y 13417, 13548, 13590, 13633, 13699, 14004, 14089, 14178, 14220, 14437, 14698, 14910. These are rows
-  whose colour under metal is the yellow-green kind: each is greenish under every track it passes
-  (`tools/textmap.py 6690 13524 6780 13572 3 --acid`: row y 13548 under x 6711 and x 6754 alike;
-  `textmap.py 6822 13400 6862 13434`, `6822 14074 6862 14104`: under x 6841), and both metal shots
-  show the track bright and 12-15 px wide across them (guide, trap 15: colour without a pad is not a
-  tap). View `n2_c5.png`.
+- The clean shot is greenish (red minus green under 24, down to -30) under a track at some row
+  crossings: on x 6711 at y 13548, 13590, 13633, 13699, 14004, 14178, 14220, 14437, 14698; on x 6754 at
+  y 13547, 14264; on x 6841 at y 13417, 13588, 14089, 14910. **The colour goes by crossing, not by row**
+  (the reviewer's correction of this run's first wording, "greenish under every track"; `tools/px.py pt`
+  in the clean shot: row y 13417 is 221/166/113 under x 6668 and 222/167/120 under x 6711, salmon, and
+  126/158/99 under x 6841; row y 14089 is 183/111/74 under x 6711 and 142/161/102 under x 6841). None is
+  read as a contact, on these grounds: neither metal shot shows a ring, a pad or a widening at any of
+  them (the track is bright and 12-15 px wide across each; `tools/textmap.py 6690 13524 6780 13572 3
+  --acid`, `6822 13400 6862 13434`, `6822 14074 6862 14104`; tiles and the reviewer's `green_rows.png`,
+  `green_13417.png` at 4.5-5.8x); the green patch is the whole protected width (about 25 px) by the
+  row's height, wider than the metal, where a contact's hole is about 12 px inside a pad; and `n2` is
+  greenish over both `cdp4_sel1`'s row (y 13701) and `cdp4_sel2`'s (y 14004), where contacts would
+  short the two selects (guide, trap 15). View `n2_c5.png`.
 - `x69`'s arm lies on the poly row y 13375 (piece `ch1`: `cdp4_in_s1`) from x 6841 to x 6906
   (`textmap.py 6824 13354 6924 13400 3 --acid`; view `n2_c6.png`, 5x, three shots): the metal is a
   plain bar 14 px tall in both chips with no ring and no pad (a notch at x 6882 in chip 2 only), and
@@ -1014,6 +1020,44 @@ apart from its ends and y 9545-9645 (text tools only).
 
 Round 1: no findings that change a connection.
 
+**Run 7, pieces `n2`, `x68`, `x69`. Round 1: full review** (2026-11-19 22:56 +0100; a fresh Fable 5.2 reviewer agent;
+commit 85f1dfb; images in `cache/scratch/busl/review-7/`, 18 used). Told to suspect: the nest of
+corners (each south run onto the right north run, no two Ls touching); a pad, contact or tap missed
+along 4,600 px of each line, with the list of greenish crossings; the twenty places where one chip
+shows no metal for 20-38 px; `x69`'s arm on the poly row y 13375; the two edges (that `n2` meets
+`eof`'s metals and not a neighbour's, and no step of one pitch in between); pads of neighbouring nets
+close to the tracks.
+Checked: the nest at 4.4x in both metal shots and by `tools/textmap.py 6654 13140 6930 13402 3` (six
+separate Ls, arms ending flush, 25-30 px of bare ground or open poly between neighbours in both chips);
+`x69`'s arm at 6x in the metal shots and at 7x in both stripped shots against a real pad (a plain bar, no
+hole, no ringed box: no contact); the arm's east end against the track x 6949 (`tools/follow.py 6841
+15040 N --gap 16` runs on to x 6949: guide trap 30, the 28 px between are open poly, chip 1 red
+123-145 against metal over 200); `tools/tl5_tracks.py` on all nine segments (longest stretch dark in
+both chips 16 px) and a text map of each of the twenty one-chip stretches (row crossings dim in one
+chip, or a speck); its own two-chip scans of the gaps beside the three lines over the full length, with
+the arms as controls (no metal in any gap: no tap, no step), and 1x strips (rings only on the known
+neighbour pads); the neighbour pads (6732,12226), (6732,12485), (6731,12788), (6666,13961),
+(6884,14869): each at least 12 px of non-metal from the tracks; both edges at 5x (straight through
+y 15000 and y 10400, coinciding with `eof`'s metals at x 6711 and x 6775); the extraction (2,379 nets,
+0 errors, 0 warnings, `rcs_e3` = NOT `bd1_n2`) and `tools/unsure.py` (the join's labels on one piece).
+Findings: two, both wording only (no geometry changed), both confirmed by the tracer:
+1. "Greenish under every track" (the trace comment and three places in these notes) is wrong: the
+   colour goes by crossing, not by row (row y 13417 is green only under x 6841 and salmon under x 6668
+   and x 6711; rows y 14089 and 14910 green only under x 6841; row y 13590 under x 6711 and x 6841).
+   Tracer's check: `tools/px.py pt 6668,13417 6711,13417 6841,13417 6711,14089 6841,14089 acid1b` gives
+   221/166/113, 222/167/120, 126/158/99, 183/111/74, 142/161/102. The no-contact reading stands on the
+   other grounds (no ring and no pad in either metal shot; the patch is the whole protected width; `n2`
+   is greenish over both `cdp4_sel1`'s and `cdp4_sel2`'s rows). Reworded in the trace comment, the
+   Inventory and Not done.
+2. The trace comment said "the third of the five nested Ls" and listed six. Reworded.
+`tools/t.sh busl sameconn.py 85f1dfb`: `connections identical`.
+`.venv/bin/python tools/sameconn.py 85f1dfb`: `connections identical`.
+Could not check, or only weakly: not every one of the roughly 300 crossings at 4x (about 30 at 4x or
+more, the rest by text scans and the 1x strips); the chip-2 stripped shot under the tracks shows only
+fringes and was not used for contacts on the runs; anything beyond the two edges.
+
+Round 1: no findings that change a connection.
+
 ## Not done
 
 - Everything else in the field: about 20 more tracks and the other rows. Next pieces, in the
@@ -1065,5 +1109,6 @@ Round 1: no findings that change a connection.
   in the northern part) and south of y 15000 (end (6754,16220), `bl0`); `busl_x6906` north (end
   (7078,8778), the northern part) and south (end (6839,16219), `bl0`). And the tracks east of them:
   x 6952 and x 6992 at y 13100 (`tools/sel_cut.py h 13100 6780 7000`), not followed.
-- What the rows y 13417, 13548, 13590, 13633, 13699, 14004, 14178, 14220, 14437, 14698 are (greenish
-  under every track in the clean shot; rows of the bands y 13300-13700 and 14050-14950, undrawn).
+- The undrawn rows of the bands y 13300-13700 and 14050-14950 that these tracks cross (y 13417, 13548,
+  13590, 13633, 13699, 14178, 14220, 14437, 14698 among them): their ends would confirm, from another
+  direction, that none of the greenish crossings of run 7 is a tap.
