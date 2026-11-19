@@ -77,7 +77,12 @@ Traced, extracting (69 transistors of its own, 0 errors), the west column and pi
   counter's L3 line** as `ur` had drawn it: three corrections to `trace/ur.txt` (a commit of
   their own, a1c5d8b).
 
-Everything else in the strip is surveyed only (Inventory): the rows above y 2890.
+- **the four rows above the cluster that were left, y 2639, 2683, 2813, 2857** (run 12, Matt Godbolt,
+  2026-11-19 16:48 -0600; wiring only): each is one straight poly row from `tl2`'s stub at x 3533 under both VSS rails,
+  the rails' link and the thin metals, with no contact on the way. Four joins (below, "Run 12").
+  Full extraction 2372 nets, 4353 transistors, 0 errors, 0 warnings.
+
+Nothing in the strip is left surveyed only.
 
 ## Inventory
 
@@ -978,6 +983,37 @@ Things looked at and left as they are:
   drawn from y 6330, where there is no metal down to y ~6570 (`px.py col 3630 6330 6620 20
   metal,metal1`). Neither touches anything of this piece; not changed (handoff).
 
+### Run 12: the rows y 2639, 2683, 2813, 2857 (wiring only)
+
+Seven poly rows cross the strip above the cluster, 44 px apart. Three were drawn (y 2724 and 2768
+by `tla`, y 2899 in run 10). The other four, each seen as one unbroken row from x 3533 to its east
+end (`tl5_tracks.py rows row 3520 4270 5 ...`: poly all the way on the row, field on both sides
+between the metals; 1.4x and 1.6x views of the whole length in `metal` and `acid1b`, 2.9x of the
+east ends in both):
+
+| Row | West (`tl2`) | East end | Join |
+|---|---|---|---|
+| y 2639 | `tl2_w3722` (track F's top pad (3324,2639)) | on across x 4250 to `tl4`'s pad (4279,2640): bus line 4 | `tl2_w3722` = `tl5_w4937` = NOT `tl4_w4068` |
+| y 2683 | `rcs_g3245` (track I's top pad (3454,2683)) | a pad with a metal contact (4233,2683); its metal runs east as `tl4`'s bus line 5 | `rcs_g3245` = `tl5_w2722` = NOT `tl4_w3113` |
+| y 2813 | `tl1_w3678` (the pad (3154,2813)) | on across x 4250 to `tl4`'s pad (4366,2812) | `tl1_w3678` = `tl4_w4590` |
+| y 2857 | `tl1_w2857` | a pad with a metal contact (4233,2857), the top end of `tla`'s bus piece x 4233 | `tl1_w2857` = `rcs_mn3852` |
+
+The two pads' contacts: green holes in the clean shot (183/180/112 and 157/165/95) under bright
+metal (`px.py pt 4233,2683 4233,2857`).
+
+What the joins say (extraction; inputs identified, no gate's logic changed):
+- `rcs_bc3460` = NOR(`clk_tl`, `rcs_e3`, `rcs_e4`, NOT `tl4_w4068`).
+- `rcs_u3288` = NOR(`rcs_bd3330`, NOT `tl4_w3113`).
+- `tl1`'s first latch takes its data from `tla`'s unit: `tl1_w3752` = NOT `rcs_mn3852`,
+  `tl1_w4287` = NOT((`rcs_mn3852` AND `tl1_w3636`) OR `tl1_w4070`), with `rcs_mn3852` =
+  NOR(`rcs_in1`, `rcs_mu`, `tl3_e3712`).
+- `tl1_w3636` = NOR(`rst_ck`, `tl4_w4590`): the enable of `tl1`'s first latch and the gate of E1
+  (latch A's enable, `tl3_w3373` = NOT `tl4_w4590`) are one net. **`tl4_w4590` still has no
+  driver**: the row y 2813 was "the only way left" to it, and it leads only to more gates (five
+  loads in all: `tl1_w3636`, `tl3_w4978`, `tl3_w3373`, `tl4_w4545`, `tl4_w4686`). Its driver must be
+  on a tap not yet seen: on `tl1`'s metal x 2457 (y 2800-3690), `tl2`'s metal y 2812 (x 2848-3164)
+  or `tl4`'s track x 4366 and its rows.
+
 ## Ports
 
 | Name | Layer | Where | Direction | What |
@@ -1032,6 +1068,10 @@ Things looked at and left as they are:
 | `rcs_thin_e` | metal | (3967-3979, 6350) | ? | pad A's metal, south out of the strip to `ur`'s pad (3968,6410), whose poly leaves east along y 6402-6422 (seen to x 4256, not drawn) |
 | `c4l_gab` | metal | (4077-4089, 6350) | ? | pad B's (4083,6327) thin metal, south out of the strip: `ur`'s `c4l_gab`, the 4-bit counter's pass-gate line (an alias) |
 | `c4l_gab` | poly | (4250, 6316-6336) | ? | pad B's row, east out of the strip: `tl4`'s row to the pad (4929,6323) of `c4l_gab` (the clear of `tl5`'s latch c) |
+| `tl5_w4937` (= `tl2_w3722`) | poly | (3533, 2630-2648) and (4250, 2630-2648) | through | the row y 2639, `tl2`'s stub to `tl4`'s pad (4279,2640) |
+| `tl5_w2722` (= `rcs_g3245`) | poly, metal | (3533, 2674-2692); metal (4250, 2679-2691) | in from the east | the row y 2683 from the pad (4233,2683), where `tl4`'s bus line 5 starts |
+| `tl4_w4590` (= `tl1_w3678`) | poly | (3533, 2804-2822) and (4250, 2801-2820) | through | the row y 2813 |
+| `rcs_mn3852` (= `tl1_w2857`) | poly | (3533, 2848-2866) | out | the row y 2857 from the pad (4233,2857) on `tla`'s bus piece |
 
 ## Ambiguities
 
@@ -1718,8 +1758,7 @@ Round 1: no findings.
 
 ## Not done
 
-- Next: the rows above y 2890 (y 2580-2880: `r9m`'s and `tla`'s lines cross here; the row y 2857
-  of `tl1_w2857`, the row y 2813 of `tl1_w3678`).
+- (Done, run 12: the rows above y 2890.) `tl4_w4590`'s driver is still not found (Logic, run 12).
 - (Done, run 11: south of the foot, y 5660-6350.) Left from it, all outside the strip: the poly
   that leaves `ur`'s pad (3968,6410) east along y 6402-6422 (seen to x 4256: `urch`'s region),
   which is where `rcs_thin_e` goes; `tl3_w3982`'s bus line south of y 6350 (the source of
