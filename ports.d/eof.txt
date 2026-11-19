@@ -43,3 +43,11 @@ res_b      P  5196-5210,6900     ?   the poly on south of the pad (5190,6845), u
 lpstb_b    P  5232-5248,6872     ?   the poly on south of the pad (5237,6803), under V3; bends south-east from here (about (5266,6900)): into lc1's diagonal bundle
 tl5_w5936  P  5053-5073,6345     ?   from tl5's bus line x 5063
 tl5_w5936  P  5054-5072,6880     ?   on south beside lc1's M_a and under it from y ~6890 (not followed)
+
+# Piece r5nor: the NOR on NOT R5's match (run 3)
+tl1_w5936   P  2362-2386,2506    in   from tl1's row y 2498-2515: a gate of the NOR
+rcs_c1      P  2405-2427,2506    in   from tl1's poly (2405-2420,2500): a gate of the NOR
+sl_eq_r5_n  P  2493-2515,2506    in   from tl1's poly (2493-2508,2500): a gate of the NOR, the net's first load
+tl1_w2637   P  2452-2472,2506    out  the NOR's output onto tl1's poly (2448-2463,2500)
+vss         M  2596,2347-2404    -    the arm into the VSS plane
+vcc         M  2250-2580,1900    -    the supply plane over the strap's head, on north (padring)

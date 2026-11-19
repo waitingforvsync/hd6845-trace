@@ -309,3 +309,65 @@ N P 5237,6500 lpstb_b
 P 5063,6345 y6880 w=18              # tl5_w5936's line, on south (no pad; not followed below y 6880)
 N P 5063,6500 tl5_w5936
 # The joins, in the full extraction (each pair is one net; the first name is the one shown):
+
+# ============================================================================================
+# Piece r5nor (run 3, 2026-11-19): the gate at the north end of tl1's four polys, in the band
+# north of the top-left strips (x 2260-2600, y 1900-2500). A three-input NOR:
+#   tl1_w2637 = NOR(tl1_w5936, rcs_c1, sl_eq_r5_n)
+# The first load of NOT R5's match. tl1 draws the four polys to y 2500 (its row y 2498-2515 for
+# tl1_w5936); here each goes on north.
+#  - Pull-downs: a diffusion band y 2428-2465 (textmap 2326 2340 2554 2476 3: top edge rows
+#    2427-2430, bottom 2463-2466) crossed by three polys; between them the band reaches up in
+#    fingers: x 2331-2351 (the output, by a strip round the west side), x 2389-2402 (to the
+#    west VSS pad), x 2450-2476 (the output strip), x 2518-2537 (to the east VSS pad). Around
+#    the poly tops (y 2400-2428) the pockets are field (greenish in both chip-2 shots).
+#  - Output: the strip x 2450-2478 from the band north under the VSS arm to the load; a
+#    branch y 2309-2328 west and down the west side (x 2331-2351) to the band's west end (the
+#    drain of the first pull-down: px col 2390 2288 2350 2, row 2335, row 2385, col 2344); the
+#    fourth poly (tl1_w2637) ends in a heavy-outlined box on the band (x 2444-2475,
+#    y 2438-2465): a buried contact.
+#  - Load: poly block x 2436-2526, y 2238-2292 over the strip (px row 2265 2420 2535 3: poly
+#    colour throughout, the strip's edges dark lines at x 2449 and 2478): W/L 28/54. Its tie:
+#    a foot from the block's south-east corner into a heavy-outlined box (x 2497-2530,
+#    y 2303-2330) on a spur of the output strip (textmap 2470 2284 2546 2344 3 --acid).
+#  - VCC: the strip widens above the load (x 2447-2497) into a diffusion strap x 2288-2549 that
+#    runs north (open, bright green in the clean shot; px row 2020) under mal's two MA lines
+#    (no contact: textmap 2280 2080 2556 2160 6) to a head with seven contacts under the metal
+#    plane y < 1963. The plane is not drawn by anyone (padring); it is named vcc from the load
+#    hanging from it. A metal island (x 2272-2543, y 2184-2232) lies on the strap's south end
+#    with one contact (2467,2205) (textmap 2262 2174 2560 2240 4): a strap, nothing else on it.
+#  - VSS: an arm of tl1's plane, x 2270-2590, y 2347-2404 (joins the plane with no edge line
+#    between: textmap 2540 2326 2620 2416 4), with a contact on each pad.
+M 2250,1900:2580,1963                  # a piece of the supply plane over the head (the plane goes on north, east and west: padring)
+N M 2400,1915 vcc
+D 2262,1915:2562,1962                  # the head
+C 2275,1940 2318,1940 2362,1940 2405,1940 2450,1940 2493,1940 2535,1940
+D 2288,1955:2549,2208                  # the strap
+M 2272,2184:2543,2232                  # the island
+C 2467,2205
+D 2447,2200:2497,2236                  # the stem above the load
+D 2450,2228:2478,2440                  # under the load, then the output strip down to the band
+P 2436,2238:2526,2292                  # the load's gate
+P 2506,2285:2526,2322                  # its foot into the tie box
+D 2470,2309:2515,2328                  # the spur east into the box
+B 2499,2304:2529,2330                  # the tie
+D 2331,2309:2460,2328                  # the output's branch west
+D 2331,2309:2351,2440                  # and south, under the VSS arm, to the band's west end
+D 2331,2428:2540,2465                  # the band
+D 2391,2390:2401,2435                  # finger to the west VSS pad (bright x 2392-2398 between the two gates' edge lines)
+D 2383,2362:2416,2398                  # west VSS pad
+C 2397,2376
+D 2518,2405:2537,2435                  # finger to the east VSS pad
+D 2520,2364:2548,2412                  # east VSS pad
+C 2532,2384
+M 2270,2347:2596,2404                  # the VSS arm, into tl1's plane
+N M 2450,2392 vss
+P 2362,2402:2386,2506                  # pull-down 1: tl1_w5936, up from tl1's row y 2498-2515
+N P 2374,2480 tl1_w5936
+P 2405,2405:2427,2506                  # pull-down 2: rcs_c1
+N P 2416,2480 rcs_c1
+P 2493,2404:2515,2506                  # pull-down 3: sl_eq_r5_n
+N P 2504,2480 sl_eq_r5_n
+P 2452,2460:2472,2506                  # tl1_w2637's poly, ending in the box on the band
+B 2446,2440:2474,2466
+N P 2462,2485 tl1_w2637

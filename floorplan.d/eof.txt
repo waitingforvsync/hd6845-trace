@@ -8,3 +8,4 @@
 6412,7632:7530,7664      route  inh_ck tap row | poly from the pad (6427,7648) east across the crossing field to a gate group at x 7540 (not traced)
 6445,8165:6695,8374      route  inh_ck, staircase south part | from lc2's corner east and south to the west end of trunks' line S: inh_ck is inh_ck
 5053,6345:5253,6905      route  reset inputs and clears | five polys of tl5's south bus to pads: res_b and lpstb_b into lc1's NOR (the reset), the NOR's buffered copy back north as the clear rst_a, rcs_x1 from lc1's inverter
+2250,1900:2600,2506      logic  NOR on NOT R5 match | tl1_w2637 = NOR(tl1_w5936, rcs_c1, sl_eq_r5_n): R5's match gated into the data of the middle cluster's latch A; load fed by a diffusion strap from the VCC plane

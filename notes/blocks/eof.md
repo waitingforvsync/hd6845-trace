@@ -42,7 +42,18 @@ only, no uncertain items.
   of four latches of the top-left logic) is `rst_a`, one of the three buffered copies of
   that NOR.
 
-Full extraction with this file: 2,351 nets, 4,232 transistors, 0 errors, 0 warnings; the package
+Run 3 (richtw1's session, Claude Fable 5.2; 2026-11-19 11:50 +0100 on). One piece, 4 transistors,
+no uncertain items.
+
+- **Task 2, the loads of `sl_eq_r5_n`: its first load found and traced** (piece `r5nor`). The four
+  polys that leave `tl1`'s strip north at x 2362-2515 all end in one gate in the band north of the
+  strips, which nobody had drawn: a three-input NOR, **`tl1_w2637` = NOR(`tl1_w5936`, `rcs_c1`,
+  `sl_eq_r5_n`)** (firm). `tl1_w2637` is the data of `tl3`'s latch A, so **latch A takes "R5's
+  match AND NOT `rcs_c1` AND NOT `tl1_w5936`"**. The poly of `sl_eq_r5_n` ends on this gate.
+
+Full extraction with run 3: 2,379 nets, 4,286 transistors, 0 errors, 0 warnings.
+
+Full extraction after run 2: 2,351 nets, 4,232 transistors, 0 errors, 0 warnings; the package
 by itself (it loads `rdp3`): 0 errors, 0 warnings.
 
 ## Inventory
@@ -60,6 +71,8 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `tcwa`, the tap | x 6412-7530, y 7632-7664 | a pad with a contact (6427,7648) on that metal; its poly row y 7640-7656 east across the crossing field to the gate group at x 7540 (drawn to x 7530) |
 | `tcwa`, link F | x 6445-6695, y 8165-8374 | from `lc2`'s end (6450,8172): east to a corner (6559,8172), south (on the poly of another net's pad (6558,8127), no contact) to a corner (6559,8367), east to `trunks`' end (6690,8366) |
 | `x1` | x 5053-5253, y 6345-6905 | five vertical polys of `tl5`'s bus on south from y 6350 (x 5063, 5107, 5150, 5192, 5237), straight under nine horizontal metals; four end on pads with contacts (5105,6761), (5147,6803), (5190,6845), (5237,6803), each with a metal on south to one of `lc1`'s wires at y 6900 (M_a, M_b, V2, V3); the fifth (x 5063) has no pad and runs on south. **Below three of the pads the poly goes on** (x 5150 in the open; x 5192 under V2; x 5237 under V3) and bends south-east into `lc1`'s diagonal poly bundle: drawn to y 6900 (the last to y 6872) |
+
+| `r5nor` | x 2250-2600, y 1900-2506 | a three-input NOR in the band north of `tl1`'s strip: pull-down band y 2428-2465 under three polys (x 2362-2386, 2405-2427, 2493-2515), two VSS pads with contacts (2397,2376), (2532,2384) under an arm of the VSS plane (x 2270-2590, y 2347-2404), output strip x 2450-2478 north to a load (poly block x 2436-2526, y 2238-2292, tie box x 2499-2529, y 2304-2330), a branch of the output round the west side (y 2309-2328, x 2331-2351) to the first pull-down's drain, the output's buried contact to `tl1_w2637`'s poly (box x 2446-2474, y 2440-2466); VCC by a diffusion strap x 2288-2549 north to a head with seven contacts (y 1940) under the supply plane; a metal island (x 2272-2543, y 2184-2232) with one contact (2467,2205) on the strap |
 
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
 
@@ -136,6 +149,71 @@ sl_eq_r5_n  = NOT sl_eq_r5                      this piece (firm)
 
 The full extraction has one net with the three names and no gate on it but the inverter's own
 load: **where NOT `sl_eq_r5` is used is north of y 2500** (or at a tap nobody has drawn).
+
+### Piece `r5nor`: the first load of NOT R5's match (traced)
+
+```
+tl1_w2637 = NOR(tl1_w5936, rcs_c1, sl_eq_r5_n)     this piece (firm: tools/unsure.py --equations tl1_w2637)
+          = sl_eq_r5 AND NOT rcs_c1 AND NOT tl1_w5936
+```
+
+| Device | Where | W/L | Gate | Between |
+|---|---|---|---|---|
+| pull-down 1 | (2374,2446) | 37/24 | `tl1_w5936` | `vss` (the finger x 2391-2401 from the west pad) and the output (the band's west end, by the strip round the west side) |
+| pull-down 2 | (2416,2446) | 37/22 | `rcs_c1` | `vss` (the same finger) and the output |
+| pull-down 3 | (2504,2446) | 37/22 | `sl_eq_r5_n` | the output and `vss` (the east pad's finger) |
+| load | (2464,2265) | 28/54 | the output (tie box at the block's south-east foot) | the output and `vcc` (the strap) |
+
+Traced: every device above, and with them the equation. Believed, not traced here: what the
+inputs mean. `tl1_w2637` runs (by `tl1`, `tl2`, `tl3`) to the data input of `tl3`'s latch A
+(`tl3_w3419` = NOT((`tl1_w2637` AND `tl3_w3373`) OR `tl3_w3550`); enable `tl3_w3373` = NOT
+`tl4_w4590`, clear `rcs_x1`) and to `tl3_w3233` = NOT `tl1_w2637`. `tl1_w5936` is the buffered
+output of `tl1`'s third latch (open while `ck_out` is high, takes `tl1_w3333`); `rcs_c1` =
+NOT `rcs_a2` AND (`rcs_x1` OR `rcs_u3425`) is `tla`'s. So the end-of-frame path from R5 goes:
+`sl_eq_r5` -> inverter (`r5inv`) -> this NOR, gated by those two -> latch A of the middle cluster.
+
+- **The four polys.** `tl1` draws them to y 2500 (`tl1_w5936` as the row y 2498-2515). Each
+  goes on north as a column between two dark edge lines, orange in both chip-2 shots (`z1.png`,
+  `z2.png`, 5x, four shots; `textmap.py 2326 2340 2554 2476 3`: gate edges 2360/2388, 2403/2429,
+  2491/2516). Three cross the band and end 25 px beyond its top edge, under the edge of the VSS
+  arm (protected poly in the clean shot at y 2403-2420, pink field above: the clean map of
+  `textmap.py 2326 2340 2554 2432 3`); the fourth, `tl1_w2637`, ends in a box on the band.
+- **The band** y 2428-2465 (edge rows 2427-2430 and 2463-2466 dark from x 2331 to 2540). Above
+  it the diffusion goes on only in four fingers; the pockets round the poly tops (x 2353-2362,
+  2434-2443, 2476-2485, y 2412-2424) are field (greenish in both chip-2 shots).
+- **The output node** is the strip x 2450-2478 from the band to the load, continuous under the
+  VSS arm (`px.py col 2464 2226 2476 4`; tan between pink in the clean shot), with no ring and no
+  hole where the arm crosses it. A branch leaves it west at y 2309-2328 and runs down the west
+  side (x 2331-2351, under the arm) to the band's west end: a narrow diffusion wire (a strip
+  between two dark edges, 177/129/84 in the chip-2 metal shot against 163/139/93 for field and
+  blue 50-66 for the polys: `px.py col 2390 2288 2350 2`, `row 2335`, `row 2385`, `col 2344`,
+  `row 2319 2430 2545 3`). So pull-down 1's far side is the output, not a fourth node.
+- **`tl1_w2637`'s box** (x 2444-2475, y 2438-2465): a heavy-outlined inverted U on the band, at
+  the top end of the poly, wider than the poly: a buried contact (`z1.png`, `z2.png`).
+- **The load.** One poly block x 2436-2526, y 2238-2292: poly colour over its whole width
+  (`px.py row 2265 2420 2535 3`), with the strip's two edges as dark lines under it at x 2449 and
+  2478 and the part over the strip brighter in the clean shot. Its foot (x 2506-2526) runs from
+  the south-east corner into a heavy-outlined box (x 2497-2530, y 2303-2330, light centre) at
+  the end of a spur of the output strip (`textmap.py 2470 2284 2546 2344 3 --acid`; `z3.png`,
+  `z4.png`, 4x, four shots): the tie.
+- **VCC.** Above the load the strip widens (x 2447-2497) into a wide diffusion (x 2288-2549)
+  that runs north, in the open (bright green in the clean shot, y 1965-2075; `px.py row 2020`),
+  under two MA driver lines (`mal`'s, y 2092-2106 and 2136-2150; no ring, no hole:
+  `textmap.py 2280 2080 2556 2160 6`) to a head (x 2262-2562, y 1915-1962) with seven contacts
+  under the wide supply plane north of y 1963 (`s4.png`, `s5.png`, overlay `ov2.png`). **That the
+  plane is VCC is taken from the load hanging from it** (tracing guide, section 3); the plane is
+  not drawn by anyone (`padring`), only a piece over the head is in `trace/eof.txt`. The metal
+  island x 2272-2543, y 2184-2232 over the strap's south end has one contact, (2467,2205), onto
+  the strap, and reaches nothing else (`textmap.py 2262 2174 2560 2240 4`; `follow.py 2420 2219
+  W` ends at x 2278): a strap.
+- **VSS.** The arm x 2270-2590, y 2347-2404 is part of `tl1`'s VSS plane (no edge line between
+  them at x 2584-2588 from y 2350 to 2402, where there is one above and below: `textmap.py 2540
+  2326 2620 2416 4`), with a contact on each pad (ring with a centre in both metal shots, specks
+  or a hole in the clean shot: (2397,2376), (2532,2384)).
+- Overlays: `ov1.png` (2.6x, metal and clean, trace on both), `ov2.png`. `tools/opendiff.py 2240
+  1890 2600 2510`: no undrawn open diffusion (the groups it lists at y 1892-1955 are colour
+  fringes under the plane). West of the gate (x 2040-2330) there is nothing but the arm's end and
+  the two MA lines (`s6.png`).
 
 ### Piece `tcwa`: `inh_ck` is `inh_ck` (traced; wiring only)
 
@@ -275,6 +353,13 @@ driver lies; the other three lead to the loads.
 | `tl5_w5936` | poly | (5053-5073, 6345) | ? | from `tl5`'s bus line x 5063 |
 | `tl5_w5936` | poly | (5054-5072, 6880) | ? | on south beside M_a and under it (not followed) |
 
+| `tl1_w5936` | poly | (2362-2386, 2506) | in | piece `r5nor`: from `tl1`'s row y 2498-2515; a gate of the NOR |
+| `rcs_c1` | poly | (2405-2427, 2506) | in | from `tl1`'s poly (2405-2420,2500); a gate of the NOR |
+| `sl_eq_r5_n` | poly | (2493-2515, 2506) | in | from `tl1`'s poly (2493-2508,2500); a gate of the NOR (the net's first load) |
+| `tl1_w2637` | poly | (2452-2472, 2506) | out | the NOR's output, onto `tl1`'s poly (2448-2463,2500) |
+| `vss` | metal | (2596, 2347-2404) | - | the arm, into the VSS plane (`tl1`'s, not drawn north of y 2500) |
+| `vcc` | metal | (2250-2580, 1900) | - | the supply plane over the strap's head, on north, east and west (`padring`) |
+
 ## Ambiguities
 
 1. **`rdp3`'s contact (13736,12826)**, the top of L9 on the east pad of its poly link (not this
@@ -329,6 +414,24 @@ driver lies; the other three lead to the loads.
    the head. Read as joined: there is no room for a gap between two metals in 9 px, each head
    starts at its pad's height with nothing above it, and a metal that ends does so on a contact
    (traps 12, 14). What would refute it: a second pad at either head.
+
+8. **Which supply the plane north of y 1963 is** (piece `r5nor`). It is named `vcc` because the
+   NOR's load hangs from it (the load's gate is tied to the output side, the other end goes to
+   the strap) and the pull-downs go to an arm of the plane that `tl1` follows to its rail R1
+   (`vss`). The plane itself is not followed to a pad. What would settle it: `padring`.
+9. **The two buried contacts of `r5nor`** (the tie box x 2497-2530, y 2303-2330, and the box on
+   the band x 2444-2475, y 2438-2465) are read from heavy-outlined boxes with a light centre, in
+   both metal shots and both stripped shots; inside a box the poly's and the diffusion's edges
+   cannot be seen, so the rectangles are placed to overlap within it. Drawn without `?`: each
+   box is at the end of a poly, the first on a spur of the output strip that goes nowhere else,
+   the second where the net `tl1_w2637` would otherwise have no driver and the NOR no exit.
+10. **The load's gate as one block.** Three poly-coloured stripes (x 2436-2446, 2453-2475,
+   2481-2526) with dark lines between them at x 2449 and 2478 are read as one poly over a strip
+   whose edges are those lines (the strip comes out below the block at exactly x 2450-2478).
+   The other reading, three polys side by side, has no poly leaving the west one or the middle
+   one. Sizes only: the load is on the output strip either way.
+11. **A pale half-dome** at (2250-2300, 2455-2495) in the clean shot only (`s6.png`): nothing in
+   either chip-2 shot. Not drawn.
 
 ## Review
 
@@ -470,10 +573,13 @@ Round 3: no findings that change a connection.
 
 ## Not done
 
-- **Task 2, the loads of `sl_eq_r5_n` (= NOT `sl_eq_r5`)**: the net's only undrawn end is the poly
-  that leaves `tl1`'s strip north at (2493-2508,2500) into the band y 2180-2500 (package `tlb`).
-  Not checked here: taps along `r9m`'s, `tc2`'s, `tl4`'s, `tl2`'s and `tl1`'s stretches of it
-  (each was read by its own package).
+- **Task 2, the loads of `sl_eq_r5_n` (= NOT `sl_eq_r5`)**: one load is drawn (piece `r5nor`,
+  the NOR that makes `tl1_w2637`), and the net's poly ends there. Not checked: taps along
+  `r9m`'s, `tc2`'s, `tl4`'s, `tl2`'s and `tl1`'s stretches of it (each was read by its own
+  package). Next on this path: what `tl3`'s latch A does with it (`tl4_w4590`, its enable's
+  source, is reached only by the row (4250,2810): queue row `tl3` (continue)).
+- The supply plane north of y 1963 (only a piece over the strap's head is drawn; `padring`), and
+  the VSS plane between the arm and `tl1`'s rail R1 (`tlb`).
 - **The gate group at the end of `inh_ck`'s tap row**: x 7540-7780, y 7600-7820 (Logic, piece
   `tcwa`): three poly rows over a diffusion column under the wide metal x 7550-7600, a contact
   (7575,7680), a load-like block with a contact (7745,7780); rows 2 and 3 arrive from the west
