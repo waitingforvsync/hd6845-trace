@@ -251,7 +251,7 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `rl`, `res_b` | x 5190-6612, y 6890-8700 | poly diagonal (centre x = y - 1698) from piece `x1`'s end (5203,6900) to (5516,7214); row y 7205-7223 east to a pad with a contact (6146,7214); metal y 7216 east to a corner (6602,7216), south on x 6596-6608 to a corner (6602,8065), west to (6558,8065), south to a pad with a contact (6558,8125); poly column x 6549-6567 south (under `inh_ck`'s link F lengthwise, y 8166-8367, and two more metals) to a pad with a contact (6556,8493); metal south to (6557,8585) and at 45 degrees south-west onto `lc2`'s metal end (6450,8692) |
 | `rl`, `lpstb_b` | x 5230-6655, y 6866-8765 | poly diagonal (centre x = y - 1632) from piece `x1`'s end (5240,6872) to (5538,7170); row y 7161-7179 east to a pad with a contact (6188,7170); metal y 7173 east to a corner (6645,7173), south on x 6639-6651 to a corner (6645,8108), west to (6601,8108), south to a pad with a contact (6602,8320); poly column x 6593-6611 south under three horizontal metals to a pad with a contact (6602,8536); metal south to (6601,8605) and at 45 degrees south-west onto `lc2`'s metal end (6450,8756) |
 | `w5936`, to latch C | x 5054-6540, y 6876-8072 | poly from piece `x1`'s end (5063,6880): the bend at y 6892, a diagonal (centre x = y - 1829) to (5471,7300), row y 7291-7309 east to a pad with a contact (6146,7301); metal y 7303 east to a corner (6514,7303), south on x 6508-6520 **through** a pad with a contact (6513,7889) to a corner (6514,7978), west to (6471,7978), south onto `lc2`'s metal x 6471 at y 8067 (its pad (6470,8127): latch C's data) |
-| `w5936`, to the box | x 6494-7522, y 7868-8444 | the pad's poly row y 7878-7898 east under sixteen tracks to a pad with a contact (7401,7888); metal south on x 7396-7408 to a pad with a contact (7401,8425); poly y 8417-8439 east to the west edge of a heavy-outlined box (7490-7520, 8410-8442), not drawn |
+| `w5936`, to the box | x 6494-7522, y 7868-8444 | the pad's poly row y 7878-7898 east under seventeen tracks to a pad with a contact (7401,7888); metal south on x 7396-7408 to a pad with a contact (7401,8425); poly y 8417-8439 east to the west edge of a heavy-outlined box (7490-7520, 8410-8442), not drawn |
 
 | `g7700`, the gate | x 7541-7775, y 7585-7860 | VSS rail x 7552-7598 over a diffusion column x 7541-7611, y 7613-7820, with one contact (7572,7684); three poly rows across it: row 1 y 7638-7656 (`inh_ck`), row 2 y 7708-7728 (`eof_w7718`), row 3 y 7767-7787 (`eof_w7777`); a diffusion ring east of the rail (top strip y 7613-7628, strap x 7637-7654, bottom strip y 7745-7757) round a field island x 7612-7636 on which rows 1 and 2 end; the output node south of row 3: east by a T-shaped diffusion wire (arm y 7803-7817, vertical x 7643-7658, y 7783-7854) to the load's strip (y 7783-7809) and the tie box (7664-7690, 7832-7854); load plate x 7666-7721, y 7761-7827; VCC box x 7726-7773, y 7759-7808 with contact (7748,7779) under the wide metal x 7725-7775 |
 | `g7700`, the output | x 7254-7545, y 6875-7839 | diffusion wire west from the column (y 7803-7822) to a buried contact (7490-7518, 7805-7832); poly row y 7812-7831 west to a pad with contact (7402,7822); thin metal x 7401 north to a pad with contact (7401,7606); poly west along y 7604 under two metals to a pad with contact (7273,7606); thin metal x 7272 north to a pad with contact (7272,6912); the pad's poly on north (drawn to y 6875) |
@@ -550,7 +550,7 @@ The two paths, each from piece `x1`'s poly end to `lc2`'s metal end (`res_b` / `
 | Stretch | What | Evidence |
 |---|---|---|
 | the diagonal | from the bend below the pad ((5203,6900) / (5240,6872)) at 45 degrees south-east under V2, V3 (`lpstb_b`'s own metal), V4 (`rst_b`), V5 and in the open from x 5380, to the turn ((5516,7214) / (5538,7170)). Each stays in its lane: a run within 8 px of the line at every cut, the neighbours 43-51 px either side | `tools/eof_rows.py diag 5196 6894 5518 7216 --step 14 --reach 56`, `diag 5238 6870 5540 7172 --step 14 --reach 30`; col cuts `eof_rows.py col X 7140 7330` for x 5450-5600 (the diagonals at x - y = -1698 and -1632 in the chip-2 stripped shot); row cuts at the bends; overlay `k_o1.png` (2.4x, clean shot: five bands between `lc1_w7040`'s line and `lpstb_b`'s at x 5300, each under its outline) |
-| the row | y 7205-7223 / y 7161-7179, from the turn east through the crossing field (x 5640-6130, eight metals) to its pad. No pad or ring on either row in the field | `eof_rows.py diag 5522 7215 6140 7213 --step 20 --reach 30`, `diag 5545 7171 6180 7169 --step 20 --reach 30` (the cuts without a run are poly in the open: `px.py row 7213 5853 5869 4 metal,acid1b` and five more: 141-170/96-126/39-60 in the chip-2 metal shot); `tl5_tracks.py h 7214 5525 6128`, `h 7170 5545 6170` (clean-shot dips of 6-10 px, minimum 9-17: the gaps between the metals; `lpstb_b`'s 6127(15,14) is the gap beside the pad (6148,7213)); overlay `k_o2.png` (1.8x, metal and clean) |
+| the row | y 7205-7223 / y 7161-7179, from the turn east through the crossing field (x 5640-6130, eight metals) to its pad. No pad on either row in the field, and no ring but one in chip 2 alone at (5665,7212) on `res_b`'s row (Ambiguity 40: a blemish) | `eof_rows.py diag 5522 7215 6140 7213 --step 20 --reach 30`, `diag 5545 7171 6180 7169 --step 20 --reach 30` (the cuts without a run are poly in the open: `px.py row 7213 5853 5869 4 metal,acid1b` and five more: 141-170/96-126/39-60 in the chip-2 metal shot); `tl5_tracks.py h 7214 5525 6128`, `h 7170 5545 6170` (clean-shot dips of 6-10 px, minimum 9-17: the gaps between the metals; `lpstb_b`'s 6127(15,14) is the gap beside the pad (6148,7213)); overlay `k_o2.png` (1.8x, metal and clean) |
 | the first pad | (6146,7214) / (6188,7170): a poly pad about 38 px square, ring and bright centre in both metal shots, a green hole in the clean shot; the row arrives from the west, the metal leaves east, nothing else on it | `eof_cchk.py 6148,7213 6190,7169` (hole -36 / -22; centre 192 / 193 in chip 2, 208 / 221 in chip 1); `k_pads3.png` (3.4x, both metal shots and the clean shot) |
 | the metal east and the track | y 7216 to the corner (6602,7216), south on x 6602 for 850 px / y 7173 to the corner (6645,7173), south on x 6645 for 935 px. Bars of 8-17 px where the tracks cross the rows of the field (the same heights on both, and on `rst_a`'s track x 6558); no break; no hole but one dull spot (Ambiguity 37) | `tl5_tracks.py h 7215 6170 6595`, `v 6600 7228 8056`, `h 7174 6212 6636`, `v 6645 7186 8098`; `follow.py 6230 7216 E --gap 16`, `6644 7300 S --gap 16`, `6644 7300 N --gap 16`; `eof_mrun.py col 6250 7150 7320 6400 6480`, `row 7350 6490 6670 7600 7950`; `textmap.py 6536 7626 6668 7670 3 --acid` (the three tracks over `inh_ck`'s tap row: alike), `6578 7806 6668 7842 3 --acid`; `k_s1.png` (1.3x, the nest) |
 | the L and the second pad | each track ends in an L one track west: (6602,8065) to (6558,8065) and south to the pad (6558,8125) / (6645,8108) to (6601,8108) and south 210 px to the pad (6602,8320). 34 px of bare ground between `rst_a`'s corner (6558,8018) and `res_b`'s arm, 30 px between `res_b`'s corner and `lpstb_b`'s arm. Pads: ring and bright centre in both chips, pitted box in the chip-2 stripped shot | `eof_mrun.py row 8040 6490 6670 8090 8140 8200 8260`, `col 6535 7990 8130 6580 6620`; `tl5_tracks.py h 8068 6566 6594`, `v 6558 8076 8112`, `h 8110 6608 6634`, `v 6601 8124 8300`; `eof_cchk.py 6558,8127 6602,8320` (centre 222 / 209 in chip 2, 174 / 186 in chip 1; clean 12 / 4); `k_s2.png` (2.05x), `k_cols.png` (2.9x, four shots), overlay `k_o3.png` (2.2x, both metal shots) |
@@ -580,7 +580,7 @@ lc2_w8906` (with `tl3`'s own `@alias tl3_w3982 tl5_w5936` repeated so that the f
 | the metal and the track | y 7303 east to a corner (6514,7303), south on x 6508-6520 | `follow.py 6230 7303 E --gap 16` (corner (6516,7303), end (6513,7865): the pad's ring); `tl5_tracks.py v 6514 7310 7990` (bars of 7-15 px, the ring 7867-7883 / 7895-7909); `eof_mrun.py` as above |
 | **the pad (6513,7889), in the run of the metal** | ring y 7867-7906 with a bright centre (y 7885-7894) in both metal shots; the metal is whole north of y 7864 and **again south of y 7909**, in line, in both chips; a pitted box in the chip-2 stripped shot; in chip 1's clean shot the pad is vivid red-orange with no green hole (Ambiguity 38). The pad's poly leaves east; field west | `k_L6513.png` (2.75x, four shots), `j_c7886.png` (4.8x, four shots, run 10); `textmap.py 6484 7858 6546 7926 3 --acid`; `eof_cchk.py 6513,7888` |
 | the L onto `lc2`'s metal | south of the pad to a corner (6514,7978), west along y 7972-7984 to (6471,7978), south on x 6465-6477 to `lc2`'s `M 6471,8067 y8142` (its pad (6470,8127), `lc2_w8906`). **`lc1_w7040`'s pad (6471,7930) stands 25 px north of the arm on the same x**: no metal at x 6471 from y 7938 to 7970 in either chip, and the pad's poly row (west along y 7944-7962) lies between. Two bars of 8 and 12 px at y 8024-8056 are the edges of the poly row that `rst_a`'s metal crosses beside it | `eof_mrun.py row 7920 6440 6540 7940 ... 8060`, `col 6471 7880 8140 6490 6514`; `k_L6513.png`; overlay `k_o3.png` |
-| the row y 7878-7898 | from the pad east, 890 px, under sixteen tracks (x 6558 `rst_a`, 6601 `res_b`, 6644 `lpstb_b`, 6685, 6731, 6776 `rcs_e4`, 6817, 6861, 6947, 6991, 7078, 7121, 7165, 7208, 7272, 7360) to a pad with a contact (7401,7888). No pad or ring on any of them; one place where the clean shot has a hole-like patch (Ambiguity 33, under `rst_a`'s track) | `eof_rows.py diag 6540 7888 7560 7888 --step 30 --reach 30`, `diag 7380 7888 7450 7888 --step 6` (the row ends at x 7416); `tl5_tracks.py h 7888 6535 7380` (clean: 6558(32,-3), and seven dips of 6-8 px); `eof_mrun.py row 7888 6530 7390`; overlays `k_o5a.png`, `k_o5b.png` (2.7x, metal and clean) |
+| the row y 7878-7898 | from the pad east, 890 px, under seventeen tracks (x 6558 `rst_a`, 6601 `res_b`, 6644 `lpstb_b`, 6688, 6731, 6776 `rcs_e4`, 6818, 6861, 6905, 6948, 6991, 7078, 7121, 7165, 7208, 7273, 7360; the cut along y 7888 misses x 6905, where the metal is dim over the row in both chips: found by review round 13, `eof_mrun.py row 7860 6530 7440 7915`) to a pad with a contact (7401,7888). No pad or ring on any of them (x 6905: `textmap.py 6884 7866 6926 7910 3 --acid`, no ring, the clean shot salmon with no hole); one place where the clean shot has a hole-like patch (Ambiguity 33, under `rst_a`'s track) | `eof_rows.py diag 6540 7888 7560 7888 --step 30 --reach 30`, `diag 7380 7888 7450 7888 --step 6` (the row ends at x 7416); `tl5_tracks.py h 7888 6535 7380` (clean: 6558(32,-3), and seven dips of 6-8 px); `eof_mrun.py row 7888 6530 7390`; overlays `k_o5a.png`, `k_o5b.png` (2.7x, metal and clean) |
 | the pad (7401,7888) and the metal south | ring, bright centre, green hole; the row arrives from the west, field east; the metal leaves south (66 px of bare ground between this pad and `g7700`'s output pad (7402,7822) north of it) and runs 535 px on x 7396-7408 to a pad with a contact (7401,8425) | `k_t4end.png` (2.1x), `k_p7400a.png` (3.5x, four shots); `eof_cchk.py 7400,7888 7400,8425` (hole -8 / -25); `follow.py 7403 7940 S --gap 16` and `N`; `tl5_tracks.py v 7402 7905 8405` (four bars of 8-10 px); `textmap.py 7380 7990 7425 8140 3` (the follower's candidate (7403,8066): field under whole metal) |
 | the poly to the box | from the pad (7401,8425) east along y 8417-8439, in the open, 70 px, to a heavy-outlined box (7490-7520, 8410-8442), cream inside in the clean shot: a buried contact. A strip leaves the box's north-east corner east (y 8405-8425 at x 7520-7545) towards the VSS rail x 7552-7598. The poly is drawn to the box's west edge; the box and the strip are not drawn | `k_t5end.png` (2.1x, metal and chip-2 stripped), `k_p7400b.png` (3.6x, four shots) |
 
@@ -1231,6 +1231,22 @@ driver lies; the other three lead to the loads.
     the row's colours in the clean shot are abnormal as far as x 6840: Ambiguity 33). If there were none,
     the track x 6514 would pass over the row's end without touching it: the row and its two pads east
     would be a wire with no source, and latch C's data would have no driver either.
+39. **Each of the three east-going metals lies on another net's poly** (pieces `rl`, `w5936`; found by
+    review round 13; the same as Ambiguity 34 for `rst_a`'s metal y 7257). Four undrawn vertical polys come
+    from the north at x 6270-6290, 6313-6333, 6360-6375 and about 6402, and each turns east under one metal
+    and runs on east under the tracks: under `tl3_w3982`'s metal y 7303 from x about 6270, under `rst_a`'s
+    y 7257 from x 6313, under `res_b`'s y 7216 from x about 6360, under `lpstb_b`'s y 7173 from x about 6402
+    (`review-13/f3_under.png`, 3.9x, metal and clean, looked at by the tracer). No pad, ring or hole on any:
+    `tl5_tracks.py h 7215 6170 6595`, `h 7174 6212 6636`, `h 7303 6170 6508` give no clean-shot stretch under
+    24 and only bars of 8-10 px in both chips (chip 1 alone is dim for 20 px at x 6283-6303 on the metal
+    y 7303, over the corner of the L beneath; chip 2 is whole there). **Assumed: no contact at any** (trap
+    13). A contact would join the wire to an undrawn net of the crossing field.
+40. **A ring-like dark circle in chip 2's metal shot at (5665,7212)**, on the vertical metal x 5660-5675
+    where it crosses `res_b`'s row (piece `rl`; found by review round 13). Chip 1's metal shot is bright
+    there, the row is unwidened and salmon with no hole in the clean shot (`review-13/b3_5665.png`, 5.8x,
+    three shots, looked at by the tracer; `eof_cchk.py 5667,7212`: clean 30, chip 1 centre 207 with dark
+    only north and south, the row's two edge bars). **Assumed: a blemish of chip 2's photo, no contact**
+    (one chip only, no pad). A contact would tap `res_b` onto that metal (undrawn, `lc1`'s crossing field).
 
 ## Review
 
@@ -1818,6 +1834,65 @@ tools/t.sh eof sameconn.py 32744d6               connections identical
 ```
 
 Round 12: no findings that change a connection.
+
+### Round 13 (full review of pieces `rl` and `w5936`; 2026-11-19 18:15 to 18:36 +0000)
+
+Commit before the round: ba2a174. One fresh reviewer (Claude Fable 5.2), briefed with the two pieces'
+eighteen claims (per wire: the diagonal, the row, each pad, each metal with its corners, each poly column,
+the diagonal metal and the join; for `w5936` also the pad in the track's run, the L onto `lc2`'s metal, the
+row y 7888, the metal x 7402 and the poly's end on the box) and told to suspect: a lane slip of the three
+diagonals under the metals at x 5080-5350 and the three bends; the pad (6513,7889) (no green hole in
+chip 1's clean shot) and whether the metal runs on through it; the L at (6514,7978)-(6471,7978) beside
+`lc1_w7040`'s pad (6471,7930); the hole-like patch at (6558,7886); (6645,7822); the nested Ls and the bare
+ground between them; taps on the four long rows; the poly columns and `inh_ck`'s metal on `res_b`'s; the
+two diagonal metals and the gap north of the pad (6556,8493); the east end. Images in
+`cache/scratch/eof/review-13/` (24).
+
+What it checked and found as claimed: the lanes (the bends at 5x in both stripped shots with field beyond
+each, `a2_bends.png`, `px.py col 5190 / 5240 / 5063`; clean-shot cuts at each metal: one band per lane,
+counted from `lc1_w7040`'s line to each source, no salmon between lanes, `j1_lanes4x.png` 4.2x; the rows
+keep their order, cuts x 5560-6120); the first pads (rings in both chips, pitted boxes in chip 2, field
+east: `k1_pads1.png` 4.5x); the nest at 4.4x in three shots (`c_nest_*.png`: each L on its own track, bare
+ground between each corner and the next arm in chip 1 and the clean shot, the pad (6471,7930) apart from
+the arm, x 6471 whole to (6470,8127)); the pad (6513,7889) (ring and centre in both chips, a pitted box in
+the chip-2 stripped shot, the metal on south in line: a contact; `g1_rows_acid.png` 5x); (6558,7886) and
+(6645,7822) (both metal shots as the neighbouring crossings, no pad, no pitted box: no contact); the
+columns (one poly from pad to pad, no ring or hole under `inh_ck`'s metal or its corner, open poly between
+(6556,8493) and the metal north of it in both chips); the diagonals (x + y = 15142 and 15206 onto `lc2`'s
+ends, `rst_a`'s at 15080: `e_diag_*.png` 3.6x); the east end (the row ends on (7401,7888), bare ground to
+(7402,7822), the poly ends on the box, the band above the box apart from it: `i1`-`i4`); the extraction
+(2,386 nets, 4,345 transistors, 0 errors, 0 warnings; `sameconn.py 4b7f4be`: only the three joins). Not
+checkable, it said: the diagonals under the metals at x 5080-5350 in chip 2 (fringes: only the clean shot
+shows them); the box's strip east (not followed); the pad (6602,8320) was read at 2.75x and by text map
+only.
+
+Findings, each checked by the tracer:
+
+1. **Not a connection change (comments only)**: seventeen tracks cross the row y 7878-7898, not sixteen:
+   the notes' list left out x 6905, where there is no contact. **Confirmed** (`eof_mrun.py row 7860 6530
+   7440 7915`: seventeen runs at both heights; the tracer's cut along y 7888 itself misses that track,
+   whose metal is dim over the row in both chips: `textmap.py 6884 7866 6926 7910 3 --acid`, 7-B between
+   the two bars, no ring, the clean shot salmon, `eof_cchk.py 6905,7888`: clean 53). The Logic table, the
+   inventory, the trace's comment and the floor-plan line corrected.
+2. **Not a connection change (comments only)**: undrawn poly Ls lie lengthwise under three of the
+   east-going metals (`res_b`'s y 7216 from x about 6360, `lpstb_b`'s y 7173 from about 6402, `tl3_w3982`'s
+   y 7303 from about 6270), as Ambiguity 34 records for `rst_a`'s; no pad, ring or hole on any.
+   **Confirmed** (`review-13/f3_under.png`; `tl5_tracks.py h 7303 6170 6508`: no hole, chip 1 dim for
+   20 px over the L's corner, chip 2 whole). Recorded as Ambiguity 39 and in the trace's comments.
+3. **Not a connection change (comments only)**: chip 2's metal shot has a ring-like dark circle at
+   (5665,7212) on the vertical metal over `res_b`'s row; chip 1 is bright and the row has no pad and no
+   hole: a blemish. **Confirmed** (`review-13/b3_5665.png`; `eof_cchk.py 5667,7212`). Recorded as
+   Ambiguity 40; the Logic table's "no ring in the field" now names the exception.
+
+All three fixes are comments (`trace/eof.txt`'s comment lines, the notes, one word of the floor-plan
+fragment); no geometry changed. The proof that no connection changed:
+
+```
+tools/t.sh eof sameconn.py ba2a174               connections identical
+.venv/bin/python tools/sameconn.py ba2a174       connections identical
+```
+
+Round 13: no findings that change a connection.
 
 ## Not done
 

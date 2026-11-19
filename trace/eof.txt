@@ -834,6 +834,12 @@ N P 5800,7257 rst_a
 #    ring of the pad (6556,8493) in both chips (the follower jumps it in chip 2: trap 30).
 #  - (6645,7822), where lpstb_b's track crosses the poly row y 7812-7830 (eofw's lc1_w7170): the clean
 #    shot is dull under it (red minus green 0-30), no ring, no pad: no contact (notes, Ambiguity 37).
+#  - each east-going metal LIES ON another net's poly (review round 13; notes, Ambiguity 39): an undrawn
+#    poly comes from the north and turns east under res_b's metal y 7216 from x ~6360 and under lpstb_b's
+#    y 7173 from x ~6402 (as under rst_a's y 7257 from x 6313, Ambiguity 34): no pad, ring or hole.
+#  - (5665,7212): chip 2's metal shot has a ring-like dark circle on the vertical metal x 5660-5675 over
+#    res_b's row; chip 1's metal is bright there and the row is unwidened with no hole: a blemish, no
+#    contact (review round 13; notes, Ambiguity 40).
 @alias res_b lc2_x6342
 @alias lpstb_b lc2_x6387
 # res_b: diagonal (centre x = y - 1698), row y 7214, pad, metal y 7216 / track x 6602 / L at y 8065 /
@@ -870,8 +876,9 @@ M 6601,8536 y8605 6444,8762 w=13
 #   contact (6146,7301) -> metal y 7303 east -> track x 6514 south -> a pad with a contact (6513,7889) IN
 #   THE RUN OF THE METAL (trap 32: the metal is bright again from y 7909 in both chips) -> on south to an
 #   L at y 7978, west to x 6471, south onto lc2's metal and its pad (6470,8127).
-#   From the pad (6513,7889) a poly row y 7878-7898 runs 890 px east under sixteen tracks (rst_a's x 6558,
-#   res_b's, lpstb_b's, rcs_e4's among them; no pad on any) to a pad with a contact (7401,7888); metal
+#   From the pad (6513,7889) a poly row y 7878-7898 runs 890 px east under seventeen tracks (rst_a's x 6558,
+#   res_b's, lpstb_b's, rcs_e4's among them; no pad on any; the one at x 6905 is dim over the row in both
+#   chips, with no ring and no hole: review round 13) to a pad with a contact (7401,7888); metal
 #   south on x 7402 to a pad with a contact (7401,8425); poly east y 8417-8439 to the box.
 # Evidence:
 #  - the lane: eof_rows.py diag 5063 6892 5471 7300 --step 14 (offset -1 / -5); row cuts y 6870-6950
@@ -886,6 +893,8 @@ M 6601,8536 y8605 6444,8762 w=13
 #  - the metals: tl5_tracks.py v 6514 7310 7990 (bars 7-19 px, the pad's ring 7867-7883 / 7895-7909),
 #    eof_mrun.py row cuts y 7920-8060 (the L: x 6514 to y 7966, the arm y 7972-7984 from x 6465 to 6521,
 #    x 6471 from y 7984) and col 6471 7880 8140 (no metal y 7938-7970: lc1_w7040's pad is apart);
+#    the metal y 7303 lies on another net's poly from x ~6270 east (an L from the north; chip 1 is dim
+#    for 20 px at x 6283-6303 over its corner, chip 2 whole, no hole: notes, Ambiguity 39);
 #    tl5_tracks.py v 7402 7905 8405 (four bars of 8-10 px, no break, no hole; the follower's candidate
 #    (7403,8066) is field under whole metal: textmap.py 7380 7990 7425 8140 3); overlay k_o3.png;
 #  - the row y 7888: eof_rows.py diag 6540 7888 7560 7888 --step 30 (a run to x 7410); tl5_tracks.py h
