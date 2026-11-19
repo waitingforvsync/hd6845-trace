@@ -440,7 +440,69 @@ P 8930,15248:8955,15266
 M 8967,17737 x8688 w=13              # the west branch
 P 8671,17720:8705,17754
 C 8688,17737
-P 8650,17722:8680,17742              # its poly on west (not followed)
+# (its poly on west: piece isrc4, below)
+
+# ============================================================================================
+# Piece isrc4 (run 9, 2026-11-19): inh_src on from its fourth open end, the poly west of the pad
+# (8688,17737). Wiring only, no uncertain item. It ends on busl's poly row of lc2_x6299:
+#     inh_src IS lc2_x6299, the first through line of the left-centre strips
+# (lc2's metal from its east edge (6450,8630); lc3 and busl bring it down the left bus field to the
+# row y 14914). On the way two more gate rows (the clear rows of two undrawn latch units under the
+# rail x 8336-8384: bc1 column A / bc3; copies of tl1's cells by findcell, not placed here).
+#
+# The path, from the pad (8688,17737) back to busl's row:
+#   A  poly row y 17728-17744 west under five vertical metals (x 8418-8646; no contact: text map
+#      8370 17716 8660 17758 4) and under ANOTHER NET's metal, which lies on the row from x 8096 to
+#      8388 (the bundle's track x 8098 comes down, turns east along the row and turns south at
+#      x 8380: trap 13; no ring, no hole anywhere along it: tl5_tracks.py h 17736 8062 8700,
+#      textmaps 8062 17690 8134 17758 3 and 8336 17713 8426 17758 3, j_w.png, j_e.png), to a pad
+#      with a contact (8053,17735), 36 px west of that metal's end;
+#   B  metal north on x 8057 to a Z step (y 17301) onto x 8103, north THROUGH a pad with a contact
+#      (8100,16910) (a tap: its poly row y 16900-16918 runs east under three tracks to a gate over
+#      the diffusion column under the thin metal x 8283-8307, ending at x ~8326 in the gap before
+#      the rail), on north to a step (y 16697) onto x 8185, north to a pad with a contact (8185,16303);
+#      the tracks step east together (i_c1.png, i_c2.png, 3.9x both metal shots); tl5_tracks.py
+#      v 8057 17314 17714, h 17301 8064 8094, v 8103 16712 17288, h 16697 8112 8180, v 8185 16320 16682:
+#      no break; dark only at the tap pad (16885-16931) and 8-10 px bars of edges underneath (the
+#      step at y 16697 lies over a large diffusion-coloured area, x 8000-8168, y 16600-16780, whose
+#      east edge is the bar at x 8164-8172: no contact onto it; i_L.png). Chip 1's metal is blemished
+#      on x 8057 at y 17400-17435 and 17508-17527 (chip 2 whole: textmap 8027 17388 8090 17448 3);
+#   C  the pad (8185,16303) is on a poly row y 16294-16312: east under the track x 8229 to a second
+#      gate of the same kind (x 8283-8311), ending at x ~8326; west under the tracks x 8143, 8098,
+#      8056, 8012 (no contact: textmap 7990 16285 8215 16321 3) to a pad with a contact (7968,16303).
+#      bc1's metal of bc1_g6_in jogs from x 8186 to x 8143 26 px above the pad and is NOT on it
+#      (bare ground y 16276-16283 and open field in the clean shot between them: textmap
+#      8155 16236 8215 16345 3; i_j4.png);
+#   D  metal north on x 7967 (bc1's untraced "track 7969"), 1,390 px straight (tl5_tracks.py
+#      v 7967 14925 16290: bars of 8-10 px only, no hole), an L corner (7967,14914), west to a pad
+#      with a contact (7880,14914);
+#   E  the pad's poly row y 14904-14924 west, under bc1's metal x 7752-7795 (it lies on the row for
+#      43 px; no pad, no hole), RL3 and two more metals, to busl's row end at x 7550.
+@alias inh_src lc2_x6299
+# A
+P 8053,17736 x8680 w=16
+P 8036,17718:8070,17752
+C 8053,17735
+# B
+M 8057,17735 y17301 x8103 y16697 x8185 y16303 w=13
+N M 8103,17100 inh_src
+P 8084,16892:8120,16926              # the tap pad on the track x 8103
+C 8100,16910
+P 8100,16909 x8326 w=18              # the tap's row: a gate at x 8283-8311 (the diffusion under it is not drawn)
+# C
+P 8167,16287:8203,16320
+C 8185,16303
+P 7968,16303 x8326 w=18              # east end: a gate at x 8283-8311 (the diffusion under it is not drawn)
+P 7950,16286:7986,16322
+C 7968,16303
+# D
+M 7967,16303 y14914 x7880 w=13
+N M 7967,15600 inh_src
+P 7862,14896:7897,14930
+C 7880,14914
+# E
+P 7540,14914 x7880 w=20
+N P 7700,14914 inh_src
 
 # ============================================================================================
 # Piece g7700 (run 5): the gate at the end of inh_ck's tap row (task (c) of the queue row).
