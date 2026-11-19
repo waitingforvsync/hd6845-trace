@@ -6,8 +6,8 @@ merged, or by `tools/claim.py release` if it is abandoned.
 | Field | Value |
 |---|---|
 | Who | mattgodbolt |
-| Claimed | 2026-11-19 06:58 -0600 |
+| Claimed | 2026-11-19 07:17 -0600 |
 | Region | 4750-6450 x 9233-10400 |
-| What | left-centre logic part 3, continued (Fable). FOUND, for eof (d): the counter goes on in lc3 as copies of lc2's cell lc2_ff: a west column '@inst lc2_ff 0,780' (x 4580-4990, y 9180-9930; findcell 0.91, overlay fits) and a turned east column about '@inst lc2_ff 260,716 rot=180 o=4826,8810'; lc2_w8475 (the L-metal south at x 4553-4575, y 9190) is the track C of the west copy, i.e. that copy's slave output (the stage in lc3 clocks the stage in lc2), and its own clock comes by its own L at about y 9892-9912 from the south. lc3 draws these copies (they reach west to x 4580, into eof's corner: please do not redraw them) and the units below them (y 9961-10341); the tracks west of x 4580 are left to eof. Then the gate pair's R31 review and the rest of the strip east of x 4750 |
+| What | left-centre logic part 3, continued (Fable). SPLIT WITH eof (run 6): the west flip-flop copy at y 9185-9990 is eof's piece ff3 (pushed to origin/eof first; lc3 drops its own drawing of it and will use eof's names eof_w9255, eof_w9332, eof_w9505, eof_w9472). lc3 has DRAWN the turned east copy, stage E4 (x 4990-5450, y 9150-9945, '@inst lc2_ff 260,716 rot=180 o=4826,8810', branch lc3 b7bcf40, in review: clock lc2_w9034, slave output = lc2_w9210, the last input of lc2_w9125) and IS DRAWING the unit below both columns (x 4440-5450, y 9960-10580: lc2_ff's latch K in the west column, its gates K3 and K4 turned in the east one, joined by five poly rows under the rails at y 10380-10555: believed stage 0, whose slave output is eof_w9255), from eof's ports at y 9990 on. Please leave E4 and that unit to lc3. Then the gate pair's R31 review and the rest of the strip east of x 5460 |
 | Branch | lc3 |
 | Status | tracing |
