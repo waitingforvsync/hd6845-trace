@@ -464,3 +464,24 @@ x 13806), which means a gap of field or a diffusion edge is being misread there.
   between it and the land): corrected, `tools/sameconn.py`: connections identical. Its `?P
   13896,15618:13908,15642` and `?D 13870,15705:13936,15728` are left marked: `trace/eof.txt` draws firm
   items over both, so the extraction does not depend on them.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, third batch)
+
+- Logic ("`bd1_k` : pull-down `inh_src` to vss (source connection uncertain; its load is not in view)";
+  "`inh_src`'s transistor ... `bd1_k`, a metal line on x 13674"), Inventory ("Pull-down of `bd1_k`") and
+  Ambiguities ("Source of `bd1_k`'s pull-down ... If it is not, the device is only a capacitor"): the
+  strip is **N2's third pull-down, and `bd1_k` is `bd1_n2`, the latch's output** (`eof` run 8, piece
+  `n2out`). The strip's lower segment (with the buried contact) is one diffusion with N2 through the gap
+  at y 15712-15736, and its top segment reaches the ground diffusion through the gap at y 15638-15652.
+  `bd1_n2` = NOT((`bd1_an` AND `inh_lat`) OR `bd1_n1` OR `inh_src`).
+- "Where `bd1_k` goes: ... metal south on x 13521 to about y 16273" and Not done ("`bd1_k` on x 13521 (to
+  y 16273)", "Lines on ... x 13565 at y 16251-16572 (scan only)"): the metal turns east at y 16264 and
+  runs south on x 13564 to a pad (13562,16604); the line on x 13565 is this net (`eof`, piece `n2w`, which
+  follows it 11,900 px to (6711,15000)).
+- "`inh_src` is on a metal line at x 13630 ... a metal runs south on x 13630 to a contact at
+  (13631,16758)": on the way it has a contact at (13627,16626) (ring and bright centre in both metal
+  shots; `tools/textmap.py 13600 16598 13660 16652 3`), whose pad's poly runs east along y 16622 into the
+  gate column (not drawn by anyone): one more load of `inh_src`.
+- `trace/bd1.txt`: the gate poly of `inh_src`, `P 13640,15671 x13805 w=20`, lengthened to x 13812 (poly
+  orange at x 13806-13809 in the chip-2 metal shot; `eof`'s review round 10; geometry only,
+  `tools/sameconn.py HEAD`: connections identical).

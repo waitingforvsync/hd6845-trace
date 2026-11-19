@@ -713,7 +713,7 @@ N D 5130,9171 lc2_w9171
 # without a contact (textmap.py at the three crossings: no hole). Named by x at the south edge.
 # tl5_tracks.py h at 14 heights (survey.md); follow.py from the south edge; view r2.png.
 M 6450,8630 6342,8738 y9034 x6299 y9233 w=14
-N M 6342,8900 lc2_x6299
+N M 6342,8900 inh_src
 M 6450,8692 6385,8757 y9076 x6342 y9233 w=14
 N M 6385,8900 lc2_x6342
 M 6450,8756 6428,8778 y9121 x6387 y9233 w=14

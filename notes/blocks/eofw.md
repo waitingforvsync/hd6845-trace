@@ -208,3 +208,10 @@ Round 1: no findings that change a connection.
   the rails.
 - `tc2_r5589`'s loads: `tc2` draws the line to the pad (8248,5262), whose poly goes on east.
 - The driver of `tc2_sr_g` / `lc1_w7908`: not found on any stretch drawn here.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, third batch)
+
+- Not done ("the metal on south (seen to y 8850). `cdp3` (continue)") and `ports.d/eofw.txt`
+  (`lc1_w7908 M 7466,8800`, open end): drawn on by `busl` (piece `sr`): south to y 8910, a diagonal to
+  (7209,9168), down the left bus field at x 7209 and out at (7187,15000) into `bc1`'s ground, no tap. It
+  is not `cdp3`'s ground. The poly east of the corner pad is still open.

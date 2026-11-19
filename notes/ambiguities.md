@@ -730,3 +730,30 @@ nets' poly at four places, and `lc2`'s metal x 6422-6440 lies 64 px along latch 
 (6431, 8117-8181); none is drawn as a contact (trap 13; read from text maps by two packages). A contact
 at the first would join `inh_ck` to latch D's output `lc1_w7040`; the one in `lc2` would join it to
 latch C's data `lc2_w8906`. The join to line S also rests on `trunks`' reading of that line (R4).
+
+## AMB-038: the box at (7535-7580, 13903-13940) under `cdp4_ld`'s metal (2026-11-19)
+
+Proposed by `busl` (richtw1, run 4; its Ambiguities 9 and 10). At the west edge of `cdp4`'s bottom-left
+gate group. `cdp4_rst`'s poly ends on its west outline; the metal of `cdp4_ld` / `bc1_ld_a` (x 7556)
+passes over its middle and is not seen in either metal shot for 51 px (y 13898-13949; drawn `?M`).
+Readings: (a) a buried contact from `cdp4_rst`'s poly onto the group's node diffusion, the metal passing
+over without contact; (b) a poly pad with a metal contact, making `cdp4_rst` and `cdp4_ld` one net;
+(c) a metal contact onto the diffusion. **Assumed (a)**: heavy outline and plain inside, unlike the
+contact pad at the other end of the same poly; no bright centre in chip 2 and no green hole in the
+clean shot. Against: a 9 x 10 px spot at (7557,13929), at ground brightness in chip 1's metal shot and
+greenish in the chip-2 stripped shot, without a ring. `cdp4_ld` = `bc1_ld_a` holds under every reading
+(a metal does not end without a contact). Settled by tracing the gate group (`cdp4` (continue)): if the
+node the box sits on is a gate output with the selects as inputs, (a) is right.
+
+## AMB-039: `tc2_sr_g`'s track over the poly row y 13744, at (7145,13728-13749) (2026-11-19)
+
+Proposed by `busl` (richtw1, run 6; its Ambiguity 13). Neither metal shot passes the metal test for
+22 px along the track where it crosses this undrawn row (the other rows it crosses give 8-13 px edge
+bars): chip 2 shows a dark patch with no bright centre, chip 1 a dim reddish stretch. Readings: (a) a
+plain crossing with marks on the metal; (b) a contact, which would put `tc2_sr_g` (the enable of latch
+D) on the row y 13744, which runs from west of x 6500 to a gate band of `cdp4`'s corner gate group.
+**Assumed (a), drawn as a plain metal**: neither the metal nor the row is widened (every contact in the
+field has a pad), the clean shot shows protected poly with no hole, the chip-2 stripped shot reads as at
+the plain crossing 60 px north; tracer and reviewer agree. Against: both chips are dim at the same spot,
+which dirt on one chip does not explain. Settled by the far ends of row y 13744 (`busl`) and the corner
+gate group (`cdp4` (continue)).

@@ -249,3 +249,272 @@ M 5582,13329 y13916 5539,13959 y14398 x5451 y15000 w=16
 N P 7590,12182 cdp4_bus_s0
 N P 7000,13332 cdp4_bus_s0
 N M 5451,14990 cdp4_bus_s0
+
+# ---- piece lc9: the nine metal lines that leave lc3 south at y 10400 (x 6082 .. 6429). With tla's
+# metal of rcs_e4 (x 6472, trace/tla.txt) they are one staircase bundle of ten: each line runs south,
+# steps west at y 11491-11838, south, steps west again at y 12380-12726, south, and turns east
+# along y 14916-14570 (the westernmost line lowest). Seven end on a poly pad at x 6320-6409 whose
+# poly row runs east under the next tracks toward bc1's 13-line bus (drawn to x 7550, the
+# region's edge; the rows end on pads at x ~7790 / ~7835, not drawn). Lines 2 and 3 turn south
+# and leave the region at y 15000. No pad on any line between y 10400 and its end; every
+# crossing of a poly row or diagonal is without contact.
+
+# line 1: inh_src (lc2's first through line)
+M 6082,10394 y11491 x5908 y12380 x5844 y14916 x6330 w=14
+P 6300,14896:6342,14932                 # pad at the row's west end
+C 6320,14914 s=24x24
+P 6332,14914 x7550 w=24                 # poly row east (runs on to a pad at x ~7880)
+N M 6082,10800 inh_src
+N P 7400,14914 inh_src
+
+# line 2: lc2_x6342 (lc2's second through line); south out of the region
+M 6126,10394 y11534 x5953 y12424 x5888 y14874 x6366 y15000 w=14
+N M 6126,10800 lc2_x6342
+
+# line 3: lc2_x6387 (lc2's third through line); south out of the region
+M 6169,10394 y11577 x5996 y12466 x5932 y14830 x6408 y15000 w=14
+N M 6169,10800 lc2_x6387
+
+# line 4: lc3_w9947 (lc2_x6432: the clock of the left-centre ripple counter's first stage B0)
+M 6212,10394 y11622 x6040 y12506 x5975 y14787 x6414 w=14
+P 6386,14766:6428,14802
+C 6406,14784 s=24x24
+P 6418,14784 x7550 w=24
+N M 6212,10800 lc3_w9947
+N P 7400,14784 lc3_w9947
+
+# line 5: lc2_w8450 (lc3 names its metal lc2_w8907, an alias: the ripple counter's clear, NOT lc1_w7170)
+M 6256,10394 y11664 x6083 y12553 x6018 y14744 x6373 w=14
+P 6345,14723:6387,14759
+C 6365,14741 s=24x24
+P 6377,14740 x7550 w=24
+N M 6256,10800 lc2_w8450
+N P 7400,14740 lc2_w8450
+
+# line 6: lc3_w9470 (the input of lc3's inverter that drives lc1_w7170)
+M 6299,10394 y11708 x6126 y12596 x6061 y14700 x6416 w=14
+P 6388,14678:6430,14714
+C 6408,14696 s=24x24
+P 6420,14697 x7550 w=24
+N M 6299,10800 lc3_w9470
+N P 7400,14697 lc3_w9470
+
+# line 7: lc3_e9756
+M 6342,10394 y11752 x6169 y12640 x6105 y14656 x6373 w=14
+P 6345,14637:6387,14673
+C 6365,14655 s=24x24
+P 6377,14654 x7550 w=24
+N M 6342,10800 lc3_e9756
+N P 7400,14654 lc3_e9756
+
+# line 8: lc2_w9079 (NOT lc3_w9299: a select of lc2's AND-OR-INVERT lc2_w9125)
+M 6386,10394 y11794 x6212 y12683 x6148 y14613 x6417 w=14
+P 6389,14594:6431,14630
+C 6409,14612 s=24x24
+P 6421,14611 x7550 w=24
+N M 6386,10800 lc2_w9079
+N P 7400,14611 lc2_w9079
+
+# line 9: lc3_e9798
+M 6429,10394 y11838 x6256 y12726 x6191 y14570 x6371 w=14
+P 6343,14550:6385,14586
+C 6363,14568 s=24x24
+P 6375,14567 x7550 w=24
+N M 6429,10800 lc3_e9798
+N P 7400,14567 lc3_e9798
+
+# ---- piece ctl: cdp4's six control rows (the four selects, the reset gate line, the row C strobe)
+# from x 7600 across the field. Each row runs west to a pad at its end and a metal track from it.
+# The four select tracks step west in one nested staircase (y 13073-13204) and run on south out of
+# the region (to y about 16150-16190, bl0); each has one more pad on the way, the west end of a
+# poly row that runs back east to cdp4's corner gate group (x 7560-7650, y 13650-14030, not drawn).
+
+# sel1: row 12225 to its pad (6732,12226); metal west along y 12228 to x 6602, south, west along
+# y 13073 to x 6538, south THROUGH the pad (6537,13701) of the row y 13701, and on south
+P 6732,12225 x7606 w=23
+P 6710,12209:6754,12243               # the row's west end pad
+C 6732,12226 s=24x24
+M 6736,12228 x6602 y13073 x6538 y15000 w=14
+P 6515,13684:6559,13718               # west end pad of the row y 13701; the track runs on through it
+C 6537,13701 s=24x24
+P 6537,13701 x7550 w=24               # row east to cdp4's corner group (steps 12 px north at x 7548, beyond)
+N P 7000,12225 cdp4_sel1
+N P 7000,13701 cdp4_sel1
+N M 6538,14500 cdp4_sel1
+
+# sel2: row 12485 to its pad (6732,12485); metal west along y 12488 to x 6646, south, west along
+# y 13116 to x 6581, south THROUGH the pad (6580,14004) of the row y 14004, and on south
+P 6732,12485 x7606 w=23
+P 6710,12468:6754,12502
+C 6732,12485 s=24x24
+M 6736,12488 x6646 y13116 x6581 y15000 w=14
+P 6558,13987:6602,14021               # west end pad of the row y 14004; the track runs on through it
+C 6580,14004 s=24x24
+P 6580,14004 x7550 w=24
+N P 7000,12485 cdp4_sel2
+N P 7000,14004 cdp4_sel2
+N M 6581,14500 cdp4_sel2
+
+# sel3: row 12528 to its pad (6687,12528); track x 6689 south, west along y 13160 to x 6624, south
+# THROUGH the pad (6623,13809) of the row y 13809, and on south
+P 6687,12528 x7606 w=23
+P 6665,12511:6709,12545
+C 6687,12528 s=24x24
+M 6689,12524 y13160 x6624 y15000 w=14
+P 6601,13792:6645,13826               # west end pad of the row y 13809; the track runs on through it
+C 6623,13809 s=24x24
+P 6623,13809 x7550 w=24
+N P 7000,12528 cdp4_sel3
+N P 7000,13809 cdp4_sel3
+N M 6624,14500 cdp4_sel3
+
+# sel4: row 12788 to its pad (6731,12788); track x 6733 south, west along y 13204 to x 6668, south
+# THROUGH the pad (6666,13961) of the row y 13961, and on south
+P 6731,12788 x7606 w=23
+P 6709,12771:6753,12805
+C 6731,12788 s=24x24
+M 6733,12784 y13204 x6668 y15000 w=14
+P 6644,13944:6688,13978               # west end pad of the row y 13961; the track runs on through it
+C 6666,13961 s=24x24
+P 6666,13961 x7550 w=24
+N P 7000,12788 cdp4_sel4
+N P 7000,13961 cdp4_sel4
+N M 6668,14500 cdp4_sel4
+
+# rst: row 12874 to its pad (7467,12875); track x 7468 south to a pad (7467,13897); from the pad a
+# poly east along y 13916, under the track x 7511, to the west edge of a heavy-outlined box
+# (7535-7580, 13903-13940) at the corner of cdp4's gate group. The box is not drawn (notes,
+# Ambiguity 9): read as a buried contact onto that group's node diffusion.
+P 7467,12874 x7606 w=22
+P 7445,12858:7489,12892
+C 7467,12875 s=24x24
+M 7468,12871 y13901 w=14
+P 7452,13878:7490,13910               # the south pad
+C 7467,13897 s=24x24
+P 7462,13906:7532,13927               # poly east to the box's west edge
+N P 7550,12874 cdp4_rst
+N P 7520,13916 cdp4_rst
+
+# ld: row 12962 to a pad below its west end (7556,12983); track x 7556 south. It passes over the
+# box at y 13899-13949, where neither metal shot shows it (drawn uncertain, guide trap 27), comes
+# out south of it, turns west along y 13982 to x 7448 and south onto bc1's metal of bc1_ld_a
+# (trace/bc1.txt draws it from y 14050 down to the strobe driver's inverter cell 1).
+P 7556,12962 x7606 w=22
+P 7540,12951:7576,13000               # the pad; the row enters at its top right
+C 7556,12983 s=24x24
+M 7556,12979 y13899 w=14
+?M 7556,13895 y13953 w=14             # over the box: dark for 51 px in both metal shots
+M 7556,13949 y13982 x7448 y14060 w=14
+N P 7590,12962 cdp4_ld
+N M 7448,14020 bc1_ld_a
+@alias bc1_ld_a cdp4_ld
+
+# =====================================================================================
+# Piece d6 (run 5, 2026-11-19): the six "line g" rows of cdp3's row A cells (cdp3_g_c2 .. c7,
+# poly rows at x 7600, y 9123 .. 8907) are the six data lines of cdp4's 6-bit latch row D.
+# Each row ends west on a pad in a staircase (x 7336 .. 7553); the pad's metal track runs
+# south, steps 86 px west (y 9190 .. 9407), runs 4,300 px down the field, steps 65 px west in
+# a second staircase (y 13722 .. 13938) and joins the metal that trace/bc1.txt draws from
+# y 14040 onto the contact of one of bc1's six poly lines (y 14089 .. 14304), which run east to
+# the feet of cdp4_in6_s1 .. s6. Line 6 (c7) is the long track: x 7468 as far as y 12835, then
+# east to x 7512 (above cdp4_rst's pad) and south. No pad or contact on the way (scan
+# cache/scratch/busl/d6_scan.txt). North of y 10400 the tracks lie in the package's northern part.
+# =====================================================================================
+
+# line 1: cdp3_g_c2 (row y 9123) -> bc1's line 1 (y 14089, the foot of cdp4_in6_s1)
+P 7336,9123 x7606 w=23
+P 7316,9104:7358,9142                 # the row's west end pad
+C 7336,9122 s=24x24
+M 7338,9118 y9190 x7252 y13722 x7189 y14050 w=14
+N P 7590,9123 cdp3_g_c2
+N M 7252,11000 cdp3_g_c2
+
+# line 2: cdp3_g_c3 (row y 9080) -> bc1's line 2 (y 14132, the foot of cdp4_in6_s2)
+P 7380,9080 x7606 w=23
+P 7360,9061:7402,9099
+C 7380,9080 s=24x24
+M 7382,9076 y9234 x7296 y13766 x7231 y14050 w=14
+N P 7590,9080 cdp3_g_c3
+N M 7296,11000 cdp3_g_c3
+
+# line 3: cdp3_g_c4 (row y 9036) -> bc1's line 3 (y 14175, bc1_d3). Its lower arm lies on
+# cdp4_sel3's row y 13809 for 80 px without a contact (notes, Ambiguity 4).
+P 7423,9036 x7606 w=23
+P 7403,9017:7445,9055
+C 7423,9036 s=24x24
+M 7426,9032 y9276 x7339 y13810 x7274 y14050 w=14
+N P 7590,9036 cdp3_g_c4
+N M 7339,11000 cdp3_g_c4
+
+# line 4: cdp3_g_c5 (row y 8993) -> bc1's line 4 (y 14218, bc1_d4). Its lower arm lies on the
+# undrawn row y 13852 without a contact.
+P 7467,8993 x7606 w=23
+P 7447,8975:7489,9013
+C 7467,8994 s=24x24
+M 7468,8990 y9320 x7382 y13855 x7317 y14050 w=14
+N P 7590,8993 cdp3_g_c5
+N M 7382,11000 cdp3_g_c5
+
+# line 5: cdp3_g_c6 (row y 8949) -> bc1's line 5 (y 14261, bc1_d5). Its lower corner (7426,13898)
+# is 20 px west of cdp4_rst's south pad: apart.
+P 7510,8949 x7606 w=23
+P 7490,8931:7532,8969
+C 7510,8950 s=24x24
+M 7512,8946 y9363 x7426 y13898 x7360 y14050 w=14
+N P 7590,8949 cdp3_g_c6
+N M 7426,11000 cdp3_g_c6
+
+# line 6: cdp3_g_c7 (row y 8906) -> bc1's line 6 (y 14304, bc1_d6): the long track. Its arm
+# y 12835 ends 16 px above cdp4_rst's north pad; x 7512 then lies over cdp4_bus_s0's poly column
+# (y 12920-13332) and crosses cdp4_rst's poly (y 13906-13927) without a contact.
+P 7553,8906 x7606 w=23
+P 7533,8887:7575,8925
+C 7553,8905 s=24x24
+M 7556,8901 y9407 x7468 y12835 x7512 y13938 x7404 y14050 w=14
+N P 7590,8906 cdp3_g_c7
+N M 7468,11000 cdp3_g_c7
+
+# the six joins: one net each with what bc1's line reaches
+@alias cdp3_g_c2 cdp4_in6_s1
+@alias cdp3_g_c3 cdp4_in6_s2
+@alias cdp3_g_c4 bc1_d3
+@alias cdp3_g_c5 bc1_d4
+@alias cdp3_g_c6 bc1_d5
+@alias cdp3_g_c7 bc1_d6
+
+# =====================================================================================
+# Piece sr (run 6, 2026-11-19): tc2_sr_g (= lc1_w7908, the enable of latch D; = eof_w7718, row 2
+# of the gate on inh_ck's tap row) runs on from eofw's corner pad (7446,8732) down the whole
+# field. trace/eofw.txt draws the metal south of the pad to y 8800 (M 7466,8745 y8800); from
+# there one metal: south to y 8910, a diagonal south-west along x+y = 16377 (the south-east line
+# of the diagonal bundle, 57 px north-west of piece d6's row-end pads) to (7209,9168), south
+# 4,500 px at x 7209 (the track west of d6's line 1), west along y 13680 to x 7145 (the seventh
+# step of the lower staircase), south, east along y 14176 to x 7187 (the arm lies on bc1's line 3,
+# the poly row y 14175, for 45 px: no contact), south, east along y 14285 to x 7231, south, west
+# along y 14588 to x 7187, south out of the region at y 15000 (it runs on in bc1's ground to
+# y 15482, west to x 7103 and south; the follower ends at (7100,16279): not drawn).
+# No pad or contact on the way (scan cache/scratch/busl/sr_scan.txt). Where it crosses the
+# undrawn poly row y 13744 neither metal shot shows the metal for 22 px (y 13728-13749): read
+# as a plain crossing (no pad on the metal or the row, no hole; notes, Ambiguity 13).
+# =====================================================================================
+M 7467,8795 y8910 7209,9168 y13680 x7145 y14176 x7187 y14285 x7231 y14588 x7187 y15000 w=14
+N M 7209,11000 tc2_sr_g
+
+# =====================================================================================
+# Piece kb (run 6, 2026-11-19): cdp3_k_b, the poly row y 9450 that trace/cdp3.txt draws from
+# x 7600 east to gate 1 of the NAND beside its row C. West of x 7600 the row ends on a pad
+# (7554,9450), 25 px south of the upper arm of d6's line 6; the pad's metal track runs 1,670 px
+# south at x 7555 (the easternmost track of the field, east of d6's line 6) with no pad or
+# contact on the way, and ends on a contact (7555,11118) on a diffusion pad; a diffusion band
+# (y 11095-11127) leaves the pad east, under column 0's VSS rail (x 7600-7646) into cdp3's ground
+# (not drawn there).
+# =====================================================================================
+P 7554,9449 x7606 w=22                # the row, onto cdp3's P 7600,9450
+P 7534,9430:7576,9468                 # its west end pad
+C 7554,9450 s=24x24
+M 7555,9446 y11122 w=14
+C 7555,11118 s=24x24
+D 7538,11096:7584,11144               # the diffusion pad
+D 7575,11095:7600,11127               # the band east, to the VSS rail's west edge (its north edge rises to y 11092 under the rail)
+N P 7590,9449 cdp3_k_b
+N M 7555,10300 cdp3_k_b

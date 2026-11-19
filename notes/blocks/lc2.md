@@ -603,7 +603,7 @@ their x at the south edge.
 
 | Line | Enters (east edge) | Path | Leaves (south edge) |
 |---|---|---|---|
-| `lc2_x6299` | y 8630 | diagonal south-west to x 6342 at y 8738, south, west at y 9034 | x 6299 |
+| `inh_src` | y 8630 | diagonal south-west to x 6342 at y 8738, south, west at y 9034 | x 6299 |
 | `lc2_x6342` | y 8692 | diagonal to x 6385 at y 8757, south, west at y 9076 | x 6342 |
 | `lc2_x6387` | y 8756 | diagonal to x 6428 at y 8778, south, west at y 9121 | x 6387 |
 | `lc2_x6432` | y 9165 | west to x 6432, south | x 6432 |
@@ -675,7 +675,7 @@ Run 3 (latch D's lower unit and the bus field):
 | `lc2_w8907` | M | 4508-4526, 8700 | ? | run 8: drawn end: track B runs on south (no pad to y 9150) |
 | `lc2_w8475` | M | 4553-4575, 9190 | in | run 9: drawn end: the clock's L-shaped metal, from the south |
 | `lc2_w9034` | M | 5247-5263, 9233 | out | run 10: the second flip-flop's slave output, south into `lc3` |
-| `lc2_x6299`, `lc2_x6342`, `lc2_x6387`, `lc2_x6432` | M | 6450, y 8630, 8692, 8756, 9165 | ? | run 10: the four through lines at the east edge |
+| `inh_src`, `lc2_x6342`, `lc2_x6387`, `lc2_x6432` | M | 6450, y 8630, 8692, 8756, 9165 | ? | run 10: the four through lines at the east edge |
 | the same four | M | x 6299, 6342, 6387, 6432; 9233 | ? | run 10: at the south edge, into `lc3` |
 | `lc2_w9079` | M | 5509-5527, 9233 | in | run 10: row 3's thin metal, from `lc3` |
 | `lc2_w9210` | M | 5334-5350, 9233 | in | run 10: row 5's metal, from `lc3` |
@@ -1433,3 +1433,10 @@ Round 18: no findings that change a connection.
 - `rst_n`'s metal ends on a pad (5473,10207) with a poly south; `lc2_w8450`'s metal (`lc3_m5626`) ends
   on a pad (5540,10165) with a poly south; `lc3_m5756` ends on a pad (5646,9992) whose poly row runs
   east out of `lc3` (`lc3` run 2b).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, third batch)
+
+- The first through line (x 6299 at the south edge; "through line", direction `?`) **is `inh_src`** (`eof` run 9, piece `isrc4`; renamed by
+  the refresh of 2026-11-19): from `lc3`'s south edge it runs down the left bus field (`busl`, piece
+  `lc9`) to the row y 14914 and `bc1`'s track x 7969. In the bottom-centre logic and `bd1` it only feeds
+  gates, so its driver is at or beyond this block's east edge (6450,8630).

@@ -339,7 +339,7 @@ N P 5063,6500 tl5_w5936
 #    runs north (open, bright green in the clean shot; px row 2020) under mal's two MA lines
 #    (no contact: textmap 2280 2080 2556 2160 6) to a head with seven contacts under the metal
 #    plane y < 1963. The plane is not drawn by anyone (padring); it is named vcc from the load
-#    hanging from it. A metal island (x 2272-2543, y 2184-2232) lies on the strap's south end
+#    hanging from it. A metal island (x 2272-2554, y 2184-2232) lies on the strap's south end
 #    with one contact (2467,2205) (textmap 2262 2174 2560 2240 4): a strap, nothing else on it.
 #  - VSS: an arm of tl1's plane, x 2270-2590, y 2347-2404 (joins the plane with no edge line
 #    between: textmap 2540 2326 2620 2416 4), with a contact on each pad.
@@ -348,7 +348,7 @@ N M 2400,1915 vcc
 D 2262,1915:2572,1962                  # the head (east edge x 2572: px row 1938, review round 4)
 C 2282,1940 2325,1940 2369,1940 2412,1940 2457,1940 2500,1940 2542,1940     # rings 7 px east of the first drawing (review round 4)
 D 2288,1955:2549,2208                  # the strap
-M 2272,2184:2543,2232                  # the island
+M 2272,2184:2554,2232                  # the island
 C 2467,2205
 D 2447,2200:2497,2236                  # the stem above the load
 D 2450,2228:2478,2440                  # under the load, then the output strip down to the band
@@ -360,7 +360,7 @@ D 2331,2309:2460,2328                  # the output's branch west
 D 2331,2309:2351,2440                  # and south, under the VSS arm, to the band's west end
 D 2331,2428:2540,2465                  # the band
 D 2391,2390:2401,2435                  # finger to the west VSS pad (bright x 2392-2398 between the two gates' edge lines)
-D 2383,2362:2430,2398                  # west VSS pad (east edge x 2430: the dark line at x 2413 is the ring; review round 4)
+D 2383,2355:2430,2398                  # west VSS pad (east edge x 2430: the dark line at x 2413 is the ring; review round 4)
 C 2397,2376
 D 2518,2405:2537,2435                  # finger to the east VSS pad
 D 2520,2364:2565,2412                  # east VSS pad (east edge x 2565: review round 4)
@@ -421,9 +421,9 @@ P 9554,18081 x9770 w=18
 P 9537,18064:9571,18098
 C 9554,18081
 M 9554,18083 x8964 w=13
-P 8947,18064:8981,18098
+P 8950,18064:8988,18098
 C 8964,18081
-P 8964,18081 8964,17900 8966,17735 w=18
+P 8970,18081 8970,17900 8970,17735 w=18
 P 8949,17718:8983,17752
 C 8967,17735
 M 8968,17740 y15255 w=13
@@ -432,7 +432,7 @@ P 8949,16721:8983,16753              # tap pad; its row goes on west (not follow
 C 8966,16737
 P 8930,16728:8955,16746
 P 8945,16156:8980,16188              # tap pad; its row goes on west (not followed)
-C 8962,16172
+C 8966,16172
 P 8930,16163:8950,16181              # the row is y 16163-16181 (px col 8940 16150 16190 3 acid1b; review round 5)
 P 8949,15244:8983,15276              # the north end's pad; its row goes on west (not followed)
 C 8966,15260
@@ -440,7 +440,68 @@ P 8930,15248:8955,15266
 M 8967,17737 x8688 w=13              # the west branch
 P 8671,17720:8705,17754
 C 8688,17737
-P 8650,17722:8680,17742              # its poly on west (not followed)
+# (its poly on west: piece isrc4, below)
+
+# ============================================================================================
+# Piece isrc4 (run 9, 2026-11-19): inh_src on from its fourth open end, the poly west of the pad
+# (8688,17737). Wiring only, no uncertain item. It ends on busl's poly row of inh_src:
+#     inh_src IS lc2's through line x 6299, the first through line of the left-centre strips
+# (lc2's metal from its east edge (6450,8630); lc3 and busl bring it down the left bus field to the
+# row y 14914). On the way two more gate rows (the clear rows of two undrawn latch units under the
+# rail x 8336-8384: bc1 column A / bc3; copies of tl1's cells by findcell, not placed here).
+#
+# The path, from the pad (8688,17737) back to busl's row:
+#   A  poly row y 17728-17744 west under five vertical metals (x 8418-8646; no contact: text map
+#      8370 17716 8660 17758 4) and under ANOTHER NET's metal, which lies on the row from x 8096 to
+#      8388 (the bundle's track x 8098 comes down, turns east along the row and turns south at
+#      x 8380: trap 13; no ring, no hole anywhere along it: tl5_tracks.py h 17736 8062 8700,
+#      textmaps 8062 17690 8134 17758 3 and 8336 17713 8426 17758 3, j_w.png, j_e.png), to a pad
+#      with a contact (8053,17735), 36 px west of that metal's end;
+#   B  metal north on x 8057 to a Z step (y 17301) onto x 8103, north THROUGH a pad with a contact
+#      (8100,16910) (a tap: its poly row y 16900-16918 runs east under three tracks to a gate over
+#      the diffusion column under the thin metal x 8283-8307, ending at x ~8326 in the gap before
+#      the rail), on north to a step (y 16697) onto x 8185, north to a pad with a contact (8185,16303);
+#      the tracks step east together (i_c1.png, i_c2.png, 3.9x both metal shots); tl5_tracks.py
+#      v 8057 17314 17714, h 17301 8064 8094, v 8103 16712 17288, h 16697 8112 8180, v 8185 16320 16682:
+#      no break; dark only at the tap pad (16885-16931) and 8-10 px bars of edges underneath (the
+#      step at y 16697 lies over a large diffusion-coloured area, x 8000-8168, y 16600-16780, whose
+#      east edge is the bar at x 8164-8172: no contact onto it; i_L.png). Chip 1's metal is blemished
+#      on x 8057 at y 17400-17435 and 17508-17527 (chip 2 whole: textmap 8027 17388 8090 17448 3);
+#   C  the pad (8185,16303) is on a poly row y 16294-16312: east under the track x 8229 to a second
+#      gate of the same kind (x 8283-8311), ending at x ~8326; west under the tracks x 8143, 8098,
+#      8056, 8012 (no contact: textmap 7990 16285 8215 16321 3) to a pad with a contact (7968,16303).
+#      bc1's metal of bc1_g6_in jogs from x 8186 to x 8143 26 px above the pad and is NOT on it
+#      (bare ground y 16276-16283 and open field in the clean shot between them: textmap
+#      8155 16236 8215 16345 3; i_j4.png);
+#   D  metal north on x 7967 (bc1's untraced "track 7969"), 1,390 px straight (tl5_tracks.py
+#      v 7967 14925 16290: bars of 8-10 px only, no hole), an L corner (7967,14914), west to a pad
+#      with a contact (7880,14914);
+#   E  the pad's poly row y 14904-14924 west, under bc1's metal x 7752-7795 (it lies on the row for
+#      43 px; no pad, no hole), RL3 and two more metals, to busl's row end at x 7550.
+# A
+P 8053,17736 x8680 w=16
+P 8036,17718:8070,17752
+C 8053,17735
+# B
+M 8057,17735 y17301 x8103 y16697 x8185 y16303 w=13
+N M 8103,17100 inh_src
+P 8084,16892:8120,16926              # the tap pad on the track x 8103
+C 8100,16910
+P 8100,16909 x8326 w=18              # the tap's row: a gate at x 8283-8311 (the diffusion under it is not drawn)
+# C
+P 8167,16287:8203,16320
+C 8185,16303
+P 7968,16303 x8326 w=18              # east end: a gate at x 8283-8311 (the diffusion under it is not drawn)
+P 7950,16286:7986,16322
+C 7968,16303
+# D
+M 7967,16303 y14914 x7880 w=13
+N M 7967,15600 inh_src
+P 7862,14896:7897,14930
+C 7880,14914
+# E
+P 7540,14914 x7880 w=20
+N P 7700,14914 inh_src
 
 # ============================================================================================
 # Piece g7700 (run 5): the gate at the end of inh_ck's tap row (task (c) of the queue row).
@@ -506,7 +567,7 @@ C 7273,7606
 M 7272,6912 y7610 w=12               # a thin metal north, 690 px: over bare field from y 6930 to about 7410, then over four rows at y 7420-7570 (bars only, no hole)
 P 7254,6893:7291,6928                # its north pad
 C 7272,6912
-P 7278,6875 y6912 w=13               # the pad's poly leaves north towards a row y 6862 (not followed)
+P 7277,6875 y6912 w=18               # the pad's poly leaves north towards a row y 6862 (not followed)
 N M 7401,7700 eof_w7818
 # row 2's pad (7267,7736) and its two metals: east then north to a pad (7313,7215); south (a long
 # run, followed by follow.py to (6514,8254), not drawn beyond the stub)
@@ -519,7 +580,7 @@ M 7267,7736 x7315 y7215 w=13
 P 7296,7198:7331,7232                # the north pad
 C 7313,7215
 P 7313,7212 x7400 w=18               # its poly row leaves east (y 7203-7221; not followed)
-M 7268,7736 y7800 w=12               # the south metal's first 60 px
+M 7273,7736 y7800 w=12               # the south metal's first 60 px
 
 # ====================================================================
 # Piece ff3 (run 6): a third flip-flop of lc2's cell lc2_ff in lc3's column A (x 4440-4990, y 9185-9990), 780 px
@@ -606,3 +667,135 @@ D 13868,15712:13930,15728
 # 15716 3 all: 150-170/97-130/42-72 in the chip-2 metal shot, orange in its stripped shot); bd1 has it as ?P
 P 13895,15618:13909,15640
 @alias bd1_n2 bd1_q
+
+# ================================================================ piece n2out (task (e), run 8): the latch's output
+# bd1 drew a strip under bd1_an's metal (D 13773,15634:13804,15730: top segment, the channel under inh_src's gate
+# y 15661-15681, lower segment with the buried contact to bd1_k's poly) as "the pull-down of bd1_k", 8-13 px clear
+# of N2. In the open gap between bd1_an's metal (east edge x 13793) and the ground rail (west edge x 13822) the
+# lower segment IS N2: at y 15712-15736 the bare ground is one plain area from the metal's edge to the rail's, with
+# no edge line at x 13801-13806 (there is one at y 15657-15703, where a field island lies in the gap), in both metal
+# shots; the clean shot has the dark bar of a diffusion crossing there (as at N1, y 15580, and between P2 and P3,
+# y 15519) and no green field strip (as at y 15657-15703). So bd1_k is bd1_n2: the latch's output leaves west on
+# bd1_k's poly. The top segment joins the ground diffusion under the rail the same way at y 15638-15652 (bd1's ?D,
+# firm here on the same three tests), so inh_src gates a third pull-down of N2:
+#     bd1_n2 = NOT( bd1_an AND inh_lat  OR  bd1_n1  OR  inh_src )
+D 13795,15712:13830,15736          # N2 west of the rail, in the gap: onto the strip's lower segment (13 px over bd1's N2; review round 10)
+D 13795,15638:13840,15652          # the strip's top segment east through the gap onto the ground diffusion (vss contact 13845,15657)
+@alias bd1_n2 bd1_k
+
+# ================================================================ piece n2w (run 8): bd1_n2 (bd1's bd1_k) on from bd1's
+# end (13521,16273), through the bottom bus field and bc3's routing field, to the left bus field. Wiring only:
+# fourteen pads with contacts, seven poly links under other nets' metals, no gate and no tap on the way.
+# Pads: ring and bright centre in both metal shots (textmap.py); metal corners from follow.py, each seen on a view.
+# --- A: bd1's metal x 13521 turns east at y 16264 and south on x 13564 to a pad
+M 13521,16250 y16264 x13564 y16606 w=13
+P 13546,16587:13582,16621
+C 13562,16604
+# --- B: poly row west under three tracks (x 13521, 13478, 13435)
+P 13348,16604 x13562 w=16
+P 13331,16587:13365,16621
+C 13348,16604
+# --- C: metal south, a 45-degree diagonal south-west (over wr_r7's poly diagonal, no contact), south on x 13218
+M 13347,16600 13347,16712 13220,16839 13218,17778 w=13
+P 13200,17759:13234,17793
+C 13217,17776
+# --- D: poly row west under the vertical trunks and the wide VCC rail x 12890-12985
+P 12848,17776 x13217 w=16
+P 12831,17760:12865,17794
+C 12848,17777
+# --- E: metal west, the outer one of three nested Z bends (north on x 11722 over four poly diagonals), west
+M 12850,17779 x11722 y17606 x11287 w=13
+P 11270,17586:11304,17620
+C 11287,17603
+# --- F: poly west, a diagonal south-west, west along y 17905 (under ck_out's metal x 10224-10320, no contact), south
+P 11287,17603 11137,17603 10835,17905 10224,17905 10224,17992 w=16
+P 10205,17976:10239,18010
+C 10222,17993
+# --- G: metal south and west
+M 10224,17990 y18039 x9811 w=13
+P 9796,18020:9830,18054
+C 9813,18037
+# --- H: poly under two vertical metals (x 9650, 9710)
+P 9594,18037 x9813 w=16
+P 9577,18021:9611,18055
+C 9594,18038
+# --- I: metal west (over isrc's poly x 8964, no contact)
+M 9596,18039 x8641 w=13
+P 8626,18021:8660,18055
+C 8643,18038
+# --- J: poly under the metals x 8460 and x 8510-8560
+P 8424,18037 x8643 w=16
+P 8407,18022:8441,18056
+C 8424,18039
+# --- K: metal west, a step south at x 8182, west
+M 8426,18039 x8182 y18083 x7597 w=13
+P 7583,18065:7617,18099
+C 7600,18082
+# --- L: poly under bc1's rail RL2 (x 7463-7520)
+P 7422,18081 x7598 w=16
+P 7405,18064:7439,18098
+C 7422,18081
+# --- M: metal west to a corner (6712,18083), north up the left bus field (two tracks west of inh_ck's x 6797)
+M 7424,18083 x6712 y16517 w=13
+P 6692,16502:6726,16536
+C 6708,16519
+# --- N: poly link under the supply buses y 16230-16490 (like inh_ck's beside it)
+P 6712,16519 y16173 w=18
+P 6694,16156:6728,16190
+C 6710,16173
+# --- O: metal on north; drawn to busl's south edge (y 15000). The follower takes it on to (6948,8707): not read.
+M 6711,16185 y15000 w=13
+N M 6711,15600 bd1_n2
+
+# ============================================================================================
+# Piece isrc5 (run 10, 2026-11-19): inh_src (lc2's first through line) followed from lc2's
+# east edge (6450,8630) back to its source. Wiring only, no uncertain item. It ends on this file's
+# own poly of piece x1, rst_a's line below its pad (5147,6803):
+#     inh_src IS rst_a, the buffered NOR(lpstb_b, res_b) of lc1's gate 5
+# (rst_a = NOT rst_n, rst_n = NOT rst, rst = NOR(lpstb_b, res_b): lc1's gates 3-5).
+#
+# The path, from lc2's metal end back to rst_a's poly:
+#   A  lc2's diagonal metal goes on north-east from (6450,8630) to (6509,8571) (tl5_tracks.py h Y 6430
+#      6560 --half 2 at y 8640 .. 8560: centre x 6440, 6459, 6478, 6488, 6498, 6508, 6513) and north to a
+#      pad with a contact (6513,8538) (textmap.py 6480 8505 6545 8575 3 --acid: ring x 6495-6535,
+#      y 8523-8556, bright centre in both chips);
+#   B  the pad's poly, x 6508-6528, 450 px north to a pad with a contact (6513,8087) (textmap.py
+#      6486 8085 6540 8530 3 --acid; 6486 8000 6580 8100 3). It passes under inh_ck's link F (metal
+#      y 8166-8178), under eofw's metal of lc1_w7908, whose vertical arm x 6508-6522, y 8259-8411 LIES ON
+#      IT for 150 px (no ring, no pad, no dark stretch in either chip: tl5_tracks.py v 6515 8262 8408
+#      --half 2), and under an undrawn metal y 8448-8460: no contact with any;
+#   C  metal from the pad north over a poly row (y 8027-8054) to a corner (6513,8018), east to a corner
+#      (6558,8018), north on x 6552-6565 for 760 px (tl5_tracks.py v 6559 7270 8010 --half 2: fourteen
+#      bars of 8-10 px, the edges of the rows it crosses; no break) to a corner (6558,7258), west along
+#      y 7252-7265 to a pad with a contact (6187,7257) (j_p6190.png, 5x four shots). The tracks of this
+#      bundle step one track west going south at y 7982-8105 (nested Ls): the track x 6513 north of
+#      y 7985 and the metal x 6558 south of y 8057 are other nets. Where the track crosses the row of
+#      the pad (6513,7888) the clean shot is olive green under it (notes, Ambiguity 33: no ring, no
+#      widening: no contact). From x 6313 east to the corner the metal y 7257 lies on another net's poly
+#      (it comes from the north on x 6313-6333 and turns east under the metal: j_c6313.png, review round
+#      12; no contact: Ambiguity 34). Chip 1's metal shot has a 13 px dark bar across the metal at
+#      x 6544-6556, just west of the corner; chip 2 is whole there and chip 1's clean shot is protected
+#      through: a blemish of chip 1's photo (Ambiguity 36);
+#   D  the pad's poly row y 7248-7266 west through lc1's crossing field (under a dozen vertical metals,
+#      none with a pad on it) and in the open to x 5494, a 45-degree diagonal north-west under V5, V4,
+#      V3 (lpstb_b) and V2 (res_b) to (5149,6912), and north onto piece x1's poly P 5150,6815 y6900
+#      (rst_a). The row and the diagonal keep their lane (tools/eof_rows.py diag 5490 7258 6170 7257
+#      --step 20 --reach 56; diag 5497 7259 5140 6902 --step 14: the line at offset -5..+9 at every cut,
+#      its neighbours 43-47 px either side; row cuts y 6890-6930: the bend is at y 6912).
+@alias rst_a inh_src
+# A
+M 6444,8636 6509,8571 6513,8560 y8538 w=14
+P 6494,8521:6536,8557
+C 6513,8538
+# B
+P 6518,8540 y8086 w=18
+P 6496,8066:6536,8104
+C 6513,8087
+# C
+M 6513,8087 y8018 x6558 y7258 x6187 w=13
+N M 6558,7600 rst_a
+P 6170,7238:6210,7278
+C 6187,7257
+# D
+P 6190,7257 x5494 5149,6912 y6890 w=18
+N P 5800,7257 rst_a

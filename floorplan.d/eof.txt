@@ -15,3 +15,19 @@
 6450,7767:7541,7831      route  eof_w7777, the gate's third input | poly row west through the crossing field, one track down at (6886,7777), into the left-centre strip at (6450,7821)
 4440,9185:4990,9990       logic  toggle flip-flop, clocks lc2's counter | a third copy of lc2's flip-flop cell: its slave output lc2_w8475 is the clock of lc2's first flip-flop; clock eof_w9255 from the south, cleared with the others by lc1_w7170
 13885,15618:14005,15730  logic  latch on R4's match: load of the lower half | the load and tie that close bd1's latch: bd1_n2 = NOT((bd1_an AND inh_lat) OR bd1_n1), cross-coupled with bd1_n1; a transparent latch of rc_eq_r4, open while inh_lat is high
+13770,15634:13832,15740  logic  latch on R4's match: output gate | N2's third pull-down, gated by inh_src, folded round a field island under bd1_an's metal; N2's buried contact puts the latch's output bd1_n2 on the wire that leaves west
+13331,16250:13582,17794  route  latched R4 match, strobe channel | bd1_n2 from bd1's metal: pad, poly row y 16604, metal south by a diagonal to a pad (13217,17776)
+10205,17586:13234,18010  route  latched R4 match, bottom bus | bd1_n2 west: poly row y 17776, metal y 17779, the outer Z bend at x 11722, a poly diagonal to the row y 17905, pad (10222,17993)
+7405,18020:10239,18099   route  latched R4 match, through the bottom-centre routing field | bd1_n2 west along y 18039 and y 18083 by three poly cross-unders; no tap
+6692,15000:7424,18090    route  latched R4 match, up the left bus field | bd1_n2 from the corner (6712,18083) north on x 6712, a poly link under the supply buses, on north (drawn to y 15000)
+7540,14896:7986,14930    route  inh_src, poly row y 14914 | inh_src is the left-centre through line (x 6299 at lc2's south edge): from the left bus field's row east to the pad (7880,14914) and the corner of the track x 7967
+7958,14930:7986,16322    route  inh_src, track x 7967 | straight south, 1,390 px, to the pad (7968,16303)
+7950,16286:8326,16322    route  inh_src, poly row y 16303 | between the pads (7968,16303) and (8185,16303), on east to a latch's clear gate at x 8283-8311
+8050,16322:8203,17718    route  inh_src, bundle track | from the pad (8185,16303) south on x 8185, x 8103 and x 8057 by two steps; a tap pad (8100,16910)
+8084,16892:8326,16926    route  inh_src, tap row y 16909 | from the tap pad east to a second latch's clear gate at x 8283-8311
+8036,17718:8690,17752    route  inh_src, poly row y 17736 | from the pad (8053,17735) east under the rails to the pad (8688,17737) of the metal that feeds the track x 8968
+5140,6890:5512,7275      route  reset copy rst_a, diagonal poly | one line of the left-centre diagonal bundle, from the poly below rst_a's pad (5147,6803) south-east under four metals to the row y 7257
+5494,7238:6210,7278      route  reset copy rst_a, poly row y 7257 | east through the crossing field to the pad (6187,7257)
+6187,7250:6566,7266      route  reset copy rst_a, metal y 7258 | from the pad east to the corner of the track x 6558 (it lies on another net's poly row from x 6313)
+6506,7258:6566,8104      route  reset copy rst_a, track x 6558 | 760 px south, an L one track west at y 8018, to the pad (6513,8087)
+6437,8066:6536,8643      route  reset copy rst_a, poly x 6518 and the diagonal metal | from the pad (6513,8087) south under three metals to the pad (6513,8538), then lc2's first through line: this is inh_src
