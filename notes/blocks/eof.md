@@ -422,7 +422,7 @@ divider of R10 bits 5-6 (1/16 or 1/32 of the field rate) would look like.
 | the thin clock metal x 4641-4655 | from row 1's pad (4648,9254) to the END pad (4648,9905) through the pads of rows a and d ((4648,9428), (4648,9645)); no metal between `lc2`'s END pad (4648,9124) and this one's top pad (y 9140-9249 bare in both chips) | `tl5_tracks.py v 4648 9140 9960` (holes 9254, 9428, 9645, 9905; no metal 9140-9249 and from 9912) |
 | **the copy's clock feed** | an L-shaped metal from the END pad (4648,9905) west along y 9897-9919 and south on x 4553-4575: one metal into the pad's ring, the same picture as the master's L 780 px up | `textmap.py 4540 9890 4664 9936 3 --acid` against `4540 9110 4664 9156`; `d_padA.png` (2.8x, three shots); `follow.py 4564 9940 N` (corner (4570,9908) -> E, end (4652,9905)), `S` (a contact candidate (4563,10093), on to a corner (4568,10520)) |
 | K1's VSS node | **differs from the master**: a box x 4752-4800, y 9196-9242 under the rail with one contact at (4765,9211) (a pit in the clean shot, a ring in both metal shots); field between it and `lc2`'s K4 column (y 9175-9196). The finger east (y 9223-9242) and the tongue are as in the master | `d_top.png` (4x, four shots); `textmap.py 4744 9186 4900 9262 4 --acid` against the master's `4744 8406 4900 8482`; `px.py col 4776 9150 9260 4` |
-| track A | one metal from `lc2`'s pad (4473,9038) to an END pad with a contact (4473,9818) (ring 9796-9813, hole 9819; no metal 9823-9899); the pad's poly leaves east only (K4's second row). Two greenish stretches under it (y 9233, 9709) are not contacts: metal C-E in both chips, no ring | `tl5_tracks.py v 4475 9040 9900`; `textmap.py 4455 9212 4497 9258 3`, `4455 9690 4497 9732 3`; `d_padA.png` |
+| track A | one metal from `lc2`'s pad (4473,9038) to an END pad with a contact (4473,9818) (ring 9796-9813, hole 9819; no metal 9823-9899); the pad's poly leaves east only (K4's second row). Under it lie two stretches of another net's diffusion (x 4458-4495, y 9088-9250 and y 9570-9725: flat tan under the track; review round 7), with no contact: metal C-E in both chips, no ring, no hole. West of the rail the pad's row lies 8 px below the cell's (own strip y 9808-9827) | `tl5_tracks.py v 4475 9040 9900`; `textmap.py 4455 9212 4497 9258 3`, `4455 9690 4497 9732 3`; `d_padA.png` |
 | track B | one metal from `lc2`'s end to (4518,10170); a pad with a contact (4517,9384) (ring 9361-9378, hole 9385), poly east only (the clear row y 9376-9392; pink field west of the pad); no other hole from y 8690 | `follow.py 4517 8690 S`; `tl5_tracks.py v 4517 8690 9380`, `v 4517 9200 9500`; `d_padB.png` (4x, three shots) |
 | the rails | the west rail has the master's outline 780 px lower (x 4752-4802; wider, x 4741-4812, at y 9580-9718; x 4757-4808, then 4757-4820 from y 9825); the middle rail x 4924-4980; both run on south of y 9970 | `d_ov3_m.png` (1.65x, the whole piece on the metal shot) |
 | under the rail east of box S | the field at (4781-4811, 9672-9732) is green in the clean shot where the master's is pink: the same outlines in both (a colour drift, trap 15), metal whole over it in both chips | `opendiff.py 4540 9180 4990 9990`; `textmap.py 4730 9660 4830 9750 3 --acid` against `4730 8880 4830 8970`; `d_mS_c.png`, `d_mS_m.png` (4.5x, copy beside master) |
@@ -665,9 +665,15 @@ driver lies; the other three lead to the loads.
 21. **The cell's VCC contacts sit about 12-15 px north of where the cell draws them** (K1's: dimple at
     (4951,9349), drawn (4955,9360); the master's own is the same, (4953,8565) against (4955,8580)). Inside
     the box either way; geometry of `lc2`'s cell, not changed here.
-22. **What lies in the copy's rectangle that the cell does not draw**: nothing found on the overlays; the
-    green stripe at y 9730-9745, x 4800-4975 is in the chip-2 metal photograph only (an image artefact:
-    not in chip 1's metal shot nor in either stripped shot; `lc3`'s survey listed it as a drawn item).
+22. **What lies in the copy's rectangle that the piece does not draw** (review round 7): (a) two stretches
+    of diffusion under track A, x 4458-4495, y 9088-9250 and y 9570-9725, joined at y 9088-9118, 9215-9250,
+    9570-9597 and 9700-9722 to the diffusion under the neighbouring metal x 4420-4440 (the reviewer: a
+    diffusion wire of the west neighbour going round that metal's pads (4432,9183) and (4430,9655)); no
+    contact to track A and no poly of this piece over it; its ends are not read (`urch`'s channel); (b) two
+    VCC boxes under the middle rail, (4928-4985, 9195-9245) with a contact about (4950,9225) and
+    (4932-4985, 9738-9800) with a contact (4955,9768): the turned flip-flop of column B's (`lc3`'s stage
+    E4), drawn by `lc3`; (c) the green stripe at y 9730-9745, x 4800-4975 is in the chip-2 metal photograph
+    only (an image artefact: not in chip 1's metal shot nor in either stripped shot).
 
 ## Review
 
@@ -982,6 +988,64 @@ beyond y 7800; the poly north of y 6875.
 
 Round 6: no findings that change a connection.
 
+### Round 7 (full review of piece `ff3`; 2026-11-19 13:27 to 13:44 +0000)
+
+One fresh reviewer (general-purpose agent, Claude Fable 5.2), at commit 8d0843b (the piece as shipped in
+88bafbc, with main merged in). A first reviewer, started at 13:04, was stopped with the session after ten
+minutes and never reported; its images are in `cache/scratch/eof/review-7/` and were not used. The round
+was run again with a new reviewer, whose images are in `cache/scratch/eof/review-8/`.
+
+**Told to suspect**: the join of track C to `lc2`'s L-shaped metal and the contact (4561,9296); a copy that
+differs from its master (all round the twelve pads and along the four edges; the top, where `lc2`'s K4
+ends, and the bottom); the box y 9196-9242 and its contact (4765,9211); the seven buried-contact boxes,
+accepted at 2.5x; the green patch under the rail east of (4752,9688); tracks A and B, followed by text only;
+bare ground between the pads (4648,9124) and (4648,9254); the L-shaped feed; the rails' outlines.
+
+**Checked and found correct** (4x or more in two or more shots, with text tools): claim 3 (track C
+unbroken from y 9120 to the pad (4561,9296); the L's arm enters the pad (4648,9124); the contact real, poly
+east only; the END pad (4560,9776) with poly east only and nothing south; `lc2_w8475` FIRM); claim 6 (bare
+ground y 9140-9235 on x 4641-4655 in both chips; the feed one metal with the END pad (4648,9904)); claim 2
+(the box separated from `lc2`'s column by field; (4765,9211) a contact, no second one); claims 4 and 5
+(tracks A and B continuous, no side arm, no other contact; A ends at (4473,9818); the pad (4517,9384) real,
+poly east only; dark spots on A at y 9066-9080 and on C at y 9395-9412 are chip-2 dirt); claim 1 (copy
+against master block by block in all four shots: differences only at the top edge, dirt and the
+neighbour's boxes; all seven buried-contact boxes match at 4.5x in three shots; the green patch has the
+master's outlines and no ring); claims 7 and 8 (rail cuts at 13 heights; equations identical, 0 errors,
+19 transistors). **Not checked**: the cell's thin metals over boxes and its four `?D` (the master's);
+track B south of y 9840.
+
+**Findings**, each checked by the tracer:
+
+1. **Undrawn diffusion under track A** at x 4458-4495, y 9088-9250 and y 9570-9725, joined to the
+   diffusion under the neighbouring metal x 4420-4440; no contact to track A, and no poly of the piece
+   crosses it. Does not change a connection. **Confirmed** (`px.py col 4475 9070 9270 10 acid1b,metal`,
+   `col 4475 9550 9740 10 acid1b`: flat tan 200/177/137 under the track from y 9100 to 9240 and from 9580
+   to 9710, pink 186/127/127 elsewhere; `px.py row 9150 4410 4500 6`: tan only under track A's width). It
+   is a wire of the west neighbour (`urch`'s channel), with ends nobody has read: **not drawn**; recorded in
+   the Logic table, Ambiguity 22 and Not done. The notes' "two greenish stretches (y 9233, 9709)" are its
+   south ends: the row in the Logic table is corrected.
+2. **Two VCC boxes with contacts under the middle rail** are not drawn: x 4928-4985, y 9195-9245 with a
+   contact about (4950,9225), and x 4932-4985, y 9738-9800 with a contact (4955,9768). Does not change a
+   connection of this piece. **Confirmed** (`px.py pt 4955,9225 4955,9768`: protected diffusion colour,
+   metal over both); they are the VCC boxes of the turned copy in column B (`lc3`'s stage E4,
+   `@inst lc2_ff 260,716 rot=180 o=4826,8810` on its branch: the cell's contacts (4952,9108) and (4955,8580)
+   land at (4960,9228) and (4957,9756)), which `lc3` draws. Not drawn here; Ambiguity 22's "nothing found"
+   corrected.
+3. **Geometry only**: K4's row from track A's END pad is drawn (by the cell) at y 9800-9818; west of the
+   rail the poly lies at about y 9805-9826 and met the pad box by 2 px. **Confirmed** (`px.py col 4510 /
+   4640 / 4700 9792 9838 3`: edges at y 9806-9808 and 9826-9830). **Fixed**: an own strip
+   `P 4478,9808:4700,9827` on the row from the pad, stopped short of the column, so the channel stays the
+   cell's.
+
+Connections before and after the fix:
+
+```
+tools/t.sh eof sameconn.py 8d0843b              ->  connections identical
+.venv/bin/python tools/sameconn.py 8d0843b      ->  connections identical
+```
+
+Round 7: no findings that change a connection.
+
 ## Not done
 
 - **Task 2, the loads of `sl_eq_r5_n` (= NOT `sl_eq_r5`)**: one load is drawn (piece `r5nor`,
@@ -1008,7 +1072,10 @@ Round 6: no findings that change a connection.
   `trunks`' poly y 16950 east of x 10470, a gate row of the unit under the rail x 10540-10585 (`bc4`);
   (6) `trunks`' Not done item 1, the two contacts (13565,15275), (13565,15190) in `bd1`. Other taps of
   the long stretches that `trunks` drew were not looked for (R4).
-- **The ripple chain below piece `ff3`** (task (d), the rest; all in `lc3`'s ground, x 4440-5450,
+- **The ripple chain below piece `ff3`: taken by `lc3`** (Matt Godbolt's claim of 2026-11-19 13:17 +0000,
+  split with this package: `lc3` draws the turned copy in column B, its stage E4, and the unit below
+  both columns, x 4440-5450, y 9960-10580, from this piece's ports at y 9970-9990, and uses this piece's
+  names). Leave them to `lc3`. As this run left them (task (d), the rest; all in `lc3`'s ground, x 4440-5450,
   y 9900-10750): (1) the copy's clock `eof_w9255` south of (4553-4575,9990): the next unit's track-C
   position, a contact near (4563,10080), a corner (4568,10520) east to about (4674,10510) (the follower,
   unchecked); `findcell.py 4600 8350 4990 9190 --region 4400,9100:5400,10500` gives `@inst lc2_ff 0,1561`
@@ -1016,6 +1083,9 @@ Round 6: no findings that change a connection.
   copy in column B, `@inst lc2_ff 322,796 rot=180 o=4795,8770` (score 0.70, centre (5117,9566)): not looked
   at; `lc2`'s second flip-flop's output `lc2_w9034` and its stack (`lc2_w9171`) lead into that column; (3)
   track B south of y 9420 (to (4518,10170)); (4) both rails south of y 9970.
+- **The diffusion under track A** (x 4458-4495, y 9088-9250 and y 9570-9725; Ambiguity 22a): a wire of
+  the west neighbour's, not drawn by anyone (`urch` (continue): the metal x 4420-4442 with pads (4432,8708),
+  (4432,9186), (4430,9655)).
 - **`lc1_w7170`, the input of the inverter that drives `rcs_x1`**: the thin metal T1 leaves
   `lc1`'s strip south at (5030-5046,8067), into `lc2`'s (claimed).
 - **`res_b`, `lpstb_b` and `rst_a` beyond the gate column**: three lines of the diagonal poly

@@ -559,6 +559,7 @@ M 4562,9185 y9296 w=18
 M 4475,9055 y9826 w=18
 P 4458,9804:4490,9832
 C 4473,9818
+P 4478,9808:4700,9827                       # review round 7: west of the rail the pad's row lies at y 9808-9827 (px.py col 4510 / 4640 / 4700 9792 9838 3), 8 px below the cell's row (y 9800-9818), which met the pad by 2 px only; one poly with it. Stopped short of the column (x 4708), so the channel is the cell's
 # track B (x 4508-4526, lc2_w8907: the clear) on south from lc2's end (y 8700) through the pad (4517,9384) of the
 # copy's clear row; it runs on south (follow.py: to (4518,10170)); drawn to y 9420
 M 4517,8695 y9420 w=18
