@@ -10,7 +10,7 @@ Trace: `trace/regs.txt`. Scratch: `cache/scratch/regs/` (`survey.md`). Started 2
 - `wr_r12`'s join rests on one uncertain item (a `?M`, Ambiguities 1); the other three joins have
   none (`tools/unsure.py` lists only `wr_r12`). `wr_r12` has a contact onto an undrawn structure in
   `bw`'s region, and `wr_r14` possibly one (Ambiguities 1).
-- **Piece 2, the read selects of R14-R17: traced** (2026-11-19 16:00 -0600). Four wires, no
+- **Piece 2, the read selects of R14-R17: traced** (2026-11-19 15:29 -0600). Four wires, no
   transistor, from `bd3`'s lines (y 17300) to `cdp4`'s four selector lines as `busl` drew them
   (tracks x 6538-6668, to y 15000). Full extraction: 2374 nets (four more joins), 4351 transistors,
   0 errors, 0 warnings. No uncertain item on these joins.
@@ -158,7 +158,7 @@ Findings:
 extraction does not change; the finding still counts, because a contact was added).
 Round 1: three findings, fixed (one contact added, one marked uncertain, one geometry).
 
-**Round 2, fix check, 2026-11-19 15:30 -0600** (fresh Fable reviewer; the changes since 8e1aa03, at
+**Round 2, fix check, 2026-11-19 15:20 -0600** (fresh Fable reviewer; the changes since 8e1aa03, at
 commit 81387d1; three images in `cache/scratch/regs/review-2/`). Change 1 (contact on `wr_r12`):
 right; bright centre red 214-229 in both metal shots, green hole red minus green -9 to -18 (the
 pad (11243,11830) reads -8 to -25), box is poly as drawn. Change 2 (`?C` on `wr_r14`): uncertain is
