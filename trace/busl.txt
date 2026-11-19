@@ -249,3 +249,76 @@ M 5582,13329 y13916 5539,13959 y14398 x5451 y15000 w=16
 N P 7590,12182 cdp4_bus_s0
 N P 7000,13332 cdp4_bus_s0
 N M 5451,14990 cdp4_bus_s0
+
+# ---- piece lc9: the nine metal lines that leave lc3 south at y 10400 (x 6082 .. 6429). With tla's
+# metal of rcs_e4 (x 6472, trace/tla.txt) they are one staircase bundle of ten: each line runs south,
+# steps west at y 11491-11838, south, steps west again at y 12380-12726, south, and turns east
+# along y 14916-14570 (the westernmost line lowest). Seven end on a poly pad at x 6320-6409 whose
+# poly row runs east under the next tracks toward bc1's 13-line bus (drawn to x 7550, the
+# region's edge; the rows end on pads at x ~7790 / ~7835, not drawn). Lines 2 and 3 turn south
+# and leave the region at y 15000. No pad on any line between y 10400 and its end; every
+# crossing of a poly row or diagonal is without contact.
+
+# line 1: lc2_x6299 (lc2's first through line)
+M 6082,10394 y11491 x5908 y12380 x5844 y14916 x6330 w=14
+P 6300,14896:6342,14932                 # pad at the row's west end
+C 6320,14914 s=24x24
+P 6332,14914 x7550 w=24                 # poly row east (runs on to a pad at x ~7880)
+N M 6082,10800 lc2_x6299
+N P 7400,14914 lc2_x6299
+
+# line 2: lc2_x6342 (lc2's second through line); south out of the region
+M 6126,10394 y11534 x5953 y12424 x5888 y14874 x6366 y15000 w=14
+N M 6126,10800 lc2_x6342
+
+# line 3: lc2_x6387 (lc2's third through line); south out of the region
+M 6169,10394 y11577 x5996 y12466 x5932 y14830 x6408 y15000 w=14
+N M 6169,10800 lc2_x6387
+
+# line 4: lc3_w9947 (lc2_x6432: the clock of the left-centre ripple counter's first stage B0)
+M 6212,10394 y11622 x6040 y12506 x5975 y14787 x6414 w=14
+P 6386,14766:6428,14802
+C 6406,14784 s=24x24
+P 6418,14784 x7550 w=24
+N M 6212,10800 lc3_w9947
+N P 7400,14784 lc3_w9947
+
+# line 5: lc2_w8450 (lc3 names its metal lc2_w8907, an alias: the ripple counter's clear, NOT lc1_w7170)
+M 6256,10394 y11664 x6083 y12553 x6018 y14744 x6373 w=14
+P 6345,14723:6387,14759
+C 6365,14741 s=24x24
+P 6377,14740 x7550 w=24
+N M 6256,10800 lc2_w8450
+N P 7400,14740 lc2_w8450
+
+# line 6: lc3_w9470 (the input of lc3's inverter that drives lc1_w7170)
+M 6299,10394 y11708 x6126 y12596 x6061 y14700 x6416 w=14
+P 6388,14678:6430,14714
+C 6408,14696 s=24x24
+P 6420,14697 x7550 w=24
+N M 6299,10800 lc3_w9470
+N P 7400,14697 lc3_w9470
+
+# line 7: lc3_e9756
+M 6342,10394 y11752 x6169 y12640 x6105 y14656 x6373 w=14
+P 6345,14637:6387,14673
+C 6365,14655 s=24x24
+P 6377,14654 x7550 w=24
+N M 6342,10800 lc3_e9756
+N P 7400,14654 lc3_e9756
+
+# line 8: lc2_w9079 (NOT lc3_w9299: a select of lc2's AND-OR-INVERT lc2_w9125)
+M 6386,10394 y11794 x6212 y12683 x6148 y14613 x6417 w=14
+P 6389,14594:6431,14630
+C 6409,14612 s=24x24
+P 6421,14611 x7550 w=24
+N M 6386,10800 lc2_w9079
+N P 7400,14611 lc2_w9079
+
+# line 9: lc3_e9798
+M 6429,10394 y11838 x6256 y12726 x6191 y14570 x6371 w=14
+P 6343,14550:6385,14586
+C 6363,14568 s=24x24
+P 6375,14567 x7550 w=24
+N M 6429,10800 lc3_e9798
+N P 7400,14567 lc3_e9798

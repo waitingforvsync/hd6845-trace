@@ -4,3 +4,5 @@
 4780,11325:5720,14920   route  row H outputs into the MA counter rows | each track ends on a pad of a diffusion row that runs west into one of eight rows of the left array (477 px apart): bit c7 at y 11338 down to c0 at y 14894
 5370,11470:7600,12200   route  channel-1 lines to the array and the row C latch | cdp4_bus_s7..s0: eight poly rows from cdp4's channel 1, each to a pad and a metal track (s2 and s1 by a diagonal poly) that reaches one poly row of the left array and the same slice's row C latch input
 5370,13320:7600,13650   route  row C latch inputs (channel 2) | the west pieces of cdp4's channel 2 (cdp4_in_s#), each the same net as the channel-1 line of its slice
+5830,10400:6450,14930   route  left-centre lines down the field | nine metals from the left-centre logic (the ripple counter's clock and clear, the input of the inverter that drives the step logic's clear, six more) in one staircase bundle with rcs_e4, to the foot of the field
+6300,14550:7550,14930   route  rows to the bottom-centre bus | seven of the nine end on pads of poly rows that run east to the 13-line bus of the bottom-centre logic

@@ -1,26 +1,26 @@
 {
  "who": "richtw1",
- "generated": "2026-11-19T15:00:49+00:00",
+ "generated": "2026-11-19T15:58:41+00:00",
  "price_source": "Claude API list prices per million tokens, as of 2026-11-03",
  "unpriced_models": [
   "<synthetic>"
  ],
- "responses": 7753,
+ "responses": 7935,
  "first": "2026-11-14T17:52:50.853000+00:00",
- "last": "2026-11-19T15:00:40.547000+00:00",
- "total_cost": 1427.21,
- "review_cost": 58.04,
+ "last": "2026-11-19T15:58:30.022000+00:00",
+ "total_cost": 1452.4,
+ "review_cost": 65.46,
  "tokens": {
-  "input": 15764,
-  "output": 10810594,
-  "cache_write_5m": 15173448,
-  "cache_write_1h": 23581462,
-  "cache_read": 2546192402
+  "input": 16134,
+  "output": 11010582,
+  "cache_write_5m": 15416379,
+  "cache_write_1h": 23985371,
+  "cache_read": 2587689890
  },
  "by_model": {
   "claude-fable-5-2": {
-   "cost": 1328.27,
-   "responses": 7012
+   "cost": 1353.46,
+   "responses": 7194
   },
   "<synthetic>": {
    "cost": 0.0,
@@ -37,11 +37,11 @@
  },
  "by_package": {
   "(coordination)": {
-   "cost": 439.03,
+   "cost": 446.73,
    "review_cost": 0.0,
-   "responses": 2096,
+   "responses": 2150,
    "models": {
-    "claude-fable-5-2": 1355,
+    "claude-fable-5-2": 1409,
     "<synthetic>": 15,
     "claude-opus-5-5": 723,
     "claude-haiku-5-5": 3
@@ -93,6 +93,14 @@
    "responses": 290,
    "models": {
     "claude-fable-5-2": 290
+   }
+  },
+  "busl": {
+   "cost": 40.02,
+   "review_cost": 14.98,
+   "responses": 357,
+   "models": {
+    "claude-fable-5-2": 357
    }
   },
   "eofw": {
@@ -197,14 +205,6 @@
    "responses": 157,
    "models": {
     "claude-fable-5-2": 157
-   }
-  },
-  "busl": {
-   "cost": 22.52,
-   "review_cost": 7.55,
-   "responses": 229,
-   "models": {
-    "claude-fable-5-2": 229
    }
   },
   "bc1": {
@@ -390,6 +390,6 @@
   "2026-11-16": 345.31,
   "2026-11-17": 67.63,
   "2026-11-18": 11.2,
-  "2026-11-19": 163.83
+  "2026-11-19": 189.02
  }
 }
