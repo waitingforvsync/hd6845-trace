@@ -62,7 +62,6 @@ inh_src     P  8930,15248-15266   ?    the row west of the end pad (8966,15260)
 inh_src     P  8650,17722-17742   ?    the poly west of the pad (8688,17737)
 
 # Piece g7700: the gate on inh_ck's tap row (run 5)
-inh_ck      P  7525,7638-7656    in   the tap row (pad (6427,7648)): row 1 of the gate
 eof_w7777   P  6450,7812-7830    in   row 3 of the gate, on west into lc1's strip (cluster E's undrawn west half)
 eof_w7718   P  7400,7203-7221    ?    the poly row east of the pad (7313,7215)
 eof_w7718   M  7262-7274,7800    ?    the metal south of row 2's pad (7267,7736)

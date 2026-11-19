@@ -435,7 +435,6 @@ driver lies; the other three lead to the loads.
 
 | `inh_ck` | metal | (6098-6112, 6345) | to loads | link E's north end on `tl6`'s metal (6105,6350) |
 | `inh_ck` | metal | (6422-6438, 8072) | in | link E's south end on `lc2`'s piece (`inh_ck`, M 6431,8067); the driver (`inh_ck`'s inverter) lies beyond |
-| `inh_ck` | poly | (7530, 7640-7656) | to loads | the tap's row: on east it is a gate of the undrawn group under the metal x 7550-7600 |
 | `inh_ck` | metal | (6445, 8165-8179) | to loads | link F's west end on `lc2`'s end (6450,8172) |
 | `inh_ck` | metal | (6695, 8360-8374) | in | link F's east end on `trunks`' line S (its end x 6690): the net is `inh_ck` |
 | `rcs_x1` | poly | (5097-5117, 6345) | to loads | from `tl5`'s bus line x 5107 |
@@ -467,7 +466,6 @@ driver lies; the other three lead to the loads.
 | `inh_src` | poly | (8930, 15248-15266) | ? | the row west of the end pad (8966,15260) |
 | `inh_src` | poly | (8650, 17722-17742) | ? | the poly west of the pad (8688,17737) |
 
-| `inh_ck` | poly | (7525, 7638-7656) | in | piece `g7700`: the tap row of piece `tcwa`, row 1 of the gate |
 | `eof_w7777` | poly | (6450, 7812-7830) | in | row 3, on west into `lc1`'s strip (cluster E's undrawn west half) |
 | `eof_w7718` | poly | (7400, 7203-7221) | ? | the poly row east of the pad (7313,7215) |
 | `eof_w7718` | metal | (7262-7274, 7800) | ? | the metal south of the pad (7267,7736) |
