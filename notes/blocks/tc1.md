@@ -1584,3 +1584,7 @@ Round 1: no findings that change a connection.
   bare field up to the top bus field, with only `tc1_m7100`'s and `tc1_o4020`'s metals passing (run 11, one 3.3x view).
 - Top bus field y 2500-2975: all ten tracks drawn (run 11).
 - Far ends of ns3..ns6; `tc1_x1`, `db_b6` (all in the Ports table).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- `tc1_bus2554`, `tc1_bus2684`, `tc1_bus2814` ("a poly from the north") come from `tl6`'s strip: they are `c4l_l3`, `tl4_w5068` (`tl5_w5500`) and `tl6_p6101` (`tlb` run 1; the last still through `tc1`'s own `?M` at (7140-7164, 2597)).

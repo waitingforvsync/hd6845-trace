@@ -1,1 +1,4 @@
 11230,8800:15360,17450  route  write strobes of R12-R15 | wr_r12 to cdp3 row C, wr_r13 to cdp3 row H, wr_r14 to the line into cdp3 row A, wr_r15 to cdp4's 8-bit latch row; nested inside the strobes of R8-R11
+6520,14990:15530,18320  route  read selects of R14-R17 | rsel14_buf..rsel17_buf from the select logic west along the bottom bus (three sets of poly diagonals, four hops) and north to cdp4's selector lines sel1..sel4
+6440,14990:15530,18400  route  buffered selects of R12 and R13 | rsel12_buf and rsel13_buf west along the bottom bus beside the read selects, to tracks x 6452 and 6494
+6680,10040:7615,10400  route  read gates of R12 and R13 | the tracks' north ends onto cdp3's row E and row F gate lines (row C and row H onto bus N)

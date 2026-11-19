@@ -215,3 +215,8 @@ Round 1: no findings that change a connection.
   (`lc1_w7908 M 7466,8800`, open end): drawn on by `busl` (piece `sr`): south to y 8910, a diagonal to
   (7209,9168), down the left bus field at x 7209 and out at (7187,15000) into `bc1`'s ground, no tap. It
   is not `cdp3`'s ground. The poly east of the corner pad is still open.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- Ambiguity 1 ("a poly x 6510-6528 lies under the vertical arm"): that poly is `rst_a` (`eof` run 10, piece `isrc5`).
+- The poly row y 7812-7830 (`lc1_w7170`) is crossed by `lpstb_b`'s track at (6645,7822), read as no contact (`eof`, Ambiguity 37).

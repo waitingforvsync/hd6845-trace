@@ -1230,3 +1230,9 @@ Round 1: no findings that change a connection.
 - `rcs_thin_e`'s row east of x 3533 ends on the pad (3973,6329), whose metal goes south to `ur`'s pad
   (3968,6410) (`tl3` run 11); `tl3_w3982`'s driver "on track J's arm": the arm leads to `tl5_w5936`;
   `tl3_w4763` is `tc1_o3527`.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- `tl1_w3333` ("the wire's source is north of the strips"): it is the net of `tl4`'s latch enable (`tlb` run 1: poly north under the plane, pad (3458,2096), metal y 2098, pad (4540,2098)); no gate is north of the strips.
+- `tl3_w3982`'s driver ("not found"): `eof`'s inverter U4 at (7575,8386) (run 12).
+- `rcs_x1` = NOT `lc1_w7170`, and `lc1_w7170` = NOT `rst_c` (`eof` run 13, piece `rc`, firm): the clear of the step logic's five latches is the reset, two inverters later. Where these notes call its source open, it is found.

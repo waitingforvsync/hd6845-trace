@@ -457,3 +457,9 @@ Round 4: no findings that change a connection.
   untested.
 - **`lc1_w7170`'s driver is found** (`lc3`, run 2b): `lc1_w7170` = NOT `lc3_w9470`, the lower inverter of
   `lc3`'s gate pair; `lc3_w9470` comes from a metal that enters `lc3` at (6450,9455).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- The diagonal bundle's "about nine more lines": drawn since by `eof`: the rows y 7170 (`lpstb_b`), 7214 (`res_b`), 7257 (`rst_a`), 7300 (`tl3_w3982`) with their pads, and the middle row y 6996 with its pad (6146,6997) (`bd1_n2`, to `tl5`'s bus poly x 5412); `rcs_e4`'s by `tla`. Left: the rows y 6953 and 7040.
+- "`lc1_w7040` ... to a pad with a contact (6471,7930)": the metal that stands 25 px south of that pad on the same x (the L at y 7978) is `tl3_w3982`'s, not joined.
+- `lc1_w7928` has one more load: the first of three inverters at x 7416-7606, y 8068-8448 (`eof` run 12), by a poly row y 8040.

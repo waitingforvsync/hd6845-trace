@@ -245,3 +245,7 @@ turn west, at y 17302, 17346, 17388, 17432, and cross the supply rail the same w
   from a contact at (15560,17430) on a metal line that comes up x 15560 from the south
   (not T15, which ended at y 17072).
 - The tracks south of y 17100 and the west-going bundle beyond x 14100.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- Not done, the four strobe tracks south of y 17100: followed by `regs` (run 1: the write strobes of R12-R15 to their rows).

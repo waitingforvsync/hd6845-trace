@@ -7,3 +7,17 @@ wr_r12        P      10835,9522-9544  out  onto cdp3_c_wr (row C's write line); 
 wr_r14        P      10835,8810-8826  out  onto cdp3_l8819 (line into row A)
 wr_r13        P      10835,10699-10719 out onto cdp3_h_wr (row H's write line)
 wr_r15        P      10590,11825-11845 out onto cdp4_ld8b (row R1 lower half's strobe)
+rsel16_buf    M      15388,17290      in   from bd3
+rsel17_buf    M      15431,17290      in   from bd3
+rsel15_buf    M      15474,17290      in   from bd3
+rsel14_buf    M      15517,17290      in   from bd3
+rsel16_buf    M      6661-6675,14990  out  onto busl's cdp4_sel4 track
+rsel17_buf    M      6617-6631,14990  out  onto busl's cdp4_sel3 track
+rsel15_buf    M      6574-6588,14990  out  onto busl's cdp4_sel2 track
+rsel14_buf    M      6531-6545,14990  out  onto busl's cdp4_sel1 track
+rsel12_buf    P      14190-14208,17290 in  from bd3's poly x 14199
+rsel13_buf    P      15502-15522,17490 in  from bd3's poly x 15512
+rsel12_buf    M      6445-6459,14990  out  track x 6452 into busl's region (undrawn there); by the follower it ends on cdp3_gate_e
+rsel13_buf    M      6487-6501,14990  out  track x 6494 into busl's region (undrawn there); by the follower it ends on cdp3_gate_f
+cdp3_gate_e   M      6684-6696,10400  in   track x 6690 from busl's region: believed rsel12_buf
+cdp3_gate_f   M      6727-6739,10400  in   track x 6733 from busl's region: believed rsel13_buf

@@ -485,3 +485,7 @@ x 13806), which means a gap of field or a diffusion edge is being misread there.
 - `trace/bd1.txt`: the gate poly of `inh_src`, `P 13640,15671 x13805 w=20`, lengthened to x 13812 (poly
   orange at x 13806-13809 in the chip-2 metal shot; `eof`'s review round 10; geometry only,
   `tools/sameconn.py HEAD`: connections identical).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- The latch's output `bd1_n2` is drawn to its load (`eof` runs 8 and 14, `busl` run 7): the inverter of `tl4`'s right cluster that makes `rcs_e3`, 23,000 px away, with no other gate on the wire. Line X is the reset copy `rst_a` (`eof` run 10).

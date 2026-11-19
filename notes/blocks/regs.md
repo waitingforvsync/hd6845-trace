@@ -10,7 +10,17 @@ Trace: `trace/regs.txt`. Scratch: `cache/scratch/regs/` (`survey.md`). Started 2
 - `wr_r12`'s join rests on one uncertain item (a `?M`, Ambiguities 1); the other three joins have
   none (`tools/unsure.py` lists only `wr_r12`). `wr_r12` has a contact onto an undrawn structure in
   `bw`'s region, and `wr_r14` possibly one (Ambiguities 1).
-- Not done: the read selects (`rsel14_buf` .. `rsel17_buf`, `rsel12_buf`, `rsel13_buf`), see Not done.
+- **Piece 2, the read selects of R14-R17: traced** (2026-11-19 15:29 -0600). Four wires, no
+  transistor, from `bd3`'s lines (y 17300) to `cdp4`'s four selector lines as `busl` drew them
+  (tracks x 6538-6668, to y 15000). Full extraction: 2374 nets (four more joins), 4351 transistors,
+  0 errors, 0 warnings. No uncertain item on these joins.
+- **Piece 3, the buffered selects of R12 and R13: traced in two parts** (2026-11-19 15:44 -0600). South: from
+  `bd3`'s poly ends along the bottom bus to the tracks x 6452 and x 6494 at y 14990, the south edge
+  of the left bus field (`busl`'s claimed region). North: the same two wires from y 10400 to the
+  west ends of `cdp3`'s read-gate rows `cdp3_gate_e` and `cdp3_gate_f`. **The 4,600 px between
+  (y 10400-15000) are read with the follower and not drawn** (they are `busl`'s): two open joins.
+  Full extraction: 2374 nets, 4351 transistors, 0 errors, 0 warnings (no new net: each part lies on
+  a net that exists).
 
 ## Inventory
 
@@ -23,6 +33,13 @@ Trace: `trace/regs.txt`. Scratch: `cache/scratch/regs/` (`survey.md`). Started 2
 | Nest west and north | x 11245-11463 | the four lines turn north at x 11463 / 11418 / 11375 / 11331, step 88 px west at y 14785 / 14824 / 14868 / 14915, and run north inside `wrs`'s four |
 | Diagonals | (11331,10709)-(10895,10273) `wr_r14`; (11375,10688)-(10938,10251) `wr_r12` | parallel to `wrs`'s; placed by `follow.py --max` in stages, overlay at 1.85x |
 | Ends | pads (10935,9532), (11243,10705), (10893,8819), (11243,11830) | each a metal contact on the east end of a poly row |
+| Read selects: first diagonals | pads (11942,17470), (11984,17514), (12027,17558), (12068,17602) to pads (11592,17730), (11555,17773), (11592,17818), (11552,17862) | four parallel poly diagonals south-west under the clock lines, x + y = 29368, 29434, 29503, 29565 (measured on cuts of the clean shot); order kept (4x, both stripped shots) |
+| Second diagonals | pads (11238,17732), (11282,17776), (11324,17819), (11365,17863) to poly rows y 18036, 18080, 18122, 18166 | x + y = 28956, 29023, 29088, 29153. Six diagonals run here; ours are the upper four (the other two start on pads (11350,17945), (11305,17990)) |
+| Third diagonals | rows y 18036-18166 at x 10333-10400 to pads (10182,18165), (10138,18210), (10182,18252), (10225,18297) | x + y = 28369, 28438, 28501, 28566. **Seven** rows arrive at x 10450: the top one (y 17990, from a pad (10470,17985)) is another wire and takes the pad (10138,18120) and the metal row y 18124; each of ours lands three rows further down than it arrived (3.2x clean, 5x chip-2 stripped) |
+| Straight hops on the rows y 18168, 18212, 18255, 18299 | x 9550-9808; 8382-8638; 7385-7600 | poly between pads under one or two vertical metals; rows straight (1.8x, 3.4x, 2.9x in `metal` and `acid1b`) |
+| Corners and tracks | x 6668, 6626, 6582, 6538, y 16515-18299 | each row turns north (nested: the northernmost row takes the easternmost track) |
+| Vertical hop | y 16168-16558 | poly between pads under the horizontal metal rows y 16260-16480: pads (6668,16210)/(6668,16558), (6624,16168)/(6626,16515), (6581,16210)/(6582,16558), (6538,16168)/(6538,16515); five columns hop here (the fifth, x 6711, is `eof`'s `bd1_n2` track), all straight (2.7x, both shots) |
+| Tracks north | y 15000-16168 | metal to `busl`'s south edge, where `cdp4_sel1`..`4` are drawn; six poly rows cross at y 15070-15190 without a contact |
 | Not drawn: a structure on `wr_r12`'s line | x 11320-11400, y 11740-12350 | Ambiguities 1 |
 
 ## Logic
@@ -42,6 +59,62 @@ in all four (R12 and R14 six bits, R13 and R15 eight). Traced for R13, R14, R15;
 (Ambiguities 1). All of it rests on `sel`'s assignment of select lines to register numbers, as in
 `wrs`.
 
+### The buffered selects of R12 and R13 (piece 3)
+
+| Select | Row after the third diagonals | Track at y 15000 | North end (by the follower through `busl`'s region) |
+|---|---|---|---|
+| `rsel13_buf` | y 18343 | x 6494 | `cdp3_gate_f`, pad (6730,10317): the gates of row F, which pass row H onto bus N |
+| `rsel12_buf` | y 18387 | x 6452 | `cdp3_gate_e`, pad (6730,10055): the gates of row E, which pass row C onto bus N |
+
+Route. `rsel12_buf`: `bd3`'s poly x 14199 ends on a pad (14195,17730); metal row y 17736 west, a
+metal diagonal (13520,17736)-(13262,17994), pad (13212,17993); poly under the vertical trunks to
+pad (12805,17995); metal to the sixth pad of the second diagonals (11305,17990); poly diagonal
+(x + y = 29284) to the poly row y 18250; third diagonal (28698) to pad (10225,18385); metal row
+y 18386 with the three straight hops (pads 9808/9592, 8638/8425, 7558/7385); north on x 6452; the
+vertical hop (pads y 16515 / 16168); north to y 14990. `rsel13_buf`: `bd3`'s poly x 15512 ends on a
+pad (15512,17688); metal row y 17691 west through the rail hop (pads 14672/14456), a metal diagonal
+(13501,17692)-(13241,17952), pad (13168,17950); poly to pad (12850,17950); metal to the fifth pad
+(11350,17946); poly west to x 11271 and diagonal (29219) to the row y 18208; third diagonal (28632)
+to pad (10267,18340); metal row y 18342 (pads 9764/9550, 8597/8382, 7600/7428); north on x 6494;
+vertical hop (y 16558 / 16210); north to y 14990.
+
+The stretch not drawn, as the follower gives it (`follow.py X 15500 N`, both chips; one 4x view of
+the corners at y 12050-12170, `q5.png`): x 6452 north to (6454,12986), east to (6516,12979), north
+to (6521,12099), east along y 12095 **on top of `busl`'s poly row `cdp4_bus_s2`** (no pad, no
+contact seen: trap 13), a corner north at x 6690, and north to y 10400. x 6494 north to
+(6501,13024), east to (6565,13023), north to (6562,12141), east along y 12140, north at x 6735 to
+y 10400. **Each track has one tap on the way** (found by review round 4, confirmed by `textmap.py`:
+a bright centre, red 176-220, in a dark ring about 34 px across in both metal shots, on a widened
+poly pad): track x 6494 (`rsel13_buf`) at (6492,13744), the west end of the poly row y 13744, and
+track x 6452 (`rsel12_buf`) at (6450,13852), the west end of the poly row y 13852. Both rows run
+east to about x 7545 beside the four `cdp4_sel` rows and, by `busl`'s notes, end as gate bands in
+the gate group at `cdp4`'s bottom-left corner (not read here). So that group takes six select
+rows (R12-R17's), not four. North of y 10400 (drawn): x 6690 steps east at y 10270 to x 6733 and ends on the pad
+(6730,10055); x 6733 ends on the pad (6730,10317); each pad's poly row runs east to `cdp3`'s edge
+(x 7600) under about twenty vertical metals without a pad (1.36x, both stripped shots).
+
+So, **if the middle stretch is as the follower gives it: R12's buffered select reads row C and
+R13's reads row H onto bus N**, the same rows their write strobes end on (piece 1): R12 = row C
+and R13 = row H from two independent directions, which also supports the marked `wr_r12` join.
+Marked, not firm: the two joins are open until the middle is drawn.
+
+### The read selects (piece 2)
+
+| Select | Row after the third diagonals | Track | Joins | Selector source (`cdp4`) |
+|---|---|---|---|---|
+| `rsel16_buf` | y 18168 | x 6668 | `cdp4_sel4` | c: the 6-bit latch row D (s2..s7) |
+| `rsel17_buf` | y 18212 | x 6626 | `cdp4_sel3` | d: the 8-bit latch row C |
+| `rsel15_buf` | y 18255 | x 6582 | `cdp4_sel2` | b: the 8-bit latch row R1, lower half |
+| `rsel14_buf` | y 18299 | x 6538 | `cdp4_sel1` | a: the 6-bit source from above row R1 (s2..s7) |
+
+So **`cdp4`'s four-way selector is the read multiplexer of R14-R17** (traced: the four joins).
+Two things agree with it that were found separately: the widths (R14 and R16 six bits, R15 and R17
+eight), and R15, whose write strobe `wr_r15` ends on the same latch row (R1, lower half) that
+`rsel15_buf` selects for reading. Rows C and D, loaded together by `bc1_ld_n` (`busl`), are then
+R17 and R16, the light pen register (believed, from the data sheet: read only, 14 bits latched by
+one event). The 6-bit source a is R14 as read; that it is `cdp3`'s row A, which `wr_r14` strobes,
+is not traced (`cdp4` row R1's upper half).
+
 `cdp3`'s notes had `cdp3_h_wr` running "on east past x 10990 without a contact": it ends on the
 pad (11243,10705). `cdp4`'s strobe row (`cdp4_ld8b`, drawn there to x 10600, "ends not examined")
 is one poly row y 11824-11844 east to the pad (11243,11830) (`tl5_tracks.py rows` in the clean
@@ -59,6 +132,17 @@ shot: poly all the way, field on both sides).
 | `wr_r14` | poly | 10835,8818 | out | onto `cdp3_l8819` |
 | `wr_r13` | poly | 10835,10709 | out | onto `cdp3_h_wr` |
 | `wr_r15` | poly | 10590,11835 | out | onto `cdp4_ld8b` |
+| `rsel16_buf`, `rsel17_buf`, `rsel15_buf`, `rsel14_buf` | metal | (15388 / 15431 / 15474 / 15517, 17290) | in | from `bd3`'s lines |
+| `rsel16_buf` | metal | 6668,14990 | out | onto `busl`'s `cdp4_sel4` |
+| `rsel17_buf` | metal | 6624,14990 | out | onto `cdp4_sel3` |
+| `rsel15_buf` | metal | 6581,14990 | out | onto `cdp4_sel2` |
+| `rsel14_buf` | metal | 6538,14990 | out | onto `cdp4_sel1` |
+| `rsel12_buf` | poly | 14199,17290 | in | from `bd3`'s poly |
+| `rsel13_buf` | poly | 15512,17490 | in | from `bd3`'s poly |
+| `rsel12_buf` | metal | 6452,14990 | out | into `busl`'s region: track x 6452, undrawn there |
+| `rsel13_buf` | metal | 6494,14990 | out | into `busl`'s region: track x 6494, undrawn there |
+| `cdp3_gate_e` | metal | 6690,10400 | in | from `busl`'s region: believed `rsel12_buf` |
+| `cdp3_gate_f` | metal | 6733,10400 | in | from `busl`'s region: believed `rsel13_buf` |
 
 ## Ambiguities
 
@@ -93,6 +177,12 @@ shot: poly all the way, field on both sides).
    y 11748). Either way `wr_r12` reaches row C's write line by its own metal; what would settle
    the rest is tracing the two units, the strip east along y 11748 and the contact column at
    x 10540 (`bw`).
+2. **Green stretches under the read selects' tracks** (`tl5_tracks.py v`): (6538, 16115-16150),
+   35 px, just north of the hop's pad, where the clean shot has interference colours over an area
+   wider than the track; (6626, 17203-17436) and (6626, 17456-17528), (6668, 17446-17496), far too
+   long for contacts. Read as not contacts; no pad or ring in the metal shot at 2.7x for the first.
+   The same value at x 6917 on all four rows (8-9 px) is one vertical feature beneath, not four
+   contacts.
 
 ## Review
 
@@ -119,7 +209,7 @@ Findings:
 extraction does not change; the finding still counts, because a contact was added).
 Round 1: three findings, fixed (one contact added, one marked uncertain, one geometry).
 
-**Round 2, fix check, 2026-11-19 15:30 -0600** (fresh Fable reviewer; the changes since 8e1aa03, at
+**Round 2, fix check, 2026-11-19 15:20 -0600** (fresh Fable reviewer; the changes since 8e1aa03, at
 commit 81387d1; three images in `cache/scratch/regs/review-2/`). Change 1 (contact on `wr_r12`):
 right; bright centre red 214-229 in both metal shots, green hole red minus green -9 to -18 (the
 pad (11243,11830) reads -8 to -25), box is poly as drawn. Change 2 (`?C` on `wr_r14`): uncertain is
@@ -131,17 +221,48 @@ metal on x 11331. `tools/t.sh regs sameconn.py 8e1aa03`: `connections identical`
 against 81387d1: both `connections identical` again.
 Round 2: no findings that change a connection.
 
+**Round 3, full review of piece 2, 2026-11-19 15:35 -0600** (fresh Fable reviewer; the four read selects, at
+commit 1c5b259; 28 images in `cache/scratch/regs/review-3/`). Told to suspect: the third diagonals
+(seven rows, an off-by-one), the second and first diagonals, every straight hop, the vertical hop,
+the corners, the tracks to y 14990 and the green stretches of Ambiguities 2, the ends on `bd3`'s and
+`busl`'s metals, missed taps. Checked: the third diagonals at 4x in `acid1b` and `acid` (five
+separate bands to five pads, ours bands 2-5, no off-by-one); the poly rows x 10440-10920 on 13
+cuts; the second diagonals at 2.8-4x (six from six pads, ours the upper four); the first diagonals
+at 2.4x in three shots (separate in the chip-2 stripped shot, where the debris is absent); all hops
+at 2-4x with text rows; the vertical hop at 2.8x; the corners; `tl5_tracks.py` on every straight
+metal piece (no stretch over 18 px without metal in both chips); the green stretches (interference
+colour, unbroken metal, no ring); no taps (about 1x metal); both ends. Not checked: the second
+diagonals under metal at 4x except one passage; the long runs at high zoom; `metal1` as an image.
+Round 3: no findings.
+
+**Round 4, full review of piece 3, 2026-11-19 15:53 -0600** (fresh Fable reviewer; at commit 49ae634; images
+in `cache/scratch/regs/review-4/`). Told to suspect: which wire is which through the second and
+third diagonals, the two metal diagonals, every hop, the two poly columns from `bd3`, the undrawn
+middle stretch, the north ends, missed taps and the green stretches. Checked at 4-4.6x in two or
+three shots: the poly columns (contacts only at the end pads), the rail hop, the second and third
+diagonals (no band swapped or shared), the three row hops and the vertical hop, the north ends
+(both pads are contacts; the step at y 10270 is 10 px clear of the lower pad; rows continuous to
+x 7615, no pad); at 2.8-3.1x the trunk cross-under and the metal diagonals; the green stretches (no
+ring). Not checked: the north rows above 2.8x; the long runs except by `tl5_tracks.py`.
+Drawn geometry: no findings. The undrawn middle stretch (notes only): the route holds, and
+1. two taps were missing from the notes: (6492,13744) on `rsel13_buf`'s track and (6450,13852) on
+   `rsel12_buf`'s, each the west end pad of a poly row toward `cdp4`'s corner gate group. A
+   connection, in geometry this package does not draw (`busl`'s region). Confirmed by the tracer
+   (`textmap.py 6470 13724 6518 13766`, `6428 13832 6476 13872`); the notes' Logic now has them and
+   the handoff carries them to `busl`. No trace line changed:
+   `tools/t.sh regs sameconn.py 49ae634`: `connections identical`;
+   `.venv/bin/python tools/sameconn.py 49ae634`: `connections identical`.
+Round 4: no findings that change a connection.
+
 ## Not done
 
-- The read selects. `rsel16_buf`, `rsel17_buf`, `rsel15_buf`, `rsel14_buf` (bd3's lines at
-  x 15388, 15431, 15474, 15517, y 17300) turn west at y 17475, 17519, 17562, 17604 (`follow.py`),
-  cross both hops like the strobes (pads east 14714 / 14672, west 14497 / 14456; 13386 / 13430 and
-  12805 / 12850; seen in the same views, not drawn), and end on pads at about (11955,17470),
-  (11998,17515), (12040,17560), (12085,17605). From each a poly diagonal runs south-west under the
-  clock lines to a pad at about x 11450-11520 on the rows y 17725, 17770, 17815, 17860; metal rows
-  go on west from those to pads at x 11240-11375 and further poly diagonals south-west (one 1.28x
-  view, `r1.png`; which diagonal lands on which row is not read).
-- `rsel12_buf` (poly x 14199, south of y 17320) and `rsel13_buf` (poly x 15512, south of y 17700):
-  `bd3`'s ends, not followed.
+- **The two open joins**: `rsel12_buf` (6452,14990) to `cdp3_gate_e` (6690,10400) and `rsel13_buf`
+  (6494,14990) to `cdp3_gate_f` (6733,10400), through `busl`'s claimed region; route in Logic.
+- The wire of the seventh row: from a pad (10470,17985), poly row y 17990, first of the third
+  diagonals, pad (10138,18120), metal row y 18124 west through the same hops to x 6708 and (by the
+  follower) north on x 6711, which is `eof`'s `bd1_n2` track (drawn there from y 15000 to 16185).
+  Not ours; seen, not drawn. A ninth row y 17648 crosses the rail hop too (west pad (14500,17648),
+  west end (13316,17803)): not followed.
 - The structure of Ambiguities 1.
-- `cdp3_l8819`'s branches into the row A cells (`cdp3` (continue)).
+- `cdp3_l8819`'s branches into the row A cells (`cdp3` (continue)); the source of `cdp4`'s 6-bit
+  input a (`cdp4` (continue)).

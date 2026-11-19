@@ -1285,3 +1285,10 @@ Round 11: no findings that change a connection.
   4-bit counter's L3 line `c4l_l3` (`tl3` run 11).
 - `rst_a` (the clear of four latches) is a buffered copy of the reset NOR(`lpstb_b`, `res_b`)
   (`rst_a`; `eof` run 2).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- The enable's poly north of y 2500 ("seen to y ~2165") ends on the pad (4540,2098) and is one net with the data of `tl1`'s third latch (the row y 3333 of `tl1`; `tlb` run 1, firm; also the enable of `tl5`'s latch b).
+- The input of the inverter that makes `rcs_e3` (the row y 3850; "the south bus line x 5412, not followed") **is `bd1_n2`, the output of `bd1`'s latch on R4's match** (`eof` run 14, piece `n2n`, and `busl` run 7, piece `n2`: drawn end to end, no uncertain item on the join): `rcs_e3` = NOT `bd1_n2`.
+- The signal on track A / line X / the first through line of the left-centre strips, which these notes call a clock, a strobe "once per scan line" or leave without a source, **is the reset**: `rst_a`, the buffered copy of `rst` = NOR(`lpstb_b`, `res_b`) made by `lc1`'s gate 5 (`eof` run 10, piece `isrc5`, firm). `inh_ck`, `inh_rc` and `inh_lat` are further buffered copies of it: high while the RES and LPSTB pins are both low, and only then. The belief "a strobe once per scan line" is withdrawn.
+- `rcs_x1` = NOT `lc1_w7170`, and `lc1_w7170` = NOT `rst_c` (`eof` run 13, piece `rc`, firm): the clear of the step logic's five latches is the reset, two inverters later. Where these notes call its source open, it is found.

@@ -275,3 +275,7 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
   c3, by line g (`cdp3_g_c2`, `cdp3_g_c3`; `busl`, piece `d6`).
 - `cdp4_ld8b` ("ends not examined"): the row does not enter the left bus field; its west end is at about
   x 7603-7640, y 11825-11850, under the metal x 7600-7645 (`busl`, run 6).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- The strobe of row R1's lower half ("ends not examined") runs east as one poly row y 11824-11844 to a pad (11243,11830) on the write strobe of R15 (`regs` run 1, firm): **row R1's lower half is R15**. Its west end is at about (7603-7640, 11825-11850) (`busl` run 6).
