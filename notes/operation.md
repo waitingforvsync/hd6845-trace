@@ -157,6 +157,7 @@ lines of `rc`, `hsw` and `sl`, the registers, the outputs).
 | R3's high nibble is the four-slice block `amr` (bits 4-7 from data bits 4-7 on `wr_r3`), so every data bit writes R3, as the datasheet's R3. | Firm for the latch equations and the data joins (`notes/blocks/amr.md`) |
 | R10 (central datapath `cdp2` row C, bits 0-6) and R11 (row A, bits 0-4) take their data from the data bus (`notes/blocks/rde.md`). | Firm for bits 5 and 6; marked for bits 0-4 (AMB-019) |
 | R12-R15 (start address, cursor), R16/R17 (light pen), the status register. | Open beyond their strobe gates |
+| The 8-bit register row H of the central datapath (`cdp3`; which register it is: open) sends each bit's inverted output `cdp3_hw_c#` west across the left bus field to one row of the left array: c7 to the row at y 11338, then one row further south per bit (477 px apart) down to c0 at y 14894 (`notes/blocks/busl.md`, piece `h8`). What those rows do with the bit is not traced (`larr`). Believed: the low byte of a 14-bit address register entering eight rows of the memory address counter. | Firm for the eight joins (no uncertain item on them; one review round, no findings); the register cell behind them is marked as before |
 | Which nibble of R3 the 4-bit row is: the low one (bits 0-3, horizontal sync width). Its four data lines are the data bus lines of bits 0-3 (`notes/blocks/r3d.md`). | Firm for the joins; the bit numbers of the data lines rest on the register-width match (`notes/blocks/bust.md`) |
 
 ## Comparators

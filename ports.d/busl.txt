@@ -1,0 +1,21 @@
+# busl: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+# The package's claimed region is x 4780-7550, y 10400-15000 (the main part of the left bus field).
+# Kept in step with the Ports table of notes/blocks/busl.md.
+
+# Piece h8: register row H's eight west outputs (cdp3_hw_c#), driven in cdp3
+cdp3_hw_c7  P  7600,10352-10370   in  joins cdp3's channel G west piece of c7 (its file starts it at x 7600)
+cdp3_hw_c6  P  7600,10395-10413   in  cdp3's west piece of c6
+cdp3_hw_c5  P  7600,10438-10456   in  cdp3's west piece of c5
+cdp3_hw_c4  P  7600,10481-10499   in  cdp3's west piece of c4
+cdp3_hw_c3  P  7600,10526-10544   in  cdp3's west piece of c3
+cdp3_hw_c2  P  7600,10568-10586   in  cdp3's west piece of c2
+cdp3_hw_c1  P  7600,10612-10630   in  cdp3's west piece of c1
+cdp3_hw_c0  P  7600,10655-10673   in  cdp3's west piece of c0
+cdp3_hw_c7  D  4780,11328-11348   in  diffusion row on west into the left array (larr's untraced x 3900-4720); the row at y 11338
+cdp3_hw_c6  D  4780,11805-11825   in  diffusion row on west into the left array, y 11815
+cdp3_hw_c5  D  4780,12281-12301   in  diffusion row on west into the left array, y 12291
+cdp3_hw_c4  D  4780,12758-12778   in  diffusion row on west into the left array, y 12768
+cdp3_hw_c3  D  4780,13237-13257   in  diffusion row on west into the left array, y 13247
+cdp3_hw_c2  D  4780,13715-13735   in  diffusion row on west into the left array, y 13725
+cdp3_hw_c1  D  4780,14192-14212   in  diffusion row on west into the left array, y 14202
+cdp3_hw_c0  D  4780,14884-14904   in  diffusion row on west into the left array, y 14894

@@ -1190,7 +1190,7 @@ there).
 - `dbus_do0_in` west of (16950,16712) (metal; see its section) and `d1_out_n` west of
   (16950,16344) (poly): both drivers are outside the region.
 - `d6_out_n`, `d7_out_n`: not drawn, and not in this region: both leave their pad cells
-  south of y 17000 (`busC`'s area). Seen in run 5 (`s5_d67cell.png`, 2.6x, both stripped
+  south of y 17000 (`busc`'s area). Seen in run 5 (`s5_d67cell.png`, 2.6x, both stripped
   shots): D6's poly comes west out of its cell along y 17331-17353 to a pad (17600,17340)
   with a contact, and a metal runs SOUTH from the pad to (17600,18084)
   (`tools/follow.py 17601 17370 S`; nothing goes north); D7's comes west along
@@ -1205,7 +1205,7 @@ there).
   between the end pads of `d2_out_n`..`d5_out_n` (about (16862,15990), (16905,16125),
   (16950,16255)), on or west of the region's edge.
 - `d_hiz`'s driver: not in this region (run 7: no tap between y 7374 and 17000). The lead
-  is the metal that leaves it west at (17630,17085), in `busC`'s area.
+  is the metal that leaves it west at (17630,17085), in `busc`'s area.
 - `dbus_le` west of x 16950: drawn to the region's edge only; its eight taps and its
   south-west end (16772,15800).
 - Ambiguity 9 (the box beside `d6_in`'s metal; AMB-021): read twice now (runs 3 and 7),
@@ -1213,7 +1213,7 @@ there).
   photo or by behaviour, not by another look.
 
 **Inside the region nothing else is left** (run 7): every other item above leaves it, to
-`dlat`, `busC` or `bd2` (rest).
+`dlat`, `busc` or `bd2` (rest).
 
 ## Note (coordinator, from the handoffs of 2026-11-17/18)
 

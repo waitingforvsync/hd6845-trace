@@ -1935,3 +1935,22 @@ firm, unchanged since `eof`'s run 3); the `inh_src` row now gives the equation o
 
 **`out/`** rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 630 floor-plan blocks.
 Coverage: 63.3% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
+
+## 2026-11-19 13:50  Bus-field packages renamed to lower case
+
+At the user's request ("please sort out the issue with busL"). `tools/claim.py` accepts only lower-case
+prefixes, and the master list named four packages with a capital, so none of them could be claimed
+(found when `/trace6845` tried to take the queue's second row). A prefix names files and a branch,
+which must not differ only by case, so the names changed, not the tool:
+
+- busL -> `busl`, busB -> `busb`, busC -> `busc`, busT -> `bustop` (`bust` is taken: the contributor
+  package that did busT's data bus part).
+- Changed in `notes/work-packages.md` (with a paragraph on the rule), `floorplan.txt`,
+  `notes/blocks/bust.md`, `dbus.md`, `dpad.md` and a comment in `trace/bust.txt`. Left as written:
+  earlier journal entries, `notes/blocks/eof.md` (one mention; `eof` is claimed and being edited)
+  and the waiting handoff.
+- `out/` rebuilt: 2,382 nets, 4,290 transistors, 0 errors, 0 warnings (this takes in `eof`'s run 5,
+  whose handoff `handoffs/eof-20261119-133240-431bea8.md` is still to be applied).
+
+**Handoffs:** one waiting (`eof` run 5). **Claims:** `eof` (tom-seddon), `tlb` (this session; to be
+released for `busl`, which the user wants done next).
