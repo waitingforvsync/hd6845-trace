@@ -455,7 +455,7 @@ M 4779,8160 y8238 w=48
 M 4755,8205:4892,8270
 M 4840,8205:4892,8350
 M 4840,8324:4980,8370                       # round 11: west of the middle rail this block ends at y 8368
-M 4952,8324 y8770 w=56                      # the middle rail (drawn to y 8770: it runs on south)
+M 4952,8324 y8770 w=56                      # the middle rail (on south: gate K3's section)
 N M 4952,8500 vcc
 M 4954,8160 y8283 w=52
 M 4928,8228:5150,8283
@@ -464,7 +464,7 @@ M 5084,8368:5150,8770                       # round 11: from y 8368 it is wider,
 N M 5127,8500 vss
 M 4668,8067:4712,8348
 M 4666,8300:4803,8348
-M 4777,8300 y8770 w=50                      # the west rail (drawn to y 8770: it runs on south)
+M 4777,8300 y8770 w=50                      # the west rail (on south: gate K3's section)
 N M 4777,8500 vss
 # -- latch K (x 4578-4985, y 8350-8750): two AND-OR-INVERT gates, cross-coupled:
 #      lc2_w8552 = NOT( lc2_w8475 AND lc2_w8298  OR  lc2_w8725  OR  lc2_w8450 )   (gate K1, y 8350-8615)
@@ -482,7 +482,7 @@ D 4588,8354:4756,8424                       # a large open diffusion west of the
 ?D 4702,8444:4756,8540                      # the column seems to run on west of the rail to x 4702 (chip-2 stripped: diffusion-like above row 1, mixed between the rows): uncertain; it only widens the two channels
 P 4634,8459:4664,8490                       # row 1's pad, on the thin metal x 4641-4655
 C 4648,8474
-M 4648,8468 y8700 w=14                      # that thin metal south, through K2's row a's pad (drawn to y 8700: it runs on)
+M 4648,8468 y8700 w=14                      # that thin metal south, through K2's row a's pad (on south: gate K3's section)
 P 4660,8466:4812,8490                       # row 1: across the column, under the rail; ends at the rail's east edge
 N P 4720,8478 lc2_w8475
 M 4562,8330 y8700 w=18                      # track C south, through the pad of row 2 (drawn to y 8700: it runs on)
@@ -548,7 +548,7 @@ D 4716,8712:4756,8745                       # and west of the rail to the output
 P 4706,8711:4736,8747                       # output box
 B 4704,8709:4738,8749
 P 4622,8726:4710,8744                       # from it a poly west and then south (drawn to y 8770: it runs on to the row y 8813-8829)
-P 4622,8726:4640,8770
+P 4622,8726:4640,8770                       # (on south: gate K3's section)
 # K2's third pull-down: finger of the VSS node east at y 8606-8628, tongue down to the open diffusion, K1's load
 # poly's end across it (x 4832-4876, y 8630-8658)
 D 4796,8606:4868,8628
@@ -563,3 +563,44 @@ D 4930,8665:4985,8745
 C 4948,8689
 P 4842,8677:4876,8703
 B 4840,8673:4874,8707
+
+# -- gate K3 (x 4620-4985, y 8760-8945): lc2_w8857 = NOT( lc2_w8930 AND ( lc2_w8725 OR lc2_w8475 ) )
+# Under the west rail (railprof.py 4758 4796 8750 9245), which is wider here (x 4741-4812 from y 8800): VSS box
+# y 8773-8805, row c y 8812-8825, node N y 8835-8860, row d y 8867-8889, box S y 8890-8940 (VSS again). N runs on east
+# under the rail's east part (E, x 4785-4816, to y 8900); a vertical poly strip x 4818-4838 lies between E and an open
+# diffusion X (x 4842-4866), which has the load. Views z1-z7; survey.md.
+M 4777,8770 y8960 w=50                      # the west rail on south (drawn to y 8960)
+M 4741,8800:4812,8960                       # ... wider from y 8800
+M 4952,8770 y8960 w=56                      # the middle rail on south (drawn to y 8960)
+D 4752,8762:4798,8806                       # VSS box
+C 4768,8780
+D 4737,8800:4780,8940                       # the column under the rail
+C 4752,8908                                 # box S: VSS
+D 4772,8836:4816,8854                       # node N east ...
+D 4802,8836:4816,8900                       # ... and down the rail's east part (E)
+P 4622,8770 y8820 w=18                      # K2's output poly on south (x 4622-4640) ...
+P 4622,8810:4797,8829                       # ... and east as row c; it ends at x 4797
+P 4634,8850:4666,8880                       # row d's pad, on the thin metal x 4641-4655 (lc2_w8475)
+C 4649,8865
+M 4648,8700 y8880 w=14                      # that thin metal on south (drawn to y 8880: it runs on)
+P 4660,8855:4752,8880                       # row d; under the rail it steps down ...
+P 4746,8864:4798,8890                       # ... and ends in a hook up the column's east side
+N M 4648,8800 lc2_w8475
+# the strip and X
+P 4818,8812:4838,8950                       # the vertical poly strip (drawn to y 8950: it runs on south)
+N P 4828,8930 lc2_w8930
+D 4810,8838:4848,8880                       # the diffusion under it, from E to X
+D 4842,8805:4866,8880                       # X
+D 4842,8805:4896,8834                       # ... and under the tie box
+?D 4894,8805:4932,8836                      # the poly east of the tie box is as red as the plate below (clean shot; px.py col 4912): a second strip of the load, uncertain (it only strengthens the load)
+# load: one poly: tie box, the plate over the strip y 8846-8868, and the pad (4882,8890) of a thin metal that runs south
+P 4866,8803:4925,8838
+B 4863,8801:4898,8836
+P 4868,8836:4925,8876
+D 4862,8846:4932,8868
+D 4930,8805:4985,8885
+C 4946,8830
+P 4868,8872:4900,8904
+C 4882,8890
+M 4882,8884 y8908 x4866 y8975 w=14          # the output's thin metal south (drawn to y 8975; it ends on a pad (4862,8998))
+N M 4866,8940 lc2_w8857
