@@ -64,15 +64,7 @@ export class PhotoViewer {
     this.canvasBox = document.createElement('div');
     this.canvasBox.className = 'pv-canvas';
     el.appendChild(this.canvasBox);
-    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, preserveDrawingBuffer: true });
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-    this.renderer.setClearColor(0x14130f, 1);
-    this.canvasBox.appendChild(this.renderer.domElement);
-    this.scene = new THREE.Scene();
-    this.camera = new THREE.OrthographicCamera(-1, 1, -1, 1, -10, 10);
-    this.overlay = new THREE.Group();
-    this.tiles = tiles.map((t, i) => this._tile(t, i));
-    this.scene.add(this.overlay);
+    this._gfx(tiles);
     this.noteLayer = document.createElement('div');
     this.noteLayer.className = 'pv-notes';
     el.appendChild(this.noteLayer);
@@ -92,6 +84,18 @@ export class PhotoViewer {
     this._loop = this._loop.bind(this);
     this.dirty = true;
     requestAnimationFrame(this._loop);
+  }
+
+  _gfx(tiles) {
+    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, preserveDrawingBuffer: true });
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    this.renderer.setClearColor(0x14130f, 1);
+    this.canvasBox.appendChild(this.renderer.domElement);
+    this.scene = new THREE.Scene();
+    this.camera = new THREE.OrthographicCamera(-1, 1, -1, 1, -10, 10);
+    this.overlay = new THREE.Group();
+    this.tiles = tiles.map((t, i) => this._tile(t, i));
+    this.scene.add(this.overlay);
   }
 
   _tile(t, i) {
@@ -270,8 +274,7 @@ export class PhotoViewer {
     requestAnimationFrame(this._loop);
   }
 
-  _draw() {
-    const aspect = this.h / this.w, hh = this.half * aspect;
+  _render(hh) {
     Object.assign(this.camera, { left: this.cx - this.half, right: this.cx + this.half, top: this.cy - hh, bottom: this.cy + hh });
     this.camera.updateProjectionMatrix();
     const z = this.pxPerDie;
@@ -296,6 +299,11 @@ export class PhotoViewer {
       t.curA = t.curB = null; t.mat.uniforms.tA.value = t.mat.uniforms.tB.value = null; t.mesh.visible = false;
     }
     this.renderer.render(this.scene, this.camera);
+  }
+
+  _draw() {
+    const aspect = this.h / this.w, hh = this.half * aspect;
+    this._render(hh);
     // notes
     for (const n of this.notes) {
       const sx = ((n.x - (this.cx - this.half)) / (2 * this.half)) * this.w;
@@ -306,5 +314,93 @@ export class PhotoViewer {
       n.el.style.transform = `translate(${Math.min(sx, Math.max(0, this.w - nw))}px, ${sy}px)`;
     }
     if (this.onView) this.onView(this);
+  }
+}
+
+
+/**
+ * The same viewer drawn with a 2D canvas, for machines where WebGL cannot start (an old integrated
+ * GPU, a blocked or disabled driver). Photographs and the tracing overlay work; only the fades are
+ * approximate.
+ */
+const imgCache = new Map();
+function image(url, onLoad) {
+  let e = imgCache.get(url);
+  if (!e) {
+    e = { img: new Image(), loaded: false, cbs: [] };
+    e.img.onload = () => { e.loaded = true; e.cbs.splice(0).forEach(f => f()); };
+    e.img.src = url;
+    imgCache.set(url, e);
+  }
+  if (onLoad && !e.loaded) e.cbs.push(onLoad);
+  return e;
+}
+const cssColour = c => (typeof c === 'number' ? '#' + c.toString(16).padStart(6, '0') : c);
+
+export class PhotoViewer2D extends PhotoViewer {
+  _gfx(tiles) {
+    const canvas = document.createElement('canvas');
+    this.ctx = canvas.getContext('2d');
+    if (!this.ctx) throw new Error('no 2D canvas either');
+    const self = this;
+    this.renderer = { domElement: canvas, setSize(w, h) {
+      const r = Math.min(window.devicePixelRatio || 1, 2); self.dpr = r;
+      canvas.width = Math.round(w * r); canvas.height = Math.round(h * r);
+    } };
+    this.canvasBox.appendChild(canvas);
+    this.dpr = 1; this.dim = 1;
+    this.tiles = tiles.map(t => ({ def: t, opacity: 1, curA: null, curB: null, used: 0, mat: { uniforms: {} }, mesh: {} }));
+    this.overlay = null;
+  }
+  setShots(a, b = a, mix = 0) { this.shots = [a, b]; this.mixv = mix; this.dirty = true; }
+  setMix(m) { this.mixv = m; this.dirty = true; }
+  setDim(d) { this.dim = d; this.dirty = true; }
+  setOverlay(polys) {
+    this.items = [];
+    const [ox, oy] = this.origin;
+    polys.forEach((p, i) => {
+      const abs = p.pts.map(([x, y]) => [x + ox, y + oy]);
+      const path = new Path2D();
+      abs.forEach(([x, y], k) => (k ? path.lineTo(x, y) : path.moveTo(x, y)));
+      path.closePath();
+      this.items.push({ ...p, fill: { visible: true }, abs, path, i });
+    });
+    this.restyle();
+  }
+  restyle() {
+    for (const it of this.items) { it.style = this.overlayStyle(it.meta, it); it.fill.visible = !!it.style; }
+    this.dirty = true;
+  }
+  _render(hh) {
+    const c = this.ctx, k = (this.w / (2 * this.half)) * this.dpr, z = this.pxPerDie;
+    c.setTransform(1, 0, 0, 1, 0, 0);
+    c.fillStyle = '#14130f'; c.fillRect(0, 0, c.canvas.width, c.canvas.height);
+    c.setTransform(k, 0, 0, k, -(this.cx - this.half) * k, -(this.cy - hh) * k);
+    c.imageSmoothingEnabled = true; c.imageSmoothingQuality = 'high';
+    const left = this.cx - this.half, right = this.cx + this.half, top = this.cy - hh, bottom = this.cy + hh;
+    const live = [];
+    for (const t of this.tiles) {
+      const d = t.def, f = d.fade;
+      const o = f ? Math.min(1, Math.max(0, (z - f[0]) / (f[1] - f[0]))) : 1;
+      if (o <= 0.001 || d.x > right || d.x + d.w < left || d.y > bottom || d.y + d.h < top) continue;
+      t.used = performance.now(); live.push(t);
+      const ea = image(this.urlFor(t, this.shots[0]), () => (this.dirty = true));
+      const eb = image(this.urlFor(t, this.shots[1]), () => (this.dirty = true));
+      t.curA = this.urlFor(t, this.shots[0]); t.curB = this.urlFor(t, this.shots[1]);
+      if (!ea.loaded || (this.mixv > 0 && !eb.loaded)) continue;
+      c.globalAlpha = o; c.drawImage(ea.img, d.x, d.y, d.w, d.h);
+      if (this.mixv > 0 && eb.loaded) { c.globalAlpha = o * this.mixv; c.drawImage(eb.img, d.x, d.y, d.w, d.h); }
+    }
+    c.globalAlpha = 1;
+    if (this.dim < 1) { c.fillStyle = `rgba(0,0,0,${1 - this.dim})`; c.fillRect(left, top, right - left, bottom - top); }
+    // keep memory bounded: forget the images of the least recently seen tiles
+    const held = this.tiles.filter(t => t.def.lazy && t.curA).sort((p, q) => q.used - p.used);
+    for (const t of held.slice(10)) { imgCache.delete(t.curA); imgCache.delete(t.curB); t.curA = t.curB = null; }
+    for (const it of [...this.items].sort((p, q) => (p.meta.order || 0) - (q.meta.order || 0))) {
+      const s = it.style; if (!s) continue;
+      c.globalAlpha = s.opacity; c.fillStyle = cssColour(s.color); c.fill(it.path);
+      c.globalAlpha = s.outline ?? 1; c.strokeStyle = cssColour(s.outlineColor ?? s.color); c.lineWidth = 1.5 / z; c.stroke(it.path);
+    }
+    c.globalAlpha = 1;
   }
 }

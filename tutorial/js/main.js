@@ -4,7 +4,7 @@ import { buildSteps } from './steps.js';
 
 const $ = id => document.getElementById(id);
 // three.js comes from a CDN. If it cannot load, the viewers say so and everything else still works.
-let THREE, PhotoViewer, StackViewer, LAYER_COLOUR, pointInRing;
+let THREE, PhotoViewer, PhotoViewer2D, StackViewer, LAYER_COLOUR, pointInRing;
 const LAYER_NAME = { M: 'Metal', P: 'Poly', D: 'Diffusion', C: 'Metal contact', B: 'Buried contact', T: 'Transistor channel' };
 class Stub {
   constructor(el, why) {
@@ -17,7 +17,7 @@ class Stub {
 }
 try {
   THREE = await import('three');
-  ({ PhotoViewer, LAYER_COLOUR, pointInRing } = await import('./photo.js'));
+  ({ PhotoViewer, PhotoViewer2D, LAYER_COLOUR, pointInRing } = await import('./photo.js'));
   ({ StackViewer } = await import('./stack.js'));
 } catch (err) {
   console.warn('three.js unavailable:', err);
@@ -29,7 +29,15 @@ try {
 const guard = C => C === Stub ? C : function (el, o) {
   try { return new C(el, o); } catch (err) { console.warn('viewer failed:', err); return new Stub(el, String(err && err.message || err).split('\n')[0]); }
 };
-PhotoViewer = guard(PhotoViewer); StackViewer = guard(StackViewer);
+// No WebGL: the photo views fall back to a 2D canvas; the 3D stacks say they cannot start.
+const guardPhoto = C => C === Stub ? C : function (el, o) {
+  try { if (/[?&]canvas2d\b/.test(location.search)) throw new Error('2D canvas requested'); return new C(el, o); } catch (err) {
+    console.warn('WebGL unavailable, using a 2D canvas:', err);
+    el.querySelectorAll(':scope > .pv-canvas').forEach(n => n.remove());
+    try { return new PhotoViewer2D(el, o); } catch (e2) { return new Stub(el, String(e2.message).split('\n')[0]); }
+  }
+};
+PhotoViewer = guardPhoto(PhotoViewer); StackViewer = guard(StackViewer);
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 // toggle buttons announce their state
 const syncPressed = () => document.querySelectorAll('button.tgl').forEach(b => b.setAttribute('aria-pressed', b.classList.contains('on')));
