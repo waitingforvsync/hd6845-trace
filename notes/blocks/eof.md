@@ -172,7 +172,7 @@ driver lies; the other three lead to the loads.
 
 ## Review
 
-**Round 1: full review** (2026-11-19 00:15 +0000; one fresh reviewer agent on Claude Fable 5.2, read
+**Round 1: full review** (2026-11-19 00:05 +0000; one fresh reviewer agent on Claude Fable 5.2, read
 from the photos alone; trace at commit 576ed4d; its images in `cache/scratch/eof/review-1/`, 22
 used). Pieces: `r4`, `r5inv`, `r5w`.
 
