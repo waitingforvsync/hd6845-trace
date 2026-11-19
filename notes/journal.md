@@ -2137,3 +2137,32 @@ transistors, 0 errors, 0 warnings; `tools/unsure.py`: 92 nets joined only throug
   untraced and in no Queue row 0.4%.
 
 **Handoffs:** none waiting. **Claims:** `busl` (waitingforvsync), `eof` (tom-seddon).
+
+## 2026-11-19 18:47  Refresh
+
+At the user's request, after the six handoffs above. **Handoffs:** none waiting. **Claims:** `busl`
+(waitingforvsync), `eof` (tom-seddon).
+
+**Renamed** (one batch; `names.py compare`: only names changed, 1 net): the first through line of the
+left-centre strips -> `inh_src` (`eof`'s piece `isrc4`: a firm join, 4,700 px with no uncertain item, and
+none on `busl`'s, `lc3`'s and `lc2`'s stretches). The old name is under Former names in the glossary;
+the `@alias` in `trace/eof.txt` is gone. Sentences the rename made circular ("X is X") were reworded in
+`notes/blocks/eof.md`, `busl.md`, `lc2.md`, `lc3.md`, `trunks.md`, the glossary, the master list,
+`floorplan.d/eof.txt` and `ports.d/eof.txt`. **Tom Seddon's `eof` branch** uses the old name: after
+merging main, `tools/rename.py` with the old and new names (as `/trace6845` step 7 says).
+
+**Left on purpose:** `bd1_n2` / `bd1_k`, `cdp3_g_c2`, `c3` / `cdp4_in6_s1`, `s2`, `cdp3_g_c4`..`c7` /
+`bc1_d3`..`bc1_d6` (placeholder to placeholder, kept as `@alias`); `bc1_ld_a` / `cdp4_ld` (joined
+through an uncertain metal, AMB-038: section 2, not renamed); the earlier deliberate aliases, as before.
+
+**`operation.md`** (ninth refresh): header (2,390 nets, 4,345 transistors; 847 of 1,276 equations firm,
+unchanged). The tracers had already written the afternoon's results (`inh_src`'s line, the latch's
+third pull-down, rows C and D loading together, row D's data from line g). Added: `tc2_sr_g`'s third
+branch down the left bus field into the bottom-centre logic's ground (marked: AMB-039). Against the last
+refresh's equations: one changed, `bd1_n2` = NOT((`bd1_an` AND `inh_lat`) OR `bd1_n1` OR `inh_src`)
+(still marked: the load's tie); none changed status. AMB-001 to AMB-039; R1-R45 unchanged in range (R4
+edited).
+
+**`out/`** rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 668 floor-plan blocks; the floor
+plan looked at beside the central datapath (`cache/scratch/refresh/fp_crop.png`): no label over another.
+Coverage: 66.5% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
