@@ -554,7 +554,18 @@ Run 3 (2026-11-18 16:28 -0600):
    - A bright strip x ~6066-6090 east of the VSS rail (segmented, `mid.png`): part of the rail
      or a separate metal: not read; nothing connects there in what is drawn.
    - Gate-width profiles (none taken); the inverter hit 3306,4809 rot=180 (0.73) not overlaid.
-3. The west gate cluster (x 4480-5330, y 8380-9160): the largest piece; not a known cell.
+3. The west gate cluster (x 4480-5330, y 8330-9240): the largest piece; not a known cell. Survey of run 7
+   (`w1_a.png`, `w1_m.png` 1.15x; `x1_a.png`, `x1_m.png` 2.6x; `x2.png` 5.2x; `x3_c2.png`, the chip-2 stripped shot at 1.38x):
+   two gate columns, roughly mirror images. Left: poly rows at x 4630-4750 and x 4800-4880 either side of a wide metal
+   x 4752-4800 (contacts under it at about y 8355-8440, 8590, 8770, 8910, 9110, 9220). Middle: a column of contact boxes
+   at x ~4935 (y 8440, 8565, 8700, 8840, 8985, 9110, 9225) under the wide metal x 4926-4978. Right: rows at x 5080-5230
+   with contacts at about (5125,8440), (5140,8640), (5120,8770), (5115,8950), (5140,9110) under the wide metal x 5095-5148
+   and pads at x 5245-5300. The left column's rows come from pads on the tracks A, B, C of the rows above the cluster
+   (track C ends on a pad (4562,8513); track B has a pad at about (4517,8607)) and on thin metals x ~4605 and x ~4648.
+   At the top of the left column a diffusion column x 4700-4747 is crossed by two rows in series (y 8462-8485 from the pad
+   (4648,8475); y 8505-8525 from track C's pad), with a ringed box below (4702-4728, 8540-8575); a large open diffusion
+   (4575-4728, 8350-8425) lies above them. Which wide metal is which supply is not settled (their feeds above y 8330
+   are the jogs of the rails noted above).
 4. The bus fields and the unit halves on the north and south edges (with `lc1` / `lc3`).
 
 Tool note: `view.py` has no `--notrace`; images wider than about 1300 px (6x of 130 px in two
