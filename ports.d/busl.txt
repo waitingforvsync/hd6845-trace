@@ -19,3 +19,29 @@ cdp3_hw_c3  D  4780,13237-13257   in  diffusion row on west into the left array,
 cdp3_hw_c2  D  4780,13715-13735   in  diffusion row on west into the left array, y 13725
 cdp3_hw_c1  D  4780,14192-14212   in  diffusion row on west into the left array, y 14202
 cdp3_hw_c0  D  4780,14884-14904   in  diffusion row on west into the left array, y 14894
+
+# Piece ch1: cdp4's channel-1 lines; one net each with cdp4's row C latch input (cdp4_in_s#, @alias)
+cdp4_bus_s7  P  7600,11868-11888   ?  cdp4's channel-1 line of slice 7 (its file starts it at x 7600)
+cdp4_bus_s6  P  7600,11912-11932   ?  cdp4's channel-1 line of slice 6 (its file starts it at x 7600)
+cdp4_bus_s5  P  7600,11956-11976   ?  cdp4's channel-1 line of slice 5 (its file starts it at x 7600)
+cdp4_bus_s4  P  7600,11999-12019   ?  cdp4's channel-1 line of slice 4 (its file starts it at x 7600)
+cdp4_bus_s3  P  7600,12042-12062   ?  cdp4's channel-1 line of slice 3 (its file starts it at x 7600)
+cdp4_bus_s2  P  7600,12086-12106   ?  cdp4's channel-1 line of slice 2 (its file starts it at x 7600)
+cdp4_bus_s1  P  7600,12128-12148   ?  cdp4's channel-1 line of slice 1 (its file starts it at x 7600)
+cdp4_bus_s0  P  7600,12172-12192   ?  cdp4's channel-1 line of slice 0 (its file starts it at x 7600)
+cdp4_bus_s7  P  7600,13626-13646   ?  cdp4's channel-2 west piece cdp4_in_s7 (row C latch input)
+cdp4_bus_s6  P  7600,13582-13602   ?  cdp4's channel-2 west piece cdp4_in_s6 (row C latch input)
+cdp4_bus_s5  P  7600,13539-13559   ?  cdp4's channel-2 west piece cdp4_in_s5 (row C latch input)
+cdp4_bus_s4  P  7600,13496-13516   ?  cdp4's channel-2 west piece cdp4_in_s4 (row C latch input)
+cdp4_bus_s3  P  7600,13452-13472   ?  cdp4's channel-2 west piece cdp4_in_s3 (row C latch input)
+cdp4_bus_s2  P  7600,13408-13428   ?  cdp4's channel-2 west piece cdp4_in_s2 (row C latch input)
+cdp4_bus_s1  P  7600,13365-13385   ?  cdp4's channel-2 west piece cdp4_in_s1 (row C latch input)
+cdp4_bus_s0  P  7600,13322-13342   ?  cdp4's channel-2 west piece cdp4_in_s0 (row C latch input)
+cdp4_bus_s7  P  4780,11478-11498   ?  poly row on west into the left array, y 11488
+cdp4_bus_s6  P  4780,11912-11932   ?  poly row on west into the left array, y 11922
+cdp4_bus_s5  P  4780,12432-12452   ?  poly row on west into the left array, y 12442
+cdp4_bus_s4  P  4780,12974-12994   ?  poly row on west into the left array, y 12984
+cdp4_bus_s3  P  4780,13387-13407   ?  poly row on west into the left array, y 13397
+cdp4_bus_s2  P  4780,13864-13884   ?  poly row on west into the left array, y 13874
+cdp4_bus_s1  P  4780,14341-14361   ?  poly row on west into the left array, y 14351
+cdp4_bus_s0  M  5443-5459,15000    ?  track on south 45 px to a pad (5365,15042) on a poly row from the west (bl0)
