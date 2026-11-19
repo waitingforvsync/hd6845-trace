@@ -2,7 +2,7 @@
 # The package's region is x 4250-4967, y 2500-6350. 
 
 # West side (x 4250)
-tl4_w2512   M  4250,2506-2518  ?    bus line 1 (y 2512), on west
+sl_eq_r5_n   M  4250,2506-2518  ?    bus line 1 (y 2512), on west
 tl5_w4937   P  4250,2632-2650  out  the row of the pad (4279,2640), the west end of bus line 4, on west
 tl5_w2722   M  4250,2679-2691  out  bus line 5 (y 2685); it starts on a pad (4236,2683) in tl3's strip
 tl4_w4590   P  4250,2801-2820  ?    the row of the pad (4366,2812), the north end of the track x 4366, on west
@@ -12,7 +12,7 @@ tl3_e4372   P  4250,4364-4381  ?    the row of the pad (4321,4374), the north en
 tl3_e4372   P  4250,5491-5510  ?    the row y 5500 of the pad (4321,5504), the south end of the same metal: on west
 inh_ck   P  4250,4492-4512  in   row from the west across the bus field; gate 2 of the three-input NOR tl4_w4545
 tl3_e4635   P  4250,4623-4642  ?    the row of the pad (4279,4636), the north end of the metal x 4279 (y 4622-5214): tl3's latch C data
-tl3_e4635   P  4250,5189-5207  in   the row of the pad (4279,5200), the south end of the same metal: tl3's inverter output (tl3_e4635_u)
+tl3_e4635   P  4250,5189-5207  in   the row of the pad (4279,5200), the south end of the same metal: tl3's inverter output (tl3_e4635)
 rcs_mv      P  4250,4733-4751  in   tl3's poly from its pad (4192,4743); an L in this strip, back out at y 4904-4925
 rcs_mv      P  4250,4904-4925  out  the same L, into tl3's pad (4234,4918) (rcs_mv)
 rcs_mv      M  4250,5754-5774  in   tl3's metal x 4236 from that pad, along y 5764 to the pad (4410,5764) (rcs_mv)
@@ -27,7 +27,7 @@ tl5_w5936   M  4250,5933-5945  ?    the metal of the pad (4583,5936), on west
 c4l_gab   P  4250,6313-6333  ?    the row of the pad (4929,6323), on west
 
 # East side (x 4967)
-tl4_w2512   P  4967,2542-2560  ?    the row of the pad (4908,2551), the east end of bus line 1
+sl_eq_r5_n   P  4967,2542-2560  ?    the row of the pad (4908,2551), the east end of bus line 1
 tl5_w4937   P  4967,2675-2694  in   the row of the pad (4866,2681), the east end of bus line 4: tl5's inverter 2 output
 tl5_w2722   P  4967,2714-2733  in   the row of the pad (4822,2723), the east end of bus line 5
 tl3_e4243   P  4967,2801-2820  out  the row of the pad (4866,2812): tl5_w4458, the enable of tl5's latch c

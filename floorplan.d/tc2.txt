@@ -52,7 +52,7 @@
 7368,6048:7440,6300    route   tc2_r5589 | poly west and south to the pad (7384,6282)
 6825,6264:7402,6300    route   tc2_r5589 | metal west along y 6283 to the pad (6840,6282)
 6833,6282:6853,6400    route   tc2_r5589 | poly south
-8170,4668:8352,4867    route   east end of r9m_l1w | the row y 4676 turns south and east to the pad (8246,4716); metal to the pad (8290,4850); poly east to a box at the datapath's west edge
+8170,4668:8352,4867    route   east end of sl_eq_r5_n | the row y 4676 turns south and east to the pad (8246,4716); metal to the pad (8290,4850); poly east to a box at the datapath's west edge
 6387,6012:6423,6400    route   tc2_m6404 | fourth line of the nest: metal from the west, pad (6404,6107), poly south
 6795,6030:6848,6155    power   VCC | the XOR cells' VCC rail turning east
 6795,6105:7752,6155    power   VCC band | wide metal y 6105-6155; no contact under it here

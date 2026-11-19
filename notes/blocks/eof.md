@@ -16,9 +16,9 @@ Three pieces, 2 transistors, no uncertain items.
   and the input of inverter A there**.
 - **Task 2, where R5's match goes: its first gate found and traced** (piece `r5inv`): at the
   west end of its row in the central datapath's channel `sl_eq_r5` is the only input of an
-  inverter that nobody had drawn, **`r9m_l1w` = NOT `sl_eq_r5`**; the output is the line that
+  inverter that nobody had drawn, **`sl_eq_r5_n` = NOT `sl_eq_r5`**; the output is the line that
   `r9m` and `tc2` had drawn without a driver. Piece `r5w` (wiring only) carries that line on
-  west: `r9m_l1w` is `tl4`'s bus line 1 (`tl4_w2512`) and `tl1`/`tl2`'s `tl1_w2592`, which
+  west: `sl_eq_r5_n` is `tl4`'s bus line 1 (`sl_eq_r5_n`) and `tl1`/`tl2`'s `sl_eq_r5_n`, which
   leaves the top-left strips north at (2493-2508,2500) into the band y 2180-2500 (package
   `tlb`, not drawn by anyone). **No load of it is drawn yet.**
 
@@ -37,9 +37,9 @@ only, no uncertain items.
   is drawn down to its pads and the pads' metals to `lc1`'s wires: **`rcs_x1` = NOT
   `lc1_w7170`**, the output of `lc1`'s gate 2 (its input comes up a thin metal from `lc2`'s
   strip, (5030-5046,8067)). The same piece joins three more lines: **`res_b` and `lpstb_b` are
-  the two inputs of `lc1`'s NOR**, so `lc1_w7304` = NOR(`lpstb_b`, `res_b`) (firm): high while
-  RES and LPSTB are both low, **the chip's reset**; and `tl5_w3636` (= `tl4_w4198`, the clear
-  of four latches of the top-left logic) is `lc1_w7606`, one of the three buffered copies of
+  the two inputs of `lc1`'s NOR**, so `rst` = NOR(`lpstb_b`, `res_b`) (firm): high while
+  RES and LPSTB are both low, **the chip's reset**; and `rst_a` (the clear
+  of four latches of the top-left logic) is `rst_a`, one of the three buffered copies of
   that NOR.
 
 Full extraction with this file: 2,351 nets, 4,232 transistors, 0 errors, 0 warnings; the package
@@ -99,7 +99,7 @@ end of the frame goes through this latch**; the latch's lower half (its load, th
 
 ```
 sl_eq_r5 = NOR(r5c_b0_x .. r5c_b4_x)        rdp1: high when the scan line counter equals R5
-r9m_l1w  = NOT sl_eq_r5                      this piece (firm)
+sl_eq_r5_n  = NOT sl_eq_r5                      this piece (firm)
 ```
 
 | Device | Where | W/L | Gate | Between |
@@ -114,7 +114,7 @@ r9m_l1w  = NOT sl_eq_r5                      this piece (firm)
   the tie box 35 px further east (nothing orange at x 8480-8500 in either chip-2 shot).
 - **Output.** The node strip's west end lies in a heavy-outlined box (x 8358-8392, y 4836-4864)
   with the end of the poly row that `tc2` drew from the pad (8290,4850): a buried contact. From
-  there the net is `r9m_l1w` (`tc2`'s piece 13 and `r9m`).
+  there the net is `sl_eq_r5_n` (`tc2`'s piece 13 and `r9m`).
 - **Supplies.** The two rails are slice 0's of the central datapath (`cdp1`'s notes: VSS
   x 8395-8440 widening here, VCC x 8620; `shm` labels both at y 3950); only the pieces over the
   gate are drawn here. The load hangs from the east rail and the pull-down from the west one,
@@ -132,7 +132,7 @@ r9m_l1w  = NOT sl_eq_r5                      this piece (firm)
 | **link C** | `eof` | from that corner the poly is a row y 2542-2560 running west under rail RC (x 5078-5127) and the wide supply metal (x 4948-4997), no contact to either, to `tl4`'s row end (4967,2551) | `t2_w2.png` (4x, three shots, all traces), overlay `ov_c.png`; text map of the row |
 | bus line 1 | `tl4` | the pad (4908,2551), the metal along y 2555, a diagonal at x 4669-4712, y 2512 west to x 4250 | its notes |
 | **link D** | `eof` | the metal runs on west, straight over plain field, to a pad with a contact (3800,2510); a poly bar y 2501-2517 under the wide vertical metal x 3648-3760 (no contact); a pad with a contact (3606,2510); the metal on west to `tl2`'s end (3533,2509) | `t2_w3.png` (4.4x, three shots), `t2_w4.png` (1.75x, the whole stretch), overlay `ov_d.png`; text map of both pads and the bar |
-| to the band | `tl2`, `tl1` | `tl1_w2592`: the metal x 3503 / y 2598, the pad (2868,2596), the row y 2591, a poly north out of the strips at (2493-2508,2500) | their notes |
+| to the band | `tl2`, `tl1` | `sl_eq_r5_n`: the metal x 3503 / y 2598, the pad (2868,2596), the row y 2591, a poly north out of the strips at (2493-2508,2500) | their notes |
 
 The full extraction has one net with the three names and no gate on it but the inverter's own
 load: **where NOT `sl_eq_r5` is used is north of y 2500** (or at a tap nobody has drawn).
@@ -189,24 +189,24 @@ x 7722-7770. So `inh_ck` is a gate there. Nothing of it is drawn.
 ### Piece `x1`: the reset NOR's inputs, a clear, and `rcs_x1`'s driver (traced; wiring only)
 
 ```
-lc1_w7304 = NOR(lpstb_b, res_b)          lc1's gate 3                         (firm)
-lc1_w7468 = NOT lc1_w7304                gate 4                               (firm)
-tl4_w4198 = NOT lc1_w7468                gate 5: lc1_w7606 = tl5_w3636 = tl4_w4198   (firm)
-lc1_w7734 = NOT lc1_w7468                gate 6                               (firm)
-lc1_w7864 = NOT lc1_w7468                gate 7                               (firm)
+rst = NOR(lpstb_b, res_b)          lc1's gate 3                         (firm)
+rst_n = NOT rst                gate 4                               (firm)
+rst_a = NOT rst_n                gate 5: rst_a   (firm)
+rst_b = NOT rst_n                gate 6                               (firm)
+rst_c = NOT rst_n                gate 7                               (firm)
 rcs_x1    = NOT lc1_w7170                gate 2: rcs_x1           (firm)
 ```
 
 Traced: the four joins (each pad, each column and each metal read as below), and with them the
 equations, which are `lc1`'s with the new names.
 
-- **`lc1_w7304` is high while RES and LPSTB are both low** (`res_b` and `lpstb_b` are the two
+- **`rst` is high while RES and LPSTB are both low** (`res_b` and `lpstb_b` are the two
   pins buffered in the pin's sense, `notes/blocks/trunks.md`). Believed: this is the reset
   condition of the datasheet (RES low resets the chip only while LPSTB is low; with LPSTB high
   it is a test mode). The datasheet's wording was not re-read in this run.
-- Its three buffered copies are high during that reset: `lc1_w7864` (the clear of latch D, which
-  makes `lc_step`, and of `lc2`'s latch C), `lc1_w7734` (north on V4, turning east at y 6720: not
-  followed) and **`lc1_w7606`, which is `tl5_w3636` = `tl4_w4198`: the clear of `tl5`'s latches a
+- Its three buffered copies are high during that reset: `rst_c` (the clear of latch D, which
+  makes `lc_step`, and of `lc2`'s latch C), `rst_b` (north on V4, turning east at y 6720: not
+  followed) and **`rst_a`, which is `rst_a`: the clear of `tl5`'s latches a
   and b, of `tl4`'s latch (whose inverse is the 4-bit counter's line `c4l_l3`) and of `tl4`'s
   cross-coupled pair**. So those four are cleared by the reset and by nothing else.
 - **`rcs_x1` is not a copy of the reset.** It is the output of gate 2, the column's separate
@@ -215,7 +215,7 @@ equations, which are `lc1`'s with the new names.
   What clears the five latches of the step logic is therefore decided in `lc2`'s west gate
   cluster or beyond.
 - **The pads are not the ends of three of the lines** (found by the review, round 2): `res_b`,
-  `lpstb_b` and the reset copy `tl5_w3636` each go on in poly below their pad and turn
+  `lpstb_b` and the reset copy `rst_a` each go on in poly below their pad and turn
   south-east into the diagonal poly bundle of `lc1`'s strip (`lc1`'s Not done: "the diagonal
   bundle's other nine lines"). So the NOR and the four latch clears are not all that these
   three nets reach: **where the two pin lines and this copy of the reset go beyond the gate
@@ -223,7 +223,7 @@ equations, which are `lc1`'s with the new names.
 
 | Stretch | Drawn by | What | Evidence |
 |---|---|---|---|
-| the bus to y 6350 | `tl5` (the pins' lines: `trunks`) | ten vertical polys; by x at y 6350: 5063 `tl5_w5936`, 5107 `rcs_x1`, 5150 `tl5_w3636`, 5192 `res_b`, 5237 `lpstb_b` | their notes; not re-read |
+| the bus to y 6350 | `tl5` (the pins' lines: `trunks`) | ten vertical polys; by x at y 6350: 5063 `tl5_w5936`, 5107 `rcs_x1`, 5150 `rst_a`, 5192 `res_b`, 5237 `lpstb_b` | their notes; not re-read |
 | **five columns, y 6350-6740** | `eof` | straight, under nine horizontal metals (`slbus`'s and others), no pad; no line steps a track | `x1_survey.png` (1.17x, metal and clean, all traces); `tl5_tracks.py rows row 5040 5262 3` at thirty heights (every 14 px, y 6340-6744): the columns stand at x 5061-5067, 5103-5115, 5148-5154, 5190-5199, 5235-5241 at every height; `tl5_tracks.py v X 6350 6900` per column: only 6-7 px dips at the gaps between metals (trap 2), the same heights on several columns |
 | **four pads** | `eof` | (5105,6761), (5147,6803), (5190,6845), (5237,6803): each a ring with a bright centre in both metal shots and a green hole 16-17 px across in the clean shot | `x2_pads.png` (2.1x, metal and clean); `eof_cchk.py`; `textmap.py 5050 6728 5260 6906 3` |
 | **four metals to y 6905** | `eof` | from pad 1 the metal's head stands 6-9 px (the ring) west of the centre and runs south at x 5077-5089 (M_a, shifting 6 px west at y 6890); from pad 2 the same, south at x 5116-5128 (M_b); V2 (x 5185-5194) and V3 (x 5230-5242) hang straight from pads 3 and 4 | the same text map: nothing above either head, bright in both chips to y 6905; the image |
@@ -248,13 +248,13 @@ driver lies; the other three lead to the loads.
 | `rc_eq_r4` | metal | (13729-13747, 14695) | to loads | track L9, on into `bd1`'s track k15 (`rc_eq_r4`) |
 
 | `sl_eq_r5` | poly | (8352, 4709-4729) | in | `cdp1`'s row y 4719 (its file ends it at x 8340) |
-| `r9m_l1w` | poly | (8348, 4840-4862) | out | the inverter's output, onto `tc2`'s poly from the pad (8290,4850) |
+| `sl_eq_r5_n` | poly | (8348, 4840-4862) | out | the inverter's output, onto `tc2`'s poly from the pad (8290,4850) |
 | `vss` | metal | (8399-8469, 4700) and (8399-8469, 4880) | - | slice 0's VSS rail, on north and south |
 | `vcc` | metal | (8595-8645, 4700) and (8595-8645, 4880) | - | slice 0's VCC rail, on north and south |
-| `tl4_w2512` | poly | (5183, 2542-2560) | in | link C's east end on `r9m`'s corner (5175,2550); the net is `r9m_l1w` |
-| `tl4_w2512` | poly | (4962, 2542-2560) | to loads | link C's west end on `tl4`'s row (4967,2551) |
-| `tl1_w2592` | metal | (4255, 2506-2518) | in | link D's east end on `tl4`'s bus line 1; the net is `r9m_l1w` |
-| `tl1_w2592` | metal | (3528, 2505-2519) | to loads | link D's west end on `tl2`'s metal (3533,2509) |
+| `sl_eq_r5_n` | poly | (5183, 2542-2560) | in | link C's east end on `r9m`'s corner (5175,2550); the net is `sl_eq_r5_n` |
+| `sl_eq_r5_n` | poly | (4962, 2542-2560) | to loads | link C's west end on `tl4`'s row (4967,2551) |
+| `sl_eq_r5_n` | metal | (4255, 2506-2518) | in | link D's east end on `tl4`'s bus line 1; the net is `sl_eq_r5_n` |
+| `sl_eq_r5_n` | metal | (3528, 2505-2519) | to loads | link D's west end on `tl2`'s metal (3533,2509) |
 
 | `inh_ck` | metal | (6098-6112, 6345) | to loads | link E's north end on `tl6`'s metal (6105,6350) |
 | `inh_ck` | metal | (6422-6438, 8072) | in | link E's south end on `lc2`'s piece (`inh_ck`, M 6431,8067); the driver (`inh_ck`'s inverter) lies beyond |
@@ -263,13 +263,13 @@ driver lies; the other three lead to the loads.
 | `inh_ck` | metal | (6695, 8360-8374) | in | link F's east end on `trunks`' line S (its end x 6690): the net is `inh_ck` |
 | `rcs_x1` | poly | (5097-5117, 6345) | to loads | from `tl5`'s bus line x 5107 |
 | `rcs_x1` | metal | (5070-5090, 6905) | in | onto `lc1`'s M_a (`rcs_x1`, gate 2's output) |
-| `tl5_w3636` | poly | (5140-5160, 6345) | to loads | from `tl5`'s bus line x 5150 (the clear of four latches) |
-| `tl5_w3636` | metal | (5116-5130, 6905) | in | onto `lc1`'s M_b (`lc1_w7606`, gate 5's output) |
+| `rst_a` | poly | (5140-5160, 6345) | to loads | from `tl5`'s bus line x 5150 (the clear of four latches) |
+| `rst_a` | metal | (5116-5130, 6905) | in | onto `lc1`'s M_b (`rst_a`, gate 5's output) |
 | `res_b` | poly | (5182-5202, 6345) | in | from `tl5`'s bus line x 5192 (`trunks`' pad (5190,6065)) |
 | `res_b` | metal | (5183-5197, 6905) | to loads | onto `lc1`'s V2 (`res_b`, the NOR's lower input) |
 | `lpstb_b` | poly | (5227-5247, 6345) | in | from `tl5`'s bus line x 5237 (`trunks`' pad (5232,6105)) |
 | `lpstb_b` | metal | (5229-5243, 6905) | to loads | onto `lc1`'s V3 (`lpstb_b`, the NOR's upper input) |
-| `tl5_w3636` | poly | (5141-5159, 6900) | to loads | the poly on south of the pad (5147,6803): into `lc1`'s diagonal bundle (bends south-east at about (5150,6910)) |
+| `rst_a` | poly | (5141-5159, 6900) | to loads | the poly on south of the pad (5147,6803): into `lc1`'s diagonal bundle (bends south-east at about (5150,6910)) |
 | `res_b` | poly | (5196-5210, 6900) | to loads | the poly on south of the pad (5190,6845), under V2, bending south-east: into `lc1`'s diagonal bundle |
 | `lpstb_b` | poly | (5232-5248, 6872) | to loads | the poly on south of the pad (5237,6803), under V3; from here it bends south-east (about (5266,6900)): into `lc1`'s diagonal bundle |
 | `tl5_w5936` | poly | (5053-5073, 6345) | ? | from `tl5`'s bus line x 5063 |
@@ -382,7 +382,7 @@ tools/t.sh eof sameconn.py 576ed4d             ->  connections identical
 ```
 
 Not checked by the reviewer: `cdp1`'s row y 4719 east of x 8660 (the tracer looked at it at 2x in the
-clean shot, `t2_row.png`); other packages' geometry on `r9m_l1w` between the inverter and
+clean shot, `t2_row.png`); other packages' geometry on `sl_eq_r5_n` between the inverter and
 (5175,2550); `bd1` south of y 14700; `mrach` west of x 13340.
 
 Round 1: no findings that change a connection.
@@ -437,7 +437,7 @@ Finding (one; it changes where wires leave the package, so it counts as changing
    under a thin metal") was not looked below. Handoff, Re-read.
 
 Not checked by the reviewer: where the three diagonals end; `trunks`' line S beyond (6930,8536);
-y 7346 at x 6150-6260 other than by scan; `tools/unsure.py` for `lc1_w7304`.
+y 7346 at x 6150-6260 other than by scan; `tools/unsure.py` for `rst`.
 
 Round 2: one finding, fixed.
 
@@ -452,7 +452,7 @@ against M_a's edge only as metal over it, no contact; it starts to bend at y ~68
 `sameconn` runs against 9f99dc2 end `connections identical`; 0 errors, 0 warnings.
 
 Findings, both geometry only, both confirmed by the tracer and fixed:
-1. `tl5_w3636`'s added poly was drawn x 5139-5155; the feature's edges are x 5140 and 5161 in both
+1. `rst_a`'s added poly was drawn x 5139-5155; the feature's edges are x 5140 and 5161 in both
    metal shots (`px.py row 6860 5130 5170 3 metal,acid`: dark at 5139 and 5160-5163). Now
    `P 5150,6815 y6900 w=18`. Same ends.
 2. `lpstb_b`'s added poly ran 6 px past where the bend starts (salmon x 5232-5250 to y 6872; at
@@ -470,7 +470,7 @@ Round 3: no findings that change a connection.
 
 ## Not done
 
-- **Task 2, the loads of `r9m_l1w` (= NOT `sl_eq_r5`)**: the net's only undrawn end is the poly
+- **Task 2, the loads of `sl_eq_r5_n` (= NOT `sl_eq_r5`)**: the net's only undrawn end is the poly
   that leaves `tl1`'s strip north at (2493-2508,2500) into the band y 2180-2500 (package `tlb`).
   Not checked here: taps along `r9m`'s, `tc2`'s, `tl4`'s, `tl2`'s and `tl1`'s stretches of it
   (each was read by its own package).
@@ -482,12 +482,12 @@ Round 3: no findings that change a connection.
   logic (`notes/blocks/trunks.md`), not followed here.
 - **`lc1_w7170`, the input of the inverter that drives `rcs_x1`**: the thin metal T1 leaves
   `lc1`'s strip south at (5030-5046,8067), into `lc2`'s (claimed).
-- **`res_b`, `lpstb_b` and `tl5_w3636` beyond the gate column**: three lines of the diagonal poly
+- **`res_b`, `lpstb_b` and `rst_a` beyond the gate column**: three lines of the diagonal poly
   bundle of `lc1`'s strip, entering it at (5150,6900), (5203,6900) and about (5266,6900)
   (`lc1`'s Not done: the bundle's other nine lines).
 - `tl5_w5936`'s poly south of (5063,6880): beside and under `lc1`'s M_a, into `lc1`'s strip.
-- `lc1_w7734` (a buffered copy of the reset) north of `lc1`'s strip: V4, x 5288-5310, "turns east
-  at y 6720" (`lc1`); `lc1_w7864`'s branch north at x 5713 (followed by `lc1` to y 6365).
+- `rst_b` (a buffered copy of the reset) north of `lc1`'s strip: V4, x 5288-5310, "turns east
+  at y 6720" (`lc1`); `rst_c`'s branch north at x 5713 (followed by `lc1` to y 6365).
 - The other five polys of `tl5`'s south bus (x 5365, 5412, 5453 and two more) south of y 6350.
 - For `bd1` (queue row `bd1`-`bd3`): the latch's lower half and where `bd1_n1`, `bd1_n2`,
   `bd1_an` go now decide what R4's match does.

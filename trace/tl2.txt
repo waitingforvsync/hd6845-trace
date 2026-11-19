@@ -460,7 +460,7 @@ C 3453,2553
 P 3450,2498:3470,2545
 N P 3460,2515 tl1_w3333
 
-# ---- tl1_w2592: tl1's row y 2582-2600 on east to a pad with a contact (2868,2596) (ring with a
+# ---- sl_eq_r5_n: tl1's row y 2582-2600 on east to a pad with a contact (2868,2596) (ring with a
 # bright centre in both metal shots, green hole in the clean shot: n5_b.png, 5x; the row is
 # poly without a break up to the pad, px.py row 2591 2804 2900 4). A metal leaves the pad east
 # along y 2598, turns north at x 3503 and east again along y 2509, out of the strip at x 3533
@@ -470,7 +470,7 @@ P 2810,2582:2860,2600
 P 2850,2578:2890,2614
 C 2868,2596
 M 2868,2598 x3503 y2509 x3533 w=16
-N M 3200,2598 tl1_w2592
+N M 3200,2598 sl_eq_r5_n
 
 # ---- VSS: the east arm of tl1's wide metal x 2733-2785 (y 2893-2948; tl1 draws it to x 2817)
 # runs on east without a break onto the top of R3 (tla draws R3 from y 2940): bright metal from

@@ -10,7 +10,7 @@
 5740,6045:6115,6350   route  inh_ck, tl5_w5674, tl5_w3505, ral_stb going south | rows y 6065-6325 between pads; ral_stb from tc2's metal y 6328 to the pad (5755,6322)
 6040,2500:6400,2680   route  north ends of the tracks U8-U11 and tcw's x 6276 | pads (6057,2595), (6105,2552) with polys north and east; three metals from the east along y 2573, 2619, 2665
 6050,2680:6200,4390   route  tracks U8-U11 | tl6_p6101, tl6_p6143, tl6_p6187 and tc2_m6404 from the north ends down to the crossing field's north pads
-6040,4390:6300,4890   route  crossing field: five polys under eight bus metals | the polys x 6101-6275 (tl6_p6101, tl6_p6143, tl6_p6187, tc2_m6404, tcw_m6404) pass under tc1_o3527, ra_eq_r9, c4l0..c4l3, r9m_l1w's line and ras_o0_alt2 without a contact
+6040,4390:6300,4890   route  crossing field: five polys under eight bus metals | the polys x 6101-6275 (tl6_p6101, tl6_p6143, tl6_p6187, tc2_m6404, tcw_m6404) pass under tc1_o3527, ra_eq_r9, c4l0..c4l3, sl_eq_r5_n's line and ras_o0_alt2 without a contact
 6090,4890:6400,6170   route  six metals from the field's foot to tc2's nest and to three pads | nested corners at y 5569-5790; tc2_m6404, tcw_m6404 (= tc2_m6447) and tc1_p4308 (= tc2_m6490) east into tc2; three polys south from the pads (6275,6152), (6318,6110), (6360,6152)
 5843,5035:6400,5185   route  tc2_o5175 going west | the NOR's output row y 5173, a corner at x 6259, row y 5045 to r9m's pad (5845,5045): r9m's line 3
 5882,5977:6400,6245   power  wide ground metal | vss band from tc2's piece west, north, west and south (no contact in the strip)

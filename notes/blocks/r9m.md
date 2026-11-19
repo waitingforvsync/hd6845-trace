@@ -23,7 +23,7 @@ poly steps down one track going east. The trace was redrawn accordingly:
   nets to what the earlier text below says.
 - Pad (5400,2596) does not join line 1's west part: its poly turns north at x 5175 and
   ends near y 2545 (not followed). The metal from it (y 2599, x 6022, the crossing field,
-  pad (7855,4676)) is named `r9m_l1w`. At `cdp1`'s west edge every row steps down one
+  pad (7855,4676)) is named `sl_eq_r5_n`. At `cdp1`'s west edge every row steps down one
   track (nested L's at x 8215-8345, `cache/scratch/bust/stair2.png`), so this row does
   **not** become `cdp1_l4676`: it turns south near x 8190. `cdp1_l4676` (the line from
   `amr` c3, east of `cdp1`) is fed instead by the west row y 4635.
@@ -196,7 +196,7 @@ beyond (4494,3813).
 
 ## Note (coordinator, from the handoffs of 2026-11-17/18)
 
-`r9m_l1w`'s east end is drawn by `tc2` (not an open end). `r9m_l3` has a driver: `tc2_o5175`, joined
+`sl_eq_r5_n`'s east end is drawn by `tc2` (not an open end). `r9m_l3` has a driver: `tc2_o5175`, joined
 by `tl6` (join 10, contact (5845,5043)).
 
 ## Correction from `tl3` (coordinator, from the handoffs of 2026-11-18, second batch)
@@ -211,6 +211,6 @@ by `tl6` (join 10, contact (5845,5043)).
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19)
 
-- `r9m_l1w` has a driver: NOT `sl_eq_r5` (`eof`). "Pad (5400,2596) ... its poly turns north at x 5175
+- `sl_eq_r5_n` has a driver: NOT `sl_eq_r5` (`eof`). "Pad (5400,2596) ... its poly turns north at x 5175
   and ends near y 2545 (not followed)": it turns west there and is `tl4`'s row of the pad (4908,2551)
-  (bus line 1), which `eof` joins on west through `tl3`'s strip to `tl1_w2592` and north into `tlb`.
+  (bus line 1), which `eof` joins on west through `tl3`'s strip to `sl_eq_r5_n` and north into `tlb`.

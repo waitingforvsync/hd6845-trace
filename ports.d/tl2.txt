@@ -48,7 +48,7 @@ tl3_w4546   P  3538,5482-5514   ?    the pad (3518,5498) at the end of track F's
 # ---- run 5: the wiring north of y 2630
 tl1_w3333   M  2848,2546-2562   out  tl1's metal from the pad (2826,2553), to tl1's third latch; comes through the strip from the pad (3453,2553)
 tl1_w3333   P  3450-3470,2500   in   the poly north from the pad (3453,2553): the wire's source is north of the strips
-tl1_w2592   P  2817,2582-2600   ?    tl1's row y 2591, on east to the pad (2868,2596)
-tl1_w2592   M  3533,2501-2518   ?    the metal from that pad: y 2598, north at x 3503, east along y 2509 (follow.py: on to x 3752)
+sl_eq_r5_n   P  2817,2582-2600   ?    tl1's row y 2591, on east to the pad (2868,2596)
+sl_eq_r5_n   M  3533,2501-2518   ?    the metal from that pad: y 2598, north at x 3503, east along y 2509 (follow.py: on to x 3752)
 vss         M  2817,2893-2948   -    the east arm of tl1's wide metal x 2733-2785, onto R3's top (over the row y 2899, no contact)
 vss         M  2832-3388,2500   -    the plane's lower edge (y 2507), on north

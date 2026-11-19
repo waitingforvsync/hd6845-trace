@@ -12,7 +12,7 @@
 # placed are both). Overlays b1.png, b2.png (4x clean), b3.png (2.5x metal).
 #   tl4_w3928 = NOT tl4_w4025
 #   tl4_w4113 = NOT( tl4_w4025 AND tl4_w4068  OR  tl4_w4243 )
-#   tl4_w4243 = NOT( tl4_w4198  OR  tl4_w4068 AND tl4_w3928  OR  tl4_w4113 )
+#   tl4_w4243 = NOT( rst_a  OR  tl4_w4068 AND tl4_w3928  OR  tl4_w4113 )
 @inst tl1_ua 2125,-434
 @inst tl1_ub 2125,-434
 # What the copy has of its own (b1-b4.png; follow.py; text maps in the notes):
@@ -59,7 +59,7 @@ P 4515,4183:4551,4213
 C 4533,4198
 P 4545,4190:4670,4208
 M 4537,3895 y4816
-N P 4600,4199 tl4_w4198
+N P 4600,4199 rst_a
 # output: the node's box poly west to a pad (4490,4243), metal x 4494 south (followed to (4507,5336))
 P 4472,4228:4508,4258
 C 4490,4243
@@ -203,7 +203,7 @@ P 4812,4590:4850,4612
 # under RA and in the open west of it as ONE diffusion (x 4677-4764: no edge between the column
 # and the part under RA, px.py row 4740/4785/4910/4955), so each row is one wide gate.
 #   tl4_w4686 = NOT( tl4_w4718 AND tl4_w4590  OR  tl4_w4850 )
-#   tl4_w4850 = NOT( tl4_w4198  OR  tl4_w4545  OR  tl4_w4686 )   (tl4_w4545 on two gates in series)
+#   tl4_w4850 = NOT( rst_a  OR  tl4_w4545  OR  tl4_w4686 )   (tl4_w4545 on two gates in series)
 # Read on b_*.png (3.3x), c_/d_/e_/f_*.png (5-5.6x), g1/g2.png (8x, four shots), h_*.png (4x),
 # j1/j2.png (6x, four shots), t2a/t2b.png (9x), w_*.png (2.8x), k1.png; profiles in the notes.
 M 4759,4650 y5005 w=54                # RA goes on south
@@ -267,7 +267,7 @@ P 4828,4820:4852,4842
 ?D 4805,4822:4830,4865
 ?B 4803,4820:4832,4848
 # gate 3: row from a pad with a contact (4537,4808) at the south end of the track x 4537
-# (tl4_w4198: follow.py, one metal from y 2938 to y 4814). West of RA only.
+# (rst_a: follow.py, one metal from y 2938 to y 4814). West of RA only.
 P 4520,4792:4556,4826
 C 4537,4808
 P 4550,4797:4730,4815
@@ -401,7 +401,7 @@ P 4835,5380:4908,5402                 # the plate's foot, west to a heavy box on
 # the latch at y 3906-4390 but laid out by hand (no findcell match), strapped by two short metals
 # (x 4680-4704, y 3235-3718; x 4851-4881, y 3380-3628).
 #   tl4_w3245 = NOT tl4_w3070                                              (data inverter)
-#   tl4_w3390 = NOT( tl4_w3070 AND tl5_w3505  OR  tl4_w4198  OR  tl4_w3178 )
+#   tl4_w3390 = NOT( tl4_w3070 AND tl5_w3505  OR  rst_a  OR  tl4_w3178 )
 #   tl4_w3178 = NOT( tl4_w3245 AND tl5_w3505  OR  tl4_w3390 )
 # Views h1-h7_*.png (6x, three shots), k1/k2_*.png (bus field 2.75x); profiles in the notes.
 # In this column a diffusion's edges under a poly plate show as dark lines across the plate.
@@ -443,7 +443,7 @@ P 4712,3376:4790,3396
 P 4438,3619:4474,3652
 C 4455,3635
 P 4465,3625:4772,3645
-# clear: pad (4540,3462) on the track x 4537 (tl4_w4198); row y 3452-3472 east to x 4724 (west
+# clear: pad (4540,3462) on the track x 4537 (rst_a); row y 3452-3472 east to x 4724 (west
 # piece of the row; the east piece is another net)
 M 4537,3440 y3900
 P 4522,3446:4560,3478
@@ -675,9 +675,8 @@ P 4261,5183:4299,5217
 C 4279,5200
 P 4250,5189:4268,5207
 N M 4279,4900 tl3_e4635
-# tl3 (run 8) drew the row y 5190-5205 up to x 4250 as tl3_e4635_u, the output of its inverter
+# tl3 (run 8) drew the row y 5190-5205 up to x 4250 as tl3_e4635, the output of its inverter
 # at y 5180-5300 (= NOT tl3_e5240): the pad (4279,5200) and this metal are the join it left open
-@alias tl3_e4635 tl3_e4635_u
 
 # --- tl3_e5240 (tl3's name: the gate row of its inverter at y 5180-5300, drawn there to x 4250):
 # row y 5233-5251 from the west edge, ending over the top of the pad (4279,5265)
@@ -768,7 +767,7 @@ M 4250,2512 x4669 4712,2555 x4908 w=12
 P 4894,2537:4926,2565
 C 4908,2551
 P 4920,2542:4967,2560
-N M 4400,2512 tl4_w2512
+N M 4400,2512 sl_eq_r5_n
 # --- bus line 4: from the pad (4279,2640), whose poly comes from the west, a diagonal
 # (4604,2641)-(4647,2684), east to the pad (4866,2681); its row runs east to x 4967 (tl5_w4937)
 P 4250,2632:4270,2650

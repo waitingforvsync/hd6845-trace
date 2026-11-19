@@ -150,8 +150,8 @@ M 6297,8067 y8184 w=20
 # The bus field east of the latches (x 6140-6490, y 8067-8560): wiring only.
 # Views e1.png (3.8x), e3_m.png / e3_a.png (3.6x), e4.png, e5.png; tl5_tracks.py v/h along every metal; textmap.py
 # on the pads (survey.md).
-# lc1_w7864 (latch D's clear) ends on a pad; a poly cross-under beneath the metals A and B to a second pad; metal
-# south to latch C's clear pad: latch C's clear is lc1_w7864
+# rst_c (latch D's clear) ends on a pad; a poly cross-under beneath the metals A and B to a second pad; metal
+# south to latch C's clear pad: latch C's clear is rst_c
 M 6256,8067 y8228 w=16
 P 6240,8197:6273,8232
 C 6254,8214
@@ -159,7 +159,7 @@ P 6247,8225:6270,8332
 P 6242,8326:6272,8360
 C 6256,8344
 M 6256,8330 y8716 w=20
-@alias lc1_w7864 lc2_w8731
+@alias rst_c lc2_w8731
 # latch C's enable: its metal x 6159-6177 runs on north through the field out of the strip; a branch east from it
 # along y 8292-8310 (metal B, a T with no dark line across the join) out of the strip
 M 6168,8067 y8580 w=18
@@ -234,10 +234,10 @@ N M 5974,8080 lc2_w9124                      # a second label north of the uncer
 # ====================================================================
 # Latch B's clear and output, and the west end of lc2_w8474 (wiring only).
 # Views g1_m.png, g1_a.png (1.9x); tl5_tracks.py v/h along each metal; textmap.py on the pads (survey.md).
-# clear: lc1's metal x 5466-5486 (lc1_w7864, gate 7's output) comes south without a break to the clear pad:
-# latch B's clear is lc1_w7864, as latch C's and latch D's
+# clear: lc1's metal x 5466-5486 (rst_c, gate 7's output) comes south without a break to the clear pad:
+# latch B's clear is rst_c, as latch C's and latch D's
 M 5476,8067 y8240 w=20
-@alias lc1_w7864 lc2_w8254
+@alias rst_c lc2_w8254
 # output Na: the metal x 5508-5524 runs north from its pad out of the strip, over the clear's row (no contact)
 M 5516,8067 y8330 w=16
 # lc2_w8474: the row y 8634-8652 on west from under the VCC rail, under the thin metals and the VSS rail (no pad
@@ -258,7 +258,7 @@ C 5429,8994
 P 5419,8939:5441,8980
 P 5419,8939:5545,8958
 # review round 3: a poly leaves latch C's clear pad (6257,8731) south and runs diagonally south-east under three
-# metals (no pad on any) out of the strip at x 6450: a further branch of lc1_w7864
+# metals (no pad on any) out of the strip at x 6450: a further branch of rst_c
 P 6258,8742 y8758 x6285 6450,8923 w=20      # east along y 8750-8768 to x 6285, then at 45 degrees (centre y = x + 2473: fix check)
 
 # ====================================================================
@@ -353,7 +353,7 @@ N P 5932,9230 lc2_w9185
 # latch B's clear pad), south, east along y 8377-8393 to x 5518 (below the Na pad), south, east along y 8777-8793 to
 # x 5560, south to the pad of gate row 4 and on (drawn above)
 M 5430,8067 y8303 x5475 y8385 x5518 y8785 x5560 y9100 w=16
-# lc1_w7468 (lc1's metal M_c2, x 5073-5093): south from lc1 to y 8128, east along y 8120-8136 to x 5387, south,
+# rst_n (lc1's metal M_c2, x 5073-5093): south from lc1 to y 8128, east along y 8120-8136 to x 5387, south,
 # east along y 8332-8348 to x 5425, south, east along y 8422-8438 to x 5473, and south through the strip without a
 # contact (no hole from y 8425 to y 9260) into lc3
 M 5083,8067 y8128 x5387 y8340 x5425 y8430 x5473 y9233 w=16
@@ -410,7 +410,7 @@ P 5072,8060:5092,8092                       # lc1_w7990's poly from lc1 onto the
 D 5012,8106:5043,8138                       # under the output box
 P 5012,8106:5045,8140                       # output box (x 5012-5043, y 8108-8138, reaching under T1: review round 10)
 B 5010,8104:5047,8142
-P 5040,8118:5140,8136                       # output row east under lc1_w7468's horizontal metal (no contact)
+P 5040,8118:5140,8136                       # output row east under rst_n's horizontal metal (no contact)
 P 5118,8090:5132,8136                       # neck north
 P 5105,8062:5142,8100                       # pad
 C 5127,8080
@@ -711,7 +711,7 @@ N D 5130,9171 lc2_w9171
 # ====================================================================
 # The bus field in the strip's south-east corner (x 6280-6450, y 8600-9233): four metal lines pass through, from the
 # east edge to the south edge, with no contact in the strip. The upper three come in diagonally, turn south, and each
-# steps west once; the fourth only cuts the corner. The diagonal poly of lc1_w7864 passes under the upper three
+# steps west once; the fourth only cuts the corner. The diagonal poly of rst_c passes under the upper three
 # without a contact (textmap.py at the three crossings: no hole). Named by x at the south edge.
 # tl5_tracks.py h at 14 heights (survey.md); follow.py from the south edge; view r2.png.
 M 6450,8630 6342,8738 y9034 x6299 y9233 w=14

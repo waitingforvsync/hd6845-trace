@@ -50,7 +50,7 @@ U10 6146, U11 6190, then `tcw`'s 6233, 6276, 6320, 6363.
 | U3 x 5843 | `r9m`'s `r9m_l3` north of its pad (5845,5045); `bw`'s `rc_stepreq_n` south of the pad (5838,5585) | theirs; the pad (5845,5045)'s poly east along y 5045: traced (piece 3) |
 | U4 x 5886, U5 x 5930, north pieces | y 2722-4522 and y 2680-4437, pads at both ends, polys north out of the strip | traced (piece 1) |
 | U4-U7 south of y 4565 | `amrw`'s and `bust`'s `c4l0`..`c4l3` | theirs |
-| U6 x 5973, U7 x 6022 north | `r9m`'s `ra_eq_r9` and `r9m_l1w` | theirs |
+| U6 x 5973, U7 x 6022 north | `r9m`'s `ra_eq_r9` and `sl_eq_r5_n` | theirs |
 | U8 x 6059, U9 6103, U10 6146, U11 6190, north of the crossing field | U8 from a pad (6058,2592) (poly north), U9 from a pad (6102,2550) (poly east), U10 and U11 from corners at y 2572 and y 2620 (metals east out of the strip); south ends on the north pads of the crossing field's polys | traced (piece 2) |
 | x 6040-6420, y 4390-4890 | **the crossing field**: eight vertical polys (x 6059 `r9m`'s, 6101, 6143, 6187, 6228, 6275, 6316 `fld`'s, 6405 `fld`'s) under eight bus metals (y 4482 `tc1_o3527`, 4528 `ra_eq_r9`, 4572 `c4l0`, 4613 `c4l1`, 4658 `c4l2`, 4701 `c4l3`, 4742 `r9m`'s, 4787 `ras_o0_alt2`) | the bus metals y 4482 and y 4787: traced (piece 1); the five polys x 6101-6275: traced (piece 2) |
 | x 6090-6400, y 4830-6160 | five metals south from the field's south pads and one from a pad (6316,5003), a nest of corners at y 5568-5790 | traced (piece 2) |
@@ -167,7 +167,7 @@ shot, y 4455-4745) shows seven straight polys at the same x in every gap between
 
 | Poly | North pad and its metal | South pad and its metal | Net |
 |---|---|---|---|
-| x 6059 | `r9m`'s (6059,4440): `r9m_l1w` (U7) | `r9m`'s (6058,4742): the bus metal y 4742 | theirs |
+| x 6059 | `r9m`'s (6059,4440): `sl_eq_r5_n` (U7) | `r9m`'s (6058,4742): the bus metal y 4742 | theirs |
 | x 6101 | (6101,4398): U8, by a foot east at y 4395 | (6101,4830): metal south, corner (6103,5790), east, corner (6233,5790), south, a foot east at y 6152 onto a pad (6275,6152); that pad's poly south along x 6282 across y 6350 | `tl6_p6101` |
 | x 6143 | (6143,4437): U9, by a step east at y 4356 from x 6103 to x 6146 | (6144,4872): metal south, corner (6146,5746), east, corner (6276,5746), south, a foot east at y 6110 onto a pad (6318,6110); poly south along x 6322 across y 6350 | `tl6_p6143` |
 | x 6187 | (6187,4397): U10, by a step east at y 4312 from x 6146 to x 6189 | (6187,4830): metal south, corner (6190,5702), east, corner (6320,5702), south, corner (6320,6074), east, corner (6363,6074), south to a pad (6360,6152); poly south along x 6365 across y 6350 | `tl6_p6187` |

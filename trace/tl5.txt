@@ -18,10 +18,10 @@
 # rdp3_cmp.py 4900,3340:5210,3810 --offsets "0,0 0,477 0,954": the copies differ only under RB.
 #   tl5_w3364 = NOT tl5_w3461
 #   tl5_w3550 = NOT( tl5_w3461 AND tl5_w3505  OR  tl5_w3680 )
-#   tl5_w3680 = NOT( tl5_w3636  OR  tl5_w3505 AND tl5_w3364  OR  tl5_w3550 )
+#   tl5_w3680 = NOT( rst_a  OR  tl5_w3505 AND tl5_w3364  OR  tl5_w3550 )
 #   tl5_w3841 = NOT tl5_w3680
 #   tl5_w4027 = NOT( tl5_w3680 AND tl5_w3982  OR  tl5_w4160 )
-#   tl5_w4160 = NOT( tl5_w3636  OR  tl5_w3982 AND tl5_w3841  OR  tl5_w4027 )
+#   tl5_w4160 = NOT( rst_a  OR  tl5_w3982 AND tl5_w3841  OR  tl5_w4027 )
 @inst tl1_ua 2361,-997 mx=2691 tag=a
 @inst tl1_ub 2361,-997 mx=2691 tag=a
 @inst tl1_ua 2361,-520 mx=2691 tag=b
@@ -82,7 +82,7 @@ N P 5400,3550 tl5_w3550
 P 5195,3627:5220,3646
 P 5212,3619:5254,3654
 C 5233,3636
-N P 5205,3636 tl5_w3636
+N P 5205,3636 rst_a
 # output: the lower node's box poly east along y 3670-3690 to the pad (5580,3680), the north end
 # of a piece of T8 that ends on latch b's data pad (5580,3938)
 P 5195,3670:5566,3690
@@ -551,7 +551,7 @@ M 4909,2755 y2901 x4690 y2988 x4625 y4062 w=14
 @alias tl4_w4068 tl5_w3982
 
 # ====================================================================
-# The clear of latches a and b is tl4's tl4_w4198: the row y 2930-2950 runs on west of the edge
+# The clear of latches a and b is tl4's rst_a: the row y 2930-2950 runs on west of the edge
 # for 415 px to a pad with a contact (4537,2940), the north end of tl4's track x 4537 (j2_a.png
 # 4x, three shots: ring with a bright centre, green hole; bare ground north of the pad, the
 # metal goes on south). The row between: along the north edge of the wide metal foot (no metal over the row at x 4694-4947 in either chip) y 2935-2995 from x 4950 to
@@ -573,4 +573,3 @@ P 4553,2930:4967,2950
 P 4520,2924:4560,2957
 C 4537,2940
 M 4537,2928 y3900 w=14
-@alias tl4_w4198 tl5_w3636

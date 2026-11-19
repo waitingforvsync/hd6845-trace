@@ -37,7 +37,7 @@ tc1_ns3      M  7894-7909,4450   ?    from tc1 (its contact (7905,4370))
 tc1_ns3      M  7652-7670,6400   ?    metal from the pad (7660,6193), going on south (follower: end (7661,7088))
 tc2_r5589    P  8275,5252-5272   ?    poly from the pad (8248,5262), going on east to a pad (8490,5262), seen
 tc2_r5589    P  6835-6851,6400   ?    poly from the pad (6840,6282), going on south
-r9m_l1w      P  8352,4840-4860   in   poly from the pad (8290,4850); the box at (8370,4850) is the output node of eof's inverter NOT sl_eq_r5
+sl_eq_r5_n      P  8352,4840-4860   in   poly from the pad (8290,4850); the box at (8370,4850) is the output node of eof's inverter NOT sl_eq_r5
 tc2_m6404    M  6400,6012-6040   ?    metal of the nest, going on west and north (x 6352-6372, seen to y 5955)
 tc2_m6404    P  6395-6415,6400   ?    poly from the pad (6404,6107), going on south
 vcc          M  7695-7752,6400   -    the wide VCC metal's south leg (from fld's VCC rail by the band y 6105-6155), going on south

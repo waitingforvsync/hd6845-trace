@@ -1,7 +1,7 @@
 # tl6: top-left random logic, sixth strip (x 5683-6400, y 2500-6350)
 # A track field: no gate and no diffusion in the strip (notes/blocks/tl6.md). Vertical metal
 # tracks at a 43.5 px pitch: U0 x 5712, U1 5755, U2 5799, U3 5843 (r9m_l3 north of y 5045, bw's
-# rc_stepreq_n south of y 5585), U4 5886, U5 5930, U6 5973 (ra_eq_r9), U7 6016 (r9m_l1w), U8 6059,
+# rc_stepreq_n south of y 5585), U4 5886, U5 5930, U6 5973 (ra_eq_r9), U7 6016 (sl_eq_r5_n), U8 6059,
 # U9 6103, U10 6146, U11 6190, then tcw's x 6233, 6276, 6320, 6363. South of y 4565 the tracks
 # U4-U7 are amrw's and bust's c4l0..c4l3. Poly rows from tl5's strip (ports at x 5683) end on
 # pads of the tracks or run on east to pads of tcw, fld and tc2.

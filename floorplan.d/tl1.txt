@@ -10,7 +10,7 @@
 2330,2795:2817,2915   route   three poly rows above the cluster | y 2812, 2857, 2899: from the top pads of the metals x 2457, 2370, 2500 east under R1 and out of the strip
 2125,2535:2600,2570   route   tl1_w3333, metal along the top | from a pad (2563,2550) west and down x 2199 to a contact (2197,3333)
 2125,3280:2340,5815   route   tl1_w3333, poly down the west side | from the contact (2197,3333) south, round under the metal x 2326, south again and east along y 5800 into the small cluster
-2400,2500:2817,2650   route   rows from the north | rcs_c1's poly (x 2413) and two L's (tl1_w2637, tl1_w2592) from the north; rows y 2551 (tl1_w3333), 2591, 2636 east under R1 and the wide metal to pads at the strip's edge
+2400,2500:2817,2650   route   rows from the north | rcs_c1's poly (x 2413) and two L's (tl1_w2637, sl_eq_r5_n) from the north; rows y 2551 (tl1_w3333), 2591, 2636 east under R1 and the wide metal to pads at the strip's edge
 2250,2705:2425,3000   route   rcs_c1's poly line, west loop | from tla's row y 2986 west to x 2265, north, east along y 2720 to x 2413 and north
 2730,2500:2817,2960   route   wide metal tl1_w2930 | x 2733-2785 from the north, turning east along y 2905-2955; no contact in the strip; not R2
 2598,2500:2652,3005   power   R1 (VSS) north of the cluster | one rail with tla's piece below, on north out of the strip

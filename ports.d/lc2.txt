@@ -13,7 +13,7 @@ lc2_w8646   M  6159-6177,8067  in   latch C's enable: the metal runs north out o
 lc2_w8646   M  6450,8292-8310  ?    its branch east (metal B)
 lc1_w7908   M  6203-6221,8067  in   latch D's enable, through the pad (6212,8128)
 lc1_w7908   M  6450,8250-8268  out  on east (metal A)
-lc1_w7864   M  6248-6264,8067  in   latch D's clear, and by a cross-under and a metal latch C's
+rst_c   M  6248-6264,8067  in   latch D's clear, and by a cross-under and a metal latch C's
 lc1_w7780   M  6287-6307,8067  in   latch D's data, to the pad (6297,8170)
 lc2_w8474   M  6332-6350,8067  ?    the metal of the pad (6341,8214)
 inh_ck   M  6422-6440,8067  ?    a metal from the north that turns east
@@ -22,11 +22,11 @@ lc2_w8906   M  6462-6480,8067  in   latch C's data: the metal of the pad (6470,8
 
 # Run 4: the inverter below latch C and its thin metal
 lc2_w9124   M  5967-5981,8067  out  the thin metal: NOT lc2_w8822 (latch C's Na), from the inverter below latch C north through latches C and D into lc1
-lc1_w7864   M  5466-5486,8067  in   latch B's clear: lc1's metal on south to the pad (5472,8254)
+rst_c   M  5466-5486,8067  in   latch B's clear: lc1's metal on south to the pad (5472,8254)
 lc2_w8341   M  5508-5524,8067  out  latch B's output Na: the metal from the pad (5514,8341) runs north out of the strip
 lc2_w8474   P  5400,8509-8526  ?    drawn end: the poly from the pad (5428,8516) runs on west (seen to x 5150)
 lc2_w8474   M  5421-5437,9233  ?    the same metal runs on south into lc3
-lc1_w7864   P  6450,8911-8936  out  the poly from latch C's clear pad (6257,8731), diagonally south-east out of the strip
+rst_c   P  6450,8911-8936  out  the poly from latch C's clear pad (6257,8731), diagonally south-east out of the strip
 
 # Run 5: the gate column south of latch B (the inverter of latch B's data; an AND-OR-INVERT gate)
 lc2_w8450   M  5618-5634,9256  out  latch B's data: the west thin metal on south (meets lc3_m5626)
@@ -39,8 +39,8 @@ lc2_w9125   P  5924-5940,9256  out  the AND-OR-INVERT's output poly (label lc2_w
 
 # Run 6: three lines of the staircase west of latch B
 lc1_w7170   M  5030-5046,8067  ?    lc2_w8474's metal north as lc1's thin metal T1 (the input of lc1's gate 2)
-lc1_w7468   M  5073-5093,8067  in   lc1's metal M_c2, down the staircase
-lc1_w7468   M  5465-5481,9233  out  the same metal on south into lc3 (no contact in the strip)
+rst_n   M  5073-5093,8067  in   lc1's metal M_c2, down the staircase
+rst_n   M  5465-5481,9233  out  the same metal on south into lc3 (no contact in the strip)
 lc3_w9299   M  5422-5438,8067  in   row 4's metal, north into lc1
 lc2_w8450   M  5378-5394,9233  ?    the staircase's fourth line (label lc2_w8907; lc2_w8450 through an uncertain buried contact) on south into lc3
 lc2_w8450   P  5240,8941-8958  ?    drawn end: the second poly of the pad (5386,8951) (label lc2_w8907) runs on west into the gate cluster

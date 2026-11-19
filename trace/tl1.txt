@@ -547,7 +547,7 @@ P 2405,2500:2420,2728
 # east into a row that runs under R1 and the wide metal, over field, without a pad (n4, n5):
 #   tl1_w2637: down to y 2645, row y 2627-2645, to a pad with a contact (2827,2637) just east
 #              of the strip's edge; a metal leaves it east along y 2630-2645 (n7.png)
-#   tl1_w2592: down to y 2600, row y 2582-2600, drawn to the strip's edge; it goes on to a
+#   sl_eq_r5_n: down to y 2600, row y 2582-2600, drawn to the strip's edge; it goes on to a
 #              pad with a contact at about (2867,2595) with a metal going east (n7.png)
 P 2448,2500:2463,2645
 P 2448,2627:2817,2645
@@ -557,7 +557,7 @@ M 2827,2637 x2852 w=16
 N P 2600,2636 tl1_w2637
 P 2493,2500:2508,2600
 P 2493,2582:2817,2600
-N P 2600,2591 tl1_w2592
+N P 2600,2591 sl_eq_r5_n
 # A poly along the strip's north edge: from the west (x < 2100) along y 2498-2515 under the MA
 # metals to a corner at x 2372-2388, where it turns north out of the strip (n11.png, 3x, both
 # stripped shots). No connection in the strip.

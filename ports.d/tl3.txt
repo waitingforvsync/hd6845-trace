@@ -37,7 +37,7 @@ rcs_mv   P  4250,4904-4925  ?    the poly of the pad (4234,4918) on the track x 
 rcs_mv   M  4250,5760-5772  ?    the metal x 4236 from that pad, east out of the strip along y 5766
 tl3_e3028   P  4250,3018-3038  in   gate of the top unit E1 (which drives tl3_w3373, latch A's enable), from the east
 tl3_e5240   P  4250,5231-5250  in   gate of the inverter under the east rail's south end; in tl4's strip the row turns south at x ~4277
-tl3_e4635_u P  4250,5190-5205  out  that inverter's output row; in tl4's strip it ends on a pad (4278,5198) of a metal x 4279 whose north pad (4278,4636) is on tl3_e4635's row (not drawn)
+tl3_e4635 P  4250,5190-5205  out  that inverter's output row; in tl4's strip it ends on a pad (4278,5198) of a metal x 4279 whose north pad (4278,4636) is on tl3_e4635's row (not drawn)
 # the foot (y 5345-5660, run 9): rows between tl2's strip and tl4's, and the metals that go on south
 rcs_x1      P  3533,5365-5378  in   the row of latch C's clear (pad (4192,5373)), from tl2's row y 5371
 tl3_w5025   P  3533,5408-5421  out  latch B's inverted output again: the row from tl2's track G (bottom pad (3368,5414)), across the foot

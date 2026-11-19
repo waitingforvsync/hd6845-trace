@@ -1,10 +1,10 @@
 # eof: follow-the-wire pieces of the end-of-frame lead group
 13416,9647:13667,10705   route  R4 match, L2 to L7 | rc_eq_r4 from the counter channel: upper piece of bundle track L2, poly bar y 9925, track L7 down to rdp3's piece
 13729,13475:13747,14695  route  R4 match, track L9 | rc_eq_r4 straight from rdp3's bundle to bd1's track k15: the data of the latch gated by inh_lat
-8330,4700:8650,4880      logic  inverter on R5's match | r9m_l1w = NOT sl_eq_r5: pull-down under slice 0's VSS rail, load to its VCC rail, output west on r9m's line
-4962,2542:5183,2560      route  NOT R5 match, row y 2551 | r9m_l1w from r9m's corner west under rail RC to tl4's bus line 1
-3528,2494:4255,2526      route  NOT R5 match, cross-under | tl4's bus line 1 west to a poly hop under the wide metal x 3648-3760 and on to tl2's metal (tl1_w2592)
+8330,4700:8650,4880      logic  inverter on R5's match | sl_eq_r5_n = NOT sl_eq_r5: pull-down under slice 0's VSS rail, load to its VCC rail, output west on r9m's line
+4962,2542:5183,2560      route  NOT R5 match, row y 2551 | sl_eq_r5_n from r9m's corner west under rail RC to tl4's bus line 1
+3528,2494:4255,2526      route  NOT R5 match, cross-under | tl4's bus line 1 west to a poly hop under the wide metal x 3648-3760 and on to tl2's metal (sl_eq_r5_n)
 6098,6345:6438,8072      route  inh_ck, staircase north part | inh_ck's metal from the top-left logic south and east by four corners; a contact (6427,7648) taps it onto a poly row east
 6412,7632:7530,7664      route  inh_ck tap row | poly from the pad (6427,7648) east across the crossing field to a gate group at x 7540 (not traced)
 6445,8165:6695,8374      route  inh_ck, staircase south part | from lc2's corner east and south to the west end of trunks' line S: inh_ck is inh_ck
-5053,6345:5253,6905      route  reset inputs and clears | five polys of tl5's south bus to pads: res_b and lpstb_b into lc1's NOR (the reset), the NOR's buffered copy back north as the clear tl5_w3636, rcs_x1 from lc1's inverter
+5053,6345:5253,6905      route  reset inputs and clears | five polys of tl5's south bus to pads: res_b and lpstb_b into lc1's NOR (the reset), the NOR's buffered copy back north as the clear rst_a, rcs_x1 from lc1's inverter

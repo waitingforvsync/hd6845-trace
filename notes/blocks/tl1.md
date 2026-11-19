@@ -46,7 +46,7 @@ master: a latch that is open while `ck_out` is high, takes `tl1_w3333` (the long
 the top of the strip), is cleared by `tl1_w5978`, and sends its output `tl1_w6022` east
 along y 6195 out of the strip. **North of y 2790 there is only wiring**, now drawn: the rest
 of `rcs_c1`'s poly line (west, north and out of the strip at (2413,2500)), two rows from the
-north (`tl1_w2637`, `tl1_w2592`), `tl1_w3333`'s row to its pad (2826,2553), R1 up to the
+north (`tl1_w2637`, `sl_eq_r5_n`), `tl1_w3333`'s row to its pad (2826,2553), R1 up to the
 strip's north edge and a second wide metal x 2733-2785, which is VSS (a leg of the same plane as R1). Thin metal W is not decided and
 not drawn; the wiring west of x 2260 below y 2600 is surveyed only: see Not done.
 
@@ -555,10 +555,10 @@ the lower corner), `n9.png` (2.2x: the rails), `n11.png` (3x: the north-west cor
   and under `tl1_w3333`'s metal at y 2553 without a pad. So `rcs_c1` = NOR(`rcs_a2`,
   `rcs_b1`) goes somewhere north of the strip.
 - **Two nested L's**: polys from the north at x 2448-2463 and x 2493-2508 turn east into the
-  rows y 2627-2645 (`tl1_w2637`) and y 2582-2600 (`tl1_w2592`), which run under R1 and the
+  rows y 2627-2645 (`tl1_w2637`) and y 2582-2600 (`sl_eq_r5_n`), which run under R1 and the
   second wide metal over field, without a pad. `tl1_w2637` ends on a pad with a contact
   (2827,2637) at the strip's east edge with a metal going on east along y 2630-2645;
-  `tl1_w2592` goes on to a pad with a contact at about (2867,2595), 50 px east of the strip
+  `sl_eq_r5_n` goes on to a pad with a contact at about (2867,2595), 50 px east of the strip
   (not drawn), also with a metal going east.
 - **`tl1_w3333`'s row** (y 2543-2560) from its pad (2563,2550): east under R1 and the wide
   metal to a pad with a contact (2826,2553); a metal goes on east along y 2545-2562. So the
@@ -677,7 +677,7 @@ shots). Sizes only: `tools/sameconn.py` shows no connection changed by it.
 | `tl1_w3333` | M | (2852,2553), east, from the pad (2826,2553) | into the block (its other ends are two gates of the third latch) | long wire down the west side; the third latch's data |
 | `rcs_c1` | P | (2405-2420,2500), north | driven in `tla` | `rcs_c1`'s poly line, on north |
 | `tl1_w2637` | P, M | (2448-2463,2500) north; (2852,2637) east, from the pad (2827,2637) | not known | passes: poly from the north, row y 2636, metal east |
-| `tl1_w2592` | P | (2493-2508,2500) north; (2817,2591) east | not known | passes: poly from the north, row y 2591, on to a pad (2867,2595) |
+| `sl_eq_r5_n` | P | (2493-2508,2500) north; (2817,2591) east | not known | passes: poly from the north, row y 2591, on to a pad (2867,2595) |
 | `tl1_w5936` | P | (2372-2388,2498) north | driven outside (`tl2`'s upper inverter, by the row y 6237) | the far end of the wire up the west margin: the north-edge poly turns north out of the strip |
 | `vss` | M | (2600-2650,2500) north | - | R1, on north |
 | `ck_out` | M, P | trunk contacts (2365,5847) (`tla`'s) and (2372,6061) | from `tla`'s trunk | the third latch's enable: two gate rows |
@@ -804,8 +804,8 @@ the way; the row y 2812 ends on a pad (2830,2811) (`n10.png`).
 - The far ends of the rows `tl1_w4937`, `rcs_x1` (east of x 2817, past x 3400) and of
   `tl1_w2857`, `tl1_w3594` (east of x 2817 along y 2857, y 2899).
 - `tl1_w3333`'s metal east of (2852,2553); `tl1_w2637`'s east of (2852,2637); `tl1_w3678`'s
-  east of (2856,2811); `tl1_w2592` east of x 2817 (pad at about (2867,2595)); the three polys
-  north of y 2500 (`rcs_c1` at x 2413, `tl1_w2637` at x 2455, `tl1_w2592` at x 2500);
+  east of (2856,2811); `sl_eq_r5_n` east of x 2817 (pad at about (2867,2595)); the three polys
+  north of y 2500 (`rcs_c1` at x 2413, `tl1_w2637` at x 2455, `sl_eq_r5_n` at x 2500);
   where the wide VSS metal x 2733-2785's east arm (y 2905-2955) goes.
 - **`tl1_w5936` north of (2380,2498)** (run 5): the fourth poly that leaves north, 33 px west of
   `rcs_c1`'s. All four go into the band y 2180-2500, which no package has drawn.
@@ -1002,9 +1002,9 @@ Round 1: no findings.
 
 ## Corrections from `tl2`, `tl3` (coordinator, from the handoffs of 2026-11-18, second batch)
 
-- Not done: "`tl1_w3333`'s metal east of (2852,2553)" and "`tl1_w2592` east of x 2817" are done in `tl2`
+- Not done: "`tl1_w3333`'s metal east of (2852,2553)" and "`sl_eq_r5_n` east of x 2817" are done in `tl2`
   (`notes/blocks/tl2.md`, "North of y 2630"): `tl1_w3333` comes from a poly that enters at
-  (3460,2500) from the band north of the strips; `tl1_w2592`'s metal leaves east at (3533,2509).
+  (3460,2500) from the band north of the strips; `sl_eq_r5_n`'s metal leaves east at (3533,2509).
   The wide VSS metal x 2733-2785's east arm is y 2893-2948 (it covers the row y 2899, no contact) and
   is one metal with the top of R3; the arm is drawn 12 px short at the top (R36).
 - `tl1_w4937` ("enters on a poly row from the east, not identified") is the net of `tl3`'s thin metal
@@ -1021,6 +1021,6 @@ Round 1: no findings.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19)
 
-- `tl1_w2592` is NOT `sl_eq_r5` (`r9m_l1w`), driven from the east by `eof`'s inverter in `cdp1`'s
+- `sl_eq_r5_n` is NOT `sl_eq_r5` (`sl_eq_r5_n`), driven from the east by `eof`'s inverter in `cdp1`'s
   slice-0 position, and leaves north into the band `tlb`.
 - `inh_ck` (and so `tl1_w3594`, marked) is `inh_ck` (`eof` run 2).

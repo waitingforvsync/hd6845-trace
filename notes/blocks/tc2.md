@@ -112,7 +112,7 @@ and its sweep of the whole region the Not done list says exactly what is left.
 
 **Piece 13** (run 4, wiring only; not through a review round)
 
-- The L at the east end of `r9m_l1w`'s row y 4676: south, east to the pad (8246,4716), a metal
+- The L at the east end of `sl_eq_r5_n`'s row y 4676: south, east to the pad (8246,4716), a metal
   to the pad (8290,4850), a poly east that ends in a box at `cdp1`'s west edge (8370,4850),
   read as a buried contact onto a diffusion there (not traced). It joins no named net.
 
@@ -159,7 +159,7 @@ Not done: see the end.
 | x 8068-8082 | `db_b6`'s thin metal over the loads' output side, no contact | `bust`, `rde` |
 | x 8198-8212, y 4450-5680 | `ral_stb`'s thin metal: a contact (8204,5371) with a poly going east, an end pad (8204,5672) | `tc1` to y 4450; **the rest: piece 9** |
 | y 5663-5683, x 7730-8224; x 7742-7757, y 5666-6072; x 7476-7770, y 6049-6297; y 6316-6340, x 6400-7500 | `ral_stb` on: a poly row, a metal, a poly in three legs, a metal going west | **piece 9** |
-| x 8170-8262, y 4676-4730 | the east end of `r9m_l1w`'s row y 4676: it turns south at x 8186 and east to a pad (8246,4716), whose metal goes east and south to a pad (8290,4850) | **piece 13** |
+| x 8170-8262, y 4676-4730 | the east end of `sl_eq_r5_n`'s row y 4676: it turns south at x 8186 and east to a pad (8246,4716), whose metal goes east and south to a pad (8290,4850) | **piece 13** |
 | x 8235-8262, y 5250-5600 | a pad (8248,5262) and a thin metal x 8240-8258 south to a pad (8246,5589) on the row y 5578-5598 | **piece 12** (`tc2_r5589`) |
 | x 7894-7909, y 4450-5640; y 5622-5643, x 7597-7918; x 7597-7612, y 5622-6203; x 7643-7678, y 6177-6400 | `tc1_ns3`: thin metal over `rax`'s units to the pad (7899,5633), a poly row west, a poly south, the pad (7660,6193), a metal south | `tc1` to y 4450; **the rest: piece 11** |
 | y 5578-5598, x 7472-8266; x 7480-7500, y 5580-6075; x 7378-7440, y 6048-6300; y 6274-6292, x 6825-7402; x 6835-6851, y 6264-6400 | `tc2_r5589` west of its east pad: the row, a metal south and west, a poly west and south, a metal west, a poly south | **piece 12** |
@@ -719,7 +719,7 @@ contact (8204,5371).
 |---|---|---|
 | meeting `tc1`'s metal at y 4450 | `e_p9c.png` first tile (4x, both metal shots and the clean shot) | one metal x 8198-8212 across y 4450 |
 | the metal y 4450-5672 | `e_rail.png`, `follow.py 8205 5000 S` (end (8203,5680)) and `N`, `segs.py 8090 8262` (x 8199-8211 at twelve y), `tc2_runs.py col 8205 4440 5665 2`; a scan of the clean shot down x 8200-8210 for green over red | one metal. The scan finds only the two contacts (y 5366-5379, 5672-5683) and a weak 15 px at y 4888-4902. Dark runs of 25 px or more at the same place in both chips: only the contact (8204,5371). Chip 2 alone is dark at y 4770-4793 and dim over the rows y 5024 and y 5066 (chip 1 bright there; the clean shot protected). **Read below 4x** between the tiles |
-| the rows it crosses: bus field y 4460-4690, the L of `r9m_l1w` y 4707-4725, `db_b6` y 5024, `cdp1_lw1` y 5066, the row y 5589 | `e_p9c.png` tiles 1, 2; `textmap.py 8180 4694 8226 4736`, `8192 5046 8222 5088`; `e_rows56.png` | no pad on any: the metal is whole between each row's two edge bars and the clean shot shows the row uniform under it |
+| the rows it crosses: bus field y 4460-4690, the L of `sl_eq_r5_n` y 4707-4725, `db_b6` y 5024, `cdp1_lw1` y 5066, the row y 5589 | `e_p9c.png` tiles 1, 2; `textmap.py 8180 4694 8226 4736`, `8192 5046 8222 5088`; `e_rows56.png` | no pad on any: the metal is whole between each row's two edge bars and the clean shot shows the row uniform under it |
 | (8205,4895), the scan's weak spot and the follower's candidate | `e_p9c.png` third tile | not a contact: a notch in the metal's east edge in chip 2 only; field under the metal; the green blob with a dark ring beside it at (8190,4890) is residue in the gap west of the metal |
 | contact (8204,5371) | `e_pads_e.png` first tile | ring and bright centre in both metal shots, green hole in a pad x 8188-8222; the metal goes on south; the poly leaves east only |
 | the poly at x 8250 | `e_east2.png` (2.4x) | goes on east under the thin metal x 8240-8258 (no pad) and beyond; **read at 2.4x** |
@@ -852,7 +852,7 @@ vertical polys have field on both sides (pink under the metals). Which end drive
 
 Omissions: the pad (7337,6065) and the poly x 7328-7346 are `ras`'s (drawn there).
 
-## Piece 13 (wiring only): the L at the east end of `r9m_l1w` (run 4, 2026-11-18)
+## Piece 13 (wiring only): the L at the east end of `sl_eq_r5_n` (run 4, 2026-11-18)
 
 Views: `l_a.png` (4.5x, clean and chip-2 stripped), `l_m.png` (4.5x, both metal shots),
 `l_p4850.png` (4.3x, four shots), `l_join_a.png`, `l_join_m.png` (4.4x), `l_box.png` (4.3x,
@@ -860,10 +860,10 @@ four shots); overlay `ov_p13.png` (2.8x).
 
 | Net | From | Path | To |
 |---|---|---|---|
-| `r9m_l1w` | the end of `r9m`'s row y 4676 at x 8192 | poly south x 8179-8192, y 4668-4728, in the gap between the VCC rail and `ral_stb`'s metal; east along y 4707-4727 under `ral_stb`'s metal; pad (8246,4716); metal east, south along x 8279-8299; pad (8290,4850); poly east along y 4840-4860 | (8352,4850), 100 px east of the region. The poly ends 5 px further on in a heavy-outlined box x 8355-8385, y 4835-4865, read as a buried contact onto a diffusion that goes on east under the metals from x 8395 (`l_box.png`: one view, four shots): `cdp1`'s west edge, drawn by nobody, **not traced** |
+| `sl_eq_r5_n` | the end of `r9m`'s row y 4676 at x 8192 | poly south x 8179-8192, y 4668-4728, in the gap between the VCC rail and `ral_stb`'s metal; east along y 4707-4727 under `ral_stb`'s metal; pad (8246,4716); metal east, south along x 8279-8299; pad (8290,4850); poly east along y 4840-4860 | (8352,4850), 100 px east of the region. The poly ends 5 px further on in a heavy-outlined box x 8355-8385, y 4835-4865, read as a buried contact onto a diffusion that goes on east under the metals from x 8395 (`l_box.png`: one view, four shots): `cdp1`'s west edge, drawn by nobody, **not traced** |
 
-Joins between named nets: none (`r9m_l1w` only carried on; the extraction's net count does
-not change with this piece). So `r9m_l1w` does not become a line of `cdp1`'s channel: it ends
+Joins between named nets: none (`sl_eq_r5_n` only carried on; the extraction's net count does
+not change with this piece). So `sl_eq_r5_n` does not become a line of `cdp1`'s channel: it ends
 on a diffusion at the datapath's west edge (a source or drain there, or a gate's input by a
 buried contact: not known). The C-shaped poly beside the metal (from the east along
 y 4712-4728 to x 8330, south, east again along y 4795-4815) is the west end of `cdp1`'s line
@@ -1052,8 +1052,8 @@ Looked at because of the sweep:
 | `tc1_ns3` | M | x 7652-7670, y 6400 | ? | going on south (follower: end (7661,7088)) |
 | `tc2_r5589` | P | x 8275, y 5252-5272 | ? | the poly from the pad (8248,5262), going on east to a pad (8490,5262) (25 px east of the region) |
 | `tc2_r5589` | P | x 6835-6851, y 6400 | ? | the poly from the pad (6840,6282), going on south |
-| `r9m_l1w` | P | x 8170-8192, y 4670-4682 | in (believed) | not a port: where this package's drawing meets `r9m`'s row (inside the region) |
-| `r9m_l1w` | P | x 8352, y 4840-4860 | ? | the poly from the pad (8290,4850), 100 px east of the region: it ends in a box at (8370,4850) at `cdp1`'s west edge |
+| `sl_eq_r5_n` | P | x 8170-8192, y 4670-4682 | in (believed) | not a port: where this package's drawing meets `r9m`'s row (inside the region) |
+| `sl_eq_r5_n` | P | x 8352, y 4840-4860 | ? | the poly from the pad (8290,4850), 100 px east of the region: it ends in a box at (8370,4850) at `cdp1`'s west edge |
 | `tc2_m6404` | M | x 6400, y 6012-6040 | ? | going on west, then north at x 6352-6372 (seen to y 5955) |
 | `tc2_m6404` | P | x 6395-6415, y 6400 | ? | going on south |
 | `vcc` | M | x 6795-6848, y 6040 | - | meets `fld`'s VCC rail (inside the region) |
@@ -1138,7 +1138,7 @@ Lines that leave the region (each is drawn to the edge; the port table has the p
 - East of x 8250: `ral_stb` (poly y 5369, seen to x 8425), `tc2_r5718` (poly row y 5718),
   `tc2_sr_q` (poly y 6172), `tc2_sr_c` (poly row y 6367, the top line of `cdp2`'s channel 2),
   `tc2_r5589` (poly y 5262 from x 8275 to a pad (8490,5262), whose metal goes south to
-  (8491,5714)), `r9m_l1w` (from (8352,4850): the box x 8355-8385, y 4835-4865 in which its
+  (8491,5714)), `sl_eq_r5_n` (from (8352,4850): the box x 8355-8385, y 4835-4865 in which its
   poly ends, read as a buried contact, and the diffusion east of it at `cdp1`'s west edge,
   drawn by nobody: `l_box.png`).
 - `cdp1_lw1` (= `tc2_sr_r`) east of x 15584 (`bust`'s Not done): the latch's reset line is
@@ -1232,7 +1232,7 @@ consistent, not proven; it decides the load's gate, not the equation `rax_o# = N
 
 Round 1 of the third round of work: clean (no findings).
 
-### Fourth round of work (pieces 11-16: `tc1_ns3`, `tc2_r5589`, `r9m_l1w`'s L, `tc2_m6404`, the supply bands; the fix to fld's rail)
+### Fourth round of work (pieces 11-16: `tc1_ns3`, `tc2_r5589`, `sl_eq_r5_n`'s L, `tc2_m6404`, the supply bands; the fix to fld's rail)
 
 Round 1 (full review of what was added since 9599d13, 2026-11-18 01:33 +0000, a fresh agent on
 claude-fable-5-2). Told to suspect `tc1_ns3`'s metal over `rax`'s boxes, the pad (7488,5586),
@@ -1243,7 +1243,7 @@ shots with the follower; the two Z-shaped metals at 4.5x; the bands (no metal in
 y 6166-6188 over x 6640-7700 in either chip; each band's join to its fld rail at 4x in both
 metal shots; only field and crossing polys beneath); the VCC leg (straight; the poly
 beneath turns west); the fld rail's end at y 6036 by profile; the verticals, corners and
-all four pads' memberships (no swap); `r9m_l1w`'s L in three shots.
+all four pads' memberships (no swap); `sl_eq_r5_n`'s L in three shots.
 No finding changes a connection. One point undecidable, now marked: `tc1_ns3`'s metal
 over the boxes (9x, four shots): the five stretches are `?M` and the Ambiguities entry
 states what is and is not shown. Not checked: beyond the ports; the four other units'
@@ -1265,5 +1265,5 @@ Round 2: no findings.
 ## Corrections (coordinator, from the handoffs of 2026-11-19)
 
 - Piece 13: the box (8355-8385, 4835-4865) "onto a diffusion ... not traced" is the output node of
-  `eof`'s inverter `r9m_l1w` = NOT `sl_eq_r5`; the C-shaped poly "not joined" is its input gate.
-  `ports.d/tc2.txt`'s `r9m_l1w` is driven from there (direction `in`).
+  `eof`'s inverter `sl_eq_r5_n` = NOT `sl_eq_r5`; the C-shaped poly "not joined" is its input gate.
+  `ports.d/tc2.txt`'s `sl_eq_r5_n` is driven from there (direction `in`).

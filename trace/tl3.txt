@@ -716,7 +716,7 @@ D 4050,3778:4106,3794
 D 4072,3778:4106,3842
 # ====================================================================
 # East column, y 5180-5300: an inverter under the south end of the VSS rail (run 8).
-#   tl3_e4635_u = NOT tl3_e5240
+#   tl3_e4635 = NOT tl3_e5240
 # The rail ends at y ~5296 (textmap 3960 5176 4130 5316 4 --acid). Under it one diffusion column
 # x 4012-4054: the node (y 5202-5226), the gate row (y 5231-5250) and a VSS box (y 5254-5298) with
 # a contact (4028,5278) (px.py col 4017 5176 5330 4, row 5241 3984 4100 4, row 5270 3990 4110 4).
@@ -741,7 +741,7 @@ D 4050,5203:4084,5222
 B 4079,5187:4113,5218
 D 4082,5192:4108,5216
 P 4086,5190:4250,5205
-N P 4200,5197 tl3_e4635_u
+N P 4200,5197 tl3_e4635
 # load: the node's strip y 5202-5226 west under the rail, through the gap (diffusion: px.py row 5214
 # 3816 4014 4), under the thin metal x 3948-3962 and under a plate x 3884-3936, y 5182-5240 (open
 # poly; the strip's edges show across it at y 5198 and y 5225 in both chip-2 shots, rg_load.png

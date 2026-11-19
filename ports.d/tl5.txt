@@ -9,7 +9,7 @@ tl5_w3982   M  4898,2760-2775  ?    the other metal of the pad (4910,2767), whic
 tl5_w4458   P  4967,2801-2820  in   latch c's enable: the row of the pad (5407,2810), T4's north piece
 tl5_w2855   P  4967,2846-2865  ?    the row of T8's north pad (5580,2855)
 tl5_w3245   P  4967,2890-2909  out  the NOR's output: the row of the pad (5452,2900), T5's north piece
-tl5_w3636   P  4967,2930-2950  ?    the clear of latches a and b: the row of the pad (5165,2945), T0; runs on west to the pad (4537,2940) of tl4's track x 4537: the net is tl4_w4198
+rst_a   P  4967,2930-2950  ?    the clear of latches a and b: the row of the pad (5165,2945), T0; runs on west to the pad (4537,2940) of tl4's track x 4537: the net is rst_a
 tl5_w3505   P  4967,2975-2994  ?    latch a's enable: the row of the pad (5494,2985), T6
 
 # East side (x 5683)
@@ -45,7 +45,7 @@ c4l_gab   M  4967,5975-5989  ?    latch c's clear: T6's lower piece, the row y 5
 # South side (y 6350): the poly bus
 tl5_w5936   P  5053-5073,6350  ?    bus line x 5063
 rcs_x1   P  5097-5117,6350  ?    bus line x 5107
-tl5_w3636   P  5140-5160,6350  ?    the clear of latches a and b: from T0's south pad (5148,6108)
+rst_a   P  5140-5160,6350  ?    the clear of latches a and b: from T0's south pad (5148,6108)
 res_b       P  5182-5202,6350  in   from trunks' pad (5190,6065)
 lpstb_b     P  5227-5247,6350  in   from trunks' pad (5232,6105)
 tl5_w2722   P  5355-5375,6350  out  the strong inverter's output: from T3's south pad (5363,6108)

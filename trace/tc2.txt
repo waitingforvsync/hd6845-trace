@@ -480,7 +480,7 @@ M 8205,5754:8248,5965
 # From there, in order:
 #   - the metal runs on south to its end, the pad (8204,5672) (follow.py 8205 5000 S: end
 #     (8203,5680); e_rail.png 0.82x; segs.py: x 8199-8211 at every y sampled). It crosses the
-#     rows of the bus field, the L of r9m_l1w's row (y 4707-4725), db_b6's row y 5024 and
+#     rows of the bus field, the L of sl_eq_r5_n's row (y 4707-4725), db_b6's row y 5024 and
 #     cdp1_lw1's row y 5066 without a contact (textmap 8180 4694 8226 4736, 8192 5046 8222 5088:
 #     metal whole between two edge bars, the row uniform under it), and has ONE contact on the
 #     way, (8204,5371), on the west end pad of a poly that runs east along y 5359-5379 past
@@ -657,7 +657,7 @@ C 6840,6282
 P 6843,6282 y6400 w=17
 N M 7490,5800 tc2_r5589
 
-# ===== Piece 13 (2026-11-18, run 4): the L at the east end of r9m_l1w's row y 4676 (wiring
+# ===== Piece 13 (2026-11-18, run 4): the L at the east end of sl_eq_r5_n's row y 4676 (wiring
 # ===== only). r9m draws the row to x 8192. l_a.png, l_m.png (4.5x, both stripped and both
 # ===== metal shots):
 #   - in the gap between the VCC rail and ral_stb's metal the row turns south: a poly

@@ -108,7 +108,7 @@ on a staircase of pads at x 7810-7860, from which metals run west:
 | `c4l1` | y 4547, pad (7810,4547) | west to x 7532, south to (7535,4619), end not looked at | c1 outer |
 | `cdp1_l4632` | y 4592, pad (7848,4592) | west, south, west along y 4657 to (6913,4658), across the crossing field | c2 outer |
 | `cdp1_l4676` | y 4635, pad (7830,4635) | west, south, west along y 4704 to (6921,4699), across the crossing field | c3 outer |
-| (none) | y 4676, pad (7855,4676) | `r9m`'s `r9m_l1w`; the row turns south near x 8190 | - |
+| (none) | y 4676, pad (7855,4676) | `r9m`'s `sl_eq_r5_n`; the row turns south near x 8190 | - |
 
 `sl_eq_r5` (R5's match): not drawn west of `cdp1` (a straight guess crossed `ras`
 geometry; with the step, it probably comes from the row that turns south at x 8190 or
@@ -238,6 +238,6 @@ photographed pads (real: x ~6490 and ~6447); connectivity unaffected
 ## Corrections (coordinator, from the handoffs of 2026-11-19)
 
 - `sl_eq_r5` (lines 50 and 113, and the comment in `trace/bust.txt`, line 191): its row y 4719 ends at
-  x 8331 in a C-shaped poly that is the gate of an inverter (`eof`): `r9m_l1w` = NOT `sl_eq_r5`. The row
+  x 8331 in a C-shaped poly that is the gate of an inverter (`eof`): `sl_eq_r5_n` = NOT `sl_eq_r5`. The row
   that turns south at x 8190 and the pad (8246,4716) are that inverter's output, not `sl_eq_r5`; the
   metal from the pad (7782,4766) is another net, not looked at.

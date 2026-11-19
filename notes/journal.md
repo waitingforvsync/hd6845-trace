@@ -1593,7 +1593,7 @@ open join (`ck_a_u`). Claims now: `tl3` (Tom, run 11), `lc2` (Matt, continuing d
 - **Left on purpose.** `tl3`'s firm renames wait for Tom's active claim to end, because they would
   rewrite `trace/tl3.txt` under his branch: `tl3_e5240` -> `tl3_w5025`,
   `tl3_e4372` -> `tl3_w4546`,
-  `tl3_e4635_u` -> `tl3_e4635`. The joins through `?M` stay as aliases (AMB-032, AMB-033), and so does
+  and the open join of latch C's data. The joins through `?M` stay as aliases (AMB-032, AMB-033), and so does
   `rcs_cond_lat` (AMB-031). Placeholder-to-placeholder aliases such as `tl4_w3070` -> `tl3_e4243` are
   not renamed. All of this is listed in the master list's `rename` row.
 - **`operation.md`.** The tracers had kept their rows current (AMB-009's resolution, `rcs_in1` = NOT
@@ -1630,10 +1630,10 @@ nets, 4,282 transistors, 0 errors, 0 warnings. No active claims.
 - **End of frame (`eof`, the lead group's first two runs).** R4's match `rc_eq_r4` is drawn end to end
   and is the data of `bd1`'s latch gated by `inh_lat` and the input of `bd1`'s inverter A (firm join;
   AMB-036 on one contact). R5's match `sl_eq_r5` drives one inverter in `cdp1`'s slice-0 position
-  (`r9m_l1w` = NOT `sl_eq_r5`, firm), whose output runs west through the top-left strips into the band
+  (`sl_eq_r5_n` = NOT `sl_eq_r5`, firm), whose output runs west through the top-left strips into the band
   `tlb`, where its loads must be. **`inh_ck` is `inh_ck`** (firm): `trunks`' line S climbs on to the top
   left, so the inhibit/strobe of the input buffer row is what opens the vertical control's master/slave
-  latch pairs and the field latch path. **`rcs_x1` = NOT `lc1_w7170`**, and **`lc1_w7304` =
+  latch pairs and the field latch path. **`rcs_x1` = NOT `lc1_w7170`**, and **`rst` =
   NOR(`lpstb_b`, `res_b`)** (firm; believed the reset), whose buffered copies clear `tl4`'s and `tl5`'s
   latches and latch D.
 - **`lc2` is done but for its edges** (80 transistors, Fable): latch D, the `lc_step` latch, is
@@ -1656,7 +1656,7 @@ nets, 4,282 transistors, 0 errors, 0 warnings. No active claims.
 - **Other blocks' notes**: corrections appended to `bust`, `cdp1`, `tc2`, `r9m`, `tl1`, `tl2`, `tl4`, `tl5`,
   `tl6`, `rdp2`, `rdp3`, `bd1`, `hcj`, `ucz`, `mrach`, `lc1`, `lc3`, `trunks`, `tcw`, `fld`, `ur`, `tla`,
   `urch`; `tl3.md` now that its claim has ended (including `tl4`'s corrections of 2026-11-18).
-  `ports.d/tl6.txt` (`inh_ck` in) and `ports.d/tc2.txt` (`r9m_l1w` in). Not changed: comments in
+  `ports.d/tl6.txt` (`inh_ck` in) and `ports.d/tc2.txt` (`sl_eq_r5_n` in). Not changed: comments in
   `trace/bust.txt` and `trace/tc2.txt` that the notes now correct.
 - **Floor plan.** The coarse left-centre block is split into what `lc1` and `lc3` have not drawn
   (`lc2` is its fragment); the top-left strip 3 block is cut to the rows above y 2890.

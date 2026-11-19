@@ -616,7 +616,7 @@ follower takes `tc2_sr_r`'s thin metal 440 px through `rax`'s units 3-5 over six
 while `rax`'s own profile says short straps: nothing drawn there. (3) `tc2_rxl`'s load tie (box
 x 8021-8048, y +38..+61 per unit) is under metal in units 2-4 and flush under the band in units 0
 and 1 (consistent, not proven); it decides the load's gate, not the equation. Also seen once: the
-box (8355-8385, 4835-4865) at the end of `r9m_l1w`'s L, read as a buried contact onto diffusion at
+box (8355-8385, 4835-4865) at the end of `sl_eq_r5_n`'s L, read as a buried contact onto diffusion at
 `cdp1`'s west edge.
 
 ## AMB-029: the feedback of the pair `rcs_n4200` / `rcs_bd3330` through one load tie (2026-11-18)

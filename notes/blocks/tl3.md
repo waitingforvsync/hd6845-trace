@@ -417,7 +417,7 @@ Overlay of both units: `rn23_ov.png` (1.6x, metal and clean shot).
 
 ### The inverter under the south end of the east rail, y 5180-5300: traced; its tie uncertain
 
-    tl3_e4635_u = NOT tl3_e5240
+    tl3_e4635 = NOT tl3_e5240
 
 **Its output is, by a track in `tl4`'s strip, the data of latch C** (believed: the track is
 measured at both ends and not drawn, so the name carries `_u`).
@@ -449,7 +449,7 @@ measured at both ends and not drawn, so the name carries `_u`).
   latch C's data** (`textmap.py 4240 4606 4312 4664 3`: bright centre x 4273-4282, y 4633-4639,
   hole, the row's poly arriving from x 4240). The track and its two pads lie 28 px inside
   `tl4`'s strip, which is claimed, and are not drawn: the row is drawn to x 4250 and named
-  `tl3_e4635_u`.
+  `tl3_e4635`.
 - The thin metal x 4100-4112 (`inh_ck`'s south arm) passes over the box: Ambiguity 12.
 - Load: the node's strip y 5200-5226 runs west under the rail, through the gap (diffusion:
   `px.py row 5214 3816 4014 4`, chip-2 stripped shot blue 88-94 at x 3976-3984, where poly has
@@ -1012,7 +1012,7 @@ Things looked at and left as they are:
 | `rcs_mv` | poly | (4250, 4904-4925) | ? | the poly of the pad (4234,4918), on east |
 | `rcs_mv` | metal | (4250, 5760-5772) | ? | the metal x 4236 from that pad, east out of the strip along y 5766 |
 | `tl3_e5240` | poly | (4250, 5231-5250) | in | gate of the inverter under the rail's south end; in `tl4`'s strip the row turns south at x ~4277 |
-| `tl3_e4635_u` | poly | (4250, 5190-5205) | out | that inverter's output row; in `tl4`'s strip it ends on a pad (4278,5198) of a metal x 4279 whose north pad (4278,4636) is on `tl3_e4635`'s row (not drawn: open join) |
+| `tl3_e4635` | poly | (4250, 5190-5205) | out | that inverter's output row; in `tl4`'s strip it ends on a pad (4278,5198) of a metal x 4279 whose north pad (4278,4636) is on `tl3_e4635`'s row (not drawn: open join) |
 | `rcs_x1` | poly | (3533, 5365-5378) | in | the row of latch C's clear (pad (4192,5373)), from `tl2`'s row y 5371 |
 | `tl3_w5025` | poly | (3533, 5408-5421) | out | latch B's inverted output again: the row from `tl2`'s track G, across the foot |
 | `tl3_w5025` | poly | (4250, 5408-5421) | out | the same row, on east to `tl4`'s pad (4279,5413) (`tl4`: `tl3_e5240`) |
@@ -1738,7 +1738,7 @@ Round 1: no findings.
   was re-drawn by `tl3` as `tl3_enor`; `rcs_mu`'s inverter at y 3320-3436 was not re-read).
 - **For `tl4`** (its strip, claimed; not drawn here): the pad with a contact (4278,5198), the metal
   x 4279 north from it to the pad with a contact (4278,4636) on `tl3_e4635`'s row (which closes
-  the open join `tl3_e4635_u`), and `tl3_e5240`'s row east of x 4250, which turns south at
+  the open join `tl3_e4635`), and `tl3_e5240`'s row east of x 4250, which turns south at
   x ~4265-4290 beyond y 5255.
 - `inh_ck`'s source (east of the strip: the row y 5631 into `tl4`, `tl5`, `tl6`).
 - Where the true outputs of latch A and latch B are taken (`tl3_w3550`, `tl3_w5156` end in
