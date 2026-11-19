@@ -3,9 +3,8 @@
 ## Status
 
 2026-11-18 23:15 -0600 (run 10, Matt Godbolt, on Fable 5.2). **Partial: the west cluster's east column: a second
-toggle flip-flop, clocked by the first** (piece N, 20 transistors; 80 in the package; reviewed, round 16, its fixes
-being checked), **and the strip's last wiring** (piece P: four through lines in the south-east corner, the west ends
-of three gate rows; in review). Run 9 is on main (87cff0c).
+toggle flip-flop, clocked by the first** (piece N, 20 transistors; 80 in the package; reviewed, rounds 16-18), **and the strip's last wiring** (piece P: four
+through lines in the south-east corner, the west ends of three gate rows; reviewed, round 17). Run 9 is on main (87cff0c).
 
 ```
 lc2_w8992 = NOT( lc2_w8298 & lc2_w9034 | lc2_w8450 | lc2_w8914 )          master   (depends: the lc2_w8450 term, as in the first)
@@ -586,8 +585,9 @@ under the middle rail on theirs. The middle rail is shared; the copy's VSS rail 
 y 9252-9266 and a node below it. The first gate is the poly from the pad (5254,9208) on the output's L-shaped metal:
 `lc2_w9034`. The node `lc2_w9171` runs west past the rail's edge to a strip x 5060-5078 that goes south beside the
 rail (outlined in the metal shot, dull in the clean shot: `s3.png` 10x, `px.py row 9172 5052 5112`): taken as a
-diffusion joining it to the node below the second gate, as node Z's strip does in the flip-flop; uncertain (`?D`),
-drawn to y 9256. Where the node's load is, is `lc3`'s (a VCC box with a contact (4950,9225), a ringed box near
+diffusion joining it to the node below the second gate, as node Z's strip does in the flip-flop (review round 17:
+diffusion, chip-2 stripped red minus green +12 to +18 along y 9166-9286, no poly on it, ending about y 9290 where it
+turns under the rail); drawn to y 9256. The node also has a dead-end tab east of the rail to x ~5202 (round 17). Where the node's load is, is `lc3`'s (a VCC box with a contact (4950,9225), a ringed box near
 (5020,9203) and a red-dotted plate (5000-5045, 9235-9300) are there: not drawn).
 
 **The counter.** Stage 1 (west) changes state once per pulse of `lc2_w8475`; its slave output `lc2_w8298` is stage 2's
@@ -679,7 +679,8 @@ Run 3 (latch D's lower unit and the bus field):
 | the same four | M | x 6299, 6342, 6387, 6432; 9233 | ? | run 10: at the south edge, into `lc3` |
 | `lc2_w9079` | M | 5509-5527, 9233 | in | run 10: row 3's thin metal, from `lc3` |
 | `lc2_w9210` | M | 5334-5350, 9233 | in | run 10: row 5's metal, from `lc3` |
-| `lc2_w9171` | D | 5062-5078, 9256 and 5104-5158, 9256 | ? | round 16: the stack south of the east column, on into `lc3` |
+| `lc2_w9171` | D | 5062-5078, 9256 | ? | rounds 16-17: the top node of the stack south of the east column leaves by its strip, on into `lc3` |
+| `vss` | D | 5104-5158, 9256 | - | round 17: that stack's VSS node, on into `lc3` |
 | `vss` | M | 5084-5148, 9256 | - | round 16: the east rail on south into `lc3` |
 
 ## Ambiguities
@@ -1357,3 +1358,34 @@ metal shot (accepted from chip 1 and both stripped shots); load-tie junctions se
 (5340,9208)'s poly reaches row 5 (it does: piece P).
 
 Round 16: two findings that change connections (a row, a transistor), fixed; geometry fixed.
+
+Round 17 (2026-11-19 00:05 -0600, a fresh agent on claude-fable-5-2, changes since d197845; images
+`cache/scratch/lc2/review-17/`, 16 of them): a fix check of round 16's fixes to piece N, and the first review of
+piece P (the four through lines, the west ends of rows 2, 3, 5).
+
+Piece N's fixes, confirmed: the gate y 9182-9198 is one poly from the pad (5254,9208) by the diagonal, crosses the
+column (edge line at x 5104 under it) and ends at x 5086, short of the strip; the contact (5124,9224) is rail to the
+VSS node (ring in both metal shots, pits); the rail is continuous (its dark bars are 7-9 px in both chips); the node
+is separate from the box above (two edge lines, field y 9143-9158); the strip x 5062-5078 is diffusion (chip-2
+stripped +12 to +18 along y 9166-9286, no poly), joins the node at its top and ends about y 9290 in `lc3`; the rail
+reaches x 5162 at y 8715; the box bottom is y 9136.
+
+Piece P: no findings. B1: the four lines as drawn, separate, no pad, ring or hole (the dark patch at (6422,8653) is
+in chip 2 only, the speck at (6432,8776) in the clean shot only); nothing else in the corner. B2: one poly from the
+pad (5343,9038) to x 5545, no contact under the metals at x 5386, 5430, 5473; the box above is field. B3: pad and
+contact (5520,9081) present, no metal north of it, no other contact to y 9233. B4: one poly, no contacts, pad and
+contact (5341,9211) present; field at y 9183-9189 separates the pad from the L-shaped metal.
+Both `sameconn.py d197845` runs showed only the intended differences.
+
+Findings:
+
+1. **Where a wire leaves, in the ports file only**: `ports.d/lc2.txt` had `lc2_w9171 D 5104-5158,9256`; the column at
+   that edge is the VSS node, as the extraction has it; `lc2_w9171` leaves only by the strip. Fixed in the ports file
+   and the Ports table (the port is `vss`). No geometry change.
+2. Geometry: the node `lc2_w9171` also runs east of the rail to x ~5202 (chip-2 stripped row 9172, x 5162-5183: red
+   minus green +20 to +26 against -5 on field; chip-2 metal 169/131/92, like known open diffusion), a dead-end tab
+   above the diagonal poly. Added. The strip's `?` dropped on the reviewer's reading.
+
+Not checked: the ringed box (5020,9203) and the VCC box (4950,9225) (Not done: with that stack's load).
+
+Round 17: one finding on a port's name, fixed; one geometry-only.

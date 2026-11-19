@@ -66,8 +66,8 @@ lc1_w7170   M  4466-4484,9060  ?    track A, drawn end: runs on south past the p
 # Run 10: the east column (second flip-flop)
 lc2_w9034   M  5247-5263,9233  out  the second flip-flop's slave output, south into lc3
 vss         M  5084-5148,9256  -    the east rail on south into lc3
-lc2_w9171   D  5104-5158,9256  ?    the stack under the east rail south of the east column, on into lc3
-lc2_w9171   D  5062-5078,9256  ?    the strip beside that rail (uncertain diffusion), on into lc3
+vss         D  5104-5158,9256  -    the VSS node (contact (5124,9224)) of the stack under the east rail south of the east column, on into lc3
+lc2_w9171   D  5062-5078,9256  ?    the stack's top node leaves by the diffusion strip beside that rail, on into lc3 (it ends about y 9290)
 # Run 10, piece P: through lines and row ends
 lc2_x6299   M  6450,8630       ?    through line, east edge
 lc2_x6299   M  6299,9233       ?    through line, south edge

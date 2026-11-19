@@ -703,7 +703,8 @@ M 5084,9160:5148,9256
 D 5104,9163:5158,9256
 C 5124,9224
 D 5076,9163:5110,9180                       # the top node runs west past the rail's edge ...
-?D 5062,9163:5078,9256                      # ... to a strip x 5060-5078 that runs south beside the rail (outlined in the metal shot; dull in the clean shot, like node Z's strip in the flip-flop): taken as diffusion that joins this node to one below the second gate, uncertain; drawn to y 9256
+D 5154,9163:5202,9176                       # round 17: and east of the rail to x ~5202, a dead-end tab above the gate's diagonal poly
+D 5062,9163:5078,9256                       # (round 17: diffusion, no poly on it; it ends about y 9290 in lc3) ... to a strip x 5060-5078 that runs south beside the rail (outlined in the metal shot; dull in the clean shot, like node Z's strip in the flip-flop): taken as diffusion that joins this node to one below the second gate, uncertain; drawn to y 9256
 P 5086,9190 x5160 5200,9210 x5242 w=16      # the gate: from the pad's poly, up a diagonal, under the rail; its end cap at x 5086-5104 is over field
 N D 5130,9171 lc2_w9171
 
