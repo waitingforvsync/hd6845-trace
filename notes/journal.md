@@ -1669,3 +1669,33 @@ nets, 4,282 transistors, 0 errors, 0 warnings. No active claims.
   the coordinator pushes its series as one push where it can, or `mergecheck.py` says at once that main
   has moved. Taken: from this pass the handoff work goes in one push and the refresh in as few as its
   steps allow.
+
+## 2026-11-19 10:22  Refresh
+
+- **Renamed** (`names.py compare` after each batch: only names changed; 26 nets). No claims were
+  open, so `tl3`'s and `lc2`'s placeholders could be taken too.
+  - Batch 1: `tcw_a`, `lc2_w8172`, `tl3_e4152`, `tl4_w4501`, `tl5_w5631` -> `inh_ck`.
+  - Batch 2, firm joins into names already in use:
+    `lc1_w7140`, `tl1_w4025`, `tl3_w3506`, `tl3_w4200` -> `rcs_x1`;
+    `tl3_w5112`, `tl3_e4808`, `rcs_g4240` -> `rcs_x1`; `tl3_e4915` -> `rcs_mv`;
+    `tl3_w3765` -> `rcs_a2`; `lc1_w7343` -> `res_b`; `lc1_w7257` -> `lpstb_b`; `bd1_a`, `rdp3_n7s9`
+    -> `rc_eq_r4`; `tl4_w5455`, `tl5_w5457` -> `c4l_l3`; `tcw_m6232`, `tl5_w4590` -> `c4l_gab`.
+  - Batch 3, new names: `r9m_l1w`, `tl4_w2512`, `tl1_w2592` -> `sl_eq_r5_n`; `lc1_w7304` -> `rst`,
+    `lc1_w7468` -> `rst_n`, `lc1_w7606`/`tl5_w3636`/`tl4_w4198` -> `rst_a`, `lc1_w7734` -> `rst_b`,
+    `lc1_w7864` -> `rst_c`; the open join `tl3_e4635_u` -> `tl3_e4635`.
+  - `rst` is named for what its traced equation does (NOR of the two pins, clearing latches). That it
+    is the datasheet's reset is believed, and its glossary row says so.
+  - The renames left about 45 tautologies in the prose ("X = X") across notes, journal, trace
+    comments and floor-plan labels. They were reworded by script and by hand. Older journal entries
+    were reworded where the former-names check required it.
+- **Left on purpose**: the joins through `?M` (AMB-032, AMB-033), `rcs_cond_lat` (AMB-031), and
+  placeholder-to-placeholder aliases (listed in the `rename` row).
+- **`operation.md`**: header (2,379 nets, 4,282 transistors), 839 of 1,261 equations firm, ranges
+  AMB-001 to AMB-037 and R1-R45. The `inh_ck`, `rcs_x1` and reset passages were reworded after the
+  renames (`rcs_x1`'s input is `lc2`'s staircase line, which also clears `lc2`'s counter). The
+  "Not established" bullet on the end-of-frame sequence now says what the lead group has traced
+  towards it.
+- **`out/` rebuilt**: 0 errors, 0 warnings, 0 names outside the glossary, one open join (`ck_a_u`).
+  Coverage: 63.0% traced, 99.7% in a package, 0.0% in neither.
+- **Pushed in two pushes** (handoffs, then the refresh), following `tl3`'s request to spare the
+  tracers' gate runs.
