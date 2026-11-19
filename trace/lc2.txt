@@ -616,6 +616,7 @@ N M 4866,8940 lc2_w8857
 # diffusion strip x 4838-4852 east of the rail joins the two. Views z8-z15; survey.md.
 M 4757,8960:4808,9190                       # the west rail on south (drawn to y 9190)
 M 4757,9045:4820,9190                       # ... wider from y 9045
+M 4757,8960:4820,8968                       # round 14: and at y 8960-8966 it reaches x 4820
 M 4952,8960 y9190 w=56                      # the middle rail on south (drawn to y 9190)
 D 4750,8956:4808,9175                       # the column under the rail
 D 4708,8975:4752,9175                       # ... and west of it to x 4708 (the outline round the whole stack in the metal shot: x 4708-4855, y 8975-9178)
@@ -624,7 +625,7 @@ D 4800,9043:4852,9062                       # Z's upper part east ...
 D 4838,9043:4852,9175                       # ... the strip round the VSS node and the two rows' ends ...
 D 4800,9158:4852,9175                       # ... and Z's lower part
 # the rows
-P 4845,8975:4885,9018                       # pad box of K3's output metal
+P 4845,8975:4880,9012                       # pad box of K3's output metal (round 14: its poly ends at x 4880, y 9012)
 C 4862,8998
 M 4866,8975 y9004 w=14
 P 4574,8977:4847,8994                       # its row west across the column to the END pad of track C
@@ -647,15 +648,17 @@ M 4560,9112:4652,9132                       # an L-shaped metal brings the enabl
 M 4553,9112:4575,9190                       # (drawn to y 9190: it runs on south)
 P 4660,9116:4745,9140                       # its row east; under the rail it lies lower
 P 4735,9133:4825,9152
-# node T: a band east above the top row, to a ringed box at the head of its load
+# node T: a band east above the top row, to a ringed box where its load's gate poly is tied; from the band's end a
+# diffusion strip runs SOUTH between the pad box and that poly to the load's plate (round 14)
 D 4750,8956:4900,8972
-D 4884,8905:4902,8972
-D 4880,8905:4925,8922
-D 4908,8905:4922,9110                       # the load's strip: long (y 8945-9100 under its poly)
-P 4904,8925:4926,9100                       # the load's poly
-P 4874,8925:4908,8945                       # ... which is one with K3's arm (lc2_w8930) over the ringed box
+D 4884,8924:4902,8972
+?D 4886,8970:4900,9020                      # the strip beside the pad box: 14 px between two poly edges (uniform down its length in all four shots; tan in the clean shot at its east side): uncertain
+D 4878,9018:4900,9104                       # ... and on under the plate to the VCC open diffusion
+P 4904,8925:4926,9100                       # the gate poly: over FIELD from the ringed box south (round 14) ...
+P 4864,9040:4926,9098                       # ... to the load's plate, one poly with it
+P 4874,8925:4908,8945                       # at its head it is one with K3's arm (lc2_w8930) over the ringed box
 B 4880,8922:4905,8950
-D 4878,9102:4985,9132                       # open diffusion at the load's foot, to a VCC box under the middle rail
+D 4878,9102:4985,9132                       # open diffusion at the plate's foot, to a VCC box under the middle rail
 D 4932,9085:4985,9132
 C 4952,9108
 # node T west: a ringed box west of the rail, on the end of the row of lc2_w8692 (K2's data row)
@@ -665,11 +668,5 @@ P 4594,8897:4720,8916                       # the row from the vertical poly x 4
 P 4696,8897:4720,8952
 B 4694,8920:4724,8954
 P 4578,8770:4596,8916                       # that vertical poly on south from y 8770
-# a second load on lc2_w8857: the pad box's poly runs on south by a neck (ringed: the tie) as a plate over a strip that
-# ends in the same VCC open diffusion
-P 4868,9012:4890,9044
-B 4874,9016:4894,9040
-D 4878,9022:4900,9104
-P 4864,9040:4902,9098
 @alias lc2_w8298 lc2_w8857
 @alias lc2_w8692 lc2_w8930

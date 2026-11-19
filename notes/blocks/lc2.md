@@ -3,8 +3,8 @@
 ## Status
 
 2026-11-18 22:15 -0600 (run 9, Matt Godbolt, on Fable 5.2). **Partial: the west column of the west cluster is
-traced: gates K3 and K4** (pieces L and M, 12 transistors; 61 in the package; L reviewed, rounds 12-13; M not yet
-reviewed). Run 8 is on main (bd81e81). **With latch K they are a toggle flip-flop**:
+traced: gates K3 and K4** (pieces L and M, 11 transistors; 60 in the package; L reviewed, rounds 12-13; M reviewed, round 14,
+its fix being checked). Run 8 is on main (bd81e81). **With latch K they are a toggle flip-flop**:
 
 ```
 lc2_w8552 = NOT( lc2_w8475 & lc2_w8298 | lc2_w8450 | lc2_w8725 )          master, K1   (depends: the lc2_w8450 term)
@@ -18,7 +18,7 @@ low, and each takes the other's outputs crossed, so the pair changes state once 
 (`lc2_w8450` = NOT `lc1_w7170` on the master, `lc1_w7170` itself in series in the slave: cleared, `lc2_w8552` = 0,
 `lc2_w8692` = 1, `lc2_w8298` = 0). **Two names became one net each**: K3's output (`lc2_w8857`) is track C,
 `lc2_w8298`; K4's output (`lc2_w8930`) is K2's data row, `lc2_w8692`. The older names are kept (`@alias`). The clock
-arrives from the south-west on an L-shaped metal (not followed). Full extraction: 2366 nets, 4263 transistors,
+arrives from the south-west on an L-shaped metal (not followed). Full extraction: 2366 nets, 4262 transistors,
 0 errors, 0 warnings.
 
 Earlier:
@@ -516,11 +516,10 @@ Under it (`railprof.py 4758 4796 8750 9245`):
 | the stack's outline | x 4708-4855, y 8975-9178 in the metal shot: the column runs west of the rail to x 4708 (rows orange-red from x ~4705) | `o17_m.png`, `z8_a.png` |
 | the pads | track C ends on (4560,8996) (`textmap.py 4544 8978 4580 9012`; nothing of the track at y 9016-9031); track A (4473,9038) (`textmap.py 4458 9022 4494 9056`), and it runs on south; (4604,9080) and (4648,9124) (`textmap.py 4588 9064 4622 9096`, `4632 9108 4666 9140`) | `z14_m.png`, `z14_a.png` |
 | the clock's source | at the pad (4648,9124) an L-shaped metal arrives: y 9112-9132 from x 4560, then south at x 4553-4575 (drawn to y 9190) | `z14_m.png`, `z8_m.png` |
-| node T east | a pale band y 8956-8972 from under the rail east to x ~4882, then north through a ringed box (4880-4905, 8922-8950) to a strip of open diffusion (4880-4925, 8905-8922) | `z15.png` (5.5x, three shots), `z11.png`, `z13.png` |
-| T's load | a long one: poly x 4904-4926 from y 8925 to 9100 (red-dotted in the clean shot, reddish in both metal shots) over a diffusion strip x 4908-4922 that ends in an open diffusion (4878-4985, 9102-9132; `opendiff.py`: 4883-4909 x 9108-9130) joined to a VCC box (4932-4985, 9085-9132, contact (4952,9108)). W/L 14/175 | `z13_m.png`, `z10_c.png`, `o17_m.png` |
-| T's tie, and K3's gate | the load's poly is one with the arm of K3's strip (`lc2_w8930`) over the ringed box: so K3's series gate is T | `z13.png`, `z13_m.png` (the box: thick outline, bright centre in chip-1 metal); review round 13 saw cross lines at x 4880-4886 and 4902-4906 on the arm's band |
+| node T east | a pale band y 8956-8972 from under the rail east to x ~4900; at its end a ringed box (4880-4905, 8922-8950) to the north and a diffusion strip to the south | `z15.png` (5.5x, three shots), `z11.png`, `z13.png`; review round 14: `tband.png`, `head.png` |
+| T's load | the strip runs south from the band's end, x 4886-4900 beside the pad box (14 px between two poly edges: drawn uncertain) and x 4878-4900 below it, under a plate (4864-4926, 9040-9098; channel colour, `px.py col 4890 9040 9100`: 157-197/81-134/40-69) into an open diffusion (4878-4985, 9102-9132; `opendiff.py`: 4883-4909 x 9108-9130) joined to a VCC box (4932-4985, 9085-9132, contact (4952,9108)). W/L 22/58 | review round 14 (`neck.png`, `east_strip.png`, `east_strip2.png`); `px.py row 9014 4846 4906` (pink field south of the pad box: no neck), `col 4894 8950 9046` (uniform y 8962-9034) |
+| the load's gate, T's tie, and K3's gate | the plate is one poly with a long poly x 4904-4926 that runs north over field (`px.py col 4914`: 71-140/38-91, darker than the plate's channel) to the ringed box, where it is tied to T and is one with the arm of K3's strip (`lc2_w8930`): so K3's series gate is T | `z13.png`, `z13_m.png`; round 14: the green rim at x 4903 runs y 8960-9036 and is absent at y 9040-9092; one bottom outline at y ~9096 |
 | node T west, and K2's data row | T's band runs west of the rail to a ringed box (4694-4724, 8920-8954); on it ends the row y 8897-8916 that comes from the vertical poly x 4578-4596, K2's row b (`lc2_w8692`) | `z14_m.png` (the box with its ring), `z15.png` |
-| a second load on `lc2_w8298` | the pad box of (4862,8998) runs on south by a ringed neck (4868-4890, 9012-9044) as a plate (4864-4902, 9040-9098; channel texture in the chip-2 stripped shot: `px.py col 4890 9036 9112`) over a strip that ends in the same VCC open diffusion. W/L 22/58 | `z10_m.png`, `z10_c.png` (8x), `o17_m.png`. Ambiguity 16 |
 
 **What the four gates are.** With `c` = `lc2_w8475`: while `c` is high the master is open (`lc2_w8552` = NOT
 `lc2_w8298`, `lc2_w8725` = NOT `lc2_w8692`) and the slave holds (`lc2_w8298` = NOT `lc2_w8692` and back); while `c` is
@@ -680,13 +679,13 @@ Run 3 (latch D's lower unit and the bus field):
    other gates, and the chip-2 stripped shot is mixed (`px.py row 8855 4776 4876`). Drawn firm; if it is wrong, X has
    no pull-down at all. Also the second load strip (`?D`), above.
 
-16. **Gate K4** (run 9). (a) The second load on `lc2_w8298` rests on the pad box, the ringed neck and the plate being one
-   poly (one outlined shape in the metal shot); if the neck is not a tie the plate is something else. (b) T's load is
-   long and weak (14/175) against 22/57 and 22/58 on `lc2_w8298`: read from the red-dotted band, its ends from the
-   open diffusions at head and foot. (c) The ringed box at the head of the load joins three things (T's band, the
-   load's poly, K3's arm): its outline is clear, what is under it is not. (d) Whether T's band is continuous under the
-   pad box's north edge at x 4836-4848 (`px.py row 8963`: field-like there in the chip-2 stripped shot, pale in the
-   clean shot).
+16. **Gate K4** (run 9, after review round 14). (a) The diffusion strip from T's band south to the plate is 14 px wide
+   beside the pad box, between two poly edges; chip-2 colours do not separate so narrow a diffusion from field (it
+   reads field-like there, red minus green -5 to -24), the clean shot has it dull to tan and uniform down its length.
+   It is drawn `?D` for y 8970-9020. It is adopted because the plate below has a channel, the plate's poly is tied to
+   T at the ringed box, and there is no neck from the pad box (pink field at y 9014): the load's source must be T.
+   (b) What is under the ringed box's outline (T's band, the gate poly, K3's arm) is not seen. (c) My first reading
+   (shipped as 514d86b) had the plate as a second load on `lc2_w8298` and the long poly as a 14/175 load: wrong.
 
 ## Not done
 
@@ -697,6 +696,7 @@ Run 5:
   node D's west lobe (Ambiguity 9); the area (5785-5830, 9200-9265) below the block is field (round 6: red minus green 0-2 in the chip-2 stripped shot).
 - The output poly's leg x 5924-5940 runs on south in `lc3`'s strip to about y 9540 and turns east along y 9525-9545 (round 6; not drawn by `lc3`).
 - Rows 2, 3 and 5 west of x 5545. The fifth staircase line south of (5257,8334) (pads on it near (5257,8425)?); pads (5295,8472), (5341,8539), (5341,8562), (5341,9038).
+- Seen by review round 14, not drawn: a VCC box (4932-4985, 8958-9018) with a contact (4950,8990) under the middle rail (the east column's: it is where the turned copy's first load would be); a diffusion under track A from y 9083 south (no contact to the track down to y 9199).
 - (Done: the west column of the west cluster: latch K, gates K3 and K4.) Left in the cluster: **the whole east column** (x 4990-5330) and the east rail south of y 8770; tracks A and B south of their drawn ends (y 9060, 8700) and the clock's metal south of y 9190 (all on into `lc3`); what else `lc2_w8552`, `lc2_w8725`, `lc2_w8692` reach.
 - **The diffusion under tracks A, B, C** (Ambiguity 13): pale tan under the three tracks from y 8340, to y 8430 (C), 8540 (B) and on south (A); what it joins and whether any poly crosses it is not read.
 - (Done, run 7: gate 9 of `lc1`'s column.) Its output's metal north of y 8067; rail 1 south of y 8160 and rail 2 south of y 8067.
@@ -1152,3 +1152,44 @@ box at the head of K4's load: for piece M's review). `tools/t.sh lc2 sameconn.py
 `.venv/bin/python tools/sameconn.py 8c767ac`: both `connections identical`.
 
 Round 13: no findings.
+
+Round 14 (full review of run 9's piece M: gate K4, 2026-11-18 22:45 -0600, a fresh agent on claude-fable-5-2, at commit
+514d86b; images `cache/scratch/lc2/review-14/`, 14 used). Told to suspect: Z as one node; T's band east; the ringed
+box, the head diffusion and the long strip as a load; the west box and the row from the vertical poly; the second
+load; the pads and the tracks' ends; row 1's length; anything left out.
+
+Checked and found correct: the equation and both merges of names. Z is one node (closed outline, tan strip
+x 4838-4852, `z_strip.png`; the VSS node ends at x ~4806 with pink beyond; rows 3 and 4 end at x 4820-4824, row 2 at
+~4828; green field between the strip and the plate). T's band is continuous east, diffusion-tan under the thin metal,
+clear of the arm and of row 1 (`tband.png`, `head.png`). The long poly does not touch K3's pad box. The west box, the
+row and the vertical poly x 4578-4596 are one poly with no contacts (`westbox.png`, `west_m.png`). All five pads, both
+contacts, the end of track C and the L-shaped metal are as drawn; no other contact on tracks A, B, C or the thin
+metals.
+
+Findings:
+
+1. **Changes a transistor's nets** (not the equation): the plate (4864-4902, 9040-9098) is T's load, not a second load
+   on `lc2_w8298`, and the 14/175 load does not exist. No neck or buried contact at (4868-4890, 9012-9044): the clean
+   shot has field directly south of the pad box's poly, which ends at y ~9010 (`px.py row 9014`: pink
+   186-201/103-125/98-122 at x 4850-4878; mine agrees). The diffusion under the plate runs north as a strip
+   x 4886-4900 into T's band (`px.py col 4894`: uniform y 8962-9031). Plate and long poly are one poly (the green rim
+   at x 4903 stops at y 9036; one bottom outline). The long poly lies over field (`px.py col 4914`: 71-140/38-91; my
+   plate channel reads 157-197/81-134). The head "open diffusion" (4880-4925, 8905-8922) is a poly-to-poly field gap
+   (`opendiff.py` does not list it). Confirmed and fixed: neck, second load, long strip and head diffusion removed;
+   the strip from T's band to the plate drawn (`?D` beside the pad box, Ambiguity 16); the plate joined to the long
+   poly. Load of `lc2_w8692` now 22/58.
+2. Geometry: the west rail reaches x ~4820 at y 8960-8966. Added.
+3. Geometry: the pad box's poly ends at about x 4880, y 9012. Fixed.
+4. Geometry: the north-east corner of the row y 8897-8916 is chamfered (not drawn).
+
+Left out, no connection found inside the piece (Not done): a VCC box (4932-4985, 8958-9018) with a contact
+(4950,8990), probably the east column's; a diffusion under track A from y 9083 south with no contact to the track.
+Could not check: poly continuity across the two ringed boxes' outlines; overlaps under 4 px; chip-2 colours do not
+separate narrow diffusion from field (finding 1 rests on the clean shot and on edges).
+
+After the fixes: `tools/t.sh lc2 sameconn.py 514d86b` and `.venv/bin/python tools/sameconn.py 514d86b`: both
+`connections identical` (4263 transistors became 4262; each one added or removed lies in parallel with one on the
+same three nets). The tool calls it the same, because both outputs keep a load; the plate's gate and source did move
+from `lc2_w8298` to `lc2_w8692`, so it is counted as a change.
+
+Round 14: one finding that changes a transistor's nets, fixed; three geometry-only.
