@@ -506,7 +506,7 @@ N M 7209,11000 tc2_sr_g
 # (7554,9450), 25 px south of the upper arm of d6's line 6; the pad's metal track runs 1,670 px
 # south at x 7555 (the easternmost track of the field, east of d6's line 6) with no pad or
 # contact on the way, and ends on a contact (7555,11118) on a diffusion pad; a diffusion band
-# (y 11100-11126) leaves the pad east, under column 0's VSS rail (x 7600-7646) into cdp3's ground
+# (y 11095-11127) leaves the pad east, under column 0's VSS rail (x 7600-7646) into cdp3's ground
 # (not drawn there).
 # =====================================================================================
 P 7554,9449 x7606 w=22                # the row, onto cdp3's P 7600,9450
@@ -515,6 +515,6 @@ C 7554,9450 s=24x24
 M 7555,9446 y11122 w=14
 C 7555,11118 s=24x24
 D 7538,11096:7584,11144               # the diffusion pad
-D 7575,11100:7600,11127               # the band east, to the VSS rail's west edge
+D 7575,11095:7600,11127               # the band east, to the VSS rail's west edge (its north edge rises to y 11092 under the rail)
 N P 7590,9449 cdp3_k_b
 N M 7555,10300 cdp3_k_b

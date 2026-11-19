@@ -103,7 +103,7 @@ wiring only, no uncertain items:
 - **`cdp3_k_b` comes from a diffusion at the foot of `cdp3`'s column 0** (piece `kb`). The poly row
   y 9450 (`cdp3`: the input of gate 1 of the NAND beside its row C) ends west of x 7600 on a pad
   (7554,9450); the pad's metal track runs 1,670 px south at x 7555 with no pad or contact and ends on a
-  contact (7555,11118) on a diffusion pad, from which a diffusion band (y 11100-11127) runs east under
+  contact (7555,11118) on a diffusion pad, from which a diffusion band (y 11095-11127) runs east under
   column 0's VSS rail into `cdp3`'s ground (drawn to x 7600).
 - Looked at and not this package's: **`cdp4_ld8b`'s row y 11837 does not enter the field**: west of
   x 7598 there is bare field at that height in both metal shots and the clean shot (view `b_ends.png`,
@@ -272,7 +272,9 @@ wide, drawn 14; all rows poly, 23-24 px between their edge lines):
 - East of x 7550 (seen, `l9_e3.png`; not drawn): the ten rows run on under four more metals to pads
   with contacts in two columns, row 14523 to (7835,14520), 14567 to (7790,14567), 14611 to (7835,14610),
   14654 to (7790,14654), 14697 to (7835,14697), 14740 to (7790,14740), 14784 to (7835,14784), 14827 to
-  (7790,14827), 14870 to (7835,14870); row 14914 goes on past x 7860. These are the west ends of
+  (7790,14827), 14870 to (7835,14870); row 14914 goes on to a pad with a contact (7880,14914), from which
+  `bc1`'s track x 7969 runs south: drawn by `eof` (piece `isrc4`, 2026-11-19), which finds that **line 1,
+  `lc2_x6299`, is `inh_src`** (`@alias inh_src lc2_x6299` in `trace/eof.txt`). These are the west ends of
   `bc1`'s thirteen bus metals (`notes/blocks/bc1.md`: y 14354 .. 14873, x 7780-8280).
 
 Piece `ctl` (pad contacts with `tools/busl_padc.py` in both metal shots; row centres with
@@ -464,7 +466,7 @@ Piece `kb` (pad contacts with `tools/busl_padc.py` in both metal shots; the row 
 
 | Net | Row at x 7600 (y) | Pad at its west end | Track | South end |
 |---|---|---|---|---|
-| `cdp3_k_b` | 9449 (poly, 24 px between its edge lines) | (7554,9450) | x 7555 south, 1,670 px | contact (7555,11118) on a diffusion pad (7538-7584, 11096-11144); a diffusion band y 11100-11127 east to x 7600 and on under the VSS rail |
+| `cdp3_k_b` | 9449 (poly, 24 px between its edge lines) | (7554,9450) | x 7555 south, 1,670 px | contact (7555,11118) on a diffusion pad (7538-7584, 11096-11144); a diffusion band y 11095-11127 east to x 7600 and on under the VSS rail |
 
 - The north pad (view `b_ends.png`, tile 1, 3x, both metal shots and the clean shot): a ring with a
   bright centre on the widened west end of the row; field west of it; no metal north of it
@@ -482,7 +484,13 @@ Piece `kb` (pad contacts with `tools/busl_padc.py` in both metal shots; the row 
   193-197/164-176/115-126 under the pad's metal, red minus green 20-29, against 215/160/113 for poly
   under a track): **diffusion**, not poly. East of the pad a band between two edge lines (y 11095 and
   11128; `tools/busl_rowy.py 7590 11090 11170`) runs to the VSS rail and is the same tan under the
-  rail's edge (194/176/122 at x 7595-7605). The dark bar across it at x 7585 in the clean shot is not
+  rail's edge (194/176/122 at x 7595-7605). Nothing else leaves the pad: field west and south; the
+  olive strip with dark outlines that runs north from the pad's north-east corner at x 7575-7592 (run 5
+  noted it as "a thin line from the north") is in the clean shot only, all the way up the 38 px gap
+  between the track and the rail (`tools/px.py row Y 7562 7602 4` at y 9900, 10950, 11060: both metal
+  shots plain ground, 154-169/124-151/80-88 in chip 2, with no edge line between the track's and the
+  rail's; the chip-2 stripped shot field, red minus green about 0; tiles `b_c1.png`): the gap's mark,
+  not layout (guide, trap 2). The dark bar across the band at x 7585 in the clean shot is not
   in either chip-2 shot (metal 160-168, stripped 121-153 at x 7580-7585): the mark of the gap between
   the pad's metal and the rail (guide, trap 2). Ambiguity 14.
 
@@ -582,7 +590,7 @@ the net that can drive it.
 | `tc2_sr_g` | M | (7460-7474,8795), 14 px wide | not known | onto `eofw`'s metal south of the corner pad (7446,8732) (`M 7466,8745 y8800`; `eofw`'s port there is named `lc1_w7908`, an alias) |
 | `tc2_sr_g` | M | (7180-7194,15000), 14 px wide | not known (believed in: driven in `bc1`'s group) | the track goes on south in `bc1`'s ground: to y 15482, west to x 7103, south; the follower ends at (7100,16279) (not read) |
 | `cdp3_k_b` | P | x 7600, y 9438-9460 (22 px wide) | out (driven from the diffusion at its south end; received by `cdp3`'s gate 1) | `cdp3`'s row y 9450, drawn there from x 7600 |
-| `cdp3_k_b` | D | x 7600, y 11100-11127 | in | the diffusion band goes on east under column 0's VSS rail (x 7600-7646) into `cdp3`'s ground (not drawn) |
+| `cdp3_k_b` | D | x 7600, y 11092-11127 | in | the diffusion band goes on east under column 0's VSS rail (x 7600-7646) into `cdp3`'s ground (not drawn) |
 
 ## Ambiguities
 
@@ -871,6 +879,54 @@ strips and the two numeric scans); `bc1`'s rows east of the pads and `cdp3`'s ro
 
 Round 1: no findings.
 
+**Run 6, pieces `sr` and `kb`. Round 1: full review** (2026-11-19 18:29 +0100; a fresh Fable 5.2 reviewer agent;
+commit ebde718; images in `cache/scratch/busl/review-6/`, 15 used). The two pieces were reviewed together
+(two single wires of the same build, no transistor).
+Told to suspect, `sr`: the dark crossing of row y 13744 at (7145,13728-13749) (a contact, a break or a
+plain crossing); the start south of `eofw`'s corner pad, the poly crossed at y 8850-8875 and which of
+the four diagonals is drawn; the long run x 7209 (a step, a pad, a tap, a break; the two follower
+candidates; chip 1's dark stretch); the step y 13680 and the jogs y 14176, 14285, 14588 (two metals
+meeting end to end, the track going on south at x 7145, a join to `d6`'s line 1 pad, a contact on the
+row under the arm y 14176); two flagged stretches; the crossing of y 15000. `kb`: the south pad's layer,
+its contact, the band's join to the pad (the bar at x 7585) and whether it reaches x 7600, anything else
+leaving the pad; the north pad (contact, anything west or north, the arm 25 px north, the row's
+identity); two flagged places on the track.
+Checked, `sr`: the start (one metal from `eofw`'s pad to the diagonal, a narrow neck at x 7470-7476 on
+`eofw`'s stretch, the test passing at x 7473 with bars of 16 px or less; a plain crossing of the poly
+y 8850-8875, no hole); the diagonal (the south-east one of four, the next one ends on the pad
+(7425,8862); both corners plain; 2.9x, chip 2); the long run by a width scan of its own every 2 px in
+both chips (12 px wide, centre 7208.5, no widening, step or tap, no break of 25 px), (7207,9579) at
+4.5x (plain crossing), (7208,12618) (a spot beside the track), y 9176-9243 (a blob on chip 1 only);
+**Ambiguity 13 at 4.4x and 7x: agrees it is a plain crossing** (at x 7148 chip 1 fails for only 14 px,
+the edge bar; chip 2's dark patch is 27 px wide, wider than the track, with no bright centre; the clean
+shot reads plain protected poly, 6-7 against 0-3 in the hole of the pad (7188,14091); the row is not
+widened; no pits in the chip-2 stripped shot; why both chips are dim there stays unexplained); the step
+and the three jogs at 4.1-4.4x in both chips (each a corner of one metal, no metal beyond any corner;
+none from y 14100 to 14171 between line 1's pad and the corner (7187,14176); none at x 7145 from
+y 14186 to 14390; no contact on the arm y 14176 or where the other arms pass rows); the two flagged
+stretches (an edge bar and marks, no holes); the port (plain metal across y 15000, text map
+y 14930-15075). `kb`: the north pad (a real contact: ring and bright centre in both chips, a pit in
+the chip-2 stripped shot; 30 px without metal and open ground between it and line 6's arm; nothing west
+or north; the row continuous into `cdp3`'s); the track (no widening; (7554,10070) a plain crossing;
+y 10897-10916 dark in chip 2 only, over field); the south end (the pad diffusion: flat tan 195/166/124
+with a contact speck, where the north pad is salmon; a real contact; the band one diffusion with the
+pad: in the gap redder than field by 25-33 in both chip-2 shots at x 7584 and 7589, the bar at x 7585
+in the clean shot only; nothing leaves north, south or west); the extraction and `tools/unsure.py`
+(nothing listed for the two nets).
+Findings: one, geometry only, confirmed by the tracer:
+1. `kb`'s band at the port: drawn `D 7575,11100:7600,11127`; the band's north edge rises under the
+   rail's west edge, so at x 7600 it is about y 11092-11126. Tracer's check (`tools/px.py col 7603 11078
+   11136 3 acid1b,metal` and `col 7596 ...`): tan 195-203/149-175/112-140 from y 11096 to 11123, the edge
+   lines centred on y 11088 and 11129 at x 7603 and on 11090 and 11128 at x 7596. Redrawn
+   `D 7575,11095:7600,11127`; the port is y 11092-11127. Same net, same layer, same side.
+`tools/t.sh busl sameconn.py ebde718`: `connections identical`.
+`.venv/bin/python tools/sameconn.py ebde718`: `connections identical`.
+Could not check, or only weakly: anything south of y 15075; under the rail east of x 7600 (no ring or
+speck seen on the band as far as x 7650, not read); the far ends of row y 13744; the long run by view
+apart from its ends and y 9545-9645 (text tools only).
+
+Round 1: no findings that change a connection.
+
 ## Not done
 
 - Everything else in the field: about 20 more tracks and the other rows. Next pieces, in the
@@ -891,7 +947,7 @@ Round 1: no findings.
   candidates at (7100,15596-15660) (`bc1` (continue): the group x 7000-7860, y 15000-16300; seen at 1x
   in `sr_s3.png`, nothing read). The driver of `tc2_sr_g` is expected there. And the row y 13744, whose
   ends decide Ambiguity 13 (item (2) above).
-- Piece `kb`'s south end: the diffusion band east of x 7600 at y 11100-11127, under column 0's VSS
+- Piece `kb`'s south end: the diffusion band east of x 7600 at y 11095-11127, under column 0's VSS
   rail (`cdp3` (continue)); the three other diagonals of the bundle north-west of `sr`'s (one ends on
   the pad (7425,8862), whose poly runs east along y 8850-8875 under `sr`'s track; the northern part).
 - `cdp4_ld8b`'s west end at about x 7603-7640, y 11825-11850, under the metal x 7600-7645 (`cdp4`
