@@ -4,6 +4,7 @@
 # metal x 5840-5890. Coordinates from the survey (3.4x) and 6x views bc_3, ld_3, bx_6 (acid1b,
 # acid, metal); traced on claude-opus. Rail names from the load's side (not followed to a pad).
 @block lc3
+@requires lc2
 @w M=22 P=22
 # rails, as far as the pair needs
 M 5688,9255 y9520 w=46
@@ -53,3 +54,54 @@ N M 5560,9500 lc3_w9470
 N M 5560,9270 lc3_w9299
 N P 5560,9429 lc3_w9432
 N P 5560,9340 lc3_w9337
+
+# ====================================================================
+# The counter of lc2's west cluster goes on south: stage W3 is the cell lc2_ff 780 px lower (x 4580-4990, y 9180-9960).
+@inst lc2_ff 0,780 tag=w3
+# the copy's own: its VSS node's top with a contact, the rails, the bus tracks, the clock's L
+D 4752,9200:4800,9226
+C 4769,9214
+M 4777,9180 y9740 w=50                      # the west rail (the master's own rails, 780 px lower; checked on the metal shot)
+M 4741,9580:4812,9718                       # ... wider at y 9580-9718
+M 4757,9718:4812,9740
+M 4757,9740:4808,9970
+M 4757,9825:4820,9970                       # ... and from y 9825
+M 4757,9740:4820,9748
+N M 4777,9400 vss
+M 4952,9180 y9970 w=56                      # the middle rail
+N M 4952,9400 vcc
+M 4562,9180 y9300 w=18                      # track C north onto lc2's L-shaped metal: this stage's slave output is lc2's clock lc2_w8475
+M 4517,8700 y9392 w=18                      # track B from lc2 to the pad of this stage's clear row
+P 4503,9370:4533,9398
+C 4517,9384
+M 4475,9060 y9826 w=18                      # track A from lc2 to its end pad, on this stage's row
+P 4458,9804:4490,9832
+C 4473,9818
+M 4554,9900:4654,9918                       # the L-shaped metal that brings this stage's clock from the south
+M 4554,9900:4572,9970
+N P 4660,9342 lc3_w9342
+N M 4889,9420 lc3_w9505
+N P 4660,9472 lc3_w9472
+N M 4648,9580 lc3_w9904
+# ====================================================================
+# stage E4: lc2_ff turned 180 degrees, a point (x,y) of the master at (9912-x, 18336-y)
+@inst lc2_ff 260,716 rot=180 o=4826,8810 tag=e4
+# the copy's own
+M 5086,9250:5150,9300                       # the east rail on south from lc2's piece (to y 9256 there)
+M 5102,9290:5150,9945
+M 5084,9395:5162,9552                       # ... wider where the stage's VSS contacts are
+N M 5126,9600 vss
+D 5112,9880:5160,9922                       # the bottom of its column: the VSS node of gate K1, with a contact
+C 5137,9896
+M 5342,9225 y9345 w=16                      # track C' north: the metal of lc2's pad (5341,9211) is this stage's output track
+M 5386,9225 y9969 w=16                      # track B' (lc2's staircase line x 5378-5394) south to the pad of this stage's clear row; it ends at y 9969
+P 5371,9720:5403,9750
+C 5386,9735
+M 5430,9225 y9440 w=16                      # track A' (lc1_w7170, lc2's staircase line x 5421-5437) south to the pad of this stage's row ...
+P 5415,9284:5447,9312
+C 5430,9298
+P 5413,9414:5446,9442                       # ... and a second pad, whose poly leaves east
+C 5428,9428
+N P 5252,9774 lc3_w9774                     # the copy's lc2_w8552 (master latch, first output)
+N M 5023,9696 lc3_w9696                     # the copy's lc2_w8725 (master latch, second output)
+N P 5252,9644 lc3_w9644                     # the copy's lc2_w8692 (slave, second output)

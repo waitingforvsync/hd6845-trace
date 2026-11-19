@@ -2,15 +2,107 @@
 
 ## Status
 
-2026-11-18 04:48 +0100. Gate pair drawn on claude-opus (`trace/lc3.txt`, ports `ports.d/lc3.txt`; section "Gate pair at 6x"); the rest of the region is survey only, not drawn. Not yet reviewed. Earlier text: survey only, **nothing was drawn** (no `trace/lc3.txt`, no ports file, no floor-plan
-fragment). The inventory below was read at 0.62x and 1.22x (metal + acid1b), one gate pair
-at 3-3.4x; everything in it is "seen", not traced. Stopped early on the coordinator's
-instruction (budget). Views: `cache/scratch/lc3/` (`survey.png`, `qa`..`qd.png`,
-`s1_*.png`, `g2_*.png`).
+2026-11-19 07:12 -0600, run 2 (Matt Godbolt, on Claude Fable 5.2). **Two more stages of `lc2`'s ripple counter are
+drawn**, as copies of `lc2`'s flip-flop cell `lc2_ff` (sections "Stage W3" and "Stage E4" below; 37 transistors,
+not yet reviewed). With them the counter's order is known: W3 clocks `lc2`'s first stage, and E4 is clocked by
+`lc2`'s second. Still open: the unit below them (y 9960-10340), where W3's clock comes from, and everything east
+of x 5460 but the gate pair. The corner x 4400-4750, y 9100-9700 is in `eof`'s claim (run 6): the copies reach
+into it (to x 4580), and the three bus tracks west of them are drawn through it because the copies' rows end on them.
 
-No other block has geometry inside the region: `urch`'s floor-plan box (x 4240-4720) and
-`larr`'s "not surveyed" box (4450-4780 x 8250-10500) overlap it, but the all-blocks render
-shows only one drawn item, a short horizontal piece near (4800-4975, 9737), owner not looked up.
+Run 1 (dp111, 2026-11-18 04:48 +0100): the gate pair drawn on claude-opus (section "Gate pair at 6x"), reviewed
+on claude-opus; it still needs its Fable review (re-read item R31). The inventory below was read at 0.62x and
+1.22x; everything in it that is not in a later section is "seen", not traced.
+
+## The counter: order of the stages (traced; cell copies checked against the master)
+
+`lc2`'s west cluster is a flip-flop cell (`lc2_ff`, `notes/blocks/lc2.md`) and its copy turned 180 degrees. The
+same cell stands twice more directly south of them, in this strip:
+
+| Stage | Where | Placed as | Clock | Slave output (the next stage's clock) |
+|---|---|---|---|---|
+| W3 | x 4580-4990, y 9180-9960 | `@inst lc2_ff 0,780` | `lc3_w9904`, from the south (metal x 4554-4572 below y 9970) | `lc2_w8475` |
+| `lc2`'s first (the master) | x 4580-4990, y 8350-9190 | the cell | `lc2_w8475` | `lc2_w8298` |
+| `lc2`'s second | x 4990-5450, y 8370-9200 | turned copy | `lc2_w8298` | `lc2_w9034` |
+| E4 | x 4990-5450, y 9150-9930 | `@inst lc2_ff 260,716 rot=180 o=4826,8810` | `lc2_w9034` | `lc2_w9210` |
+
+So the chain runs up the west column and down the east one. A clock enters a stage at the end of its thin
+metal by gate K4 (an L-shaped metal in the unturned stages, a pad in the turned ones) and the slave output leaves
+by track C at the other end. The two outputs that `lc2`'s AND-OR-INVERT south of latch B takes are the last two
+stages': `lc2_w9125` = NOT(`lc2_w9034` AND `lc2_w9079` OR `lc2_w9210` AND `lc3_w9299`). **Input identified, not
+logic changed**: `lc2_w9210` was "row 5's metal, south into `lc3`"; it is E4's slave output (one metal from
+`lc2`'s pad (5341,9211) to E4's pads (5343,9343) and (5343,9822)).
+
+Extraction (`tools/t.sh lc3 netlist.py`). `tools/unsure.py --equations`, as for `lc2`'s stages: the second and
+third of each stage FIRM; the first DEPENDS for its clear term (`lc2_w8450`: the cell's uncertain diffusion west
+of the rail) and the fourth DEPENDS on the cell's uncertain strip to its load:
+
+- W3: `lc3_w9342` = NOT(`lc2_w8450` OR `lc2_w8475` AND `lc3_w9904` OR `lc3_w9505`); `lc3_w9505` = NOT(`lc3_w9342`
+  OR `lc3_w9472` AND `lc3_w9904`); `lc2_w8475` = NOT(`lc3_w9472` AND (`lc3_w9505` OR `lc3_w9904`)); `lc3_w9472` =
+  NOT(`lc1_w7170` AND `lc2_w8475` AND (`lc3_w9342` OR `lc3_w9904`)).
+- E4: `lc3_w9774` = NOT(`lc2_w8450` OR `lc2_w9034` AND `lc2_w9210` OR `lc3_w9696`); `lc3_w9696` = NOT(`lc3_w9774`
+  OR `lc2_w9034` AND `lc3_w9644`); `lc2_w9210` = NOT(`lc3_w9644` AND (`lc3_w9696` OR `lc2_w9034`)); `lc3_w9644` =
+  NOT(`lc1_w7170` AND `lc2_w9210` AND (`lc3_w9774` OR `lc2_w9034`)).
+
+Believed, not established: with a stage 0 in the unit below (it has the cell's latch K in the west column and the
+cell's gates K3 and K4, turned, in the east one), the counter would have five stages and the AND-OR-INVERT would
+choose between its fourth and fifth outputs, which is what a cursor blink of 1/16 or 1/32 of the field rate
+needs. Nothing drawn yet says what clocks the chain.
+
+## Stage W3 (x 4580-4990, y 9180-9960): `lc2_ff` 780 px lower
+
+Found by `tools/findcell.py 4700 8400 4960 9150 --region 4400,9100:6450,10500 --layer acid1b` (score 0.91 at
+4830,9555). Checked: the cell's outline over both shots at 1.7x and 2.3x (`w3_*.png`, `p1ov_a.png`,
+`p1ov_b.png`); master and copy side by side in three bands on the clean shot and the metal shot at 1.6x
+(`mo_8390_*.png`, `mo_8650_*.png`, `mo_8910_*.png`: the same but for the ends); what lies under the west rail,
+`tools/railprof.py 4758 4796 9130 9960` against `8350 9180`: the same run of nodes and gates, row for row.
+
+The copy's own (not in the cell), each read here:
+
+- **Its VSS contact**: the master has a column of contacts above gate K1 and a large open diffusion west of
+  it; here the stage above ends 20 px higher (its node Z, y 9158-9174), and K1's VSS node (y 9200-9245) has
+  one contact (4769,9214) (ring in the metal shot, dark spot in the clean shot: `p1_9170.png`, 3x). No open
+  diffusion west of it (field).
+- **Rails**: west x 4752-4802 (wider at y 9580-9718 and from y 9825, as the master's), middle x 4924-4980; both
+  continuous from `lc2`'s (`p1_9170.png`, `p1_9370.png`, the overlays).
+- **Track C** (x 4553-4571) runs on north from the pad of K1's row 2 (4561,9296) to `lc2`'s L-shaped metal
+  (drawn there to y 9190): one metal, `tools/tl5_tracks.py v 4562 8690 10420` (metal y 9120-9780 with the pads
+  9298 and 9775 and nothing else). That is the join that makes this stage's slave output `lc2`'s clock.
+- **Track B** (x 4508-4526, `lc2_w8907`, which is `lc2_w8450` through `lc2`'s uncertain buried contact) comes
+  from `lc2` (drawn there to y 8700) to the pad (4517,9384) of the clear row and runs on south (to a pad at
+  y 10166, the unit below): `tl5_tracks.py v 4517 8690 10420`, one metal to y 10143.
+- **Track A** (x 4466-4484, `lc1_w7170`) comes from `lc2` (drawn there to y 9060) and **ends** on the pad
+  (4473,9818) of gate K4's row: `tl5_tracks.py v 4475 8690 10420` (metal to y 9823, pads 9038 and 9819; the
+  short dark stretches at 9244-9253 and 9722-9730 are edges beneath, 8-9 px).
+- **The clock's L**: from the end pad (4648,9904) of the thin metal x 4641-4655 a metal runs west (y 9900-9918)
+  and south (x 4554-4572): `tools/textmap.py 4536 9876 4664 9990 4`. It runs on south past the pad (4561,10080)
+  of the unit below and beyond y 10420 (not drawn below y 9970).
+
+## Stage E4 (x 4990-5450, y 9150-9930): `lc2_ff` turned 180 degrees
+
+`findcell` 0.75 (centre 5082,9561); a point (x,y) of the master is at (9912-x, 18336-y). Checked on overlays at
+2.5x in both shots (`p2ov_9150_*.png`, `p2ov_9560_*.png`); `tools/railprof.py 5116 5152 9560 10000`.
+
+- **Its top is what `lc2` drew by hand south of its east column** (`lc2`'s round 16: node `lc2_w9171`, the gate
+  of `lc2_w9034`, the VSS contact (5124,9224), the strip x 5062-5078): that is this stage's gate K4, its lower
+  node Z, its clock row and its VSS node. The two drawings lie on each other and extract as one transistor
+  (112/21); `lc2`'s lines are left as they are (proposal in the handoff: delete them there). The contact's ring
+  is at (5124,9224), where `lc2` has it; the cell's own contact lands 13 px off it on the same node.
+- **Its clock** is `lc2_w9034`: `lc2`'s metal to the pad (5254,9208) lies on the copy's end pad (5264,9212)
+  and thin metal x 5257-5271.
+- **Its VSS contact** at the bottom of the column: ring (5137,9896), box x 5113-5160, y 9880-9923 (`e4bot.png`, 5x).
+- **East rail**: x 5102-5150, with x 5086-5150 at y 9250-9300 and x 5084-5162 at y 9395-9552 (`tools/textmap.py`
+  rows at twelve heights; it lies about 8 px west of the west rail's turned image, as in `lc2`).
+- **Track C'** (x 5334-5352): one metal from `lc2`'s pad (5341,9211) through the end pad (5343,9343) to the pad
+  (5343,9822) of K1's row 2, where it ends (`tl5_tracks.py v 5343 9150 10420`: metal y 9206-9824; the 18 px
+  without metal at y 9215-9233 is the pad's ring, as at the other two pads).
+- **Track B'** (x 5378-5394, `lc2`'s staircase line `lc2_w8907`): from `lc2` to the pad (5386,9735) of the clear
+  row (bright centre in a ring in both metal shots, green hole in the clean shot: `tools/textmap.py 5366 9706
+  5418 9760 3`); the metal ends at about y 9969.
+- **Track A'** (x 5422-5438, `lc1_w7170`, `lc2`'s staircase line `lc2_w8474`): from `lc2` to the pad (5430,9298)
+  of K4's row, and on to **a second pad (5428,9428)** (`textmap.py 5404 9404 5456 9452 3`: a contact), whose poly
+  leaves east along y 9418-9440: not followed yet; it is in line with the lower inverter's output row
+  (`lc3_w9432`), and if it is that row, that inverter drives `lc1_w7170`. The metal runs on south to a pad at
+  about y 10084-10104 (drawn to y 9440).
 
 ## Inventory (seen, not traced)
 
@@ -111,16 +203,18 @@ before every connection could be read in two shots and the gates profiled.
 
 ## Not done
 
-Everything. Suggested order:
-1. Gate pair 5540-5900 x 9260-9520: boxes and load gate tie resolved (review round 1);
-   still the channel width (profile poly y 9470 over x 5640-5740), the tracks `lc3_m5626`
-   and `lc3_m5756` beyond the piece; then follow the west row y 9428 to its end (a pad was seen near (5250,9440)
-   at 1.22x) and the tracks x 5560 and x 5517.
-2. Crossing field 5480-6450 x 9540-10050: which crossings are contacts.
-3. Logic columns A and B (4680-5240), rails first; try `findcell.py` with `tl1`/`tl5` cells
-   (not tried).
-4. West tracks and track field: join to `urch` and to `lc2` at y 9233.
-5. Whose the drawn piece near (4800-4975, 9737) is.
+1. **The unit below the two stages**, x 4580-5450, y 9960-10400: the cell's latch K in the west column
+   (`findcell` 0.89 at 4830,10151) and its gates K3 and K4 turned in the east one (0.71 at 5083,10152), by hand
+   (half a cell cannot be placed). With it: W3's clock (`lc3_w9904`, the metal x 4554-4572 south of y 9970, which
+   passes the pad (4561,10080)), track B's end (pad y 10166), track A' (pad about y 10084-10104), the rails'
+   feet, the metals that turn west and east below y 10340.
+2. **The gate pair's Fable review (R31)**, with the row from the pad (5428,9428) to the lower inverter's
+   output (is it one poly?), the pad near (5515,9338) of the upper output, the tracks x 5517 and x 5560.
+3. The track field x 5240-5570 south of y 9560, `rst_n`'s metal x 5465-5481 (it ends about y 10186).
+4. Crossing field 5480-6450 x 9540-10050: which crossings are contacts.
+5. The corner bundle, the south bundle, the wide metal's diagonal (inventory).
+6. West of x 4580 (`urch`'s channel and `eof`'s corner): the metal x 4420-4442, the tan areas under and beside
+   track A (x 4440-4480, y 9240-9650).
 
 ## Review
 
