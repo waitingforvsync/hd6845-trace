@@ -8,7 +8,7 @@ metal-shot pixels. Evidence: `cache/scratch/bl0/` (`survey.md` holds every measu
 ## Status
 
 Run 8 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 11:28 -0600). One piece of wiring, no transistor, no
-uncertain item: the two other ends of `rst_n`'s line (`bl0_w15088`).
+uncertain item; reviewed (round 10: no findings): the two other ends of `rst_n`'s line (`bl0_w15088`).
 
 - **Piece `w8`** (wiring, 1,000 px). East: the poly row y 15078-15098 runs on from the pad (6320,15088)
   under the tracks to x 7280 and on under `bc1`'s rail x 7292-7342, where it is salmon across the rail and
@@ -834,6 +834,23 @@ Could not check: x 3157-3173, where the row lies under a track with dirt in both
 as continuous); 8 px between the column's west edge and the diffusion beside the rail at y 16086.
 
 Round 9: no findings.
+
+### Run 8
+
+Round 10 (full review of piece `w8`; fresh Fable 5.2 reviewer; 2026-11-20 11:34 -0600; commit 4838f7c; images
+`cache/scratch/bl0/review-10/`). Told to suspect: breaks, contacts at the dozen track crossings, branches
+and a neighbouring row on the east row; the thin metal's continuity, its crossings and its end pad; the
+poly column. Checked with text maps at 3 px, the two-chip metal test and views at 4x in four shots: the
+row one poly from x 6450 to 7285 with both edge lines unbroken, every track bright across it with no
+ring, salmon under the rail and ending at about x 7350-7355; the thin metal joined to the pad
+(5755,15088) and continuous y 15109-15741, its two dark pairs the edges of the poly rows y 15400-15424
+and y 15660-15684 with no hole; the pad (5737,15759) a contact with the metal ending on it and bare
+ground south; the poly column leaving it south, nothing else. Could not check: the row through the
+rail's edge line at x 7284-7292 (beyond the port); the poly inside the pad's foot; the column south of
+y 15800. A correction to the notes of run 2: the tracks east of the bundle are at about x 6965, 7055,
+7100 and 7188.
+
+Round 10: no findings.
 
 ## Not done
 
