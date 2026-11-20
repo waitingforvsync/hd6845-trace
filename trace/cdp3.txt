@@ -740,12 +740,18 @@ M 7575,7925 y8060 w=46                 # the VSS rail (eof draws it north and so
 N M 7575,7930 vss
 M 7749,7925 y8060 w=54                 # the wide VCC metal
 N M 7749,7930 vcc
-# input: a thin metal x 7309-7323 between the row's pad and a pad (7313,8625), whose poly goes on
-# east into the gates at y 8620-8800 (port). It ends on both pads.
+# input: a thin metal x 7309-7323 between the row's pad and a pad (7313,8625); it ends on both pads.
+# The lower pad's poly leads to a third pad, on which a metal from the west ends: the unit's input
+# arrives from the bus field west of the block.
 M 7316,7995 y8625 w=14
 P 7296,8608:7330,8642
 C 7313,8625
-P 7313,8615:7360,8635                 # the pad's poly east (port at x 7360)
+P 7313,8615:7415,8635                 # the pad's poly east,
+P 7393,8615:7415,8780                 #   south under a horizontal metal y 8700-8715 (another net; no contact),
+P 7383,8762:7420,8798                 #   to a pad (7400,8778)
+C 7400,8778
+M 7330,8757 x7400 y8778 w=16           # a metal from the west along y 8749-8765 ends on that pad (port at x 7330:
+                                      # it comes down the staircase of the bus field, follower to (6843,8536))
 # output: a metal x 7826-7848 from the foot's pad south through a pad (7836,8430) to a pad
 # (7838,8582), where it ends. The two pads' polys are gates of the cluster beside row A (ports).
 M 7837,8062 y8582 w=20

@@ -58,7 +58,14 @@ Which columns each row occupies:
   six copies of `cdp4`'s comparator cell over six copies of `cdp4`'s latch cell: **R14 and its
   comparator with line g.** `g_eq_r14` = NOR of the six cells' "not equal" nodes. With every file loaded:
   2439 nets, 4541 transistors, 0 errors, 0 warnings. See "Row A" under Logic.
-- NOT traced: the logic beside row A (x 7600-8300, y 8040-8800).
+- **West logic, run of 2026-11-20 13:32 -0600** (Matt Godbolt's session, Claude Fable 5.2; 2 transistors and
+  wiring, no uncertain item): **U1 of the gate column** (y 7940-8060), `cdp3_w8063` = NOT `cdp3_w7996`, with
+  its input wire (from a staircase metal of the bus field, by two poly hops) and its output wire (a metal
+  x 7826-7848 to two pads whose polys go into the cluster beside row A); and **the output line of the gate
+  beside row C** (the x 7880 line) drawn up to its end pad (7878,8385). See "West logic" under Logic.
+- NOT traced: the gate cluster beside row A (x 7780-8200, y 8260-8800): surveyed, with a draft, and
+  left out of the trace because five diffusion boundaries in it cannot be decided from the photos
+  (Not done).
 
 ## Inventory
 
@@ -224,6 +231,36 @@ contact (8178,9275) under a wide VCC metal that becomes c1's VCC rail.
   (7835,9490), metal west and then down at x 7772 to a contact at about (7770,10135)
   between rows E and F, which is not traced.
 
+### West logic: U1 and the lines into the cluster beside row A (2026-11-20; traced)
+
+**U1** (x 7296-7855, y 7940-8080) is the unit of the gate column between `eof`'s `g7700` and its three
+inverters U2-U4: `eof`'s inverter cell `eof_dinv` moved by (0,-390), written out here and fitted (the
+overlay `cache/scratch/cdp3/u1.png` fits; this copy's node has a poly cap on its buried contact that goes
+nowhere, and its load plate's foot is the output):
+
+```
+cdp3_w8063 = NOT cdp3_w7996          pull-down W 57; load 27/56
+```
+
+- **Input** `cdp3_w7996`: the gate row y 7986-8006 runs west to a pad (7313,7995); a thin metal
+  x 7309-7323 runs south from it to a pad (7313,8625) and ends on both (bare ground north of the first,
+  `px.py col 7316 7950 7985 5`, and south of the second, `px.py col 7316 8636 8660 4`; `tl5_tracks.py v
+  7316 8010 8610`: bars only). That pad's poly runs east and south (a column x 7393-7415, under a
+  horizontal metal y 8700-8715 with no contact) to a pad (7400,8778), on which a metal from the west
+  along y 8749-8765 ends (`textmap.py 7380 8762 7424 8802 3`; `px.py row 8757 7340 7400 6`). That metal is
+  a line of the bus field's staircase (`follow.py 7340 8757 W`: corners (7146,8752), (7145,8714),
+  (7013,8710), (7011,8628), (6843,8618), end (6843,8536)): drawn to x 7330 (port).
+- **Output** `cdp3_w8063`: the plate's foot runs east to a pad (7838,8062); a metal x 7826-7848 runs
+  south through a pad (7836,8430) to a pad (7838,8582), where it ends (`tl5_tracks.py v 7837 8080 8600`).
+  The first pad's poly row goes east and the second's goes west and round into a row y 8675-8697: two
+  gates of the cluster beside row A (ports).
+
+**The output line of the gate beside row C** (the upper piece of the x 7880 line): one metal from
+y 9150 north to a pad (7878,8385), where it ends (`tl5_tracks.py v 7879 8400 9240`: bars of 14 px or
+less). The pad's poly row goes east into the cluster (port). A second metal on the same x comes from the
+north and ends on a pad (7878,8315), 70 px away: another net (bare ground between,
+`px.py col 7880 8330 8372 4`).
+
 ### Channel B (traced, wiring only)
 
 - Six poly tracks from the west edge (y 8907 ... 9123) each end at a contact on line g of
@@ -366,6 +403,34 @@ Into parts not yet traced (the labels sit on the stubs):
 
 ## Not done
 
+- **The gate cluster beside row A** (x 7780-8200, y 8260-8800; run of 2026-11-20): surveyed at 5-9x and
+  drafted, **not in the trace**. Survey and draft: `cache/scratch/cdp3/survey.md`, `draft-ku.txt`; views
+  `ka_*`, `kb_*`, `cm_a`, `cm_b`, `k1_*`, `kB`, `kC1`-`kC3`, `kL1`, `kL2`, `j1`-`j5`. What is read:
+  - Three gates on the rail x 7986-8030 (`vss`: contacts (7998,8338), (7995,8562), (7992,8788)) with
+    three loads east of it under a wide metal x 8160-8200 (boxes with contacts (8187,8362), (8185,8480),
+    (8173,8575)); each load's plate has a buried contact to its node.
+  - Their gate polys: the row of the pad (7878,8385) (the gate beside row C's output), which crosses the
+    rail's diffusion at y 8383-8405 and turns north east of the rail to cross a strip y 8335-8375; the
+    row of U1's output (pad (7836,8430)) at y 8428-8452; an L from the pad (7878,8315) to a row
+    y 8502-8525 over two fingers (x 7932-7966, x 8003-8040), which runs on east and south into the third
+    load's plate; U1's second row y 8675-8697; a row y 8730-8752 from a pad (7945,8750); a row
+    y 8645-8668 from a pad (8118,8660) east of the rail.
+  - A metal x 7927-7957 from a pad (7940,8300) (the poly of the first load's plate) contacts two
+    diffusions, at (7937,8474) and (7935,8648), and goes on.
+  - **Undecided**: five boundaries between diffusions lie in the 25 px gaps between two metals (x 7960-7985
+    and x 8040-8060), where the clean shot shows a dark bar whether the diffusion is continuous or two
+    edges meet, and the chip-2 stripped shot is fringes: the contact box (7930-7966, 8457-8498) against
+    the node east of it; the box (7930-7968, 8527-8560) against the rail box (7985-8035, 8537-8592); the
+    stem (7945-7968, 8660-8672) against the arm x 7985-8010; the box (7945-7968, 8700-8722) against the
+    node east of it; the band y 8612-8632 (x 7985-8045) against the diffusion x 8060-8095. With all five
+    joined the third gate would gate its own node; with none joined two transistors hang on closed
+    boxes. Which are joined decides whether there are two or three separate gate outputs. One reading
+    that makes sense throughout (second and fourth joined, first separate): `P` = NOT(row C gate's
+    output OR `A` OR `cdp3_w8063` AND row y 8740), `N` = NOT(`A` OR row C gate's output AND `cdp3_w8063`),
+    `A` = the third node. Believed at most.
+  - Also there and not drawn: two thin metals at x 8050-8058 and x 8076-8084 (narrow, in pieces), the
+    metal from the pad (8118,8448) south, the metal from the north onto the pad (7878,8315) (follower:
+    a corner (7989,7386), end (7986,6844)).
 - (Done 2026-11-19: row A, y 8040-8830, and what the notes called row I, which is `cdp4`'s comparator
   row, traced there in its run 3. The items below on the row A cell and row I are superseded by "Row A"
   under Logic.) Left from row A: whether the bit lines join `cdp2`'s bus lines at y 8040 (drawn to y 8040,

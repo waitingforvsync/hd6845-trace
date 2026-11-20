@@ -5,3 +5,7 @@ cdp3_bl_c4    M      9248,8040        in   the same, c4
 cdp3_bl_c5    M      9638,8040        in   the same, c5
 cdp3_bl_c6    M      10028,8040       in   the same, c6
 cdp3_bl_c7    M      10419,8040       in   the same, c7
+cdp3_w7996    M      7330,8749-8765   in   U1's input: a metal from the west (the bus field's staircase; follower to (6843,8536)) onto the pad (7400,8778)
+cdp3_w8063    P      7950,8419-8441   out  U1's output: the poly row of the pad (7836,8430), into the cluster beside row A
+cdp3_w8063    P      7790,8566-8590   out  U1's output: the poly of the pad (7838,8582), west and round into a row y 8675-8697 of the cluster
+cdp3_bl_c1    P      7950,8377-8400   out  the gate beside row C's output line: the poly row of the pad (7878,8385), into the cluster
