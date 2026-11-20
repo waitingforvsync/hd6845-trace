@@ -451,6 +451,7 @@ C 10745,11652 s=28x40
 # closed on the east by a field island; the diffusion around them is the output.
 # ======================================================================
 M 7622,13640 y14050 w=46              # the s0 VSS rail on south over the column
+M 7550,14024:7645,14055               # the rail widens west into a plate from y 14022 (seen x 7488-7645, y 14022-14075; drawn only inside the region): it covers row 6's step block, no contact
 M 7837,13520 y13570 x7795 y14050 w=46 # the s0 VCC rail: bends west at y 13547-13593, then south
 C 7610,13720 7610,13838 7610,13995    # VSS onto the three pockets
 D 7584,13660:7707,14055               # the column and its east part, up to the islands' west edges

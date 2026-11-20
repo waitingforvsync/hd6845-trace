@@ -200,6 +200,8 @@ Layout (unlike the cells of the rows):
 
 - The s0 VSS rail (x 7599-7645) runs on south over a diffusion column x 7584-7655, y 13660-14055,
   with three contacts: (7610,13720), (7610,13838), (7610,13995).
+  From y 14022 the rail widens west into a plate (about x 7488-7645, y 14022-14075 in both metal
+  shots), which covers row 6's step block without a contact; drawn only for x 7550-7645, y 14024-14055.
 - Six poly rows cross the column, two round each contact: centres y 13688, 13759, 13803, 13873,
   13958, 14028 (clean shot, column x 7635). East of the rail each row ends in a head x 7660-7715.
   Each is one pull-down, W about 128, L 23.
@@ -318,6 +320,8 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
 - Ends of `wr_r15` (poly, y 11837).
 - Right of x 10600: the n lines' contacts beyond x 10850, thin vertical metals at
   x 10795-10905, the end of the s7 VCC rail.
+- The VSS plate at the foot of the s0 rail west of x 7550 and south of y 14055 (a greenish patch in
+  the clean shot at about (7500-7545, 14040-14065) is not looked at).
 - The corner group's rails south of y 14050, and the wide metal x 7860-7910, y 13650-14100 east
   of the s0 VCC rail (with its band east along y 13650-13690), which is not followed.
 - Below y 14060: where the six in tracks of row D, `cdp4_ld6` and the rails go (fan-out
@@ -352,4 +356,35 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
 ## Review
 
 ### Run 2 (corner gate group)
+Full review, 2026-11-19, of the piece as shipped in `c2927c3` (the corner gate group, 7
+transistors), by a fresh Fable reviewer; images in `cache/scratch/cdp4/review-1/` (14).
 
+Told to suspect: which side of the thin outline is diffusion and whether the three loops are
+field islands; the passage from the bus to the load's source; the west box (buried contact, or a
+contact from the thin metal x 7556); the east box; cuts in a row's poly and the joins of rows 1
+and 6 to `busl`'s row ends; the ring (7558,13793); contacts missed on either rail; the VCC rail's
+bend.
+
+Checked and found correct (4x, two or more shots, with `px.py`, `textmap.py`, `railprof.py`,
+`follow.py`, `opendiff.py`): the diffusion side and the islands (red minus green +20 to +28 on
+pockets, bus, neck and strips against -12 to -20 on the islands and outside the outline in the
+chip-2 stripped shot; the clean shot agrees); the bus continuous; the passage (the bus's east edge
+line is absent at y 13961-13970 in both metal shots and the chip-2 stripped shot); the west box
+(the column's west edge absent at y 13912-13930 in three shots; no hole, pad or ring: reading (a)
+of AMB-038); the east box; six gates under the rail (`railprof.py` calls row 5 "poly over field",
+but it has diffusion on both sides); the rows' joins to `busl`; the ring is in the clean shot
+only; the three VSS contacts and the VCC contact are real and none is missed; the VCC bend.
+
+Could not check: the thin metal x 7556 over the west box (dark at y 13900-13946 in both metal
+shots: `busl`'s `?M`); row continuity across the 6-9 px edge line at x 7579-7582; rows 2 and 4
+west of x 7550; the passage's last 6 px under the rail's edge line.
+
+Finding 1, geometry only, confirmed (`px.py row 14031 7540 7650 8 metal,metal1`: metal from
+x 7556 to 7644 in both shots; `px.py col 7570 14000 14060 6`: metal from y 14030): the VSS rail
+widens west into a plate from y 14022, over row 6's step block, with no contact. Fixed: drawn as
+`M 7550,14024:7645,14055` (the part inside the region). No connection changes:
+
+- `tools/t.sh cdp4 sameconn.py c2927c3`: connections identical
+- `.venv/bin/python tools/sameconn.py c2927c3`: connections identical
+
+Round 1: no findings that change a connection.
