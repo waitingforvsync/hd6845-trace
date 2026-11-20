@@ -1197,7 +1197,7 @@ P 8681,15329:8738,15351              # row 1 under the rail (west end x 8681, ov
 P 8730,15335:8866,15355              # row 1 east of the rail (6 px lower)
 P 8862,15333:8898,15367              # pad
 C 8881,15351
-M 8881,15351 y15465 w=16             # metal south (1,346 px, not followed here)
+M 8881,15351 y15465 w=16             # metal south: piece in350 (run 18) takes it on to ck_out
 N M 8881,15440 eof_w15350
 P 8681,15372:8736,15396              # row 2 under the rail (west end x 8681)
 P 8728,15378:8906,15398              # row 2 east of the rail
@@ -1287,3 +1287,70 @@ C 10742,14712
 M 10746,14590 y14790 w=50            # VCC rail (bc2's M 10746,14790 y15270 goes on south)
 N M 10746,14700 vcc
 @alias bc2_w15607 eof_w15390
+
+# ============================================================================================
+# Piece in350 (run 18, 2026-11-20): eof_w15350, the upper gate of W's stack, is ck_out. Wiring only.
+#
+# The metal south of row 1's pad (8881,15351) does not end on a latch's output (run 17's guess):
+#   it runs 2,200 px south through two pads, west and south to a pad (8598,17908), from which
+#   a second metal runs 1,000 px east to a pad (9596,17909); that pad's poly crosses under two
+#   vertical metals to a pad (9769,17910), the west end of the metal that trunks draws as
+#   "ck_out #1" (M 10320,17908 x10230). No gate on the way; five pads with contacts.
+# Read on r18_s1.png (1x), r18_j1.png (2.6x, both metal shots and the clean shot: the jogs),
+# r18_p1.png (2.4x, three shots: the two pads), r18_p2.png (6x), r18_c1.png, r18_c2.png (3.6x,
+# 5.5x: the stretch y 17649), r18_p3.png (5x: the pads (8598,17908), (8424,17908)), r18_e1.png
+# (3.4x, four shots: the east end), r18_w2.png, r18_w3.png; tools/tl5_tracks.py v / h along every
+# stretch (metal test in both chips, hole scan in the clean shot), tools/eof_cchk.py at every pad
+# and crossing, tools/textmap.py at the pads, corners and three crossings (notes, piece in350).
+#
+# --- A: the metal from W's row-1 pad south. It steps one track east (x 8925) from y 15698 to
+# y 15915, round a pad (8882,15745) of another net whose metal lies in the vacated position
+# (x 8882, y 15736-15878; open ground on both sides of it: 28 px and 30 px without metal).
+# South of the step it runs THROUGH two pads with contacts, (8882,16648) and (8882,16867)
+# (ring both sides, bright centre, hole in the clean shot; the metal goes on beyond each), to a
+# corner (8882,17649), west along y 17649 to a corner (8600,17649), south to a pad (8598,17908).
+# Along y 17649 it lies on another net's poly row for 300 px (x 8588-8893; that poly turns south
+# at x 8572-8588 beside the corner and goes on east under the tracks x 8925, x 8968): no ring, no
+# hole, no widening anywhere on the stretch: no contact (notes, Ambiguity 63).
+M 8882,15455 y15698 x8925 y15915 x8882 y17649 x8600 y17908 w=14
+N M 8882,16300 ck_out
+# The two pads in the run: each is the east end of a poly row that goes west under the track
+# x 8838 (another net's metal; no contact) toward the gate column under the rail x 8686-8731.
+# By their places (the rows y 4501 and y 4718 of tl1's cells, moved by 12146 px, are y 16647 and y 16864) they are
+# the two enable rows of an undrawn copy of tl1's latch (tl1_ua / tl1_ub mirrored): believed, the
+# copy is not placed; the rows are drawn to x 8806, where the cells would begin.
+P 8866,16634:8898,16665              # pad (8882,16648)
+C 8882,16648
+P 8806,16640:8870,16658              # its row west (in the open west of x 8826)
+P 8866,16851:8898,16880              # pad (8882,16867)
+C 8882,16867
+P 8806,16855:8870,16874              # its row west
+# --- B: the pad (8598,17908): the metal from the north ends on it, a second metal leaves it east,
+# and its poly leaves west (C below). Ring 17 px on the north side, 18 px on the east.
+P 8584,17895:8616,17922
+C 8598,17908
+# the metal east along y 17910, 1,000 px over field and over two vertical polys (x 8743-8766, and
+# rst_a's x 8961-8980 of piece isrc: bars of the edges, no ring, no hole) to a pad (9596,17909)
+M 8598,17910 x9596 w=16
+P 9582,17895:9616,17922              # pad (9596,17909)
+C 9596,17909
+# the pad's poly east, y 17899-17914: under a wide vertical metal (x 9641-9685) and a thin one
+# (x 9723-9735), in the open between them (dark red-brown in the clean shot, orange in chip 2),
+# to a pad (9769,17910). The dark specks on it at x 9620-9630 and x 9700 are the gaps between the
+# metals (trap 2: the same in every gap, nothing in the chip-2 shots).
+P 9612,17899:9756,17914
+P 9752,17895:9790,17921              # pad (9769,17910)
+C 9769,17910
+# the metal east from that pad onto trunks' end (x 10230): one metal, bars of 8-10 px only
+M 9769,17910 x10245 w=16
+# --- C: the poly west of the pad (8598,17908): y 17899-17915 under the VSS rail (x 8505-8565) and
+# a thin metal (x 8455-8475) to a pad with a contact (8424,17908). On that pad: a metal from the
+# north (x 8418-8430; it ends on the pad) and a metal from the west along y 17908, and the poly
+# goes on west under that metal. All three leave the piece here (ports; not followed).
+P 8438,17899:8588,17915
+P 8405,17893:8442,17925              # pad (8424,17908)
+C 8424,17908
+M 8424,17908 y17866 w=12             # the metal north (follower: to the bundle track x 8229, end (8227,17019))
+M 8424,17908 x8380 w=14              # the metal west (follower: to (7553,17950))
+P 8380,17898:8410,17916              # the poly west under it (seen to x 8312, where it turns north)
+@alias ck_out eof_w15350
