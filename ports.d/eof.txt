@@ -113,14 +113,14 @@ eof_w15300    P      8818-8854,15440-15472    out  W's output at the pad (8836,1
 vss           M      8687-8737,15465          -    column B's VSS rail on south
 vcc           M      8510-8558,15340          -    R2 (bc1's M 8534,14990 y16300), drawn again over the VCC boxes
 # Pieces in390 and in172 (run 17): two of the latch's inputs followed to bc2's east gate column
-# (the ports eof_w15172 P 9150,14645-14662 and eof_w15390 P 9002-9020,14790 are gone: the wires are drawn on)
-bc2_w15607    M      10261-10275,15520        in   eof_w15390's metal x 10268 onto bc2's metal x 10267 (its port bc2_w15607 (10267,15515)): latch unit b's lower node, the lower gate of W's stack
+# (the ports eof_w15172 P 9150,14645-14662 and the one at P 9002-9020,14790 are gone: the wires are drawn on)
+bc2_w15607    M      10261-10275,15520        in   bc2_w15607's metal x 10268 onto bc2's metal x 10267 (its port bc2_w15607 (10267,15515)): latch unit b's lower node, the lower gate of W's stack
 bc2_w15000    M      10392,14993-15007        in   gate row 1 of the NOR T: pad A's metal x 10355, its foot east onto bc2's output pad (10395,15000) of latch unit a (its port bc2_w15000 (10385,15000))
 bc2_w14955    M      10434-10448,14946        in   gate row 3 of the NOR T: pad B's metal x 10441 onto bc2's enable metal x 10441 of latch unit a (its port bc2_w14955 (10441,14940))
 vss           M      10543-10597,14590        -    the east column's VSS rail on north of the NOR T (bc2's M 10568,14790 y15270 goes on south from y 14790)
 vcc           M      10721-10771,14590        -    the east column's VCC rail on north of the NOR T (bc2's M 10746,14790 y15270 south of it)
-# Piece in350 (run 18): eof_w15350, the upper gate of W's stack, is ck_out
-# (the port eof_w15350 M 8873-8889,15465 is gone: the metal is drawn on)
+# Piece in350 (run 18): the upper gate of W's stack is ck_out
+# (the port at M 8873-8889,15465 is gone: the metal is drawn on)
 ck_out        M      10245,17902-17918        in   onto the west end of trunks' ck_out #1 (M 10320,17908 x10230): the clock's driver is the clock block's buffer
 ck_out        M      8418-8430,17866          ?    the metal that ends on the pad (8424,17908) from the north (follower: to the bundle's track x 8229, end (8227,17019); not checked)
 ck_out        P      8392,17898-17916         ?    the poly west of the pad (8424,17908) (seen to x 8312, where it turns north; another net's metal lies on it from x 8390 west)

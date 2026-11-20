@@ -1139,7 +1139,7 @@ D 8628,14975:8650,15016              # the tail up from the strip, under the tie
 # the build is theirs (node strips under thin metals, a third pull-down gated by the other unit's
 # load plate); each stack's diffusion is 90 wide, from under the rail through the open gap to under the east thin metal.
 #   eof_w15127 = NOT(eof_w15172 OR eof_w15300)                       (V; the hairpin is two gates in series on one net)
-#   eof_w15300 = NOT((eof_w15350 AND eof_w15390) OR eof_w15127 OR rst_a)   (W)
+#   eof_w15300 = NOT((ck_out AND bc2_w15607) OR eof_w15127 OR rst_a)   (W)
 # Both rest on the plates' ties (?P, ?B), like every load of this build. bc1's two thin metals
 # (x 8637-8650, x 8789-8801) run over both units and are not drawn here; no contact on either.
 # Views r16_*.png in cache/scratch/eof/ (clean 4x, both metal shots 3x); survey.md, run 16.
@@ -1198,7 +1198,7 @@ P 8730,15335:8866,15355              # row 1 east of the rail (6 px lower)
 P 8862,15333:8898,15367              # pad
 C 8881,15351
 M 8881,15351 y15465 w=16             # metal south: piece in350 (run 18) takes it on to ck_out
-N M 8881,15440 eof_w15350
+N M 8881,15440 ck_out
 P 8681,15372:8736,15396              # row 2 under the rail (west end x 8681)
 P 8728,15378:8906,15398              # row 2 east of the rail
 P 8902,15374:8940,15408              # pad
@@ -1207,7 +1207,7 @@ M 8925,15392 y14828 x9008 w=18       # metal north on x 8925 over row C and the 
 P 8990,14811:9026,14846              # pad (9008,14828)
 C 9008,14828
 # (its poly column north is drawn on in piece in390, run 17)
-N M 8925,15100 eof_w15390
+N M 8925,15100 bc2_w15607
 D 8738,15406:8797,15424              # the foot: W's ground east of the rail
 D 8560,15302:8700,15316              # node west: the strip from the rail to the VCC box; its top edge is one line at y 15300-15302
                                      #   from the plate to the rail (the tan starts 5 px below the line: review rounds 19, 20)
@@ -1237,9 +1237,9 @@ N P 9120,14653 eof_w15172
 # ======================================================================
 # Pieces in390 and in172 (run 17, 2026-11-20): two of the three inputs of the latch V/W followed east through
 # bc2's ground (free) to their sources at bc2's east gate column.
-#   eof_w15390 = bc2_w15607 (latch unit b's lower node), by a poly row and a metal: wiring only
+#   W's lower stack gate is bc2_w15607 (latch unit b's lower node), by a poly row and a metal: wiring only
 #   eof_w15172 = NOR(bc2_w15000, bc2_w14955): the top unit T of bc2's east column (x 10484-10770, y 14598-14790)
-# ---- in390: eof_w15390 from the pad (9008,14828)
+# ---- in390: bc2_w15607 from the pad (9008,14828)
 P 9005,14600:9023,14815              # the poly column north of the pad: under eof_w15172's metal y 14785 and bc1's bus
                                      #   metals y 14742, 14699, 14656 (no contact: no pad, no hole, no ring)
 P 9005,14600:10078,14621             # the row east: bc1's bus metal y 14603-14618 lies on it from the west to x 9190,
@@ -1249,7 +1249,7 @@ C 10092,14609                        #   ring and bright centre in both chips, p
 M 10092,14611 x10268 w=14            # metal east
 M 10268,14604 y15520 w=13            # south 910 px onto bc2's metal M 10267,15515 y15622 (latch unit b's output pad)
 N M 10268,15300 bc2_w15607
-N P 9600,14610 eof_w15390
+N P 9600,14610 bc2_w15607
 # ---- in172: eof_w15172's row on east, and its driver
 P 9140,14644:10302,14664             # the row east of x 9150 (bc1's bus metal y 14656 lies on it to x 9141 and turns south)
 P 10284,14644:10302,14704            # the step south at x 10284-10301
@@ -1286,10 +1286,9 @@ D 10718,14690:10770,14736            # VCC box
 C 10742,14712
 M 10746,14590 y14790 w=50            # VCC rail (bc2's M 10746,14790 y15270 goes on south)
 N M 10746,14700 vcc
-@alias bc2_w15607 eof_w15390
 
 # ============================================================================================
-# Piece in350 (run 18, 2026-11-20): eof_w15350, the upper gate of W's stack, is ck_out. Wiring only.
+# Piece in350 (run 18, 2026-11-20): the upper gate of W's stack is ck_out. Wiring only.
 #
 # The metal south of row 1's pad (8881,15351) does not end on a latch's output (run 17's guess):
 #   it runs 2,200 px south through two pads, west and south to a pad (8598,17908), from which
@@ -1361,7 +1360,6 @@ P 8392,17898:8410,17916              # the poly west (seen to x 8312, where it t
 # (9315,16818); x 9769 to (9777,17650), east, north on x 10050, west, north on x 9965 to (9964,16950)).
 M 9596,17909 y17866 w=15
 M 9770,17910 y17866 w=15
-@alias ck_out eof_w15350
 
 # ============================================================================================
 # Pieces lat16 and inv16 (run 19, 2026-11-20): the latch that ck_out's two pads enable, and the

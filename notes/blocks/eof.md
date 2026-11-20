@@ -318,10 +318,10 @@ five uncertain items (the two load ties). As first drawn it had 13 transistors (
 and an uncertain link; review round 19 showed the stacks are one diffusion each (below, Review).
 
 - **The units V and W below the inverter are traced** (piece `vw`): a cross-coupled pair.
-  **`eof_w15127` = NOT(`eof_w15172` OR `eof_w15300`)** (unit V) and **`eof_w15300` = NOT((`eof_w15350`
-  AND `eof_w15390`) OR `eof_w15127` OR `rst_a`)** (unit W). So the ripple counter's clock `lc3_w9947` =
-  NOT `eof_w15127` is the inverse of one side of a set/reset latch: it goes low when `eof_w15350` and
-  `eof_w15390` are both high (or at reset) and high again when `eof_w15172` is high. Each unit's third
+  **`eof_w15127` = NOT(`eof_w15172` OR `eof_w15300`)** (unit V) and **`eof_w15300` = NOT((`ck_out`
+  AND `bc2_w15607`) OR `eof_w15127` OR `rst_a`)** (unit W). So the ripple counter's clock `lc3_w9947` =
+  NOT `eof_w15127` is the inverse of one side of a set/reset latch: it goes low when `ck_out` and
+  `bc2_w15607` are both high (or at reset) and high again when `eof_w15172` is high. Each unit's third
   pull-down is gated by the other's load plate; V's single input lies on both rows of its stack (a
   hairpin), W's stack has two inputs. **Row C, the gate of the transistor that clears W, is `rst_a`'s row
   from the end pad (8966,15260)** of piece `isrc`: one of the undrawn gates of `rst_a` is now drawn.
@@ -329,7 +329,7 @@ and an uncertain link; review round 19 showed the stacks are one diffusion each 
   pull-downs are all drawn without `?`; the open gap east of the rail, through which both stacks'
   diffusions run, is read from edge lines against its colour (Ambiguity 53).
 - The four inputs and outputs are drawn to ports: `eof_w15172` (the hairpin's row, on east at (9150,14653)),
-  `eof_w15350` (a metal south, 1,346 px by the follower), `eof_w15390` (a metal north to the pad
+  `ck_out` (a metal south, 1,346 px by the follower), `bc2_w15607` (a metal north to the pad
   (9008,14828), whose poly goes on north) and W's output `eof_w15300` (a metal south to a pad (8836,15456)
   at the next unit of the column). None of the four is followed.
 
@@ -339,7 +339,7 @@ Run 17 (Tom Seddon's session, Claude Fable 5.2; 2026-11-20 01:05 +0000 on). Two 
 and `in172` (3 transistors), no uncertain item: **two of the three inputs of the latch V/W are followed to
 their sources**, both at the east gate column of the bottom-centre logic (`bc2`'s ground, free).
 
-- **`eof_w15390`, the lower gate of W's stack, is `bc2_w15607`, the lower node of `bc2`'s latch unit b**
+- **The lower gate of W's stack (the wire this package called w15390) is `bc2_w15607`, the lower node of `bc2`'s latch unit b**
   (piece `in390`; traced, wiring only): the poly column north of the pad (9008,14828) turns east at y 14610
   and runs 1,070 px as a row to a pad with a contact (10092,14609), whose metal goes east and 910 px south on
   x 10268 onto `bc2`'s metal of that net (its pad (10267,15607)). `bc1`'s bus metal y 14603-14618 lies on the
@@ -350,8 +350,8 @@ their sources**, both at the east gate column of the bottom-centre logic (`bc2`'
   y 14598-14790). T's two gate rows come from two pads whose metals go south onto `bc2`'s latch unit a: its
   output pad (10395,15000) (`bc2_w15000`) and its enable metal x 10441 (`bc2_w14955`).
 - So the ripple counter's clock `lc3_w9947` is set high while latch unit a's enable is low and its upper
-  node `bc2_w15000` is low, and set low by `eof_w15350` AND latch unit b's lower node (or the reset).
-- **Not followed**: `eof_w15350` (the metal south of (8881,15465)): the follower ends on a pad at about
+  node `bc2_w15000` is low, and set low by `ck_out` AND latch unit b's lower node (or the reset).
+- **Not followed**: `ck_out` (the metal south of (8881,15465)): the follower ends on a pad at about
   (8882,16644), by position the output row of an undrawn latch copy in column B (Not done).
 
 Full extraction with run 17: 2,377 nets, 4,365 transistors, 0 errors, 0 warnings.
@@ -359,7 +359,7 @@ Full extraction with run 17: 2,377 nets, 4,365 transistors, 0 errors, 0 warnings
 Run 18 (Tom Seddon's session, Claude Fable 5.2; 2026-11-20 01:54 +0000 on). One piece, `in350` (wiring only),
 no uncertain item: **the third input of the latch V/W is followed to its source, and it is `ck_out`**.
 
-- **`eof_w15350`, the upper gate of W's stack, is `ck_out`**, the main internal clock (NOT CLK) (piece
+- **The upper gate of W's stack (the wire this package called w15350) is `ck_out`**, the main internal clock (NOT CLK) (piece
   `in350`; traced, firm for the join). The metal south of row 1's pad (8881,15351) does not end at
   (8882,16623), where the follower stopped and run 17 guessed a latch's output: it runs **through** two pads
   with contacts, (8882,16648) and (8882,16867), on south to a corner (8882,17649), west and south to a pad
@@ -592,10 +592,10 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `vw`, the stacks' east part | x 8738-8797, y 15118-15424 | both stacks' diffusions run on east of the rail through the open gap to under `bc1`'s thin metal x 8789-8801 (east edge x 8797), so that rows A, B, 1 and 2 are gates 90-105 wide; between V's ground and W's output pad the diffusion narrows to x 8754-8797 under row C (`rst_a`, y 15251-15270) |
 | `vw`, unit W | x 8508-8940, y 15262-15472 | under the rail a stack of two gates (row 1 y 15329-15355 from a pad (8881,15351), row 2 y 15372-15398 from a pad (8922,15392)) between the node (y 15309-15330) and W's ground (contact (8722,15440)); output box (8762-8802, 15285-15320), its row to a pad (8835,15302); load plate x 8568-8622, y 15298-15335 (one poly with V's arm); under the thin metal x 8637-8650 a column of the node with a third gate (the row of the pad (8592,15383), V's output) and a foot into W's ground |
 | `vw`, the wires | x 8580-9150, y 14645-15472 | V's plate pad to the pad (8592,15383) by a metal x 8580-8604; the hairpin's metal x 8882 north to (8882,14785), east to a pad (9054,14785), poly north and east along y 14653; row 2's metal x 8925 north to (8925,14828), east to a pad (9008,14828); W's output metal x 8838 south to a pad (8836,15456); row 1's metal x 8881 south (to y 15465) |
-| `in390` | x 9005-10275, y 14594-15520 | `eof_w15390`'s poly column x 9005-9023 north of the pad (9008,14828), under `eof_w15172`'s metal y 14785 and `bc1`'s bus metals y 14742, 14699, 14656; east at y 14600-14621 as a row (the bus metal y 14603-14618 on it to x 9190), 1,070 px under eleven vertical metals to a pad with a contact (10092,14609); a metal east along y 14611 to a corner (10268,14607) and south on x 10268 onto `bc2`'s metal end (10267,15515) of latch unit b's output pad |
+| `in390` | x 9005-10275, y 14594-15520 | `bc2_w15607`'s poly column x 9005-9023 north of the pad (9008,14828), under `eof_w15172`'s metal y 14785 and `bc1`'s bus metals y 14742, 14699, 14656; east at y 14600-14621 as a row (the bus metal y 14603-14618 on it to x 9190), 1,070 px under eleven vertical metals to a pad with a contact (10092,14609); a metal east along y 14611 to a corner (10268,14607) and south on x 10268 onto `bc2`'s metal end (10267,15515) of latch unit b's output pad |
 | `in172`, the row | x 9140-10520, y 14644-14714 | `eof_w15172`'s poly row y 14644-14664 on east of x 9150 under the same vertical metals, a step south at x 10284-10302, the lower row y 14687-14704 under the metals x 10355 and x 10397 into the output box (10484-10520, 14681-14714) |
 | `in172`, unit T | x 10335-10772, y 14590-15007 | a NOR at the top of `bc2`'s east column: a diffusion body west of the VSS rail (x 10495-10530, y 14622-14771) whose top and bottom bands run into two VSS boxes under the rail (contacts (10562,14613), (10562,14769)); gate row 1 (y 14643-14665) from pad A (10352,14654), gate row 3 (y 14728-14750) from pad B (10440,14738); the node between them with the output box; a node strip y 14690-14706 east under the rail to the load: a plate x 10660-10716, y 14668-14762 over a strip to the VCC box (contact (10742,14712)), a tail south into the tie box (10624-10652, 14738-14768); pad A's metal x 10355 south to a foot onto `bc2`'s pad (10395,15000), pad B's metal x 10441 south onto `bc2`'s metal at y 14940; the two rails over the unit |
-| `in350`, the metal south | x 8866-8940, y 15455-17656 | `eof_w15350`'s metal from W's row-1 pad on south on x 8882; a step one track east (x 8925) from y 15698 to y 15915, round another net's pad (8882,15745) and its metal in the vacated position; through two pads with contacts, (8882,16648) and (8882,16867), each the east end of a poly row that runs west under the track x 8838 to the gate column (drawn to x 8806); on south to a corner (8882,17649) |
+| `in350`, the metal south | x 8866-8940, y 15455-17656 | `ck_out`'s metal from W's row-1 pad on south on x 8882; a step one track east (x 8925) from y 15698 to y 15915, round another net's pad (8882,15745) and its metal in the vacated position; through two pads with contacts, (8882,16648) and (8882,16867), each the east end of a poly row that runs west under the track x 8838 to the gate column (drawn to x 8806); on south to a corner (8882,17649) |
 | `in350`, the L | x 8584-8890, y 17642-17922 | west along y 17649 (on another net's poly row for 300 px, no contact) to a corner (8600,17649), south on x 8600 over four poly rows to a pad with a contact (8598,17908) |
 | `in350`, east to `ck_out` | x 8584-10245, y 17895-17922 | from that pad a metal east along y 17910, 1,000 px, to a pad with a contact (9596,17909); the pad's poly row y 17899-17914 east under a wide vertical metal (x 9641-9685) and a thin one (x 9723-9735) to a pad with a contact (9769,17910); a metal east onto `trunks`' end of `ck_out #1` at x 10230; on each of the two pads a second metal from the north (x 9589-9604, x 9762-9778), drawn as stubs to y 17866 |
 | `in350`, west | x 8380-8588, y 17866-17925 | the poly of the pad (8598,17908) west along y 17899-17915 under the VSS rail and a thin metal to a pad with a contact (8424,17908); stubs of that pad's metal north (x 8418-8430) and of its poly on west |
@@ -1445,13 +1445,13 @@ plate is shorter and wider and the pull-down runs on east of the rail). `p_g1.pn
 
 ```
 eof_w15127 = NOT(eof_w15172 OR eof_w15300)                              unit V, y 15100-15285
-eof_w15300 = NOT((eof_w15350 AND eof_w15390) OR eof_w15127 OR rst_a)    unit W, y 15285-15470
+eof_w15300 = NOT((ck_out AND bc2_w15607) OR eof_w15127 OR rst_a)    unit W, y 15285-15470
 ```
 
 From the full extraction (which prints V's first term as `eof_w15172 & eof_w15172`: the hairpin gives two
 gates in series on one net): V's load (8596,15133) 26/52; its stack 90/24 twice, both gated by
 `eof_w15172`; (8645,15216) 34/23, gate `eof_w15300`, `eof_w15127` to `vss`. W's load (8595,15317) 30/54;
-its stack 105/20 (gate `eof_w15350`) over 104/21 (gate `eof_w15390`); (8642,15384) 36/22, gate
+its stack 105/20 (gate `ck_out`) over 104/21 (gate `bc2_w15607`); (8642,15384) 36/22, gate
 `eof_w15127`; (8776,15260) 43/19, gate `rst_a`, `eof_w15300` to `vss`. `tools/unsure.py --equations`: both
 depend on uncertain items (the two ties).
 
@@ -1483,23 +1483,23 @@ about 115/80/65 in the clean shot; field is 2 and 20-23, about 105/100/65.
 | W's load and tie | plate x 8568-8622, y 15298-15335 over the strip y 15302-15332; VCC box `bc1`'s (8505-8562, 15250-15327; contact (8531,15290), centres 237/201). Tie: a tab of the plate's widening (bright patch x 8627-8635, y 15272-15292) into a heavy-outlined box (8645-8663, 15281-15298) on a tail of the strip, with a bar y 15302-15310 below it: drawn `?P`, `?D`, `?B` | `r16_wtie.png` (6x, four shots); `px.py row 15286 8604 8672 4`; `px.py col 8652 15262 15322 4`; Ambiguity 56 |
 
 What it does (the equations are marked). V and W hold one bit. `eof_w15172` high forces `eof_w15127` low,
-which makes the clock `lc3_w9947` high; `eof_w15350` AND `eof_w15390` high, or `rst_a` high (the reset),
+which makes the clock `lc3_w9947` high; `ck_out` AND `bc2_w15607` high, or `rst_a` high (the reset),
 forces `eof_w15300` low, which lets `eof_w15127` rise, the clock low. So **the ripple counter's clock is
-set high by `eof_w15172` and low by (`eof_w15350` AND `eof_w15390`) or the reset**; while both conditions
+set high by `eof_w15172` and low by (`ck_out` AND `bc2_w15607`) or the reset**; while both conditions
 are low it holds. During reset the clock is `eof_w15172` itself. What the three signals are is open: none
 of them is followed (Ports, Not done).
 
 ### Pieces `in390` and `in172`: two of the latch's inputs to their sources (traced; no uncertain item)
 
 ```
-eof_w15390 = bc2_w15607                         one net: latch unit b's lower node (bc2), by a poly row and a metal
+W's lower stack gate = bc2_w15607               one net: latch unit b's lower node (bc2), by a poly row and a metal
 eof_w15172 = NOR(bc2_w14955, bc2_w15000)        unit T, the top unit of bc2's east gate column, y 14598-14790
 ```
 
 From the full extraction: `t2121` at (10512,14654) 35/22, gate `bc2_w15000`, `vss` to `eof_w15172`; `t2122` at
 (10512,14739) 35/22, gate `bc2_w14955`, `eof_w15172` to `vss`; the load `t2123` at (10688,14704) 27/56.
 `tools/unsure.py --equations eof_w15172`: FIRM. W's equation now reads `eof_w15300` = NOT((`bc2_w15607` AND
-`eof_w15350`) OR `eof_w15127` OR `rst_a`) (marked as before: W's tie). With `bc2`'s equations (marked there:
+`ck_out`) OR `eof_w15127` OR `rst_a`) (marked as before: W's tie). With `bc2`'s equations (marked there:
 copies of `tl1`'s cells, reviewed on Opus only, R31): `bc2_w15000` = NOT((`bc2_w14912` AND `bc2_w14955`) OR
 `bc2_w15029`), latch unit a's upper node, and `bc2_w15607` = NOT((`bc2_w15352` AND `bc2_w15432`) OR
 `bc2_w15476` OR `bc2_w15565`), latch unit b's lower node.
@@ -1507,7 +1507,7 @@ copies of `tl1`'s cells, reviewed on Opus only, R31): `bc2_w15000` = NOT((`bc2_w
 What it does. `eof_w15172` is high only while latch unit a's enable `bc2_w14955` is low (the latch holds) and
 its upper node `bc2_w15000` is low, i.e. while unit a holds a set bit (`bc2_w15029` high; believed, from
 `bc2`'s equations); that sets `eof_w15127` low and the ripple counter's clock `lc3_w9947` high. The clock goes
-low again when `eof_w15350` and latch unit b's lower node are both high, or at reset. What latch units a and b
+low again when `ck_out` and latch unit b's lower node are both high, or at reset. What latch units a and b
 store is not traced (`bc2`: their data, enables and b's clear are not followed).
 
 **Piece `in390`** (views `r17_*.png` in `cache/scratch/eof/`; survey at 1.15x `r17_s1.png`, `r17_s2.png`):
@@ -1526,7 +1526,7 @@ store is not traced (`bc2`: their data, enables and b's clear are not followed).
 
 | Part | Where | Evidence |
 |---|---|---|
-| the row east of x 9150 | y 14644-14664 to x 10302; `bc1`'s bus metal y 14648-14664 lies on it from x 9044 to x 9141 and turns south there (run 16); under the same vertical metals as the row above, and under `eof_w15390`'s metal x 10268 | `eof_rows.py col`; `eof_cchk.py` at twelve crossings: 26-47 (26 under the wide metal x 9489; no ring, no pad); `px.py row 14652 10254 10310 3 acid1b,metal` against the same row under the metal x 10051 (`10036 10072`): the same dark bar at the metal's edge, salmon through it |
+| the row east of x 9150 | y 14644-14664 to x 10302; `bc1`'s bus metal y 14648-14664 lies on it from x 9044 to x 9141 and turns south there (run 16); under the same vertical metals as the row above, and under `bc2_w15607`'s metal x 10268 | `eof_rows.py col`; `eof_cchk.py` at twelve crossings: 26-47 (26 under the wide metal x 9489; no ring, no pad); `px.py row 14652 10254 10310 3 acid1b,metal` against the same row under the metal x 10051 (`10036 10072`): the same dark bar at the metal's edge, salmon through it |
 | the step | the row's east end x 10302; a vertical x 10284-10301 from y 14644 to 14704; the lower row y 14687-14704 east. 28 px of field between the step and pad A's outline (blue 79-88 in the chip-2 metal shot against 51-66 on the poly) | `px.py row 14652 10262 10346 4 metal,metal1,acid`; `row 14672 10266 10330 4`; `col 10294 14628 14716 4`; `col 10330 14664 14716 3`; `r17_e1.png`; overlay `r17_o2.png` (3.6x, metal and clean) |
 | the lower row | under pad A's metal x 10355 and the metal x 10397 (`bc2`'s data line) without contact; the clean shot's ring at (10378,14695) is the gap between those two metals (not in the chip-2 shots) | `eof_cchk.py 10355,14695 10397,14695`: 47, 45; `r17_p1.png` (4x, four shots) |
 | unit T, the body | diffusion x 10495-10530, y 14622-14771, west of the rail: outlined in both metal shots and the chip-2 stripped shot, red minus green 13-19 there inside against -3 to -8 outside. Chip 1's clean shot is covered by dark residue here (Ambiguity 60) | `eof_patch.py 10502 10535 14626 14634` (19.0), `10502 10514 14670 14678` (13.7), `10502 10535 14757 14767` (13.2), outside: `14600 14612` (-3.3), `14780 14790` (-4.3), `10470 10488 14668 14676` (-7.6); `px.py row 14631 / 14654 / 14674 / 14739 / 14762 10484 10552 4 metal,acid`; `r17_u2.png` (3.5x, four shots), `r17_u3.png` (6.5x, chip 2) |
@@ -1542,14 +1542,14 @@ store is not traced (`bc2`: their data, enables and b's clear are not followed).
 ### Piece `in350`: the third input of the latch is `ck_out` (traced; wiring only, no uncertain item)
 
 ```
-eof_w15350 = ck_out                             one net: W's upper stack gate, by 3,500 px of metal and one poly hop, on trunks' ck_out #1
+W's upper stack gate = ck_out               one net, by 3,500 px of metal and one poly hop, on trunks' ck_out #1
 eof_w15300 = NOT((ck_out AND bc2_w15607) OR eof_w15127 OR rst_a)        unit W, as the full extraction now prints it
 ```
 
 From the full extraction: `t1895` at (8747,15343) 105/20, gate `ck_out`, `eof_w15300` to the stack's middle
-node. `tools/unsure.py` lists neither `ck_out` nor `eof_w15350` among the nets joined only through uncertain
-items: no `?` on the path (W's equation stays marked: its tie). The two names are gathered by `@alias ck_out
-eof_w15350` until the next refresh renames the placeholder.
+node. `tools/unsure.py` does not list `ck_out` among the nets joined only through uncertain
+items: no `?` on the path (W's equation stays marked: its tie). The gate's wire carried a placeholder name and
+an alias until the refresh of 2026-11-20 renamed it.
 
 What it says (traced for the join; the rest as marked before): the latch behind the ripple counter's clock is
 clocked. `lc3_w9947` = NOT `eof_w15127` goes low when `ck_out` is high (CLK low) while latch unit b's lower
@@ -2070,7 +2070,7 @@ driver lies; the other three lead to the loads.
 | `lc3_w9947` | poly | (7550, 14772-14796) | out | piece `ck6`: onto `busl`'s row end (its port there): the ripple counter's clock, driven by the inverter U at (8733,15000) |
 | `bc2_w15000` | metal | (10392, 14993-15007) | in | piece `in172`: gate row 1 of the NOR T; pad A's metal x 10355, its foot onto `bc2`'s output pad (10395,15000) of latch unit a (its port (10385,15000)). (The port `eof_w15172` (9150,14645-14662) of piece `vw` is gone: the row is drawn on to its driver, T) |
 | `bc2_w14955` | metal | (10434-10448, 14946) | in | piece `in172`: gate row 3 of the NOR T; pad B's metal x 10441 onto `bc2`'s enable metal of latch unit a (its port (10441,14940)); the net's driver is not found |
-| `ck_out` | metal | (10245, 17902-17918) | in | piece `in350`: onto the west end of `trunks`' metal `ck_out #1` (`M 10320,17908 x10230 w=16`): the clock's driver is the clock block's buffer. (The port `eof_w15350` (8873-8889,15465) of piece `vw` is gone: the metal is drawn on) |
+| `ck_out` | metal | (10245, 17902-17918) | in | piece `in350`: onto the west end of `trunks`' metal `ck_out #1` (`M 10320,17908 x10230 w=16`): the clock's driver is the clock block's buffer. (The port of piece `vw` at (8873-8889,15465), then under a placeholder name, is gone: the metal is drawn on) |
 | `eof_w16000` | poly | (8800, 15727-15745) | in | piece `lat15`: the upper latch's data: the poly row west of the pad (8880,15738), where it enters a heavy-outlined box (8762-8795, 15722-15757) at column B's east edge (not read: by its place a unit's output) |
 | `eof_w16000` | metal | (8831-8845, 16030) | ? | piece `lat15`: the track x 8838 on south of the data pad (8838,16000) (the follower: to (8838,17306); not checked) |
 | `eof_w16040` | metal | (8919-8931, 16300) | in | piece `lat15`: the upper latch's enable: the metal x 8925 on south of its lower pad (8925,16262) (the follower: to (8925,17694), west along y 17700 to x 8643; not checked) |
@@ -2091,7 +2091,7 @@ driver lies; the other three lead to the loads.
 | `ck_out` | poly | (8392, 17898-17916) | ? | piece `in350`: the poly west of the pad (8424,17908) (seen to x 8312, where it turns north; another net's metal lies on it from x 8390 west) |
 | `ck_out` | metal | (9589-9604, 17866) | ? | piece `in350`: the metal that ends on the pad (9596,17909) from the north (the follower: west along y 17606, north on x 9315 to (9315,16818); not checked) |
 | `ck_out` | metal | (9762-9778, 17866) | ? | piece `in350`: the metal that ends on the pad (9769,17910) from the north (the follower: east along y 17649, north on x 10050, west, north on x 9965 to (9964,16950); not checked) |
-| `bc2_w15607` | metal | (10261-10275, 15520) | in | piece `in390`: `eof_w15390`'s metal x 10268 onto `bc2`'s metal x 10267 (its port (10267,15515)), from latch unit b's lower node. (The port `eof_w15390` (9002-9020,14790) of piece `vw` is gone) |
+| `bc2_w15607` | metal | (10261-10275, 15520) | in | piece `in390`: `bc2_w15607`'s metal x 10268 onto `bc2`'s metal x 10267 (its port (10267,15515)), from latch unit b's lower node. (The port of piece `vw` at (9002-9020,14790), then under a placeholder name, is gone) |
 | `eof_w15300` | poly | (8818-8854, 15440-15472) | out | piece `vw`: W's output at the pad (8836,15456), the south end of its metal x 8838; the pad's poly belongs to the next unit of the column (y 15440-15540: not drawn) |
 | `vss` | metal | (8687-8737, 14900) and (8687-8737, 15465) | - | pieces `ck6`, `vw`: column B's VSS rail, drawn over U, V and W only; north it turns west as a band y 14816-14878 to the rail x 8510-8560, south it runs on down the column |
 | `vcc` | metal | (8510-8558, 15340) | - | pieces `ck6`, `vw`: R2, `bc1`'s (`M 8534,14990 y16300 w=48`), drawn again over the three VCC boxes so that the package extracts by itself |
@@ -2501,10 +2501,10 @@ driver lies; the other three lead to the loads.
     What would settle it: a sharper stripped shot of (8740-8780, 15185-15250).
 54. **The row of the pad (8592,15383) and row 2 are in one line and are two polys** (piece `vw`; trap 34).
     The pad's row (V's output, by the metal x 8580-8604 from V's plate pad) crosses W's column under the thin
-    metal and ends at x about 8666; row 2 (`eof_w15390`, from the pad (8922,15392)) ends at x about 8681;
+    metal and ends at x about 8666; row 2 (`bc2_w15607`, from the pad (8922,15392)) ends at x about 8681;
     the 14 px between are not poly in the clean shot and both metal shots (the Logic table's row). Seen as a
     small outlined box at (8664-8680, 15370-15395) in all shots (`r16_wbox.png`, 6x, four shots: the two
-    rounded ends and the edges of the diffusions above and below). If they were one poly, `eof_w15390`
+    rounded ends and the edges of the diffusions above and below). If they were one poly, `bc2_w15607`
     would be `eof_w15127` and W would be NOT(`eof_w15127`) with a redundant gate.
 55. **Three links of V and W cross the 17 px open gap between the thin metal x 8637-8650 and the rail**
     (piece `vw`), where the clean shot shows a dark bar across anything (trap 2): V's pocket into its VSS
@@ -2534,8 +2534,8 @@ driver lies; the other three lead to the loads.
     y 15042, the hairpin's metal x 8882 over the rows y 14825 and y 15042: no hole at any (`eof_cchk.py`:
     +33 to +40). (e) Seen by the reviewer of round 19, no contact: the bus metal y 14648-14660 lies on the
     hairpin's poly row from x 9060 to 9147 (where the metal turns south: run 15), and the hairpin's metal
-    y 14785 crosses `eof_w15390`'s poly column x 9002-9020.
-58. **`bc1`'s bus metals on and over `eof_w15390`'s poly** (piece `in390`; traps 13, 15). The bus metal
+    y 14785 crosses `bc2_w15607`'s poly column x 9002-9020.
+58. **`bc1`'s bus metals on and over `bc2_w15607`'s poly** (piece `in390`; traps 13, 15). The bus metal
     y 14603-14618 lies on the row from its corner (x 9005) to x 9190, where the metal turns south (185 px),
     and the bus metals y 14656, 14699, 14742 and `eof_w15172`'s metal y 14785 cross the column x 9005-9023.
     Read as no contact at any: the poly keeps its width (18-21 px, no pad), neither metal shot has a ring,
@@ -2545,7 +2545,7 @@ driver lies; the other three lead to the loads.
     metal y 14656, 134/82/27 at the corner) where the same poly is salmon (203-221/147-167/101-119) under the
     three metals south of it and `eof_w15172`'s row is salmon under the same metal (`px.py col 9014 14594
     14690 4 all`; `r17_a2.png`): read as a stain of that shot, since the chip-2 stripped shot has plain poly
-    there and no pits. If the crossing were a contact, `eof_w15390` would also be `bc1`'s bus line y 14656.
+    there and no pits. If the crossing were a contact, `bc2_w15607` would also be `bc1`'s bus line y 14656.
 59. **The pad (10092,14609) has no green hole in the clean shot** (piece `in390`): vivid red-orange there,
     like the pad (6513,7889) of Ambiguity 38. Accepted as a contact from both metal shots (ring, bright centre
     12 px across) and the pits of the chip-2 stripped shot (trap 26, the converse). If it were none, the row
@@ -3765,7 +3765,7 @@ Findings:
    field west of x 8754). Fixed.
 
 Also noted by the reviewer, no contact (added to Ambiguity 57): the bus metal y 14648-14660 on the
-hairpin's poly row, the hairpin's metal y 14785 over `eof_w15390`'s poly column.
+hairpin's poly row, the hairpin's metal y 14785 over `bc2_w15607`'s poly column.
 
 Found correct by the reviewer: the row of the pad (8592,15383) and row 2 are two polys (clean shot and
 both metal shots; the stripped shot undecided); rows A/B and 1/2 not joined at their west ends; the arm
@@ -4392,7 +4392,7 @@ Round 30: no findings.
 - **The driver of the ripple counter's clock `lc3_w9947`: found** (run 15, piece `ck6`: the inverter U),
   **the latch behind it traced** (run 16, piece `vw`: the units V and W) **and two of the latch's three inputs
   followed to their sources** (run 17: `eof_w15172` = NOR(`bc2_w14955`, `bc2_w15000`), piece `in172`;
-  `eof_w15390` = `bc2_w15607`, piece `in390`). **The third input `eof_w15350` is `ck_out`** (run 18, piece
+  the second is `bc2_w15607`, piece `in390`). **The third input is `ck_out`** (run 18, piece
   `in350`). **The latch whose two enable rows the wire's pads feed is drawn** (run 19, pieces `lat16`, `inv16`).
   **The latch's three open wires are followed** (run 20, pieces `lat15`, `cap16`, `w16693`): `eof_w16388` is
   the upper node of the upper latch copy, now drawn; `eof_w16823` ends on a large diffusion (and on the gate row
