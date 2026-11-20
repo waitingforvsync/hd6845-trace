@@ -1810,9 +1810,10 @@ P 8200,17419:8245,17440
 M 9010,17604 y17780 x8733 w=13
 P 8705,17760:8752,17796
 C 8733,17778
-# The pad's poly row y 17768-17786 runs west under ck_out's metal x 8600 (piece in350), the
-# rail x 8500-8562 and the tracks x 8470, 8425 and 8382 with no contact (eof_cchk at each:
-# clean R-G 40-47, no ring; tl5_tracks.py h 17778 8345 8730: no hole) to a pad with a contact
+# The pad's poly row y 17768-17786 runs west under a thin metal x 8643 (another net's, drawn by
+# no one; review round 28), ck_out's metal x 8600 (piece in350), the rail x 8500-8562 and the
+# tracks x 8470, 8425 and 8382 with no contact (eof_cchk at each: clean R-G 40-47, no ring;
+# tl5_tracks.py h 17778 8345 8730: no hole) to a pad with a contact
 # (8338,17777) (eof_cchk: -13, centres 202/211), on which a metal from the west ends.
 P 8345,17768:8712,17786
 P 8322,17760:8354,17794

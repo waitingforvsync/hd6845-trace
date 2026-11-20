@@ -592,7 +592,7 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `o168`, the first row | x 8573-9073, y 17600-17698 | `eof_w17168`'s metal x 9057 on to a pad with a contact (9055,17648); the pad's poly row y 17638-17656 west under the tracks x 9011, 8968, 8925 and under `ck_out`'s metal y 17649 (x 8600-8882), a leg south at x 8573-8588 in the open gap between the rail and the metal x 8600 |
 | `o168`, the second row | x 8339-8588, y 17630-17698 | the row y 17682-17698 west under the rail x 8500-8562, the tracks x 8470 and x 8425 and `ck_out`'s second metal (which lies on it from x 8426 to x 8355), a leg north at x 8353-8371 to a pad with a contact (8355,17649) |
 | `o168`, the metal and the last pad | x 8172-8361, y 17410-17656 | metal west along y 17650 to a corner (8186,17650), north on x 8186 to a pad with a contact (8185,17428), where it ends; the pad's poly row y 17419-17440 east, drawn to x 8245 (port) |
-| `o040`, the metal and the row | x 8322-9017, y 17604-17796 | `eof_w17040`'s metal x 9010 south from the pad (9008,17560) to a corner (9010,17780), west along y 17780 over `rst_a`'s poly column x 8964 to a pad with a contact (8733,17778); the pad's poly row y 17768-17786 west under the metal x 8600, the rail x 8500-8562 and the tracks x 8470, 8425, 8382 to a pad with a contact (8338,17777) |
+| `o040`, the metal and the row | x 8322-9017, y 17604-17796 | `eof_w17040`'s metal x 9010 south from the pad (9008,17560) to a corner (9010,17780), west along y 17780 over `rst_a`'s poly column x 8964 to a pad with a contact (8733,17778); the pad's poly row y 17768-17786 west under the thin metal x 8643, the metal x 8600, the rail x 8500-8562 and the tracks x 8470, 8425, 8382 to a pad with a contact (8338,17777) |
 | `o040`, the track | x 8005-8345, y 16292-17784 | metal west along y 17777 to a corner (8012,17777); north on x 8012; a Z step at y 17259 onto x 8057; north to a corner (8057,16647); east along y 16647 to x 8143; north on x 8143 onto `bc1`'s metal end (8143,16300) of `bc1_g6_in` |
 
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
@@ -1860,11 +1860,11 @@ NOR(`eof_w16693`, `eof_w17212`) (pieces `inv17`, `nor17`). Both wires were ports
 | metal x 9010, y 17560-17780 | from the pad (9008,17560) south; bars of 8 px over the rows y 17636-17656 (`eof_w17168`'s) and y 17660; no hole | `tl5_tracks.py v 9010 17570 17800`; `eof_cchk.py 9010,17690 9010,17736` |
 | the corner (9010,17780), metal y 17773-17787 | an L: west; over `rst_a`'s poly column x 8964 (piece `isrc`) with no contact | `follow.py 9008 17600 S --gap 16`; `eof_mrun.py col 8850 17750 17810 8950 8780`; `eof_cchk.py 8964,17780` (39); `r22_g1.png` (3.6x, three shots) |
 | the pad (8733,17778) | a contact: ring and bright centre in both metal shots, a hole in the clean shot (-6; 201/205), a pitted box in the chip-2 stripped shot; the metal ends on it | `eof_cchk.py 8733,17778`; `tl5_tracks.py h 17779 8700 9020`; `r22_g1.png` |
-| the row y 17768-17786, x 8345-8712 | one poly, under the metal x 8600 (`ck_out`, piece `in350`), the rail x 8500-8562 and the tracks x 8470, 8425, 8382: no ring and no hole at any | `eof_rows.py col` at x 8700 ... 8360; `px.py col 8650 17760 17794 2 acid1b,acid`; `eof_cchk.py 8600,17778 8536,17778 8470,17778 8425,17778 8382,17778` (40-47); `tl5_tracks.py h 17778 8345 8730`; `r22_i2.png` (2.65x overlay) |
+| the row y 17768-17786, x 8345-8712 | one poly, under the thin metal x 8643 (another net's, drawn by no one: review round 28; `eof_mrun.py row 17758 8590 8700 17800`: 8643(13-14); `eof_cchk.py 8642,17777`: 44, no ring), the metal x 8600 (`ck_out`, piece `in350`), the rail x 8500-8562 and the tracks x 8470, 8425, 8382: no ring and no hole at any | `eof_rows.py col` at x 8700 ... 8360; `px.py col 8650 17760 17794 2 acid1b,acid`; `eof_cchk.py 8600,17778 8536,17778 8470,17778 8425,17778 8382,17778` (40-47); `tl5_tracks.py h 17778 8345 8730`; `r22_i2.png` (2.65x overlay) |
 | the pad (8338,17777) | a contact (-13; 202/211; a pitted box in the chip-2 stripped shot); a metal from the west ends on it | `eof_cchk.py 8337,17776`; `r22_g2.png` (4.2x, three shots) |
 | metal y 17777, x 8012-8338, and x 8012, y 17259-17777 | no stretch without metal; an L corner at (8012,17777) | `follow.py 8300 17778 W --gap 16`; `tl5_tracks.py h 17777 8000 8335`, `v 8012 17240 17790` |
 | the step at y 17259 | a Z: east from x 8012 to x 8057, then north. `rst_a`'s metal of piece `isrc4` is on x 8057 south of its own step at y 17301: the two metals lie on one track position end to end with 25 px of bare ground between them | `r22_h1.png` (4.2x, four shots); `textmap.py 7994 17236 8080 17270 3` |
-| metal x 8057, y 16647-17259 | bars of 9 px only; it crosses the diffusion-coloured area of Ambiguity 32 (y 16630-16780) with no ring | `tl5_tracks.py v 8057 16630 17270` |
+| metal x 8057, y 16647-17259 | bars of 9 px only; it crosses the diffusion-coloured area of Ambiguity 32 (y 16630-16780) with no ring. Chip 2's metal is dim at y 16883-16905 (the tool's "chip 2 fails"); chip 1's is whole there and the clean shot's protected strip unbroken (review round 28, `review-28/d16895.png`): continuity there rests on chip 1 | `tl5_tracks.py v 8057 16630 17270` |
 | the corner (8057,16647), metal y 16647, the corner (8143,16647) | two Ls: east across the vacant position x 8100, then north; `rst_a`'s metal turns the same way 48 px lower (nested) | `r22_h2.png` (3.3x, four shots); `eof_mrun.py row` at y 16720, 16680, 16640, 16600 |
 | metal x 8143, y 16300-16647 | bars of 8-12 px (the rows beneath, `rst_a`'s row y 16294-16312 of piece `isrc4` among them): no hole | `tl5_tracks.py v 8143 16240 16660` |
 | `bc1`'s stretch (not drawn here) | `bc1`'s `M 8186,15900 y16260 x8143 y16300` fits: the jog at y 16254-16268 passes 26 px north of `rst_a`'s pad (8185,16303) (Ambiguity 30), and the metal x 8186 ends on a pad with a contact (8186,15910), the west end of the gate row of `bc1`'s inverter 6 | `r22_h3.png` (4.5x, four shots), `r22_h4.png` (3.1x, four shots, every package's trace); `tl5_tracks.py v 8186 15880 16270`; `eof_cchk.py 8186,15910` (-15; 192/168) |
@@ -4022,6 +4022,64 @@ tools/t.sh eof sameconn.py 3ee5afd              connections identical
 ```
 
 Round 27: no findings that change a connection.
+
+### Round 28 (full review of pieces `o168` and `o040`; 2026-11-20 06:00 to 06:20 +0000, at commit cbf055e)
+
+A fresh reviewer (Claude Fable 5.2), briefed with the two pieces' claims (`o168`: the pad (9055,17648), the row
+y 17638-17656 under three tracks and under `ck_out`'s metal, the turn at x 8573-8588, the row y 17682-17698
+under the wide metal, two tracks and `ck_out`'s second metal, the leg and the pad (8355,17649), the metal to
+the corner (8186,17650) and the pad (8185,17428), the row east to the port x 8245; `o040`: the metal to the
+corner (9010,17780) and the pad (8733,17778), the row to the pad (8338,17777), the metal to the corner
+(8012,17777), the Z at y 17259, the corners at y 16647, the stretch onto `bc1`'s metal end (8143,16300) and
+`bc1`'s jog to the contact (8186,15910); the alias) and told to look hardest at: the two steps of the track
+bundle (a swap with a neighbour; the order and number of tracks entering and leaving; the bare ground between
+this line and `rst_a`'s on x 8057); the join onto `bc1`'s metal and the jog beside the pad (8185,16303); the
+long straights (a pad, a contact, two metals end to end); the row that is red-orange under the wide metal
+(contact, gate or neither); the two stretches under `ck_out`'s metals and that metal's corners; whether the
+turn at x 8573-8588 joins the two rows; all five pads (a contact, the metal ending, anything else leaving);
+whether each row is one poly on both sides of the wide metal. It used 68 tool calls and 20 images
+(`cache/scratch/eof/review-28/`), with `px.py`, `textmap.py`, `railprof.py`, `eof_mrun.py`, `eof_cchk.py`,
+`tl5_tracks.py`, the follower and the extraction.
+
+It checked and found correct. The five pads at 5-5.5x in four shots each, with text maps: each has a ring, a
+bright centre and a pitted box, its metal ends on it and one poly leaves. The pad (8355,17649): the poly east
+of it is the rounded end of another row that starts at x 8398, with bare field at x 8384-8392 between; no
+metal bridges the leg to `ck_out`'s metal. The pad (8185,17428): 10 px of open ground to the metal north of
+it. The turn at x 8573-8588: one poly from y 17642 to y 17694 in chip 2; the row y 17647 does not go on west
+(the poly under the rail there ends at x 8543, field beyond). The row y 17690 under the rail: neither contact
+nor gate (no ring in chip 2's metal, the row's edge bars cross the full width; the "diffusion" that
+`railprof.py 8526 8545` reports between every row is the rail's centre strip: no outline, no edge line in
+either metal shot, field in chip 2's stripped shot). `ck_out`'s overlaps and the corners (8600,17649),
+(8882,17649): no ring, hole or widening. The row y 17777: one poly, orange in every open gap on both sides of
+the rail. The Z at y 17259 (5x): continuous in both chips, 25 px of bare ground to `rst_a`'s step; a pad at
+(8011,17215), 35 px north of it, is another net's (its poly tab passes under x 8057 as a plain crossing). The
+corners at y 16647: three nested steps, order kept, 25 px of bare ground to the neighbour's Z at y 16611. The
+join (8143,16300) and the jog (5x): one metal, bare ground between the jog and `rst_a`'s pad, a plain crossing
+of `rst_a`'s row; plain crossings also at (8143,16515) and (8964,17780). The corner (9012,17518): 8 px of bare
+ground to the pad (9008,17560). The extraction: 0 errors, `bc1_g6_out` = NOT `bc1_g6_in`, the alias listed by
+`tools/unsure.py` as the notes say. One finding, which changes no connection:
+
+1. **A sixth metal over the row y 17768-17786** (a comment): the trace's comment and the notes' table named
+   five metals over the row; there is also a thin metal at x 8643 (`eof_mrun.py row 17758 / 17800`:
+   8643(13-14)). A plain crossing (`eof_cchk.py 8642,17777`: 44, no ring; the row unbroken in the clean shot).
+   Confirmed (`eof_mrun.py row 17758 8590 8700 17800`; `eof_cchk.py 8642,17777`: 44, centres 204/240;
+   `tl5_tracks.py v 8643 17740 17815`: bars only, no hole). Fixed: the comment in the trace, the table of
+   piece `o040` and the Inventory name it. No geometry changed.
+
+It could not check, or found resting on one chip: chip 2's metal x 8057 is dim at y 16886-16902, so the
+continuity there rests on chip 1 and the clean shot's unbroken protected strip (now in the table of piece
+`o040`); the row y 17690 under the rail rests on chip 2 (chip 1's metal is damaged and its clean shot stained
+there: Ambiguity 79); the long straights were read with `tl5_tracks.py` and a 0.85x overview, not at 4x
+throughout; `bc1`'s stretch x 8186 north of the jog by the metal test only; nothing beyond the port x 8245.
+
+After the fix of note 1 (the commit before it is cbf055e):
+
+```
+tools/t.sh eof sameconn.py cbf055e              connections identical
+.venv/bin/python tools/sameconn.py cbf055e      connections identical
+```
+
+Round 28: no findings that change a connection.
 
 ## Not done
 
