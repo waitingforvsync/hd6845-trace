@@ -1,0 +1,6 @@
+# cdp2: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+tc2_sr_q     M  7913-7931,6400    in   onto tc2's metal of tc2_sr_q (M 7922,6100 y6400): the gate row of piece ga
+db_b6        M  8107-8121,7088    in   db_b6's thin metal on the pad (8112,7088); it also runs on north of the pad (not drawn)
+cdp2_w7065   M  7290,6840-6856    out  the metal west of the pad (7335,6845) (follower: to (6142,6847))
+cdp2_w7065   P  7860-7896,8315    out  the pad (7878,8315) at the south end of the thin metal: an input of cdp3's gate cluster beside its row A
+cdp2_w7065   M  7655-7669,7040    ?    the metal north of the pad (7662,7083), at the west end of the node's poly row

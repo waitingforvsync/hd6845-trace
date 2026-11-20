@@ -23,6 +23,14 @@ the most significant of the five compared bits, s7 the least.**
 
 ## Status
 
+- **Run of 2026-11-20 17:16 -0600** (Matt Godbolt's session, Claude Fable 5.2): **piece `ga`, the first gate of
+  the logic left of rows B** (x 7645-8253, y 6828-7140; 2 transistors, one uncertain item). Its node
+  `cdp2_w7065` is pulled to `vss` while `tc2_sr_q` is high and to `vcc` through a wide transistor whose gate
+  is **`db_b6`**. It leaves three ways: a thin metal north to a pad (7987,6845), a poly row west and a pad
+  (7335,6845) with a metal on west; the same metal south 1,200 px to the pad (7878,8315) in `cdp3`'s
+  cluster beside its row A; and a poly row west to a pad (7662,7083) with a metal north. See "The logic
+  left of rows B" under Logic. (Channel 3 needs nothing: `bw` draws its five lines.)
+
 - Row A (y 6020-6345, five latch cells, s3..s7) and row C (y 7500-7825, seven latch
   cells, s1..s7): traced in the first run. **Changed in the second run: the track b
   that crosses every latch cell is a through track with no contact in the cell** (the
@@ -341,6 +349,44 @@ How the nets are made (coordinates of the master):
   loads hang from it. The VCC metal is drawn narrow (x 9405-9425) for y 7255-7380; it
   is probably wider there (the load block of y is protected), which changes nothing.
 
+### The logic left of rows B: piece `ga` (2026-11-20; traced)
+
+Under the VSS rail (x 8030-8076 here; it widens onto row C's rail at y 7430-7470) lies a diffusion
+x 7975-8105 with a source box and rail contact (8043,7008) (ring and bright centre in both metal shots,
+`textmap.py 8020 6990 8066 7030 3`), a gate row y 7028-7050 across all of it (`railprof.py 8015 8065 6980
+7120`: diffusion, gate, diffusion, field), and the node below (y 7050-7078).
+
+- **The gate row** runs west to a pad (7922,7040), on which the metal x 7913-7931 from the north ends: it is
+  `tc2`'s metal of `tc2_sr_q` (drawn there to y 6400), one metal down to this pad (`tl5_tracks.py v 7922
+  6400 7030`: bars of 14 px or less; `textmap.py 7902 7020 7944 7062 3`).
+- **East of the rail** the node narrows to a neck (y 7057-7078) and widens under a poly block
+  (x 8160-8205, y 7012-7110; channel about 73 wide and 45 long: not a load's proportions) to a box with
+  two contacts ((8225,7045), (8222,7105)) on the wide VCC metal x 8203-8253. The block's poly has a tail
+  west (y 7092-7110) to a pad (8112,7088) of a thin metal x 8107-8121: ring and bright centre in both
+  chips and a hole in the clean shot (`textmap.py 8094 7060 8136 7112 3`). That metal is `db_b6`: it is the
+  metal `cdp2` draws up from row C's s1 cell to y 7395, continuous from there to this pad
+  (`follow.py 8114 7130 S`), and the extraction puts the gate on `db_b6` = NOT `dl6_q_n`. The pad lies just
+  south of the node's neck with an edge line between: read as a plain poly pad, **not** a buried
+  contact onto the node (Ambiguities).
+- **The node's ways out.** Its south-west tab (7975-8020, 7076-7100) has a contact (7990,7084) to the
+  thin metal x 7978-8000 (ring and centre in both chips, `textmap.py 7966 7064 8008 7108 3`). North that
+  metal ends on a pad (7987,6845) whose poly row y 6836-6858 runs west to a pad (7335,6845), where a
+  metal from the west ends (`follow.py 7300 6848 W`: to (6142,6847); not drawn). South it runs by two
+  jogs (x 7950 from y 7388 to 8212) to the pad (7878,8315) in `cdp3`'s ground: the input of the gate
+  cluster beside `cdp3`'s row A that `cdp3`'s notes call the line from the north. The tab's box also
+  takes the east end of a poly row y 7076-7096 from the west (an orange row ending at the box's edge
+  line in both chip-2 shots, `cache/scratch/cdp2/gA3.png`, 9x): drawn joined by a `?B`. That row runs
+  west to a pad (7662,7083) on which a metal from the north ends (port).
+
+```
+cdp2_w7065 : to vss through W 130 gated by tc2_sr_q; to vcc through W 74 / L 45 gated by db_b6
+```
+
+Not a static gate with a depletion load as drawn: the node is high while `db_b6` is high and `tc2_sr_q` low
+(one threshold below `vcc`), low while `tc2_sr_q` is high, and floating while both are low. What it is for
+is not known. If the pad (8112,7088) were a buried contact onto the node, the block would be an
+ordinary load and the gate NOT `tc2_sr_q` driving `db_b6`, which the bus's own static driver rules out.
+
 ## Ports
 
 | Name | Layer | Where it crosses | Direction | What |
@@ -437,6 +483,16 @@ How the nets are made (coordinates of the master):
    only way the device seen there (a long poly block over a strip from the VCC land)
    can be a load, and the cell extracts as closed gates with them.
 
+Run of 2026-11-20:
+
+- **The pad (8112,7088) of `db_b6`'s metal**, beside the neck of `ga`'s node: a poly pad with a metal contact,
+  or a buried contact onto the neck as well? Read as a plain pad (an edge line between pad and neck; a
+  second static driver on a bus bit makes no sense). It decides whether the poly block is a transistor
+  gated by `db_b6` or a load.
+- **The box at `ga`'s output tab** (7962-8002, 7072-7100): the metal contact (7990,7084) is firm; that the
+  poly row from the west is joined to the node in the same box is drawn `?B` (the row ends at the box's
+  edge; a pad of poly alone would leave the row without a driver).
+
 ## Not done
 
 - **Row D** (y 8040-8450 and on below, to about y 8800: it is cdp3's untraced row A):
@@ -454,7 +510,7 @@ How the nets are made (coordinates of the master):
   x 8780 they are interwoven with the logic there (pads on line 6714, bends at
   x 7800-8080, y 6780-6890).
 - **Channel 3 (y 7830-8030)**: five poly lines (Ports), not drawn.
-- **Logic left of the rows** (x 7600-8750, y 6000-7480): not traced. It receives
+- **Logic left of the rows** (x 7600-8750, y 6000-7480): one gate traced (piece `ga`, 2026-11-20); the rest (the two large gates at x 8200-8520, y 7060-7400, the unit at x 8140-8260, the gate at x 8560-8700, y 7370-7410) not traced. `ga`'s open ends: the metal west of the pad (7335,6845), the metal north of the pad (7662,7083), `db_b6`'s metal north of the pad (8112,7088). It receives
   `cdp2_b_hl` (metal x 8725, ends about y 7400 on a diffusion) and `cdp2_b_s7_x` (metal
   x 8685, seen to y 7300), drives `cdp2_b_cin` (poly y 7252 at x 8650), takes L1/L2 (row
   C's s1, s2 outputs, y 7472/7513 at x 7990), `cdp2_trk_s3` (metal 8335,6066) and the
@@ -475,6 +531,10 @@ How the nets are made (coordinates of the master):
   where poly edges cut the metal), `cdp2_mcol.py` (is there metal along a track, with
   the clean shot's class under it: the quickest way to follow a line), `cdp2_reg.py`,
   `cdp2_cmont.py`, `cdp2_w.py`.
+
+## Review
+
+(Earlier runs' reviews are in the journal; this section starts with the run of 2026-11-20.)
 
 ## Correction from the coordinating session (2026-11-15)
 

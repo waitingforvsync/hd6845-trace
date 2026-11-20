@@ -298,6 +298,7 @@ None of these rows has a register number yet, so all names are by place. Columns
 | `cdp2_a_s#`, `cdp2_c_s#`, `cdp2_c_s#_bus` | per-slice lines and bit lines of those rows |
 | `cdp2_b_s#`, `cdp2_b_s#_*` | cdp2 row B comparator with a ripple chain, slice #: `_y` = NOR(q, t), `_ne` = q XOR t, `_x` chain output of the slice, `_o2` inverse of the previous slice's chain output, `_p1` internal node |
 | `cdp2_b_cin`, `cdp2_b_hl` | chain input of that comparator; and a row-long line pulled low per bit |
+| `cdp2_w#` | a wire of the logic left of `cdp2`'s rows B (`notes/blocks/cdp2.md`, "The logic left of rows B"), by the y of its node: `cdp2_w7065` the node of the gate at x 7940-8250, y 6985-7140 (piece `ga`, 2026-11-20): pulled to `vss` while `tc2_sr_q` is high, to `vcc` through a wide transistor gated by `db_b6`; on a thin metal x 7978-8000 north to a pad (7987,6845) and a row west, and south to the pad (7878,8315) of `cdp3`'s cluster; and on a poly row west to a pad (7662,7083) |
 | `cdp2_trk_s#` | the value that row B compares row C against, per slice (through track). s7, s6, s5, s4 are aliases of `rax_o0`, `rax_o1`, `rax_o2`, `rax_o3`; `rax_o4`'s line (y 5826) has no through track tied to it as traced (slice s3 is wired differently) |
 | `cdp2_ch#_#` | a line of channel 1, named by its y |
 | `cdp3_c_c#_*`, `cdp3_h_c#_*` | cdp3 rows C (6 bit) and H (8 bit), static register bit in column #: `_x`, `_q1`, `_q` as in cdp1 |

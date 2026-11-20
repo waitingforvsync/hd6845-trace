@@ -536,3 +536,46 @@ M 8685,7006 y7300 w=20               # on down into the logic left of rows B (cr
 # (row A: contact 10896,6325; row C: contact 10894,7801; both seen, outside the region)
 P 10750,6314:10850,6334
 P 10750,7790:10850,7810
+
+# ================================================================ run of 2026-11-20: the logic left of rows B
+# ---- piece ga: the gate at x 7940-8250, y 6985-7140
+#     cdp2_w7065: pulled to vss while tc2_sr_q is high, and to vcc through a wide transistor whose gate is db_b6
+M 8053,6960 y7460 w=46                 # the VSS rail here (x 8030-8076); it widens onto row C's rail at y 7430-7470
+M 8228,6990 y7440 w=50                 # the wide VCC metal (x 8203-8253), down onto row C's
+D 8025,6985:8075,7010                 # source box
+C 8043,7008
+D 7975,7005:8105,7078                 # source, channel, node
+P 7922,7028:8118,7050                 # gate row, from a pad (7922,7040)
+P 7905,7023:7940,7058                 # pad: tc2's metal of tc2_sr_q (M 7922,6100 y6400) runs on south and ends here
+C 7922,7040
+M 7922,6400 y7040 w=18
+D 7975,7076:8020,7100                 # the node's tab south-west: a contact to the thin metal x 7978-8000
+C 7990,7084 s=22x24
+?B 7962,7072:7979,7100                # the same box takes the end of a poly row from the west: the node's second way out
+P 7662,7076:7977,7096                 # that row, west under the tracks to a pad (7662,7083)
+P 7645,7066:7680,7100
+C 7662,7083
+M 7662,7040 y7083 w=14                 # a metal from the north ends on it (port)
+D 8103,7057:8145,7078                 # the node's neck east
+D 8140,7020:8162,7092
+D 8158,7022:8208,7095                 #   under the poly block
+D 8205,7030:8250,7140                 # box on the VCC metal
+C 8225,7045
+C 8222,7105
+P 8160,7012:8205,7110                 # the poly block (channel W about 73, L 45)
+P 8112,7092:8165,7110                 # its tail west
+P 8098,7080:8134,7104                 #   to a pad of db_b6's thin metal
+C 8112,7088
+M 8114,7088 y7395 w=14                 # db_b6's metal south to where row C's piece starts (it also runs on north: port)
+# the output's thin metal x 7978-8000: north to a pad (7987,6845), whose poly row runs west to a pad
+# (7335,6845) (port there); south by two jogs to a pad (7878,8315) in cdp3's ground (port).
+M 7988,6845 y7388 x7950 y8212 x7880 y8315 w=14
+N M 7988,7200 cdp2_w7065
+P 7970,6828:8004,6862
+C 7987,6845
+P 7335,6836:7987,6858
+P 7318,6828:7352,6862
+C 7335,6845
+M 7290,6848 x7335 w=16                 # a metal from the west ends on that pad (port; follower: to (6142,6847))
+P 7860,8298:7896,8332
+C 7878,8315
