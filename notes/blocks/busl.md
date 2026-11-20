@@ -1068,8 +1068,8 @@ straight segments and the rows (`tools/tl5_tracks.py v/h`, kept in `cache/scratc
   (trap 34: two polys in line, not one). The pad has no metal north of it; the track x 6861 (piece
   `gb`) passes 42 px east of its centre, 16 px of bare ground between the pad's ring and the track.
 - **The three poly columns** (x 6775, y 8323-8625; x 6818, y 8408-8668; x 6861, y 8366-8710; `h5_npads.png`,
-  `h14_o1.png`): cream under the staircase metals they pass under (three at y about 8455, 8500, 8540,
-  `eofw`'s and `eof`'s; column 3 also one at y about 8625), dark red-brown in the gaps and in their open
+  `h14_o1.png`): cream under the staircase metals they pass under (three at y about 8454, 8497, 8540:
+  `trunks`' line, `eofw`'s and a third; column 3 also one at y about 8625), dark red-brown in the gaps and in their open
   stretches, poly orange there in chip 2 (`tools/px.py col 6776 8340 8450 8 metal,acid,acid1b`: metal
   158-180/104-131/48-67, stripped red over green by 30-50 at every sample from y 8348 to y 8436, where
   the clean shot is dark; `tools/tl5_tracks.py rows col 8300 8730 6 6775 6818 6861`). No ring in any
@@ -2030,9 +2030,10 @@ Round 1: no findings.
   part; `eof`'s metals y 7258 and y 7300 of `rst_a` and `tl3_w3982` lie on the same lines further west); the
   rows y 14437 and y 14393 east of x 7550 (`bc1` (continue), with the eleven rows of pieces `lc9`, `fb` .. `fe`).
 - Seen beside them and drawn by no package: a pad (6690,8621) between `eof`'s pad (6645,8580) and `tla`'s
-  (6730,8580), with a poly column north and a metal about x 6679 south (`h4_north.png`, `h5_npads.png`); the
-  metals over the three poly columns at y about 8500 and 8540 and, east of x 6880, y 8580 and y 8625 with two
-  legs x 6885, x 6925.
+  (6730,8580), with a poly column north and a metal about x 6679 south (`h4_north.png`, `h5_npads.png`). Of the
+  staircase metals over the three poly columns, `trunks` draws the one at y 8452 and `eofw` the one at y 8498;
+  whether any package draws the third (y about 8540 west of x 6880) and the one over column 3 at y about 8625
+  was not checked.
 - `trunks`' two lines in the field: taps not checked (R4).
 - The ends of the two through lines of run 7: `busl_x6820` north of y 10400 (follower end (6817,9988),
   in the northern part) and south of y 15000 (end (6754,16220), `bl0`); `busl_x6906` north (end
