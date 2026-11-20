@@ -401,6 +401,14 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
    diffusion west of the gate is read as the edge of the rail's pad (the rail bulges east to x 7878 for
    y 11160-11225 in the metal shot), not as a diffusion edge: it is one line, and the diffusion's top and
    bottom edges (y 11160, y 11228) run through it. Drawn firm as one diffusion.
+12. **A tab of the match line under the top end of s0's tap track** (run 3, found by the review): only in
+   s0 the line's diffusion runs up under the tap track to y 11074 in a framed box (7766-7788, 11074-11098;
+   clean shot tan 195/170/129 at (7776,11084), pink field there in the other seven slices). Both metal
+   shots show the track bright at y 11078-11088 between dark bars (y 11060-11076, 11091, 11100). Read as
+   no contact by the tracer and by the reviewer: the bright stretch is the full track width, the clean shot
+   has no hole (`tools/textmap.py 7752 11056 7800 11112 3 --acid`), and a contact would short
+   `cdp4_bus_s0` to the comparator's output `cdp3_k_b`. Not conclusive: `busl`'s contact (7555,11118) on
+   the same line shows no hole in the clean shot either. The tab is drawn; no contact is drawn.
 
 ## Not done
 
@@ -477,3 +485,36 @@ widens west into a plate from y 14022, over row 6's step block, with no contact.
 - `.venv/bin/python tools/sameconn.py c2927c3`: connections identical
 
 Round 1: no findings that change a connection.
+
+### Run 3 (row R1 upper)
+
+Round 1 (full review, 2026-11-19 21:45 -0600; a fresh Fable reviewer, images in
+`cache/scratch/cdp4/review-2/`; commit before the round bae8129). Piece: row R1 upper, x 7540-10800,
+y 11040-11500, with the stubs and tracks down to y 11843. Told to suspect: the four buried contacts, the
+leg of poly A into poly B, the neck between the pocket and the VSS box, `q`'s poly into the latch, poly
+H's west end and crossings, the load east of s0, the separation of `ne`'s strip from the VCC band, the
+stubs and a tracks, and anything left out. It checked, at 4x or more and with profiles on the composite:
+channel against field by poly colour (A, leg, B, H, the load gates, the plate, s0's leg), the neck (chip-2
+stripped red minus green 13-23 against -1 to -7 on field), no VCC contact at (8619,11180), field between
+`ne`'s strip and the VCC band at y 11310-11325, no contact of the in track at the box or the pad, both tap
+pads, `q` across y 11495, the load's diffusion at x 7890, both stubs' ends (y 11844, both chips), both ends
+of the row, the copies (`cellcheck.py`, three shots), the extraction, `unsure.py`, `opendiff.py`.
+
+- Finding 1, **geometry only** (no connection changes as drawn): an undrawn diffusion tab of the line
+  under the top end of s0's tap track (7765-7795, 11065-11098), with the question whether the track has
+  a contact on it; the reviewer reads no contact. Confirmed by the tracer (9x views `f1-*.png`, text map):
+  the tab is there, no contact is read. Drawn (`D 7766,11074:7788,11114`), recorded as Ambiguity 12.
+- Finding 2, **geometry only**: the pad `P 8466,11297:8519,11323` over-covered its north-east corner (at
+  x 8512 the poly is y 11316-11325 only). Fixed: `P 8466,11297:8506,11323` and `P 8500,11314:8521,11325`;
+  field either way.
+- Not checkable by the reviewer: the four buried contacts beyond their look in both chips (Ambiguity 10);
+  a 10 px dark stretch between the north tap pad's west edge and `ne`'s land (x 8538-8548) with no field
+  gap resolvable (the pad is drawn 10 px clear of the land; a contact there would not change a net, both
+  being on different nets only if apart: they are drawn apart, as the composite's field at x 8533,
+  y 11240-11258 and the land's edge at x 8540 show); the a tracks and stubs over y 11500-11795 sampled only.
+
+`tools/t.sh cdp4 sameconn.py bae8129`: connections identical.
+`.venv/bin/python tools/sameconn.py bae8129`: connections identical.
+
+Round 1: no findings that change a connection.
+
