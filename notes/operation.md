@@ -185,7 +185,7 @@ run on south under a bus of metals and east to one gate in the bottom-centre log
 pen strobe passed only while RES is high**. So RES has no further use of its own: with LPSTB low it
 resets, with LPSTB high it forces the carry, and while low it blocks the light pen strobe. `bl0_w17210`'s
 metal has two loads (`bl0` run 3; firm): an inverter, `bl0_w17337` = NOT `bl0_w17210`, whose output runs
-1,770 px north to the bottom-centre logic's upper gate group and south to the fifth unit of the same gate
+south to the fifth unit of the same gate
 column, and the fourth unit of that column; neither is traced further (believed: this is where the light
 pen register's latch strobe is made).
 

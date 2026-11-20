@@ -305,24 +305,24 @@ N M 7188,17250 bl0_w17210
 # Same build as n2: source box with the rail contact, one gate band (the poly row of the pad (7188,17300)),
 # output node, strip east under a load plate to a box on the supply rail, the plate's finger on a buried
 # contact at the end of a neck of diffusion; west a tab and a buried contact onto a poly row that runs
-# west under bl0_w17210's metal to a pad of the thin metal x 7137-7152.
+# west under bl0_w17210's metal to a pad, from which a thin metal x 7137-7152 runs south.
 M 7317,17230 y17350 w=50                           # the rail on south
 D 7292,17247:7338,17317                            # source box and channel (W 7292-7338)
 C 7308,17265
 D 7286,17313:7354,17341                            # output node
-D 7352,17324:7404,17342                            # output strip east
-D 7400,17322:7470,17346                            #   under the load plate (W 24, L 56)
-D 7468,17251:7522,17348                            # box on the supply rail (its own box: an edge at y 17245-17249 parts it from n2's)
+D 7352,17324:7404,17344                            # output strip east
+D 7400,17322:7470,17350                            #   under the load plate (W 28, L 56)
+D 7468,17251:7522,17350                            # box on the supply rail (its own box: an edge at y 17245-17249 parts it from n2's)
 C 7495,17300
 M 7495,17230 y17350 w=50
 D 7384,17275:7399,17326                            # neck north, west of the plate
 D 7384,17275:7440,17296                            #   and east above the plate's top
 B 7402,17270:7436,17298
 P 7406,17272:7432,17302                            # the plate's finger
-P 7406,17300:7462,17348                            # load plate
+P 7406,17300:7462,17362                            # load plate
 D 7264,17324:7290,17346                            # output tab west
 B 7236,17322:7266,17352
-P 7144,17328:7266,17348                            # output poly west, under the metal x 7178-7198 (a crossing: no ring, no hole), to a pad
+P 7144,17334:7266,17353                            # output poly west, under the metal x 7178-7198 (a crossing: no ring, no hole), to a pad
 P 7128,17324:7160,17356                            # pad
 C 7144,17340
 N P 7215,17338 bl0_w17337
@@ -334,21 +334,11 @@ P 7172,17457:7206,17488                            # pad (7188,17472)
 C 7188,17472
 P 7188,17472 x7215 w=22                            # its poly row east: gate band A of the fourth unit (not drawn: port)
 
-# ---- the track of bl0_w17337: thin metal x 7137-7152 through the pad (7144,17340), north to a pad
-# (7144,16472), a poly column under the bus of five horizontal metals to a pad (7144,16260), metal on
-# north to a pad (7141,15566) whose poly row goes east (port); south to a pad (7143,17647) whose poly row
-# goes east (port). No other pad or contact on it (follow.py; the candidate (7145,15786) has no ring).
-M 7144,17340 y16472 w=14
-P 7129,16456:7160,16490                            # pad
-C 7144,16474
-P 7145,16260 y16474 w=14                           # poly column x 7138-7152 under the five metals
-P 7128,16243:7160,16277                            # pad
-C 7144,16260
-M 7144,16260 y15566 w=10                           # metal on north (narrower: 9-10 px)
-P 7126,15551:7158,15582                            # pad
-C 7141,15566
-P 7141,15566 x7200 w=20                            # poly row east into bc1's group (port)
-M 7144,17340 y17647 w=14                           # south
+# ---- the track of bl0_w17337: a thin metal x 7137-7152 from the pad (7144,17340) south to a pad
+# (7143,17647) whose poly row goes east (port). It starts at the pad: the thin metal on the same x north
+# of it turns west at a corner (7144,17305) and goes on south at x 7097-7110, another net (bare ground
+# between the corner and the pad at y 17314-17326; review round 4).
+M 7144,17340 y17647 w=14
 P 7127,17631:7160,17663                            # pad
 C 7143,17647
 P 7143,17646 x7215 w=20                            # poly row east: a gate band of the fifth unit (not drawn: port)

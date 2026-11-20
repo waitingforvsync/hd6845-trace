@@ -7,16 +7,15 @@ metal-shot pixels. Evidence: `cache/scratch/bl0/` (`survey.md` holds every measu
 
 ## Status
 
-Run 3 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 10:03 -0600). One piece, 2 transistors and 2,100 px
-of wire, no uncertain item. The first loads of `bl0_w17210`.
+Run 3 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 10:03 -0600). One piece, 2 transistors and 300 px
+of wire, no uncertain item; reviewed (round 4: one finding, fixed; round 5 below). The first loads of `bl0_w17210`.
 
 - **Piece `u3`** (2 transistors). The metal of `bl0_w17210` (x 7178-7198) has two pads and ends on the
   second: (7188,17300), the gate of the third unit under the rail, and (7188,17472), the gate of the
   fourth. The third unit is drawn: an inverter, **`bl0_w17337` = NOT `bl0_w17210`**. Its output goes west
-  onto a thin metal x 7137-7152 that runs both ways: north 1,770 px (under the bus of five metals as a
-  poly column, like the two pin lines) to a pad (7141,15566) whose poly row goes east into `bc1`'s gate
-  group, and south to a pad (7143,17647) whose poly row is a gate band of the fifth unit under the rail.
-  Neither end is followed.
+  onto a pad (7144,17340), from which a thin metal x 7137-7152 runs south to a pad (7143,17647) whose
+  poly row is a gate band of the fifth unit under the rail (not followed). The thin metal on the same x
+  north of the pad is another net: it turns west 35 px short of the pad (review round 4).
 - **Surveyed, not drawn**: the fourth and fifth units (y 17420-17750), one compound structure on a wide
   diffusion west of the rail; what is read of it is under Not done.
 
@@ -88,8 +87,8 @@ finding that changes a connection.
 | pin lines under the bus | 6869-7385 | 16250-17056 | `res_b`: poly column x 6877-6899 to a pad (6885,16516), thin metal x 6879-6897 south, corner y 17039, pad (6951,17038), poly row y 17029-17051 east; `lpstb_b`: poly column x 6920-6942 to a pad (6929,16560), thin metal x 6921-6939, corner y 16995, pad (6990,16996), poly row y 16986-17007 east; both rows end at x 7385 |
 | the gate of both pins | 7203-7522 | 16941-17108 | under the rail x 7292-7342: source box y 16941-16967 with a contact (7308,16960), band A y 16986-17007 (`lpstb_b`), node y 17007-17029 (no contact), band B y 17029-17051 (`res_b`), output node to y 17092; column x 7289-7360; output strip east y 17074-17092, under the load plate (x 7404-7465, y 17040-17108; diffusion y 17061-17091) to a box (7468-7522, 17030-17090) with a contact (7493,17052) on the supply rail x 7470-7520; the plate's finger (7405-7430, 17023-17042) on a buried contact at the end of an L of diffusion (neck x 7390-7402 up from the strip, arm y 17021-17042 east); output tab west y 17074-17093, buried contact (7238-7268, 17072-17096), poly west to x 7203, south to y 17180 and east as the next band |
 | the inverter after it | 7172-7522 | 17110-17235 | source box y 17110-17160 with a contact (7308,17130), band y 17160-17180, output node y 17182-17215 (x 7281-7357); strip east, load plate (7404-7465, 17165-17235; diffusion y 17190-17218), box with a contact (7488,17178) on the supply rail; finger and L as above (neck x 7383-7402, arm y 17142-17166); output tab west, buried contact (7238-7268, 17194-17226), poly west to a pad (7188,17210), metal x 7178-7198 south |
-| the third unit | 7128-7522 | 17247-17356 | under the rail x 7292-7342: source box y 17247-17288 with a contact (7308,17265), band y 17290-17311 (the row of the pad (7188,17300)), output node y 17313-17341 (x 7286-7354); strip east, load plate (7406-7462, 17300-17348), finger on a buried contact (7402-7436, 17270-17298) at the end of a neck x 7384-7399, box on the supply rail (7468-7522, 17251-17348); west a tab, a buried contact (7236-7266, 17322-17352) and a poly row y 17328-17348 to a pad (7144,17340) |
-| `bl0_w17337`'s track | 7126-7215 | 15551-17663 | thin metal x 7137-7152 from the pad (7144,17340) north to a pad (7144,16474), poly column x 7138-7152 under the five metals to a pad (7144,16260), metal (9-10 px wide) north to a pad (7141,15566), poly row east; south to a pad (7143,17647), poly row east |
+| the third unit | 7128-7522 | 17247-17356 | under the rail x 7292-7342: source box y 17247-17288 with a contact (7308,17265), band y 17290-17311 (the row of the pad (7188,17300)), output node y 17313-17341 (x 7286-7354); strip east, load plate (7406-7462, 17300-17362), finger on a buried contact (7402-7436, 17270-17298) at the end of a neck x 7384-7399, box on the supply rail (7468-7522, 17251-17350); west a tab, a buried contact (7236-7266, 17322-17352) and a poly row y 17334-17353 to a pad (7144,17340) |
+| `bl0_w17337`'s track | 7127-7215 | 17324-17663 | thin metal x 7137-7152 from the pad (7144,17340) south to a pad (7143,17647), poly row east |
 
 ## Logic
 
@@ -270,25 +269,26 @@ row of the pad (7188,17472).
 The first is the gate band of the third unit under the rail, of the same build as the inverter above it:
 
 ```
-bl0_w17337 = NOT bl0_w17210        = NOT( lpstb_b AND res_b );  pull-down W 46; load 24/56
+bl0_w17337 = NOT bl0_w17210        = NOT( lpstb_b AND res_b );  pull-down W 46; load 28/56
 ```
 
-Its output leaves west by a tab and a buried contact onto a poly row y 17328-17348, which passes under
+Its output leaves west by a tab and a buried contact onto a poly row y 17334-17353, which passes under
 the metal of `bl0_w17210` (a crossing: no ring, no hole in the clean shot;
-`textmap.py 7125 17320 7210 17360 3`) to a pad (7144,17340) of a thin metal x 7137-7152. That metal runs
-both ways (`follow.py 7147 17290 N --gap 45`, `7147 17400 S --gap 45`, `7144 16215 N --gap 45`):
+`textmap.py 7125 17320 7210 17360 3`) to a pad (7144,17340). A thin metal x 7137-7152 starts at that pad
+and runs south (`follow.py 7147 17400 S --gap 45`), over the poly row y 17550 with no pad, to a pad
+(7143,17647), where it ends; that pad's poly row runs east: a gate band of the fifth unit under the rail.
 
-- north to a pad (7144,16474), a poly column under the bus of five horizontal metals to a pad
-  (7144,16260), metal again (9-10 px wide) to a pad (7141,15566), 1,770 px north of the unit, whose poly
-  row runs east into the gate group of `bc1` at x 7190-7860 (not drawn by anyone);
-- south to a pad (7143,17647), whose poly row runs east: a gate band of the fifth unit under the rail.
+**The thin metal on the same x north of the pad is not this net** (review round 4; the first drawing
+joined them). It comes south from a pad (7144,16474) and turns west at a corner (7144,17305), 35 px
+short of the pad, along y 17299-17311 to x 7103 and on south at x 7097-7110
+(`px.py row 17305 7090 7160 5 metal,metal1`: metal from x 7100 to 7150; `px.py col 7144 17290 17345 3`
+and `px.py row 17321 7120 7170 6 metal,acid1b`: bare ground and open green between the corner and the
+pad's ring, y 17314-17326). The pad's own ring had hidden the gap from the follower. That net (north: a
+poly column under the wide bus metal, pads (7144,16260) and (7141,15566), a poly row east into `bc1`'s
+gate group; south: the reviewer's follower gives corners (7102,17868) and an end (7386,17864)) is not
+drawn.
 
-On the way it crosses poly rows at y 16540, 16780, 16860, 16995 (`lpstb_b`), 17040 (`res_b`) and 17550
-with no pad; the follower's one contact candidate, (7145,15786), has no ring and no hole
-(`textmap.py 7120 15765 7170 15810 3`).
-
-The unit is the only driver drawn on the net. Whether another pull-down sits on it at either end is not
-known until the ends are traced.
+The unit is the only driver drawn on the net; its one load is the poly row of the south pad.
 
 ## Ports
 
@@ -297,7 +297,6 @@ known until the ends are traced.
 | `res_b` | M | (6359-6373, 15000) | in | busl's track x 6366 |
 | `lpstb_b` | M | (6401-6415, 15000) | in | busl's track x 6408 |
 | `bl0_w17210` | P | (7215, 17461-17483) | out | the poly row east of the metal's last pad (7188,17472): gate band A of the fourth unit under the rail; the pad's poly also runs south onto the row y 17503-17527 (band B) |
-| `bl0_w17337` | P | (7200, 15556-15576) | out | poly row east of the track's north pad (7141,15566), into `bc1`'s gate group |
 | `bl0_w17337` | P | (7215, 17636-17656) | out | poly row east of the track's south pad (7143,17647): a gate band of the fifth unit under the rail |
 | `vss` | M | (7292-7342, 16925), (7292-7342, 17350) | - | the gate column's rail, on both ways |
 | `vcc` | M | (7470-7520, 17020), (7470-7520, 17350) | - | `bc3`'s rail x 7495 |
@@ -366,12 +365,12 @@ Run 2:
 Run 3:
 
 12. **Other drivers of `bl0_w17337`.** The track is drawn end to end with one driver (the third unit), and
-   no pad or contact between its ends. Its two ends are not traced: if either reaches a diffusion as well
-   as a gate, the equation gets another term. Assumed none.
-13. **The contact of the third unit's supply box.** The box (7468-7522, 17251-17348) is under the supply
+   no pad or contact between its ends. Its south end's row is not traced: if it reaches a diffusion as
+   well as a gate, the equation gets another term. Assumed none.
+13. **The contact of the third unit's supply box.** The box (7468-7522, 17251-17350) is under the supply
    rail and has dark specks in the clean shot at (7488,17278) and (7497,17318) and a dimple in each metal
    shot at about y 17300 (chip 2) and y 17293 (chip 1), but no ring with a bright centre: wide metal
-   does not show one. The contact is drawn at (7495,17300); where exactly it is does not matter to the
+   does not show one (the reviewer could not check it either). The contact is drawn at (7495,17300); where exactly it is does not matter to the
    connection (the box is on `vcc` like the two boxes north of it).
 
 ## Review
@@ -461,6 +460,35 @@ connections identical.
 
 Round 3: no findings that change a connection.
 
+### Run 3
+
+Round 4 (full review of piece `u3`; fresh Fable 5.2 reviewer; 2026-11-20 10:42 -0600; commit 3be37d6; images
+`cache/scratch/bl0/review-4/`). Told to suspect: the crossing at (7188,17340); the continuity and the end of
+`bl0_w17210`'s metal; the four pads of the long track and the poly column under the bus; pads or contacts
+the trace lacks; other connections of the output node; the neck, buried contact and finger of the load and
+the supply box's contact; the unit's separation from its neighbours. Checked at 3-4x with profiles, text
+maps and the followers: the metal of `bl0_w17210` continuous between its pads and ending on the second;
+the crossing plain; the source contact, the single band, the output node without a rail contact, the
+neck, buried contact and finger, the tab and buried contact west; the unit separate from `n2`; the pads
+real; the crossings plain; no second poly on any pad. Could not check: the supply box's contact (specks,
+no ring under wide metal).
+
+Findings:
+
+1. **Changes a connection.** The thin metal from the north does not reach the pad (7144,17340): it
+   turns west at (7144,17305) and goes on south at x 7097-7110; bare ground between the corner and the
+   pad. Confirmed (`px.py row 17305 7090 7160 5 metal,metal1`, `px.py col 7144 17290 17345 3`,
+   `px.py row 17321 7120 7170 6 metal,acid1b`). Fixed: the north stretch (three pads, the poly column,
+   the port into `bc1`) is taken out of the piece; `bl0_w17337` is the poly row, the pad, the metal south
+   and the pad (7143,17647). The equation is unchanged; a port is gone.
+2. Geometry: the load plate runs south to about y 17362 (drawn 17348) and the strip under it to 17350.
+   Confirmed (`px.py col 7435 17340 17384 3`); fixed.
+3. Geometry: the output poly row's edges are y 17334-17353 (drawn 17328-17348). Confirmed
+   (`px.py col 7218 17318 17366 3`); fixed.
+4. Comment: no edge parts the supply box from `n2`'s at x 7510. Both are `vcc`; left as drawn.
+
+Round 4: one finding that changes a connection, fixed; three geometry or comment findings.
+
 ## Not done
 
 - **What pulls `larr_l0_g0` and `larr_l0_g1` up** (neither pull-up is in `larr`'s rows or in the two
@@ -494,8 +522,12 @@ Round 3: no findings that change a connection.
   - East of the rail and not read: a poly (7362-7408, 17500-17527) joined to a poly bar x 7410-7438
     (y 17502-17600) under the thin metal, a salmon plate (7405-7462, 17605-17630), a poly
     (7375-7410, 17665-17695), a diffusion strip y 17703-17722 from the lower rail box east to x 7420.
-- **Both ends of `bl0_w17337`'s track**: the poly row east of the pad (7141,15566) (`bc1`'s group
-  x 7190-7860, y 15570-16300) and the poly row east of the pad (7143,17647) (band C, above).
+- **The south end of `bl0_w17337`'s track**: the poly row east of the pad (7143,17647) (band C, above).
+- **The thin metal x 7137-7152 north of the pad (7144,17340)**, another net, seen and not drawn: from a pad
+  (7141,15566) (poly row east into `bc1`'s group x 7190-7860, y 15570-16300) south to a pad (7144,16260),
+  a poly column under the wide bus metal to a pad (7144,16474), metal south to a corner (7144,17305),
+  west to x 7103 and on south at x 7097-7110 (follower: a corner (7102,17868), east to (7386,17864)).
+  All four pads are real contacts and the column is over field (review round 4).
 - The column north of piece `n1` has a band at y 16866-16884 (`railprof.py 7295 7340 16860 17400`), not
   drawn. All of this lies in `bc3`'s region.
 - `bl0_w14308`'s row west of x 2396 (it runs on west of the pad (2459,14700)); the pad (2708,14077) just
