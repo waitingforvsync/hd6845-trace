@@ -25,7 +25,8 @@ access). In short:
    changed, at most three rounds in all; only findings that change a connection count against
    that limit (geometry-only ones are fixed and shown harmless with `tools/sameconn.py`);
    recorded in the block notes.
-6. Merge main into the branch, pass `tools/mergecheck.py PREFIX`, push to main, and hand
+6. Merge main into the branch, pass `tools/mergecheck.py PREFIX` (run it unpiped, read `PASS`, and only
+   then push, in a separate command: a pipe such as `| tail` hides a failing gate from `&&`), push to main, and hand
    off with `tools/claim.py done` (proposals for the coordinator's files go there, not in
    those files). Without write access: a pull request with the template instead.
 
