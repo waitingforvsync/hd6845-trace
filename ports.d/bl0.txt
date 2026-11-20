@@ -16,8 +16,9 @@ vss          M  2605-2655,14090   -    the left edge column's vss rail, on north
 vss          M  2605-2655,14770   -    the same, on south
 vcc          M  2783-2832,14090   -    the left edge column's vcc rail, on north
 vcc          M  2783-2832,14770   -    the same, on south
-bl0_w17210   M  7178-7198,17310   out  metal south from the pad (7188,17210) onto a pad (7188,17300), the gate of the column's third unit, and on south
+bl0_w17560   P  7215,17549-17572  in   poly row from the west (crosses under the tracks x 7097-7198): clears the latch bl0_w17610
+bl0_w17687   P  7215,17676-17698  in   poly row from the west: clears the latch bl0_w17610 while bl0_w17210 is low
+bl0_w17610   M  7178-7198,17640   out  metal south from the pad (7188,17605), seen to y 17775 and east to a pad at about (7385,17780)
 vss          M  7292-7342,16925   -    the gate column's rail x 7317, on north
-vss          M  7292-7342,17240   -    the same, on south
 vcc          M  7470-7520,17020   -    bc3's rail x 7495, on north
-vcc          M  7470-7520,17240   -    the same, on south
+vcc          M  7470-7520,17670   -    the same, on south

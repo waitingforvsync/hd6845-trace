@@ -299,3 +299,115 @@ P 7172,17195:7206,17227                            # pad
 C 7188,17210
 M 7188,17200 y17310 w=20                           # metal south to the next pad (17300)
 N M 7188,17250 bl0_w17210
+
+# ================================================================ piece u3 (run 3): the third unit under the rail
+#     bl0_w17337 = NOT bl0_w17210        ( = NOT( lpstb_b AND res_b ) again, on a long track )
+# Same build as n2: source box with the rail contact, one gate band (the poly row of the pad (7188,17300)),
+# output node, strip east under a load plate to a box on the supply rail, the plate's finger on a buried
+# contact at the end of a neck of diffusion; west a tab and a buried contact onto a poly row that runs
+# west under bl0_w17210's metal to a pad, from which a thin metal x 7137-7152 runs south.
+M 7317,17230 y17350 w=50                           # the rail on south
+D 7292,17247:7338,17317                            # source box and channel (W 7292-7338)
+C 7308,17265
+D 7286,17313:7354,17341                            # output node
+D 7352,17324:7404,17344                            # output strip east
+D 7400,17322:7470,17350                            #   under the load plate (W 28, L 56)
+D 7468,17251:7522,17350                            # box on the supply rail (its own box: an edge at y 17245-17249 parts it from n2's)
+C 7495,17300
+M 7495,17230 y17350 w=50
+D 7384,17275:7399,17326                            # neck north, west of the plate
+D 7384,17275:7440,17296                            #   and east above the plate's top
+B 7402,17270:7436,17298
+P 7406,17272:7432,17302                            # the plate's finger
+P 7406,17300:7462,17362                            # load plate
+D 7264,17324:7290,17346                            # output tab west
+B 7236,17322:7266,17352
+P 7144,17334:7266,17353                            # output poly west, under the metal x 7178-7198 (a crossing: no ring, no hole), to a pad
+P 7128,17324:7160,17356                            # pad
+C 7144,17340
+N P 7215,17338 bl0_w17337
+P 7172,17285:7206,17317                            # pad of bl0_w17210's metal
+C 7188,17300
+P 7188,17290:7357,17311                            # gate band, east end x 7357
+M 7188,17300 y17472 w=20                           # bl0_w17210's metal on south to its last pad; it ends there
+P 7172,17457:7206,17488                            # pad (7188,17472)
+C 7188,17472
+P 7188,17461:7338,17483                            # its poly row east: gate band A of the fourth unit (piece u45)
+
+# ---- the track of bl0_w17337: a thin metal x 7137-7152 from the pad (7144,17340) south to a pad
+# (7143,17647) whose poly row goes east (port). It starts at the pad: the thin metal on the same x north
+# of it turns west at a corner (7144,17305) and goes on south at x 7097-7110, another net (bare ground
+# between the corner and the pad at y 17314-17326; review round 4).
+M 7144,17340 y17647 w=14
+P 7127,17631:7160,17663                            # pad
+C 7143,17647
+P 7143,17636:7295,17656                            # poly row east: gate band C of the fifth unit (piece u45)
+P 7285,17629:7350,17651                            #   under the rail it lies 6 px further north
+
+# ================================================================ piece u45 (run 4): the fourth and fifth units, a cross-coupled pair
+#     bl0_w17440 = NOT( bl0_w17210 OR bl0_w17610 )                     bl0_w17210 on two bands in series (A, B: one poly)
+#     bl0_w17610 = NOT( bl0_w17440 OR bl0_w17560 OR (bl0_w17337 AND bl0_w17687) )
+# The pull-downs are wide: their diffusion runs from an edge line x 7240 to the rail's east side. Unit 4
+# (top node bl0_w17440, bands A and B, the box of the rail contact (7322,17560)) and unit 5 (row
+# bl0_w17560 over the open column, the node bl0_w17610 with its buried contact, bands C and D, the box
+# of the rail contact (7308,17727)) each have a load east of the rail and one more pull-down there,
+# gated by the other's output.
+M 7317,17350 y17755 w=50                           # the rail on south to its end
+M 7495,17350 y17670 w=50
+# ---- unit 4
+D 7243,17425:7352,17458                            # top node N0
+B 7240,17423:7270,17450
+P 7218,17412:7268,17448                            # poly cap on the buried contact (ends there)
+D 7243,17455:7327,17548                            # stack: band A, node, band B, strip below
+P 7185,17483:7205,17527                            # the pad's poly south onto band B
+P 7185,17504:7338,17527                            # band B
+D 7305,17543:7355,17582                            # box with the rail contact
+C 7322,17560
+D 7350,17425:7410,17452                            # N0's strip east
+D 7404,17422:7470,17447                            #   under the load plate
+D 7468,17370:7522,17470
+C 7495,17420
+P 7408,17403:7462,17490                            # load plate and, in one poly, the pad south of it
+C 7432,17470
+P 7374,17460:7410,17488                            # its finger west onto the buried contact
+B 7372,17458:7410,17492
+D 7366,17450:7404,17540                            # tab south from the strip: buried contact, then the channel of T_x
+D 7325,17537:7402,17553                            # T_x's source: strip east from the box of the rail contact
+N P 7435,17480 bl0_w17440
+M 7435,17470 y17684 w=22                           # N0's thin metal south
+P 7418,17667:7452,17700                            # pad
+C 7434,17684
+P 7366,17668:7420,17695                            # T_n's gate
+# ---- X's poly: T_x's gate, the bar under the thin metal, X's load plate and its finger
+P 7362,17505:7420,17528
+P 7416,17502:7436,17600
+P 7406,17575:7462,17632
+P 7412,17630:7460,17646                            # the plate runs on south of the strip and ends on field
+P 7368,17578:7410,17598                            # the plate's finger west onto a buried contact
+B 7366,17574:7402,17614
+D 7368,17576:7400,17616                            # diffusion under it, down into the block
+N P 7424,17550 bl0_w17610
+# ---- unit 5
+D 7243,17528:7330,17546                            # strip below band B (on the rail by the box)
+D 7243,17528:7278,17602                            # the open column: under R3 its east edge is x 7278 (a field pocket x 7278-7305)
+D 7243,17598:7292,17724                            #   the buried contact, C, D
+P 7215,17549:7297,17572                            # row R3 from the west (port)
+N P 7225,17560 bl0_w17560
+B 7240,17590:7268,17620
+P 7188,17595:7266,17615                            # X's poly west to a pad
+P 7172,17589:7206,17621
+C 7188,17605
+M 7188,17605 y17640 w=20                           # the second metal on x 7178-7198, on south (port)
+D 7290,17603:7370,17616                            # X under the rail and east into the buried contact's diffusion
+D 7290,17603:7343,17702                            # under the rail: X, band C, node, band D
+D 7364,17612:7402,17664                            # the block east of the rail (X)
+D 7398,17603:7470,17630                            #   its strip under the load plate
+D 7468,17570:7522,17660
+C 7495,17615
+P 7215,17676:7295,17698                            # row D from the west (port)
+P 7285,17672:7350,17696                            #   under the rail, a few px further north
+N P 7225,17687 bl0_w17687
+D 7290,17700:7347,17752                            # box with the rail contact
+C 7308,17727
+D 7243,17703:7420,17722                            # strip along the bottom
+D 7372,17660:7402,17705                            # T_n's channel from the block down to the strip
