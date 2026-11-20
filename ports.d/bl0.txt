@@ -1,0 +1,13 @@
+# bl0: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+res_b        M  6359-6373,15000   in   busl's track x 6366
+lpstb_b      M  6401-6415,15000   in   busl's track x 6408
+res_b        P  6450,15122-15142  ?    poly row on east from the pad (6363,15132), seen to x 6790
+lpstb_b      P  6450,15166-15186  ?    poly row on east from the pad (6408,15176), seen to x 6790
+bl0_w15088   P  6450,15078-15098  ?    poly row on east from the pad (6320,15088), seen to x 6790
+bl0_w15088   P  5700,15078-15098  ?    poly row on west to a pad (4909,15088); a track x 4909 from the north ends there
+bl0_w15088   M  5750-5764,15700   ?    thin metal south from the pad (5755,15088), followed to about (5762,15768)
+bl0_w15412   P  5600,15401-15425  out  poly row west to a pad (4909,15414), track x 4909 south
+lpstb_nres   P  5600,15662-15690  out  poly row west to a pad (4867,15673), track x 4867 north
+vss          M  6013-6067,15800   -    the U's left arm runs on south
+vss          M  6273-6328,15800   -    the U's right arm runs on south
+vcc          M  6187-6241,15800   -    the inner rail runs on south

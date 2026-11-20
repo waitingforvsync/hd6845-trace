@@ -1,0 +1,3 @@
+# bl0: the gate group the buffered RES and LPSTB pins reach
+5890,15300:6250,15790    logic  RES low and LPSTB high (lpstb_nres) | NOT lpstb_b, then NOR with res_b: high only while LPSTB is high and RES is low, the condition in which the chip is not reset; a third gate on the same rail inverts a passing line (bl0_w15088)
+5850,15000:6450,15200    route  RES and LPSTB onto their gates | the two pin tracks from the left bus field end on pads; a metal from each turns west and south onto its gate, a poly row from each goes on east

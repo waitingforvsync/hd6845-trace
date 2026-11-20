@@ -1,0 +1,110 @@
+# bl0: the gate group that the buffered RES and LPSTB pins reach, between the left bus field and the
+# bottom-left logic (user, 2026-11-20: what the chip does while RES is low and LPSTB is high).
+# Evidence: cache/scratch/bl0/ (survey.md; g_*.png 2.6x, q1-q6.png 4x three shots, pads3.png, pads_e.png,
+# spot.png, in1pads.png; overlays o_*.png). tools/bl0_edges.py prints the edge lines along a cut.
+@block bl0
+@w M=20 P=22
+@s 28x28
+
+# ================================================================ piece pin: three gates on one ground rail
+# Recovered:
+#     bl0_w15412  = NOT bl0_w15088                       (G1, wide pull-down, strong load)
+#     bl0_lpstb_n = NOT lpstb_b                          (G2)
+#     lpstb_nres  = NOT( bl0_lpstb_n OR res_b )          (G3, G4)   = lpstb_b AND NOT res_b
+# Supplies by the orientation of the loads (neither rail is followed to a named supply yet): the U of
+# wide metal that carries the four pull-down contacts is vss, the rail inside it with the three load
+# contacts is vcc.
+
+# ---- supplies
+M 6040,15800 y15242 x6300 y15800 w=54              # the U: left arm x 6013-6067, top bar y 15216-15268, right arm x 6273-6328
+N M 6040,15250 vss
+M 6214,15317 y15800 w=54                           # the rail inside the U, top end y 15317
+N M 6214,15600 vcc
+
+# ---- the two pin lines. busl's tracks end at y 15000; each runs on to a pad whose metal turns west
+# and whose poly goes on east under the tracks (drawn to x 6450 here: piece east).
+M 6366,15000 y15131 w=14                           # res_b: track from the left bus field
+M 6375,15133 x5866 y15719 x5922                    # west along y 15133, corner (5866,15133), south, east onto G4's pad
+C 6363,15132 5910,15719
+P 6349,15119:6381,15145                            # pad
+P 6365,15132 x6450 w=20                            # poly row on east (port)
+N M 6366,15050 res_b
+M 6408,15000 y15175 w=14                           # lpstb_b: track from the left bus field
+M 6420,15177 x5910 y15512                          # west along y 15177, corner (5910,15177), south onto G2's pad
+C 6408,15176 5910,15501
+P 6394,15163:6424,15189                            # pad
+P 6408,15176 x6450 w=20                            # poly row on east (port)
+N M 6408,15050 lpstb_b
+
+# ---- the line bl0_w15088: a metal between two pads, each pad the end of a poly row (west and east:
+# ports), with a third pad between them from which a poly column runs south to G1's gate, and a thin
+# metal south from the west pad (port).
+M 5745,15090 x6332                                 # metal y 15080-15100 from the pad (5755,15088) to the pad (6320,15088)
+C 5755,15088 5932,15088 6320,15088
+P 5740,15075:5770,15101                            # west pad; its poly row runs on west (port)
+P 5700,15088 x5755 w=20
+P 6305,15075:6336,15101                            # east pad; its poly row runs on east (port)
+P 6320,15088 x6450 w=20
+M 5757,15088 y15700 w=14                           # thin metal south from the west pad (port; followed to a pad at about (5760,15765))
+P 5916,15073:5948,15101                            # middle pad
+P 5935,15088 y15380 w=22                           # poly column x 5924-5946 south under res_b's and lpstb_b's metals to G1
+N M 6100,15090 bl0_w15088
+
+# ---- G1: inverter. Diffusion box x 5957-6090 under the gate band y 15357-15380 (W about 133).
+P 5924,15357:6098,15380                            # gate band, east end x 6098
+D 6008,15312:6058,15345                            # source cap under the rail
+C 6030,15328
+D 5957,15338:6090,15403                            # source strip, channel, node A
+D 5957,15398:5987,15430                            # node A's tab south-west, under the end of the row y 15412
+B 5955,15399:5988,15430
+P 5600,15401:5986,15425                            # node A's poly row, west to a pad at about (4911,15412) (port at x 5600)
+N P 5800,15412 bl0_w15412
+D 6058,15389:6140,15405                            # node A's strip east from the rail
+D 6092,15389:6122,15439                            # its tab south under the load's foot
+B 6091,15404:6124,15441
+D 6135,15350:6192,15415                            # flare under the load plate to the supply box
+D 6190,15350:6242,15417
+C 6212,15378
+P 6155,15336:6188,15445                            # load plate x 6155-6188
+P 6095,15420:6188,15445                            # its foot west onto node A's tab
+
+# ---- G2: inverter of lpstb_b. Channel x 6008-6058.
+P 5895,15485:5927,15517                            # pad of lpstb_b's metal
+P 5910,15487:6081,15510                            # gate band
+D 6008,15441:6058,15487                            # source cap
+C 6033,15466
+D 6008,15487:6058,15510                            # channel
+D 6008,15510:6075,15545                            # node B under the rail
+D 5957,15524:6010,15542                            # its neck west (about 14 px between its edge lines) to the box at the end of the L's top arm
+D 5957,15524:5990,15550
+B 5955,15525:5988,15552
+P 5925,15526:5987,15550                            # the L: top arm onto node B's box,
+P 5925,15526:5947,15640                            #   down the west side,
+P 5925,15618:6072,15640                            #   and east as G3's gate band
+N P 5936,15580 bl0_lpstb_n
+D 6058,15521:6192,15547                            # node B's strip east under the load plate (W 26, L 61)
+D 6190,15486:6242,15548
+C 6212,15515
+P 6127,15497:6188,15567                            # load plate
+P 6127,15473:6153,15500                            # its top-left end, tied to node B by the L below
+B 6125,15471:6155,15498
+D 6103,15475:6122,15530                            # L of diffusion from the strip up
+D 6103,15475:6153,15496                            #   and east into the box
+
+# ---- G3, G4: NOR. Shared output node C between the two gate bands; sources at both ends on the rail.
+P 5895,15704:5927,15735                            # pad of res_b's metal
+P 5910,15705:6072,15728                            # G4's gate band
+D 6008,15571:6058,15779                            # the column: cap, G3, node C, G4, cap
+C 6030,15588 6031,15753
+D 5987,15596:6010,15752                            # its west margin beside the rail (both channels W 5987-6058)
+D 5957,15662:5990,15690                            # node C's tab west, under the end of the row y 15675
+B 5955,15661:5988,15691
+P 5600,15662:5986,15690                            # node C's poly row, west to a pad at about (4867,15674) (port at x 5600)
+N P 5800,15676 lpstb_nres
+D 6058,15653:6192,15693                            # node C's strip east under the load plate (W 40, L 42)
+D 6185,15648:6242,15694
+C 6212,15671
+P 6113,15637:6155,15742                            # load plate
+D 6080,15690:6100,15745                            # L of diffusion from the strip down
+D 6080,15716:6140,15745                            #   and east into the box under the plate's lower end
+B 6103,15711:6142,15746
