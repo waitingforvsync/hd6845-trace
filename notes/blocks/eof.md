@@ -570,6 +570,26 @@ Full extraction with run 26: 2,458 nets, 4,579 transistors, 0 errors, 0 warnings
 before the piece: `tools/sameconn.py acd1c79`, "connections identical"). The package by itself: 1,058 nets,
 1,817 transistors, 0 errors, 69 warnings (other packages' names).
 
+Run 27 (Tom Seddon's session, Claude Fable 5.2; 2026-11-20 14:32 +0000 on). One piece, `o362d`, wiring only,
+no transistor, no uncertain item (a short run again: about 3% of the week's allowance was left): **the NOR
+driver's output `eof_w17362` is DISPTMG's pad driver input, `disptmg_drv_in`**.
+
+- **Traced** (piece `o362d`): from the port (6262,18472) the poly row runs on west under a wide vertical metal
+  (no contact) to a pad with a contact (6102,18472); a thin metal runs 520 px west along y 18474 over three
+  poly columns of other nets (no contact) to a pad with a contact (5583,18472); that pad's poly goes south as
+  a column x 5578-5596 under four horizontal metals (no contact) and is the input poly of the DISPTMG output
+  driver that `pads_out` draws from y 18912 (label `disptmg_drv_in` at (5582,18927)).
+- **So** `disptmg_drv_in` = NOR(`eof_w17338`, `eof_w17168`, `eof_w17472`) (firm: `tools/unsure.py --equations
+  disptmg_drv_in`), and since the pad is the inverse of its driver's input (`pads_out`: `disptmg_pu` = NOT
+  `disptmg_drv_in`, and the pull-up fingers are gated by `disptmg_pu`), **DISPTMG = `eof_w17338` OR
+  `eof_w17168` OR `eof_w17472`**, with `eof_w17168` = NOR(`eof_w16693`, `eof_w17212`) the value of the second
+  latch on `ck_out` gated by `eof_w17212` (pieces `nor17`, `lat16`). The names are held by `@alias
+  disptmg_drv_in eof_w17362` until the coordinator's refresh.
+- **Not traced**: what `eof_w17338`, `eof_w17472` and `eof_w17212` are (Not done).
+
+Full extraction with run 27: 2,452 nets (one fewer: the join), 4,579 transistors, 0 errors, 0 warnings. The
+package by itself: 1,058 nets, 1,817 transistors, 0 errors, 69 warnings (other packages' names).
+
 Full extraction after run 2: 2,351 nets, 4,232 transistors, 0 errors, 0 warnings; the package
 by itself (it loads `rdp3`): 0 errors, 0 warnings.
 
@@ -681,6 +701,7 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `g174e`, the output | x 8455-8485, y 17445-17634 | the plate's tail south to a pad with a contact (8467,17603) and 30 px of its metal (port) |
 | `g174`, the lower poly | x 8226-8372, y 17464-17560 | `eof_w17472`: a row y 17464-17486, an east leg x 8274-8296, a bottom bar y 17521-17543 under the rail (east of it: piece `g174e`); west of the active area the row turns south on x 8226-8242 (port at y 17560) |
 | `o362`, `o362w`, the NOR's output wire | x 6262-8478, y 17603-18490 | a thin metal south from the pad (8467,17603) and west along y 18474 to a pad (7556,18473); a poly under the rail x 7468-7516 to a pad (7384,18473); a thin metal west along y 18473 to a pad (6322,18472); the pad's poly row west (port at x 6262) |
+| `o362d`, the NOR's output on to DISPTMG's driver | x 5567-6262, y 18452-18925 | the poly row y 18462-18482 west under the wide vertical metal x 6190-6238 to a pad (6102,18472); a thin metal along y 18474 to a pad (5583,18472); a poly column x 5578-5596 south onto `pads_out`'s input poly of the DISPTMG driver (`disptmg_drv_in`) |
 
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
 
@@ -2161,6 +2182,41 @@ the pad and runs east along y 18497 is the edge of the wide metal's protected ma
 `cudisp_drv_in`'s at (7729,18927) (`pads_out`); the line has passed CUDISP's driver by 1,400 px, so if it is a
 pad driver's input at all it is not CUDISP's by this route. No load of the NOR is reached yet.
 
+### Piece `o362d`: the NOR's output is DISPTMG's driver input (traced; wiring only, no uncertain item)
+
+Run 27, 2026-11-20. Traced. The poly row that piece `o362w` left at the port (6262,18472) is followed to its
+end: a row, a pad, a metal, a pad and a column, 1,200 px, with no transistor and no branch, onto the input
+poly of the DISPTMG pad driver. Sized up from text first (`px.py col` at eight places, `follow.py`), then read
+on five views: `r27_ov.png` (the whole piece at 1.3x, metal over the clean shot, every package's trace
+outlined), `r27_e.png` (the east pad and the row under the wide metal, 2.9x, four shots), `r27_x3.png` (the
+three crossings, 3.4x, both metal shots and the clean shot), `r27_p5583.png` (the west pad, 6x, four shots),
+`r27_col.png` (the column, 2.8x, four shots); overlays `r27_o1.png` (1.55x), `r27_o2.png` (2.5x, with
+`pads_out`'s poly). The stretches, east to west and then south:
+
+| Stretch | Reading | From |
+|---|---|---|
+| the poly row, x 6122-6262 | one poly row y 18462-18482: open and orange in both metal shots at x 6240-6262 and x 6122-6190 (166/114/50 and 170/117/64 at (6170,18474), (6130,18470), against 167/136/84 for the ground), dark red-brown in the clean shot; **under the wide vertical metal x 6190-6238** it is cream in the clean shot at the same width with no hole (red minus green 32-80 across, no green sample), and both metal shots show only its two edge lines straight across the whole metal (y 18458-18461 and 18479-18485), no ring with a centre: no contact (trap 15). A dark blotch at (6212,18478) in chip 2's metal shot is not in chip 1's, whose own round spot is at (6204,18492): dirt in each | `px.py col X 18446 18500 4 acid,metal` for X = 6255, 6215, 6170, 6130; `textmap.py 6170 18446 6262 18500 3 --acid`; `r27_e.png` |
+| the pad (6102,18472) | the row ends on a pad, outline x 6086-6122, y 18453-18491: a dark ring with a bright centre x 6097-6106 in both metal shots (200/153/77; 191/182/120), a green hole in the clean shot's cream pad (182/166/108, 165/172/98 at x 6098-6104; `g` at x 6100-6112, y 18473-18479 in the text map), a box with specks in the chip-2 stripped shot: a contact. Field north and south; the metal leaves west, the poly east; nothing else (trap 32) | `px.py row 18474 5900 6110 6 metal,metal1,acid,acid1b`; `textmap.py 6070 18446 6136 18503 3 --acid`; `r27_e.png` |
+| the metal y 18474, x 5607-6088 | one thin metal, about 13 px (bright y 18468-18480 at x 6010 and 6050), with no stretch of 20 px without metal in both chips between the two pads' rings, no widening and no branch; the clean shot is pink (field) under it except at the three columns below, and has no hole between the two pads' own (x 5583 and 6105). The follower's contact candidate (5649,18474) is plain metal over pink | `follow.py 6050 18474 W --gap 16` (end (5578,18473), 488 px); `tl5_tracks.py h 18474 5540 6130 --half 2`; `r27_x3.png`; `r27_ov.png` |
+| the three crossings | three poly columns of other nets run north to south under the metal: x 5773-5793, x 5860-5878 and x 5950-5965 (cream in the clean shot under the metal, orange in the open north and south of it). The metal's dark bars there (x 5767-5775, 5790-5798, 5853-5863, 5877-5885, 5940-5948, 5964-5972: 8-11 px) are their edges; the metal keeps its width, there is no ring with a centre in either metal shot, and each column is uniform and unwidened under the metal with no hole: no contact (traps 15, 36). Nobody draws the columns (`bl1`/`bl2`: on `r27_ov.png` the first runs south to a pad at about (5775,18905), the second to a pad at about (5860,18855), the third into a unit at x 5960-6060, y 18600-18900) | `tl5_tracks.py h 18474 5540 6130 --half 2`; `r27_x3.png` |
+| the pad (5583,18472) | the metal ends on a pad, outline x 5568-5606, y 18452-18490: ring and bright centre x 5576-5588 in both metal shots (200/157/92; 196/193/125), a green hole with a speck in the clean shot's cream pad (155/154/98 at (5580,18474); `g` at x 5576-5588), a box in the chip-2 stripped shot: a contact. **The stretch between the centre and the metal is 18 px (x 5589-5607)**, longer than the other pad's 12: it is two dark lines, the hole's wall (x 5591-5595) and the pad's edge (x 5602-5606), with a dim yellow strip between (chip 2 154/130/82 at x 5598, chip 1 108/79/45: metal over the pad's poly, not orange open poly, not ground), and the metal's two edge lines run unbroken into the pad's outline in both chips: the metal reaches the pad (trap 16; Ambiguity 95; `px.py row 18474 5586 5612 2 metal,metal1`; the reading is review round 34's). The clean shot's protected strip is also unbroken from the metal into the pad (pink field under the metal to x 5603, then the pad's cream; open ground begins only west of x 5560), which by itself proves little over 18 px (trap 2: the margin is about 10 px either side). Ground west and north: the metal does not run on through the pad. The pad's poly leaves south | `px.py row 18474 5540 5700 5 metal,metal1,acid,acid1b`; `textmap.py 5552 18446 5624 18506 3 --acid`; `px.py col 5583 18380 18940 10 metal,acid,acid1b`; `r27_p5583.png` |
+| the poly column x 5578-5596, y 18490-18925 | one poly, cream in the clean shot between dark outlines at x 5577 and x 5596-5598 at ten heights from y 18540 to 18920, the same width all the way, open (orange in the metal shots, red-brown in the clean shot) at y 18490-18512 and in the gaps between the metals (y 18735-18765, 18825-18848, 18875-18892). It passes under **four horizontal metals of other nets**: the wide one y 18515-18730 and those at y 18775-18820, 18850-18870 and 18895-18915. Along it the clean shot has no hole (`tl5_tracks.py v`: red minus green under 24 only at the open bars y 18495 and 18736) and no pad; both metal shots show its two edge lines through every metal and no ring; dark blobs on the wide metal over it differ between the chips (chip 2: (5580,18680); chip 1: (5583,18560), (5590,18695)): no contact with any of the four (traps 13, 15; Ambiguity 96) | `px.py row Y 5568 5606 3 acid1b,acid` for ten Y; `tl5_tracks.py v 5587 18486 18935 --half 2`; `tl5_tracks.py rows row 5556 5612 2 Y ...`; `textmap.py 5566 18630 5608 18692 3 --acid`; `r27_col.png` |
+| the join to the driver | `pads_out` draws the DISPTMG driver's input poly from y 18912 south (x 5570-5595 to y 19506: `@inst outdrv 4579,15997 rot=270`, the cell's "input from the core"; label `disptmg_drv_in` at (5582,18927)). The column is the same stripe in the clean shot down to y 18960 and beyond; drawn to y 18925, 13 px into `pads_out`'s poly. (`pads_out`'s box lies 3-8 px west of the stripe there; geometry, not this package's.) | `tracelib.Trace().query(5540,18440,5640,18980)`; `r27_o2.png` |
+
+**What the extraction gives** (firm: `tools/unsure.py --equations disptmg_drv_in`):
+
+    disptmg_drv_in = NOR(eof_w17168, eof_w17338, eof_w17472)
+
+one net fewer in the full extraction (`eof_w17362` and `disptmg_drv_in` are one net, held by `@alias
+disptmg_drv_in eof_w17362`; a label `disptmg_drv_in` sits on the column so that the package extracts by
+itself), no new transistor. With `pads_out`'s driver (`disptmg_pu` = NOT `disptmg_drv_in`, `disptmg_pd` = NOT
+`disptmg_pu`, the pull-up fingers gated by `disptmg_pu`), the pad is the inverse of the NOR:
+**DISPTMG = `eof_w17338` OR `eof_w17168` OR `eof_w17472`**.
+
+**Believed, not traced**: what the three terms mean. `eof_w17168` = NOR(`eof_w16693`, `eof_w17212`) is the
+value of the second of the two latches in series on `ck_out` (pieces `lat15`, `lat16`), passed while
+`eof_w17212` is low; the other two inputs are not followed.
+
 ## Ports
 
 The net is driven outside the package (by `rdp2`'s NOR). `in` marks the port beyond which the
@@ -2255,7 +2311,7 @@ driver lies; the other three lead to the loads.
 | `eof_w16000` | metal | (8831-8845, 16030) | ? | piece `lat15`: the track x 8838 on south of the data pad (8838,16000) (the follower: to (8838,17306); not checked) |
 | `eof_w16040` | metal | (8919-8931, 16300) | in | piece `lat15`: the upper latch's enable: the metal x 8925 on south of its lower pad (8925,16262) (the follower: to (8925,17694), west along y 17700 to x 8643; not checked) |
 | `bc1_g6_in` | metal | (8136-8150, 16292) | out | piece `o040`: `eof_w17040`'s metal x 8143 onto `bc1`'s metal end (8143,16300) of `bc1_g6_in` (`M 8186,15900 y16260 x8143 y16300`; `bc1` has no ports file): the input of `bc1`'s inverter 6. (The ports `eof_w17040` (9001-9015, 17610), `eof_w16823` (8760, 16986-17003) and `eof_w16693` (8800, 17116-17135) are gone: the wires are drawn on) |
-| `eof_w17362` | poly | (6262, 18462-18482) | out | pieces `o362`, `o362w` (runs 25, 26): **the NOR's output**, drawn from the pad (8467,17603) south, west along y 18474, through the pads (7556,18473) and (7384,18473) and the poly between them, on west along y 18473 to the pad (6322,18472), and 60 px of that pad's poly row west; the poly goes on west into the bottom-left logic (`bl1`/`bl2`; not followed). (The ports of piece `g174` at x 8368-8372 on the rail's east edge, `eof_w17168`, `eof_w17338`, `eof_w17472`, `eof_w17362`, `vss` and the node whose former name was `eof_w17552`, are gone: drawn on) |
+| `eof_w17362` | - | no port left | out | pieces `o362`, `o362w`, `o362d` (runs 25-27): **the NOR's output**, drawn from the pad (8467,17603) south, west along y 18474 and y 18473 through four pads, and by the poly row west of the pad (6322,18472), a pad (6102,18472), a metal, a pad (5583,18472) and a poly column south onto `pads_out`'s input poly of the DISPTMG driver at (5587,18912-18925): it is `disptmg_drv_in`. The port at (6262,18472) is gone: drawn on. (The ports of piece `g174` at x 8368-8372 on the rail's east edge, `eof_w17168`, `eof_w17338`, `eof_w17472`, `eof_w17362`, `vss` and the node whose former name was `eof_w17552`, are gone: drawn on) |
 | `eof_w17338` | poly | (8245, 17331-17351) | ? | piece `g174`: row 1 where it leaves the active area west, under the track x 8229 (in line with a pad at about (8188,17340): not read) |
 | `vcc` | metal | (8488-8558, 17560) | - | piece `g174e`: the VCC rail R2 on south (drawn y 17236-17560, x 8488-8558; it runs on) |
 | `eof_w17472` | poly | (8226-8242, 17560) | ? | piece `g174`: the lower poly's west leg on south (poly to y 17585 by `r23_prof.py col 8233`; not followed) |
@@ -3058,6 +3114,29 @@ driver lies; the other three lead to the loads.
     from y 17618), and `tools/follow.py 8467 17640 N --gap 16` ends on the pad. Drawn: 30 px of metal and a
     port; the run beyond is the next piece's to read. (Run 25: read and drawn, piece `o362`; the ring's 15 px
     at y 17610-17624 is the only stretch of its kind next to the pad.)
+94. **The row under the wide vertical metal x 6190-6238** (piece `o362d`; (6190-6238, 18462-18482)). The
+    poly row of `eof_w17362` passes under a wide metal of another net for 48 px. Read as no contact: the clean
+    shot is cream there at the row's own width with no green sample, the metal shows the row's two edge lines
+    straight across its whole width and no ring with a centre, and a tap in such a field has a pad (trap 15).
+    Other reading: a contact, which would tie the DISPTMG driver's input to that metal (a supply by its width:
+    the gate would be useless). Working assumption: a plain crossing; no `?` item.
+95. **The metal's last 18 px at the pad (5583,18472)** (piece `o362d`; x 5589-5607). Both metal shots are dim
+    there for 18 px, against 12 at the other pad (6102,18472) and about 10 for a plain ring (trap 16's false
+    join had 24-33 px of bare ground or open poly). Read as joined: the stretch is two dark lines (the hole's
+    wall x 5591-5595, the pad's edge x 5602-5606) with a dim yellow strip between (chip 2 154/130/82: metal,
+    not orange poly and not ground; review round 34 measured the same); the metal's two edge lines run into
+    the pad's outline in both chips (`r27_p5583.png`, the reviewer's `review-34/p5583.png`); and nothing else
+    is near for the metal to go to (ground north, south and west of the pad, no corner). The clean shot's
+    unbroken protected strip agrees but proves little over 18 px (trap 2). Working assumption: the metal ends
+    on the pad's contact; no `?` item.
+96. **The column under four horizontal metals** (piece `o362d`; x 5578-5596, y 18515-18915). `disptmg_drv_in`'s
+    poly column runs under the wide metal y 18515-18730 and three more (y 18775-18820, 18850-18870,
+    18895-18915). Read as no contact with any: one cream stripe of constant width in the clean shot with no
+    hole and no pad, only its edge lines in the metal shots, the dark blobs over it on the wide metal at
+    different places in the two chips (dirt). A faint lengthwise mark on the stripe at y 18645-18675 in the
+    clean shot has no green sample (`textmap.py 5566 18630 5608 18692 3 --acid`: red minus green 32-72
+    throughout) and no counterpart in chip 1's metal shot. Working assumption: four plain crossings; no `?`
+    item.
 
 ## Review
 
@@ -4703,6 +4782,56 @@ What it could not check: the row west of x 6180; the two columns' own nets.
 
 Round 33: no findings that change a connection.
 
+### Round 34 (full review of piece `o362d`; 2026-11-20 14:44 to 14:51 +0000, at commit 8340836)
+
+One fresh reviewer agent on Claude Fable 5.2, read from the photos alone; 8 images in
+`cache/scratch/eof/review-34/` (`ov.png` 1.6x four shots, `east.png` 3.3x, `xwide.png` 7x, `x3.png` 4.6x,
+`p5583.png` 6x four shots, `col_a.png` 2.7x, `mark660.png` 6x, `join.png` 3x with every package's trace), and
+text (`textmap.py`, `px.py`, `tl5_tracks.py h`, `follow.py`, `unsure.py --equations`).
+
+Told to suspect: the pad (5583,18472), whose metal side is dim for 18 px (trap 16), and anything else leaving
+it (trap 32); the column from that pad: one unbroken poly to the driver's input or not (a break, a step, an
+end under one of the four metals; traps 10, 13, 33, 34), a contact from any of the four metals (the faint
+mark at y 18645-18675, the dark blobs on the wide metal), poly or a diffusion wire (trap 39); the row under
+the wide vertical metal x 6190-6238 (a contact, the blotch (6212,18478), a break); the three crossings and the
+follower's candidate (5649,18474), and whether one of the columns is a branch of this net; the pad
+(6102,18472).
+
+Checked and found as claimed (all six claims): the west pad's contact in four shots, the 18 px stretch (two
+dark lines, hole wall x 5591-5594 and pad edge x 5603-5606, with a dim yellow strip between, chip 2
+147/122/73: metal, not orange poly), the metal's edge lines unbroken into the pad's outline in both chips,
+ground north and west, no second poly; the column: poly by its open stretches (chip 2 160-167/103-127/56-64,
+chip 1 green 51-101), one unbroken stripe of constant width from the pad to beyond y 18960, no widening and
+no hole under any of the four metals, the dark blobs in one chip only ((5583,18680), (5576,18804),
+(5595,18870) in chip 2; (5590,18695) in chip 1), the mark at y 18640-18690 a thickened edge line and a sliver
+with no hole or pad, field either side under the wide metal (no transistor); the join to `pads_out`'s poly
+(the same stripe, boxes overlapping y 18912-18925; the equation firm in the package alone and in the full
+extraction); the thin metal (no break over 11 px between the pads' rings, no branch, no pad; the three poly
+columns run on north and south unwidened, no ring or hole, none a branch; the candidate (5649,18474) a speck
+in chip 2 only); the east pad's contact in four shots with only the metal west and the poly east; the row
+under the wide vertical metal (two straight edge lines across the metal in both chips, a uniform cream row
+x 6183-6248 in the clean shot, no hole, no widening; the blotch in chip 2 only, chip 1's spot at (6208,18492)
+off the row).
+
+Findings: none that the reviewer called a finding ("no findings"). Two remarks, geometry or notes only:
+
+1. **The notes' argument for the west pad's join was weak**: an unbroken protected strip in the clean shot
+   proves little over 18 px, since metal protects about 10 px beyond its edges on either side (trap 2).
+   Confirmed (`px.py row 18474 5586 5612 2 metal,metal1`: dark x 5590-5594 and 5602-5606, between them
+   134-154/109-130/58-82 in chip 2 and 99-108/68-79/41-45 in chip 1; metal from x 5608). The conclusion
+   stands on the two edge lines and the strip's colour. Fixed in the trace's comment, the stretch table and
+   Ambiguity 95; no geometry line changed. Does not change a connection.
+2. `pads_out`'s input poly box (x 5570-5595) lies about 5 px west of the stripe at y 18912-18960. Not this
+   package's file; noted in the piece's table and in the handoff. Does not change a connection.
+
+The same connections before and after the fix: `tools/t.sh eof sameconn.py 8340836` ends "connections
+identical"; `.venv/bin/python tools/sameconn.py 8340836` ends "connections identical".
+
+Could not check: under the four metals the chip-2 stripped shot is fringed, so "no contact" there rests on
+the clean shot and both metal shots; the driver itself and the NOR were not re-read (not under review).
+
+Round 34: no findings that change a connection.
+
 ## Not done
 
 - **Ambiguity 53 to be measured again with a control** (from review round 29 of piece `g174`): a band about
@@ -4792,7 +4921,7 @@ Round 33: no findings that change a connection.
   **The unit that `eof_w17168` gates is drawn as far as the rail's east edge** (run 23, piece `g174`: three
   pull-downs).
   **The unit's east side is drawn** (run 24, piece `g174e`: the gates' east parts, the load, the output's pad; `eof_w17362` = NOR(`eof_w17338`, `eof_w17168`, `eof_w17472`), firm).
-  **Left on that net, and next**: (1) (i) **the NOR's output `eof_w17362` west of the port (6262,18472)** (the next piece; wiring; drawn to there in runs 25 and 26, pieces `o362` and `o362w`: south from the pad (8467,17603), west along y 18474, a poly hop under the rail x 7468-7516 between the pads (7556,18473) and (7384,18473), the metal y 18473 to its end pad (6322,18472), 60 px of the pad's poly row west): the open poly row y 18462-18482 runs on west of x 6262 into the bottom-left logic (`bl1`/`bl2`, not started): open to x 6248, then under a wide vertical metal x 6185-6238 (review round 33's `west4.png`; cream beneath it, so the row goes on under it: look for a contact there first); not followed west of x 6180, and a single profile along y 18472 in the chip-2 stripped shot does not show how far it goes (red minus green 20-45 from x 6100 to 6300, 15-30 west of that: `px.py row 18472 5800 6310 15 acid`; a strip view in the stripped shots is the way). To do: follow the row (both edges, in the chip-2 shots where poly is orange) to a pad, a gate or a buried contact, looking all round each pad (trap 32). Seen beside the piece, other nets, not drawn: a diffusion wire x 6903-6917 and a poly column x 6943-6958 that cross under the bus lines at y 18473 (`busb`); `trunks`' middle line y 18428 runs beside the metal to a pad (6797,18428) and north up the left bus field. Not drawn beside the piece: the first of the three lines (y 18383); the rail x 7468-7516 and the wide metal south of y 18515 that it joins; the pads of the bus rows at x about 8424-8445 west of the thin metal (rows y 18115, 18205, 18290, 18380). `cudisp_drv_in`'s label is at (7729,18927) (`pads_out`), `disptmg_drv_in`'s at (5582,18927). Beside the pad, another net's pad with a contact at (8402,17603) (ring and bright centre in both metal shots; no poly from this unit reaches it: field at y 17565-17585), with a metal south: not followed. Also seen: the diffusion under the VCC rail runs on east past x 8558 at y 17450-17475; a second diffusion x 8512-8566, y 17284-17348 with a contact (8530,17312) under the same rail (another unit's; review round 31); the other pad (8403,17603) has a metal from the west and a poly south (review round 31). Then the unit's wires: `eof_w17338` west (a pad at about (8188,17340) on a track x 8186
+  **Left on that net, and next**: (1) (i) **the NOR's output `eof_w17362`: done** (runs 25-27, pieces `o362`, `o362w`, `o362d`): it is `disptmg_drv_in`, the input of the DISPTMG pad driver (DISPTMG = `eof_w17338` OR `eof_w17168` OR `eof_w17472`). Left on it: nothing of the wire; the rename of `eof_w17362` to `disptmg_drv_in` is the coordinator's refresh (an `@alias` holds it). Seen beside piece `o362d`, other nets, not drawn (`bl1`/`bl2`, `busb`): the three poly columns under the metal y 18474 at x 5773-5793, 5860-5878, 5950-5965 (south to pads at about (5775,18905), (5860,18855) and into a unit at x 5960-6060, y 18600-18900: `trunks`' tap `P 6148,18962 y18850` goes into the same group); the wide vertical metal x 6190-6238 and the wide horizontal metal y 18515-18730 it joins; the three horizontal metals y 18775-18820, 18850-18870, 18895-18915 over the column (the last ends east on a pad at about (5770,18905)). **So the next piece is (ii) of this item's unit: the NOR's other two inputs**, first `eof_w17338`. Seen beside the piece, other nets, not drawn: a diffusion wire x 6903-6917 and a poly column x 6943-6958 that cross under the bus lines at y 18473 (`busb`); `trunks`' middle line y 18428 runs beside the metal to a pad (6797,18428) and north up the left bus field. Not drawn beside the piece: the first of the three lines (y 18383); the rail x 7468-7516 and the wide metal south of y 18515 that it joins; the pads of the bus rows at x about 8424-8445 west of the thin metal (rows y 18115, 18205, 18290, 18380). `cudisp_drv_in`'s label is at (7729,18927) (`pads_out`), `disptmg_drv_in`'s at (5582,18927). Beside the pad, another net's pad with a contact at (8402,17603) (ring and bright centre in both metal shots; no poly from this unit reaches it: field at y 17565-17585), with a metal south: not followed. Also seen: the diffusion under the VCC rail runs on east past x 8558 at y 17450-17475; a second diffusion x 8512-8566, y 17284-17348 with a contact (8530,17312) under the same rail (another unit's; review round 31); the other pad (8403,17603) has a metal from the west and a poly south (review round 31). Then the unit's wires: `eof_w17338` west (a pad at about (8188,17340) on a track x 8186
   from the north) and `eof_w17472`'s west leg south of y 17560 (to y 17585 and on). Also not drawn: the
   contact (8348,17245) and the diffusion north of y 17266 under the rail (the next unit's, to y 17231); the
   poly that ends at about (8292-8328, 17250-17262) from the west. (ii) **`bc1_g6_out`**, the
