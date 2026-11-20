@@ -431,3 +431,71 @@ P 6713,10300:6747,10334
 C 6730,10317
 P 6730,10316 x7615 w=20
 N P 7000,10316 rsel13_buf
+
+# ================================================================ piece w8450 (run 4, 2026-11-20): lc2_w8450 from bl0's
+# port (4930,16713) across the bottom-left logic and east along the bottom bus to a thin metal track x 10485 that
+# goes north into the bottom-centre logic's gate column. This is "the wire of the seventh row" of the notes' Not done
+# (run 1-3): the row y 18125 between bd1_n2's row (eof) and rsel16_buf's. Wiring only: thirteen pads with contacts,
+# six poly links, no transistor drawn. Pads: ring and bright centre in both metal shots, pad box in both stripped shots
+# (pads_a.png, pads_b.png; centres from busl_padc.py). Rows read in every open stretch (a1-a4.png, s19-s20.png).
+# --- A: bl0's poly row y 16703-16723 on east, straight, under a wide metal x 4950-5020, bl0's six tracks and their
+# neighbours, in the gap between two horizontal metals at x 5420-5540, to a corner at x 5845
+P 4920,16713 x5853 w=20
+N P 5600,16713 lc2_w8450
+# --- B: poly column x 5837-5853 south (open poly between the metals x 5815 and x 5865), corner, row y 16791-16810 east
+# under the track x 5855-5875 (no ring, no hole: no contact) to a pad
+P 5845,16703 y16810 w=16
+P 5837,16800 x5909 w=20
+P 5892,16783:5926,16817
+C 5909,16800
+# --- C: the row goes on east of the pad: open poly, then a band under the rail x 6008-6055 between two diffusions
+# (not drawn: a pull-down of the bottom-left logic, bl2's; port at the rail's west edge). The poly ends at x 6060.
+P 5909,16800 x6060 w=20
+# --- D: thin metal (22 px wide) south from the pad, over two poly rows of other nets (y 16870-16890, 16920-16940:
+# edge bars only, no ring), to a pad whose centre is bright in chip 1 only (notes, Ambiguities 4)
+M 5910,16800 y17019 w=20
+P 5890,17002:5924,17036
+C 5907,17019
+# --- E: poly row y 17010-17026 east under the rails x 6010-6050 and x 6190-6238 and the tracks x 6280, 6320, to a pad
+P 5907,17018 x6408 w=16
+P 6391,17000:6425,17034
+C 6408,17017
+# --- F: thin metal south (1,100 px; the follower's candidate (6409,17603) is damage on chip 1's surface, the metal
+# full-bright through it in chip 2: notes, Ambiguities 3) to a pad
+M 6408,17017 y18126 w=13
+P 6391,18109:6425,18143
+C 6408,18126
+# --- G: poly row east under the six tracks x 6452-6668 of rsel12_buf .. rsel16_buf (no pad, no contact) to a pad
+P 6408,18125 x6712 w=16
+P 6695,18107:6729,18141
+C 6712,18124
+# --- H: metal row y 18125 east, with the three straight hops of the bus (pads 7382/7555, 8424/8641, 9596/9811)
+M 6712,18125 x7382 w=13
+P 7365,18107:7399,18141
+C 7382,18124
+P 7382,18125 x7555 w=16
+P 7538,18107:7572,18141
+C 7555,18124
+M 7555,18125 x8424 w=13
+P 8407,18108:8441,18142
+C 8424,18125
+P 8424,18125 x8641 w=16
+P 8624,18109:8658,18143
+C 8641,18126
+M 8641,18125 x9596 w=13
+P 9579,18107:9613,18141
+C 9596,18124
+P 9596,18125 x9811 w=16
+P 9794,18107:9828,18141
+C 9811,18124
+M 9811,18125 x10137 w=13
+P 10120,18107:10154,18141
+C 10137,18124
+# --- I: poly east, the first of the third diagonals (x + y = 28308), row y 17995 east to a pad
+P 10137,18124 10184,18124 10313,17995 10484,17995 w=18
+P 10467,17977:10501,18011
+C 10484,17994
+# --- J: thin metal north on the track x 10485, drawn to y 17760: the dark stretch y 17716-17755 over a box
+# (no bright centre, no green hole: a pass-over, traps 22, 27) and the track beyond are not drawn (port)
+M 10485,17994 y17760 w=13
+N M 10485,17850 lc2_w8450

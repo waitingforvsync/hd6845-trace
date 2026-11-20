@@ -210,6 +210,18 @@ of the same column's separate inverter, whose input arrives on a thin metal from
 left-centre strip below: it is `lc2`'s staircase line `lc2_w8474`, which also holds the left-centre ripple counter clear while low (next section's table). **Its driver is found: `lc1_w7170` = NOT `rst_c`**, the lower inverter of `lc3`'s gate pair (`notes/blocks/lc3.md`, "The wiring east of the counter"), whose input comes from a metal that enters the left-centre strip from the east at (6450,9455), **and that metal is `rst_c`** (`notes/blocks/eof.md`, piece `rc`, 2026-11-19; firm, no uncertain item: `rst_c`'s poly from latch C's clear pad runs on out of the strip, lies under another net's metal for 225 px without a contact, and ends on a pad (6469,9209) whose own metal is that line). So `lc1_w7170` = NOT `rst_c` and **`rcs_x1` is the reset, two inverters after `rst_c`**: the step logic's five latches and the left-centre ripple counter are cleared while RES and LPSTB are both low, and by nothing else that is traced. Open: what else the reset reaches (the L3
 lines of `rc`, `hsw` and `sl`, the registers, the outputs).
 
+**One of the reset's copies is taken across the bottom of the chip** (`notes/blocks/regs.md`, piece
+`w8450`, 2026-11-20). `lc2_w8450` = NOT `lc1_w7170` (the data of the left-centre latch B and the clear
+of the ripple counter's stages; high while RES and LPSTB are both low) runs on from the foot of the
+left bus field's track x 4822 by a poly row east through the bottom-left logic, where it ends as a band
+under a supply rail at (6008-6055, 16791-16810) (believed the gate of one pull-down; that unit is not
+traced), and from a pad on that row by the track x 6408 and the bottom bus row y 18125 (between the
+row of `bd1_n2` and the read selects of R14-R17) to a thin metal x 10485 that goes north beside the
+east gate column of the bottom-centre logic (drawn to y 17760). Firm for the wire (thirteen pads, six
+poly links, no uncertain item on it; the net's own equation is marked as before, `lc2`'s box). Open:
+its loads in the bottom-centre logic (the track passes at least two units without a contact) and what
+the bottom-left unit is.
+
 ## Registers and writing
 
 | Fact | Mark |

@@ -21,6 +21,12 @@ Trace: `trace/regs.txt`. Scratch: `cache/scratch/regs/` (`survey.md`). Started 2
   (y 10400-15000) are read with the follower and not drawn** (they are `busl`'s): two open joins.
   Full extraction: 2374 nets, 4351 transistors, 0 errors, 0 warnings (no new net: each part lies on
   a net that exists).
+- **Piece `w8450`, "the wire of the seventh row": traced** (run 4, 2026-11-20 23:20 +0100; richtw1's
+  session, on Fable). It is not a register wire: it is **`lc2_w8450`**, the reset copy that `bl0` left
+  at a port in the bottom-left logic (4930,16713). One wire, no transistor drawn, thirteen pads with
+  contacts and six poly links, from that port to a thin metal track x 10485 that goes north into the
+  bottom-centre logic's east gate column (drawn to y 17760). No uncertain item on it. Full extraction:
+  2462 nets (no new net: the wire lies on a net that exists), 4594 transistors, 0 errors, 0 warnings.
 
 ## Inventory
 
@@ -40,6 +46,14 @@ Trace: `trace/regs.txt`. Scratch: `cache/scratch/regs/` (`survey.md`). Started 2
 | Corners and tracks | x 6668, 6626, 6582, 6538, y 16515-18299 | each row turns north (nested: the northernmost row takes the easternmost track) |
 | Vertical hop | y 16168-16558 | poly between pads under the horizontal metal rows y 16260-16480: pads (6668,16210)/(6668,16558), (6624,16168)/(6626,16515), (6581,16210)/(6582,16558), (6538,16168)/(6538,16515); five columns hop here (the fifth, x 6711, is `eof`'s `bd1_n2` track), all straight (2.7x, both shots) |
 | Tracks north | y 15000-16168 | metal to `busl`'s south edge, where `rsel14_buf`, `rsel15_buf`, `rsel17_buf`, `rsel16_buf` (`cdp4`'s selects 1-4) are drawn; six poly rows cross at y 15070-15190 without a contact |
+| `lc2_w8450`: poly row from `bl0`'s port | x 4930-5853, y 16703-16723 | straight; under a wide metal x 4950-5020, `bl0`'s six tracks and their neighbours (x 5100-5360), in the 25 px gap between two horizontal metals at x 5420-5540, open at x 5550-5720, under three tracks to a corner (2.5x in `metal`, `acid1b`, `acid`: `a1.png`, `a2.png`; the gap stretch at 3x in four shots, `a4.png`) |
+| Corner and second row | column x 5837-5853, y 16703-16810; row y 16791-16810, x 5837-6060 | open poly between the metals x 5815 and x 5865 (orange in both metal shots: `px.py row 16760 5822 5868 2 all`, `px.py col 5845 16700 16830 4 metal,acid`); the row passes under the track x 5855-5875 without a ring, through the pad (5909,16800), and ends under the rail x 6008-6055 as a band between two diffusions (not drawn) |
+| Metal x 5910, poly row y 17018 | y 16800-17019; x 5907-6408 | thin metal (22 px wide) between pads (5909,16800) and (5907,17019), over two poly rows of other nets (y 16870-16890, 16920-16940: edge bars only); poly row straight under the rails x 6010-6050 and x 6190-6238 and the tracks x 6280, 6320 (2.2x, three shots, `o2.png`) |
+| Track x 6408 | y 17017-18126 | thin metal between pads (6408,17017) and (6408,18126); `tl5_tracks.py v 6408 17035 18108`: no stretch without metal in both chips (Ambiguities 3) |
+| Poly row under the six tracks | x 6408-6712, y 18117-18133 | under the tracks of `rsel12_buf` .. `rsel16_buf` (x 6452-6668), no pad, no ring (3.3x, three shots, `o3.png`) |
+| The seventh row | y 18125, x 6712-10137 | metal with the bus's three straight hops, pads 7382/7555, 8424/8641, 9596/9811 (each hop at 4-4.4x in both stripped shots: `h1.png`, `h2.png`, `h3.png`); `tl5_tracks.py h 18123 6600 10200`: metal at x 6740-7364, 7581-8405, 8669-9571, 9837-10117 |
+| First of the third diagonals | pad (10137,18124) to pad (10484,17994) | poly east to x 10184, diagonal x + y = 28308, row y 17995 east (3x in both stripped shots, `o4.png`): the band above `rsel16_buf`'s |
+| Track x 10485 | y 17994 north | thin metal from the pad (10484,17994), drawn to y 17760; north of that it passes over the boxes and rows of the gate column (Not done) |
 | Not drawn: a structure on `wr_r12`'s line | x 11320-11400, y 11740-12350 | Ambiguities 1 |
 
 ## Logic
@@ -120,6 +134,46 @@ pad (11243,10705). `cdp4`'s strobe row (`wr_r15`, drawn there to x 10600, "ends 
 is one poly row y 11824-11844 east to the pad (11243,11830) (`tl5_tracks.py rows` in the clean
 shot: poly all the way, field on both sides).
 
+### `lc2_w8450` to the bottom bus (piece `w8450`, run 4)
+
+No transistor. One join, by geometry: the wire starts on `bl0`'s poly row (its port (4930,16713),
+the row of the pad (4823,16713) at the foot of the left bus field's track x 4822), so the whole wire
+is **`lc2_w8450`** = NOT `lc1_w7170` (`lc2`'s equation, marked there for its own uncertain box): the
+data of the left-centre latch B and the clear of the ripple counter's stages, a copy of the reset in
+`rst`'s sense. `tools/unsure.py`: nothing new joined through an uncertain item (the wire has none).
+
+Route, west to east: poly row y 16713 east to a corner (5845,16713); poly column south; poly row
+y 16800 east through the pad (5909,16800) to its end under the rail x 6008-6055 (below); from the
+pad a thin metal south to the pad (5907,17019); poly row y 17018 east to the pad (6408,17017); the
+track x 6408 south to the pad (6408,18126); poly row east under the six select tracks to the pad
+(6712,18124); the metal row y 18125 east with three hops to the pad (10137,18124); poly east and
+north-east (the first of the third diagonals) and along y 17995 to the pad (10484,17994); the thin
+metal x 10485 north.
+
+**Two ends, both gates, both in logic nobody has traced (seen, not drawn):**
+
+- West: the row y 16791-16810 ends as a band under the supply rail x 6008-6055 of the bottom-left
+  logic, between a diffusion with the rail's contact (6030,16845) below it (y 16815-16870) and a
+  diffusion above it (y 16755-16790) that goes west, by a patch (5990-6005,16758-16772), to a
+  heavy-outlined box (5953-5990,16748-16785) (clean shot at 5.6x, `b2.png`; four shots at 2.8x,
+  `b1.png`). So it looks like the gate of one pull-down of a unit of `bl1`/`bl2`. `railprof.py 6008
+  6048 16500 17100` calls the band "poly over field" between two diffusions (its colour test; the
+  band has a dark diagonal mark on it in the clean shot). Believed a gate, not drawn: the unit is
+  the bottom-left logic's.
+- East: the track x 10485 runs north beside the gate column of the bottom-centre logic's east part
+  (rail x 10550-10600). `tl5_tracks.py v 10486 16300 17990`: stretches without metal in both chips at
+  y 17716-17755, 17457-17549, 17326-17363, 17152-17188, 16914-17074, 16805-16840, 16673-16710,
+  16500-16553 and none at all north of y 16300. The first two were looked at (4.8x and 7.5x, four
+  shots: `s12.png`, `c4.png`, `c4b.png`; `textmap.py 10456 17696 10516 17768 3 --acid`): the metal
+  goes dark over a heavy-outlined box at the west end of a unit (y 17715-17750, y 17455-17495), with
+  no bright centre, no green hole and no widening, and is seen again beyond: pass-overs (traps 22,
+  27), so the track goes on north past at least two units. Its loads are not found.
+
+So what this piece establishes: **the reset copy `lc2_w8450` is taken from the left bus field across
+the bottom of the chip into the bottom-centre logic's east gate column, with one gate load in the
+bottom-left logic on the way** (traced: the wire; believed: that the west end is a gate; open: every
+load at the east end).
+
 ## Ports
 
 | Name | Layer | Where | Direction | What |
@@ -143,6 +197,9 @@ shot: poly all the way, field on both sides).
 | `rsel13_buf` | metal | 6494,14990 | out | into `busl`'s region: track x 6494, undrawn there |
 | `rsel12_buf` | metal | 6690,10400 | in | from `busl`'s region: believed `rsel12_buf` |
 | `rsel13_buf` | metal | 6733,10400 | in | from `busl`'s region: believed `rsel13_buf` |
+| `lc2_w8450` | poly | (4920-4930, 16703-16723) | in | from `bl0`'s poly row (its port (4930,16713)) |
+| `lc2_w8450` | poly | (6008, 16791-16810) | out | the band under the rail x 6008-6055: believed the gate of a pull-down of the bottom-left logic (undrawn); the poly is drawn to its end, x 6060 |
+| `lc2_w8450` | metal | (10479-10491, 17760) | out | the track x 10485 on north beside the bottom-centre logic's east gate column: not followed (Not done) |
 
 ## Ambiguities
 
@@ -183,6 +240,27 @@ shot: poly all the way, field on both sides).
    long for contacts. Read as not contacts; no pad or ring in the metal shot at 2.7x for the first.
    The same value at x 6917 on all four rows (8-9 px) is one vertical feature beneath, not four
    contacts.
+3. **The track x 6408 at y 17580-17625** (piece `w8450`). Chip 1's metal shot has two dark blobs on
+   the track (y 17580-17595, 17605-17622: `tl5_tracks.py v 6408 17035 18108` gives "chip 1 fails
+   17604-17623"), and chip 1's clean shot interference colours and two blue-green specks there. Chip
+   2's metal shot has full-bright metal with straight edges through both (`textmap.py 6388 17585
+   6430 17640 3`; four shots at 3x, `f1.png`), and its stripped shot is plain. Read as damage on
+   chip 1's surface: no ring, no pad; the metal is one piece. The follower's contact candidate
+   (6409,17603) is the same place.
+4. **The pad (5907,17019)'s centre in chip 2** (piece `w8450`). Dark ring about 40 px across in both
+   metal shots and a pad box in both stripped shots, but the centre is bright only in chip 1 (red
+   160-235; chip 2 96-150: `textmap.py 5880 16992 5936 17046 3 --acid`). Read as a contact with dirt
+   on it in chip 2: the thin metal from the north ends squarely on the ring and the poly row leaves
+   east.
+5. **Crossings read as no contact** (piece `w8450`): the track x 5855-5875 over the row y 16800 at
+   (5865,16800) (bright across, edge bars only: `s19b.png`, `s20b.png`); the wide metal x 4950-5020
+   over the row y 16713 (a dark mark at (4990,16712) is in chip 2's metal shot only: `a3.png`); the
+   dark dots on the poly rows at x 6248 (row y 17018) and at x 6470, 6515, 6560, 6603, 6647 (row
+   y 18125) and 10330, 10375, 10420 (row y 17995) lie in the gaps between two metals (trap 2), with
+   no metal above; two clean-shot specks on the metal row at (6808,18123) (the edge of a poly column
+   beneath) and (8912,18126) (chip 1's clean shot only; metal D-E across in both chips:
+   `textmap.py 8894 18108 8932 18144 3`); the metals x 10255-10270 and x 10300-10400 over the
+   diagonal and the row y 17995 (no pad on the poly, trap 15).
 
 ## Review
 
@@ -256,13 +334,23 @@ Round 4: no findings that change a connection.
 
 ## Not done
 
-- **The two open joins**: `rsel12_buf` (6452,14990) to the wire `cdp3` called gate_e (6690,10400) and `rsel13_buf`
-  (6494,14990) to the wire `cdp3` called gate_f (6733,10400), through `busl`'s claimed region; route in Logic.
-- The wire of the seventh row: from a pad (10470,17985), poly row y 17990, first of the third
-  diagonals, pad (10138,18120), metal row y 18124 west through the same hops to x 6708 and (by the
-  follower) north on x 6711, which is `eof`'s `bd1_n2` track (drawn there from y 15000 to 16185).
-  Not ours; seen, not drawn. A ninth row y 17648 crosses the rail hop too (west pad (14500,17648),
-  west end (13316,17803)): not followed.
+- The two open joins of piece 3 are closed (`busl` run 8: Corrections, second batch, below).
+- **`lc2_w8450`'s track x 10485 north of y 17760** (the east end of piece `w8450`; in `bc4`'s
+  region). Thin metal beside the gate column on the rail x 10550-10600. Stretches without metal in
+  both chips (`tl5_tracks.py v 10486 16300 17990`): y 17716-17755 and 17457-17549 (looked at: over a
+  box each, pass-overs; the second also over a poly row y 17500-17525, where the metal shows 10 px
+  wide), 17326-17363, 17152-17188, 16914-17074 (160 px: not read), 16805-16840, 16673-16710,
+  16500-16553; no metal north of y 16300, so the track ends at about y 16340. To do: read each
+  stretch at 5x in four shots (a tap has a widened pad, a bright centre and a green hole), draw the
+  pass-overs `?M` (trap 27), find the end and every load. Views: `c2.png`, `c3.png` (2.8x, four
+  shots, y 16880-17780).
+- **The pull-down on `lc2_w8450` under the rail x 6008-6055 at y 16791-16810** (the west end; in
+  `bl1`/`bl2`'s region): gate band drawn as poly only; its two diffusions, the rail and the box
+  (5953-5990,16748-16785) are not drawn (Logic, "Two ends").
+- A ninth row y 17648 crosses the rail hop too (west pad (14500,17648), west end (13316,17803)):
+  not followed (claimed in run 4 and not reached). Two more undrawn metal rows go through the same
+  hop below `rsel12_buf`'s: y about 17780 (pads at about (14440,17770), (14650,17770)) and y about
+  17820 (pads (14480,17810), (14690,17810)) (`n1.png`, 0.84x).
 - The structure of Ambiguities 1.
 - `wr_r14`'s branches into the row A cells (`cdp3` (continue)); the source of `cdp4`'s 6-bit
   input a (`cdp4` (continue)).
