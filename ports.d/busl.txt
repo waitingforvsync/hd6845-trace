@@ -148,3 +148,10 @@ tc2_r5718    M  7526-7540,6400     ?   onto tc2's metal from the pad (7530,6324)
 tc2_r5718    P  7550,14513-14535   ?   poly row y 14524 on east toward bc1's bus pads (seen as poly to x 7580; not drawn)
 busl_x7122   P  7592,8852-8874     ?   the row y 8863 on east under the wide rail; NOT joined to cdp3's ?P row (cdp3_k_a) that starts at x 7600: notes, Ambiguities 17, 18
 busl_x7122   P  7550,14469-14491   ?   poly row y 14480 on east toward bc1's bus pads (seen as poly to x 7580; not drawn)
+# pieces ga, gb, gc (run 12): lines 11-13 of the staircase bundle, from the northern part to the rows y 14480, 14437, 14393
+lc1_w7780    P  6450,7770-7790     in  onto lc1's row of gate E1's output at its port (lc1's port lc1_w7780 there)
+lc1_w7780    P  7170,15207-15229   out the row y 15218 from the end pad (7100,15175), on east under ck_out's track toward bc1's rail x 7292-7342 (seen to x 7260; not drawn)
+busl_x6559   P  6800,7247-7269     ?   poly row y 7258 on west into the crossing field; not read
+busl_x6603   P  6845,7289-7311     ?   poly row y 7300 on west into the crossing field; not read
+busl_x6559   P  7550,14426-14448   ?   poly row y 14437 on east toward bc1's bus pads (seen as poly to x 7600; not drawn)
+busl_x6603   P  7550,14382-14404   ?   poly row y 14393 on east toward bc1's bus pads (seen as poly to x 7600; not drawn)

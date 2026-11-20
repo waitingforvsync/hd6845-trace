@@ -763,3 +763,101 @@ P 7143,14480 x7550 w=22               # the row y 14480 east to the region's edg
 N P 7500,8863 busl_x7122
 N M 7122,11000 busl_x7122
 N P 7300,14480 busl_x7122
+
+# =====================================================================================
+# Pieces ga, gb, gc (run 12, 2026-11-20): three more lines of the staircase bundle of piece lc9,
+# inside tla's rcs_e4 (lines 11, 12, 13 of the bundle; line 14, next east, is not drawn yet). They keep
+# their order through the bundle's three staircases (arms y 9886 / 9928 / 9970 north of the
+# region, y 11923 / 11967 / 12010 and y 12813 / 12857 / 12899 in it) and end at the foot of the
+# field on the west end pads of the poly rows y 14480, 14437, 14393 (bc1's 13-line bus). North
+# of y 10400 each is, like the lines of pieces fb .. fe: a track, a diagonal north-east
+# (x + y = 15467 / 15534 / 15598), a pad, a POLY column north under the staircase metals
+# (no contact), a second pad, a metal that steps one track east and runs north to an end pad
+# on the east end of a poly row. No pad, contact or tap between the ends listed.
+#   lc1_w7780 (ga, line 11): lc1's poly row y 7780 from its port (6450,7780) east under eight
+#       tracks to its end pad (6819,7780); metal south on x 6819, west along y 8282 to a pad
+#       (6773,8323); poly column x 6775 south to a pad (6774,8625); metal south, the diagonal
+#       (6775,8692)-(6602,8865), track x 6602, arm y 9886, track x 6516, arm y 11923, track
+#       x 6343, arm y 12813, track x 6278, east along y 14483 to a pad (6364,14482); the poly
+#       row y 14480 east to a pad (7057,14480) (the row's WEST part: its east part, from the
+#       pad (7143,14481), is busl_x7122's, piece fe; field between); metal south on x 7058, a
+#       jog east at y 14588, south on x 7100 out of the region at (7100,15000) to a pad
+#       (7100,15175); a poly leaves the pad south and turns east as a row y 15218 (drawn to
+#       x 7170; it runs on east under ck_out's track toward bc1's rail x 7292-7342).
+#   busl_x6559 (gb, line 12): a poly row y 7258 from the west (drawn 60 px) to its end pad
+#       (6861,7257); metal south on x 6861, west along y 8320, south on x 6818 to a pad
+#       (6817,8408); poly column x 6818 south to a pad (6818,8668); metal south, the diagonal
+#       (6818,8716)-(6646,8888), track x 6646, arm y 9928, track x 6559, arm y 11967, track
+#       x 6386, arm y 12857, track x 6322, east along y 14440 to a pad (6407,14437); the poly
+#       row y 14437 east out of the region at x 7550.
+#   busl_x6603 (gc, line 13): a poly row y 7300 from the west (drawn 60 px) to its end pad
+#       (6904,7301); metal south on x 6905, west along y 8364 to a pad (6861,8366); poly column
+#       x 6861 south to a pad (6861,8710); metal south, the diagonal (6861,8737)-(6689,8909),
+#       track x 6689, arm y 9970, track x 6602, arm y 12010, track x 6430, arm y 12899, track
+#       x 6365 south to a pad (6365,14394); the poly row y 14393 east out at x 7550.
+# Scan: cache/scratch/busl/h12_scan.txt; flagged crossings on tiles h12_t1..t3.png.
+# =====================================================================================
+# ga: lc1_w7780
+P 6445,7780 x6800 w=20                # lc1's row on east from its port, under eight tracks, no contact
+P 6797,7761:6836,7798                 # its end pad
+C 6819,7780 s=24x24
+M 6819,7778 y8282 x6773 y8322 w=14
+P 6755,8304:6792,8342                 # pad at the head of the poly column
+C 6773,8323 s=24x24
+P 6775,8321 y8627 w=22                # poly column south under the staircase metals
+P 6756,8606:6793,8644                 # the pad at the head of the diagonal
+C 6774,8625 s=24x24
+M 6775,8623 y8692 6602,8865 y9886 x6516 y11923 x6343 y12813 x6278 y14483 x6366 w=14
+P 6346,14464:6382,14500               # the foot pad, the west end of the row
+C 6364,14482 s=24x24
+P 6364,14480 x7057 w=22               # the row y 14480, west part
+P 7040,14463:7074,14497               # its east end pad
+C 7057,14480 s=24x24
+M 7058,14478 y14588 x7100 y15177 w=14
+P 7083,15157:7117,15195               # the end pad south of the region
+C 7100,15175 s=24x24
+P 7100,15190 y15218 x7170 w=22        # the pad's poly: south, then east as a row y 15218 (drawn 70 px)
+N P 6600,7780 lc1_w7780
+N M 6819,8000 lc1_w7780
+N P 6775,8480 lc1_w7780
+N M 6516,11000 lc1_w7780
+N P 6700,14480 lc1_w7780
+N M 7100,14800 lc1_w7780
+# gb: busl_x6559
+P 6861,7258 x6800 w=22                # the row y 7258 on west (drawn 60 px)
+P 6843,7239:6880,7276                 # the end pad
+C 6861,7257 s=24x24
+M 6861,7255 y8320 x6818 y8410 w=14
+P 6799,8389:6836,8427                 # pad at the head of the poly column
+C 6817,8408 s=24x24
+P 6818,8406 y8670 w=22                # poly column south under the staircase metals
+P 6800,8649:6837,8687                 # the pad at the head of the diagonal
+C 6818,8668 s=24x24
+M 6818,8666 y8716 6646,8888 y9928 x6559 y11967 x6386 y12857 x6322 y14440 x6409 w=14
+P 6388,14420:6424,14455               # the foot pad, the west end of the row
+C 6407,14437 s=24x24
+P 6407,14437 x7550 w=22               # the row y 14437 east to the region's edge
+N P 6820,7258 busl_x6559
+N M 6861,8000 busl_x6559
+N P 6818,8540 busl_x6559
+N M 6559,11000 busl_x6559
+N P 7300,14437 busl_x6559
+# gc: busl_x6603
+P 6904,7300 x6845 w=22                # the row y 7300 on west (drawn 60 px)
+P 6886,7283:6923,7320                 # the end pad
+C 6904,7301 s=24x24
+M 6905,7299 y8364 x6859 w=14
+P 6843,8347:6880,8385                 # pad at the head of the poly column
+C 6861,8366 s=24x24
+P 6861,8364 y8712 w=22                # poly column south under the staircase metals
+P 6843,8691:6880,8729                 # the pad at the head of the diagonal
+C 6861,8710 s=24x24
+M 6861,8708 y8737 6689,8909 y9970 x6602 y12010 x6430 y12899 x6365 y14396 w=14
+P 6347,14376:6383,14412               # the foot pad, the west end of the row
+C 6365,14394 s=24x24
+P 6365,14393 x7550 w=22               # the row y 14393 east to the region's edge
+N P 6860,7300 busl_x6603
+N M 6905,8000 busl_x6603
+N P 6861,8540 busl_x6603
+N M 6602,11000 busl_x6603
+N P 7300,14393 busl_x6603
