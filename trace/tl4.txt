@@ -826,3 +826,34 @@ M 4732,2938:4967,2997
 M 4732,2990:4775,3004
 M 4949,2500:4967,2960
 M 4910,2500:4967,2507
+
+# ================================================================ run 11: tl4_w4590 is tc2_sr_g
+# tl6 ends tl4_w4590's metal x 6016 at its strip's foot (6016,6350); lc1 starts the metal of tc2_sr_g
+# on the same x at (6016,6900). Between them it is one metal, x 6008-6024, over the eight poly rows of
+# the band y 6350-6720 and one at y 6840, with no pad and no contact (tools/tl5_tracks.py v 6016 6340
+# 6910: no stretch without metal over 16 px; c1.png). So the two names are one net.
+M 6016,6350 y6900 w=16
+@alias tc2_sr_g tl4_w4590
+
+# ---- tc2_sr_g in the bottom-centre logic: busl's track x 7187 ends at y 15000. It runs on south to a
+# corner at y 15480, west to x 7103, south to a pad (7100,16303), under the wide bus metal as a poly
+# column to a pad (7100,16432), on south to a corner at y 17262, west to x 7058, south to a corner at
+# y 17908 and east to a pad (7426,17908); a poly row y 17897-17917 runs east under the supply rail to a
+# pad (7641,17908); a metal runs on east to a corner (8018,17904), north 40 px and east along y 17864
+# to a pad (8317,17863), where it ends (the pad's poly goes on: port). No other pad, contact or branch.
+M 7187,15000 y15480 x7103 y16303 w=14
+N M 7187,15200 tc2_sr_g
+P 7084,16287:7117,16320
+C 7100,16303
+P 7100,16303 y16432 w=18
+P 7084,16416:7117,16449
+C 7100,16432
+M 7101,16432 y17262 x7058 y17908 x7426 w=14
+P 7409,17892:7443,17925
+C 7426,17908
+P 7426,17907 x7641 w=20
+P 7624,17891:7658,17925
+C 7641,17908
+M 7560,17908 x8018 y17864 x8317 w=12
+P 8300,17847:8334,17880
+C 8317,17863

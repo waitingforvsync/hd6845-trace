@@ -56,3 +56,7 @@ c4l_gab   M  4922-4936,6350  ?    the thin metal x 4929, on south past its pad (
 vss         M  4667-4715,6350  -    RA's leg, on south
 vcc         M  4754-4801,6350  -    RB's leg, on south
 vss         M  4841-4888,6350  -    RC's leg, on south
+tc2_sr_g    M  6008-6024,6350   in   onto tl6's metal of tl4_w4590 from the pad (6016,6150): one net with tc2_sr_g (alias)
+tc2_sr_g    M  6008-6024,6900   out  onto lc1's metal of tc2_sr_g (latch D's enable)
+tc2_sr_g    M  7180-7194,15000  in   busl's track x 7187, on north
+tc2_sr_g    P  8334,17853-17873 ?    the poly east of the pad (8317,17863): a bend to a pad at about (8378,17863) (a track north, a poly row east); not read

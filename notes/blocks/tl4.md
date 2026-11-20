@@ -7,6 +7,36 @@ RA (x 4728-4775), loads between RA and a second rail RB (x 4905-4950).
 
 ## Status
 
+2026-11-20 12:24 -0600, eleventh run (Matt Godbolt's session, Claude Fable 5.2): **the net `tl4_w4590` is
+`tc2_sr_g`.** The queue asked for the driver of `tl4_w4590` (five gate loads in the top-left logic, no
+driver). Its three long pieces have no missed tap; the net's way out is the metal x 6016 that `tl6` ends
+at the foot of its strip, (6016,6350). That metal runs on south 550 px over the nine poly rows of the
+band y 6350-6900 with no pad, and at (6016,6900) it is the metal that `lc1` draws as `tc2_sr_g`
+(`tools/tl5_tracks.py v 6016 6340 6910`: no stretch without metal over 16 px in both chips; view
+`cache/scratch/tl4/c1.png`). So the two are one net (`@alias tc2_sr_g tl4_w4590`), with ten gate loads:
+the five here, the two units of `lc1`'s latch, the two gates of `tc2`'s latch and row 2 of `eof`'s gate
+at (7576,7718). **Still no driver.** Five equations change the name of one input and nothing else:
+
+```
+tl1_w3636 = NOR(rst_ck, tc2_sr_g)                    tl3_w4978 = NOR(rst_ck, tc2_sr_g)
+tl3_w3373 = NOT tc2_sr_g                             tl4_w4545 = NOR(rst_ck, tc2_sr_g, tla_w3417)
+tl4_w4686 = NOT((tc2_sr_g & tl5_w3245) | tl4_w4850)
+```
+
+**The net's last open end is followed into the bottom-centre logic** (wiring, 3,900 px, no transistor):
+`busl`'s track x 7187 runs on from y 15000 to a corner at y 15480, west to x 7103, south to a pad
+(7100,16303), under the wide bus metal as a poly column to a pad (7100,16432), south to a corner at
+y 17262, west to x 7058, south to a corner at y 17908, east to a pad (7426,17908); a poly row runs east
+under the supply rail to a pad (7641,17908); a metal runs east to a corner (8018,17904), north 40 px and
+east along y 17864 to a pad (8317,17863), where it ends. Every straight piece passes the two-chip metal
+test with bars of 14 px or less (row crossings); the five pads are rings with a bright centre
+(`textmap.py`; the pad (8317,17863)'s centre is weak in chip 1); the follower's candidates on x 7103 at
+y 15596-15660 have no ring. At y 17262 this track turns west 40 px north of the other net's corner
+(7144,17305)-(7103,17304): bare ground between them at x 7103, y 17270-17295 (`px.py col 7103 17240
+17320 5`). From the pad (8317,17863) a poly goes on east by a bend to a second pad at about (8378,17863),
+which has a track north and a poly row east: **not read**; the driver is to be looked for there, in the
+right gate group of the bottom-centre logic (`bc3`).
+
 2026-11-18 15:39 -0600. **Everything in the strip is drawn** (nine units, 47 transistors, and the wiring
 around them). Last piece, tenth run: **RA's supply**: the wide foot along y 2938-2997 runs into
 RA's top end, and a wide vertical metal on the strip's east edge (x 4949-4995) takes it north
@@ -1255,6 +1285,11 @@ Round 11: no findings that change a connection.
 
 ## Not done
 
+- **The driver of `tc2_sr_g`** (= `tl4_w4590`): beyond the pad (8317,17863), a poly east by a bend to a pad
+  at about (8378,17863) with a track x 8375-8395 north (the follower from (8384,17820) ends (8152,16734)
+  by corners at (8109,17342) and (8147,17342); not read) and a poly row y 17855-17875 east. The net's
+  other open ends, in other packages' ground: `eofw`'s poly east of the corner pad (7446,8732) into
+  `cdp3`'s gate column.
 - West of x 4250 (`tl3`'s strip): where the rows of `tl4_w4590` at y 2810, of `tl5_w4937` at
   y 2641 and the metals of bus lines 1 (y 2512) and 5 (y 2685, with its pad (4236,2683)) go;
   the rows y 5457 and y 5718.
