@@ -1,9 +1,9 @@
 # bl0: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
 res_b        M  6359-6373,15000   in   busl's track x 6366
 lpstb_b      M  6401-6415,15000   in   busl's track x 6408
-bl0_w15088   P  6450,15078-15098  ?    poly row on east from the pad (6320,15088), seen to x 6790
+bl0_w15088   P  7280,15078-15098  out  rst_n's poly row on east: a gate band under bc1's rail x 7292-7342 at y 15088, ending at about x 7350
 bl0_w15088   P  5700,15078-15098  ?    poly row on west to a pad (4909,15088); a track x 4909 from the north ends there
-bl0_w15088   M  5750-5764,15700   ?    thin metal south from the pad (5755,15088), followed to about (5762,15768)
+bl0_w15088   P  5725-5745,15800   out  rst_n's poly column south of the pad (5737,15759), into the bottom-left logic
 bl0_w15412   M  2694-2706,15972   out  the thin metal x 2690-2710 north of the pad (2700,15999): believed the MA cells' force line (a tab to mal_frc_m9's pad at y 15578 seen)
 bl0_w15412   M  2694-2706,16026   out  the same thin metal, on south of the pad
 vss          M  6013-6067,15800   -    the U's left arm runs on south

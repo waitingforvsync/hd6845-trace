@@ -44,8 +44,11 @@ C 5755,15088 5932,15088 6320,15088
 P 5740,15075:5770,15101                            # west pad; its poly row runs on west (port)
 P 5700,15088 x5755 w=20
 P 6305,15075:6336,15101                            # east pad; its poly row runs on east (port)
-P 6320,15088 x6450 w=20
-M 5757,15088 y15700 w=14                           # thin metal south from the west pad (port; followed to a pad at about (5760,15765))
+P 6320,15088 x7280 w=20                            # on east under the tracks to bc1's rail x 7292-7342, where it is a gate (port at x 7280; piece w8)
+M 5757,15088 y15761 x5737 w=14                     # thin metal south from the west pad onto a pad (5737,15759) (piece w8)
+P 5720,15742:5753,15776                            # pad
+C 5737,15759
+P 5735,15759 y15800 w=20                           # its poly column south, under the horizontal metals y 15800, 15850 (port at y 15800)
 P 5916,15073:5948,15101                            # middle pad
 P 5935,15088 y15380 w=22                           # poly column x 5924-5946 south under res_b's and lpstb_b's metals to G1
 N M 6100,15090 bl0_w15088

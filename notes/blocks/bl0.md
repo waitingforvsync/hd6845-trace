@@ -7,6 +7,18 @@ metal-shot pixels. Evidence: `cache/scratch/bl0/` (`survey.md` holds every measu
 
 ## Status
 
+Run 8 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 11:28 -0600). One piece of wiring, no transistor, no
+uncertain item: the two other ends of `rst_n`'s line (`bl0_w15088`).
+
+- **Piece `w8`** (wiring, 1,000 px). East: the poly row y 15078-15098 runs on from the pad (6320,15088)
+  under the tracks to x 7280 and on under `bc1`'s rail x 7292-7342, where it is salmon across the rail and
+  ends at about x 7350: a gate of `bc1`'s undrawn column (port). South: the thin metal from the pad
+  (5755,15088) ends on a pad (5737,15759), and a poly column goes on south from it under the horizontal
+  metals at y 15800 and 15850 into the bottom-left logic (port).
+- The thin metal x 2690-2710 of `bl0_w15412` (run 7) was looked at again at 6.5x in four shots: it runs
+  over a diffusion strip of its own width at y 15845-15895 and is at the photos' limit there. It is part
+  of the left column's cells (`larr`'s open work) and is left to that package.
+
 Run 7 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 11:16 -0600). One piece of wiring, no transistor, no
 uncertain item; reviewed (round 9: no findings): `bl0_w15412` (the fourth copy of the reset) to the left array's left column.
 
@@ -478,6 +490,21 @@ two-chip metal test fails on long stretches of it (`tl5_tracks.py v 2697 14700 1
 y 15852-15900 reads at bare-ground level in chip 2, and at y 15392-15470 it is dim and 6 px west. So
 whether `bl0_w15412` reaches `mal_frc_m9` by one metal is not established.
 
+### Piece `w8` (run 8): the other ends of `rst_n`'s line
+
+East of the pad (6320,15088) the poly row y 15078-15098 runs on under the track bundle and the tracks
+beyond it (a scan of the clean shot along y 15088 finds only short bars at the tracks; views `r8c.png`,
+`r8d.png`), in the open at x 6850-7280, and under the rail x 7292-7342 of the bottom-centre logic, where
+it is salmon across the whole rail and ends at about x 7350 (`px.py row 15088 7270 7372 6`). Under a
+rail of that gate column a poly row is a gate band: `rst_n` gates a pull-down of `bc1`'s column at
+y 15088. Drawn to x 7280.
+
+South, the thin metal x 5750-5764 from the pad (5755,15088) runs 670 px (`follow.py 5757 15600 S` and
+`N`: ends (5762,15768) and (5757,15088), no candidate) to a pad (5737,15759) that lies under its west
+edge (ring and bright centre in both chips, a hole in the clean shot: `textmap.py 5716 15738 5772 15780
+3`). A poly column x 5725-5745 goes on south from the pad under the two horizontal metals at y 15800 and
+15850 (view `r8e.png`). Drawn to y 15800, the foot of this package's region.
+
 ## Ports
 
 | Name | Layer | Where | Direction | Note |
@@ -489,9 +516,9 @@ whether `bl0_w15412` reaches `mal_frc_m9` by one metal is not established.
 | `bl0_w17610` | P | (7760, 17378-17398) | out | poly row west of the pad (7882,17389), into the gate column east of the supply rail |
 | `vss` | M | (7292-7342, 16925) | - | the gate column's rail, on north; it ends at y 17755 |
 | `vcc` | M | (7470-7520, 17020), (7470-7520, 17670) | - | `bc3`'s rail x 7495 |
-| `bl0_w15088` | P | (6450, 15078-15098) | ? | poly row on east from the pad (6320,15088), seen to x 6790 |
+| `bl0_w15088` | P | (7280, 15078-15098) | out | `rst_n`'s poly row on east: a gate band under `bc1`'s rail x 7292-7342, ending at about x 7350 |
 | `bl0_w15088` | P | (5700, 15078-15098) | ? | poly row on west to a pad (4909,15088); a track x 4909 from the north ends there |
-| `bl0_w15088` | M | (5750-5764, 15700) | ? | thin metal south from the pad (5755,15088), followed to about (5762,15768) |
+| `bl0_w15088` | P | (5725-5745, 15800) | out | `rst_n`'s poly column south of the pad (5737,15759), into the bottom-left logic |
 | `bl0_w15412` | M | (2694-2706, 15972), (2694-2706, 16026) | out | the thin metal x 2690-2710 through the pad (2700,15999), on north and on south: believed the force line of the MA cells |
 | `larr_l0_g0` | D | (2876, 14105-14122) | in | the diffusion wire is one piece with the box of `larr`'s contact (2893,14114) |
 | `larr_cin_s7` | P | (2850, 14559-14574) | out | onto `larr`'s poly row y 14566 |
@@ -835,9 +862,8 @@ Round 9: no findings.
   stretch y 15392-15470; a short metal y 15860-15870 from x 2720 east), south past y 16136 towards
   `mal_frc_m10` (2729,16278), and how the other twelve pads are fed. It lies in `mal`'s and `larr`'s
   region.
-- `bl0_w15088`: its west row to the pad (4909,15088) and the track x 4909 north (follower: to
-  (4908,10660), contact candidates (4908,11984), (4908,10699)); its thin metal south of y 15700 (a pad
-  at about (5760,15765)); its poly row east of x 6450 (seen past x 7000).
+- `rst_n` (`bl0_w15088`) beyond this package: the gate under `bc1`'s rail at (7292-7342, 15088), and the
+  poly column south of y 15800 at x 5725-5745 (the bottom-left logic, `bl1`/`bl2`).
 - Both rails of the gate group south of y 15800; the rest of the master-list row's region (the bus
   wiring x 4780-5850, the tracks x 6452-6841, the gate group south of y 15800).
 
