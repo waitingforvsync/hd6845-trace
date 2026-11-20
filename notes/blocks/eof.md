@@ -4292,6 +4292,29 @@ of the drawn rectangle (outside the piece: Not done).
 
 Round 29: one finding, fixed (a port added: the ground diffusion leaves the piece east; no geometry changed).
 
+### Round 30 (fix check of round 29's change; 2026-11-20, after commit 9949dbb, against 9789a76)
+
+A fresh reviewer (Claude Fable 5.2), told the one finding and the fix (the port `vss` D (8368, 17452-17466);
+only a comment changed in the trace) and to compare whole patches with a known field band and with open
+diffusion. 6 images in `cache/scratch/eof/review-30/`. It found: the slot is diffusion (red minus green at
+the band's brightest rows, x 8380-8400, y 17458-17460: 19 / 11 / 5 in the chip-2 stripped shot against -2 to
+-11 for the field band and 21 for the north neck; 27-40 in the clean shot against -8 to 13 and 31-55; chip 1's
+metal shot 26-42 against 18-26; `eof_patch.py`: slot 10.7 / 20.6, field -2.1 / 7.0, the open strip
+14.0 / 32.2); the mouth at x 8368 is open (clean shot, row 17458: tan to x 8368 with no outline, like the
+neck's row 17362; rows 17410, 17436 and 17484 have the poly's red outline at x 8364-8366); the port's place
+is right (the band's dark lines at y 17450-17452 and y 17466-17468, its colour ending at x 8404-8408);
+`tools/ports.py --near` shows the new port meeting no other. One remark, geometry only and outside what is
+drawn: in the clean shot the poly at x 8382 is bright over y 17428-17440 and y 17476-17492 and dark on the
+legs proper, so the diffusion probably also passes x 8368 under the two arm rows as gate area (one shot; it
+would widen the same two transistors): added to Not done for the east side.
+
+```
+tools/t.sh eof sameconn.py 9789a76              connections identical
+.venv/bin/python tools/sameconn.py 9789a76      connections identical
+```
+
+Round 30: no findings.
+
 ## Not done
 
 - **Task 2, the loads of `sl_eq_r5_n` (= NOT `sl_eq_r5`)**: one load is drawn (piece `r5nor`,
@@ -4378,7 +4401,9 @@ Round 29: one finding, fixed (a port added: the ground diffusion leaves the piec
   ground, free; read, not drawn: the second table of piece `g174`, with every coordinate and the command that
   gave it). In order: (a) the ground finger between the arms (y 17454-17464, from the rail's edge to about
   x 8408) and the box at the arms' ends (Ambiguity 85, reading (4)): the finger's end and the field pocket
-  between the arm ends at 6x in four shots, measured over whole patches and not single rows (review round 29),
+  between the arm ends at 6x in four shots, measured over whole patches and not single rows (review round 29;
+  round 30: the active area probably also passes x 8368 under the two arm rows, y 17428-17440 and
+  y 17476-17492, where the poly at x 8382 is bright in the clean shot),
   and against a buried contact whose poly is certain (`bc1`'s `B 8271,15150:8308,15184` is in the open);
   (b) the load: the plate x 8455-8500, y 17355-17445, its hook and
   box (8460-8478, 17330-17348), the diffusion under the VCC rail east of it and that diffusion's contact;
