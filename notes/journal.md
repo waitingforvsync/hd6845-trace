@@ -2703,3 +2703,42 @@ or outputs changes; the six lines' identity is believed only). Floor plan: no co
 `out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 794
 floor-plan blocks. Coverage: 70.3% traced; in some package region 99.9%; untraced and in no Queue row
 0.4%. Not done here: the refresh (the header counts of `notes/operation.md` are the twelfth refresh's).
+
+## 2026-11-20 23:48  Handoff: `regs` run 4, the seventh row's wire is a reset copy
+
+The loop's second tracer (a fresh Fable 5.2 agent, high effort) took `regs`, the first free Queue row
+with work in its own region (`tlb` has none left): claimed 23:05, merged ffe5906 at 23:44, claim
+released. One handoff file. Full extraction after it 2,462 nets, 4,594 transistors, 0 errors,
+0 warnings; 914 of 1,354 equations firm; 96 nets joined only through uncertain items (1,135 items): no
+count changes, the wire lies on a net that exists. Spot checks of the overlays: the wire's west end
+(the corner (5845,16713), the pad (5909,16800), the band under the rail x 6008-6055) and its east end
+(the diagonal, the pad (10484,17994), the track x 10485) (`cache/scratch/refresh/h5_w8450_w.png`,
+`h5_w8450_e.png`): the drawn shapes lie on the features.
+
+What it establishes (from the tracer's notes; marks as there):
+
+- **The "seventh row's wire" on the bottom bus is `lc2_w8450`, a reset copy, not a register's wire**
+  (piece `w8450`; wiring, firm: thirteen pads, six poly links, no uncertain item): from `bl0`'s port
+  (4930,16713) through the bottom-left logic, where it ends as a band under the rail x 6008-6055
+  (believed the gate of one pull-down; the unit is not traced), and from a pad on that row by the
+  track x 6408 and the bottom bus row y 18125 to the thin track x 10485 beside the bottom-centre
+  logic's east gate column, drawn north to y 17760. Its loads there are open.
+- The earlier reading of that row ("north on x 6711, `bd1_n2`'s track") was the follower jumping
+  8-10 px of bare ground from the row's end pad (trap 30; R26 has the method; it was in notes only).
+
+One review round (round 5): no finding that changes a connection; three geometry or notes findings
+fixed (`tools/sameconn.py`: connections identical). **Not reached**: the ninth row y 17648, claimed in
+this run; it stays in the `regs` row.
+
+Applied: master list rows `regs` (run 4; what is left), `bc2`-`bc4` (the track x 10485 and its
+loads), `bl1`/`bl2` (the pull-down under the rail x 6008-6055). **Re-read list**: nothing new.
+**Ambiguities**: none. Corrections section in `bl0`'s notes; the glossary's row `lc2_w#` says where the
+second branch goes. `notes/operation.md`: the tracer's paragraph after "Reset from the pins" stands.
+Floor plan: the tracer's one route box covered the bottom-centre logic and is split in four
+(`floorplan.d/regs.txt`), as it proposed; the labels were not looked at. A new package tool,
+`tools/regs_polyy.py`.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 798
+floor-plan blocks. Coverage: 70.4% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%. Not done here: the refresh. Next in the loop, at the user's word (2026-11-20 23:38): `busl`,
+continued on its own branch by the loop's tracer.

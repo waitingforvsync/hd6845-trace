@@ -1317,3 +1317,7 @@ Round 14: no findings.
 - Run 2, "three tracks x about 7050, 7095, 7140": the tracks east of the bundle are at about x 6965, 7055, 7100 and 7188 (review round 10).
 - Run 6, "a metal of another net lies along `bl0_w17687`'s row, x 7545-7845": that metal is the buffered clock, `ck_out` (`tl4` runs 11-12: the branch from the pad (7641,17908) along y 17824 to the track x 7840).
 - The track x 7100 south of y 15000 beside this block's tracks is `lc1_w7780` (`busl` run 12: to an end pad (7100,15175) and a poly row y 15218 east); the track x 7103 further south (pads (7100,16303) / (7100,16432)) is the clock's (`tl4`).
+
+## Corrections (coordinator, from the handoff of `regs` run 4, 2026-11-20)
+
+- Not done ("Beyond this package: ... `lc2_w8450`'s poly row east of x 4930") and the Ports row (4930, 16703-16723) "into the bottom-left logic": the row is drawn on from there by `regs` (run 4, piece `w8450`): one poly to a corner (5845,16713) with no tap on the way, then to a gate band under the rail x 6008-6055 and, from a pad (5909,16800), by the track x 6408 and the bottom bus row y 18125 to the thin track x 10485 beside the bottom-centre logic's east gate column.
