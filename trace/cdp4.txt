@@ -445,3 +445,54 @@ N M 10025,11510 cdp4_in8b_s6
 N M 10416,11510 cdp4_in8b_s7
 D 10722,11623:10751,11797           # VSS land under the ninth rail for the s7 cell of row R1
 C 10745,11652 s=28x40
+# ======================================================================
+# Corner gate group, x 7550-7870, y 13640-14055 (run 2, 2026-11-19): cdp4_rst = NOR of six
+# select rows. Three VSS pockets on the column under the VSS rail, each between two gates and
+# closed on the east by a field island; the diffusion around them is the output.
+# ======================================================================
+M 7622,13640 y14050 w=46              # the s0 VSS rail on south over the column
+M 7837,13520 y13570 x7795 y14050 w=46 # the s0 VCC rail: bends west at y 13547-13593, then south
+C 7610,13720 7610,13838 7610,13995    # VSS onto the three pockets
+D 7584,13660:7707,14055               # the column and its east part, up to the islands' west edges
+D 7700,13660:7747,13677               # top strip east to the bus
+D 7727,13660:7747,13785               # bus, north stretch
+D 7700,13773:7757,13790               # neck between rows 2 and 3, east to the bus
+D 7738,13780:7757,13950               # bus, middle stretch (east of the second island)
+D 7700,13895:7757,13947               # the big segment east to the bus (under the box)
+D 7730,13945:7757,14055               # bus, south stretch
+D 7700,14042:7757,14055               # bottom strip
+D 7540,13905:7590,13940               # the big segment west into the box
+# gates: row and head
+P 7550,13678:7578,13712               # row 1's block at the step (busl's row y 13701 ends on it)
+P 7545,13688 x7665 w=22
+P 7660,13681:7715,13707
+N P 7600,13688 rsel14_buf
+P 7550,13732:7578,13770               # row 2's block at the step
+P 7570,13759 x7665 w=22
+P 7660,13742:7715,13767
+N P 7600,13759 rsel13_buf_u
+P 7545,13803 x7665 w=22
+P 7660,13797:7715,13822
+N P 7600,13803 rsel17_buf
+P 7545,13873 x7665 w=22
+P 7660,13857:7722,13882
+N P 7600,13873 rsel12_buf_u
+P 7545,13958 x7665 w=22
+P 7660,13953:7712,13980
+N P 7600,13958 rsel16_buf
+P 7545,14004 x7562 w=22                # busl's row y 14004 on to the step
+P 7552,14010:7580,14040               # row 6's block at the step
+P 7570,14028 x7665 w=22
+P 7660,14007:7715,14035
+N P 7600,14028 rsel15_buf
+# output: buried contact of cdp4_rst's poly in the west box
+P 7528,13906:7562,13929
+B 7538,13904:7564,13931
+N P 7550,13917 cdp4_rst
+# load: gate tied to the bus by the east box, drain on VCC
+D 7775,13825:7823,13977
+D 7750,13961:7780,13975               # the passage from the bus to the load's source
+C 7798,13850 s=22x36
+P 7733,13912:7768,13935
+P 7760,13900:7833,13937
+B 7731,13910:7759,13937

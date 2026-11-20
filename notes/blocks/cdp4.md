@@ -13,6 +13,10 @@ channel 1 bus lines, rows A and B (4-way pass-transistor selector per slice), ro
 (row C latch inputs from the left, selector output to the right), row D (6-bit latch
 row under s1..s6, selector source c of s2..s7), supply rails for y 11480-14062.
 
+Run 2 (2026-11-19): **the corner gate group** (x 7550-7870, y 13640-14055; 7 transistors, no
+uncertain item): `cdp4_rst` = NOR of six select rows with one load. With every file loaded the
+extraction is 2380 nets, 4369 transistors, 0 errors, 0 warnings. See "Corner gate group" under Logic.
+
 Not traced: the upper half of row R1 (y 11100-11490: source of the 6-bit a inputs, of
 the bus taps and of the in tracks of the R1 latch), the wiring right of x 10600 and
 below y 14060.
@@ -179,6 +183,54 @@ would be one such pair, the R1 latch (8 bit) and the 6-bit a source above it the
 registers. None of this is traced; the sources of sel1..sel4, rst, ld and the in lines
 lie left of x 7600.
 
+### Corner gate group: `cdp4_rst` = NOR of six select rows (run 2, 2026-11-19; traced)
+
+Region x 7550-7870, y 13640-14055, left of row D. One gate, seven transistors:
+
+`cdp4_rst` = NOR(`rsel14_buf`, `rsel13_buf_u`, `rsel17_buf`, `rsel12_buf_u`, `rsel16_buf`, `rsel15_buf`)
+
+So the selector's nodes `cdp4_n_s#` are pulled low whenever none of the six rows is high. Four of
+the rows are the read selects of R14-R17 (firm, joined through `busl`'s rows at x 7550). The other
+two, y 13759 and y 13873 here (`busl`'s undrawn rows y 13744 and y 13852), are named as open joins
+of `rsel13_buf` and `rsel12_buf` on the strength of `regs` run 3 (taps at (6492,13744) and
+(6450,13852), read, not drawn): **believed**. If that holds, `cdp4_rst` is high exactly when none
+of R12-R17 is being read.
+
+Layout (unlike the cells of the rows):
+
+- The s0 VSS rail (x 7599-7645) runs on south over a diffusion column x 7584-7655, y 13660-14055,
+  with three contacts: (7610,13720), (7610,13838), (7610,13995).
+- Six poly rows cross the column, two round each contact: centres y 13688, 13759, 13803, 13873,
+  13958, 14028 (clean shot, column x 7635). East of the rail each row ends in a head x 7660-7715.
+  Each is one pull-down, W about 128, L 23.
+- The three diffusion pockets that carry the contacts (between rows 1-2, 3-4, 5-6) are closed on
+  the east by three field islands at the heads' ends: closed loops x 7707-7727 y 13677-13775,
+  x 7707-7737 y 13790-13893, x 7700-7728 y 13950-14045. So the pockets are VSS.
+- Everything else inside the outline is one diffusion, the output: a strip above row 1
+  (y 13660-13677), a neck between rows 2 and 3 (y 13773-13790), the big segment between rows 4 and
+  5 (y 13885-13947) and a strip below row 6 (y 14042-14055), joined along the east by a bus
+  x 7727-7747 (north of y 13780) and x 7738-7757 (south). The outline is a single thin line in the
+  chip-2 shots: the diffusion's edge.
+- Load: a diffusion box x 7775-7823, y 13825-13977 under the s0 VCC rail (which bends west at
+  y 13547-13593 from x 7815-7859 to x 7772-7818 and runs on south), contact ring (7798,13850), gate
+  poly y 13900-13937, W 48, L 37. The gate's west end is a tongue (7733-7765, 13912-13935) in a box
+  (7722-7760, 13905-13945) on the bus: a buried contact, gate tied to the output. The load's
+  source joins the bus by a passage y 13961-13972 at x 7750-7780: the outline comes south at
+  x 7757, turns round at (7757-7775, 13958) and goes back north as the load box's west edge, so the
+  bus and the load's diffusion are on the same side of one line (`px.py col 7760 13940 13990 3
+  acid,acid1b,metal1`: dark at y 13955-13958 and 13973-13979, light at 13961-13970 in the chip-2
+  stripped shot and in chip 1's metal shot).
+- Output: the big segment goes on west of the column into the box (7537-7582, 13903-13940). The
+  column's west edge is a dark line at x 7581-7584 at the pockets (y 13722, 13840, 13998) in both
+  metal shots and the chip-2 stripped shot, and is absent at y 13920 (`px.py row 13920 7560 7604 3
+  metal,metal1,acid`: flat 175/135/88 from x 7572 to 7590). In the box the poly of `cdp4_rst`
+  (`busl`'s `P 7462,13906:7532,13927`) ends as a tongue: the same construction as the east box,
+  mirrored. Drawn as a buried contact. This is reading (a) of AMB-038.
+
+Why the diffusion is on the inside of the outline: the load's box has a metal contact and a gate
+across it, so it is diffusion, and the outline's U-turn puts the bus on the same side. The
+islands are closed curves inside it, so they are the other class.
+
 ## Ports
 
 | Name | Layer | Where it crosses | Direction | What |
@@ -198,6 +250,9 @@ lie left of x 7600.
 | `wr_r15` | poly | y 11837; believed to cross x 7600 (ends not examined) | from outside | R1 latch strobe |
 | `cdp3_g_c2`..`s6` | metal | x 8073, 8465, 8855, 9245, 9635, 10025 at y 14059 (drawn end; continues down) | from outside (below) | data into the row D latch |
 | `cdp4_ld6` | metal | x 7947, y 13840 (drawn end; continues down) | from outside (below) | row D latch strobe |
+| `rsel14_buf`, `rsel17_buf`, `rsel16_buf`, `rsel15_buf` | poly | x 7550, y 13701, 13809, 13961, 14004 (`busl`'s row ends) | from outside | gates of the corner group's pull-downs 1, 3, 5, 6 |
+| `rsel13_buf_u`, `rsel12_buf_u` | poly | x 7550, y 13751 and y 13873 (blocks at the step; the rows go on west as `busl`'s undrawn rows y 13744, y 13852) | from outside | gates of pull-downs 2 and 4; open joins |
+| `cdp4_rst` | poly | (7532,13916), the end of `busl`'s poly | driven inside | output of the corner group |
 | `vss` | metal | x 7622, 8013, 8404, 8795, 9185, 9574, 9964, 10355, 10746 at y 11480; x 8013..10355 at y 14062; 7622 drawn to y 13650 | - | rails |
 | `vcc` | metal | x 7837, 8228, 8619, 9010, 9400, 9789, 10179, 10570 at y 11480; x 8228..10179 at y 14062; 7837 drawn to y 13530, 10570 to y 13650 | - | rails |
 
@@ -243,6 +298,17 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
    cell apply to them as well. In these two rows the n-track and c-track positions are
    used differently (see Logic).
 
+8. **The two open rows of the corner group** (run 2). Rows 2 and 4 are drawn from x 7550 east
+   only; west of that they are in `busl`'s region and not drawn there. Their names rest on `regs`
+   run 3's reading of two taps. `tc2_sr_g`'s track crosses row 2 at (7145,13728-13749) (AMB-039):
+   the group shows only that the row's east end is a gate and has no other contact, which does not
+   decide that crossing.
+9. **Marks not drawn** (run 2). A ring about 10 px across at (7558,13793) on the top edge of row 3,
+   under `cdp4_ld`'s thin metal, in the clean shot only: neither chip-2 shot nor chip 1's metal
+   shot has a contact ring there. A dark spot on the VCC rail at (7790,14026) and a green dot at
+   (7803,13965) in the chip-2 metal shot, with nothing under them in the clean shot. The tan strip
+   x 7835-7848 along the group's east side is the gap between two metals (`notes/layers.md`).
+
 ## Not done
 
 - **Row R1 upper** (y 11100-11490): not looked at beyond the survey. The a tracks
@@ -252,6 +318,8 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
 - Ends of `wr_r15` (poly, y 11837).
 - Right of x 10600: the n lines' contacts beyond x 10850, thin vertical metals at
   x 10795-10905, the end of the s7 VCC rail.
+- The corner group's rails south of y 14050, and the wide metal x 7860-7910, y 13650-14100 east
+  of the s0 VCC rail (with its band east along y 13650-13690), which is not followed.
 - Below y 14060: where the six in tracks of row D, `cdp4_ld6` and the rails go (fan-out
   at y 14060-14700). The s0 VCC rail's bend below y 13540 and the wide metal at
   x 7700-7990, y 13650-14060 left of row D. The s7 VSS rail between y 13300 and 13694.
@@ -280,3 +348,8 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
 
 - The strobe of row R1's lower half ("ends not examined") runs east as one poly row y 11824-11844 to a pad (11243,11830) on the write strobe of R15 (`regs` run 1, firm): **row R1's lower half is R15**. Its west end is at about (7603-7640, 11825-11850) (`busl` run 6).
 - The four selects are the read selects of R14-R17 (`regs` run 2, firm: sel1 R14's, sel2 R15's, sel3 R17's, sel4 R16's): the four-way selector is the read multiplexer of R14-R17. Source a is what R14 reads, row R1's lower half is R15, latch row C is what R17 reads, latch row D what R16 reads. The corner gate group takes two more select rows, y 13744 and y 13852 (believed R13's and R12's read selects, by taps at (6492,13744) and (6450,13852): `regs` run 3).
+
+## Review
+
+### Run 2 (corner gate group)
+
