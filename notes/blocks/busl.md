@@ -1337,7 +1337,8 @@ below (the follower is not the evidence for any of it).
   protected strips (`tools/px.py col 5520 14384 14456 3 metal,metal1`; `tools/textmap.py 5494 14424 5560
   14458 3 --acid`): apart. On line 1's arm chip 2 has a dark speck about 10 px across at (5514-5524,
   14433-14442); chip 1's metal is bright there and the clean shot protected pink without a hole: dirt, not
-  a contact (there is nothing under the arm to contact).
+  a contact (there is nothing under the arm to contact). The reviewer found a second such speck on chip 2 at
+  (5712,14437), on line 4's upper track: the same (chip 1 bright, the clean shot pink).
 - **The six pads are contacts** (`j2_pads.png`, 3.5x, both metal shots and the clean shot; overlay
   `j5_o_pads.png`, 3x, four shots): each has a dark ring and a bright centre in both metal shots, a pale
   pitted box in the chip-2 stripped shot and a cream pad with a pale greenish centre and dark specks in the
@@ -2403,6 +2404,51 @@ the long tracks x 6646, 6473, 6408 and 6948 between their ends (the two-chip tex
 east of x 7550; and the poly under metal rests mostly on chip 1's clean shot.
 
 Round 1: no findings that change a connection.
+
+**Run 14, pieces `a6` and `xn`. Round 1: full review** (2026-11-21 00:16 to 00:32 +0100; a fresh Fable 5.2
+reviewer agent, both pieces in one round; commit d56835e; images in `cache/scratch/busl/review-14/`, 20
+used). Told to suspect, for `a6`: a row that is two polys end to end, or that carries a pad or tap from
+one of the crossing tracks (read by the new text tool `tools/busl_roww.py` and on views at 1.65x and
+2.4x; only three crossings looked at above 3x); the join of each row to `bc1`'s line at x 7000 (`bc1`
+draws its lines 2-4 px further north); which pad each L ends on and the nest order; the corner of line 1
+at (5497,14441) against `cdp4_bus_s0`'s arm y 14398 on the same track position (trap 33); pads 1-4,
+where the metal arrives from the west (a poly leaving west under the arm; anything else leaving a pad);
+the dark speck on chip 2's metal at (5514-5524, 14433-14442); the continuity of each metal across
+y 15000 onto `bl0`'s. For `xn`: whether the row y 7388 east of x 6450 is the same poly as `lc1`'s and
+continuous to the pad (7076,7388); whether the lower pad (7077,8755) is a contact (vivid red centre in
+the clean shot, no green hole); whether the poly column touches either crossing metal or the leg beside
+it (the greenish patch at (7078-7090, 8704-8712)); whether the diagonal is the right one of three and
+lands on the track x 6906; the metal x 7078 over the rows at y 7544-7558 and y 7633-7664; the crossings
+of the track x 6906 with the rows y 9798 and y 10055; whether anything else leaves the pads (7076,7388)
+and (7077,8495).
+Checked, `a6`: the six rows from pad to x 7010 (`tools/busl_roww.py` and the reviewer's own edge-line
+scan every 2 px in four shots; metal at 3x and the clean shot at 3x and 2.6x: continuous poly, 22 px, no
+widening, no break; open stretches orange poly, chip-2 blue 55-57); no tap (`tools/tl5_tracks.py v`
+along all twenty-nine tracks: only the 8-13 px edge bars at every row; the clean shot's lows, strongest
+at (6841,14089) and (6711,14220), are row colour: no ring in either metal shot and no pad on text maps);
+the join to `bc1` (the same rows run straight through x 6950-7100); the jog of piece `fd` on row 6 at
+(7014-7058, 14308) (no contact: chip 1's darkness there is a stain, chip 2 bright, no hole); the six pads
+at 4x (ring and bright centre in both metal shots, a box in both stripped shots; pad 2 has no green hole
+in the clean shot but is pitted in chip 2; only the row and one metal leave each; field under the arms);
+the nest order and corners (every segment continuous in both chips; 73-90 px of bare ground between the
+two Ls that share a track position); line 1 against `cdp4_bus_s0` (apart: bare ground at y 14404-14433
+in both chips); the specks (5519,14438) and a second at (5712,14437) (chip-2 dirt; chip 1 bright, the
+clean shot pink); the metals across y 15000 to `bl0`'s corners; the extraction. `xn`: the row y 7388 (one
+poly from x 6300 to the pad, under twelve tracks, no pad or hole; field east of the pad); the pad
+(7076,7388) at 4x (a contact; nothing else leaves; 14 px of open ground to the track x 7120); the metal
+x 7078 (continuous over eight rows; the dim stretches at y 7544-7558, 7633-7664 and 8030-8039 are plain
+crossings); the pads (7077,8495) and (7077,8755) at 3.8x (both contacts; the lower has ring and centre
+in both chips and a pitted box in chip 2, and its metal joins the ring with no bare ground); the poly
+column (continuous; no ring, widening or hole under either crossing metal; the greenish patch is fringe;
+`ck_out`'s leg lies on field; `trunks`' pad at (7035,8538) is 6-9 px of ground away); the diagonal (the
+middle of three, x + y = 15922-15924 on eight cuts, landing on x 6906; followed both ways); the track
+x 6906 to y 10460 (the crossings at y 9798 and y 10055 at 5x: no ring, no pad).
+Findings: none. Nothing was changed after the review.
+Could not check: the chip-2 stripped shot is fringed under the track fields, so "no tap" rests on both
+metal shots and the clean shot; `a6`'s crossings were viewed at 3x and measured, not each at 4x; `lc1`'s
+row west of x 6300, `bc1`'s lines east of x 7100 and `bl0`'s tracks south of y 15330 were not re-read.
+
+Round 1: no findings.
 
 ## Not done
 
