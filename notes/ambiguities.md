@@ -769,7 +769,7 @@ gate group (`cdp4` (continue)).
 register read select: a further reason for (a). Still open until the row is drawn.
 **2026-11-20, later**: the row has a second dim crossing, `busl_x7122`'s track 87 px west (AMB-045); the resolution below stands.
 **2026-11-20**: `cdp4` (run 2) drew the row's east end: it is gate 2 of the NOR that makes `cdp4_rst`,
-with no other contact (the open join `rsel13_buf_u`). Under reading (b) latch D's enable would also be an
+with no other contact (the open join `rsel13_buf`). Under reading (b) latch D's enable would also be an
 input of `cdp4_rst`. Not settled: the row west of x 7550 is `busl`'s and is not drawn.
 **Resolved 2026-11-20 as reading (a), a plain crossing** (`busl` run 8, richtw1; reviewed, no findings):
 its "settled by" is met from the other direction. The row y 13744 is drawn end to end: it has a driver

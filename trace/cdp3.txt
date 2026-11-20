@@ -14,9 +14,9 @@
 
 # ---- gate lines: horizontal poly from the west edge, one per row, ending at slice s7
 P 7600,10057 x10664 w=20             # gates of the row E transistors
-N P 7610,10057 cdp3_gate_e
+N P 7610,10057 rsel12_buf
 P 7600,10317 x10664 w=20             # gates of the row F transistors
-N P 7610,10317 cdp3_gate_f
+N P 7610,10317 rsel13_buf
 
 # ---- row E transistor as it is in s3..s7: gate vertical, joined to the gate line below it
 @cell cdp3_e tag=c4
@@ -440,7 +440,7 @@ N P 9650,10757 wr_r13
 M 8076,9555 y10690 w=20
 N M 8076,9600 cdp3_bl_c1
 M 8466,9555 y10690 w=20
-N M 8466,9600 cdp3_bl_c2
+N M 8466,9600 db_b5
 M 8857,9555 y10690 w=20
 N M 8857,9600 cdp3_bl_c3
 M 9248,9555 y10690 w=20
@@ -726,7 +726,7 @@ C 7568,7958
 P 7313,7986:7614,8006                 # gate row, from the pad (7313,7995) to its rounded end east of the rail
 P 7296,7979:7330,8012                 # pad
 C 7313,7995
-N P 7450,7996 cdp3_w7996
+N P 7450,7996 lc2_w8646
 D 7488,8014:7556,8038
 D 7488,8014:7522,8052
 B 7486,8012:7524,8054
@@ -791,7 +791,6 @@ M 9248,7556 y8040 w=18
 M 9638,7556 y8040 w=18
 M 10028,7556 y8040 w=18
 M 10419,7556 y8040 w=18
-@alias db_b5 cdp3_bl_c2
 @alias cdp2_c_s3_bus cdp3_bl_c3
 @alias cdp2_c_s4_bus cdp3_bl_c4
 @alias cdp2_c_s5_bus cdp3_bl_c5
@@ -799,7 +798,7 @@ M 10419,7556 y8040 w=18
 @alias cdp2_c_s7_bus cdp3_bl_c7
 
 # ================================================================ piece ckb (2026-11-20): a wide inverter of ck_out
-#     cdp3_w7996 = NOT ck_out
+#     lc2_w8646 = NOT ck_out
 # West of the gate column, under the VSS rail (x 7552-7645 here) and the wide VCC metal (x 7682-7770):
 # one diffusion x 7547-7712, y 8660-8770. The poly of eofw's corner pad (7446,8732) (ck_out) enters from
 # the west along y 8722-8745, turns north at x 7625-7648 and east along y 8678-8698: it parts the top-left
@@ -833,5 +832,4 @@ N M 7726,8650 vcc
 D 7530,8750:7550,8764                 # neck west from the node
 D 7497,8750:7535,8790
 B 7495,8762:7533,8792
-P 7400,8768:7522,8790                 # poly row west onto the pad (7400,8778): U1's input net cdp3_w7996
-@alias lc2_w8646 cdp3_w7996
+P 7400,8768:7522,8790                 # poly row west onto the pad (7400,8778): U1's input net lc2_w8646

@@ -114,10 +114,10 @@ busl_x6906   M  6834-6848,15000    ?   on south into bl0's ground; follower ends
 # pieces r12, r13 (run 8): the read selects of R12 and R13
 rsel12_buf   M  6445-6459,15000    in  onto regs' metal from the bottom bus (sel's buffer); track x 6452
 rsel13_buf   M  6487-6501,15000    in  onto regs' metal from the bottom bus; track x 6494
-rsel12_buf   M  6683-6697,10400    out onto regs' metal north to the pad of cdp3_gate_e (row y 10055)
-rsel13_buf   M  6726-6740,10400    out onto regs' metal north to the pad of cdp3_gate_f (row y 10316)
-rsel13_buf   P  7550,13734-13754   out the row y 13744 into the block of gate row 2 of cdp4's NOR cdp4_rst (cdp4's name: rsel13_buf_u)
-rsel12_buf   P  7550,13862-13884   out the row y 13852 after its step south (x 7528-7550) onto gate row 4 of the same NOR (cdp4's name: rsel12_buf_u)
+rsel12_buf   M  6683-6697,10400    out onto regs' metal north to the pad of cdp3's gate_e (row y 10055)
+rsel13_buf   M  6726-6740,10400    out onto regs' metal north to the pad of cdp3's gate_f (row y 10316)
+rsel13_buf   P  7550,13734-13754   out the row y 13744 into the block of gate row 2 of cdp4's NOR cdp4_rst (cdp4's name: rsel13_buf)
+rsel12_buf   P  7550,13862-13884   out the row y 13852 after its step south (x 7528-7550) onto gate row 4 of the same NOR (cdp4's name: rsel12_buf)
 # piece e6 (run 9): lc3's six diagonal metals, through lines down the west side
 lc3_e9577    M  5915,10400         in  onto lc3's diagonal metal (its file ends it at y 10400)
 lc3_e9621    M  5851,10400         in  the same
@@ -133,7 +133,7 @@ lc3_e9750    M  5141-5155,15000    ?   track x 5148 on south; follower ends (515
 lc3_e9793    M  5098-5112,15000    ?   track x 5105 on south; follower ends (5107,17938), not read
 # piece p2 (run 9): the two polys from lc3 and their tracks down the west edge
 rst_n        P  5464-5486,10400    in  onto lc3's poly from rst_n's end pad (5473,10207)
-rst_n        P  5700,15078-15098   out onto bl0's poly row of bl0_w15088 (P 5700,15088 x5755): one net
+rst_n        P  5700,15078-15098   out onto bl0's poly row of bl0's w15088 (P 5700,15088 x5755): one net
 lc2_w8450    P  5530-5552,10400    in  onto lc3's poly from the end pad (5540,10165)
 lc2_w8450    M  4815-4829,15000    ?   track x 4822 on south; follower ends (4823,16690), not read
 # pieces fb, fa (run 10): the foot rows y 14870, y 14827 and their tracks to the top of the northern part

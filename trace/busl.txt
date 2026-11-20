@@ -534,8 +534,8 @@ N M 6841,14000 busl_x6906
 # Pieces r12, r13 (run 8, 2026-11-20): the buffered read selects of R12 and R13 up the field.
 # trace/regs.txt draws rsel12_buf and rsel13_buf from sel's buffers along the bottom bus to this
 # region's south edge at (6452,14990) and (6494,14990), and the two tracks north of y 10400 onto
-# the pads of cdp3's read-gate rows (rsel12_buf: cdp3_gate_e, row C onto bus N; rsel13_buf:
-# cdp3_gate_f, row H). Between them each is one thin metal, the two innermost of the nest of Ls
+# the pads of cdp3's read-gate rows (rsel12_buf: rsel12_buf, row C onto bus N; rsel13_buf:
+# rsel13_buf, row H). Between them each is one thin metal, the two innermost of the nest of Ls
 # that the selects of piece ctl continue: north, east along an arm (y 12984 / y 13028), north,
 # east along a second arm (y 12097 / y 12141), north. Each has ONE tap, a pad in its lower run
 # on the west end of a poly row that runs east under thirty tracks to cdp4's corner gate group:
@@ -561,10 +561,6 @@ P 6472,13727:6516,13761               # the tap's pad, the west end of the row y
 C 6495,13744 s=24x24
 P 6494,13744 x7560 w=20               # the row, east into the block of cdp4's gate row 2
 N P 7000,13744 rsel13_buf
-@alias rsel12_buf rsel12_buf_u
-@alias rsel12_buf cdp3_gate_e
-@alias rsel13_buf rsel13_buf_u
-@alias rsel13_buf cdp3_gate_f
 
 # =====================================================================================
 # Piece e6 (run 9, 2026-11-20): the six metal lines lc3_e9577 .. lc3_e9793 that leave lc3
@@ -610,8 +606,8 @@ N P 5300,10750 lc3_e9793
 #   rst_n:     column to y 10599, west to x 5397, diagonal to (5333,10663), row y 10663 west to
 #              the pad (4907,10663); the track x 4909 south, out of the region at y 15000 and
 #              88 px on to its END pad (4909,15087), the west end of the poly row y 15088 that
-#              trace/bl0.txt draws from x 5700 east as bl0_w15088 (drawn here from the pad to
-#              x 5700: bl0's package region, drawn by no one). So bl0_w15088 is rst_n.
+#              trace/bl0.txt draws from x 5700 east as rst_n (drawn here from the pad to
+#              x 5700: bl0's package region, drawn by no one). So rst_n is rst_n.
 #   lc2_w8450: column to y 10641, west to x 5457, diagonal to (5394,10706), row y 10706 west to
 #              the pad (4822,10708); the track x 4822 south, out at y 15000.
 # lc3_e9793's metal x 5474 lies on rst_n's column from y 10514 to 10608 and crosses
@@ -630,7 +626,6 @@ P 4909,15088 x5705 w=20               # the row y 15088 east onto bl0's piece (P
 N P 5200,10663 rst_n
 N M 4909,13000 rst_n
 N P 5200,15088 rst_n
-@alias rst_n bl0_w15088
 # lc2_w8450
 P 5541,10395 y10641 x5457 5394,10706 x4820 w=20
 P 4805,10691:4842,10725               # the row's west end pad

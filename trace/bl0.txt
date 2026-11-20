@@ -8,7 +8,7 @@
 
 # ================================================================ piece pin: three gates on one ground rail
 # Recovered:
-#     bl0_w15412  = NOT bl0_w15088                       (G1, wide pull-down, strong load)
+#     bl0_w15412  = NOT rst_n                       (G1, wide pull-down, strong load)
 #     bl0_lpstb_n = NOT lpstb_b                          (G2)
 #     lpstb_nres  = NOT( bl0_lpstb_n OR res_b )          (G3, G4)   = lpstb_b AND NOT res_b
 # Supplies by the orientation of the loads (neither rail is followed to a named supply yet): the U of
@@ -36,7 +36,7 @@ P 6394,15163:6424,15189                            # pad
 P 6408,15176 x6929 w=20                            # poly row on east under the tracks (piece pe)
 N M 6408,15050 lpstb_b
 
-# ---- the line bl0_w15088: a metal between two pads, each pad the end of a poly row (west and east:
+# ---- the line rst_n: a metal between two pads, each pad the end of a poly row (west and east:
 # ports), with a third pad between them from which a poly column runs south to G1's gate, and a thin
 # metal south from the west pad (port).
 M 5745,15090 x6332                                 # metal y 15080-15100 from the pad (5755,15088) to the pad (6320,15088)
@@ -51,7 +51,7 @@ C 5737,15759
 P 5735,15759 y15800 w=20                           # its poly column south, under the horizontal metals y 15800, 15850 (port at y 15800)
 P 5916,15073:5948,15101                            # middle pad
 P 5935,15088 y15380 w=22                           # poly column x 5924-5946 south under res_b's and lpstb_b's metals to G1
-N M 6100,15090 bl0_w15088
+N M 6100,15090 rst_n
 
 # ---- G1: inverter. Diffusion box x 5957-6090 under the gate band y 15357-15380 (W about 133).
 P 5924,15357:6098,15380                            # gate band, east end x 6098

@@ -138,22 +138,22 @@ Run 8 (richtw1's session, Claude Fable 5.2; 2026-11-20 13:42 to 13:51 +0100). Tw
 - **The read selects of R12 and R13 cross the field, and each has one tap** (pieces `r12`, `r13`).
   `regs` had drawn `rsel12_buf` and `rsel13_buf` from `sel`'s buffers to this region's south edge
   at (6452,14990) and (6494,14990), and two tracks north of y 10400 onto the pads of `cdp3`'s
-  read-gate rows `cdp3_gate_e` and `cdp3_gate_f`; the 4,600 px between were read by the follower and
+  read-gate rows `rsel12_buf` and `rsel13_buf`; the 4,600 px between were read by the follower and
   not drawn. Each is one thin metal, the two innermost Ls of the nest that the selects of piece `ctl`
   continue: `rsel12_buf` north on x 6452, east along y 12984, north on x 6516, east along y 12097,
   north on x 6690; `rsel13_buf` north on x 6494, east along y 13028, north on x 6560, east along
-  y 12141, north on x 6733. So **`rsel12_buf` is `cdp3_gate_e`** (the gate of the pass transistors that
-  read row C onto bus N) **and `rsel13_buf` is `cdp3_gate_f`** (row H onto bus N): R12 and R13 are read
+  y 12141, north on x 6733. So **`rsel12_buf` is the wire `cdp3` called gate_e** (the gate of the pass transistors that
+  read row C onto bus N) **and `rsel13_buf` is the wire `cdp3` called gate_f** (row H onto bus N): R12 and R13 are read
   through `cdp3`'s rows E and F, now on drawn geometry with no uncertain item.
 - **Each track has one pad in its lower run, the west end of a poly row into `cdp4`'s corner gate
   group**: `rsel12_buf` at (6452,13854) on the row y 13852, which runs east under thirty tracks and
-  steps south at x 7528-7550 onto the group's gate row 4 (y 13873, `cdp4`'s `rsel12_buf_u`);
+  steps south at x 7528-7550 onto the group's gate row 4 (y 13873, `cdp4`'s `rsel12_buf`);
   `rsel13_buf` at (6495,13744) on the row y 13744, which runs straight into the block of gate row 2
-  (`cdp4`'s `rsel13_buf_u`). With them the extraction gives, firm (`tools/unsure.py --equations`):
+  (`cdp4`'s `rsel13_buf`). With them the extraction gives, firm (`tools/unsure.py --equations`):
   **`cdp4_rst` = NOR(`rsel12_buf`, `rsel13_buf`, `rsel14_buf`, `rsel15_buf`, `rsel16_buf`,
   `rsel17_buf`)**: the selector's nodes are released only while one of R12-R17 is being read.
-- The names are gathered by `@alias` (`rsel12_buf` with `rsel12_buf_u`, `cdp3_gate_e`; `rsel13_buf`
-  with `rsel13_buf_u`, `cdp3_gate_f`); the renames are the coordinator's.
+- The names are gathered by `@alias` (`rsel12_buf` with the wire `cdp4` called rsel12_buf_u, the wire `cdp3` called gate_e; `rsel13_buf`
+  with the wire `cdp4` called rsel13_buf_u, the wire `cdp3` called gate_f); the renames are the coordinator's.
 - One crossing is recorded as an ambiguity (15): the track x 6452 over `cdp4_bus_s1`'s row y 13375 is
   dim and reddish in both chips for 18 px, without pad or ring. And Ambiguity 13 (AMB-039) has its
   second direction: the row y 13744 has its own driver, by a pad.
@@ -176,7 +176,7 @@ wiring only, no uncertain items: everything that arrives from `lc3` at y 10400 w
   (5473,10207)) turns west at y 10599, steps south-west along a diagonal and runs west as the row
   y 10663 to a pad (4907,10663); the pad's track (x 4909) runs 4,400 px south with no pad or contact
   and ends on a pad (4909,15087), the west end of the poly row y 15088 that `bl0` draws from x 5700
-  east as `bl0_w15088`. The last 88 px of the track and the row from the pad to x 5700 lie south of
+  east as `rst_n`. The last 88 px of the track and the row from the pad to x 5700 lie south of
   this package's region (in `bl0`'s, where no one had drawn them) and are drawn here to close the join.
   Firm (`tools/unsure.py --equations`: `bl0_w15412` = NOT `rst_n`).
 - **`lc2_w8450` has a second branch into the field** (piece `p2`): the poly that `lc3` leaves at
@@ -310,7 +310,7 @@ Full extraction with run 10: 2,455 nets (two more than main's 2,453: the two new
 transistors, 0 errors, 0 warnings. The package by itself: 54 nets, 0 errors, and the two warnings of
 run 9 (`lc2_w8450`'s two branches).
 
-Full extraction with run 9: 2,453 nets (one fewer than main's 2,454: `bl0_w15088` is `rst_n`), 4,579
+Full extraction with run 9: 2,453 nets (one fewer than main's 2,454: the wire `bl0` called w15088 is `rst_n`), 4,579
 transistors, 0 errors, 0 warnings; 909 of 1,349 equations firm. The package by itself: 52 nets,
 0 errors, and two warnings that `lc2_w8450` is on two unconnected nets (its two branches, piece `lc9`'s
 line 5 and piece `p2`'s poly, meet in `lc3`'s file, which is not loaded then).
@@ -1230,7 +1230,7 @@ fifteen straight segments (`tools/tl5_tracks.py v/h`, kept in `cache/scratch/bus
   one at (6440,12009).
 - **The north arm's east end and `regs`' pad (6730,10055)** (`i8_c10015.png`, 4.5x, four shots, all
   traces; `tools/textmap.py 6708 10000 6760 10070 3`): the corner (6732,10015) lies straight above the pad
-  of `cdp3_gate_e`'s row, on whose south side `rsel12_buf`'s metal arrives. Between the arm's south edge
+  of the wire `cdp3` called gate_e's row, on whose south side `rsel12_buf`'s metal arrives. Between the arm's south edge
   (y 10024) and the pad's ring (y 10040) both chips show a dark line and 9 px of bare ground (red
   80-150, against 190-240 on the arm): two metals on one track position, not joined (trap 33).
 - **The foot** (`i10_foot.png`): the track ends on the pad; west of the pad the clean shot is field
@@ -1344,8 +1344,8 @@ Pieces `x68`, `x69`. Traced: two through lines with no connection in the region.
 not known: named for their place (`busl_x6820`, `busl_x6906`).
 
 Pieces `r12`, `r13`. Traced (no uncertain item of this package): `rsel12_buf` (`sel`'s buffered select
-of R12, drawn by `regs` to the field's south edge) is one net with `cdp3_gate_e` and with gate row 4 of
-`cdp4`'s corner NOR; `rsel13_buf` is one net with `cdp3_gate_f` and with gate row 2. So R12 is read
+of R12, drawn by `regs` to the field's south edge) is one net with `rsel12_buf` and with gate row 4 of
+`cdp4`'s corner NOR; `rsel13_buf` is one net with the wire `cdp3` called gate_f and with gate row 2. So R12 is read
 through `cdp3`'s row E (row C onto bus N) and R13 through row F (row H onto bus N), and **`cdp4_rst` =
 NOR(`rsel12_buf`, `rsel13_buf`, `rsel14_buf`, `rsel15_buf`, `rsel16_buf`, `rsel17_buf`)** (firm).
 Believed: `cdp4_rst` holds the nodes of `cdp4`'s selector low except during a read of one of the six
@@ -1356,7 +1356,7 @@ Piece `e6`. Traced (no uncertain item): six through lines, no connection in the 
 `lc3` east at x 6450. What they are is not known. Believed from the follower's ends (about 477 px
 apart): each ends at one row of the left array's lower part.
 
-Piece `p2`. Traced (no uncertain item): `bl0_w15088` is `rst_n` = NOT `rst` (`lc1`'s gate 4; `rst` =
+Piece `p2`. Traced (no uncertain item): the wire `bl0` called w15088 is `rst_n` = NOT `rst` (`lc1`'s gate 4; `rst` =
 NOR(`lpstb_b`, `res_b`)), so **`bl0_w15412` = NOT `rst_n`**, firm: `bl0`'s wide inverter makes a
 fourth copy in `rst`'s sense (after `rst_a`, `rst_b`, `rst_c`), high while both pins are low; `bl0`
 follows its output to a pad (4909,15414) and a track south (loads not traced). `rst_n` also runs on
@@ -1425,13 +1425,13 @@ logic**, not read. With it the fourteen lines of the staircase bundle are all dr
 | `busl_x6906` | M | (6899-6913,10400) | not known | on north; the follower ends at (7078,8778) (candidates (6905,10057), (6908,9798)), not read |
 | `busl_x6906` | M | (6834-6848,15000) | not known | on south into `bl0`'s ground; the follower ends at (6839,16219), not read |
 | `rsel12_buf`, `rsel13_buf` | M | (6445-6459,15000), (6487-6501,15000), 14 px wide | in (driven by `sel`'s buffers) | onto `regs`' metals from the bottom bus (`M 6452,16168 y14990`, `M 6494,16210 y14990`) |
-| `rsel12_buf`, `rsel13_buf` | M | (6683-6697,10400), (6726-6740,10400), 14 px wide | out | onto `regs`' metals north to the pads of `cdp3_gate_e` (row y 10055) and `cdp3_gate_f` (row y 10316) |
-| `rsel13_buf` | P | (7550, 13734-13754) | out | into the block of gate row 2 of `cdp4`'s NOR `cdp4_rst` (`cdp4`'s name there: `rsel13_buf_u`) |
-| `rsel12_buf` | P | (7550, 13862-13884) | out | onto gate row 4 of the same NOR (`cdp4`'s name: `rsel12_buf_u`), after the step south at x 7528-7550 |
+| `rsel12_buf`, `rsel13_buf` | M | (6683-6697,10400), (6726-6740,10400), 14 px wide | out | onto `regs`' metals north to the pads of `rsel12_buf` (row y 10055) and `rsel13_buf` (row y 10316) |
+| `rsel13_buf` | P | (7550, 13734-13754) | out | into the block of gate row 2 of `cdp4`'s NOR `cdp4_rst` (`cdp4`'s name there: `rsel13_buf`) |
+| `rsel12_buf` | P | (7550, 13862-13884) | out | onto gate row 4 of the same NOR (`cdp4`'s name: `rsel12_buf`), after the step south at x 7528-7550 |
 | `lc3_e9577`, `lc3_e9621`, `lc3_e9665`, `lc3_e9708`, `lc3_e9750`, `lc3_e9793` | M | y 10400, x 5915, 5851, 5785, 5722, 5655, 5588 (diagonals, 14 px wide) | in (from `lc3`'s crossing rows) | onto `lc3`'s diagonal metals, which its file ends at y 10400 |
 | the same six | M | y 15000, x 5322, 5279, 5235, 5192, 5148, 5105 (14 px wide) | not known | tracks on south; the follower ends at (5326,15381), (5284,15859), (5239,16506), (5194,16981), (5151,17462), (5107,17938), not read |
 | `rst_n` | P | (5464-5486, 10400) | in (driven in `lc1`) | onto `lc3`'s poly from the end pad (5473,10207) |
-| `rst_n` | P | (5700, 15078-15098) | out | onto `bl0`'s row of `bl0_w15088` (`P 5700,15088 x5755`); the track crosses y 15000 at x 4909 inside this piece |
+| `rst_n` | P | (5700, 15078-15098) | out | onto `bl0`'s row of `rst_n` (`P 5700,15088 x5755`); the track crosses y 15000 at x 4909 inside this piece |
 | `lc2_w8450` | P | (5530-5552, 10400) | in | onto `lc3`'s poly from the end pad (5540,10165) |
 | `lc2_w8450` | M | (4815-4829, 15000) | not known | the track x 4822 on south; the follower ends at (4823,16690), candidates (4823,15199), (4823,15305), (4823,15548), (4823,15723), not read |
 | `busl_x6949`, `busl_x6992` | P | (7550, 14859-14881), (7550, 14816-14838) | not known | poly rows on east to pads at about (7836,14872), (7794,14826) under `bc1`'s bus metals (not drawn) |
@@ -1578,7 +1578,7 @@ logic**, not read. With it the fourteen lines of the staircase bundle are all dr
    widened, and this track's real tap 480 px south has a pad 45 px wide with a ring, a bright centre
    and a hole; the clean shot is plain protected poly under the track (222/165/121 against
    219/162/124 under x 6494), no hole; both stripped shots read like the neighbouring crossings; a
-   break would leave `cdp3_gate_e` with no driver, and a contact would short a select to a data line.
+   break would leave `rsel12_buf` with no driver, and a contact would short a select to a data line.
    Against: both chips at the same spot. On chance (rough): one chip alone fails the test for 20 px or
    more at 8 places on these two tracks and at 20 on run 7's three, of about 500 row crossings (about
    3% a chip), so among the field's several thousand crossings a few where both chips happen to fail
@@ -1990,7 +1990,7 @@ continuous to their pads, edge lines unbroken under VCC in both metal shots; no 
 pad); (4909,10706) (no pad, ring or widening in either metal shot, no pits in chip 2); the south end
 (the track ends on the pad (4909,15087), bare ground beyond; the row y 15088 one poly to `bl0`'s pad;
 the gap x 5511-5526 orange open poly in both metal shots like its neighbours; the jog without hole or
-pad: `bl0_w15088` = `rst_n` holds); the eight tracks by its own flank scans (no gap in both chips over
+pad: the wire `bl0` called w15088 = `rst_n` holds); the eight tracks by its own flank scans (no gap in both chips over
 15 px, no ring or branch on any; the scans find the four end pads and the corners); the diffusion-row
 crossings (alike, without pads).
 Findings: none.
@@ -2183,7 +2183,7 @@ Round 1: no findings that change a connection.
 
 - Everything else in the field: about 20 more tracks and the other rows. Next pieces, in the
   order they join things: (1) done in run 6 (pieces `sr`, `kb`; `wr_r15`'s row does not enter the field); (2) done in run 8 (pieces `r12`, `r13`: the rows y 13744 and y 13852 and the two tracks); (3) done in run 9 (pieces `e6`, `p2`), but for the VCC metal
-  x 5340-5390 and its branch west along y 10590-10650 (supply; not drawn); (4) the top band's ninth row (y 10317, `cdp3_gate_f`) and the three poly rows
+  x 5340-5390 and its branch west along y 10590-10650 (supply; not drawn); (4) the top band's ninth row (y 10317, `rsel13_buf`) and the three poly rows
   at the top left (y 10560, 10686, 10736); (5) done in run 9 (piece `e6`: the staircase at x 5100-5700 is its nest of Ls); (6) the bands at y 11850-12150 and below; (7) the foot of the field: rows y 14827 and
   14870 and their tracks: done in run 10 (pieces `fa`, `fb`); the
   net that starts on row y 14523 at the pad (7100,14522): done in run 11 (piece `fd`: it is `tc2_r5718`); the rows above
@@ -2293,7 +2293,7 @@ Round 1: no findings that change a connection.
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
 - Ambiguity 9 and the port of `cdp4_rst` ("read as a buried contact onto its node diffusion, not drawn"): drawn in `trace/cdp4.txt` (`cdp4` run 2) as that reading; AMB-038 is resolved as (a). The tongue, buried contact and diffusion (`D 7540,13905:7590,13940`) reach about 20 px into this region and overlap the end of the poly `P 7462,13906:7532,13927`. The `?M 7556,13895 y13953` is still not seen in either metal shot.
-- The undrawn rows y 13744 and y 13852 end east of x 7550 as gates 2 and 4 of the NOR that makes `cdp4_rst` (ports `rsel13_buf_u` (7550,13751), `rsel12_buf_u` (7550,13873) in `ports.d/cdp4.txt`): draw the rows onto them.
+- The undrawn rows y 13744 and y 13852 end east of x 7550 as gates 2 and 4 of the NOR that makes `cdp4_rst` (ports `rsel13_buf` (7550,13751), `rsel12_buf` (7550,13873) in `ports.d/cdp4.txt`): draw the rows onto them.
 - Piece `kb`: `bus_eq_r15`'s driver is `cdp4`'s comparator of the bus lines with R15 (`cdp4` run 3); the diffusion band east of (7600,11109) is its match line.
 - Piece `lc9`, "row ... 14784 to (7835,14784)": the pad's contact is at (7837,14784) and the pad's poly reaches x 7863 (`eof`, piece `ck6`). The row is driven from the east: `lc3_w9947` = NOT `eof_w15127` (`eof` run 15), so the port at (7550,14784) is an input of this field.
 
@@ -2301,13 +2301,13 @@ Round 1: no findings that change a connection.
 
 - "Where the buffered RES and LPSTB pins go" (the survey of run 7): the two metals from the pads
   (6363,15132) and (6408,15176) go to the gates G4 and G2 of `bl0`'s gate group as surveyed, and the third
-  pad (6320,15088) is another net's (`bl0_w15088`). **The pins do not end there**: from each pad a poly row
+  pad (6320,15088) is another net's (`rst_n`). **The pins do not end there**: from each pad a poly row
   also runs east under the tracks to a pad ((6885,15130), (6929,15177)) and a track south to a pad
   ((6882,16170), (6928,16217)) (`notes/blocks/bl0.md`, piece `pe`).
 - In the field's south-west corner two tracks are drawn by `bl0`, not by this package: x 4867 from a pad
   (4867,15675) north to a pad (4867,14436) (`lpstb_nres`, on west in poly along y 14436 into the left
   array), and nothing else. Seen there and not drawn: the track x 4909 from the pad (4909,15088) north
-  (`bl0_w15088`; by the follower to about (4908,10660)).
+  (`rst_n`; by the follower to about (4908,10660)).
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20, third batch)
 

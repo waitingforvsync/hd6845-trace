@@ -1,15 +1,15 @@
 # NAME        LAYER  X,Y              DIR  note
 rsel14_buf    P      7550,13701       in   busl's row end; gate 1 of the corner group's NOR (cdp4_rst)
-rsel13_buf_u  P      7550,13751       in   the block at the step of the group's row 2 (y 13759 east of it); west of x 7550 it is busl's undrawn row y 13744, believed rsel13_buf
+rsel13_buf  P      7550,13751       in   the block at the step of the group's row 2 (y 13759 east of it); west of x 7550 it is busl's undrawn row y 13744, believed rsel13_buf
 rsel17_buf    P      7550,13809       in   busl's row end; gate 3
-rsel12_buf_u  P      7550,13873       in   the group's row 4; west of x 7550 it is busl's undrawn row y 13852 (steps north to it at x 7535-7550), believed rsel12_buf
+rsel12_buf  P      7550,13873       in   the group's row 4; west of x 7550 it is busl's undrawn row y 13852 (steps north to it at x 7535-7550), believed rsel12_buf
 rsel16_buf    P      7550,13961       in   busl's row end; gate 5
 rsel15_buf    P      7550,14004       in   busl's row end; gate 6 (the row steps south to y 14028 at x 7552-7580)
 cdp4_rst      P      7532,13916       out  the NOR's output: buried contact of this poly in the box (7537-7582,13903-13940)
 bus_eq_r15      D      7600,11109       out  the comparator's match line (NOR of the eight slices' not-equal nodes; load east of s0) onto busl's band and pad (7555,11118)
 cdp3_bl_c0    M      7687,11048       in   cdp3's bit line = the in track of slice s0, down to the R15 latch
 cdp3_bl_c1    M      8076,11048       in   the same, s1
-cdp3_bl_c2    M      8466,11048       in   the same, s2
+db_b5    M      8466,11048       in   the same, s2
 cdp3_bl_c3    M      8857,11048       in   the same, s3
 cdp3_bl_c4    M      9248,11048       in   the same, s4
 cdp3_bl_c5    M      9638,11048       in   the same, s5

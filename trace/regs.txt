@@ -419,15 +419,15 @@ M 6494,16210 y14990 w=14
 
 # --- north ends (the same two wires, by the follower through busl's region) -----------
 # rsel12_buf's: track x 6690 north, a step east at y 10270, pad on the west end of the
-# row y 10055 = cdp3_gate_e (reads row C onto bus N).
+# row y 10055 = rsel12_buf (reads row C onto bus N).
 M 6690,10400 y10270 x6733 y10055
 P 6713,10038:6747,10072
 C 6730,10055
 P 6730,10056 x7615 w=20
-N P 7000,10056 cdp3_gate_e
-# rsel13_buf's: track x 6733, pad on the west end of the row y 10316 = cdp3_gate_f (row H).
+N P 7000,10056 rsel12_buf
+# rsel13_buf's: track x 6733, pad on the west end of the row y 10316 = rsel13_buf (row H).
 M 6733,10400 y10317
 P 6713,10300:6747,10334
 C 6730,10317
 P 6730,10316 x7615 w=20
-N P 7000,10316 cdp3_gate_f
+N P 7000,10316 rsel13_buf

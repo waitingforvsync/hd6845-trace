@@ -1838,9 +1838,9 @@ N M 8057,17000 bc1_g6_in
 # polys end, the load, the ground's finger between the two right legs) is piece g174e, below
 # (run 24); notes, pieces g174 and g174e and Ambiguities 83-93. Views r23_*.png in cache/scratch/eof/;
 # survey.md, run 23.
-#   eof_w17362 is pulled to vss by eof_w17338 (row 1) and by eof_w17168 (the hairpin)
+#   disptmg_drv_in is pulled to vss by eof_w17338 (row 1) and by eof_w17168 (the hairpin)
 #   the node below the lower bar is pulled to vss by eof_w17472 (the lower poly)
-# (Run 24: that node is eof_w17362 too, and the load is drawn: piece g174e, below.)
+# (Run 24: that node is disptmg_drv_in too, and the load is drawn: piece g174e, below.)
 #
 # ---- the VSS rail. bc1 draws it (R1, x 8336-8384) to y 16300. It runs on south as one
 # metal: no stretch of 20 px or more without metal in both chips from y 16290 to y 17235
@@ -1881,7 +1881,7 @@ C 8335,17474
 # y 17278-17305 (not drawn): ports at both ends.
 P 8245,17331:8413,17351
 N P 8280,17341 eof_w17338
-N D 8340,17362 eof_w17362
+N D 8340,17362 disptmg_drv_in
 # ---- the hairpin (eof_w17168). The row of piece o168 (y 17419-17441, redrawn here from the
 # pad to the rail) is one poly with the left leg x 8305-8323 (px.py row 17424 / 17430 / 17436
 # 8286 8326 2: poly colour to the rail's edge in chip 2, cream from x 8310 in the clean shot,
@@ -1902,13 +1902,13 @@ P 8274,17521:8389,17543
 P 8226,17464:8242,17560
 N P 8234,17520 eof_w17472
 # (N D 8340,17552 carried the former name eof_w17552 until run 24: the node below the bar is one net with
-# eof_w17362, by the south neck and the strip east of the rail: piece g174e.)
+# disptmg_drv_in, by the south neck and the strip east of the rail: piece g174e.)
 
 # ======================================================================================
 # Piece g174e (run 24, 2026-11-20): the east side of piece g174's unit, x 8368-8560,
 # y 17263-17634 (bc3's ground, free). With it the unit is whole: a three-input NOR with large
 # pull-downs and a load,
-#   eof_w17362 = NOR(eof_w17338, eof_w17168, eof_w17472)
+#   disptmg_drv_in = NOR(eof_w17338, eof_w17168, eof_w17472)
 # whose output leaves south on the load's poly to a pad with a contact (8467,17603).
 # How it was read: notes, piece g174e; survey.md, run 24; views r24_*.png and the scripts
 # r24_map.py in cache/scratch/eof/, and tools/eof_band.py.
@@ -2011,8 +2011,8 @@ P 8455,17583:8485,17617
 C 8467,17603
 # (the metal is 14-16 px wide: px.py row 17629 8448 8488 2, metal x 8462-8476, metal1 x 8464-8476)
 M 8469,17603 y17634 w=15
-N M 8469,17628 eof_w17362
-# ---- piece o362 (run 25, 2026-11-20): the NOR's output eof_w17362 on from its pad (8467,17603) ----
+N M 8469,17628 disptmg_drv_in
+# ---- piece o362 (run 25, 2026-11-20): the NOR's output disptmg_drv_in on from its pad (8467,17603) ----
 # Wiring only. The pad's thin metal (12-15 px: eof_mrun.py row at y 17940 ... 18450 gives x 8468-8470)
 # runs 840 px south over the bottom bus field's poly rows (plain rows about 20 px high, no pad at
 # the metal: r25_v1.png, r25_v2.png, 2.8x, three shots; tl5_tracks.py v 8467 17600 18500 --half 2:
@@ -2038,9 +2038,9 @@ P 7556,18472 x7384 w=20
 P 7368,18458:7401,18489
 C 7384,18473
 # a metal leaves the pad west (drawn to x 7340 in run 25; on from there: piece o362w below).
-N M 7345,18473 eof_w17362
+N M 7345,18473 disptmg_drv_in
 
-# ---- piece o362w (run 26, 2026-11-20): eof_w17362's bus line y 18473 on west of x 7340 ----
+# ---- piece o362w (run 26, 2026-11-20): disptmg_drv_in's bus line y 18473 on west of x 7340 ----
 # Wiring only. One thin metal (9-14 px; eof_mrun.py col every 6 px from x 6350 to 7346: one run
 # at every cut, centre y 18471-18475, no second run and no widening) 1,060 px west from the pad
 # (7384,18473) with no pad and no branch in its run (tl5_tracks.py h 18473 6250 7370 --half 2:
@@ -2067,7 +2067,7 @@ C 6322,18472
 # under a wide vertical metal x 6185-6238: review round 33).
 P 6322,18472 x6262 w=20
 
-# ---- piece o362d (run 27, 2026-11-20): eof_w17362 from the port (6262,18472) to DISPTMG's driver input ----
+# ---- piece o362d (run 27, 2026-11-20): disptmg_drv_in from the port (6262,18472) to DISPTMG's driver input ----
 # Wiring only: a poly row, a pad, a thin metal, a pad and a poly column; no transistor, no branch.
 # The row y 18462-18482 on west of x 6262: open (orange in both metal shots) to x 6240, under the
 # wide vertical metal x 6190-6238 (cream in the clean shot, the row's width unchanged, no hole; the
@@ -2110,7 +2110,6 @@ C 5583,18472
 # lines through every metal (dirt blobs differ between the chips): no contact with any of the
 # four (r27_col.png, 2.8x, four shots; traps 13, 15). It runs on as pads_out's input poly of the
 # DISPTMG driver (x 5570-5595 from y 18912; label disptmg_drv_in at (5582,18927)); drawn to
-# y 18925, a clear overlap. So eof_w17362 IS disptmg_drv_in.
+# y 18925, a clear overlap. So disptmg_drv_in IS disptmg_drv_in.
 P 5587,18472 y18925 w=18
 N P 5587,18880 disptmg_drv_in
-@alias disptmg_drv_in eof_w17362

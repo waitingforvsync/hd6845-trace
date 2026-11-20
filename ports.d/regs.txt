@@ -17,7 +17,7 @@ rsel15_buf    M      6574-6588,14990  out  onto busl's rsel15_buf track
 rsel14_buf    M      6531-6545,14990  out  onto busl's rsel14_buf track
 rsel12_buf    P      14190-14208,17290 in  from bd3's poly x 14199
 rsel13_buf    P      15502-15522,17490 in  from bd3's poly x 15512
-rsel12_buf    M      6445-6459,14990  out  track x 6452 into busl's region (undrawn there); by the follower it ends on cdp3_gate_e
-rsel13_buf    M      6487-6501,14990  out  track x 6494 into busl's region (undrawn there); by the follower it ends on cdp3_gate_f
-cdp3_gate_e   M      6684-6696,10400  in   track x 6690 from busl's region: believed rsel12_buf
-cdp3_gate_f   M      6727-6739,10400  in   track x 6733 from busl's region: believed rsel13_buf
+rsel12_buf    M      6445-6459,14990  out  track x 6452 into busl's region (drawn there, busl run 8: to the track x 6690 at y 10400)
+rsel13_buf    M      6487-6501,14990  out  track x 6494 into busl's region (drawn there, busl run 8: to the track x 6733 at y 10400)
+rsel12_buf   M      6684-6696,10400  in   track x 6690 from busl's region (busl run 8: one metal with the track x 6452 at y 14990)
+rsel13_buf   M      6727-6739,10400  in   track x 6733 from busl's region (busl run 8: one metal with the track x 6494 at y 14990)

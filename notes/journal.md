@@ -2229,7 +2229,7 @@ changed"), `tools/signals.py` (0 outside the glossary) and `signals.py --docs` (
 
 **Branches in flight** (`eof`, tom-seddon; `busl`) must run `tools/rename.py` with these pairs after
 merging main. Left on purpose (the master list's `rename` row has the reasons): `cdp3_c_wr` (R12's
-strobe through one `?M`), `cdp3_gate_e` / `cdp3_gate_f` (open joins), the ripple counter's clock
+strobe through one `?M`), `rsel12_buf` / `rsel13_buf` (open joins), the ripple counter's clock
 (four placeholder names, driver not found), `tl3_w3982`'s and `tl4_w4068`'s families (placeholder to
 placeholder), `bd1_k`, `bd1_q`, and **`rst_ck`, `rst_rc`, `rst_lat`, `rst_a_n`**: they are now known to be
 copies of the reset and their names say "inhibit"; they are distinct nets, so no rename is forced, and
@@ -2311,7 +2311,7 @@ names; the roles kept as suffixes):
 
 Left, each for a reason (the master list's `rename` row): 46 nets whose names meet only through an
 uncertain item (trap 17: renamed when the item is settled); 17 where the second name is a cell's own
-pin name made from a template; `cdp3_gate_e` / `cdp3_gate_f` (open joins). 98 `@alias` lines remain in
+pin name made from a template; `rsel12_buf` / `rsel13_buf` (open joins). 98 `@alias` lines remain in
 the trace files, all of those two kinds.
 
 How the sentences were kept readable: where a note said "A is B" and both are now one name, the old
@@ -2379,7 +2379,7 @@ What they establish (from the tracers' notes; marks as there):
   `cdp3`'s row C takes both: NOT((`cdp4_bus_s#` = R15) AND (`cdp3_g_c#` = R14)). Believed: the cursor
   match, active low; where its output goes rests on an uncertain box.
 - **`cdp4_rst` = NOR of six select rows** (`cdp4` run 2, 7 transistors, firm): four are the read selects
-  of R14-R17; two are open joins (`rsel13_buf_u`, `rsel12_buf_u`) through `busl`'s region.
+  of R14-R17; two are open joins (`rsel13_buf`, `rsel12_buf`) through `busl`'s region.
 - `tl3` (run 12; done): four rows drawn through the strip; three step-logic gates have all inputs
   identified. **`ck_out` has five loads and no driver**: a queue row now (`tl4` (continue)).
 
@@ -2423,7 +2423,7 @@ become the address counter's. **Left on purpose** (the master list's `rename` ro
 `eof_w17040` (joined through three uncertain stretches; trap 17); `cdp3_f_c#` / `cdp4_a_s#` (a cell's
 own pin name from a template); the latch nodes of R12-R17 (no `r14_b#_q` yet: which data bit each column
 is has not been traced, and whether the bit lines are `db_b#` is open above y 8040); the two new open
-joins `rsel13_buf_u`, `rsel12_buf_u` (`busl`); the ripple counter's clock `lc3_w9947` and the `eof_w#`
+joins `rsel13_buf`, `rsel12_buf` (`busl`); the ripple counter's clock `lc3_w9947` and the `eof_w#`
 nodes behind it (what the counter is for is not established). The glossary row `rcs_g#` is removed (no
 net matches it); rows for `bus_eq_r15` / `g_eq_r14` and `cdp3_k_a` rewritten. About forty sentences that
 the renames made circular were reworded to name the old wire by its former owner.
@@ -2444,7 +2444,7 @@ clock latch's three inputs), row H is R13, row A is R14's latch row, the Compara
 found; R11, R12, R13 not), "Not established at all" on the cursor. AMB-001 to AMB-043; R1-R49.
 
 **`out/`** rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 3 open joins (`ck_a_u`,
-`rsel12_buf_u`, `rsel13_buf_u`), 733 floor-plan blocks (the NAND beside `cdp3`'s row C relabelled; one
+`rsel12_buf`, `rsel13_buf`), 733 floor-plan blocks (the NAND beside `cdp3`'s row C relabelled; one
 route of `eof` split in two because its label covered the bottom-centre logic; looked at
 `cache/scratch/refresh/fp_cdp34.png`, `fp_bc2.png`). Coverage: 68.7% traced; in some package region
 99.9%; untraced and in no Queue row 0.4%.
@@ -2481,7 +2481,7 @@ fields without an open stretch read; first `larr`'s gap rows), R49 extended (`to
 it).
 
 **`eof` run 24** (Tom Seddon, merged 4872929, claim kept): the unit that `eof_w17168` gates is whole,
-`eof_w17362` = NOR(`eof_w17338`, `eof_w17168`, `eof_w17472`) (firm), a driver whose output is drawn to a
+`disptmg_drv_in` = NOR(`eof_w17338`, `eof_w17168`, `eof_w17472`) (firm), a driver whose output is drawn to a
 pad (8467,17603); the block's Ambiguity 85 resolved (a field island: two nets). The label of the node
 below the bar is dropped: `eof_w17552` -> `eof_w17362` (glossary's Former names; the master list's row;
 one comment in `trace/eof.txt` reworded to say "former name"). Its next step, the output's thin metal
@@ -2519,7 +2519,7 @@ What they establish (from the tracers' notes; marks as there):
   are open. `lc3`'s six diagonals are six through lines out of the field at y 15000 (no tap), and
   `lc2_w8450` has a second branch down the track x 4822.
 - **The end-of-frame lead group's NOR driver output is not CUDISP's by this route** (`eof` runs 25-26;
-  wiring, firm): `eof_w17362` is drawn 840 px south and 2,150 px west, the last 1,060 px on the bottom bus line y 18473,
+  wiring, firm): `disptmg_drv_in` is drawn 840 px south and 2,150 px west, the last 1,060 px on the bottom bus line y 18473,
   to the line's end pad (6322,18472) and 60 px of its poly row; it passes `cudisp_drv_in`'s label by
   1,400 px with no tap. No load reached yet; the row goes on west into the bottom-left logic.
 

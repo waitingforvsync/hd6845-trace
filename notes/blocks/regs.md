@@ -17,7 +17,7 @@ Trace: `trace/regs.txt`. Scratch: `cache/scratch/regs/` (`survey.md`). Started 2
 - **Piece 3, the buffered selects of R12 and R13: traced in two parts** (2026-11-19 15:44 -0600). South: from
   `bd3`'s poly ends along the bottom bus to the tracks x 6452 and x 6494 at y 14990, the south edge
   of the left bus field (`busl`'s claimed region). North: the same two wires from y 10400 to the
-  west ends of `cdp3`'s read-gate rows `cdp3_gate_e` and `cdp3_gate_f`. **The 4,600 px between
+  west ends of `cdp3`'s read-gate rows `rsel12_buf` and `rsel13_buf`. **The 4,600 px between
   (y 10400-15000) are read with the follower and not drawn** (they are `busl`'s): two open joins.
   Full extraction: 2374 nets, 4351 transistors, 0 errors, 0 warnings (no new net: each part lies on
   a net that exists).
@@ -63,8 +63,8 @@ in all four (R12 and R14 six bits, R13 and R15 eight). Traced for R13, R14, R15;
 
 | Select | Row after the third diagonals | Track at y 15000 | North end (by the follower through `busl`'s region) |
 |---|---|---|---|
-| `rsel13_buf` | y 18343 | x 6494 | `cdp3_gate_f`, pad (6730,10317): the gates of row F, which pass row H onto bus N |
-| `rsel12_buf` | y 18387 | x 6452 | `cdp3_gate_e`, pad (6730,10055): the gates of row E, which pass row C onto bus N |
+| `rsel13_buf` | y 18343 | x 6494 | `rsel13_buf`, pad (6730,10317): the gates of row F, which pass row H onto bus N |
+| `rsel12_buf` | y 18387 | x 6452 | `rsel12_buf`, pad (6730,10055): the gates of row E, which pass row C onto bus N |
 
 Route. `rsel12_buf`: `bd3`'s poly x 14199 ends on a pad (14195,17730); metal row y 17736 west, a
 metal diagonal (13520,17736)-(13262,17994), pad (13212,17993); poly under the vertical trunks to
@@ -141,8 +141,8 @@ shot: poly all the way, field on both sides).
 | `rsel13_buf` | poly | 15512,17490 | in | from `bd3`'s poly |
 | `rsel12_buf` | metal | 6452,14990 | out | into `busl`'s region: track x 6452, undrawn there |
 | `rsel13_buf` | metal | 6494,14990 | out | into `busl`'s region: track x 6494, undrawn there |
-| `cdp3_gate_e` | metal | 6690,10400 | in | from `busl`'s region: believed `rsel12_buf` |
-| `cdp3_gate_f` | metal | 6733,10400 | in | from `busl`'s region: believed `rsel13_buf` |
+| `rsel12_buf` | metal | 6690,10400 | in | from `busl`'s region: believed `rsel12_buf` |
+| `rsel13_buf` | metal | 6733,10400 | in | from `busl`'s region: believed `rsel13_buf` |
 
 ## Ambiguities
 
@@ -256,8 +256,8 @@ Round 4: no findings that change a connection.
 
 ## Not done
 
-- **The two open joins**: `rsel12_buf` (6452,14990) to `cdp3_gate_e` (6690,10400) and `rsel13_buf`
-  (6494,14990) to `cdp3_gate_f` (6733,10400), through `busl`'s claimed region; route in Logic.
+- **The two open joins**: `rsel12_buf` (6452,14990) to the wire `cdp3` called gate_e (6690,10400) and `rsel13_buf`
+  (6494,14990) to the wire `cdp3` called gate_f (6733,10400), through `busl`'s claimed region; route in Logic.
 - The wire of the seventh row: from a pad (10470,17985), poly row y 17990, first of the third
   diagonals, pad (10138,18120), metal row y 18124 west through the same hops to x 6708 and (by the
   follower) north on x 6711, which is `eof`'s `bd1_n2` track (drawn there from y 15000 to 16185).
@@ -270,7 +270,7 @@ Round 4: no findings that change a connection.
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
 - "`wr_r14` ... its branches into the cells are not traced" and "6 (believed, from the row)": the branches are the strobe loops of R14's six latch cells; row A is R14, firm (`cdp3` row A, 2026-11-20).
-- The two undrawn rows y 13744 and y 13852 end as gates 2 and 4 of the NOR that makes `cdp4_rst` (`cdp4` run 2); their east parts step south to y 13759 and y 13873 at x 7550 and are drawn there as the open joins `rsel13_buf_u`, `rsel12_buf_u`.
+- The two undrawn rows y 13744 and y 13852 end as gates 2 and 4 of the NOR that makes `cdp4_rst` (`cdp4` run 2); their east parts step south to y 13759 and y 13873 at x 7550 and are drawn there as the open joins `rsel13_buf`, `rsel12_buf`.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20, second batch)
 

@@ -59,7 +59,7 @@ Which columns each row occupies:
   comparator with line g.** `g_eq_r14` = NOR of the six cells' "not equal" nodes. With every file loaded:
   2439 nets, 4541 transistors, 0 errors, 0 warnings. See "Row A" under Logic.
 - **West logic, run of 2026-11-20 13:32 -0600** (Matt Godbolt's session, Claude Fable 5.2; 2 transistors and
-  wiring, no uncertain item): **U1 of the gate column** (y 7940-8060), `cdp3_w8063` = NOT `cdp3_w7996` (now `lc2_w8646`), with
+  wiring, no uncertain item): **U1 of the gate column** (y 7940-8060), `cdp3_w8063` = NOT the wire `cdp3` called w7996 (now `lc2_w8646`), with
   its input wire (from a staircase metal of the bus field, by two poly hops) and its output wire (a metal
   x 7826-7848 to two pads whose polys go into the cluster beside row A); and **the output line of the gate
   beside row C** (the x 7880 line) drawn up to its end pad (7878,8385). See "West logic" under Logic.
@@ -67,11 +67,11 @@ Which columns each row occupies:
   1,300 px of wire, no uncertain item): **`lc2_w8646` = NOT `ck_out`**, a wide inverter (pull-down W about 260)
   at x 7475-7780, y 8660-8845 whose gate is the poly of `eofw`'s corner pad (7446,8732). Its output is
   U1's input (so `cdp3_w8063` = NOT `lc2_w8646`, a buffered copy of `ck_out` into the cluster beside row
-  A) and, by a staircase line of the bus field, **the enable of `lc2`'s latch C**. The name `cdp3_w7996`
-  of the first run is an alias of `lc2_w8646`. See "The clock inverter" under Logic.
+  A) and, by a staircase line of the bus field, **the enable of `lc2`'s latch C**. The first handoff's name for U1's input
+  (`cdp3`'s w7996) was an alias of `lc2_w8646` until the refresh of 2026-11-20 renamed it. See "The clock inverter" under Logic.
 - **The bit lines are the data bus** (run of 2026-11-20 13:40 -0600; wiring, six joins, no uncertain item):
-  each of the six bit lines `cdp3_bl_c2`..`c7` runs on north of y 8040 as the same metal as `cdp2`'s bus
-  line of that slice (drawn y 7556-8040): **`cdp3_bl_c2`..`c7` = `db_b5`, `db_b4`, `db_b3`, `db_b2`, `db_b1`,
+  each of the six bit lines of columns c2..c7 runs on north of y 8040 as the same metal as `cdp2`'s bus
+  line of that slice (drawn y 7556-8040): **the bit lines of c2..c7 (`cdp3`'s bl_c2 and `cdp3_bl_c3`..`c7`) = `db_b5`, `db_b4`, `db_b3`, `db_b2`, `db_b1`,
   `db_b0`.** So R14's six latch cells (row A) and the register cells of rows C and H in these columns
   are written from data bus bits 5-0. See "The bit lines north of row A" under Logic.
 - NOT traced: the gate cluster beside row A (x 7780-8200, y 8260-8800): surveyed, with a draft, and
@@ -200,13 +200,13 @@ reading 0. Bit order within a byte is not established here.
 
 ### Rows E and F (traced)
 
-    row E, c2..c7:  pass transistor, gate cdp3_gate_e, between cdp3_cq_cN and cdp3_n_cN
-    row E, c0, c1:  pass transistor, gate cdp3_gate_e, between VSS and cdp3_n_cN
-    row F, c0..c7:  pass transistor, gate cdp3_gate_f, between cdp3_hq_cN (row H cell) and cdp3_n_cN
+    row E, c2..c7:  pass transistor, gate rsel12_buf, between cdp3_cq_cN and cdp3_n_cN
+    row E, c0, c1:  pass transistor, gate rsel12_buf, between VSS and cdp3_n_cN
+    row F, c0..c7:  pass transistor, gate rsel13_buf, between cdp3_hq_cN (row H cell) and cdp3_n_cN
 
 All sixteen are W/L about 190/28. `cdp3_n_cN` leaves east on its channel G track. So N is
-an eight-line bus that gets the six row C bits (and 0 on c0, c1) when `cdp3_gate_e` is
-high and the eight row H values when `cdp3_gate_f` is high: a read bus, with the two
+an eight-line bus that gets the six row C bits (and 0 on c0, c1) when `rsel12_buf` is
+high and the eight row H values when `rsel13_buf` is high: a read bus, with the two
 unused top bits of the 6-bit register reading 0. That makes c0, c1 the two most
 significant bits if the order is monotonic (not established).
 
@@ -250,10 +250,10 @@ overlay `cache/scratch/cdp3/u1.png` fits; this copy's node has a poly cap on its
 nowhere, and its load plate's foot is the output):
 
 ```
-cdp3_w8063 = NOT cdp3_w7996          pull-down W 57; load 27/56
+cdp3_w8063 = NOT lc2_w8646          pull-down W 57; load 27/56
 ```
 
-- **Input** `cdp3_w7996`: the gate row y 7986-8006 runs west to a pad (7313,7995); a thin metal
+- **Input** `lc2_w8646`: the gate row y 7986-8006 runs west to a pad (7313,7995); a thin metal
   x 7309-7323 runs south from it to a pad (7313,8625) and ends on both (bare ground north of the first,
   `px.py col 7316 7950 7985 5`, and south of the second, `px.py col 7316 8636 8660 4`; `tl5_tracks.py v
   7316 8010 8610`: bars only). That pad's poly runs east and south (a column x 7393-7415, under a
@@ -283,7 +283,7 @@ stretches over 14 px are the ring of the contact at y 7789 ON the line (bright c
 
 | bit line | x | is |
 |---|---|---|
-| `cdp3_bl_c2` | 8466 | `db_b5` |
+| `db_b5` | 8466 | `db_b5` |
 | `cdp3_bl_c3` | 8857 | `cdp2_c_s3_bus` = `db_b4` |
 | `cdp3_bl_c4` | 9248 | `cdp2_c_s4_bus` = `db_b3` |
 | `cdp3_bl_c5` | 9638 | `cdp2_c_s5_bus` = `db_b2` |
@@ -394,8 +394,8 @@ West edge, x 7600 (all poly, all continue west beyond x 7540):
 | cdp3_k_a | 8864 | ? | poly to the x 7835 metal (first run's observation, drawn `?`); passes the gate beside row C and ends at about (7770,10135). The y 9168 poly on the same net starts at x 7820, not at the west edge |
 | bus_eq_r15 | 9450 | in | gate 1 of the NAND beside row C |
 | cdp3_cw_c7 .. cdp3_cw_c2 | 9581, 9624, 9668, 9711, 9754, 9797 | out | row C register outputs (true), each from a 26/16 load |
-| cdp3_gate_e | 10057 | in | read row C onto N |
-| cdp3_gate_f | 10317 | in | read row H onto N |
+| rsel12_buf | 10057 | in | read row C onto N |
+| rsel13_buf | 10317 | in | read row H onto N |
 | cdp3_hw_c7 .. cdp3_hw_c0 | 10361, 10404, 10447, 10490, 10535, 10577, 10621, 10664 | out | row H register outputs (true), each from a 26/16 load |
 
 East edge, x 10850 (poly):
@@ -614,7 +614,7 @@ Into parts not yet traced (the labels sit on the stubs):
 - Row H's write line ("runs on east past x 10990 ... without a contact") ends on a pad with a metal contact at (11243,10705) on the write strobe of R13 (`regs` run 1, firm): **row H is R13**. The line into row A's six large cells is R14's write strobe (firm), and row C's write line is R12's (marked: one `?M` on the way).
 - The gate column x 7460-7800 ("about six units with loads"): below `eof`'s `g7700` there are four inverters at a pitch of 130 (U1 y 7940-8060, U2, U3, U4); U2-U4 are drawn by `eof` (run 12, piece `d3982`: three inverters in series, `tl3_w3982` = NOT NOT NOT `lc1_w7928`); U1 is not drawn.
 - `bus_eq_r15` comes from a diffusion band at (7600, 11092-11127) under column 0's VSS rail (`busl` run 6), undrawn here.
-- `cdp3_gate_e` and `cdp3_gate_f` enter from the west on pads (6730,10055) and (6730,10317), each with a track from the south (`regs` run 3); believed the read selects of R12 and R13 (two open joins through the left bus field): rows E and F are then the read gates of R12 and R13.
+- `rsel12_buf` and `rsel13_buf` enter from the west on pads (6730,10055) and (6730,10317), each with a track from the south (`regs` run 3); believed the read selects of R12 and R13 (two open joins through the left bus field): rows E and F are then the read gates of R12 and R13.
 
 ## Review
 
@@ -674,7 +674,7 @@ Round 3 (full review of the six bit-line joins; fresh Fable 5.2 reviewer; 2026-1
 `cache/scratch/cdp3/review-3/`). Checked: all six lines continuous y 7480-8110 (no stretch without metal
 over 21 px; every stretch of 15 px or more on 4x views of both metal shots, c2 and c5 at 6x in three
 shots); the same track at both ends, no jog; no other metal joins or crosses; whole-die extraction 0
-errors; `sameconn.py 2eb4695`: every difference carries `cdp3_bl_c2..7` or `db_b0..5`. Remarks, notes
+errors; `sameconn.py 2eb4695`: every difference carries `db_b5..7` or `db_b0..5`. Remarks, notes
 only: `cdp2`'s cell already draws the metal to y 7821 with the contact at y 7789 (the notes said y 7556
 and "taps not drawn"; corrected); c7's metal centre is x 10414-10416 (drawn 10419, overlapping).
 

@@ -265,7 +265,7 @@ cell's senses).
 
 Region x 7550-7870, y 13640-14055, left of row D. One gate, seven transistors:
 
-`cdp4_rst` = NOR(`rsel14_buf`, `rsel13_buf_u`, `rsel17_buf`, `rsel12_buf_u`, `rsel16_buf`, `rsel15_buf`)
+`cdp4_rst` = NOR(`rsel14_buf`, `rsel13_buf`, `rsel17_buf`, `rsel12_buf`, `rsel16_buf`, `rsel15_buf`)
 
 So the selector's nodes `cdp4_n_s#` are pulled low whenever none of the six rows is high. Four of
 the rows are the read selects of R14-R17 (firm, joined through `busl`'s rows at x 7550). The other
@@ -332,7 +332,7 @@ islands are closed curves inside it, so they are the other class.
 | `cdp3_g_c2`..`s6` | metal | x 8073, 8465, 8855, 9245, 9635, 10025 at y 14059 (drawn end; continues down) | from outside (below) | data into the row D latch |
 | `cdp4_ld6` | metal | x 7947, y 13840 (drawn end; continues down) | from outside (below) | row D latch strobe |
 | `rsel14_buf`, `rsel17_buf`, `rsel16_buf`, `rsel15_buf` | poly | x 7550, y 13701, 13809, 13961, 14004 (`busl`'s row ends) | from outside | gates of the corner group's pull-downs 1, 3, 5, 6 |
-| `rsel13_buf_u`, `rsel12_buf_u` | poly | x 7550, y 13751 and y 13873 (blocks at the step; the rows go on west as `busl`'s undrawn rows y 13744, y 13852) | from outside | gates of pull-downs 2 and 4; open joins |
+| `rsel13_buf`, `rsel12_buf` | poly | x 7550, y 13751 and y 13873 (blocks at the step; the rows go on west as `busl`'s undrawn rows y 13744, y 13852) | from outside | gates of pull-downs 2 and 4; open joins |
 | `cdp4_rst` | poly | (7532,13916), the end of `busl`'s poly | driven inside | output of the corner group |
 | `vss` | metal | x 7622, 8013, 8404, 8795, 9185, 9574, 9964, 10355, 10746 at y 11480; x 8013..10355 at y 14062; 7622 drawn to y 13650 | - | rails |
 | `vcc` | metal | x 7837, 8228, 8619, 9010, 9400, 9789, 10179, 10570 at y 11480; x 8228..10179 at y 14062; 7837 drawn to y 13530, 10570 to y 13650 | - | rails |
