@@ -854,6 +854,24 @@ C 7426,17908
 P 7426,17907 x7641 w=20
 P 7624,17891:7658,17925
 C 7641,17908
-M 7560,17908 x8018 y17864 x8317 w=12
+M 7558,17908 x8018 y17864 x8317 w=12
 P 8300,17847:8334,17880
 C 8317,17863
+
+# ---- the branch at the pad (7641,17908) (review round 12): the metal on that pad does not start free
+# west of it. At (7558,17908) it turns north, runs x 7551-7566 to a corner (7557,17824), east along
+# y 17812-17832 (lengthwise on bl0's poly row of bl0_w17687: no contact) to x 7840, and north on the
+# track x 7828-7850 onto the pad (7840,17648) that bc3 draws with the track north of it as bc3_w17646,
+# the gate of bc3's inverter. So bc3_w17646 is tc2_sr_g.
+M 7558,17908 y17824 x7840 y17655 w=14
+@alias tc2_sr_g bc3_w17646
+
+# ================================================================ run 12: tc2_sr_g is ck_out
+# The pad (8317,17863) at the end of the metal: its poly goes south 30 px (a 6 px dark bar at y 17888-
+# 17893, between the pad's metal and a metal of another net that lies along the row, keeps poly colours
+# in the clean and the chip-2 stripped shot) into the poly row y 17898-17916, which runs east onto the
+# poly that eof draws west of its pad (8424,17908) (trace/eof.txt, piece in350, part C: "seen to x 8312,
+# where it turns north"): ck_out. So tc2_sr_g, with tl4_w4590 and bc3_w17646, is ck_out.
+P 8310,17880:8332,17916
+P 8310,17898:8396,17916
+@alias ck_out tc2_sr_g

@@ -59,4 +59,5 @@ vss         M  4841-4888,6350  -    RC's leg, on south
 tc2_sr_g    M  6008-6024,6350   in   onto tl6's metal of tl4_w4590 from the pad (6016,6150): one net with tc2_sr_g (alias)
 tc2_sr_g    M  6008-6024,6900   out  onto lc1's metal of tc2_sr_g (latch D's enable)
 tc2_sr_g    M  7180-7194,15000  in   busl's track x 7187, on north
-tc2_sr_g    P  8334,17853-17873 ?    the poly east of the pad (8317,17863): a bend to a pad at about (8378,17863) (a track north, a poly row east); not read
+ck_out      P  8396,17898-17916 ?    the poly row east of the pad (8317,17863)'s neck, onto eof's poly west of its pad (8424,17908): ck_out
+ck_out      M  7828-7850,17655  ?    the branch from the pad (7641,17908) onto bc3's pad (7840,17648) and track (bc3_w17646)

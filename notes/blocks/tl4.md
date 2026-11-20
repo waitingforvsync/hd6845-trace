@@ -7,6 +7,41 @@ RA (x 4728-4775), loads between RA and a second rail RB (x 4905-4950).
 
 ## Status
 
+2026-11-20 12:31 -0600, twelfth run (Matt Godbolt's session, Claude Fable 5.2): **`tc2_sr_g`, and with it `tl4_w4590`, is
+`ck_out`: the driver the queue asked for is the clock.** Two joins, both wiring:
+
+- **The pad (8317,17863) at the end of run 11's metal is on `ck_out`'s poly.** Its poly goes south 30 px
+  into the poly row y 17898-17916 (`px.py col 8320 17872 17912 3 acid,acid1b,metal`: salmon to y 17884, a
+  6 px dark bar at y 17888-17893 that keeps poly colours in the clean and the chip-2 stripped shot, the gap
+  between the pad's metal and a metal of another net that lies along the row, salmon again from 17896),
+  and that row runs east without a break (`px.py row 17905 8296 8400 6`) onto the poly that `eof` draws
+  west of its pad (8424,17908) and names `ck_out` (`trace/eof.txt`, piece `in350`, part C: "seen to
+  x 8312, where it turns north"). The second pad 60 px east, (8380,17860), is another net: field between
+  them (`cache/scratch/tl4/c7.png`, 7x).
+- **A branch at the pad (7641,17908)** (found by review round 12): the metal on that pad turns north at
+  (7558,17908), east along y 17824 (lengthwise on `bl0_w17687`'s poly row, no contact) and north on the
+  track x 7840 onto the pad (7840,17648) that `bc3` draws as `bc3_w17646`, the gate of its inverter
+  (`tl5_tracks.py v 7558 17832 17900`, `h 17824 7566 7836`, `v 7840 17668 17812`: bars of 11 px or less).
+  So `bc3_w17605` = NOT `ck_out`.
+
+Names are joined by `@alias` (`ck_out` <- `tc2_sr_g` <- `tl4_w4590`, `bc3_w17646`); the placeholders are
+for the next refresh to rename. **Equations that change, all by the name of one input** (was `tl4_w4590`,
+`tc2_sr_g` or `bc3_w17646`, now `ck_out`), eleven gates:
+
+```
+tl1_w3636  = NOR(ck_out, rst_ck)                         tl3_w4978  = NOR(ck_out, rst_ck)
+tl3_w3373  = NOT ck_out                                  tl4_w4545  = NOR(ck_out, rst_ck, tla_w3417)
+tl4_w4686  = NOT((ck_out & tl5_w3245) | tl4_w4850)       bc3_w17605 = NOT ck_out
+lc1_w7040  = NOT((ck_out & lc1_w7862) | lc1_w7928 | rst_c)
+lc1_w7928  = NOT((ck_out & lc1_w7780) | lc1_w7040)
+tc2_r5589  = NOT((ck_out & lc1_w7170) | (lc1_w7170 & rst_ck))
+tc2_sr_q_n = NOT((ck_out & tc2_sr_s) | tc2_sr_q)
+tc2_sr_q   = NOT((cdp1_lw1 & ck_out) | tc2_sr_c | tc2_sr_q_n)
+```
+
+No transistor is added or removed and no other net is joined (whole-die extraction: 2458 nets, 4590
+transistors, 0 errors, 0 warnings).
+
 2026-11-20 12:24 -0600, eleventh run (Matt Godbolt's session, Claude Fable 5.2): **the net `tl4_w4590` is
 `tc2_sr_g`.** The queue asked for the driver of `tl4_w4590` (five gate loads in the top-left logic, no
 driver). Its three long pieces have no missed tap; the net's way out is the metal x 6016 that `tl6` ends
@@ -1283,13 +1318,32 @@ contact on the row, so no connection changes.
 
 Round 11: no findings that change a connection.
 
+### Round 12: full review of run 11 (the join with `tc2_sr_g` and its track) (2026-11-20 12:31 -0600, commit 76eb307, images `review-12/`)
+
+Fresh Fable 5.2 reviewer. Told to suspect: the join at x 6016 as a whole; every corner of the track in the
+bottom-centre logic, above all (7103,17262) beside the other net's corner; the metal at every pad's ring;
+where the metal on the pad (7641,17908) starts; the poly column and the poly row; the follower's
+candidates; the join with `busl`. Checked with the two-chip metal test, profiles, text maps and views:
+the join (one metal x 6008-6024 from y 6280 to 6970, longest stretch without metal 16 px, the same track
+at both ends, the track x 5972 separate); all seven corners; the five pads with metal only on the claimed
+sides; the column pad to pad over field; the row continuous under the rail; no stretch of 20 px without
+metal on the long pieces, no ring at any candidate; the join with `busl`. Not checked: the branch north
+of y 17600; the clean shot east of the pad (7641,17908) (dirt); what leaves the pad (8317,17863).
+
+Findings:
+
+1. **Changes a connection.** The metal on the pad (7641,17908) does not start free at x 7560: at
+   (7558,17908) it turns north, runs to a corner (7557,17824), east along y 17812-17832 to x 7845 and
+   north on the track x 7828-7850 to `bc3`'s pad (7840,17648), net `bc3_w17646`. Confirmed
+   (`tl5_tracks.py` on the three pieces). Fixed: the branch is drawn and the names joined.
+
+Round 12: one finding that changes a connection, fixed.
+
 ## Not done
 
-- **The driver of `tc2_sr_g`** (= `tl4_w4590`): beyond the pad (8317,17863), a poly east by a bend to a pad
-  at about (8378,17863) with a track x 8375-8395 north (the follower from (8384,17820) ends (8152,16734)
-  by corners at (8109,17342) and (8147,17342); not read) and a poly row y 17855-17875 east. The net's
-  other open ends, in other packages' ground: `eofw`'s poly east of the corner pad (7446,8732) into
-  `cdp3`'s gate column.
+- `ck_out`'s track x 7840 north of `bc3`'s pad (7840,17648) (`bc3` draws it to y 16640; the follower ends
+  (7837,16386)); `eofw`'s open poly east of the corner pad (7446,8732) into `cdp3`'s gate column: more
+  loads of the clock, in other packages' ground.
 - West of x 4250 (`tl3`'s strip): where the rows of `tl4_w4590` at y 2810, of `tl5_w4937` at
   y 2641 and the metals of bus lines 1 (y 2512) and 5 (y 2685, with its pad (4236,2683)) go;
   the rows y 5457 and y 5718.
