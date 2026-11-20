@@ -341,7 +341,8 @@ P 7188,17461:7338,17483                            # its poly row east: gate ban
 M 7144,17340 y17647 w=14
 P 7127,17631:7160,17663                            # pad
 C 7143,17647
-P 7143,17636:7350,17656                            # poly row east: gate band C of the fifth unit (piece u45)
+P 7143,17636:7295,17656                            # poly row east: gate band C of the fifth unit (piece u45)
+P 7285,17629:7350,17651                            #   under the rail it lies 6 px further north
 
 # ================================================================ piece u45 (run 4): the fourth and fifth units, a cross-coupled pair
 #     bl0_w17440 = NOT( bl0_w17210 OR bl0_w17610 )                     bl0_w17210 on two bands in series (A, B: one poly)
@@ -373,21 +374,23 @@ B 7372,17458:7410,17492
 D 7366,17450:7404,17540                            # tab south from the strip: buried contact, then the channel of T_x
 D 7325,17537:7402,17553                            # T_x's source: strip east from the box of the rail contact
 N P 7435,17480 bl0_w17440
-M 7432,17470 y17684 w=18                           # N0's thin metal south
+M 7435,17470 y17684 w=22                           # N0's thin metal south
 P 7418,17667:7452,17700                            # pad
 C 7434,17684
 P 7366,17668:7420,17695                            # T_n's gate
 # ---- X's poly: T_x's gate, the bar under the thin metal, X's load plate and its finger
-P 7362,17505:7410,17528
-P 7410,17502:7438,17600
+P 7362,17505:7420,17528
+P 7416,17502:7436,17600
 P 7406,17575:7462,17632
+P 7412,17630:7460,17646                            # the plate runs on south of the strip and ends on field
 P 7368,17578:7410,17598                            # the plate's finger west onto a buried contact
 B 7366,17574:7402,17614
 D 7368,17576:7400,17616                            # diffusion under it, down into the block
 N P 7424,17550 bl0_w17610
 # ---- unit 5
 D 7243,17528:7330,17546                            # strip below band B (on the rail by the box)
-D 7243,17528:7292,17724                            # the open column: R3, the buried contact, C, D
+D 7243,17528:7278,17602                            # the open column: under R3 its east edge is x 7278 (a field pocket x 7278-7305)
+D 7243,17598:7292,17724                            #   the buried contact, C, D
 P 7215,17549:7297,17572                            # row R3 from the west (port)
 N P 7225,17560 bl0_w17560
 B 7240,17590:7268,17620
@@ -401,7 +404,8 @@ D 7364,17612:7402,17664                            # the block east of the rail 
 D 7398,17603:7470,17630                            #   its strip under the load plate
 D 7468,17570:7522,17660
 C 7495,17615
-P 7215,17676:7350,17698                            # row D from the west (port)
+P 7215,17676:7295,17698                            # row D from the west (port)
+P 7285,17672:7350,17696                            #   under the rail, a few px further north
 N P 7225,17687 bl0_w17687
 D 7290,17700:7347,17752                            # box with the rail contact
 C 7308,17727

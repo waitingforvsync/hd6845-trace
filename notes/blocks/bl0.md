@@ -7,8 +7,8 @@ metal-shot pixels. Evidence: `cache/scratch/bl0/` (`survey.md` holds every measu
 
 ## Status
 
-Run 4 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 10:22 -0600). One piece, 9 transistors, no uncertain item:
-the fourth and fifth units under the rail x 7292-7342, a cross-coupled pair that `bl0_w17210` sets.
+Run 4 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 10:22 -0600). One piece, 9 transistors, no uncertain item;
+reviewed (round 6: no finding that changes a connection): the fourth and fifth units under the rail x 7292-7342, a cross-coupled pair that `bl0_w17210` sets.
 
 - **Piece `u45`** (9 transistors, x 7172-7522, y 17370-17755):
 
@@ -594,6 +594,38 @@ row's edges. `tools/t.sh bl0 sameconn.py 3be37d6` and `.venv/bin/python tools/sa
 difference intended (none in names, transistors or equations; the port into `bc1` is gone).
 
 Round 5: no findings.
+
+### Run 4
+
+Round 6 (full review of piece `u45`; fresh Fable 5.2 reviewer; 2026-11-20 10:36 -0600; commit f194b8a; images
+`cache/scratch/bl0/review-6/`). Told to suspect: the thin line as a diffusion edge and the diffusion of the
+open column all the way down; bands A and B as one poly and band B's ends; the east ends of the four
+bands; plate and pad of unit 4 as one poly and its buried contact; the second pull-down's diffusion and
+the bar's two joins; unit 5's buried contact, the node's passage into it, the block and the strip; the
+thin metal from pad to pad and the transistor under its pad's poly; the rail contacts and their absence
+on the four nodes; anything left out. Checked with profiles, text maps and `railprof.py`, 10 views: the
+line as a real edge across all five rows in both metal shots, diffusion east of it; A and B continuous
+salmon at x 7191; the diffusion edge crossing each band with the poly overhanging and field beyond;
+plate and pad parted by a single line like the strip's top edge; pad and bar apart (20 px of field);
+single edge lines where each diffusion enters under its plate and on both sides of the two cross-coupling
+gates; the thin metal with dark bars of 10 px or less and holes only at its two pads; both rail contacts
+real, none on the four nodes; the poly cap closed. Could not check: the diffusion across the rail's west
+edge line (dark in every shot), the insides of the two buried contacts, the strip to the contact box at
+x 7352-7366 (a line in each chip at a different x), the supply boxes' contacts beyond 3.4x.
+
+Findings, all geometry only:
+
+1. The open column's east edge under the row `bl0_w17560` is x 7278, not 7292 (a field pocket x 7278-7305
+   at y 17546-17599): the pull-down is about 35 wide. Confirmed (`px.py row 17560 7262 7300 3
+   metal,metal1`: an edge line at x 7276-7279 across the poly); fixed.
+2. Bands C and D lie 6-8 px further north under the rail than west of it. Fixed (each drawn in two parts).
+3. Unit 5's load plate runs on south of the strip to y 17646 and ends on field. Fixed.
+4. The bar is x 7416-7435 and the thin metal about x 7424-7447. Fixed.
+
+`tools/t.sh bl0 sameconn.py f194b8a`: connections identical. `.venv/bin/python tools/sameconn.py f194b8a`:
+connections identical.
+
+Round 6: no findings that change a connection.
 
 ## Not done
 
