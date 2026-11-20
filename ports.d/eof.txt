@@ -140,7 +140,7 @@ vcc           M      8510-8560,15870          -    R2 (bc1's M 8534,14990 y16300
 # (gone: eof_w16823 P 8760,16986-17003 and eof_w16693 P 8800,17116-17135: the unit they entered is drawn;
 #  the rails' ports at y 16985 / 16960 moved to y 17300 / 17240)
 eof_w17040    M      9001-9015,17610          out  the inverter inv17's output: the metal south of the pad (9008,17560) (follower: to a corner (9003,17780), west to (8727,17779); not checked)
-eof_w17168    M      9050-9064,17600          out  the NOR nor17's output: the metal x 9057 on south of the corner (9057,17518) (seen to y 17640)
+eof_w17168    M      9050-9064,17600          out  the NOR nor17's output: the metal x 9057 on south of the corner (9057,17518); it ends 47 px on, on a pad with a contact at about (9055,17647), whose poly runs west along y 17636-17656 (not drawn)
 eof_w17212    P      8990,15812-15832         in   the NOR's second input: the poly row west of the pad (9053,15822) (believed: to the pad (8838,15822) of the thin metal x 8792)
 vss           M      8686-8732,17300          -    column B's VSS rail on south of the NOR's second VSS box (drawn y 15870-17300)
 vcc           M      8510-8560,17240          -    R2 on south of the NOR's VCC box (drawn y 15870-17240)

@@ -561,7 +561,7 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `lat15`, the data track | x 8800-8900, y 15722-16030 | from the data pad north on x 8838 to y 15868, east to x 8880, north over two poly rows to a pad with a contact (8880,15738); the pad's poly row y 15727-15745 west to x 8800 (port); the track south of the data pad to y 16030 (port) |
 | `cap16`, the box and the diffusion | x 8908-9254, y 16434-16745 | the lower node's leg on east to x 9090, north on x 9068-9090 into a buried-contact box on a diffusion pad (9056-9102, 16672-16706); a neck x 9070-9088 north to a diffusion rectangle x 8908-9254, y 16477-16607 (with a step x 9167-9254 up to y 16434): no gate, no contact |
 | `w16693`, the upper node's wire | x 8800-9028, y 16840-17135 | the metal x 9012 south to a pad with a contact (9011,17080); the pad's poly 35 px south and west as a row y 17116-17135 under four tracks to x 8800 (port: the unit south of the latch) |
-| `inv17`, the inverter | x 8512-8814, y 16960-17072 | a copy of `inv16`'s build 607 px lower, by hand: under the VSS rail the latch `lat16`'s foot box as source, the gate (y 16986-17006: the west end of `eof_w16823`'s branch row), the node (y 17011-17043); the node's strip east (y 17024-17039) to a diffusion pad (8772-8814, 17021-17063) with a metal contact (8791,17040); the load west of the rail: strip y 16988-17016 under a plate (8563-8655, 16979-17039) to a VCC box (8512-8562, 16987-17047; contact (8533,17019)), a tie box (8618-8660, 17040-17072) under the thin metal x 8637-8650 (uncertain) |
+| `inv17`, the inverter | x 8512-8814, y 16960-17072 | a copy of `inv16`'s build 607 px lower, by hand: under the VSS rail the latch `lat16`'s foot box as source, the gate (y 16986-17006: the west end of `eof_w16823`'s branch row), the node (y 17011-17043); the node's strip east (y 17024-17039) to a diffusion pad (8772-8814, 17021-17063) with a metal contact (8791,17040); the load west of the rail: strip y 16988-17016 under a plate (8563-8655, 16974-17039) to a VCC box (8512-8562, 16987-17047; contact (8533,17019)), a tie box (8618-8660, 17040-17072) under the thin metal x 8637-8650 (uncertain) |
 | `inv17`, its output wire | x 8778-9030, y 17040-17610 | a thin metal (10 px) from the pad: a diagonal (8791,17062)-(8798,17095), south on x 8798, x 8796 from y 17272, over three boxes of other nodes (y 17144-17210, 17318-17368, 17454-17497: uncertain) to a pad with a contact (8792,17561); the pad's poly row y 17551-17569 east under four tracks to a pad with a contact (9008,17560); its metal south (stub to y 17610) |
 | `nor17`, the gate | x 8700-8805, y 17074-17290 | VSS box under the rail (y 17074-17111, contact (8722,17092)); a band east (y 17097-17110) into the top of a diffusion column x 8757-8785 east of the rail; row 1 (y 17116-17135, `eof_w16693`) over it; the node (y 17135-17203) with a buried-contact box (8765-8802, 17151-17192) in which row 2, the output, ends; row 3 (y 17203-17222, `eof_w17212`) over it; a band west (y 17231-17245) into a second VSS box under the rail (y 17231-17290, long contact (8714,17258)) |
 | `nor17`, the load | x 8508-8760, y 17148-17238 | the node's strip west under the rail (y 17163-17181), under the thin metal x 8637-8650 and a plate (8573-8623, 17148-17232; strip y 17166-17190) to a VCC box (8508-8565, 17162-17208; contact (8525,17183)); a tie box (8628-8662, 17196-17238) under the thin metal, with a tab of the plate and a tail of the strip (uncertain) |
@@ -1736,9 +1736,9 @@ the latch copy north of it (here `lat16`'s, contact (8713,16950)).
 | Part | What | Evidence |
 |---|---|---|
 | gate | y 16986-17006 under the rail: the west end of the lower node's branch row (piece `lat16`: `P 8760,16986:8935,17003`), to x 8684 | `railprof.py 8692 8732 16960 17300`: diffusion to y 16987, gate 16988-17010, diffusion 17011-17043; `px.py col 8712 16978 17050 4 acid1b`: bright salmon y 16988-17004 |
-| node, east | a strip y 17024-17039 out of the rail to the pad. **Diffusion, and joined to the pad**: redder than the field south of it in three shots (stripped red minus green 25-28 against 2-14; chip-2 metal 41-44 against 24-28, blue 81-92; chip-1 metal 31-37 against 10-17), and the pad's dark west edge line (x 8765-8769 at y 17054) is absent where the strip arrives (y 17031: no sample under 141 from x 8750 to x 8780) | `px.py col 8758 16976 17078 3 acid1b,acid,metal`; `px.py row 17031 / 17054 8744 8800 3 acid1b,acid,metal,metal1` |
+| node, east | a strip y 17024-17039 out of the rail to the pad. **Diffusion, and joined to the pad**: redder than the field south of it in three shots (stripped red minus green 25-28 against 2-14; chip-2 metal 41-44 against 24-28, blue 81-92; chip-1 metal 31-37 against 10-17), and the pad's dark west edge line (x 8765-8769 at y 17054) is absent where the strip arrives (y 17031: in the clean shot no sample under 137 from x 8750 to x 8780; the dark at x 8776-8783 there in the other three shots is the contact's ring: review round 27) | `px.py col 8758 16976 17078 3 acid1b,acid,metal`; `px.py row 17031 / 17054 8744 8800 3 acid1b,acid,metal,metal1` |
 | output pad | a diffusion pad x 8772-8814, y 17021-17063, plain tan like the VCC box, with a metal contact: ring and bright centre (8792,17040) in both metal shots (chip-2 red 181-233 at y 17032-17047, a dark ring 40 px across), dark specks at (8785,17036) in the clean shot. `inv16` has a buried contact and a poly here; this pad has **no poly** | `px.py row 17036 8728 8826 3`, `px.py col 8792 17008 17076 3`; `r21_a1.png` |
-| load | as `inv16`'s: the node west under the rail's margin, through the open gap (x 8658-8678), a strip y 16988-17016 under the plate (8563-8655, 16979-17039) to the VCC box (contact (8533,17019): `eof_cchk.py`: -13, 217/135) | `r21_a1.png`, `r21_o1.png` |
+| load | as `inv16`'s: the node west under the rail's margin, through the open gap (x 8658-8678), a strip y 16988-17016 under the plate (8563-8655, 16974-17039) to the VCC box (contact (8533,17019): `eof_cchk.py`: -13, 217/135) | `r21_a1.png`, `r21_o1.png` |
 | tie | the heavy-outlined box (8618-8660, 17040-17072) under the thin metal x 8637-8650 below the plate's east end: uncertain, as `inv16`'s (Ambiguity 70) | `r21_o1.png` |
 
 **The inverter's output wire.** A thin metal, about 10 px wide, leaves the pad south: a diagonal from
@@ -1767,7 +1767,7 @@ The end pad's poly row runs east along y 17551-17569 under the tracks x 8838, 88
 clean red minus green 37-42, no ring) to **a pad with a contact (9008,17560)**: ring and bright centre in
 both metal shots, the pad vivid red in the clean shot with no green hole (Ambiguity 77). Its metal runs
 south (drawn to y 17610; `follow.py 9008 17600 S --gap 16`: to a corner (9003,17780), west to (8727,17779):
-not checked).
+not checked). It is about 10 px wide to y 17250 and 13 below (x 8789-8802: `px.py row 17255 / 17265 / 17280`).
 
 **The NOR** (piece `nor17`; by hand: `r21_b1.png` 3x, `r21_c1.png` 5x three shots, `r21_c2.png` 6x four shots,
 `r21_g1.png` 4x three shots, `r21_j1.png` 5x three shots, `r21_e1.png` 3x; overlays `r21_o1.png`, `r21_o2.png`).
@@ -1788,7 +1788,10 @@ Run 20 saw "three rows over a column" and took all three for inputs. Row 2 is th
 cross the column. It runs east under the thin metal (`inv17`'s output wire, dark there: Ambiguity 76) and
 the tracks x 8838, 8882, 8925, 8968 to **a pad with a contact (9007,17170)** (`eof_cchk.py`: -25, 198/183).
 The pad's metal runs south on x 9011 over row 3 (no contact: `eof_cchk.py 9010,17212`: 46, no ring) to a
-corner (9011,17518), east to (9057,17518) and south on x 9057 (drawn to y 17600; `r21_f1.png`, 2.2x). **The
+corner (9011,17518), east to (9057,17518) and south on x 9057 (drawn to y 17600; `r21_f1.png`, 2.2x). Beyond
+the port the metal **ends on a pad with a contact at about (9055,17647)** (ring and bright centre in both
+chips; `textmap.py 8990 17612 9082 17672 4`; found by review round 27), whose poly runs west along y 17636-17656
+under `eof_w17040`'s metal x 9011 (bars of the row's edges only, no ring): not drawn. **The
 corner passes 10 px north of the ring of `inv17`'s pad (9008,17560) and does not touch it** (trap 16):
 between the arm's south edge (y 17527) and the ring (y 17542) both metal shots show bare ground (chip 2: 9,
 chip 1: 7 on the text map's scale) and the clean shot open ground (`textmap.py 8984 17494 9040 17600 3
@@ -1805,8 +1808,10 @@ end of the track x 9099 (nothing else leaves the pad: field east of it, the step
 30 px south of its ring; `r21_e1.png`, `r21_o2.png`). The track is straight from there to y 15880
 (`tl5_tracks.py v 9099 14700 17200`: between y 15880 and y 17195 the only stretches without metal in both
 chips are the 8-11 px bars of the two large diffusions' edges at y 16474-16481, 16602-16610, 16777-16785,
-16992-17002, and 47 px at y 16671-16717, where its west edge lies over the east edge of the pad of
-`eof_w16823`'s buried contact, piece `cap16`: Ambiguity 72, drawn `?M` now). **At y 15870 it is not the
+16992-17002, and 47 px at y 16671-16717, where its west part lies over the east edge of the pad of
+`eof_w16823`'s buried contact, piece `cap16`: Ambiguity 72, drawn `?M` now; in chip 2 the track keeps its
+width there with a bright strip at x 9096 and the rest dim, and chip 1's darkness is a blemish over both
+tracks and the box: review round 27). **At y 15870 it is not the
 track x 9099 of further north**: sampled every 100 px (`eof_mrun.py row ...`) the line reads as one track
 from y 17180 to the bus line y 14742, which turns south at (9097,14745) (`r21_k1.png`, 4.5x); but at
 (9097,15870) the metal turns west along y 15858-15882 to (9053,15870) and north to **a pad with a contact
@@ -1911,7 +1916,7 @@ driver lies; the other three lead to the loads.
 | `eof_w16000` | metal | (8831-8845, 16030) | ? | piece `lat15`: the track x 8838 on south of the data pad (8838,16000) (the follower: to (8838,17306); not checked) |
 | `eof_w16040` | metal | (8919-8931, 16300) | in | piece `lat15`: the upper latch's enable: the metal x 8925 on south of its lower pad (8925,16262) (the follower: to (8925,17694), west along y 17700 to x 8643; not checked) |
 | `eof_w17040` | metal | (9001-9015, 17610) | out | piece `inv17`: the inverter's output, the metal south of the pad (9008,17560) (the follower: to a corner (9003,17780), west to (8727,17779); not checked). (The ports `eof_w16823` (8760, 16986-17003) and `eof_w16693` (8800, 17116-17135) are gone: the unit they entered is drawn) |
-| `eof_w17168` | metal | (9050-9064, 17600) | out | piece `nor17`: the NOR's output, the metal x 9057 on south of the corner (9057,17518) (seen to y 17640) |
+| `eof_w17168` | metal | (9050-9064, 17600) | out | piece `nor17`: the NOR's output, the metal x 9057 on south of the corner (9057,17518); 47 px on it ends on a pad with a contact at about (9055,17647), whose poly runs west along y 17636-17656 (review round 27; not drawn) |
 | `eof_w17212` | poly | (8990, 15812-15832) | in | piece `in212`: the NOR's second input, the poly row west of the pad (9053,15822) (believed: to the pad (8838,15822) of the thin metal x 8792) |
 | `vss` | metal | (8686-8732, 15870) and (8686-8732, 17300) | - | pieces `lat15`, `inv16`, `lat16`, `inv17`, `nor17`: column B's VSS rail, drawn over the two latch copies, the inverters and the NOR only; it runs on both ways (north to the piece over V and W) |
 | `vcc` | metal | (8510-8560, 15870) and (8510-8560, 17240) | - | pieces `lat15`, `inv16`, `lat16`, `inv17`, `nor17`: R2 (`bc1`'s `M 8534,14990 y16300 w=48`, drawn again from y 15870) and on south of `bc1`'s end, over the VCC boxes of the two latch copies and the inverter |
@@ -2538,7 +2543,8 @@ driver lies; the other three lead to the loads.
 77. **The pad (9008,17560) shows no green hole** (piece `inv17`; trap 26's converse). Both metal shots show
     a ring and a bright centre there and the pad's own metal leaving south; chip 1's clean shot shows the
     pad vivid red with no hole (`eof_cchk.py 9007,17560`: 27), as at the pad (6513,7889) (Ambiguity 38,
-    AMB-041). Drawn as a contact. If it were none, the poly row from the pad (8792,17561) would end on
+    AMB-041). Drawn as a contact. Review round 27 looked at the chip-2 stripped shot at 6x: a pitted
+    box, which is what a metal contact looks like there. If it were none, the poly row from the pad (8792,17561) would end on
     nothing and the metal south of the pad would have no source.
 78. **`nor17`'s tie** (piece `nor17`). The heavy-outlined box (8628-8662, 17196-17238) below the load's
     strip lies under the thin metal x 8637-8650 (another net's, dark over it); the plate's tab enters it
@@ -3840,6 +3846,71 @@ tools/t.sh eof sameconn.py a8bd088              connections identical
 
 Round 26: no findings that change a connection.
 
+### Round 27 (full review of pieces `inv17`, `nor17` and `in212`; 2026-11-20 05:15 to 05:33 +0000, at commit 3ee5afd)
+
+A fresh reviewer (Claude Fable 5.2), briefed with the three pieces' claims (the inverter with its source,
+gate, node strip, output pad, load and tie, and its output wire pad to pad with the three `?M` stretches, the
+row and the pad (9008,17560); the NOR with both VSS boxes, the bands and the column, rows 1 and 3 as gates,
+row 2 ending in a buried contact, the strip to the load, the output metal with its corner, row 3 to its pad,
+the rails, the undrawn plain area; the track x 9099 from the pad (9098,17210) to the pad (9053,15822) with
+its corner, its `?M` stretch and the claim that it is not the track north of y 15830) and told to look hardest
+at: whether the inverter's strip is diffusion and opens into the pad; metal contact or poly on that pad; the
+thin metal (dim, unseen by the follower): one metal, a step or break, a contact at any of the three boxes,
+where it begins; the pad (9008,17560) without a green hole; the load's shapes placed from another inverter;
+whether both ends of the NOR's column reach VSS and the second box has a contact; whether row 2 ends in a
+buried contact or is a third gate; whether rows 1 and 3 cross the column; where the node's strip goes west;
+the output metal over row 3 and its corner beside the pad (trap 16); every track crossing; the corner
+(9097,15870), the pad (9053,15822), any pad, tap or step in the track's run, the `?M` stretch. It used 76
+tool calls and 23 images (`cache/scratch/eof/review-27/`), with `px.py`, `textmap.py`, the follower and the
+extraction.
+
+It checked and found correct. `inv17`: the strip is diffusion with edges at y 17019 and 17045 and opens into
+the pad; the pad has a pitted contact and no poly, and nothing goes north from it; the gate row ends at
+x 8684 and is not joined to the plate; the gap diffusion is bounded y 16990-17058; the thin metal runs from
+pad to pad with no ring, widening or hole at the three boxes; the pad (9008,17560) is a pitted box in the
+chip-2 stripped shot (`k1.png`, 6x): a contact (so Ambiguity 77 has its second look). `nor17`: both bands
+are diffusion and reach tan under the rail's margin; both VSS contacts exist; the column is unbroken past
+the box on its west side (`px.py col 8761`), so row 2 ends on it and is no gate; rows 1 and 3 cross fully;
+the strip reaches the VCC box; the pads (9011,17080) and (9007,17170) are separate metals (`i1.png`); the
+corner at y 17518 clears the pad's ring by bare ground; no hole under any track on the three rows.
+`in212`: the corner and the pad (9053,15822) as drawn, with bare ground to the upper track and to the track
+x 9012 (`l1.png`); the follower's run west there is a jump; no pad or tap in the run (its three contact
+candidates are bright metal over flat tan). The overlay `q1.png` (3.9x, stripped shot): every outline on a
+feature; the island is field. Four notes, none changing a connection:
+
+1. **The `?M` stretch of `in212`, y 16671-16717** (a comment): the trace said the metal is "dark in both
+   chips"; chip 1's darkness is an irregular blob about 60 x 50 px over both tracks and the box (absent in
+   chip 2), and in chip 2 the track keeps its width and its centre stays bright. Confirmed (`px.py row 16690
+   9084 9112 3 metal,metal1,acid1b`: chip 2 197/177/95 at x 9096, 126-148 at x 9099-9105; chip 1 33-101
+   across). The `?M` stays; the comment and the notes are reworded.
+2. **Beyond the port `eof_w17168`** (a note): the metal x 9057 ends 47 px south of the port on a pad with a
+   contact at about (9055,17647) (ring and bright centre in both chips), whose poly runs west along
+   y 17636-17656 under `eof_w17040`'s metal x 9011 with no ring there. Confirmed (`textmap.py 8990 17612 9082
+   17672 4`). The port stays where it is; its note, the Ports table and Not done say so. Not drawn.
+3. **A sentence of the notes** on the inverter's strip ("no sample under 141 from x 8750 to x 8780" at
+   y 17031): true of the clean shot only (137 at step 2); the other shots are dark at x 8776-8783, the
+   contact's ring. The conclusion holds (the pad's west edge line is absent where the strip arrives).
+   Reworded.
+4. **Two sizes** (geometry only): the inverter's plate has its top edge at about y 16972, drawn 16979; the
+   thin metal at y 17250-17285 is x 8787-8802, drawn 10 px wide. Confirmed (`px.py col 8600 / 8640 16962
+   16992 3`: edge line y 16965-16974; `px.py row 17255 / 17265 / 17280 8780 8808 3 metal,metal1`: bright
+   x 8789-8801 in both chips). Fixed: `P 8563,16974:8655,17039`; the wire is 13 px wide from y 17244 to
+   y 17460.
+
+It could not check: the continuity of the thin metal over the three boxes and the absence of a contact
+there (the photos cannot show it: Ambiguity 76); the load ties; the 6-8 px of each band's join hidden under
+the rail's edge line; the track x 9099 at y 15880-16450, seen only at 1.85x and by the follower; the
+identities of the rows `eof_w16823` and `eof_w16693` (earlier pieces) were not re-read.
+
+After the fixes of notes 1-4 (the commit before them is 3ee5afd):
+
+```
+tools/t.sh eof sameconn.py 3ee5afd              connections identical
+.venv/bin/python tools/sameconn.py 3ee5afd      connections identical
+```
+
+Round 27: no findings that change a connection.
+
 ## Not done
 
 - **Task 2, the loads of `sl_eq_r5_n` (= NOT `sl_eq_r5`)**: one load is drawn (piece `r5nor`,
@@ -3921,8 +3992,9 @@ Round 26: no findings that change a connection.
   **Left on that net, and next**: (1) **the two outputs and the NOR's second input**: (i) `eof_w17040`, the metal
   south of the pad (9008,17560) (`follow.py 9008 17600 S --gap 16`: to a corner (9003,17780), west to (8727,17779),
   candidate (8734,17779): one of the pads of the nest of Ls south of column B; not checked); (ii) `eof_w17168`,
-  the metal x 9057 south of (9057,17600) (seen to y 17640 on `r21_f1.png`; `follow.py 9010 17195 S --gap 16`
-  ended at (9055,17625): not read); (iii) `eof_w17212`, the poly row y 15812-15832 west of (8990,15822): by its
+  the metal x 9057 south of (9057,17600): it ends on a pad with a contact at about (9055,17647), whose poly runs
+  west along y 17636-17656 under `eof_w17040`'s metal x 9011 with no contact (review round 27; `textmap.py 8990
+  17612 9082 17672 4`); the row is not followed; (iii) `eof_w17212`, the poly row y 15812-15832 west of (8990,15822): by its
   place the row of the pad (8838,15822), on which the thin metal x 8792 ends by a diagonal; that metal's north
   end is the pad (8792,14870) by the VSS band y 14816-14878 (`bc1` (continue), free; run 20's view, not read;
   the thin metal runs down column B's east edge over the units' boxes: trap 27). (iv) **the unit below the NOR**

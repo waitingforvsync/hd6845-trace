@@ -1640,7 +1640,7 @@ D 8658,16993:8678,17057
 D 8556,16988:8664,17016
 D 8512,16987:8562,17047
 C 8533,17019 s=22x34
-P 8563,16979:8655,17039              # the plate
+P 8563,16974:8655,17039              # the plate (top edge line y 16965-16974: px col 8600, col 8640; review round 27)
 # the tie: a heavy-outlined box under the thin metal x 8637-8650 below the plate's east end.
 # Drawn uncertain, like inv16's.
 ?P 8625,17035:8650,17067
@@ -1659,9 +1659,11 @@ P 8563,16979:8655,17039              # the plate
 # the metal bright over it in both chips: no contact).
 M 8791,17040 8791,17062 8798,17095 8798,17150 w=10
 ?M 8798,17144 y17210 w=10
-M 8798,17204 8798,17250 8796,17272 8796,17324 w=10
-?M 8796,17318 y17368 w=10
-M 8796,17362 8796,17440 8794,17460 w=10
+M 8798,17204 y17248 w=10
+# from y 17250 the metal is wider, x 8789-8802 (px rows 17255, 17265, 17280 in both metal shots; review round 27)
+M 8796,17244 y17324 w=13
+?M 8796,17318 y17368 w=13
+M 8796,17362 8796,17440 8794,17460 w=13
 ?M 8794,17454 y17497 w=10
 M 8793,17491 y17562 w=10
 # the end pad and its poly row east (y 17551-17569) under the tracks x 8838, 8882 (ck_out), 8925
@@ -1709,9 +1711,11 @@ N P 8900,17212 eof_w17212
 # (9053,15870) and north to a pad with a contact (9053,15822) (ring and bright centre in both
 # metal shots, a hole in the clean shot: eof_cchk -16, centres 248/194; r21_k2.png 3.6x,
 # r21_k3.png 5x, three shots). The pad's poly row runs west along y 15812-15832 (stub: port).
-# At y 16671-16717 the track's west edge lies over the east edge of the pad of eof_w16823's
-# buried contact (piece cap16) and the metal is dark in both chips: read as no contact in run 20
-# (not widened; notes, Ambiguity 72); drawn ?M there (trap 27). It crosses the large diffusion
+# At y 16671-16717 the track lies with its west part over the east edge of the pad of eof_w16823's
+# buried contact (piece cap16) and fails the metal test at x 9099 in both chips: in chip 2 it keeps
+# its width, a strip at x 9096 stays bright (197/177/95) and the rest is dim (126-148); chip 1's
+# darkness is a blemish 60 x 50 px over both tracks and the box (review round 27). Read as no
+# contact in run 20 (not widened; notes, Ambiguity 72); drawn ?M there (trap 27). It crosses the large diffusion
 # of piece cap16 (y 16477-16607) with no contact.
 M 9099,17210 y16712 w=13
 ?M 9099,16718 y16666 w=13
