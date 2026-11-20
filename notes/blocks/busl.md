@@ -803,9 +803,10 @@ test and the clean shot's hole test on every straight segment (`tools/tl5_tracks
   with the ring and bright centre in both metal shots and a greenish patch inside the pad in the
   chip-2 stripped shot (`tools/textmap.py 6866 14852 6908 14892 3 --acid`, `6908 14808 6950 14848 3
   --acid`; `fa`'s diagonal pad is a pitted box there, `f10_ncol.png`): trap 26's converse).
-- **The poly columns** between the diagonal pads and the second pads lie under two of `eofw`'s
-  staircase metals (y 8660-8730) and one more metal (y 8745-8765): cream under the metals and dark in
-  the gaps in the clean shot, poly orange in the open stretches of the chip-2 metal shot
+- **The poly columns** between the diagonal pads and the second pads lie under one metal of `eofw` (y 8662-8680, both columns) and one staircase metal that no package
+  draws (y 8704-8722 west of x 7135, over column B; a leg south at x 7140-7152 between the columns;
+  y 8748-8765 going east, over column A: `tools/sel_cut.py v 7100`, `v 7146`, `v 7180 8640 8790`;
+  corrected after the review): cream under the metals and dark in the gaps in the clean shot, poly orange in the open stretches of the chip-2 metal shot
   (`tools/busl_rowy.py 8712 7095 7190 --horizontal`: 143/111/49); no ring in any crossing metal and no
   hole on either column (`tools/tl5_tracks.py v 7122 8640 8780`, `v 7166 8595 8820`: two dark stretches
   on column B at y 8737 and y 8775, both in the open gaps between the metals).
@@ -834,11 +835,17 @@ test and the clean shot's hole test on every straight segment (`tools/tl5_tracks
   throughout): straight, no pad, no step. Row y 14827 lies in the open at x 7355-7445 (no track
   crosses it there: `bc1_ld_a`'s metal jogs east along y 14803 above it): orange-brown poly in both
   metal shots, dark in the clean shot (`tools/tl5_tracks.py h 14827 6950 7550` lists that stretch as
-  low red minus green: open poly, not holes). **Over row y 14870 from x 7378 to the region's edge lies
+  low red minus green: open poly, not holes). **Over row y 14870 from x 7378 to x 7513 lies
   a wide metal** (about y 14840-14905, its west edge at x 7378; the row's two edges print through it
-  as dark lines): it is drawn by no package and is not followed here (believed supply). No contact
-  onto the row: the clean shot is protected cream along the whole row with no hole
-  (`tools/tl5_tracks.py h 14870 6905 7550`: none); the dark blob at (7470,14875) is on chip 2 only.
+  as dark lines), **with a limb x 7469-7513 that runs north from it and also crosses row y 14827**
+  (`tools/sel_cut.py h 14848 7350 7570`: 7463-7514; `h 14800`, `h 14760`: 7468-7515; corrected after
+  the review, which found the limb and the plate's east end: the first reading had the plate run past
+  x 7550): it is drawn by no package and is not followed here (believed supply). No contact onto
+  either row: the clean shot is protected cream along row y 14870 with no hole (`tools/tl5_tracks.py h
+  14870 6905 7550`: none; `h 14827`: nothing at x 7469-7513); the dark blob at (7470,14875) is on chip
+  2 only. Under the limb, between the two rows, the clean shot has a grey band (x 7484-7504): read as
+  field by the reviewer (no edge line prints through the metal in either chip and the rows are no
+  brighter over it; no control under another wide metal).
 - **The rows' ends outside the piece.** East of x 7550 (view `f10_east.png`, 1.6x): row y 14827 runs on
   to a pad at about (7794,14826) and row y 14870 to a pad at about (7836,14872), each with a contact
   ring, under `bc1`'s bus metals (not drawn, `bc1`'s region; which way each pad's metal leaves was not
@@ -1472,6 +1479,47 @@ only the track x 4909 was read; `lc3` north of y 10400 not re-read.
 
 Round 1: no findings.
 
+**Run 10, pieces `fb`, `fa`. Round 1: full review** (2026-11-20 15:44 to 16:01 +0100; a fresh Fable 5.2
+reviewer agent; commit faf7c54; images in `cache/scratch/busl/review-10/`, 12 used). Told to suspect:
+the diagonal bundle (each drawn diagonal on the right track and the right pad; corners placed from
+cuts every 20 px); the two arms lying on `cdp4_bus_s2`'s and `cdp4_bus_s3`'s rows (a contact; the
+nested corners; the vivid red row under `fb`'s arm); the poly columns under the crossing metals
+(poly, continuous, one per pad pair, a contact from a crossing metal, a second poly or metal on a
+pad); the crossing (6885,13835-13851) on `rsel12_buf`'s row; the three pads without a green hole and
+whether a foot row goes on west of its pad; the foot rows from x 6950 to x 7550 (the wide metal,
+`bc1_ld_a`'s metal at x 7338, a dozen tracks); taps on the six long runs; the end pads (the metal
+running on north, the row leaving west only).
+Checked: the extraction (2,455 nets, 4,579 transistors, 0 errors, 0 warnings); the eight pads at
+3.6-4x (ring and bright centre in both metal shots, a hole or pitted box in a stripped shot, field on
+every other side; neither foot row goes west of its pad: clean shot green, chip-2 blue 73-81 against
+56 for poly; both end metals stop at their pads, the rows leave west only, row y 7171 clears `fb`'s
+end pad by about 13 px of field); the arms at 5x in four shots (corners as drawn, bare ground at every
+other corner position in both chips, no ring or widening; under `fb`'s arm the row is olive at
+x 6886-6914 and vivid red at x 6930-6954 in the clean shot, both metal shots fully bright: colour
+only); the diagonals at 4x in both chips (each one continuous line onto the pad drawn; chip-1 cuts
+every 20 px keep x + y at 15988 and 16054, no step); the columns (poly, continuous, straight: blue
+46-65 in chip 2 along both; no ring where the metals cross; a dim blotch on chip 1 at (7166,8756) on
+the crossing metal, chip 2 bright and the clean shot uniform cream at 5.5x: dirt); the crossing
+(6885,13835-13851) (an edge bar and a chip-2 speck, no pad or widening, the neighbouring tracks alike
+on that row); the long runs by its own two-chip scans (no stretch of 20 px without metal, no metal
+wider than 16 px, no ring; the ring test finds the known pads in chip 2; the eight greenish row
+crossings plain); the foot rows (poly in every open stretch, straight, no pad, no branch by cuts at
+y 14806, 14848, 14892, no contact from any crossing metal, `bc1_ld_a`'s at x 7338 among them).
+Findings: none in the trace. Three remarks on the notes' wording, each checked and the notes
+corrected (no geometry changed): (1) the wide metal over row y 14870 ends at x 7513, not at the
+region's edge, and has a limb x 7469-7513 north that also crosses row y 14827, without contact onto
+either row (confirmed: `tools/sel_cut.py h 14848 7350 7570` gives 7463-7514, `h 14800` and `h 14760`
+7468-7515); (2) the columns pass under one metal of `eofw` (y 8662-8680) and one staircase metal that
+no package draws (y 8704-8722 west of x 7135, a leg x 7140-7152, y 8748-8765 east), not under two of
+`eofw`'s (confirmed: `tools/sel_cut.py v 7100`, `v 7146`, `v 7180 8640 8790`; `eofw` draws one metal
+there); (3) a grey band in the clean shot under the limb between the two rows (x 7484-7504), read as
+field. The two undrawn metals are in Not done.
+Could not check: the rows beyond x 7550 and west of x 7060; where the two undrawn metals go; most row
+crossings were checked by text maps and scans, not by image; the grey band of remark (3) has no
+control under another wide metal.
+
+Round 1: no findings.
+
 ## Not done
 
 - Everything else in the field: about 20 more tracks and the other rows. Next pieces, in the
@@ -1519,9 +1567,12 @@ Round 1: no findings.
   view at 5x agrees; `tools/follow.py` at `--gap 16` jumps it going north from (6429,10426), and going
   north from (6126,10426) it steps from line 2 onto line 3 at y 9775, in `lc3`: ground bright in chip 2
   only, guide trap 30).
-- The wide metal over row y 14870 (x 7378 to beyond x 7550, y about 14840-14905; view
-  `f10_e7400.png`): drawn by no package, not followed (believed supply; `bc1` (continue) has "the VSS
-  plate at the foot of the s0 rail" nearby).
+- The wide metal over row y 14870 (x 7378-7513, y about 14840-14905) with its limb x 7469-7513 north
+  across row y 14827 (views `f10_e7400.png`, `review-10/r12_widemetal.png`): drawn by no package, not
+  followed (believed supply; `bc1` (continue) has "the VSS plate at the foot of the s0 rail" nearby).
+- The staircase metal over the two poly columns of pieces `fb`, `fa` (y 8704-8722 west of x 7135, a
+  leg x 7140-7152, y 8748-8765 east of it): drawn by no package (`eofw` draws the one above it,
+  y 8662-8680); the northern part.
 - Pieces `fb` and `fa`'s ends: east of x 7550 the rows y 14870 and y 14827 to their pads at about
   (7836,14872), (7794,14826) and the metals from those pads (`bc1` (continue), with piece `lc9`'s seven
   rows); west of x 7060 the rows y 7214 and y 7171 across the crossing field, under `eof`'s staircase
