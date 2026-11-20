@@ -3165,7 +3165,7 @@ pad rows; chip 1 at (8838,16866), where its metal is missing.
 
 Round 22: two findings that change a connection, fixed; a fix check follows.
 
-### Round 23 (fix check of round 22's changes; 2026-11-20 02:36 to 02:47 +0000, after commit e2efee7)
+### Round 23 (fix check of round 22's changes; 2026-11-20 02:34 to 02:39 +0000, after commit e2efee7)
 
 One fresh reviewer agent on Claude Fable 5.2, briefed with the two findings and `git diff e2efee7 --
 trace/eof.txt` only; trace at commit 86e3897; its images (7) in `cache/scratch/eof/review-23/`.
