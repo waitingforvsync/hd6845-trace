@@ -111,9 +111,14 @@ bd1_n2     P      5403-5421,6345           out  onto tl5's poly end (its port bd
 lc3_w9947     P      7550,14772-14796         out  onto busl's row end (its port there): the ripple counter's clock, driven by the inverter U at (8733,15000)
 vss           M      8687-8737,14900          -    column B's VSS rail north of the inverter (it turns west as a band y 14816-14878 to the rail x 8510-8560)
 # Piece vw (run 16): the units V and W, the latch that makes eof_w15127 (the clock inverter's input)
-eof_w15172    P      9150,14645-14662         in   the hairpin's signal, V's one input: its poly row goes on east through bc2's ground (not followed)
 eof_w15350    M      8873-8889,15465          in   the upper gate of W's stack: the metal of the pad (8881,15351) runs on south (follower: to (8882,16623), not checked)
-eof_w15390    P      9002-9020,14790          in   the lower gate of W's stack: the poly column north of the pad (9008,14828), on north to y 14610 and east (not followed)
 eof_w15300    P      8818-8854,15440-15472    out  W's output at the pad (8836,15456), the south end of its metal; the pad's poly is the next unit's (not drawn)
 vss           M      8687-8737,15465          -    column B's VSS rail on south
 vcc           M      8510-8558,15340          -    R2 (bc1's M 8534,14990 y16300), drawn again over the VCC boxes
+# Pieces in390 and in172 (run 17): two of the latch's inputs followed to bc2's east gate column
+# (the ports eof_w15172 P 9150,14645-14662 and eof_w15390 P 9002-9020,14790 are gone: the wires are drawn on)
+bc2_w15607    M      10261-10275,15520        in   eof_w15390's metal x 10268 onto bc2's metal x 10267 (its port bc2_w15607 (10267,15515)): latch unit b's lower node, the lower gate of W's stack
+bc2_w15000    M      10392,14993-15007        in   gate row 1 of the NOR T: pad A's metal x 10355, its foot east onto bc2's output pad (10395,15000) of latch unit a (its port bc2_w15000 (10385,15000))
+bc2_w14955    M      10434-10448,14946        in   gate row 3 of the NOR T: pad B's metal x 10441 onto bc2's enable metal x 10441 of latch unit a (its port bc2_w14955 (10441,14940))
+vss           M      10543-10597,14590        -    the east column's VSS rail on north of the NOR T (bc2's M 10568,14790 y15270 goes on south from y 14790)
+vcc           M      10721-10771,14590        -    the east column's VCC rail on north of the NOR T (bc2's M 10746,14790 y15270 south of it)

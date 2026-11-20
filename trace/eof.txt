@@ -1206,7 +1206,7 @@ C 8922,15392
 M 8925,15392 y14828 x9008 w=18       # metal north on x 8925 over row C and the row y 15042 (no contact), east at y 14828
 P 8990,14811:9026,14846              # pad (9008,14828)
 C 9008,14828
-P 9002,14790:9020,14815              # its poly column north (x 9002-9020, to y 14610 and east: not drawn)
+# (its poly column north is drawn on in piece in390, run 17)
 N M 8925,15100 eof_w15390
 D 8738,15406:8797,15424              # the foot: W's ground east of the rail
 D 8560,15302:8700,15316              # node west: the strip from the rail to the VCC box; its top edge is one line at y 15300-15302
@@ -1234,3 +1234,56 @@ C 9054,14785
 P 9053,14790 y14653 x9150 w=17       # north x 9044-9062, east along y 14645-14662 (goes on east)
 N M 8882,15000 eof_w15172
 N P 9120,14653 eof_w15172
+# ======================================================================
+# Pieces in390 and in172 (run 17, 2026-11-20): two of the three inputs of the latch V/W followed east through
+# bc2's ground (free) to their sources at bc2's east gate column.
+#   eof_w15390 = bc2_w15607 (latch unit b's lower node), by a poly row and a metal: wiring only
+#   eof_w15172 = NOR(bc2_w15000, bc2_w14955): the top unit T of bc2's east column (x 10484-10770, y 14598-14790)
+# ---- in390: eof_w15390 from the pad (9008,14828)
+P 9005,14600:9023,14815              # the poly column north of the pad: under eof_w15172's metal y 14785 and bc1's bus
+                                     #   metals y 14742, 14699, 14656 (no contact: no pad, no hole, no ring)
+P 9005,14600:10078,14621             # the row east: bc1's bus metal y 14603-14618 lies on it from the west to x 9190,
+                                     #   where that metal turns south (no contact); under eleven vertical metals
+P 10074,14594:10112,14624            # end pad
+C 10092,14609                        #   ring and bright centre in both chips, pits; no green hole in the clean shot
+M 10092,14611 x10268 w=14            # metal east
+M 10268,14604 y15520 w=13            # south 910 px onto bc2's metal M 10267,15515 y15622 (latch unit b's output pad)
+N M 10268,15300 bc2_w15607
+N P 9600,14610 eof_w15390
+# ---- in172: eof_w15172's row on east, and its driver
+P 9140,14644:10302,14664             # the row east of x 9150 (bc1's bus metal y 14656 lies on it to x 9141 and turns south)
+P 10284,14644:10302,14704            # the step south at x 10284-10301
+P 10284,14687:10515,14704            # the lower row east, under the metals x 10355 and x 10397, into the output box
+B 10484,14681:10520,14714            # output box of unit T (heavy outline, greenish inside) on the node
+N P 10400,14696 eof_w15172
+# unit T: a NOR west of the VSS rail
+D 10495,14622:10530,14771            # the body west of the rail: top band, gate 1, node, gate 3, bottom band
+D 10495,14622:10592,14642            # top band east into the VSS box
+D 10545,14598:10592,14642            # VSS box under the rail
+C 10562,14613
+D 10495,14752:10592,14771            # bottom band east into the lower VSS box
+D 10545,14752:10592,14790
+C 10562,14769
+M 10570,14590 y14790 w=54            # VSS rail (bc2's M 10568,14790 y15270 goes on south)
+N M 10570,14700 vss
+P 10370,14643:10541,14665            # gate row 1, from pad A
+P 10335,14636:10373,14672            # pad A
+C 10352,14654
+M 10355,14654 y15000 x10392 w=14     # its metal south, a foot east onto bc2's output pad (10395,15000)
+N P 10450,14654 bc2_w15000
+P 10455,14728:10541,14750            # gate row 3, from pad B
+P 10420,14720:10458,14756            # pad B
+C 10440,14738
+M 10441,14738 y14946 w=13            # its metal south onto bc2's enable metal M 10441,14940 y15188
+N P 10480,14739 bc2_w14955
+D 10525,14690:10650,14706            # node strip east under the rail
+D 10627,14690:10647,14764            # tail south into the tie box
+D 10645,14690:10745,14717            # load strip under the plate to the VCC box
+P 10660,14668:10716,14762            # the load's plate
+P 10630,14742:10662,14762            # its tab west into the tie box
+B 10624,14738:10652,14768            # tie: plate to node
+D 10718,14690:10770,14736            # VCC box
+C 10742,14712
+M 10746,14590 y14790 w=50            # VCC rail (bc2's M 10746,14790 y15270 goes on south)
+N M 10746,14700 vcc
+@alias bc2_w15607 eof_w15390
