@@ -3578,7 +3578,7 @@
   },
   {
    "id": 447,
-   "name": "cdp3_k_b",
+   "name": "bus_eq_r15",
    "named": true,
    "x": 7924,
    "y": 11192,
@@ -4274,7 +4274,7 @@
   },
   {
    "id": 534,
-   "name": "cdp3_k_c",
+   "name": "g_eq_r14",
    "named": true,
    "x": 8335,
    "y": 8675,

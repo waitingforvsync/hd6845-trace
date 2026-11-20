@@ -1434,15 +1434,15 @@ transistors
   t1428 at   7574,  8255  W/L   57/22   -     gate eof_w8168    vss <-> eof_w8298
   t1429 at   7694,  8418  W/L   27/56   load  gate tl3_w3982    tl3_w3982 <-> vcc
   t1430 at   7574,  8386  W/L   57/20   -     gate eof_w8298    vss <-> tl3_w3982
-  t1431 at   7728, 11150  W/L  145/24   -     gate cdp4_xr_s0_ne cdp3_k_b <-> vss
-  t1432 at   7924, 11194  W/L   68/42   load  gate cdp3_k_b     cdp3_k_b <-> vcc
-  t1433 at   8252, 11181  W/L  255/24   -     gate cdp4_xr_s1_ne cdp3_k_b <-> vss
-  t1434 at   8642, 11181  W/L  255/24   -     gate cdp4_xr_s2_ne cdp3_k_b <-> vss
-  t1435 at   9034, 11181  W/L  255/24   -     gate cdp4_xr_s3_ne cdp3_k_b <-> vss
-  t1436 at   9424, 11181  W/L  255/24   -     gate cdp4_xr_s4_ne cdp3_k_b <-> vss
-  t1437 at   9812, 11181  W/L  255/24   -     gate cdp4_xr_s5_ne cdp3_k_b <-> vss
-  t1438 at  10202, 11181  W/L  255/24   -     gate cdp4_xr_s6_ne cdp3_k_b <-> vss
-  t1439 at  10594, 11181  W/L  255/24   -     gate cdp4_xr_s7_ne cdp3_k_b <-> vss
+  t1431 at   7728, 11150  W/L  145/24   -     gate cdp4_xr_s0_ne bus_eq_r15 <-> vss
+  t1432 at   7924, 11194  W/L   68/42   load  gate bus_eq_r15   bus_eq_r15 <-> vcc
+  t1433 at   8252, 11181  W/L  255/24   -     gate cdp4_xr_s1_ne bus_eq_r15 <-> vss
+  t1434 at   8642, 11181  W/L  255/24   -     gate cdp4_xr_s2_ne bus_eq_r15 <-> vss
+  t1435 at   9034, 11181  W/L  255/24   -     gate cdp4_xr_s3_ne bus_eq_r15 <-> vss
+  t1436 at   9424, 11181  W/L  255/24   -     gate cdp4_xr_s4_ne bus_eq_r15 <-> vss
+  t1437 at   9812, 11181  W/L  255/24   -     gate cdp4_xr_s5_ne bus_eq_r15 <-> vss
+  t1438 at  10202, 11181  W/L  255/24   -     gate cdp4_xr_s6_ne bus_eq_r15 <-> vss
+  t1439 at  10594, 11181  W/L  255/24   -     gate cdp4_xr_s7_ne bus_eq_r15 <-> vss
   t1440 at   7679, 11615  W/L   56/22   -     gate cdp4_lr_s0_a cdp4_lr_s0_n2 <-> vss
   t1441 at   7789, 11649  W/L   31/50   load  gate cdp4_lr_s0_n2 vcc <-> cdp4_lr_s0_n2
   t1442 at   7836, 11762  W/L   26/29   load  gate cdp4_b_s0    vcc <-> cdp4_b_s0
@@ -1607,8 +1607,8 @@ transistors
   t1601 at  10705,  7702  W/L   53/22   -     gate cdp2_a_c_s7_n2 vss <-> cdp2_a_c_s7_q
   t1602 at   8075,  7754  W/L   36/23   -     gate wr_r10       db_b6 <-> cdp2_a_c_s1_a
   t1603 at   8149,  9286  W/L   38/23   load  gate cdp3_bl_c1   vcc <-> cdp3_bl_c1
-  t1604 at   7997,  9290  W/L  130/21   -     gate cdp3_k_b     cdp3_bl_c1 <-> n2263
-  t1605 at   7997,  9338  W/L  130/20   -     gate cdp3_k_c     n2263 <-> vss
+  t1604 at   7997,  9290  W/L  130/21   -     gate bus_eq_r15   cdp3_bl_c1 <-> n2263
+  t1605 at   7997,  9338  W/L  130/20   -     gate g_eq_r14     n2263 <-> vss
   t1606 at   7907,  9940  W/L  189/30   -     gate cdp3_gate_e  cdp3_n_c0 <-> vss
   t1607 at   7908, 10199  W/L  194/28   -     gate cdp3_gate_f  cdp3_hq_c0 <-> cdp3_n_c0
   t1608 at   7705, 10757  W/L   72/22   -     gate wr_r13       cdp3_bl_c0 <-> cdp3_h_c0_x
@@ -1833,13 +1833,13 @@ transistors
   t1827 at   8427,  4806  W/L   62/20   -     gate sl_eq_r5     vss <-> sl_eq_r5_n
   t1828 at   8608,  7596  W/L   15/83   hold  gate vss          cdp2_a_c_s2_a <-> cdp2_a_c_s2_q
   t1829 at   8465,  7754  W/L   36/23   -     gate wr_r10       db_b5 <-> cdp2_a_c_s2_a
-  t1830 at   8510,  8135  W/L  145/24   -     gate cdp4_xr_c2_ne vss <-> cdp3_k_c
-  t1831 at   8706,  8179  W/L   68/42   load  gate cdp3_k_c     vcc <-> cdp3_k_c
-  t1832 at   9032,  8166  W/L  255/24   -     gate cdp4_xr_c3_ne cdp3_k_c <-> vss
-  t1833 at   9422,  8166  W/L  255/24   -     gate cdp4_xr_c4_ne cdp3_k_c <-> vss
-  t1834 at   9812,  8166  W/L  255/24   -     gate cdp4_xr_c5_ne cdp3_k_c <-> vss
-  t1835 at  10202,  8166  W/L  255/24   -     gate cdp4_xr_c6_ne cdp3_k_c <-> vss
-  t1836 at  10592,  8166  W/L  255/24   -     gate cdp4_xr_c7_ne cdp3_k_c <-> vss
+  t1830 at   8510,  8135  W/L  145/24   -     gate cdp4_xr_c2_ne vss <-> g_eq_r14
+  t1831 at   8706,  8179  W/L   68/42   load  gate g_eq_r14     vcc <-> g_eq_r14
+  t1832 at   9032,  8166  W/L  255/24   -     gate cdp4_xr_c3_ne g_eq_r14 <-> vss
+  t1833 at   9422,  8166  W/L  255/24   -     gate cdp4_xr_c4_ne g_eq_r14 <-> vss
+  t1834 at   9812,  8166  W/L  255/24   -     gate cdp4_xr_c5_ne g_eq_r14 <-> vss
+  t1835 at  10202,  8166  W/L  255/24   -     gate cdp4_xr_c6_ne g_eq_r14 <-> vss
+  t1836 at  10592,  8166  W/L  255/24   -     gate cdp4_xr_c7_ne g_eq_r14 <-> vss
   t1837 at   8510,  8442  W/L   44/22   -     gate cdp3_g_c2    vss <-> cdp4_xr_c2_nor
   t1838 at   8734,  8458  W/L   37/22   -     gate cdp4_la_c2_q vss <-> cdp4_xr_c2_nor
   t1839 at   8900,  8442  W/L   44/22   -     gate cdp3_g_c3    vss <-> cdp4_xr_c3_nor
@@ -4845,7 +4845,7 @@ gates
   tc2_r5589    = NOT((lc1_w7170 & rst_ck) | (lc1_w7170 & tc2_sr_g))
   cnt_la_a_n   = NOT cnt_la_a
   ck_a         = NOR(ck_b, ck_g2, clk_b)
-  cdp3_k_b     = NOR(cdp4_xr_s0_ne, cdp4_xr_s1_ne, cdp4_xr_s2_ne, cdp4_xr_s3_ne, cdp4_xr_s4_ne, cdp4_xr_s5_ne, cdp4_xr_s6_ne, cdp4_xr_s7_ne)
+  bus_eq_r15   = NOR(cdp4_xr_s0_ne, cdp4_xr_s1_ne, cdp4_xr_s2_ne, cdp4_xr_s3_ne, cdp4_xr_s4_ne, cdp4_xr_s5_ne, cdp4_xr_s6_ne, cdp4_xr_s7_ne)
   cdp4_rst     = NOR(rsel12_buf_u, rsel13_buf_u, rsel14_buf, rsel15_buf, rsel16_buf, rsel17_buf)
   bc1_ld_a     = NOT bc1_ld_n
   r8_b1_q      = NOT r8_b1_n2
@@ -4861,7 +4861,7 @@ gates
   tc2_sr_q_n   = NOT((tc2_sr_g & tc2_sr_s) | tc2_sr_q)
   tc2_sr_q     = NOT((cdp1_lw1 & tc2_sr_g) | tc2_sr_c | tc2_sr_q_n)
   cdp2_a_c_s1_q = NOT cdp2_a_c_s1_n2
-  cdp3_bl_c1   = NAND(cdp3_k_b, cdp3_k_c)
+  cdp3_bl_c1   = NAND(bus_eq_r15, g_eq_r14)
   cdp3_hq_c1   = NOT((cdp3_gate_e & cdp3_gate_f) | cdp3_h_c1_q1)
   cdp3_hq_c0   = NOT((cdp3_gate_e & cdp3_gate_f) | cdp3_h_c0_q1)
   cdp4_lr_s1_q = NOT cdp4_lr_s1_n2
@@ -4896,7 +4896,7 @@ gates
   cdp3_f_c3    = NOT(cdp4_la_c3_n2 | (cdp4_rst & rsel14_buf))
   cdp3_f_c2    = NOT(cdp4_la_c2_n2 | (cdp4_rst & rsel14_buf))
   cdp4_la_c2_q = NOT cdp4_la_c2_n2
-  cdp3_k_c     = NOR(cdp4_xr_c2_ne, cdp4_xr_c3_ne, cdp4_xr_c4_ne, cdp4_xr_c5_ne, cdp4_xr_c6_ne, cdp4_xr_c7_ne)
+  g_eq_r14     = NOR(cdp4_xr_c2_ne, cdp4_xr_c3_ne, cdp4_xr_c4_ne, cdp4_xr_c5_ne, cdp4_xr_c6_ne, cdp4_xr_c7_ne)
   cdp3_cw_c2   = NOT cdp3_c_c2_q1
   cdp3_cq_c2   = NOT cdp3_c_c2_q1
   cdp3_hq_c2   = NOT cdp3_h_c2_q1
