@@ -345,3 +345,8 @@ In order of value:
 - Survey, "Right ends: most lines end on contacts at x 8250-8290 and continue (in poly under the rails x 8300-8560, then metal again from x 8560) towards x 9000": not so for the line y 14786 (`lc3_w9947`): from its pad (8293,14785) the poly goes south 40 px and east along y 14816-14834 under the rails and the VSS band to a turn at x 8968 and a pad (8967,14870), with no metal between (`eof`, piece `ck6`).
 - Ports, `bc1_g6_in` "from outside (below)": the metal continues 1,520 px down the bundle and by two pads and a poly row to the output of `eof`'s inverter `inv17` (`eof_w17040` = NOT `eof_w16823`; `notes/blocks/eof.md`, piece `o040`). The join passes three uncertain stretches of a thin metal (an alias, not a rename).
 - Column B (x 8508-8940) is drawn by `eof` from y 14942 to 15472 and from y 15886 south; column A's VSS rail (R1) is drawn on south of y 16300 to its end at y 17568.
+
+## Corrections (coordinator, from the handoff of `bl0` run 12, 2026-11-20)
+
+- The six poly lines "line 1 .. line 6" (drawn from x 7000): believed to run on west to pads at about x 5760-5800, where six tracks start that `bl0` (run 12) draws from y 15000 south into the left array's six lower rows (follower only; not read; the stretch is in `busl`'s region).
+- A poly row out of the gate group at y 15566 (it runs on east under the rail x 7292-7342) ends west on a pad (7143,15566): it is `bl0_w15566` (`bl0` run 12, piece `m7144`), a wire with no transistor that goes south and east to a poly row east of (8360,17821) in `bc3`. A second net lies beside it (pads (7186,15520), (7187,15696)), undrawn.

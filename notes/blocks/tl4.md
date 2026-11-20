@@ -1399,3 +1399,7 @@ Round 13: no findings.
 - The input of the inverter that makes `rcs_e3` (the row y 3850; "the south bus line x 5412, not followed") **is `bd1_n2`, the output of `bd1`'s latch on R4's match** (`eof` run 14, piece `n2n`, and `busl` run 7, piece `n2`: drawn end to end, no uncertain item on the join): `rcs_e3` = NOT `bd1_n2`.
 - The signal on track A / line X / the first through line of the left-centre strips, which these notes call a clock, a strobe "once per scan line" or leave without a source, **is the reset**: `rst_a`, the buffered copy of `rst` = NOR(`lpstb_b`, `res_b`) made by `lc1`'s gate 5 (`eof` run 10, piece `isrc5`, firm). `rst_ck`, `rst_rc` and `rst_lat` are further buffered copies of it: high while the RES and LPSTB pins are both low, and only then. The belief "a strobe once per scan line" is withdrawn.
 - `rcs_x1` = NOT `lc1_w7170`, and `lc1_w7170` = NOT `rst_c` (`eof` run 13, piece `rc`, firm): the clear of the step logic's five latches is the reset, two inverters later. Where these notes call its source open, it is found.
+
+## Corrections (coordinator, from the handoff of `bl0` run 12, 2026-11-20)
+
+- For the record (nothing here was wrong): the thin metal inside the L of the clock's metal at x 7103, y 17305-17866 and along y 17866, and the metal along y 17866 / 17824 between the pads (7602,17866) and (8272,17821), south of `bl0_w17687`'s row and north of the clock's, are one wire, `bl0_w15566` (`bl0` run 12).

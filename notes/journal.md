@@ -2662,3 +2662,44 @@ blocks (two of `bl0`'s routes split because their labels covered the bottom-cent
 three routes named for DISPTMG; `cdp3`'s read gates of R12 and R13 no longer marked "?"; looked at
 `cache/scratch/refresh/fp12_bl2.png`, `fp12_nw.png`). Coverage: 70.1% traced; in some package region
 99.9%; untraced and in no Queue row 0.4%.
+
+## 2026-11-20 23:00  Handoff: `bl0` run 12, six more lines into the left array; a tracer loop
+
+The user set a loop going in the coordinating session (2026-11-20, minutes before the first claim): one fresh Fable 5.2 agent at
+high effort per package, each following `/trace6845` for the first free Queue row, the next started
+when the last has handed off and its handoff is applied. The first took `bl0` (run 12; claimed 22:17,
+merged 8342270 at 22:55, claim released). The machine's `gh` login is `waitingforvsync`, so the loop's
+claims carry that name, like the `busl` session's; `costs/richtw1.json` is shared with that session.
+
+One handoff file. Full extraction after it 2,462 nets, 4,594 transistors, 0 errors, 0 warnings; 914 of
+1,354 equations firm; 96 nets joined only through uncertain items (1,135 items): wiring only, seven new
+nets, no transistor, no uncertain item. Spot checks of the overlays: the six-line bundle's staircases and
+three of its pads at x 5050-5800, y 15450-16100, and `bl0_w15566`'s end pad (8272,17821)
+(`cache/scratch/refresh/h4_t6.png`, `h4_m7144.png`): the drawn shapes lie on the features.
+
+What it establishes (from the tracer's notes; marks as there):
+
+- **Six more lines into the left array's six lower rows** (piece `t6`; wiring, firm): what the master
+  list had as "one undrawn metal on `rst_n`'s row" is the first of six thin metals that cross y 15000 at
+  x 5496-5714; each steps west and ends on a pad whose poly row runs west into one lower row of the array
+  (`bl0_w15522`, `bl0_w15999`, `bl0_w16649`, `bl0_w17126`, `bl0_w17603`, `bl0_w18081`). **Believed,
+  not traced**: they are `cdp3_g_c7`..`cdp3_g_c2`, the six lines compared with R14: the follower runs
+  each track north to the y of one of `bc1`'s six poly lines; the stretch (x 5490-7000, y 14080-15000)
+  is `busl`'s and undrawn. If so the left array's fourteen rows take `cdp4_bus_s7`..`s0` and
+  `cdp3_g_c7`..`c2`, the fourteen lines that R15 and R14 are compared with.
+- **`bl0_w15566`** (piece `m7144`; wiring, firm): the thin metal x 7144 is one wire from `bc1`'s gate
+  group (port (7260,15566)) to a pad (8272,17821) and a poly row on east into `bc3` (port
+  (8360,17821)); no transistor, no branch, both ends open.
+
+One review round (round 14, both pieces, 34 images): no findings.
+
+Applied: master list rows `bl0` (done as far as the package reaches; nothing of its own left), `busl`
+(the six tracks north of y 15000, to draw and join), `larr` (continue), `bc1` (continue), `bc2`-`bc4`,
+`bl1`/`bl2`. **Re-read list**: nothing new. **Ambiguities**: none. Corrections sections in the notes of
+`busl`, `bc1` and `tl4`. `notes/operation.md`: unchanged (nothing about clocks, resets, comparators
+or outputs changes; the six lines' identity is believed only). Floor plan: no coarse block is replaced;
+`floorplan.d/bl0.txt` has five more route lines, whose labels were not looked at.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 794
+floor-plan blocks. Coverage: 70.3% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%. Not done here: the refresh (the header counts of `notes/operation.md` are the twelfth refresh's).
