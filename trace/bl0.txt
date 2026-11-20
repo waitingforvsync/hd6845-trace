@@ -57,7 +57,7 @@ C 6030,15328
 D 5957,15338:6090,15403                            # source strip, channel, node A
 D 5957,15398:5987,15430                            # node A's tab south-west, under the end of the row y 15412
 B 5955,15399:5988,15430
-P 5600,15401:5986,15425                            # node A's poly row, west to a pad at about (4911,15412) (port at x 5600)
+P 4909,15401:5986,15425                            # node A's poly row, west to a pad (4909,15415) (piece w7)
 N P 5800,15412 bl0_w15412
 D 6058,15389:6140,15405                            # node A's strip east from the rail
 D 6092,15389:6122,15439                            # its tab south under the load's foot
@@ -466,3 +466,21 @@ M 7925,17821 y15696 w=14
 P 7909,15680:7942,15712
 C 7925,15696
 P 7790,15682:7927,15702                            # poly row west (port at x 7790)
+
+# ================================================================ piece w7 (run 7): bl0_w15412 to the left array's left column
+# The row y 15401-15425 ends west on a pad (4909,15415); a track x 4902-4916 runs south to a corner at
+# y 16087 and west onto a pad (4868,16086); a poly row y 16075-16097 runs west across the whole left
+# array in its Gap 2 (2,000 px, no pad, no transistor), turns north at x 2845-2867 and west at
+# y 15988-16008 under the left column's supply rail to a pad (2700,15999) on a thin metal x 2690-2710
+# that runs on both north and south of the pad (ports: the force line of the MA cells, not drawn).
+P 4893,15398:4926,15431
+C 4909,15415
+M 4909,15415 y16087 x4868 w=14
+P 4850,16070:4885,16103
+C 4868,16086
+P 2845,16075:4868,16097
+P 2845,15988:2867,16097
+P 2700,15988:2867,16008
+P 2684,15982:2717,16015
+C 2700,15999
+M 2700,15972 y16026 w=12                           # the thin metal through the pad (ports north and south)

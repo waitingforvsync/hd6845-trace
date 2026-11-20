@@ -13,3 +13,4 @@
 7126,17595:7465,17838    route  the flag's other wires | bl0_w17687 from a pad (7424,17822) by a thin metal west and north onto band D's row; bl0_w17610 from its pad (7188,17605) south and east to a pad (7384,17779)
 7384,17373:7899,17795    route  the light pen flag to its use | bl0_w17610 east by poly, metal and poly, north on a track x 7882 to a pad (7882,17389) and a poly row west into the gate column east of the supply rail
 7424,15680:7942,17838    route  the flag's second clear | bl0_w17687 from bc1's gate group: a poly row east to a pad (7925,15696), a track x 7925 south 2,125 px to a pad (7925,17821), a poly row west to band D
+2684,15398:5600,16103    route  the fourth reset copy to the left column | bl0_w15412 = NOT rst_n: poly row west, a track x 4909 south, a poly row west across the left array in its Gap 2, north and west to a pad (2700,15999) on the thin metal between the left column's rails (believed the MA cells' force line)

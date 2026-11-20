@@ -7,6 +7,17 @@ metal-shot pixels. Evidence: `cache/scratch/bl0/` (`survey.md` holds every measu
 
 ## Status
 
+Run 7 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 11:16 -0600). One piece of wiring, no transistor, no
+uncertain item: `bl0_w15412` (the fourth copy of the reset) to the left array's left column.
+
+- **Piece `w7`** (wiring, 3,600 px). `bl0_w15412` = NOT `rst_n` runs west on its poly row to a pad
+  (4909,15415), south on a track to a pad (4868,16086), west as a poly row across the whole left array in
+  its Gap 2, north and west to a pad (2700,15999) on a thin metal x 2690-2710 between the left
+  column's rails. **Believed, not traced**: that thin metal is the force line of the MA output cells
+  (`mal`'s `mal_frc_m#` pads; a metal tab from it to the pad of `mal_frc_m9` at (2728,15583) is seen), so
+  reset forces the MA outputs through this copy. The thin metal itself is not drawn: it is narrow, dim
+  in places, and must be read stretch by stretch (Not done).
+
 Run 6 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 10:59 -0600). One piece of wiring, no transistor, no
 uncertain item; reviewed (round 8: no finding that changes a connection): the flag's output and its second clearing line to the gate groups they belong to.
 
@@ -135,6 +146,7 @@ finding that changes a connection.
 | `bl0_w17610`'s wire | 7178-7465 | 17595-17795 | from the pad (7188,17605) a metal south to a corner (7192,17786), east to a pad (7384,17779); poly row east |
 | `bl0_w17610` east and north | 7384-7899 | 17373-17795 | poly row y 17768-17790 to a pad (7555,17778); metal y 17771-17785 to a pad (7795,17778); poly to a pad (7880,17777); track x 7875-7889 north to a pad (7882,17389); poly row y 17378-17398 west |
 | `bl0_w17687` east and north | 7424-7942 | 15680-17838 | poly row y 17811-17831 east to a pad (7925,17821); track x 7918-7932 north to a pad (7925,15696); poly row y 15682-15702 west |
+| `bl0_w15412` to the left column | 2684-5600 | 15398-16103 | poly row y 15401-15425 west to a pad (4909,15415); track x 4902-4916 south, corner y 16087, pad (4868,16086); poly row y 16075-16097 west to x 2845; column x 2845-2867 north; row y 15988-16008 west under the supply rail to a pad (2700,15999) on the thin metal x 2690-2710 |
 
 ## Logic
 
@@ -442,6 +454,30 @@ All six pads are rings with a bright centre in both metal shots and a hole in th
 hole in the clean shot), and the
 metal is bright up to the ring on the side it arrives from (`px.py` rows and columns at each).
 
+### Piece `w7` (run 7): `bl0_w15412` to the left column
+
+The poly row of G1's output is one poly from the buried contact to a pad (4909,15415) (a scan of the
+clean shot along y 15408 and 15413, x 4925-5610, finds no stretch of 6 px without poly colour). From the
+pad a track x 4902-4916 runs south (`follow.py 4909 15440 S`: end (4905,16094); the one candidate,
+(4913,15856), is a 6 px edge bar with no ring) to a corner at y 16087 and west onto a pad (4868,16086);
+both pads are rings with a bright centre in both metal shots and a hole in the clean shot
+(`textmap.py 4891 15397 4927 15431 3`, `4848 16068 4886 16104 3`). The pad's poly row runs west along
+y 16075-16097 across the left array in its Gap 2: the same scan along y 16080 and 16086 from x 2848 to
+4860 finds only two 6 px bars (x 2911, 4756: under tracks). With every package loaded the row makes no
+transistor (`tools/netlist.py`: the count is unchanged) and touches nothing drawn. At x 2845-2867 it
+turns north (`px.py col 2855 15985 16100 8`) and at y 15988-16008 west, under the left column's supply
+rail x 2783-2832 (salmon under the rail, field above and below), to a pad (2700,15999).
+
+That pad is on a thin metal x 2690-2710 which goes on both ways (bright up to the ring north and south:
+`px.py col 2700 15966 16030 4 metal,metal1`). **Not drawn beyond the pad.** What is seen of it: it runs
+past the pads that `mal` drew as `mal_frc_m#` (the gate tabs of the MA cells' force pull-downs), and at
+y 15575-15581 a metal tab joins it to the pad of `mal_frc_m9` (2728,15583) (`textmap.py 2684 15548 2750
+15604 3`: metal levels from x 2690 to 2738 in both chips). North it is followed to a pad (2700,14785)
+(`follow.py 2700 15960 N`), south to at least y 16150. But it is only about 8 px wide in places, the
+two-chip metal test fails on long stretches of it (`tl5_tracks.py v 2697 14700 18700`), a stretch
+y 15852-15900 reads at bare-ground level in chip 2, and at y 15392-15470 it is dim and 6 px west. So
+whether `bl0_w15412` reaches `mal_frc_m9` by one metal is not established.
+
 ## Ports
 
 | Name | Layer | Where | Direction | Note |
@@ -456,7 +492,7 @@ metal is bright up to the ring on the side it arrives from (`px.py` rows and col
 | `bl0_w15088` | P | (6450, 15078-15098) | ? | poly row on east from the pad (6320,15088), seen to x 6790 |
 | `bl0_w15088` | P | (5700, 15078-15098) | ? | poly row on west to a pad (4909,15088); a track x 4909 from the north ends there |
 | `bl0_w15088` | M | (5750-5764, 15700) | ? | thin metal south from the pad (5755,15088), followed to about (5762,15768) |
-| `bl0_w15412` | P | (5600, 15401-15425) | out | poly row west to a pad (4909,15414), track x 4909 south |
+| `bl0_w15412` | M | (2694-2706, 15972), (2694-2706, 16026) | out | the thin metal x 2690-2710 through the pad (2700,15999), on north and on south: believed the force line of the MA cells |
 | `larr_l0_g0` | D | (2876, 14105-14122) | in | the diffusion wire is one piece with the box of `larr`'s contact (2893,14114) |
 | `larr_cin_s7` | P | (2850, 14559-14574) | out | onto `larr`'s poly row y 14566 |
 | `bl0_w14308` | P | (2405, 14687-14708) | out | the third pad's row runs on west of the pad (not read) |
@@ -775,9 +811,12 @@ Round 8: no findings that change a connection.
   metal from the north, x 2555-2577) east under both rails with no transistor under the vss rail; a
   track x 2493-2512 over `bl0_w14308`'s row; the wide metal west of x 2440; a poly row y 14770-14790
   from the west to a pad (2700,14785), from which a thin metal x 2688-2712 runs south between the rails.
-- `bl0_w15412` west of x 5600 (surveyed, `survey.md`): the row to a pad (4909,15414), a track x 4909
-  south to a corner at y 16088 and a pad (4866,16088), a poly row west across the left array's Gap 2 to
-  x 2850, north and west to a pad (2700,15995) on that thin metal x 2688-2712. Its loads are not found.
+- **The thin metal x 2690-2710 through the pad (2700,15999)** (`bl0_w15412`): believed the force line of
+  the MA output cells. To read stretch by stretch at 6x or more in both metal shots: north to the pad
+  (2700,14785) (the tab to `mal_frc_m9` at y 15575-15581; a possible break y 15852-15900; a dim, shifted
+  stretch y 15392-15470; a short metal y 15860-15870 from x 2720 east), south past y 16136 towards
+  `mal_frc_m10` (2729,16278), and how the other twelve pads are fed. It lies in `mal`'s and `larr`'s
+  region.
 - `bl0_w15088`: its west row to the pad (4909,15088) and the track x 4909 north (follower: to
   (4908,10660), contact candidates (4908,11984), (4908,10699)); its thin metal south of y 15700 (a pad
   at about (5760,15765)); its poly row east of x 6450 (seen past x 7000).
