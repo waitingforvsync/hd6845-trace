@@ -1838,7 +1838,9 @@ N M 8057,17000 bc1_g6_in
 # A's VSS rail at y 17266-17560 (bc3's ground, free). Three transistors on one active area,
 # drawn by hand; the east side of the unit (the two diffusion necks east of the rail, the
 # open diffusion strip x 8400-8448, the box where both gate polys end, the load) is NOT
-# drawn: notes, piece g174 and Ambiguities 83-87. Views r23_*.png in cache/scratch/eof/;
+# drawn: notes, piece g174 and Ambiguities 83-87. Nor is the finger by which the ground
+# diffusion between the two polys runs on east between the two right legs (y 17452-17466:
+# review round 29; a port). Views r23_*.png in cache/scratch/eof/;
 # survey.md, run 23.
 #   eof_w17362 is pulled to vss by eof_w17338 (row 1) and by eof_w17168 (the hairpin)
 #   eof_w17552 is pulled to vss by eof_w17472 (the lower poly)

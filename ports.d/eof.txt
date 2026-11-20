@@ -150,6 +150,7 @@ eof_w17472    P      8372,17521-17543         ?    the lower poly's bar where it
 eof_w17362    D      8368,17352-17372         out  the node between row 1 and the hairpin, at the active area's east edge: a neck y 17358-17366 east to the open diffusion strip x 8400-8448 (not drawn)
 eof_w17552    D      8368,17544-17560         out  the node below the lower poly's bar, at the east edge: a neck y 17548-17558 to the same strip (not drawn)
 vss           M      8338-8382,16300          -    column A's VSS rail, bc1's R1, drawn on south from bc1's end to the rail's end at y 17568
+vss           D      8368,17452-17466         -    the ground diffusion between the two polys leaves east between the two right legs: a finger between the arms to about x 8408 (review round 29; not drawn)
 eof_w17212    P      8990,15812-15832         in   the NOR's second input: the poly row west of the pad (9053,15822) (believed: to the pad (8838,15822) of the thin metal x 8792)
 vss           M      8686-8732,17300          -    column B's VSS rail on south of the NOR's second VSS box (drawn y 15870-17300)
 vcc           M      8510-8560,17240          -    R2 on south of the NOR's VCC box (drawn y 15870-17240)
