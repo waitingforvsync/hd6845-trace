@@ -7,7 +7,7 @@ metal-shot pixels. Evidence: `cache/scratch/bl0/` (`survey.md` holds every measu
 
 ## Status
 
-Run 12 (richtw1's session, Claude Fable 5.2; 2026-11-20 22:40 +0100). Two pieces of wiring, no transistor, no
+Run 12 (richtw1's session, Claude Fable 5.2; 2026-11-20 22:38 +0100). Two pieces of wiring, no transistor, no
 uncertain item, seven new nets; reviewed (round 14, below): what the master list's row left in this package.
 
 - **Piece `t6`** (wiring, 15,700 px). "The metal of another net on `rst_n`'s row" is the first of **six
