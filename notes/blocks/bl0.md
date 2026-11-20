@@ -8,7 +8,7 @@ metal-shot pixels. Evidence: `cache/scratch/bl0/` (`survey.md` holds every measu
 ## Status
 
 Run 12 (richtw1's session, Claude Fable 5.2; 2026-11-20 22:38 +0100). Two pieces of wiring, no transistor, no
-uncertain item, seven new nets; reviewed (round 14, below): what the master list's row left in this package.
+uncertain item, seven new nets; reviewed (round 14: no findings): what the master list's row left in this package.
 
 - **Piece `t6`** (wiring, 15,700 px). "The metal of another net on `rst_n`'s row" is the first of **six
   tracks** that cross y 15000 east of `cdp4_bus_s0`'s (x 5496, 5540, 5584, 5627, 5671, 5714; north of
@@ -1207,6 +1207,56 @@ do not cross the track x 4822. Not checked: beyond the two ports; the track betw
 on views (tools only).
 
 Round 13: no findings.
+
+### Run 12
+
+Round 14 (full review of pieces `t6` and `m7144` together: two pieces of wiring of one build, thin metals,
+pads and poly rows, no transistor; fresh Fable 5.2 reviewer; 2026-11-20 22:52 +0100; commit 1ae67e1; images
+`cache/scratch/bl0/review-14/`, 34 of them). Told to suspect, for `t6`: the staircases (an arm onto the
+wrong vertical piece, a line ending where another begins on one track position; four of them seen only at
+2.1x), `bl0_w15999`'s arm into its pad (5538,15999) over 22 px that are dim in both chips, the arms into
+the pads (5322,17127), (5236,17603), (5106,18081), the four arms lying on poly rows, the track 44 px west
+of each pad, whether each row is poly and one piece to x 4780 (the row y 15999 dark in the clean shot at
+x 4840-4865), anything crossing or tapping a row under the tracks or the wide metal x 4954-5018, a
+second poly on a pad; for `m7144`: the corner (7144,17305) against the pad (7144,17340), the green
+stretch under the thin metal at y 15763-15815 and the pad (7187,15778) beside it, the crossing
+(7188,15566), the arm on the poly column at x 7970, the poly column under the bus metal, the row under
+the supply rail, the west-east metals near other nets' pads, the pads (7602,17866) and (8272,17821).
+
+Checked: all six staircases and the end at (5106,18081) in both metal shots at 3.7-5x (every arm joins
+the claimed verticals, no line ends where another begins); the corner (5323,17086) against the pad
+(5322,17127) (8 px of bare ground: the pad is `bl0_w17126`'s); the four arms into pads (one 6 px edge
+line between foot and pad, no bare ground); the four arms on poly rows (text maps and two views: no
+ring, no hole); the tracks 44 px west of each pad (open orange poly between, blue under 55); the six
+rows (poly, one piece each to x 4780, orange in the open with blue 56-74 and redder than the diffusion
+wire y 16066 under the same tracks; `railprof.py`: poly over field under the wide metal; no second poly
+on any pad); the extraction (0 errors, no joined names). For `m7144`: the corner against the pad
+(7144,17340) (bare ground y 17318-17322 in both chips; the clock's L separate); the pads on x 7144 at y
+17340, 17635, 17700 against the metal x 7103 (10 px of bare ground); the green stretch (an area effect
+of the clean shot, the metal at full width in both chips, the pad (7187,15778) separate); the crossing
+(7188,15566) in four shots; the poly column under the bus (orange in the open, field on both sides
+underneath, bare ground between it and the clock's pads); the row y 17866 under the supply rail (poly
+over field; the clock's branch crosses without contact; 5x, four shots); the pad (7384,17866) against
+both neighbours at 6x; the east run and the pad (8272,17821) (one metal, clear of the pad (7925,17821)
+and of the clock's metal).
+
+Two observations, neither a finding (the reviewer: "comment only"), both read again by the tracer:
+
+- (7977,17821), Ambiguity 20: the chip-2 stripped shot has a greenish patch about 12 px across on the
+  poly column under the inner corner of `bl0_w15566`'s metal (`px.py pt 7977,17821`: stripped 125/159/104,
+  clean 172/155/90). Not a contact: no ring in either metal shot, no hole in the clean shot (red minus
+  green 16-30), the bars at x 7955-7964 and 7978-7987 are 9 px edge lines (the reviewer's `m_x1`..`m_x3`,
+  4.3x and 10x, four shots).
+- (5192,15522): chip 2's metal shot has a ring-like blemish where `lc3_e9708`'s track crosses
+  `bl0_w15522`'s row (110/78/45). Chip 1 is bright there (197/161/71), the clean shot cream with no hole
+  (209/166/108), the stripped shot has no box (the reviewer's `t_5192.png`, 9x): dirt on chip 2.
+
+Not checked: anything north of y 15000 or beyond the ports at x 4780, 7260, 8360; under the wide metal
+x 4954-5018 and under the bus y 16340-16400 only the clean shot and edge lines were usable (the chip-2
+stripped shot shows fringes there); the pad (8272,17821) at 3.6x and a text map, not 4x; the straight
+runs between staircases by `tl5_tracks.py` on every segment and overlays at about 1x, not at 4x.
+
+Round 14: no findings.
 
 ## Not done
 
