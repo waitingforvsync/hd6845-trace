@@ -1,26 +1,26 @@
 {
  "who": "Matt Godbolt",
- "generated": "2026-11-20T18:03:12+00:00",
+ "generated": "2026-11-20T18:14:11+00:00",
  "price_source": "Claude API list prices per million tokens, as of 2026-11-03",
  "unpriced_models": [
   "<synthetic>"
  ],
- "responses": 6460,
+ "responses": 6496,
  "first": "2026-11-17T14:25:20.582000+00:00",
- "last": "2026-11-20T18:02:57.902000+00:00",
- "total_cost": 943.98,
- "review_cost": 395.05,
+ "last": "2026-11-20T18:13:54.685000+00:00",
+ "total_cost": 949.0,
+ "review_cost": 398.18,
  "tokens": {
-  "input": 13330,
-  "output": 8951034,
-  "cache_write_5m": 16364729,
-  "cache_write_1h": 11668843,
-  "cache_read": 1387888501
+  "input": 13404,
+  "output": 8993166,
+  "cache_write_5m": 16499322,
+  "cache_write_1h": 11686855,
+  "cache_read": 1396413726
  },
  "by_model": {
   "claude-fable-5-2": {
-   "cost": 919.17,
-   "responses": 5754
+   "cost": 924.19,
+   "responses": 5790
   },
   "claude-sonnet-5-5": {
    "cost": 16.12,
@@ -53,11 +53,11 @@
    }
   },
   "(coordination)": {
-   "cost": 158.05,
+   "cost": 158.25,
    "review_cost": 25.85,
-   "responses": 1555,
+   "responses": 1556,
    "models": {
-    "claude-fable-5-2": 849,
+    "claude-fable-5-2": 850,
     "claude-sonnet-5-5": 554,
     "<synthetic>": 1,
     "claude-opus-5-5": 151
@@ -72,11 +72,11 @@
    }
   },
   "bl0": {
-   "cost": 67.85,
-   "review_cost": 36.49,
-   "responses": 474,
+   "cost": 72.67,
+   "review_cost": 39.63,
+   "responses": 509,
    "models": {
-    "claude-fable-5-2": 474
+    "claude-fable-5-2": 509
    }
   },
   "lc3": {
@@ -156,6 +156,6 @@
   "2026-11-17": 293.55,
   "2026-11-18": 214.26,
   "2026-11-19": 315.68,
-  "2026-11-20": 120.49
+  "2026-11-20": 125.52
  }
 }
