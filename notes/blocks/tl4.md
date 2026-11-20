@@ -1339,6 +1339,24 @@ Findings:
 
 Round 12: one finding that changes a connection, fixed.
 
+### Round 13: fix check of round 12's fix and of the join with `ck_out` (2026-11-20 12:39 -0600, against commit 76eb307, images `review-13/`)
+
+Fresh Fable 5.2 reviewer. Checked at 5x or more with profiles in both metal shots and both stripped
+shots and the two-chip metal test. **The join with `ck_out`**: the neck between the pad (8317,17863) and
+the row is poly (open-poly orange in both metal shots at y 17888-17894, x 8311-8326, plain field at the
+same y either side; the clean shot's bar there dark red where the same bar over field is olive; the
+flanking lines 6-8 px each, no room for a separate poly end; the chip-2 stripped shot does not decide
+it); the row unbroken salmon from x 8312 to 8412 with open poly at x 8398-8406 before `eof`'s pad; the
+metal lying on the row has no contact and belongs to the pad (8380,17860), which is not joined to the
+pad (8317,17863) (field between); the row ends at x 8310. **The branch to `bc3_w17646`**: metal continuous
+from the pad's ring west to x 7551, north to y 17817, east to x 7845 and north to the pad (7840,17648),
+every bar 8-11 px on a poly edge; no metal west, south or past either corner; no contact to
+`bl0_w17687`'s row; the pad (7840,17648) a real contact. `.venv/bin/python tools/sameconn.py 76eb307`:
+118 differences, all of them the four names on one net and the equations that change by that name; no
+other net joined or split.
+
+Round 13: no findings.
+
 ## Not done
 
 - `ck_out`'s track x 7840 north of `bc3`'s pad (7840,17648) (`bc3` draws it to y 16640; the follower ends
