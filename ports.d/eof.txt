@@ -127,5 +127,6 @@ ck_out        M      10245,17902-17918        in   onto the west end of trunks' 
 ck_out        P      8806,16640-16658         out  the row of the pad (8882,16648) west into the gate column under the rail x 8686-8731: believed the upper enable row of an undrawn copy of tl1's latch (bc3)
 ck_out        P      8806,16855-16874         out  the row of the pad (8882,16867): believed the same copy's lower enable row
 ck_out        M      8418-8430,17866          ?    the metal that ends on the pad (8424,17908) from the north (follower: to the bundle's track x 8229, end (8227,17019); not checked)
-ck_out        M      8380,17901-17915         ?    the metal west of the pad (8424,17908) (follower: to (7553,17950); not checked)
-ck_out        P      8380,17898-17916         ?    the poly west of the pad (8424,17908), under that metal (seen to x 8312, where it turns north)
+ck_out        P      8392,17898-17916         ?    the poly west of the pad (8424,17908) (seen to x 8312, where it turns north; another net's metal lies on it from x 8390 west)
+ck_out        M      9589-9604,17866          ?    the metal that ends on the pad (9596,17909) from the north (follower: west along y 17606, north on x 9315 to (9315,16818); not checked)
+ck_out        M      9762-9778,17866          ?    the metal that ends on the pad (9769,17910) from the north (follower: east along y 17649, north on x 10050, west, north on x 9965 to (9964,16950); not checked)

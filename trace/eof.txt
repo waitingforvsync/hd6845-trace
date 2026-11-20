@@ -1345,12 +1345,20 @@ C 9769,17910
 M 9769,17910 x10245 w=16
 # --- C: the poly west of the pad (8598,17908): y 17899-17915 under the VSS rail (x 8505-8565) and
 # a thin metal (x 8455-8475) to a pad with a contact (8424,17908). On that pad: a metal from the
-# north (x 8418-8430; it ends on the pad) and a metal from the west along y 17908, and the poly
-# goes on west under that metal. All three leave the piece here (ports; not followed).
+# north (x 8418-8430; it ends on the pad), and the poly goes on west. Both leave the piece here
+# (ports; not followed). The metal that lies on the poly west of x 8390 is NOT on this pad (review
+# round 22): it ends at x 8390, 10 px of open poly and the ring short of the pad's centre, and turns
+# north toward another net's pad (8382,17862).
 P 8438,17899:8588,17915
 P 8405,17893:8442,17925              # pad (8424,17908)
 C 8424,17908
 M 8424,17908 y17866 w=12             # the metal north (follower: to the bundle track x 8229, end (8227,17019))
-M 8424,17908 x8380 w=14              # the metal west (follower: to (7553,17950))
-P 8380,17898:8410,17916              # the poly west under it (seen to x 8312, where it turns north)
+P 8392,17898:8410,17916              # the poly west (seen to x 8312, where it turns north; another net's metal lies on it from x 8390)
+# --- D (review round 22): the pads (9596,17909) and (9769,17910) each carry a second metal, from the
+# north: tracks x 9589-9604 and x 9762-9778 end on them with the same 17 px ring (y 17886-17903) as
+# the metal x 8600 on the pad (8598,17908); no metal south of either pad. Two more branches of the
+# net; drawn as stubs (ports; the follower: x 9596 to (9593,17608), west, north on x 9315 to
+# (9315,16818); x 9769 to (9777,17650), east, north on x 10050, west, north on x 9965 to (9964,16950)).
+M 9596,17909 y17866 w=15
+M 9770,17910 y17866 w=15
 @alias ck_out eof_w15350
