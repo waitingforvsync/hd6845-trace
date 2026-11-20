@@ -127,9 +127,6 @@ ck_out        P      8392,17898-17916         ?    the poly west of the pad (842
 ck_out        M      9589-9604,17866          ?    the metal that ends on the pad (9596,17909) from the north (follower: west along y 17606, north on x 9315 to (9315,16818); not checked)
 ck_out        M      9762-9778,17866          ?    the metal that ends on the pad (9769,17910) from the north (follower: east along y 17649, north on x 10050, west, north on x 9965 to (9964,16950); not checked)
 # Pieces lat16, inv16 (run 19): the latch that ck_out's two pads enable, and the inverter on its data
-eof_w16823    P      8760,16986-17003         out  the lower node's branch (review round 24): the row y 16986-17003 where it goes under the rail as a gate of the unit south of the latch (not drawn)
-vss           M      8686-8732,16985          -    the same rail on south
-vcc           M      8510-8560,16960          -    the same rail on south
 # Pieces lat15, cap16, w16693 (run 20): the upper latch copy, and the lower latch's two outputs on east
 # (gone: eof_w16388 M 9004-9018,16340 and eof_w16693 M 9006-9018,16850 and eof_w16823 P 9062,16724-16745: the wires are drawn on;
 #  rst_a P 8930,16728-16746 and P 8930,16163-16181: the rows are the two latch copies' clear rows, drawn;
@@ -137,6 +134,13 @@ vcc           M      8510-8560,16960          -    the same rail on south
 eof_w16000    P      8800,15727-15745         in   the upper latch's data: the poly row west of the pad (8880,15738), into a heavy-outlined box (8762-8795,15722-15757) at column B's east edge (not read)
 eof_w16000    M      8831-8845,16030          ?    the track x 8838 on south of the data pad (8838,16000) (follower: to (8838,17306); not checked)
 eof_w16040    M      8919-8931,16300          in   the upper latch's enable: the metal x 8925 on south of its lower pad (8925,16262) (follower: to (8925,17694), west along y 17700 to x 8643; not checked)
-eof_w16693    P      8800,17116-17135         out  the lower latch's upper node: its row into the unit south of the latch (not drawn)
 vss           M      8686-8732,15870          -    column B's VSS rail, drawn over the two latch copies and the inverter only (y 15870-16985); it runs on north
 vcc           M      8510-8560,15870          -    R2 (bc1's M 8534,14990 y16300, drawn again from y 15870) over the VCC boxes of the two latch copies and the inverter
+# Pieces inv17, nor17, in212 (run 21): the two gates south of the second latch, and the NOR's second input to a pad
+# (gone: eof_w16823 P 8760,16986-17003 and eof_w16693 P 8800,17116-17135: the unit they entered is drawn;
+#  the rails' ports at y 16985 / 16960 moved to y 17300 / 17240)
+eof_w17040    M      9001-9015,17610          out  the inverter inv17's output: the metal south of the pad (9008,17560) (follower: to a corner (9003,17780), west to (8727,17779); not checked)
+eof_w17168    M      9050-9064,17600          out  the NOR nor17's output: the metal x 9057 on south of the corner (9057,17518) (seen to y 17640)
+eof_w17212    P      8990,15812-15832         in   the NOR's second input: the poly row west of the pad (9053,15822) (believed: to the pad (8838,15822) of the thin metal x 8792)
+vss           M      8686-8732,17300          -    column B's VSS rail on south of the NOR's second VSS box (drawn y 15870-17300)
+vcc           M      8510-8560,17240          -    R2 on south of the NOR's VCC box (drawn y 15870-17240)

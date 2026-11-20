@@ -1598,3 +1598,154 @@ P 8996,17064:9027,17100
 C 9011,17080
 P 8998,17095:9028,17135
 P 8800,17116:9028,17135
+
+# ============================================================================================
+# Pieces inv17, nor17 and in212 (run 21, 2026-11-20): the two gates south of the latch lat16,
+# which take the latch's two outputs, and the NOR's second input back to a pad. bc3's ground
+# (free), under column B's rail x 8686-8731.
+#
+#   eof_w17040 = NOT eof_w16823                     (inv17: an inverter, a copy of inv16's build 607 px lower)
+#   eof_w17168 = NOR(eof_w16693, eof_w17212)        (nor17: two pull-downs on one column east of the rail)
+# Both equations rest on their load's tie (?), like every unit of this build; inv17's output wire
+# (a thin metal down the column's east side) also on three stretches over other units' boxes (?M),
+# and eof_w17212's track on one stretch over the edge of piece cap16's pad (?M).
+# Views r21_*.png in cache/scratch/eof/; survey.md, run 21; notes, pieces inv17 and nor17.
+#
+# ---- the rails on south over the unit (continuous on r21_a1.png, r21_b1.png, 3x)
+M 8709,16980 y17300 w=46
+N M 8709,17200 vss
+M 8535,16955 y17240 w=50
+N M 8535,17100 vcc
+# ---- inv17: findcell (clean shot) gives inv16's rectangle at +(0,607) with 0.83. Drawn by hand from
+# inv16's lines moved 607 px south and fitted (r21_a1.png, 3x, three shots).
+# Under the rail: the latch's foot box (piece lat16: VSS, contact (8713,16950)) runs on south as
+# this inverter's source; the gate; the node (railprof 8692 8732 16960 17300: diffusion to y 16987,
+# gate 16988-17010, diffusion 17011-17043; px col 8712: gate band y 16988-17004).
+D 8697,16970:8745,17043
+# gate row: the west end of the lower node's branch (piece lat16: drawn to x 8760), under the rail
+# to its end at x 8684
+P 8684,16986:8765,17006
+# output: the node's strip east out of the rail (y 17024-17039; px col 8758: stripped red minus
+# green 25-28 against 4-14 on the field south of it, chip-2 metal blue 81-92: diffusion) to a
+# diffusion pad (8772-8814, 17021-17063) with a metal contact (ring and bright centre (8792,17040)
+# in both metal shots; dark specks at (8785,17036) in the clean shot). Unlike inv16's box this is
+# a metal contact on diffusion: no poly leaves the pad.
+D 8738,17024:8778,17039
+D 8772,17021:8814,17063
+C 8791,17040
+# load, west of the rail, as inv16's: the node west under the rail's margin, through the open gap,
+# as a strip under the plate to the VCC box (contact (8533,17019): eof_cchk -13, centres 217/135)
+D 8670,17021:8705,17043
+D 8658,16993:8678,17057
+D 8556,16988:8664,17016
+D 8512,16987:8562,17047
+C 8533,17019 s=22x34
+P 8563,16979:8655,17039              # the plate
+# the tie: a heavy-outlined box under the thin metal x 8637-8650 below the plate's east end.
+# Drawn uncertain, like inv16's.
+?P 8625,17035:8650,17067
+?D 8620,17044:8664,17059
+?B 8618,17040:8660,17072
+# ---- inv17's output wire: a thin metal (about 10 px) from the pad south down the column's east
+# side: a diagonal (8791,17062)-(8798,17095), x 8798 to y 17250, x 8796 below (eof_mrun rows:
+# 8799(5) at y 17090, 17130, 17210, 17250; 8796(11-12) at 17270, 17370, 17400; 8795(12) at 17430,
+# 17450), to a pad with a contact (8792,17561) (eof_cchk -20, centres 201/222; r21_h1.png, 4x,
+# three shots). It passes over three heavy-outlined boxes of other nodes, where it is dark in
+# both metal shots (tl3_thin.py: y 17148-17205, 58 px, nor17's output box; y 17322-17364 with a
+# bright stretch y 17336-17346, the box (8770-8800, 17325-17352), r21_i1.png, 6x, four shots;
+# y 17457-17493, 37 px, a box at (8780-8800, 17460-17490)): no widened pad, no round green hole
+# at any; drawn ?M there (tracing guide, trap 27; notes, Ambiguity 76). It crosses the row
+# y 17290-17305 of the pad (8838,17298) (an 8 px bar) and a poly end (8778-8805, 17503-17530;
+# the metal bright over it in both chips: no contact).
+M 8791,17040 8791,17062 8798,17095 8798,17150 w=10
+?M 8798,17144 y17210 w=10
+M 8798,17204 8798,17250 8796,17272 8796,17324 w=10
+?M 8796,17318 y17368 w=10
+M 8796,17362 8796,17440 8794,17460 w=10
+?M 8794,17454 y17497 w=10
+M 8793,17491 y17562 w=10
+# the end pad and its poly row east (y 17551-17569) under the tracks x 8838, 8882 (ck_out), 8925
+# (eof_w16040), 8968 (rst_a), no contact at any (eof_cchk: clean red minus green 37-42, no ring),
+# to a pad with a contact (9008,17560) (ring and bright centre in both metal shots; the pad is
+# vivid red in the clean shot with no green hole: notes, Ambiguity 77), from which a metal runs
+# south (stub: port; the follower: to a corner (9003,17780), west to (8727,17779)).
+P 8778,17545:8812,17578
+C 8792,17561
+P 8805,17551:9000,17569
+P 8992,17545:9030,17578
+C 9008,17560
+M 9008,17560 y17610 w=14
+N M 8798,17120 eof_w17040
+# ---- nor17: by hand (r21_b1.png 3x; r21_c1.png 5x, r21_c2.png 6x, four shots; r21_g1.png 4x).
+# VSS box under the rail (y 17074-17111; px col 8722: its foot edge at y 17112-17118, field south of it; contact (8722,17092): eof_cchk -9, centres 195/235), a
+# narrow diffusion band east from its north part (y 17097-17110) into the top of a diffusion
+# column east of the rail (x 8757-8785: the dark lines across rows 1 and 3 at x 8752-8758 and
+# x 8782-8785 in both metal shots, px rows 17126, 17212). The column runs south under row 1
+# (eof_w16693's row y 17116-17135: gate), through the node, under row 3 (y 17203-17222: gate) and
+# by a band west (y 17231-17245) into a second VSS box under the rail (y 17231-17290, a long
+# contact (8714,17258): r21_j1.png, 5x, three shots).
+D 8700,17074:8747,17111
+C 8722,17092
+D 8740,17097:8762,17110
+D 8757,17097:8785,17245
+D 8740,17231:8762,17245
+D 8700,17231:8747,17290
+C 8714,17258 s=22x40
+# row 1: eof_w16693's row (piece w16693: drawn to x 8800) on west over the column to its end
+P 8741,17116:8805,17135
+# row 3: from a pad with a contact (9098,17210) (eof_cchk -13, centres 229/193), on which the
+# track x 9099 from the north ends, west under the track x 9056 and the tracks x 9010 (this
+# unit's output), 8968, 8925, 8882, 8838 with no contact (eof_cchk (9010,17212), (9056,17212):
+# no hole, no ring) and the thin metal, over the column to its end at x 8740
+P 8740,17203:9090,17222
+P 9082,17195:9114,17226
+C 9098,17210
+N P 8900,17212 eof_w17212
+# ---- in212: row 3's track to the pad it comes from. The track x 9099 runs north from the pad,
+# straight (tl5_tracks.py v 9099 14700 17200: between y 15880 and y 17195 no stretch without
+# metal but the 8-11 px bars of the two large diffusions' edges and 47 px at y 16671-16717),
+# to a corner (9097,15870); there it is NOT the track x 9099 that goes on north of y 15830 (that
+# one turns east at (9098,15827), 25 px from the pad below): it turns west along y 15858-15882 to
+# (9053,15870) and north to a pad with a contact (9053,15822) (ring and bright centre in both
+# metal shots, a hole in the clean shot: eof_cchk -16, centres 248/194; r21_k2.png 3.6x,
+# r21_k3.png 5x, three shots). The pad's poly row runs west along y 15812-15832 (stub: port).
+# At y 16671-16717 the track's west edge lies over the east edge of the pad of eof_w16823's
+# buried contact (piece cap16) and the metal is dark in both chips: read as no contact in run 20
+# (not widened; notes, Ambiguity 72); drawn ?M there (trap 27). It crosses the large diffusion
+# of piece cap16 (y 16477-16607) with no contact.
+M 9099,17210 y16712 w=13
+?M 9099,16718 y16666 w=13
+M 9099,16672 y15870 x9053 y15822 w=14
+P 9038,15805:9072,15840
+C 9053,15822
+P 8990,15812:9045,15832
+# the node: the column between the two gates, with the strip west under the rail (y 17163-17181;
+# px cols 8722, 8672), under the thin metal x 8637-8650 and the plate (y 17166-17190; px col
+# 8602) to the VCC box (contact (8525,17183): ring and bright centre in chip 2, hole in the
+# clean shot)
+D 8655,17163:8760,17181
+D 8556,17166:8662,17190
+D 8508,17162:8565,17208
+C 8525,17183
+P 8573,17148:8623,17232              # the plate
+# the tie: a heavy-outlined box (8628-8662, 17196-17238) under the thin metal below the strip,
+# a tab of the plate into it from the west, a tail of the node from the strip. Drawn uncertain.
+?P 8618,17198:8652,17216
+?D 8640,17186:8660,17234
+?B 8628,17196:8662,17238
+# the output: row 2 (y 17160-17178) ends from the east in a heavy-outlined box with a lighter
+# centre on the node (8767-8800, 17153-17190; px row 17172: outline x 8764-8772, centre
+# x 8776-8792, poly from x 8798; no poly crosses the column west of the box: px col 8760 is
+# diffusion from y 17146 to y 17194 in the chip-2 stripped shot): a buried contact. The row runs
+# east under the thin metal and the tracks x 8838, 8882, 8925, 8968 to a pad with a contact
+# (9007,17170) (eof_cchk -25, centres 198/183), whose metal runs south on x 9012 over row 3 to a
+# corner (9012,17518), east to (9057,17518) and south on x 9057 (stub: port). The corner passes
+# 10 px north of the ring of inv17's pad (9008,17560) without touching it (bare ground between,
+# y 17533-17540: textmap 8984 17494 9040 17600 3; follow.py 9008 17600 N stops on the pad).
+D 8762,17153:8798,17190
+B 8765,17151:8802,17192
+P 8774,17160:9000,17178
+P 8993,17155:9030,17190
+C 9007,17170
+M 9011,17170 y17518 x9057 y17600 w=14
+N P 8900,17169 eof_w17168

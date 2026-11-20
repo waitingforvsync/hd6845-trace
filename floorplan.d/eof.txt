@@ -71,3 +71,8 @@
 8800,15722:8900,16030    route  data of the first latch | from a pad (8880,15738), whose poly comes from column B's edge, south and west onto the track x 8838 and down to the latch's data pad (8838,16000)
 8908,16434:9254,16714    ?logic  capacitor on the second latch's node (large diffusion) | a diffusion rectangle with no gate and no contact under six tracks, tied by a neck and a buried contact at (9080,16695) to eof_w16823: believed a delay
 8800,17064:9028,17135    route  second latch's inverse output into the unit below | eof_w16693: metal x 9012 to a pad (9011,17080), a poly row y 17125 west under four tracks
+8512,16960:8814,17072    logic  inverter on the second latch's node | eof_w17040 = NOT eof_w16823: a copy of the inverter between the latches; its output leaves by a metal contact (8791,17040) and a thin metal south
+8508,17074:8805,17290    logic  NOR on the second latch's inverse output | eof_w17168 = NOR(eof_w16693, eof_w17212): two pull-downs on one diffusion column east of the rail, the output by a buried contact onto the row between them
+8778,17040:9030,17610    route  that inverter's output | a thin metal down the column's east side over three other boxes to a pad (8792,17561), a poly row east to a pad (9008,17560), a metal on south
+8774,17155:9064,17600    route  that NOR's output | row y 17169 east to a pad (9007,17170), a metal south, east at y 17518 and south on x 9057
+8990,15805:9114,17226    route  that NOR's second input | from a pad (9053,15822), whose poly comes from the west, south and east onto the track x 9099 and down to the row y 17212
