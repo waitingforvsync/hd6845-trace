@@ -434,7 +434,7 @@ P 8930,16728:8955,16746
 P 8945,16156:8980,16188              # tap pad; its row goes on west (not followed)
 C 8966,16172
 P 8930,16163:8950,16181              # the row is y 16163-16181 (px col 8940 16150 16190 3 acid1b; review round 5)
-P 8949,15244:8983,15276              # the north end's pad; its row goes on west (not followed)
+P 8949,15244:8983,15276              # the north end's pad; its row goes on west: row C of piece vw, a gate of unit W
 C 8966,15260
 P 8930,15248:8955,15266
 M 8967,17737 x8688 w=13              # the west branch
@@ -1075,7 +1075,7 @@ N P 5412,6500 bd1_n2
 # ============================================================================================
 # Piece ck6 (run 15, 2026-11-19): the ripple counter's clock lc3_w9947 from busl's row end
 # (7550,14784) east to its driver, an inverter under the bottom-centre logic's east VSS rail.
-#   lc3_w9947 = NOT eof_w15127      (eof_w15127: the output of the unit below, y 15100-15285, not drawn)
+#   lc3_w9947 = NOT eof_w15127      (eof_w15127: the output of the unit below, y 15100-15285: piece vw)
 # Path: busl's poly row y 14784 on east to a pad (7837,14784); bus metal y 14784 (the eleventh of
 # bc1's 13 bus lines) to a pad (8293,14785); a poly L south and east along y 14825 under R1, the
 # VCC vertical and the VSS band, in the open from x 8735, south at x 8968 to a pad (8967,14870);
@@ -1118,7 +1118,7 @@ P 8820,14984:8854,15016              # pad
 C 8836,15000
 M 8838,15000 y15127 w=16             # the input's metal, x 8830-8848, south over the row y 15042 (no pad) to a pad
 P 8816,15110:8850,15144              # pad (8833,15127); its poly row y 15120-15138 goes west into the output box
-C 8833,15127                         #   (8765-8795, 15118-15140) of the unit below (read, not drawn: notes, Not done)
+C 8833,15127                         #   (8765-8795, 15118-15140) of the unit below (piece vw)
 N M 8838,15060 eof_w15127
 D 8738,15018:8800,15058              # node east: the pad round the box
 B 8768,15030:8802,15052              # the output's buried contact
@@ -1133,3 +1133,99 @@ P 8600,14975:8620,15003              # its tab east along the top (poly seen to 
 D 8628,14975:8650,15016              # the tail up from the strip, under the tie box
 ?P 8616,14977:8648,15001             # the tab's end in the tie box, under bc1's thin metal x 8637-8650
 ?B 8626,14973:8650,15003             # the tie: plate to node (box 8628-8648, 14977-15000 in the clean shot)
+#
+# Piece vw (run 16, 2026-11-20): the units V and W below the inverter U, a cross-coupled pair that
+# makes eof_w15127 (the inverter's input). By hand: findcell gives no copy of tl1's units here, but
+# the build is theirs (node strips under thin metals, a third pull-down gated by the other unit's
+# load plate, a second finger of the stack under the east thin metal).
+#   eof_w15127 = NOT(eof_w15172 OR eof_w15300)                       (V; the hairpin is two gates in series on one net)
+#   eof_w15300 = NOT((eof_w15350 AND eof_w15390) OR eof_w15127 OR rst_a)   (W; the rst_a term rests on a ?D link)
+# Both rest on the plates' ties (?P, ?B), like every load of this build. bc1's two thin metals
+# (x 8637-8650, x 8789-8801) run over both units and are not drawn here; no contact on either.
+# Views r16_*.png in cache/scratch/eof/ (clean 4x, both metal shots 3x); survey.md, run 16.
+M 8712,15060 y15465 w=50             # column B's VSS rail, x 8687-8737, on south over V and W
+M 8534,15060 y15340 w=48             # R2 (bc1's), the piece over the two VCC boxes
+# ---- unit V (y 15100-15285) ----
+D 8707,15111:8742,15246              # under the rail: the node, gate A, a closed diffusion, gate B, V's ground
+D 8685,15240:8730,15284              # VSS box
+C 8702,15260
+D 8738,15118:8770,15158              # node east: through the open gap
+D 8760,15113:8798,15146              # and the pad round the box
+B 8765,15116:8800,15140              # the output's buried contact
+P 8770,15120:8826,15138              # output row east to its pad (8833,15127) (piece ck6)
+P 8694,15163:8870,15187              # row A  } one poly, a hairpin joined at the east end by the pad:
+P 8694,15204:8897,15228              # row B  } both arms end free at x 8694
+P 8866,15152:8897,15228              # the bend, with the pad
+C 8880,15172
+D 8628,15120:8712,15146              # node west: the strip, under the thin metal x 8637-8650
+D 8560,15120:8632,15146              # under the plate to the VCC box
+D 8508,15116:8562,15166              # VCC box (bc1 draws the land 8505-8562, 15118-15182)
+C 8534,15146 s=24x40
+P 8570,15100:8622,15148              # the plate (channel 52 long, 26 wide)
+P 8563,15146:8620,15184              # the plate's poly on south: a pad with a metal contact
+C 8592,15168
+D 8628,15140:8662,15256              # the column under the thin metal: tail, under the tie box, the arm's channel, a pocket
+?P 8612,15160:8648,15184             # the pad's poly on east into the tie box
+?B 8626,15160:8650,15187             # the tie: plate to node (box 8627-8650, 15160-15187)
+D 8655,15240:8690,15257              # the pocket runs east through the open gap into the VSS box
+P 8597,15205:8672,15228              # the arm: W's plate poly across the column (V's third pull-down), end x 8672
+P 8597,15205:8612,15270              # its column south (x 8597-8612)
+P 8568,15262:8622,15300              # widening to the plate's width
+# ---- the second finger, under the thin metal x 8789-8801 ----
+D 8777,15140:8797,15424              # strip from V's box pad to W's foot; rows A, B, C, 1, 2 cross it
+D 8754,15244:8797,15282              # wider under row C (channel x 8754-8797), down to W's pad
+?D 8738,15236:8760,15245             # UNCERTAIN: the segment between rows B and C joined to V's ground under the rail
+P 8746,15251:8950,15270              # row C: rst_a's row from its end pad (8966,15260) (piece isrc), west end x 8746
+# ---- unit W (y 15285-15470) ----
+D 8697,15309:8742,15462              # under the rail: the node, row 1, a closed diffusion, row 2, W's ground
+C 8722,15440
+D 8738,15309:8756,15323              # node east: through the open gap
+D 8752,15276:8800,15328              # the pad round the box
+B 8762,15285:8802,15320              # the output's buried contact
+P 8768,15292:8826,15317              # output row east
+P 8816,15284:8854,15320              # pad
+C 8835,15302
+M 8838,15302 y15456 w=16             # metal south, x 8830-8848, over rows 1 and 2 (no contact)
+P 8818,15440:8854,15472              # pad (8836,15456); its poly goes on (the next unit: not drawn)
+C 8836,15456
+N M 8838,15420 eof_w15300
+P 8681,15329:8738,15351              # row 1 under the rail (west end x 8681, over field west of x 8695)
+P 8730,15335:8866,15355              # row 1 east of the rail (6 px lower)
+P 8862,15333:8898,15367              # pad
+C 8881,15351
+M 8881,15351 y15465 w=16             # metal south (1,346 px, not followed here)
+N M 8881,15440 eof_w15350
+P 8681,15372:8736,15396              # row 2 under the rail (west end x 8681)
+P 8728,15378:8906,15398              # row 2 east of the rail
+P 8902,15374:8940,15408              # pad
+C 8922,15392
+M 8925,15392 y14828 x9008 w=18       # metal north on x 8925 over row C and the row y 15042 (no contact), east at y 14828
+P 8990,14811:9026,14846              # pad (9008,14828)
+C 9008,14828
+P 9002,14790:9020,14815              # its poly column north (x 9002-9020, to y 14610 and east: not drawn)
+N M 8925,15100 eof_w15390
+D 8738,15406:8797,15424              # the foot: the strip's end joined to W's ground through the open gap
+D 8560,15302:8700,15316              # node west: the strip from the rail (y 15302-15316) to the VCC box
+D 8560,15302:8630,15332              # full height under the plate
+D 8508,15262:8562,15332              # VCC box (bc1's land 8505-8562, 15250-15327)
+C 8531,15290 s=30x56
+P 8568,15298:8622,15335              # the plate (channel 54 long, 30 wide); one poly with the arm above
+D 8624,15302:8660,15420              # the column under the thin metal: node, the gate of the pad's row, the foot
+D 8655,15318:8674,15358              # the column's part in the open gap
+D 8655,15402:8700,15420              # the foot runs east through the open gap into W's ground
+?P 8616,15272:8652,15294             # the plate's tab east into the tie box
+?D 8643,15279:8662,15306             # the tail up from the strip
+?B 8641,15277:8664,15308             # the tie: plate to node (box 8645-8663, 15281-15298, and a bar y 15302-15310 below it)
+# V's output to W: from the plate's pad a metal south to a pad, whose row is W's third gate
+M 8592,15168 y15383 w=24             # x 8580-8604, dim (it lies half over the arm's column)
+P 8578,15365:8616,15397              # pad
+C 8592,15383
+P 8610,15373:8666,15395              # the pad's row east across the column; it ENDS at x 8666 (14 px short of row 2)
+N M 8592,15280 eof_w15127
+# the hairpin's wire: from the bend's pad north and east to a pad, a poly north and east
+M 8882,15172 y14785 x9054 w=14
+P 9038,14768:9070,14802              # pad
+C 9054,14785
+P 9053,14790 y14653 x9150 w=17       # north x 9044-9062, east along y 14645-14662 (goes on east)
+N M 8882,15000 eof_w15172
+N P 9120,14653 eof_w15172

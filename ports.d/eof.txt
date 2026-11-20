@@ -54,7 +54,6 @@ rst_a     M  10390-10402,15083  out  onto bc2's pad (10395,15087): the clear of 
 rst_a     P  9770,18072-18090   ?    link H: from trunks' pad (9770,18081)
 rst_a     P  8930,16728-16746   ?    the row west of the tap pad (8966,16737): into the gate column x 8650-8800
 rst_a     P  8930,16163-16181   ?    the row west of the tap pad (8962,16172): into the gate column
-rst_a     P  8930,15248-15266   ?    the row west of the end pad (8966,15260)
 
 # Piece isrc4: rst_a is lc2's through line x 6299 (run 9)
 rst_a     P  7550,14904-14924   in   onto the east end of busl's poly row of rst_a (one net); the driver is beyond it: lc1's gate 5, rst_a (piece isrc5)
@@ -110,7 +109,11 @@ bd1_n2      M      6769-6782,10400          in   the track x 6775 from busl's re
 bd1_n2     P      5403-5421,6345           out  onto tl5's poly end (its port bd1_n2 (5402-5422,6350)): the input of tl4's inverter that makes rcs_e3
 # Piece ck6 (run 15): the ripple counter's clock to its driver, the inverter U
 lc3_w9947     P      7550,14772-14796         out  onto busl's row end (its port there): the ripple counter's clock, driven by the inverter U at (8733,15000)
-eof_w15127    P      8816,15120-15138         in   the inverter's input at the pad (8833,15127) of its metal; the pad's row goes west into the output box (8765-8795,15118-15140) of the unit below (read, not drawn)
 vss           M      8687-8737,14900          -    column B's VSS rail north of the inverter (it turns west as a band y 14816-14878 to the rail x 8510-8560)
-vss           M      8687-8737,15070          -    column B's VSS rail on south
-vcc           M      8510-8558,15070          -    R2 (bc1's M 8534,14990 y16300), drawn again over the VCC box
+# Piece vw (run 16): the units V and W, the latch that makes eof_w15127 (the clock inverter's input)
+eof_w15172    P      9150,14645-14662         in   the hairpin's signal, V's one input: its poly row goes on east through bc2's ground (not followed)
+eof_w15350    M      8873-8889,15465          in   the upper gate of W's stack: the metal of the pad (8881,15351) runs on south (follower: to (8882,16623), not checked)
+eof_w15390    P      9002-9020,14790          in   the lower gate of W's stack: the poly column north of the pad (9008,14828), on north to y 14610 and east (not followed)
+eof_w15300    P      8818-8854,15440-15472    out  W's output at the pad (8836,15456), the south end of its metal; the pad's poly is the next unit's (not drawn)
+vss           M      8687-8737,15465          -    column B's VSS rail on south
+vcc           M      8510-8558,15340          -    R2 (bc1's M 8534,14990 y16300), drawn again over the VCC boxes
