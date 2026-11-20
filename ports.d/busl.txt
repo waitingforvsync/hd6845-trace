@@ -158,3 +158,16 @@ busl_x6603   P  7550,14382-14404   ?   poly row y 14393 on east toward bc1's bus
 # piece gd (run 13): tl5_w2722, line 14 of the staircase bundle
 tl5_w2722    P  5356-5378,6350     in  onto tl5's poly column from T3's south pad (tl5's port tl5_w2722 there)
 tl5_w2722    P  7550,14339-14361   out poly row y 14350 on east toward bc1's bus pads (seen as poly to x 7630; not drawn)
+# piece a6 (run 14): the six lines of cdp3_g_c# west of bc1's contacts, to bl0's six tracks at y 15000
+cdp3_g_c2    M  5490-5504,15000    ?   onto bl0's track (its bl0_w18081, piece t6): on south to the left array's row y 18081
+cdp3_g_c3    M  5533-5547,15000    ?   onto bl0's track (bl0_w17603): to the array's row y 17603
+cdp3_g_c4    M  5577-5591,15000    ?   onto bl0's track (bl0_w17126): to the array's row y 17126
+cdp3_g_c5    M  5620-5634,15000    ?   onto bl0's track (bl0_w16649): to the array's row y 16649
+cdp3_g_c6    M  5664-5678,15000    ?   onto bl0's track (bl0_w15999): to the array's row y 15999
+cdp3_g_c7    M  5707-5721,15000    ?   onto bl0's track (bl0_w15522): to the array's row y 15522
+cdp3_g_c2    P  7000,14080-14102   ?   the row runs on east as bc1's poly line 1 (drawn there from x 7000) to its contact (7188,14091)
+cdp3_g_c3    P  7000,14123-14145   ?   on east as bc1's line 2, to its contact (7230,14131)
+cdp3_g_c4    P  7000,14167-14189   ?   on east as bc1's line 3, to its contact (7274,14172)
+cdp3_g_c5    P  7000,14209-14231   ?   on east as bc1's line 4, to its contact (7317,14217)
+cdp3_g_c6    P  7000,14253-14275   ?   on east as bc1's line 5, to its contact (7361,14260)
+cdp3_g_c7    P  7000,14297-14319   ?   on east as bc1's line 6, to its contact (7405,14304)

@@ -901,3 +901,68 @@ N M 6948,8000 tl5_w2722
 N P 6904,8540 tl5_w2722
 N M 6646,11000 tl5_w2722
 N P 7300,14350 tl5_w2722
+# =====================================================================================
+# Piece a6 (run 14, 2026-11-20): the six data lines of cdp4's latch row D (piece d6: cdp3_g_c2 ..
+# c7, bc1's six poly lines y 14089 .. 14304) run on west of bc1's contacts across the whole field
+# and reach the left array's six lower rows. Each of bc1's poly lines (drawn in trace/bc1.txt from
+# x 7000 east) is one straight poly row from x 7000 west under about thirty tracks (no pad, no
+# widening: tools/busl_roww.py) to a west end pad (x 5757 for lines 1, 3, 5; x 5800 for lines 2,
+# 4, 6); the pad's thin metal is a nested L: west (lines 1-4 only), south on x 5584 .. 5801, west
+# 87 px along y 14441 .. 14656, south on x 5497 .. 5714 to the region's edge at y 15000, where
+# trace/bl0.txt (piece t6) draws it on to the pad of one poly row of the left array (bl0_w18081 ..
+# bl0_w15522). The order is kept: line 1 (cdp3_g_c2) is the outermost L and goes to the array's
+# lowest row (y 18081), line 6 (cdp3_g_c7) the innermost, to the row y 15522. No pad, contact or
+# tap between the pad and y 15000 (scan cache/scratch/busl/j14_scan.txt); the Ls cross no row.
+# North of the lower arms the track positions x 5497 and x 5540 carry cdp4_bus_s1 and
+# cdp4_bus_s0 (piece ch1), which turn west at y 14353 and y 14398: 36 px of bare ground between
+# s0's arm and line 1's (two metals on one track position, trap 33).
+# =====================================================================================
+# line 1: cdp3_g_c2 (bc1's line 1, row y 14091) -> bl0_w18081 at (5497,15000)
+P 5757,14091 x7010 w=22               # the row west of bc1's `P 7000,14089 x8087`, to its west end pad
+P 5738,14074:5776,14110               # the row's west end pad
+C 5757,14092 s=24x24
+M 5759,14094 x5584 y14441 x5497 y15000 w=14
+N P 6500,14091 cdp3_g_c2
+N M 5497,14900 cdp3_g_c2
+# line 2: cdp3_g_c3 (row y 14134) -> bl0_w17603 at (5540,15000)
+P 5800,14134 x7010 w=22
+P 5781,14118:5819,14154
+C 5800,14136 s=24x24
+M 5802,14137 x5627 y14484 x5540 y15000 w=14
+N P 6500,14134 cdp3_g_c3
+N M 5540,14900 cdp3_g_c3
+# line 3: cdp3_g_c4 (row y 14178) -> bl0_w17126 at (5584,15000)
+P 5757,14178 x7010 w=22
+P 5738,14160:5776,14196
+C 5756,14178 s=24x24
+M 5759,14180 x5671 y14526 x5584 y15000 w=14
+N P 6500,14178 cdp3_g_c4
+N M 5584,14900 cdp3_g_c4
+# line 4: cdp3_g_c5 (row y 14220) -> bl0_w16649 at (5627,15000)
+P 5800,14220 x7010 w=22
+P 5781,14204:5819,14240
+C 5800,14223 s=24x24
+M 5802,14224 x5714 y14572 x5627 y15000 w=14
+N P 6500,14220 cdp3_g_c5
+N M 5627,14900 cdp3_g_c5
+# line 5: cdp3_g_c6 (row y 14264) -> bl0_w15999 at (5671,15000)
+P 5757,14264 x7010 w=22
+P 5738,14247:5776,14283
+C 5757,14265 s=24x24
+M 5757,14263 y14613 x5671 y15000 w=14
+N P 6500,14264 cdp3_g_c6
+N M 5671,14900 cdp3_g_c6
+# line 6: cdp3_g_c7 (row y 14308) -> bl0_w15522 at (5714,15000)
+P 5800,14308 x7010 w=22
+P 5781,14290:5819,14326
+C 5800,14308 s=24x24
+M 5801,14306 y14656 x5714 y15000 w=14
+N P 6500,14308 cdp3_g_c7
+N M 5714,14900 cdp3_g_c7
+# the six joins: bl0's names for the tracks south of y 15000 (trace/bl0.txt, piece t6)
+@alias cdp3_g_c2 bl0_w18081
+@alias cdp3_g_c3 bl0_w17603
+@alias cdp3_g_c4 bl0_w17126
+@alias cdp3_g_c5 bl0_w16649
+@alias cdp3_g_c6 bl0_w15999
+@alias cdp3_g_c7 bl0_w15522
