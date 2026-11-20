@@ -155,3 +155,6 @@ busl_x6559   P  6800,7247-7269     ?   poly row y 7258 on west into the crossing
 busl_x6603   P  6845,7289-7311     ?   poly row y 7300 on west into the crossing field; not read
 busl_x6559   P  7550,14426-14448   ?   poly row y 14437 on east toward bc1's bus pads (seen as poly to x 7600; not drawn)
 busl_x6603   P  7550,14382-14404   ?   poly row y 14393 on east toward bc1's bus pads (seen as poly to x 7600; not drawn)
+# piece gd (run 13): tl5_w2722, line 14 of the staircase bundle
+tl5_w2722    P  5356-5378,6350     in  onto tl5's poly column from T3's south pad (tl5's port tl5_w2722 there)
+tl5_w2722    P  7550,14339-14361   out poly row y 14350 on east toward bc1's bus pads (seen as poly to x 7630; not drawn)

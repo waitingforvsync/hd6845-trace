@@ -37,3 +37,7 @@
 7045,14465:7180,15235   route  latch D's data out of the field | from the pad (7057,14480) a metal south (x 7058, jog y 14588, x 7100) to a pad (7100,15175) and a poly row y 15218 east
 6590,8255:6925,10400    route  the same three lines north of the field | tracks x 6602, 6646, 6689 (arms y 9886-9970), diagonals, pads, poly columns under the staircase metals, second pads
 6440,7235:6925,8330     route  the three lines' north ends | lc1_w7780's poly row y 7780 from the left-centre strip to its pad (6819,7780); metals x 6819, 6861, 6905 to the end pads (6861,7257), (6904,7301) of the rows y 7258, y 7300
+5345,6350:6210,7065     route  step-logic inverter output out of the top-left logic | tl5_w2722 (= NOT tl4_w3113): the poly column x 5367 south under nine metals, a diagonal, the poly row y 7041 east to a pad (6188,7042)
+6180,7030:6960,8690     route  the same line, east and south | metal y 7043 to a corner (6948,7043), south on x 6948 to a pad (6903,8408), a poly hop under the staircase metals to a pad (6904,8669)
+6400,8690:6920,14370    route  the same line down the field: bundle line 14 | diagonal, tracks x 6732, 6646, 6473, 6408 (arms y 10015, 12054, 12943) to the pad (6408,14350)
+6390,14335:7550,14365   route  foot row y 14350 | poly row from the pad east toward the bus of the bottom-centre logic

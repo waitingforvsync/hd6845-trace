@@ -861,3 +861,48 @@ N M 6905,8000 busl_x6603
 N P 6861,8540 busl_x6603
 N M 6602,11000 busl_x6603
 N P 7300,14393 busl_x6603
+# =====================================================================================
+# Piece gd (run 13, 2026-11-20): line 14 of the staircase bundle of piece lc9, the last one inside
+# tla's rcs_e4 (east of line 13, busl_x6603; the next line east is rsel12_buf). It is tl5_w2722,
+# the output of tl5's strong inverter (tl5_w2722 = NOT tl4_w3113), drawn from tl5's poly end
+# `P 5365,6120 y6350 w=20` to the foot of the field, the west end pad of the poly row y 14350
+# (bc1's 13-line bus). No pad, contact or tap between the ends listed.
+#   tl5's poly column x 5367 on south from y 6350 under nine horizontal metals (no pad: its width
+#       is 19-24 px at every 6 px in one or both stripped shots) to a bend (5367,6806); a
+#       45-degree diagonal (x - y = -1439, the south-west one of three; the middle one is eof's
+#       bd1_n2) to (5602,7041); the poly row y 7041 east under the crossing field's tracks (no
+#       pad) to its end pad (6188,7042); metal east along y 7043 over ten vertical polys to a
+#       plain L corner (6948,7043) (the south-most of three nested corners; the middle one is
+#       bd1_n2's), south on x 6948, west along y 8406 to a pad (6903,8408); poly column x 6904
+#       south under the staircase metals (y 8455, 8585, 8625; legs of two of them lie beside it
+#       at x 6876-6890 and x 6921-6938: no contact) to a pad (6904,8669); metal south, the
+#       diagonal (6904,8756)-(6732,8928) (x + y = 15660), track x 6732, arm y 10015 (its east
+#       end lies 15 px north of the ring of regs' pad (6730,10055): bare ground between, both
+#       chips), track x 6646, arm y 12054 (on cdp4_bus_s3's poly row for 173 px, no contact),
+#       track x 6473, arm y 12943, track x 6408 south to a pad (6408,14350); the poly row
+#       y 14350 east out of the region at x 7550.
+# Scan: cache/scratch/busl/i13_scan.txt; flagged crossings on tiles i4_t1.png, i13_t2.png.
+# One chip-2-only mark: the track x 6408 over cdp4_bus_s1's row y 13375 is dim for 20 px in
+# chip 2 (greenish patch in chip 2's stripped shot), bright in chip 1, no hole in the clean
+# shot, the row not widened: not a contact (notes; the same row as AMB-044, one track west).
+# =====================================================================================
+# gd: tl5_w2722 (line 14)
+P 5367,6345 y6806 5602,7041 x6188 w=22   # tl5's column on south from y 6350, the diagonal, the row y 7041 east to its end pad
+P 6169,7024:6207,7061                 # the row's east end pad
+C 6188,7042 s=24x24
+M 6186,7043 x6948 y8406 x6902 w=13    # metal east along y 7043, south on x 6948, west along y 8406 to the pad
+P 6885,8389:6922,8427                 # pad at the head of the poly column
+C 6903,8408 s=24x24
+P 6904,8406 y8671 w=22                # poly column south under the staircase metals
+P 6886,8650:6923,8688                 # the pad at the head of the diagonal
+C 6904,8669 s=24x24
+M 6904,8667 y8756 6732,8928 y10015 x6646 y12054 x6473 y12943 x6408 y14352 w=14
+P 6390,14332:6426,14368               # the foot pad, the west end of the row
+C 6408,14350 s=24x24
+P 6408,14350 x7550 w=22               # the row y 14350 east to the region's edge
+N P 5367,6600 tl5_w2722
+N P 5900,7041 tl5_w2722
+N M 6948,8000 tl5_w2722
+N P 6904,8540 tl5_w2722
+N M 6646,11000 tl5_w2722
+N P 7300,14350 tl5_w2722
