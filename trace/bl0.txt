@@ -99,7 +99,7 @@ C 6030,15588 6031,15753
 D 5987,15596:6010,15752                            # its west margin beside the rail (both channels W 5987-6058)
 D 5957,15662:5990,15690                            # node C's tab west, under the end of the row y 15675
 B 5955,15661:5988,15691
-P 5600,15662:5986,15690                            # node C's poly row, west to a pad at about (4867,15674) (port at x 5600)
+P 4852,15662:5986,15690                            # node C's poly row, west under the tracks to a pad (4867,15675) (piece g1)
 N P 5800,15676 lpstb_nres
 D 6058,15653:6192,15693                            # node C's strip east under the load plate (W 40, L 42)
 D 6185,15648:6242,15694
@@ -108,3 +108,70 @@ P 6113,15637:6155,15742                            # load plate
 D 6080,15690:6100,15745                            # L of diffusion from the strip down
 D 6080,15716:6140,15745                            #   and east into the box under the plate's lower end
 B 6103,15711:6142,15746
+
+# ================================================================ piece g1: lpstb_nres to its loads in the left array
+# (the memory address counter, larr). The wire: the poly row y 15676 west to a pad (4867,15675), a track
+# x 4867 north through the left bus field's south-west corner (nothing else of busl's is there) to a pad
+# (4867,14436), a poly row y 14436 west across the whole array in its Gap 1 (between the carry groups
+# s0-s6 and s7-s9), under the left column's vcc rail, north and west to a gate band under the vss rail.
+# There:
+#     bl0_w14308  = NOT( bl0_w14113 OR lpstb_nres )            (two pull-downs with the output between them)
+#     larr_l0_g1 is pulled to vss while bl0_w14308 is high     (one transistor east of the vss rail)
+# larr_l0_g1 is larr's all-ones line of group s7-s9 and the carry into s10 (notes/blocks/larr.md).
+# The two rails are the left edge column's (vss x 2605-2655, vcc x 2783-2832: tla, tl1, ur name them so
+# further north, each by the loads; they are not drawn between there and here).
+
+# ---- the wire
+P 4852,15660:4884,15690                            # pad at the row's west end
+C 4867,15675
+M 4867,15690 y14422 w=18                           # track x 4858-4876 north; no break (tl5_tracks.py v 4867 14415 15700)
+C 4867,14436
+P 4850,14422:4884,14450                            # pad at the track's north end
+P 2798,14425:4867,14447                            # poly row west across the array (Gap 1)
+P 2798,14362:2818,14447                            # north under the vcc rail
+P 2669,14362:2818,14380                            # west along y 14371
+P 2669,14350:2692,14380                            # where the row meets the band's east end
+P 2537,14339:2692,14361                            # gate band B under the vss rail; west end x 2537
+N P 3600,14436 lpstb_nres
+
+# ---- supplies (the stretch of each rail over this cell)
+M 2630,14090 y14560 w=50
+N M 2630,14500 vss
+M 2807,14090 y14560 w=49
+N M 2807,14400 vcc
+
+# ---- the NOR under the vss rail. One diffusion column x 2603-2651 with a west margin x 2580-2603 in
+# the open: source box with a contact, gate band A, the output node, gate band B, source with two contacts.
+D 2603,14209:2651,14415
+D 2580,14228:2605,14385                            # west margin: both channels are W 2580-2651
+D 2613,14410:2667,14460                            # the lower source widens east at its foot
+C 2618,14228 2620,14385 2633,14433
+P 2517,14253:2664,14274                            # gate band A
+P 2517,14105:2539,14274                            # its poly north along the west side to the row y 14113
+P 2500,14105:2860,14122                            # the row y 14105-14122 (ports at both ends: not followed)
+N P 2528,14180 bl0_w14113
+D 2651,14292:2780,14326                            # output strip east under the load plate
+D 2776,14288:2836,14338                            # box under the vcc rail
+C 2803,14312
+P 2706,14262:2748,14342                            # load plate (strip W 34, L 42)
+P 2706,14243:2733,14268                            # its finger north into the box of the L below
+B 2704,14241:2735,14267
+D 2673,14238:2690,14300                            # L of diffusion from the strip north
+D 2673,14238:2734,14262                            #   and east under the finger
+D 2555,14296:2582,14320                            # output tab west of the margin
+B 2553,14294:2580,14321
+P 2445,14298:2578,14318                            # output poly row west under the track x 2493-2512 (not drawn)
+P 2443,14292:2476,14322                            # pad
+N P 2520,14308 bl0_w14308
+M 2459,14300 y14706 w=18                           # metal south through three pads; ends on the third (tl5_tracks.py v 2459 14290 14780)
+C 2459,14307 2459,14505 2459,14700
+P 2440,14488:2478,14518                            # second pad, on the lower side of the row y 14467-14494
+P 2432,14467:2777,14494                            # that row: the gate of the transistor on larr_l0_g1; ends at both field islands
+P 2405,14688:2550,14708                            # third pad's row y 14688-14708 (ports at both ends: not followed)
+
+# ---- the transistor on larr_l0_g1, east of the vss rail, between two field islands (x 2661-2687 and
+# x 2760-2777). Its source is the NOR's lower source by a neck y 14434-14446 north of the west island.
+D 2660,14434:2776,14446                            # neck and top band
+D 2689,14434:2760,14532                            # source, channel (W 71), drain
+D 2689,14517:2860,14533                            # drain strip east under the vcc rail onto larr's diffusion (2850-2880, 14508-14540)
+N D 2800,14525 larr_l0_g1

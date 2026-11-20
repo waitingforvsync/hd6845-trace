@@ -7,7 +7,15 @@ bl0_w15088   P  6450,15078-15098  ?    poly row on east from the pad (6320,15088
 bl0_w15088   P  5700,15078-15098  ?    poly row on west to a pad (4909,15088); a track x 4909 from the north ends there
 bl0_w15088   M  5750-5764,15700   ?    thin metal south from the pad (5755,15088), followed to about (5762,15768)
 bl0_w15412   P  5600,15401-15425  out  poly row west to a pad (4909,15414), track x 4909 south
-lpstb_nres   P  5600,15662-15690  out  poly row west to a pad (4867,15673), track x 4867 north
 vss          M  6013-6067,15800   -    the U's left arm runs on south
 vss          M  6273-6328,15800   -    the U's right arm runs on south
 vcc          M  6187-6241,15800   -    the inner rail runs on south
+bl0_w14113   P  2500,14105-14122  in   the row y 14105-14122 runs on west under the wide metal
+bl0_w14113   P  2860,14105-14122  in   the same row runs on east into the array
+bl0_w14308   P  2405,14688-14708  out  the row of the third pad (2459,14700) runs on west
+bl0_w14308   P  2550,14688-14708  out  the same row runs on east
+larr_l0_g1   D  2860,14517-14533  ?    onto larr's diffusion (2850-2880, 14508-14540) and its contact (2892,14523)
+vss          M  2605-2655,14090   -    the left edge column's vss rail, on north
+vss          M  2605-2655,14560   -    the same, on south
+vcc          M  2783-2832,14090   -    the left edge column's vcc rail, on north
+vcc          M  2783-2832,14560   -    the same, on south
