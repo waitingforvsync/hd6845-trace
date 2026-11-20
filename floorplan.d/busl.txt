@@ -22,3 +22,7 @@
 5090,10950:5335,15000   route  six through lines down the west side | lc3_e9577..e9793 on six tracks, no tap in the field; they run on south to the lower rows of the left array
 4805,10590:5560,10725   route  reset inverse and counter clear, poly rows west | rst_n and lc2_w8450: two polys from the left-centre logic, each by a diagonal to a row under the supply branch and a pad at the top of a track
 4805,10650:4925,15105   route  reset inverse down the west edge | rst_n on the track x 4909 to the pad (4909,15087) and the row y 15088 east into the wide inverter of the gate group below (bl0_w15412 = NOT rst_n); lc2_w8450 on the track x 4822 south out of the field
+6870,13400:7010,15000   route  two foot rows' tracks | busl_x6949 and busl_x6992: from the pads of the poly rows y 14870 and y 14827 north, one step east each (y 13421, y 13463); no connection in the field
+6935,8780:7190,13400    route  the same two lines north | tracks x 6949 and x 6992 to the diagonal bundle and its pads (7121,8797), (7163,8842)
+7100,7150:7190,8860     route  the same two lines, poly hop and north | a poly column under the staircase metals, a second pad, and a metal north to end pads (7120,7214), (7165,7170) on poly rows that go west
+6865,14810:7550,14890   route  foot rows y 14827, y 14870 | poly rows from the bus of the bottom-centre logic to the pads of the two tracks

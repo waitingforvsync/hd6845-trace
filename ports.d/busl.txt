@@ -136,3 +136,8 @@ rst_n        P  5464-5486,10400    in  onto lc3's poly from rst_n's end pad (547
 rst_n        P  5700,15078-15098   out onto bl0's poly row of bl0_w15088 (P 5700,15088 x5755): one net
 lc2_w8450    P  5530-5552,10400    in  onto lc3's poly from the end pad (5540,10165)
 lc2_w8450    M  4815-4829,15000    ?   track x 4822 on south; follower ends (4823,16690), not read
+# pieces fb, fa (run 10): the foot rows y 14870, y 14827 and their tracks to the top of the northern part
+busl_x6949   P  7550,14859-14881   ?   poly row on east to a pad at about (7836,14872) under bc1's bus metals (not drawn)
+busl_x6992   P  7550,14816-14838   ?   poly row on east to a pad at about (7794,14826) (not drawn)
+busl_x6949   P  7060,7203-7225     ?   poly row on west into the crossing field; seen as poly to x 6720, not read
+busl_x6992   P  7060,7160-7182     ?   poly row on west into the crossing field; seen as poly to x 6720, not read

@@ -638,3 +638,58 @@ C 4822,10708 s=24x24
 M 4822,10705 y15000 w=14
 N P 5200,10706 lc2_w8450
 N M 4822,13000 lc2_w8450
+
+# =====================================================================================
+# Pieces fb, fa (run 10, 2026-11-20): the two foot rows y 14870 and y 14827 and their tracks,
+# the next two Ls of the nest east of busl_x6906's (corners y 13421, y 13463). Each net is,
+# from the south-east: a poly row that comes in from the east at x 7550 (it runs on 240-290 px
+# to a pad at the west end of one of bc1's bus metals: (7836,14872), (7794,14826), not drawn)
+# and ends west on a pad; the pad's metal track north; an arm east (64 px, lying on a poly row
+# of piece ch1 without pad, ring or hole: traps 13, 15); 4,400 px north with no pad or
+# contact; a diagonal north-east in the bundle (x + y = 15986 / 16052); a pad; a POLY column
+# north under eofw's staircase metals (no contact); a second pad; a metal 1,400 px north to an
+# end pad on the east end of a poly row that runs on west into the crossing field (drawn 60 px).
+#   busl_x6949 (fb): row y 14870, pad (6885,14871), track x 6885, arm y 13421, track x 6949,
+#       diagonal (6949,9037)-(7122,8864), pad (7121,8797), column x 7123, pad (7121,8627),
+#       metal x 7121, end pad (7120,7214), row y 7214 west.
+#   busl_x6992 (fa): row y 14827, pad (6927,14827), track x 6927, arm y 13463, track x 6992,
+#       diagonal (6992,9060)-(7165,8888), pad (7163,8842), column x 7165, pad (7164,8581),
+#       metal x 7164, end pad (7165,7170), row y 7171 west.
+# Scan: cache/scratch/busl/f10_scan.txt; flagged crossings on tiles f10_c1..c4.png.
+# =====================================================================================
+# fb: busl_x6949
+P 6885,14870 x7550 w=22               # the foot row, from its pad east to the region's edge
+P 6871,14856:6903,14888               # its west end pad
+C 6885,14871 s=24x24
+M 6885,14873 y13421 x6949 y9037 7122,8864 y8795 w=14
+P 7104,8778:7140,8817                 # the pad at the head of the diagonal
+C 7121,8797 s=24x24
+P 7123,8800 y8625 w=22                # poly column north under eofw's staircase metals
+P 7104,8604:7142,8644                 # the second pad
+C 7121,8627 s=24x24
+M 7121,8629 y7212 w=14                # metal north to the end pad
+P 7104,7196:7142,7232                 # the end pad
+C 7120,7214 s=24x24
+P 7122,7214 x7060 w=22                # the row y 7214 on west (drawn 60 px)
+N P 7200,14870 busl_x6949
+N M 6949,11000 busl_x6949
+N P 7123,8700 busl_x6949
+N M 7121,8000 busl_x6949
+# fa: busl_x6992
+P 6927,14827 x7550 w=22
+P 6913,14812:6947,14843
+C 6927,14827 s=24x24
+M 6927,14829 y13463 x6992 y9060 7165,8888 y8840 w=14
+P 7148,8824:7182,8860
+C 7163,8842 s=24x24
+P 7165,8845 y8580 w=20
+P 7147,8560:7183,8600
+C 7164,8581 s=24x24
+M 7164,8583 y7168 w=14
+P 7150,7152:7188,7190
+C 7165,7170 s=24x24
+P 7167,7171 x7060 w=22                # the row y 7171 on west (drawn 60 px)
+N P 7200,14827 busl_x6992
+N M 6992,11000 busl_x6992
+N P 7165,8700 busl_x6992
+N M 7164,8000 busl_x6992
