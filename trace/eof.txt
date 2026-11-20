@@ -2066,3 +2066,48 @@ C 6322,18472
 # a port; not followed (the bottom-left logic's region, bl1/bl2; open only to x 6248, then
 # under a wide vertical metal x 6185-6238: review round 33).
 P 6322,18472 x6262 w=20
+
+# ---- piece o362d (run 27, 2026-11-20): eof_w17362 from the port (6262,18472) to DISPTMG's driver input ----
+# Wiring only: a poly row, a pad, a thin metal, a pad and a poly column; no transistor, no branch.
+# The row y 18462-18482 on west of x 6262: open (orange in both metal shots) to x 6240, under the
+# wide vertical metal x 6190-6238 (cream in the clean shot, the row's width unchanged, no hole; the
+# metal shows only the row's two edge lines across its whole width, no ring with a centre: no
+# contact, trap 15; textmap.py 6170 18446 6262 18500 3 --acid; r27_e.png, 2.9x, four shots), open
+# again x 6122-6190 (px.py col 6170 / 6130: 166/114/50, 170/117/64), onto the pad below.
+P 6262,18472 x6102 w=20
+# pad with a contact (6102,18472): outline x 6086-6122, y 18453-18491; a dark ring with a bright
+# centre x 6097-6106 in both metal shots, a green hole in the clean shot's cream pad (182/166/108,
+# 165/172/98), a pitted box in the chip-2 stripped shot (textmap.py 6070 18446 6136 18503 3 --acid;
+# r27_e.png). Field north and south of it; the metal leaves west.
+P 6086,18454:6122,18490
+C 6102,18472
+# a thin metal (about 13 px) 520 px west along y 18474 to the next pad: tl5_tracks.py h 18474 5540
+# 6130 --half 2 gives no stretch of 20 px without metal in both chips between the two pads' rings,
+# and no clean-shot hole but the two pads' (5583, 6105). It crosses three poly columns of other
+# nets (x 5773-5793, 5860-5878, 5950-5965: the 8-11 px bars at 5767-5775, 5790-5798, 5853-5863,
+# 5877-5885, 5940-5948, 5964-5972 are their edges): the metal keeps its width, no ring, the
+# columns uniform cream and unwidened under it in the clean shot: no contact (r27_x3.png, 3.4x,
+# both metal shots and the clean shot; trap 15). The follower's candidate (5649,18474) is nothing
+# (plain metal, pink beneath). Nobody draws the three columns.
+M 6102,18474 x5583 w=13
+# pad with a contact (5583,18472): outline x 5568-5606, y 18452-18490; ring and bright centre
+# x 5576-5588 in both metal shots, a green hole with a speck in the clean shot's cream pad, a box
+# in the chip-2 stripped shot. The metal's ring side is 18 px (x 5589-5607), dim not bare: the
+# clean shot's protected strip (pink field under the metal, then the pad's cream) is unbroken
+# from the metal into the pad (textmap.py 5552 18446 5624 18506 3 --acid; r27_p5583.png, 6x, four
+# shots; trap 16). Ground west and north of it: the metal ends here.
+P 5567,18454:5603,18490
+C 5583,18472
+# the pad's poly leaves south: a column x 5578-5596 (cream between dark outlines at x 5577 and
+# 5596-5598 at ten heights, px.py row Y 5568 5606 3 acid1b,acid), open at y 18490-18512 and in the
+# gaps y 18735-18765, 18825-18848, 18875-18892, under the wide horizontal metal y 18515-18730 and
+# the metals y 18775-18820, 18850-18870, 18895-18915 between: one unbroken stripe of constant
+# width in the clean shot, no hole (tl5_tracks.py v 5587 18486 18935: red minus green under 24
+# only at the two open bars y 18495, 18736), no pad, and in both metal shots only its two edge
+# lines through every metal (dirt blobs differ between the chips): no contact with any of the
+# four (r27_col.png, 2.8x, four shots; traps 13, 15). It runs on as pads_out's input poly of the
+# DISPTMG driver (x 5570-5595 from y 18912; label disptmg_drv_in at (5582,18927)); drawn to
+# y 18925, a clear overlap. So eof_w17362 IS disptmg_drv_in.
+P 5587,18472 y18925 w=18
+N P 5587,18880 disptmg_drv_in
+@alias disptmg_drv_in eof_w17362
