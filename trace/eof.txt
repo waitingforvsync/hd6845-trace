@@ -1937,16 +1937,19 @@ D 8376,17263:8452,17419
 #     of it: the node is one from the north neck to the south neck.
 D 8434,17419:8452,17498
 D 8411,17498:8452,17560
-#   - the strip's north-east corner, to the active's east edge x 8467 (one edge line x 8464-8470
-#     with row 1's east end; px.py row 17270 / 17292 / 17314, metal).
-D 8452,17263:8467,17328
+#   - the strip's north-east corner, to the active's east edge: x 8467 down to row 1 (px.py
+#     row 17270 / 17292, metal), and south of row 1 a slant from about (8468,17306) to
+#     (8477,17322) (review round 31; px.py row 17312: edge line x 8468-8476; row 17320: x 8476-8486).
+D [ 8452,17263 x8467 y17304 8477,17322 y17328 x8452 ]
 # ---- row 1 (eof_w17338) east of the rail: an L on the active area, a second and third stretch
 # of the same gate between the ground diffusion (north, west) and the strip (south, east):
 # a stub to x 8413, a vertical part x 8388-8413 (px.py row 17315: edge lines x 8384-8388 and
 # 8412-8416) and an east stretch y 17282-17302 (px.py col 8420) to the active's east edge.
-# The poly's end and that edge fall in one line; the poly is drawn 5 px past it (notes).
+# The poly runs 10 px past that edge, to x 8478 (review round 31: east of the edge line
+# x 8466-8470 the strip x 8472-8476 has the poly's colour at y 17292-17296 and is plain at
+# y 17272: px.py row 17292 metal, row 17296 acid): the gate closes the band off.
 P 8388,17282:8413,17351
-P 8388,17282:8472,17302
+P 8388,17282:8478,17302
 # ---- the hairpin (eof_w17168) east of the rail: the bar turns south into a right leg
 # x 8370-8389 (px.py row 17400: poly x 8370-8388, its east edge line x 8388-8394, the strip
 # plain from x 8396) and the leg into an arm y 17425-17447 east (px.py col 8400), which ends
@@ -2006,5 +2009,6 @@ N M 8523,17400 vcc
 P 8463,17445:8480,17590
 P 8455,17583:8485,17617
 C 8467,17603
-M 8467,17603 y17634 w=12
-N M 8467,17628 eof_w17362
+# (the metal is 14-16 px wide: px.py row 17629 8448 8488 2, metal x 8462-8476, metal1 x 8464-8476)
+M 8469,17603 y17634 w=15
+N M 8469,17628 eof_w17362
