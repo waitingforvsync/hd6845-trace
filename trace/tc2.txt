@@ -159,12 +159,12 @@ M 6727,4870 y4996 w=49
 # ===== Piece 4 (2026-11-17): the latch at x 7760-8250, y 5960-6300 (two cross-coupled gates
 # ===== with their loads), its five lines in and two out.
 #
-#   tc2_sr_q   = NOR(tc2_sr_q_n, tc2_sr_c, tc2_sr_g AND cdp1_lw1)
-#   tc2_sr_q_n = NOR(tc2_sr_q,             tc2_sr_g AND tc2_sr_s)
+#   tc2_sr_q   = NOR(tc2_sr_q_n, tc2_sr_c, ck_out AND cdp1_lw1)
+#   tc2_sr_q_n = NOR(tc2_sr_q,             ck_out AND tc2_sr_s)
 #
 # Build: one diffusion x 7977-8073 (its west 47 px in the open, the rest under the ground
 # rail x 8030-8075), top to bottom: ground (contact (8053,5982)), row A, row B, node q, row C,
-# ground (contact (8060,6155)), row D, row E, node q_n. Rows A and D are one net (tc2_sr_g: an
+# ground (contact (8060,6155)), row D, row E, node q_n. Rows A and D are one net (ck_out: an
 # L of metal joins their pads). East of the rail, under the thin metal of db_b6, two diffusion
 # columns x 8106-8136: the upper from the top ground diffusion to node q under a separate poly
 # (the east piece of row A's track = q_n), the lower from the ground box to node q_n under the
@@ -213,13 +213,13 @@ D 8106,6150:8136,6294                 # lower column x 8106-8136 (rows y 6160, 6
 D 8088,6266:8106,6288                 # node q_n east to the lower column: a band y 6266-6286 between dark edges, redder
                                       # than the field above and below it in all four shots (px.py col 8095 6196 6312)
 
-# --- row A (tc2_sr_g): pad (7878,6022), poly east y 6010-6034, 7 px lower east of x 8050, ends
+# --- row A (ck_out): pad (7878,6022), poly east y 6010-6034, 7 px lower east of x 8050, ends
 #     rounded at x 8086. Its track's east piece is another poly (below): field between x 8090 and
 #     8099 in both stripped shots (px.py row 6022, row 6028: green, G over R, in the chip-2 shots).
 P 7862,6006:7900,6040
 C 7878,6022
 P [ 7890,6010 x8050 y6017 x8086 y6041 x8050 y6034 x7890 ]
-# --- row D (tc2_sr_g): pad (7837,6193), poly east y 6183-6203, ends at x 8073 (pink field
+# --- row D (ck_out): pad (7837,6193), poly east y 6183-6203, ends at x 8073 (pink field
 #     x 8078-8088 under the rail's bulge, green in the chip-2 shots: px.py row 6192).
 P 7822,6178:7862,6208
 C 7837,6193
@@ -228,7 +228,7 @@ P 7850,6183:8073,6203
 #     through the pad (7837,6193) (ring and bright centre in both metal shots, g1_wpads.png 4.2x)
 #     and on south past y 6400 (follower: end (7835,7218)).
 M 7880,6012 y6111 x7837 y6400 w=20
-N M 7837,6300 tc2_sr_g
+N M 7837,6300 ck_out
 
 # --- row B (cdp1_lw1): pad (7837,6064), poly east y 6055-6081, ends rounded at x 8088. The
 #     pad's metal comes from the north (x 7826-7846, follower: end (7835,5520); g1_bnorth.png

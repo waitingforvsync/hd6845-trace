@@ -145,7 +145,7 @@ M 4462,3852 x4412 y3900 w=20
 N P 4600,3850 bd1_n2
 
 # ====================================================================
-# Unit (a), y 4410-4640: a three-input NOR.   tl4_w4545 = NOR(tla_w3417, rst_ck, tl4_w4590)
+# Unit (a), y 4410-4640: a three-input NOR.   tl4_w4545 = NOR(tla_w3417, rst_ck, ck_out)
 # Read on u2.png (clean), u3.png (chip-2 stripped), u4.png (metal), u5.png (chip-1 stripped), all
 # 3.9x; tie1.png, tie2.png (9x, four shots); rows on r1.png (2.7x, stripped and metal).
 # A column of diffusion in the open west of RA (x 4677-4716) crossed by three poly rows from
@@ -177,7 +177,7 @@ P 4347,4575:4385,4605
 C 4364,4590
 M 4364,4565 y4785 w=12
 P 4380,4578:4728,4598
-N P 4500,4588 tl4_w4590
+N P 4500,4588 ck_out
 # the node's buried contact west of the column's middle (concentric rings in the clean shot),
 # the poly west to a pad with a contact (4620,4545), and the metal x 4626 south from the pad
 # (follow.py: (4623,4544)-(4623,4900))
@@ -202,7 +202,7 @@ P 4812,4590:4850,4612
 # The cross-coupled pair at y 4645-5000 (hand-traced; no cell matches). Here the stack lies
 # under RA and in the open west of it as ONE diffusion (x 4677-4764: no edge between the column
 # and the part under RA, px.py row 4740/4785/4910/4955), so each row is one wide gate.
-#   tl4_w4686 = NOT( tl5_w3245 AND tl4_w4590  OR  tl4_w4850 )
+#   tl4_w4686 = NOT( tl5_w3245 AND ck_out  OR  tl4_w4850 )
 #   tl4_w4850 = NOT( rst_a  OR  tl4_w4545  OR  tl4_w4686 )   (tl4_w4545 on two gates in series)
 # Read on b_*.png (3.3x), c_/d_/e_/f_*.png (5-5.6x), g1/g2.png (8x, four shots), h_*.png (4x),
 # j1/j2.png (6x, four shots), t2a/t2b.png (9x), w_*.png (2.8x), k1.png; profiles in the notes.
@@ -240,7 +240,7 @@ C 4580,4718
 M 4581,4690 y4730 w=12
 P 4595,4708:4770,4728
 N P 4640,4718 tl5_w3245
-# gate 2: row from a pad with a contact (4364,4762) on the track x 4362 (tl4_w4590)
+# gate 2: row from a pad with a contact (4364,4762) on the track x 4362 (ck_out)
 P 4347,4747:4385,4778
 C 4364,4762
 P 4380,4752:4776,4772
@@ -609,10 +609,10 @@ N M 4497,5630 tc1_o3527
 P 4250,5621:4967,5641
 N P 4700,5631 rst_ck
 
-# --- tl4_w4590: the track x 4366 runs on south from the pad (4364,4762): a pad with a contact
-# (4366,5112) whose row leaves west along y 5102-5121 (tl3's tl4_w4590, gate 2 of its NOR e5),
+# --- ck_out: the track x 4366 runs on south from the pad (4364,4762): a pad with a contact
+# (4366,5112) whose row leaves west along y 5102-5121 (tl3's ck_out, gate 2 of its NOR e5),
 # and at the south end an L east onto the pad (4411,5676); row y 5665-5684 east from the pad
-# to tl5's pad (5493,5674) (tl4_w4590).
+# to tl5's pad (5493,5674) (ck_out).
 M 4366,4780 y5676 x4425
 P 4347,5095:4386,5129
 C 4366,5112
@@ -713,9 +713,9 @@ M 4583,2813 x4866
 P 4852,2797:4885,2825
 C 4866,2812
 P 4878,2801:4967,2820
-# --- tl4_w4590: the track x 4366 from its drawn piece (y 4565) north to its end on the pad
+# --- ck_out: the track x 4366 from its drawn piece (y 4565) north to its end on the pad
 # (4366,2812), over the pad (4366,3030); both pads' rows run west across x 4250 (the south one
-# is tl3's tl4_w4590, the gate of its inverter E1)
+# is tl3's ck_out, the gate of its inverter E1)
 M 4366,2802 y4572
 P 4352,2797:4386,2826
 C 4366,2812
@@ -827,22 +827,21 @@ M 4732,2990:4775,3004
 M 4949,2500:4967,2960
 M 4910,2500:4967,2507
 
-# ================================================================ run 11: tl4_w4590 is tc2_sr_g
-# tl6 ends tl4_w4590's metal x 6016 at its strip's foot (6016,6350); lc1 starts the metal of tc2_sr_g
+# ================================================================ run 11: ck_out is ck_out
+# tl6 ends ck_out's metal x 6016 at its strip's foot (6016,6350); lc1 starts the metal of ck_out
 # on the same x at (6016,6900). Between them it is one metal, x 6008-6024, over the eight poly rows of
 # the band y 6350-6720 and one at y 6840, with no pad and no contact (tools/tl5_tracks.py v 6016 6340
 # 6910: no stretch without metal over 16 px; c1.png). So the two names are one net.
 M 6016,6350 y6900 w=16
-@alias tc2_sr_g tl4_w4590
 
-# ---- tc2_sr_g in the bottom-centre logic: busl's track x 7187 ends at y 15000. It runs on south to a
+# ---- ck_out in the bottom-centre logic: busl's track x 7187 ends at y 15000. It runs on south to a
 # corner at y 15480, west to x 7103, south to a pad (7100,16303), under the wide bus metal as a poly
 # column to a pad (7100,16432), on south to a corner at y 17262, west to x 7058, south to a corner at
 # y 17908 and east to a pad (7426,17908); a poly row y 17897-17917 runs east under the supply rail to a
 # pad (7641,17908); a metal runs on east to a corner (8018,17904), north 40 px and east along y 17864
 # to a pad (8317,17863), where it ends (the pad's poly goes on: port). No other pad, contact or branch.
 M 7187,15000 y15480 x7103 y16303 w=14
-N M 7187,15200 tc2_sr_g
+N M 7187,15200 ck_out
 P 7084,16287:7117,16320
 C 7100,16303
 P 7100,16303 y16432 w=18
@@ -861,17 +860,15 @@ C 8317,17863
 # ---- the branch at the pad (7641,17908) (review round 12): the metal on that pad does not start free
 # west of it. At (7558,17908) it turns north, runs x 7551-7566 to a corner (7557,17824), east along
 # y 17812-17832 (lengthwise on bl0's poly row of bl0_w17687: no contact) to x 7840, and north on the
-# track x 7828-7850 onto the pad (7840,17648) that bc3 draws with the track north of it as bc3_w17646,
-# the gate of bc3's inverter. So bc3_w17646 is tc2_sr_g.
+# track x 7828-7850 onto the pad (7840,17648) that bc3 draws with the track north of it as ck_out,
+# the gate of bc3's inverter. So ck_out is ck_out.
 M 7558,17908 y17824 x7840 y17655 w=14
-@alias tc2_sr_g bc3_w17646
 
-# ================================================================ run 12: tc2_sr_g is ck_out
+# ================================================================ run 12: ck_out is ck_out
 # The pad (8317,17863) at the end of the metal: its poly goes south 30 px (a 6 px dark bar at y 17888-
 # 17893, between the pad's metal and a metal of another net that lies along the row, keeps poly colours
 # in the clean and the chip-2 stripped shot) into the poly row y 17898-17916, which runs east onto the
 # poly that eof draws west of its pad (8424,17908) (trace/eof.txt, piece in350, part C: "seen to x 8312,
-# where it turns north"): ck_out. So tc2_sr_g, with tl4_w4590 and bc3_w17646, is ck_out.
+# where it turns north"): ck_out. So ck_out, with ck_out and ck_out, is ck_out.
 P 8310,17880:8332,17916
 P 8310,17898:8396,17916
-@alias ck_out tc2_sr_g

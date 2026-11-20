@@ -137,7 +137,7 @@ P 5780,4963:5816,4998
 C 5798,4980
 M 5799,4980 y6350
 
-# ---- tl4_w4590: tl5's pad (5667,6150): its poly east along y 6151 under U0 (no pad), U1's
+# ---- ck_out: tl5's pad (5667,6150): its poly east along y 6151 under U0 (no pad), U1's
 # position (no metal there), U2, bw's metal and the wide metal to a pad (6016,6150) (t9.png);
 # metal south out of the strip
 P 5676,6151 x6016

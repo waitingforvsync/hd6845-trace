@@ -26,7 +26,7 @@ tl3_w5025   P  3533,5015-5035  out  latch B's inverted output
 rcs_x1   P  3533,5103-5121  in   clear of latch B
 # east column
 tl3_e4243   M  4250,4235-4255  out  output of the east NOR e3; the metal goes on east and north at x 4323
-tl4_w4590   P  4250,5105-5123  in   gate 2 of the east NOR e5 (which drives latch B's enable), from the east
+ck_out   P  4250,5105-5123  in   gate 2 of the east NOR e5 (which drives latch B's enable), from the east
 rst_ck       P  3533,2892-2906  ?    the row y 2899 from the pad (4103,2899) at the north end of the thin metal x 4099-4111 (track A's net), on west: tl2's tl1_w3594 (an alias, across six ?M)
 tl3_e4635   P  4250,4627-4642  in   latch C's data, from the east
 rcs_x1   M  4250,5889-5901  in   latch C's clear: the metal x 4192 from the pad (4190,4808), east along y 5895
@@ -35,7 +35,7 @@ rst_ck   P  4250,4496-4510  ?    the row of track A's pad (4146,4510), on east: 
 rcs_mv      P  4250,4736-4751  in   the poly of the pad (4192,4743) at the south end of rcs_mv's track, from the east
 rcs_mv   P  4250,4904-4925  ?    the poly of the pad (4234,4918) on the track x 4236, on east
 rcs_mv   M  4250,5760-5772  ?    the metal x 4236 from that pad, east out of the strip along y 5766
-tl4_w4590   P  4250,3018-3038  in   gate of the top unit E1 (which drives tl3_w3373, latch A's enable), from the east
+ck_out   P  4250,3018-3038  in   gate of the top unit E1 (which drives tl3_w3373, latch A's enable), from the east
 tl3_e5240   P  4250,5231-5250  in   gate of the inverter under the east rail's south end; in tl4's strip the row turns south at x ~4277
 tl3_e4635 P  4250,5190-5205  out  that inverter's output row; in tl4's strip it ends on a pad (4278,5198) of a metal x 4279 whose north pad (4278,4636) is on tl3_e4635's row (not drawn)
 # the foot (y 5345-5660, run 9): rows between tl2's strip and tl4's, and the metals that go on south
@@ -63,6 +63,6 @@ tl5_w4937   P  3533,2630-2648  ?    the row y 2639: tl2's track F, on east
 tl5_w4937   P  4250,2630-2648  in   the row y 2639 onto tl4's pad (4279,2640), bus line 4
 tl5_w2722   P  3533,2674-2692  out  the row y 2683: tla's input by track I
 tl5_w2722   M  4250,2679-2691  in   metal from the pad (4233,2683) onto tl4's bus line 5
-tl4_w4590   P  3533,2804-2822  ?    the row y 2813: tl1's row
-tl4_w4590   P  4250,2801-2820  ?    the row y 2813 onto tl4's row of the pad (4366,2812)
+ck_out   P  3533,2804-2822  ?    the row y 2813: tl1's row
+ck_out   P  4250,2801-2820  ?    the row y 2813 onto tl4's row of the pad (4366,2812)
 rcs_mn3852  P  3533,2848-2866  out  the row y 2857 from the pad (4233,2857) on tla's bus piece: tl2's rcs_mn3852 (an alias)

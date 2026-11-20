@@ -381,7 +381,7 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
 
 8. **The two open rows of the corner group** (run 2). Rows 2 and 4 are drawn from x 7550 east
    only; west of that they are in `busl`'s region and not drawn there. Their names rest on `regs`
-   run 3's reading of two taps. `tc2_sr_g`'s track crosses row 2 at (7145,13728-13749) (AMB-039):
+   run 3's reading of two taps. `ck_out`'s track crosses row 2 at (7145,13728-13749) (AMB-039):
    the group shows only that the row's east end is a gate and has no other contact, which does not
    decide that crossing.
 9. **Marks not drawn** (run 2). A ring about 10 px across at (7558,13793) on the top edge of row 3,

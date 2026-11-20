@@ -1566,7 +1566,7 @@ open join (`ck_a_u`). Claims now: `tl3` (Tom, run 11), `lc2` (Matt, continuing d
   marks), AMB-035 (`tc2_o5175` to `tl3`'s gates through `r9m`'s stub).
 - **Other blocks' notes.** Corrections appended to `tla`, `tl1`, `tl2`, `tl4`, `tl5`, `r9m` and `ur`.
   `ports.d/tl1.txt` gains the VSS arm at x 2817. Not edited, because they are under active claims:
-  `tl3.md` (`tl4`'s corrections on `rcs_mv`'s direction, `tl4_w4590`, the rows at x 4250) and `lc2.md`
+  `tl3.md` (`tl4`'s corrections on `rcs_mv`'s direction, `ck_out`, the rows at x 4250) and `lc2.md`
   (`lc1`'s latch D lower unit and the joins `rst_c`, `lc2_w8169`). Both are listed in the master list
   rows for their claimants.
 - **Floor plan.** The coarse top-left block is trimmed to strip 3 (`tl3`); the fragments of
@@ -1610,7 +1610,7 @@ holds the follow tasks that block the end-of-frame sequence, in order: where R4'
 `rc_eq_r4` goes (east of x 13425 at y 9663, from track T6 of the counter channel); where R5's match
 `sl_eq_r5` goes (west of x 8340); `rst_ck`'s source (eleven gate loads, among them the master/slave
 latch pairs and the field latch path); the driver of `rcs_x1` (beyond `tl5`'s bus line x 5107).
-`bd1`-`bd3` moves up to second. `tl4_w4590`'s driver (in `tl3`'s strip) and `lc2`'s latch D data wait
+`bd1`-`bd3` moves up to second. `ck_out`'s driver (in `tl3`'s strip) and `lc2`'s latch D data wait
 for their claims.
 
 ## 2026-11-19 00:16  The left bus field second in the queue
@@ -1723,7 +1723,7 @@ The user asked for priority on the top-left random logic and on the registers an
 central column (R12-R17). After `eof`, `busL` and `tlb` the queue now runs:
 1. `regs`: a follow lead group. It takes `wr_r14`, `wr_r15`, `rsel12`, `rsel13` and the four read
    selects from `sel`'s bottom edge to the rows they strobe, to say which row is which register.
-2. `tl3` (continue): the rows above y 2890, which hold the only way left to `tl4_w4590`'s driver.
+2. `tl3` (continue): the rows above y 2890, which hold the only way left to `ck_out`'s driver.
 3. `cdp4` (continue), moved up.
 4. `cdp3` (continue): row A's six large cells, with `cdp2`'s row D, the top of the same cells.
 5. `tla` (continue): its Left list and R38-R42.
@@ -1876,7 +1876,7 @@ items, none of them this piece's.
 
 **Applied:**
 - Master list: the `eof` row's task (a) marked done as a gate, with what is next on that path
-  (latch A's enable `tl4_w4590`, by `tl3` (continue)'s row (4250,2810)); the `tlb` row no longer
+  (latch A's enable `ck_out`, by `tl3` (continue)'s row (4250,2810)); the `tlb` row no longer
   leads the end-of-frame group and lists what is left of the band (four of its six edge wires closed).
 - `notes/blocks/tl1.md`: the three ports north and the Not done entry now say where the polys end.
 - `floorplan.txt`: the band's coarse block trimmed to x 2600-6400.
@@ -1975,7 +1975,7 @@ At the user's request ("apply waiting handoffs"). Seven handoffs, applied togeth
   of the left array (piece `h8`); `cdp4_bus_s#` = `cdp4_in_s#` for all eight slices, each also on a poly
   row of the left array (piece `ch1`). Claimed, continuing.
 - `eofw` (richtw1; wiring, new package): the three wires of `g7700` followed to named nets:
-  **`tc2_r5589` = NOT(`lc1_w7170` AND (`rst_ck` OR `tc2_sr_g`))**, and **`tc2_sr_g` is the wire `lc1` called w7908**, the
+  **`tc2_r5589` = NOT(`lc1_w7170` AND (`rst_ck` OR `ck_out`))**, and **`ck_out` is the wire `lc1` called w7908**, the
   enable of latch D. Two open ends at a corner pad (7446,8732) into `cdp3`'s gate column.
 
 **The test of effort** (user: "test the results against a high effort trace"). `g7700` had been traced
@@ -2062,16 +2062,16 @@ At the user's request, after the eight handoffs above. **Handoffs:** none waitin
 (`ar#_q`, `d#_in`, the `*_tab` cell pins, `db_b6`/`db_b5` under AMB-019).
 
 **Left on purpose:** the day's new joins are placeholder to placeholder, kept as `@alias` until one
-side has a functional name: `tc2_r5589` / the wire `eof` called w7818; `tc2_sr_g` / the wire `eof` called w7718 / `tc2_sr_g`;
+side has a functional name: `tc2_r5589` / the wire `eof` called w7818; `ck_out` / the wire `eof` called w7718 / `ck_out`;
 `lc1_w7170` / `lc2_w8474` / `eof_w7777` / `lc3_w9432`; `lc2_w9079` / the wire `lc3` called w9337; `lc3_w9947` /
 `lc3_w9947`; `cdp4_bus_s#` / `cdp4_in_s#` (eight); `bd1_n2` / `bd1_q` (through an uncertain tie).
 Section 2 (joins through uncertain geometry) untouched, as the rule says. The glossary rows of
-`tc2_sr_g` and `tc2_r#` now say where those two lines go.
+`ck_out` and `tc2_r#` now say where those two lines go.
 
 **`operation.md`** (eighth refresh): header (2,399 nets, 4,345 transistors; 847 of 1,276 equations
 firm, from 840 of 1,262). Taken in: the gate on `rst_ck`'s tap row is named on every side,
-`tc2_r5589` = NOT(`lc1_w7170` AND (`rst_ck` OR `tc2_sr_g`)) (firm, now also in the name `lc1_w7170`:
-`lc3`'s gate pair ends on the same line); latch D's enable the wire `lc1` called w7908 is `tc2_sr_g`; "Not
+`tc2_r5589` = NOT(`lc1_w7170` AND (`rst_ck` OR `ck_out`)) (firm, now also in the name `lc1_w7170`:
+`lc3`'s gate pair ends on the same line); latch D's enable the wire `lc1` called w7908 is `ck_out`; "Not
 established at all" no longer says the ripple counter's length and consumers are untraced (five
 stages, clock `lc3_w9947` with its source open, `lc2_w9125` choosing between the fourth and fifth
 outputs). The tracers had already written the counter's table, `lc1_w7170`'s driver and the latch on
@@ -2109,7 +2109,7 @@ was merged (d911059). Six handoffs, applied together.
   `?M` over the box), so latch rows C and D load together.
 - `busl` run 5 (piece `d6`): **line g of `cdp3`'s row A cells is the data of `cdp4`'s 6-bit latch row
   D** (`cdp3_g_c2`..`c7` onto `bc1`'s lines 1-6; firm).
-- `busl` run 6 (pieces `sr`, `kb`): **`tc2_sr_g` runs from `eofw`'s corner pad down the whole field
+- `busl` run 6 (pieces `sr`, `kb`): **`ck_out` runs from `eofw`'s corner pad down the whole field
   into `bc1`'s ground** (no tap; its driver is expected there); `bus_eq_r15` comes from a diffusion under
   `cdp3`'s column 0 rail. Review: no finding that changes a connection.
 
@@ -2125,7 +2125,7 @@ transistors, 0 errors, 0 warnings; `tools/unsure.py`: 92 nets joined only throug
   (continue), `lc1`-`lc3` rows; R4 (`ck_out #1` runs on west of x 10230, and lies on `bd1_n2`'s row).
   No new Re-read item (none proposed: the handoffs' cases fall under traps 2, 13, 30, 32 as written).
 - `notes/ambiguities.md`: **AMB-038** (the box under `cdp4_ld`'s metal at (7535-7580, 13903-13940)),
-  **AMB-039** (`tc2_sr_g`'s track dark over the poly row y 13744 in both metal shots; drawn as a plain
+  **AMB-039** (`ck_out`'s track dark over the poly row y 13744 in both metal shots; drawn as a plain
   crossing).
 - Corrections sections (third batch) in `notes/blocks/bd1.md`, `bc1.md`, `bc3.md`, `cdp3.md`, `cdp4.md`,
   `lc2.md`, `lc3.md`, `trunks.md`, `eofw.md`. `notes/blocks/eof.md` is not edited (claimed: Tom Seddon).
@@ -2157,7 +2157,7 @@ through an uncertain metal, AMB-038: section 2, not renamed); the earlier delibe
 
 **`operation.md`** (ninth refresh): header (2,390 nets, 4,345 transistors; 847 of 1,276 equations firm,
 unchanged). The tracers had already written the afternoon's results (`rst_a`'s line, the latch's
-third pull-down, rows C and D loading together, row D's data from line g). Added: `tc2_sr_g`'s third
+third pull-down, rows C and D loading together, row D's data from line g). Added: `ck_out`'s third
 branch down the left bus field into the bottom-centre logic's ground (marked: AMB-039). Against the last
 refresh's equations: one changed, `bd1_n2` = NOT((`bd1_an` AND `rst_lat`) OR `bd1_n1` OR `rst_a`)
 (still marked: the load's tie); none changed status. AMB-001 to AMB-039; R1-R45 unchanged in range (R4
@@ -2381,11 +2381,11 @@ What they establish (from the tracers' notes; marks as there):
 - **`cdp4_rst` = NOR of six select rows** (`cdp4` run 2, 7 transistors, firm): four are the read selects
   of R14-R17; two are open joins (`rsel13_buf_u`, `rsel12_buf_u`) through `busl`'s region.
 - `tl3` (run 12; done): four rows drawn through the strip; three step-logic gates have all inputs
-  identified. **`tl4_w4590` has five loads and no driver**: a queue row now (`tl4` (continue)).
+  identified. **`ck_out` has five loads and no driver**: a queue row now (`tl4` (continue)).
 
 Applied: master list rows `eof`, `busl`, `cdp2`, `cdp3`, `cdp4` (wave and continue rows), `tl1`-`tl6`,
 `bc1` (continue), `bc2`-`bc4`, `trunks` (continue); the row `tl3` (continue) is replaced by `tl4`
-(continue), the search for `tl4_w4590`'s driver; two open joins added to the table. **Re-read list**:
+(continue), the search for `ck_out`'s driver; two open joins added to the table. **Re-read list**:
 R46 (bands between gate rows in an open gap drawn as field from colour: the latch units of `tl1`'s build),
 R47 (pad joins accepted across a "dim metal" stretch: `tl2`-`tl4`), R48 (`cdp4`'s three strobe polys are
 probably serpentines; geometry), R49 (`eof`'s own bands of AMB-043, to be measured with a control); R4, R17

@@ -25,7 +25,7 @@ rst_b = NOT rst_n                      firm
 rst_c = NOT rst_n                      firm
 lc1_w7990 = NOT rst_c                      firm
 lc1_w7780 = NOT lc1_w7733                      firm (cluster E, gate E1)
-lc1_w7040 = NOT( rst_c  OR  tc2_sr_g AND lc1_w7862  OR  lc1_w7928 )
+lc1_w7040 = NOT( rst_c  OR  ck_out AND lc1_w7862  OR  lc1_w7928 )
                                                marked: depends on the cell's ? load tie, as every copy of tl1_ub
 ```
 
@@ -35,13 +35,13 @@ lc1_w7040 = NOT( rst_c  OR  tc2_sr_g AND lc1_w7862  OR  lc1_w7928 )
 counter and the 4-bit counter `c4l`, `notes/blocks/ur.md`) is the output of gate 1, an
 inverter of the poly row `lc1_w7040`, which arrives from the east along y 7030-7050. That row is
 followed back (below) to the gate cluster E in the south-east of this strip, where it ends on the output box of
-**the upper unit of a latch** (Logic, "Latch D"): `lc1_w7040` = NOT(`rst_c` OR `tc2_sr_g` AND `lc1_w7862` OR
+**the upper unit of a latch** (Logic, "Latch D"): `lc1_w7040` = NOT(`rst_c` OR `ck_out` AND `lc1_w7862` OR
 `lc1_w7928`). `rst_c` is the buffered NOR of this strip's gate column, here the latch's clear;
-`tc2_sr_g` is its enable, on a metal from far north of the strip; `lc1_w7862` and `lc1_w7928` come up from the
+`ck_out` is its enable, on a metal from far north of the strip; `lc1_w7862` and `lc1_w7928` come up from the
 latch's lower unit in `lc2` (by `lc2`'s latch B, a copy of the same pair: the inverse of the data and the
 other half's output). Believed, not traced (the lower unit is not drawn): `lc_step` is the inverse of what the
 latch holds, and is forced high while `rst_c` is high. Believed, from the user (2026-11-17), not followed to
-a pin: `tc2_sr_g` is a chip-wide inverted clock and `rst_c` a chip-wide reset of some kind.
+a pin: latch D's enable is a chip-wide inverted clock (traced since, 2026-11-20: it is `ck_out`, the clock buffer's output, not inverted) and `rst_c` a chip-wide reset of some kind.
 
 The rest of the column is a small tree: a two-input NOR (`rst`, inputs two poly rows
 from the east), its inverse `rst_n`, and three inverters of that (`rst_a`,
@@ -145,7 +145,7 @@ Believed: nothing beyond what is said under Status.
 
 ### Latch D, upper unit (cluster E, x 5887-6142, y 7833-8043), traced
 
-`lc1_w7040` = NOT(`rst_c` OR `tc2_sr_g` AND `lc1_w7862` OR `lc1_w7928`): marked (the cell's `?` load tie).
+`lc1_w7040` = NOT(`rst_c` OR `ck_out` AND `lc1_w7862` OR `lc1_w7928`): marked (the cell's `?` load tie).
 
 The gate group that two passes could not read by itself is **`tl1`'s unit `tl1_ub` turned 180 degrees**:
 `@inst tl1_ub 3352,3243 rot=180 o=2662.5,4695` (`findcell 2535 4590 2790 4800 --layer acid1b`: 0.75, centre
@@ -164,17 +164,17 @@ paths to VSS:
 | Path | Device(s) | Gate |
 |---|---|---|
 | clear | (6106,7999), 35/18, to the VSS box of the contact (6049,8023) by the arm y 8017-8035 | row y 7988-8006, east to the pad (6255,7996) on the metal x 6247-6263, which comes from the pad (6253,7517) at the east end of `rst_c`'s row and runs on south (followed to y 8218): **`rst_c`** |
-| series pair | (6058,7918), 83/19, on the output side; (6058,7872), 81/21, on the VSS side (the copy's own VSS box y 7808-7858, contact (6047,7832)) | lower row y 7900-7918, east to the pad (6213,7908) on the metal x 6204-6221: **`tc2_sr_g`**, the enable. Upper row y 7859-7881, east end the pad (6117,7862) on the thin metal x 6096-6110 (the cell's), which runs south out of the strip: **`lc1_w7862`** |
+| series pair | (6058,7918), 83/19, on the output side; (6058,7872), 81/21, on the VSS side (the copy's own VSS box y 7808-7858, contact (6047,7832)) | lower row y 7900-7918, east to the pad (6213,7908) on the metal x 6204-6221: **`ck_out`**, the enable. Upper row y 7859-7881, east end the pad (6117,7862) on the thin metal x 6096-6110 (the cell's), which runs south out of the strip: **`lc1_w7862`** |
 | third | (5956,7878), 43/22, on the strip under the thin metal x 5965-5982 | the poly from the pad (5929,7929), which a thin metal x 5918-5932 joins to the south: **`lc1_w7928`** |
 
-`tc2_sr_g`'s metal comes from the north: x 6007-6025 from beyond y 6900 (`follow.py 6012 7410 N`: straight to
+`ck_out`'s metal comes from the north: x 6007-6025 from beyond y 6900 (`follow.py 6012 7410 N`: straight to
 y 6150), east along y 7421-7439, south along x 6204-6221 through the pad and on south, where `lc2`'s lower unit
 has its enable row (`follow.py 6213 7950 S`: contact candidate (6212,8141)). No tap seen on it in the strip.
 
 What the lower unit is (believed, from `lc2`'s latch B, the same pair of cells; nothing of it is drawn):
 `tl1_ua` at `3351,3703 rot=180 o=2662.5,4465` (findcell 0.68, centre (6014,8168)), an inverter of the data and
 the gate NOT(data AND enable OR `lc1_w7040`). Then `lc1_w7862` is the inverse of the data, `lc1_w7928` the
-other half's output, and the pair is a latch that is open while `tc2_sr_g` is high and cleared by `rst_c`
+other half's output, and the pair is a latch that is open while `ck_out` is high and cleared by `rst_c`
 (`lc1_w7040` low, so `lc_step` high). The latch's data arrives in `lc2`.
 
 Colours that had misled the earlier passes, settled by the copy: the strip y 7837-7854 (x 5937-6075) is the
@@ -208,7 +208,7 @@ stops.
 | `lc1_w7780` | M | x 6287-6307 at y 8067 | out | south from the pad (6296,7781) (followed to y 8175) |
 | `rst` | P | (6450, 7379-7397) | out | the long row, on east (seen to x 6710) |
 | `lc1_w7780` | P | (6450, 7772-7788) | out | gate E1's output row, on east (seen to x 6710) |
-| `tc2_sr_g` | M | x 6007-6025 at y 6900; x 6204-6221 at y 8067 | in | latch D's enable: from the north (followed to y 6150), through the pad (6213,7908) and on south to the lower unit |
+| `ck_out` | M | x 6007-6025 at y 6900; x 6204-6221 at y 8067 | in | latch D's enable: from the north (followed to y 6150), through the pad (6213,7908) and on south to the lower unit |
 | `rst_c` | M | x 6247-6263 at y 8067 | out | the clear's metal, on south from the pad (6255,7996) (followed to y 8218) |
 | `lc1_w7862` | M | x 6096-6110 at y 8067 | in | the cell's thin metal from the pad (6117,7862): from the lower unit in `lc2` (believed: the inverse of the latch's data) |
 | `lc1_w7928` | M | x 5918-5932 at y 8067 | in | thin metal from the pad (5929,7929): from the lower unit in `lc2` (believed: its output plate, pad about (5934,8133)) |
@@ -431,7 +431,7 @@ Round 4: no findings that change a connection.
   ports: an undrawn poly (`tl3_w3982`) enters at about (5065-5083, 6900), beside and under M_a. The
   polys of `res_b`, `lpstb_b` and the reset copy run on south below their pads into the diagonal bundle
   at (5150,6900), (5203,6900), (5266,6900): three of the bundle's undrawn lines.
-- From `lc2`: `lc1_w7928`'s pad is at (5927,8131) on the lower unit's load plate; `tc2_sr_g`'s pad is
+- From `lc2`: `lc1_w7928`'s pad is at (5927,8131) on the lower unit's load plate; `ck_out`'s pad is
   at (6212,8128) and the metal runs on through it, south and east along y 8250-8268; `rst_c` ends on
   the pad (6254,8214) and is latch C's (and B's) clear; **latch D's data is `lc1_w7780`**. `lc1_w7170`'s
   metal T1 runs on to a pad (5232,8214) and a row west to a track down `lc2`'s west cluster: it is
@@ -450,7 +450,7 @@ Round 4: no findings that change a connection.
 - That poly runs on west inside this strip to a pad with a contact (6339,7824), whose metal x 6333-6349
   goes south onto `lc2`'s metal of `lc2_w8474`: drawn by `eofw` (`trace/eofw.txt`, wire 3). So the gate
   on `rst_ck`'s tap row is one more load of `lc1_w7170`.
-- **`tc2_sr_g`, latch D's enable, is `tc2_sr_g`**, the gate line of `tc2`'s latch (`eofw`: a metal
+- **The wire this block called w7908, latch D's enable, is the gate line of `tc2`'s latch** (and that net is `ck_out`: `tl4` runs 11-12) (`eofw`: a metal
   staircase from `lc2`'s end (6450,8259) to a T (7273,8710), north to row 2 of `eof`'s gate and on to
   `tc2`'s metal (7837,6400); firm, resting on two joins read without `?`: `notes/blocks/eofw.md`,
   Ambiguities 1 and 2). No driver was met on any of it; "believed a chip-wide inverted clock" stands

@@ -1,5 +1,5 @@
 # eofw: the wires of eof's gate g7700 beyond eof's ports
 6834,6395:7285,6900      route  tc2_r5589, the output of the gate on rst_ck | poly from the pad (7272,6912) west along y 6870 and north at x 6843 under the bus metals to tc2's line of the row y 5589
-7395,6395:7854,7232      route  tc2_sr_g, north branch | row 2 of the gate on rst_ck: poly row y 7214 east under both rails to a pad (7836,7215), metal north to the gate line of tc2's latch
-6445,7790:7482,8800      route  tc2_sr_g, south branch | row 2's metal south to a T (7273,8710), a staircase west to latch D's enable (lc2, (6450,8259)); a corner pad (7446,8732) east of the T
+7395,6395:7854,7232      route  ck_out, north branch | row 2 of the gate on rst_ck: poly row y 7214 east under both rails to a pad (7836,7215), metal north to the gate line of tc2's latch
+6445,7790:7482,8800      route  ck_out, south branch | row 2's metal south to a T (7273,8710), a staircase west to latch D's enable (lc2, (6450,8259)); a corner pad (7446,8732) east of the T
 6322,7806:6455,8072      route  lc1_w7170, row 3 of the gate on rst_ck | poly row y 7822 west to a pad (6339,7824), metal south to lc2's line (the input of rcs_x1's inverter)

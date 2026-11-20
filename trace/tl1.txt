@@ -8,7 +8,7 @@
 # thin metal W x 2689-2703), y 3558-3742: a NOR unit. findcell: tla's in2 unit
 # (2535-2790 x 5120-5290) recurs here at -1,-1562 with score 0.92 (acid1b); the geometry
 # below is that unit's, moved, and checked on b1.png (2.7x acid1b) and m1.png (2.7x metal).
-#   tl1_w3636 = NOR(tl1_w3594, tl4_w4590)
+#   tl1_w3636 = NOR(tl1_w3594, ck_out)
 # Column x 2549-2591 west of R1 between the rail's VSS boxes at y 3530-3588 (tla's, contact
 # (2612,3550)) and y 3697-3742 (contact (2622,3722)).
 D 2549,3558:2604,3578                 # top arm onto tla's rail box
@@ -26,7 +26,7 @@ N P 2530,3592 tl1_w3594
 P 2460,3668:2598,3688
 P 2440,3663:2476,3693
 C 2457,3678
-N P 2500,3678 tl4_w4590
+N P 2500,3678 ck_out
 # output: buried contact (concentric box) on the node between the gates, poly west along
 # y 3625-3645 to a pad with a contact (2283,3636) at the north end of a metal x 2283
 B 2547,3620:2577,3652
@@ -362,7 +362,7 @@ N P 2700,2857 rcs_mn3852
 P 2354,3836:2392,3866
 C 2372,3851
 P 2386,3841:2545,3861
-# tl4_w4590 (the NOR's second gate): metal x 2457, y 2800-3690. Top pad (2458,2812): poly
+# ck_out (the NOR's second gate): metal x 2457, y 2800-3690. Top pad (2458,2812): poly
 # row east along y 2803-2821 out of the strip
 M 2457,2800 y3690
 P 2440,2797:2478,2827

@@ -3,9 +3,9 @@
 # are eof's (trace/eof.txt, piece g7700); each wire here starts on eof's drawn end and runs to a net
 # another package drew:
 #     tc2_r5589 (the gate's output) = tc2_r5589
-#     tc2_sr_g (row 2)             = tc2_sr_g = the wire `lc1` called w7908    (one net: tc2's latch gate line IS latch D's enable)
+#     ck_out (row 2)             = ck_out = the wire `lc1` called w7908    (one net: tc2's latch gate line IS latch D's enable)
 #     eof_w7777 (row 3)             = lc2_w8474 (= lc1_w7170 by lc2's alias)
-# so the gate is   tc2_r5589 = NOT( lc1_w7170 AND ( rst_ck OR tc2_sr_g ) ).
+# so the gate is   tc2_r5589 = NOT( lc1_w7170 AND ( rst_ck OR ck_out ) ).
 # The names are joined by @alias here; the placeholders are renamed by the next refresh.
 # From a second, independent trace of the gate (a test of method, 2026-11-19: notes/blocks/eofw.md),
 # which agreed with eof's on the gate and followed each wire on. Evidence: cache/scratch/eofw/
@@ -24,8 +24,8 @@
 P 7276,6900 y6870 x6843 y6395 w=18
 N P 7000,6870 tc2_r5589
 
-# ---- Wire 2, north branch: tc2_sr_g, from eof's poly row east of the pad (7313,7215) to tc2's metal
-#   of tc2_sr_g (7837,6400).
+# ---- Wire 2, north branch: ck_out, from eof's poly row east of the pad (7313,7215) to tc2's metal
+#   of ck_out (7837,6400).
 #   The row y 7204-7225 (px.py col 7405 7194 7234 2 metal,acid: edge lines y 7203 and 7225) runs east
 #   under bw's two metals x 7410-7432 and x 7456-7478, a metal x 7520-7540, the VSS rail (here
 #   x 7572-7620) and the VCC rail (x 7725-7775) without a pad (px.py row 7214 7330 7700 10 metal,acid and
@@ -40,10 +40,10 @@ P 7395,7214 x7836 w=20
 P 7818,7198:7854,7232                  # pad (in cdp2's ground; nobody draws it)
 C 7836,7215
 M 7836,7229 y6395 w=14
-N M 7836,6800 tc2_sr_g
+N M 7836,6800 ck_out
 
 # ---- Wire 2, south branch: from eof's metal south of row 2's pad (7267,7736) to lc2's metal of
-#   tc2_sr_g (6450,8259), latch D's enable.
+#   ck_out (6450,8259), latch D's enable.
 #   The metal (x 7266-7280: px.py row 7795 7252 7292 2 metal,metal1, edge lines x 7263 and 7284) runs
 #   south 910 px (tl5_tracks.py v 7273 7760 8700: bars of 8-10 px; chip 2 alone dim at y 8173-8192, dirt:
 #   textmap.py 7246 8160 7300 8206 3 --acid) into a T at (7273,8710) on a horizontal metal y 8703-8716
@@ -57,7 +57,7 @@ N M 7836,6800 tc2_sr_g
 #   That the south metal is on row 2's pad at all is eof's Ambiguity 14 (the pad (7267,7736) has two
 #   metals; 12 px of ring between its centre and this one).
 M 7273,7790 y8710 x7190 y8672 x7060 y8585 x6883 y8498 x6710 y8411 x6515 y8259 x6445 w=14
-N M 6883,8540 tc2_sr_g
+N M 6883,8540 ck_out
 #   East of the T the metal runs to a corner pad (x 7426-7476, y 8703-8750) with a contact (7446,8732) on
 #   a poly pad; the poly leaves east and the metal goes on south at x 7458-7474 (textmap.py 7410 8684
 #   7500 8740 3; s20_eastend.png 3.4x, s26_c7466.png 6x, o6_ecorner.png). Both are drawn as stubs: ports

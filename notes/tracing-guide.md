@@ -433,7 +433,7 @@ Traps, all of them real:
    nobody has drawn is not yet a source (`tl3` took the two ends of one L in `tl4`'s strip for two
    wires). Found 2026-11-18 (`lc1`, `tl4`).
 32. **Look all round every pad.** A pad is not the end of what reaches it. A metal can run on
-   through a pad (the follower stops at the ring: `lc2_w8474` had two pads in its run, `tc2_sr_g`
+   through a pad (the follower stops at the ring: `lc2_w8474` had two pads in its run, `ck_out`
    one); a pad can carry a second poly (`lc2`'s pad (5386,8951)); a poly drawn as ending on a pad
    whose metal carries the net on can go on below the pad (`eof`: RES, LPSTB and a reset copy ran on
    south into `lc1`'s bundle); a copy's pad can have a poly on a side the master's pad has none

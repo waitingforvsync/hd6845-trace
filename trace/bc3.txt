@@ -2,7 +2,7 @@
 # Piece 1: an inverter at x 7475-7775, y 17575-17705: a copy of tl5_inv (findcell on the
 # clean shot, score 0.85 at 7644,17645; offset 2562,12797, no mirror). Overlay i1.png (3x,
 # metal + clean); west end w5.png (5x, metal, clean, chip-2 stripped).
-#   bc3_w17605 = NOT bc3_w17646
+#   bc3_w17605 = NOT ck_out
 @requires tl5
 @inst tl5_inv 2562,12797 tag=i1
 # By hand (the cell does not carry them): the load's VCC box under the rail x 7463-7520
@@ -41,4 +41,4 @@ M 7828,17636:7852,17660
 M 7795,17150 y17617 w=22
 M 7839,16640 y17660 w=22
 N P 7760,17605 bc3_w17605
-N P 7760,17646 bc3_w17646
+N P 7760,17646 ck_out

@@ -292,7 +292,7 @@ C 6296,7781 s=26x26
 N P 6400,7780 lc1_w7780
 M 6297,7768 y8067 w=20                      # and metal south from the pad out of the strip
 
-# ---------------------------------------------------------------- latch D, upper unit: lc1_w7040 = NOT(rst_c OR tc2_sr_g AND lc1_w7862 OR lc1_w7928)
+# ---------------------------------------------------------------- latch D, upper unit: lc1_w7040 = NOT(rst_c OR ck_out AND lc1_w7862 OR lc1_w7928)
 # The gate group at x 5887-6142, y 7833-8043 is tl1's unit tl1_ub turned 180 degrees (findcell, clean shot: 0.75 on
 # the master, 0.78 on lc2's latch B mirrored). It is the upper half of a latch like lc2's latch B, back to back
 # with it on the VCC rail; the lower half (tl1_ua at 3351,3703 rot=180 o=2662.5,4465, centre (6014,8168)) lies
@@ -315,7 +315,7 @@ P 6130,7909 x6204 w=18
 P 6197,7893:6230,7925
 C 6213,7908 s=26x26
 M 6016,6900 y7430 x6213 y8067 w=18          # its east-west piece lies lengthwise on the poly row y 7432 (not drawn) for all its length: no contact (no ring, no hole)
-N M 6213,7700 tc2_sr_g
+N M 6213,7700 ck_out
 # the series gate under the rail (row y 7859-7881): its pad (6117,7862) and the thin metal south are the cell's
 M 6103,7868 y8067 w=14                      # the copy's thin metal measures x 6096-6110, 8 px west of the cell's (px.py row 7980, 8030)
 N M 6103,8040 lc1_w7862

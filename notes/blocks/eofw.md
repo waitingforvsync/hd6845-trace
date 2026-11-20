@@ -14,12 +14,12 @@ port is followed to a net another package drew.
   y 7585-7860):
 
   ```
-  tc2_r5589 = NOT( lc1_w7170 AND ( rst_ck OR tc2_sr_g ) )
+  tc2_r5589 = NOT( lc1_w7170 AND ( rst_ck OR ck_out ) )
   ```
 
-  with the wire `eof` called w7818 = `tc2_r5589` (the output), the wire `eof` called w7718 = `tc2_sr_g` = the wire `lc1` called w7908 (row 2) and
+  with the wire `eof` called w7818 = `tc2_r5589` (the output), the wire `eof` called w7718 = `ck_out` = the wire `lc1` called w7908 (row 2) and
   `eof_w7777` = `lc2_w8474` = `lc1_w7170` (row 3).
-- **`tc2_sr_g` and the wire `lc1` called w7908 are one net**: the gate line of `tc2`'s latch (`tc2_sr_q`,
+- **`ck_out` and the wire `lc1` called w7908 are one net**: the gate line of `tc2`'s latch (`tc2_sr_q`,
   `tc2_sr_q_n`) is the enable of latch D, the latch that makes `lc_step`.
 - Two open ends are left, both at a corner pad (7446,8732) on the same net, leading into `cdp3`
   (continue)'s ground (Not done).
@@ -40,8 +40,8 @@ Extraction: the package by itself 4 nets, 0 transistors, 0 errors, 0 warnings. E
 | Wire | From (`eof`'s end) | Path | To |
 |---|---|---|---|
 | Y, the output | `eof`'s poly north of the pad (7272,6912), x 7266-7286 | poly north to y 6870; west along y 6861-6879 (430 px, in the open); a corner (6843,6870); north at x 6834-6852 under eleven bus metals, no pad (465 px) | `tc2`'s poly `P 6843,6282 y6400` (`tc2_r5589`) |
-| 2, north branch | `eof`'s poly row y 7204-7225 east of the pad (7313,7215), at x 7400 | the row east under `bw`'s metals x 7410-7432 and 7456-7478, a metal x 7520-7540, the VSS rail (x 7572-7620) and the VCC rail (x 7725-7775), no pad; a pad with a contact (7836,7215); metal x 7829-7843 north (820 px) | `tc2`'s metal `M ... x7837 y6400` (`tc2_sr_g`) |
-| 2, south branch | `eof`'s metal south of row 2's pad (7267,7736), x 7266-7280 | metal south to a T (7273,8710) on a horizontal metal y 8703-8716; west of the T a staircase: (7190,8710), (7190,8672), (7060,8672), (7060,8585), (6883,8585), (6883,8498), (6710,8498), (6710,8411), (6515,8411), (6515,8259), west | `lc2`'s metal `M 6212,8067 y8259 x6450` (`tc2_sr_g`) |
+| 2, north branch | `eof`'s poly row y 7204-7225 east of the pad (7313,7215), at x 7400 | the row east under `bw`'s metals x 7410-7432 and 7456-7478, a metal x 7520-7540, the VSS rail (x 7572-7620) and the VCC rail (x 7725-7775), no pad; a pad with a contact (7836,7215); metal x 7829-7843 north (820 px) | `tc2`'s metal `M ... x7837 y6400` (`ck_out`) |
+| 2, south branch | `eof`'s metal south of row 2's pad (7267,7736), x 7266-7280 | metal south to a T (7273,8710) on a horizontal metal y 8703-8716; west of the T a staircase: (7190,8710), (7190,8672), (7060,8672), (7060,8585), (6883,8585), (6883,8498), (6710,8498), (6710,8411), (6515,8411), (6515,8259), west | `lc2`'s metal `M 6212,8067 y8259 x6450` (`ck_out`) |
 | 2, east of the T | the T (7273,8710) | metal y 8703-8715 east to a corner pad x 7426-7476, y 8703-8750 with a contact (7446,8732) on a poly pad x 7428-7482, y 8716-8750 | two open ends: the poly on east at (7490,8722-8745); the metal on south at (7458-7474,8800) |
 | 3 | `eof`'s poly row y 7812-7832 at `lc1`'s edge x 6450 | the row west (110 px); a pad with a contact (6339,7824); metal x 6333-6349 south (245 px) | `lc2`'s metal `M 6341,8067 y8228` (`lc2_w8474`, the pad (6341,8214)) |
 
@@ -51,19 +51,19 @@ No transistor. Traced: the four joins, each by one drawn wire with no `?` item, 
 gate's equation in the names above.
 
 - `tools/unsure.py --equations tc2_r5589`: **DEPENDS**, "without ?: NOT((eof_w7777 & rst_ck) |
-  (eof_w7777 & tc2_sr_g))". The gate and the joins to `tc2_r5589`, `tc2_sr_g` and `lc2_w8474` are
+  (eof_w7777 & ck_out))". The gate and the joins to `tc2_r5589`, `ck_out` and `lc2_w8474` are
   firm; only the *name* `lc1_w7170` for row 3's net depends on uncertain items, and they are `lc2`'s
   (`trace/lc2.txt` aliases `lc2_w8474` to `lc1_w7170` across `?` geometry of its staircase).
-- With `rst_ck` high the output is NOT `lc1_w7170`; with it low, NAND(`lc1_w7170`, `tc2_sr_g`).
+- With `rst_ck` high the output is NOT `lc1_w7170`; with it low, NAND(`lc1_w7170`, `ck_out`).
 - From other packages' notes (not traced here): `lc1_w7170` is the input of `lc1`'s inverter that
   makes `rcs_x1` (`rcs_x1` = NOT `lc1_w7170`) and holds `lc2`'s ripple counter clear while low;
-  `tc2_sr_g` is the enable of latch D (`lc1_w7040` = NOT(`rst_c` OR `tc2_sr_g` AND `lc1_w7862` OR
-  `lc1_w7928`), whose inverse is `lc_step`); `tc2_sr_g` gates both sides of `tc2`'s latch
-  (`tc2_sr_q` = NOR(`tc2_sr_q_n`, `tc2_sr_c`, `tc2_sr_g` AND `cdp1_lw1`), `tc2_sr_q_n` =
-  NOR(`tc2_sr_q`, `tc2_sr_g` AND `tc2_sr_s`)); `tc2_r5589` runs through `tc2` to a pad (8248,5262)
+  `ck_out` is the enable of latch D (`lc1_w7040` = NOT(`rst_c` OR `ck_out` AND `lc1_w7862` OR
+  `lc1_w7928`), whose inverse is `lc_step`); `ck_out` gates both sides of `tc2`'s latch
+  (`tc2_sr_q` = NOR(`tc2_sr_q_n`, `tc2_sr_c`, `ck_out` AND `cdp1_lw1`), `tc2_sr_q_n` =
+  NOR(`tc2_sr_q`, `ck_out` AND `tc2_sr_s`)); `tc2_r5589` runs through `tc2` to a pad (8248,5262)
   whose poly goes on east (no load drawn yet: no extracted gate has it as an input).
-- Believed, not traced: nothing about what the gate is for. `lc1`'s notes believe `tc2_sr_g` to be
-  a chip-wide inverted clock; this package finds one more gate and one more latch on it, and no
+- Believed, not traced: nothing about what the gate is for. `lc1`'s notes believe this gate line to be
+  a chip-wide inverted clock (it is `ck_out` itself, not inverted: `tl4` runs 11-12, 2026-11-20); this package finds one more gate and one more latch on it, and no
   driver: every end reached is a gate, a pad or a port.
 
 The evidence for each stretch (every command is in `cache/scratch/eofw/survey.md`; images there):
@@ -96,12 +96,12 @@ four packages' traces: `join1.png`, `join2.png` (3-4x, metal and chip-2 stripped
 |---|---|---|---|---|
 | `tc2_r5589` | P | (7267-7285,6900) | in | `eof`'s poly north of the pad (7272,6912): the gate's output (`tc2_r5589`) |
 | `tc2_r5589` | P | (6834-6852,6395) | not known | onto `tc2`'s poly (6843,6400) |
-| `tc2_sr_g` | P | (7395,7204-7224) | not known | `eof`'s row east of the pad (7313,7215) (`tc2_sr_g`) |
-| `tc2_sr_g` | M | (7829-7843,6395) | not known | onto `tc2`'s metal (7837,6400) |
-| `tc2_sr_g` | M | (7266-7280,7790) | not known | `eof`'s metal south of row 2's pad (`tc2_sr_g`) |
-| `tc2_sr_g` | M | (6445,8252-8266) | not known | onto `lc2`'s metal (6450,8259) |
-| `tc2_sr_g` | P | (7490,8722-8745) | not known | **open end**: the poly east of the corner pad, into `cdp3` (continue)'s ground |
-| `tc2_sr_g` | M | (7458-7474,8800) | not known | **open end**: the corner pad's metal on south, `cdp3` (continue)'s ground |
+| `ck_out` | P | (7395,7204-7224) | not known | `eof`'s row east of the pad (7313,7215) (`ck_out`) |
+| `ck_out` | M | (7829-7843,6395) | not known | onto `tc2`'s metal (7837,6400) |
+| `ck_out` | M | (7266-7280,7790) | not known | `eof`'s metal south of row 2's pad (`ck_out`) |
+| `ck_out` | M | (6445,8252-8266) | not known | onto `lc2`'s metal (6450,8259) |
+| `ck_out` | P | (7490,8722-8745) | not known | **open end**: the poly east of the corner pad, into `cdp3` (continue)'s ground |
+| `ck_out` | M | (7458-7474,8800) | not known | **open end**: the corner pad's metal on south, `cdp3` (continue)'s ground |
 | `lc2_w8474` | P | (6455,7812-7832) | not known | `eof`'s row at `lc1`'s edge (`eof_w7777`): a gate input |
 | `lc2_w8474` | M | (6333-6349,8072) | not known | onto `lc2`'s metal (6341,8067) |
 
@@ -118,14 +118,14 @@ more away (`lc1_w7780` at (6297,8067) and (6450,7780), `lc2_w8646` at (6450,8301
    vertical metal (seen in the clean shot from y 8230 to 8290) and its west edge is there; both arms
    have their top edge at y 8250; 6-8 px is an edge line's width, and a gap between two metals would
    be 20 px or more with bare ground in it; and as two metals each would end on nothing. If it were a
-   gap, row 2's net would still be `tc2_sr_g` but not latch D's enable.
+   gap, row 2's net would still be `ck_out` but not latch D's enable.
 2. **The south metal on row 2's pad (7267,7736)** is `eof`'s Ambiguity 14, and the whole south branch
    hangs on it: 12 px of dark between the pad's bright centre and the metal that starts at y 7757,
    against 15 px on the north side, where no metal leaves, and 6-8 px on the east. Read as joined (by
    `eof`'s tracer and both its reviewers, and here): the metal's two edge lines run on from the pad's
    sides in both metal shots (`s26_pad7270.png`, 6x), and the pad's own poly edge lies under that
    ring, which the east side has not (the row arrives there). Ambiguities 1 and 2 are the two places
-   on which "the wire `lc1` called w7908 is `tc2_sr_g`" rests.
+   on which "the wire `lc1` called w7908 is `ck_out`" rests.
 3. **The corner pad (7446,8732).** Read as one piece of metal (the run from the T, a contact in the
    inside of the corner, the metal on south) from a 3.4x view, a 6x view and a text map. The vertical
    metal has a dark bar of 8-11 px at y 8714-8725 where the poly pad's edge lies under it. If the
@@ -207,12 +207,12 @@ Round 1: no findings that change a connection.
   `eof`'s reading of its wide metal x 7725-7775 as VCC (its Ambiguity 15), but it is not a trace of
   the rails.
 - `tc2_r5589`'s loads: `tc2` draws the line to the pad (8248,5262), whose poly goes on east.
-- The driver of `tc2_sr_g` / the wire `lc1` called w7908: not found on any stretch drawn here.
+- The driver of the gate line / the wire `lc1` called w7908 (found since: the clock buffer, the net is `ck_out`): not found on any stretch drawn here.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, third batch)
 
 - Not done ("the metal on south (seen to y 8850). `cdp3` (continue)") and `ports.d/eofw.txt`
-  (`tc2_sr_g M 7466,8800`, open end): drawn on by `busl` (piece `sr`): south to y 8910, a diagonal to
+  (`ck_out M 7466,8800`, open end): drawn on by `busl` (piece `sr`): south to y 8910, a diagonal to
   (7209,9168), down the left bus field at x 7209 and out at (7187,15000) into `bc1`'s ground, no tap. It
   is not `cdp3`'s ground. The poly east of the corner pad is still open.
 

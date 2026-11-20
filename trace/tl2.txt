@@ -100,13 +100,13 @@ N P 3200,2857 rcs_mn3852
 P 2810,5449:3533,5467
 N P 3200,5458 tl1_w4937
 
-# ---- tl4_w4590: tl1's metal from the pad (2830,2811) east along y 2812 to a pad with a contact
+# ---- ck_out: tl1's metal from the pad (2830,2811) east along y 2812 to a pad with a contact
 # (3154,2813); poly row east along y 2813 out of the strip
 M 2848,2812 x3164 w=18
 P 3132,2796:3174,2830
 C 3154,2813
 P 3165,2804:3533,2822
-N P 3400,2813 tl4_w4590
+N P 3400,2813 ck_out
 
 # ---- track D, upper piece = tl1_w2637: tl1's metal from the pad (2827,2637) east along y 2640,
 # south at x 3241 to a pad with a contact (3240,3204); poly row east along y 3202 to x 3522,

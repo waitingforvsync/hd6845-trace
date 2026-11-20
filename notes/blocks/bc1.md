@@ -337,7 +337,7 @@ In order of value:
 - The six verticals "from above ending on the lines" (x 7189 .. 7404, drawn from y 14040) are
   `cdp3_g_c2` .. `c7`, line g of `cdp3`'s row A cells (`busl`, piece `d6`).
 - A seventh track (x 7145 / 7187 / 7231 between y 13680 and 15000, running on to about (7100,16279)) is
-  `tc2_sr_g` (`busl`, piece `sr`): it lies on line 3 at y 14176 (x 7145-7187) and crosses line 6 at
+  `ck_out` (`busl`, piece `sr`): it lies on line 3 at y 14176 (x 7145-7187) and crosses line 6 at
   (7231,14304) without a contact. Its driver is expected in the group x 7000-7860, y 15000-16300.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)

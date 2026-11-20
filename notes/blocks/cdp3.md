@@ -585,8 +585,8 @@ Into parts not yet traced (the labels sit on the stubs):
   ends (`busl`, piece `h8`): each runs across the left bus field to a diffusion row of the left array at
   x 4780, y 11338, 11815, 12291, 12768, 13247, 13725, 14202, 14894 (c7 northernmost).
 - The top unit of the gate column x 7460-7800 (y 7585-7860) is drawn by `eof` (piece `g7700`):
-  `tc2_r5589` = NOT(`lc1_w7170` AND (`rst_ck` OR `tc2_sr_g`)) in the names `eofw` joined it to.
-- Two wires of `tc2_sr_g` enter the gate column from a corner pad with a contact (7446,8732) (`eofw`): a
+  `tc2_r5589` = NOT(`lc1_w7170` AND (`rst_ck` OR `ck_out`)) in the names `eofw` joined it to.
+- Two wires of `ck_out` enter the gate column from a corner pad with a contact (7446,8732) (`eofw`): a
   poly east at (7490, 8722-8745) and a metal south at (7458-7474, 8800). Not followed.
 - **Trace corrected** (geometry only): column 0's VSS rail `M 7623,8450 y11200 w=46` began 106 px too far
   north. At y 8500 the ground at x 7612-7660 is bare in both metal shots (163/135/85, 139/113/74) and the
@@ -606,7 +606,7 @@ Into parts not yet traced (the labels sit on the stubs):
   whose metal track runs south on x 7555 to a contact (7555,11118) on a diffusion pad; the diffusion
   runs east under column 0's VSS rail at y 11092-11127 (`busl`, piece `kb`; not drawn in `cdp3`). That
   diffusion is the net's only possible driver drawn so far.
-- The metal south of `eofw`'s corner pad (7446,8732) does not enter the gate column: it is `tc2_sr_g`'s
+- The metal south of `eofw`'s corner pad (7446,8732) does not enter the gate column: it is `ck_out`'s
   branch down the left bus field (`busl`, piece `sr`). The pad's poly on east is still open.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)

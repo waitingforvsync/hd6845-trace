@@ -228,7 +228,7 @@ pad.
 
 | Net | Metal | Pads and rows |
 |---|---|---|
-| `tl4_w4590` | tl1's metal from the pad (2830,2811) east along y 2812 | pad (3154,2813); row east along y 2813 out of the strip (x 3533) |
+| `ck_out` | tl1's metal from the pad (2830,2811) east along y 2812 | pad (3154,2813); row east along y 2813 out of the strip (x 3533) |
 | `tl1_w2637` = the wire `tl3` called w3333 | track D upper: tl1's metal from the pad (2827,2637) east along y 2640, south at x 3241 to y 3214 | pad (3240,3204); row east along y 3202 to x 3522, south (poly in the open) to y 3334, east into tl3's row y 3333: **the data of tl3's latch** |
 | `rcs_bd3330` (tla) | track D middle (tla's, y 3314-4390) | its bottom pad (3237,4376), not drawn by tla; row west along y 4374 to x 3072 and on into the gate column (not traced) |
 | `tl5_w4937` | track F upper, y 2630-3732 | top pad (3324,2639), row east along y 2639 out of the strip; bottom pad (3322,3722), row west along y 3722, drawn to x 3100 (it goes on west under track A into the gate column: not traced) |
@@ -734,13 +734,13 @@ open field between the metal's protected margin and the row's green rim, with it
 | `vss` | M | x 3257-3305, y 6350 | - | the metal from R3's foot, on south |
 | `rcs_mn3852` | P | x 2817, y 2848-2866 | out | row y 2857 to tl1's gates; comes through the strip from the east |
 | `tl1_w3594` | P | x 2817, y 2890-2908 | out | row y 2899 to tl1's gates; pad (3410,2899) of track H's upper piece on it |
-| `tl4_w4590` | M | x 2848, y 2803-2821 | out | tl1's metal from the pad (2830,2811), on east to a pad (3154,2813) |
+| `ck_out` | M | x 2848, y 2803-2821 | out | tl1's metal from the pad (2830,2811), on east to a pad (3154,2813) |
 | `tl1_w2637` | M | x 2845, y 2631-2649 | in | tl1's metal from the pad (2827,2637), on east and south (track D upper) to tl3's latch data |
 | `rcs_x1` | P | x 2817, y 5362-5380 | out | row y 5371 to tl1's metal x 2457 (the clear of tl1's two latches); one net with rcs_x1 (alias) |
 | `tl1_w4937` | P | x 2817, y 5449-5467 | out | row y 5458 to tl1's metal x 2370; comes through the strip from the east |
 | `tl5_w4937` | P | x 3533, y 2630-2648 | ? | row y 2639 east from track F's top pad (3324,2639) |
 | `tl5_w2722` | P | x 3533, y 2674-2692 | in | row y 2683 east from track I's top pad (3454,2683); the net's known end is a gate in tla |
-| `tl4_w4590` | P | x 3533, y 2804-2822 | in | row y 2813 east from the pad (3154,2813) |
+| `ck_out` | P | x 3533, y 2804-2822 | in | row y 2813 east from the pad (3154,2813) |
 | `rcs_mn3852` | P | x 3533, y 2848-2866 | in | row y 2857, straight through |
 | `tl1_w3594` | P | x 3533, y 2890-2908 | ? | row y 2899 east of track H's pad; every known end is a gate |
 | `tl1_w2637` | P | x 3540, y 3325-3343 | out | onto tl3's row y 3333 (tl1_w2637, the latch's data): alias |
@@ -1242,7 +1242,7 @@ Round 1: no findings that change a connection.
 - Track F's upper piece (the wire this file called w3722; "its other end is the row y 2639 east out of the strip"; port `?`): that row is drawn through strip 3 (`tl3` run 12) onto `tl4`'s bus line 4, so the net is `tl5_w4937` = NOT `tl4_w4068` (renamed at the refresh of 2026-11-20), and `rcs_bc3460` = NOR(`clk_tl`, `rcs_e3`, `rcs_e4`, NOT `tl4_w4068`) with every input identified (no uncertain item on the join). The port at (3533,2630-2648) is an input.
 - Track I's upper piece (`tla`'s input g3245): its row y 2683 east out of the strip runs onto `tl4`'s bus line 5, so the net is `tl5_w2722` = NOT `tl4_w3113` (renamed), and `rcs_u3288` = NOR(`rcs_bd3330`, NOT `tl4_w3113`).
 - The row y 2857 ("straight through"; `tl1`'s w2857, renamed): it is `rcs_mn3852` = NOR(`rcs_in1`, `rcs_mu`, `tl3_e3712`), the data of `tl1`'s first latch.
-- The row y 2813 (`tl1`'s w3678, renamed) is `tl4_w4590`: `tl1_w3636` = NOR(`rst_ck`, `tl4_w4590`). `tl4_w4590` now has five loads and no driver: a missed tap is looked for on this strip's metal y 2812 (x 2848-3164) among other places (the master list's row `tl4` (continue)).
+- The row y 2813 (`tl1`'s w3678, renamed) is the wire `tl4` called w4590: `tl1_w3636` = NOR(`rst_ck`, `ck_out`). That wire had five loads and no driver (found since: it is `ck_out`): a missed tap was looked for on this strip's metal y 2812 (x 2848-3164) among other places (the master list's row `tl4` (continue)).
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20, third batch)
 

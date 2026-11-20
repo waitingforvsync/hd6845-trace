@@ -482,7 +482,7 @@ C 5493,5674
 M 5481,5676 x5627 y6150 x5680
 P 5650,6134:5683,6166
 C 5667,6150
-N P 5300,5674 tl4_w4590
+N P 5300,5674 ck_out
 # ---- row y 5708-5727: no pad. East under T5 to a corner at x 5485-5507 and south (under amrw's
 # metal x 5495 from y 5850) to a corner at y 6228-6248 and east, in the open from x 5600, out of
 # the strip (g_b.png, g_f.png, p2_d.png, p2_c.png 4x)

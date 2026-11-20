@@ -367,7 +367,7 @@ P 4218,4226:4256,4262
 C 4236,4246
 M 4236,4245 x4250 w=20
 N P 4170,4242 tl3_e4243
-# ---- wiring of the lower unit e5 (y 4990-5160):  tl3_w4978 = NOR(rst_ck, tl4_w4590)
+# ---- wiring of the lower unit e5 (y 4990-5160):  tl3_w4978 = NOR(rst_ck, ck_out)
 # gate 1: row east to the pad (4147,5005), the south end of track A
 P 4105,5016:4150,5034
 P 4130,4990:4166,5024
@@ -395,7 +395,7 @@ C 4148,5330
 # gate 2: a row y 5105-5123 from the east, across the bus field under four tracks without a
 # contact (textmap 4124 5098 4262 5130 3): from tl4's strip
 P 4105,5105:4250,5123
-N P 4200,5114 tl4_w4590
+N P 4200,5114 ck_out
 
 # ====================================================================
 # East column, y 4514-4970: latch C, the pair of units tl1_ua / tl1_ub once more, MIRRORED
@@ -761,7 +761,7 @@ P 3915,5236:3938,5270
 ?B 3912,5244:3944,5276
 # ====================================================================
 # East column, y 2950-3090: the top unit E1, an inverter under the VSS rail (run 8).
-#   node = NOT tl4_w4590; the node's way out is its load plate, which is one poly with the row
+#   node = NOT ck_out; the node's way out is its load plate, which is one poly with the row
 #   of tl3_w3373, latch A's enable (through the plate's tie, uncertain as every load tie)
 # The same build as the inverter at y 5180-5300. One diffusion column under the rail, x 4012-4054:
 # the node (y 2990-3014), the gate (y 3018-3038) and a VSS box (y 3042-3088) with a contact
@@ -775,7 +775,7 @@ C 4029,3064
 # gate: a row y 3018-3038 from the east, under the thin metal x 4099-4111 and the metals x 4148,
 # 4190, 4234 without a contact, across x 4250 (textmap 4044 3008 4262 3052 5, 4216 3004 4330 3052 3)
 P 3994,3018:4250,3038
-N P 4200,3028 tl4_w4590
+N P 4200,3028 ck_out
 # the node east of the rail: diffusion y 2993-3008 (px.py row 3000 4040 4124 4) into a heavy box
 # (4076-4114 x 2972-3010) under the thin metal x 4099-4111; inside it a pale square (4090-4106 x
 # 2983-2998), a stub of poly; nothing leaves the box (e1_box.png, 4.6x three shots). The thin
@@ -1035,8 +1035,8 @@ P 4216,2666:4250,2700
 C 4233,2683
 M 4233,2685 x4258 w=12
 N P 3850,2683 tl5_w2722
-P 3525,2813 x4260 w=18               # tl4_w4590's row on to tl4's pad (4366,2812)
-N P 3850,2813 tl4_w4590
+P 3525,2813 x4260 w=18               # ck_out's row on to tl4's pad (4366,2812)
+N P 3850,2813 ck_out
 P 3525,2857 x4233 w=18               # rcs_mn3852's row to the top pad of tla's bus piece x 4233
 P 4216,2840:4250,2874
 C 4233,2857

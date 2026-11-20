@@ -83,7 +83,7 @@ No transistor. What the wiring joins (every join below is drawn without a `?` it
 | `tl5_w4503`, row y 4849 | the pad (5797,4850) above | |
 | the wire `tl5` called w3982 (`tl4_w4068`), row y 4979 | pad (5798,4980), U2's south piece south across y 6350 | leaves south at (5799,6350) |
 | `rst_ck`, pad (5666,5632) | poly east under U0 to a pad (5757,5632) **on U1** | **`rst_ck`** |
-| `tl4_w4590`, pad (5667,6150) | poly east along y 6151 to a pad (6016,6150); metal south across y 6350 | leaves south at (6016,6350) |
+| `ck_out`, pad (5667,6150) | poly east along y 6151 to a pad (6016,6150); metal south across y 6350 | leaves south at (6016,6350) |
 
 And from the east:
 
@@ -334,7 +334,7 @@ The same ports are in `ports.d/tl6.txt`. West-side ports carry `tl5`'s names (al
 | `tl5_w4503` | poly | (5683, 4840-4858) | ? | = `tl5_w4503`; inverter 1's gate |
 | `tl4_w4068` | poly | (5683, 4970-4988) | ? | = `tl4_w4068`; to U2's south piece |
 | `rst_ck` | poly | (5683, 5622-5642) | ? | = `rst_ck` |
-| `tl4_w4590` | poly | (5683, 6142-6160) | ? | to the pad (6016,6150) |
+| `ck_out` | poly | (5683, 6142-6160) | ? | to the pad (6016,6150) |
 | `c4l_l3` | poly | (5877-5897, 2500) | ? | north from U4's north pad |
 | `tl4_w5068` | poly | (5918-5938, 2500) | ? | north from U5's north pad |
 | `tcw_m6320` | poly | (6212, 3649-3667) | ? | onto `tcw`'s poly |
@@ -347,7 +347,7 @@ The same ports are in `ports.d/tl6.txt`. West-side ports carry `tl5`'s names (al
 | `ral_stb` | metal | (5749-5761, 6350) | ? | from the pad (5755,6322) |
 | `tl4_w4068` | metal | (5793-5805, 6350) | ? | U2's south piece |
 | `tl5_w3505` | metal | (5966-5978, 6350) | ? | from the pad (5972,6193) |
-| `tl4_w4590` | metal | (6010-6022, 6350) | ? | from the pad (6016,6150) |
+| `ck_out` | metal | (6010-6022, 6350) | ? | from the pad (6016,6150) |
 | `rst_ck` | metal | (6099-6111, 6350) | ? | from the corner (6105,6066) |
 | `rcs_mv` | poly | (5683, 6228-6248) | ? | `tl5`'s row y 6238 |
 | `tl6_p6101` | poly | (6052-6072, 2500) | ? | north from U8's pad (6057,2595); turns east under the band's rim at y 2475-2500 |
@@ -430,7 +430,7 @@ Round 2: no findings.
 ## Corrections (coordinator, from the handoffs of 2026-11-19)
 
 - `ports.d/tl6.txt`, `rst_ck M 6099-6111,6350 ?`: driven from the south (`rst_ck`, `eof` run 2): `in`.
-  `tl4_w4590` (x 6016 at y 6350) is probably `tc2_sr_g` (`lc1`: "followed straight to y 6150"): not checked.
+  the wire `tl4` called w4590 (x 6016 at y 6350) is probably the wire `tc2` called sr_g (it is, and the net is `ck_out`: `tl4` runs 11-12) (`lc1`: "followed straight to y 6150"): not checked.
 - The net that clears `tl5`'s latch c is also the 4-bit counter's pass-gate line `c4l_gab` (`tl3` run 11).
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)

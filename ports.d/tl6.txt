@@ -16,7 +16,7 @@ tl5_w4503    P  5683,4840-4858  ?    = tl5_w4503: inverter 1's gate: the row fro
 tl4_w4068    P  5683,4970-4988  ?    = tl4_w4068: latch b's enable: the row to the pad (5798,4980)
 rst_ck    P  5683,5622-5642  ?    = rst_ck: tl5's pad (5666,5632): the row to the pad (5757,5632) on U1
 rcs_mv    P  5683,6228-6248  ?    tl5's row y 6238: east to a corner at x 6236 and south
-tl4_w4590    P  5683,6142-6160  ?    tl5's pad (5667,6150): the row to the pad (6016,6150)
+ck_out    P  5683,6142-6160  ?    tl5's pad (5667,6150): the row to the pad (6016,6150)
 
 # North side (y 2500)
 c4l_l3    P  5877-5897,2500  ?    poly north from U4's north pad (5887,2722), on under the wide metal band
@@ -47,7 +47,7 @@ ral_stb      M  6400,6318-6338  ?    the metal y 6328, on east as tc2's piece
 ral_stb      M  5749-5761,6350  ?    from the pad (5755,6322)
 tl4_w4068    M  5793-5805,6350  ?    U2's south piece
 tl5_w3505    M  5966-5978,6350  ?    from the pad (5972,6193)
-tl4_w4590    M  6010-6022,6350  ?    from the pad (6016,6150)
+ck_out    M  6010-6022,6350  ?    from the pad (6016,6150)
 rst_ck        M  6099-6111,6350  in   from the corner (6105,6066); driven from the south (rst_ck, eof run 2)
 vss          M  5882-5934,6350  -    the wide ground metal's west leg
 rcs_mv    P  6226-6246,6350  ?    from the row y 6238's corner

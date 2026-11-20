@@ -97,9 +97,9 @@ cdp3_g_c4    M  7267-7281,14050    ?   joins bc1's metal x 7274 onto its line 3 
 cdp3_g_c5    M  7310-7324,14050    ?   joins bc1's metal x 7317 onto its line 4 (y 14218; cdp3_g_c5)
 cdp3_g_c6    M  7353-7367,14050    ?   joins bc1's metal x 7360 onto its line 5 (y 14261; cdp3_g_c6)
 cdp3_g_c7    M  7397-7411,14050    ?   joins bc1's metal x 7404 onto its line 6 (y 14304; cdp3_g_c7)
-# piece sr (run 6): tc2_sr_g (= the wire `lc1` called w7908) from eofw's corner pad down the field
-tc2_sr_g     M  7460-7474,8795     ?   onto eofw's metal south of the corner pad (7446,8732) (eofw's port there: tc2_sr_g, an alias)
-tc2_sr_g     M  7180-7194,15000    ?   the track goes on south in bc1's ground: to y 15482, west to x 7103, south; follower ends (7100,16279), not read
+# piece sr (run 6): ck_out (= the wire `lc1` called w7908) from eofw's corner pad down the field
+ck_out     M  7460-7474,8795     ?   onto eofw's metal south of the corner pad (7446,8732) (eofw's port there has the same name)
+ck_out     M  7180-7194,15000    ?   the track goes on south in bc1's ground: to y 15482, west to x 7103, south; follower ends (7100,16279), not read
 # piece kb (run 6): bus_eq_r15's track
 bus_eq_r15     P  7600,9438-9460     out cdp3's row y 9450 (gate 1 of the NAND beside its row C), drawn there from x 7600
 bus_eq_r15     D  7600,11092-11127   in  the diffusion band goes on east under column 0's VSS rail into cdp3's ground (not drawn)

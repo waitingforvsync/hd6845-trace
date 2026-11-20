@@ -60,8 +60,8 @@ rst_a     P  8326,16900-16918   out  the tap row's east end: the same 606 px low
 
 # Piece g7700: the gate on rst_ck's tap row (run 5)
 eof_w7777   P  6450,7812-7830    in   row 3 of the gate, on west into lc1's strip (cluster E's undrawn west half)
-tc2_sr_g   P  7400,7203-7221    ?    the poly row east of the pad (7313,7215)
-tc2_sr_g   M  7262-7274,7800    ?    the metal south of row 2's pad (7267,7736)
+ck_out   P  7400,7203-7221    ?    the poly row east of the pad (7313,7215)
+ck_out   M  7262-7274,7800    ?    the metal south of row 2's pad (7267,7736)
 tc2_r5589   P  7272-7285,6875    out  the gate's output: the poly north of the pad (7272,6912)
 vss         M  7552-7598,7585    -    column 0's VSS rail, on north
 vcc         M  7725-7775,7720    -    the wide metal east of the load, on north

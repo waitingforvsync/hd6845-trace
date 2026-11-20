@@ -196,7 +196,7 @@ Believed: the two cross-couplings, which rest on the plates' ties as in latch A 
 ### The east column's two NOR units: traced
 
     tl3_e4243 = NOR(rst_ck, rcs_mv)        unit e3, y 4165-4335
-    tl3_w4978 = NOR(rst_ck, tl4_w4590)     unit e5, y 4990-5160: latch B's enable
+    tl3_w4978 = NOR(rst_ck, ck_out)     unit e5, y 4990-5160: latch B's enable
 
 The standard unit of `tla`'s east column (`rcs_c1`'s) again: a diffusion column east of the
 rail (x 4072-4105) between two arms onto the rail's VSS boxes, two gate rows from the bus field,
@@ -220,9 +220,9 @@ Wiring (`en_bus.png` 3x, `en_padA.png` 6x, `en_w1.png`, `en_w2.png` overlays):
 | e3 output, y 4232-4252 | `tl3_e4243` | east under both tracks (no hole: `textmap.py 4128 4184 4256 4304 3`) to a pad with a contact (4236,4246); its metal leaves east into `tl4`'s strip (it turns north at x 4323 and runs to y 2772: `follow.py 4270 4243 E`) |
 | e5 gate 1, y 5016-5034 | `rst_ck` | east to the pad (4147,5005), where track A arrives from the north. **The net goes on** (found by the review): a metal arm leaves the pad west along y 4996-5008 to x ~4106 and runs south at x 4100-4112, beside the metal x 4148 and apart from it, to a pad with a contact (4104,5633), whose poly leaves east along y 5620-5645, not followed (`arm1.png`, `arm_s.png`, 5x; `textmap.py 4084 5612 4130 5656 3`). It passes over e5's node box (y 5050-5083) and over a boxed poly end at 4088-4112 x 5188-5216 where the row y ~5195-5207 ends: neither has a hole in the clean shot (`px.py col 4104 5090 5622 3 acid1b`, and at x 4108, 4112: green only for 3-6 px at y 5183-5186), so both are taken as pass-overs (assumed, tracing guide trap 22) |
 | e5 output, y 5057-5077 | `tl3_w4978` | east to a pad with a contact (4147,5070) at the north end of a metal x 4142-4155 (`follow.py 4148 5090`: y 5064-5332), which crosses three rows without a hole (`textmap.py 4124 5098 4262 5130 3`, `4130 5186 4168 5252 3`) and ends on a contact (4148,5330) on the east pad of latch B's enable row (`textmap.py 4126 5300 4172 5352 3`). That row, y 5318-5342, is one poly from x 3550 to x 4132: no break and no other hole (`px.py row 5330 3560 4160 3 acid1b`) |
-| e5 gate 2, y 5105-5123 | `tl4_w4590` | from the east, across the bus field under four tracks without a contact; out of the strip at x 4250 |
+| e5 gate 2, y 5105-5123 | `ck_out` | from the east, across the bus field under four tracks without a contact; out of the strip at x 4250 |
 
-So latch B is open while `rst_ck` and `tl4_w4590` are both low. `rst_ck` is the east
+So latch B is open while `rst_ck` and `ck_out` are both low. `rst_ck` is the east
 column's distributed line (five gate pads on track A, and a sixth pad at (4104,5633)).
 
 ### Latch C (east column, y 4514-4970): traced
@@ -235,7 +235,7 @@ The circuit of latches A and B a third time, as a mirror image east of the east 
 while `rst_ck` is high, when `tl3_e4852` takes the data `tl3_e4635` and `tl3_e4720` its
 inverse; `rcs_x1` high clears it (`tl3_e4852` low). **Its enable is `rst_ck`, track A**:
 both enable rows end on track A's pads (4146,4681) and (4146,4900). Latch B is open while
-`rst_ck` and `tl4_w4590` are both low (`tl3_w4978`), so B and C are never open together.
+`rst_ck` and `ck_out` are both low (`tl3_w4978`), so B and C are never open together.
 **Traced**: the equations, by extraction. **Believed**: the two cross-couplings, which run
 over the load plates and rest on the plates' ties (`?`, as in `tl1`'s cells: AMB-026;
 `@alias tl3_e4720 tl3_e4675`).
@@ -473,7 +473,7 @@ Overlay `rg_ov.png` (2.9x, metal and clean shot).
 
 ### The top unit E1, y 2950-3090: traced; its tie uncertain
 
-    tl3_w3373 = NOT tl4_w4590        (the node is tl3_e3000; the join to tl3_w3373 is the plate's tie)
+    tl3_w3373 = NOT ck_out        (the node is tl3_e3000; the join to tl3_w3373 is the plate's tie)
 
 **This is the driver of latch A's enable.** The same build as the inverter at y 5180-5300.
 
@@ -482,7 +482,7 @@ Overlay `rg_ov.png` (2.9x, metal and clean shot).
   4017 2940 3100 4`; `row 3063 3994 4064 4`: bright x 4026-4034 in a ring in both metal shots).
   East of the rail below the gate row is field (`px.py pt 4075,3060 3930,3080`: the same in four
   shots): the transistor is under the rail only.
-- Gate, `tl4_w4590`: a row y 3018-3038 from the east, under the thin metal x 4099-4111 and the
+- Gate, `ck_out`: a row y 3018-3038 from the east, under the thin metal x 4099-4111 and the
   metals x 4148, 4190, 4234 without a contact, across x 4250 and on beyond x 4327 (`textmap.py
   4044 3008 4262 3052 5`, `4216 3004 4330 3052 3`: poly unbroken, no hole, bright metal over it
   between edge bars). The ring at (4124,3027) in the clean shot lies in the gap between two
@@ -741,7 +741,7 @@ a hole.
 What follows, **marked** (Ambiguity 13):
 
     tl1_w3594 = rst_ck
-    tl1_w3636 = NOR(rst_ck, tl4_w4590)              tl1's first latch is open while rst_ck and tl4_w4590 are low
+    tl1_w3636 = NOR(rst_ck, ck_out)              tl1's first latch is open while rst_ck and ck_out are low
     tl1_w4678 = NOT(rcs_x1 OR rst_ck AND tl1_w4360 OR tl1_w4703)     tl1's second latch is open while rst_ck is high
     rcs_a2    = NOR(rst_ck, tl3_w3803)
 
@@ -831,7 +831,7 @@ new net):
     tl3_e4852 = NOT(rcs_x1 OR rst_ck AND tl3_e4537 OR tl3_e4720)     latch C: cleared by rcs_x1, open while rst_ck is high
     tl3_e4635 = NOT tl3_w5025                                       latch C's data = latch B's true value
     rcs_mv    = NOR(tl3_e4852, tl3_w4546)                           gate 1 is NOR 3's output
-    tl4_w4545 = NOR(rst_ck, tl4_w4590, tla_w3417)                    (tl4's NOR: its second input is rst_ck)
+    tl4_w4545 = NOR(rst_ck, ck_out, tla_w3417)                    (tl4's NOR: its second input is rst_ck)
 
 - **`rcs_x1` clears a fifth latch** (latch C, beside `tl1`'s two and latches A and B).
 - **Latch C takes latch B's value**: the inverter under the rail's south end is fed with latch
@@ -995,7 +995,7 @@ east ends in both):
 |---|---|---|---|
 | y 2639 | `tl2`'s track F (its w3722; top pad (3324,2639)) | on across x 4250 to `tl4`'s pad (4279,2640): bus line 4 | the net is `tl5_w4937` = NOT `tl4_w4068` |
 | y 2683 | `tla`'s input g3245 (track I's top pad (3454,2683)) | a pad with a metal contact (4233,2683); its metal runs east as `tl4`'s bus line 5 | the net is `tl5_w2722` = NOT `tl4_w3113` |
-| y 2813 | `tl1`'s w3678 (the pad (3154,2813)) | on across x 4250 to `tl4`'s pad (4366,2812) | the net is `tl4_w4590` |
+| y 2813 | `tl1`'s w3678 (the pad (3154,2813)) | on across x 4250 to `tl4`'s pad (4366,2812) | the net is `ck_out` |
 | y 2857 | `tl1`'s w2857 | a pad with a metal contact (4233,2857), the top end of `tla`'s bus piece x 4233 | the net is `rcs_mn3852` |
 
 The two pads' contacts: green holes in the clean shot (183/180/112 and 157/165/95) under bright
@@ -1007,9 +1007,9 @@ What the joins say (extraction; inputs identified, no gate's logic changed):
 - `tl1`'s first latch takes its data from `tla`'s unit: `tl1_w3752` = NOT `rcs_mn3852`,
   `tl1_w4287` = NOT((`rcs_mn3852` AND `tl1_w3636`) OR `tl1_w4070`), with `rcs_mn3852` =
   NOR(`rcs_in1`, `rcs_mu`, `tl3_e3712`).
-- `tl1_w3636` = NOR(`rst_ck`, `tl4_w4590`): the enable of `tl1`'s first latch and the gate of E1
-  (latch A's enable, `tl3_w3373` = NOT `tl4_w4590`) are one net. **`tl4_w4590` still has no
-  driver**: the row y 2813 was "the only way left" to it, and it leads only to more gates (five
+- `tl1_w3636` = NOR(`rst_ck`, `ck_out`): the enable of `tl1`'s first latch and the gate of E1
+  (latch A's enable, `tl3_w3373` = NOT `ck_out`) are one net. **The net still had no
+  driver** (it is `ck_out`: `tl4` runs 11-12): the row y 2813 was "the only way left" to it, and it leads only to more gates (five
   loads in all: `tl1_w3636`, `tl3_w4978`, `tl3_w3373`, `tl4_w4545`, `tl4_w4686`). Its driver must be
   on a tap not yet seen: on `tl1`'s metal x 2457 (y 2800-3690), `tl2`'s metal y 2812 (x 2848-3164)
   or `tl4`'s track x 4366 and its rows.
@@ -1021,7 +1021,7 @@ What the joins say (extraction; inputs identified, no gate's logic changed):
 | `tl1_w2637` | poly | (3533, 3324-3342) | in | data of latch A |
 | `tl3_w3419` | poly | (3533, 3409-3429) | out | latch A's inverted output |
 | `rcs_x1` | poly | (3533, 3497-3515) | in | clear of latch A |
-| `tl4_w4590` | poly | (4250, 3018-3038) | in | gate of the top unit E1, from the east (seen on to x 4327) |
+| `ck_out` | poly | (4250, 3018-3038) | in | gate of the top unit E1, from the east (seen on to x 4327) |
 | `tl3_w3722` | poly | (3533, 3712-3732) | in | NOR 1 gate 1 |
 | `rcs_a2` | poly | (3533, 3755-3775) | out | NOR 1 output |
 | `tl3_w3896` | poly | (3533, 3886-3906) | in | NOR 2 gate 1 |
@@ -1038,7 +1038,7 @@ What the joins say (extraction; inputs identified, no gate's logic changed):
 | `tl3_w5025` | poly | (3533, 5015-5035) | out | latch B's inverted output |
 | `rcs_x1` | poly | (3533, 5103-5121) | in | clear of latch B |
 | `tl3_e4243` | metal | (4250, 4235-4255) | out | e3's output, on east into `tl4`'s strip |
-| `tl4_w4590` | poly | (4250, 5105-5123) | in | e5's gate 2, from the east |
+| `ck_out` | poly | (4250, 5105-5123) | in | e5's gate 2, from the east |
 | `rst_ck` | poly | (3533, 2892-2906) | ? | the row y 2899 from the pad (4103,2899) at the north end of the thin metal x 4099-4111 (track A's net), on west: `tl2`'s and `tl1`'s `tl1_w3594` (alias across six `?M`); driven from track A if the thin metal is one metal (Ambiguity 13) |
 | `tl3_e4635` | poly | (4250, 4627-4642) | in | latch C's data, from the east |
 | `rcs_x1` | metal | (4250, 5889-5901) | in | latch C's clear: the metal x 4192 from the pad (4190,4808), east out of the strip along y 5895 |
@@ -1070,7 +1070,7 @@ What the joins say (extraction; inputs identified, no gate's logic changed):
 | `c4l_gab` | poly | (4250, 6316-6336) | ? | pad B's row, east out of the strip: `tl4`'s row to the pad (4929,6323) of `c4l_gab` (the clear of `tl5`'s latch c) |
 | `tl5_w4937` (`tl2`'s w3722 until the refresh of 2026-11-20) | poly | (3533, 2630-2648) and (4250, 2630-2648) | through | the row y 2639, `tl2`'s stub to `tl4`'s pad (4279,2640) |
 | `tl5_w2722` (`tla`'s g3245 until then) | poly, metal | (3533, 2674-2692); metal (4250, 2679-2691) | in from the east | the row y 2683 from the pad (4233,2683), where `tl4`'s bus line 5 starts |
-| `tl4_w4590` (`tl1`'s w3678 until then) | poly | (3533, 2804-2822) and (4250, 2801-2820) | through | the row y 2813 |
+| `ck_out` (`tl1`'s w3678 until then) | poly | (3533, 2804-2822) and (4250, 2801-2820) | through | the row y 2813 |
 | `rcs_mn3852` (`tl1`'s w2857 until then) | poly | (3533, 2848-2866) | out | the row y 2857 from the pad (4233,2857) on `tla`'s bus piece |
 
 ## Ambiguities
@@ -1183,8 +1183,8 @@ What the joins say (extraction; inputs identified, no gate's logic changed):
     are green over red with low blue (169/169/98, 158/172/102), and in the chip-2 stripped shot
     they look like the boxes at (4097,4241) and (4097,4417) that no metal crosses (review 13:
     `mosA.png`, `mosB.png`, `b3400.png`, `b3719.png`); for two of the boxes a contact would make
-    a gate constant (E1's: latch B's enable NOR(`rst_ck`, `tl4_w4590`) with `rst_ck` = NOT
-    `tl4_w4590`; `rcs_in1`'s: `tl3_e4243` = NOR(`rcs_mv`, `rst_ck`) with `rst_ck` = NOT `rcs_mv`);
+    a gate constant (E1's: latch B's enable NOR(`rst_ck`, `ck_out`) with `rst_ck` = NOT
+    `ck_out`; `rcs_in1`'s: `tl3_e4243` = NOR(`rcs_mv`, `rst_ck`) with `rst_ck` = NOT `rcs_mv`);
     the dark stretches are trap 22's pass-over, as on the
     other thin metal (Ambiguity 11). Against: **`rst_ck`'s source is not traced** (in the full extraction it is
     only ever a gate, eleven loads), so logic does not exclude that one of the other four units
@@ -1775,7 +1775,7 @@ Round 1: no findings.
 
 ## Not done
 
-- (Done, run 12: the rows above y 2890.) `tl4_w4590`'s driver is still not found (Logic, run 12).
+- (Done, run 12: the rows above y 2890.) (Done by `tl4` runs 11-12: the driver of the net with five loads is the clock buffer; the net is `ck_out`.)
 - (Done, run 11: south of the foot, y 5660-6350.) Left from it, all outside the strip: the poly
   that leaves `ur`'s pad (3968,6410) east along y 6402-6422 (seen to x 4256: `urch`'s region),
   which is where `rcs_thin_e` goes; `tl3_w3982`'s bus line south of y 6350 (the source of
@@ -1786,7 +1786,7 @@ Round 1: no findings.
 - The six uncertain stretches of the thin metal x 3948-3962 over tie boxes (Ambiguity 11).
 - `rcs_mv`'s two ends east of x 4250 are `tl4`'s.
 - The clear's metal east of (4250,5895) is `tl4`'s. `tl3_e4635` and `rcs_mv`'s poly east of
-  x 4250 are `tl4`'s, and `tl4_w4590`'s row (E1's gate).
+  x 4250 are `tl4`'s, and `ck_out`'s row (E1's gate).
 
 - In `tla`'s units around the branch: the inside of gate mu's transistor (its channel is
   probably x 4072-4095, not 58 px); what gate `rcs_mv`'s row does under the rail; and whether
@@ -1815,9 +1815,9 @@ Round 1: no findings.
   latches, are master/slave pairs on `rst_ck`.
 - `rcs_x1` = NOT `lc1_w7170` (`lc1`'s gate 2; `eof` run 2).
 - From `tl4` (2026-11-18), where this file still says so: `rcs_mv`'s poly at (4250,4736-4751) is an
-  output (it leaves and comes straight back as `rcs_mv`, one L in `tl4`'s strip); `tl4_w4590`, "gate
-  of the top unit E1 ... from the east", is `tl4_w4590`, which crosses x 4250 again at y 2801-2820 (the
-  pad (4366,2812)): that row is the only way left to `tl4_w4590`'s driver.
+  output (it leaves and comes straight back as `rcs_mv`, one L in `tl4`'s strip); `ck_out`, "gate
+  of the top unit E1 ... from the east", is `ck_out`, which crosses x 4250 again at y 2801-2820 (the
+  pad (4366,2812)): that row was thought the only way left to the driver of the net with five loads (it is `ck_out`: `tl4` runs 11-12).
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
 

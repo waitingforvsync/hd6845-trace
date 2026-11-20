@@ -11,8 +11,8 @@ lc1_w7928   P  6401-6415,8067  out  the same node's row (label lc2_w8083), north
 vss         M  6015-6063,8067  -    the east rail, one metal from lc1's piece to latch C's
 lc2_w8646   M  6159-6177,8067  in   latch C's enable: the metal runs north out of the strip (lc1 has no port there)
 lc2_w8646   M  6450,8292-8310  ?    its branch east (metal B)
-tc2_sr_g   M  6203-6221,8067  in   latch D's enable, through the pad (6212,8128)
-tc2_sr_g   M  6450,8250-8268  out  on east (metal A)
+ck_out   M  6203-6221,8067  in   latch D's enable, through the pad (6212,8128)
+ck_out   M  6450,8250-8268  out  on east (metal A)
 rst_c   M  6248-6264,8067  in   latch D's clear, and by a cross-under and a metal latch C's
 lc1_w7780   M  6287-6307,8067  in   latch D's data, to the pad (6297,8170)
 lc2_w8474   M  6332-6350,8067  ?    the metal of the pad (6341,8214)

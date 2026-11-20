@@ -43,10 +43,10 @@ and its sweep of the whole region the Not done list says exactly what is left.
 **Piece 4** (run 2; not yet through an independent review round)
 
 - The logic at x 7760-8250, y 5960-6300: a latch of two cross-coupled gates, 9 transistors,
-  `tc2_sr_q` = NOR(`tc2_sr_q_n`, `tc2_sr_c`, `tc2_sr_g` AND `cdp1_lw1`) and
-  `tc2_sr_q_n` = NOR(`tc2_sr_q`, `tc2_sr_g` AND `tc2_sr_s`), both loads traced. One poly join
+  `tc2_sr_q` = NOR(`tc2_sr_q_n`, `tc2_sr_c`, `ck_out` AND `cdp1_lw1`) and
+  `tc2_sr_q_n` = NOR(`tc2_sr_q`, `ck_out` AND `tc2_sr_s`), both loads traced. One poly join
   (12 px, in a gap between two metals) is marked `?`: both equations depend on it.
-- Its lines: `tc2_sr_g`, `tc2_sr_s` and `tc2_sr_q` south past y 6400 in metal; `tc2_sr_q` also
+- Its lines: `ck_out`, `tc2_sr_s` and `tc2_sr_q` south past y 6400 in metal; `tc2_sr_q` also
   east past x 8250 in poly; `cdp1_lw1` north to the pad (7836,5520), east in poly to the pad
   (8031,5520) and onto a thin metal that runs over `rax`'s units to `cdp1_lw1` (piece 7); `tc2_sr_c` onto the top
   line of `cdp2`'s channel 2 (y 6367), drawn from its west pad (7490,6367) to x 8250, and its
@@ -355,25 +355,25 @@ gap was made in the chip-2 shots or by a profile, and is listed below.
 
 ### Logic (traced)
 
-    tc2_sr_q   = NOT(tc2_sr_c | (tc2_sr_g & cdp1_lw1) | tc2_sr_q_n)     DEPENDS on one ?P
-    tc2_sr_q_n = NOT((tc2_sr_g & tc2_sr_s) | tc2_sr_q)                  DEPENDS on one ?P
+    tc2_sr_q   = NOT(tc2_sr_c | (ck_out & cdp1_lw1) | tc2_sr_q_n)     DEPENDS on one ?P
+    tc2_sr_q_n = NOT((ck_out & tc2_sr_s) | tc2_sr_q)                  DEPENDS on one ?P
 
 (`tools/unsure.py --equations`: both DEPENDS. The one uncertain item is the 12 px of poly that
 joins the gate of `tc2_sr_q_n`'s pull-down to `tc2_sr_q`'s load poly; Ambiguity 1.)
 
-A latch with a common gate line: while `tc2_sr_g` is high, `cdp1_lw1` high pulls `tc2_sr_q`
+A latch with a common gate line: while `ck_out` is high, `cdp1_lw1` high pulls `tc2_sr_q`
 low and `tc2_sr_s` high pulls `tc2_sr_q_n` low (so `tc2_sr_q` high); `tc2_sr_c` high pulls
 `tc2_sr_q` low at any time. **Believed, not traced**: what the five lines are. `tc2_sr_c` is
 the top line of `cdp2`'s channel 2; the wire `tc2` called sr_r is `cdp1_lw1` (traced in run 3, piece 7: a line that
-comes through the central datapath's channel from x 15584; its source is not followed); `tc2_sr_g`, `tc2_sr_s` and `tc2_sr_q` go south along x 7837, 7791
+comes through the central datapath's channel from x 15584; its source is not followed); `ck_out`, `tc2_sr_s` and `tc2_sr_q` go south along x 7837, 7791
 and 7922.
 
 | Device | Where | W/L | Gate | Between |
 |---|---|---|---|---|
-| A | (8025,6026) | 96/22 (the extraction gives 103: the row's jog) | `tc2_sr_g` (row A) | `vss` (contact (8053,5982)), node A-B |
+| A | (8025,6026) | 96/22 (the extraction gives 103: the row's jog) | `ck_out` (row A) | `vss` (contact (8053,5982)), node A-B |
 | B | (8025,6068) | 96/26 | `cdp1_lw1` (row B) | node A-B, `tc2_sr_q` |
 | C | (8000,6150) | 47/26 | `tc2_sr_c` (row C) | `tc2_sr_q`, `vss` (contact (8060,6155)) |
-| D | (8019,6193) | 84/20 | `tc2_sr_g` (row D) | `vss` (the same contact), node D-E |
+| D | (8019,6193) | 84/20 | `ck_out` (row D) | `vss` (the same contact), node D-E |
 | E | (8019,6239) | 84/22 | `tc2_sr_s` (row E) | node D-E, `tc2_sr_q_n` |
 | upper column's gate | (8126,6027) | 24/26 | `tc2_sr_q_n` (east piece of row A's track) | `vss` (the top diffusion), `tc2_sr_q` |
 | lower column's gate | (8122,6192) | 30/19 | `tc2_sr_q` (west arm of its load's poly; the join is `?`) | `vss` (the ground box), `tc2_sr_q_n` |
@@ -402,7 +402,7 @@ the region) and an arm west across the lower column.
 
 | Net | From | Path | To |
 |---|---|---|---|
-| `tc2_sr_g` | pad (7878,6022) of row A | metal south x 7870-7890, west along y 6100-6122, south x 7827-7847 through the pad (7837,6193) of row D | the region's edge (7837,6400); follower: end (7835,7218), not looked at |
+| `ck_out` | pad (7878,6022) of row A | metal south x 7870-7890, west along y 6100-6122, south x 7827-7847 through the pad (7837,6193) of row D | the region's edge (7837,6400); follower: end (7835,7218), not looked at |
 | `cdp1_lw1` | pad (7837,6064) of row B | metal north x 7826-7846 over ten poly rows without a pad; pad (7836,5520); poly east y 5510-5530 under the thin metal x 7902 and `rax`'s ground rail (no gate: field on both sides); pad (8031,5520); thin metal x 8022-8040 north | the pad (8031,5066) north of `rax`'s unit 2, and from there to `cdp1_lw1` (piece 7) |
 | `tc2_sr_c` | pad (7880,6155) of row C | metal south x 7869-7889; pad (7880,6368) on the poly row y 6358-6376 | the row's west end, the pad (7490,6367), from which a metal y 6360-6380 goes west to the region's edge (6400,6370) (follower: end (6184,6370) on a pad); and east along the row to the region's edge (8250,6367), going on (to x 11000 by `amr`'s notes) |
 | `tc2_sr_s` | pad (7790,6258) of row E | metal south x 7782-7800 | the region's edge (7791,6400); follower: end (7791,6958) |
@@ -1035,7 +1035,7 @@ Looked at because of the sweep:
 | `tc1_p4308` | P | x 6483-6501, y 6400 | ? | going on south |
 | `lc3_w9947` | M | x 6400, y 5601-5621 | ? | going on west (follower: end (6276,4825)); its vertical x 6396-6416 lies on the edge |
 | `lc3_w9947` | P | x 6443-6460, y 6400 | ? | going on south |
-| `tc2_sr_g` | M | x 7827-7847, y 6400 | in | the latch's gate line, going on south (follower: end (7835,7218)) |
+| `ck_out` | M | x 7827-7847, y 6400 | in | the latch's gate line, going on south (follower: end (7835,7218)) |
 | `tc2_sr_s` | M | x 7782-7800, y 6400 | in | going on south (follower: end (7791,6958)) |
 | `tc2_sr_q` | M | x 7913-7931, y 6400 | out | going on south (follower: end (7922,7046)) |
 | `tc2_sr_q` | P | x 8250, y 6163-6180 | out | going on east under the VCC rail |
@@ -1132,7 +1132,7 @@ Lines that leave the region (each is drawn to the edge; the port table has the p
 - South of y 6400: `tc1_m6817` (poly x 6534), `tc1_p4308` (poly x 6492), `lc3_w9947` (poly
   x 6451), `tc2_m6404` (poly x 6405), `tc2_r5589` (poly x 6843), `tc2_r5718` (metal x 7533;
   follower: end (7353,7465)), `tc1_ns3` (metal x 7661; follower: end (7661,7088)),
-  `tc2_sr_s`, `tc2_sr_g`, `tc2_sr_q` (metals x 7791, 7837, 7922; follower ends (7791,6958),
+  `tc2_sr_s`, `ck_out`, `tc2_sr_q` (metals x 7791, 7837, 7922; follower ends (7791,6958),
   (7835,7218), (7922,7046)), the wide ground metal's leg x 7572-7620, the wide VCC metal's
   leg x 7695-7752, the ground rail x 8030-8075 and the VCC rail x 8206-8248.
 - East of x 8250: `ral_stb` (poly y 5369, seen to x 8425), `tc2_r5718` (poly row y 5718),
@@ -1270,16 +1270,16 @@ Round 2: no findings.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, second batch)
 
-- `tc2_sr_g` ("metal x 7837 going south past y 6400, not followed") **is followed** (`eofw`): the metal
+- `ck_out` ("metal x 7837 going south past y 6400, not followed") **is followed** (`eofw`): the metal
   runs 820 px south to a pad with a contact (7836,7215), whose poly row runs west under both rails to
   the pad (7313,7215) of row 2 of `eof`'s gate `g7700`; from that row's pad (7267,7736) a metal goes on
-  south to a T (7273,8710) and by a staircase to `lc2`'s `tc2_sr_g`, **the enable of latch D**, with a
+  south to a T (7273,8710) and by a staircase to `lc2`'s `ck_out`, **the enable of latch D**, with a
   corner pad (7446,8732) into `cdp3`'s gate column. So the latch `tc2_sr_q` / `tc2_sr_q_n` and latch D
   are gated by one line. Its driver is not found.
 - `tc2_r5589`'s poly x 6843 south of y 6400 ("still there at y 6440") **is followed** (`eofw`): south
   to a corner (6843,6870), east along y 6870, to the pad (7272,6912) of the output of `eof`'s gate
   `g7700`. **`tc2_r5589` is driven by that gate**: `tc2_r5589` = NOT(`lc1_w7170` AND (`rst_ck` OR
-  `tc2_sr_g`)). Its loads lie east of the pad (8248,5262).
+  `ck_out`)). Its loads lie east of the pad (8248,5262).
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
 

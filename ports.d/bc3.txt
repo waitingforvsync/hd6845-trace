@@ -1,7 +1,7 @@
 # bc3: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
 # Drawn ends of the one piece traced so far (inverter at x 7475-7775, y 17575-17705).
 bc3_w17605  M  7783-7806,17150  out  inverter output metal, drawn end; goes on north
-bc3_w17646  M  7828-7850,16640  in   inverter input metal, drawn north end; goes on north
-bc3_w17646  M  7828-7850,17660  in   inverter input metal, drawn south end; goes on south
+ck_out  M  7828-7850,16640  in   inverter input metal, drawn north end; goes on north
+ck_out  M  7828-7850,17660  in   inverter input metal, drawn south end; goes on south
 vcc         M  7470-7520,16290   -    bc1's RL2 carried on south to y 17700
 vss         M  7641-7691,16290   -    bc1's RL3 carried on south to y 17705

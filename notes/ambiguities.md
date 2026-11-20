@@ -752,12 +752,12 @@ no driver before; readings (b) and (c) would now put two drivers on one net. Dra
 Still uncertain: `busl`'s `?M 7556,13895 y13953` itself is not seen in either metal shot (the reviewer
 could not check it either), so `cdp4_ld` = `bc1_ld_a` rests on it as before.
 
-## AMB-039: `tc2_sr_g`'s track over the poly row y 13744, at (7145,13728-13749) (2026-11-19)
+## AMB-039: `ck_out`'s track over the poly row y 13744, at (7145,13728-13749) (2026-11-19)
 
 Proposed by `busl` (richtw1, run 6; its Ambiguity 13). Neither metal shot passes the metal test for
 22 px along the track where it crosses this undrawn row (the other rows it crosses give 8-13 px edge
 bars): chip 2 shows a dark patch with no bright centre, chip 1 a dim reddish stretch. Readings: (a) a
-plain crossing with marks on the metal; (b) a contact, which would put `tc2_sr_g` (the enable of latch
+plain crossing with marks on the metal; (b) a contact, which would put `ck_out` (the enable of latch
 D) on the row y 13744, which runs from west of x 6500 to a gate band of `cdp4`'s corner gate group.
 **Assumed (a), drawn as a plain metal**: neither the metal nor the row is widened (every contact in the
 field has a pad), the clean shot shows protected poly with no hole, the chip-2 stripped shot reads as at
@@ -774,7 +774,7 @@ input of `cdp4_rst`. Not settled: the row west of x 7550 is `busl`'s and is not 
 **Resolved 2026-11-20 as reading (a), a plain crossing** (`busl` run 8, richtw1; reviewed, no findings):
 its "settled by" is met from the other direction. The row y 13744 is drawn end to end: it has a driver
 of its own, `rsel13_buf`, through a pad with a contact at (6495,13744) on the track x 6494, and ends in
-gate row 2 of `cdp4`'s NOR. A contact at (7145,13738) would short latch D's enable `tc2_sr_g` to R13's
+gate row 2 of `cdp4`'s NOR. A contact at (7145,13738) would short latch D's enable `ck_out` to R13's
 read select, two driven nets. Nothing new was read at the crossing itself.
 
 ## AMB-040: the structure at x 10530-11400, y 11740-12350 on the write strobes of R12 and R14 (2026-11-19)

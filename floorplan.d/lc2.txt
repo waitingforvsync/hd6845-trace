@@ -4,7 +4,7 @@
 4440,8945:4990,9190  logic  gate K4 | lc2_w8692 = NOT(lc1_w7170 & lc2_w8298 & (lc2_w8475 | lc2_w8552)); with K3 the slave of a toggle flip-flop (master: latch K)
 4620,8750:4985,8945  logic  gate K3 | lc2_w8298 = NOT(lc2_w8692 & (lc2_w8725 | lc2_w8475))
 4500,8350:4985,8750  logic  latch K | lc2_w8552 = NOT(lc2_w8475 & lc2_w8298 | lc2_w8450 | lc2_w8725), lc2_w8725 = NOT(lc2_w8475 & lc2_w8692 | lc2_w8552)
-5887,8067:6142,8290  logic  latch D, lower unit | with lc1's upper unit the latch whose inverse is lc_step: open while tc2_sr_g, data lc1_w7780, clear rst_c
+5887,8067:6142,8290  logic  latch D, lower unit | with lc1's upper unit the latch whose inverse is lc_step: open while ck_out, data lc1_w7780, clear rst_c
 6142,8067:6490,8560  route  bus field east of the latches | enable, clear and data of latches C and D from the north; two metals east
 5545,8880:5848,9000  logic  inverter of latch B's data | lc2_w8450 = NOT lc2_w8474, on the thin metal x 5626
 5545,9000:5848,9256  logic  AND-OR-INVERT gate | lc2_w9125 = NOT(lc2_w9034 AND lc2_w9079 OR lc3_w9299 AND lc2_w9210); output on a poly east and south

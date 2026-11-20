@@ -469,7 +469,7 @@ N M 7468,11000 cdp3_g_c7
 # the six joins: one net each with what bc1's line reaches
 
 # =====================================================================================
-# Piece sr (run 6, 2026-11-19): tc2_sr_g (= the wire `lc1` called w7908, the enable of latch D; = tc2_sr_g, row 2
+# Piece sr (run 6, 2026-11-19): ck_out (= the wire `lc1` called w7908, the enable of latch D; = ck_out, row 2
 # of the gate on rst_ck's tap row) runs on from eofw's corner pad (7446,8732) down the whole
 # field. trace/eofw.txt draws the metal south of the pad to y 8800 (M 7466,8745 y8800); from
 # there one metal: south to y 8910, a diagonal south-west along x+y = 16377 (the south-east line
@@ -484,7 +484,7 @@ N M 7468,11000 cdp3_g_c7
 # as a plain crossing (no pad on the metal or the row, no hole; notes, Ambiguity 13).
 # =====================================================================================
 M 7467,8795 y8910 7209,9168 y13680 x7145 y14176 x7187 y14285 x7231 y14588 x7187 y15000 w=14
-N M 7209,11000 tc2_sr_g
+N M 7209,11000 ck_out
 
 # =====================================================================================
 # Piece kb (run 6, 2026-11-19): bus_eq_r15, the poly row y 9450 that trace/cdp3.txt draws from

@@ -507,9 +507,9 @@ N P 7700,14914 rst_a
 # Piece g7700 (run 5): the gate at the end of rst_ck's tap row (task (c) of the queue row).
 #   One gate between the VSS rail of the central datapath's column 0 (here x 7552-7598) and the
 #   wide metal x 7725-7775 (VCC, by the load):
-#       tc2_r5589 = NOT( eof_w7777 AND (rst_ck OR tc2_sr_g) )
+#       tc2_r5589 = NOT( eof_w7777 AND (rst_ck OR ck_out) )
 #   A diffusion column under the rail (x 7541-7611, y 7613-7820) is crossed by three poly rows:
-#   row 1 (rst_ck, the tap row), row 2 (tc2_sr_g) and row 3 (eof_w7777). Between rows 1 and 2
+#   row 1 (rst_ck, the tap row), row 2 (ck_out) and row 3 (eof_w7777). Between rows 1 and 2
 #   the rail's one contact (7572,7684): the source of both. The drain north of row 1 and the
 #   drain south of row 2 are joined east of the rail by a diffusion ring (top strip, strap
 #   x 7637-7654, bottom strip) round a field island on which rows 1 and 2 end (they are NOT
@@ -539,7 +539,7 @@ P 7525,7638:7632,7656                # row 1 (rst_ck) on from the tap row's draw
 P 7500,7718 x7632 w=20               # row 2 over the column to its end cap (y 7708-7728)
 P 7500,7708:7527,7745                # row 2's widened step
 P 7262,7735 x7527 w=19               # row 2 west (y 7726-7745) to its pad
-N P 7400,7735 tc2_sr_g
+N P 7400,7735 ck_out
 P 7634,7777 x6886 y7821 x6450 w=19   # row 3: west through the crossing field, a corner (6886,7777), down one
                                      # track, west on the row y 7812-7830 to lc1's east edge (not followed further)
 N P 7300,7777 eof_w7777
@@ -761,7 +761,7 @@ N M 6711,15600 bd1_n2
 #      y 8523-8556, bright centre in both chips);
 #   B  the pad's poly, x 6508-6528, 450 px north to a pad with a contact (6513,8087) (textmap.py
 #      6486 8085 6540 8530 3 --acid; 6486 8000 6580 8100 3). It passes under rst_ck's link F (metal
-#      y 8166-8178), under eofw's metal of tc2_sr_g, whose vertical arm x 6508-6522, y 8259-8411 LIES ON
+#      y 8166-8178), under eofw's metal of ck_out, whose vertical arm x 6508-6522, y 8259-8411 LIES ON
 #      IT for 150 px (no ring, no pad, no dark stretch in either chip: tl5_tracks.py v 6515 8262 8408
 #      --half 2), and under an undrawn metal y 8448-8460: no contact with any;
 #   C  metal from the pad north over a poly row (y 8027-8054) to a corner (6513,8018), east to a corner

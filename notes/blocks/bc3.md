@@ -6,7 +6,7 @@ Trace: `trace/bc3.txt`. Scratch: `cache/scratch/bc3/`. Coordinates are metal-sho
 
 2026-11-18 05:33 (UTC+1). Traced on claude-opus (the Fable allowance was used up); a
 survey and one small piece. Drawn: one inverter at x 7475-7775, y 17575-17705, a copy
-of `tl5_inv` (`bc3_w17605` = NOT `bc3_w17646`) with its two rail boxes, and the
+of `tl5_inv` (`bc3_w17605` = NOT `ck_out`) with its two rail boxes, and the
 two rails: `bc1`'s RL2 (VCC, x 7470-7520) and RL3 (VSS, x 7641-7691) carried on from
 y 16300 to the inverter (continuous metal in both metal shots). Neither row is followed
 beyond the piece. Extraction with the piece: 0 errors,
@@ -50,7 +50,7 @@ every block's geometry). Read at 0.57x only: the coordinates below are within ab
 ## Logic
 
 Inverter i1 (x 7475-7775, y 17575-17705), `@inst tl5_inv 2562,12797 tag=i1`:
-`bc3_w17605` = NOT `bc3_w17646`. Load from the box under the VCC rail x 7470-7520
+`bc3_w17605` = NOT `ck_out`. Load from the box under the VCC rail x 7470-7520
 (contact (7490,17620): dot in the clean shot, ring in metal; `w5.png`, 5x three shots);
 pull-down to the box under the VSS rail x 7641-7691 (contact (7676,17681); `e5.png`, 5x three
 shots). Overlay `i1.png` (3x, metal and clean). The cell's tab tie (buried contact
@@ -69,7 +69,7 @@ metal south of y 17660 are not drawn.
 | Net | Where | Dir | Note |
 |---|---|---|---|
 | `bc3_w17605` | M x 7783-7806, north end y 17150 | out | inverter output; goes on north to a box near (7795,17130) |
-| `bc3_w17646` | M x 7828-7850, y 16640 and y 17660 | in | inverter input; goes on north to pads near (7835,16590) and on south |
+| `ck_out` | M x 7828-7850, y 16640 and y 17660 | in | inverter input; goes on north to pads near (7835,16590) and on south |
 | vcc | M rail x 7470-7520, from y 16290 (bc1's RL2) to 17700 | - | the rail's south end not followed |
 | vss | M rail x 7641-7691, from y 16290 (bc1's RL3) to 17705 | - | the rail's south end not followed |
 
@@ -118,7 +118,7 @@ to 17610 in both chips (dark bands up to about 22 px are contact rings or edges 
 starting on bc1's RL2 (vcc) and RL3 (vss); the output contact (7795,17605) and input
 contact (7840,17648) on their poly pads; the two long metals not swapped; the input metal
 without a contact between y 16640 and 17660; no metal south of the output contact; the
-extraction (0 errors; bc3's nets are `bc3_w17605`, `bc3_w17646`, vcc, vss; no merge with
+extraction (0 errors; bc3's nets are `bc3_w17605`, `ck_out`, vcc, vss; no merge with
 bc1's metals at x 7795 / 7838, which end at y 15447 / 15830).
 No finding changes a drawn connection. One omission, recorded in Not done: a real contact
 on the output metal at (7795,17337) is not drawn (an open tap). Not checked: the `?` tab

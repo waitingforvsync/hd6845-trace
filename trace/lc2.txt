@@ -122,7 +122,7 @@ N M 6106,8960 lc2_w9005
 # latch whose upper unit is lc1's copy of tl1_ub (lc1_w7040, the input of lc_step's inverter).
 # Master (x,y) -> (8676-x, 12633-y). Overlay d2_a.png / d2_m.png (4x, clean and chip-2 metal).
 #   lc1_w7862 = NOT lc1_w7780                              (the inverter; its output row and pad are in lc1's cell)
-#   lc1_w7928 = NOT( lc1_w7780 AND tc2_sr_g  OR  lc1_w7040 )   (through the plate's ? tie, as every copy)
+#   lc1_w7928 = NOT( lc1_w7780 AND ck_out  OR  lc1_w7040 )   (through the plate's ? tie, as every copy)
 @inst tl1_ua 3351,3703 rot=180 o=2662.5,4465
 M 6039,8067 y8530 w=48                      # the east VSS rail on south from lc1 to latch C's piece (the unit's VSS contact (6056,8213) under it)
 M 5925,8067 y8141 w=14                      # lc1_w7928's thin metal x 5918-5932 on south to its pad on the load plate
@@ -133,7 +133,7 @@ P 6136,8075:6415,8092
 P 6401,8067:6415,8092
 N P 6300,8083 lc2_w8083
 @alias lc1_w7928 lc2_w8083                  # one net only through the cell's ? tie (plate to node): the names are kept apart
-# enable: gate 2's row y 8118-8135 east to a pad in the run of tc2_sr_g's metal x 6203-6221, which goes on south
+# enable: gate 2's row y 8118-8135 east to a pad in the run of ck_out's metal x 6203-6221, which goes on south
 # and turns east along y 8250-8268 (metal A) out of the strip
 P 6130,8118:6200,8135
 P 6192,8109:6230,8143

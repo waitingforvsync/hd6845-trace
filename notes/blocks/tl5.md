@@ -261,7 +261,7 @@ those listed):
 | T10 x 5667 | from the strip's east edge along y 3650-3668 to a corner (5668,3659), south to y 4407 | (5665,4395) | `tcw_m6320` |
 | T10 | y 4468-5545, a corner (5667,5545) and west | (5666,4480), (5538,5544) | `tc1_o3527` |
 | x 5189 | y 5399-5982, a corner (5189,5982) and west out of the strip | (5190,5411) | `c4l_gab` |
-| x 5627 | from the pad (5493,5674) east along y 5676, a corner (5627,5676), south, a corner (5627,6150), east | (5493,5674), (5667,6150) | `tl4_w4590` |
+| x 5627 | from the pad (5493,5674) east along y 5676, a corner (5627,5676), south, a corner (5627,6150), east | (5493,5674), (5667,6150) | `ck_out` |
 
 T1 (`res_b`) and T2 (`lpstb_b`) are `trunks`' (to their pads (5190,6065) and (5232,6105)); T7 ends on
 the pad (5538,4980).
@@ -383,7 +383,7 @@ east under RC, the metal x 5189 and the tracks. None crosses a diffusion.
 | y 5534-5553 | edge | pad (5538,5544) | metal east, corner (5667,5545), T10's south piece north to its pad (5666,4480), which lies on the strip's east edge (x 5650-5690); its poly leaves east | `tc1_o3527` |
 | y 5576-5594 | `bw`'s `rc_stepreq_n` row: through the strip without a pad (theirs) | | | |
 | y 5621-5641 | edge | pad (5538,5631) | metal east along y 5632 to a pad (5666,5632) on the east edge; its poly leaves east | `rst_ck` |
-| y 5665-5684 | edge | pad (5493,5674) | metal east, corner (5627,5676), south over `amrw`'s four rows (no pad, no hole), corner (5627,6150), east to a pad (5667,6150) on the east edge; its poly leaves east | `tl4_w4590` |
+| y 5665-5684 | edge | pad (5493,5674) | metal east, corner (5627,5676), south over `amrw`'s four rows (no pad, no hole), corner (5627,6150), east to a pad (5667,6150) on the east edge; its poly leaves east | `ck_out` |
 | y 5708-5727 | edge | no pad: a corner at x 5485-5507 and south, under `amrw`'s metal x 5495 from y 5850, a corner at y 6228-6248 and east, in the open from x 5600, out of the strip | | `rcs_mv` |
 | y 5751-5770 | edge | no pad: a corner at x 5402-5424 and south as the bus line x 5412 | | `bd1_n2` |
 
@@ -556,8 +556,8 @@ lies outside it).
 | `tc1_o3527` | poly | (4967, 5534-5553) | ? | the row of the pad (5538,5544) |
 | `rst_ck` | poly | (4967, 5621-5641) | ? | the row of the pad (5538,5631) |
 | `rst_ck` | poly | (5683, 5616-5649) | ? | the pad (5666,5632), on the edge |
-| `tl4_w4590` | poly | (4967, 5665-5684) | ? | the row of the pad (5493,5674) |
-| `tl4_w4590` | poly | (5683, 6134-6166) | ? | the pad (5667,6150), on the edge |
+| `ck_out` | poly | (4967, 5665-5684) | ? | the row of the pad (5493,5674) |
+| `ck_out` | poly | (5683, 6134-6166) | ? | the pad (5667,6150), on the edge |
 | `rcs_mv` | poly | (4967, 5708-5727) | ? | a row without a pad in the strip |
 | `rcs_mv` | poly | (5683, 6228-6248) | ? | the same line, after its two corners |
 | `bd1_n2` | poly | (4967, 5751-5770) | ? | a row without a pad in the strip |
@@ -673,7 +673,7 @@ From `tl6`: latch c's outputs reach `ras_o0_alt2` (through its inverter) and `tc
   (4539,2768) and a poly column north (`tl4_w4068`). `tl5_w4937` and `tl5_w2722` go west on `tl4`'s bus
   lines 4 and 5.
 - `c4l_l3` (NOT `tl4_w4243`); the wire `tl5` called w5500 = `tl4_w5068` (NOR(`tl4_w4545`,
-  `tl4_w4850`)); the wire `tl5` called w5674 = `tl4_w4590`; this file's bus line x 5717 is `rcs_mv`; the bus line x 5412 of tl5 = `bd1_n2`.
+  `tl4_w4850`)); the wire `tl5` called w5674 = `ck_out`; this file's bus line x 5717 is `rcs_mv`; the bus line x 5412 of tl5 = `bd1_n2`.
 - The bus line x 5107 is `rcs_x1` (renamed 2026-11-19); `tl3_w3982` (bus line x 5063) comes from a pad (4583,5936)
   and a metal on west along y 5939; `c4l_gab`'s metal x 5189 / y 5982 turns south at x 4929 to a pad
   (4929,6323) and a row on west.
