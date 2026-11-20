@@ -6,3 +6,5 @@
 6365,15116:6946,16250    route  RES and LPSTB on south | each pin's poly row ends on a pad east of the track bundle; a track runs south to a pad at y 16170 / 16217
 6866,16250:7290,17056    route  RES and LPSTB to their gate | each line goes under the bus of five horizontal metals as a poly column, south as a thin metal and east as a poly row to the gate column under the rail x 7292-7342
 7172,16941:7522,17235    logic  light pen strobe gated by reset (bl0_w17210) | bl0_w17085 = NOT(lpstb_b AND res_b), two pull-downs in series, then an inverter: bl0_w17210 is high while LPSTB is high and RES is high
+7128,17247:7522,17356    logic  NOT of the gated light pen strobe (bl0_w17337) | the third unit under the rail: an inverter of bl0_w17210; its output goes west onto a thin metal that runs north and south
+7126,15551:7215,17663    route  bl0_w17337 north and south | a thin metal x 7137-7152 from the inverter's pad: north through a poly column under the bus of five metals to a pad (7141,15566) and a poly row east; south to a pad (7143,17647) and a poly row east

@@ -16,8 +16,10 @@ vss          M  2605-2655,14090   -    the left edge column's vss rail, on north
 vss          M  2605-2655,14770   -    the same, on south
 vcc          M  2783-2832,14090   -    the left edge column's vcc rail, on north
 vcc          M  2783-2832,14770   -    the same, on south
-bl0_w17210   M  7178-7198,17310   out  metal south from the pad (7188,17210) onto a pad (7188,17300), the gate of the column's third unit, and on south
+bl0_w17210   P  7215,17461-17483  out  the poly row east of the metal's last pad (7188,17472): gate band A of the fourth unit under the rail (the pad's poly also runs south onto band B, y 17503-17527)
+bl0_w17337   P  7200,15556-15576  out  poly row east of the track's north pad (7141,15566), into bc1's gate group x 7190-7860
+bl0_w17337   P  7215,17636-17656  out  poly row east of the track's south pad (7143,17647): a gate band of the fifth unit under the rail
 vss          M  7292-7342,16925   -    the gate column's rail x 7317, on north
-vss          M  7292-7342,17240   -    the same, on south
+vss          M  7292-7342,17350   -    the same, on south
 vcc          M  7470-7520,17020   -    bc3's rail x 7495, on north
-vcc          M  7470-7520,17240   -    the same, on south
+vcc          M  7470-7520,17350   -    the same, on south
