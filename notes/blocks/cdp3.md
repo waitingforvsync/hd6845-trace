@@ -358,6 +358,12 @@ Into parts not yet traced (the labels sit on the stubs):
 - Neighbours: `cdp4` (below) tags the column whose VSS rail is at x 8405 as its s2, so its
   sK is column c(K) here; `cdp2` (above) uses the same numbering as cdp4.
 
+- **A tab of row A's match line under the top end of c2's tap track**, (8548-8570, 8059-8106), as in
+  `cdp4`'s slice s0 (its Ambiguity 12). Both metal shots show a bright centre about 12-15 px across in a
+  dark ring at (8557,8068); c3's track end is plain. Neither stripped shot shows a pit there (clean shot
+  200/174/135, flat), while the known contacts (8712,8757) and (8632,8178) do. Read as no contact by the
+  tracer and the reviewer; a contact would short `cdp3_g_c2` to `cdp3_k_c`. The tab is drawn, no contact.
+
 ## Not done
 
 - (Done 2026-11-19: row A, y 8040-8830, and what the notes called row I, which is `cdp4`'s comparator
@@ -449,3 +455,32 @@ Into parts not yet traced (the labels sit on the stubs):
 
 ## Review
 
+### Row A (run of 2026-11-19)
+
+Round 1 (full review, 2026-11-19 22:51 -0600; a fresh Fable reviewer, images in `cache/scratch/cdp3/review-1/`;
+commit before the round e1b2cc7). Piece: row A, x 8280-10800, y 8030-8840, and the thin metal x 8336 to
+y 9160. Told to suspect: the west end (box, poly, pad, the metal's start and run), the latch gates' poly
+being `wr_r14`, the joins at y 8765-8795, line f's and the bit line's lack of contacts, c2's hand-drawn
+part and its tab, c2's copy, the east end, anything left out. Checked at 4x or more in up to four shots
+with profiles and text maps: the west end (pad contact with ring and bright centre in both chips, no metal
+north of the pad, the metal continuous to (8336,9430), the crossing at y 9090 a poly-row edge); the copies
+(c3..c7 at most 4 % bad blocks in three shots, c2's all in the hand-drawn part and the west rail edge);
+c2's leg on field, load, head box, VCC contact; the metals' top ends and joins; the east end's lands and
+contacts; the extraction (91 transistors, equations as claimed).
+
+- Finding 1, **geometry only**: `wr_r14`'s poly (an older line, `P 8528,8818 x10850`) is not straight:
+  under every bit line and line f metal there is field at y 8812-8830; the band is joined through each
+  latch cell's loop. Confirmed (`tools/px.py row 8820 8826 8930 8 acid1b,acid`: pink 201/117/115 at
+  x 8850-8866 and 8898-8906; view `strobe.png`). Redrawn as six segments, with the dead-end stub under c2's
+  VSS rail.
+- Finding 2, **geometry only**: the tab joined the pocket by a 2 px overlap. Lengthened to y 8106.
+- Finding 3, **geometry only**: the six older `?M` bit-line pieces (y 8450-8795) doubled the firm metals.
+  Removed.
+- Ambiguity recorded: the tab under c2's tap track (no contact read by both).
+- Not checked by the reviewer: c4..c7 individually above 1x (composite and `cellcheck.py` only); the
+  masters' internals (reviewed in `cdp4`).
+
+`tools/t.sh cdp3 sameconn.py e1b2cc7`: connections identical.
+`.venv/bin/python tools/sameconn.py e1b2cc7`: connections identical.
+
+Round 1: no findings that change a connection.

@@ -481,7 +481,15 @@ P 10705,9533 x10850 w=22              # row C's: runs on east
 # line east of the region (x 10888, which comes up from the south and ends there) west to
 # x 8528 in c2. Seen unbroken in the clean shot at 1.5x. It passes just below the bit-line
 # contact of every row A cell; its branches into those cells are not traced.
-P 8528,8818 x10850 w=16
+# the strobe is a serpentine (review, 2026-11-19): under each bit line and line f metal there is
+# field at this height; the band is joined through each latch cell's loop (legs and gate bar)
+P 8528,8818 x8836 w=16
+P 8913,8818 x9226 w=16
+P 9303,8818 x9616 w=16
+P 9693,8818 x10006 w=16
+P 10083,8818 x10396 w=16
+P 10473,8818 x10850 w=16
+P 8388,8818 x8440 w=16                 # west stub under c2's VSS rail: a dead end, no contact
 N P 10840,8818 wr_r14
 
 # --- VSS rails c0..c8 over the full height (straight; contacts are drawn with the cells)
@@ -535,17 +543,11 @@ N M 10528,9600 vcc
 # others by profile) and, uncertain, through the row A cells to the top edge. Each row A cell
 # has a contact on its bit line at about y 8782 (seen in c2 and c5); not drawn, row A is not traced.
 M 8466,8790 y9195 w=20
-?M 8466,8450 y8795 w=20
 M 8857,8790 y9195 w=20
-?M 8857,8450 y8795 w=20
 M 9248,8790 y9195 w=20
-?M 9248,8450 y8795 w=20
 M 9638,8790 y9195 w=20
-?M 9638,8450 y8795 w=20
 M 10028,8790 y9195 w=20
-?M 10028,8450 y8795 w=20
 M 10419,8790 y9195 w=20
-?M 10419,8450 y8795 w=20
 
 # --- bit lines and lines f below row H, to the bottom edge: metal is present at these x all the
 # way (profile); row I, which they cross, is not traced
@@ -654,7 +656,7 @@ N M 7835,9300 cdp3_k_a
 D 8370,8085:8456,8110
 D 8437,8097:8582,8185
 D 8577,8078:8772,8102
-D 8548,8059:8570,8099
+D 8548,8059:8570,8106
 P 8407,8123:8604,8147
 P 8584,8123:8604,8213
 P 8455,8190:8604,8213
