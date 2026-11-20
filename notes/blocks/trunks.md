@@ -599,3 +599,10 @@ along the top of the central datapath) is the gap.
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
 - `ck_out #1` "turns left along y 17900-17915 (followed to x 10230; not yet further)": it runs on west, unbroken, to a pad with a contact (9769,17910), then by a poly to a pad (9596,17909) and a metal to a pad (8598,17908), drawn by `eof` (piece `in350`, run 18); from there one metal goes north to the latch behind the ripple counter's clock and a poly west to a pad (8424,17908). Four open ends of `ck_out` there are not followed.
+
+## Corrections (coordinator, from the handoffs of 2026-11-20, `bl0`)
+
+- `res_b` and `lpstb_b` do not end at (6366,15000) and (6408,15000) nor in `bl0`'s gate group: each runs
+  on east in poly and south by a track to a pad, (6882,16170) and (6928,16217), and on south in poly
+  (drawn to y 16250; `notes/blocks/bl0.md`, piece `pe`). In the gate group they make `lpstb_nres` =
+  NOR(NOT `lpstb_b`, `res_b`), which forces the carry into the address counter's row s7.

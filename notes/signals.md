@@ -1180,3 +1180,4 @@ datapath s1...s7, s0 became b0...b6, b7.
 | cdp3_k_b | bus_eq_r15 | |
 | cdp3_k_c | g_eq_r14 | |
 | bl0_w14113 | larr_l0_g0 | |
+| eof_w17552 | eof_w17362 | |

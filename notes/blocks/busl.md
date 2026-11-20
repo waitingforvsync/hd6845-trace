@@ -1125,3 +1125,15 @@ Round 1: no findings that change a connection.
 - The undrawn rows y 13744 and y 13852 end east of x 7550 as gates 2 and 4 of the NOR that makes `cdp4_rst` (ports `rsel13_buf_u` (7550,13751), `rsel12_buf_u` (7550,13873) in `ports.d/cdp4.txt`): draw the rows onto them.
 - Piece `kb`: `bus_eq_r15`'s driver is `cdp4`'s comparator of the bus lines with R15 (`cdp4` run 3); the diffusion band east of (7600,11109) is its match line.
 - Piece `lc9`, "row ... 14784 to (7835,14784)": the pad's contact is at (7837,14784) and the pad's poly reaches x 7863 (`eof`, piece `ck6`). The row is driven from the east: `lc3_w9947` = NOT `eof_w15127` (`eof` run 15), so the port at (7550,14784) is an input of this field.
+
+## Corrections (coordinator, from the handoffs of 2026-11-20, `bl0`)
+
+- "Where the buffered RES and LPSTB pins go" (the survey of run 7): the two metals from the pads
+  (6363,15132) and (6408,15176) go to the gates G4 and G2 of `bl0`'s gate group as surveyed, and the third
+  pad (6320,15088) is another net's (`bl0_w15088`). **The pins do not end there**: from each pad a poly row
+  also runs east under the tracks to a pad ((6885,15130), (6929,15177)) and a track south to a pad
+  ((6882,16170), (6928,16217)) (`notes/blocks/bl0.md`, piece `pe`).
+- In the field's south-west corner two tracks are drawn by `bl0`, not by this package: x 4867 from a pad
+  (4867,15675) north to a pad (4867,14436) (`lpstb_nres`, on west in poly along y 14436 into the left
+  array), and nothing else. Seen there and not drawn: the track x 4909 from the pad (4909,15088) north
+  (`bl0_w15088`; by the follower to about (4908,10660)).

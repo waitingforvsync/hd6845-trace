@@ -355,3 +355,21 @@ traced.
     `cdp4_bus_s1` (each is also `cdp4`'s row C latch input of that slice; which end drives is not known);
     an eighth, y 15042 with its east end pad (5365,15042), carries `cdp4_bus_s0` once the last 45 px of
     its track are drawn (south of `busl`'s region).
+
+## Corrections (coordinator, from the handoffs of 2026-11-20, `bl0`)
+
+- "`larr_l0_g0` ... its connection to anything else was not found": it leaves the box of its contact
+  (2893,14114) west as a **diffusion** wire y 14105-14122, under both rails of the left column, to a
+  buried contact (2513-2545, 14100-14125), and is one input of the NOR `bl0_w14308` =
+  NOT(`larr_l0_g0` OR `lpstb_nres`) (`notes/blocks/bl0.md`, piece `g1`; two reviews).
+- "Carry-in of s7 (`larr_cin_s7`) arrives as poly from the left column along y 14566": its driver is an
+  inverter of `bl0_w14308` in the left column (x 2520-2835, y 14633-14757; piece `s7`):
+  `larr_cin_s7` = `larr_l0_g0` OR `lpstb_nres`.
+- "whatever conditions it on the carry into group 1 must hang on that line in the left column": found.
+  `larr_l0_g1` is pulled to vss by a transistor (x 2689-2760, y 14467-14494) gated by `bl0_w14308`, whose
+  drain reaches the contact (2892,14523) by a diffusion strip under the vcc rail.
+- Gap 1's "horizontal poly bands": the band y 14425-14447 is `lpstb_nres` (high while LPSTB is high and
+  RES is low), from a pad (4867,14436) in the left bus field to the left column. The others are not read
+  (re-read item R50: one of this cell's rows was diffusion).
+- The left column's rails here are vss x 2605-2655 and vcc x 2783-2832 (by the loads, as `tla`, `tl1` and
+  `ur` have them further north). The pull-ups of `larr_l0_g0` and `larr_l0_g1` are still not found.

@@ -480,6 +480,24 @@ Traps, all of them real:
    each (`tools/eof_patch.py`), **with a control**, a band of the same height that is certainly
    field between the same kind of edges nearby. Found 2026-11-20 (`eof` runs 16 and 23, both by
    reviewers; R46, R49; AMB-043; with traps 4 and 28).
+   `tools/eof_band.py h|v` does this measure (the band's own rows only, and a control band). Two
+   more points from its first use (`eof` run 24, 2026-11-20): a patch that takes in two rows of the
+   poly beyond the edge line moves a band's value by 3 to 8 units; and **a poly's own colour in the
+   open does not say what lies under it**: on the centre line, poly over field and poly over active
+   area of the same unit do not separate in chip 2 (metal 165-176/115-118 against 170-185/121-135).
+   What decides a gate's extent is the edge line crossing the poly, and the diffusion against both
+   of the poly's edges.
+39. **A long row under rails and tracks is not poly because it is pale there.** In the clean shot a
+   diffusion wire and a poly row are both pale under metal, and at 1-2x a row that crosses a rail
+   field looks like every poly row beside it. The row y 14105-14122 in the left array's left column
+   was drawn as poly with a port at each end; it is a diffusion wire that ends on a buried contact in
+   the west and is one piece with a contact's box in the east. Read one open stretch of every such
+   row: chip-2 metal shot poly orange (blue under 75) against diffusion plain (blue 85-95), chip 1's
+   metal shot the same (green under 95 against 114-125), clean shot red-brown against green; and
+   under a rail compare with a known gate band (salmon, 222/168/119 there) and a known diffusion
+   (tan, 206/170/134). A row's layer decides what its ends are (a pad or a buried contact, a contact
+   box) and what a poly crossing it would be (a transistor). Found 2026-11-20 by a reviewer (`bl0`;
+   R50).
 
 **When a trap turns out to affect work already done**, add the affected blocks to the
 "Re-read list" in `notes/work-packages.md` in the same commit that records the finding.

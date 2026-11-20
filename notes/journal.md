@@ -2448,3 +2448,47 @@ found; R11, R12, R13 not), "Not established at all" on the cursor. AMB-001 to AM
 route of `eof` split in two because its label covered the bottom-centre logic; looked at
 `cache/scratch/refresh/fp_cdp34.png`, `fp_bc2.png`). Coverage: 68.7% traced; in some package region
 99.9%; untraced and in no Queue row 0.4%.
+
+## 2026-11-20 13:24  RES low with LPSTB high: `bl0` traced, merged and applied; `eof` run 24 applied
+
+The user asked which block would show what the chip does while RES is low and LPSTB is high, and for it
+to be traced next. It is `bl0`: the gate group between the left bus field and the bottom-left logic that
+both buffered pins reach. The coordinating session put it at the top of the queue (93684dd), claimed it
+and traced it (branch `bl0`, four pieces, 13 transistors, no uncertain item; merged ef7f510 through the
+gate; claim released).
+
+**What is traced** (`notes/blocks/bl0.md`; `notes/operation.md`, "RES low with LPSTB high"):
+
+- `lpstb_nres` = NOR(NOT `lpstb_b`, `res_b`): high only while LPSTB is high and RES is low, the one case
+  in which RES is low and the reset NOR gives no reset.
+- Its one load is in the left column of the memory address counter, at the gap between rows s6 and s7,
+  3,300 px away by a poly row, a track x 4867 and a poly row y 14436 across the whole left array:
+  `bl0_w14308` = NOT(`larr_l0_g0` OR `lpstb_nres`); `larr_cin_s7` = NOT `bl0_w14308`; and
+  `bl0_w14308` gates a pull-down on `larr_l0_g1` (the carry into s10). All three are joined to
+  `larr`'s nets by drawn geometry.
+- So while RES is low and LPSTB is high the carry into row s7 is forced on: the counter's upper seven rows
+  count on every step whatever the lower seven hold. That this is the family's test mode is believed.
+- Both pin lines go on from the gate group to pads (6882,16170), (6928,16217) and further south: not
+  followed (the master list's `bl0` row, next step 1).
+
+**Review.** Round 1 (pieces `pin`, `g1`): one finding that changes a connection, confirmed: the row
+y 14105-14122 drawn as poly is a diffusion wire, one piece with `larr_l0_g0`'s contact box and joined to
+the NOR's gate by a buried contact. Round 2 (the fix and the new pieces `s7`, `pe`): two geometry-only
+findings, fixed, connections identical. **Re-read list**: R50 (new: long rows drawn as poly through rail
+fields without an open stretch read; first `larr`'s gap rows), R49 extended (`tools/eof_band.py`).
+**Guide**: trap 39 (new: a long row under rails is not poly because it is pale there); trap 38 extended
+(from `eof` run 24: the band's own rows only; a poly's colour in the open does not class what lies under
+it).
+
+**`eof` run 24** (Tom Seddon, merged 4872929, claim kept): the unit that `eof_w17168` gates is whole,
+`eof_w17362` = NOR(`eof_w17338`, `eof_w17168`, `eof_w17472`) (firm), a driver whose output is drawn to a
+pad (8467,17603); the block's Ambiguity 85 resolved (a field island: two nets). The label of the node
+below the bar is dropped: `eof_w17552` -> `eof_w17362` (glossary's Former names; the master list's row;
+one comment in `trace/eof.txt` reworded to say "former name"). Its next step, the output's thin metal
+south and west towards `cudisp_drv_in`, is in the `eof` row.
+
+Corrections sections in `larr`, `busl` and `trunks` notes. `out/` rebuilt: 2,455 nets, 4,574
+transistors, 0 errors, 0 warnings, 0 names outside the glossary, 3 open joins, 738 floor-plan blocks.
+Coverage: 69.1% traced; in some package region 99.9%; untraced and in no Queue row 0.4%. Spot checks:
+`cache/scratch/refresh/bl0_check.png`, `eof_g174e.png`. Not done here: the refresh (the header counts of
+`notes/operation.md` are the eleventh refresh's).

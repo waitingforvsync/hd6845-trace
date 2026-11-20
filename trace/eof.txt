@@ -1901,7 +1901,7 @@ P 8274,17464:8296,17543
 P 8274,17521:8389,17543
 P 8226,17464:8242,17560
 N P 8234,17520 eof_w17472
-# (N D 8340,17552 carried the name eof_w17552 until run 24: the node below the bar is one net with
+# (N D 8340,17552 carried the former name eof_w17552 until run 24: the node below the bar is one net with
 # eof_w17362, by the south neck and the strip east of the rail: piece g174e.)
 
 # ======================================================================================
