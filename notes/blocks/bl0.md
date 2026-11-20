@@ -7,8 +7,8 @@ metal-shot pixels. Evidence: `cache/scratch/bl0/` (`survey.md` holds every measu
 
 ## Status
 
-Run 2 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 06:38 -0600). Three pieces, 5 transistors, no uncertain item:
-both pin lines followed south of y 16250 to the gate they end on.
+Run 2 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 06:38 -0600). Three pieces, 5 transistors, no uncertain item;
+reviewed (round 3: no finding that changes a connection). Both pin lines followed south of y 16250 to the gate they end on.
 
 - **Piece `xu`** (wiring). Each line goes under the bus of five horizontal metals as a poly column to a
   second pad ((6885,16516), (6929,16560)), south as a thin metal, east at a corner to a third pad
@@ -300,12 +300,18 @@ traced: it is what latches the light pen register; its loads are the next step.
 Run 2:
 
 9. **A dark C-shaped mark on the wide metal of the bus at (6925,16365)**, over `lpstb_b`'s poly column,
-   in the chip-2 metal shot only. Chip 1's metal shot is plain there, the clean shot has no hole, and the
-   column has no pad under the wide metal (`s3.png`, `textmap.py 6860 16330 6950 16400 2 --acid`). Read
-   as a blemish, not a contact.
+   in the chip-2 shots only (metal: the C; stripped: a dark-red ring about 22 px across). Chip 1's metal shot
+   has only a dim patch 12 px south at (6930,16375), and a small reddish ring on `res_b`'s column at
+   (6884,16357) where chip 2 is plain. No mark is at the same place in both chips, none has a ring with a
+   bright centre, and neither column has a pad under the wide metal (`s3.png`, `review-3/bus4.png`,
+   `textmap.py 6860 16330 6950 16400 2 --acid`). Read as blemishes, not contacts. Under the wide metal
+   the clean shot shows every column dark and textured, so it does not help there.
 10. **A small dark mark on the rail at (7307,17058)**, over the output node of piece `n1`: about 6 px, no
    ring, no bright centre, and the clean shot is uniform there (`textmap.py 7280 16940 7356 17160 3`).
-   Read as no contact (a contact to the rail there would short the gate's output to `vss`).
+   Read as no contact (a contact to the rail there would short the gate's output to `vss`). The pinkish-white
+   blob there in the chip-2 stripped shot reads 226/157/135 against 108-181 red at four real contacts: a
+   fringe (review). Chip 1's metal also has a dark spot of about 8 px over the middle node at (7318,17018);
+   chip 2 and the clean shot are plain there: no contact.
 11. **Which supply the rail x 7292-7342 is.** Not followed to a named supply: `vss` by the orientation of
    the gates (sources on it, loads on the other rail, which `bc3` names `vcc`).
 
@@ -367,6 +373,34 @@ After the fixes: `tools/t.sh bl0 sameconn.py 5f2676e` ends `connections identica
 `.venv/bin/python tools/sameconn.py 5f2676e` ends `connections identical`.
 
 Round 2: no findings that change a connection.
+
+### Run 2
+
+Round 3 (full review of pieces `xu`, `n1`, `n2`; fresh Fable 5.2 reviewer; 2026-11-20 06:47 -0600; commit 71168d2; images
+`cache/scratch/bl0/review-3/`). Told to suspect: series pair or NOR (which diffusion pieces of the column
+have a contact; the mark at (7307,17058)); the gap y 17092-17110; the "U" of dark line east of the column;
+the necks and finger ties; the tabs west of the column; the C mark at (6925,16365); undrawn branches or
+gates along rows and columns; the output poly's branches; the metal from the pad (7188,17210). Checked at
+4x or more with text maps and profiles: the two contacts (ring with bright centre in both metal shots),
+no contact on the output node or the middle node, both gaps to the next unit (two edge lines in all four
+shots), the U as one outline (chip-2 stripped red minus green: strip +22 to +29, neck +23, inside the U
+-5 to -12), both necks and tabs as diffusion, both lines pad to pad with no contact candidate
+(`follow.py`), the rows continuous to their rounded ends at x 7383 on field, one poly with no branch for
+`bl0_w17085`, the metal from the pad going south only. Could not check: the plate fingers against the
+box interiors (outline only), which supply each rail is, holes under the wide bus metal in the clean shot.
+
+Findings, all geometry or comment only:
+
+1. Ambiguity 9's "chip-2 metal shot only" was incomplete (marks in the chip-2 stripped shot and, elsewhere,
+   in chip 1). Confirmed; the ambiguity is reworded. No contact.
+2. A dark spot in chip 1's metal over `n1`'s middle node (7318,17018). Confirmed; added to Ambiguity 10.
+3. `n2`'s output poly between pad and buried contact is y 17203-17223 (drawn 17198-17224). Fixed.
+4. `n2`'s supply box ends at about y 17243 (drawn 17235). Fixed.
+
+`tools/t.sh bl0 sameconn.py 71168d2`: connections identical. `.venv/bin/python tools/sameconn.py 71168d2`:
+connections identical.
+
+Round 3: no findings that change a connection.
 
 ## Not done
 

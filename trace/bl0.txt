@@ -283,7 +283,7 @@ C 7308,17130
 D 7281,17182:7357,17215                            # output node, wider than the channel
 D 7355,17192:7404,17215                            # output strip east
 D 7400,17190:7470,17218                            #   under the load plate (W 28, L 62)
-D 7468,17158:7522,17235                            # box on the supply rail
+D 7468,17158:7522,17243                            # box on the supply rail
 C 7488,17178
 M 7495,17110 y17240 w=50
 N M 7495,17120 vcc
@@ -294,7 +294,7 @@ P 7405,17146:7430,17168                            # the plate's finger
 P 7404,17166:7465,17235                            # load plate
 D 7238,17192:7283,17215                            # output tab west
 B 7238,17194:7268,17226
-P 7180,17198:7268,17224                            # output poly west to a pad
+P 7180,17203:7268,17223                            # output poly west to a pad
 P 7172,17195:7206,17227                            # pad
 C 7188,17210
 M 7188,17200 y17310 w=20                           # metal south to the next pad (17300)
