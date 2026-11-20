@@ -1334,6 +1334,43 @@ crossings singly (the metal test and the clean-shot scan cover them).
 
 Round 1: no findings.
 
+**Run 9, pieces `e6`, `p2`. Round 1: full review** (2026-11-20 14:38 +0100; a fresh Fable 5.2 reviewer agent;
+commit ea21812; images in `cache/scratch/busl/review-9/`, 20 used). Told to suspect: the order of the
+six lines through the diagonals and the nest (the two western diagonals rested on a 1.5x overlay); the
+knot at x 5440-5560 (the pad (5473,10707) joined only to the row y 10750; the metal x 5474 on
+`rst_n`'s column and over `lc2_w8450`'s row at the dark spot (5476,10643); the arm y 10752 one metal
+with x 5518 and without contact to the row under it); the pad (5102,10750) against the fifth line's
+corner; the two diagonal polys (swapped, touching, a second poly on a pad, the rows' layer, under the
+VCC metal); the track x 4909 over the row y 10706; the south end (the track's end on the pad, the row
+y 15088 to x 5700, the jog lying on it, the dark gap at x 5511-5526); taps along the eight tracks with
+the scan's list; two metals end to end on one track.
+Checked: the six lines by `tools/tl5_tracks.py h` cuts at y 10400, 10450, 10500 and `tools/follow.py`
+(four run unbroken from `lc3`'s pads to beyond y 15000), the two western diagonals at 4x in both metal
+shots ((5655,10400) becomes x 5518, (5588,10400) becomes x 5474; no pad, ring or hole where they cross
+the polys); the knot at 4x or more in four shots and by text map (the pad joins in poly only to the
+row y 10750, pink field between it and the row y 10641; no ring, widening or hole on the metal x 5474
+over `rst_n`'s column or at (5476,10643), where the chip-2 dark spot is in no other shot; the line at
+x 5488 is the row's end edge); the arm (one metal; the dim stretch x 5158-5181 is chip 2 only, 7 px
+dark in both; no pad or hole); the west end (open poly, orange in both metal shots, between the pad
+(5102,10750) and the corner at x 5148; the follower from the track x 5105 stops on the pad); the two
+diagonals (two polys with 40 px of field between, each column on the row claimed; both rows poly and
+continuous to their pads, edge lines unbroken under VCC in both metal shots; no second poly on either
+pad); (4909,10706) (no pad, ring or widening in either metal shot, no pits in chip 2); the south end
+(the track ends on the pad (4909,15087), bare ground beyond; the row y 15088 one poly to `bl0`'s pad;
+the gap x 5511-5526 orange open poly in both metal shots like its neighbours; the jog without hole or
+pad: `bl0_w15088` = `rst_n` holds); the eight tracks by its own flank scans (no gap in both chips over
+15 px, no ring or branch on any; the scans find the four end pads and the corners); the diffusion-row
+crossings (alike, without pads).
+Findings: none.
+Could not check, or on weaker evidence: the row y 10750 lies under the arm for its whole length, so
+its continuity rests on the two stripped shots (chip 1's clean shot is patchy dark red at x 5240-5360);
+on `rst_n`'s row under VCC at x 4948-4978 chip 1's clean shot is green with a dark wedge in chip 1's
+metal shot, read as a blemish of chip 1 because chip 2 is whole there; at (4909,10706) the clean shot's
+patch is as green as a real hole, and "no contact" rests on the absence of a pad; south of y 15000
+only the track x 4909 was read; `lc3` north of y 10400 not re-read.
+
+Round 1: no findings.
+
 ## Not done
 
 - Everything else in the field: about 20 more tracks and the other rows. Next pieces, in the
