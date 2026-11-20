@@ -2405,3 +2405,46 @@ rewrote 240 places in main's own records; run now on main they change nothing.
 
 `out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 3 open joins, 732 floor-plan blocks.
 Coverage: 68.7% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
+
+## 2026-11-20 11:42  Refresh
+
+Eleventh refresh, after the thirteen handoffs of this morning. Renames in four batches, each checked with
+`tools/names.py compare` ("only names changed"), `tools/signals.py` (0 outside the glossary) and
+`signals.py --docs` (no former names):
+
+- `eof_w15350` -> `ck_out`, `eof_w15390` -> `bc2_w15607` (`eof` runs 17-18, firm joins)
+- `tl2_w3722` -> `tl5_w4937`, `rcs_g3245` -> `tl5_w2722`, `tl1_w3678` -> `tl4_w4590`, `tl1_w2857` -> `rcs_mn3852` (`tl3` run 12, no uncertain item on the joins)
+- `cdp4_in8b_s0` -> `cdp3_bl_c0`, `cdp4_in8b_s1` -> `cdp3_bl_c1`, `cdp4_in8b_s2` -> `cdp3_bl_c2`, `cdp4_in8b_s3` -> `cdp3_bl_c3`, `cdp4_in8b_s4` -> `cdp3_bl_c4`, `cdp4_in8b_s5` -> `cdp3_bl_c5`, `cdp4_in8b_s6` -> `cdp3_bl_c6`, `cdp4_in8b_s7` -> `cdp3_bl_c7` (`cdp4` run 3: single metals)
+- `cdp3_k_b` -> `bus_eq_r15`, `cdp3_k_c` -> `g_eq_r14` (the match lines of the two comparators, firm; proposed by the tracer)
+
+On the last pair: each is named for what is traced (equal to R15, equal to R14); "bus" and "g" stand for
+the compared lines, which are not identified. If they turn out to be the memory address the names can
+become the address counter's. **Left on purpose** (the master list's `rename` row): `bc1_g6_in` /
+`eof_w17040` (joined through three uncertain stretches; trap 17); `cdp3_f_c#` / `cdp4_a_s#` (a cell's
+own pin name from a template); the latch nodes of R12-R17 (no `r14_b#_q` yet: which data bit each column
+is has not been traced, and whether the bit lines are `db_b#` is open above y 8040); the two new open
+joins `rsel13_buf_u`, `rsel12_buf_u` (`busl`); the ripple counter's clock `lc3_w9947` and the `eof_w#`
+nodes behind it (what the counter is for is not established). The glossary row `rcs_g#` is removed (no
+net matches it); rows for `bus_eq_r15` / `g_eq_r14` and `cdp3_k_a` rewritten. About forty sentences that
+the renames made circular were reworded to name the old wire by its former owner.
+
+**Branches in flight** (`eof`, tom-seddon; `busl`): after merging main, run in the branch (it now leaves
+main's records alone: `tools/rename.py` was changed this morning):
+
+```
+tools/rename.py eof_w15350 ck_out eof_w15390 bc2_w15607 tl2_w3722 tl5_w4937 rcs_g3245 tl5_w2722 tl1_w3678 tl4_w4590 tl1_w2857 rcs_mn3852 cdp4_in8b_s0 cdp3_bl_c0 cdp4_in8b_s1 cdp3_bl_c1 cdp4_in8b_s2 cdp3_bl_c2 cdp4_in8b_s3 cdp3_bl_c3 cdp4_in8b_s4 cdp3_bl_c4 cdp4_in8b_s5 cdp3_bl_c5 cdp4_in8b_s6 cdp3_bl_c6 cdp4_in8b_s7 cdp3_bl_c7 cdp3_k_b bus_eq_r15 cdp3_k_c g_eq_r14    # pairs: old -> new
+```
+
+**`operation.md`** (eleventh): header (2,451 nets, 4,560 transistors; 901 of 1,341 equations firm; no
+equation changed status against the baseline taken before the renames). The tracers had written their own
+rows (the ripple clock's latch and what follows it, the two comparators, `cdp4_rst`, `tl3`'s four joins).
+Changed here: the short answers (a sixth counter with a marked clock; the R14 and R15 matches meet in a
+NAND), three "open" lists that named signals since found (`rcs_mn3852`, `tl5_w4937`, `tl5_w2722`, the
+clock latch's three inputs), row H is R13, row A is R14's latch row, the Comparators section (R14 and R15
+found; R11, R12, R13 not), "Not established at all" on the cursor. AMB-001 to AMB-043; R1-R49.
+
+**`out/`** rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 3 open joins (`ck_a_u`,
+`rsel12_buf_u`, `rsel13_buf_u`), 733 floor-plan blocks (the NAND beside `cdp3`'s row C relabelled; one
+route of `eof` split in two because its label covered the bottom-centre logic; looked at
+`cache/scratch/refresh/fp_cdp34.png`, `fp_bc2.png`). Coverage: 68.7% traced; in some package region
+99.9%; untraced and in no Queue row 0.4%.
