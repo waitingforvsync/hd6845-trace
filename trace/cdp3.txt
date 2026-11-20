@@ -801,7 +801,8 @@ M 10419,7556 y8040 w=18
 # the node by a buried contact on a tab. The node leaves west by a neck into a buried contact under the
 # end of a poly row that runs west onto the pad (7400,8778) of piece u1's input wire: the inverter drives
 # U1's input and the staircase metal that ends on that pad.
-D 7494,8658:7712,8770                 # it runs on west of the rail to x 7494 (review round 4)
+D 7547,8660:7712,8770
+D 7494,8658:7550,8764                 # it runs on west of the rail to x 7494 (review round 4)
 C 7572,8680
 C 7592,8688
 M 7598,8640 y8800 w=92                 # the VSS rail here (x 7552-7645)
