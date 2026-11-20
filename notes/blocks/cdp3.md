@@ -56,7 +56,7 @@ Which columns each row occupies:
   - channel B: six tracks onto line g, six poly links from line f to the "x 9893" line.
 - **Row A (y 8040-8830), traced** (run of 2026-11-19 22:35 -0600; 91 transistors, no uncertain item):
   six copies of `cdp4`'s comparator cell over six copies of `cdp4`'s latch cell: **R14 and its
-  comparator with line g.** `cdp3_k_c` = NOR of the six cells' "not equal" nodes. With every file loaded:
+  comparator with line g.** `g_eq_r14` = NOR of the six cells' "not equal" nodes. With every file loaded:
   2439 nets, 4541 transistors, 0 errors, 0 warnings. See "Row A" under Logic.
 - NOT traced: the logic beside row A (x 7600-8300, y 8040-8800).
 
@@ -199,12 +199,12 @@ Where row C has no cells there is one gate. Its pull-down chain is a diffusion
 rail at the bottom (8000,9378); its load is a poly block 8116-8150 over a strip to a VCC
 contact (8178,9275) under a wide VCC metal that becomes c1's VCC rail.
 
-    out = NAND(cdp3_k_b, cdp3_k_c)        extracted as cdp3_bl_c1 (see below)
+    out = NAND(bus_eq_r15, g_eq_r14)        extracted as cdp3_bl_c1 (see below)
 
-- `cdp3_k_b` (gate 1, y 9279-9300): poly from the west edge along y 9450 to a contact
+- `bus_eq_r15` (gate 1, y 9279-9300): poly from the west edge along y 9450 to a contact
   (7765,9448), a metal bar east along y 9451, up the lower piece of the x 7880 line to
   the gate's pad (contact 7878,9297).
-- `cdp3_k_c` (gate 2, y 9328-9348): the gate poly runs down the left side and east along
+- `g_eq_r14` (gate 2, y 9328-9348): the gate poly runs down the left side and east along
   y 9423 to a contact (8335,9428) on a metal line at x 8327 that comes down from above
   y 9150 (not followed).
 - Output: (1) a buried contact at the top left of the chain (7924-7958 x 9238-9271) to a
@@ -220,7 +220,7 @@ contact (8178,9275) under a wide VCC metal that becomes c1's VCC rail.
   the west edge: seen by the first run, not re-checked, drawn `?`) down to a contact
   (7833,9165) on a poly line y 9168 that runs east to a contact at (8290,9165) (metal
   there not followed), on down to a contact (7835,9401), a poly cross-under below the
-  metal bar of `cdp3_k_b` (no metal over it, checked at 4x in both metal shots), contact
+  metal bar of `bus_eq_r15` (no metal over it, checked at 4x in both metal shots), contact
   (7835,9490), metal west and then down at x 7772 to a contact at about (7770,10135)
   between rows E and F, which is not traced.
 
@@ -249,7 +249,7 @@ C latch"); with this row's names:
     cdp3_f_c#      = NOT cdp4_la_c#_n2            (the buffered output: R14 as read, cdp4's selector source a)
     cdp4_xr_c#_nor = NOR(cdp3_g_c#, cdp4_la_c#_q)
     cdp4_xr_c#_ne  = NOT((cdp3_g_c# AND cdp4_la_c#_q) OR cdp4_xr_c#_nor)        = cdp3_g_c# XOR cdp4_la_c#_q
-    cdp3_k_c       = NOR(cdp4_xr_c2_ne, ..., cdp4_xr_c7_ne)                     high when line g equals R14's q in all six columns
+    g_eq_r14       = NOR(cdp4_xr_c2_ne, ..., cdp4_xr_c7_ne)                     high when line g equals R14's q in all six columns
 
 - **Latch row** (y 8490-8830): the latch cell upside down, strobe `wr_r14` (the poly y 8818 already drawn),
   data from the bit line (line e; contact (8466+dx, 8794)), buffered output by the land's contact
@@ -266,12 +266,12 @@ C latch"); with this row's names:
 - **West end of the match line**: the band ends in a framed box (8328-8368, 8098-8145) read as a buried
   contact; a poly runs south from it (x 8333-8350) to a pad (8323-8357, 8192-8227) whose contact
   (8334,8209) starts the thin metal x 8336. `tools/follow.py 8330 8260 S` follows that metal to (8336,9430),
-  the contact of the NAND's gate 2: **the match line is `cdp3_k_c`**. The one contact candidate on the way
+  the contact of the NAND's gate 2: **the match line is `g_eq_r14`**. The one contact candidate on the way
   (8336,9090) is a crossing (`tools/textmap.py 8318 9072 8354 9110 3`: no hole).
 - **East end**: the line stops under the ninth VSS rail; c7's comparator and latch take VSS from lands
   under that rail (contacts (10745,8443), (10745,8637)).
 
-So the NAND beside row C is NAND(`cdp3_k_b`, `cdp3_k_c`) = NOT((bus lines = R15) AND (line g = R14)): with
+So the NAND beside row C is NAND(`bus_eq_r15`, `g_eq_r14`) = NOT((bus lines = R15) AND (line g = R14)): with
 the bus lines and line g believed to be the low eight and high six address bits, **the cursor match,
 active low** (believed for what the lines are; the gates are firm).
 
@@ -283,7 +283,7 @@ West edge, x 7600 (all poly, all continue west beyond x 7540):
 |---|---|---|---|
 | cdp3_g_c7 .. cdp3_g_c2 | 8907, 8950, 8994, 9037, 9080, 9123 | ? | one line into each row A cell |
 | cdp3_k_a | 8864 | ? | poly to the x 7835 metal (first run's observation, drawn `?`); passes the gate beside row C and ends at about (7770,10135). The y 9168 poly on the same net starts at x 7820, not at the west edge |
-| cdp3_k_b | 9450 | in | gate 1 of the NAND beside row C |
+| bus_eq_r15 | 9450 | in | gate 1 of the NAND beside row C |
 | cdp3_cw_c7 .. cdp3_cw_c2 | 9581, 9624, 9668, 9711, 9754, 9797 | out | row C register outputs (true), each from a 26/16 load |
 | cdp3_gate_e | 10057 | in | read row C onto N |
 | cdp3_gate_f | 10317 | in | read row H onto N |
@@ -315,7 +315,7 @@ Into parts not yet traced (the labels sit on the stubs):
 
 | Name | Layer | Where | To |
 |---|---|---|---|
-| cdp3_k_c | metal | x 8327, y 9150, going up | gate 2 of the NAND; source above not followed |
+| g_eq_r14 | metal | x 8327, y 9150, going up | gate 2 of the NAND; source above not followed |
 | cdp3_bl_c1 | metal | x 7880, y 9150, going up (output of the NAND) and x 8076, y 9150, going up (line e of c1) | logic beside row A |
 | cdp3_k_a | metal | stub at (8290,9150-9178); and x 7772, y 10150 | not followed |
 | cdp3_g_cN (N 2..7) | metal | x 9731 + 390 (N-5), y 8790 | row A cell |
@@ -362,14 +362,14 @@ Into parts not yet traced (the labels sit on the stubs):
   `cdp4`'s slice s0 (its Ambiguity 12). Both metal shots show a bright centre about 12-15 px across in a
   dark ring at (8557,8068); c3's track end is plain. Neither stripped shot shows a pit there (clean shot
   200/174/135, flat), while the known contacts (8712,8757) and (8632,8178) do. Read as no contact by the
-  tracer and the reviewer; a contact would short `cdp3_g_c2` to `cdp3_k_c`. The tab is drawn, no contact.
+  tracer and the reviewer; a contact would short `cdp3_g_c2` to `g_eq_r14`. The tab is drawn, no contact.
 
 ## Not done
 
 - (Done 2026-11-19: row A, y 8040-8830, and what the notes called row I, which is `cdp4`'s comparator
   row, traced there in its run 3. The items below on the row A cell and row I are superseded by "Row A"
   under Logic.) Left from row A: whether the bit lines join `cdp2`'s bus lines at y 8040 (drawn to y 8040,
-  not examined above it); the logic beside row A (x 7600-8300, y 8040-8800), through which `cdp3_k_c`'s
+  not examined above it); the logic beside row A (x 7600-8300, y 8040-8800), through which `g_eq_r14`'s
   thin metal only passes.
 
 - Row A cell (c2..c7, y about 8400-8790, cut by the top edge): not a copy of `cdp3_reg` in
@@ -439,7 +439,7 @@ Into parts not yet traced (the labels sit on the stubs):
   left bus field, and `bc1`'s row D data line of the same order (c2 to `cdp3_g_c2`). So line g is what
   `cdp4`'s 6-bit latch row D latches on `cdp4_ld6`; believed an output of the row A cell, not "a line in
   from the west".
-- `cdp3_k_b` ("in", gate 1 of the NAND beside row C): its row y 9450 ends west on a pad (7554,9450)
+- `bus_eq_r15` ("in", gate 1 of the NAND beside row C): its row y 9450 ends west on a pad (7554,9450)
   whose metal track runs south on x 7555 to a contact (7555,11118) on a diffusion pad; the diffusion
   runs east under column 0's VSS rail at y 11092-11127 (`busl`, piece `kb`; not drawn in `cdp3`). That
   diffusion is the net's only possible driver drawn so far.
@@ -450,7 +450,7 @@ Into parts not yet traced (the labels sit on the stubs):
 
 - Row H's write line ("runs on east past x 10990 ... without a contact") ends on a pad with a metal contact at (11243,10705) on the write strobe of R13 (`regs` run 1, firm): **row H is R13**. The line into row A's six large cells is R14's write strobe (firm), and row C's write line is R12's (marked: one `?M` on the way).
 - The gate column x 7460-7800 ("about six units with loads"): below `eof`'s `g7700` there are four inverters at a pitch of 130 (U1 y 7940-8060, U2, U3, U4); U2-U4 are drawn by `eof` (run 12, piece `d3982`: three inverters in series, `tl3_w3982` = NOT NOT NOT `lc1_w7928`); U1 is not drawn.
-- `cdp3_k_b` comes from a diffusion band at (7600, 11092-11127) under column 0's VSS rail (`busl` run 6), undrawn here.
+- `bus_eq_r15` comes from a diffusion band at (7600, 11092-11127) under column 0's VSS rail (`busl` run 6), undrawn here.
 - `cdp3_gate_e` and `cdp3_gate_f` enter from the west on pads (6730,10055) and (6730,10317), each with a track from the south (`regs` run 3); believed the read selects of R12 and R13 (two open joins through the left bus field): rows E and F are then the read gates of R12 and R13.
 
 ## Review
@@ -488,5 +488,5 @@ Round 1: no findings that change a connection.
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
 - "Row I (y 11050-11200+) ... not traced" and Not done: it is the top of `cdp4`'s comparator row (the bus lines against R15), traced in `cdp4` run 3; lines e and f pass through it with no contact. The uncertain metal pieces of the bit lines and line f at y 11048-11200 were removed from `trace/cdp3.txt` (`cdp4` draws the same metals firm; `tools/sameconn.py`: connections identical).
-- `cdp3_k_b` ("in"): its driver is `cdp4`'s comparator: `cdp3_k_b` = NOR of the eight "not equal" nodes `cdp4_xr_s#_ne`.
+- `bus_eq_r15` ("in"): its driver is `cdp4`'s comparator: `bus_eq_r15` = NOR of the eight "not equal" nodes `cdp4_xr_s#_ne`.
 - Ambiguities, "A gate driving a bit line" (reading (a), the `?B` at 8081-8105 x 9221-9254): the NAND's output is extracted on `cdp3_bl_c1`, which is now known to run on south as `cdp4`'s in track of slice 1, the data line of R15's latch, and both NAND inputs are the two comparators' match lines. A gate output on a register's data line adds to the doubt on reading (a); the box is to be read again (the master list's row `cdp3` (continue)).

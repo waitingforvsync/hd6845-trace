@@ -569,7 +569,7 @@ P 7868,9325:7890,9432                 # ... down the left side ...
 P 7868,9423 x8348 w=17                # ... and east along y 9423 to a contact on the x 8327 line
 C 8335,9428
 M 8327,9150 y9442 w=26                # x 8327 line: comes down from above the region shown
-N M 8327,9160 cdp3_k_c
+N M 8327,9160 g_eq_r14
 # --- load: strip from the output east under the poly block to the VCC contact
 D 8055,9248:8215,9273
 D 8148,9250:8212,9300
@@ -594,7 +594,7 @@ M 7880,9150 y9242 w=22                # upper piece: runs on up past y 9150
 # --- gate 1 input: poly from the west edge along y 9450, contact, metal bar, up the lower piece
 # of the x 7880 line to the pad of gate 1
 P 7600,9450 x7785 w=18
-N P 7610,9450 cdp3_k_b
+N P 7610,9450 bus_eq_r15
 C 7765,9448
 M 7752,9451 x7892 w=22
 M 7880,9285 y9462 w=22
@@ -702,7 +702,7 @@ C 10745,8443 s=24x40
 D 10722,8608:10751,8782
 C 10745,8637 s=28x40
 # west end of the match line: the band ends in a buried contact box under no metal; a poly
-# south to a pad, whose contact starts the thin metal x 8336 down to the NAND's gate 2 (cdp3_k_c)
+# south to a pad, whose contact starts the thin metal x 8336 down to the NAND's gate 2 (g_eq_r14)
 D 8330,8085:8375,8110
 D 8330,8098:8368,8120
 P 8333,8100:8350,8195

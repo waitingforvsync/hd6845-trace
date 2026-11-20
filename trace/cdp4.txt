@@ -503,7 +503,7 @@ B 7731,13910:7759,13937
 # lines with R15. Per slice (cell cdp4_xr): nor = NOR(bus, q) and ne = NOR(nor, bus AND q)
 # = bus XOR q, where bus is the slice's bus-tap metal (cdp4_bus_sK) and q the poly that
 # comes up from the R15 latch below. ne gates a wide pull-down (cell cdp4_xpd; s0's is
-# shorter and drawn by hand) on a diffusion wire through the row, cdp3_k_b, whose load
+# shorter and drawn by hand) on a diffusion wire through the row, bus_eq_r15, whose load
 # stands east of s0 and which leaves west by busl's pad at (7555,11118).
 # ======================================================================
 @cell cdp4_xr tag=s2
@@ -596,7 +596,7 @@ D 7766,11074:7788,11114              # a tab of the line up under the top end of
 P 7625,11138:7822,11162
 P 7802,11138:7822,11228
 P 7673,11205:7822,11228
-N D 7620,11112 cdp3_k_b
+N D 7620,11112 bus_eq_r15
 # the load of the match line, east of s0: VCC contact under a pad of the rail, gate tied
 # to the line by a buried contact on its head
 D 7838,11160:7968,11228

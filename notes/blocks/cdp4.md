@@ -20,7 +20,7 @@ extraction is 2380 nets, 4369 transistors, 0 errors, 0 warnings. See "Corner gat
 Run 3 (2026-11-19 21:27 -0600): **the upper half of row R1** (y 11050-11492; 65 transistors, no
 uncertain item): **the comparator of the eight bus lines `cdp4_bus_s0`..`s7` with R15.** Per slice an
 exclusive-OR of the bus line with the R15 latch's `q`, whose output gates a wide pull-down on one
-diffusion wire through the row; the wire has one load east of s0 and is `cdp3_k_b`, the net `busl`
+diffusion wire through the row; the wire has one load east of s0 and is `bus_eq_r15`, the net `busl`
 followed from the row's west end to gate 1 of the NAND beside `cdp3`'s row C. With every file loaded:
 2390 nets, 4437 transistors, 0 errors, 0 warnings. See "Row R1 upper" under Logic.
 
@@ -236,7 +236,7 @@ its north and east: one transistor of W about 255. The pocket joins the VSS box 
 rail contact (8400,11197)) through the gap between the rail and the in track. The leg runs on south as
 poly B's east end. In s0 poly A is shorter (x 7625-7822) and its leg (x 7802-7822) lies on field: W 145.
 
-    cdp3_k_b = NOR(cdp4_xr_s0_ne, ..., cdp4_xr_s7_ne)        high when all eight bus lines equal R15's q
+    bus_eq_r15 = NOR(cdp4_xr_s0_ne, ..., cdp4_xr_s7_ne)        high when all eight bus lines equal R15's q
 
 - **Load**, in the open ground east of s0: a diffusion (7838-7968, 11160-11228) from a VCC contact
   (7850,11190), under a pad of s0's VCC rail, east under a poly gate (x 7903-7945) to a strip
@@ -255,9 +255,9 @@ the chip-2 stripped shot on the composite: field 0 or negative, diffusion and po
 (columns x 8445, 8489, 8533, 8583, 8666; the numbers are in `cache/scratch/cdp4/survey.md`).
 
 **Believed, not traced**: the eight bus lines are address bits (`busl`: each ends on a row of the left
-array, which holds the 14-bit address counter), R15 is the cursor's low byte, so `cdp3_k_b` would be
+array, which holds the 14-bit address counter), R15 is the cursor's low byte, so `bus_eq_r15` would be
 "address low byte equals cursor low byte", and the NAND in `cdp3` would combine it with the high six bits
-compared in `cdp3`'s row A (`cdp3_k_c`, not followed). Which bus line is which address bit, and whether
+compared in `cdp3`'s row A (`g_eq_r14`, not followed). Which bus line is which address bit, and whether
 `q` is the latch's true or inverted sense, are not established here (the row C latch notes give the
 cell's senses).
 
@@ -327,7 +327,7 @@ islands are closed curves inside it, so they are the other class.
 | `cdp4_a_s2`..`s7` = `cdp3_f_c2`..`c7` | metal | x 8511 + offset, y 11048 (the end of `cdp3`'s line f, y 11052) | from `cdp3`'s row A | selector input a (6 bits); crosses row R1 with no contact (run 3) |
 | (bus tap) | metal | x 8556 + offset, top end y 11062 | inside | `cdp4_bus_sK` up to the comparator's two gate polys (run 3) |
 | `cdp3_bl_c0`..`c7` (the in tracks of s0..s7) | metal | x 8466 + offset, y 11048 (the end of `cdp3`'s bit line) | from `cdp3` | data into the R15 latch; crosses row R1 upper with no contact (run 3) |
-| `cdp3_k_b` | diffusion | x 7600, y 11095-11127 (`busl`'s band ends there) | driven inside | the comparator's match line, out to `cdp3`'s NAND (run 3) |
+| `bus_eq_r15` | diffusion | x 7600, y 11095-11127 (`busl`'s band ends there) | driven inside | the comparator's match line, out to `cdp3`'s NAND (run 3) |
 | `wr_r15` | poly | y 11837; believed to cross x 7600 (ends not examined) | from outside | R1 latch strobe |
 | `cdp3_g_c2`..`s6` | metal | x 8073, 8465, 8855, 9245, 9635, 10025 at y 14059 (drawn end; continues down) | from outside (below) | data into the row D latch |
 | `cdp4_ld6` | metal | x 7947, y 13840 (drawn end; continues down) | from outside (below) | row D latch strobe |
@@ -407,12 +407,12 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
    shots show the track bright at y 11078-11088 between dark bars (y 11060-11076, 11091, 11100). Read as
    no contact by the tracer and by the reviewer: the bright stretch is the full track width, the clean shot
    has no hole (`tools/textmap.py 7752 11056 7800 11112 3 --acid`), and a contact would short
-   `cdp4_bus_s0` to the comparator's output `cdp3_k_b`. Not conclusive: `busl`'s contact (7555,11118) on
+   `cdp4_bus_s0` to the comparator's output `bus_eq_r15`. Not conclusive: `busl`'s contact (7555,11118) on
    the same line shows no hole in the clean shot either. The tab is drawn; no contact is drawn.
 
 ## Not done
 
-- (Done, run 3: row R1 upper.) Left from it: `cdp3_k_c`, the NAND's other input (not followed); which
+- (Done, run 3: row R1 upper.) Left from it: `g_eq_r14`, the NAND's other input (not followed); which
   address bit each bus line is; the three thin vertical metals east of the ninth VSS rail (x 10790-10910).
 - Ends of `wr_r15` (poly, y 11837).
 - Right of x 10600: the n lines' contacts beyond x 10850, thin vertical metals at
@@ -520,5 +520,5 @@ Round 1: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
-- Row R1 upper, "Believed, not traced" and Not done ("`cdp3_k_c`, the NAND's other input (not followed)"): followed by `cdp3` (row A): it is the match line of the comparator of line g (`cdp3_g_c#`) with R14.
+- Row R1 upper, "Believed, not traced" and Not done ("`g_eq_r14`, the NAND's other input (not followed)"): followed by `cdp3` (row A): it is the match line of the comparator of line g (`cdp3_g_c#`) with R14.
 - The strobe polys `wr_r15` (y 11837), `cdp4_ld` and `cdp4_ld6` are drawn as straight lines; in `cdp3`'s copy of the same latch cell the strobe `wr_r14` is a serpentine (field under each bit line and a-track metal at the band's height, the band joined through each cell's loop). Probably the same here; geometry only as far as seen (Re-read item R48).

@@ -100,9 +100,9 @@ cdp3_g_c7    M  7397-7411,14050    ?   joins bc1's metal x 7404 onto its line 6 
 # piece sr (run 6): tc2_sr_g (= the wire `lc1` called w7908) from eofw's corner pad down the field
 tc2_sr_g     M  7460-7474,8795     ?   onto eofw's metal south of the corner pad (7446,8732) (eofw's port there: tc2_sr_g, an alias)
 tc2_sr_g     M  7180-7194,15000    ?   the track goes on south in bc1's ground: to y 15482, west to x 7103, south; follower ends (7100,16279), not read
-# piece kb (run 6): cdp3_k_b's track
-cdp3_k_b     P  7600,9438-9460     out cdp3's row y 9450 (gate 1 of the NAND beside its row C), drawn there from x 7600
-cdp3_k_b     D  7600,11092-11127   in  the diffusion band goes on east under column 0's VSS rail into cdp3's ground (not drawn)
+# piece kb (run 6): bus_eq_r15's track
+bus_eq_r15     P  7600,9438-9460     out cdp3's row y 9450 (gate 1 of the NAND beside its row C), drawn there from x 7600
+bus_eq_r15     D  7600,11092-11127   in  the diffusion band goes on east under column 0's VSS rail into cdp3's ground (not drawn)
 # piece n2 (run 7): bd1_n2's track between eof's two ports
 bd1_n2       M  6704-6718,15000    in  onto eof's metal from the bottom bus field (piece n2w): the output of bd1's latch on R4's match
 bd1_n2       M  6769-6783,10400    out onto eof's metal north (piece n2n, then labelled as an open join): to the inverter that makes rcs_e3

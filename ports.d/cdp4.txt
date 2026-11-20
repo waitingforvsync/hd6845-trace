@@ -6,7 +6,7 @@ rsel12_buf_u  P      7550,13873       in   the group's row 4; west of x 7550 it 
 rsel16_buf    P      7550,13961       in   busl's row end; gate 5
 rsel15_buf    P      7550,14004       in   busl's row end; gate 6 (the row steps south to y 14028 at x 7552-7580)
 cdp4_rst      P      7532,13916       out  the NOR's output: buried contact of this poly in the box (7537-7582,13903-13940)
-cdp3_k_b      D      7600,11109       out  the comparator's match line (NOR of the eight slices' not-equal nodes; load east of s0) onto busl's band and pad (7555,11118)
+bus_eq_r15      D      7600,11109       out  the comparator's match line (NOR of the eight slices' not-equal nodes; load east of s0) onto busl's band and pad (7555,11118)
 cdp3_bl_c0    M      7687,11048       in   cdp3's bit line = the in track of slice s0, down to the R15 latch
 cdp3_bl_c1    M      8076,11048       in   the same, s1
 cdp3_bl_c2    M      8466,11048       in   the same, s2

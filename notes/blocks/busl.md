@@ -100,7 +100,7 @@ wiring only, no uncertain items:
   staircase (west along y 13680 to x 7145), three more jogs (y 14176, 14285, 14588) and out at
   (7187,15000). No pad or contact on the way. It runs on in `bc1`'s ground (seen at 1x, not drawn):
   south to y 15482, west to x 7103, south; the follower ends at (7100,16279).
-- **`cdp3_k_b` comes from a diffusion at the foot of `cdp3`'s column 0** (piece `kb`). The poly row
+- **`bus_eq_r15` comes from a diffusion at the foot of `cdp3`'s column 0** (piece `kb`). The poly row
   y 9450 (`cdp3`: the input of gate 1 of the NAND beside its row C) ends west of x 7600 on a pad
   (7554,9450); the pad's metal track runs 1,670 px south at x 7555 with no pad or contact and ends on a
   contact (7555,11118) on a diffusion pad, from which a diffusion band (y 11095-11127) runs east under
@@ -492,7 +492,7 @@ Piece `kb` (pad contacts with `tools/busl_padc.py` in both metal shots; the row 
 
 | Net | Row at x 7600 (y) | Pad at its west end | Track | South end |
 |---|---|---|---|---|
-| `cdp3_k_b` | 9449 (poly, 24 px between its edge lines) | (7554,9450) | x 7555 south, 1,670 px | contact (7555,11118) on a diffusion pad (7538-7584, 11096-11144); a diffusion band y 11095-11127 east to x 7600 and on under the VSS rail |
+| `bus_eq_r15` | 9449 (poly, 24 px between its edge lines) | (7554,9450) | x 7555 south, 1,670 px | contact (7555,11118) on a diffusion pad (7538-7584, 11096-11144); a diffusion band y 11095-11127 east to x 7600 and on under the VSS rail |
 
 - The north pad (view `b_ends.png`, tile 1, 3x, both metal shots and the clean shot): a ring with a
   bright centre on the widened west end of the row; field west of it; no metal north of it
@@ -634,7 +634,7 @@ driver of `tc2_sr_g`, which no package has found, is there (the net's three draw
 `eof`'s gate and latch D's enable, are all gates). The reading rests on Ambiguity 13 (no contact
 where the track crosses row y 13744).
 
-Piece `kb`. Traced (no uncertain item): `cdp3_k_b`, gate 1 of the NAND beside `cdp3`'s row C, is one
+Piece `kb`. Traced (no uncertain item): `bus_eq_r15`, gate 1 of the NAND beside `cdp3`'s row C, is one
 net with a diffusion pad at (7555,11118) and the band east of it. Not traced: what that diffusion is
 (a source or drain under or east of column 0's VSS rail, `cdp3` (continue)); it is the only drawn end of
 the net that can drive it.
@@ -676,8 +676,8 @@ not known: named for their place (`busl_x6820`, `busl_x6906`).
 | `cdp3_g_c2` .. `cdp3_g_c7` | M | y 14050, x 7189, 7231, 7274, 7317, 7360, 7404 (14 px wide) | as above | each joins `bc1`'s metal (drawn there from y 14040) onto the contact of its line 1 .. 6 (`cdp3_g_c2`, `cdp3_g_c3`, `cdp3_g_c4` .. `cdp3_g_c7`) |
 | `tc2_sr_g` | M | (7460-7474,8795), 14 px wide | not known | onto `eofw`'s metal south of the corner pad (7446,8732) (`M 7466,8745 y8800`; `eofw`'s port there is named `tc2_sr_g`, an alias) |
 | `tc2_sr_g` | M | (7180-7194,15000), 14 px wide | not known (believed in: driven in `bc1`'s group) | the track goes on south in `bc1`'s ground: to y 15482, west to x 7103, south; the follower ends at (7100,16279) (not read) |
-| `cdp3_k_b` | P | x 7600, y 9438-9460 (22 px wide) | out (driven from the diffusion at its south end; received by `cdp3`'s gate 1) | `cdp3`'s row y 9450, drawn there from x 7600 |
-| `cdp3_k_b` | D | x 7600, y 11092-11127 | in | the diffusion band goes on east under column 0's VSS rail (x 7600-7646) into `cdp3`'s ground (not drawn) |
+| `bus_eq_r15` | P | x 7600, y 9438-9460 (22 px wide) | out (driven from the diffusion at its south end; received by `cdp3`'s gate 1) | `cdp3`'s row y 9450, drawn there from x 7600 |
+| `bus_eq_r15` | D | x 7600, y 11092-11127 | in | the diffusion band goes on east under column 0's VSS rail (x 7600-7646) into `cdp3`'s ground (not drawn) |
 | `bd1_n2` | M | (6704-6718,15000), 14 px wide | in (driven by `bd1`'s latch) | onto `eof`'s metal from the bottom bus field (piece `n2w`, `M 6711,15000 ..`) |
 | `bd1_n2` | M | (6769-6783,10400), 14 px wide | out | onto `eof`'s metal north (piece `n2n`, `M .. 6775,10400`, then labelled as an open join): to `tl5`'s bus line x 5412 and the inverter that makes `rcs_e3` |
 | `busl_x6820` | M | (6813-6827,10400) | not known | the track goes on north; the follower ends at (6817,9988), not read |
@@ -785,7 +785,7 @@ not known: named for their place (`busl_x6820`, `busl_x6906`).
    which dirt on one chip does not explain. Views `sr_c1.png` (4x), `sr_c3.png` (7x), `sr_c4.png` (the
    two rows under thirty tracks, 1.5x). Would settle it: the far ends of row y 13744 (if `tc2_sr_g` were
    on it, the row would need no other driver) and the corner gate group (`cdp4` (continue)).
-14. **The south end of `cdp3_k_b`'s track** (piece `kb`): the pad (7538-7584, 11096-11144) is read as
+14. **The south end of `bus_eq_r15`'s track** (piece `kb`): the pad (7538-7584, 11096-11144) is read as
    diffusion from its plain tan colour under the pad's metal in the clean shot, and the band east of it
    as the same diffusion from its two edge lines and the tan under the rail's edge. In the open gap
    between the pad's metal and the rail (x 7585-7597) the band has no colour of its own (clean shot
@@ -1123,5 +1123,5 @@ Round 1: no findings that change a connection.
 
 - Ambiguity 9 and the port of `cdp4_rst` ("read as a buried contact onto its node diffusion, not drawn"): drawn in `trace/cdp4.txt` (`cdp4` run 2) as that reading; AMB-038 is resolved as (a). The tongue, buried contact and diffusion (`D 7540,13905:7590,13940`) reach about 20 px into this region and overlap the end of the poly `P 7462,13906:7532,13927`. The `?M 7556,13895 y13953` is still not seen in either metal shot.
 - The undrawn rows y 13744 and y 13852 end east of x 7550 as gates 2 and 4 of the NOR that makes `cdp4_rst` (ports `rsel13_buf_u` (7550,13751), `rsel12_buf_u` (7550,13873) in `ports.d/cdp4.txt`): draw the rows onto them.
-- Piece `kb`: `cdp3_k_b`'s driver is `cdp4`'s comparator of the bus lines with R15 (`cdp4` run 3); the diffusion band east of (7600,11109) is its match line.
+- Piece `kb`: `bus_eq_r15`'s driver is `cdp4`'s comparator of the bus lines with R15 (`cdp4` run 3); the diffusion band east of (7600,11109) is its match line.
 - Piece `lc9`, "row ... 14784 to (7835,14784)": the pad's contact is at (7837,14784) and the pad's poly reaches x 7863 (`eof`, piece `ck6`). The row is driven from the east: `lc3_w9947` = NOT `eof_w15127` (`eof` run 15), so the port at (7550,14784) is an input of this field.

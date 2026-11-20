@@ -2110,7 +2110,7 @@ was merged (d911059). Six handoffs, applied together.
 - `busl` run 5 (piece `d6`): **line g of `cdp3`'s row A cells is the data of `cdp4`'s 6-bit latch row
   D** (`cdp3_g_c2`..`c7` onto `bc1`'s lines 1-6; firm).
 - `busl` run 6 (pieces `sr`, `kb`): **`tc2_sr_g` runs from `eofw`'s corner pad down the whole field
-  into `bc1`'s ground** (no tap; its driver is expected there); `cdp3_k_b` comes from a diffusion under
+  into `bc1`'s ground** (no tap; its driver is expected there); `bus_eq_r15` comes from a diffusion under
   `cdp3`'s column 0 rail. Review: no finding that changes a connection.
 
 **Checks:** overlays of `isrc4`'s join on row y 14914 at 3x and of `n2out`'s links at 4.5x, metal and
@@ -2374,8 +2374,8 @@ What they establish (from the tracers' notes; marks as there):
   (run 22; through three uncertain stretches of a thin metal: an alias), and the NOR's output gates a
   unit of three wide pull-downs under column A's rail (run 23; its east side is read, not drawn).
 - **The six large cells are R14's latch under a comparator** (`cdp3` row A, 91 transistors, firm): line g
-  (`cdp3_g_c#`) is compared with R14, match line `cdp3_k_c`. **`cdp4`'s row R1 upper is the comparator of
-  the eight bus lines with R15** (run 3, 65 transistors, firm), match line `cdp3_k_b`. The NAND beside
+  (`cdp3_g_c#`) is compared with R14, match line `g_eq_r14`. **`cdp4`'s row R1 upper is the comparator of
+  the eight bus lines with R15** (run 3, 65 transistors, firm), match line `bus_eq_r15`. The NAND beside
   `cdp3`'s row C takes both: NOT((`cdp4_bus_s#` = R15) AND (`cdp3_g_c#` = R14)). Believed: the cursor
   match, active low; where its output goes rests on an uncertain box.
 - **`cdp4_rst` = NOR of six select rows** (`cdp4` run 2, 7 transistors, firm): four are the read selects

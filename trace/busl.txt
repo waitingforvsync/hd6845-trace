@@ -487,7 +487,7 @@ M 7467,8795 y8910 7209,9168 y13680 x7145 y14176 x7187 y14285 x7231 y14588 x7187 
 N M 7209,11000 tc2_sr_g
 
 # =====================================================================================
-# Piece kb (run 6, 2026-11-19): cdp3_k_b, the poly row y 9450 that trace/cdp3.txt draws from
+# Piece kb (run 6, 2026-11-19): bus_eq_r15, the poly row y 9450 that trace/cdp3.txt draws from
 # x 7600 east to gate 1 of the NAND beside its row C. West of x 7600 the row ends on a pad
 # (7554,9450), 25 px south of the upper arm of d6's line 6; the pad's metal track runs 1,670 px
 # south at x 7555 (the easternmost track of the field, east of d6's line 6) with no pad or
@@ -502,8 +502,8 @@ M 7555,9446 y11122 w=14
 C 7555,11118 s=24x24
 D 7538,11096:7584,11144               # the diffusion pad
 D 7575,11095:7600,11127               # the band east, to the VSS rail's west edge (its north edge rises to y 11092 under the rail)
-N P 7590,9449 cdp3_k_b
-N M 7555,10300 cdp3_k_b
+N P 7590,9449 bus_eq_r15
+N M 7555,10300 bus_eq_r15
 
 # =====================================================================================
 # Piece n2 (run 7, 2026-11-19): bd1_n2, the output of bd1's latch on R4's match (rc_eq_r4),
