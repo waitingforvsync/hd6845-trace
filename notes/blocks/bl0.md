@@ -8,7 +8,7 @@ metal-shot pixels. Evidence: `cache/scratch/bl0/` (`survey.md` holds every measu
 ## Status
 
 Run 9 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 11:40 -0600). One piece of wiring, no transistor, no
-uncertain item: three tracks of the left bus field followed on south of y 15000.
+uncertain item; reviewed (round 11: no findings): three tracks of the left bus field followed on south of y 15000.
 
 - **Piece `w9`** (wiring, 5,200 px).
   - `busl_x6820` (track x 6754): to a pad (6754,16217), under the bus of horizontal metals as a poly column
@@ -901,6 +901,26 @@ y 15800. A correction to the notes of run 2: the tracks east of the bundle are a
 7100 and 7188.
 
 Round 10: no findings.
+
+### Run 9
+
+Round 11 (full review of piece `w9`; fresh Fable 5.2 reviewer; 2026-11-20 11:49 -0600; commit 2ffd23c; images
+`cache/scratch/bl0/review-11/`). Told to suspect: `lc3_e9577`'s strip as diffusion or poly, its
+continuity, a poly crossing it, a join from a crossing track, the row south of the box; the metal at
+every pad's ring on all four sides and each pad as a contact; the two poly columns under the bus and
+whether each is the right one; the joins with `busl`'s tracks at y 15000; the row crossings; the thin
+metal x 6754 south of the bus. Checked with text maps, the two-chip metal test and 15 views at 3-5.5x:
+the three joins with `busl` (one net per name, no break from y 14950); the seven pads (ring and centre
+in both chips; metal only on the claimed sides); the two columns straight from top pad to bottom pad,
+field between columns, nothing under the five metals; the row crossings as bars with no pad; the thin
+metal continuous in chip 2, its candidates chip-1 blemishes; the strip as diffusion in three shots
+against the poly row beside it (chip-2 stripped red minus green +13 against +40; chip-2 metal
+170/133/94 against 165/112/60), continuous from x 4772 to the box, no poly across it, no pad at any
+crossing; no edge line across the poly row y 15401-15425 at the box. Could not check: the 8 px between
+the box and that row by colour; the thin bus metals in chip 1 at high zoom; x 6754 at y 16660-16800 and
+16870-17000 by view (profile and metal test only).
+
+Round 11: no findings.
 
 ## Not done
 
