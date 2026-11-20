@@ -1,26 +1,26 @@
 {
  "who": "Matt Godbolt",
- "generated": "2026-11-20T20:11:18+00:00",
+ "generated": "2026-11-20T23:54:49+00:00",
  "price_source": "Claude API list prices per million tokens, as of 2026-11-03",
  "unpriced_models": [
   "<synthetic>"
  ],
- "responses": 6806,
+ "responses": 6963,
  "first": "2026-11-17T14:25:20.582000+00:00",
- "last": "2026-11-20T20:11:05.352000+00:00",
- "total_cost": 1021.16,
- "review_cost": 415.02,
+ "last": "2026-11-20T23:54:37.405000+00:00",
+ "total_cost": 1058.9,
+ "review_cost": 428.13,
  "tokens": {
-  "input": 14042,
-  "output": 9354985,
-  "cache_write_5m": 17252340,
-  "cache_write_1h": 13147612,
-  "cache_read": 1530314289
+  "input": 14358,
+  "output": 9575547,
+  "cache_write_5m": 17657551,
+  "cache_write_1h": 13939006,
+  "cache_read": 1591323257
  },
  "by_model": {
   "claude-fable-5-2": {
-   "cost": 996.35,
-   "responses": 6100
+   "cost": 1034.09,
+   "responses": 6255
   },
   "claude-sonnet-5-5": {
    "cost": 16.12,
@@ -28,7 +28,7 @@
   },
   "<synthetic>": {
    "cost": 0.0,
-   "responses": 1
+   "responses": 3
   },
   "claude-opus-5-5": {
    "cost": 8.69,
@@ -44,23 +44,23 @@
     "claude-fable-5-2": 1138
    }
   },
+  "(coordination)": {
+   "cost": 195.53,
+   "review_cost": 32.09,
+   "responses": 1662,
+   "models": {
+    "claude-fable-5-2": 954,
+    "claude-sonnet-5-5": 554,
+    "<synthetic>": 3,
+    "claude-opus-5-5": 151
+   }
+  },
   "tc1": {
    "cost": 182.39,
    "review_cost": 80.22,
    "responses": 1052,
    "models": {
     "claude-fable-5-2": 1052
-   }
-  },
-  "(coordination)": {
-   "cost": 173.39,
-   "review_cost": 25.85,
-   "responses": 1584,
-   "models": {
-    "claude-fable-5-2": 878,
-    "claude-sonnet-5-5": 554,
-    "<synthetic>": 1,
-    "claude-opus-5-5": 151
    }
   },
   "tl4": {
@@ -127,6 +127,14 @@
     "claude-fable-5-2": 121
    }
   },
+  "cdp2": {
+   "cost": 15.6,
+   "review_cost": 6.86,
+   "responses": 79,
+   "models": {
+    "claude-fable-5-2": 79
+   }
+  },
   "tlb": {
    "cost": 5.94,
    "review_cost": 2.67,
@@ -156,6 +164,6 @@
   "2026-11-17": 293.55,
   "2026-11-18": 214.26,
   "2026-11-19": 315.68,
-  "2026-11-20": 197.68
+  "2026-11-20": 235.42
  }
 }
