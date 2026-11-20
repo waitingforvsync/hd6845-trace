@@ -4,7 +4,7 @@ Queue row `busl` of `notes/work-packages.md` (written busL until 2026-11-19): th
 left array (`larr`, rows end at x 4780) and the central datapath (`cdp3`, `cdp4`, from x 7600).
 Claimed region: x 4780-7550, y 10400-15000 (the main part; the northern part 6450-7600 x 6750-10400
 is not started). Coordinates are metal-shot pixels; images are in `cache/scratch/busl/`. Wiring only:
-no transistor has been found in the field so far. Ten pieces are drawn: `h8`, `ch1`, `lc9`, `ctl`, `d6`, `sr`, `kb`, `n2`, `x68`, `x69`.
+no transistor has been found in the field so far. Twelve pieces are drawn: `h8`, `ch1`, `lc9`, `ctl`, `d6`, `sr`, `kb`, `n2`, `x68`, `x69`, `r12`, `r13`.
 Pieces `d6`, `sr` and `kb` begin in the northern part (x 7180-7600, y 8795-10400), drawn there as far
 as their pads or, for `sr`, the end of `eofw`'s metal; nothing else of the northern part is.
 
@@ -129,6 +129,36 @@ Run 7 (richtw1's session, Claude Fable 5.2; 2026-11-19 22:30 to 22:56 +0100). Th
   Neither end is in the region (follower: `busl_x6820` from (6817,9988) to (6754,16220);
   `busl_x6906` from (7078,8778) to (6839,16219)). `busl_x6906`'s arm lies for 65 px on the poly row
   y 13375 (`cdp4_bus_s1`'s, piece `ch1`): no contact (below).
+
+Run 8 (richtw1's session, Claude Fable 5.2; 2026-11-20 13:42 to 13:51 +0100). Two pieces, `r12` and
+`r13`, wiring only, no uncertain items (registers lead group; item (2) of the Not done list):
+
+- **The read selects of R12 and R13 cross the field, and each has one tap** (pieces `r12`, `r13`).
+  `regs` had drawn `rsel12_buf` and `rsel13_buf` from `sel`'s buffers to this region's south edge
+  at (6452,14990) and (6494,14990), and two tracks north of y 10400 onto the pads of `cdp3`'s
+  read-gate rows `cdp3_gate_e` and `cdp3_gate_f`; the 4,600 px between were read by the follower and
+  not drawn. Each is one thin metal, the two innermost Ls of the nest that the selects of piece `ctl`
+  continue: `rsel12_buf` north on x 6452, east along y 12984, north on x 6516, east along y 12097,
+  north on x 6690; `rsel13_buf` north on x 6494, east along y 13028, north on x 6560, east along
+  y 12141, north on x 6733. So **`rsel12_buf` is `cdp3_gate_e`** (the gate of the pass transistors that
+  read row C onto bus N) **and `rsel13_buf` is `cdp3_gate_f`** (row H onto bus N): R12 and R13 are read
+  through `cdp3`'s rows E and F, now on drawn geometry with no uncertain item.
+- **Each track has one pad in its lower run, the west end of a poly row into `cdp4`'s corner gate
+  group**: `rsel12_buf` at (6452,13854) on the row y 13852, which runs east under thirty tracks and
+  steps south at x 7528-7550 onto the group's gate row 4 (y 13873, `cdp4`'s `rsel12_buf_u`);
+  `rsel13_buf` at (6495,13744) on the row y 13744, which runs straight into the block of gate row 2
+  (`cdp4`'s `rsel13_buf_u`). With them the extraction gives, firm (`tools/unsure.py --equations`):
+  **`cdp4_rst` = NOR(`rsel12_buf`, `rsel13_buf`, `rsel14_buf`, `rsel15_buf`, `rsel16_buf`,
+  `rsel17_buf`)**: the selector's nodes are released only while one of R12-R17 is being read.
+- The names are gathered by `@alias` (`rsel12_buf` with `rsel12_buf_u`, `cdp3_gate_e`; `rsel13_buf`
+  with `rsel13_buf_u`, `cdp3_gate_f`); the renames are the coordinator's.
+- One crossing is recorded as an ambiguity (15): the track x 6452 over `cdp4_bus_s1`'s row y 13375 is
+  dim and reddish in both chips for 18 px, without pad or ring. And Ambiguity 13 (AMB-039) has its
+  second direction: the row y 13744 has its own driver, by a pad.
+
+Full extraction with run 8: 2,451 nets (main had 2,455: four joins, each wire with its `_u` end and
+its read-gate row), 4,574 transistors, 0 errors, 0 warnings; 907 of 1,347 equations firm. The package
+by itself: 44 nets, 0 errors, 0 warnings.
 
 Full extraction with run 7: 2,379 nets (main had 2,378: two new through lines, one join), 4,351
 transistors, 0 errors, 0 warnings; 849 of 1,279 equations firm, as on main (`rcs_e3` = NOT `bd1_n2`
@@ -568,6 +598,52 @@ south), `x69`'s. What the scan flagged, all looked at (tiles `n2_c2.png`, `n2_c3
   are 40 px west of `n2`'s north run; the metal test at both heights shows the gap
   (`sel_cut.py h 12300`: 6776 w15, no run between 6740 and 6769).
 
+### Pieces `r12`, `r13` (run 8): the read selects of R12 and R13
+
+Method as for `n2`: `tools/follow.py --gap 16` from both ends and from the middle of each run;
+centres by `tools/sel_cut.py h` at fifteen heights and `v` on the four arms; the two-chip metal test
+and the clean shot's hole test on all ten segments (`tools/tl5_tracks.py v/h`, kept in
+`cache/scratch/busl/r8_scan.txt`); pads by `tools/busl_padc.py`; rows on views of both stripped shots.
+
+| | lower run | arm 1 | middle run | arm 2 | upper run | tap (contact) | row |
+|---|---|---|---|---|---|---|---|
+| `r12` `rsel12_buf` | x 6452, y 15000-12984 | y 12984 | x 6516 | y 12097 | x 6690 to y 10400 | (6452,13854); chip 2 (6453,13855), chip 1 (6451,13853) | y 13852, 20 px, from the pad to x 7550; step south at x 7528-7550 to y 13873 |
+| `r13` `rsel13_buf` | x 6494, y 15000-13028 | y 13028 | x 6560 | y 12141 | x 6733 to y 10400 | (6495,13744) in both chips | y 13744, 20 px, from the pad to `cdp4`'s block (7550-7578, 13732-13770) |
+
+- **The two taps are contacts** (views `r8_taps_a.png`, `r8_taps_b.png`, 5x, four shots): each has the
+  metal widened to a round pad with a dark ring and a bright centre in both metal shots, a poly pad
+  about 45 x 34 px with a hole in the clean shot (`tl5_tracks`: red minus green down to 8 at
+  (6452,13854), (6494,13750)) and a pitted box in the chip-2 stripped shot. The follower stops on
+  `r12`'s pad from both sides (trap 32: the metal goes on through it; the two-chip test shows the two
+  halves of the ring, y 13831-13849 and 13858-13873, and metal beyond) and runs through `r13`'s. Each
+  pad's poly leaves east only: pink field west, north and south of both pads in the clean shot.
+- **The rows are poly** (trap 39; `tools/px.py pt` in open gaps between tracks: chip-2 metal blue
+  42-65, chip-1 green 71-113, at (6516,13744), (6730,13744), (7100,13744), (6473,13852), (6516,13852),
+  (7100,13852), (7538,13852)) and continuous from pad to end in both stripped shots (views
+  `r8_rows_w.png`, `r8_rows_e.png`, 2.1x, all traces outlined): no pad, no widening, no second end.
+  The dark dots on them in the clean shot are at the gaps between tracks (trap 2).
+- **Row y 13852's east end is a Z** (views `r8_east_a.png` 5x, `r8_step.png` 8x): the row (y 13842-
+  13862) ends at x 7550 and the poly goes on south from x 7528-7550 into the row y 13862-13884 that
+  `cdp4` draws from x 7545 east. In the open column x 7538 the chip-2 metal shot is poly colour
+  without a break from y 13845 to 13881 (`tools/px.py col 7538 13836 13890 3`: 143-157/125-138/51-58,
+  the dark edges at y 13839-13842 and 13884-13887). Row y 13744 meets `cdp4`'s block without a step.
+- **Two arms**: y 12097 lies for 170 px on `cdp4_bus_s2`'s poly row (piece `ch1`, y 12095); no pad,
+  no ring, no dark stretch in either chip and no hole in the clean shot along it (`tl5_tracks.py h
+  12097 6530 6675`; views `r8_arms_m.png`, `r8_arms_c.png`, 4.6x; one dark dot at (6625,12086) on the
+  row's north edge in the clean shot only): two nets (traps 13, 15). The arm y 12141 lies over field
+  (pink in the clean shot); `cdp4_bus_s1`'s row ends at its pad (7510,12137), far east of it.
+- **Metal test**: one stretch of 14 px or more without metal in both chips that is not a pad's ring:
+  (6452,13372-13389), 18 px (Ambiguity 15); then (6494,13618-13633) 16 px and (6690,10622-10635)
+  14 px. Stretches of 20 px or more where one chip alone fails: (6452,14140-14169), (6452,14289-14322),
+  (6494,13614-13633), (6494,14550-14582), (6690,11861-11881), (6732,11078-11098), (6732,12035-12054),
+  and (6652-6674,12097) on the arm. Clean-shot hole candidates besides the taps: (6494,14786) (the row
+  y 14784 is dark red-brown there under every track). All looked at in four shots (tiles `r8_c1.png`,
+  `r8_c2.png`, 3.6x): in each the other chip shows the metal bright and of the same width, no ring,
+  no pad. The follower's candidates (6494,14914), (6497,14774) are the crossings of `rst_a`'s and
+  `lc3_w9947`'s rows: plain.
+- Overlays: `r8_o1.png` (taps, 4.3x, metal and clean), `r8_o2.png` (lower corners), `r8_o3.png`
+  (arms), `r8_o4.png` (east ends, all traces).
+
 ## Logic
 
 Wiring only. Traced: the eight joins above (no uncertain item on any). From `cdp3`'s notes:
@@ -652,6 +728,14 @@ at `tl4`'s inverter).
 Pieces `x68`, `x69`. Traced: two through lines with no connection in the region. What they are is
 not known: named for their place (`busl_x6820`, `busl_x6906`).
 
+Pieces `r12`, `r13`. Traced (no uncertain item of this package): `rsel12_buf` (`sel`'s buffered select
+of R12, drawn by `regs` to the field's south edge) is one net with `cdp3_gate_e` and with gate row 4 of
+`cdp4`'s corner NOR; `rsel13_buf` is one net with `cdp3_gate_f` and with gate row 2. So R12 is read
+through `cdp3`'s row E (row C onto bus N) and R13 through row F (row H onto bus N), and **`cdp4_rst` =
+NOR(`rsel12_buf`, `rsel13_buf`, `rsel14_buf`, `rsel15_buf`, `rsel16_buf`, `rsel17_buf`)** (firm).
+Believed: `cdp4_rst` holds the nodes of `cdp4`'s selector low except during a read of one of the six
+readable address registers.
+
 ## Ports
 
 | Name | Layer | Where | Direction | What |
@@ -684,6 +768,10 @@ not known: named for their place (`busl_x6820`, `busl_x6906`).
 | `busl_x6820` | M | (6747-6761,15000) | not known | on south into `bl0`'s ground; the follower ends at (6754,16220), not read |
 | `busl_x6906` | M | (6899-6913,10400) | not known | on north; the follower ends at (7078,8778) (candidates (6905,10057), (6908,9798)), not read |
 | `busl_x6906` | M | (6834-6848,15000) | not known | on south into `bl0`'s ground; the follower ends at (6839,16219), not read |
+| `rsel12_buf`, `rsel13_buf` | M | (6445-6459,15000), (6487-6501,15000), 14 px wide | in (driven by `sel`'s buffers) | onto `regs`' metals from the bottom bus (`M 6452,16168 y14990`, `M 6494,16210 y14990`) |
+| `rsel12_buf`, `rsel13_buf` | M | (6683-6697,10400), (6726-6740,10400), 14 px wide | out | onto `regs`' metals north to the pads of `cdp3_gate_e` (row y 10055) and `cdp3_gate_f` (row y 10316) |
+| `rsel13_buf` | P | (7550, 13734-13754) | out | into the block of gate row 2 of `cdp4`'s NOR `cdp4_rst` (`cdp4`'s name there: `rsel13_buf_u`) |
+| `rsel12_buf` | P | (7550, 13862-13884) | out | onto gate row 4 of the same NOR (`cdp4`'s name: `rsel12_buf_u`), after the step south at x 7528-7550 |
 
 ## Ambiguities
 
@@ -785,6 +873,10 @@ not known: named for their place (`busl_x6820`, `busl_x6906`).
    which dirt on one chip does not explain. Views `sr_c1.png` (4x), `sr_c3.png` (7x), `sr_c4.png` (the
    two rows under thirty tracks, 1.5x). Would settle it: the far ends of row y 13744 (if `tc2_sr_g` were
    on it, the row would need no other driver) and the corner gate group (`cdp4` (continue)).
+   Run 8 adds the second direction: the row y 13744 is `rsel13_buf`'s, driven through a pad of its own
+   at (6495,13744) (piece `r13`), and ends in gate row 2 of `cdp4`'s NOR. A contact at (7145,13738)
+   would short the enable of latch D to R13's read select; reading (a) stands, and nothing in these
+   photos can add to it.
 14. **The south end of `bus_eq_r15`'s track** (piece `kb`): the pad (7538-7584, 11096-11144) is read as
    diffusion from its plain tan colour under the pad's metal in the clean shot, and the band east of it
    as the same diffusion from its two edge lines and the tan under the rail's edge. In the open gap
@@ -796,6 +888,26 @@ not known: named for their place (`busl_x6820`, `busl_x6906`).
    metal shot). What is under the rail is `cdp3` (continue)'s; nothing drawn depends on it yet.
 6. **Which end drives `cdp4_bus_s#`**: not decidable in the field (it holds no transistor). Settled by
    `larr`'s rows east of x 3900 and `cdp4`'s row R1 upper.
+15. **The track of `rsel12_buf` over the poly row y 13375, at (6452,13372-13389)** (piece `r12`; the row
+   is `cdp4_bus_s1`'s channel-2 piece, piece `ch1`). Of the same kind as 13: neither metal shot passes
+   the metal test for 18 px along the track, the full height of the row. In both chips the track's
+   surface there is reddish and dim (`tools/px.py col 6452 13356 13396 4`: chip 2 137/81/28 and
+   133/85/38 at y 13376-13380, chip 1 130/54/27 and 133/108/54; the track x 6494 over the same row is
+   206-212/159-171/79-89), which is the colour of the open row beside the track ((6468,13374):
+   136/97/48). Readings: (a) a plain crossing with a mark on the metal in both chips; (b) a contact
+   onto the row, which would put R12's read select on a data line of latch row C; (c) a break in the
+   metal. Working assumption: (a). For it: the track's two edge lines run through the crossing
+   unbroken in both metal shots (`tools/px.py row 13374 6438 6468 3`: dark at x 6441 and x 6462 at
+   every height from 13370 to 13382), which a break would interrupt; neither the metal nor the row is
+   widened, and this track's real tap 480 px south has a pad 45 px wide with a ring, a bright centre
+   and a hole; the clean shot is plain protected poly under the track (222/165/121 against
+   219/162/124 under x 6494), no hole; both stripped shots read like the neighbouring crossings; a
+   break would leave `cdp3_gate_e` with no driver, and a contact would short a select to a data line.
+   Against: both chips at the same spot. On chance (rough): one chip alone fails the test for 20 px or
+   more at 8 places on these two tracks and at 20 on run 7's three, of about 500 row crossings (about
+   3% a chip), so among the field's several thousand crossings a few where both chips happen to fail
+   are to be expected; this is the second found. Views `r8_13380_a.png`, `r8_13380_b.png` (4.5x), `r8_x13375.png` (4.6x, four shots, beside
+   `r8_x7145.png`, Ambiguity 13's spot).
 
 ## Review
 
@@ -1058,12 +1170,46 @@ fringes and was not used for contacts on the runs; anything beyond the two edges
 
 Round 1: no findings that change a connection.
 
+**Run 8, pieces `r12`, `r13`. Round 1: full review** (2026-11-20 14:06 +0100; a fresh Fable 5.2 reviewer agent;
+commit 420283d; images in `cache/scratch/busl/review-8/`, 12 used). Told to suspect: the dim crossing
+(6452,13372-13389) (a contact or a break?); the two nests of corners (each L onto the right upper
+run, no step of a track); the arm y 12097 on `cdp4_bus_s2`'s poly row; the two taps (this track onto
+this row, the metal on through the pad, a second poly on a pad); the rows' east ends (the step of
+row y 13852, a swap with the rows y 13701 and y 13809); the rows' layer and any second pad on them;
+the upper runs to y 10400 and the join onto `regs`' metals; the ten dim stretches of the scan.
+Checked: the crossing at 6x in four shots, by colour profiles and a per-pixel class map (both chips
+orange across the track for about 10 px: chip 2 133-150/81-96/31-38, chip 1 114-137/51-68/26-37; no
+ring, no pad, the row 20 px as elsewhere, no hole in the clean shot, 216/165/112 as under x 6494; the
+track's two edge lines unbroken through the patch in both chips, no end line across; the same reddish
+patch occurs in one chip alone on unbroken crossings, chip 1 at (6452,14304), chip 2 at (6494,13616)
+and (7055,13852); the chip-2 stripped shot is no evidence there, it reads red minus green 67 at
+(6452,14304) where chip 2's metal is whole); the taps at 4.6x and by text maps with the stripped shot
+(ring, bright centre and hole on each, the metal on both ways through each pad, neighbouring tracks
+13-18 px clear, field north, south and west of both pads); both nests at 4.5x (order kept, no stub
+beyond a corner; the arms y 12984, 13028, 12141 over field); the arm y 12097 (no pad, ring or hole; a
+pale patch in the stripped shot at (6564,12097) is fringes, 7x); the rows in every gap between tracks
+(chip-2 blue 46-65, chip-1 green 67-96, against 82-90 and 109-129 on a field control at y 13782:
+poly, unbroken, straight, no other pad; the L of another net that lies on row y 13852 at x 7312-7388,
+piece `d6`'s line 4, has no contact, 5.6x); the east ends by views and profiles (row y 13852 ends at
+x 7548 and steps south through open poly at x 7530-7546, y 13845-13881, onto the row y 13873, which
+starts at x 7528; row y 13744 runs into `cdp4`'s block; field between each and the rows y 13701 and
+y 13809: no swap); the long runs by the two-chip test and the follower from both ends (one metal
+each, no ring besides the taps; each listed dim stretch a one-chip blemish or a row edge; the clean
+shot's green patch at (6494,14787) is damage to chip 1's row there); the north join at 4.6x (the same
+tracks as `regs`' metals); the full extraction (0 errors, `cdp4_rst` = NOR of the six selects).
+Findings: none.
+Could not check, or only weakly: continuity at (6452,13372-13389) rests on the edge lines (Ambiguity
+15 stays); that `cdp4`'s block (7550-7578, 13732-13770) is poly (golden-brown 173/128/56 in the clean
+shot under the track x 7556: `cdp4`'s reading; only that nothing field-coloured separates the row, the
+block and the gate row); the south join at y 15000 by tools only; not each of the roughly 100
+crossings singly (the metal test and the clean-shot scan cover them).
+
+Round 1: no findings.
+
 ## Not done
 
 - Everything else in the field: about 20 more tracks and the other rows. Next pieces, in the
-  order they join things: (1) done in run 6 (pieces `sr`, `kb`; `wr_r15`'s row does not enter the field); (2) the rows
-  y 13744 and y 13852 (from west of x 6500 to gate bands of `cdp4`'s corner gate group) and the two
-  tracks that step west of the selects' staircase (x 6516, x 6559 at y 12700); (3) what else arrives
+  order they join things: (1) done in run 6 (pieces `sr`, `kb`; `wr_r15`'s row does not enter the field); (2) done in run 8 (pieces `r12`, `r13`: the rows y 13744 and y 13852 and the two tracks); (3) what else arrives
   from `lc3` at y 10400 (`ports.d/lc3.txt`): the six diagonal metals at x 5915, 5851, 5785, 5722, 5655,
   5588 (`lc3_e9577` .. `lc3_e9793`), the polys at x 5475 (`rst_n`) and x 5541 (`lc2_w8450` again), the
   VCC metal x 5340-5390; (4) the top band's ninth row (y 10317, `cdp3_gate_f`) and the three poly rows
@@ -1071,7 +1217,7 @@ Round 1: no findings that change a connection.
   piece `h8`'s; (6) the bands at y 11850-12150 and below; (7) the foot of the field: rows y 14827 and
   14870 from their pads (6915,14828), (6872,14868) and those pads' tracks north (x 6927, x 6885); the
   net that starts on row y 14523 at the pad (7100,14522); the rows above y 14523 (`bc1`'s bus has four
-  more, y 14354-14482); the track x 6452 beside piece `lc9`'s pads; the metal that turns south at
+  more, y 14354-14482); (the track x 6452 beside piece `lc9`'s pads is `rsel12_buf`, run 8); the metal that turns south at
   about (7187,14165) below line 1's end pad.
 - Piece `sr`'s south end: `tc2_sr_g`'s track from (7187,15000) on: x 7186 south over `tla`'s poly
   (y 15334-15444) to (7186,15482), west to x 7103, south; the follower ends at (7100,16279), contact
