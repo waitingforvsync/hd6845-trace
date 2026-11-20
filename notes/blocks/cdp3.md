@@ -54,8 +54,11 @@ Which columns each row occupies:
   - rows E and F (two pass transistors per column), their two gate lines, the tracks of
     channels D and G and the vertical metal joining them;
   - channel B: six tracks onto line g, six poly links from line f to the "x 9893" line.
-- NOT traced: row A (a different, larger cell, cut by the top edge), row I (the top
-  150 px of cdp4's row R1), the logic beside row A (x 7600-8400, y 8440-8800).
+- **Row A (y 8040-8830), traced** (run of 2026-11-19 22:35 -0600; 91 transistors, no uncertain item):
+  six copies of `cdp4`'s comparator cell over six copies of `cdp4`'s latch cell: **R14 and its
+  comparator with line g.** `cdp3_k_c` = NOR of the six cells' "not equal" nodes. With every file loaded:
+  2439 nets, 4541 transistors, 0 errors, 0 warnings. See "Row A" under Logic.
+- NOT traced: the logic beside row A (x 7600-8300, y 8040-8800).
 
 ## Inventory
 
@@ -232,6 +235,46 @@ contact (8178,9275) under a wide VCC metal that becomes c1's VCC rail.
   y 8862 for c2, c3, c5, c6 and at y 9144 for c4, c7). Line f then runs down through the
   row C cell without a contact and on to the bottom edge.
 
+### Row A: R14's latch row and the comparator of line g with R14 (2026-11-19; traced)
+
+Row A is, in each of c2..c7, the cell pair of `cdp4`'s row R1, 3015 px north (`tools/findcell.py 8370
+11060 8790 11490` and `... 8370 11495 8790 11845`: six hits each at dy -3015/-3016, scores 0.83-0.88; c2's
+comparator 0.72, see below). It is placed from `cdp4`'s cells (`@requires cdp4`), and every copy was
+checked with `tools/cellcheck.py`. The gates in full are in `notes/blocks/cdp4.md` ("Row R1 upper", "Row
+C latch"); with this row's names:
+
+    cdp4_la_c#_a   : storage node, written from the bit line cdp3_bl_c# while wr_r14 is high
+    cdp4_la_c#_n2  = NOT cdp4_la_c#_a
+    cdp4_la_c#_q   = NOT cdp4_la_c#_n2
+    cdp3_f_c#      = NOT cdp4_la_c#_n2            (the buffered output: R14 as read, cdp4's selector source a)
+    cdp4_xr_c#_nor = NOR(cdp3_g_c#, cdp4_la_c#_q)
+    cdp4_xr_c#_ne  = NOT((cdp3_g_c# AND cdp4_la_c#_q) OR cdp4_xr_c#_nor)        = cdp3_g_c# XOR cdp4_la_c#_q
+    cdp3_k_c       = NOR(cdp4_xr_c2_ne, ..., cdp4_xr_c7_ne)                     high when line g equals R14's q in all six columns
+
+- **Latch row** (y 8490-8830): the latch cell upside down, strobe `wr_r14` (the poly y 8818 already drawn),
+  data from the bit line (line e; contact (8466+dx, 8794)), buffered output by the land's contact
+  (8712+dx, 8757) onto the metal x 8722 (the "x 9500 line") and the link poly to line f. So **row A is
+  R14** (firm: `wr_r14` by `regs`), and line f is R14's buffered output.
+- **Comparator row** (y 8040-8490): the bus-tap metal of the cell (x 8556+dx, top end y 8047) is line g,
+  which the tracks of channel B bring from the west. Line f's metal runs on up through the row as a stub
+  (top end y 8052, no contact above the link).
+- **c2** has the short pull-down and, east of it, the match line's load, exactly as `cdp4`'s slice s0
+  (hand-drawn, `cdp4`'s items moved by +782,-3015): poly A x 8407-8604 with its leg on field, VCC
+  contact (8632,8175) under a pad of the rail, load gate x 8685-8727 with a buried contact on the line at
+  its head, and the same tab of the line under the top end of the tap track (8548-8570, 8059-8099; no
+  contact read, as `cdp4`'s Ambiguity 12).
+- **West end of the match line**: the band ends in a framed box (8328-8368, 8098-8145) read as a buried
+  contact; a poly runs south from it (x 8333-8350) to a pad (8323-8357, 8192-8227) whose contact
+  (8334,8209) starts the thin metal x 8336. `tools/follow.py 8330 8260 S` follows that metal to (8336,9430),
+  the contact of the NAND's gate 2: **the match line is `cdp3_k_c`**. The one contact candidate on the way
+  (8336,9090) is a crossing (`tools/textmap.py 8318 9072 8354 9110 3`: no hole).
+- **East end**: the line stops under the ninth VSS rail; c7's comparator and latch take VSS from lands
+  under that rail (contacts (10745,8443), (10745,8637)).
+
+So the NAND beside row C is NAND(`cdp3_k_b`, `cdp3_k_c`) = NOT((bus lines = R15) AND (line g = R14)): with
+the bus lines and line g believed to be the low eight and high six address bits, **the cursor match,
+active low** (believed for what the lines are; the gates are firm).
+
 ## Ports
 
 West edge, x 7600 (all poly, all continue west beyond x 7540):
@@ -315,7 +358,19 @@ Into parts not yet traced (the labels sit on the stubs):
 - Neighbours: `cdp4` (below) tags the column whose VSS rail is at x 8405 as its s2, so its
   sK is column c(K) here; `cdp2` (above) uses the same numbering as cdp4.
 
+- **A tab of row A's match line under the top end of c2's tap track**, (8548-8570, 8059-8106), as in
+  `cdp4`'s slice s0 (its Ambiguity 12). Both metal shots show a bright centre about 12-15 px across in a
+  dark ring at (8557,8068); c3's track end is plain. Neither stripped shot shows a pit there (clean shot
+  200/174/135, flat), while the known contacts (8712,8757) and (8632,8178) do. Read as no contact by the
+  tracer and the reviewer; a contact would short `cdp3_g_c2` to `cdp3_k_c`. The tab is drawn, no contact.
+
 ## Not done
+
+- (Done 2026-11-19: row A, y 8040-8830, and what the notes called row I, which is `cdp4`'s comparator
+  row, traced there in its run 3. The items below on the row A cell and row I are superseded by "Row A"
+  under Logic.) Left from row A: whether the bit lines join `cdp2`'s bus lines at y 8040 (drawn to y 8040,
+  not examined above it); the logic beside row A (x 7600-8300, y 8040-8800), through which `cdp3_k_c`'s
+  thin metal only passes.
 
 - Row A cell (c2..c7, y about 8400-8790, cut by the top edge): not a copy of `cdp3_reg` in
   any orientation (findcell finds nothing above 0.5 in y 8250-8900). Not traced.
@@ -397,3 +452,35 @@ Into parts not yet traced (the labels sit on the stubs):
 - The gate column x 7460-7800 ("about six units with loads"): below `eof`'s `g7700` there are four inverters at a pitch of 130 (U1 y 7940-8060, U2, U3, U4); U2-U4 are drawn by `eof` (run 12, piece `d3982`: three inverters in series, `tl3_w3982` = NOT NOT NOT `lc1_w7928`); U1 is not drawn.
 - `cdp3_k_b` comes from a diffusion band at (7600, 11092-11127) under column 0's VSS rail (`busl` run 6), undrawn here.
 - `cdp3_gate_e` and `cdp3_gate_f` enter from the west on pads (6730,10055) and (6730,10317), each with a track from the south (`regs` run 3); believed the read selects of R12 and R13 (two open joins through the left bus field): rows E and F are then the read gates of R12 and R13.
+
+## Review
+
+### Row A (run of 2026-11-19)
+
+Round 1 (full review, 2026-11-19 22:51 -0600; a fresh Fable reviewer, images in `cache/scratch/cdp3/review-1/`;
+commit before the round e1b2cc7). Piece: row A, x 8280-10800, y 8030-8840, and the thin metal x 8336 to
+y 9160. Told to suspect: the west end (box, poly, pad, the metal's start and run), the latch gates' poly
+being `wr_r14`, the joins at y 8765-8795, line f's and the bit line's lack of contacts, c2's hand-drawn
+part and its tab, c2's copy, the east end, anything left out. Checked at 4x or more in up to four shots
+with profiles and text maps: the west end (pad contact with ring and bright centre in both chips, no metal
+north of the pad, the metal continuous to (8336,9430), the crossing at y 9090 a poly-row edge); the copies
+(c3..c7 at most 4 % bad blocks in three shots, c2's all in the hand-drawn part and the west rail edge);
+c2's leg on field, load, head box, VCC contact; the metals' top ends and joins; the east end's lands and
+contacts; the extraction (91 transistors, equations as claimed).
+
+- Finding 1, **geometry only**: `wr_r14`'s poly (an older line, `P 8528,8818 x10850`) is not straight:
+  under every bit line and line f metal there is field at y 8812-8830; the band is joined through each
+  latch cell's loop. Confirmed (`tools/px.py row 8820 8826 8930 8 acid1b,acid`: pink 201/117/115 at
+  x 8850-8866 and 8898-8906; view `strobe.png`). Redrawn as six segments, with the dead-end stub under c2's
+  VSS rail.
+- Finding 2, **geometry only**: the tab joined the pocket by a 2 px overlap. Lengthened to y 8106.
+- Finding 3, **geometry only**: the six older `?M` bit-line pieces (y 8450-8795) doubled the firm metals.
+  Removed.
+- Ambiguity recorded: the tab under c2's tap track (no contact read by both).
+- Not checked by the reviewer: c4..c7 individually above 1x (composite and `cellcheck.py` only); the
+  masters' internals (reviewed in `cdp4`).
+
+`tools/t.sh cdp3 sameconn.py e1b2cc7`: connections identical.
+`.venv/bin/python tools/sameconn.py e1b2cc7`: connections identical.
+
+Round 1: no findings that change a connection.
