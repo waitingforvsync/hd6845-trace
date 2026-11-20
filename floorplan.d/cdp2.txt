@@ -3,4 +3,5 @@
 7990,7500:10790,7825  array  R10 register (7 bit) | seven copies of the same static latch cell with their own strobe line. Five bits feed the comparator above, the two leftmost bits leave to the left. Which register: not yet established (the 5 + 2 split would fit R10)
 8700,6930:10830,7480  array  R10 comparator (equal, greater) | per bit: XOR of the register bit with the bit on the slice's through track, a chain from left (most significant) to right, and a pull-down on a row-long line. Believed outputs: "equal" at the right end of the chain, "greater" on the line; one connection per bit not seen
 ?7600,6350:10850,6900  route  channel 2 | 13 horizontal poly lines under the per-slice metal lines and rails; the lowest carries the comparator's chain output
-7645,6828:8253,7140  logic  a gate on tc2_sr_q and db_b6 (cdp2_w7065) | its node is pulled low while tc2_sr_q is high and high through a wide transistor gated by data bus bit 6; it goes west on two lines and south to the gate cluster beside R14's row
+7645,6985:8253,7140  logic  NOT tc2_sr_q (cdp2_w7065) | an inverter of the top-centre latch's output; it leaves west on a poly row to a pad (7662,7083)
+7318,6828:8004,8332  route  a through line past the inverter (cdp2_w6845) | from a pad (7335,6845) by a poly row and a thin metal x 7988 south to the gate cluster beside R14's row
