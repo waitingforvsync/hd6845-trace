@@ -517,6 +517,15 @@ Into parts not yet traced (the labels sit on the stubs):
     by boundaries (e), (c) and the metal x 7927-7957 is the node above the finger). So one of these is
     still misread: the two contacts of that metal ((7937,8474), (7935,8648)), the plates' ties, or a
     boundary. Not resolved; nothing of the cluster is drawn.
+  - A last observation (2026-11-20 14:12): in the chip-2 stripped shot the box of the first contact
+    (7930-7950, 8455-8485) reads orange, red far over green, like poly (`textmap.py 7918 8452 7964 8496 2
+    --acid`; `cache/scratch/cdp3/c1.png`, 10x), where the clean shot has it tan like diffusion; it lies
+    under the 30 px metal, where the stripped shot may be fringes. If that box (and its twin at
+    (7935,8648)) is a poly pad and not a contact to diffusion, the metal x 7927-7957 joins three polys and
+    the contradiction goes away. Whoever takes this up: settle those two boxes first.
+  - Known inputs of the cluster: `cdp3_w8063` (a buffered `ck_out`, two rows), the gate beside row C's
+    output line (`cdp3_bl_c1` as extracted), and a line from a pad (7987,6845) by a metal to the pad
+    (7878,8315) (source west of (7335,6845), not followed).
   - Also there and not drawn: two thin metals at x 8050-8058 and x 8076-8084 (narrow, in pieces), the
     metal from the pad (8118,8448) south, the metal from the north onto the pad (7878,8315) (follower:
     a corner (7989,7386), end (7986,6844)).
