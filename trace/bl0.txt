@@ -487,3 +487,41 @@ P 2700,15988:2867,16008
 P 2684,15982:2717,16015
 C 2700,15999
 M 2700,15972 y16026 w=12                           # the thin metal through the pad (ports north and south)
+
+# ================================================================ piece w9 (run 9): three tracks of the left bus field, on south
+# ---- busl_x6820: busl's track x 6754 ends at y 15000; on south to a pad (6754,16217), a poly column
+# under the bus of horizontal metals to a pad (6754,16562), a thin metal on south (port at y 17000: the
+# follower runs it to a corner (6767,18040) and east). It crosses the poly rows y 15088, 15132, 15176.
+M 6754,15000 y16217 w=14
+N M 6754,15500 busl_x6820
+P 6738,16200:6771,16234
+C 6754,16217
+P 6757,16217 y16562 w=18
+P 6738,16546:6771,16579
+C 6754,16562
+M 6754,16562 y17000 w=14
+# ---- rcs_mv: busl's track x 6971 ends at y 15000; on south through a pad (6966,15305), whose poly row
+# goes east (port), to a pad (6970,16175), a poly column under the bus to a pad (6970,16519), a thin
+# metal south to a pad (6968,16780), whose poly row goes east (port).
+M 6971,15000 y16175 w=14
+N M 6971,15500 rcs_mv
+P 6950,15289:6984,15321
+C 6966,15305
+P 6966,15301 x7030 w=20
+P 6954,16159:6987,16192
+C 6970,16175
+P 6972,16175 y16519 w=18
+P 6954,16502:6987,16536
+C 6970,16519
+M 6970,16519 y16780 w=14
+P 6952,16764:6985,16797
+C 6968,16780
+P 6968,16780 x7040 w=20
+# ---- lc3_e9577: busl's track x 5322 ends at y 15000; on south to a contact on a diffusion box
+# (5325-5370, 15350-15392), from which a diffusion wire y 15362-15382 runs west under the tracks
+# (port at x 4780: it goes on into the left array).
+M 5322,15000 y15371 x5345 w=14
+N M 5322,15200 lc3_e9577
+D 5325,15350:5370,15392
+C 5345,15371
+D 4780,15362:5330,15382

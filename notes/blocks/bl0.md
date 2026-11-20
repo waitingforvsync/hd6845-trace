@@ -7,6 +7,19 @@ metal-shot pixels. Evidence: `cache/scratch/bl0/` (`survey.md` holds every measu
 
 ## Status
 
+Run 9 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 11:40 -0600). One piece of wiring, no transistor, no
+uncertain item: three tracks of the left bus field followed on south of y 15000.
+
+- **Piece `w9`** (wiring, 5,200 px).
+  - `busl_x6820` (track x 6754): to a pad (6754,16217), under the bus of horizontal metals as a poly column
+    to a pad (6754,16562), on south as a thin metal (drawn to y 17000; the follower runs it to a corner
+    (6767,18040) and east past (7417,18035)).
+  - `rcs_mv` (track x 6971): through a pad (6966,15305) whose poly row goes east (port), to a pad
+    (6970,16175), a poly column under the bus to a pad (6970,16519), a thin metal to a pad (6968,16780)
+    whose poly row goes east (port).
+  - `lc3_e9577` (track x 5322): to a contact (5345,15371) on a diffusion box, from which **a diffusion
+    wire** y 15362-15382 runs west under the tracks and on past x 4780 into the left array (port).
+
 Run 8 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 11:28 -0600). One piece of wiring, no transistor, no
 uncertain item; reviewed (round 10: no findings): the two other ends of `rst_n`'s line (`bl0_w15088`).
 
@@ -159,6 +172,9 @@ finding that changes a connection.
 | `bl0_w17610` east and north | 7384-7899 | 17373-17795 | poly row y 17768-17790 to a pad (7555,17778); metal y 17771-17785 to a pad (7795,17778); poly to a pad (7880,17777); track x 7875-7889 north to a pad (7882,17389); poly row y 17378-17398 west |
 | `bl0_w17687` east and north | 7424-7942 | 15680-17838 | poly row y 17811-17831 east to a pad (7925,17821); track x 7918-7932 north to a pad (7925,15696); poly row y 15682-15702 west |
 | `bl0_w15412` to the left column | 2684-5600 | 15398-16103 | poly row y 15401-15425 west to a pad (4909,15415); track x 4902-4916 south, corner y 16087, pad (4868,16086); poly row y 16075-16097 west to x 2845; column x 2845-2867 north; row y 15988-16008 west under the supply rail to a pad (2700,15999) on the thin metal x 2690-2710 |
+| `busl_x6820` south | 6738-6771 | 15000-17000 | track x 6747-6761 to a pad (6754,16217); poly column to a pad (6754,16562); thin metal on south |
+| `rcs_mv` south | 6950-7040 | 15000-16797 | track x 6964-6978 through a pad (6966,15305) (poly row y 15291-15311 east) to a pad (6970,16175); poly column to a pad (6970,16519); thin metal to a pad (6968,16780) (poly row y 16770-16790 east) |
+| `lc3_e9577` south | 4780-5370 | 15000-15392 | track x 5315-5329 to a contact (5345,15371) on a diffusion box (5325-5370, 15350-15392); diffusion wire y 15362-15382 west |
 
 ## Logic
 
@@ -505,6 +521,33 @@ edge (ring and bright centre in both chips, a hole in the clean shot: `textmap.p
 3`). A poly column x 5725-5745 goes on south from the pad under the two horizontal metals at y 15800 and
 15850 (view `r8e.png`). Drawn to y 15800, the foot of this package's region.
 
+### Piece `w9` (run 9): three tracks of the left bus field
+
+`busl_x6820`. `busl`'s track x 6754 runs on from y 15000 (`follow.py 6754 15010 S`: end (6754,16220);
+candidates (6755,15140) and (6755,15174) are the edges of `res_b`'s and `lpstb_b`'s rows, like those on
+`busl_x6906`) to a pad (6754,16217), a poly column under the bus to a pad (6754,16562) (both rings with
+a bright centre in both chips: `textmap.py 6736 16196 6774 16236 3`, `6736 16546 6774 16580 3`), and a
+thin metal south (`follow.py 6754 16610 S`: a corner (6767,18040), east to (7417,18035), where the
+metal goes on; candidates (6755,16627), (6755,16846), (6756,17352), (6967,18038) not read). Drawn to
+y 17000, the foot of this package's region.
+
+`rcs_mv`. `busl`'s track x 6971 passes through a pad (6966,15305) (metal bright up to the ring north and
+south: `px.py col 6970 15276 15334 4`), whose poly row y 15291-15311 goes east, and runs on
+(`follow.py 6971 15010 S`: end (6970,16178); its candidate (6971,15098) is `rst_n`'s row) to a pad
+(6970,16175), a poly column under the bus to a pad (6970,16519), and a thin metal to a pad (6968,16780)
+(`follow.py 6971 16560 S`), whose poly row y 16770-16790 goes east under the tracks x 7015, 7055 and on.
+Four pads, each a ring with a centre (the pad (6970,16175)'s centre is weak in chip 2, strong in chip 1).
+
+`lc3_e9577`. `busl`'s track x 5322 ends on a large pad at (5345,15371) (`follow.py 5322 15010 S`). The
+pad is on diffusion, not poly: the clean shot under it is tan with specks (red minus green 15-29 against
+33-41 on this package's poly pads; `px.py pt 5330,15380 5362,15360 6982,17556 4878,16094`), and the strip
+that leaves it west is tan too (red minus green about 10). The strip, y 15362-15382 between two edge
+lines, runs west under the tracks without a break to x 4700 at least (edges at y 15359-15362 and
+15380-15384 at every sample, 24 px apart; where no track covers it, x 5040-5085, it is khaki with
+chip-2 stripped red minus green 9-19 and no poly colour: `px.py row 15371 5020 5100 5`). So the line
+goes on as a diffusion wire into the left array. Between the box and `bl0_w15412`'s row 14 px south
+there is field: no transistor.
+
 ## Ports
 
 | Name | Layer | Where | Direction | Note |
@@ -514,6 +557,13 @@ edge (ring and bright centre in both chips, a hole in the clean shot: `textmap.p
 | `busl_x6906` | M | (6834-6848, 15000) | in | `busl`'s track x 6841, on north |
 | `bl0_w17687` | P | (7790, 15682-15702) | in | poly row west of the pad (7925,15696), into `bc1`'s gate group at about (7745,15690) |
 | `bl0_w17610` | P | (7760, 17378-17398) | out | poly row west of the pad (7882,17389), into the gate column east of the supply rail |
+| `busl_x6820` | M | (6747-6761, 15000) | in | `busl`'s track x 6754, on north |
+| `busl_x6820` | M | (6747-6761, 17000) | out | the thin metal on south: corner (6767,18040), east |
+| `rcs_mv` | M | (6964-6978, 15000) | in | `busl`'s track x 6971, on north |
+| `rcs_mv` | P | (7030, 15291-15311) | out | poly row east of the pad (6966,15305) |
+| `rcs_mv` | P | (7040, 16770-16790) | out | poly row east of the pad (6968,16780), under the tracks and on |
+| `lc3_e9577` | M | (5315-5329, 15000) | in | `busl`'s track x 5322, on north |
+| `lc3_e9577` | D | (4780, 15362-15382) | out | diffusion wire on west into the left array |
 | `vss` | M | (7292-7342, 16925) | - | the gate column's rail, on north; it ends at y 17755 |
 | `vcc` | M | (7470-7520, 17020), (7470-7520, 17670) | - | `bc3`'s rail x 7495 |
 | `bl0_w15088` | P | (7280, 15078-15098) | out | `rst_n`'s poly row on east: a gate band under `bc1`'s rail x 7292-7342, ending at about x 7350 |
@@ -881,6 +931,10 @@ Round 10: no findings.
   region.
 - `rst_n` (`bl0_w15088`) beyond this package: the gate under `bc1`'s rail at (7292-7342, 15088), and the
   poly column south of y 15800 at x 5725-5745 (the bottom-left logic, `bl1`/`bl2`).
+- Beyond this package: `busl_x6820` south of y 17000; `rcs_mv`'s two poly rows east of x 7030 and x 7040
+  (`bc1`, `bc3`); `lc3_e9577`'s diffusion wire west of x 4780 (the left array).
+- The other tracks from `busl` at y 15000: `lc3_e9621`..`lc3_e9793` (x 5279-5105) and `lc2_w8450` (x 4822)
+  run through this region to y 15859 and beyond (`busl`'s follower); not drawn.
 - Both rails of the gate group south of y 15800; the rest of the master-list row's region (the bus
   wiring x 4780-5850, the tracks x 6452-6841, the gate group south of y 15800).
 
