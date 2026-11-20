@@ -1942,6 +1942,49 @@ of x 7550 on the foot rows.
 
 Round 1: no findings.
 
+**Run 12, pieces `ga`, `gb`, `gc`. Round 1: full review** (2026-11-20 20:19 to 20:32 +0100; a fresh
+Fable 5.2 reviewer agent; commit dc7a63f; images in `cache/scratch/busl/review-12/`, 27 used). Told to
+suspect: the three staircases and the steps north of the poly columns (a line on the wrong track or
+two lines swapped; `tools/follow.py` had misread the staircase y 11923-12054); the diagonals' pads and
+tracks against their neighbours (`rcs_e4`, line 14, `bd1_n2`); each of the thirteen pads as a contact
+(the four foot pads were accepted without a clear green hole); the three poly columns (one poly each,
+no contact from a crossing metal); whether `lc1_w7780`'s row ends on the pad (6819,7780) apart from
+the poly east of x 6870 on the same line, and whether the track x 6861 touches that pad (trap 16);
+the row y 14480 (broken between the pads (7057,14480) and (7143,14481), continuous west of them
+through the residue-coloured stretch; row y 14437 likewise); the track position x 7057/7058 between
+this wire's jog y 14588 and `rcs_e4`'s arm y 14632; the dim crossings (6905,7872-7889),
+(6602,10345-10360), (6343,12138-12186); the south end pad and its poly L.
+Checked: the three staircases at 3.5-4x in both metal shots (each four plain nested Ls inside
+`rcs_e4`'s, line 11 westmost throughout; the staircase the follower failed on also by cuts down every
+track and along every arm with `tools/busl_both.py`; line 12's corner at (6386,11985) is dim in chip 2
+only, chip 1 bright and the clean shot's protected strip unbroken); the steps north of the columns
+and the diagonals (cuts at 13 heights: x + y = 15467 / 15534 / 15598 go to the pads and tracks
+claimed, bare ground between each pad's ring and the neighbouring metal by `tools/textmap.py`); all
+thirteen pads (ring and bright centre in both metal shots, a pitted box in the chip-2 stripped shot,
+the four foot pads at 4.5x in four shots; field beyond each pad on the sides with no drawn poly); the
+three poly columns (one poly each from pad to pad, only edge bars and no hole under the staircase
+metals); the row y 7780 (one poly under eight tracks, ending on the pad; east of the pad open field,
+then pink under the track x 6861, and `eof`'s poly starts at about x 6878; the track x 6861 is apart
+from the pad's ring by ground and its own edge line in both chips); the row y 14480 (continuous from
+(6364,14482) to (7057,14480): chip 1's metal shot shows orange poly in every gap of the residue
+stretch and the open stretch x 6988-7040 is poly in three shots; field between (7057,14480) and
+(7143,14481)); the rows y 14437 and y 14393 to x 7550 (no pad; the two jogs lying on them and the
+wide metal x 7483-7535 show no ring or hole); the track position x 7057 at y 14597-14624 (no metal in
+either chip, only the open orange poly of the row y 14610); the three dim crossings (4.2x, four
+shots: plain); the south end (the metal ends on the pad (7100,15175), the poly L runs to the row
+y 15218; a pad (7100,15262) below it is separate, ground between); every metal segment
+(`tools/tl5_tracks.py`: no stretch of 20 px or more without metal in both chips; the clean shot's
+lows on the tracks are greenish rows without rings); the full extraction (0 errors, no new
+transistor), `tools/unsure.py` and `tools/padjoin.py` (nothing for these nets).
+Findings: none.
+Could not check: the stubs beyond their drawn ends (the rows y 7258 and y 7300 west, the rows y 14437
+and y 14393 east of x 7550, the row y 15218 east of x 7170); `lc1`'s part of the row y 7780 west of
+x 6440; the long straight runs between the staircases at 4x (read by the scans and by strip views at
+1.4-2.1x in the chip-2 metal shot); the crossings of the northern runs over the rows between y 7370
+and y 8060 one by one, other than (6905,7880).
+
+Round 1: no findings.
+
 ## Not done
 
 - Everything else in the field: about 20 more tracks and the other rows. Next pieces, in the
@@ -2029,6 +2072,8 @@ Round 1: no findings.
   (continue) / `bc3`); the rows y 7258 and y 7300 west of x 6800 / x 6845 (the crossing field of the northern
   part; `eof`'s metals y 7258 and y 7300 of `rst_a` and `tl3_w3982` lie on the same lines further west); the
   rows y 14437 and y 14393 east of x 7550 (`bc1` (continue), with the eleven rows of pieces `lc9`, `fb` .. `fe`).
+- Seen by the reviewer of run 12, south of `lc1_w7780`'s end pad: a pad (7100,15262), separate from it (ground
+  between), drawn by no package.
 - Seen beside them and drawn by no package: a pad (6690,8621) between `eof`'s pad (6645,8580) and `tla`'s
   (6730,8580), with a poly column north and a metal about x 6679 south (`h4_north.png`, `h5_npads.png`). Of the
   staircase metals over the three poly columns, `trunks` draws the one at y 8452 and `eofw` the one at y 8498;
