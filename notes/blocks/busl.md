@@ -1170,6 +1170,42 @@ fringes and was not used for contacts on the runs; anything beyond the two edges
 
 Round 1: no findings that change a connection.
 
+**Run 8, pieces `r12`, `r13`. Round 1: full review** (2026-11-20 14:06 +0100; a fresh Fable 5.2 reviewer agent;
+commit 420283d; images in `cache/scratch/busl/review-8/`, 12 used). Told to suspect: the dim crossing
+(6452,13372-13389) (a contact or a break?); the two nests of corners (each L onto the right upper
+run, no step of a track); the arm y 12097 on `cdp4_bus_s2`'s poly row; the two taps (this track onto
+this row, the metal on through the pad, a second poly on a pad); the rows' east ends (the step of
+row y 13852, a swap with the rows y 13701 and y 13809); the rows' layer and any second pad on them;
+the upper runs to y 10400 and the join onto `regs`' metals; the ten dim stretches of the scan.
+Checked: the crossing at 6x in four shots, by colour profiles and a per-pixel class map (both chips
+orange across the track for about 10 px: chip 2 133-150/81-96/31-38, chip 1 114-137/51-68/26-37; no
+ring, no pad, the row 20 px as elsewhere, no hole in the clean shot, 216/165/112 as under x 6494; the
+track's two edge lines unbroken through the patch in both chips, no end line across; the same reddish
+patch occurs in one chip alone on unbroken crossings, chip 1 at (6452,14304), chip 2 at (6494,13616)
+and (7055,13852); the chip-2 stripped shot is no evidence there, it reads red minus green 67 at
+(6452,14304) where chip 2's metal is whole); the taps at 4.6x and by text maps with the stripped shot
+(ring, bright centre and hole on each, the metal on both ways through each pad, neighbouring tracks
+13-18 px clear, field north, south and west of both pads); both nests at 4.5x (order kept, no stub
+beyond a corner; the arms y 12984, 13028, 12141 over field); the arm y 12097 (no pad, ring or hole; a
+pale patch in the stripped shot at (6564,12097) is fringes, 7x); the rows in every gap between tracks
+(chip-2 blue 46-65, chip-1 green 67-96, against 82-90 and 109-129 on a field control at y 13782:
+poly, unbroken, straight, no other pad; the L of another net that lies on row y 13852 at x 7312-7388,
+piece `d6`'s line 4, has no contact, 5.6x); the east ends by views and profiles (row y 13852 ends at
+x 7548 and steps south through open poly at x 7530-7546, y 13845-13881, onto the row y 13873, which
+starts at x 7528; row y 13744 runs into `cdp4`'s block; field between each and the rows y 13701 and
+y 13809: no swap); the long runs by the two-chip test and the follower from both ends (one metal
+each, no ring besides the taps; each listed dim stretch a one-chip blemish or a row edge; the clean
+shot's green patch at (6494,14787) is damage to chip 1's row there); the north join at 4.6x (the same
+tracks as `regs`' metals); the full extraction (0 errors, `cdp4_rst` = NOR of the six selects).
+Findings: none.
+Could not check, or only weakly: continuity at (6452,13372-13389) rests on the edge lines (Ambiguity
+15 stays); that `cdp4`'s block (7550-7578, 13732-13770) is poly (golden-brown 173/128/56 in the clean
+shot under the track x 7556: `cdp4`'s reading; only that nothing field-coloured separates the row, the
+block and the gate row); the south join at y 15000 by tools only; not each of the roughly 100
+crossings singly (the metal test and the clean-shot scan cover them).
+
+Round 1: no findings.
+
 ## Not done
 
 - Everything else in the field: about 20 more tracks and the other rows. Next pieces, in the
