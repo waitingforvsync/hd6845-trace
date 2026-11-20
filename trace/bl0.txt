@@ -404,7 +404,7 @@ D 7364,17612:7402,17664                            # the block east of the rail 
 D 7398,17603:7470,17630                            #   its strip under the load plate
 D 7468,17570:7522,17660
 C 7495,17615
-P 7128,17676:7295,17698                            # row D, from the pad (7142,17713) (piece w5)
+P 7139,17676:7295,17698                            # row D, from the pad (7142,17713) (piece w5)
 P 7285,17672:7350,17696                            #   under the rail, a few px further north
 N P 7225,17687 bl0_w17687
 D 7290,17700:7347,17752                            # box with the rail contact
@@ -416,7 +416,8 @@ D 7372,17660:7402,17705                            # T_n's channel from the bloc
 # ---- busl_x6906, the line that clears the pair: busl's track x 6841 ends at y 15000; it runs on south
 # to a pad (6842,16217), under the bus of horizontal metals as a poly column to a pad (6842,16562), on
 # south as a thin metal, east along y 17086, south at x 6970 to a pad (6970,17561), whose poly row is
-# the gate of the fifth unit's first pull-down. No pad, contact or branch on the way.
+# the gate of the fifth unit's first pull-down. No pad, contact or branch on the way (it crosses three poly
+# rows north of the first pad, y 15088, 15132 and 15176, with no contact).
 M 6841,15000 y16217 w=14
 N M 6841,15500 busl_x6906
 P 6826,16200:6858,16234                            # pad
@@ -432,10 +433,10 @@ C 6970,17561
 P 7126,17690:7160,17732                            # pad, one poly with the row's west end
 C 7142,17713
 M 7144,17713 y17826 x7424 w=14
-P 7408,17806:7441,17838                            # pad
+P 7408,17803:7441,17838                            # pad
 C 7424,17822
 P 7424,17821 x7465 w=20                            # poly row east, under the supply rail (port)
 # ---- bl0_w17610: the end of its metal, a pad (7384,17779) whose poly row goes on east (port).
-P 7367,17763:7401,17795                            # pad
+P 7367,17758:7401,17795                            # pad
 C 7384,17779
 P 7384,17779 x7465 w=22                            # poly row east, under the supply rail, to a pad at about (7553,17775) (port)

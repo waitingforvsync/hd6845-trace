@@ -8,7 +8,7 @@ metal-shot pixels. Evidence: `cache/scratch/bl0/` (`survey.md` holds every measu
 ## Status
 
 Run 5 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 10:41 -0600). One piece of wiring, no transistor,
-no uncertain item: the three wires of the cross-coupled pair.
+no uncertain item; reviewed (round 7: no finding that changes a connection): the three wires of the cross-coupled pair.
 
 - **Piece `w5`** (wiring, 4,400 px). **The line that clears the pair is `busl_x6906`**, a track of the left
   bus field: from `busl`'s port (6841,15000) it runs on south to a pad (6842,16217), under the bus of
@@ -394,12 +394,13 @@ and north again to a pad (6842,16562) (`follow.py 6972 17530 N`: corners (6969,1
 metals (poly colours all the way, `px.py col 6846 16230 16550 8 acid1b,acid`; the dark rings across every
 column at y 16330 and 16405 are the gaps between the metals) to a pad (6842,16217), where the track
 x 6841 from the north ends (`px.py col 6841 16150 16215 6`). That track is `busl`'s `busl_x6906`, drawn
-by `busl` to y 15000; between y 15000 and the pad it crosses `res_b`'s and `lpstb_b`'s poly rows (y 15132,
+by `busl` to y 15000; between y 15000 and the pad it crosses three poly rows, `bl0_w15088`'s (y 15078-15098; a dark speck
+at (6842,15088) in chip 2 only, a blemish), `res_b`'s and `lpstb_b`'s (y 15132,
 15176; the follower's candidate (6841,15121) is the edge bar of the first, no ring:
 `textmap.py 6822 15104 6862 15140 3`). All four pads are rings with a bright centre in both metal shots.
 With `busl` loaded the gate's input is `busl_x6906` (`TRACE=bl0,busl .venv/bin/python tools/netlist.py`).
 
-`bl0_w17687`. Band D's row ends west at x 7128 on a pad (7142,17713); a thin metal runs south from it,
+`bl0_w17687`. Band D's row ends west at about x 7139 on a pad (7142,17713); a thin metal runs south from it,
 turns east at (7151,17829) and ends on a pad (7424,17822) (`follow.py 7145 17745 S`), whose poly row
 (y 17811-17831) goes on east under the supply rail.
 
@@ -664,6 +665,33 @@ Findings, all geometry only:
 connections identical.
 
 Round 6: no findings that change a connection.
+
+### Run 5
+
+Round 7 (full review of piece `w5`; fresh Fable 5.2 reviewer; 2026-11-20 10:52 -0600; commit 9cba725; images
+`cache/scratch/bl0/review-7/`). Told to suspect: every place a metal reaches or leaves a pad (profiles
+outside each ring on all four sides, after round 4's finding); each pad as a real contact; the corners
+and the neighbouring tracks; the track's identity with `busl`'s; the poly column under the bus; the
+crossings; second polys on the pads. Checked at 4.6-5.5x in four shots, with text maps, profiles and a
+two-chip metal test along and beside every run: all seven pads (ring and bright centre in both chips;
+(6842,16562) from text maps only; (6842,16217) has no hole in the clean shot but ring and centre in both
+chips); the metal arriving on one side only of each pad; no metal between the pads (7143,17647) and
+(7142,17713); no gap and no side branch on any run; the four corners; the poly column continuous over
+field with nothing under the five bus metals; the crossings plain; the join with `busl` across y 15000.
+Could not check: a khaki band and dark bar under the wide bus metal at y 16360-16378 (read as not a
+diffusion: no edge line in either metal shot); the rows east of x 7465.
+
+Findings, geometry or notes only:
+
+1. A third poly row crosses the track x 6841, at y 15078-15098 (`bl0_w15088`'s), with no contact. Notes and
+   the trace's comment now say so.
+2. Row D's west end is at about x 7139 (drawn 7128). Fixed.
+3. The pads (7384,17779) and (7424,17822) reach about 5 px further north. Fixed.
+
+`tools/t.sh bl0 sameconn.py 9cba725`: connections identical. `.venv/bin/python tools/sameconn.py 9cba725`:
+connections identical.
+
+Round 7: no findings that change a connection.
 
 ## Not done
 
