@@ -1790,11 +1790,12 @@ C 8355,17649
 # tl5_tracks.py v 8184 17380 17650; the horizontal metal 35 px north of the pad is another
 # net's). The pad's poly row runs east along y 17419-17440 in the open (px col 8275 17408 17450
 # 2: orange in chip 2, dark red in the clean shot) towards the unit under the rail x 8315-8362
-# (stub: port at x 8245, short of a dark line x 8254-8258 that is not identified).
+# (since run 23, piece g174, the row is drawn on to the hairpin under the rail: the dark line
+# x 8254-8258 it crosses is the west edge of that unit's active area).
 M 8355,17650 x8186 y17428 w=12
 P 8172,17410:8210,17446
 C 8185,17428
-P 8200,17419:8245,17440
+P 8200,17419:8306,17441
 
 # Piece o040 (run 22, 2026-11-20): the inverter inv17's output eof_w17040 on from the pad
 # (9008,17560) to the net it is: bc1's bc1_g6_in, the input of bc1's inverter 6. Wiring only,
@@ -1831,3 +1832,72 @@ C 8338,17777
 M 8338,17777 x8012 y17259 x8057 y16647 x8143 y16292 w=13
 N M 8057,17000 bc1_g6_in
 @alias bc1_g6_in eof_w17040
+
+# ======================================================================================
+# Piece g174 (run 23, 2026-11-20): the pull-down column that eof_w17168 gates, under column
+# A's VSS rail at y 17266-17560 (bc3's ground, free). Three transistors on one active area,
+# drawn by hand; the east side of the unit (the two diffusion necks east of the rail, the
+# open diffusion strip x 8400-8448, the box where both gate polys end, the load) is NOT
+# drawn: notes, piece g174 and Ambiguities 83-87. Views r23_*.png in cache/scratch/eof/;
+# survey.md, run 23.
+#   eof_w17362 is pulled to vss by eof_w17338 (row 1) and by eof_w17168 (the hairpin)
+#   eof_w17552 is pulled to vss by eof_w17472 (the lower poly)
+# No load is drawn, so the extraction gives no equation for either node.
+#
+# ---- the VSS rail. bc1 draws it (R1, x 8336-8384) to y 16300. It runs on south as one
+# metal: no stretch of 20 px or more without metal in both chips from y 16290 to y 17235
+# (cache/scratch/eof/r23_rail.py 8338 8382 16290 17235; the one stretch dark in both chips,
+# y 16968-16979, is 12 px, an edge beneath), a step west at y 17240-17270 (px.py row 17215:
+# x 8338-8380; row 17275: x 8318-8360; col 8350 and 8364, y 17196-17276: dark bars of 6-15 px
+# at different heights in the two columns, bright between; r23_f1.png, 5x, both metal shots)
+# and an end at y 17568 (px.py row 17566, 17580). Chip 1's metal is destroyed over the unit
+# (y 17320-17480); chip 2's is whole there. r23_c1.png (1x, the whole stretch, three shots).
+M 8360,16300 y17250 w=44
+M 8339,17240 y17568 w=46
+N M 8339,17400 vss
+# ---- the active area. Under the rail the clean shot shows it plainly (tan; px.py col 8314 /
+# 8340 17262 17566 2 acid1b; railprof.py 8318 8360 17240 17600): x 8306-8368. West of the rail
+# it runs on in the open to a straight edge x 8254-8258 (the dark line of the notes'
+# Ambiguity 81, in all four shots from y 17262 to y 17560): chip 2's two shots give the ground
+# east of that line the colour of the open diffusion strip east of the rail and not of field
+# (eof_patch.py 8266 8298 17275 17315: red minus green 16 / 34 against 17 / 33 for the strip
+# and -9 / 12 for field); chip 1's clean shot shows the part north of row 1 khaki, like field
+# (notes, Ambiguity 83: it changes a width, no connection). The narrow bands between the
+# polys west of the rail have no reliable colour (trap 4); they are drawn as active area on
+# the edge line. A heavy-outlined box with a pale centre and no poly, x 8242-8282,
+# y 17372-17402, lies in the part between row 1 and the hairpin's row (notes, Ambiguity 84):
+# nothing is drawn for it.
+D 8258,17266:8368,17560
+# Two contacts onto the rail: rings with bright centres in chip 2's metal shot, white pitted
+# patches in the chip-2 stripped shot, specks in the clean shot (r23_d3.png, 3.6x, three
+# shots). A third, (8348,17245), lies north of what is drawn.
+C 8335,17293
+C 8335,17474
+# ---- row 1 (eof_w17338): a poly row y 17331-17351 right across the active area (clean shot
+# under the rail: cream, px.py col 8340: y 17332-17346; chip 2 in the open: orange,
+# r23_prof.py col 8280: y 17335-17349). It comes from the west (in line with a pad at about
+# (8188,17340), not read) and goes on east of the rail, north at x 8375-8410 and east along
+# y 17278-17305 (not drawn): ports at both ends.
+P 8245,17331:8372,17351
+N P 8280,17341 eof_w17338
+N D 8340,17362 eof_w17362
+# ---- the hairpin (eof_w17168). The row of piece o168 (y 17419-17441, redrawn here from the
+# pad to the rail) is one poly with the left leg x 8305-8323 (px.py row 17424 / 17430 / 17436
+# 8286 8326 2: poly colour to the rail's edge in chip 2, cream from x 8310 in the clean shot,
+# no field between; r23_h2.png, 7.5x), which runs up to the top bar y 17373-17395 (clean shot:
+# px.py row 17384: cream x 8306-8366; col 8340: y 17374-17390). The bar runs on east of the
+# rail into a right leg x 8372-8398 over field (not drawn: port).
+P 8305,17373:8323,17441
+P 8305,17373:8372,17395
+# ---- the lower poly (eof_w17472): a row y 17464-17486 from the west, an east leg x 8274-8296
+# down to the bottom bar y 17521-17543, which crosses under the rail (r23_e1.png, 4.8x, four
+# shots; r23_prof.py row 17472: poly x 8261-8288; row 17500: x 8278-8292; clean shot row 17531:
+# cream x 8312-8366; col 8340: y 17526-17540). West of the active area the row turns south on
+# x 8226-8242 (r23_prof.py col 8233: poly from y 17470 to y 17585): drawn to a port at y 17560.
+# East of the rail the bar runs on into a right leg x 8370-8395 (not drawn: port).
+P 8226,17464:8296,17486
+P 8274,17464:8296,17543
+P 8274,17521:8372,17543
+P 8226,17464:8242,17560
+N P 8234,17520 eof_w17472
+N D 8340,17552 eof_w17552

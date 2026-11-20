@@ -141,7 +141,15 @@ vcc           M      8510-8560,15870          -    R2 (bc1's M 8534,14990 y16300
 #  the rails' ports at y 16985 / 16960 moved to y 17300 / 17240)
 # Pieces o040, o168 (run 22): the two outputs followed (the ports eof_w17040 M 9001-9015,17610 and eof_w17168 M 9050-9064,17600 are gone)
 bc1_g6_in     M      8136-8150,16292          out  eof_w17040's metal x 8143 onto bc1's metal end (8143,16300) of bc1_g6_in: the input of bc1's inverter 6
-eof_w17168    P      8245,17419-17440         out  the NOR nor17's output: the poly row east of the pad (8185,17428), short of a dark line x 8254-8258; 58 px on it joins a hairpin gate under column A's rail x 8315-8362 (not drawn)
+# Piece g174 (run 23): the pull-down column that eof_w17168 gates (the port eof_w17168 P 8245,17419-17440 is gone: the row is drawn on to the hairpin)
+eof_w17168    P      8372,17373-17395         out  the hairpin's top bar where it leaves the rail east: a right leg x 8372-8398 over field and an arm to a box (8410-8437,17418-17500) on an open diffusion strip (not drawn)
+eof_w17338    P      8245,17331-17351         ?    row 1 where it leaves the active area west, under the track x 8229 (in line with a pad at about (8188,17340), not read)
+eof_w17338    P      8372,17331-17351         ?    row 1 east of the rail: north on x 8375-8410, east along y 17278-17305 (not drawn)
+eof_w17472    P      8226-8242,17560          ?    the lower poly's west leg on south (poly to y 17585; not followed)
+eof_w17472    P      8372,17521-17543         ?    the lower poly's bar where it leaves the rail east: a right leg x 8372-8395 and an arm into the same box as eof_w17168's (not drawn)
+eof_w17362    D      8368,17352-17372         out  the node between row 1 and the hairpin, at the active area's east edge: a neck y 17358-17366 east to the open diffusion strip x 8400-8448 (not drawn)
+eof_w17552    D      8368,17544-17560         out  the node below the lower poly's bar, at the east edge: a neck y 17548-17558 to the same strip (not drawn)
+vss           M      8338-8382,16300          -    column A's VSS rail, bc1's R1, drawn on south from bc1's end to the rail's end at y 17568
 eof_w17212    P      8990,15812-15832         in   the NOR's second input: the poly row west of the pad (9053,15822) (believed: to the pad (8838,15822) of the thin metal x 8792)
 vss           M      8686-8732,17300          -    column B's VSS rail on south of the NOR's second VSS box (drawn y 15870-17300)
 vcc           M      8510-8560,17240          -    R2 on south of the NOR's VCC box (drawn y 15870-17240)
