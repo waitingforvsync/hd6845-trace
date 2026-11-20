@@ -1397,8 +1397,10 @@ C 8713,16950
 C 8537,16745 s=24x60
 # the VCC diffusion under the rail is taller than the cells' boxes (review round 24; railprof
 # 8514 8556 16480 16960: diffusion y 16497-16622 and y 16656-16925), with a second long contact
-# (8535,16860) (eof_cchk: 5, centres 224/217). No poly crosses it.
-D 8510,16497:8560,16570
+# (8535,16860) (eof_cchk: 5, centres 224/217). No poly crosses it. The upper piece's top edge is at
+# y 16510 (px col 8535; railprof's 16497 is the edge line's shoulder).
+D 8510,16510:8560,16570              # top edge line at y 16508-16510 in all four shots (review round 25)
+C 8532,16537                         # a further VCC contact on it (ring and centre in both metal shots, hole in the clean shot; round 25)
 D 8510,16785:8560,16925
 C 8535,16860 s=24x60
 # thin metal x 8588-8600 between the upper unit's plate (contact (8594,16648)) and the pad of the

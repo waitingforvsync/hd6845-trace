@@ -1517,7 +1517,7 @@ What the copy has of its own, and what was looked at round its pads (R45, trap 3
 |---|---|---|
 | rails | VSS x 8686-8731 over the pull-downs' boxes, VCC x 8510-8560 over the loads' boxes. The VCC rail is `bc1`'s R2 (`M 8534,14990 y16300 w=48`) running on south; the VSS rail is the one drawn over V and W, continuous down to the latch (contacts and edge bars only) | `s19_rails.png` (0.75x), `s19_gap.png` (1.4x, both metal shots and the clean shot); `tl5_tracks.py v 8712 15460 17000 --half 12`, `v 8534 15330 17000 --half 12` (no stretch over 31 px without metal in both, each at a contact's ring) |
 | VSS boxes | the cells' two (contacts (8726,16566), (8718,16756)) and the copy's own at the foot of the lower stack, x 8695-8745, y 16922-16975, contact (8713,16950); the lower unit's third pull-down's source strip y 16928-16942 runs into it from the west | `eof_cchk.py 8726,16566 8718,16756 8715,16950` (holes 5, 11, -8; centres 227/237, 236/208, 240/197); `s19_i.png` (3.2x, clean and metal) |
-| VCC contacts | the cell's (8543,16593) and a long one on the two loads' box, (8537,16745). The diffusion under the rail is taller than the cells' boxes (y 16497-16622 and y 16656-16925), with a second long contact (8535,16860): drawn since review round 24 (no poly crosses it) | `eof_cchk.py 8543,16593 8537,16745 8535,16860` (6, -9, 5; 208/223, 223/230, 224/217; the last two long north-south); `railprof.py 8514 8556 16480 16960` |
+| VCC contacts | the cell's (8543,16593) and a long one on the two loads' box, (8537,16745). The diffusion under the rail is taller than the cells' boxes (y 16497-16622 and y 16656-16925), with a second long contact (8535,16860): drawn since review round 24 (no poly crosses it; the upper piece's top edge at y 16510 and a further contact (8532,16537): round 25) | `eof_cchk.py 8543,16593 8537,16745 8535,16860` (6, -9, 5; 208/223, 223/230, 224/217; the last two long north-south); `railprof.py 8514 8556 16480 16960` |
 | thin metal x 8588-8600 | from the upper unit's plate (contact (8594,16648): hole 1, ring, bright centre) to the pad of the lower unit's third pull-down (contact (8594,16846): ring and bright centre in both chips, no green hole in the clean shot: Ambiguity 68); it ends on both | `tl5_tracks.py v 8594 16620 16880`; `textmap.py 8570 16826 8624 16874 3`; `px.py pt 8594,16846 8594,16648 acid,acid1b` |
 | the top pad (the cell's inverter's output) | contact at (8776,16511) (bright centre x 8771-8780 in a dark ring in both chips, green hole in the clean shot), 8 px west of the instance's; its thin metal leaves south only (x 8765-8777, centre 8771 against the instance's 8781) and ends on the lower gate's pad (contact about (8785,16912)); open ground north and east of the pad, no poly leaving it | `textmap.py 8750 16478 8822 16540 3 --acid`; `eof_mrun.py row 16540 / 16720 / 16800` (8770-8772); `eof_rows.py col 8776 16440 16500`, `row 16507 8795 8830` (none); `eof_cchk.py 8791,16913` (-28, 186/192); `eof_rows.py col 8785 16925 17000`, `row 16912 8800 8850` (nothing leaves the lower pad) |
 
@@ -3402,6 +3402,41 @@ tools/t.sh eof sameconn.py 81f6ac5              connections identical
 ```
 
 Round 24: one finding that changes a connection (a third exit of `eof_w16823`), fixed; two geometry-only, fixed.
+
+### Round 25 (fix check of round 24's changes; 2026-11-20 03:38 to 03:48 +0000, after commit 81f6ac5)
+
+A fresh reviewer (Claude Fable 5.2), briefed with `git diff 81f6ac5 -- trace/eof.txt` and round 24's three
+findings in one line each (the branch of `eof_w16823` under the track x 8925; the two strips of the inverter;
+the taller VCC diffusion with its contact), and asked whether each change is right, whether the column is one
+poly with the row and with the leg, whether it touches a metal, the pad (8882,16867) or anything else,
+whether x 8760 is on the leg, and whether any poly crosses the added diffusion. It used 29 tool calls and 9
+images (`cache/scratch/eof/review-25/`), with `px.py`, `textmap.py` and `sameconn.py` (identical both ways
+against 81f6ac5).
+
+It found the three changes right: the branch one poly with the row (no edge bar at y 16832 under the track
+in either metal shot, salmon unbroken y 16816-17000) and with the leg, which reaches x 8760 (poly colour
+continuous x 8748-8933 in the clean and chip-2 stripped shots); no contact to the tracks x 8925, 8882, 8838
+(a dark blob on x 8882 at y 16976-16990 is in chip 2 only); the pad (8882,16867) does not touch the column
+(field colour at x 8904-8910 in both metal shots; the clean shot's salmon blob there is one of that shot's
+ragged fringes beside the column); nothing branches off, and a field strip (y 17010-17016) separates the leg
+from the diffusion south of it in the open; the plate's strip has its edge lines at y 16379-16380 and 16409,
+the east strip at 16418 and 16436-16437; no poly crosses the added VCC diffusion and the contact (8535,16860)
+is there. Two findings, both geometry only, both on the VCC diffusion added in round 24:
+
+1. **`D 8510,16497:8560,16570` was about 11 px too tall** (geometry only): the top edge line is at
+   y 16508-16510 in all four shots, field above. Confirmed (`px.py col 8535 16490 16522 3 metal,acid1b`: the
+   edge at y 16508-16511). Fixed: `D 8510,16510:8560,16570`.
+2. **An undrawn VCC contact at about (8532,16537)** on that piece (geometry only: `vcc` onto `vcc`). Confirmed
+   (`eof_cchk.py 8532,16537`: hole -14, centres 219/150, ring west and east). Fixed: `C 8532,16537`.
+
+After these two fixes (the commit before them is e994105):
+
+```
+tools/t.sh eof sameconn.py e994105              connections identical
+.venv/bin/python tools/sameconn.py e994105      connections identical
+```
+
+Round 25: no findings that change a connection.
 
 ## Not done
 
