@@ -570,3 +570,92 @@ N M 4822,15500 lc2_w8450
 P 4806,16697:4840,16730
 C 4823,16713
 P 4823,16703:4930,16723
+# ================================================================ piece t6 (run 12): six tracks from the left bus field to six rows of the left array
+# Six thin metals cross y 15000 east of cdp4_bus_s0's track, at x 5496, 5540, 5584, 5627, 5671, 5714
+# (north of y 15000 they are in busl's region and drawn by no one yet: ports). Each ends on a pad with a
+# contact whose poly row runs west under the tracks into the left array (ports at x 4780), one row per
+# array row, 150 px south of the diffusion wire of lc3's through line of that row (pieces w9, w10):
+# rows y 15522, 15999, 16649, 17126, 17603, 18081. On the way the bundle steps west as nested L's
+# (no line can cross another: one metal layer): by two track positions (88 px) at y 15090-15308 (round
+# cdp4_bus_s0's end), then by one position (44 px) below each of lc3's lines as it ends (y 15438-15568,
+# 15915-16046, 16565-16652, 17043-17086, 17521). No pad, contact or branch on any of them between
+# y 15000 and its end pad (tl5_tracks.py v/h on every segment: no stretch without metal over 13 px, no
+# hole in the clean shot). Four arms lie ON a poly row for 45-90 px without a contact (trap 13): the
+# first line's arm y 15090 on rst_n's row, and the fourth line's arms y 15522, 16001, 16652 on the rows
+# of the sixth, fifth and third pads. Each pad has a neighbouring track 44 px west of its centre that
+# passes without touching it (15-20 px of open poly between the metal's edge and the pad's ring).
+# Named by the y of the row each ends on.
+# ---- bl0_w18081 (from x 5496)
+M 5496,15000 y15090 x5410 y15438 x5366 y15915 x5322 y16565 x5279 y17043 x5236 y17521 x5193 y18084 x5106 w=14
+N M 5496,15040 bl0_w18081
+P 5089,18065:5125,18097                            # pad
+C 5106,18081
+P 4780,18081 x5106 w=22                            # poly row west into the left array (port at x 4780)
+# ---- bl0_w17603 (from x 5540)
+M 5540,15000 y15134 x5453 y15481 x5409 y15958 x5366 y16608 x5323 y17086 x5279 y17603 x5236 w=14
+N M 5540,15040 bl0_w17603
+P 5219,17587:5254,17619                            # pad
+C 5236,17603
+P 4780,17603 x5236 w=22                            # poly row west (port at x 4780)
+# ---- bl0_w17126 (from x 5584)
+M 5584,15000 y15177 x5496 y15522 x5453 y16001 x5409 y16652 x5366 y17127 x5322 w=14
+N M 5584,15040 bl0_w17126
+P 5304,17111:5341,17143                            # pad
+C 5322,17127
+P 4780,17126 x5322 w=22                            # poly row west (port at x 4780)
+# ---- bl0_w16649 (from x 5627)
+M 5627,15000 y15221 x5540 y15568 x5497 y16046 x5453 y16649 w=14
+N M 5627,15040 bl0_w16649
+P 5436,16632:5471,16666                            # pad
+C 5453,16649
+P 4780,16649 x5453 w=22                            # poly row west (port at x 4780)
+# ---- bl0_w15999 (from x 5671)
+M 5671,15000 y15264 x5584 y15999 x5538 w=14
+N M 5671,15040 bl0_w15999
+P 5521,15982:5557,16017                            # pad
+C 5538,15999
+P 4780,15999 x5538 w=22                            # poly row west (port at x 4780)
+# ---- bl0_w15522 (from x 5714)
+M 5714,15000 y15308 x5627 y15522 w=14
+N M 5714,15040 bl0_w15522
+P 5608,15505:5645,15540                            # pad
+C 5626,15522
+P 4780,15522 x5626 w=22                            # poly row west (port at x 4780)
+
+# ================================================================ piece m7144 (run 12): the thin metal x 7137-7152 north of the pad (7144,17340)
+# Another net than bl0_w17337 (run 3, review round 4: bare ground between its corner and that pad,
+# re-measured in run 12: px.py col 7144 17296 17352). One wire, 4,400 px, no transistor, no branch:
+# a pad (7143,15566) whose poly row goes east into bc1's gate group (port); a thin metal south to a pad
+# (7143,16259); a poly column under the wide bus metal (over field) to a pad (7143,16474); a thin metal
+# south to a corner (7144,17305), west to x 7103, south to a corner (7103,17866) and east to a pad
+# (7384,17866), inside the L of the clock's metal (tl4: x 7058, y 17908); a poly row east under the
+# supply rail x 7470-7520 (no diffusion under the rail) to a pad (7602,17866); a metal east to a corner
+# (7970,17866), north 44 px LYING ON a poly column x 7962-7983 of another net (no contact: salmon in the
+# clean shot all along, no ring in either metal shot) and east along y 17824 to a pad (8272,17821),
+# whose poly row runs on east (port; seen as open poly to about x 8690).
+# Places where the wire crosses or lies on something with no contact: the metal x 7179-7197 (another
+# net: from a pad (7186,15520) south to a pad (7187,15696)) crosses the north row at x 7188; the thin
+# metal crosses poly rows at y 15738, 15825, 15998, 16540, 16780 (rcs_mv), 16866, 16996, 17040 and
+# 17560 (busl_x6906); the clean shot is green under it at y 15763-15815 (no pad, no ring: no contact);
+# the clock's branch x 7551-7566 crosses the row y 17866.
+P 7127,15550:7160,15583                            # north pad
+C 7143,15566
+P 7143,15566 x7260 w=22                            # poly row east, under the metal x 7179-7197 (no contact), into bc1's group (port at x 7260)
+N P 7230,15566 bl0_w15566
+M 7144,15566 y16259 w=14                           # thin metal x 7137-7151 south
+P 7127,16242:7160,16276                            # pad
+C 7143,16259
+P 7144,16259 y16474 w=20                           # poly column under the wide bus metal y 16340-16400
+P 7126,16457:7160,16492                            # pad
+C 7143,16474
+M 7144,16474 y17305 x7103 y17866 x7384 w=14        # south, the corner 35 px short of bl0_w17337's pad, west, south, east
+P 7367,17849:7401,17883                            # pad
+C 7384,17866
+P 7384,17865 x7602 w=20                            # poly row east under the supply rail
+P 7585,17849:7619,17883                            # pad
+C 7602,17866
+M 7602,17866 x7970 y17824 x8272 w=14               # east, north on another net's poly column (no contact), east
+P 8255,17805:8291,17839                            # pad
+C 8272,17821
+P 8272,17821 x8360 w=20                            # poly row on east (port at x 8360)
+
