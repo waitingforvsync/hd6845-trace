@@ -8,7 +8,7 @@ metal-shot pixels. Evidence: `cache/scratch/bl0/` (`survey.md` holds every measu
 ## Status
 
 Run 10 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 11:54 -0600). One piece of wiring, no transistor, no
-uncertain item: the other five through lines of `lc3`.
+uncertain item; reviewed (round 12: no findings): the other five through lines of `lc3`.
 
 - **Piece `w10`** (wiring, 9,500 px). `lc3_e9621`, `lc3_e9665`, `lc3_e9708`, `lc3_e9750`, `lc3_e9793` (tracks
   x 5279, 5235, 5192, 5148, 5105) each run on south from y 15000 to a contact on a diffusion box, at
@@ -957,6 +957,26 @@ the box and that row by colour; the thin bus metals in chip 1 at high zoom; x 67
 16870-17000 by view (profile and metal test only).
 
 Round 11: no findings.
+
+### Run 10
+
+Round 12 (full review of piece `w10`; fresh Fable 5.2 reviewer; 2026-11-20 12:03 -0600; commit aa3ad04; images
+`cache/scratch/bl0/review-12/`). Told that only two of the five strips had been viewed and that the
+followers' candidates were unread, and to suspect: each strip as diffusion, its continuity, a poly
+across it, a join or branch, a neighbouring strip taken for it; each track's whole length (a jog onto a
+neighbour, a contact, above all where it crosses an earlier wire's strip); each end; the joins with
+`busl`. Checked with profiles every 8 px along each strip, the two-chip metal test and a scan of the
+gaps beside every track, text maps and 17 views: all five strips diffusion (tan under metal against
+salmon on the poly row y 15413; in the open like the reference wire), continuous with both edge lines
+21-23 px apart at every sample from x 4764 to the box, no poly across, still there at x 4750; the band
+north of the fourth strip is field; every track continuous with bars of 8-17 px only and no metal
+beside it; all 15 crossings of a track over an earlier strip plain; every candidate read, none a
+contact; all five ends like the reference in four shots; the joins with `busl`. Could not check: the
+tracks x 5148-5279 at y 15520-15700 in chip 1 (a blemish in both its shots; chip 2 only); the 16-20 px
+dark stretch where each track enters its pad (read as the box's and strip's edges, as on the
+reference); west of x 4750.
+
+Round 12: no findings.
 
 ## Not done
 
