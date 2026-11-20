@@ -554,3 +554,19 @@ N M 5105,15200 lc3_e9793
 D 5106,17908:5151,17950
 C 5126,17929
 D 4780,17924:5111,17938
+
+# ================================================================ piece w11 (run 11): two more tracks of the left bus field
+# ---- cdp4_bus_s0: busl's track x 5451 ends at y 15000; on south 45 px, west along y 15045 to a pad
+# (5364,15044), whose poly row y 15033-15053 runs west under the tracks into the left array (port).
+M 5451,15000 y15045 x5364 w=16
+N M 5451,15010 cdp4_bus_s0
+P 5348,15027:5382,15060
+C 5364,15044
+P 4780,15033:5366,15053
+# ---- lc2_w8450, second branch: busl's track x 4822 ends at y 15000; on south to a pad (4823,16713),
+# whose poly row y 16703-16723 goes east (port).
+M 4822,15000 y16713 w=14
+N M 4822,15500 lc2_w8450
+P 4806,16697:4840,16730
+C 4823,16713
+P 4823,16703:4930,16723

@@ -17,3 +17,4 @@
 5720,15078:7280,15800    route  rst_n's other ends | its poly row east under the tracks to a gate under the bottom-centre logic's rail x 7292-7342, and its thin metal south to a pad (5737,15759) and a poly column on south into the bottom-left logic
 4780,15000:7040,17000    route  three tracks of the left bus field on south | busl_x6820 and rcs_mv under the bus of metals as poly columns and on south; lc3_e9577 onto a diffusion wire west into the left array
 4780,15000:5324,17950    route  the six through lines into the left array | lc3_e9577..lc3_e9793: each track ends on a contact to a diffusion box and goes on west as a diffusion wire, one about every 478 px
+4780,15000:5459,16730    route  two more tracks of the left bus field | cdp4_bus_s0 onto a poly row y 15043 west into the left array; lc2_w8450's second branch south to a pad (4823,16713) and a poly row east
