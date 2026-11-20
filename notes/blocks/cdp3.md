@@ -464,6 +464,16 @@ Into parts not yet traced (the labels sit on the stubs):
     x 7984-8005 (pink in the clean shot there, an orange patch inside a dark ring in both metal
     shots). If it is two polys, the west one (from the pad (7878,8315)) and the east one (into the
     third load's plate) are different nets, which may remove the contradiction. Start there.
+  - **Checked 2026-11-20 13:52: the row is two polys.** At y 8502-8525 the west poly (from the pad
+    (7878,8315)) ends at about x 7977 and the east poly starts at about x 7995: between them the clean
+    shot is pink (field under metal) and chip 2's metal shot grey bare ground, in a notch of the rail
+    (`cache/scratch/cdp3/j6.png`, 9x, three shots; `textmap.py 7960 8490 8050 8536 3`). The east poly
+    crosses the east finger (x 8003-8040) and runs on east and south (x 8058-8072, y 8505-8545) into the
+    third load's plate. With all five boundaries joined this still leaves a transistor whose gate and
+    drain are one net (the east finger: gate = the third load's plate, which is tied to its node, which
+    by boundaries (e), (c) and the metal x 7927-7957 is the node above the finger). So one of these is
+    still misread: the two contacts of that metal ((7937,8474), (7935,8648)), the plates' ties, or a
+    boundary. Not resolved; nothing of the cluster is drawn.
   - Also there and not drawn: two thin metals at x 8050-8058 and x 8076-8084 (narrow, in pieces), the
     metal from the pad (8118,8448) south, the metal from the north onto the pad (7878,8315) (follower:
     a corner (7989,7386), end (7986,6844)).
