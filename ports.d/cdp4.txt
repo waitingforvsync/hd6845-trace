@@ -1,0 +1,8 @@
+# NAME        LAYER  X,Y              DIR  note
+rsel14_buf    P      7550,13701       in   busl's row end; gate 1 of the corner group's NOR (cdp4_rst)
+rsel13_buf_u  P      7550,13751       in   the block at the step of the group's row 2 (y 13759 east of it); west of x 7550 it is busl's undrawn row y 13744, believed rsel13_buf
+rsel17_buf    P      7550,13809       in   busl's row end; gate 3
+rsel12_buf_u  P      7550,13873       in   the group's row 4; west of x 7550 it is busl's undrawn row y 13852 (steps north to it at x 7535-7550), believed rsel12_buf
+rsel16_buf    P      7550,13961       in   busl's row end; gate 5
+rsel15_buf    P      7550,14004       in   busl's row end; gate 6 (the row steps south to y 14028 at x 7552-7580)
+cdp4_rst      P      7532,13916       out  the NOR's output: buried contact of this poly in the box (7537-7582,13903-13940)

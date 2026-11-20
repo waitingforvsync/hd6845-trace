@@ -312,7 +312,8 @@ None of these rows has a register number yet, so all names are by place. Columns
 | `cdp4_in_s#`, `cdp4_in#b_s#`, `cdp4_in#_s#` | data inputs of those rows |
 | `cdp4_n_s#` | output node of the 4-way selector, slice # |
 | `cdp4_a_s#`, `cdp4_b_s#`, `cdp4_c_s#`, `cdp4_d_s#` | the selector's four sources per slice |
-| `cdp4_rst` | gate of the pull-down on the selector node; its poly ends on a box of the gate group at `cdp4`'s bottom-left corner, believed its driver (`busl`, piece `ctl`, Ambiguity 9) |
+| `cdp4_rst` | gate of the pull-down on every selector node `cdp4_n_s#`. **= NOR(`rsel14_buf`, `rsel13_buf_u`, `rsel17_buf`, `rsel12_buf_u`, `rsel16_buf`, `rsel15_buf`)**: the gate group at `cdp4`'s bottom-left corner (x 7550-7870, y 13640-14055; `notes/blocks/cdp4.md`, run 2, traced, no uncertain item). Its poly ends in a buried contact on the gate's output diffusion (AMB-038, reading (a)) |
+| `rsel13_buf_u`, `rsel12_buf_u` | open joins: the second and fourth gate rows of that group (y 13759 and y 13873 at x 7550-7715). West of x 7550 they are the left bus field's undrawn rows y 13744 and y 13852, which `regs` run 3 read as taps of `rsel13_buf` (6492,13744) and `rsel12_buf` (6450,13852). Believed; the join is `busl`'s to draw |
 | `cdp4_bus_s#` | the eight poly lines of channel 1; each is one net with `cdp4_in_s#` (the row C latch input of the same slice) and with one poly row of the left array, joined in the left bus field (`busl`, piece `ch1`; `@alias` in `trace/busl.txt` until the rename) |
 
 ## Left array (`notes/blocks/larr.md`): the 14-bit memory address counter
