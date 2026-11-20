@@ -699,7 +699,7 @@ N M 7164,8000 busl_x6992
 # (corners y 13507, 13550, 13594) and the three diagonals next to its in the bundle north of
 # y 10400 (x + y = 16116, 16182, 16247). Each is one wire with no pad, contact or tap between
 # the ends listed. Scan: cache/scratch/busl/g11_scan.txt; views g1..g7 in cache/scratch/busl/.
-#   rcs_mv (fc): tl6's poly column x 6237 from its port (6236,6350) south under eight metals
+#   rcs_mv (fc): tl6's poly column x 6237 from its port (6236,6350) south under ten metals
 #       (no contact) to a pad (6232,6911); metal east along y 6913 to x 7208, south to a pad
 #       (7207,8625); a POLY column south under the two staircase metals (no contact) to a pad
 #       (7206,8798); metal south, the diagonal (7208,8908)-(7035,9081), track x 7036, arm
@@ -720,7 +720,7 @@ N M 7164,8000 busl_x6992
 #       x 7144, a pad (7143,14481) on the row y 14480, which runs east out at x 7550.
 # =====================================================================================
 # fc: rcs_mv
-P 6237,6345 y6905 w=20                # tl6's column on south, under eight metals, no contact
+P 6237,6345 y6905 w=20                # tl6's column on south, under ten metals, no contact
 P 6213,6892:6252,6930                 # the pad
 C 6232,6911 s=24x24
 M 6230,6913 x7208 y8627 w=14
