@@ -871,7 +871,7 @@ N P 7300,14393 busl_x6603
 #       is 19-24 px at every 6 px in one or both stripped shots) to a bend (5367,6806); a
 #       45-degree diagonal (x - y = -1439, the south-west one of three; the middle one is eof's
 #       bd1_n2) to (5602,7041); the poly row y 7041 east under the crossing field's tracks (no
-#       pad) to its end pad (6188,7042); metal east along y 7043 over ten vertical polys to a
+#       pad) to its end pad (6188,7042); metal east along y 7043 over five vertical polys to a
 #       plain L corner (6948,7043) (the south-most of three nested corners; the middle one is
 #       bd1_n2's), south on x 6948, west along y 8406 to a pad (6903,8408); poly column x 6904
 #       south under the staircase metals (y 8455, 8585, 8625; legs of two of them lie beside it

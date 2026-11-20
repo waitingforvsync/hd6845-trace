@@ -1204,7 +1204,7 @@ fifteen straight segments (`tools/tl5_tracks.py v/h`, kept in `cache/scratch/bus
   L, nothing north of it (`tools/sel_cut.py v 6947 7020 7070`: the metal's north edge at y 7037; tile 1 of
   `i12_corners.png`); the arm y 8406 runs from the track to the pad's ring (`tools/sel_cut.py h 8405 6880
   6970`, both chips: metal x 6929-6956, the pad's centre at x 6903/6904; `i5_pad2.png`). The run y 7043
-  passes over ten vertical polys (x 6263-6470) and the run x 6948 over the rows of the crossing field
+  passes over five vertical polys (centres x 6280, 6323, 6366, 6409, 6453; `tools/tl5_tracks.py rows row 6240 6490 3 7036 7043 7050`; run 13 first wrote ten, counting their edge lines: found by run 13's reviewer) and the run x 6948 over the rows of the crossing field
   and of `eof`: no stretch without metal in both chips of 14 px or more on either (bars of 8-13 px).
 - **The poly column x 6904, y 8408-8669** (`i6_col.png`, 3.2x, three shots, `eofw`'s and `trunks`' traces
   outlined; `tools/px.py col 6904 8425 8655 10 metal,acid,acid1b`): cream in the clean shot from pad to
@@ -1213,14 +1213,21 @@ fifteen straight segments (`tools/tl5_tracks.py v/h`, kept in `cache/scratch/bus
   8455, 8585 and 8625), and the vertical legs of two of them lie beside it (`eofw`'s `ck_out`
   x 6876-6890, y 8490-8575, 3 px from the column's west edge as drawn; `trunks`' x 6921-6938, y 8455-8540):
   beside, not on, and without a pad; no hole on the column (`tools/tl5_tracks.py v 6904 8430 8650`:
-  none).
+  none). Where the metal y 8625 crosses the column, chip 1's metal is dim and orange for 32 px
+  (x 6892-6924) and the chip-2 stripped shot has a greenish patch of about 10 x 12 px at (6907-6916,
+  8621-8633); chip 2's metal is plain yellow there (red 190-220) without a ring and the column is not
+  widened (`tools/textmap.py 6880 8606 6931 8645 3 --acid`): no contact (found by run 13's reviewer).
 - **The diagonal and the staircases** (`i9_diag.png`, 2.4x, both metal shots, overlay; `i7_arms.png`, 2.6x,
   overlay): four-line nests as in run 12, this line the outermost of lines 11-14 and inside
   `rsel12_buf`'s. Chip 1 has dirt between this diagonal and `bd1_n2`'s at (6850-6870, 8800-8820); chip 2
   is clean there. **The upper arm lies on `cdp4_bus_s3`'s poly row y 12052** for 173 px: no stretch
   without metal in either chip (`tools/tl5_tracks.py h 12054 6480 6640`), metal of constant width without
-  a ring; one greenish speck of 10 px in the clean shot at (6506,12054) where both metal shots are bright
-  (tile 3 of `i4_t1.png`), like line 13's at (6440,12009).
+  a ring; one greenish patch in the clean shot, about 24 x 10 px at (6497-6520, 12044-12054) (widest at its
+  north side, 6 px at the arm's centre line), also in the chip-2 stripped shot (red minus green 2-19
+  against 50-80 beside it), where both metal shots are bright along the centre line without a ring and
+  the row's north edge line is unbroken at y 12042 in both (`tools/textmap.py 6484 12036 6532 12066 3
+  --acid`; tile 3 of `i4_t1.png`; the reviewer's `review-13/r05`, `r06`): no contact. Line 13 has a smaller
+  one at (6440,12009).
 - **The north arm's east end and `regs`' pad (6730,10055)** (`i8_c10015.png`, 4.5x, four shots, all
   traces; `tools/textmap.py 6708 10000 6760 10070 3`): the corner (6732,10015) lies straight above the pad
   of `cdp3_gate_e`'s row, on whose south side `rsel12_buf`'s metal arrives. Between the arm's south edge
@@ -1647,14 +1654,18 @@ logic**, not read. With it the fourteen lines of the staircase bundle are all dr
    Would settle any of them from another direction: the far ends of the rows.
 21. **Polys under and over the wire of run 13 without a contact** (drawn plain, traps 8, 13, 15): the
    nine horizontal metals over the column x 5367 and the crossing field's tracks over the row y 7041
-   (widths measured every 6 px: no pad); the ten vertical polys under the metal y 7043 and the rows
+   (widths measured every 6 px: no pad); the five vertical polys under the metal y 7043 and the rows
    under the run x 6948; the three staircase metals over the poly column x 6904 and the two legs
    beside it; the upper arm on `cdp4_bus_s3`'s row y 12052 (173 px); the tracks over the row y 14350
    and the wide metals x 7490-7535, x 7575-7625 over its east end. None has a pad, a ring or a hole
-   (Inventory). One mark is recorded there and assumed no contact: the track x 6408 over `cdp4_bus_s1`'s
-   row y 13375, dim in chip 2 only (chip 1 bright, no hole in the clean shot, the row not widened); the
+   (Inventory). Three marks are recorded there and assumed no contact: the track x 6408 over `cdp4_bus_s1`'s
+   row y 13375, dim in chip 2 only (chip 1 bright, no hole in the clean shot, the row not widened; the
    candidate reading, a contact of `tl5_w2722` onto `cdp4_bus_s1`, would need a pad that neither chip
-   shows. Not looked at one by one: the rows that the run x 6948 crosses between y 7050 and y 8400
+   shows); the greenish patch (6497-6520, 12044-12054) under the upper arm on `cdp4_bus_s3`'s row, seen in
+   both chips' stripped shots, with both metal shots bright and ringless over it (a contact there would
+   join `tl5_w2722` to `cdp4_bus_s3`); the metal y 8625 over the column x 6904, dim in chip 1 only, with
+   a greenish patch in the chip-2 stripped shot and chip 2's metal plain (a contact there would join
+   `tl5_w2722` to the undrawn staircase metal). Not looked at one by one: the rows that the run x 6948 crosses between y 7050 and y 8400
    other than the two flagged ones. Would settle any of them from another direction: the far ends of
    the rows.
 
@@ -2120,6 +2131,53 @@ x 6440; the long straight runs between the staircases at 4x (read by the scans a
 and y 8060 one by one, other than (6905,7880).
 
 Round 1: no findings.
+
+**Run 13, piece `gd`. Round 1: full review** (2026-11-20 21:05 to 21:20 +0100; a fresh Fable 5.2
+reviewer agent; commit 6fe819f; images in `cache/scratch/busl/review-13/`, 17 used). Told to suspect:
+the three staircases (arms y 10015, 12054, 12943) and the diagonal y 8756-8928 (a line on the wrong
+track or two lines swapped among lines 13, 14, `rsel12_buf`, `bd1_n2`; `tools/follow.py` misreads the
+staircase y 11923-12054); the north arm's corner (6732,10015) above `regs`' pad (6730,10055) (trap
+33); the upper arm on `cdp4_bus_s3`'s row; the track x 6408 over the row y 13375 (dim in chip 2);
+the poly column x 6904 with the two legs beside it; the corner (6948,7043) and the arm y 8406 onto the
+pad (6903,8408); the pad (6188,7042) and what leaves it; the row y 7041 (one poly, no pad, which
+diagonal and which column it joins); the join to `tl5` at y 6350 and the nine metals over the column;
+the foot pad (accepted with a pale centre), the field west of it and the row to x 7550.
+Checked: the upper staircase (the follower overruns the arm y 12054 to x 6688; the 25 px between
+x 6654 and x 6682 are open poly in both chips, so the arm ends at x 6653, and its west end is apart
+from the track x 6430); the nest order at all three staircases and on the diagonal (`tools/busl_both.py`:
+x + y = 15656-15664 at six heights, neighbours 15598 and 15727); the corner (6732,10015) over the pad
+(6730,10055) (9 px of bare ground between in both chips, open-ground green in the clean shot across
+x 6702-6750); the crossing (6408,13357-13377) (chip 2 only; chip 1 a normal crossing, the same as the
+control at x 6366; no hole, the row not widened); the column x 6904 (poly from pad to pad, the two
+legs beside it, line 13's corner above the pad (6903,8408) apart by bare ground); the corner
+(6948,7043) (a plain L; the track bends onto the pad (6903,8408), not (6988,8427)); the four pads
+(ring and bright centre in both chips; nothing else leaves any); the rows y 7041 and y 14350
+(continuous, no pad, also under the wide metal x 7490-7535; field west of the foot pad); the north end
+(the diagonal x - y = -1440 continuous, the south-west of three; no pad on the column x 5367 under
+the nine metals; one poly with `tl5`'s across y 6350); the extraction and both ports. Zoom 4x and more
+at the junctions (`r01` .. `r17`), text tools elsewhere.
+Findings, all three geometry or comment only (none changes a connection):
+1. The metal y 7043 at x 6263-6470 passes over five vertical polys (centres x 6280, 6323, 6366, 6409,
+   6453), not ten: the ten are their edge lines. No ring, hole or widening on any. **Confirmed**
+   (`tools/tl5_tracks.py rows row 6240 6490 3 7036 7043 7050`: five runs of poly); the trace's comment
+   and the notes corrected. Comment only.
+2. The mark under the arm y 12054 is a patch of about 24 x 10 px at (6497-6520, 12044-12054), also in
+   the chip-2 stripped shot, not a 10 px speck in the clean shot only. Not a contact (both metal shots
+   bright along the centre line, no ring; the row's north edge line unbroken). **Confirmed**
+   (`tools/textmap.py 6484 12036 6532 12066 3 --acid`); the notes corrected, and it is listed in
+   Ambiguity 21. Comment only.
+3. The metal y 8625 over the column x 6904: chip 1's metal dim and orange for 32 px with a greenish
+   patch in the chip-2 stripped shot, not in the notes; chip 2's metal plain, no ring, the column not
+   widened: no contact. **Confirmed** (`tools/textmap.py 6880 8606 6931 8645 3 --acid`); written into
+   the piece's notes and Ambiguity 21. Comment only.
+The proof that the fixes change no connection (the trace file changed in one comment line):
+`tools/t.sh busl sameconn.py 6fe819f`: `connections identical`;
+`.venv/bin/python tools/sameconn.py 6fe819f`: `connections identical`.
+Could not check: the roughly 40 track crossings of the two rows one by one at 4x (tested by text);
+the long tracks x 6646, 6473, 6408 and 6948 between their ends (the two-chip text test only); the row
+east of x 7550; and the poly under metal rests mostly on chip 1's clean shot.
+
+Round 1: no findings that change a connection.
 
 ## Not done
 
