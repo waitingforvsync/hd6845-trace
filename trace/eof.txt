@@ -2045,19 +2045,24 @@ N M 7345,18473 eof_w17362
 # at every cut, centre y 18471-18475, no second run and no widening) 1,060 px west from the pad
 # (7384,18473) with no pad and no branch in its run (tl5_tracks.py h 18473 6250 7370 --half 2:
 # no stretch of 20 px without metal in both chips; r26_run.png, 1.15x, both metal shots and the
-# clean shot). It crosses two vertical poly columns of other nets, x 6903-6917 and x 6943-6958
-# (the 9-13 px dark bars at x 6898-6906, 6937-6949, 6959-6968 are their edges): the metal keeps
-# its width there, no ring in either metal shot, the columns continuous cream under it in the
-# clean shot with no hole: no contact (r26_x.png, 6x, four shots; trap 15). Nobody draws the
-# columns. The clean shot is pink (field) under the metal everywhere else.
+# clean shot). It crosses two vertical columns of other nets: a diffusion wire x 6903-6917
+# (plain in the open: chip 2 blue 83-84, chip 1 green 118-123, chip-2 stripped red minus green
+# 16-21; tan under the metal in the clean shot; review round 33, trap 39) and a poly column
+# x 6943-6958 (orange in the open, blue 44-61; salmon under the metal). The dark bars at
+# x 6898-6906, 6916-6923, 6937-6949, 6959-6968 (8-13 px) are their edges: the metal keeps its
+# width there, no ring in either metal shot, both columns continuous under it in the clean shot
+# with no hole: no contact (r26_x.png, 6x, four shots; traps 15, 36). Nobody draws the columns.
+# The clean shot is pink (field) under the metal everywhere else.
 M 7384,18473 x6322 w=13
 # the end pad (6322,18472): outline x 6305-6347, y 18452-18490, a dark ring with a bright centre
 # in both metal shots, a heavy-outlined box with a pale centre in the chip-2 stripped shot, the
-# clean shot's pad pale inside (r26_end.png, 4.8x, four shots; textmap.py 6290 18446 6372 18500
-# 3 --acid). Ground north, south and beyond the ring: nothing else leaves it but the poly west.
+# clean shot's pad pale inside with a green hole at (6322,18479) (154/179/115; review round 33)
+# (r26_end.png, 4.8x, four shots; textmap.py 6290 18446 6372 18500 3 --acid). Ground north,
+# south and beyond the ring: nothing else leaves it but the poly west.
 P 6306,18456:6342,18489
 C 6322,18472
 # the pad's poly west, y 18462-18482, in the open (orange in both metal shots, blue under 60:
 # px.py pt 6285,18471): seen to x 6262 in all four shots and running on west. Drawn to x 6262,
-# a port; not followed (the bottom-left logic's region, bl1/bl2).
+# a port; not followed (the bottom-left logic's region, bl1/bl2; open only to x 6248, then
+# under a wide vertical metal x 6185-6238: review round 33).
 P 6322,18472 x6262 w=20
