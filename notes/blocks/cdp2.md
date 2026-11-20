@@ -24,7 +24,7 @@ the most significant of the five compared bits, s7 the least.**
 ## Status
 
 - **Run of 2026-11-20 17:16 -0600** (Matt Godbolt's session, Claude Fable 5.2): **piece `ga`, the first gate of
-  the logic left of rows B** (x 7645-8253, y 6985-7140; 2 transistors, two uncertain items): an inverter,
+  the logic left of rows B** (x 7645-8253, y 6985-7140; 2 transistors, three uncertain items; reviewed: round 1 one finding that changes connections, fixed; round 2, the fix check, none): an inverter,
   **`cdp2_w7065` = NOT `tc2_sr_q`** (marked: its load's tie and its output's buried contact are both `?B`).
   The output leaves on a poly row west to a pad (7662,7083) and a metal north (port). Two thin metals
   pass over the gate without contact: `db_b6`'s (x 8107-8121) and a through line `cdp2_w6845` (x 7978-8000:
@@ -561,6 +561,27 @@ Findings:
    Recorded in Not done.
 
 Round 1: one finding that changes connections, fixed; two geometry or notes findings.
+
+Round 2 (fix check of round 1's fixes; fresh Fable 5.2 reviewer; 2026-11-20 17:53 -0600; against commit bdab944; images
+`cache/scratch/cdp2/review-2/`). Checked at 5x or more with profiles and text maps: the east box (metal
+of unchanged width, no pad, the clean shot's centre 195/180/123 with no hole, fringes in the chip-2
+stripped shot against a pitted pad at the real contact (7922,7040); the tail open orange poly ending by
+x 8104; one edge line only between box and neck); the south-west box (the row red-brown without a field
+stripe up to the box, ending at about x 7992 inside it; metal not widened, no ring); no other pad or
+contact on either thin metal between y 6990 and 7150; the row does not go on east (field, then pink
+under the rail); block and tail touch only the box; nothing left unconnected; the geometry
+(diffusion edge x 8148, poly edge 8169-8170). `.venv/bin/python tools/sameconn.py bdab944`: exactly the
+four intended differences. One marking item, no connection change: the through line's metal is dark for
+19 px over the node's box (y 7087-7105), which trap 27 wants drawn `?M` with an alias: done
+(`cdp2_w6845s` aliased to `cdp2_w6845`). Outside the diff: a third thin metal (x 8154-8170, y 6714-7658)
+passes over the load's strip and tail without contact; noted in the trace and in Not done.
+
+The marking's effect, measured against the commit before it: with the `?M` stretch alone (the second
+label and the alias line left out) `tools/t.sh cdp2 sameconn.py 64ffb1b` and `.venv/bin/python
+tools/sameconn.py 64ffb1b` both end: connections identical. With the label and alias in, the only
+differences are the two "names on one net" lines for `cdp2_w6845` / `cdp2_w6845s`.
+
+Round 2: no findings that change a connection.
 
 ## Correction from the coordinating session (2026-11-15)
 

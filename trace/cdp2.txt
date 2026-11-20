@@ -573,10 +573,16 @@ P 8169,7012:8205,7110                 # the poly block (channel W about 73, L ab
 P 8112,7092:8172,7110                 # its tail west
 P 8100,7080:8134,7104                 #   and its end in the box
 ?B 8098,7076:8136,7092
-# the two thin metals that pass over the gate
+# the thin metals that pass over the gate (a third, x 8154-8170, crosses the load's strip and tail: not drawn)
 M 8114,7000 y7395 w=14                 # db_b6's metal: on south to where row C's piece starts; on north (port)
-M 7988,6845 y7388 x7950 y8212 x7880 y8315 w=14   # a through line: from a pad (7987,6845) to a pad (7878,8315) in cdp3's ground
-N M 7988,7200 cdp2_w6845
+# a through line: from a pad (7987,6845) to a pad (7878,8315) in cdp3's ground. Over the node's box it is
+# dark for 19 px (y 7087-7105): drawn ?M there (tracing guide, trap 27); the names are gathered by alias.
+M 7988,6845 y7089 w=14
+N M 7988,6950 cdp2_w6845
+?M 7988,7085 y7107 w=14
+M 7988,7103 y7388 x7950 y8212 x7880 y8315 w=14
+N M 7988,7200 cdp2_w6845s
+@alias cdp2_w6845 cdp2_w6845s
 P 7970,6828:8004,6862
 C 7987,6845
 P 7335,6836:7987,6858                 # its poly row west to a pad (7335,6845)
