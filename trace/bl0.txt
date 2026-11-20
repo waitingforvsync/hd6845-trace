@@ -332,7 +332,7 @@ P 7188,17290:7357,17311                            # gate band, east end x 7357
 M 7188,17300 y17472 w=20                           # bl0_w17210's metal on south to its last pad; it ends there
 P 7172,17457:7206,17488                            # pad (7188,17472)
 C 7188,17472
-P 7188,17472 x7215 w=22                            # its poly row east: gate band A of the fourth unit (not drawn: port)
+P 7188,17461:7338,17483                            # its poly row east: gate band A of the fourth unit (piece u45)
 
 # ---- the track of bl0_w17337: a thin metal x 7137-7152 from the pad (7144,17340) south to a pad
 # (7143,17647) whose poly row goes east (port). It starts at the pad: the thin metal on the same x north
@@ -341,4 +341,62 @@ P 7188,17472 x7215 w=22                            # its poly row east: gate ban
 M 7144,17340 y17647 w=14
 P 7127,17631:7160,17663                            # pad
 C 7143,17647
-P 7143,17646 x7215 w=20                            # poly row east: a gate band of the fifth unit (not drawn: port)
+P 7143,17636:7350,17656                            # poly row east: gate band C of the fifth unit (piece u45)
+
+# ================================================================ piece u45 (run 4): the fourth and fifth units, a cross-coupled pair
+# DRAFT, not reviewed.
+#     bl0_n0 = NOR( bl0_w17210, bl0_x )                 bl0_w17210 on two bands in series (A, B: one poly)
+#     bl0_x  = NOT( R3 OR (bl0_w17337 AND D) OR bl0_n0 )
+M 7317,17350 y17755 w=50                           # the rail on south to its end
+M 7495,17350 y17670 w=50
+# ---- unit 4
+D 7243,17425:7352,17458                            # top node N0
+B 7240,17423:7270,17450
+P 7218,17412:7268,17448                            # poly cap on the buried contact (ends there)
+D 7243,17455:7327,17548                            # stack: band A, node, band B, strip below
+P 7185,17483:7205,17527                            # the pad's poly south onto band B
+P 7185,17504:7338,17527                            # band B
+D 7305,17543:7355,17582                            # box with the rail contact
+C 7322,17560
+D 7350,17425:7410,17452                            # N0's strip east
+D 7404,17422:7470,17447                            #   under the load plate
+D 7468,17370:7522,17470
+C 7495,17420
+P 7408,17403:7462,17490                            # load plate and, in one poly, the pad south of it
+C 7432,17470
+P 7374,17460:7410,17488                            # its finger west onto the buried contact
+B 7372,17458:7410,17492
+D 7366,17450:7404,17540                            # tab south from the strip: buried contact, then the channel of T_x
+D 7325,17537:7402,17553                            # T_x's source: strip east from the box of the rail contact
+N P 7435,17480 bl0_n0
+M 7432,17470 y17684 w=18                           # N0's thin metal south
+P 7418,17667:7452,17700                            # pad
+C 7434,17684
+P 7366,17668:7420,17695                            # T_n's gate
+# ---- X's poly: T_x's gate, the bar under the thin metal, X's load plate and its finger
+P 7362,17505:7410,17528
+P 7410,17502:7438,17600
+P 7406,17575:7462,17632
+P 7362,17600:7410,17612
+B 7358,17597:7402,17615
+N P 7424,17550 bl0_x
+# ---- unit 5
+D 7243,17528:7330,17546                            # strip below band B (on the rail by the box)
+D 7243,17528:7292,17724                            # the open column: R3, the buried contact, C, D
+P 7215,17549:7297,17572                            # row R3 from the west (port)
+B 7240,17590:7268,17620
+P 7188,17595:7266,17615                            # X's poly west to a pad
+P 7172,17589:7206,17621
+C 7188,17605
+M 7188,17605 y17640 w=20                           # the second metal on x 7178-7198, on south (port)
+D 7290,17603:7366,17616                            # X under the rail and east to the buried contact of the plate
+D 7290,17603:7343,17702                            # under the rail: X, band C, node, band D
+D 7364,17612:7402,17664                            # the block east of the rail (X)
+D 7400,17614:7470,17632                            #   its strip under the load plate
+D 7468,17570:7522,17660
+C 7495,17615
+P 7215,17676:7350,17698                            # row D from the west (port)
+D 7290,17700:7347,17752                            # box with the rail contact
+C 7308,17727
+D 7243,17703:7420,17722                            # strip along the bottom
+D 7372,17660:7402,17705                            # T_n's channel from the block down to the strip
