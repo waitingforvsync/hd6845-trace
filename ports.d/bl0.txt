@@ -1,8 +1,8 @@
 # bl0: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
 res_b        M  6359-6373,15000   in   busl's track x 6366
 lpstb_b      M  6401-6415,15000   in   busl's track x 6408
-res_b        P  6872-6892,16250  ?    poly column on south from the pad (6882,16170), under the bus of horizontal metals
-lpstb_b      P  6918-6938,16250  ?    poly column on south from the pad (6928,16217)
+res_b        P  6877-6899,16250  ?    poly column on south from the pad (6882,16170), under the bus of horizontal metals
+lpstb_b      P  6920-6942,16250  ?    poly column on south from the pad (6928,16217)
 bl0_w15088   P  6450,15078-15098  ?    poly row on east from the pad (6320,15088), seen to x 6790
 bl0_w15088   P  5700,15078-15098  ?    poly row on west to a pad (4909,15088); a track x 4909 from the north ends there
 bl0_w15088   M  5750-5764,15700   ?    thin metal south from the pad (5755,15088), followed to about (5762,15768)

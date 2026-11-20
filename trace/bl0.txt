@@ -197,7 +197,8 @@ P 2520,14645:2573,14668                            # poly from the box west
 P 2520,14559:2540,14668                            #   and north (one orange run y 14560-14661: bl0_edges.py col 2530)
 P 2520,14559:2850,14574                            # the row y 14559-14574 east under both rails onto larr's P at x 2850
 N P 2700,14566 larr_cin_s7
-D 2651,14664:2780,14690                            # output strip east under the load plate (W 26-32, L 37)
+D 2651,14662:2705,14678                            # output strip east: y 14662-14678 from the rail (review round 2),
+D 2700,14654:2780,14690                            #   widening to y 14654-14690 under the load plate (W 36, L 37)
 D 2778,14643:2835,14692                            # box under the vcc rail
 C 2805,14674
 P 2740,14633:2777,14722                            # load plate
@@ -216,10 +217,10 @@ C 6885,15130
 M 6885,15122 y16182 w=20                           # track x 6875-6895 south
 C 6882,16170
 P 6866,16155:6899,16186                            # pad
-P 6882,16170 y16250 w=20                           # poly column on south (port)
+P 6888,16170 y16250 w=22                           # poly column x 6877-6899 on south (port)
 P 6913,15163:6946,15191                            # lpstb_b: pad at the row's east end
 C 6929,15177
 M 6929,15167 y16229 w=20                           # track x 6919-6939 south
 C 6928,16217
 P 6912,16202:6945,16232                            # pad
-P 6928,16217 y16250 w=20                           # poly column on south (port)
+P 6931,16217 y16250 w=22                           # poly column x 6920-6942 on south (port)
