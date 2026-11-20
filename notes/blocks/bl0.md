@@ -462,7 +462,7 @@ Round 3: no findings that change a connection.
 
 ### Run 3
 
-Round 4 (full review of piece `u3`; fresh Fable 5.2 reviewer; 2026-11-20 10:42 -0600; commit 3be37d6; images
+Round 4 (full review of piece `u3`; fresh Fable 5.2 reviewer; 2026-11-20 10:13 -0600; commit 3be37d6; images
 `cache/scratch/bl0/review-4/`). Told to suspect: the crossing at (7188,17340); the continuity and the end of
 `bl0_w17210`'s metal; the four pads of the long track and the poly column under the bus; pads or contacts
 the trace lacks; other connections of the output node; the neck, buried contact and finger of the load and
