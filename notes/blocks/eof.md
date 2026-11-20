@@ -2915,6 +2915,49 @@ tools/t.sh eof sameconn.py 873de81               connections identical
 
 Round 20: no findings that change a connection.
 
+### Round 21 (full review of pieces `in390` and `in172`; 2026-11-20 01:30 to 01:49 +0000)
+
+One fresh reviewer agent on Claude Fable 5.2, read from the photos alone; trace at commit befa9bc; its images
+(16) and three scratch scripts in `cache/scratch/eof/review-21/`.
+
+Told to suspect. `in390`: the crossing (9014,14656) of `bc1`'s bus metal over the poly column and the 185 px
+where the bus metal y 14603-14618 lies on the row (contact or not; the column's odd colour in the clean
+shot); the pad (10092,14609) without a green hole; whether the row keeps its track over 1,070 px and whether
+a vertical metal taps it; the 910 px metal on x 10268 (its corner, taps, and that it is not the neighbour on
+x 10225). `in172`: the step at x 10284-10302 (one poly; no continuation west of the lower row or east of the
+upper one to pad A); unit T read without the clean shot (the body's extent, rows 1 and 3 crossing all of it
+and stopping before the rail, the output box a buried contact on the node, the bands reaching VSS contacts);
+the strip under the VSS rail (diffusion, continuous, no contact to the rail); the tie box drawn as certain;
+the foot of the metal x 10355 onto `bc2`'s pad (trap 16) and pad B's metal onto `bc2`'s; anything left out
+in x 10470-10780, y 14590-14790.
+
+What it checked, and how: the column and its four crossings (4.2x in four shots, 7.5x): protected poly with
+no hole at y 14699, 14742, 14785; at (9014,14656) no ring in either metal shot, the poly 20 px wide with no
+pad, the clean shot dark olive (84/89/31) and not a hole, chip 2 ordinary poly (161/116/59): the tint is
+chip 1's clean shot only (it agrees with Ambiguity 58 as written). The row under the bus metal (5x, four
+shots): no ring in either chip, pink field west of x 9003. Both rows to x 10078 and x 10302: the same y
+under all three wide metals (`railprof.py`; 3.9x), poly over field, red minus green 42-62 under every
+crossing metal, no branch in the open stretches. The pad (10092,14609) at 6x: ring and bright centre in both
+chips, a rounded box in the chip-2 stripped shot, nothing else leaving it. The metal to `bc2`'s pad (6x and
+`follow.py`): a plain corner, 20 px of bare ground to the metal north of it, no hole beneath it, end at
+(10265,15614); the neighbour on x 10225 ends separately at (10223,15570). The step (4.6x, four shots): one
+L, no row west of the metal at y 14687-14704, field between the step and pad A. Unit T (5-5.4x): body edges
+x 10490-10494 and 10530-10534; rows 1 and 3 poly to x 10536, stopping before the rail; the output box like
+`bc2`'s box at (10506,15000), with node diffusion east of it; the strip under the rail two edge bars with
+bright metal between in both chips, no ring; the tail diffusion, the tab poly, the tie box heavy-outlined
+with a light centre in both chips; the plate not under the VCC rail. Pad A's foot (6x): it ends in the ring
+of (10395,15000), 10 px dark either side of the centre. Pad B's metal (4.6x): dim in chip 2 at
+y 14896-14936, clearly metal in chip 1, an unbroken protected strip in the clean shot to the pad
+(10441,14955). The extraction: 0 errors, `eof_w15172` FIRM.
+
+Findings: none ("nothing changes a connection, and no geometry error is worth a fix").
+
+What it could not check: unit T in chip 1's clean shot (residue); a contact on the stained stretch
+x 9005-9060 from the clean shot (both metal shots say none); `bc2`'s own readings and the rails' identity as
+supplies.
+
+Round 21: no findings.
+
 ## Not done
 
 - **Task 2, the loads of `sl_eq_r5_n` (= NOT `sl_eq_r5`)**: one load is drawn (piece `r5nor`,
