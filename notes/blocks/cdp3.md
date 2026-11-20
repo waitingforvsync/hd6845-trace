@@ -63,6 +63,11 @@ Which columns each row occupies:
   its input wire (from a staircase metal of the bus field, by two poly hops) and its output wire (a metal
   x 7826-7848 to two pads whose polys go into the cluster beside row A); and **the output line of the gate
   beside row C** (the x 7880 line) drawn up to its end pad (7878,8385). See "West logic" under Logic.
+- **The bit lines are the data bus** (run of 2026-11-20 13:40 -0600; wiring, six joins, no uncertain item):
+  each of the six bit lines `cdp3_bl_c2`..`c7` runs on north of y 8040 as the same metal as `cdp2`'s bus
+  line of that slice (drawn y 7556-8040): **`cdp3_bl_c2`..`c7` = `db_b5`, `db_b4`, `db_b3`, `db_b2`, `db_b1`,
+  `db_b0`.** So R14's six latch cells (row A) and the register cells of rows C and H in these columns
+  are written from data bus bits 5-0. See "The bit lines north of row A" under Logic.
 - NOT traced: the gate cluster beside row A (x 7780-8200, y 8260-8800): surveyed, with a draft, and
   left out of the trace because five diffusion boundaries in it cannot be decided from the photos
   (Not done).
@@ -261,6 +266,31 @@ less). The pad's poly row goes east into the cluster (port). A second metal on t
 north and ends on a pad (7878,8315), 70 px away: another net (bare ground between,
 `px.py col 7880 8330 8372 4`).
 
+### The bit lines north of row A (2026-11-20; traced, wiring only)
+
+`cdp2` draws each slice's bus-line metal to y 7556 (x 8465, 8855, 9246, 9636, 10026, 10416); this file's
+bit lines start at y 8040 (x 8466, 8857, 9248, 9638, 10028, 10419). Between the two each is one metal:
+`tools/tl5_tracks.py v X 7560 8050` for the six x finds no stretch without metal over 21 px, and the
+stretches over 14 px are rings of contacts ON the line (for instance (8850,7790) and (8466,7604): bright
+centre and ring in both metal shots, `textmap.py 8836 7754 8880 7824 3`, `8444 7574 8490 7620 3`): taps of
+`cdp2`'s channel 3, which are that package's and are not drawn here. View `cache/scratch/cdp3/bl3.png`
+(c3, 3.6x). The names are joined by `@alias` (the bus names are canonical):
+
+| bit line | x | is |
+|---|---|---|
+| `cdp3_bl_c2` | 8466 | `db_b5` |
+| `cdp3_bl_c3` | 8857 | `cdp2_c_s3_bus` = `db_b4` |
+| `cdp3_bl_c4` | 9248 | `cdp2_c_s4_bus` = `db_b3` |
+| `cdp3_bl_c5` | 9638 | `cdp2_c_s5_bus` = `db_b2` |
+| `cdp3_bl_c6` | 10028 | `cdp2_c_s6_bus` = `db_b1` |
+| `cdp3_bl_c7` | 10419 | `cdp2_c_s7_bus` = `db_b0` |
+
+No gate's equation changes: six bus equations (`db_b#` = NOT `dl#_q_n`) gain the alias, and 108 transistor
+terminals in this package now read `db_b#`. **Not joined**: c1's line e (x 8076). Its metal north of
+y 9150 fails the metal test on long stretches inside the cluster beside row A (y 8377-8768, narrow and
+dim); `cdp2` names the bus line at x 8075 `db_b6`. If they are one metal, the gate beside row C has
+`db_b6` on its load's pad (the `?B` there): not established.
+
 ### Channel B (traced, wiring only)
 
 - Six poly tracks from the west edge (y 8907 ... 9123) each end at a contact on line g of
@@ -433,8 +463,8 @@ Into parts not yet traced (the labels sit on the stubs):
     a corner (7989,7386), end (7986,6844)).
 - (Done 2026-11-19: row A, y 8040-8830, and what the notes called row I, which is `cdp4`'s comparator
   row, traced there in its run 3. The items below on the row A cell and row I are superseded by "Row A"
-  under Logic.) Left from row A: whether the bit lines join `cdp2`'s bus lines at y 8040 (drawn to y 8040,
-  not examined above it); the logic beside row A (x 7600-8300, y 8040-8800), through which `g_eq_r14`'s
+  under Logic.) Left from row A: (done 2026-11-20: the bit lines join `cdp2`'s bus lines; they are `db_b5`..`db_b0`;
+  c1's line e at x 8076 is not followed north of y 9150); the logic beside row A (x 7600-8300, y 8040-8800), through which `g_eq_r14`'s
   thin metal only passes.
 
 - Row A cell (c2..c7, y about 8400-8790, cut by the top edge): not a copy of `cdp3_reg` in

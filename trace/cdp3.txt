@@ -770,3 +770,20 @@ M 7880,8385 y9150 w=22
 P 7860,8368:7896,8402                 # pad
 C 7878,8385
 P 7878,8377:7950,8400                 # its poly row east (port at x 7950)
+
+# ================================================================ run of 2026-11-20: the bit lines are cdp2's bus lines
+# cdp2 draws each slice's bus-line metal up... down to y 7556; this file's bit lines start at y 8040.
+# Between, each is one metal (tools/tl5_tracks.py v X 7560 8050: no stretch without metal over 21 px; the
+# longer dark stretches are the rings of contacts on the line, taps in cdp2's channel 3, not drawn here).
+M 8466,7556 y8040 w=18
+M 8857,7556 y8040 w=18
+M 9248,7556 y8040 w=18
+M 9638,7556 y8040 w=18
+M 10028,7556 y8040 w=18
+M 10419,7556 y8040 w=18
+@alias db_b5 cdp3_bl_c2
+@alias cdp2_c_s3_bus cdp3_bl_c3
+@alias cdp2_c_s4_bus cdp3_bl_c4
+@alias cdp2_c_s5_bus cdp3_bl_c5
+@alias cdp2_c_s6_bus cdp3_bl_c6
+@alias cdp2_c_s7_bus cdp3_bl_c7
