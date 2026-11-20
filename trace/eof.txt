@@ -1676,7 +1676,7 @@ C 8792,17561
 P 8805,17551:9000,17569
 P 8992,17545:9030,17578
 C 9008,17560
-M 9008,17560 y17610 w=14
+M 9008,17560 y17610 w=14            # piece o040 (run 22) takes it on
 N M 8798,17120 eof_w17040
 # ---- nor17: by hand (r21_b1.png 3x; r21_c1.png 5x, r21_c2.png 6x, four shots; r21_g1.png 4x).
 # VSS box under the rail (y 17074-17111; px col 8722: its foot edge at y 17112-17118, field south of it; contact (8722,17092): eof_cchk -9, centres 195/235), a
@@ -1751,5 +1751,82 @@ B 8765,17151:8802,17192
 P 8774,17160:9000,17178
 P 8993,17155:9030,17190
 C 9007,17170
-M 9011,17170 y17518 x9057 y17600 w=14
+M 9011,17170 y17518 x9057 y17648 w=14
 N P 8900,17169 eof_w17168
+
+# Piece o168 (run 22, 2026-11-20): the NOR nor17's output eof_w17168 on from the corner
+# (9057,17518) to the unit it feeds. Wiring only, no uncertain item. r22_a1.png (2.4x, three
+# shots), r22_a3.png (5.5x, four shots), r22_b2.png (4x, four shots), r22_b3.png (4.2x, three
+# shots), r22_c1.png (4.2x, three shots), r22_e1.png (5.5x, four shots).
+# The metal x 9057 ends on a pad with a contact (9055,17648) (ring and bright centre in both
+# metal shots, a pitted box in the chip-2 stripped shot; eof_cchk: hole 1, centres 172/166;
+# tl5_tracks.py v 9057 17500 17700: no metal south of y 17652; bare ground south of the pad).
+P 9037,17630:9073,17665
+C 9055,17648
+# The pad's poly row y 17638-17656 west under the tracks x 9011 (eof_w17040), 8968 (rst_a),
+# 8925 (eof_w16040) and, from x 8890 to x 8588, under ck_out's metal y 17649 of piece in350,
+# which lies on it for 300 px with no contact (notes, Ambiguity 63: no ring, no hole;
+# eof_cchk at (9011,17647), (8968,17647), (8925,17647), (8882,17649): clean R-G 27-35).
+P 8573,17638:9045,17656
+# West of that metal's corner (8600,17649) the poly turns south in the open gap between the
+# rail (east edge x 8562) and the metal x 8600 (px col 8580 17624 17920 4: orange in chip 2's
+# metal shot, blue under 75, from y 17640 to y 17696; bare ground from y 17708), and west as a
+# second row y 17682-17698 under the rail x 8500-8562 (no ring in either metal shot, field north
+# and south of the row: textmap 8486 17668 8600 17712 3 --acid; in chip 1's clean shot the row
+# is vivid red-orange under the rail, not cream: notes, Ambiguity 79), under the tracks x 8470
+# and x 8425 and under ck_out's second metal, which lies on it from x 8426 to x 8355 (70 px, no
+# contact: eof_cchk (8425,17692), (8390,17692): no hole; a NOR's output is not ck_out).
+P 8573,17638:8588,17698
+P 8353,17682:8588,17698
+# At x 8353-8371 the row turns north to a pad with a contact (8355,17649) (textmap 8334 17622
+# 8384 17708 3: a bright centre x 8349-8358 in a dark ring in both chips; a pitted box in the
+# chip-2 stripped shot; eof_cchk: hole 3), on which a metal from the west ends.
+P 8353,17655:8371,17698
+P 8339,17630:8375,17666
+C 8355,17649
+# That metal: west along y 17650 (eof_mrun.py col 8270 / 8220: 17650(12-13)) to a corner
+# (8186,17650) and north on x 8186 (eof_mrun rows 17600, 17500, 17470: 8186-8187(11-13)) to a
+# pad with a contact (8185,17428), where it ends (eof_cchk: hole -25, centres 171/193;
+# tl5_tracks.py v 8184 17380 17650; the horizontal metal 35 px north of the pad is another
+# net's). The pad's poly row runs east along y 17419-17440 in the open (px col 8275 17408 17450
+# 2: orange in chip 2, dark red in the clean shot) towards the unit under the rail x 8315-8362
+# (stub: port at x 8245, short of a dark line x 8254-8258 that is not identified).
+M 8355,17650 x8186 y17428 w=12
+P 8172,17410:8210,17446
+C 8185,17428
+P 8200,17419:8245,17440
+
+# Piece o040 (run 22, 2026-11-20): the inverter inv17's output eof_w17040 on from the pad
+# (9008,17560) to the net it is: bc1's bc1_g6_in, the input of bc1's inverter 6. Wiring only,
+# no uncertain item. r22_g1.png (3.6x, three shots), r22_g2.png (4.2x, three shots), r22_h1.png
+# (4.2x, four shots), r22_h2.png (3.3x, four shots), r22_h3.png (4.5x, four shots), r22_h4.png
+# (3.1x, four shots, every package's trace).
+# The pad's metal x 9010 runs south (tl5_tracks.py v 9010 17570 17800: bars of 8 px over the rows
+# y 17636-17656 and y 17660, no hole; eof_cchk (9010,17690), (9010,17736): no hole) to a corner
+# (9010,17780) and west along y 17773-17787 (eof_mrun.py col 8950 / 8850 / 8780: 17780(12-14)),
+# over rst_a's poly column x 8964 of piece isrc with no contact (eof_cchk (8964,17780): 39), to
+# a pad with a contact (8733,17778) (ring and bright centre in both metal shots, a hole in the
+# clean shot, a pitted box in the chip-2 stripped shot; eof_cchk: -6, centres 201/205).
+M 9010,17604 y17780 x8733 w=13
+P 8705,17760:8752,17796
+C 8733,17778
+# The pad's poly row y 17768-17786 runs west under ck_out's metal x 8600 (piece in350), the
+# rail x 8500-8562 and the tracks x 8470, 8425 and 8382 with no contact (eof_cchk at each:
+# clean R-G 40-47, no ring; tl5_tracks.py h 17778 8345 8730: no hole) to a pad with a contact
+# (8338,17777) (eof_cchk: -13, centres 202/211), on which a metal from the west ends.
+P 8345,17768:8712,17786
+P 8322,17760:8354,17794
+C 8338,17777
+# That metal: west along y 17777 to a corner (8012,17777) and north on x 8012, the west track of
+# the bundle x 8012-8229 (tl5_tracks.py h 17777 8000 8335, v 8012 17240 17790: no stretch
+# without metal); a Z step at y 17259 onto x 8057, the position rst_a's metal of piece isrc4
+# leaves 35 px further south by its own step (25 px of bare ground between the two: r22_h1.png);
+# north on x 8057 over the diffusion-coloured area of Ambiguity 32 (no ring; bars of 9 px) to a
+# corner (8057,16647); east along y 16647 across the vacant position x 8100 to x 8143 (r22_h2.png)
+# and north on x 8143 (tl5_tracks.py v 8143 16240 16660: bars of 8-12 px) over rst_a's row
+# y 16294-16312 of piece isrc4 with no contact, onto bc1's metal end (8143,16300) of bc1_g6_in,
+# which goes on north by a jog at y 16260 to x 8186 and ends on a pad with a contact
+# (8186,15910), the west end of the gate row of bc1's inverter 6 (r22_h3.png, r22_h4.png).
+M 8338,17777 x8012 y17259 x8057 y16647 x8143 y16292 w=13
+N M 8057,17000 bc1_g6_in
+@alias bc1_g6_in eof_w17040
