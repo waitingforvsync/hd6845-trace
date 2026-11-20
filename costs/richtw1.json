@@ -1,26 +1,26 @@
 {
  "who": "richtw1",
- "generated": "2026-11-20T22:43:03+00:00",
+ "generated": "2026-11-20T23:32:38+00:00",
  "price_source": "Claude API list prices per million tokens, as of 2026-11-03",
  "unpriced_models": [
   "<synthetic>"
  ],
- "responses": 10460,
+ "responses": 10692,
  "first": "2026-11-14T17:52:50.853000+00:00",
- "last": "2026-11-20T22:42:56.900000+00:00",
- "total_cost": 1770.87,
- "review_cost": 166.84,
+ "last": "2026-11-20T23:32:32.195000+00:00",
+ "total_cost": 1798.94,
+ "review_cost": 174.34,
  "tokens": {
-  "input": 21240,
-  "output": 13629617,
-  "cache_write_5m": 20044725,
-  "cache_write_1h": 28072573,
-  "cache_read": 3097612026
+  "input": 21710,
+  "output": 13838807,
+  "cache_write_5m": 20988550,
+  "cache_write_1h": 28097320,
+  "cache_read": 3146945101
  },
  "by_model": {
   "claude-fable-5-2": {
-   "cost": 1671.93,
-   "responses": 9719
+   "cost": 1700.0,
+   "responses": 9951
   },
   "<synthetic>": {
    "cost": 0.0,
@@ -37,22 +37,22 @@
  },
  "by_package": {
   "(coordination)": {
-   "cost": 511.06,
+   "cost": 513.08,
    "review_cost": 0.0,
-   "responses": 2616,
+   "responses": 2633,
    "models": {
-    "claude-fable-5-2": 1875,
+    "claude-fable-5-2": 1892,
     "<synthetic>": 15,
     "claude-opus-5-5": 723,
     "claude-haiku-5-5": 3
    }
   },
   "busl": {
-   "cost": 202.13,
-   "review_cost": 83.88,
-   "responses": 1756,
+   "cost": 228.1,
+   "review_cost": 91.37,
+   "responses": 1970,
    "models": {
-    "claude-fable-5-2": 1756
+    "claude-fable-5-2": 1970
    }
   },
   "tla": {
@@ -72,11 +72,11 @@
    }
   },
   "bl0": {
-   "cost": 62.55,
+   "cost": 62.59,
    "review_cost": 22.64,
-   "responses": 475,
+   "responses": 476,
    "models": {
-    "claude-fable-5-2": 475
+    "claude-fable-5-2": 476
    }
   },
   "mra": {
@@ -208,11 +208,11 @@
    }
   },
   "regs": {
-   "cost": 24.41,
+   "cost": 24.45,
    "review_cost": 9.84,
-   "responses": 259,
+   "responses": 260,
    "models": {
-    "claude-fable-5-2": 259
+    "claude-fable-5-2": 260
    }
   },
   "bd3": {
@@ -431,6 +431,6 @@
   "2026-11-17": 67.63,
   "2026-11-18": 11.2,
   "2026-11-19": 271.75,
-  "2026-11-20": 235.74
+  "2026-11-20": 263.81
  }
 }

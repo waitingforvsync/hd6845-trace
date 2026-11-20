@@ -1321,3 +1321,8 @@ Round 14: no findings.
 ## Corrections (coordinator, from the handoff of `regs` run 4, 2026-11-20)
 
 - Not done ("Beyond this package: ... `lc2_w8450`'s poly row east of x 4930") and the Ports row (4930, 16703-16723) "into the bottom-left logic": the row is drawn on from there by `regs` (run 4, piece `w8450`): one poly to a corner (5845,16713) with no tap on the way, then to a gate band under the rail x 6008-6055 and, from a pad (5909,16800), by the track x 6408 and the bottom bus row y 18125 to the thin track x 10485 beside the bottom-centre logic's east gate column.
+
+## Corrections (coordinator, from the handoff of `busl` run 14, 2026-11-21)
+
+- Piece `t6`, the ports table and the sentence "believed ... `bl0_w18081` is `cdp3_g_c2` and `bl0_w15522` is `cdp3_g_c7`" (and `ports.d/bl0.txt`, "drawn by no one ... follower"): the six tracks are drawn north of y 15000 (`busl`, piece `a6`) and the six identities are firm: `bl0_w18081` = `cdp3_g_c2`, `bl0_w17603` = c3, `bl0_w17126` = c4, `bl0_w16649` = c5, `bl0_w15999` = c6, `bl0_w15522` = `cdp3_g_c7` (aliases until the refresh renames them).
+- Piece `w5` and the pair's equations ("`busl_x6906` ... not followed", "its source lies north of the field"): `busl_x6906` is `rst` (`busl`, piece `xn`); the flag's equation is `bl0_w17610` = NOT(`bl0_w17440` OR `rst` OR (`bl0_w17337` AND `bl0_w17687`)), firm: the light pen flag is cleared by the unbuffered reset, NOR(`lpstb_b`, `res_b`).

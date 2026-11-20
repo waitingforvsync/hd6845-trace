@@ -5080,3 +5080,7 @@ Round 34: no findings that change a connection.
 - Piece `n2n`, part D ("its neighbours at -1306 and -1439 are the lines of tl5's polys x 5455 and x 5368"): the diagonal -1439 is drawn by `busl` run 13 (`tl5_w2722`).
 - Piece `n2n`, part C, the comment in `trace/eof.txt` "west along y 7000 over ten vertical polys (x 6263-6470, no pad)": there are five polys there (centres x 6280, 6323, 6366, 6409, 6453; `tools/tl5_tracks.py rows row 6240 6490 3 7000`); ten is the count of their edge lines (`busl` run 13's reviewer caught the same miscount on the next metal south). The comment is corrected (comment only).
 - Piece `in350`, part C ("the poly west (seen to x 8312, where it turns north)"): it ends on the pad (8317,17863) of the clock's metal that `tl4` draws from the west (runs 11-12): one of `ck_out`'s open ends is closed.
+
+## Corrections (coordinator, from the handoff of `busl` run 14, 2026-11-21)
+
+- The northern part's list of undrawn tracks over the row y 8040, "x 7078": the track x 7078 is `rst` (`busl` run 14, piece `xn`); it crosses `eof`'s rows y 7648, 7777, 7888 and 8040 with no contact.

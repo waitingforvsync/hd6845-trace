@@ -2742,3 +2742,51 @@ Floor plan: the tracer's one route box covered the bottom-centre logic and is sp
 floor-plan blocks. Coverage: 70.4% traced; in some package region 99.9%; untraced and in no Queue row
 0.4%. Not done here: the refresh. Next in the loop, at the user's word (2026-11-20 23:38): `busl`,
 continued on its own branch by the loop's tracer.
+
+## 2026-11-21 00:39  Handoff: `busl` run 14, R14's six compared lines reach the left array; the light pen flag is cleared by `rst`
+
+The loop's third tracer (a fresh Fable 5.2 agent, high effort) continued `busl` on its branch, at the
+user's word (the claim is the user's): run 14, two pieces, merged a2dc105 at 00:32, claim kept. One
+handoff file. Full extraction after it 2,455 nets (seven joins: seven nets fewer), 4,594 transistors,
+0 errors, 0 warnings; 914 of 1,354 equations firm; 96 nets joined only through uncertain items (1,135
+items). Spot checks of the overlays: the six west end pads of piece `a6` (x 5757 / 5800, y 14092-14308)
+and the poly hop of piece `xn` between the pads (7077,8495) and (7077,8755)
+(`cache/scratch/refresh/h6_a6_pads.png`, `h6_xn_hop.png`): the drawn shapes lie on the features.
+
+What it establishes (from the tracer's notes; marks as there):
+
+- **The six lines compared with R14 reach the left array's six lower rows** (piece `a6`; wiring, firm,
+  no uncertain item): each of `bc1`'s six poly lines `cdp3_g_c2`..`c7` runs on west of x 7000 as one
+  poly row under about thirty tracks, with no pad or tap, to an end pad, and by one of six nested Ls
+  onto one of the six tracks that `bl0` run 12 drew from y 15000 south. What `bl0` believed from the
+  follower is so, in that order: `bl0_w18081` = `cdp3_g_c2` .. `bl0_w15522` = `cdp3_g_c7`. So the
+  left array's fourteen rows, north to south, carry `cdp4_bus_s7`..`s0` and `cdp3_g_c7`..`c2`: the
+  fourteen lines that R15 and R14 are compared with. **Believed, not traced**: the array's rows drive
+  them (the memory address); no drawn end drives `cdp3_g_c#`.
+- **The light pen flag is cleared by `rst` itself** (piece `xn`; wiring, firm): `busl_x6906`, the
+  flag's clear, is `lc1`'s row of `rst` = NOR(`lpstb_b`, `res_b`), run on east to an end pad
+  (7076,7388), south on the metal x 7078, through a poly hop and a diagonal onto the track x 6906. The
+  extraction gives, firm: `bl0_w17610` = NOT((`bl0_w17337` AND `bl0_w17687`) OR `bl0_w17440` OR
+  `rst`).
+
+One review round (round 14 of the package, both pieces): no findings. The reviewer did not check
+`a6`'s crossings one by one at 4x (3x and measured). Two readings are recorded in the notes without a
+`?`: the pad (7077,8755) has a red centre, not a green hole, in the clean shot (taken as a contact:
+ring and bright centre in both metal shots, the metal ends on it), and a greenish patch where
+`lc2_w8646`'s metal crosses `rst`'s poly column (no contact).
+
+Applied: master list rows `busl` (run 14; the two items done, the Next list), `larr` (continue) (the
+six rows' names; the lines' driver to be found in the array), `bc1` (continue), `bl0`, and the
+`rename` row (seven renames wait for the refresh: `bl0_w18081`..`bl0_w15522` onto `cdp3_g_c2`..`c7`,
+`busl_x6906` onto `rst`; aliases in `trace/busl.txt` until then). **Re-read list**: nothing new.
+**Ambiguities**: none. Corrections sections in the notes of `bl0`, `lc1`, `bc1` and `eof`.
+`notes/operation.md` and the glossary: the tracer's own edits stand (the fourteen lines; the flag's
+clear). Floor plan: no coarse block is replaced; the left bus field's line says twenty-five pieces;
+`floorplan.d/busl.txt` has five more lines, whose labels were not looked at.
+
+Also on main since the last entry, not the loop's: Matt Godbolt's claim of `cdp2` (c6b3093) and his
+change to the workflow, "the gate's result decides the push" (3ff2f92).
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 803
+floor-plan blocks. Coverage: 70.4% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%. Not done here: the refresh (seven renames wait).

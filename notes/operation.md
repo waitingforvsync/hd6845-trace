@@ -197,8 +197,13 @@ metal has two loads (`bl0` run 3; firm): an inverter, `bl0_w17337` = NOT `bl0_w1
 `bl0_w17440` = NOT(`bl0_w17210` OR `bl0_w17610`), `bl0_w17610` = NOT(`bl0_w17440` OR `busl_x6906` OR
 (`bl0_w17337` AND `bl0_w17687`)). **`bl0_w17610` is a flag set by the gated light pen strobe**; it holds
 after the strobe ends and is cleared by `busl_x6906`, or by `bl0_w17687` once the strobe is low. The first is a
-track of the left bus field (run 5: drawn from the field's foot to the gate; its source lies north of the
-field); the second line comes out of the bottom-centre logic's upper gate group (`bc1`, at about (7745,15690)), and
+track of the left bus field (run 5: drawn from the field's foot to the gate), and **it is `rst` itself, the
+output of the reset NOR** (`notes/blocks/busl.md`, piece `xn`, 2026-11-21; firm, no uncertain item:
+`lc1`'s poly row of `rst` on east to an end pad (7076,7388), a metal south, a poly hop between pads
+(7077,8495) and (7077,8755), a diagonal and the track x 6906 down the field; the two names are an alias
+until the rename). So `bl0_w17610` = NOT(`bl0_w17440` OR `rst` OR (`bl0_w17337` AND `bl0_w17687`)): **the
+light pen flag is cleared by the reset** (RES and LPSTB both low), through the unbuffered `rst` and not
+through one of its copies; the second line comes out of the bottom-centre logic's upper gate group (`bc1`, at about (7745,15690)), and
 the flag goes into the gate column east of the supply rail at y 17388 (run 6: both drawn to those groups, which
 are not traced yet) (believed: it times the latching of R16/R17).
 
@@ -250,7 +255,8 @@ the bottom-left unit is.
 | **The eight lines `cdp4_bus_s#` are compared with R15** in the upper half of `cdp4`'s row R1 (`notes/blocks/cdp4.md`, run 3): per slice `cdp4_xr_s#_ne` = `cdp4_bus_s#` XOR `cdp4_lr_s#_q` (a NOR and a NOR with a series pair), each gating a wide pull-down on one diffusion line with a single load: `bus_eq_r15` = NOR of the eight, high when every bus line equals R15's latch output. The line runs to gate 1 of the NAND beside `cdp3`'s row C (`busl`, piece `kb`), whose other input is `g_eq_r14` (the next row). Believed: the cursor comparison, low byte (the bus lines being address bits); the high six bits would be compared in `cdp3`'s row A. `cdp3`'s bit lines and line f run through this row to the R15 latch and the read selector with no contact. | Firm for the comparator and the line (no uncertain item); that it is the cursor match is believed |
 | **`cdp3`'s row A is R14 with the same comparator** (`notes/blocks/cdp3.md`, "Row A"): six latch cells written from the bit lines on `wr_r14`, whose buffered outputs are line f (`cdp4`'s selector source a), and six comparator cells of line g (`cdp3_g_c#`, the lines that also feed `cdp4`'s 6-bit latch row D) with the latch outputs; their match line is `g_eq_r14`. The NAND beside `cdp3`'s row C is therefore NAND(`bus_eq_r15`, `g_eq_r14`) = NOT((`cdp4_bus_s#` = R15) AND (`cdp3_g_c#` = R14)): believed the cursor match, active low (14 bits: R14 six, R15 eight). Its output is extracted on `cdp3_bl_c1` through an uncertain box of `cdp3` (its Ambiguities), so where the cursor match goes is not established. The bit lines of row A and of the register rows below it are **data bus bits 5-0** (2026-11-20: each is one metal with `cdp2`'s bus line of its slice), so R14 is written from D5-D0: firm for bit 5 (`db_b5`), marked for bits 4-0 (`cdp3_bl_c3`..`c7`, which meet `db_b4`..`db_b0` through the narrow necks of AMB-019 like `cdp2`'s own column lines). | Firm for both comparators and the NAND's inputs; the NAND's output net marked; "cursor" believed |
 | `cdp4`'s 8-bit latch row C and its 6-bit latch row D are strobed by two copies of one signal: row C's strobe `cdp4_ld` is `bc1_ld_a` = NOT `bc1_ld_n`, and row D's is `cdp4_ld6` = NOT `bc1_ld_n`, with `bc1_ld_n` = NAND(`bc1_ld_in1`, `bc1_ld_in2`) (`notes/blocks/busl.md`, piece `ctl`; the driver is `bc1`'s): the fourteen bits are loaded by one event. The four select lines of `cdp4`'s selector (`rsel14_buf`, `rsel15_buf`, `rsel17_buf`, `rsel16_buf` (`cdp4`'s selects 1-4)) come up the left bus field on metal tracks from south of y 15000 (drivers not traced), and each also feeds a poly row into the gate group at `cdp4`'s bottom-left corner, which is one gate: `cdp4_rst` = NOR(`rsel14_buf`, `rsel13_buf`, `rsel17_buf`, `rsel12_buf`, `rsel16_buf`, `rsel15_buf`) (`notes/blocks/cdp4.md`, run 2; the second and fourth inputs joined to their selects by `busl` run 8). `cdp4_rst` gates the pull-downs on the selector's nodes, so those nodes are held low whenever none of the six rows is high; that is, whenever none of R12-R17 is read. | Firm for the NAND and the two inverters and for the selects' wires; **marked** for the join of `cdp4_ld` to `bc1_ld_a` (its metal passes over a box where the photos do not show it for 51 px, drawn uncertain: `notes/blocks/busl.md`, Ambiguities 9 and 10). Open: what `bc1_ld_in1` and `bc1_ld_in2` are; the selects' drivers. Firm for the NOR and its six inputs |
-| The six data inputs of `cdp4`'s 6-bit latch row D come from `cdp3`'s row A: each "line g" row `cdp3_g_c#` (# = 2..7; the one line that enters each of the six large cells of row A from the west) runs on one metal track down the east side of the left bus field, with no tap, onto one of the bottom-centre logic's six poly lines into row D, in order: `cdp3_g_c2` is the data of the latch bit under slice s1 (`cdp3_g_c2`), `cdp3_g_c3` of s2, and `cdp3_g_c4` .. `c7` are `cdp3_g_c4` .. `cdp3_g_c7` (`notes/blocks/busl.md`, piece `d6`). So row D latches, on `cdp4_ld6`, six bits that the row A cells put on line g (believed: the cells drive; they are not traced). | Firm for the six joins (no uncertain item on them) and for the first two bits' pass transistors; **believed** for bits s3 .. s6 (`bc1` draws its lines 3-6 only to x 8040). Open: what the row A cells are, and so what the six bits are |
+| The six data inputs of `cdp4`'s 6-bit latch row D come from `cdp3`'s row A: each "line g" row `cdp3_g_c#` (# = 2..7; the one line that enters each of the six large cells of row A from the west) runs on one metal track down the east side of the left bus field, with no tap, onto one of the bottom-centre logic's six poly lines into row D, in order: `cdp3_g_c2` is the data of the latch bit under slice s1 (`cdp3_g_c2`), `cdp3_g_c3` of s2, and `cdp3_g_c4` .. `c7` are `cdp3_g_c4` .. `cdp3_g_c7` (`notes/blocks/busl.md`, piece `d6`). So row D latches, on `cdp4_ld6`, the six bits on line g. The row A cells do not drive it: they are R14's latch and its comparator, which has line g on gates only (the row above). | Firm for the six joins (no uncertain item on them) and for the first two bits' pass transistors; **believed** for bits s3 .. s6 (`bc1` draws its lines 3-6 only to x 8040). Where the six bits come from: the next row |
+| **The fourteen compared lines each end on one poly row of the left array.** The six lines `cdp3_g_c#` run on west from the bottom-centre logic's contacts across the left bus field, without a tap, to six end pads and by six nested metal Ls to the foot of the field (`notes/blocks/busl.md`, piece `a6`, 2026-11-21), where `bl0`'s six tracks take them to the array's six lower rows: `cdp3_g_c7` on the row y 15522, `c6` on 15999, `c5` on 16649, `c4` on 17126, `c3` on 17603, `cdp3_g_c2` on 18081. With the eight lines `cdp4_bus_s7` .. `s0` on the eight rows above (y 11488 .. 15042; piece `ch1`), the array's fourteen rows from north to south carry `cdp4_bus_s7` .. `s0`, `cdp3_g_c7` .. `c2`: the lines compared with R15 and R14 and latched in `cdp4`'s rows C and D. No drawn end drives any of the six `cdp3_g_c#` (comparator gates, latch inputs): believed, the array's rows drive all fourteen, with the memory address (the rows' cells are `larr`'s untraced part). | Firm for the fourteen wires (no uncertain item on them); that the rows drive, and that the lines are the memory address, **believed** |
 | Which nibble of R3 the 4-bit row is: the low one (bits 0-3, horizontal sync width). Its four data lines are the data bus lines of bits 0-3 (`notes/blocks/r3d.md`). | Firm for the joins; the bit numbers of the data lines rest on the register-width match (`notes/blocks/bust.md`) |
 
 ## Comparators
@@ -275,8 +281,10 @@ throughout.
 
 Found 2026-11-20, in the central datapath (the two rows under "Registers and writing"):
 `bus_eq_r15` (the eight lines `cdp4_bus_s#` with R15) and `g_eq_r14` (the six lines
-`cdp3_g_c#` with R14), both firm, meeting in one NAND. That the fourteen lines are the
-memory address, and the NAND therefore the cursor match, is believed, not traced.
+`cdp3_g_c#` with R14), both firm, meeting in one NAND. Each of the fourteen lines is drawn
+to one poly row of the left array, the memory address counter's fourteen rows (firm wires;
+"Registers and writing", 2026-11-21). That the rows put the memory address on them, and that
+the NAND is therefore the cursor match, is believed, not traced (the rows' cells: `larr`).
 
 Not found at all: comparators for R11 (cursor end), and for R12 and R13 against the
 address counter.
@@ -341,14 +349,15 @@ So that silence is not read as knowledge:
   latch clears named under "Reset from the pins" (the NOR of RES and LPSTB is traced, and so is the gate
   for RES low with LPSTB high and its effect on the address counter's carry; both pin lines are
   followed to their one last gate, the light pen strobe gated by RES, and to the flag it sets,
-  `bl0_w17610`; what the flag does, what its two clears are, and so how R16/R17 are latched, is not
-  traced).
+  `bl0_w17610`; one of the flag's two clears is `rst` itself (firm, 2026-11-21); what the flag does, what
+  its other clear `bl0_w17687` is, and so how R16/R17 are latched, is not traced).
   Of the skew path only the wires' first stretch is traced: `r8_b5_q` and `r8_b4_q` leave the
   datapath westwards through the top bus field of `tc1` and go on west of x 6750 at
   y 2568-2626, into logic that is not traced yet.
 - The memory address counter's control. Of the cursor: two comparators on R14 and R15 and the
-  NAND of their match lines are traced ("Registers and writing"), but not that the compared
-  lines are the address, nor where the NAND's output goes, nor anything of R10, R11 and the blink.
+  NAND of their match lines are traced ("Registers and writing"), and the fourteen compared
+  lines are drawn to the left array's fourteen rows, but not what those rows put on them, nor
+  where the NAND's output goes, nor anything of R10, R11 and the blink.
 
 The list of what is assumed, with the evidence for and against each, is
 `notes/ambiguities.md` (AMB-001 to AMB-047). Work still to re-check before anything is

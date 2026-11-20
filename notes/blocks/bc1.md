@@ -350,3 +350,7 @@ In order of value:
 
 - The six poly lines "line 1 .. line 6" (drawn from x 7000): believed to run on west to pads at about x 5760-5800, where six tracks start that `bl0` (run 12) draws from y 15000 south into the left array's six lower rows (follower only; not read; the stretch is in `busl`'s region).
 - A poly row out of the gate group at y 15566 (it runs on east under the rail x 7292-7342) ends west on a pad (7143,15566): it is `bl0_w15566` (`bl0` run 12, piece `m7144`), a wire with no transistor that goes south and east to a poly row east of (8360,17821) in `bc3`. A second net lies beside it (pads (7186,15520), (7187,15696)), undrawn.
+
+## Corrections (coordinator, from the handoff of `busl` run 14, 2026-11-21)
+
+- Not done / the correction above ("The six poly lines ... believed to run on west to pads at about x 5760-5800"): drawn (`busl` run 14, piece `a6`): pads at (5757,14092), (5800,14136), (5756,14178), (5800,14223), (5757,14265), (5800,14308), no tap between; from them six nested Ls to `bl0`'s six tracks. The lines are `cdp3_g_c2`..`c7` to the left array's six lower rows.
