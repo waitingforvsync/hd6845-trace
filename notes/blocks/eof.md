@@ -501,7 +501,7 @@ column A's VSS rail; its east side, with the load, is read and not drawn**.
   contacts onto the rail, crossed by three polys. Row 1 (`eof_w17338`, from the west) and **the hairpin, which
   is `eof_w17168`** (piece `o168`'s row is one poly with its left leg), each lie between the rail's ground and
   one node, `eof_w17362`; a third poly (`eof_w17472`, a row from the west with a leg and a bar) lies between
-  ground and a second node, `eof_w17552`. The three are wide: W/L 110/20, 156/21 and 167/22, against 28/19 for
+  ground and a second node, the node below the lower bar (former name `eof_w17552`; it is `eof_w17362`, run 24). The three are wide: W/L 110/20, 156/21 and 167/22, against 28/19 for
   the NOR `nor17` that drives `eof_w17168`. The rail is `bc1`'s R1, followed 1,270 px south of where `bc1`
   ends it (one metal, a step west at y 17240-17270, an end at y 17568) and drawn.
 - **Read, not drawn** (east of the rail; the Logic section's piece `g174` and Ambiguity 85): both nodes go on
@@ -518,6 +518,28 @@ column A's VSS rail; its east side, with the load, is read and not drawn**.
 
 Full extraction with run 23: 2,451 nets, 4,560 transistors, 0 errors, 0 warnings. The package by itself:
 1,059 nets, 1,816 transistors, 0 errors, 65 warnings (as before the piece).
+
+Run 24 (Tom Seddon's session, Claude Fable 5.2; 2026-11-20 11:13 +0000 on). One piece, `g174e`, one more
+transistor (the load) and the east parts of the three gates; no uncertain item: **the unit that `eof_w17168`
+gates is whole: a three-input NOR with large pull-downs, `eof_w17362` = NOR(`eof_w17338`, `eof_w17168`,
+`eof_w17472`), and its output leaves south on a metal that the follower takes to the bottom bus field**.
+
+- **Traced** (piece `g174e`): the active area runs on east of the rail (run 23's "east edge at x 8368" was
+  inferred, and is not there). East of the rail it is the output node, a strip with a load on its east side;
+  the ground diffusion goes on east in three places, as a band north and a sliver west of row 1's L and as a
+  finger between the two arms. Each gate poly wraps its ground: row 1 runs round the strip's north end, the
+  hairpin and the lower poly each turn down a right leg and along an arm; the two arms end on a small field
+  island (the "box" of Ambiguity 85: no buried contact). The extraction gives W/L 258/21, 250/21 and 261/22
+  for the three pull-downs and 67/37 for the load. The node below the lower poly's bar, which run 23 kept
+  under a name of its own (former name `eof_w17552`), is `eof_w17362`.
+- **How the narrow bands were classed**: over whole bands, against a control band of the same height that is
+  certainly field (trap 38; `tools/eof_band.py`): the table in the Logic section.
+- **The output**: the load's poly runs on south to a pad with a contact (8467,17603); the pad's metal goes
+  south (port). `tools/follow.py` takes it 840 px south through the bottom bus field and 910 px west to
+  (7552,18472): not checked, not drawn. `cudisp_drv_in`'s label is 450 px south of that end.
+
+Full extraction with run 24: 2,450 nets, 4,561 transistors, 0 errors, 0 warnings. The package by itself:
+1,058 nets, 1,817 transistors, 0 errors, 69 warnings (69 before the piece: other packages' names).
 
 Full extraction after run 2: 2,351 nets, 4,232 transistors, 0 errors, 0 warnings; the package
 by itself (it loads `rdp3`): 0 errors, 0 warnings.
@@ -621,10 +643,14 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `o040`, the metal and the row | x 8322-9017, y 17604-17796 | `eof_w17040`'s metal x 9010 south from the pad (9008,17560) to a corner (9010,17780), west along y 17780 over `rst_a`'s poly column x 8964 to a pad with a contact (8733,17778); the pad's poly row y 17768-17786 west under the thin metal x 8643, the metal x 8600, the rail x 8500-8562 and the tracks x 8470, 8425, 8382 to a pad with a contact (8338,17777) |
 | `o040`, the track | x 8005-8345, y 16292-17784 | metal west along y 17777 to a corner (8012,17777); north on x 8012; a Z step at y 17259 onto x 8057; north to a corner (8057,16647); east along y 16647 to x 8143; north on x 8143 onto `bc1`'s metal end (8143,16300) of `bc1_g6_in` |
 | `g174`, the rail | x 8316-8382, y 16300-17568 | column A's VSS rail south of `bc1`'s end: x 8338-8382 to y 17250, a step west at y 17240-17270, x 8316-8362 to its end at y 17568 |
-| `g174`, the active area | x 8258-8368, y 17266-17560 | one diffusion under the rail (x 8306-8368) and west of it in the open to a straight edge x 8254-8258; contacts onto the rail at (8335,17293) and (8335,17474) |
-| `g174`, row 1 | x 8245-8372, y 17331-17351 | `eof_w17338`: a poly row right across the active area; ports at both ends |
-| `g174`, the hairpin | x 8200-8372, y 17373-17441 | `eof_w17168`: piece `o168`'s row y 17419-17441 on to a left leg x 8305-8323 and a top bar y 17373-17395, which leaves east of the rail (port) |
-| `g174`, the lower poly | x 8226-8372, y 17464-17560 | `eof_w17472`: a row y 17464-17486, an east leg x 8274-8296, a bottom bar y 17521-17543 under the rail (port east of it); west of the active area the row turns south on x 8226-8242 (port at y 17560) |
+| `g174`, the active area | x 8258-8411, y 17266-17560 | one diffusion under the rail and west of it in the open to a straight edge x 8254-8258; contacts onto the rail at (8335,17293) and (8335,17474). It runs on east of the rail (piece `g174e`) |
+| `g174`, row 1 | x 8245-8413, y 17331-17351 | `eof_w17338`: a poly row right across the active area; a port at its west end; east of the rail: piece `g174e` |
+| `g174`, the hairpin | x 8200-8372, y 17373-17441 | `eof_w17168`: piece `o168`'s row y 17419-17441 on to a left leg x 8305-8323 and a top bar y 17373-17395, which runs on east of the rail (piece `g174e`) |
+| `g174e`, the active area east of the rail | x 8368-8467, y 17263-17560 | the output node's strip (x 8389-8452), the ground's band (y 17263-17282), sliver (x 8368-8388) and finger (y 17447-17468, to x 8411), and a field island x 8411-8434, y 17419-17498 |
+| `g174e`, the gates' east parts | x 8370-8472, y 17282-17543 | row 1's L (to x 8472), the hairpin's and the lower poly's right legs (x 8370-8389) and arms (to x 8424, ending on the island) |
+| `g174e`, the load | x 8446-8558, y 17326-17560 | a plate x 8461-8498, y 17360-17447 with a tie box (8458-8482, 17330-17354); the diffusion under the VCC rail with contacts (8528,17477), (8509,17513); the rail R2 on south, x 8488-8558 |
+| `g174e`, the output | x 8455-8485, y 17445-17634 | the plate's tail south to a pad with a contact (8467,17603) and 30 px of its metal (port) |
+| `g174`, the lower poly | x 8226-8372, y 17464-17560 | `eof_w17472`: a row y 17464-17486, an east leg x 8274-8296, a bottom bar y 17521-17543 under the rail (east of it: piece `g174e`); west of the active area the row turns south on x 8226-8242 (port at y 17560) |
 
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
 
@@ -1953,24 +1979,24 @@ No known cell matches it (`findcell`, run 22). It was read from eleven views (`r
 
     t  gate eof_w17338   vss <-> eof_w17362    W/L 110/20
     t  gate eof_w17168   eof_w17362 <-> vss    W/L 156/21
-    t  gate eof_w17472   vss <-> eof_w17552    W/L 167/22
+    t  gate eof_w17472   vss <-> eof_w17552 (former name; it is eof_w17362, run 24)    W/L 167/22
 
 No load is drawn, so there is no equation. Each poly seals its node from the ground inside: row 1 crosses the
 whole width; the hairpin's row runs west past the active area's edge and its bar east past the other edge, so
 the part between row 1 and the hairpin (the band under the rail, y 17352-17372, and the area west of the leg
 down to the row) is one node, `eof_w17362`; the lower poly's row likewise runs west past the edge and its bar
 east past it, so the band below the bar (y 17544-17560) with the sliver west of the east leg is the other,
-`eof_w17552`. The ground between the two polys (the inside of the hairpin, the area with the contact
+the node below the lower bar (former name `eof_w17552`; it is `eof_w17362`, run 24). The ground between the two polys (the inside of the hairpin, the area with the contact
 (8335,17474), the band between the two rows) is `vss`. The widths count every stretch of a poly over the active
 area and are rough (Ambiguities 83 and 86); the connections do not depend on them.
 
-**What is read and not drawn, east of the rail** (believed; coordinates for the next run):
+**What is read and not drawn, east of the rail** (run 23's reading, kept as written; **drawn since run 24, piece `g174e` below, which corrects four of these rows**):
 
 | Feature | Where | Reading |
 |---|---|---|
 | The active area's east edge | x 8366-8370, y 17266-17560 | under the two right legs, field (the legs' row below). **Between the legs the ground diffusion goes on east** (review round 29; this run first read the slot as field from one row, `px.py row 17457`, which lies on the slot's north flank): the next row |
 | The two necks and the slot | necks y 17358-17366 (north) and y 17548-17558 (south), slot y 17454-17464 between the two arms, each x 8370-8400 | three bands about 10 px high, each between two polys, and alike: in chip 2's two shots each has a greenish north flank and a reddish south flank (`px.py col 8380 / 8388 / 8396 17446 17470 1 acid,metal` for the slot; `eof_patch.py 8376 8394 17355 17358 17359 17364` for the north neck: -12.6 / -25.1 and 20.3 / 32.6), so one row or a few rows say nothing. Over the red flank (`eof_patch.py`, red minus green, stripped / metal): slot (8376-8400, 17458-17462) 16.0 / 34.6; north neck 20.3 / 32.6; south neck (8378-8392, 17549-17555) 24.9 / 42.2; the open strip 14.0 / 32.2. **The control**: a band of the same height that is certainly field, between the hairpin's row and the lower row west of the active area's edge (`eof_patch.py 8228 8250 17452 17458`), gives 0.5 / 24.2 on that flank. So all three are diffusion: the two nodes go on east by the necks, **and the ground between the two polys goes on east as a finger between the arms** (clean shot: the tan runs out under the rail's margin at y 17445-17462 with no closing edge, like the necks' mouths: the reviewer's `g1.png`, `e3.png`). Along y 17460 the finger's colour ends at about x 8404-8410, the box's west line. Not drawn: the two nodes and the ground are left at ports on the edge |
-| The open diffusion strip | x 8400-8448, y 17315-17555 | bright green in the clean shot (`opendiff.py 8240 17200 8480 17600`: two groups), red minus green 14-17 / 32-33 in chip 2 (`eof_patch.py 8410 8440 17370 17410 17515 17545`), continuous east of the box (`px.py col 8442 17408 17508 3`: no edge line, 152-168/125-151/78-92). Both necks end on it: so **`eof_w17362` and `eof_w17552` are believed one node** |
+| The open diffusion strip | x 8400-8448, y 17315-17555 | bright green in the clean shot (`opendiff.py 8240 17200 8480 17600`: two groups), red minus green 14-17 / 32-33 in chip 2 (`eof_patch.py 8410 8440 17370 17410 17515 17545`), continuous east of the box (`px.py col 8442 17408 17508 3`: no edge line, 152-168/125-151/78-92). Both necks end on it: so **`eof_w17362` and the node below the lower bar (former name `eof_w17552`; it is `eof_w17362`, run 24) are believed one node** |
 | The right legs and the arms | upper: x 8372-8398, y 17370-17440, arm y 17420-17448 east; lower: x 8372-8395, y 17462-17540, arm y 17462-17492 east | each bar turns down (up) east of the rail and runs to an arm. The legs lie over field (`eof_patch.py 8378 8390 17380 17412`: 159/138/72 in the chip-2 stripped shot and 125/78/52 in the clean shot, against 172-175 and 157-180 for the same polys over the active area west of the rail and 152-157 and 122-126 over field there); the arms west of the box are bright again (174/146/63; 176/111/73): over active area, **each between the ground finger and the strip: believed two more stretches of the two gates** |
 | The box at the arms' ends | x 8410-8437, y 17418-17500 | one heavy outline round both arm ends, the ends dim and plain inside it (`eof_patch.py 8417 8429 17433 17444 17475 17488`: 125/106/57, dimmer than the arms west of it), a pale green spot between them that has the field's colour (`eof_patch.py 8416 8428 17454 17462`: -3.8 / 9.7; `px.py col 8422 17408 17508 3`; `r23_b1.png` 5.5x, `r23_h1.png` 7x). Believed since round 29: the two gates' ends over the field beyond the finger's end, no contact. Ambiguity 85 |
 | The load | plate x 8455-8500, y 17355-17445; a hook at its top with a pale-centred box (8460-8478, 17330-17348); tan diffusion x 8500 and on east under the VCC rail, y 17372-17445 | by its place the strip's load: a poly plate between the strip and a diffusion under the VCC rail (`r23_g1.png` 3x, `r23_g2.png` 4.4x). Its length across the plate is about 45 and its width about 75, a strong load (about 1.6) beside pull-downs of 5 to 8. The VCC contact, the tie and the plate's south end are not read |
@@ -1980,6 +2006,74 @@ area and are rough (Ambiguities 83 and 86); the connections do not depend on the
 `eof_w17472`), with pull-downs four to five times its load's strength: a driver stage behind the NOR `nor17`.
 The box stood against it (Ambiguity 85) until review round 29 showed the slot to be a ground finger: with the
 finger the box is the gates' ends and ties nothing. Where the strip's node leaves the unit is not found.
+
+### Piece `g174e`: the east side of the unit: the gates' east parts, the load, the output (traced)
+
+Run 24, 2026-11-20. Region x 8368-8560, y 17263-17634 (`bc3`'s ground, free). Read from fourteen views
+(`r24_a1.png` to `r24_g2.png`: 2.2x to 9x, the four shots), and mostly from text: `tools/px.py`,
+`tools/eof_patch.py`, `tools/textmap.py`, `tools/follow.py`, `tools/tl5_tracks.py`, the new `tools/eof_band.py` (the mean colour of a narrow band over all its rows, or
+columns, that are not dark: the whole-band test), and one script kept in `cache/scratch/eof/`: `r24_map.py` (a rectangle's red channel as numbers). Overlay `r24_o1.png` (3x,
+both stripped shots).
+
+**The narrow bands, classed over whole bands against a control** (trap 38; chip-2 metal shot / chip-2 stripped
+shot, red minus green over the band's own rows or columns, the run that is not dark between its two edge lines):
+
+| Band | Rectangle given to the script | Metal | Stripped | Class |
+|---|---|---|---|---|
+| **Control**: field between the hairpin's row and the lower row, west of the active area's edge | `tools/eof_band.py h c 8230 8250 17440 17466` | +14.0 | -3.4 | field (certain) |
+| The slot between the two arms | `tools/eof_band.py h s 8378 8402 17448 17470` | +31.9 | +16.8 | diffusion |
+| The north neck | `tools/eof_band.py h n 8374 8394 17350 17376` | +32.2 | +25.5 | diffusion |
+| The south neck | `tools/eof_band.py h s 8376 8392 17540 17566` | +39.9 | +24.6 | diffusion |
+| The band north of row 1's east stretch | `tools/eof_band.py h b 8396 8462 17258 17284` | +33.9 | +24.0 | diffusion |
+| The band between the two rows over the active area west of the rail (Ambiguity 86) | `tools/eof_band.py h a 8264 8298 17440 17466` | +32.0 | +16.9 | diffusion |
+| The sliver west of row 1's vertical part | `tools/eof_band.py v w 8368 8390 17288 17318` | +31.2 | +16.8 | diffusion |
+| The bridge east of the box | `tools/eof_band.py v b 8434 8454 17425 17495` | +31.6 | +18.6 | diffusion |
+| **The pocket between the two arm ends** | `tools/eof_band.py v p 8414 8432 17453 17463` | +3.8 | -7.7 | field |
+
+A narrow band has a green flank on its north and a red one on its south (and, between two vertical lines, red
+on the west and green on the east), so a few rows say nothing; the whole band does, and the seven diffusion
+bands stand at least 17 units from the control in both shots (metal +31 to +40 against +14; stripped +17 to
++26 against -3), the pocket below it.
+
+**What is drawn** (no uncertain item):
+
+| Item | Geometry | Evidence |
+|---|---|---|
+| The active area east of the rail | one area with `g174`'s: west of the island to x 8411; north of it x 8376-8452, y 17263-17419; the bridge x 8434-8452; south of it to y 17560; the north-east corner to x 8467 above y 17328 | the table above. No edge closes the area at x 8368: the clean shot's protected tan under the rail runs to x 8370 with no dark line at the slot (`px.py row 17459 8344 8452 2 acid1b`), at the sliver (`row 17300`) and at the rail's step corner, where it runs on to x 8390 (`r24_map.py 8366 17260 8404 17290 2 acid1b`: 190-200 from the rail to x 8390 at y 17264-17274). Edges: north y 17263 (`px.py col 8425 17250 17275 2`), south y 17560 (`col 8425 17540 17580 2`), east x 8450-8452 south of the plate (`row 17520`), x 8467 at the north-east corner (`row 17270`, `row 17292`, `row 17314`) |
+| **The field island** | x 8411-8434, y 17419-17498, left out of the diffusion | one dark line x 8408-8414 crosses the slot and both arms (`px.py row 17434`, `row 17459`, `row 17481`, metal and `metal1`: 72/56/5 on the arms, a real crossing); one line x 8430-8436 closes the pocket on the east; the pocket has the field's colour (the table). `r24_c1.png`, `r24_c2.png` (7x, four shots) |
+| Row 1 (`eof_w17338`) east of the rail | a stub to x 8413; a vertical part x 8388-8413, y 17282-17351; an east stretch y 17282-17302 to x 8472 | the poly: `px.py row 17315 8380 8430 2` (edge lines x 8384-8388, 8412-8416), `col 8420 17250 17310 2` (y 17284-17300), `row 17292` (bright to x 8462; the end line x 8464-8470). `r24_b1.png`, `r24_b2.png` (4.5x, four shots). North and west of it the ground diffusion (the band and the sliver of the table), south and east the strip: three stretches of one gate |
+| The hairpin (`eof_w17168`) east of the rail | the bar on to x 8389; a right leg x 8370-8389, y 17373-17447; an arm y 17425-17447 to x 8424 | `px.py row 17400 8362 8416 2` (poly x 8370-8388, its east edge line x 8388-8394, the strip plain from x 8396); `col 8400 17408 17502 2` (the arm between lines y 17422-17426 and 17450-17454); `row 17434 8396 8450 2` (bright to x 8404, the crossing line, the end to x 8422). No edge line crosses the poly from the bar's end to the arm (`px.py col 8381 17376 17446 2 metal`: lowest red 151; a real crossing of an active edge under this poly dips to 61, `px.py row 17430 8232 8290 2` at x 8254) |
+| The lower poly (`eof_w17472`) east of the rail | the bar on to x 8389; a right leg x 8370-8389, y 17468-17543; an arm y 17468-17492 to x 8424 | the same: `px.py row 17515`, `row 17481`, `col 8381 17470 17530 2` (lowest red 162 in metal, 158 in the stripped shot) |
+| The load | a poly plate x 8461-8498, y 17360-17447 over a diffusion x 8446-8504, y 17374-17441 | `px.py row 17405 8440 8548 2`, four shots: the strip plain to x 8452, the plate from its west edge line x 8456-8460, in the open (red, textured) to x 8480 and under the VCC rail's margin from there (clean shot 244/172/115: a poly over active area under metal, as 240/170/120 under the VSS rail); the plate's east edge prints through the rail at x 8496-8502; cream diffusion east of it. The active's north and south edge lines (y 17374, y 17442) cross the whole plate (`px.py col 8470`, `col 8492`; `r24_map.py 8476 17364 8502 17384 2`): the channel runs east-west. `r24_d1.png`, `r24_d2.png` (4.5x, four shots) |
+| The plate's column and tab | column x 8462-8482 north to y 17334; tab x 8486-8498 north to y 17332 | the column: an orange bar y 17360-17368 between the plate and the box in both metal shots (`px.py col 8470 17318 17376 2`). The tab lies under the rail's west edge; clean shot 227/167/105, which is neither field under metal (203/117/126) nor diffusion under metal (202/179/139) (`px.py col 8491 17322 17462 3 acid1b`) |
+| The tie | `B 8458,17330:8482,17354` on a diffusion x 8446-8482, y 17326-17354 | a box x 8456-8482, y 17326-17356 with a heavy frame and a pale centre (8462-8476, 17333-17350) in all four shots, at the column's north end, with the strip on its west and north (`r24_e1.png`, `r24_e2.png`, 9x) |
+| The diffusion under the VCC rail | x 8500-8538, y 17375-17450; x 8510-8538 to y 17478; x 8493-8538, y 17476-17542 | the clean shot: cream, one area (`px.py col 8525 17360 17556 4`: no line from y 17376 to y 17540; `col 8508`: a notch y 17442-17474; `row 17410`, `row 17462`, `row 17510`). At y 17450-17475 it also runs on east past x 8558 (not followed) |
+| Two contacts onto the rail | (8528,17477); (8509,17513), 18 x 34 | the first: a ring with a bright centre in both metal shots (`textmap.py 8486 17452 8554 17552 3 --acid`; `r24_d2.png`), specks in the clean shot. The second: a bright bar x 8504-8516, y 17494-17527 between dark sides in both metal shots, specks in the clean shot, a pitted white patch in the chip-2 stripped shot (Ambiguity 91) |
+| The VCC rail R2 on south | x 8488-8558 from y 17236 to y 17560 (it runs on) | `r23_rail.py 8510 8556 17200 17600`: no stretch without metal in both chips. Its west edge is the dark line x 8484-8488 of both metal shots, which runs from y 17332 to y 17440, north of the active too; the strip x 8488-8497 has metal's colour north of the plate (`px.py col 8492 17322 17462 3 metal`: 199-208/167-174/81-97) and is dim over the plate (trap 30) |
+| The output | the plate's tail x 8463-8480 south to a pad x 8455-8485, y 17583-17617; a contact (8467,17603); 30 px of the pad's metal south | the tail over field (clean shot 108/66/46 against 172/101/58 on the plate; `px.py row 17520 8436 8500 2`). The pad: a ring with a bright centre in both metal shots, a peach pad with a round green hole in the clean shot (`px.py col 8471 17540 17630 3`, metal and `acid1b`; `r24_g1.png`, `r24_g2.png`, 5x, four shots). South of the pad the clean shot's protected strip runs on (pink from y 17618) and chip 2's metal is bright again at y 17627 (trap 16: the dark stretch between is 14 px) |
+
+**What the extraction gives** (firm: `tools/unsure.py --equations eof_w17362`):
+
+    eof_w17362 = NOR(eof_w17168, eof_w17338, eof_w17472)
+    t  gate eof_w17338   vss <-> eof_w17362    W/L 258/21
+    t  gate eof_w17168   vss <-> eof_w17362    W/L 250/21
+    t  gate eof_w17472   vss <-> eof_w17362    W/L 261/22
+    t  gate eof_w17362   eof_w17362 <-> vcc    W/L  67/37   load
+
+The pull-downs are six to seven times the load's strength, and four times the width of any gate of the latch
+column behind them: a driver. **Believed, not traced**: it drives a long line. `tools/follow.py 8467 17640 S
+--gap 16` takes the pad's metal 840 px south across the bottom bus field's rows to a corner (8466,18478) and
+910 px west to an end at (7552,18472); the metal is thin (`tools/tl5_tracks.py v 8467 17600 17700`: four
+stretches of 8-15 px without metal in both chips in the first 100 px, the bars of the rows beneath or breaks:
+not read). `cudisp_drv_in`'s label (`pads_out`) is at (7729,18927), 450 px south of that stretch. Nothing of
+this is drawn: the next piece.
+
+**What run 23 read differently** (its second table, "read and not drawn", above): (1) "the active area's east
+edge x 8366-8370": there is none; (2) "the legs lie over field": its patches x 8378-8392 were half edge line
+(the legs' east edge line is at x 8388-8394), and the legs' centre line has the arms' colour; the poly's colour
+does not class it here at all (Ambiguity 88); (3) "the open strip x 8400-8448 ... continuous east of the box":
+east of the box it is 14 px between two edge lines (the bridge of the table); (4) the load's plate is
+x 8461-8498 by 87 high with a channel 37 long and 67 wide (W/L 1.8, where run 23 estimated 1.6).
 
 ## Ports
 
@@ -2075,15 +2169,12 @@ driver lies; the other three lead to the loads.
 | `eof_w16000` | metal | (8831-8845, 16030) | ? | piece `lat15`: the track x 8838 on south of the data pad (8838,16000) (the follower: to (8838,17306); not checked) |
 | `eof_w16040` | metal | (8919-8931, 16300) | in | piece `lat15`: the upper latch's enable: the metal x 8925 on south of its lower pad (8925,16262) (the follower: to (8925,17694), west along y 17700 to x 8643; not checked) |
 | `bc1_g6_in` | metal | (8136-8150, 16292) | out | piece `o040`: `eof_w17040`'s metal x 8143 onto `bc1`'s metal end (8143,16300) of `bc1_g6_in` (`M 8186,15900 y16260 x8143 y16300`; `bc1` has no ports file): the input of `bc1`'s inverter 6. (The ports `eof_w17040` (9001-9015, 17610), `eof_w16823` (8760, 16986-17003) and `eof_w16693` (8800, 17116-17135) are gone: the wires are drawn on) |
-| `eof_w17168` | poly | (8372, 17373-17395) | out | piece `g174`: the hairpin's top bar where it leaves the rail east: it runs on as a right leg x 8372-8398 over field and an arm y 17420-17448 east to a box (8410-8437, 17418-17500) on an open diffusion strip (not drawn; Ambiguity 85). (The ports (8245, 17419-17440) and (9050-9064, 17600) are gone: the row is drawn on) |
+| `eof_w17362` | metal | (8461-8473, 17634) | out | piece `g174e`: **the NOR's output**, the metal south of the pad (8467,17603) on the load's poly. `tools/follow.py`: south to a corner (8466,18478), west to (7552,18472); thin, over the bottom bus field's rows; not checked, not drawn (Ambiguity 93). (The ports of piece `g174` at x 8368-8372 on the rail's east edge, `eof_w17168`, `eof_w17338`, `eof_w17472`, `eof_w17362`, `vss` and the node whose former name was `eof_w17552`, are gone: drawn on) |
 | `eof_w17338` | poly | (8245, 17331-17351) | ? | piece `g174`: row 1 where it leaves the active area west, under the track x 8229 (in line with a pad at about (8188,17340): not read) |
-| `eof_w17338` | poly | (8372, 17331-17351) | ? | piece `g174`: row 1 east of the rail: it turns north on x 8375-8410 and east along y 17278-17305 over the north end of the open diffusion strip (not drawn) |
+| `vcc` | metal | (8488-8558, 17560) | - | piece `g174e`: the VCC rail R2 on south (drawn y 17236-17560, x 8488-8558; it runs on) |
 | `eof_w17472` | poly | (8226-8242, 17560) | ? | piece `g174`: the lower poly's west leg on south (poly to y 17585 by `r23_prof.py col 8233`; not followed) |
-| `eof_w17472` | poly | (8372, 17521-17543) | ? | piece `g174`: the lower poly's bar where it leaves the rail east: a right leg x 8372-8395 over field and an arm y 17462-17492 east into the same box as `eof_w17168`'s (not drawn; Ambiguity 85) |
-| `eof_w17362` | diffusion | (8368, 17352-17372) | out | piece `g174`: the node between row 1 and the hairpin, at the active area's east edge: it goes on east as a neck y 17358-17366 to the open diffusion strip x 8400-8448 (not drawn) |
-| `eof_w17552` | diffusion | (8368, 17544-17560) | out | piece `g174`: the node below the lower poly's bar, at the east edge: a neck y 17548-17558 to the same strip (not drawn; believed one node with `eof_w17362`) |
+| `vcc` | diffusion | (8538, 17450-17475) | - | piece `g174e`: the diffusion under the VCC rail runs on east past x 8558 at this height (not followed) |
 | `vss` | metal | (8338-8382, 16300) | - | piece `g174`: column A's VSS rail, `bc1`'s R1 (`M 8360,14890 y16300 w=48`) drawn on south to its end at y 17568 |
-| `vss` | diffusion | (8368, 17452-17466) | - | piece `g174` (review round 29): the ground diffusion between the two polys leaves the active area's east edge between the two right legs and runs on east as a finger between the arms, to about x 8408 (not drawn) |
 | `eof_w17212` | poly | (8990, 15812-15832) | in | piece `in212`: the NOR's second input, the poly row west of the pad (9053,15822) (believed: to the pad (8838,15822) of the thin metal x 8792) |
 | `vss` | metal | (8686-8732, 15870) and (8686-8732, 17300) | - | pieces `lat15`, `inv16`, `lat16`, `inv17`, `nor17`: column B's VSS rail, drawn over the two latch copies, the inverters and the NOR only; it runs on both ways (north to the piece over V and W) |
 | `vcc` | metal | (8510-8560, 15870) and (8510-8560, 17240) | - | pieces `lat15`, `inv16`, `lat16`, `inv17`, `nor17`: R2 (`bc1`'s `M 8534,14990 y16300 w=48`, drawn again from y 15870) and on south of `bc1`'s end, over the VCC boxes of the two latch copies and the inverter |
@@ -2779,14 +2870,17 @@ driver lies; the other three lead to the loads.
     at x 8271-8308, with a poly leaving west), so a wire may have been taken out of the layout here. Recorded
     because the box of Ambiguity 85 has the same look.
 85. **The box where both gate polys end, east of the rail: a tie of the gates to their own drain, or not**
-    (piece `g174`; not drawn). **Since review round 29 the working belief is reading (4) at the end of this
+    (piece `g174`). **Resolved in run 24 (piece `g174e`): reading (4), drawn. The box is a field island; the
+    pocket between the arm ends is field and the slot, the necks and the bridge east of the box are diffusion,
+    each on a whole-band test against a control (the Logic section's table of piece `g174e`). A buried contact
+    there would join the ground finger to the output node. What follows is the entry as run 23 left it.** **Since review round 29 the working belief is reading (4) at the end of this
     entry; fact (a)'s "a field slot" was wrong.** The facts, each measured (the Logic section's second table): (a) the hairpin
     `eof_w17168` and the lower poly `eof_w17472` each run on east of the rail, over field, and turn into an arm;
     the two arms run side by side, a slot between them (first read as field; diffusion: below), and end at x 8437 inside one heavy outline
     (x 8410-8437, y 17418-17500), 10 px short of the east edge of the open diffusion strip, which is continuous
     past them; (b) inside the outline the arm ends are dim and plain, not orange, and a pale green spot lies
     between them: what a poly's end on a buried contact looks like in the chip-2 shots; (c) the two necks make
-    the strip one node with `eof_w17362` and `eof_w17552`; (d) the strip has a load toward the VCC rail.
+    the strip one node with `eof_w17362` and the node below the lower bar (former name `eof_w17552`; it is `eof_w17362`, run 24); (d) the strip has a load toward the VCC rail.
     Readings: **(1) the box is a buried contact onto the strip**: then both polys, and with the first the NOR
     `nor17`'s output, are the strip's node, and the hairpin and the lower poly are transistors of W/L 7 and 8
     from that node to ground with their gates on it, against a load of about 1.6: the node could not rise.
@@ -2812,7 +2906,8 @@ driver lies; the other three lead to the loads.
     side and its review; from use, where `eof_w17472`'s west leg goes (a driver at its far end excludes (1)
     and (3)), and what the strip's node drives.
 86. **The narrow bands of the active area west of the rail have no colour of their own** (piece `g174`; trap
-    4). Between row 1's bottom and the box of Ambiguity 84, between the two rows (y 17443-17463), west of the
+    4). **Run 24: the band between the two rows (x 8264-8298, y 17443-17463) is diffusion on the whole-band test
+    (+32.0 / +16.9 against +14.0 / -3.4 for the field band of the same height just west of the edge): as drawn.** Between row 1's bottom and the box of Ambiguity 84, between the two rows (y 17443-17463), west of the
     lower poly's east leg (x 8258-8273) and east of it (x 8297-8305) the ground is 8-15 px wide between two
     edges and reads between field and diffusion (`eof_patch.py 8266 8298 17446 17456`: 3.6 / 15.9;
     `... 8261 8268 17500 17540`: 16.2 / 30.8, but `r23_prof.py row 17500` gives the diffusion's colour only
@@ -2824,6 +2919,55 @@ driver lies; the other three lead to the loads.
     the two contacts, the contact (8335,17474) as a contact of this rail, and the absence of any other metal
     over the active area rest on chip 2's metal shot and on the clean shot's protected colours (cream polys,
     tan diffusion from x 8306 to x 8368 the whole height).
+
+88. **The right legs and the arms are drawn as gate; the poly's colour does not show it** (piece `g174e`).
+    Each leg (x 8370-8389) has diffusion against both its edges, the ground under the rail on the west and the
+    strip on the east, and no edge line crosses the poly between the bar, the leg and the arm (`px.py col 8381`,
+    2 px steps, both chip-2 shots: lowest red 151-162, where a real crossing dips to 61); the slot beside the
+    arms is diffusion on the whole-band test. Against it: run 23 read the legs as lying over field from the
+    poly's colour, and in the clean shot the east half of each leg (x 8382-8388) is dark (100-127) beside a
+    bright west half (148-184) (`px.py row 17400 / 17515 8362 8416 2 acid1b`). Run 23's patches were half edge
+    line; on the centre line the legs have the arms' colour in both chip-2 shots, and known field-poly and known
+    active-poly of the same unit do not separate there (metal, red/green: 165-176/115-118 against
+    170-185/121-135). If the legs lay over field after all, the hairpin's and the lower poly's widths would be
+    about 50 less each; every connection and the equation would be the same. What would settle it: nothing more
+    in these photos.
+89. **Row 1's east end and the active area's east edge fall in one edge line** (piece `g174e`; x 8464-8470,
+    y 17282-17302; `px.py row 17292 8440 8490 2`, metal and `acid1b`; `row 17270`, `row 17314`). Drawn: the
+    active to x 8467, the poly 5 px past it, so that the gate closes the ground band off from the strip. A
+    poly ending short of the edge would leave a sliver of diffusion joining ground to the output node; the
+    photos cannot exclude a sliver under an edge line 6-8 px wide. Working assumption: closed. East of the line
+    a plain strip x 8472-8482 and the VCC rail's edge line: field.
+90. **The band and the sliver of ground diffusion beside row 1 join the ground under the rail's step corner,
+    which only the clean shot shows** (piece `g174e`; x 8366-8392, y 17262-17282). In both metal shots the
+    rail's corner lies over the place. The clean shot is protected tan (190-200) from under the rail right
+    through to x 8390 at y 17264-17274, with no dark line, and the band (open, dull) and the sliver (open, dark
+    red: trap 28) begin where the protection ends (`r24_map.py 8366 17260 8404 17290 2 acid1b,metal1`;
+    `r24_map.py 8364 17254 8404 17290 2 metal,acid`: in chip 2 a bright path from the sliver round the poly's
+    corner to the band, lowest red 130-150 against 155-180 on either side). The dark dip of about 6 px where a
+    diffusion passes from protected to open is there at the slot too, where chip 2 shows plain diffusion
+    through it. If the band or the sliver were cut off, row 1's width would be less; no connection changes.
+91. **The second contact of the diffusion under the VCC rail** (piece `g174e`; (8509,17513), 18 x 34) is read
+    from a text map and one 4.5x view of the two metal shots (a bright bar between dark sides, not a round
+    ring), with specks in the clean shot and a pitted patch in the chip-2 stripped shot. The first contact,
+    (8528,17477), is a plain ring with a bright centre in both chips and joins the diffusion to the rail by
+    itself.
+92. **The dark line x 8484-8488 through the load's plate, and the tab** (piece `g174e`). Both metal shots show
+    a dark line down the plate 12 px west of what looks like the rail's edge (x 8498-8502), and the chip-2
+    stripped shot a red line there. Read as the rail's west edge: the line runs on north of the active area
+    (so it is no active edge), the strip east of it has metal's colour where no poly lies under it, and the
+    clean shot shows no line there, only the change from open to protected poly. The line x 8498-8502 is then
+    the plate's east edge under the metal. Other reading: two polys side by side (a column and a strip), 4 px
+    apart, which no process draws. The tab north of the plate under the rail's edge is poly by its colour in
+    the clean shot; were it a diffusion from the tie box to the diffusion under the rail, the output would be
+    tied to VCC. Working assumption: one poly, a plate with a column and a tab.
+93. **The output pad's metal south** (piece `g174e`; (8467,17603)). Between the pad's bright centre and the
+    metal south of it both metal shots are dark for 14 px (y 17611-17625; a ring is about 10, trap 16's false
+    join had 24-33), and `tools/tl5_tracks.py v 8467 17600 17700` lists three more stretches of 8-13 px without
+    metal in both chips further south (the thin metal over the bus rows: traps 19, 27). The clean shot's
+    protected strip runs on south from the pad without a break (`px.py col 8471 17540 17630 3 acid1b`: pink
+    from y 17618), and `tools/follow.py 8467 17640 N --gap 16` ends on the pad. Drawn: 30 px of metal and a
+    port; the run beyond is the next piece's to read.
 
 ## Review
 
@@ -4321,8 +4465,8 @@ Round 30: no findings.
   10-20 px high between two polys has a greenish north flank and a reddish south flank in chip 2's shots, so
   its colour says something only against a band of the same height that is certainly field, measured the same
   way. Piece `vw`'s three bands (x 8752-8772; y 15191-15200, 15235-15247, 15360-15373) were classed from
-  patches without one. To do when next in column B: `tools/eof_patch.py` on each band's flanks and on a field
-  band between two rows nearby.
+  patches without one. To do when next in column B: `tools/eof_band.py h` (run 24: the whole-band test) on each band and on a field
+  band of the same height between two rows nearby.
 - **Task 2, the loads of `sl_eq_r5_n` (= NOT `sl_eq_r5`)**: one load is drawn (piece `r5nor`,
   the NOR that makes `tl1_w2637`), and the net's poly ends there. Not checked: taps along
   `r9m`'s, `tc2`'s, `tl4`'s, `tl2`'s and `tl1`'s stretches of it (each was read by its own
@@ -4403,19 +4547,8 @@ Round 30: no findings.
   `bc1`'s inverter 6; `eof_w17168` runs to the edge of a unit under column A's rail.
   **The unit that `eof_w17168` gates is drawn as far as the rail's east edge** (run 23, piece `g174`: three
   pull-downs).
-  **Left on that net, and next**: (1) (i) **the east side of that unit** (x 8368-8520, y 17240-17570; `bc3`'s
-  ground, free; read, not drawn: the second table of piece `g174`, with every coordinate and the command that
-  gave it). In order: (a) the ground finger between the arms (y 17454-17464, from the rail's edge to about
-  x 8408) and the box at the arms' ends (Ambiguity 85, reading (4)): the finger's end and the field pocket
-  between the arm ends at 6x in four shots, measured over whole patches and not single rows (review round 29;
-  round 30: the active area probably also passes x 8368 under the two arm rows, y 17428-17440 and
-  y 17476-17492, where the poly at x 8382 is bright in the clean shot),
-  and against a buried contact whose poly is certain (`bc1`'s `B 8271,15150:8308,15184` is in the open);
-  (b) the load: the plate x 8455-8500, y 17355-17445, its hook and
-  box (8460-8478, 17330-17348), the diffusion under the VCC rail east of it and that diffusion's contact;
-  (c) the open strip x 8400-8448, y 17315-17555 and the two necks, as diffusion; (d) row 1's east stretch (north
-  on x 8375-8410, east along y 17278-17305 to about x 8476) and what lies north of it at y 17256-17276; (e) the
-  right legs and arms. Then the unit's wires: `eof_w17338` west (a pad at about (8188,17340) on a track x 8186
+  **The unit's east side is drawn** (run 24, piece `g174e`: the gates' east parts, the load, the output's pad; `eof_w17362` = NOR(`eof_w17338`, `eof_w17168`, `eof_w17472`), firm).
+  **Left on that net, and next**: (1) (i) **the NOR's output `eof_w17362` south of its pad (8467,17603)** (the next piece; wiring, through `bc3`'s ground and the bottom bus field, `busb`, both free): `follow.py 8467 17640 S --gap 16` gives a corner (8466,18478) west and an end (7552,18472), 1,764 px; the metal is thin (about 10 px; `tl5_tracks.py v 8467 17600 17700`: stretches without metal in both chips at y 17610-17624, 17632-17639, 17653-17665, 17674-17685: the pad's ring and the bars of the bus rows beneath, or breaks: not read). To do: a continuous two-chip test along all of it in stages (traps 19, 27, 30, 33), every stretch of 14 px or more without metal looked at, the corner and the end at 5x (trap 14), then what the end is on. `cudisp_drv_in`'s label is at (7729,18927) (`pads_out`), `disptmg_drv_in`'s at (5582,18927). Beside the pad, another net's pad with a contact at (8402,17603) (ring and bright centre in both metal shots; no poly from this unit reaches it: field at y 17565-17585), with a metal south: not followed. Also seen: the diffusion under the VCC rail runs on east past x 8558 at y 17450-17475; a second diffusion with a contact under the same rail at x 8500-8545, y 17280-17345 (another unit's). Then the unit's wires: `eof_w17338` west (a pad at about (8188,17340) on a track x 8186
   from the north) and `eof_w17472`'s west leg south of y 17560 (to y 17585 and on). Also not drawn: the
   contact (8348,17245) and the diffusion north of y 17266 under the rail (the next unit's, to y 17231); the
   poly that ends at about (8292-8328, 17250-17262) from the west. (ii) **`bc1_g6_out`**, the
