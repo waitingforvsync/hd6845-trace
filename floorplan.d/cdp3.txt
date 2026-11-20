@@ -1,5 +1,5 @@
 # cdp3: central datapath, rows y 8450-11200
-7780,9820:10900,10330   array  ?read gates of R12 and R13 onto bus N (rows E, F) | believed gated by rsel12_buf and rsel13_buf (regs: two open joins through the left bus field); two pass transistors per column: gate_e puts the six row C register bits (and 0 in the two left columns) on bus N, gate_f the eight row H values
+7780,9820:10900,10330   array  read gates of R12 and R13 onto bus N (rows E, F) | gated by rsel12_buf and rsel13_buf (busl run 8: one metal track each up the left bus field, firm); two pass transistors per column: gate_e puts the six row C register bits (and 0 in the two left columns) on bus N, gate_f the eight row H values
 7600,9550:10850,9815    route  row C register outputs going west | six poly lines, one from each row C cell (true data, buffered) to the west edge
 7600,10300:10850,10720  route  channel G tracks | per column: one poly line between the west edge and the row H cell, and the column's bus N line leaving east
 8380,9195:10770,9550    array  ?R12 register (6 bit; row C) | written by wr_r12 (regs: marked, one uncertain metal), read through row E; static register cell per column c2..c7: written from the column bit line when the write line is high, held through a grounded-gate device; one buffered output west, one onto bus N. Believed R12 or R14 (high bits)
