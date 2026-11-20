@@ -439,7 +439,7 @@ P 7424,17821 x7925 w=20                            # poly row east, under the su
 # ---- bl0_w17610: the end of its metal, a pad (7384,17779) whose poly row goes on east (port).
 P 7367,17758:7401,17795                            # pad
 C 7384,17779
-P 7384,17779 x7555 w=22                            # poly row east, under the supply rail, to a pad (piece w6)
+P 7384,17776 x7555 w=23                            # poly row east, under the supply rail, to a pad (piece w6)
 
 # ================================================================ piece w6 (run 6): both wires on east and north
 # ---- bl0_w17610: pad (7555,17778), metal east to a pad (7795,17778), poly east under the track x 7840

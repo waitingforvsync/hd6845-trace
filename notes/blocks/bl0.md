@@ -8,7 +8,7 @@ metal-shot pixels. Evidence: `cache/scratch/bl0/` (`survey.md` holds every measu
 ## Status
 
 Run 6 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 10:59 -0600). One piece of wiring, no transistor, no
-uncertain item: the flag's output and its second clearing line to the gate groups they belong to.
+uncertain item; reviewed (round 8: no finding that changes a connection): the flag's output and its second clearing line to the gate groups they belong to.
 
 - **Piece `w6`** (wiring, 3,600 px). **`bl0_w17610`** (the flag): poly row east under the supply rail to a pad
   (7555,17778), metal east to a pad (7795,17778), poly to a pad (7880,17777), a track north to a pad
@@ -437,7 +437,9 @@ north (`follow.py 7925 17780 N`: end (7923,15694); five candidates, none with a 
 (7925,15696), whose poly row goes west under `bc1`'s tracks `bc1_ld_in2` and `bc1_ld_in1` into `bc1`'s
 gate group at about (7745,15690). Not followed: that group is `bc1`'s and undrawn.
 
-All six pads are rings with a bright centre in both metal shots and a hole in the clean shot, and the
+All six pads are rings with a bright centre in both metal shots and a hole in the clean shot (the pad
+(7880,17777)'s centre is weak and small in chip 2: 169/148/79 against 217/207/122 in chip 1; ring in both,
+hole in the clean shot), and the
 metal is bright up to the ring on the side it arrives from (`px.py` rows and columns at each).
 
 ## Ports
@@ -724,6 +726,33 @@ Findings, geometry or notes only:
 connections identical.
 
 Round 7: no findings that change a connection.
+
+### Run 6
+
+Round 8 (full review of piece `w6`; fresh Fable 5.2 reviewer; 2026-11-20 11:08 -0600; commit b3d1ee0; images
+`cache/scratch/bl0/review-8/`). Told to suspect: the metal at every pad's ring on all four sides; each
+pad as a contact; the track x 7918-7932 over its whole length (jogs, swaps, the five candidates, two
+stretches dim in chip 1); the track x 7875-7889; wire 2's poly row under the metal that lies along it;
+the crossing at (7840,17778); second polys or metals on the pads. Checked with a two-chip metal test
+along both tracks and in strips beside them, text maps, profiles and 12 views: both tracks continuous
+with no jog, swap or branch; the two dim stretches are dirt on chip 1 (chip 2 continuous, clean shot
+unbroken); no candidate has a ring; another net's poly under the track at y 16210-16345 without contact;
+the pads (7882,17389) and (7925,15696) with metal from the south only; the pads (7555,17778),
+(7795,17778), (7925,17821) with ring and centre in both chips; wire 1's metal continuous over field; the
+crossing at (7840,17778) plain (an arc in chip 1 only, the row uniform in the clean shot); wire 2's row
+one poly of constant width with no hole, the metal over it ending at x 7845 and turning south at x 7555
+with no ring; field under the rail; the port rows continuous. Not checked: the port rows beyond x 7740
+and x 7720; where the neighbouring nets go.
+
+Findings, notes or geometry only:
+
+1. The pad (7880,17777)'s centre is weak in chip 2. Still a contact; the notes say so now.
+2. Wire 1's row under the rail is y 17764-17787 (drawn 17768-17790). Fixed.
+
+`tools/t.sh bl0 sameconn.py b3d1ee0`: connections identical. `.venv/bin/python tools/sameconn.py b3d1ee0`:
+connections identical.
+
+Round 8: no findings that change a connection.
 
 ## Not done
 
