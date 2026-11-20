@@ -141,3 +141,10 @@ busl_x6949   P  7550,14859-14881   ?   poly row on east to a pad at about (7836,
 busl_x6992   P  7550,14816-14838   ?   poly row on east to a pad at about (7794,14826) (not drawn)
 busl_x6949   P  7060,7203-7225     ?   poly row on west into the crossing field; seen as poly to x 6720, not read
 busl_x6992   P  7060,7160-7182     ?   poly row on west into the crossing field; seen as poly to x 6720, not read
+# pieces fc, fd, fe (run 11): the next three Ls of the nest and their lines north of y 10400
+rcs_mv       P  6227-6247,6350     in  onto tl6's poly column from the corner of the row y 6238 (tl6's port rcs_mv there)
+rcs_mv       M  6964-6978,15000    out track x 6971 on south into bl0's ground; follower ends (6970,15282), candidate (6971,15098), not read
+tc2_r5718    M  7526-7540,6400     ?   onto tc2's metal from the pad (7530,6324) (tc2's port tc2_r5718 there)
+tc2_r5718    P  7550,14513-14535   ?   poly row y 14524 on east toward bc1's bus pads (seen as poly to x 7580; not drawn)
+busl_x7122   P  7592,8852-8874     ?   the row y 8863 on east under the wide rail; NOT joined to cdp3's ?P row (cdp3_k_a) that starts at x 7600: notes, Ambiguities 17, 18
+busl_x7122   P  7550,14469-14491   ?   poly row y 14480 on east toward bc1's bus pads (seen as poly to x 7580; not drawn)

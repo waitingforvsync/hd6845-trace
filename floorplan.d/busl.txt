@@ -26,3 +26,9 @@
 6935,8780:7190,13400    route  the same two lines north | tracks x 6949 and x 6992 to the diagonal bundle and its pads (7121,8797), (7163,8842)
 7100,7150:7190,8860     route  the same two lines, poly hop and north | a poly column under the staircase metals, a second pad, and a metal north to end pads (7120,7214), (7165,7170) on poly rows that go west
 6865,14810:7550,14890   route  foot rows y 14827, y 14870 | poly rows from the bus of the bottom-centre logic to the pads of the two tracks
+6955,13495:7155,14540   route  step condition, top-centre line and a third: lower tracks and foot jogs | rcs_mv (out south at x 6971), tc2_r5718 and busl_x7122: three more Ls (corners y 13507, 13550, 13594); the last two step east twice at the foot onto the pads of the poly rows y 14524 and y 14480
+7020,8800:7440,13495    route  the same three lines north | tracks x 7036, 7078, 7122 and their diagonals to the pads (7206,8798), (7337,8798), (7423,8863)
+7085,14465:7550,14540   route  foot rows y 14480, y 14524 | poly rows from the pads east toward the bus of the bottom-centre logic
+6215,6350:7225,8820     route  rcs_mv out of the top-left logic | the poly column x 6237 south under ten metals to a pad (6232,6911), a metal east along y 6913 and south on x 7208, a poly hop under the staircase metals
+7325,6400:7545,8820     route  tc2_r5718 from the top-centre logic | one metal south (x 7533, x 7511, west along y 7453, x 7360) to a pad, a poly hop under the staircase metals
+7405,8845:7595,8882     route  third line's row from under column 0's rail | a poly row y 8863 from the east (under the wide rail, uncertain there) to the pad (7423,8863)
