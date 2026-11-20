@@ -224,3 +224,78 @@ M 6929,15167 y16229 w=20                           # track x 6919-6939 south
 C 6928,16217
 P 6912,16202:6945,16232                            # pad
 P 6931,16217 y16250 w=22                           # poly column x 6920-6942 on south (port)
+
+# ================================================================ piece xu: both pin lines under the metal bus and on to their gate
+# South of the staggered pads each line goes under a bus of five horizontal metals (y 16255, 16300,
+# 16340-16390, 16430, 16475) as a poly column to a second pad, south again as a thin metal, east at a
+# corner to a third pad, and east as a poly row to a gate column under a rail x 7292-7342 (piece n1).
+# No transistor and no contact on the way: field beside both columns and both rows.
+P 6888,16250 y16515 w=22                           # res_b: poly column x 6877-6899 under the bus
+P 6869,16499:6903,16531                            # pad south of the bus
+C 6885,16516
+M 6888,16508 y17039 x6951 w=18                     # thin metal south, corner (6888,17040), east onto the pad
+C 6951,17038
+P 6937,17025:6969,17056                            # pad
+P 6951,17029:7385,17051                            # poly row east under three tracks: gate band B of piece n1
+P 6931,16250 y16560 w=22                           # lpstb_b: poly column x 6920-6942 under the bus
+P 6913,16543:6947,16578                            # pad south of the bus
+C 6929,16560
+M 6930,16552 y16995 x6990 w=18                     # thin metal south, corner (6931,16997), east onto the pad
+C 6990,16996
+P 6972,16981:7008,17012                            # pad
+P 6990,16986:7385,17007                            # poly row east: gate band A of piece n1
+
+# ================================================================ piece n1: the gate both pin lines end on
+#     bl0_w17085 = NOT( lpstb_b AND res_b )
+# Two pull-downs in series under the rail: a source box with a contact, band A (lpstb_b), a node with
+# no contact, band B (res_b), the output node. The output goes east as a strip under a load plate to a
+# box on the supply rail x 7470-7520 (bc3 names it vcc), and west by a tab and a buried contact onto a
+# poly that runs south and back east as the gate band of the next unit (piece n2).
+M 7317,16925 y17110 w=50                           # rail x 7292-7342 (vss by the orientation of the loads)
+N M 7317,16930 vss
+D 7289,16941:7341,16967                            # source box
+C 7308,16960
+D 7289,16965:7360,17092                            # column: source, band A, node, band B, output node (W 7289-7360)
+D 7358,17074:7404,17092                            # output strip east
+D 7400,17061:7470,17091                            #   under the load plate (W 30, L 62)
+D 7468,17030:7522,17090                            # box on the supply rail
+C 7493,17052
+M 7495,17020 y17110 w=50                           # the supply rail over the box (bc3 draws the whole rail)
+N M 7495,17030 vcc
+D 7390,17021:7402,17078                            # neck of diffusion from the strip north, west of the plate
+D 7390,17021:7447,17039                            #   and east above the plate's top
+B 7403,17021:7432,17040
+P 7405,17023:7430,17042                            # the plate's finger onto it
+P 7404,17041:7465,17108                            # load plate
+D 7238,17074:7291,17093                            # output tab west
+B 7238,17072:7268,17096
+P 7203,17070:7268,17097                            # output poly: west,
+P 7203,17070:7227,17180                            #   south,
+P 7203,17160:7358,17180                            #   and east as the gate band of piece n2
+N P 7215,17120 bl0_w17085
+
+# ================================================================ piece n2: the inverter after it
+#     bl0_w17210 = NOT bl0_w17085        ( = lpstb_b AND res_b )
+M 7317,17110 y17240 w=50                           # the rail on south
+N M 7317,17120 vss
+D 7290,17110:7340,17186                            # source box and channel (W 7290-7340)
+C 7308,17130
+D 7281,17182:7357,17215                            # output node, wider than the channel
+D 7355,17192:7404,17215                            # output strip east
+D 7400,17190:7470,17218                            #   under the load plate (W 28, L 62)
+D 7468,17158:7522,17243                            # box on the supply rail
+C 7488,17178
+M 7495,17110 y17240 w=50
+N M 7495,17120 vcc
+D 7383,17142:7402,17195                            # neck north, west of the plate
+D 7383,17142:7447,17164                            #   and east above the plate's top
+B 7403,17143:7432,17165
+P 7405,17146:7430,17168                            # the plate's finger
+P 7404,17166:7465,17235                            # load plate
+D 7238,17192:7283,17215                            # output tab west
+B 7238,17194:7268,17226
+P 7180,17203:7268,17223                            # output poly west to a pad
+P 7172,17195:7206,17227                            # pad
+C 7188,17210
+M 7188,17200 y17310 w=20                           # metal south to the next pad (17300)
+N M 7188,17250 bl0_w17210
