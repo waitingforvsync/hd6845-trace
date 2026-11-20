@@ -17,8 +17,8 @@ vss          M  2605-2655,14770   -    the same, on south
 vcc          M  2783-2832,14090   -    the left edge column's vcc rail, on north
 vcc          M  2783-2832,14770   -    the same, on south
 busl_x6906   M  6834-6848,15000   in   busl's track x 6841, on north; here south to the gate that clears the pair bl0_w17610
-bl0_w17687   P  7465,17811-17831  in   poly row east of the pad (7424,17822), under the supply rail and on east
-bl0_w17610   P  7465,17768-17790  out  poly row east of the pad (7384,17779), under the supply rail to a pad at about (7553,17775)
+bl0_w17687   P  7790,15682-15702  in   poly row west of the pad (7925,15696), into bc1's gate group at about (7745,15690): what clears the light pen flag once the strobe is low
+bl0_w17610   P  7760,17378-17398  out  poly row west of the pad (7882,17389), into the gate column east of the supply rail x 7470-7520 (bc3's region): the light pen flag
 vss          M  7292-7342,16925   -    the gate column's rail x 7317, on north
 vcc          M  7470-7520,17020   -    bc3's rail x 7495, on north
 vcc          M  7470-7520,17670   -    the same, on south

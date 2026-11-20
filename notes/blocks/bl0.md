@@ -7,6 +7,17 @@ metal-shot pixels. Evidence: `cache/scratch/bl0/` (`survey.md` holds every measu
 
 ## Status
 
+Run 6 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 10:59 -0600). One piece of wiring, no transistor, no
+uncertain item: the flag's output and its second clearing line to the gate groups they belong to.
+
+- **Piece `w6`** (wiring, 3,600 px). **`bl0_w17610`** (the flag): poly row east under the supply rail to a pad
+  (7555,17778), metal east to a pad (7795,17778), poly to a pad (7880,17777), a track north to a pad
+  (7882,17389) and a poly row west into the gate column east of the supply rail (`bc3`'s region, not
+  drawn by anyone). **`bl0_w17687`** (clears the flag once the strobe is low): its poly row runs east to
+  a pad (7925,17821), a track runs north 2,125 px to a pad (7925,15696), and a poly row goes west into
+  `bc1`'s gate group at about (7745,15690) (not drawn by anyone). Both ends are gates or outputs of
+  other packages' undrawn groups: ports.
+
 Run 5 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 10:41 -0600). One piece of wiring, no transistor,
 no uncertain item; reviewed (round 7: no finding that changes a connection): the three wires of the cross-coupled pair.
 
@@ -122,6 +133,8 @@ finding that changes a connection.
 | `busl_x6906` south of the bus field | 6826-7215 | 15000-17578 | track x 6834-6848 from y 15000 to a pad (6842,16217); poly column x 6836-6854 under the bus to a pad (6842,16562); thin metal south to y 17085, east to x 6970, south to a pad (6970,17561); poly row y 17549-17572 east under four tracks to the fifth unit |
 | `bl0_w17687`'s wire | 7126-7465 | 17676-17838 | the row's west end on a pad (7142,17713); thin metal x 7137-7151 south to a corner (7151,17829), east to a pad (7424,17822); poly row east |
 | `bl0_w17610`'s wire | 7178-7465 | 17595-17795 | from the pad (7188,17605) a metal south to a corner (7192,17786), east to a pad (7384,17779); poly row east |
+| `bl0_w17610` east and north | 7384-7899 | 17373-17795 | poly row y 17768-17790 to a pad (7555,17778); metal y 17771-17785 to a pad (7795,17778); poly to a pad (7880,17777); track x 7875-7889 north to a pad (7882,17389); poly row y 17378-17398 west |
+| `bl0_w17687` east and north | 7424-7942 | 15680-17838 | poly row y 17811-17831 east to a pad (7925,17821); track x 7918-7932 north to a pad (7925,15696); poly row y 15682-15702 west |
 
 ## Logic
 
@@ -408,6 +421,25 @@ turns east at (7151,17829) and ends on a pad (7424,17822) (`follow.py 7145 17745
 pad (7384,17779) (`follow.py 7189 17730 S`); its poly row (y 17768-17790) goes on east under the supply
 rail to a pad at about (7553,17775), from which a metal goes on east (seen, not drawn).
 
+### Piece `w6` (run 6): the flag's output and its second clearing line
+
+`bl0_w17610`. The poly row of the pad (7384,17779) runs east under the supply rail to a pad (7555,17778);
+a metal runs east to a pad (7795,17778); a poly goes on east, under the track x 7840 (no contact), to a
+pad (7880,17777); a track x 7875-7889 runs north (`follow.py 7882 17740 N`: end (7880,17384); the
+candidates (7883,17729) and (7882,17452) have no ring: `textmap.py 7868 17717 7898 17741 3`,
+`7868 17440 7898 17464 3`) to a pad (7882,17389), whose poly row goes west under two tracks towards the
+gate column east of the supply rail (x 7520-7780). Not followed: that column is `bc3`'s and undrawn.
+
+`bl0_w17687`. The poly row of the pad (7424,17822) runs east to a pad (7925,17821). Between x 7545 and
+7845 a metal of another net lies along it (it comes down the track x 7840 and leaves south at x 7555);
+the row has no pad under it and the clean shot is one salmon row. From the pad a track x 7918-7932 runs
+north (`follow.py 7925 17780 N`: end (7923,15694); five candidates, none with a ring in chip 2) to a pad
+(7925,15696), whose poly row goes west under `bc1`'s tracks `bc1_ld_in2` and `bc1_ld_in1` into `bc1`'s
+gate group at about (7745,15690). Not followed: that group is `bc1`'s and undrawn.
+
+All six pads are rings with a bright centre in both metal shots and a hole in the clean shot, and the
+metal is bright up to the ring on the side it arrives from (`px.py` rows and columns at each).
+
 ## Ports
 
 | Name | Layer | Where | Direction | Note |
@@ -415,8 +447,8 @@ rail to a pad at about (7553,17775), from which a metal goes on east (seen, not 
 | `res_b` | M | (6359-6373, 15000) | in | busl's track x 6366 |
 | `lpstb_b` | M | (6401-6415, 15000) | in | busl's track x 6408 |
 | `busl_x6906` | M | (6834-6848, 15000) | in | `busl`'s track x 6841, on north |
-| `bl0_w17687` | P | (7465, 17811-17831) | in | poly row east of the pad (7424,17822), under the supply rail and on |
-| `bl0_w17610` | P | (7465, 17768-17790) | out | poly row east of the pad (7384,17779), under the supply rail to a pad at about (7553,17775) |
+| `bl0_w17687` | P | (7790, 15682-15702) | in | poly row west of the pad (7925,15696), into `bc1`'s gate group at about (7745,15690) |
+| `bl0_w17610` | P | (7760, 17378-17398) | out | poly row west of the pad (7882,17389), into the gate column east of the supply rail |
 | `vss` | M | (7292-7342, 16925) | - | the gate column's rail, on north; it ends at y 17755 |
 | `vcc` | M | (7470-7520, 17020), (7470-7520, 17670) | - | `bc3`'s rail x 7495 |
 | `bl0_w15088` | P | (6450, 15078-15098) | ? | poly row on east from the pad (6320,15088), seen to x 6790 |
@@ -697,10 +729,9 @@ Round 7: no findings that change a connection.
 
 - **What pulls `larr_l0_g0` and `larr_l0_g1` up** (neither pull-up is in `larr`'s rows or in the two
   cells drawn here), and the carry into s0.
-- **`bl0_w17687`'s source**: the poly row east of the pad (7424,17822) (y 17811-17831; salmon to x 7620
-  at least, a metal over it from about x 7545).
-- **Where `bl0_w17610` goes**: the poly row east of the pad (7384,17779) to a pad at about (7553,17775)
-  and the metal east of it.
+- **`bl0_w17687`'s source** is in `bc1`'s gate group (the poly row west of the pad (7925,15696)), and
+  **`bl0_w17610`'s use** is in the gate column east of the supply rail (the poly row west of the pad
+  (7882,17389); `bc3`'s region). Neither group is drawn; they are those packages' work.
 - `busl_x6906`'s source is `busl`'s (north of y 10400).
 - **The thin metal x 7137-7152 north of the pad (7144,17340)**, another net, seen and not drawn: from a pad
   (7141,15566) (poly row east into `bc1`'s group x 7190-7860, y 15570-16300) south to a pad (7144,16260),

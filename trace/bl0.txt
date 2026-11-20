@@ -435,8 +435,34 @@ C 7142,17713
 M 7144,17713 y17826 x7424 w=14
 P 7408,17803:7441,17838                            # pad
 C 7424,17822
-P 7424,17821 x7465 w=20                            # poly row east, under the supply rail (port)
+P 7424,17821 x7925 w=20                            # poly row east, under the supply rail and on (piece w6)
 # ---- bl0_w17610: the end of its metal, a pad (7384,17779) whose poly row goes on east (port).
 P 7367,17758:7401,17795                            # pad
 C 7384,17779
-P 7384,17779 x7465 w=22                            # poly row east, under the supply rail, to a pad at about (7553,17775) (port)
+P 7384,17779 x7555 w=22                            # poly row east, under the supply rail, to a pad (piece w6)
+
+# ================================================================ piece w6 (run 6): both wires on east and north
+# ---- bl0_w17610: pad (7555,17778), metal east to a pad (7795,17778), poly east under the track x 7840
+# to a pad (7880,17777), a track x 7875-7889 north to a pad (7882,17389), whose poly row goes west into
+# the gate column east of the supply rail (port).
+P 7539,17762:7572,17794
+C 7555,17778
+M 7555,17778 x7795 w=14
+P 7779,17762:7812,17794
+C 7795,17778
+P 7795,17778 x7880 w=20
+P 7864,17761:7897,17794
+C 7880,17777
+M 7882,17777 y17389 w=14
+P 7866,17373:7899,17405
+C 7882,17389
+P 7760,17378:7884,17398                            # poly row west (port at x 7760)
+# ---- bl0_w17687: its poly row runs east (for 300 px under a metal of another net that lies along it,
+# x 7545-7845) to a pad (7925,17821); a track x 7918-7932 runs north 2,125 px to a pad (7925,15696),
+# whose poly row goes west into bc1's gate group (port).
+P 7909,17805:7942,17838
+C 7925,17821
+M 7925,17821 y15696 w=14
+P 7909,15680:7942,15712
+C 7925,15696
+P 7790,15682:7927,15702                            # poly row west (port at x 7790)

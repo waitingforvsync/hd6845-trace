@@ -189,7 +189,9 @@ metal has two loads (`bl0` run 3; firm): an inverter, `bl0_w17337` = NOT `bl0_w1
 (`bl0_w17337` AND `bl0_w17687`)). **`bl0_w17610` is a flag set by the gated light pen strobe**; it holds
 after the strobe ends and is cleared by `busl_x6906`, or by `bl0_w17687` once the strobe is low. The first is a
 track of the left bus field (run 5: drawn from the field's foot to the gate; its source lies north of the
-field); the second line's source and the flag's use are not traced yet (believed: it times the latching of R16/R17).
+field); the second line comes out of the bottom-centre logic's upper gate group (`bc1`, at about (7745,15690)), and
+the flag goes into the gate column east of the supply rail at y 17388 (run 6: both drawn to those groups, which
+are not traced yet) (believed: it times the latching of R16/R17).
 
 Firm for the NOR, its three copies and the four joins (no uncertain item on them); the latches'
 own equations are marked as before. Believed: this is the datasheet's reset, which RES gives
