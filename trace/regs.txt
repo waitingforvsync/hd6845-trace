@@ -449,14 +449,15 @@ P 5837,16800 x5909 w=20
 P 5892,16783:5926,16817
 C 5909,16800
 # --- C: the row goes on east of the pad: open poly, then a band under the rail x 6008-6055 between two diffusions
-# (not drawn: a pull-down of the bottom-left logic, bl2's; port at the rail's west edge). The poly ends at x 6060.
-P 5909,16800 x6060 w=20
+# (not drawn: a pull-down of the bottom-left logic, bl2's; port at the rail's west edge). The poly ends at x 6065
+# (an orange nub beyond the rail in both metal shots: px.py row 16796 6044 6100 2 all; review round 5).
+P 5909,16800 x6065 w=20
 # --- D: thin metal (22 px wide) south from the pad, over two poly rows of other nets (y 16870-16890, 16920-16940:
 # edge bars only, no ring), to a pad whose centre is bright in chip 1 only (notes, Ambiguities 4)
 M 5910,16800 y17019 w=20
 P 5890,17002:5924,17036
 C 5907,17019
-# --- E: poly row y 17010-17026 east under the rails x 6010-6050 and x 6190-6238 and the tracks x 6280, 6320, to a pad
+# --- E: poly row y 17010-17026 east under the rails x 6015-6065 and x 6190-6238 and the tracks x 6280, 6320, to a pad
 P 5907,17018 x6408 w=16
 P 6391,17000:6425,17034
 C 6408,17017

@@ -47,8 +47,8 @@ Trace: `trace/regs.txt`. Scratch: `cache/scratch/regs/` (`survey.md`). Started 2
 | Vertical hop | y 16168-16558 | poly between pads under the horizontal metal rows y 16260-16480: pads (6668,16210)/(6668,16558), (6624,16168)/(6626,16515), (6581,16210)/(6582,16558), (6538,16168)/(6538,16515); five columns hop here (the fifth, x 6711, is `eof`'s `bd1_n2` track), all straight (2.7x, both shots) |
 | Tracks north | y 15000-16168 | metal to `busl`'s south edge, where `rsel14_buf`, `rsel15_buf`, `rsel17_buf`, `rsel16_buf` (`cdp4`'s selects 1-4) are drawn; six poly rows cross at y 15070-15190 without a contact |
 | `lc2_w8450`: poly row from `bl0`'s port | x 4930-5853, y 16703-16723 | straight; under a wide metal x 4950-5020, `bl0`'s six tracks and their neighbours (x 5100-5360), in the 25 px gap between two horizontal metals at x 5420-5540, open at x 5550-5720, under three tracks to a corner (2.5x in `metal`, `acid1b`, `acid`: `a1.png`, `a2.png`; the gap stretch at 3x in four shots, `a4.png`) |
-| Corner and second row | column x 5837-5853, y 16703-16810; row y 16791-16810, x 5837-6060 | open poly between the metals x 5815 and x 5865 (orange in both metal shots: `px.py row 16760 5822 5868 2 all`, `px.py col 5845 16700 16830 4 metal,acid`); the row passes under the track x 5855-5875 without a ring, through the pad (5909,16800), and ends under the rail x 6008-6055 as a band between two diffusions (not drawn) |
-| Metal x 5910, poly row y 17018 | y 16800-17019; x 5907-6408 | thin metal (22 px wide) between pads (5909,16800) and (5907,17019), over two poly rows of other nets (y 16870-16890, 16920-16940: edge bars only); poly row straight under the rails x 6010-6050 and x 6190-6238 and the tracks x 6280, 6320 (2.2x, three shots, `o2.png`) |
+| Corner and second row | column x 5837-5853, y 16703-16810; row y 16791-16810, x 5837-6065 | open poly between the metals x 5815 and x 5865 (orange in both metal shots: `px.py row 16760 5822 5868 2 all`, `px.py col 5845 16700 16830 4 metal,acid`); the row passes under the track x 5855-5875 without a ring, through the pad (5909,16800), and ends under the rail x 6008-6055 as a band between two diffusions (not drawn) |
+| Metal x 5910, poly row y 17018 | y 16800-17019; x 5907-6408 | thin metal (22 px wide) between pads (5909,16800) and (5907,17019), over two poly rows of other nets (y 16870-16890, 16920-16940: edge bars only); poly row straight under the rails x 6015-6065 and x 6190-6238 and the tracks x 6280, 6320 (2.2x, three shots, `o2.png`) |
 | Track x 6408 | y 17017-18126 | thin metal between pads (6408,17017) and (6408,18126); `tl5_tracks.py v 6408 17035 18108`: no stretch without metal in both chips (Ambiguities 3) |
 | Poly row under the six tracks | x 6408-6712, y 18117-18133 | under the tracks of `rsel12_buf` .. `rsel16_buf` (x 6452-6668), no pad, no ring (3.3x, three shots, `o3.png`) |
 | The seventh row | y 18125, x 6712-10137 | metal with the bus's three straight hops, pads 7382/7555, 8424/8641, 9596/9811 (each hop at 4-4.4x in both stripped shots: `h1.png`, `h2.png`, `h3.png`); `tl5_tracks.py h 18123 6600 10200`: metal at x 6740-7364, 7581-8405, 8669-9571, 9837-10117 |
@@ -159,7 +159,13 @@ metal x 10485 north.
   `b1.png`). So it looks like the gate of one pull-down of a unit of `bl1`/`bl2`. `railprof.py 6008
   6048 16500 17100` calls the band "poly over field" between two diffusions (its colour test; the
   band has a dark diagonal mark on it in the clean shot). Believed a gate, not drawn: the unit is
-  the bottom-left logic's.
+  the bottom-left logic's. The poly's tip is an orange nub to x 6065 beyond the rail's east edge. The
+  diffusion above the band also leaves the rail east, as a strip x 6072-6092, y 16745-16812 (beside
+  the tip x 6080-6092: chip-2 metal 155-168/112-128/78-85, plain, and the chip-2 stripped shot red
+  over green by 15-19, `px.py row 16796 6044 6100 2 all`); between the tip and the strip are 12-14 px
+  of dark in both metal shots, read as two edge lines with no buried contact (no box, no lighter
+  centre, and the poly does not cross the strip): found by review round 5, for whoever draws the
+  pull-down.
 - East: the track x 10485 runs north beside the gate column of the bottom-centre logic's east part
   (rail x 10550-10600). `tl5_tracks.py v 10486 16300 17990`: stretches without metal in both chips at
   y 17716-17755, 17457-17549, 17326-17363, 17152-17188, 16914-17074, 16805-16840, 16673-16710,
@@ -198,7 +204,7 @@ load at the east end).
 | `rsel12_buf` | metal | 6690,10400 | in | from `busl`'s region: believed `rsel12_buf` |
 | `rsel13_buf` | metal | 6733,10400 | in | from `busl`'s region: believed `rsel13_buf` |
 | `lc2_w8450` | poly | (4920-4930, 16703-16723) | in | from `bl0`'s poly row (its port (4930,16713)) |
-| `lc2_w8450` | poly | (6008, 16791-16810) | out | the band under the rail x 6008-6055: believed the gate of a pull-down of the bottom-left logic (undrawn); the poly is drawn to its end, x 6060 |
+| `lc2_w8450` | poly | (6008, 16791-16810) | out | the band under the rail x 6008-6055: believed the gate of a pull-down of the bottom-left logic (undrawn); the poly is drawn to its end, x 6065 |
 | `lc2_w8450` | metal | (10479-10491, 17760) | out | the track x 10485 on north beside the bottom-centre logic's east gate column: not followed (Not done) |
 
 ## Ambiguities
@@ -331,6 +337,49 @@ Drawn geometry: no findings. The undrawn middle stretch (notes only): the route 
    `tools/t.sh regs sameconn.py 49ae634`: `connections identical`;
    `.venv/bin/python tools/sameconn.py 49ae634`: `connections identical`.
 Round 4: no findings that change a connection.
+
+**Round 5, full review of piece `w8450`, 2026-11-20 23:42 +0100** (fresh Fable reviewer; at commit
+c55d30d; 26 images by its count, 23 files in `cache/scratch/regs/review-5/`). Told to suspect: the
+920 px poly row from `bl0`'s end (a hidden tap, a branch, the gap stretch x 5420-5540, the mark
+(4990,16712)); the corner (5845,16713) and whether either row runs on past it; the crossing
+(5865,16800); the row's east end under the rail; the pad (5907,17019), dull in chip 2; the track
+x 6408 at y 17580-17625; the three hops and a swap with a neighbouring row; the west end pad
+(6712,18124) against `bd1_n2`'s corner; which diagonal band lands on the pad (10137,18124); the pad
+(10484,17994), the track x 10485 and the stretch y 17716-17755; missed taps on the metal row and
+the two tracks; all round every pad. Checked (text maps of both chips at every crossing, `px.py`,
+`busl_both.py`, `tl5_tracks.py`, views at 2.3-7.5x): the row is one straight poly with no ring or
+hole at any crossing, open poly in the gaps x 5375-5398 and 5425-5530, the mark in chip 2 only; no
+edge line across either junction of the column, field north of y 16700, south of y 16815, east of
+x 5858 and west under the track x 5815; no contact at (5865,16800); the pad (5909,16800) a contact
+with field north of it; the vertical poly x 5925-5945 ends 10 px of field short of the row and the
+box (5953-5990,16748-16785) is separate; no contact where the metal x 5910 crosses the two rows
+(the metal y 16885-16895 ends at x 5873); the pad (5907,17019) a contact (ring in both chips, centre
+red 220 / 145, green hole); the track x 6408 one metal, the patches in chip 1 only; no pad under the
+six tracks; 8-10 px of bare ground between `bd1_n2`'s corner and the pad (6712,18124); no contact at
+x 6808, 6917, 8262, 8912 and no branch outside the hops; the three hops straight; the first band
+lands on (10137,18124) and goes to the row y 17995, `rsel16_buf`'s is the next, no touching and no
+pad under the crossing metals; no contact on the three rows the track x 10485 crosses; the stretch
+y 17716-17755 has no bright centre, no hole and no widening, and the metal is bright again at
+y 17685-17715; every poly link is orange in an open stretch (trap 39); the ports as stated. Could
+not check: whether the metal is continuous through y 17716-17755 (undrawn; trap 27); the gap
+between the poly's tip and the strip of finding 2 more finely; the hops in images above 2.6x (their
+straightness rests on the text cuts; the tracer's own `h1.png`-`h3.png` are at 4-4.4x in both
+stripped shots).
+Findings, all geometry or notes, each checked by the tracer:
+1. The east end of the row y 16800 is at about x 6066, not x 6060. Geometry only (a length).
+   Confirmed (`px.py row 16796 6044 6100 2 all`: orange, 157/94/54 and 149/93/48 in chip 2, at
+   x 6060-6062, dark from x 6066): the poly now ends at x 6065.
+2. The notes left out that the diffusion above the band leaves the rail east as a strip x 6072-6092
+   beside the poly's tip, with 12-14 px of dark between, read as no buried contact. Notes only (in
+   undrawn geometry). Confirmed for the strip (the same profile: plain, blue 78-85, chip-2 stripped
+   red over green 15-19 at x 6082-6088); the gap is as the reviewer read it and is left to whoever
+   draws the pull-down: Logic, "Two ends".
+3. The rail the row y 17018 passes under is x 6015-6065, not x 6010-6050. A comment. Confirmed
+   (`busl_both.py h 17040 5990 6090`: metal x 6019-6061 by the two-chip test): notes and trace
+   comment corrected.
+`tools/t.sh regs sameconn.py c55d30d`: `connections identical`. `.venv/bin/python tools/sameconn.py
+c55d30d`: `connections identical`.
+Round 5: no findings that change a connection.
 
 ## Not done
 
