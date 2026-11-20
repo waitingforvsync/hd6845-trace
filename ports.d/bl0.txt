@@ -27,6 +27,16 @@ rcs_mv       P  7030,15291-15311  out  poly row east of the pad (6966,15305)
 rcs_mv       P  7040,16770-16790  out  poly row east of the pad (6968,16780)
 lc3_e9577    M  5315-5329,15000   in   busl's track x 5322, on north
 lc3_e9577    D  4780,15362-15382  out  diffusion wire on west into the left array
+lc3_e9621    M  5272-5286,15000   in   busl's track x 5279, on north
+lc3_e9621    D  4780,15841-15856  out  diffusion wire on west into the left array
+lc3_e9665    M  5228-5242,15000   in   busl's track x 5235, on north
+lc3_e9665    D  4780,16493-16508  out  diffusion wire on west into the left array
+lc3_e9708    M  5185-5199,15000   in   busl's track x 5192, on north
+lc3_e9708    D  4780,16970-16985  out  diffusion wire on west into the left array
+lc3_e9750    M  5141-5155,15000   in   busl's track x 5148, on north
+lc3_e9750    D  4780,17447-17461  out  diffusion wire on west into the left array
+lc3_e9793    M  5098-5112,15000   in   busl's track x 5105, on north
+lc3_e9793    D  4780,17924-17938  out  diffusion wire on west into the left array
 vss          M  7292-7342,16925   -    the gate column's rail x 7317, on north
 vcc          M  7470-7520,17020   -    bc3's rail x 7495, on north
 vcc          M  7470-7520,17670   -    the same, on south
