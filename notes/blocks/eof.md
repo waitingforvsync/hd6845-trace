@@ -4317,6 +4317,12 @@ Round 30: no findings.
 
 ## Not done
 
+- **Ambiguity 53 to be measured again with a control** (from review round 29 of piece `g174`): a band about
+  10-20 px high between two polys has a greenish north flank and a reddish south flank in chip 2's shots, so
+  its colour says something only against a band of the same height that is certainly field, measured the same
+  way. Piece `vw`'s three bands (x 8752-8772; y 15191-15200, 15235-15247, 15360-15373) were classed from
+  patches without one. To do when next in column B: `tools/eof_patch.py` on each band's flanks and on a field
+  band between two rows nearby.
 - **Task 2, the loads of `sl_eq_r5_n` (= NOT `sl_eq_r5`)**: one load is drawn (piece `r5nor`,
   the NOR that makes `tl1_w2637`), and the net's poly ends there. Not checked: taps along
   `r9m`'s, `tc2`'s, `tl4`'s, `tl2`'s and `tl1`'s stretches of it (each was read by its own
