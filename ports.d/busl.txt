@@ -109,8 +109,7 @@ bd1_n2       M  6769-6783,10400    out onto eof's metal north (piece n2n, then l
 # pieces x68, x69 (run 7): two through lines beside it
 busl_x6820   M  6813-6827,10400    ?   the track goes on north; follower ends (6817,9988), not read
 busl_x6820   M  6747-6761,15000    ?   on south into bl0's ground; follower ends (6754,16220), not read
-busl_x6906   M  6899-6913,10400    ?   on north; follower ends (7078,8778), not read
-busl_x6906   M  6834-6848,15000    ?   on south into bl0's ground; follower ends (6839,16219), not read
+busl_x6906   M  6834-6848,15000    out onto bl0's metal (its run 5): south to the gate that clears the light pen flag bl0_w17610; the wire is rst (piece xn, @alias)
 # pieces r12, r13 (run 8): the read selects of R12 and R13
 rsel12_buf   M  6445-6459,15000    in  onto regs' metal from the bottom bus (sel's buffer); track x 6452
 rsel13_buf   M  6487-6501,15000    in  onto regs' metal from the bottom bus; track x 6494
@@ -171,3 +170,5 @@ cdp3_g_c4    P  7000,14167-14189   ?   on east as bc1's line 3, to its contact (
 cdp3_g_c5    P  7000,14209-14231   ?   on east as bc1's line 4, to its contact (7317,14217)
 cdp3_g_c6    P  7000,14253-14275   ?   on east as bc1's line 5, to its contact (7361,14260)
 cdp3_g_c7    P  7000,14297-14319   ?   on east as bc1's line 6, to its contact (7405,14304)
+# piece xn (run 14): the north end of busl_x6906 = rst
+rst          P  6450,7377-7399     in  onto lc1's poly row of gate 3's output at its port (lc1's port rst there)

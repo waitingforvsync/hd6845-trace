@@ -197,8 +197,13 @@ metal has two loads (`bl0` run 3; firm): an inverter, `bl0_w17337` = NOT `bl0_w1
 `bl0_w17440` = NOT(`bl0_w17210` OR `bl0_w17610`), `bl0_w17610` = NOT(`bl0_w17440` OR `busl_x6906` OR
 (`bl0_w17337` AND `bl0_w17687`)). **`bl0_w17610` is a flag set by the gated light pen strobe**; it holds
 after the strobe ends and is cleared by `busl_x6906`, or by `bl0_w17687` once the strobe is low. The first is a
-track of the left bus field (run 5: drawn from the field's foot to the gate; its source lies north of the
-field); the second line comes out of the bottom-centre logic's upper gate group (`bc1`, at about (7745,15690)), and
+track of the left bus field (run 5: drawn from the field's foot to the gate), and **it is `rst` itself, the
+output of the reset NOR** (`notes/blocks/busl.md`, piece `xn`, 2026-11-21; firm, no uncertain item:
+`lc1`'s poly row of `rst` on east to an end pad (7076,7388), a metal south, a poly hop between pads
+(7077,8495) and (7077,8755), a diagonal and the track x 6906 down the field; the two names are an alias
+until the rename). So `bl0_w17610` = NOT(`bl0_w17440` OR `rst` OR (`bl0_w17337` AND `bl0_w17687`)): **the
+light pen flag is cleared by the reset** (RES and LPSTB both low), through the unbuffered `rst` and not
+through one of its copies; the second line comes out of the bottom-centre logic's upper gate group (`bc1`, at about (7745,15690)), and
 the flag goes into the gate column east of the supply rail at y 17388 (run 6: both drawn to those groups, which
 are not traced yet) (believed: it times the latching of R16/R17).
 
@@ -344,8 +349,8 @@ So that silence is not read as knowledge:
   latch clears named under "Reset from the pins" (the NOR of RES and LPSTB is traced, and so is the gate
   for RES low with LPSTB high and its effect on the address counter's carry; both pin lines are
   followed to their one last gate, the light pen strobe gated by RES, and to the flag it sets,
-  `bl0_w17610`; what the flag does, what its two clears are, and so how R16/R17 are latched, is not
-  traced).
+  `bl0_w17610`; one of the flag's two clears is `rst` itself (firm, 2026-11-21); what the flag does, what
+  its other clear `bl0_w17687` is, and so how R16/R17 are latched, is not traced).
   Of the skew path only the wires' first stretch is traced: `r8_b5_q` and `r8_b4_q` leave the
   datapath westwards through the top bus field of `tc1` and go on west of x 6750 at
   y 2568-2626, into logic that is not traced yet.

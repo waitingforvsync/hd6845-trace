@@ -966,3 +966,33 @@ N M 5714,14900 cdp3_g_c7
 @alias cdp3_g_c5 bl0_w16649
 @alias cdp3_g_c6 bl0_w15999
 @alias cdp3_g_c7 bl0_w15522
+# =====================================================================================
+# Piece xn (run 14, 2026-11-21): the north end of the through line busl_x6906 (piece x69), the
+# wire that clears bl0's light pen flag (bl0_w17610). It is rst, the output of lc1's gate 3
+# (rst = NOR(lpstb_b, res_b)): the same build as pieces fb .. fe, from north to south:
+#   lc1's poly row `P 5096,7388 x6450 w=18` (its port rst at (6450,7388)) on east under twelve
+#       tracks of the crossing field (no pad: tools/busl_roww.py) to its east end pad
+#       (7076,7388); a thin metal south on x 7078 over eight rows, six drawn by bw and eof (no pad
+#       on any) to a pad (7077,8495); a poly column x 7069-7093 south under the two staircase
+#       metals (eofw's y 8669, cdp3's y 8713: no contact) to a pad (7077,8755); metal south,
+#       the diagonal (7078,8845)-(6906,9017) (x + y = 15923, between trunks' and fb's) and the
+#       track x 6906 south to y 10400, where piece x69's `M 6841,15000 y13376 x6906 y10400`
+#       takes it down the field.
+# No pad, contact or tap between the ends listed (scan cache/scratch/busl/k14_scan.txt; tiles
+# k4_t1.png). The names are gathered by an alias; the rename is the coordinator's.
+# =====================================================================================
+P 6445,7388 x7077 w=22                # lc1's row y 7388 on east from x 6450 to its end pad
+P 7058,7370:7096,7406                 # the row's east end pad
+C 7076,7388 s=24x24
+M 7078,7386 y8497 w=13                # thin metal south from the end pad
+P 7059,8477:7096,8514                 # pad at the head of the poly column
+C 7077,8495 s=24x24
+P 7080,8495 y8757 w=22                # poly column south under the staircase metals
+P 7059,8737:7096,8773                 # pad at the head of the diagonal
+C 7077,8755 s=24x24
+M 7078,8753 y8845 6906,9017 y10410 w=14   # metal south, the diagonal, the track x 6906 onto piece x69's metal
+N P 6800,7388 rst
+N M 7078,8000 rst
+N P 7080,8620 rst
+N M 6906,9500 rst
+@alias rst busl_x6906
