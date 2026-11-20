@@ -18,3 +18,7 @@
 6745,10400:6915,15000   route  two through lines beside it | busl_x6820 and busl_x6906, on either side of the long line S: no connection in the field, ends not read
 6440,10400:6745,15000   route  R12 and R13 read selects up the field | rsel12_buf and rsel13_buf: two metal tracks from the bottom bus to the read gates of the central datapath's rows E and F, nested Ls at y 12984-13028 and y 12097-12141
 6430,13725:7550,13885   route  R12 and R13 selects into the selector's NOR | one pad on each track (6452,13854), (6495,13744) and a poly row east to the gate that makes cdp4_rst = NOR of the six read selects R12-R17
+5090,10400:5930,10950   route  left-centre crossing rows, staircase | lc3_e9577..e9793: six diagonal metals from the left-centre logic turn south and step west in a nest of Ls; the sixth hops in poly under the fifth's arm
+5090,10950:5335,15000   route  six through lines down the west side | lc3_e9577..e9793 on six tracks, no tap in the field; they run on south to the lower rows of the left array
+4805,10590:5560,10725   route  reset inverse and counter clear, poly rows west | rst_n and lc2_w8450: two polys from the left-centre logic, each by a diagonal to a row under the supply branch and a pad at the top of a track
+4805,10650:4925,15105   route  reset inverse down the west edge | rst_n on the track x 4909 to the pad (4909,15087) and the row y 15088 east into the wide inverter of the gate group below (bl0_w15412 = NOT rst_n); lc2_w8450 on the track x 4822 south out of the field

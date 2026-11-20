@@ -565,3 +565,76 @@ N P 7000,13744 rsel13_buf
 @alias rsel12_buf cdp3_gate_e
 @alias rsel13_buf rsel13_buf_u
 @alias rsel13_buf cdp3_gate_f
+
+# =====================================================================================
+# Piece e6 (run 9, 2026-11-20): the six metal lines lc3_e9577 .. lc3_e9793 that leave lc3
+# south-west as diagonals at y 10400 (x 5915 .. 5588; trace/lc3.txt draws each from the pad of
+# its crossing row y 9577 .. 9793). They keep their order: each diagonal turns south (x 5691 ..
+# 5474), steps west along its own arm of a nest of Ls (y 10928 .. 10752) and runs 4,200 px down
+# the west side of the field on its own track (x 5322 .. 5106), out at y 15000. The sixth,
+# lc3_e9793, has no arm of its own: its metal ends on a pad (5473,10707), a poly goes south from
+# the pad and west along y 10750 UNDER the fifth line's arm (no contact: traps 10, 13) to a pad
+# (5102,10750), where the track x 5105 starts. No other pad, contact or tap on any of the six
+# (scan cache/scratch/busl/r9_scan.txt): they cross the eight diffusion rows of piece h8 and the
+# poly rows of piece ch1 without contact (the clean shot is greenish under every track on every
+# diffusion row, 48 crossings alike: the rows' colour).
+# =====================================================================================
+M 5915,10400 5691,10624 y10928 x5322 y15000 w=14
+N M 5322,13000 lc3_e9577
+M 5851,10400 5648,10603 y10884 x5279 y15000 w=14
+N M 5279,13000 lc3_e9621
+M 5785,10400 5604,10581 y10840 x5235 y15000 w=14
+N M 5235,13000 lc3_e9665
+M 5722,10400 5562,10560 y10796 x5192 y15000 w=14
+N M 5192,13000 lc3_e9708
+M 5655,10400 5518,10537 y10752 x5148 y15000 w=14
+N M 5148,13000 lc3_e9750
+# the sixth: metal to a pad, a poly hop under the fifth's arm, a pad, the track
+M 5588,10400 5474,10514 y10702 w=14
+P 5458,10688:5492,10727               # the pad under the metal's end
+C 5473,10707 s=24x24
+P 5478,10710 y10750 w=20              # the pad's poly south onto the row
+P 5100,10750 x5490 w=20               # the row y 10750, under lc3_e9750's arm
+P 5080,10733:5126,10767               # the row's west end pad
+C 5102,10750 s=24x24
+M 5105,10745 y15000 w=14
+N M 5105,13000 lc3_e9793
+N P 5300,10750 lc3_e9793
+
+# =====================================================================================
+# Piece p2 (run 9, 2026-11-20): the two polys that leave lc3 south at y 10400 beside the six
+# diagonals: rst_n's (x 5475, from its end pad (5473,10207)) and lc2_w8450's (x 5541, from
+# its end pad (5540,10165)). Each turns west, steps south-west along a diagonal, runs west as
+# a poly row in the open strip under the wide VCC branch, and ends on a pad at the top of a
+# track that runs south down the west edge of the field:
+#   rst_n:     column to y 10599, west to x 5397, diagonal to (5333,10663), row y 10663 west to
+#              the pad (4907,10663); the track x 4909 south, out of the region at y 15000 and
+#              88 px on to its END pad (4909,15087), the west end of the poly row y 15088 that
+#              trace/bl0.txt draws from x 5700 east as bl0_w15088 (drawn here from the pad to
+#              x 5700: bl0's package region, drawn by no one). So bl0_w15088 is rst_n.
+#   lc2_w8450: column to y 10641, west to x 5457, diagonal to (5394,10706), row y 10706 west to
+#              the pad (4822,10708); the track x 4822 south, out at y 15000.
+# lc3_e9793's metal x 5474 lies on rst_n's column from y 10514 to 10608 and crosses
+# lc2_w8450's row y 10641; the track x 4909 crosses lc2_w8450's row y 10706 30 px below its
+# own pad; a metal jog of another net lies on the row y 15088 at x 5400-5500: no pad, ring or
+# hole at any of them (traps 13, 15).
+# =====================================================================================
+# rst_n
+P 5475,10395 y10599 x5397 5333,10663 x4905 w=20
+P 4890,10646:4927,10680               # the row's west end pad
+C 4907,10663 s=24x24
+M 4909,10660 y15090 w=14              # the track, to its end pad
+P 4892,15071:4927,15104               # the end pad
+C 4909,15087 s=24x24
+P 4909,15088 x5705 w=20               # the row y 15088 east onto bl0's piece (P 5700,15088 x5755)
+N P 5200,10663 rst_n
+N M 4909,13000 rst_n
+N P 5200,15088 rst_n
+@alias rst_n bl0_w15088
+# lc2_w8450
+P 5541,10395 y10641 x5457 5394,10706 x4820 w=20
+P 4805,10691:4842,10725               # the row's west end pad
+C 4822,10708 s=24x24
+M 4822,10705 y15000 w=14
+N P 5200,10706 lc2_w8450
+N M 4822,13000 lc2_w8450

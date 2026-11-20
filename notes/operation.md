@@ -126,6 +126,10 @@ RES and LPSTB lines run south out of the top-left logic in its poly bus and end 
 inputs of the NOR at the top of the left-centre gate column: **`rst` = NOR(`lpstb_b`,
 `res_b`)**, high while both pins are low. **The data sheet says the same** (`cache/ds/p-08.png`, "Reset (RES)": "RES has capability of reset function only when LPSTB is at Low level"; it gives no reason and names no test mode; **what RES low with LPSTB high does is traced: the paragraph "RES low with LPSTB high" below**). Its inverse `rst_n` is buffered three times:
 
+- `rst_n` itself also runs down the west edge of the left bus field (a poly row y 10663, the track
+  x 4909, a poly row y 15088) to the wide inverter of the gate group at (5850-6330, 15200-15800):
+  `bl0_w15412` = NOT `rst_n`, a fourth copy in `rst`'s sense (firm; `notes/blocks/busl.md`, piece `p2`,
+  2026-11-20; `bl0`'s name for the line was `bl0_w15088`). Its loads are open;
 - `rst_c` clears latch D, so `lc_step` (the step pulse of the scan line counter and of
   `c4l`) is held high during reset, and clears the left-centre latch C; inverted twice more it is
   `rcs_x1`, the clear of the step logic's five latches (the last paragraph of this section);
