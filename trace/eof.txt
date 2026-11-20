@@ -1137,9 +1137,9 @@ D 8628,14975:8650,15016              # the tail up from the strip, under the tie
 # Piece vw (run 16, 2026-11-20): the units V and W below the inverter U, a cross-coupled pair that
 # makes eof_w15127 (the inverter's input). By hand: findcell gives no copy of tl1's units here, but
 # the build is theirs (node strips under thin metals, a third pull-down gated by the other unit's
-# load plate, a second finger of the stack under the east thin metal).
+# load plate); each stack's diffusion is 90 wide, from under the rail through the open gap to under the east thin metal.
 #   eof_w15127 = NOT(eof_w15172 OR eof_w15300)                       (V; the hairpin is two gates in series on one net)
-#   eof_w15300 = NOT((eof_w15350 AND eof_w15390) OR eof_w15127 OR rst_a)   (W; the rst_a term rests on a ?D link)
+#   eof_w15300 = NOT((eof_w15350 AND eof_w15390) OR eof_w15127 OR rst_a)   (W)
 # Both rest on the plates' ties (?P, ?B), like every load of this build. bc1's two thin metals
 # (x 8637-8650, x 8789-8801) run over both units and are not drawn here; no contact on either.
 # Views r16_*.png in cache/scratch/eof/ (clean 4x, both metal shots 3x); survey.md, run 16.
@@ -1149,7 +1149,9 @@ M 8534,15060 y15340 w=48             # R2 (bc1's), the piece over the two VCC bo
 D 8707,15111:8742,15246              # under the rail: the node, gate A, a closed diffusion, gate B, V's ground
 D 8685,15240:8730,15284              # VSS box
 C 8702,15260
-D 8738,15118:8770,15158              # node east: through the open gap
+D 8738,15118:8780,15246              # the same diffusion on east through the open gap, from the node down to row C's top:
+                                     #   rows A and B are one gate each, 90 wide (no diffusion edge crosses them between the rail
+                                     #   and the thin metal in either metal shot; review round 19)
 D 8760,15113:8798,15146              # and the pad round the box
 B 8765,15116:8800,15140              # the output's buried contact
 P 8770,15120:8826,15138              # output row east to its pad (8833,15127) (piece ck6)
@@ -1171,15 +1173,17 @@ D 8655,15240:8690,15257              # the pocket runs east through the open gap
 P 8597,15205:8672,15228              # the arm: W's plate poly across the column (V's third pull-down), end x 8672
 P 8597,15205:8612,15270              # its column south (x 8597-8612)
 P 8568,15262:8622,15300              # widening to the plate's width
-# ---- the second finger, under the thin metal x 8789-8801 ----
-D 8777,15140:8797,15424              # strip from V's box pad to W's foot; rows A, B, C, 1, 2 cross it
+# ---- the stacks' east part, under the thin metal x 8789-8801 ----
+D 8777,15140:8797,15424              # the diffusion's east edge x 8797, from V's box pad to W's foot; rows A, B, C, 1, 2 cross it
 D 8754,15244:8797,15282              # wider under row C (channel x 8754-8797), down to W's pad
-?D 8738,15236:8760,15245             # UNCERTAIN: the segment between rows B and C joined to V's ground under the rail
-P 8746,15251:8950,15270              # row C: rst_a's row from its end pad (8966,15260) (piece isrc), west end x 8746
+P 8738,15251:8950,15270              # row C: rst_a's row from its end pad (8966,15260) (piece isrc); west end x 8738, over field
+                                     #   west of x 8754: the diffusion's boundary comes up x 8754 under the row and turns west
+                                     #   along the row's top edge to the rail (a doubled edge line there in three shots)
 # ---- unit W (y 15285-15470) ----
 D 8697,15309:8742,15462              # under the rail: the node, row 1, a closed diffusion, row 2, W's ground
 C 8722,15440
-D 8738,15309:8756,15323              # node east: through the open gap
+D 8738,15309:8780,15424              # the same diffusion on east through the open gap, from the node to the foot: rows 1 and 2
+                                     #   are one gate each (as in V)
 D 8752,15276:8800,15328              # the pad round the box
 B 8762,15285:8802,15320              # the output's buried contact
 P 8768,15292:8826,15317              # output row east
@@ -1204,8 +1208,9 @@ P 8990,14811:9026,14846              # pad (9008,14828)
 C 9008,14828
 P 9002,14790:9020,14815              # its poly column north (x 9002-9020, to y 14610 and east: not drawn)
 N M 8925,15100 eof_w15390
-D 8738,15406:8797,15424              # the foot: the strip's end joined to W's ground through the open gap
-D 8560,15302:8700,15316              # node west: the strip from the rail (y 15302-15316) to the VCC box
+D 8738,15406:8797,15424              # the foot: W's ground east of the rail
+D 8560,15302:8676,15316              # node west: the strip from the open gap to the VCC box (y 15302-15316)
+D 8668,15308:8700,15316              # and from the rail to the gap (y 15308-15316: pink above it)
 D 8560,15302:8630,15332              # full height under the plate
 D 8508,15262:8562,15332              # VCC box (bc1's land 8505-8562, 15250-15327)
 C 8531,15290 s=30x56
