@@ -4567,6 +4567,48 @@ tools/t.sh eof sameconn.py 8e2cb12              connections identical
 
 Round 31: no findings that change a connection.
 
+### Round 32 (full review of piece `o362`; 2026-11-20 12:36 to 12:43 +0000, at commit 11dd9bb)
+
+A fresh reviewer (Claude Fable 5.2), briefed with the piece's six claims (the thin metal x 8468 one metal
+from y 17630 to y 18474 with no tap on any row it crosses, `ck_out`'s row y 17908 among them; the L corner
+(8468,18474); the metal y 18474 unbroken to the pad (7556,18473) with no pad or branch in its run; the pad's
+poly row under the rail x 7468-7516 without contact to the pad (7384,18473); the metal west of that pad and
+the port; the trace lines) and told to suspect: two metals end to end on the track (the stretches of 14-16 px
+without metal in both chips, and the longer ones in one chip alone); the crossing at y 17977, read from one
+text map; the corner, read at 2.8x only; the horizontal metal, read by text only; whether the metal from the
+east ends on the pad (7556,18473) and whether anything else leaves it; a contact from the rail to the poly
+beneath; the pad (7384,18473), whose centre is dim in chip 2's metal shot, and whether the metal west of it
+is joined; the neighbouring line y 18428.
+
+What it checked (11 images in `cache/scratch/eof/review-32/`): the vertical metal on `v1.png`, `v2.png`
+(2.9x; both metal shots and the clean shot) and by a width scan of both metal shots every 3 px (never over
+15 px, chip 1 16: no pad, no T); the single-chip dim stretches at y 17742-17766 and y 18395-18419 (the other
+chip bright, the clean shot pink); the crossing of `ck_out`'s row (`x17908.png`, 6x; `textmap.py --acid`;
+`px.py row 17906`: chip 2 metal-yellow over the row, chip 1 dim there, the clean shot's row cream under the
+metal with no hole, ring or pad); the crossing y 17977 (`x17977.png`, 6x: the greenish dip spans the row's
+whole width, x 8444-8490, the metal keeps its width, no ring in either chip); the corner (`corner.png`, 5x;
+text map: bare ground east, to the rail's edge at about x 8503, and south in both chips); the horizontal
+metal over its full length (`h_east.png`, `h_west.png`, 2.75x, metal and clean: one line, no pad, no branch,
+8-14 px wide with its top edge constant at y 18467-18470; the line y 18428 apart throughout, open field
+between); the pad (7556,18473) (`padE.png`, 4.6x; 2 px profiles on three rows: ring, bright centre in both
+chips, hole in the clean shot, the east metal on it, open orange poly west, nothing north or south); the
+poly under the rail (`rail.png`, `west_acid.png`; text map: one poly, straight edges, no ring, no hole, no
+poly along under the rail); the pad (7384,18473) (`padW.png`, `west_acid.png`: bright centre in chip 1, a
+pitted box in the chip-2 stripped shot, a hole of -16 to -19 in the clean shot; rings of 12 px on both sides
+in both chips, so the west metal is joined; pink under that metal: no poly west; open field to `trunks`' pad
+(7420,18428)); the extraction alone and with every file (no join, nothing in `tools/unsure.py`; the port
+agrees with `ports.d/eof.txt`).
+
+Findings: none. Nothing changes a connection and no geometry was found worth correcting (edges within about
+3 px).
+
+What it could not check: anything west of x 7340; the centre of the pad (7384,18473) in chip 2's metal shot
+(dim: the contact rests on the other three shots); the row crossings other than y 17908 and y 17977 at 4x or
+more (read at 2.9x, with the width scan and the clean-shot scan); the chip-2 stripped shot along the vertical
+run except by text map at y 17836-17932 and y 17950-18000.
+
+Round 32: no findings.
+
 ## Not done
 
 - **Ambiguity 53 to be measured again with a control** (from review round 29 of piece `g174`): a band about
