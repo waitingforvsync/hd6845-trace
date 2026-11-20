@@ -1257,12 +1257,12 @@ about 115/80/65 in the clean shot; field is 2 and 20-23, about 105/100/65.
 | the pocket into V's VSS box | through the 17 px open gap between the thin metal and the rail, y 15240-15257: chip-2 stripped 121-148/85-116 (red minus green 32-36) and both metal shots 149-174/111-133 (38-50) at x 8660-8668, tan on both sides (x 8640-8656 and from x 8672); the patch x 8663-8674, y 15242-15254: 22.8 in the stripped shot, 146/110/87 in the clean shot | `px.py row 15248 8640 8700 4`; `eof_patch.py 8663 8674 15242 15254`. VSS box x 8685-8730, y 15240-15284 |
 | the stacks under the east thin metal | diffusion x 8777-8797 from V's box pad (y 15146) to y 15424: tan 188/178/140 between the rows, pink 196/120/132 north of y 15110 and south of y 15430, a dark line down its east side at x 8797. Rows A, B, C, 1, 2 are all at channel brightness on it (red 222-238; poly over field under the rail is 196-220) | `px.py col 8787 15060 15450 5 acid1b,acid,metal,metal1`; round 17's finding 2; `r16_east.png` (4x, three shots) |
 | **the open gap east of the rail (x 8742-8777): the same diffusion runs through it** (review round 19; first drawn as field between the rows, with the part under the thin metal as a second finger) | no diffusion edge crosses rows A, B, 1 or 2 between the rail's edge and the thin metal's in either metal shot (red 152-186 in chip 2 from x 8742 to 8778 on each row; a real edge is 50-65: the inverter's at x 8766, row C's at x 8754); the nodes, which are diffusion in the gap by colour (21.2 and 33.0 at V's, 25.2 and 36.0 at W's), run up to the rows' edge lines with no line of their own, and every edge of rows A, B, 1, 2 in the gap is a single line as over plain field (minimum red 53-71 in chip 2, like the same rows at x 8850). The one doubled line (30-36 in chip 2, 33-43 in chip 1, 43-49 in the stripped shot, 9 px wide) is row C's top edge west of x 8757: the diffusion's boundary, which comes up x 8754 under row C and turns west along the row's top to the rail. So the band between B and C is V's ground, and row C's west end lies on field. Below row 2 the gap is diffusion by colour too (18.7 and 30.4). **Against**: the three bands between the rows have field colour in the chip-2 stripped shot (Ambiguity 53) | `px.py row Y 8730 8802 3 metal,metal1,acid1b` for Y = 15000, 15175, 15216, 15260, 15345, 15388 and the bands 15196, 15241, 15367, 15415; `px.py col X 15150 15282 2` and `15300 15432 2` for X = 8746-8772 and 8850/8858, in `metal`, `metal1`, `acid`; the reviewer's `e_gap_metal.png` (6x), `e_gap_v.png`, `e_gap_w.png`, `rowc.png` in `cache/scratch/eof/review-19/` |
-| row C | poly y 15251-15270 from a rounded west end at x about 8738 east, in the open (orange in both metal shots), under the track x 8925 without contact (no hole, no ring: `eof_cchk.py 8920,15260`) onto the row of `rst_a`'s end pad (8966,15260). The diffusion under it is x 8754-8797 (its west edge a dark line across the poly in both metal shots) | `r16_me.png`, `r16_o_n.png`; round 17's `px.py row 15260 8736 8862 6` |
+| row C | poly y 15251-15270 from a rounded west end at x 8733-8738 east, in the open (orange in both metal shots), under the track x 8925 without contact (no hole, no ring: `eof_cchk.py 8920,15260`) onto the row of `rst_a`'s end pad (8966,15260). The diffusion under it is x 8754-8797 (its west edge a dark line across the poly in both metal shots) | `r16_me.png`, `r16_o_n.png`; round 17's `px.py row 15260 8736 8862 6` |
 | W's stack | under the rail: node y 15309-15330, row 1, a closed diffusion y 15356-15374, row 2, diffusion from y 15406 with a contact (8722,15440) (hole -6, centres 211/228). Both rows end in the west at x 8681: poly over field x 8681-8692 (196-220 red), the diffusion's edge a dark line at x 8692-8696, channel (243-254) east of it; pink field between the two ends | `railprof.py 8706 8732 15090 15470`; `px.py row 15340 8650 8712 3`, `row 15386 8600 8716 4`, `col 8684 15296 15412 4` |
 | W's node east, box and output | diffusion through the open gap from y 15309 (25.2 and 36.0: `eof_patch.py 8741 8750 15312 15328`; field north of it, 7.0 and 23.3 at y 15280-15296, green in the clean shot); the pad round the box x 8752-8800, y 15276-15328; row y 15292-15317 to the pad (8835,15302) (hole -35, centres 181/215); metal x 8830-8848 south over rows 1 and 2 (no hole: `eof_cchk.py 8838,15345 8838,15388`) to a pad (8836,15456) (hole -17) | `follow.py 8836 15330 S --gap 16` (end (8839,15434)); `r16_o_e.png` |
 | rows 1 and 2 east | row 1 (6 px lower east of the rail) to the pad (8881,15351) (hole -38, centres 227/189), whose metal goes south: `follow.py 8880 15375 S --gap 16` runs 1,346 px (corners (8890,15699), (8926,15699), (8922,15913), (8882,15915), end (8882,16623)); row 2 to the pad (8922,15392) (hole -31, centres 229/210), whose metal runs north on x 8925 to a corner (8930,14830) and east to the pad (9008,14828) (hole -22): `follow.py 8920 15300 N --gap 16`. Row 1's metal crosses row 2 without contact (`eof_cchk.py 8881,15388`: no hole) | `r16_me.png`, `r16_o_n.png` |
 | **the row of the pad (8592,15383) is not row 2** (trap 34) | from the pad east: channel x 8624-8652 under the thin metal (240-247 red), poly to x 8666 (orange 137/82-99 and 148/71-96 in the two metal shots at x 8660-8664), then 14 px that are not poly in three shots (x 8672-8676: clean 150-154/147-151, chip-2 metal 87-91/81-83, chip-1 metal 91-111/70-109), then row 2's end from x 8681 | `px.py row 15386 8600 8716 4 acid1b,acid,metal,metal1`; `textmap.py 8612 15358 8704 15434 2 --acid`; `r16_ww.png` (4x, stripped and clean): Ambiguity 54 |
-| W's column, node strip and foot | the column x 8624-8660 under the thin metal from y 15302 to 15420 (`railprof.py 8632 8652`: diffusion to 15373, gate 15374-15397, diffusion to 15428), wider in the open gap at y 15316-15358 (22.9 and 27.7: `eof_patch.py 8663 8674 15322 15356`); the node strip between it and the rail (y 15302-15316 west of the gap, y 15308-15316 east of it: tan from x 8672 east at y 15310, pink above); the foot y 15402-15420, whose bottom edge runs in one line from x 8620 to the rail in the clean shot and both metal shots | `px.py row 15310 8640 8712 4`; `r16_foot.png` (4x, three shots); Ambiguity 55 |
+| W's column, node strip and foot | the column x 8624-8660 under the thin metal from y 15302 to 15420 (`railprof.py 8632 8652`: diffusion to 15373, gate 15374-15397, diffusion to 15428), wider in the open gap at y 15316-15358 (22.9 and 27.7: `eof_patch.py 8663 8674 15322 15356`); the node strip y 15302-15316 between it and the rail (tan from x 8672 east at y 15310; its top edge one line at y 15300-15302 from the plate to the rail); the foot y 15402-15420, whose bottom edge runs in one line from x 8620 to the rail in the clean shot and both metal shots | `px.py row 15310 8640 8712 4`; `r16_foot.png` (4x, three shots); Ambiguity 55 |
 | W's load and tie | plate x 8568-8622, y 15298-15335 over the strip y 15302-15332; VCC box `bc1`'s (8505-8562, 15250-15327; contact (8531,15290), centres 237/201). Tie: a tab of the plate's widening (bright patch x 8627-8635, y 15272-15292) into a heavy-outlined box (8645-8663, 15281-15298) on a tail of the strip, with a bar y 15302-15310 below it: drawn `?P`, `?D`, `?B` | `r16_wtie.png` (6x, four shots); `px.py row 15286 8604 8672 4`; `px.py col 8652 15262 15322 4`; Ambiguity 56 |
 
 What it does (the equations are marked). V and W hold one bit. `eof_w15172` high forces `eof_w15127` low,
@@ -2770,6 +2770,42 @@ unnamed closed nodes that became one each). The finding is treated as one that c
 the same (a transistor's existence), so a fix check follows.
 
 Round 19: one finding that changes a connection (the stacks' diffusion through the open gap), fixed, with two geometry-only findings.
+
+### Round 20 (fix check of round 19's changes; 2026-11-20 00:40 to 00:58 +0000, after commit 873de81)
+
+A fresh reviewer (Claude Fable 5.2), briefed with the three findings of round 19 and with what changed since
+commit 3d76317 (both stacks' diffusions drawn through the open gap east of the rail, the uncertain link
+removed, W's node strip, row C's west end). 35 tool calls, nine images in `cache/scratch/eof/review-20/`,
+with profiles in three or four shots.
+
+- `tools/t.sh eof sameconn.py 3d76317` and `.venv/bin/python tools/sameconn.py 3d76317`: connections
+  identical; the four transistors fewer are the old finger pairs merged; no uncertain diffusion is left on
+  the path.
+- Finding 1, right. Under rows A, B, 1, 2 no dark line between x 8739 and 8779 in the chip-2 metal shot,
+  the rail's and the thin metal's edge lines (centres x 8735, 8783) no wider than north of V, channel up to
+  both protection boundaries in the clean shot; no vertical edge in the bands between the rows in three
+  shots (their colour in the stripped shot is field-like, +5 to +10 against +20 for W's node and the foot:
+  "the reading rests on edges, not colour": Ambiguity 53); under the rail the tan runs unbroken from the
+  band between B and C into the VSS box (x 8716-8736, y 15234-15250, three shots); the edge at x 8755
+  crosses row C in four shots with dimmer poly west of it; the transistor under row C is `rst_a`'s, between
+  `vss` and `eof_w15300`, 43 wide. Nothing touched: row C 5 px clear of the new diffusion, the buried
+  contacts cover both output rows.
+- Finding 2, **geometry only**: the strip's top edge line is centred y 15300-15302 across x 8668-8730 with no
+  step at x 8676 (clean shot and both metal shots); y 15308 is where the tan starts, not the edge.
+  Confirmed (`px.py col 8690 15292 15326 2 acid1b,metal,metal1`: the line's minimum at y 15300, tan from
+  y 15306; the same at x 8712). Fixed: the strip is one rectangle again (`D 8560,15302:8700,15316`) and
+  W's stack starts at y 15303 under the rail.
+- Finding 3, right; **geometry only**: the end may lie 5 px further west (a red outline at x 8732-8734 in
+  the clean shot). Fixed: `P 8736,15251:8950,15270` (6 px clear of the VSS box).
+
+Connections before and after these two geometry-only fixes (against commit 873de81):
+
+```
+tools/t.sh eof sameconn.py 873de81               connections identical
+.venv/bin/python tools/sameconn.py 873de81       connections identical
+```
+
+Round 20: no findings that change a connection.
 
 ## Not done
 

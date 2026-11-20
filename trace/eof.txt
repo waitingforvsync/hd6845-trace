@@ -1176,11 +1176,11 @@ P 8568,15262:8622,15300              # widening to the plate's width
 # ---- the stacks' east part, under the thin metal x 8789-8801 ----
 D 8777,15140:8797,15424              # the diffusion's east edge x 8797, from V's box pad to W's foot; rows A, B, C, 1, 2 cross it
 D 8754,15244:8797,15282              # wider under row C (channel x 8754-8797), down to W's pad
-P 8738,15251:8950,15270              # row C: rst_a's row from its end pad (8966,15260) (piece isrc); west end x 8738, over field
+P 8736,15251:8950,15270              # row C: rst_a's row from its end pad (8966,15260) (piece isrc); west end x 8733-8738, over field
                                      #   west of x 8754: the diffusion's boundary comes up x 8754 under the row and turns west
                                      #   along the row's top edge to the rail (a doubled edge line there in three shots)
 # ---- unit W (y 15285-15470) ----
-D 8697,15309:8742,15462              # under the rail: the node, row 1, a closed diffusion, row 2, W's ground
+D 8697,15303:8742,15462              # under the rail: the node, row 1, a closed diffusion, row 2, W's ground
 C 8722,15440
 D 8738,15309:8780,15424              # the same diffusion on east through the open gap, from the node to the foot: rows 1 and 2
                                      #   are one gate each (as in V)
@@ -1209,8 +1209,8 @@ C 9008,14828
 P 9002,14790:9020,14815              # its poly column north (x 9002-9020, to y 14610 and east: not drawn)
 N M 8925,15100 eof_w15390
 D 8738,15406:8797,15424              # the foot: W's ground east of the rail
-D 8560,15302:8676,15316              # node west: the strip from the open gap to the VCC box (y 15302-15316)
-D 8668,15308:8700,15316              # and from the rail to the gap (y 15308-15316: pink above it)
+D 8560,15302:8700,15316              # node west: the strip from the rail to the VCC box; its top edge is one line at y 15300-15302
+                                     #   from the plate to the rail (the tan starts 5 px below the line: review rounds 19, 20)
 D 8560,15302:8630,15332              # full height under the plate
 D 8508,15262:8562,15332              # VCC box (bc1's land 8505-8562, 15250-15327)
 C 8531,15290 s=30x56
