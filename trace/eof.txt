@@ -1580,8 +1580,11 @@ N P 8780,16216 eof_w16216
 # Believed: a capacitor on the node (a delay).
 P 9055,16724:9090,16745
 P 9068,16680:9090,16745
-B 9066,16678:9092,16716
-D 9056,16672:9102,16714
+# the box proper is y 16674-16704 (chip-2 metal, px col 9079: outline lines y 16672-16682 and
+# y 16700-16704, a plain centre between; the poly's own colour reaches north to y 16706; review
+# round 26). The pad's lobes are green to y 16713 in the clean shot; drawn to the box's foot.
+B 9066,16672:9092,16708
+D 9056,16672:9102,16706
 D 9070,16600:9088,16676
 D 8908,16477:9254,16607
 D 9167,16434:9254,16480

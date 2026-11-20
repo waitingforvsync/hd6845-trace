@@ -530,7 +530,7 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `lat15`, the latch | x 8508-8815, y 15886-16368 | the upper mirrored copy of `tl1`'s latch (`@inst tl1_ua 5976,11539 mx=2685`, `@inst tl1_ub 5973,11539 mx=2686.5`; x' = 11346 - x, y' = y + 11539: the lower copy moved 607 px north) under column B's VSS rail, loads under the VCC rail; the foot of its lower stack is the VSS box of the inverter `inv16`; long VCC contacts (8537,16138), (8535,16253) and one more (8532,15930); the thin metal x 8588-8600 between the upper plate (contact (8594,16041)) and the pad of the lower unit's third pull-down (contact (8594,16239)) |
 | `lat15`, the rows | x 8800-9026, y 15984-16278 | from the cells' east edge: data y 15991-16009 to a pad with a contact (8838,16000) in the run of the track x 8838; enables y 16031-16049 and y 16248-16267 to pads with contacts (8925,16040), (8925,16262) on one metal x 8925; upper node y 16076-16095 to a pad with a contact (9007,16082) and the metal x 9011 south to the inverter's pad (9010,16388); clear y 16164-16182 to `rst_a`'s tap pad (8962,16172); the lower node's row ends at x 8812 |
 | `lat15`, the data track | x 8800-8900, y 15722-16030 | from the data pad north on x 8838 to y 15868, east to x 8880, north over two poly rows to a pad with a contact (8880,15738); the pad's poly row y 15727-15745 west to x 8800 (port); the track south of the data pad to y 16030 (port) |
-| `cap16`, the box and the diffusion | x 8908-9254, y 16434-16745 | the lower node's leg on east to x 9090, north on x 9068-9090 into a buried-contact box on a diffusion pad (9056-9102, 16672-16714); a neck x 9070-9088 north to a diffusion rectangle x 8908-9254, y 16477-16607 (with a step x 9167-9254 up to y 16434): no gate, no contact |
+| `cap16`, the box and the diffusion | x 8908-9254, y 16434-16745 | the lower node's leg on east to x 9090, north on x 9068-9090 into a buried-contact box on a diffusion pad (9056-9102, 16672-16706); a neck x 9070-9088 north to a diffusion rectangle x 8908-9254, y 16477-16607 (with a step x 9167-9254 up to y 16434): no gate, no contact |
 | `w16693`, the upper node's wire | x 8800-9028, y 16840-17135 | the metal x 9012 south to a pad with a contact (9011,17080); the pad's poly 35 px south and west as a row y 17116-17135 under four tracks to x 8800 (port: the unit south of the latch) |
 
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
@@ -1648,7 +1648,7 @@ structure not read". It is this (`r20_a1.png`, 4.6x, four shots; `r20_g2.png`, 5
 | Part | What | Evidence |
 |---|---|---|
 | the leg | the poly y 16724-16745 runs on east under the track x 9056 (no contact: `eof_cchk.py 9056,16735`: 50) into the gap between the tracks x 9056 and x 9099 and turns north, x 9068-9090 (orange in the chip-2 metal shot, blue 42-46) | `px.py row 16735 9024 9100 4 acid1b,acid,metal`; `textmap.py 9046 16596 9112 16750 3 --acid` |
-| the box | a diffusion pad x 9056-9102, y 16672-16714 (in the clean shot green lobes either side of the poly, x 9058-9067 and x 9094-9100), in which the poly ends at y about 16678 (a dark line across at y 16674-16683 in both metal shots); heavy outline in all four shots, no metal over it (the two tracks pass either side): a buried contact | the same text map; `px.py row 16690 9040 9120 4`; `r20_a1.png` |
+| the box | a diffusion pad x 9056-9102, y 16672-16706 as drawn (in the clean shot green lobes either side of the poly, x 9058-9067 and x 9094-9100, to y 16713), with the box proper at y 16674-16704 (outline lines y 16672-16682 and y 16700-16704 in the chip-2 metal shot, a plain centre between; the poly's colour reaches north to y 16706: review round 26); heavy outline in all four shots, no metal over it (the two tracks pass either side): a buried contact | the same text map; `px.py row 16690 9040 9120 4`; `r20_a1.png` |
 | the neck | from the pad north, x 9070-9088, y 16607-16672, to the rectangle. **It is the rectangle's material, not the poly's**: in the gap between two tracks the clean shot shows it dark (65-90/44-64/46-68) like the rectangle's inside in such a gap (83/55/47 at x 8950) and unlike the poly leg in the same gap (92-154/61-119/42-91); the chip-2 metal shot shows it plain (164-170/120/77) like the rectangle there (175/134/82) and unlike the leg (142/101/46, orange); and no edge line crosses it where it meets the rectangle (both metal shots bright at x 9073-9082, y 16605-16608, where the rectangle's bottom edge line is dark on either side). The chip-2 stripped shot does not separate the two (red minus green 27-33 for both) | `px.py col 9079 16590 16750 6 acid1b,acid,metal`, `row 16640 9040 9120 4`, `col 8950 16458 16494 3`, `col 8950 16588 16618 3`; the text map (rows 16605, 16608); Ambiguity 72 |
 | the rectangle | diffusion x 8908-9254, y 16477-16607, with a step at its north-east corner (x 9167-9254 up to y 16434): flat tan under the tracks, grey-green in the wide open gaps (x 8985-9040, x 9160-9210), a heavy outline all round. **No gate** (no poly on it: the data poly of piece `inv16` passes 60 px west of it) **and no contact**: the six tracks over it (x 8925, 8968, 9056, 9099, 9142, 9225; `ck_out`'s x 8882 passes 20 px west of its edge) show only the 8-10 px bars of its top and bottom edges. Nothing else joins it: its bottom edge is whole but for the neck; south of its east part the pad (9180,16648) is a metal contact on a poly row of another net, with open field between; the olive block x 9255-9295, y 16430-16545 east of it is the open ground between the track x 9225 and an L of metal (trap 2), absent from the chip-2 shots | `r20_s2.png` (1.5x, clean and chip-2 stripped), `r20_b1.png` (3.1x), `r20_g1.png` (1.65x, overlay); `px.py row 16540 8886 8936 3`, `row 16540 9236 9270 3`, `col 9195 16418 16446 3`, `row 16455 9150 9186 3` (the edges); `tl5_tracks.py v X 16440 16640` for the six tracks; `opendiff.py 8880 16380 9320 17120` |
 
@@ -2364,6 +2364,14 @@ driver lies; the other three lead to the loads.
     a metal contact (`eof_cchk.py 8776,15737`: centre 101/104) and is not read: a buried contact onto a
     unit's node (then that unit drives the data) or a pad of something else. A port; the latch's equations
     do not depend on it.
+75. **The thin metal x 8637-8650 over the upper latch copy** (piece `lat15`; review round 26; traps 22, 27).
+    Column B's thin metal (another net's: `bc1` draws its top, `M 8642,14898 y15060`; nobody draws it here)
+    runs over the copy's inverter node box and its two tie boxes and is dark there in both metal shots for
+    12, 23 and 17 px (`tl3_thin.py 8636 8650 15860 16470 --thr 144 --min 8`), as over `inv16`'s tie (Ambiguity
+    70: 35 px) and as the master's thin W over `tl1`'s cells. Read as a pass-over with no contact: no
+    widening, no round bright centre, the clean shot tan under it. If it did make contact with a tie box it
+    would join that net to a latch node. Its continuity over the boxes cannot be shown from these photos;
+    whoever draws it draws those stretches `?M` (trap 27).
 
 ## Review
 
@@ -3599,6 +3607,65 @@ tools/t.sh eof sameconn.py e994105              connections identical
 ```
 
 Round 25: no findings that change a connection.
+
+### Round 26 (full review of pieces `lat15`, `cap16` and `w16693`; 2026-11-20 04:21 to 04:41 +0000, at commit a8bd088)
+
+A fresh reviewer (Claude Fable 5.2), briefed with the three pieces' claims (the two cell copies with their
+equations and additions, every row east of the cells with its pad, the data track, the enable metal; the
+lower node's leg, box, neck and rectangle; the upper node's metal, pad and row) and told to look hardest at:
+whether the neck is diffusion joined to the rectangle or poly; whether the box is a buried contact and
+whether either of the tracks x 9056 / x 9099 makes a contact there (dark for about 45 px in both metal shots,
+green in the clean shot, a blemish in chip 1's metal shot); whether anything else touches the rectangle or
+crosses it; each cell copy against the master and the lower copy; whether the metal x 8925 is one metal
+through the pad (8925,16262) and ends at (8925,16040); the pad (8838,16000); the data track's corner and its
+thin stretch over two poly rows; whether the lower-node row ends at x 8812; every crossing and every pad's
+surroundings; whether the upper node's metal ends on the pad (9011,17080). It used 81 tool calls and 15
+images (`cache/scratch/eof/review-26/`), with `px.py`, `textmap.py`, `tl5_tracks.py`, `tl3_thin.py`, the
+follower, the extraction and `unsure.py --equations`.
+
+It checked and found correct: the neck is the rectangle's material (chip-2 metal 162/118/74 against the
+rectangle's 176/133/79, the poly leg's 158/110/47 and the field's 168/138/87; chip 1's metal shot blue 79-83
+against poly 32-34; no edge line across at y 16602-16608, `c2.png`, 4.6x); no contact from the tracks beside
+the box (the west half of x 9056 passes undisturbed in both chips, x 9099 has no ring north or south in chip 2
+and no widening; the green lobes are in chip 1 only, the chip-2 stripped shot shows none and no pits:
+`c3.png`, `c4.png`); the rectangle's perimeter whole on text maps of all four sides, the pad (9180,16648)
+15 px of field away, the six tracks with 8-10 px edge bars only, no poly across; the upper node's metal ends
+on the pad (9011,17080) with bare ground y 17107-17146 in both chips, the row ends at x 9026, its four
+crossings without a hole (`w1.png`, 5x); both cell copies by overlay at 2.6x and 3.9x in the clean and metal
+shots and by a mosaic against the lower copy (`l1`-`l3`, `l9`, `l10`); the lower-node row ends at x 8812
+where the lower copy's runs on (`l4`, `l5`, 5x); bare ground north of (8925,16040) and symmetric rings at
+(8925,16262); the data pad with the track through it, the row from the west and field east; the corner at
+y 15868 whole and 30 px from `ck_out`'s corner in both chips (`l7.png`); the thin stretch x 8880 with 8-10 px
+bars and no hole (`l8.png`); the metals x 9011 and x 8594 pad to pad; no row crossing with a hole; the
+equations and their marks as claimed. Two notes, neither changing a connection:
+
+1. **The box's extent** (geometry only): the box proper is y 16674-16704 and the poly's colour reaches north
+   to about y 16706, where `B` was drawn to y 16716. Confirmed (`px.py col 9079 16664 16724 2 metal,acid1b`:
+   outline lines y 16672-16682 and y 16700-16704 in the chip-2 metal shot, a plain centre 165/125/75 between,
+   poly colour from y 16708; a further line at y 16714-16716 across the poly, read as the pad's foot under
+   it). Fixed: `B 9066,16672:9092,16708`, `D 9056,16672:9102,16706` (the buried contact still covers all the
+   poly on the pad, so no transistor appears).
+2. **An undrawn thin metal over the cells** (coverage; another net's): the thin metal x 8637-8650 down
+   column B (`bc1`'s `M 8642,14898 y15060`, which runs on) crosses the copy's inverter node box and both tie
+   boxes, dark there for 12, 23 and 17 px in both chips (`tl3_thin.py 8636 8650 15860 16470 --thr 144 --min
+   8`: y 15887-15898, 16044-16066, 16146-16162), with a 9 px bright patch at (8640,15904). The reviewer read
+   it as no contact (the same at the lower copy and at the master's thin W; the clean shot 189/177/130; no
+   widening; chip 1's metal is dark there, so chip 2 and the clean shot carry it). Confirmed as recorded:
+   Ambiguity 75. Nothing drawn: the metal is not this package's, and no piece's net touches it.
+
+It could not check: the track x 9099 at the box in chip 1's metal shot (the blemish); the unread box
+(8762-8795, 15722-15757) beyond the data port (the thin metal x 8792 is dark for 36 px over it with no bright
+centre); the cells' load ties and the continuity of the cell's thin metal over the node boxes (as at the
+lower copy).
+
+After the fix of note 1 (the commit before it is a8bd088):
+
+```
+tools/t.sh eof sameconn.py a8bd088              connections identical
+.venv/bin/python tools/sameconn.py a8bd088      connections identical
+```
+
+Round 26: no findings that change a connection.
 
 ## Not done
 
