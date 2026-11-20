@@ -744,6 +744,13 @@ clean shot. Against: a 9 x 10 px spot at (7557,13929), at ground brightness in c
 greenish in the chip-2 stripped shot, without a ring. `cdp4_ld` = `bc1_ld_a` holds under every reading
 (a metal does not end without a contact). Settled by tracing the gate group (`cdp4` (continue)): if the
 node the box sits on is a gate output with the selects as inputs, (a) is right.
+**Resolved 2026-11-20 as reading (a)** (`cdp4` run 2, Matt Godbolt): the group is one gate, `cdp4_rst` =
+NOR of the six select rows with one load, and the box sits on its output diffusion (the column's west
+edge line is absent at y 13912-13930 in three shots; tracer and reviewer); `cdp4_rst`'s poly ends in it
+as a tongue, and the east box of the same gate, with no metal near it, has the same look. `cdp4_rst` had
+no driver before; readings (b) and (c) would now put two drivers on one net. Drawn in `trace/cdp4.txt`.
+Still uncertain: `busl`'s `?M 7556,13895 y13953` itself is not seen in either metal shot (the reviewer
+could not check it either), so `cdp4_ld` = `bc1_ld_a` rests on it as before.
 
 ## AMB-039: `tc2_sr_g`'s track over the poly row y 13744, at (7145,13728-13749) (2026-11-19)
 
@@ -760,6 +767,9 @@ gate group (`cdp4` (continue)).
 **2026-11-19, later**: `regs` (run 3) reads row y 13744 as the read select of R13 (`rsel13_buf`), tapped at
 (6492,13744) from the track x 6494 (read, not drawn). Under reading (b) latch D's enable would be on a
 register read select: a further reason for (a). Still open until the row is drawn.
+**2026-11-20**: `cdp4` (run 2) drew the row's east end: it is gate 2 of the NOR that makes `cdp4_rst`,
+with no other contact (the open join `rsel13_buf_u`). Under reading (b) latch D's enable would also be an
+input of `cdp4_rst`. Not settled: the row west of x 7550 is `busl`'s and is not drawn.
 
 ## AMB-040: the structure at x 10530-11400, y 11740-12350 on the write strobes of R12 and R14 (2026-11-19)
 
@@ -795,4 +805,26 @@ centre against a 13 px ring on the south, where the pad's own metal leaves. A du
 (clean shot dull over x 6456-6495, wider than the poly; chip 2's metal dim for 9 px, chip 1's whole) is
 read as a stain. Three nets depend on it (`lc3_w9947`, `rst_c`, `lc1_w7170` = NOT `rst_c`). Settled by
 the driver of the clock (`eof`: the row y 14784 east of x 7550), which must not be the reset.
+**Resolved 2026-11-20 as reading (a)** (coordinator, from `eof` runs 15-18): the clock's driver is found
+and is not the reset: `lc3_w9947` = NOT `eof_w15127`, an inverter on one side of a set/reset latch in the
+bottom-centre logic (set by `eof_w15172`, cleared by `ck_out` AND `bc2_w15607`, or by `rst_a`). Every
+other end of the net is a gate. Under reading (b) that inverter and `rst_c`'s driver would share a net.
+The inverter's and the latch's equations are marked for load ties only.
 
+## AMB-043: `eof`'s clock latch (units V, W): the stacks' diffusion in the open gap drawn against its colour (2026-11-20)
+
+Proposed by `eof` (Tom Seddon, run 16; its Ambiguity 53). x 8742-8777, y 15160-15400, the 35 px open gap
+between column B's rail and a thin metal in the bottom-centre logic. Edge lines in both metal shots and the
+chip-2 stripped shot say both stacks' diffusions run through the gap (no edge across rows A, B, 1, 2;
+single edge lines; a doubled line along row C's top west of x 8757, where the boundary turns west to the
+rail). The colour of the three bands between the rows says field (stripped shot red minus green 2-11
+against 19-25 for diffusion in the same gap; the clean shot likewise). **Assumed: diffusion** (drawn so;
+two reviewers and the tracer on the edges). If field after all: each stack is two fingers (no equation
+changes), except that the part between rows B and C under the thin metal would float and the `rst_a`
+transistor would lie in series with V's input gates between the two nodes, so that the reset would clear
+the latch only while `eof_w15172` is high. The equations at stake: `eof_w15127` = NOT(`eof_w15172` OR
+`eof_w15300`), `eof_w15300` = NOT((`ck_out` AND `bc2_w15607`) OR `eof_w15127` OR `rst_a`), and through them
+the ripple counter's clock `lc3_w9947`. **2026-11-20, later** (`eof` run 23): the bands were classed by
+colour without a control band, and a like band elsewhere read both ways from single rows (trap 38): the
+colour evidence is to be measured again with a control (Re-read item R49). What would settle it: that
+measurement, or a sharper stripped shot of (8740-8780, 15185-15250).

@@ -339,3 +339,9 @@ In order of value:
 - A seventh track (x 7145 / 7187 / 7231 between y 13680 and 15000, running on to about (7100,16279)) is
   `tc2_sr_g` (`busl`, piece `sr`): it lies on line 3 at y 14176 (x 7145-7187) and crosses line 6 at
   (7231,14304) without a contact. Its driver is expected in the group x 7000-7860, y 15000-16300.
+
+## Corrections (coordinator, from the handoffs of 2026-11-20)
+
+- Survey, "Right ends: most lines end on contacts at x 8250-8290 and continue (in poly under the rails x 8300-8560, then metal again from x 8560) towards x 9000": not so for the line y 14786 (`lc3_w9947`): from its pad (8293,14785) the poly goes south 40 px and east along y 14816-14834 under the rails and the VSS band to a turn at x 8968 and a pad (8967,14870), with no metal between (`eof`, piece `ck6`).
+- Ports, `bc1_g6_in` "from outside (below)": the metal continues 1,520 px down the bundle and by two pads and a poly row to the output of `eof`'s inverter `inv17` (`eof_w17040` = NOT `eof_w16823`; `notes/blocks/eof.md`, piece `o040`). The join passes three uncertain stretches of a thin metal (an alias, not a rename).
+- Column B (x 8508-8940) is drawn by `eof` from y 14942 to 15472 and from y 15886 south; column A's VSS rail (R1) is drawn on south of y 16300 to its end at y 17568.

@@ -2349,3 +2349,59 @@ of reset function only when LPSTB is at Low level", which is what the trace has:
 `res_b`), firm. It names no test mode. Added to `notes/operation.md`, "Reset from the pins", with the
 belief (not traced, not in this data sheet) that RES low with LPSTB high is a test mode, and where to
 look: the loads of the two buffered pins in the bottom-left logic.
+
+## 2026-11-20 11:28  Handoffs: eof runs 15-23, cdp4 runs 2-3, cdp3 row A, tl3 run 12
+
+Thirteen handoff files, thirteen pieces of work (Tom Seddon: `eof` runs 15-23, 2026-11-19 21:11 to
+2026-11-20 07:51 +0000; Matt Godbolt: `tl3` run 12, `cdp4` runs 2 and 3, `cdp3` row A). Full extraction
+after them 2,451 nets, 4,560 transistors, 0 errors, 0 warnings; 901 of 1,341 equations firm. Spot checks
+of the overlays: `eof`'s clock latch and its unit of three pull-downs, `cdp4`'s NOR and one slice of its
+comparator (`cache/scratch/refresh/spot_vw.png`, `spot_g174.png`, `spot_rst.png`, `spot_r15.png`).
+
+What they establish (from the tracers' notes; marks as there):
+
+- **The left-centre ripple counter's clock has its driver and its sources** (`eof` runs 15-18):
+  `lc3_w9947` = NOT `eof_w15127`, one side of a set/reset latch in the bottom-centre logic's column B
+  (`eof_w15127` = NOT(`eof_w15172` OR `eof_w15300`), `eof_w15300` = NOT((`ck_out` AND `bc2_w15607`) OR
+  `eof_w15127` OR `rst_a`); marked for load ties, and AMB-043). The set is `eof_w15172` =
+  NOR(`bc2_w14955`, `bc2_w15000`) (firm), from `bc2`'s latch unit a; the clear needs `ck_out` (firm join
+  onto `trunks`' `ck_out #1`) and `bc2`'s latch unit b's lower node (firm join). What the two `bc2`
+  latches store is open.
+- **Two latches in series on `ck_out`'s metal** (`eof` runs 19-21; 29 transistors): copies of `tl1`'s
+  latch under the rail x 8686-8731 with an inverter between, the second open while `ck_out` is high, the
+  first while `eof_w16040` is high (not followed; believed the opposite clock level), both cleared by
+  `rst_a`; an inverter and a NOR on the second latch's outputs. **The inverter's output is `bc1_g6_in`**
+  (run 22; through three uncertain stretches of a thin metal: an alias), and the NOR's output gates a
+  unit of three wide pull-downs under column A's rail (run 23; its east side is read, not drawn).
+- **The six large cells are R14's latch under a comparator** (`cdp3` row A, 91 transistors, firm): line g
+  (`cdp3_g_c#`) is compared with R14, match line `cdp3_k_c`. **`cdp4`'s row R1 upper is the comparator of
+  the eight bus lines with R15** (run 3, 65 transistors, firm), match line `cdp3_k_b`. The NAND beside
+  `cdp3`'s row C takes both: NOT((`cdp4_bus_s#` = R15) AND (`cdp3_g_c#` = R14)). Believed: the cursor
+  match, active low; where its output goes rests on an uncertain box.
+- **`cdp4_rst` = NOR of six select rows** (`cdp4` run 2, 7 transistors, firm): four are the read selects
+  of R14-R17; two are open joins (`rsel13_buf_u`, `rsel12_buf_u`) through `busl`'s region.
+- `tl3` (run 12; done): four rows drawn through the strip; three step-logic gates have all inputs
+  identified. **`tl4_w4590` has five loads and no driver**: a queue row now (`tl4` (continue)).
+
+Applied: master list rows `eof`, `busl`, `cdp2`, `cdp3`, `cdp4` (wave and continue rows), `tl1`-`tl6`,
+`bc1` (continue), `bc2`-`bc4`, `trunks` (continue); the row `tl3` (continue) is replaced by `tl4`
+(continue), the search for `tl4_w4590`'s driver; two open joins added to the table. **Re-read list**:
+R46 (bands between gate rows in an open gap drawn as field from colour: the latch units of `tl1`'s build),
+R47 (pad joins accepted across a "dim metal" stretch: `tl2`-`tl4`), R48 (`cdp4`'s three strobe polys are
+probably serpentines; geometry), R49 (`eof`'s own bands of AMB-043, to be measured with a control); R4, R17
+and R44 extended. **Guide**: trap 38 (new: a band between gate rows in an open gap is not classed by
+colour, nor from one row), additions to traps 2 (residue strips between close tracks), 16 ("dim is not a
+colour"), 19 (a metal half over a poly column fails the metal test) and 33 (two metals end to end on one
+track position). **Ambiguities**: AMB-038 resolved as (a); AMB-042 resolved as (a) (the clock's driver is
+not the reset); AMB-039 annotated; AMB-043 new. Corrections sections in eleven block notes. Floor plan:
+the coarse block of `cdp4`'s corner gate group removed, and the two "R14's cells" blocks that `cdp3`'s new
+fragment lines replace. `trace/cdp3.txt`: fourteen uncertain metal pieces at y 11048-11200 removed
+(`cdp4` draws the same metals firm; `tools/sameconn.py`: connections identical; 1,134 uncertain items).
+
+**A shared tool changed**: `tools/rename.py` leaves records of renames as written (journal lines with an
+arrow, lines that say "former name" or "old name", and pairs already in the glossary's Former names).
+`eof` run 15 reported that the catch-up commands of 2026-11-19 23:27, run in a branch after merging main,
+rewrote 240 places in main's own records; run now on main they change nothing.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 3 open joins, 732 floor-plan blocks.
+Coverage: 68.7% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.

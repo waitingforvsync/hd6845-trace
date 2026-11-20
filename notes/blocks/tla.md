@@ -566,3 +566,9 @@ Each is in the named block's notes in full; the trace fixes are on main.
 ## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
 
 - `tl3_w3982`'s driver is `eof`'s inverter U4 at (7575,8386) (run 12). For the reader of `rcs_e4`'s line through the nest at y 7888-8275: the tracks west of it are named (x 6645 `lpstb_b`, 6602 `res_b`, 6558 `rst_a`, 6514 `tl3_w3982`; `eof` runs 10-11).
+
+## Corrections (coordinator, from the handoffs of 2026-11-20)
+
+- `rcs_g3245` ("comes from ...", the input of `rcs_u3288`): it is NOT `tl4_w3113` (`tl3` run 12: its row y 2683 is drawn through strip 3 onto `tl5_w2722`).
+- `tl2_w3722`, the third input of `rcs_bc3460`: it is NOT `tl4_w4068` (`tl3` run 12: the row y 2639 onto `tl5_w4937`).
+- `tl1_w2857` is `rcs_mn3852` (the row y 2857 is one poly from `rcs_mn3852`'s unit to `tl1`'s first latch's data).

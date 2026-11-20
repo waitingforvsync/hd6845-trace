@@ -190,6 +190,11 @@ Traps, all of them real:
    the clean shot is not there.** A buried contact in a 36 px gap in `dbus` was read as an
    artefact for a whole session; in the chip-2 shots it is an ordinary heavy-outlined box
    (2026-11-17, R24).
+   Between closely spaced metal tracks (the central datapath's comparator rows) the gaps
+   carry dark or green residue strips in the clean shot that hide whether a diffusion
+   crosses the gap. The chip-2 stripped shot's red minus green in the gap decides (field 0
+   or negative, diffusion and poly positive), best on a median composite of the slices
+   (2026-11-20, `cdp4` run 3; with trap 24 on medians).
 3. A dark line across a metal wire in the metal shots is the edge of something
    *underneath*, not a break in the metal. Likewise, bright green bands in `acid1b`
    inside the arrays are gaps of open field between metal lines, not features.
@@ -262,6 +267,15 @@ Traps, all of them real:
    The follower's default `--gap 24` is itself enough to jump from a pad to a line that
    passes 24 px away (found 2026-11-16 at (7467,4782)): where its output turns a corner
    within 30 px of a pad or contact candidate, check the corner with a brightness profile.
+   **Dim is not a colour**: a stretch between a metal's end and a pad's ring that reads as
+   "dim metal" in the red channel (130-155: `tools/textmap.py`'s metal columns and
+   `tools/tl5_tracks.py` show red only) can be open poly. Before calling a stretch beside
+   a pad dim metal, read its green and blue in both metal shots (`tools/px.py row`): open
+   poly is orange (chip 2 about 151/104-122/51-54, chip 1 132-146/59-80/43-45: green under
+   about 125, blue under 55), metal yellow (187-203/152-174/64-81); and the chip-2 stripped
+   shot's pale metal ghost ends where the metal ends. Test (b)'s length said the same at
+   (8424,17908) (33 px without metal against 17 px for a ring) and was explained away.
+   Found 2026-11-20 by a reviewer (`eof` run 18; R47).
 
 17. **A join the extraction reports is only as good as the geometry on its path.** When
    two named nets become one after new geometry is drawn, the message "carries several
@@ -282,6 +296,11 @@ Traps, all of them real:
    see thin, dim lines (under about 16 px): it reports breaks or no line at all. For those,
    profile along and across the line and compare with a known stretch of the same line.
    Found 2026-11-17 in `rde` (R17).
+   Nor is width a protection: a metal of ordinary width (about 26 px) that lies half over
+   a poly column reads as two dim halves with a dark line between (the poly's edge), and
+   each half fails the test (`tools/follow.py` and `tools/eof_mrun.py` report no metal for
+   215 px south of the pad (8592,15168), where both metal shots and the clean shot's pink
+   protected strip show one). Found 2026-11-19 (`eof` run 15; R17).
 20. **A contact at low zoom does not say which way a signal goes.** Whether a line drives or
    receives depends on whether its contact lands on a gate poly or on a source or drain.
    Two packages called `amr`'s four outer lines outputs; they are gate inputs. Found
@@ -411,6 +430,13 @@ Traps, all of them real:
    and step across at y 6600-6700. A row between two pads must be seen in the open stretch (its two
    edge lines in the metal shots, or poly colour in the stripped shots); a line near a block's edge
    must be measured there (R36). Found 2026-11-19 (`tl3`; R44).
+   Likewise **two metals on one track position, end to end, read as one track when sampled
+   coarsely**: in the bottom-centre logic the track x 9099 is a bus line's metal down to
+   (9098,15827), where it turns east, and another net's metal from a corner (9097,15870) on south,
+   with 20 px of bare ground between; `tools/eof_mrun.py row` at every 100 px gives the same x at
+   every cut and `tools/follow.py` jumps the gap. A long track is one metal only after a continuous
+   two-chip test along all of it (`tools/tl5_tracks.py v`), and every stretch of 20 px or more
+   without metal is looked at. Found 2026-11-20 (`eof` run 21; R44, R36).
 34. **A row that lines up with a poly beyond a rail's edge is not thereby the same poly.** In
    `lc2`'s west cluster the gate rows end at the rail's east edge and a different poly (the gate of
    a pull-down east of the rail) starts 20-30 px further on, in line. At 2.8x they look like one
@@ -437,6 +463,23 @@ Traps, all of them real:
    leaving south instead of west). When a full-cell hit is weak, try the cell's halves, and then
    read every row end rather than trusting the half's lines (with trap 32). Found 2026-11-19
    (`lc3`); no earlier block is known to be affected.
+38. **A band between two gate rows in an open gap beside a rail cannot be classed by its colour,
+   and not from one row.** In `eof`'s column B the bands between the gate rows in the 35 px gap
+   between the rail and a thin metal (x 8742-8777) have field colour in the chip-2 stripped shot
+   (red minus green 2-11, against 19-25 for diffusion in the same gap) and in the clean shot, and
+   are read as diffusion from the edge lines: no diffusion edge crosses the gate rows there in
+   either metal shot (a real edge under a poly dips to red 50-65 in chip 2; these rows stay at
+   152-186), and where a diffusion boundary does run along a poly edge the line is doubled (9 px
+   wide against a single line). Profile along each row in both metal shots (`tools/px.py row`): if
+   no edge line crosses the row between the two metals' own edges, the diffusion under the rail
+   runs on through the gap and the bands between the rows are diffusion too. Read from colour, each
+   stack had two fingers and a clear lay in series with an input (drawn so twice and passed by two
+   review rounds). And a narrow band (about 10 px) between two poly edges has a greenish north
+   flank and a reddish south flank in chip 2's shots, so a single `px.py row` through it reads
+   field on one flank and diffusion on the other: measure the whole band, or the same flank of
+   each (`tools/eof_patch.py`), **with a control**, a band of the same height that is certainly
+   field between the same kind of edges nearby. Found 2026-11-20 (`eof` runs 16 and 23, both by
+   reviewers; R46, R49; AMB-043; with traps 4 and 28).
 
 **When a trap turns out to affect work already done**, add the affected blocks to the
 "Re-read list" in `notes/work-packages.md` in the same commit that records the finding.

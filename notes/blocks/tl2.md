@@ -1236,3 +1236,10 @@ Round 1: no findings that change a connection.
 - `tl4_w4068` ("the wire's source is north of the strips"): it is the net of `tl4`'s latch enable (`tlb` run 1: poly north under the plane, pad (3458,2096), metal y 2098, pad (4540,2098)); no gate is north of the strips.
 - `tl3_w3982`'s driver ("not found"): `eof`'s inverter U4 at (7575,8386) (run 12).
 - `rcs_x1` = NOT `lc1_w7170`, and `lc1_w7170` = NOT `rst_c` (`eof` run 13, piece `rc`, firm): the clear of the step logic's five latches is the reset, two inverters later. Where these notes call its source open, it is found.
+
+## Corrections (coordinator, from the handoffs of 2026-11-20)
+
+- `tl2_w3722` (track F, "its other end is the row y 2639 east out of the strip"; port `?`): that row is drawn through strip 3 (`tl3` run 12) and joins `tl5_w4937` = NOT `tl4_w4068`, so `rcs_bc3460` = NOR(`clk_tl`, `rcs_e3`, `rcs_e4`, NOT `tl4_w4068`) with every input identified (no uncertain item on the join). The port at (3533,2630-2648) is an input.
+- `rcs_g3245` (track I): its row y 2683 east out of the strip joins `tl5_w2722` = NOT `tl4_w3113`, so `rcs_u3288` = NOR(`rcs_bd3330`, NOT `tl4_w3113`).
+- `tl1_w2857` (the row y 2857 "straight through"): it is `rcs_mn3852` = NOR(`rcs_in1`, `rcs_mu`, `tl3_e3712`), the data of `tl1`'s first latch.
+- The row y 2813 of `tl1_w3678` joins `tl4_w4590`: `tl1_w3636` = NOR(`rst_ck`, `tl4_w4590`). `tl4_w4590` now has five loads and no driver: a missed tap is looked for on this strip's metal y 2812 (x 2848-3164) among other places (the master list's row `tl4` (continue)).

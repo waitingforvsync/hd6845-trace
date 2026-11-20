@@ -518,3 +518,7 @@ of the row, the copies (`cellcheck.py`, three shots), the extraction, `unsure.py
 
 Round 1: no findings that change a connection.
 
+## Corrections (coordinator, from the handoffs of 2026-11-20)
+
+- Row R1 upper, "Believed, not traced" and Not done ("`cdp3_k_c`, the NAND's other input (not followed)"): followed by `cdp3` (row A): it is the match line of the comparator of line g (`cdp3_g_c#`) with R14.
+- The strobe polys `wr_r15` (y 11837), `cdp4_ld` and `cdp4_ld6` are drawn as straight lines; in `cdp3`'s copy of the same latch cell the strobe `wr_r14` is a serpentine (field under each bit line and a-track metal at the band's height, the band joined through each cell's loop). Probably the same here; geometry only as far as seen (Re-read item R48).

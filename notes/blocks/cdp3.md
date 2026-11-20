@@ -484,3 +484,9 @@ contacts; the extraction (91 transistors, equations as claimed).
 `.venv/bin/python tools/sameconn.py e1b2cc7`: connections identical.
 
 Round 1: no findings that change a connection.
+
+## Corrections (coordinator, from the handoffs of 2026-11-20)
+
+- "Row I (y 11050-11200+) ... not traced" and Not done: it is the top of `cdp4`'s comparator row (the bus lines against R15), traced in `cdp4` run 3; lines e and f pass through it with no contact. The uncertain metal pieces of the bit lines and line f at y 11048-11200 were removed from `trace/cdp3.txt` (`cdp4` draws the same metals firm; `tools/sameconn.py`: connections identical).
+- `cdp3_k_b` ("in"): its driver is `cdp4`'s comparator: `cdp3_k_b` = NOR of the eight "not equal" nodes `cdp4_xr_s#_ne`.
+- Ambiguities, "A gate driving a bit line" (reading (a), the `?B` at 8081-8105 x 9221-9254): the NAND's output is extracted on `cdp3_bl_c1`, which is now known to be `cdp4_in8b_s1`, the data line of R15's latch in slice 1, and both NAND inputs are the two comparators' match lines. A gate output on a register's data line adds to the doubt on reading (a); the box is to be read again (the master list's row `cdp3` (continue)).

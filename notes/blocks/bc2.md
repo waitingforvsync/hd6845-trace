@@ -233,3 +233,8 @@ the tl1 master cell's width, unit a reads the same. Not checked: the gate widths
 and t1894; anything beyond y 15746.
 
 Round 1 (latch unit b): no findings.
+
+## Corrections (coordinator, from the handoffs of 2026-11-20)
+
+- "Latch unit a", row `bc2_w14912` ("goes west, not followed"): the pad (10395,14912) is the south end of a thin metal x 10397 that comes from north of y 14570 (`eof` run 17, at 1.28x and by `tools/eof_mrun.py col 10395 14640 15030`; not read at high zoom).
+- Not done 1 ("the metals at a's ... output pads ... x 10441 north of y 14940 ... x 10267 (output, north of y 15515). None is followed"): these three are followed (`eof`, pieces `in172`, `in390`): unit a's output `bc2_w15000` and enable `bc2_w14955` gate the NOR T at the top of this column (`eof_w15172`, the set of the latch behind the ripple counter's clock), and unit b's lower node `bc2_w15607` is one input of that latch's clear.

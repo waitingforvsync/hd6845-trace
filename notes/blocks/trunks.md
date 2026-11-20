@@ -595,3 +595,7 @@ along the top of the central datapath) is the gap.
 
 - The signal on track A / line X / the first through line of the left-centre strips, which these notes call a clock, a strobe "once per scan line" or leave without a source, **is the reset**: `rst_a`, the buffered copy of `rst` = NOR(`lpstb_b`, `res_b`) made by `lc1`'s gate 5 (`eof` run 10, piece `isrc5`, firm). `rst_ck`, `rst_rc` and `rst_lat` are further buffered copies of it: high while the RES and LPSTB pins are both low, and only then. The belief "a strobe once per scan line" is withdrawn. So "source of X" is found.
 - `res_b` and `lpstb_b` do not end at `lc1`'s NOR: they run on down the left-centre strips and the left bus field to (6366,15000) and (6408,15000) (`eof` run 11, piece `rl`).
+
+## Corrections (coordinator, from the handoffs of 2026-11-20)
+
+- `ck_out #1` "turns left along y 17900-17915 (followed to x 10230; not yet further)": it runs on west, unbroken, to a pad with a contact (9769,17910), then by a poly to a pad (9596,17909) and a metal to a pad (8598,17908), drawn by `eof` (piece `in350`, run 18); from there one metal goes north to the latch behind the ripple counter's clock and a poly west to a pad (8424,17908). Four open ends of `ck_out` there are not followed.

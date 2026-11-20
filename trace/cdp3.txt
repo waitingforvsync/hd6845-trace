@@ -549,22 +549,9 @@ M 9638,8790 y9195 w=20
 M 10028,8790 y9195 w=20
 M 10419,8790 y9195 w=20
 
-# --- bit lines and lines f below row H, to the bottom edge: metal is present at these x all the
-# way (profile); row I, which they cross, is not traced
-?M 7687,11048 y11200 w=20
-?M 8076,11048 y11200 w=20
-?M 8466,11048 y11200 w=20
-?M 8857,11048 y11200 w=20
-?M 9248,11048 y11200 w=20
-?M 9638,11048 y11200 w=20
-?M 10028,11048 y11200 w=20
-?M 10419,11048 y11200 w=20
-?M 8511,11048 y11200 w=17
-?M 8902,11048 y11200 w=17
-?M 9293,11048 y11200 w=17
-?M 9683,11048 y11200 w=17
-?M 10073,11048 y11200 w=17
-?M 10464,11048 y11200 w=17
+# --- bit lines and lines f below row H, y 11048-11200: drawn firm by `cdp4` (run 3: they are its in
+# tracks and a tracks through the R15 comparator row); the uncertain pieces that stood here were
+# removed 2026-11-20 (coordinator; connections identical)
 
 # =====================================================================================
 # Gate beside row C, in c0-c1 (x 7600-8360, y 9150-9500): one two-input NAND on c1's line e

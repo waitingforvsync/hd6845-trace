@@ -67,7 +67,6 @@
 7460,7860:7800,8068     ?logic  inverter U1 at the foot of the gate column | not traced (cdp3 (continue)): a copy of eof's inverter cell at y 7940-8060 and a diffusion under the rail at y 7849-7907; the units above (g7700) and below (the three inverters that drive tl3_w3982) are drawn by eof
 7850,8260:8300,8800     ?logic  logic beside the large cells (row A) | gates between channel 3 and channel B, west of the six large cells; lines from the gate beside row C come up into it (x 7880, 8076, 8290, 8327); not traced: package cdp3 (continue)
 7460,8620:7800,8800     ?logic  gates below the column west of the large cells | not traced: package cdp3 (continue)
-7550,13640:7870,14040   ?logic  gate group at cdp4's bottom-left corner | pull-downs with loads beside bc1_ld_a; not traced: package cdp4 (continue); it takes six select rows (the read selects of R12-R17: regs)
 4400,6900:6450,8067     ?logic  left-centre logic, strip 1 | what `lc1` has not drawn yet: cluster E's west half, two rows of the diagonal bundle (y 6953, 7040; the others are drawn by eof and tla), the crossing field's remaining lines
 11900,3400:16400,4210   ?logic  top-right logic rows | gates under the test structures, near the RA/HSYNC/VSYNC pads (the RA output stage below is ral)
 7000,14600:11000,18550  ?logic  bottom-centre logic | random logic below the central datapath

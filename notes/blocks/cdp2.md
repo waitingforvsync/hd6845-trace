@@ -520,3 +520,6 @@ of `wl_h0`, which ends on a pad (11060,6712)). Identified so far, east of the kn
 comparator's chain output is, west of the knot, the line at y 6844, which goes to a pad
 (7330,6845) and on west and north along x 6840 (not drawn).
 
+## Corrections (coordinator, from the handoffs of 2026-11-20)
+
+- Not done, "Row D ... (it is cdp3's untraced row A)": traced as `cdp3`'s row A (2026-11-20): the comparator of line g with R14 (y 8040-8490) over R14's latch row. Whether the bit lines join this block's bus lines above y 8040 was not examined.

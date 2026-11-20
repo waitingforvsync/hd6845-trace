@@ -1118,3 +1118,10 @@ Round 1: no findings that change a connection.
 - The four select tracks of piece `ctl` are driven by `sel`'s buffers: they are the read selects of R14-R17 (`regs` run 2: the tracks hop in poly at y 16168-16558 and turn east along rows y 18168-18299).
 - The "two undrawn rows of other nets" y 13744 and y 13852 are, as read by `regs` (run 3, not drawn), the read selects of R13 and R12, tapped at (6492,13744) and (6450,13852) from the tracks x 6494 and x 6452. For Ambiguity 13: a contact at (7145,13728-13749) would put latch D's enable `tc2_sr_g` on a register read select.
 - Lines 1-3 of piece `lc9` are the reset copy `rst_a` and the buffered pins RES and LPSTB; line 6 is `rst_c` (`eof` runs 10, 11, 13).
+
+## Corrections (coordinator, from the handoffs of 2026-11-20)
+
+- Ambiguity 9 and the port of `cdp4_rst` ("read as a buried contact onto its node diffusion, not drawn"): drawn in `trace/cdp4.txt` (`cdp4` run 2) as that reading; AMB-038 is resolved as (a). The tongue, buried contact and diffusion (`D 7540,13905:7590,13940`) reach about 20 px into this region and overlap the end of the poly `P 7462,13906:7532,13927`. The `?M 7556,13895 y13953` is still not seen in either metal shot.
+- The undrawn rows y 13744 and y 13852 end east of x 7550 as gates 2 and 4 of the NOR that makes `cdp4_rst` (ports `rsel13_buf_u` (7550,13751), `rsel12_buf_u` (7550,13873) in `ports.d/cdp4.txt`): draw the rows onto them.
+- Piece `kb`: `cdp3_k_b`'s driver is `cdp4`'s comparator of the bus lines with R15 (`cdp4` run 3); the diffusion band east of (7600,11109) is its match line.
+- Piece `lc9`, "row ... 14784 to (7835,14784)": the pad's contact is at (7837,14784) and the pad's poly reaches x 7863 (`eof`, piece `ck6`). The row is driven from the east: `lc3_w9947` = NOT `eof_w15127` (`eof` run 15), so the port at (7550,14784) is an input of this field.

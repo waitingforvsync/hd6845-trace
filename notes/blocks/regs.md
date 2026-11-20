@@ -266,3 +266,8 @@ Round 4: no findings that change a connection.
 - The structure of Ambiguities 1.
 - `wr_r14`'s branches into the row A cells (`cdp3` (continue)); the source of `cdp4`'s 6-bit
   input a (`cdp4` (continue)).
+
+## Corrections (coordinator, from the handoffs of 2026-11-20)
+
+- "`wr_r14` ... its branches into the cells are not traced" and "6 (believed, from the row)": the branches are the strobe loops of R14's six latch cells; row A is R14, firm (`cdp3` row A, 2026-11-20).
+- The two undrawn rows y 13744 and y 13852 end as gates 2 and 4 of the NOR that makes `cdp4_rst` (`cdp4` run 2); their east parts step south to y 13759 and y 13873 at x 7550 and are drawn there as the open joins `rsel13_buf_u`, `rsel12_buf_u`.

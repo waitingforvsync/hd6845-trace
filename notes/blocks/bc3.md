@@ -132,3 +132,9 @@ Round 1: no findings in what is drawn; one undrawn tap on the output listed in N
   at y 17250-17350 and again (two positions) at y 16640-16750; the track that is x 8057 at y 17700 is
   `rst_a` (`eof` run 9, piece `isrc4`), and the track x 8098 lies on `rst_a`'s poly row y 17736 from
   x 8096 to 8388 without a contact.
+
+## Corrections (coordinator, from the handoffs of 2026-11-20)
+
+- Inventory, "Vertical metal rails ... x ~8350-8390 and x ~8520-8560 (whole height)": the rail x 8338-8382 steps west to x 8316-8362 at y 17240-17270 and ends at y 17568 (20 px of bare ground to the metal y 17599-17614; `eof`, piece `g174`).
+- Inventory, "Right gate group ... a big diffusion area x 8250-8400, y 17450-17620": it is the active area of `eof`'s piece `g174`, x 8258-8368, y 17266-17560, with three gates on it.
+- Under the rail x 8686-8732 `eof` draws everything from y 15886 to y 17290 (two copies of `tl1`'s latch in series, two inverters, a NOR); the `findcell` hit `tl5_inv` at (8687,17305) is still undrawn.
