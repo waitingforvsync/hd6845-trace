@@ -522,3 +522,7 @@ Round 1: no findings that change a connection.
 
 - Row R1 upper, "Believed, not traced" and Not done ("`g_eq_r14`, the NAND's other input (not followed)"): followed by `cdp3` (row A): it is the match line of the comparator of line g (`cdp3_g_c#`) with R14.
 - The strobe polys `wr_r15` (y 11837), `cdp4_ld` and `cdp4_ld6` are drawn as straight lines; in `cdp3`'s copy of the same latch cell the strobe `wr_r14` is a serpentine (field under each bit line and a-track metal at the band's height, the band joined through each cell's loop). Probably the same here; geometry only as far as seen (Re-read item R48).
+
+## Corrections (coordinator, from the handoffs of 2026-11-20, second batch)
+
+- The corner gate group, rows 2 and 4 "believed `rsel13_buf`, `rsel12_buf`": traced (`busl` run 8, pieces `r12`, `r13`; firm): the rows y 13744 and y 13852 are drawn from pads with contacts on the two select tracks ((6495,13744), (6452,13854)) onto this package's ports at x 7550, so **`cdp4_rst` = NOR(`rsel12_buf`, `rsel13_buf`, `rsel14_buf`, `rsel15_buf`, `rsel16_buf`, `rsel17_buf`)**, the six read selects of R12-R17 (believed: the selector's nodes are held low except while one of them is read). Row 4's poly begins at x 7528 (the foot of the step from row y 13852), 17 px west of `P 7545,13873`. The two open-join labels of the ports are renamed at the next refresh.

@@ -425,3 +425,8 @@ Round 3: no findings that change a connection.
   at about (5760,15765)); its poly row east of x 6450 (seen past x 7000).
 - Both rails of the gate group south of y 15800; the rest of the master-list row's region (the bus
   wiring x 4780-5850, the tracks x 6452-6841, the gate group south of y 15800).
+
+## Corrections (coordinator, from the handoffs of 2026-11-20)
+
+- G1's input ("a track x 4909 from the north reaches the west row's end; source not traced"; Not done, "its west row to the pad (4909,15088) and the track x 4909 north"): traced by `busl` run 9 (piece `p2`; firm). **The line is `rst_n`**, from `lc3`'s port (5475,10400) by a poly row y 10663, a pad (4907,10663) and the track x 4909, 4,400 px south without pad or contact. So `bl0_w15412` = NOT `rst_n`, a fourth copy of the reset in `rst`'s sense (high while RES and LPSTB are both low). The pad's contact is at (4909,15087); the track ends there (bare ground to y 15409, where `bl0_w15412`'s track begins on the same position). The port `P 5700,15078-15098` is met; `busl` drew the last 88 px of the track, the pad and the row from the pad to x 5700 inside this package's region. The label of G1's input is renamed at the next refresh.
+- Seven more tracks arrive from `busl` at y 15000 and are not followed: the six through lines `lc3_e9577`..`lc3_e9793` (x 5322, 5279, 5235, 5192, 5148, 5105; the follower's ends (5326,15381), (5284,15859), (5239,16506), (5194,16981), (5151,17462), (5107,17938)) and `lc2_w8450`'s second branch (x 4822; follower: to (4823,16690)). A metal jog on the row y 15088 at x 5400-5500 is another net's track (x 5495 north, x 5410 south), not followed.

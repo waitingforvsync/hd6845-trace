@@ -1451,3 +1451,9 @@ Round 1: no findings.
   (4867,15675) north to a pad (4867,14436) (`lpstb_nres`, on west in poly along y 14436 into the left
   array), and nothing else. Seen there and not drawn: the track x 4909 from the pad (4909,15088) north
   (`bl0_w15088`; by the follower to about (4908,10660)).
+
+## Corrections (coordinator, from the handoffs of 2026-11-20, third batch)
+
+- The two corrections above that asked for work are done: the rows y 13744 and y 13852 are drawn onto `cdp4`'s ports (run 8), and the track x 4909 is drawn (run 9, piece `p2`: it is `rst_n`).
+- The register: Ambiguity 13 is AMB-039, resolved as a plain crossing by run 8's rows; Ambiguity 15 is AMB-044 (new, assumed a plain crossing).
+- The five `@alias` lines of runs 8 and 9 at the end of `trace/busl.txt` go at the next refresh, when the names they gather are renamed (the master list's `rename` row has the pairs).

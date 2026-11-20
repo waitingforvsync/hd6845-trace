@@ -124,12 +124,8 @@ which `ur`'s drawing had joined to it by a poly that is not there.
 **Reset from the pins** (`notes/blocks/eof.md`, piece `x1`; the gates are `lc1`'s). The buffered
 RES and LPSTB lines run south out of the top-left logic in its poly bus and end on the two
 inputs of the NOR at the top of the left-centre gate column: **`rst` = NOR(`lpstb_b`,
-`res_b`)**, high while both pins are low. **The data sheet says the same** (`cache/ds/p-08.png`, "Reset (RES)": "RES has capability of reset function only when LPSTB is at Low level"; it gives no reason and names no test mode; **what RES low with LPSTB high does is traced: the paragraph "RES low with LPSTB high" below**). Its inverse `rst_n` is buffered three times:
+`res_b`)**, high while both pins are low. **The data sheet says the same** (`cache/ds/p-08.png`, "Reset (RES)": "RES has capability of reset function only when LPSTB is at Low level"; it gives no reason and names no test mode; **what RES low with LPSTB high does is traced: the paragraph "RES low with LPSTB high" below**). Its inverse `rst_n` is buffered three times beside the NOR, and inverted once more far to the south:
 
-- `rst_n` itself also runs down the west edge of the left bus field (a poly row y 10663, the track
-  x 4909, a poly row y 15088) to the wide inverter of the gate group at (5850-6330, 15200-15800):
-  `bl0_w15412` = NOT `rst_n`, a fourth copy in `rst`'s sense (firm; `notes/blocks/busl.md`, piece `p2`,
-  2026-11-20; `bl0`'s name for the line was `bl0_w15088`). Its loads are open;
 - `rst_c` clears latch D, so `lc_step` (the step pulse of the scan line counter and of
   `c4l`) is held high during reset, and clears the left-centre latch C; inverted twice more it is
   `rcs_x1`, the clear of the step logic's five latches (the last paragraph of this section);
@@ -146,7 +142,11 @@ inputs of the NOR at the top of the left-centre gate column: **`rst` = NOR(`lpst
   believed) and holds the output of the latch on R4's match low. So during reset the
   horizontal counter's `ck_b` phase stops, the row counter is not stepped, and those latches are
   held clear;
-- `rst_b` leaves the gate column north and turns east (not followed).
+- `rst_b` leaves the gate column north and turns east (not followed);
+- `rst_n` itself also runs down the west edge of the left bus field (a poly row y 10663, the track
+  x 4909, a poly row y 15088) to the wide inverter of the gate group at (5850-6330, 15200-15800), 4,700 px
+  to the south: `bl0_w15412` = NOT `rst_n`, a fourth copy in `rst`'s sense (firm; `notes/blocks/busl.md`,
+  piece `p2`, 2026-11-20). Its loads are open.
 
 Below their pads the two pin lines and this copy of the reset each go on in poly into the
 diagonal bundle of the left-centre strip: the reset copy's line is drawn (the bullet above); the
@@ -310,5 +310,5 @@ So that silence is not read as knowledge:
   lines are the address, nor where the NAND's output goes, nor anything of R10, R11 and the blink.
 
 The list of what is assumed, with the evidence for and against each, is
-`notes/ambiguities.md` (AMB-001 to AMB-043). Work still to re-check before anything is
+`notes/ambiguities.md` (AMB-001 to AMB-044). Work still to re-check before anything is
 simulated is the "Re-read list" in `notes/work-packages.md` (R1-R49).

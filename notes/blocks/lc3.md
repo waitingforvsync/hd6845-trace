@@ -511,3 +511,7 @@ Round 5: no findings that change a connection.
 ## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
 
 - The fifth corner-bundle line ("comes from a metal that enters from the east at (6450,9455)") is `rst_c` (`eof` run 13, piece `rc`); the ripple counter's clock comes from `lc3_w9947` (piece `ck5`). The lines 2 and 3 of the nine that leave south are `res_b` and `lpstb_b`, the first is `rst_a` (`eof` runs 10-11). `lc3_e9756` and `lc3_e9798` are still not followed east of x 6450 (R26).
+
+## Corrections (coordinator, from the handoffs of 2026-11-20)
+
+- The six diagonals and the two polys at y 10400 ("sources and destinations not followed"): followed through the left bus field by `busl` run 9 (pieces `e6`, `p2`; no uncertain item). `lc3_e9577`..`lc3_e9793` are six through lines: they keep their order through a nest of Ls and run down six tracks (x 5322 .. 5105) out of the field at y 15000 with no tap (believed from the follower: each ends at one row of the left array's lower part). `rst_n`'s poly (5475,10400) runs to the track x 4909 and down the field's west edge to `bl0`'s wide inverter: `bl0_w15412` = NOT `rst_n`. `lc2_w8450`'s poly (5541,10400) is a second branch of that net: by a row y 10706 to a pad (4822,10708) and the track x 4822 south out of the field. All of this package's ports at y 10400 are now met but the VCC metal.

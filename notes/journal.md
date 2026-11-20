@@ -2492,3 +2492,53 @@ transistors, 0 errors, 0 warnings, 0 names outside the glossary, 3 open joins, 7
 Coverage: 69.1% traced; in some package region 99.9%; untraced and in no Queue row 0.4%. Spot checks:
 `cache/scratch/refresh/bl0_check.png`, `eof_g174e.png`. Not done here: the refresh (the header counts of
 `notes/operation.md` are the eleventh refresh's).
+
+## 2026-11-20 15:18  Handoffs: `bl0` run 2, `eof` runs 25-26, `busl` runs 8-9
+
+Five handoff files (Matt Godbolt: `bl0` run 2, merged 4c432de; Tom Seddon: `eof` runs 25 and 26, merged
+a85229b and d3e9ceb, claim kept; richtw1's other session: `busl` runs 8 and 9, merged 5f91aa5 and 1aac536,
+claim kept). Full extraction after them 2,453 nets, 4,579 transistors, 0 errors, 0 warnings; 909 of 1,349
+equations firm; 96 nets joined only through uncertain items (1,134 items). Spot checks of the overlays:
+`bl0`'s gate under the rail x 7292-7342, `eof`'s end pad (6322,18472), `busl`'s two taps and its pad
+(4909,15087) (`cache/scratch/refresh/h_bl0_gate.png`, `h_eof_end.png`, `h_busl_taps.png`,
+`h_busl_4909.png`): the drawn shapes lie on the features.
+
+What they establish (from the tracers' notes; marks as there):
+
+- **Where RES and LPSTB end** (`bl0` run 2; 5 transistors, firm): both buffered pin lines run on south
+  and east to one gate in the bottom-centre logic, `bl0_w17085` = NOT(`lpstb_b` AND `res_b`), inverted
+  once: `bl0_w17210` = `lpstb_b` AND `res_b`, the light pen strobe passed only while RES is high. So
+  `res_b` has three uses and no more (`lc1`'s reset NOR, `lpstb_nres`, this gate). The loads of
+  `bl0_w17210` are not traced (believed the light pen register's latch strobe).
+- **R12 and R13 are read through `cdp3`'s rows E and F** (`busl` run 8; wiring, firm): `rsel12_buf` and
+  `rsel13_buf` are drawn up the left bus field on one metal each to the rows' read gates, and each has
+  one tap into `cdp4`'s corner NOR, so **`cdp4_rst` = NOR of the six read selects R12-R17** (firm). The
+  two open joins of that NOR are closed (one is left, `ck_a_u`).
+- **A fourth copy of the reset** (`busl` run 9; firm): `rst_n` runs from `lc3` down the west edge of
+  the left bus field (the track x 4909) to `bl0`'s wide inverter: `bl0_w15412` = NOT `rst_n`. Its loads
+  are open. `lc3`'s six diagonals are six through lines out of the field at y 15000 (no tap), and
+  `lc2_w8450` has a second branch down the track x 4822.
+- **The end-of-frame lead group's NOR driver output is not CUDISP's by this route** (`eof` runs 25-26;
+  wiring, firm): `eof_w17362` is drawn 840 px south and 2,150 px west, the last 1,060 px on the bottom bus line y 18473,
+  to the line's end pad (6322,18472) and 60 px of its poly row; it passes `cudisp_drv_in`'s label by
+  1,400 px with no tap. No load reached yet; the row goes on west into the bottom-left logic.
+
+Applied: master list rows `bl0` (run 2; next step 1 is now the loads of `bl0_w17210`; step 4 reworded,
+the source being found; the seven tracks arriving from `busl`), `eof`, `busl` (status to run 9, the
+registers step done, a new Next), `cdp4` (continue), `bc2`-`bc4` (the gate column under the rail
+x 7292-7342 is in `bc3`'s region, two of its units drawn by `bl0`), `bl1`/`bl2` and `busb` (what
+arrives and what was seen beside `eof`'s wire), the `rename` row (three renames wait for the refresh);
+the Open joins row of the two read selects removed. **Ambiguities**: AMB-039 resolved as (a), a plain
+crossing (the row y 13744 has its own driver, `rsel13_buf`); AMB-044 new (the track of `rsel12_buf`
+over the row y 13375 at (6452,13372-13389): the same kind, assumed a plain crossing, no `?` item).
+**Re-read list**: nothing new (`eof` run 26 met trap 39 once more, in a comment only: a column under a
+thin metal called poly from its colour is a diffusion wire; nothing drawn was affected). Corrections
+sections in `regs`, `cdp3`, `cdp4`, `bl0`, `lc3`, `bc3` and `busl` notes. `notes/operation.md`: the
+tracers had written their own passages; here only the place of the fourth reset copy's bullet (last in
+the list, with the sentence above it reworded) and the register's range. Floor plan: no coarse block is
+replaced; the left bus field's line says fourteen pieces.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join, 748 floor-plan blocks.
+Coverage: 69.4% traced; in some package region 99.9%; untraced and in no Queue row 0.4%. Not done here:
+the refresh (three renames wait, in the master list's `rename` row; the header counts of
+`notes/operation.md` are the eleventh refresh's).

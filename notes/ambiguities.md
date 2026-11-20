@@ -770,6 +770,11 @@ register read select: a further reason for (a). Still open until the row is draw
 **2026-11-20**: `cdp4` (run 2) drew the row's east end: it is gate 2 of the NOR that makes `cdp4_rst`,
 with no other contact (the open join `rsel13_buf_u`). Under reading (b) latch D's enable would also be an
 input of `cdp4_rst`. Not settled: the row west of x 7550 is `busl`'s and is not drawn.
+**Resolved 2026-11-20 as reading (a), a plain crossing** (`busl` run 8, richtw1; reviewed, no findings):
+its "settled by" is met from the other direction. The row y 13744 is drawn end to end: it has a driver
+of its own, `rsel13_buf`, through a pad with a contact at (6495,13744) on the track x 6494, and ends in
+gate row 2 of `cdp4`'s NOR. A contact at (7145,13738) would short latch D's enable `tc2_sr_g` to R13's
+read select, two driven nets. Nothing new was read at the crossing itself.
 
 ## AMB-040: the structure at x 10530-11400, y 11740-12350 on the write strobes of R12 and R14 (2026-11-19)
 
@@ -828,3 +833,20 @@ the ripple counter's clock `lc3_w9947`. **2026-11-20, later** (`eof` run 23): th
 colour without a control band, and a like band elsewhere read both ways from single rows (trap 38): the
 colour evidence is to be measured again with a control (Re-read item R49). What would settle it: that
 measurement, or a sharper stripped shot of (8740-8780, 15185-15250).
+
+## AMB-044: `rsel12_buf`'s track over the poly row y 13375, at (6452,13372-13389) (2026-11-20)
+
+Proposed by `busl` (richtw1, run 8; its Ambiguity 15). The same kind as AMB-039. The row is
+`cdp4_bus_s1`'s channel-2 row (a data line of latch row C). Neither metal shot passes the metal test for
+18 px, the row's full height, where the track x 6452 crosses it; both chips are reddish and dim there
+(chip 2 137/81/28, chip 1 130/54/27, against 206-212/159-171/79-89 on the track x 6494 over the same
+row). Readings: (a) a plain crossing with a mark on the metal; (b) a contact onto the row, which would
+put R12's read select on a data line of latch row C; (c) a break, which would leave row E's read gate
+without a driver. **Assumed (a), drawn as a plain metal, no `?` item** (as AMB-039 was): the track's two
+edge lines run unbroken through the patch in both chips (tracer and reviewer); no pad, no ring, no
+widening of metal or row; no hole in the clean shot (222/165/121, as under x 6494); the track's real tap
+480 px south has all of them; the row has its own pad at (5538,13375). The reviewer adds that the same
+reddish patch occurs in one chip alone on unbroken crossings ((6452,14304) chip 1; (6494,13616) and
+(7055,13852) chip 2). Against: both chips are dim at the same spot, as at AMB-039 (which the row's ends
+settled as a plain crossing). Nothing in these photos can add to it. What would settle it: a sharper
+metal shot of the spot, or simulation (reading (b) would drive a latch input whenever R12 is read).

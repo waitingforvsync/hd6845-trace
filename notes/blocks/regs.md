@@ -271,3 +271,7 @@ Round 4: no findings that change a connection.
 
 - "`wr_r14` ... its branches into the cells are not traced" and "6 (believed, from the row)": the branches are the strobe loops of R14's six latch cells; row A is R14, firm (`cdp3` row A, 2026-11-20).
 - The two undrawn rows y 13744 and y 13852 end as gates 2 and 4 of the NOR that makes `cdp4_rst` (`cdp4` run 2); their east parts step south to y 13759 and y 13873 at x 7550 and are drawn there as the open joins `rsel13_buf_u`, `rsel12_buf_u`.
+
+## Corrections (coordinator, from the handoffs of 2026-11-20, second batch)
+
+- Piece 3, "The 4,600 px between are read (notes), not drawn", and the two joins "believed": drawn by `busl` run 8 (pieces `r12`, `r13`) and reviewed, no uncertain item: `rsel12_buf` and `rsel13_buf` run from this package's ports at the south edge of the left bus field to its tracks at y 10400 on one thin metal each, and they are the read gates of `cdp3`'s rows E and F. The path is as read here; the tap contacts are at (6452,13854) and (6495,13744) (here: (6450,13852), (6492,13744)).

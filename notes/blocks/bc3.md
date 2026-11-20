@@ -138,3 +138,7 @@ Round 1: no findings in what is drawn; one undrawn tap on the output listed in N
 - Inventory, "Vertical metal rails ... x ~8350-8390 and x ~8520-8560 (whole height)": the rail x 8338-8382 steps west to x 8316-8362 at y 17240-17270 and ends at y 17568 (20 px of bare ground to the metal y 17599-17614; `eof`, piece `g174`).
 - Inventory, "Right gate group ... a big diffusion area x 8250-8400, y 17450-17620": it is the active area of `eof`'s piece `g174`, x 8258-8368, y 17266-17560, with three gates on it.
 - Under the rail x 8686-8732 `eof` draws everything from y 15886 to y 17290 (two copies of `tl1`'s latch in series, two inverters, a NOR); the `findcell` hit `tl5_inv` at (8687,17305) is still undrawn.
+
+## Corrections (coordinator, from the handoffs of 2026-11-20, second batch)
+
+- The gate column under the rail x 7292-7342 (bands at y 16866-16884, 16986-17051, 17160-17180, 17290-17310 and on south: `tools/railprof.py 7295 7340 16860 17400`) is in this package's region. Its units at y 16941-17235 are drawn in `trace/bl0.txt` (`bl0` run 2): `bl0_w17085` = NOT(`lpstb_b` AND `res_b`) and `bl0_w17210` = NOT `bl0_w17085`, the light pen strobe passed only while RES is high. The rail is not drawn here (this package draws x 7495 `vcc` and x 7666 `vss`); `bl0` draws its stretch y 16925-17240 and names it `vss` by the orientation of the gates only. `bl0`'s `vcc` ports at (7470-7520, 17020 and 17240) are on this package's rail x 7495.
