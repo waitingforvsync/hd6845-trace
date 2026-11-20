@@ -710,3 +710,111 @@ B 8328,8096:8370,8122
 P 8323,8192:8357,8227
 C 8334,8209 s=22x22
 M 8335,8200 y9160 w=14
+
+# ================================================================ run of 2026-11-20 (west logic)
+# ---- piece u1: U1 of the gate column (y 7940-8060): eof's inverter cell eof_dinv moved by 0,-390,
+# written out here (the cell is eof's file's) and to be fitted to this copy's own measurements.
+D 7546,7940:7603,8036
+C 7568,7958
+P 7313,7986:7614,8006                 # gate row, from the pad (7313,7995) to its rounded end east of the rail
+P 7296,7979:7330,8012                 # pad
+C 7313,7995
+N P 7450,7996 cdp3_w7996
+D 7488,8014:7556,8038
+D 7488,8014:7522,8052
+B 7486,8012:7524,8054
+P 7480,8028:7520,8049                 # a poly cap on the node's buried contact (it goes nowhere)
+D 7594,8015:7734,8042
+D 7728,7984:7778,8042
+C 7750,8018
+P 7666,7993:7722,8070                 # the load plate; its foot runs east as the output
+P 7700,8054:7838,8072                 # the foot: east to a pad
+P 7821,8046:7855,8080                 # pad (7838,8062)
+C 7838,8062
+N P 7760,8063 cdp3_w8063
+D 7640,7967:7660,8020
+D 7640,7967:7690,7987
+P 7666,7970:7690,8000
+B 7662,7965:7694,7991
+M 7575,7925 y8060 w=46                 # the VSS rail (eof draws it north and south of this unit)
+M 7749,7925 y8060 w=54                 # the wide VCC metal
+# input: a thin metal x 7309-7323 between the row's pad and a pad (7313,8625), whose poly goes on
+# east into the gates at y 8620-8800 (port). It ends on both pads.
+M 7316,7995 y8625 w=14
+P 7296,8608:7330,8642
+C 7313,8625
+P 7313,8615:7360,8635                 # the pad's poly east (port at x 7360)
+# output: a metal x 7826-7848 from the foot's pad south through a pad (7836,8430) to a pad
+# (7838,8582), where it ends. The two pads' polys are gates of the cluster beside row A (ports).
+M 7837,8062 y8582 w=20
+P 7818,8413:7855,8447                 # pad (7836,8430)
+C 7836,8430
+P 7836,8419:7975,8441                 # its poly row east: gate G2 of the cluster (piece ku)
+P 7820,8566:7856,8598                 # pad (7838,8582)
+C 7838,8582
+P 7790,8566:7838,8590                 # its poly west (port at x 7790)
+
+# ---- piece ku: the upper gate group beside row A, under the rail x 7986-8030 (vss)
+#     cdp3_w8480 = NOT( cdp3_w8315 OR (NAND's line AND cdp3_w8063) )
+#     cdp3_w8355 = NOT( NAND's line OR cdp3_w8315 )       (through the ?D below)
+M 8008,8300 y8460 w=44                 # the rail on north of where it is drawn
+D 7982,8318:8030,8380                 # top box
+C 7998,8338
+D 7958,8355:8027,8452                 # column: G1, the node between, G2
+D 7972,8450:8040,8500                 # node N (cdp3_w8480)
+D 8003,8498:8040,8540                 #   its east finger down under the row G3
+D 7985,8537:8035,8592                 # box B2 on the rail
+C 7995,8562
+# G1: the row of the pad (7878,8385) of the metal x 7880 from the gate beside row C (its output line)
+P 7860,8368:7896,8402                 # pad
+C 7878,8385
+M 7880,8385 y9150 w=22                # the x 7880 line, from cdp3's upper piece (y 9150) up to the pad
+P 7878,8377:8000,8400
+P 7990,8384:8064,8410                 # the row's jog; it runs on east of the rail
+P 8040,8322:8064,8410                 #   and north as a column across the strip below
+# G2: the row of u1's output
+P 7950,8428:8030,8452
+# G3: an L from the pad (7878,8315), on which a metal x 7880 from the north ends
+P 7860,8298:7896,8332                 # pad
+C 7878,8315
+M 7880,8250 y8315 w=22                # the metal from the north (port)
+N M 7880,8270 cdp3_w8315
+P 7790,8305:7878,8328
+P 7783,8305:7803,8525
+P 7783,8502:8048,8525                 # the row: over two fingers, x 7932-7966 and x 8003-8040
+# the west finger and its node K
+D 7930,8457:7966,8498                 # K: its contact carries the metal x 7925-7960
+C 7937,8474
+D 7932,8496:7966,8530
+D 7930,8527:7968,8560                 # Wb, below the row
+?D 7966,8538:7987,8558                # Wb to B2 across the gap between the two metals (a dark bar; assumed joined)
+# the strip east of the top box: pull-down under the column, node, load
+D 8028,8335:8102,8375
+D 8068,8373:8112,8410                 # the node's stem south into the buried contact
+B 8098,8385:8128,8412
+D 8098,8338:8152,8375
+D 8150,8338:8200,8385                 # VCC box
+C 8187,8362
+P 8100,8318:8150,8384                 # load plate
+P 8102,8380:8126,8408                 # its finger into the buried contact
+P 8100,8283:8125,8320                 # the plate's poly north
+P 7940,8283:8125,8300                 #   and west along the row to a pad
+P 7922,8283:7958,8318
+C 7940,8300
+M 7942,8300 y8474 w=30                # metal x 7927-7957 from the pad south onto K's contact
+N M 7942,8400 cdp3_w8355
+M 8180,8280 y8520 w=40                # the wide metal over both VCC boxes
+N M 8180,8290 vcc
+# N's load
+D 8038,8475:8102,8500
+D 8100,8473:8160,8505
+D 8158,8458:8202,8502                 # VCC box
+C 8185,8480
+P 8100,8470:8155,8520                 # load plate
+P 8095,8430:8155,8472                 #   one poly with the pad above it
+C 8118,8448
+P 8062,8446:8100,8466                 # finger west
+B 8058,8443:8084,8472
+D 8060,8445:8082,8478
+M 8115,8448 y8520 w=28                # metal south from the pad (port)
+N M 8115,8500 cdp3_w8480
