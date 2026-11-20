@@ -829,6 +829,16 @@ test and the clean shot's hole test on every straight segment (`tools/tl5_tracks
   northern run at (7155-7185, 7640-7655) (both metal shots plain: dirt on chip 1). The greenish rows
   under the tracks (y 13376, 13503, 14219, 14266, 14483, 14742, 9796, 10057) are green under every
   track that crosses them (trap 15).
+- **The foot rows between their pads and x 7550** (view `f10_rows.png`, 1.8x, with the trace;
+  `f10_e7400.png`, 2.7x, four shots; `tools/busl_rowy.py` at x 6970 .. 7536: centres 14827 and 14870
+  throughout): straight, no pad, no step. Row y 14827 lies in the open at x 7355-7445 (no track
+  crosses it there: `bc1_ld_a`'s metal jogs east along y 14803 above it): orange-brown poly in both
+  metal shots, dark in the clean shot (`tools/tl5_tracks.py h 14827 6950 7550` lists that stretch as
+  low red minus green: open poly, not holes). **Over row y 14870 from x 7378 to the region's edge lies
+  a wide metal** (about y 14840-14905, its west edge at x 7378; the row's two edges print through it
+  as dark lines): it is drawn by no package and is not followed here (believed supply). No contact
+  onto the row: the clean shot is protected cream along the whole row with no hole
+  (`tools/tl5_tracks.py h 14870 6905 7550`: none); the dark blob at (7470,14875) is on chip 2 only.
 - **The rows' ends outside the piece.** East of x 7550 (view `f10_east.png`, 1.6x): row y 14827 runs on
   to a pad at about (7794,14826) and row y 14870 to a pad at about (7836,14872), each with a contact
   ring, under `bc1`'s bus metals (not drawn, `bc1`'s region; which way each pad's metal leaves was not
@@ -1509,6 +1519,9 @@ Round 1: no findings.
   view at 5x agrees; `tools/follow.py` at `--gap 16` jumps it going north from (6429,10426), and going
   north from (6126,10426) it steps from line 2 onto line 3 at y 9775, in `lc3`: ground bright in chip 2
   only, guide trap 30).
+- The wide metal over row y 14870 (x 7378 to beyond x 7550, y about 14840-14905; view
+  `f10_e7400.png`): drawn by no package, not followed (believed supply; `bc1` (continue) has "the VSS
+  plate at the foot of the s0 rail" nearby).
 - Pieces `fb` and `fa`'s ends: east of x 7550 the rows y 14870 and y 14827 to their pads at about
   (7836,14872), (7794,14826) and the metals from those pads (`bc1` (continue), with piece `lc9`'s seven
   rows); west of x 7060 the rows y 7214 and y 7171 across the crossing field, under `eof`'s staircase
