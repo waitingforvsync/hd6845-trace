@@ -32,3 +32,8 @@
 6215,6350:7225,8820     route  rcs_mv out of the top-left logic | the poly column x 6237 south under ten metals to a pad (6232,6911), a metal east along y 6913 and south on x 7208, a poly hop under the staircase metals
 7325,6400:7545,8820     route  tc2_r5718 from the top-centre logic | one metal south (x 7533, x 7511, west along y 7453, x 7360) to a pad, a poly hop under the staircase metals
 7405,8845:7595,8882     route  third line's row from under column 0's rail | a poly row y 8863 from the east (under the wide rail, uncertain there) to the pad (7423,8863)
+6265,10400:6660,14500   route  latch D's data and two more lines: bundle lines 11-13 | lc1_w7780, busl_x6559, busl_x6603: three more lines of the staircase bundle inside rcs_e4's (arms y 11923-12010 and y 12813-12899), onto the pads of the rows y 14480, 14437, 14393
+6350,14380:7550,14495   route  foot rows y 14393, 14437 and y 14480's west part | poly rows from the three lines' pads east: two toward the bus of the bottom-centre logic, the third to a pad (7057,14480)
+7045,14465:7180,15235   route  latch D's data out of the field | from the pad (7057,14480) a metal south (x 7058, jog y 14588, x 7100) to a pad (7100,15175) and a poly row y 15218 east
+6590,8255:6925,10400    route  the same three lines north of the field | tracks x 6602, 6646, 6689 (arms y 9886-9970), diagonals, pads, poly columns under the staircase metals, second pads
+6440,7235:6925,8330     route  the three lines' north ends | lc1_w7780's poly row y 7780 from the left-centre strip to its pad (6819,7780); metals x 6819, 6861, 6905 to the end pads (6861,7257), (6904,7301) of the rows y 7258, y 7300
