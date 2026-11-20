@@ -346,10 +346,10 @@ P 7285,17629:7350,17651                            #   under the rail it lies 6 
 
 # ================================================================ piece u45 (run 4): the fourth and fifth units, a cross-coupled pair
 #     bl0_w17440 = NOT( bl0_w17210 OR bl0_w17610 )                     bl0_w17210 on two bands in series (A, B: one poly)
-#     bl0_w17610 = NOT( bl0_w17440 OR bl0_w17560 OR (bl0_w17337 AND bl0_w17687) )
+#     bl0_w17610 = NOT( bl0_w17440 OR busl_x6906 OR (bl0_w17337 AND bl0_w17687) )
 # The pull-downs are wide: their diffusion runs from an edge line x 7240 to the rail's east side. Unit 4
 # (top node bl0_w17440, bands A and B, the box of the rail contact (7322,17560)) and unit 5 (row
-# bl0_w17560 over the open column, the node bl0_w17610 with its buried contact, bands C and D, the box
+# busl_x6906 over the open column, the node bl0_w17610 with its buried contact, bands C and D, the box
 # of the rail contact (7308,17727)) each have a load east of the rail and one more pull-down there,
 # gated by the other's output.
 M 7317,17350 y17755 w=50                           # the rail on south to its end
@@ -391,23 +391,51 @@ N P 7424,17550 bl0_w17610
 D 7243,17528:7330,17546                            # strip below band B (on the rail by the box)
 D 7243,17528:7278,17602                            # the open column: under R3 its east edge is x 7278 (a field pocket x 7278-7305)
 D 7243,17598:7292,17724                            #   the buried contact, C, D
-P 7215,17549:7297,17572                            # row R3 from the west (port)
-N P 7225,17560 bl0_w17560
+P 6970,17549:7297,17572                            # row R3 from the west: from the pad (6970,17561) under four tracks (piece w5)
+N P 7225,17560 busl_x6906
 B 7240,17590:7268,17620
 P 7188,17595:7266,17615                            # X's poly west to a pad
 P 7172,17589:7206,17621
 C 7188,17605
-M 7188,17605 y17640 w=20                           # the second metal on x 7178-7198, on south (port)
+M 7188,17605 y17782 x7384 w=16                     # the second metal on x 7178-7198: south, a corner (7192,17786), east to a pad (piece w5)
 D 7290,17603:7370,17616                            # X under the rail and east into the buried contact's diffusion
 D 7290,17603:7343,17702                            # under the rail: X, band C, node, band D
 D 7364,17612:7402,17664                            # the block east of the rail (X)
 D 7398,17603:7470,17630                            #   its strip under the load plate
 D 7468,17570:7522,17660
 C 7495,17615
-P 7215,17676:7295,17698                            # row D from the west (port)
+P 7128,17676:7295,17698                            # row D, from the pad (7142,17713) (piece w5)
 P 7285,17672:7350,17696                            #   under the rail, a few px further north
 N P 7225,17687 bl0_w17687
 D 7290,17700:7347,17752                            # box with the rail contact
 C 7308,17727
 D 7243,17703:7420,17722                            # strip along the bottom
 D 7372,17660:7402,17705                            # T_n's channel from the block down to the strip
+
+# ================================================================ piece w5 (run 5): the three wires of the pair
+# ---- busl_x6906, the line that clears the pair: busl's track x 6841 ends at y 15000; it runs on south
+# to a pad (6842,16217), under the bus of horizontal metals as a poly column to a pad (6842,16562), on
+# south as a thin metal, east along y 17086, south at x 6970 to a pad (6970,17561), whose poly row is
+# the gate of the fifth unit's first pull-down. No pad, contact or branch on the way.
+M 6841,15000 y16217 w=14
+N M 6841,15500 busl_x6906
+P 6826,16200:6858,16234                            # pad
+C 6842,16217
+P 6845,16217 y16562 w=18                           # poly column under the bus
+P 6826,16546:6858,16578                            # pad
+C 6842,16562
+M 6842,16562 y17085 x6970 y17561 w=14
+P 6954,17545:6988,17578                            # pad
+C 6970,17561
+# ---- bl0_w17687 (band D): its row ends west on a pad (7142,17713); a thin metal runs south, east at a
+# corner (7151,17829) to a pad (7424,17822), whose poly row goes on east (port).
+P 7126,17690:7160,17732                            # pad, one poly with the row's west end
+C 7142,17713
+M 7144,17713 y17826 x7424 w=14
+P 7408,17806:7441,17838                            # pad
+C 7424,17822
+P 7424,17821 x7465 w=20                            # poly row east, under the supply rail (port)
+# ---- bl0_w17610: the end of its metal, a pad (7384,17779) whose poly row goes on east (port).
+P 7367,17763:7401,17795                            # pad
+C 7384,17779
+P 7384,17779 x7465 w=22                            # poly row east, under the supply rail, to a pad at about (7553,17775) (port)

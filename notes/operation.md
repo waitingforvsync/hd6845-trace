@@ -185,10 +185,11 @@ run on south under a bus of metals and east to one gate in the bottom-centre log
 pen strobe passed only while RES is high**. So RES has no further use of its own: with LPSTB low it
 resets, with LPSTB high it forces the carry, and while low it blocks the light pen strobe. `bl0_w17210`'s
 metal has two loads (`bl0` run 3; firm): an inverter, `bl0_w17337` = NOT `bl0_w17210`, and the two units below it, a cross-coupled pair (run 4; firm):
-`bl0_w17440` = NOT(`bl0_w17210` OR `bl0_w17610`), `bl0_w17610` = NOT(`bl0_w17440` OR `bl0_w17560` OR
+`bl0_w17440` = NOT(`bl0_w17210` OR `bl0_w17610`), `bl0_w17610` = NOT(`bl0_w17440` OR `busl_x6906` OR
 (`bl0_w17337` AND `bl0_w17687`)). **`bl0_w17610` is a flag set by the gated light pen strobe**; it holds
-after the strobe ends and is cleared by `bl0_w17560`, or by `bl0_w17687` once the strobe is low. Neither
-clearing line nor the flag's use is traced yet (believed: it times the latching of R16/R17).
+after the strobe ends and is cleared by `busl_x6906`, or by `bl0_w17687` once the strobe is low. The first is a
+track of the left bus field (run 5: drawn from the field's foot to the gate; its source lies north of the
+field); the second line's source and the flag's use are not traced yet (believed: it times the latching of R16/R17).
 
 Firm for the NOR, its three copies and the four joins (no uncertain item on them); the latches'
 own equations are marked as before. Believed: this is the datasheet's reset, which RES gives
