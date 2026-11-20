@@ -148,5 +148,5 @@ vss           M      8338-8382,16300          -    column A's VSS rail, bc1's R1
 eof_w17212    P      8990,15812-15832         in   the NOR's second input: the poly row west of the pad (9053,15822) (believed: to the pad (8838,15822) of the thin metal x 8792)
 vss           M      8686-8732,17300          -    column B's VSS rail on south of the NOR's second VSS box (drawn y 15870-17300)
 # Piece g174e (run 24): the east side of the same unit; the six ports of piece g174 on the rail's east edge (x 8368-8372) are gone: drawn on
-eof_w17362    M      8461-8477,17634          out  the NOR's output: the metal south of the pad (8467,17603) on the load's poly (follower: south to a corner (8466,18478), west to (7552,18472); thin, over the bottom bus field's rows; not checked, not drawn)
+eof_w17362    M      7340,18467-18480         out  the NOR's output (piece o362): the metal west of the pad (7384,18473), the third bus line y 18473 (follower: west to (6318,18471); not checked, not drawn)
 vcc           M      8488-8558,17560          -    R2 on south of the NOR's VCC box and past this unit's load (drawn y 15870-17560; x 8488-8558 south of y 17236; it runs on)
