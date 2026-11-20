@@ -8,7 +8,7 @@ metal-shot pixels. Evidence: `cache/scratch/bl0/` (`survey.md` holds every measu
 ## Status
 
 Run 11 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 12:06 -0600). One piece of wiring, no transistor, no
-uncertain item: the last two tracks from the left bus field.
+uncertain item; reviewed (round 13: no findings): the last two tracks from the left bus field.
 
 - **Piece `w11`** (wiring, 2,500 px). `cdp4_bus_s0` (track x 5451): 45 px south of y 15000 it turns west
   onto a pad (5364,15044), whose poly row y 15033-15053 runs west under the tracks into the left array
@@ -1009,6 +1009,25 @@ reference); west of x 4750.
 
 Round 12: no findings.
 
+### Run 11
+
+Round 13 (full review of piece `w11`; fresh Fable 5.2 reviewer; 2026-11-20 12:14 -0600; commit a588bab; images
+`cache/scratch/bl0/review-13/`). Told to suspect: the track x 4822 over its whole length (the four unread
+candidates, the crossings of three diffusion wires and of the poly rows, a jog onto a neighbour); both
+end pads; `cdp4_bus_s0`'s corner and the other net's metal south of it; its poly row under a dozen
+tracks; the joins with `busl`. Checked with the two-chip metal test, a per-row width scan of the track
+in both metal shots, text maps and four views at 5-6x: the track one metal from y 14984 to the pad, 9-14
+px wide throughout; the four candidates and the three strip crossings plain (the green there is residue
+or spans the whole strip); the pad (4823,16713) a contact with metal from the north only and only the
+east row leaving; the corner one metal, 32 px without metal south of it; the pad (5364,15044) a contact
+(one lollipop outline in both metal shots); the row poly under every track and in every gap, bare
+ground north and south in all eleven gaps, no hole, no diffusion under the wide metal; both joins with
+`busl`. A correction to the brief, not the trace: the rows y 15088 and y 15412 end on pads at x 4909 and
+do not cross the track x 4822. Not checked: beyond the two ports; the track between the listed crossings
+on views (tools only).
+
+Round 13: no findings.
+
 ## Not done
 
 - **What pulls `larr_l0_g0` and `larr_l0_g1` up** (neither pull-up is in `larr`'s rows or in the two
@@ -1042,8 +1061,11 @@ Round 12: no findings.
   (`bc1`, `bc3`); `lc3_e9577`'s diffusion wire west of x 4780 (the left array).
 - Beyond this package: `cdp4_bus_s0`'s poly row west of x 4780; `lc2_w8450`'s poly row east of x 4930.
 - The six diffusion wires west of x 4780 (the left array's side).
-- Both rails of the gate group south of y 15800; the rest of the master-list row's region (the bus
-  wiring x 4780-5850, the tracks x 6452-6841, the gate group south of y 15800).
+- Seen in this package's region and drawn by no one: a metal of another net on `rst_n`'s row (it comes
+  down a track at about x 5495, runs west along y 15088 to x 5405 and goes on south); the tracks east
+  of the bundle at about x 7015, 7055, 7100 (`bc1`'s side); a pad at about (5364,15045)'s neighbour
+  rows. Everything `busl` hands over at y 15000 west of x 7000 is drawn.
+- South of y 15800 (`bl1`/`bl2`'s region): both rails of the gate group and the gate group there.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
