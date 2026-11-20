@@ -64,7 +64,7 @@ Which columns each row occupies:
   x 7826-7848 to two pads whose polys go into the cluster beside row A); and **the output line of the gate
   beside row C** (the x 7880 line) drawn up to its end pad (7878,8385). See "West logic" under Logic.
 - **A clock inverter west of the gate column** (run of 2026-11-20 13:55 -0600; piece `ckb`, 2 transistors and
-  1,300 px of wire, no uncertain item): **`lc2_w8646` = NOT `ck_out`**, a wide inverter (pull-down W 210)
+  1,300 px of wire, no uncertain item): **`lc2_w8646` = NOT `ck_out`**, a wide inverter (pull-down W about 260)
   at x 7475-7780, y 8660-8845 whose gate is the poly of `eofw`'s corner pad (7446,8732). Its output is
   U1's input (so `cdp3_w8063` = NOT `lc2_w8646`, a buffered copy of `ck_out` into the cluster beside row
   A) and, by a staircase line of the bus field, **the enable of `lc2`'s latch C**. The name `cdp3_w7996`
@@ -299,7 +299,7 @@ dim); `cdp2` names the bus line at x 8075 `db_b6`. If they are one metal, the ga
 ### The clock inverter (piece `ckb`, 2026-11-20; traced)
 
 Under the VSS rail (x 7552-7645 at this height) and the wide VCC metal (x 7682-7770) lies one diffusion,
-x 7547-7712, y 8660-8770 (`railprof.py 7560 7615 8640 8810`, `7685 7710 8640 8860`). The poly of `eofw`'s
+x 7494-7712, y 8658-8770 (it runs on 50 px west of the rail: review round 4) (`railprof.py 7560 7615 8640 8810`, `7685 7710 8640 8860`). The poly of `eofw`'s
 corner pad (7446,8732), which is `ck_out`, enters from the west along y 8722-8745, turns north at
 x 7625-7648 and east along y 8678-8698 to its end at x 7722: it parts the top-left of the diffusion (two
 rail contacts, (7572,8680) and (7592,8688)) from the rest, the output node. East of the rail a second
@@ -309,7 +309,7 @@ contact (7598-7626, 8768-8798) on a tab. The thin outlined strip at x 7655-7672 
 is the usual artefact of a gap between metals (layers notes), not layout.
 
 ```
-lc2_w8646 = NOT ck_out            pull-down W 210 (the poly's whole path across the diffusion); load 70/29
+lc2_w8646 = NOT ck_out            pull-down W about 260 (the poly's whole path across the diffusion); load 70/29
 ```
 
 The node leaves west by a neck (y 8750-8764: a tab bounded by edge lines at y 8747 and 8765 in both
@@ -670,6 +670,29 @@ only: `cdp2`'s cell already draws the metal to y 7821 with the contact at y 7789
 and "taps not drawn"; corrected); c7's metal centre is x 10414-10416 (drawn 10419, overlapping).
 
 Round 3: no findings.
+
+Round 4 (full review of piece `ckb`; fresh Fable 5.2 reviewer; 2026-11-20 14:02 -0600; commit 8bfbad7; images
+`cache/scratch/cdp3/review-4/`). Told to suspect the staircase line as a whole (nine corners, the wrong
+neighbour, the corner at (6843,8541), the meeting with `lc2`'s metal), the neck and buried contact of
+the output, diffusion round the gate poly's ends, the strip between the two metals, the load's tie.
+Checked: all nine corners at 4x in both metal shots (one metal round each, nothing beyond, bare ground
+to the neighbour); all ten pieces by `tl5_tracks.py` (bars of 15 px or less, no hole), three at 4.6-6x;
+the poly across the whole diffusion with its east cap past the edge; the rail contact; no contact on
+the node; the strip x 7655-7672 absent from three shots (the gap is diffusion there); the load, tail,
+tie, VCC box and contact; the output row continuous to the pad; extraction and `sameconn.py`. Could not
+check: diffusion under the rail's edge line at x 7547; the buried contacts' insides; `lc2`'s metal west
+of x 6450 beyond the metal test.
+
+Findings, geometry only:
+
+1. The diffusion runs on west of the rail to x 7494 (an outlined box x 7494-7546, y 8658-8716, and the
+   band south of the poly; chip-2 stripped red minus green 18-21 there against -3 to -16 on field): the
+   pull-down is about 260 wide, not 210. Confirmed (`px.py row 8690 7476 7544 8 acid`); fixed.
+
+`tools/t.sh cdp3 sameconn.py 8bfbad7`: connections identical. `.venv/bin/python tools/sameconn.py 8bfbad7`:
+connections identical.
+
+Round 4: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
