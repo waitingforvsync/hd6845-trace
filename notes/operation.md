@@ -175,10 +175,12 @@ whatever the lower seven hold** (and the carry into s10 is then "s7-s9 all ones"
 in reset meanwhile. Believed, not traced: this is the test mode of the 6845 family, which lets the upper
 half of the 14-bit counter be run through in 128 steps. Open: what pulls `larr_l0_g0` and `larr_l0_g1`
 up (so each "is" above reads "can be high only when"); which row is which address bit (s0 = bit 0 is
-believed, `notes/blocks/larr.md`); and where the two pins go beyond this: each runs on south from the gate
-group to a pad at (6882,16170) and (6928,16217) and on in poly, not followed (the light pen strobe's own
-logic is expected there, and a second use of RES low with LPSTB high cannot be excluded until those
-ends are found).
+believed, `notes/blocks/larr.md`); and what the light pen strobe then does. **Where the two pins end** (`bl0` run 2, 2026-11-20; firm): both
+run on south under a bus of metals and east to one gate in the bottom-centre logic and end there,
+`bl0_w17085` = NOT(`lpstb_b` AND `res_b`), inverted once: `bl0_w17210` = `lpstb_b` AND `res_b`, **the light
+pen strobe passed only while RES is high**. So RES has no further use of its own: with LPSTB low it
+resets, with LPSTB high it forces the carry, and while low it blocks the light pen strobe. The loads of
+`bl0_w17210` are not traced (believed: the light pen register's latch strobe).
 
 Firm for the NOR, its three copies and the four joins (no uncertain item on them); the latches'
 own equations are marked as before. Believed: this is the datasheet's reset, which RES gives
