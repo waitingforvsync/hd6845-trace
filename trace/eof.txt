@@ -1567,7 +1567,7 @@ N P 8780,16216 eof_w16216
 # Pieces cap16 and w16693 (run 20, 2026-11-20): the two outputs of the latch lat16 on east.
 # ---- cap16: the lower node (eof_w16823) ends on a large diffusion. Its east leg (y 16724-16745)
 # runs on east under the track x 9056 into the gap between the tracks x 9056 and x 9099, turns
-# north (x 9068-9090) and ends in a buried-contact box on a diffusion pad (9056-9102, 16672-16714:
+# north (x 9068-9090) and ends in a buried-contact box on a diffusion pad (9056-9102, 16672-16706:
 # green lobes either side of the poly in the clean shot); from the pad a neck x 9070-9088 runs
 # north into a diffusion rectangle x 8908-9254, y 16477-16607 (with a step x 9167-9254 up to
 # y 16434) that lies under six tracks with no contact and no gate: nothing else is on it.
