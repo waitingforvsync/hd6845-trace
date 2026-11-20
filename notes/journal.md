@@ -2617,3 +2617,48 @@ three minutes (commit 95bbae7 pushed although the gate had printed FAIL: the pus
 `out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 786
 floor-plan blocks. Coverage: 70.1% traced; in some package region 99.9%; untraced and in no Queue row
 0.4%. The refresh follows.
+
+## 2026-11-20 22:08  Refresh
+
+Twelfth refresh, after the eighteen handoffs of this evening. Renames in two batches, each checked with
+`tools/names.py compare` ("only names changed"), `tools/signals.py` (0 outside the glossary) and
+`signals.py --docs` (no former names):
+
+- `tc2_sr_g` -> `ck_out`, `tl4_w4590` -> `ck_out`, `bc3_w17646` -> `ck_out` (`tl4` runs 11-12: three firm joins; the gate line of the latches of the top-left, top-centre and left-centre logic is the buffered clock)
+- `cdp3_bl_c2` -> `db_b5` (`cdp3`: one metal with `cdp2`'s bus line); `cdp3_w7996` -> `lc2_w8646` (`cdp3`, piece `ckb`); `eof_w17362` -> `disptmg_drv_in` (`eof` run 27); `bl0_w15088` -> `rst_n` (`busl` run 9); `rsel12_buf_u` -> `rsel12_buf`, `cdp3_gate_e` -> `rsel12_buf`, `rsel13_buf_u` -> `rsel13_buf`, `cdp3_gate_f` -> `rsel13_buf` (`busl` run 8; the last three sets waited since this afternoon)
+
+One open join is left (`ck_a_u`). **Left on purpose** (the master list's `rename` row): `cdp3_bl_c3`..`c7`.
+Each is one firm metal with `cdp2`'s column lines `cdp2_c_s3_bus`..`s7_bus`, and those meet
+`db_b4`..`db_b0` only through the narrow necks of AMB-019 (trap 17), so they join the column names
+that already wait for that item; a rename onto another placeholder would have to be undone. `cdp3`'s
+tracer proposed all six onto `db_b#`: only c2's join is free of an uncertain item. Also left:
+`cdp3_bl_c1`, `cdp3_bl_c0` (not followed north); `bc1_g6_in` / `eof_w17040` and `bc1_ld_a` / `cdp4_ld`
+(through uncertain stretches); the template pin names; the `eof_w#` terms of DISPTMG's NOR and the
+light pen flag `bl0_w17610` with its clears (function not established). Glossary: the rows of
+`ck_out` (rewritten: the whole route of the clock to the latches), `tl3_e3000`, `cdp1_lw1` at
+`tc2`'s latch (the row that was the gate line's), `bl0_w#`, `cdp3_w#`, `cdp3_bl_c#` and the two
+rows of the R12/R13 read selects. About sixty sentences that the renames made circular or false
+("the driver is not found") were reworded; nine and twenty-nine of them rebuilt from the committed
+text with the old wire named by its former owner.
+
+**Branches in flight** (`eof`, tom-seddon; `busl`): after merging main, run in the branch:
+
+```
+tools/rename.py tc2_sr_g ck_out tl4_w4590 ck_out bc3_w17646 ck_out cdp3_bl_c2 db_b5 cdp3_w7996 lc2_w8646 eof_w17362 disptmg_drv_in bl0_w15088 rst_n rsel12_buf_u rsel12_buf cdp3_gate_e rsel12_buf rsel13_buf_u rsel13_buf cdp3_gate_f rsel13_buf    # pairs: old -> new
+```
+
+**`operation.md`** (twelfth): header (2,455 nets, 4,594 transistors; 914 of 1,354 equations firm; no
+equation changed status against the baseline taken before the renames). The tracers had written the
+DISPTMG section, the light pen flag and the clock's second inverter. Changed here: the short answer
+(DISPTMG is the OR of three signals, none yet traced to a comparator); the row on `ck_out` (the gate
+line of the latches is the clock) and six rows and lists that still said its driver was open; latch D
+is open while CLK is low and its data `lc1_w7780` runs down the left bus field; `rcs_mv`,
+`tl5_w2722` and `tc2_r5589` leave for the bottom-centre logic (firm wires, loads open); the fourth
+reset copy's route across the left array (believed the MA cells' force line); R14's data lines (firm
+for bit 5, marked for bits 4-0); "Not established at all" on the light pen. AMB-001 to AMB-047; R1-R50.
+
+**`out/`** rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join, 789 floor-plan
+blocks (two of `bl0`'s routes split because their labels covered the bottom-centre logic; `eof`'s
+three routes named for DISPTMG; `cdp3`'s read gates of R12 and R13 no longer marked "?"; looked at
+`cache/scratch/refresh/fp12_bl2.png`, `fp12_nw.png`). Coverage: 70.1% traced; in some package region
+99.9%; untraced and in no Queue row 0.4%.
