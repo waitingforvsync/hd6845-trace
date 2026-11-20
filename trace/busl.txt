@@ -693,3 +693,73 @@ N P 7200,14827 busl_x6992
 N M 6992,11000 busl_x6992
 N P 7165,8700 busl_x6992
 N M 7164,8000 busl_x6992
+
+# =====================================================================================
+# Pieces fc, fd, fe (run 11, 2026-11-20): the next three Ls of the nest east of busl_x6992's
+# (corners y 13507, 13550, 13594) and the three diagonals next to its in the bundle north of
+# y 10400 (x + y = 16116, 16182, 16247). Each is one wire with no pad, contact or tap between
+# the ends listed. Scan: cache/scratch/busl/g11_scan.txt; views g1..g7 in cache/scratch/busl/.
+#   rcs_mv (fc): tl6's poly column x 6237 from its port (6236,6350) south under eight metals
+#       (no contact) to a pad (6232,6911); metal east along y 6913 to x 7208, south to a pad
+#       (7207,8625); a POLY column south under the two staircase metals (no contact) to a pad
+#       (7206,8798); metal south, the diagonal (7208,8908)-(7035,9081), track x 7036, arm
+#       y 13507, track x 6971, out of the region at (6971,15000): a through line.
+#   tc2_r5718 (fd): tc2's metal from its port (7533,6400) south on x 7533, a 22 px jog west at
+#       y 7279, x 7511, west along y 7453, south on x 7360 to a pad (7357,8667); a POLY column
+#       (x 7342) south under the staircase metals to a pad (7337,8798); metal south, the
+#       diagonal (7338,8844)-(7078,9104), track x 7078, arm y 13550, track x 7014, a jog east
+#       at y 14308 to x 7058, a jog east at y 14438 to x 7100, a pad (7098,14525) on the row
+#       y 14524, which runs east out of the region at x 7550.
+#   busl_x7122 (fe): a poly row y 8863 that comes in from the east under the wide rail
+#       x 7550-7645 (drawn ?P under the rail, to x 7592: Ambiguity 17; it is NOT joined to
+#       cdp3's ?P row of cdp3_k_a, which starts at x 7600: the row runs on east to a pad
+#       (7835,8862) whose metal goes north to (7834,8645), and cdp3's metal x 7835 south of
+#       that pad is not there between y 8880 and y 9150: notes, Ambiguity 18) west to a pad (7423,8863);
+#       metal west along y 8862 to (7385,8862), the diagonal to (7122,9125), track x 7122, arm
+#       y 13594, track x 7058, a jog east at y 14267 to x 7100, a jog east at y 14396 to
+#       x 7144, a pad (7143,14481) on the row y 14480, which runs east out at x 7550.
+# =====================================================================================
+# fc: rcs_mv
+P 6237,6345 y6905 w=20                # tl6's column on south, under eight metals, no contact
+P 6213,6892:6252,6930                 # the pad
+C 6232,6911 s=24x24
+M 6230,6913 x7208 y8627 w=14
+P 7189,8605:7227,8645                 # pad at the head of the poly column
+C 7207,8625 s=24x24
+P 7211,8623 y8800 w=22                # poly column south under the staircase metals
+P 7188,8779:7226,8817                 # the pad at the head of the diagonal
+C 7206,8798 s=24x24
+M 7208,8796 y8908 7035,9081 y13507 x6971 y15000 w=14
+N P 6237,6600 rcs_mv
+N M 7208,7500 rcs_mv
+N P 7211,8700 rcs_mv
+N M 7036,11000 rcs_mv
+N M 6971,14500 rcs_mv
+# fd: tc2_r5718
+M 7533,6395 y7279 x7511 y7453 x7360 y8669 w=14
+P 7334,8648:7380,8688                 # pad at the head of the poly column (east of the column's axis)
+C 7357,8667 s=24x24
+P 7342,8655 y8800 w=22                # poly column south under the staircase metals
+P 7319,8779:7357,8817                 # the pad at the head of the diagonal
+C 7337,8798 s=24x24
+M 7338,8796 y8844 7078,9104 y13550 x7014 y14308 x7058 y14438 x7100 y14523 w=14
+P 7082,14508:7116,14542               # the foot pad, the west end of the row
+C 7098,14525 s=24x24
+P 7100,14524 x7550 w=22               # the row y 14524 east to the region's edge
+N M 7533,6900 tc2_r5718
+N M 7360,8000 tc2_r5718
+N P 7342,8730 tc2_r5718
+N M 7078,11000 tc2_r5718
+N P 7300,14524 tc2_r5718
+# fe: busl_x7122
+P 7550,8863 x7423 w=22                # the row from the wide rail's west edge to the pad
+?P 7592,8863 x7550 w=22               # under the wide rail (x 7550 on): Ambiguity 17; kept 8 px short of cdp3's ?P (Ambiguity 18)
+P 7406,8845:7442,8882                 # the pad
+C 7423,8863 s=24x24
+M 7425,8862 x7385 7122,9125 y13594 x7058 y14267 x7100 y14396 x7144 y14479 w=14
+P 7127,14464:7161,14498               # the foot pad, the west end of the row
+C 7143,14481 s=24x24
+P 7143,14480 x7550 w=22               # the row y 14480 east to the region's edge
+N P 7500,8863 busl_x7122
+N M 7122,11000 busl_x7122
+N P 7300,14480 busl_x7122
