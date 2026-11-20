@@ -268,11 +268,10 @@ north and ends on a pad (7878,8315), 70 px away: another net (bare ground betwee
 
 ### The bit lines north of row A (2026-11-20; traced, wiring only)
 
-`cdp2` draws each slice's bus-line metal to y 7556 (x 8465, 8855, 9246, 9636, 10026, 10416); this file's
+`cdp2` draws each slice's bus-line metal to y 7556 at s2 and, through its latch cell placed at dy 1476, to y 7821 at s3..s7 with the contact at y 7789 (x 8465, 8855, 9246, 9636, 10026, 10416; review round 3: the lines drawn here duplicate that stretch); this file's
 bit lines start at y 8040 (x 8466, 8857, 9248, 9638, 10028, 10419). Between the two each is one metal:
 `tools/tl5_tracks.py v X 7560 8050` for the six x finds no stretch without metal over 21 px, and the
-stretches over 14 px are rings of contacts ON the line (for instance (8850,7790) and (8466,7604): bright
-centre and ring in both metal shots, `textmap.py 8836 7754 8880 7824 3`, `8444 7574 8490 7620 3`): taps of
+stretches over 14 px are the ring of the contact at y 7789 ON the line (bright centre and ring in both metal shots; at (8466,7604) and y 7700-7730 the dark stretches have no hole in the clean shot and are not breaks: review round 3), `textmap.py 8836 7754 8880 7824 3`, `8444 7574 8490 7620 3`): taps of
 `cdp2`'s channel 3, which are that package's and are not drawn here. View `cache/scratch/cdp3/bl3.png`
 (c3, 3.6x). The names are joined by `@alias` (the bus names are canonical):
 
@@ -458,6 +457,13 @@ Into parts not yet traced (the labels sit on the stubs):
     that makes sense throughout (second and fourth joined, first separate): `P` = NOT(row C gate's
     output OR `A` OR `cdp3_w8063` AND row y 8740), `N` = NOT(`A` OR row C gate's output AND `cdp3_w8063`),
     `A` = the third node. Believed at most.
+  - **Review round 2's independent reading** (2026-11-20): all five boundaries are one diffusion each
+    (controls in the same gap: field shows a green strip at x 7968-7974 in the clean shot and an edge
+    line in both metal shots; two diffusions, at the box (7935,8648), show the box's edge and green
+    field; the five pairs show neither). And: the row y 8502-8525 may not be continuous under the rail at
+    x 7984-8005 (pink in the clean shot there, an orange patch inside a dark ring in both metal
+    shots). If it is two polys, the west one (from the pad (7878,8315)) and the east one (into the
+    third load's plate) are different nets, which may remove the contradiction. Start there.
   - Also there and not drawn: two thin metals at x 8050-8058 and x 8076-8084 (narrow, in pieces), the
     metal from the pad (8118,8448) south, the metal from the north onto the pad (7878,8315) (follower:
     a corner (7989,7386), end (7986,6844)).
@@ -579,6 +585,38 @@ contacts; the extraction (91 transistors, equations as claimed).
 `.venv/bin/python tools/sameconn.py e1b2cc7`: connections identical.
 
 Round 1: no findings that change a connection.
+
+### West logic and the bit lines (run of 2026-11-20)
+
+Round 2 (full review of the west-logic piece; fresh Fable 5.2 reviewer; 2026-11-20 13:46 -0600; commit 2eb4695; images
+`cache/scratch/cdp3/review-2/`). Told to suspect the metal at every pad's ring, the inverter copy's fit,
+contacts at the crossings, a pad on the x 7880 metal, anything left out. Checked at 4-6x in two or more
+shots with `tl5_tracks.py` and `px.py`: the U1 copy (rail contact, gate row, node, the closed west box,
+strip, tail, tie, VCC box); the pads (7838,8062), (7836,8430) (metal through, rings both sides),
+(7838,8582) (metal ends), (7313,7995), (7313,8625), (7400,8778); the metal x 7837 over the rows at
+y 8305-8330 and 8500-8522; the gate row under the metals x 7355 and x 7400; the row y 8615-8635 under
+`tc2_r5718`'s metal (8 px of field from that metal's pad poly); the column under the metal y 8700-8715;
+the metal x 7880 as one metal from y 9150 to the pad (7878,8385), bare ground y 8327-8382 to the next
+pad. Not checked: the staircase metal west of x 7330; the polys beyond the ports.
+
+Findings, geometry only: the load plate's lower-left corner steps in to x 7700 below y 8050 (over field;
+left as drawn).
+
+The same reviewer read the five undecided boundaries of the cluster beside row A independently (Not
+done): all five as one diffusion each, against three controls in the same gap, and noted that the row
+y 8502-8525 may be broken under the rail at x 7984-8005.
+
+Round 2: no findings that change a connection.
+
+Round 3 (full review of the six bit-line joins; fresh Fable 5.2 reviewer; 2026-11-20 13:46 -0600; commit c411e90; images
+`cache/scratch/cdp3/review-3/`). Checked: all six lines continuous y 7480-8110 (no stretch without metal
+over 21 px; every stretch of 15 px or more on 4x views of both metal shots, c2 and c5 at 6x in three
+shots); the same track at both ends, no jog; no other metal joins or crosses; whole-die extraction 0
+errors; `sameconn.py 2eb4695`: every difference carries `cdp3_bl_c2..7` or `db_b0..5`. Remarks, notes
+only: `cdp2`'s cell already draws the metal to y 7821 with the contact at y 7789 (the notes said y 7556
+and "taps not drawn"; corrected); c7's metal centre is x 10414-10416 (drawn 10419, overlapping).
+
+Round 3: no findings.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
