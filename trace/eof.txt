@@ -1321,10 +1321,10 @@ N M 8882,16300 ck_out
 # copy is not placed; the rows are drawn to x 8806, where the cells would begin.
 P 8866,16634:8898,16665              # pad (8882,16648)
 C 8882,16648
-P 8806,16640:8870,16658              # its row west (in the open west of x 8826)
+P 8800,16640:8870,16658              # its row west (in the open west of x 8826), into the latch's upper enable row (piece lat16)
 P 8866,16851:8898,16880              # pad (8882,16867)
 C 8882,16867
-P 8806,16855:8870,16874              # its row west
+P 8800,16855:8870,16874              # its row west, into the latch's lower enable row (piece lat16)
 # --- B: the pad (8598,17908): the metal from the north ends on it, a second metal leaves it east,
 # and its poly leaves west (C below). Ring 17 px on the north side, 18 px on the east.
 P 8584,17895:8616,17922
@@ -1362,3 +1362,107 @@ P 8392,17898:8410,17916              # the poly west (seen to x 8312, where it t
 M 9596,17909 y17866 w=15
 M 9770,17910 y17866 w=15
 @alias ck_out eof_w15350
+
+# ============================================================================================
+# Pieces lat16 and inv16 (run 19, 2026-11-20): the latch that ck_out's two pads enable, and the
+# inverter that drives its data. bc3's ground (free), under column B's rail x 8686-8731.
+#
+#   eof_w16607 = NOT eof_w16388                                  (inv16: the inverter between the two latch copies)
+#   eof_w16507 = NOT eof_w16607                                  (the cell's own inverter)
+#   eof_w16693 = NOT((eof_w16607 AND ck_out) OR eof_w16823)      (upper unit)
+#   eof_w16823 = NOT(rst_a OR (ck_out AND eof_w16507) OR eof_w16693)   (lower unit)
+# A transparent latch of tl1's build: open while ck_out is high (CLK low), eof_w16823 then follows
+# the data eof_w16607 = NOT eof_w16388, and rst_a high clears it (eof_w16823 low). Both latch
+# equations rest on the cells' load ties (?), like every copy; the inverter's on its own tie (?).
+# Views s19_*.png in cache/scratch/eof/; survey.md, run 19; notes, pieces lat16 and inv16.
+#
+# ---- lat16: the cells. findcell (clean shot): tl1_ua 0.72, tl1_ub 0.67; metal shot 0.67.
+# Mirror image: x' = 11346 - x, y' = y + 12146. Overlay s19_b.png, s19_c.png (2.7x, clean and metal):
+# every outline on its feature; the copy's thin metal between the top pad and the lower gate's pad
+# lies about 8 px west of the instance's (centre x 8771 against 8781; the top pad's contact is at
+# (8776,16511)): inside both pads either way.
+@inst tl1_ua 5976,12146 mx=2685 tag=l16
+@inst tl1_ub 5973,12146 mx=2686.5 tag=l16
+# rails over the copy and over the inverter north of it: VSS over the pull-downs' boxes (x 8686-8731),
+# VCC over the loads' boxes (x 8510-8560). Continuous with piece vw's rails on s19_rails.png (0.75x)
+# and s19_gap.png (1.4x, both metal shots); also by structure.
+M 8709,16300 y16985 w=46
+N M 8709,16700 vss
+M 8535,16300 y16960 w=50
+N M 8535,16700 vcc
+# the copy's own VSS box at the foot of the lower unit's stack (contact: eof_cchk -8, centres 240/197)
+D 8695,16922:8745,16975
+C 8713,16950
+# VCC: the long contact of the two loads' box (eof_cchk -9, centres 223/230, long north-south)
+C 8537,16745 s=24x60
+# thin metal x 8588-8600 between the upper unit's plate (contact (8594,16648)) and the pad of the
+# lower unit's third pull-down (contact (8594,16846): ring and bright centre in both chips, no green
+# hole in the clean shot: notes, Ambiguity 68); it ends on both (tl5_tracks v 8594 16620 16880)
+M 8594,16640 y16852 w=12
+C 8594,16648
+C 8594,16846
+# ---- lat16: the rows east of the cells (the cells' rows end at x 8806)
+# data: row y 16598-16616 east under the track x 8838, where it turns north (inv16, below)
+P 8800,16598:8847,16616
+# upper node (eof_w16693): row y 16683-16702 east under the tracks x 8838, 8882 (ck_out), 8925,
+# 8968 (rst_a) with no contact, to a pad with a contact (9012,16693); the pad's metal runs south
+# (follower: to (9011,17088)), for 100 px on the lower node's poly without a contact (Ambiguity 69)
+P 8800,16683:8990,16702
+P 8975,16675:9030,16706
+C 9012,16693
+M 9012,16693 y16850 w=13
+# clear (rst_a): row y 16771-16789 east to x 8910, a step north on x 8893-8910, east along
+# y 16728-16746 to the tap pad (8966,16737) of rst_a's metal x 8968 (piece isrc)
+P 8800,16771:8910,16789
+P 8893,16728:8910,16789
+P 8893,16728:8935,16746
+# lower node (eof_w16823): row y 16813-16832 east under the same four tracks to x 9022, north on
+# x 9004-9022 under the upper node's metal to y 16724, east along y 16724-16745 (seen to x 9067,
+# where it turns north into a structure at x 9058-9100, y 16665-16715 that is not read: port)
+P 8800,16813:9022,16832
+P 9004,16724:9022,16832
+P 9004,16724:9062,16745
+N P 8900,16692 eof_w16693
+N P 8900,16823 eof_w16823
+N P 8776,16507 eof_w16507
+# ---- inv16: the inverter between the two latch copies (y 16317-16465), by hand. U4's build
+# (eof_dinv) mirrored left to right and with its load's tie below the strip: findcell 0.55 only.
+# Under the rail: the VSS box (shared with the foot of the upper latch copy's stack, which is not
+# drawn), the gate, the node (railprof 8692 8732 16290 16500: diffusion 16317-16381, gate
+# 16382-16403, diffusion 16404-16436).
+D 8697,16317:8745,16436
+C 8717,16349
+# gate row y 16380-16400: from a pad with a contact (9010,16388) west under the tracks x 8968
+# (rst_a), 8925, 8882 (ck_out), 8838 with no contact, in the open, under the rail, to its end at
+# x 8684. The pad's metal comes from the north on x 9004-9018 and ends on the pad (follower: from
+# (9010,16082)).
+P 8684,16380:9000,16400
+P 8995,16372:9027,16402
+C 9010,16388
+M 9011,16388 y16340 w=14
+N P 8900,16390 eof_w16388
+# output: the node's strip east out of the rail (y 16422-16437: plain, pinker than the field
+# beside it in three shots) to a buried-contact box (8779-8793, 16421-16442 inside its outline),
+# in which the data poly ends from the east; the poly runs east under the track x 8838, turns south
+# under it (x 8826-8847, 195 px, no contact with the track) and west into the latch's data row.
+D 8738,16422:8782,16437
+D 8776,16419:8798,16444
+B 8774,16417:8800,16446
+P 8778,16421:8847,16443
+P 8826,16421:8847,16616
+N P 8838,16500 eof_w16607
+# load, west of the rail: the node goes west below the gate row's end (under the rail's margin),
+# through the open gap between the rail and the thin metal x 8637-8650 (a diffusion 68 px tall
+# there, y 16382-16450: px col 8668), and as a strip y 16388-16410 under the plate to the VCC box.
+D 8670,16414:8705,16436
+D 8658,16386:8678,16450
+D 8556,16388:8664,16410
+D 8512,16380:8560,16440
+C 8533,16412 s=22x34
+P 8563,16372:8655,16432              # the plate (channel 92 long, 22 wide)
+# the tie: a heavy-outlined box under the thin metal below the plate's east end (8618-8660,
+# 16433-16465), a hook of the node under it from the gap. Drawn uncertain, like every load tie
+# of this build.
+?P 8625,16428:8650,16460
+?D 8620,16437:8664,16452
+?B 8618,16433:8660,16465

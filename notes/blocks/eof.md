@@ -385,6 +385,32 @@ Full extraction with run 18: 2,378 nets, 4,372 transistors, 0 errors, 0 warnings
 group since run 17). The package by itself: 1,039 nets, 1,784 transistors, 0 errors, 65 warnings (the
 partial-load messages of `lc1`, `lc2`, `bd1`, as before the piece).
 
+Run 19 (Tom Seddon's session, Claude Fable 5.2; 2026-11-20 02:44 +0000 on). Two pieces, `lat16` (11 transistors: a
+copy of `tl1`'s latch) and `inv16` (2 transistors, by hand): **the latch that `ck_out`'s two pads enable is
+drawn, with the inverter that drives its data**.
+
+- **The two pads in `ck_out`'s metal are the two enable rows of a latch** (piece `lat16`; traced, the cells'
+  ties uncertain as in every copy): the lower of the two mirrored copies of `tl1`'s latch under column B's rail
+  x 8686-8731 (x 8508-8815, y 16493-16975; `findcell` 0.72 and 0.67, every outline on its feature at 2.7x).
+  `eof_w16693` = NOT((`eof_w16607` AND `ck_out`) OR `eof_w16823`), `eof_w16823` = NOT(`rst_a` OR (`ck_out` AND
+  `eof_w16507`) OR `eof_w16693`), `eof_w16507` = NOT `eof_w16607`: **open while `ck_out` is high (CLK low), it
+  takes `eof_w16607`, and the reset copy `rst_a` clears it** (its clear row is the row of `rst_a`'s tap pad
+  (8966,16737), drawn to the pad). Run 18's belief about the two pads is now traced.
+- **Its data does not come from the east like its other rows** (piece `inv16`; traced, the load's tie
+  uncertain): the data row turns north under the track x 8838 (195 px of poly under another net's metal, no
+  contact) and west into the output box of **an inverter that stands between the two latch copies**
+  (x 8512-8800, y 16317-16465): `eof_w16607` = NOT `eof_w16388`. The inverter's gate row y 16380-16400 comes
+  from a pad with a contact (9010,16388), on which a metal from the north ends (the follower: from
+  (9010,16082); not followed). So **the latch stores NOT `eof_w16388`**: `eof_w16823` follows NOT `eof_w16388`
+  and `eof_w16693` follows `eof_w16388` while `ck_out` is high.
+- **Both outputs leave east** (drawn to ports; not followed): the upper node `eof_w16693` by a row to a pad
+  with a contact (9012,16693) and a metal south (the follower: to (9011,17088)); the lower node `eof_w16823` by
+  a row that turns north under that metal (100 px, no contact: Ambiguity 69) and east along y 16724-16745 into
+  a structure at x 9058-9100, y 16665-16715 that is not read.
+
+Full extraction with run 19: 2,385 nets, 4,385 transistors, 0 errors, 0 warnings. The package by itself:
+1,046 nets, 1,797 transistors, 0 errors, 65 warnings (as before the pieces).
+
 Full extraction after run 2: 2,351 nets, 4,232 transistors, 0 errors, 0 warnings; the package
 by itself (it loads `rdp3`): 0 errors, 0 warnings.
 
@@ -465,6 +491,10 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `in350`, the L | x 8584-8890, y 17642-17922 | west along y 17649 (on another net's poly row for 300 px, no contact) to a corner (8600,17649), south on x 8600 over four poly rows to a pad with a contact (8598,17908) |
 | `in350`, east to `ck_out` | x 8584-10245, y 17895-17922 | from that pad a metal east along y 17910, 1,000 px, to a pad with a contact (9596,17909); the pad's poly row y 17899-17914 east under a wide vertical metal (x 9641-9685) and a thin one (x 9723-9735) to a pad with a contact (9769,17910); a metal east onto `trunks`' end of `ck_out #1` at x 10230; on each of the two pads a second metal from the north (x 9589-9604, x 9762-9778), drawn as stubs to y 17866 |
 | `in350`, west | x 8380-8588, y 17866-17925 | the poly of the pad (8598,17908) west along y 17899-17915 under the VSS rail and a thin metal to a pad with a contact (8424,17908); stubs of that pad's metal north (x 8418-8430) and of its poly on west |
+| `lat16`, the latch | x 8508-8815, y 16493-16975 | a mirrored copy of `tl1`'s latch (`@inst tl1_ua 5976,12146 mx=2685`, `@inst tl1_ub 5973,12146 mx=2686.5`; x' = 11346 - x, y' = y + 12146) under column B's VSS rail x 8686-8731, loads under the VCC rail x 8510-8560; its own VSS box at the foot (8695-8745, 16922-16975; contact (8713,16950)), the long VCC contact (8537,16745), the thin metal x 8588-8600 between the upper plate (contact (8594,16648)) and the pad of the lower unit's third pull-down (contact (8594,16846)) |
+| `lat16`, the rows | x 8800-9062, y 16598-16874 | from the cells' east edge (x 8806): data y 16598-16616 to the track x 8838; enable y 16640-16658 to `ck_out`'s pad (8882,16648); upper node y 16683-16702 to a pad with a contact (9012,16693) and a metal south (stub to y 16850); clear y 16771-16789, a step north at x 8893-8910, y 16728-16746 to `rst_a`'s tap pad (8966,16737); lower node y 16813-16832 to x 9022, north on x 9004-9022 to y 16724, east along y 16724-16745 to x 9062 (port); enable y 16855-16874 to `ck_out`'s pad (8882,16867) |
+| `inv16`, the inverter | x 8512-8800, y 16317-16465 | between the two latch copies, by hand: under the VSS rail the box (y 16317-16381, contact (8717,16349); also the foot of the upper copy's stack), the gate (y 16382-16403), the node (y 16404-16436); the node's strip east to a buried-contact box (8774-8800, 16417-16446); the load west of the rail: strip y 16388-16410 under a plate (8563-8655, 16372-16432) to a VCC box (8512-8560, 16380-16440; contact (8533,16412)), a tie box (8618-8660, 16433-16465) under the thin metal x 8637-8650 (uncertain) |
+| `inv16`, its wires | x 8684-9027, y 16340-16616 | the gate row y 16380-16400 from a pad with a contact (9010,16388) (a metal from the north ends on it: stub to y 16340) west under four tracks to the rail; the output poly from the box east along y 16421-16443 and south under the track x 8838 (x 8826-8847, y 16421-16616) into the latch's data row |
 
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
 
@@ -1446,6 +1476,70 @@ copies the enable rows are joined by one vertical metal in the same way. The cop
 of the tap pad (8966,16737). The copy is not placed or overlaid, so that these rows are gates, and of what,
 is not in the trace.
 
+### Pieces `lat16` and `inv16`: the latch that `ck_out` enables, and the inverter on its data (traced; the ties uncertain)
+
+```
+eof_w16607 = NOT eof_w16388                                        inv16: the inverter between the two latch copies
+eof_w16507 = NOT eof_w16607                                        the cell's own inverter
+eof_w16693 = NOT((ck_out AND eof_w16607) OR eof_w16823)            upper unit (tl1_ua)
+eof_w16823 = NOT((ck_out AND eof_w16507) OR eof_w16693 OR rst_a)   lower unit (tl1_ub)
+```
+
+From the full extraction (thirteen transistors, `t369`-`t381` of the package's list). The inverter: load
+(8609,16399) 22/92, gate and source on `eof_w16607`; pull-down (8721,16390) 48/20, gate `eof_w16388`. The cell's
+inverter: load (8598,16572) 28/53; pull-down (8684,16568) 37/21, gate `eof_w16607`. Upper unit: stack 72/18
+(gate `eof_w16607`) over 72/18 (gate `ck_out`); third pull-down (8715,16721) 42/20, gate `eof_w16823`; load
+26/50. Lower unit: stack 83/19 (gate `ck_out`) over 81/21 (gate `eof_w16507`); third pull-down (8624,16901)
+43/22, gate `eof_w16693`; clear (8776,16780) 35/18, gate `rst_a`; load 26/50. `tools/unsure.py --equations
+eof_w16`: `eof_w16507` firm; the other three depend on uncertain items (the cells' two load ties and the
+inverter's tie).
+
+What it says (traced, but for the ties): **a transparent latch, open while `ck_out` is high (CLK low)**.
+While open, `eof_w16693` = NOT `eof_w16607` = `eof_w16388` and `eof_w16823` = `eof_w16607` = NOT `eof_w16388`;
+when `ck_out` falls both hold. `rst_a` high (the reset) forces `eof_w16823` low, and with it `eof_w16693`
+high unless the latch is open with `eof_w16607` high. It is the fifth latch of `tl1`'s build that `rst_a` is
+seen to clear and the first whose enable is `ck_out` (the top-left logic's third latch, `tl1_w6022`, is
+enabled by `ck_out` too). Believed, not traced: what `eof_w16388` is and where the two outputs go; with the
+clock latch V/W (which `ck_out` also gates) it belongs to a group clocked on CLK low.
+
+**The latch** is the lower of the two mirrored copies of `tl1`'s units that `findcell` found under column
+B's rail (run 9: the table at the end of piece `isrc4`). `findcell.py 2532 4350 2838 4600 --region
+8450,16400:9050,17000 --layer acid1b --cell tl1_ua`: `@inst tl1_ua 5976,12146 mx=2685`, 0.72 (metal shot:
+5972,12145, 0.67); `tl1_ub` (2535 4347 2838 4797): `@inst tl1_ub 5973,12146 mx=2686.5`, 0.67. Both give the
+same mapping, x' = 11346 - x, y' = y + 12146. Overlays `s19_b.png`, `s19_c.png` (2.7x, clean and chip-2
+metal), `s19_ov1.png`, `s19_ov2.png` (2.2x, clean), `s19_ov3.png` (1.9x, metal): every outline on its feature.
+What the copy has of its own, and what was looked at round its pads (R45, trap 32):
+
+| Item | What | Evidence |
+|---|---|---|
+| rails | VSS x 8686-8731 over the pull-downs' boxes, VCC x 8510-8560 over the loads' boxes. The VCC rail is `bc1`'s R2 (`M 8534,14990 y16300 w=48`) running on south; the VSS rail is the one drawn over V and W, continuous down to the latch (contacts and edge bars only) | `s19_rails.png` (0.75x), `s19_gap.png` (1.4x, both metal shots and the clean shot); `tl5_tracks.py v 8712 15460 17000 --half 12`, `v 8534 15330 17000 --half 12` (no stretch over 31 px without metal in both, each at a contact's ring) |
+| VSS boxes | the cells' two (contacts (8726,16566), (8718,16756)) and the copy's own at the foot of the lower stack, x 8695-8745, y 16922-16975, contact (8713,16950); the lower unit's third pull-down's source strip y 16928-16942 runs into it from the west | `eof_cchk.py 8726,16566 8718,16756 8715,16950` (holes 5, 11, -8; centres 227/237, 236/208, 240/197); `s19_i.png` (3.2x, clean and metal) |
+| VCC contacts | the cell's (8543,16593) and a long one on the two loads' box, (8537,16745) | `eof_cchk.py 8543,16593 8537,16745` (6, -9; 208/223, 223/230; the second long north-south) |
+| thin metal x 8588-8600 | from the upper unit's plate (contact (8594,16648): hole 1, ring, bright centre) to the pad of the lower unit's third pull-down (contact (8594,16846): ring and bright centre in both chips, no green hole in the clean shot: Ambiguity 68); it ends on both | `tl5_tracks.py v 8594 16620 16880`; `textmap.py 8570 16826 8624 16874 3`; `px.py pt 8594,16846 8594,16648 acid,acid1b` |
+| the top pad (the cell's inverter's output) | contact at (8776,16511) (bright centre x 8771-8780 in a dark ring in both chips, green hole in the clean shot), 8 px west of the instance's; its thin metal leaves south only (x 8765-8777, centre 8771 against the instance's 8781) and ends on the lower gate's pad (contact about (8785,16912)); open ground north and east of the pad, no poly leaving it | `textmap.py 8750 16478 8822 16540 3 --acid`; `eof_mrun.py row 16540 / 16720 / 16800` (8770-8772); `eof_rows.py col 8776 16440 16500`, `row 16507 8795 8830` (none); `eof_cchk.py 8791,16913` (-28, 186/192); `eof_rows.py col 8785 16925 17000`, `row 16912 8800 8850` (nothing leaves the lower pad) |
+
+The rows east of the cells (the cells' rows end at x 8806; all `eof`'s):
+
+| Row | What | Evidence |
+|---|---|---|
+| data, y 16598-16616 | east to the track x 8838, where it is one poly with a column under the track (piece `inv16`) | `s19_b.png`, `s19_d.png` (3x, four shots) |
+| enable, y 16640-16658 and y 16855-16874 | onto `ck_out`'s pads (8882,16648), (8882,16867) (piece `in350`; the stubs drawn then to x 8806 now overlap the cells' rows) | `s19_b.png`, `s19_c.png`, `s19_ov2.png` |
+| upper node `eof_w16693`, y 16683-16702 | from the cell's node box east under the tracks x 8838, 8882 (`ck_out`), 8925, 8968 (`rst_a`) with no contact, to **a pad with a contact (9012,16693)** (pad x 8975-9030, y 16675-16706; ring and bright centre in both chips, green hole); the pad's metal leaves south on x 9006-9018 (nothing north or east of the pad) and runs to (9011,17088) by the follower; drawn to y 16850 | `s19_g.png` (2.45x, four shots), `s19_h.png` (4x, four shots); `eof_cchk.py 8838,16693 8882,16693 8925,16693 8968,16693` (47-50: no hole); `eof_cchk.py 9008,16691` (-22, 221/208); `follow.py 9008 16730 S --gap 16`, `N`; `eof_rows.py col 9012 16640 16680`, `row 16690 9028 9060` (none) |
+| clear, y 16771-16789 | east under the tracks x 8838, 8882 (no contact) to x 8910, north on x 8893-8910, east along y 16728-16746 onto piece `isrc`'s stub of the tap pad (8966,16737): **the clear is `rst_a`** | `s19_g.png`, `s19_ov2.png`; `eof_rows.py row 16758 8870 8940` (8896-8909); `eof_cchk.py 8838,16780 8882,16780` (45, 50) |
+| lower node `eof_w16823`, y 16813-16832 | from the cell's node box east under the same four tracks to x 9022, north on x 9004-9022 **under the upper node's metal** for 100 px (Ambiguity 69: no contact), east along y 16724-16745; seen to x 9067, where it turns north into a structure at x 9058-9100, y 16665-16715 (a square ring with a dim centre at about (9080,16688) between the tracks x 9056 and x 9099: not read). Drawn to x 9062 (port) | `s19_g.png`, `s19_h.png`; `textmap.py 8988 16705 9040 16845 3`, `9040 16640 9112 16760 3 --acid`; `eof_rows.py row 16780 8990 9040` (9007-9019), `col 9045 16700 16770` (16730-16748); `eof_cchk.py 8838,16823 8882,16823 8925,16823 8968,16823` (7, 47, 45, 50: the first is chip 1's damaged track, Ambiguity 65) |
+
+**The inverter** (piece `inv16`; x 8512-8800, y 16317-16465) stands between the two latch copies. It is the
+build of U4 (`eof_dinv`, itself `tl5_inv`) mirrored left to right, with the load's tie below the strip
+instead of above; `findcell` gives the cell only 0.55 (`tl5_inv`, 4951 4786 5213 4912) and no hit for
+`eof_dinv`, so it is drawn by hand:
+
+| Part | What | Evidence |
+|---|---|---|
+| under the rail | VSS box y 16317-16381 with a contact (8717,16349), the gate y 16382-16403, the node y 16404-16436 (x 8697-8745). The box is also the foot of the upper latch copy's stack (its lower gate is at y 16290-16316; that copy is not drawn) | `railprof.py 8692 8732 16290 16500`; `eof_cchk.py 8715,16345` (2; 159/198); `s19_e.png` (3x, clean and metal) |
+| the gate row, y 16380-16400 | from **a pad with a contact (9010,16388)** (pad x 8995-9027, y 16372-16402; ring and bright centre in both chips, green hole, pits in the chip-2 stripped shot) west under the tracks x 8968 (`rst_a`), 8925, 8882 (`ck_out`), 8838 with no contact, in the open (orange in both chip-2 shots), under the rail, to its end at about x 8680 under the rail's west margin. The pad's metal comes from the north on x 9004-9018 and ends on the pad; nothing leaves the pad south or east | `s19_m.png` (4x, four shots), `s19_j.png` (5x, four shots); `eof_cchk.py 9012,16390 8968,16389 8925,16389 8882,16389 8838,16389` (-7; 50, 42, 43, 47); `follow.py 9011 16350 N --gap 16` (end (9010,16082)); `eof_rows.py col 9010 16400 16440`, `row 16388 9026 9060`; `px.py row 16389 8740 8830 9 metal,metal1,acid` |
+| the output | the node's strip leaves the rail east at y 16422-16437 (x 8738-8768) to a buried-contact box (interior x 8779-8793, y 16421-16442, heavy outline all round), in which the output poly ends from the east; that poly runs east along y 16421-16443 to the track x 8838 and south under it on x 8826-8847 for 195 px (salmon under the metal in the clean shot, no ring and no hole on the track) into the latch's data row. The clean shot is unreadable in the gap east of the rail (trap 28); the strip, the box and the two polys are read in the chip-2 shots and chip 1's metal shot (Ambiguity 67) | `s19_j.png`, `s19_k.png` (7x, chip-2 metal and stripped), `s19_d.png`; `px.py row 16429 8736 8830 3 metal,metal1,acid`, `row 16410 8740 8830 6`; `textmap.py 8732 16366 8832 16500 3 --acid`; `tl5_tracks.py rows col 15700 16660 8 8832 8838 8844`, `v 8838 15700 16960` (no hole y 16000-16800); `eof_cchk.py 8838,16432 8838,16500 8838,16607` |
+| the load | west of the rail: the node passes below the gate row's end (tan under the rail's margin, x 8676-8697, y 16412-16440), through the open gap between the rail and the thin metal x 8637-8650 (one diffusion 68 px tall there, y 16382-16450), and as a strip y 16388-16410 under the plate (x 8563-8655, y 16372-16432: three bars with two edge lines under the thin metal, textured block in the open) to the VCC box (x 8512-8560, y 16380-16440, contact (8533,16412)). The tie is a heavy-outlined box under the thin metal below the plate's east end (x 8618-8660, y 16433-16465): drawn uncertain (Ambiguity 70) | `s19_l.png` (3.4x, clean and chip-2 stripped), `s19_e.png`; `px.py col 8668 16360 16470 4 metal,metal1,acid`, `row 16389 8646 8692 3`, `row 16420 8652 8686 4`; `eof_cchk.py 8537,16410` (4; 202/223); `tl5_tracks.py v 8643 16340 16500` |
+
 ## Ports
 
 The net is driven outside the package (by `rdp2`'s NOR). `in` marks the port beyond which the
@@ -1538,8 +1632,11 @@ driver lies; the other three lead to the loads.
 | `bc2_w15000` | metal | (10392, 14993-15007) | in | piece `in172`: gate row 1 of the NOR T; pad A's metal x 10355, its foot onto `bc2`'s output pad (10395,15000) of latch unit a (its port (10385,15000)). (The port `eof_w15172` (9150,14645-14662) of piece `vw` is gone: the row is drawn on to its driver, T) |
 | `bc2_w14955` | metal | (10434-10448, 14946) | in | piece `in172`: gate row 3 of the NOR T; pad B's metal x 10441 onto `bc2`'s enable metal of latch unit a (its port (10441,14940)); the net's driver is not found |
 | `ck_out` | metal | (10245, 17902-17918) | in | piece `in350`: onto the west end of `trunks`' metal `ck_out #1` (`M 10320,17908 x10230 w=16`): the clock's driver is the clock block's buffer. (The port `eof_w15350` (8873-8889,15465) of piece `vw` is gone: the metal is drawn on) |
-| `ck_out` | poly | (8806, 16640-16658) | out | piece `in350`: the row of the pad (8882,16648) west into the gate column under the rail x 8686-8731: believed the upper enable row of an undrawn copy of `tl1`'s latch (`bc3`) |
-| `ck_out` | poly | (8806, 16855-16874) | out | piece `in350`: the row of the pad (8882,16867), likewise: believed the same copy's lower enable row |
+| `eof_w16388` | metal | (9004-9018, 16340) | in | piece `inv16`: the metal that ends on the gate row's pad (9010,16388) from the north (the follower: from (9010,16082); not checked): the inverter's input, so the latch's data inverted |
+| `eof_w16693` | metal | (9006-9018, 16850) | out | piece `lat16`: the upper node's metal south of its pad (9012,16693) (the follower: to (9011,17088); not checked) |
+| `eof_w16823` | poly | (9062, 16724-16745) | out | piece `lat16`: the lower node's poly east; it turns north at x 9067-9092 into a structure at x 9058-9100, y 16665-16715 (not read) |
+| `vss` | metal | (8686-8732, 16300) and (8686-8732, 16985) | - | pieces `lat16`, `inv16`: column B's VSS rail, drawn over the inverter and the latch only; it runs on both ways (north to the piece over V and W) |
+| `vcc` | metal | (8510-8560, 16300) and (8510-8560, 16960) | - | pieces `lat16`, `inv16`: R2 on south of `bc1`'s end (`M 8534,14990 y16300 w=48`), over the inverter's and the latch's VCC boxes |
 | `ck_out` | metal | (8418-8430, 17866) | ? | piece `in350`: the metal that ends on the pad (8424,17908) from the north (the follower: to the bundle's track x 8229, end (8227,17019); not checked) |
 | `ck_out` | poly | (8392, 17898-17916) | ? | piece `in350`: the poly west of the pad (8424,17908) (seen to x 8312, where it turns north; another net's metal lies on it from x 8390 west) |
 | `ck_out` | metal | (9589-9604, 17866) | ? | piece `in350`: the metal that ends on the pad (9596,17909) from the north (the follower: west along y 17606, north on x 9315 to (9315,16818); not checked) |
@@ -2055,6 +2152,52 @@ driver lies; the other three lead to the loads.
     probable, not read further). Not read: whether that metal makes contact with the poly on the 80 px
     (x 8312-8390) where it lies on it; no ring or hole was seen there (`tl5_tracks.py h 17908 8040 8440`: no
     hole between x 8122 and x 8420). If it did, that net would be `ck_out`.
+
+67. **The inverter's output east of the rail is read without chip 1's clean shot** (piece `inv16`; trap 28).
+    In the open gap between the rail x 8686-8731 and the track x 8838 the clean shot shows a dark tangle at
+    y 16400-16450 (`s19_j.png`, 5x): it does not show the box or the strip. In the other three shots
+    (`s19_j.png`, `s19_k.png` at 7x) the row y 16421-16443 is three pieces between dark edges: x 8741-8766 plain
+    and pinker than the field (chip-2 metal 172/128/82, chip-1 metal 156/121/77, chip-2 stripped 163/131/70),
+    x 8779-8793 a box interior (168/130/76, 152/129/70, 150/131/66), x 8806-8824 poly (165/110/47, 152/88/48,
+    158/113/45, like the gate row above: 160/114/59, 155/82/45, 155/115/52). The pale band between this row and
+    the gate row (y 16403-16416) is field (165/146/83, 135/122/62, 143/137/64), closed at its east end by the
+    track's edge. Read: the west piece is the node's diffusion strip from under the rail (where `railprof`
+    gives diffusion at y 16404-16436), the box a buried contact, the east piece the output poly's end, which is
+    U4's arrangement mirrored. The other reading, that the west piece is a poly stub ending at the rail (blue
+    74-87 there is between poly's 41-68 and the 85-95 of trap 28's diffusion), leaves the output poly with no
+    driver and the inverter with no output, and chip 1's metal shot separates the piece from poly clearly
+    (red minus green 35 against 64-73). Drawn without `?`. What would settle it: another die's stripped shot.
+68. **The lower contact of the latch's thin metal x 8588-8600 shows no green hole** (piece `lat16`; trap 26).
+    At (8594,16846) both metal shots have a bright centre (x 8588-8600, y 16841-16850: 160-207 in chip 2,
+    176-223 in chip 1) in a dark ring, and the metal ends there (`tl5_tracks.py v 8594 16620 16880`); the clean
+    shot is dark red at the centre (109/55/34), the chip-2 stripped shot 135/116/69. The upper contact
+    (8594,16648) has the hole (121/120/62). In the master and in `bc2`'s two copies the same pad carries a
+    contact (the thin metal joins the upper unit's plate to the gate of the lower unit's third pull-down);
+    drawn as one, without `?`. If it were none, `eof_w16823` would lose the term `eof_w16693` and the pair
+    would not latch.
+69. **The upper node's metal lies on the lower node's poly for 100 px** (piece `lat16`; trap 13). The metal
+    x 9006-9018 south of the pad (9012,16693) runs over the poly column x 9004-9022 from y 16724 to y 16832.
+    `textmap.py 8988 16705 9040 16845 3`: the metal is bright without a ring from y 16729 to y 16828 in both
+    chips, the clean shot under it salmon (red minus green 48-72) with no hole; 15 px of field (y 16707-16722)
+    between the pad and the poly's corner; the follower's candidates (9012,16798), (9011,16811) have no ring
+    and no hole (`eof_cchk.py`: 27, 24, at the poly's east edge). Read as no contact: a contact would join the
+    latch's two outputs.
+70. **The inverter's tie, and the thin metal over it** (piece `inv16`). The tie box (8618-8660, 16433-16465)
+    lies under the thin metal x 8637-8650 below the plate's east end; plate tab, hook and box are drawn `?`,
+    as for every load of this build, and `eof_w16607`'s equation rests on them. The thin metal (another
+    net's, not drawn here: it runs the length of column B) is dark over the box for 40 px in both chips
+    (`tl5_tracks.py v 8643 16340 16500`: y 16426-16465) with no bright centre (`eof_cchk.py 8643,16450`:
+    102/68): a pass-over (trap 22), read as no contact. Geometry not resolved and not affecting a connection:
+    whether the gate row's west end (salmon x 8678-8697, y 16372-16412 under the rail's margin) lies partly on
+    the node's diffusion, and where exactly the strip under the plate has its edges (y 16388-16410 from the two
+    edge lines under the thin metal; the chip-2 stripped shot shows one line at y 16405).
+71. **Two things at the latch that differ between the chips or from the master** (piece `lat16`; neither
+    changes a connection). (a) The copy's thin metal from the top pad lies about 8 px west of the instance's
+    (centre x 8771; the top pad's contact at (8776,16511), the lower pad's at about (8785,16912)): inside both
+    pads either way; the cell is not changed. (b) Chip 1's metal on the track x 8838 is missing from about
+    y 16793 to y 16910 (the clean shot is green there: `tl5_tracks.py v 8838 15700 16960`: -51, -85, -66),
+    which is Ambiguity 65's damage and covers the lower node's row as well; chip 2's track is whole over the
+    row with no ring (`eof_cchk.py 8838,16823`: 182, ring 78/79 north and south, as at the next track).
 
 ## Review
 
@@ -3261,12 +3404,17 @@ Round 23: no findings.
   **the latch behind it traced** (run 16, piece `vw`: the units V and W) **and two of the latch's three inputs
   followed to their sources** (run 17: `eof_w15172` = NOR(`bc2_w14955`, `bc2_w15000`), piece `in172`;
   `eof_w15390` = `bc2_w15607`, piece `in390`). **The third input `eof_w15350` is `ck_out`** (run 18, piece
-  `in350`). **Left on that net, and next**: (1) **the gate column's copy of `tl1`'s latch whose two enable rows
-  the wire's pads (8882,16648), (8882,16867) feed** (`bc3`'s ground, free; `@inst tl1_ua 5976,12146 mx=2685` with
-  `tl1_ub 5973,12146 mx=2686.5`, the table at the end of piece `isrc4`; its clear row is `rst_a`'s y 16737 /
-  16770-16790): place the two cells, overlay, look round every pad (R45); the rows are drawn to x 8806. The upper
-  copy (+11539) has its enable rows on another net, a short metal x 8925 between pads (8925,16043) and
-  (8925,16260), not followed. (2) **`ck_out`'s four open ends** (ports): at the pad (8424,17908) the metal north
+  `in350`). **The latch whose two enable rows the wire's pads feed is drawn** (run 19, pieces `lat16`, `inv16`).
+  **Left on that net, and next**: (1) **the latch's three open wires**: its data's source `eof_w16388` (the metal
+  north of the pad (9010,16388): `follow.py 9011 16350 N --gap 16` ends at (9010,16082), 284 px, no candidate;
+  the end not looked at); the upper node `eof_w16693` (the metal south of the pad (9012,16693), drawn to
+  y 16850: `follow.py 9008 16730 S --gap 16` ends at (9011,17088)); the lower node `eof_w16823` (the poly east
+  of (9062,16735): it turns north at x 9067-9092 into a square ring with a dim centre at about (9080,16688)
+  between the tracks x 9056 and x 9099, bright green bands either side of it in the clean shot:
+  `textmap.py 9040 16640 9112 16760 3 --acid`, `s19_h.png`; not read: a pad with a contact, or a gate). The upper
+  copy (+11539; `bc3`'s ground, free) is not drawn: its foot's VSS box is the inverter's (drawn), its lower gate
+  is at y 16290-16316 under the rail, and its enable rows are on another net, a short metal x 8925 between pads
+  (8925,16043) and (8925,16260), not followed. (2) **`ck_out`'s four open ends** (ports): at the pad (8424,17908) the metal north
   (`follow.py 8424 17870 N --gap 16`: corners (8422,17690) west, (8142,17687) north, (8146,17383) east,
   (8230,17373) north, end (8227,17019); candidates (8142,17540), (8144,17427); it crosses `rst_a`'s row y 17736
   at x 8418-8430 with no contact, as piece `isrc4` read it) and the poly west (to x 8312, north to a pad at

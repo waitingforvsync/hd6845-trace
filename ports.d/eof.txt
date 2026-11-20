@@ -124,9 +124,15 @@ vcc           M      10721-10771,14590        -    the east column's VCC rail on
 # Piece in350 (run 18): eof_w15350, the upper gate of W's stack, is ck_out
 # (the port eof_w15350 M 8873-8889,15465 is gone: the metal is drawn on)
 ck_out        M      10245,17902-17918        in   onto the west end of trunks' ck_out #1 (M 10320,17908 x10230): the clock's driver is the clock block's buffer
-ck_out        P      8806,16640-16658         out  the row of the pad (8882,16648) west into the gate column under the rail x 8686-8731: believed the upper enable row of an undrawn copy of tl1's latch (bc3)
-ck_out        P      8806,16855-16874         out  the row of the pad (8882,16867): believed the same copy's lower enable row
 ck_out        M      8418-8430,17866          ?    the metal that ends on the pad (8424,17908) from the north (follower: to the bundle's track x 8229, end (8227,17019); not checked)
 ck_out        P      8392,17898-17916         ?    the poly west of the pad (8424,17908) (seen to x 8312, where it turns north; another net's metal lies on it from x 8390 west)
 ck_out        M      9589-9604,17866          ?    the metal that ends on the pad (9596,17909) from the north (follower: west along y 17606, north on x 9315 to (9315,16818); not checked)
 ck_out        M      9762-9778,17866          ?    the metal that ends on the pad (9769,17910) from the north (follower: east along y 17649, north on x 10050, west, north on x 9965 to (9964,16950); not checked)
+# Pieces lat16, inv16 (run 19): the latch that ck_out's two pads enable, and the inverter on its data
+eof_w16388    M      9004-9018,16340          in   the metal that ends on the inverter's gate-row pad (9010,16388) from the north (follower: from (9010,16082); not checked)
+eof_w16693    M      9006-9018,16850          out  the latch's upper node: the metal south of its pad (9012,16693) (follower: to (9011,17088); not checked)
+eof_w16823    P      9062,16724-16745         out  the latch's lower node: poly east; turns north at x 9067-9092 into a structure at x 9058-9100, y 16665-16715 (not read)
+vss           M      8686-8732,16300          -    column B's VSS rail, drawn over the inverter and the latch only (y 16300-16985); it runs on north
+vss           M      8686-8732,16985          -    the same rail on south
+vcc           M      8510-8560,16300          -    R2 on south of bc1's end (M 8534,14990 y16300), over the inverter's and the latch's VCC boxes
+vcc           M      8510-8560,16960          -    the same rail on south
