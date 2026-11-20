@@ -1395,6 +1395,12 @@ D 8695,16922:8745,16975
 C 8713,16950
 # VCC: the long contact of the two loads' box (eof_cchk -9, centres 223/230, long north-south)
 C 8537,16745 s=24x60
+# the VCC diffusion under the rail is taller than the cells' boxes (review round 24; railprof
+# 8514 8556 16480 16960: diffusion y 16497-16622 and y 16656-16925), with a second long contact
+# (8535,16860) (eof_cchk: 5, centres 224/217). No poly crosses it.
+D 8510,16497:8560,16570
+D 8510,16785:8560,16925
+C 8535,16860 s=24x60
 # thin metal x 8588-8600 between the upper unit's plate (contact (8594,16648)) and the pad of the
 # lower unit's third pull-down (contact (8594,16846): ring and bright centre in both chips, no green
 # hole in the clean shot: notes, Ambiguity 68); it ends on both (tl5_tracks v 8594 16620 16880)
@@ -1422,6 +1428,14 @@ P 8893,16728:8935,16746
 P 8800,16813:9022,16832
 P 9004,16724:9022,16832
 P 9004,16724:9062,16745
+# a branch of the lower node (review round 24): under the track x 8925 the row is one poly with a
+# column x 8917-8935 that runs south to y 17003 (salmon without a break from the row; no edge bar
+# of the row at y 16832 on that track in either metal shot; no ring, no hole: no contact to the
+# track) and west along y 16986-17003 under the tracks x 8882 (ck_out), x 8838 (no contact) to the
+# rail, where it is a gate (railprof 8702 8738: gate y 16988-17010) of the unit south of the foot
+# box, which is not drawn: port at x 8760.
+P 8917,16826:8935,17003
+P 8760,16986:8935,17003
 N P 8900,16692 eof_w16693
 N P 8900,16823 eof_w16823
 N P 8776,16507 eof_w16507
@@ -1445,7 +1459,7 @@ N P 8900,16390 eof_w16388
 # beside it in three shots) to a buried-contact box (8779-8793, 16421-16442 inside its outline),
 # in which the data poly ends from the east; the poly runs east under the track x 8838, turns south
 # under it (x 8826-8847, 195 px, no contact with the track) and west into the latch's data row.
-D 8738,16422:8782,16437
+D 8738,16422:8782,16435
 D 8776,16419:8798,16444
 B 8774,16417:8800,16446
 P 8778,16421:8847,16443
@@ -1453,13 +1467,14 @@ P 8826,16421:8847,16616
 N P 8838,16500 eof_w16607
 # load, west of the rail: the node goes west below the gate row's end (under the rail's margin),
 # through the open gap between the rail and the thin metal x 8637-8650 (a diffusion 68 px tall
-# there, y 16382-16450: px col 8668), and as a strip y 16388-16410 under the plate to the VCC box.
+# there, y 16382-16450: px col 8668), and as a strip y 16381-16409 under the plate (px col 8642: edge
+# lines at y 16378-16381 and y 16408-16411; review round 24) to the VCC box.
 D 8670,16414:8705,16436
 D 8658,16386:8678,16450
-D 8556,16388:8664,16410
+D 8556,16381:8664,16409
 D 8512,16380:8560,16440
 C 8533,16412 s=22x34
-P 8563,16372:8655,16432              # the plate (channel 92 long, 22 wide)
+P 8563,16372:8655,16432              # the plate (channel 92 long, 28 wide)
 # the tie: a heavy-outlined box under the thin metal below the plate's east end (8618-8660,
 # 16433-16465), a hook of the node under it from the gap. Drawn uncertain, like every load tie
 # of this build.

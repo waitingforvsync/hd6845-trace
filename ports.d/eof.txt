@@ -132,6 +132,7 @@ ck_out        M      9762-9778,17866          ?    the metal that ends on the pa
 eof_w16388    M      9004-9018,16340          in   the metal that ends on the inverter's gate-row pad (9010,16388) from the north (follower: from (9010,16082); not checked)
 eof_w16693    M      9006-9018,16850          out  the latch's upper node: the metal south of its pad (9012,16693) (follower: to (9011,17088); not checked)
 eof_w16823    P      9062,16724-16745         out  the latch's lower node: poly east; turns north at x 9067-9092 into a structure at x 9058-9100, y 16665-16715 (not read)
+eof_w16823    P      8760,16986-17003         out  the lower node's branch (review round 24): the row y 16986-17003 where it goes under the rail as a gate of the unit south of the latch (not drawn)
 vss           M      8686-8732,16300          -    column B's VSS rail, drawn over the inverter and the latch only (y 16300-16985); it runs on north
 vss           M      8686-8732,16985          -    the same rail on south
 vcc           M      8510-8560,16300          -    R2 on south of bc1's end (M 8534,14990 y16300), over the inverter's and the latch's VCC boxes
