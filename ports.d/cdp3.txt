@@ -5,7 +5,8 @@ cdp3_bl_c4    M      9239-9257,7556     in   the bit line of column c4 onto cdp2
 cdp3_bl_c5    M      9629-9647,7556     in   the bit line of column c5 onto cdp2's bus-line metal (cdp2_c_s5_bus): one net (alias)
 cdp3_bl_c6    M      10019-10037,7556     in   the bit line of column c6 onto cdp2's bus-line metal (cdp2_c_s6_bus): one net (alias)
 cdp3_bl_c7    M      10410-10428,7556     in   the bit line of column c7 onto cdp2's bus-line metal (cdp2_c_s7_bus): one net (alias)
-cdp3_w7996    M      7330,8749-8765   in   U1's input: a metal from the west (the bus field's staircase; follower to (6843,8536)) onto the pad (7400,8778)
+lc2_w8646     M      6450,8292-8310   out  the staircase line from the clock inverter's pad (7400,8778) onto lc2's metal B (latch C's enable): one net (alias cdp3_w7996)
+ck_out        P      7475,8722-8745   in   the poly of eofw's corner pad (7446,8732): the gate of the clock inverter
 cdp3_w8063    P      7950,8419-8441   out  U1's output: the poly row of the pad (7836,8430), into the cluster beside row A
 cdp3_w8063    P      7790,8566-8590   out  U1's output: the poly of the pad (7838,8582), west and round into a row y 8675-8697 of the cluster
 cdp3_bl_c1    P      7950,8377-8400   out  the gate beside row C's output line: the poly row of the pad (7878,8385), into the cluster

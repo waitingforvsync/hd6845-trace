@@ -10,3 +10,5 @@
 8380,8490:10780,8830  array  R14 register (6-bit latch) | cdp4's latch cell upside down, written from the bit lines on wr_r14; buffered outputs by the link polys to line f = the read selector's source a
 7296,7940:7855,8080   logic  inverter U1 (cdp3_w8063) | a copy of the gate column's inverter: NOT of a line from the bus field's staircase; its output goes down a metal x 7837 to two gates of the cluster beside row A
 7296,8062:7860,8800   route  U1's wires | input by a metal x 7316 and a poly column to a pad (7400,8778); output by a metal x 7837 to pads (7836,8430) and (7838,8582)
+7475,8640:7780,8850   logic  clock inverter (NOT ck_out) | a wide inverter of ck_out under the VSS rail and the VCC metal; its output is the enable of lc2's latch C (by a staircase line) and the input of U1
+6450,8292:7420,8790   route  NOT ck_out to lc2's latch C | the staircase line from the clock inverter's pad (7400,8778) west and north to lc2's metal at (6450,8301)
