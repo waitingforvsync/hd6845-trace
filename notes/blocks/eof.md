@@ -3165,6 +3165,30 @@ pad rows; chip 1 at (8838,16866), where its metal is missing.
 
 Round 22: two findings that change a connection, fixed; a fix check follows.
 
+### Round 23 (fix check of round 22's changes; 2026-11-20 02:36 to 02:47 +0000, after commit e2efee7)
+
+One fresh reviewer agent on Claude Fable 5.2, briefed with the two findings and `git diff e2efee7 --
+trace/eof.txt` only; trace at commit 86e3897; its images (7) in `cache/scratch/eof/review-23/`.
+
+What it checked, and how. (1) The pad (8424,17908): the west metal ends at x 8388 (the follower at `--gap 16`,
+both metal shots); `tl5_tracks.py h 17908`: no metal in either chip for x 8388-8420, 32 px, against the pad's
+17 px ring on the north side; open poly at x 8396-8405, the same colour as the known poly east of the pad at
+x 8447-8450; no hole in the clean shot along x 8300-8415, so that metal has no contact on the poly; its end
+widens north at x 8370-8388, a corner toward the pad (8382,17862); the poly west is continuous into the pad
+(red minus green 40-50 throughout); nothing else on the pad (field south; the north metal crosses the poly row
+y 17853-17870 without ring or hole). (2) The pads (9596,17909) and (9769,17910): each north track is a single
+track at y 17866 (x 9590-9604 and x 9763-9778, open poly either side) and ends at y 17886 with an 18 px ring
+before the bright centre, the same as on the pads (8598,17908) and (8424,17908); each pad's own line has a
+ring of the same class (13 px west at 9596, about 20 px east at 9769); no metal south of either pad; the clean
+shot's protected strip runs into each pad; no contact where the stubs cross the poly row y 17853-17870.
+(3) `tools/t.sh eof sameconn.py e2efee7` and `.venv/bin/python tools/sameconn.py e2efee7`: both `connections
+identical`; the four changed port lines sit on the drawn stub ends, and `tools/ports.py` shows no lost partner.
+
+Findings: none. An observation, not a finding: the other net's metal west of x 8390 is drawn by no package
+(it is in Not done).
+
+Round 23: no findings.
+
 ## Not done
 
 - **Task 2, the loads of `sl_eq_r5_n` (= NOT `sl_eq_r5`)**: one load is drawn (piece `r5nor`,
