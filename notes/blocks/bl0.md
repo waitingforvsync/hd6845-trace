@@ -8,7 +8,7 @@ metal-shot pixels. Evidence: `cache/scratch/bl0/` (`survey.md` holds every measu
 ## Status
 
 Run 7 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 11:16 -0600). One piece of wiring, no transistor, no
-uncertain item: `bl0_w15412` (the fourth copy of the reset) to the left array's left column.
+uncertain item; reviewed (round 9: no findings): `bl0_w15412` (the fourth copy of the reset) to the left array's left column.
 
 - **Piece `w7`** (wiring, 3,600 px). `bl0_w15412` = NOT `rst_n` runs west on its poly row to a pad
   (4909,15415), south on a track to a pad (4868,16086), west as a poly row across the whole left array in
@@ -789,6 +789,24 @@ Findings, notes or geometry only:
 connections identical.
 
 Round 8: no findings that change a connection.
+
+### Run 7
+
+Round 9 (full review of piece `w7`; fresh Fable 5.2 reviewer; 2026-11-20 11:24 -0600; commit 1a54640; images
+`cache/scratch/bl0/review-9/`). Told to suspect: the 2,000 px row (breaks, a neighbouring row taken for
+it, pads, diffusion under it, branches); the two corners and the passage under the supply rail; the
+metal at each pad's ring on all four sides and each pad as a contact; the other track on x 4909. Checked:
+the row y 15401-15425 one poly from x 4909 to 5986, under the wide metal x 4950-5020 with no ring; the
+pad (4909,15415) a contact with metal south only and no metal for y 15093-15409 north of it; the track
+continuous y 15436-16096, its candidate a row crossing; the pad (4868,16086) a contact, its arm joined
+(the skirt is metal in both chips); the long row with no stretch of field in both stripped shots over
+x 2845-4868, eight spots at 3.7x in three shots with both edge lines unbroken, no transistor in the
+whole-die extraction; both corners one poly with field beyond; the row under the rail uniform; the pad
+(2700,15999) a contact with the poly from the east and the thin metal bright on both sides of the ring.
+Could not check: x 3157-3173, where the row lies under a track with dirt in both stripped shots (read
+as continuous); 8 px between the column's west edge and the diffusion beside the rail at y 16086.
+
+Round 9: no findings.
 
 ## Not done
 
