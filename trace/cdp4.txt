@@ -497,3 +497,168 @@ C 7798,13850 s=22x36
 P 7733,13912:7768,13935
 P 7760,13900:7833,13937
 B 7731,13910:7759,13937
+
+# ======================================================================
+# Row R1, upper half (y 11050-11492; run 3, 2026-11-19): the comparator of the eight bus
+# lines with R15. Per slice (cell cdp4_xr): nor = NOR(bus, q) and ne = NOR(nor, bus AND q)
+# = bus XOR q, where bus is the slice's bus-tap metal (cdp4_bus_sK) and q the poly that
+# comes up from the R15 latch below. ne gates a wide pull-down (cell cdp4_xpd; s0's is
+# shorter and drawn by hand) on a diffusion wire through the row, cdp3_k_b, whose load
+# stands east of s0 and which leaves west by busl's pad at (7555,11118).
+# ======================================================================
+@cell cdp4_xr tag=s2
+# VSS box and the neck to the pull-down's source pocket; the stub of the pull-down's gate
+# poly, onto node ne by a buried contact
+D 8387,11172:8437,11232
+D 8430,11168:8450,11198
+C 8400,11197 s=24x30
+P 8458,11205:8480,11264
+B 8457,11246:8484,11268
+D 8460,11248:8482,11270
+# node ne: the land, its west column down to the VSS diffusion (gate H), the strip east
+D 8425,11267:8535,11289
+D 8425,11267:8462,11425
+D 8524,11267:8540,11306
+D 8524,11290:8672,11306
+D 8668,11290:8795,11360
+N D 8440,11278 cdp4_xr_{}_ne
+# load of ne: gate tied to ne by the pad's buried contact
+D 8440,11333:8647,11357
+D 8600,11333:8650,11385
+C 8618,11345 s=24x24
+P 8466,11297:8519,11323
+P 8440,11300:8470,11320
+B 8438,11298:8464,11322
+P 8497,11320:8527,11335
+P 8483,11328:8527,11362
+# the bus tap's two polys: north to the series gate, south to the gate of nor's pull-down
+C 8556,11261 8556,11449 s=22x22
+P 8550,11246:8582,11278
+P 8566,11261:8722,11283
+P 8696,11261:8722,11370
+P 8542,11436:8578,11466
+P 8478,11446:8560,11468
+# q: the latch's poly, up the east side
+P 8723,11448:8745,11505
+P 8719,11410:8767,11450
+P 8742,11275:8767,11412
+# node nor: poly H (gate of ne's pull-down) and the plate under the VCC rail (load gate),
+# tied to the nor diffusion by the buried contact east of the plate
+P 8408,11392:8600,11412
+P 8596,11385:8674,11433
+P 8672,11412:8697,11447
+D 8675,11436:8697,11458
+B 8673,11434:8699,11449
+D 8620,11380:8652,11492
+D 8488,11474:8622,11492
+D 8650,11455:8795,11492
+N D 8636,11470 cdp4_xr_{}_nor
+# VSS diffusion: the big land with its contact, the wrap south of the field island,
+# the column under the south tap poly, the strip under the next slice's rail
+D 8384,11420:8462,11492
+D 8384,11422:8532,11444
+D 8488,11422:8532,11492
+D 8768,11290:8795,11492
+C 8400,11455 s=24x40
+# the bus-tap metal, from its top end down through the R15 latch (no contact there)
+M 8556,11062 y11795 w=22
+@end
+@inst cdp4_xr -782,0 tag=s0
+@inst cdp4_xr -391,0 tag=s1
+@inst cdp4_xr 391,0 tag=s3
+@inst cdp4_xr 781,0 tag=s4
+@inst cdp4_xr 1170,0 tag=s5
+@inst cdp4_xr 1560,0 tag=s6
+@inst cdp4_xr 1951,0 tag=s7
+
+# the pull-down of the match line, slices s1..s7: the line's three pieces, the diffusion
+# under poly A and its leg (channel on the north and east of the source pocket), poly B
+@cell cdp4_xpd tag=s2
+D 8370,11104:8456,11125
+D 8437,11114:8680,11200
+D 8650,11108:8776,11125
+P 8425,11138:8655,11162
+P 8630,11138:8655,11228
+P 8455,11205:8655,11228
+@end
+@inst cdp4_xpd -391,0 tag=s1
+@inst cdp4_xpd 391,0 tag=s3
+@inst cdp4_xpd 781,0 tag=s4
+@inst cdp4_xpd 1170,0 tag=s5
+@inst cdp4_xpd 1560,0 tag=s6
+@inst cdp4_xpd 1951,0 tag=s7
+# s0's pull-down: poly A is shorter and its leg lies on field
+D 7588,11100:7674,11125
+D 7655,11112:7800,11200
+D 7795,11093:7990,11117
+P 7625,11138:7822,11162
+P 7802,11138:7822,11228
+P 7673,11205:7822,11228
+N D 7620,11112 cdp3_k_b
+# the load of the match line, east of s0: VCC contact under a pad of the rail, gate tied
+# to the line by a buried contact on its head
+D 7838,11160:7968,11228
+D 7947,11093:7968,11228
+M 7815,11160:7878,11226
+C 7850,11190 s=24x24
+P 7903,11140:7945,11242
+P 7918,11105:7945,11142
+B 7916,11101:7947,11119
+
+# rails through the row (cdp3's VSS rails end at y 11200, its VCC rails at y 11052)
+M 7622,11190 y11490 w=46
+M 8013,11190 y11490 w=46
+M 8404,11190 y11490 w=46
+M 8795,11190 y11490 w=46
+M 9185,11190 y11490 w=46
+M 9574,11190 y11490 w=46
+M 9964,11190 y11490 w=46
+M 10355,11190 y11490 w=46
+M 7837,11045 y11490 w=44
+M 8228,11045 y11490 w=44
+M 8619,11045 y11490 w=44
+M 9010,11045 y11490 w=44
+M 9400,11045 y11490 w=44
+M 9789,11045 y11490 w=44
+M 10179,11045 y11490 w=44
+M 10570,11045 y11490 w=44
+# the in tracks (cdp3's bit lines) down to the R15 latch, no contact in this row
+M 7687,11048 y11510 w=22
+M 8076,11048 y11510 w=22
+M 8466,11048 y11510 w=22
+M 8857,11048 y11510 w=22
+M 9248,11048 y11510 w=22
+M 9638,11048 y11510 w=22
+M 10028,11048 y11510 w=22
+M 10419,11048 y11510 w=22
+# the a tracks (cdp3's line f) through this row and the R15 latch, no contact in either
+M 8511,11048 y11795 w=20
+M 8902,11048 y11795 w=20
+M 9293,11048 y11795 w=20
+M 9683,11048 y11795 w=20
+M 10073,11048 y11795 w=20
+M 10464,11048 y11795 w=20
+# s0, s1: a metal at the a position too, but a stub with no contact (y 11068-11843)
+M 7729,11068 y11843 w=20
+M 8119,11068 y11843 w=20
+# east end: the match line ends under the ninth VSS rail (no contact); the rail through
+# the row; s7's VSS strip widens to a land with the rail's contact
+D 10720,11108:10766,11125
+M 10746,11190 y11490 w=46
+D 10719,11425:10772,11492
+C 10745,11458 s=24x40
+# the in tracks are cdp3's bit lines and the a tracks cdp3's line f: one metal each (run 3)
+@alias cdp3_bl_c0 cdp4_in8b_s0
+@alias cdp3_bl_c1 cdp4_in8b_s1
+@alias cdp3_bl_c2 cdp4_in8b_s2
+@alias cdp3_bl_c3 cdp4_in8b_s3
+@alias cdp3_bl_c4 cdp4_in8b_s4
+@alias cdp3_bl_c5 cdp4_in8b_s5
+@alias cdp3_bl_c6 cdp4_in8b_s6
+@alias cdp3_bl_c7 cdp4_in8b_s7
+@alias cdp3_f_c2 cdp4_a_s2
+@alias cdp3_f_c3 cdp4_a_s3
+@alias cdp3_f_c4 cdp4_a_s4
+@alias cdp3_f_c5 cdp4_a_s5
+@alias cdp3_f_c6 cdp4_a_s6
+@alias cdp3_f_c7 cdp4_a_s7
