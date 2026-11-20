@@ -150,7 +150,7 @@ differing blocks of 132, metal overlay of s1, s2, s3, both layers of s7.
 
 - Strobe `wr_r15`: the poly line at y 11837 along the bottom edge of the row. Its
   ends were not examined (drawn x 7600-10600).
-- Data: in tracks `cdp4_in8b_sK` (x 8465 + dx), contact at (8466 + dx, 11809), run **up**
+- Data: the in tracks, `cdp3`'s bit lines `cdp3_bl_cK` (x 8465 + dx), contact at (8466 + dx, 11809), run **up**
   through the cell and on into the upper half of R1.
 - Output: the d land's contact falls at (8712 + dx, 11772) under the top end of the b
   track, so `cdp4_b_sK` is the buffered output of this latch.
@@ -194,7 +194,7 @@ Master slice s2; coordinates are s2's unless said. Read on a median picture of s
 (`tools/composite.py r1u`), then checked on each slice (`tools/cellcheck.py`).
 
 **Metal.** Only verticals cross the row: the VSS rail (x 8381-8427), the in track (x 8455-8478, `cdp3`'s
-bit line: `cdp3_bl_c#` = `cdp4_in8b_s#`, alias), the a track (x 8500-8522, `cdp3`'s line f: `cdp3_f_c#` =
+bit line `cdp3_bl_c#`: one metal, renamed from this block's placeholder at the refresh of 2026-11-20), the a track (x 8500-8522, `cdp3`'s line f: `cdp3_f_c#` =
 `cdp4_a_s#`, alias; s2..s7), the bus-tap track (x 8545-8568; **its top end is at y 11062**: it starts in
 this row) and the VCC rail (x 8597-8641). In and a have no contact in this row or in the R15 latch below.
 In s0 and s1 a metal stands at the a position too (x 7729, x 8119) but is a stub from y 11068 to y 11843
@@ -326,7 +326,7 @@ islands are closed curves inside it, so they are the other class.
 | `cdp4_n_s0`..`s7` | poly | x 10850, same y as `in` of the same slice | driven inside | selector output |
 | `cdp4_a_s2`..`s7` = `cdp3_f_c2`..`c7` | metal | x 8511 + offset, y 11048 (the end of `cdp3`'s line f, y 11052) | from `cdp3`'s row A | selector input a (6 bits); crosses row R1 with no contact (run 3) |
 | (bus tap) | metal | x 8556 + offset, top end y 11062 | inside | `cdp4_bus_sK` up to the comparator's two gate polys (run 3) |
-| `cdp4_in8b_s0`..`s7` = `cdp3_bl_c0`..`c7` | metal | x 8466 + offset, y 11048 (the end of `cdp3`'s bit line) | from `cdp3` | data into the R15 latch; crosses row R1 upper with no contact (run 3) |
+| `cdp3_bl_c0`..`c7` (the in tracks of s0..s7) | metal | x 8466 + offset, y 11048 (the end of `cdp3`'s bit line) | from `cdp3` | data into the R15 latch; crosses row R1 upper with no contact (run 3) |
 | `cdp3_k_b` | diffusion | x 7600, y 11095-11127 (`busl`'s band ends there) | driven inside | the comparator's match line, out to `cdp3`'s NAND (run 3) |
 | `wr_r15` | poly | y 11837; believed to cross x 7600 (ends not examined) | from outside | R1 latch strobe |
 | `cdp3_g_c2`..`s6` | metal | x 8073, 8465, 8855, 9245, 9635, 10025 at y 14059 (drawn end; continues down) | from outside (below) | data into the row D latch |

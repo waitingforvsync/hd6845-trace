@@ -428,21 +428,21 @@ C 10354,13906 s=28x40
 P 7600,11837 x10600 w=22           # strobe (poly line seen under all slices; ends not examined)
 N P 7610,11837 wr_r15
 @inst cdp4_lat -782,-1466 mx=8610 rot=180 o=8610,13132.5 tag=lr_s0
-N M 7683,11510 cdp4_in8b_s0
+N M 7683,11510 cdp3_bl_c0
 @inst cdp4_lat -392,-1466 mx=8610 rot=180 o=8610,13132.5 tag=lr_s1
-N M 8073,11510 cdp4_in8b_s1
+N M 8073,11510 cdp3_bl_c1
 @inst cdp4_lat 0,-1466 mx=8610 rot=180 o=8610,13132.5 tag=lr_s2
-N M 8465,11510 cdp4_in8b_s2
+N M 8465,11510 cdp3_bl_c2
 @inst cdp4_lat 390,-1466 mx=8610 rot=180 o=8610,13132.5 tag=lr_s3
-N M 8855,11510 cdp4_in8b_s3
+N M 8855,11510 cdp3_bl_c3
 @inst cdp4_lat 780,-1466 mx=8610 rot=180 o=8610,13132.5 tag=lr_s4
-N M 9245,11510 cdp4_in8b_s4
+N M 9245,11510 cdp3_bl_c4
 @inst cdp4_lat 1170,-1466 mx=8610 rot=180 o=8610,13132.5 tag=lr_s5
-N M 9635,11510 cdp4_in8b_s5
+N M 9635,11510 cdp3_bl_c5
 @inst cdp4_lat 1560,-1466 mx=8610 rot=180 o=8610,13132.5 tag=lr_s6
-N M 10025,11510 cdp4_in8b_s6
+N M 10025,11510 cdp3_bl_c6
 @inst cdp4_lat 1951,-1467 mx=8610 rot=180 o=8610,13132.5 tag=lr_s7
-N M 10416,11510 cdp4_in8b_s7
+N M 10416,11510 cdp3_bl_c7
 D 10722,11623:10751,11797           # VSS land under the ninth rail for the s7 cell of row R1
 C 10745,11652 s=28x40
 # ======================================================================
@@ -650,14 +650,6 @@ M 10746,11190 y11490 w=46
 D 10719,11425:10772,11492
 C 10745,11458 s=24x40
 # the in tracks are cdp3's bit lines and the a tracks cdp3's line f: one metal each (run 3)
-@alias cdp3_bl_c0 cdp4_in8b_s0
-@alias cdp3_bl_c1 cdp4_in8b_s1
-@alias cdp3_bl_c2 cdp4_in8b_s2
-@alias cdp3_bl_c3 cdp4_in8b_s3
-@alias cdp3_bl_c4 cdp4_in8b_s4
-@alias cdp3_bl_c5 cdp4_in8b_s5
-@alias cdp3_bl_c6 cdp4_in8b_s6
-@alias cdp3_bl_c7 cdp4_in8b_s7
 @alias cdp3_f_c2 cdp4_a_s2
 @alias cdp3_f_c3 cdp4_a_s3
 @alias cdp3_f_c4 cdp4_a_s4

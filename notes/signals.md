@@ -303,7 +303,7 @@ None of these rows has a register number yet, so all names are by place. Columns
 | `cdp3_cq_c#`, `cdp3_hq_c#` | read outputs of those bits, to the pass transistors onto bus N |
 | `cdp3_n_c#` | bus N, column # |
 | `cdp3_gate_e`, `cdp3_gate_f` | gates of the read pass transistors of rows E (row C onto bus N) and F (row H onto bus N) |
-| `cdp3_bl_c#`, `cdp3_f_c#`, `cdp3_g_c#` | column lines e (bit line), f and g. `cdp3_g_c2` .. `c7` each run, by a track down the left bus field, onto one of the six data lines of `cdp4`'s latch row D: c2 is one net with `cdp3_g_c2`, c3 with `cdp3_g_c3`, c4 .. c7 with `cdp3_g_c4` .. `cdp3_g_c7` (`busl`, piece `d6`; `@alias` in `trace/busl.txt` until the rename) |
+| `cdp3_bl_c#`, `cdp3_f_c#`, `cdp3_g_c#` | column lines e (bit line), f and g. `cdp3_g_c2` .. `c7` each run, by a track down the left bus field, onto one of the six data lines of `cdp4`'s latch row D: c2 is one net with `cdp3_g_c2`, c3 with `cdp3_g_c3`, c4 .. c7 with `cdp3_g_c4` .. `cdp3_g_c7` (`busl`, piece `d6`; `@alias` in `trace/busl.txt` until the rename) **The bit lines `cdp3_bl_c0`..`c7` run on south through `cdp4`'s R15 comparator row without a contact to the data contacts of R15's latch** (`cdp4`'s in tracks; `cdp4` run 3, firm; one name since the refresh of 2026-11-20), so R12 (marked), R13, R14 and R15 are written from the same eight lines; whether they are the data bus lines `db_b#` is not traced (above y 8040, `cdp2`). **`cdp3_f_c2`..`c7` are the buffered outputs of R14's latch** (`cdp3` row A, firm) and one metal each with `cdp4_a_s2`..`s7`, the read selector's source a: both names are kept, the second being the selector cell's own pin name made from its template |
 | `cdp3_k_a`, `cdp3_k_b`, `cdp3_k_c` | lines of the NAND beside row C. `cdp3_k_b` (the poly row y 9450) comes from a pad (7554,9450) west of x 7600, whose metal track runs south at x 7555 to a contact (7555,11118) on a diffusion that goes east under column 0's VSS rail (`busl`, piece `kb`). **`cdp3_k_b` is the match line of `cdp4`'s comparator row** (`cdp4` run 3, 2026-11-19; firm): `cdp3_k_b` = NOR(`cdp4_xr_s0_ne` .. `cdp4_xr_s7_ne`), high when all eight bus lines `cdp4_bus_s#` equal R15's latch outputs; a name for what it is waits for a refresh. **`cdp3_k_c` is the match line of `cdp3`'s row A** (2026-11-19; firm): `cdp3_k_c` = NOR(`cdp4_xr_c2_ne` .. `cdp4_xr_c7_ne`), high when line g (`cdp3_g_c#`) equals R14's latch outputs in all six columns; so the NAND is NOT((bus = R15) AND (line g = R14)), believed the cursor match, active low |
 | `cdp3_l#` | a line of channel B, named by its y |
 | `cdp4_lc_s#_*`, `cdp4_lr_s#_*`, `cdp4_ldr_s#_*` | cdp4 latch rows C (8 bit), R1-lower (8 bit, upside down) and D (6 bit), slice #: `_a` storage node, `_n2` inverse, `_q` output, `_x2` internal strap |
@@ -1165,3 +1165,11 @@ datapath s1...s7, s0 became b0...b6, b7.
 | rcs_g3245 | tl5_w2722 | |
 | tl1_w3678 | tl4_w4590 | |
 | tl1_w2857 | rcs_mn3852 | |
+| cdp4_in8b_s0 | cdp3_bl_c0 | |
+| cdp4_in8b_s1 | cdp3_bl_c1 | |
+| cdp4_in8b_s2 | cdp3_bl_c2 | |
+| cdp4_in8b_s3 | cdp3_bl_c3 | |
+| cdp4_in8b_s4 | cdp3_bl_c4 | |
+| cdp4_in8b_s5 | cdp3_bl_c5 | |
+| cdp4_in8b_s6 | cdp3_bl_c6 | |
+| cdp4_in8b_s7 | cdp3_bl_c7 | |
