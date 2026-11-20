@@ -5,8 +5,8 @@
 # cluster's west column) is shared with tla, whose rails and units stand among tl1's.
 
 # East side (x 2817), rows that run on east
-tl1_w3678   M  2856,2803-2820  in   metal east from the pad (2830,2811) at the end of the row y 2812; its only other end is gate 2 of the NOR at y 3558-3742
-tl1_w2857   P  2817,2848-2866  in   row above the cluster; its other ends are gates (the data of the first latch)
+tl4_w4590   M  2856,2803-2820  in   metal east from the pad (2830,2811) at the end of the row y 2812; its only other end is gate 2 of the NOR at y 3558-3742
+rcs_mn3852   P  2817,2848-2866  in   row above the cluster; its other ends are gates (the data of the first latch)
 tl1_w3594   P  2817,2890-2908  in   row above the cluster; its other ends are four gates (NOR tl1_w3636; the enable of the second latch)
 rcs_x1   P  2817,5362-5382  ?    row under the foot, on east past x 3400; gates of the two units at y 3982 and y 4590
 tl1_w4937   P  2817,5450-5470  in   row under the foot, on east past x 3400; gate 2 of rcs_e4's NOR

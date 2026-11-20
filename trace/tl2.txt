@@ -93,20 +93,20 @@ P 2925,6327 x3533 w=20
 @s 26x26
 
 # ---- the rows that only pass through the strip
-# tl1_w2857: row y 2857 from tl1's piece, straight east out of the strip (no pad)
+# rcs_mn3852: row y 2857 from tl1's piece, straight east out of the strip (no pad)
 P 2810,2848:3533,2866
-N P 3200,2857 tl1_w2857
+N P 3200,2857 rcs_mn3852
 # tl1_w4937: row y 5458 under the foot from tl1's piece, straight east out of the strip (no pad)
 P 2810,5449:3533,5467
 N P 3200,5458 tl1_w4937
 
-# ---- tl1_w3678: tl1's metal from the pad (2830,2811) east along y 2812 to a pad with a contact
+# ---- tl4_w4590: tl1's metal from the pad (2830,2811) east along y 2812 to a pad with a contact
 # (3154,2813); poly row east along y 2813 out of the strip
 M 2848,2812 x3164 w=18
 P 3132,2796:3174,2830
 C 3154,2813
 P 3165,2804:3533,2822
-N P 3400,2813 tl1_w3678
+N P 3400,2813 tl4_w4590
 
 # ---- track D, upper piece = tl1_w2637: tl1's metal from the pad (2827,2637) east along y 2640,
 # south at x 3241 to a pad with a contact (3240,3204); poly row east along y 3202 to x 3522,
@@ -124,7 +124,7 @@ P 3217,4359:3259,4393
 C 3237,4376
 P 3072,4365:3230,4383
 
-# ---- track F, upper piece (y 2630-3732) = tl2_w3722: top pad (3324,2639) with a row east along
+# ---- track F, upper piece (y 2630-3732) = tl5_w4937: top pad (3324,2639) with a row east along
 # y 2639 out of the strip; bottom pad (3322,3722) with a row west along y 3722 into the gate
 # column east of R3 (gate 1 of run 3's piece 1, at the end of this file)
 M 3326,2630 y3732 w=18
@@ -134,7 +134,7 @@ P 3340,2630:3533,2648
 P 3302,3705:3344,3739
 C 3322,3722
 P 3100,3713:3310,3731
-N M 3326,3200 tl2_w3722
+N M 3326,3200 tl5_w4937
 
 # ---- track F, middle piece (y 4278-4470) = tl3_w3982: bottom pad (3322,4460), poly row west along
 # y 4461 to x 3105, south UNDER track A (x 3105-3125, no contact to A) into the east end of tla's
@@ -209,7 +209,7 @@ C 3410,4764
 P 3425,4755:3540,4773
 N M 3413,5000 tc1_o3527
 
-# ---- track I, upper piece (y 2674-3256) = tla's rcs_g3245: bottom pad (3452,3246) at the east end
+# ---- track I, upper piece (y 2674-3256) = tl5_w2722 (tla's input of rcs_u3288): bottom pad (3452,3246) at the east end
 # of tla's row y 3246; top pad (3454,2683) with a row east along y 2683 out of the strip
 M 3456,2674 y3256 w=18
 P 3434,2666:3476,2700
@@ -287,13 +287,13 @@ P 3395,3755:3540,3773
 # pull-downs with no load of their own. Their node box (x 3030-3068, y 3737-3793) has an arm
 # west under the rail (y 3757-3777) that turns south at x 2915-2935, under the east margin of
 # thin metal E, and runs into tla's node box of rcs_bc3460 (D 2898,3882:2932,3915). So
-#   rcs_bc3460 = NOR(rcs_e3, rcs_e4, tl2_w3722, clk_tl)      (tla had NOR(rcs_e3, rcs_e4))
+#   rcs_bc3460 = NOR(rcs_e3, rcs_e4, tl5_w4937, clk_tl)      (tla had NOR(rcs_e3, rcs_e4))
 # VSS link: a strip y 3696-3709 from tla's VSS box (2966-3014 x 3655-3725) east to the column's top
 D 3000,3696:3068,3709
 # the column (west edge x 3030: field at x 3014-3023 beside the node box, px.py row 3745; review
 # round 1): under gate 1, the node box, under gate 2, onto tla's VSS arm (D 2995,3818:3063,3836)
 D 3030,3696:3068,3836
-# gate 1: tl2_w3722's row (from track F's pad (3322,3722)) on west under track A (no contact:
+# gate 1: tl5_w4937's row (from track F's pad (3322,3722)) on west under track A (no contact:
 # textmap 3084 3700 3132 3745) across the column; west end x 3012-3018 at the rail's edge
 P 3018,3712:3105,3733
 # gate 2: the row from track B's top pad (3150,3812), contact on tla's metal (clk_tl)

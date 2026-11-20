@@ -8,17 +8,17 @@ vss         M  3257-3305,6350   -    the metal from R3's foot, on south
 
 # ---- run 2: the bus field's east tracks and their rows
 # West side (x 2817 and tl1's metal ends): onto tl1's drawn pieces
-tl1_w2857   P  2817,2848-2866   out  row y 2857 to tl1's gates; comes through the strip from the east
+rcs_mn3852   P  2817,2848-2866   out  row y 2857 to tl1's gates; comes through the strip from the east
 tl1_w3594   P  2817,2890-2908   out  row y 2899 to tl1's gates; pad (3410,2899) of track H's upper piece on it
-tl1_w3678   M  2848,2803-2821   out  tl1's metal from the pad (2830,2811), on east to a pad (3154,2813)
+tl4_w4590   M  2848,2803-2821   out  tl1's metal from the pad (2830,2811), on east to a pad (3154,2813)
 tl1_w2637   M  2845,2631-2649   in   tl1's metal from the pad (2827,2637), on east and south (track D upper) to tl3's latch data
 rcs_x1   P  2817,5362-5380   out  row y 5371 to tl1's metal x 2457 (the clear of tl1's two latches); one net with rcs_x1 (alias)
 tl1_w4937   P  2817,5449-5467   out  row y 5458 to tl1's metal x 2370; comes through the strip from the east
 # East side (x 3533, or x 3540 where tl3 has drawn the row's other part)
-tl2_w3722   P  3533,2630-2648   ?    row y 2639 east from track F's top pad (3324,2639)
-rcs_g3245   P  3533,2674-2692   in   row y 2683 east from track I's top pad (3454,2683); the net's known end is a gate in tla
-tl1_w3678   P  3533,2804-2822   in   row y 2813 east from the pad (3154,2813)
-tl1_w2857   P  3533,2848-2866   in   row y 2857, straight through
+tl5_w4937   P  3533,2630-2648   ?    row y 2639 east from track F's top pad (3324,2639)
+tl5_w2722   P  3533,2674-2692   in   row y 2683 east from track I's top pad (3454,2683); the net's known end is a gate in tla
+tl4_w4590   P  3533,2804-2822   in   row y 2813 east from the pad (3154,2813)
+rcs_mn3852   P  3533,2848-2866   in   row y 2857, straight through
 tl1_w3594   P  3533,2890-2908   ?    row y 2899 east of track H's pad; every known end is a gate
 tl1_w2637   P  3540,3325-3343   out  onto tl3's row y 3333 (tl1_w2637, the latch's data): alias
 tl3_w3419   P  3540,3410-3428   in   tl3's row y 3419 (the latch's inverted output) to track J's upper piece

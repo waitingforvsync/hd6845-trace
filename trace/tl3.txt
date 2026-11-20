@@ -1028,20 +1028,16 @@ P 4100,6316:4250,6336
 # (y 2639, 2683, 2813, 2857). Each runs straight from tl2's stub (x 3533) under both VSS
 # rails and the thin metals; no transistor, no contact on the way. Four joins.
 # =====================================================================================
-P 3525,2639 x4262 w=18               # tl2_w3722's row on to tl4's pad (4279,2640): bus line 4
+P 3525,2639 x4262 w=18               # tl5_w4937's row on to tl4's pad (4279,2640): bus line 4
 N P 3850,2639 tl5_w4937
-@alias tl5_w4937 tl2_w3722
-P 3525,2683 x4233 w=18               # rcs_g3245's row to a pad; metal east is tl4's bus line 5
+P 3525,2683 x4233 w=18               # tl5_w2722's row to a pad; metal east is tl4's bus line 5
 P 4216,2666:4250,2700
 C 4233,2683
 M 4233,2685 x4258 w=12
 N P 3850,2683 tl5_w2722
-@alias tl5_w2722 rcs_g3245
-P 3525,2813 x4260 w=18               # tl1_w3678's row on to tl4's pad (4366,2812)
+P 3525,2813 x4260 w=18               # tl4_w4590's row on to tl4's pad (4366,2812)
 N P 3850,2813 tl4_w4590
-@alias tl4_w4590 tl1_w3678
-P 3525,2857 x4233 w=18               # tl1_w2857's row to the top pad of tla's bus piece x 4233
+P 3525,2857 x4233 w=18               # rcs_mn3852's row to the top pad of tla's bus piece x 4233
 P 4216,2840:4250,2874
 C 4233,2857
 N P 3850,2857 rcs_mn3852
-@alias rcs_mn3852 tl1_w2857

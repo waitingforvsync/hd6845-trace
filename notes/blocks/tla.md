@@ -31,7 +31,7 @@ rcs_bc3460 = NOR(e3, e4)                 a second copy of in3's function        
 rcs_cond_n = NOR(in2, in3)               "m2": the step condition inverted              (3046,4765)
 rcs_cond   = NOT rcs_cond_n              inverter on the column above; on bus piece A3   (3046,4636)
 rcs_cond_lat <- rcs_cond while clk_tl  pass transistor latch (AMB-009)                (3046,4546)
-rcs_u3288  = NOR(rcs_g3245, rcs_bd3330)                                                (3046,3288)
+rcs_u3288  = NOR(tl5_w2722, rcs_bd3330)                                                (3046,3288)
 rcs_n4200  = NOT(rcs_cond AND clk_tl OR rcs_x1)   AND-OR-INVERT under the rail (3008,4200)
 in1        = NOR(rcs_mu, rcs_mv)         middle cluster                                (4081,4072)
 rcs_mu     = NOT ra_eq_r9              middle cluster, inverter                      (4050,3374)
@@ -67,8 +67,8 @@ rcs_bc3460 = NOR(e3, e4)          unit at y 3892: a second copy of in3's functio
                                   goes up bus line C's upper piece to the unit at y 3425
 rcs_u3425  = NOT rcs_bc3460       = e3 OR e4. An inverter: one pull-down, nothing above the node.
                                   Its load and its destination are in the dense part west of the rail
-rcs_u3288  = NOR(rcs_g3245, rcs_bd3330)   unit at y 3288. Output up bus line C's top piece and west
-                                  along y 2728 to about x 2822 (not looked at). rcs_g3245 comes from
+rcs_u3288  = NOR(tl5_w2722, rcs_bd3330)   unit at y 3288. Output up bus line C's top piece and west
+                                  along y 2728 to about x 2822 (not looked at). tl5_w2722 comes from
                                   the east; rcs_bd3330 is a piece of bus line D (y 3330-4380)
 ```
 
@@ -507,7 +507,7 @@ Each is in the named block's notes in full; the trace fixes are on main.
   `rcs_x1`); the poly that leaves east along y 3752-3770 (`a2`) is the
   output of `tl3`'s NOR 1.
 - Bus pieces: D upper and F are drawn by `tl2`, as is D middle's bottom contact (3237,4376).
-- `rcs_bc3460` = NOR(`rcs_e3`, `rcs_e4`, `tl2_w3722`, `clk_tl`): two inputs more than this file says
+- `rcs_bc3460` = NOR(`rcs_e3`, `rcs_e4`, `tl5_w4937`, `clk_tl`): two inputs more than this file says
   (so `rcs_u3425` is not simply `rcs_e3` OR `rcs_e4`); the step formula stands. `rcs_bd3330` has its
   driver (`tl2`'s piece 2, AMB-029). `rcs_n4200` has a third input, `rcs_bd3330` (marked), on the west
   part of g3, which is two polys (fixed, 0239da7).
@@ -569,6 +569,6 @@ Each is in the named block's notes in full; the trace fixes are on main.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
-- `rcs_g3245` ("comes from ...", the input of `rcs_u3288`): it is NOT `tl4_w3113` (`tl3` run 12: its row y 2683 is drawn through strip 3 onto `tl5_w2722`).
-- `tl2_w3722`, the third input of `rcs_bc3460`: it is NOT `tl4_w4068` (`tl3` run 12: the row y 2639 onto `tl5_w4937`).
-- `tl1_w2857` is `rcs_mn3852` (the row y 2857 is one poly from `rcs_mn3852`'s unit to `tl1`'s first latch's data).
+- The input of `rcs_u3288` that this file called g3245 ("comes from ..."): it is `tl5_w2722` = NOT `tl4_w3113` (`tl3` run 12: its row y 2683 is drawn through strip 3 onto `tl4`'s bus line 5; renamed at the refresh of 2026-11-20).
+- The third input of `rcs_bc3460` (`tl2`'s w3722): it is `tl5_w4937` = NOT `tl4_w4068` (`tl3` run 12: the row y 2639 onto `tl4`'s bus line 4; renamed).
+- The data of `tl1`'s first latch (`tl1`'s w2857) is `rcs_mn3852` (the row y 2857 is one poly from `rcs_mn3852`'s unit to the latch; renamed).

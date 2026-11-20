@@ -741,7 +741,7 @@ a hole.
 What follows, **marked** (Ambiguity 13):
 
     tl1_w3594 = rst_ck
-    tl1_w3636 = NOR(rst_ck, tl1_w3678)              tl1's first latch is open while rst_ck and tl1_w3678 are low
+    tl1_w3636 = NOR(rst_ck, tl4_w4590)              tl1's first latch is open while rst_ck and tl4_w4590 are low
     tl1_w4678 = NOT(rcs_x1 OR rst_ck AND tl1_w4360 OR tl1_w4703)     tl1's second latch is open while rst_ck is high
     rcs_a2    = NOR(rst_ck, tl3_w3803)
 
@@ -993,10 +993,10 @@ east ends in both):
 
 | Row | West (`tl2`) | East end | Join |
 |---|---|---|---|
-| y 2639 | `tl2_w3722` (track F's top pad (3324,2639)) | on across x 4250 to `tl4`'s pad (4279,2640): bus line 4 | `tl2_w3722` = `tl5_w4937` = NOT `tl4_w4068` |
-| y 2683 | `rcs_g3245` (track I's top pad (3454,2683)) | a pad with a metal contact (4233,2683); its metal runs east as `tl4`'s bus line 5 | `rcs_g3245` = `tl5_w2722` = NOT `tl4_w3113` |
-| y 2813 | `tl1_w3678` (the pad (3154,2813)) | on across x 4250 to `tl4`'s pad (4366,2812) | `tl1_w3678` = `tl4_w4590` |
-| y 2857 | `tl1_w2857` | a pad with a metal contact (4233,2857), the top end of `tla`'s bus piece x 4233 | `tl1_w2857` = `rcs_mn3852` |
+| y 2639 | `tl2`'s track F (its w3722; top pad (3324,2639)) | on across x 4250 to `tl4`'s pad (4279,2640): bus line 4 | the net is `tl5_w4937` = NOT `tl4_w4068` |
+| y 2683 | `tla`'s input g3245 (track I's top pad (3454,2683)) | a pad with a metal contact (4233,2683); its metal runs east as `tl4`'s bus line 5 | the net is `tl5_w2722` = NOT `tl4_w3113` |
+| y 2813 | `tl1`'s w3678 (the pad (3154,2813)) | on across x 4250 to `tl4`'s pad (4366,2812) | the net is `tl4_w4590` |
+| y 2857 | `tl1`'s w2857 | a pad with a metal contact (4233,2857), the top end of `tla`'s bus piece x 4233 | the net is `rcs_mn3852` |
 
 The two pads' contacts: green holes in the clean shot (183/180/112 and 157/165/95) under bright
 metal (`px.py pt 4233,2683 4233,2857`).
@@ -1068,10 +1068,10 @@ What the joins say (extraction; inputs identified, no gate's logic changed):
 | `rcs_thin_e` | metal | (3967-3979, 6350) | ? | pad A's metal, south out of the strip to `ur`'s pad (3968,6410), whose poly leaves east along y 6402-6422 (seen to x 4256, not drawn) |
 | `c4l_gab` | metal | (4077-4089, 6350) | ? | pad B's (4083,6327) thin metal, south out of the strip: `ur`'s `c4l_gab`, the 4-bit counter's pass-gate line (an alias) |
 | `c4l_gab` | poly | (4250, 6316-6336) | ? | pad B's row, east out of the strip: `tl4`'s row to the pad (4929,6323) of `c4l_gab` (the clear of `tl5`'s latch c) |
-| `tl5_w4937` (= `tl2_w3722`) | poly | (3533, 2630-2648) and (4250, 2630-2648) | through | the row y 2639, `tl2`'s stub to `tl4`'s pad (4279,2640) |
-| `tl5_w2722` (= `rcs_g3245`) | poly, metal | (3533, 2674-2692); metal (4250, 2679-2691) | in from the east | the row y 2683 from the pad (4233,2683), where `tl4`'s bus line 5 starts |
-| `tl4_w4590` (= `tl1_w3678`) | poly | (3533, 2804-2822) and (4250, 2801-2820) | through | the row y 2813 |
-| `rcs_mn3852` (= `tl1_w2857`) | poly | (3533, 2848-2866) | out | the row y 2857 from the pad (4233,2857) on `tla`'s bus piece |
+| `tl5_w4937` (`tl2`'s w3722 until the refresh of 2026-11-20) | poly | (3533, 2630-2648) and (4250, 2630-2648) | through | the row y 2639, `tl2`'s stub to `tl4`'s pad (4279,2640) |
+| `tl5_w2722` (`tla`'s g3245 until then) | poly, metal | (3533, 2674-2692); metal (4250, 2679-2691) | in from the east | the row y 2683 from the pad (4233,2683), where `tl4`'s bus line 5 starts |
+| `tl4_w4590` (`tl1`'s w3678 until then) | poly | (3533, 2804-2822) and (4250, 2801-2820) | through | the row y 2813 |
+| `rcs_mn3852` (`tl1`'s w2857 until then) | poly | (3533, 2848-2866) | out | the row y 2857 from the pad (4233,2857) on `tla`'s bus piece |
 
 ## Ambiguities
 

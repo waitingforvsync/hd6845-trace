@@ -8,7 +8,7 @@
 # thin metal W x 2689-2703), y 3558-3742: a NOR unit. findcell: tla's in2 unit
 # (2535-2790 x 5120-5290) recurs here at -1,-1562 with score 0.92 (acid1b); the geometry
 # below is that unit's, moved, and checked on b1.png (2.7x acid1b) and m1.png (2.7x metal).
-#   tl1_w3636 = NOR(tl1_w3594, tl1_w3678)
+#   tl1_w3636 = NOR(tl1_w3594, tl4_w4590)
 # Column x 2549-2591 west of R1 between the rail's VSS boxes at y 3530-3588 (tla's, contact
 # (2612,3550)) and y 3697-3742 (contact (2622,3722)).
 D 2549,3558:2604,3578                 # top arm onto tla's rail box
@@ -26,7 +26,7 @@ N P 2530,3592 tl1_w3594
 P 2460,3668:2598,3688
 P 2440,3663:2476,3693
 C 2457,3678
-N P 2500,3678 tl1_w3678
+N P 2500,3678 tl4_w4590
 # output: buried contact (concentric box) on the node between the gates, poly west along
 # y 3625-3645 to a pad with a contact (2283,3636) at the north end of a metal x 2283
 B 2547,3620:2577,3652
@@ -236,9 +236,9 @@ N P 2545,4070 tl1_w4070
 # ====================================================================
 # West column, y 4340-4590 (and its copy 608 px higher, y 3732-3982): an inverter and a
 # three-input gate, which with the unit below (tl1_ub) makes a cross-coupled pair.
-#   tl1_w4360 = NOT tl1_w4243                               (copy: tl1_w3752 = NOT tl1_w2857)
+#   tl1_w4360 = NOT tl1_w4243                               (copy: tl1_w3752 = NOT rcs_mn3852)
 #   tl1_w4703 = NOT( tl1_w4243 AND tl1_w3594  OR  tl1_w4678 )
-#                               (copy: tl1_w4287 = tl1_w4095 = NOT( tl1_w2857 AND tl1_w3636 OR tl1_w4070 ))
+#                               (copy: tl1_w4287 = tl1_w4095 = NOT( rcs_mn3852 AND tl1_w3636 OR tl1_w4070 ))
 # Read on u1_a.png, u1_m1.png (4.1x clean shot and chip-1 metal), u2_a.png, u2_m.png (6x, four
 # shots), u3_a.png, u3_a2.png (6x both stripped shots), u4_all.png (west box, master and copy);
 # tools/railprof.py 2604 2646 4380 4600 (and 3772 3992); profiles in the notes.
@@ -351,18 +351,18 @@ M 2371,3925 y4300
 P 2354,3923:2392,3953
 C 2372,3938
 P 2386,3929:2545,3949
-# tl1_w2857: metal x 2370, y 2843-3863. Top pad (2372,2857): poly row east along y 2848-2866,
+# rcs_mn3852: metal x 2370, y 2843-3863. Top pad (2372,2857): poly row east along y 2848-2866,
 # under R1 and on east out of the strip. Bottom pad (2372,3851): poly row east along
 # y 3841-3861, a gate of the unit at y 3740-3960 (cell tl1_ua's copy)
 M 2371,2843 y3863
 P 2354,2842:2392,2872
 C 2372,2857
 P 2386,2848:2817,2866
-N P 2700,2857 tl1_w2857
+N P 2700,2857 rcs_mn3852
 P 2354,3836:2392,3866
 C 2372,3851
 P 2386,3841:2545,3861
-# tl1_w3678 (the NOR's second gate): metal x 2457, y 2800-3690. Top pad (2458,2812): poly
+# tl4_w4590 (the NOR's second gate): metal x 2457, y 2800-3690. Top pad (2458,2812): poly
 # row east along y 2803-2821 out of the strip
 M 2457,2800 y3690
 P 2440,2797:2478,2827

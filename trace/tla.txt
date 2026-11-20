@@ -419,7 +419,7 @@ P 2950,3449:2968,3547
 N P 2959,3530 rcs_iso2958
 
 # ====================================================================
-# East column, unit at y 3288: rcs_u3288 = NOR(rcs_g3245, rcs_bd3330). Standard unit (as
+# East column, unit at y 3288: rcs_u3288 = NOR(tl5_w2722, rcs_bd3330). Standard unit (as
 # rcs_c1's, 173 px lower). Output by the buried contact and a poly east to the bottom contact
 # (3192,3288) of bus line C's top piece, which runs north to y 2728 and west along
 # y 2718-2738 to about x 2822 (its west end: not looked at).
@@ -430,7 +430,7 @@ C 2978,3372 s=30x30
 D 2995,3350:3063,3372
 # gate 1: poly y 3237-3255 from the east, across the whole bus without a contact
 P 3012,3237:3400,3255
-N P 3300,3246 rcs_g3245
+N P 3300,3246 tl5_w2722
 # gate 2: poly y 3320-3340 from the top contact (3237,3328) of a piece of bus line D that
 # runs down to y 4380 (follow.py; its bottom contact at about (3239,4376) not looked at)
 P 3012,3320:3225,3340

@@ -59,10 +59,10 @@ rcs_thin_e  P  3533,6317-6337  ?    the row y 6327 from tl2's pad (2913,6327), o
 rcs_thin_e  M  3967-3979,6350  ?    pad A's metal, south out of the strip to ur's pad (3968,6410), whose poly leaves east along y 6402-6422
 c4l_gab   M  4077-4089,6350  ?    pad B's (4083,6327) thin metal, south out of the strip: ur's c4l_gab (an alias)
 c4l_gab   P  4250,6316-6336  ?    pad B's row, on east: tl4's row to the pad (4929,6323) of c4l_gab
-tl5_w4937   P  3533,2630-2648  ?    the row y 2639: tl2's tl2_w3722 (an alias), on east
+tl5_w4937   P  3533,2630-2648  ?    the row y 2639: tl2's track F, on east
 tl5_w4937   P  4250,2630-2648  in   the row y 2639 onto tl4's pad (4279,2640), bus line 4
-tl5_w2722   P  3533,2674-2692  out  the row y 2683: tl2's rcs_g3245 (an alias)
+tl5_w2722   P  3533,2674-2692  out  the row y 2683: tla's input by track I
 tl5_w2722   M  4250,2679-2691  in   metal from the pad (4233,2683) onto tl4's bus line 5
-tl4_w4590   P  3533,2804-2822  ?    the row y 2813: tl2's tl1_w3678 (an alias)
+tl4_w4590   P  3533,2804-2822  ?    the row y 2813: tl1's row
 tl4_w4590   P  4250,2801-2820  ?    the row y 2813 onto tl4's row of the pad (4366,2812)
-rcs_mn3852  P  3533,2848-2866  out  the row y 2857 from the pad (4233,2857) on tla's bus piece: tl2's tl1_w2857 (an alias)
+rcs_mn3852  P  3533,2848-2866  out  the row y 2857 from the pad (4233,2857) on tla's bus piece: tl2's rcs_mn3852 (an alias)
