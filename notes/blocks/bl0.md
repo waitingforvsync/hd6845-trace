@@ -8,7 +8,7 @@ metal-shot pixels. Evidence: `cache/scratch/bl0/` (`survey.md` holds every measu
 ## Status
 
 Run 3 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 10:03 -0600). One piece, 2 transistors and 300 px
-of wire, no uncertain item; reviewed (round 4: one finding, fixed; round 5 below). The first loads of `bl0_w17210`.
+of wire, no uncertain item; reviewed (round 4: one finding that changes a connection, fixed; round 5, the fix check: no findings). The first loads of `bl0_w17210`.
 
 - **Piece `u3`** (2 transistors). The metal of `bl0_w17210` (x 7178-7198) has two pads and ends on the
   second: (7188,17300), the gate of the third unit under the rail, and (7188,17472), the gate of the
@@ -488,6 +488,18 @@ Findings:
 4. Comment: no edge parts the supply box from `n2`'s at x 7510. Both are `vcc`; left as drawn.
 
 Round 4: one finding that changes a connection, fixed; three geometry or comment findings.
+
+Round 5 (fix check of round 4's fixes; fresh Fable 5.2 reviewer; 2026-11-20 10:16 -0600; against commit 3be37d6; images
+`cache/scratch/bl0/review-5/`). Checked at 4x with profiles in both metal shots and the clean shot: the
+metal from the north ends at the corner (metal to y 17308, bare ground y 17317-17323, the pad's ring from
+17326) and passes the pad without touching its ring; bare ground west of the pad (x 7112-7136); only the
+poly row to the east; one continuous metal south from y 17370 to 17622 with a plain crossing of the poly
+row y 17548-17570 (no hole, no widening); the metal ends on the pad (7143,17647), whose poly row east is
+y 17638-17656; the plate to about y 17362 and the diffusion edge under it at 17348-17350; the output
+row's edges. `tools/t.sh bl0 sameconn.py 3be37d6` and `.venv/bin/python tools/sameconn.py 3be37d6`: every
+difference intended (none in names, transistors or equations; the port into `bc1` is gone).
+
+Round 5: no findings.
 
 ## Not done
 
