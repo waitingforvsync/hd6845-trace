@@ -152,8 +152,8 @@ Run 8 (richtw1's session, Claude Fable 5.2; 2026-11-20 13:42 to 13:51 +0100). Tw
   (`cdp4`'s `rsel13_buf`). With them the extraction gives, firm (`tools/unsure.py --equations`):
   **`cdp4_rst` = NOR(`rsel12_buf`, `rsel13_buf`, `rsel14_buf`, `rsel15_buf`, `rsel16_buf`,
   `rsel17_buf`)**: the selector's nodes are released only while one of R12-R17 is being read.
-- The names are gathered by `@alias` (`rsel12_buf` with the wire `cdp4` called rsel12_buf_u, the wire `cdp3` called gate_e; `rsel13_buf`
-  with the wire `cdp4` called rsel13_buf_u, the wire `cdp3` called gate_f); the renames are the coordinator's.
+- The names are gathered by `@alias` (`rsel12_buf` with the open-join label of `cdp4`'s gate row 4 and the wire `cdp3` called gate_e; `rsel13_buf`
+  with the open-join label of gate row 2 and the wire `cdp3` called gate_f); renamed by the refresh of 2026-11-20.
 - One crossing is recorded as an ambiguity (15): the track x 6452 over `cdp4_bus_s1`'s row y 13375 is
   dim and reddish in both chips for 18 px, without pad or ring. And Ambiguity 13 (AMB-039) has its
   second direction: the row y 13744 has its own driver, by a pad.
