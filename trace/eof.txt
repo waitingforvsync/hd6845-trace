@@ -2092,10 +2092,13 @@ C 6102,18472
 M 6102,18474 x5583 w=13
 # pad with a contact (5583,18472): outline x 5568-5606, y 18452-18490; ring and bright centre
 # x 5576-5588 in both metal shots, a green hole with a speck in the clean shot's cream pad, a box
-# in the chip-2 stripped shot. The metal's ring side is 18 px (x 5589-5607), dim not bare: the
-# clean shot's protected strip (pink field under the metal, then the pad's cream) is unbroken
-# from the metal into the pad (textmap.py 5552 18446 5624 18506 3 --acid; r27_p5583.png, 6x, four
-# shots; trap 16). Ground west and north of it: the metal ends here.
+# in the chip-2 stripped shot. The metal's ring side is 18 px (x 5589-5607): two dark lines (the
+# hole's wall x 5591-5595 and the pad's edge x 5602-5606) with a dim yellow strip between (chip 2
+# 154/130/82 at x 5598: metal over the pad's poly, not orange open poly and not ground), and the
+# metal's two edge lines run unbroken into the pad's outline in both chips (px.py row 18474 5586
+# 5612 2 metal,metal1; textmap.py 5552 18446 5624 18506 3 --acid; r27_p5583.png, 6x, four shots;
+# review round 34; trap 16). The clean shot's protected strip is unbroken there too, which by
+# itself proves little over 18 px (trap 2). Ground west and north of it: the metal ends here.
 P 5567,18454:5603,18490
 C 5583,18472
 # the pad's poly leaves south: a column x 5578-5596 (cream between dark outlines at x 5577 and
