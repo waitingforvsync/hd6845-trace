@@ -529,3 +529,39 @@ M 6754,15000 y13290 x6820 y10400 w=14
 N M 6754,14000 busl_x6820
 M 6841,15000 y13376 x6906 y10400 w=14
 N M 6841,14000 busl_x6906
+
+# =====================================================================================
+# Pieces r12, r13 (run 8, 2026-11-20): the buffered read selects of R12 and R13 up the field.
+# trace/regs.txt draws rsel12_buf and rsel13_buf from sel's buffers along the bottom bus to this
+# region's south edge at (6452,14990) and (6494,14990), and the two tracks north of y 10400 onto
+# the pads of cdp3's read-gate rows (rsel12_buf: cdp3_gate_e, row C onto bus N; rsel13_buf:
+# cdp3_gate_f, row H). Between them each is one thin metal, the two innermost of the nest of Ls
+# that the selects of piece ctl continue: north, east along an arm (y 12984 / y 13028), north,
+# east along a second arm (y 12097 / y 12141), north. Each has ONE tap, a pad in its lower run
+# on the west end of a poly row that runs east under thirty tracks to cdp4's corner gate group:
+# rsel12_buf's on the row y 13852 (which steps south at x 7528-7550 onto the group's gate row 4,
+# y 13873), rsel13_buf's on the row y 13744 (into the block of gate row 2). So both are inputs
+# of the NOR that makes cdp4_rst. The arm y 12097 lies for 170 px on cdp4_bus_s2's poly row and
+# no pad, ring or hole is on it (traps 13, 15); the arm y 12141 lies over field.
+# Scan: cache/scratch/busl/r8_scan.txt. One crossing recorded as an ambiguity: the track x 6452
+# over cdp4_bus_s1's row y 13375 (notes, Ambiguity 15).
+# =====================================================================================
+# r12: rsel12_buf
+M 6452,15000 y12984 x6516 y12097 x6690 y10400 w=14
+N M 6452,14500 rsel12_buf
+P 6430,13836:6476,13870               # the tap's pad, the west end of the row y 13852
+C 6452,13854 s=24x24
+P 6452,13852 x7545 w=20               # the row, east under the tracks
+P 7528,13842:7550,13884               # its step south onto cdp4's gate row 4 (y 13873)
+N P 7000,13852 rsel12_buf
+# r13: rsel13_buf
+M 6494,15000 y13028 x6560 y12141 x6733 y10400 w=14
+N M 6494,14500 rsel13_buf
+P 6472,13727:6516,13761               # the tap's pad, the west end of the row y 13744
+C 6495,13744 s=24x24
+P 6494,13744 x7560 w=20               # the row, east into the block of cdp4's gate row 2
+N P 7000,13744 rsel13_buf
+@alias rsel12_buf rsel12_buf_u
+@alias rsel12_buf cdp3_gate_e
+@alias rsel13_buf rsel13_buf_u
+@alias rsel13_buf cdp3_gate_f

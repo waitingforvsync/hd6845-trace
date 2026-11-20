@@ -111,3 +111,10 @@ busl_x6820   M  6813-6827,10400    ?   the track goes on north; follower ends (6
 busl_x6820   M  6747-6761,15000    ?   on south into bl0's ground; follower ends (6754,16220), not read
 busl_x6906   M  6899-6913,10400    ?   on north; follower ends (7078,8778), not read
 busl_x6906   M  6834-6848,15000    ?   on south into bl0's ground; follower ends (6839,16219), not read
+# pieces r12, r13 (run 8): the read selects of R12 and R13
+rsel12_buf   M  6445-6459,15000    in  onto regs' metal from the bottom bus (sel's buffer); track x 6452
+rsel13_buf   M  6487-6501,15000    in  onto regs' metal from the bottom bus; track x 6494
+rsel12_buf   M  6683-6697,10400    out onto regs' metal north to the pad of cdp3_gate_e (row y 10055)
+rsel13_buf   M  6726-6740,10400    out onto regs' metal north to the pad of cdp3_gate_f (row y 10316)
+rsel13_buf   P  7550,13734-13754   out the row y 13744 into the block of gate row 2 of cdp4's NOR cdp4_rst (cdp4's name: rsel13_buf_u)
+rsel12_buf   P  7550,13862-13884   out the row y 13852 after its step south (x 7528-7550) onto gate row 4 of the same NOR (cdp4's name: rsel12_buf_u)

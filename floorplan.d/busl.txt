@@ -16,3 +16,5 @@
 7530,9430:7600,11145   route  NAND input from column 0's foot | bus_eq_r15: a poly row, a pad, a metal track south to a diffusion pad whose diffusion runs east under column 0's ground rail
 6700,10400:6790,15000   route  R4's latched match to the row counter's step logic | bd1_n2: one metal track up the field with one step (y 13247), from the bottom bus field to the track that leads to the inverter making rcs_e3
 6745,10400:6915,15000   route  two through lines beside it | busl_x6820 and busl_x6906, on either side of the long line S: no connection in the field, ends not read
+6440,10400:6745,15000   route  R12 and R13 read selects up the field | rsel12_buf and rsel13_buf: two metal tracks from the bottom bus to the read gates of the central datapath's rows E and F, nested Ls at y 12984-13028 and y 12097-12141
+6430,13725:7550,13885   route  R12 and R13 selects into the selector's NOR | one pad on each track (6452,13854), (6495,13744) and a poly row east to the gate that makes cdp4_rst = NOR of the six read selects R12-R17
