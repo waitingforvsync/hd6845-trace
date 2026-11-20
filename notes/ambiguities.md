@@ -767,6 +767,7 @@ gate group (`cdp4` (continue)).
 **2026-11-19, later**: `regs` (run 3) reads row y 13744 as the read select of R13 (`rsel13_buf`), tapped at
 (6492,13744) from the track x 6494 (read, not drawn). Under reading (b) latch D's enable would be on a
 register read select: a further reason for (a). Still open until the row is drawn.
+**2026-11-20, later**: the row has a second dim crossing, `busl_x7122`'s track 87 px west (AMB-045); the resolution below stands.
 **2026-11-20**: `cdp4` (run 2) drew the row's east end: it is gate 2 of the NOR that makes `cdp4_rst`,
 with no other contact (the open join `rsel13_buf_u`). Under reading (b) latch D's enable would also be an
 input of `cdp4_rst`. Not settled: the row west of x 7550 is `busl`'s and is not drawn.
@@ -850,3 +851,57 @@ reddish patch occurs in one chip alone on unbroken crossings ((6452,14304) chip 
 (7055,13852) chip 2). Against: both chips are dim at the same spot, as at AMB-039 (which the row's ends
 settled as a plain crossing). Nothing in these photos can add to it. What would settle it: a sharper
 metal shot of the spot, or simulation (reading (b) would drive a latch input whenever R12 is read).
+**2026-11-20, later** (`busl` run 13, its Ambiguity 21): the next track west, x 6408 (`tl5_w2722`), has
+a like mark over the same row at (6408,13357-13377): chip 2's metal is dim for the row's height with a
+greenish patch of about 10 x 12 px in chip 2's stripped shot; chip 1's metal is bright between the
+row's edge bars with no ring, the clean shot has no hole, the row is not widened. Read as a mark on
+chip 2, a plain crossing, no `?` item. A one-chip mark, so weaker than this entry's two-chip one.
+
+## AMB-045: `busl_x7122`'s track over the poly row y 13744, at (7058,13727-13761) (2026-11-20)
+
+Proposed by `busl` (richtw1, run 11; its Ambiguity 16). The same kind as AMB-039 and AMB-044, and the
+second dim crossing on AMB-039's row (`rsel13_buf`'s tap row; AMB-039 was 87 px east). Neither metal shot
+passes the metal test for 18 px and again for 14 px where the track x 7058 crosses the row. Readings:
+(a) a plain crossing with a dim surface in both chips; (b) a contact, which would put R13's read select
+on `busl_x7122` (the row y 8863 under `cdp3`'s column 0 rail to the row y 14480 of the bottom-centre
+bus); (c) a break. **Assumed (a), drawn as a plain metal, no `?` item**: the track's edge lines run
+through unbroken, neither metal nor row is widened, the clean shot is protected cream without a hole,
+and the row's real tap 560 px west has pad, ring, bright centre and hole. The reviewer found the same
+dim centre on the same track over `rsel12_buf`'s row at (7058,13852): one wire cannot be on both
+selects. Against: two dim crossings on one row. AMB-039's resolution stands (the row has its own
+driver). What would settle it: the driver of the row y 14480 (`bc1`) or the far end of the row y 8863
+(the pad (7835,8862)'s metal north, `cdp3` (continue)).
+
+## AMB-046: the row y 8863 under `cdp3`'s column 0 rail, x 7550-7600 (2026-11-20)
+
+Proposed by `busl` (richtw1, run 11; its Ambiguity 17), with the correction of `cdp3_k_a` it led to.
+The poly row y 8863 from the pad (7423,8863) runs east under the wide rail. Its two edge lines run on
+under the rail in all four shots, but the clean shot's colour between them is dark red, not the cream
+of poly under metal, up to a slanted boundary at x 7600-7608 (the clean shot is anomalous over that
+patch). **Assumed one poly row through, drawn `?P`** (42 px in `trace/busl.txt`; east of x 7592 the row
+is `cdp3`'s `?P` to the contact pad (7835,8862), drawn by the first run of `cdp3` from a single
+observation). If the row is broken under the rail, `busl_x7122` ends there on nothing and the pad
+(7835,8862) with its metal north is a separate net. **`cdp3_k_a` is not on this row either way**
+(coordinator, 2026-11-20, from `busl`'s handoff, both metal shots, `cache/scratch/refresh/h_k_a.png`):
+`cdp3`'s first run had the pad's metal going south at x 7835 to the contact (7833,9165); there is no
+metal at x 7835 between y 8880 and y 9160, the pad's metal goes north to a pad at about (7834,8645),
+and `cdp3_k_a`'s metal starts at (7833,9165). `trace/cdp3.txt` corrected (`tools/sameconn.py`:
+connections identical; no transistor is on either net there). What would settle the row: the pad's
+metal north and what it reaches (`cdp3` (continue)).
+
+## AMB-047: the gate cluster beside `cdp3`'s row A (2026-11-20)
+
+Proposed by `cdp3` (Matt Godbolt, closing handoff 740bfe3). x 7780-8200, y 8260-8800: three gates on the
+rail x 7986-8030 with three loads, about 14 transistors; inputs from U1 (`cdp3_w8063`, a buffered
+`ck_out`, on two gate rows), from the end pad (7878,8385) of the x 7880 line (the output of the gate
+beside row C) and from a pad (7878,8315) whose metal comes down from a pad (7987,6845). **Nothing of the
+cluster is in the trace.** Five boundaries between diffusions lie in 20-25 px gaps between two metals; a
+reviewer reads all five as joined (with controls in the same gap: field at y 8565-8628, the box
+(7935,8648) against its neighbour); the row y 8502-8525 is two polys (firm; a break at x 7984-8005).
+With that reading one transistor has its gate and its drain on one net, so a contact or a tie is still
+misread. Candidates: the two boxes under the metal x 7927-7957 at (7937,8474) and (7935,8648), tan like
+diffusion in the clean shot and orange like poly in the chip-2 stripped shot (contacts to diffusion, or
+poly pads?). Two readings by the tracer and one by the reviewer give no consistent circuit. What is at
+stake: where the cursor-match NAND's output goes, and the clocked logic it feeds. What would settle it:
+those two boxes at 6x in all four shots, then the cluster redrawn from them (`cdp3` (continue); the
+survey and the draft are in `notes/blocks/cdp3.md`, Not done). Trap 2's addition of the same date.

@@ -1053,8 +1053,8 @@ N M 6471,9330 rst_c
 # B. The pad's poly column x 6941-6961 north under three horizontal metals (y 8530-8632, no pad, no
 #    hole) to y 8428, east along y 8416-8440 to a pad with a contact (6988,8427).
 # C. Metal north on x 6991 (1,410 px over the poly rows of the crossing field, no pad) to a plain L corner
-#    (6991,7000) (the middle of three nested corners), west along y 7000 over ten vertical polys
-#    (x 6263-6470, no pad) to a pad with a contact (6146,6997).
+#    (6991,7000) (the middle of three nested corners), west along y 7000 over five vertical polys
+#    (centres x 6280, 6323, 6366, 6409, 6453: ten edge lines; no pad) to a pad with a contact (6146,6997).
 # D. The pad's poly row y 6988-7004 west under the crossing field's tracks to (5624,6996): the middle of
 #    the three undrawn rows of lc1's diagonal bundle; a 45-degree diagonal (x - y = -1372; its
 #    neighbours at -1306 and -1439 are the lines of tl5's polys x 5455 and x 5368) to a bend

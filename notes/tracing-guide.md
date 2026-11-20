@@ -195,6 +195,13 @@ Traps, all of them real:
    crosses the gap. The chip-2 stripped shot's red minus green in the gap decides (field 0
    or negative, diffusion and poly positive), best on a median composite of the slices
    (2026-11-20, `cdp4` run 3; with trap 24 on medians).
+   In a 20-25 px gap between two metals the clean shot shows the same dark bar where one
+   diffusion crosses the gap and where two diffusions' edges meet in it. What separates the
+   two is a green strip (field) in the clean shot **and** a vertical edge line in both
+   metal shots; read a control in the same gap first, one place that is certainly field and
+   one that is certainly joined (`cdp3`'s cluster beside row A: field at y 8565-8628, the
+   box (7935,8648) against its neighbour at x 7960-7985). Five such boundaries kept that
+   cluster out of the trace (2026-11-20, `cdp3`; AMB-047).
 3. A dark line across a metal wire in the metal shots is the edge of something
    *underneath*, not a break in the metal. Likewise, bright green bands in `acid1b`
    inside the arrays are gaps of open field between metal lines, not features.
@@ -407,6 +414,17 @@ Traps, all of them real:
    off its track is open ground, not a pad (`lc3`'s corner bundle: four through lines each step one
    track west, and the vacated positions read as 17 px holes at (6299,9298), (6342,9341),
    (6386,9385), (6428,9428)). Found 2026-11-18/19 (`tl3`, `tl4`, `tl2`, `eof`, `lc3`; R38, R36, R26).
+   **A large `--gap` passes over a real break beside a pad.** `follow.py 7147 17290 N --gap 45`
+   and the same southwards were read as one metal through the pad (7144,17340); the metal
+   from the north turns west 35 px short of the pad, and the 20-30 px of bare ground between
+   its corner and the pad's ring is inside the gap allowance and looks like the ring. A track
+   is continuous through a pad only if the metal is seen on both sides of the ring at the
+   ring's edge: a row profile just outside the ring on each side. Found 2026-11-20 by a
+   reviewer (`bl0` run 3; R26). And in a staircase whose arms lie on poly rows the follower
+   runs along an arm past its corner even at `--gap 16` (from one line's arm onto the next
+   line's track; a corner reported one track off): read such a staircase on a view and by
+   cuts across each arm (`tools/busl_both.py` tests both chips along a cut), not from the
+   follower's corners (`busl` run 12, 2026-11-20; nothing drawn was affected).
 31. **A group near a package boundary that will not read may be half of a cell.** `lc1`'s cluster
    E was read three times as a free-standing gate without a load; it is the upper unit of a
    two-unit latch whose lower unit lies in `lc2`. Before a second pass over such a group, run

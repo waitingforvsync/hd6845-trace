@@ -1031,3 +1031,7 @@ Round 1: no findings.
 
 - The signal on track A / line X / the first through line of the left-centre strips, which these notes call a clock, a strobe "once per scan line" or leave without a source, **is the reset**: `rst_a`, the buffered copy of `rst` = NOR(`lpstb_b`, `res_b`) made by `lc1`'s gate 5 (`eof` run 10, piece `isrc5`, firm). `rst_ck`, `rst_rc` and `rst_lat` are further buffered copies of it: high while the RES and LPSTB pins are both low, and only then. The belief "a strobe once per scan line" is withdrawn.
 - `rcs_x1` = NOT `lc1_w7170`, and `lc1_w7170` = NOT `rst_c` (`eof` run 13, piece `rc`, firm): the clear of the step logic's five latches is the reset, two inverters later. Where these notes call its source open, it is found.
+
+## Corrections (coordinator, from the handoffs of 2026-11-20, third batch)
+
+- The net with five loads and no driver (`tl1_w3636`, `tl3_w4978`, `tl3_w3373`, `tl4_w4545`, `tl4_w4686`; "driver not found", "believed in `bc1`'s group"): the driver is the clock buffer. The net is `ck_out` (`tl4` runs 11-12, 2026-11-20, firm joins: the metal x 6016 across y 6350-6900, and from the left bus field's foot through the bottom-centre logic onto `eof`'s row of the clock). `tl3`'s latches A and B are latches on the buffered clock.

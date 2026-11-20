@@ -697,3 +697,7 @@ From `tl6`: latch c's outputs reach `ras_o0_alt2` (through its inverter) and `tc
 
 - The south bus line x 5412 (the row y 5761; "driver open") **is `bd1_n2`**, the output of `bd1`'s latch on R4's match: followed south by `eof`'s piece `n2n` (the middle row y 6996 of the left-centre diagonal bundle, the track x 6991, the track x 6775) and through the left bus field by `busl`'s piece `n2`.
 - the wire `tl5` called w5936 (= `tl3_w3982`; "source open") is followed (`eof` runs 11-12, pieces `w5936`, `d3982`): it is latch C's data in `lc2` and is driven by the inverter U4 at (7575,8386), the last of three in series from latch D's lower node (`lc1_w7928`).
+
+## Corrections (coordinator, from the handoffs of 2026-11-20, third batch)
+
+- Ports, `tl5_w2722` P (5355-5375,6350) out ("the strong inverter's output: from T3's south pad (5363,6108)"): the column runs on south to a bend (5367,6806) and by a diagonal and the row y 7041 to the left bus field's staircase bundle and the row y 14350 of the bottom-centre bus (`busl`, piece `gd`, 2026-11-20; no tap in 11,000 px; load open).

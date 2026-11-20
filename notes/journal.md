@@ -2542,3 +2542,78 @@ replaced; the left bus field's line says fourteen pieces.
 Coverage: 69.4% traced; in some package region 99.9%; untraced and in no Queue row 0.4%. Not done here:
 the refresh (three renames wait, in the master list's `rename` row; the header counts of
 `notes/operation.md` are the eleventh refresh's).
+
+## 2026-11-20 21:48  Handoffs: `bl0` runs 3-11, `tl4` runs 11-12, `cdp3` west logic, `eof` run 27, `busl` runs 10-13
+
+Eighteen handoff files (Matt Godbolt: `bl0` runs 3-11, merged b3720ed to 7d797fe, claim released; `tl4`
+runs 11-12, merged f4d4451, released; `cdp3`, three handoffs, merged 503941e, c29da4f, 740bfe3, released;
+Tom Seddon: `eof` run 27, merged 81638e2, claim kept; richtw1's other session: `busl` runs 10-13, merged
+384bd6a, c4e8d5c, 1c4c1b5, b13d34a, claim kept). Full extraction after them 2,455 nets, 4,594
+transistors, 0 errors, 0 warnings; 914 of 1,354 equations firm; 96 nets joined only through uncertain
+items (1,135 items). Spot checks of the overlays: `bl0`'s cross-coupled pair, `eof`'s wire into the
+DISPTMG driver, `cdp3`'s clock inverter, `tl4`'s join onto `eof`'s row of the clock
+(`cache/scratch/refresh/h3_flag.png`, `h3_disptmg.png`, `h3_ckinv.png`, `h3_ckjoin.png`): the drawn
+shapes lie on the features.
+
+What they establish (from the tracers' notes; marks as there):
+
+- **The net with five loads and no driver is the clock** (`tl4` runs 11-12; wiring, firm): the enable
+  of `tl3`'s latch A, the gate line of `tc2`'s latch and the enable of `lc1`'s latch D are one net, and
+  it is `ck_out`: from the foot of the left bus field through the bottom-centre logic onto the row
+  `eof` draws west of its pad (8424,17908). A branch reaches `bc3`'s pad (7840,17648). Eleven equations
+  change the name of one input.
+- **A clock inverter beside `cdp3`'s gate column** (`cdp3`; 4 transistors, firm): `lc2_w8646` = NOT
+  `ck_out`, the enable of `lc2`'s latch C and the input of U1 (`cdp3_w8063`, a buffered `ck_out` into
+  the cluster beside row A). **R14 is written from D5-D0**: `cdp3`'s six bit lines are `cdp2`'s bus
+  lines. The cluster beside row A (about 14 transistors) is not in the trace: AMB-047.
+- **DISPTMG's driver input is traced** (`eof` run 27; wiring, firm): `disptmg_drv_in` =
+  NOR(`eof_w17338`, `eof_w17168`, `eof_w17472`), so DISPTMG = `eof_w17338` OR `eof_w17168` OR
+  `eof_w17472`. One term is the second of two latches in series on `ck_out` (marked). What the terms
+  mean is not traced.
+- **A light pen flag** (`bl0` runs 3-6; 11 transistors, firm): the strobe gated by RES sets a
+  cross-coupled pair, `bl0_w17610`; it is cleared by `busl_x6906` (a line from north of the left bus
+  field) or, with the strobe low, by `bl0_w17687` (from `bc1`'s gate group). Its load is a unit of
+  `bc3`'s gate column, undrawn. Believed: it times the latching of R16/R17.
+- **The fourth reset copy crosses the left array** (`bl0` run 7; firm to the pad): `bl0_w15412` runs
+  through Gap 2 to a pad on the thin metal between the left column's rails; believed `mal`'s force
+  line (a tab to `mal_frc_m9` seen; the thin metal is at the photos' limit and not drawn).
+- **Nine tracks of the left bus field on south** (`bl0` runs 8-11): `rst_n`'s other ends, `busl_x6820`,
+  `rcs_mv`, `cdp4_bus_s0`, `lc2_w8450`'s second branch, and `lc3`'s six through lines, which enter
+  the left array as six diffusion wires about 478 px apart.
+- **The left bus field's staircase bundle is complete, fourteen lines** (`busl` runs 10-13; wiring):
+  `rcs_mv` leaves the top-left logic and runs down the whole field; `tc2_r5718`, `lc1_w7780` (latch
+  D's data) and `tl5_w2722` (the input of `rcs_u3288`'s NOR) each run 9,000-11,000 px to the foot rows
+  of the bottom-centre bus with no tap; five more lines whose ends are not identified
+  (`busl_x6949`, `busl_x6992`, `busl_x7122`, `busl_x6559`, `busl_x6603`).
+
+**A correction to the trace by the coordinator** (proposed by `busl` run 11): `cdp3_k_a`'s metal x 7835
+was drawn from the contact pad (7835,8862) south; both metal shots show no metal there between y 8880
+and y 9160 (`cache/scratch/refresh/h_k_a.png`): the pad's metal goes north, and `cdp3_k_a` starts at its
+contact (7833,9165). `trace/cdp3.txt`: the metal starts at y 9150, the `?P` of the row y 8864 is
+lengthened 8 px west onto `busl`'s row (`busl_x7122`, still through an uncertain stretch), a 76 px
+stub of the pad's metal north is drawn. `tools/sameconn.py HEAD`: connections identical (no transistor
+is on either net there). One comment in `trace/eof.txt` corrected (five polys, not ten).
+
+Applied: master list rows `bl0` (mostly done; what is left is in other rows), `eof`, `busl` (status to
+run 13, a new Next), `tl4` (continue) (done), `cdp3` and `cdp3` (continue), `cdp2` (continue),
+`bc1` (continue) (five leads into its gate group; fourteen rows at x 7550; it does not hold the clock's
+driver), `bc2`-`bc4`, `bl1`/`bl2`, `busb`, `larr` (continue), `lc1`-`lc3`, `tl1`-`tl6`, `tc2`, and
+the `rename` row (what waits for the refresh). **Re-read list**: R26 extended (every thin metal joined
+through a pad on the follower's word with `--gap` above the default: `bl0` run 3's reviewer found one,
+taken out before the merge). **Guide**: trap 30 extended twice (a large `--gap` passes over a real
+break beside a pad; a staircase whose arms lie on poly rows is not read from the follower's corners),
+trap 2 extended (a dark bar in a gap between two metals is a crossing diffusion or two edges meeting:
+a control in the same gap first). **Ambiguities**: AMB-045 (`busl_x7122`'s track over `rsel13_buf`'s
+row), AMB-046 (the row y 8863 under `cdp3`'s rail, with the correction of `cdp3_k_a`), AMB-047 (the
+cluster beside `cdp3`'s row A); AMB-039 and AMB-044 annotated. Corrections sections in the notes of
+`bc3`, `busl`, `mal`, `bl0`, `cdp2`, `cdp3`, `lc1`, `lc2`, `eof`, `eofw`, `tl1`, `tl2`, `tl3`, `tl5`,
+`tl6`, `tc2`, `pads`; glossary rows `cdp3_k_a` and `mal_frc_m#`. Floor plan: no coarse block is
+replaced; the left bus field's line says twenty-three pieces.
+
+**A slip reported by a tracer** (`cdp3`, second handoff): main carried one extraction warning for about
+three minutes (commit 95bbae7 pushed although the gate had printed FAIL: the push was chained after
+`tail`, whose exit status hid the gate's); corrected by the next commit.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 786
+floor-plan blocks. Coverage: 70.1% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%. The refresh follows.

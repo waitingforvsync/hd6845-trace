@@ -1243,3 +1243,7 @@ Round 1: no findings that change a connection.
 - Track I's upper piece (`tla`'s input g3245): its row y 2683 east out of the strip runs onto `tl4`'s bus line 5, so the net is `tl5_w2722` = NOT `tl4_w3113` (renamed), and `rcs_u3288` = NOR(`rcs_bd3330`, NOT `tl4_w3113`).
 - The row y 2857 ("straight through"; `tl1`'s w2857, renamed): it is `rcs_mn3852` = NOR(`rcs_in1`, `rcs_mu`, `tl3_e3712`), the data of `tl1`'s first latch.
 - The row y 2813 (`tl1`'s w3678, renamed) is `tl4_w4590`: `tl1_w3636` = NOR(`rst_ck`, `tl4_w4590`). `tl4_w4590` now has five loads and no driver: a missed tap is looked for on this strip's metal y 2812 (x 2848-3164) among other places (the master list's row `tl4` (continue)).
+
+## Corrections (coordinator, from the handoffs of 2026-11-20, third batch)
+
+- The net with five loads and no driver (`tl1_w3636`, `tl3_w4978`, `tl3_w3373`, `tl4_w4545`, `tl4_w4686`; "driver not found", "believed in `bc1`'s group"): the driver is the clock buffer. The net is `ck_out` (`tl4` runs 11-12, 2026-11-20, firm joins: the metal x 6016 across y 6350-6900, and from the left bus field's foot through the bottom-centre logic onto `eof`'s row of the clock). `tl3`'s latches A and B are latches on the buffered clock.

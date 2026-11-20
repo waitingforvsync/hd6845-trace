@@ -463,3 +463,9 @@ Round 4: no findings that change a connection.
 - The diagonal bundle's "about nine more lines": drawn since by `eof`: the rows y 7170 (`lpstb_b`), 7214 (`res_b`), 7257 (`rst_a`), 7300 (`tl3_w3982`) with their pads, and the middle row y 6996 with its pad (6146,6997) (`bd1_n2`, to `tl5`'s bus poly x 5412); `rcs_e4`'s by `tla`. Left: the rows y 6953 and 7040.
 - "`lc1_w7040` ... to a pad with a contact (6471,7930)": the metal that stands 25 px south of that pad on the same x (the L at y 7978) is `tl3_w3982`'s, not joined.
 - `lc1_w7928` has one more load: the first of three inverters at x 7416-7606, y 8068-8448 (`eof` run 12), by a poly row y 8040.
+
+## Corrections (coordinator, from the handoffs of 2026-11-20, third batch)
+
+- Ports, `lc1_w7780` P (6450, 7772-7788) "gate E1's output row; seen to x 6710": the row runs on to an end pad with a contact (6819,7780) and from there down the left bus field to a pad (7100,15175) and a poly row y 15218 toward the bottom-centre logic's west rail (`busl`, piece `ga`, 2026-11-20; no tap; load open). It is not joined to the poly that lies on the same line east of x 6870, which is `eof`'s row of `lc1_w7170` coming up from y 7821.
+- Latch D's enable ("No driver was met on any of it; believed a chip-wide inverted clock"): the net is `ck_out`, the clock buffer's output (`tl4` runs 11-12, firm joins; the metal x 6016 from (6016,6900) is one with `tl6`'s at (6016,6350)). Not inverted: it is `ck_out` itself.
+- Of the diagonal bundle from `tl5`'s polys x 5368 / 5412 / 5455: the south-west diagonal (x - y = -1439) and its row y 7041 to the end pad (6188,7042) are drawn by `busl` (piece `gd`): `tl5_w2722`; the middle one is `eof`'s `bd1_n2`; the north-east one (x - y = -1306; seen as poly for y 6830-6950; the row y 6953 and the pad (6190,6955) lie where it would land) is not followed. `rcs_mv`'s poly column x 6236 through the band above the strip is drawn by `busl` (piece `fc`).

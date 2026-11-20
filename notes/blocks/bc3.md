@@ -142,3 +142,9 @@ Round 1: no findings in what is drawn; one undrawn tap on the output listed in N
 ## Corrections (coordinator, from the handoffs of 2026-11-20, second batch)
 
 - The gate column under the rail x 7292-7342 (bands at y 16866-16884, 16986-17051, 17160-17180, 17290-17310 and on south: `tools/railprof.py 7295 7340 16860 17400`) is in this package's region. Its units at y 16941-17235 are drawn in `trace/bl0.txt` (`bl0` run 2): `bl0_w17085` = NOT(`lpstb_b` AND `res_b`) and `bl0_w17210` = NOT `bl0_w17085`, the light pen strobe passed only while RES is high. The rail is not drawn here (this package draws x 7495 `vcc` and x 7666 `vss`); `bl0` draws its stretch y 16925-17240 and names it `vss` by the orientation of the gates only. `bl0`'s `vcc` ports at (7470-7520, 17020 and 17240) are on this package's rail x 7495.
+
+## Corrections (coordinator, from the handoffs of 2026-11-20, third batch)
+
+- Survey, "left gate group": the gate column under the rail x 7292-7342, y 16941-17755, is drawn in full in `trace/bl0.txt` (`bl0` runs 2-4; five units; the rail ends at y 17755): the strobe gate `bl0_w17085` and its inverter `bl0_w17210`, `bl0_w17337` = NOT `bl0_w17210`, and the cross-coupled pair `bl0_w17440` / `bl0_w17610`, the light pen flag. The band y 16866-16884 north of it is not drawn.
+- The gate column east of the supply rail x 7470-7520 takes the flag `bl0_w17610` on the poly row y 17378-17398 from the pad (7882,17389) (`bl0`'s port (7760,17378-17398)); `rcs_mv` arrives on a poly row east of the pad (6968,16780) (port (7040,16770-16790)). Neither unit is drawn.
+- The pad (7840,17648) of the track x 7840 is on the buffered clock (`tl4` runs 11-12: a branch of the clock's metal from the pad (7641,17908) north, east along y 17824 and north on x 7840): the inverter of that pad is NOT `ck_out`. The track north of the pad (drawn here to y 16640; follower to (7837,16386)) leads to more loads of the clock.

@@ -599,13 +599,20 @@ C 7765,9448
 M 7752,9451 x7892 w=22
 M 7880,9285 y9462 w=22
 C 7878,9297
-# --- a line that only passes: x 7835 metal from channel B (contact on the y 8864 poly, seen by the
-# first run only) down to a contact on the y 9168 poly (which runs east to a contact at 8290,9165)
-# and to a poly cross-under below the metal bar; then west and down on the x 7772 line, which ends
-# at a contact at about (7770,10135) that is not traced
-?P 7600,8864 x7848 w=18
+# --- a line that only passes: x 7835 metal from a contact on the y 9168 poly (which runs east to a
+# contact at 8290,9165) to a poly cross-under below the metal bar; then west and down on the x 7772
+# line, which ends at a contact at about (7770,10135) that is not traced.
+# Corrected 2026-11-20 (coordinator, from busl run 11's handoff; both metal shots,
+# cache/scratch/refresh/h_k_a.png): the metal does not come from channel B. There is no metal at
+# x 7835 between y 8880 and y 9160 (only the poly rows of the field); the metal starts at the contact
+# (7833,9165). The poly row y 8864 and its contact pad (7834,8862) are another net, busl's
+# busl_x7122 (its row is drawn to x 7592; this ?P is lengthened 8 px west to meet it, still
+# uncertain under the wide rail: busl's Ambiguity 17). That pad's metal goes NORTH to a pad at about
+# (7834,8645): not drawn.
+?P 7592,8864 x7848 w=18
 ?C 7834,8862 s=24x24
-M 7835,8850 y9414 w=24
+M 7835,8876 y8800 w=24                # stub of that pad's metal north (both metal shots); not followed
+M 7835,9150 y9414 w=24
 C 7833,9165 s=24x24
 P 7820,9168 x8305 w=18
 C 8290,9165 s=24x24

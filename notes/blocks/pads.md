@@ -125,3 +125,6 @@ the rows gives a working circuit; so that reading, or one of items 2-4, is wrong
 somewhere. Also open: where row H's metal goes at its left end, and what the frame
 group does if row I is not simply the pull-down gate net.
 
+## Corrections (coordinator, from the handoffs of 2026-11-20, third batch)
+
+- The DISPTMG driver's input `disptmg_drv_in` has its driver traced (`eof` run 27, 2026-11-20, firm): `disptmg_drv_in` = NOR(`eof_w17338`, `eof_w17168`, `eof_w17472`), a driver in the bottom-centre logic, by a wire with no tap. Geometry only, not changed: the input poly is drawn at x 5570-5595 from y 18912; the stripe in the clean shot is x 5578-5596 there (about 5 px east).

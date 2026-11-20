@@ -85,3 +85,7 @@ can now be checked against the counter rows (each copy's **input**, not yet foll
    mirrored, `@inst ral_cell -5785,1167 rot=90 o=14235,4395`), but an overlay at 1.5x
    (`cache/scratch/ral/t0.png`) does not put the cell's rails and pads on matching
    features, and its strobe contact (8298,5368) has no metal over it. Not placed.
+
+## Corrections (coordinator, from the handoffs of 2026-11-20, third batch)
+
+- "The fourteen `mal_frc_m#` are probably one line: a thin vertical metal at x about 2700 ... not drawn": the thin metal x 2690-2710 has a pad at (2700,15999) where `bl0_w15412` (= NOT `rst_n`, the fourth copy of the reset) arrives by a poly row across the left array's Gap 2 (`bl0` run 7, firm to the pad); a metal tab from the thin metal to `mal_frc_m9`'s pad (2728,15583) is seen at y 15575-15581. So the force line is, **believed**, the reset in `rst`'s sense, forcing the MA outputs. Not joined in the trace: the thin metal is not drawn (about 8 px wide; at y 15845-15895 it runs over a diffusion strip of its own width and reads at bare-ground level in chip 2; `follow.py` passes it from y 15960 to 14782, `tl5_tracks.py v 2697 14700 18700` fails on long stretches). It needs views at 6x, with the left column's cell (`larr` (continue)).

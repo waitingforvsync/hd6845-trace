@@ -1284,3 +1284,8 @@ Round 2: no findings.
 ## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
 
 - `lc3_w9947` ("neither end is followed"): followed south from y 6400 by `eof` (run 13, piece `ck5`: a pad (6450,7127), the track x 6688, pads (6645,8276), (6645,8580)) to the clock of the left-centre ripple counter; the net's canonical name is `lc3_w9947`.
+
+## Corrections (coordinator, from the handoffs of 2026-11-20, third batch)
+
+- Piece 10 and ports, `tc2_r5718` M (7522-7544, 6400) ("follower: to (7509,7456), west, end (7353,7465), not looked at"): followed by `busl` (piece `fd`, 2026-11-20) by x 7533, x 7511, y 7453, x 7360, a poly hop between pads (7357,8667) / (7337,8798), a diagonal and tracks down the left bus field to the pad (7098,14525) and the row y 14524 at its foot (drawn to x 7550); no tap.
+- The latch's gate line ("Its driver is not found"): it is the buffered clock `ck_out` (`tl4` runs 11-12, firm joins): `tc2_sr` is a latch on the clock.

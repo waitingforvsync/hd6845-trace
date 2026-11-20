@@ -1445,3 +1445,8 @@ Round 18: no findings that change a connection.
 
 - Latch C's data the wire `lc2` called w8906 is `tl3_w3982` (`eof` run 11, piece `w5936`: the metal x 6471 runs on north to an L at y 7978 and the track x 6514), and that is latch D's lower node inverted three times (`eof` run 12). The second and third through lines are the buffered pins RES and LPSTB (`res_b`, `lpstb_b`; `eof` run 11, piece `rl`). The first is `rst_a` (run 10).
 - The fourth through line (the ripple counter's clock, "enters at the east edge at y 9165") comes from `lc3_w9947` (`eof` run 13, piece `ck5`). The reset copy `rst_c`'s diagonal poly out of the strip at (6450,8923) ends on a pad (6469,9209) whose metal turns west at y 9452 onto `lc3`'s fifth corner-bundle line: that line is `rst_c` (piece `rc`).
+
+## Corrections (coordinator, from the handoffs of 2026-11-20, third batch)
+
+- Latch C's enable `lc2_w8646` (metal x 6168 with its branch east along y 8301 "out of the strip"): its driver is found (`cdp3`, piece `ckb`, 2026-11-20, firm): a wide inverter of the clock west of `cdp3`'s gate column (x 7475-7780, y 8640-8850), **`lc2_w8646` = NOT `ck_out`**, by a staircase line of the bus field onto metal B at (6450,8301). The same net is the input of `cdp3`'s U1.
+- Latch D's enable, the gate line that `tc2`'s latch shares ("driver not found"): it is the buffered clock `ck_out` (`tl4` runs 11-12, firm joins). So latch C is open while the clock is low and latch D while it is high (in `ck_out`'s sense).

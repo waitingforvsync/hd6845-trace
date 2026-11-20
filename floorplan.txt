@@ -74,7 +74,7 @@
 11600,2150:12080,2800   ?logic  small cell by die marking | isolated cell left of the HD46505S text
 
 # --- routing
-4850,10400:7550,15000   route   left bus field | dense wiring between the left array, the left-centre logic and the central datapath; fourteen pieces are traced (package `busl`, fragments in floorplan.d/busl.txt), about twenty tracks and the lower bands are not
+4850,10400:7550,15000   route   left bus field | dense wiring between the left array, the left-centre logic and the central datapath; twenty-three pieces are traced (package `busl`, fragments in floorplan.d/busl.txt), about twenty tracks and the lower bands are not
 11000,3000:17000,5300   route   top-right bus field | horizontal buses under the test structures
 6500,17000:13300,18600  route   bottom bus field | wiring along the bottom of the core
 

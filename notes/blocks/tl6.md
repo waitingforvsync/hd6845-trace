@@ -438,3 +438,8 @@ Round 2: no findings.
 - The ports `c4l_l3`, `tl4_w5068`, `tl6_p6101` ("on under the wide metal band") go to `tc1`'s `c4l_l3`, `tl4_w5068`, `tc1_bus2814` by three nested polys under the plane (`tlb` run 1).
 - `lc3_w9947` (`tc2`'s metal x 6447 / `tcw`'s gate line; "not followed further"): followed south (`eof` run 13, piece `ck5`): it is the clock of the left-centre ripple counter; the net's canonical name is `lc3_w9947`, and `trace/tl6.txt`'s alias line was changed for that by `eof` (commit a9233e9, no geometry).
 - The signal on track A / line X / the first through line of the left-centre strips, which these notes call a clock, a strobe "once per scan line" or leave without a source, **is the reset**: `rst_a`, the buffered copy of `rst` = NOR(`lpstb_b`, `res_b`) made by `lc1`'s gate 5 (`eof` run 10, piece `isrc5`, firm). `rst_ck`, `rst_rc` and `rst_lat` are further buffered copies of it: high while the RES and LPSTB pins are both low, and only then. The belief "a strobe once per scan line" is withdrawn.
+
+## Corrections (coordinator, from the handoffs of 2026-11-20, third batch)
+
+- Ports, `rcs_mv` poly (6226-6246, 6350), direction "?": it is an output. The net is driven in `tl3` (`rcs_mv` = NOR(`tl3_w4546`, `tl3_e4852`)) and runs on south to a pad (6232,6911) and down the whole left bus field to loads south of y 15000 (`busl`, piece `fc`; `bl0` run 9).
+- The metal x 6016 that ends at (6016,6350) is one metal with the one `lc1` starts at (6016,6900) (`tl4` run 11: 550 px over nine poly rows, no pad): the net is the buffered clock `ck_out`.

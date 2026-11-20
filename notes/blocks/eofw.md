@@ -220,3 +220,8 @@ Round 1: no findings that change a connection.
 
 - Ambiguity 1 ("a poly x 6510-6528 lies under the vertical arm"): that poly is `rst_a` (`eof` run 10, piece `isrc5`).
 - The poly row y 7812-7830 (`lc1_w7170`) is crossed by `lpstb_b`'s track at (6645,7822), read as no contact (`eof`, Ambiguity 37).
+
+## Corrections (coordinator, from the handoffs of 2026-11-20, third batch)
+
+- `ports.d/eofw.txt`, "open end: the poly east of the corner pad (7446,8732), into cdp3 (continue)'s ground": it is the gate of `cdp3`'s clock inverter (piece `ckb`, 2026-11-20): `lc2_w8646` = NOT `ck_out`.
+- The net of the three wires' row 2 (the gate line of `tc2`'s latch, the enable of `lc1`'s latch D), "driver not found": it is the buffered clock `ck_out` (`tl4` runs 11-12: from `busl`'s port (7187,15000) through the bottom-centre logic onto `eof`'s row at (8396,17907); firm).
