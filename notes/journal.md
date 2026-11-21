@@ -2896,3 +2896,53 @@ lines' labels were not looked at.
 `out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 820
 floor-plan blocks. Coverage: 70.4% traced; in some package region 99.9%; untraced and in no Queue row
 0.4%. Not done here: the refresh (fifteen renames wait).
+
+## 2026-11-21 10:40  The tracer loop stopped at the Fable limit; handoffs: `eof` runs 28-35, `cdp2` (`wn`, a join)
+
+**The loop.** The coordinating session's loop (one fresh Fable 5.2 agent per package, 2026-11-20 22:15
+to 2026-11-21 02:47) ran six tracers: `bl0` run 12, `regs` run 4, `busl` runs 14, 15 and 16 (merged,
+applied above), and `busl` run 17, started at 02:23 and stopped at about 02:47 by the account's Fable
+usage limit (it resets 2026-11-22 18:00 Europe/Madrid). Run 17 left one pushed commit on the branch `busl`
+(71469a2, "draw line Q (`lc3_e9756`), `lc2_w9125`'s pad, row y 7432"), not reviewed and not merged, and
+uncommitted changes in `../hd6845-trace-busl`; they are left as they are so the run can be resumed
+(the master list's `busl` row says so). The user asked for the loop to stop at the limit. This entry and
+the refresh after it are the coordinator's, on Opus 5.5 (coordination; no tracing).
+
+Ten handoff files (Tom Seddon: `eof` runs 28-35, 2026-11-21 03:22 to 09:21 +0000, merged 519987d to
+5f48624, claim kept; Matt Godbolt: `cdp2` piece `wn` and a join, merged 268252b and e745442 on
+2026-11-20, claim released). Full extraction after them 2,472 nets, 4,644 transistors, 0 errors,
+0 warnings; 917 of 1,370 equations firm; 103 nets joined only through uncertain items (1,176 items).
+Spot checks of the overlays: the four units under `bc1`'s west gate column's rail (x 7160-7560,
+y 15000-15900) and the neck of AMB-049 at 6x in both metal shots (`cache/scratch/refresh/h9_bc1col.png`,
+`h9_neck.png`): the drawn shapes lie on the features; the neck is as ambiguous as the tracer says.
+
+What they establish (from the tracers' notes; marks as there):
+
+- **DISPTMG's terms reach two latch pairs in series** (`eof` runs 28-30). `eof_w17338` =
+  NOR(`eof_w17124`, `eof_w17207`) (marked); `eof_w17207` is `bc1`'s decode line `bc1_dec01_n`
+  (marked: a `?M` neck, AMB-049); `eof_w17124` is a latch (a copy of `tl1`'s) enabled by `ck_out` (firm)
+  whose data is a second latch copy fed from `bc1_g6_out`, i.e. column B's latch pair's value. So
+  DISPTMG = (`eof_w16823` AND NOT `eof_w17212`) OR (NOT `eof_w17124` AND NOT `bc1_dec01_n`) OR
+  `eof_w17472`. **Believed, not traced**: the second term is the display enable one stage later,
+  selected by `bc1`'s decode line 01: R8's DISPTMG skew.
+- **The first latch of both pairs has one enable** (run 31, firm), `eof_w16040`, followed 9,000 px to
+  seven ends, all gates; **its driver is not found** (believed: the clock level opposite to `ck_out`).
+- **A chain of NORs under `bc1`'s west gate column** (runs 32-35; each marked by two ties, AMB-050):
+  `eof_w15523` = NOR(`rcs_e4`, `eof_w16040`, `bl0_w15566`); `eof_w15262` = NOR(`lc1_w7780`,
+  `rcs_mv`); `eof_w15128` = NOT `rst_n`; `eof_w15781` = NOR(`eof_w15523`, `eof_w15262`,
+  `eof_w15128`). The row counter's step term and two of the wires that `busl` brought down the left
+  bus field meet here. What the chain computes is open; `eof_w15781` gates two units further south.
+- **`tc1_ns3` = NOT `tc2_sr_q`** (`cdp2`; marked): the inverter left of rows B drives `tc2`'s wire.
+
+Applied: master list rows `eof` (runs 28-35; a new Next), `bc1` (continue), `bc2`-`bc4`, `bl0`,
+`busl` (the meetings, and run 17's state), `cdp2` (continue) (claim released; what is left), `cdp1`
+(continue), `tc2`, and the `rename` row (five more). **Re-read list**: nothing new. **Guide**: trap 18
+extended (`railprof.py` calls field "diffusion" along a rail too; `eof` runs 32, 35). **Ambiguities**:
+AMB-049 (the neck), AMB-050 (the column's ties). Corrections sections in the notes of `bc1`, `bc3`,
+`bl0`, `busl`, `tla` and `tc2`. `notes/operation.md` and the glossary: the tracers' own edits stand
+(DISPTMG's rows; the reset paragraph). Floor plan: no coarse block is replaced; `floorplan.d/eof.txt`'s
+new lines were not looked at.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 834
+floor-plan blocks. Coverage: 70.4% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%. The refresh follows.

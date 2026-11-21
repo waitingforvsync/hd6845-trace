@@ -299,6 +299,12 @@ Traps, all of them real:
    `tools/railprof.py` call open poly "dark" and open field "diffusion", and do not tell a
    channel from poly over field there. In an open gap, decide in the chip-2 shots, where
    poly is orange. Found 2026-11-17 in `amr` (re-read item R16).
+   **Along a rail, `railprof.py` calls field "diffusion" too** (`eof` runs 32 and 35, 2026-11-21): it called
+   y 15633-15646 under the rail x 7295-7340 diffusion where the clean shot is greenish (127-130/130-159/87-105,
+   against the tan of diffusion, about 185/168/125) and the box's real edge is a dark line in both metal
+   shots, and it called 145 px of open field north of a unit "diffusion, dark 100%" (`tools/opendiff.py`
+   and `px.py pt` settled it). A box's end, or a unit's extent, under a rail is not taken from
+   `railprof.py` alone. Neither reading joined anything.
 19. **The metal test misses thin metal.** The follower's test (R > 177, G > 128) does not
    see thin, dim lines (under about 16 px): it reports breaks or no line at all. For those,
    profile along and across the line and compare with a known stretch of the same line.

@@ -572,3 +572,7 @@ Each is in the named block's notes in full; the trace fixes are on main.
 - The input of `rcs_u3288` that this file called g3245 ("comes from ..."): it is `tl5_w2722` = NOT `tl4_w3113` (`tl3` run 12: its row y 2683 is drawn through strip 3 onto `tl4`'s bus line 5; renamed at the refresh of 2026-11-20).
 - The third input of `rcs_bc3460` (`tl2`'s w3722): it is `tl5_w4937` = NOT `tl4_w4068` (`tl3` run 12: the row y 2639 onto `tl4`'s bus line 4; renamed).
 - The data of `tl1`'s first latch (`tl1`'s w2857) is `rcs_mn3852` (the row y 2857 is one poly from `rcs_mn3852`'s unit to the latch; renamed).
+
+## Corrections (coordinator, from the handoffs of `eof` runs 28-35, 2026-11-21)
+
+- `rcs_e4`'s wire ("the gate of a pull-down under the rail x 7290-7345 of bc1's untraced left column ... the poly ends at x 7370 ... its driver is NOT found"; also the comment in `trace/tla.txt`, not edited): the poly ends at about x 7390 over a field island; the pull-down is gate 1 of the NOR `eof_w15523` = NOR(`rcs_e4`, `eof_w16040`, `bl0_w15566`) (`eof`, piece `u15500`); the driver has been found since (`rcs_e4` = NOR(`tl1_w4678`, `tl3_e3550`), `tl1`).

@@ -3224,3 +3224,8 @@ detail; where one names something of this list as undrawn, this list is the curr
 ## Corrections (coordinator, from the handoff of `bl0` run 12, 2026-11-20)
 
 - Ports at y 15000: six tracks at x 5496, 5540, 5584, 5627, 5671, 5714 (east of `cdp4_bus_s0`'s at x 5451) are not in this block's ports or trace. `bl0` (run 12, piece `t6`) draws them from y 15000 south: `bl0_w18081`, `bl0_w17603`, `bl0_w17126`, `bl0_w16649`, `bl0_w15999`, `bl0_w15522`, each to a poly row into one of the left array's six lower rows. North of y 15000 they are undrawn: the follower runs each through one more staircase to an end at (5760,14092), (5803,14135), (5761,14177), (5804,14223), (5756,14261), (5799,14304), the y of `bc1`'s six poly lines (believed `cdp3_g_c7`..`cdp3_g_c2`; not read, the follower is not evidence for an end).
+
+## Corrections (coordinator, from the handoffs of `eof` runs 28-35, 2026-11-21)
+
+- Piece `ga`, `lc1_w7780`'s row y 15218 "(drawn to x 7170; it runs on east under `ck_out`'s track toward `bc1`'s rail)": drawn to its end by `eof` (run 34): gate 1 of the NOR `eof_w15262`, ending over field at x 7350, no contact under `ck_out`'s metal. The pad (7100,15262), 87 px south of the end pad (7100,15175) on the same x, is another net (`eof_w15262`; no metal between).
+- Piece `vb` ("south on x 7383-7432 out of the region at y 15000"): drawn on by `eof` (run 35): at y 15024-15069 it turns west and becomes the ground rail x 7294-7342 of `bc1`'s west gate column.

@@ -1330,3 +1330,9 @@ Round 14: no findings.
 ## Corrections (coordinator, from the handoffs of `busl` run 15, 2026-11-21)
 
 - `busl_x6820` ("busl's track x 6754 ... its north end not read"): it is `lc3_m5756` (`busl`, piece `xm`; an alias until a refresh).
+
+## Corrections (coordinator, from the handoffs of `eof` runs 28-35, 2026-11-21)
+
+- `bl0_w15566` ("poly row east of the pad (7143,15566), on under bc1's rail x 7292-7342"): the row is gate 3 of the NOR `eof_w15523` and ends at x 7347; the metal x 7179-7197 from a pad (7186,15520) to a pad (7187,15696), "another net", is `eof_w15523`, that NOR's output. The pad (7186,15520) is not on `ck_out`'s corner 35 px north.
+- `bl0_w15566`'s unit at `bc1`'s rail ("a second net lies beside it"): the gate rows y 15427-15445 (`rcs_e4`), y 15493-15515 (`eof_w16040`) and y 15557-15580 (`bl0_w15566`) are the three inputs of that one NOR. Of the thin metal's crossings at y 15738, 15825, 15998 the first two are `eof_w15262` and `eof_w15128` (gates of the second NOR); the third is the row of another unit's exit box.
+- `rcs_mv` ("a pad (6966,15305), whose poly row goes east (port)") and `rst_n` (Ports, (7280, 15078-15098)): drawn on by `eof`: gate 2 of `eof_w15262` (ending at x 7350) and the gate of the inverter `eof_w15128` = NOT `rst_n` (ending at x 7355). `bl0` draws the row of `rcs_mv` `w=20` on y 15301; measured y 15293-15317 (geometry only).
