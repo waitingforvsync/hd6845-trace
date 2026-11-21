@@ -25,6 +25,6 @@ dbus_le       M      16775,16450      ?    the data input latches' enable: the t
 vcc           M      16491-16540,16440 -   the units' VCC rail (dlat's, from the north), drawn end; goes on south to about y 16478
 vss           M      16017-16059,17285 -   the rail of the sixth output inverter, drawn end (goes on north past the unit above); its south end is at about y 17540
 cdp4_w10808   P      10980,3624-3646  ?    the first through line east of the ninth VSS rail (track x 10808): the poly row east of its top pad (10804,3636), on east as open poly
-cdp4_w10808   P      10655,15752-15772 ?   the same line: the poly from its bottom pad (10808,15738): west under bc2's rail x 10718-10770, south at x 10697-10716, west along y 15762; on west
 rst_lat       P      10980,3580-3600  out  the second through line (track x 10852): the poly row east of its top pad (10849,3592), on east as open poly
 rst_lat       P      10782-10797,17700 out  the same line: a poly column south from the west end of the row through its bottom pad (10852,17648)
+cdp4_w10808   P      10694-10716,15726-15748 in   the same line: the corner of the poly row from its bottom pad (10808,15738), at the west edge of bc2's VCC rail (drawn end). Beyond it, read and not drawn: the plate of a depletion load (x 10685-10716, y 15782-15849) and a row west along y 15762 to a tie box (10622-10650,15760-15790): an undrawn unit of bc2 drives this net

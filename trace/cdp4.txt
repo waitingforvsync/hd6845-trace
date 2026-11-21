@@ -1117,7 +1117,12 @@ P 10804,3635 x10980 w=22                 # the row east from its top pad, under 
 M 10804,3628 10808,3700 10809,12000 10810,15000 10808,15746 w=12
 P 10791,15721:10825,15755
 C 10808,15738 s=20x20
-P 10808,15737 x10706 y15762 x10655 w=20  # the row west from its bottom pad under bc2's rail, south at the rail's west edge, west: port at x 10655
+# the row west from its bottom pad under bc2's VCC rail (no contact) to its corner at the rail's west edge.
+# Drawn to the corner only (port): beyond it the same poly is part of an undrawn unit of bc2: it runs south as
+# the plate of a depletion load (block x 10685-10716, y 15782-15849, beside the rail's contact box
+# (10722-10775, 15782-15848)) and west along y 15750-15771 to its end at x 10623 on a heavy-outlined box
+# (10622-10650, 15760-15790), read as the plate's tie: this net is that unit's output (notes; fix check 12)
+P 10808,15737 x10694 w=22
 N M 10809,9000 cdp4_w10808
 # --- T2 (x 10852): rst_lat
 P 10832,3575:10866,3609

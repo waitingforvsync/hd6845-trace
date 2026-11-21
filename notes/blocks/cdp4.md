@@ -659,7 +659,7 @@ and D6's the cell `cdp4_ro`, D7's in `regs`).
 | top pad (contact) | (10804,3636) | (10849,3592) |
 | poly from the top pad | a row east, y 3624-3646 (port x 10980) | a row east, y 3580-3600 (port x 10980) |
 | bottom pad (contact) | (10808,15738) | (10852,17648) |
-| poly from the bottom pad | a row west, y 15726-15748, under `bc2`'s rail, south at x 10697-10716 and west along y 15752-15772 (port x 10655) | a row through the pad, y 17633-17653: east to a bend onto `trunks`' diagonal; west to x 10787 and a column south (port y 17700) |
+| poly from the bottom pad | a row west, y 15726-15748, under `bc2`'s VCC rail to its corner at x 10694-10716 (port): beyond, the plate of a load of an undrawn unit of `bc2` | a row through the pad, y 17633-17653: east to a bend onto `trunks`' diagonal; west to x 10787 and a column south (port y 17700) |
 
 - **The tracks.** `tools/follow.py 10809 12000 N` / `S` and `10853 12000 N` / `S` (`--gap 16`) run each
   metal from pad to pad; the centres at twelve cuts (`tools/busl_both.py h Y 10785 10875`) stay within 3 px.
@@ -678,12 +678,20 @@ and D6's the cell `cdp4_ro`, D7's in `regs`).
 - **Top rows** (`t12_top4.png`, 4x, metal and clean): each pad's poly row runs east, T1's under T2's track
   (bright metal between two edge bars, no pad) and both under `wrs`' `wr_r8` metal (x 10885-10900, no
   contact), and on east as open poly. Drawn to x 10980 (ports); not followed.
-- **T1's bottom row** runs west from the pad under `bc2`'s rail (x 10718-10770; salmon in the clean shot),
-  turns south at the rail's west edge (open poly x 10697-10716, y 15727-15773: `tools/px.py col 10706 15718
-  15800 5 metal,metal1`) and runs on west along y 15752-15772 (`tools/px.py row 15762 10610 10730 6`: orange
-  from x 10652 to x 10712; found by the review, round 11: the first drawing had it going straight west on
-  y 15737, where it is field west of x 10694). Drawn to x 10655 (port). A 10-14 px dark bar at y 15775-15785
-  with a 36 px wide poly south of it (x 10684-10720) is not read (`bc2`'s).
+- **T1's bottom row** runs west from the pad under `bc2`'s VCC rail (x 10718-10770; salmon in the clean shot,
+  no contact) to the rail's west edge, and is drawn to there (the corner at x 10694-10716: port). **Beyond the
+  corner the same poly belongs to an undrawn unit of `bc2`, and T1 is that unit's output** (read by the
+  tracer and two reviewers, rounds 11 and 12; not drawn): it turns south (`tools/px.py col 10706 15718 15800 5
+  metal,metal1`: orange from y 15733 to y 15773), crosses one 8 px edge line at y 15776-15782 (the top edge of
+  the rail's contact box (10722-10775, 15782-15848) running on west under the poly) and is a block
+  x 10685-10716, y 15782-15849 (`tools/px.py col 10700 15770 15870 6`: orange in both metal shots from y 15788
+  to y 15842, dark red-brown and textured in the clean shot): the plate of a depletion load from that VCC
+  box, with a narrow strip west of it (x 10670-10682). From the corner it also runs west along y 15750-15771
+  (`tools/px.py row 15762 10610 10730 6`: orange from x 10652 to x 10712) and ends at x 10623 on a
+  heavy-outlined box (10622-10650, 15760-15790) with no metal over it, read as the buried contact that ties
+  the plate to the unit's output diffusion. So `cdp4_w10808` is driven by a gate of `bc2` whose pull-downs are
+  not found yet. (The first drawing took the row straight west on y 15737, where it is field west of
+  x 10694; the second drew the step and the row west to x 10655 with a port "on west": both corrected.)
 - **T2's bottom row** (`t12_b2z.png`, `t12_b2w.png`, `t12_b2e.png`, 4-5x, four shots): the row is poly in every
   gap between the metals it passes under from x 10788 to x 10962 (`tools/px.py row 17643 10764 10990 6
   metal,metal1,acid`: orange at x 10788, 10830, 10878, 10914-10920, 10962). East of the pad it passes under
@@ -697,8 +705,8 @@ and D6's the cell `cdp4_ro`, D7's in `regs`).
 
 So `rst_lat` (a copy of the reset: `notes/signals.md`) runs from the input buffer row's inverter, by
 `trunks`' wires, up the whole east side of the central datapath to a pad at (10849,3592) and on east in poly,
-with a branch south at (10789,17700). T1 carries a signal between the top-right area and `bc2`'s logic; what
-it is, is not known.
+with a branch south at (10789,17700). T1 carries the output of a gate of `bc2`'s logic (its load is at the
+line's bottom end) up to the top of the datapath and east; what it is, is not known.
 
 ### Corner gate group: `cdp4_rst` = NOR of six select rows (run 2, 2026-11-19; traced)
 
@@ -764,7 +772,7 @@ islands are closed curves inside it, so they are the other class.
 | `cdp4_bus_s0`..`s7` | poly | x 7600, y 13333, 13376, 13420, 13463, 13505, 13548, 13590, 13633 | from outside | data into the row C latch |
 | `d5_out_n`..`d1_out_n` | poly | onto `dbus`'s rows at x 16822, 16870, 16912, 16957, 16957 (y 15824, 15954, 16085, 16215, 16345) | driven inside | the outputs of the data output inverters (run 8) |
 | `dbus_le` | metal | x 16775, y 15930 (onto `dlat`'s end) and y 16450 (drawn end; goes on south) | from outside (believed from the south) | the data input latches' enable, passing through the units (run 8; uncertain over four boxes) |
-| `cdp4_w10808` | poly | (10980, 3624-3646) (the row east of T1's top pad) and (10655, 15752-15772) (the row from its bottom pad, after its step south) | ? | the first through line east of the ninth VSS rail (run 12) |
+| `cdp4_w10808` | poly | (10980, 3624-3646) (the row east of T1's top pad) and (10694-10716, 15726-15748) (the corner of the row from its bottom pad, at the VCC rail's west edge: beyond, an undrawn unit of `bc2` that drives it) | driven from `bc2`'s unit (read, not drawn) | the first through line east of the ninth VSS rail (run 12) |
 | `rst_lat` | poly | (10980, 3580-3600) (the row east of T2's top pad) and (10782-10797, 17700) (the column south of the row's west end) | from `trunks`' inverter | the second through line (run 12) |
 | `vcc`, `vss` | metal | x 16515 and x 16689 at y 15780 (onto `dlat`'s rails); `vcc` drawn to y 16440 (goes on to about y 16478), `vss` ends at y 16446 | - | the units' rails |
 | `cdp3_n_c7` (= `cdp4_n_s7` = `dbus_do0_in`) | metal | (16950-16962, 16714): onto `dbus`'s metal | driven inside | the read bus, column 7 = the gate of D0's output chain (run 7) |
@@ -894,8 +902,8 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
 - Ends of `wr_r15` (poly, y 11837).
 - Right of x 10600: (done, runs 4 and 12: the read bus tracks and the two through lines.) Left: the end of
   the s7 VCC rail; the ninth VSS rail's end (y 13300).
-- From run 12: the four rows beyond their ports (`cdp4_w10808` east of (10980,3635) and west of
-  (10655,15762); `rst_lat` east of (10980,3590) and south of (10789,17700)); the undrawn metal on T1's track
+- From run 12: the four rows beyond their ports (`cdp4_w10808` east of (10980,3635), and the unit of `bc2`
+  at (10620-10780, 15750-15860) whose load's plate it is; `rst_lat` east of (10980,3590) and south of (10789,17700)); the undrawn metal on T1's track
   position from about y 16400 to y 18458 (the north part of `trunks`' `rst_ck` piece, or another net).
 - From the review of run 7 (round 6): `dbus`'s `d7_c` metal (port (16950,16750-16766)) goes on west along
   y 16758 to a corner near (16838,16758) and south on x ~16840 to about y 17306, in no trace file and no
@@ -1339,6 +1347,31 @@ Not checked by it: T2 over the row at y 13633-13642 is orange in chip 2 (its con
 the four ports.
 
 Round 11: one finding (a port's place), fixed.
+
+Round 12 (fix check, 2026-11-21 17:29 -0600; a fresh Fable reviewer, images in `cache/scratch/cdp4/review-12/`, 8; the
+change since 8c34d0d: one line, T1's bottom row redrawn with its step south and a port at (10655,15762)).
+It found the drawn item right as far as it went (one poly from the pad, under the rail without a contact,
+south at x 10693-10716, west along y 15750-15771; `sameconn.py` identical both ways; nothing of `bc2`
+touched), and two findings about what the wire does beyond, **both changing a connection**:
+
+- Finding 1, confirmed (`tools/px.py col 10700 15770 15870 6 metal,metal1,acid1b`; view `t1w_a.png`): the
+  dark bar at y 15776-15782 is one edge line and the poly goes on south of it as a block x 10685-10716,
+  y 15782-15849, beside the VCC rail's contact box: the plate of a load, a transistor nobody draws.
+- Finding 2, confirmed (`tools/px.py row 15775 10600 10670 5`; the same view): the poly does not go on west
+  of x 10655; it ends at x 10623 on a heavy-outlined box (10622-10650, 15760-15790), read as the plate's tie
+  to the unit's output. So the port's "on west" was wrong, and the net is driven here.
+
+Fixed by drawing less and saying what is there: the row is drawn only to its corner at the rail's west edge
+(`P 10808,15737 x10694 w=22`), the port is that corner, and the notes and the port line describe the undrawn
+unit of `bc2` beyond it (the load's plate, the tie box) as read, not drawn. The unit itself (its load, its
+tie and its pull-downs) is `bc2`'s and goes to that package as a lead. No net, transistor or equation
+changes against either earlier state:
+
+`tools/t.sh cdp4 sameconn.py 0fa5cce`: connections identical.
+`.venv/bin/python tools/sameconn.py 0fa5cce`: connections identical.
+
+Round 12: two findings (the wire's end: a load's plate and its tie), fixed by ending the drawing at the
+corner with a port.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
