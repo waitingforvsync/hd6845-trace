@@ -1170,6 +1170,11 @@ is the compared line of the row above.
   row drives the line (a driver's output) or a gate is the next piece.**
 - **All fourteen rows are alike** (`tools/eof_hjrows.py`, written for this piece: every extent within
   4 px of the master's; three montages).
+- **Review round 52** (a full review, 46 images): no findings. It read the band's junction with the
+  column as one poly in every row (directly in s8 and s9; in the other twelve rows a 2-4 px bar lies
+  along the column's edge, there with and without a band), no contact under the three metals, no
+  transistor in the gap between the rails, the foot and the west row as drawn. One remark on geometry
+  (s8's column edge in the clean shot), checked in chip 2 and not changed.
 - **Read without an uncertain item, recorded as ambiguities**: the band meets the column inside rail
   G's protected margin (181), the jog and the three metal crossings as no contact (182), the joins rest
   on `larr`'s drawing of H3 (183), the three gap rows (184).
@@ -6263,7 +6268,9 @@ driver lies; the other three lead to the loads.
     nothing in s8 (`px.py row 15543 4147 4181 2`), down to 78/44/22 for one sample in s0 (`px.py row
     11509 4150 4186 2`; `r44_f1.png`). Read as the edge of the rail's margin, not as a gap: it is 2-4 px
     wide where two polys stand about 20 px apart, the colour east of it is still poly's, and s8 has
-    none. In both chip-2 shots and chip 1's metal shot the rail's own edge line (x 4166-4170, there at
+    none. Review round 52 adds s9: chip 2's stripped shot stays red over green through the junction
+    (minimum 102/50/32) where the control row has a dark line (53/17/13), and that the bar is as dark
+    where there is no band, so it runs along the column. In both chip-2 shots and chip 1's metal shot the rail's own edge line (x 4166-4170, there at
     every y) covers the place. The other reading, a band that ends a few px short of the column, would
     leave the band a dead end under the rail and the column and H3 without the selector: not read so
     (trap 34 is about rows 20-30 px apart).
@@ -8941,6 +8948,61 @@ What it could not check: chip 2 at x 4696-4702, where both shots show only the V
 6 px: Ambiguity 178); the bus rows east of x 4804 and the cell west of x 4676 (not re-read).
 
 Round 51: no findings that change a connection.
+
+### Round 52 (full review of piece `hj`; 2026-11-21 16:18 to 16:35 +0000, at commit 5ca4406)
+
+One fresh reviewer (Claude Fable 5.2), 46 images in `cache/scratch/eof/review-52/`. Brief:
+`cache/scratch/eof/brief-round52.md` (seven claims: the band on west to x 4290 under the thin metal
+without contact; the jog block under rail H; the lower band west under both rails and across the gap,
+no contact, no transistor; the band one poly with the column x 4152-4165, whose foot is at y 12007; the
+row west of the foot one poly with the column and, in eleven rows, with `larr`'s H3, with the eleven
+joins by name; the fourteen copies; the seventeen ports; told to suspect the band's junction with the
+column inside rail G's margin and the dark dip across it (deepest in s0, none in s8), the jog block and
+a contact from either rail or the thin metal (the contact check's three low readings), a diffusion
+under the lower band in the gap between the rails and the north-south strip there, the column's foot
+and what touches it or the west row (the diffusion box 7 px west of the column), the west row against
+`larr`'s H3 in each of the eleven rows and in s6, s9, s13, and the rows that might differ: s0, s6, s7,
+s9, s10, s13).
+
+The reviewer reported **no findings**: nothing in the photos changes a connection, and nothing undrawn
+on this net lies inside the region. One remark on geometry:
+
+1. **In s8's clean shot the column's poly reaches about x 4168; it is drawn to x 4165** (geometry
+   only). Checked: chip 2's metal shot, whose frame the trace is drawn in, has the column's east edge in
+   s8 where the other rows have it (`tools/px.py row 15519 4151 4171 2 acid1b,metal,metal1`, 24 px north
+   of the band: orange to x 4161-4163, 161/120/62 and 138/108/60, the edge line from x 4165), and the
+   clean shot alone is bright to x 4167 there (187/152/104, 205/164/118, 196/142/106): chip 1's shot
+   lies 3-4 px east of chip 2's at this place, which is also why s8 shows no dip at the junction. **Not
+   confirmed as an error of the drawing; nothing changed** (the band overlaps the place in any case).
+
+What it checked and found as drawn, in all fourteen rows unless stated: **the band's junction with the
+column, one poly**: directly in s8 (the clean shot rises steadily from 141/81/47 to 210/159/108 with no
+line across: `px.py row 15542 4152 4178 2`; 7x) and in s9 (chip 2's stripped shot stays red over green
+through it, minimum 102/50/32, where the control row 22 px north has a dark line of 53/17/13: `px.py
+row 16018` against `15996`); in the other twelve rows a dark bar of 2-4 px lies on it that is equally
+dark where there is no band (s0: 76/40/21 at the junction, 73/34/24 in the control), so it runs along
+the column and not across a gap, with poly colour on both sides and no room for a gap between two
+polys; the jog block as one cream Z with both bands, pink west of x 4290 at the upper level and field
+east of x 4308 at the lower; no contact under rail G, rail H or the thin metal (the clean shot's lowest
+red minus green on the band and the block always at an edge of the test box, no hole; the thin metal
+keeps its width, 9-16 px, at 9x; dark blobs on chip 2's rails over the band in s1 at (4207,11983), in
+s6 and in s8 at (4266,15545) are absent from chip 1's metal shot and the clean shot); no transistor in
+the gap between the rails (both metal shots smooth across x 4226-4246 north of, on and south of the
+band, no edge line; the strip x 4233-4246 only in the clean shot and khaki there, at 5x); the column
+orange without a break from y 11920 to its foot at y 12005-12007 in both metal shots, plain field south
+of it and a separate poly from about y 12030 (in s6, s9 and s13 only field); the diffusion box west of
+the column parted from it by a green rim in thirteen rows (in s7 the clean shot is dark there and both
+metal shots are like the other rows); the west row continuous orange poly from the column to x 4060 in
+every row, s6, s9 and s13 included, field north and south, overlapping `larr`'s H3 in the eleven rows;
+the extraction of `eof` with `larr` (0 errors, no warning on these names) and the seventeen ports
+against the offsets; every outline on its feature in the overlays of the copies.
+
+What it could not check: the junction is not directly visible in the twelve rows with the bar (there
+the join rests on s8, s9 and the missing room for a gap: Ambiguity 181); it viewed one of the three
+chip-2 metal overlay sheets (s5-s9) and checked the other rows' metal by measurement; the column north
+of y 11940 is outside the piece.
+
+Round 52: no findings.
 
 ## Not done
 
