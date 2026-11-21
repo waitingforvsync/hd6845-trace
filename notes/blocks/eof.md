@@ -1112,6 +1112,36 @@ Full extraction with run 42: 2,534 nets, 4,696 transistors, 0 errors, 0 warnings
 transistors before). The package by itself: 1,143 nets, 1,910 transistors, 0 errors, 82 warnings (other
 packages' names; 81 before the run: `rcs_mv`'s row is `bl0`'s west of x 7040).
 
+Run 43 (Tom Seddon's session, Claude Fable 5.2; 2026-11-21 15:17 +0000 on). One piece, `rj` (wiring
+only: no transistor, no uncertain item): **in all fourteen rows of the left array the selector's two
+inputs are joined to the bus field's row ends**, so what the selector chooses between has names.
+
+- **Traced** (piece `rj`; x 4695-4790, the 80 px between the cell `eof_mx`'s east ends at x 4700 and
+  `busl`'s / `bl0`'s row ends at x 4780, in each row). The diffusion line `eof_mxn_s#` runs straight on
+  east in every row; the south band `eof_mxs_s#` (poly) runs straight on in twelve rows and **jogs in
+  two**: in s1 by a poly column x 4703-4723 north to the bus row y 11912-11932, in s3 by a column south
+  to the bus row y 12974-12994. Lines and bands pass under the thin tracks x 4736 and x 4780 (this
+  package's `eof_w15998` / `eof_w16218`; in s12 the metal on x 4780 is another net's, not drawn) without
+  contact.
+- **The joins** (firm: `tools/unsure.py` lists none of the 28 nets). The diffusion line of rows s0-s7 is
+  `cdp3_hw_c7` .. `cdp3_hw_c0`, **R13's bits 7-0 inverted** (`cdp3_hw_c#` = NOT `cdp3_h_c#_q1`, the west
+  outputs of `cdp3`'s register row H, which is R13 by its write strobe); of rows s8-s13 it is `lc3_e9577`,
+  `lc3_e9621`, `lc3_e9665`, `lc3_e9708`, `lc3_e9750`, `lc3_e9793` (the six through lines of the
+  left-centre strip; their sources are not followed: believed R12's bits). The band of rows s0-s7 is
+  `cdp4_bus_s7` .. `cdp4_bus_s0` (the eight lines compared with R15 and latched by `cdp4`'s row C), of
+  rows s8-s13 `cdp3_g_c7` .. `cdp3_g_c2` (the six lines compared with R14 and latched by `cdp4`'s row D).
+- **So** (extracted; the selects marked for run 42's ties): in row s# the strap's node `eof_strap_s#` is
+  joined to R13's inverted bit (s0-s7) or the line `lc3_e#` (s8-s13) while `rcs_mv` is LOW, and to the
+  row's compared line (`cdp4_bus_s#` / `cdp3_g_c#`) while `rcs_mv` is HIGH. Believed, not traced: the
+  compared lines are the memory address MA0-MA13 as the rows hold it, and the lines `lc3_e#` R12's bits.
+- **Read without an uncertain item, recorded as ambiguities**: the 38 crossings under the two tracks as
+  no contact (177), the two jog columns as one poly with band and row (178), the west end of s3's bus
+  row against the pad of the next row's VSS-tied band (179), a green spot under the track in s1 (180).
+
+Full extraction with run 43: 2,506 nets, 4,696 transistors, 0 errors, 0 warnings (2,534 nets before: 28
+joins; the transistors unchanged). The package by itself: 1,143 nets, 1,910 transistors, 0 errors, 82
+warnings (as before).
+
 Full extraction after run 2: 2,351 nets, 4,232 transistors, 0 errors, 0 warnings; the package
 by itself (it loads `rdp3`): 0 errors, 0 warnings.
 
@@ -1249,6 +1279,7 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `mx1`, the two pass transistors on the strap's node in each row (cell `eof_mx`, 14 copies) | x 4325-4705, y 11785-11980 in row s1; the copies at dy -477, 477, 954, 1431, 1909, 2386 and (dx 1) 3079, 3557, 4034, 4684, 5162, 5639, 6116 | one active area (4462-4655, 11838-11946) with the diffusion line from the east (y 11805-11825 to x 4640, y 11816-11828 to its turn at x 4549-4563) on its north side. Upper gate `eof_ga_s#`: a Z-shaped poly (band y 11853-11877, x 4434-4590; vertical part x 4564-4590; band y 11830-11851 to x 4664), a column (4434-4450, 11808-11877), a row y 11808-11825 east to a pad and contact (4517,11811) on the thin metal x 4510-4527. Lower gate `eof_gb_s#`: a band y 11902-11924 from a pad and contact (4352,11912) on the thin metal x 4338-4354 to x 4666. South strip y 11926-11945 with a buried contact (4462-4488, 11954-11973) onto the band y 11955-11972 (`eof_mxs_s#`, drawn x 4420-4700). Two transistors per row: 217/23 between `eof_strap_s#` and `eof_mxn_s#`, 193/22 between `eof_strap_s#` and `eof_mxs_s#` |
 | `sel`, the two select lines of the selector (`eof_ga`, `eof_gb`) | x 4338-4527, y 11046-18301 (two thin metals); x 4338-6340, y 18238-18338 (the channel below the array); x 6273-6329, y 16428-18319 and x 6273-7021, y 16428-16485 (two metals north and east); x 6997-7230, y 16416-16883 (the crossing field) | wiring only. East line `eof_ga`: metal (4518,11048) - (4518,18301) - pad (4909,18298); poly to pad (5103,18298); metal, diagonal x 5592-5612, to pad (6147,18321); poly to pad (6322,18319); metal north x 6322, east y 16478, south x 7014 to pad (7014,16865); poly row y 16855-16875 through pad (7187,16866) to x 7230; metal x 7187 north to pad (7185,16432), poly to x 7222. West line `eof_gb`: metal (4346,11046) - (4346,18256) - pad (4389,18256); poly to pad (4563,18255); metal to pad (4866,18255); poly to pad (5062,18254); metal, diagonal x 5632-5652, to pad (6103,18278); poly to pad (6279,18278); metal north x 6280, east y 16435 to pad (7014,16433); poly column x 7004-7024 south and row y 16528-16548 east to x 7230. Fourteen pads with contacts; no transistor |
 | `selg`, the two inverters that drive the select lines (cell `eof_sdrv`, 2 copies) | x 7190-7530, y 16290-16930; the master is the upper unit, the copy at dy 325 | per unit: active area (7256-7450, 16316-16523) with a contact box (7290-7342, 16296-16320) and a load region (7319-7450, 16500-16594); ground contacts (7307,16310), (7319,16451); gate poly: band y 16337-16359 (x 7297-7461), column x 7297-7319, U (top bar y 16404-16426, east side x 7388-7411, bottom bar y 16479-16500 west to x 7230); plate (7303-7461, 16530-16567); tongue (7288-7298, 16518-16552); exit box (7266-7284, 16528-16561) on the row y 16531-16551; two `?` ties. Outside the cell: rail x 7294-7340 (y 16325-16930), its arm y 16349-16391 west to x 7200, the input blocks (7204-7246, 16424-16500) and (7223-7246, 16771-16825), `rcs_mv`'s row y 16771-16787 from x 7035, supply boxes (7467-7522, 16465-16597) and (7467-7522, 16825-16918) with contacts (7491,16531), (7491,16848), (7491,16895). Four transistors: 518/22 and 131/37 twice |
+| `rj`, the fourteen rows' joins at the left array's east edge (wiring) | x 4695-4790 in each row: y 11805-11825 and y 11955-11972 in row s1, the other rows at the offsets of `eof_mx`; s1's jog (4703-4723, 11912-11972), s3's jog (4703-4723, 12909-12994) | per row one diffusion rectangle (the line `eof_mxn_s#` on east to `busl`'s / `bl0`'s diffusion row) and one poly (the band `eof_mxs_s#` on east to the bus row; in s1 and s3 a stub, a column and the row); under the tracks x 4736 and x 4780 without contact. Each net takes the bus field's name (`cdp3_hw_c#` / `lc3_e#`; `cdp4_bus_s#` / `cdp3_g_c#`), the cell's name stays as an alias |
 
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
 
@@ -4220,6 +4251,119 @@ the arm west of x 7200; green in the clean shot under the rail at x 7298-7318, y
 (7308,16923); chip 2 whole, 200/179/86; no ring: review round 50). The upper supply contact may be two
 (a bar at y 16537-16548 in chip 2, a dip in chip 1): drawn as one, the same connection.
 
+### Piece `rj`: the selector's two inputs are joined to the bus field's row ends in all fourteen rows (traced; wiring only; no uncertain item)
+
+Run 43, 2026-11-21. Region: x 4695-4790 in each of the fourteen rows of the left array, the 80 px between
+the east ends of the cell `eof_mx` (piece `mx1`: the diffusion line `eof_mxn_s#` and the south band
+`eof_mxs_s#`, both drawn to x 4700 under the east edge of the VSS metal x 4645-4698) and the ends at
+x 4780 of the rows that `busl` (the lines of s0-s7, the bands of s0-s6) and `bl0` (the band of s7, both of
+s8-s13) bring from the bus field. Survey and draft: `cache/scratch/eof/survey.md` ("RUN 43"),
+`cache/scratch/eof/draft-rj.txt`. Views: `r43_m1.png`, `r43_m2.png` (the fourteen rows, 1.0x, clean and
+metal), `r43_a1.png` (row s1, 2.8x, four shots), `r43_b1.png`, `r43_b2.png`, `r43_b3.png` (every row at
+2.0x in chip 2's metal shot, chip 2's stripped shot and the clean shot: `cache/scratch/eof/rows43.py`),
+`r43_c1.png` (s3's jog, 5x, four shots); overlays `r43_o1.png` (both jogs, 2.8x, metal and clean) and
+`r43_o2.png` (the fourteen rows with every package's trace, 1.3x).
+
+**What lies between x 4698 and x 4790.** The VSS metal ends at x 4698. In rows s0-s5 one thin track
+crosses the strip, x 4729-4743 (`eof_w15998`); in s6 one, x 4773-4787 (`eof_w15998` south of its arm);
+in s7-s12 two (`eof_w16218` on x 4729-4743; on x 4773-4787 `eof_w15998` in s7-s11 and, in s12, the
+thin metal that comes south from the pad (4778,17365), another net, not drawn: Not done); in s13 none
+(they end north of it). Between the metals the ground is open: 14 px beside the VSS metal (x 4708-4722) and 30 px
+between the tracks.
+
+**The diffusion line runs straight on in every row.** `tools/eof_rowx.py` (written for this piece: the
+two edge lines of each line at x 4710, 4756 and 4794 in chip 2's metal shot, and the clean shot under
+each track): in every row the line's two edge lines are at the same y at the three places, 18-19 px
+apart (s0 y 11328 / 11347, s1 11806 / 11825, s2 12283 / 12301, s3 12759 / 12778, s4 13237 / 13255, s5
+13715 / 13734, s6 14192 / 14210, s7 14885 / 14903, s8 15363 / 15382, s9 15840 / 15859, s10 16490 /
+16509, s11 16967 / 16986, s12 17446 / 17464, s13 17923 / 17941), plain between them in both metal shots
+(chip 2 about 170-184/126-142/80-91: diffusion, blue over 80; no orange). Under each track the clean
+shot is tan on the line (184-205/161-179/122-136) where 30 px along the same track it is the pink of
+field under metal (176-199/117-129/124-132). Along the line across the cell's end (the clean shot, x 4684
+to x 4728): tan to x 4700, the edge of the VSS metal's protected margin at x 4704-4708, a narrow
+diffusion's open colours to x 4720, tan again under the track. `busl`'s and `bl0`'s diffusion rows end
+at x 4780 on the same y (their ports: y 11328-11348 .. 17924-17938).
+
+**The band runs straight on in twelve rows.** In s0, s2 and s4-s13 the band's two edge lines are at
+the same y at x 4710, 4756 and 4794, 22-24 px apart (s0 y 11477 / 11500, s2 12431 / 12454, s4 13385 /
+13409, s5 13863 / 13886, s6 14340 / 14362, s7 15033 / 15056, s8 15511 / 15535, s9 15988 / 16011, s10
+16638 / 16661, s11 17116 / 17139, s12 17594 / 17616, s13 18070 / 18093); between them the poly is orange
+in the open in both chip-2 shots (chip 2's metal shot 146-185/94-131/42-72, blue under 75) and cream
+under each track in the clean shot (210-231/156-180/107-127; no hole). The bus rows' ports at x 4780 are
+on the same y (`busl`: y 11478-11498, 12432-12452, 13387-13407, 13864-13884, 14341-14361; `bl0`:
+15033-15053, 15511-15533, 15988-16010, 16639-16659, 17116-17137, 17593-17614, 18070-18092).
+
+**In rows s1 and s3 the band jogs**, in the open strip between the VSS metal and the track:
+
+- **s1**: `busl`'s row `cdp4_bus_s6` is y 11912-11932, 43 px north of the band (y 11955-11972). It runs
+  west under the track (cream, 217-222/164/107-109) to a poly column x 4703-4723 that runs south to the
+  band: `tools/px.py col 4712 11890 11996 4 all`: open poly without a break from y 11914 to y 11972
+  (chip 2's metal shot 149-174/87-115/48-73), field above y 11902 and below y 11982. The row does not go
+  on west of the column (`px.py row 11918 4650 4732 3 all`: the clean shot is pink, field under the VSS
+  metal, at x 4683-4698 and olive at x 4671-4680; the lower gate `eof_gb_s1`'s free end is at x 4666,
+  37 px away), and the band does not go on east of it (`px.py row 11964 4690 4760 3 all`: cream to
+  x 4699, the column x 4702-4720, pink under the track at x 4732-4744, open field beyond).
+- **s3**: `busl`'s row `cdp4_bus_s4` is y 12974-12994, 68 px south of the band (y 12909-12926). The
+  column x 4703-4723 runs from the band down to it: `px.py col 4712 12884 13024 4 all`: open poly from
+  y 12912 to y 12988, field above y 12900 and below y 13004. The band is cream through x 4680-4701 into
+  the column and does not go on east (`px.py row 12917 4680 4730 3 all`, `row 12917 4722 4770 3 all`:
+  pink under the track at x 4731-4746); the row is cream under the track from x 4726 and does not go on
+  west of the column (`px.py row 12984 4690 4735 3 all`: pink at x 4693-4699). Beside the row's west end
+  lies the pad of row s4's VSS-tied poly band (the band of piece `ld1`'s kind, its contact at about
+  (4667,12971)): **not joined** (`px.py row 12970 4676 4730 3 all`: the pad's cream ends at x 4685, pink
+  field x 4688-4700, the column's rim from x 4703; `r43_c1.png`; Ambiguity 179).
+
+Why these two rows differ is seen in the bus field: its rows arrive at x 4780 at y 11922 and y 12984
+where the array's bands lie at y 11963 and y 12917.
+
+**No contact with either track.** Both tracks are thin (12-14 px) and cross each line and band at their
+ordinary width: runs of metal along each line's centre and 32 px off it are x 4729/4731-4741/4743 and
+x 4773-4787 at both, in both chips (no pad: a contact of these tracks has a 35 px pad, like their own
+fourteen pads 45-49 px north of each diffusion line). Under the tracks the clean shot has no hole on a
+band (`tools/eof_cchk.py`: lowest red minus green 32-51 at 18 of the 19 band crossings, against -14 and
+3 at the tracks' pads (4736,11291) and (4737,14160); at s1's it gives 6, found at (4744,11928), which is
+the open rim east of the track at the row's south edge: `tools/textmap.py 4720 11902 4754 11962 2 --acid`
+has no hole under the track there, red minus green 48-72 at x 4730-4742) and plain tan on a line
+(above). Ambiguity 177.
+
+**Drawn**: per row one diffusion rectangle x 4695-4790 at the cell's y and one poly rectangle x 4695-4790
+(in s1 and s3 a stub of the band, the column and the row), each overlapping the cell by 5 px and the bus
+row by 10. Each new piece carries the bus field's name, and the cell's name is kept as an alias
+(`@alias cdp3_hw_c6 eof_mxn_s1` and the like, 28 lines).
+
+**Extracted.** Full extraction 2,506 nets (2,534 before), 4,696 transistors (unchanged), 0 errors,
+0 warnings. `.venv/bin/python tools/sameconn.py 1c25d6b`: the differences are the 28 joins (each of 28
+nets gains one name; no transistor and no equation changes but for the names). `tools/unsure.py`: none of
+the 28 nets is listed, so every join is firm. In each row:
+
+```
+t gate eof_ga: eof_strap_s# <-> cdp3_hw_c(7-#)       s0-s7     (cdp3_hw_c# = NOT cdp3_h_c#_q1)
+t gate eof_ga: eof_strap_s# <-> lc3_e9577 .. 9793    s8-s13
+t gate eof_gb: eof_strap_s# <-> cdp4_bus_s(7-#)      s0-s7
+t gate eof_gb: eof_strap_s# <-> cdp3_g_c(15-#)       s8-s13    (c7 in s8 .. c2 in s13)
+```
+
+**What it means** (traced, with run 42's selects, which are marked for their ties). While `rcs_mv` is
+low (`eof_ga` high) the strap's node of row s# is joined to **R13's bit, inverted**, in the eight
+northern rows (bit 7 in s0 down to bit 0 in s7) and to one of the six lines `lc3_e#` in the six southern
+rows; while `rcs_mv` is high (`eof_gb` high) it is joined to **the row's compared line**, the line that
+`cdp4` compares with R15 (`cdp4_bus_s#`, s0-s7) or R14 (`cdp3_g_c#`, s8-s13) and latches in its rows C
+and D on `bc1`'s strobe. The order fits one 14-bit word: s7 is bit 0 and s0 bit 7 of the low byte, s8-s13
+the six high bits (which of them is bit 8 is not established here: `cdp3_g_c7` is in s8).
+
+**Believed, not traced.** The compared lines are the memory address as the fourteen rows hold it (MA0 in
+s7 .. MA7 in s0; the high six in s8-s13), and the lines `lc3_e#` are R12's bits (their sources are not
+followed: `lc3`'s six rows at its east edge). Then the selector puts the display start address (R12/R13)
+on the node while `rcs_mv` is low and the row's own address while it is high, and the load line
+(`eof_w15998` / `eof_w16218`) passes the node on to `eof_nbox_s#`. Which end drives a compared line (the
+row's cells west of x 4420, through the band's west end) is not traced; the pass transistor of the lower
+gate conducts both ways.
+
+**Seen in the region, not drawn**: the green spot in the clean shot at the track's east edge at about
+(4742,11952) in row s1 (Ambiguity 180); the large plain rectangles east of x 4750 between the rows: open
+field, bounded by the rims of the track's protected margin and of the rows (khaki in the clean shot,
+155-159/143-149/96-104 at (4764-4770,12917); chip 2's stripped shot red over green by 7 there).
+
 ## Ports
 
 The net is driven outside the package (by `rdp2`'s NOR). `in` marks the port beyond which the
@@ -4311,8 +4455,7 @@ driver lies; the other three lead to the loads.
 | `eof_w16000` | poly | (8800, 15727-15745) | in | piece `lat15`: the upper latch's data: the poly row west of the pad (8880,15738), where it enters a heavy-outlined box (8762-8795, 15722-15757) at column B's east edge (not read: by its place a unit's output) |
 | `eof_w16000` | metal | (8831-8845, 16030) | ? | piece `lat15`: the track x 8838 on south of the data pad (8838,16000) (the follower: to (8838,17306); not checked) |
 | `eof_nbox_s0` .. `eof_nbox_s13` | diffusion | (4566-4632, 11216), (4566-4632, 11694), (4566-4632, 12171), (4566-4632, 12648), (4566-4632, 13125), (4566-4632, 13603), (4566-4632, 14079), (4567-4633, 14773), (4567-4633, 15251), (4567-4633, 15728), (4567-4633, 16378), (4567-4633, 16856), (4567-4633, 17333), (4567-4633, 17810) | ? | piece `ld1` (run 39): the north end of the diffusion of the transistor that the line gates, one per row of the left array (s0 at the top). 14 px north of the gate it ends on a heavy-outlined box (x 4600-4635, y 11662-11692 in row s1), not drawn: believed a buried contact onto a poly column x 4605-4625 that goes north across the diffusion box of a VSS contact (4665,11622). (The fourteen poly ports of pieces `t4736s` and `t4780n` at x 4700 are gone: the rows are drawn on to this transistor) |
-| `eof_mxn_s0` .. `eof_mxn_s13` | diffusion | (4700, 11328-11348), (4700, 11805-11825), (4700, 12282-12302), (4700, 12759-12779), (4700, 13236-13256), (4700, 13714-13734), (4700, 14191-14211), (4701, 14884-14904), (4701, 15362-15382), (4701, 15839-15859), (4701, 16489-16509), (4701, 16967-16987), (4701, 17444-17464), (4701, 17921-17941) | ? | piece `mx1` (run 40): the diffusion line that enters the row from the east, drawn to x 4700 under the VSS metal; it goes on east. In row s1 it is seen to be `busl`'s `cdp3_hw_c6` (its end at (4780,11815)); the join is not drawn in any row (Not done). (The fourteen ports of `eof_strap_s#` are gone: the box under the strap's south contact is drawn whole and has no other way out) |
-| `eof_mxs_s0` .. `eof_mxs_s13` | poly | east: (4700, 11478-11495), (4700, 11955-11972), (4700, 12432-12449), (4700, 12909-12926), (4700, 13386-13403), (4700, 13864-13881), (4700, 14341-14358), (4701, 15034-15051), (4701, 15512-15529), (4701, 15989-16006), (4701, 16639-16656), (4701, 17117-17134), (4701, 17594-17611), (4701, 18071-18088); west: (4420, 11478-11495), (4420, 11955-11972), (4420, 12432-12449), (4420, 12909-12926), (4420, 13386-13403), (4420, 13864-13881), (4420, 14341-14358), (4421, 15034-15051), (4421, 15512-15529), (4421, 15989-16006), (4421, 16639-16656), (4421, 17117-17134), (4421, 17594-17611), (4421, 18071-18088) | ? | piece `mx1` (run 40): the poly band along the row's south edge, which the south strip joins by a buried contact; drawn from x 4420 to x 4700 and going on both ways: west into the array (open poly), east under the VSS metal. In row s1 it is seen to be `busl`'s `cdp4_bus_s6` (a jog at x 4703-4723 up to the row end (4780,11922)); the join is not drawn in any row |
+| `cdp4_bus_s7` .. `cdp4_bus_s0`, `cdp3_g_c7` .. `cdp3_g_c2` (the bands `eof_mxs_s0` .. `eof_mxs_s13`) | poly | (4420, 11478-11495), (4420, 11955-11972), (4420, 12432-12449), (4420, 12909-12926), (4420, 13386-13403), (4420, 13864-13881), (4420, 14341-14358), (4421, 15034-15051), (4421, 15512-15529), (4421, 15989-16006), (4421, 16639-16656), (4421, 17117-17134), (4421, 17594-17611), (4421, 18071-18088) | ? | pieces `mx1` and `rj`: the west end as drawn of the poly band along each row's south edge; it goes on west into the array (open poly). Since run 43 the band is joined in the east to the bus field's row (piece `rj`), so the net has that row's name and `eof_mxs_s#` is an alias. (The 28 east ports of `eof_mxn_s#` and `eof_mxs_s#` at x 4700 are gone: piece `rj` draws both on to `busl`'s and `bl0`'s row ends at x 4780) |
 | `rcs_mv` | poly | (7035, 16771-16787) | in | piece `selg` (run 42): `bl0`'s row (its port (7040, 16770-16790)) taken on east to the gate of the lower inverter. (The three ports of piece `sel` at x 7222 / 7230 are gone: `eof_ga` and `eof_gb` are driven by this piece's two inverters) |
 | `vss` | metal | (7200, 16349-16391) | - | piece `selg`: a wide arm of the ground rail x 7294-7340 on west across the bus field (seen to x 6850; the thin metals x 7014 .. 7144 pass under it in poly); not followed |
 | `vcc` | metal | (7470-7520, 16455) and (7470-7520, 16925) | - | piece `selg`: `bc3`'s rail RL2 (`M 7495,16290 y17560 w=50`), two pieces of it drawn again over the two supply boxes (y 16455-16605, y 16815-16925) |
@@ -5904,6 +6047,36 @@ driver lies; the other three lead to the loads.
     lines (`tools/px.py row 16650 7436 7484 3 all`; `r33_dark.py v 7458 16560 16730`: one plain run
     y 16602-16653 with no strip in it). Read as not joined (a join would short the supplies). What the
     box feeds is east of RL2 (`bc3`).
+177. **The lines and bands under the two tracks** (piece `rj`; no `?` item). The thin tracks x 4729-4743
+    and x 4773-4787 (`eof_w15998`, `eof_w16218`; in row s12 the metal on x 4773-4787 is the undrawn one
+    from the pad (4778,17365)) cross the fourteen diffusion lines and the fourteen
+    bands at 38 places and are read as making no contact: at each crossing the track has its ordinary
+    width (12-14 px, the same 32 px away; a contact of these tracks has a 35 px pad), the clean shot under
+    it is plain tan on a line and cream without a hole on a band (`tools/eof_rowx.py`; `tools/eof_cchk.py`:
+    32-51 at 18 of the 19 band crossings, and s1's read on a text map: piece `rj`). A contact on a line would put the load line on R13's bit; on a band, on
+    the row's compared line.
+178. **The two jog columns** (piece `rj`; no `?` item). In s1 and s3 the band, the column x 4703-4723 and
+    the bus row are read as one poly. The column is open poly without a break in both chip-2 shots
+    (`tools/px.py col 4712 11890 11996 4 all`, `col 4712 12884 13024 4 all`). Where the band meets the
+    column, at the VSS metal's edge, a dark line 4-6 px wide crosses the band at x 4696-4701 in chip 2's
+    two shots and in chip 1's metal shot (the metal's edge line and the stripped shot's etch line beside
+    a wide metal: it is there at every y along the edge, on field too); the clean shot is cream without
+    a break from x 4680 to x 4701 (`px.py row 12917 4680 4730 3 all`, `row 11964 4690 4760 3 all`). If
+    the band ended at the metal's edge the bus row and its column would be a dead end and the band
+    would have no line: not read so.
+179. **s3's bus row and the pad beside it** (piece `rj`; no `?` item). The row y 12974-12994
+    (`cdp4_bus_s4`) ends in the west on the column x 4703-4723; 18 px further west, under the VSS metal's
+    edge, lies the pad of row s4's VSS-tied poly band with its contact at about (4667,12971). Between
+    them the clean shot is pink, field under metal, for 12-15 px (x 4688-4700: 170-202/95-117/89-134;
+    `tools/px.py row 12970 4676 4730 3 all`, `row 12984 4690 4735 3 all`; `r43_c1.png`, 5x, four shots).
+    Read as not joined (a join would ground the compared line of row s3).
+180. **A green spot at the track's edge in row s1** (piece `rj`; nothing drawn). At x 4738-4752,
+    y 11946-11958, 14 px south of the bus row y 11912-11932, the clean shot is green from the open east of
+    the track x 4729-4743 in under the track's east half, with a small dark ring at about (4737,11950)
+    (`r43_a1.png`, `r43_o1.png`; `tools/textmap.py 4720 11902 4754 11962 2 --acid`; first seen in run
+    40). Both metal shots show the track there at its ordinary width and brightness with no ring, and the
+    ground under it is field (pink west of the spot, open field east of it): a place where chip 1's
+    metal did not protect, and no connection whichever way it is read.
 
 ## Review
 
@@ -8506,6 +8679,15 @@ Round 50: no findings that change a connection.
 
 ## Not done
 
+- **Next (after run 43)**: the fourteen joins are drawn (piece `rj`: the selector's inputs are
+  `cdp3_hw_c#` / `lc3_e#` and `cdp4_bus_s#` / `cdp3_g_c#`), so item (a) of the list below is done but for
+  **the band west of x 4420**: each band's west end (port (4420, 11955-11972) in row s1) goes on into the
+  array as open poly, toward the thin metal x 4338-4354 and the rail x 4256-4302: what in the row drives
+  or reads the compared line. In order: (a) that band west of x 4420 in the master row s1; (b) the box
+  north of the load line's gate (what `eof_nbox_s#` is); (c) the rest of the column; (d) the pad
+  (4778,17365); (e) `bl0_w15566`'s driver and the twin of `cap18`; (f) **the sources of `lc3_e9577` ..
+  `lc3_e9793`** (the six lines into rows s8-s13: `lc3`'s six poly rows at its east edge x 6450,
+  y 9577-9793; believed R12's outputs, `cdp3`'s row C); as in the lists below.
 - **Next (after run 42)**: the two select lines have their drivers (piece `selg`: `eof_ga` = NOT `rcs_mv`,
   `eof_gb` = NOT `eof_ga`), so item (a) of the list below is done. In order: (a) **the fourteen joins to
   `busl`'s and `bl0`'s row ends** between x 4700 and x 4780 (`eof_mxn_s#`, `eof_mxs_s#`) and the band west

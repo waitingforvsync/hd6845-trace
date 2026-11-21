@@ -3938,3 +3938,117 @@ C 7491,16848 s=18x22
 C 7491,16895 s=18x14
 M 7495,16815 y16925 w=50
 N M 7495,16920 vcc
+
+# ---- piece rj (run 43, 2026-11-21): the fourteen rows' joins at the left array's east edge, x 4695-4790.
+# In each row the diffusion line eof_mxn_s# (cell eof_mx, drawn to x 4700) and the south band eof_mxs_s#
+# (poly, drawn to x 4700) run on east under the track x 4736 (rows s0-s5, s7-s12) and the track x 4780
+# (rows s6-s12) to the row ends that busl (s0-s7's lines, s0-s6's bands) and bl0 (s7's band, s8-s13) draw
+# from x 4780: one diffusion and one poly per row, no contact with either track (the tracks keep their
+# 12 px width over every crossing; the clean shot under them is tan on the lines and cream on the bands,
+# without a hole: tools/eof_rowx.py). Twelve bands go straight on; two jog in the open strip between
+# the VSS metal's edge (x 4698) and the track x 4736, by a poly column x 4703-4723: in s1 the bus row
+# is 43 px north of the band (y 11912-11932), in s3 68 px south of it (y 12974-12994). Each column ends
+# at the band and at the row (field beyond both ends; tools/px.py col 4712). The names: each line and
+# band takes the bus field's name, and the cell's name stays as an alias.
+# row s0
+D 4695,11328:4790,11348
+N D 4750,11338 cdp3_hw_c7
+@alias cdp3_hw_c7 eof_mxn_s0
+P 4695,11478:4790,11497
+N P 4750,11486 cdp4_bus_s7
+@alias cdp4_bus_s7 eof_mxs_s0
+# row s1
+D 4695,11805:4790,11825
+N D 4750,11815 cdp3_hw_c6
+@alias cdp3_hw_c6 eof_mxn_s1
+P 4695,11955:4723,11972          # the band's east end
+P 4703,11912:4723,11972          # the column north to the bus row
+P 4703,11912:4790,11932          # the bus row (busl: P 4780,11922 w=20)
+N P 4750,11922 cdp4_bus_s6
+@alias cdp4_bus_s6 eof_mxs_s1
+# row s2
+D 4695,12282:4790,12302
+N D 4750,12292 cdp3_hw_c5
+@alias cdp3_hw_c5 eof_mxn_s2
+P 4695,12432:4790,12451
+N P 4750,12440 cdp4_bus_s5
+@alias cdp4_bus_s5 eof_mxs_s2
+# row s3
+D 4695,12759:4790,12779
+N D 4750,12769 cdp3_hw_c4
+@alias cdp3_hw_c4 eof_mxn_s3
+P 4695,12909:4723,12926          # the band's east end
+P 4703,12909:4723,12994          # the column south to the bus row
+P 4703,12974:4790,12994          # the bus row (busl: P 4780,12984 w=20)
+N P 4750,12984 cdp4_bus_s4
+@alias cdp4_bus_s4 eof_mxs_s3
+# row s4
+D 4695,13236:4790,13256
+N D 4750,13246 cdp3_hw_c3
+@alias cdp3_hw_c3 eof_mxn_s4
+P 4695,13386:4790,13405
+N P 4750,13394 cdp4_bus_s3
+@alias cdp4_bus_s3 eof_mxs_s4
+# row s5
+D 4695,13714:4790,13734
+N D 4750,13724 cdp3_hw_c2
+@alias cdp3_hw_c2 eof_mxn_s5
+P 4695,13864:4790,13883
+N P 4750,13872 cdp4_bus_s2
+@alias cdp4_bus_s2 eof_mxs_s5
+# row s6
+D 4695,14191:4790,14211
+N D 4750,14201 cdp3_hw_c1
+@alias cdp3_hw_c1 eof_mxn_s6
+P 4695,14341:4790,14360
+N P 4750,14349 cdp4_bus_s1
+@alias cdp4_bus_s1 eof_mxs_s6
+# row s7
+D 4696,14884:4790,14904
+N D 4750,14894 cdp3_hw_c0
+@alias cdp3_hw_c0 eof_mxn_s7
+P 4696,15034:4790,15053
+N P 4750,15042 cdp4_bus_s0
+@alias cdp4_bus_s0 eof_mxs_s7
+# row s8
+D 4696,15362:4790,15382
+N D 4750,15372 lc3_e9577
+@alias lc3_e9577 eof_mxn_s8
+P 4696,15512:4790,15531
+N P 4750,15520 cdp3_g_c7
+@alias cdp3_g_c7 eof_mxs_s8
+# row s9
+D 4696,15839:4790,15859
+N D 4750,15849 lc3_e9621
+@alias lc3_e9621 eof_mxn_s9
+P 4696,15989:4790,16008
+N P 4750,15997 cdp3_g_c6
+@alias cdp3_g_c6 eof_mxs_s9
+# row s10
+D 4696,16489:4790,16509
+N D 4750,16499 lc3_e9665
+@alias lc3_e9665 eof_mxn_s10
+P 4696,16639:4790,16658
+N P 4750,16647 cdp3_g_c5
+@alias cdp3_g_c5 eof_mxs_s10
+# row s11
+D 4696,16967:4790,16987
+N D 4750,16977 lc3_e9708
+@alias lc3_e9708 eof_mxn_s11
+P 4696,17117:4790,17136
+N P 4750,17125 cdp3_g_c4
+@alias cdp3_g_c4 eof_mxs_s11
+# row s12
+D 4696,17444:4790,17464
+N D 4750,17454 lc3_e9750
+@alias lc3_e9750 eof_mxn_s12
+P 4696,17594:4790,17613
+N P 4750,17602 cdp3_g_c3
+@alias cdp3_g_c3 eof_mxs_s12
+# row s13
+D 4696,17921:4790,17941
+N D 4750,17931 lc3_e9793
+@alias lc3_e9793 eof_mxn_s13
+P 4696,18071:4790,18090
+N P 4750,18079 cdp3_g_c2
+@alias cdp3_g_c2 eof_mxs_s13
