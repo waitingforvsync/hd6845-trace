@@ -21,3 +21,10 @@ cdp3_f_c4     M      9293,11048       in   the same, s4
 cdp3_f_c5     M      9683,11048       in   the same, s5
 cdp3_f_c6     M      10073,11048      in   the same, s6
 cdp3_f_c7     M      10464,11048      in   the same, s7
+cdp3_n_c1     P      16148,17480      out  the read bus of R12-R17, column 1 (= cdp4_n_s1): a poly column north beside trunks' metal x 16163-16178; the drawn end is on its corner: it turns west as a band y 17463-17485 (seen to x 16084), not drawn
+cdp3_n_c2     M      16580,17380      out  the read bus, column 2 (= cdp4_n_s2): a thin metal track north from its pad, runs on north past y 16780
+cdp3_n_c3     M      16624,17380      out  the read bus, column 3 (= cdp4_n_s3): a thin metal track north from its pad, runs on north past y 16780
+cdp3_n_c4     M      16667,17380      out  the read bus, column 4 (= cdp4_n_s4): a thin metal track north from its pad, runs on north past y 16780
+cdp3_n_c5     M      16711,17380      out  the read bus, column 5 (= cdp4_n_s5): a thin metal track north from its pad, runs on north past y 16780
+cdp3_n_c6     M      16755,17380      out  the read bus, column 6 (= cdp4_n_s6): a thin metal track north from its pad, runs on north past y 16780
+cdp3_n_c7     M      16798,17380      out  the read bus, column 7 (= cdp4_n_s7): a thin metal track north from its pad, runs on north past y 16780
