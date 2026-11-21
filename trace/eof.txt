@@ -4407,3 +4407,48 @@ M 3958,18238 y18272 w=36
 C 3957,18255 s=18x18
 P 3944,18243:3978,18272
 P 3972,18247:3996,18263
+
+# ============================================================================================
+# Piece cap18b (run 49, 2026-11-21): the twin of piece cap18 east of the VCC rail R2, and the
+# end of bl0_w15566's row that gates it (x 8352-8812, y 17804-18005; bc3's ground, free).
+# One transistor, the mirror image of cap18: gate bl0_w15566, one end on VCC by the
+# diffusion wire from cap18's box under the rail, the other a closed diffusion box whose
+# metal contact lies under a metal island that also covers the gate and has no metal
+# leaving it (the island a net of its own, eof_w17969: Ambiguity 116 holds for it too).
+# r49_a1.png (2x, four shots), r49_b1.png (4x), r49_c1.png (4.5x), r49_d1.png (6.5x).
+# bl0_w15566's poly row on east of bl0's end (P 8272,17821 x8360): one poly y 17811-17831,
+# open (orange in both metal shots) between the metals and cream under them, under eof_w16040's
+# track x 8382, ck_out's x 8426, disptmg_drv_in's x 8468, the VCC rail, ck_out's x 8598 and
+# eof_w16040's x 8643: each metal bright across it with a 9-11 px bar at either edge of the
+# row, no pad on the row, no hole in the clean shot (tl5_tracks.py h 17821 8350 8700; v at
+# each x). No contact at any of them.
+P 8352,17821 x8672 w=20
+N P 8500,17821 bl0_w15566
+# its end pad with a contact (8685,17821): bright centre x 8682-8688 in a dark ring in both
+# chips, a hole in the clean shot, a pitted box in the chip-2 stripped shot (textmap.py
+# 8655 17800 8717 17886 3 --acid)
+P 8668,17804:8702,17838
+C 8685,17821
+# the pad's metal east: the bus line y 17817-17830 (both chips metal from x 8712 on, beyond
+# the ring; follow.py: to (9468,17823)). Drawn 75 px: PORT at x 8760
+M 8685,17824 x8760 w=12
+# the pad's poly south: a column x 8680-8698 under the west end of the bus line y 17860-17873
+# (another net's metal: bright on the column in both chips, no pad, no hole: no contact;
+# Ambiguity 206), east along y 17877-17893 in the gap between that line and ck_out's bus line
+# y 17908, south as a column x 8745-8765 under ck_out's line (bars at the column's two edges,
+# bright between, no pad, no hole: no contact) to the gate
+P 8689,17830 y17885 x8755 y17935 w=18
+# the gate: the column widens to x 8741-8769 and crosses the box from y 17930 to 18005
+# (salmon in the clean shot under the island, outlines at x 8739 and x 8769)
+P 8741,17930:8769,18005
+# the diffusion: the wire y 17964-17984 from cap18's box under the VCC rail (plain between
+# two edge lines, nothing across it: px.py row 17974 8552 8742 8; col 8640) to the box
+# x 8722-8812, y 17949-17997, through under the gate
+D 8553,17964:8730,17984
+D 8722,17949:8812,17997
+# the island: metal x 8744-8810, y 17952-17994, a dark outline all round, over the gate and
+# the box east of it; its contact (8790,17970) on the box (ring and bright centre in both
+# chips, specks in the clean shot, a pitted oval in the chip-2 stripped shot)
+M 8744,17952:8810,17994
+C 8790,17970
+N M 8800,17988 eof_w17969
