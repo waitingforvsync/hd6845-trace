@@ -1134,6 +1134,9 @@ inputs are joined to the bus field's row ends**, so what the selector chooses be
   joined to R13's inverted bit (s0-s7) or the line `lc3_e#` (s8-s13) while `rcs_mv` is LOW, and to the
   row's compared line (`cdp4_bus_s#` / `cdp3_g_c#`) while `rcs_mv` is HIGH. Believed, not traced: the
   compared lines are the memory address MA0-MA13 as the rows hold it, and the lines `lc3_e#` R12's bits.
+- **Review round 51** (a full review, 21 images): no findings on the trace. One note on the evidence
+  (`tools/eof_rowx.py` printed the clean shot under the tracks at 19 of the 38 crossings only): the tool
+  is corrected and prints all 38; nothing drawn changed.
 - **Read without an uncertain item, recorded as ambiguities**: the 38 crossings under the two tracks as
   no contact (177), the two jog columns as one poly with band and row (178), the west end of s3's bus
   row against the pad of the next row's VSS-tied band (179), a green spot under the track in s1 (180).
@@ -4273,13 +4276,13 @@ between the tracks.
 
 **The diffusion line runs straight on in every row.** `tools/eof_rowx.py` (written for this piece: the
 two edge lines of each line at x 4710, 4756 and 4794 in chip 2's metal shot, and the clean shot under
-each track): in every row the line's two edge lines are at the same y at the three places, 18-19 px
+each track at all 38 crossings): in every row the line's two edge lines are at the same y at the three places, 18-19 px
 apart (s0 y 11328 / 11347, s1 11806 / 11825, s2 12283 / 12301, s3 12759 / 12778, s4 13237 / 13255, s5
 13715 / 13734, s6 14192 / 14210, s7 14885 / 14903, s8 15363 / 15382, s9 15840 / 15859, s10 16490 /
 16509, s11 16967 / 16986, s12 17446 / 17464, s13 17923 / 17941), plain between them in both metal shots
 (chip 2 about 170-184/126-142/80-91: diffusion, blue over 80; no orange). Under each track the clean
-shot is tan on the line (184-205/161-179/122-136) where 30 px along the same track it is the pink of
-field under metal (176-199/117-129/124-132). Along the line across the cell's end (the clean shot, x 4684
+shot is tan on the line (184-205/159-179/118-136 at the 19 crossings) where 30 px south under the same
+track it is the pink of field under metal (168-194/121-129/114-133). Along the line across the cell's end (the clean shot, x 4684
 to x 4728): tan to x 4700, the edge of the VSS metal's protected margin at x 4704-4708, a narrow
 diffusion's open colours to x 4720, tan again under the track. `busl`'s and `bl0`'s diffusion rows end
 at x 4780 on the same y (their ports: y 11328-11348 .. 17924-17938).
@@ -4289,7 +4292,8 @@ the same y at x 4710, 4756 and 4794, 22-24 px apart (s0 y 11477 / 11500, s2 1243
 13409, s5 13863 / 13886, s6 14340 / 14362, s7 15033 / 15056, s8 15511 / 15535, s9 15988 / 16011, s10
 16638 / 16661, s11 17116 / 17139, s12 17594 / 17616, s13 18070 / 18093); between them the poly is orange
 in the open in both chip-2 shots (chip 2's metal shot 146-185/94-131/42-72, blue under 75) and cream
-under each track in the clean shot (210-231/156-180/107-127; no hole). The bus rows' ports at x 4780 are
+under each track in the clean shot (211-230/161-180/107-127 at the 19 crossings, against pink
+182-199/115-127/125-137 30 px north; no hole). The bus rows' ports at x 4780 are
 on the same y (`busl`: y 11478-11498, 12432-12452, 13387-13407, 13864-13884, 14341-14361; `bl0`:
 15033-15053, 15511-15533, 15988-16010, 16639-16659, 17116-17137, 17593-17614, 18070-18092).
 
@@ -8676,6 +8680,59 @@ tools/t.sh eof sameconn.py 3cff464              ->  after 1143 nets, 1910 transi
 ```
 
 Round 50: no findings that change a connection.
+
+### Round 51 (full review of piece `rj`; 2026-11-21 15:35 to 15:51 +0000, at commit 641c7d7)
+
+One fresh reviewer (Claude Fable 5.2), 21 images in `cache/scratch/eof/review-51/`. Brief:
+`cache/scratch/eof/brief-round51.md` (six claims: the fourteen diffusion lines straight on, twelve bands
+straight on, the jogs of s1 and s3, no contact at the 38 crossings under the thin tracks, no transistor
+and nothing left out; told to suspect the two jogs (the column as one poly with band and bus row, the
+dark line at the VSS metal's edge, the band east of the column, the bus row west of it, in s3 the gap to
+the pad at (4667,12971)), any other row with a jog, step or break that a straight rectangle hides, the
+layer of each wire in the open stretches, the 38 crossings and `tools/eof_cchk.py`'s 6 at s1's, the
+continuity under the tracks and the metal's edge, the green spot in s1, the rows at the group gaps and
+the ends).
+
+The reviewer reported **no findings** on the trace, and one note on the evidence:
+
+1. **`tools/eof_rowx.py` printed the clean shot under a track for only 19 of the 38 crossings** (a note
+   on the tool and on a sentence of the notes; nothing drawn; no connection changes). Its metal probe
+   lay 30 px north of each line, which for a diffusion line under the track x 4736 is the ring of the
+   track's own pad, so it printed none of those; the notes' "under each track the clean shot is tan"
+   rested on the tool for half the crossings (the tracer's numbers for the rest came from a script that
+   is not in the repository). **Confirmed** (seen while tracing and not put right in the tool). Fixed:
+   the tool now takes the control 30 px south of a diffusion line and north of a band and prints all 38
+   crossings (tan 184-205/159-179/118-136 on the lines against pink 168-194/121-129/114-133; cream
+   211-230/161-180/107-127 on the bands against pink 182-199/115-127/125-137); the section "Piece `rj`"
+   gives those numbers. The reviewer measured all 38 independently: tan on the lines
+   (173-189/145-164/111-123), cream on the bands (209-222/152-168/107-122).
+
+`tools/t.sh eof sameconn.py 641c7d7`: `connections identical`. `.venv/bin/python tools/sameconn.py
+641c7d7`: `connections identical` (the trace file is unchanged since that commit).
+
+What it checked and found as drawn: every line and band straight and unbroken from x 4676 to x 4804 in
+all fourteen rows, no step, branch or pad (3x strips of every row in both chip-2 shots and the clean
+shot); the layer of each in three open stretches (x 4709-4719, 4754-4766, 4795-4803: every line
+diffusion, chip 2 blue 77-88 and chip 1 green 106-121; every band poly, blue 42-66, green 64-98); the
+two jogs at 4.5x and 5x in four shots (`tools/px.py col 4713`: unbroken orange in both metal shots over
+y 11916-11972 and y 12914-12990, field beyond both ends; the band-to-column transition at x 4696-4716
+the same as on the straight rows s2 and s4; pink under the track east of each column at the band's y,
+pink west of each column at the bus row's y); s3's pad (its outline at x 4688-4690, pink field at
+x 4692-4700 at y 12968, 12978, 12985 and 12991, the column's green rim at x 4702-4708: not joined); the
+38 crossings (the edge lines beside the track end 11-16 px west and 12-17 px east of its centre, against
+17-20 and 23-25 at four of the tracks' own pads; text maps of ten crossings: no ring, no hole;
+`eof_cchk.py`'s 6 at s1 is open ground at (4744,11928), outside the track); the green spot at
+(4742,11952) in chip 1's clean shot only; column scans over y 11300-18110 at x 4710-4716 and
+x 4756-4764 and of the clean shot under both tracks (only drawn features, the known undrawn pad
+(4778,17365) and specks; `tools/opendiff.py`: none); the rows at the gaps and ends (the pad (4737,17885)
+and the undrawn metal's corner clear of s13's line); the extraction (2,534 to 2,506 nets, 4,696
+transistors, no errors, the 28 joins as claimed, none in `tools/unsure.py`).
+
+What it could not check: chip 2 at x 4696-4702, where both shots show only the VSS metal's edge line
+(continuity there rests on chip 1's clean shot and on each wire being present on both sides within
+6 px: Ambiguity 178); the bus rows east of x 4804 and the cell west of x 4676 (not re-read).
+
+Round 51: no findings that change a connection.
 
 ## Not done
 

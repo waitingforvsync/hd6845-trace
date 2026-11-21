@@ -10,9 +10,11 @@ y 11963 + offset, but in s1 and s3 the bus field's row east of the jog, y 11922 
           2's metal shot (y and red), i.e. the line's two edge lines; `M` if metal (R > 177, G > 150) lies there instead;
   along   at y = centre, x 4696 .. 4792 in steps of 8: chip 2's metal shot R/G/B (metal is R > 177,
           G > 128; open poly orange, blue under 75; open diffusion plain, blue 85-95);
-  under   at each track (a run of metal, R > 177 and G > 150 in chip 2, along y = centre - 30): the
-          clean shot's R/G/B on the line under the track's centre and 30 px north of it under the same
-          track (the control: field under metal, pink; diffusion under metal is tan, poly cream).
+  under   at each track (x 4736 and x 4780 +-8: the brightest column 30 px off the line, taken as metal
+          if chip 2 reads R > 170, G > 140 or chip 1 R > 170 there): the clean shot's R/G/B on the line
+          under the track's centre and 30 px off it under the same track (the control: field under
+          metal, pink; diffusion under metal is tan, poly cream). The control is south of a diffusion
+          line (the track's pad lies 45-49 px north of it) and north of a band. 38 crossings in all.
 Written for `eof` run 43 (piece `rj`). Offsets are those of the cell `eof_mx`.
 """
 import os, sys
@@ -39,14 +41,13 @@ for r in rows:
         yc = y0 + dy
         print('s%-2d %s y %d  edges 4710: %s  4756: %s  4794: %s' % (r, nm, yc, edges(4710+dx, yc), edges(4756+dx, yc), edges(4794+dx, yc)))
         print('      along m2: ' + ' '.join('%3.0f/%3.0f/%3.0f' % tuple(mean(m, x+dx, yc)) for x in range(4696, 4793, 8)))
-        # the tracks: runs of metal along y = centre - 30 between x 4718 and x 4796
-        xs = [x for x in range(4718+dx, 4797+dx) if ismetal(x, yc-30)]
-        runs = []
-        for x in xs:
-            if runs and x - runs[-1][1] <= 2: runs[-1][1] = x
-            else: runs.append([x, x])
-        for x0, x1 in runs:
-            if x1 - x0 < 6: continue
-            x = (x0 + x1) // 2
-            v, k = mean(c, x, yc, 2), mean(c, x, yc-30, 2)
-            print('      under track x %d-%d: clean %3.0f/%3.0f/%3.0f  control(-30) %3.0f/%3.0f/%3.0f' % (x0, x1, v[0], v[1], v[2], k[0], k[1], k[2]))
+        # the tracks: at x 4736 and x 4780 (+-8), the brightest column 30 px off the line (south of a
+        # diffusion line, whose north side has the track's pad; north of a band)
+        off = 30 if nm == 'N' else -30
+        for tx in (4736, 4780):
+            red, x = max((mean(m, tx+dx+o, yc+off)[0], tx+dx+o) for o in range(-8, 9))
+            g2, r1 = mean(m, x, yc+off)[1], mean(m1, x, yc+off)[0]
+            if not ((red > 170 and g2 > 140) or r1 > 170) or (red < 150 and r1 < 150): continue
+            if abs(g2 - mean(m, x, yc+off)[2]) < 60 and r1 < 170: continue      # open ground, not metal
+            v, k = mean(c, x, yc, 2), mean(c, x, yc+off, 2)
+            print('      under track x %d (chip 2 %3.0f, chip 1 %3.0f): clean %3.0f/%3.0f/%3.0f  control(%+d) %3.0f/%3.0f/%3.0f' % (x, red, r1, v[0], v[1], v[2], off, k[0], k[1], k[2]))
