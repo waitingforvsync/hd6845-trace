@@ -2709,14 +2709,14 @@ metal shot and 10 or more in the stripped shot.
 
 | Item | Geometry | Evidence |
 |---|---|---|
-| The ground rail | `M 7317,15385 y15655 w=46`, `vss` | one metal with `bl0`'s `M 7317,16925` (`r23_rail.py 7300 7334 15380 16940`: no stretch of 25 px without metal in both chips; 18 px at y 15480-15497 are the contact's ring and gate 2's edge: `px.py col 7312 / 7334 15474 15504 2`). `vss` by the orientation: the three pull-downs go to it, the load to RL2; `bl0` names it the same way |
+| The ground rail | `M 7317,15385 y15655 w=46`, `vss` | one metal with `bl0`'s `M 7317,16925` (`cache/scratch/eof/r23_rail.py 7300 7334 15380 16940`, run 23's throwaway two-chip test, not committed; the reviewer's own test gave the same: no stretch of 25 px without metal in both chips; 18 px at y 15480-15497 are the contact's ring and gate 2's edge: `px.py col 7312 / 7334 15474 15504 2`). `vss` by the orientation: the three pull-downs go to it, the load to RL2; `bl0` names it the same way |
 | A piece of `bc1`'s VCC rail RL2 | `M 7495,15435 y15555 w=50`, `vcc` | `bc1` draws it (`M 7495,14950 y16300 w=50`); `r23_rail.py 7474 7512 15040 15600`: no gap. Drawn again over the load's contacts so that the package extracts by itself |
 | The active area under the rail and east of it | `D 7306,15404:7375,15546` | `railprof.py`: diffusion 15405-15426, gate 15427-15450, diffusion 15451-15496, gate 15497-15521, diffusion 15522-15556. West edge x 7306: a dark line x 7304-7308 through the rail in both metal shots with pink field west of it in the clean shot (`px.py row 15412 7278 7316 2`). North edge: field at y 15401 across x 7312-7348 (`textmap.py 7276 15380 7360 15662 3`). No edge closes it at the rail's east edge (the clean shot's tan runs out under the margin at each level) |
 | The ring round the island | top `D 7370,15404:7413,15417`, east `D 7400,15404:7413,15546`, bottom `D 7370,15529:7419,15546`, foot `D 7400,15511:7419,15546` | the table. The island: a rounded outline x 7376-7399, y 15418-15528, plain inside between the two rows' ends. The east band is bright from y 15406 to y 15541 with no line across it (`textmap.py 7340 15385 7430 15548 3 --acid`: no gate crosses it) and widens to x 7417 from y 15511 |
 | Gate 1, `rcs_e4` | `P 7280,15425:7390,15446` | `tla` draws the row to x 7370. Cream under the rail (240/171/120: over a channel), orange in chip 2 east of it to x 7388, its end dark to x 7397 (`px.py row 15435 7340 7424 3`): it ends over the island, 10 px short of the east band |
 | Gate 2, `eof_w16040` | step `P 7279,15471:7296,15518`, row `P 7279,15495:7390,15518` | piece `en18`'s row runs on to x 7296 under the rail's west edge and steps south there (`px.py row 15480 / 15492 / 15504 7262 7300 2`: orange in chip 2 at x 7279-7288, salmon in the clean shot at x 7282-7296; the step lies over field: 196/144/100, not a gate's cream). The row ends over the island like gate 1 |
 | Gate 3, `bl0_w15566` | `P 7255,15555:7347,15577` | `bl0` draws the row to x 7260. Cream under the rail, its east end at x 7340-7347, past the active's east edge x 7334-7338 (`px.py row 15565 7324 7366 2`) |
-| The active area under gate 3 and the ground box | `D 7264,15534:7338,15597`, `D 7292,15590:7338,15645` | the node between gates 2 and 3 goes on west of the rail as the band of the table (the clean shot's tan runs out under the rail's west edge at y 15535-15548 with no edge line: `px.py row 15538 7278 7316 2`); below gate 3 a tab x 7264-7290 west of the rail (the table) with one dark line x 7261-7264 as the west edge of band and tab from y 15545 to y 15600, and a line y 15598-15601 closing the tab, in both metal shots. South edge y 15643 (pink below: `r32_i1.png`) |
+| The active area under gate 3 and the ground box | `D 7264,15534:7338,15597`, `D 7292,15590:7338,15626` | the node between gates 2 and 3 goes on west of the rail as the band of the table (the clean shot's tan runs out under the rail's west edge at y 15535-15548 with no edge line: `px.py row 15538 7278 7316 2`); below gate 3 a tab x 7264-7290 west of the rail (the table) with one dark line x 7261-7264 as the west edge of band and tab from y 15545 to y 15600, and a line y 15598-15601 closing the tab, in both metal shots. South edge y 15626: a dark line y 15624-15628 across x 7294-7336 in both metal shots, the clean shot tan above it and greenish below (`px.py col 7322 15606 15660 3`; drawn to y 15645 at first, after `railprof.py`, which calls y 15633-15646 diffusion; corrected in review round 39) |
 | Ground contacts | `C 7324,15472`, `C 7312,15600` | each a ring with a bright centre in both metal shots and specks in the clean shot's tan (`textmap.py 7276 15380 7360 15662 3`, `7286 15578 7348 15650 3 --acid`; `r32_b1.png`, `r32_i1.png`) |
 | The load | plate `P 7420,15488:7460,15564` over `D 7413,15511:7472,15546`; box under RL2 `D 7468,15445:7524,15546`; contacts `C 7485,15463`, `C 7486,15512 s=30x44` | the plate is orange in both chip-2 shots from y 15493 to y 15563; the active's two edges cross it as dark lines at y 15508-15511 and y 15544-15550 (`textmap.py 7396 15436 7536 15590 3 --acid`): a channel 35 wide and 40 long. East of the plate the clean shot's tan runs into the box under the rail with no edge line. The contacts: a ring and a double ring with bright centres in both metal shots, specks in the clean shot (`r32_d1.png`, `r32_d2.png`, 4.3x, four shots). Under RL2 south of y 15550 the clean shot is pink (field): no poly leaves the plate south (`px.py row 15575 / 15600 / 15640 7440 7500 3`) |
 | **The load's tie** | box `P 7414,15459:7450,15492`, `?D 7408,15463:7446,15487`, `?B 7412,15461:7448,15489` | at the plate's north end, against the east band's edge: a heavy frame x 7414-7450, y 15459-15488 with a pale centre (7423-7438, 15472-15478) in both metal shots and the chip-2 stripped shot; the clean shot shows the box dark. Ambiguity 121 |
@@ -5781,6 +5781,57 @@ The connections are the same before and after the fixes:
     .venv/bin/python tools/sameconn.py 71e4721   -> connections identical
 
 Round 38: no findings that change a connection.
+
+### Round 39 (full review of piece `u15500`; 2026-11-21 06:58 to 07:12 +0000, at commit f71926b)
+
+One fresh reviewer (Claude Fable 5.2), briefed with the piece's claims (the ground rail and its two contacts;
+the three gate rows and how each joins its net; the active column, the field island and the ring round it;
+the ground box below gate 3; the load, its box under RL2 and its uncertain tie; the exit: band, box with an
+uncertain tie, row, pad (7186,15524), thin metal, pad (7187,15697), row to the port; the pad apart from
+`ck_out`'s corner; the alias) and told to suspect: (a) the island's class, the two rows' ends and anything
+crossing the ring; (b) the pad (7186,15524) against the corner (7187,15480), and a second poly or metal at
+either pad; (c) whether the band west of the rail is diffusion and reaches the exit box, and whether box or
+band belong to something else (gate 2's step 16 px east); (d) whether gate 3 seals the node from the ground
+box on both sides; (e) the node's north end under the rail and the ground box's south end; (f) the thin
+metal over `bl0_w15566`'s row; (g) the load, any poly leaving the plate or the tie box, and the two rails'
+supplies; (h) anything left out. Images: `cache/scratch/eof/review-39/` (12).
+
+It checked, at 4.5x to 7x in two to four shots and by text (`textmap.py`, `px.py`, `eof_band.py`, its own
+two-chip rail test), and found as drawn: (a) the island is neither poly nor diffusion (plain between the
+rows, +24.1 / -6.0, blue 81-84 against 59-69 for poly); both rows end at x 7388-7390; the east band is
+unbroken from y 15418 to 15540 in both chips and the top and bottom bands are uncrossed; (b) two metals:
+bare ground at y 15495-15502 in both metal shots, open green in the clean shot; nothing else leaves either
+pad; (c) the band is diffusion in both chips, abuts the box's frame with no field between and runs under
+the rail with no edge at x 7306; the box is separate from gate 2's step: a neutral strip, about 6 px at its
+neck (7270,15510), runs from the open field to (7277,15521) in both chips' metal shots, greenish in the
+chip-2 stripped shot (the narrowest margin of the piece); (d) gate 3 seals: the active's edge at
+x 7335-7338, the poly to about x 7347, the tab joined to the ground box; (e) the north edge at
+y 15397-15400 across the rail, no contact on either part of the node under the rail; (f) no contact (edge
+bars only, no hole, no widening); (g) the channel runs from the foot to the VCC box under the plate, no
+poly leaves the plate or the tie box, both RL2 contacts lie in one box; the rails: ground x 7300-7334 from
+y 15380 to 16940 with no stretch over 19 px without metal, VCC x 7474-7514 from y 14950 to 15720 with none.
+
+It reported **no finding that changes a connection**, and two others, each checked here:
+
+1. **The ground box's south end: drawn to y 15645, the edge is at y 15624-15628.** Confirmed (`px.py col
+   7322 15606 15660 3`: a dark line y 15624-15627 in both metal shots; the clean shot tan to y 15618 and
+   greenish, not tan, from y 15633): the stretch below is field, as north of the unit; the drawing had
+   followed `railprof.py`, which calls y 15633-15646 diffusion. Geometry only: `D 7292,15590:7338,15626`;
+   nothing drawn is touched.
+2. **A record: `r23_rail.py`, cited for both rails, is in no tracked folder.** So: it is run 23's throwaway
+   script in `cache/scratch/eof/` (not committed); the trace's comment and the piece's table now say so, and
+   the reviewer's own two-chip test gave the same result. A comment only.
+
+Could not check (the reviewer): whether diffusion lies under the two tie boxes (both stay `?B`: Ambiguities
+120, 121); the rails through to supply pads (`vss` / `vcc` rest on the orientation and the neighbours'
+labels); the clean shot in the group west of the rail (inverted there: Ambiguity 123); the next unit south.
+
+The connections are the same before and after the fixes:
+
+    tools/t.sh eof sameconn.py f71926b           -> connections identical
+    .venv/bin/python tools/sameconn.py f71926b   -> connections identical
+
+Round 39: no findings that change a connection.
 
 ## Not done
 

@@ -2647,7 +2647,7 @@ N M 8200,17988 eof_w17970
 #   the band west of the rail (h cw 7265 7282 15526 15556)                   +39.9 / +21.6  diffusion
 #   west of the rail below gate 3 (h dw 7268 7284 15576 15604)               +45.5 / +25.1  diffusion
 # the ground rail: one metal with bl0's M 7317,16925 (vss by the orientation of the loads;
-# r23_rail.py 7300 7334 15380 16940: no stretch of 25 px without metal in both chips); here
+# cache/scratch/eof/r23_rail.py (run 23's throwaway two-chip test, not committed) 7300 7334 15380 16940: no stretch of 25 px without metal in both chips); here
 # the pull-downs go to it and the load to RL2, the same orientation
 M 7317,15385 y15655 w=46
 N M 7317,15640 vss
@@ -2669,7 +2669,10 @@ D 7400,15511:7419,15546
 # 2), and the active area runs on south under gate 3 from x 7264 (its west edge: a dark line
 # x 7261-7264 from y 15545 to y 15600) to the ground contact's box
 D 7264,15534:7338,15597
-D 7292,15590:7338,15645
+# (the box's south edge: a dark line y 15624-15628 across x 7294-7336 in both metal shots;
+# the clean shot is tan to y 15618 and greenish, not tan, below the line: px.py col 7322 15606
+# 15660 3; review round 39. railprof.py calls y 15633-15646 diffusion: not so)
+D 7292,15590:7338,15626
 # gate 1, rcs_e4 (tla draws its row to x 7370): y 15425-15446, through under the rail and on
 # over the active area east of it (orange in chip 2 to x 7388; px.py row 15435 7340 7424 3),
 # its end over the island
