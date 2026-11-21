@@ -1325,6 +1325,10 @@ and the fourteen gates are one line, `eof_ypd`.**
   (202); the pad as poly, one piece with the column, and apart from rail F's poly pad (203); the
   line's two ends (204). Ambiguity 199 is closed: the wide metal runs on into the thin metal in all
   fourteen rows.
+- **Review round 56** (a full review): no finding that changes a connection. Two observations,
+  geometry only, nothing redrawn: the metal on the column may be the full 18 px wide and not 9 (not
+  settled; Ambiguity 205), and in row s10 the clean shot is olive on the line south of the pad
+  (Ambiguity 201).
 
 Full extraction with run 48: 2,524 nets, 4,794 transistors, 0 errors, 0 warnings (2,523 nets and 4,780
 transistors before: one new net, 14 transistors). The package by itself: 1,200 nets, 2,008 transistors,
@@ -7089,7 +7093,13 @@ driver lies; the other three lead to the loads.
     row (`tools/eof_ygrows.py`, `gap`: chip 2 82-135 against 31-61 at x 3974, chip 1 110-184
     against 54-67), and in three rows (s3, s12, s13) it passes 176 and splits the stretch in two.
     South of it the metal is wide and bright. A break there in every row would leave fourteen
-    separate gates, each with 370 px of metal that goes nowhere.
+    separate gates, each with 370 px of metal that goes nowhere. Review round 56: the metal's two
+    edge lines run through the stretch in every row and the brighter patch is confined to the
+    metal's width; continuity cannot be proven from brightness there (no bare-ground control on the
+    line). **In row s10 the clean shot is olive on the line** at y 16553-16559 (148/150/74,
+    147/160/84 along x 3959; pinkish in the other rows, 180/133/109 in s9), south of the pad's
+    edge; both metal shots are as in the other rows there (chip 1 162/171/80 at y 16556 against
+    166/174/74 in s9), no ring and no widening: read as a mark of chip 1's stripping, not a hole.
 202. **The line lies over everything it crosses without contact** (piece `yg`). Per row pitch: Y's
     foot band, the lengthwise edge at y 11916-11937, Z's band y 11946-11960, two poly rows, the gate
     row of `eof_pdg_s#`, the band N, Y's block and Y's horizontal poly, and the head of the column
@@ -7115,6 +7125,17 @@ driver lies; the other three lead to the loads.
     3x in three shots and by two profiles, not at 6x. Foot: the pad's poly row is drawn for 40 px
     only (to x 3996), where it is seen in all four shots; beyond it the row is read from the clean
     shot and chip 1's metal shot alone and is left for the next piece.
+205. **The width of the metal on the column** (piece `yg`; geometry only; not settled). Drawn as a
+    thin metal x 3957-3966 (`M 3961,11736 y11832 w=9`). Review round 56: the wide metal is still
+    full width at y 11744-11752, and a dark line x 3943-3946 runs on from its west edge past the
+    head and the band to the pad's metal in all fourteen rows, in both metal shots and chip 2's
+    stripped shot but not in the clean shot (so it is not a diffusion edge): the metal may be
+    x 3948-3966 all the way, with the poly's west edge showing through it at x 3954-3957. Against:
+    in chip 1's metal shot the strip x 3948-3954 is dull (82-106 along y 11800 on the medians;
+    the reviewer's row maxima 104-138) where x 3958-3964 is yellow (148-190; 177-207), and it is
+    plain, not yellow, in chip 2 (124-151/101-124). The clean shot is protected from x 3946, which
+    fits either. One metal from the wide piece to the pad in both readings, over Y's diffusion
+    without contact: no connection depends on it.
 
 ## Review
 
@@ -10009,6 +10030,63 @@ The connections are the same before and after the fix:
     .venv/bin/python tools/sameconn.py 1798d8f      ->  connections identical
 
 Round 55: no findings that change a connection.
+
+### Round 56 (full review of piece `yg`; 2026-11-21 19:43 to 20:05 +0000, at commit 75bf13f)
+
+One fresh reviewer (general-purpose agent, Claude Fable 5.2), a full review of piece `yg`; its images
+are in `cache/scratch/eof/review-56/`. It was given the piece's nine claims (Y's diffusion on east as
+one band into rail F's wide diffusion; the poly column across it, one transistor per row; the head
+apart from Y's poly; the pad, poly and one piece with the column, with its contact, joined to
+nothing else; the thin metal on the column and the pad's metal; the wide metal from a free end
+through the fourteen rows to the foot pad as one net; no other contact and no branch; the foot pad
+and its poly row east; the extraction) and told to suspect: the strip between the column and rail F
+in the open gap; the 23-26 px dark stretch south of every pad; where the wide metal narrows;
+contacts read as absent on Z's band and Y's poly block; the pad (poly or diffusion, its join to the
+column, rail F's poly pad beside it); the top end, read at 3x only; the foot pad; the two group
+gaps and the stretches above s0 and below s13; the copies, rows s7-s13 above all.
+
+**What it checked**: medians over the fourteen rows and their cross profiles, per-row numbers,
+mosaics of all rows in three shots, views of the two group gaps, the top stub (5x), the stretch
+below s13 and the foot pad, a scan of the clean shot along the whole line for holes, the
+extraction. Found correct: the strip x 3984-3992 diffusion in all rows (both metal shots pinker
+than the field north of it, green over red 0.80-0.84 against 0.90-0.93; the stripped shot +12 to
++32 against -8 to +6; both band edge lines cross x 3988 in both chips; the clean shot tan from
+x 3992 to x 4004 with no edge line); 8-12 px of pink field between the head and Y's poly in every
+row; the pad poly and one piece with the column, green field x 3984-3990 between it and rail F's
+pad, field between it and Y's foot band; south of each pad the metal's two edge lines running
+through and the brighter patch confined to the metal's width, in all rows; green holes in the
+clean shot only at the fourteen pads and the foot pad (the greenish patches at Y's foot band and
+Z's band in rows s2, s3, s8, s9, s13 are the tracing guide's trap 36: no ring, no widening;
+nothing at Y's poly block); no branch in either chip, the group gaps, the top stub and the
+stretch below s13 viewed; the top a rounded free end with bare ground on three sides and no hole;
+the foot pad's ring, centre and hole, open poly leaving east at x 3978-3992, orange in both chips,
+nothing else leaving; all fourteen copies alike in three shots; fourteen transistors `gate eof_ypd
+larr_y_s# <-> vss`, 0 errors, 2,524 nets and 4,794 transistors in the full extraction.
+
+**Findings**: none that changes a connection. Two observations, geometry only:
+
+1. **The metal on the column may be full width, not 9 px** (`M 3961,11736 y11832 w=9`; the wide
+   piece is ended at y 11740). The reviewer could not settle it; nor can the tracer
+   (`r47prof.py row:11800:3936:3970:2`: the strip x 3948-3952 is 124-151 in chip 2 and 82-106 in
+   chip 1, the strip x 3960-3962 162-165 and 176-190; the clean shot tan from x 3946). Undecidable
+   and without effect on any connection: recorded as Ambiguity 205 and in a comment in the cell;
+   the geometry is left as drawn.
+2. **Row s10, south of the pad**: the clean shot is olive on the line at y 16554-16562 where the
+   other thirteen rows are pink; both metal shots look like the other rows. Confirmed
+   (`tools/t.sh eof px.py col 3959 16538 16574 3 metal,metal1,acid1b` against the same in s9,
+   y 15888-15924). Recorded under Ambiguity 201; nothing drawn changes.
+
+**Could not check**: continuity through the 14-26 px dark stretches by brightness (on the line
+chip 2 reads 55-108 and chip 1 96-167 there, and no clean bare-ground control exists); the foot
+pad's poly row beyond x 3996 (the port); whose the undrawn poly rows are that cross the line in
+the group gaps and below s13.
+
+Only a comment changed in the trace file. The connections are the same before and after:
+
+    tools/t.sh eof sameconn.py 75bf13f              ->  connections identical
+    .venv/bin/python tools/sameconn.py 75bf13f      ->  connections identical
+
+Round 56: no findings that change a connection.
 
 ## Not done
 

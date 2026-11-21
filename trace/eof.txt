@@ -4364,6 +4364,9 @@ P 3957,11756:3981,11834
 P 3946,11828:3979,11866
 C 3958,11848 s=20x20
 # the line in this row: the thin metal on the column (from the wide metal's end) and the pad's metal
+# (review round 56, not settled, geometry only: the metal on the column may be the full 18 px, x 3948-3966, and not
+# 9: a dark line x 3943-3946 runs from the wide metal's west edge to the pad in both metal shots; in chip 1 the
+# strip x 3948-3954 is dull where x 3958-3964 is yellow. One metal from the wide piece to the pad either way)
 M 3961,11736 y11832 w=9
 M 3959,11826 y11870 w=38
 @end
