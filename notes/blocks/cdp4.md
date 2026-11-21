@@ -633,6 +633,12 @@ From there:
 
 `@alias d7_out_n regs_w17462` (the rename of `regs`' label is the coordinator's refresh).
 
+From the review (round 10), no contact at any: the first row also passes under this package's own
+`d6_out_n` metal at x 16897-16912 (and `e_b`'s metal is at x 16813-16828); the south metal crosses
+`d6_out_n`'s poly row y 18068-18092; for x 17595-17690 the bottom row runs lengthwise under the top edge
+(y ~18945) of the wide band that joins the rail, not only under the rail. The arm at the pad (17558,18146)
+is as tall as the pad (y 18128-18168; drawn 18130-18150) and the junction block spans y 18918-18960.
+
 **So for every bit: pin D# is driven (while `d_hiz` is low) with the read bus's column 7 - # in true sense**:
 `d#_out_n` = NOT `cdp3_n_c(7-#)`, eight inverters (D0's at the foot of the data bus column in `dbus`, D1-D5's
 and D6's the cell `cdp4_ro`, D7's in `regs`).
@@ -1202,6 +1208,40 @@ shot; under the middle of the rail (x 17715-17745) the clean shot's field is gre
 field: the row's colour is uniform across it and no edge crosses the row).
 
 Round 9: no findings.
+
+### Run 11 (the bit 7 line into D7's pad cell)
+
+Round 10 (full review, 2026-11-21 16:51 -0600; a fresh Fable reviewer, images in `cache/scratch/cdp4/review-10/`, 13;
+commit before the round 728c635). Piece: one wire from `regs`' row at (16795,18012) to D7's pad cell at
+(17825,18946) (four pads, two poly rows, two thin metals, the 800 px poly column, the bottom row) and the
+join of `regs_w17462` with `dpad`'s `d7_out_n`. Told to suspect: which of the two poly columns under the
+wide horizontal metal the pad's poly joins, and a bridge to `d_hiz`'s column or a contact from that metal;
+the long column (a gap, a branch, a diffusion it lies on, the parallel dark lines west of it in the clean
+shot); the corner, the row under the rail and the junction with the pad cell's strip; the join with `regs`'
+row and the crossing of `e_b`'s metal; which of the three pads at x ~17080; each metal's ends; a confusion
+with the two parallel lines.
+
+It checked: the row continuous from `regs`' pad to the middle pad (17080,18013), poly over field under the
+rail; both metals by `tools/tl5_tracks.py` and `tools/follow.py --gap 16` (no break; ground all round each
+ring; the third pad's metal leaves south only; it crosses `d6_out_n`'s poly row without a contact and ends
+on the fourth pad with 16 px of bare ground before the wide metal); the hop; the pad's poly onto the column
+x 17595-17613, with field between it and `d_hiz`'s column above, under and below the wide metal and at both
+`d_hiz` pads (4x, four shots), and no contact from the wide metal (chip 2's dark blobs there are absent in
+chip 1); the column as poly at every 4 px from y 18266 to y 18938 in three shots, with ground on both flanks
+throughout (the clean shot's lines west of it are absent from the other three shots); the corner, the row
+uniform under the rail, and the junction as one orange poly (column x 17812, y 18924-18952) into `dpad`'s
+strip 4; the extraction (`d7_out_n` = NOT `cdp3_n_c0`, `d7_pu`'s pull-down gated by it, `d6_out_n` separate)
+and `tools/unsure.py`.
+
+No finding. Comments only (taken into Logic above): two more crossings without contact, the bottom row's
+lie under the band's edge, two drawn sizes. No geometry changed.
+
+Not checked by it: under the wide metals the chip-2 stripped shot is fringed (those readings rest on the
+clean shot and the two metal shots); chip 1's metal shot has a dirt blob at (17625-17650, 18930-18962); the
+metal on y 18014 between x 17110 and x 17400 only by tools and a 1.2x view; `regs`' inverter and `dpad`'s
+cell.
+
+Round 10: no findings.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
