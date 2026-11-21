@@ -3564,13 +3564,14 @@ P 4275,11759:4558,11776
 D 4566,11694:4632,11754
 D 4590,11736:4630,11780
 C 4608,11757
-# the strap is the south part of one thin metal per row, y 11527-11898: north of the gate it
+# the strap is the south part of one thin metal per row, y 11522-11898: north of the gate it
 # lies half on a poly column x 4607-4625 (two dim halves with a dark line between in both
 # metal shots: trap 19; the clean shot is protected there: tan x 4595-4604, cream x 4610-4625,
-# pink at y 11656: px.py row 11612 / 11636 / 11656 4586 4634 3) and ends at y 11527 on a poly
-# band y 11527-11545 (no hole, no pad: eof_cchk.py 4605,11536: 43). Over the heavy-outlined
+# pink at y 11656: px.py row 11612 / 11636 / 11656 4586 4634 3) and ends at y 11522 (its edge
+# line is dark y 11518-11526, the metal bright from y 11528: px.py col 4605 11512 11532 2;
+# review round 47) on a poly band y 11527-11545 (no hole, no pad: eof_cchk.py 4605,11536: 43). Over the heavy-outlined
 # box north of the diffusion neither metal shot shows it for 38 px (trap 27): uncertain there
-M 4605,11527 y11662 w=16
+M 4605,11522 y11662 w=16
 ?M 4605,11662 y11700 w=16
 M 4605,11700 y11898 w=16
 C 4607,11881
