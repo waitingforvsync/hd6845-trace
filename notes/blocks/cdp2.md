@@ -726,6 +726,21 @@ Round 4: one finding that changes a connection, fixed; geometry findings.
 Added with the fixes, for the same fix check: the lower gate's row 1 is drawn on east to its pad
 (8682,7300) and so joined to `cdp2_b_s7_x` (the placeholder `cdp2_w7300` renamed).
 
+Round 5 (fix check of round 4's fix and of the added join; fresh Fable 5.2 reviewer; 2026-11-20 18:48 -0600; against
+commit c30b7f3; images `cache/scratch/cdp2/review-5/`). Checked: the metal x 8503-8517 one straight track
+from y 6340 to 6962 (bars of 8-14 px at the poly rows, no hole, the protected strip unbroken), ending on
+both pads; `db_b5`'s metal stopping at its corner with about 20 px of open poly up to the pad's ring; the
+poly row y 6314-6334 continuous between its pads, no contact under the metals crossing it, ending at the
+pad (8680,6324) (bare ground and field east of it), that pad's metal from the north only; row 1 of `gl`
+continuous from x 8540 to its pad, no contact to either crossing metal; the metal x 8675-8695 from the
+pad (8683,7018) to the new pad, across `cdp2_b_cin` without contact, bare ground south of y 7324; row 2
+parted from row 1 and the pad by field; the geometry. `.venv/bin/python tools/sameconn.py c30b7f3`:
+exactly the expected differences. Weaker evidence, recorded: the pad (8530,6955) has no bright centre in
+chip 2 and the pad (8682,7300) none in chip 1 (each has the clean shot's hole and the other chip's
+centre); chip-1 debris over the metal x 8675-8695 at y 7026-7083.
+
+Round 5: no findings.
+
 ## Correction from the coordinating session (2026-11-15)
 
 Channel 3 (y 7830-8030) was read in the clean shot from x 7950 to x 11040 while following
