@@ -3420,8 +3420,9 @@ One wire of 5,900 px with five pads and no tap, from the lower inverter's port (
 6. **The thin metal x 4730-4742 (the track x 4736) runs through that pad**: north (drawn to y 17340, port;
    `tools/follow.py 4732 17300 N --gap 16` ends at (4736,16928), not read) and **south** (found by review
    round 44; the first drawing had only the north side: `tools/tl5_tracks.py v 4736 17380 17800` is without
-   metal in both chips only in the ring, y 17388-17405 and y 17415-17432, 17 px on each side of the centre,
-   and in two 8 px bars at y 17442-17468, the edges of `bl0`'s diffusion wire `lc3_e9750` beneath;
+   metal in both chips in the ring, y 17388-17405 and y 17415-17432, 17 px on each side of the centre,
+   in two 8 px bars at y 17442-17468, the edges of `bl0`'s diffusion wire `lc3_e9750` beneath, and in two
+   stretches of 9-11 px at y 17588-17598 and y 17612-17620, 150 px beyond the drawn end and not read;
    `tools/eof_mrun.py row 17436 4700 4820`: 4738(11) in both chips; the clean shot pink under it;
    `r37_k1.png`, 5x, four shots; drawn to y 17440, port; the follower runs it on to (4738,17864), not read).
    **And the row runs on west** of the pad into the left array's east column (pale in the clean shot,
@@ -7044,7 +7045,8 @@ It reported **one finding, which changes a connection** (where `eof_w16218` leav
    8 px bars at y 17442-17468 (over `bl0`'s diffusion wire `lc3_e9750`), then metal; `px.py row 17436`
    against `row 17385`: the same metal at x 4730-4742 in both chips; the clean shot pink under it; the
    follower runs it to (4738,17864). **Confirmed** (`tools/t.sh eof tl5_tracks.py v 4736 17380 17800`: the
-   same four stretches, chip 2 fails nowhere for 20 px; `tools/eof_mrun.py row 17436 4700 4820`: 4738(11)
+   same four stretches and two more at y 17588-17598 and y 17612-17620, beyond what is drawn; chip 2 fails
+   nowhere for 20 px; `tools/eof_mrun.py row 17436 4700 4820`: 4738(11)
    in both chips, as at y 17385; `r37_k1.png`, 5x, four shots: bright metal on the track below the ring in
    both chips, pink beneath in the clean shot). The run-37 views of this pad ended at y 17436, at the
    ring's south edge, and what lay below was not looked at: trap 32 (look all round every pad), not a new
@@ -7064,6 +7066,41 @@ excluded from chip 1's clean shot alone, and nothing in chip 2 or the metal shot
     .venv/bin/python tools/sameconn.py 2851abf   -> connections identical
 
 Round 44: one finding that changes a connection (a second exit of `eof_w16218`), fixed.
+
+### Round 45 (fix check of round 44's change; 2026-11-21 11:02 to 11:05 +0000, after commit d1f2729, against 2851abf)
+
+One fresh reviewer (Claude Fable 5.2), briefed with the diff since 2851abf and the one finding it fixes
+(the track x 4736 drawn through the pad (4735,17410) to a second port at y 17440), and told to check the
+change in the photos, every junction within 100 px of it (the pad on all four sides, the thin metal x 4780
+of the pad (4778,17365) and its crossing (4780,17408), `bl0`'s diffusion wire y 17447-17461 under the track
+just south of the new end) and both `sameconn.py` runs. Images: `cache/scratch/eof/review-45/` (4).
+
+It checked and found as drawn: `tl5_tracks.py v 4736 17300 17560` without metal in both chips only in the
+ring (17 px each side) and in the two 8 px bars of the diffusion wire's edges; `px.py row` at y 17436,
+17452, 17480: yellow metal at x 4732-4744 in both chips (219/180/103 and 232/151/72 at y 17436), the width
+it has north of the pad, not open poly; the clean shot's pink strip continuous south of the pad (views at
+4.5x and 3.2x); bare ground in both chips west (x 4704-4724) and east (x 4752-4768) of the track at
+y 17436, so it is separate from the wide metal and from the track x 4780; open poly in the row between the
+pad and x 4780 with no metal bridge, and at (4780,17408) no hole and no widening (a pass-over); at
+(4736,17452) the metal not widened over `bl0`'s diffusion wire and the clean shot tan without a hole (no
+contact); both `sameconn.py 2851abf` runs `connections identical`. `tools/ports.py` lists the new port
+38 px from `bl0`'s `lc3_e9750` D (4780,17454): the diffusion wire that passes under the track, proximity
+only.
+
+It reported **no findings**, and two remarks of geometry or wording, both checked here:
+
+1. The metal's centre in the photos is x 4738; it is drawn at x 4736. **Confirmed** (`tools/eof_mrun.py row
+   17436 4700 4820`: 4738(11); at y 17160 4736(12), at y 17300 4737(12)): 1-2 px, inside the edges'
+   uncertainty; left as drawn.
+2. The trace comment's "only the ring, then two 8 px bars" leaves out the stretches y 17588-17598 and
+   y 17612-17620 that the same command reports (chip 1 fails y 17587-17622), 150 px beyond the drawn end in
+   the part marked not read. **Confirmed; the comment and the notes' wording corrected** (they now name
+   the two stretches as beyond the drawn end and not read). A comment only:
+
+    tools/t.sh eof sameconn.py d1f2729           -> connections identical
+    .venv/bin/python tools/sameconn.py d1f2729   -> connections identical
+
+Round 45: no findings that change a connection.
 
 ## Not done
 

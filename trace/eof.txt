@@ -3383,8 +3383,9 @@ C 5320,17410
 # width: a pass-over, Ambiguity 145), to a pad with a contact (4735,17410) (hole -14,
 # 219 / 217; r37_i1.png, r37_i2.png). The thin metal x 4730-4742 (the track x 4736) runs
 # THROUGH the pad: north (drawn to y 17340, port) and south (review round 44: tl5_tracks.py
-# v 4736 17380 17800: without metal in both chips only the ring, y 17388-17405 and
-# 17415-17432, 17 px each side, then two 8 px bars over bl0's diffusion wire y 17447-17461;
+# v 4736 17380 17800: without metal in both chips the ring, y 17388-17405 and 17415-17432,
+# 17 px each side, then two 8 px bars over bl0's diffusion wire y 17447-17461, and two
+# stretches of 9-11 px at y 17588-17598 and 17612-17620, 150 px beyond the drawn end, not read;
 # eof_mrun.py row 17436 4700 4820: 4738(11) in both chips; the clean shot pink under it;
 # r37_k1.png, 5x, four shots; drawn to y 17440, port). The row runs on WEST of the pad into
 # the left array's east column (pale in the clean shot, orange in the chip-2 stripped shot
