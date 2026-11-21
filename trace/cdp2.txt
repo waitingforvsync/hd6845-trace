@@ -593,7 +593,7 @@ P 7860,8298:7896,8332
 C 7878,8315
 
 # ---- piece gl: the lower of two series gates under the rail x 8375-8425 (x 8205-8600, y 7160-7400)
-#     cdp2_w7272 = NOT( cdp2_w7300 AND cdp2_w7344 )
+#     cdp2_w7272 = NOT( cdp2_b_s7_x AND cdp2_w7344 )
 # Top node, row 1, a node with no contact, row 2, a box with the rail contact. Load west of the thin
 # metal x 8328-8345 (which passes over the node's tab): strip under a plate to a box on the VCC metal,
 # the plate's finger on a buried contact at the end of an L of diffusion. Output: the node's strip east,
@@ -603,8 +603,10 @@ M 8400,7040 y7440 w=50                 # the VSS rail x 8375-8425, down onto row
 D 8365,7255:8446,7365                 # the column (edges x 8365 and 8446: review round 3)
 D 8385,7360:8437,7400                 # box
 C 8405,7380
-P 8350,7290:8600,7311                 # row 1, from the east (port at x 8600)
-N P 8590,7300 cdp2_w7300
+P 8350,7290:8684,7311                 # row 1: east under the wide metal x 8595-8645 to a pad (8682,7300), on which the
+P 8664,7284:8700,7318                 #   metal of the comparator chain's output (M 8685,7006 y7300) ends
+C 8682,7300
+N P 8590,7300 cdp2_b_s7_x
 P 8350,7333:8600,7354                 # row 2, from the east (port at x 8600)
 N P 8590,7344 cdp2_w7344
 # the load
@@ -632,27 +634,27 @@ M 8336,7322 y7395 w=14
 M 8532,7155 y7395 w=14                 # x 8525-8540: over both rows, no pad
 
 # ---- piece gu: the upper series gate under the same rail (x 8205-8550, y 6940-7230): gl's build 173 px north
-#     cdp2_w7092 = NOT( db_b5 AND cdp2_w7272 )
+#     cdp2_w7092 = NOT( cdp2_w7128 AND cdp2_w7272 )
 # Differences from gl: its output does not leave by the buried contact east of the column (that box has
 # only a poly cap) but by the load plate's poly, which runs north to a pad (8290,6997) of a thin metal
-# from the north; and its row 1 comes down a poly column x 8520-8545 from a pad (8530,6955), on which the
-# thin metal of db_b5 (row C's s2 bus line, x 8525-8540) ends.
+# from the north; and its row 1 comes down a poly column x 8520-8545 from a pad (8530,6955).
 D 8365,7078:8446,7190                 # the column
 D 8392,7185:8440,7226                 # box
 C 8413,7208
 P 8350,7117:8545,7139                 # row 1: east to the poly column
 P 8520,6955:8545,7139                 #   which comes down from a pad (8530,6955) under the thin metal x 8525-8540
-P 8514,6938:8550,6972                 # pad: the thin metal ends on it from the south
+P 8514,6938:8550,6972                 # pad: a metal x 8503-8517 from the north steps onto it
 C 8530,6955
 # the load
-D 8320,7081:8367,7105                 # the node's tab west (under the thin metal x 8328-8345: no contact)
+D 8320,7081:8367,7100                 # the node's tab west (under the thin metal x 8328-8345: no contact)
+D 8320,7081:8340,7105
 D 8248,7081:8322,7108                 # strip under the plate, on west into the VCC box of piece ga
 P 8265,7064:8320,7125                 # plate
 D 8322,7103:8337,7148                 # L of diffusion from the tab down
 D 8298,7128:8337,7148                 #   and west into the box
 P 8298,7122:8320,7146                 # the plate's finger
 B 8296,7126:8324,7150
-P 8283,7008:8298,7068                 # the plate's poly north: the gate's output,
+P 8286,7008:8305,7068                 # the plate's poly north: the gate's output,
 P 8273,6980:8308,7015                 #   to a pad
 C 8290,6997
 M 8290,6940 y6997 w=14                 # a thin metal from the north ends on it (port)
@@ -668,5 +670,14 @@ C 8332,6954
 P 8270,6942:8334,6962
 M 8336,6954 y7100 w=14                 # x 8328-8345: dark over the tab and the L for 55 px (y 7096-7150):
 ?M 8336,7096 y7150 w=14                #   drawn ?M there (trap 27)
-M 8532,6955 y7155 w=14                 # x 8525-8540: from its end on the pad (8530,6955) south, lengthwise on row 1's poly column;
-                                      # south of y 7395 it is row C's s2 bus line (db_b5): so row 1 is db_b5
+# Review round 4: the thin metal x 8525-8540 that lies on row 1's poly column (db_b5's, drawn in trace/rde.txt:
+# it turns west at y 6999 to x 8464 and north) does NOT reach the pad (8530,6955): 37 px of open poly
+# between its corner and the pad. The pad's metal is another one, x 8503-8517, from the north:
+M 8510,6325 y6955 x8530 w=14           # from the pad (8530,6955) north to a pad (8508,6325)
+P 8492,6308:8526,6342                 # pad
+C 8508,6325
+P 8508,6314:8680,6334                 # its poly row east to a second pad
+P 8662,6306:8698,6342
+C 8680,6324
+M 8683,6270 y6324 w=14                 # a metal from the north ends on that pad (port)
+N P 8600,6324 cdp2_w7128
