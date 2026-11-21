@@ -4526,3 +4526,74 @@ M 9813,17866 y17800 w=14
 # Drawn as a stub to a PORT at y 17885 (the follower: south to a corner (10364,18387), east,
 # south on x 10397 to a pad with a hole at about (10397,18427): not read).
 M 10356,17866 y17885 w=13
+
+# ===== Run 51, piece u17345 (2026-11-21): the unit both bus lines of piece bus2 end in =====
+# x 10296-10600, y 17227-17500, in bc4's ground west of cdp4's strip (x 10600).
+# One diffusion column x 10521-10588 lies under and west of the wide metal x 10548-10598,
+# which is bc2's VSS rail come down the east column (one metal from bc2's M 10568,15270 y15746:
+# r51_rail.png; where the metal test fails across its whole width, y 16585-16626 and
+# y 17064-17104, both chips show the metal through an oval contact ring: r51_g1.png, r51_g2.png).
+# Two poly rows cross the column in full (end caps in the open to x 10596, beyond the
+# diffusion's east edge x 10588): y 17293-17306, the poly of bl0_w15566's pad (10311,17474),
+# and y 17380-17394, the poly of eof_w17866's pad (10397,17410). The rail has a contact on
+# the diffusion north of the first row (10562,17255) and south of the second (10562,17422)
+# (ring and bright centre in both metal shots, green hole in the clean shot). The diffusion
+# between the rows is the node eof_w17345: two pull-downs to vss side by side.
+# The node leaves west by a buried contact box (10497-10516, 17331-17355) onto a poly row
+# y 17336-17349 to a pad with a contact (10397,17343), whose metal goes north (PORT at
+# y 17315), and east as diffusion y 17327-17358 under the rail's edge (PORT at x 10600: its
+# load is expected there, in cdp4's claimed strip; not drawn).
+#
+# the poly of the pad (10311,17474): a row east y 17467-17481 under three thin metals (no pad,
+# no contact) to a buried contact box (10497-10517, 17462-17492), and a column x 10350-10364
+# north (under another net's metal x 10356) to y 17300, east as the gate row
+P 10311,17474 x10505 w=14
+P 10357,17474 y17300 x10596 w=14
+# the poly of the pad (10397,17410): north onto the row y 17380-17394, east as the gate row
+P 10384,17380:10416,17400
+P 10390,17387 x10596 w=14
+# the column's diffusion, through under both gates
+D 10546,17227:10588,17445
+# west of the rail the strip x 10521-10546 is diffusion from y 17263 to y 17425 only (review
+# round 61: a field notch y 17252-17263 and field y 17425-17446; px.py col 10533)
+D 10521,17263:10546,17425
+C 10562,17255
+C 10562,17422
+M 10573,17227 y17590 w=50              # the VSS rail, over this unit only
+N M 10573,17340 vss
+# the node's west exit: tab, buried contact, poly row, pad, metal north
+D 10497,17331:10525,17355
+B 10497,17331:10516,17355
+P 10397,17342 x10505 w=13
+P 10381,17327:10414,17358            # pad (10397,17343)
+C 10397,17343
+M 10397,17343 y17315 w=13
+N P 10450,17342 eof_w17345
+# the node's east exit, as far as the rail's east edge
+D 10585,17327:10600,17358
+# bl0_w15566's row end: the box on the west end of a diffusion band y 17484-17500 that
+# runs east under the rail with no contact (one edge line y 17478-17482 north of it, field
+# north of that; no ring in either metal shot) to a PORT at x 10600
+D 10497,17462:10522,17494
+B 10497,17462:10517,17492
+D 10515,17484:10600,17500
+# Review round 61: the band is the drain of a pull-down. A poly row y 17506-17523 lies
+# against the band's south edge with no field between (px.py col 10572 17476 17545 3 and
+# col 10533 17476 17536 4: band, one edge line y 17500-17504, poly; railprof.py 10552 10592
+# 17480 17640: GATE y 17510-17521) and crosses under the rail to an end cap at x 10598; south
+# of it the diffusion under the rail (y 17528-17580) has a rail contact (10563,17550) (ring
+# and bright centre in both chips, a green hole; r51_f1.png). The row comes from the south:
+# at its west end, under the thin metal x 10440, it turns down as a column x 10433-10447
+# (r51_f2.png): PORT at y 17545. Drawn under the rail only (x 10546-10590): the outlined box
+# west of it (10508-10543, 17532-17588) is not read.
+P 10440,17545 y17515 x10598 w=16
+N P 10470,17515 eof_w17515
+D 10546,17496:10590,17580
+C 10563,17550
+# Review round 62 (geometry only): the strip west of the rail is also diffusion at
+# y 17227-17248 (px.py col 10528 17226 17270 4 acid,metal), and the pull-down's channel runs
+# on west of the rail: diffusion on both sides of the row at x 10506-10546, the south part
+# y 17532-17548 only (px.py col 10522 17526 17562 4: field from y 17550). East of the rail
+# the row and the channel run on to about x 10620-10638 (cdp4's strip: not drawn).
+D 10521,17227:10546,17248
+D 10506,17496:10546,17548
