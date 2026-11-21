@@ -559,7 +559,8 @@ P 7662,7076:7998,7096                 # the row, west under the tracks to a pad 
 N P 7800,7086 cdp2_w7065
 P 7645,7066:7680,7100
 C 7662,7083
-M 7662,7040 y7083 w=14                 # a metal from the north ends on it (port)
+M 7662,6400 y7083 w=14                 # the metal from the north that ends on it is tc2's metal of tc1_ns3
+@alias tc1_ns3 cdp2_w7065               # (M 7661,6185 y6400 in trace/tc2.txt): one metal, y 6400-7083 drawn here
 # the load: neck east, strip under the poly block, box on the VCC metal; the block's tail ends on a
 # buried contact against the neck
 D 8103,7057:8145,7088

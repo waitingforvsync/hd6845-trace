@@ -23,6 +23,13 @@ the most significant of the five compared bits, s7 the least.**
 
 ## Status
 
+- **Run of 2026-11-20 19:36 -0600**: **the inverter's output is `tc1_ns3`** (wiring, one join; it rests on piece `ga`'s two
+  `?B`): the metal that ends on the output row's pad (7662,7083) is one metal (x 7652-7670) with the
+  metal `tc2` draws from its pad (7660,6193) south to y 6400 as `tc1_ns3` (`tl5_tracks.py v 7661 6390
+  7070`: bars of 10 px or less; bare ground south of the pad: `px.py col 7661 7085 7120 5`). Drawn
+  y 6400-7083; `cdp2_w7065` is an alias of `tc1_ns3`. So **`tc1_ns3` = NOT `tc2_sr_q`** (marked): the line that
+  runs north past `rax`'s units into the top-centre logic is the inverted output of `tc2`'s latch.
+
 - **Run of 2026-11-20 19:10 -0600**: **piece `wn`** (wiring, 3,100 px, no uncertain item; reviewed: round 7 a port's side, fixed; round 8, the fix check, no findings): the two metals of the upper
   series gate followed north to their ends. `cdp2_w7092` (the gate's output) ends on a pad (8290,5327)
   whose poly row goes east (port: a gate in the logic at y 5300-5350, undrawn). `cdp2_w7128` (its row 1)
@@ -659,7 +666,7 @@ Run of 2026-11-20:
   x 8780 they are interwoven with the logic there (pads on line 6714, bends at
   x 7800-8080, y 6780-6890).
 - **Channel 3 (y 7830-8030)**: five poly lines (Ports), not drawn.
-- **Logic left of the rows** (x 7600-8750, y 6000-7480): one gate traced (piece `ga`, 2026-11-20); both series gates traced (pieces `gl`, `gu`); the rest (`gu`'s output metal north of the pad (8290,6997), the poly row west of the pad (8332,6954), the unit at x 8140-8260, the gate at x 8560-8700, y 7370-7410) not traced. Open ends: **`cdp2_w7065`'s metal north of the pad (7662,7083): seen 2026-11-20 19:40, not drawn and not reviewed: it is one metal (x 7652-7670; `tl5_tracks.py v 7661 6390 7070`: bars of 10 px or less) with the metal that `tc2` draws from its pad (7660,6193) south to y 6400 as `tc1_ns3`. If so `tc1_ns3` = `cdp2_w7065` = NOT `tc2_sr_q` (through `ga`'s two `?B`): draw `M 7662,6400 y7040`, alias the names and have it reviewed**; the through line `cdp2_w6845` west of the pad (7335,6845) (`busl` has since drawn it on west: its port at (6118,6847)); a thin metal x 8152-8166 that crosses the gate, in line with row C's track b, drawn by no one north of y 7395. Beside piece `gl`, seen and not drawn: a poly column x 8565-8590 from the north ending at y 7266; a contact pad near (8605,7395). It receives
+- **Logic left of the rows** (x 7600-8750, y 6000-7480): one gate traced (piece `ga`, 2026-11-20); both series gates traced (pieces `gl`, `gu`); the rest (`gu`'s output metal north of the pad (8290,6997), the poly row west of the pad (8332,6954), the unit at x 8140-8260, the gate at x 8560-8700, y 7370-7410) not traced. Open ends: the through line `cdp2_w6845` west of the pad (7335,6845) (`busl` has since drawn it on west: its port at (6118,6847)); a thin metal x 8152-8166 that crosses the gate, in line with row C's track b, drawn by no one north of y 7395. Beside piece `gl`, seen and not drawn: a poly column x 8565-8590 from the north ending at y 7266; a contact pad near (8605,7395). It receives
   `cdp2_b_hl` (metal x 8725, ends about y 7400 on a diffusion) and `cdp2_b_s7_x` (metal
   x 8685, seen to y 7300), drives `cdp2_b_cin` (poly y 7252 at x 8650), takes L1/L2 (row
   C's s1, s2 outputs, y 7472/7513 at x 7990), `cdp2_trk_s3` (metal 8335,6066) and the
