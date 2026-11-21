@@ -3865,8 +3865,13 @@ N D 7432,16450 eof_sdn_{}
 # (px.py row 16586 7436 7484 3: plain without a line to RL2's edge, tan under RL2 from x 7466)
 P 7303,16530:7461,16567
 # the node's way out: a tongue x 7288-7298 from the strip south to y 16552, tan in the clean
-# shot without a line across it (px.py col 7293 16500 16574 3 acid1b: 186-200/169-179 from
-# y 16506 to y 16548; dark in both metal shots, where the rail's edge line lies on it)
+# shot (px.py col 7293 16500 16574 3 acid1b: 186-200/169-179 at y 16506-16518 and y 16534-16548;
+# dark in both metal shots, where the rail's edge line lies on it). A FAINT LINE crosses it at
+# y 16529-16531 (px.py col 7293 16516 16536 1: 117-127/111-121 against 175-192 either side;
+# the copy has it at y 16854-16856), at the level of the row's and the plate's north edges
+# (review round 50): the tan south of it may be the window of a buried contact under one poly
+# that runs from the row through to the plate, and not a free tongue. Same nets either way
+# (row, plate and node one net through the uncertain ties below); drawn as one diffusion
 D 7288,16518:7298,16552
 # west of the tongue the east end of the output's poly row: a box x 7266-7290, y 16521-16562
 # (frame lines x 7266-7270 and x 7276-7283, top y 16519-16531, bottom y 16549-16564; cells
@@ -3920,7 +3925,8 @@ N P 7120,16779 rcs_mv
 # that the package extracts by itself). Upper: tan with specks y 16465-16597 in the clean shot
 # (px.py col 7492 16440 16930 10 acid1b), one long contact (r33_dark.py v 7492: bright
 # y 16483-16578 between ring lines in chip 1, with one bar across it in chip 2; h 16514: centre
-# x 7481-7500; eof_cchk.py 7491,16500 / 7491,16560: clean 5 / 8). Lower: y 16825-16918, two
+# x 7481-7500; eof_cchk.py 7491,16500 / 7491,16560: clean 5 / 8; the bar at y 16537-16548 may
+# divide it into two contacts, as in the lower box: drawn as one). Lower: y 16825-16918, two
 # contacts (v 7492: centres y 16835-16860 and y 16886-16903; eof_cchk.py 7491,16848 /
 # 7491,16895: clean 9 / 5, centres 221 / 224 and 223 / 251)
 D 7467,16465:7522,16597

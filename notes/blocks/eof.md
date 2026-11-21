@@ -1101,7 +1101,9 @@ complementary.
   is LOW, and to the row's south band (`eof_mxs_s#`; believed the row's own address line) while `rcs_mv` is
   HIGH. `rcs_mv` = NOR(`tl3_w4546`, `tl3_e4852`) is the step logic's line (`rcs_in1` = NOT `rcs_mv` is
   term 1 of the row counter's step request).
-- **Review round 50** (a full review): see the Review section.
+- **Review round 50** (a full review, 14 images): no finding that changes a connection. One comment was wrong
+  (the tongue is crossed by a faint line at y 16529-16531, which gives Ambiguity 172 a third reading with
+  the same nets); corrected in the trace file's comments and here, no geometry changed.
 - **Read without an uncertain item, recorded as ambiguities**: the winding as one poly under the rail
   (173), the arm as one metal with the rail (174), `rcs_mv`'s row under `eof_ga`'s metal (175), the lower
   unit's north ground strip against the supply box in the middle of RL2 (176).
@@ -4172,7 +4174,7 @@ the rail) is drawn outside it.
 | Ground | the strip north of the band (y 16319-16330), the wing (x 7256-7296, y 16316-16479, under the arm too: `px.py col 7275 16318 16412 4` tan from y 16342 to y 16402), the box inside the U (x 7297-7388, y 16426-16479) with a contact (7319,16451) | `eof_band.py`; `eof_cchk.py 7318,16452` (hole 4, centres 218 / 229) |
 | Node | the pocket (x 7322-7450, y 16365-16398), the strip east of the U (x 7418-7447), the strip south of the bottom bar (y 16507-16523, from x 7256 to x 7450) | v 7430: one plain run y 16385-16523; `eof_band.py` |
 | Load | a plate y 16530-16567, x 7303-7461, over a region x 7319-7450 (its west edge under the rail: a heavy line down x 7320 from y 16525 to y 16597 in the clean shot, `r42_c1.png`); south of it a strip y 16574-16592 and a neck x 7450-7467 into the supply box | v 7368 / 7400 / 7430: poly y 16531-16566; h 16548; h 16583: plain x 7349-7458; `px.py row 16586 7436 7484 3`: no line before RL2's edge, tan under RL2 |
-| The node's way out | a tongue x 7288-7298, y 16518-16552 under the rail's west edge | clean shot `px.py col 7293 16500 16574 3`: tan from y 16506 to y 16548 with no line across it; both metal shots are dark there (the rail's edge line) |
+| The node's way out | a tongue x 7288-7298, y 16518-16552 under the rail's west edge | clean shot `px.py col 7293 16500 16574 3`: tan from y 16506 to y 16548, with one faint line across it at y 16529-16531 (`px.py col 7293 16516 16536 1`: 117-127/111-121 against 175-192; the copy at y 16854-16856; found by review round 50: Ambiguity 172); both metal shots are dark there (the rail's edge line) |
 | Output row's end | a box x 7266-7290, y 16521-16562 at the east end of the row y 16531-16551: frame lines x 7266-7270 and x 7276-7283, cells x 7271-7275 and x 7284-7289 | `px.py row 16545 7254 7348 2 all`; v 7272: frame y 16519-16531 and y 16549-16564, a dim centre between; `r42_x1.png` (5.4x, four shots). The tie to the tongue is drawn uncertain (Ambiguity 172) |
 | Plate's end | a poly cell x 7306-7314 (147/112/52 in chip 2; 213-228/159-167 in the clean shot) between a line x 7298-7305 and the active's edge line x 7315-7323 | the same row profile; `px.py col 7311`. The tie to the tongue is drawn uncertain (Ambiguity 172) |
 
@@ -4213,7 +4215,10 @@ low and recirculate their own line while it is high.
 
 **Seen, not drawn**: the third supply box under RL2 (above) and whatever it feeds east of RL2 (`bc3`);
 a spot at (7272,16426) on the upper wing in chip 1's clean shot only (dirt: neither chip-2 shot has it);
-the arm west of x 7200.
+the arm west of x 7200; green in the clean shot under the rail at x 7298-7318, y 16916-16930
+(`tools/opendiff.py`): field where chip 1's rail is damaged (chip 1's metal shot dark there, 48/56/51 at
+(7308,16923); chip 2 whole, 200/179/86; no ring: review round 50). The upper supply contact may be two
+(a bar at y 16537-16548 in chip 2, a dip in chip 1): drawn as one, the same connection.
 
 ## Ports
 
@@ -5860,6 +5865,15 @@ driver lies; the other three lead to the loads.
     there the output row has no driver; if the east one is not, the plate floats. Working assumption:
     both are ties; the names `eof_gb` / `eof_ga` are held on the nodes by aliases. What would settle it:
     a sharper shot of one such box; the simulation (a selector with no driver would show at once).
+    **A third reading** (review round 50): the tongue is not plain. A faint line crosses it at
+    y 16529-16531 over x 7284-7297 (clean shot 117-127/111-121 against 175-192 either side; the copy
+    has it at y 16854-16856, so it is layout), at the level of the north edges of the row (y 16531) and
+    of the plate (y 16530), and the tan below it ends at y 16552, the row's south edge; the tan cell
+    above the line (y 16522-16527) is wider (x 7280-7298). So the row and the plate may be ONE poly
+    straight through under the rail's west edge, with the tan patch as the window of its buried contact
+    onto the node. The nets are the same as drawn (row, plate and node one net); the `?` items stay,
+    and no metal contact is there (the cell x 7306-7314 is bright metal between edge lines in both
+    chips, no hole in the clean shot).
 173. **The winding is one poly** (piece `selg`; no `?` item). The band, the column and the U's top bar
     meet under the rail, where neither metal shot shows poly. The clean shot shows one cream piece
     without a line between them (`tools/px.py row 16348 / 16380 / 16414 7284 7352 3 acid1b`:
@@ -8432,6 +8446,63 @@ medians); the cell's own pads and gates and where the three ports lead (not in t
 `tools/unsure.py`'s whole report (it filtered the output for these nets: nothing).
 
 Round 49: no findings.
+
+### Round 50 (full review of piece `selg`; 2026-11-21 14:54 to 15:08 +0000, at commit 3cff464)
+
+One fresh reviewer (Claude Fable 5.2), 14 images in `cache/scratch/eof/review-50/`. Brief:
+`cache/scratch/eof/brief-round50.md` (eleven claims; told to suspect the winding as one poly under the
+rail and its west ends, the exit area x 7260-7325, y 16515-16570 in both units, which rows are inputs
+and which outputs, the four crossings of `rcs_mv`'s row, above all (7187,16780), the ground as one
+diffusion and the node as one, the arm's junction with the rail, the lower unit's north strip against
+the third supply box, any difference between the two units, the seven contacts).
+
+Findings:
+
+1. **The tongue is not "tan without a line across it"** (a comment in the trace file and the notes;
+   bears on Ambiguity 172). The clean shot at x 7293 reads 149/131/85 at y 16520 and 121/113/78 at
+   y 16529 against 185-201 either side; single pixels show a line at y 16529-16531 across x 7284-7297
+   and a wider tan cell above it; the lower unit has the same at y 16854-16856. A third reading: one
+   poly from the row through to the plate, the tan patch its buried-contact window. Same nets as
+   drawn. **Confirmed** (`tools/px.py col 7293 16516 16536 1 acid1b`: 117-127/111-121 at y 16529-16531
+   against 175-192; `col 7293 16842 16862 1`: 121-129 at y 16854-16856; `px.py row 16530 7276 7302 2`
+   against `row 16524`). **It does not change a connection**: no geometry is changed (the `?D` / `?B`
+   items and the tongue stay as drawn); the comment in the trace file, the Logic table's row and
+   Ambiguity 172 are corrected and the third reading added.
+2. **Green in the clean shot under the rail at x 7298-7318, y 16916-16930, not in "Seen, not drawn"**
+   (a note). Field where chip 1's rail is damaged. **Confirmed** (`px.py pt 7308,16923`: clean
+   141/165/73, chip 2's metal 200/179/86, chip 1's 48/56/51). Added to "Seen, not drawn"; nothing drawn.
+3. **The upper supply contact may be two contacts** (a bar at y about 16540 in chip 2; the same
+   connection). **Undecided** (`px.py col 7491 16528 16552 3`: chip 2 dips to 162/88/58, chip 1 to
+   130/112/82, the clean shot dark there): one diffusion box on one rail either way; left as one
+   contact, with a comment.
+
+Checked and found correct (the reviewer; 4x or more in two shots, with text maps and profiles): band,
+column and top bar one cream piece in both units, ending at x about 7297, the wing plain west of it;
+wing, north strip, contact box and the box inside the U one diffusion; pocket, east strip and south
+strip one plain run y 16366-16522 at x 7432 in both chips; the band's east end past the active's edge
+to x about 7461, field under RL2; plate and neck, no edge line at x 7448-7456 on y 16586 or y 16911;
+the pad (7185,16432), the block and the bottom bar one poly through a single edge line, and likewise
+`rcs_mv`'s row, its block and the lower bar; no contact at the four crossings of `rcs_mv`'s row nor at
+(7187,16538); the extraction and `tools/unsure.py` as stated; the arm's junction with the rail a bar of
+6-8 px like the control at x 7251-7258, the rail unbroken, the arm 12-15 px of bare ground from
+`eof_ga`'s pad; the copy by overlay (north box, winding and exit match); green field between the lower
+unit's north strip and the third supply box; all seven contacts (ring, bright centre, specks). No
+metal contact at the exit (the cell x 7306-7314 is bright metal between edge lines, no hole).
+
+Could not check (the reviewer): the four ties themselves (Ambiguity 172: not to be settled from these
+photos); poly continuity under the rail other than from the clean shot; the arm west of x 7200; that
+RL2 is VCC (taken from `bc3`).
+
+The connections are the same before and after the corrections (comments only in `trace/eof.txt`):
+
+```
+tools/t.sh eof sameconn.py 3cff464              ->  after 1143 nets, 1910 transistors, 0 errors, 82 warnings
+                                                    connections identical
+.venv/bin/python tools/sameconn.py 3cff464        ->  after 2534 nets, 4696 transistors, 0 errors, 0 warnings
+                                                    connections identical
+```
+
+Round 50: no findings that change a connection.
 
 ## Not done
 
