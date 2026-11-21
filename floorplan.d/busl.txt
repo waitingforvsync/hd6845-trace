@@ -48,3 +48,5 @@
 6895,8750:7090,10400    route  reset, diagonal and track | from the pad (7077,8755) by a diagonal onto the track x 6906, which runs down the left bus field to the light pen flag's clear
 6440,9970:6840,10010     route  through line from the left-centre strips, row east | the poly row of lc3_m5756 (a thin metal from the left-centre logic, neither end identified) from the left-centre strip's edge east under six tracks to an end pad (6817,9991)
 6805,9990:6833,10400     route  the same line, track south | the track x 6819 from the pad into the left bus field (the through line x 6820 / x 6754 that runs on south of the field)
+6265,6345:6425,7315      route  four lines from the top-left logic, poly columns | four poly columns (x 6280, 6324, 6367, 6410) south from the sixth strip of the top-left logic under sixteen metals; believed four outputs of R8
+6265,7155:7070,7315      route  the same four lines, rows of the crossing field | each column turns east as a poly row (y 7300, 7258, 7214, 7171) under one metal of the reset group, without contact, to an end pad; from there down the left bus field to its foot rows y 14393, 14437, 14870, 14827
