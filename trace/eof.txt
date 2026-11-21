@@ -2899,3 +2899,93 @@ C 7014,15128
 # that pad's poly row east, y 15119-15142, under ck_out's metal x 7187 to a box at about
 # (7247,15128), the exit of the unit under the rail at y 15100-15200 (not drawn: port)
 P 7026,15119:7225,15142
+
+# Piece u15260 (run 34, 2026-11-21): the unit north of piece u15500 under the same ground rail
+# x 7294-7342 of bc1's west gate column, x 7025-7470, y 15140-15390 (bc1's ground, free): the
+# driver of eof_w15262 (gate 2 of u15760). NOT a copy of u15500 (findcell.py 7290 15395 7530
+# 15635 --region 7200,14950:7620,15460: 0.46 at best): a two-input NOR laid flat,
+#   eof_w15270 = NOR(lc1_w7780, rcs_mv)
+# Under the rail an active area y 15161-15365 with a ground contact at each end and two gate
+# rows across it; the rows also cross a wing of the same active area west of the rail
+# (x 7267-7290). The node between the rows leaves WEST by a box on the wing's edge, the east
+# end of eof_w15262's row (piece in15760), and EAST by a band y 15246-15280 that runs under
+# the load's plate to bc1's VCC box under RL2 (bc1: D 7462,15194:7540,15284 with two contacts).
+# Read from r34_a1 .. r34_e1.png (1.6x to 6x, the four shots) and from text: railprof.py 7295
+# 7340 15000 15420; textmap.py 7222 15140 7362 15380 3 --acid, 7336 15206 7474 15350 3 --acid;
+# px.py; eof_cchk.py; r33_dark.py; r23_rail.py; eof_band.py (below).
+#
+# The bands, over whole bands (eof_band.py; chip-2 metal / chip-2 stripped, red minus green;
+# trap 38). Controls: the field gap between gate 1's row and the exit's row west of the wing
+# (h ctl 7225 7258 15226 15254: +20.8 / -3.9), the gap between the exit's row and gate 2's row
+# (h ctl2 7225 7258 15270 15296: +7.6 / -10.2), the gap between the strip and the plate
+# (v gapSP 7372 7394 15288 15300: +11.9 / -8.5), u15500's island (v M 7374 7402 15456 15486:
+# +24.1 / -6.0).
+#   the wing between the gate rows (v wm 7258 7292 15236 15286)           +33.6 / +15.6  diffusion
+#   the wing north of gate 1 (h wn 7268 7286 15180 15210)                 +33.5 / +16.1  diffusion
+#   the wing south of gate 2 (h ws 7268 7286 15312 15346)                 +39.4 / +18.6  diffusion
+#   the east band west of the plate (h Bw 7356 7384 15238 15288)          +34.3 / +15.5  diffusion
+#   the east band east of the plate (h Be 7438 7456 15238 15288)          +40.1 / +19.9  diffusion
+#   the strip south of the band (v S 7352 7384 15292 15312)               +37.1 / +23.5  diffusion
+#   the strip's foot beside the tie box (h foot 7362 7380 15306 15340)    +35.2 / +16.1  diffusion
+# the ground rail on north (r23_rail.py 7300 7334 15090 15400: no stretch without metal in
+# both chips)
+M 7317,15140 y15390 w=46
+N M 7317,15150 vss
+# the active area under the rail: north edge a dark bar across the rail at y 15159-15163 in
+# both metal shots, south edge at y 15362-15368 (r33_dark.py v 7320 15140 15380); east edge
+# x 7336-7339 (a dark line in the clean shot at y 15190, 15218, 15304, 15330: px.py row),
+# open between y 15246 and y 15279 (px.py col 7338 15226 15298 3: tan y 15247-15277)
+D 7292,15161:7338,15365
+# the wing west of the rail: x 7267-7290 between an edge line x 7261-7267 and the rail's
+# edge, y 15188-15338 (top line y 15182-15188, bottom line y 15338-15344); no edge line
+# between it and the active area under the rail (px.py row 15262 7276 7366 3)
+D 7267,15188:7296,15340
+# the ground contacts (eof_cchk.py 7305,15181: 0, 214 / 190; 7305,15341: 0, 204 / 149; each
+# ring open east, toward the rail's body)
+C 7305,15181 s=30x30
+C 7305,15341 s=30x30
+# gate 1, lc1_w7780: busl's row y 15218 (drawn to x 7170) on east: one poly between edge lines
+# y 15201-15208 and y 15229-15235 from x 7160 to the rail (r33_dark.py h 15218 7160 7300: only
+# ck_out's metal's edges and the wing's edge cross it; v 7125 / 7230 / 7278), under ck_out's
+# metal x 7187 with no contact (eof_cchk.py 7187,15218: no hole, 40), cream under the rail
+# (240/171/120: over a channel) from x 7291 to x 7333, its end over field at x 7346-7348
+P 7165,15207:7347,15229
+N P 7230,15218 lc1_w7780
+# gate 2, rcs_mv: bl0's row y 15301 (drawn to x 7030) on east: one poly between edge lines
+# y 15288-15296 and y 15314-15322 (r33_dark.py h 15304 7020 7300; v 7040 / 7125 / 7230 / 7278),
+# under the metals x 7058, 7100, 7187 with no contact (eof_cchk.py 7058,15304 / 7100,15304 /
+# 7187,15304: no hole, 37-40; 7014,15304: 38), no metal over it at x 7143; the same build
+# under the rail, its end at x 7346-7348
+P 7025,15293:7347,15317
+N P 7230,15304 rcs_mv
+N D 7315,15262 eof_w15270
+# the node's way out west: a box x 7237-7262, y 15250-15276 (heavy frame, pale centre
+# x 7243-7258, y 15255-15273 in both metal shots and the chip-2 stripped shot, no metal over
+# it) at the east end of eof_w15262's row y 15251-15273 (piece in15760, drawn to x 7225). One
+# dark line (x 7259-7267) lies between the centre and the wing: the tie is drawn uncertain as
+# in u15500, and the two names are held by an alias
+P 7220,15251:7240,15273
+P 7234,15248:7263,15278
+?D 7243,15254:7270,15270
+?B 7241,15252:7265,15272
+@alias eof_w15262 eof_w15270
+# the node's way east: a band y 15246-15280 (north edge one dark line y 15242-15245 from the
+# rail to RL2, south edge y 15281-15284 from x 7381 to RL2; textmap.py 7336 15206 7474 15350 3
+# --acid), crossed by the load's plate, into bc1's box under RL2 with no edge line (px.py row
+# 15262 7426 7500 3: plain to x 7459, the rail's own edge, tan in the clean shot from x 7462)
+D 7330,15246:7468,15280
+N D 7450,15262 vcc
+# the load: a poly plate x 7390-7430 from y 15226 over the band (a channel 34 wide and 40
+# long) and on south beside the tie box to y 15326 (its east part x 7419-7430)
+P 7390,15226:7430,15305
+P 7418,15300:7430,15326
+# the tie: a diffusion strip x 7361-7379 leaves the band south (the band has no south edge at
+# x 7357-7372) to y 15331; at y 15303-15330 its east edge is the west frame (x 7383-7392) of a
+# box x 7386-7418, y 15300-15326 at the plate's south-west corner, pale centre x 7395-7407,
+# y 15311-15321 in both metal shots and the chip-2 stripped shot (px.py col 7402 15294 15345
+# 2, row 15315 / 15329 7350 7442 3; r34_d1.png, 6x). The clean shot is inverted there (the
+# centre dark, a light band below it: trap 28). Drawn uncertain as in u15500
+D 7361,15276:7379,15331
+P 7386,15302:7418,15326
+?D 7375,15308:7412,15323
+?B 7384,15306:7414,15325
