@@ -186,7 +186,7 @@ vss          M  7383-7432,15000    -   the wide metal on south into bc1's ground
 tl5_w3461    P  5443-5465,6350     out onto tl5's poly column from T5's south pad (its port tl5_w3461 there): the wire comes from bw's pad (7031,7560), the west end of wl_h1's row y 7562
 # piece hb (run 16): cdp2_w6845 west of cdp2's port
 cdp2_w6845   M  7290-7300,6842-6854  ?  onto cdp2's metal west of its pad (7335,6845) (its port cdp2_w6845 (7290,6848))
-cdp2_w6845   P  6118,6836-6858     ?   the end pad (6146,6847)'s poly row on west (seen as a row to x 5990; not followed: lc1's band)
+cdp2_w6845   P  6118,6836-6858     ?   the end pad (6146,6847)'s poly row on west (it runs under eight tracks to a pad (5668,6846), whose thin metal goes on west along y 6849 to about x 5339; not drawn: lc1's band)
 # piece hc (run 16): busl_y6805, the metal north of it
 busl_y6805   P  6160,6705-6727     ?   the end pad (6189,6716)'s poly row on west (seen as a row to x 6040; not followed: lc1's band)
 busl_y6805   P  7410,6791-6813     ?   the pad (7380,6802)'s poly row on east (seen as a row to x 7500; not followed)
