@@ -25,5 +25,6 @@ rsel13_buf   M      6727-6739,10400  in   track x 6733 from busl's region (busl 
 lc2_w8450     P      4920-4930,16703-16723  in   from bl0's poly row east of the pad (4823,16713) (bl0's port (4930,16713))
 lc2_w8450     P      6008,16791-16810  out  the band under the rail x 6008-6055: believed the gate of a pull-down of the bottom-left logic (undrawn); poly drawn to its end x 6065
 lc2_w8450     M      10479-10491,17760  out  the thin track x 10485 on north beside the bottom-centre logic's east gate column: passes over boxes (dark stretches), not followed
-regs_w17648   M      12770,17900-17914 in   the bus metal y 17907 on west: not followed
+cdp3_n_c0     P      10840,10654-10674 in   cdp3's row y 10664 (east piece of s0, drawn there to x 10850): bus N column 0
+cdp3_n_c0     P      10840,13323-13343 in   cdp4's row y 13333 (s0: n out to the right, drawn there to x 10850): cdp4_n_s0, the same net
 regs_w17462   P      16800,18003-18021 out  the poly row y 18012 on east to a pad seen at (17065,18010): not followed

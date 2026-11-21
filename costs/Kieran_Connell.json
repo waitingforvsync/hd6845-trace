@@ -1,45 +1,45 @@
 {
  "who": "Kieran Connell",
- "generated": "2026-11-21T19:37:37+00:00",
+ "generated": "2026-11-21T20:02:01+00:00",
  "price_source": "Claude API list prices per million tokens, as of 2026-11-03",
  "unpriced_models": [],
- "responses": 126,
+ "responses": 193,
  "first": "2026-11-21T19:11:23.063000+00:00",
- "last": "2026-11-21T19:37:21.134000+00:00",
- "total_cost": 14.48,
- "review_cost": 3.08,
+ "last": "2026-11-21T20:01:39.090000+00:00",
+ "total_cost": 22.5,
+ "review_cost": 5.57,
  "tokens": {
-  "input": 260,
-  "output": 103054,
-  "cache_write_5m": 151227,
-  "cache_write_1h": 256566,
-  "cache_read": 23690353
+  "input": 398,
+  "output": 157650,
+  "cache_write_5m": 287248,
+  "cache_write_1h": 325474,
+  "cache_read": 40577274
  },
  "by_model": {
   "claude-fable-5-2": {
-   "cost": 14.48,
-   "responses": 126
+   "cost": 22.5,
+   "responses": 193
   }
  },
  "by_package": {
   "regs": {
-   "cost": 11.87,
-   "review_cost": 3.08,
-   "responses": 113,
+   "cost": 18.64,
+   "review_cost": 5.57,
+   "responses": 169,
    "models": {
-    "claude-fable-5-2": 113
+    "claude-fable-5-2": 169
    }
   },
   "(coordination)": {
-   "cost": 2.61,
+   "cost": 3.86,
    "review_cost": 0.0,
-   "responses": 13,
+   "responses": 24,
    "models": {
-    "claude-fable-5-2": 13
+    "claude-fable-5-2": 24
    }
   }
  },
  "by_day": {
-  "2026-11-21": 14.48
+  "2026-11-21": 22.5
  }
 }
