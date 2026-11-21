@@ -23,7 +23,7 @@ the most significant of the five compared bits, s7 the least.**
 
 ## Status
 
-- **Run of 2026-11-20 19:10 -0600**: **piece `wn`** (wiring, 3,100 px, no uncertain item): the two metals of the upper
+- **Run of 2026-11-20 19:10 -0600**: **piece `wn`** (wiring, 3,100 px, no uncertain item; reviewed: round 7 a port's side, fixed; round 8, the fix check, no findings): the two metals of the upper
   series gate followed north to their ends. `cdp2_w7092` (the gate's output) ends on a pad (8290,5327)
   whose poly row goes east (port: a gate in the logic at y 5300-5350, undrawn). `cdp2_w7128` (its row 1)
   comes from a contact (8705,4810) on the west end of a diffusion band y 4776-4838 that goes on east
@@ -850,6 +850,17 @@ Findings:
    The port is now at x 8336 and the notes say what it meets.
 
 Round 7: one finding on a port's side, fixed; two geometry findings.
+
+Round 8 (fix check of round 7's fixes; fresh Fable 5.2 reviewer; 2026-11-20 19:25 -0600; against commit 79d34e1; images
+`cache/scratch/cdp2/review-8/`). Checked: the band one piece from the contact's ring to x 8756, no poly
+or edge line across it (row y 4808 flat over x 8728-8756 in both metal shots), its edges at y 4774-4778
+and 4838-4842, field north, south and west of the land, going on east under the metal at x 8760; the
+jog inside the metal in both chips, no metal at x 8725; the poly row x 8312-8331 running straight into
+the west outline of a box (8332-8368, 5309-5347) that reads as a buried-contact box at the poly's end
+(a gap under 10 px cannot be excluded). `.venv/bin/python tools/sameconn.py 79d34e1` and `TRACE=cdp2
+.venv/bin/python tools/sameconn.py 79d34e1`: connections identical.
+
+Round 8: no findings.
 
 ## Correction from the coordinating session (2026-11-15)
 
