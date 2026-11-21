@@ -3381,13 +3381,17 @@ C 5320,17410
 # thin metal x 4780 that comes south there from another net's pad (4778,17365) (a bright
 # blob between the row's two edge bars in both chips, no hole: 47; the metal keeps its
 # width: a pass-over, Ambiguity 145), to a pad with a contact (4735,17410) (hole -14,
-# 219 / 217; r37_i1.png, r37_i2.png). The pad's thin metal goes NORTH on x 4730-4742 (the
-# track x 4736: drawn to y 17340, port), and the row runs on WEST of the pad into the left
-# array's east column (pale in the clean shot, orange in the chip-2 stripped shot at
-# x 4690-4718): drawn to x 4700, port
+# 219 / 217; r37_i1.png, r37_i2.png). The thin metal x 4730-4742 (the track x 4736) runs
+# THROUGH the pad: north (drawn to y 17340, port) and south (review round 44: tl5_tracks.py
+# v 4736 17380 17800: without metal in both chips only the ring, y 17388-17405 and
+# 17415-17432, 17 px each side, then two 8 px bars over bl0's diffusion wire y 17447-17461;
+# eof_mrun.py row 17436 4700 4820: 4738(11) in both chips; the clean shot pink under it;
+# r37_k1.png, 5x, four shots; drawn to y 17440, port). The row runs on WEST of the pad into
+# the left array's east column (pale in the clean shot, orange in the chip-2 stripped shot
+# at x 4690-4718): drawn to x 4700, port
 P 4700,17399:5303,17420
 P 4718,17392:4755,17430
 C 4735,17410
-M 4736,17410 y17340 w=12
+M 4736,17440 y17340 w=12
 N M 6700,16305 eof_w16218
 N P 5100,17409 eof_w16218

@@ -877,8 +877,9 @@ track that goes north beside the array.**
   staircase through the bottom-left logic (in the track positions `bl0`'s six-line bundle leaves free) to
   end pads (5320,17212) and (5320,17410), whose poly rows (y 17202-17222, y 17399-17420) go west under
   four thin metals and the wide VCC metal to pads (4778,17212) and (4735,17410) at the left array's east
-  edge. There `eof_w15998` goes north on the thin track x 4780 (the one `busl` found on its west boundary)
-  and `eof_w16218` north on the track x 4736 and also on west in poly into the array. Ports; not followed.
+  edge. There `eof_w15998` goes north on the thin track x 4780 (the one `busl` found on its west boundary);
+  `eof_w16218`'s pad lies in the run of the track x 4736, which goes north and south from it (the south
+  side found by review round 44), and its row goes on west in poly into the array. Ports; not followed.
 - **Traced** (piece `cap998`): `eof_w15998`'s metal runs through a tap pad (5627,16125), whose poly is the
   gate of a device of `cap18`'s build: a channel 46/35 between VCC (a diffusion wire 520 px west to a box
   under `busl`'s VCC rail) and a closed diffusion with one contact under a metal island that also covers
@@ -1025,7 +1026,7 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `u16175`, the lower inverter on `eof_w15781` | x 6990-7525, y 16095-16320 | `u15960`'s build 217 px south: wing (7236-7296, 16101-16162), ground contact (7317,16127), gate row y 16162-16185 from the end pad (7187,16170) with the dogleg to the band y 16117-16142; node band y 16185-16204; plate (7366-7461, 16211-16253), supply box (7468-7522, 16213-16284) with a taller contact (7490,16249); tie box (7343-7370, 16209-16253) and exit box (7232-7265, 16204-16235) (both ties uncertain); the row y 16206-16227 west to x 7005, a poly column x 7005-7025 south under `u15960`'s output metal to a pad (7012,16303), its own metal west along y 16303 (port at x 6990) |
 | `o998`, `eof_w15998` to the left array's edge | x 4760-6995, y 15783-17235 (a path) | wiring: bus metal y 16257-16267 (x 6409-6995) over thirteen poly columns; corner (6409,16262); metal x 6404-6414 north; pad and contact (6408,15800); poly row y 15796-15812 (x 5990-6395); pad and contact (5972,15803); thin metal by corners (5627,15807), (5627,16241), (5496,16241), (5496,16693), (5409,16693), (5409,17174), (5320,17174) with a tap pad and contact (5627,16125) in its run; end pad and contact (5320,17212); poly row y 17202-17222 (x 4795-5306); pad and contact (4778,17212); the track x 4780 north to y 17150 (port) |
 | `cap998`, the device on the tap pad | x 4950-5650, y 16020-16200 | poly lead y 16120-16139 and gate plate (5508-5573, 16111-16146) over a diffusion box (5520-5566, 16097-16192); contact (5538,16168) under a metal island (5521-5564, 16122-16188), net `eof_w16168`; neck (5534-5553, 16057-16100) and diffusion wire y 16057-16076 west to a box (4975-5025, 16040-16090) with a contact (4990,16063) under the VCC metal x 4953-5018 (drawn y 16020-16110). One transistor, 46/35 |
-| `o218`, `eof_w16218` to the left array's edge | x 4700-6995, y 15828-17432 (a path) | wiring: bus metal y 16301-16310 (x 6366-6995) over the same columns; corner (6366,16305); metal x 6361-6371 north; pad and contact (6364,15847); poly row y 15840-15856 (x 5945-6350); pad and contact (5931,15848); thin metal by corners (5673,15851), (5673,16283), (5540,16283), (5540,16740), (5453,16740), (5453,17217), (5365,17217), (5365,17411); end pad and contact (5320,17410); poly row y 17399-17420 (x 4700-5303) through a pad and contact (4735,17410); the track x 4736 north to y 17340 (port); the row west to x 4700 (port) |
+| `o218`, `eof_w16218` to the left array's edge | x 4700-6995, y 15828-17432 (a path) | wiring: bus metal y 16301-16310 (x 6366-6995) over the same columns; corner (6366,16305); metal x 6361-6371 north; pad and contact (6364,15847); poly row y 15840-15856 (x 5945-6350); pad and contact (5931,15848); thin metal by corners (5673,15851), (5673,16283), (5540,16283), (5540,16740), (5453,16740), (5453,17217), (5365,17217), (5365,17411); end pad and contact (5320,17410); poly row y 17399-17420 (x 4700-5303) through a pad and contact (4735,17410); the track x 4736 through the pad, north to y 17340 and south to y 17440 (ports); the row west to x 4700 (port) |
 
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
 
@@ -3416,18 +3417,23 @@ One wire of 5,900 px with five pads and no tap, from the lower inverter's port (
    (`tools/railprof.py`: poly over field y 17398-17419) and the thin metal x 4780 that comes south there
    from another net's pad (4778,17365) (Ambiguity 145), to **a pad with a contact (4735,17410)** (hole -14,
    219 / 217).
-6. From that pad **the thin metal x 4730-4742 goes north** (the track x 4736; drawn to y 17340, port;
-   `tools/follow.py 4732 17300 N --gap 16` ends at (4736,16928), not read) **and the row runs on west**
-   of the pad into the left array's east column (pale in the clean shot, orange in the chip-2 stripped
-   shot at x 4690-4718; drawn to x 4700, port).
+6. **The thin metal x 4730-4742 (the track x 4736) runs through that pad**: north (drawn to y 17340, port;
+   `tools/follow.py 4732 17300 N --gap 16` ends at (4736,16928), not read) and **south** (found by review
+   round 44; the first drawing had only the north side: `tools/tl5_tracks.py v 4736 17380 17800` is without
+   metal in both chips only in the ring, y 17388-17405 and y 17415-17432, 17 px on each side of the centre,
+   and in two 8 px bars at y 17442-17468, the edges of `bl0`'s diffusion wire `lc3_e9750` beneath;
+   `tools/eof_mrun.py row 17436 4700 4820`: 4738(11) in both chips; the clean shot pink under it;
+   `r37_k1.png`, 5x, four shots; drawn to y 17440, port; the follower runs it on to (4738,17864), not read).
+   **And the row runs on west** of the pad into the left array's east column (pale in the clean shot,
+   orange in the chip-2 stripped shot at x 4690-4718; drawn to x 4700, port).
 
 **Extraction**: the net `eof_w16218` carries the lower inverter's node, the bus metal, both rows and the
 two ports; no other name joins it.
 
 **What the two pieces say.** The two inverters' outputs do not meet anywhere on these 5,000 px: they run
 side by side, one track apart, from the bottom-centre logic to the left array's east edge, and there go
-separate ways: `eof_w15998` north on the track x 4780, `eof_w16218` north on the track x 4736 and west
-into the array on its row. So they are two drivers of one signal for two loads, as run 36 believed.
+separate ways: `eof_w15998` north on the track x 4780, `eof_w16218` north and south on the track x 4736
+and west into the array on its row. So they are two drivers of one signal for two loads, as run 36 believed.
 **Believed, not traced**: the two tracks are lines of the left array (the memory address counter's
 fourteen rows lie west of them), which would make NOR(`rcs_e4`, `eof_w16040`, `bl0_w15566`) OR
 NOR(`lc1_w7780`, `rcs_mv`) OR the reset a control of that counter. Nothing of the array's side is read.
@@ -3529,6 +3535,7 @@ driver lies; the other three lead to the loads.
 | `eof_w16000` | metal | (8831-8845, 16030) | ? | piece `lat15`: the track x 8838 on south of the data pad (8838,16000) (the follower: to (8838,17306); not checked) |
 | `eof_w15998` | metal | (4773-4786, 17150) | out | piece `o998` (run 37): the upper inverter's output at the left array's east edge, the thin track x 4780 north of the pad (4778,17212) (follower: 3,000 px north to (4776,14158) and west to a pad (4737,14160): `busl`'s Not done, item 4; not read). The port (6990, 16255-16269) of run 36 is gone: the bus metal is drawn on |
 | `eof_w16218` | metal | (4730-4742, 17340) | out | piece `o218` (run 37): the lower inverter's output at the left array's east edge, the thin track x 4736 north of the pad (4735,17410) (follower: to (4736,16928); not read). The port (6990, 16297-16310) of run 36 is gone |
+| `eof_w16218` | metal | (4730-4742, 17440) | out | piece `o218` (review round 44): the same track on south of the pad (4735,17410), which lies in its run (follower: to (4738,17864); not read; `bl0`'s diffusion wire `lc3_e9750`, y 17447-17461, passes under it just south of the port) |
 | `eof_w16218` | poly | (4700, 17399-17420) | out | piece `o218`: the same pad's poly row on west into the left array's east column (seen to x 4690; `larr` draws nothing there) |
 | `vcc` | metal | (4953-5018, 16020) and (4953-5018, 16110) | - | piece `cap998`: the wide VCC metal x 4953-5018 (`busl`'s rail, its port `vcc` (4953-5018,15000)), a piece of it drawn over the box of the device's diffusion wire; it runs on both ways (north to y 15000 one metal by the two-chip test; south past y 17440) |
 | `vcc` | metal | (7470-7520, 16000) and (7470-7520, 16205) | - | pieces `u15960`, `u16175`: `bc1`'s RL2, drawn again over the two supply boxes (y 16000-16085 and y 16205-16300) |
@@ -4776,7 +4783,9 @@ driver lies; the other three lead to the loads.
     over the contact (5538,16168) also covers the gate plate. Over the plate both metal shots are bright
     without a ring (`tools/textmap.py 5496 16086 5586 16206 3 --acid`: 9-D), the clean shot is salmon
     without a hole or a pale patch (6-A; `tools/eof_cchk.py 5540,16128`: 58), and the chip-2 stripped shot
-    shows the plate's poly with streaks that are not pits. Read as no contact: the island is a net of its
+    shows the plate's poly with streaks that are not pits (review round 44 saw a pale patch there at
+    (5539-5560, 16134-16140), on the plate's south edge under the island, read no contact and could not
+    settle it from that shot). Read as no contact: the island is a net of its
     own and the device a transistor between VCC and that island. If there were a tie, the device would be
     a depletion load of 46/35 on `eof_w15998` beside the inverter's own. Three devices of this build are
     now known (`cap18`, its twin, this one); a fourth reading of any of them would change all three.
@@ -6994,6 +7003,68 @@ The connections are the same before and after the changes:
 
 Round 43: no findings that change a connection.
 
+### Round 44 (full review of pieces `o998`, `cap998` and `o218`; 2026-11-21 10:45 to 11:00 +0000, at commit 2851abf)
+
+One fresh reviewer (Claude Fable 5.2), briefed with the three pieces' claims (per wire: the bus metal over
+the thirteen columns without a contact, its corner and north leg, the end pad, the poly row under the
+three wide metals without contact or transistor, the pad, every corner of the staircase metal, the end
+pad, the row under four thin metals and the wide metal, the pad at the array's edge and what leaves it;
+for `o998` the tap pad; for `cap998` the lead and gate plate, the closed box with its contact under an
+island that has no wire and no contact to the gate, the neck and the diffusion wire to the box under the
+wide metal, that metal as VCC, the extracted transistor; that the two wires touch neither each other nor
+any other net) and told to suspect: (a) the crossing field, with the clean shot's green on column 1 and
+under the lower metal, and (6497,16305); (b) the rings of the two north end pads; (c) the tap pad; (d) the
+island's contact to the gate, a metal leaving it, the strip as diffusion in one piece with no poly across
+it, the wide metal as one from y 15000; (e) every corner of the staircases against `bl0`'s lines and
+pads; (f) the crossing (4780,17408); (g) what belongs to the pads (4735,17410) and (4778,17212); (h) the
+four rows as one poly each with field under every wide metal. Images: `cache/scratch/eof/review-44/` (24).
+
+It checked, at 4x and more in the four shots and by text (`px.py`, `textmap.py`, `tl5_tracks.py` along
+every segment, `follow.py`, the full extraction), and found as drawn: none of the 26 crossings with a pad,
+a ring or a widening, the green of Ambiguity 142 in chip 1 only (chip 2's stripped shot has field north
+and south of the lower metal), (6497,16305) a chip-1 blemish; both north end pads with their metals ending
+on them (a 30 px dim stretch at (6409,15826-15835) in chip 2 a blemish: chip 1 has metal there); the pads
+(5972,15803), (5931,15848) separate, no poly west of them; the four rows one piece each, orange in every
+open stretch (blue 48-72), field under every wide metal; a two-chip test along every staircase segment,
+30 px and more without metal between neighbours beyond every corner, `bl0`'s pads (5538,15999),
+(5453,16649), (5322,17127) separate; the end pads (5320,17212), (5320,17410), and (4778,17212) without
+poly west or south; the crossing (4780,17408) a pass-over (7 px bars, no hole, row not widened); the
+crossing (5409,16712) without a pad (the clean shot dark there, the bars as at x 5540); for `cap998` the
+tap metal bright on both sides of the ring, the lead one poly with the plate, the island closed with no
+ring or hole over the plate, the strip diffusion (chip 2 180/132/88 against the lead's 168/113/61) with no
+poly across it and open into the box under the wide metal (the box's edge line x 5022-5028 absent at
+y 16066, present at y 16047 and y 16085), the wide metal one metal from y 15000 to y 16110; the full
+extraction (no extra transistor, no join on either net).
+
+It reported **one finding, which changes a connection** (where `eof_w16218` leaves the package):
+
+1. **The pad (4735,17410): the thin metal x 4730-4742 also runs on south of the pad.** The trace had only
+   the metal north (`M 4736,17410 y17340`) and the row west. `tl5_tracks.py v 4736 17380 17800`: without
+   metal in both chips only y 17388-17405 and y 17415-17432 (the ring, 17 px each side, symmetric), then two
+   8 px bars at y 17442-17468 (over `bl0`'s diffusion wire `lc3_e9750`), then metal; `px.py row 17436`
+   against `row 17385`: the same metal at x 4730-4742 in both chips; the clean shot pink under it; the
+   follower runs it to (4738,17864). **Confirmed** (`tools/t.sh eof tl5_tracks.py v 4736 17380 17800`: the
+   same four stretches, chip 2 fails nowhere for 20 px; `tools/eof_mrun.py row 17436 4700 4820`: 4738(11)
+   in both chips, as at y 17385; `r37_k1.png`, 5x, four shots: bright metal on the track below the ring in
+   both chips, pink beneath in the clean shot). The run-37 views of this pad ended at y 17436, at the
+   ring's south edge, and what lay below was not looked at: trap 32 (look all round every pad), not a new
+   trap. **Fixed**: the metal is drawn through the pad, `M 4736,17440 y17340 w=12`, a second port
+   (4730-4742, 17440) added (notes, `ports.d/eof.txt`, the glossary and `notes/operation.md` say "north and
+   south"). No net is joined or split by it (the two commands below end `connections identical`); it
+   counts as a finding that changes a connection because the wire leaves the package at one more place.
+
+Could not check (the reviewer): where the track x 4736 goes south of y 17864; the wide metal's identity as
+VCC north of y 15000 (taken from `busl`); Ambiguity 144 (a pale patch at (5539-5560, 16134-16140) on the
+plate in the chip-2 stripped shot: read as no contact, not settled from that shot; added to the
+ambiguity's text); a diffusion lying wholly under the 10 px lower bus metal at x 6465-6530 cannot be
+excluded from chip 1's clean shot alone, and nothing in chip 2 or the metal shots supports one
+(Ambiguity 142, as it stands).
+
+    tools/t.sh eof sameconn.py 2851abf           -> connections identical
+    .venv/bin/python tools/sameconn.py 2851abf   -> connections identical
+
+Round 44: one finding that changes a connection (a second exit of `eof_w16218`), fixed.
+
 ## Not done
 
 - **Next (after run 37)**: the two inverters' outputs are drawn to the left array's east edge (pieces `o998`,
@@ -7002,8 +7073,9 @@ Round 43: no findings that change a connection.
   4780 17150 N --gap 16`: 3,000 px to (4776,14158), west to the pad (4737,14160) of `busl`'s Not done item 4,
   from which a poly leaves west and the track x 4736 goes on north; candidates (4778,15484), (4780,15376),
   (4779,15226), (4781,14439); it crosses every row that `bl0` and `busl` take into the array) and
-  `eof_w16218` on x 4736 from the port (4730-4742, 17340) (follower: to (4736,16928), not read), and that
-  wire's row west of (4700, 17399-17420) into the array's east column (a pad at about (4612,17398) is seen
+  `eof_w16218` on x 4736, north from the port (4730-4742, 17340) (follower: to (4736,16928), not read) and
+  south from the port (4730-4742, 17440) (follower: to (4738,17864), not read), and that wire's row west of
+  (4700, 17399-17420) into the array's east column (a pad at about (4612,17398) is seen
   on `r37_e2.png`). South of y 15000 the tracks are in `bl0`'s old ground and `larr`'s east edge (free);
   north of it `busl` (claimed: hand the coordinates over or ask). Read them with a continuous two-chip test
   and every pad looked round; where each ends is what the signal controls. (b) the pad (4778,17365) and
