@@ -338,24 +338,28 @@ north by the same kind of route to its inverter. Each line, from its port of run
 
 | K | horizontal y | hop 1: pads (poly row between) | diagonal (45 degrees, 260 px) | row y | hop 2: pads | hop 3: pads |
 |---|---|---|---|---|---|---|
-| 1 | 18038 | (12851,18038) - (13165,18035) | (13284,18039) - (13543,17779) | 17777 | (14456,17776) - (14672,17777) | (15712,17776) - (15926,17777) |
-| 2 | 18082 | (12808,18082) - (13205,18079) | (13302,18082) - (13562,17822) | 17821 | (14499,17821) - (14716,17821) | (15754,17821) - (15969,17821) |
-| 3 | 18125 | (12853,18124) - (13158,18120) | (13324,18125) - (13583,17866) | 17864 | (14457,17864) - (14673,17864) | (15712,17864) - (15926,17864) |
-| 4 | 18168 | (12808,18168) - (13203,18163) | (13346,18169) - (13605,17909) | 17908 | (14500,17908) - (14715,17907) | (15755,17906) - (15969,17906) |
-| 5 | 18211 | (12851,18210) - (13160,18208) | (13368,18212) - (13627,17953) | 17951 | (14456,17951) - (14671,17951) | (15711,17951) - (15926,17951) |
-| 6 | 18255 | (12807,18254) - (13203,18249) | (13390,18256) - (13650,17996) | 17994 | (14499,17994) - (14715,17994) | (15755,17994) - (15969,17993) |
-| 7 | 18298 | (12852,18298) - (13161,18296) | (13412,18298) - (13672,18039) | 18037 | (14457,18037) - (14672,18037) | (15713,18037) - (15926,18039) |
+| 1 | 18038 | (12851,18038) - (13174,18035) | (13284,18039) - (13543,17779) | 17777 | (14456,17776) - (14672,17777) | (15712,17776) - (15926,17777) |
+| 2 | 18082 | (12808,18082) - (13219,18079) | (13302,18082) - (13562,17822) | 17821 | (14499,17821) - (14716,17821) | (15754,17821) - (15969,17821) |
+| 3 | 18125 | (12853,18124) - (13174,18120) | (13324,18125) - (13583,17866) | 17864 | (14457,17864) - (14673,17864) | (15712,17864) - (15926,17864) |
+| 4 | 18168 | (12808,18168) - (13219,18163) | (13346,18169) - (13605,17909) | 17908 | (14500,17908) - (14715,17907) | (15755,17906) - (15969,17906) |
+| 5 | 18211 | (12851,18210) - (13174,18208) | (13368,18212) - (13627,17953) | 17951 | (14456,17951) - (14671,17951) | (15711,17951) - (15926,17951) |
+| 6 | 18255 | (12807,18254) - (13219,18249) | (13390,18256) - (13650,17996) | 17994 | (14499,17994) - (14715,17994) | (15755,17994) - (15969,17993) |
+| 7 | 18298 | (12852,18298) - (13174,18296) | (13412,18298) - (13672,18039) | 18037 | (14457,18037) - (14672,18037) | (15713,18037) - (15926,18039) |
 
 - **The horizontals** (thin metal, 12 px): `tools/follow.py 11400 Y E` ends each on its pad; the 68 contact
   candidates it lists were put through the pad test (`cache/scratch/cdp4/candh.py`): no ring pattern in
   either metal shot at any (five small clean-shot specks).
 - **Hop 1**, under the vertical trunks (x 12880-13130): seven straight poly rows, each between a west pad
-  (x 12808 or 12852, alternating) and an east pad (x 13205 or 13160) at the same y; read in the clean shot
+  (x 12808 or 12852, alternating) and an east pad (x 13219 or 13174) at the same y; read in the clean shot
   at 2.9x (`hop1_c.png`): no row steps a track.
 - **Diagonals**: east of its pad each line runs east, climbs 260 px north-east and runs east on its row;
   the ends are from a walk along the metal (`cache/scratch/cdp4/track.py X0 Y0 14440 60`, which cannot
   leave a line: it re-centres within 7 px every 2 px) and an overlay (`ov5d.png`). North-west of them, in
   the same fan, are `regs`' three lines (column 0's and two write/select lines).
+- Crossings named by the review (round 4), none with a pad, ring or pits: a poly column x 12732-12756 under
+  all seven horizontals; a poly diagonal under column 1's metal at x 11222-11265; and **a diffusion
+  rectangle x 11513-11728, from y 18278 southwards, under column 7's metal, in no trace file** (clean shot
+  191/173/127 under the metal): a lead for `busb`.
 - A poly column x 13706-13730 crosses under all seven rows (y 17750-18060): the rows are bright between
   its two edge bars, with no pad: no tap (`x13718.png`, three shots at 3.2x; tracing guide, trap 15). Whose
   it is was not followed.
@@ -694,6 +698,44 @@ is drawn once. No connection changes with every file loaded:
   `trace/regs.txt`); no transistor's nets and no other name differ.
 
 Round 3: no findings.
+
+### Run 5 (the read bus, east along the bottom bus)
+
+Round 4 (full review, 2026-11-21 14:41 -0600; a fresh Fable reviewer, images in `cache/scratch/cdp4/review-4/`, 26;
+commit before the round 1127424). Piece: columns 1-7 from x 11220 to x 16000 (42 pads, 21 poly hops, the
+diagonal fan). Told to suspect: a step or a bridge in each of the three hops, and a transistor or a contact
+under their rails; the pad-to-row correspondence through the fan of ten parallel diagonals; column 6 against
+the thin metal x ~14535, where `tools/follow.py` went wrong; missed taps on the long metals, above all east
+of x 13200 where the clean shot is unreliable; the poly column x 13706-13730; each of the 42 pads; the join
+with run 4's corners at x 11220.
+
+It checked: the join (3x); each hop at 4x in the clean and the chip-2 stripped shot and in metal (seven
+straight rows in and out in the same order, no step, no bridge; field under the rails: the rows keep one
+colour, no diffusion edge line crosses them in either metal shot, `tools/railprof.py` reports no gate);
+column 6 is not joined to the thin metal x ~14535 (19 px of open poly between its pad's ring and that
+metal, which the follower's 24 px gap bridged); all seven pad-to-row correspondences, with a walk of its own
+along every drawn metal segment at 1 px in both metal shots (metal within 6 px of the drawn centre along
+every diagonal) and cuts at x 13450 and x 13690 (`regs`' lines above these, in order); taps, by the same
+walk (no branch, no dark stretch of 6 px or more except pad rings, the named crossings and a chip-2 speck
+at (14080,17775)); all 42 pads (one pad, one contact, its own metal on one side only, field beyond); the
+extraction and `tools/unsure.py`.
+
+- Finding 1, **geometry only**, confirmed (`tools/px.py row Y X0 X1 5 metal,metal1` through each pad: ring
+  x 13158-13165, bright centre 13170-13175, ring 13180-13197 for columns 1, 3, 5, 7; ring 13200-13210, centre
+  13215-13220, ring 13225-13240 for columns 2, 4, 6): the east pads of hop 1 were drawn 9-15 px too far
+  west (their centres had been taken from the clean shot, which has interference colours there). Moved to
+  x 13174 and x 13219; the drawn boxes overlapped the real pads before and the ends are the same.
+- Finding 2, **comments only**: three crossings the notes did not name (Logic, "Crossings named by the
+  review"), none with a pad.
+
+`tools/t.sh cdp4 sameconn.py 1127424`: connections identical.
+`.venv/bin/python tools/sameconn.py 1127424`: connections identical.
+
+Not checked by it: under the three rails the chip-2 stripped shot shows only fringes, so "field" there rests
+on the clean shot and the two metal shots; the long runs were seen in the stripped shots only at 1.3-1.6x;
+nothing east of x 16000.
+
+Round 4: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
