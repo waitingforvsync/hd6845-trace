@@ -1128,3 +1128,68 @@ P 7361,6783:7399,6821                 # the east pad
 C 7380,6802 s=24x24
 P 7378,6802 x7410 w=22                # the poly row on east: a stub
 N M 6700,6805 busl_y6805
+# =====================================================================================
+# Run 17 (2026-11-21): the northern part's leftovers. Items (a), (b) and line Q of the Next
+# list are three wires: pieces qc, qa, qb.
+# =====================================================================================
+# Piece qc: lc3_e9798 is lc2_w9125 (the output of lc2's AND-OR-INVERT). lc3's poly
+# `P 5933,9250 y9537 x6450 w=22` (lc2_w9125) runs on east under Q's track x 6472 (plain) to
+# an END pad (6514,9535): ring and bright centre in both chips, green hole in the clean
+# shot, field east. The pad's metal leaves SOUTH on x 6514 over six poly rows (y 9577 ..
+# 9793: bar pairs only, no pad) to a corner (6514,9798) and west along y 9798 onto lc3's
+# metal end `M 6450,9798 x6428 y10400` (lc3_e9798, line 9 of piece lc9: the foot row
+# y 14567). The track x 6516 that comes from the north toward this pad is piece qa's: it
+# turns west at y 9495, and between its arm's south edge (y 9502-9506) and the pad's ring
+# (from y 9516) lie 8 px of open ground (olive in both metal shots, green = unprotected in
+# the clean shot): not on the pad. West of x 6480 the metal y 9798 lies on the row y 9793
+# and is dim orange in chip 1's metal shot (yellow in chip 2); the clean shot (chip 1) has
+# the row protected there. 25 px of ground between the metals y 9756 and y 9798.
+P 6445,9536 x6514 w=20                # lc2_w9125's row on east from lc3's port to its end pad
+P 6495,9516:6533,9554                 # the end pad
+C 6514,9535 s=24x24
+M 6514,9535 y9798 x6445 w=13          # metal south on x 6514, corner, west onto lc3's metal y 9798
+N P 6480,9536 lc2_w9125
+N M 6514,9700 lc3_e9798
+@alias lc2_w9125 lc3_e9798
+# =====================================================================================
+# Piece qa: line Q is lc3_e9756 (line 7 of piece lc9: the foot row y 14654). From lc3's
+# metal end `M 6450,9756 x6342 y10400` the metal runs on east to a plain corner (6472,9756),
+# north on x 6472 over six poly rows (y 9537 .. 9750: no pad), one step east (arm y 9495)
+# to x 6516, north to (6516,8821), a 45-degree diagonal (x + y = 15337) to (6687,8650) and
+# onto a pad (6687,8625); a poly column x 6687 north under four metals of the staircases
+# (y 8541 cdp3's, y 8411 eofw's, y 8367 eof's link F / trunks' end; plain crossings, no
+# pad, no hole; open between cdp3's leg x 6667 and eofw's leg x 6710) to a pad
+# (6687,8323); metal north on x 6688, one step east (arm y 8195, the middle one of three
+# nested steps: eof's lc3_w9947 above, tla's rcs_e4 below, ground between) to x 6731 and
+# north over six poly rows (y 8040, 7888, 7821, 7780, 7648, 7519: no pad) to an END pad
+# (6731,7474) (ground north and west of it); the pad's poly row y 7474 runs east under
+# twelve tracks (no pad) and turns north under tc2_r5718's corner metal into a poly column
+# x 7362 (open north of y 7440), which turns east at y 7300: the row y 7300 runs on east
+# under ck_a's, cnt_bus_b's and tc2_r5718's tracks and a wide metal x 7577-7617 (no pad),
+# drawn to the region's edge x 7600. It goes on to x about 7885 and turns south (cdp2's
+# ground). Field between this L and its neighbours: x 7336-7348 west of the column (piece
+# qb's corner), x 7378-7393 east of it (bw's rc_stepreq_n column x 7398-7416).
+M 6445,9756 x6472 y9495 x6516 y8821 6687,8650 y8625 w=13   # from lc3's metal: corner, x 6472, step, x 6516, diagonal, onto the pad
+P 6668,8606:6706,8644                 # the lower pad of the poly hop
+C 6687,8625 s=24x24
+P 6687,8625 y8323 w=18                # the poly column under the staircase metals
+P 6668,8304:6706,8342                 # the upper pad
+C 6687,8323 s=24x24
+M 6688,8323 y8195 x6731 y7474 w=13    # track x 6688, step y 8195, track x 6731 (line Q) to its end pad
+P 6712,7455:6750,7493                 # the end pad of line Q
+C 6731,7474 s=24x24
+P 6731,7474 x7362 y7300 x7600 w=20    # row y 7474 east, column x 7362 north, row y 7300 east to the region's edge
+N M 6731,7800 lc3_e9756
+# =====================================================================================
+# Piece qb: busl_y7432, the poly row y 7431 of the crossing field. It arrives from the west
+# (lc1's ground: under eof's rst_ck arm y 7432 and lc1's ck_out metal y 7430, which lie on
+# it without a contact as their files say; its west end is a pad (5536,7432), not drawn),
+# runs east from the region's edge x 6450 under eighteen tracks (no pad: the end pad of
+# line Q, (6731,7474), is 14 px south of it), turns north at x 7318 into a poly column
+# that lies under eof's metal x 7315 (cream in the clean shot; 20 px of pink field between
+# its top corner and eof's pad (7313,7215)) and turns east at y 7256: the row y 7256 runs
+# east under the same tracks as piece qa's row y 7300 (no pad), drawn to x 7600. It goes
+# on to x about 7930 and turns south, outside piece qa's L. Neither end identified.
+P 6445,7431 x7318 y7256 x7600 w=20    # row y 7431 east, column x 7318 north (under eof's metal), row y 7256 east
+N P 7000,7431 busl_y7432
+N P 7500,7256 busl_y7432

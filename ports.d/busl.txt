@@ -190,3 +190,12 @@ cdp2_w6845   P  6118,6836-6858     ?   the end pad (6146,6847)'s poly row on wes
 # piece hc (run 16): busl_y6805, the metal north of it
 busl_y6805   P  6160,6705-6727     ?   the end pad (6189,6716)'s poly row on west (seen as a row to x 6040; not followed: lc1's band)
 busl_y6805   P  7410,6791-6813     ?   the pad (7380,6802)'s poly row on east (seen as a row to x 7500; not followed)
+# piece qc (run 17): lc2_w9125's poly onto lc3_e9798's metal (canonical lc2_w9125; @alias until the rename)
+lc2_w9125    P  6450,9526-9546     in  onto lc3's poly at its port (lc2's AND-OR-INVERT's output; marked in lc2): on east to an end pad (6514,9535)
+lc3_e9798    M  6450,9791-9805     out onto lc3's metal y 9798 at its port: the wire comes from the pad (6514,9535) of lc2_w9125's poly
+# piece qa (run 17): lc3_e9756 = line Q
+lc3_e9756    M  6450,9749-9763     ?   onto lc3's metal y 9756 at its port: on east and north (line Q) to the rows y 7474 / y 7300
+lc3_e9756    P  7600,7290-7310     ?   the poly row y 7300 on east: seen to about x 7885, where it turns south (not followed: cdp2)
+# piece qb (run 17): busl_y7432, the poly row y 7431 of the crossing field
+busl_y7432   P  6450,7421-7441     ?   the row on west under eof's rst_ck arm and lc1's ck_out metal (no contact) to a pad (5536,7432) with a metal from the west (lc1's ground; not drawn)
+busl_y7432   P  7600,7246-7266     ?   the poly row y 7256 on east: seen to about x 7930, where it turns south (not followed: cdp2)
