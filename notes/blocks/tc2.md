@@ -1294,3 +1294,7 @@ Round 2: no findings.
 
 - Piece 14, `tc2_m6404` ("poly south past y 6400 ... neither end is followed"): the south end is followed by `busl` (piece `ca`) to the foot row y 14827 of the left bus field, no tap.
 - `tc2_sr_q` ("leaves south on a metal x 7922 (past y 6400)"): that metal ends on a pad (7922,7040), the gate of `cdp2`'s inverter `cdp2_w7065` = NOT `tc2_sr_q` (`cdp2`, piece `ga`; marked).
+
+## Corrections (coordinator, from the handoffs of `cdp2`, 2026-11-20)
+
+- Piece 11, `tc1_ns3` ("south of the island ... metal x 7661 to y 6400"): the metal ends on the pad (7662,7083), the output of `cdp2`'s inverter: `tc1_ns3` = NOT `tc2_sr_q` (marked: two `?B` of `cdp2`'s piece `ga`).

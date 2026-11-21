@@ -145,10 +145,10 @@ vss           M      8686-8732,17300          -    column B's VSS rail on south 
 # Piece g174e (run 24): the east side of the same unit; the six ports of piece g174 on the rail's east edge (x 8368-8372) are gone: drawn on
 vcc           M      8488-8558,17560          -    R2 on south of the NOR's VCC box and past this unit's load (drawn y 15870-17560; x 8488-8558 south of y 17236; it runs on)
 # Piece n338 (run 28): eof_w17338's port at (8245,17341) is gone: the row is drawn on to its driver, a NOR; its two inputs
-# Pieces en17, dinv17, lat18 (run 30): the ports eof_w16778 M 8223-8235,17030, ck_out M 8418-8430,17866 and eof_w16737 P 8270,16553-16573 are gone: drawn on
+# Pieces en17, dinv17, lat18 (run 30): the ports ck_out M 8223-8235,17030, ck_out M 8418-8430,17866 and eof_w16737 P 8270,16553-16573 are gone: drawn on
 bc1_g6_out    P      8214-8247,16090          in   the pad (8229,16107) on which bc1's metal x 8229 ends (bc1's contact): one poly with the latch lat18's data row
 vss           M      8336-8384,16040          -    column A's VSS rail, bc1's R1, drawn again over the latch lat18 (y 16040-16300)
-# Pieces en18, cap18 (run 31): the ports eof_w16040 M 8919-8931,16300 and eof_w16172 M 8223-8235,16425 are gone (drawn on: one net, eof_w16040); rst_a P 8326,16294-16312 and 8326,16900-16918 are gone (their loads are the clear gates of the latches lat18 and lat17)
+# Pieces en18, cap18 (run 31): the ports eof_w16040 M 8919-8931,16300 and eof_w16040 M 8223-8235,16425 are gone (drawn on: one net, eof_w16040); rst_a P 8326,16294-16312 and 8326,16900-16918 are gone (their loads are the clear gates of the latches lat18 and lat17)
 # Piece u15500 (run 32): the port eof_w16040 P 7290,15471-15489 is gone (the row is drawn on into its gate, gate 2 of the NOR eof_w15523 = NOR(rcs_e4, eof_w16040, bl0_w15566))
 rcs_e4        P      7280,15425-15446         in   gate 1's row of the NOR, drawn again from x 7280 over tla's row (tla ends it at x 7370; here to its end x 7390)
 bl0_w15566    P      7255,15555-15577         in   gate 3's row of the NOR, on east from bl0's row end (bl0's port 7260,15566)

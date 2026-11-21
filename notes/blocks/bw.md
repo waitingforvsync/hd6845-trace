@@ -67,4 +67,4 @@ Everything in the survey; the far ends of the five lines (table); H4 west of x 1
 
 ## Corrections (coordinator, from the handoffs of `busl` run 16, 2026-11-21)
 
-- The table's row `wl_h1` ("metal x 7025-7048, direction not followed") and the comment in `trace/bw.txt`: the metal goes north on x 7034 to a corner (7034,6957), west along y 6957 to a pad (6188,6956), and by a poly row, a diagonal and the poly column x 5454 onto `tl5`'s poly end (5453,6350): it is `tl5_w3461`, the data of `tl5`'s latch a (`busl`, piece `ha`).
+- The table's row `wl_h1` ("metal x 7025-7048, direction not followed") and the comment in `trace/bw.txt`: the metal goes north on x 7034 to a corner (7034,6957), west along y 6957 to a pad (6188,6956), and by a poly row, a diagonal and the poly column x 5454 onto `tl5`'s poly end (5453,6350): it is `wl_h1`, the data of `tl5`'s latch a (`busl`, piece `ha`).

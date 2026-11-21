@@ -108,7 +108,7 @@ bd1_n2       M  6704-6718,15000    in  onto eof's metal from the bottom bus fiel
 bd1_n2       M  6769-6783,10400    out onto eof's metal north (piece n2n, then labelled as an open join): to the inverter that makes rcs_e3
 # pieces x68, x69 (run 7): two through lines beside it
 busl_x6820   M  6747-6761,15000    ?   onto bl0's metal, south to its pad (6754,16217) and on; the wire is lc3_m5756 (piece xm, @alias)
-busl_x6906   M  6834-6848,15000    out onto bl0's metal (its run 5): south to the gate that clears the light pen flag bl0_w17610; the wire is rst (piece xn, @alias)
+rst   M  6834-6848,15000    out onto bl0's metal (its run 5): south to the gate that clears the light pen flag bl0_w17610; the wire is rst (piece xn, @alias)
 # pieces r12, r13 (run 8): the read selects of R12 and R13
 rsel12_buf   M  6445-6459,15000    in  onto regs' metal from the bottom bus (sel's buffer); track x 6452
 rsel13_buf   M  6487-6501,15000    in  onto regs' metal from the bottom bus; track x 6494
@@ -135,8 +135,8 @@ rst_n        P  5700,15078-15098   out onto bl0's poly row of bl0's w15088 (P 57
 lc2_w8450    P  5530-5552,10400    in  onto lc3's poly from the end pad (5540,10165)
 lc2_w8450    M  4815-4829,15000    ?   track x 4822 on south; follower ends (4823,16690), not read
 # pieces fb, fa (run 10): the foot rows y 14870, y 14827 and their tracks to the top of the northern part
-busl_x6949   P  7550,14859-14881   ?   poly row on east to a pad at about (7836,14872) under bc1's bus metals (not drawn)
-busl_x6992   P  7550,14816-14838   ?   poly row on east to a pad at about (7794,14826) (not drawn)
+tl6_p6187   P  7550,14859-14881   ?   poly row on east to a pad at about (7836,14872) under bc1's bus metals (not drawn)
+tc2_m6404   P  7550,14816-14838   ?   poly row on east to a pad at about (7794,14826) (not drawn)
 # pieces fc, fd, fe (run 11): the next three Ls of the nest and their lines north of y 10400
 rcs_mv       P  6227-6247,6350     in  onto tl6's poly column from the corner of the row y 6238 (tl6's port rcs_mv there)
 rcs_mv       M  6964-6978,15000    out track x 6971 on south into bl0's ground; follower ends (6970,15282), candidate (6971,15098), not read
@@ -147,32 +147,32 @@ busl_x7122   P  7550,14469-14491   ?   poly row y 14480 on east toward bc1's bus
 # pieces ga, gb, gc (run 12): lines 11-13 of the staircase bundle, from the northern part to the rows y 14480, 14437, 14393
 lc1_w7780    P  6450,7770-7790     in  onto lc1's row of gate E1's output at its port (lc1's port lc1_w7780 there)
 lc1_w7780    P  7170,15207-15229   out the row y 15218 from the end pad (7100,15175), on east under ck_out's track toward bc1's rail x 7292-7342 (seen to x 7260; not drawn)
-busl_x6559   P  7550,14426-14448   ?   poly row y 14437 on east toward bc1's bus pads (seen as poly to x 7600; not drawn)
+tl6_p6143   P  7550,14426-14448   ?   poly row y 14437 on east toward bc1's bus pads (seen as poly to x 7600; not drawn)
 busl_x6603   P  7550,14382-14404   ?   poly row y 14393 on east toward bc1's bus pads (seen as poly to x 7600; not drawn)
 # piece gd (run 13): tl5_w2722, line 14 of the staircase bundle
 tl5_w2722    P  5356-5378,6350     in  onto tl5's poly column from T3's south pad (tl5's port tl5_w2722 there)
 tl5_w2722    P  7550,14339-14361   out poly row y 14350 on east toward bc1's bus pads (seen as poly to x 7630; not drawn)
 # piece a6 (run 14): the six lines of cdp3_g_c# west of bc1's contacts, to bl0's six tracks at y 15000
-cdp3_g_c2    M  5490-5504,15000    ?   onto bl0's track (its bl0_w18081, piece t6): on south to the left array's row y 18081
-cdp3_g_c3    M  5533-5547,15000    ?   onto bl0's track (bl0_w17603): to the array's row y 17603
-cdp3_g_c4    M  5577-5591,15000    ?   onto bl0's track (bl0_w17126): to the array's row y 17126
-cdp3_g_c5    M  5620-5634,15000    ?   onto bl0's track (bl0_w16649): to the array's row y 16649
-cdp3_g_c6    M  5664-5678,15000    ?   onto bl0's track (bl0_w15999): to the array's row y 15999
-cdp3_g_c7    M  5707-5721,15000    ?   onto bl0's track (bl0_w15522): to the array's row y 15522
+cdp3_g_c2    M  5490-5504,15000    ?   onto bl0's track (its cdp3_g_c2, piece t6): on south to the left array's row y 18081
+cdp3_g_c3    M  5533-5547,15000    ?   onto bl0's track (cdp3_g_c3): to the array's row y 17603
+cdp3_g_c4    M  5577-5591,15000    ?   onto bl0's track (cdp3_g_c4): to the array's row y 17126
+cdp3_g_c5    M  5620-5634,15000    ?   onto bl0's track (cdp3_g_c5): to the array's row y 16649
+cdp3_g_c6    M  5664-5678,15000    ?   onto bl0's track (cdp3_g_c6): to the array's row y 15999
+cdp3_g_c7    M  5707-5721,15000    ?   onto bl0's track (cdp3_g_c7): to the array's row y 15522
 cdp3_g_c2    P  7000,14080-14102   ?   the row runs on east as bc1's poly line 1 (drawn there from x 7000) to its contact (7188,14091)
 cdp3_g_c3    P  7000,14123-14145   ?   on east as bc1's line 2, to its contact (7230,14131)
 cdp3_g_c4    P  7000,14167-14189   ?   on east as bc1's line 3, to its contact (7274,14172)
 cdp3_g_c5    P  7000,14209-14231   ?   on east as bc1's line 4, to its contact (7317,14217)
 cdp3_g_c6    P  7000,14253-14275   ?   on east as bc1's line 5, to its contact (7361,14260)
 cdp3_g_c7    P  7000,14297-14319   ?   on east as bc1's line 6, to its contact (7405,14304)
-# piece xn (run 14): the north end of busl_x6906 = rst
+# piece xn (run 14): the north end of rst = rst
 rst          P  6450,7377-7399     in  onto lc1's poly row of gate 3's output at its port (lc1's port rst there)
 # piece xm (run 15): the north end of busl_x6820 = lc3_m5756
 lc3_m5756    P  6450,9979-10001    ?   onto lc3's crossing row 10 at its port (from the END pad (5646,9992) of lc3_m5756); the row runs on east to the end pad (6817,9991) of the track x 6819
 # pieces ca, cb, cc, cd (run 15): the four poly Ls of the crossing field = the north ends of pieces fa, fb, gb, gc
-tc2_m6404    P  6399-6421,6400     ?   onto tc2's poly from its pad (6404,6107); column x 6410, row y 7171 to the pad (7165,7170); the wire's track name busl_x6992 is an alias
-tl6_p6187    P  6356-6378,6350     ?   onto tl6's poly from its pad (6360,6152); column x 6367, row y 7214 to the pad (7120,7214); alias busl_x6949
-tl6_p6143    P  6313-6335,6350     ?   onto tl6's poly from its pad (6318,6110); column x 6324, row y 7258 to the pad (6861,7257); alias busl_x6559
+tc2_m6404    P  6399-6421,6400     ?   onto tc2's poly from its pad (6404,6107); column x 6410, row y 7171 to the pad (7165,7170); the wire's track name tc2_m6404 is an alias
+tl6_p6187    P  6356-6378,6350     ?   onto tl6's poly from its pad (6360,6152); column x 6367, row y 7214 to the pad (7120,7214); alias tl6_p6187
+tl6_p6143    P  6313-6335,6350     ?   onto tl6's poly from its pad (6318,6110); column x 6324, row y 7258 to the pad (6861,7257); alias tl6_p6143
 tl6_p6101    P  6269-6291,6350     ?   onto tl6's poly from its pad (6275,6152); column x 6280, row y 7300 to the pad (6904,7301); alias busl_x6603
 # pieces va, vc, vb (run 16): the supply metals
 vcc          M  4926-4980,10590    -   onto the foot of lc3's middle rail (its port vcc (4924-4980,10600))
@@ -182,8 +182,8 @@ vss          M  4752-4802,10590    -   onto the foot of lc3's west rail (its por
 vss          M  4645-4698,10700    -   the rail's foot turned west and south, on south down the left array's east edge (larr)
 vss          M  7550-7555,14022-14075  -   onto cdp4's plate at the foot of its s0 VSS rail (cdp4's `M 7550,14024:7645,14055`)
 vss          M  7383-7432,15000    -   the wide metal on south into bc1's ground (not followed)
-# piece ha (run 16): tl5_w3461 = wl_h1 (canonical wl_h1; @alias until the rename)
-tl5_w3461    P  5443-5465,6350     out onto tl5's poly column from T5's south pad (its port tl5_w3461 there): the wire comes from bw's pad (7031,7560), the west end of wl_h1's row y 7562
+# piece ha (run 16): wl_h1 = wl_h1 (canonical wl_h1; @alias until the rename)
+wl_h1    P  5443-5465,6350     out onto tl5's poly column from T5's south pad (its port wl_h1 there): the wire comes from bw's pad (7031,7560), the west end of wl_h1's row y 7562
 # piece hb (run 16): cdp2_w6845 west of cdp2's port
 cdp2_w6845   M  7290-7300,6842-6854  ?  onto cdp2's metal west of its pad (7335,6845) (its port cdp2_w6845 (7290,6848))
 cdp2_w6845   P  6118,6836-6858     ?   the end pad (6146,6847)'s poly row on west (it runs under eight tracks to a pad (5668,6846), whose thin metal goes on west along y 6849 to about x 5339; not drawn: lc1's band)

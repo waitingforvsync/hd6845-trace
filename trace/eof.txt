@@ -2246,11 +2246,11 @@ M 8013,16604 y17155 w=12
 # found there (run 9: the table at the end of piece isrc4, notes). bc3's ground (free).
 #
 #   eof_w16636 = NOT eof_w16737                                        (the cell's own inverter)
-#   eof_w17124 = NOT((eof_w16737 AND eof_w16778) OR eof_w16950)        (upper unit, tl1_ua)
-#   eof_w16950 = NOT(rst_a OR (eof_w16778 AND eof_w16636) OR eof_w17124)   (lower unit, tl1_ub)
-# A transparent latch, open while eof_w16778 is high: eof_w17124 is then NOT eof_w16737, and
+#   eof_w17124 = NOT((eof_w16737 AND ck_out) OR eof_w16950)        (upper unit, tl1_ua)
+#   eof_w16950 = NOT(rst_a OR (ck_out AND eof_w16636) OR eof_w17124)   (lower unit, tl1_ub)
+# A transparent latch, open while ck_out is high: eof_w17124 is then NOT eof_w16737, and
 # rst_a high clears the lower node. Both latch equations rest on the cells' load ties (?), like
-# every copy. eof_w16778 is ck_out: the track is drawn on to ck_out's pad (8424,17908) by piece
+# every copy. ck_out is ck_out: the track is drawn on to ck_out's pad (8424,17908) by piece
 # en17 (run 30), which holds the two names with an @alias.
 # Views r29_*.png in cache/scratch/eof/; survey.md, run 29; notes, piece lat17.
 #
@@ -2289,7 +2289,7 @@ P 8170,16808:8204,16838
 C 8186,16823
 P 8195,16812:8275,16833
 N P 8240,16823 eof_w17124
-# ---- the two enable rows (eof_w16778): each from a pad with a contact on the track x 8229,
+# ---- the two enable rows (ck_out): each from a pad with a contact on the track x 8229,
 # (8229,16779) and (8227,16994) (ring and bright centre in both chips, hole in the clean shot:
 # r29_k778.png, 7x, four shots; textmap.py 8205 16968 8255 17016 3 --acid). The track ends
 # north on the upper pad: between its ring and the corner of the metal that comes down x 8229
@@ -2304,7 +2304,7 @@ P 8212,16978:8247,17010
 C 8227,16994
 P 8240,16984:8275,17004
 M 8229,16779 y17030 w=13
-N M 8229,16900 eof_w16778
+N M 8229,16900 ck_out
 # ---- the data (eof_w16737): the cell's gate row y 16727-16745 runs west in the open (orange in
 # both chip-2 shots) to the track x 8229 (the other net's), turns north under it as a column
 # x 8224-8242 (cream in the clean shot, y 16553-16745; no hole and no ring on the track: no
@@ -2321,7 +2321,7 @@ N P 8233,16650 eof_w16737
 N P 8300,16638 eof_w16636
 N P 8285,16954 eof_w16950
 
-# Piece en17 (run 30, 2026-11-21): the enable track of the latch lat17 (eof_w16778) on south
+# Piece en17 (run 30, 2026-11-21): the enable track of the latch lat17 (ck_out) on south
 # from its port (8229,17030) to ck_out's pad (8424,17908): the latch's enable is ck_out. Wiring
 # only, one thin metal of 1,390 px in five legs, no pad and no contact on the way.
 # r30_a1.png (1.75x, metal + clean, all traces), r30_c1.png (5x, four shots: the corner
@@ -2351,7 +2351,6 @@ N P 8285,16954 eof_w16950
 # (R 48-100, like the bars at y 17721-17724 where the leg crosses the next row's edge): the
 # south edge of eof_w17168's poly row beneath, not a gap (Ambiguity 110).
 M 8229,17030 y17390 x8143 y17693 x8425 y17866 w=12
-@alias ck_out eof_w16778
 
 # Piece dinv17 (run 30, 2026-11-21): the inverter that drives the latch lat17's data, between
 # the two latch copies under column A's VSS rail (x 8262-8516, y 16447-16594; bc3's ground,
@@ -2433,9 +2432,9 @@ P 8419,16497:8507,16561
 # and its wires.
 #
 #   eof_w16029 = NOT bc1_g6_out                                          (the cell's own inverter)
-#   eof_w16215 = NOT((bc1_g6_out AND eof_w16172) OR eof_w16345)          (upper unit, tl1_ua)
-#   eof_w16345 = NOT(rst_a OR (eof_w16172 AND eof_w16029) OR eof_w16215) (lower unit, tl1_ub)
-# A transparent latch of tl1's build: open while eof_w16172 is high, eof_w16345 then follows the
+#   eof_w16215 = NOT((bc1_g6_out AND eof_w16040) OR eof_w16345)          (upper unit, tl1_ua)
+#   eof_w16345 = NOT(rst_a OR (eof_w16040 AND eof_w16029) OR eof_w16215) (lower unit, tl1_ub)
+# A transparent latch of tl1's build: open while eof_w16040 is high, eof_w16345 then follows the
 # data bc1_g6_out, and rst_a high clears it. Both equations rest on the cells' load ties (?).
 # findcell (clean shot): tl1_ua 5729,11669 (0.73), tl1_ub 5729,11669 (0.74): the lower copy
 # (piece lat17, run 29) + (0,-607). Overlays r30_l1.png, r30_l2.png (2.7x, clean and chip-2
@@ -2465,7 +2464,7 @@ C 8468,16370
 P 8214,16090:8247,16138
 P 8240,16120:8275,16138
 N P 8229,16125 bc1_g6_out
-# ---- the two enable rows (eof_w16172): each from a pad with a contact on the track x 8229,
+# ---- the two enable rows (eof_w16040): each from a pad with a contact on the track x 8229,
 # (8229,16172) and (8227,16387) (ring and centre in both chips, hole in the clean shot:
 # eof_cchk -21, 193 / 193 and -14, 148 / 146; r30_w1.png). The track ends north on the upper
 # pad: between it and the data's pad 57 px without metal in either chip, open ground in the
@@ -2480,7 +2479,7 @@ P 8212,16371:8247,16403
 C 8227,16387
 P 8240,16377:8275,16397
 M 8229,16172 y16425 w=13
-N M 8229,16250 eof_w16172
+N M 8229,16250 eof_w16040
 # ---- the upper node (eof_w16215): the row of piece dinv17 from the pad (8140,16215) on into
 # the cell's node box.
 P 8262,16207:8282,16226
@@ -2489,7 +2488,7 @@ N P 8300,16031 eof_w16029
 N P 8285,16347 eof_w16345
 
 # ============================================================================================
-# Piece en18 (run 31, 2026-11-21): the enable of the latch lat18, eof_w16172, from the port
+# Piece en18 (run 31, 2026-11-21): the enable of the latch lat18, eof_w16040, from the port
 # (8229,16425) on. Wiring only, no uncertain item. The net is also the enable of column B's
 # first latch lat15 (eof_w16040): ONE NET, held by the alias below. Every end found is a gate;
 # the driver is not found.
@@ -2508,7 +2507,6 @@ N P 8285,16347 eof_w16345
 # tools/eof_cchk.py and tools/textmap.py at every candidate and pad; views r31_a2/a3 (the
 # pad (8382,17862)), r31_b1/b2 (the pad (8098,17908)), r31_c1 (7555,17951), r31_d1 (7141,
 # 15437), r31_d2/d3 (the row at bc1's rail), r31_f1 (the row to (8643,17865)).
-@alias eof_w16040 eof_w16172
 # ---- the metal from the port to its west end pad. Legs: x 8229 (bars over dinv17's gate row
 # and lat17's data row; from y 16553 to 16745 lat17's data column lies under it, no contact:
 # run 29), y 16738 (bars x 8162-8172, 8215-8223: the east edge of Ambiguity 32's area and
@@ -2582,11 +2580,11 @@ C 7141,15437
 # y 15493-15515 under the rail (bc1's unit, not drawn: port at x 7290).
 P 7135,15445:7155,15489
 P 7135,15471:7290,15489
-N P 7200,15480 eof_w16172
+N P 7200,15480 eof_w16040
 
 # ============================================================================================
 # Piece cap18 (run 31, 2026-11-21): the device on the poly of the pad (8098,17908), x 8172-
-# 8560, y 17930-18005 (bc3's ground, free). One transistor: its gate is eof_w16172, one end
+# 8560, y 17930-18005 (bc3's ground, free). One transistor: its gate is eof_w16040, one end
 # is on VCC by a diffusion wire, the other end is a closed diffusion box whose metal contact
 # lies under a metal island that also covers the gate and has no metal leaving it. No contact
 # from the island to the gate poly is seen (no ring, no hole, no pale patch over the gate in

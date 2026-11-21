@@ -15,14 +15,14 @@
 7130,8795:7480,15000   route  latch D enable down the field | ck_out (the enable of the latch that makes the row counter's step, also the gate line of the top-centre latch) on one metal track from the corner pad north of the datapath's row A to the bottom-centre logic, without a tap
 7530,9430:7600,11145   route  NAND input from column 0's foot | bus_eq_r15: a poly row, a pad, a metal track south to a diffusion pad whose diffusion runs east under column 0's ground rail
 6700,10400:6790,15000   route  R4's latched match to the row counter's step logic | bd1_n2: one metal track up the field with one step (y 13247), from the bottom bus field to the track that leads to the inverter making rcs_e3
-6745,10400:6915,15000   route  a through line and the reset to the light pen flag | busl_x6820 (ends not read) and rst (was busl_x6906), on either side of the long line S: no connection in the field; rst goes on south to the gate that clears the light pen flag
+6745,10400:6915,15000   route  a through line and the reset to the light pen flag | busl_x6820 (ends not read) and rst (was rst), on either side of the long line S: no connection in the field; rst goes on south to the gate that clears the light pen flag
 6440,10400:6745,15000   route  R12 and R13 read selects up the field | rsel12_buf and rsel13_buf: two metal tracks from the bottom bus to the read gates of the central datapath's rows E and F, nested Ls at y 12984-13028 and y 12097-12141
 6430,13725:7550,13885   route  R12 and R13 selects into the selector's NOR | one pad on each track (6452,13854), (6495,13744) and a poly row east to the gate that makes cdp4_rst = NOR of the six read selects R12-R17
 5090,10400:5930,10950   route  left-centre crossing rows, staircase | lc3_e9577..e9793: six diagonal metals from the left-centre logic turn south and step west in a nest of Ls; the sixth hops in poly under the fifth's arm
 5090,10950:5335,15000   route  six through lines down the west side | lc3_e9577..e9793 on six tracks, no tap in the field; they run on south to the lower rows of the left array
 4805,10590:5560,10725   route  reset inverse and counter clear, poly rows west | rst_n and lc2_w8450: two polys from the left-centre logic, each by a diagonal to a row under the supply branch and a pad at the top of a track
 4805,10650:4925,15105   route  reset inverse down the west edge | rst_n on the track x 4909 to the pad (4909,15087) and the row y 15088 east into the wide inverter of the gate group below (bl0_w15412 = NOT rst_n); lc2_w8450 on the track x 4822 south out of the field
-6870,13400:7010,15000   route  two foot rows' tracks | busl_x6949 and busl_x6992: from the pads of the poly rows y 14870 and y 14827 north, one step east each (y 13421, y 13463); no connection in the field
+6870,13400:7010,15000   route  two foot rows' tracks | tl6_p6187 and tc2_m6404: from the pads of the poly rows y 14870 and y 14827 north, one step east each (y 13421, y 13463); no connection in the field
 6935,8780:7190,13400    route  the same two lines north | tracks x 6949 and x 6992 to the diagonal bundle and its pads (7121,8797), (7163,8842)
 7100,7150:7190,8860     route  the same two lines, poly hop and north | a poly column under the staircase metals, a second pad, and a metal north to end pads (7120,7214), (7165,7170) on poly rows that go west
 6865,14810:7550,14890   route  foot rows y 14827, y 14870 | poly rows from the bus of the bottom-centre logic to the pads of the two tracks
@@ -32,7 +32,7 @@
 6215,6350:7225,8820     route  rcs_mv out of the top-left logic | the poly column x 6237 south under ten metals to a pad (6232,6911), a metal east along y 6913 and south on x 7208, a poly hop under the staircase metals
 7325,6400:7545,8820     route  tc2_r5718 from the top-centre logic | one metal south (x 7533, x 7511, west along y 7453, x 7360) to a pad, a poly hop under the staircase metals
 7405,8845:7595,8882     route  third line's row from under column 0's rail | a poly row y 8863 from the east (under the wide rail, uncertain there) to the pad (7423,8863)
-6265,10400:6660,14500   route  latch D's data and two more lines: bundle lines 11-13 | lc1_w7780, busl_x6559, busl_x6603: three more lines of the staircase bundle inside rcs_e4's (arms y 11923-12010 and y 12813-12899), onto the pads of the rows y 14480, 14437, 14393
+6265,10400:6660,14500   route  latch D's data and two more lines: bundle lines 11-13 | lc1_w7780, tl6_p6143, busl_x6603: three more lines of the staircase bundle inside rcs_e4's (arms y 11923-12010 and y 12813-12899), onto the pads of the rows y 14480, 14437, 14393
 6350,14380:7550,14495   route  foot rows y 14393, 14437 and y 14480's west part | poly rows from the three lines' pads east: two toward the bus of the bottom-centre logic, the third to a pad (7057,14480)
 7045,14465:7180,15235   route  latch D's data out of the field | from the pad (7057,14480) a metal south (x 7058, jog y 14588, x 7100) to a pad (7100,15175) and a poly row y 15218 east
 6590,8255:6925,10400    route  the same three lines north of the field | tracks x 6602, 6646, 6689 (arms y 9886-9970), diagonals, pads, poly columns under the staircase metals, second pads
@@ -54,7 +54,7 @@
 4950,10645:5022,15000    power  VCC metal down the west side | a wide metal from the band south down the whole left bus field, over nineteen rows without a contact
 4640,10590:4805,10705    power  VSS rail foot, west | the left-centre logic's west ground rail turns west and south at its foot toward the left array's east edge
 7380,14020:7560,15000    power  VSS metal over the foot rows | from the plate at the foot of the central datapath's column 0 ground rail a wide metal south over the rows of the bottom-centre bus, a second plate, and on south; no contact in the field
-5440,6345:6210,6980      route  latch data from the counters' band H1, poly column and row | tl5_w3461 (the data of latch a of the top-left logic's fifth strip): poly column x 5454 south under nine metals, a diagonal, the row y 6954 east to a pad
+5440,6345:6210,6980      route  latch data from the counters' band H1, poly column and row | wl_h1 (the data of latch a of the top-left logic's fifth strip): poly column x 5454 south under nine metals, a diagonal, the row y 6954 east to a pad
 6180,6945:7045,7560      route  the same line, metal east and south | metal along y 6957 over five poly columns to a corner (7034,6957), south over six rows onto the west end pad of the line from the band H1 above the counters (wl_h1)
 6115,6825:7305,6870      route  through line of the logic left of the R-row cells, west part | cdp2_w6845: metal along y 6848 from the pad (7335,6845) west over seven poly columns to an end pad (6146,6847); its row goes on west
 6155,6695:7415,6825      route  a second line north of it | busl_y6805: from an end pad (6189,6716) south and east along y 6805 to a pad (7380,6802); neither end identified

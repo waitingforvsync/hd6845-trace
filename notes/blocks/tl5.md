@@ -27,8 +27,8 @@ In the equations below `tl4_w4068` is the net the extraction prints as `tl4_w406
 ```
 tl5_w2722 = NOT tl4_w3113                                            marked: the load's tie (`?`); the pull-down is firm
 tl5_w3245 = NOR( tl5_w4160, tl5_w3550 )                              firm
-tl5_w3364 = NOT tl5_w3461                                            firm
-tl5_w3550 = NOT( tl5_w3461 AND tl5_w3505  OR  tl5_w3680 )            marked: the load ties (`?` in tl1's cells)
+tl5_w3364 = NOT wl_h1                                            firm
+tl5_w3550 = NOT( wl_h1 AND tl5_w3505  OR  tl5_w3680 )            marked: the load ties (`?` in tl1's cells)
 tl5_w3680 = NOT( rst_a  OR  tl5_w3505 AND tl5_w3364  OR  tl5_w3550 )   marked likewise
 tl5_w3841 = NOT tl5_w3680                                            firm
 tl5_w4027 = NOT( tl5_w3680 AND tl4_w4068  OR  tl5_w4160 )            marked
@@ -43,7 +43,7 @@ tl5_w4937 = NOT tl4_w4068                                            marked like
 - **The top inverter** (y 3040-3150), a wide rail gate (122/19) with a strong load: its input
   `tl4_w3113` comes in on the north row y 2855 and T8, its output `tl5_w2722` goes onto T3, which
   runs from the north row y 2722 south to y 6114.
-- **Latch a** (y 3343-3803): open while `tl5_w3505` is high, takes `tl5_w3461`, cleared
+- **Latch a** (y 3343-3803): open while `tl5_w3505` is high, takes `wl_h1`, cleared
   (output low) by `rst_a`. Output `tl5_w3680`, inverse output `tl5_w3550`.
 - **Latch b** (y 3820-4280): open while `tl4_w4068` is high, **takes latch a's output**
   (`tl5_w3680`: the track T8 joins a's output pad to b's data pad), cleared by the same
@@ -73,7 +73,7 @@ b not (yet) set". What any of the signals is, is not known: every track is follo
 ends inside the strip, and each leaves the strip as a row or a bus
 line (Ports), not yet joined to anything named, except latch b's enable, which is `tl4_w4068`. Known by name: `res_b` and `lpstb_b` (T1, T2,
 `trunks`') go south in the poly bus beside the clear of latches a and b (`rst_a`), the strong
-inverter's output (`tl5_w2722`) and latch a's data (`tl5_w3461`).
+inverter's output (`tl5_w2722`) and latch a's data (`wl_h1`).
 
 ## Inventory
 
@@ -248,7 +248,7 @@ those listed):
 | T4 x 5407 | y 2798-4689 | (5407,2810), (5407,4458), (5407,4677) | `tl3_e4243` |
 | T4 | y 4925-5249 | (5407,4937), (5407,5237); the speck (5407,5028) is not a contact (`pw2.png`) | `tl5_w4937` |
 | T5 x 5451 | y 2888-3257 | (5452,2900), (5452,3245) | `tl5_w3245` |
-| T5 | y 3450-5771 | (5452,3461), (5451,5759) | `tl5_w3461` |
+| T5 | y 3450-5771 | (5452,3461), (5451,5759) | `wl_h1` |
 | T6 x 5494 | y 2973-3734 | (5494,2985), (5494,3505), (5494,3722) | `tl5_w3505` |
 | T6 | y 3860-5423 | (5492,3872), (5492,4590), (5493,5411) | `c4l_gab` |
 | T7 x 5538 | from the arm at y 2769 to y 4992 | (5452,2767), (5538,3982), (5538,4200), (5538,4980) | `tl4_w4068` |
@@ -414,7 +414,7 @@ it joined; `g_f.png` 4x in both stripped shots). The pad's own poly runs south f
 | 5281 | `tla`'s line (drawn there) | `rcs_e4` |
 | 5365 | T3's south pad (5363,6108) | `tl5_w2722` (the strong inverter's output) |
 | 5412 | the row y 5761 | `bd1_n2` |
-| 5453 | T5's south pad (5451,5759) | `tl5_w3461` (latch a's data) |
+| 5453 | T5's south pad (5451,5759) | `wl_h1` (latch a's data) |
 | 5497, to y 6238 only | the row y 5717; east along y 6228-6248 out of the strip | `rcs_mv` |
 
 Seen: `h_rc_acid1b.png`, `h_rc_metal.png` (4x: the two corners under the rail, nested, 24 px of
@@ -573,7 +573,7 @@ lies outside it).
 | `res_b` | poly | (5182-5202, 6350) | in | bus line x 5193 from `trunks`' pad |
 | `lpstb_b` | poly | (5227-5247, 6350) | in | bus line x 5237 from `trunks`' pad |
 | `tl5_w2722` | poly | (5355-5375, 6350) | out | the strong inverter's output: bus line x 5365 from T3's south pad |
-| `tl5_w3461` | poly | (5443-5463, 6350) | in | latch a's data: bus line x 5453 from T5's south pad |
+| `wl_h1` | poly | (5443-5463, 6350) | in | latch a's data: bus line x 5453 from T5's south pad |
 
 ## Ambiguities
 
@@ -704,4 +704,4 @@ From `tl6`: latch c's outputs reach `ras_o0_alt2` (through its inverter) and `tc
 
 ## Corrections (coordinator, from the handoffs of `busl` run 16, 2026-11-21)
 
-- T5 / port `tl5_w3461` ("latch a's data: from T5's south pad"): the wire's other end is `bw`'s pad (7031,7560): the net is `wl_h1`, the line from the poly band H1 above the mid-right array's counters (`busl`, piece `ha`; firm; the rename waits for a refresh).
+- T5 / port `wl_h1` ("latch a's data: from T5's south pad"): the wire's other end is `bw`'s pad (7031,7560): the net is `wl_h1`, the line from the poly band H1 above the mid-right array's counters (`busl`, piece `ha`; firm; the rename waits for a refresh).

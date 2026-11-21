@@ -921,3 +921,30 @@ The plate is one poly with row 2 of the lower series gate left of rows B, so the
 equations: that `cdp2_b_hl` is a gate at all (NOT(OR over s3..s7 of (`cdp2_b_s#_p1` AND `cdp2_b_s#_y`))),
 and that `cdp2_w7272` = NOT(`cdp2_b_hl` AND `cdp2_b_s7_x`). **Adopted: tied** (the tracer's reading; a depletion load's gate
 is normally tied to its output node). What would settle it: the box at 6x in all four shots.
+
+## AMB-049: the neck between the tracks x 8013 and x 8056 (2026-11-21)
+
+Proposed by `eof` (Tom Seddon, run 29, piece `in207`; the block's Ambiguity 102). x 8025-8050, y 16609-16619.
+Candidate readings: (a) one metal, the bundle's outermost L with a thin neck, so gate B of the NOR that
+makes `eof_w17338` is `bc1_dec01_n`; (b) two metals ending 25 px apart, both without a contact. For (a): a
+band 9-10 px tall in both metal shots with its own lower edge line, absent at a control column; chip 2
+without a gap; the clean shot protected under it; the chip-2 stripped shot's ghost unbroken; the next two
+lines of the bundle step by the same kind of L. Against: chip 1's dark notch 6 px wide at x 8046-8051; the
+arm thinner than the tracks and dimmer than the ground in chip 2. **Adopted: (a)**, drawn `?M`, names held
+by `@alias bc1_dec01_n eof_w17207`. Rests on it: which decode line of `bc1` selects DISPTMG's delayed term.
+Would settle it: a sharper metal shot, or the logic (each of `bc1`'s decode lines reaching one gate of
+this group). Looked at by the coordinator at 6x in both metal shots (`cache/scratch/refresh/h9_neck.png`):
+the reading is as described; it does not decide it.
+
+## AMB-050: the two ties of each unit of `bc1`'s west gate column (2026-11-21)
+
+From `eof` runs 32-35 (Tom Seddon; the block's Ambiguities 120/121, 125/126, 131/132, 133/134). Four units
+under the rail x 7294-7342 (`eof_w15523`, `eof_w15781`, `eof_w15262`, `eof_w15128`) are each drawn with two
+uncertain items: the load's tie (`?B`, as every load of the build) and the tie at the node's exit (`?D` /
+`?B`), where the node's diffusion band ends against the corner of a heavy-framed box with a pale centre from
+which a poly row leaves west. Both metal shots show the box; the clean shot is inverted there (trap 28), so
+how the active area gets under the poly is not seen. **Adopted: buried contacts** (the band has no other
+end, the row no other driver; the reviewer of run 34 measured the pilot cell's accepted buried contact as a
+control: the same 12 px dark line and plain centre). Rests on it: all four equations, and so the chain from
+`rcs_e4`, `lc1_w7780`, `rcs_mv` and `rst_n` onward. Would settle it: a sharper shot, or the next units'
+logic making sense with these inputs.

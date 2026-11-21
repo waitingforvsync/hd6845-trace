@@ -1,7 +1,7 @@
 # tl5: top-left random logic, fifth strip (gate column east of RB and its bus field)
 4960,3040:5600,3142   logic    strong inverter at the top of the column east of RB | tl5_w2722 = NOT tl4_w3113; input from the north row y 2855, output onto the track x 5364 (y 2722-6114)
 4967,3142:5645,3352   logic    NOR east of RB | tl5_w3245 = NOR(tl5_w4160, tl5_w3550): latch b's output and latch a's inverse output; out north on the track x 5451
-4967,3343:5600,3803   logic    latch a east of RB | tl5_w3680 = NOT(rst_a OR tl5_w3505 AND NOT tl5_w3461 OR tl5_w3550): open while tl5_w3505 is high, data tl5_w3461, cleared by rst_a; a mirrored copy of tl1's latch
+4967,3343:5600,3803   logic    latch a east of RB | tl5_w3680 = NOT(rst_a OR tl5_w3505 AND NOT wl_h1 OR tl5_w3550): open while tl5_w3505 is high, data wl_h1, cleared by rst_a; a mirrored copy of tl1's latch
 4967,3820:5645,4280   logic    latch b east of RB | tl5_w4160: open while tl4_w4068 is high, data latch a's output tl5_w3680, cleared by rst_a
 4967,4297:5683,4757   logic   latch c: field flip-flop candidate | the wire `tl5` called w4633 (tcw_c, the true output; both row address bit 0 sources in interlace sync-and-video come from it): open while tl3_e4243 is high, data tcw_m6320, cleared by c4l_gab; both outputs leave east
 4951,4786:5683,4912   logic    inverter east of RB | ras_o0_alt2 = NOT tl5_w4503; both on rows that leave east
