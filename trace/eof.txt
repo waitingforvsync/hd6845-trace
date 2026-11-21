@@ -2203,3 +2203,35 @@ P 8450,17142:8505,17237              # the plate
 ?P 8424,17214:8456,17237
 ?D 8414,17180:8434,17236
 ?B 8410,17198:8446,17240
+
+# ======================================================================================
+# Piece in207 (run 29, 2026-11-21): eof_w17207, gate B of the NOR that makes eof_w17338 (piece
+# n338), followed north from its port (8013,17150): it is bc1's bc1_dec01_n (bc1's gate 5
+# output, `M 8198,15823 x8143 y16170 x8056 y16300`). Wiring only; bc3's ground (free). The
+# track x 8013 runs 545 px north to a rounded head at (8013,16610), with no pad and no contact
+# on the way; from the head a thin arm (9-10 px, y 16609-16619) runs 25 px east to the foot of
+# the track x 8056, which runs north to bc1's end at (8056,16300): the outermost of the nested
+# Ls by which the bundle steps (the next two are bc1_g6_in's, y 16645, and rst_a's, y 16697).
+# Views r29_*.png in cache/scratch/eof/; survey.md, run 29; notes, piece in207 and Ambiguity 102.
+#
+# the track x 8056, y 16300-16618: one metal (tl5_tracks.py v 8056 16280 16625: bars of 9-11 px
+# at the edges of rst_a's row y 16294-16312, which piece isrc4 read as no contact, and nothing
+# else; the clean shot's pink strip unbroken, no pad: r29_t56.png, 2.5x, three shots). At
+# y 16604-16609 it crosses the dark bar of an edge beneath (the same bar at x 8085, beside it).
+M 8056,16290 y16618 w=13
+N M 8056,16450 bc1_dec01_n
+# the arm (the neck of the L): both metal shots show a band y 16609-16619 between the head and
+# the foot, brighter than the ground south of it, with its own lower edge line (y 16618-16620,
+# x 8026-8068; absent at the control column x 8085; no edge there in the clean shot), and the
+# chip-2 stripped shot a ghost band between two dark lines. Chip 2 has no gap in it (red
+# 114-192); chip 1 has a dark notch 6 px wide at x 8046-8051 between arm and foot (red 62-70).
+# Neither end has a contact (no ring, no pad), so each line's only way on is the other. Drawn
+# uncertain because of chip 1's notch and because it joins two packages' names (trap 17).
+?M 8054,16614 x8016 w=9
+# the track x 8013, y 16604-17192: one metal (tl5_tracks.py v 8013 16540 17215: one bar of 9 px
+# at y 16776-16785, the south edge of the diffusion-coloured area of Ambiguity 32, dark across
+# every track there). No contact: the follower's candidates are a nick on chip 2's west edge
+# with chip 1 dim 15 px higher (8012,16948), and a blemish of chip 1 at y 16806-16824 where
+# chip 2 is whole (textmap.py 7986 16924 8042 16972 3 --acid, 7986 16770 8042 16836 3).
+M 8013,16604 y17155 w=12
+@alias bc1_dec01_n eof_w17207
