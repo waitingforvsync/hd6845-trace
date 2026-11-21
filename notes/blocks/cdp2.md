@@ -23,6 +23,12 @@ the most significant of the five compared bits, s7 the least.**
 
 ## Status
 
+- **Run of 2026-11-20 19:10 -0600**: **piece `wn`** (wiring, 3,100 px, no uncertain item): the two metals of the upper
+  series gate followed north to their ends. `cdp2_w7092` (the gate's output) ends on a pad (8290,5327)
+  whose poly row goes east (port: a gate in the logic at y 5300-5350, undrawn). `cdp2_w7128` (its row 1)
+  comes from a contact (8705,4810) on a diffusion land in the logic north of the datapath's first row
+  (port: `cdp1`'s undrawn slice-0 logic).
+
 - **Run of 2026-11-20 18:57 -0600**: **piece `gh`, the load of the comparator's line `cdp2_b_hl`** (x 8578-8745,
   y 7352-7432; 1 transistor, one uncertain item, the load's tie; reviewed: round 6, no finding that changes a connection). `cdp2_b_hl`'s metal x 8715-8735 ends on a
   diffusion that a poly plate parts from a contact to the VCC metal x 8594-8644: a depletion load
@@ -507,6 +513,23 @@ cdp2_b_hl  = NOT( OR over s3..s7 of (cdp2_b_s#_p1 AND cdp2_b_s#_y) )
 
 Without the tie the plate would be a pull-up gated by an undriven poly, and the line would have no load
 anywhere: the tie is the only reading that makes a circuit, but the box's inside cannot be seen.
+
+### Piece `wn`: the upper series gate's two metals, north (2026-11-20; traced, wiring only)
+
+`cdp2_w7092`: the thin metal x 8283-8297 runs north from the pad (8290,6997) without a break
+(`tl5_tracks.py v 8290 5345 6975`: bars of 14 px or less; one stretch of 40 px at y 5682-5722 fails the
+test in both chips: on a view the metal is there, dimmer, with one edge bar at y 5683-5690 and no ring or
+widening: `cache/scratch/cdp2/y3.png`, 7x) to a pad (8290,5327) (ring and bright centre in chip
+2, a hole in the clean shot, weaker centre in chip 1: `textmap.py 8270 5306 8312 5346 3`; view
+`cache/scratch/cdp2/y1.png`), whose poly row y 5316-5336 goes east (drawn 40 px: port).
+
+`cdp2_w7128`: the metal x 8676-8690 runs north from the pad (8680,6324) (`tl5_tracks.py v 8684 4910 6300`:
+bars of 13 px or less; at y 5456-5510, the follower's candidate, the metal narrows beside a second
+bright stripe and has no ring: `textmap.py 8664 5456 8706 5512 3`), steps east by a short diagonal at
+y 4866-4890 (`textmap.py 8668 4838 8722 4906 4`: one metal, x 8676-8712 wide at the step) and ends on a
+contact (8705,4810) (ring and bright centre in both chips, a hole in the clean shot: `textmap.py 8684
+4790 8728 4832 3`) on a diffusion land (8690-8726, 4782-4838; view `cache/scratch/cdp2/y2.png`). So the
+upper gate's first input is the output node of something in the logic north of the datapath there.
 
 ## Ports
 

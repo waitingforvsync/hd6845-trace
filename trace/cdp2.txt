@@ -659,7 +659,7 @@ B 8296,7126:8324,7150
 P 8286,7008:8305,7068                 # the plate's poly north: the gate's output,
 P 8273,6980:8308,7015                 #   to a pad
 C 8290,6997
-M 8290,6940 y6997 w=14                 # a thin metal from the north ends on it (port)
+M 8290,5327 y6997 w=14                 # a thin metal from the north ends on it (piece wn: from a pad (8290,5327))
 N M 8290,6950 cdp2_w7092
 # the unused output box east of the column
 D 8444,7079:8460,7096                 # arm
@@ -681,7 +681,7 @@ C 8508,6325
 P 8508,6314:8680,6334                 # its poly row east to a second pad
 P 8662,6306:8698,6342
 C 8680,6324
-M 8683,6270 y6324 w=14                 # a metal from the north ends on that pad (port)
+M 8683,6270 y6324 w=14                 # a metal from the north ends on that pad (piece wn: from a contact (8705,4810))
 N P 8600,6324 cdp2_w7128
 
 # ---- piece gh: the load of the comparator's line cdp2_b_hl (x 8578-8745, y 7352-7432)
@@ -703,3 +703,16 @@ D 8695,7358:8715,7386                 # tab of the line's diffusion north
 P 8690,7355:8712,7372                 # the plate's corner on it
 ?B 8688,7352:8716,7376
 @alias cdp2_b_hl cdp2_w7344            # the placeholder of the earlier merge (it occurs in the coordinator's files)
+
+# ---- piece wn: the two metals of pieces gu's nets on north to their ends (wiring)
+# cdp2_w7092: the thin metal x 8283-8297 runs 1,670 px north from the pad (8290,6997) to a pad
+# (8290,5327), whose poly row goes east (port).
+P 8272,5310:8307,5345
+C 8290,5327
+P 8290,5316:8330,5336                 # its poly row east (port at x 8330)
+# cdp2_w7128: the metal x 8676-8690 runs 1,430 px north from the pad (8680,6324), steps east by a
+# diagonal at y 4866-4890 to x 8699-8713 and ends on a contact (8705,4810) to a diffusion land in the
+# logic north of the datapath's first row (port: the land's diffusion goes on).
+M 8683,6324 y4890 8706,4866 y4810 w=14
+D 8690,4782:8726,4838
+C 8705,4810
