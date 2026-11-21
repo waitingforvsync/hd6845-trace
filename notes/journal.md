@@ -2990,3 +2990,39 @@ comparator and use are not identified.
 floor-plan blocks (looked at the bottom-centre logic and the left bus field's north part,
 `cache/scratch/refresh/fp13_bc.png`, `fp13_busl.png`: numbered labels, no overlap). Coverage: 70.4%
 traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
+
+## 2026-11-21 11:19  Floor plan: a sweep of the labels
+
+At the user's request, every label of `floorplan.txt` and `floorplan.d/` was checked against what is now
+established, and about 110 were renamed (commits 1a0292d and after; no coordinate changed). The rules
+asked for: name a block by its function where the trace gives one; drop the datapath's row and channel
+letters where the register is known; drop a '?' where the reading is now firm. What was done:
+
+- **The 4-bit counter of the left array is the VSYNC width counter** (its outputs are compared with
+  R3 bits 4-7, the vertical sync width, by `amr`'s firm joins); its clock generator, its L3 line's latch
+  and driver in `tl4`, and four descriptions say so.
+- The central datapath's registers by number: R12 (its read path is firm, so the '?' goes), R13, R14,
+  R15, R16 and R17 as the light pen register's high and low parts, the cursor match (the NAND of the R14
+  and R15 comparators), the NOR of the read selects R12-R17, the R16/R17 latch strobe in `bc1`; the
+  left bus field's routes of R13's outputs and of the lines compared with R14 and R15.
+- The top-left logic by the nets its blocks drive (from the extraction): the two R9-match latches and
+  their enable, the step term `rcs_e4`, `rcs_e3`, the step condition latch and inverter, step input
+  a2, the R5-match latch (latch A) and the latch that gates R5's match, latch C into `rcs_mv`, the
+  clock inverters, `tl5`'s latches by their data and enables; the RA0 source select in `tc1`.
+- The bottom-centre logic: DISPTMG's terms 1 and 2 and its two latch pairs, the NOR column under `bc1`'s
+  rail by output; the left-centre ripple counter's five stages by the names of `notes/operation.md`.
+- '?' removed from `eof`'s four routes of the latched R4 match (the 4,600 px between are drawn by
+  `busl`'s piece `n2`), from the crossing field west of the datapath and from the diagonal fan.
+- Three coarse blocks of `floorplan.txt` that fragments now replace were removed (strip 3's rows above
+  y 2890, inverter U1, the gates below the column west of R14); "logic beside the large cells (row A)"
+  is now the untraced gate cluster beside R14 (AMB-047, R51).
+- Descriptions: R10 and R11 "not yet established" corrected (their write strobes, firm joins).
+- `notes/operation.md`: one stale sentence corrected (the join of the latched R4 match up the left bus
+  field "drawn by no one": `busl` has drawn it).
+
+Kept as they are, for want of a function: the datapath's channels B, G and 2, `cdp1`'s rows D and E,
+`larr`'s untraced columns, `tcw`'s gate column, the top-right gate rows, and the gate names of
+`tc1`'s column (they already carry their equations). `eof` run 36 (merged during the sweep) added two
+inverters on the NOR column's output; their labels were brought into line in the merge. Its handoff
+is not applied yet. `out/` rebuilt: 2,474 nets, 4,648 transistors, 0 errors, 0 warnings, 833 floor-plan
+blocks.
