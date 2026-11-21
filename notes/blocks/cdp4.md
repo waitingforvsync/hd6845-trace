@@ -37,6 +37,13 @@ pad, hops in poly under the vertical trunks, climbs a diagonal to its row, and h
 rails; no tap on the way. With every file loaded: 2517 nets, 4796 transistors, 0 errors, 0 warnings. See
 "The read bus, east" under Logic.
 
+Run 6 (2026-11-21 14:48 -0600): **the read bus, columns 1-7, from x 16000 to their turn north** (wiring only, 13 pads with
+contacts, seven poly columns, no transistor, no uncertain item): each row ends on a pad, a poly column goes
+north under the bundle of horizontal metals, and columns 2-7 step east and come up on six metal tracks
+x 16580-16798 that go on north; column 1's column runs into a gate group at about (16060-16230,
+17290-17480). With every file loaded: 2517 nets, 4796 transistors, 0 errors, 0 warnings. See "The read
+bus, the turn north" under Logic.
+
 Not traced: the rest of the wiring right of x 10600 (the two thin metals x 10809 and x 10853, the rails'
 ends) and below y 14060.
 
@@ -373,6 +380,44 @@ north by the same kind of route to its inverter. Each line, from its port of run
   (16148,17777), column 2's at (16516,17820), and columns 3-7 turn north at corners x 16558, 16602, 16646,
   16690, 16732; `regs`' inverter output (NOT column 0) runs east on the row y 17735 just above.
 
+### The read bus, the turn north (run 6, 2026-11-21; traced)
+
+East of x 16000 the seven rows fan into a staircase:
+
+| K | row y | corner | end pad (contact) | poly: column x, arm y, column x | top pad (contact) | track north |
+|---|---|---|---|---|---|---|
+| 1 | 17777 | - | (16145,17776) | x 16148 north to y 17480 (drawn end) | - | - |
+| 2 | 17821 | - | (16513,17820) | x 16517, arm y 17470 | (16579,17473) | x 16580 |
+| 3 | 17864 | (16557,17864) | (16557,17775) | x 16560, arm y 17517, x 16626 | (16623,17427) | x 16624 |
+| 4 | 17907 | (16601,17907) | (16601,17820) | x 16605, arm y 17558, x 16671 | (16666,17473) | x 16667 |
+| 5 | 17951 | (16643,17951) | (16643,17775) | x 16650, arm y 17629, x 16711 | (16709,17427) | x 16711 |
+| 6 | 17994 | (16687,17994) | (16687,17820) | x 16693, arm y 17672, x 16758 | (16752,17473) | x 16755 |
+| 7 | 18038 | (16730,18038) | (16730,17776) | x 16735, arm y 17714, x 16802 | (16796,17430) | x 16798 |
+
+- Columns 1 and 2 run straight east onto their pads; columns 3-7 turn north at nested corners and end on
+  pads at y 17775 / 17820 (the metal overlay `ov6_m.png`).
+- **The metal row y 17729-17741 just north of the y 17775 pads is another net** (`regs`' inverter output,
+  NOT column 0) and is not joined to them: between it and each pad's ring the two metal shots read open poly
+  (155-179/91-112/44-68 in chip 2, 127-155/74-100/36-50 in chip 1 at y 17752-17760, `tools/px.py col X
+  17724 17796 4 metal,metal1` at x 16145, 16557, 16643, 16730), which is the pad's poly column going north.
+  `tools/follow.py` bridges that gap and runs columns 3 and 7 onto that row (tracing guide, trap 30).
+- **The poly columns** pass north under four horizontal metals (y about 17605, 17648, 17691 (`trunks`), 17735
+  (`regs`)) with no contact (the metals are bright over them, no ring). Each of columns 3-7 steps east on an
+  arm that lies in the gap between two of those metals (or, columns 2-4, north of them under a wide metal
+  band y 17505-17565) and goes on north to its top pad. Read in the clean shot at 3x (`z6_c.png`, `z6_c7.png`,
+  overlay `ov6_c.png`), in the chip-2 metal and stripped shots at 2x (`z6_ma.png`), and the three arms in
+  gaps by colour: `tools/px.py row Y 16630 16800 8 metal,metal1,acid1b` at y 17628, 17672, 17715 gives
+  orange poly (chip 2 about 166/113/56) from x 16646 to 16710, from x 16686 to 16762 and from x 16726 on
+  east, and field between (172/143/79), as drawn.
+- **Top pads**: six pads in two rows (y 17473 and y 17427), each with ring and bright centre in both metal
+  shots, each the south end of a thin metal track that goes north (`tools/follow.py X 17380 N --max 600`
+  runs every one to y 16780 and beyond). Drawn to y 17380 (ports).
+- **Column 1** is different: its poly column x 16139-16157 runs north beside `trunks`' metal x 16163-16178
+  (two edge lines at x 16138 and x 16156 with orange between and plain field west of it at y 17500 and
+  y 17600: `tools/px.py row`), to at least y 17480, where a gate group begins (a diffusion area x 16075-16150,
+  y 17360-17410, poly rows y 17325-17345 and y 17413-17437, a framed box at (16100-16125, 17415-17445);
+  `z6_c1t.png`). Drawn to y 17480 (port); its end is not read.
+
 ### Corner gate group: `cdp4_rst` = NOR of six select rows (run 2, 2026-11-19; traced)
 
 Region x 7550-7870, y 13640-14055, left of row D. One gate, seven transistors:
@@ -435,7 +480,8 @@ islands are closed curves inside it, so they are the other class.
 | `cdp4_ld` | poly | x 7600, y 12962; right end about x 10600 | from outside | row C latch strobe |
 | `cdp4_bus_s0`..`s7` | poly | x 7600, y 12180, 12137, 12093, 12052, 12008, 11964, 11922, 11877 | unknown | per-slice line between row R1 and the left |
 | `cdp4_bus_s0`..`s7` | poly | x 7600, y 13333, 13376, 13420, 13463, 13505, 13548, 13590, 13633 | from outside | data into the row C latch |
-| `cdp3_n_c1`..`c7` (= `cdp4_n_s1`..`s7`) | metal | x 16000, y 17777, 17821, 17864, 17906, 17951, 17993, 18039 (drawn end; each runs on east) | driven inside | the read bus of R12-R17, columns 1-7, east of the third hop (runs 4, 5) |
+| `cdp3_n_c2`..`c7` (= `cdp4_n_s2`..`s7`) | metal | y 17380, x 16580, 16624, 16667, 16711, 16755, 16798 (drawn end; each track runs on north) | driven inside | the read bus of R12-R17, columns 2-7, north toward the data bus column (runs 4-6) |
+| `cdp3_n_c1` (= `cdp4_n_s1`) | poly | x 16148, y 17480 (drawn end; the column goes on north into a gate group) | driven inside | the read bus, column 1 (runs 4-6) |
 | `cdp4_n_s0` | poly | x 10850, y 13333 | driven inside | selector output of slice 0: on east to its pad (11200,13330) on the read bus track of column 0, drawn by `regs` (piece `n0`) |
 | `cdp4_a_s2`..`s7` = `cdp3_f_c2`..`c7` | metal | x 8511 + offset, y 11048 (the end of `cdp3`'s line f, y 11052) | from `cdp3`'s row A | selector input a (6 bits); crosses row R1 with no contact (run 3) |
 | (bus tap) | metal | x 8556 + offset, top end y 11062 | inside | `cdp4_bus_sK` up to the comparator's two gate polys (run 3) |
@@ -550,8 +596,9 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
 - Right of x 10600: (done, run 4: the n lines' contacts and the read bus tracks.) Left: the two thin
   metals x 10809 (the follower ends it at (10809,15738)) and x 10853 (to (10852,17652)), both through
   the whole field from north of y 10150; the end of the s7 VCC rail; the ninth VSS rail's end (y 13300).
-- From run 5: the read bus's seven lines east of x 16000 (ends and corners listed under "The read bus,
-  east"); the poly column x 13706-13730 under the rows.
+- From run 6: the six tracks x 16580-16798 north of y 17380 (columns 2-7); column 1's poly column north of
+  y 17480 and the gate group it enters (about x 16060-16230, y 17290-17480).
+- From run 5: the poly column x 13706-13730 under the rows.
 - From run 4: the undrawn poly from the west along
   y 18297 that turns south under column 7's corner to `rst_ck`'s pad (10900,18470) (Ambiguity 13); the
   structure of AMB-040 under and east of the tracks (the diffusion-coloured rectangle y 11919-12186,
