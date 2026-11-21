@@ -4937,7 +4937,7 @@ metal shots (chip 2 blue under 70) and everything else plain (blue 70 and more).
    the gap x 3880-3898 (red minus green +16 to +28 in chip 2's stripped shot), tan under Vm6
    (Ambiguity 198).
 
-**Drawn**: the cell `eof_yi` (eight polys, two buried contacts, six diffusion rectangles), placed
+**Drawn**: the cell `eof_yi` (eight polys, two buried contacts, seven diffusion rectangles), placed
 at the offsets of `eof_mx`. The gate row overlaps piece `pd`'s by 5 px, the load strip `larr`'s
 VCC box by 6, Y's diffusion `larr`'s band by 7, the active under the arms piece `pd`'s diffusions
 by 2 and more. Labels `eof_pdg_{}` on N and `larr_y_{}` on Y's poly. No new net name.
