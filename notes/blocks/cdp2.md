@@ -869,6 +869,16 @@ the west outline of a box (8332-8368, 5309-5347) that reads as a buried-contact 
 
 Round 8: no findings.
 
+Round 9 (full review of the join with `tc1_ns3`; fresh Fable 5.2 reviewer; 2026-11-20 19:39 -0600; commit 496a9cf; images
+`cache/scratch/cdp2/review-9/`). Checked: the metal continuous y 6380-7075 (bars of 8-12 px at the poly
+rows, nothing in the hole scan; a dark blob in the clean shot at (7665,6467) with no ring, centre or pad
+and field in the chip-2 stripped shot: a blemish); the same track throughout (row cuts every 12 px from
+y 6226 to 7060: x 7656-7669 in both chips, no jog, branch or pad; in line with `tc2`'s metal from the pad
+(7660,6193)); the metal reaching the pad (7662,7083) with no bare ground before the ring and nothing
+south of it; extraction and `sameconn.py 30c94a3` (only the two names joined and their consequences).
+
+Round 9: no findings.
+
 ## Correction from the coordinating session (2026-11-15)
 
 Channel 3 (y 7830-8030) was read in the clean shot from x 7950 to x 11040 while following
