@@ -4,6 +4,6 @@
 3400,2620:4250,2900   ?route  poly lines along the top | seven horizontal lines from the vertical bus east to a second bus field at x 4140-4420; one drawn (first input of the step gate)
 3400,5480:5860,5700   route   second crossing field | horizontal poly lines over vertical metals; rc_stepreq_n (the row counter's step request) crosses it on the poly y 5585
 5080,5830:5300,6870   route   poly bus (RES, LPSTB, the reset, rcs_x1) | vertical poly lines taking signals from the top-left logic south to the left-centre gate column (eof, 2026-11-19): tl3_w3982 (x 5063-5083), rcs_x1 (5080), rst_a (5123), res_b (5190), lpstb_b (5236); the last three go on below their pads into lc1's diagonal bundle
-5280,6850:6170,7360   ?route  diagonal fan | the five lines of the poly bus turn south-east and then east to pads at x 6130-6165, where horizontal metals take them on
+5280,6850:6170,7360  route  diagonal fan (reset copies, RES, LPSTB, latched R4 match, wl_h1) | the lines of the poly bus turn south-east and then east to pads at x 6130-6165, where horizontal metals take them on (drawn by eof and busl)
 2440,5370:3270,5640   route   poly lines under the foot of the step logic cluster | six horizontal poly lines joining the bus lines west and east of the cluster; one carries the strobe clk_tl west
 2480,7790:2850,8000   logic   clock inverter for the top-left logic | clk_tl = NOT ck_out (CLK polarity): made here, where the main clock's left-edge trunk ends, and run back north; it samples the row counter's step condition

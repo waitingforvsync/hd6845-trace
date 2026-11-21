@@ -1,7 +1,7 @@
 # bc1: bottom-centre logic, upper left part
-7520,14950:7860,15400  logic  latch strobe drivers | two strong inverters with one input: one drives cdp4_ld6 (strobe of the 6-bit latch row D), the other a twin line going up at x 7448
-7470,15400:7900,15600  logic  latch strobe NAND | 2-input NAND of two channel lines; the strobe is their AND
-8040,15060:8565,15860  logic  2-bit decoder | two bus lines (y 14832, 14873) inverted and decoded by three NANDs into active-low lines for 00, 10 and 01
+7520,14950:7860,15400  logic  R16/R17 latch strobe drivers | two strong inverters with one input: one drives cdp4_ld6 (strobe of the 6-bit latch row D), the other a twin line going up at x 7448
+7470,15400:7900,15600  logic  R16/R17 latch strobe NAND | 2-input NAND of two channel lines; the strobe is their AND
+8040,15060:8565,15860  logic  2-bit decoder (bc1_s0, bc1_s1; line 01 gates DISPTMG) | two bus lines (y 14832, 14873) inverted and decoded by three NANDs into active-low lines for 00, 10 and 01
 8170,15850:8565,15990  logic  inverter (weak load) | input from below the block, output to the gates under it
 7780,14330:8290,14890  route  13-line bus | horizontal metal lines from the left field towards the right; the two lowest drop into the decoder
 7000,14060:8200,14320  route  latch data lines | six poly lines carrying the data inputs of the 6-bit latch row D of the central datapath

@@ -8,7 +8,7 @@
 6355,4825:6373,5534    route   tc1_m6817 metal | west leg of the line, south along x 6364
 6485,5516:6545,6400    route   tc1_m6817 metal and poly | through the nest to the pad (6533,6152), poly south
 6686,4450:6755,4996    power   VCC rail through the crossing field | joins the rail of the gate columns west of the island to the rail of the bit-0 inverters
-7955,5960:8200,6302    logic   latch with a common gate line | tc2_sr_q = NOR(tc2_sr_q_n, tc2_sr_c, ck_out AND cdp1_lw1); tc2_sr_q_n = NOR(tc2_sr_q, ck_out AND tc2_sr_s); stack of five gates under and west of the ground rail, two columns and two loads east of it
+7955,5960:8200,6302  logic  latch tc2_sr_q (on ck_out) | tc2_sr_q = NOR(tc2_sr_q_n, tc2_sr_c, ck_out AND cdp1_lw1); tc2_sr_q_n = NOR(tc2_sr_q, ck_out AND tc2_sr_s); stack of five gates under and west of the ground rail, two columns and two loads east of it
 7762,6004:7955,6278    route   pads of the latch's lines | ck_out (rows A and D, joined by an L of metal), cdp1_lw1, tc2_sr_c, tc2_sr_s, tc2_sr_q
 7826,5505:7872,6050    route   cdp1_lw1 | metal from the pad (7836,5520) south to row B's pad
 7845,5504:8048,5537    route   reset line of the latch | cdp1_lw1 (the wire `tc2` called sr_r): poly from the pad (7836,5520) east under the ground rail to the pad (8031,5520)

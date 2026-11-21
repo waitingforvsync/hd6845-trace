@@ -1,11 +1,11 @@
 # tl5: top-left random logic, fifth strip (gate column east of RB and its bus field)
-4960,3040:5600,3142   logic    strong inverter at the top of the column east of RB | tl5_w2722 = NOT tl4_w3113; input from the north row y 2855, output onto the track x 5364 (y 2722-6114)
-4967,3142:5645,3352   logic    NOR east of RB | tl5_w3245 = NOR(tl5_w4160, tl5_w3550): latch b's output and latch a's inverse output; out north on the track x 5451
-4967,3343:5600,3803   logic    latch a east of RB | tl5_w3680 = NOT(rst_a OR tl5_w3505 AND NOT wl_h1 OR tl5_w3550): open while tl5_w3505 is high, data wl_h1, cleared by rst_a; a mirrored copy of tl1's latch
-4967,3820:5645,4280   logic    latch b east of RB | tl5_w4160: open while tl4_w4068 is high, data latch a's output tl5_w3680, cleared by rst_a
+4960,3040:5600,3142  logic  strong inverter tl5_w2722 (step logic, bottom-centre logic) | tl5_w2722 = NOT tl4_w3113; input from the north row y 2855, output onto the track x 5364 (y 2722-6114)
+4967,3142:5645,3352  logic  NOR tl5_w3245 (latches a and b) | tl5_w3245 = NOR(tl5_w4160, tl5_w3550): latch b's output and latch a's inverse output; out north on the track x 5451
+4967,3343:5600,3803  logic  latch a (data wl_h1) | tl5_w3680 = NOT(rst_a OR tl5_w3505 AND NOT wl_h1 OR tl5_w3550): open while tl5_w3505 is high, data wl_h1, cleared by rst_a; a mirrored copy of tl1's latch
+4967,3820:5645,4280  logic  latch b (enable tl4_w4068) | tl5_w4160: open while tl4_w4068 is high, data latch a's output tl5_w3680, cleared by rst_a
 4967,4297:5683,4757   logic   latch c: field flip-flop candidate | the wire `tl5` called w4633 (tcw_c, the true output; both row address bit 0 sources in interlace sync-and-video come from it): open while tl3_e4243 is high, data tcw_m6320, cleared by c4l_gab; both outputs leave east
-4951,4786:5683,4912   logic    inverter east of RB | ras_o0_alt2 = NOT tl5_w4503; both on rows that leave east
-4951,4916:5683,5042   logic    inverter east of RB | tl5_w4937 = NOT tl4_w4068 (latch b's enable); out south on the track x 5407
+4951,4786:5683,4912  logic  inverter ras_o0_alt2 (to the row address selector) | ras_o0_alt2 = NOT tl5_w4503; both on rows that leave east
+4951,4916:5683,5042  logic  inverter tl5_w4937 = NOT tl4_w4068 | tl5_w4937 = NOT tl4_w4068 (latch b's enable); out south on the track x 5407
 4967,2665:5600,3003   route   north rows of the fifth strip | eight poly rows from tl4's strip to the north pads of the tracks: enables, clear, the NOR's output, tl5_w4937
 5026,2665:5050,5255   route   thin metal W | tl5_w4937 = NOT tl4_w4068 from the row y 5237 north over the whole column to the row y 2685
 5210,3003:5683,5400   route   bus field of the fifth strip | tracks T0-T10 (x 5233-5667) and the rows of the three latches and the NOR; south of y 4420 three rows from the east come down T8-T10 to the rows under the foot

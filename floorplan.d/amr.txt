@@ -1,6 +1,6 @@
 # amr: R3's high nibble and its comparator (traced 2026-11-17)
 11430,5620:13050,5880  array  R3 bits 4-7 (register) | four latches (columns x 11490, 11880, 12270, 12660 = data bits 4-7) written from the data bus on wr_r3; q leaves each slice south at y 6400
-11430,5880:13050,6140  array  comparator of R3 bits 4-7 | per bit: nor = NOR(c, q), x = c XOR q, against the 4-bit counter c4l0-c4l3 of the left array (believed the vertical sync width counter: it is held at 0 while tl4's latch drives c4l_l3); output amr_eq_r3 runs 12,000 px west to tla's selector
+11430,5880:13050,6140  array  comparator of R3 bits 4-7 | per bit: nor = NOR(c, q), x = c XOR q, against the VSYNC width counter c4l0-c4l3 of the left array (R3 bits 4-7 are the vertical sync width; the counter is held at 0 while tl4's latch drives c4l_l3); output amr_eq_r3 runs 12,000 px west to tla's selector
 11430,6140:13050,6290  logic  amr_eq_r3: wired NOR of the four XORs | a 241/25 pull-down per bit (c0's 132/26) on one diffusion line y 6246-6272; its load east of the first column's VCC rail (x 11677-11815). It leaves by a buried contact under c0's outer metal (11601-11628, 6286-6307) to the top-left logic (amrw)
 11880,4630:12800,5600  route  amr lines north | six polys under the supply metal from the slices' top contacts (y 5585) to pads on the bus: data bits in, compared bits in
 11430,5545:13050,5620  route  amr slices, top | the VSS rails hanging from the wide supply metal (four slices and the fifth rail x 12998-13044), and the tops of each slice's two lines with their contacts to poly (y 5585)
@@ -16,7 +16,7 @@
 3718,5956:4018,6000    route  amr_eq_r3, row y 5978 | poly from the pad (3998,5979) west to the pad (3740,5978)
 2230,5612:3758,5990    route  amr_eq_r3, second crossing field | poly y 5978, metal x 3738, poly west along y 5630 to the pad (2242,5632)
 2228,3450:2600,5640    route  amr_eq_r3 to the step logic | metal x 2240 north, poly east along y 3461 into tla's first cluster (gate under rail R1 at (2625,3461))
-4715,6140:5600,6295    route  c4l0-c4l3 east | the 4-bit counter's four lines: poly rows, metals over the poly bus, nested corners north
+4715,6140:5600,6295    route  c4l0-c4l3 east | the VSYNC width counter's four lines: poly rows, metals over the poly bus, nested corners north
 5438,5950:5602,6140    route  c4l0-c4l3 nested metals | the four metals x 5450, 5495, 5540, 5582 going north from the corners to the pads of the rows
 5440,5790:5940,5950    route  c4l0-c4l3 rows | four poly rows between the nested metals
 5880,4560:6500,5800    route  c4l0, c4l1 north | two nested metals to the crossing field (beside bust's two for c4l2, c4l3)
