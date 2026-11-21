@@ -1289,3 +1289,8 @@ Round 2: no findings.
 
 - Piece 10 and ports, `tc2_r5718` M (7522-7544, 6400) ("follower: to (7509,7456), west, end (7353,7465), not looked at"): followed by `busl` (piece `fd`, 2026-11-20) by x 7533, x 7511, y 7453, x 7360, a poly hop between pads (7357,8667) / (7337,8798), a diagonal and tracks down the left bus field to the pad (7098,14525) and the row y 14524 at its foot (drawn to x 7550); no tap.
 - The latch's gate line ("Its driver is not found"): it is the buffered clock `ck_out` (`tl4` runs 11-12, firm joins): `tc2_sr` is a latch on the clock.
+
+## Corrections (coordinator, from the handoffs of `busl` run 15 and `cdp2`, 2026-11-20/21)
+
+- Piece 14, `tc2_m6404` ("poly south past y 6400 ... neither end is followed"): the south end is followed by `busl` (piece `ca`) to the foot row y 14827 of the left bus field, no tap.
+- `tc2_sr_q` ("leaves south on a metal x 7922 (past y 6400)"): that metal ends on a pad (7922,7040), the gate of `cdp2`'s inverter `cdp2_w7065` = NOT `tc2_sr_q` (`cdp2`, piece `ga`; marked).

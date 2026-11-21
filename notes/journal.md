@@ -2790,3 +2790,57 @@ change to the workflow, "the gate's result decides the push" (3ff2f92).
 `out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 803
 floor-plan blocks. Coverage: 70.4% traced; in some package region 99.9%; untraced and in no Queue row
 0.4%. Not done here: the refresh (seven renames wait).
+
+## 2026-11-21 01:26  Handoffs: `busl` run 15, `cdp2` pieces `ga` and `gl`
+
+Three handoff files (the loop's fourth tracer, a fresh Fable 5.2 agent at high effort: `busl` run 15,
+merged f7b0f8e at 01:19, claim kept; Matt Godbolt: `cdp2` pieces `ga` and `gl`, merged 3cdd18c and
+7e7cb96 on 2026-11-20 17:54 and 18:14 -0600, claim kept). Full extraction after them 2,456 nets, 4,599
+transistors, 0 errors, 0 warnings; 915 of 1,356 equations firm; 97 nets joined only through uncertain
+items (1,139 items). Spot checks of the overlays: the corner of `busl`'s four rows under `eof`'s metal
+arms at x 6240-6540, y 7130-7350, and `cdp2`'s series gate at x 8190-8620, y 7150-7420
+(`cache/scratch/refresh/h7_ca_corner.png`, `h7_cdp2_gl.png`): the drawn shapes lie on the features.
+
+What they establish (from the tracers' notes; marks as there):
+
+- **The main part of the left bus field has no undrawn row and no undrawn signal track** (`busl` run
+  15): the Next list's "undrawn rows of the bands y 11850-12150 and below" were rows drawn before or
+  since. Undrawn there: supply metals, the poly row y 10560 and the top band's ninth row, two spots not
+  looked at.
+- **Four wires from the top-left logic's sixth strip run the whole left bus field to the bottom-centre
+  bus** (`busl` run 15, pieces `ca`-`cd`; wiring, firm in `busl`): the crossing field's rows y 7171,
+  7214, 7258, 7300 run west under `eof`'s four metal arms (no contact) and turn north into four poly
+  columns onto `tc2`'s and `tl6`'s poly ends: `tc2_m6404`, `tl6_p6187`, `tl6_p6143`, `tl6_p6101`
+  are the wires on the foot rows y 14827, 14870, 14437, 14393. **Believed, not traced: four outputs of
+  R8** (the skew bits would fit). Their top ends (x 6400-6750, y 2500-2630) would decide it: a task now
+  in the `tcw` (continue) row.
+- **`busl_x6820` is `lc3_m5756`** (piece `xm`; firm in `busl`): the track ends on the east end pad of
+  `lc3`'s crossing row 10. Neither end of the wire is identified.
+- **`trunks`' line in the left bus field has no tap between y 8995 and y 15000** (R4, part done).
+- **The logic left of `cdp2`'s rows B** (`cdp2`; 5 transistors): an inverter `cdp2_w7065` = NOT
+  `tc2_sr_q` (marked: two `?B`); a through line `cdp2_w6845` from the west to the pad (7878,8315), an
+  input of the cluster beside `cdp3`'s row A (one `?M`); the lower of two series gates, `cdp2_w7272`
+  = NOT(`cdp2_w7300` AND `cdp2_w7344`) (firm), believed cross-coupled with the gate above it.
+
+Reviews: `busl` round 15, no findings (every crossing read at 4x or 5x in the chip-2 metal shot and the
+clean shot; chip 1's metal shot not by eye at the 64 column crossings). `cdp2` rounds 1-3: one finding
+that changed connections in round 1 (two boxes drawn as metal contacts are buried contacts with the
+metal passing over), fixed; the rest geometry.
+
+Applied: master list rows `busl` (run 15; a new, short Next list: one more run could close the
+package), `cdp2` (continue), `cdp3` (continue), `tcw` (continue) (the task on the four lines' top
+ends), `bc1` (continue), `lc1`-`lc3`, `tl1`-`tl6`, `tc2`, `bl0`, `trunks` (continue), and the
+`rename` row (five more renames wait, all onto names that are placeholders themselves). **Re-read
+list**: R51 (new, proposed by `cdp2`'s tracer: a small box under a thin metal accepted as a contact
+from the metal shots and the text map alone; first `cdp3`'s cluster beside row A); R4 part done for
+the left bus field. **Guide**: trap 27 extended (a ring with a bright centre on a 20 px box under a
+thin metal is not a contact; what a real one has). **Ambiguities**: AMB-047 annotated (the two boxes
+are probably such pass-overs; the pad (7878,8315)'s line is `cdp2_w6845`). Corrections sections in the
+notes of `lc3`, `bl0`, `tl6`, `tc2`, `eof`, `trunks` and `cdp3`. `notes/operation.md`: not changed
+by the tracers or here (the four wires' identity is believed only; `cdp2`'s gates are not yet joined to
+anything this page states). Floor plan: no coarse block is replaced; the left bus field's line says
+thirty pieces; the new fragment lines' labels were not looked at.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 810
+floor-plan blocks. Coverage: 70.4% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%. Not done here: the refresh (twelve renames wait).

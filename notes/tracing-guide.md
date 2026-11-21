@@ -377,6 +377,14 @@ Traps, all of them real:
    metal lies over field, an unbroken pink protected strip beside it in the clean shot shows the
    metal was there. `tools/follow.py` running through such a stretch is not evidence (it bridges
    24 px). Found 2026-11-18 (`tl3` runs 7-10; R41, AMB-032, AMB-033).
+   **A small box under a thin metal is not a contact because it shows a ring with a bright centre**
+   (`cdp2`, piece `ga`, 2026-11-20; R51). A heavy-outlined box of about 20 px under a thin metal reads so in
+   both metal shots, and `tools/textmap.py`'s map alone does not tell it from a contact: it is a
+   buried-contact box with the metal passing over. A real contact of these wires has a 35 px pad or land, a
+   green hole or pits at the centre in the clean shot, pits in the chip-2 stripped shot, and the metal
+   widened into a square ring; the pass-over has none of these and the metal keeps its width (`px.py row`
+   across the metal at the box and 50 px away). Two such boxes were drawn as metal contacts and found by
+   the reviewer.
 28. **In the gap between a rail and a thin metal the clean shot misleads on poly and diffusion.**
    It shows a poly only as far as the rail's protected margin (about 10 px), so a gate drawn from
    "the bright band" there is too short (`tl1_ua`'s inverter gate: 12 drawn, 21 real); the far
