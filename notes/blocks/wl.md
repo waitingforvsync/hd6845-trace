@@ -172,3 +172,6 @@ as the cell `wl_ckgen` (tag `rc` here, `lc` there); the rails, the VCC strip, th
 clock metals, and the pad and metal that bring the step signal are drawn outside the
 cell for each copy. The extraction of this block is unchanged.
 
+## Corrections (coordinator, from the handoffs of `busl` run 16, 2026-11-21)
+
+- `wl_h1` ("not identified"): its west end is the data input of `tl5`'s latch a in the top-left logic (`busl`, piece `ha`).

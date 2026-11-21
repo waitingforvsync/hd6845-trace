@@ -473,3 +473,8 @@ Round 4: no findings that change a connection.
 ## Corrections (coordinator, from the handoff of `busl` run 14, 2026-11-21)
 
 - Ports, "`rst` (gate 3's output) ... out at x 6450 (seen to x 6710)": the row runs on east under twelve tracks to an end pad (7076,7388) and by `busl`'s piece `xn` (the metal x 7078, a poly hop, a diagonal, the track x 6906) down the left bus field to the gate that clears the light pen flag (`bl0_w17610`). In the extraction `rst` now gates two pull-downs: the inverter that makes `rst_n` and this clear.
+
+## Corrections (coordinator, from the handoffs of `busl` run 16, 2026-11-21)
+
+- "Left: the rows y 6953 and 7040" and "the north-east one (x - y = -1306 ...) is not followed": both rows are drawn by `busl` (y 7041: piece `gd`; y 6954 with the north-east diagonal: piece `ha`, the wire `tl5_w3461` = `wl_h1`).
+- New for the band, undrawn: a thin metal along y 6849 from a pad (5668,6846) west over the three diagonals to about x 5339, and the poly row from that pad east to `busl`'s pad (6146,6847) (`cdp2_w6845`'s west end); the poly row west of the pad (6189,6716) (`busl_y6805`).

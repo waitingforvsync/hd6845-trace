@@ -2844,3 +2844,55 @@ thirty pieces; the new fragment lines' labels were not looked at.
 `out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 810
 floor-plan blocks. Coverage: 70.4% traced; in some package region 99.9%; untraced and in no Queue row
 0.4%. Not done here: the refresh (twelve renames wait).
+
+## 2026-11-21 02:23  Handoffs: `busl` run 16, `cdp2` pieces `gu` and `gh`
+
+Three handoff files (the loop's fifth tracer, a fresh Fable 5.2 agent at high effort: `busl` run 16,
+merged 2ddf89e at 02:14, claim kept; Matt Godbolt: `cdp2` pieces `gu` and `gh`, merged 2e8d6ef and
+5d52ee6 on 2026-11-20 18:52 and 19:06 -0600, claim kept). Full extraction after them 2,457 nets, 4,603
+transistors, 0 errors, 0 warnings; 915 of 1,358 equations firm; 98 nets joined only through uncertain
+items (1,141 items). Spot checks of the overlays: the end pad (6188,6956) of `busl`'s piece `ha` with
+its neighbours, and `cdp2`'s upper series gate at x 8230-8630, y 7050-7270
+(`cache/scratch/refresh/h8_ha_pad.png`, `h8_cdp2_gu.png`): the drawn shapes lie on the features.
+
+What they establish (from the tracers' notes; marks as there):
+
+- **The data of `tl5`'s latch a is `wl_h1`** (`busl` run 16, piece `ha`; wiring, firm): the third
+  diagonal of `lc1`'s bundle, the row y 6953, the metal y 6957 and the track x 7035 are one wire from
+  `tl5`'s poly end (5453,6350) onto `bw`'s pad (7031,7560), the line from the poly band H1 above the
+  mid-right array's counters. What `wl_h1` is at its other end is open.
+- **The main part's supply metals** (`busl` run 16, pieces `va`, `vc`, `vb`): the wide metal
+  x 4953-5018 is VCC, one metal with `lc3`'s two VCC metals; the wide metal over the foot rows is VSS
+  from `cdp4`'s column-0 plate, not joined to `bc1`'s RL2.
+- `cdp2_w6845` drawn west of `cdp2`'s port to an end pad (6146,6847) (it goes on west in `lc1`'s band);
+  a new wire `busl_y6805`, neither end identified. Seven items of the old Next list read with nothing
+  to draw (other packages' wires, or ghosts of a thin metal over field).
+- **`cdp2`'s two series gates are a chain, not a pair** (pieces `gu`, `gh`; 4 transistors; correcting
+  the entry of 01:26, which had them "believed cross-coupled"): `cdp2_w7272` = NOT(`cdp2_b_hl` AND
+  `cdp2_b_s7_x`) (the comparator's row line and the comparator chain's output; marked: one `?B`) and
+  `cdp2_w7092` = NOT(`cdp2_w7128` AND `cdp2_w7272`) (firm), whose output leaves north. The load of
+  `cdp2_b_hl` is drawn, so that line extracts as a gate for the first time.
+
+Reviews: `busl` round 16, no finding that changes a connection; three findings of completeness written
+into notes (a row and a metal on west of `hb`'s pad, a plain crossing not listed, two thin metals drawn
+by no package); four of `va`'s eight diffusion-row crossings were read by text only. `cdp2` rounds 4-6:
+one finding that changed a connection in round 4 (a gate row drawn on `db_b5`, whose metal turns away
+37 px short of the pad), fixed.
+
+Applied: master list rows `busl` (run 16; the Next list is the northern part's leftovers, and the
+package's northern region now starts at y 6400: the strip x 6450-7600, y 6400-6750 was in no Queue
+row), `larr` (continue) (a thin track on its east boundary, x 4780, in no trace), `bl1`/`bl2`,
+`bc1` (continue), `lc1`-`lc3`, `tl1`-`tl6`, `bw` (continue), `cdp4` (continue), `cdp2` (continue),
+`wl`, and the `rename` row (three more wait: fifteen in all). **Re-read list**: R26 extended (proposed
+by `cdp2`'s tracer: a pad joined to a track that runs toward it on the pad's own line, on the
+follower's word or one off-centre profile). **Guide**: trap 30 extended (the same), trap 40 new
+("nothing undrawn" holds only inside its cuts; a poly-colour mask of the chip-2 stripped shot takes a
+thin metal's ghost for a row). **Ambiguities**: AMB-048 new (the tie of `cdp2_b_hl`'s load; adopted:
+tied). Corrections sections in the notes of `bw`, `tl5`, `wl`, `lc1`, `lc3`, `cdp4`, `cdp2` and
+`bc1`. `notes/operation.md`: the tracer's own change stands (latch a's data is `wl_h1`). Floor plan:
+no coarse block is replaced; the left bus field's line says thirty-six pieces; the new fragment
+lines' labels were not looked at.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 820
+floor-plan blocks. Coverage: 70.4% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%. Not done here: the refresh (fifteen renames wait).

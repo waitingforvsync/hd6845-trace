@@ -701,3 +701,7 @@ From `tl6`: latch c's outputs reach `ras_o0_alt2` (through its inverter) and `tc
 ## Corrections (coordinator, from the handoffs of 2026-11-20, third batch)
 
 - Ports, `tl5_w2722` P (5355-5375,6350) out ("the strong inverter's output: from T3's south pad (5363,6108)"): the column runs on south to a bend (5367,6806) and by a diagonal and the row y 7041 to the left bus field's staircase bundle and the row y 14350 of the bottom-centre bus (`busl`, piece `gd`, 2026-11-20; no tap in 11,000 px; load open).
+
+## Corrections (coordinator, from the handoffs of `busl` run 16, 2026-11-21)
+
+- T5 / port `tl5_w3461` ("latch a's data: from T5's south pad"): the wire's other end is `bw`'s pad (7031,7560): the net is `wl_h1`, the line from the poly band H1 above the mid-right array's counters (`busl`, piece `ha`; firm; the rename waits for a refresh).
