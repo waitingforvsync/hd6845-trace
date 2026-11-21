@@ -6,4 +6,5 @@ cdp2_w6845   M  7290,6840-6856    ?    the through line: the metal west of the p
 cdp2_w6845   P  7860-7896,8315    ?    the through line's south end, the pad (7878,8315): an input of cdp3's gate cluster beside its row A
 cdp2_w7300   P  8600,7290-7311    in   row 1 of the lower series gate (piece gl), from the east
 cdp2_w7344   P  8600,7333-7354    in   row 2 of the lower series gate, from the east
-cdp2_w7272   P  8445,7160-7181    out  the lower series gate's output: row 2 of the gate above it (not drawn)
+cdp2_w7092   M  8283-8297,6940    out  the upper series gate's output: the thin metal north of the pad (8290,6997) (follower: to (8290,5323))
+db_b5        M  8525-8539,7395    in   db_b5's thin metal (row C's s2 bus line) up to the pad (8530,6955): row 1 of the upper series gate
