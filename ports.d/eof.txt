@@ -154,7 +154,7 @@ rcs_e4        P      7280,15425-15446         in   gate 1's row of the NOR, draw
 bl0_w15566    P      7255,15555-15577         in   gate 3's row of the NOR, on east from bl0's row end (bl0's port 7260,15566)
 vss           M      7383-7432,14995          -    the rail of bc1's west gate column (drawn y 15024-15900 over four units): north it turns east at y 15024-15069 onto busl's VSS metal x 7383-7432 (busl's piece vb, drawn to y 15000)
 vcc           M      7470-7520,15435          -    bc1's RL2 (M 7495,14950 y16300 w=50), drawn again over the load's contacts (y 15435-15555)
-vcc           D      8560,17964-17984         -    the diffusion wire of piece cap18 on east of the box under the VCC rail, to the twin device at x 8700-8800 (not drawn)
+# piece cap18b (run 49): the port vcc D 8560,17964-17984 of piece cap18 is gone (the wire is drawn on to the twin device)
 vcc           M      8512-8558,17997          -    R2 on south (drawn y 17550-17997 over the box of piece cap18; it runs on)
 # Pieces u15760, in15760 (run 33): the ports eof_w15523 P 7290,15687-15704 and vss M 7294-7340,15655 are gone (the row is drawn on into its gate, gate 1 of the NOR eof_w15781 = NOR(eof_w15523, eof_w15262, eof_w15128); the rail is drawn on south)
 # Pieces u15960, u16175 (run 36): the two ports eof_w15781 P 7228,15945-15968 and 7228,16160-16186 are gone (the rows are drawn on as the gates of two wide inverters, eof_w15998 = NOT eof_w15781 and eof_w16218 = NOT eof_w15781)
@@ -235,3 +235,6 @@ vss            M      3885,10925-10990          -    the wide metal that rail F'
 vss            M      3960-3982,10960           -    an arm of the same metal north from the band (bright in both metal shots at y 10940, dark edges at x 3958 and x 3982); not followed
 # piece yg (run 48): the gate line of the fourteen pull-downs on Y, at the poly row that leaves its foot pad
 eof_ypd        P      3996,18247-18263          in   the poly row east of the foot pad (3957,18255) of the line eof_ypd, east end as drawn; it runs on east along the north side of a wide metal to about x 4138 (cream in the clean shot; not followed); the line's driver lies beyond
+# piece cap18b (run 49): the twin of cap18 on bl0_w15566; the bus line that leaves its pad east
+bl0_w15566     M      8760,17818-17830         ?    the bus line y 17824 on east of the end pad (8685,17821) of bl0_w15566's row, as far as drawn; follow.py runs it to (9468,17823): not read
+eof_w17866     M      8760,17860-17872         ?    piece cap18b (review round 57): the bus line y 17866 on east, as far as drawn; believed eof_w16040's (joined to its pad (8643,17865) through a ?M); follow.py runs it to (9556,17863): not read
