@@ -4553,10 +4553,13 @@ P 10357,17474 y17300 x10596 w=14
 P 10384,17380:10416,17400
 P 10390,17387 x10596 w=14
 # the column's diffusion, through under both gates
-D 10521,17227:10588,17445
+D 10546,17227:10588,17445
+# west of the rail the strip x 10521-10546 is diffusion from y 17263 to y 17425 only (review
+# round 61: a field notch y 17252-17263 and field y 17425-17446; px.py col 10533)
+D 10521,17263:10546,17425
 C 10562,17255
 C 10562,17422
-M 10573,17227 y17450 w=50              # the VSS rail, over this unit only
+M 10573,17227 y17590 w=50              # the VSS rail, over this unit only
 N M 10573,17340 vss
 # the node's west exit: tab, buried contact, poly row, pad, metal north
 D 10497,17331:10525,17355
@@ -4574,3 +4577,16 @@ D 10585,17327:10600,17358
 D 10497,17462:10522,17494
 B 10497,17462:10517,17492
 D 10515,17484:10600,17500
+# Review round 61: the band is the drain of a pull-down. A poly row y 17506-17523 lies
+# against the band's south edge with no field between (px.py col 10572 17476 17545 3 and
+# col 10533 17476 17536 4: band, one edge line y 17500-17504, poly; railprof.py 10552 10592
+# 17480 17640: GATE y 17510-17521) and crosses under the rail to an end cap at x 10598; south
+# of it the diffusion under the rail (y 17528-17580) has a rail contact (10563,17550) (ring
+# and bright centre in both chips, a green hole; r51_f1.png). The row comes from the south:
+# at its west end, under the thin metal x 10440, it turns down as a column x 10433-10447
+# (r51_f2.png): PORT at y 17545. Drawn under the rail only (x 10546-10590): the outlined box
+# west of it (10508-10543, 17532-17588) is not read.
+P 10440,17545 y17515 x10598 w=16
+N P 10470,17515 eof_w17515
+D 10546,17496:10590,17580
+C 10563,17550

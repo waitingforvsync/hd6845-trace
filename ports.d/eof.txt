@@ -239,7 +239,8 @@ eof_ypd        P      3996,18247-18263          in   the poly row east of the fo
 bl0_w15566     D      10600,17484-17500        in   piece u17345: the diffusion band bl0_w15566's row y 17473 is tied to by a buried contact, east under the VSS rail with no contact; the driver is expected on it (cdp4's strip): not drawn
 eof_w17345     M      10390-10404,17315        out  piece u17345: the metal x 10397 north from the pad (10397,17343), the NOR's output (unbroken to about y 17040): not followed
 eof_w17345     D      10600,17327-17358        out  piece u17345: the node's diffusion east past the rail's edge, to its load (believed x 10640-10700, y 17300-17400, cdp4's strip): not drawn
-vss            M      10548-10598,17227        -    piece u17345: bc2's VSS rail, drawn over this unit only (y 17227-17450)
+vss            M      10548-10598,17227        -    piece u17345: bc2's VSS rail, drawn over this unit only (y 17227-17590)
+eof_w17515     P      10432-10448,17545        in   piece u17345 (review round 61): gate poly of the pull-down on bl0_w15566's band, a column from the south under the thin metal x 10440: not followed
 eof_w17866     M      9546-9560,17800          ?    piece bus2: the second metal of the pad (9553,17866), from the north (follower: to (9546,17645), west to (9266,17641)): not read
 eof_w17866     M      9806-9820,17800          ?    piece bus2: the second metal of the pad (9813,17866), from the north (follower: 1,800 px to (9961,16341)): not read
 eof_w17866     M      10350-10362,17885        ?    piece bus2 (review round 59): the metal x 10356 on south of the T (10356,17866) (follower: to a corner (10364,18387), east, south on x 10397 to a pad about (10397,18427)): not read

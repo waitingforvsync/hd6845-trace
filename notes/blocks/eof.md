@@ -1401,10 +1401,12 @@ poly goes on into a gate unit under the rail x 10548-10597 (not drawn).**
   items, the second now with this piece's label at (10410,17410).
 
 Run 51 (Kieran Connell's session, Claude Fable 5.2; 2026-11-21 22:10 +0000 on). One piece, `u17345`
-(2 transistors, one new net, no uncertain item): **the two bus lines end as the two inputs of one NOR:
+(3 transistors, two new nets, no uncertain item): **the two bus lines end as the two inputs of one NOR:
 `eof_w17345` = NOR(`bl0_w15566`, `eof_w16040`) as far as its pull-downs go (its load lies east, in `cdp4`'s
-claimed strip, not drawn); and `bl0_w15566` is tied by a buried contact to a diffusion band that leaves
-east under the rail: its driver is to be looked for there.**
+claimed strip, not drawn); and `bl0_w15566` is a diffusion node here with its own pull-down: it is tied
+by a buried contact to a band that is the drain of a transistor to `vss` gated by a poly from the south
+(`eof_w17515`; found by review round 61), and that leaves east under the rail, where its load is
+expected. This is the first driver found on `bl0_w15566`.**
 
 - **Traced** (piece `u17345`; x 10296-10600, y 17227-17500; `bc4`'s ground, free, west of `cdp4`'s strip
   x 10600): the poly of `bl0_w15566`'s pad (10311,17474) north as a column x 10350-10364 and east as a gate
@@ -1418,16 +1420,22 @@ east under the rail: its driver is to be looked for there.**
   past the rail's edge (a port at x 10600).
 - **Traced**: `bl0_w15566`'s other poly, the row y 17467-17481 east from the pad, ends in a buried contact
   box (10497-10517, 17462-17492) on the west end of a diffusion band y 17484-17500, which runs east under
-  the rail with no contact to it (a port at x 10600). So `bl0_w15566` is on a diffusion node that leaves
-  into `cdp4`'s strip: **its driver is expected on that band** (believed: a structure at about
-  x 10620-10700, y 17440-17500, seen at 2x only).
+  the rail with no contact to it (a port at x 10600). **Review round 61: the band is the drain of a
+  pull-down.** A poly row y 17506-17523 lies against the band's south edge and crosses under the rail;
+  south of it the diffusion under the rail has a rail contact (10563,17550):
+  `t at 10568,17515 W/L 44/16, gate eof_w17515: bl0_w15566 <-> vss` (the width is the part under the
+  rail; an outlined box west of it, (10508-10543, 17532-17588), is not read). The row comes from the south:
+  at its west end it turns down as a column x 10433-10447 under the thin metal x 10440 (a port at
+  y 17545). **So `bl0_w15566` is the output node of a gate here: pulled to `vss` while `eof_w17515` is
+  high; its load is expected on the band east of x 10600** (believed: a structure at about x 10620-10700,
+  y 17440-17500, seen at 2x only), and other pull-downs may join it there.
 - **Believed** (not drawn; `r50_e1.png`, 2x): the node's load is the block at x 10640-10700,
   y 17300-17400 east of the rail, on the VCC rail x 10721-10771. With it the gate is a two-input NOR.
 - **The equation with the join's uncertainty**: `eof_w16040` reaches this gate only through run 49's `?M`
   (Ambiguity 206): without it the second input is `eof_w17866`, the bus line's net.
-- **Checks**: full extraction 2,518 nets, 4,809 transistors, 0 errors, 0 warnings (2,517 and 4,807
-  before: one new net, two transistors). The package by itself: 1,203 nets, 2,011 transistors, 0 errors,
-  84 warnings.
+- **Checks** (after round 61's fixes): full extraction 2,519 nets, 4,810 transistors, 0 errors, 0 warnings
+  (2,517 and 4,807 before the run: two new nets, three transistors). The package by itself: 1,204 nets,
+  2,012 transistors, 0 errors, 84 warnings.
 
 Full extraction after run 2: 2,351 nets, 4,232 transistors, 0 errors, 0 warnings; the package
 by itself (it loads `rdp3`): 0 errors, 0 warnings.
@@ -5362,6 +5370,18 @@ three shots of the two boxes), `r51_b3.png` (6x, three shots of the south box an
   band: no ring in either metal shot, and the clean shot is greenish only as a line y 17496-17499 across
   the whole width (the band's south edge), not as a hole (same text map as the south rail contact, for
   comparison). Drawn: the box as a buried contact on the band's west end, the band to x 10600: a port.
+- **The pull-down on the band** (review round 61; `r51_f1.png`, 3.7x; `r51_f2.png`, 2.6x): the poly row
+  y 17506-17523 (`px.py row 17515 10470 10618 4`: salmon under the thin metal x 10480 and under the rail,
+  the orange of open poly between, an end cap to x 10598) has the band against its north edge with one
+  edge line and no field between (`px.py col 10572 17476 17545 3`; `px.py col 10533 17476 17536 4`: band
+  y 17488-17498, line y 17500-17504, poly y 17508-17524), and `tools/railprof.py 10552 10592 17480 17640`
+  calls y 17510-17521 a gate and y 17531-17590 diffusion. The rail's contact on that diffusion is at
+  (10563,17550) (the reviewer's `textmap.py 10540 17526 10604 17580 3`: ring, bright centre, green hole;
+  a dark dot in the clean shot of `r51_f1.png`). Drawn under the rail only (x 10546-10590). The row's west
+  end is at x 10433, where it turns south as a column under the thin metal x 10440
+  (`tl5_tracks.py rows row 10240 10500 4 17506 17514 17522`: pink west of x 10436). Named `eof_w17515`.
+- **The column's west strip** (review round 61, geometry only): west of the rail the diffusion x 10521-10546
+  runs from y 17263 to y 17425 only (a field notch y 17252-17263 and field y 17425-17446); drawn so.
 - **The column x 10350-10364** (`px.py row 17360 10328 10384 4`: poly x 10352-10364 in the clean shot and
   in chip 2) lies under the metal x 10356 of another net (the one that ends on the pad (10355,17603)); no
   pad on it. The marks beside it in the clean shot at (10362-10375, 17355-17385) are not in chip 2.
@@ -5481,7 +5501,8 @@ driver lies; the other three lead to the loads.
 | `eof_w17345` | metal | (10390-10404, 17315) | out | piece `u17345`: the metal x 10397 north from the pad (10397,17343), the NOR's output by its west exit (unbroken to about y 17040 in the two-chip test; not followed). (Run 50's two pad ports at (10311,17474) and (10397,17410) are gone: the poly is drawn on) |
 | `eof_w17345` | diffusion | (10600, 17327-17358) | out | piece `u17345`: the node's diffusion east past the rail's edge; its load is expected at x 10640-10700, y 17300-17400 (`cdp4`'s claimed strip; not drawn) |
 | `bl0_w15566` | diffusion | (10600, 17484-17500) | in | piece `u17345`: the band that `bl0_w15566`'s row y 17473 is tied to by a buried contact, east under the VSS rail with no contact; the net's driver is expected on it (`cdp4`'s claimed strip; not drawn) |
-| `vss` | metal | (10548-10598, 17227) and (10548-10598, 17450) | - | piece `u17345`: `bc2`'s VSS rail, drawn over this unit only; it runs on north (to `bc2`'s end at y 15746, not drawn between) and south |
+| `vss` | metal | (10548-10598, 17227) and (10548-10598, 17590) | - | piece `u17345`: `bc2`'s VSS rail, drawn over this unit only; it runs on north (to `bc2`'s end at y 15746, not drawn between) and south |
+| `eof_w17515` | poly | (10432-10448, 17545) | in | piece `u17345` (review round 61): the gate poly of the pull-down on `bl0_w15566`'s band, a column x 10433-10447 from the south under the thin metal x 10440 (not followed) |
 | `eof_w17866` | metal | (9546-9560, 17800) | ? | piece `bus2`: the second metal of the pad (9553,17866), from the north (the follower: north to (9546,17645), west to (9266,17641); not read) |
 | `eof_w17866` | metal | (9806-9820, 17800) | ? | piece `bus2`: the second metal of the pad (9813,17866), from the north (the follower: north, then 1,800 px to (9961,16341), close beside `ck_out`'s metal from the pad (9769,17910); not read) |
 | `eof_w17866` | metal | (10350-10362, 17885) | ? | piece `bus2` (review round 59): the metal x 10356 on south of the T (10356,17866) (the follower: south to a corner (10364,18387), east, south on x 10397 to a pad with a hole at about (10397,18427); not read) |
@@ -10529,7 +10550,10 @@ Round 60: no findings.
   `cdp4`'s claim on the strip x 10600-10880 is released** (or by `cdp4`): the load of `eof_w17345`
   (believed the block x 10640-10700, y 17300-17400, from the port (10600,17327-17358)), and **the driver
   of `bl0_w15566`** on the band from the port (10600,17484-17500) (a structure at about x 10620-10700,
-  y 17440-17500). (b) **where the NOR's output goes**: the metal x 10397 north from the port
+  y 17440-17500). And **the source of `eof_w17515`**, the gate of `bl0_w15566`'s pull-down: the poly
+  column x 10433-10447 south from the port (10440,17545), under the thin metal x 10440; and the outlined
+  box (10508-10543, 17532-17588) west of that pull-down's source (not read: more width, or another
+  node). (b) **where the NOR's output goes**: the metal x 10397 north from the port
   (10397,17315) (two-chip test: unbroken to about y 17040). (c) the gate row y 17206-17219 north of this
   unit on the same column (another unit; its diffusion north of the row has a contact at about
   (10565,17175)), and the row y 17510-17521 south of the band. Then items (b) to (d) of the list below.
