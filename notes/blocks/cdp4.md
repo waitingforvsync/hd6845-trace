@@ -651,6 +651,12 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
 - Right of x 10600: (done, run 4: the n lines' contacts and the read bus tracks.) Left: the two thin
   metals x 10809 (the follower ends it at (10809,15738)) and x 10853 (to (10852,17652)), both through
   the whole field from north of y 10150; the end of the s7 VCC rail; the ninth VSS rail's end (y 13300).
+- From the review of run 7 (round 6): `dbus`'s `d7_c` metal (port (16950,16750-16766)) goes on west along
+  y 16758 to a corner near (16838,16758) and south on x ~16840 to about y 17306, in no trace file and no
+  ports file (it does not touch the read bus: no metal at x 16803-16835 on y 16758). And the thin metal
+  x 16762-16780 that these notes call `dbus_le` is **not one metal** south of `dlat`'s end: no metal in
+  either chip for 20-60 px at every unit (y 15937-15990, 16067-16124, 16197-16255, 16323-16383,
+  `tools/tl5_tracks.py v 16771 15840 16400`): to be read with the units.
 - From run 7: the five units the rows of columns 2-6 enter (x 16600-16790, y 15880-16450, pitch 130; a rail
   with contacts at x ~16700; `bd2`'s region), which should join them to `d5_out_n`..`d1_out_n`.
 - From run 6: column 1's poly band west of
@@ -876,6 +882,35 @@ clean shot and the edge lines in both metal shots; "no poly under the thin metal
 rests on the clean shot alone; nothing beyond the ports.
 
 Round 5: no findings that change a connection.
+
+### Run 7 (the read bus, north to the output units)
+
+Round 6 (full review, 2026-11-21 15:22 -0600; a fresh Fable reviewer, images in `cache/scratch/cdp4/review-6/`, 15;
+commit before the round 87c5f4f). Piece: x 16560-16970, y 15840-17390 (six tracks, five pads, five poly
+rows or columns, the join of column 7 with `dbus_do0_in`). Told to suspect: the join (one metal from the
+corner (16798,16714) to `dbus`'s pad (16993,16451)?); a contact where column 6's poly passes under column 7's
+corner; that poly's continuity across the 12 px gap, along its column and at its turn west; the pad pairs on
+one track position (read bus pad below, `d#_out_n` pad above); the nested corners; taps on the long runs;
+the rows west of the end pads; each pad all round.
+
+It checked: the join by `tools/tl5_tracks.py` h 16714 and v 16993 (no gap of 8 px or more in both chips
+except 6-8 px edge bars at x 16808-16812 and y 16722-16726) and views of the corner and the pad; nothing on
+x 16798 north of the corner; no contact at (16800,16713) at 5.5x in four shots (clean shot uniform salmon,
+red minus green 40-56, against 8-17 in column 6's pad; no widening of metal or poly); the poly continuous
+across the gap (both metal shots orange at x 16776); the column one poly from y 16384 to y 16712 with no
+hole under the four horizontals, ending at y ~16375 with 12 px of field before `d1_out_n`'s row (it turns
+west only); column 6's pad (poly east only); no metal in either chip between each pad pair; each row on its
+claimed pad; the nesting (`tools/follow.py --gap 16`, an overlay); no clean-shot hole on any track,
+horizontal or leg except the five pads; the rows continuous to x 16790; the joined extraction.
+
+No finding. Notes only (taken into Not done): an undrawn metal of `dbus`'s `d7_c` inside the region, which
+does not touch the six nets; the thin metal x 16762-16780 is in pieces south of `dlat`'s end.
+
+Not checked by it: under the thin metals the chip-2 stripped shot is fringed, so "no contact" at the
+crossings rests on the clean shot and both metal shots; the pad centres of columns 2, 3 and 5 are dull in
+chip 2 and were accepted from chip 1, the clean-shot hole and the stripped shot; nothing west of the ports.
+
+Round 6: no findings.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
