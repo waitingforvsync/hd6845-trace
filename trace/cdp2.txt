@@ -606,6 +606,8 @@ C 8405,7380
 P 8350,7290:8684,7311                 # row 1: east under the wide metal x 8595-8645 to a pad (8682,7300), on which the
 P 8664,7284:8700,7318                 #   metal of the comparator chain's output (M 8685,7006 y7300) ends
 C 8682,7300
+N P 8590,7300 cdp2_w7300
+@alias cdp2_b_s7_x cdp2_w7300          # the placeholder of the first merge: the row is the chain output's
 N P 8590,7300 cdp2_b_s7_x
 P 8350,7333:8600,7354                 # row 2, from the east (port at x 8600)
 N P 8590,7344 cdp2_w7344

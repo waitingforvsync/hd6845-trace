@@ -724,7 +724,9 @@ Findings:
 Round 4: one finding that changes a connection, fixed; geometry findings.
 
 Added with the fixes, for the same fix check: the lower gate's row 1 is drawn on east to its pad
-(8682,7300) and so joined to `cdp2_b_s7_x` (the placeholder `cdp2_w7300` renamed).
+(8682,7300) and so joined to `cdp2_b_s7_x`. The row's placeholder name of the earlier merge, `cdp2_w7300`,
+is kept as an alias of `cdp2_b_s7_x` in the trace (it occurs in the coordinator's journal and master
+list, which are not a tracer's to edit); the next refresh can rename it.
 
 Round 5 (fix check of round 4's fix and of the added join; fresh Fable 5.2 reviewer; 2026-11-20 18:48 -0600; against
 commit c30b7f3; images `cache/scratch/cdp2/review-5/`). Checked: the metal x 8503-8517 one straight track

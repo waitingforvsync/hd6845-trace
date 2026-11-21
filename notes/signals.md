@@ -1194,4 +1194,3 @@ datapath s1...s7, s0 became b0...b6, b7.
 | cdp3_gate_e | rsel12_buf | |
 | rsel13_buf_u | rsel13_buf | |
 | cdp3_gate_f | rsel13_buf | |
-| cdp2_w7300 | cdp2_b_s7_x | |
