@@ -4052,3 +4052,66 @@ N D 4750,17931 lc3_e9793
 P 4696,18071:4790,18090
 N P 4750,18079 cdp3_g_c2
 @alias cdp3_g_c2 eof_mxs_s13
+
+# ---- piece hj (run 44, 2026-11-21): the south band eof_mxs_s# west of x 4420, in the fourteen rows of
+# the left array (master in larr's row s1; the band lies on the s1|s2 boundary). Wiring only.
+# The band (y 11955-11972) runs on west from the cell eof_mx's end: open poly x 4362-4420 and
+# x 4316-4332 (orange in chip 2's metal shot: px.py row 11963 4180 4440 4; col 4325 11940 12020 4),
+# cream under the thin metal x 4338-4354 (eof_gb's line; no hole: 219/162/105) and under rail H's east
+# part from x 4290. UNDER RAIL H (x 4256-4302) IT JOGS SOUTH: a solid block x 4290-4308,
+# y 11956-11994 (textmap.py 4250 11944 4336 12004 2 --acid; px.py col 4296; no hole: eof_cchk.py
+# 4298,11975: 36), and goes on west as a band y 11978-11994: under rail H (px.py col 4270), in the
+# open gap x 4225-4250 (orange in both metal shots: px.py pt 4240,11988; field north and south of it,
+# and the outlined strip x 4233-4246 north of it is the clean shot's gap artefact: khaki 145/137/80,
+# not in chip 2), under rail G (x 4172-4218; px.py col 4195; no contact: eof_cchk.py 4280,11986
+# 4195,11986: 43, 40, no ring). At x 4165 it meets A POLY COLUMN x 4152-4164 that stands in the open
+# gap west of rail G (px.py row 11986 4148 4182 2: the column's open poly 117/74/50 at x 4162, then
+# 148/105/67, 191/141/92, cream 215/158/108 at x 4168, with no pink or green rim between; the
+# control row 11960, where there is no band, has the rim: 140/115/75, 147/125/88, and pink from
+# x 4174; px.py col 4168 11966 12016 2: cream y 11976-11994. Where the open colours give way to the
+# protected ones, x 4160-4164, the samples dip by an amount that differs by the row, none in s8
+# (px.py row 15543 4147 4181 2), most in s0 (78/44/22 at x 4162: px.py row 11509 4150 4186 2): the
+# edge of the rail's margin, 2-4 px, not a gap between two polys). The column's foot is at y 12006
+# (px.py col 4157 11966 12016 2), and at its foot a poly row y 11990-12006 leaves WEST (orange through
+# x 4136-4163 at y 11998: px.py row 11998 4136 4180 3; col 4110 / 4142: field north and south of it):
+# larr's line H3 of the row below (cell larr_top_n: P 3345,11519 x4100 w=22, here y 11985-12007),
+# drawn from x 4095. The column runs on north to about y 11612 through the row's east cell
+# (x 4090-4250, not read: dark lines cross it at y 11620-11734 and y 11806-11848; px.py col 4158
+# 11584 11970 6); it is drawn from y 11940 (field both sides there: px.py row 11940 4136 4180 3).
+# All fourteen rows are alike (tools/eof_hjrows.py: every extent within 4 px of the master's).
+# So the band of row s(k) is the line larr_h_s(k+1) in the eleven rows that have another row below
+# (the aliases); in s6, s9 and s13 the row west of the column goes on into gap 1, gap 2 and the
+# channel below the array (seen to x 3100 in gap 1: cache/scratch/eof/probe44.py 14384 4150 3050 -25 34),
+# where larr draws nothing: a port at x 4095.
+@cell eof_hj tag=s1
+P 4290,11955:4425,11972          # the band on west of the cell eof_mx's end
+P 4290,11955:4308,11995          # the jog under rail H
+P 4160,11978:4308,11995          # the lower band, under rails H and G
+P 4152,11940:4165,12007          # the column's foot (the column goes on north: port)
+P 4095,11989:4165,12007          # the row west of the column: larr's H3
+@end
+@inst eof_hj 0,-477 tag=s0
+@inst eof_hj 0,477 tag=s2
+@inst eof_hj 0,954 tag=s3
+@inst eof_hj 0,1431 tag=s4
+@inst eof_hj 0,1909 tag=s5
+@inst eof_hj 0,2386 tag=s6
+@inst eof_hj 1,3079 tag=s7
+@inst eof_hj 1,3557 tag=s8
+@inst eof_hj 1,4034 tag=s9
+@inst eof_hj 1,4684 tag=s10
+@inst eof_hj 1,5162 tag=s11
+@inst eof_hj 1,5639 tag=s12
+@inst eof_hj 1,6116 tag=s13
+# the joins: the band of row s(k) is line H of row s(k+1)
+@alias cdp4_bus_s7 larr_h_s1
+@alias cdp4_bus_s6 larr_h_s2
+@alias cdp4_bus_s5 larr_h_s3
+@alias cdp4_bus_s4 larr_h_s4
+@alias cdp4_bus_s3 larr_h_s5
+@alias cdp4_bus_s2 larr_h_s6
+@alias cdp4_bus_s0 larr_h_s8
+@alias cdp3_g_c7 larr_h_s9
+@alias cdp3_g_c5 larr_h_s11
+@alias cdp3_g_c4 larr_h_s12
+@alias cdp3_g_c3 larr_h_s13

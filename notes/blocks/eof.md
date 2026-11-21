@@ -1145,6 +1145,39 @@ Full extraction with run 43: 2,506 nets, 4,696 transistors, 0 errors, 0 warnings
 joins; the transistors unchanged). The package by itself: 1,143 nets, 1,910 transistors, 0 errors, 82
 warnings (as before).
 
+Run 44 (Tom Seddon's session, Claude Fable 5.2; 2026-11-21 15:59 +0000 on). One piece, `hj` (wiring
+only: no transistor, no uncertain item): **west of the selector each row's compared line runs on to a
+poly column in the row's east cell and, in the eleven rows that have another row below, onto `larr`'s
+line H of that row.** So line H, which `larr` follows from every row boundary west to the left column,
+is the compared line of the row above.
+
+- **Traced** (piece `hj`; x 4095-4425 on each row's south boundary; the cell `eof_hj`, fourteen copies).
+  The band (y 11955-11972 in the master row s1) runs on west of the cell `eof_mx`'s end under the thin
+  metal of `eof_gb` (no contact), **jogs 22 px south under rail H** (a solid block x 4290-4308,
+  y 11956-11994) and goes on as a band y 11978-11994 under rail H, across the open gap and under rail G
+  to **a poly column x 4152-4164** that stands in the open gap west of rail G. At the column's foot
+  (y 12006) a poly row y 11990-12006 leaves west: `larr`'s H3, drawn by `larr` from x 3345 to x 4100
+  in the eleven rows s1-s6, s8, s9, s11-s13.
+- **The joins** (firm: `tools/unsure.py` lists none of the nets): `cdp4_bus_s7` = `larr_h_s1`,
+  `cdp4_bus_s6` = `larr_h_s2`, `cdp4_bus_s5` = `larr_h_s3`, `cdp4_bus_s4` = `larr_h_s4`, `cdp4_bus_s3` =
+  `larr_h_s5`, `cdp4_bus_s2` = `larr_h_s6`, `cdp4_bus_s0` = `larr_h_s8`, `cdp3_g_c7` = `larr_h_s9`,
+  `cdp3_g_c5` = `larr_h_s11`, `cdp3_g_c4` = `larr_h_s12`, `cdp3_g_c3` = `larr_h_s13`.
+- **Not joined, ports**: in rows s6, s9 and s13 (the last row of each carry group) the same row leaves
+  the column's foot west into gap 1, gap 2 and the channel below the array, where `larr` draws nothing
+  (ports at x 4095; in gap 1 a poly row at that level is seen as far as x 3100). The column itself
+  runs on north through the row's east cell to about y 11612 (not read; dark lines cross it at
+  y 11620-11734 and y 11806-11848): a port at y 11940 in every row. **Whether the column is where the
+  row drives the line (a driver's output) or a gate is the next piece.**
+- **All fourteen rows are alike** (`tools/eof_hjrows.py`, written for this piece: every extent within
+  4 px of the master's; three montages).
+- **Read without an uncertain item, recorded as ambiguities**: the band meets the column inside rail
+  G's protected margin (181), the jog and the three metal crossings as no contact (182), the joins rest
+  on `larr`'s drawing of H3 (183), the three gap rows (184).
+
+Full extraction with run 44: 2,495 nets, 4,696 transistors, 0 errors, 0 warnings (2,506 nets before: 11
+joins; the transistors unchanged). The package by itself: 1,143 nets, 1,910 transistors, 0 errors, 82
+warnings (as before).
+
 Full extraction after run 2: 2,351 nets, 4,232 transistors, 0 errors, 0 warnings; the package
 by itself (it loads `rdp3`): 0 errors, 0 warnings.
 
@@ -1283,6 +1316,7 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `sel`, the two select lines of the selector (`eof_ga`, `eof_gb`) | x 4338-4527, y 11046-18301 (two thin metals); x 4338-6340, y 18238-18338 (the channel below the array); x 6273-6329, y 16428-18319 and x 6273-7021, y 16428-16485 (two metals north and east); x 6997-7230, y 16416-16883 (the crossing field) | wiring only. East line `eof_ga`: metal (4518,11048) - (4518,18301) - pad (4909,18298); poly to pad (5103,18298); metal, diagonal x 5592-5612, to pad (6147,18321); poly to pad (6322,18319); metal north x 6322, east y 16478, south x 7014 to pad (7014,16865); poly row y 16855-16875 through pad (7187,16866) to x 7230; metal x 7187 north to pad (7185,16432), poly to x 7222. West line `eof_gb`: metal (4346,11046) - (4346,18256) - pad (4389,18256); poly to pad (4563,18255); metal to pad (4866,18255); poly to pad (5062,18254); metal, diagonal x 5632-5652, to pad (6103,18278); poly to pad (6279,18278); metal north x 6280, east y 16435 to pad (7014,16433); poly column x 7004-7024 south and row y 16528-16548 east to x 7230. Fourteen pads with contacts; no transistor |
 | `selg`, the two inverters that drive the select lines (cell `eof_sdrv`, 2 copies) | x 7190-7530, y 16290-16930; the master is the upper unit, the copy at dy 325 | per unit: active area (7256-7450, 16316-16523) with a contact box (7290-7342, 16296-16320) and a load region (7319-7450, 16500-16594); ground contacts (7307,16310), (7319,16451); gate poly: band y 16337-16359 (x 7297-7461), column x 7297-7319, U (top bar y 16404-16426, east side x 7388-7411, bottom bar y 16479-16500 west to x 7230); plate (7303-7461, 16530-16567); tongue (7288-7298, 16518-16552); exit box (7266-7284, 16528-16561) on the row y 16531-16551; two `?` ties. Outside the cell: rail x 7294-7340 (y 16325-16930), its arm y 16349-16391 west to x 7200, the input blocks (7204-7246, 16424-16500) and (7223-7246, 16771-16825), `rcs_mv`'s row y 16771-16787 from x 7035, supply boxes (7467-7522, 16465-16597) and (7467-7522, 16825-16918) with contacts (7491,16531), (7491,16848), (7491,16895). Four transistors: 518/22 and 131/37 twice |
 | `rj`, the fourteen rows' joins at the left array's east edge (wiring) | x 4695-4790 in each row: y 11805-11825 and y 11955-11972 in row s1, the other rows at the offsets of `eof_mx`; s1's jog (4703-4723, 11912-11972), s3's jog (4703-4723, 12909-12994) | per row one diffusion rectangle (the line `eof_mxn_s#` on east to `busl`'s / `bl0`'s diffusion row) and one poly (the band `eof_mxs_s#` on east to the bus row; in s1 and s3 a stub, a column and the row); under the tracks x 4736 and x 4780 without contact. Each net takes the bus field's name (`cdp3_hw_c#` / `lc3_e#`; `cdp4_bus_s#` / `cdp3_g_c#`), the cell's name stays as an alias |
+| `hj`, each row's compared line west of the selector (cell `eof_hj`, 14 copies; wiring) | x 4095-4425, y 11940-12007 in row s1 (the s1\|s2 boundary); the copies at the offsets of `eof_mx` | poly: the band y 11955-11972 on west from x 4425 to x 4290, a jog block (4290-4308, 11955-11995) under rail H, a band y 11978-11995 west to x 4160, the foot of a column (4152-4165, 11940-12007), a row y 11989-12007 west to x 4095 (onto `larr`'s H3 in eleven rows) |
 
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
 
@@ -4368,6 +4402,142 @@ gate conducts both ways.
 field, bounded by the rims of the track's protected margin and of the rows (khaki in the clean shot,
 155-159/143-149/96-104 at (4764-4770,12917); chip 2's stripped shot red over green by 7 there).
 
+### Piece `hj`: each row's compared line runs on west to a poly column and onto `larr`'s line H of the row below (traced; wiring only; no uncertain item; a cell placed fourteen times)
+
+Run 44, 2026-11-21. Region: x 4095-4425 on the south boundary of each of the fourteen rows of the left
+array (y 11940-12007 for the master row s1, whose band lies on the s1|s2 boundary); the left array's
+east cell column, `larr` (continue), free. Survey and draft: `cache/scratch/eof/survey-run44.md`,
+`cache/scratch/eof/draft-hj.txt`. Views of the master: `r44_a1.png`, `r44_a2.png` (4.5x, four shots,
+x 4225-4475: the band, the jog), `r44_b1.png` (3.5x, three shots, x 4070-4440: the whole stretch),
+`r44_c1.png` (2.4x, three shots: the column over the height of the row), `r44_d1.png` (7x, four shots:
+the junction of band, column and H3), `r44_e1.png`, `r44_e2.png` (4x, four shots: the column's north
+part, not drawn); the fourteen rows, `r44_m1.png` (clean shot, 1.75x, before drawing), and with the
+trace `r44_m2.png` (chip 2's metal shot) and `r44_m3.png` (clean shot).
+
+**The path, east to west** (master coordinates, with the measurement that carries each):
+
+1. **The band on west of x 4420** (y 11955-11972, the poly band that the cell `eof_mx` ties to the
+   strip `eof_mxs_s#` by a buried contact): open poly at x 4362-4420 and x 4316-4332 (orange in chip
+   2's metal shot, 180/120/60; `tools/px.py row 11963 4180 4440 4`, `col 4325 11940 12020 4`: poly
+   y 11957-11972 with an edge line above and below), cream under the thin metal x 4338-4354 (`eof_gb`'s
+   line; 217-227/162-167/105-114, no hole) and under rail H's east part from x 4290.
+2. **A jog under rail H** (x 4256-4302): the band ends in a solid block x 4290-4308, y 11956-11994
+   (`tools/textmap.py 4250 11944 4336 12004 2 --acid`: in the clean shot red minus green is 40-72
+   over the whole block, pink field west of x 4288 at the band's level and south of y 11996; `px.py col
+   4296 11940 12020 4`: cream from y 11960 to y 11992). East of the block at the lower level the open
+   ground is field (red minus green 0-8 at x 4318-4330, y 11980-11990, with the green rim of the rail's
+   margin at x 4310-4316).
+3. **The lower band**, y 11978-11994, from the block west: cream under rail H (`px.py col 4270`:
+   y 11980-11992 between edge lines at y 11976 and y 11996), open poly in the 30 px gap between rails H
+   and G (x 4225-4250; `px.py pt 4240,11988`: clean shot 97/74/49, chip 2's metal shot 171/124/58,
+   chip 1's 171/82/47; plain ground north and south of it there, 163/139/77 and 163/150/85 in chip 2's
+   metal shot: `px.py pt 4240,11968 4240,12006 acid,metal`; chip 2's stripped shot red minus green
+   -16 to +22 at 14 px from the band in the fourteen rows: `tools/eof_hjrows.py`), cream under rail G
+   (x 4172-4218; `px.py col 4195`: y 11980-11992).
+4. **The column.** At x 4165 the band meets a vertical poly x 4152-4164 that stands in the open
+   between the strap of the east cell and rail G: orange in both metal shots and chip 2's stripped
+   shot from y 11612 to y 12006 (`px.py col 4158 11584 11970 6`, `col 4157 11966 12016 2`; rows at
+   thirteen heights, `px.py row Y 4136 4180 3`), field at y 11540 and y 11580 (so it is one column per
+   row, not a line through the rows). **The junction lies inside rail G's protected margin**: along
+   y 11986 the clean shot goes from the column's open poly (117/74/50 at x 4162) through 148/105/67
+   (x 4164) and 191/141/92 (x 4166) to the band's cream (215/158/108 at x 4168) with no pink and no
+   green rim between, where 26 px north, with no band, the same samples are the column's rim and field
+   (140/115/75, 147/125/88, 143/113/77, pink from x 4174): `px.py row 11986 4148 4182 2` against `row
+   11960`; `px.py col 4168 11966 12016 2`: cream from y 11976 to y 11994, pink below. **Where the open
+   colours give way to the protected ones (x 4160-4164) the samples dip, by a different amount in each
+   row**: not at all in s8 (a steady rise from 96/63/45 at x 4153 through 174/119/72 at x 4161 to the
+   cream 212/162/112 at x 4165: `px.py row 15543 4147 4181 2`), slightly in s1 (117/74/50 against
+   143/87/49 on the column), most in s0 (78/44/22 at x 4162 between 150/109/54 and 144/94/39: `px.py
+   row 11509 4150 4186 2`; `r44_f1.png`, `r44_f2.png`, 7.5x, s0 and s9). East of the dip the colour is
+   still poly's (red over green by 33-61, blue under 40 in s0) where the control row has the khaki rim
+   (blue 62-69), and a dip of 2-4 px is no gap between two polys (the smallest poly spacing here is
+   about 20 px): read as the edge of the rail's protected margin lying along the column's east edge. In
+   chip 2's shots the rail's edge line (x 4166-4170) lies on the junction at every y and decides
+   nothing. Ambiguity 181.
+5. **The column's foot and the row west of it.** The column ends at y 12006 (edge y 12006-12010,
+   field below). From its lowest 16 px a poly row y 11990-12006 runs west in the open: orange without
+   a break from x 4136 to x 4163 at y 11998 (`px.py row 11998 4136 4180 3`), and at x 4110 and x 4142
+   poly y 11992-12004 with field north (greenish in chip 2's stripped shot, y 11968-11980) and south
+   (`px.py col 4110 11940 12020 4`, `col 4142`). **That row is `larr`'s H3** of the row below (cell
+   `larr_top_n`: `P 3345,11519 x4100 w=22`, on the s1|s2 boundary y 11985-12007; its comment's "seen to
+   x 4277" was the lower band beyond the column). `cache/scratch/eof/probe44.py 11997 4150 2990 -20 30`
+   (the poly at every 20 px: orange in chip 2's metal shot in the open, cream in the clean shot under
+   metal) finds it at y 11991-12007 at every cut from x 4150 to x 3370 but one (x 3770).
+
+**No contact on the way.** Three metals cross the path: the thin metal x 4338-4354, rail H (over the
+jog block and the lower band) and rail G. `tools/eof_cchk.py` at the four places in the fourteen rows
+(56 readings): the clean shot's lowest red minus green is 24-52 at 53 of them (a pad's hole reads under
+about 24 with a ring all round in both chips; here no place has both), and 18, 7 and 18 at s0's and
+s3's jog and s3's lower band under rail H, each found at the block's or band's own edge (`tools/textmap.py
+4276 12904 4320 12956 2` for s3's jog: red minus green 40-64 over the whole block, no hole; `px.py row
+12929 4284 4314 2`: the low sample is the rim at x 4306). The metals keep their width, and a rail's
+contact is a box with a hole (the contact (4197,11885) of rail G 100 px north). Ambiguity 182.
+
+**The copies.** `tools/eof_hjrows.py` (written for this piece; for each row the y extents of the upper
+band at x 4325, the jog block at x 4298, the lower band at x 4272, 4238 and 4195, the column's foot,
+the west row at x 4142 / 4120 / 4100, and the clean shot across the junction): in the fourteen rows the
+upper band is y 11958/11962 - 11970/11973, the block y 11957/11960 - 11989/11993, the lower band
+y 11979/11985 - 11988/11995, the west row y 11991/11996 - 12005/12007 with poly at all three x, and no
+sample across the junction is pink or green (the tool's one flag, s4's 232/170/116 at x 4170, is the
+band's cream at the edge of the test). On `r44_m2.png` and `r44_m3.png` the outlines lie on the band, the block,
+the lower band, the column and the west row in all fourteen rows.
+
+**Drawn**: the cell `eof_hj` (five poly rectangles), placed at the offsets of `eof_mx`; its band
+overlaps `eof_mx`'s by 5 px, and in the eleven rows its west row overlaps `larr`'s H3 by 5 px. Eleven
+`@alias` lines join the names. No new net name.
+
+**Extracted.** Full extraction 2,495 nets (2,506 before), 4,696 transistors (unchanged), 0 errors,
+0 warnings. `.venv/bin/python tools/sameconn.py 1024d08`: the differences are the 11 joins (each of 11
+nets gains the name `larr_h_s#`; no transistor and no equation changes but for the names).
+`tools/unsure.py`: none of the 11 nets is listed (the labels of `larr_h_s#` are on H3 itself), so
+every join is firm.
+
+```
+cdp4_bus_s7 = larr_h_s1     cdp4_bus_s6 = larr_h_s2     cdp4_bus_s5 = larr_h_s3     cdp4_bus_s4 = larr_h_s4
+cdp4_bus_s3 = larr_h_s5     cdp4_bus_s2 = larr_h_s6     cdp4_bus_s0 = larr_h_s8     cdp3_g_c7   = larr_h_s9
+cdp3_g_c5   = larr_h_s11    cdp3_g_c4   = larr_h_s12    cdp3_g_c3   = larr_h_s13
+(cdp4_bus_s1 in s6, cdp3_g_c6 in s9, cdp3_g_c2 in s13: the west row goes on into a gap, a port)
+```
+
+**What it says (traced).** The line that `larr` calls H, which runs along the top of every row that
+has a row above it (a poly H3 from the east cell column west to a buried contact under rail E, a
+diffusion strip under rails E and B, a poly H1 on to the left column, where on s2 `larr` followed it to
+a contact (2283,11833) and a metal going north), is the compared line of the row above: one net from
+the left column across the whole row boundary, through the column of this piece, to the selector's
+lower pass transistor, and on east across the bus field to `cdp4`'s comparators and latches. (The
+buried contact between H3 and the strip is `larr`'s uncertain item; the joins of this piece do not
+pass through it.)
+
+**Believed, not traced.** (1) The column is the row's output: it runs 390 px north through the row's
+east cell beside the wide device on rail F (`larr`'s Not done: "a driver"), and the line it feeds
+goes to the comparators, to the selector and to the left column, where `larr` found the stages of the
+`ma#_drv_in` lines on the row boundaries. So line H of row s(k+1) would carry row s(k)'s address bit.
+(2) Reading (b) of `larr`'s ambiguity "Line H under rail E" (a contact from rail E, `vss`, onto the
+line) would ground eleven of the fourteen compared lines; with these joins it is not believable.
+(3) In the three gap rows the west row is the same line without a row below it, on to the left
+column.
+
+**Seen, not drawn** (other nets, or the next piece):
+
+- the column north of y 11940: open poly to about y 11612; dark lines cross it at y 11620, 11656-11662,
+  11680-11686, 11704, 11734 and at y 11806, 11824, 11842-11848 (`px.py col 4158 11584 11970 6`), where
+  `r44_e1.png` shows two heavy-outlined spots (x 4145-4175, y 11655-11710 and y 11800-11850) between the
+  column and two salmon poly blocks under rail G's west edge (x 4165-4188, y 11605-11655 and
+  y 11720-11800); between y 11855 and y 11975 it has a green rim on both sides (field);
+- the gap strip x 4233-4246, y 11560-11965 between rails G and H: outlined in the clean shot only,
+  khaki (145/137/80), plain in both chip-2 shots: the clean shot's artefact of a gap between two metals
+  (trap 2), and the same again south of the band (y 12000-12012);
+- **under rail E the gaps have the structure of a row top.** `tools/px.py row 14385 3270 3384 6` (gap 1)
+  against `row 12000 3270 3384 6` (the top of row s2): the same sequence of tan, dark and tan samples at
+  x 3294-3360 in the clean shot, and a poly row at the same level on both sides of it
+  (`cache/scratch/eof/probe44.py 14384 4150 3050 -25 34`: y 14378-14391 from x 4150 to x 3375 and from
+  x 3275 to x 3150). `larr` has, in gap 1, the carry out of row s6 on a contact (3094,14390) and a poly
+  band east along y 14389 "followed to x 3300", and no line H. Whether that band and the west row of
+  this piece's s6 are one poly under rail E is not read (Ambiguity 184): if they were, the carry out of
+  group 0 would be on the compared line of row s6, which is not believable; in the rows with a row
+  below, `larr` has the carry-in poly P2 turning south at x 3263-3292 and H3 beginning at a pale box at
+  x 3330-3352.
+
 ## Ports
 
 The net is driven outside the package (by `rdp2`'s NOR). `in` marks the port beyond which the
@@ -4459,7 +4629,8 @@ driver lies; the other three lead to the loads.
 | `eof_w16000` | poly | (8800, 15727-15745) | in | piece `lat15`: the upper latch's data: the poly row west of the pad (8880,15738), where it enters a heavy-outlined box (8762-8795, 15722-15757) at column B's east edge (not read: by its place a unit's output) |
 | `eof_w16000` | metal | (8831-8845, 16030) | ? | piece `lat15`: the track x 8838 on south of the data pad (8838,16000) (the follower: to (8838,17306); not checked) |
 | `eof_nbox_s0` .. `eof_nbox_s13` | diffusion | (4566-4632, 11216), (4566-4632, 11694), (4566-4632, 12171), (4566-4632, 12648), (4566-4632, 13125), (4566-4632, 13603), (4566-4632, 14079), (4567-4633, 14773), (4567-4633, 15251), (4567-4633, 15728), (4567-4633, 16378), (4567-4633, 16856), (4567-4633, 17333), (4567-4633, 17810) | ? | piece `ld1` (run 39): the north end of the diffusion of the transistor that the line gates, one per row of the left array (s0 at the top). 14 px north of the gate it ends on a heavy-outlined box (x 4600-4635, y 11662-11692 in row s1), not drawn: believed a buried contact onto a poly column x 4605-4625 that goes north across the diffusion box of a VSS contact (4665,11622). (The fourteen poly ports of pieces `t4736s` and `t4780n` at x 4700 are gone: the rows are drawn on to this transistor) |
-| `cdp4_bus_s7` .. `cdp4_bus_s0`, `cdp3_g_c7` .. `cdp3_g_c2` (the bands `eof_mxs_s0` .. `eof_mxs_s13`) | poly | (4420, 11478-11495), (4420, 11955-11972), (4420, 12432-12449), (4420, 12909-12926), (4420, 13386-13403), (4420, 13864-13881), (4420, 14341-14358), (4421, 15034-15051), (4421, 15512-15529), (4421, 15989-16006), (4421, 16639-16656), (4421, 17117-17134), (4421, 17594-17611), (4421, 18071-18088) | ? | pieces `mx1` and `rj`: the west end as drawn of the poly band along each row's south edge; it goes on west into the array (open poly). Since run 43 the band is joined in the east to the bus field's row (piece `rj`), so the net has that row's name and `eof_mxs_s#` is an alias. (The 28 east ports of `eof_mxn_s#` and `eof_mxs_s#` at x 4700 are gone: piece `rj` draws both on to `busl`'s and `bl0`'s row ends at x 4780) |
+| `cdp4_bus_s7` .. `cdp4_bus_s0`, `cdp3_g_c7` .. `cdp3_g_c2` (the bands `eof_mxs_s0` .. `eof_mxs_s13`): the column | poly | (4152-4165, 11463), (4152-4165, 11940), (4152-4165, 12417), (4152-4165, 12894), (4152-4165, 13371), (4152-4165, 13849), (4152-4165, 14326), (4153-4166, 15019), (4153-4166, 15497), (4153-4166, 15974), (4153-4166, 16624), (4153-4166, 17102), (4153-4166, 17579), (4153-4166, 18056) | ? (believed in: the row drives it) | piece `hj`: the poly column x 4152-4164 at whose foot the band and the west row meet, north end as drawn; it goes on north through the row's east cell to about y 11612 (not read). (The fourteen ports at x 4420 are gone: piece `hj` draws the band on west) |
+| `cdp4_bus_s1` (4095, 14375-14393); `cdp3_g_c6` (4096, 16023-16041); `cdp3_g_c2` (4096, 18105-18123) | poly | as given | ? | piece `hj`: in rows s6, s9 and s13 the row west of the column's foot, west end as drawn; it goes on west into gap 1, gap 2 and the channel below the array (open poly; `larr` draws nothing there). In the other eleven rows that row is `larr`'s H3 (`larr_h_s#`), joined |
 | `rcs_mv` | poly | (7035, 16771-16787) | in | piece `selg` (run 42): `bl0`'s row (its port (7040, 16770-16790)) taken on east to the gate of the lower inverter. (The three ports of piece `sel` at x 7222 / 7230 are gone: `eof_ga` and `eof_gb` are driven by this piece's two inverters) |
 | `vss` | metal | (7200, 16349-16391) | - | piece `selg`: a wide arm of the ground rail x 7294-7340 on west across the bus field (seen to x 6850; the thin metals x 7014 .. 7144 pass under it in poly); not followed |
 | `vcc` | metal | (7470-7520, 16455) and (7470-7520, 16925) | - | piece `selg`: `bc3`'s rail RL2 (`M 7495,16290 y17560 w=50`), two pieces of it drawn again over the two supply boxes (y 16455-16605, y 16815-16925) |
@@ -6081,6 +6252,43 @@ driver lies; the other three lead to the loads.
     40). Both metal shots show the track there at its ordinary width and brightness with no ring, and the
     ground under it is field (pink west of the spot, open field east of it): a place where chip 1's
     metal did not protect, and no connection whichever way it is read.
+
+181. **The band meets the column inside rail G's margin** (piece `hj`; no `?` item). The lower band is
+    seen under rail G as far as the rail's west edge (x 4172) and its margin, and the column is open poly
+    from x 4152 to x 4164; whether they touch is read from the clean shot alone, where the band's cream
+    runs into the column's red-brown at x 4164-4166 without a pink stretch or a green rim
+    (`tools/px.py row 11986 4148 4182 2` against the control `row 11960`; `col 4168 11966 12016 2`; the
+    same in all fourteen rows: `tools/eof_hjrows.py`, its last table). At x 4160-4164, where the open
+    colours give way to the protected ones, the samples dip by an amount that differs from row to row:
+    nothing in s8 (`px.py row 15543 4147 4181 2`), down to 78/44/22 for one sample in s0 (`px.py row
+    11509 4150 4186 2`; `r44_f1.png`). Read as the edge of the rail's margin, not as a gap: it is 2-4 px
+    wide where two polys stand about 20 px apart, the colour east of it is still poly's, and s8 has
+    none. In both chip-2 shots and chip 1's metal shot the rail's own edge line (x 4166-4170, there at
+    every y) covers the place. The other reading, a band that ends a few px short of the column, would
+    leave the band a dead end under the rail and the column and H3 without the selector: not read so
+    (trap 34 is about rows 20-30 px apart).
+182. **The jog and the three metal crossings** (piece `hj`; no `?` item). The block under rail H's east
+    edge (x 4290-4308, y 11956-11994) and the bands under the thin metal x 4338-4354, rail H and rail G
+    are read as poly under metal without contact: no hole in the clean shot at any of the 56 places
+    (`tools/eof_cchk.py`; the three low readings are edges: piece `hj`), the metals at their ordinary
+    width, no box. A contact from rail G or rail H would put the compared line on a supply.
+183. **The eleven joins rest on `larr`'s H3** (piece `hj`). This piece draws the row west of the column
+    only from x 4095; from x 4100 to x 3345 it is `larr`'s poly, drawn straight in the first sessions and
+    not reviewed since. Sampled here every 20 px in row s2 only (`cache/scratch/eof/probe44.py 11997 4150
+    2990 -20 30`: poly at y 11991-12007 at every cut but x 3770, under the metal Vm5), not read for
+    crossings under the rails and thin metals (C, D, the VCC rail x 3823-3873, F, the strap, Vm1-Vm6)
+    and not in the other ten rows. `larr`'s own ambiguity "Line H under rail E" (the buried contact from
+    H3 to the strip; a possible contact from rail E) is west of everything this piece joins.
+184. **The three gap rows** (piece `hj`; ports). In s6, s9 and s13 the row west of the column is drawn
+    to x 4095 and left as a port. In gap 1 a poly row is seen at its level (y 14378-14391) from x 4150
+    to x 3375 and again from x 3275 to x 3150, on both sides of the same tan structure under rail E that
+    a row top has (`tools/px.py row 14385 3270 3384 6` against `row 12000 3270 3384 6`), and `larr` has
+    the carry out of row s6 on a contact (3094,14390) with a poly band east along y 14389. Readings: (a)
+    as in the rows with a row below, two polys in line, the western one the carry's (ending at the rail)
+    and the eastern one line H's (from a buried contact under the rail, on from there to the left column
+    by the strip); (b) one poly, the carry out of the group on the compared line. Assumed (a); nothing is
+    drawn of either. Settled by reading x 3080-3380 of gap 1 at 4x or more in the clean shot and both
+    metal shots, with the top of row s2 beside it as the control.
 
 ## Review
 
@@ -8736,6 +8944,23 @@ Round 51: no findings that change a connection.
 
 ## Not done
 
+- **Next (after run 44)**: the band is drawn west to the poly column x 4152-4164 and joined to `larr`'s
+  line H in eleven rows (piece `hj`), so item (a) of the list below is done as far as the column. In
+  order: (a) **the column north of y 11940 in the master row s1** (x 4145-4190, y 11600-11940; `larr`
+  (continue), free): what it is at the two heavy-outlined spots (x 4145-4175, y 11655-11710 and
+  y 11800-11850) beside the two salmon poly blocks under rail G's west edge (x 4165-4188, y 11605-11655
+  and y 11720-11800): a buried contact onto a driver's output (then the row drives the compared line
+  there), or a gate over a diffusion that crosses from rail G's diffusion (x 4188-4225, y 11619-11915)
+  to the strap's (x 4092-4147). Read with `tools/px.py` columns along x 4158 and rows across it at each
+  dark line (y 11620, 11656-11662, 11680-11686, 11704, 11734, 11806, 11824, 11842-11848), in chip 2's
+  two shots for poly against diffusion in the open (trap 28) and the clean shot under rail G; views
+  `r44_e1.png`, `r44_e2.png` (4x, four shots) show the place; then `findcell` over the fourteen rows.
+  With it `larr`'s Not done readings of x 3900-4250 (rail F's wide device, the strap, rail G's
+  diffusion). (b) **the three gap rows' west rows** (ports (4095, 14375-14393), (4096, 16023-16041),
+  (4096, 18105-18123)): follow each west to the left column, and read x 3080-3380 of gap 1 under rail E
+  (Ambiguity 184: the carry out of s6 against line H). (c) the box north of the load line's gate (what
+  `eof_nbox_s#` is); (d) the rest of the column; (e) the pad (4778,17365); (f) `bl0_w15566`'s driver and
+  the twin of `cap18`; (g) the sources of `lc3_e9577` .. `lc3_e9793`; as in the lists below.
 - **Next (after run 43)**: the fourteen joins are drawn (piece `rj`: the selector's inputs are
   `cdp3_hw_c#` / `lc3_e#` and `cdp4_bus_s#` / `cdp3_g_c#`), so item (a) of the list below is done but for
   **the band west of x 4420**: each band's west end (port (4420, 11955-11972) in row s1) goes on into the
