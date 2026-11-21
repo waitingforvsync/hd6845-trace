@@ -1655,7 +1655,13 @@ views and with the text tools named below. No transistor, no contact, no pad bet
   bar at (6418-6426, 7302) (`m5_arm4.png`, 3x, four shots; `tools/textmap.py 6360 7284 6450 7320 3
   --acid`): a notch in the north half of the metal in chip 2 only (y 7299; full bright at y 7302-7305), a
   dim spot at x 6396-6408 in chip 1 only, the pale patch named above in the chip-2 stripped shot, the
-  clean shot unbroken salmon: no ring in either chip, not a contact.
+  clean shot unbroken salmon: no ring in either chip, not a contact. A second bar, found by the reviewer
+  (round 15): (6494-6503, 7165-7180), right across the arm y 7173 over the row y 7171: dark in chip 2
+  (101/48/22, 90/35/17 at x 6496-6500), only dim in chip 1 (151/118/48), the clean shot unbroken protected
+  poly (228/175/123) and the chip-2 stripped shot constant (`tools/px.py row 7173 6484 6512 4 all`,
+  `tools/textmap.py 6478 7158 6520 7188 3 --acid`; `review-15/c2_arms.png`): 9 px, no ring, no widening:
+  a blemish of chip 2's metal, not a contact (`tools/tl5_tracks.py h` does not list it because chip 1
+  passes its test on either side within 8 px).
 - **The rows east of the arms** (`m4_rows_w.png`; `m6_rows_e.png`, 2.85x, chip-2 metal and clean, every
   package's trace outlined; `m1_field.png`, 1.17x, three shots): `tools/busl_roww.py`, `--win 21`: row
   y 7171, x 6400-7070: a row 16-30 px wide in two or more shots at every sample but x 6658 (the arm's
@@ -2675,6 +2681,49 @@ Findings: none. Nothing was changed after the review.
 Could not check: the chip-2 stripped shot is fringed under the track fields, so "no tap" rests on both
 metal shots and the clean shot; `a6`'s crossings were viewed at 3x and measured, not each at 4x; `lc1`'s
 row west of x 6300, `bc1`'s lines east of x 7100 and `bl0`'s tracks south of y 15330 were not re-read.
+
+Round 1: no findings.
+
+**Run 15, piece `xm` and the four Ls `ca`, `cb`, `cc`, `cd`. Round 1: full review** (2026-11-21 01:10 to
+01:18 +0100; a fresh Fable 5.2 reviewer agent; the two groups in one round: one wire, and four wires of
+one build; commit 3fa665c; images in `cache/scratch/busl/review-15/`, 15 used). Told to suspect, for
+`ca`-`cd`: the pairing of columns and rows at the four corners under the metal arms, whether each corner
+is one poly and whether each row stops short of the next column west; whether the rows under `eof`'s
+arms are poly along the whole overlap and unbroken (the two pale patches of the chip-2 stripped shot,
+the bar at (6418-6426, 7302)) and whether any arm has a contact onto its row; the columns under the
+sixteen metals (a step of one track, a contact; chip 2's mottled metal at (6315-6335, 6996-7005) and
+(6358-6373, 6953-6962)); the joins to `tl6`'s and `tc2`'s poly ends at y 6350 / 6400 and the order of
+the columns there. For `xm`: whether the end pad is a contact and whether anything else leaves it; the
+crossings of the tracks x 6472 (dim), x 6514 (vivid red in the clean shot), x 6558 (greenish); the red
+spot of chip 1's metal shot at (6819,10056). Asked to read every crossing at 4x or more in a metal shot
+and the clean shot, not by measurement alone.
+Checked, `xm` (crossings at 5x in four shots, the pad at 4x): the pad (6817,9991) is a contact with ring
+and bright centre in both chips; bare ground north and east of it and field under the track south of it,
+so the poly ends there; the row y 9990 is continuous orange poly from x 6435 to the pad; all six
+crossings are plain (x 6472 is mottled differently in the two chips, no ring); the two staircase arms
+lie beside the row, not on it; the track x 6819 is continuous to y 10400. `ca`-`cd`: the corners at 4x
+in four shots and by text map: four nested Ls, each corner one salmon poly with no edge line, pink field
+between each row's west end and the next column, and in both metal shots one edge bar, not two, where
+each arm meets its own column; no column runs on south of its row; the pairing is as drawn. The arms at
+4x: constant width, no ring or hole, the rows unbroken beneath. The rows east to the four end pads at 4x
+and with `tools/busl_roww.py`: plain crossings, no pad or break. The columns at 4x in the chip-2 metal
+shot and the clean shot (three strips, y 6330-7200): straight, the same edge positions under all sixteen
+metals in both chips, no ring or hole, poly in the open gaps (chip-2 blue 46-61 against 73-88 for
+field); the two mottled spots are chip 2 only. The north ends at 4x: each column runs straight from its
+pad, (6275,6152), (6318,6110), (6360,6152), (6404,6107), in the same order, under the ground metal. The
+full extraction: 2,450 nets, 4,594 transistors, 0 errors, 0 warnings.
+Findings: none. Two remarks that change nothing in the trace: (1) a second dark bar across an arm,
+(6494-6503, 7165-7180) on the arm y 7173 (chip 2 dark, chip 1 dim, no ring, the clean shot unbroken):
+checked here with `tools/px.py` and `tools/textmap.py` and written into the piece's notes; (2) at
+(6819,10056) chip 1's metal is poly-coloured (139/48/49) across the track's full width, a defect of chip
+1's metal, with chip 2 plain metal and no ring; the greenish patch there in the chip-2 stripped shot is
+also at the crossings of x 6733 and x 6775 with the same row and means nothing. Nothing in
+`trace/busl.txt` was changed after the review.
+Could not check: chip 1's metal shot by eye at the 64 column crossings and along the rows at
+x 6640-6905 (those rest on the text tools, which test both chips); the chip-2 stripped shot at the
+corners reads poly-coloured everywhere there, so the field between the Ls rests on the clean shot and on
+the metal shots' edge bars; `lc3`'s row west of x 6435 and the far ends of the neighbours' nets were not
+re-read.
 
 Round 1: no findings.
 
