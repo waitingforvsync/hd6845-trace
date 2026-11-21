@@ -4590,3 +4590,10 @@ P 10440,17545 y17515 x10598 w=16
 N P 10470,17515 eof_w17515
 D 10546,17496:10590,17580
 C 10563,17550
+# Review round 62 (geometry only): the strip west of the rail is also diffusion at
+# y 17227-17248 (px.py col 10528 17226 17270 4 acid,metal), and the pull-down's channel runs
+# on west of the rail: diffusion on both sides of the row at x 10506-10546, the south part
+# y 17532-17548 only (px.py col 10522 17526 17562 4: field from y 17550). East of the rail
+# the row and the channel run on to about x 10620-10638 (cdp4's strip: not drawn).
+D 10521,17227:10546,17248
+D 10506,17496:10546,17548
