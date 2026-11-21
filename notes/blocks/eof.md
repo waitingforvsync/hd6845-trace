@@ -850,8 +850,8 @@ are two wide inverters on that one input, each with its own output: `eof_w15998`
   edge of the wing (the "outlined square" is diffusion: bright green in the clean shot, red over green by
   18 in the chip-2 stripped shot against -5 for the field west of it), so each row is one poly and a gate
   from that line east.
-- **Traced** (wiring of the two outputs, no uncertain item): each node leaves west by a box at the end of a
-  poly row. The upper row runs under four thin metals (the input's own among them: no contact) to an end pad
+- **Traced** (wiring of the two outputs; one uncertain item, 16 px of metal at a corner: Ambiguity 138): each
+  node leaves west by a box at the end of a poly row. The upper row runs under four thin metals (the input's own among them: no contact) to an end pad
   (7013,16000), whose metal goes south on x 7014 and turns west at (7014,16262) into a horizontal metal. The
   lower row turns south at x 7005-7025 under that metal (no contact in 65 px) and runs on to its own pad
   (7012,16303), whose metal goes west along y 16303. So the two outputs are two wires, 41 px apart, going
@@ -989,7 +989,7 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `in15760`, the wires of gates 2 and 3 of `u15760` | x 6995-7296, y 15111-15840 | wiring only. `eof_w15262`: the row y 15727-15752, a poly column x 7092-7114 under `ck_out`'s metal, a pad (7100,15392), a metal x 7100 north, a pad (7100,15262), a poly row y 15251-15273 east (port at x 7225, before a box at (7247,15262)). `eof_w15128`: the row y 15814-15838, a pad (7012,15822), a thin metal x 7014 north, a pad (7014,15128), a poly row y 15119-15142 east (port at x 7225, before a box at (7247,15128)) |
 | `u15260`, the NOR that makes `eof_w15262` | x 7025-7470, y 15140-15390 | a two-input NOR laid flat under the rail x 7294-7340 (`vss`): an active area y 15161-15365 under the rail with a wing west of it (x 7267-7296, y 15188-15340); ground contacts (7305,15181), (7305,15341); gate rows `lc1_w7780` (y 15207-15229, from `busl`'s row end x 7170) and `rcs_mv` (y 15293-15317, from `bl0`'s row end x 7030), each ending east of the rail at x 7350; the node between them: west a box (7234-7263, 15248-15278) at the end of `eof_w15262`'s row (tie uncertain), east a band y 15246-15280 under the load's plate (x 7390-7432, y 15226-15326; channel 34 wide, 42 long) into `bc1`'s VCC box (x 7462 on); the plate's tie a box (7386-7418, 15302-15326) on a diffusion strip x 7361-7374 south of the band (tie uncertain) |
 | `u15100`, the inverter that makes `eof_w15128` | x 7220-7525, y 14995-15160 | one pull-down under the north end of the rail x 7294-7342 (`vss`): the active area x 7292-7338, y 15030-15128 with a ground contact (7308,15051) north of the gate row `rst_n` (y 15076-15097, from `bl0`'s row end x 7280, ending east of the rail at x 7355); the node south of the gate: west a band (x 7266-7296) against a box (7234-7263, 15110-15145) at the end of `eof_w15128`'s row (uncertain tie), east a band y 15110-15128 that widens to y 15106-15136 and runs under the load's plate (x 7408-7461, y 15086-15153) into a supply box (7468-7521, 15073-15135) with a contact (7491,15102) under RL2; the load's tie a strip x 7385-7398 north from the band to a box (7379-7435, 15057-15080) (uncertain); the rail's turn east at y 15024-15069 onto `busl`'s VSS metal x 7383-7432 |
-| `u15960`, the upper inverter on `eof_w15781` | x 6990-7525, y 15880-16270 | a wide pull-down under the rail x 7294-7342 (`vss`): the ground diffusion is a wing west of the rail (x 7236-7296, y 15884-15945), the box under the rail with a contact (7316,15911), a tab east of the rail and a strip y 15884-15900 to x 7451; the gate is `eof_w15781`'s row y 15945-15968 from the pad (7187,15955), on east to x 7386, north at x 7359-7386 and east along y 15900-15925 to x 7460; the node the band y 15968-15987 from x 7236 to x 7451 with the area x 7386-7451, y 15925-15987; the load a plate (7366-7461, 15994-16036) over the node's south end, a region y 16041-16064 south of it into a supply box (7468-7522, 16017-16067) with a contact (7490,16040) under `bc1`'s RL2 (`vcc`), its tie a box (7343-7370, 15992-16036) under the node band (uncertain); the exit: a tongue (7266-7280, 15978-16006) beside a box (7232-7265, 15987-16018) (uncertain tie), the row y 15989-16010 west to an end pad (7013,16000), a thin metal x 7014 south to a corner (7014,16262) and west (port at x 6990) |
+| `u15960`, the upper inverter on `eof_w15781` | x 6990-7525, y 15880-16270 | a wide pull-down under the rail x 7294-7342 (`vss`): the ground diffusion is a wing west of the rail (x 7236-7296, y 15884-15945), the box under the rail with a contact (7316,15911), a tab east of the rail and a strip y 15884-15900 to x 7451; the gate is `eof_w15781`'s row y 15945-15968 from the pad (7187,15955), on east to x 7386, north at x 7359-7386 and east along y 15900-15925 to x 7460; the node the band y 15968-15987 from x 7236 to x 7451 with the area x 7386-7451, y 15925-15987; the load a plate (7366-7461, 15994-16036) over the node's south end, a region y 16041-16064 south of it into a supply box (7468-7522, 16017-16067) with a contact (7490,16040) under `bc1`'s RL2 (`vcc`), its tie a box (7343-7370, 15992-16036) under the node band (uncertain); the exit: a tongue (7266-7280, 15978-16006) beside a box (7232-7265, 15987-16018) (uncertain tie), the row y 15989-16010 west to an end pad (7013,16000), a thin metal x 7014 south to a corner (7014,16262) and west (port at x 6990; 16 px at the corner drawn uncertain) |
 | `u16175`, the lower inverter on `eof_w15781` | x 6990-7525, y 16095-16320 | `u15960`'s build 217 px south: wing (7236-7296, 16101-16162), ground contact (7317,16127), gate row y 16162-16185 from the end pad (7187,16170) with the dogleg to the band y 16117-16142; node band y 16185-16204; plate (7366-7461, 16211-16253), supply box (7468-7522, 16213-16284) with a taller contact (7490,16249); tie box (7343-7370, 16209-16253) and exit box (7232-7265, 16204-16235) (both ties uncertain); the row y 16206-16227 west to x 7005, a poly column x 7005-7025 south under `u15960`'s output metal to a pad (7012,16303), its own metal west along y 16303 (port at x 6990) |
 
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
@@ -3184,7 +3184,7 @@ it 146/142/102 and -5, the area inside the dogleg 125/121/97 and +13.
 | The node's way out west | tongue `D 7266,15978:7280,16006`, box `P 7232,15987:7265,16018`, `?D 7243,15992:7270,16008`, `?B 7241,15990:7266,16010` | a box with a heavy frame x 7232-7265, y 15984-16018 and a pale centre x 7242-7255, y 15993-16010 in both metal shots and the chip-2 stripped shot, at the east end of the output row; the node band lies on its top frame, and a tongue of the band (x 7267-7279, closed by a U-shaped outline at y 16008-16015) runs south beside its east frame, one dark line (x 7256-7266) between the centre and the tongue. `r36_d1.png` (6x, four shots). Ambiguity 136 |
 | The output row | `P 7025,15989:7240,16010` | orange in chip 2 at y 15991-16007 between edge lines y 15984-15990 and y 16008-16015 (`r33_dark.py v 7215 / v 7150 15970 16030`), under the metals x 7187, 7143, 7103 and 7058 with the same width and no pad (`r33_dark.py h 16001 6880 7240`; `tools/eof_cchk.py 7143,16001 7103,16001 7058,16001`: clean shot 38, 41, 34, no hole). **Under x 7187, the gate's own metal** (piece `u15760`): the metal is 12 px wide and not widened, with bars at the row's two edges, and the clean shot keeps poly's colour across the row (red over green by 24 to 64, no green hole: `tools/textmap.py 7166 15978 7210 16024 3`). Ambiguity 139 |
 | The end pad | `P 6996,15982:7031,16018`, `C 7013,16000` | a bright centre x 7008-7017, y 15995-16004 in a dark ring on all four sides in both metal shots, a green hole in the clean shot (`tools/textmap.py 6990 15974 7040 16024 3`; `tools/eof_cchk.py 7013,16001`: hole -29, centres 217 / 207). No metal north of it (`tools/tl5_tracks.py v 7014 15820 16010`: none in either chip y 15831-15994): not on `eof_w15128`'s track, which ends on its own pad (7012,15822) on the same x |
-| **The thin metal south and its corner** | `M 7014,16000 y16262 x6990 w=13` | `tools/tl5_tracks.py v 7014 15960 16500`: metal in both chips from y 16022 (south of the pad's ring) to y 16259, none y 16260-16296; `tools/follow.py 7014 16030 S --gap 16`: to (7018,16266). It passes over the lower unit's output row and lies on that row's poly column from y 16205 (no contact: Ambiguity 139). At y 16254-16270 a horizontal metal runs west from it: bright in both chips at x 6992-7001 and x 6968-6983, with dim bars at x 6983-6989 and x 6959-6965 (the edges of `bl0`'s poly column of `rcs_mv` beneath) and at x 7004-7010 beside the vertical metal (`tools/textmap.py 6956 16238 7040 16330 3`; `r36_g1.png`, 4x, four shots). The clean shot has a protected pink band y 16253-16274 from x 6986 to x 7007. Read as one metal with a corner (Ambiguity 138). Drawn to x 6990 (port); `tools/follow.py 6990 16260 W --gap 16` runs it on to a corner (6408,16262) and north (not read) |
+| **The thin metal south and its corner** | `M 7014,16000 y16268 w=13`, `?M 6999,16262 x7017 w=13`, `M 6990,16262 x7001 w=13` | `tools/tl5_tracks.py v 7014 15960 16500`: metal in both chips from y 16022 (south of the pad's ring) to y 16259, none y 16260-16296; `tools/follow.py 7014 16030 S --gap 16`: to (7018,16266). It passes over the lower unit's output row and lies on that row's poly column from y 16205 (no contact: Ambiguity 139). At y 16254-16270 a horizontal metal runs west: bright in both chips at x 6992-7001 and x 6968-6983, with dim bars of 8-9 px at x 6958-6965 and x 6937-6945 (edges of poly columns beneath) (`tools/textmap.py 6956 16238 7040 16330 3`; `r36_g1.png`, 4x, four shots); its south edge line y 16270-16274 is continuous over x 6990-7022 and the vertical arm ends flush with it; the clean shot has a protected pink band y 16253-16274 from x 6986 to x 7007. **At the corner neither chip shows metal for 14 px** (`tools/tl5_tracks.py h 16262 6900 7040`: none x 7001-7015; `tools/px.py row 16262 6996 7024 2`: dark red-brown at x 7004-7012, the arm's bright strip only x 7014-7020 at that height): read as one metal with a corner over the west edge of the poly column beneath, and the 16 px drawn uncertain (review round 43; Ambiguity 138). Drawn to x 6990 (port); `tools/follow.py 6990 16260 W --gap 16` runs it on to a corner (6408,16262) and north (not read) |
 | The load | plate `P 7366,15994:7461,16036` over `D 7381,15982:7451,16067` | orange in both chip-2 shots at y 15998-16033 between single lines y 15990-15997 and y 16034-16040 (`r33_dark.py v 7420 15866 16096`); the active's west edge crosses it at x 7377-7384 and its east edge at x 7447-7453, the poly running on to x 7461 (`h 16020 7330 7540`): a channel 70 wide and 42 long. North of it the node's area, south of it the region of the table (bottom edge y 16064-16071) |
 | The supply | `D 7445,16041:7475,16064`, `D 7468,16017:7522,16067`, `C 7490,16040 s=22x20`, a piece of RL2 `M 7495,16000 y16085 w=50`, `vcc` | the region south of the plate runs east to RL2 with only RL2's own edge line between (`r33_dark.py h 16060 7330 7540`: plain x 7385-7461, one line x 7462-7466; `tools/px.py row 16052 7430 7500 4`: tan under RL2 from x 7466), into a box y 16017-16067 with a contact: a bright centre y 16031-16050 in a ring in both metal shots (`r33_dark.py v 7490 15880 16100`; `tools/eof_cchk.py 7490,16035`: centres 232 / 240, the ring dark on all sides), specks in the clean shot. `bc1` draws RL2 (`M 7495,14950 y16300 w=50`) and no box here |
 | **The load's tie** | `P 7343,15992:7370,16036`, `?D 7347,15984:7361,16012`, `?B 7346,15990:7362,16014` | the plate's poly runs on west of the active's edge as an L round a box with a heavy frame x 7343-7368, y 15990-16020 and a pale centre x 7349-7358, y 15998-16012 (plain in both metal shots, greenish in the chip-2 stripped shot, a bright cell in the clean shot), orange east of the box (x 7368-7377) and south of it (y 16022-16032); the box stands directly under the node band with one dark line (y 15987-15997) between the band and the centre (`r33_dark.py v 7352 15866 16070`; `r36_c1.png`, 6x, four shots). Ambiguity 137 |
@@ -3197,7 +3197,9 @@ it 146/142/102 and -5, the area inside the dogleg 125/121/97 and +13.
 
 The node's diffusion is labelled `eof_w15980` and the output row `eof_w15998`; `@alias eof_w15998 eof_w15980`
 holds them, as in the NORs. The pull-down is 6.5 times the load's strength, and both are about four times
-as wide as those of the NORs north of it (69/21 against 35/40).
+as wide as those of the NORs north of it (69/21 against 35/40). `tools/unsure.py` lists `eof_w15998` in three
+pieces without the uncertain items: the node, the output row with its pad and vertical metal, and the bus
+metal west of the corner.
 
 **What it says.** `eof_w15998` is the inverse of the second NOR's output: high whenever `eof_w15523`,
 `eof_w15262` or `eof_w15128` is high, that is NOR(`rcs_e4`, `eof_w16040`, `bl0_w15566`) OR NOR(`lc1_w7780`,
@@ -3261,7 +3263,10 @@ twice because its loads are heavy and lie in two places; if the two bus metals m
 units would be one driver of double strength. That is for whoever follows the two metals.
 
 **Seen in the region, not drawn**: the upper box under RL2 beside this unit too (y 16096-16172, a contact
-(7487,16142)); the rail south of y 16330.
+(7487,16142)); the rail south of y 16330; **the head of the next unit south under the rail** (review round
+43): a contact on the rail at about (7305,16305) (`tools/eof_cchk.py 7305,16305`: centres 243 / 213, the ring
+dark on all sides), a box under the rail from y 16290 (`r33_dark.py v 7320 16280 16340`) and an outline west
+of the rail from (7250,16311), 85 px of field under the rail between it and this unit's node.
 
 ## Ports
 
@@ -4525,23 +4530,30 @@ driver lies; the other three lead to the loads.
     depletion load, as in every unit of the column. (b) Not tied: the plate would float, and the L of poly
     round the box would have no purpose. The box's centre is plain in both metal shots and a bright cell in
     the clean shot, like the other tie boxes of the column.
-138. **The corner (7014,16262) of `eof_w15998`'s metal** (piece `u15960`; no `?` item). Between the vertical
-    metal (bright at x 7010-7019 in chip 2, x 7013-7023 in chip 1) and the horizontal metal's nearest bright
-    stretch (x 6992-7001) both metal shots are dim (80-110) over x 7004-7010, 7 to 9 px, at y 16256-16268
-    (`tools/textmap.py 6956 16238 7040 16330 3`). (a) Adopted: one metal with a corner; the dim bar is the
-    west edge of the lower unit's poly column beneath (x 7005-7025), like the bars at x 6983-6989 and
-    x 6959-6965 over the edges of `bl0`'s column further west, which are as dim. Two metals end to end
-    would show two edge lines with bare ground between (20 px or more elsewhere in this field), and
-    neither metal has a pad there: the vertical one ends at y 16270 and the horizontal one at x 7020. The
-    clean shot's protected band is unbroken across the place (it would be across a 9 px gap too: trap 2).
-    (b) Two metals: then `eof_w15998`'s pad metal would end on nothing and the bus metal would begin on
-    nothing. If (b), the upper inverter has no load drawn and the bus metal no driver.
+138. **The corner (7014,16262) of `eof_w15998`'s metal** (piece `u15960`; `?M 6999,16262 x7017`). Between the
+    horizontal metal's nearest bright stretch (to x 7000) and the vertical arm (bright at x 7010-7018 above
+    the corner, only x 7014-7020 at y 16258-16268) neither chip passes the metal test for 14 px, x 7001-7015
+    (`tools/tl5_tracks.py h 16262 6900 7040`), against 8-9 px for the bars over other edges on the same metal
+    (x 6958-6965, x 6937-6945); x 7004-7012 is dark red-brown in both chips (chip 2 73-127 / 34-63 / 15-34:
+    `tools/px.py row 16262 6996 7024 2`), and `tools/tl5_tracks.py v 7014` loses the arm from y 16260, 9 px
+    before its end. **The photos cannot tell one metal from two metals 9 px apart here** (review round 43,
+    which corrected this entry's first figures, "7 to 9 px at 80-110"). (a) Adopted, drawn uncertain: one
+    metal with a corner, dark where it lies over the west edge of the lower unit's poly column (the dark
+    line x 7003-7007 runs on north and south of the metal as that edge). For it: the horizontal metal's
+    south edge line y 16270-16274 is continuous over x 6990-7022 and the arm ends flush with it (trap 16's
+    test (c)); there is no pad and no hole on y 16262 from x 6900 to x 7040 nor on x 7014 from y 16022 to
+    y 16296, so two metals would be two dead ends; the clean shot's protected band is unbroken (it would be
+    across a 9 px gap too: trap 2). (b) Two metals: then `eof_w15998`'s pad metal ends on nothing and the bus
+    metal begins on nothing; the upper inverter would have no load drawn and the bus metal no driver. What
+    would settle it: the bus metal's other end (if it has a driver of its own, (b)); nothing more at the
+    corner in these photos. `tools/unsure.py` lists the join.
 139. **Two metals over the two output rows without contact** (pieces `u15960`, `u16175`; traps 13, 22; no `?`
     item). (1) `eof_w15998`'s thin metal x 7014 crosses the lower unit's output row at y 16206-16227 and
     lies on that row's poly column from there to its corner at y 16262, 65 px. No pad, no ring and no hole:
     the metal keeps its width, the clean shot has poly's colour without a green hole all along (red over
-    green by 40 to 80; `tools/eof_cchk.py 7014,16218`: 39; the follower's candidate (7014,16232) is the bar
-    of the row's south edge), and the column's own pad with a hole lies 40 px further south (7012,16303).
+    green by 40 to 80; `tools/eof_cchk.py 7014,16218`: 39; the follower's candidate (7014,16232) is a dull red spot in
+    chip 1 only, y 16223-16235, with chip 2 fully bright there, no ring, no hole, the clean shot salmon:
+    `tools/px.py col 7014 16218 16240 3`; review round 43), and the column's own pad with a hole lies 40 px further south (7012,16303).
     A contact would join the two inverters' outputs: two drivers of one net, which changes no logic but
     would make the two bus metals one net. (2) `eof_w15781`'s thin metal x 7187 crosses `eof_w15998`'s row at
     y 15989-16010 on its way to its end pad: 12 px wide, not widened, bars at the row's edges only, the
@@ -6688,6 +6700,75 @@ The connections are the same before and after the fix:
 
 Round 42: no findings that change a connection.
 
+### Round 43 (full review of pieces `u15960` and `u16175`; 2026-11-21 09:50 to 10:08 +0000, at commit 3b3bb33)
+
+One fresh reviewer (Claude Fable 5.2), briefed with the two pieces' claims (per unit: the inverter's
+equation; the gate as one poly from `eof_w15781`'s pad row through the block to the band's end, the line at
+x 7231-7239 an active edge under it; the ground side as one diffusion of wing, box under the rail, tab and
+strip on one contact; the node band from the wing's west edge under the rail into the area inside the
+dogleg and on under the plate into the supply box under RL2; the two uncertain ties; the output row under
+the thin metals without contact to its pad; for the upper unit the metal x 7014 south to a corner
+(7014,16262) and west, for the lower the row's turn south under that metal to its own pad (7012,16303) and
+a metal west; the second box under RL2 beside each unit as not joined; the lower unit as a copy of the
+upper with three differences) and told to suspect: (a) the corner (7014,16262): one metal or two, and
+whether the vertical metal runs on to the pad (7012,16303); (b) a contact between the metal x 7014 and the
+lower unit's poly beneath it; (c) which way each pad's metal leaves; (d) the crossing (7187,16000); (e) the
+gate as one poly and the line at x 7231-7239; (f) the strips north of the bands as diffusion, and the
+ground side as one diffusion; (g) the node's continuity and the supply entry, and the second boxes under
+RL2; (h) the four ties; (i) every difference of the copy. Images: `cache/scratch/eof/review-43/` (15).
+
+It checked, at 4x and more in the four shots and by text (`px.py`, `textmap.py`, `eof_band.py`,
+`eof_cchk.py`, `tl5_tracks.py`, mosaics of the two units, the extraction), and found as drawn: each gate
+one poly, the line at x 7231-7239 a single 9 px edge (minimum red 54) with orange poly on both sides in both
+units, each band's tip ending at about x 7461 with field before RL2's box; the strips diffusion (chip-2
+metal shot red minus green +36 against +20 for field, stripped +11 to +17 against -3); wing, box under the
+rail and tab separated only by the rail's edge lines; both ground contacts; the node tan under the rail at
+y 15977 and y 16190-16196 and plain through the plate to the region south of it; both supply necks with
+one line at RL2's edge and no green strip, and the second boxes under RL2 separate (a field strip
+x 7460-7466); no hole, pad or ring on the output rows under x 7058, 7103, 7143, nor under x 7187 at
+(7187,16000), and none on the metal x 7014 along y 16206-16296; the pad (7013,16000) with one poly east and
+one metal south, the pad (7012,16303) with metal west only, open poly between the corner and its ring and
+field south of it; the lower unit matching the upper by mosaic but for the three differences in the notes;
+the extraction (0 errors, two transistors per unit).
+
+It reported **no finding that changes a connection** and three points for the record, each checked here:
+
+1. **The corner (7014,16262): the evidence is weaker than Ambiguity 138 said.** `tl5_tracks.py h 16262 6900
+   7040` gives 14 px without metal in both chips (x 7001-7015), against 8 px for the other bars on the same
+   metal; the vertical arm is lost from y 16260 and its bright strip at y 16258-16268 is only x 7014-7020;
+   x 7008-7013 is orange-brown in both chips. The photos cannot tell this from a 9 px gap; the reviewer
+   held one metal on three grounds (the continuous south edge line y 16270-16274 with the arm ending flush,
+   the dark line x 7003-7007 continuing the poly column's west edge, and no hole or pad on either line, so
+   that two metals would be two dead ends). **Confirmed** (`tl5_tracks.py h 16262 6900 7040`: none
+   x 7001-7015; `px.py row 16262 6996 7024 2`: 73-127 / 34-63 at x 7004-7012, yellow only at x 7016-7018).
+   The first figures of Ambiguity 138 ("7 to 9 px at 80-110") were from a 3 px text map and are corrected.
+   Since the join is an inference, **the 16 px at the corner are now drawn uncertain** (`?M 6999,16262
+   x7017`, the metal's two firm pieces either side, a label on the bus piece), so that `tools/unsure.py`
+   lists `eof_w15998`'s bus metal as joined only through an uncertain item (trap 27's rule). The
+   connections are the same (below); geometry and marking only.
+2. **The follower's candidate (7014,16232) is not "the bar of the row's south edge"**: chip 2 is fully
+   bright there and only chip 1 has a dull red spot at y 16223-16235, without ring or hole, the clean shot
+   salmon. **Confirmed** (`px.py col 7014 16218 16240 3`: chip 2 188-237, chip 1 109-159 at y 16224-16233,
+   clean shot 215-226/151-165). Ambiguity 139's wording corrected; no contact, as drawn.
+3. **Undrawn and unlisted inside `u16175`'s region**: a ring contact on the ground rail at about
+   (7305,16305), a tan box under the rail from y about 16290 and an outline west of it from (7250,16311):
+   the head of the next unit south, 85 px of field under the rail from the lower unit. **Confirmed**
+   (`eof_cchk.py 7305,16305`: centres 243 / 213, the ring dark on all sides; `r33_dark.py v 7320 16280
+   16340`). Written into the piece's "Seen, not drawn" and into Not done; nothing of these two units.
+
+Could not check (the reviewer): the four uncertain ties (by form, a heavy frame and a pale centre at a poly
+end, "tied" is the better reading at each; conduction cannot be seen); whether the two bus metals meet west
+of x 6990; and the end pad (7187,16170) of piece `u15760`, the lower inverter's gate input: ring and centre
+in both chips, only a weak hole in the clean shot (as run 33 recorded it: a widened pad at the metal's end
+with a ring on all four sides; trap 26's converse; left as drawn).
+
+The connections are the same before and after the changes:
+
+    tools/t.sh eof sameconn.py 3b3bb33           -> connections identical
+    .venv/bin/python tools/sameconn.py 3b3bb33   -> connections identical
+
+Round 43: no findings that change a connection.
+
 ## Not done
 
 - **Next (after run 36)**: the two units `eof_w15781` gates are drawn (pieces `u15960`, `u16175`: two wide
@@ -6702,8 +6783,11 @@ Round 42: no findings that change a connection.
   wires meet decides if the two inverters are one driver. (b) `bl0_w15566`'s driver and the twin of `cap18`,
   then the rest, as below. Seen beside the two pieces, other nets, not drawn: a box with a contact under RL2
   beside each unit ((7476-7520, 15900-15960), (7476-7520, 16096-16172): Ambiguity 141) and the column east of
-  RL2 (`bc1` (continue)); the rail x 7294-7342 between y 16330 and `bl0`'s piece from y 16925, and whatever
-  stands under it there (`tools/railprof.py 7295 7340 15860 16320`: a poly over field at y 16278-16297).
+  RL2 (`bc1` (continue)); the rail x 7294-7342 between y 16330 and `bl0`'s piece from y 16925, and the units
+  under it there: the next one's head is a contact on the rail at about (7305,16305) with a box under the
+  rail from y 16290 and an outline west of the rail from (7250,16311) (review round 43). The corner
+  (7014,16262) of `eof_w15998`'s metal is drawn uncertain (Ambiguity 138): following the bus metal west is
+  also what would settle it.
 - **As run 35 left it** (item (a) is done by run 36): the unit that drives `eof_w15128` is drawn (piece `u15100`: `eof_w15128` = NOT
   `rst_n`), so item (a) of the list below is done, and all three inputs of the second NOR have their drivers.
   In order (all `bc1` (continue), free; the same reading method: `tools/eof_band.py` on every narrow band with

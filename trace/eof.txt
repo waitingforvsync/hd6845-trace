@@ -3159,9 +3159,19 @@ N P 7120,16000 eof_w15998
 # over the LOWER unit's output row and poly column (y 16205-16270, no hole, no pad:
 # eof_cchk.py 7014,16218: clean 39), to a corner at (7014,16262), where it turns west into a
 # horizontal metal y 16254-16270 (textmap.py 6956 16238 7040 16330 3: bright in both chips at
-# x 6968-6983 and x 6992-7001; the 7-9 px dim bar at x 7004-7010 at the corner is read as the
-# edge of the poly column beneath, not a gap). Drawn west to x 6990: port
-M 7014,16000 y16262 x6990 w=13
+# x 6968-6983 and x 6992-7001). AT THE CORNER neither chip shows metal for 14 px
+# (tl5_tracks.py h 16262 6900 7040: none x 7001-7015, against 8-9 px for the bars over other
+# edges on the same metal; px.py row 16262 6996 7024 2: dark red-brown at x 7004-7012, the
+# vertical arm's bright strip only x 7014-7020 there): the photos cannot tell one metal over
+# the poly column's west edge (x 7003-7007) from two metals 9 px apart (review round 43).
+# Read as one metal (neither piece has a pad or a hole to end on; the south edge line
+# y 16270-16274 is continuous over x 6990-7022 and the arm ends flush with it), and the 16 px
+# at the corner drawn uncertain so that tools/unsure.py lists the join. Drawn west to
+# x 6990: port
+M 7014,16000 y16268 w=13
+?M 6999,16262 x7017 w=13
+M 6990,16262 x7001 w=13
+N M 6994,16262 eof_w15998
 # the load: a poly plate over the node's area, x 7366-7461, y 15994-16036 (r33_dark.py
 # v 7420: orange y 15998-16033 between single lines; h 16020: the active's west edge crosses
 # it at x 7377-7384, its east edge at x 7447-7453, poly on to x 7461): a channel 70 wide and

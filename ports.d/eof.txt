@@ -158,7 +158,7 @@ vcc           D      8560,17964-17984         -    the diffusion wire of piece c
 vcc           M      8512-8558,17997          -    R2 on south (drawn y 17550-17997 over the box of piece cap18; it runs on)
 # Pieces u15760, in15760 (run 33): the ports eof_w15523 P 7290,15687-15704 and vss M 7294-7340,15655 are gone (the row is drawn on into its gate, gate 1 of the NOR eof_w15781 = NOR(eof_w15523, eof_w15262, eof_w15128); the rail is drawn on south)
 # Pieces u15960, u16175 (run 36): the two ports eof_w15781 P 7228,15945-15968 and 7228,16160-16186 are gone (the rows are drawn on as the gates of two wide inverters, eof_w15998 = NOT eof_w15781 and eof_w16218 = NOT eof_w15781)
-eof_w15998    M      6990,16255-16269         out  the upper inverter's output: the horizontal metal west of the corner (7014,16262) of the thin metal x 7014 from the pad (7013,16000); it runs on west as a bus metal (follower: to a corner (6408,16262) and north; not read)
+eof_w15998    M      6990,16255-16269         out  the upper inverter's output: the horizontal metal west of the corner (7014,16262) of the thin metal x 7014 from the pad (7013,16000) (16 px at the corner drawn uncertain); it runs on west as a bus metal (follower: to a corner (6408,16262) and north; not read)
 eof_w16218    M      6990,16297-16310         out  the lower inverter's output: the metal west of the pad (7012,16303), the next bus metal south; not followed
 vcc           M      7470-7520,16000          -    bc1's RL2, drawn again over the upper inverter's supply box (y 16000-16085)
 vcc           M      7470-7520,16205          -    bc1's RL2, drawn again over the lower inverter's supply box (y 16205-16300; bc3 draws RL2 from y 16290)
