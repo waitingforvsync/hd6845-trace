@@ -2584,7 +2584,7 @@ What they establish (from the tracers' notes; marks as there):
   `rcs_mv` leaves the top-left logic and runs down the whole field; `tc2_r5718`, `lc1_w7780` (latch
   D's data) and `tl5_w2722` (the input of `rcs_u3288`'s NOR) each run 9,000-11,000 px to the foot rows
   of the bottom-centre bus with no tap; five more lines whose ends are not identified
-  (`busl_x6949`, `busl_x6992`, `busl_x7122`, `busl_x6559`, `busl_x6603`).
+  (`tl6_p6187`, `tc2_m6404`, `busl_x7122`, `tl6_p6143`, `busl_x6603`).
 
 **A correction to the trace by the coordinator** (proposed by `busl` run 11): `cdp3_k_a`'s metal x 7835
 was drawn from the contact pad (7835,8862) south; both metal shots show no metal there between y 8880
