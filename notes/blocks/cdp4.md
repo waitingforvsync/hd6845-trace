@@ -723,14 +723,14 @@ From the south end of run 8's thin metal (16775,16450):
   (`tools/follow.py 16775 16420 S --gap 16`; `tools/tl5_tracks.py h 16498 16592 16762` and
   `v 16775 16440 16490`: no gap, no hole). South of the corner there is no metal (bare ground from
   y 16510, `tools/px.py col 16775 16440 16530 5`);
-- a poly hop west (a block x 16480-16545, y 16486-16524, with the two pads at its ends) under the south part
-  of the VCC rail x 16491-16540, with no contact: under the rail the clean shot is uniform salmon (red minus
+- a poly hop west (one block x 16440-16595, y 16486-16527, with the two pads in its ends) under the VCC rail
+  x 16491-16540 (which runs on south at least to y 16900: review, round 14), with no contact: under the rail the clean shot is uniform salmon (red minus
   green 48-60) with no hole (`tools/textmap.py 16484 16464 16550 16536 3`; `le_hop.png`, 3.5x, four shots;
   the dark blobs on the rail there are at different places in the two chips);
 - a pad (16447,16496), and a thin metal from it west 20 px and south on x 16427 to a pad (16426,16864)
   (`tools/follow.py 16428 16560 N` and `S --gap 16` end on the two pads; `tools/tl5_tracks.py v 16427 16515
   16848`: nothing);
-- a poly row west from that pad (y 16855-16875) under six vertical metals (x 16386 `cs_d`, 16342, 16298
+- a poly row west from that pad (y 16855-16875) under six vertical metals (x 16386 `cs_d`, 16342 `rs_d`, 16298
   `rw_d`, 16255 `bd2_rs_n`, 16211, 16168 `e_b`), with no contact (each metal bright between two edge bars in
   both metal shots, clean shot salmon 42-52 with no hole: `cache/scratch/cdp4/candh.py -v v`; `le_b.png`), to
   x ~16130.
@@ -811,7 +811,7 @@ islands are closed curves inside it, so they are the other class.
 | `dbus_le` | metal, poly | x 16775, y 15930 (onto `dlat`'s end); the poly row's west end (16130, 16855-16875), on a framed box of an undrawn gate (runs 8, 13) | from that gate (read, not drawn) | the data input latches' enable, passing through the units (run 8; uncertain over four boxes) |
 | `cdp4_w10808` | poly | (10980, 3624-3646) (the row east of T1's top pad) and (10694-10716, 15726-15748) (the corner of the row from its bottom pad, at the VCC rail's west edge: beyond, an undrawn unit of `bc2` that drives it) | driven from `bc2`'s unit (read, not drawn) | the first through line east of the ninth VSS rail (run 12) |
 | `rst_lat` | poly | (10980, 3580-3600) (the row east of T2's top pad) and (10782-10797, 17700) (the column south of the row's west end) | from `trunks`' inverter | the second through line (run 12) |
-| `vcc`, `vss` | metal | x 16515 and x 16689 at y 15780 (onto `dlat`'s rails); `vcc` drawn to y 16440 (goes on to about y 16478), `vss` ends at y 16446 | - | the units' rails |
+| `vcc`, `vss` | metal | x 16515 and x 16689 at y 15780 (onto `dlat`'s rails); `vcc` drawn to y 16440 (goes on south at least to y 16900), `vss` ends at y 16446 | - | the units' rails |
 | `cdp3_n_c7` (= `cdp4_n_s7` = `dbus_do0_in`) | metal | (16950-16962, 16714): onto `dbus`'s metal | driven inside | the read bus, column 7 = the gate of D0's output chain (run 7) |
 | `d6_out_n` | poly | (17800-17825, 17313-17350): onto `dpad`'s strip 4 of D6's pad cell | driven inside | the output of the sixth output inverter, joined to the pad cell (run 10) |
 | `d7_out_n` (= `regs_w17462`) | poly | (16795-16800, 18012): onto `regs`' row; and (17803-17825, 18918-18957): onto `dpad`'s strip 4 of D7's pad cell | from `regs`' inverter | the bit 7 output line (run 11) |
@@ -981,8 +981,8 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
   `tools/tl5_tracks.py v 16771 15840 16400`): to be read with the units.
 - From run 13: the gate at (16000-16130, 16770-16960) under `bd2`'s VSS rail whose output box the row of
   `dbus_le` ends on (`bd2`'s region).
-- From run 8: the VCC rail south of y 16440 (to about y 16478: whether it meets the
-  horizontal metal y 16493-16508 below it is not read; 12 px of dark between them at x 16515); what lies
+- From run 8: the VCC rail south of y 16440 (it runs on at least to y 16900: `tools/tl5_tracks.py v 16515 16430 16900
+  --half 12`, review round 14); what lies
   west of the VCC rail (x < 16490) beside the units.
 - From run 11: the third line beside bits 6 and 7 (a pad (17065,17945), a thin metal east along y 17950 to a
   pad (17430,17945), then north): another net, not identified; the unit above the sixth inverter on the same rail (x 15840-16260, y 17260-17400: a weaker match of
@@ -1458,6 +1458,43 @@ the bullet (the plate's overhang; its colour in the clean shot). `sameconn.py 0f
 identical, both runs.
 
 Round 13: no findings.
+
+### Run 13 (`dbus_le` to its driver)
+
+Round 14 (full review, 2026-11-21 17:55 -0600; a fresh Fable reviewer, images in `cache/scratch/cdp4/review-14/`, 9;
+commit before the round a802561). Piece: one wire from (16775,16440) to (16130,16865) (a corner, three
+pads, the hop under the VCC rail, the metal on x 16427, the row west under six trunk metals) and the
+statement about the box at its end. Told to suspect: the row's west end all round (does it end on the box,
+pass it, or branch; is the box a buried contact; is it clear of `e_b`'s metal); the six crossings; one row
+or two; a contact from the VCC rail onto the hop; the corner, each pad all round, the metal on x 16427.
+
+It checked: the row's end at 4x and 3.2x in four shots with text maps (the row ends on the box, outer frame
+about 16097-16128 x 16850-16878; both edge lines of the row unbroken from x 16130 to x 16403, so nothing
+leaves north or south; no poly on the land west of the box at y 16865; the box's centre matches the pilot's
+verified buried contact in both chip-2 shots, no metal over it, no pits; it sits on the east edge of a
+diffusion land x ~16030-16097, y 16838-16893 between two gate rows, and the VSS rail has contact rings on
+the lands north and south of it, (16043,16782) and (16043,16940), and none on this one: an output node; the
+row's end is 27 px clear of `e_b`); the six crossings (`cache/scratch/cdp4/candh.py`: no pad, clean-shot
+minimum 42-52, its three control pads all read as pads; one straight row y 16858-16870; field east and
+south of the pad (16426,16864)); the hop (clean shot uniform with no hole, no ring in either metal shot,
+unlike the rail's real contact (16510,16368); no edge line across it under the rail); the corner (continuous,
+bare ground south, no pad toward the poly column east of it); both hop pads (metal only from the side
+drawn); the metal on x 16427 (unbroken from y 16492 to y 16844, no hole, no branch, over field).
+
+- Findings, all **geometry or comment only**, confirmed from its measurements and fixed: the hop's poly is
+  one block y 16486-16527 (drawn y 16487-16513; now `w=40`); the metal on x 16427 is x 16421-16437 (drawn 12
+  wide at x 16427; now 14 at x 16429); the VCC rail does not end near the hop (the notes' and the port
+  line's "to about y 16478" corrected: it runs on at least to y 16900); the metal x 16342 is `bd2`'s `rs_d`
+  (comment and notes).
+
+`tools/t.sh cdp4 sameconn.py a802561`: connections identical.
+`.venv/bin/python tools/sameconn.py a802561`: connections identical.
+
+Not checked by it: under the VCC rail the chip-2 stripped shot is fringes; in the 18 px gaps between the
+trunk metals its colour is unreliable, so "field beside the row" rests on the clean shot and the unbroken
+edge lines; the undrawn gate.
+
+Round 14: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
