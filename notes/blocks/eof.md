@@ -1279,10 +1279,15 @@ transistors, no uncertain item): **the gate poly of the two pull-downs has its d
   under Vm5 (`larr_y_s#` <- `larr_n5_s#`).
 - **Seen, not drawn** (ports; Not done): Y's diffusion runs on east under a poly column that comes
   up from the pad (3958,11847): **a second transistor on Y, to rail F's diffusion**, whose gate is
-  the pad's net (the "segmented" metal; what else that metal touches is not read); and a leg of Y's
+  the pad's net (the "segmented" metal, most likely one line through the fourteen rows: review
+  round 55, Ambiguity 199); and a leg of Y's
   diffusion runs south under Vm6 and east along y 11879-11892 to the knot at rail F's fifth ring,
   where the ring is a contact onto a poly pad (as review round 54 read it).
 - **All fourteen rows are alike** (`tools/eof_yirows.py`, written for this piece).
+- **Review round 55** (a full review): no finding that changes a connection. One geometry point,
+  confirmed and fixed: N's west margin between the load strip and the tab is the buried contact's
+  outline, not diffusion. It also read the segmented metal as running on into the thin metal
+  (confirmed by the tracer; not drawn).
 - **Read without an uncertain item, recorded as ambiguities**: the band and the area south of Y's
   arm where they cross the open gap east of the segmented metal (195); the load's buried contact
   (196); the three metals over the piece without contact (197); Y's U box as a buried contact
@@ -4970,9 +4975,11 @@ in all (s0's band darker, 150/135); both boxes tan inside; Y's diffusion tan und
   x 3956-3965 lies on it from the head to the pad (`r47_d1.png`; in chip 1's metal shot bright
   at y 11760-11764 and y 11778-11816 along x 3961). So Y is pulled to `vss` while the pad's net
   is high. The pad's metal is the segmented metal that runs south into the next row.
-- **The segmented metal's south end** is at about y 11740, over Y's horizontal poly, 15 px north
-  of the next thin metal's head: along x 3961 both metal shots read like bare ground at
-  y 11744-11750 (131-155/137-146 and 146-154/140-151), between two edge bars (Ambiguity 199).
+- **The segmented metal** from the pad of the row above most likely runs on into that thin metal
+  (review round 55: bright at x 3950-3958, y 11746-11754 in both chips, between the edge bar of
+  Y's poly and the column's head; the tracer's "bare ground" was read along x 3961, the metal's
+  dim east side): then pad, thin metal and segment are one line through the fourteen rows
+  (Ambiguity 199).
 - **Y's leg**: its diffusion runs south under Vm6 (x 3898-3930) to y 11891
   (`col:3912:11800:11960`: tan without a break) and east along y 11879-11892 (`row:11885:3890:4010:2`:
   tan under Vm6 and under the segmented metal, plain in both gaps) into an area x 3975-4000,
@@ -6891,14 +6898,20 @@ driver lies; the other three lead to the loads.
     end at y 11784-11787, x 3912-3933), tan inside and on both sides of the poly within the box
     (`larr`'s notes read it so too). Without the `B` the stem's end would extract as a transistor
     with both ends on Y.
-199. **The segmented metal's south end** (not drawn). The metal from the pad of the row above ends
-    at about y 11740 of this row, over Y's horizontal poly, and the thin metal on the poly column
-    begins at y 11757: 15 px apart, read from 8 px of bare-ground colour between two edge bars
-    along x 3961 on the medians, in both chips; not certain, and if the two are one metal the line
-    is one net through all fourteen rows. No contact is seen at the segment's end (cream without a
-    hole at y 11710-11734 along x 3958, the metal bright); `larr`'s notes also have "without a
-    visible contact", and a likely one where it crosses the band y 11946-11960 at (3958,11953).
-    A metal that ends on nothing is not believed: to be read with the pad's column (Not done).
+199. **The segmented metal's south end** (not drawn). The tracer read the metal from the pad of the
+    row above as ending at about y 11740 of this row, over Y's horizontal poly, 15 px short of the
+    thin metal on the poly column (bare-ground colour along x 3961 at y 11744-11750). **Review
+    round 55 read it otherwise, and the tracer's check agrees**: x 3961 is the metal's dim east
+    side; at x 3950-3958 the metal is bright at y 11746-11754 in both chips (12 of 14 rows in chip
+    2, all in chip 1), the dark stretch y 11738-11746 is an 8 px edge bar on the south edge of Y's
+    poly, and the column's head begins at y 11757. So the segmented metal and the next row's thin
+    metal are most likely one metal, and the line (pad, thin metal on the column, wide metal south
+    to the next row's column) one net through all fourteen rows: a common gate line of the
+    fourteen transistors on Y, like Vm1-Vm6. Not drawn, so not yet read row by row at the head
+    (y 11752-11772: two edge bars), nor at its top above s0, its foot below s13 and the two gaps.
+    No contact is seen where it lies on Y's poly (cream without a hole at y 11710-11734 along
+    x 3958, the metal bright); `larr`'s notes have a likely contact where it crosses the band
+    y 11946-11960 at (3958,11953): not read (Not done).
 
 ## Review
 
@@ -9727,6 +9740,73 @@ The connections are the same before and after the fixes:
 
 Round 54: no findings that change a connection.
 
+### Round 55 (full review of piece `yi`; 2026-11-21 18:52 to 19:12 +0000, at commit 1798d8f)
+
+One fresh reviewer (general-purpose agent, Claude Fable 5.2), a full review of piece `yi`; its images
+are in `cache/scratch/eof/review-55/`. It was given the piece's ten claims (the gate row as the top
+of the load's block; the load strip from `larr`'s VCC box to N; the buried contact that ties the
+block's foot to N; the band east to rail F; Y's poly as an L over active with rail F's diffusion
+outside it; that poly's path to the U box on Y's diffusion and Y's join to `larr`'s band; the
+equation in fourteen rows; no contact of Vm6, the segmented metal or rail F inside the piece; the
+fourteen copies; the two places where the drawing of Y's diffusion stops) and told to suspect: the
+load's buried contact under Vm6 (a tie, field between, or a contact of Vm6); the band and the area
+south of the arm in the open gap x 3966-3999, and the arm's join across it; the channel under rail
+F and the diffusion east of it; the poly's path from the block to the U box; the row's join to the
+block; contacts of Vm6 and of the segmented metal; rows s0, s6, s7, s9, s10, s13.
+
+**What it checked**: medians over the fourteen rows at 4-7x in four shots, median profiles,
+per-row samples of all fourteen rows, `tools/textmap.py`, `cellcheck` (at most 2.9% bad blocks),
+mosaics of all rows, overlays of s0, s1, s7, s13, the extraction, `tools/unsure.py`. Found correct:
+the gate row and the block one poly (no break along x 3890 or along y 11598, field west of
+x 3884); the load (tan from the VCC box, bright salmon channel under Vm6); the load's box a buried
+contact like the pilot's (heavy outlines, tan inside, one line between interior and N's tab) and
+not a contact of Vm6 (the metal 10-14 px wide there in every row, no widening; clean shot
+196/175/124 against 155-162/151-167/90 on Vm6's real contact (3907,11955)); the band and the area
+south of the arm (tan up to both margins, no edge line across the gap, heavy edges y 11636-11642
+and y 11698-11706; the area pinker than field in chip 1's metal shot in all rows and tan without
+a break to x 4051); Y's L one poly, bright salmon under both metals, its top at y 11624 with pink
+field up to the gate row, diffusion east of x 4027, no field between the block and N; block,
+horizontal part and stem one poly, field between it and the load's box; the U box a poly end in a
+window on tan; Y's diffusion unbroken through the gap x 3880-3898 into `larr`'s band; both
+transistors in all fourteen rows, all equations FIRM; no pad or hole on Vm6, the segmented metal
+(y 11585-11740) or rail F in any row (a dark spot at (4008,11190) in s0 is dirt on chip 2 only);
+no poly across the drawn diffusions other than the stem and Y's L.
+
+**Finding**, geometry only, confirmed and fixed:
+
+1. **N's west margin between the load strip and the tab** (x 3920-3931, y 11657-11682) was drawn
+   as diffusion and is the box's heavy outline: dark red-brown in the clean shot where the same
+   strip is tan at y 11640 and y 11692, darkest in both metal shots; in chip 1's metal shot the
+   outline spans about x 3895-3930, y 11655-11705, larger than the `B` drawn. Confirmed
+   (`r47prof.py row:11668:3918:3950:2`: both metal shots 26-76 at x 3922-3932, plain from x 3936,
+   the clean shot 64-128/37-93 there and tan from x 3942). Fixed: N drawn round it (`D
+   3920,11622:3952,11657` and `D 3934,11622:3952,11700`), the tab to x 3938, the `B` to
+   x 3898-3930, y 11678-11703. Does not change a connection (N is one piece east of x 3934 and
+   the tab reaches the box at y 11684-11697).
+
+**Also reported, outside the piece** (Ambiguity 199; checked by the tracer and confirmed): **the
+segmented metal probably does not end at y 11740.** The dark stretch at y 11738-11746 is 8 px, an
+edge bar on the south edge of Y's poly; south of it, at y 11746-11754, the metal is bright at
+x 3950-3958 (max red 193-238 in 12 of 14 rows in chip 2, 166-208 in all rows in chip 1), with its
+own edge lines at x 3944-3948 and x 3964-3968 over field; the poly column's head begins at
+y 11757, which leaves no room for a break. The tracer's reading of bare ground came from the
+column x 3961, on the metal's dim east side: along y 11749 (`r47prof.py row:11749:3940:3972:2`)
+the medians are bright at x 3952-3956 in both chips (191-194/166-179 and 180-194/169-175). So the
+segmented metal and the thin metal on the next row's poly column are most likely one metal, and
+the line one net through the fourteen rows. Nothing drawn changes; Ambiguity 199, the piece's
+"Seen, not drawn" and Not done are rewritten to say so.
+
+**Could not check**: the 12 px open centre of the gap x 3976-3989 by the stripped shots' colour
+(chip 2 red minus green 0-8 on the band: Ambiguity 195 stands on the edge lines); poly under the
+heavy line y 11760-11772; rows s2-s6 and s8-s12 above 1.1x other than by numbers.
+
+The connections are the same before and after the fix:
+
+    tools/t.sh eof sameconn.py 1798d8f              ->  connections identical
+    .venv/bin/python tools/sameconn.py 1798d8f      ->  connections identical
+
+Round 55: no findings that change a connection.
+
 ## Not done
 
 - **Next (after run 47)**: the gate poly has its driver (piece `yi`: `eof_pdg_s#` = NOT `larr_y_s#`), so
@@ -9734,11 +9814,11 @@ Round 54: no findings that change a connection.
   (master row s1; `larr` (continue), free): Y's diffusion from x 3946 east under the poly column
   x 3956-3980 (channel y 11772-11822) to rail F's diffusion at x 3992; the column's head y 11757, its
   pad x 3945-3985, y 11832-11870 with the contact (3958,11847), the thin metal x 3956-3965 on the
-  column, and the segmented metal x 3949-3966 south from the pad to about y 11740 of the next row
-  (Ambiguity 199): is the segment one metal with the next row's thin metal (then one line through
-  the fourteen rows: read the 15 px at y 11740-11757 in every row, both chips, `tools/px.py col 3961`),
-  and does it touch the band y 11946-11960 at (3958,11953) or Y's poly at its end? Then its top above
-  s0 and its foot below s13, and the two gaps. Views `r47_c1.png`, `r47_d1.png`. (b) **the knot at
+  column, and the segmented metal x 3949-3966 south from the pad into the next row, where it most
+  likely runs on into that row's thin metal (Ambiguity 199; review round 55: bright at x 3950-3958,
+  y 11746-11754): one line through the fourteen rows, a common gate line of the transistors on Y.
+  Read its head in every row (y 11738-11772, along x 3954, both chips), whether it touches the band
+  y 11946-11960 at (3958,11953), its top above s0, its foot below s13 and the two gaps. Views `r47_c1.png`, `r47_d1.png`. (b) **the knot at
   rail F's fifth ring** (x 3966-4100, y 11850-11965; with items (b) and (c) of the list below): Y's leg
   (x 3898-3930 to y 11891, then east along y 11879-11892 into the area x 3975-4000, y 11882-11918),
   the ring's poly pad (L, x 3998-4040, y 11855-11897) and where its poly goes (open poly x 4057-4082,

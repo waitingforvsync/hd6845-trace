@@ -4302,12 +4302,15 @@ N M 4196,11500 vcc
 P 3884,11588:3995,11607
 P 3882,11590:3920,11668
 P 3902,11660:3920,11696
-B 3900,11680:3922,11702
-D 3900,11682:3930,11700
+B 3898,11678:3930,11703
+D 3900,11682:3938,11700
 # the load strip under the block, from larr's VCC box to N
 D 3874,11621:3925,11657
 # N, and the band east of it; the active under Y's block and arms, R1 south of the arm, to eof_pd's diffusions
-D 3920,11622:3952,11700
+# (review round 55, geometry only: between the load strip and the tab, x 3920-3932, y 11657-11682, lies the
+# box's heavy outline, not diffusion: N is drawn round it)
+D 3920,11622:3952,11657
+D 3934,11622:3952,11700
 D 3950,11641:4030,11700
 N D 3936,11670 eof_pdg_{}
 # Y's poly: block, arm along the band, arm under rail F; south over field, west, south into the U box
