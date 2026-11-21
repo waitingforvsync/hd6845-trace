@@ -2221,10 +2221,13 @@ P 8450,17142:8505,17237              # the plate
 M 8056,16290 y16618 w=13
 N M 8056,16450 bc1_dec01_n
 # the arm (the neck of the L): both metal shots show a band y 16609-16619 between the head and
-# the foot, brighter than the ground south of it, with its own lower edge line (y 16618-16620,
-# x 8026-8068; absent at the control column x 8085; no edge there in the clean shot), and the
-# chip-2 stripped shot a ghost band between two dark lines. Chip 2 has no gap in it (red
-# 114-192); chip 1 has a dark notch 6 px wide at x 8046-8051 between arm and foot (red 62-70).
+# the foot (in chip 1 brighter than the ground south of it; in chip 2 orange-brown and dimmer
+# than that ground at x 8030-8044, red 114-152 against 163-173: review round 36), with its own
+# lower edge line (y 16618-16620, x 8026-8068; absent at the control column x 8085; no edge
+# there in the clean shot); the clean shot is protected tan under it (x 8040, y 16612-16625)
+# where the control column x 8085 is open green (y 16621-16630); and the chip-2 stripped shot
+# has a ghost band from x 8026 to x 8062 between two dark lines. Chip 2 has no gap in it; chip 1
+# has a dark notch 6 px wide at x 8046-8051 between arm and foot (red 58-75).
 # Neither end has a contact (no ring, no pad), so each line's only way on is the other. Drawn
 # uncertain because of chip 1's notch and because it joins two packages' names (trap 17).
 ?M 8054,16614 x8016 w=9

@@ -2352,7 +2352,7 @@ Run 29, 2026-11-21. Region x 8000-8070, y 16290-17155 (`bc3`'s ground, free). Re
 | Stretch | What | Evidence |
 |---|---|---|
 | the track x 8013, y 16604-17192 | one metal, 12 px, from the pad (8010,17210) of gate row B north to a rounded head at (8003-8025, 16604-16618); no pad, no ring with a centre, no hole on the way. One bar of 9 px at y 16776-16785, the south edge of the diffusion-coloured area of Ambiguity 32 (dark across every track there). The follower's candidates: (8012,16948) is a nick on chip 2's west edge at y 16942-16954 with chip 1 dim 15 px higher on the east side; (8013,16819) and (8013,16799) are a blemish of chip 1 (x 7986-8004, y 16791-16830, reaching the track at y 16806-16824) where chip 2 is whole and the clean shot's pink strip is present | `tl5_tracks.py v 8013 16540 17215 --half 2`; `eof_mrun.py row 16700 7950 8260 16760 16800 16850 16950 17050`; `eof_cchk.py 8012,16948 8013,16819 8013,16799 8013,16780 8013,16636 8013,16612`; `textmap.py 7986 16924 8042 16972 3 --acid`, `7986 16770 8042 16836 3`; `r29_ov.png` (1.3x) |
-| the neck, (8025-8050, 16609-16619) | a thin arm, 9-10 px tall, from the head east into the foot of the track x 8056. **Drawn `?M`** (Ambiguity 102). For one metal: both metal shots show a band there, brighter than the ground south of it, with its own lower edge line (y 16618-16620 from x 8026 to x 8068, red 43-81; absent at the control column x 8085; the clean shot has no edge there), chip 2 without a gap (red 114-192), and the chip-2 stripped shot has a ghost band between two dark lines where the control has plain ground; neither the head nor the foot has a contact, so each track's only way on is the other; the next two lines of the bundle step the same way (`bc1_g6_in` at y 16645, `rst_a` at y 16697). Against: chip 1 has a dark notch 6 px wide at x 8046-8051 between the arm and the foot (red 62-70), and the arm is 9-10 px where the tracks are 12-13 | `r29_jog.png` (5.2x, four shots), `r29_neck.png` (8.5x, four shots); `px.py row 16612 7996 8084 4 metal,metal1,acid,acid1b`; `px.py col X 16602 16624 2 metal,metal1` for X = 8032, 8038, 8044, 8047, 8050, 8056; `px.py col 8040 16596 16630 2 acid1b,acid,metal,metal1` and the same at 8085 (control); `textmap.py 7990 16580 8084 16650 3 --acid`; `eof_cchk.py 8013,16612 8056,16612` |
+| the neck, (8025-8050, 16609-16619) | a thin arm, 9-10 px tall, from the head east into the foot of the track x 8056. **Drawn `?M`** (Ambiguity 102). For one metal: both metal shots show a band there (brighter than the ground south of it in chip 1; in chip 2 orange-brown and dimmer than that ground at x 8030-8044: review round 36), with its own lower edge line (y 16618-16620 from x 8026 to x 8068, red 43-81; absent at the control column x 8085; the clean shot has no edge there), chip 2 without a gap (red 114-192), the clean shot is protected tan under it (x 8040, y 16612-16625) where the control column is open green (y 16621-16630), and the chip-2 stripped shot has a ghost band from x 8026 to x 8062 between two dark lines where the control has plain ground; neither the head nor the foot has a contact, so each track's only way on is the other; the next two lines of the bundle step the same way (`bc1_g6_in` at y 16645, `rst_a` at y 16697). Against: chip 1 has a dark notch 6 px wide at x 8046-8051 between the arm and the foot (red 62-70), and the arm is 9-10 px where the tracks are 12-13 | `r29_jog.png` (5.2x, four shots), `r29_neck.png` (8.5x, four shots); `px.py row 16612 7996 8084 4 metal,metal1,acid,acid1b`; `px.py col X 16602 16624 2 metal,metal1` for X = 8032, 8038, 8044, 8047, 8050, 8056; `px.py col 8040 16596 16630 2 acid1b,acid,metal,metal1` and the same at 8085 (control); `textmap.py 7990 16580 8084 16650 3 --acid`; `eof_cchk.py 8013,16612 8056,16612` |
 | the track x 8056, y 16300-16618 | one metal, 13 px, from the foot north to `bc1`'s metal end (`M 8198,15823 x8143 y16170 x8056 y16300`, label `bc1_dec01_n` at (8056,16290)). Bars of 9-11 px at the edges of `rst_a`'s row y 16294-16312 (piece `isrc4`, C: no contact) and at y 16604-16609 (an edge beneath, the same at x 8085); the clean shot's pink strip is unbroken and there is no pad. Beside it, other nets: the track x 8098 ends on a pad with a contact (8098,16515); the track x 8012 from the north turns west at y 16370 | `tl5_tracks.py v 8056 16280 16625 --half 2`; `eof_mrun.py row 16560 7950 8260 16580 16596 16604 16612 16620 16630 16660`; `r29_t56.png` (2.5x, three shots) |
 
 What it says: gate B of the NOR is `bc1`'s decode line "01" (`bc1`'s notes: low when `bc1_s1` = 0 and
@@ -3378,8 +3378,10 @@ driver lies; the other three lead to the loads.
 102. **The neck of the L between the tracks x 8013 and x 8056** (piece `in207`; x 8025-8050, y 16609-16619).
     Candidate readings: one metal, the bundle's outermost L with a thin neck (so `eof_w17207` is
     `bc1_dec01_n`); or two metals that end 25 px apart, both without a contact. For the first: a band 9-10 px
-    tall in both metal shots, brighter than the ground beside it (chip 2 red 114-192 without a gap; chip 1
-    140-158 but for the notch), with its own lower edge line from x 8026 to x 8068 that the control column
+    tall in both metal shots (chip 2 red 114-192 without a gap, but orange-brown and dimmer than the ground
+    south of it at x 8030-8044; chip 1 140-158, brighter than that ground, but for the notch), the clean shot
+    protected tan under it where the control column x 8085 is open green (review round 36), with its own
+    lower edge line from x 8026 to x 8068 that the control column
     x 8085 does not have and under which the clean shot has no edge; a ghost band between two dark lines in
     the chip-2 stripped shot; no contact at either end (a metal ends on a contact: trap 14); the two next
     lines of the bundle step by the same kind of L. Against: chip 1's dark notch 6 px wide at x 8046-8051
@@ -5159,6 +5161,63 @@ The connections are the same before and after the fix:
     .venv/bin/python tools/sameconn.py 7779d91   -> connections identical
 
 Round 35: no findings that change a connection.
+
+### Round 36 (full review of pieces `in207` and `lat17`; 2026-11-21 04:07 to 04:28 +0000, at commit abece8b)
+
+A fresh reviewer agent (Claude Fable 5.2), 14 images in `cache/scratch/eof/review-36/`. It was given the two
+pieces' ten claims (`in207`: the track x 8013 as one metal without a contact, the neck, the track x 8056 to
+`bc1`'s metal end; `lat17`: the two cell copies with their three equations, foot and VCC box, the thin metal
+x 8462-8475 with its two contacts, the upper node's track, pad and row, the two enable pads on one track
+that ends north on the upper pad, the data row, column and top row, the clear on `rst_a`'s row, nothing
+leaving the lower node or the two cell pads) and told to suspect: the neck (metal, or two ends 25 px apart;
+chip 1's notch), a contact near either track's end and taps along the two tracks; the track x 8186 at
+y 16984-16993; the pad (8229,16779) against the other metal's corner north of it; the track x 8229 between
+and through the enable pads; a contact from the data column to the metal over it and where the top row
+ends; each cell copy against its master (row ends, pads, contacts); the enable gates under the rail; the row
+y 16812-16833 under the track x 8229.
+
+What it checked, at 5-7x in two to four shots with `tools/px.py`, `tools/textmap.py`, `tools/tl5_tracks.py`,
+`tools/follow.py --gap 16`, `tools/unsure.py` and the extraction, and found as drawn: the track x 8013 one
+metal from the head to the pad's ring (the follower's candidates a blemish of chip 1, no hole, no ring); no
+contact at the head or the foot (the clean shot's blob is in that shot only); the track x 8056 over
+`rst_a`'s row without widening or hole; the pad (8229,16779) not joined to the metal from the north (bare
+ground without edge lines at y 16755 in both chips, the clean shot's green band, the follower from the north
+turns west: `b2_pad779.png`, 7x); the data column without a contact (no ring, no hole over y 16557-16743),
+its top at y 16554 and its row meeting a heavy-outlined box at x 8275-8278; the track x 8229 through the
+lower pad, with no contact on the upper node's row or `rst_a`'s row (`b4_row823.png`, 6x); the track x 8186
+ending on the pad (8186,16823) and one metal at the nick (chip 2 keeps a sliver of 4 px, its stripped ghost
+unchanged: `b3_nick.png`, 5x); the lower node's stub ending rounded at x 8260 in all four shots
+(`c3_lownode.png`, 7x); the cell copies against the master (`c1_mosaic.png`, `c2_cell_clean.png`: row ends,
+pads and contacts match; both enable gates real, clean red 244-246 under the rail with diffusion on both
+sides; the stack's foot and the source strip on the VSS box: `c4_foot.png`); the thin metal x 8468 (both
+contacts, bars of 9-11 px between); the three equations, and `unsure.py`'s marks.
+
+Findings:
+
+1. **A comment on the neck** (piece `in207`; geometry only, no connection): the trace's comment and the notes
+   said the arm is "brighter than the ground south of it" in both metal shots. In chip 2 it is not at
+   x 8030-8044 (`px.py row 16613`: red 121-152, orange-brown, against ground 163-173). Confirmed (this run's
+   own `px.py col 8040 16596 16630 2`: chip 2 115-127 on the arm against 163-171 on the ground; chip 1
+   148-155 against 110-140). The reviewer's better support for the `?M`, both confirmed from the same
+   profiles: the clean shot is protected tan under the arm (x 8040, y 16612-16625) where the control column
+   x 8085 is open green (y 16621-16630), and the chip-2 stripped shot's ghost runs unbroken from x 8026 to
+   x 8062. Chip 1's notch at x 8046-8051 is real (red 58-75) and not resolved: `?M` stands. Fixed: the
+   comment in the trace, the row of piece `in207`'s table and Ambiguity 102.
+
+Also noted by the reviewer, nothing to change: the copy has no metal over its tie boxes (the master has
+one); in chip 2 they are heavy-outlined boxes between the plate's bar and the node's strip (`c5_ties.png`),
+consistent with the ties and not settled (Ambiguity 104).
+
+Could not check (the reviewer): the load ties; the thin metal x 8294 over the node boxes (the master's
+pattern; Ambiguity 105); chip 1's notch in the neck (Ambiguity 102); the data's source in the undrawn unit;
+the track x 8229 south of y 17030; `tools/ports.py --near` (it was denied the command).
+
+The connections are the same before and after the fix:
+
+    tools/t.sh eof sameconn.py abece8b           -> connections identical
+    .venv/bin/python tools/sameconn.py abece8b   -> connections identical
+
+Round 36: no findings that change a connection.
 
 ## Not done
 
