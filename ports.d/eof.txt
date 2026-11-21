@@ -167,7 +167,7 @@ vcc           D      7480,15246-15280         -    the NOR's load band into bc1'
 # Piece u15100 (run 35): the port eof_w15128 P 7225,15119-15142 is gone (the row is drawn on to the exit box of its driver, the inverter eof_w15128 = NOT rst_n); the rail is drawn on north to its turn east onto busl's VSS metal
 rst_n         P      7275,15076-15097         in   the gate row of the inverter eof_w15128, on east from bl0's row end (bl0's port 7280,15078-15098)
 vcc           M      7470-7520,15060          -    bc1's RL2, drawn again over the inverter's supply box (y 15060-15150)
-vss           M      7294-7340,16330          -    the rail of bc1's west gate column on south of the two inverters (drawn y 15024-16330; bl0 draws it from y 16925)
+vss           M      7294-7340,16930          -    the rail of bc1's west gate column on south over the two select inverters (drawn y 15024-16930; it meets bl0's piece, drawn from y 16925)
 vcc           M      7470-7520,15690          -    bc1's RL2, drawn again over the second NOR's load contact (y 15690-15860)
 # Pieces o998, cap998, o218 (run 37): the two ports eof_w15998 M 6990,16255-16269 and eof_w16218 M 6990,16297-16310 are gone (both bus metals are drawn on to the left array's east edge)
 vcc           M      4953-5018,16020          -    the wide VCC metal x 4953-5018 (busl's rail, one metal from y 15000), drawn over the box of cap998's diffusion wire (y 16020-16110)
@@ -232,6 +232,7 @@ eof_mxs_s12    P      4701,17594-17611          ?    the poly band along the sou
 eof_mxs_s12    P      4421,17594-17611          ?    the same band, west end as drawn; goes on west into the array (open poly)
 eof_mxs_s13    P      4701,18071-18088          ?    the poly band along the south edge of row s13, east end as drawn; goes on east under the VSS metal (in row s1 seen to be cdp4_bus_s6; join not drawn)
 eof_mxs_s13    P      4421,18071-18088          ?    the same band, west end as drawn; goes on west into the array (open poly)
-eof_ga         P      7230,16855-16875          ?    piece sel (run 41): the east select line (the fourteen upper gates of the selector; thin metal x 4510-4527, free end (4518,11048)) ends as a poly row east of the pad (7187,16866) at the undrawn gate group x 7200-7450, y 16400-16900 (believed driven there)
-eof_ga         P      7222,16424-16444          ?    piece sel: the poly east of the pad (7185,16432) at the north end of the metal x 7187, into the same gate group's upper unit
-eof_gb         P      7230,16528-16548          ?    piece sel: the west select line (the fourteen lower gates; thin metal x 4338-4354, free end (4346,11046)) ends as a poly row into the same gate group (believed driven there)
+rcs_mv        P      7035,16771-16787         in   piece selg (run 42): bl0's row (port (7040,16770-16790)) on east to the gate of the lower select inverter (eof_ga = NOT rcs_mv)
+vss           M      7200,16349-16391         -    piece selg: a wide arm of the ground rail x 7294-7340 on west across the bus field (seen to x 6850); not followed
+vcc           M      7470-7520,16455          -    piece selg: bc3's RL2 (M 7495,16290 y17560 w=50), drawn again over the upper supply box (y 16455-16605)
+vcc           M      7470-7520,16925          -    piece selg: the same over the lower supply box (y 16815-16925)

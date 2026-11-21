@@ -3781,3 +3781,154 @@ N M 4346,14500 eof_gb
 @alias eof_gb eof_gb_s11
 @alias eof_gb eof_gb_s12
 @alias eof_gb eof_gb_s13
+
+# =====================================================================================
+# Piece selg (run 42, 2026-11-21): the gate group that the two select lines of the left array's
+# fourteen-row selector (piece sel) end in: x 7190-7530, y 16290-16930 under the rail x 7294-7342
+# south of u16175 (bc3's ground, free). TWO WIDE INVERTERS IN SERIES, one build, 325 px apart:
+#   eof_ga = NOT rcs_mv          (the lower unit, y 16615-16925)
+#   eof_gb = NOT eof_ga          (the upper unit, y 16290-16600)
+# Known cells first: tools/findcell.py with u15960, u15500, u15260, u15760 over 7100,16330:
+# 7700,16960 in four orientations: 0 hits at 0.45. The lower unit is the upper one again:
+# findcell.py 7250 16395 7465 16600 --region 7200,16300:7520,16960 gives 0,325 at 0.91 in the
+# clean shot and in the metal shot, and every cut of the upper unit repeated 325 px south gives
+# the same lines within 2 px (cache/scratch/eof/r42_cuts_v_upper.txt, r42_cuts_h_upper.txt,
+# r42_cuts_lower.txt: r33_dark.py v 7272 7335 7368 7400 7430 7458, h at eleven rows).
+#
+# One unit (the upper is the master). One active area, x 7256-7450, y 16316-16523 (a rectangle:
+# edge lines x 7251-7258, y 16311-16318, x 7447-7455 at every cut), with a contact box on its
+# north edge under the rail and a load region on its south edge. The gate is ONE poly wound
+# through it: a band along the north (y 16337-16359, from the rail's west edge to x 7461), a
+# column down the rail's west half (x 7297-7319), a U round a ground contact (top bar
+# y 16404-16426, east side x 7388-7411, bottom bar y 16479-16500), and the bottom bar on west
+# across the active's west part (the "wing", x 7256-7296) to the input. Ground is what lies
+# outside the winding: the strip north of the band (y 16319-16330), the wing, and the box inside
+# the U, each on the rail by a contact (the box under the rail's north contact and the U's).
+# The node is what lies inside: the pocket between the band, the column and the top bar
+# (x 7322-7450, y 16365-16398), the strip east of the U (x 7418-7447) and the strip south of
+# the bottom bar (y 16507-16523). South of that strip the load: a plate y 16530-16567 over a
+# region x 7319-7450, and south of it a strip y 16574-16592 whose neck runs east into a supply
+# box under RL2. The node leaves by a tongue under the rail's west edge (x 7288-7298,
+# y 16523-16552) between two boxes: the east end of the output's poly row (west) and the
+# plate's west end (east); both ties are drawn uncertain, as in the five units north of here.
+#
+# Read from r42_s1.png (2x), r42_u1/u2/u3.png (2.2x, four shots), r42_a1.png, r42_b1.png (3.7x,
+# the west sides), r42_c1.png (4x, under the rail between the units), r42_n1.png (4.8x, the
+# north-west corner), r42_x1.png (5.4x, the exit), r42_e1.png (2x, the east side and RL2),
+# r42_all.png, r42_arm.png (every package's trace), and from text (cache/scratch/eof/
+# survey-run42.md has every command).
+# The bands, over whole bands with controls (tools/eof_band.py; chip-2 metal / chip-2 stripped,
+# red minus green; trap 38). Controls: the field west of the wing (v fieldW 7215 7245 16565
+# 16625: +25.5 / +9.6; v fieldW2 7258 7292 16570 16630: +21.1 / +9.8) and the field between the
+# units (h fieldM 7355 7440 16598 16640: +23.5 / +9.2).
+#   the wing, upper unit (v wingU 7258 7292 16405 16470)                  +38.0 / +23.4  diffusion
+#   the wing north of the arm (v wingN 7258 7292 16320 16338)             +41.2 / +19.1  diffusion
+#   the wing, lower unit (v wingL 7258 7292 16650 16790)                  +37.7 / +20.4  diffusion
+#   the north strip (h Nstrip 7355 7440 16310 16338)                      +35.7 / +25.9  diffusion
+#   the pocket (h nodeN 7355 7440 16360 16402)                            +35.9 / +25.8  diffusion
+#   the box inside the U (v gndIn 7350 7384 16436 16468)                  +37.0 / +24.2  diffusion
+#   the strip east of the U (v nodeE 7416 7450 16420 16470)               +35.6 / +30.5  diffusion
+#   the strip south of the bottom bar (h stripS 7355 7440 16502 16528)    +35.3 / +18.1  diffusion
+#   the same west of the rail (h stripSw 7262 7288 16500 16528)           +33.9 / +11.3  diffusion (11 px)
+#   the strip south of the plate (h vccS 7355 7440 16568 16597)           +36.2 / +23.7  diffusion
+#   lower unit: north strip (h gndS2), pocket (h nodeN2), south strip (h stripS2), supply strip
+#   (h vccS2): +35.5 / +20.1, +35.3 / +20.1, +34.2 / +20.3, +38.3 / +18.7
+# Under the rail the clean shot (tools/px.py row Y 7284 7352 3 acid1b): y 16348 cream (poly over
+# a channel, 223-243/148-177) from x 7299 to 7344, tan (the wing) west of x 7291; y 16380 cream
+# x 7300-7312 (the column), an edge x 7315-7318, tan x 7321-7351 (the pocket); y 16414 cream from
+# x 7299 (the top bar ends flush with the column); y 16452 tan x 7293-7350 (the box, joined to
+# the wing); y 16490 cream from x 7293, open poly west of the rail; y 16514 tan x 7293-7347;
+# y 16583 pink (field) x 7297-7312, an edge x 7315-7321, tan x 7324-7351 (the supply strip).
+# Under the arm (below) the wing is tan from y 16342 to y 16402 (px.py col 7275 16318 16412 4).
+@cell eof_sdrv tag=gb
+# the active area, the contact box on its north edge and the load region on its south edge
+D 7256,16316:7450,16523
+D 7290,16296:7342,16320
+D 7319,16500:7450,16594
+D 7445,16581:7470,16593
+# the two ground contacts: bright centre in a dark ring in both metal shots, a hole or specks in
+# the clean shot (tools/eof_cchk.py 7306,16309: clean 3, centres 244 / 214; 7318,16452: 4,
+# 218 / 229; the copy's 7308,16634: 6, 231 / 224; 7318,16777: 3, 209 / 180; textmap.py 7286
+# 16292 7348 16330 2)
+C 7307,16310 s=16x14
+C 7319,16451 s=20x16
+# the gate: band, column, U, bottom bar (r33_dark.py v 7368: poly y 16338-16357, 16406-16425,
+# 16480-16499 between single lines; v 7400: poly y 16405-16499 in one, the U's east side;
+# h 16452: poly x 7389-7410; h 16348: poly on east of the active's edge to x 7461; the clean
+# shot under the rail: one cream piece, no line between band, column and top bar: r42_n1.png)
+P [ 7297,16337 x7461 y16359 x7319 y16404 x7411 y16500 x7230 y16479 x7388 y16426 x7297 ]
+N D 7432,16450 eof_sdn_{}
+# the load: a plate y 16530-16567 from x 7303 under the rail's east half and on east past the
+# active's edge to x 7461 (r33_dark.py v 7368 / 7400 / 7430: poly y 16531-16566 between single
+# lines; h 16548: poly x 7306-7314, the active's west edge x 7315-7323, poly on to x 7461): a
+# channel 131 wide and 37 long. South of it the strip y 16574-16592 and its neck x 7450-7467
+# (px.py row 16586 7436 7484 3: plain without a line to RL2's edge, tan under RL2 from x 7466)
+P 7303,16530:7461,16567
+# the node's way out: a tongue x 7288-7298 from the strip south to y 16552, tan in the clean
+# shot without a line across it (px.py col 7293 16500 16574 3 acid1b: 186-200/169-179 from
+# y 16506 to y 16548; dark in both metal shots, where the rail's edge line lies on it)
+D 7288,16518:7298,16552
+# west of the tongue the east end of the output's poly row: a box x 7266-7290, y 16521-16562
+# (frame lines x 7266-7270 and x 7276-7283, top y 16519-16531, bottom y 16549-16564; cells
+# x 7271-7275 and x 7284-7289: px.py row 16545 7254 7348 2 all; r42_x1.png). The tie of the
+# tongue to the row is drawn uncertain (one heavy line between them), as in u15960
+P 7225,16531:7270,16551
+P 7266,16528:7284,16561
+?D 7270,16533:7292,16549
+?B 7268,16531:7286,16551
+# east of the tongue the plate's west end over field: a cell x 7306-7314 (poly: 147/112/52 in
+# chip 2, cream 213-228/159-167 in the clean shot) between a line x 7298-7305 and the active's
+# edge line x 7315-7323. The tie of the plate to the tongue is drawn uncertain likewise
+?D 7294,16535:7313,16549
+?B 7301,16532:7315,16552
+@end
+# the lower unit: the same 325 px south (findcell 0.91; cuts above; r42_b1.png, r42_c1.png)
+@inst eof_sdrv 0,325 tag=ga
+# the outputs: the node of each unit is the net of the poly row on its exit box if the tie (?)
+# is right: the names are held by aliases
+@alias eof_gb eof_sdn_gb
+@alias eof_ga eof_sdn_ga
+# the ground rail on south over both units, from u16175's piece (to y 16330) to bl0's (from
+# y 16925): cache/scratch/eof/r23_rail.py 7300 7334 16320 16930: no stretch without metal in
+# both chips
+M 7317,16325 y16930 w=46
+N M 7317,16600 vss
+# a wide metal arm, y 16348-16391, leaves the rail west over the upper unit's wing and runs on
+# across the bus field (seen to x 6850; the thin metals x 7014, 7057, 7100, 7144 end on pads
+# either side of it and pass under it in poly): one metal with the rail (tl5_tracks.py h 16370
+# 6850 7345: bars of 8-10 px only; px.py row 16370 7270 7312 3: a dip of 5 px in chip 2 and
+# 9 px in chip 1 at the rail's edge, x 7288-7296). Drawn to x 7200: port
+M 7317,16370 x7200 w=42
+# the upper unit's input, eof_ga: the pad poly of piece sel (P 7185,16434 x7222) widens to a
+# block x 7204-7246, y 16444-16462 and runs south as x 7223-7246 into the bottom bar
+# (r33_dark.py v 7215: poly y 16425-16461; v 7232 / 7242: poly y 16445-16499 in one; h 16452:
+# poly x 7205-7244; h 16490: poly x 7224-7250, the wing's edge line, poly on; r42_a1.png)
+P 7204,16424:7223,16462
+P 7204,16444:7246,16462
+P 7223,16444:7246,16500
+# the lower unit's input, rcs_mv: bl0's row (P 6968,16780 x7040) on east as one poly between
+# edge lines y 16764-16771 and y 16787-16795 (r33_dark.py h 16780 7030 7235; v 7078 / 7122 /
+# 7165 / 7215: poly y 16772-16786), under the metals x 7057, 7100, 7144 and eof_ga's x 7187
+# with no contact (eof_cchk.py 7057,16780 7100,16780 7144,16780 7187,16780: clean 48, 46, 45,
+# 44, no hole; the metals 16-17 px wide over it as beside it), to a block x 7223-7246,
+# y 16771-16825 that is one with the copy's bottom bar (v 7232 / 7242: poly y 16770-16824 in
+# one; h 16815: poly x 7225-7250, the wing's edge line, poly on; r42_b1.png)
+P 7035,16771:7246,16787
+P 7223,16771:7246,16825
+N P 7120,16779 rcs_mv
+# the supply boxes under RL2 (bc3's rail, M 7495,16290 y17560 w=50; pieces of it drawn again so
+# that the package extracts by itself). Upper: tan with specks y 16465-16597 in the clean shot
+# (px.py col 7492 16440 16930 10 acid1b), one long contact (r33_dark.py v 7492: bright
+# y 16483-16578 between ring lines in chip 1, with one bar across it in chip 2; h 16514: centre
+# x 7481-7500; eof_cchk.py 7491,16500 / 7491,16560: clean 5 / 8). Lower: y 16825-16918, two
+# contacts (v 7492: centres y 16835-16860 and y 16886-16903; eof_cchk.py 7491,16848 /
+# 7491,16895: clean 9 / 5, centres 221 / 224 and 223 / 251)
+D 7467,16465:7522,16597
+C 7491,16531 s=18x92
+M 7495,16455 y16605 w=50
+N M 7495,16600 vcc
+D 7467,16825:7522,16918
+C 7491,16848 s=18x22
+C 7491,16895 s=18x14
+M 7495,16815 y16925 w=50
+N M 7495,16920 vcc
