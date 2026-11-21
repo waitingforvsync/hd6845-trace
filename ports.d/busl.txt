@@ -174,3 +174,19 @@ tc2_m6404    P  6399-6421,6400     ?   onto tc2's poly from its pad (6404,6107);
 tl6_p6187    P  6356-6378,6350     ?   onto tl6's poly from its pad (6360,6152); column x 6367, row y 7214 to the pad (7120,7214); alias busl_x6949
 tl6_p6143    P  6313-6335,6350     ?   onto tl6's poly from its pad (6318,6110); column x 6324, row y 7258 to the pad (6861,7257); alias busl_x6559
 tl6_p6101    P  6269-6291,6350     ?   onto tl6's poly from its pad (6275,6152); column x 6280, row y 7300 to the pad (6904,7301); alias busl_x6603
+# pieces va, vc, vb (run 16): the supply metals
+vcc          M  4926-4980,10590    -   onto the foot of lc3's middle rail (its port vcc (4924-4980,10600))
+vcc          M  5340-5392,10590    -   onto the foot of lc3's wide VCC metal (its port vcc (5340-5390,10600))
+vcc          M  4953-5018,15000    -   the wide metal x 4953-5018 on south into bl0's ground (no contact between y 10645 and y 15000)
+vss          M  4752-4802,10590    -   onto the foot of lc3's west rail (its port vss (4752-4802,10600))
+vss          M  4645-4698,10700    -   the rail's foot turned west and south, on south down the left array's east edge (larr)
+vss          M  7550-7555,14022-14075  -   onto cdp4's plate at the foot of its s0 VSS rail (cdp4's `M 7550,14024:7645,14055`)
+vss          M  7383-7432,15000    -   the wide metal on south into bc1's ground (not followed)
+# piece ha (run 16): tl5_w3461 = wl_h1 (canonical wl_h1; @alias until the rename)
+tl5_w3461    P  5443-5465,6350     out onto tl5's poly column from T5's south pad (its port tl5_w3461 there): the wire comes from bw's pad (7031,7560), the west end of wl_h1's row y 7562
+# piece hb (run 16): cdp2_w6845 west of cdp2's port
+cdp2_w6845   M  7290-7300,6842-6854  ?  onto cdp2's metal west of its pad (7335,6845) (its port cdp2_w6845 (7290,6848))
+cdp2_w6845   P  6118,6836-6858     ?   the end pad (6146,6847)'s poly row on west (seen as a row to x 5990; not followed: lc1's band)
+# piece hc (run 16): busl_y6805, the metal north of it
+busl_y6805   P  6160,6705-6727     ?   the end pad (6189,6716)'s poly row on west (seen as a row to x 6040; not followed: lc1's band)
+busl_y6805   P  7410,6791-6813     ?   the pad (7380,6802)'s poly row on east (seen as a row to x 7500; not followed)
