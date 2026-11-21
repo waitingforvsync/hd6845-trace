@@ -2946,3 +2946,47 @@ new lines were not looked at.
 `out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 834
 floor-plan blocks. Coverage: 70.4% traced; in some package region 99.9%; untraced and in no Queue row
 0.4%. The refresh follows.
+
+## 2026-11-21 11:00  Refresh
+
+Thirteenth refresh (the coordinator, on Opus 5.5), after the handoffs since the twelfth: `bl0` run 12,
+`regs` run 4, `busl` runs 14-16, `cdp2` (six pieces), `eof` runs 28-35. Renames in three batches, each
+checked with `tools/names.py compare` ("only names changed"), `tools/signals.py` (0 outside the
+glossary) and `signals.py --docs` (no former names). Only joins on nets that `tools/unsure.py` does not
+list were renamed. Before each batch, the sentences that named both names were reworded to name the old
+wire by its owner ("the wire `busl` called x6906 is `rst`"), so that the renames left none circular.
+
+- bl0_w18081 -> cdp3_g_c2, bl0_w17603 -> cdp3_g_c3, bl0_w17126 -> cdp3_g_c4, bl0_w16649 -> cdp3_g_c5, bl0_w15999 -> cdp3_g_c6, bl0_w15522 -> cdp3_g_c7, busl_x6906 -> rst (`busl` run 14)
+- busl_x6992 -> tc2_m6404, busl_x6949 -> tl6_p6187, busl_x6559 -> tl6_p6143 (`busl` run 15)
+- tl5_w3461 -> wl_h1 (`busl` run 16), eof_w16778 -> ck_out (`eof` run 30), eof_w16172 -> eof_w16040 (`eof` run 31), cdp2_w7300 -> cdp2_b_s7_x (`cdp2`, piece `gu`)
+
+**Left on purpose** (the master list's `rename` row): `busl_x6820` / `lc3_m5756` and `busl_x6603` /
+`tl6_p6101` (`busl`'s joins are firm, but each net is joined elsewhere through uncertain items);
+`cdp2_w7344` / `cdp2_b_hl` (AMB-048); `cdp2_w7065` / `tc1_ns3` (the two `?B` of `cdp2`'s piece
+`ga`); `eof_w17207` / `bc1_dec01_n` (AMB-049); the node aliases of `bc1`'s west gate column (AMB-050);
+`eof_w15128` (proposed `rst_d`, when its ties are accepted); and what the twelfth refresh left.
+`names.py candidates` also lists `ar#` / `ar#_q`, `d#` / `d#_in` and the `_tab` names of the look-ahead
+lines: the glossary gives the reason both names are kept (a cell's node, a pad's protected input, a
+template's spare finger), as in earlier refreshes.
+
+**Branches in flight** (`busl`, whose run 17 stopped at the Fable limit with work uncommitted in
+`../hd6845-trace-busl`; `eof`, tom-seddon): after merging main, run in the branch:
+
+```
+tools/rename.py bl0_w18081 cdp3_g_c2 bl0_w17603 cdp3_g_c3 bl0_w17126 cdp3_g_c4 bl0_w16649 cdp3_g_c5 bl0_w15999 cdp3_g_c6 bl0_w15522 cdp3_g_c7 busl_x6906 rst busl_x6992 tc2_m6404 busl_x6949 tl6_p6187 busl_x6559 tl6_p6143 tl5_w3461 wl_h1 eof_w16778 ck_out eof_w16172 eof_w16040 cdp2_w7300 cdp2_b_s7_x    # pairs: old -> new
+```
+
+**`operation.md`** (thirteenth): header (2,472 nets, 4,644 transistors; 917 of 1,370 equations firm; no
+equation changed status against the baseline taken before the renames). The tracers had written their own
+rows (DISPTMG's inner NOR, the two latch pairs and the NOR chain under `bc1`'s rail; the light pen flag's
+clear; the fourteen compared lines into the left array; `lc2_w8450` across the bottom; latch a's data).
+Changed here: the short answers (DISPTMG traced back through two latch pairs, marked; R9's match reaches
+the bottom-centre logic through `rcs_e4`); "Not established at all" (the first latches' enable without a
+driver, and the NOR chain); two "until the rename" remarks; AMB-001 to AMB-050, R1-R51. Not on the page:
+`cdp2`'s gates left of rows B (`tc1_ns3` = NOT `tc2_sr_q`, the chain on `cdp2_b_hl`), whose
+comparator and use are not identified.
+
+**`out/`** rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 834
+floor-plan blocks (looked at the bottom-centre logic and the left bus field's north part,
+`cache/scratch/refresh/fp13_bc.png`, `fp13_busl.png`: numbered labels, no overlap). Coverage: 70.4%
+traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
