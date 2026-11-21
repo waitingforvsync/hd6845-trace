@@ -1004,6 +1004,8 @@ diffusion line that enters the row from the east and one from the poly band alon
   pull-down's source; it is a node between pass transistors. With a contact at the strap's north end the
   node would be VSS and the upper transistor would tie the diffusion line (believed a register's output) to
   ground whenever its gate is high. The photos' evidence at the north end is as it was.
+- **Review round 48** (a full review, 21 images): no findings. It could not check the strip-to-box
+  junction itself (Ambiguity 157) or the buried contact in chip 2 (159).
 - **Read without an uncertain item, recorded as ambiguities**: the strip and the contact's box as one
   diffusion (157); the two bands as gates over one active area in the open stretches (158); the buried
   contact (159); the band south of the group as no gate (160); the bands' east ends under the VSS metal's
@@ -7947,6 +7949,64 @@ between them).
 
 Round 47: no findings that change a connection.
 
+### Round 48 (full review of piece `mx1`; 2026-11-21 13:09 to 13:30 +0000, at commit ebb0622)
+
+One fresh reviewer (Claude Fable 5.2), briefed with the piece's eight claims (`cache/scratch/eof/brief-round48.md`)
+and told to suspect: the buried contact at the south strip's west end (a buried contact, a transistor on
+a stub, or nothing; read from the clean shot only, under the wide metal); the strip and the contact's box
+as one diffusion (the one dark line between them is also the ring and the strap's edge); each band as a
+gate over active area along its whole length, and the strips as diffusion, in the open stretch
+x 4537-4590 and under the wide metal; the neck where the diffusion line turns south, and its clearance
+from the upper pad; the two bands' east ends under the VSS metal's edge (a contact that would ground the
+gates, with the contact (4667,11540) as control); the join of the upper band to the column, the row and
+the pad, all under metal; a contact of the thin or the wide metal on any strip, and the dark line under
+the wide metal (one metal or two); the copies, with s12's upper pad, s6's lower pad, the rows beside the
+group gaps and the last row named. Images: `cache/scratch/eof/review-48/` (21 read).
+
+It checked and found as drawn:
+
+- **The buried contact**: inside the U at the band's level the clean shot is tan, 208/179/128, like
+  known buried contacts (185-201/148-171/121-134) and unlike a channel (247/175/120) or poly over field
+  (215/159/106), in all fourteen rows; no pink between strip and band (`tools/px.py col 4472`); the
+  band's north edge line crosses the U at y 11954 in every row, so the poly is there; field south of the
+  U (pink from y 11986; `h1.png`), so no transistor; no pit or hole (darkest 92-122 against 46-70 at
+  real contacts), so the wide metal makes no contact (`d1.png`, 6x, four shots).
+- **The strip and the box**: the strip plain to x 4586, the box tan from x 4592 under the strap: no room
+  for a field gap.
+- **Strips and bands**: the strips tan and the bands channel-bright under the thin and the wide metal; no
+  edge line across any strip or band in the open in either chip, in any row (minimum red 112 or more).
+- **The neck**: plain from y 11820 to y 11846 with no line across in three shots (`tools/px.py col
+  4556`); the pad separate, green open ground at x 4536-4542 (`b1.png`, `b2.png`, 5x).
+- **The bands' east ends**: no pad, no hole (the clean shot is poly cream), unlike the control
+  (4667,11540) (`c1.png`, `c2.png`): the VSS metal over the poly's end.
+- **The upper gate's wire**: column, row and join continuous cream; pink field north and south of the
+  column in all rows, so `eof_ga_s#` meets neither the load line nor `eof_gb_s#`; the row orange in the
+  open gap in both chips (`g1.png`).
+- **No contacts** on the strips, the bands, the line or the south band under any metal (`i3.png`, text
+  maps, `tools/eof_cchk.py`).
+- **The wide metal**: the dark line at x 4454-4462 is an edge beneath one metal; the metal is unbroken
+  over the poly row in chip 2 in all rows and in chip 1 in thirteen (row s1 has a local defect in chip 1
+  only).
+- **The pads**: all 28 have a ring and a bright centre; s6's lower pad has no green hole but a ring in
+  both chips and a pitted box in chip 2's stripped shot (`f1.png`); s12's upper pad is confirmed from
+  chip 1 and both stripped shots (`f2.png`).
+- **The copies**: all fourteen overlays fit in the clean shot and chip 2's metal shot (`mont_*.png`); the
+  rows by the group gaps and s13 are the same. **The ports**: the line and the south band both run on
+  east past x 4700. **The extraction**: as claimed, 0 errors, no uncertain item; `tools/opendiff.py`
+  finds nothing.
+
+Findings: none. Nothing it found changes a connection, and no geometry is off by more than the 3 px of
+an edge.
+
+It could not check: the strip-to-box junction itself (it coincides with the strap's edge and the
+contact's ring in every shot: the reading rests on the width argument; Ambiguity 157 stands); the buried
+contact in chip 2's stripped shot (fringes under the wide metal; Ambiguity 159 stands on the clean
+shot); whether the thin metals are continuous beyond their stubs (dim for 20 px south of the upper pad
+in both chips, though the clean shot is protected there; they are not drawn: Not done, item (a)); s12's
+upper pad in chip 2's metal shot (the blemish).
+
+Round 48: no findings.
+
 ## Not done
 
 - **Next (after run 40)**: the group south of the strap is drawn (piece `mx1`: two wide pass transistors on
@@ -7956,7 +8016,7 @@ Round 47: no findings that change a connection.
   477 k)). Is each one line through the fourteen rows? `tools/tl5_tracks.py v 4518 11330 12300` loses the
   east one for 47 px in every row (y 11544-11591 in row s1: `r40_g1.png`, `r40_g2.png`, 5x, four shots: it
   lies over a poly's edges south of the VSS-tied band, the clean shot protected under it; trap 19 or a
-  break: read it with `tools/px.py row` across the metal at 6 px steps and a control), and the west one for
+  break: read it with `tools/px.py row` across the metal at 6 px steps and a control); review round 48 adds that it is dim for 20 px south of the upper pad in both chips, the clean shot protected there, and the west one for
   18 px (y 11629-11647). Then their ends north of y 11300 and south of y 18050, and the group gaps (between
   rows s6 and s7, s9 and s10): the drivers say what selects. If each is one line the 28 gate names become
   two (`tools/rename.py`, the coordinator's refresh, or an `@alias` each). (b) **the fourteen joins to
