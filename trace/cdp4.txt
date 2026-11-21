@@ -1105,3 +1105,30 @@ P 17604,18130 y18957 w=18
 P 17595,18946 x17825 w=22
 N M 17250,18014 d7_out_n
 @alias d7_out_n regs_w17462
+# ======================================================================
+# Run 12 (2026-11-21): the two thin metals east of the ninth VSS rail, west of the read bus: two through
+# lines from pads at the top of the datapath's east edge (y 3592, 3636) to pads in the bottom-centre logic
+# (y 15738) and the bottom bus (y 17648). No tap on either. From each pad a poly row leaves.
+# ======================================================================
+# --- T1 (x 10808): cdp4_w10808
+P 10787,3619:10821,3653
+C 10804,3636 s=20x20
+P 10804,3635 x10980 w=22                 # the row east from its top pad, under T2 and wrs' wr_r8 metal (no contact): port
+M 10804,3628 10808,3700 10809,12000 10810,15000 10808,15746 w=12
+P 10791,15721:10825,15755
+C 10808,15738 s=20x20
+P 10700,15737 x10808 w=22                # the row west from its bottom pad, under bc2's rail: port at x 10700
+N M 10809,9000 cdp4_w10808
+# --- T2 (x 10852): rst_lat
+P 10832,3575:10866,3609
+C 10849,3592 s=20x20
+P 10849,3590 x10980 w=20                 # the row east from its top pad, under wr_r8's metal (no contact): port
+M 10849,3584 10852,3700 10851,9000 10853,15000 10852,17656 w=12
+P 10835,17631:10869,17665
+C 10852,17648 s=20x20
+# the row through its bottom pad: east under the read bus tracks c7 and c6 (no contact) to the bend onto the
+# poly diagonal that trunks draws from rst_lat's contact (11288,17517) (its end (10980,17640)); west to
+# x 10787, where a poly column goes south (port at y 17700)
+P 10787,17643 10960,17643 10986,17634 w=20
+P 10789,17636 y17700 w=14
+N M 10852,9000 rst_lat
