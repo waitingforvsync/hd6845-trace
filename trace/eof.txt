@@ -2513,9 +2513,12 @@ N P 8285,16347 eof_w16345
 # and lat17's data row; from y 16553 to 16745 lat17's data column lies under it, no contact:
 # run 29), y 16738 (bars x 8162-8172, 8215-8223: the east edge of Ambiguity 32's area and
 # the data column's west edge), x 8143 (bc1_g6_in's metal of piece o040 is on the same track
-# position north of y 16653: 79 px of bare ground between; ck_out's leg of piece en17 on it
-# south of y 17384: 30 px between), y 17348, x 8099, y 17737, x 8382, y 17907, x 8055,
-# y 17952.
+# position north of y 16657, and a third net's metal crosses the position at y 16690-16700,
+# running west from a track x 8186 to x 8093: bare ground y 16659-16689 and y 16701-16733
+# either side of it (review round 38; tl5_tracks.py v 8143 16630 16745); ck_out's leg of
+# piece en17 is on the position south of y 17384: 30 px between), y 17348, x 8099 (that third
+# net's metal is on x 8099 north of y 17303: bare ground y 17330-17340), y 17737, x 8382,
+# y 17907, x 8055, y 17952.
 M 8229,16425 y16738 x8143 y17348 x8099 y17737 x8382 y17907 x8055 y17952 x7555 w=12
 # pad in the run at (8382,17862): ring and bright centre in both chips, a green hole in the
 # clean shot (eof_cchk -28, 204 / 143). South of the ring the metal goes on at track width
@@ -2606,8 +2609,9 @@ C 8530,17970
 # metal x 8512-8558 over the rows of the nest of Ls (r31_g3.png, 2.4x, three shots)
 M 8535,17550 y17997 w=46
 N M 8535,17800 vcc
-# the island: metal x 8171-8244, y 17952-17994, its contact (8190,17970) on the box west of
+# the island: metal x 8171-8239, y 17952-17994 (east edge from px.py row 17974 8226 8256 2:
+# bright to x 8236 in both chips; review round 38), its contact (8190,17970) on the box west of
 # the gate (ring and centre in both chips; eof_cchk 10, 236 / 204)
-M 8171,17952:8244,17994
+M 8171,17952:8239,17994
 C 8190,17970
 N M 8200,17988 eof_w17970

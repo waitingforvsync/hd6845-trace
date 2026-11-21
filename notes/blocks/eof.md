@@ -846,7 +846,7 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `dinv17`, the inverter on `lat17`'s data | x 8080-8516, y 16200-16594 | the mirror image of `inv16` under column A's VSS rail: VSS box y 16447-16505 (contact (8347,16478)), gate row y 16509-16529 from a pad (8096,16517), node y 16534-16567 with a strip west to a buried-contact box (8272-8302, 16548-16577) on the data poly, a load east of the rail (strip y 16512-16539 under a plate x 8419-8510 to `lat16`'s VCC box; tie box (8424-8458, 16562-16594)); the input's track x 8099 north to a corner (8099,16217) and a pad (8140,16215), whose row y 16207-16226 runs east |
 | `lat18`, the latch whose upper node is `eof_w16215` | x 8212-8570, y 16015-16447 | a copy of `tl1_ua` / `tl1_ub` at 5729,11669 under column A's VSS rail (11 transistors); the thin metal x 8462-8475 between the upper plate and the third pull-down's pad; the data row's pad (8229,16107) (`bc1`'s contact: `bc1_g6_out`); the enable track x 8229 with its pads (8229,16172), (8227,16387) (port at y 16425) |
 | `en18`, `lat18`'s enable on to its ends | x 7010-8935, y 15420-17970 | one net, `eof_w16040`: the thin metal from the port (8229,16425) by six legs to a pad in its run (8382,17862), a corner (8382,17907), a pad in its run (8098,17908) and an end pad (7555,17951); a poly row under the rail x 7468-7516 to a pad (7382,17951); metal west and north (x 7017, x 7057) to a pad (7057,16476); a poly column to a pad (7056,16260); metal north and east to a pad (7141,15437); its poly row y 15471-15489 east to `bc1`'s rail (port at x 7290). The pad (8382,17862)'s poly row y 17855-17873 east to a pad (8643,17865) and its metal (x 8643, y 17695, x 8925) onto `lat15`'s enable metal. The pad (8098,17908)'s poly (a row y 17877-17892, a column x 8221-8239) to the gate of `cap18` |
-| `cap18`, the device on that poly | x 8171-8560, y 17930-18005 | one transistor (W/L 48/27): gate `eof_w16040`; a diffusion box x 8172-8258 with a contact (8190,17970) under a metal island x 8171-8244, y 17952-17994 (`eof_w17970`, nothing else on it); east of the gate a diffusion wire y 17964-17984 to a box under the VCC rail with a contact (8530,17970); the rail R2 drawn on from y 17550 to 17997 |
+| `cap18`, the device on that poly | x 8171-8560, y 17930-18005 | one transistor (W/L 48/27): gate `eof_w16040`; a diffusion box x 8172-8258 with a contact (8190,17970) under a metal island x 8171-8239, y 17952-17994 (`eof_w17970`, nothing else on it); east of the gate a diffusion wire y 17964-17984 to a box under the VCC rail with a contact (8530,17970); the rail R2 drawn on from y 17550 to 17997 |
 
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
 
@@ -2593,7 +2593,7 @@ poly row or an edge crosses beneath; `tools/eof_mrun.py` at 14 px either side of
 |---|---|---|
 | the track x 8229 south of the port (8229,16425) | one thin metal (12 px): bars over `dinv17`'s gate row and `lat17`'s data row; from y 16553 to 16745 `lat17`'s data column lies under it without a contact (Ambiguity 107); a corner (8229,16738) | `tl5_tracks.py v 8229 16395 16770` |
 | west along y 16738 | to a corner (8143,16738); bars at x 8162-8172 (the east edge of Ambiguity 32's area) and x 8215-8223 (the data column's west edge) | `tl5_tracks.py h 16740 8125 8245`; `textmap.py 8128 16718 8248 16758 3 --acid`; `eof_mrun.py col 8185 / 8205`: 16737-16739 |
-| south on x 8143 | to a corner (8143,17348). North of the corner (8143,16738) the same track position carries `bc1_g6_in` (piece `o040`) down to y 16653: 79 px of bare ground between; south of y 17384 it carries `ck_out` (piece `en17`): 30 px of bare ground between. Over Ambiguity 32's area for 40 px: no ring | `tl5_tracks.py v 8143 16725 17365`; `eof_cchk.py 8144,16761` (no ring north) |
+| south on x 8143 | to a corner (8143,17348). North of the corner (8143,16738) the same track position carries `bc1_g6_in` (piece `o040`) down to y 16657, and a third net's metal crosses it at y 16690-16700 (from a track x 8186 west to x 8093, then south on x 8099 to about y 17303): bare ground y 16659-16689 and y 16701-16733 either side of it (review round 38); south of y 17384 the position carries `ck_out` (piece `en17`): 30 px of bare ground between. Over Ambiguity 32's area for 40 px: no ring | `tl5_tracks.py v 8143 16725 17365`; `eof_cchk.py 8144,16761` (no ring north) |
 | west along y 17348, south on x 8099 | to a corner (8099,17737). Two candidates: (8099,17428) (chip 1 has dirt west of the track; both chips bright through) and (8099,17565) (a stain in chip 1, clean shot greenish; chip 2 226, no ring): no contact | `tl5_tracks.py h 17348 8080 8160`, `v 8099 17330 17760`; `textmap.py 8072 17398 8128 17456 3 --acid` |
 | east along y 17737 | to a corner (8382,17737): lengthwise on `rst_a`'s poly row y 17736 for 280 px, no pad, no ring (Ambiguity 29) | `tl5_tracks.py h 17737 8085 8400` |
 | south on x 8382, **the pad (8382,17862)** | bars over four poly rows; then a pad with a contact **in the run**: ring and bright centre in both chips, a green hole in the clean shot. South of the ring the metal goes on at track width: chip 1 bright yellow x 8377-8389 at y 17884-17891, chip 2 dim there but with the same two edge lines (x 8371-8377, 8392-8395), the clean shot's pink strip 24 px wide (a 12 px metal's, not a pad's); a bar y 17892-17898 at the north edge of `ck_out`'s poly row; the corner (8382,17907) (Ambiguity 115) | `r31_a2.png` (2.65x), `r31_a3.png` (6x, four shots); `textmap.py 8346 17832 8412 17926 3 --acid`; `px.py col 8382 17866 17920 2`, `row 17886 / 17888 / 17890 8362 8404 3`; `eof_cchk.py`: -28, 204 / 143 |
@@ -2629,7 +2629,7 @@ Run 31, 2026-11-21. Region x 8171-8560, y 17930-18005 (`bc3`'s ground, free). `r
   line across it at y 17950).
 - **West of the gate**: the box's closed west part (x 8172-8214, y 17949-17997) with one metal contact
   (8190,17970) (ring and bright centre in both chips, specks in the clean shot, pits in the chip-2
-  stripped shot; `eof_cchk.py`: 10, 236 / 204). The metal over it is an **island** x 8171-8244,
+  stripped shot; `eof_cchk.py`: 10, 236 / 204). The metal over it is an **island** x 8171-8239,
   y 17952-17994 that covers the gate as well and has a dark outline all round: no metal leaves it (the
   column north of it is open poly, orange in chip 2 and red-brown in the clean shot; nothing bright west,
   south or east of it). Over the gate neither metal shot shows a ring and the clean shot no hole and no
@@ -3725,7 +3725,10 @@ driver lies; the other three lead to the loads.
     the net is an input there and not the unit's output rests on those two readings. East of the rail the
     row crosses a narrow plain strip (x 7377-7395) that `rcs_e4`'s row crosses 70 px north; what that
     strip is (a second diffusion of the same unit, or field between two edge lines) was not decided, and
-    the two rows are not joined there (`px.py row 15470 7344 7410 3`: plain, blue 76-88, between them).
+    the two rows are not joined there (`px.py row 15470 7344 7410 3`: plain, blue 76-88, between them). Review round 38
+    measured the strip as field in the chip-2 stripped shot (red minus green -15 to +4 at x 7385-7391,
+    against 17-22 in the box west of it), and found the row's step at the port over field, with no buried
+    contact.
 
 ## Review
 
@@ -5581,6 +5584,59 @@ The connections are the same before and after the fix:
     .venv/bin/python tools/sameconn.py 3d59d8f   -> connections identical
 
 Round 37: no findings that change a connection.
+
+### Round 38 (full review of pieces `en18` and `cap18`; 2026-11-21 06:01 to 06:20 +0000, at commit 71e4721)
+
+One fresh reviewer (Claude Fable 5.2), briefed with the claims of both pieces (the metal's eleven legs and
+two pads in its run, the poly row to the pad (8643,17865) and its metal onto `lat15`'s enable track, the
+pad (8098,17908)'s poly to the gate, the two poly hops and the row to `bc1`'s rail; the transistor, its
+island, its diffusion wire and the rail) and told to suspect: (a) whether the metal ends on the pad
+(8382,17862) or runs through it; (b) the horizontal metal's east end 34 px from `ck_out`'s pad; (c) the
+corners (8643,17695) and (8925,17695); (d) the three lengthwise stretches on other nets' wires; (e) the two
+metals end to end with this one on x 8143; (f) the two poly hops (poly or diffusion, straight or stepping);
+(g) the three places where chip 1 does not show the metal; (h) a second poly or a metal running on at any of
+the eight pads; (i) side arms; (j) a contact between the island and the gate; (k) a metal leaving the
+island; (l) whether the wire east of the gate is diffusion; (m) whether the rail over the contact
+(8530,17970) is the VCC rail. Images: `cache/scratch/eof/review-38/` (26).
+
+It checked, at 4.5x to 7x in two to four shots and by text (`textmap.py`, `px.py`, `tl5_tracks.py`,
+`eof_mrun.py` at 13 px either side of every leg, `railprof.py`), and found as drawn: (a) the metal runs
+through the pad (chip 1 shows track-width metal at y 17884-17891 and the clean shot is pink through to the
+row, where the like gap under the pad (8643,17865) is green; chip 2 alone does not show it); (b) the metal
+ends at x 8390, open orange poly on to `ck_out`'s pad in both chips; (c) both corners are Ls, with 20 px of
+bare ground to the metal south of (8925,17695); (d) no pad, ring or hole at y 17737, y 17907 or y 15480;
+(e) bare ground at both ends on x 8143, and also at `ck_out`'s corner (7058,17262) and where another net
+leaves x 8099 at y 17303; (f) both hops are poly, straight, with nothing crossing; (g) all three are damage
+to chip 1, chip 2 whole in both its shots; (h), (i) the eight pads carry only what is drawn, the pad
+(8098,17908) has metal on both sides, no side arm; (j)-(m) no ring, hole or pits over the gate (7x), no
+metal leaves the island, the wire is diffusion (chip 2 blue 85-88, chip 1 green 113-118) with no contact
+under the thin metal x 8468, the rail is one metal from y 17545 to 18010; the extraction as claimed. At the
+port (7290,15480) the row's step lies over field west of the diffusion edge, with no buried contact; for
+Ambiguity 119 it measured the strip x 7385-7391 as field in the chip-2 stripped shot (red minus green -15
+to +4, against 17-22 in the box west of it).
+
+It reported **no findings**, and two notes, neither changing a connection, each checked here:
+
+1. **A comment: "79 px of bare ground" on x 8143 north of the corner (8143,16738).** Another net's metal
+   crosses the track position at y 16690-16700 (running west from a track x 8186). Confirmed
+   (`tl5_tracks.py v 8143 16630 16745`: no metal y 16659-16689 and y 16701-16733, metal between;
+   `eof_mrun.py row 16695 8090 8250`: 8127(68), 8182(20); `col 8143 16630 16750`: 16643(28), 16695(11),
+   16742(17)): it is 30 px clear of this net's leg on both sides and joins nothing drawn. Geometry only (a
+   comment): the trace's comment and piece `en18`'s table now say so.
+2. **The island's east edge is at about x 8239, drawn 8244.** Confirmed (`px.py row 17974 8226 8256 2`:
+   bright to x 8236 in both chips, dark from x 8240). Geometry only: `M 8171,17952:8239,17994`.
+
+Could not check (the reviewer): Ambiguity 116 stays open (the chip-2 stripped shot is fringed under the
+island, with a greenish patch x 8196-8214 against the gate's edge); the track x 8925 from y 16300 to 17215
+was read by text only; the undrawn unit at `bc1`'s rail and the twin device beyond what touches the wire;
+the earlier pieces' pads (8227,16387) and (8925,16262) were seen only in passing.
+
+The connections are the same before and after the fixes:
+
+    tools/t.sh eof sameconn.py 71e4721           -> connections identical
+    .venv/bin/python tools/sameconn.py 71e4721   -> connections identical
+
+Round 38: no findings that change a connection.
 
 ## Not done
 
