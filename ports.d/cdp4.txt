@@ -21,3 +21,11 @@ cdp3_f_c4     M      9293,11048       in   the same, s4
 cdp3_f_c5     M      9683,11048       in   the same, s5
 cdp3_f_c6     M      10073,11048      in   the same, s6
 cdp3_f_c7     M      10464,11048      in   the same, s7
+cdp3_n_c0     M      11201,17860      out  the read bus of R12-R17, column 0 (= cdp4_n_s0): drawn to the edge of regs' claim; on 50 px south to its corner (11201,17910) and east along y 17909 (regs run 6's metal)
+cdp3_n_c1     M      11230,18040      out  the read bus, column 1 (= cdp4_n_s1): the horizontal east of the track's corner (11157,18040), runs on east
+cdp3_n_c2     M      11230,18085      out  the same, column 2
+cdp3_n_c3     M      11230,18128      out  the same, column 3
+cdp3_n_c4     M      11230,18170      out  the same, column 4
+cdp3_n_c5     M      11230,18213      out  the same, column 5
+cdp3_n_c6     M      11230,18256      out  the same, column 6 (the follower runs it to x 12810)
+cdp3_n_c7     M      11230,18298      out  the same, column 7
