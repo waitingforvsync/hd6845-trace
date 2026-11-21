@@ -50,3 +50,11 @@
 6805,9990:6833,10400     route  the same line, track south | the track x 6819 from the pad into the left bus field (the through line x 6820 / x 6754 that runs on south of the field)
 6265,6345:6425,7315      route  four lines from the top-left logic, poly columns | four poly columns (x 6280, 6324, 6367, 6410) south from the sixth strip of the top-left logic under sixteen metals; believed four outputs of R8
 6265,7155:7070,7315      route  the same four lines, rows of the crossing field | each column turns east as a poly row (y 7300, 7258, 7214, 7171) under one metal of the reset group, without contact, to an end pad; from there down the left bus field to its foot rows y 14393, 14437, 14870, 14827
+4920,10585:5400,10650    power  VCC band at the field's top left | the foot of the left-centre logic's middle rail runs east as a wide band to the foot of its wide VCC metal: one metal
+4950,10645:5022,15000    power  VCC metal down the west side | a wide metal from the band south down the whole left bus field, over nineteen rows without a contact
+4640,10590:4805,10705    power  VSS rail foot, west | the left-centre logic's west ground rail turns west and south at its foot toward the left array's east edge
+7380,14020:7560,15000    power  VSS metal over the foot rows | from the plate at the foot of the central datapath's column 0 ground rail a wide metal south over the rows of the bottom-centre bus, a second plate, and on south; no contact in the field
+5440,6345:6210,6980      route  latch data from the counters' band H1, poly column and row | tl5_w3461 (the data of latch a of the top-left logic's fifth strip): poly column x 5454 south under nine metals, a diagonal, the row y 6954 east to a pad
+6180,6945:7045,7560      route  the same line, metal east and south | metal along y 6957 over five poly columns to a corner (7034,6957), south over six rows onto the west end pad of the line from the band H1 above the counters (wl_h1)
+6115,6825:7305,6870      route  through line of the logic left of the R-row cells, west part | cdp2_w6845: metal along y 6848 from the pad (7335,6845) west over seven poly columns to an end pad (6146,6847); its row goes on west
+6155,6695:7415,6825      route  a second line north of it | busl_y6805: from an end pad (6189,6716) south and east along y 6805 to a pad (7380,6802); neither end identified

@@ -526,3 +526,7 @@ Round 1: no findings that change a connection.
 ## Corrections (coordinator, from the handoffs of 2026-11-20, second batch)
 
 - The corner gate group, rows 2 and 4 "believed `rsel13_buf`, `rsel12_buf`": traced (`busl` run 8, pieces `r12`, `r13`; firm): the rows y 13744 and y 13852 are drawn from pads with contacts on the two select tracks ((6495,13744), (6452,13854)) onto this package's ports at x 7550, so **`cdp4_rst` = NOR(`rsel12_buf`, `rsel13_buf`, `rsel14_buf`, `rsel15_buf`, `rsel16_buf`, `rsel17_buf`)**, the six read selects of R12-R17 (believed: the selector's nodes are held low except while one of them is read). Row 4's poly begins at x 7528 (the foot of the step from row y 13852), 17 px west of `P 7545,13873`. The two open-join labels of the ports are renamed at the next refresh.
+
+## Corrections (coordinator, from the handoffs of `busl` run 16, 2026-11-21)
+
+- "The VSS plate at the foot of the s0 rail west of x 7550 and south of y 14055": drawn by `busl` (piece `vb`): the plate reaches x 7491 and a wide metal runs south from it to y 15000.

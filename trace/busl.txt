@@ -1050,3 +1050,81 @@ N P 6280,6800 tl6_p6101
 @alias tl6_p6187 busl_x6949
 @alias tl6_p6143 busl_x6559
 @alias tl6_p6101 busl_x6603
+# =====================================================================================
+# Run 16 (2026-11-21): the leftovers. Pieces va, vb, vc (supply metal), ha, hb, hc (three wires
+# of the band above the crossing field, y 6700-7560).
+# =====================================================================================
+# Piece va: the VCC metal of the field's top left and west side. One metal: lc3's middle rail
+# (`M 4952,9965 y10600 w=56`, vcc) widens at its foot (east edge x 5003 from y 10570, west edge
+# x 4950 from y 10628) into a band y 10597-10645 that runs east to lc3's wide VCC metal
+# (x 5340-5392, `M ... 5365,10452 y10600 w=50`; square corner (5392,10645): the two diagonal
+# lines across the corner are the edges of piece p2's polys underneath), and a wide metal
+# x 4953-5018 leaves the band south and runs down the whole field, out at y 15000. No contact
+# on any of it in the field: nineteen rows cross under the wide metal (8-13 px edge bars only,
+# tools/tl5_tracks.py v 4968|4986|5004), the clean shot under it and under the band shows no
+# feature of its own, and the dots on the metal differ between the two chips.
+M [ 4926,10590 x5003 y10597 x5340 y10590 x5392 y10645 x5018 y15000 x4953 y10628 x4926 ]
+N M 4986,12000 vcc
+# Piece vc: the foot of lc3's west rail (`M 4777,9965 y10600 w=50`, vss): it ends at y 10645,
+# turns west along y 10598-10645 and south on x 4645-4698 (the left array's side: drawn to
+# y 10700). Bare ground between it and piece va's metal (x 4802-4926).
+M [ 4752,10590 x4802 y10645 x4698 y10700 x4645 y10598 x4752 ]
+N M 4672,10630 vss
+# Piece vb: the VSS metal of the field's lower right. cdp4's plate at the foot of its s0 VSS
+# rail (`M 7550,14024:7645,14055`; the plate is x 7491-7645, y 14022-14075, one metal: the
+# dark column x 7577-7583 and the dark rows across it are single edge lines of what lies
+# under) sends a wide metal south over the foot rows: x 7490-7537 to y 14680, x 7468-7537 to
+# y 14722, x 7468-7515 to a second plate (x 7383-7515, y 14852-14898), and from the plate's
+# west part south on x 7383-7432 out of the region at y 15000. No contact in the field. It
+# is NOT joined to bc1's RL2 (vcc, x 7470-7520 from y 14950): RL2's top is a bar y 14935-14970
+# east of x 7468, 37 px south of the plate's bottom edge, with the open poly row y 14914
+# between.
+M [ 7490,14022 x7555 y14075 x7537 y14722 x7515 y14898 x7432 y15000 x7383 y14852 x7458 7468,14843 y14680 x7490 ]
+N M 7512,14400 vss
+# =====================================================================================
+# Piece ha: tl5_w3461 (the data of latch a of the top-left logic's fifth strip) is wl_h1.
+# The third (north-east) line of the diagonal bundle of pieces gd and eof's bd1_n2: tl5's
+# poly column `P 5453,5770 y6350 w=20` on south (x 5454) under nine horizontal metals (no pad:
+# 21-24 px wide in the chip-2 stripped shot at every sample) to a bend (5454,6763), a
+# 45-degree diagonal (x - y = -1309; a thin metal y 6849, the one west of the pad (5668,6846),
+# crosses it at about (5540,6849): plain, no pad or hole, found by the round-16 reviewer) to
+# (5645,6954), the poly row y 6954 east under eight
+# tracks (no pad, no tap) to its end pad (6188,6956); metal east along y 6957 over five
+# vertical polys (x 6280, 6324, 6367, 6410: pieces cd, cc, cb, ca; x 6451: eof's) to a plain
+# L corner (7034,6957), the outermost of three nested corners, and south on x 7034 over six
+# poly rows (y 7171, 7214, 7388, 7432, 7474, 7519) onto bw's pad (7031,7560), the west end
+# of bw's row y 7562 (wl_h1; bw's `M 7036,7530 y7590 w=23` is the pad's metal).
+P 5454,6345 y6763 5645,6954 x6188 w=22   # tl5's column on south, the diagonal, the row y 6954 east to its end pad
+P 6169,6937:6207,6975                 # the row's east end pad
+C 6188,6956 s=24x24
+M 6186,6957 x7034 y7545 w=13          # metal east along y 6957, corner (7034,6957), south onto bw's pad
+N P 5454,6600 tl5_w3461
+N P 5900,6954 tl5_w3461
+N M 6700,6957 tl5_w3461
+N M 7034,7300 wl_h1
+@alias wl_h1 tl5_w3461
+# =====================================================================================
+# Piece hb: cdp2_w6845 west of cdp2's port. The metal that cdp2 draws from its pad
+# (7335,6845) west to x 7290 (`M 7290,6848 x7335 w=16`) runs on west along y 6848 over eofw's
+# poly column (x 6843) and six poly columns (x 6451, 6410, 6367, 6324, 6280, 6237), no pad or
+# tap, to an end pad (6146,6847); the pad's poly row runs on west (drawn as a stub to x 6118;
+# it runs under eight tracks to a pad (5668,6846), from which a thin metal goes on west along
+# y 6849 to about x 5339: lc1's band, not drawn).
+P 6127,6828:6165,6866                 # the end pad
+C 6146,6847 s=24x24
+P 6148,6847 x6118 w=22                # the poly row on west: a stub
+M 6144,6848 x7300 w=13                # metal east along y 6848 onto cdp2's metal
+N M 6700,6848 cdp2_w6845
+# Piece hc: busl_y6805, the metal north of it. From an end pad (6189,6716) of a poly row
+# from the west (seen to x 6040; a stub to x 6160) a metal runs south on x 6191 to a plain
+# corner (6191,6805) and east along y 6805 over the same seven polys, no pad or tap, to a
+# pad (7380,6802) whose poly row runs on east (seen to x 7500; a stub to x 7410). Neither
+# end identified.
+P 6170,6697:6208,6735                 # the west end pad
+C 6189,6716 s=24x24
+P 6191,6716 x6160 w=22                # the poly row on west: a stub
+M 6191,6714 y6805 x7382 w=13          # metal south on x 6191, corner, east along y 6805
+P 7361,6783:7399,6821                 # the east pad
+C 7380,6802 s=24x24
+P 7378,6802 x7410 w=22                # the poly row on east: a stub
+N M 6700,6805 busl_y6805

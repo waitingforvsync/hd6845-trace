@@ -519,3 +519,7 @@ Round 5: no findings that change a connection.
 ## Corrections (coordinator, from the handoffs of `busl` run 15, 2026-11-21)
 
 - The table of crossing rows, row 10 (y 9990, "END pad (5646,9992) of `lc3_m5756` | the east edge"), and "`lc3_m5756` runs north through `lc2` ...": the row runs on east of x 6450 to an end pad (6817,9991), and the wire goes down the whole left bus field on the track x 6819 / x 6754 (`busl`, pieces `xm`, `x68`) and on in `bl0`'s ground. Neither end is identified.
+
+## Corrections (coordinator, from the handoffs of `busl` run 16, 2026-11-21)
+
+- Ports `vcc` (4924-4980,10600), `vcc` (5340-5390,10600), `vss` (4752-4802,10600): the two VCC metals are one metal (a band y 10597-10645 joins their feet; `busl`, piece `va`), and the west rail's foot turns west and south (piece `vc`).

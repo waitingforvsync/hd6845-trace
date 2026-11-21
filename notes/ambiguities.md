@@ -912,3 +912,12 @@ contacts with the metal passing over (found by its reviewer). The two boxes at (
 are very probably the same: no contact to the metal x 7927-7957. Re-read item R51 gives the test (pad or
 land, hole or pits, widened ring; trap 27's addition). And the pad (7878,8315)'s metal from (7987,6845) is
 `cdp2_w6845`, a through line from the west (a metal along y 6848), not the output of `cdp2`'s inverter.
+
+## AMB-048: the tie of `cdp2_b_hl`'s load (2026-11-21)
+
+Proposed by `cdp2` (Matt Godbolt, piece `gh`, merged 5d52ee6). The depletion load of the comparator's row line
+`cdp2_b_hl` (x 8578-8745, y 7352-7432) has its gate plate tied to the line by a buried contact drawn `?B`.
+The plate is one poly with row 2 of the lower series gate left of rows B, so the same tie decides two
+equations: that `cdp2_b_hl` is a gate at all (NOT(OR over s3..s7 of (`cdp2_b_s#_p1` AND `cdp2_b_s#_y`))),
+and that `cdp2_w7272` = NOT(`cdp2_b_hl` AND `cdp2_b_s7_x`). **Adopted: tied** (the tracer's reading; a depletion load's gate
+is normally tied to its output node). What would settle it: the box at 6x in all four shots.

@@ -915,3 +915,7 @@ comparator's chain output is, west of the knot, the line at y 6844, which goes t
 - Not done / the coordinator's earlier correction "Whether the bit lines join this block's bus lines ...": they do (`cdp3`, 2026-11-20, firm): `cdp3`'s bit lines of columns c2-c7 are each one metal with this block's bus line of its slice (`db_b5`..`db_b0`). The latch cell draws the metal to y 7821; `cdp3` draws y 7556-8040.
 - The bus line at x 8075 is `db_b6`; whether it is `cdp3`'s c1 line e (x 8076, drawn from y 9150 south) is open: the metal between is narrow and dim inside the cluster beside `cdp3`'s row A (y 8377-8768).
 - A pad (7335,6845) with a metal from the west and a poly row y 6835-6858 east to a pad (7987,6845), whose metal runs down to the pad (7878,8315): an input of that cluster (seen by `cdp3`, not drawn).
+
+## Corrections (coordinator, from the handoffs of `busl` run 16, 2026-11-21)
+
+- `cdp2_w6845`, "the metal west of the pad (7335,6845) (follower: to (6142,6847))": drawn by `busl` (piece `hb`) to an end pad (6146,6847); the wire goes on west in poly to a pad (5668,6846) and in metal along y 6849 to about x 5339 (`lc1`'s band, undrawn).

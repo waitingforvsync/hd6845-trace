@@ -354,3 +354,7 @@ In order of value:
 ## Corrections (coordinator, from the handoff of `busl` run 14, 2026-11-21)
 
 - Not done / the correction above ("The six poly lines ... believed to run on west to pads at about x 5760-5800"): drawn (`busl` run 14, piece `a6`): pads at (5757,14092), (5800,14136), (5756,14178), (5800,14223), (5757,14265), (5800,14308), no tap between; from them six nested Ls to `bl0`'s six tracks. The lines are `cdp3_g_c2`..`c7` to the left array's six lower rows.
+
+## Corrections (coordinator, from the handoffs of `busl` run 16, 2026-11-21)
+
+- "The VSS plate at the foot of the s0 rail" / the wide metal over the row y 14870: it is VSS from `cdp4`'s plate (`busl`, piece `vb`) and leaves south at (7383-7432, 15000); RL2's top bar (y 14935-14970, east of x 7468) is separate from it.

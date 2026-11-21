@@ -433,6 +433,13 @@ Traps, all of them real:
    line's track; a corner reported one track off): read such a staircase on a view and by
    cuts across each arm (`tools/busl_both.py` tests both chips along a cut), not from the
    follower's corners (`busl` run 12, 2026-11-20; nothing drawn was affected).
+   **A metal that runs toward a pad on the pad's own line need not end on it** (`bl0` run 3 round 4, `cdp2`
+   round 4, 2026-11-20; R26). A thin metal lying lengthwise on a poly column, or running toward a pad on the
+   pad's own x, was taken to end on the pad; it turned away or stopped 20-40 px short, and the pad's metal
+   came from another side. `follow.py` bridges the gap, and a column profile 20 px off the metal's centre
+   line misses the real metal. The check: `tools/tl5_tracks.py v X Y0 Y1` (or `h`) on the metal's own centre
+   line over the last 60 px before the pad's ring, and a row profile across the pad on each side to find
+   which side the metal arrives from.
 31. **A group near a package boundary that will not read may be half of a cell.** `lc1`'s cluster
    E was read three times as a free-standing gate without a load; it is the upper unit of a
    two-unit latch whose lower unit lies in `lc2`. Before a second pass over such a group, run
@@ -524,6 +531,17 @@ Traps, all of them real:
    (tan, 206/170/134). A row's layer decides what its ends are (a pad or a buried contact, a contact
    box) and what a poly crossing it would be (a transistor). Found 2026-11-20 by a reviewer (`bl0`;
    R50).
+40. **"Nothing is undrawn here" holds only inside the cuts it was made from, and a poly-colour mask of the
+   chip-2 stripped shot finds rows that are not there.** `busl` run 15 (2026-11-21) said the main part of
+   the left bus field had no undrawn signal track; its column cuts began at x 4800 and its row cuts at
+   x 5030, and run 16 found a thin track at x 4780, on the region's boundary. State the cuts with the
+   claim, and cut to the region's edges. And under a thin metal over field the chip-2 stripped shot reads
+   red over green by 9-41 (the metal's ghost), which a mask of "red minus green of 20 or more" takes for
+   a poly row; the clean shot decides (pink, about 181/121/119, against salmon, about 217/166/113, for poly
+   under metal). The mask gave run 15 a "poly row y 10560" and a patch at (6021-6057, 10704-10727) that
+   are ghosts. The check that works is by the metals (`tools/busl_mdrawn.py`: each metal along a cut and
+   the trace item that covers it) and by views with every trace outlined. No earlier block is known to
+   rest on such a mask.
 
 **When a trap turns out to affect work already done**, add the affected blocks to the
 "Re-read list" in `notes/work-packages.md` in the same commit that records the finding.
