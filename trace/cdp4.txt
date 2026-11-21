@@ -1063,4 +1063,20 @@ P 16905,18079 x17080 w=20                # under the wide rail x 16940-17030 (fi
 P 17063,18061:17097,18095
 C 17080,18078 s=20x20
 M 17080,18078 x17115 w=12                # the pad's metal leaves east along y 18078 (port; runs on)
-N M 16600,17605 d6_out_n_u
+N M 16600,17605 d6_out_n
+# ======================================================================
+# Run 10 (2026-11-21): the bit 6 output line on east into D6's pad cell. From the port of run 9 the thin
+# metal runs east to a pad, a poly row hops east under a wide rail and a thin metal (field) to a pad, a thin
+# metal runs north on x 17602 to a pad (17599,17341), and a poly row runs east under a thin metal and the
+# rail x 17690-17760 (field) into the west end of strip 4 of D6's pad cell (dpad's {}_out_n poly, x 17800).
+# ======================================================================
+M 17105,18078 17427,18079 w=12
+P 17410,18062:17444,18096
+C 17427,18079 s=20x20
+P 17427,18079 17602,18078 w=22
+P 17585,18061:17619,18095
+C 17602,18078 s=20x20
+M 17602,18084 y17335 w=12
+P 17582,17324:17616,17358
+C 17599,17341 s=20x20
+P 17599,17342 x17825 w=22                # onto dpad's strip 4 of D6 (P 17802,17313:..., y 17313-17339): one poly, a step

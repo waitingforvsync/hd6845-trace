@@ -62,10 +62,16 @@ transistors, 0 errors, 0 warnings. See "The data output inverters" under Logic.
 
 Run 9 (2026-11-21 16:00 -0600): **the sixth data output inverter, on the read bus's column 1** (x 15840-16270, y 17400-17620,
 and its output wire to (17066,18078); 2 transistors by instancing, no uncertain item): a sixth copy of
-`cdp4_ro`: **`d6_out_n_u` = NOT `cdp3_n_c1`** (firm). Its output is drawn by poly, a pad, a thin metal east
+`cdp4_ro`: **`d6_out_n` = NOT `cdp3_n_c1`** (firm). Its output is drawn by poly, a pad, a thin metal east
 along y 17605 and south, a pad and a poly hop to a pad (17080,18078) below the data bus column; believed
-`d6_out_n`, not yet joined to D6's pad cell (an open join). With every file loaded: 2518 nets, 4809
+`d6_out_n`, not yet joined to D6's pad cell then (it carried an open-join label until run 10). With every file loaded: 2518 nets, 4809
 transistors, 0 errors, 0 warnings. See "The sixth output inverter" under Logic.
+
+Run 10 (2026-11-21 16:20 -0600): **the bit 6 line into D6's pad cell: `d6_out_n` = NOT `cdp3_n_c1`** (wiring only, three pads
+with contacts, no uncertain item): from run 9's port a thin metal east, a poly hop, a thin metal north on
+x 17602 and a poly row east into the west end of strip 4 of D6's pad cell, one poly with `dpad`'s. So pins
+D0-D6 read R12-R17 through the read bus. With every file loaded: 2517 nets, 4809 transistors, 0 errors,
+0 warnings. See "The bit 6 line" under Logic.
 
 Not traced: the rest of the wiring right of x 10600 (the two thin metals x 10809 and x 10853, the rails'
 ends) and below y 14060.
@@ -540,7 +546,7 @@ frame with the cell outlined (`tools/view.py ... --shift -650,1474 --trace`, `g3
 metal): every shape of the cell sits on a feature (VCC box and contact, plate, strip, branch and tie box,
 pull-down column and VSS contact, gate row, output strip and box). Instance `u6`:
 
-    d6_out_n_u = NOT cdp3_n_c1
+    d6_out_n = NOT cdp3_n_c1
 
 - **Rails.** The VCC box (15847-15897, 17424-17486) with its contact (15860,17452) lies under the east part
   of the VCC rail that `regs` draws for its own inverter (x 15795-15890). The pull-down's column is under a
@@ -565,7 +571,31 @@ pull-down column and VSS contact, gate row, output strip and box). Instance `u6`
 
 **Believed, not traced**: this is `d6_out_n` (the other five copies drive `d5_out_n`..`d1_out_n`; `dbus`'s
 notes have `d6_out_n` leaving D6's pad cell "west to a pad (17600,17340), then south by metal"), and
-`regs_w17462` is `d7_out_n`. Named `d6_out_n_u` (an open join) until the wire is drawn into the pad cell.
+`regs_w17462` is `d7_out_n`. The wire carried an open-join label until run 10 drew it into the pad cell.
+
+### The bit 6 line into D6's pad cell (run 10, 2026-11-21; traced)
+
+From the port of run 9 at (17115,18078):
+
+- a thin metal east along y 18078-18080 to a pad (17427,18079) (`tools/tl5_tracks.py h 18080 17120 17420`:
+  no gap, no hole);
+- a poly row east (y 18068-18092) under a wide rail (x 17470-17520) and a thin metal (x 17550-17570), on
+  field, to a pad (17602,18078) (`d6_hop.png`, 4x, metal and clean: both pads with ring, bright centre and
+  hole);
+- a thin metal north on x 17602 from that pad to a pad (17599,17341) (`tools/follow.py 17605 17900 N
+  --gap 16` ends there; `tools/tl5_tracks.py v 17602 17360 18060`: two edge bars of 10 px, no hole): the
+  pad `dbus`'s notes give for `d6_out_n` ("west to a pad (17600,17340), then south by metal");
+- a poly row east from that pad (y 17328-17350) under a thin metal (x ~17646, `d_hiz`'s) and the rail
+  x 17690-17760 (`tools/railprof.py 17690 17760 17290 17380`: poly over field) to x 17825, where it is one
+  poly with the west end of strip 4 of D6's pad cell (`dpad`'s `{}_out_n`, `P 17802,17313:...`): the outline
+  steps up 17 px at x 17800 on its top edge and at x 17825 on its bottom edge, orange without a break in
+  both metal shots and the chip-2 stripped shot (`d6_join.png`, 5x, four shots).
+
+    d6_out_n = NOT cdp3_n_c1            d6_pu = NOR(d6_out_n, d_hiz)   (dpad)
+
+Beside it, not drawn: `regs_w17462` (NOT column 0) runs the same way to a pad (17427,18014), hops to a pad
+(17559,18014), and its metal goes SOUTH from there on x 17559 to about (17558,18149) (`tools/follow.py 17559
+18045 S --gap 16`), toward D7's pad cell; a third line on y 17945 turns north at its pad (17430,17945).
 
 ### Corner gate group: `cdp4_rst` = NOR of six select rows (run 2, 2026-11-19; traced)
 
@@ -633,7 +663,7 @@ islands are closed curves inside it, so they are the other class.
 | `dbus_le` | metal | x 16775, y 15930 (onto `dlat`'s end) and y 16450 (drawn end; goes on south) | from outside (believed from the south) | the data input latches' enable, passing through the units (run 8; uncertain over four boxes) |
 | `vcc`, `vss` | metal | x 16515 and x 16689 at y 15780 (onto `dlat`'s rails); `vcc` drawn to y 16440 (goes on to about y 16478), `vss` ends at y 16446 | - | the units' rails |
 | `cdp3_n_c7` (= `cdp4_n_s7` = `dbus_do0_in`) | metal | (16950-16962, 16714): onto `dbus`'s metal | driven inside | the read bus, column 7 = the gate of D0's output chain (run 7) |
-| `d6_out_n_u` | metal | (17115,18078), east of the pad (17080,18078) (drawn end; the metal runs on east to a pad at about (17432,18080)) | driven inside | the output of the sixth output inverter (NOT `cdp3_n_c1`), believed `d6_out_n` (run 9) |
+| `d6_out_n` | poly | (17800-17825, 17313-17350): onto `dpad`'s strip 4 of D6's pad cell | driven inside | the output of the sixth output inverter, joined to the pad cell (run 10) |
 | `vss` | metal | x 16017-16059 at y 17285 and y 17535 (drawn ends; not followed) | - | the rail of the sixth output inverter and of the unit above it |
 | `cdp4_n_s0` | poly | x 10850, y 13333 | driven inside | selector output of slice 0: on east to its pad (11200,13330) on the read bus track of column 0, drawn by `regs` (piece `n0`) |
 | `cdp4_a_s2`..`s7` = `cdp3_f_c2`..`c7` | metal | x 8511 + offset, y 11048 (the end of `cdp3`'s line f, y 11052) | from `cdp3`'s row A | selector input a (6 bits); crosses row R1 with no contact (run 3) |
@@ -769,8 +799,8 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
   y 16505; PR #17: west at y 16498); the VCC rail south of y 16440 (to about y 16478: whether it meets the
   horizontal metal y 16493-16508 below it is not read; 12 px of dark between them at x 16515); what lies
   west of the VCC rail (x < 16490) beside the units.
-- From run 9: `d6_out_n_u` east of (17115,18078) to D6's pad cell (and `regs_w17462` likewise to
-  D7's); the unit above the sixth inverter on the same rail (x 15840-16260, y 17260-17400: a weaker match of
+- From run 10: `regs_w17462` (NOT column 0) from `regs`' port (16800,18012) by its pads (17065,18010),
+  (17427,18014), (17559,18014) and a metal south on x 17559 to D7's pad cell (believed `d7_out_n`); the unit above the sixth inverter on the same rail (x 15840-16260, y 17260-17400: a weaker match of
   `cdp4_ro`, gate row y 17335 from a pad at about (16250,17335)); the ends of the rail x 16017-16059.
 - From run 5: the poly column x 13706-13730 under the rows.
 - From run 4: the undrawn poly from the west along

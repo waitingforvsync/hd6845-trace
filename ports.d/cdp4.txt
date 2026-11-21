@@ -23,5 +23,4 @@ cdp3_f_c6     M      10073,11048      in   the same, s6
 cdp3_f_c7     M      10464,11048      in   the same, s7
 dbus_le       M      16775,16450      ?    the data input latches' enable: the thin metal through the output units (uncertain over four output boxes), drawn end; goes on south
 vcc           M      16491-16540,16440 -   the units' VCC rail (dlat's, from the north), drawn end; goes on south to about y 16478
-d6_out_n_u    M      17115,18078      out  the output of the sixth data output inverter (NOT cdp3_n_c1), believed d6_out_n: the metal east of the pad (17080,18078) at the end of its poly hop under the wide rail; runs on east to a pad at about (17432,18080)
 vss           M      16017-16059,17285 -   the rail of the sixth output inverter, drawn end (goes on north past the unit above); its south end is at about y 17540
