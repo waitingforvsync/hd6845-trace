@@ -1054,6 +1054,10 @@ east on poly rows that enter one gate group nobody has drawn (x 7200-7450, y 164
   line's row y 16538. If the lower unit's output is the east line and the upper unit inverts it onto
   the west line, the two selects are complementary and `rcs_mv` chooses between the display start
   address and the row's own line. That is the next piece; nothing of it is drawn.
+- **Review round 49** (a full review, 19 images): no findings. It read the corner at (7014,16478) and
+  the pad north of it as two nets, both thin metals as one piece each (and would leave the stretch south
+  of each upper pad plain metal), every pad and every hop. Not viewed at high zoom: rows other than s1,
+  s8 and s10.
 - **Read without an uncertain item, recorded as ambiguities**: the east line over the box in every row
   (165), the 20 px south of each upper pad (166), the metals over diffusions without contacts (167),
   the two free north ends (168), the west line's poly column under the east line's metal at x 7014 and
@@ -5715,6 +5719,10 @@ driver lies; the other three lead to the loads.
     chip 2's metal is bright through (193-217: `tools/px.py col 4346 15380 15430 6`). No other row has
     it at that place. Read as damage to chip 1's metal before it was stripped; the line is drawn
     through on chip 2.
+    Review round 49 lists three more of chip 1 on this piece's metals, chip 2 bright through each
+    (x 6280 at y 17023-17098, x 6322 at y 17063-17144, y 16478 at x 6377-6452), and one of chip 2: a
+    dark blob over the east line at y 17383-17481 (row s12; run 40's Ambiguity 163 has its pad), where
+    the line's continuity rests on chip 1 alone.
 
 ## Review
 
@@ -8194,6 +8202,69 @@ in both chips, though the clean shot is protected there; they are not drawn: Not
 upper pad in chip 2's metal shot (the blemish).
 
 Round 48: no findings.
+
+### Round 49 (full review of piece `sel`; 2026-11-21 13:59 to 14:18 +0000, at commit e722598)
+
+One fresh reviewer (Claude Fable 5.2), briefed with the piece's 21 claims (the east line in ten stretches,
+the west line in nine, the two nets apart everywhere, the three ports) and told to suspect: the corner
+(7014,16478) against the pad (7014,16433) (the pad's own metal running south, which would make the two
+nets one, or a corner with bare ground between: traps 13, 16); the continuity of each thin metal through
+the fourteen rows, with the two places that repeat on the east line (over the box, y 11544-11591 in row
+s1, and the 20 px south of each upper pad), in several rows and both group gaps, and whether any stretch
+should be `?M`; a contact of either thin metal on what it crosses (the large diffusion box, the
+diffusion under the west line, the band under the north ends); the north ends (free, or running on
+dimly); each of the fourteen pads (which metal reaches it, whether another does, which side the poly
+leaves by), with (4563,18255), (4909,18298), (7014,16865), (7187,16866), (7185,16432) named; the poly
+row under the east line at (4518,18256); the four poly hops under the rail and the wide metal (a step of
+one track, the rows entering against the rows leaving); the diagonal steps (a swap); taps, pads or two
+metals end to end on the long metals; the row y 16865 between its pads and the dark spots on it. Images:
+`cache/scratch/eof/review-49/` (19 used).
+
+It checked and found as drawn:
+
+- **The corner and the pad** (`c20.png`, 5x, three shots; `tools/px.py col 7014`, `row 16456 / 16478 /
+  16500`; `tools/tl5_tracks.py v 7014`): south of the pad no metal for 30 px (y 16441-16468): a 10 px
+  ring, open poly at y 16453-16462 (orange in both chips: chip 2 156-167/111-119/58-61, chip 1
+  137-142/87-96/42-44, against 190-228/143-195 for the metal from y 16471), then the metal's north edge
+  line. The pad's own metal arrives from the west along y 16435; the vertical's top is flush with the
+  north edge of the metal y 16478: a corner. No ring and no hole along y 16470-16548 where the metal
+  lies on the poly column. (The 10 px that Ambiguity 169 called bare ground it reads as the pad's open
+  poly: the same conclusion, two nets.)
+- **Both thin metals as one piece each**: over the box, on the median of the fourteen rows and row by
+  row, only two bars of 8-14 px with the metal bright between in both chips; south of each upper pad
+  about 20 px dim in every row, the metal's edge lines (x 4507, x 4531) running through in both chips and
+  the clean shot redder under the line than on its flanks at y 11826-11838, no hole at y 11840-11848, so
+  nothing restarts there: **it would leave the stretch plain `M`**. Both group gaps one piece each, no
+  branch (`gap1.png`, `gap2.png`); a flank test with a control at the corners finds no branch on either
+  line.
+- **The north ends**: free (`north.png`, text maps): bare ground north of them in both chips, no ring, no
+  hole. **No contact** on the large diffusion box in any row, nor on the diffusion under the west line.
+- **The crossing at (4518,18256)**: the east line bright through, no hole; the row open poly on both
+  sides (`sw.png`).
+- **The hops**: all four straight across; five rows enter and leave the rail in the same order
+  (`hop1_clean.png`, `hop2.png`), open poly at each rail edge. **The steps**: the four lines step in
+  turn, no swap (`steps.png`, `tools/eof_mrun.py`).
+- **The long metals**: `tools/tl5_tracks.py` along x 6280, x 6322, y 16435 and y 16478: no stretch over
+  16 px without metal in both chips; no pad or tap (`long_h.png`, `long_v1.png`, `long_v2.png`,
+  `nwcorner.png`).
+- **The ends**: the row y 16865 continuous in chip 2's stripped shot, so the dark spots at x 7078 and
+  x 7122 are artefacts of the clean shot (`row16865.png`); the pad (7185,16432) takes its metal from the
+  south and its poly leaves east (`ne.png`). **All fourteen pads** take their metal and poly from the
+  sides claimed. **The extraction**: 28 gates on two separate nets, 0 errors, nothing else on either net
+  with every package loaded.
+
+Chip defects it lists, not layout: chip 1 has lost metal on x 6280 (y 17023-17098), on x 6322
+(y 17063-17144), on y 16478 (x 6377-6452) and on the west line (y 15389-15420), chip 2 bright through
+each; chip 2 has a dark blob over the east line at y 17383-17481 (row s12), so continuity there rests on
+chip 1 alone. Added to Ambiguity 171.
+
+Findings: none. Nothing it found changes a connection, and it has no geometry corrections.
+
+It could not check: rows other than s1, s8 and s10 at high zoom (they rest on the measurements and the
+medians); the cell's own pads and gates and where the three ports lead (not in the brief);
+`tools/unsure.py`'s whole report (it filtered the output for these nets: nothing).
+
+Round 49: no findings.
 
 ## Not done
 
