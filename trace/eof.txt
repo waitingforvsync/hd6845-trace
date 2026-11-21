@@ -2994,3 +2994,86 @@ D 7361,15306:7380,15331
 P 7386,15302:7418,15326
 ?D 7375,15308:7412,15323
 ?B 7384,15306:7414,15325
+
+# =====================================================================================
+# Piece u15100 (run 35, 2026-11-21): the unit that drives eof_w15128, an inverter on rst_n
+# under the north end of the rail x 7294-7342 (bc1's west gate column; region x 7220-7525,
+# y 14995-15160). eof_w15128 = NOT rst_n. One pull-down under the rail (gate: rst_n's row
+# y 15076-15097, bl0's, drawn there to x 7280), its ground on a contact north of the gate,
+# its node south of it: west by a band to the exit box at the end of eof_w15128's row (piece
+# in15760), east by a band under the load's plate into a supply box under RL2. The load's tie
+# is a strip from the band north to a box beside the plate's north end. The large outlined
+# area north-west of the unit (x 7205-7375, y 14925-15030) is open field (tools/opendiff.py
+# 7195 14900 7480 15165: no open diffusion; px.py pt: 151/133/100 like the field south-west).
+#
+# The ground rail does not run on north: at y 15024-15069 it turns east and joins the wide
+# metal x 7383-7432 that busl draws down to y 15000 (its piece vb: VSS from cdp4's plate).
+# Two-chip metal cuts (tools/tl5_tracks.py v 7340/7350/7372/7380/7390/7400/7417, h 15036/
+# 15045/15052/15058/15066): the arm is y 15025-15068 for x 7340-7376; east of x 7377 its
+# south edge is at y 15052-15057 (a notch over the tie box); between the rail's part over
+# the ground box and the arm one dark line x 7329-7341 (8-13 px: the box's east edge
+# beneath), no bare ground. The two dark dots on the metal at (7420,15010), (7420,15033) in
+# chip 2 are not in chip 1 (one dot at (7402,15018) there): dirt, no contacts.
+M [ 7383,14995 x7432 y15054 x7377 y15069 x7342 y15145 x7294 y15024 x7383 ]
+N M 7400,15035 vss
+# the active area under the rail: the ground box y 15030-15075 (top edge a dark line y 15029
+# in both metal shots, tan with specks in the clean shot), the channel, the node y 15098-15128.
+# West edge x 7290-7294 (the clean shot: dark at x 7289, cream from x 7295 on the gate row),
+# east edge x 7336-7338 (dark line in the clean shot at y 15087), open at y 15110-15128 on
+# both sides (px.py row 15119 7258 7366 3: tan from x 7291 to x 7351 without a line)
+D 7292,15030:7338,15128
+# ground contact: bright centre x 7300-7315, y 15044-15059 in a dark ring in both metal shots,
+# specks in the clean shot (textmap.py 7216 15020 7345 15160 3 --acid)
+C 7308,15051
+# the gate: rst_n's row (bl0: `P 6320,15088 x7280 w=20`) on east under the rail: cream
+# (232-249/164-179) from x 7298 to x 7331, over the active's east edge, its end over field at
+# x 7349-7353 (px.py row 15087 7280 7366 3), against the field pocket x 7361-7376
+P 7275,15076:7352,15097
+N P 7285,15087 rst_n
+N D 7315,15115 eof_w15120
+# the node's way out west: a band x 7266-7290 (y 15114-15128 at the rail, its south edge
+# sloping down to y 15137 at its west end; eof_band.py h wing: +32.8 / +16.4, diffusion)
+# against a box x 7234-7262, y 15108-15145 (heavy frame, pale centre x 7240-7253,
+# y 15120-15138 in both metal shots and the chip-2 stripped shot, no metal over it) at the
+# east end of eof_w15128's row (piece in15760, drawn to x 7225). One dark line (x 7255-7264)
+# lies between the centre and the band: the tie is drawn uncertain as in u15260, and the two
+# names are held by an alias
+D [ 7266,15114 x7296 y15128 x7284 7266,15137 ]
+P 7220,15119:7240,15142
+P 7234,15110:7263,15145
+?D 7243,15120:7270,15134
+?B 7241,15118:7265,15136
+@alias eof_w15128 eof_w15120
+# the node's way east: a band y 15110-15128 from the rail (edge lines y 15106-15113 and
+# y 15124-15132 at x 7365; eof_band.py h Bw: +38.0 / +27.9), which widens at x 7384-7400
+# (its south edge steps to y 15136, a strip leaves it north) and runs under the load's plate
+# (the two edges cross the plate as dark lines y 15101-15110 and y 15132-15140) into a box
+# under RL2 with no edge line (px.py row 15120 7396 7500 4; col 7464 15080 15150 4: tan at
+# y 15108-15128 between the plate and the box)
+D 7334,15110:7398,15128
+D 7384,15106:7480,15136
+# the supply box under RL2: pale with a heavy outline x 7467-7522, y 15072-15136 in the clean
+# shot; one contact, a ring with a bright centre x 7485-7497, y 15092-15113 in both metal
+# shots, pits in both stripped shots (textmap.py 7440 15056 7545 15150 3; r35_d1.png, 4.2x).
+# A piece of bc1's RL2 (`M 7495,14950 y16300 w=50`) is drawn again over it so that the
+# package extracts by itself
+D 7468,15073:7521,15135
+C 7491,15102 s=26x34
+M 7495,15060 y15150 w=50
+N M 7495,15140 vcc
+# the load: a poly plate x 7408-7461, y 15086-15153, orange in both chip-2 shots (blue 55-60)
+# in three bands divided by the band's two edges (r33_dark.py v 7430 / v 7452 15050 15160):
+# a channel 30 wide and 53 long
+P 7408,15086:7461,15153
+# the load's tie: a diffusion strip x 7385-7397 leaves the band north (eof_band.py v S:
+# +37.8 / +18.3, against +19.1 / -3.3 for the pocket west of it and +24.1 / -6.0 for u15500's
+# island) to a box x 7379-7435, y 15057-15080 beside the arm's notch: a heavy frame with two
+# pale cells, x 7385-7394 (plain, blue 81: the strip's head) and x 7409-7422 (orange, blue
+# 59: poly, the plate's north tab), a line x 7395-7408 between them and a line y 15070-15077
+# between the left cell and the strip (r33_dark.py h 15066 7340 7480, v 7392 15050 15160;
+# r35_c1.png, 5.7x, four shots). No metal over the box (the arm's notch), no ring, no hole.
+# Drawn uncertain as in u15500
+D 7385,15078:7398,15112
+P 7405,15058:7428,15090
+?D [ 7385,15062 x7424 y15076 x7398 y15082 x7385 ]
+?B 7403,15060:7426,15078

@@ -152,7 +152,7 @@ vss           M      8336-8384,16040          -    column A's VSS rail, bc1's R1
 # Piece u15500 (run 32): the port eof_w16040 P 7290,15471-15489 is gone (the row is drawn on into its gate, gate 2 of the NOR eof_w15523 = NOR(rcs_e4, eof_w16040, bl0_w15566))
 rcs_e4        P      7280,15425-15446         in   gate 1's row of the NOR, drawn again from x 7280 over tla's row (tla ends it at x 7370; here to its end x 7390)
 bl0_w15566    P      7255,15555-15577         in   gate 3's row of the NOR, on east from bl0's row end (bl0's port 7260,15566)
-vss           M      7294-7340,15140          -    the rail of bc1's west gate column, drawn over the three units only (y 15140-15900); it runs on north
+vss           M      7383-7432,14995          -    the rail of bc1's west gate column (drawn y 15024-15900 over four units): north it turns east at y 15024-15069 onto busl's VSS metal x 7383-7432 (busl's piece vb, drawn to y 15000)
 vcc           M      7470-7520,15435          -    bc1's RL2 (M 7495,14950 y16300 w=50), drawn again over the load's contacts (y 15435-15555)
 vcc           D      8560,17964-17984         -    the diffusion wire of piece cap18 on east of the box under the VCC rail, to the twin device at x 8700-8800 (not drawn)
 vcc           M      8512-8558,17997          -    R2 on south (drawn y 17550-17997 over the box of piece cap18; it runs on)
@@ -163,6 +163,8 @@ eof_w15781    P      7228,16160-16186         out  the same net: the poly row ea
 lc1_w7780     P      7165,15207-15229         in   gate 1's row of the NOR eof_w15262, on east from busl's row end (busl's port 7170,15218)
 rcs_mv        P      7025,15293-15317         in   gate 2's row of that NOR, on east from bl0's row end (bl0's port 7030,15301)
 vcc           D      7480,15246-15280         -    the NOR's load band into bc1's box under RL2 (bc1: D 7462,15194:7540,15284)
-eof_w15128    P      7225,15119-15142         in   gate 3's net: the poly row east of the pad (7014,15128), drawn to the frame of a box (7226-7262, about 15108-15148): believed the exit of a unit under the rail at y 15100-15200 (not drawn)
+# Piece u15100 (run 35): the port eof_w15128 P 7225,15119-15142 is gone (the row is drawn on to the exit box of its driver, the inverter eof_w15128 = NOT rst_n); the rail is drawn on north to its turn east onto busl's VSS metal
+rst_n         P      7275,15076-15097         in   the gate row of the inverter eof_w15128, on east from bl0's row end (bl0's port 7280,15078-15098)
+vcc           M      7470-7520,15060          -    bc1's RL2, drawn again over the inverter's supply box (y 15060-15150)
 vss           M      7294-7340,15900          -    the rail of bc1's west gate column on south of the second NOR (bl0 draws it from y 16925)
 vcc           M      7470-7520,15690          -    bc1's RL2, drawn again over the second NOR's load contact (y 15690-15860)
