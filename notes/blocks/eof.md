@@ -4038,7 +4038,9 @@ driver lies; the other three lead to the loads.
     other metal, and the metal south of the row has no other north end: it crosses gate 3's row with no pad
     and no hole. (b) The metal from the south ends on gate 3's row and the pad's metal is not seen: then the
     row would need a pad there, and has none (it keeps its width; the clean shot's row is whole). No `?`
-    item. Where the metal crosses the row the chip-2 stripped shot is yellow-green, not poly's orange (the
+    item. **Review round 40's control**: the clean shot is as green south of the pad (7187,15697), where no
+    metal goes on, and under `bl0`'s metal x 7143, where both chips show full metal: the green says nothing
+    either way, and the edge lines and the colour between them decide. Where the metal crosses the row the chip-2 stripped shot is yellow-green, not poly's orange (the
     metal's ghost; `px.py col 7187`: 163-174/150-158/49-53).
 128. **The corner of gate 2's row under `ck_out`'s metal, and 270 px of poly under that metal** (piece
     `in15760`; traps 13, 34). The poly column x 7092-7114 from the pad (7100,15392) lies exactly under
@@ -6025,6 +6027,57 @@ The connections are the same before and after the fixes:
     .venv/bin/python tools/sameconn.py f71926b   -> connections identical
 
 Round 39: no findings that change a connection.
+
+### Round 40 (full review of pieces `u15760` and `in15760`; 2026-11-21 07:41 to 07:55 +0000, at commit 8ebc0d2)
+
+One fresh reviewer (Claude Fable 5.2), briefed with the two pieces' claims (`u15760`: the two rails; the
+three pull-downs, their gate rows and how each joins its net; the ring round the field island; the band
+west of the rail and the active under gate 3; the load, its box under RL2 with one long contact and its
+uncertain tie; the exit: band, box with an uncertain tie, row, pad (7187,15782), the thin metal south over
+gate 3's row, through the pad (7187,15955) to the pad (7187,16170), the two rows drawn 28 px; the equation.
+`in15760`: each wire's row, pads, metal and row to its port; every crossing claimed to make no contact; the
+pad (7100,15262) apart from the pad (7100,15175)) and told to suspect, in this order: (a) the thin metal in
+the 10 px between the pad (7187,15782) and gate 3's row, where the clean shot is green, a contact on that
+row, and the metal's run through one pad to the other; (b) the corner of gate 2's row with the poly column
+under `ck_out`'s metal, the column's south end, and a contact with that metal over 270 px; (c) the island's
+class and the east band's; (d) gate 3's east end against the active's edge; (e) the two uncertain ties and
+the patch between the exit box and gate 2's step; (f) the box under RL2 and its contact; (g) every pad, and
+anything going on beyond one; (h) the thin metal x 7014 over its 690 px; (i) the rows' east ends and the
+line across the two output rows. Images: `cache/scratch/eof/review-40/` (22).
+
+It checked, at 4.4x in four shots unless noted and by text (`px.py`, `textmap.py`, `eof_band.py`,
+`eof_cchk.py`, `tl5_tracks.py`), and found as drawn: (a) the stretch is metal: at `px.py row 15806` edge
+lines at x 7178 and x 7199 with 182-186/128-158 (chip 2) and 168-178/142-166 (chip 1) between, against its
+own control south of the pad (7187,15697) at y 15720, where no metal goes on: no edge lines, 131-145/126-132;
+**the clean shot is green at both places, and under `bl0`'s metal x 7143 at y 15764-15808 where both chips
+read 214-240, so the green refutes nothing** (Ambiguity 127); no contact on gate 3's row (no pad, the row
+keeps its width, bars only); the metal runs through the pad (7187,15955) (bright at y 15928 and y 15979) and
+ends on the pad (7187,16170), with no side arm; (b) row and column are one poly: the clean shot's dark
+stripe at x 7120-7128 is the open gap between the two metals, where both metal shots are poly's orange
+(159-165/109-119/50-55; 154-164/78-80/39-41) and the stripped shot is weak (red minus green 15-28); the
+column ends at y 15748 (pink south of it); no ring and no hole along `ck_out`'s metal, none at the y 15437
+crossing; (c) the strip is field (+25.2 / -3.6 against controls +21.9 / +5.4 and its own +27.7 / +1.2), the
+east band diffusion (+38.1 / +16.4) with no edge across it (`px.py col 7406`), the top and bottom bands
+continuous; (d) the active's edge at x 7334-7338, the poly cream to x 7346, field south of the bottom band
+east of the rail; (e) gate 2's step ends at about y 15773, apart from the band and from the exit box (a
+field gap x 7264-7271); (f) one oval contact; the box's west edge line is present at y 15760 and y 15814 and
+absent at y 15780-15795, where the load's strip enters; closed north and south; (g) all seven pads are
+contacts with nothing on an undrawn side; the pad (7100,15262) is apart from (7100,15175): 10 px of field,
+no metal; (h) one metal, y 15153-15805, no arm, no pad; (i) both input rows end against framed boxes; the
+dark line x 7231-7239 does cross both output rows and runs on beyond them (seen y 15925-16020 and
+y 16125-16215). The unit against its master `u15500`: the same build, only the VCC box differs, as the
+notes say. No contact on the node's parts under the rail.
+
+It reported **no findings**.
+
+Could not check (the reviewer): whether diffusion lies under the two tie boxes (both stay `?`: Ambiguities
+125, 126); the 18-20 px of dark between the exit box and gate 3's row (the same in the master); the class
+of the 6 px patch at (7267-7282, 15779-15785); the line x 7231-7239 between y 16020 and y 16125; what joins
+the VCC box east of x 7522.
+
+Nothing was changed in the trace after the round (no `sameconn` run is called for).
+
+Round 40: no findings.
 
 ## Not done
 
