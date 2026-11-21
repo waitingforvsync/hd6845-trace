@@ -536,3 +536,97 @@ M 8685,7006 y7300 w=20               # on down into the logic left of rows B (cr
 # (row A: contact 10896,6325; row C: contact 10894,7801; both seen, outside the region)
 P 10750,6314:10850,6334
 P 10750,7790:10850,7810
+
+# ================================================================ run of 2026-11-20: the logic left of rows B
+# ---- piece ga: an inverter at x 7900-8253, y 6985-7140
+#     cdp2_w7065 = NOT tc2_sr_q        (through two uncertain buried contacts: the load's tie and the output's)
+# Review round 1: the two boxes first drawn as metal contacts, (8112,7088) and (7990,7084), are buried
+# contacts with a thin metal passing over each (no widening of the metal, no ring, no hole in the clean
+# shot; trap 22). So db_b6's metal x 8107-8121 and the thin metal x 7978-8000 only pass over this gate.
+M 8053,6960 y7460 w=46                 # the VSS rail here (x 8030-8076); it widens onto row C's rail at y 7430-7470
+M 8228,6990 y7440 w=50                 # the wide VCC metal (x 8203-8253), down onto row C's
+D 8025,6985:8075,7010                 # source box
+C 8043,7008
+D 7975,7005:8105,7078                 # source, channel, node
+P 7922,7028:8118,7050                 # gate row, from a pad (7922,7040)
+P 7905,7023:7940,7058                 # pad: tc2's metal of tc2_sr_q (M 7922,6100 y6400) runs on south and ends here
+C 7922,7040
+M 7922,6400 y7040 w=18
+# the output: the node's tab south-west and a buried contact under the east end of a poly row
+D 7975,7076:8020,7100
+?B 7972,7072:8002,7100
+P 7662,7076:7998,7096                 # the row, west under the tracks to a pad (7662,7083)
+N P 7800,7086 cdp2_w7065
+P 7645,7066:7680,7100
+C 7662,7083
+M 7662,7040 y7083 w=14                 # a metal from the north ends on it (port)
+# the load: neck east, strip under the poly block, box on the VCC metal; the block's tail ends on a
+# buried contact against the neck
+D 8103,7057:8145,7088
+D 8140,7057:8151,7092
+D 8149,7020:8171,7092
+D 8167,7022:8208,7095                 #   under the poly block
+D 8205,7030:8250,7140                 # box on the VCC metal
+C 8225,7045
+C 8222,7105
+P 8169,7012:8205,7110                 # the poly block (channel W about 73, L about 37)
+P 8112,7092:8172,7110                 # its tail west
+P 8100,7080:8134,7104                 #   and its end in the box
+?B 8098,7076:8136,7092
+# the thin metals that pass over the gate (a third, x 8154-8170, crosses the load's strip and tail: not drawn)
+M 8114,7000 y7395 w=14                 # db_b6's metal: on south to where row C's piece starts; on north (port)
+# a through line: from a pad (7987,6845) to a pad (7878,8315) in cdp3's ground. Over the node's box it is
+# dark for 19 px (y 7087-7105): drawn ?M there (tracing guide, trap 27); the names are gathered by alias.
+M 7988,6845 y7089 w=14
+N M 7988,6950 cdp2_w6845
+?M 7988,7085 y7107 w=14
+M 7988,7103 y7388 x7950 y8212 x7880 y8315 w=14
+N M 7988,7200 cdp2_w6845s
+@alias cdp2_w6845 cdp2_w6845s
+P 7970,6828:8004,6862
+C 7987,6845
+P 7335,6836:7987,6858                 # its poly row west to a pad (7335,6845)
+P 7318,6828:7352,6862
+C 7335,6845
+M 7290,6848 x7335 w=16                 # a metal from the west ends on that pad (port; follower: to (6142,6847))
+P 7860,8298:7896,8332
+C 7878,8315
+
+# ---- piece gl: the lower of two series gates under the rail x 8375-8425 (x 8205-8600, y 7160-7400)
+#     cdp2_w7272 = NOT( cdp2_w7300 AND cdp2_w7344 )
+# Top node, row 1, a node with no contact, row 2, a box with the rail contact. Load west of the thin
+# metal x 8328-8345 (which passes over the node's tab): strip under a plate to a box on the VCC metal,
+# the plate's finger on a buried contact at the end of an L of diffusion. Output: the node's strip east,
+# a tab up into a buried contact, a poly east and north that turns west as row 2 of the gate above.
+# (Review round 3: the node reaches the tab by an arm y 7252-7268, not by a strip below it.)
+M 8400,7040 y7440 w=50                 # the VSS rail x 8375-8425, down onto row C's
+D 8365,7255:8446,7365                 # the column (edges x 8365 and 8446: review round 3)
+D 8385,7360:8437,7400                 # box
+C 8405,7380
+P 8350,7290:8600,7311                 # row 1, from the east (port at x 8600)
+N P 8590,7300 cdp2_w7300
+P 8350,7333:8600,7354                 # row 2, from the east (port at x 8600)
+N P 8590,7344 cdp2_w7344
+# the load
+D 8320,7255:8367,7277                 # the node's tab west (under the thin metal x 8328-8345: no contact)
+D 8262,7253:8322,7280                 # strip under the plate
+D 8205,7248:8264,7315                 # box on the VCC metal
+C 8226,7276
+P 8265,7236:8320,7297                 # plate
+D 8322,7275:8337,7320                 # L of diffusion from the tab down (x 8322-8337)
+D 8298,7300:8337,7320                 #   and west into the box
+P 8298,7295:8320,7318                 # the plate's finger
+B 8296,7298:8324,7322
+# the output
+D 8444,7252:8460,7268                 # the node's arm east from the column into the tab (review round 3: the band y 7272-7288 is field)
+D 8455,7246:8496,7274                 # tab up
+B 8463,7244:8500,7273
+P 8468,7250:8518,7268                 # poly from the buried contact east,
+P 8500,7170:8518,7268                 #   north,
+P 8445,7160:8518,7181                 #   and west as row 2 of the gate above (port at x 8445)
+N P 8509,7220 cdp2_w7272
+# the two thin metals that cross the piece (no contact on either here)
+M 8336,7155 y7272 w=14                 # x 8328-8345: over the node's tab and the L it is dark for 58 px (y 7268-7326):
+?M 8336,7268 y7326 w=14                #   drawn ?M there (tracing guide, trap 27)
+M 8336,7322 y7395 w=14
+M 8532,7155 y7395 w=14                 # x 8525-8540: over both rows, no pad

@@ -1,0 +1,9 @@
+# cdp2: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+tc2_sr_q     M  7913-7931,6400    in   onto tc2's metal of tc2_sr_q (M 7922,6100 y6400): the gate row of piece ga
+cdp2_w7065   M  7655-7669,7040    out  the metal north of the pad (7662,7083), at the west end of the inverter's output row
+db_b6        M  8107-8121,7000    ?    db_b6's thin metal runs on north (it passes over piece ga without contact)
+cdp2_w6845   M  7290,6840-6856    ?    the through line: the metal west of the pad (7335,6845) (follower: to (6142,6847))
+cdp2_w6845   P  7860-7896,8315    ?    the through line's south end, the pad (7878,8315): an input of cdp3's gate cluster beside its row A
+cdp2_w7300   P  8600,7290-7311    in   row 1 of the lower series gate (piece gl), from the east
+cdp2_w7344   P  8600,7333-7354    in   row 2 of the lower series gate, from the east
+cdp2_w7272   P  8445,7160-7181    out  the lower series gate's output: row 2 of the gate above it (not drawn)
