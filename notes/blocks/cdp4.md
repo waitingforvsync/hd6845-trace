@@ -303,7 +303,9 @@ c0 = s0 on x 11201):
   centre, a ring, bright; the metal widened). The dark bars across the tracks are edges underneath:
   `wr_r15`'s poly row (y 11819-11851), the two long edges of the diffusion-coloured rectangle of
   AMB-040 (y 11919-11927, 12178-12186; the tracks cross it, tan under them, with no contact), the n
-  rows, and the poly diagonals of the bottom bus (y 17500-18300). So the rows `cdp4_n_s#` pass under
+  rows, three more poly rows that cross all eight tracks (y 10700-10722, `cdp3`'s row H line;
+  y 14558-14576; y 16380-16397: named by the review), and the poly diagonals of the bottom bus
+  (y 17500-18300). So the rows `cdp4_n_s#` pass under
   the lower-numbered tracks, and the tracks over everything else, without contact.
 - **South end.** Nested corners, no pad: each track turns east onto a horizontal metal (drawn to
   x 11230). `tools/follow.py 10940 13700 S` runs column 6's on east to x 12810. Column 0's track is
@@ -482,6 +484,11 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
    chip 2's metal bright); a particle in the clean shot at (11140-11215, 12215-12295); two rings about
    10 px across in the clean shot only at (11113,12921) and (11156,12928), on field under tracks 2 and 1
    (no pad, no ring in either metal shot); a dark patch on chip 2's metal at (11098-11122, 12885-12900).
+   From the review (round 3): more 8-15 px clean-shot rings on field under tracks at (10897,12808),
+   (10984,12847), (10984,13245), (11113,12322), (11113,13235), (11201,12808); chip-1 stain patches at
+   (11157,15356-15412) and (11201,15204-15264); blemishes in both chips, 7-15 px apart between them, at
+   (10897,12390), (10984,13937), (11201,15240), with field under each (not breaks). Under the chip-1 stain
+   (y 15530-15790) the tracks' continuity rests on chip 2 alone.
 
 ## Not done
 
@@ -596,6 +603,38 @@ of the row, the copies (`cellcheck.py`, three shots), the extraction, `unsure.py
 `.venv/bin/python tools/sameconn.py bae8129`: connections identical.
 
 Round 1: no findings that change a connection.
+
+### Run 4 (the read bus)
+
+Round 3 (full review, 2026-11-21 14:22 -0600; a fresh Fable reviewer, images in `cache/scratch/cdp4/review-3/`;
+commit before the round 1429ae0). Piece: the read bus, x 10840-11230, y 10343-18305 (16 pads, eight tracks,
+seven corners). Told to suspect: the corner of column 7's track over the poly corner of `rst_ck`'s column
+(Ambiguity 13); whether each track runs through its `cdp4` pad; a missed pad or tap along the 7,900 px of
+each track (the stretches y 11840-12300 on columns 1 and 0, the clean-shot marks, the bar on column 5 at
+y 14575, the chip-1 stain, the poly-diagonal zone); the rows' continuity and their crossings of the lower
+tracks and of the two undrawn metals x 10809, x 10853; two metals end to end on one track; a one-pitch step.
+
+It checked: straightness by `tools/busl_mdrawn.py h` at 70 cuts (every centre within 3 px); continuity by
+`tools/tl5_tracks.py v X 10300 18330` on all eight (no stretch over 16 px without metal in both chips apart
+from pad rings, ends and one 21 px crossing of a poly diagonal on column 1 at y 17844-17865); the eight
+north pads at 3x in three shots (ring, bright centre, hole, pits; no metal north; the poly ends on each);
+both staircases by views and overlays (row K on the claimed track), with text maps of three `cdp4` pads
+(metal directly beyond both rings in both chips) and `tl5`'s rings of 16-22 px on all eight; a scan of the
+clean shot under each track (only the known crossings, the stain and specks; no ring or pad in either metal
+shot); the corners in both metal shots (nested, order kept, no west arm, nothing south; column 0 turns east
+at (11201,17908) onto y 17904-17913); Ambiguity 13 at 5x in three shots and by text maps (no contact: the
+corner looks like the plain crossings of the same poly column at y 18380 and y 18425 and unlike that
+poly's pad (10897,18468); clean-shot red minus green 48-71 under the corner against 8-32 in the pad
+(10896,13636); south of y 18307 the column is open poly); the extraction of `cdp4` with `cdp3`.
+
+No finding. Notes only, taken into the notes: three more poly rows cross the tracks without contact
+(Logic, "No other contact"); more marks for Ambiguity 14.
+
+Not checked by it: the horizontals east of x 11230; the rectangle y 11919-12186 beyond "no track has a
+ring or pad on it"; continuity under the chip-1 stain (y 15530-15790) rests on chip 2 alone; the pad
+(10983,13549) in the chip-2 stripped shot (residue); `tools/ports.py` (it could not run it).
+
+Round 3: no findings.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
