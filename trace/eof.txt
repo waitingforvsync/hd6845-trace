@@ -4115,3 +4115,91 @@ P 4095,11989:4165,12007          # the row west of the column: larr's H3
 @alias cdp3_g_c5 larr_h_s11
 @alias cdp3_g_c4 larr_h_s12
 @alias cdp3_g_c3 larr_h_s13
+
+# ---- piece ol (run 45, 2026-11-21): what the poly column of piece hj is, north of y 11940, in the
+# fourteen rows of the left array (master in larr's row s1; x 4098-4222, y 11605-11960, the east
+# side of larr's east cell, free). TWO IDENTICAL LOAD UNITS stand between a west strap (larr's
+# "strap", the thin metal x 4101-4135) and rail G (x 4173-4219, vcc); the column is the lower one's
+# output. Read on medians over the fourteen rows (tools/cdp1_sr.py with the offsets of eof_mx:
+# r45_s1 .. r45_s4.png; cache/scratch/eof/med45.py) and row by row (tools/eof_olrows.py).
+# Each unit, west to east: a diffusion on the west (tan under the strap's margin: med45 col 4133),
+# a poly PLATE x 4150-4190 whose west third is open poly (orange in both metal shots) and whose east
+# part lies under rail G (bright salmon in the clean shot, 243/172/120, between two edge lines: the
+# channel; cream 214/153/106 above the upper line: the overhang over field; med45 col 4180), and east
+# of the plate the supply diffusion d2 (tan, x 4192-4220: med45 row 11636 / row 11770: one edge line
+# at each side of the plate, x 4148 and x 4188). Channel of the upper plate y 11620-11656, of the
+# lower y 11737-11803; L 39.
+# South of each plate its poly goes on as a stem x 4151-4166 through a BURIED CONTACT, a box
+# x 4148-4168 with a heavy outline (12 px dark bands north and south of a plain centre: med45 col
+# 4157; the centre reads as the pilot's known box (14536,14941) does: chip 1's metal shot plain,
+# R-G 5-29 in every row against 48-108 on the stem north of it and 60-85 on the column south of it:
+# eof_olrows.py). The diffusion under the box is a tab of the WEST diffusion (x 4127-4146, tan from
+# the plate's level down to the box's: med45 col 4133: tan y 11616-11696 and y 11740-11836, pink
+# field between at y 11710-11726), as the bump of the pilot's loads is. So each plate is a depletion
+# load from d2 to the west diffusion with its gate tied to the west side.
+# The upper unit's poly ENDS at its box (y 11702): field y 11708-11716 between it and the lower
+# plate's top (chip 2's and chip 1's metal shots plain, R = G, and the stripped shot's R-G under 25
+# in every row: eof_olrows.py "gap"). The lower unit's poly goes on south from its box as the
+# column (open poly y 11854-12006) to the foot drawn in piece hj.
+# d2 is one diffusion y 11620-11914 (med45 col 4208: tan 197-205/172-178/135-141 throughout) with
+# one contact (4198,11886) on rail G (ring in both metal shots, specks in the clean shot, pits in
+# chip 2's stripped shot: r45_s3.png); rail G crosses the plates, the boxes and d2 without another
+# (no ring: eof_cchk.py 4186,11694 4186,11838 4180,11640 4180,11770).
+# Under rail G east of each box lies a GREENISH BOX (x 4176-4197, y 11674-11714 and y 11820-11858:
+# clean shot 150/148/108, no ring, no pits, bounded on the east by d2's own outline, one line 8 px
+# wide): read as field inside the buried contact's window and NOT DRAWN (Ambiguity 185).
+# The west strap: metal x 4101-4135 from a contact (4116,11633) on the upper unit's west diffusion
+# south over the poly PA and the lower unit's west diffusion (no ring: eof_cchk.py 4117,11720
+# 4117,11815) to a contact (4118,11928) on a diffusion box x 4098-4146, y 11900-11957, whose strip
+# leaves west at y 11926-11944 (r45_s4.png; not followed: port).
+# NOT READ, ports: the poly PA under the strap (x 4095-4125, y 11655-11780) between the two west
+# diffusions; both west diffusions west of x 4100; what pulls either node down.
+@cell eof_ol tag=s1
+# the supply diffusion under rail G: strip, contact land, contact
+D 4199,11620:4221,11866
+D 4180,11862:4221,11913
+C 4198,11886 s=30x30
+# upper unit
+D 4100,11615:4148,11656          # the west diffusion's body (contact of the strap on it)
+D 4127,11620:4221,11656          # channel band through to d2
+D 4127,11620:4146,11700          # tab down to the box
+D 4127,11682:4167,11700
+B 4148,11680:4169,11702
+P 4151,11607:4190,11670          # plate (channel y 11620-11656)
+P 4151,11665:4166,11702          # stem, ends in the box
+# lower unit: tab and west diffusion's body, channel band, box
+D 4127,11737:4221,11803
+D 4127,11737:4146,11843
+D 4100,11783:4146,11843
+D 4127,11824:4167,11843
+B 4148,11822:4169,11848
+P 4151,11722:4190,11814          # plate (channel y 11737-11803)
+P 4152,11809:4165,11945          # stem through the box, on south as the column to piece hj's foot
+# the west strap and its two contacts; the south box
+M 4118,11612 y11955 w=33
+C 4116,11633 s=26x26
+C 4118,11928 s=26x26
+D 4098,11900:4146,11957
+N M 4118,11800 eof_wstrap_{}
+@end
+@inst eof_ol 0,-477 tag=s0
+@inst eof_ol 0,477 tag=s2
+@inst eof_ol 0,954 tag=s3
+@inst eof_ol 0,1431 tag=s4
+@inst eof_ol 0,1909 tag=s5
+@inst eof_ol 0,2386 tag=s6
+@inst eof_ol 1,3079 tag=s7
+@inst eof_ol 1,3557 tag=s8
+@inst eof_ol 1,4034 tag=s9
+@inst eof_ol 1,4684 tag=s10
+@inst eof_ol 1,5162 tag=s11
+@inst eof_ol 1,5639 tag=s12
+@inst eof_ol 1,6116 tag=s13
+# rail G: one metal from the widened foot of ur's vcc metal (M 4150,6330 y11040 w=44) through the
+# fourteen rows and both gaps (tools/tl5_tracks.py v 4208 11000 18400: nothing 25 px or more without
+# metal in both chips but the fourteen contact rings; px.py row 11032 4116 4228 4: one metal
+# x 4128-4216; row 11080 4152 4312 4: the rail over a poly band y 11065-11095, the clean shot
+# protected across its whole width). Drawn to y 18240; south of that it widens and turns west (port).
+M 4128,11040 x4217 w=36
+M 4196,11040 y18240 w=46
+N M 4196,11500 vcc
