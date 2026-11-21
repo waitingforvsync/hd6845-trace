@@ -27,6 +27,15 @@ Trace: `trace/regs.txt`. Scratch: `cache/scratch/regs/` (`survey.md`). Started 2
   contacts and six poly links, from that port to a thin metal track x 10485 that goes north into the
   bottom-centre logic's east gate column (drawn to y 17760). No uncertain item on it. Full extraction:
   2462 nets (no new net: the wire lies on a net that exists), 4594 transistors, 0 errors, 0 warnings.
+- **Piece `r9`, the ninth row y 17648: traced** (run 5, 2026-11-21 19:26 +0000; Kieran Connell's session,
+  on Fable). It is not a register's select either: it is a bottom-bus line, **`regs_w17648`**, that ends as
+  the gate of an undrawn inverter under the south end of `bd3`'s ground rail (x 15560-15900,
+  y 17370-17530): **`regs_w17462` = NOT `regs_w17648`** (two transistors: pull-down 46/20, depletion load
+  24/45; no uncertain item). The wire is drawn from the bus pad (12806,17907) to the gate (two hops, four
+  pads with contacts), and the output from the inverter to a pad (16773,18012) at the foot of the track
+  x 16776 (two pads with contacts); both go on (ports): the bus metal y 17907 west of x 12770, the output's
+  poly row y 18012 east of x 16800. Full extraction: 2525 nets, 4754 transistors, 0 errors, 0 warnings
+  (two new nets, two new transistors; no join to a named net).
 
 ## Inventory
 
@@ -54,6 +63,13 @@ Trace: `trace/regs.txt`. Scratch: `cache/scratch/regs/` (`survey.md`). Started 2
 | The seventh row | y 18125, x 6712-10137 | metal with the bus's three straight hops, pads 7382/7555, 8424/8641, 9596/9811 (each hop at 4-4.4x in both stripped shots: `h1.png`, `h2.png`, `h3.png`); `tl5_tracks.py h 18123 6600 10200`: metal at x 6740-7364, 7581-8405, 8669-9571, 9837-10117 |
 | First of the third diagonals | pad (10137,18124) to pad (10484,17994) | poly east to x 10184, diagonal x + y = 28308, row y 17995 east (3x in both stripped shots, `o4.png`): the band above `rsel16_buf`'s |
 | Track x 10485 | y 17994 north | thin metal from the pad (10484,17994), drawn to y 17760; north of that it passes over the boxes and rows of the gate column (Not done) |
+| `regs_w17648`: bus metal and its pad | metal y 17907 west of the pad (12806,17907) | `follow.py 12770 17907 W` runs it 1,594 px to (11200,17913): not followed. Pad: bright centre in both metal shots, greenish centre in the clean shot (`px.py row 17907 12780 12830 5 metal,metal1,acid1b`) |
+| Hop under the vertical trunks, and up to the second pad | poly row y 17897-17917, x 12806-13224; poly north x 13206-13224 to the pad (13240,17862) | straight (2.6x in three shots, `w6.png`); the row above (y 17862, pads (12845,17862) and (13172,17862)) is another net, undrawn; the corner and both pads at 4x in four shots (`w4.png`) |
+| Diagonal and row y 17648 | thin metal from the pad's east ring (13262,17857) on x + y = 31119 to the corner (13470,17649), east to the pad (14497,17648) | the diagonal lies beside and partly on `trunks`' poly diagonal of `rst_a` for 200 px, crosses that poly's row y 17815 (the follower's stop (13316,17803)) and its column x 13480: no pad, no ring (4x in four shots, `w2.png`, `w7.png`); the row passes over poly columns at x 13700 and 14195 (`r2.png`) |
+| Hop under `trunks`' X and the VCC rail | pads (14497,17648), (14714,17648) | straight, between `rsel14_buf`'s row y 17604 and `rsel13_buf`'s y 17691, whose pads sit one position west (2x in four shots, `h1.png`; `tl5_tracks.py h 17648 14380 15600`) |
+| Row east, corner, pad | metal y 17648 to x 15560, north to the pad (15558,17428) | no pad between (strip in three shots, `r1.png`); the pad: `px.py col 15560 17395 17460 5`, green hole at y 17429 (`tl5_tracks.py v 15560 17390 17670`) |
+| The inverter | x 15577-15895, y 17372-17491 | pull-down: diffusion column x 15662-15708 under the ground rail's end (the rail's metal runs to y 17525; `bd3` drew it to y 17380), ground contact (15679,17391), gate band y 17418-17438, drain below; a tab west to a buried-contact box (15602-15640, 17449-17479); a neck east y 17452-17474 to the node land x 15752-15776; load plate x 15790-15835, y 17432-17491 over the strip y 17449-17473, tie box (15772-15804, 17400-17428), supply land x 15838-15895 with a contact (15864,17450) under the VCC rail (3.2x in four shots: `e3.png`, `e4.png`, `e6.png`; overlays `ov1.png`, `ov2.png`) |
+| The output `regs_w17462` | poly x 15587 south, y 17646 east, x 15932 south to the pad (15971,17733); metal y 17735 east, corner x 16776, south to the pad (16773,18012) | the row passes under the VCC rail x 15795-15890 without a channel (`px.py row 17644 15770 15930 10`: 211-222/164-176 throughout); the metal passes over twelve poly columns, bars of 8-10 px only, no pad (`tl5_tracks.py h 17736 15990 16790`, `o5.png`); `tl5_tracks.py v 16776 17730 18030`: metal to the ring, green hole at y 18014 |
 | Not drawn: a structure on `wr_r12`'s line | x 11320-11400, y 11740-12350 | Ambiguities 1 |
 
 ## Logic
@@ -180,6 +196,28 @@ the bottom of the chip into the bottom-centre logic's east gate column, with one
 bottom-left logic on the way** (traced: the wire; believed: that the west end is a gate; open: every
 load at the east end).
 
+### The ninth row and its inverter (piece `r9`, run 5)
+
+Traced: `regs_w17462` = NOT `regs_w17648`.
+
+- **`regs_w17648`** arrives on the bottom bus (metal y 17907; its source is west of x 12770, not followed),
+  hops east under the vertical trunks in poly, climbs to the row y 17648 on a thin diagonal metal, hops
+  under `trunks`' X and the VCC rail like the eight rows above it, turns north at x 15560 and ends on a
+  pad (15558,17428), whose poly runs east as the gate band y 17418-17438 of one pull-down. No tap, no
+  other transistor on the way.
+- **The inverter** stands south of `bd3`'s R13 select buffer, on the same two rails. Pull-down 46/20 under
+  the south end of the ground rail; depletion load 24/45 at the west edge of the VCC rail, its plate tied
+  to the node land by a buried contact at the plate's top-left corner. The drain reaches the load by a
+  diffusion neck east and the output poly by a tab west and a buried contact.
+- **`regs_w17462`** leaves on poly (south, east under the VCC rail, south) to a pad (15971,17733), runs
+  east on the top line of a bus of thin metals (y 17735) to a corner at x 16776, south to a pad
+  (16773,18012), and on east as a poly row y 18012 under `e_b`'s track and a wide rail to a pad seen at
+  (17065,18010) with a metal on east (1.28x, `o4.png`): not followed.
+
+Believed, not traced: nothing about what the signal is. It is one more line of the bottom bus that passes
+the strobe logic; its row lies directly below the eight rows of the register strobes and read selects only
+because they share the hop.
+
 ## Ports
 
 | Name | Layer | Where | Direction | What |
@@ -206,6 +244,8 @@ load at the east end).
 | `lc2_w8450` | poly | (4920-4930, 16703-16723) | in | from `bl0`'s poly row (its port (4930,16713)) |
 | `lc2_w8450` | poly | (6008, 16791-16810) | out | the band under the rail x 6008-6055: believed the gate of a pull-down of the bottom-left logic (undrawn); the poly is drawn to its end, x 6065 |
 | `lc2_w8450` | metal | (10479-10491, 17760) | out | the track x 10485 on north beside the bottom-centre logic's east gate column: not followed (Not done) |
+| `regs_w17648` | metal | (12770, 17900-17914) | in | the bus metal y 17907 on west: not followed (`follow.py` runs it to (11200,17913)) |
+| `regs_w17462` | poly | (16800, 18003-18021) | out | the poly row y 18012 on east under `e_b`'s track and a wide rail to a pad seen at (17065,18010): not followed |
 
 ## Ambiguities
 
@@ -267,6 +307,21 @@ load at the east end).
    beneath) and (8912,18126) (chip 1's clean shot only; metal D-E across in both chips:
    `textmap.py 8894 18108 8932 18144 3`); the metals x 10255-10270 and x 10300-10400 over the
    diagonal and the row y 17995 (no pad on the poly, trap 15).
+6. **Crossings and strips of piece `r9`** (run 5).
+   - `regs_w17648`'s thin metal lies beside and partly on `trunks`' poly diagonal (`rst_a`) from about
+     (13465,17655) to (13330,17790), crosses that poly's row y 17815 at (13316,17803) and its column at
+     (13480,17648). Read as no contact: no pad, no ring, the metal keeps its width (4x in four shots,
+     `w2.png`, `w7.png`; traps 13, 15). The metal is dim where it lies on the poly (it fails the metal test at
+     x 13470-13440 and x 13350: `px.py col`), bright between; one metal from corner to pad.
+   - The two narrow strips of the drain (tab x 15640-15662 and neck x 15712-15752, y 17452-17474; 14 px
+     between their edge lines) are read as diffusion: blue 83-91 in chip 2's metal shot and 77-80 in chip
+     1's against 58-70 and 39-54 for the open poly beside them, and darker and redder than the field
+     control (15630,17510) in all four shots (`px.py pt`; survey). `textmap.py 15565 17440 15650 17500 3
+     --acid` reads the west tab strongly red over green in the chip-2 stripped shot, like poly. If the tab
+     were poly the box would still join it to the drain or not at all; the reading "drain - box - output
+     poly" is the ordinary one (a box with a heavy outline between a diffusion and a poly).
+   - The dark dot on the ground rail's metal at (15688,17497) is in chip 2 only; the clean shot is plain
+     field there (147/140/112 from y 17480 to 17525, `px.py col 15685`). No contact.
 
 ## Review
 
@@ -396,10 +451,17 @@ Round 5: no findings that change a connection.
 - **The pull-down on `lc2_w8450` under the rail x 6008-6055 at y 16791-16810** (the west end; in
   `bl1`/`bl2`'s region): gate band drawn as poly only; its two diffusions, the rail and the box
   (5953-5990,16748-16785) are not drawn (Logic, "Two ends").
-- A ninth row y 17648 crosses the rail hop too (west pad (14500,17648), west end (13316,17803)):
-  not followed (claimed in run 4 and not reached). Two more undrawn metal rows go through the same
-  hop below `rsel12_buf`'s: y about 17780 (pads at about (14440,17770), (14650,17770)) and y about
-  17820 (pads (14480,17810), (14690,17810)) (`n1.png`, 0.84x).
+- The ninth row y 17648 is drawn (run 5, piece `r9`: `regs_w17648`, the gate of an inverter). **Left of it**:
+  its source, west along the bus metal y 17907 from (12770,17907) (`follow.py 12770 17907 W` runs
+  1,594 px to (11200,17913); `busb`'s region); its output `regs_w17462` east of (16800,18012) (a poly row
+  under `e_b`'s track x 16810 and a wide rail x 16940-17030 to a pad seen at (17065,18010), metal on
+  east; `busc`'s region).
+- More undrawn metal rows go through the same hop below `rsel12_buf`'s: y about 17777 (pads at about
+  (14450,17777), (14673,17777)), y about 17823 (pads (14497,17823), (14714,17823)), y about 17865 and
+  17905 (`s1.png`, 0.55x, every trace outlined); and at the trunk hop the row y 17862 between pads
+  (12845,17862) and (13172,17862), whose east pad takes a thin metal from the north (`w4.png`, `w6.png`).
+- The unit east of the VCC rail beside the new inverter (a poly block at x 15890-15935, y 17410-17470 and a
+  poly row y 17405-17420, x 15880-15940: `e5.png`), undrawn.
 - The structure of Ambiguities 1.
 - `wr_r14`'s branches into the row A cells (`cdp3` (continue)); the source of `cdp4`'s 6-bit
   input a (`cdp4` (continue)).
