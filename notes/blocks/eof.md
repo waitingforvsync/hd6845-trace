@@ -3631,7 +3631,9 @@ pad (4778,17365) south to a corner at about (4780,17890), where it turns east al
 passes the south end pad (4737,17885) 20 px east of the pad's frame: `tools/tl5_tracks.py h 17888 4722
 4800`: 38 px without metal between the pad's centre and it; the pad's ring is 17 px; `r38_a2.png`); a
 round mark in the clean shot only at (4793,11280); `bl0`'s row y 16703-16723 goes on east of its port
-(4930,16713) under the VCC metal.
+(4930,16713) under the VCC metal; and, seen by review round 46 and not checked here: the poly rows
+y 11922 and y 12984 jog in the gap x 4703-4722 (y 11930-11969 and y 12912-12987), clear of every pad row;
+two contact structures at about (4855,17290) (the small transistor of Not done, item (b)) and (4860,17700).
 
 ## Ports
 
@@ -7328,6 +7330,69 @@ It reported **no findings**, and two remarks of geometry or wording, both checke
     .venv/bin/python tools/sameconn.py d1f2729   -> connections identical
 
 Round 45: no findings that change a connection.
+
+### Round 46 (full review of pieces `t4736s`, `cap218` and `t4780n`; 2026-11-21 11:31 to 11:43 +0000, at commit 5c86390)
+
+One fresh reviewer (Claude Fable 5.2), briefed with the three pieces' claims (`cache/scratch/eof/brief-round46.md`)
+and told to suspect: the arm onto the pad (4736,14155) (is it on the pad, and is the metal from the north);
+every through pad (metal at the ring's edge on both sides, or two metals end to end) and both end pads'
+far sides; whether the track x 4736 is really without metal between y 14203 and y 14844; the poly column
+between the tracks at the pad (4736,16932) (poly or the gap's artefact, one piece with the pad and the
+row, any other pad with a second poly, a contact under the track x 4780); the crossings of the diffusion
+lines (trap 36), with the four lowest clean-shot values named; `cap218`'s island (a tie to the plate, a
+metal leaving it), its neck and wire (diffusion, one piece, onto the contact under the wide metal), the
+wide metal's continuity with the piece labelled `vcc`, the plate's join to the row; and the rows west of
+the pads. Images: `cache/scratch/eof/review-46/` (17).
+
+It checked and found as drawn:
+
+- **The arm** (`a1_arm.png`, 6x, four shots; `px.py row` at y 14154, 14158, 14162): on the pad. Chip 2 is
+  metal yellow on the pad's frame at x 4748-4752 (187-197/157-185/77-118), not open-poly orange; the dim
+  bar x 4754-4758 is 6 px wide and lies on the pad poly's east edge (clean shot cream to x 4752, pink from
+  x 4760, no open colour between); the dark stretch from the centre to the arm is 19 px against 16-19 px
+  on the north side, where the pad's own metal arrives; the north metal is bright to y 14132 and there is
+  no metal south of the pad.
+- **All fourteen pads** (`pads_0.png` .. `pads_3.png`, 4x, four shots; `tl5_tracks.py v 4736` over the full
+  length): the ten inner pads have metal bright at the ring on both sides in both chips, with symmetric
+  rings of 16-21 px; the four end pads are closed on the far side; the pad (4736,13680) is dull in chip 2
+  only (chip 1 a normal through pad).
+- **Two nets on the track x 4736**: no metal at y 14203-14844 in either chip, the clean shot khaki there.
+- **The south end pad against the L**: a green strip at x 4758-4767 in the clean shot and no metal at
+  x 4743-4774 (`textmap.py`).
+- **The track x 4780**, y 14153-17191: only paired bars of 8-11 px; a scan for arms at x 4754-4762, 4796 and
+  4802 finds only the arm at y 14153-14164.
+- **The poly column** (`b1_col.png`, 4x; `px.py col 4760`): poly in both chips (chip 2 blue 44-64 against
+  73-86 on ground controls at y 16820 and y 16960; chip 1 green 66-90 against 116-130; chip-2 stripped red
+  minus green 19-49 against 0 or less); no edge line separates it from the row or from the pad's east
+  extension (cream to x 4766; the control pad 16455 ends at x 4750); no other pad has one (an orange scan
+  at x 4758 and x 4762 over y 11240-17930 finds only the crossing rows).
+- **The row under the track x 4780 at y 16845**: cream without a hole, the metal not widened: no contact.
+- **The crossings** (`x1.png`, `x2.png`, 4x): no pad, ring or widening at any sampled crossing; the clean
+  shot shows only crossing runs of 5-14 px under either track.
+- **`cap218`** (`c1_cap.png`, 5.5x; `c2_neck.png`, 4x; `textmap.py`): the plate is one poly with the row
+  (no edge line at x 4799-4865); no hole or ring over the plate, the island closed all round; the neck and
+  wire are diffusion (chip 2 blue 80-88, chip 1 green 110-121), one piece with the box at the gate and
+  with the box of the contact (4972,16759); the VCC rail is continuous over y 16000-16860 (cuts at x 4965
+  and x 5008).
+- **The rows west**: all fourteen are orange at x 4709 in both chips and cream at x 4688 and x 4670.
+- **Extraction** with `larr`, `bl0`, `busl` and `cdp4` loaded: no new join and no new transistor.
+
+It reported **no findings**: nothing that changes a connection, and no geometry correction.
+
+What it could not check: the 6 px bar at the arm cannot be told in these photos from a 6 px slot between
+two metals (it read it as an edge because a slot that narrow is far below the metal spacing seen
+elsewhere: Ambiguity 147 stands as written); at (4780,14436) the clean shot is dull olive, not cream,
+under this track and equally under the neighbouring track x 4822, so "no contact" there is read from the
+metal shots alone (Ambiguity 149); that the rail is `vcc` rests on `busl`'s label north of y 15000, which
+it did not re-read (run 37's test, `tools/tl5_tracks.py v 4965 14950 16110`, joins the drawn pieces to
+that port).
+
+It saw, of other nets and not in the notes' lists (added to piece `t4780n`'s "Seen" paragraph, not checked
+here): the poly rows y 11922 and y 12984 jog in the gap x 4703-4722 (y 11930-11969 and y 12912-12987;
+`d1_11940.png`, `d2_12950.png`, `e1_strip.png`), clear of every pad row; two contact structures at about
+(4855,17290) and (4860,17700).
+
+Round 46: no findings.
 
 ## Not done
 
