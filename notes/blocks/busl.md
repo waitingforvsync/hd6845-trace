@@ -1785,7 +1785,7 @@ rest is on the left array's side.
 
 | | north end | poly column | diagonal | poly row | end pad | metal | south end |
 |---|---|---|---|---|---|---|---|
-| `ha` | `tl5`'s poly end `P 5443,5770:5463,6350` (its port `tl5_w3461`, in) | x 5454, y 6350-6763, 21-24 px | x - y = -1309, (5454,6763) to (5645,6954) | y 6954, x 5645-6169 | (6188,6956) | y 6957 east to a corner (7034,6957), x 7034 south, 11-13 px | `bw`'s pad (7031,7560) (`C 7031,7560`, `M 7036,7530 y7590 w=23`), the west end of its row y 7562 (`wl_h1`) |
+| `ha` | `tl5`'s poly end `P 5453,5770 y6350 w=20` (its port `tl5_w3461`, in) | x 5454, y 6350-6763, 21-24 px | x - y = -1309, (5454,6763) to (5645,6954) | y 6954, x 5645-6169 | (6188,6956) | y 6957 east to a corner (7034,6957), x 7034 south, 11-13 px | `bw`'s pad (7031,7560) (`C 7031,7560`, `M 7036,7530 y7590 w=23`), the west end of its row y 7562 (`wl_h1`) |
 
 - **The column** (`p1_col.png`, 1.9x, both stripped shots, every package's trace; overlay
   `o3_ha_col.png`): poly at every sample of x 5455 from y 6336 to y 6770 and field at x 5434 and x 5478
@@ -1834,7 +1834,7 @@ rest is on the left array's side.
 
 | | west end | metal | east end |
 |---|---|---|---|
-| `hb` `cdp2_w6845` | end pad (6146,6847) of a poly row from the west (a stub to x 6118; the row runs on under eight tracks to a pad (5668,6846) with a thin metal on west along y 6849 to about x 5339: not drawn) | y 6848, x 6146-7300 | `cdp2`'s metal `M 7290,6840:7335,6856` west of its pad (7335,6845) (its port `cdp2_w6845` (7290,6848)) |
+| `hb` `cdp2_w6845` | end pad (6146,6847) of a poly row from the west (a stub to x 6118; the row runs on under eight tracks to a pad (5668,6846) with a thin metal on west along y 6849 to about x 5339: not drawn) | y 6848, x 6146-7300 | `cdp2`'s metal `M 7290,6848 x7335 w=16` west of its pad (7335,6845) (its port `cdp2_w6845` (7290,6848)) |
 | `hc` `busl_y6805` | end pad (6189,6716) of a poly row from the west (a stub to x 6160; seen to x 6040); metal south on x 6191 to a corner (6191,6805) | y 6805, x 6191-7380 | pad (7380,6802), whose poly row goes on east (a stub to x 7410; seen to x 7500) |
 
 - Ends (`q1_ends.png`, 2.9x, and `q2_tiles.png`, 3.2x, four shots each; `tools/busl_padc.py`:

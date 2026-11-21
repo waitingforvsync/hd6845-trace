@@ -1084,7 +1084,7 @@ N M 7512,14400 vss
 # =====================================================================================
 # Piece ha: tl5_w3461 (the data of latch a of the top-left logic's fifth strip) is wl_h1.
 # The third (north-east) line of the diagonal bundle of pieces gd and eof's bd1_n2: tl5's
-# poly column `P 5443,5770:5463,6350` on south (x 5454) under nine horizontal metals (no pad:
+# poly column `P 5453,5770 y6350 w=20` on south (x 5454) under nine horizontal metals (no pad:
 # 21-24 px wide in the chip-2 stripped shot at every sample) to a bend (5454,6763), a
 # 45-degree diagonal (x - y = -1309; a thin metal y 6849, the one west of the pad (5668,6846),
 # crosses it at about (5540,6849): plain, no pad or hole, found by the round-16 reviewer) to
@@ -1105,7 +1105,7 @@ N M 7034,7300 wl_h1
 @alias wl_h1 tl5_w3461
 # =====================================================================================
 # Piece hb: cdp2_w6845 west of cdp2's port. The metal that cdp2 draws from its pad
-# (7335,6845) west to x 7290 (`M 7290,6840:7335,6856`) runs on west along y 6848 over eofw's
+# (7335,6845) west to x 7290 (`M 7290,6848 x7335 w=16`) runs on west along y 6848 over eofw's
 # poly column (x 6843) and six poly columns (x 6451, 6410, 6367, 6324, 6280, 6237), no pad or
 # tap, to an end pad (6146,6847); the pad's poly row runs on west (drawn as a stub to x 6118;
 # it runs under eight tracks to a pad (5668,6846), from which a thin metal goes on west along
