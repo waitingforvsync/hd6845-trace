@@ -3026,9 +3026,10 @@ D 7292,15030:7338,15128
 # specks in the clean shot (textmap.py 7216 15020 7345 15160 3 --acid)
 C 7308,15051
 # the gate: rst_n's row (bl0: `P 6320,15088 x7280 w=20`) on east under the rail: cream
-# (232-249/164-179) from x 7298 to x 7331, over the active's east edge, its end over field at
-# x 7349-7353 (px.py row 15087 7280 7366 3), against the field pocket x 7361-7376
-P 7275,15076:7352,15097
+# (232-249/164-179) from x 7298 to x 7331, over the active's east edge, salmon over field to
+# x 7350-7352, its end's outline to x 7358 in both metal shots (px.py row 15087 7340 7366 2;
+# drawn to x 7352 at first: review round 42), against the field pocket x 7361-7376
+P 7275,15076:7355,15097
 N P 7285,15087 rst_n
 N D 7315,15115 eof_w15120
 # the node's way out west: a band x 7266-7290 (y 15114-15128 at the rail, its south edge
@@ -3071,7 +3072,9 @@ P 7408,15086:7461,15153
 # pale cells, x 7385-7394 (plain, blue 81: the strip's head) and x 7409-7422 (orange, blue
 # 59: poly, the plate's north tab), a line x 7395-7408 between them and a line y 15070-15077
 # between the left cell and the strip (r33_dark.py h 15066 7340 7480, v 7392 15050 15160;
-# r35_c1.png, 5.7x, four shots). No metal over the box (the arm's notch), no ring, no hole.
+# r35_c1.png, 5.7x, four shots). No metal over the box in either metal shot (the arm's notch;
+# the chip-2 stripped shot's colours at the cells leave that open: review round 42), and in
+# any case no ring, no bright centre, no pits, no hole: no contact.
 # Drawn uncertain as in u15500
 D 7385,15078:7398,15112
 P 7405,15058:7428,15090
