@@ -1038,3 +1038,29 @@ M 16775,16255 y16325 w=14
 ?M 16775,16323 y16385 w=14
 M 16775,16383 y16450 w=14
 N M 16775,16030 dbus_le
+# ======================================================================
+# Run 9 (2026-11-21): the sixth data output inverter, on the read bus's column 1. A copy of cdp4_ro at
+# (-650,+1474) between regs' VCC rail (x 15795-15890) and a VSS rail x 16017-16059: its gate row is the band
+# of cdp3_n_c1 (the corner of the poly column drawn in run 6), its output box takes a poly row that runs
+# east, south to a pad, east as a thin metal (y 17605) and south to a pad, and east in poly under a wide rail
+# to a pad (17066,18078). Believed d6_out_n (not joined to the pad cell yet: open join).
+# ======================================================================
+@inst cdp4_ro -650,1474 tag=u6
+M 15842,17415:15890,17495                # the part of regs' VCC rail (x 15795-15890) over the unit's VCC box
+N M 15866,17425 vcc
+M 16038,17285 y17535 w=42                # the VSS rail of the unit (and of the unit above it); ends not followed
+N M 16038,17300 vss
+P 16139,17459:16157,17482                # the corner of column 1's poly: the column of run 6 onto the gate row
+# the output: from the box east under two vertical metals (no contact), south, a pad
+P 16107,17428 x16251 y17602 w=22
+B 16104,17420:16134,17446
+P 16236,17585:16270,17619
+C 16253,17602 s=20x20
+M 16253,17603 16906,17607 16906,18086 w=12
+P 16888,18063:16922,18097
+C 16905,18080 s=20x20
+P 16905,18079 x17066 w=20                # under the wide rail x 16940-17030 (field), beside regs' row y 18012
+P 17049,18061:17083,18095
+C 17066,18078 s=20x20
+M 17054,18066:17078,18090                # the pad's metal; where it goes on is not read (port)
+N M 16600,17605 d6_out_n_u

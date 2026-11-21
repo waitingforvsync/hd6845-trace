@@ -19,3 +19,5 @@
 16560,16520:16980,17380  route  read bus, columns 2-7: tracks north and nested corners | six thin metals; columns 2-5 turn east and north to the output units' staircase, column 6 ends on a pad, column 7 turns east onto D0's output chain input
 16780,15845:16970,16400  route  read bus, columns 2-6: end pads and rows into the data output units | interleaved with the pads of d5_out_n..d1_out_n; each read bus row goes west into the unit that (believed) inverts it onto the output line
 16485,15800:16800,16450  logic  data output inverters, bits 5-1 | five copies of one cell: d#_out_n = NOT the read bus column (R12-R17 read data); depletion load from the VCC rail on the west, pull-down under the VSS rail, output east to the line into the pad cell
+15845,17405:16140,17535  logic  data output inverter, bit 6 (believed) | the sixth copy of the output inverter: NOT the read bus's column 1; output east and south to a line toward the data pads
+16230,17590:17085,18095  route  bit 6 output line (believed d6_out_n) | from the inverter's pad a thin metal east and south, then a poly hop under the wide rail, beside the line of NOT column 0
