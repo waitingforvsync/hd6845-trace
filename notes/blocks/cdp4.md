@@ -496,7 +496,8 @@ cdp4_ro`), overlay on the single shots (`ov8_u2.png`, `ov8_u1.png`, `ov8_u5.png`
 Coordinates of the master:
 
 - **Load.** A diffusion box (16497-16547, 15950-16012) under the VCC rail with the rail's contact
-  (16510,15978). A strip leaves it east (y 15954-15982) under the poly plate (16548-16603, 15937-15998): in
+  (16510,15978). In unit u1 only, the box runs on north to y 15772 and has a second contact of the rail
+  at (16512,15794) (review, round 7; drawn outside the cell). A strip leaves it east (y 15954-15982) under the poly plate (16548-16603, 15937-15998): in
   the metal shots the plate is three orange bands with the strip's two edge lines across it (y 15951-15956,
   15979-15985). W/L 28/54.
 - **Output node.** East of the plate the strip (y 15959-15979, pinker than the field beside it in the
@@ -507,7 +508,7 @@ Coordinates of the master:
 - **Pull-down.** Under the VSS rail a diffusion column x 16683-16722: the output strip above (y 15960-15984),
   the gate (the read bus row, salmon, y 15985-16007, its west end at x 16657) and the source box below
   (y 16010-16056) with the rail's contact (16697,16032; ring and bright centre in the metal composite,
-  specks in the clean one). W/L 39/22. West of the column, under the rail's west part, the clean shot is
+  specks in the clean one). W/L 42/22 (the column's edges at x 16680 and x 16722: review, round 7). West of the column, under the rail's west part, the clean shot is
   pink below the gate (field): one transistor.
 - **Output.** East of the rail the strip (y 15960-15977) runs into a framed box (16746-16782, 15948-15976),
   the buried contact with the poly row of `d#_out_n`, which `dbus` draws from its pad to within 30 px west
@@ -976,6 +977,44 @@ crossings rests on the clean shot and both metal shots; the pad centres of colum
 chip 2 and were accepted from chip 1, the clean-shot hole and the stripped shot; nothing west of the ports.
 
 Round 6: no findings.
+
+### Run 8 (the data output inverters)
+
+Round 7 (full review, 2026-11-21 15:52 -0600; a fresh Fable reviewer, images in `cache/scratch/cdp4/review-7/`, 17;
+commit before the round c79aa21). Piece: x 16480-16800, y 15780-16460 (the cell `cdp4_ro` and its four
+copies, 10 transistors; the two rails; the five `d#_out_n` row ends; `dbus_le`'s thin metal). Told to
+suspect: whether each output box is a buried contact or a metal contact from the thin metal over it, unit
+by unit; which outlined regions are diffusion (the output strip, the branch, the plain area south of the tie
+box, under the rail west of the column); other polys reaching the plate; the gate row's west end and a
+second transistor on it; the copies, above all u1 and u5; anything undrawn; Ambiguity 15.
+
+It checked: the five output boxes against three real pads of the same kind of metal at 3.5x in four shots
+(no widened pad, no green hole, no pits; the small bright spot is not metal-bright, and the tie box, which
+has no metal over it, shows the same spot): none is a metal contact; the pairing (each row straight from
+pad to box or rail at one y under every track); the output strip and the branch as one outlined region
+with no edge between, pinker than field in both chips and with blue 83-86 (not poly); the plain area as
+field (`tools/opendiff.py`: none); pink field below the gate at x 16670 with an edge line across the gate
+at x 16677-16680 in both metal shots (one transistor); the gate row's end at x 16657-16662, 15 px of field
+short of the branch; no other poly at the plate; the rails (no break over 9 px in both chips; VSS ends at
+about y 16446); the copies by `tools/cellcheck.py` in four layers; the extraction and `tools/unsure.py`.
+
+- Finding 1, **geometry only** (it adds a contact, between metal and diffusion that are both `vcc`: no net,
+  transistor or equation changes), confirmed (`tools/textmap.py 16484 15760 16556 15830 4`: ring and bright
+  centre at x 16504-16516, y 15788-15800 in both metal shots; `tools/px.py col 16520 15760 15890 8 acid1b`:
+  one tan box from y 15776 to y 15872): unit u1's VCC box runs on north to y 15772 and has a second contact
+  of the rail at (16512,15794). Drawn outside the cell (`D 16497,15772:16547,15826`, `C 16512,15794`).
+- Finding 2, **geometry only**: the pull-down's column is x 16680-16722 (W 42, was 39). Changed in the cell.
+
+`tools/t.sh cdp4 sameconn.py c79aa21`: connections identical.
+`.venv/bin/python tools/sameconn.py c79aa21`: connections identical.
+
+Not checked by it: the thin metal's continuity over the boxes (Ambiguity 15 stands; `dlat` draws the same
+dark stretch over u1's box as plain metal); the plate's foot into the tie box and the branch into it pass
+through 9-12 px dark frames, and the field between each output box and its gate row is only 6-8 px (pink,
+all five alike): read from structure, not measurable; the thin metal's end south of the piece (no metal at
+y 16506-16529); the pads and rows east of x 16790 (run 7's and `dbus`'s).
+
+Round 7: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 

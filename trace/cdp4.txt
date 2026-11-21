@@ -996,7 +996,7 @@ C 16510,15978 s=24x34
 D 16540,15954:16606,15982                # the strip under the plate: the load's channel
 P 16548,15937:16603,15998                # the plate
 D 16600,15959:16690,15979                # the output strip east of the plate, to under the VSS rail
-D 16683,15959:16722,16056                # drain, channel and source of the pull-down under the rail
+D 16680,15959:16722,16056                # drain, channel and source of the pull-down under the rail
 C 16697,16032 s=24x28                    # VSS contact on the source box
 P 16657,15996 x16795 w=22                # the gate: the read bus row, from its west end
 D 16715,15960:16752,15977                # the output east of the rail
@@ -1007,6 +1007,10 @@ P 16585,15990:16607,16021                # the plate's tab into the box
 B 16581,16002:16611,16027                # buried contact: plate tied to the output
 @end
 @inst cdp4_ro 0,-130 tag=u1
+# u1 only: its VCC box runs on north to y 15772 (one tan box, no edge across it) and has a second contact
+# of the rail there (ring and bright centre in both metal shots): found by the review, round 7
+D 16497,15772:16547,15826
+C 16512,15794 s=24x30
 @inst cdp4_ro 0,130 tag=u3
 @inst cdp4_ro 0,261 tag=u4
 @inst cdp4_ro 0,391 tag=u5
