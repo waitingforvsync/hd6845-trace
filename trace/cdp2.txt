@@ -598,8 +598,9 @@ C 7878,8315
 # metal x 8328-8345 (which passes over the node's tab): strip under a plate to a box on the VCC metal,
 # the plate's finger on a buried contact at the end of an L of diffusion. Output: the node's strip east,
 # a tab up into a buried contact, a poly east and north that turns west as row 2 of the gate above.
+# (Review round 3: the node reaches the tab by an arm y 7252-7268, not by a strip below it.)
 M 8400,7040 y7440 w=50                 # the VSS rail x 8375-8425, down onto row C's
-D 8358,7255:8440,7365                 # the column
+D 8365,7255:8446,7365                 # the column (edges x 8365 and 8446: review round 3)
 D 8385,7360:8437,7400                 # box
 C 8405,7380
 P 8350,7290:8600,7311                 # row 1, from the east (port at x 8600)
@@ -607,20 +608,25 @@ N P 8590,7300 cdp2_w7300
 P 8350,7333:8600,7354                 # row 2, from the east (port at x 8600)
 N P 8590,7344 cdp2_w7344
 # the load
-D 8320,7255:8360,7277                 # the node's tab west (under the thin metal x 8328-8345: no contact)
+D 8320,7255:8367,7277                 # the node's tab west (under the thin metal x 8328-8345: no contact)
 D 8262,7253:8322,7280                 # strip under the plate
 D 8205,7248:8264,7315                 # box on the VCC metal
 C 8226,7276
 P 8265,7236:8320,7297                 # plate
-D 8322,7275:8345,7320                 # L of diffusion from the tab down
-D 8298,7300:8345,7320                 #   and west into the box
+D 8322,7275:8337,7320                 # L of diffusion from the tab down (x 8322-8337)
+D 8298,7300:8337,7320                 #   and west into the box
 P 8298,7295:8320,7318                 # the plate's finger
 B 8296,7298:8324,7322
 # the output
-D 8438,7272:8520,7288                 # the node's strip east
+D 8444,7252:8460,7268                 # the node's arm east from the column into the tab (review round 3: the band y 7272-7288 is field)
 D 8455,7246:8496,7274                 # tab up
 B 8463,7244:8500,7273
 P 8468,7250:8518,7268                 # poly from the buried contact east,
 P 8500,7170:8518,7268                 #   north,
 P 8445,7160:8518,7181                 #   and west as row 2 of the gate above (port at x 8445)
 N P 8509,7220 cdp2_w7272
+# the two thin metals that cross the piece (no contact on either here)
+M 8336,7155 y7272 w=14                 # x 8328-8345: over the node's tab and the L it is dark for 58 px (y 7268-7326):
+?M 8336,7268 y7326 w=14                #   drawn ?M there (tracing guide, trap 27)
+M 8336,7322 y7395 w=14
+M 8532,7155 y7395 w=14                 # x 8525-8540: over both rows, no pad

@@ -24,7 +24,7 @@ the most significant of the five compared bits, s7 the least.**
 ## Status
 
 - **Run of 2026-11-20 18:00 -0600**: **piece `gl`, the lower of two series gates left of rows B** (x 8205-8600,
-  y 7160-7400; 3 transistors, no uncertain item): **`cdp2_w7272` = NOT(`cdp2_w7300` AND `cdp2_w7344`)**, two
+  y 7160-7400; 3 transistors, one uncertain item, a `?M` on a passing metal; reviewed: round 3, no finding that changes a connection): **`cdp2_w7272` = NOT(`cdp2_w7300` AND `cdp2_w7344`)**, two
   pull-downs in series under the rail x 8375-8425 with a tied load. Its two gate rows come from the east
   (ports at x 8600, not followed); its output goes by a buried contact and a poly north to become row 2 of
   the gate above it (the same build, y 7075-7240, not drawn yet): the two look cross-coupled.
@@ -398,7 +398,7 @@ cdp2_w7065 = NOT tc2_sr_q            pull-down W 130; load 74/36       (marked: 
 Under the VSS rail x 8375-8425 (`railprof.py 8380 8420 7040 7420`): a top node y 7259-7292, a gate
 y 7293-7316, a node with no contact, a gate y 7336-7360, and a diffusion y 7361-7419 with the rail
 contact (8405,7380) (ring and centre in both chips, `textmap.py 8384 7362 8424 7400 3`). The column is
-x 8358-8440. The two gate rows (y 7290-7311, y 7333-7354) end rounded just west of the diffusion at
+x 8365-8446. The two gate rows (y 7290-7311, y 7333-7354) end rounded just west of the diffusion at
 x 8350 and run on east, in the open and under the thin metal x 8525-8540 without a pad, past x 8600
 (`px.py row 7300 8540 8720 12`): ports.
 
@@ -408,7 +408,8 @@ x 8350 and run on east, in the open and under the thin metal x 8525-8540 without
   plate at y 7251 and 7281, `px.py col 8290 7236 7330 5`) to a box with a contact (8226,7276) on the VCC
   metal (`textmap.py 8200 7240 8262 7310 4`). An L of diffusion runs from the tab down (x 8322-8345) and
   west into a heavy-outlined box (8296-8324, 7298-7322) under the plate's finger: the tie.
-- **Output.** The top node runs east as a strip y 7272-7288, with a tab up (x 8455-8496) into a buried
+- **Output.** The top node has an arm east from the column (x 8444-8460, y 7252-7268; the band below
+  it, y 7272-7288, is field: review round 3) into a tab (x 8455-8496) with a buried
   contact (8463-8500, 7244-7273); a poly leaves it east and turns north at x 8500-8518 (orange in the
   chip-2 stripped shot, `cache/scratch/cdp2/n3.png`, 9x), runs up to y 7170 and turns west as the row
   y 7160-7181: row 2 of the gate above (`cache/scratch/cdp2/n4.png`). Drawn to x 8445.
@@ -544,7 +545,7 @@ Run of 2026-11-20:
   x 8780 they are interwoven with the logic there (pads on line 6714, bends at
   x 7800-8080, y 6780-6890).
 - **Channel 3 (y 7830-8030)**: five poly lines (Ports), not drawn.
-- **Logic left of the rows** (x 7600-8750, y 6000-7480): one gate traced (piece `ga`, 2026-11-20); the lower series gate traced (piece `gl`); the rest (the upper series gate at x 8255-8550, y 7075-7240: surveyed, its output's poly not read, the unit at x 8140-8260, the gate at x 8560-8700, y 7370-7410) not traced. Open ends: `cdp2_w7065`'s metal north of the pad (7662,7083) (its loads); the through line `cdp2_w6845` west of the pad (7335,6845) (its source); a thin metal x 8152-8166 that crosses the gate, in line with row C's track b, drawn by no one north of y 7395. It receives
+- **Logic left of the rows** (x 7600-8750, y 6000-7480): one gate traced (piece `ga`, 2026-11-20); the lower series gate traced (piece `gl`); the rest (the upper series gate at x 8255-8550, y 7075-7240: surveyed, its output's poly not read, the unit at x 8140-8260, the gate at x 8560-8700, y 7370-7410) not traced. Open ends: `cdp2_w7065`'s metal north of the pad (7662,7083) (its loads); the through line `cdp2_w6845` west of the pad (7335,6845) (its source); a thin metal x 8152-8166 that crosses the gate, in line with row C's track b, drawn by no one north of y 7395. Beside piece `gl`, seen and not drawn: a poly column x 8565-8590 from the north ending at y 7266; a contact pad near (8605,7395). It receives
   `cdp2_b_hl` (metal x 8725, ends about y 7400 on a diffusion) and `cdp2_b_s7_x` (metal
   x 8685, seen to y 7300), drives `cdp2_b_cin` (poly y 7252 at x 8650), takes L1/L2 (row
   C's s1, s2 outputs, y 7472/7513 at x 7990), `cdp2_trk_s3` (metal 8335,6066) and the
@@ -616,6 +617,36 @@ tools/sameconn.py 64ffb1b` both end: connections identical. With the label and a
 differences are the two "names on one net" lines for `cdp2_w6845` / `cdp2_w6845s`.
 
 Round 2: no findings that change a connection.
+
+Round 3 (full review of piece `gl`; fresh Fable 5.2 reviewer; 2026-11-20 18:14 -0600; commit b67770e; images
+`cache/scratch/cdp2/review-3/`). Told to suspect: the output path (box, poly east, north and west; the
+strip); the thin metal x 8328-8345 over the tab and L (a real contact read as a pass-over); the plate as
+one poly; the tie; contacts on the two nodes; the rows separate and without pads; anything left out.
+Checked: no contact on the top or middle node; the rows across the whole column and separate (field
+between them at three places), no pad under the thin metal x 8525-8540; no contact of the thin metal
+x 8328-8345 (width unchanged, no ring, hole or pits); the tab joined to the column; the plate one poly
+with the strip's edges at y 7252 and 7282; the tie box and the vcc contact; the output poly continuous
+from the box east, north along x 8509 and west along y 7171, going nowhere else. Could not check: the
+two buried contacts beyond their appearance (the output box's west outline is a double line 8 px apart);
+the clean shot around the output box (inverted there, trap 28: read from the other three shots).
+
+Findings, all geometry only:
+
+1. The band `D 8438,7272:8520,7288` is field (chip-2 stripped red minus green -14..0, like the field
+   between the rows), and the node reaches the tab by an arm x 8436-8458, y 7252-7268 that was not
+   drawn; the false strip was the only join. Confirmed (`px.py row 7260 / 7280 / 7323 8430 8462 4 acid`:
+   red minus green 12-57 on the arm, -14..9 on the band and on the control). Fixed: strip deleted, arm
+   drawn. Same net.
+2. The L is x 8322-8337 (drawn to 8345). Fixed.
+3. The column's edges are x 8365 and 8446 (drawn 8358 and 8440). Fixed.
+4. Left out: the two thin metals over the piece (now drawn; x 8328-8345 with a `?M` over y 7268-7326,
+   where it is dark in both chips: trap 27); a poly column x 8565-8590 from the north ending at y 7266,
+   not joined to row 1 (field between); a contact pad near (8605,7395). The last two are in Not done.
+
+`tools/t.sh cdp2 sameconn.py b67770e`: connections identical. `.venv/bin/python tools/sameconn.py b67770e`:
+connections identical.
+
+Round 3: no findings that change a connection.
 
 ## Correction from the coordinating session (2026-11-15)
 
