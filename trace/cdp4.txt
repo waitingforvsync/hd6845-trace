@@ -685,13 +685,7 @@ C 11112,10577 s=20x20
 P 10840,10621 x11173 w=20
 P 11139,10604:11173,10638
 C 11156,10621 s=20x20
-P 10840,10664 x11216 w=20
-P 11182,10647:11216,10681
-C 11199,10664 s=20x20
 # cdp4's n rows, east of x 10850, to their pads (each track runs on through its pad)
-P 10840,13333 x11216 w=22
-P 11182,13316:11216,13350
-C 11199,13333 s=20x20
 P 10840,13376 x11173 w=22
 P 11139,13360:11173,13394
 C 11156,13377 s=20x20
@@ -713,7 +707,9 @@ C 10939,13592 s=20x20
 P 10840,13633 x10913 w=22
 P 10879,13619:10913,13653
 C 10896,13636 s=20x20
-# the eight tracks, top pad to bottom corner, and the horizontal east of the corner to x 11230
+# the tracks, top pad to bottom corner, and the horizontal east of the corner to x 11230.
+# Column 0 (track x 11200, pads (11200,10664) and (11200,13330), its two row ends, its corner and the bus
+# row y 17908 east) is drawn in trace/regs.txt (piece n0), which reached main first; not repeated here.
 M 10895,10352 y10375 10897,10390 y18298 x11230     # bit of column 7
 M 10939,10396 y10418 10940,10432 y18256 x11230     # column 6
 M 10983,10438 y10460 10984,10475 y18213 x11230     # column 5
@@ -721,7 +717,6 @@ M 11026,10482 y10505 11027,10520 y18170 x11230     # column 4
 M 11069,10526 y10548 11070,10563 y18128 x11230     # column 3
 M 11112,10569 y18085 x11230                        # column 2
 M 11157,10613 y18040 x11230                        # column 1
-M 11201,10656 y17860                               # column 0: on south 50 px to its corner (11201,17910), regs' piece
 N M 10897,12000 cdp3_n_c7
 N M 10940,12000 cdp3_n_c6
 N M 10984,12000 cdp3_n_c5
@@ -729,8 +724,6 @@ N M 11027,12000 cdp3_n_c4
 N M 11070,12000 cdp3_n_c3
 N M 11112,12000 cdp3_n_c2
 N M 11157,12000 cdp3_n_c1
-N M 11201,12000 cdp3_n_c0
-@alias cdp3_n_c0 cdp4_n_s0
 @alias cdp3_n_c1 cdp4_n_s1
 @alias cdp3_n_c2 cdp4_n_s2
 @alias cdp3_n_c3 cdp4_n_s3

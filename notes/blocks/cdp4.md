@@ -287,7 +287,13 @@ c0 = s0 on x 11201):
 | 3 | y 10535, (11068,10534) | y 13463, (11070,13462) | (11070,18128) | y 18128 |
 | 2 | y 10577, (11112,10577) | y 13420, (11113,13420) | (11113,18085) | y 18085 |
 | 1 | y 10621, (11156,10621) | y 13376, (11156,13377) | (11157,18040) | y 18040 |
-| 0 | y 10664, (11199,10664) | y 13333, (11199,13333) | (11201,17910), not drawn | y 17909, `regs`' |
+| 0 | y 10664, (11199,10664) | y 13333, (11199,13333) | (11201,17910) | y 17909 | 
+
+**Column 0 is drawn in `trace/regs.txt`** (piece `n0` of `regs` run 6, Kieran Connell's session, merged to main
+while this run was in review): the same track, the same two pads and row ends, read independently, and on
+east along y 17908 to the inverter `regs_w17462` = NOT `cdp3_n_c0`. This package's copy of column 0 (reviewed
+in round 3 with the rest) was taken out again before the merge, so that the wire is drawn once; columns 1-7
+are drawn here.
 
 - **North end.** `cdp3` draws its bus N rows to x 10850; each runs on east as one poly row under the
   tracks west of its own and ends in a pad about 34 px square with a contact (ring and bright centre in
@@ -308,10 +314,8 @@ c0 = s0 on x 11201):
   (y 17500-18300). So the rows `cdp4_n_s#` pass under
   the lower-numbered tracks, and the tracks over everything else, without contact.
 - **South end.** Nested corners, no pad: each track turns east onto a horizontal metal (drawn to
-  x 11230). `tools/follow.py 10940 13700 S` runs column 6's on east to x 12810. Column 0's track is
-  drawn to y 17860, the edge of `regs`' claim: it goes on 50 px to its corner (11201,17910) and east
-  along y 17909, the bottom bus metal that `regs` run 6 follows west from (12770,17907) (the gate of an
-  inverter, `regs_w17648`).
+  x 11230). `tools/follow.py 10940 13700 S` runs column 6's on east to x 12810. Column 0's track turns
+  east at (11201,17910) onto the bottom bus metal y 17909, which `regs` draws to the gate of its inverter.
 
     read bus bit of column K = cdp3_n_cK = cdp4_n_sK
     pulled to: cdp3_cq_cK (rsel12_buf; VSS in c0, c1), cdp3_hq_cK (rsel13_buf), cdp3_f_cK (rsel14_buf;
@@ -384,7 +388,7 @@ islands are closed curves inside it, so they are the other class.
 | `cdp4_bus_s0`..`s7` | poly | x 7600, y 12180, 12137, 12093, 12052, 12008, 11964, 11922, 11877 | unknown | per-slice line between row R1 and the left |
 | `cdp4_bus_s0`..`s7` | poly | x 7600, y 13333, 13376, 13420, 13463, 13505, 13548, 13590, 13633 | from outside | data into the row C latch |
 | `cdp3_n_c1`..`c7` (= `cdp4_n_s1`..`s7`) | metal | x 11230, y 18040, 18085, 18128, 18170, 18213, 18256, 18298 (drawn end; each runs on east) | driven inside | the read bus of R12-R17, columns 1-7, east along the bottom bus (run 4) |
-| `cdp3_n_c0` (= `cdp4_n_s0`) | metal | x 11201, y 17860 (drawn end, the edge of `regs`' claim; the corner is at (11201,17910)) | driven inside | the read bus, column 0: on east along y 17909, `regs` run 6's metal |
+| `cdp4_n_s0` | poly | x 10850, y 13333 | driven inside | selector output of slice 0: on east to its pad (11200,13330) on the read bus track of column 0, drawn by `regs` (piece `n0`) |
 | `cdp4_a_s2`..`s7` = `cdp3_f_c2`..`c7` | metal | x 8511 + offset, y 11048 (the end of `cdp3`'s line f, y 11052) | from `cdp3`'s row A | selector input a (6 bits); crosses row R1 with no contact (run 3) |
 | (bus tap) | metal | x 8556 + offset, top end y 11062 | inside | `cdp4_bus_sK` up to the comparator's two gate polys (run 3) |
 | `cdp3_bl_c0`..`c7` (the in tracks of s0..s7) | metal | x 8466 + offset, y 11048 (the end of `cdp3`'s bit line) | from `cdp3` | data into the R15 latch; crosses row R1 upper with no contact (run 3) |
@@ -633,6 +637,16 @@ No finding. Notes only, taken into the notes: three more poly rows cross the tra
 Not checked by it: the horizontals east of x 11230; the rectangle y 11919-12186 beyond "no track has a
 ring or pad on it"; continuity under the chip-1 stain (y 15530-15790) rests on chip 2 alone; the pad
 (10983,13549) in the chip-2 stripped shot (residue); `tools/ports.py` (it could not run it).
+
+After the round, on merging main (fe17f17): `regs` run 6 had reached main with column 0 of the bus drawn
+in `trace/regs.txt` (the same track, pads and row ends, read independently). This package's copy of
+column 0 (two row ends, two pads with contacts, the track, a label, an alias) was removed so that the wire
+is drawn once. No connection changes with every file loaded:
+
+- `.venv/bin/python tools/sameconn.py fe17f17`: connections identical
+- `tools/t.sh cdp4 sameconn.py 70bbbc9`: 12 differences, all one thing: with `cdp4` loaded alone the
+  selector node of slice 0 is again named `cdp4_n_s0` (its alias to `cdp3_n_c0` and the track now live in
+  `trace/regs.txt`); no transistor's nets and no other name differ.
 
 Round 3: no findings.
 
