@@ -31,7 +31,7 @@ Trace: `trace/regs.txt`. Scratch: `cache/scratch/regs/` (`survey.md`). Started 2
   on Fable). It is not a register's select either: it is a bottom-bus line, **`regs_w17648`**, that ends as
   the gate of an undrawn inverter under the south end of `bd3`'s ground rail (x 15560-15900,
   y 17370-17530): **`regs_w17462` = NOT `regs_w17648`** (two transistors: pull-down 46/20, depletion load
-  24/45; no uncertain item). The wire is drawn from the bus pad (12806,17907) to the gate (two hops, four
+  24/54; no uncertain item). The wire is drawn from the bus pad (12806,17907) to the gate (two hops, four
   pads with contacts), and the output from the inverter to a pad (16773,18012) at the foot of the track
   x 16776 (two pads with contacts); both go on (ports): the bus metal y 17907 west of x 12770, the output's
   poly row y 18012 east of x 16800. Full extraction: 2525 nets, 4754 transistors, 0 errors, 0 warnings
@@ -68,7 +68,7 @@ Trace: `trace/regs.txt`. Scratch: `cache/scratch/regs/` (`survey.md`). Started 2
 | Diagonal and row y 17648 | thin metal from the pad's east ring (13262,17857) on x + y = 31119 to the corner (13470,17649), east to the pad (14497,17648) | the diagonal lies beside and partly on `trunks`' poly diagonal of `rst_a` for 200 px, crosses that poly's row y 17815 (the follower's stop (13316,17803)) and its column x 13480: no pad, no ring (4x in four shots, `w2.png`, `w7.png`); the row passes over poly columns at x 13700 and 14195 (`r2.png`) |
 | Hop under `trunks`' X and the VCC rail | pads (14497,17648), (14714,17648) | straight, between `rsel14_buf`'s row y 17604 and `rsel13_buf`'s y 17691, whose pads sit one position west (2x in four shots, `h1.png`; `tl5_tracks.py h 17648 14380 15600`) |
 | Row east, corner, pad | metal y 17648 to x 15560, north to the pad (15558,17428) | no pad between (strip in three shots, `r1.png`); the pad: `px.py col 15560 17395 17460 5`, green hole at y 17429 (`tl5_tracks.py v 15560 17390 17670`) |
-| The inverter | x 15577-15895, y 17372-17491 | pull-down: diffusion column x 15662-15708 under the ground rail's end (the rail's metal runs to y 17525; `bd3` drew it to y 17380), ground contact (15679,17391), gate band y 17418-17438, drain below; a tab west to a buried-contact box (15602-15640, 17449-17479); a neck east y 17452-17474 to the node land x 15752-15776; load plate x 15790-15835, y 17432-17491 over the strip y 17449-17473, tie box (15772-15804, 17400-17428), supply land x 15838-15895 with a contact (15864,17450) under the VCC rail (3.2x in four shots: `e3.png`, `e4.png`, `e6.png`; overlays `ov1.png`, `ov2.png`) |
+| The inverter | x 15577-15895, y 17372-17491 | pull-down: diffusion column x 15662-15708 under the ground rail's end (the rail's metal runs to y 17525; `bd3` drew it to y 17380), ground contact (15679,17391), gate band y 17418-17438, drain below; a tab west to a buried-contact box (15602-15640, 17449-17479); a neck east y 17452-17474 to the node land x 15752-15776; load plate x 15781-15835, y 17432-17491 over the strip y 17449-17473, tie box (15772-15804, 17400-17428), supply land x 15838-15895 with a contact (15864,17450) under the VCC rail (3.2x in four shots: `e3.png`, `e4.png`, `e6.png`; overlays `ov1.png`, `ov2.png`) |
 | The output `regs_w17462` | poly x 15587 south, y 17646 east, x 15932 south to the pad (15971,17733); metal y 17735 east, corner x 16776, south to the pad (16773,18012) | the row passes under the VCC rail x 15795-15890 without a channel (`px.py row 17644 15770 15930 10`: 211-222/164-176 throughout); the metal passes over twelve poly columns, bars of 8-10 px only, no pad (`tl5_tracks.py h 17736 15990 16790`, `o5.png`); `tl5_tracks.py v 16776 17730 18030`: metal to the ring, green hole at y 18014 |
 | Not drawn: a structure on `wr_r12`'s line | x 11320-11400, y 11740-12350 | Ambiguities 1 |
 
@@ -206,7 +206,7 @@ Traced: `regs_w17462` = NOT `regs_w17648`.
   pad (15558,17428), whose poly runs east as the gate band y 17418-17438 of one pull-down. No tap, no
   other transistor on the way.
 - **The inverter** stands south of `bd3`'s R13 select buffer, on the same two rails. Pull-down 46/20 under
-  the south end of the ground rail; depletion load 24/45 at the west edge of the VCC rail, its plate tied
+  the south end of the ground rail; depletion load 24/54 at the west edge of the VCC rail, its plate tied
   to the node land by a buried contact at the plate's top-left corner. The drain reaches the load by a
   diffusion neck east and the output poly by a tab west and a buried contact.
 - **`regs_w17462`** leaves on poly (south, east under the VCC rail, south) to a pad (15971,17733), runs
@@ -435,6 +435,43 @@ Findings, all geometry or notes, each checked by the tracer:
 `tools/t.sh regs sameconn.py c55d30d`: `connections identical`. `.venv/bin/python tools/sameconn.py
 c55d30d`: `connections identical`.
 Round 5: no findings that change a connection.
+
+**Round 6, full review of piece `r9`, 2026-11-21 19:35 +0000** (fresh Fable reviewer; at commit ac77193; 21
+images in `cache/scratch/regs/review-6/`). Told to suspect: the diagonal metal x 13262-13470 on and across
+`rst_a`'s poly and its end on the pad (13240,17862); both hops keeping their rows; the drain's two narrow
+strips and the west box; the load (plate, strip, tie box, supply contact); the ground contact, the ground
+rail's metal to y 17527 and the dot (15688,17497); the gate poly's end and the pad (15558,17428); the
+output poly under the VCC rail; the metal y 17735 over the poly columns, its corner and the pad
+(16773,18012); anything undrawn at x 15560-15900, y 17370-17530 that touches these nets.
+
+Checked and found correct: the west pad (metal from the west only) and the rows y 17815 / 17862 / 17907
+on their tracks at seven cuts (`tl5_tracks.py rows`; 2.4x in three shots); the poly column x 13206-13224
+apart from the pad (13172,17862); the diagonal as one metal from pad to corner, bright in both chips, the
+pad's ring equal on both sides, no pad, widening or hole at (13316,17803) or at the column crossing
+(`textmap.py`; 4-5x); the row y 17648 continuous in chip 2 (chip 1's failure at x 13924-13998 is a blemish
+on that die) and the second hop straight (3.9x, two shots); the gate pad (metal from the south only, poly
+east only, the gate's cap at about x 15728 with field beyond); both contacts of the inverter (ring in the
+metal shots, pits in the stripped ones), the tab as diffusion (chip-2 stripped 172/160/94 at x 15652), the
+west box, the tie box and the node land, field north of the tie box; the ground rail's metal to about
+y 17527 with field under it from y 17476 (`railprof.py` calls y 17490-17513 diffusion: not tan, trap 18);
+the dot (15688,17497) in chip 2 only; the output poly under the VCC rail uniform, no transistor; the metal
+y 17735 without a pad (the pads at y 17775 are the next row's), the inner corner at x 16776, the pad
+(16773,18012) and its poly on east; the extraction and `unsure.py` (0 nets).
+
+One finding, geometry only, confirmed and fixed: **the load plate's west edge is at x 15781, not 15790**
+(`px.py row 17483 15765 15805 3 metal,metal1,acid`: the edge line at x 15777-15780, orange poly at
+x 15783-15789, the VCC rail's own edge at x 15792-15795). The load is 24/54, not 24/45. Proof that no
+connection changed, against ac77193:
+
+    tools/t.sh regs sameconn.py ac77193             ->  connections identical
+    .venv/bin/python tools/sameconn.py ac77193      ->  connections identical
+
+Not checked by the reviewer: the bus metal west of x 12770 (a poly column crosses under it at about
+x 12738-12750, outside what is drawn) and the output poly east of x 16830 (both are ports); the west hop's
+rows at 4x (2.4x and seven text cuts; the tracer's `w6.png` is 2.6x in three shots, `w4.png` 4x at its east
+end); the neck from views and single points only; what the two rails join north of y 17370 (`bd3`'s).
+
+Round 6: no findings that change a connection.
 
 ## Not done
 
