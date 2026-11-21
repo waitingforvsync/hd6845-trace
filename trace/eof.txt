@@ -4285,3 +4285,56 @@ N M 4022,11300 vss
 M 4128,11040 x4217 w=36
 M 4196,11040 y18240 w=46
 N M 4196,11500 vcc
+
+# ---- run 47, piece `yi`: the inverter of larr's line Y that drives the gate poly eof_pdg_s# (one per row of the
+# left array; master row s1; west of rail F, between the VCC rail x 3823-3873 and rail F, under Vm6 and the
+# "segmented" metal x 3949-3966).  eof_pdg_s# = NOT larr_y_s#.
+# The gate row of eof_pd (y 11588-11607) is the top of a depletion load's block: the block lies over a strip from
+# larr's VCC box (D 3818,11601:3880,11662 in larr_lat) to the node N, and its foot ends in a buried contact on a tab
+# of N.  N runs east as a band y 11641-11657 to rail F.  Y's poly (from a U-shaped buried contact on Y's diffusion,
+# north, east under the segmented metal, north again) is an L round the band's south and east sides: a block under
+# the segmented metal, an arm along the band and an arm under rail F; outside the L lies rail F's diffusion (vss).
+# Not drawn: Y's diffusion east of x 3946 (a poly column from the pad (3958,11847) crosses it: a transistor to rail
+# F's diffusion) and its leg south under Vm6 (to y 11891 and on east: the knot at rail F's fifth ring); the
+# segmented metal; ports.
+@cell eof_yi tag=s1
+# the load: the gate row west of eof_pd's, the block, its foot, the buried contact on N's tab
+P 3884,11588:3995,11607
+P 3882,11590:3920,11668
+P 3902,11660:3920,11696
+B 3898,11678:3930,11703
+D 3900,11682:3938,11700
+# the load strip under the block, from larr's VCC box to N
+D 3874,11621:3925,11657
+# N, and the band east of it; the active under Y's block and arms, R1 south of the arm, to eof_pd's diffusions
+# (review round 55, geometry only: between the load strip and the tab, x 3920-3932, y 11657-11682, lies the
+# box's heavy outline, not diffusion: N is drawn round it)
+D 3920,11622:3952,11657
+D 3934,11622:3952,11700
+D 3950,11641:4030,11700
+N D 3936,11670 eof_pdg_{}
+# Y's poly: block, arm along the band, arm under rail F; south over field, west, south into the U box
+P 3950,11659:3972,11738
+P 3950,11659:4023,11680
+P 4001,11627:4023,11680
+P 3915,11722:3972,11738
+P 3915,11722:3933,11788
+B 3910,11766:3938,11792
+N P 3924,11750 larr_y_{}
+# Y's diffusion: from larr's band (it ends at x 3895) into the block that holds the U box
+D 3888,11805:3900,11824
+D 3896,11770:3946,11824
+@end
+@inst eof_yi 0,-477 tag=s0
+@inst eof_yi 0,477 tag=s2
+@inst eof_yi 0,954 tag=s3
+@inst eof_yi 0,1431 tag=s4
+@inst eof_yi 0,1909 tag=s5
+@inst eof_yi 0,2386 tag=s6
+@inst eof_yi 1,3079 tag=s7
+@inst eof_yi 1,3557 tag=s8
+@inst eof_yi 1,4034 tag=s9
+@inst eof_yi 1,4684 tag=s10
+@inst eof_yi 1,5162 tag=s11
+@inst eof_yi 1,5639 tag=s12
+@inst eof_yi 1,6116 tag=s13
