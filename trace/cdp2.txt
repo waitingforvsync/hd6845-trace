@@ -591,3 +591,36 @@ C 7335,6845
 M 7290,6848 x7335 w=16                 # a metal from the west ends on that pad (port; follower: to (6142,6847))
 P 7860,8298:7896,8332
 C 7878,8315
+
+# ---- piece gl: the lower of two series gates under the rail x 8375-8425 (x 8205-8600, y 7160-7400)
+#     cdp2_w7272 = NOT( cdp2_w7300 AND cdp2_w7344 )
+# Top node, row 1, a node with no contact, row 2, a box with the rail contact. Load west of the thin
+# metal x 8328-8345 (which passes over the node's tab): strip under a plate to a box on the VCC metal,
+# the plate's finger on a buried contact at the end of an L of diffusion. Output: the node's strip east,
+# a tab up into a buried contact, a poly east and north that turns west as row 2 of the gate above.
+M 8400,7040 y7440 w=50                 # the VSS rail x 8375-8425, down onto row C's
+D 8358,7255:8440,7365                 # the column
+D 8385,7360:8437,7400                 # box
+C 8405,7380
+P 8350,7290:8600,7311                 # row 1, from the east (port at x 8600)
+N P 8590,7300 cdp2_w7300
+P 8350,7333:8600,7354                 # row 2, from the east (port at x 8600)
+N P 8590,7344 cdp2_w7344
+# the load
+D 8320,7255:8360,7277                 # the node's tab west (under the thin metal x 8328-8345: no contact)
+D 8262,7253:8322,7280                 # strip under the plate
+D 8205,7248:8264,7315                 # box on the VCC metal
+C 8226,7276
+P 8265,7236:8320,7297                 # plate
+D 8322,7275:8345,7320                 # L of diffusion from the tab down
+D 8298,7300:8345,7320                 #   and west into the box
+P 8298,7295:8320,7318                 # the plate's finger
+B 8296,7298:8324,7322
+# the output
+D 8438,7272:8520,7288                 # the node's strip east
+D 8455,7246:8496,7274                 # tab up
+B 8463,7244:8500,7273
+P 8468,7250:8518,7268                 # poly from the buried contact east,
+P 8500,7170:8518,7268                 #   north,
+P 8445,7160:8518,7181                 #   and west as row 2 of the gate above (port at x 8445)
+N P 8509,7220 cdp2_w7272

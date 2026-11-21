@@ -5,3 +5,4 @@
 ?7600,6350:10850,6900  route  channel 2 | 13 horizontal poly lines under the per-slice metal lines and rails; the lowest carries the comparator's chain output
 7645,6985:8253,7140  logic  NOT tc2_sr_q (cdp2_w7065) | an inverter of the top-centre latch's output; it leaves west on a poly row to a pad (7662,7083)
 7318,6828:8004,8332  route  a through line past the inverter (cdp2_w6845) | from a pad (7335,6845) by a poly row and a thin metal x 7988 south to the gate cluster beside R14's row
+8205,7230:8600,7400  logic  a two-input series gate (cdp2_w7272) | NOT(cdp2_w7300 AND cdp2_w7344), two pull-downs under the rail x 8375-8425 with a tied load; its output feeds the same kind of gate above it
