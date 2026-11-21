@@ -52,6 +52,14 @@ each with a poly row west toward a column of five units; column 6 ends on a pad 
 the fifth unit. With every file loaded: 2516 nets, 4796 transistors, 0 errors, 0 warnings. See "The read
 bus, north to the output units" under Logic.
 
+Run 8 (2026-11-21 15:32 -0600): **the data output inverters of bits 5-1** (x 16480-16800, y 15800-16460, in `bd2`'s region;
+cell `cdp4_ro`, five copies, 10 transistors): **`d5_out_n` = NOT `cdp3_n_c2`, `d4_out_n` = NOT `cdp3_n_c3`,
+`d3_out_n` = NOT `cdp3_n_c4`, `d2_out_n` = NOT `cdp3_n_c5`, `d1_out_n` = NOT `cdp3_n_c6`** (firm), with
+run 7's `d0_out_n` = NOT `cdp3_n_c7`: the read bus's column K is data bit 7 - K for K = 2..7, and each
+`d#_out_n` line is drawn by `dbus` to its pad cell. Also the thin metal of `dbus_le` on south through the
+units, marked uncertain over four output boxes (Ambiguity 15). With every file loaded: 2517 nets, 4807
+transistors, 0 errors, 0 warnings. See "The data output inverters" under Logic.
+
 Not traced: the rest of the wiring right of x 10600 (the two thin metals x 10809 and x 10853, the rails'
 ends) and below y 14060.
 
@@ -471,6 +479,50 @@ East of x 16000 the seven rows fan into a staircase:
 So **the read bus's column 7 is data bit 0**: with `cdp3`'s bit line of column 2 being `db_b5`, the datapath's
 column K is bit 7 - K for writing, and for reading at least in column 7.
 
+### The data output inverters (run 8, 2026-11-21; traced)
+
+Five copies of one cell, `cdp4_ro`, at pitch 130 (`tools/findcell.py 16480 15925 16800 16055`, clean shot:
+dy -130 (0.90), +130 (0.94), +261 (0.92), +391 (0.93); `tools/cellcheck.py cdp4_ro`: median 0.96-0.98 in the
+clean and the metal shot, 0-3 differing blocks of 35), between the VCC rail x 16491-16540 and the VSS rail
+x 16666-16712, which `dlat` draws from the north to y 15790 and which run on south through the units (drawn
+here to y 16440 and to the VSS rail's end at y 16446; the VCC rail goes on to about y 16478). Master: unit
+`u2`, the one whose output box takes `d4_out_n`. Read on the median picture of the five
+(`tools/composite.py cdp4_ro 16470,15915:16810,16065 --offsets "0,-130 0,130 0,261 0,391"`; the metal
+composite is the clear one: `u_w6.png`, `u_e6.png`), edges measured by ten cuts (`tools/px.py ... --comp
+cdp4_ro`), overlay on the single shots (`ov8_u2.png`, `ov8_u1.png`, `ov8_u5.png`).
+
+    d(7-K)_out_n = NOT cdp3_n_cK        K = 2 (unit u1) .. 6 (unit u5); 2 transistors each
+
+Coordinates of the master:
+
+- **Load.** A diffusion box (16497-16547, 15950-16012) under the VCC rail with the rail's contact
+  (16510,15978). A strip leaves it east (y 15954-15982) under the poly plate (16548-16603, 15937-15998): in
+  the metal shots the plate is three orange bands with the strip's two edge lines across it (y 15951-15956,
+  15979-15985). W/L 28/54.
+- **Output node.** East of the plate the strip (y 15959-15979, pinker than the field beside it in the
+  metal composite: 175/128/81 against 164/142/82) runs east to the VSS rail and under it. A branch
+  (x 16614-16632) goes south from it to y 16025 and west into a small heavy-outlined box
+  (16581-16611, 16002-16027), where the plate's tab (x 16585-16607, from the plate's foot) ends: the buried
+  contact that ties the load's gate to the output.
+- **Pull-down.** Under the VSS rail a diffusion column x 16683-16722: the output strip above (y 15960-15984),
+  the gate (the read bus row, salmon, y 15985-16007, its west end at x 16657) and the source box below
+  (y 16010-16056) with the rail's contact (16697,16032; ring and bright centre in the metal composite,
+  specks in the clean one). W/L 39/22. West of the column, under the rail's west part, the clean shot is
+  pink below the gate (field): one transistor.
+- **Output.** East of the rail the strip (y 15960-15977) runs into a framed box (16746-16782, 15948-15976),
+  the buried contact with the poly row of `d#_out_n`, which `dbus` draws from its pad to within 30 px west
+  of the pad; the rows are drawn on here to the boxes (y 15824, 15954, 16085, 16215, 16345), under the read
+  bus tracks they cross (no contact: reviewed with run 7).
+- The read bus rows of run 7 (ports at x 16790, and column 6's band at (16780,16384)) are the gate rows.
+
+**The thin metal of `dbus_le`** (x 16768-16782) comes from the north (`dlat` draws it to (16774,15935),
+over unit u1's box) and runs on south over the other four output boxes. Drawn to y 16450, uncertain over
+each box: Ambiguity 15.
+
+**Believed, not traced**: with `dpad`'s cells (the pin is the inverse of `d#_out_n` while `d_hiz` is low),
+pin D(7-K) carries the read bus's column K in true sense. Columns 1 and 0 (bits 6 and 7) are not joined to
+`d6_out_n`, `d7_out_n` yet (`regs`' inverter on column 0; column 1's gate group).
+
 ### Corner gate group: `cdp4_rst` = NOR of six select rows (run 2, 2026-11-19; traced)
 
 Region x 7550-7870, y 13640-14055, left of row D. One gate, seven transistors:
@@ -533,8 +585,9 @@ islands are closed curves inside it, so they are the other class.
 | `cdp4_ld` | poly | x 7600, y 12962; right end about x 10600 | from outside | row C latch strobe |
 | `cdp4_bus_s0`..`s7` | poly | x 7600, y 12180, 12137, 12093, 12052, 12008, 11964, 11922, 11877 | unknown | per-slice line between row R1 and the left |
 | `cdp4_bus_s0`..`s7` | poly | x 7600, y 13333, 13376, 13420, 13463, 13505, 13548, 13590, 13633 | from outside | data into the row C latch |
-| `cdp3_n_c2`..`c5` (= `cdp4_n_s2`..`s5`) | poly | x 16790, y 15866, 15996, 16128, 16257 (drawn end; each row runs on west into the units) | driven inside | the read bus of R12-R17, columns 2-5, at the output units (runs 4-7) |
-| `cdp3_n_c6` (= `cdp4_n_s6`) | poly | x 16780, y 16384 (drawn end; the band runs on west into the fifth unit) | driven inside | the read bus, column 6 (runs 4-7) |
+| `d5_out_n`..`d1_out_n` | poly | onto `dbus`'s rows at x 16822, 16870, 16912, 16957, 16957 (y 15824, 15954, 16085, 16215, 16345) | driven inside | the outputs of the data output inverters (run 8) |
+| `dbus_le` | metal | x 16775, y 15930 (onto `dlat`'s end) and y 16450 (drawn end; goes on south) | from outside (believed from the south) | the data input latches' enable, passing through the units (run 8; uncertain over four boxes) |
+| `vcc`, `vss` | metal | x 16515 and x 16689 at y 15780 (onto `dlat`'s rails); `vcc` drawn to y 16440 (goes on to about y 16478), `vss` ends at y 16446 | - | the units' rails |
 | `cdp3_n_c7` (= `cdp4_n_s7` = `dbus_do0_in`) | metal | (16950-16962, 16714): onto `dbus`'s metal | driven inside | the read bus, column 7 = the gate of D0's output chain (run 7) |
 | `cdp3_n_c1` (= `cdp4_n_s1`) | poly | x 16148, y 17480 (drawn end, on the corner where the column turns west as a band y 17463-17485, seen to x 16084) | driven inside | the read bus, column 1 (runs 4-6) |
 | `cdp4_n_s0` | poly | x 10850, y 13333 | driven inside | selector output of slice 0: on east to its pad (11200,13330) on the read bus track of column 0, drawn by `regs` (piece `n0`) |
@@ -643,6 +696,16 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
    (10897,12390), (10984,13937), (11201,15240), with field under each (not breaks). Under the chip-1 stain
    (y 15530-15790) the tracks' continuity rests on chip 2 alone.
 
+15. **`dbus_le`'s thin metal over the output boxes** (run 8). The metal x 16768-16782 is dark in both metal
+   shots for 53-60 px over each output box (y 15937-15990, 16067-16124, 16197-16255, 16323-16383;
+   `tools/tl5_tracks.py v 16771 15800 16520`) and bright between (y 15990-16067, 16124-16197, 16255-16323,
+   16383-16456); the clean shot is greenish under it at each box. Readings: one metal that passes over the
+   boxes (the tracing guide's trap 27; `dlat` draws it so over unit u1's box); or pieces. No contact onto a
+   box is read (no pad; a contact at every box would short five outputs to the latch enable). Drawn `M`
+   between the boxes and `?M` over them, so `dbus_le` here is joined to `dlat`'s piece only through
+   uncertain items (`tools/unsure.py` lists it). What would settle it: its far end (south of y 16450, toward
+   the NOR that PR #17 reported as its driver).
+
 ## Not done
 
 - (Done, run 3: row R1 upper.) Left from it: `g_eq_r14`, the NAND's other input (not followed); which
@@ -657,8 +720,10 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
   x 16762-16780 that these notes call `dbus_le` is **not one metal** south of `dlat`'s end: no metal in
   either chip for 20-60 px at every unit (y 15937-15990, 16067-16124, 16197-16255, 16323-16383,
   `tools/tl5_tracks.py v 16771 15840 16400`): to be read with the units.
-- From run 7: the five units the rows of columns 2-6 enter (x 16600-16790, y 15880-16450, pitch 130; a rail
-  with contacts at x ~16700; `bd2`'s region), which should join them to `d5_out_n`..`d1_out_n`.
+- From run 8: `dbus_le`'s thin metal south of y 16450 (a 15 px dark bar at y 16456-16471, then on to about
+  y 16505; PR #17: west at y 16498); the VCC rail south of y 16440 (to about y 16478: whether it meets the
+  horizontal metal y 16493-16508 below it is not read; 12 px of dark between them at x 16515); what lies
+  west of the VCC rail (x < 16490) beside the units.
 - From run 6: column 1's poly band west of
   (16139,17474) (seen to x 16084) and what it drives (the gate group at about x 16060-16230, y 17290-17480).
 - From run 5: the poly column x 13706-13730 under the rows.

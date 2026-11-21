@@ -979,3 +979,58 @@ P 16752,16712 x16800 y16384 x16780 w=20
 # --- column 7: onto dbus's metal (M 16993,16440 y16712 x16950) from the pad (16993,16451) of dbus_do0_in
 M 16798,17390 y16714 x16962 w=12
 @alias cdp3_n_c7 dbus_do0_in
+# ======================================================================
+# Run 8 (2026-11-21): the data output inverters of bits 5-1. Five copies of one cell at pitch 130 between a
+# VCC rail (x 16491-16540, dlat's rail going on south) and a VSS rail (x 16666-16712): a depletion load
+# (plate tied to the output by a buried contact at the foot of a branch of the output diffusion) and one
+# pull-down under the VSS rail gated by a read bus row. The output diffusion runs east to a framed box, a
+# buried contact with the poly row of d#_out_n. Master: the unit of d4_out_n (read bus column 3).
+# ======================================================================
+M 16515,15780 y16440 w=48                # VCC rail (dlat draws it to y 15790); goes on south
+N M 16515,16100 vcc
+M 16689,15780 y16446 w=46                # VSS rail (dlat's), ends below the last contact
+N M 16689,16100 vss
+@cell cdp4_ro tag=u2
+D 16497,15950:16547,16012                # VCC box
+C 16510,15978 s=24x34
+D 16540,15954:16606,15982                # the strip under the plate: the load's channel
+P 16548,15937:16603,15998                # the plate
+D 16600,15959:16690,15979                # the output strip east of the plate, to under the VSS rail
+D 16683,15959:16722,16056                # drain, channel and source of the pull-down under the rail
+C 16697,16032 s=24x28                    # VSS contact on the source box
+P 16657,15996 x16795 w=22                # the gate: the read bus row, from its west end
+D 16715,15960:16752,15977                # the output east of the rail
+D 16746,15948:16782,15976                # the output box (buried contact with the d#_out_n row, below)
+D 16614,15973:16632,16025                # branch south from the output strip
+D 16583,16004:16620,16025                # ... and west to the tie box
+P 16585,15990:16607,16021                # the plate's tab into the box
+B 16581,16002:16611,16027                # buried contact: plate tied to the output
+@end
+@inst cdp4_ro 0,-130 tag=u1
+@inst cdp4_ro 0,130 tag=u3
+@inst cdp4_ro 0,261 tag=u4
+@inst cdp4_ro 0,391 tag=u5
+# the d#_out_n rows, from where dbus's drawing of each ends, west under the read bus tracks to the boxes
+P 16757,15954 x16870 w=22                # d4_out_n
+B 16754,15946:16784,15972
+P 16757,16085 x16912 w=22                # d3_out_n
+B 16754,16076:16784,16102
+P 16757,16215 x16957 w=22                # d2_out_n
+B 16754,16207:16784,16233
+P 16757,16345 x16957 w=22                # d1_out_n
+B 16754,16337:16784,16363
+P 16757,15824 x16822 w=22                # d5_out_n
+B 16754,15816:16784,15842
+# dbus_le's thin metal (x 16768-16782; dlat draws it to (16774,15935)) on south through the units. Over each
+# output box it is dark in both metal shots for 53-60 px (y 15937-15990, 16067-16124, 16197-16255,
+# 16323-16383) and the clean shot is greenish under it: continuity cannot be shown there, and no contact is
+# read (a contact would short the outputs together): drawn uncertain over the boxes (tracing guide, trap 27).
+?M 16775,15930 y15992 w=14
+M 16775,15990 y16069 w=14
+?M 16775,16067 y16126 w=14
+M 16775,16124 y16199 w=14
+?M 16775,16197 y16257 w=14
+M 16775,16255 y16325 w=14
+?M 16775,16323 y16385 w=14
+M 16775,16383 y16450 w=14
+N M 16775,16030 dbus_le

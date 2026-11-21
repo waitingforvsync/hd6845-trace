@@ -22,8 +22,5 @@ cdp3_f_c5     M      9683,11048       in   the same, s5
 cdp3_f_c6     M      10073,11048      in   the same, s6
 cdp3_f_c7     M      10464,11048      in   the same, s7
 cdp3_n_c1     P      16148,17480      out  the read bus of R12-R17, column 1 (= cdp4_n_s1): a poly column north beside trunks' metal x 16163-16178; the drawn end is on its corner: it turns west as a band y 17463-17485 (seen to x 16084), not drawn
-cdp3_n_c2     P      16790,15866      out  the read bus of R12-R17, column 2 (= cdp4_n_s2): the poly row west from its end pad, on west into the column of output units (x 16600-16790)
-cdp3_n_c3     P      16790,15996      out  the read bus of R12-R17, column 3 (= cdp4_n_s3): the poly row west from its end pad, on west into the column of output units (x 16600-16790)
-cdp3_n_c4     P      16790,16128      out  the read bus of R12-R17, column 4 (= cdp4_n_s4): the poly row west from its end pad, on west into the column of output units (x 16600-16790)
-cdp3_n_c5     P      16790,16257      out  the read bus of R12-R17, column 5 (= cdp4_n_s5): the poly row west from its end pad, on west into the column of output units (x 16600-16790)
-cdp3_n_c6     P      16780,16384      out  the read bus, column 6 (= cdp4_n_s6): the band west from the top of its poly column x 16790-16810, on west into the fifth unit
+dbus_le       M      16775,16450      ?    the data input latches' enable: the thin metal through the output units (uncertain over four output boxes), drawn end; goes on south
+vcc           M      16491-16540,16440 -   the units' VCC rail (dlat's, from the north), drawn end; goes on south to about y 16478
