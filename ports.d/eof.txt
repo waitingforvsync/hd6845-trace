@@ -122,7 +122,6 @@ vcc           M      10721-10771,14590        -    the east column's VCC rail on
 # Piece in350 (run 18): the upper gate of W's stack is ck_out
 # (the port at M 8873-8889,15465 is gone: the metal is drawn on)
 ck_out        M      10245,17902-17918        in   onto the west end of trunks' ck_out #1 (M 10320,17908 x10230): the clock's driver is the clock block's buffer
-ck_out        M      8418-8430,17866          ?    the metal that ends on the pad (8424,17908) from the north (follower: to the bundle's track x 8229, end (8227,17019); not checked)
 ck_out        P      8392,17898-17916         ?    the poly west of the pad (8424,17908) (seen to x 8312, where it turns north; another net's metal lies on it from x 8390 west)
 ck_out        M      9589-9604,17866          ?    the metal that ends on the pad (9596,17909) from the north (follower: west along y 17606, north on x 9315 to (9315,16818); not checked)
 ck_out        M      9762-9778,17866          ?    the metal that ends on the pad (9769,17910) from the north (follower: east along y 17649, north on x 10050, west, north on x 9965 to (9964,16950); not checked)
@@ -149,5 +148,7 @@ vss           M      8686-8732,17300          -    column B's VSS rail on south 
 # Piece g174e (run 24): the east side of the same unit; the six ports of piece g174 on the rail's east edge (x 8368-8372) are gone: drawn on
 vcc           M      8488-8558,17560          -    R2 on south of the NOR's VCC box and past this unit's load (drawn y 15870-17560; x 8488-8558 south of y 17236; it runs on)
 # Piece n338 (run 28): eof_w17338's port at (8245,17341) is gone: the row is drawn on to its driver, a NOR; its two inputs
-eof_w16737    P      8270,16553-16573         in   the latch lat17's data: its top row enters a heavy-outlined box (8270-8300, 16550-16580) of the undrawn unit between the two latch copies under column A's rail
-eof_w16778    M      8223-8235,17030          in   the latch lat17's enable track x 8229 on south of its lower pad (8227,16994); believed ck_out (the follower from the port (8418-8430,17866) ends on it), not joined
+# Pieces en17, dinv17, lat18 (run 30): the ports eof_w16778 M 8223-8235,17030, ck_out M 8418-8430,17866 and eof_w16737 P 8270,16553-16573 are gone: drawn on
+eof_w16172    M      8223-8235,16425          in   the latch lat18's enable track x 8229 on south of its lower pad (8227,16387): the bundle's fourth L (west at y 16740, south on x 8143; not followed)
+bc1_g6_out    P      8214-8247,16090          in   the pad (8229,16107) on which bc1's metal x 8229 ends (bc1's contact): one poly with the latch lat18's data row
+vss           M      8336-8384,16040          -    column A's VSS rail, bc1's R1, drawn again over the latch lat18 (y 16040-16300)

@@ -2250,8 +2250,8 @@ M 8013,16604 y17155 w=12
 #   eof_w16950 = NOT(rst_a OR (eof_w16778 AND eof_w16636) OR eof_w17124)   (lower unit, tl1_ub)
 # A transparent latch, open while eof_w16778 is high: eof_w17124 is then NOT eof_w16737, and
 # rst_a high clears the lower node. Both latch equations rest on the cells' load ties (?), like
-# every copy. eof_w16778 is believed ck_out (the follower of run 18 from ck_out's pad
-# (8424,17908) ends on this track at (8227,17019)): not joined here, a port.
+# every copy. eof_w16778 is ck_out: the track is drawn on to ck_out's pad (8424,17908) by piece
+# en17 (run 30), which holds the two names with an @alias.
 # Views r29_*.png in cache/scratch/eof/; survey.md, run 29; notes, piece lat17.
 #
 # ---- the cells. findcell (clean shot): tl1_ua 5729,12277 (0.68), tl1_ub 5729,12276 (0.70);
@@ -2295,8 +2295,8 @@ N P 8240,16823 eof_w17124
 # north on the upper pad: between its ring and the corner of the metal that comes down x 8229
 # from the north and turns west at y 16740 (another net, not drawn) the clean shot has an open
 # green band y 16753-16762 across x 8200-8250 and both metal shots bare ground. It runs through
-# the lower pad and on south (tl5_tracks.py v 8229 16730 17040: rings and bars only): port at
-# y 17030.
+# the lower pad and on south (tl5_tracks.py v 8229 16730 17040: rings and bars only): to y 17030
+# here, and on from there in piece en17 (run 30).
 P 8212,16762:8247,16796
 C 8229,16779
 P 8240,16767:8275,16787
@@ -2309,8 +2309,8 @@ N M 8229,16900 eof_w16778
 # both chip-2 shots) to the track x 8229 (the other net's), turns north under it as a column
 # x 8224-8242 (cream in the clean shot, y 16553-16745; no hole and no ring on the track: no
 # contact, trap 13) and at y 16553-16573 east in the open to a heavy-outlined box at about
-# (8270-8300, 16550-16580) of a unit between the two latch copies that is not drawn: port at
-# x 8270 (r29_data.png, 3.1x, three shots; px.py row 16650 / 16736 / 16564, col 8262).
+# (8270-8300, 16550-16580) of the unit between the two latch copies (piece dinv17, run 30: an
+# inverter's output box) (r29_data.png, 3.1x, three shots; px.py row 16650 / 16736 / 16564, col 8262).
 P 8224,16727:8275,16745
 P 8224,16553:8242,16745
 P 8224,16553:8270,16573
@@ -2320,3 +2320,169 @@ N P 8233,16650 eof_w16737
 # leaves the cell west)
 N P 8300,16638 eof_w16636
 N P 8285,16954 eof_w16950
+
+# Piece en17 (run 30, 2026-11-21): the enable track of the latch lat17 (eof_w16778) on south
+# from its port (8229,17030) to ck_out's pad (8424,17908): the latch's enable is ck_out. Wiring
+# only, one thin metal of 1,390 px in five legs, no pad and no contact on the way.
+# r30_a1.png (1.75x, metal + clean, all traces), r30_c1.png (5x, four shots: the corner
+# (8143,17390) and the dim stretch), r30_d1.png / r30_d2.png (2x, four shots: the south loop),
+# r30_se.png (7x, four shots: the corner (8425,17693)).
+# The legs, each with a continuous two-chip metal test (tl5_tracks.py v / h --half 2: no stretch
+# of 25 px without metal in both chips but the one named below) and its centre line
+# (eof_mrun.py): south on x 8229 over the rows A, the output row, B (piece n338) and row 1
+# (piece g174e), whose edges are 8-11 px bars and which have no pad there; a corner
+# (8229,17390); west along y 17390 (x 8137-8233); a corner (8143,17390); south on x 8143 to a
+# corner (8143,17693); east along y 17693 over field and, from x 8355, lengthwise on
+# eof_w17168's poly row (piece o168: no contact) to a corner (8425,17693); south on x 8425 over
+# five poly rows (rst_a's row y 17736 among them: no contact, piece isrc4) to the pad.
+# North of the corner (8143,17390) the track position x 8143 carries another net's metal (the
+# bundle's fourth L, which turns west at y 17345): 27 px of bare ground between (y 17355-17382,
+# textmap.py 8118 17340 8172 17476 3 --acid): two metals end to end on one track (trap 33).
+# y 17432-17458 on x 8143: neither chip passes the metal test for 27 px. Chip 1 has a dark blob
+# (dirt) over the track at y 17405-17460 and chip 2's metal is dim and orange-brown there
+# (170-182/108-136/57-66 against 204-209/145-192/94-100 at y 17470); but the clean shot's pink
+# protected strip is unbroken at y 17430-17475 (165-190/121-134/117-130: field under metal),
+# the chip-2 stripped shot's ghost reads the same there as at y 17470 (px.py row 17440 / 17470
+# 8124 8160 3), and nothing lies beneath: one metal with a blemish, drawn plain (Ambiguity 109).
+# y 17510-17570 on x 8143: the clean shot is green (a stain of chip 1: its metal shot is dim
+# there too) while chip 2's metal is full bright with no ring: no contact.
+# The corner (8425,17693): a dark bar y 17699-17705 crosses the south leg just below the corner
+# (R 48-100, like the bars at y 17721-17724 where the leg crosses the next row's edge): the
+# south edge of eof_w17168's poly row beneath, not a gap (Ambiguity 110).
+M 8229,17030 y17390 x8143 y17693 x8425 y17866 w=12
+@alias ck_out eof_w16778
+
+# Piece dinv17 (run 30, 2026-11-21): the inverter that drives the latch lat17's data, between
+# the two latch copies under column A's VSS rail (x 8262-8516, y 16447-16594; bc3's ground,
+# free), and its input wire. 2 transistors; the load's tie uncertain.
+#
+#   eof_w16737 = NOT eof_w16215
+#
+# The mirror image of inv16 (x' = 17076 - x, y' = y + 130), drawn by hand; its input comes, as
+# inv16's does, from the upper node's pad of the latch copy above it (not drawn: the port).
+# Views r30_u1.png (1.7x, all traces), r30_u2.png / r30_u3.png (2.1x, four shots), r30_u4.png
+# (5x, four shots: the node, the data box, the rail south of the node), r30_u5.png (4.2x, four
+# shots: the load), r30_v1.png (3.6x, three shots: the VCC rail's box), r30_p1.png, r30_p2.png
+# (5.5x, four shots: the two pads of the input's track).
+# ---- under the rail: the VSS box (the foot of the upper latch copy's lower stack too), the
+# gate, the node (railprof.py 8340 8380 16380 16640: diffusion 16446-16505, gate 16513-16533,
+# diffusion 16534-16567; textmap.py 8322 16500 8400 16632 3 --acid: edge lines y 16503-16506,
+# 16530-16536, 16566-16569). The box's contact: a dark dot in the clean shot, ring and bright
+# centre in both chips (eof_cchk 8347,16478: hole -14, 206 / 207). South of the node the clean
+# shot is pink (field under the rail) to y 16625; the pale patch there in the chip-2 stripped
+# shot (x 8350-8370, y 16572-16620) is the rail's fringe: neither metal shot has a ring (notes,
+# Ambiguity 111).
+D 8331,16447:8381,16567
+C 8347,16478
+# ---- the gate row y 16509-16529: from a pad with a contact (8096,16517) (ring in both chips,
+# bright centre in chip 1 and a dim one in chip 2, a hole in the clean shot's cream pad, a
+# pitted box in the chip-2 stripped shot) east in the open and under the tracks x 8143, 8186,
+# 8229 (no contact: eof_cchk, no hole and no ring at any) and under the rail to its end at
+# x 8388 (tl5_tracks.py rows col 16488 16548 3: the row at every cut from x 8098 to 8370, gone
+# at x 8388). No poly leaves the pad west (field at x 8072-8076).
+P 8118,16509:8388,16529
+P 8080,16502:8122,16534
+C 8096,16517
+# The pad's metal: the track x 8099 from the north ends on it (tl5_tracks.py v 8098 16250 16540:
+# bars of 8-9 px at y 16286-16294 and 16309-16316, the edges of rst_a's row y 16294-16312, no
+# contact: piece isrc4; then the pad's ring). North it runs to a corner (8099,16217) and east
+# along y 16217 to a pad with a contact (8140,16215) (ring and bright centre in both chips, a
+# green hole in the clean shot: eof_cchk -20, 201 / 204), where it ends. That pad's poly row
+# y 16207-16226 runs east under the tracks x 8186 and x 8229 (no contact) toward the node box of
+# the upper latch copy, which is not drawn: port at x 8270.
+M 8099,16517 y16217 x8140 w=12
+P 8124,16200:8157,16231
+C 8140,16215
+P 8150,16207:8270,16226
+N P 8200,16217 eof_w16215
+# ---- the output west: the node's strip out of the rail (plain between two edge lines in both
+# metal shots, x 8304-8327, y 16552-16566) to a buried-contact box (heavy outline x 8271-8301,
+# y 16548-16577; textmap.py 8256 16536 8342 16590 3 --acid), in which the data poly of the latch
+# lat17 (run 29) ends from the west.
+D 8296,16552:8335,16567
+D 8276,16550:8300,16575
+B 8272,16548:8302,16577
+P 8265,16553:8290,16573
+# ---- the load, east of the rail: the node comes out of the rail south of the gate row's end
+# (px.py row 16552 8378 8424 3: plain in chip 2, red over green by 24-31 in the chip-2 stripped
+# shot from x 8393 to 8408), a vertical piece x 8397-8413, y 16512-16584 between the rail and
+# the plate (px.py col 8408 16486 16602 4: edge lines y 16506-16510 and 16586-16590, between
+# them red over green by 9-31 in the stripped shot against 0-13 outside), and from its top the
+# strip y 16512-16539 east under the plate (edge lines y 16508-16512 and 16536-16542 across the
+# orange plate in chip 2: px.py col 8450) to the VCC box under the rail that piece lat16 drew
+# (D 8510,16510:8560,16570, contact (8532,16537)). The plate: x 8419-8510, y 16497-16561,
+# orange in the open; its last 12 px lie under the rail's widened part x 8497-8565 (the clean
+# shot: salmon beside the strip, bright cream on it: px.py col 8504 16470 16650 6; no contact).
+D 8376,16538:8402,16567
+D 8397,16512:8413,16584
+D 8397,16512:8516,16539
+P 8419,16497:8507,16561
+# the tie: a heavy-outlined box below the plate's west end (8424-8458, 16562-16594), the foot
+# of the vertical piece running into it from the west (px.py row 16575 8384 8468 4: diffusion
+# x 8400-8420, the box's outlines at x 8424-8436 and 8452-8460). Drawn uncertain, like every
+# load tie of this build.
+?P 8428,16556:8453,16590
+?D 8408,16566:8456,16583
+?B 8424,16562:8458,16594
+
+# ============================================================================================
+# Piece lat18 (run 30, 2026-11-21): the upper of the two latch copies under column A's VSS rail
+# (x 8261-8567, y 16015-16447; bc1's / bc3's ground, free). Its upper node is eof_w16215, the
+# input of the inverter dinv17 that drives the lower latch's data. A cell copy (11 transistors)
+# and its wires.
+#
+#   eof_w16029 = NOT bc1_g6_out                                          (the cell's own inverter)
+#   eof_w16215 = NOT((bc1_g6_out AND eof_w16172) OR eof_w16345)          (upper unit, tl1_ua)
+#   eof_w16345 = NOT(rst_a OR (eof_w16172 AND eof_w16029) OR eof_w16215) (lower unit, tl1_ub)
+# A transparent latch of tl1's build: open while eof_w16172 is high, eof_w16345 then follows the
+# data bc1_g6_out, and rst_a high clears it. Both equations rest on the cells' load ties (?).
+# findcell (clean shot): tl1_ua 5729,11669 (0.73), tl1_ub 5729,11669 (0.74): the lower copy
+# (piece lat17, run 29) + (0,-607). Overlays r30_l1.png, r30_l2.png (2.7x, clean and chip-2
+# metal): every outline on its feature. Contacts (eof_cchk.py: hole, centres chip 2 / chip 1):
+# top pad (8291,16029) -33, 137 / 212; bottom pad (8284,16435) -13, 50 / 198; VSS (8347,16088)
+# -1, 223 / 222; (8357,16278) 1, 193 / 47; VCC (8535,16253) 4, 238 / 209.
+@inst tl1_ua 5729,11669 tag=l18
+@inst tl1_ub 5729,11669 tag=l18
+# Rails: bc1 draws the VSS rail R1 to y 16300 (M 8360,14890 y16300) and this file from there
+# south; the piece over the cell is drawn here too, so that the file extracts alone. The two
+# loads' VCC box is the diffusion that piece lat15 drew under the VCC rail (D 8510,16178:
+# 8560,16318, C 8535,16253); the foot of the lower stack and the source of the lower unit's
+# third pull-down are piece dinv17's VSS box (D 8331,16447:8381,16567, C 8347,16478).
+M 8360,16040 y16300 w=48
+N M 8360,16150 vss
+# thin metal x 8462-8475 between the upper unit's plate (contact (8468,16169)) and the pad of the
+# lower unit's third pull-down (contact (8468,16370)): ring and bright centre in both chips and a
+# hole in the clean shot at both (eof_cchk -31, 151 / 217 and -24, 219 / 206).
+M 8468,16161 y16378 w=12
+C 8468,16169
+C 8468,16370
+# ---- the data: bc1_g6_out. bc1's metal x 8229 from the north ends on a pad with a contact
+# (8229,16107) (bc1's C; ring and bright centre in both chips, a green hole in the clean shot's
+# cream pad: r30_w1.png, 5x, four shots; eof_cchk -14, 216 / 201). The pad's poly widens south
+# to y 16138 and is one poly with the cell's data row y 16120-16138, orange in the open in both
+# chip-2 shots. (bc1 draws a stub from the pad east along y 16107, 15 px north of the row.)
+P 8214,16090:8247,16138
+P 8240,16120:8275,16138
+N P 8229,16125 bc1_g6_out
+# ---- the two enable rows (eof_w16172): each from a pad with a contact on the track x 8229,
+# (8229,16172) and (8227,16387) (ring and centre in both chips, hole in the clean shot:
+# eof_cchk -21, 193 / 193 and -14, 148 / 146; r30_w1.png). The track ends north on the upper
+# pad: between it and the data's pad 57 px without metal in either chip, open ground in the
+# clean shot (tl5_tracks.py v 8229 16040 16420: no metal y 16112-16168). South of the upper pad
+# it crosses the upper node's row and rst_a's row (bars of 8-11 px at their edges: no contact),
+# runs through the lower pad and on south (the bundle's fourth L, not followed): port at
+# y 16425.
+P 8212,16156:8247,16189
+C 8229,16172
+P 8240,16161:8275,16180
+P 8212,16371:8247,16403
+C 8227,16387
+P 8240,16377:8275,16397
+M 8229,16172 y16425 w=13
+N M 8229,16250 eof_w16172
+# ---- the upper node (eof_w16215): the row of piece dinv17 from the pad (8140,16215) on into
+# the cell's node box.
+P 8262,16207:8282,16226
+# ---- names of the cell's other nodes
+N P 8300,16031 eof_w16029
+N P 8285,16347 eof_w16345
