@@ -3313,7 +3313,7 @@ C 5320,17212
 P 4795,17202:5306,17222
 P 4760,17195:4797,17232
 C 4778,17212
-M 4779,17212 y17150 w=13
+# (run 38: the track is drawn whole in piece t4780n below; it was M 4779,17212 y17150 w=13)
 N M 6700,16262 eof_w15998
 N P 5100,17212 eof_w15998
 
@@ -3393,6 +3393,141 @@ C 5320,17410
 P 4700,17399:5303,17420
 P 4718,17392:4755,17430
 C 4735,17410
-M 4736,17440 y17340 w=12
+# (run 38: the track is drawn whole in piece t4736s below; it was M 4736,17440 y17340 w=12)
 N M 6700,16305 eof_w16218
 N P 5100,17409 eof_w16218
+
+# ---- run 38 (2026-11-21): the two inverters' outputs along the left array's east edge.
+# The thin track x 4736 beside the array is TWO metals end to end, each with seven pads
+# with contacts, one pad per row of the array (each 45-49 px north of the row's diffusion
+# line: y 11338 .. 14202 at 477 px, 14894, 15372, 15848, 16500, 16977, 17454, 17931), and
+# from every pad a poly row runs west under the VSS metal x 4645-4698 into the array
+# (drawn to x 4700: ports; the array's side is larr's). eof_w16218 has the southern seven,
+# eof_w15998 the northern seven. Regions: x 4700-4800, y 11270-17910 (larr's east edge and
+# bl0's old ground, free; the track x 4773-4786 north of y 15000 lies on busl's west
+# boundary and busl's notes give it to larr), and the device at x 4850-5020, y 16700-16910.
+
+# Piece t4736s (run 38): eof_w16218's track x 4736, one metal 12 px wide from a north end
+# pad (4736,14849) to a south end pad (4737,17885) through five pads (tl5_tracks.py v 4736
+# 14100 16915, v 4736 16850 17345, v 4737 17435 17900: without metal in both chips only
+# the rings, 15-20 px on each side of each pad's centre, and bars of 8-11 px in pairs at
+# the rows it crosses; no metal north of y 14845 (to y 14203) nor south of the pad 17885;
+# r38_a1.png, r38_a2.png, 4x, four shots; r38_c_*.png, 2.5x, four shots). It crosses
+# bl0's diffusion lines y 14894, 15372, 15848, 16500, 16977, 17454 (a greenish band between
+# two 8 px bars in the clean shot, the metal bright and no wider between the bars: a
+# diffusion under a thin metal, no contact) and the poly rows y 15043, 15522, 15999, 16085,
+# 16649, 17126, 17603 (eof_cchk.py: 34 to 51, no hole)
+M 4736,14849 y17885 w=12
+N M 4736,16200 eof_w16218
+# the six new pads (eof_cchk.py, clean hole and both chips' centres: 14849 -19 197/205;
+# 15327 -20 189/207; 15804 -16 108/191; 16455 -15 169/171; 16932 -14 173/171; 17885 -21
+# 145/167; ring dark all round but where the metal leaves) and each pad's poly row west
+# (cream in the clean shot under the VSS metal, r38_pads.py), drawn to x 4700
+P 4718,14830:4755,14868
+C 4736,14849
+P 4700,14837:4722,14858
+P 4718,15308:4755,15346
+C 4736,15327
+P 4700,15315:4722,15336
+P 4718,15785:4755,15823
+C 4736,15804
+P 4700,15792:4722,15813
+P 4718,16436:4755,16474
+C 4736,16455
+P 4700,16443:4722,16464
+P 4718,16913:4755,16951
+C 4736,16932
+P 4700,16920:4722,16941
+P 4718,17866:4755,17904
+C 4737,17885
+P 4700,17873:4722,17894
+# the pad (4736,16932) has a second poly: from its east end (cream to x 4766 at y 16928) a
+# column x 4752-4768 runs north in the gap between the two tracks (px.py row 16885: chip 2
+# 132-154/68-111/37-57, chip 1 165-173/96-107, stripped red minus green 31-46 between
+# edges at x 4750 and x 4770; open poly, orange in both metal shots from y 16838 to 16931
+# and nowhere else along the gap) to a corner at y 16835 and a row east, y 16835-16855,
+# under eof_w15998's track x 4780 (eof_cchk.py 4780,16845: 40, no hole; the metal 12 px
+# wide between the row's two edge bars) and 60 px in the open (px.py col 4826: dark
+# red-brown in the clean shot, orange in chip 1) to the gate plate of piece cap218
+# (r38_b1.png, 3x, four shots)
+P 4750,16918:4768,16946
+P 4752,16835:4768,16925
+P 4752,16835:4856,16855
+
+# Piece cap218 (run 38): the device on that row, the build of pieces cap18 and cap998
+# (r38_b2.png, 2.4x, r38_f1.png, 5x, four shots each; textmap.py 4842 16806 4936 16916 3
+# --acid). The row widens into a gate plate x 4852-4927, y 16828-16858 across a diffusion
+# box x 4870-4916, y 16812-16905. South of the gate the box is closed and has one metal
+# contact (4886,16884) (ring and bright centre in both chips, specks in the clean shot;
+# eof_cchk.py: 0, 217 / 217) under a metal ISLAND x 4858-4918, y 16838-16905 that also
+# covers the gate and has a dark outline all round: no metal leaves it. Over the gate
+# neither chip shows a ring and the clean shot no hole (eof_cchk.py 4888,16845: 63): no
+# contact to the poly (Ambiguity 144's question again). The island is a net of its own
+P 4852,16828:4927,16858
+D 4870,16812:4916,16905
+C 4886,16884
+M 4888,16840 y16903 w=58
+N M 4888,16896 eof_w16884
+# north of the gate the box narrows (shoulders y 16808-16818) to a neck x 4883-4900 that
+# runs north to y 16750 and turns east into a diffusion wire y 16750-16768 (one outline
+# with the box, plain inside in chip 2's metal shot: r38_b3.png, 2.4x; r38_f2.png, 3.6x,
+# four shots) to a box under the wide metal (x 4950-5005, y 16738-16786) with a contact
+# (4972,16759) (ring in both chips; eof_cchk.py: 3, 227 / 234). The wide metal x 4953-5018
+# is the VCC rail of piece cap998 (tl5_tracks.py v 4985 16080 16860 --half 8: without metal
+# in both chips only bars of 8-12 px over the rows it crosses and this contact's ring): a
+# second piece of it drawn here and labelled
+D 4883,16750:4900,16815
+D 4883,16750:4955,16768
+D 4950,16738:5005,16786
+C 4972,16759
+M 4985,16700 y16800 w=64
+N M 4985,16790 vcc
+
+# Piece t4780n (run 38): eof_w15998's track. The thin metal x 4773-4786 runs north from
+# the pad (4778,17212) (tl5_tracks.py v 4780 14950 17160 and v 4780 14140 14960: without
+# metal in both chips only bars of 8-11 px in pairs at the rows it crosses, no stretch of
+# 12 px; the crossings: bl0's and busl's diffusion lines y 14202, 14894, 15372, 15848,
+# 16500, 16977, bl0's poly row y 14436 (r38_g1.png, 5x, four shots: the metal bright and
+# no wider between the row's edge bars, no hole) and the poly rows y 14351, 15043, 15522,
+# 15999, 16085, 16649, 17126 (eof_cchk.py: 39 to 48) and eof_w16218's own gate row y 16845)
+# to y 14159, where it turns west by an arm y 14154-14164 (busl_both.py h 14160: 4761-4782;
+# v 4764: 14154-14164) onto a pad with a contact (4736,14155) (r38_d1.png, 4x, four shots;
+# eof_cchk.py: 2, 215 / 176; the hole dull, not green). East of the contact's ring the
+# pad's frame is bright (x 4748-4752), then 6-8 px are dim (x 4753-4759: chip 2 96-144,
+# chip 1 50-110), then the arm is bright: the dim bar lies on the pad poly's east edge
+# (cream to x 4752, pink under the arm from x 4762 in the clean shot) and is read as that
+# edge under one metal (textmap.py 4714 14128 4800 14190 2; Ambiguity 147)
+M 4779,17212 y14159 x4736 w=12
+# from that pad the track x 4736 goes on NORTH, one metal 12 px wide through five more
+# pads to a north end pad (4736,11292) (tl5_tracks.py v 4736 10900 14140: the rings and
+# bars of 8-11 px at the rows crossed; no metal y 10900-11288; chip 1 alone is dark at
+# y 12896-12918, a blemish: chip 2 194-223 there; r38_e1_*.png, r38_e2_*.png, 2.8x, three
+# shots). It crosses busl's diffusion lines y 11338, 11815, 12291, 12768, 13247, 13725 and
+# the poly rows y 11488, 11922, 12442, 12984, 13397, 13874 (eof_cchk.py: 36 to 48 on the
+# rows' centre lines)
+M 4736,11292 y14155 w=12
+N M 4736,12500 eof_w15998
+# the seven pads (eof_cchk.py: 11292 -14 171/209; 11771 -14 202/197; 12247 -29 161/201;
+# 12724 -25 193/159; 13201 -25 220/205; 13680 -11 76/165 (chip 2's centre dull); 14155 as
+# above) and each pad's poly row west, drawn to x 4700
+P 4718,11273:4755,11311
+C 4736,11292
+P 4700,11280:4722,11301
+P 4718,11752:4755,11790
+C 4736,11771
+P 4700,11759:4722,11780
+P 4718,12228:4755,12266
+C 4736,12247
+P 4700,12235:4722,12256
+P 4718,12705:4755,12743
+C 4736,12724
+P 4700,12712:4722,12733
+P 4718,13182:4755,13220
+C 4736,13201
+P 4700,13189:4722,13210
+P 4718,13661:4755,13699
+C 4736,13680
+P 4700,13668:4722,13689
+P 4718,14136:4758,14174
+C 4736,14155
+P 4700,14141:4722,14162

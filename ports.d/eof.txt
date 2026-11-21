@@ -170,9 +170,22 @@ vcc           M      7470-7520,15060          -    bc1's RL2, drawn again over t
 vss           M      7294-7340,16330          -    the rail of bc1's west gate column on south of the two inverters (drawn y 15024-16330; bl0 draws it from y 16925)
 vcc           M      7470-7520,15690          -    bc1's RL2, drawn again over the second NOR's load contact (y 15690-15860)
 # Pieces o998, cap998, o218 (run 37): the two ports eof_w15998 M 6990,16255-16269 and eof_w16218 M 6990,16297-16310 are gone (both bus metals are drawn on to the left array's east edge)
-eof_w15998    M      4773-4786,17150          out  the upper inverter's output at the left array's east edge: the thin track x 4780 north of the pad (4778,17212) (follower: 3,000 px north to (4776,14158), west to busl's pad (4737,14160); not read)
-eof_w16218    M      4730-4742,17340          out  the lower inverter's output: the thin track x 4736 north of the pad (4735,17410) (follower: to (4736,16928); not read)
-eof_w16218    M      4730-4742,17440          out  the same track on south of the pad (4735,17410), which lies in its run (review round 44; follower: to (4738,17864); not read)
 eof_w16218    P      4700,17399-17420         out  the same pad's poly row on west into the left array's east column
 vcc           M      4953-5018,16020          -    the wide VCC metal x 4953-5018 (busl's rail, one metal from y 15000), drawn over the box of cap998's diffusion wire (y 16020-16110)
 vcc           M      4953-5018,16110          -    the same metal on south
+# Pieces t4736s, cap218, t4780n (run 38): the three metal ports of run 37 (eof_w15998 M 4773-4786,17150; eof_w16218 M 4730-4742,17340 and 17440) are gone: both tracks are drawn to their ends. Each of the fourteen pads' poly rows leaves west into the left array
+eof_w15998    P      4700,11280-11301         out  the poly row of one of the seven northern pads of the track x 4736, on west under the VSS metal into a row of the left array
+eof_w15998    P      4700,11759-11780         out  the poly row of one of the seven northern pads of the track x 4736, on west under the VSS metal into a row of the left array
+eof_w15998    P      4700,12235-12256         out  the poly row of one of the seven northern pads of the track x 4736, on west under the VSS metal into a row of the left array
+eof_w15998    P      4700,12712-12733         out  the poly row of one of the seven northern pads of the track x 4736, on west under the VSS metal into a row of the left array
+eof_w15998    P      4700,13189-13210         out  the poly row of one of the seven northern pads of the track x 4736, on west under the VSS metal into a row of the left array
+eof_w15998    P      4700,13668-13689         out  the poly row of one of the seven northern pads of the track x 4736, on west under the VSS metal into a row of the left array
+eof_w15998    P      4700,14141-14162         out  the poly row of one of the seven northern pads of the track x 4736, on west under the VSS metal into a row of the left array
+eof_w16218    P      4700,14837-14858         out  the poly row of one of the seven southern pads of the track x 4736, on west into a row of the left array
+eof_w16218    P      4700,15315-15336         out  the poly row of one of the seven southern pads of the track x 4736, on west into a row of the left array
+eof_w16218    P      4700,15792-15813         out  the poly row of one of the seven southern pads of the track x 4736, on west into a row of the left array
+eof_w16218    P      4700,16443-16464         out  the poly row of one of the seven southern pads of the track x 4736, on west into a row of the left array
+eof_w16218    P      4700,16920-16941         out  the poly row of one of the seven southern pads of the track x 4736, on west into a row of the left array
+eof_w16218    P      4700,17873-17894         out  the poly row of one of the seven southern pads of the track x 4736, on west into a row of the left array
+vcc           M      4953-5018,16700          -    the wide VCC metal x 4953-5018 again, drawn over the box of cap218's diffusion wire (y 16700-16800)
+vcc           M      4953-5018,16800          -    the same metal on south
