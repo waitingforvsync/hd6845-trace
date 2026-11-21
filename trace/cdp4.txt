@@ -1038,3 +1038,45 @@ M 16775,16255 y16325 w=14
 ?M 16775,16323 y16385 w=14
 M 16775,16383 y16450 w=14
 N M 16775,16030 dbus_le
+# ======================================================================
+# Run 9 (2026-11-21): the sixth data output inverter, on the read bus's column 1. A copy of cdp4_ro at
+# (-650,+1474) between regs' VCC rail (x 15795-15890) and a VSS rail x 16017-16059: its gate row is the band
+# of cdp3_n_c1 (the corner of the poly column drawn in run 6), its output box takes a poly row that runs
+# east, south to a pad, east as a thin metal (y 17605) and south to a pad, and east in poly under a wide rail
+# to a pad (17066,18078). Believed d6_out_n (not joined to the pad cell yet: open join).
+# ======================================================================
+@inst cdp4_ro -650,1474 tag=u6
+M 15842,17415:15890,17495                # the part of regs' VCC rail (x 15795-15890) over the unit's VCC box
+N M 15866,17425 vcc
+M 16038,17285 y17535 w=42                # the VSS rail of the unit (and of the unit above it); ends not followed
+N M 16038,17300 vss
+P 16139,17459:16157,17482                # the corner of column 1's poly: the column of run 6 onto the gate row
+# the output: from the box east under two vertical metals (no contact), south, a pad
+P 16107,17428 x16257 y17602 w=22
+B 16104,17420:16134,17446
+P 16236,17585:16270,17619
+C 16253,17602 s=20x20
+M 16253,17603 16906,17607 16906,18086 w=12
+P 16888,18063:16922,18097
+C 16905,18080 s=20x20
+P 16905,18079 x17080 w=20                # under the wide rail x 16940-17030 (field), beside regs' row y 18012
+P 17063,18061:17097,18095
+C 17080,18078 s=20x20
+M 17080,18078 x17115 w=12                # the pad's metal leaves east along y 18078 (port; runs on)
+N M 16600,17605 d6_out_n
+# ======================================================================
+# Run 10 (2026-11-21): the bit 6 output line on east into D6's pad cell. From the port of run 9 the thin
+# metal runs east to a pad, a poly row hops east under a wide rail and a thin metal (field) to a pad, a thin
+# metal runs north on x 17602 to a pad (17599,17341), and a poly row runs east under a thin metal and the
+# rail x 17690-17760 (field) into the west end of strip 4 of D6's pad cell (dpad's {}_out_n poly, x 17800).
+# ======================================================================
+M 17105,18078 17427,18079 w=12
+P 17410,18062:17444,18096
+C 17427,18079 s=20x20
+P 17427,18079 17602,18078 w=22
+P 17585,18061:17619,18095
+C 17602,18078 s=20x20
+M 17602,18084 y17335 w=12
+P 17582,17324:17616,17358
+C 17599,17341 s=20x20
+P 17599,17342 x17825 w=22                # onto dpad's strip 4 of D6 (P 17802,17313:..., y 17313-17339): one poly, a step
