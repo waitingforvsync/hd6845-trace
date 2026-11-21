@@ -443,3 +443,7 @@ Round 2: no findings.
 
 - Ports, `rcs_mv` poly (6226-6246, 6350), direction "?": it is an output. The net is driven in `tl3` (`rcs_mv` = NOR(`tl3_w4546`, `tl3_e4852`)) and runs on south to a pad (6232,6911) and down the whole left bus field to loads south of y 15000 (`busl`, piece `fc`; `bl0` run 9).
 - The metal x 6016 that ends at (6016,6350) is one metal with the one `lc1` starts at (6016,6900) (`tl4` run 11: 550 px over nine poly rows, no pad): the net is the buffered clock `ck_out`.
+
+## Corrections (coordinator, from the handoffs of `busl` run 15, 2026-11-21)
+
+- `tl6_p6101`, `tl6_p6143`, `tl6_p6187` ("a poly south across y 6350 ... neither end is followed"), and `tc2_m6404` where it is named: the south ends are followed (`busl`, pieces `cd`, `cc`, `cb`, `ca`): each to a poly row at the foot of the left bus field (y 14393, 14437, 14870, 14827) toward the bottom-centre logic's bus, no tap on the way. Their top ends (x 6400-6750, y 2500-2630) are a task in the master list's `tcw` (continue) row: believed four outputs of R8.

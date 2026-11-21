@@ -717,3 +717,8 @@ Round 4: no findings that change a connection.
 
 - "`cdp3_k_a` only passes: metal at x 7835 from channel B (contact on the y 8864 poly from the west edge ...) down to a contact (7833,9165)", and the two table rows for `cdp3_k_a`: the poly y 8864 and its contact pad (7835,8862) are there, but the pad's metal goes **north**, to a pad at about (7834,8645); there is no metal at x 7835 between y 8880 and about y 9160 (`busl` run 11 and its reviewer; the coordinator's view of both metal shots, `cache/scratch/refresh/h_k_a.png`). So `cdp3_k_a`'s metal starts at its contact (7833,9165), and the row y 8864 is another net, `busl_x7122` (through the uncertain stretch under the rail: AMB-046). `trace/cdp3.txt` is corrected (2026-11-20): the metal starts at y 9150; the `?P` is lengthened 8 px west to meet `busl`'s row; a 76 px stub of the pad's metal north is drawn. `tools/sameconn.py HEAD`: connections identical (no transistor is on either net there).
 - The proposed register entry for the cluster beside row A is AMB-047.
+
+## Corrections (coordinator, from the handoffs of `cdp2`, 2026-11-20)
+
+- Not done (the cluster beside row A): its "line from the north" onto the pad (7878,8315) is `cdp2_w6845`, a through line whose source is west of the pad (7335,6845) (a metal along y 6848, follower to (6142,6847)); it is not the output of `cdp2`'s inverter.
+- The cluster's two "contacts" under the metal x 7927-7957, at (7937,8474) and (7935,8648), are very probably buried-contact boxes with the metal passing over (re-read item R51; trap 27's addition of 2026-11-21): that would remove the contradiction recorded here. Nothing of the cluster is drawn.

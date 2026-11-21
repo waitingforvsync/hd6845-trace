@@ -606,3 +606,7 @@ along the top of the central datapath) is the gap.
   on east in poly and south by a track to a pad, (6882,16170) and (6928,16217), and on south in poly
   (drawn to y 16250; `notes/blocks/bl0.md`, piece `pe`). In the gate group they make `lpstb_nres` =
   NOR(NOT `lpstb_b`, `res_b`), which forces the carry into the address counter's row s7.
+
+## Corrections (coordinator, from the handoffs of `busl` run 15, 2026-11-21)
+
+- Taps in the left bus field (R4): none on the one line there between y 8995 and y 15000 (`busl`, under piece `xm`: method and numbers). South of y 15000 and its poly cross-unders are not checked.

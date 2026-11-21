@@ -905,3 +905,10 @@ poly pads?). Two readings by the tracer and one by the reviewer give no consiste
 stake: where the cursor-match NAND's output goes, and the clocked logic it feeds. What would settle it:
 those two boxes at 6x in all four shots, then the cluster redrawn from them (`cdp3` (continue); the
 survey and the draft are in `notes/blocks/cdp3.md`, Not done). Trap 2's addition of the same date.
+
+**Annotated 2026-11-21** (from `cdp2`'s handoff, piece `ga`): a third candidate reading of the two boxes. Small
+heavy-outlined boxes under a thin metal were twice read as metal contacts in `cdp2` that day and are buried
+contacts with the metal passing over (found by its reviewer). The two boxes at (7937,8474) and (7935,8648)
+are very probably the same: no contact to the metal x 7927-7957. Re-read item R51 gives the test (pad or
+land, hole or pits, widened ring; trap 27's addition). And the pad (7878,8315)'s metal from (7987,6845) is
+`cdp2_w6845`, a through line from the west (a metal along y 6848), not the output of `cdp2`'s inverter.

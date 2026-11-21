@@ -107,8 +107,7 @@ bus_eq_r15     D  7600,11092-11127   in  the diffusion band goes on east under c
 bd1_n2       M  6704-6718,15000    in  onto eof's metal from the bottom bus field (piece n2w): the output of bd1's latch on R4's match
 bd1_n2       M  6769-6783,10400    out onto eof's metal north (piece n2n, then labelled as an open join): to the inverter that makes rcs_e3
 # pieces x68, x69 (run 7): two through lines beside it
-busl_x6820   M  6813-6827,10400    ?   the track goes on north; follower ends (6817,9988), not read
-busl_x6820   M  6747-6761,15000    ?   on south into bl0's ground; follower ends (6754,16220), not read
+busl_x6820   M  6747-6761,15000    ?   onto bl0's metal, south to its pad (6754,16217) and on; the wire is lc3_m5756 (piece xm, @alias)
 busl_x6906   M  6834-6848,15000    out onto bl0's metal (its run 5): south to the gate that clears the light pen flag bl0_w17610; the wire is rst (piece xn, @alias)
 # pieces r12, r13 (run 8): the read selects of R12 and R13
 rsel12_buf   M  6445-6459,15000    in  onto regs' metal from the bottom bus (sel's buffer); track x 6452
@@ -138,8 +137,6 @@ lc2_w8450    M  4815-4829,15000    ?   track x 4822 on south; follower ends (482
 # pieces fb, fa (run 10): the foot rows y 14870, y 14827 and their tracks to the top of the northern part
 busl_x6949   P  7550,14859-14881   ?   poly row on east to a pad at about (7836,14872) under bc1's bus metals (not drawn)
 busl_x6992   P  7550,14816-14838   ?   poly row on east to a pad at about (7794,14826) (not drawn)
-busl_x6949   P  7060,7203-7225     ?   poly row on west into the crossing field; seen as poly to x 6720, not read
-busl_x6992   P  7060,7160-7182     ?   poly row on west into the crossing field; seen as poly to x 6720, not read
 # pieces fc, fd, fe (run 11): the next three Ls of the nest and their lines north of y 10400
 rcs_mv       P  6227-6247,6350     in  onto tl6's poly column from the corner of the row y 6238 (tl6's port rcs_mv there)
 rcs_mv       M  6964-6978,15000    out track x 6971 on south into bl0's ground; follower ends (6970,15282), candidate (6971,15098), not read
@@ -150,8 +147,6 @@ busl_x7122   P  7550,14469-14491   ?   poly row y 14480 on east toward bc1's bus
 # pieces ga, gb, gc (run 12): lines 11-13 of the staircase bundle, from the northern part to the rows y 14480, 14437, 14393
 lc1_w7780    P  6450,7770-7790     in  onto lc1's row of gate E1's output at its port (lc1's port lc1_w7780 there)
 lc1_w7780    P  7170,15207-15229   out the row y 15218 from the end pad (7100,15175), on east under ck_out's track toward bc1's rail x 7292-7342 (seen to x 7260; not drawn)
-busl_x6559   P  6800,7247-7269     ?   poly row y 7258 on west into the crossing field; not read
-busl_x6603   P  6845,7289-7311     ?   poly row y 7300 on west into the crossing field; not read
 busl_x6559   P  7550,14426-14448   ?   poly row y 14437 on east toward bc1's bus pads (seen as poly to x 7600; not drawn)
 busl_x6603   P  7550,14382-14404   ?   poly row y 14393 on east toward bc1's bus pads (seen as poly to x 7600; not drawn)
 # piece gd (run 13): tl5_w2722, line 14 of the staircase bundle
@@ -172,3 +167,10 @@ cdp3_g_c6    P  7000,14253-14275   ?   on east as bc1's line 5, to its contact (
 cdp3_g_c7    P  7000,14297-14319   ?   on east as bc1's line 6, to its contact (7405,14304)
 # piece xn (run 14): the north end of busl_x6906 = rst
 rst          P  6450,7377-7399     in  onto lc1's poly row of gate 3's output at its port (lc1's port rst there)
+# piece xm (run 15): the north end of busl_x6820 = lc3_m5756
+lc3_m5756    P  6450,9979-10001    ?   onto lc3's crossing row 10 at its port (from the END pad (5646,9992) of lc3_m5756); the row runs on east to the end pad (6817,9991) of the track x 6819
+# pieces ca, cb, cc, cd (run 15): the four poly Ls of the crossing field = the north ends of pieces fa, fb, gb, gc
+tc2_m6404    P  6399-6421,6400     ?   onto tc2's poly from its pad (6404,6107); column x 6410, row y 7171 to the pad (7165,7170); the wire's track name busl_x6992 is an alias
+tl6_p6187    P  6356-6378,6350     ?   onto tl6's poly from its pad (6360,6152); column x 6367, row y 7214 to the pad (7120,7214); alias busl_x6949
+tl6_p6143    P  6313-6335,6350     ?   onto tl6's poly from its pad (6318,6110); column x 6324, row y 7258 to the pad (6861,7257); alias busl_x6559
+tl6_p6101    P  6269-6291,6350     ?   onto tl6's poly from its pad (6275,6152); column x 6280, row y 7300 to the pad (6904,7301); alias busl_x6603

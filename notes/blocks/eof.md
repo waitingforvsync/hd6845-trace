@@ -5084,3 +5084,7 @@ Round 34: no findings that change a connection.
 ## Corrections (coordinator, from the handoff of `busl` run 14, 2026-11-21)
 
 - The northern part's list of undrawn tracks over the row y 8040, "x 7078": the track x 7078 is `rst` (`busl` run 14, piece `xn`); it crosses `eof`'s rows y 7648, 7777, 7888 and 8040 with no contact.
+
+## Corrections (coordinator, from the handoffs of `busl` run 15, 2026-11-21)
+
+- Ambiguities 34 and 39, and the list "the poly Ls under the metals y 7173, 7216, 7303" among the things still undrawn beside its pieces: the four Ls are drawn (`busl`, pieces `ca`..`cd`); the polys under the four arms are `tc2_m6404` (y 7171), `tl6_p6187` (y 7214), `tl6_p6143` (y 7258), `tl6_p6101` (y 7300), and no arm has a contact onto them.

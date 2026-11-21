@@ -996,3 +996,57 @@ N M 7078,8000 rst
 N P 7080,8620 rst
 N M 6906,9500 rst
 @alias rst busl_x6906
+# =====================================================================================
+# Piece xm (run 15, 2026-11-21): the north end of the through line busl_x6820 (piece x68). It is
+# lc3_m5756, the thin metal that lc2 and lc3 draw from lc1 down through latch B's column to an
+# END pad (5646,9992): lc3's crossing row 10 (`P 5630,9979:6450,10001`, its port lc3_m5756 at
+# (6450,9979-10001)) runs on east under six tracks (x 6472, 6514, 6558, 6602, 6733, 6775; no pad
+# on any: tiles l3_cross.png) and between two staircase arms that lie along its edges without
+# touching it (gc's y 9963-9977, gd's y 10007-10022) to its east end pad (6817,9991), where the
+# track x 6819 ends that piece x68 draws from y 10400 south. The track crosses three rows on the
+# way (regs' y 10056 and y 10316, h8's y 10361: no pad; chip 1's metal shot has a red spot on
+# the first crossing, chip 2 is plain). The names are gathered by an alias; the rename is the
+# coordinator's.
+# =====================================================================================
+P 6445,9990 x6817 w=22                # lc3's crossing row 10 on east from x 6450 to its end pad
+P 6798,9971:6836,10009                # the row's east end pad
+C 6817,9991 s=24x24
+M 6819,10410 y9989 w=14               # the track x 6819 from piece x68's metal north to the pad
+N P 6600,9990 lc3_m5756
+N M 6819,10200 lc3_m5756
+@alias lc3_m5756 busl_x6820
+# =====================================================================================
+# Pieces ca, cb, cc, cd (run 15, 2026-11-21): the four poly Ls of the crossing field, the north
+# ends of pieces fa, fb, gb, gc. Each of the rows y 7171, 7214, 7258, 7300 that those pieces left
+# as 60 px stubs west of their end pads runs on west as one poly row, under the tracks of the
+# crossing field and then for 220-330 px directly under one of eof's four metal arms (y 7173,
+# 7216, 7260, 7302: lpstb_b's, res_b's, rst_a's and tl3_w3982's metals lie ON these rows without
+# a contact: no ring, pad or hole along any, guide trap 13), and turns north at its west end
+# into a poly column. The four columns (x 6410, 6367, 6324, 6280; 24 px wide, 43 px apart, east
+# of rcs_mv's x 6237) run straight north under sixteen horizontal metals (y 6329 .. 7086; no pad
+# on any: tools/busl_padscan.py, views m7_c1..c3.png) onto the poly ends that tc2 and tl6 draw
+# to y 6400 / y 6350:
+#   ca: tc2_m6404 (tc2 `P 6405,6108 y6400 w=18`, from its pad (6404,6107)) = column x 6410 =
+#       row y 7171 = busl_x6992 (piece fa, foot row y 14827)
+#   cb: tl6_p6187 (tl6 `P 6365,6152 y6350`, pad (6360,6152)) = x 6367 = row y 7214 =
+#       busl_x6949 (piece fb, foot row y 14870)
+#   cc: tl6_p6143 (tl6 `P 6322,6110 y6350`, pad (6318,6110)) = x 6324 = row y 7258 =
+#       busl_x6559 (piece gb, foot row y 14437)
+#   cd: tl6_p6101 (tl6 `P 6282,6152 y6350`, pad (6275,6152)) = x 6280 = row y 7300 =
+#       busl_x6603 (piece gc, foot row y 14393)
+# The Ls are nested and do not touch: field is seen between each row's west end and the next
+# column west (tools/textmap.py 6256 7150 6440 7320 4 --acid). The names are gathered by
+# aliases; the renames are the coordinator's.
+# =====================================================================================
+P 6410,6395 y7171 x7065 w=22          # ca: column x 6410 from tc2's poly end, row y 7171 east onto fa's stub
+P 6367,6345 y7214 x7065 w=22          # cb: column x 6367 from tl6's poly end, row y 7214 east onto fb's stub
+P 6324,6345 y7258 x6805 w=22          # cc: column x 6324 from tl6's poly end, row y 7258 east onto gb's stub
+P 6280,6345 y7300 x6850 w=22          # cd: column x 6280 from tl6's poly end, row y 7300 east onto gc's stub
+N P 6410,6800 tc2_m6404
+N P 6367,6800 tl6_p6187
+N P 6324,6800 tl6_p6143
+N P 6280,6800 tl6_p6101
+@alias tc2_m6404 busl_x6992
+@alias tl6_p6187 busl_x6949
+@alias tl6_p6143 busl_x6559
+@alias tl6_p6101 busl_x6603
