@@ -22,3 +22,4 @@
 15845,17405:16140,17535  logic  data output inverter, bit 6 | the sixth copy of the output inverter: NOT the read bus's column 1; output east and south to a line toward the data pads
 16230,17590:17085,18095  route  bit 6 output line (d6_out_n) | from the inverter's pad a thin metal east and south, then a poly hop under the wide rail, beside the line of NOT column 0
 17100,17320:17830,18100  route  bit 6 output line (d6_out_n) into D6's pad cell | east to a pad, a poly hop under a rail, north on a thin metal x 17602, and a poly row east into the pad cell's strip
+16795,17995:17830,18960  route  bit 7 output line (d7_out_n) into D7's pad cell | from the bit 7 inverter's row: two poly hops under rails, a thin metal south, then 800 px of poly column west of d_hiz's metal and a row east into the pad cell's strip

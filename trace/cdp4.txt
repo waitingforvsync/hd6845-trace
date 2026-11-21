@@ -1080,3 +1080,28 @@ M 17602,18084 y17335 w=12
 P 17582,17324:17616,17358
 C 17599,17341 s=20x20
 P 17599,17342 x17825 w=22                # onto dpad's strip 4 of D6 (P 17802,17313:..., y 17313-17339): one poly, a step
+# ======================================================================
+# Run 11 (2026-11-21): the bit 7 output line into D7's pad cell. regs draws regs_w17462 (= NOT cdp3_n_c0) to
+# (16800,18012) on its poly row; the row runs on east under e_b's track and the wide rail (field) to a pad,
+# a thin metal east to a pad, a poly hop to a pad, a thin metal south on x 17558 to a pad, and a poly: east,
+# then a column x 17595-17613 south for 800 px (under the wide horizontal metal y 18175-18255, beside d_hiz's
+# cross-under, then in the open west of d_hiz's metal), then a row east under the rail x 17690-17765 into
+# the west end of strip 4 of D7's pad cell (dpad's {}_out_n poly): one poly, a step, as at D6.
+# ======================================================================
+P 16795,18012 x17080 w=20
+P 17063,17996:17097,18030
+C 17080,18013 s=20x20
+M 17080,18013 17428,18014 w=12
+P 17411,17997:17445,18031
+C 17428,18014 s=20x20
+P 17428,18014 17557,18014 w=22
+P 17540,17997:17574,18031
+C 17557,18014 s=20x20
+M 17557,18008 17558,18152 w=12
+P 17541,18129:17575,18163
+C 17558,18146 s=20x20
+P 17558,18140 x17613 w=20
+P 17604,18130 y18957 w=18
+P 17595,18946 x17825 w=22
+N M 17250,18014 d7_out_n
+@alias d7_out_n regs_w17462

@@ -73,6 +73,12 @@ x 17602 and a poly row east into the west end of strip 4 of D6's pad cell, one p
 D0-D6 read R12-R17 through the read bus. With every file loaded: 2517 nets, 4809 transistors, 0 errors,
 0 warnings. See "The bit 6 line" under Logic.
 
+Run 11 (2026-11-21 16:39 -0600): **the bit 7 line into D7's pad cell: `d7_out_n` = NOT `cdp3_n_c0`** (wiring only, four pads
+with contacts, no uncertain item): `regs`' inverter output `regs_w17462` from its port (16800,18012) east by
+two hops, south on a thin metal and 800 px of poly column into the west end of strip 4 of D7's pad cell.
+**All eight data pins now read R12-R17 through the read bus: `d#_out_n` = NOT `cdp3_n_c(7-#)`.** With every
+file loaded: 2516 nets, 4809 transistors, 0 errors, 0 warnings. See "The bit 7 line" under Logic.
+
 Not traced: the rest of the wiring right of x 10600 (the two thin metals x 10809 and x 10853, the rails'
 ends) and below y 14060.
 
@@ -597,6 +603,40 @@ Beside it, not drawn: `regs_w17462` (NOT column 0) runs the same way to a pad (1
 (17559,18014), and its metal goes SOUTH from there on x 17559 to about (17558,18149) (`tools/follow.py 17559
 18045 S --gap 16`), toward D7's pad cell; a third line on y 17945 turns north at its pad (17430,17945).
 
+### The bit 7 line into D7's pad cell (run 11, 2026-11-21; traced)
+
+`regs` draws its inverter's output `regs_w17462` (= NOT `cdp3_n_c0`) to a port (16800,18012) on a poly row.
+From there:
+
+- the poly row runs on east (y 18003-18022) under `e_b`'s track and the wide rail x 16940-17030
+  (`tools/railprof.py 16955 17025 17990 18040`: poly over field) to a pad (17080,18013) (ring x 17066-17070,
+  bright centre x 17078-17084 in both metal shots, hole in the clean shot: `tools/px.py row 18013 17046 17114
+  4`), the middle one of the three pads there (bit 6's is 65 px south);
+- a thin metal east along y 18014 (`tools/tl5_tracks.py h 18015 17110 17415`: no gap) to a pad
+  (17428,18014);
+- a poly hop east under the wide rail x 17470-17520 to a pad (17557,18014);
+- a thin metal SOUTH on x 17558 (two 9 px edge bars, `tools/tl5_tracks.py v 17558 18030 18125`) to a pad
+  (17558,18146) (ring y 18126-18134, bright centre y 18142-18150, ring y 18154-18162, hole in the clean
+  shot);
+- a poly from that pad east (y 18130-18150) to a column x 17595-17613, which runs south for 800 px: under
+  the wide horizontal metal y 18175-18255, 35 px west of `d_hiz`'s cross-under (`dpad`'s column
+  x 17633-17655), with field between them in the clean shot (`d7_top.png`, `ov11_top.png`, 4x), and then in
+  the open, west of `d_hiz`'s metal x 17633-17653: one orange poly on plain ground in both chip-2 shots and
+  chip 1's metal shot, with nothing beside or across it (`tools/px.py col 17608 18262 18942 20
+  metal,metal1`: orange at every sample; rows at y 18300, 18500, 18700, 18900: poly x 17597-17611; `d7_mid.png`,
+  3.4x, four shots);
+- at y 18935-18957 the column turns east as a row under the rail x 17690-17765 (salmon and uniform in the
+  clean shot) to x 17825, where it is one poly with the west end of strip 4 of D7's pad cell (`dpad`'s
+  `{}_out_n` block from x 17803, y 18918-18944): the same step as at D6 (`d7_bot.png`, `ov11_bot.png`, 4x).
+
+    d7_out_n = NOT cdp3_n_c0            d7_pu = NOR(d7_out_n, d_hiz)   (regs' inverter; dpad)
+
+`@alias d7_out_n regs_w17462` (the rename of `regs`' label is the coordinator's refresh).
+
+**So for every bit: pin D# is driven (while `d_hiz` is low) with the read bus's column 7 - # in true sense**:
+`d#_out_n` = NOT `cdp3_n_c(7-#)`, eight inverters (D0's at the foot of the data bus column in `dbus`, D1-D5's
+and D6's the cell `cdp4_ro`, D7's in `regs`).
+
 ### Corner gate group: `cdp4_rst` = NOR of six select rows (run 2, 2026-11-19; traced)
 
 Region x 7550-7870, y 13640-14055, left of row D. One gate, seven transistors:
@@ -664,6 +704,7 @@ islands are closed curves inside it, so they are the other class.
 | `vcc`, `vss` | metal | x 16515 and x 16689 at y 15780 (onto `dlat`'s rails); `vcc` drawn to y 16440 (goes on to about y 16478), `vss` ends at y 16446 | - | the units' rails |
 | `cdp3_n_c7` (= `cdp4_n_s7` = `dbus_do0_in`) | metal | (16950-16962, 16714): onto `dbus`'s metal | driven inside | the read bus, column 7 = the gate of D0's output chain (run 7) |
 | `d6_out_n` | poly | (17800-17825, 17313-17350): onto `dpad`'s strip 4 of D6's pad cell | driven inside | the output of the sixth output inverter, joined to the pad cell (run 10) |
+| `d7_out_n` (= `regs_w17462`) | poly | (16795-16800, 18012): onto `regs`' row; and (17803-17825, 18918-18957): onto `dpad`'s strip 4 of D7's pad cell | from `regs`' inverter | the bit 7 output line (run 11) |
 | `vss` | metal | x 16017-16059 at y 17285 and y 17535 (drawn ends; not followed) | - | the rail of the sixth output inverter and of the unit above it |
 | `cdp4_n_s0` | poly | x 10850, y 13333 | driven inside | selector output of slice 0: on east to its pad (11200,13330) on the read bus track of column 0, drawn by `regs` (piece `n0`) |
 | `cdp4_a_s2`..`s7` = `cdp3_f_c2`..`c7` | metal | x 8511 + offset, y 11048 (the end of `cdp3`'s line f, y 11052) | from `cdp3`'s row A | selector input a (6 bits); crosses row R1 with no contact (run 3) |
@@ -799,8 +840,8 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
   y 16505; PR #17: west at y 16498); the VCC rail south of y 16440 (to about y 16478: whether it meets the
   horizontal metal y 16493-16508 below it is not read; 12 px of dark between them at x 16515); what lies
   west of the VCC rail (x < 16490) beside the units.
-- From run 10: `regs_w17462` (NOT column 0) from `regs`' port (16800,18012) by its pads (17065,18010),
-  (17427,18014), (17559,18014) and a metal south on x 17559 to D7's pad cell (believed `d7_out_n`); the unit above the sixth inverter on the same rail (x 15840-16260, y 17260-17400: a weaker match of
+- From run 11: the third line beside bits 6 and 7 (a pad (17065,17945), a thin metal east along y 17950 to a
+  pad (17430,17945), then north): another net, not identified; the unit above the sixth inverter on the same rail (x 15840-16260, y 17260-17400: a weaker match of
   `cdp4_ro`, gate row y 17335 from a pad at about (16250,17335)); the ends of the rail x 16017-16059.
 - From run 5: the poly column x 13706-13730 under the rows.
 - From run 4: the undrawn poly from the west along
