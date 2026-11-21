@@ -10380,6 +10380,52 @@ what they touch. Told: the two findings in one line each, with the new lines of 
 
 Round 58: no findings.
 
+### Round 59 (full review; run 50, piece `bus2`; 2026-11-21, at commit 5c31420)
+
+A fresh reviewer agent on Claude Fable 5.2, briefed with the piece's claims only (the two lines pad by pad,
+the two second metals on the hop pads, the metal x 10356 not reaching the pad (10355,17603), the metal
+x 10397 ending on the pad (10397,17410)). Told to suspect: whether the vertical metals x 9553 and x 9813
+end on the pads or beside them, and whether the other line's pads have a second metal; the 33 px without
+metal at x 10356 and the jog at y 17649; the hop (a step under the wide metal, a tap); pads or two metals
+end to end on the long runs; the corner (10311,17823); the pads' contacts. Images in
+`cache/scratch/eof/review-59/` (11 used, 4x-5x; `px.py`, `tl5_tracks.py`, `follow.py`, `textmap.py`).
+
+- **Finding 1, changes a connection (a wire that leaves the piece): (10356,17866) is a T, not a corner.**
+  The metal x 10350-10362 also runs on south from the line y 17866 (`px.py col 10356 17868 17900 3
+  metal,metal1`: metal colour in both chips to y 17889, then the bar of a row's edge; `tl5_tracks.py v
+  10356 17840 18400`: bars only; `a3.png`, 5x, three shots; the follower: south to a corner (10364,18387),
+  east, south on x 10397 to a pad with a hole at about (10397,18427)). The tracer's own test had started
+  14 px below the junction's line. **Confirmed** by the tracer (`px.py col 10356 17856 17900 4`,
+  `px.py row 17890 10335 10380 4`, `r50_t1.png` at 5x in both metal shots). **Fixed** (commit 6ef3acc): a
+  stub `M 10356,17866 y17885 w=13` and a port at y 17885; the branch is not followed (Not done).
+- **Found correct**: both long runs unbroken, the bars at x 8956-8986 and x 10059-10091 plain cross-overs
+  (4x); the corner (10311,17823); the hop (both rows straight in both stripped shots, no step, no tap); the
+  contacts of the pads (9465,17822), (9857,17822), (10311,17474), (10397,17410), each with one metal only;
+  the vertical metals x 9553 and x 9813 on their pads (16 px dark on the north side against 14-20 px for
+  the pads' own rings; the protected strip runs into each pad); no metal at x 10356, y 17610-17643 (open
+  poly), the jog one metal with both tracks; open ground north of the pad (10397,17410); the follower's
+  contact candidates (10355,17798) and (10355,17715) are not contacts.
+- **Not checked**: the stubs north of y 17800; the poly beyond the two north pads; the branch south of
+  y 17900 beyond the tests above; the metal west of x 8755.
+
+Round 59: one finding that changes a connection, fixed.
+
+### Round 60 (fix check of round 59's change; 2026-11-21, after commit 6ef3acc, against 5c31420)
+
+A fresh reviewer agent on Claude Fable 5.2, briefed with the finding and the change only. Images in
+`cache/scratch/eof/review-60/` (3 used, 6x, both metal shots and the clean shot).
+
+- The stub is one metal with the junction: metal colour unbroken from the line to y 17887 in both chips,
+  the clean shot protected pink to y 17890, no gap at the line's south edge (trap 16 (c) does not apply);
+  beyond it only the 8-10 px bars of the poly row y 17897-17913's edges, and the metal runs on south. Its
+  width is x 10347-10363 (`px.py row 17880`), the drawn x 10350-10362 inside it; field at x 10372-10384
+  separates it from the track x 10397. Field only under the stub: no pad, ring, hole or box.
+- `tools/t.sh eof sameconn.py 5c31420`: 1202 nets, 2009 transistors, `connections identical`;
+  `.venv/bin/python tools/sameconn.py 5c31420`: 2517 nets, 4797 transistors, `connections identical` (the
+  stub adds a port, no join).
+
+Round 60: no findings.
+
 ## Not done
 
 - **Next (after run 50)**: the two bus lines are drawn to their east ends (piece `bus2`), so items (a)
@@ -10402,6 +10448,10 @@ Round 58: no findings.
   (9266,17641)); x 9813 north (follower: 1,800 px, by x 10045 and x 9961 to (9961,16341), close beside
   `ck_out`'s metal from the pad (9769,17910): read with a two-chip test and cuts, the follower may have
   changed track). There is a pad with a hole at about (9553,17627) north of the first one's corner.
+  And the third branch (review round 59): from the port (10356,17885) the metal x 10356 south (two-chip test:
+  bars only to y 18393; single-chip dim stretches at y 18092-18113, 18254-18298 in chip 2 and
+  y 18145-18167, 18187-18209 in chip 1, not examined), a corner (10364,18387), east, south on x 10397 to a
+  pad with a hole at about (10397,18427); the pad and its poly are not read.
   (c) the pad (10355,17603): a metal from the north on x 10356 ends on it and its poly is a column south
   under this piece's metal (another net; not read). (d) the bus lines y 17778 (pads about (9509,17778)
   and (9895,17776)) and y 17735 (pads (9465,17735) and (9860,17732)) of the same hop, and item (c) of the
