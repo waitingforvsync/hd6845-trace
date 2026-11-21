@@ -16,3 +16,5 @@
 13140,17760:14480,18312  route  read bus, columns 1-7: diagonal fan up to the rows y 17777-18037 | east of the hop under the trunks each line climbs 260 px on a diagonal
 14440,17760:16000,18055  route  read bus, columns 1-7: rows east through two more poly hops | under a rail at x 14600 and a wide rail at x 15830, no transistor; on east to the data output path (not followed)
 16000,17380:16820,18055  route  read bus, columns 1-7: the turn north | the rows end on pads; poly columns under the horizontal metals, stepping east, up to six tracks that go north toward the data bus column; column 1's goes into the gate group to the north-west
+16560,16520:16980,17380  route  read bus, columns 2-7: tracks north and nested corners | six thin metals; columns 2-5 turn east and north to the output units' staircase, column 6 ends on a pad, column 7 turns east onto D0's output chain input
+16780,15845:16970,16400  route  read bus, columns 2-6: end pads and rows into the data output units | interleaved with the pads of d5_out_n..d1_out_n; each read bus row goes west into the unit that (believed) inverts it onto the output line
