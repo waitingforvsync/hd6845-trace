@@ -4199,7 +4199,9 @@ N M 4118,11800 eof_wstrap_{}
 # fourteen rows and both gaps (tools/tl5_tracks.py v 4208 11000 18400: nothing 25 px or more without
 # metal in both chips but the fourteen contact rings; px.py row 11032 4116 4228 4: one metal
 # x 4128-4216; row 11080 4152 4312 4: the rail over a poly band y 11065-11095, the clean shot
-# protected across its whole width). Drawn to y 18240; south of that it widens and turns west (port).
+# protected across its whole width). The same band crosses under the rail at the top of every row
+# (y 11545-11569 in the master row s1, a stepped top edge; cream in the clean shot, no hole, no ring:
+# review round 53). Drawn to y 18240; south of that it widens and turns west (port).
 M 4128,11040 x4217 w=36
 M 4196,11040 y18240 w=46
 N M 4196,11500 vcc

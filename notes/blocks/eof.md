@@ -1210,6 +1210,10 @@ and rail G, which is `vcc`; the compared line is the lower unit's node.
   lies along both; nothing of that is read.
 - **All fourteen rows are alike** (`tools/eof_olrows.py`, written for this piece; medians over the
   fourteen rows, `tools/cdp1_sr.py`; three montages).
+- **Review round 53** (a full review, 21 images): no finding that changes a connection. Three points on
+  comments, confirmed: the greenish boxes are field on firmer grounds (the green under rail G is there
+  over bare field too and differs by the row); a poly band under rail G at the top of every row was
+  missing from Ambiguity 189's list (no ring on any); the poly PA shows the channel's signature.
 - **Read without an uncertain item, recorded as ambiguities**: the greenish boxes under rail G between
   each buried contact and the supply diffusion (185), the buried contacts as ties to the west tab (186),
   the plate as one poly across rail G's edge line (187), the poly PA (188), rail G over the poly bands
@@ -6491,6 +6495,17 @@ driver lies; the other three lead to the loads.
     has buried-contact boxes greenish under a metal, and a single outline between (b) and the supply
     diffusion would be no isolation. Settled by a shot of the bare silicon, or by the pull-downs once
     drawn (a node on `vcc` would have none).
+    **Review round 53 adds, checked here**: the green is not layout. (1) The upper box is not closed:
+    along x 4186 no edge line crosses between the upper plate's bottom (y 11672) and the lower plate's
+    top (y 11716) in either metal shot or chip 2's stripped shot, and the green fades into the pink
+    south of it (`tools/px.py col 4186 11664 11724 4`: 143/148/110 at y 11676 to 169/134/115 at
+    y 11712, the metal 175-242 throughout). (2) The same green lies under rail G's west half over bare
+    field south of the contact land (x 4180-4202, y 11919-11964): 119-127/154-161/91-101 in eleven rows
+    and pink (187-192/117-122/121-128) in s2, s8 and s10. (3) In row s10 the lower box itself is pink
+    (199/125/116 at (4188,16524), where the other thirteen rows have 132-151/147-162/101-113), and in
+    s11 and s12 the upper one is half way (180/131/120, 164/139/118). So under this rail the clean shot
+    shows field green in some places and pink in others, by the row: reading (a) without the window
+    (plain field), and (d) is out.
 186. **The buried contacts tie each gate to the west tab** (piece `ol`; no `?` item). The box has a
     heavy outline on every side, as the pilot's has, so the diffusion is not seen passing from the tab
     into it; the reading rests on the tan on both sides of the poly inside the box, on the tab ending
@@ -6510,10 +6525,16 @@ driver lies; the other three lead to the loads.
     tab's north edge. If the diffusions run on under it, it is the gate of transistors on both nodes
     (toward the open green area x 4062-4092 west of it, or between the two nodes); if not, it is a
     poly over field. Not read: the ports on both tabs' west edges say so. With it `larr`'s Not done
-    readings west of x 4100.
+    readings west of x 4100. Review round 53: the clean shot on PA is bright salmon only between the
+    edge lines (y 11659-11695 and y 11740-11767) and paler at y 11704-11728, the channel's signature
+    on both diffusions (not checked here beyond the montage; the next piece).
 189. **Rail G over poly, and its one contact per row** (piece `ol`; no `?` item). Rail G is drawn as one
     metal from `ur`'s `vcc` metal to y 18240 with no contact but the fourteen on the supply diffusions.
-    Poly bands cross under it at y 11065-11095 (above row s0), in each row (piece `hj`'s band, the
+    Poly bands cross under it at the top of every row (y 11545-11569 in the master row s1, a band with
+    a stepped top edge; row s0's is the one at y 11065-11095; found missing from this list by review
+    round 53, which read all fourteen: cream in the clean shot, 206-223/152-170/107-125 at
+    (4196,11557) in every row, no hole; the dark stretches in the metal shots are the stepped edge:
+    `tools/textmap.py 4166 17172 4226 17222 3` for s12, the dimmest), in each row (piece `hj`'s band, the
     plates), in gap 1 (y 14365-14385 and y 14425-14445), in gap 2 (y 16010-16030, y 16075-16095) and
     below the array (y 18160-18175, y 18205-18225). None has a ring in either metal shot, and the
     bands keep their width (no pad). The clean shot under the rail is not the usual salmon at three of
@@ -9230,6 +9251,68 @@ chip-2 metal overlay sheets (s5-s9) and checked the other rows' metal by measure
 of y 11940 is outside the piece.
 
 Round 52: no findings.
+
+### Round 53 (full review of piece `ol`; 2026-11-21 17:19 to 17:40 +0000, at commit 8b2bc20)
+
+One fresh reviewer (general-purpose agent, Claude Fable 5.2), briefed with the piece's ten claims
+(the two plates as one poly each; a transistor under each from a west diffusion to the supply strip;
+the strip's one contact on rail G; the stems and buried contacts onto the west tabs; the upper poly
+ending at its box with field below; the lower poly on south as the column of piece `hj`; the strap
+and its two contacts; rail G as one metal with `ur`'s `vcc` and no other contact; the fourteen copies;
+what is left as ports) and told to suspect: the greenish boxes between each buried contact and the
+supply strip, which side each buried contact ties to and whether the poly passes through it, poly
+between the two units in any row, the plate across rail G's edge line, diffusion up to the plates'
+west edges, rail G over the poly band at its top and a contact onto a band in the gaps, the three
+contacts in every row and any further one under the strap or the rail, a row that differs. 21 images
+(`cache/scratch/eof/review-53/`: medians of the upper and lower unit and the foot, overlays of the
+fourteen rows on the clean shot and chip 2's metal shot, the rail's top, the gaps, the foot, the band
+at the top of the rows), with `tools/px.py`, `tools/textmap.py`, `tools/tl5_tracks.py v` at x 4184 and
+x 4208, `tools/eof_olrows.py` and the extraction.
+
+**Findings: none that changes a connection.** Three points on comments, each checked here:
+
+1. **Ambiguity 185, the greenish boxes: field, on firmer grounds than the notes gave.** The upper one
+   has no south edge (no line crosses x 4186 between the plates in either metal shot or chip 2's
+   stripped shot); the same green lies under rail G over bare field south of the contact land in
+   eleven rows and is pink in s2, s8, s10; in s10 the lower box itself is pink. Checked
+   (`tools/px.py col 4186 11664 11724 4`; the fourteen rows at (4188,11840), (4188,11694) and
+   (4190,11940) + offset): confirmed, as the reviewer has it. Comment only: Ambiguity 185 has the
+   evidence; reading (d), the one that would change nets, is out. Nothing drawn changes.
+2. **Ambiguity 189's list of poly bands under rail G was incomplete.** A band crosses under the rail
+   at the top of every row (y 11545-11569 in the master; the notes had only row s0's, y 11065-11095).
+   No ring on any of the fourteen. Checked (the clean shot at (4196,11557) + offset: cream in every
+   row; `tools/textmap.py 4166 17172 4226 17222 3` for s12, where both metal shots are dimmest: the
+   stepped edge, no ring, no hole): confirmed. Comment only: the ambiguity and the trace file's
+   comment on rail G name the band. Nothing drawn changes.
+3. **The poly PA** (not drawn, Ambiguity 188): bright salmon in the clean shot only between the edge
+   lines on each west diffusion, paler between: the channel's signature, which supports the ports.
+   Recorded in Ambiguity 188 for the next piece; not checked here beyond the montage.
+
+**Checked and found correct** (the reviewer's list): each plate one outline across the rail's edge;
+diffusion to both plates' west edges (one edge line at x 4146-4148; the channel's edge lines cross the
+gap) and the channel extents; three contacts in every row and no ring elsewhere under the strap (no
+dark stretch of 18 px or more between y 11662 and y 11895 in any row) or under rail G; the supply
+strip unbroken; the strap one piece per row; the lower west diffusion not joined to the south box or
+to the upper tab; in every row a full dark line between tab and stem beside the stem and none at the
+box's level, and box centres that read like the pilot's; field between the units in all fourteen rows
+(plain in both metal shots, red minus green 3 or less in the stripped shot at the gap's centre; pink
+under the rail); the column continuous to `eof_hj`'s foot, crossing no diffusion; rail G joined to
+`ur`'s metal (metal in both chips across x 4128-4216 at y 11050), continuous over the band's stepped
+edge at y 11060-11075, through both gaps and to y 18240 (the dark blobs at (4188/4210,14370) are in
+chip 2 only); the extraction (28 loads; no other package's item under rail G or in the cell).
+
+**Could not check**: the diffusion inside each box's outline (Ambiguity 186 stands as written); the
+plate's join at the rail's edge line beyond the outline argument (Ambiguity 187); anything west of
+x 4100.
+
+After the round only comments changed (the trace file's comment on rail G; Ambiguities 185, 188, 189):
+
+```
+tools/t.sh eof sameconn.py 8b2bc20              ->  connections identical
+.venv/bin/python tools/sameconn.py 8b2bc20      ->  connections identical
+```
+
+Round 53: no findings that change a connection.
 
 ## Not done
 
