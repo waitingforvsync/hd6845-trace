@@ -2154,6 +2154,8 @@ N M 8186,17260 eof_w17338
 # 8350 17222 17300; a contact at about (8350,17248): a green hole with a pit).
 D 8332,17054:8376,17112
 C 8350,17078 s=24x30
+# (review round 35: at y 17048-17070 the box seems to go on west (x 8308-8332) and east (x 8385-8468)
+# as narrow bands of diffusion colour in chip 2: the unit above's, not drawn; notes, Not done)
 D 8284,17095:8340,17110
 D 8284,17095:8319,17248
 # the foot: the column's last 20 px run east under the rail (the dark line at x 8303-8308 in the
@@ -2196,6 +2198,8 @@ D 8414,17162:8515,17190
 P 8450,17142:8505,17237              # the plate
 # the tie: a heavy-outlined box (8410-8446, 17200-17240) below the strip, a tab of the plate into
 # it from the east, a tail of the node down from the strip. Drawn uncertain, as nor17's.
-?P 8422,17200:8456,17218
+# (review round 35: the tab meets the box at y 17214-17237, not higher: px.py row 17226 has orange
+# poly from x 8444 into the plate, row 17208 has none between the box and the plate)
+?P 8424,17214:8456,17237
 ?D 8414,17180:8434,17236
 ?B 8410,17198:8446,17240

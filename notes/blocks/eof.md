@@ -3246,11 +3246,13 @@ driver lies; the other three lead to the loads.
     from these lines. Working assumption: joined (the foot has no other way to a supply: closed west and
     south, no metal over it); no `?` item. If it were not, gate B would have no source.
 100. **The load's tie** (piece `n338`; box (8410-8446, 17200-17240)): a heavy-outlined box with a tab of the
-    plate and a tail of the strip, as in `nor17` and every cell of this build; drawn `?P`, `?D`, `?B`.
+    plate (it meets the box at y 17214-17237: review round 35) and a tail of the strip, as in `nor17` and
+    every cell of this build; drawn `?P`, `?D`, `?B`.
     `eof_w17338`'s equation is marked for that reason only.
 101. **Dark rings on the gate row B in the clean shot** at x 8078, 8121, 8165, 8208 (piece `n338`), each in
-    a gap between two tracks. Neither chip-2 shot nor chip 1's metal shot has anything there (`r28_bw.png`,
-    `r28_o2.png`): artefacts of the gaps (trap 2). No contact drawn.
+    a gap between two tracks. Neither metal shot has an outline or a metal there (`r28_bw.png`,
+    `r28_o2.png`); the chip-2 stripped shot has weak greenish spots on the row in the gaps (clearest at
+    x 8081-8084 and 8126-8129; review round 35), no box. Artefacts of the gaps (trap 2). No contact drawn.
 
 ## Review
 
@@ -4946,6 +4948,57 @@ the clean shot and both metal shots; the driver itself and the NOR were not re-r
 
 Round 34: no findings that change a connection.
 
+### Round 35 (full review of piece `n338`; 2026-11-21 03:23 to 03:38 +0000, at commit 7779d91)
+
+A fresh reviewer agent (Claude Fable 5.2), 23 images in `cache/scratch/eof/review-35/`. It was given the piece's
+six claims (the wire from row 1 by two pads and the metal x 8186; the output row into the box; the NOR with its
+VSS box, bar, column, two gates, foot, load and tie; the two gate rows' pads and track stubs) and told to
+suspect: the column in the open gap (one diffusion, two gates, no third); the foot's join to the diffusion
+under the rail and the bar's to the VSS box; the box (buried contact or a gate); the three pads on x 8186 and
+the bare ground between the first two; the pad (8010,17210) against `bc1_g6_in`'s corner; the dark rings on
+row B; the load's strip and plate; anything left out.
+
+What it checked (4.2-5.5x, two to four shots, with `px.py` profiles, `textmap.py --acid`, `tl5_tracks.py`,
+`railprof.py`, `opendiff.py`) and found as drawn: the column's two edge lines across rows A and B and both
+bands in both metal shots, both rows ending at about x 8333 with field under the rail; no edge at x 8319 on
+the output row (node and strip are one); the box a buried contact (poly stops at x 8310), not a gate; the bar
+joined to the VSS box; the slot south of the foot too narrow (13 px between two edge lines) for a third poly;
+no gate under the rail; the strip unbroken to the VCC box, the plate closed and gating only the strip; all
+four pads contacts; bare ground between the pads (8184,17105) and (8184,17170), between the pad (8186,17338)
+and `ck_out`'s corner metal (y 17366-17376), and between the pad (8010,17210) and `bc1_g6_in`'s corner
+(y 17237-17245); no contact on any of the five tracks over row B, nor of `ck_out`'s track on row A, the output
+row or row 1; row 1 one poly from the pad into the driver; x 8390-8500, y 17075-17155 field.
+
+Findings, all geometry only:
+
+1. **Diffusion-coloured bands at the region's north edge, y 17048-17070, that the piece leaves out**: a tab
+   west of the VSS box (x 8308-8332) and an arm east of it (x 8385-8468). Checked (`px.py row 17061 8296 8480
+   8`, `col 8430`, `col 8318`): both are plain in chip 2 between two dark lines, the east arm red minus green
+   21 in the stripped shot against 0-2 for the ground south of it, the west tab 7-18 against -3; each is a
+   band 10-14 px high (trap 38: no control of the same height). They would be parts of the VSS box that serve
+   the unit above (whose gate row lies at y 17036-17048); no gate of this piece is on them. **Not drawn**:
+   they are the unit above's and their class is not established; written into the trace's comment and Not
+   done. No connection of the piece depends on them.
+2. **The tie's tab** (Ambiguity 100): the plate's poly meets the box at y 17214-17237, not at the drawn
+   y 17200-17218. Confirmed (`px.py row 17226 8404 8460 4`: orange poly from x 8444 into the plate; `row
+   17208`: none between the box and the plate). Fixed: `?P 8424,17214:8456,17237` (still uncertain, still
+   inside the `?B`).
+3. **Ambiguity 101's wording**: the chip-2 stripped shot is not blank at the rings on row B (weak greenish
+   spots at x 8081-8084 and 8126-8129). The reading stands (no outline at 5x, no metal in the gaps, field
+   north and south of the row in each gap); the ambiguity's text is corrected.
+
+Could not check (the reviewer): Ambiguity 99 (a diffusion edge exactly under the rail's edge at the foot
+cannot be excluded; the dark line matches the control at y 17285 and y 17300, and it agrees with the
+assumption); the pad (8184,17105) in chip 1 (dim centre; the other three shots show a contact); the mirror
+twin `nor17` (under tracks, no use for comparison); nothing north of y 17048.
+
+The connections are the same before and after the fix:
+
+    tools/t.sh eof sameconn.py 7779d91           -> connections identical
+    .venv/bin/python tools/sameconn.py 7779d91   -> connections identical
+
+Round 35: no findings that change a connection.
+
 ## Not done
 
 - **Next (after run 28)**: (i) **the two inputs of the NOR that makes `eof_w17338`**: `eof_w17124`, the track
@@ -4956,7 +5009,9 @@ Round 34: no findings that change a connection.
   y 16640-16750 (trap 33: a continuous two-chip test, each step on a view); north of y 16300 it is `bc1`'s
   ground. (ii) `eof_w17472` (the driver's lower poly, west leg south of y 17560). Seen beside piece `n338`,
   other nets, not drawn (`bc3`, free): the unit above under the same rail (its gate under the rail at
-  y 17036-17046 shares the VSS box; an outlined box x 8262-8300 north of y 17058); `ck_out`'s track x 8229
+  y 17036-17046 shares the VSS box; an outlined box x 8262-8300 north of y 17058; at y 17048-17070 two
+  narrow bands of diffusion colour beside the VSS box, x 8308-8332 and x 8385-8468, believed that unit's
+  sources: review round 35, finding 1; class them against a control before drawing); `ck_out`'s track x 8229
   has a pad with a contact at (8229,16990) in its run, with a poly east (trap 32: the follower of run 18
   ended there; the metal runs on south to the corner (8230,17373) in both chips); the track x 8143 of the
   bundle between y 16750 and y 17340.
