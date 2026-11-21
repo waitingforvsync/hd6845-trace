@@ -565,3 +565,25 @@ M 15971,17735 x16776 y18012
 P 16755,17995:16792,18030
 C 16773,18012
 P 16773,18012 x16800
+
+# ======================================================================================
+# Run 6 (2026-11-21), piece n0: regs_w17648 is bus N, column 0
+# ======================================================================================
+# The bus metal y 17907-17911 of run 5 runs west from (12770,17907) to a corner (11200,17911) and
+# north on the track x 11200 of the bus field east of the central datapath, 7,245 px, straight,
+# through a pad (11200,13330) to its end on a pad (11200,10664). Each pad ends a poly row from the
+# datapath: y 13333 is cdp4's row "s0: n out to the right" (cdp4_n_s0, drawn to x 10850) and y 10664
+# is cdp3's channel G east piece of s0 (cdp3_n_c0, drawn to x 10850). No other pad or tap on the way.
+# --- A: cdp3's row y 10664 on east under eight vertical metals to its pad (no pad on any of them)
+P 10840,10664 x11200
+P 11183,10648:11221,10682
+C 11200,10664
+N P 11000,10664 cdp3_n_c0
+# --- B: the track x 11200 south, the corner, the bus row east onto run 5's stub at x 12770
+M 11200,10664 11200,17911 12780,17908 w=13
+# --- C: cdp4's row y 13333 on east to the pad in the track's run
+P 10840,13333 x11200
+P 11183,13313:11222,13348
+C 11200,13330
+@alias cdp3_n_c0 cdp4_n_s0
+@alias cdp3_n_c0 regs_w17648

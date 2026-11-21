@@ -6,6 +6,10 @@
 6395,17000:6425,18145  route  reset copy lc2_w8450, track x 6408 | south to the bottom bus
 6395,18105:10500,18145  route  reset copy lc2_w8450 along the bottom bus | the row y 18125 east with three hops
 10120,17750:10500,18105  route  reset copy lc2_w8450 to the bottom-centre logic | the diagonal's corner and the thin track x 10485 north beside the east gate column
-12770,17630:15580,17925  route  bus line regs_w17648 to its inverter | from the bottom bus pad (12806,17907) by two hops and the row y 17648 to a gate
-15577,17370:15900,17530  logic  inverter regs_w17462 = NOT regs_w17648 | pull-down under the ground rail's south end, load at the VCC rail; south of the R13 select buffer
+12770,17630:15580,17925  route  bus N column 0 to its inverter | from the bottom bus pad (12806,17907) by two hops and the row y 17648 to a gate
+15577,17370:15900,17530  logic  read buffer of bus N column 0 (regs_w17462 = NOT cdp3_n_c0) | pull-down under the ground rail's south end, load at the VCC rail; south of the R13 select buffer
 15577,17630:16800,18030  route  regs_w17462 east | poly under the VCC rail to a pad, the bus line y 17735, the track x 16776 south to a pad
+10840,10645:11225,10685  route  bus N column 0 out of R12/R13's rows | cdp3's row y 10664 east to the pad (11200,10664)
+10840,13310:11225,13350  route  bus N column 0 out of the R14-R17 selector | cdp4's row y 13333 east to the pad (11200,13330)
+11190,10685:11212,17920  route  bus N column 0, track x 11200 | south 7,245 px down the bus field east of the central datapath to the bottom bus
+11190,17895:12790,17925  route  bus N column 0 along the bottom bus | the row y 17909 east to the trunk hop
