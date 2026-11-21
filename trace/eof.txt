@@ -3531,3 +3531,63 @@ P 4700,13668:4722,13689
 P 4718,14136:4758,14174
 C 4736,14155
 P 4700,14141:4722,14162
+
+# Piece ld1 (run 39): what a row of the left array does with the line. Master: larr's row s1
+# (y 11470-11947), the pad (4736,11771) of eof_w15998. Region x 4270-4710, y 11690-11900 of
+# each of the fourteen rows (larr's east column, free). The pad's poly row runs west under
+# the VSS metal x 4647-4692 to x 4640 and turns north as an L (x 4640-4667, y 11710-11779,
+# cream without a hole in the clean shot; no ring in either metal shot); from the L's top a
+# band y 11711-11734 runs west: through the 25 px of open ground between the VSS metal and
+# a short metal strap x 4597-4613, under the strap, 22 px in the open, to a poly column
+# x 4537-4558 that goes south to y 11778 and on west as a long band y 11760-11777 under two
+# thin metals and a wide one to a dead end at x 4275 under the rail x 4256-4302 (field on
+# every side at six cuts, px.py col at x 4290, 4346, 4390, 4455, 4510, 4546; no contact:
+# eof_cchk.py 4284,11768 4455,11768 4518,11768).
+# Under the band a diffusion x 4566-4632 (its west and east edges are dark lines across the
+# poly at x 4562-4568 and x 4631-4637: px.py row 11722 4556 4676 3): ONE TRANSISTOR, gate
+# eof_w15998. South of the gate the diffusion (y 11736-11754, and a box x 4590-4630 to
+# y 11780) has a metal contact (4608,11757) (ring and bright centre in both chips, green
+# hole in the clean shot, pits in chip 2's stripped shot: eof_cchk.py -9, 178 / 163) on the
+# strap, which runs from y 11697 to y 11898 (tl5_tracks.py v 4605 11380 11980) over field,
+# the diffusion line y 11816-11828 (cdp3_hw_c#'s; no hole, no ring: eof_cchk.py 4605,11812)
+# and a poly band y 11834-11850 (no hole: 41) to a second contact (4607,11881) on a diffusion
+# box (tan with a hole; eof_cchk.py -4, 217 / 229), drawn only round the contact: the box
+# is part of a group of bands and strips west and south of it that is not read.
+# North of the gate the diffusion is 14 px (y 11694-11708) and ends on a heavy-outlined
+# box (x 4600-4635, y 11662-11692), not drawn.
+@cell eof_ld tag=s1
+P 4640,11758:4705,11779
+P 4640,11711:4667,11779
+P 4537,11711:4667,11734
+P 4537,11711:4558,11778
+P 4275,11759:4558,11776
+D 4566,11694:4632,11754
+D 4590,11736:4630,11780
+C 4608,11757
+# the strap is the south part of one thin metal per row, y 11527-11898: north of the gate it
+# lies half on a poly column x 4607-4625 (two dim halves with a dark line between in both
+# metal shots: trap 19; the clean shot is protected there: tan x 4595-4604, cream x 4610-4625,
+# pink at y 11656: px.py row 11612 / 11636 / 11656 4586 4634 3) and ends at y 11527 on a poly
+# band y 11527-11545 (no hole, no pad: eof_cchk.py 4605,11536: 43). Over the heavy-outlined
+# box north of the diffusion neither metal shot shows it for 38 px (trap 27): uncertain there
+M 4605,11527 y11662 w=16
+?M 4605,11662 y11700 w=16
+M 4605,11700 y11898 w=16
+C 4607,11881
+D 4592,11857:4628,11897
+N D 4610,11700 eof_nbox_{}
+N M 4605,11800 eof_strap_{}
+@end
+@inst eof_ld 0,-478 tag=s0
+@inst eof_ld 0,477 tag=s2
+@inst eof_ld 0,954 tag=s3
+@inst eof_ld 0,1431 tag=s4
+@inst eof_ld 0,1909 tag=s5
+@inst eof_ld 0,2385 tag=s6
+@inst eof_ld 1,3079 tag=s7
+@inst eof_ld 1,3557 tag=s8
+@inst eof_ld 1,4034 tag=s9
+@inst eof_ld 1,4684 tag=s10
+@inst eof_ld 1,5162 tag=s11
+@inst eof_ld 1,5639 tag=s12
+@inst eof_ld 1,6116 tag=s13
