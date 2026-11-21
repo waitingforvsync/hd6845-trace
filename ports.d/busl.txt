@@ -107,8 +107,7 @@ bus_eq_r15     D  7600,11092-11127   in  the diffusion band goes on east under c
 bd1_n2       M  6704-6718,15000    in  onto eof's metal from the bottom bus field (piece n2w): the output of bd1's latch on R4's match
 bd1_n2       M  6769-6783,10400    out onto eof's metal north (piece n2n, then labelled as an open join): to the inverter that makes rcs_e3
 # pieces x68, x69 (run 7): two through lines beside it
-busl_x6820   M  6813-6827,10400    ?   the track goes on north; follower ends (6817,9988), not read
-busl_x6820   M  6747-6761,15000    ?   on south into bl0's ground; follower ends (6754,16220), not read
+busl_x6820   M  6747-6761,15000    ?   onto bl0's metal, south to its pad (6754,16217) and on; the wire is lc3_m5756 (piece xm, @alias)
 busl_x6906   M  6834-6848,15000    out onto bl0's metal (its run 5): south to the gate that clears the light pen flag bl0_w17610; the wire is rst (piece xn, @alias)
 # pieces r12, r13 (run 8): the read selects of R12 and R13
 rsel12_buf   M  6445-6459,15000    in  onto regs' metal from the bottom bus (sel's buffer); track x 6452
@@ -172,3 +171,5 @@ cdp3_g_c6    P  7000,14253-14275   ?   on east as bc1's line 5, to its contact (
 cdp3_g_c7    P  7000,14297-14319   ?   on east as bc1's line 6, to its contact (7405,14304)
 # piece xn (run 14): the north end of busl_x6906 = rst
 rst          P  6450,7377-7399     in  onto lc1's poly row of gate 3's output at its port (lc1's port rst there)
+# piece xm (run 15): the north end of busl_x6820 = lc3_m5756
+lc3_m5756    P  6450,9979-10001    ?   onto lc3's crossing row 10 at its port (from the END pad (5646,9992) of lc3_m5756); the row runs on east to the end pad (6817,9991) of the track x 6819

@@ -4,11 +4,11 @@ Queue row `busl` of `notes/work-packages.md` (written busL until 2026-11-19): th
 left array (`larr`, rows end at x 4780) and the central datapath (`cdp3`, `cdp4`, from x 7600).
 Claimed region: x 4780-7550, y 10400-15000 (the main part; the northern part 6450-7600 x 6750-10400
 is not started). Coordinates are metal-shot pixels; images are in `cache/scratch/busl/`. Wiring only:
-no transistor has been found in the field so far. Twenty-five pieces are drawn: `h8`, `ch1`, `lc9`, `ctl`, `d6`, `sr`, `kb`, `n2`, `x68`, `x69`, `r12`, `r13`, `e6`, `p2`, `fb`, `fa`, `fc`, `fd`, `fe`, `ga`, `gb`, `gc`, `gd`, `a6`, `xn`.
+no transistor has been found in the field so far. Twenty-six pieces are drawn: `h8`, `ch1`, `lc9`, `ctl`, `d6`, `sr`, `kb`, `n2`, `x68`, `x69`, `r12`, `r13`, `e6`, `p2`, `fb`, `fa`, `fc`, `fd`, `fe`, `ga`, `gb`, `gc`, `gd`, `a6`, `xn`, `xm`.
 Pieces `d6`, `sr` and `kb` begin in the northern part (x 7180-7600, y 8795-10400), drawn there as far
 as their pads or, for `sr`, the end of `eofw`'s metal; pieces `fb` and `fa` run through it from y 10400
 to their end pads at (7120,7214), (7165,7170), and pieces `fc`, `fd`, `fe` (run 11) likewise, to `tl6`'s
-port (6236,6350), `tc2`'s port (7533,6400) and the wide rail at (7592,8863), and pieces `ga`, `gb`, `gc` (run 12) to `lc1`'s port (6450,7780) and the end pads (6861,7257), (6904,7301), and piece `gd` (run 13) through the northern part and `lc1`'s strip to `tl5`'s port (5365,6350), and piece `xn` (run 14) to `lc1`'s port (6450,7388); nothing else of the northern part is.
+port (6236,6350), `tc2`'s port (7533,6400) and the wide rail at (7592,8863), and pieces `ga`, `gb`, `gc` (run 12) to `lc1`'s port (6450,7780) and the end pads (6861,7257), (6904,7301), and piece `gd` (run 13) through the northern part and `lc1`'s strip to `tl5`'s port (5365,6350), and piece `xn` (run 14) to `lc1`'s port (6450,7388), and piece `xm` (run 15) to `lc3`'s port (6450,9990); nothing else of the northern part is.
 
 ## Status
 
@@ -326,6 +326,43 @@ second piece, `xn`, wiring only, no uncertain item: the north end of the through
   the extraction gives, firm (`tools/unsure.py --equations`): **`bl0_w17610` = NOT((`bl0_w17337` AND
   `bl0_w17687`) OR `bl0_w17440` OR `rst`)**. No pad, contact or tap in the 9,300 px between `lc1`'s port
   and y 15000. The two names are gathered by `@alias rst busl_x6906`; the rename is the coordinator's.
+
+Run 15 (the loop's tracer, Claude Fable 5.2; 2026-11-21 00:39 +0100 on). First the head of the Next list,
+"the bands y 11850-12150 and below (the undrawn rows)": **there is none; the main part is drawn but for
+supply metal and one short poly row** (below). Then piece `xm`, wiring only, no uncertain item: the north
+end of the through line `busl_x6820`; and a check of `trunks`' line in the field (re-read item R4).
+
+- **No undrawn row or signal track is left in the main part** (x 4780-7550, y 10400-15000). Three checks:
+  (1) the new `tools/busl_mdrawn.py` lists the metals along a cut (both chips pass the follower's metal
+  test) with the trace item that covers each: along rows every 60 px from y 10420 to y 14990 (x 5030-7560)
+  and along columns every 50 px from x 4800 to x 7550, the only metals that no package draws are the wide
+  metal x 4955-5018 (the whole height; a supply by its width, not followed), the VCC metal x 5340-5390
+  with its branch west along y 10600-10645 (run 9's item (3)), and the two wide metals over the foot rows
+  at the lower right (x 7483-7535, y 14030-14850; x 7378-7513, y 14840-15000); (2) a mask of the chip-2
+  stripped shot's poly colour minus every package's poly, diffusion and contact items
+  (`cache/scratch/busl/l_left.py`, scratch) leaves nothing of row height but the row y 10560 at the top
+  left (x 5110-5272: item (4) of Not done) and a patch at (6021-6057, 10704-10727) under piece `h8`'s
+  track; (3) two views of the field south of y 11780 in the chip-2 stripped shot with every package's
+  trace outlined (`l_s1.png`, `l_s2.png`, 0.46x): every row and every track of the bands y 11850-12150,
+  12550-12900, 13300-13700, 14050-14300 and 14450-14950 carries an outline. The list of "undrawn rows"
+  that Not done carried since run 7 (y 13417, 13548, 13590, 13633, 13699, 14178, 14220, 14437, 14698)
+  was of rows drawn before or since: `ch1`'s channel-2 rows, `ctl`'s row of `rsel14_buf`, `a6`'s lines 3
+  and 4, `gb`'s row and `lc9`'s `rst_c`.
+- **`busl_x6820` is `lc3_m5756`** (piece `xm`). The track x 6819 ends 410 px north of the region on a pad
+  (6817,9991), the east end of `lc3`'s crossing row 10 (y 9990): `lc3` draws that row from the END pad
+  (5646,9992) of its thin metal `lc3_m5756` east to x 6450 (its port), and it runs on as one poly, 367 px
+  under six tracks with no pad, to this pad. So the through line that `bl0` follows south from
+  (6754,15000) to a pad (6754,16217) and on is the metal that `lc2` and `lc3` draw down from `lc1`
+  through latch B's column (x 5756; no contact found on it in either strip). Wiring, no uncertain item;
+  neither end is identified (north: `lc1`, the metal x 5756 at y 8067; south: `bl0`'s port (6754,17000)).
+  The two names are gathered by `@alias lc3_m5756 busl_x6820`; the rename is the coordinator's.
+- **`trunks`' line has no tap in the field** (re-read item R4, the field's part: x 6798 from y 15000 to
+  the arm y 13331, x 6862 from there to y 10400 and on to the diagonal at y 8990). Under the piece `xm`
+  heading: no pad by the new `tools/busl_padscan.py`, no hole in the clean shot, six places read at 4x.
+
+Full extraction with run 15, piece `xm`: 2,454 nets (one fewer than main's 2,455: `busl_x6820` with
+`lc3_m5756`), 4,594 transistors, 0 errors, 0 warnings. The package by itself: 67 nets, 0 errors, and the
+fourteen warnings of run 14.
 
 Full extraction with run 14: 2,455 nets (seven fewer than main's 2,462: the six joins of piece `a6` and
 `busl_x6906` with `rst`), 4,594 transistors, 0 errors, 0 warnings; none of the seven nets is in
@@ -1460,6 +1497,71 @@ the column, the diagonal and the row were then read on views and by the text too
   passes there.
 - Overlays: `k5_o_col.png`, `k6_o_diag.png`, `k7_o_row.png`.
 
+### Piece `xm` (run 15): the north end of `busl_x6820`, which is `lc3_m5756`
+
+Survey: `cache/scratch/busl/survey.md`, "Run 15". `tools/follow.py 6819 10200 N --gap 16` ends at
+(6817,9988) (from (6820,10300) it reports no metal: the start lies on the edge bar of `regs`' row y 10316);
+the end, the row and every crossing were then read on views and by the text tools below.
+
+| | west end | poly row | end pad | track | joins |
+|---|---|---|---|---|---|
+| `xm` `lc3_m5756` | `lc3`'s poly end (6450,9990) (`P 5630,9979:6450,10001`, crossing row 10, its port `lc3_m5756`) | y 9990, x 6450-6798, 20-22 px | (6817,9991) | x 6819, y 9991-10400, 11-12 px | piece `x68`'s `M 6754,15000 y13290 x6820 y10400` |
+
+- **The end pad (6817,9991) is a contact** (`l1_end.png`, 3x, both metal shots and the clean shot; the
+  last tile of `l3_cross.png`, 4x, four shots): a square dark ring about 40 px across with a bright centre
+  about 12 px across in both metal shots (`tools/busl_padc.py 6817,9988`: (6817,9992) in both chips), a
+  green-centred pad in the clean shot, a ring with a pale centre in the chip-2 stripped shot. The track
+  arrives from the south and ends on it; the poly row leaves west (orange in both metal shots); east of
+  the pad the clean shot is pink (field under the margin of `trunks`' track x 6862) and both metal shots
+  plain; north of it there is only the olive strip between the protected margins of the tracks x 6775 and
+  x 6862 (trap 2), plain ground in both metal shots (a dark speck in chip 1 at (6812,9925)).
+- **The row y 9990 from `lc3`'s port to the pad** (`l2_row.png`, 3x, chip-2 metal, chip-2 stripped and
+  clean shots stacked, every package's trace outlined; overlay `l6_o1.png`): one poly row, edges y 9980
+  and y 10000, orange in the chip-2 shots, red-brown in the clean shot where it is in the open (the gaps between the
+  tracks x 6472, 6514, 6558, 6602 and x 6733, 6775 and the pad) and pale between the two staircase arms
+  that run along it:
+  `busl_x6603`'s (piece `gc`) arm y 9963-9977 from x 6602 to x 6689 lies 3 px north of the row's edge, and
+  `tl5_w2722`'s (piece `gd`) arm y 10007-10022 from x 6646 to x 6733 lies 7 px south of it; neither is on
+  the row and both are within the 10 px that a metal protects, which is why the row is pale there (it is
+  open and orange between the arms in the chip-2 metal shot, blue 42-62 at x 6624-6708, `tools/px.py row
+  9990 6612 6730 12 metal`: poly, trap 39). `tools/busl_roww.py 9990
+  6440 6840 --win 21`: a row 16-30 px wide in two or more shots at every sample but x 6440, 6614 and the
+  pad (6806-6836); no sample 32 px wide; centre 9991.5 (median). The join to `lc3`'s poly is by overlap
+  (this piece starts at x 6445).
+- **Six tracks cross the row and none has a pad** (`l3_cross.png`: each crossing at 4x in both metal
+  shots, the chip-2 stripped shot and the clean shot, with the end pad as the control): x 6472 (`tla`'s
+  `rcs_e4`), 6514 (`lc1_w7780`), 6558 (`busl_x6559`), 6602 (`busl_x6603`, 10 px south of its corner),
+  6733 (`tl5_w2722`, 15 px north of its corner) and 6775 (`eof`'s `bd1_n2`). `tools/tl5_tracks.py v X
+  9940 10040` on each: the row's two edge bars (8-10 px) and metal between them in both chips;
+  `tools/busl_padscan.py v X 9945 10035`: no ring beside any (the pad itself: 40 px on the east flank).
+  The clean shot's colour under the tracks differs by crossing, as trap 15 says: vivid red under x 6514
+  (red minus green over 120), greenish under x 6558 (10 px, minimum -3) and x 6733 (6 px); the metal is of
+  constant width with no ring at each, and the row is not widened (`tools/textmap.py 6455 9966 6622 10014
+  3 --acid`). The crossing of x 6472 is dimmer than the others in both chips (red 160-190 against
+  200-220) and mottled, without a ring: read as no contact.
+- **The track x 6819 from the pad to y 10400** (`tools/busl_both.py h` at y 10020 .. 10380: centre
+  6818-6819, 11-12 px; `tools/tl5_tracks.py v 6819 10000 10405`: no stretch without metal in both chips
+  but the edge bars of the three rows it crosses; no hole in the clean shot). The rows: `regs`' y 10056
+  (`rsel12_buf`) and y 10316 (`rsel13_buf`), piece `h8`'s y 10361 (`l4_trk.png`, 4x, four shots). **Chip
+  1's metal shot has a round red spot on the first crossing, (6819,10056)** (153/51/56, with chip 1 alone
+  failing the metal test for 33 px); chip 2's metal is plain bright there (217/193/73) between the row's
+  two edge bars, with no ring and no widening, and the clean shot is orange-red protected poly without a
+  hole (`tools/textmap.py 6770 10030 6875 10082 3 --acid`): dirt on chip 1, not a contact.
+- **`trunks`' line, taps (R4)**: `trace/trunks.txt` line 140, `M 6798,16183 y13331 x6862 y8990 ..`. New
+  tool `tools/busl_padscan.py` (a pad's dark ring beside a track, in both chips; it finds the pads
+  (6817,9991), (5713,12443), (6538,13701) at 40, 42 and 32 px and reads 6-8 px at a plain crossing):
+  `v 6798 13350 15000`, `h 13331 6790 6870`, `v 6862 10400 13315` and `v 6862 8995 10400`: no stretch.
+  `tools/tl5_tracks.py` on the same four pieces: no stretch without metal in both chips over 16 px (the
+  16 px is at y 13701-13716, the south half of `rsel14_buf`'s row and its edge line, where both chips
+  are dim, red 159-196 with green 94-142, `tools/px.py col 6798 13684 13746 4 metal,metal1`; just south
+  of it chip 2 has a dark blemish at y 13716-13728 where chip 1 is bright; no ring beside the track at
+  either); clean-shot lows of 6-10 px at y 13551, 14091, 14176, 14525,
+  14569, 14785 and (6862,9709), each on a row the line crosses. Six of the places read at 4x in four
+  shots (`l5_trunk.png`: (6798,13636), (6798,13718), (6798,13852), (6798,14525), (6798,14567),
+  (6798,14690)): a plain crossing at each, the metal of constant width, no ring, no pad. **No tap on
+  `trunks`' line between y 8995 and y 15000.** Not checked: the line south of y 15000 and its poly
+  cross-unders (`trunks`, `bl0`).
+
 ## Logic
 
 Wiring only. Traced: the eight joins above (no uncertain item on any). From `cdp3`'s notes:
@@ -1541,8 +1643,11 @@ the latch and that inverter the net is wire only (about 23,000 px: the bottom bu
 marked, not firm, for reasons outside this package (the latch's load tie in `bd1`, an uncertain item
 at `tl4`'s inverter).
 
-Pieces `x68`, `x69`. Traced: two through lines with no connection in the region. What they are is
-not known: named for their place (`busl_x6820`, `busl_x6906`).
+Pieces `x68`, `x69`. Traced: two through lines with no connection in the region, named for their
+place (`busl_x6820`, `busl_x6906`). Since runs 14 and 15 both north ends are read: `busl_x6906` is `rst`
+(piece `xn`) and `busl_x6820` is `lc3_m5756` (piece `xm`: wiring, no uncertain item), the thin metal that
+comes down from `lc1` through `lc2`'s latch B column and `lc3` with no contact drawn on it; neither end of
+that wire is identified.
 
 Pieces `r12`, `r13`. Traced (no uncertain item of this package): `rsel12_buf` (`sel`'s buffered select
 of R12, drawn by `regs` to the field's south edge) is one net with `rsel12_buf` and with gate row 4 of
@@ -1644,8 +1749,8 @@ is a second load of gate 3 besides the inverter that makes `rst_n`. No transisto
 | `bus_eq_r15` | D | x 7600, y 11092-11127 | in | the diffusion band goes on east under column 0's VSS rail (x 7600-7646) into `cdp3`'s ground (not drawn) |
 | `bd1_n2` | M | (6704-6718,15000), 14 px wide | in (driven by `bd1`'s latch) | onto `eof`'s metal from the bottom bus field (piece `n2w`, `M 6711,15000 ..`) |
 | `bd1_n2` | M | (6769-6783,10400), 14 px wide | out | onto `eof`'s metal north (piece `n2n`, `M .. 6775,10400`, then labelled as an open join): to `tl5`'s bus line x 5412 and the inverter that makes `rcs_e3` |
-| `busl_x6820` | M | (6813-6827,10400) | not known | the track goes on north; the follower ends at (6817,9988), not read |
-| `busl_x6820` | M | (6747-6761,15000) | not known | on south into `bl0`'s ground; the follower ends at (6754,16220), not read |
+| `lc3_m5756` (the track's name was `busl_x6820`) | P | (6450, 9979-10001) | not known | onto `lc3`'s crossing row 10 at its port (`P 5630,9979:6450,10001`, from the END pad (5646,9992) of its metal `lc3_m5756`); piece `xm`, run 15. The track crosses y 10400 at x 6819 inside the wire |
+| `busl_x6820` (= `lc3_m5756`) | M | (6747-6761,15000) | not known | onto `bl0`'s metal, south to its pad (6754,16217) and on (`bl0`'s port (6754,17000)) |
 | `rst` (the track's name was `busl_x6906`) | P | (6450, 7377-7399) | in (driven by `lc1`'s gate 3) | onto `lc1`'s row of `rst` at its port (`P 5096,7388 x6450 w=18`); piece `xn`, run 14. The track crosses y 10400 at x 6906 inside the wire |
 | `busl_x6906` (= `rst`) | M | (6834-6848,15000) | out | onto `bl0`'s metal (its run 5), south to the gate of the pull-down that clears the light pen flag `bl0_w17610` |
 | `rsel12_buf`, `rsel13_buf` | M | (6445-6459,15000), (6487-6501,15000), 14 px wide | in (driven by `sel`'s buffers) | onto `regs`' metals from the bottom bus (`M 6452,16168 y14990`, `M 6494,16210 y14990`) |
@@ -2452,10 +2557,19 @@ Round 1: no findings.
 
 ## Not done
 
-- Everything else in the field: about 20 more tracks and the other rows. Next pieces, in the
+- **The main part (x 4780-7550, y 10400-15000) has no undrawn signal track and no undrawn row but the
+  one at the top left (run 15: Status, with the three checks).** What is left in it: the wide metal
+  x 4955-5018 (the whole height; a supply by its width: which one is not read; a white residue of metal
+  on it at y 11800-12000 in the chip-2 stripped shot, `l_s1.png`); the VCC metal x 5340-5390 with its
+  branch west along y 10600-10645 (item (3)); the poly row y 10560 at the top left (x 5110-5272) and the
+  top band's ninth row (item (4)); the two wide metals over the foot rows (below); a patch of poly colour
+  at (6021-6057, 10704-10727) under piece `h8`'s track x 6039 (not looked at); a small group at the west
+  edge (4790-4850, 14370-14520) beside the pad on the track x 4838, seen on `l_s2.png` (`larr`'s side;
+  not looked at). The earlier list, kept for its item numbers ("about 20 more tracks and the other rows"
+  was the state after run 1). Next pieces, in the
   order they join things: (1) done in run 6 (pieces `sr`, `kb`; `wr_r15`'s row does not enter the field); (2) done in run 8 (pieces `r12`, `r13`: the rows y 13744 and y 13852 and the two tracks); (3) done in run 9 (pieces `e6`, `p2`), but for the VCC metal
   x 5340-5390 and its branch west along y 10590-10650 (supply; not drawn); (4) the top band's ninth row (y 10317, `rsel13_buf`) and the three poly rows
-  at the top left (y 10560, 10686, 10736); (5) done in run 9 (piece `e6`: the staircase at x 5100-5700 is its nest of Ls); (6) the bands at y 11850-12150 and below; (7) the foot of the field: rows y 14827 and
+  at the top left (y 10560, 10686, 10736); (5) done in run 9 (piece `e6`: the staircase at x 5100-5700 is its nest of Ls); (6) the bands at y 11850-12150 and below: nothing is undrawn there (run 15); (7) the foot of the field: rows y 14827 and
   14870 and their tracks: done in run 10 (pieces `fa`, `fb`); the
   net that starts on row y 14523 at the pad (7100,14522): done in run 11 (piece `fd`: it is `tc2_r5718`); the rows above
   y 14523 (`bc1`'s bus has four more, y 14354-14482): of row y 14480 the part east of the pad (7143,14481) is piece
@@ -2517,8 +2631,9 @@ Round 1: no findings.
   rows); west of x 7060 the rows y 7214 and y 7171 across the crossing field, under `eof`'s staircase
   arms from x 6650 on (the northern part; their west ends are beyond x 6400, in `lc1`'s strip).
 - The other lines of the diagonal bundle north of y 10400: `busl_x6906` is piece `xn` (run 14: it is `rst`);
-  the lines x 7035, x 7078 and x 7121 are pieces `fc`, `fd`, `fe` (run 11). Of the bundle only `trunks`'
-  line's taps (R4) and `busl_x6820`'s north end are left.
+  the lines x 7035, x 7078 and x 7121 are pieces `fc`, `fd`, `fe` (run 11); `busl_x6820`'s north end is
+  piece `xm` (run 15: it is `lc3_m5756`) and `trunks`' line has no tap between y 8995 and y 15000 (run 15).
+  Nothing of the bundle is left.
 - Pieces `fc`, `fd`, `fe`'s ends: `rcs_mv`'s track x 6971 south of y 15000 (follower: to (6970,15282),
   candidate (6971,15098): `bl0`), where its loads must be; `tc2_r5718`'s row y 14524 and `busl_x7122`'s
   row y 14480 east of x 7550 (`bc1` (continue), with the nine rows of pieces `lc9`, `fb`, `fa`), and
@@ -2552,10 +2667,14 @@ Round 1: no findings.
   staircase metals over the three poly columns, `trunks` draws the one at y 8452 and `eofw` the one at y 8498;
   whether any package draws the third (y about 8540 west of x 6880) and the one over column 3 at y about 8625
   was not checked.
-- `trunks`' two lines in the field: taps not checked (R4).
-- The north end of the through line `busl_x6820` (run 7): follower end (6817,9988), in the northern part; its
-  south end (6754,16220) is `bl0`'s. (`busl_x6906` is done: piece `xn`, run 14, north; `bl0` run 5, south.
-  The tracks east of them, x 6949 and x 6992, are pieces `fb` and `fa`, run 10.)
+- `trunks`' line in the field (one line: x 6798 / arm y 13331 / x 6862): no tap between y 8995 and
+  y 15000 (run 15, under piece `xm`). Its part south of y 15000 and its poly cross-unders are not
+  checked here (R4 stays open for those).
+- The ends of the through line `busl_x6820` = `lc3_m5756` (pieces `x68`, `xm`): north, `lc2`'s metal x 5756
+  at y 8067, on into `lc1` (its port there, not followed); south, `bl0`'s thin metal from the pad
+  (6754,16217) on (its port (6754,17000); follower: a corner (6767,18040), east past (7417,18035)).
+  (`busl_x6906` is done: piece `xn`, run 14, north; `bl0` run 5, south. The tracks east of them, x 6949
+  and x 6992, are pieces `fb` and `fa`, run 10.)
 - Seen beside piece `xn` and drawn by no package (the northern part): the track x 7036 over the row y 7388
   (the track `eof`'s notes have from the corner (7035,6957)); two rows under the metal x 7078 at y about
   7430 and 7474 (the first is the row under the row y 7388 on `k3_row7388.png`, which runs on east past
@@ -2566,6 +2685,9 @@ Round 1: no findings.
   (Of these, y 14178 and y 14220 are lines 3 and 4 of piece `a6`, run 14, with y 14091, 14134, 14264, 14308:
   no pad between their west end pads and `bc1`'s contacts; y 14437 is piece `gb`'s row and y 14698
   piece `lc9`'s `rst_c`.)
+  (Run 15: none of these is undrawn. y 13417, 13548, 13590 and 13633 are piece `ch1`'s channel-2 rows of
+  s2, s5, s6 and s7 (y 13418, 13549, 13592, 13636), and y 13699 is piece `ctl`'s row of `rsel14_buf`
+  (y 13701). This item is closed.)
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
 
