@@ -970,6 +970,49 @@ array the line is the gate of one pass transistor.**
 Full extraction with run 39: 2,504 nets, 4,664 transistors, 0 errors, 0 warnings. The package by itself:
 1,112 nets, 1,878 transistors, 0 errors, 81 warnings (other packages' names; 81 before the run).
 
+Run 40 (Tom Seddon's session, Claude Fable 5.2; 2026-11-21 12:45 +0000 on). One piece, `mx1`
+(28 transistors: one cell of two, placed on the fourteen rows), no uncertain item: **the strap's node is where
+three pass transistors meet: the one the load line gates, and two wide ones south of it, one from the
+diffusion line that enters the row from the east and one from the poly band along the row's south edge.**
+
+- **Traced** (piece `mx1`; cell `eof_mx`, master in `larr`'s row s1): the group south of the strap is one
+  active area (x 4462-4655, y 11838-11946) crossed by two poly bands. North of the upper band lies the end
+  of the diffusion line that comes into the row from the east (`eof_mxn_s#`; it turns south at x 4548-4564
+  and runs west as a strip); between the bands a strip that is one diffusion with the box of the strap's
+  south contact (`eof_strap_s#`); south of the lower band a strip `eof_mxs_s#`. Extracted, fourteen times:
+  `t gate eof_ga_s#: eof_strap_s# <-> eof_mxn_s#`, W/L 217/23, and `t gate eof_gb_s#: eof_strap_s# <->
+  eof_mxs_s#`, W/L 193/22. Neither has an end on a supply: two more pass transistors on the strap's node,
+  three times as wide as the one the load line gates (66/23).
+- **The two gates come from pads on two thin metals.** The upper band is a Z round the contact's box; its
+  west end joins a poly column under the wide metal x 4430-4480 and a row y 11808-11825 east to a pad with
+  a contact (4517,11811) in the run of the thin metal x 4510-4527. The lower band runs west to a pad with a
+  contact (4352,11912) in the run of the thin metal x 4338-4354. Each thin metal runs on north and south
+  of its pad; only a stub over each pad is drawn, and **whether each is one line through the fourteen rows
+  is not read** (the next piece): the gates are named by row.
+- **The south strip is tied to the poly band south of it** by a buried contact at its west end (a
+  heavy-outlined U, x 4456-4490, y 11925-11978). The band (y 11955-11972 in row s1) runs west into the
+  array and east under the VSS metal: drawn from x 4420 to x 4700.
+- **Seen, not drawn (believed)**: in row s1 the diffusion line is `busl`'s `cdp3_hw_c6` (its end at
+  (4780,11815); the 80 px between are seen whole on `r40_i1.png` and by `tools/px.py row 11816`) and the
+  band is `busl`'s `cdp4_bus_s6` (its row end (4780,11922); the poly jogs south at x 4703-4723 onto the
+  band: `tools/px.py col 4712`). If the other rows are alike, the strap's node takes **R13's bit** (rows
+  s0-s7; `bl0`'s lines in s8-s13) through the upper transistor and is joined to **the row's compared line**
+  (`cdp4_bus_s#` / `cdp3_g_c#`, the line that R15 / R14 is compared with and that `cdp4` latches) through
+  the lower one. The joins differ row by row (`busl`'s rows arrive at x 4780 between 68 px north and 40 px
+  south of the bands) and are the next piece.
+- **Ambiguity 156 after this run**: the box under the strap's south contact has no supply contact and no
+  pull-down's source; it is a node between pass transistors. With a contact at the strap's north end the
+  node would be VSS and the upper transistor would tie the diffusion line (believed a register's output) to
+  ground whenever its gate is high. The photos' evidence at the north end is as it was.
+- **Read without an uncertain item, recorded as ambiguities**: the strip and the contact's box as one
+  diffusion (157); the two bands as gates over one active area in the open stretches (158); the buried
+  contact (159); the band south of the group as no gate (160); the bands' east ends under the VSS metal's
+  edge (161); the metals that cross the three diffusions, and the clean shot's rings in the gap (162); two
+  pads that one chip shows badly (163); the diffusion line's turn beside the upper pad (164).
+
+Full extraction with run 40: 2,560 nets, 4,692 transistors, 0 errors, 0 warnings. The package by itself:
+1,168 nets, 1,906 transistors, 0 errors, 81 warnings (other packages' names; 81 before the run).
+
 Full extraction after run 2: 2,351 nets, 4,232 transistors, 0 errors, 0 warnings; the package
 by itself (it loads `rdp3`): 0 errors, 0 warnings.
 
@@ -1104,6 +1147,7 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `cap218`, the device on `eof_w16218`'s pad (4736,16932) | x 4850-5020, y 16700-16910 | gate plate (4852-4927, 16828-16858) over a diffusion box (4870-4916, 16812-16905); contact (4886,16884) under a metal island (4859-4917, 16840-16903), net `eof_w16884`; neck (4883-4900, 16750-16815) and diffusion wire y 16750-16768 east to a box (4950-5005, 16738-16786) with a contact (4972,16759) under the VCC metal x 4953-5018 (drawn y 16700-16800). One transistor, 46/30 |
 | `t4780n`, `eof_w15998`'s track and its seven pads | x 4700-4790, y 11270-17212 (a path) | wiring: thin metal x 4773-4785 from the pad (4778,17212) north to y 14159, an arm west y 14153-14165 onto the pad (4736,14155), thin metal x 4730-4742 north to the end pad (4736,11292) through pads (4736,13680), (4736,13201), (4736,12724), (4736,12247), (4736,11771); each pad with a contact and a poly row west drawn to x 4700 (y 11280-11301, 11759-11780, 12235-12256, 12712-12733, 13189-13210, 13668-13689, 14141-14162). No transistor |
 | `ld1`, the transistor the line gates in each row (cell `eof_ld`, 14 copies) | x 4270-4710, y 11690-11900 in row s1; the copies at dy -478, 477, 954, 1431, 1909, 2385 and (dx 1) 3079, 3557, 4034, 4684, 5162, 5639, 6116 | poly: the pad's row y 11758-11779 west to an L (4640-4667, 11711-11779), a band y 11711-11734 west to a column (4537-4558, 11711-11778), a long band y 11759-11776 west to a dead end at x 4275; diffusion (4566-4632, 11694-11754) with a box (4590-4630, 11736-11780) and a contact (4608,11757); thin metal x 4597-4613, y 11522-11898 (y 11662-11700 `?M`, over a box); contact (4607,11881) on a diffusion box (drawn 4592-4628, 11857-11897). One transistor per row, 66/23: gate the line, between `eof_nbox_s#` (north) and `eof_strap_s#` (south) |
+| `mx1`, the two pass transistors on the strap's node in each row (cell `eof_mx`, 14 copies) | x 4325-4705, y 11785-11980 in row s1; the copies at dy -477, 477, 954, 1431, 1909, 2386 and (dx 1) 3079, 3557, 4034, 4684, 5162, 5639, 6116 | one active area (4462-4655, 11838-11946) with the diffusion line from the east (y 11805-11825 to x 4640, y 11816-11828 to its turn at x 4549-4563) on its north side. Upper gate `eof_ga_s#`: a Z-shaped poly (band y 11853-11877, x 4434-4590; vertical part x 4564-4590; band y 11830-11851 to x 4664), a column (4434-4450, 11808-11877), a row y 11808-11825 east to a pad and contact (4517,11811) on the thin metal x 4510-4527. Lower gate `eof_gb_s#`: a band y 11902-11924 from a pad and contact (4352,11912) on the thin metal x 4338-4354 to x 4666. South strip y 11926-11945 with a buried contact (4462-4488, 11954-11973) onto the band y 11955-11972 (`eof_mxs_s#`, drawn x 4420-4700). Two transistors per row: 217/23 between `eof_strap_s#` and `eof_mxn_s#`, 193/22 between `eof_strap_s#` and `eof_mxs_s#` |
 
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
 
@@ -3801,6 +3845,134 @@ and the wide metal (x 4455-4530, y 11695-11745, a contact at about (4470,11720))
 narrow band north of the long band (x 4385-4430, y 11700-11745); a pad with a contact (4518,11808) on
 the thin metal; the group of bands and strips x 4455-4655, y 11825-11950; a ring at about (4560,11640).
 
+### Piece `mx1`: the strap's node has two more pass transistors, from the diffusion line and from the band south of the group (traced; no uncertain item; a cell placed fourteen times)
+
+Run 40, 2026-11-21. Region x 4325-4705, y 11785-11980 in `larr`'s master row s1 (the group south of the
+strap of piece `ld1`), and the same rectangle in the other thirteen rows: the left array's east column
+(`larr` (continue), free). Views of the master: `r40_a1.png`, `r40_a2.png` (2.7x, four shots, the group),
+`r40_b1.png`, `r40_b2.png` (5x: the contact's box, the Z, the line's turn), `r40_c1.png`, `r40_c2.png` (4x:
+the east half and the bands' ends), `r40_d1.png`, `r40_d2.png` (3.9x: the west half), `r40_e1.png` (3x, metal
+over clean: the row's south edge), `r40_f1.png` (5x, three shots: the column under the wide metal),
+`r40_h1.png`, `r40_h2.png` (5.6x: the south strip's west end), `r40_i1.png` (3.6x: east to `busl`'s ports);
+overlays `r40_o1.png`, `r40_o2.png` (3x); the fourteen rows with the trace, `r40_m1.png`, `r40_m2.png`
+(clean shot, 1.6x) and `r40_m3.png` (chip 2's metal shot, 1.1x).
+
+**One active area, x 4462-4655, y 11838-11946, and two poly bands across it** (master coordinates). From
+north to south, with the measurement that carries each:
+
+1. **The diffusion line from the east** (`eof_mxn_s#`). East of x 4640 it is y 11805-11825: tan under the
+   VSS metal and under the track x 4736, a narrow diffusion's colours in the open at x 4764-4788
+   (`tools/px.py row 11816 4536 4790 6`); from x 4640 to x 4564 it is y 11816-11828 (plain between two
+   edge lines at x 4575, tan under the strap at x 4605: `tools/px.py col 4575 11800 11960 4`, `col 4605
+   11802 11962 4`). **At x 4548-4564 it turns south** and runs west as a strip y 11838-11852 to x 4462
+   (a neck 12-15 px wide; `tools/px.py col 4556 11812 11852 3 all`: plain in both metal shots from
+   y 11821 to y 11845 without a line across, like the line and the strap's strip and unlike the poly
+   beside it; Ambiguity 164; tan under the thin metal at x 4518, y 11842-11850). Drawn to x 4700, under the VSS metal's east edge.
+2. **The upper gate** (`eof_ga_s#`), a Z-shaped poly: a band y 11853-11877 from x 4434 to x 4590, a
+   vertical part x 4564-4590 up to y 11830, and a band y 11830-11851 on east to a free end at x 4664.
+   Under the thin metal x 4510-4527 and under the strap it is the bright cream of poly over a channel
+   (245/148/116 to 237/177/121 at x 4518; 233-251/135-190/112-130 at x 4605, as piece `ld1`'s gate), and
+   in the open it is orange in both chips (`tools/px.py row 11840 4530 4700 3`; `col 4575`: poly from
+   y 11836 to y 11872 without a break, the vertical part). The active's west edge is the dark line
+   x 4458-4464 across it and its east edge the dark line x 4653-4656 (`row 11840`, `row 11866 4580 4664
+   3`); the band ends 9 px beyond.
+3. **The strap's node** (`eof_strap_s#`): a strip y 11879-11900 from x 4462 to x 4590, and the box
+   x 4590-4655, y 11851-11899 of the strap's south contact (4607,11881), which the Z goes round. The
+   strip is diffusion (chip 2's stripped shot red over green by 12-25 at y 11888, x 4536-4581, against
+   0-4 for field; tan under the thin metal), the box tan under the strap and the VSS metal's edge
+   (`tools/px.py row 11888 4530 4700 3`, `row 11866`, `col 4650`). **Read as one diffusion** (Ambiguity
+   157).
+4. **The lower gate** (`eof_gb_s#`), a band y 11902-11924 from its pad to a free end at x 4666: open poly
+   between the pad and the wide metal (x 4376-4420), cream over field under the wide metal's west part,
+   the dark line of the active's west edge at x 4460-4464, bright cream from x 4468 (`tools/px.py row
+   11912 4300 4480 4`), bright under the thin metal (246-251/171-181 at x 4518), open poly at x 4575 and
+   x 4605 (the strap ends at y 11898), cream at x 4650 (`col 4400 11890 11934 4`, `col 4518`, `col 4575`,
+   `col 4605`, `col 4650`).
+5. **The south strip** (`eof_mxs_s#`), y 11926-11945 from x 4462 to x 4655 (`tools/px.py row 11937 4400
+   4670 5`: tan under the metals, a narrow diffusion's colours in the open, pink field west of x 4460,
+   the east edge at x 4655). No contact on it.
+
+**The upper gate's wire.** West of the active the band joins a poly column x 4434-4450, y 11808-11877,
+under the wide metal x 4430-4480 (`tools/px.py col 4442 11790 11886 4`: cream 210-233/140-175/112-129
+from y 11810 to y 11870, pink field above and below; `tools/textmap.py 4424 11840 4486 11886 2 --acid`:
+at y 11846 the poly is x 4436-4447 only, at y 11860 it runs on to the active's edge). The column's top
+turns east as a row y 11808-11825 (`tools/px.py row 11814 4424 4548 4`: cream from x 4440 to x 4504 but
+for the gap's bar at x 4488-4492) to **a pad with a contact (4517,11811)** in the run of the thin metal
+x 4510-4527: a green hole at x 4508-4524 (160/181/102), ring and bright centre in both chips
+(`tools/eof_cchk.py 4518,11808`: -25, 227 / 193). The wide metal makes no contact with the column (cream
+without a hole; `tools/eof_cchk.py 4446,11845 4446,11864`: 16, 40, no ring).
+
+**The lower gate's pad**: a contact (4352,11912) in the run of the thin metal x 4338-4354
+(`tools/textmap.py 4318 11880 4392 11944 2`: a bright centre x 4346-4356, y 11906-11918 in both chips, the
+ring y 11890-11932, a green hole x 4346-4358; `tools/eof_cchk.py`: -28, 225 / 190; the metal itself is
+bright at x 4341-4350 away from the pad: `tools/px.py row 11870 4326 4372 3`).
+
+**Both thin metals run on north and south of their pads and are drawn only as stubs over them.**
+`tools/tl5_tracks.py v 4347 11430 12400` finds the west one whole between rows but for the pads' rings,
+bars of 8-13 px and one stretch of 18 px (y 11629-11647, again 477 px on); `tools/tl5_tracks.py v 4518
+11330 12300` loses the east one for 47 px in each row (y 11544-11591, again y 12021-12070), where
+`r40_g1.png` and `r40_g2.png` show it over a poly's edges with the clean shot protected under it: not
+read (trap 19 or a break). So the gates carry row names, and whether a row's gate is on the same net as
+the next row's is the next piece.
+
+**The south strip is tied to the band south of it.** At the strip's west end a U-shaped heavy outline
+(x 4456-4490, y 11925-11978) runs down from the strip across a poly band y 11955-11972. Inside the U the
+band's level reads tan, like the strip (189-208/155-182/130-137 at x 4474, y 11958-11967), where the
+band outside it is cream (221/163/114 at x 4520), and no dark line parts strip and band inside it (the
+darkest sample 135/112/94, against 89/75/46 outside): `tools/px.py col 4474 11922 11990 3` against `col
+4520`. Along the band (`tools/px.py row 11962 4420 4500 4`): cream poly x 4428-4452, the heavy line,
+tan x 4468-4476, the heavy line, open poly from x 4492. **A buried contact** (Ambiguity 159). The band
+runs on west of x 4428 (open poly) and east under the thin metal, through the open and under the VSS
+metal; it is drawn from x 4420 to x 4700 with a port at each end. East of the U it does not gate the
+strip: between them is a double edge 12-15 px wide, and south of the band is field (pink under the thin
+metal at x 4520; red over green by 4-9 in chip 2's stripped shot at x 4575 and x 4625, where the strip
+reads 15-16: `tools/px.py col 4575 11936 12000 3`, `col 4625`; Ambiguity 160).
+
+**No metal contacts the three diffusions.** The thin metal x 4510-4527 and the wide metal's east part
+cross all three strips: over each strip a bright stretch between the strip's two edge bars, no ring, no
+hole in the clean shot (trap 36; `tools/eof_cchk.py 4518,11842 4518,11888 4518,11937 4472,11842
+4472,11888 4472,11937`: no ring all round at any). The two bands' ends under the VSS metal's edge have no
+contact either (Ambiguity 161).
+
+**The copies.** `tools/t.sh eof findcell.py 4325 11785 4705 11980 --min 0.5 --region 4250,11200:4780,18200
+--orient 0 --layer metal`: fourteen hits, 0.85 to 0.91, at dy -477, 0, 477, 954, 1431, 1909, 2386 (dx 0)
+and 3079, 3557, 4034, 4684, 5162, 5639, 6116 (dx 1); the clean shot gives the same within 2 px (0.89 to
+0.94). On the three montages the outlines lie on the same features in all fourteen rows: both pads' holes,
+the column and the row, the Z, the box, the lower band, the U. `tools/eof_cchk.py` on the 28 pads: a hole
+of -8 to -50 at 27 of them (the other, s6's lower pad, +6: dull, not green), a ring in both chips at all,
+and a centre over 145 in both chips at 24; at the other four one chip's centre is dull (107-128) or, on
+s12's upper pad, hidden by a dark blemish in chip 2 (Ambiguity 163).
+
+**Extracted**: 28 transistors. In each row `W/L 217/23, gate eof_ga_s#: eof_strap_s# <-> eof_mxn_s#` and
+`W/L 193/22, gate eof_gb_s#: eof_strap_s# <-> eof_mxs_s#`; with piece `ld1`'s `W/L 66/23, gate eof_w15998
+/ eof_w16218: eof_nbox_s# <-> eof_strap_s#`, three transistors on the strap's node, none with an end on a
+supply. `tools/unsure.py`: no uncertain item in the piece. `tools/t.sh eof sameconn.py fb3382b`: the
+differences are the 56 new names and the 28 transistors.
+
+**What it says (traced).** In each row of the left array the node `eof_strap_s#` can be joined to three
+things: to the diffusion line from the east while `eof_ga_s#` is high, to the row's south band while
+`eof_gb_s#` is high, and to `eof_nbox_s#` while the load line is high.
+
+**Believed, not traced.** (1) In row s1 the diffusion line is `busl`'s `cdp3_hw_c6` and the band is
+`busl`'s `cdp4_bus_s6`: both are seen whole between this piece's ports at x 4700 and `busl`'s ends at
+x 4780 (`r40_i1.png`; the line: `tools/px.py row 11816 4536 4790 6`; the band's poly jogs south at
+x 4703-4723 from `busl`'s row y 11912-11932: `tools/px.py col 4712 11896 11986 5`, poly without a break
+from y 11918 to y 11972). The other rows' joins are not looked at; `busl`'s rows reach x 4780 at
+y 11488, 11922, 12442, 12984, 13397, 13874, 14351 where the bands lie at y 11486 + 477 k, so the jogs
+differ. If every row is like s1: the diffusion line is R13's bit, inverted (`cdp3_hw_c7` .. `c0` in rows
+s0-s7; in s8-s13 the lines `bl0` brings, believed R12's), and the band is the row's compared line
+(`cdp4_bus_s7` .. `s0` in s0-s7, `cdp3_g_c7` .. `c2` in s8-s13). (2) The two thin metals are two select
+lines common to the fourteen rows. (3) Then the strap's node is a two-way selector between the display
+start address bit and the row's own address line, and the load line passes the selected value on to
+`eof_nbox_s#`: the loading of a start-of-row value from R12/R13 or from the address the row holds. Which
+end drives the band (this node through the lower transistor, or the row's cells west of x 4420) is not
+traced.
+
+**Seen in the region, other nets, not drawn**: the wide metal x 4430-4480 and the thin metals x 4510-4527
+and x 4338-4354 beyond their stubs; the VSS metal; a poly band y 12004-12022 south of the row's south
+band (the next row's VSS-tied band, piece `ld1`); the khaki rectangle x 4365-4420, y 11790-11895 (open
+ground between two metals, as piece `ld1` read it).
+
 ## Ports
 
 The net is driven outside the package (by `rdp2`'s NOR). `in` marks the port beyond which the
@@ -3892,7 +4064,10 @@ driver lies; the other three lead to the loads.
 | `eof_w16000` | poly | (8800, 15727-15745) | in | piece `lat15`: the upper latch's data: the poly row west of the pad (8880,15738), where it enters a heavy-outlined box (8762-8795, 15722-15757) at column B's east edge (not read: by its place a unit's output) |
 | `eof_w16000` | metal | (8831-8845, 16030) | ? | piece `lat15`: the track x 8838 on south of the data pad (8838,16000) (the follower: to (8838,17306); not checked) |
 | `eof_nbox_s0` .. `eof_nbox_s13` | diffusion | (4566-4632, 11216), (4566-4632, 11694), (4566-4632, 12171), (4566-4632, 12648), (4566-4632, 13125), (4566-4632, 13603), (4566-4632, 14079), (4567-4633, 14773), (4567-4633, 15251), (4567-4633, 15728), (4567-4633, 16378), (4567-4633, 16856), (4567-4633, 17333), (4567-4633, 17810) | ? | piece `ld1` (run 39): the north end of the diffusion of the transistor that the line gates, one per row of the left array (s0 at the top). 14 px north of the gate it ends on a heavy-outlined box (x 4600-4635, y 11662-11692 in row s1), not drawn: believed a buried contact onto a poly column x 4605-4625 that goes north across the diffusion box of a VSS contact (4665,11622). (The fourteen poly ports of pieces `t4736s` and `t4780n` at x 4700 are gone: the rows are drawn on to this transistor) |
-| `eof_strap_s0` .. `eof_strap_s13` | diffusion | (4592-4628, 11379-11419), (4592-4628, 11857-11897), (4592-4628, 12334-12374), (4592-4628, 12811-12851), (4592-4628, 13288-13328), (4592-4628, 13766-13806), (4592-4628, 14242-14282), (4593-4629, 14936-14976), (4593-4629, 15414-15454), (4593-4629, 15891-15931), (4593-4629, 16541-16581), (4593-4629, 17019-17059), (4593-4629, 17496-17536), (4593-4629, 17973-18013) | ? | piece `ld1` (run 39): the diffusion box under the south contact of the strap, drawn only round the contact. The box is one of a group of poly bands and diffusion strips (x 4455-4655, y 11825-11950 in row s1) that is not read; it goes on at least east to x 4650 |
+| `eof_mxn_s0` .. `eof_mxn_s13` | diffusion | (4700, 11328-11348), (4700, 11805-11825), (4700, 12282-12302), (4700, 12759-12779), (4700, 13236-13256), (4700, 13714-13734), (4700, 14191-14211), (4701, 14884-14904), (4701, 15362-15382), (4701, 15839-15859), (4701, 16489-16509), (4701, 16967-16987), (4701, 17444-17464), (4701, 17921-17941) | ? | piece `mx1` (run 40): the diffusion line that enters the row from the east, drawn to x 4700 under the VSS metal; it goes on east. In row s1 it is seen to be `busl`'s `cdp3_hw_c6` (its end at (4780,11815)); the join is not drawn in any row (Not done). (The fourteen ports of `eof_strap_s#` are gone: the box under the strap's south contact is drawn whole and has no other way out) |
+| `eof_mxs_s0` .. `eof_mxs_s13` | poly | east: (4700, 11478-11495), (4700, 11955-11972), (4700, 12432-12449), (4700, 12909-12926), (4700, 13386-13403), (4700, 13864-13881), (4700, 14341-14358), (4701, 15034-15051), (4701, 15512-15529), (4701, 15989-16006), (4701, 16639-16656), (4701, 17117-17134), (4701, 17594-17611), (4701, 18071-18088); west: (4420, 11478-11495), (4420, 11955-11972), (4420, 12432-12449), (4420, 12909-12926), (4420, 13386-13403), (4420, 13864-13881), (4420, 14341-14358), (4421, 15034-15051), (4421, 15512-15529), (4421, 15989-16006), (4421, 16639-16656), (4421, 17117-17134), (4421, 17594-17611), (4421, 18071-18088) | ? | piece `mx1` (run 40): the poly band along the row's south edge, which the south strip joins by a buried contact; drawn from x 4420 to x 4700 and going on both ways: west into the array (open poly), east under the VSS metal. In row s1 it is seen to be `busl`'s `cdp4_bus_s6` (a jog at x 4703-4723 up to the row end (4780,11922)); the join is not drawn in any row |
+| `eof_ga_s0` .. `eof_ga_s13` | metal | (4510-4526, 11318-11348), (4510-4526, 11795-11825), (4510-4526, 12272-12302), (4510-4526, 12749-12779), (4510-4526, 13226-13256), (4510-4526, 13704-13734), (4510-4526, 14181-14211), (4511-4527, 14874-14904), (4511-4527, 15352-15382), (4511-4527, 15829-15859), (4511-4527, 16479-16509), (4511-4527, 16957-16987), (4511-4527, 17434-17464), (4511-4527, 17911-17941) | ? | piece `mx1` (run 40): the stub of the thin metal x 4510-4527 over the pad of the upper gate (contact at (4517, 11811) in row s1); the metal runs on north and south. Whether it is one line through the fourteen rows is not read |
+| `eof_gb_s0` .. `eof_gb_s13` | metal | (4338-4354, 11418-11453), (4338-4354, 11895-11930), (4338-4354, 12372-12407), (4338-4354, 12849-12884), (4338-4354, 13326-13361), (4338-4354, 13804-13839), (4338-4354, 14281-14316), (4339-4355, 14974-15009), (4339-4355, 15452-15487), (4339-4355, 15929-15964), (4339-4355, 16579-16614), (4339-4355, 17057-17092), (4339-4355, 17534-17569), (4339-4355, 18011-18046) | ? | piece `mx1` (run 40): the stub of the thin metal x 4338-4354 over the pad of the lower gate (contact at (4352, 11912) in row s1); the metal runs on north and south. Whether it is one line through the fourteen rows is not read |
 | `vcc` | metal | (4953-5018, 16020) and (4953-5018, 16110); (4953-5018, 16700) and (4953-5018, 16800) | - | pieces `cap998`, `cap218`: the wide VCC metal x 4953-5018 (`busl`'s rail, its port `vcc` (4953-5018,15000)), two pieces of it drawn over the boxes of the two devices' diffusion wires; one metal between them and on both ways by the two-chip test (north to y 15000; south past y 17440) |
 | `vcc` | metal | (7470-7520, 16000) and (7470-7520, 16205) | - | pieces `u15960`, `u16175`: `bc1`'s RL2, drawn again over the two supply boxes (y 16000-16085 and y 16205-16300) |
 | `lc1_w7780` | poly | (7165, 15207-15229) | in | piece `u15260` (run 34): gate 1's row of the NOR `eof_w15262`, drawn on east from `busl`'s row end (`busl`'s port (7170,15218)) to its end east of the rail. (The port `eof_w15262` P (7225, 15251-15273) of run 33 is gone: the row is drawn on to the unit's exit box) |
@@ -5269,6 +5444,87 @@ driver lies; the other three lead to the loads.
     line is high, and the box of the south contact is grounded. What would settle it: the group south of
     the metal traced (a grounded box there shows as the source of pull-downs; a signal node as a pass
     transistor's end), and what the poly column on the box drives.
+    **After run 40** (piece `mx1`): the group is traced. The box under the south contact has no supply
+    contact and is the source of no pull-down: it is the common end of two wide pass transistors, one
+    from the diffusion line that enters the row from the east (believed R13's bit) and one from the
+    row's south band. With a contact at the metal's north end those two would tie both lines to VSS
+    whenever their gates are high, which for a line believed to be a register's output makes no
+    circuit. That is logic, not a reading: the photos at the north end are as they were, and what the
+    diffusion line is rests on a join that is seen and not drawn.
+
+157. **The strip and the contact's box of the strap's node as one diffusion** (piece `mx1`; no `?` item;
+    each row). The strip y 11879-11900 (x 4462-4590) and the box x 4590-4655 of the strap's south contact
+    meet at x 4587-4592, where there is one dark line in every shot: it is at once the contact's ring, the
+    strap's west edge and, in the clean shot, the limit of what the strap protected. For one diffusion:
+    the clean shot is tan from x 4590 (177/143/104, then 200/173/122) with no pink between, and the dark
+    is one line of 6-8 px in both metal shots at y 11894 and y 11897, below the ring's widest part
+    (`tools/px.py row 11888 4530 4700 3`, `row 11894 4566 4604 2`, `row 11897`); the box's west edge
+    north of the strip (y 11853-11877) is the Z's own edge. A field gap under about 5 px in that line
+    cannot be excluded. With one, the strip would be a node of its own between the two gates, in series
+    from the diffusion line to the south strip: two more transistors, and the same nets joined whenever
+    both gates are high. Drawn as one diffusion.
+158. **The two bands as gates over one active area** (piece `mx1`; no `?` item; each row). Under the thin
+    metal and the strap each band is the bright cream of poly over a channel and each strip is tan (the
+    table of the piece). In the open stretch x 4537-4590 the reading rests on the edges: each strip
+    borders its band by one dark line of 6-8 px, with no second line and no ground between (`tools/px.py
+    col 4575 11800 11960 4`), and chip 2's stripped shot reads the strips as diffusion (red over green
+    by 12-25) there. The narrow strips' own colour in the clean shot (red-brown to tan) says nothing
+    (trap 4). Not measured with `tools/eof_band.py` against a field control of the same height.
+159. **The buried contact at the south strip's west end** (piece `mx1`; no `?` item; each row; **what
+    `eof_mxs_s#` is rests on it**). The box lies under the wide metal's east part, where chip 2's
+    stripped shot has only fringes and both metal shots show the metal; it is read from the clean shot:
+    the heavy U-shaped outline, tan inside at the band's level, no line between strip and band inside.
+    Other readings: (a) the diffusion runs under the band as a channel and stops 6 px south of it: a
+    transistor with a dead end, gated by the band; (b) the strip ends at y 11946 and the U is the
+    outline of something on the band alone. Neither gives the strip a connection: it has no contact
+    (the table), so as (a) or (b) it would be a node with no way out. Against (a) also: a channel under
+    metal reads bright cream here (245/148/116), not tan. Drawn as a buried contact.
+160. **The band south of the group is not a gate over the south strip** (piece `mx1`; no `?` item; each
+    row). East of the U the band y 11955-11972 runs 12-15 px south of the strip for 165 px. Between them
+    the dark is 12-15 px wide where one edge line is 6-8, with a greenish sample in the middle of it in
+    the clean shot at x 4575 (82/100/61, 91/100/66), and south of the band is field (the piece's text).
+    Read as two edges with ground between: the band crosses no diffusion there.
+161. **The bands' east ends under the VSS metal's edge** (piece `mx1`; no `?` item; each row). Each band
+    ends 9-11 px east of the active's edge, where both metal shots show a bright patch 8 px wide in a
+    rounded dark outline (x 4654-4662, y 11832-11850 on the upper band; chip 2 144-192, chip 1 the same):
+    the look of a small contact onto the VSS metal, which would ground both gates. Against: the clean
+    shot is salmon there with no hole (red minus green 48-64 at x 4658-4662; a dip of 4-6 px at
+    x 4652-4656 is the active's edge), where the contact (4667,11540) of the same metal onto a poly has
+    a green hole 14 px across; the patch is 8 px where a contact's centre is 12 in a ring of 35-40
+    (`tools/textmap.py 4636 11822 4684 11858 2 --acid` against `tools/textmap.py 4646 11522 4694 11558 2
+    --acid`; `tools/eof_cchk.py 4657,11840 4659,11912`: centres 174 / 168 and 146 / 113, no hole). And
+    each band has a pad with a contact on a thin metal at its other end. Read as the metal over the
+    poly's end.
+162. **The metals over the three diffusions, and the clean shot's rings** (piece `mx1`; no `?` item; each
+    row). (a) The thin metal x 4510-4527 crosses the diffusion line's strip, the strap's strip and the
+    south strip, and is bright for 12 px between two dark bars over each: trap 36, no ring, no hole
+    (the piece's text). (b) The wide metal x 4430-4480 shows a dark line at x 4454-4462 from y 11835
+    south, 8-10 px wide: read as the poly column's east edge and the active's west edge under one metal
+    (north of y 11835 the metal is whole across: `r40_f1.png`), not as a gap between two metals. Which
+    it is decides nothing in this piece (neither part has a contact here) but would decide the net of
+    the contact at about (4470,11720), not drawn. (c) The clean shot has a dark ring on each strip at
+    x 4488-4502 ((4492,11888), (4495,11935), and (4497,11985) on the ground south of the band): the bar
+    of the gap between the wide and the thin metal (trap 2); no metal is there in either metal shot and
+    chip 2's shots have no ring (`tools/eof_cchk.py 4492,11888`). Not contacts.
+163. **Pads that one chip shows badly** (piece `mx1`; the copies). s12's upper pad (4518,17450): chip 2's
+    metal shot has a dark blemish over the whole pad (centre 27); chip 1 has ring and bright centre (178)
+    and the clean shot a hole (-14). s6's lower pad (4352,14298): the clean shot's hole is dull, not green
+    (+6); both metal shots have ring and centre (200 / 173). One chip's centre is dull at (4517,13242)
+    (chip 1, 107), (4518,17927) (chip 1, 128) and (4353,14991) (chip 2, 114), with a green hole at each.
+    All read as contacts, like the other 23 (`tools/eof_cchk.py` on the 28 places).
+164. **The diffusion line's turn beside the upper pad** (piece `mx1`; no `?` item; each row). The line
+    turns south through a neck 12-15 px wide (x 4549-4563, between its west edge line and the Z's corner),
+    12 px east of the poly of the pad (4517,11811) (the pad's east edge at x 4534-4536; open ground
+    between, 122/148/96 and 109/162/91 in the clean shot at x 4537-4540, y 11826; the pad's row and the
+    strip below it are 11-13 px apart with pink field between under the metals). On the neck's centre
+    line every shot matches the diffusion controls and not the poly beside it (`tools/px.py col 4556
+    11812 11852 3 all` against `tools/px.py pt 4580,11822 4560,11888 4575,11845 4575,11802 all`: chip 2's
+    metal 168-183/135-146/82-98, the line 171/137/83, the strap's strip 173/145/91, poly 180/131/67;
+    chip 2's stripped shot red over green by 20-26, the strip 22, poly 40; the clean shot 169/130/113,
+    the strip 153/105/93, poly 203/123/77). A column 4 px further west (`tools/px.py col 4552 11800 11860
+    3`) lies on the neck's edge line and reads red-brown there, like open poly (trap 28): the neck is
+    narrow enough to be misread from one cut. If it were a poly it would be a gate with no wire across
+    the line. Drawn as diffusion.
 
 ## Review
 
@@ -7693,6 +7949,34 @@ Round 47: no findings that change a connection.
 
 ## Not done
 
+- **Next (after run 40)**: the group south of the strap is drawn (piece `mx1`: two wide pass transistors on
+  `eof_strap_s#`, from the diffusion line `eof_mxn_s#` and from the south band `eof_mxs_s#`), so item (a) of
+  the list below is done. In order: (a) **the two thin metals that carry the gates' pads**: x 4510-4527
+  (the upper gates' pads (4517, 11811 + 477 k)) and x 4338-4354 (the lower gates' pads (4352, 11912 +
+  477 k)). Is each one line through the fourteen rows? `tools/tl5_tracks.py v 4518 11330 12300` loses the
+  east one for 47 px in every row (y 11544-11591 in row s1: `r40_g1.png`, `r40_g2.png`, 5x, four shots: it
+  lies over a poly's edges south of the VSS-tied band, the clean shot protected under it; trap 19 or a
+  break: read it with `tools/px.py row` across the metal at 6 px steps and a control), and the west one for
+  18 px (y 11629-11647). Then their ends north of y 11300 and south of y 18050, and the group gaps (between
+  rows s6 and s7, s9 and s10): the drivers say what selects. If each is one line the 28 gate names become
+  two (`tools/rename.py`, the coordinator's refresh, or an `@alias` each). (b) **the fourteen joins to
+  `busl`'s and `bl0`'s row ends** between x 4700 and x 4780: `eof_mxn_s#` (straight on east in row s1,
+  onto `cdp3_hw_c6` at (4780,11815)) and `eof_mxs_s#` (in row s1 by a jog at x 4703-4723 up to
+  `cdp4_bus_s6`'s row y 11912-11932; `busl`'s rows reach x 4780 at y 11488, 11922, 12442, 12984, 13397,
+  13874, 14351 and `bl0`'s further south, so every row's jog differs): one row at a time, both shots, with
+  an `@alias` for each join; and the band west of x 4420 into the array (open poly, toward the thin metal
+  x 4338-4354 and the rail x 4256-4302). (c) **the box north of the load line's gate** (x 4600-4635,
+  y 11662-11692) and the poly column x 4605-4625 north of it across the diffusion box (x 4590-4700,
+  y 11593-11648) of the VSS contact (4665,11622): believed a buried contact and the gate of a pull-down;
+  its drain is the box's west part (x 4590-4605) and a ring at about (4560,11640); the salmon block
+  x 4590-4640, y 11565-11600 above it; the VSS-tied poly band y 11527-11545 (west of x 4590 it goes on in
+  the open). (d) the rest of the column: the large diffusion box (x 4455-4530, y 11695-11745, contact at
+  about (4470,11720); whether the wide metal x 4430-4480 is one metal: Ambiguity 162), the poly block and
+  band at (4385-4430, 11700-11745), rails G and H, and `larr`'s readings of x 3900-4250. (e) the pad
+  (4778,17365) and the small transistor east of it; (f) `bl0_w15566`'s driver and the twin of `cap18`,
+  then the rest, as below. Seen in run 40, not this package's: a green spot under the track x 4736 at
+  about (4735,11948), 20 px south of `cdp4_bus_s6`'s row, in the clean shot only (`r40_i1.png`; the
+  track's crossing of that row is the one piece `t4780n`'s list marks "to look").
 - **Next (after run 39)**: the line's load in a row is drawn (piece `ld1`: one transistor per row, between
   `eof_nbox_s#` and `eof_strap_s#`), so item (a) of the list below is done as far as the gate. What the two
   nodes are is the row's east column (x 4250-4720 of each row; `larr` (continue), free), in the master

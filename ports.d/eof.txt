@@ -189,17 +189,74 @@ eof_nbox_s10   D      4567-4633,16378          ?    north end of the diffusion o
 eof_nbox_s11   D      4567-4633,16856          ?    north end of the diffusion of the transistor the line gates in row s11 of the left array; it ends 14 px north of the gate on a heavy-outlined box, not drawn
 eof_nbox_s12   D      4567-4633,17333          ?    north end of the diffusion of the transistor the line gates in row s12 of the left array; it ends 14 px north of the gate on a heavy-outlined box, not drawn
 eof_nbox_s13   D      4567-4633,17810          ?    north end of the diffusion of the transistor the line gates in row s13 of the left array; it ends 14 px north of the gate on a heavy-outlined box, not drawn
-eof_strap_s0   D      4592-4628,11379-11419    ?    the diffusion box under the strap's south contact in row s0, drawn only round the contact; part of a group of bands and strips that is not read
-eof_strap_s1   D      4592-4628,11857-11897    ?    the diffusion box under the strap's south contact in row s1, drawn only round the contact; part of a group of bands and strips that is not read
-eof_strap_s2   D      4592-4628,12334-12374    ?    the diffusion box under the strap's south contact in row s2, drawn only round the contact; part of a group of bands and strips that is not read
-eof_strap_s3   D      4592-4628,12811-12851    ?    the diffusion box under the strap's south contact in row s3, drawn only round the contact; part of a group of bands and strips that is not read
-eof_strap_s4   D      4592-4628,13288-13328    ?    the diffusion box under the strap's south contact in row s4, drawn only round the contact; part of a group of bands and strips that is not read
-eof_strap_s5   D      4592-4628,13766-13806    ?    the diffusion box under the strap's south contact in row s5, drawn only round the contact; part of a group of bands and strips that is not read
-eof_strap_s6   D      4592-4628,14242-14282    ?    the diffusion box under the strap's south contact in row s6, drawn only round the contact; part of a group of bands and strips that is not read
-eof_strap_s7   D      4593-4629,14936-14976    ?    the diffusion box under the strap's south contact in row s7, drawn only round the contact; part of a group of bands and strips that is not read
-eof_strap_s8   D      4593-4629,15414-15454    ?    the diffusion box under the strap's south contact in row s8, drawn only round the contact; part of a group of bands and strips that is not read
-eof_strap_s9   D      4593-4629,15891-15931    ?    the diffusion box under the strap's south contact in row s9, drawn only round the contact; part of a group of bands and strips that is not read
-eof_strap_s10  D      4593-4629,16541-16581    ?    the diffusion box under the strap's south contact in row s10, drawn only round the contact; part of a group of bands and strips that is not read
-eof_strap_s11  D      4593-4629,17019-17059    ?    the diffusion box under the strap's south contact in row s11, drawn only round the contact; part of a group of bands and strips that is not read
-eof_strap_s12  D      4593-4629,17496-17536    ?    the diffusion box under the strap's south contact in row s12, drawn only round the contact; part of a group of bands and strips that is not read
-eof_strap_s13  D      4593-4629,17973-18013    ?    the diffusion box under the strap's south contact in row s13, drawn only round the contact; part of a group of bands and strips that is not read
+# piece mx1 (run 40): the two pass transistors on the strap's node in each row of the left array (the fourteen eof_strap_s# ports are gone: the box is drawn whole)
+eof_mxn_s0     D      4700,11328-11348          ?    the diffusion line that enters row s0 of the left array from the east, drawn to x 4700; goes on east (in row s1 seen to be cdp3_hw_c6; join not drawn)
+eof_mxn_s1     D      4700,11805-11825          ?    the diffusion line that enters row s1 of the left array from the east, drawn to x 4700; goes on east (in row s1 seen to be cdp3_hw_c6; join not drawn)
+eof_mxn_s2     D      4700,12282-12302          ?    the diffusion line that enters row s2 of the left array from the east, drawn to x 4700; goes on east (in row s1 seen to be cdp3_hw_c6; join not drawn)
+eof_mxn_s3     D      4700,12759-12779          ?    the diffusion line that enters row s3 of the left array from the east, drawn to x 4700; goes on east (in row s1 seen to be cdp3_hw_c6; join not drawn)
+eof_mxn_s4     D      4700,13236-13256          ?    the diffusion line that enters row s4 of the left array from the east, drawn to x 4700; goes on east (in row s1 seen to be cdp3_hw_c6; join not drawn)
+eof_mxn_s5     D      4700,13714-13734          ?    the diffusion line that enters row s5 of the left array from the east, drawn to x 4700; goes on east (in row s1 seen to be cdp3_hw_c6; join not drawn)
+eof_mxn_s6     D      4700,14191-14211          ?    the diffusion line that enters row s6 of the left array from the east, drawn to x 4700; goes on east (in row s1 seen to be cdp3_hw_c6; join not drawn)
+eof_mxn_s7     D      4701,14884-14904          ?    the diffusion line that enters row s7 of the left array from the east, drawn to x 4700; goes on east (in row s1 seen to be cdp3_hw_c6; join not drawn)
+eof_mxn_s8     D      4701,15362-15382          ?    the diffusion line that enters row s8 of the left array from the east, drawn to x 4700; goes on east (in row s1 seen to be cdp3_hw_c6; join not drawn)
+eof_mxn_s9     D      4701,15839-15859          ?    the diffusion line that enters row s9 of the left array from the east, drawn to x 4700; goes on east (in row s1 seen to be cdp3_hw_c6; join not drawn)
+eof_mxn_s10    D      4701,16489-16509          ?    the diffusion line that enters row s10 of the left array from the east, drawn to x 4700; goes on east (in row s1 seen to be cdp3_hw_c6; join not drawn)
+eof_mxn_s11    D      4701,16967-16987          ?    the diffusion line that enters row s11 of the left array from the east, drawn to x 4700; goes on east (in row s1 seen to be cdp3_hw_c6; join not drawn)
+eof_mxn_s12    D      4701,17444-17464          ?    the diffusion line that enters row s12 of the left array from the east, drawn to x 4700; goes on east (in row s1 seen to be cdp3_hw_c6; join not drawn)
+eof_mxn_s13    D      4701,17921-17941          ?    the diffusion line that enters row s13 of the left array from the east, drawn to x 4700; goes on east (in row s1 seen to be cdp3_hw_c6; join not drawn)
+eof_mxs_s0     P      4700,11478-11495          ?    the poly band along the south edge of row s0, east end as drawn; goes on east under the VSS metal (in row s1 seen to be cdp4_bus_s6; join not drawn)
+eof_mxs_s0     P      4420,11478-11495          ?    the same band, west end as drawn; goes on west into the array (open poly)
+eof_mxs_s1     P      4700,11955-11972          ?    the poly band along the south edge of row s1, east end as drawn; goes on east under the VSS metal (in row s1 seen to be cdp4_bus_s6; join not drawn)
+eof_mxs_s1     P      4420,11955-11972          ?    the same band, west end as drawn; goes on west into the array (open poly)
+eof_mxs_s2     P      4700,12432-12449          ?    the poly band along the south edge of row s2, east end as drawn; goes on east under the VSS metal (in row s1 seen to be cdp4_bus_s6; join not drawn)
+eof_mxs_s2     P      4420,12432-12449          ?    the same band, west end as drawn; goes on west into the array (open poly)
+eof_mxs_s3     P      4700,12909-12926          ?    the poly band along the south edge of row s3, east end as drawn; goes on east under the VSS metal (in row s1 seen to be cdp4_bus_s6; join not drawn)
+eof_mxs_s3     P      4420,12909-12926          ?    the same band, west end as drawn; goes on west into the array (open poly)
+eof_mxs_s4     P      4700,13386-13403          ?    the poly band along the south edge of row s4, east end as drawn; goes on east under the VSS metal (in row s1 seen to be cdp4_bus_s6; join not drawn)
+eof_mxs_s4     P      4420,13386-13403          ?    the same band, west end as drawn; goes on west into the array (open poly)
+eof_mxs_s5     P      4700,13864-13881          ?    the poly band along the south edge of row s5, east end as drawn; goes on east under the VSS metal (in row s1 seen to be cdp4_bus_s6; join not drawn)
+eof_mxs_s5     P      4420,13864-13881          ?    the same band, west end as drawn; goes on west into the array (open poly)
+eof_mxs_s6     P      4700,14341-14358          ?    the poly band along the south edge of row s6, east end as drawn; goes on east under the VSS metal (in row s1 seen to be cdp4_bus_s6; join not drawn)
+eof_mxs_s6     P      4420,14341-14358          ?    the same band, west end as drawn; goes on west into the array (open poly)
+eof_mxs_s7     P      4701,15034-15051          ?    the poly band along the south edge of row s7, east end as drawn; goes on east under the VSS metal (in row s1 seen to be cdp4_bus_s6; join not drawn)
+eof_mxs_s7     P      4421,15034-15051          ?    the same band, west end as drawn; goes on west into the array (open poly)
+eof_mxs_s8     P      4701,15512-15529          ?    the poly band along the south edge of row s8, east end as drawn; goes on east under the VSS metal (in row s1 seen to be cdp4_bus_s6; join not drawn)
+eof_mxs_s8     P      4421,15512-15529          ?    the same band, west end as drawn; goes on west into the array (open poly)
+eof_mxs_s9     P      4701,15989-16006          ?    the poly band along the south edge of row s9, east end as drawn; goes on east under the VSS metal (in row s1 seen to be cdp4_bus_s6; join not drawn)
+eof_mxs_s9     P      4421,15989-16006          ?    the same band, west end as drawn; goes on west into the array (open poly)
+eof_mxs_s10    P      4701,16639-16656          ?    the poly band along the south edge of row s10, east end as drawn; goes on east under the VSS metal (in row s1 seen to be cdp4_bus_s6; join not drawn)
+eof_mxs_s10    P      4421,16639-16656          ?    the same band, west end as drawn; goes on west into the array (open poly)
+eof_mxs_s11    P      4701,17117-17134          ?    the poly band along the south edge of row s11, east end as drawn; goes on east under the VSS metal (in row s1 seen to be cdp4_bus_s6; join not drawn)
+eof_mxs_s11    P      4421,17117-17134          ?    the same band, west end as drawn; goes on west into the array (open poly)
+eof_mxs_s12    P      4701,17594-17611          ?    the poly band along the south edge of row s12, east end as drawn; goes on east under the VSS metal (in row s1 seen to be cdp4_bus_s6; join not drawn)
+eof_mxs_s12    P      4421,17594-17611          ?    the same band, west end as drawn; goes on west into the array (open poly)
+eof_mxs_s13    P      4701,18071-18088          ?    the poly band along the south edge of row s13, east end as drawn; goes on east under the VSS metal (in row s1 seen to be cdp4_bus_s6; join not drawn)
+eof_mxs_s13    P      4421,18071-18088          ?    the same band, west end as drawn; goes on west into the array (open poly)
+eof_ga_s0      M      4510-4526,11318-11348     ?    stub of the thin metal x 4510-4527 over the upper gate's pad in row s0; the metal runs on north and south (one line through the rows or not: not read)
+eof_ga_s1      M      4510-4526,11795-11825     ?    stub of the thin metal x 4510-4527 over the upper gate's pad in row s1; the metal runs on north and south (one line through the rows or not: not read)
+eof_ga_s2      M      4510-4526,12272-12302     ?    stub of the thin metal x 4510-4527 over the upper gate's pad in row s2; the metal runs on north and south (one line through the rows or not: not read)
+eof_ga_s3      M      4510-4526,12749-12779     ?    stub of the thin metal x 4510-4527 over the upper gate's pad in row s3; the metal runs on north and south (one line through the rows or not: not read)
+eof_ga_s4      M      4510-4526,13226-13256     ?    stub of the thin metal x 4510-4527 over the upper gate's pad in row s4; the metal runs on north and south (one line through the rows or not: not read)
+eof_ga_s5      M      4510-4526,13704-13734     ?    stub of the thin metal x 4510-4527 over the upper gate's pad in row s5; the metal runs on north and south (one line through the rows or not: not read)
+eof_ga_s6      M      4510-4526,14181-14211     ?    stub of the thin metal x 4510-4527 over the upper gate's pad in row s6; the metal runs on north and south (one line through the rows or not: not read)
+eof_ga_s7      M      4511-4527,14874-14904     ?    stub of the thin metal x 4510-4527 over the upper gate's pad in row s7; the metal runs on north and south (one line through the rows or not: not read)
+eof_ga_s8      M      4511-4527,15352-15382     ?    stub of the thin metal x 4510-4527 over the upper gate's pad in row s8; the metal runs on north and south (one line through the rows or not: not read)
+eof_ga_s9      M      4511-4527,15829-15859     ?    stub of the thin metal x 4510-4527 over the upper gate's pad in row s9; the metal runs on north and south (one line through the rows or not: not read)
+eof_ga_s10     M      4511-4527,16479-16509     ?    stub of the thin metal x 4510-4527 over the upper gate's pad in row s10; the metal runs on north and south (one line through the rows or not: not read)
+eof_ga_s11     M      4511-4527,16957-16987     ?    stub of the thin metal x 4510-4527 over the upper gate's pad in row s11; the metal runs on north and south (one line through the rows or not: not read)
+eof_ga_s12     M      4511-4527,17434-17464     ?    stub of the thin metal x 4510-4527 over the upper gate's pad in row s12; the metal runs on north and south (one line through the rows or not: not read)
+eof_ga_s13     M      4511-4527,17911-17941     ?    stub of the thin metal x 4510-4527 over the upper gate's pad in row s13; the metal runs on north and south (one line through the rows or not: not read)
+eof_gb_s0      M      4338-4354,11418-11453     ?    stub of the thin metal x 4338-4354 over the lower gate's pad in row s0; the metal runs on north and south (one line through the rows or not: not read)
+eof_gb_s1      M      4338-4354,11895-11930     ?    stub of the thin metal x 4338-4354 over the lower gate's pad in row s1; the metal runs on north and south (one line through the rows or not: not read)
+eof_gb_s2      M      4338-4354,12372-12407     ?    stub of the thin metal x 4338-4354 over the lower gate's pad in row s2; the metal runs on north and south (one line through the rows or not: not read)
+eof_gb_s3      M      4338-4354,12849-12884     ?    stub of the thin metal x 4338-4354 over the lower gate's pad in row s3; the metal runs on north and south (one line through the rows or not: not read)
+eof_gb_s4      M      4338-4354,13326-13361     ?    stub of the thin metal x 4338-4354 over the lower gate's pad in row s4; the metal runs on north and south (one line through the rows or not: not read)
+eof_gb_s5      M      4338-4354,13804-13839     ?    stub of the thin metal x 4338-4354 over the lower gate's pad in row s5; the metal runs on north and south (one line through the rows or not: not read)
+eof_gb_s6      M      4338-4354,14281-14316     ?    stub of the thin metal x 4338-4354 over the lower gate's pad in row s6; the metal runs on north and south (one line through the rows or not: not read)
+eof_gb_s7      M      4339-4355,14974-15009     ?    stub of the thin metal x 4338-4354 over the lower gate's pad in row s7; the metal runs on north and south (one line through the rows or not: not read)
+eof_gb_s8      M      4339-4355,15452-15487     ?    stub of the thin metal x 4338-4354 over the lower gate's pad in row s8; the metal runs on north and south (one line through the rows or not: not read)
+eof_gb_s9      M      4339-4355,15929-15964     ?    stub of the thin metal x 4338-4354 over the lower gate's pad in row s9; the metal runs on north and south (one line through the rows or not: not read)
+eof_gb_s10     M      4339-4355,16579-16614     ?    stub of the thin metal x 4338-4354 over the lower gate's pad in row s10; the metal runs on north and south (one line through the rows or not: not read)
+eof_gb_s11     M      4339-4355,17057-17092     ?    stub of the thin metal x 4338-4354 over the lower gate's pad in row s11; the metal runs on north and south (one line through the rows or not: not read)
+eof_gb_s12     M      4339-4355,17534-17569     ?    stub of the thin metal x 4338-4354 over the lower gate's pad in row s12; the metal runs on north and south (one line through the rows or not: not read)
+eof_gb_s13     M      4339-4355,18011-18046     ?    stub of the thin metal x 4338-4354 over the lower gate's pad in row s13; the metal runs on north and south (one line through the rows or not: not read)

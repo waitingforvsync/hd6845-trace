@@ -3592,3 +3592,76 @@ N M 4605,11800 eof_strap_{}
 @inst eof_ld 1,5162 tag=s11
 @inst eof_ld 1,5639 tag=s12
 @inst eof_ld 1,6116 tag=s13
+
+# ---- piece mx1 (run 40, 2026-11-21): the two wide transistors on the strap's node in each row
+# of the left array (master in larr's row s1, y 11470-11947; the group south of the strap).
+# One active area x 4462-4655, y 11838-11946, crossed by two poly bands:
+#   N  the diffusion line that enters the row from the east (y 11805-11825 east of x 4640,
+#      y 11816-11828 west of it: px.py row 11816 4536 4790 6, col 4575, col 4605), which turns
+#      south at x 4549-4563 (px.py col 4556 11812 11852 3 all: plain in both metal shots,
+#      y 11821-11845, like the diffusion controls; a neck 12-15 px wide) into a strip y 11838-11852
+#      that runs west to x 4462 (px.py col 4518, col 4466);
+#   the UPPER GATE, a Z-shaped poly: band y 11853-11877 from x 4434 to x 4590, a vertical part
+#      x 4564-4590, band y 11830-11851 on east to a free end at x 4664 (px.py row 11840 4530
+#      4700 3, col 4575, col 4605, col 4650: bright cream under the strap and the thin metal =
+#      poly over a channel; the active's east edge is the dark line x 4653-4656 across it);
+#   M  a strip y 11879-11900, x 4462-4590, one diffusion with the box x 4590-4655, y 11851-11899
+#      of the strap's south contact (4607,11881) (px.py row 11888, row 11866 4580 4664 3);
+#   the LOWER GATE, a band y 11902-11924 from a pad to a free end at x 4666 (px.py row 11912
+#      4300 4480 4, col 4400, col 4518, col 4575, col 4605, col 4650);
+#   S  a strip y 11926-11945, x 4462-4655 (px.py row 11937 4400 4670 5), no contact on it.
+# The upper gate's west end joins a poly column x 4434-4450, y 11808-11877, under the wide
+# metal x 4430-4480 (px.py col 4442 11790 11886 4; no contact: eof_cchk.py 4446,11845
+# 4446,11864), whose top turns east as a row y 11808-11825 to a pad with a contact (4517,11811)
+# in the run of the thin metal x 4510-4527 (px.py row 11814 4424 4548 4: green hole x 4508-4524;
+# eof_cchk.py 4518,11808: -25, 227 / 193). The lower gate's pad has a contact (4352,11912) in
+# the run of the thin metal x 4338-4354 (textmap.py 4318 11880 4392 11944 2; eof_cchk.py: -28,
+# 225 / 190). Only a stub of each thin metal is drawn, over its pad: both run on north and south.
+# S's west end has a buried contact onto a poly band y 11955-11972 (a U-shaped heavy outline
+# x 4456-4490, y 11925-11978; inside it the band's level is tan and no line parts it from S:
+# px.py col 4474 11922 11990 3 against col 4520; row 11962 4420 4500 4). The band runs west
+# of x 4428 into the array and east under the VSS metal; drawn x 4420-4700. Elsewhere it lies
+# over field (px.py col 4575 / col 4625 11936 12000 3: a 15 px double edge to S, field south).
+# No metal that crosses the three diffusions makes a contact (the thin metal x 4510-4527 and
+# the wide metal: a bright stretch between each strip's two edge bars, no ring, no hole: trap
+# 36; eof_cchk.py 4518,11842 4518,11888 4518,11937 4472,11842 4472,11888 4472,11937), and the
+# two bands' east ends have none onto the VSS metal (textmap.py 4636 11822 4684 11858 2 --acid
+# against the contact (4667,11540): no hole).
+@cell eof_mx tag=s1
+D 4640,11805:4700,11825
+D 4548,11816:4655,11853
+D 4462,11838:4566,11855
+D 4462,11851:4655,11946
+P 4498,11792:4536,11827
+C 4517,11811 s=24x24
+M 4518,11795 y11825 w=16
+P 4434,11808:4502,11825
+P 4434,11808:4450,11877
+P 4434,11853:4590,11877
+P 4564,11830:4590,11877
+P 4564,11830:4664,11851
+P 4333,11892:4371,11931
+C 4352,11912 s=24x24
+M 4346,11895 y11930 w=16
+P 4352,11902:4666,11924
+D 4462,11940:4488,11976
+B 4462,11954:4488,11973
+P 4420,11955:4700,11972
+N D 4670,11815 eof_mxn_{}
+N P 4442,11840 eof_ga_{}
+N P 4400,11913 eof_gb_{}
+N P 4560,11963 eof_mxs_{}
+@end
+@inst eof_mx 0,-477 tag=s0
+@inst eof_mx 0,477 tag=s2
+@inst eof_mx 0,954 tag=s3
+@inst eof_mx 0,1431 tag=s4
+@inst eof_mx 0,1909 tag=s5
+@inst eof_mx 0,2386 tag=s6
+@inst eof_mx 1,3079 tag=s7
+@inst eof_mx 1,3557 tag=s8
+@inst eof_mx 1,4034 tag=s9
+@inst eof_mx 1,4684 tag=s10
+@inst eof_mx 1,5162 tag=s11
+@inst eof_mx 1,5639 tag=s12
+@inst eof_mx 1,6116 tag=s13
