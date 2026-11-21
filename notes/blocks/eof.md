@@ -10267,6 +10267,31 @@ names), as finding 1 intends.
 
 Round 57: one finding that changes a connection (the undrawn arm of `eof_w16040`'s pad, drawn uncertain), one geometry only; both fixed.
 
+### Round 58 (fix check; run 49, piece `cap18b`)
+
+2026-11-21 21:10 +0000 (when it reported). One fresh agent (general-purpose, Claude Fable 5.2), the changes since 24ac29c
+(commit 89cfc06), images in `cache/scratch/eof/review-58/` (5). Covered: the two fixes of round 57 and
+what they touch. Told: the two findings in one line each, with the new lines of the trace.
+
+- **The bus line** (`?M 8643,17866 x8708`, `M 8704,17866 x8760`, `eof_w17866` an alias of
+  `eof_w16040`): found right. Its cut at x 8670 (`px.py col`): chip 2 metal-yellow (184-212 / 173-178 /
+  106-124) at y 17862-17870 between edge bars at y 17856 and 17878, bare ground beside it 157-166 /
+  143-155 / 83; chip 1 the same two bars with a dim interior (97-126), "so `?M` is the fitting mark";
+  the clean shot's pink strip y 17856-17874 the height of the one under the certain line at x 8730; a
+  ghost band at the same y in the chip-2 stripped shot. The arm reaches bright metal 26 px from the
+  pad's centre, as the pad's north arm does. No contact with the column x 8680-8698 (bright between
+  two bars in both chips, no widening, no hole, no pitted box). East of the column bright in both chips
+  to x 8768 and beyond, no ring; the port sits on the line.
+- **The gate's south end** (`P 8741,17930:8769,18008`): found right, geometry only (chip-2 stripped
+  poly colour, red over green by 46-61, to y 18008 at x 8748 and 8755, bare ground from 18014; the
+  transistor unchanged, 48/28 on `bl0_w15566`).
+- `tools/t.sh eof sameconn.py 24ac29c` and `.venv/bin/python tools/sameconn.py 24ac29c`: 22 differences
+  each, all the one intended (`eof_w17866` joins `eof_w16040`'s net; the transistor lines differ only by
+  that name and the hashes of unnamed nets); no other join or split; `tools/unsure.py` lists the join
+  as resting on the `?M`.
+
+Round 58: no findings.
+
 ## Not done
 
 - **Next (after run 49)**: the twin of `cap18` is drawn (piece `cap18b`), so the second half of item (g)
