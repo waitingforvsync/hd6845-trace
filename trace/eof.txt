@@ -4195,6 +4195,82 @@ N M 4118,11800 eof_wstrap_{}
 @inst eof_ol 1,5162 tag=s11
 @inst eof_ol 1,5639 tag=s12
 @inst eof_ol 1,6116 tag=s13
+
+# ---- piece pd (run 46, 2026-11-21): what pulls the two load nodes of piece ol down, in the fourteen
+# rows of the left array (master in larr's row s1; x 3990-4130, y 11585-11870, the middle of larr's
+# east cell, free). TWO PULL-DOWNS ON ONE GATE POLY, sources on rail F, which is vss. Read on medians
+# over the fourteen rows (tools/cdp1_sr.py, offsets of eof_mx: r46_a1 .. r46_a4, r46_g1, r46_n2,
+# r46_b2.png; cache/scratch/eof/med45.py rows and columns; cache/scratch/eof/r46pt.py by row).
+# THE GATE POLY (eof_pdg_s#): a row y 11588-11607 under rail F, coming from west of x 3990 (port;
+# over field: pink above and below it under the rail, and it is not larr's Y block x 3998-4025,
+# y 11626-11690, whose top is closed with field between), a stem x 4050-4072 south from the row's
+# east end, a bar x 4050-4124, y 11654-11683, the poly PA of piece ol under the strap (x 4094-4124,
+# to y 11779), and joined to PA at y 11755-11779 a C: top bar, west strip x 4050-4072, arm
+# y 11805-11830, with a stub x 4078-4096 south from the arm to y 11866. One poly: its colour is
+# continuous across x 4064-4112 in both metal shots on rows y 11668 and y 11766 (blue 54-62), and
+# the clean shot's dark line at x 4088-4092 is the boundary of the strap's protected margin (at the
+# same x where there is no poly edge: rows y 11793, 11820).
+# THE ACTIVE AREA: its north edge is the line y 11640 (x 3990-4092, all shots), which crosses the
+# stem (poly on both sides of it: col 4060). North of the bar a sliver of the strap's diffusion
+# (x 4072-4094, y 11644-11653: plain between two edge lines, col 4082); south of the bar the
+# diffusion D_w (x 4050-4082, y 11686-11752), one piece with rail F's wide diffusion (the clean
+# shot's tan runs to x 4052, D_w begins at the margin line; chip 2's stripped shot red minus green
+# +19 on D_w, 15-34 in every row, against +4 on the field at (4084,11597)). Between the two units
+# a notch of FIELD from the east (x 4085-4146, y 11703-11730: pink at (4136,11716), PA duller over
+# it, its edge lines y 11700, x 4082, y 11732 in both metal shots).
+# UPPER PULL-DOWN: the bar and PA's upper part (to y 11700) lie over active between the strap's
+# node (north: the sliver and the strap's diffusion; east: the upper tab) and vss (south: D_w; west:
+# rail F's diffusion).
+# LOWER PULL-DOWN: the C is wrapped round the west tip of the lower node's diffusion (the "inner
+# box" x 4078-4092, y 11783-11803: not poly, metal blue 78-87; open to the east, the clean shot tan
+# from x 4094 with no poly in the margin: row y 11793), with vss on the outside: rail F's diffusion
+# (west), D_w (north) and a tab x 4050-4076, y 11832-11850 (south), which the stub separates from
+# the lower node's diffusion; PA's lower part (y 11733-11779) lies between D_w and the lower tab.
+# The active edge y 11850 runs under the stub (16 px of overhang over field).
+# RAIL F IS vss: the metal x 3998-4045 is one metal with ur's vss metal x 3889-3937 through a band
+# x 3885-4045, y 10966-11014 (r46_ftop3.png, both chips), and ends at y 18132 (r46_fbot.png); four
+# contacts per row on the wide diffusion. NOT DRAWN: a fifth ring per row at (4010,11872) on a pad
+# under the rail; larr's Y block and everything west of x 4028 under the rail; the gate's row west
+# of x 3990.
+@cell eof_pd tag=s1
+# rail F's wide diffusion with its four contacts; its north-east part beside the bar; D_w; the tab
+D 4002,11690:4052,11850
+C 4018,11707 4018,11746 4018,11785 4018,11826 s=30x30
+# the upper active band: under the bar and PA, the sliver north of the bar, through to the upper tab
+D 4028,11643:4130,11700
+# D_w south of the bar, west of the notch; and its two arms under PA's west edge
+D 4050,11683:4082,11756
+D 4050,11733:4130,11783
+# the lower active: under the C, the box (N2's tip), the tab, through to N2's body
+D 4050,11752:4102,11850
+# the gate poly G: row under rail F, stem, bar, PA, the C (top bar, west strip, arm), the stub
+P 3990,11588:4072,11607
+P 4050,11588:4072,11660
+P 4050,11654:4124,11683
+P 4094,11654:4124,11779
+P 4050,11755:4098,11782
+P 4050,11755:4072,11830
+P 4050,11805:4098,11830
+P 4078,11805:4096,11866
+N P 4060,11620 eof_pdg_{}
+@end
+@inst eof_pd 0,-477 tag=s0
+@inst eof_pd 0,477 tag=s2
+@inst eof_pd 0,954 tag=s3
+@inst eof_pd 0,1431 tag=s4
+@inst eof_pd 0,1909 tag=s5
+@inst eof_pd 0,2386 tag=s6
+@inst eof_pd 1,3079 tag=s7
+@inst eof_pd 1,3557 tag=s8
+@inst eof_pd 1,4034 tag=s9
+@inst eof_pd 1,4684 tag=s10
+@inst eof_pd 1,5162 tag=s11
+@inst eof_pd 1,5639 tag=s12
+@inst eof_pd 1,6116 tag=s13
+# rail F: the band from ur's vss metal, and the rail down the fourteen rows to its foot
+M 3895,10990 x4022 w=48
+M 4022,10966 y18132 w=47
+N M 4022,11300 vss
 # rail G: one metal from the widened foot of ur's vcc metal (M 4150,6330 y11040 w=44) through the
 # fourteen rows and both gaps (tools/tl5_tracks.py v 4208 11000 18400: nothing 25 px or more without
 # metal in both chips but the fourteen contact rings; px.py row 11032 4116 4228 4: one metal
