@@ -1260,6 +1260,38 @@ Full extraction with run 46: 2,523 nets, 4,752 transistors, 0 errors, 0 warnings
 transistors before: 14 new nets, 28 transistors). The package by itself: 1,171 nets, 1,966 transistors,
 0 errors, 82 warnings (as before).
 
+Run 47 (Tom Seddon's session, Claude Fable 5.2; 2026-11-21 18:31 +0000 on). One piece, `yi` (28
+transistors, no uncertain item): **the gate poly of the two pull-downs has its driver: an inverter of
+`larr`'s line Y, so each row's compared line is Y inverted twice.**
+
+- **Traced** (piece `yi`; x 3874-4030, y 11585-11825 in the master row s1; the cell `eof_yi`, fourteen
+  copies; `larr`'s east cell west of rail F, free). The gate row of piece `pd` is the top of a
+  depletion load's block (x 3882-3920, half in the open, half under Vm6), which lies over a strip
+  from `larr`'s VCC box to a node N and is tied to N by a buried contact under Vm6. N runs east as
+  a band y 11641-11657 to rail F. `larr`'s line Y comes up from a U-shaped buried contact on its
+  diffusion as a poly that lies as an L round the band (a block under the "segmented" metal
+  x 3949-3966, an arm along the band, an arm under rail F), with rail F's diffusion (`vss`) outside
+  the L: one pull-down, W/L 110/22 as drawn.
+- **So `eof_pdg_s#` = NOT `larr_y_s#`** (firm: `tools/unsure.py --equations eof_pdg_s`, all
+  fourteen), and with piece `pd` the compared line (`cdp4_bus_s7` .. `s0`, `cdp3_g_c7` .. `c2`) and
+  the strap's node `eof_wstrap_s#` are both `larr_y_s#` inverted twice: what the comparators, the
+  selector of piece `mx1` and line H see of a row is its line Y, the node behind `larr`'s pass gate
+  under Vm5 (`larr_y_s#` <- `larr_n5_s#`).
+- **Seen, not drawn** (ports; Not done): Y's diffusion runs on east under a poly column that comes
+  up from the pad (3958,11847): **a second transistor on Y, to rail F's diffusion**, whose gate is
+  the pad's net (the "segmented" metal; what else that metal touches is not read); and a leg of Y's
+  diffusion runs south under Vm6 and east along y 11879-11892 to the knot at rail F's fifth ring,
+  where the ring is a contact onto a poly pad (as review round 54 read it).
+- **All fourteen rows are alike** (`tools/eof_yirows.py`, written for this piece).
+- **Read without an uncertain item, recorded as ambiguities**: the band and the area south of Y's
+  arm where they cross the open gap east of the segmented metal (195); the load's buried contact
+  (196); the three metals over the piece without contact (197); Y's U box as a buried contact
+  (198); the segmented metal's south end over Y's poly (199, not drawn).
+
+Full extraction with run 47: 2,523 nets, 4,780 transistors, 0 errors, 0 warnings (2,523 nets and 4,752
+transistors before: no new net, 28 transistors). The package by itself: 1,199 nets, 1,994 transistors,
+0 errors, 82 warnings (as before).
+
 Full extraction after run 2: 2,351 nets, 4,232 transistors, 0 errors, 0 warnings; the package
 by itself (it loads `rdp3`): 0 errors, 0 warnings.
 
@@ -4824,6 +4856,134 @@ notch like the others), the gate's row brighter than the field beside it in twel
 spot and a green strip beside it; the row is in the montage), the box's east side tan and the poly
 in the strap's margin salmon in all.
 
+### Piece `yi`: the gate poly of the two pull-downs is driven by an inverter of `larr`'s line Y (traced; no uncertain item; a cell placed fourteen times)
+
+Run 47, 2026-11-21. Region: x 3874-4030, y 11585-11825 of the master row s1 (`larr`'s east cell
+between the VCC rail x 3823-3873 and rail F; `larr` (continue), free), in each of the fourteen rows.
+Survey and draft: `cache/scratch/eof/survey.md` (RUN 47), `cache/scratch/eof/draft-yi.txt`. Tools:
+`tools/eof_yirows.py` (written for the piece: the fourteen rows as text); in the scratch folder
+`r47prof.py` (a row or a column as the median over the fourteen rows, four shots, with a class
+letter per shot). Views, medians over the fourteen rows (`tools/cdp1_sr.py`, the offsets of
+`eof_mx`): `r47_ma.png` (3x, four shots), `r47_a1.png`, `r47_a2.png` (4x, x 3870-4030,
+y 11578-11718), `r47_b1.png`, `r47_b2.png` (4x, y 11690-11830), `r47_c1.png` (4x, Y's diffusion
+and the pad), `r47_d1.png` (6x, the poly column south of the segmented metal's end); a single
+row: `r47_ov1.png` (the trace on row s1, 3.8x, with `larr`'s).
+
+The metals over the place, west to east: the VCC rail x 3823-3873, Vm6 x 3903-3922, the
+"segmented" metal x 3949-3966 (`larr`'s name: it comes down from the pad (3958,11847) of the row
+above), rail F x 3999-4045. Under each metal and within 10 px of it the clean shot shows poly
+cream over field (about 219/160/117) and bright salmon over a channel (241/170/121), diffusion
+tan (195/177/130) and field pink (185/122/120); in the three open gaps poly is orange in both
+metal shots (chip 2 blue under 70) and everything else plain (blue 70 and more).
+
+1. **The gate row is the top of the load's block.** Along y 11597 (`r47prof.py row:11597:3856:4000`,
+   i.e. `med45.py row 11597 3856 4000 3`) the row is open poly at x 3886-3896, 3931-3940 and
+   3976-3988 and cream under Vm6, the segmented metal and rail F: one poly from x 3884 to piece
+   `pd`'s end at x 3990. Down x 3890, its open west part (`col:3890:11584:11716`): poly from
+   y 11593 to y 11668 with two edge lines across it, y 11617-11623 and y 11655-11661, and field
+   south of it (green in the clean shot, red minus green -8 in chip 2's stripped shot). Down
+   x 3912, under Vm6: cream y 11596-11611, an edge line, **bright salmon y 11626-11650** (243/172/120
+   against 219/160/117: a channel), an edge line, cream y 11665-11671 (the block's foot), a box
+   (outline y 11677-11686 and y 11698-11707, tan inside), pink south of it.
+2. **The load strip** runs under the block from `larr`'s VCC box (`D 3818,11601:3880,11662` of
+   `larr_lat`, with the VCC rail's contact (3848,11630)) to N: along y 11649
+   (`row:11649:3874:4052`) tan to x 3880, open poly x 3883-3898, the channel under Vm6
+   x 3901-3916, the block's east edge x 3919-3922, tan x 3925-3928. Channel 36 wide (y 11621-11657),
+   37 long.
+3. **The node N** (x 3922-3950, y 11622-11700): plain in the gap between Vm6 and the segmented
+   metal (`col:3935:11605:11716`: not poly, red minus green +20 to +30 in chip 2's stripped shot
+   from y 11626 to y 11695, against -6 on the field south of the heavy edge y 11698-11704) and tan
+   under both metals' margins. Between N's north edge and the gate row's south edge the clean
+   shot is green (field, y 11611-11614): the row does not lie on N.
+4. **The load's gate is tied to N by a buried contact** (the box x 3903-3931, y 11678-11702, under
+   Vm6): along y 11690 (`row:11690:3874:4052`) the box's west outline x 3895-3904, tan inside
+   x 3907-3916, the foot's east edge x 3919-3922, tan x 3925-3928 (N's tab into the box), N in the
+   open x 3931-3940. The foot is the block's poly at x 3903-3919 (cream along y 11668). So the
+   block is a depletion load with its gate on its output, and the output is the block itself, the
+   gate row: `eof_pdg_s#` is N (Ambiguity 196).
+5. **N runs east as a band** y 11641-11657 to rail F: tan under the segmented metal (x 3943-3970
+   along y 11649; `col:3958:11605:11716`: pink y 11611-11629, an edge, tan y 11644-11653, an
+   edge), plain across the gap x 3973-3988 with no dip in either metal shot, tan under rail F's
+   margin x 3991-3997. In that gap the heavy edge line y 11636-11642 (the active area's north
+   edge, which piece `pd` follows east of rail F as y 11640) crosses in both metal shots
+   (`med45.py col 3980 11570 11720 3`); the gap's colours do not class the 12 px band (Ambiguity 195).
+6. **Y's poly is an L round the band.** Under the segmented metal a block x 3950-3972: bright
+   salmon from y 11662 to y 11692 (241/170/121: over active), an edge line y 11701-11704, cream
+   south of it (over field). From the block an arm runs east along y 11659-11680: salmon to
+   x 3970, open poly x 3973-3991, bright salmon under rail F's margin and the rail to x 4018
+   (`row:11669:3964:4030`). Under rail F it turns north as an arm x 4001-4023 from y 11680 up to
+   y 11627 (`col:4012:11605:11700`: cream y 11629-11632 over field, the active edge y 11638-11641,
+   bright salmon y 11644-11674, the poly's end, tan from y 11683: rail F's wide diffusion).
+7. **Outside the L lies rail F's diffusion.** East of the arm under the rail tan at x 4027-4045
+   (the diffusion `D 4028,11643:4130,11700` of piece `pd`); south of it rail F's wide diffusion;
+   south of the arm along the band the area R1 (x 3972-4002, y 11682-11700), tan from x 3991
+   under the rail's margin (along y 11690 tan without a break from x 3991 to x 4051), bounded in
+   the south by the heavy edge y 11699-11705 that also bounds N and the block's channel. So the L
+   is one gate between N (inside: N west of the block, the band north of the arm and west of the
+   rail's arm) and `vss` (outside): a pull-down, 110/22 as extracted.
+8. **Y's poly comes from Y's diffusion.** South of the block the poly runs on over field to
+   y 11737 (cream under the segmented metal), west along y 11722-11737 (`row:11730:3900:3990`:
+   cream x 3915-3927, open poly x 3930-3942, cream x 3945-3966, field east of x 3969), and south
+   at x 3915-3933 (cream y 11724-11757 along x 3924) into a U-shaped box x 3896-3938,
+   y 11768-11800: a heavy outline, the poly's rounded end inside it at y 11787, tan inside and
+   beside the poly (`row:11780:3894:3946`). The box stands on a diffusion x 3896-3946,
+   y 11770-11824 that is one piece with `larr`'s band `larr_y_s#` (`D 3802,11805:3895,11824`):
+   along y 11812 (`row:11812:3872:4000:2`) tan under the VCC rail, plain and diffusion-coloured in
+   the gap x 3880-3898 (red minus green +16 to +28 in chip 2's stripped shot), tan under Vm6
+   (Ambiguity 198).
+
+**Drawn**: the cell `eof_yi` (eight polys, two buried contacts, six diffusion rectangles), placed
+at the offsets of `eof_mx`. The gate row overlaps piece `pd`'s by 5 px, the load strip `larr`'s
+VCC box by 6, Y's diffusion `larr`'s band by 7, the active under the arms piece `pd`'s diffusions
+by 2 and more. Labels `eof_pdg_{}` on N and `larr_y_{}` on Y's poly. No new net name.
+
+**Extracted.** Full extraction 2,523 nets (as before), 4,780 transistors (4,752), 0 errors,
+0 warnings. `tools/unsure.py --equations eof_pdg_s`: FIRM for all fourteen.
+
+```
+per row s#:   t  37/37   load   gate eof_pdg_s#   eof_pdg_s# <-> vcc
+              t  110/22         gate larr_y_s#    eof_pdg_s# <-> vss
+eof_pdg_s#  = NOT larr_y_s#
+```
+
+**What it says (traced).** With piece `pd`: `eof_wstrap_s#` = NOT `eof_pdg_s#` and the compared
+line = NOT `eof_pdg_s#`, so both are `larr_y_s#` inverted twice. Y is, in `larr`'s notes, the
+node behind the pass gate under Vm5 (`larr_y_s#` <- `larr_n5_s#`, the incremented or the loaded
+value in true sense): **each row's compared line (the line the comparators of R14/R15, the
+selector of piece `mx1` and line H read) is the row's new value Y, buffered.**
+
+**The fourteen rows** (`tools/eof_yirows.py`): open poly at the six places on the load block,
+the gate row, Y's arm and Y's horizontal part (blue 36-67); not poly at the six open places
+(69-98; 62 on R1 in s11); N redder than the field in chip 2's stripped shot by 10 and more in
+thirteen rows (s12: +3 against +12, as in piece `pd`); the block over the load strip brighter
+than over field in all (235-251 against 204-229), Y's block and Y's arm over active brighter
+than over field in all; the band tan and the field north of it pink under the segmented metal
+in all (s0's band darker, 150/135); both boxes tan inside; Y's diffusion tan under Vm6.
+
+**Seen, not drawn** (the next pieces; ports):
+
+- **A second transistor on Y.** Y's diffusion runs on east from x 3946 (tan x 3944-3954 along
+  y 11812), under a poly column x 3956-3980 (bright salmon in the clean shot x 3958-3976; edge
+  lines cross it at y 11767-11776 and y 11821-11827: `col:3958:11716:11860`), and on to rail F's
+  diffusion (plain x 3986-3990, tan from x 3992). The column has a rounded head at y 11757 and
+  ends in the pad x 3945-3985, y 11832-11870 with the contact (3958,11847). A thin metal
+  x 3956-3965 lies on it from the head to the pad (`r47_d1.png`; in chip 1's metal shot bright
+  at y 11760-11764 and y 11778-11816 along x 3961). So Y is pulled to `vss` while the pad's net
+  is high. The pad's metal is the segmented metal that runs south into the next row.
+- **The segmented metal's south end** is at about y 11740, over Y's horizontal poly, 15 px north
+  of the next thin metal's head: along x 3961 both metal shots read like bare ground at
+  y 11744-11750 (131-155/137-146 and 146-154/140-151), between two edge bars (Ambiguity 199).
+- **Y's leg**: its diffusion runs south under Vm6 (x 3898-3930) to y 11891
+  (`col:3912:11800:11960`: tan without a break) and east along y 11879-11892 (`row:11885:3890:4010:2`:
+  tan under Vm6 and under the segmented metal, plain in both gaps) into an area x 3975-4000,
+  y 11882-11918 west of rail F (`col:3980:11860:11972`), beside rail F's fifth ring.
+- **Rail F's fifth ring** (4012,11872) is a contact onto a poly pad (an L, x 3998-4040,
+  y 11855-11897: cream with a greenish hole in the clean shot, ring and bright centre in both
+  metal shots: `r47_f1.png`), as review round 54 read it; under the rail south of it bright
+  salmon bands y 11903-11918 and y 11923-11932, open poly x 4057-4082, y 11885-11935 east of the
+  rail, and the band along the bottom of the row y 11937-11957 into the strap's south box
+  (`r47_g1.png`). Not read.
+
 ## Ports
 
 The net is driven outside the package (by `rdp2`'s NOR). `in` marks the port beyond which the
@@ -4916,7 +5076,7 @@ driver lies; the other three lead to the loads.
 | `eof_w16000` | metal | (8831-8845, 16030) | ? | piece `lat15`: the track x 8838 on south of the data pad (8838,16000) (the follower: to (8838,17306); not checked) |
 | `eof_nbox_s0` .. `eof_nbox_s13` | diffusion | (4566-4632, 11216), (4566-4632, 11694), (4566-4632, 12171), (4566-4632, 12648), (4566-4632, 13125), (4566-4632, 13603), (4566-4632, 14079), (4567-4633, 14773), (4567-4633, 15251), (4567-4633, 15728), (4567-4633, 16378), (4567-4633, 16856), (4567-4633, 17333), (4567-4633, 17810) | ? | piece `ld1` (run 39): the north end of the diffusion of the transistor that the line gates, one per row of the left array (s0 at the top). 14 px north of the gate it ends on a heavy-outlined box (x 4600-4635, y 11662-11692 in row s1), not drawn: believed a buried contact onto a poly column x 4605-4625 that goes north across the diffusion box of a VSS contact (4665,11622). (The fourteen poly ports of pieces `t4736s` and `t4780n` at x 4700 are gone: the rows are drawn on to this transistor) |
 | `eof_wstrap_s0` .. `eof_wstrap_s13` | diffusion | (4098, 11926-11944) in row s1; fourteen rows | ? | piece `ol`: the west side of the diffusion box of the strap's south contact, where a strip leaves west (believed `larr`'s Z; not followed). The node's and the compared line's west diffusions and tabs are no longer ports: piece `pd` draws the pull-downs there |
-| `eof_pdg_s0` .. `eof_pdg_s13` | poly | (3990, 11588-11607) in row s1; in row s# at the offset of `eof_mx` (`ports.d/eof.txt` has the fourteen) | in | piece `pd`: the gate poly of the row's two pull-downs, its row under rail F, west end as drawn; it comes from the west (not followed; believed the inverse of `larr`'s Y) |
+| `larr_y_s0` .. `larr_y_s13` | diffusion | (3946, 11772-11822) and (3898-3930, 11824) in row s1; in row s# at the offset of `eof_mx` (`ports.d/eof.txt` has the twenty-eight) | in | piece `yi`: line Y's diffusion (`larr`'s, driven by its pass gate under Vm5) where the drawing stops: east, where it runs on under the poly column from the pad (3958,11847) (a transistor to rail F's diffusion, not drawn), and south, where a leg runs on under Vm6 to the knot at rail F's fifth ring (not drawn). The gate poly `eof_pdg_s#` is no longer a port: its driver is the cell `eof_yi` |
 | `vss` | metal | (3885, 10925-10990) and (3960-3982, 10960) | - | piece `pd` (review round 54): the metal that rail F hangs from runs on beyond the band drawn (y 10966-11014, from `ur`'s `vss` metal x 3889-3937): west of x 3885 as a wide metal, and north as an arm; not followed |
 | `vcc` | metal | (4173-4219, 18240) | - | piece `ol`: rail G of the left array, south end as drawn; it widens and turns west at y 18250-18330 (not followed). Its top is one metal with `ur`'s `vcc` metal at (4128-4172, 11022-11040) |
 | `cdp4_bus_s1` (4095, 14375-14393); `cdp3_g_c6` (4096, 16023-16041); `cdp3_g_c2` (4096, 18105-18123) | poly | as given | ? | piece `hj`: in rows s6, s9 and s13 the row west of the column's foot, west end as drawn; it goes on west into gap 1, gap 2 and the channel below the array (open poly; `larr` draws nothing there). In the other eleven rows that row is `larr`'s H3 (`larr_h_s#`), joined |
@@ -6695,6 +6855,50 @@ driver lies; the other three lead to the loads.
     217/166/115 like the gate row under the rail, a green hole, a ring in both metal shots), the
     pad probably one with a band y 11903-11918 that is bright salmon under the rail and runs east
     as open poly to x 4086: a poly held at `vss`, perhaps an always-off gate.
+
+195. **The band and the area south of Y's arm in the open gap east of the segmented metal** (piece
+    `yi`; no uncertain item). N's band (y 11641-11657) and the area R1 south of Y's arm
+    (y 11682-11700) cross the 33 px gap x 3966-3999 between the segmented metal and rail F, whose
+    open middle (x 3976-3989) does not class a 12-15 px band by colour: chip 2's stripped shot
+    reads red minus green +3 to +19 on the band and +2 to +9 on R1 there, against +22 to +27 on N
+    in the next gap and -8 to +7 on field. Both are drawn as diffusion: (a) the heavy edge lines
+    y 11636-11642 and y 11699-11705 cross the gap in both metal shots, and no edge line crosses
+    the band or R1 between the two metals' own edges (trap 38's test: along y 11649 chip 2 reads
+    168/133/84 to 165/142/83 from x 3976 to x 3985 without a dip, chip 1 likewise; along y 11690
+    160/139/89 to 153/142/90); (b) the clean shot is tan under both margins of each (x 3967-3970
+    and x 3991-3997 on the band, x 3991-4000 on R1); (c) R1's open part is reddish in the clean
+    shot (100/78/54) where field in the same gap is greenish (96/94/51 at y 11722). The pull-down
+    does not rest on either one: if the band were cut in the gap, N would still reach `vss` through
+    the block's channel and R1; if R1 were field, through the band and the arm under rail F. Only
+    with both wrong would Y gate nothing.
+196. **The load's buried contact** (piece `yi`; no uncertain item). The box x 3903-3931, y 11678-11702
+    lies under Vm6 with its west half beside the gap. Read as the block's foot on a tab of N: tan
+    inside (198/167/120 at x 3907-3916), the foot's east edge inside the box at x 3919-3922, tan
+    again x 3925-3928 and N beyond; cream poly from the block down to the box's north outline
+    (y 11665-11671 along x 3912). Vm6 passes over it without a ring (bright at x 3910-3916 along
+    y 11690 in both metal shots). If the foot did not reach N the block would be a gate without a
+    driver and the node a load-less net: the tie is what makes the inverter. Not seen at more than
+    4x on a single row; the medians of fourteen rows agree (`tools/eof_yirows.py`, `box`).
+197. **Three metals lie over the piece without contact** (piece `yi`). Vm6 over the gate row, the
+    load's channel, the load's box and Y's U box; the segmented metal over the gate row, the band,
+    Y's block (a channel) and Y's horizontal part; rail F over the gate row and Y's arm (piece
+    `pd`'s Ambiguity 194). Along x 3912, x 3958 and x 4012 both metal shots are bright between
+    the edge bars of what lies underneath (bars of 6-12 px), the clean shot has no greenish hole,
+    and no metal is widened. A contact of Vm6 on Y's U box would put Y on the write line of all
+    fourteen rows.
+198. **Y's U box is a buried contact, not a gate** (piece `yi`; no uncertain item). The poly from
+    the north ends inside a heavy-outlined box on Y's diffusion (the inner outline of its rounded
+    end at y 11784-11787, x 3912-3933), tan inside and on both sides of the poly within the box
+    (`larr`'s notes read it so too). Without the `B` the stem's end would extract as a transistor
+    with both ends on Y.
+199. **The segmented metal's south end** (not drawn). The metal from the pad of the row above ends
+    at about y 11740 of this row, over Y's horizontal poly, and the thin metal on the poly column
+    begins at y 11757: 15 px apart, read from 8 px of bare-ground colour between two edge bars
+    along x 3961 on the medians, in both chips; not certain, and if the two are one metal the line
+    is one net through all fourteen rows. No contact is seen at the segment's end (cream without a
+    hole at y 11710-11734 along x 3958, the metal bright); `larr`'s notes also have "without a
+    visible contact", and a likely one where it crosses the band y 11946-11960 at (3958,11953).
+    A metal that ends on nothing is not believed: to be read with the pad's column (Not done).
 
 ## Review
 
@@ -9525,6 +9729,27 @@ Round 54: no findings that change a connection.
 
 ## Not done
 
+- **Next (after run 47)**: the gate poly has its driver (piece `yi`: `eof_pdg_s#` = NOT `larr_y_s#`), so
+  item (a) of the list below is done. In order: (a) **the second transistor on Y and its gate's net**
+  (master row s1; `larr` (continue), free): Y's diffusion from x 3946 east under the poly column
+  x 3956-3980 (channel y 11772-11822) to rail F's diffusion at x 3992; the column's head y 11757, its
+  pad x 3945-3985, y 11832-11870 with the contact (3958,11847), the thin metal x 3956-3965 on the
+  column, and the segmented metal x 3949-3966 south from the pad to about y 11740 of the next row
+  (Ambiguity 199): is the segment one metal with the next row's thin metal (then one line through
+  the fourteen rows: read the 15 px at y 11740-11757 in every row, both chips, `tools/px.py col 3961`),
+  and does it touch the band y 11946-11960 at (3958,11953) or Y's poly at its end? Then its top above
+  s0 and its foot below s13, and the two gaps. Views `r47_c1.png`, `r47_d1.png`. (b) **the knot at
+  rail F's fifth ring** (x 3966-4100, y 11850-11965; with items (b) and (c) of the list below): Y's leg
+  (x 3898-3930 to y 11891, then east along y 11879-11892 into the area x 3975-4000, y 11882-11918),
+  the ring's poly pad (L, x 3998-4040, y 11855-11897) and where its poly goes (open poly x 4057-4082,
+  y 11885-11935), the bright bands under the rail at y 11903-11918 and y 11923-11932 (a gate held at
+  `vss` between Y's leg and the strap's south box?), the band along the bottom y 11937-11957 (`larr`'s
+  Z, which turns down at x 3950-3972) and the strip into the strap's south box (4098, 11926-11944).
+  Views `r47_e1.png`, `r47_f1.png`, `r47_g1.png`; profiles in `cache/scratch/eof/survey.md` (RUN 47).
+  (c) the three gap rows' west rows and gap 1 under rail E (Ambiguity 184); (d) the box north of the
+  load line's gate (`eof_nbox_s#`); (e) the rest of the column x 4590-4700; (f) the pad (4778,17365);
+  (g) `bl0_w15566`'s driver and the twin of `cap18`; (h) the sources of `lc3_e9577` .. `lc3_e9793`;
+  (i) rail G's foot and rail H; as in the lists below.
 - **Next (after run 46)**: the two pull-downs are drawn (piece `pd`: both nodes are NOT `eof_pdg_s#`), so
   item (a) of the list below is done. In order: (a) **the gate poly west of x 3990** (the row
   y 11588-11607 in the master row s1; `larr` (continue), free): to its driver, believed the node of
