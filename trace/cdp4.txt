@@ -1117,7 +1117,7 @@ P 10804,3635 x10980 w=22                 # the row east from its top pad, under 
 M 10804,3628 10808,3700 10809,12000 10810,15000 10808,15746 w=12
 P 10791,15721:10825,15755
 C 10808,15738 s=20x20
-P 10700,15737 x10808 w=22                # the row west from its bottom pad, under bc2's rail: port at x 10700
+P 10808,15737 x10706 y15762 x10655 w=20  # the row west from its bottom pad under bc2's rail, south at the rail's west edge, west: port at x 10655
 N M 10809,9000 cdp4_w10808
 # --- T2 (x 10852): rst_lat
 P 10832,3575:10866,3609
