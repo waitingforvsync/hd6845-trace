@@ -1,26 +1,26 @@
 {
  "who": "Matt Godbolt",
- "generated": "2026-11-21T01:29:54+00:00",
+ "generated": "2026-11-21T01:39:33+00:00",
  "price_source": "Claude API list prices per million tokens, as of 2026-11-03",
  "unpriced_models": [
   "<synthetic>"
  ],
- "responses": 7229,
+ "responses": 7248,
  "first": "2026-11-17T14:25:20.582000+00:00",
- "last": "2026-11-21T01:29:43.348000+00:00",
- "total_cost": 1120.04,
- "review_cost": 452.5,
+ "last": "2026-11-21T01:39:22.105000+00:00",
+ "total_cost": 1123.27,
+ "review_cost": 454.13,
  "tokens": {
-  "input": 14904,
-  "output": 9968754,
-  "cache_write_5m": 18598633,
-  "cache_write_1h": 14850235,
-  "cache_read": 1698392669
+  "input": 14944,
+  "output": 9985501,
+  "cache_write_5m": 18699029,
+  "cache_write_1h": 14858398,
+  "cache_read": 1705525103
  },
  "by_model": {
   "claude-fable-5-2": {
-   "cost": 1095.23,
-   "responses": 6521
+   "cost": 1098.46,
+   "responses": 6540
   },
   "claude-sonnet-5-5": {
    "cost": 16.12,
@@ -36,23 +36,23 @@
   }
  },
  "by_package": {
+  "(coordination)": {
+   "cost": 202.67,
+   "review_cost": 32.09,
+   "responses": 1695,
+   "models": {
+    "claude-fable-5-2": 987,
+    "claude-sonnet-5-5": 554,
+    "<synthetic>": 3,
+    "claude-opus-5-5": 151
+   }
+  },
   "lc2": {
    "cost": 202.44,
    "review_cost": 104.36,
    "responses": 1138,
    "models": {
     "claude-fable-5-2": 1138
-   }
-  },
-  "(coordination)": {
-   "cost": 201.94,
-   "review_cost": 32.09,
-   "responses": 1692,
-   "models": {
-    "claude-fable-5-2": 984,
-    "claude-sonnet-5-5": 554,
-    "<synthetic>": 3,
-    "claude-opus-5-5": 151
    }
   },
   "tc1": {
@@ -71,20 +71,20 @@
     "claude-fable-5-2": 774
    }
   },
+  "cdp2": {
+   "cost": 72.83,
+   "review_cost": 32.86,
+   "responses": 331,
+   "models": {
+    "claude-fable-5-2": 331
+   }
+  },
   "bl0": {
    "cost": 72.67,
    "review_cost": 39.63,
    "responses": 509,
    "models": {
     "claude-fable-5-2": 509
-   }
-  },
-  "cdp2": {
-   "cost": 70.33,
-   "review_cost": 31.23,
-   "responses": 315,
-   "models": {
-    "claude-fable-5-2": 315
    }
   },
   "lc3": {
@@ -165,6 +165,6 @@
   "2026-11-18": 214.26,
   "2026-11-19": 315.68,
   "2026-11-20": 238.81,
-  "2026-11-21": 57.74
+  "2026-11-21": 60.97
  }
 }
