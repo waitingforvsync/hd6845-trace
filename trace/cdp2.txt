@@ -609,7 +609,7 @@ C 8682,7300
 N P 8590,7300 cdp2_w7300
 @alias cdp2_b_s7_x cdp2_w7300          # the placeholder of the first merge: the row is the chain output's
 N P 8590,7300 cdp2_b_s7_x
-P 8350,7333:8600,7354                 # row 2, from the east (port at x 8600)
+P 8350,7333:8660,7354                 # row 2: east into the plate of the load of cdp2_b_hl (piece gh)
 N P 8590,7344 cdp2_w7344
 # the load
 D 8320,7255:8367,7277                 # the node's tab west (under the thin metal x 8328-8345: no contact)
@@ -683,3 +683,21 @@ P 8662,6306:8698,6342
 C 8680,6324
 M 8683,6270 y6324 w=14                 # a metal from the north ends on that pad (port)
 N P 8600,6324 cdp2_w7128
+
+# ---- piece gh: the load of the comparator's line cdp2_b_hl (x 8578-8745, y 7352-7432)
+# One diffusion x 8578-8745, y 7372-7420 between a contact to the wide VCC metal x 8594-8644 and the
+# contact on which cdp2_b_hl's metal x 8715-8735 ends; a poly plate x 8632-8692 across it between them.
+# Row 2 of piece gl is one poly with the plate. The plate's north-east corner lies on a small box at
+# the top of a tab of the line's diffusion: the tie of a depletion load (drawn ?B). So row 2 of gl,
+# cdp2_w7344, is cdp2_b_hl.
+M 8619,7230 y7440 w=50                 # the wide VCC metal x 8594-8644, down onto row C's
+N M 8619,7240 vcc
+D 8578,7372:8745,7420
+C 8598,7398
+C 8712,7399
+M 8706,7400 x8735 w=20                 # the foot of cdp2_b_hl's metal over its contact
+P 8632,7352:8692,7432                 # plate (channel W about 48, L 60)
+D 8695,7358:8715,7375                 # tab of the line's diffusion north
+P 8690,7355:8712,7372                 # the plate's corner on it
+?B 8688,7352:8716,7376
+@alias cdp2_b_hl cdp2_w7344            # the placeholder of the earlier merge (it occurs in the coordinator's files)

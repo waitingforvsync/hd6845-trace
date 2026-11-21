@@ -23,6 +23,13 @@ the most significant of the five compared bits, s7 the least.**
 
 ## Status
 
+- **Run of 2026-11-20 18:57 -0600**: **piece `gh`, the load of the comparator's line `cdp2_b_hl`** (x 8578-8745,
+  y 7352-7432; 1 transistor, one uncertain item, the load's tie). `cdp2_b_hl`'s metal x 8715-8735 ends on a
+  diffusion that a poly plate parts from a contact to the VCC metal x 8594-8644: a depletion load
+  (50/57). The plate is one poly with row 2 of the lower series gate, so **`cdp2_w7344` is `cdp2_b_hl`** and
+  `cdp2_w7272` = NOT(`cdp2_b_hl` AND `cdp2_b_s7_x`) (marked: through the tie's `?B`). With its load drawn,
+  `cdp2_b_hl` extracts as a gate for the first time: NOT(OR over s3..s7 of (`_p1` AND `_y`)).
+
 - **Run of 2026-11-20 18:21 -0600**: **piece `gu`, the upper series gate** (x 8205-8550, y 6300-7230; 3 transistors,
   one uncertain item, a `?M` on a passing metal): **`cdp2_w7092` = NOT(`cdp2_w7128` AND `cdp2_w7272`)**. Row 2 is
   the lower gate's output. Row 1 is a poly column from a pad (8530,6955), whose metal x 8503-8517 comes
@@ -415,8 +422,8 @@ x 8350 and run on east, in the open and under the thin metal x 8525-8540 without
 under the wide metal x 8595-8645 to a pad (8682,7300) (ring and bright centre in chip 2, a hole in the
 clean shot: `textmap.py 8660 7280 8704 7322 3`), on which the metal x 8675-8695 from the north ends
 (`tl5_tracks.py v 8685 7040 7290`: bars only; no metal south of the pad): the metal `cdp2` drew from the
-pad (8683,7018) of the comparator chain's output line 6888, `cdp2_b_s7_x`. Row 2 runs on east past
-x 8600 (port).
+pad (8683,7018) of the comparator chain's output line 6888, `cdp2_b_s7_x`. Row 2 runs on east into
+the plate of piece `gh`.
 
 - **Load.** The top node has a tab west (y 7255-7277; open diffusion green at x 8340-8348, tan under the
   thin metal x 8328-8345, which passes over it: the metal is dimmer there but has no ring, `px.py row
@@ -473,6 +480,33 @@ cdp2_w7092 = NOT( cdp2_w7128 AND cdp2_w7272 )        pull-downs W 81; load 27/55
 Also drawn here: the thin metal x 8328-8345 that passes over both gates' tabs (a `?M` over each: dark for
 55 and 58 px) starts on a pad (8332,6954) (ring and centre in both chips), whose poly row y 6942-6962
 goes west (port). South of y 7395 it is the metal `cdp2` drew as "q of s1" on row C's track-c column.
+
+### The logic left of rows B: piece `gh`, the load of `cdp2_b_hl` (2026-11-20; traced)
+
+`cdp2_b_hl`'s metal (x 8715-8735, from the land at the west end of the row-long diffusion line of rows B)
+ends on a contact (8712,7399); 115 px west a second contact (8598,7398) is on the wide VCC metal
+x 8594-8644 (both: ring and bright centre in both metal shots, a hole in the clean shot: `textmap.py 8692
+7380 8736 7420 3`, `8580 7380 8622 7418 3`). They are on one diffusion, x 8578-8745, y 7372-7420 (a closed
+rounded outline in all shots), and a poly plate x 8632-8692 lies across it between them: chip-2 stripped
+red minus green 30-43 along y 7400 from x 8630 to 8672 and 14-25 to x 8690, about 5 on the diffusion at
+both sides (`px.py row 7400 8570 8750 6 acid1b,acid`); down x 8670 the poly runs from y 7350 to 7432
+with the diffusion's edge line across it at y 7380 (`px.py col 8670 7340 7446 5`). Under the VCC metal's
+edge it is salmon (x 8636-8650), in the open dark red-brown. Views `cache/scratch/cdp2/x1_acid1b.png`,
+`x1_metal.png`, `x1_acid.png` (6x), `o_gh.png`.
+
+Row 2 of piece `gl` (y 7333-7354) runs east into the plate's north-west corner: one poly (orange without
+a break round the corner in the chip-2 stripped shot). At the plate's north-east corner a small
+heavy-outlined box (8690-8715, 7352-7372) sits on top of a tab of the line's diffusion (tan from y 7376
+down, `px.py col 8705 7340 7392 4`): read as the load's tie, a buried contact, drawn `?B`. With it:
+
+```
+load of cdp2_b_hl: 50/57, gate tied to the line        cdp2_w7344 = cdp2_b_hl
+cdp2_w7272 = NOT( cdp2_b_hl AND cdp2_b_s7_x )           (marked: the tie)
+cdp2_b_hl  = NOT( OR over s3..s7 of (cdp2_b_s#_p1 AND cdp2_b_s#_y) )
+```
+
+Without the tie the plate would be a pull-up gated by an undriven poly, and the line would have no load
+anywhere: the tie is the only reading that makes a circuit, but the box's inside cannot be seen.
 
 ## Ports
 
@@ -579,6 +613,8 @@ Run of 2026-11-20:
   contacts (the load's tie; the output onto the poly row) with the metal passing over, and drawn `?B`.
   The other reading (metal contacts) would put `db_b6` on the gate of a wide pull-up and the node on the
   through line `cdp2_w6845`; the photos do not exclude it outright.
+- **The tie of `cdp2_b_hl`'s load** (the box 8690-8715, 7352-7372 at the plate's north-east corner): drawn
+  `?B`. It decides that row 2 of the lower series gate is `cdp2_b_hl` (and so `cdp2_w7272`'s equation).
 
 ## Not done
 
