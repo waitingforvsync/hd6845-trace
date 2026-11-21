@@ -2478,7 +2478,7 @@ to the metal that piece `in350` drew north from `ck_out`'s pad (8424,17908):
 | west along y 17390, x 8143-8229 | `tl5_tracks.py h 17388 / 17393 8125 8245`: metal x 8137-8233 whole in both chips | field |
 | south on x 8143, y 17390-17693 | `tl5_tracks.py v 8143 17300 17710`; `r30_c1.png` (5x, four shots) | field. North of the corner the same track position carries another net's metal (the bundle's fourth L, which turns west at y 17345), with 27 px of bare ground between (trap 33). A dim stretch at y 17432-17458 and a green stain of chip 1 at y 17510-17570: Ambiguity 109 |
 | east along y 17693, x 8143-8425 | `tl5_tracks.py h 17690 / 17694 8125 8440`: metal x 8136-8431, bars at x 8345-8355 and 8392-8399 | field, and from x 8355 lengthwise on `eof_w17168`'s poly row (piece `o168`: no contact; `eof_cchk`, no hole) |
-| south on x 8425, y 17693-17866 | `tl5_tracks.py v 8424 17670 17900`: bars of 8-11 px in pairs | five poly rows (`rst_a`'s row y 17736 among them: no contact, piece `isrc4`); a bar just south of the corner: Ambiguity 110 |
+| south on x 8425, y 17693-17866 | `tl5_tracks.py v 8424 17670 17900`: bars of 8-11 px in pairs | four poly rows south of the corner's own (y 17724-17742, 17769-17784, 17811-17829, 17856-17871; `rst_a`'s row y 17736 among them: no contact, piece `isrc4`); a bar just south of the corner: Ambiguity 110 |
 
 Centre lines from `eof_mrun.py` (rows 17500 / 17600 / 17660: x 8142-8143; columns 8180-8400: y 17389-17390
 and y 17693; rows 17730 / 17800: x 8426-8427). Overlay `r30_o1.png`. The extraction joins the latch's two
@@ -3555,7 +3555,11 @@ driver lies; the other three lead to the loads.
     box with a contact on the rail 8 px below the node. Read as field: the clean shot is pink (field under
     metal) from y 16575 to 16625 with only a greenish tinge along the rail's middle, neither metal shot has
     a ring, and the patch is where the stripped shot shows the rail's fringe (`r30_u4.png`). The edge line
-    y 16566-16569 is the node's south edge. Column B's `inv16` has field below its node too.
+    y 16566-16569 is the node's south edge. Column B's `inv16` has field below its node too. Review round 37
+    adds: the same signature as the cells' known field under this rail at y 16320-16332 and 16927-16939; and
+    a dark dot on the rail over the node at (8343,16550) in chip 2's metal shot, with a red ring in its
+    stripped shot, that neither chip-1 shot has (`eof_cchk`: no hole, 16; chip 1 centre 213 without a ring):
+    a blemish of chip 2, not a contact.
 112. **The load tie of `dinv17`** (`?P`, `?D`, `?B` at (8424-8458, 16562-16594)): as in every load of this
     build; the inverter's equation is marked for it only.
 113. **The latch `lat18`'s ties, its thin metal over the upper node's box, and two dim contacts** (the cells
@@ -5372,6 +5376,59 @@ The connections are the same before and after the fix:
 
 Round 36: no findings that change a connection.
 
+### Round 37 (full review of pieces `en17`, `dinv17` and `lat18`; 2026-11-21 05:01 to 05:22 +0000, at commit 3d59d8f)
+
+A fresh reviewer agent (Claude Fable 5.2), 30 images in `cache/scratch/eof/review-37/`. It was given the three
+pieces' thirteen claims (`en17`: the five legs as one metal without a pad or contact, the join to `ck_out`'s
+pad, the crossings and the row it lies on, the other metal north of the corner (8143,17390); `dinv17`: the
+box, gate and node under the rail with field south of the node, the gate row and its pad, the input's track
+with its corner and north pad and that pad's row, the output's strip and box, the load and its tie; `lat18`:
+the two cell copies with their three equations, the data pad's join to the row, the two enable pads on one
+track that ends north on the upper, the thin metal, rail, clear, foot and VCC box) and told to look hardest
+at: the dim stretch y 17432-17458 on x 8143, the bar below the corner (8425,17693), the corner (8143,17390),
+any contact onto the row along y 17693 or a crossed row, the follower's three candidates; the region south
+of `dinv17`'s node, the pad (8096,16517), the gate row's end against the load's vertical piece, whether that
+piece is diffusion, the plate's end under the widened rail, the corner (8099,16217), both pads all round;
+the data pad's join, the 57 px without metal between the pads, the two dim contacts, every row end of the
+copy against the master, anything left out.
+
+What it checked (4x or more, two or more shots, with `tl5_tracks.py`, `px.py`, `textmap.py`, `eof_cchk.py`,
+the extraction and `unsure.py`): all five legs of `en17` on three centre lines each; the dim stretch (chip 2
+keeps both edge lines there, its stripped ghost matches y 17470, the clean strip stays pink, and the real gap
+at y 17365 has none of these: one metal); all four corners; the bar at (8425,17701) (red 106 in chip 2
+against 35 on the edge line beside it and 78 at the next row's edge); every crossing and the row along
+y 17693 (no hole, ring or pad); the field south of `dinv17`'s node; the pad (8096,16517) (closed west and
+south); the corner (8099,16217) and the pad (8140,16215) (the metal ends on it; bare ground north, south
+and east); the gate row's end at x 8388; the vertical piece (diffusion: chip-2 stripped red minus green
+21-25 against 0-5 for field, no poly crossing); the node out of the rail both ways; the plate's end at
+x 8509; the copy against the master; the data pad and row as one poly; the 57 px without metal; the track
+through (8227,16387); the contacts (8284,16435) and (8357,16278); the top and bottom pads; the equations.
+
+It reported **no findings**, and three notes, none changing a connection, each checked here:
+
+1. **A dark dot at (8343,16550) on the rail over `dinv17`'s node in chip 2 only.** Confirmed as a blemish
+   (`eof_cchk.py 8343,16550`: no hole, 16; no ring in chip 1). Written into Ambiguity 111. Nothing drawn
+   changes.
+2. **An undrawn wire inside `en17`'s region: the continuation of the port `eof_w17472`** (a strap y 17603
+   between pads (8225,17600) and (8402,17598), a row y 17632-17656 east, north under the VCC rail). Confirmed
+   by text (`eof_cchk.py`, `tl5_tracks.py h 17603 8200 8425`); it is the next piece, written into Not done.
+   It does not touch `en17`'s metal. Nothing drawn changes.
+3. **A comment: leg 5 crosses four rows south of the corner's row, not five.** Confirmed (the bars of
+   `tl5_tracks.py v 8424 17670 17900` pair into four rows). Geometry only (a comment): fixed in the trace's
+   comment and in piece `en17`'s table.
+
+Could not check (the reviewer): whether the bar at the corner (8425,17693) is an edge or an 8 px gap (it
+accepts Ambiguity 110); the three load ties; the cell's internals beyond a 1.8x comparison with the master,
+and its thin metal over the node box; a contact from the widened VCC rail onto the plate's end (the metal
+shots are unclear there, the clean shot has no hole).
+
+The connections are the same before and after the fix:
+
+    tools/t.sh eof sameconn.py 3d59d8f           -> connections identical
+    .venv/bin/python tools/sameconn.py 3d59d8f   -> connections identical
+
+Round 37: no findings that change a connection.
+
 ## Not done
 
 - **Next (after run 30)**: (i) **`lat18`'s enable `eof_w16172`**: the track x 8229 south of the port
@@ -5379,7 +5436,14 @@ Round 36: no findings that change a connection.
   y 17345, where it turns west (the bundle's fourth L: `textmap.py 8118 17340 8172 17476 3 --acid` shows the
   corner); not followed further. If it is the level opposite to `ck_out`, each latch pair is a flip-flop.
   Column B's first latch has the like question (`eof_w16040`, the metal x 8925 south of (8925,16300)).
-  (ii) `eof_w17472` (the driver's lower poly, west leg south of y 17560). (iii) `eof_w17212` and
+  (ii) `eof_w17472` (the driver's lower poly, west leg south of y 17560): **review round 37 saw where it
+  goes** (not drawn, checked by text only: `eof_cchk` (8225,17600) hole -11, 219 / 217; (8402,17598) -5,
+  174 / 131; `tl5_tracks.py h 17603 8200 8425`: metal x 8254-8382 between the two rings): the leg ends on a
+  pad with a contact (8225,17600), a metal strap along y 17603 runs east to a pad with a contact
+  (8402,17598), whose poly goes south into a row y 17632-17656 that runs east and turns north under the VCC
+  rail at x 8520-8545; it does not touch `en17`'s metal and is not joined to `eof_w17168`'s leg at x 8573
+  (the reviewer's `t1`, `u1`, `v1`, `w1.png` in `review-37/`). To draw: the strap, the two pads, the row and
+  its turn north to its driver. (iii) `eof_w17212` and
   `eof_w16000` (the item on the ripple counter's clock below). (iv) what `bc1_s0` and `bc1_s1` are (`bc1`'s
   bus lines y 14832 and its second select: `bc1` (continue)). Seen beside pieces `dinv17` and `lat18`, other
   nets, not drawn (`bc3` / `bc1`, free): the track x 8012 north of y 16370, where it turns west; the

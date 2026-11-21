@@ -2334,7 +2334,8 @@ N P 8285,16954 eof_w16950
 # (8229,17390); west along y 17390 (x 8137-8233); a corner (8143,17390); south on x 8143 to a
 # corner (8143,17693); east along y 17693 over field and, from x 8355, lengthwise on
 # eof_w17168's poly row (piece o168: no contact) to a corner (8425,17693); south on x 8425 over
-# five poly rows (rst_a's row y 17736 among them: no contact, piece isrc4) to the pad.
+# four poly rows south of the corner's own (rst_a's row y 17736 among them: no contact, piece
+# isrc4) to the pad.
 # North of the corner (8143,17390) the track position x 8143 carries another net's metal (the
 # bundle's fourth L, which turns west at y 17345): 27 px of bare ground between (y 17355-17382,
 # textmap.py 8118 17340 8172 17476 3 --acid): two metals end to end on one track (trap 33).
