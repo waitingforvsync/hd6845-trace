@@ -685,8 +685,9 @@ and D6's the cell `cdp4_ro`, D7's in `regs`).
   metal,metal1`: orange from y 15733 to y 15773), crosses one 8 px edge line at y 15776-15782 (the top edge of
   the rail's contact box (10722-10775, 15782-15848) running on west under the poly) and is a block
   x 10685-10716, y 15782-15849 (`tools/px.py col 10700 15770 15870 6`: orange in both metal shots from y 15788
-  to y 15842, dark red-brown and textured in the clean shot): the plate of a depletion load from that VCC
-  box, with a narrow strip west of it (x 10670-10682). From the corner it also runs west along y 15750-15771
+  to y 15842; bright red-orange and textured in the clean shot): the plate of a depletion load from that VCC
+  box, with a narrow strip west of it (x 10668-10681); the plate's poly overhangs its bottom edge line
+  (y ~15848) to y ~15862, with field beyond. From the corner it also runs west along y 15750-15771
   (`tools/px.py row 15762 10610 10730 6`: orange from x 10652 to x 10712) and ends at x 10623 on a
   heavy-outlined box (10622-10650, 15760-15790) with no metal over it, read as the buried contact that ties
   the plate to the unit's output diffusion. So `cdp4_w10808` is driven by a gate of `bc2` whose pull-downs are
@@ -902,6 +903,37 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
 - Ends of `wr_r15` (poly, y 11837).
 - Right of x 10600: (done, runs 4 and 12: the read bus tracks and the two through lines.) Left: the end of
   the s7 VCC rail; the ninth VSS rail's end (y 13300).
+- **Lead: the gate cluster above the sixth output inverter** (x 15840-16260, y 17100-17410, under `bd2`'s VSS rail
+  x 16008-16058 on south of where `bd2` draws it; `busc`'s "gate group at its east end" / `bd2`'s "column below group
+  4"). Surveyed in run 12's waiting time, not drawn (readings with the commands in `cache/scratch/cdp4/survey.md`;
+  views `u7_*.png`):
+  - Under the rail (`tools/railprof.py 16022 16055 17120 17420`): gates at y 17120-17139, 17176-17198, 17247-17262,
+    17334-17348, with rail contacts at (16035,17218) (between the second and third) and (16040,17375) (south of the
+    fourth). The fourth gate row is `bd2_rs_n` (the metal x 16255 from `bd2`'s contact (16252,16128) ends on a pad
+    (16253,17341): one metal, `tools/follow.py 16255 17150 N --gap 20`). The third gate row comes from a pad
+    (16209,17212), the south end of a thin metal x 16211 whose north end is a pad at about (16212,16757): the pad's
+    poly goes south (x 16205-16225) into the band y 17247-17268 and west under `e_b`'s metal (no contact) and the rail.
+    The second gate row's lead (y 17195-17222, an L up at x 16090-16115) runs east under `e_b`'s metal and seems to end
+    there at x ~16178 (no poly on y 17210 between x 16180 and x 16200; no contact from `e_b`'s metal): its source is
+    not found.
+  - East of the rail the bands between those poly rows (x 16095-16150) are field (chip-2 stripped red minus green
+    -12 to -4): wiring, no transistor.
+  - The node between the third and fourth gates (y 17269-17333) has an open diffusion west of the rail (green,
+    x 15950-16000, y 17280-17322; trap 21's rule holds here) up to a load plate (15912-15950, 17268-17340) with a VCC
+    box (15845-15890, 17255-17345; two contacts) under `regs`' VCC rail; **a diffusion wire leaves that region north
+    at x 15975-15992** (y 17195-17280 and on), so the node is joined to more of the cluster: it is one gate group,
+    not separable there.
+  - Its output: a box (16100-16125, 17285-17315) east of the rail, a poly row y 17285-17310 to a pad (16210,17299),
+    the top end of a thin metal x 16210 that runs south to a corner (16217,17648), east along y 17650-17658 to
+    (16863,17655), south to a pad (16861,17950), a poly hop to a pad (17065,17944), a metal east to a pad
+    (17427,17948), then a poly north (x 17415-17440) and west along y ~17855 under a wide metal: the third line
+    beside `d7_out_n` and `d6_out_n`. Believed part of the bus control (what makes `d_hiz`); nothing traced.
+- **Lead: `rst_lat`'s branch south of its port (10789,17700)** (run 12's waiting time; not drawn): the column
+  x 10782-10797 runs south to y ~17805 and turns west as a row y 17806-17826 under the wide rail x 10722-10772, a
+  rail x 10545-10595 and three thin metals, to x ~10355, where it turns north as a poly column x 10345-10365 under
+  a drawn metal's track (views `rl_s.png`, `rl_w.png`, `rl_we.png`).
+- **Lead: the two top rows** (`rst_lat` east of (10980,3590), `cdp4_w10808` east of (10980,3635)) are poly at least
+  to x 11660 (`tools/px.py row 3590 10980 11700 40`), heading into `tr1`'s track field (y 3400-3650).
 - From run 12: the four rows beyond their ports (`cdp4_w10808` east of (10980,3635), and the unit of `bc2`
   at (10620-10780, 15750-15860) whose load's plate it is; `rst_lat` east of (10980,3590) and south of (10789,17700)); the undrawn metal on T1's track
   position from about y 16400 to y 18458 (the north part of `trunks`' `rst_ck` piece, or another net).
@@ -1372,6 +1404,23 @@ changes against either earlier state:
 
 Round 12: two findings (the wire's end: a load's plate and its tie), fixed by ending the drawing at the
 corner with a port.
+
+Round 13 (fix check, 2026-11-21 17:38 -0600; a fresh Fable reviewer, images in `cache/scratch/cdp4/review-13/`, 10; the
+change since 0fa5cce: T1's bottom row drawn to its corner only, the port moved to the corner, the undrawn
+unit described in the notes and the port line). It checked at 5.5x and 8x in all four shots, with
+`tools/px.py` and `tools/textmap.py`: the drawn row (one poly from the pad to x ~10694; under the rail
+unbroken salmon with no hole or pits, where the rail's own contact box below shows both; a dark wedge at
+(10744-10756, 15736-15750) in the chip-2 shots only; field west of x 10693 on y 15737 and north of the
+corner; `bc2`'s diffusion does not touch it); the port (the corner square is the drawn end: column x 10706
+orange from y 15732 to y 15772 with no edge line at y 15748); and every statement about the undrawn part
+(the edge line y 15776-15784 continuing the VCC box's top edge; the plate x 10685-10716 with a
+diffusion-coloured strip x 10668-10681; the row orange from x 10630 to x 10708, ending at x ~10623 with about
+18 px of field beyond; the tie box's walls, no metal over it; the strip's top joining a band along
+y 15790-15803 under the box's south wall, which fits the tie reading). Two wording refinements, taken into
+the bullet (the plate's overhang; its colour in the clean shot). `sameconn.py 0fa5cce`: connections
+identical, both runs.
+
+Round 13: no findings.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
