@@ -2820,7 +2820,7 @@ What they establish (from the tracers' notes; marks as there):
 - **The logic left of `cdp2`'s rows B** (`cdp2`; 5 transistors): an inverter `cdp2_w7065` = NOT
   `tc2_sr_q` (marked: two `?B`); a through line `cdp2_w6845` from the west to the pad (7878,8315), an
   input of the cluster beside `cdp3`'s row A (one `?M`); the lower of two series gates, `cdp2_w7272`
-  = NOT(`cdp2_w7300` AND `cdp2_w7344`) (firm), believed cross-coupled with the gate above it.
+  = NOT(`cdp2_b_s7_x` AND `cdp2_w7344`) (firm), believed cross-coupled with the gate above it.
 
 Reviews: `busl` round 15, no findings (every crossing read at 4x or 5x in the chip-2 metal shot and the
 clean shot; chip 1's metal shot not by eye at the 64 column crossings). `cdp2` rounds 1-3: one finding

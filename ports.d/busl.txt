@@ -182,8 +182,8 @@ vss          M  4752-4802,10590    -   onto the foot of lc3's west rail (its por
 vss          M  4645-4698,10700    -   the rail's foot turned west and south, on south down the left array's east edge (larr)
 vss          M  7550-7555,14022-14075  -   onto cdp4's plate at the foot of its s0 VSS rail (cdp4's `M 7550,14024:7645,14055`)
 vss          M  7383-7432,15000    -   the wide metal on south into bc1's ground (not followed)
-# piece ha (run 16): tl5_w3461 = wl_h1 (canonical wl_h1; @alias until the rename)
-tl5_w3461    P  5443-5465,6350     out onto tl5's poly column from T5's south pad (its port tl5_w3461 there): the wire comes from bw's pad (7031,7560), the west end of wl_h1's row y 7562
+# piece ha (run 16): wl_h1 = wl_h1 (canonical wl_h1; @alias until the rename)
+wl_h1    P  5443-5465,6350     out onto tl5's poly column from T5's south pad (its port wl_h1 there): the wire comes from bw's pad (7031,7560), the west end of wl_h1's row y 7562
 # piece hb (run 16): cdp2_w6845 west of cdp2's port
 cdp2_w6845   M  7290-7300,6842-6854  ?  onto cdp2's metal west of its pad (7335,6845) (its port cdp2_w6845 (7290,6848))
 cdp2_w6845   P  6118,6836-6858     ?   the end pad (6146,6847)'s poly row on west (it runs under eight tracks to a pad (5668,6846), whose thin metal goes on west along y 6849 to about x 5339; not drawn: lc1's band)

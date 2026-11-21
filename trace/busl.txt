@@ -1072,7 +1072,7 @@ N M 4672,10630 vss
 M [ 7490,14022 x7555 y14075 x7537 y14722 x7515 y14898 x7432 y15000 x7383 y14852 x7458 7468,14843 y14680 x7490 ]
 N M 7512,14400 vss
 # =====================================================================================
-# Piece ha: tl5_w3461 (the data of latch a of the top-left logic's fifth strip) is wl_h1.
+# Piece ha: wl_h1 (the data of latch a of the top-left logic's fifth strip) is wl_h1.
 # The third (north-east) line of the diagonal bundle of pieces gd and eof's bd1_n2: tl5's
 # poly column `P 5453,5770 y6350 w=20` on south (x 5454) under nine horizontal metals (no pad:
 # 21-24 px wide in the chip-2 stripped shot at every sample) to a bend (5454,6763), a
@@ -1088,11 +1088,10 @@ P 5454,6345 y6763 5645,6954 x6188 w=22   # tl5's column on south, the diagonal, 
 P 6169,6937:6207,6975                 # the row's east end pad
 C 6188,6956 s=24x24
 M 6186,6957 x7034 y7545 w=13          # metal east along y 6957, corner (7034,6957), south onto bw's pad
-N P 5454,6600 tl5_w3461
-N P 5900,6954 tl5_w3461
-N M 6700,6957 tl5_w3461
+N P 5454,6600 wl_h1
+N P 5900,6954 wl_h1
+N M 6700,6957 wl_h1
 N M 7034,7300 wl_h1
-@alias wl_h1 tl5_w3461
 # =====================================================================================
 # Piece hb: cdp2_w6845 west of cdp2's port. The metal that cdp2 draws from its pad
 # (7335,6845) west to x 7290 (`M 7290,6848 x7335 w=16`) runs on west along y 6848 over eofw's

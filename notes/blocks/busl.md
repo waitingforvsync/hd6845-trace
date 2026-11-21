@@ -399,7 +399,7 @@ its order. Six pieces, wiring and supply metal only, no transistor, no uncertain
     second plate (x 7383-7515, y 14852-14898) and on south at x 7383-7432 out of the region. The "two wide
     metals over the foot rows" of the Next list are this one metal. It is **not** joined to `bc1`'s VCC
     rail RL2, whose top is 37 px south of the second plate with an open poly row between.
-- **`tl5_w3461`, the data of latch a of the top-left logic's fifth strip, is `wl_h1`** (piece `ha`; wiring,
+- **`wl_h1`, the data of latch a of the top-left logic's fifth strip, is `wl_h1`** (piece `ha`; wiring,
   no uncertain item). The "third diagonal of `lc1`'s bundle", the row y 6953 with its pad (6190,6955), the
   metal y 6957 and the track x 7035 of the Next list are one wire, and it ends on the pad (7031,7560) that
   `bw` drew as the west end of the line from the poly band H1 above the mid-right array's counters
@@ -407,7 +407,7 @@ its order. Six pieces, wiring and supply metal only, no transistor, no uncertain
   poly column x 5454 south under nine metals, a diagonal (x - y = -1309), the poly row y 6954 east under
   eight tracks to an end pad (6188,6956), a metal east along y 6957 over five vertical polys to a corner
   (7034,6957) and south on x 7034 over six poly rows onto `bw`'s pad. No pad or tap between the ends. The
-  names are gathered by `@alias wl_h1 tl5_w3461`; the rename is the coordinator's. What `wl_h1` is is not
+  names are gathered by an `@alias`; the rename is the coordinator's. What `wl_h1` is is not
   known (`notes/blocks/wl.md`: band H1 has a second end, a strap north at (11978,7000)).
 - **`cdp2_w6845` runs on west of `cdp2`'s port** (piece `hb`): the metal y 6848 from `cdp2`'s pad
   (7335,6845) to an end pad (6146,6847), 1,190 px over seven vertical polys with no tap; the pad's poly
@@ -428,7 +428,7 @@ its order. Six pieces, wiring and supply metal only, no transistor, no uncertain
   poly rows of the crossing field, y 7432 and y 7474, with a poly column x 7352-7372; the metals y 6373
   and y 6459 north of the northern part.
 
-Full extraction with run 16: 2,456 nets (as main: one more, `busl_y6805`, and one fewer, `tl5_w3461` with
+Full extraction with run 16: 2,456 nets (as main: one more, `busl_y6805`, and one fewer, `wl_h1` with
 `wl_h1`; `cdp2_w6845` lengthens `cdp2`'s net), 4,599 transistors, 0 errors, 0 warnings; VCC is 111
 separate pieces (112 on main: the band joins two of `lc3`'s); 97 nets joined only through uncertain
 items, the same 97 names as on main (`tools/unsure.py` before and after; `cdp2_w6845` is on that list
@@ -1781,11 +1781,11 @@ rest is on the left array's side.
 - Seen east of the region and drawn by no package: a second wide metal x 7555-7600 south of the plate
   (y 14090 to about 14760).
 
-**Piece `ha`: `tl5_w3461` = `wl_h1`.**
+**Piece `ha`: the wire `tl5` called w3461 = `wl_h1`.**
 
 | | north end | poly column | diagonal | poly row | end pad | metal | south end |
 |---|---|---|---|---|---|---|---|
-| `ha` | `tl5`'s poly end `P 5453,5770 y6350 w=20` (its port `tl5_w3461`, in) | x 5454, y 6350-6763, 21-24 px | x - y = -1309, (5454,6763) to (5645,6954) | y 6954, x 5645-6169 | (6188,6956) | y 6957 east to a corner (7034,6957), x 7034 south, 11-13 px | `bw`'s pad (7031,7560) (`C 7031,7560`, `M 7036,7530 y7590 w=23`), the west end of its row y 7562 (`wl_h1`) |
+| `ha` | `tl5`'s poly end `P 5453,5770 y6350 w=20` (its port `wl_h1`, in) | x 5454, y 6350-6763, 21-24 px | x - y = -1309, (5454,6763) to (5645,6954) | y 6954, x 5645-6169 | (6188,6956) | y 6957 east to a corner (7034,6957), x 7034 south, 11-13 px | `bw`'s pad (7031,7560) (`C 7031,7560`, `M 7036,7530 y7590 w=23`), the west end of its row y 7562 (`wl_h1`) |
 
 - **The column** (`p1_col.png`, 1.9x, both stripped shots, every package's trace; overlay
   `o3_ha_col.png`): poly at every sample of x 5455 from y 6336 to y 6770 and field at x 5434 and x 5478
@@ -2107,7 +2107,7 @@ is a second load of gate 3 besides the inverter that makes `rst_n`. No transisto
 | `vcc` | M | (4926-4980, 10590), (5340-5392, 10590); (4953-5018, 15000) | supply | piece `va`: onto the feet of `lc3`'s middle rail and wide VCC metal (its ports at y 10600); the wide metal on south into `bl0`'s ground |
 | `vss` | M | (4752-4802, 10590); (4645-4698, 10700) | supply | piece `vc`: onto the foot of `lc3`'s west rail; on south on the left array's side (`larr`) |
 | `vss` | M | (7550-7555, 14022-14075); (7383-7432, 15000) | supply | piece `vb`: onto `cdp4`'s plate; the limb on south into `bc1`'s ground |
-| `tl5_w3461` (= `wl_h1`) | P | (5443-5465, 6350) | out (toward `tl5`'s latch a) | piece `ha`: onto `tl5`'s poly column from T5's south pad; the other end is `bw`'s pad (7031,7560), inside the northern part |
+| the wire `tl5` called w3461 (= `wl_h1`) | P | (5443-5465, 6350) | out (toward `tl5`'s latch a) | piece `ha`: onto `tl5`'s poly column from T5's south pad; the other end is `bw`'s pad (7031,7560), inside the northern part |
 | `cdp2_w6845` | M | (7290-7300, 6848) | not known | piece `hb`: onto `cdp2`'s metal west of its pad (7335,6845) |
 | `cdp2_w6845` | P | (6118, 6836-6858) | not known | the end pad (6146,6847)'s row on west (`lc1`'s band): to a pad (5668,6846) and a thin metal on west along y 6849 to about x 5339, not drawn |
 | `busl_y6805` | P | (6160, 6705-6727); (7410, 6791-6813) | not known | piece `hc`: the rows beyond its two pads, on west (seen to x 6040) and on east (seen to x 7500) |

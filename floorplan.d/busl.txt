@@ -54,7 +54,7 @@
 4950,10645:5022,15000    power  VCC metal down the west side | a wide metal from the band south down the whole left bus field, over nineteen rows without a contact
 4640,10590:4805,10705    power  VSS rail foot, west | the left-centre logic's west ground rail turns west and south at its foot toward the left array's east edge
 7380,14020:7560,15000    power  VSS metal over the foot rows | from the plate at the foot of the central datapath's column 0 ground rail a wide metal south over the rows of the bottom-centre bus, a second plate, and on south; no contact in the field
-5440,6345:6210,6980      route  latch data from the counters' band H1, poly column and row | tl5_w3461 (the data of latch a of the top-left logic's fifth strip): poly column x 5454 south under nine metals, a diagonal, the row y 6954 east to a pad
+5440,6345:6210,6980      route  latch data from the counters' band H1, poly column and row | wl_h1 (the data of latch a of the top-left logic's fifth strip): poly column x 5454 south under nine metals, a diagonal, the row y 6954 east to a pad
 6180,6945:7045,7560      route  the same line, metal east and south | metal along y 6957 over five poly columns to a corner (7034,6957), south over six rows onto the west end pad of the line from the band H1 above the counters (wl_h1)
 6115,6825:7305,6870      route  through line of the logic left of the R-row cells, west part | cdp2_w6845: metal along y 6848 from the pad (7335,6845) west over seven poly columns to an end pad (6146,6847); its row goes on west
 6155,6695:7415,6825      route  a second line north of it | busl_y6805: from an end pad (6189,6716) south and east along y 6805 to a pad (7380,6802); neither end identified
