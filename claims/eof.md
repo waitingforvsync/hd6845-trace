@@ -10,4 +10,4 @@ merged, or by `tools/claim.py release` if it is abandoned.
 | Region | 6250-7350 x 18440-18510 |
 | What | end-of-frame lead group, run 26: the NOR driver's output eof_w17362 on west of its port (7340,18473) along the bottom bus line y 18473 to its end near (6318,18471), drawing only what no package draws; the region is where the wire runs and will be extended by where it leads |
 | Branch | eof |
-| Status | tracing (part merged 92db809 at 2026-11-21 15:15 +0000) |
+| Status | tracing (part merged 8ea7cb5 at 2026-11-21 15:57 +0000) |
