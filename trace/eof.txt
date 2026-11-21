@@ -2487,3 +2487,127 @@ P 8262,16207:8282,16226
 # ---- names of the cell's other nodes
 N P 8300,16031 eof_w16029
 N P 8285,16347 eof_w16345
+
+# ============================================================================================
+# Piece en18 (run 31, 2026-11-21): the enable of the latch lat18, eof_w16172, from the port
+# (8229,16425) on. Wiring only, no uncertain item. The net is also the enable of column B's
+# first latch lat15 (eof_w16040): ONE NET, held by the alias below. Every end found is a gate;
+# the driver is not found.
+#   lat18's enable pads - track x 8229 south - west y 16738 - x 8143 south - west y 17348 -
+#   x 8099 south - east y 17737 (lengthwise on rst_a's poly row, no contact: Ambiguity 29) -
+#   x 8382 south THROUGH a pad with a contact (8382,17862) - corner (8382,17907) - west along
+#   y 17907 THROUGH a pad with a contact (8098,17908) - corner (8055,17908) - south - corner
+#   (8055,17952) - west along y 17952 to an end pad (7555,17951) - a poly row under the supply
+#   rail x 7468-7516 - a pad (7382,17951) - metal west y 17952, north x 7017, east y 17215,
+#   north x 7057 to an end pad (7057,16476) - a poly column under the bus metals - a pad
+#   (7056,16260) - metal north x 7058, east y 15437 to an end pad (7141,15437) - a poly south
+#   and east along y 15480 to the rail x 7292-7342 of bc1's west gate column (a gate row
+#   there, bc1's: port).
+# Read with tools/tl5_tracks.py (two-chip test along every leg: only bars of 8-11 px where
+# poly rows or edges cross beneath), tools/eof_mrun.py (no side arm within 14 px of any leg),
+# tools/eof_cchk.py and tools/textmap.py at every candidate and pad; views r31_a2/a3 (the
+# pad (8382,17862)), r31_b1/b2 (the pad (8098,17908)), r31_c1 (7555,17951), r31_d1 (7141,
+# 15437), r31_d2/d3 (the row at bc1's rail), r31_f1 (the row to (8643,17865)).
+@alias eof_w16040 eof_w16172
+# ---- the metal from the port to its west end pad. Legs: x 8229 (bars over dinv17's gate row
+# and lat17's data row; from y 16553 to 16745 lat17's data column lies under it, no contact:
+# run 29), y 16738 (bars x 8162-8172, 8215-8223: the east edge of Ambiguity 32's area and
+# the data column's west edge), x 8143 (bc1_g6_in's metal of piece o040 is on the same track
+# position north of y 16653: 79 px of bare ground between; ck_out's leg of piece en17 on it
+# south of y 17384: 30 px between), y 17348, x 8099, y 17737, x 8382, y 17907, x 8055,
+# y 17952.
+M 8229,16425 y16738 x8143 y17348 x8099 y17737 x8382 y17907 x8055 y17952 x7555 w=12
+# pad in the run at (8382,17862): ring and bright centre in both chips, a green hole in the
+# clean shot (eof_cchk -28, 204 / 143). South of the ring the metal goes on at track width
+# (chip 1 bright x 8377-8389 at y 17884-17891; the same edge lines in chip 2, which is dim
+# there; the clean shot's pink strip is a 12 px metal's) over the north edge of ck_out's poly
+# row (a bar y 17892-17898) to the corner.
+P 8366,17846:8400,17880
+C 8381,17862
+# the pad's poly row y 17855-17873 east under ck_out's track x 8424, disptmg_drv_in's x 8468,
+# the VCC rail and ck_out's x 8600 with no contact (eof_cchk 31-41, no ring) to an end pad
+# with a contact (8643,17865) (eof_cchk -10, 211 / 193).
+P 8395,17855:8630,17873
+P 8626,17849:8661,17881
+C 8643,17865
+# that pad's metal: north on x 8643 to a corner (8643,17695) (an L: no metal north of
+# y 17688), east along y 17695 to a corner (8925,17695) (no metal south or east of it for
+# 30 px), north on x 8925 over cap16's diffusion and the rows of column B's units (bars of
+# 8-11 px, no ring) onto the metal of lat15's enable pads (M 8925,16040 y16300, piece
+# lat15): eof_w16040.
+M 8643,17865 y17695 x8925 y16300 w=13
+# pad in the run at (8098,17908): rings on both sides, centre x 8093-8102, a hole in the
+# clean shot at (8103,17913), a red box x 8084-8111, y 17895-17920 in the chip-2 stripped
+# shot. Its poly goes north to a row y 17877-17892 in the gap between tl4's ck_out metal
+# (y 17864) and this metal, east to x 8238 and south as a column x 8222-8238 under this
+# net's own metal (bars x 8215-8225, 8238-8248, no ring) to the gate of piece cap18.
+P 8083,17893:8114,17923
+C 8098,17908
+P 8088,17877:8114,17900
+P 8088,17877:8238,17892
+P 8221,17877:8239,17935
+# the end pad (7555,17951) (eof_cchk -8, 204 / 110), the poly row y 17943-17958 west under
+# the supply rail x 7468-7516 (orange in the open x 7403-7457, salmon under the rail; no
+# diffusion: the same hop as ck_out's one row north) and the pad (7382,17951) (-23, 210 /
+# 202).
+P 7538,17934:7572,17967
+C 7555,17951
+P 7382,17951 x7555 w=16
+P 7365,17934:7400,17968
+C 7382,17951
+# metal west along y 17952 (chip 1 has a dark blob over it at x 7060-7111; chip 2 whole),
+# north on x 7017 (bars at rst's row y 17561), east along y 17215, north on x 7057 over
+# five poly rows (rcs_mv's y 16770-16790 among them; bars only, eof_cchk 30-48) to an end
+# pad (7057,16476) (-3, 240 / 195).
+M 7382,17952 x7017 y17215 x7057 y16476 w=13
+P 7041,16460:7074,16493
+C 7057,16476
+# a poly column x 7051-7070 north under the bus metals y 16346-16392 to a pad (7056,16260)
+# (22: a dull hole; 196 / 207), as ck_out's pads (7100,16432) / (7100,16303) one track east.
+P 7060,16260 y16476 w=18
+P 7040,16244:7074,16277
+C 7056,16260
+# metal north on x 7058 (bars at a poly row y 16206-16224 and three more), east along
+# y 15437 over a poly column x 7092-7112 of another net (bars, no ring) to an end pad
+# (7141,15437) (-33, 213 / 223).
+M 7057,16260 y15437 x7141 w=13
+P 7126,15421:7157,15453
+C 7141,15437
+# the pad's poly: south to y 15489 and east as a row y 15471-15489, for 85 px lengthwise
+# under tl4's ck_out metal y 15480 (no contact: that metal has no pad there), in the open to
+# the rail x 7292-7342 of bc1's west gate column. There it steps south into a gate row
+# y 15493-15515 under the rail (bc1's unit, not drawn: port at x 7290).
+P 7135,15445:7155,15489
+P 7135,15471:7290,15489
+N P 7200,15480 eof_w16172
+
+# ============================================================================================
+# Piece cap18 (run 31, 2026-11-21): the device on the poly of the pad (8098,17908), x 8172-
+# 8560, y 17930-18005 (bc3's ground, free). One transistor: its gate is eof_w16172, one end
+# is on VCC by a diffusion wire, the other end is a closed diffusion box whose metal contact
+# lies under a metal island that also covers the gate and has no metal leaving it. No contact
+# from the island to the gate poly is seen (no ring, no hole, no pale patch over the gate in
+# any shot), so the island is drawn as a net of its own, eof_w17970. Believed a capacitor on
+# the net. A mirror-image twin stands east of the rail on bl0_w15566's poly (not drawn).
+# r31_e1.png (3.4x), r31_e2.png (6x, four shots), r31_g1.png (1.2x), r31_g2.png (5x, four
+# shots); textmap.py 8160 17930 8262 18010 3 --acid.
+# the gate: the poly column of piece en18 widens to x 8216-8243 and crosses the box
+P 8216,17930:8243,18005
+# the diffusion: the box x 8172-8250, y 17949-17997, through under the gate; east of the
+# gate it narrows (x 8243-8272) into a wire y 17964-17984 (plain between two dark lines:
+# px.py col 8300 17952 17994 2) that runs east to a box under the VCC rail with a contact
+# (8530,17970) (ring and centre in both chips, specks in the clean shot; eof_cchk 5, 198 /
+# 216).
+D 8172,17949:8258,17997
+D 8250,17964:8512,17984
+D 8505,17950:8560,17995
+C 8530,17970
+# the VCC rail R2 on south of where piece g174e ends it (M 8523,17236 y17560): one wide
+# metal x 8512-8558 over the rows of the nest of Ls (r31_g3.png, 2.4x, three shots)
+M 8535,17550 y17997 w=46
+N M 8535,17800 vcc
+# the island: metal x 8171-8244, y 17952-17994, its contact (8190,17970) on the box west of
+# the gate (ring and centre in both chips; eof_cchk 10, 236 / 204)
+M 8171,17952:8244,17994
+C 8190,17970
+N M 8200,17988 eof_w17970

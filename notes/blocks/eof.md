@@ -688,6 +688,45 @@ data is `bc1_g6_out`: column A's two latches are a second pair in series behind 
 Full extraction with run 30: 2,468 nets, 4,630 transistors, 0 errors, 0 warnings. The package by itself:
 1,072 nets, 1,844 transistors, 0 errors, 76 warnings (other packages' names; 76 before the run).
 
+Run 31 (Tom Seddon's session, Claude Fable 5.2; 2026-11-21 05:30 +0000 on). Two pieces, `en18` (wiring) and
+`cap18` (1 transistor): **the enable of the latch `lat18` and the enable of column B's first latch `lat15`
+are one net; it is followed to all its ends, 9,000 px through eleven pads, and every end is a gate. Its
+driver is not found.**
+
+- **Traced** (piece `en18`; wiring, no uncertain item): from `lat18`'s port (8229,16425) the track runs on
+  as the bundle's fourth L (west along y 16738, south on x 8143, west along y 17348, south on x 8099, east
+  along y 17737 lengthwise on `rst_a`'s poly row, south on x 8382) **through a pad with a contact
+  (8382,17862)**, to a corner (8382,17907), west along y 17907 **through a second pad with a contact
+  (8098,17908)**, south and west along y 17952 to an end pad (7555,17951); by a poly row under the supply
+  rail x 7468-7516 and a pad (7382,17951) on west and north (the tracks x 7017 and x 7057) to an end pad
+  (7057,16476), a poly column under the bus metals and a pad (7056,16260), north on x 7058 and east to an
+  end pad (7141,15437), whose poly row runs east to the rail x 7292-7342 of `bc1`'s west gate column and
+  is a gate row under it (`bc1`'s unit, not drawn: port).
+- **The pad (8382,17862)'s poly row runs east to a pad (8643,17865)**, whose metal goes north on x 8643,
+  east along y 17695 and north on x 8925 onto the metal of `lat15`'s two enable pads: **`eof_w16172` is
+  `eof_w16040`** (firm: no uncertain item on the join; `@alias eof_w16040 eof_w16172`). The extraction
+  now prints `eof_w16215` = NOT((`bc1_g6_out` AND `eof_w16040`) OR `eof_w16345`) and `eof_w16388` =
+  NOT((`eof_w16000` AND `eof_w16040`) OR `eof_w16216`): **the first latch of each pair is open on the
+  same signal**, as the second of each is open on `ck_out`.
+- **Traced** (piece `cap18`; 1 transistor): the pad (8098,17908)'s poly ends as the gate of a device
+  between the VCC rail (by a diffusion wire of 250 px and a contact (8530,17970)) and a closed diffusion
+  box whose contact lies under a metal island that also covers the gate and has no metal leaving it
+  (`eof_w17970`). No contact from the island to the gate is seen. **Believed**: a capacitor on the net.
+  A mirror-image twin stands east of the rail on the poly of `bl0_w15566`'s row (not drawn).
+- **The net's ends** (all traced): the four enable rows of `lat15` and `lat18`, the gate of `cap18`, and
+  a gate row under `bc1`'s rail at y 15497-15521, the unit whose next gate row (y 15557-15580) is
+  `bl0_w15566`'s. No contact to a diffusion node, no side arm (searched within 14 px of every leg), no
+  second poly on any pad. **So the driver is not on what is drawn**: either a contact was read as a
+  plain crossing (the readings are in piece `en18`'s table and Ambiguities 115-119), or the island of
+  `cap18` is tied to its gate (then `cap18` would be the net's load and the net a wired line with its
+  pull-downs still to find).
+- **Believed, not traced** (as before): the net is the clock level opposite to `ck_out`, which would
+  make each latch pair a flip-flop. `bl0_w15566` runs with it at both ends (the same unit at `bc1`'s
+  rail, the twin device here): the two may be a pair of clock phases.
+
+Full extraction with run 31: 2,468 nets, 4,631 transistors, 0 errors, 0 warnings. The package by itself:
+1,072 nets, 1,845 transistors, 0 errors, 76 warnings (other packages' names; 76 before the run).
+
 Full extraction after run 2: 2,351 nets, 4,232 transistors, 0 errors, 0 warnings; the package
 by itself (it loads `rdp3`): 0 errors, 0 warnings.
 
@@ -806,6 +845,8 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `en17`, `lat17`'s enable to `ck_out` | x 8137-8435, y 17030-17866 | one thin metal: the track x 8229 south from the port (8229,17030) to a corner (8229,17390), west along y 17390, south on x 8143 to (8143,17693), east along y 17693 and south on x 8425 to the metal end (8424,17866) of `ck_out`'s pad (8424,17908); no pad, no contact |
 | `dinv17`, the inverter on `lat17`'s data | x 8080-8516, y 16200-16594 | the mirror image of `inv16` under column A's VSS rail: VSS box y 16447-16505 (contact (8347,16478)), gate row y 16509-16529 from a pad (8096,16517), node y 16534-16567 with a strip west to a buried-contact box (8272-8302, 16548-16577) on the data poly, a load east of the rail (strip y 16512-16539 under a plate x 8419-8510 to `lat16`'s VCC box; tie box (8424-8458, 16562-16594)); the input's track x 8099 north to a corner (8099,16217) and a pad (8140,16215), whose row y 16207-16226 runs east |
 | `lat18`, the latch whose upper node is `eof_w16215` | x 8212-8570, y 16015-16447 | a copy of `tl1_ua` / `tl1_ub` at 5729,11669 under column A's VSS rail (11 transistors); the thin metal x 8462-8475 between the upper plate and the third pull-down's pad; the data row's pad (8229,16107) (`bc1`'s contact: `bc1_g6_out`); the enable track x 8229 with its pads (8229,16172), (8227,16387) (port at y 16425) |
+| `en18`, `lat18`'s enable on to its ends | x 7010-8935, y 15420-17970 | one net, `eof_w16040`: the thin metal from the port (8229,16425) by six legs to a pad in its run (8382,17862), a corner (8382,17907), a pad in its run (8098,17908) and an end pad (7555,17951); a poly row under the rail x 7468-7516 to a pad (7382,17951); metal west and north (x 7017, x 7057) to a pad (7057,16476); a poly column to a pad (7056,16260); metal north and east to a pad (7141,15437); its poly row y 15471-15489 east to `bc1`'s rail (port at x 7290). The pad (8382,17862)'s poly row y 17855-17873 east to a pad (8643,17865) and its metal (x 8643, y 17695, x 8925) onto `lat15`'s enable metal. The pad (8098,17908)'s poly (a row y 17877-17892, a column x 8221-8239) to the gate of `cap18` |
+| `cap18`, the device on that poly | x 8171-8560, y 17930-18005 | one transistor (W/L 48/27): gate `eof_w16040`; a diffusion box x 8172-8258 with a contact (8190,17970) under a metal island x 8171-8244, y 17952-17994 (`eof_w17970`, nothing else on it); east of the gate a diffusion wire y 17964-17984 to a box under the VCC rail with a contact (8530,17970); the rail R2 drawn on from y 17550 to 17997 |
 
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
 
@@ -2540,6 +2581,73 @@ takes the first pair's value in one term and the second pair's in another. Belie
 `eof_w16172` is the clock level opposite to `ck_out`, so that each pair is a flip-flop and the second term
 is the first one clock later.
 
+### Piece `en18`: the enable of `lat18` is the enable of `lat15`, and every end of the net is a gate (traced; wiring only, no uncertain item)
+
+Run 31, 2026-11-21. Region x 7010-8935, y 15420-17970 (`bc1`'s, `bc3`'s and `busb`'s ground, free). Read
+by text along every leg (`tools/tl5_tracks.py --half 2`, the two-chip test: only bars of 8-11 px where a
+poly row or an edge crosses beneath; `tools/eof_mrun.py` at 14 px either side of every leg: no side arm;
+`tools/eof_cchk.py` and `tools/textmap.py` at every candidate and pad) and from twenty-two views
+(`r31_a1`-`a4`, `b1`, `b2`, `c1`, `d1`-`d5`, `e1`, `e2`, `f1`, `g1`-`g3`, overlays `r31_o1`-`o5`).
+
+| Stretch | What the photos show | Evidence |
+|---|---|---|
+| the track x 8229 south of the port (8229,16425) | one thin metal (12 px): bars over `dinv17`'s gate row and `lat17`'s data row; from y 16553 to 16745 `lat17`'s data column lies under it without a contact (Ambiguity 107); a corner (8229,16738) | `tl5_tracks.py v 8229 16395 16770` |
+| west along y 16738 | to a corner (8143,16738); bars at x 8162-8172 (the east edge of Ambiguity 32's area) and x 8215-8223 (the data column's west edge) | `tl5_tracks.py h 16740 8125 8245`; `textmap.py 8128 16718 8248 16758 3 --acid`; `eof_mrun.py col 8185 / 8205`: 16737-16739 |
+| south on x 8143 | to a corner (8143,17348). North of the corner (8143,16738) the same track position carries `bc1_g6_in` (piece `o040`) down to y 16653: 79 px of bare ground between; south of y 17384 it carries `ck_out` (piece `en17`): 30 px of bare ground between. Over Ambiguity 32's area for 40 px: no ring | `tl5_tracks.py v 8143 16725 17365`; `eof_cchk.py 8144,16761` (no ring north) |
+| west along y 17348, south on x 8099 | to a corner (8099,17737). Two candidates: (8099,17428) (chip 1 has dirt west of the track; both chips bright through) and (8099,17565) (a stain in chip 1, clean shot greenish; chip 2 226, no ring): no contact | `tl5_tracks.py h 17348 8080 8160`, `v 8099 17330 17760`; `textmap.py 8072 17398 8128 17456 3 --acid` |
+| east along y 17737 | to a corner (8382,17737): lengthwise on `rst_a`'s poly row y 17736 for 280 px, no pad, no ring (Ambiguity 29) | `tl5_tracks.py h 17737 8085 8400` |
+| south on x 8382, **the pad (8382,17862)** | bars over four poly rows; then a pad with a contact **in the run**: ring and bright centre in both chips, a green hole in the clean shot. South of the ring the metal goes on at track width: chip 1 bright yellow x 8377-8389 at y 17884-17891, chip 2 dim there but with the same two edge lines (x 8371-8377, 8392-8395), the clean shot's pink strip 24 px wide (a 12 px metal's, not a pad's); a bar y 17892-17898 at the north edge of `ck_out`'s poly row; the corner (8382,17907) (Ambiguity 115) | `r31_a2.png` (2.65x), `r31_a3.png` (6x, four shots); `textmap.py 8346 17832 8412 17926 3 --acid`; `px.py col 8382 17866 17920 2`, `row 17886 / 17888 / 17890 8362 8404 3`; `eof_cchk.py`: -28, 204 / 143 |
+| the pad's poly row y 17855-17873 | east under `ck_out`'s track x 8424, `disptmg_drv_in`'s x 8468, the VCC rail and `ck_out`'s x 8600 (no ring, clean red minus green 31-41 at each) to **an end pad with a contact (8643,17865)**; nothing west of the pad (a field island, then `tl4`'s pad (8317,17863)) | `r31_f1.png` (3.4x, metal and clean), `r31_o1.png`; `px.py col 8446 17846 17884 2`; `eof_cchk.py 8424,17864 8468,17864 8530,17864 8600,17864 8643,17865` (-10, 211 / 193) |
+| the metal of that pad | north on x 8643 to a corner (8643,17695) (an L: no metal north of y 17688), east along y 17695 to a corner (8925,17695) (no metal south of it for 30 px or east of it), north on x 8925 over the capacitor diffusion of piece `cap16` and the rows of column B's units (bars of 8-11 px; both chips bright through at the two candidates) onto the metal of `lat15`'s enable pads at y 16300: **one net with `eof_w16040`** | `tl5_tracks.py v 8644 17560 17880`, `h 17695 8625 8950`, `v 8925 16270 17720`, `v 8925 17680 17760`, `h 17695 8900 8990`; `textmap.py 8612 17660 8684 17724 3 --acid`, `8898 16524 8954 16584 3 --acid`, `8898 16826 8954 16862 3 --acid` |
+| west along y 17907, **the pad (8098,17908)** | from the corner over `tl4`'s neck and row of `ck_out` (a bar x 8302-8312) and over this net's own poly column (bars x 8215-8225, 8238-8248) to a pad with a contact **in the run**: rings on both sides, centre x 8093-8102, a hole in the clean shot, a red box in the chip-2 stripped shot; on west to a corner (8055,17908), south to a corner (8055,17952) | `r31_b1.png` (5x, four shots), `r31_b2.png` (4.9x), `r31_o2.png`; `textmap.py 8030 17880 8140 17965 3 --acid`; `tl5_tracks.py h 17907 8040 8400`, `v 8055 17895 17965` |
+| the pad's poly | north to a row y 17877-17892 in the gap between `tl4`'s `ck_out` metal and this metal (orange in chip 2), east to x 8238, south as a column x 8221-8239 under this net's metal and in the open to the gate of `cap18` | `r31_b2.png`, `r31_e1.png`; `px.py col 8230 17896 18130 6` |
+| west along y 17952 | 500 px over the poly column x 7962-7983 of another net (bars, no ring) to **an end pad with a contact (7555,17951)** | `tl5_tracks.py h 17951 7530 8070`; `r31_c1.png` (4.5x, four shots); `textmap.py 7516 17926 7606 17984 3 --acid`; `eof_cchk.py`: -8, 204 / 110 |
+| the poly row y 17943-17958 | west under the supply rail x 7468-7516 to **a pad with a contact (7382,17951)**: poly, not diffusion (orange in the open stretch x 7403-7457 in both metal shots, like `ck_out`'s row one position north), and no diffusion under the rail | `px.py row 17950 7402 7462 6`, `col 7430 17934 17966 2`, `pt 7450,17908`; `textmap.py 7352 17926 7546 17974 3 --acid`; `r31_o3.png`; `eof_cchk.py`: -23, 210 / 202 |
+| metal west and north | west along y 17952 to a corner (7017,17952), north on x 7017 to (7017,17215), east to (7057,17215), north on x 7057 over five poly rows (`rcs_mv`'s among them; bars only) to **an end pad with a contact (7057,16476)**. Chip 1 has a dark blob over the metal at x 7060-7111, y 17928-17960 and is dim at (7057, 16863-16893) (the clean shot greenish at both); chip 2 is bright through at both (Ambiguity 118) | `follow.py 7360 17951 W --gap 16`; `tl5_tracks.py h 17952 7000 7400`, `v 7017 17200 17965`, `v 7017 17940 18010`, `h 17215 7000 7080`, `v 7057 16480 17225`; `textmap.py 7036 17928 7204 17976 3 --acid`, `7026 16836 7090 16912 3 --acid`; `eof_cchk.py 7057,16476`: -3, 240 / 195 |
+| the poly column x 7051-7069 | north under the bus metals y 16346-16392 to **a pad with a contact (7056,16260)**, like `ck_out`'s pads (7100,16432) / (7100,16303) one track east | `textmap.py 7030 16270 7084 16500 4 --acid`, `7024 16190 7092 16290 4 --acid`; `px.py row 16420 7040 7078 2`; `r31_o4.png` (4x, three shots); `eof_cchk.py`: 22 (a dull hole), 196 / 207 |
+| metal north and east | north on x 7058 (bars at four poly rows), east along y 15437 over a poly column x 7092-7112 of another net (bars, no ring) to **an end pad with a contact (7141,15437)** | `follow.py 7057 16195 N --gap 16`; `tl5_tracks.py v 7058 15420 16240`, `h 15437 7045 7175`; `r31_d1.png` (4x, four shots); `textmap.py 7040 15404 7190 15470 3 --acid`; `eof_cchk.py`: -33, 213 / 223 |
+| the pad's poly | south to y 15489 and east as a row y 15471-15489: 85 px lengthwise under `tl4`'s `ck_out` metal y 15480 (no pad of that metal there), then in the open to the rail x 7292-7342, where it steps south (x 7280-7300) into **a gate row y 15493-15515 under the rail** (`railprof.py 7295 7340 15380 15600`: the rail's contact (7320,15468) north of the gate, a diffusion y 15522-15556 south of it, then `bl0_w15566`'s gate row y 15557-15580). East of the rail the row runs on to x 7388 across a narrow plain strip x 7377-7395, which `rcs_e4`'s row (y 15427-15445, `tla`'s) also crosses; the two rows are not joined (the strip is plain between them). `bc1`'s unit: not drawn | `r31_d2.png` (2.7x), `r31_d3.png` (5x, three shots), `r31_d4.png` (4.6x), `r31_d5.png` (5.5x), `r31_o5.png`; `textmap.py 7128 15452 7368 15504 4 --acid`, `7340 15396 7412 15530 3 --acid`; `px.py col 7240 15460 15498 2`, `row 15435 / 15470 / 15505 7344 7410 3` |
+
+**The join.** `eof_w16172` (the enable of `lat18`, run 30) and `eof_w16040` (the enable of `lat15`, run 20)
+are one net: the track x 8382 and the track x 8925 meet through the pads (8382,17862) and (8643,17865)
+and the poly row between them. Firm in the extraction (no uncertain item on the path). So both latch
+pairs behind the DISPTMG driver have the build "first latch on `eof_w16040`, second latch on `ck_out`".
+
+**The ends.** Six, all gates: the two enable rows of `lat15`, the two of `lat18`, the gate of `cap18`, and
+the gate row under `bc1`'s rail. The pads were each looked round for a second poly (the views named; the
+four enable pads by `textmap.py 8150 16150 8262 16196 4`, `8150 16366 8262 16408 4`, `8896 16018 9000 16062
+4`, `8896 16240 9000 16284 4`): none. **The driver is not found.** What that leaves is under Not done.
+
+### Piece `cap18`: the device on the poly of the pad (8098,17908) (traced; the island's tie open)
+
+Run 31, 2026-11-21. Region x 8171-8560, y 17930-18005 (`bc3`'s ground, free). `r31_e1.png` (3.4x),
+`r31_e2.png` (6x, four shots), `r31_g1.png` (1.2x, three shots), `r31_g2.png` (5x, four shots),
+`r31_g3.png` (2.4x, three shots), overlay `r31_o2.png`; `textmap.py 8160 17930 8262 18010 3 --acid`.
+
+- **Gate**: the poly column of piece `en18` widens to x 8216-8243 and crosses a diffusion box from
+  y 17930 to 18005 (salmon and orange without a break in the clean shot; the box's north edge is a dark
+  line across it at y 17950).
+- **West of the gate**: the box's closed west part (x 8172-8214, y 17949-17997) with one metal contact
+  (8190,17970) (ring and bright centre in both chips, specks in the clean shot, pits in the chip-2
+  stripped shot; `eof_cchk.py`: 10, 236 / 204). The metal over it is an **island** x 8171-8244,
+  y 17952-17994 that covers the gate as well and has a dark outline all round: no metal leaves it (the
+  column north of it is open poly, orange in chip 2 and red-brown in the clean shot; nothing bright west,
+  south or east of it). Over the gate neither metal shot shows a ring and the clean shot no hole and no
+  pale patch: no contact to the poly is seen. Drawn as a net of its own, `eof_w17970`.
+- **East of the gate**: the box narrows (x 8243-8272) into a diffusion wire y 17964-17984 (plain between
+  two dark lines; chip 2 blue 80-89, chip 1 green 113-115, khaki-green in the clean shot: `px.py col 8300
+  17952 17994 2`, against poly 157 / 116 / 58 at (8120,17885)) that runs 250 px east to a diffusion box
+  under the VCC rail (x 8505-8560, y 17950-17995) with a contact (8530,17970) (`eof_cchk.py`: 5, 198 /
+  216). The rail is R2: one wide metal from where piece `g174e` ends it (y 17560) to past y 18000
+  (`r31_g3.png`), drawn here from y 17550 to 17997.
+- **Extracted**: `t at 8230,17973 W/L 48/27, gate eof_w16040: eof_w17970 <-> vcc`, in no gate.
+- **Believed**: a capacitor on the net (its gate over a channel held at VCC, with the island's plate on
+  the channel's far end). If the island were tied to the gate the device would be a load of W/L 1.8, the
+  build of the DISPTMG driver's load, with its gate tied to its source by metal: Ambiguity 116.
+- **Its twin**: east of the rail the wire goes on from the box to a mirror-image device at x 8700-8800
+  (island with a contact (8770,17970) on its east side), whose gate poly comes from the north, from the
+  pad (8688,17820) at the east end of `bl0_w15566`'s row (`r31_g1.png`, `r31_f1.png`). Not drawn.
+
 ## Ports
 
 The net is driven outside the package (by `rdp2`'s NOR). `in` marks the port beyond which the
@@ -2594,8 +2702,6 @@ driver lies; the other three lead to the loads.
 | `rst_a` | poly | (9770, 18072-18090) | in or out | link H: from `trunks`' pad (9770,18081) |
 | `rst_a` | poly | (8930, 15248-15266) | out | the row west of the end pad (8966,15260): no longer a port, it is row C of piece `vw` (the gate of W's clear, at (8776,15260)) |
 | `rst_a` | poly | (7550, 14904-14924) | in | piece `isrc4`: onto the east end of `busl`'s poly row of `rst_a` (its port (7550,14902-14926)); the driver lies beyond it: `lc1`'s gate 5, `rst_a` (piece `isrc5`) |
-| `rst_a` | poly | (8326, 16294-16312) | to a load | piece `isrc4`: the row's east end, a gate at x 8283-8311 over an undrawn diffusion column (`bc1` (continue) / `bc3`) |
-| `rst_a` | poly | (8326, 16900-16918) | to a load | piece `isrc4`: the tap row's east end, a gate at x 8283-8311 over an undrawn diffusion column (`bc3`) |
 
 | `eof_w7777` | poly | (6450, 7812-7830) | in | row 3, on west into `lc1`'s strip (cluster E's undrawn west half) |
 | `ck_out` | poly | (7400, 7203-7221) | ? | the poly row east of the pad (7313,7215) |
@@ -2632,10 +2738,11 @@ driver lies; the other three lead to the loads.
 | `ck_out` | metal | (10245, 17902-17918) | in | piece `in350`: onto the west end of `trunks`' metal `ck_out #1` (`M 10320,17908 x10230 w=16`): the clock's driver is the clock block's buffer. (The port of piece `vw` at (8873-8889,15465), then under a placeholder name, is gone: the metal is drawn on) |
 | `eof_w16000` | poly | (8800, 15727-15745) | in | piece `lat15`: the upper latch's data: the poly row west of the pad (8880,15738), where it enters a heavy-outlined box (8762-8795, 15722-15757) at column B's east edge (not read: by its place a unit's output) |
 | `eof_w16000` | metal | (8831-8845, 16030) | ? | piece `lat15`: the track x 8838 on south of the data pad (8838,16000) (the follower: to (8838,17306); not checked) |
-| `eof_w16040` | metal | (8919-8931, 16300) | in | piece `lat15`: the upper latch's enable: the metal x 8925 on south of its lower pad (8925,16262) (the follower: to (8925,17694), west along y 17700 to x 8643; not checked) |
+| `eof_w16040` | poly | (7290, 15471-15489) | ? | piece `en18` (run 31): the net's poly row at the west edge of the rail x 7292-7342 of `bc1`'s west gate column, where it steps south into a gate row y 15493-15515 under the rail (`bc1` (continue): the unit is not drawn). (The ports `eof_w16040` M (8919-8931, 16300) and `eof_w16172` M (8223-8235, 16425) are gone: the two metals are drawn on and are one net) |
+| `vcc` | diffusion | (8560, 17964-17984) | - | piece `cap18`: the diffusion wire on east of the box under the VCC rail, to the twin device at x 8700-8800 (not drawn) |
+| `vcc` | metal | (8512-8558, 17997) | - | piece `cap18`: the VCC rail R2 on south (drawn y 17550-17997; it runs on) |
 | `bc1_g6_in` | metal | (8136-8150, 16292) | out | piece `o040`: `eof_w17040`'s metal x 8143 onto `bc1`'s metal end (8143,16300) of `bc1_g6_in` (`M 8186,15900 y16260 x8143 y16300`; `bc1` has no ports file): the input of `bc1`'s inverter 6. (The ports `eof_w17040` (9001-9015, 17610), `eof_w16823` (8760, 16986-17003) and `eof_w16693` (8800, 17116-17135) are gone: the wires are drawn on) |
 | `disptmg_drv_in` | - | no port left | out | pieces `o362`, `o362w`, `o362d` (runs 25-27): **the NOR's output**, drawn from the pad (8467,17603) south, west along y 18474 and y 18473 through four pads, and by the poly row west of the pad (6322,18472), a pad (6102,18472), a metal, a pad (5583,18472) and a poly column south onto `pads_out`'s input poly of the DISPTMG driver at (5587,18912-18925): it is `disptmg_drv_in`. The port at (6262,18472) is gone: drawn on. (The ports of piece `g174` at x 8368-8372 on the rail's east edge, `eof_w17168`, `eof_w17338`, `eof_w17472`, `disptmg_drv_in`, `vss` and the node whose former name was `eof_w17552`, are gone: drawn on) |
-| `eof_w16172` | metal | (8223-8235, 16425) | in | piece `lat18`: the upper latch copy's enable track x 8229 on south of its lower pad (8227,16387): the bundle's fourth L (it turns west at y 16740 and runs south on x 8143 to about y 17345, where it turns west; not followed). (The ports `eof_w16737` (8270, 16553-16573), `eof_w16778` (8223-8235, 17030) and `ck_out` (8418-8430, 17866) are gone: drawn on in run 30, pieces `dinv17` and `en17`.) |
 | `bc1_g6_out` | poly | (8214-8247, 16090) | in | piece `lat18`: the pad (8229,16107) on which `bc1`'s metal x 8229 ends (`bc1`'s contact); the pad is one poly with the latch's data row |
 | `vss` | metal | (8336-8384, 16040) | - | piece `lat18`: `bc1`'s rail R1 (`M 8360,14890 y16300`), drawn again over the cell from y 16040 so that the package extracts by itself |
 | `vcc` | metal | (8488-8558, 17560) | - | piece `g174e`: the VCC rail R2 on south (drawn y 17236-17560, x 8488-8558; it runs on) |
@@ -3573,6 +3680,52 @@ driver lies; the other three lead to the loads.
     south and leaves as the row y 16120-16138 (`r30_w1.png`), which is `lat18`'s data row. The stub is 15 px
     off and joins nothing else; this package draws the pad and the row. A correction for `bc1`'s file
     (handoff), geometry only.
+
+115. **The 8 px between the ring of the pad (8382,17862) and the corner** (piece `en18`). Whether the track
+    x 8382 ends on the pad or runs through it to the metal along y 17907 decides whether the pad
+    (8098,17908), `cap18`, and everything west of them are on this net. Chip 1 shows the metal plainly
+    south of the ring (x 8377-8389, y 17884-17891: 182-209 / 150-198 / 59-96, yellow); chip 2 is dim there
+    (74-155 red) but shows the same two edge lines at x 8371-8377 and x 8392-8395; the clean shot's pink
+    strip is 24 px wide there (x 8374-8395), the width a 12 px metal protects, where the pad alone would
+    protect 35 px or more; the horizontal metal ends at x 8392, flush with the track's east edge (a
+    corner). The 6 px bar at y 17892-17898 is where the north edge of `ck_out`'s poly row lies beneath
+    (`tl4`'s `P 8310,17898:8396,17916`), and a gap of 6 px between two metals is below anything else seen
+    in this field (20 px). Review round 22 read the same corner from the other side ("the metal's end
+    turns north toward a pad at about (8382,17862)"). Drawn plain; it is the weakest link of the join of
+    the net's two halves, so the reviewer was pointed at it.
+116. **Is the island of `cap18` tied to its gate?** Reading (a), drawn: no. The island's one contact is on
+    the diffusion west of the gate; over the gate both metal shots are bright without a ring (chip 2 has a
+    dimmer patch of 10 x 10 px at (8222,17970), chip 1 none), the clean shot is evenly orange (red minus
+    green 59-88, no hole, no pale patch) and the chip-2 stripped shot shows no pits there
+    (`textmap.py 8160 17930 8262 18010 3 --acid`). The device is then a transistor from VCC onto a node
+    with nothing else on it: a capacitor on the gate's net. Reading (b): the contact's cut reaches the
+    poly's west edge (the chip-2 stripped shot's coloured patch runs from x 8180 to 8215, the poly's edge)
+    and the island shorts poly to diffusion: then the device is a depletion load of the net, gate tied to
+    source, W/L 48/27 = 1.8, and the net is a wired line whose pull-downs are not found. For (b): a metal
+    island with one contact and no wire makes little sense otherwise, and the net has no driver in what
+    is drawn. Against (b): nothing in any shot shows the cut over the poly, the same device stands on
+    `bl0_w15566`'s row, and a net with a load and no pull-down in 9,000 px would be as odd. What would
+    settle it: the driver. If a gate output is found on the net, (a) stands.
+117. **Three stretches where this net's wire lies along another net's** (piece `en18`; trap 13): its metal
+    y 17737 on `rst_a`'s poly row for 280 px (Ambiguity 29, read again: no pad, no ring); its metal y 17907
+    on `ck_out`'s poly row y 17898-17916 from x 8310 to 8390 (Ambiguity 66: the metal ends 34 px short of
+    `ck_out`'s pad (8424,17908)); its poly row y 15471-15489 under `tl4`'s `ck_out` metal y 15480 for 85 px
+    (that metal's corner, no pad: `r31_d1.png`, `r31_o5.png`). A contact at any would join the net to
+    `rst_a` or to `ck_out`. None has a pad, a ring or a hole.
+118. **Three places where chip 1 does not show the metal and chip 2 does** (piece `en18`): the track x 8099
+    at y 17552-17579 (a stain: the clean shot greenish, red minus green -39; chip 2 226 with no ring), the
+    metal y 17952 at x 7060-7111 (a dark blob on chip 1 from y 17928 to 17960, wider than the metal; the
+    clean shot's pink strip dulled; chip 2 bright D-F in the text map, no ring), the track x 7057 at
+    y 16863-16893 (chip 1 dim, the clean shot green at x 7056-7071; chip 2 bright from y 16881, and the two
+    dark lines y 16851-16854 and 16875-16878 run across the whole width of the map: the edges of a poly row
+    beneath). Read as damage to chip 1, as on `trunks`' line S (R4). No contact is drawn at any.
+119. **The gate row under `bc1`'s rail** (piece `en18`'s port). The row is taken to be a gate of `bc1`'s
+    unit from `tools/railprof.py` (a gate band between two diffusions) and from its colour under the rail
+    (brighter than the row's salmon west of the rail edge: `r31_d3.png`); the unit is not drawn, so that
+    the net is an input there and not the unit's output rests on those two readings. East of the rail the
+    row crosses a narrow plain strip (x 7377-7395) that `rcs_e4`'s row crosses 70 px north; what that
+    strip is (a second diffusion of the same unit, or field between two edge lines) was not decided, and
+    the two rows are not joined there (`px.py row 15470 7344 7410 3`: plain, blue 76-88, between them).
 
 ## Review
 
@@ -5431,25 +5584,36 @@ Round 37: no findings that change a connection.
 
 ## Not done
 
-- **Next (after run 30)**: (i) **`lat18`'s enable `eof_w16172`**: the track x 8229 south of the port
-  (8229,16425): it turns west at y 16740 (over `lat17`'s data column) and runs south on x 8143 to about
-  y 17345, where it turns west (the bundle's fourth L: `textmap.py 8118 17340 8172 17476 3 --acid` shows the
-  corner); not followed further. If it is the level opposite to `ck_out`, each latch pair is a flip-flop.
-  Column B's first latch has the like question (`eof_w16040`, the metal x 8925 south of (8925,16300)).
-  (ii) `eof_w17472` (the driver's lower poly, west leg south of y 17560): **review round 37 saw where it
-  goes** (not drawn, checked by text only: `eof_cchk` (8225,17600) hole -11, 219 / 217; (8402,17598) -5,
-  174 / 131; `tl5_tracks.py h 17603 8200 8425`: metal x 8254-8382 between the two rings): the leg ends on a
-  pad with a contact (8225,17600), a metal strap along y 17603 runs east to a pad with a contact
-  (8402,17598), whose poly goes south into a row y 17632-17656 that runs east and turns north under the VCC
-  rail at x 8520-8545; it does not touch `en17`'s metal and is not joined to `eof_w17168`'s leg at x 8573
-  (the reviewer's `t1`, `u1`, `v1`, `w1.png` in `review-37/`). To draw: the strap, the two pads, the row and
-  its turn north to its driver. (iii) `eof_w17212` and
-  `eof_w16000` (the item on the ripple counter's clock below). (iv) what `bc1_s0` and `bc1_s1` are (`bc1`'s
-  bus lines y 14832 and its second select: `bc1` (continue)). Seen beside pieces `dinv17` and `lat18`, other
-  nets, not drawn (`bc3` / `bc1`, free): the track x 8012 north of y 16370, where it turns west; the
-  diffusion-coloured area of Ambiguity 32 and the ring or box at its north-west corner (7985-8030,
-  16560-16600); a short poly at (8275, 16497-16503) between the upper copy's bottom pad and `dinv17`'s gate
-  row (`tl5_tracks.py rows col`: one cut only, not looked at); `bc1`'s gate 6 north of y 16015.
+- **Next (after run 31)**: (i) **the driver of `eof_w16040`** (the enable of the first latch of both
+  pairs; piece `en18` followed it to six gate ends and found no driver). Where to look, in order: (1)
+  **`bc1`'s unit at the rail x 7292-7342, y 15400-15600** (`bc1` (continue), free): three gate rows under
+  one rail (`rcs_e4`'s y 15427-15445, this net's y 15493-15515, `bl0_w15566`'s y 15557-15580), contacts
+  (7320,15468) and (7320,15595), a narrow strip east of the rail (x 7377-7395) that the first two rows
+  cross; trace it whole (`r31_d2.png` .. `r31_d5.png`; `railprof.py 7295 7340 15380 15600`): it says what
+  the net and `bl0_w15566` do together, and `bl0_w15566`'s own driver is the next lead (its row east of
+  x 8360 on y 17821 ends on a pad (8688,17820), whose metal goes on east along y 17821 to about x 8955:
+  not followed). (2) **The twin of `cap18`** (x 8560-8800, y 17930-18005): the wire east of the rail box,
+  the gate from the pad (8688,17820), the island with a contact (8770,17970); if its island has a wire
+  the reading of `cap18` changes (Ambiguity 116). (3) Ambiguities 115-119's readings again, first the
+  three lengthwise stretches (117). (ii) `eof_w17472` (the driver's lower poly, west leg south of
+  y 17560): **review round 37 saw where it goes** (not drawn, checked by text only: `eof_cchk` (8225,17600)
+  hole -11, 219 / 217; (8402,17598) -5, 174 / 131; `tl5_tracks.py h 17603 8200 8425`: metal x 8254-8382
+  between the two rings): the leg ends on a pad with a contact (8225,17600), a metal strap along y 17603
+  runs east to a pad with a contact (8402,17598), whose poly goes south into a row y 17632-17656 that runs
+  east and turns north under the VCC rail at x 8520-8545 (seen in run 31 on `r31_g3.png`: the L under the
+  rail at y 17590-17650, on east along y 17585-17605); it does not touch `en17`'s metal and is not joined
+  to `eof_w17168`'s leg at x 8573 (the reviewer's `t1`, `u1`, `v1`, `w1.png` in `review-37/`). To draw:
+  the strap, the two pads, the row and its turn north to its driver. (iii) `eof_w17212` and `eof_w16000`
+  (the item on the ripple counter's clock below). (iv) what `bc1_s0` and `bc1_s1` are (`bc1`'s bus lines
+  y 14832 and its second select: `bc1` (continue)). Seen beside piece `en18`, other nets, not drawn: the
+  poly column x 7092-7112 from a pad with a contact (7100,15392) south under this net's metal and
+  `ck_out`'s (believed the pad (7100,15262)'s net: `bc1`); a poly row y 16206-16224 under the track
+  x 7058; the metal that starts 30 px south of the corner (8925,17695) on the same x (y 17731 on); the
+  wide metal x 8512-8558 south of y 17997. Seen beside pieces `dinv17` and `lat18`, other nets, not drawn
+  (`bc3` / `bc1`, free): the track x 8012 north of y 16370, where it turns west; the diffusion-coloured
+  area of Ambiguity 32 and the ring or box at its north-west corner (7985-8030, 16560-16600); a short poly
+  at (8275, 16497-16503) between the upper copy's bottom pad and `dinv17`'s gate row (`tl5_tracks.py rows
+  col`: one cut only, not looked at); `bc1`'s gate 6 north of y 16015.
 - **Ambiguity 53 to be measured again with a control** (from review round 29 of piece `g174`): a band about
   10-20 px high between two polys has a greenish north flank and a reddish south flank in chip 2's shots, so
   its colour says something only against a band of the same height that is certainly field, measured the same
@@ -5557,7 +5721,7 @@ Round 37: no findings that change a connection.
   17503-17530)). To draw: place `tl5_inv`, read its pads and the box. Also seen, other nets, not drawn: the
   track x 9056, which steps east at y 17240-17265 to x 9104 and runs on south beside `nor17`'s output; the
   track x 9012 north of y 15950 (it steps east there to x 9056); the 13-line bus's line y 14742, which turns
-  south at (9097,14745) on x 9099 and east at (9098,15827) (`r21_k1.png`, `r21_k3.png`). (1a) **the upper latch's enable `eof_w16040`**: the metal x 8925 south of (8925,16300)
+  south at (9097,14745) on x 9099 and east at (9098,15827) (`r21_k1.png`, `r21_k3.png`). (1a) **the upper latch's enable `eof_w16040`: followed (run 31, piece `en18`: it is `lat18`'s enable too; driver not found)**; as it was left: the metal x 8925 south of (8925,16300)
   (`follow.py 8925 16300 S --gap 16`: to (8925,17694), a corner west, (8643,17706), where the follower loops;
   candidates (8926,16552), (8926,16845), (8923,16963): bars of the rows beneath). If it is high only while
   `ck_out` is low the two latches are a flip-flop. (1b) **the upper latch's data `eof_w16000`**: the box

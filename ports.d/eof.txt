@@ -55,8 +55,6 @@ rst_a     P  9770,18072-18090   ?    link H: from trunks' pad (9770,18081)
 
 # Piece isrc4: rst_a is lc2's through line x 6299 (run 9)
 rst_a     P  7550,14904-14924   in   onto the east end of busl's poly row of rst_a (one net); the driver is beyond it: lc1's gate 5, rst_a (piece isrc5)
-rst_a     P  8326,16294-16312   out  the row's east end: a gate at x 8283-8311 over an undrawn diffusion column (the clear row of a latch unit: bc1 / bc3)
-rst_a     P  8326,16900-16918   out  the tap row's east end: the same 606 px lower (bc3)
 
 # Piece g7700: the gate on rst_ck's tap row (run 5)
 eof_w7777   P  6450,7812-7830    in   row 3 of the gate, on west into lc1's strip (cluster E's undrawn west half)
@@ -132,7 +130,6 @@ ck_out        M      9762-9778,17866          ?    the metal that ends on the pa
 #  the rails' ports at y 16300 moved to y 15870)
 eof_w16000    P      8800,15727-15745         in   the upper latch's data: the poly row west of the pad (8880,15738), into a heavy-outlined box (8762-8795,15722-15757) at column B's east edge (not read)
 eof_w16000    M      8831-8845,16030          ?    the track x 8838 on south of the data pad (8838,16000) (follower: to (8838,17306); not checked)
-eof_w16040    M      8919-8931,16300          in   the upper latch's enable: the metal x 8925 on south of its lower pad (8925,16262) (follower: to (8925,17694), west along y 17700 to x 8643; not checked)
 vss           M      8686-8732,15870          -    column B's VSS rail, drawn over the two latch copies and the inverter only (y 15870-16985); it runs on north
 vcc           M      8510-8560,15870          -    R2 (bc1's M 8534,14990 y16300, drawn again from y 15870) over the VCC boxes of the two latch copies and the inverter
 # Pieces inv17, nor17, in212 (run 21): the two gates south of the second latch, and the NOR's second input to a pad
@@ -149,6 +146,9 @@ vss           M      8686-8732,17300          -    column B's VSS rail on south 
 vcc           M      8488-8558,17560          -    R2 on south of the NOR's VCC box and past this unit's load (drawn y 15870-17560; x 8488-8558 south of y 17236; it runs on)
 # Piece n338 (run 28): eof_w17338's port at (8245,17341) is gone: the row is drawn on to its driver, a NOR; its two inputs
 # Pieces en17, dinv17, lat18 (run 30): the ports eof_w16778 M 8223-8235,17030, ck_out M 8418-8430,17866 and eof_w16737 P 8270,16553-16573 are gone: drawn on
-eof_w16172    M      8223-8235,16425          in   the latch lat18's enable track x 8229 on south of its lower pad (8227,16387): the bundle's fourth L (west at y 16740, south on x 8143; not followed)
 bc1_g6_out    P      8214-8247,16090          in   the pad (8229,16107) on which bc1's metal x 8229 ends (bc1's contact): one poly with the latch lat18's data row
 vss           M      8336-8384,16040          -    column A's VSS rail, bc1's R1, drawn again over the latch lat18 (y 16040-16300)
+# Pieces en18, cap18 (run 31): the ports eof_w16040 M 8919-8931,16300 and eof_w16172 M 8223-8235,16425 are gone (drawn on: one net, eof_w16040); rst_a P 8326,16294-16312 and 8326,16900-16918 are gone (their loads are the clear gates of the latches lat18 and lat17)
+eof_w16040    P      7290,15471-15489         ?    the enable of the first latch of both pairs: its poly row at the west edge of the rail x 7292-7342 of bc1's west gate column, where it steps south into a gate row y 15493-15515 under the rail (bc1's unit, not drawn)
+vcc           D      8560,17964-17984         -    the diffusion wire of piece cap18 on east of the box under the VCC rail, to the twin device at x 8700-8800 (not drawn)
+vcc           M      8512-8558,17997          -    R2 on south (drawn y 17550-17997 over the box of piece cap18; it runs on)
