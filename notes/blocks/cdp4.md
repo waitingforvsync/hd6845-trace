@@ -31,6 +31,12 @@ with a contact on one thin metal track, and the same track starts on the end pad
 alias). Each track runs on south to a corner in the bottom bus field and turns east. With every file
 loaded: 2517 nets, 4782 transistors, 0 errors, 0 warnings. See "The read bus" under Logic.
 
+Run 5 (2026-11-21 14:28 -0600): **the read bus, columns 1-7, east along the bottom bus to x 16000** (wiring only, 42 pads with
+contacts, 21 poly hops, no transistor, no uncertain item): each of the seven horizontals runs east to a
+pad, hops in poly under the vertical trunks, climbs a diagonal to its row, and hops twice more under
+rails; no tap on the way. With every file loaded: 2517 nets, 4796 transistors, 0 errors, 0 warnings. See
+"The read bus, east" under Logic.
+
 Not traced: the rest of the wiring right of x 10600 (the two thin metals x 10809 and x 10853, the rails'
 ends) and below y 14060.
 
@@ -325,6 +331,44 @@ are drawn here.
 **Believed, not traced**: the eight horizontals lead to the data output path (column 0's reaches an
 inverter of `regs`); with `cdp3`'s bit line of column 2 being `db_b5`, column K would be data bit 7 - K.
 
+### The read bus, east along the bottom bus (run 5, 2026-11-21; traced)
+
+Columns 1-7 only (`cdp3_n_c1`..`c7`); column 0 is `regs`' piece `n0`, which runs one row pitch further
+north by the same kind of route to its inverter. Each line, from its port of run 4 at x 11230:
+
+| K | horizontal y | hop 1: pads (poly row between) | diagonal (45 degrees, 260 px) | row y | hop 2: pads | hop 3: pads |
+|---|---|---|---|---|---|---|
+| 1 | 18038 | (12851,18038) - (13165,18035) | (13284,18039) - (13543,17779) | 17777 | (14456,17776) - (14672,17777) | (15712,17776) - (15926,17777) |
+| 2 | 18082 | (12808,18082) - (13205,18079) | (13302,18082) - (13562,17822) | 17821 | (14499,17821) - (14716,17821) | (15754,17821) - (15969,17821) |
+| 3 | 18125 | (12853,18124) - (13158,18120) | (13324,18125) - (13583,17866) | 17864 | (14457,17864) - (14673,17864) | (15712,17864) - (15926,17864) |
+| 4 | 18168 | (12808,18168) - (13203,18163) | (13346,18169) - (13605,17909) | 17908 | (14500,17908) - (14715,17907) | (15755,17906) - (15969,17906) |
+| 5 | 18211 | (12851,18210) - (13160,18208) | (13368,18212) - (13627,17953) | 17951 | (14456,17951) - (14671,17951) | (15711,17951) - (15926,17951) |
+| 6 | 18255 | (12807,18254) - (13203,18249) | (13390,18256) - (13650,17996) | 17994 | (14499,17994) - (14715,17994) | (15755,17994) - (15969,17993) |
+| 7 | 18298 | (12852,18298) - (13161,18296) | (13412,18298) - (13672,18039) | 18037 | (14457,18037) - (14672,18037) | (15713,18037) - (15926,18039) |
+
+- **The horizontals** (thin metal, 12 px): `tools/follow.py 11400 Y E` ends each on its pad; the 68 contact
+  candidates it lists were put through the pad test (`cache/scratch/cdp4/candh.py`): no ring pattern in
+  either metal shot at any (five small clean-shot specks).
+- **Hop 1**, under the vertical trunks (x 12880-13130): seven straight poly rows, each between a west pad
+  (x 12808 or 12852, alternating) and an east pad (x 13205 or 13160) at the same y; read in the clean shot
+  at 2.9x (`hop1_c.png`): no row steps a track.
+- **Diagonals**: east of its pad each line runs east, climbs 260 px north-east and runs east on its row;
+  the ends are from a walk along the metal (`cache/scratch/cdp4/track.py X0 Y0 14440 60`, which cannot
+  leave a line: it re-centres within 7 px every 2 px) and an overlay (`ov5d.png`). North-west of them, in
+  the same fan, are `regs`' three lines (column 0's and two write/select lines).
+- A poly column x 13706-13730 crosses under all seven rows (y 17750-18060): the rows are bright between
+  its two edge bars, with no pad: no tap (`x13718.png`, three shots at 3.2x; tracing guide, trap 15). Whose
+  it is was not followed.
+- **Hop 2**, under a thin metal x ~14535 and a rail x 14580-14620: straight rows between pads x 14456 /
+  14499 and x 14672 / 14716. **Hop 3**, under a wide rail x 15790-15880: pads x 15712 / 15755 and x 15926 /
+  15969. Under both rails the rows lie on field (`tools/railprof.py 15800 15870 17740 18060` and
+  `14585 14615 17740 18060`: "poly over field" for all seven, field between; its one "diffusion" band,
+  y 17795-17807 under the second hop's rail, is a greenish patch 16 px wide in the clean shot between two
+  rows, not under either: `tools/px.py row 17801 14560 14650 8`): no transistor.
+- Drawn to x 16000 (ports). East of that (`tools/follow.py 16010 Y E`, not drawn): column 1's metal ends at
+  (16148,17777), column 2's at (16516,17820), and columns 3-7 turn north at corners x 16558, 16602, 16646,
+  16690, 16732; `regs`' inverter output (NOT column 0) runs east on the row y 17735 just above.
+
 ### Corner gate group: `cdp4_rst` = NOR of six select rows (run 2, 2026-11-19; traced)
 
 Region x 7550-7870, y 13640-14055, left of row D. One gate, seven transistors:
@@ -387,7 +431,7 @@ islands are closed curves inside it, so they are the other class.
 | `cdp4_ld` | poly | x 7600, y 12962; right end about x 10600 | from outside | row C latch strobe |
 | `cdp4_bus_s0`..`s7` | poly | x 7600, y 12180, 12137, 12093, 12052, 12008, 11964, 11922, 11877 | unknown | per-slice line between row R1 and the left |
 | `cdp4_bus_s0`..`s7` | poly | x 7600, y 13333, 13376, 13420, 13463, 13505, 13548, 13590, 13633 | from outside | data into the row C latch |
-| `cdp3_n_c1`..`c7` (= `cdp4_n_s1`..`s7`) | metal | x 11230, y 18040, 18085, 18128, 18170, 18213, 18256, 18298 (drawn end; each runs on east) | driven inside | the read bus of R12-R17, columns 1-7, east along the bottom bus (run 4) |
+| `cdp3_n_c1`..`c7` (= `cdp4_n_s1`..`s7`) | metal | x 16000, y 17777, 17821, 17864, 17906, 17951, 17993, 18039 (drawn end; each runs on east) | driven inside | the read bus of R12-R17, columns 1-7, east of the third hop (runs 4, 5) |
 | `cdp4_n_s0` | poly | x 10850, y 13333 | driven inside | selector output of slice 0: on east to its pad (11200,13330) on the read bus track of column 0, drawn by `regs` (piece `n0`) |
 | `cdp4_a_s2`..`s7` = `cdp3_f_c2`..`c7` | metal | x 8511 + offset, y 11048 (the end of `cdp3`'s line f, y 11052) | from `cdp3`'s row A | selector input a (6 bits); crosses row R1 with no contact (run 3) |
 | (bus tap) | metal | x 8556 + offset, top end y 11062 | inside | `cdp4_bus_sK` up to the comparator's two gate polys (run 3) |
@@ -502,8 +546,9 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
 - Right of x 10600: (done, run 4: the n lines' contacts and the read bus tracks.) Left: the two thin
   metals x 10809 (the follower ends it at (10809,15738)) and x 10853 (to (10852,17652)), both through
   the whole field from north of y 10150; the end of the s7 VCC rail; the ninth VSS rail's end (y 13300).
-- From run 4: the seven horizontals of the read bus east of x 11230 (y 18040-18298; column 6's runs to
-  x 12810 by the follower) and column 0's corner (`regs` run 6); the undrawn poly from the west along
+- From run 5: the read bus's seven lines east of x 16000 (ends and corners listed under "The read bus,
+  east"); the poly column x 13706-13730 under the rows.
+- From run 4: the undrawn poly from the west along
   y 18297 that turns south under column 7's corner to `rst_ck`'s pad (10900,18470) (Ambiguity 13); the
   structure of AMB-040 under and east of the tracks (the diffusion-coloured rectangle y 11919-12186,
   whose west end has contacts of the s7 VCC rail at x 10565).
