@@ -149,5 +149,5 @@ vss           M      8686-8732,17300          -    column B's VSS rail on south 
 # Piece g174e (run 24): the east side of the same unit; the six ports of piece g174 on the rail's east edge (x 8368-8372) are gone: drawn on
 vcc           M      8488-8558,17560          -    R2 on south of the NOR's VCC box and past this unit's load (drawn y 15870-17560; x 8488-8558 south of y 17236; it runs on)
 # Piece n338 (run 28): eof_w17338's port at (8245,17341) is gone: the row is drawn on to its driver, a NOR; its two inputs
-eof_w17124    M      8179-8192,17060          in   gate A of the NOR that makes eof_w17338: the track x 8186 on north of the pad (8184,17105)
-eof_w17207    M      8007-8019,17150          in   gate B of the same NOR: the track x 8013 on north of the pad (8010,17210)
+eof_w16737    P      8270,16553-16573         in   the latch lat17's data: its top row enters a heavy-outlined box (8270-8300, 16550-16580) of the undrawn unit between the two latch copies under column A's rail
+eof_w16778    M      8223-8235,17030          in   the latch lat17's enable track x 8229 on south of its lower pad (8227,16994); believed ck_out (the follower from the port (8418-8430,17866) ends on it), not joined

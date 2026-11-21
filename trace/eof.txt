@@ -2235,3 +2235,85 @@ N M 8056,16450 bc1_dec01_n
 # chip 2 is whole (textmap.py 7986 16924 8042 16972 3 --acid, 7986 16770 8042 16836 3).
 M 8013,16604 y17155 w=12
 @alias bc1_dec01_n eof_w17207
+
+# ======================================================================================
+# Piece lat17 (run 29, 2026-11-21): eof_w17124, gate A of the NOR that makes eof_w17338 (piece
+# n338), followed north from its port (8186,17060): it is the upper node of a latch of tl1's build
+# under column A's VSS rail (x 8338-8382), the lower of the two unmirrored copies that findcell
+# found there (run 9: the table at the end of piece isrc4, notes). bc3's ground (free).
+#
+#   eof_w16636 = NOT eof_w16737                                        (the cell's own inverter)
+#   eof_w17124 = NOT((eof_w16737 AND eof_w16778) OR eof_w16950)        (upper unit, tl1_ua)
+#   eof_w16950 = NOT(rst_a OR (eof_w16778 AND eof_w16636) OR eof_w17124)   (lower unit, tl1_ub)
+# A transparent latch, open while eof_w16778 is high: eof_w17124 is then NOT eof_w16737, and
+# rst_a high clears the lower node. Both latch equations rest on the cells' load ties (?), like
+# every copy. eof_w16778 is believed ck_out (the follower of run 18 from ck_out's pad
+# (8424,17908) ends on this track at (8227,17019)): not joined here, a port.
+# Views r29_*.png in cache/scratch/eof/; survey.md, run 29; notes, piece lat17.
+#
+# ---- the cells. findcell (clean shot): tl1_ua 5729,12277 (0.68), tl1_ub 5729,12276 (0.70);
+# placed at 5729,12276. Overlays r29_c1.png, r29_c2.png (2.7x, clean and chip-2 metal): every
+# outline on its feature. The cells bring the thin metal x 8287-8301 from the top pad (contact
+# (8291,16637)) to the lower gate's pad (contact (8284,17043)): tl3_thin.py 8282 8302 16640 17045
+# --thr 176 --min 8: bars of 8-13 px at the edges beneath and three of 16-17 px (the top pad's
+# ring; over the upper node's box at y 16783-16819, as in the master: trap 27).
+@inst tl1_ua 5729,12276 tag=l17
+@inst tl1_ub 5729,12276 tag=l17
+# Rails: VSS x 8338-8382 (M 8360,16300 y17250, piece isrc4 / n338) and VCC x 8510-8560
+# (M 8535,16300 y16960, piece lat16) are drawn. The two loads' VCC box is the diffusion that
+# piece lat16 drew under the VCC rail (D 8510,16785:8560,16925, C 8535,16860); the foot of the
+# lower stack and the source of the lower unit's third pull-down are piece n338's VSS box
+# (D 8332,17054:8376,17112, C 8350,17078).
+# thin metal x 8462-8475 between the upper unit's plate (contact (8468,16776)) and the pad of the
+# lower unit's third pull-down (contact (8468,16977)): ring and bright centre in both chips and a
+# hole in the clean shot at both (eof_cchk.py; r29_tm471.png, 4x, three shots); between them
+# bars of 9-11 px only (tl3_thin.py 8462 8478 16780 16975 --thr 176 --min 8), the clean shot
+# pink under it where it lies over field (y 16845-16870, 16945-16965).
+M 8468,16768 y16985 w=12
+C 8468,16776
+C 8468,16977
+# ---- the upper node (eof_w17124): the track x 8186 north of the port, 240 px, to a pad with a
+# contact (8186,16823) (ring and bright centre in both chips, pitted box in the chip-2 stripped
+# shot, a hole in the clean shot's cream pad: r29_p823.png, 4x, four shots; eof_cchk -13,
+# 203/216), on which it ends (no metal north of the pad). On the way it crosses rst_a's tap row
+# y 16900-16918 (bars of 9 px, no contact) and has a nick at y 16984-16993: chip 2's metal is
+# cut from the east to a sliver 4-6 px wide, chip 1 has a dark blob over the track there
+# (y 16981-16999), the chip-2 stripped shot's ghost is unbroken (r29_s990.png, 5x, four shots;
+# notes, Ambiguity 103). The pad's poly row y 16812-16833 runs east under the track x 8229 (no
+# contact: no hole, no ring) and in the open into the cell's node box.
+M 8186,17065 y16823 w=13
+P 8170,16808:8204,16838
+C 8186,16823
+P 8195,16812:8275,16833
+N P 8240,16823 eof_w17124
+# ---- the two enable rows (eof_w16778): each from a pad with a contact on the track x 8229,
+# (8229,16779) and (8227,16994) (ring and bright centre in both chips, hole in the clean shot:
+# r29_k778.png, 7x, four shots; textmap.py 8205 16968 8255 17016 3 --acid). The track ends
+# north on the upper pad: between its ring and the corner of the metal that comes down x 8229
+# from the north and turns west at y 16740 (another net, not drawn) the clean shot has an open
+# green band y 16753-16762 across x 8200-8250 and both metal shots bare ground. It runs through
+# the lower pad and on south (tl5_tracks.py v 8229 16730 17040: rings and bars only): port at
+# y 17030.
+P 8212,16762:8247,16796
+C 8229,16779
+P 8240,16767:8275,16787
+P 8212,16978:8247,17010
+C 8227,16994
+P 8240,16984:8275,17004
+M 8229,16779 y17030 w=13
+N M 8229,16900 eof_w16778
+# ---- the data (eof_w16737): the cell's gate row y 16727-16745 runs west in the open (orange in
+# both chip-2 shots) to the track x 8229 (the other net's), turns north under it as a column
+# x 8224-8242 (cream in the clean shot, y 16553-16745; no hole and no ring on the track: no
+# contact, trap 13) and at y 16553-16573 east in the open to a heavy-outlined box at about
+# (8270-8300, 16550-16580) of a unit between the two latch copies that is not drawn: port at
+# x 8270 (r29_data.png, 3.1x, three shots; px.py row 16650 / 16736 / 16564, col 8262).
+P 8224,16727:8275,16745
+P 8224,16553:8242,16745
+P 8224,16553:8270,16573
+N P 8233,16650 eof_w16737
+# ---- names of the cell's other nodes: the inverter's output (the top pad, the thin metal x 8294,
+# the lower stack's lower gate) and the lower node (its stub ends rounded at x 8262: nothing
+# leaves the cell west)
+N P 8300,16638 eof_w16636
+N P 8285,16954 eof_w16950
