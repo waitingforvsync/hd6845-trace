@@ -3665,3 +3665,119 @@ N P 4560,11963 eof_mxs_{}
 @inst eof_mx 1,5162 tag=s11
 @inst eof_mx 1,5639 tag=s12
 @inst eof_mx 1,6116 tag=s13
+
+# ---- piece sel (run 41, 2026-11-21): the two thin metals that carry the pads of the eof_mx gates
+# are one line each through the fourteen rows, and where they come from. Wiring only.
+# EAST LINE (eof_ga: the upper gates' pads (4517, 11811 + 477 k)), x 4510-4527: a free end at
+# y 11048 at the top of row s0 (over a poly band y 11048-11068, no ring and no hole: px.py col 4518
+# 11024 11112 4 all; textmap.py 4494 11036 4544 11132 2; bare ground north of it), then straight
+# south through the rows and both group gaps (r41_g1.png, r41_g2.png) to a corner (4520,18301).
+#   tl3_thin.py 4509 4528 10900 18400 --thr 150 --min 12: no stretch dark in both chips longer
+#   than 25 px. In every row it passes (a) over the west end of a heavy-outlined box (s1:
+#   y 11545-11591): on x 4524 two bars of 14 and 11 px with the metal bright between in both chips
+#   (px.py col 4524 11536 11600 3 all; no hole: 204/161/133), the west half dark along a poly's end
+#   (trap 19); (b) the 20 px between the pad's ring and the diffusion strip N (s1: y 11820-11840):
+#   dim (80-104 chip 2, 109-126 chip 1) between the metal's own edge lines at x 4507 and x 4531,
+#   the clean shot protected (pink 184/114/111 at y 11829; px.py row 11832 4494 4542 3 all);
+#   (c) the large diffusion box y 11698-11744: bright through, no ring (textmap.py 4496 11686
+#   4542 11756 2). No branch anywhere (cache/scratch/eof/wid.py v 4518 11055 18285).
+# From the corner east along y 18301 to a pad with a contact (4909,18298); a poly row east under
+# the rail x 4948-5022 to a pad (5103,18298); metal east, a diagonal at x 5592-5612 down to
+# y 18322, to a pad (6147,18321); a poly row east under the wide metal x 6188-6240 to a pad
+# (6322,18319); metal north on x 6322 for 1,840 px to a corner (6322,16478), east along y 16478
+# over the poly columns of regs, bl0, trunks and eof (no pad on it: wid.py h 16478 6335 6995) to
+# a corner (7014,16478), south on x 7014 (for 60 px over the WEST line's poly column, no contact;
+# across rcs_mv's row y 16780, bars only) to a pad (7014,16865); a poly row east under three
+# metals (x 7057, 7100, 7144: bars, no pad) through a pad with a contact (7187,16866) and on east
+# into a gate group nobody has drawn (drawn to x 7230); from the pad (7187,16866) a metal north
+# on x 7187 to a pad (7185,16432), whose poly leaves east into the same group (drawn to x 7222).
+# All fourteen pads: green hole, ring, bright centre (eof_cchk.py; cache/scratch/eof/padc.py).
+M 4518,11048 y18301 w=16
+M 4518,18301 x4909 w=13
+P 4892,18281:4926,18315
+C 4909,18298 s=24x24
+P 4909,18299 x5103 w=17
+P 5086,18281:5120,18315
+C 5103,18298 s=24x24
+M 5103,18300 x5592 5612,18322 x6147 w=13
+P 6130,18304:6164,18338
+C 6147,18321 s=24x24
+P 6147,18320 x6322 w=18
+P 6305,18302:6339,18336
+C 6322,18319 s=24x24
+M 6322,18319 y16478 x7014 y16865 w=13
+P 6997,16848:7031,16882
+C 7014,16865 s=24x24
+P 7014,16865 x7230 w=20
+P 7170,16849:7204,16883
+C 7187,16866 s=24x24
+M 7187,16866 y16432 w=13
+P 7168,16415:7202,16449
+C 7185,16432 s=24x24
+P 7185,16434 x7222 w=20
+N M 4518,14500 eof_ga
+# WEST LINE (eof_gb: the lower gates' pads (4352, 11912 + 477 k)), x 4338-4354: a free end at
+# y 11046 (px.py col 4346 11024 11112 4 all: no ring, no hole), straight south (tl3_thin.py 4336
+# 4357 10900 18400 --thr 150 --min 12: nothing over 17 px dark in both; chip 1 alone is dark at
+# y 15389-15420, a blemish of that chip, chip 2 bright through: px.py col 4346 15380 15430 6) to a
+# corner (4346,18256) and east 30 px onto a pad (4389,18256); a poly row east under the wide
+# metal x 4430-4480 and under the EAST line (no pad, no ring: eof_cchk.py 4518,18255) to a pad
+# (4563,18255); metal east along y 18256 to a pad (4866,18255); a poly row under the rail to a
+# pad (5062,18254); metal east, a diagonal at x 5632-5652 down to y 18278, to a pad (6103,18278);
+# a poly row under the wide metal to a pad (6279,18278); metal north on x 6280 to a corner
+# (6280,16435), east along y 16435 to an end pad (7014,16433) (the EAST line's metal x 7014
+# begins 35 px south of the pad's ring with bare ground between: textmap.py 6966 16408 7040
+# 16506 2 --acid); the pad's poly runs south (x 7004-7024, under the EAST line's metal) to
+# y 16548 and east as a row y 16528-16548 under the metals x 7057, 7100, 7144, 7187 into the
+# same undrawn gate group (drawn to x 7230).
+M 4346,11046 y18256 x4389 w=16
+P 4372,18239:4406,18273
+C 4389,18256 s=24x24
+P 4389,18256 x4563 w=18
+P 4546,18238:4580,18272
+C 4563,18255 s=24x24
+M 4563,18256 x4866 w=13
+P 4849,18238:4883,18272
+C 4866,18255 s=24x24
+P 4866,18255 x5062 w=17
+P 5045,18237:5079,18271
+C 5062,18254 s=24x24
+M 5062,18257 x5632 5652,18278 x6103 w=13
+P 6086,18261:6120,18295
+C 6103,18278 s=24x24
+P 6103,18277 x6279 w=18
+P 6262,18261:6296,18295
+C 6279,18278 s=24x24
+M 6280,18278 y16435 x7014 w=13
+P 6997,16416:7031,16450
+C 7014,16433 s=24x24
+P 7014,16433 y16538 x7230 w=20
+N M 4346,14500 eof_gb
+@alias eof_ga eof_ga_s0
+@alias eof_ga eof_ga_s1
+@alias eof_ga eof_ga_s2
+@alias eof_ga eof_ga_s3
+@alias eof_ga eof_ga_s4
+@alias eof_ga eof_ga_s5
+@alias eof_ga eof_ga_s6
+@alias eof_ga eof_ga_s7
+@alias eof_ga eof_ga_s8
+@alias eof_ga eof_ga_s9
+@alias eof_ga eof_ga_s10
+@alias eof_ga eof_ga_s11
+@alias eof_ga eof_ga_s12
+@alias eof_ga eof_ga_s13
+@alias eof_gb eof_gb_s0
+@alias eof_gb eof_gb_s1
+@alias eof_gb eof_gb_s2
+@alias eof_gb eof_gb_s3
+@alias eof_gb eof_gb_s4
+@alias eof_gb eof_gb_s5
+@alias eof_gb eof_gb_s6
+@alias eof_gb eof_gb_s7
+@alias eof_gb eof_gb_s8
+@alias eof_gb eof_gb_s9
+@alias eof_gb eof_gb_s10
+@alias eof_gb eof_gb_s11
+@alias eof_gb eof_gb_s12
+@alias eof_gb eof_gb_s13

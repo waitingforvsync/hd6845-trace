@@ -1015,6 +1015,55 @@ diffusion line that enters the row from the east and one from the poly band alon
 Full extraction with run 40: 2,560 nets, 4,692 transistors, 0 errors, 0 warnings. The package by itself:
 1,168 nets, 1,906 transistors, 0 errors, 81 warnings (other packages' names; 81 before the run).
 
+Run 41 (Tom Seddon's session, Claude Fable 5.2; 2026-11-21 13:37 +0000 on). One piece, `sel` (wiring
+only, no transistor, no uncertain item): **the two thin metals that carry the pads of the selector's
+gates are one line each through the fourteen rows, so the 28 gates are on two nets, `eof_ga` and
+`eof_gb`; both lines are free ends at the array's top and leave it at the bottom, and both end 2,700 px
+east on poly rows that enter one gate group nobody has drawn (x 7200-7450, y 16400-16900).**
+
+- **Traced** (piece `sel`, the east line, `eof_ga`: the upper gates, the ones that join the strap's
+  node to the diffusion line from the east). The thin metal x 4510-4527 begins as a free end at
+  (4518,11048), at the top of row s0, runs straight south through the fourteen pads and both group gaps
+  to a corner (4520,18301), east along y 18301 to a pad (4909,18298), by a poly row under the rail
+  x 4948-5022 to a pad (5103,18298), east by metal (a diagonal at x 5592-5612 down to y 18322) to a pad
+  (6147,18321), by a poly row under the wide metal x 6188-6240 to a pad (6322,18319), north by metal on
+  x 6322 for 1,840 px to a corner at y 16478, east along y 16478 to a corner (7014,16478), south on
+  x 7014 to a pad (7014,16865), and east by a poly row y 16855-16875 through a second pad with a
+  contact (7187,16866) into the gate group (drawn to x 7230). From the pad (7187,16866) a metal runs
+  north on x 7187 to a pad (7185,16432) whose poly leaves east into the same group (drawn to x 7222).
+- **Traced** (the west line, `eof_gb`: the lower gates, the ones that join the node to the row's south
+  band). The thin metal x 4338-4354 begins as a free end at (4346,11046), runs straight south to a
+  corner (4346,18256) and 30 px east onto a pad (4389,18256); a poly row east under the wide metal
+  x 4430-4480 and under the east line to a pad (4563,18255); metal east along y 18256 to a pad
+  (4866,18255); a poly row under the rail to a pad (5062,18254); metal east (a diagonal at x 5632-5652
+  down to y 18278) to a pad (6103,18278); a poly row under the wide metal to a pad (6279,18278); metal
+  north on x 6280 to a corner at y 16435 and east to an end pad (7014,16433); the pad's poly runs south
+  (x 7004-7024, for 60 px under the east line's metal) to y 16548 and east as a row y 16528-16548 into
+  the gate group (drawn to x 7230).
+- **How "one line" was read**: the two-chip metal test across each metal's whole width
+  (`tools/tl3_thin.py ... --thr 150 --min 12`) finds no stretch dark in both chips longer than 25 px on
+  the east line and 17 px on the west between the free ends and the corners; the three kinds of dark
+  stretch a row gives were each read with `tools/px.py` and `tools/textmap.py` (the east line over the
+  west end of a heavy-outlined box, 20 px of it between its pad's ring and the strip N, and over the
+  large diffusion box: Ambiguities 165-167); both group gaps on views; no branch on either line and no
+  pad but the fourteen (`cache/scratch/eof/wid.py`, a width scan, and the views).
+- **Believed, not traced** (from two views at 2.2x, `r41_e3.png`, `r41_e4.png`): the gate group is two
+  mirrored units on a rail x 7295-7340 (contacts (7312,16455), (7312,16785)). Into the lower one go
+  `rcs_mv`'s row (y 16770-16790, which `bl0` ends at x 7040 and which is seen to run on east) and the
+  east line's row y 16865; into the upper one the east line's pad poly (7185,16432) and the west
+  line's row y 16538. If the lower unit's output is the east line and the upper unit inverts it onto
+  the west line, the two selects are complementary and `rcs_mv` chooses between the display start
+  address and the row's own line. That is the next piece; nothing of it is drawn.
+- **Read without an uncertain item, recorded as ambiguities**: the east line over the box in every row
+  (165), the 20 px south of each upper pad (166), the metals over diffusions without contacts (167),
+  the two free north ends (168), the west line's poly column under the east line's metal at x 7014 and
+  the pad that is not the east line's (169), the crossings in the channel and under y 16435 / 16478
+  (170), a blemish of chip 1 on the west line (171).
+
+Full extraction with run 41: 2,534 nets, 4,692 transistors, 0 errors, 0 warnings (2,560 nets before: 28
+names on 2 nets). The package by itself: 1,142 nets, 1,906 transistors, 0 errors, 81 warnings (other
+packages' names; 81 before the run).
+
 Full extraction after run 2: 2,351 nets, 4,232 transistors, 0 errors, 0 warnings; the package
 by itself (it loads `rdp3`): 0 errors, 0 warnings.
 
@@ -1150,6 +1199,7 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `t4780n`, `eof_w15998`'s track and its seven pads | x 4700-4790, y 11270-17212 (a path) | wiring: thin metal x 4773-4785 from the pad (4778,17212) north to y 14159, an arm west y 14153-14165 onto the pad (4736,14155), thin metal x 4730-4742 north to the end pad (4736,11292) through pads (4736,13680), (4736,13201), (4736,12724), (4736,12247), (4736,11771); each pad with a contact and a poly row west drawn to x 4700 (y 11280-11301, 11759-11780, 12235-12256, 12712-12733, 13189-13210, 13668-13689, 14141-14162). No transistor |
 | `ld1`, the transistor the line gates in each row (cell `eof_ld`, 14 copies) | x 4270-4710, y 11690-11900 in row s1; the copies at dy -478, 477, 954, 1431, 1909, 2385 and (dx 1) 3079, 3557, 4034, 4684, 5162, 5639, 6116 | poly: the pad's row y 11758-11779 west to an L (4640-4667, 11711-11779), a band y 11711-11734 west to a column (4537-4558, 11711-11778), a long band y 11759-11776 west to a dead end at x 4275; diffusion (4566-4632, 11694-11754) with a box (4590-4630, 11736-11780) and a contact (4608,11757); thin metal x 4597-4613, y 11522-11898 (y 11662-11700 `?M`, over a box); contact (4607,11881) on a diffusion box (drawn 4592-4628, 11857-11897). One transistor per row, 66/23: gate the line, between `eof_nbox_s#` (north) and `eof_strap_s#` (south) |
 | `mx1`, the two pass transistors on the strap's node in each row (cell `eof_mx`, 14 copies) | x 4325-4705, y 11785-11980 in row s1; the copies at dy -477, 477, 954, 1431, 1909, 2386 and (dx 1) 3079, 3557, 4034, 4684, 5162, 5639, 6116 | one active area (4462-4655, 11838-11946) with the diffusion line from the east (y 11805-11825 to x 4640, y 11816-11828 to its turn at x 4549-4563) on its north side. Upper gate `eof_ga_s#`: a Z-shaped poly (band y 11853-11877, x 4434-4590; vertical part x 4564-4590; band y 11830-11851 to x 4664), a column (4434-4450, 11808-11877), a row y 11808-11825 east to a pad and contact (4517,11811) on the thin metal x 4510-4527. Lower gate `eof_gb_s#`: a band y 11902-11924 from a pad and contact (4352,11912) on the thin metal x 4338-4354 to x 4666. South strip y 11926-11945 with a buried contact (4462-4488, 11954-11973) onto the band y 11955-11972 (`eof_mxs_s#`, drawn x 4420-4700). Two transistors per row: 217/23 between `eof_strap_s#` and `eof_mxn_s#`, 193/22 between `eof_strap_s#` and `eof_mxs_s#` |
+| `sel`, the two select lines of the selector (`eof_ga`, `eof_gb`) | x 4338-4527, y 11046-18301 (two thin metals); x 4338-6340, y 18238-18338 (the channel below the array); x 6273-6329, y 16428-18319 and x 6273-7021, y 16428-16485 (two metals north and east); x 6997-7230, y 16416-16883 (the crossing field) | wiring only. East line `eof_ga`: metal (4518,11048) - (4518,18301) - pad (4909,18298); poly to pad (5103,18298); metal, diagonal x 5592-5612, to pad (6147,18321); poly to pad (6322,18319); metal north x 6322, east y 16478, south x 7014 to pad (7014,16865); poly row y 16855-16875 through pad (7187,16866) to x 7230; metal x 7187 north to pad (7185,16432), poly to x 7222. West line `eof_gb`: metal (4346,11046) - (4346,18256) - pad (4389,18256); poly to pad (4563,18255); metal to pad (4866,18255); poly to pad (5062,18254); metal, diagonal x 5632-5652, to pad (6103,18278); poly to pad (6279,18278); metal north x 6280, east y 16435 to pad (7014,16433); poly column x 7004-7024 south and row y 16528-16548 east to x 7230. Fourteen pads with contacts; no transistor |
 
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
 
@@ -3975,6 +4025,68 @@ and x 4338-4354 beyond their stubs; the VSS metal; a poly band y 12004-12022 sou
 band (the next row's VSS-tied band, piece `ld1`); the khaki rectangle x 4365-4420, y 11790-11895 (open
 ground between two metals, as piece `ld1` read it).
 
+### Piece `sel`: the selector's two gate lines are two nets common to the fourteen rows, and where they go (traced; wiring only; no uncertain item)
+
+Run 41, 2026-11-21. Region: the two thin metals of the left array's east column (x 4338-4354 and
+x 4510-4527, y 11046-18301), the channel below the array (y 18238-18338, x 4338-6340), two metals north
+on x 6280 and x 6322 (y 16435-18319) and east along y 16435 and y 16478 to x 7014, and the crossing
+field x 6997-7230, y 16416-16883. Survey and draft: `cache/scratch/eof/survey-run41.md`,
+`cache/scratch/eof/draft-sel.txt`. Images `r41_*.png`.
+
+**Extracted** (traced): the 28 gates of piece `mx1` are on two nets.
+
+```
+t gate eof_ga: eof_strap_s# <-> eof_mxn_s#     (fourteen, W/L 217/23: the node to the diffusion line from the east)
+t gate eof_gb: eof_strap_s# <-> eof_mxs_s#     (fourteen, W/L 193/22: the node to the row's south band)
+```
+
+`eof_ga_s0` .. `eof_ga_s13` are aliases of `eof_ga`, `eof_gb_s0` .. `eof_gb_s13` of `eof_gb` (`@alias`
+lines; the cell's labels are kept). Neither net has a driver in what is drawn: each ends on poly at a
+port into the gate group east of x 7200.
+
+**The east line, `eof_ga`** (traced; pads by `tools/eof_cchk.py` and `cache/scratch/eof/padc.py`:
+clean-shot hole / chip 2 centre / chip 1 centre):
+
+| Stretch | Layer | Read with |
+|---|---|---|
+| free end (4518,11048) south to the corner (4520,18301), through the pads (4517, 11811 + 477 k) | metal, 16 wide | `tools/tl3_thin.py 4509 4528 10900 18400 --thr 150 --min 12`; Ambiguities 165-168; `r41_a1.png`, `r41_g1.png`, `r41_g2.png`, `r41_n2.png`, `r41_o5.png` |
+| east along y 18301 to the pad (4909,18298) | metal | `tools/follow.py 4700 18300 W` / `E --gap 16`; `r41_p1.png`, `r41_p2.png`; pad -2 / 149 / 158 |
+| pad (4909,18298) east under the rail x 4948-5022 to the pad (5103,18298) | poly row y 18290-18308 | `r41_p2.png` (4.5x); 222/182/128 under the rail; pad -26 / 194 / 208 |
+| east along y 18301, a diagonal at x 5592-5612, y 18322 to the pad (6147,18321) | metal | `tools/eof_mrun.py col 5560 .. 5760 18140 18350`; `r41_o2.png`; pad -15 / 148 / 155 |
+| pad (6147,18321) east under the wide metal x 6188-6240 to the pad (6322,18319) | poly row y 18311-18329 | `r41_p3.png` (4.7x); pad -19 / 192 / 138 |
+| north on x 6322 to the corner (6322,16478), east to the corner (7014,16478), south to the pad (7014,16865) | metal | `tools/follow.py 6317 18200 N --gap 16` (2,812 px, both corners); `tools/eof_mrun.py row`; `r41_p4.png`, `r41_e2.png` (4.3x, four shots); pad -9 / 180 / 168 |
+| pad (7014,16865) east to the pad (7187,16866) and on to x 7230 | poly row y 16855-16875 | `r41_p5.png` (4.7x); `cache/scratch/eof/rg.py row 16865 7030 7236 6`; pad -29 / 209 / 221 |
+| pad (7187,16866) north on x 7187 to the pad (7185,16432); its poly east to x 7222 | metal; poly | `tools/follow.py 7187 16650 N` / `S`; `r41_p6.png` (4.5x); pad -10 / 109 / 164 |
+
+**The west line, `eof_gb`** (traced):
+
+| Stretch | Layer | Read with |
+|---|---|---|
+| free end (4346,11046) south to the corner (4346,18256), east onto the pad (4389,18256), through the pads (4352, 11912 + 477 k) | metal, 16 wide | `tools/tl3_thin.py 4336 4357 10900 18400 --thr 150 --min 12`; Ambiguities 167, 168, 171; `r41_p1.png` (4.8x); pad -25 / 227 / 213 |
+| pad (4389,18256) east under the wide metal x 4430-4480 and the east line to the pad (4563,18255) | poly row y 18247-18265 | `r41_p1.png`; 207/170/112 and 218/175/119 under the two metals; pad -15 / 206 / 190 |
+| east along y 18256 to the pad (4866,18255) | metal | `tools/follow.py 4700 18257 W` / `E`; pad -13 / 211 / 200 |
+| pad (4866,18255) east under the rail to the pad (5062,18254) | poly row y 18246-18263 | `r41_p2.png`; pad -25 / 86 / 181 (chip 2's centre is dull; ring and hole are there) |
+| east along y 18257, a diagonal at x 5632-5652, y 18278 to the pad (6103,18278) | metal | `tools/eof_mrun.py col`; `r41_o2.png`; pad -23 / 152 / 182 |
+| pad (6103,18278) east under the wide metal to the pad (6279,18278) | poly row y 18268-18286 | `r41_p3.png`; pad -9 / 218 / 199 |
+| north on x 6280 to the corner (6280,16435), east to the end pad (7014,16433) | metal | `tools/follow.py 6275 18200 N --gap 16` (2,518 px); `r41_p4.png`, `r41_e2.png`; pad -19 / 232 / 229 |
+| pad (7014,16433) south to y 16548, east to x 7230 | poly column x 7004-7024, row y 16528-16548 | `r41_e2.png`, `r41_e3.png`, `r41_o4.png`; Ambiguity 169; `cache/scratch/eof/rg.py row 16538`, `col 7014` |
+
+**What the channel is** (seen, not drawn): below the array four lines run east at y 18171, 18214,
+18257 and 18301 (y 18192, 18236, 18279, 18323 east of their steps at x 5590-5740). The upper two are
+other nets: they come from poly rows further west in the array (pads (4563,18165), (4603,18210)),
+each has a poly column south from a pad ((4690,18165), (4733,18205)) that crosses the two select
+lines, and they turn north at about (6100,18185) and (6140,18235). Four more lines (y 18345-18475) run
+between pads at x 4345 / 4390 and x 4863 / 4905 and on east: not followed.
+
+**Believed, not traced**: the gate group east of the ports (x 7200-7450, y 16400-16900: two mirrored
+units on the rail x 7295-7340, contacts (7312,16455) and (7312,16785)) drives both lines. The lower
+unit takes `rcs_mv`'s row y 16770-16790 (`bl0`'s port (7040,16780); the row is seen to run on east
+under the four metals) and has the east line's row y 16865 beside it; the upper unit takes the east
+line's pad poly (7185,16432) and has the west line's row y 16538 beside it. If each unit's second row
+is its output, `eof_ga` = NOT `rcs_mv` (or a NOR with more inputs) and `eof_gb` = NOT `eof_ga`: the
+selects are complementary, and the strap's node takes R13's bit while `eof_ga` is high and the row's
+own line while it is low. Which rows are inputs and which outputs is not read.
+
 ## Ports
 
 The net is driven outside the package (by `rdp2`'s NOR). `in` marks the port beyond which the
@@ -4068,8 +4180,9 @@ driver lies; the other three lead to the loads.
 | `eof_nbox_s0` .. `eof_nbox_s13` | diffusion | (4566-4632, 11216), (4566-4632, 11694), (4566-4632, 12171), (4566-4632, 12648), (4566-4632, 13125), (4566-4632, 13603), (4566-4632, 14079), (4567-4633, 14773), (4567-4633, 15251), (4567-4633, 15728), (4567-4633, 16378), (4567-4633, 16856), (4567-4633, 17333), (4567-4633, 17810) | ? | piece `ld1` (run 39): the north end of the diffusion of the transistor that the line gates, one per row of the left array (s0 at the top). 14 px north of the gate it ends on a heavy-outlined box (x 4600-4635, y 11662-11692 in row s1), not drawn: believed a buried contact onto a poly column x 4605-4625 that goes north across the diffusion box of a VSS contact (4665,11622). (The fourteen poly ports of pieces `t4736s` and `t4780n` at x 4700 are gone: the rows are drawn on to this transistor) |
 | `eof_mxn_s0` .. `eof_mxn_s13` | diffusion | (4700, 11328-11348), (4700, 11805-11825), (4700, 12282-12302), (4700, 12759-12779), (4700, 13236-13256), (4700, 13714-13734), (4700, 14191-14211), (4701, 14884-14904), (4701, 15362-15382), (4701, 15839-15859), (4701, 16489-16509), (4701, 16967-16987), (4701, 17444-17464), (4701, 17921-17941) | ? | piece `mx1` (run 40): the diffusion line that enters the row from the east, drawn to x 4700 under the VSS metal; it goes on east. In row s1 it is seen to be `busl`'s `cdp3_hw_c6` (its end at (4780,11815)); the join is not drawn in any row (Not done). (The fourteen ports of `eof_strap_s#` are gone: the box under the strap's south contact is drawn whole and has no other way out) |
 | `eof_mxs_s0` .. `eof_mxs_s13` | poly | east: (4700, 11478-11495), (4700, 11955-11972), (4700, 12432-12449), (4700, 12909-12926), (4700, 13386-13403), (4700, 13864-13881), (4700, 14341-14358), (4701, 15034-15051), (4701, 15512-15529), (4701, 15989-16006), (4701, 16639-16656), (4701, 17117-17134), (4701, 17594-17611), (4701, 18071-18088); west: (4420, 11478-11495), (4420, 11955-11972), (4420, 12432-12449), (4420, 12909-12926), (4420, 13386-13403), (4420, 13864-13881), (4420, 14341-14358), (4421, 15034-15051), (4421, 15512-15529), (4421, 15989-16006), (4421, 16639-16656), (4421, 17117-17134), (4421, 17594-17611), (4421, 18071-18088) | ? | piece `mx1` (run 40): the poly band along the row's south edge, which the south strip joins by a buried contact; drawn from x 4420 to x 4700 and going on both ways: west into the array (open poly), east under the VSS metal. In row s1 it is seen to be `busl`'s `cdp4_bus_s6` (a jog at x 4703-4723 up to the row end (4780,11922)); the join is not drawn in any row |
-| `eof_ga_s0` .. `eof_ga_s13` | metal | (4510-4526, 11318-11348), (4510-4526, 11795-11825), (4510-4526, 12272-12302), (4510-4526, 12749-12779), (4510-4526, 13226-13256), (4510-4526, 13704-13734), (4510-4526, 14181-14211), (4511-4527, 14874-14904), (4511-4527, 15352-15382), (4511-4527, 15829-15859), (4511-4527, 16479-16509), (4511-4527, 16957-16987), (4511-4527, 17434-17464), (4511-4527, 17911-17941) | ? | piece `mx1` (run 40): the stub of the thin metal x 4510-4527 over the pad of the upper gate (contact at (4517, 11811) in row s1); the metal runs on north and south. Whether it is one line through the fourteen rows is not read |
-| `eof_gb_s0` .. `eof_gb_s13` | metal | (4338-4354, 11418-11453), (4338-4354, 11895-11930), (4338-4354, 12372-12407), (4338-4354, 12849-12884), (4338-4354, 13326-13361), (4338-4354, 13804-13839), (4338-4354, 14281-14316), (4339-4355, 14974-15009), (4339-4355, 15452-15487), (4339-4355, 15929-15964), (4339-4355, 16579-16614), (4339-4355, 17057-17092), (4339-4355, 17534-17569), (4339-4355, 18011-18046) | ? | piece `mx1` (run 40): the stub of the thin metal x 4338-4354 over the pad of the lower gate (contact at (4352, 11912) in row s1); the metal runs on north and south. Whether it is one line through the fourteen rows is not read |
+| `eof_ga` | poly | (7230, 16855-16875) | ? | piece `sel` (run 41): the east select line's poly row east of the pad (7187,16866), where it enters the undrawn gate group x 7200-7450, y 16400-16900 (believed that group's lower unit drives it). (The fourteen metal stub ports `eof_ga_s#` of piece `mx1` are gone: the thin metal is drawn whole and is a free end at (4518,11048)) |
+| `eof_ga` | poly | (7222, 16424-16444) | ? | piece `sel`: the poly east of the pad (7185,16432) at the north end of the metal x 7187, into the same group's upper unit (believed a gate there) |
+| `eof_gb` | poly | (7230, 16528-16548) | ? | piece `sel`: the west select line's poly row, east of the metal x 7187, into the same group (believed the upper unit drives it). (The fourteen stub ports `eof_gb_s#` are gone likewise; the thin metal is a free end at (4346,11046)) |
 | `vcc` | metal | (4953-5018, 16020) and (4953-5018, 16110); (4953-5018, 16700) and (4953-5018, 16800) | - | pieces `cap998`, `cap218`: the wide VCC metal x 4953-5018 (`busl`'s rail, its port `vcc` (4953-5018,15000)), two pieces of it drawn over the boxes of the two devices' diffusion wires; one metal between them and on both ways by the two-chip test (north to y 15000; south past y 17440) |
 | `vcc` | metal | (7470-7520, 16000) and (7470-7520, 16205) | - | pieces `u15960`, `u16175`: `bc1`'s RL2, drawn again over the two supply boxes (y 16000-16085 and y 16205-16300) |
 | `lc1_w7780` | poly | (7165, 15207-15229) | in | piece `u15260` (run 34): gate 1's row of the NOR `eof_w15262`, drawn on east from `busl`'s row end (`busl`'s port (7170,15218)) to its end east of the rail. (The port `eof_w15262` P (7225, 15251-15273) of run 33 is gone: the row is drawn on to the unit's exit box) |
@@ -5527,6 +5640,81 @@ driver lies; the other three lead to the loads.
     3`) lies on the neck's edge line and reads red-brown there, like open poly (trap 28): the neck is
     narrow enough to be misread from one cut. If it were a poly it would be a gate with no wire across
     the line. Drawn as diffusion.
+
+165. **The east select line over a box in every row** (piece `sel`; no `?` item; each row; `eof_ga`
+    as one net rests on it and on 166). In row s1 the thin metal x 4510-4527 is lost by
+    `tools/tl5_tracks.py v 4518` for 47 px (y 11544-11591; y 11068-11110 in row s0). What lies under it
+    there: a poly's east end under the metal's west half (cream 248/166/102 at x 4508-4511, a dark
+    lengthwise line at x 4514-4518) and the west end of a heavy-outlined box under its east half (tan
+    204/161/133 at x 4520-4529; outline bars at y 11544-11558 and y 11577-11588). On the east half's
+    centre line the metal is bright between the two bars in both chips (`tools/px.py col 4524 11536
+    11600 3 all`: 174-185 / 176-217 at y 11562-11575; `tools/px.py row 11562` and `row 11572 4496 4541
+    3`), and the bars are 14 and 11 px: with the whole width tested (`tools/tl3_thin.py 4509 4528
+    10900 18400 --thr 150 --min 12`) the stretch is not listed in any row. No contact: no hole in the
+    clean shot inside the box under the metal, no pad, the metal keeps its width (traps 22, 26). Read
+    as one metal passing over (trap 19 for the west half). The other reading, a break of the metal at
+    one of the two bars, would cut the line into fourteen pieces with one pad each and no driver for
+    thirteen; the 14 px bar is at trap 27's limit between "an edge" and "a box", which is why this is
+    written down. Not drawn `?M`: the metal is seen between the bars. What would settle it further: a
+    shot of a third chip.
+166. **The 20 px south of each upper pad on the east line** (piece `sel`; no `?` item; each row; review
+    round 48 noted it). Between the ring of the pad (4517,11811) and the strip N the metal is dim in
+    both chips for 21 px (y 11819-11839 in row s1; 22 px in s0 and s2, 25 px in s10, 13-14 px in the
+    others: `tools/tl3_thin.py`, as above). In that stretch lie the ring's south side (y 11819-11825),
+    the edge of the pad's poly (y 11826-11830) and the strip's north edge (y 11835-11840): three
+    edge lines within 21 px, so no bright metal is to be expected between them. Evidence that the
+    metal is there: its own two edge lines run on through the stretch at x 4506-4509 and x 4530-4533,
+    with the track between them brighter than the ground outside in chip 1 (109-126 against 83-101:
+    `tools/px.py row 11832 4494 4542 3 all`); the clean shot is protected over the metal's width and
+    margin (x 4503-4533: 122-143/84-94/77-89, pink 184/114/111 at y 11829 on the centre line, against
+    59-87/52-108/37-79 outside); the metal is bright again from y 11841 (`tools/px.py col 4518 11784
+    11858 3 all`). The other reading (the metal from the south ends 15 px short of the pad) leaves a
+    gap smaller than any metal spacing on the die and no end line across the track. Drawn as one metal.
+167. **No contact where the two select lines lie over diffusions** (piece `sel`; no `?` item; each
+    row). The east line crosses the large diffusion box (y 11698-11744 in row s1): bright through in
+    both chips, no ring, the clean shot evenly dull for 40 px with no hole pattern (`tools/textmap.py
+    4496 11686 4542 11756 2`; `tools/tl5_tracks.py`'s "hole" of 34-61 px there is the diffusion itself,
+    trap 36). The west line crosses a diffusion at y 11650-11690 of row s1 (y 12127-12173 in s2, where
+    the scan lists it): the same (`tools/textmap.py 4324 11644 4370 11704 2`). The strips of piece
+    `mx1` under the east line were read in run 40 (Ambiguity 162). A contact at any of these would tie
+    a select line to a node of the row.
+168. **The two free north ends** (piece `sel`; no `?` item). Both thin metals begin at y 11046-11048,
+    at the top of row s0, over a poly band (y 11048-11068): no ring, no pad, no hole in the clean shot
+    (cream 213-234/150-172/107-122 under the west end, 203-226/154-175/111-116 under the east:
+    `tools/px.py col 4346` and `col 4518 11024 11112 4 all`; `tools/textmap.py 4494 11036 4544 11132
+    2`; `r41_n2.png`, 5x), and bare ground north of them up to the band y 10940-11000 (the metal that
+    `lc3` draws on x 4517 ends at y 10556 and is another net). A contact there would tie both selects
+    to that band (the copy in row s0 of row s1's VSS-tied band y 11527-11545, run 39). Read as free ends: a line that feeds fourteen gates and is driven from its south end
+    needs none (trap 12: neither end is widened).
+169. **The west line's poly under the east line's metal at x 7014** (piece `sel`; no `?` item). The
+    west line ends on the pad (7014,16433); the east line turns south at (7014,16478), 45 px south of
+    that pad's centre, and for 60 px its metal lies on the poly that leaves the pad south (cream
+    215-217/160-163/111 at y 16500 and y 16520 against pink 184-196/117-120/126-128 at y 16600 and
+    y 16700 under the same metal: `tools/px.py pt`). Two nets (traps 13, 16): between the pad's ring
+    and the east line's north edge both chips show 10 px of bare ground (chip 2 110-190, chip 1 95-145;
+    the metal 175-240 in both) and then the east line's own edge line across the whole corner, y 16464-16468
+    (`tools/textmap.py 6966 16408 7040 16506 2 --acid`); the east line's metal has no pad, ring or hole
+    over the poly (`cache/scratch/eof/wid.py v 7014 16500 16845`). If the metal x 7014 were the pad's
+    own, the two selects would be one net and the selector would join R13's bit to the row's line.
+170. **Crossings without contacts on the two routes** (piece `sel`; no `?` item). In the channel
+    below the array the two metals cross poly columns at x 4690, 4737, 5365, 5407, 5453, 5497, 5770,
+    5860 and 5950, and the west line's first poly row crosses under the wide metal x 4430-4480 and
+    under the east line (4518,18256); under y 16435 and y 16478 the two metals cross the poly columns
+    that `regs`, `bl0`, `trunks` and this package draw north from their pads (x 6452-6970); the east
+    line's metal x 7014 crosses `rcs_mv`'s row (y 16780) and the two poly rows cross under the metals
+    x 7057, 7100, 7144 and (the west line's row) x 7187. None has a pad: a width scan of every metal
+    stretch finds no widening and no branch (`cache/scratch/eof/wid.py`, twelve stretches), the views
+    `r41_s2.png` to `r41_s5.png`, `r41_e1.png`, `r41_e3.png` show plain crossings (bars only), and the
+    rows are poly under each metal in the clean shot (210-221/153-167/105-117 against pink
+    184-196/108-134/97-131: `tools/px.py pt`) and in each open gap in chip 2's stripped shot (red over
+    green by 27-67 against 2-12: `cache/scratch/eof/rg.py`). `tools/eof_cchk.py` is of no use on
+    y 16435 / 16478, where open field beside the metals is green in the clean shot. The follower's
+    contact candidates on the two routes (31 places) were each read: none is a pad (trap 15).
+171. **A blemish of chip 1 on the west line** (piece `sel`). At y 15389-15420 chip 1's metal shot is
+    dark on the track x 4338-4354 (36-76) and chip 1's clean shot is green for 85 px (100-131/174-178);
+    chip 2's metal is bright through (193-217: `tools/px.py col 4346 15380 15430 6`). No other row has
+    it at that place. Read as damage to chip 1's metal before it was stripped; the line is drawn
+    through on chip 2.
 
 ## Review
 
@@ -8009,6 +8197,26 @@ Round 48: no findings.
 
 ## Not done
 
+- **Next (after run 41)**: the two select lines are drawn end to end (piece `sel`: `eof_ga`, `eof_gb`),
+  so item (a) of the list below is done but for their driver. In order: (a) **the gate group that the two
+  lines end in** (x 7200-7450, y 16400-16900; `bc3`'s region, free; nothing of it is drawn): two mirrored
+  units on the rail x 7295-7340 (contacts (7312,16455), (7312,16785)). Its rows at the west side:
+  `eof_ga`'s pad poly (7222, 16424-16444), `eof_gb`'s row (7230, 16528-16548), `rcs_mv`'s row
+  y 16770-16790 (`bl0` ends it at x 7040; seen to run on east under the metals x 7057-7187 to about
+  x 7210, where it turns south-east in the open), `eof_ga`'s row (7230, 16855-16875). Read which rows
+  are gates and which are outputs (a buried-contact box at a row's east end makes it an output:
+  `r41_e4.png` shows a box at about (7255-7290, 16530-16560)), the loads, and what else enters from
+  the east (x 7340-7450). Try `tools/findcell.py` with this package's units of `bc1`'s west gate column
+  first (pieces `u15100` .. `u16175`, the same rail position one block north). Believed: `eof_ga` = NOT
+  `rcs_mv` and `eof_gb` = NOT `eof_ga`. (b) the fourteen joins to `busl`'s and `bl0`'s row ends, and
+  the band west of x 4420; (c) the box north of the load line's gate; (d) the rest of the column; (e)
+  the pad (4778,17365); (f) `bl0_w15566`'s driver and the twin of `cap18`; as in the list below. Seen
+  in run 41, not this package's: the channel below the array (x 4290-6200, y 18130-18480) is drawn by
+  no one but for the two select lines: two more lines from the array at y 18171 and y 18214 (pads
+  (4563,18165), (4603,18210), poly columns south from pads (4690,18165), (4733,18205), north turns at
+  about (6100,18185) and (6140,18235)) and four lines y 18345-18475 between pads at x 4345 / 4390 and
+  x 4863 / 4905; vertical polys from the north end on pads (5357,18340), (5405,18385), (5448,18340),
+  (5490,18385); three poly columns x 5770, 5860, 5950 cross the whole channel.
 - **Next (after run 40)**: the group south of the strap is drawn (piece `mx1`: two wide pass transistors on
   `eof_strap_s#`, from the diffusion line `eof_mxn_s#` and from the south band `eof_mxs_s#`), so item (a) of
   the list below is done. In order: (a) **the two thin metals that carry the gates' pads**: x 4510-4527
