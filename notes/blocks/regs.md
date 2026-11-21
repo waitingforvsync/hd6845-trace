@@ -516,6 +516,39 @@ end); the neck from views and single points only; what the two rails join north 
 
 Round 6: no findings that change a connection.
 
+**Round 7, full review of piece `n0`, 2026-11-21 20:05 +0000** (fresh Fable reviewer; at commit 6cdd5db; 21
+images in `cache/scratch/regs/review-7/`). Told to suspect: whether the 7,245 px track is one metal on one
+position all the way (two metals end to end, or a step where a neighbour steps: traps 10, 33); both pads
+(contact real, the metal through the one at (11200,13330) and ending on the one at (11200,10664), a second
+poly); each poly row from x 10850 to its pad (the right row, straight, no tap onto the metals above); the
+corner (11200,17911); the bus row to run 5's pad; the crossing (11201,16390); anything the track touches
+that the trace leaves out.
+
+Checked and found correct: the track by `tl5_tracks.py v 11201 10600 17900` (the longest stretch without
+metal in both chips is 18 px, each accounted for: the pad's rings, poly rows at y 10708, 11830, 14567,
+16390 and the bottom bus rows, a diffusion edge at y 12179-12186, a 10 px blemish at y 15238-15247 that is
+dark across chip 1 and only a notch in chip 2, with nothing under it in the chip-2 stripped shot; chip 1's
+failure at y 15712-15761 is dirt), by two-chip cuts of its own every 60 px (centre x 11197-11204 at every
+cut, the neighbours at x 11113 and x 11157 not moving either) and on six 1x strips in three shots (the
+nested corners at y 14880-14920 are lines further east); the end pad (ring and bright centre in both
+metal shots, green hole in the clean shot, pitted box in the chip-2 stripped shot, metal from the south,
+bare ground north, no second poly; the rows y 10621 and y 10708 end on their own pads at x 11157 and
+x 11243); the pad (11200,13330) in all four shots, metal within 5 px of its ring on both sides in both
+chips, field east and south, the row y 13376 on its own pad at x 11157; both poly rows straight with no
+widened metal over them, the clean shot's dots in the gaps between metals and absent from the chip-2
+shots; the crossings (11200,11835) and (11201,16390) (text map with `--acid`: the track keeps its width,
+plain salmon under it, 14 px of open poly to the neighbour's pad ring); the bottom bus crossings
+y 17458-17877; the corner (no metal south of y 17915 or west of x 11196); the bus row continuous to the
+ring of the pad (12806,17907), bars of 8-12 px at the poly diagonal and the poly column only (ragged
+material in the clean shot at x 12690-12745 is residue on chip 1, absent from chip 2); the full
+extraction and `unsure.py`.
+
+Not checked by the reviewer: `cdp3`'s and `cdp4`'s rows west of x 10830 (theirs); run 5's pad beyond the
+metal reaching its ring (round 6); whether the crossing polys are drawn by anyone; the crossings at
+y 10708 and y 14567 and the wide diffusion at 4x (1x, the metal test and a text map only).
+
+Round 7: no findings.
+
 ## Not done
 
 - The two open joins of piece 3 are closed (`busl` run 8: Corrections, second batch, below).
