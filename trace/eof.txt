@@ -4338,3 +4338,69 @@ D 3896,11770:3946,11824
 @inst eof_yi 1,5162 tag=s11
 @inst eof_yi 1,5639 tag=s12
 @inst eof_yi 1,6116 tag=s13
+# ------------------------------------------------------------------------------------------------
+# Piece yg (run 48, 2026-11-21): THE SECOND TRANSISTOR ON LINE Y, AND ITS GATE LINE eof_ypd (the left
+# array's east cell, fourteen rows; master row s1; larr (continue), free). Read on medians over the fourteen
+# rows (cache/scratch/eof/r47prof.py) and per row (tools/eof_ygrows.py); notes/blocks/eof.md, piece `yg`.
+#
+# THE TRANSISTOR. Y's diffusion (eof_yi's block, to x 3946) runs on east as one active band y 11772-11822
+# (the same two heavy edge lines west of the column, across it and east of it, both metal shots) under a
+# poly column x 3957-3981 (bright salmon in the clean shot = a channel) and across the open strip
+# x 3984-3992 to rail F's wide diffusion (tan from x 3992; eof_pd's D begins at x 4002), which is vss.
+# The column has a rounded head at y 11756 (over field) and ends south in a pad x 3946-3979,
+# y 11828-11866 with a contact (3958,11848) (green hole in the clean shot, ring and bright centre in both
+# metal shots). Field (green, open) lies between the pad and rail F (x 3984-3992): the pad is not joined
+# to the poly pad of rail F's fifth ring.
+# THE LINE. The pad's metal is larr's "segmented" metal x 3948-3966: it runs south from the pad over the
+# next row (no ring anywhere: over Y's foot band, Z's band, two poly rows, eof_pdg's row, the band N and
+# Y's block it only shows the 6-10 px bars of the edges beneath) to y ~11740, narrows to a thin metal
+# x 3957-3966 lying on the west half of that row's column, and ends on that row's pad. One metal from a
+# free end at (3957,11047) to a pad with a contact at (3957,18255), whose poly leaves east (port).
+@cell eof_yg tag=s1
+# Y's diffusion on east: under the column, the open strip, into rail F's wide diffusion (eof_pd)
+D 3940,11772:4008,11822
+# the gate: the column from its head, and its pad
+P 3957,11756:3981,11834
+P 3946,11828:3979,11866
+C 3958,11848 s=20x20
+# the line in this row: the thin metal on the column (from the wide metal's end) and the pad's metal
+M 3961,11736 y11832 w=9
+M 3959,11826 y11870 w=38
+@end
+@inst eof_yg 0,-477 tag=s0
+@inst eof_yg 0,477 tag=s2
+@inst eof_yg 0,954 tag=s3
+@inst eof_yg 0,1431 tag=s4
+@inst eof_yg 0,1909 tag=s5
+@inst eof_yg 0,2386 tag=s6
+@inst eof_yg 1,3079 tag=s7
+@inst eof_yg 1,3557 tag=s8
+@inst eof_yg 1,4034 tag=s9
+@inst eof_yg 1,4684 tag=s10
+@inst eof_yg 1,5162 tag=s11
+@inst eof_yg 1,5639 tag=s12
+@inst eof_yg 1,6116 tag=s13
+# the wide metal between the rows: from the free end at the top to s0's thin metal, from each pad to the next
+# row's thin metal (through the two group gaps), and from s13's pad to the foot pad
+M 3957,11047 y11263 w=18
+M 3957,11383 y11740 w=18
+M 3957,11860 y12217 w=18
+M 3957,12337 y12694 w=18
+M 3957,12814 y13171 w=18
+M 3957,13291 y13649 w=18
+M 3957,13769 y14126 w=18
+M 3957,14246 y14819 w=18
+M 3958,14939 y15297 w=18
+M 3958,15417 y15774 w=18
+M 3958,15894 y16424 w=18
+M 3958,16544 y16902 w=18
+M 3958,17022 y17379 w=18
+M 3958,17499 y17856 w=18
+M 3958,17976 y18262 w=18
+N M 3957,11500 eof_ypd
+# the foot pad: its metal, the contact, the poly pad and the poly row that leaves it east (open poly
+# x 3978-3993 in all four shots; it runs on east under the north margin of the wide metal: PORT at x 3996)
+M 3958,18238 y18272 w=36
+C 3957,18255 s=18x18
+P 3944,18243:3978,18272
+P 3972,18247:3996,18263
