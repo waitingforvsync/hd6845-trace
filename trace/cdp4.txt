@@ -1052,15 +1052,15 @@ M 16038,17285 y17535 w=42                # the VSS rail of the unit (and of the 
 N M 16038,17300 vss
 P 16139,17459:16157,17482                # the corner of column 1's poly: the column of run 6 onto the gate row
 # the output: from the box east under two vertical metals (no contact), south, a pad
-P 16107,17428 x16251 y17602 w=22
+P 16107,17428 x16257 y17602 w=22
 B 16104,17420:16134,17446
 P 16236,17585:16270,17619
 C 16253,17602 s=20x20
 M 16253,17603 16906,17607 16906,18086 w=12
 P 16888,18063:16922,18097
 C 16905,18080 s=20x20
-P 16905,18079 x17066 w=20                # under the wide rail x 16940-17030 (field), beside regs' row y 18012
-P 17049,18061:17083,18095
-C 17066,18078 s=20x20
-M 17054,18066:17078,18090                # the pad's metal; where it goes on is not read (port)
+P 16905,18079 x17080 w=20                # under the wide rail x 16940-17030 (field), beside regs' row y 18012
+P 17063,18061:17097,18095
+C 17080,18078 s=20x20
+M 17080,18078 x17115 w=12                # the pad's metal leaves east along y 18078 (port; runs on)
 N M 16600,17605 d6_out_n_u
