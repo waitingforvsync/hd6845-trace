@@ -1375,8 +1375,9 @@ poly goes on into a gate unit under the rail x 10548-10597 (not drawn).**
   y 17812-17828 under six vertical metals to a pad (9857,17822), metal east to a corner (10311,17823) and
   north on x 10311 to a pad (10311,17474). **`eof_w17866`'s line y 17866** (believed `eof_w16040`'s:
   Ambiguity 206 stands): metal east to a pad (9553,17866), a straight poly row y 17855-17871 to a pad
-  (9813,17866), metal east to a corner (10356,17866), north to y 17649, east to x 10397 and north to a pad
-  (10397,17410).
+  (9813,17866), metal east to a T (10356,17866), north to y 17649, east to x 10397 and north to a pad
+  (10397,17410); from the T the same metal also runs on south (review round 59: a stub and a port at
+  y 17885; the follower: 520 px south, then east and south to a pad at about (10397,18427); not read).
 - **Traced** (found on the way; trap 32): **each of the two hop pads of the line y 17866 carries a second
   metal, from the north** (x 9553 and x 9813), as `ck_out`'s two pads one line south do. Drawn as stubs to
   ports at y 17800. So the net of this line has two more ends than the bus line (the follower: x 9553
@@ -5398,6 +5399,7 @@ driver lies; the other three lead to the loads.
 | `eof_w17866` | poly | (10382-10416, 17395-17425) | ? | piece `bus2`: the pad (10397,17410) at the north end of the bus line y 17866's metal; its poly goes on north and east (row y 17378-17395, a gate row of the same unit): not drawn. (The port of piece `cap18b` at (8760,17866) is gone) |
 | `eof_w17866` | metal | (9546-9560, 17800) | ? | piece `bus2`: the second metal of the pad (9553,17866), from the north (the follower: north to (9546,17645), west to (9266,17641); not read) |
 | `eof_w17866` | metal | (9806-9820, 17800) | ? | piece `bus2`: the second metal of the pad (9813,17866), from the north (the follower: north, then 1,800 px to (9961,16341), close beside `ck_out`'s metal from the pad (9769,17910); not read) |
+| `eof_w17866` | metal | (10350-10362, 17885) | ? | piece `bus2` (review round 59): the metal x 10356 on south of the T (10356,17866) (the follower: south to a corner (10364,18387), east, south on x 10397 to a pad with a hole at about (10397,18427); not read) |
 | `vcc` | metal | (8512-8558, 17997) | - | piece `cap18`: the VCC rail R2 on south (drawn y 17550-17997; it runs on) |
 | `bc1_g6_in` | metal | (8136-8150, 16292) | out | piece `o040`: `eof_w17040`'s metal x 8143 onto `bc1`'s metal end (8143,16300) of `bc1_g6_in` (`M 8186,15900 y16260 x8143 y16300`; `bc1` has no ports file): the input of `bc1`'s inverter 6. (The ports `eof_w17040` (9001-9015, 17610), `eof_w16823` (8760, 16986-17003) and `eof_w16693` (8800, 17116-17135) are gone: the wires are drawn on) |
 | `disptmg_drv_in` | - | no port left | out | pieces `o362`, `o362w`, `o362d` (runs 25-27): **the NOR's output**, drawn from the pad (8467,17603) south, west along y 18474 and y 18473 through four pads, and by the poly row west of the pad (6322,18472), a pad (6102,18472), a metal, a pad (5583,18472) and a poly column south onto `pads_out`'s input poly of the DISPTMG driver at (5587,18912-18925): it is `disptmg_drv_in`. The port at (6262,18472) is gone: drawn on. (The ports of piece `g174` at x 8368-8372 on the rail's east edge, `eof_w17168`, `eof_w17338`, `eof_w17472`, `disptmg_drv_in`, `vss` and the node whose former name was `eof_w17552`, are gone: drawn on) |

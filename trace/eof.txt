@@ -4519,3 +4519,10 @@ N P 10410,17410 eof_w17866
 # (9546,17645), west to (9266,17641); x 9813 north, then 1,800 px to (9961,16341): not read).
 M 9553,17866 y17800 w=14
 M 9813,17866 y17800 w=14
+# Review round 59: (10356,17866) is a T, not a corner: the metal x 10350-10362 also runs on
+# south from the line (px.py col 10356 17856 17900 4 metal,metal1: metal colour in both chips
+# through the junction to y 17889, then the 8 px bar of a row's edge; tl5_tracks.py v 10356
+# 17860 18420: only bars of 8-14 px at the 22 px pitch of the rows' edges down to y 18393).
+# Drawn as a stub to a PORT at y 17885 (the follower: south to a corner (10364,18387), east,
+# south on x 10397 to a pad with a hole at about (10397,18427): not read).
+M 10356,17866 y17885 w=13
