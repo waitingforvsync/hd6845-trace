@@ -149,6 +149,12 @@ vcc           M      8488-8558,17560          -    R2 on south of the NOR's VCC 
 bc1_g6_out    P      8214-8247,16090          in   the pad (8229,16107) on which bc1's metal x 8229 ends (bc1's contact): one poly with the latch lat18's data row
 vss           M      8336-8384,16040          -    column A's VSS rail, bc1's R1, drawn again over the latch lat18 (y 16040-16300)
 # Pieces en18, cap18 (run 31): the ports eof_w16040 M 8919-8931,16300 and eof_w16172 M 8223-8235,16425 are gone (drawn on: one net, eof_w16040); rst_a P 8326,16294-16312 and 8326,16900-16918 are gone (their loads are the clear gates of the latches lat18 and lat17)
-eof_w16040    P      7290,15471-15489         ?    the enable of the first latch of both pairs: its poly row at the west edge of the rail x 7292-7342 of bc1's west gate column, where it steps south into a gate row y 15493-15515 under the rail (bc1's unit, not drawn)
+# Piece u15500 (run 32): the port eof_w16040 P 7290,15471-15489 is gone (the row is drawn on into its gate, gate 2 of the NOR eof_w15523 = NOR(rcs_e4, eof_w16040, bl0_w15566))
+eof_w15523    P      7290,15687-15704         out  the NOR's output: the poly row east of the pad (7187,15697) at the west edge of the rail x 7294-7340 of bc1's west gate column, where it goes under the rail as a gate row of the next unit south (not drawn)
+rcs_e4        P      7280,15425-15446         in   gate 1's row of the NOR, drawn again from x 7280 over tla's row (tla ends it at x 7370; here to its end x 7390)
+bl0_w15566    P      7255,15555-15577         in   gate 3's row of the NOR, on east from bl0's row end (bl0's port 7260,15566)
+vss           M      7294-7340,15385          -    the rail of bc1's west gate column, drawn over the NOR only (y 15385-15655); it runs on north
+vss           M      7294-7340,15655          -    the same rail, on south (bl0 draws it from y 16925)
+vcc           M      7470-7520,15435          -    bc1's RL2 (M 7495,14950 y16300 w=50), drawn again over the load's contacts (y 15435-15555)
 vcc           D      8560,17964-17984         -    the diffusion wire of piece cap18 on east of the box under the VCC rail, to the twin device at x 8700-8800 (not drawn)
 vcc           M      8512-8558,17997          -    R2 on south (drawn y 17550-17997 over the box of piece cap18; it runs on)
