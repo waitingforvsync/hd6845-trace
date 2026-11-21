@@ -4,5 +4,5 @@ cdp2_w7065   M  7655-7669,7040    out  the metal north of the pad (7662,7083), a
 db_b6        M  8107-8121,7000    ?    db_b6's thin metal runs on north (it passes over piece ga without contact)
 cdp2_w6845   M  7290,6840-6856    ?    the through line: the metal west of the pad (7335,6845) (follower: to (6142,6847))
 cdp2_w6845   P  7860-7896,8315    ?    the through line's south end, the pad (7878,8315): an input of cdp3's gate cluster beside its row A
-cdp2_w7092   P  8330,5316-5336    out  the poly row east of the pad (8290,5327) at the north end of the output's thin metal
-cdp2_w7128   D  8690-8726,4782    in   the diffusion land of the contact (8705,4810) at the north end of row 1's metal: the output of something in cdp1's slice-0 logic
+cdp2_w7092   P  8336,5316-5336    out  the poly row east of the pad (8290,5327), onto a heavy-outlined box (8335-8365, 5315-5345), not read
+cdp2_w7128   D  8745,4778-4838    in   the diffusion band east of the land of the contact (8705,4810): the output of something in cdp1's slice-0 logic

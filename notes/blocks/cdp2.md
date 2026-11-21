@@ -26,8 +26,8 @@ the most significant of the five compared bits, s7 the least.**
 - **Run of 2026-11-20 19:10 -0600**: **piece `wn`** (wiring, 3,100 px, no uncertain item): the two metals of the upper
   series gate followed north to their ends. `cdp2_w7092` (the gate's output) ends on a pad (8290,5327)
   whose poly row goes east (port: a gate in the logic at y 5300-5350, undrawn). `cdp2_w7128` (its row 1)
-  comes from a contact (8705,4810) on a diffusion land in the logic north of the datapath's first row
-  (port: `cdp1`'s undrawn slice-0 logic).
+  comes from a contact (8705,4810) on the west end of a diffusion band y 4776-4838 that goes on east
+  (port at x 8745: `cdp1`'s undrawn slice-0 logic).
 
 - **Run of 2026-11-20 18:57 -0600**: **piece `gh`, the load of the comparator's line `cdp2_b_hl`** (x 8578-8745,
   y 7352-7432; 1 transistor, one uncertain item, the load's tie; reviewed: round 6, no finding that changes a connection). `cdp2_b_hl`'s metal x 8715-8735 ends on a
@@ -521,14 +521,17 @@ anywhere: the tie is the only reading that makes a circuit, but the box's inside
 test in both chips: on a view the metal is there, dimmer, with one edge bar at y 5683-5690 and no ring or
 widening: `cache/scratch/cdp2/y3.png`, 7x) to a pad (8290,5327) (ring and bright centre in chip
 2, a hole in the clean shot, weaker centre in chip 1: `textmap.py 8270 5306 8312 5346 3`; view
-`cache/scratch/cdp2/y1.png`), whose poly row y 5316-5336 goes east (drawn 40 px: port).
+`cache/scratch/cdp2/y1.png`), whose poly row y 5316-5336 runs 30 px east and ends on a heavy-outlined box (8335-8365, 5315-5345), not
+read (port at x 8336).
 
 `cdp2_w7128`: the metal x 8676-8690 runs north from the pad (8680,6324) (`tl5_tracks.py v 8684 4910 6300`:
 bars of 13 px or less; at y 5456-5510, the follower's candidate, the metal narrows beside a second
-bright stripe and has no ring: `textmap.py 8664 5456 8706 5512 3`), steps east by a short diagonal at
-y 4866-4890 (`textmap.py 8668 4838 8722 4906 4`: one metal, x 8676-8712 wide at the step) and ends on a
+bright stripe and has no ring: `textmap.py 8664 5456 8706 5512 3`), steps east by a square jog at
+y 4862-4887 (`textmap.py 8668 4838 8722 4906 4`: one metal, x 8676-8712 wide at the step) and ends on a
 contact (8705,4810) (ring and bright centre in both chips, a hole in the clean shot: `textmap.py 8684
-4790 8728 4832 3`) on a diffusion land (8690-8726, 4782-4838; view `cache/scratch/cdp2/y2.png`). So the
+4790 8728 4832 3`) on a diffusion land (8690-8726, 4778-4838; view `cache/scratch/cdp2/y2.png`), the west end of a band that
+goes on east from x 8726 with field north of y 4776 (review round 7: chip-2 stripped red minus green
+21 at (8740,4800), 2 at (8740,4760)). So the
 upper gate's first input is the output node of something in the logic north of the datapath there.
 
 ## Ports
@@ -825,6 +828,28 @@ Findings, geometry only:
 connections identical.
 
 Round 6: no findings that change a connection.
+
+Round 7 (full review of piece `wn`; fresh Fable 5.2 reviewer; 2026-11-20 19:21 -0600; commit 79d34e1; images
+`cache/scratch/cdp2/review-7/`). Told to suspect both north ends (the metal reaching the pad; a real
+contact; diffusion or poly), both metals over their length (the stretch y 5682-5722; the candidate
+(8684,5481); the step), contacts at the many crossings, the pad's polys. Checked: the pad (8290,5327) a
+real contact with metal from the south only and poly east only; wire 1 one metal at x 8290 throughout
+(at y 5682-5722 its west edge lies on a poly L, the east half bright in both chips); the contact
+(8705,4810) real and on diffusion, metal from the south only; neither arm continuing past the jog; at
+(8684,5481) a box under the metal's east edge, a pass-over; no hole in the clean shot on either wire.
+Not checked: most row crossings at 5x (hole scan and 1.6x views only).
+
+Findings:
+
+1. **A port's side** (counted as a connection by the workflow; no geometry of a net changes): the land
+   of the contact (8705,4810) is the west end of a diffusion band that goes on EAST from x 8726; north
+   of y 4776 is field. The port was given on the north edge. Confirmed (`px.py pt 8740,4800,3 8740,4760,3
+   acid`). Fixed: the land drawn to x 8745, the port moved to the east edge.
+2. Geometry: the step is a square jog y 4862-4887, not a diagonal. Fixed.
+3. Geometry: wire 1's poly row is 30 px long and ends on a heavy-outlined box (8335-8365, 5315-5345).
+   The port is now at x 8336 and the notes say what it meets.
+
+Round 7: one finding on a port's side, fixed; two geometry findings.
 
 ## Correction from the coordinating session (2026-11-15)
 

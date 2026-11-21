@@ -709,10 +709,10 @@ P 8690,7355:8712,7372                 # the plate's corner on it
 # (8290,5327), whose poly row goes east (port).
 P 8272,5310:8307,5345
 C 8290,5327
-P 8290,5316:8330,5336                 # its poly row east (port at x 8330)
+P 8290,5316:8336,5336                 # its poly row east, 30 px to a heavy-outlined box (8335-8365, 5315-5345) (port at x 8336)
 # cdp2_w7128: the metal x 8676-8690 runs 1,430 px north from the pad (8680,6324), steps east by a
-# diagonal at y 4866-4890 to x 8699-8713 and ends on a contact (8705,4810) to a diffusion land in the
-# logic north of the datapath's first row (port: the land's diffusion goes on).
-M 8683,6324 y4890 8706,4866 y4810 w=14
-D 8690,4782:8726,4838
+# square jog at y 4862-4887 to x 8699-8713 and ends on a contact (8705,4810) to a diffusion land, the
+# west end of a band y 4776-4838 that goes on east (port).
+M 8683,6324 y4874 x8706 y4810 w=14     # a square jog at y 4862-4887 (review round 7)
+D 8690,4778:8745,4838                 # the land: the west end of a diffusion band that goes on east (port at x 8745)
 C 8705,4810
