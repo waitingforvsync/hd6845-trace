@@ -692,12 +692,14 @@ N P 8600,6324 cdp2_w7128
 # cdp2_w7344, is cdp2_b_hl.
 M 8619,7230 y7440 w=50                 # the wide VCC metal x 8594-8644, down onto row C's
 N M 8619,7240 vcc
-D 8578,7372:8745,7420
+D 8578,7375:8634,7420                 # west part (north edge y 7375)
+D 8630,7383:8745,7420                 # under and east of the plate (north edge y 7383: review round 6)
 C 8598,7398
 C 8712,7399
 M 8706,7400 x8735 w=20                 # the foot of cdp2_b_hl's metal over its contact
-P 8632,7352:8692,7432                 # plate (channel W about 48, L 60)
-D 8695,7358:8715,7375                 # tab of the line's diffusion north
+P 8632,7352:8676,7432                 # plate (channel W about 37, L about 42; its east edge over the channel is x 8676)
+P 8632,7352:8692,7378                 #   its head runs on east into the box
+D 8695,7358:8715,7386                 # tab of the line's diffusion north
 P 8690,7355:8712,7372                 # the plate's corner on it
 ?B 8688,7352:8716,7376
 @alias cdp2_b_hl cdp2_w7344            # the placeholder of the earlier merge (it occurs in the coordinator's files)

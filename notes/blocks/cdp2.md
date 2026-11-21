@@ -24,9 +24,9 @@ the most significant of the five compared bits, s7 the least.**
 ## Status
 
 - **Run of 2026-11-20 18:57 -0600**: **piece `gh`, the load of the comparator's line `cdp2_b_hl`** (x 8578-8745,
-  y 7352-7432; 1 transistor, one uncertain item, the load's tie). `cdp2_b_hl`'s metal x 8715-8735 ends on a
+  y 7352-7432; 1 transistor, one uncertain item, the load's tie; reviewed: round 6, no finding that changes a connection). `cdp2_b_hl`'s metal x 8715-8735 ends on a
   diffusion that a poly plate parts from a contact to the VCC metal x 8594-8644: a depletion load
-  (50/57). The plate is one poly with row 2 of the lower series gate, so **`cdp2_w7344` is `cdp2_b_hl`** and
+  (about 37/42). The plate is one poly with row 2 of the lower series gate, so **`cdp2_w7344` is `cdp2_b_hl`** and
   `cdp2_w7272` = NOT(`cdp2_b_hl` AND `cdp2_b_s7_x`) (marked: through the tie's `?B`). With its load drawn,
   `cdp2_b_hl` extracts as a gate for the first time: NOT(OR over s3..s7 of (`_p1` AND `_y`)).
 
@@ -487,7 +487,7 @@ goes west (port). South of y 7395 it is the metal `cdp2` drew as "q of s1" on ro
 ends on a contact (8712,7399); 115 px west a second contact (8598,7398) is on the wide VCC metal
 x 8594-8644 (both: ring and bright centre in both metal shots, a hole in the clean shot: `textmap.py 8692
 7380 8736 7420 3`, `8580 7380 8622 7418 3`). They are on one diffusion, x 8578-8745, y 7372-7420 (a closed
-rounded outline in all shots), and a poly plate x 8632-8692 lies across it between them: chip-2 stripped
+rounded outline in all shots; its north edge is y 7375 west of the plate and y 7383 under and east of it), and a poly plate lies across it between them (x 8632-8676 over the channel; only its head, y 7352-7378, runs on east to x 8692: review round 6): chip-2 stripped
 red minus green 30-43 along y 7400 from x 8630 to 8672 and 14-25 to x 8690, about 5 on the diffusion at
 both sides (`px.py row 7400 8570 8750 6 acid1b,acid`); down x 8670 the poly runs from y 7350 to 7432
 with the diffusion's edge line across it at y 7380 (`px.py col 8670 7340 7446 5`). Under the VCC metal's
@@ -500,7 +500,7 @@ heavy-outlined box (8690-8715, 7352-7372) sits on top of a tab of the line's dif
 down, `px.py col 8705 7340 7392 4`): read as the load's tie, a buried contact, drawn `?B`. With it:
 
 ```
-load of cdp2_b_hl: 50/57, gate tied to the line        cdp2_w7344 = cdp2_b_hl
+load of cdp2_b_hl: about 37/42, gate tied to the line        cdp2_w7344 = cdp2_b_hl
 cdp2_w7272 = NOT( cdp2_b_hl AND cdp2_b_s7_x )           (marked: the tie)
 cdp2_b_hl  = NOT( OR over s3..s7 of (cdp2_b_s#_p1 AND cdp2_b_s#_y) )
 ```
@@ -778,6 +778,30 @@ chip 2 and the pad (8682,7300) none in chip 1 (each has the clean shot's hole an
 centre); chip-1 debris over the metal x 8675-8695 at y 7026-7083.
 
 Round 5: no findings.
+
+Round 6 (full review of piece `gh`; fresh Fable 5.2 reviewer; 2026-11-20 19:05 -0600; commit 9a7c108; images
+`cache/scratch/cdp2/review-6/`). Told to suspect: the tie (a buried contact at all; to which side); the
+plate as one poly across the whole diffusion; the row and plate as one poly; both contacts and their
+metals; which supply the wide metal is; anything left out. Checked: both contacts real; the thin metal
+ending on its land (no metal y 7419-7469); the wide metal continuous y 7200-7660 and `vcc` by the older
+label; the plate one poly (the dark line at x 8646-8650 is the metal's edge: the same where it crosses
+row 1), across both diffusion edges, its foot an overhang going nowhere; the row and plate continuous
+poly at x 8641 from y 7337 to 7376, no contact under the wide metal; the box at the head's east end in
+all four shots, like the control box of piece `gl`, the diffusion's north edge line absent at
+x 8704-8710 (open into the land), field north and east, nothing on the VCC side. Could not check: the
+box's opening south in the chip-2 shots (dark there): `?B` stays; the rail's identity beyond the label.
+
+Findings, geometry only:
+
+1. The plate's east edge over the channel is x 8675 (drawn 8692); only its head runs on east into the
+   box. L about 40. Fixed.
+2. The diffusion's north edge under and east of the plate is y 7383 (drawn 7372); the west box's 7375.
+   W about 38. Fixed.
+
+`tools/t.sh cdp2 sameconn.py 9a7c108`: connections identical. `.venv/bin/python tools/sameconn.py 9a7c108`:
+connections identical.
+
+Round 6: no findings that change a connection.
 
 ## Correction from the coordinating session (2026-11-15)
 
