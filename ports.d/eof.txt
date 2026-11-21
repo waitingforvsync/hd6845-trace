@@ -237,3 +237,4 @@ vss            M      3960-3982,10960           -    an arm of the same metal no
 eof_ypd        P      3996,18247-18263          in   the poly row east of the foot pad (3957,18255) of the line eof_ypd, east end as drawn; it runs on east along the north side of a wide metal to about x 4138 (cream in the clean shot; not followed); the line's driver lies beyond
 # piece cap18b (run 49): the twin of cap18 on bl0_w15566; the bus line that leaves its pad east
 bl0_w15566     M      8760,17818-17830         ?    the bus line y 17824 on east of the end pad (8685,17821) of bl0_w15566's row, as far as drawn; follow.py runs it to (9468,17823): not read
+eof_w17866     M      8760,17860-17872         ?    piece cap18b (review round 57): the bus line y 17866 on east, as far as drawn; believed eof_w16040's (joined to its pad (8643,17865) through a ?M); follow.py runs it to (9556,17863): not read

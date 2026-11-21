@@ -4438,9 +4438,10 @@ M 8685,17824 x8760 w=12
 # y 17908, south as a column x 8745-8765 under ck_out's line (bars at the column's two edges,
 # bright between, no pad, no hole: no contact) to the gate
 P 8689,17830 y17885 x8755 y17935 w=18
-# the gate: the column widens to x 8741-8769 and crosses the box from y 17930 to 18005
-# (salmon in the clean shot under the island, outlines at x 8739 and x 8769)
-P 8741,17930:8769,18005
+# the gate: the column widens to x 8741-8769 and crosses the box from y 17930 to 18008
+# (salmon in the clean shot under the island, outlines at x 8739 and x 8769); its south end
+# is at about y 18008 (review round 57)
+P 8741,17930:8769,18008
 # the diffusion: the wire y 17964-17984 from cap18's box under the VCC rail (plain between
 # two edge lines, nothing across it: px.py row 17974 8552 8742 8; col 8640) to the box
 # x 8722-8812, y 17949-17997, through under the gate
@@ -4452,3 +4453,15 @@ D 8722,17949:8812,17997
 M 8744,17952:8810,17994
 C 8790,17970
 N M 8800,17988 eof_w17969
+# The bus line y 17860-17873 (review round 57; Ambiguity 206): believed the east arm of
+# eof_w16040's pad (8643,17865) (piece en18 drew that pad's metal north only). In chip 2's
+# metal shot the metal is bright from x 8668 on, 27 px from the pad's centre, as at the two
+# neighbouring pads whose lines leave east (26-27 px), with a bar of 8 px at either edge of
+# piece cap18b's poly column (x 8674-8681, 8696-8705); chip 1's is dark from x 8646 to 8686.
+# So the stretch from the pad over the column is drawn uncertain, the line east of the column
+# (bright in both chips) plain, 55 px of it: PORT at x 8760 (follow.py: to (9556,17863)). It
+# makes no contact with the column (no pad, no hole).
+?M 8643,17866 x8708 w=12
+M 8704,17866 x8760 w=12
+N M 8740,17866 eof_w17866
+@alias eof_w16040 eof_w17866
