@@ -24,3 +24,7 @@ cdp3_f_c7     M      10464,11048      in   the same, s7
 dbus_le       M      16775,16450      ?    the data input latches' enable: the thin metal through the output units (uncertain over four output boxes), drawn end; goes on south
 vcc           M      16491-16540,16440 -   the units' VCC rail (dlat's, from the north), drawn end; goes on south to about y 16478
 vss           M      16017-16059,17285 -   the rail of the sixth output inverter, drawn end (goes on north past the unit above); its south end is at about y 17540
+cdp4_w10808   P      10980,3624-3646  ?    the first through line east of the ninth VSS rail (track x 10808): the poly row east of its top pad (10804,3636), on east as open poly
+cdp4_w10808   P      10700,15726-15748 ?   the same line: the poly row west of its bottom pad (10808,15738), under bc2's rail x 10718-10770, on west
+rst_lat       P      10980,3580-3600  out  the second through line (track x 10852): the poly row east of its top pad (10849,3592), on east as open poly
+rst_lat       P      10782-10797,17700 out  the same line: a poly column south from the west end of the row through its bottom pad (10852,17648)

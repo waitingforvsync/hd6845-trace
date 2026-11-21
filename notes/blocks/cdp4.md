@@ -79,6 +79,14 @@ two hops, south on a thin metal and 800 px of poly column into the west end of s
 **All eight data pins now read R12-R17 through the read bus: `d#_out_n` = NOT `cdp3_n_c(7-#)`.** With every
 file loaded: 2516 nets, 4809 transistors, 0 errors, 0 warnings. See "The bit 7 line" under Logic.
 
+Run 12 (2026-11-21 16:59 -0600): **the two thin metals east of the ninth VSS rail** (x 10808 and x 10852; wiring only, four
+pads with contacts, no transistor, no uncertain item): two through lines of 12,100 and 14,060 px with no
+tap, from pads at the top of the datapath's east edge to pads in the bottom-centre logic and the bottom
+bus. **The second is `rst_lat`**: the poly row through its bottom pad bends onto the diagonal `trunks`
+draws from `rst_lat`'s contact (11288,17517) (firm). The first is `cdp4_w10808` (both ends open). With
+every file loaded: 2519 nets, 4812 transistors, 0 errors, 0 warnings. See "The two through lines" under
+Logic.
+
 Not traced: the rest of the wiring right of x 10600 (the two thin metals x 10809 and x 10853, the rails'
 ends) and below y 14060.
 
@@ -643,6 +651,51 @@ is as tall as the pad (y 18128-18168; drawn 18130-18150) and the junction block 
 `d#_out_n` = NOT `cdp3_n_c(7-#)`, eight inverters (D0's at the foot of the data bus column in `dbus`, D1-D5's
 and D6's the cell `cdp4_ro`, D7's in `regs`).
 
+### The two through lines east of the ninth VSS rail (run 12, 2026-11-21; traced)
+
+| | T1, `cdp4_w10808` | T2, `rst_lat` |
+|---|---|---|
+| track | x 10804-10810 | x 10849-10854 |
+| top pad (contact) | (10804,3636) | (10849,3592) |
+| poly from the top pad | a row east, y 3624-3646 (port x 10980) | a row east, y 3580-3600 (port x 10980) |
+| bottom pad (contact) | (10808,15738) | (10852,17648) |
+| poly from the bottom pad | a row west, y 15726-15748, under `bc2`'s rail (port x 10700) | a row through the pad, y 17633-17653: east to a bend onto `trunks`' diagonal; west to x 10787 and a column south (port y 17700) |
+
+- **The tracks.** `tools/follow.py 10809 12000 N` / `S` and `10853 12000 N` / `S` (`--gap 16`) run each
+  metal from pad to pad; the centres at twelve cuts (`tools/busl_both.py h Y 10785 10875`) stay within 3 px.
+  `tools/tl5_tracks.py v 10808 3640 15710` and `v 10852 3600 17645`: 134 and 138 dark stretches, all under
+  15 px (the edge bars of the poly rows of `cdp1`-`cdp4` that pass under) except four, each read as three
+  strips (`cache/scratch/cdp4/cand.py`) and found to be crossings with no pad: both tracks at y 4660-4677;
+  T2 at y 13633-13651 (`cdp4`'s s7 selector row passing under: two edge bars and dim metal between,
+  `tools/textmap.py 10836 13612 10872 13668 3 --acid`) and y 14574-14589. The clean shot's only "holes" are
+  the diffusion-coloured rectangle of AMB-040 under both (y 11933-12181) and a dirt particle on the clean
+  shot at (10800-10860, 13150-13230) (`t12_spot.png`: in chip 1's stripped shot only). No tap.
+- **Each track ends on its pads** (column profiles, `tools/px.py col`, both metal shots: ring, bright centre,
+  ring, then bare ground): T1 has no metal north of y 3616 or south of y 15758; T2 none north of y 3572 or
+  south of y 17666. **South of T1's bottom pad another metal stands on the same track position** from about
+  y 16400 to y 18612 (`trunks` draws its last 150 px, the start of `rst_ck`'s run west): two metals end to
+  end with 650 px of bare ground between, not one track (tracing guide, trap 33).
+- **Top rows** (`t12_top4.png`, 4x, metal and clean): each pad's poly row runs east, T1's under T2's track
+  (bright metal between two edge bars, no pad) and both under `wrs`' `wr_r8` metal (x 10885-10900, no
+  contact), and on east as open poly. Drawn to x 10980 (ports); not followed.
+- **T1's bottom row** runs west from the pad under `bc2`'s rail (x 10718-10770; salmon in the clean shot) and
+  is open poly at x 10700-10716. Drawn to x 10700 (port).
+- **T2's bottom row** (`t12_b2z.png`, `t12_b2w.png`, `t12_b2e.png`, 4-5x, four shots): the row is poly in every
+  gap between the metals it passes under from x 10788 to x 10962 (`tools/px.py row 17643 10764 10990 6
+  metal,metal1,acid`: orange at x 10788, 10830, 10878, 10914-10920, 10962). East of the pad it passes under
+  the read bus tracks of columns 7 and 6 (no contact: reviewed with run 4's tap check) and at x ~10958 bends
+  north-east into a diagonal on the line x + y = 28605-28620, which is the diagonal `trunks` draws from
+  `rst_lat`'s contact (11288,17517) down to (10980,17640) ("poly west and south-west. Not followed"); the
+  next diagonal north (x + y = 28540, `h_eq_r1`'s) is 58 px away and meets the next row north (y 17598).
+  West of the pad the row passes under the other metal on T1's track position (no pad) and ends at
+  x ~10785, where a poly column x 10782-10797 goes south in the gap between that metal and the wide rail
+  (orange in both chip-2 shots at y 17670, 17700, 17760). Drawn to y 17700 (port); not followed.
+
+So `rst_lat` (a copy of the reset: `notes/signals.md`) runs from the input buffer row's inverter, by
+`trunks`' wires, up the whole east side of the central datapath to a pad at (10849,3592) and on east in poly,
+with a branch south at (10789,17700). T1 carries a signal between the top-right area and `bc2`'s logic; what
+it is, is not known.
+
 ### Corner gate group: `cdp4_rst` = NOR of six select rows (run 2, 2026-11-19; traced)
 
 Region x 7550-7870, y 13640-14055, left of row D. One gate, seven transistors:
@@ -707,6 +760,8 @@ islands are closed curves inside it, so they are the other class.
 | `cdp4_bus_s0`..`s7` | poly | x 7600, y 13333, 13376, 13420, 13463, 13505, 13548, 13590, 13633 | from outside | data into the row C latch |
 | `d5_out_n`..`d1_out_n` | poly | onto `dbus`'s rows at x 16822, 16870, 16912, 16957, 16957 (y 15824, 15954, 16085, 16215, 16345) | driven inside | the outputs of the data output inverters (run 8) |
 | `dbus_le` | metal | x 16775, y 15930 (onto `dlat`'s end) and y 16450 (drawn end; goes on south) | from outside (believed from the south) | the data input latches' enable, passing through the units (run 8; uncertain over four boxes) |
+| `cdp4_w10808` | poly | (10980, 3624-3646) (the row east of T1's top pad) and (10700, 15726-15748) (the row west of its bottom pad) | ? | the first through line east of the ninth VSS rail (run 12) |
+| `rst_lat` | poly | (10980, 3580-3600) (the row east of T2's top pad) and (10782-10797, 17700) (the column south of the row's west end) | from `trunks`' inverter | the second through line (run 12) |
 | `vcc`, `vss` | metal | x 16515 and x 16689 at y 15780 (onto `dlat`'s rails); `vcc` drawn to y 16440 (goes on to about y 16478), `vss` ends at y 16446 | - | the units' rails |
 | `cdp3_n_c7` (= `cdp4_n_s7` = `dbus_do0_in`) | metal | (16950-16962, 16714): onto `dbus`'s metal | driven inside | the read bus, column 7 = the gate of D0's output chain (run 7) |
 | `d6_out_n` | poly | (17800-17825, 17313-17350): onto `dpad`'s strip 4 of D6's pad cell | driven inside | the output of the sixth output inverter, joined to the pad cell (run 10) |
@@ -833,9 +888,11 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
 - (Done, run 3: row R1 upper.) Left from it: `g_eq_r14`, the NAND's other input (not followed); which
   address bit each bus line is; the three thin vertical metals east of the ninth VSS rail (x 10790-10910).
 - Ends of `wr_r15` (poly, y 11837).
-- Right of x 10600: (done, run 4: the n lines' contacts and the read bus tracks.) Left: the two thin
-  metals x 10809 (the follower ends it at (10809,15738)) and x 10853 (to (10852,17652)), both through
-  the whole field from north of y 10150; the end of the s7 VCC rail; the ninth VSS rail's end (y 13300).
+- Right of x 10600: (done, runs 4 and 12: the read bus tracks and the two through lines.) Left: the end of
+  the s7 VCC rail; the ninth VSS rail's end (y 13300).
+- From run 12: the four rows beyond their ports (`cdp4_w10808` east of (10980,3635) and west of
+  (10700,15737); `rst_lat` east of (10980,3590) and south of (10789,17700)); the undrawn metal on T1's track
+  position from about y 16400 to y 18458 (the north part of `trunks`' `rst_ck` piece, or another net).
 - From the review of run 7 (round 6): `dbus`'s `d7_c` metal (port (16950,16750-16766)) goes on west along
   y 16758 to a corner near (16838,16758) and south on x ~16840 to about y 17306, in no trace file and no
   ports file (it does not touch the read bus: no metal at x 16803-16835 on y 16758). And the thin metal
