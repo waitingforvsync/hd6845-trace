@@ -315,7 +315,8 @@ address counter.
 | **The DISPTMG pad driver's input is the output of a three-input NOR in the bottom-centre logic**: `disptmg_drv_in` = NOR(`eof_w17338`, `eof_w17168`, `eof_w17472`), a driver stage under column A's VSS rail (three pull-downs of W/L 12, a load of 1.8; `notes/blocks/eof.md`, pieces `g174`, `g174e`). Its output (the wire `eof` called w17362) runs 840 px south, 2,850 px west along the bottom bus line y 18473 (two poly hops, four pads) and 450 px south on a poly column onto the driver's input poly (pieces `o362`, `o362w`, `o362d`, 2026-11-20), with no tap and no other load. | Firm (`tools/unsure.py --equations disptmg_drv_in`: no uncertain item on the gate or the wire; six places where the wire crosses other nets' metal or poly are read as no contact: `notes/blocks/eof.md`, Ambiguities 94, 96 and those of the earlier pieces) |
 | The pad is the inverse of its driver's input (`pads_out`: `disptmg_pu` = NOT `disptmg_drv_in`, `disptmg_pd` = NOT `disptmg_pu`; the pull-up fingers are gated by `disptmg_pu`), so **DISPTMG = `eof_w17338` OR `eof_w17168` OR `eof_w17472`**. | Firm for the NOR; the driver cell as `pads_out` has it |
 | One of the three terms is known: `eof_w17168` = NOR(`eof_w16693`, `eof_w17212`), where `eof_w16693` is the upper node of the second of two latches in series (the first open while `eof_w16040` is high, the second while `ck_out` is high, i.e. CLK low; both cleared by the reset copy `rst_a`; the table under Counters). So that term is the latch pair's value, re-timed to `ck_out`, passed while `eof_w17212` is low. | Marked (the latch cells' load ties and the NOR's; the joins are firm) |
-| What the latch pair stores (`eof_w16000`, its enable `eof_w16040`), what `eof_w17212`, `eof_w17338` and `eof_w17472` are, and so how the display enable is made from the comparators and where R8's DISPTMG skew enters. | **Open** |
+| A second term is one gate further back: **`eof_w17338` = NOR(`eof_w17124`, `eof_w17207`)**, a two-input NOR under column A's VSS rail 170 px north of the driver, the mirror image of the NOR that makes `eof_w17168` (`notes/blocks/eof.md`, piece `n338`, 2026-11-21). So DISPTMG = NOT(`eof_w17124` OR `eof_w17207`) OR `eof_w17168` OR `eof_w17472`. Its two inputs come down two tracks of the bundle x 8012-8229 from the north and are not followed. | Marked (the NOR's load tie; its pull-downs, the wire to the driver and the two gate rows to their pads have no uncertain item) |
+| What the latch pair stores (`eof_w16000`, its enable `eof_w16040`), what `eof_w17212`, `eof_w17124`, `eof_w17207` and `eof_w17472` are, and so how the display enable is made from the comparators and where R8's DISPTMG skew enters. | **Open** |
 
 ## The data pins (D0-D7) as outputs
 
@@ -332,7 +333,7 @@ address counter.
 So that silence is not read as knowledge:
 
 - How HSYNC, VSYNC, DISPTMG and CUDISP are made from the comparator outputs. Of DISPTMG the last gate is
-  traced ("The DISPTMG pin": a three-input NOR into the pad driver, one input from a latch pair on `ck_out`);
+  traced ("The DISPTMG pin": a three-input NOR into the pad driver, one input from a latch pair on `ck_out`, one from a two-input NOR whose inputs are not followed);
   nothing connects it to a comparator yet.
 - The end-of-frame sequence (R4, then R5 extra lines, then restart) and the interlace
   odd/even logic. What is traced towards it (the `eof` lead group, 2026-11-19): R4's match reaches

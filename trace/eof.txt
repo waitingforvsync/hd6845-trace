@@ -2113,3 +2113,89 @@ C 5583,18472
 # y 18925, a clear overlap. So disptmg_drv_in IS disptmg_drv_in.
 P 5587,18472 y18925 w=18
 N P 5587,18880 disptmg_drv_in
+
+# ======================================================================================
+# Piece n338 (run 28, 2026-11-21): the source of eof_w17338, row 1 of the DISPTMG driver (piece
+# g174): a two-input NOR under column A's VSS rail at y 17054-17250 (bc3's ground, free), the
+# mirror image of nor17 about the VCC rail x 8510-8560 (the two units share that rail's VCC box),
+# drawn by hand from this unit's own measurements; and the wire from its output to row 1.
+#     eof_w17338 = NOR(eof_w17124, eof_w17207)
+# Views r28_*.png in cache/scratch/eof/; survey.md, run 28; notes, piece n338 and Ambiguities 97-101.
+#
+# ---- the wire. Row 1 (P 8245,17331:8413,17351, piece g174) runs on west under ck_out's track
+# x 8229 (no contact: tl5_tracks.py v 8229 17005 17372: no hole, bars of 8-10 px at the poly's
+# edges; under that metal the poly is taller, y 17312-17350) to a pad with a contact (8186,17338)
+# (ring and bright centre in both metal shots, a pitted box in the chip-2 stripped shot, a green
+# hole in the cream pad in the clean shot: r28_pad.png, 4.2x, four shots). The pad's metal runs
+# north on x 8186 over row B (bars of 9 px at the row's edges, no hole) and ends on a second pad
+# with a contact (8184,17170) (textmap.py 8160 17078 8250 17196 3 --acid; r28_n1.png). No metal
+# between that pad and the pad (8184,17105) 65 px north of it (bare ground, y 17118-17150 at
+# x 8186, in both chips). The second pad's poly is the row y 17160-17180 east into the NOR's box.
+P 8198,17331:8250,17351
+P 8216,17312:8244,17336
+P 8170,17327:8204,17352
+C 8186,17338
+M 8186,17338 y17170 w=13
+P 8170,17155:8206,17184
+C 8184,17170
+P 8195,17160:8302,17180
+N M 8186,17260 eof_w17338
+# ---- the NOR. A VSS box under the rail (clean shot: tan x 8332-8376, y 17054-17112; px.py col
+# 8350, row 17082; a contact at about (8350,17078): bright centre in a ring in chip 2's metal
+# shot, a greenish hole in the clean shot). North of it, at y 17036-17046, is the gate of the unit
+# above (not drawn). From the box's south part a diffusion bar runs west (y 17095-17111) into the
+# top of a column west of the rail, x 8284-8319: its two edge lines cross both gate rows and the
+# bands between them in both metal shots and the chip-2 stripped shot (px.py row 17102, 17124,
+# 17146, 17171, 17194, 17212, 17236: dips to red 46-94 at x 8280-8284 and x 8319-8322; the bands'
+# colour in chip 2 is redder than the field west of them at the same y by 8-15 units:
+# eof_patch.py; notes, Ambiguity 97). The column runs south under row A (gate), through the
+# node, under row B (gate), and at y 17228-17248 east under the rail into the VSS diffusion there
+# (clean shot: tan from y 17230 on south without an edge to piece g174's active area, px.py col
+# 8350 17222 17300; a contact at about (8350,17248): a green hole with a pit).
+D 8332,17054:8376,17112
+C 8350,17078 s=24x30
+D 8284,17095:8340,17110
+D 8284,17095:8319,17248
+# the foot: the column's last 20 px run east under the rail (the dark line at x 8303-8308 in the
+# clean shot is the edge of the rail's protected margin: the same line crosses piece g174's
+# active area at y 17300, px.py row 17238 / 17300 / 17104; notes, Ambiguity 99); a field slot
+# y 17250-17262 separates the foot from piece g174's active area west of x 8335
+D 8284,17228:8342,17248
+D 8336,17230:8376,17270
+C 8350,17248
+# row A (eof_w17124): from a pad with a contact (8184,17105) (bright centre in a ring in chip 2,
+# a hole in the clean shot's pad, a pitted box in the chip-2 stripped shot; chip 1's centre is
+# dim: notes, Ambiguity 98), east under ck_out's track x 8229 (no contact) and over the column
+# to its end at x 8333 under the rail's margin (clean shot: cream to x 8331, field under the
+# rail at x 8340-8346). The pad is the south end of the track x 8186 from the north (stub: port).
+P 8170,17087:8206,17120
+C 8184,17105
+P 8176,17115:8334,17135
+M 8185,17105 y17060 w=13
+N P 8260,17125 eof_w17124
+# row B (eof_w17207): from a pad with a contact (8010,17210) (ring and bright centre in both
+# metal shots, a pitted box in the chip-2 stripped shot, pits in the clean shot's cream pad:
+# r28_bw.png, 4.2x, four shots), east under the tracks x 8057 (bc1_g6_in), 8100, 8143, 8186
+# (this piece's own metal) and 8229 (ck_out) with no contact at any (tl5_tracks.py v: bars of
+# 8-11 px at the row's edges, no hole; no pad on the row) and over the column to its end at
+# x 8333. The pad is the south end of the track x 8013 from the north (stub: port); 15 px of
+# bare ground lie between its ring and the corner of bc1_g6_in's metal south of it (y 17250).
+P 7998,17198:8030,17224
+C 8010,17210
+P 8022,17202:8334,17222
+M 8013,17210 y17150 w=12
+N P 8260,17212 eof_w17207
+# the node: the column between the two gates; the output row ends in a heavy-outlined box on it
+# (outline x 8274-8310, y 17153-17192, a plain centre: px.py row 17171), a buried contact; a
+# strip runs east from the node (y 17162-17184) under the rail (clean shot: tan, no gate: px.py
+# row 17172, railprof.py --horizontal), in the open, under the plate (y 17162-17190: the two
+# edge lines across the plate in chip 2, r28_ld.png) to nor17's VCC box (D 8508,17162:8565,17208).
+B 8274,17151:8311,17192
+D 8300,17162:8420,17184
+D 8414,17162:8515,17190
+P 8450,17142:8505,17237              # the plate
+# the tie: a heavy-outlined box (8410-8446, 17200-17240) below the strip, a tab of the plate into
+# it from the east, a tail of the node down from the strip. Drawn uncertain, as nor17's.
+?P 8422,17200:8456,17218
+?D 8414,17180:8434,17236
+?B 8410,17198:8446,17240

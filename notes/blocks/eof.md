@@ -590,6 +590,27 @@ driver's output the wire `eof` called w17362 is DISPTMG's pad driver input, `dis
 Full extraction with run 27: 2,452 nets (one fewer: the join), 4,579 transistors, 0 errors, 0 warnings. The
 package by itself: 1,058 nets, 1,817 transistors, 0 errors, 69 warnings (other packages' names).
 
+Run 28 (Tom Seddon's session, Claude Fable 5.2; 2026-11-21 03:03 +0000 on). One piece, `n338`, 3 transistors
+and a load: **the first of the DISPTMG NOR's two unknown inputs, `eof_w17338`, is the output of a two-input
+NOR 170 px north of the driver**.
+
+- **Traced** (piece `n338`): row 1 of the driver runs west under `ck_out`'s track to a pad with a contact
+  (8186,17338); the pad's thin metal runs 170 px north to a second pad (8184,17170), whose poly row goes east
+  into a unit under column A's VSS rail that nobody had drawn (x 8274-8515, y 17054-17250; `bc3`'s ground,
+  free): the mirror image of `nor17` about the VCC rail, with which it shares a VCC box.
+  **`eof_w17338` = NOR(`eof_w17124`, `eof_w17207`)** (marked: the load's tie, as in `nor17`; the three
+  pull-downs' geometry has no uncertain item).
+- **Its two inputs are drawn to pads**: `eof_w17124` (the gate row y 17115-17135) from a pad (8184,17105), the
+  south end of the track x 8186 from the north; `eof_w17207` (the gate row y 17202-17222) from a pad
+  (8010,17210), the south end of the track x 8013 from the north. Both tracks are stubs with ports; they are
+  lines of the track bundle x 8012-8229 and go north toward `bc1`'s ground (the follower: to (8184,16846) and
+  to (8015,16604); not read).
+- **So** DISPTMG = NOT(`eof_w17124` OR `eof_w17207`) OR `eof_w17168` OR `eof_w17472`.
+- **Not traced**: what `eof_w17124`, `eof_w17207`, `eof_w17472` and `eof_w17212` are (Not done).
+
+Full extraction with run 28: 2,458 nets, 4,606 transistors, 0 errors, 0 warnings. The package by itself:
+1,060 nets, 1,820 transistors, 0 errors, 76 warnings (other packages' names; 76 before the piece).
+
 Full extraction after run 2: 2,351 nets, 4,232 transistors, 0 errors, 0 warnings; the package
 by itself (it loads `rdp3`): 0 errors, 0 warnings.
 
@@ -702,6 +723,7 @@ by itself (it loads `rdp3`): 0 errors, 0 warnings.
 | `g174`, the lower poly | x 8226-8372, y 17464-17560 | `eof_w17472`: a row y 17464-17486, an east leg x 8274-8296, a bottom bar y 17521-17543 under the rail (east of it: piece `g174e`); west of the active area the row turns south on x 8226-8242 (port at y 17560) |
 | `o362`, `o362w`, the NOR's output wire | x 6262-8478, y 17603-18490 | a thin metal south from the pad (8467,17603) and west along y 18474 to a pad (7556,18473); a poly under the rail x 7468-7516 to a pad (7384,18473); a thin metal west along y 18473 to a pad (6322,18472); the pad's poly row west (port at x 6262) |
 | `o362d`, the NOR's output on to DISPTMG's driver | x 5567-6262, y 18452-18925 | the poly row y 18462-18482 west under the wide vertical metal x 6190-6238 to a pad (6102,18472); a thin metal along y 18474 to a pad (5583,18472); a poly column x 5578-5596 south onto `pads_out`'s input poly of the DISPTMG driver (`disptmg_drv_in`) |
+| `n338`, the NOR that makes `eof_w17338` | x 7998-8515, y 17054-17352 | a two-input NOR under column A's VSS rail (VSS box y 17054-17112 with a contact (8350,17078); a diffusion column x 8284-8319 west of the rail under two gate rows; a buried-contact box (8274-8310, 17153-17192); a load strip y 17162-17190 east under the rail to a plate x 8450-8505 and `nor17`'s VCC box); the output row y 17160-17180 to a pad (8184,17170), a thin metal x 8186 south to a pad (8186,17338) and row 1 of the DISPTMG driver; the two gate rows' pads (8184,17105), (8010,17210) and stubs of their tracks |
 
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
 
@@ -2217,6 +2239,69 @@ itself), no new transistor. With `pads_out`'s driver (`disptmg_pu` = NOT `disptm
 value of the second of the two latches in series on `ck_out` (pieces `lat15`, `lat16`), passed while
 `eof_w17212` is low; the other two inputs are not followed.
 
+### Piece `n338`: `eof_w17338` is the output of a two-input NOR (traced; the load's tie uncertain)
+
+Run 28, 2026-11-21. Region x 7998-8515, y 17054-17352 (`bc3`'s ground, free). Read from eight views
+(`cache/scratch/eof/r28_*.png`) and text measurements (`survey.md`, run 28).
+
+    eof_w17338 = NOR(eof_w17124, eof_w17207)        (t 35/20, 35/20; load 28/55)
+
+**The wire.** Row 1 of the DISPTMG driver (piece `g174`) runs on west of x 8245 under `ck_out`'s track x 8229
+(under that metal the poly is taller, y 17312-17350; no contact: `tl5_tracks.py v 8229 17005 17372`, no hole
+in the clean shot, bars of 8-10 px at the poly's edges) to **a pad with a contact (8186,17338)**: ring and
+bright centre in both metal shots, a pitted box in the chip-2 stripped shot, a green hole in the cream pad
+x 8172-8203, y 17327-17352 of the clean shot (`r28_pad.png`, 4.2x, four shots). Nothing else leaves the pad
+(field west and south; `ck_out`'s corner metal passes 18 px south of its ring). The pad's metal runs north on
+x 8186 (13 px) over the gate row B of the NOR (bars of 9 px at the row's edges, y 17197-17205 and 17221-17229,
+no hole: `tl5_tracks.py v 8186 16900 17345`) and ends on **a second pad with a contact (8184,17170)** (ring
+y 17153-17186, centre B-A in both chips, a hole in the clean shot's pad x 8172-8205, y 17156-17183:
+`textmap.py 8160 17078 8250 17196 3 --acid`; `r28_n1.png`, 2.6x, three shots). There is no metal between that
+pad and the pad (8184,17105) 65 px north of it: bare ground at y 17138-17150 in both chips. The second pad's
+poly is the row y 17160-17180, which runs east under `ck_out`'s track (no contact) into the unit's box.
+
+**The unit** (`r28_u1.png`, 3.6x, clean; `r28_w_c2.png`, `r28_w_c1.png`, 5x, two shots each; `r28_ld.png`,
+5x; `r28_bot.png`, 6.5x, four shots; overlays `r28_o1.png`, `r28_o2.png`). It is `nor17` (x 8573-8800, the
+NOR on the second latch's upper node) mirrored about the VCC rail x 8510-8560: the same rows at the same y,
+and one VCC box for both loads. No known cell matches (`findcell.py` with `tl5_inv` and `eof_dinv`, --min
+0.4: 0 hits and 0.43); drawn by hand from its own measurements.
+
+- **VSS box** under the rail: tan in the clean shot at x 8332-8376, y 17054-17112 (`px.py col 8350`, `row
+  17082`), with a contact at about (8350,17078). North of it, at y 17036-17046, the rail covers the gate of
+  the unit above (not drawn): the box is shared with that unit.
+- **The column** west of the rail, in the open gap between `ck_out`'s track and the rail: a bar y 17095-17110
+  from the box's south part west to x 8284, and a column x 8284-8319 south from it to y 17248. Its two edge
+  lines (x 8280-8284, x 8319-8322) cross both gate rows and the bands between them in both metal shots and
+  the chip-2 stripped shot (`px.py row` at seven heights: Ambiguity 97). At its foot (y 17228-17248) it runs
+  east under the rail into the VSS diffusion there (contact at about (8350,17248)), which is one piece with
+  the driver's active area south of it (Ambiguity 99).
+- **Gate A** (`eof_w17124`): the row y 17115-17135 from the pad (8184,17105) east under `ck_out`'s track and
+  over the column, ending at x 8333 (cream under the rail's margin to x 8331; field under the rail itself).
+- **Gate B** (`eof_w17207`): the row y 17202-17222 from the pad (8010,17210), 320 px east under five tracks
+  (x 8057 `bc1_g6_in`, 8100 the reset copy's, 8143, 8186 this piece's own metal, 8229 `ck_out`: bars of
+  8-11 px at the row's edges on each, no hole, no pad on the row) and over the column, ending at x 8333.
+- **The node**: the column between the two gates. The output row ends in a heavy-outlined box on it
+  (outline x 8274-8310, y 17153-17192, a plain centre x 8286-8295: `px.py row 17171`), a buried contact. No
+  gate lies under the rail (`railprof.py 8338 8382 17040 17300`: diffusion 17053-17122, field, diffusion
+  17150-17178, field, diffusion from 17233).
+- **The load**: a strip y 17162-17184 from the node east under the rail (tan, no gate: `px.py row 17172`,
+  `railprof.py --horizontal`), in the open (diffusion: chip-2 stripped shot red minus green 18 against 0 for
+  the ground north of the plate), under the plate x 8450-8505, y 17142-17237 (the strip's two edge lines
+  cross the plate at y 17162 and y 17190) to `nor17`'s VCC box (`D 8508,17162:8565,17208`, contact
+  (8525,17183)). The tie is a heavy-outlined box (8410-8446, 17200-17240) below the strip, with a tab of the
+  plate from the east and a tail of the strip from the north: drawn uncertain, as `nor17`'s (Ambiguity 100).
+
+**The inputs.** The pad (8184,17105) of gate A is the south end of the track x 8186 from the north (bright
+centre in a ring in chip 2, a hole in the clean shot, a pitted box in the chip-2 stripped shot; chip 1's
+centre is dim: Ambiguity 98). The pad (8010,17210) of gate B is the south end of the track x 8013 from the
+north (ring and bright centre in both metal shots, a pitted box, pits in the clean shot's pad: `r28_bw.png`,
+4.2x, four shots); 15 px of bare ground lie between its ring and the corner of `bc1_g6_in`'s metal south of
+it (`tl5_tracks.py v 8013 17100 17250`: no metal at y 17230-17249, the clean shot green there). Both tracks
+are drawn as stubs of 45-60 px (ports); neither is followed.
+
+So `disptmg_drv_in` = NOR(NOR(`eof_w17124`, `eof_w17207`), `eof_w17168`, `eof_w17472`), and DISPTMG = NOT(
+`eof_w17124` OR `eof_w17207`) OR `eof_w17168` OR `eof_w17472`: the pin is high whenever both `eof_w17124` and
+`eof_w17207` are low.
+
 ## Ports
 
 The net is driven outside the package (by `rdp2`'s NOR). `in` marks the port beyond which the
@@ -2312,7 +2397,8 @@ driver lies; the other three lead to the loads.
 | `eof_w16040` | metal | (8919-8931, 16300) | in | piece `lat15`: the upper latch's enable: the metal x 8925 on south of its lower pad (8925,16262) (the follower: to (8925,17694), west along y 17700 to x 8643; not checked) |
 | `bc1_g6_in` | metal | (8136-8150, 16292) | out | piece `o040`: `eof_w17040`'s metal x 8143 onto `bc1`'s metal end (8143,16300) of `bc1_g6_in` (`M 8186,15900 y16260 x8143 y16300`; `bc1` has no ports file): the input of `bc1`'s inverter 6. (The ports `eof_w17040` (9001-9015, 17610), `eof_w16823` (8760, 16986-17003) and `eof_w16693` (8800, 17116-17135) are gone: the wires are drawn on) |
 | `disptmg_drv_in` | - | no port left | out | pieces `o362`, `o362w`, `o362d` (runs 25-27): **the NOR's output**, drawn from the pad (8467,17603) south, west along y 18474 and y 18473 through four pads, and by the poly row west of the pad (6322,18472), a pad (6102,18472), a metal, a pad (5583,18472) and a poly column south onto `pads_out`'s input poly of the DISPTMG driver at (5587,18912-18925): it is `disptmg_drv_in`. The port at (6262,18472) is gone: drawn on. (The ports of piece `g174` at x 8368-8372 on the rail's east edge, `eof_w17168`, `eof_w17338`, `eof_w17472`, `disptmg_drv_in`, `vss` and the node whose former name was `eof_w17552`, are gone: drawn on) |
-| `eof_w17338` | poly | (8245, 17331-17351) | ? | piece `g174`: row 1 where it leaves the active area west, under the track x 8229 (in line with a pad at about (8188,17340): not read) |
+| `eof_w17124` | metal | (8179-8192, 17060) | in | piece `n338`: gate A of the NOR that makes `eof_w17338`: the track x 8186 on north of the pad (8184,17105) (the follower: to (8184,16846); not read) |
+| `eof_w17207` | metal | (8007-8019, 17150) | in | piece `n338`: gate B of the same NOR: the track x 8013 on north of the pad (8010,17210) (the follower: to (8015,16604); not read) |
 | `vcc` | metal | (8488-8558, 17560) | - | piece `g174e`: the VCC rail R2 on south (drawn y 17236-17560, x 8488-8558; it runs on) |
 | `eof_w17472` | poly | (8226-8242, 17560) | ? | piece `g174`: the lower poly's west leg on south (poly to y 17585 by `r23_prof.py col 8233`; not followed) |
 | `vcc` | diffusion | (8538, 17450-17475) | - | piece `g174e`: the diffusion under the VCC rail runs on east past x 8558 at this height (not followed) |
@@ -3137,6 +3223,34 @@ driver lies; the other three lead to the loads.
     clean shot has no green sample (`textmap.py 5566 18630 5608 18692 3 --acid`: red minus green 32-72
     throughout) and no counterpart in chip 1's metal shot. Working assumption: four plain crossings; no `?`
     item.
+
+97. **The column of the NOR `n338` stands in the open gap beside the rail** (x 8284-8319, y 17095-17248;
+    traps 28 and 38). Its bands between the rows are 8-20 px high and their colour alone decides nothing:
+    in chip 2 they are redder than the field west of them at the same y by 8-15 units (`eof_patch.py 8290
+    8314 ...` against `8252 8274 ...`: stripped shot red minus green 7.9 / 8.7 / 4.8 against -7.4 / -0.2 /
+    -10.7; the bar at the top 18.6 against 5.6), no control band of the same height between the same kind of
+    edges was measured. What the reading rests on: the two edge lines x 8280-8284 and x 8319-8322 cross
+    both gate rows in both metal shots (`px.py row 17124`, `17212`: red 67-94 and 59-61 in chip 2, 39-46
+    and 44-45 in chip 1, against 164-179 on the rows between them) and run through the bands; the mirror
+    unit `nor17` is built the same way. Working assumption: one diffusion column, two gates; no `?` item.
+98. **The pad (8184,17105) of gate A** (piece `n338`). Chip 2's metal shot has a bright centre in a ring, the
+    clean shot a green hole in the pad, the chip-2 stripped shot a pitted box; chip 1's metal shot shows the
+    ring with a dim centre (red 80-112: `textmap.py 8160 17078 8250 17196 3 --acid`). Taken as a contact
+    (three shots of four; the track from the north ends on it and has no other end there).
+99. **The column's foot and the VSS diffusion under the rail** (piece `n338`; x 8300-8316, y 17228-17248).
+    The clean shot has a dark line at x 8303-8308 between the foot (open) and the tan under the rail, and
+    chip 2's shots have the rail's edge line at x 8309-8315. The same pair of lines crosses the driver's
+    active area at y 17300, where the diffusion is continuous (`px.py row 17300 8288 8336 3`: clean
+    103/41/55 at x 8306 against 90/48/43 here; chip 2 plain to x 8306 in both rows), and the bar at the
+    column's top at y 17104 (weaker). A diffusion edge lying exactly under the rail's edge cannot be told
+    from these lines. Working assumption: joined (the foot has no other way to a supply: closed west and
+    south, no metal over it); no `?` item. If it were not, gate B would have no source.
+100. **The load's tie** (piece `n338`; box (8410-8446, 17200-17240)): a heavy-outlined box with a tab of the
+    plate and a tail of the strip, as in `nor17` and every cell of this build; drawn `?P`, `?D`, `?B`.
+    `eof_w17338`'s equation is marked for that reason only.
+101. **Dark rings on the gate row B in the clean shot** at x 8078, 8121, 8165, 8208 (piece `n338`), each in
+    a gap between two tracks. Neither chip-2 shot nor chip 1's metal shot has anything there (`r28_bw.png`,
+    `r28_o2.png`): artefacts of the gaps (trap 2). No contact drawn.
 
 ## Review
 
@@ -4834,6 +4948,18 @@ Round 34: no findings that change a connection.
 
 ## Not done
 
+- **Next (after run 28)**: (i) **the two inputs of the NOR that makes `eof_w17338`**: `eof_w17124`, the track
+  x 8186 north of the port (8186,17060) (`follow.py 8186 17060 N --gap 16`: end (8184,16846), candidate
+  (8188,16983); a stain of the clean shot lies over it at y 16940-17060), and `eof_w17207`, the track x 8013
+  north of the port (8013,17150) (`follow.py 8013 17170 N --gap 16`: end (8015,16604), candidates
+  (8012,16948), (8013,16819), (8013,16799)). Both are lines of the bundle x 8012-8229, which steps at
+  y 16640-16750 (trap 33: a continuous two-chip test, each step on a view); north of y 16300 it is `bc1`'s
+  ground. (ii) `eof_w17472` (the driver's lower poly, west leg south of y 17560). Seen beside piece `n338`,
+  other nets, not drawn (`bc3`, free): the unit above under the same rail (its gate under the rail at
+  y 17036-17046 shares the VSS box; an outlined box x 8262-8300 north of y 17058); `ck_out`'s track x 8229
+  has a pad with a contact at (8229,16990) in its run, with a poly east (trap 32: the follower of run 18
+  ended there; the metal runs on south to the corner (8230,17373) in both chips); the track x 8143 of the
+  bundle between y 16750 and y 17340.
 - **Ambiguity 53 to be measured again with a control** (from review round 29 of piece `g174`): a band about
   10-20 px high between two polys has a greenish north flank and a reddish south flank in chip 2's shots, so
   its colour says something only against a band of the same height that is certainly field, measured the same
