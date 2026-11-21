@@ -4465,3 +4465,57 @@ N M 8800,17988 eof_w17969
 M 8704,17866 x8760 w=12
 N M 8740,17866 eof_w17866
 @alias eof_w16040 eof_w17866
+
+# ===== Run 50, piece bus2 (2026-11-21): the two bottom bus lines east of x 8760 =====
+# Wiring only. Both lines run east as thin metal to a pad, cross under six vertical metals
+# (x 9540-9830) as a straight poly row with pink field either side (no step, no widened tap;
+# the dark specks on the rows at x 9575, 9620, 9700, 9748, 9790 are the gaps between those
+# metals, the same on every row and between the rows), come up on a second pad and run on
+# east as thin metal to a corner and north into the bottom-centre logic.
+#
+# --- bl0_w15566: the line y 17824 ---
+# tl5_tracks.py h 17824 8600 9800: metal unbroken from x 8711 to the ring x 9447-9460 of the
+# pad (9465,17822) (hole in the clean shot; no metal north or south of it: tl5_tracks.py v
+# 9465 17780 17865); poly row y 17812-17828 (px.py col 9660) to the pad (9857,17822) (the same
+# test at x 9858: nothing north or south); metal east (tl5_tracks.py h 17823 9790 10340:
+# unbroken from the ring to x 10320), corner (10311,17823), north on x 10311
+# (tl5_tracks.py v 10311 17380 17830: unbroken to the ring y 17479-17495) to the pad
+# (10311,17474), no metal beyond. PORT: the pad's poly goes on east (row y 17473) and north
+# (column x 10357): not drawn.
+M 8755,17824 x9465 w=12
+P 9450,17807:9483,17837              # pad (9465,17822)
+C 9465,17822
+P 9465,17820 x9857 w=16
+P 9841,17807:9874,17837              # pad (9857,17822)
+C 9857,17822
+M 9857,17823 x10311 y17474 w=13
+P 10296,17459:10332,17489            # pad (10311,17474)
+C 10311,17474
+N P 10326,17474 bl0_w15566
+# --- eof_w17866 (believed eof_w16040's): the line y 17866 ---
+# tl5_tracks.py h 17866 8600 9800: metal unbroken from x 8705 to the ring x 9535-9548 of the
+# pad (9553,17866); poly row y 17855-17871 to the pad (9813,17866); metal east
+# (tl5_tracks.py h 17866 9770 10380: unbroken from the ring x 9818-9837 to x 10364), corner
+# (10356,17866), north on x 10356 to y 17649 (tl5_tracks.py v 10356: no metal y 17610-17643,
+# 33 px, between this metal's corner and the pad (10355,17603), which is another net's: its
+# metal comes from the north), east along y 17649 to x 10397, north (tl5_tracks.py v 10395:
+# unbroken to the ring y 17414-17431) to the pad (10397,17410), no metal beyond (open ground
+# y 17350-17404; the pad (10397,17343) north of it is another net's). PORT: the pad's poly
+# goes on north and east (row y 17378-17395): not drawn.
+M 8755,17866 x9553 w=12
+P 9537,17851:9570,17881              # pad (9553,17866)
+C 9553,17866
+P 9553,17863 x9813 w=16
+P 9797,17851:9830,17881              # pad (9813,17866)
+C 9813,17866
+M 9813,17866 x10356 y17649 x10397 y17410 w=13
+P 10382,17395:10416,17425            # pad (10397,17410)
+C 10397,17410
+N P 10410,17410 eof_w17866
+# Each of this line's two hop pads carries a second metal, from the north (as ck_out's pads
+# one line south do, piece D): tl5_tracks.py v 9553 17600 17880 and v 9813: metal between the
+# rows from y 17645 down to a ring of 15 px (y 17843-17858) at the pad, the bars of the rows'
+# edges on the way. Drawn as stubs to PORTS at y 17800 (the follower: x 9553 north to
+# (9546,17645), west to (9266,17641); x 9813 north, then 1,800 px to (9961,16341): not read).
+M 9553,17866 y17800 w=14
+M 9813,17866 y17800 w=14
