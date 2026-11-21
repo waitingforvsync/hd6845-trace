@@ -1137,3 +1137,21 @@ C 10852,17648 s=20x20
 P 10787,17643 10960,17643 10986,17634 w=20
 P 10789,17636 y17700 w=14
 N M 10852,9000 rst_lat
+# ======================================================================
+# Run 13 (2026-11-21): dbus_le south of the output inverters to the output box of its driver. From the end of
+# run 8's thin metal: south to a corner, west along y 16498 to a pad, a poly hop west under the VCC rail (no
+# contact) to a pad, a thin metal south on x 16427 to a pad, and a poly row west under six trunk metals (no
+# contact) to x 16130, where it ends on a framed box (16100-16128, 16850-16876) of an undrawn gate under
+# bd2's VSS rail: read as that gate's output (not drawn: port).
+# ======================================================================
+M 16775,16440 y16498 x16578 w=14
+P 16561,16479:16595,16513
+C 16578,16496 s=20x20
+P 16447,16500 x16578 w=26                # the hop under the VCC rail x 16491-16540
+P 16430,16479:16464,16513
+C 16447,16496 s=20x20
+M 16447,16496 x16427 y16864 w=12
+P 16409,16847:16443,16881
+C 16426,16864 s=20x20
+P 16130,16865 x16426 w=20                # west under cs_d, x 16342, rw_d, bd2_rs_n, x 16211 and e_b
+N M 16427,16700 dbus_le

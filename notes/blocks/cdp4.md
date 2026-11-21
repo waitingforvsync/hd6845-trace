@@ -87,6 +87,12 @@ draws from `rst_lat`'s contact (11288,17517) (firm). The first is `cdp4_w10808` 
 every file loaded: 2519 nets, 4812 transistors, 0 errors, 0 warnings. See "The two through lines" under
 Logic.
 
+Run 13 (2026-11-21 17:43 -0600): **`dbus_le` on south from the output inverters to the output box of its driver** (wiring
+only, three pads with contacts, no transistor, no uncertain item of its own): a corner west, a poly hop under
+the VCC rail, a thin metal south on x 16427 and a poly row west under six trunk metals to a framed box at
+(16100-16128, 16850-16876) of an undrawn gate under `bd2`'s VSS rail. With every file loaded: 2519 nets,
+4812 transistors, 0 errors, 0 warnings. See "`dbus_le` to its driver" under Logic.
+
 Not traced: the rest of the wiring right of x 10600 (the two thin metals x 10809 and x 10853, the rails'
 ends) and below y 14060.
 
@@ -709,6 +715,36 @@ So `rst_lat` (a copy of the reset: `notes/signals.md`) runs from the input buffe
 with a branch south at (10789,17700). T1 carries the output of a gate of `bc2`'s logic (its load is at the
 line's bottom end) up to the top of the datapath and east; what it is, is not known.
 
+### `dbus_le` to its driver (run 13, 2026-11-21; traced)
+
+From the south end of run 8's thin metal (16775,16450):
+
+- the metal runs on south to a corner (16771,16498) and west along y 16492-16504 to a pad (16578,16496)
+  (`tools/follow.py 16775 16420 S --gap 16`; `tools/tl5_tracks.py h 16498 16592 16762` and
+  `v 16775 16440 16490`: no gap, no hole). South of the corner there is no metal (bare ground from
+  y 16510, `tools/px.py col 16775 16440 16530 5`);
+- a poly hop west (a block x 16480-16545, y 16486-16524, with the two pads at its ends) under the south part
+  of the VCC rail x 16491-16540, with no contact: under the rail the clean shot is uniform salmon (red minus
+  green 48-60) with no hole (`tools/textmap.py 16484 16464 16550 16536 3`; `le_hop.png`, 3.5x, four shots;
+  the dark blobs on the rail there are at different places in the two chips);
+- a pad (16447,16496), and a thin metal from it west 20 px and south on x 16427 to a pad (16426,16864)
+  (`tools/follow.py 16428 16560 N` and `S --gap 16` end on the two pads; `tools/tl5_tracks.py v 16427 16515
+  16848`: nothing);
+- a poly row west from that pad (y 16855-16875) under six vertical metals (x 16386 `cs_d`, 16342, 16298
+  `rw_d`, 16255 `bd2_rs_n`, 16211, 16168 `e_b`), with no contact (each metal bright between two edge bars in
+  both metal shots, clean shot salmon 42-52 with no hole: `cache/scratch/cdp4/candh.py -v v`; `le_b.png`), to
+  x ~16130.
+
+**The row's west end** (`le_box.png`, 5x, four shots): at x 16122-16130 the row meets a framed box
+(16100-16128, 16850-16876; lighter centre, green in the clean shot, no metal over it), which stands on a
+structure x 16075-16100 beside `bd2`'s VSS rail. Read as a buried contact onto the output diffusion of a gate
+there; the gate is not drawn (it is the "NOR under the VSS rail x 16003-16053" of the lead in `bd1`-`bd3`'s
+row, which gave `dbus_le` = NOR(`cs_d`, X) from an Opus trace). The row is drawn to x 16130 (port): `dbus_le`
+is driven from there.
+
+So the net has, in this package, the five-box pass-over of Ambiguity 15 between `dlat`'s piece and this one;
+that ambiguity is unchanged by this run.
+
 ### Corner gate group: `cdp4_rst` = NOR of six select rows (run 2, 2026-11-19; traced)
 
 Region x 7550-7870, y 13640-14055, left of row D. One gate, seven transistors:
@@ -772,7 +808,7 @@ islands are closed curves inside it, so they are the other class.
 | `cdp4_bus_s0`..`s7` | poly | x 7600, y 12180, 12137, 12093, 12052, 12008, 11964, 11922, 11877 | unknown | per-slice line between row R1 and the left |
 | `cdp4_bus_s0`..`s7` | poly | x 7600, y 13333, 13376, 13420, 13463, 13505, 13548, 13590, 13633 | from outside | data into the row C latch |
 | `d5_out_n`..`d1_out_n` | poly | onto `dbus`'s rows at x 16822, 16870, 16912, 16957, 16957 (y 15824, 15954, 16085, 16215, 16345) | driven inside | the outputs of the data output inverters (run 8) |
-| `dbus_le` | metal | x 16775, y 15930 (onto `dlat`'s end) and y 16450 (drawn end; goes on south) | from outside (believed from the south) | the data input latches' enable, passing through the units (run 8; uncertain over four boxes) |
+| `dbus_le` | metal, poly | x 16775, y 15930 (onto `dlat`'s end); the poly row's west end (16130, 16855-16875), on a framed box of an undrawn gate (runs 8, 13) | from that gate (read, not drawn) | the data input latches' enable, passing through the units (run 8; uncertain over four boxes) |
 | `cdp4_w10808` | poly | (10980, 3624-3646) (the row east of T1's top pad) and (10694-10716, 15726-15748) (the corner of the row from its bottom pad, at the VCC rail's west edge: beyond, an undrawn unit of `bc2` that drives it) | driven from `bc2`'s unit (read, not drawn) | the first through line east of the ninth VSS rail (run 12) |
 | `rst_lat` | poly | (10980, 3580-3600) (the row east of T2's top pad) and (10782-10797, 17700) (the column south of the row's west end) | from `trunks`' inverter | the second through line (run 12) |
 | `vcc`, `vss` | metal | x 16515 and x 16689 at y 15780 (onto `dlat`'s rails); `vcc` drawn to y 16440 (goes on to about y 16478), `vss` ends at y 16446 | - | the units' rails |
@@ -943,8 +979,9 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
   x 16762-16780 that these notes call `dbus_le` is **not one metal** south of `dlat`'s end: no metal in
   either chip for 20-60 px at every unit (y 15937-15990, 16067-16124, 16197-16255, 16323-16383,
   `tools/tl5_tracks.py v 16771 15840 16400`): to be read with the units.
-- From run 8: `dbus_le`'s thin metal south of y 16450 (a 15 px dark bar at y 16456-16471, then on to about
-  y 16505; PR #17: west at y 16498); the VCC rail south of y 16440 (to about y 16478: whether it meets the
+- From run 13: the gate at (16000-16130, 16770-16960) under `bd2`'s VSS rail whose output box the row of
+  `dbus_le` ends on (`bd2`'s region).
+- From run 8: the VCC rail south of y 16440 (to about y 16478: whether it meets the
   horizontal metal y 16493-16508 below it is not read; 12 px of dark between them at x 16515); what lies
   west of the VCC rail (x < 16490) beside the units.
 - From run 11: the third line beside bits 6 and 7 (a pad (17065,17945), a thin metal east along y 17950 to a
