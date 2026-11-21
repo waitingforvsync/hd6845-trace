@@ -585,7 +585,7 @@ From the port of run 9 at (17115,18078):
 - a thin metal north on x 17602 from that pad to a pad (17599,17341) (`tools/follow.py 17605 17900 N
   --gap 16` ends there; `tools/tl5_tracks.py v 17602 17360 18060`: two edge bars of 10 px, no hole): the
   pad `dbus`'s notes give for `d6_out_n` ("west to a pad (17600,17340), then south by metal");
-- a poly row east from that pad (y 17328-17350) under a thin metal (x ~17646, `d_hiz`'s) and the rail
+- a poly row east from that pad (y 17332-17353) under a thin metal (x ~17646, `d_hiz`'s) and the rail
   x 17690-17760 (`tools/railprof.py 17690 17760 17290 17380`: poly over field) to x 17825, where it is one
   poly with the west end of strip 4 of D6's pad cell (`dpad`'s `{}_out_n`, `P 17802,17313:...`): the outline
   steps up 17 px at x 17800 on its top edge and at x 17825 on its bottom edge, orange without a break in
@@ -1130,6 +1130,37 @@ green under the VCC rail south of the VCC box (x 15840-15873, y 17500-17622; `to
 field (the box's bottom edge at y 17488 is a clear line in both metal shots).
 
 Round 8: no findings that change a connection.
+
+### Run 10 (the bit 6 line into D6's pad cell)
+
+Round 9 (full review, 2026-11-21 16:33 -0600; a fresh Fable reviewer, images in `cache/scratch/cdp4/review-9/`, 10;
+commit before the round e390807). Piece: one wire from (17105,18078) to (17825,17342) (three pads, a poly
+hop, the metal north on x 17602, the poly row into D6's pad cell) and the join with `dpad`'s `d6_out_n`.
+Told to suspect: the junction with the pad cell's strip (one poly, a gap, or another strip); a contact from
+`d_hiz`'s metal or the rail onto the row, a step, a transistor under the rail; the metal on x 17602 (two
+metals end to end, a tap, an end that runs on); the hop; the pad (17427,18079); a confusion among the three
+parallel lines.
+
+It checked: the junction at 6.5x in four shots, by columns at x 17806 and x 17814 (unbroken orange from
+y 17318 to y 17352 in both metal shots and the chip-2 stripped shot, no edge line between row and block) and
+rows y 17341 and y 17346 (continuous from x 17780 to x 17822); that the block is `dpad`'s strip 4 and no
+other strip; the row (orange in the open stretches, uniform under `d_hiz`'s metal and the rail, no hole,
+pad or widening, no edge line across it under the rail); the metal on x 17602 by
+`tools/tl5_tracks.py v 17602 17290 18130` (one metal from y 17365 to y 18059, two 10 px bars at
+y 17479-17510 that are the edges of a poly row beneath, nothing north of the north pad or south of the
+south pad, no side arm); the hop (straight, the same row at both ends, field in the gap at x 17536); the
+y 18078 metal from x 17105 to x 17410 and the pad (17427,18079); the three parallel metals separate and
+straight, pad to pad; the extraction (`d6_out_n` = NOT `cdp3_n_c1`, `d6_pu` = NOR(`d6_out_n`, `d_hiz`), no
+transistor on the new wire) and `tools/unsure.py`.
+
+No finding (one wording correction to these notes: the north row is y 17332-17353, as drawn).
+
+Not checked fully by it: in chip 2's metal shot the north pad (17599,17341) is dark with a dim centre, so
+its contact rests on chip 1's metal shot, the clean shot's hole and the pitted box in the chip-2 stripped
+shot; under the middle of the rail (x 17715-17745) the clean shot's field is green, not pink (read as
+field: the row's colour is uniform across it and no edge crosses the row).
+
+Round 9: no findings.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
