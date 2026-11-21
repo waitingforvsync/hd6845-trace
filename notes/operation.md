@@ -196,9 +196,9 @@ run on south under a bus of metals and east to one gate in the bottom-centre log
 pen strobe passed only while RES is high**. So RES has no further use of its own: with LPSTB low it
 resets, with LPSTB high it forces the carry, and while low it blocks the light pen strobe. `bl0_w17210`'s
 metal has two loads (`bl0` run 3; firm): an inverter, `bl0_w17337` = NOT `bl0_w17210`, and the two units below it, a cross-coupled pair (run 4; firm):
-`bl0_w17440` = NOT(`bl0_w17210` OR `bl0_w17610`), `bl0_w17610` = NOT(`bl0_w17440` OR `busl_x6906` OR
+`bl0_w17440` = NOT(`bl0_w17210` OR `bl0_w17610`), `bl0_w17610` = NOT(`bl0_w17440` OR `rst` OR
 (`bl0_w17337` AND `bl0_w17687`)). **`bl0_w17610` is a flag set by the gated light pen strobe**; it holds
-after the strobe ends and is cleared by `busl_x6906`, or by `bl0_w17687` once the strobe is low. The first is a
+after the strobe ends and is cleared by `rst`, or by `bl0_w17687` once the strobe is low. The first is a
 track of the left bus field (run 5: drawn from the field's foot to the gate), and **it is `rst` itself, the
 output of the reset NOR** (`notes/blocks/busl.md`, piece `xn`, 2026-11-21; firm, no uncertain item:
 `lc1`'s poly row of `rst` on east to an end pad (7076,7388), a metal south, a poly hop between pads

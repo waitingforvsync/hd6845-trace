@@ -127,9 +127,9 @@ Run 7 (richtw1's session, Claude Fable 5.2; 2026-11-19 22:30 to 22:56 +0100). Th
   the renames are the coordinator's.
 - **Two through lines** (pieces `x68`, `x69`): the tracks next east, on either side of `trunks`' line,
   cross the whole region with one step each and no pad or contact in it: `busl_x6820` (x 6820 north
-  of its arm y 13290, x 6754 south) and `busl_x6906` (x 6906 north of its arm y 13376, x 6841 south).
+  of its arm y 13290, x 6754 south) and `rst` (x 6906 north of its arm y 13376, x 6841 south).
   Neither end is in the region (follower: `busl_x6820` from (6817,9988) to (6754,16220);
-  `busl_x6906` from (7078,8778) to (6839,16219)). `busl_x6906`'s arm lies for 65 px on the poly row
+  `rst` from (7078,8778) to (6839,16219)). `rst`'s arm lies for 65 px on the poly row
   y 13375 (`cdp4_bus_s1`'s, piece `ch1`): no contact (below).
 
 Run 8 (richtw1's session, Claude Fable 5.2; 2026-11-20 13:42 to 13:51 +0100). Two pieces, `r12` and
@@ -187,7 +187,7 @@ wiring only, no uncertain items: everything that arrives from `lc3` at y 10400 w
 
 Run 10 (richtw1's session, Claude Fable 5.2; 2026-11-20 15:33 to 15:45 +0100). Two pieces, `fb` and
 `fa`, wiring only, no uncertain items: the two foot rows of item (7) of the Not done list and their
-tracks, the next two Ls of the nest east of `busl_x6906`'s.
+tracks, the next two Ls of the nest east of `rst`'s.
 
 - **The foot rows y 14870 and y 14827 each lead 7,700 px north to a poly row at the top of the
   northern part** (pieces `fb`, `fa`). Each net is one wire with no tap between its ends: a poly row
@@ -296,7 +296,7 @@ line of piece `lc9`'s staircase bundle inside `tla`'s `rcs_e4`**.
 
 Run 14 (the loop's tracer, Claude Fable 5.2; 2026-11-20 23:50 to 2026-11-21 00:14 +0100). Piece `a6`, wiring
 only, no uncertain item: the six tracks that `bl0` (run 12) found crossing y 15000 at x 5496-5714; and a
-second piece, `xn`, wiring only, no uncertain item: the north end of the through line `busl_x6906`.
+second piece, `xn`, wiring only, no uncertain item: the north end of the through line `rst`.
 
 - **The six lines compared with R14 reach the left array's six lower rows** (piece `a6`). Each of the
   bottom-centre logic's six poly lines (`bc1`'s lines 1-6, y 14089 .. 14304; piece `d6`: they are
@@ -305,9 +305,9 @@ second piece, `xn`, wiring only, no uncertain item: the north end of the through
   west end pad (x 5757 for lines 1, 3, 5; x 5800 for lines 2, 4, 6). The pad's thin metal is one of six
   nested Ls: west (lines 1-4), south on x 5584 .. 5801, 87 px west along y 14441 .. 14656 and south on
   x 5497 .. 5714 to the region's edge at y 15000, where `bl0`'s piece `t6` draws it on to the pad of one
-  poly row of the left array. The order is kept: **`cdp3_g_c2` = `bl0_w18081`** (the array's lowest row,
-  y 18081), `cdp3_g_c3` = `bl0_w17603`, `cdp3_g_c4` = `bl0_w17126`, `cdp3_g_c5` = `bl0_w16649`,
-  `cdp3_g_c6` = `bl0_w15999`, **`cdp3_g_c7` = `bl0_w15522`**. No pad, contact or tap between a row's two
+  poly row of the left array. The order is kept: **`cdp3_g_c2` = the wire `bl0` called w18081** (the array's lowest row,
+  y 18081), `cdp3_g_c3` = the wire `bl0` called w17603, `cdp3_g_c4` = the wire `bl0` called w17126, `cdp3_g_c5` = the wire `bl0` called w16649,
+  `cdp3_g_c6` = the wire `bl0` called w15999, **`cdp3_g_c7` = the wire `bl0` called w15522**. No pad, contact or tap between a row's two
   ends or on its L. The names are gathered by `@alias` (`cdp3_g_c#` canonical); the renames are the
   coordinator's.
 - With pieces `ch1` and `d6` this makes **fourteen lines, each on one poly row of the left array**:
@@ -316,7 +316,7 @@ second piece, `xn`, wiring only, no uncertain item: the north end of the through
   `g_eq_r14`) and latches in `cdp4`'s rows C and D. Firm for the wires; which end drives is not traced
   (no transistor in the field; believed the array's rows: the memory address).
 
-- **The light pen flag is cleared by `rst` itself** (piece `xn`). The through line `busl_x6906` (piece
+- **The light pen flag is cleared by `rst` itself** (piece `xn`). The through line `rst` (piece
   `x69`; `bl0` run 5 drew its south end to the gate of the pull-down that clears the flag `bl0_w17610`) is,
   north of y 10400, the same build as pieces `fb` .. `fe`: the track x 6906, a diagonal to a pad
   (7077,8755), a poly column north under the two staircase metals (no contact) to a pad (7077,8495), a
@@ -325,7 +325,7 @@ second piece, `xn`, wiring only, no uncertain item: the north end of the through
   the row of `rst`, the output of `lc1`'s gate 3 (`rst` = NOR(`lpstb_b`, `res_b`), firm there). With it
   the extraction gives, firm (`tools/unsure.py --equations`): **`bl0_w17610` = NOT((`bl0_w17337` AND
   `bl0_w17687`) OR `bl0_w17440` OR `rst`)**. No pad, contact or tap in the 9,300 px between `lc1`'s port
-  and y 15000. The two names are gathered by `@alias rst busl_x6906`; the rename is the coordinator's.
+  and y 15000. The two names are gathered by an `@alias`; the rename is the coordinator's.
 
 Run 15 (the loop's tracer, Claude Fable 5.2; 2026-11-21 00:39 +0100 on). First the head of the Next list,
 "the bands y 11850-12150 and below (the undrawn rows)": **there is none; the main part is drawn but for
@@ -447,7 +447,7 @@ Full extraction with run 15, piece `xm`: 2,454 nets (one fewer than main's 2,455
 fourteen warnings of run 14.
 
 Full extraction with run 14: 2,455 nets (seven fewer than main's 2,462: the six joins of piece `a6` and
-`busl_x6906` with `rst`), 4,594 transistors, 0 errors, 0 warnings; none of the seven nets is in
+the wire `busl` called x6906 with `rst`), 4,594 transistors, 0 errors, 0 warnings; none of the seven nets is in
 `tools/unsure.py`'s list; 914 of 1,354 equations firm, as on main (the flag's equation was firm with the
 placeholder name and is firm with `rst`). The package by itself: 67 nets,
 0 errors, and fourteen warnings: the two of run 9 and twelve that `cdp3_g_c2` .. `c7` are each on unconnected
@@ -879,7 +879,7 @@ segments, kept in `cache/scratch/busl/n2_scan.txt`; views `n2_step.png` (3.4x me
 |---|---|---|---|---|---|---|
 | `n2` | `bd1_n2` | (6711,15000), onto `eof`'s `M 6711,15000 ..` (piece `n2w`) | 6711 | 13247 | 6776 | (6776,10400), onto `eof`'s `M .. 6775,10400` (piece `n2n`) |
 | `x68` | `busl_x6820` | (6754,15000), on south | 6754 | 13290 | 6820 | (6820,10400), on north |
-| `x69` | `busl_x6906` | (6841,15000), on south | 6841 | 13376 | 6906 | (6906,10400), on north |
+| `x69` | `rst` | (6841,15000), on south | 6841 | 13376 | 6906 | (6906,10400), on north |
 
 All three are 14-16 px wide throughout (`sel_cut.py`). The nest, from the west: `rsel17_buf`'s L (arm
 y 13160), `rsel16_buf`'s (13208), `n2`'s, `x68`'s, `trunks`' line (x 6862 north, arm y 13332, x 6798
@@ -1427,12 +1427,12 @@ below (the follower is not the evidence for any of it).
 
 | line | net | `bc1`'s poly line | row here (centre y; x 5757/5800 to 7010) | west end pad | upper arm (y) | upper track (x) | lower arm (y) | lower track (x), out at y 15000 | `bl0`'s name south of y 15000 (array row) |
 |---|---|---|---|---|---|---|---|---|---|
-| 1 | `cdp3_g_c2` | y 14089 | 14091 | (5757,14092) | 14094 | 5584 | 14441 | 5497 | `bl0_w18081` (y 18081) |
-| 2 | `cdp3_g_c3` | y 14132 | 14134 | (5800,14136) | 14137 | 5627 | 14484 | 5540 | `bl0_w17603` (y 17603) |
-| 3 | `cdp3_g_c4` | y 14175 | 14178 | (5756,14178) | 14180 | 5671 | 14526 | 5584 | `bl0_w17126` (y 17126) |
-| 4 | `cdp3_g_c5` | y 14218 | 14220 | (5800,14223) | 14224 | 5714 | 14572 | 5627 | `bl0_w16649` (y 16649) |
-| 5 | `cdp3_g_c6` | y 14261 | 14264 | (5757,14265) | none (the track ends on the pad from the south) | 5757 | 14613 | 5671 | `bl0_w15999` (y 15999) |
-| 6 | `cdp3_g_c7` | y 14304 | 14308 | (5800,14308) | none | 5801 | 14656 | 5714 | `bl0_w15522` (y 15522) |
+| 1 | `cdp3_g_c2` | y 14089 | 14091 | (5757,14092) | 14094 | 5584 | 14441 | 5497 | the wire `bl0` called w18081 (y 18081) |
+| 2 | `cdp3_g_c3` | y 14132 | 14134 | (5800,14136) | 14137 | 5627 | 14484 | 5540 | the wire `bl0` called w17603 (y 17603) |
+| 3 | `cdp3_g_c4` | y 14175 | 14178 | (5756,14178) | 14180 | 5671 | 14526 | 5584 | the wire `bl0` called w17126 (y 17126) |
+| 4 | `cdp3_g_c5` | y 14218 | 14220 | (5800,14223) | 14224 | 5714 | 14572 | 5627 | the wire `bl0` called w16649 (y 16649) |
+| 5 | `cdp3_g_c6` | y 14261 | 14264 | (5757,14265) | none (the track ends on the pad from the south) | 5757 | 14613 | 5671 | the wire `bl0` called w15999 (y 15999) |
+| 6 | `cdp3_g_c7` | y 14304 | 14308 | (5800,14308) | none | 5801 | 14656 | 5714 | the wire `bl0` called w15522 (y 15522) |
 
 - **The six Ls** (`j1_west.png`, 1.6x, metal and clean shot; overlay `j3_o_west.png`, both panels;
   `j4_o_south.png`, 1.9x, the tracks through y 15000 with `bl0`'s trace): six plain nested Ls of thin
@@ -1508,7 +1508,7 @@ below (the follower is not the evidence for any of it).
   in x at most); `j4_o_south.png` shows the six metals straight and unbroken across y 15000.
 - Overlays: `j3_o_west.png`, `j4_o_south.png`, `j5_o_pads.png`, `j6_o_rows_w.png`, `j6_o_rows_e.png`.
 
-### Piece `xn` (run 14): the north end of `busl_x6906`, which is `rst`
+### Piece `xn` (run 14): the north end of the wire `busl` called x6906, which is `rst`
 
 Survey: `cache/scratch/busl/survey.md`, "Run 14", second part; the method is that of pieces `fb` .. `gd`.
 `tools/follow.py 6906 10420 N --gap 16` ends at (7078,8778) and `7078 8465 N` at (7075,7383); every pad,
@@ -1956,7 +1956,7 @@ marked, not firm, for reasons outside this package (the latch's load tie in `bd1
 at `tl4`'s inverter).
 
 Pieces `x68`, `x69`. Traced: two through lines with no connection in the region, named for their
-place (`busl_x6820`, `busl_x6906`). Since runs 14 and 15 both north ends are read: `busl_x6906` is `rst`
+place (`busl_x6820`, `rst`). Since runs 14 and 15 both north ends are read: the wire `busl` called x6906 is `rst`
 (piece `xn`) and `busl_x6820` is `lc3_m5756` (piece `xm`: wiring, no uncertain item), the thin metal that
 comes down from `lc1` through `lc2`'s latch B column and `lc3` with no contact drawn on it; neither end of
 that wire is identified.
@@ -2025,8 +2025,8 @@ logic**, not read. With it the fourteen lines of the staircase bundle are all dr
 
 Piece `a6`. Traced (no uncertain item on any of the six nets; `tools/unsure.py` lists none of them): each
 of `cdp3_g_c2` .. `cdp3_g_c7` is one net with one of `bl0`'s six tracks, and so with one poly row of the
-left array's six lower rows: `cdp3_g_c2` on the row y 18081 (`bl0_w18081`), `c3` on 17603, `c4` on 17126,
-`c5` on 16649, `c6` on 15999, `cdp3_g_c7` on 15522 (`bl0_w15522`). In the full extraction each of the six
+left array's six lower rows: `cdp3_g_c2` on the row y 18081 (the wire `bl0` called w18081), `c3` on 17603, `c4` on 17126,
+`c5` on 16649, `c6` on 15999, `cdp3_g_c7` on 15522 (the wire `bl0` called w15522). In the full extraction each of the six
 nets now has: the gates of two transistors of `cdp3`'s row A comparator (`cdp4_xr_c#_nor` =
 NOR(`cdp3_g_c#`, `cdp4_la_c#_q`) and `cdp4_xr_c#_ne`: the compare with R14), for c2 and c3 the data end
 of row D's pass transistor (gate `cdp4_ld6`), and the row into the left array at x 4780. None of the drawn
@@ -2039,7 +2039,7 @@ address**, compared with R14 and latched in row D; with piece `ch1`'s eight line
 south. This replaces piece `d6`'s belief above that the row A cells drive line g. No transistor.
 
 Piece `xn`. Traced (no uncertain item on the wire; `tools/unsure.py` does not list the net): the through
-line `busl_x6906` is `rst` = NOR(`lpstb_b`, `res_b`) (`lc1`'s gate 3, firm there), one wire from
+line the wire `busl` called x6906 is `rst` = NOR(`lpstb_b`, `res_b`) (`lc1`'s gate 3, firm there), one wire from
 `lc1`'s port (6450,7388) to `bl0`'s port (6841,15000). With `bl0`'s gate (its run 5) the extraction
 gives, firm: **`bl0_w17610` = NOT((`bl0_w17337` AND `bl0_w17687`) OR `bl0_w17440` OR `rst`)**: the light
 pen flag is held clear while the RES and LPSTB pins are both low. It is `rst` itself that goes there, not
@@ -2076,8 +2076,8 @@ is a second load of gate 3 besides the inverter that makes `rst_n`. No transisto
 | `bd1_n2` | M | (6769-6783,10400), 14 px wide | out | onto `eof`'s metal north (piece `n2n`, `M .. 6775,10400`, then labelled as an open join): to `tl5`'s bus line x 5412 and the inverter that makes `rcs_e3` |
 | `lc3_m5756` (the track's name was `busl_x6820`) | P | (6450, 9979-10001) | not known | onto `lc3`'s crossing row 10 at its port (`P 5630,9979:6450,10001`, from the END pad (5646,9992) of its metal `lc3_m5756`); piece `xm`, run 15. The track crosses y 10400 at x 6819 inside the wire |
 | `busl_x6820` (= `lc3_m5756`) | M | (6747-6761,15000) | not known | onto `bl0`'s metal, south to its pad (6754,16217) and on (`bl0`'s port (6754,17000)) |
-| `rst` (the track's name was `busl_x6906`) | P | (6450, 7377-7399) | in (driven by `lc1`'s gate 3) | onto `lc1`'s row of `rst` at its port (`P 5096,7388 x6450 w=18`); piece `xn`, run 14. The track crosses y 10400 at x 6906 inside the wire |
-| `busl_x6906` (= `rst`) | M | (6834-6848,15000) | out | onto `bl0`'s metal (its run 5), south to the gate of the pull-down that clears the light pen flag `bl0_w17610` |
+| `rst` (the wire `busl` called x6906) | P | (6450, 7377-7399) | in (driven by `lc1`'s gate 3) | onto `lc1`'s row of `rst` at its port (`P 5096,7388 x6450 w=18`); piece `xn`, run 14. The track crosses y 10400 at x 6906 inside the wire |
+| the wire `busl` called x6906 (= `rst`) | M | (6834-6848,15000) | out | onto `bl0`'s metal (its run 5), south to the gate of the pull-down that clears the light pen flag `bl0_w17610` |
 | `rsel12_buf`, `rsel13_buf` | M | (6445-6459,15000), (6487-6501,15000), 14 px wide | in (driven by `sel`'s buffers) | onto `regs`' metals from the bottom bus (`M 6452,16168 y14990`, `M 6494,16210 y14990`) |
 | `rsel12_buf`, `rsel13_buf` | M | (6683-6697,10400), (6726-6740,10400), 14 px wide | out | onto `regs`' metals north to the pads of `rsel12_buf` (row y 10055) and `rsel13_buf` (row y 10316) |
 | `rsel13_buf` | P | (7550, 13734-13754) | out | into the block of gate row 2 of `cdp4`'s NOR `cdp4_rst` (`cdp4`'s name there: `rsel13_buf`) |
@@ -2102,7 +2102,7 @@ is a second load of gate 3 besides the inverter that makes `rst_n`. No transisto
 | `busl_x6559`, `busl_x6603` | P | (7550, 14426-14448), (7550, 14382-14404) | not known | the rows y 14437, y 14393 on east toward `bc1`'s bus pads (seen as poly to x 7600; not drawn) |
 | `tl5_w2722` | P | (5356-5378, 6350) | in (driven in `tl5`) | onto `tl5`'s poly column from T3's south pad (its port `tl5_w2722` there) |
 | `tl5_w2722` | P | (7550, 14339-14361) | out | the row y 14350 on east toward `bc1`'s bus pads (seen as poly to x 7630; not drawn) |
-| `cdp3_g_c2` .. `cdp3_g_c7` (`bl0`'s names: `bl0_w18081`, `bl0_w17603`, `bl0_w17126`, `bl0_w16649`, `bl0_w15999`, `bl0_w15522`) | M | y 15000, x 5497, 5540, 5584, 5627, 5671, 5714 (14 px wide) | not known (believed in: driven by the left array's rows) | onto `bl0`'s six tracks (piece `t6`, `M 5496,15000 ..` and the five beside it), each on south to the pad of one poly row of the left array (y 18081, 17603, 17126, 16649, 15999, 15522) |
+| `cdp3_g_c2` .. `cdp3_g_c7` (`bl0`'s names: `cdp3_g_c2`, `cdp3_g_c3`, `cdp3_g_c4`, `cdp3_g_c5`, `cdp3_g_c6`, `cdp3_g_c7`) | M | y 15000, x 5497, 5540, 5584, 5627, 5671, 5714 (14 px wide) | not known (believed in: driven by the left array's rows) | onto `bl0`'s six tracks (piece `t6`, `M 5496,15000 ..` and the five beside it), each on south to the pad of one poly row of the left array (y 18081, 17603, 17126, 16649, 15999, 15522) |
 | `cdp3_g_c2` .. `cdp3_g_c7` | P | x 7000, y 14091, 14134, 14178, 14220, 14264, 14308 (22 px wide) | as above | each row runs on east as `bc1`'s poly line 1 .. 6 (drawn there from x 7000; this piece overlaps it to x 7010) to the contact where piece `d6`'s track lands |
 | `vcc` | M | (4926-4980, 10590), (5340-5392, 10590); (4953-5018, 15000) | supply | piece `va`: onto the feet of `lc3`'s middle rail and wide VCC metal (its ports at y 10600); the wide metal on south into `bl0`'s ground |
 | `vss` | M | (4752-4802, 10590); (4645-4698, 10700) | supply | piece `vc`: onto the foot of `lc3`'s west rail; on south on the left array's side (`larr`) |
@@ -3124,7 +3124,7 @@ detail; where one names something of this list as undrawn, this list is the curr
   (7836,14872), (7794,14826) and the metals from those pads (`bc1` (continue), with piece `lc9`'s seven
   rows). West of x 7060 the rows y 7214 and y 7171 are done (run 15, pieces `cb`, `ca`: the wires are
   `tl6_p6187` and `tc2_m6404`).
-- The other lines of the diagonal bundle north of y 10400: `busl_x6906` is piece `xn` (run 14: it is `rst`);
+- The other lines of the diagonal bundle north of y 10400: the wire `busl` called x6906 is piece `xn` (run 14: it is `rst`);
   the lines x 7035, x 7078 and x 7121 are pieces `fc`, `fd`, `fe` (run 11); `busl_x6820`'s north end is
   piece `xm` (run 15: it is `lc3_m5756`) and `trunks`' line has no tap between y 8995 and y 15000 (run 15).
   Nothing of the bundle is left.
@@ -3167,7 +3167,7 @@ detail; where one names something of this list as undrawn, this list is the curr
 - The ends of the through line `busl_x6820` = `lc3_m5756` (pieces `x68`, `xm`): north, `lc2`'s metal x 5756
   at y 8067, on into `lc1` (its port there, not followed); south, `bl0`'s thin metal from the pad
   (6754,16217) on (its port (6754,17000); follower: a corner (6767,18040), east past (7417,18035)).
-  (`busl_x6906` is done: piece `xn`, run 14, north; `bl0` run 5, south. The tracks east of them, x 6949
+  (`rst` is done: piece `xn`, run 14, north; `bl0` run 5, south. The tracks east of them, x 6949
   and x 6992, are pieces `fb` and `fa`, run 10.)
 - Seen beside piece `xn` and drawn by no package (the northern part): the track x 7036 over the row y 7388
   (the track `eof`'s notes have from the corner (7035,6957)); two rows under the metal x 7078 at y about
@@ -3216,14 +3216,14 @@ detail; where one names something of this list as undrawn, this list is the curr
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20, third batch)
 
-- Ports and "ends not read" at y 15000: all of these are read and drawn by `bl0` (2026-11-20). `busl_x6906` (6841,15000) ("follower ends (6839,16219), not read"): piece `w5`, to the gate of a pull-down on the light pen flag `bl0_w17610` at (7243-7278, 17549-17572): it clears the flag, so its north end (follower to (7078,8778)) is where to find what clears it (believed a read of R16/R17). `busl_x6820` (6754,15000), `rcs_mv` (6971,15000), `lc3_e9577` (5322,15000): piece `w9`; the candidate (6971,15098) on `rcs_mv` is `rst_n`'s poly row, a plain crossing; `rcs_mv` has a real pad at (6966,15305) with a poly row east. `lc3_e9621`..`lc3_e9793`: piece `w10` (each onto a contact on a diffusion box and west as a diffusion wire into the left array). `cdp4_bus_s0` (5451,15000) and `lc2_w8450` (4822,15000) ("follower ends (4823,16690), not read"): piece `w11`.
+- Ports and "ends not read" at y 15000: all of these are read and drawn by `bl0` (2026-11-20). `rst` (6841,15000) ("follower ends (6839,16219), not read"): piece `w5`, to the gate of a pull-down on the light pen flag `bl0_w17610` at (7243-7278, 17549-17572): it clears the flag, so its north end (follower to (7078,8778)) is where to find what clears it (believed a read of R16/R17). `busl_x6820` (6754,15000), `rcs_mv` (6971,15000), `lc3_e9577` (5322,15000): piece `w9`; the candidate (6971,15098) on `rcs_mv` is `rst_n`'s poly row, a plain crossing; `rcs_mv` has a real pad at (6966,15305) with a poly row east. `lc3_e9621`..`lc3_e9793`: piece `w10` (each onto a contact on a diffusion box and west as a diffusion wire into the left array). `cdp4_bus_s0` (5451,15000) and `lc2_w8450` (4822,15000) ("follower ends (4823,16690), not read"): piece `w11`.
 - Piece `sr` (the track x 7209, out at (7187,15000), "follower ends (7100,16279), not read"): read and drawn by `tl4` (runs 11-12) through the bottom-centre logic onto `eof`'s row of the clock at (8396,17907): the net is the buffered clock, `ck_out`.
 - "the net of the pads (7317,8623) and (7405,8777) with the staircase metal y 8757 and a box (7490-7547, 8753-8793)" (run 11, seen and drawn by no package): `cdp3` draws it (pieces `u1`, `ckb`; pads (7313,8625), (7400,8778)): it is the output of the clock inverter west of `cdp3`'s gate column, `lc2_w8646` = NOT `ck_out`, and its staircase line (y 8301-8757, x 6450-7400, nine corners) runs to `lc2`'s metal B at (6450,8301), the enable of latch C.
 - Ambiguity 18 and the 8 px left between the row y 8863 and `cdp3`'s `?P`: `trace/cdp3.txt` is corrected (coordinator, 2026-11-20): `cdp3_k_a`'s metal starts at its contact (7833,9165), and `cdp3`'s `?P` (lengthened to x 7592) with the pad (7834,8862) is on `busl_x7122`'s net. The 8 px are closed from `cdp3`'s side; `ports.d/busl.txt`'s line for (7592,8852-8874) can say so. The register entries are AMB-045 (Ambiguity 16) and AMB-046 (Ambiguity 17).
 
 ## Corrections (coordinator, from the handoff of `bl0` run 12, 2026-11-20)
 
-- Ports at y 15000: six tracks at x 5496, 5540, 5584, 5627, 5671, 5714 (east of `cdp4_bus_s0`'s at x 5451) are not in this block's ports or trace. `bl0` (run 12, piece `t6`) draws them from y 15000 south: `bl0_w18081`, `bl0_w17603`, `bl0_w17126`, `bl0_w16649`, `bl0_w15999`, `bl0_w15522`, each to a poly row into one of the left array's six lower rows. North of y 15000 they are undrawn: the follower runs each through one more staircase to an end at (5760,14092), (5803,14135), (5761,14177), (5804,14223), (5756,14261), (5799,14304), the y of `bc1`'s six poly lines (believed `cdp3_g_c7`..`cdp3_g_c2`; not read, the follower is not evidence for an end).
+- Ports at y 15000: six tracks at x 5496, 5540, 5584, 5627, 5671, 5714 (east of `cdp4_bus_s0`'s at x 5451) are not in this block's ports or trace. `bl0` (run 12, piece `t6`) draws them from y 15000 south: `cdp3_g_c2`, `cdp3_g_c3`, `cdp3_g_c4`, `cdp3_g_c5`, `cdp3_g_c6`, `cdp3_g_c7`, each to a poly row into one of the left array's six lower rows. North of y 15000 they are undrawn: the follower runs each through one more staircase to an end at (5760,14092), (5803,14135), (5761,14177), (5804,14223), (5756,14261), (5799,14304), the y of `bc1`'s six poly lines (believed `cdp3_g_c7`..`cdp3_g_c2`; not read, the follower is not evidence for an end).
 
 ## Corrections (coordinator, from the handoffs of `eof` runs 28-35, 2026-11-21)
 

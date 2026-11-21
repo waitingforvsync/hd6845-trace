@@ -17,7 +17,7 @@ vss          M  2605-2655,14090   -    the left edge column's vss rail, on north
 vss          M  2605-2655,14770   -    the same, on south
 vcc          M  2783-2832,14090   -    the left edge column's vcc rail, on north
 vcc          M  2783-2832,14770   -    the same, on south
-busl_x6906   M  6834-6848,15000   in   busl's track x 6841, on north; here south to the gate that clears the pair bl0_w17610
+rst   M  6834-6848,15000   in   busl's track x 6841, on north; here south to the gate that clears the pair bl0_w17610
 bl0_w17687   P  7790,15682-15702  in   poly row west of the pad (7925,15696), into bc1's gate group at about (7745,15690): what clears the light pen flag once the strobe is low
 bl0_w17610   P  7760,17378-17398  out  poly row west of the pad (7882,17389), into the gate column east of the supply rail x 7470-7520 (bc3's region): the light pen flag
 busl_x6820   M  6747-6761,15000   in   busl's track x 6754, on north
@@ -44,17 +44,17 @@ lc2_w8450    P  4930,16703-16723  out  poly row east of the pad (4823,16713), in
 vss          M  7292-7342,16925   -    the gate column's rail x 7317, on north
 vcc          M  7470-7520,17020   -    bc3's rail x 7495, on north
 vcc          M  7470-7520,17670   -    the same, on south
-bl0_w18081   M  5489-5503,15000   ?    track on north in the left bus field, drawn by no one (busl's region); follower: one staircase east, to an end at (5760,14092), the y of bc1's poly line of cdp3_g_c2
-bl0_w18081   P  4780,18070-18092  ?    poly row on west into the left array (its lowest row)
-bl0_w17603   M  5533-5547,15000   ?    track on north; follower: to (5803,14135), the y of bc1's line of cdp3_g_c3
-bl0_w17603   P  4780,17593-17614  ?    poly row on west into the left array
-bl0_w17126   M  5577-5591,15000   ?    track on north; follower: to (5761,14177), the y of bc1's line of cdp3_g_c4
-bl0_w17126   P  4780,17116-17137  ?    poly row on west into the left array
-bl0_w16649   M  5620-5634,15000   ?    track on north; follower: to (5804,14223), the y of bc1's line 4
-bl0_w16649   P  4780,16639-16659  ?    poly row on west into the left array
-bl0_w15999   M  5664-5678,15000   ?    track on north; follower: to (5756,14261), the y of bc1's line of cdp3_g_c6
-bl0_w15999   P  4780,15988-16010  ?    poly row on west into the left array
-bl0_w15522   M  5707-5721,15000   ?    track on north; follower: to (5799,14304), the y of bc1's line of cdp3_g_c7
-bl0_w15522   P  4780,15511-15533  ?    poly row on west into the left array
+cdp3_g_c2   M  5489-5503,15000   ?    track on north in the left bus field, drawn by no one (busl's region); follower: one staircase east, to an end at (5760,14092), the y of bc1's poly line of cdp3_g_c2
+cdp3_g_c2   P  4780,18070-18092  ?    poly row on west into the left array (its lowest row)
+cdp3_g_c3   M  5533-5547,15000   ?    track on north; follower: to (5803,14135), the y of bc1's line of cdp3_g_c3
+cdp3_g_c3   P  4780,17593-17614  ?    poly row on west into the left array
+cdp3_g_c4   M  5577-5591,15000   ?    track on north; follower: to (5761,14177), the y of bc1's line of cdp3_g_c4
+cdp3_g_c4   P  4780,17116-17137  ?    poly row on west into the left array
+cdp3_g_c5   M  5620-5634,15000   ?    track on north; follower: to (5804,14223), the y of bc1's line 4
+cdp3_g_c5   P  4780,16639-16659  ?    poly row on west into the left array
+cdp3_g_c6   M  5664-5678,15000   ?    track on north; follower: to (5756,14261), the y of bc1's line of cdp3_g_c6
+cdp3_g_c6   P  4780,15988-16010  ?    poly row on west into the left array
+cdp3_g_c7   M  5707-5721,15000   ?    track on north; follower: to (5799,14304), the y of bc1's line of cdp3_g_c7
+cdp3_g_c7   P  4780,15511-15533  ?    poly row on west into the left array
 bl0_w15566   P  7260,15555-15577  ?    poly row east of the pad (7143,15566), on under bc1's rail x 7292-7342 (bc1's gate group)
 bl0_w15566   P  8360,17811-17831  ?    poly row east of the pad (8272,17821); seen as poly to about x 8690, then a metal along y 17821 to x 8955

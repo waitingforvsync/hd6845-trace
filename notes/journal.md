@@ -2571,7 +2571,7 @@ What they establish (from the tracers' notes; marks as there):
   `eof_w17472`. One term is the second of two latches in series on `ck_out` (marked). What the terms
   mean is not traced.
 - **A light pen flag** (`bl0` runs 3-6; 11 transistors, firm): the strobe gated by RES sets a
-  cross-coupled pair, `bl0_w17610`; it is cleared by `busl_x6906` (a line from north of the left bus
+  cross-coupled pair, `bl0_w17610`; it is cleared by `rst` (a line from north of the left bus
   field) or, with the strobe low, by `bl0_w17687` (from `bc1`'s gate group). Its load is a unit of
   `bc3`'s gate column, undrawn. Believed: it times the latching of R16/R17.
 - **The fourth reset copy crosses the left array** (`bl0` run 7; firm to the pad): `bl0_w15412` runs
@@ -2682,7 +2682,7 @@ What it establishes (from the tracer's notes; marks as there):
 - **Six more lines into the left array's six lower rows** (piece `t6`; wiring, firm): what the master
   list had as "one undrawn metal on `rst_n`'s row" is the first of six thin metals that cross y 15000 at
   x 5496-5714; each steps west and ends on a pad whose poly row runs west into one lower row of the array
-  (`bl0_w15522`, `bl0_w15999`, `bl0_w16649`, `bl0_w17126`, `bl0_w17603`, `bl0_w18081`). **Believed,
+  (`cdp3_g_c7`, `cdp3_g_c6`, `cdp3_g_c5`, `cdp3_g_c4`, `cdp3_g_c3`, `cdp3_g_c2`). **Believed,
   not traced**: they are `cdp3_g_c7`..`cdp3_g_c2`, the six lines compared with R14: the follower runs
   each track north to the y of one of `bc1`'s six poly lines; the stretch (x 5490-7000, y 14080-15000)
   is `busl`'s and undrawn. If so the left array's fourteen rows take `cdp4_bus_s7`..`s0` and
@@ -2759,11 +2759,11 @@ What it establishes (from the tracer's notes; marks as there):
   no uncertain item): each of `bc1`'s six poly lines `cdp3_g_c2`..`c7` runs on west of x 7000 as one
   poly row under about thirty tracks, with no pad or tap, to an end pad, and by one of six nested Ls
   onto one of the six tracks that `bl0` run 12 drew from y 15000 south. What `bl0` believed from the
-  follower is so, in that order: `bl0_w18081` = `cdp3_g_c2` .. `bl0_w15522` = `cdp3_g_c7`. So the
+  follower is so, in that order: the wire `bl0` called w18081 = `cdp3_g_c2` .. the wire `bl0` called w15522 = `cdp3_g_c7`. So the
   left array's fourteen rows, north to south, carry `cdp4_bus_s7`..`s0` and `cdp3_g_c7`..`c2`: the
   fourteen lines that R15 and R14 are compared with. **Believed, not traced**: the array's rows drive
   them (the memory address); no drawn end drives `cdp3_g_c#`.
-- **The light pen flag is cleared by `rst` itself** (piece `xn`; wiring, firm): `busl_x6906`, the
+- **The light pen flag is cleared by `rst` itself** (piece `xn`; wiring, firm): `rst`, the
   flag's clear, is `lc1`'s row of `rst` = NOR(`lpstb_b`, `res_b`), run on east to an end pad
   (7076,7388), south on the metal x 7078, through a poly hop and a diagonal onto the track x 6906. The
   extraction gives, firm: `bl0_w17610` = NOT((`bl0_w17337` AND `bl0_w17687`) OR `bl0_w17440` OR
@@ -2777,8 +2777,8 @@ ring and bright centre in both metal shots, the metal ends on it), and a greenis
 
 Applied: master list rows `busl` (run 14; the two items done, the Next list), `larr` (continue) (the
 six rows' names; the lines' driver to be found in the array), `bc1` (continue), `bl0`, and the
-`rename` row (seven renames wait for the refresh: `bl0_w18081`..`bl0_w15522` onto `cdp3_g_c2`..`c7`,
-`busl_x6906` onto `rst`; aliases in `trace/busl.txt` until then). **Re-read list**: nothing new.
+`rename` row (seven renames wait for the refresh: `bl0`'s w18081..w15522 onto `cdp3_g_c2`..`c7`,
+`busl`'s x6906 onto `rst`; aliases in `trace/busl.txt` until then). **Re-read list**: nothing new.
 **Ambiguities**: none. Corrections sections in the notes of `bl0`, `lc1`, `bc1` and `eof`.
 `notes/operation.md` and the glossary: the tracer's own edits stand (the fourteen lines; the flag's
 clear). Floor plan: no coarse block is replaced; the left bus field's line says twenty-five pieces;
