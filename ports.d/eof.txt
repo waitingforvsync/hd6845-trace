@@ -229,3 +229,6 @@ eof_pdg_s10    P      3991,16272-16291          in   the gate poly of the two pu
 eof_pdg_s11    P      3991,16750-16769          in   the gate poly of the two pull-downs of row s11 of the left array: its row under rail F (vss), west end as drawn; it comes from the west (larr's east cell west of rail F; not followed)
 eof_pdg_s12    P      3991,17227-17246          in   the gate poly of the two pull-downs of row s12 of the left array: its row under rail F (vss), west end as drawn; it comes from the west (larr's east cell west of rail F; not followed)
 eof_pdg_s13    P      3991,17704-17723          in   the gate poly of the two pull-downs of row s13 of the left array: its row under rail F (vss), west end as drawn; it comes from the west (larr's east cell west of rail F; not followed)
+# rail F's top (run 46; found undrawn by review round 54): the vss metal that the rail hangs from runs on beyond the band drawn
+vss            M      3885,10925-10990          -    the wide metal that rail F's band (y 10966-11014) is part of, running on west of ur's vss metal x 3889-3937 (bright in both metal shots at x 3856-3868, y 10958); not followed
+vss            M      3960-3982,10960           -    an arm of the same metal north from the band (bright in both metal shots at y 10940, dark edges at x 3958 and x 3982); not followed

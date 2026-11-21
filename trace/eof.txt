@@ -4232,6 +4232,10 @@ N M 4118,11800 eof_wstrap_{}
 # contacts per row on the wide diffusion. NOT DRAWN: a fifth ring per row at (4010,11872) on a pad
 # under the rail; larr's Y block and everything west of x 4028 under the rail; the gate's row west
 # of x 3990.
+# Review round 54 (geometry only): the arm's and the stub's east edge is x 4101 (drawn 4098 and 4096:
+# salmon in the strap's margin to x 4098-4100, tan from x 4106, rows y 11820 and y 11840), and rail
+# F's band is not the whole of the metal there: it runs on west of x 3885 (a wide metal y 10925-10990)
+# and north as an arm x 3960-3982 from y 10960 (ports; not followed).
 @cell eof_pd tag=s1
 # rail F's wide diffusion with its four contacts; its north-east part beside the bar; D_w; the tab
 D 4002,11690:4052,11850
@@ -4242,7 +4246,7 @@ D 4028,11643:4130,11700
 D 4050,11683:4082,11756
 D 4050,11733:4130,11783
 # the lower active: under the C, the box (N2's tip), the tab, through to N2's body
-D 4050,11752:4102,11850
+D 4050,11752:4104,11850
 # the gate poly G: row under rail F, stem, bar, PA, the C (top bar, west strip, arm), the stub
 P 3990,11588:4072,11607
 P 4050,11588:4072,11660
@@ -4250,8 +4254,8 @@ P 4050,11654:4124,11683
 P 4094,11654:4124,11779
 P 4050,11755:4098,11782
 P 4050,11755:4072,11830
-P 4050,11805:4098,11830
-P 4078,11805:4096,11866
+P 4050,11805:4101,11830
+P 4078,11805:4101,11866
 N P 4060,11620 eof_pdg_{}
 @end
 @inst eof_pd 0,-477 tag=s0
