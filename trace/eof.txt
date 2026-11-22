@@ -4597,3 +4597,21 @@ C 10563,17550
 # the row and the channel run on to about x 10620-10638 (cdp4's strip: not drawn).
 D 10521,17227:10546,17248
 D 10506,17496:10546,17548
+# ======================================================================
+# Run 52 (2026-11-21), pieces `s17515` and `rl`: the source of eof_w17515, and rst_lat's branch beside it.
+# s17515: the gate column of bl0_w15566's pull-down (x 10433-10447, port (10440,17545) of run 51) runs on
+# south under the thin metal x 10440 (no contact) onto a poly row y 17592-17612 that runs east under the
+# VSS rail, the wide rail x 10722-10768 and four tracks (field under all, no contact) to trunks' diagonal
+# of h_eq_r1 at (10940,17598): eof_w17515 is h_eq_r1.
+P 10440,17540 y17602 w=16
+P 10432,17602 x10946 w=20
+@alias h_eq_r1 eof_w17515
+# rl: rst_lat's poly from cdp4's port (10789,17700): the column on south to a row y 17806-17826, west
+# under both rails and three thin metals (no contact), north as a column x 10346-10364 (eof_w17866's metal
+# x 10356 lies on it from y 17643 south: no contact) to a pad (10352,17604); a thin metal north from the
+# pad (port at y 17540; it runs on to a tap (10353,17128) and an end pad (10353,16343))
+P 10789,17695 y17816 x10355 y17604 w=18
+P 10335,17587:10369,17621
+C 10352,17604 s=20x20
+M 10353,17604 y17540 w=13
+N M 10353,17560 rst_lat

@@ -277,7 +277,7 @@ throughout.
 |---|---|---|---|
 | `h_eq_r0` | `hc` with R0 (8 bits) | all drawn (bits 0-5 joined by `hcj`; bit 2 rests on one uncertain poly in `bd1`) | to a gate column beside the strobe channel; ends on a buried contact there. **Use: open** |
 | `h_eq_r0half` | `hc` bits 0-6 with R0 bits 1-7 (R0 / 2) | as above | towards the same gate column. **Use: open** |
-| `h_eq_r1` | `hc` with R1 | as above | into the bottom-centre logic. **Use: open** |
+| `h_eq_r1` | `hc` with R1 | as above | into the bottom-centre logic. **One use is traced** (`notes/blocks/eof.md`, piece `s17515`, 2026-11-21; firm, wiring with no uncertain item): it is the gate of a pull-down to `vss` on `bl0_w15566` (the wire `eof` called w17515), so that line, an input of the NOR `eof_w15523` in the chain whose output reaches every row of the memory address counter ("The DISPTMG pin"), is forced low while the horizontal counter equals R1. `bl0_w15566`'s load and its other pull-downs are not drawn. Other uses: open |
 | `h_eq_r2` | `hc` with R2 | as above | runs west of the counters on bus line G (joined, `notes/blocks/ucz.md`). **Use: open** |
 | `hsw_eq_r3` | `hsw` with the R3 nibble (4 bits) | drawn | not followed. **Use: open** |
 | `amr_eq_r3` | R3 bits 4-7 (the vertical sync width, `amr`) with the 4-bit counter `c4l0`..`c4l3` (drawn through `c4l0`..`cdp1_l4676`; `c4l2`, `c4l3` over two `?P` rows of `bust`) | drawn | leaves through a buried contact at c0 (marked) and runs about 12,000 px west to `tla`'s west column, where it is a data input of the selector `tla_w3417 = NOT(rcs_thin_e·tla_w3376 + tla_w3505·amr_eq_r3)`. Per bit XOR and the NOR marked (`?` items in the cell). **Use: the selector's output, to the right cluster, not followed** |
