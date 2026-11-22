@@ -1180,3 +1180,26 @@ C 12000,3636 s=20x20
 P 12004,3636 y3655 w=22
 @alias rst_lat tr1_w12265
 @alias cdp4_w10808 tr1_w12005
+# ======================================================================
+# Run 15 (2026-11-21): the two metals of run 14 east of x 12400 to their ends in the top-right logic's track
+# field. rst_lat's runs along y 3592 to a corner (13467,3592), north to y 3550 and east to an end pad
+# (14016,3551), with one tap (13821,3549); cdp4_w10808's runs along y 3636 to an end pad (13560,3636), with one
+# tap (13345,3636). From each tap and end pad a poly runs south into the undrawn gate rows of tr1 (drawn to
+# y 3675: ports).
+# ======================================================================
+# --- rst_lat
+M 12390,3592 x13467 y3550 x14016 w=14
+P 13804,3532:13838,3566                  # tap
+C 13821,3549 s=20x20
+P 13822,3552 y3675 w=20                  # south under the y 3592 metal of another net (no contact)
+P 13999,3534:14033,3568                  # end pad
+C 14016,3551 s=20x20
+P 14016,3556 x14039 y3675 w=18           # east and south, under the y 3592 and y 3636 metals of other nets
+# --- cdp4_w10808
+M 12390,3636 x13560 w=14
+P 13328,3620:13362,3654                  # tap
+C 13345,3637 s=20x20
+P 13346,3640 y3675 w=22
+P 13543,3619:13577,3653                  # end pad
+C 13560,3636 s=20x20
+P 13560,3640 y3675 w=22

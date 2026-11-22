@@ -101,6 +101,13 @@ gate's load tie holds: `tr1`'s mark), and **`cdp4_w10808` is the wire `tr1` call
 = NOT `cdp4_w10808`**. The metals are drawn to x 12400 and run on to more taps. With every file loaded:
 2517 nets, 4812 transistors, 0 errors, 0 warnings. See "The top rows east" under Logic.
 
+Run 15 (2026-11-21 18:13 -0600): **the two metals on east to their ends** (wiring only, four pads with contacts, no
+transistor, no uncertain item): `rst_lat`'s along y 3592 to a corner, north to y 3550 and east to an end pad
+(14016,3551), with one more tap (13821,3549); `cdp4_w10808`'s along y 3636 to an end pad (13560,3636), with
+one more tap (13345,3636). From each of the four a poly runs south into `tr1`'s gate row, where it is a gate
+input (drawn to y 3675: ports; the gates are not drawn). With every file loaded: 2517 nets, 4812
+transistors, 0 errors, 0 warnings. See "The two metals east to their ends" under Logic.
+
 Not traced: the rest of the wiring right of x 10600 (the two thin metals x 10809 and x 10853, the rails'
 ends) and below y 14060.
 
@@ -790,10 +797,45 @@ that ambiguity is unchanged by this run.
 `tr1`'s three gates were traced on Opus (re-read item R31): the equations above rest on `tr1`'s gates as
 they stand; what this run adds is the two joins.
 
-**East of x 12400, not drawn** (`tools/follow.py 11760 3588 E` / `3632 E --gap 16`; `tr_e2.png`, `tr_e3.png`):
+**East of x 12400** (drawn in run 15, the next section; `tools/follow.py 11760 3588 E` / `3632 E --gap 16`; `tr_e2.png`, `tr_e3.png`):
 `rst_lat`'s metal runs on along y 3592 to a corner (13476,3584), north to y 3550 and east to an end pad
 (14017,3550) with a poly south (x 14025-14045), with one more tap at (13823,3549); `cdp4_w10808`'s runs on
 to an end pad (13560,3636) with a poly south (x 13550-13575), with one more tap at (13345,3636).
+
+### The two metals east to their ends (run 15, 2026-11-21; traced)
+
+| | `rst_lat` | `cdp4_w10808` |
+|---|---|---|
+| metal from x 12400 | along y 3592 to a corner (13467,3592), north to y 3550, east along y 3545-3555 | along y 3636 |
+| tap (pad with a contact) | (13821,3549) | (13345,3636) |
+| end pad (contact) | (14016,3551) | (13560,3636) |
+| polys | from the tap south on x 13812-13832; from the end pad east and south on x 14030-14048 | from the tap south on x 13335-13357; from the end pad south on x 13549-13571 |
+| ports (drawn ends of the polys) | (13822,3675), (14039,3675) | (13346,3675), (13560,3675) |
+
+- **The metals** (`tools/follow.py 11760 3588 E` and `3632 E --gap 16`; `tools/tl5_tracks.py h 3592 12390 13470`,
+  `h 3636 12390 13548`, `h 3550 13495 13800`): no gap of 20 px in both chips; the clean shot has no hole on
+  `rst_lat`'s metal between x 12400 and its corner, and one on `cdp4_w10808`'s, its tap. The dark bars are
+  the polys of `tr1`'s gates passing under.
+- **`rst_lat`'s corner** (`tools/textmap.py 13440 3530 13570 3620 3`): the metal turns north at x 13455-13479
+  and east along y 3545-3555. **The pad (13513,3592) 30 px east of the corner is another net's**: between the
+  corner's east edge (x 13479) and that pad's ring (x 13497) neither metal shot has metal (4-9 of 16 against
+  12-14 for the metals) and the clean shot is green there (open field); that pad's metal runs east from
+  x 13539 along y 3592.
+- **The taps and end pads** (`t15_a.png` .. `t15_d.png`, 3.6-4x, metal and clean;
+  `cache/scratch/cdp4/candh.py -v h`): each a widened pad with ring, bright centre and a hole in the clean shot.
+- **The polys south**: each is orange in the chip-2 metal shot and red over green by 28-62 in the chip-2
+  stripped shot from its pad to y 3680 (`tools/px.py col`). `rst_lat`'s tap poly passes under the other
+  net's y 3592 metal, and its end column under that metal and under a third metal on y 3636, with no pad
+  (`candh.py -v h 13822,3592 14039,3592 14039,3636`). The end column (x 14030-14048) is separated from the
+  pad (14000,3632) of that third metal by 16 px of field (`tools/px.py row 3632 13984 14060 4`, four shots:
+  chip-2 stripped red minus green -5 to -13 at x 14016-14032 against 40-56 on the column) and from that pad's
+  own poly at y 3660 by bare ground (x 14020-14028).
+- **South of the ports** (`t15_s.png`, 1.6x): `tr1`'s gate row (a wide horizontal metal y ~3735-3790 with
+  contacts, plates and gate bands from y ~3690): each of the four polys runs on into it as a gate input. The
+  gates are not drawn (`tr1`'s; its drawn part ends at x 12320).
+
+So `rst_lat` has, in this row, three gate loads (the wire `tr1` called w12265 and two undrawn gates at about
+x 13822 and x 14039) and `cdp4_w10808` three (`tr1_w12005` and two at about x 13346 and x 13560).
 
 ### Corner gate group: `cdp4_rst` = NOR of six select rows (run 2, 2026-11-19; traced)
 
@@ -859,8 +901,8 @@ islands are closed curves inside it, so they are the other class.
 | `cdp4_bus_s0`..`s7` | poly | x 7600, y 13333, 13376, 13420, 13463, 13505, 13548, 13590, 13633 | from outside | data into the row C latch |
 | `d5_out_n`..`d1_out_n` | poly | onto `dbus`'s rows at x 16822, 16870, 16912, 16957, 16957 (y 15824, 15954, 16085, 16215, 16345) | driven inside | the outputs of the data output inverters (run 8) |
 | `dbus_le` | metal, poly | x 16775, y 15930 (onto `dlat`'s end); the poly row's west end (16130, 16855-16875), on a framed box of an undrawn gate (runs 8, 13) | from that gate (read, not drawn) | the data input latches' enable, passing through the units (run 8; uncertain over four boxes) |
-| `cdp4_w10808` (= `tr1_w12005`) | metal, poly | (12400, 3636) (the metal east of its tap onto `tr1`'s inverter A input; runs on east) and (10694-10716, 15726-15748) (the corner of the row from its bottom pad: beyond, an undrawn unit of `bc2` that drives it) | driven from `bc2`'s unit (read, not drawn) | the first through line (runs 12, 14) |
-| `rst_lat` | metal, poly | (12400, 3592) (the metal east of its tap onto `tr1`'s gate C input; runs on east) and (10782-10797, 17700) (the column south of the bottom row's west end) | from `trunks`' inverter | the second through line (runs 12, 14) |
+| `cdp4_w10808` (= `tr1_w12005`) | poly | (13346,3675) and (13560,3675) (the polys south of its second tap and its end pad, into `tr1`'s gate row); (10694-10716, 15726-15748) (the corner of the row from its bottom pad: beyond, an undrawn unit of `bc2` that drives it) | driven from `bc2`'s unit (read, not drawn) | the first through line and its run in the top-right track field (runs 12, 14, 15) |
+| `rst_lat` | poly | (13822,3675) and (14039,3675) (the polys south of its second tap and its end pad, into `tr1`'s gate row); (10782-10797, 17700) (the column south of the bottom row's west end) | from `trunks`' inverter | the second through line and its run in the top-right track field (runs 12, 14, 15) |
 | `vcc`, `vss` | metal | x 16515 and x 16689 at y 15780 (onto `dlat`'s rails); `vcc` drawn to y 16440 (goes on south at least to y 16900), `vss` ends at y 16446 | - | the units' rails |
 | `cdp3_n_c7` (= `cdp4_n_s7` = `dbus_do0_in`) | metal | (16950-16962, 16714): onto `dbus`'s metal | driven inside | the read bus, column 7 = the gate of D0's output chain (run 7) |
 | `d6_out_n` | poly | (17800-17825, 17313-17350): onto `dpad`'s strip 4 of D6's pad cell | driven inside | the output of the sixth output inverter, joined to the pad cell (run 10) |
@@ -1018,8 +1060,8 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
   x 10782-10797 runs south to y ~17805 and turns west as a row y 17806-17826 under the wide rail x 10722-10772, a
   rail x 10545-10595 and three thin metals, to x ~10355, where it turns north as a poly column x 10345-10365 under
   a drawn metal's track (views `rl_s.png`, `rl_w.png`, `rl_we.png`).
-- From run 14: the two metals east of x 12400 (ends and one more tap each: "The top rows east"), in `tr1`'s
-  track field.
+- From run 15: the four gates of `tr1`'s row that the polys enter at about x 13346, 13560, 13822 and 14039
+  (y 3690-3800).
 - From run 12: the four rows beyond their ports (the unit of `bc2`
   at (10620-10780, 15750-15860) whose load's plate it is; `rst_lat` south of (10789,17700)); the undrawn metal on T1's track
   position from about y 16400 to y 18458 (the north part of `trunks`' `rst_ck` piece, or another net).
