@@ -260,7 +260,7 @@ Traps, all of them real:
    jog metal toward the column being traced and wrote it down as another unit's row; its west 25 px lie in
    a gap between two metals, where the clean shot shows only a dark ring, and it is a branch of that column
    (found by review round 63). Before calling a poly "one wire with no tap", sample both its flanks for poly
-   leaving it (`tools/eof_tee.py h|v`) and look at every hit; the tool is an aid, not a proof (its limits are
+   leaving it (`tools/eof_tee.py h|v`; `tools/eof_teeall.py` for a whole trace file) and look at every hit; the tool is an aid, not a proof (its limits are
    in its docstring). Found 2026-11-21 (R52).
 14. **Where a tool says a line ends, look at the end at 5x in the metal shot.** A line ends
    on a contact; if you see none, the line has turned and the tool missed the corner.
