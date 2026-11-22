@@ -1485,6 +1485,23 @@ contact, no transistor, no uncertain item).
   does there (a gate west of the rail?) is not read.
 - **Checks**: full extraction 2,516 nets, 4,812 transistors, 0 errors, 0 warnings (connections identical).
 
+Run 55 (Kieran Connell's session, Claude Fable 5.2; 2026-11-22 23:17 +0000 on). One piece, 3 transistors, no
+uncertain item; and one correction to `trace/trunks.txt` (commit cdc4d7d).
+
+- **Piece `u17170`: the unit in the VSS rail's column between the rail contact (10560,17083) and run 51's
+  unit is a two-input NOR, `eof_w17166` = NOR(`rst_lat`, `ck_out`)** (firm: `tools/unsure.py --equations
+  eof_w17166`). Its pull-downs are `rst_lat`'s gate row y 17115-17137 (run 53's row: the second of the three
+  transistors `rst_lat` gates in this column is now drawn) and the row y 17205-17221; its load is east of the
+  rail (a strip under a plate to a contact on the wide rail x 10722-10768, which is `bc2`'s VCC rail); its
+  output leaves west by a buried contact, a row and a pad (10441,17168) onto a thin metal x 10441 north
+  (drawn to y 16885; it runs on to pads at (10441,16862) and (10441,16650)).
+- **The row y 17205-17221 is `ck_out`**: a pad (10439,17238) on its south side is the north end of `trunks`'
+  "ck_out #2", the right-hand vertical of the ring at the clock buffer's output. `trunks` had drawn that
+  metal on north to y 16880, through the open row and through the output's pad, which made one net of the
+  NOR's output and its input: corrected in `trace/trunks.txt` (the metal now ends on the pad). So outside
+  reset the gate's output is NOT `ck_out`, and during reset it is low.
+- **Checks**: full extraction 2,517 nets, 4,815 transistors, 0 errors, 0 warnings.
+
 ## Inventory
 
 | Piece | Where | What |
@@ -5599,6 +5616,98 @@ Views `s54_a.png` (2.15x), `s54_b.png` (3.3x, four shots), overlay `ov54.png` (3
 tying this net to the rail diffusion, and the equation built on it. The review showed both wrong; the NOR's
 extracted equation, `eof_w17345` = NOR(`bl0_w15566`, `eof_w17866`), is untouched (its load is still undrawn).
 
+### Run 55: the NOR of `rst_lat` and `ck_out` under the VSS rail (piece `u17170`)
+
+Views `r55_s2.png`, `r55_s3.png` (2.5x, four shots), `r55_w1.png`, `r55_w2.png` (4x, west of and under the
+rail), `r55_e1.png`, `r55_e2.png` (4x, east of the rail), `r55_t1.png` (5.3x, the plate and its tie),
+`r55_v1.png` (5x, the load's supply contact), `r55_x1.png`, `r55_x2.png` (3.5x, the output pad), `r55_row.png`
+(4.5x, the gate row west), overlays `r55_ov1.png`, `r55_ov2.png` (3.1x). Survey: `cache/scratch/eof/survey-run55.md`.
+
+    eof_w17166 = NOR(rst_lat, ck_out)        t at 10556,17126 W/L 69/22 gate rst_lat; t at 10556,17213 W/L 69/16
+                                             gate ck_out; load at 10666,17171 W/L 38/43, plate tied to the node
+
+- **The column** (`tools/railprof.py 10552 10592 16990 17290`: diffusion to y 17112, GATE y 17119-17132,
+  diffusion y 17140-17199, GATE y 17206-17219, diffusion from y 17227). The diffusion north of the first gate
+  (y 17054-17112; an edge line y 17050-17053 north of it) carries the rail contact (10560,17083) (round 67's:
+  ring and bright centre in both metal shots, specks in the clean shot): `vss`. The diffusion south of the
+  second gate is run 51's, with the rail contact (10562,17255). The diffusion between the gates is the node.
+  West of the rail the column goes on as a strip x 10521-10546 from y ~17096 south (`tools/px.py col 10533
+  17050 17270 5 all`: chip-2 stripped shot red over green by 15-23 and the clean shot green, 108/158/90, at
+  y 17100-17105 and y 17148-17192; field north of y 17092: `px.py row 17080 10470 10612 4 all`, red minus
+  green -3 to 0 at x 10506-10534).
+- **Gate 1** is `rst_lat`'s row y 17115-17137 (run 53), which crosses the column in full and ends in a cap at
+  x ~10600 with field east of it (`tools/px.py row 17125 10584 10650 3 all`: plain field from x 10611; the
+  5 px green strip x 10601-10606 beside the rail at y 17100 is the margin of the rail, tracing guide trap 3).
+- **Gate 2**, the row y 17205-17221 (`tools/px.py col 10330 17146 17236 3`, `col 10290`: poly y 17206-17221),
+  crosses the column in full; its east cap ends at x ~10598, 15 px short of the east diffusion (`tools/px.py
+  row 17213 10590 10626 2`: orange to x 10597, dark x 10598-10614 with plain x 10604-10608 in chip 1, the
+  diffusion from x 10616). **It is `ck_out`.** On its south side at x 10424-10458 the row widens into a pad
+  with a contact (10439,17238) (ring and bright centre in both metal shots, a hole in the clean shot at
+  y 17241; the clean shot's poly is continuous from the row into the pad, `tools/px.py col 10441 17170 17250 4`:
+  no dark line at y 17222-17230). The pad's metal x 10440 comes from the south: `tools/tl5_tracks.py v 10440
+  17225 17700` has no stretch of 25 px without metal in both chips (the 18 px at y 17284-17301 is where it
+  crosses `bl0_w15566`'s gate row) and no hole in the clean shot but the pad's; it is `trunks`' "ck_out #2",
+  the right-hand vertical of the ring at the clock buffer's output (`M 10311,17908 y18473 x10442 y18342
+  x10398 y17689 x10441 ...`), each leg of which passes the same two-chip test (`tl5_tracks.py h 17689 10385
+  10455`, `v 10398 17680 18350`, `h 18342 10390 10450`, `v 10442 18335 18480`, `h 18473 10300 10450`, whose
+  one hole is `trunks`' contact (10358,18470), and `v 10311 17900 18480`). West of the pad the row runs under
+  the thin metals x 10397 (`eof_w17345`), x 10353 (`rst_lat`) and x 10305 with its width unchanged and no
+  ring in either metal shot (`r55_row.png`; the dark rings on it at x ~10333, ~10377 and ~10420 are in the
+  gaps between the metals and in the clean shot only, trap 2; both metal shots show open poly there) to an
+  **end pad with a contact (10267,17214)**, on which a thin metal from the north ends (`tools/follow.py 10267
+  17150 S --gap 16` ends at (10268,17190); nothing leaves the pad west or south). That metal is a further
+  branch of `ck_out`: `follow.py 10267 17150 N --gap 16` takes it north to a corner (10269,16906), east to
+  (10311,16906) and north on x 10311 to an end at about (10310,15908). Drawn to a port at y 17150; not read
+  beyond (`trunks`' metal on x 10312 from the south ends on its own pad (10310,16950), 44 px south of that
+  corner: two metals end to end on one track position, tracing guide trap 33; not looked at here).
+  No poly leaves either flank of the row (`tools/eof_tee.py h 17204 17222 10292 10420` and `... 10462 10545`:
+  none).
+- **`trunks` had the metal x 10441 as one line from y 17689 north to y 16880.** It is two metals: `ck_out`'s
+  ends on the pad (10439,17238), and another starts on the output's pad (10441,17168), 70 px north. Between
+  the pads the row lies in the open with open ground north of it: `tools/px.py col 10441 17170 17250 4
+  metal,metal1,acid1b` reads open poly at y 17206-17218 (167/115/57 in chip 2, 143/80/44 in chip 1) and green
+  ground at y 17194-17198 in the clean shot; `tools/tl5_tracks.py v 10441 16460 17200` has no metal in either
+  chip at y 17175-17199; `tools/follow.py 10440 17100 S --gap 16` ends at (10439,17174) and `follow.py 10439
+  17300 N --gap 16` at (10441,17258). Drawn through, the line put the NOR's output and its input on one net
+  (the extraction's "carries several names"). Corrected in `trace/trunks.txt` as a commit of its own (cdc4d7d).
+- **The node's west exit** is of the build of run 51's unit 175 px south. A box (10497-10516, 17156-17180)
+  on a tab of the strip reads like run 51's drawn buried contact (10497-10516, 17331-17355) sample for sample
+  in all four shots (`tools/px.py row 17167 10484 10530 3 all` against `row 17343`, and `col 10506 17140 17200
+  4 all` against `col 10506 17318 17366`: plain inside, 134/122/83 against 158/140/87 in chip 2's metal shot,
+  197/175/153 against 195/181/143 in the clean shot, between the same dark outlines). From it a poly row
+  y 17162-17176 runs west under the thin metal x 10485 (`tools/textmap.py 10470 17150 10500 17190 3`: the metal
+  bright across the row, no ring; `eof_tee.py h 17161 17177 10462 10495`: none) to a pad with a contact
+  (10441,17168) (ring and bright centre in both metal shots, a green hole in the clean shot, pits in the
+  chip-2 stripped shot: `r55_x1.png`, `r55_x2.png`). The pad's metal x 10441 goes north (`tools/tl5_tracks.py
+  v 10441 16460 17200`: unbroken to a pad pattern at y 16842-16887 with a hole at y 16871, and on to another
+  at y 16627-16669 with a hole at y 16650; `cache/scratch/eof/r55_n1.png`: both are pads with rings, each with
+  a poly row east). Drawn to a port at y 16885, where `trunks`' line ended. Run 53 found no pad pattern where
+  this metal crosses `rst_lat`'s row and run 54 none at `eof_w17345`'s row y 17040.
+- **The node's east exit and the load.** At y 17152-17190 the node's diffusion runs on east of the rail with
+  no edge line (`tools/px.py row 17170 10596 10760 4 all`: plain from x 10604 to x 10636 in both metal shots,
+  tan under the rail to its edge in the clean shot, where at y 17100 and y 17125 the diffusion's east edge is
+  a dark line at x 10590) into a column x 10613-10636, y 17152-17240 (`tools/px.py col 10622 17056 17262 5
+  all`: field at y 17081-17141, diffusion at y 17156-17236: red over green by 15-25 in the chip-2 stripped
+  shot, green 120/158/90 in the clean shot, the colour of a large open diffusion, trap 21). From the column a
+  strip y 17152-17190 runs east under a poly plate x 10645-10688, y 17134-17236 (orange in both metal shots;
+  `px.py col 10665 17110 17260 5 all`) and on (`px.py col 10700 17120 17250 5 all`: diffusion y 17158-17182,
+  field north and south) into a box x 10713-10772, y 17144-17190 under the wide metal x 10722-10768, with a
+  contact (10745,17165): a ring with a bright centre in both metal shots, specks in the clean shot
+  (`r55_v1.png`, 5x in four shots). The plate is tied to the node: a heavy-outlined box (10645-10672,
+  17212-17236) on its south-west corner lies on a tab of the column (the column's south outline y 17242 runs
+  on east to x 10672) and is plain inside (`tools/px.py row 17222 10600 10700 3 all`: 122-133/104-125/78-83 in
+  chip 2, red equal to green in chip 1's metal shot at x 10648-10660, the signature of a buried contact's
+  centre, trap 24; the plate's east part, orange, runs down beside it at x 10675-10684). A notch of field
+  x 10636-10645, y 17190-17212 lies between the strip and the tab. Nothing else leaves the plate
+  (`r55_e1.png`, `r55_t1.png`). **The wide metal is `vcc`**: it is one metal with `bc2`'s VCC rail
+  (`M 10746,15270 y15746`): `tools/tl5_tracks.py v 10746 15700 17260 --half 12` has no stretch of 25 px
+  without metal in both chips; its longest, 23-24 px twice at y 16681-16735, is the ring of a contact like
+  this one (`r55_v2.png`).
+- **The spot (10567,17178) on the rail over the node is not a contact** (Ambiguity 217): a dark spot about
+  10 px across in chip 2's metal shot only.
+- **Seen and not drawn**: the thin metal x 10476-10496 that crosses both rows of the unit without a contact
+  (another net's; in no trace file); the unit north of the edge line y 17052 (below, Not done).
+
 ## Ports
 
 The net is driven outside the package (by `rdp2`'s NOR). `in` marks the port beyond which the
@@ -5714,7 +5823,7 @@ driver lies; the other three lead to the loads.
 | `eof_w17345` | metal | (10390-10404, 17315) | out | piece `u17345`: the metal x 10397 north from the pad (10397,17343), the NOR's output by its west exit (unbroken to about y 17040 in the two-chip test; not followed). (Run 50's two pad ports at (10311,17474) and (10397,17410) are gone: the poly is drawn on) |
 | `eof_w17345` | diffusion | (10600, 17327-17358) | out | piece `u17345`: the node's diffusion east past the rail's edge; its load is expected at x 10640-10700, y 17300-17400 (`cdp4`'s claimed strip; not drawn) |
 | `bl0_w15566` | diffusion | (10600, 17484-17500) | in | piece `u17345`: the band that `bl0_w15566`'s row y 17473 is tied to by a buried contact, east under the VSS rail with no contact; the net's driver is expected on it (`cdp4`'s claimed strip; not drawn) |
-| `vss` | metal | (10548-10598, 17227) and (10548-10598, 17590) | - | piece `u17345`: `bc2`'s VSS rail, drawn over this unit only; it runs on north (to `bc2`'s end at y 15746, not drawn between) and south |
+| `vss` | metal | (10548-10598, 17590) | - | piece `u17345`: `bc2`'s VSS rail, drawn over this unit (run 55's piece `u17170` joins it at y 17227); it runs on north (to `bc2`'s end at y 15746, not drawn between) and south |
 | `eof_w17515` | poly | (10432-10448, 17545) | in | piece `u17345` (review round 61): the gate poly of the pull-down on `bl0_w15566`'s band, a column x 10433-10447 from the south under the thin metal x 10440 (not followed) |
 | `eof_w17866` | metal | (9546-9560, 17800) | ? | piece `bus2`: the second metal of the pad (9553,17866), from the north (the follower: north to (9546,17645), west to (9266,17641); not read) |
 | `eof_w17866` | metal | (9806-9820, 17800) | ? | piece `bus2`: the second metal of the pad (9813,17866), from the north (the follower: north, then 1,800 px to (9961,16341), close beside `ck_out`'s metal from the pad (9769,17910); not read) |
@@ -5743,7 +5852,10 @@ driver lies; the other three lead to the loads.
 | `rst_lat` | - | (the metal north of the pad (10352,17604)) | - | piece `rl`'s port at (10353,17540) is met by piece `rln` (run 53): no port |
 | `h_eq_r1` (= `eof_w17515`) | poly | onto `trunks`' diagonal at (10940-10950, 17592-17612) | in | piece `s17515`: the row of the gate column of `bl0_w15566`'s pull-down; no port (joined by geometry) |
 | `rst_lat` | poly | (10546-10598, 17682-17698) | out | piece `rl` (review round 63): the branch row from the column x 10355, under the VSS rail: the gate of an undrawn pull-down (rail diffusion with a contact (10560,17652) north of it, diffusion y 17705-17739 south of it) |
-| `rst_lat` | poly | (10521-10598, 17115-17137) | out | piece `rln`: the tap pad (10353,17127)'s row, an end cap at the rail's east edge: the gate of an undrawn transistor under the VSS rail (diffusion y 17040-17112 north of it, y 17140-17199 south of it) |
+| `eof_w17166` | metal | (10435-10447, 16885) | out | piece `u17170`: the thin metal x 10441 of the NOR's output pad (10441,17168), north; it runs on to a pad (10441,16862) (a poly row east) and another (10441,16650) (a poly row east), not drawn |
+| `ck_out` | metal | (10261-10275, 17150) | out | piece `u17170`: the thin metal of the end pad (10267,17214) of the NOR's gate row, north: it runs to a corner (10269,16906), east to (10311,16906) and north on x 10311 to about (10310,15908) (`tools/follow.py`; not read) |
+| `vss` | metal | (10548-10598, 17054) | - | piece `u17170`: the VSS rail, drawn from y 17054 south; north of it the rail has another unit's contact area at y 17015-17050 |
+| `vcc` | metal | (10722-10770, 17120) and (10722-10770, 17215) | - | piece `u17170`: `bc2`'s VCC rail, drawn over this unit's load contact only; it runs on north (to `bc2`'s end at y 15746, not drawn between) and south |
 | `rst_lat` | poly | (10497-10640, 16292-16314) | out | piece `rln`: the end pad (10353,16345)'s row: the gate of an undrawn transistor (channel about x 10497-10620; diffusion y 16244-16289 and y 16317-16369), ending in a cap x 10624-10640; Ambiguity 216 on a box north of the cap |
 | `eof_w17345` | poly | (10492, 17029-17051) | out | piece `o345`: the drawn end of the row of the pad (10397,17040) at the top of the NOR's output metal x 10397; the row goes on east as poly through x 10497-10522 to a patch x 10530-10542 west of the rail (not read: a gate there?) |
 
@@ -7710,6 +7822,18 @@ driver lies; the other three lead to the loads.
    contact's outline); the dark band over the cap is about 10 px against 6 px for the same line east of the
    cap, so the cap has a north edge of its own; but a dark line between poly and box is also what the
    control buried contact shows, so the band alone does not discriminate.
+217. **Is the dark spot (10567,17178) on the VSS rail a contact onto the NOR's node?** (piece `u17170`, run
+   55.) Chip 2's metal shot has a dark spot about 10 px across (red 48-80 against 190-220 round it) at
+   x 10564-10573, y 17173-17182, on the rail over the node's diffusion y 17140-17199; run 51 noted "a contact
+   at about (10565,17175)" from a low zoom. A contact there would put the node on `vss`: the unit would be no
+   gate, and `rst_lat`'s transistor would lie between two grounded diffusions. Readings: (a) a blemish on
+   chip 2 (a pit or a particle on the metal); (b) a rail contact. **Working assumption: (a), nothing drawn.**
+   `tools/textmap.py 10546 17152 10600 17204 3 --acid` against the rail's contact 80 px south, `textmap.py
+   10546 17232 10600 17278 3 --acid`: the control has a dark ring round a bright centre in both metal shots
+   and a greener centre in the clean shot; the spot has no ring, chip 1's metal shot is uniformly bright over
+   it (C-D of 16) and the clean shot uniformly tan (no greener patch, no specks). A contact is a mask feature
+   and would be on both chips. What would settle it beyond that: nothing more in these photos; the node also
+   has a load and an exit of its own, which a grounded diffusion would not.
 
 ## Review
 
@@ -10974,6 +11098,22 @@ Round 67: no findings that change a connection.
 
 ## Not done
 
+- **Next (after run 55)**: the unit of the rail column y 17054-17250 is drawn (piece `u17170`:
+  `eof_w17166` = NOR(`rst_lat`, `ck_out`)). Open from it: (a) **where `eof_w17166` goes**: the thin metal
+  x 10441 north of the port (10441,16885): a pad (10441,16862) with a poly row east (y ~16850-16875) and a pad
+  (10441,16650) with a poly row east (y ~16640-16665), both toward the rail column; whether the metal runs on
+  north of the upper pad (run 53 saw a metal come down x 10441 from a corner (10403,16483) to about
+  (10440,16626)) decides whether this net is that jog metal's. (b) **`ck_out`'s branch north** from the end
+  pad (10267,17214): the metal x 10268 to a corner (10269,16906), east, north on x 10311 to about
+  (10310,15908) (`tools/follow.py 10267 17150 N --gap 16`; `trunks`' other metal on x 10312 ends on its pad
+  (10310,16950) just south of the corner: check they are two). (c) **the unit north of the edge line
+  y 17052**, still not read: `eof_w17345`'s row y 17029-17051 east of (10492,17040); a contact area of the
+  rail at y 17015-17050 (chip 1's metal shot has a cross pattern with a dot at (10578,17030); the clean shot
+  under the rail there is 150/150/108, neither field nor plain diffusion: `tools/px.py col 10572 17004 17072 4
+  all`); east of the rail a poly x 10618-10650, y 17025-17048 to a pad (10683,17035) with a thin metal north.
+  (d) the thin metal x 10476-10496 (crosses this unit and run 51's without a contact; in no trace file).
+  (e) `ck_out #2` south of the pad (10439,17238): run 52 saw a pad (10439,17734) "at the foot of the thin
+  metal x 10440", south of `trunks`' jog y 17689: a tap of `ck_out` if the metal runs on to it (not looked at).
 - **Next (after run 54)**: `eof_w17345`'s row east of its drawn end (10492,17040): poly through x 10497-10522
   and a patch x 10530-10542 west of the rail (a gate over a diffusion strip there? plain strips at
   y 17015-17022 and y 17055-17067); and the column of the rail x 10548-10598 between y 17036 and y 17260 as

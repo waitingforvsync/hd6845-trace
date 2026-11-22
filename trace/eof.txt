@@ -4649,3 +4649,57 @@ M 10397,17320 y17040 w=13
 P 10380,17023:10414,17057
 C 10397,17040 s=20x20
 P 10397,17040 x10492 w=22
+# ======================================================================
+# Run 55 (2026-11-22), piece `u17170`: the unit in the column of the VSS rail x 10548-10598 between the rail
+# contact (10560,17083) and run 51's unit: a two-input NOR, eof_w17166 = NOR(rst_lat, ck_out).
+# The rail diffusion y 17054-17112 (contact (10560,17083): ring and bright centre in both metal shots, specks
+# in the clean shot) is the source of the pull-down that rst_lat's row y 17115-17137 gates (run 53's row); the
+# node is the diffusion y 17140-17199; the second pull-down is the row y 17205-17221 between the node and the
+# rail diffusion of the contact (10562,17255) (run 51's). A dark spot (10567,17178) on the rail over the node
+# is in chip 2's metal shot only (no ring, nothing in chip 1's metal shot or the clean shot): not a contact
+# (notes, Ambiguity 217).
+M 10573,17054 y17232 w=50              # the VSS rail, over this unit (run 51's piece goes on south)
+D 10546,17054:10590,17232              # the column's diffusion, through under both gates
+# west of the rail the strip x 10521-10546 is diffusion from y 17096 south (field north of it)
+D 10521,17096:10546,17232
+C 10560,17083
+# gate 2: the row y 17205-17221 is ck_out. A pad (10439,17238) hangs on its south side: the north end of
+# trunks' ck_out #2 (the ring's right-hand vertical; trunks drew that metal on north to y 16880, through the
+# open row: corrected in trace/trunks.txt, commit cdc4d7d). The row runs west under the thin metals x 10397
+# (eof_w17345), x 10353 (rst_lat) and x 10305 (no pad, no contact) to an end pad (10267,17214), on which a
+# thin metal from the north ends (PORT at y 17150: it runs north to a corner (10269,16906), east, north on
+# x 10311), and east under the thin metal x 10485 (no contact) to an end cap at the rail's east edge.
+P 10267,17213 x10600 w=16
+P 10250,17197:10284,17231
+C 10267,17214 s=20x20
+M 10267,17214 y17150 w=14
+P 10424,17213:10458,17254
+M 10425,17225:10457,17253                # the pad's metal square (trunks' line ends in it)
+C 10439,17238 s=20x20
+N P 10330,17213 ck_out
+# the node's west exit, of run 51's build 175 px south: a tab, a buried contact box (10497-10516,
+# 17156-17180), a poly row y 17162-17176 under the thin metal x 10485 (no contact) to a pad (10441,17168),
+# a thin metal x 10441 north (PORT at y 16885: it runs on to a pad (10441,16862) and another (10441,16650),
+# not drawn; over rst_lat's row and eof_w17345's row y 17040 without a pad). 40 px of open row and ground
+# lie between this pad and ck_out's pad south of it: two metals on one track position.
+D 10497,17156:10525,17180
+B 10497,17156:10516,17180
+P 10441,17169 x10505 w=14
+P 10424,17151:10458,17185
+C 10441,17168 s=20x20
+M 10441,17168 y16885 w=13
+N P 10470,17169 eof_w17166
+# the node's east exit and the load: the diffusion leaves the rail's east edge at y 17154-17188 into a column
+# x 10613-10636, y 17152-17240, and runs on east as a strip under a plate x 10645-10688, y 17134-17236 into
+# a box under the wide rail x 10722-10768 with a contact (10745,17165): the rail is bc2's VCC rail
+# (M 10746,15270 y15746) come down the column. The plate's SW corner is tied to a tab of the column by a
+# buried contact box (10645-10672, 17212-17236); a notch of field x 10636-10645, y 17190-17212 between.
+D 10585,17152:10716,17190
+D 10613,17152:10636,17240
+D 10630,17214:10670,17240
+B 10645,17212:10672,17236
+P 10645,17134:10688,17236
+D 10713,17144:10772,17190
+C 10745,17165
+M 10746,17120 y17215 w=48              # the VCC rail, over this unit only
+N M 10746,17200 vcc

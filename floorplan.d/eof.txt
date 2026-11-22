@@ -227,3 +227,4 @@
 10425,17540:10950,17615   route  h_eq_r1 to the pull-down on bl0_w15566 | a poly row from the diagonal of the bottom bus field west under two rails and four tracks, then north as the gate column
 10335,17540:10800,17830   route  rst_lat (reset copy) round the units' south side and north | a poly column south, a row west under both rails, a column north to a pad and a thin metal on north
 10335,16285:10605,17550   route  rst_lat (reset copy) north to two gates of the bottom-centre east column | a thin metal with a tap and an end pad; each pad's poly row is the gate of a transistor under the ground rail (not drawn)
+10420,17050:10775,17260   logic  NOR of ck_out and the reset copy rst_lat | two pull-downs under the ground rail, the load east of it on the supply rail; the output (NOT ck_out outside reset) leaves west to a pad and north on a thin metal
