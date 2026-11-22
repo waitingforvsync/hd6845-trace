@@ -1221,3 +1221,18 @@ there).
   these notes is superseded by `dpad`: the pad cell has only gates on them; they are `d_hiz` and
   `d#_out_n`.
 - `dbus_le`'s eight taps and the latches of bits 4-7 are traced in `dlat` (`notes/blocks/dlat.md`).
+
+## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
+
+- `dbus_do0_in`'s metal ("west at y 16702-16722 out of the region (follow.py: on west to x 16795, then south
+  to (16797,17434))", here and in `trace/dbus.txt`'s comment): drawn by `cdp4` run 7: it is the read bus's
+  column 7 (`cdp3_n_c7`), from the read multiplexers of R12-R17; `@alias cdp3_n_c7 dbus_do0_in`, so `d0_out_n`
+  = NOT `cdp3_n_c7`.
+- "The driver is west of the column" for `d1_out_n`..`d5_out_n`: the drivers are the five inverters of
+  `cdp4`'s cell `cdp4_ro` (run 8); each row is drawn on from this block's end to its buried contact.
+- Not done, "`d6_out_n`, `d7_out_n`: not drawn, and not in this region": both are drawn (`cdp4` runs 9-11):
+  `d6_out_n` from an inverter of the read bus's column 1 into D6's pad cell; `d7_out_n` (`regs`' inverter of
+  column 0) ends as a poly column x 17595-17613 from a pad (17558,18146) south to y 18957 and a row east into
+  the pad cell.
+- `d7_c` ("metal west of x 16950"): the reviewer of `cdp4` run 7 followed it west along y 16758 to a corner
+  near (16838,16758) and south on x ~16840 to about y 17306; undrawn (a lead in `busc`'s row).

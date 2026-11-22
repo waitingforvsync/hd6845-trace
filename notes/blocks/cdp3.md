@@ -790,3 +790,13 @@ Round 5: no findings that change a connection.
 
 - Not done (the cluster beside row A): its "line from the north" onto the pad (7878,8315) is `cdp2_w6845`, a through line whose source is west of the pad (7335,6845) (a metal along y 6848, follower to (6142,6847)); it is not the output of `cdp2`'s inverter.
 - The cluster's two "contacts" under the metal x 7927-7957, at (7937,8474) and (7935,8648), are very probably buried-contact boxes with the metal passing over (re-read item R51; trap 27's addition of 2026-11-21): that would remove the contradiction recorded here. Nothing of the cluster is drawn.
+
+## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
+
+- Ports table, `cdp3_n_c7 .. cdp3_n_c0` ("c7's track ends at a metal contact at about 10855,10355 and c6's at
+  about 10900,10400, each on a vertical metal line that comes down from the north ..."): the eight rows end on
+  pads (10894,10360), (10938,10404), (10982,10446), (11025,10490), (11068,10534), (11112,10577),
+  (11156,10621), (11199,10664), each the top end of a track that runs south; no metal comes from the north
+  (the diagonals there are `regs`' and `wrs`' write strobes). `cdp3_n_c#` and `cdp4_n_s#` are one net per
+  column (aliases in `trace/regs.txt` and `trace/cdp4.txt`), and `d#_out_n` = NOT `cdp3_n_c(7-#)` (`cdp4` runs
+  4-11, `regs` run 6).

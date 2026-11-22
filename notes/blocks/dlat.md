@@ -345,3 +345,11 @@ Round 1: no findings that change a connection.
 - Sizes: `dlat_lat`'s poly and diffusion are `dbus_lat`'s mirrored (within 3-5 px by
   `tools/dlat_shift.py`); `dlat_drv`'s shapes are from 3x views and one overlay, good to
   about 5 px.
+
+## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
+
+- `dbus_le` "SOUTH along x 16767-16781 out of the region" / "south of (16774,15935) to its driver (`bd2`
+  (rest))": drawn by `cdp4` runs 8 and 13 through the data output inverters to the output box (16097-16128,
+  16850-16878) of an undrawn two-input NOR under `bd2`'s VSS rail. This block's own plain `M` over unit u1's
+  output box (y 15802-15868) is the same dark stretch that `cdp4` draws `?M` over the other four (AMB-056);
+  left as drawn.

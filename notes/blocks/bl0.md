@@ -1336,3 +1336,16 @@ Round 14: no findings.
 - `bl0_w15566` ("poly row east of the pad (7143,15566), on under bc1's rail x 7292-7342"): the row is gate 3 of the NOR `eof_w15523` and ends at x 7347; the metal x 7179-7197 from a pad (7186,15520) to a pad (7187,15696), "another net", is `eof_w15523`, that NOR's output. The pad (7186,15520) is not on `ck_out`'s corner 35 px north.
 - `bl0_w15566`'s unit at `bc1`'s rail ("a second net lies beside it"): the gate rows y 15427-15445 (`rcs_e4`), y 15493-15515 (`eof_w16040`) and y 15557-15580 (`bl0_w15566`) are the three inputs of that one NOR. Of the thin metal's crossings at y 15738, 15825, 15998 the first two are `eof_w15262` and `eof_w15128` (gates of the second NOR); the third is the row of another unit's exit box.
 - `rcs_mv` ("a pad (6966,15305), whose poly row goes east (port)") and `rst_n` (Ports, (7280, 15078-15098)): drawn on by `eof`: gate 2 of `eof_w15262` (ending at x 7350) and the gate of the inverter `eof_w15128` = NOT `rst_n` (ending at x 7355). `bl0` draws the row of `rcs_mv` `w=20` on y 15301; measured y 15293-15317 (geometry only).
+
+## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
+
+- The bus of five horizontal metals its pin lines pass under: two of them, y 16262 and y 16303, are the
+  outputs of `eof`'s two inverters (`eof_w15998`, `eof_w16218`); they cross `rcs_mv`'s poly column between the
+  pads (6970,16175) and (6970,16519) without a pad.
+- "Also seen, other nets, not drawn" / Not done: the tracks at x 5627 / 5671, x 5496 / 5540 and the rows from
+  the pads (5322,17213), (5322,17405) are `eof_w15998` and `eof_w16218` (drawn, `eof` run 37); the diffusion
+  wire y 16056-16076 "from a unit at x 5500-5560, y 16090-16190" is the VCC feed of `eof`'s `cap998`.
+- Where `rcs_mv`'s row goes on east ("port"): its load there is the lower select inverter of `eof`'s piece
+  `selg` (`eof_ga` = NOT `rcs_mv`).
+- The ports at x 4780 "into the left array": each row end now has its load in the left array's selector (`eof`
+  run 43).

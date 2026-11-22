@@ -143,3 +143,10 @@ ring or two edges). Not drawn, nobody's yet: the thin metal y 3827-3839 across t
 the next gate's diffusion at x 12318-12338.
 
 Round 1 (gates B and C): no findings.
+
+## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
+
+- `tr1_w12005` and `tr1_w12265` "from the track field to the north (not followed)" (here and in
+  `ports.d/tr1.txt`): followed by `cdp4` run 14: `tr1_w12265` (gate C's input) is `rst_lat`, `tr1_w12005`
+  (inverter A's input) is `cdp4_w10808`; the two ports at y 3650 are met by geometry. Four undrawn gates
+  further east in the row take the same two lines (`cdp4` run 15).

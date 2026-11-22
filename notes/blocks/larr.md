@@ -373,3 +373,37 @@ traced.
   (re-read item R50: one of this cell's rows was diffusion).
 - The left column's rails here are vss x 2605-2655 and vcc x 2783-2832 (by the loads, as `tla`, `tl1` and
   `ur` have them further north). The pull-ups of `larr_l0_g0` and `larr_l0_g1` are still not found.
+
+## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
+
+- Inventory, "4250-4720: separate cell per row", and Not done, "Rest of the lower row, x 3900-4720": drawn by
+  `eof` runs 39-48 in every one of the fourteen lower rows: the line's pass transistor (`eof_ld`), the two-way
+  selector (`eof_mx`), two depletion loads (`eof_ol`), their pull-downs (`eof_pd`), an inverter of Y
+  (`eof_yi`), a pull-down on Y (`eof_yg`). Readings superseded: "a poly in the open gap x 4151-4162 the full
+  height of the row" is two polys, each the stem of a load plate under rail G's west edge, and the column x
+  4152-4164 from about y 11612 to a foot at y 12006 is one poly with H3 of the row below and with the
+  selector's band; "rail G's diffusion 4188-4225 x 11619-11915 (contact 4197,11885)" is the loads' supply
+  diffusion; "the strap's diffusion 4092-4147 x 11604-11652 (contact 4116,11633)" is the upper load's west
+  node, and the strap ends in the south on a second contact (4118,11928). The two wide polys x 4052-4098 and
+  the gate under the strap are one poly, the gate of two pull-downs; the inner box is the tip of the compared
+  line's diffusion. "Believed: an inverter of Y on rail F" is traced; Y's diffusion is wider at the top (x
+  3896-3956, y 11770-11824) and carries a second transistor (a pull-down gated by `eof_ypd`).
+- Rails: rail G (x 4172-4218) is `vcc` (one metal with `ur`'s `vcc` metal x 4128-4172); rail F is `vss` (one
+  metal with `ur`'s `vss` metal).
+- The list of vertical metals, "a line 4336-4357", and the thin metal x 4510-4527: `eof_gb` and `eof_ga`, the
+  selector's two select lines, each one metal from a free end at y 11046-11048 to the array's foot.
+- Ports and `trace/larr.txt`'s comment ("H3 ... drawn to x 4100, seen to x 4277, goes on right ... its source
+  is in the cells at x > 4250"): H3 ends on the column's foot at x 4152; what was seen to x 4277 is the
+  selector's band beyond the column. **Line H is the compared line of the row above** (`cdp4_bus_s#` /
+  `cdp3_g_c#`, eleven rows firm; AMB-054); it is driven in the east cell (the load and pull-down above) and
+  read by the selector.
+- Ambiguities, "Line H under rail E", candidate (b) (a contact from rail E ties H to VSS; "the more likely"):
+  with these joins (b) would ground eleven of the fourteen lines that `cdp4` compares with R14 and R15, so
+  (a), H a signal, is the reading to keep. Nothing was read under rail E.
+- "The metal segment ... ends at y 11738 of the next row without a visible contact" / "its metal is a segment
+  x 3949-3966 that runs down across the row boundary": one metal through all fourteen rows, `eof_ypd`, from a
+  free end (3957,11047) to a pad (3957,18255) below the array. It passes over Z's band at (3958,11955) without
+  contact in every row.
+- `trace/larr.txt`, the comment on Vm6 ("Ends on a contact at 3913,18207 (not followed)"): seen in passing by
+  `eof` run 48, not read: Vm6 has a second pad at about (3912,18070), and its end pad is at about
+  (3915,18208).

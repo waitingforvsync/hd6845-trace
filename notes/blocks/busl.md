@@ -3229,3 +3229,18 @@ detail; where one names something of this list as undrawn, this list is the curr
 
 - Piece `ga`, `lc1_w7780`'s row y 15218 "(drawn to x 7170; it runs on east under `ck_out`'s track toward `bc1`'s rail)": drawn to its end by `eof` (run 34): gate 1 of the NOR `eof_w15262`, ending over field at x 7350, no contact under `ck_out`'s metal. The pad (7100,15262), 87 px south of the end pad (7100,15175) on the same x, is another net (`eof_w15262`; no metal between).
 - Piece `vb` ("south on x 7383-7432 out of the region at y 15000"): drawn on by `eof` (run 35): at y 15024-15069 it turns west and becomes the ground rail x 7294-7342 of `bc1`'s west gate column.
+
+## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
+
+- Piece `fe`, "a pad (7835,8862) whose metal goes north to (7834,8645)": drawn (`cdp3`, 2026-11-21): the end
+  pad's contact is at (7834,8647), and its poly row runs east into the cluster beside row A (AMB-047).
+- Not done, item 4 (the thin track x 4780 and the track x 4736 "from the north"): drawn by `eof` runs 37-38.
+  The track x 4780 ends in the south on the pad (4778,17212), not "at about (4780,17190)", and is
+  `eof_w15998`; it runs north to an arm at y 14159 onto the pad (4736,14155) (not (4737,14160); AMB-052), and
+  the track x 4736 runs north from that pad to an end pad (4736,11292) through five more pads, each with a
+  poly row west into the left array. The follower's candidates (4779,15224), (4778,15380), (4780,15482) are
+  bars of rows crossed, not contacts. A second metal on the same track position starts 150 px south of
+  (4778,17212) at another net's pad (4778,17365) (trap 33).
+- The ports at x 4780 "into the left array": each row end now has its load (`eof` run 43): `cdp3_hw_c#` ends
+  on a wide pass transistor gated by `eof_ga` = NOT `rcs_mv`; `cdp4_bus_s#` on a strip with a second pass
+  transistor gated by `eof_gb` and on west into the row.

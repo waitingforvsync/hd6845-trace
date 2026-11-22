@@ -3026,3 +3026,75 @@ Kept as they are, for want of a function: the datapath's channels B, G and 2, `c
 inverters on the NOR column's output; their labels were brought into line in the merge. Its handoff
 is not applied yet. `out/` rebuilt: 2,474 nets, 4,648 transistors, 0 errors, 0 warnings, 833 floor-plan
 blocks.
+
+## 2026-11-21 18:59  Handoffs: `eof` runs 36-51, `cdp4` runs 4-15, `regs` runs 5-6, `cdp3`
+
+Thirty-one handoff files, applied by the coordinator (on Opus 5.5; coordination, no tracing): Tom Seddon,
+`eof` runs 36-49 (2026-11-21 10:17-21:16 +0000, merged 4c53c1a .. 964dc12, claim kept through them);
+Kieran Connell's session, `eof` runs 50-51 (merged 3ef0a7a, 0e68afe, claim released) and `regs` runs 5-6
+(merged 41e794f, c0cffa9; one of its three files, `regs-...-200605-c0cffa9`, repeated run 5's text by
+mistake, as the run 6 file says, and was removed unused); Matt Godbolt, `cdp4` runs 4-15 (merged 7a4a3d8 ..
+c44b6fd, claim released) and one item of `cdp3` (merged 0d349fe, claim released).
+Full extraction after them 2,517 nets, 4,812 transistors, 0 errors, 0 warnings; 966 of 1,423 equations
+firm; 109 nets joined only through uncertain items (1,212 items). Spot checks of the overlays (the drawn
+shapes lie on the features): `regs`' inverter under `bd3`'s rail end at 2.5x in `metal` and `acid1b`
+(`cache/scratch/refresh/h10_regs_inv.png`), and row s1 of the left array's east column at 1.4x in `acid1b`
+(`h10_eof_s1.png`).
+
+What they establish (from the tracers' notes; marks as there):
+
+- **The read path of R12-R17 is complete, registers to pins** (`cdp4` runs 4-11 with `regs` runs 5-6;
+  firm). `cdp3_n_c#` = `cdp4_n_s#` is one 8-bit bus on eight thin tracks east of the datapath, down to
+  the bottom bus, east through three poly hops and north to the data output units: **`d#_out_n` = NOT
+  `cdp3_n_c(7-#)` for all eight bits** (D0 `dbus`'s inverter, D1-D6 the new cell `cdp4_ro`, D7 `regs`'
+  inverter under the stretch of `bd3`'s ground rail that `bd3` had not drawn). The datapath's column K is
+  data bit 7 - K. With `d_hiz` low each data pin is one column of the read bus in true sense.
+- **`dbus_le`** runs from `dlat` south over four output boxes (`?M`, AMB-056) to the output box of an
+  undrawn two-input NOR under `bd2`'s VSS rail; believed NOR(`cs_d`, X), as PR #17 had it.
+- **The two through lines east of the datapath** (`cdp4` runs 12-15): x 10852 is `rst_lat` (firm),
+  x 10808 is `cdp4_w10808`, the output of an undrawn unit of `bc2`; both run 14,000 px north into `tr1`'s
+  gate row, three gate loads each (`tr1_w12265` = `rst_lat`, `tr1_w12005` = `cdp4_w10808`).
+- **`eof`: the NOR column's output reaches every row of the memory address counter** (runs 36-38):
+  `eof_w15998` = `eof_w16218` = NOT `eof_w15781` (marked: AMB-050's ties), seven rows each, on the tracks
+  x 4736 / x 4780 (the arm onto (4736,14155): AMB-052), with two more capacitor-like devices (AMB-051).
+- **`eof`: what each row of the left array's east column does** (runs 39-48, 14 cells per piece): the
+  line gates a pass transistor onto a strap node (AMB-053); a two-way selector gives that node R13's
+  inverted bit `cdp3_hw_c#` (or `lc3_e9577` .. `lc3_e9793` in rows s8-s13) while `rcs_mv` is low and the
+  row's compared line `cdp4_bus_s#` / `cdp3_g_c#` while it is high (select drivers `eof_ga` = NOT `rcs_mv`,
+  `eof_gb` = NOT `eof_ga`, marked); the compared line is `larr`'s line H of the row below (eleven rows
+  firm; AMB-054), the node of a depletion load on rail G = `vcc` (AMB-055) pulled down by `eof_pdg_s#` =
+  NOT `larr_y_s#` on rail F = `vss` (firm), so the compared line and the strap node are Y inverted twice;
+  and a pull-down on every Y gated by one line `eof_ypd` whose driver is open.
+- **`eof` runs 49-51**: the twin of `cap18`; the bus lines of `bl0_w15566` and (through a `?M`, AMB-057)
+  `eof_w16040` east to `bc4`'s ground, where `eof_w17345` = NOR(`bl0_w15566`, `eof_w16040`) waits for its
+  load east of x 10600; `bl0_w15566` has a pull-down gated by `eof_w17515`.
+
+Applied: master list rows `eof` (runs 36-51; a new Next, released), `cdp4` (continue) (runs 4-15,
+released), `regs` (runs 5-6), `cdp3` (continue) (only the cluster beside row A left), and the proposals
+for `larr` (continue), `bc1` (continue), `bc2`-`bc4`, `bl0`, `busl`, `bl1`/`bl2`, `busc`, `bd1`-`bd3`,
+`tr1`/`tr2`, `trunks` (continue), `lc1`-`lc3`, `dpad`, `dlat`, `bw` (continue) and the `rename` row (the
+selector's and line H's aliases are to stay aliases). **Re-read list**: R50 gets `larr`'s H3 in the
+eleven rows (it now carries eleven joins; one row sampled) and gap 1's band; R26 gets `eof`'s own piece
+`en18` (`eof_w16040`'s eleven pads not read all round; `eof` run 49 found a line leaving one east).
+**Guide**: traps 19 (the centre-line test loses a thin metal half on a poly; test the whole width),
+24 (sub-pixel medians; a buried contact's centre does not look like poly), 25 ("runs on" at a port is a
+claim about the next 100 px), 28 (class a narrow feature on its centre line), 29 (a rail drawn to a round
+coordinate can hide a unit; read a diffusion's long edges before a port) and 32 (test a corner's far
+side: it may be a T) extended. **Ambiguities**: AMB-047 annotated (`cdp3`'s lead on the box (7935,8648)),
+AMB-050 extended (the two select drivers), AMB-051 to AMB-057 new (`eof`'s run 49 proposal "AMB-051"
+is AMB-057). Corrections sections in the notes of `bd3`, `bw`, `cdp3`, `regs`, `dbus`, `dlat`, `dpad`,
+`trunks`, `cdp2`, `tr1`, `busl`, `bc1`, `bl0`, `larr` and `bc2`. `notes/operation.md` and the glossary:
+the tracers' own edits stand. Floor plan: the fragments' new blocks lie inside coarse blocks that they do
+not replace whole (`bc3`'s north-west corner, x 7190-7530, y 16290-16930, is inside the large "bottom-centre
+logic" block); nothing trimmed. `dlat`'s plain `M` over the first output box is left as drawn (AMB-056).
+
+Tools, from the Windows runs (`regs`, `eof` 50-51): `tools/costs.py` now names the transcripts' folder as
+Claude Code does on Windows too (`tools/regs_costs.py`'s one line; `regs_costs.py` itself is `regs`' and
+stays), `/trace6845` runs `costs.py` with the venv's Python, and `notes/workflow.md` has a paragraph for
+Windows collaborators (Developer Mode and `MSYS=winsymlinks:nativestrict`, `flock`, lone carriage returns).
+**Not done, proposals left open**: `tools/claim.py done` refusing a handoff file older than the merged
+commit (the cause of `regs`' mis-filed handoff); `tools/mergecheck.py` checking that the last "Round N:"
+line of the notes is this run's (the slip `cdp4` run 15 caught before its push).
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 985 floor-plan
+blocks. Coverage: 72.9% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.

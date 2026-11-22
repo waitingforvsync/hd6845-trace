@@ -913,6 +913,8 @@ are very probably the same: no contact to the metal x 7927-7957. Re-read item R5
 land, hole or pits, widened ring; trap 27's addition). And the pad (7878,8315)'s metal from (7987,6845) is
 `cdp2_w6845`, a through line from the west (a metal along y 6848), not the output of `cdp2`'s inverter.
 
+**Annotated 2026-11-21 (evening)** (from `cdp3`'s handoff, merged 0d349fe): a poly row arrives at the box (7935,8648) from the west: the pad (7834,8647) at the end of `busl_x7122`'s metal x 7835 carries a row east (y 8637-8658) under the x 7880 metal to x 7918, 15 px short of the box. A row arriving there fits the box being a poly pad of this row with a contact from the metal x 7927-7957 rather than a diffusion: a lead, not a finding (views `cache/scratch/cdp3/x7835_a.png`, `ov_x7835.png`; `tools/px.py row 8647 7790 7960 6 metal,metal1,acid1b`).
+
 ## AMB-048: the tie of `cdp2_b_hl`'s load (2026-11-21)
 
 Proposed by `cdp2` (Matt Godbolt, piece `gh`, merged 5d52ee6). The depletion load of the comparator's row line
@@ -948,3 +950,91 @@ end, the row no other driver; the reviewer of run 34 measured the pilot cell's a
 control: the same 12 px dark line and plain centre). Rests on it: all four equations, and so the chain from
 `rcs_e4`, `lc1_w7780`, `rcs_mv` and `rst_n` onward. Would settle it: a sharper shot, or the next units'
 logic making sense with these inputs.
+
+**Annotated 2026-11-21 (evening)** (from `eof` run 42, piece `selg`; the block's Ambiguity 172): two more units
+of this build, `eof`'s cell `eof_sdrv` (x 7260-7325, y 16515-16570 and 325 px south), the select drivers
+`eof_ga` = NOT `rcs_mv` and `eof_gb` = NOT `eof_ga`, are drawn with the same pair of ties (`?D` / `?B`). If the
+west tie is not there the select line has no driver.
+
+## AMB-051: the devices of `cap18`'s build (2026-11-21)
+
+From `eof` runs 37-38 (Tom Seddon; the block's Ambiguities 116, 144, 150). Four devices of one build:
+`cap18` on `eof_w16040`, its twin on `bl0_w15566` (drawn in run 49 as `cap18b`), `cap998` on `eof_w15998`
+(tap pad (5627,16125)), `cap218` on `eof_w16218` (x 4850-5020, y 16700-16910). Each: a gate on the net, a
+channel between VCC and a closed diffusion whose contact's metal island also covers the gate and has no wire.
+Candidate readings: (a) a capacitor on the net; (b) a depletion load whose gate is tied to its source through
+the island by a contact not seen in any of the four shots. For (a): no ring and no hole over any gate plate;
+`cap998` sits on a net that has a driver with its own load. **Adopted: (a)**, drawn as transistors whose
+island node has no other connection. Rests on it: whether `eof_w16040` (no driver found) has a pull-up. Would
+settle it: the circuit (the driver of `eof_w16040` found), since no photo shows the cross-section.
+
+## AMB-052: the arm of the track x 4780 onto the pad (4736,14155) (2026-11-21)
+
+From `eof` run 38 (Tom Seddon; the block's Ambiguity 147). 6-8 px between the pad's metal frame and the arm
+at y 14159 are dim in both chips (chip 2 80-144, chip 1 48-112). **Adopted: one metal**, the pad poly's east
+edge under it (the bar is as narrow as a row's edge bar, the frame is bright on that side only, and the track
+would otherwise end on nothing). Drawn as plain metal. Rests on it: the join of `eof_w15998`'s track from the
+south to the seven northern rows of the left array (s0-s6); without it those rows' line has no driver. Would
+settle it: a sharper metal shot, or the north track's other end (it is a free end pad (4736,11292)).
+
+## AMB-053: the strap's north end on the VSS-tied poly band, left array rows s0-s13 (2026-11-21)
+
+From `eof` runs 39-40 (Tom Seddon; the block's Ambiguity 156; master (4605,11536)). The thin metal x 4597-4613
+of each row (y 11522-11898) carries the end of the transistor that the fourteen-row line gates (contacts
+(4608,11757), (4607,11881)); its north end lies on a poly band y 11527-11545 that a pad with a contact
+(4667,11540) ties to the VSS metal x 4647-4692. Candidate readings: (A) no contact: `eof_strap_s#` is a signal
+node and the transistor a pass transistor; (B) a contact: `eof_strap_s#` is VSS and the transistor pulls
+`eof_nbox_s#` low. For A: no hole in the clean shot (cream, uniform), the metal not widened (15 px), the band
+18 px high where every contact of these thin metals stands on a 33-38 px pad, the two dark bars are the band's
+edges. For B: the metal has no other connection north of the gate and ends exactly on the band; chip 2's
+stripped shot is greenish there, but as greenish on the field south of the band (the metal's ghost). **Adopted:
+A** (no `?` item drawn). Run 40 traced the group south of the metal: two pass transistors on the node with no
+supply contact, so A is the reading that makes a circuit. Rests on it: the meaning of fourteen transistors.
+Would settle it: what the box north of the gate (`eof_nbox_s#`) and its poly column drive.
+
+## AMB-054: the selector's band meets the poly column inside rail G's margin (2026-11-21)
+
+From `eof` run 44 (Tom Seddon; the block's Ambiguity 181). In each row of the left array the lower band from
+the selector meets the poly column x 4152-4164 inside rail G's protected margin: read from the clean shot
+(cream into the column's red-brown, no pink, no green rim; a 2-4 px dip at x 4160-4164 whose depth differs by
+row, none in s8); chip 2's shots show only the rail's edge line there. Other reading: the band ends a few px
+short of the column (no room for a poly gap; it would leave the band a dead end). **Adopted: one poly**
+(the reviewer agrees and adds s9 from chip 2's stripped shot). Rests on it: the eleven joins of the compared
+lines to `larr`'s lines H, and all fourteen bands' loads. Also rests on `larr`'s H3 being poly in the eleven
+rows (R50).
+
+## AMB-055: the greenish box under rail G beside each load's buried contact (2026-11-21)
+
+From `eof` run 45 (Tom Seddon; the block's Ambiguity 185). Under rail G east of each buried contact of the two
+loads lies a greenish box (x 4176-4197, y 11674-11714 and y 11820-11858 in row s1; clean shot 150/148/108; no
+ring, specks or pits), between the buried contact (a dark bar 10-12 px) and the supply diffusion. Readings:
+(a) field inside the buried contact's window; (b) bare diffusion of the buried contact's active area; (c) a
+bump of the supply diffusion ending at the bar; (d) diffusion joining the buried contact to the supply
+diffusion. (a)-(c) give the nets as drawn; (d) would put each compared line on `vcc`, so it is not believed.
+**Adopted: (a)**; nothing is drawn of the boxes. Rests on it: all 28 loads. Settled by the pull-downs (run 46
+drew them on one gate per row: the nodes are logic outputs, which (d) would contradict).
+
+## AMB-056: `dbus_le`'s thin metal over the output boxes of the data output inverters (2026-11-21)
+
+From `cdp4` run 8 (Matt Godbolt; the block's Ambiguity 15). The thin metal x 16768-16782 that `dlat` draws
+south to (16774,15935) runs on south over five output boxes (buried contacts of `d5_out_n`..`d1_out_n`) and is
+dark in both metal shots for 53-67 px over each (y 15802-15868, 15937-15990, 16067-16124, 16197-16255,
+16323-16383), the clean shot greenish under it. **Adopted: one metal passing over the boxes with no contact**
+(trap 27; the reviewer of round 7 checked each box against real pads: no pad, hole or pits). `dlat` draws the
+stretch over the first box as plain metal; `cdp4` draws the other four `?M`, so `dbus_le` south of y 15990 is
+joined only through uncertain items. Left as drawn: whether `dlat`'s stretch should be `?M` too is a question
+of consistency only. Would settle it: the far end, traced by `cdp4` run 13 to the output box of a two-input
+NOR under `bd2`'s VSS rail (PR #17 had a NOR as its driver); a NOR there makes one metal the reading.
+
+## AMB-057: is the bottom bus line y 17860-17873 the east arm of `eof_w16040`'s pad (8643,17865)? (2026-11-21)
+
+From `eof` run 49 (Tom Seddon; the block's Ambiguity 206; proposed there as AMB-051). One `?M`
+(`trace/eof.txt`, `?M 8643,17866 x8708 w=12`). Reading B (drawn): one metal from the pad east over
+`bl0_w15566`'s poly column x 8680-8698. For it: chip 2's metal shot (bright metal from x 8668, 26-27 px from
+the pad's centre, as at the control pads (8685,17821) and (8598,17908)); the clean shot's protected strip and
+the chip-2 stripped shot's ghost band at the line's height; the follower from the east runs to the pad; under
+the other reading the line would end 6-8 px from the pad's metal. Reading A: the line ends on the column,
+short of the pad. For it: chip 1's metal shot is dark from x 8646 to 8686, where both control pads show their
+line bright right after the ring. **Adopted: B.** Rests on it: that the line `eof` runs 50-51 drew east
+(`eof_w17866`, gate of `eof_w17345`'s second pull-down) is `eof_w16040`. Would settle it: the line's east end
+logic; a sharper chip-1 view.

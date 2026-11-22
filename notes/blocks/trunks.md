@@ -610,3 +610,13 @@ along the top of the central datapath) is the gap.
 ## Corrections (coordinator, from the handoffs of `busl` run 15, 2026-11-21)
 
 - Taps in the left bus field (R4): none on the one line there between y 8995 and y 15000 (`busl`, under piece `xm`: method and numbers). South of y 15000 and its poly cross-unders are not checked.
+
+## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
+
+- `rst_lat`'s diagonal from the contact (11288,17517) ("poly west and south-west. Not followed", here and in
+  `trace/trunks.txt`): followed by `cdp4` run 12: it ends in a row y 17633-17653 through a pad (10852,17648)
+  on the track x 10852, which is `rst_lat` up the east side of the central datapath to y 3592 and into `tr1`'s
+  gate row.
+- The metal on the track position x 10810 south of y 16430 (a pad (10808,16430), then south to this block's
+  piece at y 18458) is a separate metal from `cdp4_w10808`'s track (650 px of bare ground between); y
+  16430-18458 of it is undrawn.

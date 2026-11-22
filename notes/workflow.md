@@ -64,6 +64,11 @@ working tree. A remote collaborator with a separate clone needs `cache/` built o
 (`tools/prepare.py`, then `tools/align.py`) (they write only under `cache/`: `align.py` keeps its fit in
 `cache/align.json`; the tracked `trace/align.json` is the coordinator's record, changed only
 with `--record`, and the merge gate refuses a branch that changes it) and the Python packages listed in `CLAUDE.md`.
+On Windows (Git for Windows; `regs` and `eof`, 2026-11-21): turn on Developer Mode and set
+`MSYS=winsymlinks:nativestrict` before `tools/newwork.sh`, or `ln -s` silently copies `cache/` (7 GB) and
+`.venv` and the gate dies at `os.symlink`; `tools/ship.sh` needs `flock`, which Git for Windows lacks (one
+shipper per clone: a no-op `flock` on PATH works); a script that edits notes under `core.autocrlf` must not
+leave a lone carriage return (git then takes the file for binary).
 
 What you may change on your branch:
 

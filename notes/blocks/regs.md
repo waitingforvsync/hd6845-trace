@@ -590,3 +590,13 @@ Round 7: no findings.
 ## Corrections (coordinator, from the handoffs of 2026-11-20, second batch)
 
 - Piece 3, "The 4,600 px between are read (notes), not drawn", and the two joins "believed": drawn by `busl` run 8 (pieces `r12`, `r13`) and reviewed, no uncertain item: `rsel12_buf` and `rsel13_buf` run from this package's ports at the south edge of the left bus field to its tracks at y 10400 on one thin metal each, and they are the read gates of `cdp3`'s rows E and F. The path is as read here; the tap contacts are at (6452,13854) and (6495,13744) (here: (6450,13852), (6492,13744)).
+
+## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
+
+- "Believed, not traced: the other seven columns do the same": traced by `cdp4` runs 4-11. The "more undrawn
+  metal rows through the same hop below `rsel12_buf`'s, y about 17777 ..." are the read bus's columns 1-7 (y
+  17777, 17821, 17864, 17908, 17951, 17994, 18037).
+- "The unit east of the VCC rail beside this inverter" is the sixth data output inverter, on column 1 (`cdp4`
+  run 9); columns 2-7 go north to the data output units instead.
+- `regs_w17462` "to a pad seen at (17065,18010) with a metal on east: not followed": followed (`cdp4` run 11):
+  it is `d7_out_n`, into D7's pad cell; the pad's contact is at (17080,18013).

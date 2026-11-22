@@ -238,3 +238,12 @@ Round 1 (latch unit b): no findings.
 
 - "Latch unit a", row `bc2_w14912` ("goes west, not followed"): the pad (10395,14912) is the south end of a thin metal x 10397 that comes from north of y 14570 (`eof` run 17, at 1.28x and by `tools/eof_mrun.py col 10395 14640 15030`; not read at high zoom).
 - Not done 1 ("the metals at a's ... output pads ... x 10441 north of y 14940 ... x 10267 (output, north of y 15515). None is followed"): these three are followed (`eof`, pieces `in172`, `in390`): unit a's output `bc2_w15000` and enable `bc2_w14955` gate the NOR T at the top of this column (`eof_w15172`, the set of the latch behind the ripple counter's clock), and unit b's lower node `bc2_w15607` is one input of that latch's clear.
+
+## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
+
+- The east column's VSS rail (`M 10568,15270 y15746 w=56` in `trace/bc2.txt`) runs on south as one metal to at
+  least y 17590 (`eof` run 51; the reviewer agrees); `eof` draws y 17227-17590 of it. The stretch y
+  15746-17227 is drawn by no one.
+- An undrawn unit at about (10620-10780, 15750-15860): a depletion load from the VCC rail's contact box
+  (10722-10775, 15782-15848), plate x 10685-10716, tie box (10622-10650, 15760-15790); its output is the track
+  x 10808 (`cdp4_w10808`, `cdp4` run 12), which runs north into `tr1`'s gate row. Pull-downs not found.

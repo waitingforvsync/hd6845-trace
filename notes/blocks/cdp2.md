@@ -936,3 +936,8 @@ comparator's chain output is, west of the knot, the line at y 6844, which goes t
 ## Corrections (coordinator, from the handoffs of `busl` run 16, 2026-11-21)
 
 - `cdp2_w6845`, "the metal west of the pad (7335,6845) (follower: to (6142,6847))": drawn by `busl` (piece `hb`) to an end pad (6146,6847); the wire goes on west in poly to a pad (5668,6846) and in metal along y 6849 to about x 5339 (`lc1`'s band, undrawn).
+
+## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
+
+- The reviewer of `cdp4` run 12 notes that the chain's poly row drawn to x 10842 at about y 6880-7262 ends at
+  about x 10821; the track x 10808 (`cdp4_w10808`) lies lengthwise on it with no pad (no connection).

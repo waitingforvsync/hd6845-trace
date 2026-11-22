@@ -275,7 +275,7 @@ end up as that side left it. If main renamed a net that your files still use, ru
 merge resolution (`git commit` to conclude the merge is fine here).
 
 ```
-python3 tools/costs.py
+.venv/bin/python tools/costs.py
 tools/ship.sh "Cost report" costs/*.json
 .venv/bin/python tools/mergecheck.py PREFIX
 ```
