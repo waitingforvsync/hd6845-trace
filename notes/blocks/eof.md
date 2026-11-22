@@ -7644,7 +7644,8 @@ driver lies; the other three lead to the loads.
    plain band y 16264-16282 that leaves the rail's north diffusion eastwards (plain again x 10654-10678).
    Readings: (a) no tie: the cap is an end cap in field and the dark band is the cap's north edge line and
    the band's south edge line side by side; the box is something in the band (a contact of another wire,
-   a buried contact of the poly that reads orange further north at y 16256-16259, or dirt); (b) a buried
+   or a buried contact of the poly that reads orange further north at y 16256-16259; not dirt: it is on
+   both chips, fix check round 66); (b) a buried
    contact: the poly continues from the cap north into the box and is tied to that diffusion, which would
    put `rst_lat` on a diffusion beside its own gate. **Working assumption: (a)**: a buried contact's box
    has a lighter, tan centre in every shot (control, run 51's box (10497-10516, 17331-17355): 159/132/85 in
@@ -7652,7 +7653,12 @@ driver lies; the other three lead to the loads.
    cap's orange stops at y ~16293 with its own rounded outline (`f65_cap.png`, 7x). Nothing is drawn for
    the box, and no `?` item: the transistor and the band are undrawn, so the extraction is the same under
    either reading. What would settle it: tracing the unit (the band's ends, and where the poly at y 16256
-   comes from).
+   comes from). Fix check round 66 (its own reading with both controls): (a) holds, not strictly
+   decidable: the box matches neither control (red 77-97 / 92-114 / 84-104 / 50-79 in chip 2's metal, chip
+   1's metal, the chip-2 stripped and the clean shot at y 16272, against 142 six px inside the buried
+   contact's outline); the dark band over the cap is about 10 px against 6 px for the same line east of the
+   cap, so the cap has a north edge of its own; but a dark line between poly and box is also what the
+   control buried contact shows, so the band alone does not discriminate.
 
 ## Review
 
@@ -10869,6 +10875,21 @@ Not checked by it: anything north of y 16262 or east of x 10700; the far ends of
 rail.
 
 Round 65: one finding that changes a port, fixed; an open question recorded as Ambiguity 216.
+
+### Round 66 (fix check of round 65's changes; 2026-11-21 22:22 -0600, after commit ff47574, against fd093cf)
+
+A fresh Fable reviewer; images in `cache/scratch/eof/review-66/` (8). The changes: the north row drawn to
+its cap (`P 10355,16345 y16303 x10638`), the south row to x 10604, the port corrected, Ambiguity 216
+written. It checked: the north row as one poly from the rail to the cap (orange x 10602-10616, one 8 px
+dark line x 10618-10624 that continues south as the outline of the south diffusion, so the diffusion's edge
+crossing the gate at x ~10620, orange again x 10626-10634); the cap's east edge x 10638-10642 in both metal
+shots and the chip-2 stripped shot, field x 10646-10660 and south of y ~16320, nothing leaving east or
+south; the south row's cap (dark x 10598-10606, field from x 10610); Ambiguity 216 with both controls (the
+working assumption holds, not strictly decidable: its measurements are in the entry; "dirt" struck from the
+entry, the box being on both chips). `tools/t.sh eof sameconn.py fd093cf` and
+`.venv/bin/python tools/sameconn.py fd093cf`: connections identical.
+
+Round 66: no findings.
 
 ## Not done
 
