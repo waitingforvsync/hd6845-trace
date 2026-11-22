@@ -4616,7 +4616,7 @@ P 10789,17695 y17816 x10355 y17604 w=18
 # dark ring) and runs east under ck_out's jog metal (trunks; lengthwise on it for 50 px, no contact) and the
 # thin metals x 10440, x 10485 to its end cap at x 10598 under the VSS rail x 10548-10598, where it is the
 # gate of a pull-down nobody draws (railprof.py 10552 10592 17480 17720: GATE y 17681-17696 between rail
-# diffusions y 17620-17680, with the rail's contact (10560,17652), and y 17705-17749). Drawn as poly only.
+# diffusions y 17633-17680, with the rail's contact (10560,17652), and y 17705-17739). Drawn as poly only.
 P 10355,17690 x10597 w=16
 P 10335,17587:10369,17621
 C 10352,17604 s=20x20
