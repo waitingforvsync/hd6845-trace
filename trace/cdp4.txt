@@ -1155,3 +1155,28 @@ P 16409,16847:16443,16881
 C 16426,16864 s=20x20
 P 16130,16865 x16426 w=20                # west under cs_d, rs_d (x 16342), rw_d, bd2_rs_n, x 16211 and e_b
 N M 16427,16700 dbus_le
+# ======================================================================
+# Run 14 (2026-11-21): the two through lines' top rows east into the top-right logic's track field. Each poly
+# row runs east from run 12's port under three thin metals and a wide metal plate (no contact) to a pad; a
+# thin metal runs on east from the pad along the track field. Each metal has a tap within 700 px: a pad with a
+# contact on a poly that runs south to a gate input of tr1 (drawn there from y 3650 south). The metals are
+# drawn to x 12400 (ports): each runs on east to further taps.
+# ======================================================================
+# --- rst_lat (track y 3592)
+P 10975,3590 x11695 w=20
+P 11678,3575:11712,3609
+C 11695,3592 s=20x20
+M 11695,3592 x12400 w=12
+P 12244,3576:12278,3610                  # tap: a pad on the poly that runs south under the y 3636 metal (no contact)
+C 12261,3593 s=20x20
+P 12263,3593 y3655 w=22                  # ... onto tr1's P 12265,3650 y3795 (tr1_w12265: gate C's input)
+# --- cdp4_w10808 (track y 3636)
+P 10975,3635 x11652 w=22
+P 11635,3618:11669,3652
+C 11652,3635 s=20x20
+M 11652,3636 x12400 w=12
+P 11983,3619:12017,3653                  # tap: a pad at the top of tr1's P 12005,3650 y3795 (tr1_w12005: inverter A's input)
+C 12000,3636 s=20x20
+P 12004,3636 y3655 w=22
+@alias rst_lat tr1_w12265
+@alias cdp4_w10808 tr1_w12005
