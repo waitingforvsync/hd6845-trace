@@ -620,3 +620,10 @@ along the top of the central datapath) is the gap.
 - The metal on the track position x 10810 south of y 16430 (a pad (10808,16430), then south to this block's
   piece at y 18458) is a separate metal from `cdp4_w10808`'s track (650 px of bare ground between); y
   16430-18458 of it is undrawn.
+
+## Corrections (coordinator, from the handoffs of `eof` runs 52-54, 2026-11-22)
+
+- `h_eq_r1`, "poly west and south-west" with its diagonal to (10940,17598) (here and in the comment in
+  `trace/trunks.txt`): followed by `eof` run 52: the diagonal becomes a row y 17592-17612 west to a column
+  x 10432-10448 north, the gate of the pull-down on `bl0_w15566` at (10548,17515). `eof_w17515` is an alias of
+  `h_eq_r1`.

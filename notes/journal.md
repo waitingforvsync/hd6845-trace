@@ -3098,3 +3098,45 @@ line of the notes is this run's (the slip `cdp4` run 15 caught before its push).
 
 `out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 985 floor-plan
 blocks. Coverage: 72.9% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
+
+## 2026-11-22 00:36  Handoffs: `eof` runs 52-54
+
+Three handoff files, applied by the coordinator (on Opus 5.5; coordination, no tracing): Matt Godbolt's
+session, on Fable, `eof` runs 52-54 (2026-11-21 21:20-22:39 -0600, merged fde9969, 6410bab, 74c859a; claim
+released after each). Wiring only: three pads with contacts, no transistor, no uncertain item.
+Full extraction after them 2,516 nets (one fewer than at the last handoffs: run 52's join), 4,812
+transistors, 0 errors, 0 warnings; 966 of 1,423 equations firm; 109 nets joined only through uncertain items
+(1,212 items). Spot checks of the overlays (the drawn shapes lie on the features): run 52's two pieces at 1.8x
+in `metal` and `acid1b` (`cache/scratch/refresh/hR-20261122-eof52.png`), and `rst_lat`'s metal x 10353 with
+its two pads and run 54's metal x 10397 at 1x (`hR-20261122-eof53.png`).
+
+What they establish (from the tracer's notes; marks as there):
+
+- **`eof_w17515` is `h_eq_r1`** (run 52, firm): `bl0_w15566`, an input of the NOR `eof_w15523` in the chain
+  whose output reaches every row of the memory address counter, is pulled to `vss` while the horizontal
+  counter equals R1. The first traced use of R1's match.
+- **`rst_lat` reaches the column of `bc4`'s VSS rail x 10548-10598** (runs 52-53): from `cdp4`'s port south,
+  west and north to a pad (10352,17604), then a thin metal x 10353 north to an end pad (10353,16345) with a
+  tap (10353,17127). It gates three transistors under that rail (y 16297-16316, 17119-17132, 17681-17696),
+  none of them drawn; the box north of the north row's cap is AMB-058 (assumed no tie).
+- **`eof_w17345`'s output metal** (run 54) runs north to an end pad (10397,17040); the pad's row goes east to
+  a patch x 10530-10542 west of the rail, not read. A first belief (a buried contact onto the rail diffusion,
+  with an equation on it) was withdrawn by review round 67; nothing of it was ever drawn.
+
+Applied: master list rows `eof` (runs 52-54; a new Next, released), `cdp4` (continue) (`rst_lat` south of
+its port drawn), `trunks` (continue) (`h_eq_r1`'s diagonal followed), `bc2`-`bc4` (the five undrawn gate rows
+on the east column's VSS rail, the rail contact (10560,17083) in no trace file, the unit with `rst_lat`'s
+pull-down, the metal round the end pad) and the `rename` row (`eof_w17515`, an alias of `h_eq_r1`).
+**Re-read list**: R52 new: follow-task wires drawn as one plain poly with no tap, flanks read by eye only
+(`eof`'s own rows and columns, `busl`, `regs`, `tl4` runs 11-12; `cdp4`'s wires of 2026-11-21 and `bl0`'s
+long segments already scanned by run 53, no branch). **Guide**: trap 13 (a poly row whose end is hidden under
+a metal lying on it is not another net's until its end is seen; `tools/eof_tee.py`) and trap 24 (a framed
+block is not a buried contact by position: compare the interior) extended. **Ambiguities**: AMB-058 new (the
+block's Ambiguity 216). Corrections sections in the notes of `cdp4` and `trunks`. Floor plan: run 52-53's
+route blocks lie inside the coarse bottom-centre block; nothing trimmed.
+
+**Not done, proposals left open**: committing `cache/scratch/eof/teeall.py` (the tracer's loop of
+`eof_tee.py` over a trace file's long straight `P` segments), offered by run 53 for R52.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 988 floor-plan
+blocks. Coverage: 72.9% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.

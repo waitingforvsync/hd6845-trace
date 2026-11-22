@@ -255,6 +255,13 @@ Traps, all of them real:
    real end is a 90 px arm to a contact one bus line over. Before calling two coincident
    lines one net, find the contact: a pad, a ring in the metal shot, the green patch in
    the clean shot. If none of the three is there, they are two nets.
+   The other way round: **a poly row whose end is hidden under a metal lying on it is not another net's
+   until its end is seen.** `eof` run 52's survey saw a gate row y 17682-17698 running west under `ck_out`'s
+   jog metal toward the column being traced and wrote it down as another unit's row; its west 25 px lie in
+   a gap between two metals, where the clean shot shows only a dark ring, and it is a branch of that column
+   (found by review round 63). Before calling a poly "one wire with no tap", sample both its flanks for poly
+   leaving it (`tools/eof_tee.py h|v`) and look at every hit; the tool is an aid, not a proof (its limits are
+   in its docstring). Found 2026-11-21 (R52).
 14. **Where a tool says a line ends, look at the end at 5x in the metal shot.** A line ends
    on a contact; if you see none, the line has turned and the tool missed the corner.
 15. **Crossing fields without pads carry no taps.** In the fields where poly rows cross a
@@ -369,6 +376,11 @@ Traps, all of them real:
    along its centre "ends" at every buried contact it passes through. `eof` run 44 read two polys, each
    through a box, as one open column 390 px long "with dark lines across it". Control: the box
    (14536,14941). Found 2026-11-21 (`eof` run 45).
+   And a framed block on a poly row is not a buried contact because one sits at the same x in the same
+   column: compare the interior, not the position. `eof` run 54 took a block at x 10497-10522 for the
+   buried-contact box that the unit 300 px south has there and built a tie and an equation on it; its
+   interior is ordinary poly (orange in both metal shots), the lower one's plain (review round 67; nothing
+   had been drawn). Found 2026-11-21.
 
 25. **A port is drawn to the boundary only after the boundary itself has been looked at.** A
    line still there 50 px short of the edge may end on a pad. `dbus`'s `dbus_do0_in` was drawn

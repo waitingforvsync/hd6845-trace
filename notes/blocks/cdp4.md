@@ -1683,3 +1683,11 @@ Round 16: no findings that change a connection.
 ## Corrections (coordinator, from the handoffs of `busl` run 16, 2026-11-21)
 
 - "The VSS plate at the foot of the s0 rail west of x 7550 and south of y 14055": drawn by `busl` (piece `vb`): the plate reaches x 7491 and a wide metal runs south from it to y 15000.
+
+## Corrections (coordinator, from the handoffs of `eof` runs 52-54, 2026-11-22)
+
+- Not done, "`rst_lat` south of (10789,17700)", and the lead "`rst_lat`'s branch south of its port": drawn by
+  `eof` run 52 (piece `rl`): south, west along y 17816 under both rails, north on x 10355 to a pad
+  (10352,17604), not "under a drawn metal's track ... not followed"; the column has a branch row y 17682-17698
+  east to the gate of an undrawn pull-down under the VSS rail x 10548-10598. Its thin metal x 10353 runs on
+  north to an end pad (10353,16345) with a tap (10353,17127) (`eof` run 53).

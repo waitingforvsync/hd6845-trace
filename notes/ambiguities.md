@@ -1038,3 +1038,17 @@ short of the pad. For it: chip 1's metal shot is dark from x 8646 to 8686, where
 line bright right after the ring. **Adopted: B.** Rests on it: that the line `eof` runs 50-51 drew east
 (`eof_w17866`, gate of `eof_w17345`'s second pull-down) is `eof_w16040`. Would settle it: the line's east end
 logic; a sharper chip-1 view.
+
+## AMB-058: is the cap of `rst_lat`'s north gate row tied to the box north of it? (2026-11-21)
+
+From `eof` run 53 (Matt Godbolt; the block's Ambiguity 216; raised by review round 65, read again by round
+66). The poly row y 16292-16314 from `rst_lat`'s end pad (10353,16345) ends in a cap x 10624-10640 east of
+the diffusion it gates under the VSS rail x 10548-10598. Directly north, across a dark band y 16282-16290
+(about 10 px), is a box (10622-10650, 16264-16282) that is dark in all four shots, on both chips, in a narrow
+plain band that leaves the rail's north diffusion eastwards. **Assumed: no tie** (the cap is an end cap in
+field): the box matches neither control (a buried contact's centre is light: 142-159 against about 100 here
+in chip 2's metal shot), and the dark band is wider over the cap than east of it, so the cap has a north edge
+of its own. Not strictly decidable: a dark line between poly and box is also what a buried contact shows.
+Nothing is drawn for the box and the transistor is undrawn, so the extraction is the same either way. Would
+settle it: tracing that unit (the band's ends; the poly that reads orange north of the box at y
+16256-16259).
