@@ -778,6 +778,10 @@ that ambiguity is unchanged by this run.
   between two edge bars, no pad) and on as the poly `tr1` draws from y 3650; `cdp4_w10808`'s pad is the top
   end of the poly `tr1` draws from y 3650. The other polys of `tr1`'s gates that come north in this stretch
   (x ~11960, 12090, 12135, 12220) pass under both metals with no pad.
+  Their north ends, from the review (round 15; 2.3x only): 11961 on a pad (11958,3460) on the track y 3460,
+  12091 on a pad (12087,3548) on the track y 3550, 12221 on a pad (12218,3418) on the track y 3418; 12135 runs
+  on north past y 3330. One more poly crosses both metals at x ~12385-12407, from a pad (12393,3460), with no
+  contact: the drawn ends of the metals (x 12400) lie over it.
 
     tr1_w12220 = NOT rst_lat             (tr1's gate C; its load's tie is marked uncertain there)
     tr1_w11960 = NOT cdp4_w10808         (tr1's inverter A; likewise)
@@ -1541,6 +1545,43 @@ trunk metals its colour is unreliable, so "field beside the row" rests on the cl
 edge lines; the undrawn gate.
 
 Round 14: no findings that change a connection.
+
+### Run 14 (the top rows east into the top-right logic's track field)
+
+Round 15 (full review, 2026-11-21 18:08 -0600; a fresh Fable reviewer, images in `cache/scratch/cdp4/review-15/`, 11;
+commit before the round 2bc358b). Piece: the two rows from run 12's ports to their pads, the two metals to
+x 12400, the two taps and their joins with `tr1`'s polys (`rst_lat` = the wire `tr1` called w12265,
+`cdp4_w10808` = `tr1_w12005`). Told to suspect: each tap (a real contact? on which metal? which of `tr1`'s
+polys does its poly become? a contact where tap A's poly crosses the y 3636 metal? a poly north of a pad?);
+every other crossing of the two metals; the rows under the plate and the three thin metals and at the join;
+each end pad; the metals' continuity and identity.
+
+It checked: tap A at 5.6x in four shots with a text map and profiles (a real contact on the y 3592 metal:
+arched pad x 12247-12283, ring and bright centre in both metal shots, hole in the clean shot, pit in the
+chip-2 stripped shot, metal bright on both sides of the ring; its poly continuous south at x 12253-12273 from
+y 3606 to y 3660 and on as `tr1`'s 12265 poly down to gate C; no contact under the y 3636 metal; separate from
+the 12221 poly throughout; field north of the pad); tap B likewise (a real contact on the y 3636 metal, pad
+x 11986-12024; pink field between the pad and the 11961 poly; its poly south at x 11995-12015 is `tr1`'s 12005
+poly; field north of the pad); the other crossings (11961, 12091, 12135, 12221 and an undrawn poly at about
+x 12395) on both metals (clean shot 218-230/161-174 with no hole, no pad, the metal keeping its width) and
+their north ends (none on these two tracks); the metals (`tools/tl5_tracks.py h` at three heights each: no gap
+over 12 px away from the pads; no metal west of either end pad); the end pads at 5.6x (each on its own row,
+its metal leaving east; field between row A and pad B and between pad A and the y 3636 metal); the rows
+(continuous and separate under the three thin metals, across the join at x 10975-10985 and under the plate;
+uniform in the clean shot with no hole); the extraction with `tr1` loaded and `tools/unsure.py`.
+
+No finding that changes a connection. Geometry only, fixed or noted: the two metals measure 14-16 px (drawn
+12; now 14); the drawn ends at x 12400 lie over an undrawn poly crossing (noted in Logic; run 15 draws the
+metals on).
+
+`tools/t.sh cdp4 sameconn.py 2bc358b`: connections identical.
+`.venv/bin/python tools/sameconn.py 2bc358b`: connections identical.
+
+Not checked by it: contacts under the plate in the chip-2 stripped shot (fringes there; the plate's dark
+pits differ between the two chips and were taken as corrosion); whether the y 3460 metal is continuous
+between its two pads; anything east of x 12400; `tr1`'s gates.
+
+Round 15: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
