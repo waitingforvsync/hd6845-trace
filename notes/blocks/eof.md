@@ -1459,6 +1459,19 @@ contact, no transistor, no uncertain item).
 - **Checks**: full extraction 2,516 nets, 4,812 transistors, 0 errors, 0 warnings (2,517 nets before:
   one join). The package by itself: 1,204 nets, 2,012 transistors, 0 errors, 86 warnings.
 
+Run 53 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-21 22:06 -0600). One piece, wiring only (two pads with
+contacts, no transistor, no uncertain item).
+
+- **Piece `rln`: `rst_lat`'s metal north of run 52's port, to its end.** The thin metal x 10353 runs
+  1,200 px north from the pad (10352,17604) to an end pad (10353,16345), with one tap, a pad (10353,17127).
+  Each pad's poly row runs east to the VSS rail x 10548-10598 and **is the gate of a transistor under that
+  rail that nobody has drawn** (`bc4`'s column): the tap's row y 17115-17137 ends in a cap at the rail's east
+  edge; the end pad's poly goes north and east as a row y 16292-16314, under the rail, and runs on east of
+  it into a structure that is not read. With run 52's branch that makes three gates of the reset copy in
+  this column. Drawn as poly, with ports.
+- **Checks**: full extraction 2,516 nets, 4,812 transistors, 0 errors, 0 warnings (connections identical
+  to before: the net grows, no join). The package by itself: 1,204 nets, 2,012 transistors, 0 errors.
+
 ## Inventory
 
 | Piece | Where | What |
@@ -5487,6 +5500,48 @@ datapath). Views `s52_c.png`, `s52_m.png` (1.95x, clean and metal, every trace o
   another metal stands on the same track position after 10 px of bare ground. Run 51 found it passing
   over `bl0_w15566`'s column (y 17300-17474) with no contact.
 
+### Run 53: `rst_lat`'s metal north to its end (piece `rln`)
+
+Region x 10330-10620, y 16270-17550. Views `s53_tap.png`, `s53_end.png`, `s53_r1.png`, `s53_r2.png`,
+`s53_r1e.png`, `s53_r2e.png` (3.3-3.4x, metal and clean), `s53_end4.png` (3.6x, four shots), overlays
+`ov53_tap.png`, `ov53_end.png` (4x).
+
+- **The metal** (x 10347-10360): `tools/follow.py 10352 17570 N --gap 16` runs it from the pad (10352,17604)
+  to (10353,16342). `tools/tl5_tracks.py v 10353 16350 17590`: the stretches without metal in both chips are
+  9-12 px edge bars except the rings of two pads, and the clean shot has a hole only at those: a tap at
+  y 17133 and the end at y 16353. The follower's other candidates, (10355,17451) and (10356,17353), have no
+  pad pattern (`cache/scratch/cdp4/candh.py -v v`). Run 51 read no contact where it passes over the column
+  of `bl0_w15566`'s pad (y 17300-17474).
+- **The tap pad** (contact (10353,17127); ring and bright centre in both metal shots, a hole in the clean
+  shot): the metal runs through it. Its poly row runs east, y 17115-17137: under the thin metals x 10397,
+  x 10440 and x 10485 (no pad pattern at any: `candh.py -v v X,17126`), in the open at x 10495-10545 and
+  under the rail to an end cap at x ~10598 (bare ground east of it in both metal shots, `tools/px.py row
+  17125 10580 10700 6`). No poly leaves either flank between x 10372 and x 10600
+  (`cache/scratch/eof/tee.py h 17114 17138 10372 10600`: none; the tool finds run 52's tee as a control), and
+  nothing leaves the pad west, north or south.
+  **Under the rail the row is a gate**: `tools/railprof.py 10552 10592 17040 17260` gives GATE y 17119-17132
+  between diffusion y 17040-17112 and diffusion y 17140-17199 (the next gate south, y 17206-17219, is the
+  row run 51 noted north of its unit).
+- **The end pad** (contact (10353,16345)): the metal from the south ends on it. Its poly goes north as a
+  column x 10345-10366 to y ~16292 and east as a row y 16292-16314 (`tee.py`: no poly leaving the column or
+  the row's flanks from x 10372 to x 10600), under the thin metals x 10398 and x 10442 and the rail.
+  `tools/railprof.py 10552 10592 16240 16380`: GATE y 16297-16316 between diffusion y 16244-16289 and
+  diffusion y 16317-16369. **East of the rail the row runs on** (orange in both metal shots at
+  x 10604-10610 and x 10628, `tools/px.py row 16303 10580 10700 6`) into a structure at x 10600-10660,
+  y 16270-16330 (outline loops and a dark box in the clean shot, `s53_r2e.png`): not read. Drawn to x 10600.
+- **Another metal lies on that row and is not joined** (tracing guide, traps 13 and 33). The track position
+  x 10353 carries a second metal north of the end pad: `tools/follow.py 10392 16345 N --gap 16` shows it
+  coming down x 10353 from (10353,15865), jogging east along y 16296-16312 from x 10350 to x 10398 (on
+  `rst_lat`'s row, over the L's corner) and going on south on x 10398. Between the end pad's north ring
+  (y 16332-16335) and that metal's south edge (y 16314) both metal shots read open poly (chip 2
+  155-162/100-107/44-54, chip 1 150-160/87-92/44-51: `tools/px.py col 10354 16296 16350 3`), and along the
+  jog the metal is bright without a ring (176-217 in chip 2, 171-235 in chip 1) and the clean shot under it
+  uniform salmon with no hole (`tools/px.py row 16303 10340 10412 3`; `tools/textmap.py 10336 16284 10420
+  16324 3 --acid`): no contact. That metal's net is not identified here.
+
+    rst_lat gates, in the column of the VSS rail x 10548-10598 (none of the three transistors is drawn):
+    y 16297-16316, y 17119-17132, y 17681-17696
+
 ## Ports
 
 The net is driven outside the package (by `rdp2`'s NOR). `in` marks the port beyond which the
@@ -5628,9 +5683,11 @@ driver lies; the other three lead to the loads.
 | `vcc` | metal | (8510-8558, 15340) | - | pieces `ck6`, `vw`: R2, `bc1`'s (`M 8534,14990 y16300 w=48`), drawn again over the three VCC boxes so that the package extracts by itself |
 | `vss` | metal | (10543-10597, 14590) | - | piece `in172`: the east column's VSS rail, drawn over the NOR T only (y 14590-14790); `bc2`'s rail goes on south, north it runs on |
 | `vcc` | metal | (10721-10771, 14590) | - | piece `in172`: the east column's VCC rail, likewise |
-| `rst_lat` | metal | (10347-10359, 17540) | out | piece `rl`: the thin metal north of the pad (10352,17604) at the end of `rst_lat`'s poly from `cdp4`'s port (10789,17700); runs on north to a tap pad (10353,17128) and an end pad (10353,16343) (measured, not drawn) |
+| `rst_lat` | - | (the metal north of the pad (10352,17604)) | - | piece `rl`'s port at (10353,17540) is met by piece `rln` (run 53): no port |
 | `h_eq_r1` (= `eof_w17515`) | poly | onto `trunks`' diagonal at (10940-10950, 17592-17612) | in | piece `s17515`: the row of the gate column of `bl0_w15566`'s pull-down; no port (joined by geometry) |
 | `rst_lat` | poly | (10546-10598, 17682-17698) | out | piece `rl` (review round 63): the branch row from the column x 10355, under the VSS rail: the gate of an undrawn pull-down (rail diffusion with a contact (10560,17652) north of it, diffusion y 17705-17739 south of it) |
+| `rst_lat` | poly | (10521-10598, 17115-17137) | out | piece `rln`: the tap pad (10353,17127)'s row, an end cap at the rail's east edge: the gate of an undrawn transistor under the VSS rail (diffusion y 17040-17112 north of it, y 17140-17199 south of it) |
+| `rst_lat` | poly | (10600, 16292-16314) | out | piece `rln`: the end pad (10353,16345)'s row at the rail's east edge (drawn end): under the rail the gate of an undrawn transistor (diffusion y 16244-16289 and y 16317-16369); east of the rail it runs on into a structure at x 10600-10660 that is not read |
 
 ## Ambiguities
 
@@ -10763,6 +10820,12 @@ Round 64: no findings.
 
 ## Not done
 
+- **Next (after run 53)**: `rst_lat`'s metal north is drawn to its end (piece `rln`). Open from it: the three
+  transistors `rst_lat` gates under the VSS rail x 10548-10598 (y 16297-16316, y 17119-17132, y 17681-17696)
+  and their units; the structure east of the rail at x 10600-10660, y 16270-16330 that the north row runs
+  into; the metal that jogs round the end pad (down x 10353 from (10353,15865), east along y 16303, south on
+  x 10398 to a corner (10403,16483), east, south on x 10441 to about (10440,16626): `tools/follow.py 10392
+  16345 N` / `S`).
 - **Next (after run 52)**: `eof_w17515` is `h_eq_r1` (piece `s17515`), so that item of the list below is
   done. New from piece `rl`: `rst_lat`'s metal x 10353 north of the port (10353,17540): its tap pad
   (10353,17128) and its end pad (10353,16343), each with whatever its poly gates (in `bc4`'s ground); and,

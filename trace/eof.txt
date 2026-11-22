@@ -4622,3 +4622,16 @@ P 10335,17587:10369,17621
 C 10352,17604 s=20x20
 M 10353,17604 y17540 w=13
 N M 10353,17560 rst_lat
+# ======================================================================
+# Run 53 (2026-11-21), piece `rln`: rst_lat's thin metal north of run 52's port (10353,17540): one metal to
+# its end pad (10353,16345), with one tap, a pad (10353,17127). Each pad's poly is the gate of a transistor
+# under the VSS rail x 10548-10598 that nobody has drawn (bc4's column): the tap's row y 17115-17137 runs east
+# to an end cap at the rail's east edge; the end pad's poly goes north and east as a row y 16292-16314, under
+# the rail, and runs on east of it into a structure that is not read (drawn to x 10600: port).
+M 10353,17550 y16345 w=13
+P 10336,17110:10370,17144
+C 10353,17127 s=20x20
+P 10353,17126 x10597 w=22
+P 10336,16328:10370,16362
+C 10353,16345 s=20x20
+P 10355,16345 y16303 x10600 w=20
