@@ -741,6 +741,36 @@ connections identical.
 
 Round 4: no findings that change a connection.
 
+### `busl_x7122`'s metal north of its pad (run of 2026-11-21)
+
+Round 5 (full review, 2026-11-21 18:46 -0600; a fresh Fable reviewer, images in `cache/scratch/cdp3/review-5/`, 5;
+commit before the round a4ababb). Piece: the metal x 7835 from the stub at y 8800 to its end pad (7834,8647)
+and the pad's poly row east to x 7905. Told to suspect: whether the metal from the south is separate from
+the pad (7838,8582) of `cdp3_w8063` 65 px further north; whether the pad (7834,8647) is a real contact with
+the metal on it; the crossing of the row y 8675-8697; the row east (one poly, a contact under the metal
+x 7874-7886, anything else leaving the pad); the south pad.
+
+It checked: bare ground at y 8606-8622 across the whole width x 7814-7860 in both metal shots (chip 2
+155-170/140/88), khaki in the clean shot and red minus green about 0 in the chip-2 stripped shot (two metals
+end to end, no off-centre link; 6x); the pad (ring with bright centre, dimmer in chip 1 than the north pad's;
+a hole in the clean shot like that of (7838,8582); the dark stretch on the arrival side 12-14 px against a
+14-16 px ring on the north); the metal continuous from y 8668 to y 8841 with no side arm, landing on the
+south pad; the crossing (metal bright between two 4-6 px edge bars, no widening, no hole, no pits); the row
+(one poly from the pad to x 7918, no ring, hole or widening under the metal x 7874-7886, field north and
+south of it at the port); nothing else leaving the pad (field north; a field stripe x 7812-7816 against
+`cdp3_w8063`'s poly strip on the west; field y 8662-8674 on the south); the extraction (the new pieces on
+`busl_x7122`'s net, apart from `cdp3_w8063` and `cdp3_bl_c1`).
+
+No finding that changes a connection. Geometry only, fixed: the pad's south edge is at y ~8658 (drawn to
+y 8664; now y 8660).
+
+`tools/t.sh cdp3 sameconn.py a4ababb`: connections identical.
+`.venv/bin/python tools/sameconn.py a4ababb`: connections identical.
+
+Not checked by it: how the row meets the box (7935,8648) (out of scope: AMB-047).
+
+Round 5: no findings that change a connection.
+
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
 - "Row I (y 11050-11200+) ... not traced" and Not done: it is the top of `cdp4`'s comparator row (the bus lines against R15), traced in `cdp4` run 3; lines e and f pass through it with no contact. The uncertain metal pieces of the bit lines and line f at y 11048-11200 were removed from `trace/cdp3.txt` (`cdp4` draws the same metals firm; `tools/sameconn.py`: connections identical).

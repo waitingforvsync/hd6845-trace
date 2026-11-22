@@ -839,6 +839,6 @@ P 7400,8768:7522,8790                 # poly row west onto the pad (7400,8778): 
 # the x 7880 metal (no contact) toward the box (7935,8648) of the gate cluster beside row A (AMB-047): drawn to
 # x 7905 (port); how it meets that box is not read.
 M 7835,8810 y8640 w=14
-P 7817,8630:7851,8664
+P 7817,8630:7851,8660
 C 7834,8647 s=20x20
 P 7834,8647 x7905 w=20
