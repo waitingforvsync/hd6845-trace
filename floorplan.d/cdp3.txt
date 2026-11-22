@@ -12,3 +12,4 @@
 7296,8062:7860,8800  route  U1's clock wires | input by a metal x 7316 and a poly column to a pad (7400,8778); output by a metal x 7837 to pads (7836,8430) and (7838,8582)
 7475,8640:7780,8850   logic  clock inverter (NOT ck_out) | a wide inverter of ck_out under the VSS rail and the VCC metal; its output is the enable of lc2's latch C (by a staircase line) and the input of U1
 6450,8292:7420,8790   route  NOT ck_out to lc2's latch C | the staircase line from the clock inverter's pad (7400,8778) west and north to lc2's metal at (6450,8301)
+7815,8630:7910,8880  route  busl_x7122 into the gate cluster beside R14 | a thin metal north from the pad at the end of the left bus field's row to a pad, and a poly row east to the cluster's second box

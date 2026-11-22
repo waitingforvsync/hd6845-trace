@@ -78,6 +78,11 @@ Which columns each row occupies:
   left out of the trace because five diffusion boundaries in it cannot be decided from the photos
   (Not done).
 
+Run of 2026-11-21 18:37 -0600 (one small item of the Left list; wiring only, one pad with a contact, no transistor): **the
+metal north of the pad (7835,8862)** (the east end of `busl_x7122`'s row y 8863): it ends on a pad
+(7834,8647), whose poly row runs east toward the second box of the cluster beside row A (AMB-047); drawn to
+x 7905 (port). See "`busl_x7122`'s metal north" under Logic.
+
 ## Inventory
 
 Rows (y), top to bottom:
@@ -333,6 +338,30 @@ lc2_w8688 = NOT((lc2_w8646 & lc2_w9005) | lc2_w8822 | rst_c)
 cdp3_w8063 = NOT lc2_w8646                                  U1
 ```
 
+### `busl_x7122`'s metal north of its pad (2026-11-21; traced, wiring only)
+
+The pad (7835,8862) at the east end of `busl_x7122`'s row y 8863 (the row and the pad's contact are marked
+uncertain where the row lies under the wide rail: `busl`'s Ambiguity 17) carries a thin metal (12 px) that
+runs north on x 7835:
+
+- from the stub drawn before (to y 8800) on north to its end on a pad with a contact at (7834,8647)
+  (`tools/follow.py 7835 8800 N --gap 16` ends at (7834,8642); ring, bright centre and a hole in the clean
+  shot: `cache/scratch/cdp4/padc.py`). On the way it passes over U1's second row y 8675-8697 (two edge bars,
+  `tools/tl5_tracks.py v 7835 8665 8850`; no hole): no contact.
+- **It is not the metal of `cdp3_w8063`**, whose pad (7838,8582) lies 65 px further north on the same track
+  position: between the two pads' rings (y 8600 and y 8630) there is bare ground (163-168 in the chip-2 metal
+  shot at y 8610-8620, `tools/px.py col 7834 8590 8640 5`): two metals end to end.
+- From the pad a poly row runs east (y 8637-8658): open poly at x 7850-7868, under the metal x 7874-7886
+  (the x 7880 line of the gate beside row C's output) with no contact (bright metal between two edge bars,
+  clean shot salmon with no hole), open poly again at x 7898-7918, and then the ring and bright centre of the
+  box (7935,8648) under the metal x 7927-7957 (`tools/px.py row 8647 7790 7960 6`; `x7835_a.png`,
+  `ov_x7835.png`). Nothing leaves the pad west or north (field).
+
+The row is drawn to x 7905 (port). **How it meets the box (7935,8648) is not read here**: that box is one of
+the two "contacts" of the metal x 7927-7957 that AMB-047 turns on. This row arriving at it from the west fits
+the reading that the box is a poly pad (a pad of this row with a contact from that metal) rather than a
+diffusion: a lead for whoever reads the cluster, not a finding.
+
 ### Channel B (traced, wiring only)
 
 - Six poly tracks from the west edge (y 8907 ... 9123) each end at a contact on line g of
@@ -429,6 +458,7 @@ Into parts not yet traced (the labels sit on the stubs):
 | cdp3_k_a | metal | stub at (8290,9150-9178); and x 7772, y 10150 | not followed |
 | cdp3_g_cN (N 2..7) | metal | x 9731 + 390 (N-5), y 8790 | row A cell |
 | x 9893 line (same net as cdp3_f_cN) | metal | x 9893 + 390 (N-5), y 8790 | row A cell |
+| `busl_x7122` | poly | (7905, 8637-8658) | from `busl`'s row (through its uncertain stretch under the wide rail) | the poly row east of the pad (7834,8647) at the north end of the metal x 7835; runs on 15 px to the box (7935,8648) of the cluster (AMB-047), not read |
 
 ## Ambiguities
 
@@ -558,6 +588,9 @@ Into parts not yet traced (the labels sit on the stubs):
   to the usual VCC position x 7775-7822 above row H; a thin line at x 7772 comes down from
   the logic above and ends at the 7770,10135 contact. c1's VCC rail starts at y 9750 with
   a tab to x 8255; above it a narrower line at x 8215-8255 comes down from the logic.
+
+- From the run of 2026-11-21: `busl_x7122`'s row east of (7905,8647): its meeting with the box (7935,8648) under
+  the metal x 7927-7957 (part of the cluster's question, AMB-047).
 
 ## Tools and method notes
 

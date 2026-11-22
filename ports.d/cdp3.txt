@@ -10,3 +10,4 @@ ck_out        P      7475,8722-8745   in   the poly of eofw's corner pad (7446,8
 cdp3_w8063    P      7950,8419-8441   out  U1's output: the poly row of the pad (7836,8430), into the cluster beside row A
 cdp3_w8063    P      7790,8566-8590   out  U1's output: the poly of the pad (7838,8582), west and round into a row y 8675-8697 of the cluster
 cdp3_bl_c1    P      7950,8377-8400   out  the gate beside row C's output line: the poly row of the pad (7878,8385), into the cluster
+busl_x7122    P      7905,8637-8658   out  the poly row east of the pad (7834,8647) at the north end of the metal x 7835 (from the pad (7835,8862) of busl's row y 8863); runs on 15 px to the box (7935,8648) of the cluster beside row A (AMB-047): not read

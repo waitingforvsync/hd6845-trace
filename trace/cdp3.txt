@@ -833,3 +833,12 @@ D 7530,8750:7550,8764                 # neck west from the node
 D 7497,8750:7535,8790
 B 7495,8762:7533,8792
 P 7400,8768:7522,8790                 # poly row west onto the pad (7400,8778): U1's input net lc2_w8646
+# busl_x7122's metal on north of the stub (run of 2026-11-21): from the pad (7835,8862) it runs north on
+# x 7835 over U1's second row (no contact) to its end on a pad (7834,8647) (65 px south of cdp3_w8063's pad
+# (7838,8582): two metals end to end, bare ground between). The pad's poly row runs east (y 8637-8658) under
+# the x 7880 metal (no contact) toward the box (7935,8648) of the gate cluster beside row A (AMB-047): drawn to
+# x 7905 (port); how it meets that box is not read.
+M 7835,8810 y8640 w=14
+P 7817,8630:7851,8664
+C 7834,8647 s=20x20
+P 7834,8647 x7905 w=20
