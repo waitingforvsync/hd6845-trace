@@ -1477,11 +1477,12 @@ Run 54 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-21 22:28 -0600). One s
 contact, no transistor, no uncertain item).
 
 - **Piece `o345`: where the NOR `eof_w17345`'s output goes.** Its metal x 10397 runs only 280 px north of run
-  51's port to an end pad (10397,17040), whose poly row runs east under two thin metals and ends in a framed
-  box at (10497-10522, 17028-17052), beside the rail diffusion y 17036-17112. The box is not drawn (port).
-  **Believed, not drawn**: it is a buried contact onto that diffusion, as this net's own node leaves its unit
-  by the box (10497-10516, 17331-17355); if so the NOR's node has a second pull-down path, through the gate
-  `rst_lat` makes at y 17119-17132 in series with the gate row y 17206-17219, and its equation changes.
+  51's port to an end pad (10397,17040), whose poly row runs east under two thin metals toward the rail
+  x 10548-10598; drawn to x 10492 (port). **What the tracer believed about its end was wrong, and review round
+  67 showed it**: the "framed box" at (10497-10522, 17028-17052) is ordinary poly, the row goes on through it
+  to an orange patch x 10530-10542, and the rail diffusion south of it (y 17054-17112) has a rail contact of
+  its own at (10560,17083), so it is not a second part of the NOR's node. Where the row ends and what it
+  does there (a gate west of the rail?) is not read.
 - **Checks**: full extraction 2,516 nets, 4,812 transistors, 0 errors, 0 warnings (connections identical).
 
 ## Inventory
@@ -5577,19 +5578,26 @@ Views `s54_a.png` (2.15x), `s54_b.png` (3.3x, four shots), overlay `ov54.png` (3
   and the box's west outline, not as a contact (the metal is not widened; tracing guide, traps 22 and 26):
   the spot the review is sent to first. No poly leaves either flank (`tools/eof_tee.py h 17028 17051 10420
   10475`: none), and nothing leaves the pad west, north or south.
-- **The row's end**: a framed box (10497-10522, 17028-17052), orange-tan with a heavy outline in both metal
-  shots, bright in the clean shot at x 10495-10500, directly west of the strip of diffusion beside the rail.
-  Under the rail at this height `tools/railprof.py 10552 10592 16900 17120` gives diffusion y 17036-17112
-  with no gate (the next row south is `rst_lat`'s gate, y 17119-17132). Not drawn: the row is drawn to
-  x 10492 (port).
+- **Beyond the drawn end** (review round 67, confirmed: `tools/px.py pt 10556,17040 10510,17040 10536,17040
+  10510,17343 ...`, `tools/px.py col 10580 17026 17070 4`, `cache/scratch/cdp4/padc.py 10560,17083 10562,17255`;
+  the reviewer's `review-67/d_box_m.png`, `e_box_a.png`, `f_rail_m.png`, `g_rail_a.png`): the row is drawn to
+  x 10492 and **goes on east**. The outlined block x 10497-10522, y 17028-17052 reads as ordinary open poly
+  (chip 2 171/130/65, chip 1 154-157/74/47-50, like the row's open stretches; the drawn buried contact 300 px
+  south, (10497-10516, 17331-17355), is plain inside), then an outline at x 10523-10529 and an orange patch
+  x 10530-10542 of the same height (158-163/98-104/60 and 150/80-82/55), then an outline to the rail. Under
+  the rail at the row's height is field (181/121/110 at (10556,17040); the rail diffusion begins at
+  y ~17054, its edge line at y 17050-17053), so the row does not cross under the rail. **Not read**: whether
+  the block and the patch are the row as a gate over a diffusion strip west of the rail (plain strips at
+  y 17015-17022 and y 17055-17067), where the row ends, and a dark band x 10486-10498 that runs the whole
+  height y 17010-17075 under the thin metal's east flank.
+- **The rail diffusion south of the row has its own rail contact**, at (10560,17083) (review round 67;
+  ring and bright centre x 10552-10567, y 17070-17097 in both metal shots, a hole in the clean shot, the same
+  signature as the drawn `C 10562,17255`), in no trace file. So the diffusion y 17054-17112 is on the rail,
+  and `rst_lat`'s gate at y 17119-17132 (run 53) lies between it and the diffusion y 17140-17199.
 
-**Believed, not drawn** (it would change a merged equation, so it wants its own piece and review): the box
-is a buried contact onto a tab of the rail diffusion y 17036-17112, the same construction as this net's
-node exit 300 px south (run 51: tab, box (10497-10516, 17331-17355), poly row west, pad (10397,17343)). Then
-`eof_w17345`'s node would be two diffusions joined by the metal x 10397, and the upper one is separated from
-the diffusion y 17140-17199 by `rst_lat`'s gate, and that from the rail's contact (10562,17255) by the gate
-row y 17206-17219: `eof_w17345` = NOT(`bl0_w15566` OR `eof_w17866` OR (`rst_lat` AND the row y 17212)).
-Nothing of this is in the trace.
+**Withdrawn** (the first version of these notes, before the review): that the block is a buried contact
+tying this net to the rail diffusion, and the equation built on it. The review showed both wrong; the NOR's
+extracted equation, `eof_w17345` = NOR(`bl0_w15566`, `eof_w17866`), is untouched (its load is still undrawn).
 
 ## Ports
 
@@ -5737,7 +5745,7 @@ driver lies; the other three lead to the loads.
 | `rst_lat` | poly | (10546-10598, 17682-17698) | out | piece `rl` (review round 63): the branch row from the column x 10355, under the VSS rail: the gate of an undrawn pull-down (rail diffusion with a contact (10560,17652) north of it, diffusion y 17705-17739 south of it) |
 | `rst_lat` | poly | (10521-10598, 17115-17137) | out | piece `rln`: the tap pad (10353,17127)'s row, an end cap at the rail's east edge: the gate of an undrawn transistor under the VSS rail (diffusion y 17040-17112 north of it, y 17140-17199 south of it) |
 | `rst_lat` | poly | (10497-10640, 16292-16314) | out | piece `rln`: the end pad (10353,16345)'s row: the gate of an undrawn transistor (channel about x 10497-10620; diffusion y 16244-16289 and y 16317-16369), ending in a cap x 10624-10640; Ambiguity 216 on a box north of the cap |
-| `eof_w17345` | poly | (10492, 17029-17051) | out | piece `o345`: the east end of the row of the pad (10397,17040) at the top of the NOR's output metal x 10397: it ends in a framed box (10497-10522, 17028-17052), not drawn (believed a buried contact onto the rail diffusion y 17036-17112) |
+| `eof_w17345` | poly | (10492, 17029-17051) | out | piece `o345`: the drawn end of the row of the pad (10397,17040) at the top of the NOR's output metal x 10397; the row goes on east as poly through x 10497-10522 to a patch x 10530-10542 west of the rail (not read: a gate there?) |
 
 ## Ambiguities
 
@@ -10934,12 +10942,44 @@ entry, the box being on both chips). `tools/t.sh eof sameconn.py fd093cf` and
 
 Round 66: no findings.
 
+### Round 67 (full review; run 54, piece `o345`; 2026-11-21 22:36 -0600, at commit 0bb64ac)
+
+A fresh Fable reviewer; images in `cache/scratch/eof/review-67/`. Told to suspect: a contact of the thin
+metal x ~10478-10490 onto the row's east end; the end pad and the three row crossings of the metal x 10397; a
+branch of the row; whether the row ends in the "box" and whether "believed a buried contact onto the rail
+diffusion" is tenable.
+
+It checked and found correct, for everything drawn: the metal x 10397 (continuous to the pad, only edge-bar
+pairs at the three rows, no metal north of y 17035); the pad (10397,17040) (ring and bright centre; field
+north, west and south); the row to x 10492 (one poly, no branch; `tools/eof_tee.py`: none); the crossing
+under x 10440 (no hole); the thin metal x 10477-10486 (no contact: unwidened, its centre line salmon in the
+clean shot, no pits in chip 2, its bars the row's own edge lines; the clean shot's dip lies on a dark band
+x 10486-10498 that runs the whole height y 17010-17075).
+
+- **Finding, about the undrawn part only (notes and a trace comment; nothing drawn changes)**, confirmed
+  by the tracer's measurements (Logic, "Beyond the drawn end"): the tracer's belief that the block
+  (10497-10522, 17028-17052) is a buried contact onto the rail diffusion is not tenable: the rail diffusion
+  has its own rail contact at (10560,17083) and begins at y ~17054; under the rail at the row's height is
+  field; the block's interior is ordinary poly; and the row goes on past it to a patch x 10530-10542. The
+  belief and its equation are withdrawn from the notes, the port's note and the trace comment corrected. No
+  geometry changed:
+
+`tools/t.sh eof sameconn.py 0bb64ac`: connections identical.
+`.venv/bin/python tools/sameconn.py 0bb64ac`: connections identical.
+
+Not checked by it: whether the block and the patch are a gate over a diffusion; what the band x 10486-10498
+is; the rail's continuity between y 17112 and y 17222.
+
+Round 67: no findings that change a connection.
+
 ## Not done
 
-- **Next (after run 54)**: the box (10497-10522, 17028-17052) at the end of `eof_w17345`'s row and the unit
-  it belongs to: the rail diffusion y 17036-17112, `rst_lat`'s gate y 17119-17132, the diffusion y 17140-17199,
-  the gate row y 17206-17219 (its source not followed) and the rail contact (10562,17255) ("Run 54" under
-  Logic: believed a second, series pull-down path of the NOR). To be traced as one piece with its own review.
+- **Next (after run 54)**: `eof_w17345`'s row east of its drawn end (10492,17040): poly through x 10497-10522
+  and a patch x 10530-10542 west of the rail (a gate over a diffusion strip there? plain strips at
+  y 17015-17022 and y 17055-17067); and the column of the rail x 10548-10598 between y 17036 and y 17260 as
+  one piece: the rail diffusion y 17054-17112 with its undrawn rail contact (10560,17083), `rst_lat`'s gate
+  y 17119-17132, the diffusion y 17140-17199, the gate row y 17206-17219 (source not followed), the contact
+  (10562,17255).
 - **Next (after run 53)**: `rst_lat`'s metal north is drawn to its end (piece `rln`). Open from it: the three
   transistors `rst_lat` gates under the VSS rail x 10548-10598 (y 16297-16316, y 17119-17132, y 17681-17696)
   and their units; the box north of the north row's cap, (10622-10650, 16264-16282), and the narrow band it

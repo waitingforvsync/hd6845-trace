@@ -4641,9 +4641,10 @@ P 10355,16345 y16303 x10638 w=20
 # ======================================================================
 # Run 54 (2026-11-21), piece `o345`: the NOR eof_w17345's output metal x 10397 north of run 51's port
 # (10397,17315): 280 px, over three poly rows (no contact), to its end on a pad (10397,17040). The pad's poly
-# row runs east (y 17029-17051) under the thin metals x 10440 and x 10485 (no contact) and ends in a framed
-# box (10497-10522, 17028-17052) that is not drawn (port; read as a buried contact onto a tab of the rail
-# diffusion y 17036-17112, like the box (10497-10516, 17331-17355) of this net's own node: notes).
+# row runs east (y 17029-17051) under the thin metals x 10440 and x 10485 (no contact); drawn to x 10492 (port).
+# It goes on east as poly through x 10497-10522 to a patch x 10530-10542 west of the rail: not read (review
+# round 67: that block is ordinary poly, not a buried contact, and the rail diffusion south of it has its
+# own rail contact (10560,17083)).
 M 10397,17320 y17040 w=13
 P 10380,17023:10414,17057
 C 10397,17040 s=20x20
