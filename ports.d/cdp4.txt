@@ -27,6 +27,6 @@ rst_lat       P      10782-10797,17700 out  the same line: a poly column south f
 cdp4_w10808   P      10694-10716,15726-15748 in   the same line: the corner of the poly row from its bottom pad (10808,15738), at the west edge of bc2's VCC rail (drawn end). Beyond it, read and not drawn: the plate of a depletion load (x 10685-10716, y 15782-15849) and a row west along y 15762 to a tie box (10622-10650,15760-15790): an undrawn unit of bc2 drives this net
 dbus_le       P      16130,16855-16875 in   the data input latches' enable: the west end of its poly row, on a framed box (16100-16128,16850-16876) read as the output of an undrawn gate under bd2's VSS rail (the row is drawn from the pad (16426,16864))
 rst_lat       P      13822,3675       out  the reset copy: the poly south of its tap (13821,3549), into tr1's gate row (y 3690-3800), where it is a gate input (the gate is not drawn)
-rst_lat       P      14039,3675       out  the same net: the poly column south of its end pad (14016,3551), into tr1's gate row: a gate input (not drawn)
+rst_lat       P      14044,3675       out  the same net: the poly column south of its end pad (14016,3551), into tr1's gate row: a gate input (not drawn)
 cdp4_w10808   P      13346,3675       out  the first through line: the poly south of its tap (13345,3636), into tr1's gate row: a gate input (not drawn)
 cdp4_w10808   P      13560,3675       out  the same net: the poly south of its end pad (13560,3636), into tr1's gate row: a gate input (not drawn)

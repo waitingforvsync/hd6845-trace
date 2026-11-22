@@ -806,19 +806,22 @@ to an end pad (13560,3636) with a poly south (x 13550-13575), with one more tap 
 
 | | `rst_lat` | `cdp4_w10808` |
 |---|---|---|
-| metal from x 12400 | along y 3592 to a corner (13467,3592), north to y 3550, east along y 3545-3555 | along y 3636 |
+| metal from x 12400 | along y 3592 to a corner (13475,3592), north to y 3550, east along y 3545-3555 | along y 3636 |
 | tap (pad with a contact) | (13821,3549) | (13345,3636) |
 | end pad (contact) | (14016,3551) | (13560,3636) |
-| polys | from the tap south on x 13812-13832; from the end pad east and south on x 14030-14048 | from the tap south on x 13335-13357; from the end pad south on x 13549-13571 |
-| ports (drawn ends of the polys) | (13822,3675), (14039,3675) | (13346,3675), (13560,3675) |
+| polys | from the tap south on x 13812-13832; from the end pad east and south on x 14033-14055 | from the tap south on x 13335-13357; from the end pad south on x 13549-13571 |
+| ports (drawn ends of the polys) | (13822,3675), (14044,3675) | (13346,3675), (13560,3675) |
 
 - **The metals** (`tools/follow.py 11760 3588 E` and `3632 E --gap 16`; `tools/tl5_tracks.py h 3592 12390 13470`,
   `h 3636 12390 13548`, `h 3550 13495 13800`): no gap of 20 px in both chips; the clean shot has no hole on
   `rst_lat`'s metal between x 12400 and its corner, and one on `cdp4_w10808`'s, its tap. The dark bars are
   the polys of `tr1`'s gates passing under.
-- **`rst_lat`'s corner** (`tools/textmap.py 13440 3530 13570 3620 3`): the metal turns north at x 13455-13479
-  and east along y 3545-3555. **The pad (13513,3592) 30 px east of the corner is another net's**: between the
-  corner's east edge (x 13479) and that pad's ring (x 13497) neither metal shot has metal (4-9 of 16 against
+- **`rst_lat`'s corner** (`tools/textmap.py 13440 3530 13570 3620 3`): the metal turns north at x 13468-13484
+  and east along y 3545-3555. It is not joined to the metal that comes along y 3550 from the west and ends at
+  x ~13438: 12-20 px of bare ground between them in both chips (`tools/px.py row 3550 13380 13500 4
+  metal,metal1`: 157-165/135-142/84 at x 13452-13460), green in the clean shot: two metals end to end on
+  one track position (tracing guide, trap 33). **The pad (13513,3592) 30 px east of the corner is another net's**: between the
+  corner's east edge (x 13484) and that pad's ring (x 13500) neither metal shot has metal (4-9 of 16 against
   12-14 for the metals) and the clean shot is green there (open field); that pad's metal runs east from
   x 13539 along y 3592.
 - **The taps and end pads** (`t15_a.png` .. `t15_d.png`, 3.6-4x, metal and clean;
@@ -826,7 +829,7 @@ to an end pad (13560,3636) with a poly south (x 13550-13575), with one more tap 
 - **The polys south**: each is orange in the chip-2 metal shot and red over green by 28-62 in the chip-2
   stripped shot from its pad to y 3680 (`tools/px.py col`). `rst_lat`'s tap poly passes under the other
   net's y 3592 metal, and its end column under that metal and under a third metal on y 3636, with no pad
-  (`candh.py -v h 13822,3592 14039,3592 14039,3636`). The end column (x 14030-14048) is separated from the
+  (`candh.py -v h 13822,3592 14039,3592 14039,3636`). The end column (x 14033-14055) is separated from the
   pad (14000,3632) of that third metal by 16 px of field (`tools/px.py row 3632 13984 14060 4`, four shots:
   chip-2 stripped red minus green -5 to -13 at x 14016-14032 against 40-56 on the column) and from that pad's
   own poly at y 3660 by bare ground (x 14020-14028).
@@ -835,7 +838,7 @@ to an end pad (13560,3636) with a poly south (x 13550-13575), with one more tap 
   gates are not drawn (`tr1`'s; its drawn part ends at x 12320).
 
 So `rst_lat` has, in this row, three gate loads (the wire `tr1` called w12265 and two undrawn gates at about
-x 13822 and x 14039) and `cdp4_w10808` three (`tr1_w12005` and two at about x 13346 and x 13560).
+x 13822 and x 14044) and `cdp4_w10808` three (`tr1_w12005` and two at about x 13346 and x 13560).
 
 ### Corner gate group: `cdp4_rst` = NOR of six select rows (run 2, 2026-11-19; traced)
 
@@ -902,7 +905,7 @@ islands are closed curves inside it, so they are the other class.
 | `d5_out_n`..`d1_out_n` | poly | onto `dbus`'s rows at x 16822, 16870, 16912, 16957, 16957 (y 15824, 15954, 16085, 16215, 16345) | driven inside | the outputs of the data output inverters (run 8) |
 | `dbus_le` | metal, poly | x 16775, y 15930 (onto `dlat`'s end); the poly row's west end (16130, 16855-16875), on a framed box of an undrawn gate (runs 8, 13) | from that gate (read, not drawn) | the data input latches' enable, passing through the units (run 8; uncertain over four boxes) |
 | `cdp4_w10808` (= `tr1_w12005`) | poly | (13346,3675) and (13560,3675) (the polys south of its second tap and its end pad, into `tr1`'s gate row); (10694-10716, 15726-15748) (the corner of the row from its bottom pad: beyond, an undrawn unit of `bc2` that drives it) | driven from `bc2`'s unit (read, not drawn) | the first through line and its run in the top-right track field (runs 12, 14, 15) |
-| `rst_lat` | poly | (13822,3675) and (14039,3675) (the polys south of its second tap and its end pad, into `tr1`'s gate row); (10782-10797, 17700) (the column south of the bottom row's west end) | from `trunks`' inverter | the second through line and its run in the top-right track field (runs 12, 14, 15) |
+| `rst_lat` | poly | (13822,3675) and (14044,3675) (the polys south of its second tap and its end pad, into `tr1`'s gate row); (10782-10797, 17700) (the column south of the bottom row's west end) | from `trunks`' inverter | the second through line and its run in the top-right track field (runs 12, 14, 15) |
 | `vcc`, `vss` | metal | x 16515 and x 16689 at y 15780 (onto `dlat`'s rails); `vcc` drawn to y 16440 (goes on south at least to y 16900), `vss` ends at y 16446 | - | the units' rails |
 | `cdp3_n_c7` (= `cdp4_n_s7` = `dbus_do0_in`) | metal | (16950-16962, 16714): onto `dbus`'s metal | driven inside | the read bus, column 7 = the gate of D0's output chain (run 7) |
 | `d6_out_n` | poly | (17800-17825, 17313-17350): onto `dpad`'s strip 4 of D6's pad cell | driven inside | the output of the sixth output inverter, joined to the pad cell (run 10) |
@@ -1024,6 +1027,14 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
    uncertain items (`tools/unsure.py` lists it). What would settle it: its far end (south of y 16450, toward
    the NOR that PR #17 reported as its driver).
 
+16. **The join of `rst_lat`'s end pad with its poly column** (run 15). Between the pad (14016,3551) and the
+   column x 14033-14055 there is a 6 px dark line at about x 14030 in all four shots (the reviewer of round 16
+   calls it its weakest evidence). Read as one poly (the pad's east side and the column's west edge
+   coinciding): the column's west flank has no green rim beside the pad but has one below y 3565, the column's
+   top ends in bare ground at y ~3540, and the pad has no other poly. Drawn firm. If they were apart, the
+   pad would end the metal with nothing on it and the column (a gate input at about x 14044) would have no
+   driver: no other net would be joined.
+
 ## Not done
 
 - (Done, run 3: row R1 upper.) Left from it: `g_eq_r14`, the NAND's other input (not followed); which
@@ -1060,7 +1071,7 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
   x 10782-10797 runs south to y ~17805 and turns west as a row y 17806-17826 under the wide rail x 10722-10772, a
   rail x 10545-10595 and three thin metals, to x ~10355, where it turns north as a poly column x 10345-10365 under
   a drawn metal's track (views `rl_s.png`, `rl_w.png`, `rl_we.png`).
-- From run 15: the four gates of `tr1`'s row that the polys enter at about x 13346, 13560, 13822 and 14039
+- From run 15: the four gates of `tr1`'s row that the polys enter at about x 13346, 13560, 13822 and 14044
   (y 3690-3800).
 - From run 12: the four rows beyond their ports (the unit of `bc2`
   at (10620-10780, 15750-15860) whose load's plate it is; `rst_lat` south of (10789,17700)); the undrawn metal on T1's track
@@ -1624,6 +1635,41 @@ pits differ between the two chips and were taken as corrosion); whether the y 34
 between its two pads; anything east of x 12400; `tr1`'s gates.
 
 Round 15: no findings that change a connection.
+
+### Run 15 (the two metals east to their ends)
+
+Round 16 (full review, 2026-11-21 18:30 -0600; a fresh Fable reviewer, images in `cache/scratch/cdp4/review-16/`, 17;
+commit before the round 06caf75). Piece: the two metals from x 12400 to their end pads, `rst_lat`'s corner,
+the two further taps, the four polys south to their ports. Told to suspect: whether `rst_lat`'s metal is on
+the pad (13513,3592) beside its corner; the corner itself and whether the north leg is joined to the west
+metal of the y 3550 track; the end pad (14016,3551) all round and its column's separation from the pad
+(14000,3632); each tap and end pad (a real contact, on the wire claimed, its poly from its own pad); missed
+taps among about thirty poly crossings; whether `cdp4_w10808`'s metal ends at (13560,3636).
+
+It checked: the pad (13513,3592) is not on `rst_lat` (metal to x 13482, an edge line, x 13491-13497 bare in
+both chips, then the ring; the clean shot green there for every row y 3565-3604; 5x in four shots; that pad's
+own metal leaves east); one metal round the corner, nothing north or south of it, and not joined to the west
+y 3550 track (20 px of bare ground at x 13448-13463 in both chips, green in the clean shot); the y 3550 run
+continuous to the end pad; the end pad (no metal east, no poly north or west); the column as one poly to
+y 3690, no contact under the y 3592 or y 3636 metals, field between it and the pad (14000,3632)'s poly at
+y 3634 and bare ground at y 3660; each tap and end pad (ring in both chips, hole in the clean shot, pits in
+the chip-2 stripped shot; the metal runs through both taps; each poly from its own pad); `cdp4_w10808`'s
+metal ends at (13560,3636) (no metal for x 13564-13990); `tools/tl5_tracks.py` over both wires and 3x
+three-shot scans of the full length (no other pad; about 25 poly crossings all plain; the wires not joined
+to each other; five marks each on one chip only); the extraction.
+
+- Geometry only, confirmed and fixed: `rst_lat`'s north leg is at x 13468-13484 (drawn at x 13467; now
+  x 13475); its end column is x 14033-14055 and meets the pad over y 3541-3562 (drawn x 14030-14048 from
+  y 3547; now `P 14016,3552 x14044 y3675 w=22`).
+- Its weakest evidence, recorded as Ambiguity 16: the pad-to-column join is a 6 px dark line in all four
+  shots.
+
+`tools/t.sh cdp4 sameconn.py 06caf75`: connections identical.
+`.venv/bin/python tools/sameconn.py 06caf75`: connections identical.
+
+Not checked by it: `tr1`'s gates south of y 3675.
+
+Round 16: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
