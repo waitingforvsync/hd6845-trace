@@ -11096,6 +11096,43 @@ is; the rail's continuity between y 17112 and y 17222.
 
 Round 67: no findings that change a connection.
 
+### Round 68 (full review; run 55, piece `u17170`; 2026-11-22 23:36 to 23:45 +0000, at commit 4cd8c52)
+
+A fresh reviewer agent (Claude Fable 5.2), briefed with the piece's twelve claims and told to suspect: the gap
+between the two pads on the track x 10441 (the correction to `trace/trunks.txt`); whether the pad (10439,17238)
+is joined to the row and its metal is `trunks`' line; the spot (10567,17178); the box (10497-10516,
+17156-17180) and the direction of the output pad's metal; the east cap of the row y 17205-17221; the node's
+east exit and the plate's tie; the three crossings and the end pad (10267,17214); the continuity of the wide
+metal x 10722-10770. Images in `cache/scratch/eof/review-68/` (17; 5x and 5.5x in two to four shots), with
+`tools/px.py`, `tools/textmap.py`, `tools/tl5_tracks.py`, the full extraction and `tools/unsure.py`.
+
+- **Finding 1, geometry only (confirmed, fixed)**: an arm of the rail diffusion west of the rail at
+  x ~10500-10546, y 17056-17068 was not drawn and not listed. Checked: `tools/px.py row 17062 10492 10556 4 all`
+  (plain 166-175/132-137/86 in chip 2's metal shot, red over green by 17-30 in the chip-2 stripped shot at
+  x 10504-10536) and `px.py col 10512 17040 17096 4 metal,acid,acid1b` (the arm at y 17060-17064 between an
+  edge line y 17052-17056, which is the south edge of `eof_w17345`'s row, and one at y 17068-17076; field
+  south of that). It joins the rail diffusion, so it is `vss`: no net, transistor or equation changes. Drawn
+  (`D 10502,17056:10548,17068`); Not done (c) now says that it lies against the row's south edge and is
+  probably the source of a pull-down of the unit north of it (tracing guide, trap 29).
+- **Checked and found correct**: the two metals on x 10441 (open poly across x 10418-10463 at y 17212 in both
+  metal shots, no metal at y 17192-17197; `tl5_tracks.py v 10441`: none in either chip at y 17175-17230); the
+  pad (10439,17238) joined to the row (no dark line between them at x 10434, 10441, 10448 in the clean shot)
+  and its metal continuous south to y 17689 and through the jog; the spot (10567,17178) (a dot in chip 2 only,
+  no ring, no specks, nothing in chip 1; both rail contacts have ring and specks); the box (plain inside, the
+  strip's west edge line absent at the tab's height in three shots, like the control 175 px south); no poly and
+  no edge line across the east column at y 17190-17240, the diffusion leaving the rail only at y 17152-17190,
+  the plate closed with its tie box; no ring or widening at the three crossings, field west and south of the
+  end pad; the wide metal unbroken from y 15700 to y 17260 in both chips; the extraction's equation.
+- **Not settled or not checked** (the reviewer's words, shortened): a dim band at y 17216-17222 across the
+  pad's top in the chip-2 stripped shot, lighter than an edge, read as the ghost of the pad metal's edge; in
+  chip 2's metal shot alone the tab's join to the strip cannot be seen; not checked: the wide metal north of
+  y 15700, `trunks`' legs south of y 17700 beyond the tracer's tests, the two metals beyond their ports.
+- **Proof that the fix changed no connection** (against 4cd8c52):
+  `tools/t.sh eof sameconn.py 4cd8c52`: `connections identical`;
+  `.venv/bin/python tools/sameconn.py 4cd8c52`: `connections identical`.
+
+Round 68: no findings that change a connection.
+
 ## Not done
 
 - **Next (after run 55)**: the unit of the rail column y 17054-17250 is drawn (piece `u17170`:
@@ -11107,7 +11144,9 @@ Round 67: no findings that change a connection.
   pad (10267,17214): the metal x 10268 to a corner (10269,16906), east, north on x 10311 to about
   (10310,15908) (`tools/follow.py 10267 17150 N --gap 16`; `trunks`' other metal on x 10312 ends on its pad
   (10310,16950) just south of the corner: check they are two). (c) **the unit north of the edge line
-  y 17052**, still not read: `eof_w17345`'s row y 17029-17051 east of (10492,17040); a contact area of the
+  y 17052**, still not read: `eof_w17345`'s row y 17029-17051 east of (10492,17040), which has an arm of the
+  rail diffusion (x 10502-10546, y 17056-17068, drawn, `vss`) directly against its south edge: probably the
+  source of a pull-down that the row gates (review round 68); a contact area of the
   rail at y 17015-17050 (chip 1's metal shot has a cross pattern with a dot at (10578,17030); the clean shot
   under the rail there is 150/150/108, neither field nor plain diffusion: `tools/px.py col 10572 17004 17072 4
   all`); east of the rail a poly x 10618-10650, y 17025-17048 to a pad (10683,17035) with a thin metal north.

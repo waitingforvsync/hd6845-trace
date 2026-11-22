@@ -4662,6 +4662,11 @@ M 10573,17054 y17232 w=50              # the VSS rail, over this unit (run 51's 
 D 10546,17054:10590,17232              # the column's diffusion, through under both gates
 # west of the rail the strip x 10521-10546 is diffusion from y 17096 south (field north of it)
 D 10521,17096:10546,17232
+# Review round 68 (geometry only): an arm of the rail diffusion runs west of the rail at y 17056-17068 to
+# x ~10502, against the south edge of eof_w17345's row y 17029-17051 (px.py row 17062 10492 10556 4 all:
+# chip-2 stripped shot red over green by 17-30, plain in both metal shots; field at y 17078-17092 south of
+# it). It is vss; probably the source of a pull-down of the unread unit north of it.
+D 10502,17056:10548,17068
 C 10560,17083
 # gate 2: the row y 17205-17221 is ck_out. A pad (10439,17238) hangs on its south side: the north end of
 # trunks' ck_out #2 (the ring's right-hand vertical; trunks drew that metal on north to y 16880, through the
