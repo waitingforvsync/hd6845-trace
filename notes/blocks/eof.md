@@ -1466,8 +1466,9 @@ contacts, no transistor, no uncertain item).
   1,200 px north from the pad (10352,17604) to an end pad (10353,16345), with one tap, a pad (10353,17127).
   Each pad's poly row runs east to the VSS rail x 10548-10598 and **is the gate of a transistor under that
   rail that nobody has drawn** (`bc4`'s column): the tap's row y 17115-17137 ends in a cap at the rail's east
-  edge; the end pad's poly goes north and east as a row y 16292-16314, under the rail, and runs on east of
-  it into a structure that is not read. With run 52's branch that makes three gates of the reset copy in
+  edge; the end pad's poly goes north and east as a row y 16292-16314, under the rail, to a cap at x 10624-10640,
+  20 px beyond the edge of the diffusion it crosses (found by review round 65; whether the cap is tied to
+  a box north of it is Ambiguity 216: read as no). With run 52's branch that makes three gates of the reset copy in
   this column. Drawn as poly, with ports.
 - **Checks**: full extraction 2,516 nets, 4,812 transistors, 0 errors, 0 warnings (connections identical
   to before: the net grows, no join). The package by itself: 1,204 nets, 2,012 transistors, 0 errors.
@@ -5515,7 +5516,7 @@ Region x 10330-10620, y 16270-17550. Views `s53_tap.png`, `s53_end.png`, `s53_r1
 - **The tap pad** (contact (10353,17127); ring and bright centre in both metal shots, a hole in the clean
   shot): the metal runs through it. Its poly row runs east, y 17115-17137: under the thin metals x 10397,
   x 10440 and x 10485 (no pad pattern at any: `candh.py -v v X,17126`), in the open at x 10495-10545 and
-  under the rail to an end cap at x ~10598 (bare ground east of it in both metal shots, `tools/px.py row
+  under the rail to an end cap at x ~10598-10606 (bare ground east of it in both metal shots, `tools/px.py row
   17125 10580 10700 6`). No poly leaves either flank between x 10372 and x 10600
   (`cache/scratch/eof/tee.py h 17114 17138 10372 10600`: none; the tool finds run 52's tee as a control), and
   nothing leaves the pad west, north or south.
@@ -5524,11 +5525,17 @@ Region x 10330-10620, y 16270-17550. Views `s53_tap.png`, `s53_end.png`, `s53_r1
   row run 51 noted north of its unit).
 - **The end pad** (contact (10353,16345)): the metal from the south ends on it. Its poly goes north as a
   column x 10345-10366 to y ~16292 and east as a row y 16292-16314 (`tee.py`: no poly leaving the column or
-  the row's flanks from x 10372 to x 10600), under the thin metals x 10398 and x 10442 and the rail.
+  the row's flanks from x 10372 to x 10600), under the thin metals x 10398, x 10442 and x ~10482 (review, round 65: bright in both chips, the clean shot
+  uniform salmon, no pad or hole) and the rail.
   `tools/railprof.py 10552 10592 16240 16380`: GATE y 16297-16316 between diffusion y 16244-16289 and
-  diffusion y 16317-16369. **East of the rail the row runs on** (orange in both metal shots at
-  x 10604-10610 and x 10628, `tools/px.py row 16303 10580 10700 6`) into a structure at x 10600-10660,
-  y 16270-16330 (outline loops and a dark box in the clean shot, `s53_r2e.png`): not read. Drawn to x 10600.
+  diffusion y 16317-16369. **East of the rail** (review round 65, confirmed: `f65_cap.png`, 7x in four shots; `tools/px.py row 16303
+  10580 10700 6`; `tools/px.py col 10632 16256 16324 3 metal,metal1,acid,acid1b`): the diffusion reaches
+  20 px beyond the rail (plain boxes x 10600-10620 north and south of the row), so the channel is about
+  x 10497-10620; the row crosses the diffusion's east edge line at x 10620 and ends in a cap x 10624-10640
+  (orange in both chips: 149-165/116-127/60-71 at x 10632, y 16295-16307), with bare ground east of x 10646
+  in all four shots. It does not run on. Drawn to its cap. North of the cap, across one dark band
+  y 16283-16291, lies a box (10622-10650, 16264-16282) that is dark in all four shots, in a narrow plain
+  band that leaves the rail's north diffusion eastwards: Ambiguity 216.
 - **Another metal lies on that row and is not joined** (tracing guide, traps 13 and 33). The track position
   x 10353 carries a second metal north of the end pad: `tools/follow.py 10392 16345 N --gap 16` shows it
   coming down x 10353 from (10353,15865), jogging east along y 16296-16312 from x 10350 to x 10398 (on
@@ -5687,7 +5694,7 @@ driver lies; the other three lead to the loads.
 | `h_eq_r1` (= `eof_w17515`) | poly | onto `trunks`' diagonal at (10940-10950, 17592-17612) | in | piece `s17515`: the row of the gate column of `bl0_w15566`'s pull-down; no port (joined by geometry) |
 | `rst_lat` | poly | (10546-10598, 17682-17698) | out | piece `rl` (review round 63): the branch row from the column x 10355, under the VSS rail: the gate of an undrawn pull-down (rail diffusion with a contact (10560,17652) north of it, diffusion y 17705-17739 south of it) |
 | `rst_lat` | poly | (10521-10598, 17115-17137) | out | piece `rln`: the tap pad (10353,17127)'s row, an end cap at the rail's east edge: the gate of an undrawn transistor under the VSS rail (diffusion y 17040-17112 north of it, y 17140-17199 south of it) |
-| `rst_lat` | poly | (10600, 16292-16314) | out | piece `rln`: the end pad (10353,16345)'s row at the rail's east edge (drawn end): under the rail the gate of an undrawn transistor (diffusion y 16244-16289 and y 16317-16369); east of the rail it runs on into a structure at x 10600-10660 that is not read |
+| `rst_lat` | poly | (10497-10640, 16292-16314) | out | piece `rln`: the end pad (10353,16345)'s row: the gate of an undrawn transistor (channel about x 10497-10620; diffusion y 16244-16289 and y 16317-16369), ending in a cap x 10624-10640; Ambiguity 216 on a box north of the cap |
 
 ## Ambiguities
 
@@ -7630,6 +7637,22 @@ driver lies; the other three lead to the loads.
 215. **Is the diffusion band y 17484-17500 joined to anything under the rail?** (piece `u17345`) Read as no:
    no contact ring, and one edge line with field north of it separates it from the column's south part
    (edge y 17445-17452). No `?` item.
+216. **Is the cap of `rst_lat`'s north gate row tied to the box north of it?** (piece `rln`, run 53; raised by
+   review round 65, not decided by it.) The row y 16292-16314 ends in a cap x 10624-10640 east of the
+   diffusion it gates. Directly north, across one dark band y 16283-16291 (9 px), is a box (10622-10650,
+   16264-16282), dark in all four shots (red 88-111 in chip 2's metal shot at x 10632), lying in a narrow
+   plain band y 16264-16282 that leaves the rail's north diffusion eastwards (plain again x 10654-10678).
+   Readings: (a) no tie: the cap is an end cap in field and the dark band is the cap's north edge line and
+   the band's south edge line side by side; the box is something in the band (a contact of another wire,
+   a buried contact of the poly that reads orange further north at y 16256-16259, or dirt); (b) a buried
+   contact: the poly continues from the cap north into the box and is tied to that diffusion, which would
+   put `rst_lat` on a diffusion beside its own gate. **Working assumption: (a)**: a buried contact's box
+   has a lighter, tan centre in every shot (control, run 51's box (10497-10516, 17331-17355): 159/132/85 in
+   chip 2's metal shot, 204/180/139 in the clean shot at x 10504), this box is dark throughout, and the
+   cap's orange stops at y ~16293 with its own rounded outline (`f65_cap.png`, 7x). Nothing is drawn for
+   the box, and no `?` item: the transistor and the band are undrawn, so the extraction is the same under
+   either reading. What would settle it: tracing the unit (the band's ends, and where the poly at y 16256
+   comes from).
 
 ## Review
 
@@ -10818,12 +10841,41 @@ the diffusion's edge lines are at y ~17633 and y ~17739 (written 17620 and 17749
 
 Round 64: no findings.
 
+### Round 65 (full review; run 53, piece `rln`; 2026-11-21 22:16 -0600, at commit fd093cf)
+
+A fresh Fable reviewer; images in `cache/scratch/eof/review-65/`. Told to suspect: the end pad against the
+metal that jogs along the L's row 30 px north of it, and a contact from that metal onto the poly; missed
+taps on 1,200 px of metal and two metals end to end; a hidden branch of either row or of the L's column (as
+in round 63); whether each row is a gate at the rail or ends on a buried contact at the diffusion's west
+edge; the rows' east ends; every crossing.
+
+It checked and found correct: the end pad and the jog (y 16320-16328 at x 10354 is open poly, 17 px wide
+against the metal's 13; no ring, widening or hole along the jog or at its corners; 5.5x and a text map);
+one metal with only 8-12 px bars and the two pads' rings (`tools/tl5_tracks.py v 10353 16280 17620`; holes
+only at y 16352 and y 17133); row 1 (a cap at x ~10606, no branch on either flank, nothing leaving either
+pad, no contact at the three crossings); both rows as gates (orange poly through x 10500-10545 in both
+chip-2 shots with no box; the clean shot's rings there are absent in chip 2).
+
+- **Finding 1, the east end of the north row; it changes a port** (treated as a connection change),
+  confirmed (`f65_cap.png`; `tools/px.py row 16303 10580 10700 6`; `col 10632 16256 16324 3`): the row does
+  not run on east into a structure, as the port said: it ends in a cap x 10624-10640, 20 px beyond the east
+  edge of the diffusion, with bare ground east of it. Fixed: the row is drawn to its cap, the port and the
+  notes corrected. The reviewer's open question, whether the cap is tied to a dark box north of it, is
+  Ambiguity 216 (working assumption: no; nothing drawn for it).
+- Finding 2, notes only: a third thin metal crosses the north row at x ~10476-10488, without a pad. Noted.
+- Geometry: row 1's cap is at x ~10606 (drawn to x 10597; now x 10604).
+
+Not checked by it: anything north of y 16262 or east of x 10700; the far ends of the diffusions under the
+rail.
+
+Round 65: one finding that changes a port, fixed; an open question recorded as Ambiguity 216.
+
 ## Not done
 
 - **Next (after run 53)**: `rst_lat`'s metal north is drawn to its end (piece `rln`). Open from it: the three
   transistors `rst_lat` gates under the VSS rail x 10548-10598 (y 16297-16316, y 17119-17132, y 17681-17696)
-  and their units; the structure east of the rail at x 10600-10660, y 16270-16330 that the north row runs
-  into; the metal that jogs round the end pad (down x 10353 from (10353,15865), east along y 16303, south on
+  and their units; the box north of the north row's cap, (10622-10650, 16264-16282), and the narrow band it
+  lies in (Ambiguity 216); the metal that jogs round the end pad (down x 10353 from (10353,15865), east along y 16303, south on
   x 10398 to a corner (10403,16483), east, south on x 10441 to about (10440,16626): `tools/follow.py 10392
   16345 N` / `S`).
 - **Next (after run 52)**: `eof_w17515` is `h_eq_r1` (piece `s17515`), so that item of the list below is

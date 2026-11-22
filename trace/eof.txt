@@ -4631,7 +4631,10 @@ N M 10353,17560 rst_lat
 M 10353,17550 y16345 w=13
 P 10336,17110:10370,17144
 C 10353,17127 s=20x20
-P 10353,17126 x10597 w=22
+P 10353,17126 x10604 w=22
 P 10336,16328:10370,16362
 C 10353,16345 s=20x20
-P 10355,16345 y16303 x10600 w=20
+# Review round 65: east of the rail the row does not run on: it crosses the diffusion's east edge at x 10620
+# (the diffusion reaches 20 px beyond the rail) and ends in a cap x 10624-10640; bare ground east of it. A dark
+# box north of the cap (10622-10650, 16264-16282) is read as not joined to it (notes, Ambiguity 216).
+P 10355,16345 y16303 x10638 w=20
