@@ -458,6 +458,11 @@ Into parts not yet traced (the labels sit on the stubs):
 | cdp3_k_a | metal | stub at (8290,9150-9178); and x 7772, y 10150 | not followed |
 | cdp3_g_cN (N 2..7) | metal | x 9731 + 390 (N-5), y 8790 | row A cell |
 | x 9893 line (same net as cdp3_f_cN) | metal | x 9893 + 390 (N-5), y 8790 | row A cell |
+
+Into the cluster beside row A (run of 2026-11-21):
+
+| Name | Layer | Where | Direction | What |
+|---|---|---|---|---|
 | `busl_x7122` | poly | (7905, 8637-8658) | from `busl`'s row (through its uncertain stretch under the wide rail) | the poly row east of the pad (7834,8647) at the north end of the metal x 7835; runs on 15 px to the box (7935,8648) of the cluster (AMB-047), not read |
 
 ## Ambiguities
