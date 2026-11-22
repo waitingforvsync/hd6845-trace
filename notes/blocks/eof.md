@@ -1473,6 +1473,17 @@ contacts, no transistor, no uncertain item).
 - **Checks**: full extraction 2,516 nets, 4,812 transistors, 0 errors, 0 warnings (connections identical
   to before: the net grows, no join). The package by itself: 1,204 nets, 2,012 transistors, 0 errors.
 
+Run 54 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-21 22:28 -0600). One short piece, wiring only (one pad with a
+contact, no transistor, no uncertain item).
+
+- **Piece `o345`: where the NOR `eof_w17345`'s output goes.** Its metal x 10397 runs only 280 px north of run
+  51's port to an end pad (10397,17040), whose poly row runs east under two thin metals and ends in a framed
+  box at (10497-10522, 17028-17052), beside the rail diffusion y 17036-17112. The box is not drawn (port).
+  **Believed, not drawn**: it is a buried contact onto that diffusion, as this net's own node leaves its unit
+  by the box (10497-10516, 17331-17355); if so the NOR's node has a second pull-down path, through the gate
+  `rst_lat` makes at y 17119-17132 in series with the gate row y 17206-17219, and its equation changes.
+- **Checks**: full extraction 2,516 nets, 4,812 transistors, 0 errors, 0 warnings (connections identical).
+
 ## Inventory
 
 | Piece | Where | What |
@@ -5549,6 +5560,37 @@ Region x 10330-10620, y 16270-17550. Views `s53_tap.png`, `s53_end.png`, `s53_r1
     rst_lat gates, in the column of the VSS rail x 10548-10598 (none of the three transistors is drawn):
     y 16297-16316, y 17119-17132, y 17681-17696
 
+### Run 54: the NOR `eof_w17345`'s output metal north (piece `o345`)
+
+Views `s54_a.png` (2.15x), `s54_b.png` (3.3x, four shots), overlay `ov54.png` (3.8x).
+
+- **The metal** x 10391-10403 from run 51's port (10397,17315) north to a pad with a contact at (10397,17040)
+  (`tools/follow.py 10397 17300 N --gap 16` ends at (10397,17036); `tools/tl5_tracks.py v 10397 16900 17320`: no
+  metal north of y 17035, and south of the pad only pairs of edge bars where it crosses three poly rows,
+  y 17111-17142 (`rst_lat`'s row of run 53), y 17197-17229 and y 17284-17316 (this unit's gate row); the clean
+  shot has no hole on it but the pad's). Ring, bright centre and a hole in the clean shot at the pad
+  (`cache/scratch/cdp4/padc.py`).
+- **The pad's poly row** runs east, y 17029-17051 (`tools/px.py row 17040 10380 10560 5`, four shots): open
+  poly at x 10420-10425 and x 10460-10470 (orange in both metal shots), under the thin metal x 10440 (no pad
+  pattern: `candh.py -v v 10441,17040`) and under the thin metal x ~10478-10490, which is dark-barred there
+  and where the clean shot dips (red minus green 18 on the centre line): read as the metal over the row's end
+  and the box's west outline, not as a contact (the metal is not widened; tracing guide, traps 22 and 26):
+  the spot the review is sent to first. No poly leaves either flank (`tools/eof_tee.py h 17028 17051 10420
+  10475`: none), and nothing leaves the pad west, north or south.
+- **The row's end**: a framed box (10497-10522, 17028-17052), orange-tan with a heavy outline in both metal
+  shots, bright in the clean shot at x 10495-10500, directly west of the strip of diffusion beside the rail.
+  Under the rail at this height `tools/railprof.py 10552 10592 16900 17120` gives diffusion y 17036-17112
+  with no gate (the next row south is `rst_lat`'s gate, y 17119-17132). Not drawn: the row is drawn to
+  x 10492 (port).
+
+**Believed, not drawn** (it would change a merged equation, so it wants its own piece and review): the box
+is a buried contact onto a tab of the rail diffusion y 17036-17112, the same construction as this net's
+node exit 300 px south (run 51: tab, box (10497-10516, 17331-17355), poly row west, pad (10397,17343)). Then
+`eof_w17345`'s node would be two diffusions joined by the metal x 10397, and the upper one is separated from
+the diffusion y 17140-17199 by `rst_lat`'s gate, and that from the rail's contact (10562,17255) by the gate
+row y 17206-17219: `eof_w17345` = NOT(`bl0_w15566` OR `eof_w17866` OR (`rst_lat` AND the row y 17212)).
+Nothing of this is in the trace.
+
 ## Ports
 
 The net is driven outside the package (by `rdp2`'s NOR). `in` marks the port beyond which the
@@ -5695,6 +5737,7 @@ driver lies; the other three lead to the loads.
 | `rst_lat` | poly | (10546-10598, 17682-17698) | out | piece `rl` (review round 63): the branch row from the column x 10355, under the VSS rail: the gate of an undrawn pull-down (rail diffusion with a contact (10560,17652) north of it, diffusion y 17705-17739 south of it) |
 | `rst_lat` | poly | (10521-10598, 17115-17137) | out | piece `rln`: the tap pad (10353,17127)'s row, an end cap at the rail's east edge: the gate of an undrawn transistor under the VSS rail (diffusion y 17040-17112 north of it, y 17140-17199 south of it) |
 | `rst_lat` | poly | (10497-10640, 16292-16314) | out | piece `rln`: the end pad (10353,16345)'s row: the gate of an undrawn transistor (channel about x 10497-10620; diffusion y 16244-16289 and y 16317-16369), ending in a cap x 10624-10640; Ambiguity 216 on a box north of the cap |
+| `eof_w17345` | poly | (10492, 17029-17051) | out | piece `o345`: the east end of the row of the pad (10397,17040) at the top of the NOR's output metal x 10397: it ends in a framed box (10497-10522, 17028-17052), not drawn (believed a buried contact onto the rail diffusion y 17036-17112) |
 
 ## Ambiguities
 
@@ -10893,6 +10936,10 @@ Round 66: no findings.
 
 ## Not done
 
+- **Next (after run 54)**: the box (10497-10522, 17028-17052) at the end of `eof_w17345`'s row and the unit
+  it belongs to: the rail diffusion y 17036-17112, `rst_lat`'s gate y 17119-17132, the diffusion y 17140-17199,
+  the gate row y 17206-17219 (its source not followed) and the rail contact (10562,17255) ("Run 54" under
+  Logic: believed a second, series pull-down path of the NOR). To be traced as one piece with its own review.
 - **Next (after run 53)**: `rst_lat`'s metal north is drawn to its end (piece `rln`). Open from it: the three
   transistors `rst_lat` gates under the VSS rail x 10548-10598 (y 16297-16316, y 17119-17132, y 17681-17696)
   and their units; the box north of the north row's cap, (10622-10650, 16264-16282), and the narrow band it
