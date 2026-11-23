@@ -12315,6 +12315,48 @@ column. Images in `cache/scratch/eof/review-81/` (5), with `tools/px.py`, `tools
 
 Round 81: two findings that change a connection, fixed; a fix check follows with the review of run 68's pieces.
 
+### Round 82 (full review of pieces `m15998` and `u15955` and fix check of round 81's corrections to piece `p16215`; runs 67-68; 2026-11-23, ended 08:30 +0000, at commit 64acf11)
+
+A fresh reviewer agent (Claude Fable 5.2), briefed with the two pieces' eight claims and the two corrections
+to piece `p16215`, and told to suspect: the channels under both rows and the strip's two ends at `vss`
+contact boxes (chip 1 has a dark blob over the exit box: chip 2 there); the band under the rail, the load's
+tie box and neck (geometry copied from piece `u16692`), an extra pull-down east of the rail; the exit row,
+the pad (10441,15955) and its metal; the metal x 10397 as one to a real end pad, what the row y 15998
+touches; the corrected poly path at (10441,16260) with no contact to the metal above it. Images in
+`cache/scratch/eof/review-82/` (8), with `tools/px.py`, `tools/tl3_thin.py`, `tools/sameconn.py`.
+
+- **Finding 1, geometry only (confirmed, fixed)**: the load's strip has edge lines across the plate at
+  y 15945-15948 and y 15975-15978 (`px.py col 10682`), drawn y 15949-15971. Now
+  `D 10596,15946:10716,15977`.
+- **Finding 2, geometry only (confirmed, fixed)**: the pull-down strip's edge lines cross both gate rows at
+  x 10491-10495 and x 10529-10532, drawn x 10500-10529; its top edge is about y 15876. Now
+  `D 10493,15876:10531,16032` (the exit's buried contact box widened to x 10489 with it).
+- **Finding 3, geometry only (confirmed, fixed)**: the north contact's box was drawn 16 px west of the rail at
+  y 15850-15875, where the photo shows field. Now `D 10545,15850:10600,15896` with
+  `D 10529,15876:10600,15896` for the strip's end.
+- **Finding 4, geometry only (confirmed, fixed)**: the thin metal and the pad (10397,15998) lie about 4 px
+  west of the first drawing. Now `M 10394,16236 y15998`, the pad and its contact at (10393,15998).
+- **Checked and found correct**: the metal x 10397 clean from y 16020 to y 16240, the pad with ring, bright
+  centre and green hole, 15 px of bare ground to the metal x 10345-10361, the row y 15998 with nothing over
+  it; channels under both rows, the caps ending at x ~10543 with pink field under the rail, no edge line
+  across the strip between the gates, both rail contacts (rings in chip 2, specks or pits on tan boxes in
+  the clean shot); the band diffusion under the rail and east of it, the neck, tie box, plate and VCC
+  contact fitting, no extra poly or pull-down at x 10586-10660, no diffusion column west of the tie box;
+  the exit row open poly under no metal, the pad (10441,15955) with ring, centre and hole, its metal from
+  the north only, crossing `ck_out`'s row with edge bars only; round 81's corrections: no widening and no
+  hole at (10441,16260), the gap y 16237-16247 between the pad (10440,16215) and the corner's metal open
+  poly (two metals), the poly turning east at y 16250-16267 to x ~10478; `tools/sameconn.py 53fca7b`: the
+  two new names, three transistors and one equation only.
+- **Not checked by the reviewer**: the join of the open strip to each contact box falls on the rail's edge
+  line (accepted from the continuous outline in both metal shots); north of y 15845 the metal x 10441 has a
+  31 px break at y 15790-15822, so `eof_w15955`'s pad metal appears to end near (10441,15835): not followed;
+  whether `eof_w16213`'s poly joins the box east of x 10481 (Ambiguity 216); chip 1 round the exit box.
+- **Proof that the fixes changed no connection** (against 64acf11):
+  `tools/t.sh eof sameconn.py 64acf11`: `connections identical`;
+  `.venv/bin/python tools/sameconn.py 64acf11`: `connections identical`.
+
+Round 82: no findings that change a connection.
+
 ## Not done
 
 - **Next (after run 68)**: the pad group (piece `p16215`), `eof_w16432`'s north end (piece `m15998`) and the

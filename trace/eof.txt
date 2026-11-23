@@ -5071,10 +5071,11 @@ N M 10470,16215 eof_w16213
 # y 15987-16009 runs east, with no metal over it at x 10441, to the rail column (drawn to x 10492: PORT; it
 # goes on as a block x 10500-10524 and ends at x ~10540 west of the rail, field under the rail at its
 # height: the build of the latch's gate rows, a gate on the strip, not read).
-M 10397,16236 y15998 w=13
-P 10380,15981:10414,16015              # the end pad (10397,15998)
-C 10397,15998 s=20x20
-P 10397,15998 x10492 w=22
+# review round 82 (geometry only): the metal and the pad lie about 4 px west of the first drawing
+M 10394,16236 y15998 w=13
+P 10376,15981:10410,16015              # the end pad (10393,15998)
+C 10393,15998 s=20x20
+P 10393,15998 x10492 w=22
 # ======================================================================
 # Run 68 (2026-11-23), piece `u15955`: the unit at the head of the rail column, between the rail contacts
 # (10558,15870) and (10562,16032): a two-input NOR, eof_w15955 = NOR(ck_out, eof_w16432). The build of
@@ -5084,8 +5085,11 @@ P 10397,15998 x10492 w=22
 # band y 15947-15965 under the rail (field under the rail at both rows' heights).
 P 10492,15911 x10546 w=22
 P 10492,15998 x10546 w=22
-D 10500,15882:10529,16032              # the strip, through under both gates
-D 10529,15850:10600,15896              # the box of the rail contact north
+# review round 82 (geometry only): the strip is x ~10493-10531 from y ~15876; the north contact's box does
+# not reach west of the rail above y 15876
+D 10493,15876:10531,16032              # the strip, through under both gates
+D 10529,15876:10600,15896              # the strip's north end into
+D 10545,15850:10600,15896              # the box of the rail contact north
 C 10558,15870 s=24x30
 D 10529,16014:10590,16052              # the box of the rail contact south
 C 10562,16032
@@ -5095,7 +5099,7 @@ D 10500,15947:10604,15965              # the node's band under the rail
 # The node's west exit: a buried contact box (10495-10520, 15940-15975) and a poly row y 15945-15965 west
 # to an end pad (10441,15955) (run 57's notes: "the pad (10441,15955) at the end of the metal x 10441").
 # The pad's metal runs north (PORT at y 15925: not followed).
-B 10495,15940:10520,15975
+B 10489,15940:10520,15975
 P 10441,15955 x10512 w=20
 P 10424,15938:10458,15972
 C 10441,15955 s=20x20
@@ -5104,7 +5108,7 @@ N P 10470,15955 eof_w15955
 # The load, piece u16692's moved by dy -737: the strip y 15949-15971 east under the plate x 10652-10712,
 # y 15925-16019 into a box under bc2's VCC rail with a contact (10745,15968); a neck south of the band into
 # a buried contact box (10625-10652, 15991-16023) at the plate's SW corner.
-D 10596,15949:10716,15971
+D 10596,15946:10716,15977              # review round 82: edge lines across the plate at y 15945-15948 and y 15975-15978
 D 10628,15963:10646,16023
 B 10625,15991:10652,16023
 P 10640,16007 x10660 w=20
