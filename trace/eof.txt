@@ -4808,3 +4808,23 @@ P 10251,16372:10285,16406            # end pad (10268,16389)
 C 10268,16389 s=20x20
 P 10268,16389 x10335 w=22
 N M 10268,16100 bc2_w15388
+# ======================================================================
+# Run 62 (2026-11-23), piece `w16560`: the other metal on the track x 10268 (the one that ends 26 px north of
+# ck_out's corner (10268,16910): review round 70). From a pad (10266,16560) a thin metal runs south on x 10268
+# to a corner (10268,16868), west to a corner (10226,16868), south on x 10226 for 900 px to a corner
+# (10226,17777) and west along y 17777 to an end pad (9893,17777): one metal of 1,560 px (two-chip test on
+# every leg: only 8-10 px edge bars). From y 16864 to y 16950 and from x 10231 to x 10070 it lies on rst_a's
+# poly (trunks' P 10470,16950 10225,16950 10225,16820 and P 10075,18080 10075,17772 10262,17772) with no
+# contact, and it passes rst_a's pads (10225,16820) and (10262,17770) with open poly between (37 px and
+# 12 px): not joined. West of x 10065 the clean shot under it is field: the end pad's poly is another poly.
+# The north pad's poly runs north as a column x 10256-10278 and east as a row y 16505-16530 (drawn to
+# x 10335: PORT, on east under the tracks toward the rail column); the end pad's poly row runs west (drawn to
+# x 9860: PORT). Net named by the north pad's y.
+P 10249,16543:10283,16577            # the north pad (10266,16560)
+C 10266,16560 s=20x20
+P 10267,16560 y16517 x10335 w=22
+M 10268,16560 y16868 x10226 y17777 x9893 w=13
+P 9876,17760:9910,17794              # the end pad (9893,17777)
+C 9893,17777 s=20x20
+P 9893,17777 x9860 w=20
+N M 10226,17300 eof_w16560
