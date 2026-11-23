@@ -5043,3 +5043,22 @@ P 10788,16415:10822,16449              # the east pad (10805,16432)
 C 10805,16432 s=20x20
 M 10811,16432 y18430 x10850 w=13
 N M 10811,17400 eof_w16432
+# ======================================================================
+# Run 67 (2026-11-23), piece `p16215`: the west pad (10437,16432)'s metal north of run 66's port, and the
+# pad group at its north end. Wiring only. The metal x 10433-10445 runs north over rst_lat's row and
+# bc2_w15388's row (bars only) to a pad (10441,16260) and on west along y 16252-16266 to a corner
+# (10397,16258) and north on x 10397 (PORT at y 16236: not followed; bc2_w14955's metal on the same track
+# has its corner at (10397,16301), 35 px south, with bare ground between: two metals, trap 33). The pad
+# (10441,16260) lies on the south end of a poly column x 10431-10451 (ring bars west, north and south of a
+# bright centre in both metal shots; no hole seen in the clean shot: the contact is the piece's least
+# certain item); the column runs north to a pad (10440,16215) (ring, bright centre, a green hole in the
+# clean shot), whose metal runs east as a patch y 16205-16225 to x 10495 and south: the north end of the
+# thin metal x 10476-10492 (PORT at y 16240: south of it that metal is dark over a box, Ambiguity 219's
+# metal).
+M 10439,16405 y16258 x10397 y16236 w=13
+P 10427,16246:10455,16272              # the pad (10441,16260), the poly column's south end
+C 10441,16260 s=18x16
+P 10441,16260 y16215 w=20
+P 10424,16198:10456,16232              # the pad (10440,16215)
+C 10440,16215 s=20x20
+M 10440,16215 x10484 y16240 w=18
