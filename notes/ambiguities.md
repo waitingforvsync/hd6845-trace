@@ -1052,3 +1052,15 @@ of its own. Not strictly decidable: a dark line between poly and box is also wha
 Nothing is drawn for the box and the transistor is undrawn, so the extraction is the same either way. Would
 settle it: tracing that unit (the band's ends; the poly that reads orange north of the box at y
 16256-16259).
+
+## AMB-059: is the dark spot (10567,17178) on the VSS rail a contact onto the NOR `bc2_w14955`'s node? (2026-11-22)
+
+From `eof` run 55 (Kieran Connell; the block's Ambiguity 217; the reviewer of round 68 measured the same and
+agreed). Chip 2's metal shot has a dark spot about 10 px across (x 10564-10573, y 17173-17182) on the rail
+x 10548-10598 over the node's diffusion y 17140-17199; run 51 had noted "a contact at about (10565,17175)" from
+a low zoom. **Assumed: a blemish of chip 2, nothing drawn.** The spot has no ring; chip 1's metal shot is
+uniformly bright over it and the clean shot uniformly tan (no greener patch, no specks), while both real rail
+contacts 95 px north and 80 px south have the ring and the specks; a contact is a mask feature and would be on
+both chips. A contact would put the node on `vss`: no gate, and `rst_lat`'s transistor between two grounded
+diffusions; the node also has a load and an exit of its own, which a grounded diffusion would not. Rests on it:
+`bc2_w14955` = NOR(`rst_lat`, `ck_out`). Would settle it: nothing more in these photos.

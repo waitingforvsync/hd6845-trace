@@ -627,3 +627,16 @@ along the top of the central datapath) is the gap.
   `trace/trunks.txt`): followed by `eof` run 52: the diagonal becomes a row y 17592-17612 west to a column
   x 10432-10448 north, the gate of the pull-down on `bl0_w15566` at (10548,17515). `eof_w17515` is an alias of
   `h_eq_r1`.
+
+## Corrections (coordinator, from the handoffs of `eof` runs 55-62, 2026-11-23)
+
+- The table row `| 10433-10450 | <16880-17689 | metal | ck_out | "ck_out #2" continues up the left side of the
+  gate column ... (contacts on it at about y 17234 and 17168 ...`: the `ck_out` metal ends on the pad
+  (10439,17238) (the "contact at about y 17234"); the contact at y 17168 is the pad of another metal, the output
+  of the NOR `bc2_w14955` = NOR(`rst_lat`, `ck_out`), which runs north from there. `trace/trunks.txt`'s line
+  `M 10311,17908 y18473 x10442 y18342 x10398 y17689 x10441 y16880` now ends `y17238` (`eof`, cdc4d7d; open poly
+  at y 17206-17218 in both metal shots, no metal in either chip at y 17175-17199; review round 68 of `eof`).
+  The stretch y 16885-17168 is `eof`'s metal of that NOR. R53.
+- The poly row y 17772 between x 10075 and the pad (10262,17770), and the poly column x 10225 between y 16820
+  and y 16950, each have another net's metal (`eof_w16560`, `eof` run 62) lying on them with no contact: that
+  metal is not `rst_a`'s.

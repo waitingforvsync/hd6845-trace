@@ -522,6 +522,13 @@ Traps, all of them real:
    every cut and `tools/follow.py` jumps the gap. A long track is one metal only after a continuous
    two-chip test along all of it (`tools/tl5_tracks.py v`), and every stretch of 20 px or more
    without metal is looked at. Found 2026-11-20 (`eof` run 21; R44, R36).
+   And **a line drawn at 1x through a pad can be two metals that meet at it**: `trunks` drew "ck_out #2" as
+   one metal x 10441 through two pads 70 px apart ("contacts on it"); they are the ends of two metals with
+   40 px of open poly row between, and the line joined a NOR's output to its own input (caught only when the
+   gate was drawn and the extraction showed the short). In the bottom-centre logic a track position is
+   reused wherever a line ends: `eof` runs 55-62 met six places where two metals lie end to end 12-40 px
+   apart. Before drawing a metal through a pad or past another line's end, run the two-chip test across
+   it. Found 2026-11-22 (`eof` run 55; R53).
 34. **A row that lines up with a poly beyond a rail's edge is not thereby the same poly.** In
    `lc2`'s west cluster the gate rows end at the rail's east edge and a different poly (the gate of
    a pull-down east of the rail) starts 20-30 px further on, in line. At 2.8x they look like one

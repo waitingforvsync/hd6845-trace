@@ -3140,3 +3140,53 @@ route blocks lie inside the coarse bottom-centre block; nothing trimmed.
 
 `out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 988 floor-plan
 blocks. Coverage: 72.9% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
+
+## 2026-11-22 20:37  Handoffs: `eof` runs 55-62
+
+Eight handoff files, applied by the coordinator (on Opus 5.5; coordination, no tracing): Kieran Connell's
+session, on Fable, `eof` runs 55-62 (2026-11-22 23:17 to 2026-11-23 01:28 +0000, merged 1fa3bde, 545d59e,
+188346b, 1e79cbf, 70cbb56, 4b24684, fc3f1f2, eb1f72e; claim kept through run 61, released with run 62).
+4 transistors (run 55's NOR, run 58's load), the rest wiring; no uncertain item; review rounds 68-75, no
+finding that changes a connection. Full extraction after them 2,517 nets (one more than at the last
+handoffs: run 55's net, then run 59's join, then run 62's new net `eof_w16560`), 4,816 transistors, 0 errors,
+0 warnings; 967 of 1,425 equations firm; 109 nets joined only through uncertain items (1,212 items). Spot
+checks of the overlays (the drawn shapes lie on the features): run 55's unit in `metal` and `acid1b` at 1.6x
+(`cache/scratch/refresh/hR-20261122-eof55.png`), and runs 56-61's metals x 10180-10441, y 15400-16400 at 0.9x
+(`hR-20261122-eof59.png`).
+
+What they establish (from the tracer's notes; marks as there):
+
+- **`bc2_w14955` = NOR(`rst_lat`, `ck_out`)** (runs 55, 56, 59, firm): the unit under `bc2`'s east column VSS
+  rail at y 17054-17250, its load on the VCC rail x 10722-10768, its output metal north 1,300 px and a poly hop
+  onto `bc2`'s enable stub (10398,15440). The enable of the east column's latch unit a is NOT `ck_out` outside
+  reset and low during reset; the same net is an input of the NOR `eof_w15172` (unit T, which sets the latch
+  that clocks the ripple counter) and the gate of two rows west of the rail. `eof_w17166` is an alias. The
+  dark spot (10567,17178) on the rail is assumed a blemish (AMB-059).
+- **`ck_out` #2 ends on the pad (10439,17238)** (run 55): `trunks` had drawn it on north through the NOR's
+  output pad, joining the gate's output to its input; `trace/trunks.txt` was cut back by `eof` (cdc4d7d).
+- **`eof_w17345` = NOR(`bl0_w15566`, `eof_w17866`) is complete** (run 58: its load, a copy of run 55's); it
+  depends only through AMB-057's alias of `eof_w17866`.
+- Wiring (runs 57, 60-62): `ck_out`'s branch north to an end pad (10311,15912); `bc2`'s copy-b enable
+  `bc2_w15432` and data `bc2_w15388` followed south to end pads (10180,16128) and (10268,16389), no driver yet;
+  `eof_w16560`, a metal of 1,560 px lying on `rst_a`'s poly twice without a contact, neither end read. Seven
+  gate rows end west of the rail column x 10497-10600 in one build; their units are the package's next work.
+
+Applied: master list rows `eof` (runs 55-62; a new Next, released), `bc2`-`bc4` (the drawn unit and load
+strip, `bc2`'s three ports met, the seven gate rows on the rail column, what was seen and is in no trace
+file), `trunks` (continue) (ck_out #2's end; `eof_w16560` on `rst_a`'s poly), the `rename` row
+(`eof_w17166` -> `bc2_w14955`, a functional name due), R31 (`bc2`'s three enable lines of unit a confirmed on
+Fable by review round 72 of `eof`) and R4 (pointer to R53). **Re-read list**: R53 new: `trunks` lines with
+contacts "on it" not drawn by `trunks`, and `trunks` / `bc*` metals in the bottom-centre logic drawn at 1x
+through a pad or past a line's end (six places where two metals lie end to end 12-40 px apart met by runs
+55-62). **Guide**: trap 33 extended (a line drawn at 1x through a pad can be two metals meeting at it).
+**Ambiguities**: AMB-059 new (the block's Ambiguity 217). Corrections sections in the notes of `trunks` and
+`bc2`. Floor plan: the eight runs' blocks lie inside the coarse bottom-centre block; nothing trimmed.
+
+**Not done, proposals left open** (tools): fold `tools/eof_costs.py`'s `HD_COSTS_ALSO` (earlier transcript
+folders of a moved checkout) into `tools/costs.py`; `tools/netlist.py`'s report lists no named net without a
+transistor, so a wiring-only net shows only as the count going up; `tools/t.sh eof` does not load `trunks`
+(not in `eof`'s `@requires`), so a short through a `trunks` line shows only in the full extraction.
+`ports.d/bc2.txt`'s three ports met by `eof` (lines 5, 8, 9) can go: for `bc2`'s next tracer.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 996 floor-plan
+blocks. Coverage: 72.9% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.

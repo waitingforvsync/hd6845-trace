@@ -247,3 +247,22 @@ Round 1 (latch unit b): no findings.
 - An undrawn unit at about (10620-10780, 15750-15860): a depletion load from the VCC rail's contact box
   (10722-10775, 15782-15848), plate x 10685-10716, tie box (10622-10650, 15760-15790); its output is the track
   x 10808 (`cdp4_w10808`, `cdp4` run 12), which runs north into `tr1`'s gate row. Pull-downs not found.
+
+## Corrections (coordinator, from the handoffs of `eof` runs 55-62, 2026-11-23)
+
+- The table row of `bc2_w14955` ("south it runs to y 15398, jogs west along y 15386-15398 to the metal x 10398,
+  which runs on south ...") and its Not done: the metal x 10398 is followed (`eof` runs 55, 56, 59): south to a
+  corner (10398,15738), west to (10354,15738), south onto a pad (10354,15781), a poly hop to the pad
+  (10354,15867) and the thin metal x 10353 / 10397 / 10441 to the output pad (10441,17168) of a NOR under the
+  VSS rail x 10548-10598: **`bc2_w14955` = NOR(`rst_lat`, `ck_out`)** (firm; `eof_w17166` is an alias). The
+  port `bc2_w14955` M (10398,15440) in `ports.d/bc2.txt` is met.
+- Copy b's enable `bc2_w15432` ("it goes on south (metal shot continuous to y 15718 at least; not followed)"):
+  followed by `eof` run 60 (piece `en432`) through the pad (10441,15650), corners (10441,15788), (10393,15788),
+  (10393,15828), (10180,15828) to an end pad (10180,16128), whose row runs west (no driver yet). The port
+  (10441,15665) is met.
+- Copy b's data `bc2_w15388` ("metal x 10353 from the pad south (not followed)"): followed by `eof` run 61
+  (piece `d388`): corners (10353,15698), (10311,15698), (10311,15740), a pad (10268,15738), a poly hop to a pad
+  (10268,15868), a metal x 10268 to an end pad (10268,16389), whose row runs east toward the rail column (no
+  driver yet). The port (10353,15440) is met.
+- R31: the lines `M 10441,15180 y15392`, `M 10441,15392 x10398`, `M 10398,15386 y15440` and the reading "not
+  joined to copy b's pad" were confirmed on Fable by review round 72 of `eof`.
