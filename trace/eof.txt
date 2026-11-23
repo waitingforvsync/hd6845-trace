@@ -4708,3 +4708,28 @@ D 10713,17144:10772,17190
 C 10745,17165
 M 10746,17120 y17215 w=48              # the VCC rail, over this unit only
 N M 10746,17200 vcc
+# ======================================================================
+# Run 56 (2026-11-23), piece `o166`: where the NOR eof_w17166's output goes. Its thin metal x 10441 runs on
+# north of run 55's port (10441,16885) through two tap pads, (10441,16864) and (10441,16650), to a corner
+# (10441,16472), west to x 10397, north to y 16301, west along y 16301 (lying on rst_lat's row there, no
+# contact: run 53) to x 10353 and north to an end pad (10354,15867): one metal of 1,300 px (two-chip test on
+# every leg, no stretch of 25 px without metal but the pads' rings). Each tap pad's poly row runs east
+# under the thin metal x 10476-10492 (no contact) toward the rail column; drawn to x 10492 (PORTS: each row
+# goes on as a block x 10497-10526 and a patch x 10534-10542 west of the rail, with field under the rail at
+# its height, the same end as eof_w17345's row y 17040: not read). The end pad's poly runs north as a column
+# x 10345-10363 under a horizontal metal y 15821-15836 (no contact) to a pad (10354,15781), whose metal
+# goes north (PORT at y 15755: it joins a staircase of three metals at y ~15740, not read).
+M 10441,16890 y16472 x10397 y16301 x10353 y15867 w=13
+P 10424,16847:10458,16881            # tap pad (10441,16864)
+C 10441,16864 s=20x20
+P 10441,16864 x10492 w=22
+P 10424,16633:10458,16667            # tap pad (10441,16650)
+C 10441,16650 s=20x20
+P 10441,16651 x10492 w=22
+P 10337,15850:10371,15884            # end pad (10354,15867)
+C 10354,15867 s=20x20
+P 10354,15867 y15781 w=18
+P 10337,15764:10371,15798            # the hop's north pad (10354,15781)
+C 10354,15781 s=20x20
+M 10354,15781 y15755 w=18
+N M 10397,16400 eof_w17166

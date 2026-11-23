@@ -1502,6 +1502,18 @@ uncertain item; and one correction to `trace/trunks.txt` (commit cdc4d7d).
   reset the gate's output is NOT `ck_out`, and during reset it is low.
 - **Checks**: full extraction 2,517 nets, 4,815 transistors, 0 errors, 0 warnings.
 
+Run 56 (Kieran Connell's session, Claude Fable 5.2; 2026-11-22 23:56 +0000 on). One piece, wiring only (four
+pads with contacts, no transistor, no uncertain item).
+
+- **Piece `o166`: where the NOR `eof_w17166`'s output goes.** Its thin metal x 10441 is one metal of 1,300 px
+  from the output pad north through two tap pads, (10441,16864) and (10441,16650), round two corners
+  (it is the metal run 53 saw jog round `rst_lat`'s end pad) to an end pad (10354,15867); a poly hop of 85 px
+  north under a crossing metal to a pad (10354,15781), whose metal goes on north (port). Each tap pad's poly
+  row runs east toward the rail column and is drawn to x 10492 (ports): **both rows end like `eof_w17345`'s
+  row y 17040**, in a block x 10497-10526 and a patch x 10534-10542 west of the rail with field under the
+  rail: three rows of one build, believed gates over a diffusion strip west of the rail; not read.
+- **Checks**: full extraction 2,517 nets, 4,815 transistors, 0 errors, 0 warnings.
+
 ## Inventory
 
 | Piece | Where | What |
@@ -5708,6 +5720,46 @@ rail), `r55_e1.png`, `r55_e2.png` (4x, east of the rail), `r55_t1.png` (5.3x, th
 - **Seen and not drawn**: the thin metal x 10476-10496 that crosses both rows of the unit without a contact
   (another net's; in no trace file); the unit north of the edge line y 17052 (below, Not done).
 
+### Run 56: the NOR `eof_w17166`'s output metal north (piece `o166`)
+
+Views `r56_s1.png` (1.6x, every trace), `r56_a1.png`, `r56_a2.png` (3.1x, four shots, the lower tap pad and the
+rail), `r56_b1.png`, `r56_b2.png` (4.9x, the lower row's east end), `r56_end.png`, `r56_p780.png`, `r56_endn.png`
+(the end pad, the hop's north pad and beyond), `r56_p650.png`, `r56_r650.png` (the upper tap pad and its row),
+overlays `r56_ov1.png` (3.4x), `r56_ov2.png` (2.4x, both metal shots), `r56_ov3.png` (2.3x).
+
+- **The metal** (x 10435-10447): from run 55's port (10441,16885) north. `tools/tl5_tracks.py v 10441 16460
+  17200` and `v 10441 16465 16640`: the only stretches without metal in both chips longer than 13 px are the
+  rings of two pads, at y 16842-16887 (hole in the clean shot at y 16871) and y 16627-16669 (hole at y 16650);
+  the metal is bright on both sides of each ring (`tools/px.py col 10441 16596 16700 4 metal,metal1,acid1b`:
+  218/201/113 at y 16624, 198/169/90 at y 16672), so it runs through both pads. `tools/follow.py 10441 16580
+  N --gap 16`: a corner (10434,16472) west, a corner (10398,16470) north, a corner (10396,16302) west, a corner
+  (10350,16299) north, an end at (10353,15865). Each leg passes the two-chip test with no stretch over 10 px
+  (`tl5_tracks.py h 16472 10385 10455`, `v 10397 16290 16480`, `h 16302 10340 10410`, `v 10353 15830 16310`),
+  and beyond each corner there is no metal in either chip (`tl5_tracks.py v 10397 16225 16300`: none at
+  y 16267-16299; `h 16301 10285 10348`; `v 10441 16395 16465`; `h 16472 10335 10390`; `v 10397 16480 16545`):
+  corners, not tees. Along y 16301 the metal lies on `rst_lat`'s row (run 53: no contact; the gap to
+  `rst_lat`'s end pad south of it is open poly).
+- **The lower tap pad** (contact (10441,16864); box x 10424-10458, y 16847-16881; ring and bright centre in
+  both metal shots, a hole in the clean shot) and **the upper tap pad** (contact (10441,16650); box
+  y 16633-16667; the centre bright in chip 1's metal shot, dim in chip 2's, a hole in the clean shot). Each
+  pad's poly row runs east (y 16853-16875 and y 16640-16662) under the thin metal x 10476-10492, which is
+  bright across the row with no ring and no hole under it (`tools/textmap.py 10468 16846 10500 16884 3`,
+  `textmap.py 10468 16632 10500 16672 3`). Drawn to x 10492. **Beyond** (`tools/px.py row 16864 10456 10560 4`,
+  `row 16651 ...`: the two rows read alike sample for sample): open poly x 10500-10524 (orange in both metal
+  shots), a dark line x 10528-10532, an orange patch x 10536-10540, a dark line, and field under the rail
+  (pink, 203/110/114). `eof_w17345`'s row y 17040 ends the same way (run 54), with an arm of the rail
+  diffusion against its south edge (run 55): believed three gates over diffusion west of the rail, of the
+  units at y 16600-17050; not read (`r56_b1.png`: the rail narrows to x 10545-10582 south of y 16850, with a
+  poly column x 10584-10597 beside it and a rail contact (10553,16907)).
+- **The end pad** (contact (10354,15867); `tl5_tracks.py v 10353 15830 16310`: a hole in the clean shot at
+  y 15871, no metal north of the ring) has a poly column north, x 10345-10363, under the horizontal metal
+  y 15821-15836 (`tools/textmap.py 10328 15800 10382 15852 3`: the metal bright across the column, no ring,
+  the clean shot salmon throughout) to a **pad with a contact (10354,15781)** (ring and bright centre in both
+  metal shots, `r56_p780.png`). That pad's metal leaves north (x 10345-10365); the metal that passes 15 px
+  east of the pad (a corner at about (10385,15780)) is separate (a dark gap x 10372-10385 in both metal
+  shots). Drawn to a port at y 15755: at y ~15740 it joins a staircase of three metals (`r56_endn.png`),
+  where `tools/follow.py` fails (tracing guide, trap 30).
+
 ## Ports
 
 The net is driven outside the package (by `rdp2`'s NOR). `in` marks the port beyond which the
@@ -5852,7 +5904,9 @@ driver lies; the other three lead to the loads.
 | `rst_lat` | - | (the metal north of the pad (10352,17604)) | - | piece `rl`'s port at (10353,17540) is met by piece `rln` (run 53): no port |
 | `h_eq_r1` (= `eof_w17515`) | poly | onto `trunks`' diagonal at (10940-10950, 17592-17612) | in | piece `s17515`: the row of the gate column of `bl0_w15566`'s pull-down; no port (joined by geometry) |
 | `rst_lat` | poly | (10546-10598, 17682-17698) | out | piece `rl` (review round 63): the branch row from the column x 10355, under the VSS rail: the gate of an undrawn pull-down (rail diffusion with a contact (10560,17652) north of it, diffusion y 17705-17739 south of it) |
-| `eof_w17166` | metal | (10435-10447, 16885) | out | piece `u17170`: the thin metal x 10441 of the NOR's output pad (10441,17168), north; it runs on to a pad (10441,16862) (a poly row east) and another (10441,16650) (a poly row east), not drawn |
+| `eof_w17166` | metal | (10345-10365, 15755) | out | piece `o166`: the metal of the pad (10354,15781) at the north end of the hop from the output metal's end pad (10354,15867); on north into a staircase of three metals at y ~15740: not read |
+| `eof_w17166` | poly | (10492, 16853-16875) | out | piece `o166`: the row of the tap pad (10441,16864); on east as a block x 10497-10526 and a patch x 10534-10542 west of the rail (field under the rail): believed a gate over diffusion there, not read |
+| `eof_w17166` | poly | (10492, 16640-16662) | out | piece `o166`: the row of the tap pad (10441,16650); the same end as the row above |
 | `ck_out` | metal | (10261-10275, 17150) | out | piece `u17170`: the thin metal of the end pad (10267,17214) of the NOR's gate row, north: it runs to a corner (10269,16906), east to (10311,16906) and north on x 10311 to about (10310,15908) (`tools/follow.py`; not read) |
 | `vss` | metal | (10548-10598, 17054) | - | piece `u17170`: the VSS rail, drawn from y 17054 south; north of it the rail has another unit's contact area at y 17015-17050 |
 | `vcc` | metal | (10722-10770, 17120) and (10722-10770, 17215) | - | piece `u17170`: `bc2`'s VCC rail, drawn over this unit's load contact only; it runs on north (to `bc2`'s end at y 15746, not drawn between) and south |
@@ -11135,6 +11189,14 @@ Round 68: no findings that change a connection.
 
 ## Not done
 
+- **Next (after run 56)**: `eof_w17166`'s metal is drawn north to the pad (10354,15781) (piece `o166`). Open:
+  (a) **the metal north of the port (10354,15755)** through the staircase at y ~15740 (three metals step
+  there; read it on views and by cuts across each arm, not with the follower); (b) **the units west of and
+  under the rail at y 16600-17050**, which the three rows y 16651, y 16864 (`eof_w17166`) and y 17040
+  (`eof_w17345`) end in: each row has a block x 10497-10526, a dark line x 10528-10532 and a patch
+  x 10534-10542; the rail narrows to x 10545-10582 south of y 16850 beside a poly column x 10584-10597; rail
+  contact (10553,16907); loads east of the rail with contacts on the VCC rail at about (10735,16700) and
+  (10735,16860). Items (b) to (e) of the list after run 55 stand.
 - **Next (after run 55)**: the unit of the rail column y 17054-17250 is drawn (piece `u17170`:
   `eof_w17166` = NOR(`rst_lat`, `ck_out`)). Open from it: (a) **where `eof_w17166` goes**: the thin metal
   x 10441 north of the port (10441,16885): a pad (10441,16862) with a poly row east (y ~16850-16875) and a pad
