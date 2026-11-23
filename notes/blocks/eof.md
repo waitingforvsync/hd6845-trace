@@ -11548,6 +11548,38 @@ under), with `tools/tl5_tracks.py`, `tools/px.py`, `tools/textmap.py` and the fu
 
 Round 73: no findings.
 
+### Round 74 (full review; run 61, piece `d388`; 2026-11-23 01:00 to 01:12 +0000, at commit 8b6e96b)
+
+A fresh reviewer agent (Claude Fable 5.2), briefed with the piece's six claims and told to suspect: the gap
+between `rst_a`'s corner (10312,15654) and this line's corner (10311,15698) on one track position (trap 33);
+the join to `bc2`'s stub and each corner in the staircase (traps 30, 32); two metals end to end or a tap on
+x 10268, and whether the metal ends on the pad (10268,16389); the hop (one poly, no contact from the metal
+y 15821-15836, which metal is on the pad (10268,15738): trap 16); a contact between the end pad's row and
+`ck_out`'s metal x 10311. Images in `cache/scratch/eof/review-74/` (up to 6x, both metal shots and both
+stripped shots), with `tools/px.py`, `tools/tl5_tracks.py`, `tools/eof_tee.py` and the full extraction.
+
+- **Finding 1, geometry only (confirmed, fixed)**: the two metals are about 18 px wide (x 10259-10277 at
+  y 16100) and were drawn `w=13` and `w=14`; centres right. Both now `w=18`.
+- **Checked and found correct**: two metals at the gap to `rst_a` (metal to y 15661, outline, bare ground
+  y 15667-15682, outline, metal from y 15691; each corner with its own closed outline at 6x in four shots;
+  chip 2 alone passes the metal test for 3 px in the gap, bright ground, trap 30; chip 1 fails throughout);
+  one metal from `bc2`'s pad to the corner (only 8-12 px bars; the ring south of the pad 17 px, the clean shot
+  protected from the hole into the metal); no metal past any corner (south of (10353,15698) y 15705-15734,
+  east x 10362-10393, west of (10311,15698) x 10232-10304, south or east of (10311,15740)); no hole or
+  widening on x 10353; the pad (10268,15738) on the metal from the east (one protected area, no metal west);
+  the column one poly from pad to pad (chip-2 stripped shot red over green by 40-60 over y 15760-15856), the
+  metal y 15821-15836 keeping its width over it, no ring, no hole, no branch (`eof_tee.py`); one metal over
+  y 15890-16366 with no hole or pad, ending on the pad (no metal in either chip over y 16394-16557, bare
+  field in four shots); the row east under `ck_out`'s metal (width kept, no ring, uniform salmon), nothing
+  else leaving the pad, no branch over x 10287-10335; the row runs on east past x 10335 to at least x 10530;
+  the extraction (0 errors; `bc2_w15388` gates only `bc2`'s two transistors).
+- **Not checked**: the contact of `bc2`'s pad (10352,15388) beyond its ring and hole; the row east of x 10530.
+- **Proof that the fix changed no connection** (against 8b6e96b):
+  `tools/t.sh eof sameconn.py 8b6e96b`: `connections identical`;
+  `.venv/bin/python tools/sameconn.py 8b6e96b`: `connections identical`.
+
+Round 74: no findings that change a connection.
+
 ## Not done
 
 - **Next (after run 61)**: the data of `bc2`'s latch copy b (`bc2_w15388`) is drawn from `bc2`'s pad to an end
