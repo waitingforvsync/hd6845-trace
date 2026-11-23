@@ -4740,7 +4740,8 @@ N M 10397,16400 eof_w17166
 # stain over x 10290-10330, y 16840-16920, chip 2 shows the metal through it). 15 px south of the corner's
 # east end lies the ring of trunks' pad (10310,16950), the north end of another metal on the same track
 # position: not joined (30 px without metal between). The end pad's poly row runs east, y 15900-15922, under
-# eof_w17166's metal x 10353 and the thin metals x 10441, x 10485 (no contact) toward the rail column;
+# eof_w17166's metal x 10353 and the metal x 10441 (no contact; review round 70: no metal at x 10485 here,
+# a dark line x 10488-10496 crosses the row just at the drawn end) toward the rail column;
 # drawn to x 10492 (PORT: it goes on as a block x 10497-10526 and a patch x 10534-10542 west of the rail,
 # the end that eof_w17166's two rows and eof_w17345's row have: not read).
 M 10268,17155 y16910 x10311 y15912 w=14

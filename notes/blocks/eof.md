@@ -1520,7 +1520,7 @@ with a contact, no transistor, no uncertain item).
 - **Piece `ckn`: `ck_out`'s branch north of the NOR's gate row.** The thin metal of the row's end pad
   (10267,17214) is one metal north on x 10268, east along y 16910 and north on x 10311 to an end pad
   (10311,15912), 1,300 px; the pad's poly row runs east, y 15900-15922, under `eof_w17166`'s metal x 10353 and
-  two thin metals (no contact) toward the rail column, drawn to x 10492 (port): **a fourth row with the end
+  the metal x 10441 (no contact) toward the rail column, drawn to x 10492 (port): **a fourth row with the end
   that `eof_w17166`'s two rows and `eof_w17345`'s row have** (block x 10497-10526, patch x 10534-10542, field
   under the rail). `trunks`' pad (10310,16950), 30 px south of the corner on the same track position, is the
   end of another metal and is not joined.
@@ -5792,8 +5792,10 @@ Views `r57_c1.png` (3.3x, three shots: the corner and `trunks`' pad), `r57_e1.pn
   shot). Field west of it (the pad (10226,15912) 85 px west is `rst_a`'s, drawn in link G: separate, pink
   field between in the clean shot, `r57_e1.png`). Its poly row runs east, y 15900-15922: under `eof_w17166`'s
   metal x 10353 (`tools/textmap.py 10336 15895 10372 15930 3`: the metal bright across the row, no ring; run
-  56's two-chip test of that metal has only the row's two edge bars there) and under the metals x 10441 and
-  x 10485 (`textmap.py 10424 15895 10500 15930 4`: bright across, no ring, the clean shot salmon). Drawn to
+  56's two-chip test of that metal has only the row's two edge bars there) and under the metal x 10441
+  (`textmap.py 10424 15895 10500 15930 4`: bright across, no ring, the clean shot salmon; that metal ends
+  35 px south of the row on an undrawn pad (10441,15955), field between: review round 70). There is no metal
+  at x 10485 here (round 70; the first version of these notes said there was): the row is open poly to x 10484. Drawn to
   x 10492. Beyond (`tools/px.py row 15911 10330 10650 8 metal,acid1b`): open poly x 10498-10522, a dark line
   x 10530, a patch x 10538, a dark line, field under the rail (204/119/125): the end of the three rows of run
   56; not read (and review round 69's dark line x 10491-10497 applies here too).
@@ -11253,11 +11255,54 @@ metal x 10476-10492. Images in `cache/scratch/eof/review-69/` (11), with `tools/
 
 Round 69: no findings.
 
+### Round 70 (full review; run 57, piece `ckn`; 2026-11-23 00:14 to 00:24 +0000, at commit 23dcfba)
+
+A fresh reviewer agent (Claude Fable 5.2), briefed with the piece's seven claims and told to suspect: the gap
+between the corner (10311,16910) and `trunks`' pad (10310,16950) (traps 16, 30, 33); the stretch under chip 1's
+stain; the far side of each corner (trap 32); two metals end to end or a tap pad on either leg; a contact where
+the row passes under the metals x 10353, x 10441 and "x 10485"; the end pad all round. Images in
+`cache/scratch/eof/review-70/` (6), with `tools/tl5_tracks.py`, `tools/px.py`, `tools/textmap.py`, the extraction
+and `tools/unsure.py`.
+
+- **Finding 1, a comment (confirmed, fixed)**: there is no thin metal at x ~10485 over the row y 15900-15922.
+  `tools/px.py row 15911 10468 10500 4 metal,metal1`: open poly to x 10484 (160-172/115-129/61-73 in chip 2),
+  then a dark line x 10488-10496 across the row (50/51/9 at x 10492), then orange again. The trace's comment
+  and the notes said "the thin metals x 10441, x 10485"; both now say the metal x 10441 only. The port at
+  x 10492 sits on that dark line, so "goes on as a block" east of it is not established (it was not claimed;
+  round 69 said the same of run 56's two rows).
+- **Finding 2, a comment (confirmed, noted)**: "no metal north of the corner on x 10268" holds only for 26 px.
+  Another thin metal lies on x 10260-10277 from the north down to y ~16874 and turns west there (an arm
+  y 16857-16880); between it and this piece's corner is bare ground at y 16876-16904 in both chips
+  (`tools/px.py col 10268 16860 16912 4 metal,metal1`: 148-169/117-140/77-84 and 124-153/115-120/52-75 at
+  y 16884-16892). Two metals end to end, not joined; that metal is in no trace file. The tracer's test began
+  at y 16895 and missed it. Nothing drawn changes; Not done lists it.
+- **Finding 3, an omission outside the piece (noted)**: the metal x 10441 over the row ends 35 px south of it
+  on an undrawn pad (10441,15955), with pink field between row and pad: no contact to the row.
+- **Checked and found correct**: one metal on both legs (`tl5_tracks.py v 10311 15840 17000`, `v 10268 16840
+  17200`, also `--half 1`: only 8-10 px bars, which text maps show to be poly-row edges with no hole; cuts
+  12-14 px either side of both legs find no side branch); no metal west (x 10232-10262) or east
+  (x 10318-10349) of the corners at y 16910; `trunks`' pad not joined (metal ends y 16917, 27 px without
+  metal with bare ground at y 16926-16929 and the clean shot green, pad centre y 16947-16956, a 15 px ring
+  south), in both chips at 4x; the metal whole under chip 1's stain in chip 2, at uniform width, no ring or
+  branch; the end pad's contact (ring and bright centre in both chips, green hole, bright box in the chip-2
+  stripped shot) with field north, west and south; x 10353 and x 10441 bright across the row with only the
+  row's edge bars and no hole; the extraction.
+- **Could not check**: the stain stretch rests on chip 2 alone; the undrawn metals were not followed; nothing
+  east of x 10492 was read.
+- **Proof that the fix (a comment line) changed no connection** (against 23dcfba):
+  `tools/t.sh eof sameconn.py 23dcfba`: `connections identical`;
+  `.venv/bin/python tools/sameconn.py 23dcfba`: `connections identical`.
+
+Round 70: no findings that change a connection.
+
 ## Not done
 
 - **Next (after run 57)**: `ck_out`'s branch north is drawn to its end pad (10311,15912) and the pad's row to
   x 10492 (piece `ckn`): item (b) of the list after run 55 is done as wiring. The row's end west of the rail
-  at y 15900-15922 joins the three of run 56 (item (b) there): four rows of one build to read.
+  at y 15900-15922 joins the three of run 56 (item (b) there): four rows of one build to read. Seen and in
+  no trace file (review round 70): a thin metal on x 10260-10277 from the north that ends at y ~16874 and
+  turns west (26 px of bare ground north of this piece's corner (10268,16910)); the pad (10441,15955) at the
+  end of the metal x 10441, 35 px south of the row.
 - **Next (after run 56)**: `eof_w17166`'s metal is drawn north to the pad (10354,15781) (piece `o166`). Open:
   (a) **the metal north of the port (10354,15755)** through the staircase at y ~15740 (three metals step
   there; read it on views and by cuts across each arm, not with the follower); (b) **the units west of and
