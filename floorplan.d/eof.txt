@@ -240,3 +240,4 @@
 10380,16440:10775,16610   logic  inverter driving a wire to the bus field | a pull-down under the ground rail, gated from the unit south by a thin metal and a poly row; output west by a poly row to a pad
 10415,16410:10830,18445   route  a wire across the east column to the bottom bus | a poly row under both rails between two pads; a thin metal 2,000 px south from the east pad into a bus line
 10385,16190:10500,16410   route  pad group at the head of the east column's thin metals | two pads joined by a short poly column; thin metals to the north, the south and the east column
+10380,15845:10775,16060   logic  gate at the head of the east column | a two-input NOR in the ground rail's column, of the clock and a wire from the bottom bus; output by a row west to a pad

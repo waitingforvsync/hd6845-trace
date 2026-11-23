@@ -5046,19 +5046,70 @@ N M 10811,17400 eof_w16432
 # ======================================================================
 # Run 67 (2026-11-23), piece `p16215`: the west pad (10437,16432)'s metal north of run 66's port, and the
 # pad group at its north end. Wiring only. The metal x 10433-10445 runs north over rst_lat's row and
-# bc2_w15388's row (bars only) to a pad (10441,16260) and on west along y 16252-16266 to a corner
-# (10397,16258) and north on x 10397 (PORT at y 16236: not followed; bc2_w14955's metal on the same track
-# has its corner at (10397,16301), 35 px south, with bare ground between: two metals, trap 33). The pad
-# (10441,16260) lies on the south end of a poly column x 10431-10451 (ring bars west, north and south of a
-# bright centre in both metal shots; no hole seen in the clean shot: the contact is the piece's least
-# certain item); the column runs north to a pad (10440,16215) (ring, bright centre, a green hole in the
-# clean shot), whose metal runs east as a patch y 16205-16225 to x 10495 and south: the north end of the
-# thin metal x 10476-10492 (PORT at y 16240: south of it that metal is dark over a box, Ambiguity 219's
-# metal).
+# bc2_w15388's row (bars only) to a corner (10439,16258), west along y 16252-16266 to a corner
+# (10397,16258) and north on x 10397 (bc2_w14955's metal on the same track has its corner at (10397,16301),
+# 35 px south, with bare ground between: two metals, trap 33). All of it eof_w16432.
+# Review round 81: at (10441,16260) this metal only lies over a poly (trap 13: no widening, no hole in
+# either chip-1 stripped shot, bars of 6-9 px on the poly's edges as at the row y 16292-16314): no contact.
+# That poly is another net, eof_w16213: from a pad (10440,16215) (ring, bright centre, a green hole in the
+# clean shot) a column x 10431-10451 runs south and turns east at y 16249-16267, through the open gap
+# x 10455-10470 and under the thin metal x 10476-10492, toward the framed box (10487-10535, 16240-16288)
+# of rst_lat's unit (drawn to x 10481: PORT; whether it joins the box is not read: Ambiguity 216). The
+# pad's metal runs east as a patch y 16205-16225 to x ~10490 and south: the north end of the thin metal
+# x 10476-10492 (PORT at y 16240: south of it that metal is dark over the box; Ambiguity 219's metal).
 M 10439,16405 y16258 x10397 y16236 w=13
-P 10427,16246:10455,16272              # the pad (10441,16260), the poly column's south end
-C 10441,16260 s=18x16
-P 10441,16260 y16215 w=20
+P 10441,16215 y16258 x10481 w=18
 P 10424,16198:10456,16232              # the pad (10440,16215)
 C 10440,16215 s=20x20
 M 10440,16215 x10484 y16240 w=18
+N M 10470,16215 eof_w16213
+# ======================================================================
+# Run 68 (2026-11-23), piece `m15998`: eof_w16432's metal north of run 67's port (10397,16236). Wiring only.
+# The thin metal x 10391-10403 runs north, one metal (tl3_thin.py 10390 10406 15700 16240 --min 8: dark in
+# both chips only at the end pad's ring y 16003-16020 and north of the pad), to an end pad (10397,15998)
+# (ring and bright centre in both metal shots, a green hole in the clean shot). The pad's poly row
+# y 15987-16009 runs east, with no metal over it at x 10441, to the rail column (drawn to x 10492: PORT; it
+# goes on as a block x 10500-10524 and ends at x ~10540 west of the rail, field under the rail at its
+# height: the build of the latch's gate rows, a gate on the strip, not read).
+M 10397,16236 y15998 w=13
+P 10380,15981:10414,16015              # the end pad (10397,15998)
+C 10397,15998 s=20x20
+P 10397,15998 x10492 w=22
+# ======================================================================
+# Run 68 (2026-11-23), piece `u15955`: the unit at the head of the rail column, between the rail contacts
+# (10558,15870) and (10562,16032): a two-input NOR, eof_w15955 = NOR(ck_out, eof_w16432). The build of
+# piece u16692: ck_out's row y 15900-15922 (run 57's row, drawn on from x 10492) and eof_w16432's row
+# y 15987-16009 (piece m15998's) each cross the strip x 10500-10529 and end as caps at x ~10546; vss north
+# of the first and south of the second (the rail contacts' boxes); the node between them runs east as a
+# band y 15947-15965 under the rail (field under the rail at both rows' heights).
+P 10492,15911 x10546 w=22
+P 10492,15998 x10546 w=22
+D 10500,15882:10529,16032              # the strip, through under both gates
+D 10529,15850:10600,15896              # the box of the rail contact north
+C 10558,15870 s=24x30
+D 10529,16014:10590,16052              # the box of the rail contact south
+C 10562,16032
+M 10573,15845 y16060 w=50              # the VSS rail, over this unit
+N M 10573,15930 vss
+D 10500,15947:10604,15965              # the node's band under the rail
+# The node's west exit: a buried contact box (10495-10520, 15940-15975) and a poly row y 15945-15965 west
+# to an end pad (10441,15955) (run 57's notes: "the pad (10441,15955) at the end of the metal x 10441").
+# The pad's metal runs north (PORT at y 15925: not followed).
+B 10495,15940:10520,15975
+P 10441,15955 x10512 w=20
+P 10424,15938:10458,15972
+C 10441,15955 s=20x20
+M 10441,15955 y15925 w=13
+N P 10470,15955 eof_w15955
+# The load, piece u16692's moved by dy -737: the strip y 15949-15971 east under the plate x 10652-10712,
+# y 15925-16019 into a box under bc2's VCC rail with a contact (10745,15968); a neck south of the band into
+# a buried contact box (10625-10652, 15991-16023) at the plate's SW corner.
+D 10596,15949:10716,15971
+D 10628,15963:10646,16023
+B 10625,15991:10652,16023
+P 10640,16007 x10660 w=20
+P 10652,15925:10712,16019
+D 10713,15945:10772,15993
+C 10745,15968
+M 10746,15920 y16020 w=48              # the VCC rail, over this unit only
+N M 10746,15930 vcc
