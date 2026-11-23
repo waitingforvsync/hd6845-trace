@@ -4828,3 +4828,60 @@ P 9881,17760:9923,17794              # the end pad (9898,17777) (review round 75
 C 9898,17777 s=20x20
 P 9898,17777 x9860 w=20
 N M 10226,17300 eof_w16560
+# ======================================================================
+# Run 63 (2026-11-23), piece `u16864`: the unit that bc2_w14955's row y 16864 ends in (run 56's port
+# (10492,16864)): an inverter, eof_w16889 = NOT bc2_w14955. The row runs on east over a diffusion strip
+# x 10508-10528 (the "block" x 10497-10526: its gate) and ends as a cap at x 10546 under the rail's west
+# edge (the "dark line" x 10491-10497 is the edge of the thin metal x 10476-10492 over the row, the one at
+# x 10528-10533 the edge of the rail's widening round its contact). South of the gate the strip is one
+# diffusion with the box of the rail contact (10553,16907) (ring in both metal shots, specks in the clean
+# shot): vss. North of it the strip widens (x 10512-10539, y 16821-16847) and runs east as a band
+# y 16818-16840 under the rail (field under the rail at y 16848-16862, between the band and the contact
+# box's neck) into an open diffusion x 10606-10656, y 16820-16876 east of the rail: the node.
+P 10492,16864 x10546 w=22
+D 10508,16818:10528,16938              # the strip, through under the gate
+D 10508,16818:10546,16848              # the node's west part
+D 10528,16890:10586,16938              # the rail contact's box
+D 10566,16862:10586,16892              # its neck north (ends at field y 16848-16862)
+C 10553,16907
+M 10565,16800 y16945 w=36              # the VSS rail, over this unit (x 10547-10583 here)
+N M 10565,16930 vss
+D 10540,16818:10612,16842              # the band under the rail
+D 10606,16820:10656,16876              # the node east of the rail
+# The load: a plate x 10658-10712, y 16822-16872 over a strip y 16840-16866 from the node to a box under
+# bc2's VCC rail x 10722-10770 with a contact (10745,16855). The plate's poly runs on south as a pad
+# (10683,16889) and from the pad west into a buried contact box (10626-10652, 16880-16904) on a tab of the
+# node's diffusion (x 10614-10642, y 16868-16902): the load's gate tied to the node, and the node on the
+# pad's metal.
+D 10650,16840:10716,16866
+P 10658,16822:10712,16872
+D 10713,16830:10772,16882
+C 10745,16855
+M 10746,16810 y16905 w=48              # the VCC rail, over this unit only
+N M 10746,16890 vcc
+P 10662,16872:10708,16906              # the pad (10683,16889)
+C 10683,16889 s=20x20
+P 10640,16893 x10670 w=18
+D 10614,16868:10642,16902
+B 10626,16880:10652,16904
+# The output: a metal x 10670-10696 from the pad south to an end pad (10683,17035) (two-chip test: only
+# 8-10 px bars, the edges of what crosses under it at y 16930-17005); the end pad's poly row runs west,
+# y 17025-17048, drawn to x 10622 (PORT: toward the rail column, not read).
+M 10683,16889 y17035 w=26
+P 10666,17018:10700,17052              # the end pad (10683,17035)
+C 10683,17035 s=20x20
+P 10683,17036 x10622 w=22
+N M 10683,16950 eof_w16889
+# The node's west exit, of run 55's build: a buried contact box (10497-10520, 16812-16838) at the strip's
+# north end and a poly row y 16814-16830 west under the thin metal x 10476-10492 (no contact: the metal's
+# two bars at y 16804-16813 and y 16830-16839 are the row's edges, the same signature as at run 55's row
+# y 17169) to a rounded end at x ~10456, 6 px short of bc2_w14955's metal x 10441: a stub, no pad.
+B 10497,16812:10520,16838
+P 10458,16822 x10510 w=16
+# A poly column x 10589-10603 runs south from y 16850 to y 16948 along the rail's east edge (open poly in
+# chip 2's metal shot, no diffusion east of it: not a gate). Its north end lies in a rounded box
+# (10588-10618, 16840-16870) against the node's diffusion: read as a buried contact onto the node
+# (uncertain: notes, Ambiguity 218). Its south end at y ~16948 is not read (PORT).
+P 10596,16850 y16948 w=14
+D 10600,16846:10618,16868
+?B 10588,16842:10618,16870

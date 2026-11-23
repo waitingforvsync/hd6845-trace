@@ -244,7 +244,6 @@ eof_w17866     M      10350-10362,17885        ?    piece bus2 (review round 59)
 rst_lat        P      10546-10598,17682-17698  out  piece rl (review round 63): the branch row east from rst_lat's column x 10355, under the VSS rail: the gate of an undrawn pull-down (rail diffusion with a contact (10560,17652) north of it, diffusion y 17705-17739 south of it)
 rst_lat        P      10497-10640,16292-16314  out  piece rln: the row of the end pad (10353,16345): the gate of an undrawn transistor (channel about x 10497-10620, the diffusion reaching 20 px east of the rail), ending in a cap x 10624-10640; a dark box north of the cap is read as not joined (eof's Ambiguity 216)
 eof_w17345     P      10492,17029-17051        out  piece o345: the drawn end of the row of the pad (10397,17040) at the top of the NOR's output metal x 10397 (run 51's port (10397,17315) is met); the row goes on east as poly through x 10497-10522 to a patch x 10530-10542 west of the rail: not read (a gate there?)
-eof_w17166     P      10492,16853-16875        out  piece o166: the row of the tap pad (10441,16864); on east as a block x 10497-10526 and a patch x 10534-10542 west of the rail: believed a gate, not read
 eof_w17166     P      10492,16640-16662        out  piece o166: the row of the tap pad (10441,16650); the same end as the row y 16864
 ck_out         P      10492,15900-15922        out  piece ckn: the row of the end pad (10311,15912) of ck_out's branch north from the NOR's gate row; on east as a block x 10497-10526 and a patch x 10534-10542 west of the rail: believed a gate, not read
 vcc            M      10722-10770,17120        -    piece u17170: bc2's VCC rail over the load's contact (10745,17165), drawn y 17120-17215 only; runs on north and south
@@ -253,3 +252,7 @@ bc2_w15432     P      10150,16118-16138        ?    piece en432: the row of the 
 bc2_w15388     P      10335,16378-16400        ?    piece d388: the row of the end pad (10268,16389) of the data line of bc2's latch copy b; on east toward the rail column: not read
 eof_w16560     P      10335,16506-16528        ?    piece w16560: the row of the north pad (10266,16560) (a column north, a row east) toward the rail column: not read
 eof_w16560     P      9860,17767-17787         ?    piece w16560: the row of the end pad (9893,17777), on west: not read
+eof_w16889     P      10622,17025-17047        out  piece u16864: the row of the end pad (10683,17035) of the inverter's output metal, on west toward the rail column: not read
+eof_w16889     P      10589-10603,16948        out  piece u16864: the south end of the poly column along the rail's east edge: not read
+vss            M      10547-10583,16800        -    piece u16864: the VSS rail over this unit only (y 16800-16945)
+vcc            M      10722-10770,16810        -    piece u16864: bc2's VCC rail over this unit only (y 16810-16905)
