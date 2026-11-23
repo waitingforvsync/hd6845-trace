@@ -11187,6 +11187,34 @@ metal x 10722-10770. Images in `cache/scratch/eof/review-68/` (17; 5x and 5.5x i
 
 Round 68: no findings that change a connection.
 
+### Round 69 (full review; run 56, piece `o166`; 2026-11-23 00:01 to 00:12 +0000, at commit 1bda55e)
+
+A fresh reviewer agent (Claude Fable 5.2), briefed with the piece's eight claims and told to suspect: two metals
+end to end on the track x 10441 at or between the two tap pads (trap 33); every corner as a tee (trap 32), the
+corner (10397,16301) with another metal close north of it and (10353,16301) with `rst_lat`'s pad close south;
+a contact along y 16301 on `rst_lat`'s row or at the poly rows the x 10441 leg crosses; the hop under the metal
+y 15821-15836; which metal is on the pad (10354,15781) (trap 16); a contact between either row and the thin
+metal x 10476-10492. Images in `cache/scratch/eof/review-69/` (11), with `tools/tl5_tracks.py`, `tools/px.py`,
+`tools/textmap.py`, the extraction and `tools/unsure.py`.
+
+- **No findings.** Checked and found correct: one metal on every leg (only 8-10 px edge bars and the two pads'
+  rings; metal at x 10436-10448 in both chips on row profiles just outside each ring, y 16622, 16673, 16838,
+  16891); both tap pads with ring, bright centre and a hole in the clean shot; the bars at the y 16301 leg are
+  the edges of `rst_lat`'s row (they match a control crossing at (10441,16506/16530)); no metal beyond any of
+  the four corners (the pad (10441,16432) north of the corner (10441,16472) is a separate metal with bare
+  ground between); along y 16301 no ring and no hole, and 14 px of open poly between the leg and `rst_lat`'s
+  pad ring; no pad at any poly row crossed; the thin metal x 10477-10490 over both rows without pad, ring or
+  hole; field north and south of each pad box; the hop's metal bright across the column and the clean shot
+  salmon from pad to pad; the pad (10354,15781)'s metal leaving north, the metal east of it separated by bare
+  ground x 10376-10384 in both chips. The reviewer read that metal further than drawn: a corner at about
+  (10354,15740), east along y ~15740 to x ~10400, then north (its `f_north.png`).
+- **Could not check, and not claimed by the piece**: whether each tap row continues as one poly east of the
+  port x 10492: a heavy dark line at x 10491-10497 crosses both rows in all four shots, either an edge
+  underneath or the outline of the block east of it; no field stripe seen, a poly end there not ruled out.
+  The notes' "goes on east" at the two ports is to be read with that (Not done, item (b)).
+
+Round 69: no findings.
+
 ## Not done
 
 - **Next (after run 56)**: `eof_w17166`'s metal is drawn north to the pad (10354,15781) (piece `o166`). Open:
@@ -11196,7 +11224,10 @@ Round 68: no findings that change a connection.
   (`eof_w17345`) end in: each row has a block x 10497-10526, a dark line x 10528-10532 and a patch
   x 10534-10542; the rail narrows to x 10545-10582 south of y 16850 beside a poly column x 10584-10597; rail
   contact (10553,16907); loads east of the rail with contacts on the VCC rail at about (10735,16700) and
-  (10735,16860). Items (b) to (e) of the list after run 55 stand.
+  (10735,16860). Review round 69: a heavy dark line crosses each tap row at x 10491-10497, just east of the
+  drawn end, in all four shots: an edge underneath, the block's outline, or the row's end; decide it first.
+  The metal north of the port was read by that reviewer as a corner at about (10354,15740), east along
+  y ~15740 to x ~10400, then north. Items (b) to (e) of the list after run 55 stand.
 - **Next (after run 55)**: the unit of the rail column y 17054-17250 is drawn (piece `u17170`:
   `eof_w17166` = NOR(`rst_lat`, `ck_out`)). Open from it: (a) **where `eof_w17166` goes**: the thin metal
   x 10441 north of the port (10441,16885): a pad (10441,16862) with a poly row east (y ~16850-16875) and a pad
