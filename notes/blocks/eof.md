@@ -12164,6 +12164,37 @@ under two metals. Images in `cache/scratch/eof/review-79/` (13), with `tools/px.
 
 Round 79: no findings that change a connection.
 
+### Round 80 (full review; run 66, piece `r16432`; 2026-11-23, at commit 4f043f9)
+
+A fresh reviewer agent (Claude Fable 5.2), briefed with the piece's five claims and told to suspect: the south
+end (joined to the horizontal metal y 18420-18440, or on `rst_ck`'s pad (10810,18470): traps 16, 33; which way
+the horizontal metal goes); two metals end to end, a pad or a branch on the 2,000 px metal; diffusion under
+the row at the VSS rail or anywhere else; contacts where the row passes under the thin metal and the two
+rails; the west pad's metal and its separation from the corner (10441,16472). Images in
+`cache/scratch/eof/review-80/` (up to 5.5x, four shots), with `tools/px.py`, `tools/textmap.py`,
+`tools/tl3_thin.py`, `tools/tl5_tracks.py`, `tools/railprof.py`, `tools/sameconn.py`.
+
+- **No findings.**
+- **Checked and found correct**: the south end: the vertical metal turns east as a plain corner at
+  y 18420-18440, bright and continuous round the bend in both chips, nothing going west, the horizontal metal
+  on east past x 10990 over two poly columns with edge bars only; the pad (10810,18470) separate (dark
+  y 18439-18463 in both chips, an open-field green strip at y 18445-18451 in the clean shot, its own complete
+  ring); the 2,000 px metal: the only stretches of 14 px or more are the pad's ring and the end, every 7-11 px
+  bar the edge of a poly row crossing beneath (four crossings at 5.5x, the metal's width unchanged at
+  y 17602 and y 18060, no pad, no branch); the west pad (ring and centre in both chips, a hole in the clean
+  shot, the thin metal arriving from the north, open field west and south of it, the row beginning at the
+  pad); bars of 9-10 px only under the thin metal x 10476-10492; the row open orange poly with no edge line
+  across it, field north and south of it between and under the rails, no ring under either rail; the east
+  pad (metal south only, no poly east); `tools/sameconn.py 19501dc`: the new name only.
+- **Not settled fully by the reviewer**: under both rails the field reading rests on colour and missing
+  outlines (the clean shot there pink flanks and a grey centre strip with no dark outline, unlike the tan
+  diffusion at y 16320-16356; the row 210-227 red against 230-250 for the two known gate rows and 196 for
+  poly over field, so colour alone is not decisive); a dark patch in the clean shot under the metal at
+  (10810,17602), read as residue (the other three shots show an ordinary crossing); the west metal north of
+  y 16400, outside the piece.
+
+Round 80: no findings.
+
 ## Not done
 
 - **Next (after run 66)**: the row y 16432 is drawn with its pads and the metal south (piece `r16432`,
