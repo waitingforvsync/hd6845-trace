@@ -1649,6 +1649,20 @@ no new net (the output is run 62's `eof_w16560`), no uncertain item.
 - **Checks**: full extraction 2,520 nets, 4,828 transistors, 0 errors, 0 warnings; firm
   (`tools/unsure.py --equations`).
 
+Run 66 (Kieran Connell's session, Claude Fable 5.2; 2026-11-23 07:56 +0000 on). One piece, wiring only (two
+pads with contacts, no transistor, no uncertain item; one new net, `eof_w16432`, with a port at each end).
+
+- **Piece `r16432`: the poly row y 16423-16441 is wiring across the rail column, not a gate.** From a pad
+  (10437,16432), on which a thin metal from the north ends, the row runs east under the thin metal
+  x 10476-10492, the VSS rail (over field) and `bc2`'s VCC rail to a pad (10805,16432); that pad's thin
+  metal x 10804-10817 runs 2,000 px south, one metal, into a horizontal metal y 18420-18440 east of
+  x 10806: a bus line that no trace file has. `rst_ck`'s contact (10810,18470) 30 px south of the join is a
+  separate pad.
+- **Survey of the column north of y 16440** (not drawn): `bc2_w15388`'s row y 16378-16400 also crosses the
+  rail over field and runs on east past x 11030; `rst_lat`'s row y 16292-16314 is the only gate there (under
+  the rail, between a node y 16272-16288 and the rail contact (10560,16336)).
+- **Checks**: full extraction 2,521 nets, 4,828 transistors, 0 errors, 0 warnings.
+
 ## Inventory
 
 | Piece | Where | What |
@@ -6274,6 +6288,37 @@ the box and the row under the rail), `r65_u3.png` (3.3x, the load), overlay `r65
   x 10668; field west of the box (x 10608-10628), so no column of diffusion as in run 55's load.
 - **Equation**: `eof_w16560` = NOT `eof_w16692`.
 
+### Run 66: the row y 16432 and the metals at its ends (piece `r16432`)
+
+Views `r66_u1.png` (3x, the rail column y 16235-16450 with what is drawn), `r66_w.png` (4.6x, the west pad),
+`r66_e2.png` (4.6x, the east pad), `r66_e1.png` (1.9x, both rows east of the VCC rail), `r66_s.png` (5x, the
+metal's south end).
+
+- **No transistor under the rail** (`tools/px.py col 10572 16236 16500 4 metal,acid1b`): under the rail the
+  clean shot is field-coloured (153-164/138-145/110-116) at y 16368-16378 and y 16400-16420 and mottled
+  field from y 16444, the rows salmon at y 16384-16394 (`bc2_w15388`) and y 16428-16436 (this row), against
+  tan 196-202/172-177/124-134 for the diffusion of the rail contact at y 16316-16356. `px.py row 16432 10380
+  10640 6`: the row from x ~10452 (salmon under the thin metal, open poly x 10500-10536, salmon under the
+  rail) and on east of the rail (orange in chip 2 to x 10638 and beyond, `r66_e1.png`).
+- **The west pad (10437,16432)** (`r66_w.png`): ring and bright centre in both metal shots, a hole in the
+  clean shot; metal arrives from the north (bright at y 16400-16412), plain ground south of the ring.
+  `tools/tl5_tracks.py v 10439 16150 16425`: metal up to a 35 px stretch without metal at y 16221-16256
+  (the pad group at about (10440,16215), where the thin metal x 10476-10492's north end (10481,16212)
+  also arrives): not read. The metal x 10397 (`bc2_w14955`) passes 40 px west of the pad, no poly under it.
+- **Under the thin metal x 10476-10492**: only the bars y 16416-16424 and y 16439-16448 (`tools/tl3_thin.py
+  10476 10492 16200 17770`): no contact.
+- **The east pad (10805,16432)** (`r66_e2.png`): ring and bright centre in both metal shots, a hole in the
+  clean shot; the metal leaves south only.
+- **The metal south** (`tl3_thin.py 10796 10830 16440 18470 --thr 176 --min 12`: dark in both chips only at
+  y 16440-16453, the pad's ring, and y 18437-18464, south of its end; `tools/follow.py 10810 16460 S --gap
+  30` ends at (10825,18436); `tl5_tracks.py h` at eight heights: metal x 10804-10817 throughout). At
+  y 18420-18440 it runs into a horizontal metal that goes on east (`tl5_tracks.py h 18430 10780 11000`:
+  metal from x 10806 to x ~10990 with edge bars; `r66_s.png`). `px.py col 10812 18410 18490 4`: metal
+  bright to y 18434, dark y 18438-18462, the bright centre of `trunks`' contact (10810,18470) at
+  y 18466-18470: that pad has its own ring and is not on this metal (trap 16).
+- **Taps not excluded**: a tap would be a pad on the 2,000 px metal; none shows as a dark stretch of 12 px
+  or more, but edge bars of 8-11 px were not looked at one by one.
+
 ## Ports
 
 The net is driven outside the package (by `rdp2`'s NOR). `in` marks the port beyond which the
@@ -6422,6 +6467,8 @@ driver lies; the other three lead to the loads.
 | `bc2_w15388` | poly | (10335, 16378-16400) | ? | piece `d388`: the row of the end pad (10268,16389) of the data line of `bc2`'s latch copy b; on east under the tracks x 10353, x 10397 toward the rail column: not read. The line's north end is `bc2`'s port (10353,15440) (met) |
 | `eof_w16560` | poly | (10335, 16506-16528) | (met) | **read by piece `u16560` (run 65): the output row of the inverter `eof_w16560` = NOT `eof_w16692`; no longer a port.** Before: ? | piece `w16560`: the row of the north pad (10266,16560) (a column north, a row east) toward the rail column: not read |
 | `eof_w16560` | poly | (9860, 17767-17787) | ? | piece `w16560`: the row of the end pad (9893,17777), on west: not read |
+| `eof_w16432` | metal | (10433-10445, 16400) | ? | piece `r16432`: the thin metal of the west pad (10437,16432), north to a pad group at about (10440,16215): not followed |
+| `eof_w16432` | metal | (10850, 18420-18440) | ? | piece `r16432`: the horizontal metal y 18420-18440 that the east pad's metal x 10804-10817 runs into, on east (to x ~10990 at least): a bus line in no trace file |
 | `eof_w16692` | metal | pad (10397, 16692) | (met) | piece `u16692`'s end pad: its metal is drawn by piece `u16560` (run 65); no longer a port |
 | `eof_w16996` | metal | (10476-10492, 16960) | ? | piece `u16996`: the thin metal over the node's box (10476-10518, 16980-17012), north; on the node only if the contact of Ambiguity 219 is real; the metal runs to about (10481,16212), not followed |
 | `eof_w16996` | metal | (10476-10492, 17024) | ? | piece `u16996`: the same metal south, toward `regs`' pad (10484,17994) of `lc2_w8450` (dark stretches over boxes at y 17169, 17344, 17475, 17735): not followed |
@@ -12119,6 +12166,19 @@ Round 79: no findings that change a connection.
 
 ## Not done
 
+- **Next (after run 66)**: the row y 16432 is drawn with its pads and the metal south (piece `r16432`,
+  net `eof_w16432`). Open: (a) **the bus line y 18420-18440 east of x 10806** that the metal joins (which
+  net; `trunks`' middle bus line `M 10693,18601 x10268 y18426` is west of it, `rst_ck`'s contact (10810,18470)
+  just south); (b) the west pad's metal north to the pad group (10440,16215), which the thin metal
+  x 10476-10492's north end also reaches (Ambiguity 219's metal: whether `eof_w16432` is that metal's net);
+  (c) **the unit of `rst_lat`'s row y 16303**: the channel under the rail between the node y 16272-16288
+  and the rail contact (10560,16336); the node's band runs east at y 16266-16280 through a dark box
+  (10621-10651, 16262-16282) (Ambiguity 216's) to a plate x 10686-10712, y 16262-16318 and a VCC contact
+  at about (10740,16285), with a poly row y 16230-16250 above; its west side is a framed box
+  (10487-10530, 16240-16288) under the thin metal's dark stretch y 16240-16277 (`r66_u2.png`,
+  `r66_u3.png`, `r66_u4.png`; `px.py row 16270 10596 10776 5`, `col 10660 16226 16334 4`, `col 10634 16226
+  16300 4`): surveyed, not drawn; (d) `bc2_w15388`'s row east of x 10335: over field under the rail, on east
+  under `bc2`'s VCC rail and the vertical metals to x 11030 at least.
 - **Next (after run 65)**: `eof_w16560` has its driver (piece `u16560`). Open: (a) the units north of it in
   the column (the rows y 16378-16400 of `bc2_w15388`, y 16292-16314 of `rst_lat`, y 15911 of `ck_out`); (b)
   `eof_w16560`'s far end, the row west of (9860,17777); (c) Ambiguity 219 and the thin metal x 10476-10492;

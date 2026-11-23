@@ -5024,3 +5024,22 @@ D 10600,16518:10716,16554
 D 10713,16506:10772,16552
 C 10745,16527
 M 10746,16480 y16640 w=48              # the VCC rail, on north
+# ======================================================================
+# Run 66 (2026-11-23), piece `r16432`: the poly row y 16423-16441 and the metals at its two ends. Wiring
+# only. The row crosses the rail column without a transistor: under the VSS rail it lies on field (px.py
+# col 10572 16236 16500 4: field colours north and south of it at y 16400-16420 and y 16444-16500), as
+# bc2_w15388's row y 16378-16400 does. West end: a pad (10437,16432) on which a thin metal from the north
+# ends (PORT at y 16400: it runs north to a pad group at about (10440,16215), not followed). East end,
+# past bc2's VCC rail: a pad (10805,16432) whose thin metal x 10804-10817 runs 2,000 px south, one metal
+# (tl3_thin.py 10796 10830 16440 18470 --min 12: dark in both chips only at the pad's ring), into a
+# horizontal metal y 18420-18440 east of x 10806, a bus line that no trace file has (PORT at x 10850). The
+# contact (10810,18470) of rst_ck (trunks), 30 px south of the join, is a separate pad: dark y 18438-18462
+# between (trap 16). Named by the row's y.
+P 10420,16415:10454,16449              # the west pad (10437,16432)
+C 10437,16432 s=20x20
+M 10439,16432 y16400 w=13
+P 10437,16432 x10805 w=18
+P 10788,16415:10822,16449              # the east pad (10805,16432)
+C 10805,16432 s=20x20
+M 10811,16432 y18430 x10850 w=13
+N M 10811,17400 eof_w16432
