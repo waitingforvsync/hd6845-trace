@@ -11337,6 +11337,34 @@ and `tools/unsure.py`.
 
 Round 70: no findings that change a connection.
 
+### Round 71 (full review; run 58, piece `ld345`; 2026-11-23 00:31 to 00:42 +0000, at commit 80c0b55)
+
+A fresh reviewer agent (Claude Fable 5.2), briefed with the piece's six claims and told that it was drawn as a
+copy of run 55's load 175 px north with four colour profiles, so to suspect: any difference between the two
+copies (plate edges, tie box, the notch, the column's outline, the box under the VCC rail); the tie box as a
+buried contact and the tab's join to the column; the node's east exit at the rail's edge, and whether it also
+runs out at the height of a gate row; the contact (10745,17340) and the box's join to the strip; anything
+undrawn in the region. Images in `cache/scratch/eof/review-71/` (8; 3.2x to 6x, up to four shots), with
+`tools/px.py`, `tools/mosaic.py`, `tools/opendiff.py`, the extraction and `tools/unsure.py`.
+
+- **No findings.** Checked and found correct: the node's exit at y 17327-17363 only (the clean shot uniform tan
+  from x 10548 to x 10602 at y 17345, no edge line at x 10586-10596 in chip 1's metal shot; south of y 17365
+  the column's own west edge at x 10612; no exit at the height of either gate row); no line across the column
+  between y 17327 and y 17415 in either metal shot (chip-2 stripped shot red over green by 16-25 on it, 0-7 on
+  the field at y 17312); the strip's edge lines at y 17324 and y 17364 and its join to the box under the rail;
+  the contact (ring and bright centre in chip 1, a ring with a darker centre in chip 2, a ring in the chip-2
+  stripped shot, specks in the clean shot); the tie box (heavy outline, plain interior at x 10648-10662,
+  y 17390-17403 in three shots, its outline one 12 px band directly against the column as in the northern
+  copy; the notch above it field); the two units match edge for edge on mosaics of three shots, and no poly
+  leaves the plate; the VCC rail continuous from y 17196 to y 17436 in both chips; the extraction.
+- **Seen, not layout**: three blobs in the clean shot only, at (10627-10638, 17300-17310), (10679-10694,
+  17399-17415) and (10600-10612, 17418-17425): residue.
+- **Could not check**: diffusion under the tie box's 12 px outline (it rests on the absence of a field strip
+  and the usual look of a buried contact); the wide metal as `vcc` beyond y 17196-17436; the structure south
+  of y 17440.
+
+Round 71: no findings.
+
 ## Not done
 
 - **Next (after run 58)**: the NOR `eof_w17345` has its load (piece `ld345`): item (a) of the list after run
