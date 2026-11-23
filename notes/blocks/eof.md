@@ -1586,7 +1586,8 @@ pads with contacts, no transistor, no uncertain item; one new net, `eof_w16560`,
 
 Run 63 (Kieran Connell's session, Claude Fable 5.2; 2026-11-23 06:38 +0000 on; the claim taken again after
 the release with run 62). Two pieces, the two halves of one circuit: 7 transistors, two new nets
-(`eof_w16889`, `eof_w16996`), no uncertain item.
+(`eof_w16889`, `eof_w16996`), one uncertain item (Ambiguity 219: the latch's exit contact; no equation
+rests on it).
 
 - **Pieces `u16864` and `u16996`: a set/reset latch in the rail column, y 16800-17070** (firm):
   **`eof_w16889` = NOR(`bc2_w14955`, `eof_w16996`)** and
@@ -1606,9 +1607,11 @@ the release with run 62). Two pieces, the two halves of one circuit: 7 transisto
   (the contact box (10553,16907), the arm y 17056-17068). The node runs east under the rail to a diffusion
   with a third pull-down (the row of the north half's end pad, over a diffusion down to the rail's `vss`
   diffusion come out east) and a depletion load (contact (10746,16972)); the load's gate poly, tied to the
-  node by a buried contact, runs north as the column that is the north half's second pull-down. **The node
-  leaves by a contact (10481,16996) onto the thin metal x 10476-10492**, which runs north to about
-  (10480,16538) and south to about (10485,17456) (`tools/follow.py`): not followed.
+  node by a buried contact, runs north as the column that is the north half's second pull-down. **Where the
+  latch's output leaves is not established**: the node has a framed box (10476-10518, 16980-17012) under
+  the thin metal x 10476-10492, drawn as a contact marked uncertain (Ambiguity 219: by traps 22 and 27 the
+  metal's dark stretch over the box is a pass-over as much as a contact, and the metal lies on the track of
+  `regs`' line `lc2_w8450`); `eof_w16889` has only a poly stub.
 - **The rows' ends are read** (the question left by runs 54-57): the "block x 10497-10526" is the row's
   gate over the strip, the "patch x 10534-10542" its end cap under the rail's west edge, the "dark line
   x 10491-10497" the edge of the thin metal x 10476-10492 that lies over the row.
@@ -6137,14 +6140,18 @@ row's west end), `r64_s5.png` (6x, the column's foot), `r64_s6.png` (6x, the wes
   does; `rst_a`'s row does not cross under the rail (field there: `px.py col 10572 16940 17076 4
   metal,acid1b`: mottled field y 16944-16980, the node's band tan y 16992-17008, mottled field
   y 17020-17044, the rail's diffusion tan from y 17060).
-- **The west exit: a contact onto the thin metal x 10476-10492.** `px.py col 10480 16956 17030 3
-  metal,metal1,acid1b`: metal to y 16977, a dark ring y 16980-16986, a centre y 16989-17001 that is dim in
-  both metal shots (116-136 red against 190-210 for the metal) and tan in the clean shot (158/133/96), a
-  ring y 17004-17010, metal from y 17016: a pad of 34 px. At this metal's two crossings over a poly row
-  without a contact (`textmap.py 10464 16796 10502 16846 3`, `textmap.py 10464 17146 10502 17192 3`) the
-  centre is bright and the clean shot salmon. `tools/tl5_tracks.py v 10481 16880 17120`: no metal in either
-  chip over y 16977-17015 only (the pad); the metal is one through the pad. `tools/follow.py 10482 16950 N
-  --gap 16` ends at (10480,16538), `follow.py 10482 17060 S --gap 16` at (10485,17456).
+- **The west exit: a framed box under the thin metal x 10476-10492; the contact is uncertain** (Ambiguity
+  219). `px.py col 10480 16956 17030 3 metal,metal1,acid1b`: metal to y 16977, dark y 16980-16986, a centre
+  y 16989-17001 that is dim in both metal shots (116-136 red against 190-210 for the metal; the reviewer at
+  x 10483: 58-88 and 64-87 against 214-220 on the contact (10484,17994)) and tan in the clean shot
+  (158/133/96, no green hole), dark y 17004-17010, metal from y 17016. `tools/tl5_tracks.py v 10481 16880
+  17120`: no metal in either chip over y 16977-17015. The box (review round 77): a dark wall x 10509-10518,
+  y 16982-17006 inside the strip's diffusion, a plain interior x 10500-10507. The same metal has the same
+  dark stretch over the boxes at y 16519, y 17475 and y 17735 (`px.py col 10480 17452 17500 3`, `col 10482
+  17706 17764 3`: dim centre, tan under it), where a poly row lies under it, and `regs` read the last as a
+  pass-over. `tools/follow.py 10482 16950 N --gap 44` ends at (10481,16212) (a pad group at about
+  (10440,16215)), `follow.py 10483 17060 S --gap 44` at (10484,17998): `regs`' pad (10484,17994) of
+  `lc2_w8450`. Neither shows the metal continuous over the boxes (trap 27).
 - **The third pull-down, east of the rail** (`px.py row 17031 10586 10668 3 all`, `row 17058 10560 10668 4
   metal,acid,acid1b`, `col 10630 16900 17070 4`): the row of the end pad (10683,17038) is orange poly
   x 10601-10648, crossed by a dark line at x 10613-10619 in all four shots (a diffusion edge under it);
@@ -6315,8 +6322,8 @@ driver lies; the other three lead to the loads.
 | `bc2_w15388` | poly | (10335, 16378-16400) | ? | piece `d388`: the row of the end pad (10268,16389) of the data line of `bc2`'s latch copy b; on east under the tracks x 10353, x 10397 toward the rail column: not read. The line's north end is `bc2`'s port (10353,15440) (met) |
 | `eof_w16560` | poly | (10335, 16506-16528) | ? | piece `w16560`: the row of the north pad (10266,16560) (a column north, a row east) toward the rail column: not read |
 | `eof_w16560` | poly | (9860, 17767-17787) | ? | piece `w16560`: the row of the end pad (9893,17777), on west: not read |
-| `eof_w16996` | metal | (10476-10492, 16960) | out | piece `u16996`: the thin metal of the node's contact (10481,16996), north: to about (10480,16538) (`tools/follow.py`), not followed |
-| `eof_w16996` | metal | (10476-10492, 17024) | out | piece `u16996`: the same metal south: to about (10485,17456), not followed |
+| `eof_w16996` | metal | (10476-10492, 16960) | ? | piece `u16996`: the thin metal over the node's box (10476-10518, 16980-17012), north; on the node only if the contact of Ambiguity 219 is real; the metal runs to about (10481,16212), not followed |
+| `eof_w16996` | metal | (10476-10492, 17024) | ? | piece `u16996`: the same metal south, toward `regs`' pad (10484,17994) of `lc2_w8450` (dark stretches over boxes at y 17169, 17344, 17475, 17735): not followed |
 | `vss` | metal | (10548-10598, 16800) | - | pieces `u16864`, `u16996`: the VSS rail, drawn from y 16800 south to run 55's stretch |
 | `vcc` | metal | (10722-10770, 16810) and (10722-10770, 17000) | - | pieces `u16864`, `u16996`: `bc2`'s VCC rail over these units only |
 | `eof_w17166` | poly | (10492, 16853-16875) | (met) | **read by piece `u16864` (run 63): the gate of the inverter `eof_w16889`; no longer a port.** Before: piece `o166`: the row of the tap pad (10441,16864); on east as a block x 10497-10526 and a patch x 10534-10542 west of the rail (field under the rail): believed a gate over diffusion there, not read |
@@ -8309,6 +8316,23 @@ driver lies; the other three lead to the loads.
    neck west and the node's tab east of the stretch between), its north end an end cap in a notch of field,
    and its south end the gate poly of the south unit's load. Had the buried contact been real, the node
    would have gated its own pull-down. The `?B` is removed; nothing uncertain is left of it.
+
+219. **Is the box (10476-10518, 16980-17012) of the node `eof_w16996` contacted by the thin metal x 10476-10492?**
+   (piece `u16996`, run 63; review round 77.) The metal is dark over the box for 39 px in both chips, with
+   no bright centre, no widening into a pad, and tan with no green hole in the clean shot: all of trap 22's
+   marks of a pass-over, none of a contact. For a contact: no poly leaves the box (the rows north and south
+   and field west of it), a node needs an exit, and the latch's other node has only a poly stub; metal is
+   present up to the box's edge on both sides. Against: the metal is on the track of `regs`' line `lc2_w8450`
+   (pad (10484,17994), drawn north to y 17760), and if it is that line a contact here would tie a NOR's node
+   to an inverter's output; the same dark stretch lies over every unit's box along this metal. Readings:
+   (a) a contact: `eof_w16996` leaves on this metal, which then is not `lc2_w8450` (two metals end to end
+   somewhere between y 17024 and y 17760, trap 33); (b) a pass-over: the metal is another net and the
+   latch's output leaves some other way not yet seen. **Working assumption: neither; drawn `?C`**, the metal
+   drawn over the box only and unnamed, the name on the node's diffusion. Nothing rests on it: both
+   equations are the same either way. What would settle it: following the thin metal both ways (each dark
+   stretch: a pink protected strip beside it in the clean shot, trap 27; its north end at the pad group
+   (10440,16215); whether it reaches `regs`' metal at y 17760), and finding what `eof_w16889`'s and
+   `eof_w16996`'s loads are.
 
 ## Review
 
@@ -11870,11 +11894,57 @@ extraction.
 
 Round 76: one finding that changes a connection, fixed with three geometry-only findings; a fix check follows.
 
+### Round 77 (full review of piece `u16996` and fix check of round 76's corrections to piece `u16864`; run 63; 2026-11-23 07:10 to 07:22 +0000, at commit a619d0b)
+
+A fresh reviewer agent (Claude Fable 5.2), briefed with piece `u16996`'s eight claims and with the changed
+lines of piece `u16864` since f048c3b, and told to suspect: the load's buried contact (12 px of dark between
+the box's centre and the diffusion south of it) and the poly from the column's foot to the plate; whether the
+row of the end pad is a gate over diffusion or ends in a buried contact, and whether the diffusion south of
+it is `vss`; the contact (10481,16996) under the thin metal (traps 13, 16, 33); the rows' ends; the
+separation of the two nodes east of the rail; the column's channel. Images in `cache/scratch/eof/review-77/`
+(10), with `tools/px.py`, `tools/tl5_tracks.py`, `tools/sameconn.py`, `tools/unsure.py`.
+
+- **Finding 1, not decidable (marked uncertain; the extraction's connections unchanged)**: the contact
+  (10481,16996) is not demonstrated: no metal in either chip over y 16977-17015, no bright centre (red 58-88
+  and 64-87 against 214-220 on the control contact (10484,17994)), no green hole in the clean shot: trap
+  22's pass-over signature as much as a contact's; the feature is a framed box (a dark wall x 10509-10518,
+  y 16982-17006 inside the strip's diffusion, a plain interior x 10500-10507), not a plain tab. For the
+  contact: metal up to the box's edge on both sides, and no poly can leave the box. The tracer had found
+  meanwhile that the metal is on the track of `regs`' line `lc2_w8450`. Now `?C`, the metal unnamed and
+  drawn over the box only, the name on the node's diffusion; Ambiguity 219. Both equations stand either way.
+- **Finding 2, geometry only (confirmed, fixed)**: the node's west part ends at x ~10524 at y 16974 and
+  y 17016 (field-coloured at x 10534-10541), drawn to x 10546. Now `D 10500,16966:10526,17024`, the band from
+  x 10522.
+- **Finding 3, geometry only (confirmed, fixed)**: the end pad's bright centre is about (10680,17042). Now
+  `C 10681,17040`.
+- **Noted, nothing drawn**: an 8 px dark bar crosses the output metal at y 17002-17008 in both chips with
+  nothing drawn beneath, metal bright on both sides (an edge under it; the tracer's two-chip test had it).
+- **Checked and found correct**: the load's box centre (10628-10636, 16940-16949) plain in three shots, a
+  13 px neck at y 16957-16963 joining it to the node, the poly continuous from the column's foot to the
+  plate; the end pad's row ordinary orange poly at its west end (no buried contact), edge lines across it
+  at x 10614-10617 and x 10651-10655, the south diffusion tan under the rail through to y 17090 (`vss`);
+  both gate rows ending at x ~10540-10546, field under the rail at y 16950-16980 and y 17020-17045, the
+  band's edge lines unbroken, the rows either side of the rail at y 17040 separate polys; the band
+  y 16908-16928 and the patch x 10600-10618, y 16958-16985 field (the two nodes apart); round 76's
+  correction: edge lines across the column at y ~16867 and y ~16905 in all shots, the `vss` neck tan under
+  the rail to the column's west edge, the tab east, the cap orange poly, no other channel;
+  `tools/sameconn.py f048c3b`: nine differences, all intended; `tools/unsure.py`: nothing for these nets.
+- **Not checked by the reviewer**: the thin metal beyond its ports; run 55's contact (10560,17083); the ring
+  at the west end of the stub row y 16822; the load's VCC contact (10746,16972), seen at 2x only (the
+  tracer: ring in both metal shots, specks in the clean shot, `r64_s3.png`, 3.5x).
+- **Proof that the fixes changed no connection** (against a619d0b):
+  `tools/t.sh eof sameconn.py a619d0b`: `connections identical`;
+  `.venv/bin/python tools/sameconn.py a619d0b`: `connections identical`.
+
+Round 77: no findings that change a connection.
+
 ## Not done
 
 - **Next (after run 63)**: the latch of the rail column y 16800-17070 is drawn (pieces `u16864`, `u16996`).
-  Open from it: (a) **where `eof_w16996` goes**: the thin metal x 10476-10492 north of (10482,16960) (to about
-  (10480,16538)) and south of (10482,17024) (to about (10485,17456)); (b) the unit north of the latch in the
+  Open from it: (a) **where the latch's output leaves** (Ambiguity 219): the thin metal x 10476-10492, north to
+  about (10481,16212) (a pad group at about (10440,16215)) and south toward `regs`' pad (10484,17994) of
+  `lc2_w8450`, with dark stretches over boxes at y 16519, 16650, 17169, 17344, 17475, 17735: to be followed
+  stretch by stretch (traps 22, 27, 33); (b) the unit north of the latch in the
   same column: rows y 16651 (`bc2_w14955`) and y 16734 (unnamed), the contact (10553,16775), an exit box
   (10480-10510, 16680-16712); (c) what else lies east of the rail at x 10600-10670, y 16905-16935 (a band of
   field and edges, read as no device).

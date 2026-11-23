@@ -235,4 +235,4 @@
 10145,15660:10450,16150   route  the enable of the east column's second latch, south and west | a thin metal with four corners from the latch's enable pads to an end pad; the pad's poly row on west
 10245,15430:10370,16410   route  the data of the east column's second latch, south | a thin metal with three corners, a poly hop under the enable's metal, a second thin metal to an end pad; the pad's poly row east
 9855,16500:10340,17795   route  a wire from a gate row of the east column to a pad in the bus field | a thin metal with three corners, lying on the reset copy's poly for part of its run without a contact
-10455,16800:10775,17070   logic  set/reset latch on the east column's latch enable | two cross-coupled NOR gates in the ground rail's column: set by the enable, cleared by the reset or a third signal; output on a thin metal north and south
+10455,16800:10775,17070   logic  set/reset latch on the east column's latch enable | two cross-coupled NOR gates in the ground rail's column: set by the enable, cleared by the reset or a third signal; where its output leaves is not established

@@ -4870,7 +4870,7 @@ B 10626,16880:10652,16904
 # y 17025-17048, drawn to x 10622 (PORT: toward the rail column, not read).
 M 10683,16889 y17035 w=26
 P 10666,17018:10700,17052              # the end pad (10683,17035)
-C 10683,17038 s=20x20
+C 10681,17040 s=20x20
 P 10683,17036 x10622 w=22
 N M 10683,16950 eof_w16889
 # The node's west exit, of run 55's build: a buried contact box (10497-10520, 16812-16838) at the strip's
@@ -4902,20 +4902,22 @@ P 10470,16952 x10546 w=20
 N P 10495,16952 rst_a
 P 10492,17040 x10546 w=22
 D 10500,16936:10529,17060              # the strip, through under both gates
-D 10500,16966:10546,17024              # the node's west part
-D 10540,16990:10604,17012              # the band under the rail
+D 10500,16966:10526,17024              # the node's west part (round 77: it ends at x ~10524 north and south of the band)
+D 10522,16990:10604,17012              # the band under the rail
 D 10600,16990:10654,17012              # the node east of the rail
 M 10573,16945 y17054 w=50              # the VSS rail, between piece u16864's stretch and run 55's
-# The node's west exit: a tab of the diffusion x 10474-10520, y 16980-17012 under the thin metal
-# x 10476-10492 with a contact (10481,16996): dark ring y 16980-16986 and y 17004-17010, a dim centre in
-# both metal shots, tan in the clean shot (at the two crossings of this metal over a poly row without a
-# contact, y 16822 and y 17169, the centre is bright and the clean shot salmon). The metal runs on north and
-# south (PORTS at y 16960 and y 17024: over rst_a's row and eof_w17345's row without a contact; not
-# followed).
+# The node's west exit: a framed box x 10476-10518, y 16980-17012 at the strip's west side (a dark wall
+# x 10509-10518 inside the strip's diffusion, a plain interior x 10500-10507, tan in the clean shot under
+# the thin metal x 10476-10492), drawn as a tab of the diffusion. The thin metal is dark over it for 39 px
+# in both chips (y 16977-17015), with no bright centre and no green hole in the clean shot: by the tracing
+# guide's traps 22 and 27 a pass-over as much as a contact. No poly leaves the box (rows north and south,
+# field west), so the contact is drawn uncertain (notes, Ambiguity 219; review round 77). The metal is on
+# the track of regs' line lc2_w8450 (M 10485,17994 y17760), 700 px south: whether it is that line is not
+# shown. Drawn over the box only (PORTS at y 16960 and y 17024).
 D 10474,16980:10520,17012
-C 10481,16996 s=14x20
+?C 10481,16996 s=14x20
 M 10482,16960 y17024 w=16
-N M 10482,16965 eof_w16996
+N D 10512,17020 eof_w16996
 # The third pull-down, east of the rail: the poly row of piece u16864's end pad (10683,17035) runs west
 # over a diffusion x 10620-10650 that joins the node (north) to a diffusion y 17052-17068 (south), which is
 # the rail's vss diffusion come out east from under the rail; the row ends as a cap x 10600-10616 (the

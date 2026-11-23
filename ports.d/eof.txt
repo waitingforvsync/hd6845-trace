@@ -251,7 +251,7 @@ bc2_w15432     P      10150,16118-16138        ?    piece en432: the row of the 
 bc2_w15388     P      10335,16378-16400        ?    piece d388: the row of the end pad (10268,16389) of the data line of bc2's latch copy b; on east toward the rail column: not read
 eof_w16560     P      10335,16506-16528        ?    piece w16560: the row of the north pad (10266,16560) (a column north, a row east) toward the rail column: not read
 eof_w16560     P      9860,17767-17787         ?    piece w16560: the row of the end pad (9893,17777), on west: not read
-eof_w16996     M      10476-10492,16960        out  piece u16996: the thin metal of the node's contact (10481,16996), north: to about (10480,16538), not followed
-eof_w16996     M      10476-10492,17024        out  piece u16996: the same metal south: to about (10485,17456), not followed
+eof_w16996     M      10476-10492,16960        ?    piece u16996: the thin metal over the node's box, north (on the node only if the uncertain contact (10481,16996) is real): to about (10481,16212), not followed
+eof_w16996     M      10476-10492,17024        ?    piece u16996: the same metal south, toward regs' pad (10484,17994) of lc2_w8450: not followed
 vss            M      10548-10598,16800        -    pieces u16864, u16996: the VSS rail, drawn from y 16800 south to run 55's stretch
 vcc            M      10722-10770,16810        -    pieces u16864, u16996: bc2's VCC rail over these units only (y 16810-17000)
