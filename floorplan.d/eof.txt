@@ -232,3 +232,4 @@
 10255,15890:10495,17160   route  ck_out north from the clock-and-reset NOR's gate row | a thin metal with one jog to an end pad; the pad's poly row east toward the ground rail's column
 10600,17300:10775,17420   logic  load of the NOR on the two bus lines (bl0_w15566, eof_w17866) | a depletion load east of the ground rail, on the supply rail; the gate's pull-downs are under the ground rail
 10345,15430:10410,15765   route  the clock-and-reset NOR's output onto the enable metal of the east column's latch | a thin metal with two corners between the hop's pad and the latch enable's stub
+10145,15660:10450,16150   route  the enable of the east column's second latch, south and west | a thin metal with four corners from the latch's enable pads to an end pad; the pad's poly row on west

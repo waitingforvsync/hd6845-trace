@@ -4774,3 +4774,16 @@ M 10746,17210 y17390 w=48              # the VCC rail, on south over this unit
 # NOR(rst_lat, ck_out).
 M 10354,15760 y15738 x10398 y15436 w=14
 @alias bc2_w14955 eof_w17166
+# ======================================================================
+# Run 60 (2026-11-23), piece `en432`: the enable metal of bc2's latch copy b south of bc2's port
+# (10441,15665). bc2's metal x 10441 runs on south from the pad (10441,15650) to a corner (10441,15788), west
+# to a corner (10393,15788), south to a corner (10393,15828), west along y 15828 over two poly columns
+# (rst_a's link G column x 10215-10239 and the hop of eof_w17166 x 10345-10363: no contact) to a corner
+# (10180,15828) and south to an end pad (10180,16128): one metal of 800 px (two-chip test on every leg: only
+# 8-10 px edge bars; no metal beyond any corner). The pad's poly row runs west, y 16117-16138, under a
+# metal lying on it; drawn to x 10150 (PORT: not read beyond).
+M 10441,15660 y15788 x10393 y15828 x10180 y16128 w=14
+P 10163,16111:10197,16145            # end pad (10180,16128)
+C 10180,16128 s=20x20
+P 10180,16128 x10150 w=20
+N M 10300,15828 bc2_w15432

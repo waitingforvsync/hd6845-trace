@@ -249,3 +249,4 @@ eof_w17166     P      10492,16640-16662        out  piece o166: the row of the t
 ck_out         P      10492,15900-15922        out  piece ckn: the row of the end pad (10311,15912) of ck_out's branch north from the NOR's gate row; on east as a block x 10497-10526 and a patch x 10534-10542 west of the rail: believed a gate, not read
 vcc            M      10722-10770,17120        -    piece u17170: bc2's VCC rail over the load's contact (10745,17165), drawn y 17120-17215 only; runs on north and south
 vcc            M      10722-10770,17390        -    pieces u17170, ld345: the same rail, south end of the drawn stretch (y 17120-17390)
+bc2_w15432     P      10150,16118-16138        ?    piece en432: the row of the end pad (10180,16128) of the enable metal of bc2's latch copy b; on west under a metal lying on it: not read
