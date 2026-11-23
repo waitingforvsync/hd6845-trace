@@ -11637,6 +11637,41 @@ stripped shots), with `tools/px.py`, `tools/tl5_tracks.py`, `tools/eof_tee.py` a
 
 Round 74: no findings that change a connection.
 
+### Round 75 (full review; run 62, piece `w16560`; 2026-11-23 01:12 to 01:24 +0000, at commit 246fa08)
+
+A fresh reviewer agent (Claude Fable 5.2), briefed with the piece's six claims, the main one being that the
+metal is not `rst_a` although it lies on `rst_a`'s poly twice and passes two of its pads, and told to suspect:
+the 12 px between the corner's east end and the ring of `rst_a`'s pad (10262,17770) (trap 16, "dim is not a
+colour"); the same at the pad (10225,16820); a contact along either overlap (trap 13); whether the end pad's
+poly is `rst_a`'s row; two metals end to end on the 900 px leg; each corner (trap 32); the north pad all
+round. Images in `cache/scratch/eof/review-75/` (12; 2.8x to 5.5x, both metal shots and both stripped shots),
+with `tools/px.py`, `tools/tl5_tracks.py`, `tools/textmap.py` and the full extraction.
+
+- **Finding 1, geometry only (confirmed, fixed)**: the end pad lies about 6 px east of where it was drawn: the
+  pad at about x 9881-9923 with its bright centre at x 9893-9903 (`tools/px.py row 17777 9836 9930 4`); the
+  drawn contact (9893,17777) covered the centre's west half. Now pad `9881,17760:9923,17794`, contact
+  (9898,17777), the metal ending at x 9898.
+- **Checked and found correct**: at the pad (10262,17770): metal to x 10231, its outline x 10234-10240, open
+  poly x 10243-10249 (orange in both chips, not metal), the pad's ring x 10252-10258: 30 px without metal
+  against a 12 px ring on the north side where the pad's own metal arrives; the chip-2 stripped shot's metal
+  ghost ends at x ~10234; at the pad (10225,16820): ring y 16832-16840, open orange poly y 16844-16852 in both
+  chips, metal from y 16864 (38 px without metal); `rst_a`'s poly comes up from the south at x 10069-10087
+  and turns east, and west of x ~10066 the clean shot is pink field under the metal as far as the end pad; no
+  ring, widening or hole on either overlap; south of y 16960 the leg lies on field; the clean shot's stretch
+  at y 17278-17320 is a residue blob in chip 1 only; one metal on every leg (only 9-10 px bars, poly edges);
+  no metal past any corner, none north of the north pad, none west of the end pad; the north pad's metal
+  leaving south only, its poly an L north then east with field west of the column, under the metal x 10311
+  with no pad; the end pad's poly running west, nothing north or south; an orange oval at (10268,16822) in
+  chip 2's stripped shot only, field under it: not a contact; the full extraction (0 errors, 0 warnings).
+- **Not checked by the reviewer**: the poly beyond either port; that the extraction keeps `eof_w16560` and
+  `rst_a` apart (checked by the tracer: the full extraction gained one net with this piece, 2,516 to 2,517,
+  with no "carries several names" error, so the name is on a net of its own); `tools/unsure.py` (no `?` item in the piece).
+- **Proof that the fix changed no connection** (against 246fa08):
+  `tools/t.sh eof sameconn.py 246fa08`: `connections identical`;
+  `.venv/bin/python tools/sameconn.py 246fa08`: `connections identical`.
+
+Round 75: no findings that change a connection.
+
 ## Not done
 
 - **Next (after run 62)**: the net `eof_w16560` is one metal between two pads (piece `w16560`), neither end
