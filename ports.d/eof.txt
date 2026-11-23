@@ -251,3 +251,5 @@ vcc            M      10722-10770,17120        -    piece u17170: bc2's VCC rail
 vcc            M      10722-10770,17390        -    pieces u17170, ld345: the same rail, south end of the drawn stretch (y 17120-17390)
 bc2_w15432     P      10150,16118-16138        ?    piece en432: the row of the end pad (10180,16128) of the enable metal of bc2's latch copy b; on west under a metal lying on it: not read
 bc2_w15388     P      10335,16378-16400        ?    piece d388: the row of the end pad (10268,16389) of the data line of bc2's latch copy b; on east toward the rail column: not read
+eof_w16560     P      10335,16506-16528        ?    piece w16560: the row of the north pad (10266,16560) (a column north, a row east) toward the rail column: not read
+eof_w16560     P      9860,17767-17787         ?    piece w16560: the row of the end pad (9893,17777), on west: not read

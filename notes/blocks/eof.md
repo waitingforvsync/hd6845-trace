@@ -1573,6 +1573,17 @@ pads with contacts, no transistor, no uncertain item).
   corner on the same track position, is separate.
 - **Checks**: full extraction 2,516 nets, 4,816 transistors, 0 errors, 0 warnings.
 
+Run 62 (Kieran Connell's session, Claude Fable 5.2; 2026-11-23 01:05 +0000 on). One piece, wiring only (two
+pads with contacts, no transistor, no uncertain item; one new net, `eof_w16560`, with a port at each end).
+
+- **Piece `w16560`: the other metal on the track x 10268.** From a pad (10266,16560) one metal of 1,560 px:
+  south on x 10268, west along y 16868, south on x 10226 for 900 px, west along y 17777 to an end pad
+  (9893,17777). **It lies on `rst_a`'s poly twice (y 16864-16950 and x 10070-10231) without a contact and
+  passes two of `rst_a`'s pads with open poly between**: another net. Neither end is read: the north pad's
+  poly goes north and east as a row y 16505-16530 toward the rail column (port (10335,16517)), the end pad's
+  poly row goes west (port (9860,17777)).
+- **Checks**: full extraction 2,517 nets, 4,816 transistors, 0 errors, 0 warnings.
+
 ## Inventory
 
 | Piece | Where | What |
@@ -5970,6 +5981,50 @@ pad), overlay `r61_ov1.png` (3x).
   two-chip tests have only edge bars at y 16373-16403) toward the rail column, not read. Field west of the
   pad (`rst_a`'s track x 10225 passes 30 px west).
 
+### Run 62: the metal from the pad (10266,16560) to the pad (9893,17777) (piece `w16560`)
+
+Views `r62_top.png` (3.1x, three shots, the north pad), `r62_col.png` (2.8x, its poly north and east),
+`r62_bot.png` (3.2x, the corners at y 16868), `r62_cor.png` (3.2x, the corner (10226,17777) and `rst_a`'s pad),
+`r62_mid.png` (3.3x, both stripped shots under the leg y 17777), `r62_wend.png` (3.2x, the end pad), overlay
+`r62_ov1.png` (4x).
+
+- **The metal**: `tools/follow.py 10268 16700 N --gap 16` ends at (10265,16558); `tools/tl5_tracks.py v 10268
+  16575 16880`: no stretch without metal from the pad's ring to the corner; `h 16868 10215 10285`: metal from
+  x 10220 to x 10275 (an 8 px bar at x 10234-10242, the edge of the poly column under it); `v 10226 16860
+  17800`: only the bars y 16958-16967 (the poly row y 16950) and the corner's, no hole in the clean shot
+  (its three stretches of red minus green under 24 have minima 9-15: not holes, which are negative);
+  `h 17777 9840 10300`: metal from x 9893 to x 10232, bars at x 9904-9924 (the end pad's ring) and
+  x 10060-10069 (the poly's corner under it). `tools/follow.py`'s contact candidates (10224,16924) and
+  (10225,17297): `tools/textmap.py 10208 16908 10246 16942 3`, `textmap.py 10208 17280 10246 17320 3`: the
+  metal uniform, no ring, the clean shot with no greener patch: not contacts.
+- **Corners, not tees**: `tl5_tracks.py v 10268 16860 16910`: none south of the first corner (y 16875-16904:
+  the 26 px of bare ground to `ck_out`'s corner (10268,16910), review round 70); `h 16868 10150 10222`: none
+  west of the second; `v 10226 16780 16870`: none north of it (y 16827-16864); `v 10226 17770 17840`: none
+  south of the third for 34 px (the metal at y 17817-17830 is the bus line y 17824, `bl0_w15566`);
+  `v 10268 16480 16560`: none north of the north pad.
+- **Not `rst_a`** (tracing guide, traps 13, 16, 30). (a) Its leg x 10226 lies on `trunks`' poly column
+  x 10225 (`P 10470,16950 10225,16950 10225,16820`) from y 16864 to y 16950, 37 px south of `rst_a`'s pad
+  (10225,16820): `tools/px.py col 10226 16820 16900 4 metal,metal1,acid1b`: the pad's ring y 16832-16840,
+  open poly y 16844-16852 (134-161/87-125/44-57 in chip 2, 125-164/68-89/28-55 in chip 1: orange, green
+  under 125, blue under 60), the metal's own outline y 16856-16860, metal from y 16864. (b) Its leg y 17777
+  lies on `trunks`' poly row y 17772 from x 10231 west to that poly's corner at x ~10070, and ends 12 px
+  short of `rst_a`'s pad (10262,17770): `px.py row 17777 10222 10272 3`: metal to x 10231, outline
+  x 10234-10240, open poly x 10243-10249 (158-162/100-125/49-54; 169-174/75-84/39-40), the pad's ring
+  x 10252-10258, its centre from x 10261; the pad's own metal arrives from the north (`px.py col 10266 17726
+  17772 3`: bright to y 17753, a 15 px ring). (c) West of x 10065 the poly under the metal is gone:
+  `px.py row 17777 9900 10110 10 acid1b,acid`: cream (poly under metal, 211-213/144-175/99-108) from x 10070
+  east, pink (field under metal, 186-199/117-122/123-128) from x 9930 to x 10060 (`r62_mid.png`: `trunks`'
+  poly turns south at x 10065-10085). So the end pad's poly is a different poly, and no contact was found
+  along either overlap (no ring, no widening, no hole).
+- **The north pad** (contact (10266,16560); ring and bright centre in both metal shots, a hole in the clean
+  shot; `r62_top.png`): the metal leaves south. Its poly runs north as a column x 10256-10278 to y ~16508
+  and east as a row y 16508-16530 (`r62_col.png`, `r62_ov1.png`; `px.py row 16517 10240 10345 7`: open poly
+  x 10268-10296, under `ck_out`'s metal x 10311 with its width kept, open poly again x 10331-10338); the
+  column's west flank is field. Drawn to x 10335 (port); on east under the tracks toward the rail column.
+- **The end pad** (contact (9893,17777); ring and bright centre in both metal shots, a hole in the clean
+  shot; `r62_wend.png`): the metal from the east ends on it. Its poly row runs west (`px.py row 17777 9850
+  9900 4 metal,metal1,acid`: open poly x 9850-9878, orange in both metal shots). Drawn to x 9860 (port).
+
 ## Ports
 
 The net is driven outside the package (by `rdp2`'s NOR). `in` marks the port beyond which the
@@ -6116,6 +6171,8 @@ driver lies; the other three lead to the loads.
 | `bc2_w14955` (= `eof_w17166`) | metal | onto `bc2`'s metal at (10391-10405, 15440) | - | piece `o166n`: the NOR's output metal north of the pad (10354,15781) joins `bc2`'s stub `M 10398,15386 y15440`; no port (joined by geometry) |
 | `bc2_w15432` | poly | (10150, 16118-16138) | ? | piece `en432`: the row of the end pad (10180,16128) of the enable metal of `bc2`'s latch copy b; on west under a metal lying on it (from x ~10145): not read. The metal's north end is `bc2`'s port (10441,15665) (met) |
 | `bc2_w15388` | poly | (10335, 16378-16400) | ? | piece `d388`: the row of the end pad (10268,16389) of the data line of `bc2`'s latch copy b; on east under the tracks x 10353, x 10397 toward the rail column: not read. The line's north end is `bc2`'s port (10353,15440) (met) |
+| `eof_w16560` | poly | (10335, 16506-16528) | ? | piece `w16560`: the row of the north pad (10266,16560) (a column north, a row east) toward the rail column: not read |
+| `eof_w16560` | poly | (9860, 17767-17787) | ? | piece `w16560`: the row of the end pad (9893,17777), on west: not read |
 | `eof_w17166` | poly | (10492, 16853-16875) | out | piece `o166`: the row of the tap pad (10441,16864); on east as a block x 10497-10526 and a patch x 10534-10542 west of the rail (field under the rail): believed a gate over diffusion there, not read |
 | `eof_w17166` | poly | (10492, 16640-16662) | out | piece `o166`: the row of the tap pad (10441,16650); the same end as the row above |
 | `ck_out` | poly | (10492, 15900-15922) | out | piece `ckn`: the row of the end pad (10311,15912) of `ck_out`'s branch north from the NOR's gate row; on east as a block x 10497-10526 and a patch x 10534-10542 west of the rail (field under the rail): believed a gate, not read |
@@ -11582,6 +11639,10 @@ Round 74: no findings that change a connection.
 
 ## Not done
 
+- **Next (after run 62)**: the net `eof_w16560` is one metal between two pads (piece `w16560`), neither end
+  read: the row y 16508-16530 east of x 10335 toward the rail column, and the row west of (9860,17777).
+  With run 61's row y 16378-16400 and run 53's `rst_lat` row y 16292-16314 these are the rows of the rail
+  column's units at y 16240-16560 (`bc4` / `bc2`), to be traced as units.
 - **Next (after run 61)**: the data of `bc2`'s latch copy b (`bc2_w15388`) is drawn from `bc2`'s pad to an end
   pad (10268,16389) and its row to x 10335 (piece `d388`). Open: the row east of x 10335 (toward the rail
   column at y 16378-16400; run 53's `rst_lat` row y 16292-16314 is the next row north there); the other
