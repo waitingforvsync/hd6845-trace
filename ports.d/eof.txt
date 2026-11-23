@@ -237,7 +237,6 @@ vss            M      3960-3982,10960           -    an arm of the same metal no
 eof_ypd        P      3996,18247-18263          in   the poly row east of the foot pad (3957,18255) of the line eof_ypd, east end as drawn; it runs on east along the north side of a wide metal to about x 4138 (cream in the clean shot; not followed); the line's driver lies beyond
 # piece cap18b (run 49): the twin of cap18 on bl0_w15566; the bus line that leaves its pad east
 bl0_w15566     D      10600,17484-17500        in   piece u17345: the diffusion band bl0_w15566's row y 17473 is tied to by a buried contact, east under the VSS rail with no contact; the driver is expected on it (cdp4's strip): not drawn
-eof_w17345     D      10600,17327-17358        out  piece u17345: the node's diffusion east past the rail's edge, to its load (believed x 10640-10700, y 17300-17400, cdp4's strip): not drawn
 vss            M      10548-10598,17054        -    pieces u17170, u17345: bc2's VSS rail, drawn over these two units (y 17054-17590); north of y 17054 another unit's contact area
 eof_w17866     M      9546-9560,17800          ?    piece bus2: the second metal of the pad (9553,17866), from the north (follower: to (9546,17645), west to (9266,17641)): not read
 eof_w17866     M      9806-9820,17800          ?    piece bus2: the second metal of the pad (9813,17866), from the north (follower: 1,800 px to (9961,16341)): not read
@@ -250,4 +249,4 @@ eof_w17166     P      10492,16853-16875        out  piece o166: the row of the t
 eof_w17166     P      10492,16640-16662        out  piece o166: the row of the tap pad (10441,16650); the same end as the row y 16864
 ck_out         P      10492,15900-15922        out  piece ckn: the row of the end pad (10311,15912) of ck_out's branch north from the NOR's gate row; on east as a block x 10497-10526 and a patch x 10534-10542 west of the rail: believed a gate, not read
 vcc            M      10722-10770,17120        -    piece u17170: bc2's VCC rail over the load's contact (10745,17165), drawn y 17120-17215 only; runs on north and south
-vcc            M      10722-10770,17215        -    piece u17170: the same rail, south end of the drawn stretch
+vcc            M      10722-10770,17390        -    pieces u17170, ld345: the same rail, south end of the drawn stretch (y 17120-17390)

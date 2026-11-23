@@ -4749,3 +4749,18 @@ P 10294,15895:10328,15929            # end pad (10311,15912)
 C 10311,15912 s=20x20
 P 10311,15911 x10492 w=22
 N M 10311,16400 ck_out
+# ======================================================================
+# Run 58 (2026-11-23), piece `ld345`: the load of the NOR eof_w17345 (run 51's unit), east of the rail from
+# run 51's port (10600,17327-17358). It is run 55's load 175 px south, shape for shape: the node's diffusion
+# leaves the rail's east edge at y 17327-17365 into a column x 10613-10636, y 17327-17415, and runs on east
+# as a strip under a plate x 10645-10688, y 17309-17411 into a box under the VCC rail x 10722-10770 with a
+# contact (10745,17340); the plate's SW corner is tied to a tab of the column by a buried contact box
+# (10645-10672, 17387-17411). So eof_w17345 = NOR(bl0_w15566, eof_w17866) has its depletion load.
+D 10585,17327:10716,17365
+D 10613,17327:10636,17415
+D 10630,17389:10670,17415
+B 10645,17387:10672,17411
+P 10645,17309:10688,17411
+D 10713,17319:10772,17365
+C 10745,17340
+M 10746,17210 y17390 w=48              # the VCC rail, on south over this unit
