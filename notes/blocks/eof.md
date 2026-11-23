@@ -11406,6 +11406,34 @@ undrawn in the region. Images in `cache/scratch/eof/review-71/` (8; 3.2x to 6x, 
 
 Round 71: no findings.
 
+### Round 72 (full review; run 59, piece `o166n`; 2026-11-23 00:48 to 00:58 +0000, at commit f6a8bab)
+
+A fresh reviewer agent (Claude Fable 5.2), briefed with the piece's five claims, among them `bc2`'s three metal
+lines between the stub and the pad (10441,15172) as part of what it checks, and told to suspect: the corner
+(10441,15392) against the pad (10441,15432) 40 px south on the same track (traps 16, 30, 33); the join at
+y 15440 as two metals end to end; the far side of each corner in the staircase (traps 30, 32); a continuation
+north of y 15386 on x 10398; a tap pad on the x 10398 leg. Images in `cache/scratch/eof/review-72/` (8; both
+metal shots at 5x, the clean shot added at 4-4.8x), with `tools/tl5_tracks.py`, `tools/px.py`, the full
+extraction and `tools/unsure.py`.
+
+- **No findings.** Checked and found correct: one metal from the pad north (bright into the pad's ring), east
+  along y 15731-15745 and north on x 10391-10405; no metal north of the first corner (y 15705-15734), along
+  y 15738 at x 10318-10348 or x 10405-10435, or south of the second corner (y 15747-15777); a greenish speck
+  at about (10335,15742) in chip 1 only (a blemish); the leg x 10398 from y 15745 to y 15380 with only 8-11 px
+  edge bars, constant width through y 15440 in both chips and an unbroken protected strip in the clean shot
+  (the one longer dark stretch, y 15399-15418 in chip 2 only, is 6 px in chip 1: the edge of the poly row
+  under the arm); no widening and no hole on the leg; **`bc2`'s lines**: bare field north of the corner on
+  x 10398 (row y 15365); between the corner (10441,15392) and the pad (10441,15432) rows y 15408-15412 flat
+  across the track like its flanks (red 86-151 against over 190 for metal) and the clean shot olive at
+  y 15409-15415: open ground, so `bc2_w14955` and `bc2_w15432` are separate; the arm y 15386-15398 one metal
+  from x 10391 to x 10445, lying on the poly row `bc2_w15388` with no contact; the metal x 10441 unbroken
+  from y 15376 north into the rings of the pads (10441,15172) and (10441,14955); the extraction's
+  `bc2_w14955 = NOR(ck_out, rst_lat)`, nothing in `tools/unsure.py` for the net.
+- **Not checked**: the pad (10354,15781) beyond its north approach (reviewed in round 69); everything south of
+  y 15800; `bc2`'s latch cells east of x 10480; the chip-2 stripped shot only sampled on the two columns.
+
+Round 72: no findings.
+
 ## Not done
 
 - **Next (after run 59)**: the NOR's output is followed to `bc2`'s latch unit a (piece `o166n`:
