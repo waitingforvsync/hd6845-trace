@@ -4764,3 +4764,13 @@ P 10645,17309:10688,17411
 D 10713,17319:10772,17365
 C 10745,17340
 M 10746,17210 y17390 w=48              # the VCC rail, on south over this unit
+# ======================================================================
+# Run 59 (2026-11-23), piece `o166n`: the NOR eof_w17166's output metal north of run 56's port (10354,15755):
+# from the pad (10354,15781) north to a corner (10354,15738), east to a corner (10398,15738) and north on
+# x 10398 onto bc2's metal `M 10398,15386 y15440` (bc2's port bc2_w14955 (10398,15440), "runs on south, not
+# followed"): one metal (two-chip test: only 8-11 px edge bars; no metal beyond either corner). bc2's metal
+# goes on north to a corner (10398,15392), east to x 10441 and north to the two enable pads of its latch
+# unit a, (10441,15172) and (10441,14955). So eof_w17166 is bc2_w14955: the enable of bc2's latch unit a is
+# NOR(rst_lat, ck_out).
+M 10354,15760 y15738 x10398 y15436 w=14
+@alias bc2_w14955 eof_w17166
