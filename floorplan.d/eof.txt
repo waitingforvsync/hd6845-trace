@@ -237,3 +237,4 @@
 9855,16500:10340,17795   route  a wire from a gate row of the east column to a pad in the bus field | a thin metal with three corners, lying on the reset copy's poly for part of its run without a contact
 10455,16800:10775,17070   logic  set/reset latch on the east column's latch enable | two cross-coupled NOR gates in the ground rail's column: set by the enable, cleared by the reset or a third signal; where its output leaves is not established
 10370,16600:10775,16800   logic  gate on the east column's latch enable and the latch beside it | a two-input NOR in the ground rail's column, its second input a poly column up from the latch; output by a row west to a pad
+10380,16440:10775,16610   logic  inverter driving a wire to the bus field | a pull-down under the ground rail, gated from the unit south by a thin metal and a poly row; output west by a poly row to a pad

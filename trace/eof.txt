@@ -4965,7 +4965,7 @@ D 10500,16684:10604,16706              # the node's band under the rail
 # under the thin metal x 10476-10492 and under bc2_w14955's metal x 10441 (no contact at either: field
 # colours under x 10441 north and south of the row, the metal straight) to an end pad (10397,16692) with a
 # contact (dark ring, bright centre in both metal shots, a green hole in the clean shot). The pad's metal
-# is not found (PORT): no metal leaves it that the views show.
+# runs north on x 10397 to a pad (10397,16562): piece u16560 (run 65; review round 78 found it too).
 B 10495,16680:10520,16712
 P 10397,16691 x10512 w=20
 P 10380,16674:10414,16708
@@ -4977,11 +4977,46 @@ N P 10430,16691 eof_w16692
 # y 16686-16708 runs on east under the plate x 10652-10712, y 16662-16756 into a box under bc2's VCC rail
 # with a contact (10745,16705).
 D 10596,16686:10716,16708
-D 10605,16686:10628,16762
-D 10620,16735:10646,16760
+# review round 78 (geometry only): the link from the band to the box is a neck x 10628-10644, y 16706-16728;
+# the column x 10605-10628 first drawn lies on field
+D 10628,16700:10646,16760
 B 10625,16728:10652,16760
 P 10640,16744 x10660 w=20
 P 10652,16662:10712,16756
 D 10713,16682:10772,16730
 C 10745,16705
 M 10746,16640 y16810 w=48              # the VCC rail, on north from piece u16864's stretch
+# ======================================================================
+# Run 65 (2026-11-23), piece `u16560`: the next unit north in the column, of run 55's build (the gate row
+# crosses under the VSS rail): an inverter, eof_w16560 = NOT eof_w16692.
+# The metal of piece u16692's end pad (10397,16692): a thin metal x 10391-10403 north to an end pad
+# (10397,16562) (tl3_thin.py 10390 10404 16440 16700: dark in both chips only at the two pads' rings; no
+# metal on the track between y 16486 and y 16545, so bc2_w14955's corner (10397,16472) 75 px north is
+# another metal: trap 33). The pad's poly row y 16551-16571 runs east under the metals x 10441 and
+# x 10476-10492 (no contact) and under the rail to a cap at x ~10596: the gate, over the diffusion
+# x 10519-10592 between the node (north, y 16528-16548) and the vss box of the rail contacts (south).
+M 10397,16562 y16692 w=12
+P 10380,16545:10414,16579              # the end pad (10397,16562)
+C 10397,16562 s=20x20
+P 10397,16561 x10596 w=20
+D 10540,16526:10592,16636              # under the rail: the node north of the gate, vss south
+D 10519,16526:10546,16592              # the same west of the rail
+M 10573,16440 y16600 w=50              # the VSS rail, on north
+# The node: a band y 16526-16548 from the west exit under the rail and on east as the load's strip. West
+# exit: a buried contact box (10495-10520, 16506-16546) and the poly row y 16506-16528 west, under the
+# metals x 10476-10492, x 10441, x 10353 (no contact), which is run 62's row of the pad (10266,16560)
+# (its port (10335,16517) is met): the net is eof_w16560.
+D 10503,16520:10716,16548
+B 10495,16506:10520,16546
+P 10335,16517 x10512 w=22
+# The load: the strip runs on east under a plate x 10664-10712, y 16496-16598 into a box under the VCC rail
+# with a contact (10745,16527). The tie: a box (10632-10666, 16556-16592) directly south of the band at
+# the plate's SW corner (walls x 10632-10640 and x 10656-10664, a plain centre x 10644-10652, y 16568-16580,
+# the band's diffusion colour; field west of it at x 10608-10628), with a poly from the plate.
+D 10640,16540:10656,16584
+B 10632,16556:10666,16592
+P 10648,16574 x10672 w=18
+P 10664,16496:10712,16598
+D 10713,16506:10772,16552
+C 10745,16527
+M 10746,16480 y16640 w=48              # the VCC rail, on north
