@@ -1053,6 +1053,11 @@ Nothing is drawn for the box and the transistor is undrawn, so the extraction is
 settle it: tracing that unit (the band's ends; the poly that reads orange north of the box at y
 16256-16259).
 
+Updated 2026-11-23 (`eof` run 67, Kieran Connell): the "poly at y 16256" is the row of `eof_w16213`, from the
+pad (10440,16215) south and east (y 16249-16267) toward `rst_lat`'s unit's west box (port at x 10481), with the
+north end of the thin metal x 10476-10492 on the same net (AMB-060). Whether that poly joins the box is still
+open; it is `eof`'s next work (`rst_lat`'s unit), whose output is probably `eof_w16213`.
+
 ## AMB-059: is the dark spot (10567,17178) on the VSS rail a contact onto the NOR `bc2_w14955`'s node? (2026-11-22)
 
 From `eof` run 55 (Kieran Connell; the block's Ambiguity 217; the reviewer of round 68 measured the same and
@@ -1064,3 +1069,23 @@ contacts 95 px north and 80 px south have the ring and the specks; a contact is 
 both chips. A contact would put the node on `vss`: no gate, and `rst_lat`'s transistor between two grounded
 diffusions; the node also has a load and an exit of its own, which a grounded diffusion would not. Rests on it:
 `bc2_w14955` = NOR(`rst_lat`, `ck_out`). Would settle it: nothing more in these photos.
+
+## AMB-060: is the box (10476-10518, 16980-17012) of the latch node `eof_w16996` contacted by the thin metal x 10476-10492? (2026-11-23)
+
+From `eof` run 63 (Kieran Connell; the block's Ambiguity 219; review round 77). The latch `eof_w16889` /
+`eof_w16996` in `bc2`'s rail column has no other visible exit for `eof_w16996`: no poly leaves the box (rows
+north and south, field west), and the thin metal x 10476-10492 passes over it. Over the box the metal is dark
+for 39 px in both chips, with no bright centre, no widening into a pad, and tan with no green hole in the clean
+shot: trap 22's marks of a pass-over, none of a contact. Against a pass-over: a node needs an exit, and metal
+is present up to the box's edge on both sides. The metal is on the track of `regs`' `lc2_w8450` (pad
+(10484,17994), drawn north to y 17760), and its north end is `eof_w16213` at the pad (10440,16215) (`eof` run
+67), with a poly toward `rst_lat`'s unit. Readings: (a) a contact: `eof_w16996` leaves on this metal, which
+then is not `lc2_w8450` all the way (two metals end to end somewhere, trap 33; R53); (b) a pass-over: the
+metal is another net and the latch's output leaves some other way not yet seen. **Drawn `?C`**: the metal
+over the box only and unnamed, the name on the node's diffusion. Nothing rests on it: both latch equations
+(`eof_w16889` = NOR(`bc2_w14955`, `eof_w16996`), `eof_w16996` = NOR(`rst_a`, `eof_w17345`, `eof_w16889`)) are
+the same either way. Support for (b) (review round 79): the same metal is dark in the same way over the exit
+box of `eof_w16560` (y 16500-16537), which has a poly exit of its own; the metal is dark over a box at each
+unit along it (y 16240-16277, 16500-16537, 16977-17014, 17457-17492, 17716-17754). Would settle it: following
+the thin metal both ways, stretch by stretch (a pink protected strip beside each dark stretch in the clean
+shot, trap 27); finding `rst_lat`'s unit's output (probably `eof_w16213`), and what `eof_w16996` drives.

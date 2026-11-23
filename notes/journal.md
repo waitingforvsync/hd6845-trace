@@ -3190,3 +3190,52 @@ transistor, so a wiring-only net shows only as the count going up; `tools/t.sh e
 
 `out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 996 floor-plan
 blocks. Coverage: 72.9% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
+
+## 2026-11-23 10:50 UTC  Handoffs: `eof` runs 63-68
+
+Four handoff files, applied by the coordinator (on Opus 5.5; coordination, no tracing): Kieran Connell's
+session, on Fable, `eof` runs 63-68 (2026-11-23 06:38 to 08:34 +0000, merged 573d43b, 19501dc, 1788e28,
+85797e3; claim kept through run 66, released with runs 67-68). 15 transistors (run 63's latch 7, runs 64-65's
+NOR and inverter 5, run 68's NOR 3), runs 66-67 wiring; one uncertain item (the latch's exit contact, AMB-060;
+no equation rests on it); review rounds 76-82, three findings that changed a connection (rounds 76, 78, 81),
+all fixed in the same runs. Full extraction after them 2,523 nets (six more than at the last handoffs: two in run
+63, one each in runs 64, 66, 67, 68), 4,831 transistors, 0 errors, 0 warnings; 972 of 1,430 equations firm; 109 nets joined
+only through uncertain items (1,213 items). Spot checks of the overlays (the drawn shapes lie on the
+features): run 63's latch in `metal` and `acid1b` at 1.8x (`cache/scratch/refresh/hR-20261123-eof63.png`),
+and runs 64-68's units and the pad group x 10360-10840, y 15840-16480 at 1x (`hR-20261123-eof67.png`).
+
+What they establish (from the tracer's notes; marks as there):
+
+- **A set/reset latch in `bc2`'s rail column** (run 63, firm): `eof_w16889` = NOR(`bc2_w14955`, `eof_w16996`),
+  `eof_w16996` = NOR(`rst_a`, `eof_w17345`, `eof_w16889`). `bc2_w14955` (= NOR(`rst_lat`, `ck_out`)) sets
+  `eof_w16996`; `rst_a` or `eof_w17345` clears it. Where `eof_w16996` leaves is open (AMB-060).
+- **`eof_w16692` = NOR(`bc2_w14955`, `eof_w16889`), `eof_w16560` = NOT `eof_w16692`** (runs 64-65, firm): the
+  driver of run 62's wire to the bus field, so `eof_w16560` = `bc2_w14955` OR `eof_w16889`. The latch node's
+  "stub" is a poly column in a 26 px gap between two thin metals (new note in trap 38).
+- **`eof_w15955` = NOR(`ck_out`, `eof_w16432`)** at the head of the rail column (run 68, firm), with
+  `eof_w16432` from an undrawn bus metal y 18420-18440 by a 2,000 px thin metal x 10811, the row y 16432 across
+  the column, and the tracks x 10439 / x 10397 (runs 66-67).
+- **`eof_w16213`** (run 67): the pad (10440,16215), the north end of the thin metal x 10476-10492 (`regs`'
+  `lc2_w8450` track) and a poly toward `rst_lat`'s unit (AMB-058's "poly at y 16256"). A contact first drawn
+  at (10441,16260) was a metal corner lying on a poly column's foot (trap 13, review round 81).
+- The rail column's build is read: a gate row from the west, a diffusion strip x 10500-10529, a cap at the
+  rail's edge, the node east under the rail to a load on `bc2`'s VCC rail. Every gate row from y 15911 to
+  y 17040 is now read except `rst_lat`'s (y 16303).
+
+Applied: master list rows `eof` (runs 63-68; a new Next; released), `bc2`-`bc4` (the rail column's rows read,
+its build), `trunks` (continue) (`rst_a`'s row y 16950 is a gate of `eof_w16996`; the undrawn bus metal
+y 18420-18440 east of x 10806). **Re-read list**: R53 extended (the thin metal x 10476-10492's dark stretches
+over boxes, one of which may be two metals end to end; the tracks x 10397 at y 16486-16545 and y 16268-16298;
+x 10441 at y 15790-15822). **Guide**: trap 13 (a metal's corner over a poly column's foot read as a pad with a
+contact) and trap 38 (a 26 px gap between two thin metals can hold a poly column; no earlier block known to be
+affected). **Ambiguities**: AMB-060 new (the block's Ambiguity 219); AMB-058 updated (its "poly at y 16256" is
+`eof_w16213`'s row; the join to the box still open). Corrections sections in the notes of `trunks` and
+`regs`. No rename proposals in these handoffs. Floor plan: the runs' blocks lie inside the coarse
+bottom-centre block; nothing trimmed.
+
+**Not done, proposals left open** (tools): `tools/sameconn.py` reports `connections identical` when a `C`
+becomes `?C` (an item turned uncertain does not show as a difference). The earlier list's three (journal
+2026-11-23 02:37) stand.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 1,002 floor-plan
+blocks. Coverage: 73.0% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.

@@ -262,6 +262,10 @@ Traps, all of them real:
    (found by review round 63). Before calling a poly "one wire with no tap", sample both its flanks for poly
    leaving it (`tools/eof_tee.py h|v`; `tools/eof_teeall.py` for a whole trace file) and look at every hit; the tool is an aid, not a proof (its limits are
    in its docstring). Found 2026-11-21 (R52).
+   And **a metal's corner over the foot of a poly column can look like a pad with a contact**: `eof` run 67
+   drew a contact at (10441,16260), where a thin metal turns over a poly column's foot, from 6-9 px dark bars
+   on three sides and a bright centre; it joined two nets. What told it apart: the metal keeps its 12 px width
+   (a pad widens), and neither chip-1 stripped shot has a hole there. Found 2026-11-23 (`eof` review round 81).
 14. **Where a tool says a line ends, look at the end at 5x in the metal shot.** A line ends
    on a contact; if you see none, the line has turned and the tool missed the corner.
 15. **Crossing fields without pads carry no taps.** In the fields where poly rows cross a
@@ -579,6 +583,12 @@ Traps, all of them real:
    area of the same unit do not separate in chip 2 (metal 165-176/115-118 against 170-185/121-135).
    What decides a gate's extent is the edge line crossing the poly, and the diffusion against both
    of the poly's edges.
+   Likewise **a gap of about 26 px between two thin metals can hold a poly column**: in `bc2`'s rail column
+   (`eof` run 64) a latch node's "stub" turns north as a poly column x 10456-10470 between the metals x 10441
+   and x 10476-10492 and is a gate of the next unit. The clean shot shows it dark red where field is olive;
+   `tools/px.py col` down the gap in both metal shots shows orange without a break, against plain ground
+   between the rows. Read every such gap before calling a row's end a stub. Found 2026-11-23 (`eof` run 64);
+   no earlier block is known to be affected.
 39. **A long row under rails and tracks is not poly because it is pale there.** In the clean shot a
    diffusion wire and a poly row are both pale under metal, and at 1-2x a row that crosses a rail
    field looks like every poly row beside it. The row y 14105-14122 in the left array's left column

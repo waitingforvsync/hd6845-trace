@@ -640,3 +640,13 @@ along the top of the central datapath) is the gap.
 - The poly row y 17772 between x 10075 and the pad (10262,17770), and the poly column x 10225 between y 16820
   and y 16950, each have another net's metal (`eof_w16560`, `eof` run 62) lying on them with no contact: that
   metal is not `rst_a`'s.
+
+## Corrections (coordinator, from the handoffs of `eof` runs 63-68, 2026-11-23)
+
+- `rst_a`'s poly row y 16950 (`P 10470,16950 10225,16950 10225,16820`, drawn to x 10470; "the second is a gate
+  row at x 10540-10585", "the poly along y 16950 east of x 10470, into the bottom-centre logic"): it runs on to a
+  cap at x ~10546 and is a gate of the NOR `eof_w16996` = NOR(`rst_a`, `eof_w17345`, `eof_w16889`) (drawn by
+  `eof` run 63, piece `u16996`), one half of a set/reset latch; it does not cross under the rail.
+- An undrawn bus metal at y 18420-18440, between bus line L4 (y 18385) and L6 (y 18470), runs east from
+  x 10806 (to x 10990 at least); `eof_w16432` (`eof` run 66) joins it from the north at x 10811 by a thin metal
+  x 10804-10817 and is not on `rst_ck`'s contact (10810,18470). Its source is in no trace file.

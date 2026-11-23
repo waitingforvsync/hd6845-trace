@@ -600,3 +600,15 @@ Round 7: no findings.
   run 9); columns 2-7 go north to the data output units instead.
 - `regs_w17462` "to a pad seen at (17065,18010) with a metal on east: not followed": followed (`cdp4` run 11):
   it is `d7_out_n`, into D7's pad cell; the pad's contact is at (17080,18013).
+
+## Corrections (coordinator, from the handoffs of `eof` runs 63-68, 2026-11-23)
+
+- Track x 10485 ("north of that it passes over the boxes and rows of the gate column"; Not done, "`lc2_w8450`'s
+  track x 10485 north of y 17760", "no metal north of y 16300, so the track ends at about y 16340"): the thin
+  metal x 10476-10492 runs north to (10484,16240) and turns west to a pad (10440,16215); that north end is drawn
+  by `eof` (run 67, piece `p16215`) as `eof_w16213`, on a net with a poly toward `rst_lat`'s unit. Whether it is
+  one metal with `lc2_w8450` is not shown: it is dark over a box at each unit between (y 16240-16277,
+  16500-16537, 16977-17014, 17457-17492, 17716-17754). At y 16996 the box is the node of the NOR `eof_w16996`,
+  with no other exit; `eof` draws a `?C` there (AMB-060). If that contact is real, the track is two metals end
+  to end somewhere between y 17024 and y 17760 (trap 33; R53). `regs`' drawn stretch (to y 17760) is not
+  affected.
