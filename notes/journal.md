@@ -3141,7 +3141,7 @@ route blocks lie inside the coarse bottom-centre block; nothing trimmed.
 `out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 988 floor-plan
 blocks. Coverage: 72.9% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
 
-## 2026-11-22 20:37  Handoffs: `eof` runs 55-62
+## 2026-11-23 02:37 UTC  Handoffs: `eof` runs 55-62
 
 Eight handoff files, applied by the coordinator (on Opus 5.5; coordination, no tracing): Kieran Connell's
 session, on Fable, `eof` runs 55-62 (2026-11-22 23:17 to 2026-11-23 01:28 +0000, merged 1fa3bde, 545d59e,

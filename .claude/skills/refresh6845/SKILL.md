@@ -174,7 +174,7 @@ git add out floorplan.txt floorplan.d costs && git commit -m "Refresh: out/ rebu
 
 ## 5. Journal and report
 
-Append a journal entry `## YYYY-MM-DD HH:MM  Refresh` (time from `date`): the renames
+Append a journal entry `## YYYY-MM-DD HH:MM UTC  Refresh` (time from `date -u '+%Y-%m-%d %H:%M'`): the renames
 (old -> new, by batch), what changed in `operation.md`, the extraction and coverage
 figures, and anything left unrenamed on purpose, with the reason. Commit and push it
 (`HD_COORD=1 tools/ship.sh "Refresh: journal" notes/journal.md`). Then report to the

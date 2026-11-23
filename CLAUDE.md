@@ -85,8 +85,10 @@ access). In short:
 
 - **Dates** (user, 2026-11-16: "the journal dates are nonsense"): take the date and time
   from `date`, and when something was done from `git log`. Never advance the date by
-  guess between pieces of work. Journal headings carry date and time (`## YYYY-MM-DD
-  HH:MM  title`).
+  guess between pieces of work. Journal headings carry date and time in UTC, from
+  `date -u '+%Y-%m-%d %H:%M'` (`## YYYY-MM-DD HH:MM UTC  title`; user, 2026-11-23: handoffs from
+  other zones made local-time headings look out of order). Headings before 2026-11-23 are the
+  owner's local time (CST, UTC-6) and carry no zone.
 - **`notes/operation.md`** (user, 2026-11-16): keep it current and readable. It states
   only what the extraction supports, marked firm (`tools/unsure.py --equations` says the
   equation survives without every uncertain item), marked, or open. When a block changes
