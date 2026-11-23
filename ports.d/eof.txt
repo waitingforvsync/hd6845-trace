@@ -243,7 +243,6 @@ eof_w17866     M      9806-9820,17800          ?    piece bus2: the second metal
 eof_w17866     M      10350-10362,17885        ?    piece bus2 (review round 59): the metal x 10356 on south of the T (10356,17866) (follower: to a corner (10364,18387), east, south on x 10397 to a pad about (10397,18427)): not read
 rst_lat        P      10546-10598,17682-17698  out  piece rl (review round 63): the branch row east from rst_lat's column x 10355, under the VSS rail: the gate of an undrawn pull-down (rail diffusion with a contact (10560,17652) north of it, diffusion y 17705-17739 south of it)
 rst_lat        P      10497-10640,16292-16314  out  piece rln: the row of the end pad (10353,16345): the gate of an undrawn transistor (channel about x 10497-10620, the diffusion reaching 20 px east of the rail), ending in a cap x 10624-10640; a dark box north of the cap is read as not joined (eof's Ambiguity 216)
-eof_w17166     P      10492,16640-16662        out  piece o166: the row of the tap pad (10441,16650); the same end as the row y 16864
 ck_out         P      10492,15900-15922        out  piece ckn: the row of the end pad (10311,15912) of ck_out's branch north from the NOR's gate row; on east as a block x 10497-10526 and a patch x 10534-10542 west of the rail: believed a gate, not read
 vcc            M      10722-10770,17120        -    piece u17170: bc2's VCC rail over the load's contact (10745,17165), drawn y 17120-17215 only; runs on north and south
 vcc            M      10722-10770,17390        -    pieces u17170, ld345: the same rail, south end of the drawn stretch (y 17120-17390)
@@ -255,3 +254,4 @@ eof_w16996     M      10476-10492,16960        ?    piece u16996: the thin metal
 eof_w16996     M      10476-10492,17024        ?    piece u16996: the same metal south, toward regs' pad (10484,17994) of lc2_w8450: not followed
 vss            M      10548-10598,16800        -    pieces u16864, u16996: the VSS rail, drawn from y 16800 south to run 55's stretch
 vcc            M      10722-10770,16810        -    pieces u16864, u16996: bc2's VCC rail over these units only (y 16810-17000)
+eof_w16692     M      10397,16692              out  piece u16692: the end pad of the NOR's west exit row; the pad's metal is not found

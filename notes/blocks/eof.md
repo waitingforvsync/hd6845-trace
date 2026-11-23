@@ -1601,7 +1601,8 @@ rests on it).
   pad's metal runs south on x 10683 to an end pad (10683,17038), whose poly row is a gate of the south half.
   **The second pull-down** (found by review round 76, and by the tracer while surveying the south half): a
   poly column x 10588-10608 along the rail's east edge, between the contact box's neck (`vss`) and a tab of
-  the node. A poly stub leaves the node west (to x ~10456) and leads nowhere.
+  the node. A poly leaves the node west to x ~10456 (read as a stub in run 63; run 64: it turns north and is
+  the gate row y 16734 of the unit north, piece `u16692`).
 - **Piece `u16996`** (the south half): the same strip runs on south under `rst_a`'s row y 16942-16962 and
   `eof_w17345`'s row y 17029-17051, each a pull-down, with the node between them and `vss` at both ends
   (the contact box (10553,16907), the arm y 17056-17068). The node runs east under the rail to a diffusion
@@ -1611,12 +1612,27 @@ rests on it).
   latch's output leaves is not established**: the node has a framed box (10476-10518, 16980-17012) under
   the thin metal x 10476-10492, drawn as a contact marked uncertain (Ambiguity 219: by traps 22 and 27 the
   metal's dark stretch over the box is a pass-over as much as a contact, and the metal lies on the track of
-  `regs`' line `lc2_w8450`); `eof_w16889` has only a poly stub.
+  `regs`' line `lc2_w8450`); `eof_w16889` goes on to the unit north (run 64).
 - **The rows' ends are read** (the question left by runs 54-57): the "block x 10497-10526" is the row's
   gate over the strip, the "patch x 10534-10542" its end cap under the rail's west edge, the "dark line
   x 10491-10497" the edge of the thin metal x 10476-10492 that lies over the row.
 - **Checks**: full extraction 2,519 nets, 4,823 transistors, 0 errors, 0 warnings; both equations firm
   (`tools/unsure.py --equations`).
+
+Run 64 (Kieran Connell's session, Claude Fable 5.2; 2026-11-23 07:27 +0000 on). One piece: 3 transistors,
+one new net (`eof_w16692`), no uncertain item.
+
+- **Piece `u16692`: the unit north of the latch is a NOR fed by the latch:
+  `eof_w16692` = NOR(`bc2_w14955`, `eof_w16889`)** (firm). Same build: `bc2_w14955`'s tap row y 16651 and a
+  row y 16725-16745 each gate a pull-down on the strip x 10500-10529, `vss` from the rail contacts
+  (10554,16624) and (10553,16775), the node between them, a band under the rail to a depletion load
+  (contact (10745,16705)).
+- **`eof_w16889`'s "stub" is its output** (correcting run 63): the row y 16822 west of the latch node's
+  buried contact turns north at x ~10463 as a poly column in the 26 px gap between the metals x 10441 and
+  x 10476-10492, and turns east as this unit's row y 16725-16745.
+- The node leaves west: a buried contact, a poly row y 16681-16701 to an end pad (10397,16692). **The pad's
+  metal is not found** (port).
+- **Checks**: full extraction 2,520 nets, 4,826 transistors, 0 errors, 0 warnings.
 
 ## Inventory
 
@@ -6174,6 +6190,45 @@ row's west end), `r64_s5.png` (6x, the column's foot), `r64_s6.png` (6x, the wes
 - **Equation**: `eof_w16996` = NOR(`rst_a`, `eof_w17345`, `eof_w16889`). With the north half: a
   cross-coupled pair.
 
+### Run 64: the unit north of the latch, a NOR of `bc2_w14955` and `eof_w16889` (piece `u16692`)
+
+Views `r64_u1.png` (1.6x, the unit with what is drawn round it), `r64_u2.png` (3.3x, four shots, the strip
+and both rows), `r64_u3.png` (3.8x, the west exit and its end pad), `r64_u4.png` (3.3x, the load), overlay
+`r64_ov1.png`.
+
+- **The poly column x 10456-10470, y 16728-16824** (`tools/px.py col 10464 16600 17064 8 all`): at x 10464
+  the ground is plain (163/140/85 in chip 2's metal shot) at y 16600-16624, 16672, 16712, 16840,
+  16888-16928, 16976-17016; orange (155/115/55, 150/80/45 in chip 1) at each row that crosses (y 16648,
+  16688-16696, 16864, 16952, 17040) and **without a break from y 16728 to y 16824**, dark red in the clean
+  shot there (open poly; a strip of field in such a gap is olive). Its south end is the west end of the
+  row y 16814-16830 from `eof_w16889`'s buried contact (piece `u16864`; review round 76 saw a ring at that
+  row's west end and did not check it); its north end is the west end of the row y 16725-16745
+  (`px.py row 16735 10444 10552 4`: field pink under the metal x 10441, poly from x 10460, salmon under
+  the thin metal x 10476-10488, the gate x 10500-10524, the rail's edge line, the cap x 10536-10540).
+- **The strip** (`px.py col 10515 16596 16812 4 metal,acid,acid1b`): field to y 16608, plain y 16620-16630,
+  `bc2_w14955`'s row (orange) y 16640-16656, plain y 16668-16672, the exit's box y 16680-16708, plain
+  y 16716, the row (orange) y 16728-16744, plain y 16756-16764, field y 16776-16804 (khaki in the clean
+  shot). North of the first gate the strip runs east into the box of the rail contact (10554,16624)
+  (`px.py row 16626 10496 10604 4`: plain x 10504-10536, then the contact, dark in both metal shots with
+  specks in the clean shot, tan round it); south of the second into the box of (10553,16775) (ring in both
+  metal shots, specks, `r64_u2.png`).
+- **Under the rail** (`px.py col 10575 16600 16812 4 metal,acid1b`): tan to y 16632 (the north contact's
+  box), field y 16644-16680, the node's band tan y 16688-16700 between edge lines, field y 16708-16744,
+  tan y 16756-16792 (the south contact's box).
+- **The west exit** (`r64_u3.png`; `px.py row 16691 10340 10500 5`; `tools/textmap.py 10366 16664 10432
+  16718 3`): the box (10495-10520, 16680-16712), a poly row y 16681-16701 west, salmon under the thin metal
+  and under the metal x 10441 (no contact: both metals keep their width, no ring), to an end pad
+  (10397,16692): a dark ring x 10372-10418, a bright centre x 10393-10402 in both metal shots, a green
+  hole in the clean shot. No metal is seen leaving the pad (bare ground north and south of it in both
+  metal shots; `tools/tl5_tracks.py v 10397 16560 16800` passes north of it on ground colour only,
+  trap 30): not resolved.
+- **The load** (`r64_u4.png`): run 55's build. The band leaves the rail's east edge at y 16686-16706, a
+  column x 10605-10628 runs south to y 16762 with a tab into a box (10625-10652, 16728-16760) at the
+  plate's south-west corner (a light centre in the clean shot): the buried contact; the strip runs on east
+  under the plate x 10652-10712, y 16662-16756 (lines across the plate at y 16682 and y 16710, the
+  strip's edges) into the box of the VCC rail's contact (10745,16705) (ring in both metal shots, specks).
+- **Equation**: `eof_w16692` = NOR(`bc2_w14955`, `eof_w16889`) = NOT `bc2_w14955` AND NOT `eof_w16889`.
+
 ## Ports
 
 The net is driven outside the package (by `rdp2`'s NOR). `in` marks the port beyond which the
@@ -6322,12 +6377,13 @@ driver lies; the other three lead to the loads.
 | `bc2_w15388` | poly | (10335, 16378-16400) | ? | piece `d388`: the row of the end pad (10268,16389) of the data line of `bc2`'s latch copy b; on east under the tracks x 10353, x 10397 toward the rail column: not read. The line's north end is `bc2`'s port (10353,15440) (met) |
 | `eof_w16560` | poly | (10335, 16506-16528) | ? | piece `w16560`: the row of the north pad (10266,16560) (a column north, a row east) toward the rail column: not read |
 | `eof_w16560` | poly | (9860, 17767-17787) | ? | piece `w16560`: the row of the end pad (9893,17777), on west: not read |
+| `eof_w16692` | metal | pad (10397, 16692) | out | piece `u16692`: the end pad of the NOR's west exit row; the pad's metal is not found |
 | `eof_w16996` | metal | (10476-10492, 16960) | ? | piece `u16996`: the thin metal over the node's box (10476-10518, 16980-17012), north; on the node only if the contact of Ambiguity 219 is real; the metal runs to about (10481,16212), not followed |
 | `eof_w16996` | metal | (10476-10492, 17024) | ? | piece `u16996`: the same metal south, toward `regs`' pad (10484,17994) of `lc2_w8450` (dark stretches over boxes at y 17169, 17344, 17475, 17735): not followed |
 | `vss` | metal | (10548-10598, 16800) | - | pieces `u16864`, `u16996`: the VSS rail, drawn from y 16800 south to run 55's stretch |
 | `vcc` | metal | (10722-10770, 16810) and (10722-10770, 17000) | - | pieces `u16864`, `u16996`: `bc2`'s VCC rail over these units only |
 | `eof_w17166` | poly | (10492, 16853-16875) | (met) | **read by piece `u16864` (run 63): the gate of the inverter `eof_w16889`; no longer a port.** Before: piece `o166`: the row of the tap pad (10441,16864); on east as a block x 10497-10526 and a patch x 10534-10542 west of the rail (field under the rail): believed a gate over diffusion there, not read |
-| `eof_w17166` | poly | (10492, 16640-16662) | out | piece `o166`: the row of the tap pad (10441,16650); the same end as the row above |
+| `eof_w17166` | poly | (10492, 16640-16662) | (met) | **read by piece `u16692` (run 64): a gate of the NOR `eof_w16692`; no longer a port.** Before: piece `o166`: the row of the tap pad (10441,16650); the same end as the row above |
 | `ck_out` | poly | (10492, 15900-15922) | out | piece `ckn`: the row of the end pad (10311,15912) of `ck_out`'s branch north from the NOR's gate row; on east as a block x 10497-10526 and a patch x 10534-10542 west of the rail (field under the rail): believed a gate, not read |
 | `vss` | metal | (10548-10598, 17054) | - | piece `u17170`: the VSS rail, drawn from y 17054 south; north of it the rail has another unit's contact area at y 17015-17050 |
 | `vcc` | metal | (10722-10770, 17120) and (10722-10770, 17390) | - | pieces `u17170`, `ld345`: `bc2`'s VCC rail, drawn over these two units' load contacts (y 17120-17390); it runs on north (to `bc2`'s end at y 15746, not drawn between) and south |
@@ -11940,6 +11996,11 @@ Round 77: no findings that change a connection.
 
 ## Not done
 
+- **Next (after run 64)**: the unit north of the latch is drawn (piece `u16692`: `eof_w16692` =
+  NOR(`bc2_w14955`, `eof_w16889`)). Open: (a) **the metal of its end pad (10397,16692)**: none seen leaving
+  it; look for a thin metal on the track x 10397 (`bc2_w14955`'s leg x 10397 ends at the corner
+  (10397,16472), 200 px north) and for anything in the clean shot's pink strips round the pad; (b) the unit
+  north of this one (above the contact (10554,16624)); (c) run 63's list.
 - **Next (after run 63)**: the latch of the rail column y 16800-17070 is drawn (pieces `u16864`, `u16996`).
   Open from it: (a) **where the latch's output leaves** (Ambiguity 219): the thin metal x 10476-10492, north to
   about (10481,16212) (a pad group at about (10440,16215)) and south toward `regs`' pad (10484,17994) of

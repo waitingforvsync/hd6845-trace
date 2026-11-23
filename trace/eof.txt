@@ -4876,7 +4876,8 @@ N M 10683,16950 eof_w16889
 # The node's west exit, of run 55's build: a buried contact box (10497-10520, 16812-16838) at the strip's
 # north end and a poly row y 16814-16830 west under the thin metal x 10476-10492 (no contact: the metal's
 # two bars at y 16804-16813 and y 16830-16839 are the row's edges, the same signature as at run 55's row
-# y 17169) to a rounded end at x ~10456, 6 px short of bc2_w14955's metal x 10441: a stub, no pad.
+# y 17169) to x ~10456, 6 px short of bc2_w14955's metal x 10441. Not a stub (run 64): it turns north there
+# as a poly column to the second gate row of the unit north (piece u16692).
 B 10497,16812:10520,16838
 P 10458,16822 x10510 w=16
 # The second pull-down (review round 76): a poly column x 10588-10608 runs along the rail's east edge from
@@ -4938,3 +4939,49 @@ M 10746,16905 y17000 w=48              # the VCC rail, on from piece u16864's st
 P 10600,16943 x10662 w=14
 D 10628,16938:10640,16968
 B 10620,16934:10648,16954
+# ======================================================================
+# Run 64 (2026-11-23), piece `u16692`: the unit north of the latch in the same column, between the rail
+# contacts (10554,16624) and (10553,16775): a two-input NOR, eof_w16692 = NOR(bc2_w14955, eof_w16889).
+# Its second gate row y 16725-16745 is fed by the latch: the "stub" of piece u16864 (the row y 16822 west of
+# eof_w16889's buried contact) does not end at x ~10456 but turns north there as a poly column
+# x 10456-10470 in the gap between the metals x 10441 and x 10476-10492 (orange in both metal shots and
+# dark red in the clean shot at every y from 16728 to 16824: px.py col 10464) and turns east as this row.
+# The build is the latch's: bc2_w14955's row y 16640-16662 (run 56's tap row, drawn on from x 10492) and
+# the row y 16725-16745 each cross the strip x 10500-10529 and end as caps at x ~10546; vss north of the
+# first (the rail contact (10554,16624)'s box) and south of the second (the box of (10553,16775)); the node
+# between them runs east as a band y 16686-16704 under the rail.
+P 10492,16651 x10546 w=22
+P 10463,16822 y16735 w=14
+P 10463,16735 x10546 w=20
+D 10500,16616:10529,16766              # the strip, through under both gates
+D 10529,16606:10600,16636              # the box of the rail contact north
+C 10554,16624
+D 10500,16750:10540,16768              # the strip's south end, into
+D 10532,16752:10586,16794              # the box of the rail contact south
+C 10553,16775
+M 10573,16600 y16800 w=50              # the VSS rail, on north from piece u16864's stretch
+D 10500,16684:10604,16706              # the node's band under the rail
+# The node's west exit: a buried contact box (10495-10520, 16680-16712) and a poly row y 16681-16701 west
+# under the thin metal x 10476-10492 and under bc2_w14955's metal x 10441 (no contact at either: field
+# colours under x 10441 north and south of the row, the metal straight) to an end pad (10397,16692) with a
+# contact (dark ring, bright centre in both metal shots, a green hole in the clean shot). The pad's metal
+# is not found (PORT): no metal leaves it that the views show.
+B 10495,16680:10520,16712
+P 10397,16691 x10512 w=20
+P 10380,16674:10414,16708
+C 10397,16692 s=20x20
+M 10385,16680:10409,16704              # the pad's metal square
+N P 10430,16691 eof_w16692
+# The load, of run 55's build: the band leaves the rail's east edge, a column x 10605-10628 runs south to
+# a tab with a buried contact box (10625-10652, 16728-16760) at the plate's SW corner, and the strip
+# y 16686-16708 runs on east under the plate x 10652-10712, y 16662-16756 into a box under bc2's VCC rail
+# with a contact (10745,16705).
+D 10596,16686:10716,16708
+D 10605,16686:10628,16762
+D 10620,16735:10646,16760
+B 10625,16728:10652,16760
+P 10640,16744 x10660 w=20
+P 10652,16662:10712,16756
+D 10713,16682:10772,16730
+C 10745,16705
+M 10746,16640 y16810 w=48              # the VCC rail, on north from piece u16864's stretch
