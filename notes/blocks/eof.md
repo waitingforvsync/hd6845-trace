@@ -12074,6 +12074,49 @@ contact, an extra pull-down east of the rail as in the latch; the exit row under
 
 Round 78: one finding that changes where a net leaves the package, fixed with one geometry-only finding; a fix check follows with the review of piece `u16560`.
 
+### Round 79 (full review of piece `u16560` and fix check of round 78's corrections to piece `u16692`; runs 64-65; 2026-11-23, ended 07:52 +0000, at commit 2624252)
+
+A fresh reviewer agent (Claude Fable 5.2), briefed with piece `u16560`'s six claims and the neck correction to
+piece `u16692`, and told to suspect: the channel under the row (diffusion all the way, `vss` south, the node
+north, a wrap round the cap, a second gate west of, under or east of the rail); the load's tie box, the
+plate, the VCC contact; the large box of the west exit under the thin metal x 10476-10492's dark stretch
+(traps 22, 27) and the row west as one poly to x 10335 with no pad under three metals; the thin metal x 10397
+as one metal between two real pads and apart from the corner (10397,16472); contacts where the row passes
+under two metals. Images in `cache/scratch/eof/review-79/` (13), with `tools/px.py`, `tools/tl3_thin.py`,
+`tools/railprof.py`, `tools/eof_tee.py`, `tools/sameconn.py`.
+
+- **Finding 1, geometry only (confirmed, fixed)**: the load plate begins at x ~10676 over the strip (poly from
+  x 10676-10679 in all four shots, `px.py row 16535 10652 10724 3`), drawn from x 10664; only its lower part
+  (y 16555-16595) reaches west to the tie box. Now `P 10676,16496:10712,16598` and
+  `P 10664,16556:10712,16598`.
+- **Finding 2, geometry only (confirmed, fixed)**: the strip under the plate has its edge lines at y ~16517
+  and y ~16555 (`px.py col 10695`), drawn y 16520-16548. Now `D 10600,16518:10716,16554` added.
+- **Finding 3, geometry only (confirmed, fixed)**: the VSS rail's contact is one contact area, its ring
+  y 16585-16625; the specks at (10565,16600) and the dot at (10554,16624) are the same contact. Now
+  `C 10556,16606 s=24x34`.
+- **Checked and found correct**: the metal x 10397 unbroken y 16583-16670, the pad (10397,16562) with ring
+  and bright centre in both chips, no metal at y 16540 across the track (apart from the corner
+  (10397,16472)); only 8-10 px edge bars where the metals x 10441 and x 10476-10492 cross the gate row; the
+  cap ending at x ~10597 with field east of the rail; one channel (the diffusion edge across the row at
+  x 10515-10521, diffusion north and south of it, its east edge x ~10590, no wrap); no second poly on the
+  node west of, under or east of the rail; the tie box against the band with no field between, the plate's
+  poly entering its east wall; the VCC contact; the exit row continuous poly from x 10330 to the box, no
+  branches (`tools/eof_tee.py`), bars only under the metals x 10353 and x 10441, the box's interior plain;
+  round 78's neck (diffusion colour unbroken y 16692-16725 into the box wall; the old column field);
+  `tools/sameconn.py 0b3737a`: three differences, all intended.
+- **Not checked by the reviewer**: the thin metal x 10476-10492 over the exit box: dark for 38 px
+  (y 16500-16537) in both chips, no full-bright centre, no widening, no green hole: it reads as a pass-over,
+  the same as the box of Ambiguity 219 (noted there by the tracer: this box has a poly exit of its own, so
+  the pass-over reading is the natural one here); whether the diffusion west of the rail joins that under it
+  at x 10540-10548 (the rail's edge line hides it; no edge in the stripped shot); a stretch that
+  `tools/railprof.py` calls diffusion under the rail at y 16459-16491 (field at y 16492-16532 separates it
+  from the node; the tracer's `px.py col 10572 16490 16640 4` has mottled field at y 16490-16518).
+- **Proof that the fixes changed no connection** (against 2624252):
+  `tools/t.sh eof sameconn.py 2624252`: `connections identical`;
+  `.venv/bin/python tools/sameconn.py 2624252`: `connections identical`.
+
+Round 79: no findings that change a connection.
+
 ## Not done
 
 - **Next (after run 65)**: `eof_w16560` has its driver (piece `u16560`). Open: (a) the units north of it in

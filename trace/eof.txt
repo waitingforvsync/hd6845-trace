@@ -4955,7 +4955,7 @@ P 10463,16822 y16735 w=14
 P 10463,16735 x10546 w=20
 D 10500,16616:10529,16766              # the strip, through under both gates
 D 10529,16606:10600,16636              # the box of the rail contact north
-C 10554,16624
+C 10556,16606 s=24x34                   # review round 79: one contact area, ring y 16585-16625
 D 10500,16750:10540,16768              # the strip's south end, into
 D 10532,16752:10586,16794              # the box of the rail contact south
 C 10553,16775
@@ -5016,7 +5016,11 @@ P 10335,16517 x10512 w=22
 D 10640,16540:10656,16584
 B 10632,16556:10666,16592
 P 10648,16574 x10672 w=18
-P 10664,16496:10712,16598
+# review round 79 (geometry only): over the strip the plate begins at x ~10676; only its lower part
+# (y 16556-16598) reaches west to the tie box; the strip's edges under it are y ~16517 and y ~16555
+P 10676,16496:10712,16598
+P 10664,16556:10712,16598
+D 10600,16518:10716,16554
 D 10713,16506:10772,16552
 C 10745,16527
 M 10746,16480 y16640 w=48              # the VCC rail, on north
