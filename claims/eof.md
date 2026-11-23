@@ -10,4 +10,4 @@ merged, or by `tools/claim.py release` if it is abandoned.
 | Region | 10380-10780 x 16990-17280 |
 | What | eof run 55: the column of bc2's VSS rail x 10548-10598 between y 17036 and y 17260 as one piece (the rail diffusion with its rail contact (10560,17083), rst_lat's gate y 17119-17132, the diffusion y 17140-17199, the gate row y 17206-17219, the contact (10562,17255)) and the east end of eof_w17345's row y 17040; with what the unit has east of the rail |
 | Branch | eof |
-| Status | tracing (part merged 1fa3bde at 2026-11-22 23:54 +0000) |
+| Status | tracing (part merged 545d59e at 2026-11-23 00:11 +0000) |
