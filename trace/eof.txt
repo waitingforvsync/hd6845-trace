@@ -4733,3 +4733,18 @@ P 10337,15764:10371,15798            # the hop's north pad (10354,15781)
 C 10354,15781 s=20x20
 M 10354,15781 y15755 w=18
 N M 10397,16400 eof_w17166
+# ======================================================================
+# Run 57 (2026-11-23), piece `ckn`: ck_out's branch north of run 55's port (10268,17150). The thin metal of
+# the end pad (10267,17214) runs north on x 10268 to a corner (10268,16910), east to a corner (10311,16910)
+# and north on x 10311 to an end pad (10311,15912): one metal (two-chip test on every leg; chip 1 has a
+# stain over x 10290-10330, y 16840-16920, chip 2 shows the metal through it). 15 px south of the corner's
+# east end lies the ring of trunks' pad (10310,16950), the north end of another metal on the same track
+# position: not joined (30 px without metal between). The end pad's poly row runs east, y 15900-15922, under
+# eof_w17166's metal x 10353 and the thin metals x 10441, x 10485 (no contact) toward the rail column;
+# drawn to x 10492 (PORT: it goes on as a block x 10497-10526 and a patch x 10534-10542 west of the rail,
+# the end that eof_w17166's two rows and eof_w17345's row have: not read).
+M 10268,17155 y16910 x10311 y15912 w=14
+P 10294,15895:10328,15929            # end pad (10311,15912)
+C 10311,15912 s=20x20
+P 10311,15911 x10492 w=22
+N M 10311,16400 ck_out

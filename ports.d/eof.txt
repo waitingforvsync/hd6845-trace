@@ -248,6 +248,6 @@ eof_w17345     P      10492,17029-17051        out  piece o345: the drawn end of
 eof_w17166     M      10345-10365,15755        out  piece o166: the metal of the pad (10354,15781) north of the hop from the output metal's end pad (10354,15867); on north into a staircase of three metals at y ~15740: not read
 eof_w17166     P      10492,16853-16875        out  piece o166: the row of the tap pad (10441,16864); on east as a block x 10497-10526 and a patch x 10534-10542 west of the rail: believed a gate, not read
 eof_w17166     P      10492,16640-16662        out  piece o166: the row of the tap pad (10441,16650); the same end as the row y 16864
-ck_out         M      10261-10275,17150        out  piece u17170: the thin metal of the end pad (10267,17214) of the NOR's gate row, north to a corner (10269,16906), east, north on x 10311 to about (10310,15908): not read
+ck_out         P      10492,15900-15922        out  piece ckn: the row of the end pad (10311,15912) of ck_out's branch north from the NOR's gate row; on east as a block x 10497-10526 and a patch x 10534-10542 west of the rail: believed a gate, not read
 vcc            M      10722-10770,17120        -    piece u17170: bc2's VCC rail over the load's contact (10745,17165), drawn y 17120-17215 only; runs on north and south
 vcc            M      10722-10770,17215        -    piece u17170: the same rail, south end of the drawn stretch

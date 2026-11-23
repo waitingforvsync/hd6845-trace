@@ -229,3 +229,4 @@
 10335,16285:10605,17550   route  rst_lat (reset copy) north to two gates of the bottom-centre east column | a thin metal with a tap and an end pad; each pad's poly row is the gate of a transistor under the ground rail (not drawn)
 10420,17050:10775,17260   logic  NOR of ck_out and the reset copy rst_lat | two pull-downs under the ground rail, the load east of it on the supply rail; the output (NOT ck_out outside reset) leaves west to a pad and north on a thin metal
 10335,15755:10495,16890   route  the clock-and-reset NOR's output north | a thin metal with two tap pads (rows east toward the ground rail's units) and two corners to an end pad, a poly hop north to a pad, on north
+10255,15890:10495,17160   route  ck_out north from the clock-and-reset NOR's gate row | a thin metal with one jog to an end pad; the pad's poly row east toward the ground rail's column
