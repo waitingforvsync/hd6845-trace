@@ -4787,3 +4787,24 @@ P 10163,16111:10197,16145            # end pad (10180,16128)
 C 10180,16128 s=20x20
 P 10180,16128 x10150 w=20
 N M 10300,15828 bc2_w15432
+# ======================================================================
+# Run 61 (2026-11-23), piece `d388`: the data of bc2's latch copy b followed south from bc2's port
+# (10353,15440). bc2's metal x 10353 of the pad (10352,15388) runs on south to a corner (10353,15698), west
+# to a corner (10311,15698), south to a corner (10311,15740) and west onto a pad (10268,15738); a poly hop
+# south, x 10258-10278, under the enable metal of piece en432 (y 15821-15836, no contact) to a pad
+# (10268,15868); that pad's thin metal x 10268 south to an end pad (10268,16389) (two-chip test on every leg:
+# only 8-12 px edge bars; south of the end pad the track has no metal for 160 px, then another metal from a
+# pad at about (10268,16562): not this net). The end pad's poly row runs east, y 16378-16400, under ck_out's
+# metal x 10311 (no contact); drawn to x 10335 (PORT: it runs on east under the tracks x 10353, x 10397
+# toward the rail column, not read).
+M 10353,15436 y15698 x10311 y15740 x10268 w=14
+P 10251,15721:10285,15755            # the hop's north pad (10268,15738)
+C 10268,15738 s=20x20
+P 10268,15738 y15868 w=20
+P 10251,15851:10285,15885            # the hop's south pad (10268,15868)
+C 10268,15868 s=20x20
+M 10268,15868 y16389 w=13
+P 10251,16372:10285,16406            # end pad (10268,16389)
+C 10268,16389 s=20x20
+P 10268,16389 x10335 w=22
+N M 10268,16100 bc2_w15388

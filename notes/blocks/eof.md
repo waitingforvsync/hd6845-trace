@@ -1561,6 +1561,18 @@ with a contact, no transistor, no uncertain item).
   is a gate or this row.
 - **Checks**: full extraction 2,516 nets, 4,816 transistors, 0 errors, 0 warnings.
 
+Run 61 (Kieran Connell's session, Claude Fable 5.2; 2026-11-23 00:55 +0000 on). One piece, wiring only (three
+pads with contacts, no transistor, no uncertain item).
+
+- **Piece `d388`: the data of `bc2`'s latch copy b followed south.** `bc2`'s metal x 10353 of the data pad
+  (10352,15388) (its port `bc2_w15388` (10353,15440), "south, not followed") runs on to a corner
+  (10353,15698), west, south to (10311,15740) and west onto a pad (10268,15738); a poly hop south under the
+  enable metal of piece `en432` to a pad (10268,15868); a thin metal x 10268 south to an end pad
+  (10268,16389), whose poly row runs east toward the rail column, drawn to x 10335 (port). **No driver yet**:
+  the row's far end is not read. `rst_a`'s metal, whose corner (10312,15654) lies 30 px north of this line's
+  corner on the same track position, is separate.
+- **Checks**: full extraction 2,516 nets, 4,816 transistors, 0 errors, 0 warnings.
+
 ## Inventory
 
 | Piece | Where | What |
@@ -5920,6 +5932,44 @@ shots, the end pad).
   x 10130-10150: 10 px of open poly between its end and the pad's ring; tracing guide, traps 13 and 30).
   Drawn to x 10150 (port). Field east and south of the pad.
 
+### Run 61: the data line of `bc2`'s latch copy b, south (piece `d388`)
+
+Views `r61_d1.png` (2.4x, both metal shots, the staircase), `r61_gap.png` (5.5x, both metal shots: `rst_a`'s
+corner and this line's), `r61_hop.png` (3.3x, three shots, the hop), `r61_end.png` (3x, three shots, the end
+pad), overlay `r61_ov1.png` (3x).
+
+- **The metal from `bc2`'s stub** (`M 10353,15372 y15440`): `tools/tl5_tracks.py v 10353 15430 15700`: only
+  8-12 px edge bars (y 15550-15558, 15573-15582, 15593-15605, 15614-15624: the poly rows it crosses, no hole
+  in the clean shot) down to a corner at y ~15698; `h 15698 10280 10380`: metal from x 10305 to x 10361, none
+  either side; `v 10311 15670 15780`: metal y 15692-15746; `h 15740 10225 10330`: metal from the pad's ring
+  to x 10317, none east. Beyond the corners: `v 10353 15700 15760`: none south (y 15705-15734);
+  `h 15698 10230 10305`: none west; `h 15740 10315 10380`: none east.
+- **`rst_a`'s metal is separate** (`r61_gap.png`; tracing guide, trap 33). `rst_a`'s L (drawn in this file:
+  east along y 15654, north on x 10312) has its corner at (10312,15654); this line's corner is at
+  (10311,15698) on the same track position. `tools/px.py col 10311 15640 15704 3 metal,metal1,acid1b`:
+  metal to y 15661, bare ground y 15667-15682 (138-179/129-143/76-90 in chip 2, 114-155/109-122/58-82 in
+  chip 1; the clean shot open, 86-113/68-141/55-97), metal again from y 15691, with each metal's own dark
+  outline (y 15664, y 15685-15688) in both chips.
+- **The hop** (`r61_hop.png`): the pad (10268,15738) (ring and bright centre in both metal shots, a hole in
+  the clean shot; `tl5_tracks.py h 15740`: hole at x 10268); the metal arrives from the east and ends on it
+  (none west, x 10231-10261). Its poly runs south as a column x 10258-10278 (`tl5_tracks.py v 10263 15750
+  15860`: no metal on it but the crossing metal at y 15826-15828; open ground in the clean shot at y 15782)
+  under piece `en432`'s metal y 15821-15836 (review round 73: that metal keeps its width over this column,
+  no ring, no hole) to the pad (10268,15868) (ring, bright centre, a hole in the clean shot at y 15872).
+- **The lower metal** x 10262-10275 from that pad south: `tools/follow.py 10268 15920 S --gap 16` ends at
+  (10268,16366); `tl5_tracks.py v 10268 15840 16900`: metal y 15890-16366 with no stretch without, the end
+  pad's rings y 16367-16384 and beyond; **south of the end pad no metal for 160 px (y 16394-16557)**, then
+  another metal from a pad pattern at y ~16562 (hole in the clean shot at y 16564) down to y 16874: that is
+  the metal review round 70 saw end north of `ck_out`'s corner; not this net.
+- **The end pad** (contact (10268,16389); `tools/px.py col 10268 16340 16420 4`: metal to y 16364, ring
+  y 16368-16380, bright centre y 16384-16392, ring y 16396-16408; `r61_end.png`: ring and bright centre in
+  both metal shots, a hole in the clean shot). Its poly row runs east, y 16378-16400: under `ck_out`'s metal
+  x 10311 (`tools/px.py row 16389 10280 10345 5`: the metal bright at x 10310-10315 between the row's open
+  stretches; review round 70 found the bars at y 16372-16404 on that metal to be a poly row's edges, no hole).
+  Drawn to x 10335 (port); it runs on east under the tracks x 10353, x 10397 (`bc2_w14955`'s legs: run 56's
+  two-chip tests have only edge bars at y 16373-16403) toward the rail column, not read. Field west of the
+  pad (`rst_a`'s track x 10225 passes 30 px west).
+
 ## Ports
 
 The net is driven outside the package (by `rdp2`'s NOR). `in` marks the port beyond which the
@@ -6065,6 +6115,7 @@ driver lies; the other three lead to the loads.
 | `rst_lat` | poly | (10546-10598, 17682-17698) | out | piece `rl` (review round 63): the branch row from the column x 10355, under the VSS rail: the gate of an undrawn pull-down (rail diffusion with a contact (10560,17652) north of it, diffusion y 17705-17739 south of it) |
 | `bc2_w14955` (= `eof_w17166`) | metal | onto `bc2`'s metal at (10391-10405, 15440) | - | piece `o166n`: the NOR's output metal north of the pad (10354,15781) joins `bc2`'s stub `M 10398,15386 y15440`; no port (joined by geometry) |
 | `bc2_w15432` | poly | (10150, 16118-16138) | ? | piece `en432`: the row of the end pad (10180,16128) of the enable metal of `bc2`'s latch copy b; on west under a metal lying on it (from x ~10145): not read. The metal's north end is `bc2`'s port (10441,15665) (met) |
+| `bc2_w15388` | poly | (10335, 16378-16400) | ? | piece `d388`: the row of the end pad (10268,16389) of the data line of `bc2`'s latch copy b; on east under the tracks x 10353, x 10397 toward the rail column: not read. The line's north end is `bc2`'s port (10353,15440) (met) |
 | `eof_w17166` | poly | (10492, 16853-16875) | out | piece `o166`: the row of the tap pad (10441,16864); on east as a block x 10497-10526 and a patch x 10534-10542 west of the rail (field under the rail): believed a gate over diffusion there, not read |
 | `eof_w17166` | poly | (10492, 16640-16662) | out | piece `o166`: the row of the tap pad (10441,16650); the same end as the row above |
 | `ck_out` | poly | (10492, 15900-15922) | out | piece `ckn`: the row of the end pad (10311,15912) of `ck_out`'s branch north from the NOR's gate row; on east as a block x 10497-10526 and a patch x 10534-10542 west of the rail (field under the rail): believed a gate, not read |
@@ -11499,6 +11550,10 @@ Round 73: no findings.
 
 ## Not done
 
+- **Next (after run 61)**: the data of `bc2`'s latch copy b (`bc2_w15388`) is drawn from `bc2`'s pad to an end
+  pad (10268,16389) and its row to x 10335 (piece `d388`). Open: the row east of x 10335 (toward the rail
+  column at y 16378-16400; run 53's `rst_lat` row y 16292-16314 is the next row north there); the other
+  metal on the track x 10268 from a pad at about (10268,16562) south to y 16874, turning west.
 - **Next (after run 60)**: the enable of `bc2`'s latch copy b (`bc2_w15432`) is drawn from `bc2`'s pads to an
   end pad (10180,16128) and its row to x 10150 (piece `en432`). Open: the row west of x 10150 (under a metal
   lying on it from x ~10145; where it ends, what drives it), and that metal (an arm south at x 10130-10150).
