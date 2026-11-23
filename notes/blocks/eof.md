@@ -11471,6 +11471,32 @@ extraction and `tools/unsure.py`.
 
 Round 72: no findings.
 
+### Round 73 (full review; run 60, piece `en432`; 2026-11-23 00:55 to 01:05 +0000, at commit db9793a)
+
+A fresh reviewer agent (Claude Fable 5.2), briefed with the piece's five claims and told to suspect: two metals
+end to end at the pad (10441,15650) or on a leg (trap 33); each corner as a tee, and above all a join of the
+corner (10393,15788) to the pad (10354,15781) of `bc2_w14955` (traps 30, 32); a contact where the metal crosses
+the three poly columns on y 15828; the end pad all round and the metal lying on its row west of x 10145 (traps
+16, 30). Images in `cache/scratch/eof/review-73/` (4x to 4.5x, both metal shots, the clean shot for what lies
+under), with `tools/tl5_tracks.py`, `tools/px.py`, `tools/textmap.py` and the full extraction.
+
+- **No findings.** Checked and found correct: one metal on every leg (only 8-10 px edge bars and the two pads'
+  rings; a dark spot across the metal at (10437-10450,15700) is in chip 2 only, chip 1 bright and the clean
+  shot's protected strip unbroken: a blemish); the metal through the pad (10441,15650) (metal at x 10438-10446
+  in both chips on rows y 15627 and y 15677, rings y 15632-15646 and y 15658-15673); no metal beyond any
+  corner ((10441,15788): none south y 15790-15822 or east; (10393,15788): none north y 15748-15780, so 33 px
+  of bare ground to `bc2_w14955`'s metal on the same track, and none west; (10393,15828): none east
+  x 10404-10435; (10180,15828): none north or west); the pads (10354,15781) and (10432,15825) separate (field
+  bands in both metal shots, separate protected areas in the chip-2 stripped shot); at the three poly columns
+  the metal keeps its width, bright between the edge bars, no ring, no hole (the undrawn column x 10255-10285
+  runs from open poly in the north to a pad at about (10265,15868)); the end pad's contact, the metal ending
+  on it, the row west only, field east and south; the metal on the row ends at x ~10144 with open poly at
+  x 10156-10160 between two dark edges: separate from the pad; the extraction (0 errors, 0 warnings).
+- **Not checked**: `tools/unsure.py` (the tracer ran it: nothing for this net; no `?` item in the piece); the
+  row west of x 10150 and whether the metal lying on it contacts it; `bc2`'s metal north of y 15620.
+
+Round 73: no findings.
+
 ## Not done
 
 - **Next (after run 60)**: the enable of `bc2`'s latch copy b (`bc2_w15432`) is drawn from `bc2`'s pads to an
