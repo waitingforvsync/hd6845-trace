@@ -1442,7 +1442,7 @@ errors, 0 warnings; 777 of 1,124 equations firm.
 
 - **Master list.** `dbus` partial, 127 transistors, claim released by its tracer; the queue row
   `dbus (continue)` now lists only the wiring left (`d2_out_n`..`d7_out_n`, the drivers of
-  `cdp3_n_c7` and `d1_out_n`, `d7_in`, the capacitor taps, `d_hiz`'s driver, AMB-021). `r9c`: its
+  `rd_b0` and `d1_out_n`, `d7_in`, the capacitor taps, `d_hiz`'s driver, AMB-021). `r9c`: its
   units' loads are traced (in `trace/dbus.txt`, cell `dbus_r9l`).
 - **AMB-012** resolved for the loads and the rails (the east rail is VCC): `ra#_cmp` = NOT `ra#_drv_in`.
   Left: `r9c`'s `?B` ties at the units' west ends. Notes of `r9c`, its floor-plan line, the glossary
@@ -1464,7 +1464,7 @@ claim kept).
 
 - Master list: `dbus` down to AMB-021 and a look along `d_hiz` inside its region; what leaves it
   went to `busC` (`d6_out_n`, `d7_out_n`, `d7_in`, `d7_c`, `d_hiz`'s driver) and `bd2` (rest) (the
-  drivers of `d1_out_n`..`d5_out_n` and `cdp3_n_c7`, a second staircase of pads). `tc1` done
+  drivers of `d1_out_n`..`d5_out_n` and `rd_b0`, a second staircase of pads). `tc1` done
   (54 transistors, 41 nets). `tcw`'s south end complete; its region is now x 6380-6760. `tl1`: the
   west column is two latches in series in front of `rcs_e4`'s NOR (marked).
 - **AMB-020** grew: `tcw` drives the row `tc1_x1_u`, and with `tc1`'s alias the extraction gives
@@ -1837,7 +1837,7 @@ Closed with the count noted in the comment.
 - The bits 4-7 latches and bus drivers (its `trace/dbus_h.txt`) against Tom's `dlat`: all 40
   transistors pair up within 25 px, and every gate and channel terminal is on the same named net. That
   is an independent confirmation of `dlat`.
-- Its `dbus_n9` is `dbus`'s `d0_out_n` = NOT `cdp3_n_c7`, the same two transistors.
+- Its `dbus_n9` is `dbus`'s `d0_out_n` = NOT `rd_b0`, the same two transistors.
 - Not merged:
   - it rewrites `dbus`'s files, which Tom has since traced;
   - dp111's cost report shows part of this work on Opus (Fable-only rule; no further non-Fable merges).

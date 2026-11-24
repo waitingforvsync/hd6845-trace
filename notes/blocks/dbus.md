@@ -47,7 +47,7 @@ Traced, extracting (127 transistors, 85 nets, 0 errors, 0 warnings), overlay-che
     down the channel, west on chain 1's "line 2" and south on a 6,140 px metal to a poly
     that leaves the region west at (16950,16344): its driver is west of the column, not at
     the column's foot like D0's.
-  - **correction to run 3**: `cdp3_n_c7` does not come from the west edge. Its poly ends
+  - **correction to run 3**: `rd_b0` does not come from the west edge. Its poly ends
     on a pad (16993,16451), and a metal from that pad runs south and then west out of the
     region at (16950,16712).
 
@@ -334,7 +334,7 @@ units there at about y 13950-14300, 14400-14700, 14900-15200 and 15400-15700.
 
 Traced (run 3; `g9.png`, `g9b.png` at 3-3.3x, overlay `ov9.png`):
 
-    d0_out_n = NOT cdp3_n_c7
+    d0_out_n = NOT rd_b0
 
 - Pull-down under the end of the VSS rail (the rail ends at y 16552): gate band
   y 16444-16463, from the region's west edge (16950,16453) under the metals to x 17418;
@@ -353,14 +353,14 @@ Traced (run 3; `g9.png`, `g9b.png` at 3-3.3x, overlay `ov9.png`):
   pad (17600,8103), and in metal north up the channel to `dpad`'s contact (17597,7492) on
   D0's `out_n` poly (`follow.py`: one piece 7492-8134; `thin_top.png`, 4.4x, two shots).
   **Joined**: with `dpad` loaded the extraction has `d0_pu` = NOR(`d_hiz`, `d0_out_n`)
-  with `d0_out_n` = NOT `cdp3_n_c7`.
+  with `d0_out_n` = NOT `rd_b0`.
 - Along the column the thin metal is 16 px wide and dim, and the follower's metal test
   does not see it (trap 19). A profile of its core (x 17444-17454) in both metal shots from
   y 8100 to 16570 is dim (R < 150 for more than 14 px) only where the trace has poly or a
   buried-contact box under it, repeating with the cells; review round 1 of run 2 found
   it continuous, 16 px wide, with no pad from y 8110 to 13700.
 
-What `cdp3_n_c7` is: the data that the chip puts on D0, in true sense (the pad is NOT
+What `rd_b0` is: the data that the chip puts on D0, in true sense (the pad is NOT
 `d0_out_n`). Its poly (y 16444-16463) starts on a pad (16993,16451), box 16977-17012 x
 16435-16468, with a bright contact centre in the metal shot; the stripped shot has no edge
 at x 16960 on that y, so nothing goes on west (run 3 drew the poly to the region's edge:
@@ -668,7 +668,7 @@ keep the two in step.
 | `d6_in` | poly | pad (17838,16519) under the metal from D6's protection node | in | pin D6 (alias of `d6`) |
 | `d7_in` | poly under the VCC rail, x 17531-17548 | leaves south at (17540,17000) | in | believed pin D7; not followed to the pad |
 | `d7_c` | metal | leaves west at (16950,16758) | - | chain 7's c tap, probably to a capacitor; not followed |
-| `cdp3_n_c7` | metal | leaves west at (16950,16712), from the pad (16993,16451) at the west end of the poly y 16444-16463 | in | input of the inverter that drives `d0_out_n` |
+| `rd_b0` | metal | leaves west at (16950,16712), from the pad (16993,16451) at the west end of the poly y 16444-16463 | in | input of the inverter that drives `d0_out_n` |
 | `d1_out_n` | poly y 16334-16355 | leaves west at (16950,16344) | in | D1's output data line; drawn from here to D1's pad cell |
 | `d0_out_n` | metal x 17591-17609 | joins `dpad`'s metal at (17600,7565) | out | D0's output data line (the thin metal) |
 | `d2_out_n` | poly y 16203-16225 | leaves west at (16950,16214); joins `dpad`'s strip 4 of D2's cell at (17801-17812, 10954-10962) | in | D2's output data line; drawn from here to D2's pad cell |
@@ -948,11 +948,11 @@ the `d_hiz` metal on D5's poly and its corners; each node metal's reach to its p
 second pad's join to the gate band; branches or breaks along the channel runs;
 `d1_out_n`'s join to the pad cell's strip, its corner, the Z-step (trap 10), the long
 metal's candidate taps, a bridge at the metal's step, the end pad; whether anything goes on
-west of `cdp3_n_c7`'s pad. It read unit 1 at 4x in three shots and unit 0 at 4x, profiled
+west of `rd_b0`'s pad. It read unit 1 at 4x in three shots and unit 0 at 4x, profiled
 the rail-band-wide-metal joins in both metal shots, ran `cellcheck.py` on the loads (units
 2-4: 0.96-0.98, unit 0: 0.92), viewed the tops of all four input lines at 3.6-4.6x and the
 channel runs of D2-D4 end to end, the pads and jumpers at 3.6-4x, and every junction of
-`d1_out_n` and `cdp3_n_c7`.
+`d1_out_n` and `rd_b0`.
 
 No finding changes a connection. Two points:
 
@@ -981,7 +981,7 @@ No finding changes a connection. Two points:
   x 17230-17236 from y 9593 to 9628 in chip 2, field beyond both stubs in the clean shot),
   no tap at any candidate (chain 4's rectangle has its own contact at (17188,14155)), the
   metal's step clear of its neighbour, the end pad, no contact under the metal
-  x 16940-16960; field west of `cdp3_n_c7`'s pad in all shots.
+  x 16940-16960; field west of `rd_b0`'s pad in all shots.
 - Not checked: the 6,140 px metal between its candidates (`follow.py` only); line 1 under
   the rails in chip 2 (fringes; read in the clean shot); `r9c`'s `?B` boxes; the VCC metal
   north of y 4520.
@@ -1187,7 +1187,7 @@ there).
   is `areg`'s right-hand column down to y 14700 and `bd2`'s below; `db_b4`..`db_b7` are
   expected to be driven there. First thing to try: `findcell` with `dbus_lat`
   (17230 8885 17590 9370) and `dbus_drv` restricted to 16450,13900:16850,15750.
-- `cdp3_n_c7` west of (16950,16712) (metal; see its section) and `d1_out_n` west of
+- `rd_b0` west of (16950,16712) (metal; see its section) and `d1_out_n` west of
   (16950,16344) (poly): both drivers are outside the region.
 - `d6_out_n`, `d7_out_n`: not drawn, and not in this region: both leave their pad cells
   south of y 17000 (`busc`'s area). Seen in run 5 (`s5_d67cell.png`, 2.6x, both stripped
@@ -1199,7 +1199,7 @@ there).
   `d2_out_n`..`d5_out_n` are drawn to their end pads (run 5); the poly
   that leaves each end pad west (y 16214, 16085, 15954, 15826) goes into the column west
   of x 16950 (`bd2`'s right-hand column), where their drivers must be, with D1's
-  (16950,16344) and `cdp3_n_c7`'s metal.
+  (16950,16344) and `rd_b0`'s metal.
 - `d7_in` south of y 17000 to D7's protection; `d7_c`'s metal west of x 16950.
 - Seen in run 5 and not looked at: a second staircase of pads with polys west lies
   between the end pads of `d2_out_n`..`d5_out_n` (about (16862,15990), (16905,16125),
@@ -1224,10 +1224,10 @@ there).
 
 ## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
 
-- `cdp3_n_c7`'s metal ("west at y 16702-16722 out of the region (follow.py: on west to x 16795, then south
+- `rd_b0`'s metal ("west at y 16702-16722 out of the region (follow.py: on west to x 16795, then south
   to (16797,17434))", here and in `trace/dbus.txt`'s comment): drawn by `cdp4` run 7: it is the read bus's
-  column 7 (`cdp3_n_c7`), from the read multiplexers of R12-R17; `@alias cdp3_n_c7 input`, so `d0_out_n`
-  = NOT `cdp3_n_c7`.
+  column 7 (`rd_b0`), from the read multiplexers of R12-R17; `@alias rd_b0 input`, so `d0_out_n`
+  = NOT `rd_b0`.
 - "The driver is west of the column" for `d1_out_n`..`d5_out_n`: the drivers are the five inverters of
   `cdp4`'s cell `cdp4_ro` (run 8); each row is drawn on from this block's end to its buried contact.
 - Not done, "`d6_out_n`, `d7_out_n`: not drawn, and not in this region": both are drawn (`cdp4` runs 9-11):

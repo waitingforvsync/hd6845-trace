@@ -27,7 +27,7 @@ followed from the row's west end to gate 1 of the NAND beside `cdp3`'s row C. Wi
 Run 4 (2026-11-21 14:07 -0600): **the read bus** (x 10840-11230, y 10343-18305; wiring only, 16 contacts, no transistor, no
 uncertain item): the selector's eight output rows `cdp4_n_s0`..`s7` each end east of the array on a pad
 with a contact on one thin metal track, and the same track starts on the end pad of `cdp3`'s bus N row
-`cdp3_n_c#` of the same column: **R12-R17 are read onto one 8-bit bus** (`cdp3_n_c#`, with `cdp4_n_s#` an
+`rd_b(7-#)` of the same column: **R12-R17 are read onto one 8-bit bus** (`rd_b(7-#)`, with `cdp4_n_s#` an
 alias). Each track runs on south to a corner in the bottom bus field and turns east. With every file
 loaded: 2517 nets, 4782 transistors, 0 errors, 0 warnings. See "The read bus" under Logic.
 
@@ -46,37 +46,37 @@ bus, the turn north" under Logic.
 
 Run 7 (2026-11-21 15:06 -0600): **the read bus's six tracks north to their ends: column 7 is data bit 0** (wiring only, five
 pads with contacts, no transistor, no uncertain item). Column 7's track turns east onto the metal `dbus`
-draws from the pad of `cdp3_n_c7`, the gate of D0's output chain: **`d0_out_n` = NOT `cdp3_n_c7`** in the
+draws from the pad of `rd_b0`, the gate of D0's output chain: **`d0_out_n` = NOT `rd_b0`** in the
 extraction (firm). Columns 2-5 end on pads in the staircase beside `dbus`'s `d5_out_n`..`d2_out_n` pads,
 each with a poly row west toward a column of five units; column 6 ends on a pad whose poly goes round to
 the fifth unit. With every file loaded: 2516 nets, 4796 transistors, 0 errors, 0 warnings. See "The read
 bus, north to the output units" under Logic.
 
 Run 8 (2026-11-21 15:32 -0600): **the data output inverters of bits 5-1** (x 16480-16800, y 15800-16460, in `bd2`'s region;
-cell `cdp4_ro`, five copies, 10 transistors): **`d5_out_n` = NOT `cdp3_n_c2`, `d4_out_n` = NOT `cdp3_n_c3`,
-`d3_out_n` = NOT `cdp3_n_c4`, `d2_out_n` = NOT `cdp3_n_c5`, `d1_out_n` = NOT `cdp3_n_c6`** (firm), with
-run 7's `d0_out_n` = NOT `cdp3_n_c7`: the read bus's column K is data bit 7 - K for K = 2..7, and each
+cell `cdp4_ro`, five copies, 10 transistors): **`d5_out_n` = NOT `rd_b5`, `d4_out_n` = NOT `rd_b4`,
+`d3_out_n` = NOT `rd_b3`, `d2_out_n` = NOT `rd_b2`, `d1_out_n` = NOT `rd_b1`** (firm), with
+run 7's `d0_out_n` = NOT `rd_b0`: the read bus's column K is data bit 7 - K for K = 2..7, and each
 `d#_out_n` line is drawn by `dbus` to its pad cell. Also the thin metal of `dbus_le` on south through the
 units, marked uncertain over four output boxes (Ambiguity 15). With every file loaded: 2517 nets, 4807
 transistors, 0 errors, 0 warnings. See "The data output inverters" under Logic.
 
 Run 9 (2026-11-21 16:00 -0600): **the sixth data output inverter, on the read bus's column 1** (x 15840-16270, y 17400-17620,
 and its output wire to (17066,18078); 2 transistors by instancing, no uncertain item): a sixth copy of
-`cdp4_ro`: **`d6_out_n` = NOT `cdp3_n_c1`** (firm). Its output is drawn by poly, a pad, a thin metal east
+`cdp4_ro`: **`d6_out_n` = NOT `rd_b6`** (firm). Its output is drawn by poly, a pad, a thin metal east
 along y 17605 and south, a pad and a poly hop to a pad (17080,18078) below the data bus column; believed
 `d6_out_n`, not yet joined to D6's pad cell then (it carried an open-join label until run 10). With every file loaded: 2518 nets, 4809
 transistors, 0 errors, 0 warnings. See "The sixth output inverter" under Logic.
 
-Run 10 (2026-11-21 16:20 -0600): **the bit 6 line into D6's pad cell: `d6_out_n` = NOT `cdp3_n_c1`** (wiring only, three pads
+Run 10 (2026-11-21 16:20 -0600): **the bit 6 line into D6's pad cell: `d6_out_n` = NOT `rd_b6`** (wiring only, three pads
 with contacts, no uncertain item): from run 9's port a thin metal east, a poly hop, a thin metal north on
 x 17602 and a poly row east into the west end of strip 4 of D6's pad cell, one poly with `dpad`'s. So pins
 D0-D6 read R12-R17 through the read bus. With every file loaded: 2517 nets, 4809 transistors, 0 errors,
 0 warnings. See "The bit 6 line" under Logic.
 
-Run 11 (2026-11-21 16:39 -0600): **the bit 7 line into D7's pad cell: `d7_out_n` = NOT `cdp3_n_c0`** (wiring only, four pads
+Run 11 (2026-11-21 16:39 -0600): **the bit 7 line into D7's pad cell: `d7_out_n` = NOT `rd_b7`** (wiring only, four pads
 with contacts, no uncertain item): `regs`' inverter output `d7_out_n` from its port (16800,18012) east by
 two hops, south on a thin metal and 800 px of poly column into the west end of strip 4 of D7's pad cell.
-**All eight data pins now read R12-R17 through the read bus: `d#_out_n` = NOT `cdp3_n_c(7-#)`.** With every
+**All eight data pins now read R12-R17 through the read bus: `d#_out_n` = NOT `rd_b#`.** With every
 file loaded: 2516 nets, 4809 transistors, 0 errors, 0 warnings. See "The bit 7 line" under Logic.
 
 Run 12 (2026-11-21 16:59 -0600): **the two thin metals east of the ninth VSS rail** (x 10808 and x 10852; wiring only, four
@@ -368,7 +368,7 @@ c0 = s0 on x 11201):
 
 **Column 0 is drawn in `trace/regs.txt`** (piece `n0` of `regs` run 6, Kieran Connell's session, merged to main
 while this run was in review): the same track, the same two pads and row ends, read independently, and on
-east along y 17908 to the inverter `d7_out_n` = NOT `cdp3_n_c0`. This package's copy of column 0 (reviewed
+east along y 17908 to the inverter `d7_out_n` = NOT `rd_b7`. This package's copy of column 0 (reviewed
 in round 3 with the rest) was taken out again before the merge, so that the wire is drawn once; columns 1-7
 are drawn here.
 
@@ -394,7 +394,7 @@ are drawn here.
   x 11230). `tools/follow.py 10940 13700 S` runs column 6's on east to x 12810. Column 0's track turns
   east at (11201,17910) onto the bottom bus metal y 17909, which `regs` draws to the gate of its inverter.
 
-    read bus bit of column K = cdp3_n_cK = cdp4_n_sK
+    read bus bit of column K = rd_b(7-K) = cdp4_n_sK
     pulled to: cdp3_cq_cK (rsel12_buf; VSS in c0, c1), cdp3_hq_cK (rsel13_buf), cdp3_f_cK (rsel14_buf;
     VSS in s0, s1), cdp4_b_sK (rsel15_buf), cdp4_c_sK (rsel16_buf; VSS in s0, s1), cdp4_d_sK (rsel17_buf),
     and to VSS by cdp4_rst (while none of R12-R17 is read)
@@ -404,7 +404,7 @@ inverter of `regs`); with `cdp3`'s bit line of column 2 being `db_b5`, column K 
 
 ### The read bus, east along the bottom bus (run 5, 2026-11-21; traced)
 
-Columns 1-7 only (`cdp3_n_c1`..`c7`); column 0 is `regs`' piece `n0`, which runs one row pitch further
+Columns 1-7 only (`rd_b6`..`c7`); column 0 is `regs`' piece `n0`, which runs one row pitch further
 north by the same kind of route to its inverter. Each line, from its port of run 4 at x 11230:
 
 | K | horizontal y | hop 1: pads (poly row between) | diagonal (45 degrees, 260 px) | row y | hop 2: pads | hop 3: pads |
@@ -519,10 +519,10 @@ East of x 16000 the seven rows fan into a staircase:
   columns 5, 4, 3, 2 (pairs of edge bars at x 16783-16798 and 16805-16815 on each: `tools/tl5_tracks.py h`)
   to y 16384 and turns west as a band y 16372-16395 (`r7_c6.png`). Drawn to x 16780 (port).
 - **Column 7** turns east at (16798,16714) and runs along y 16714 onto the metal that `dbus` draws from the
-  pad (16993,16451) of `cdp3_n_c7` (`M 16993,16440 y16712 x16950`; `dbus`'s notes had followed it "west to
-  x 16795, then south to (16797,17434)"). One metal, no pad between: `@alias cdp3_n_c7 input`.
+  pad (16993,16451) of `rd_b0` (`M 16993,16440 y16712 x16950`; `dbus`'s notes had followed it "west to
+  x 16795, then south to (16797,17434)"). One metal, no pad between: `@alias rd_b0 input`.
 
-    d0_out_n = NOT cdp3_n_c7        (dbus's pull-down t at (17378,16454); firm)
+    d0_out_n = NOT rd_b0        (dbus's pull-down t at (17378,16454); firm)
 
 So **the read bus's column 7 is data bit 0**: with `cdp3`'s bit line of column 2 being `db_b5`, the datapath's
 column K is bit 7 - K for writing, and for reading at least in column 7.
@@ -539,7 +539,7 @@ here to y 16440 and to the VSS rail's end at y 16446; the VCC rail goes on to ab
 composite is the clear one: `u_w6.png`, `u_e6.png`), edges measured by ten cuts (`tools/px.py ... --comp
 cdp4_ro`), overlay on the single shots (`ov8_u2.png`, `ov8_u1.png`, `ov8_u5.png`).
 
-    d(7-K)_out_n = NOT cdp3_n_cK        K = 2 (unit u1) .. 6 (unit u5); 2 transistors each
+    d(7-K)_out_n = NOT rd_b(7-K)        K = 2 (unit u1) .. 6 (unit u5); 2 transistors each
 
 Coordinates of the master:
 
@@ -581,7 +581,7 @@ frame with the cell outlined (`tools/view.py ... --shift -650,1474 --trace`, `g3
 metal): every shape of the cell sits on a feature (VCC box and contact, plate, strip, branch and tie box,
 pull-down column and VSS contact, gate row, output strip and box). Instance `u6`:
 
-    d6_out_n = NOT cdp3_n_c1
+    d6_out_n = NOT rd_b6
 
 - **Rails.** The VCC box (15847-15897, 17424-17486) with its contact (15860,17452) lies under the east part
   of the VCC rail that `regs` draws for its own inverter (x 15795-15890). The pull-down's column is under a
@@ -626,7 +626,7 @@ From the port of run 9 at (17115,18078):
   steps up 17 px at x 17800 on its top edge and at x 17825 on its bottom edge, orange without a break in
   both metal shots and the chip-2 stripped shot (`d6_join.png`, 5x, four shots).
 
-    d6_out_n = NOT cdp3_n_c1            d6_pu = NOR(d6_out_n, d_hiz)   (dpad)
+    d6_out_n = NOT rd_b6            d6_pu = NOR(d6_out_n, d_hiz)   (dpad)
 
 Beside it, not drawn: `d7_out_n` (NOT column 0) runs the same way to a pad (17427,18014), hops to a pad
 (17559,18014), and its metal goes SOUTH from there on x 17559 to about (17558,18149) (`tools/follow.py 17559
@@ -634,7 +634,7 @@ Beside it, not drawn: `d7_out_n` (NOT column 0) runs the same way to a pad (1742
 
 ### The bit 7 line into D7's pad cell (run 11, 2026-11-21; traced)
 
-`regs` draws its inverter's output `d7_out_n` (= NOT `cdp3_n_c0`) to a port (16800,18012) on a poly row.
+`regs` draws its inverter's output `d7_out_n` (= NOT `rd_b7`) to a port (16800,18012) on a poly row.
 From there:
 
 - the poly row runs on east (y 18003-18022) under `e_b`'s track and the wide rail x 16940-17030
@@ -658,7 +658,7 @@ From there:
   clean shot) to x 17825, where it is one poly with the west end of strip 4 of D7's pad cell (`dpad`'s
   `{}_out_n` block from x 17803, y 18918-18944): the same step as at D6 (`d7_bot.png`, `ov11_bot.png`, 4x).
 
-    d7_out_n = NOT cdp3_n_c0            d7_pu = NOR(d7_out_n, d_hiz)   (regs' inverter; dpad)
+    d7_out_n = NOT rd_b7            d7_pu = NOR(d7_out_n, d_hiz)   (regs' inverter; dpad)
 
 `@alias d7_out_n w17462` (the rename of `regs`' label is the coordinator's refresh).
 
@@ -669,7 +669,7 @@ From the review (round 10), no contact at any: the first row also passes under t
 is as tall as the pad (y 18128-18168; drawn 18130-18150) and the junction block spans y 18918-18960.
 
 **So for every bit: pin D# is driven (while `d_hiz` is low) with the read bus's column 7 - # in true sense**:
-`d#_out_n` = NOT `cdp3_n_c(7-#)`, eight inverters (D0's at the foot of the data bus column in `dbus`, D1-D5's
+`d#_out_n` = NOT `rd_b#`, eight inverters (D0's at the foot of the data bus column in `dbus`, D1-D5's
 and D6's the cell `cdp4_ro`, D7's in `regs`).
 
 ### The two through lines east of the ninth VSS rail (run 12, 2026-11-21; traced)
@@ -907,7 +907,7 @@ islands are closed curves inside it, so they are the other class.
 | `cdp4_w10808` | poly | (13346,3675) and (13560,3675) (the polys south of its second tap and its end pad, into `tr1`'s gate row); (10694-10716, 15726-15748) (the corner of the row from its bottom pad: beyond, an undrawn unit of `bc2` that drives it) | driven from `bc2`'s unit (read, not drawn) | the first through line and its run in the top-right track field (runs 12, 14, 15) |
 | `rst_lat` | poly | (13822,3675) and (14044,3675) (the polys south of its second tap and its end pad, into `tr1`'s gate row); (10782-10797, 17700) (the column south of the bottom row's west end) | from `trunks`' inverter | the second through line and its run in the top-right track field (runs 12, 14, 15) |
 | `vcc`, `vss` | metal | x 16515 and x 16689 at y 15780 (onto `dlat`'s rails); `vcc` drawn to y 16440 (goes on south at least to y 16900), `vss` ends at y 16446 | - | the units' rails |
-| `cdp3_n_c7` (= `cdp4_n_s7` = `cdp3_n_c7`) | metal | (16950-16962, 16714): onto `dbus`'s metal | driven inside | the read bus, column 7 = the gate of D0's output chain (run 7) |
+| `rd_b0` (= `cdp4_n_s7` = `rd_b0`) | metal | (16950-16962, 16714): onto `dbus`'s metal | driven inside | the read bus, column 7 = the gate of D0's output chain (run 7) |
 | `d6_out_n` | poly | (17800-17825, 17313-17350): onto `dpad`'s strip 4 of D6's pad cell | driven inside | the output of the sixth output inverter, joined to the pad cell (run 10) |
 | `d7_out_n` |  poly | (16795-16800, 18012): onto `regs`' row; and (17803-17825, 18918-18957): onto `dpad`'s strip 4 of D7's pad cell | from `regs`' inverter | the bit 7 output line (run 11) |
 | `vss` | metal | x 16017-16059 at y 17285 and y 17535 (drawn ends; not followed) | - | the rail of the sixth output inverter and of the unit above it |
@@ -1233,7 +1233,7 @@ is drawn once. No connection changes with every file loaded:
 
 - `.venv/bin/python tools/sameconn.py fe17f17`: connections identical
 - `tools/t.sh cdp4 sameconn.py 70bbbc9`: 12 differences, all one thing: with `cdp4` loaded alone the
-  selector node of slice 0 is again named `cdp4_n_s0` (its alias to `cdp3_n_c0` and the track now live in
+  selector node of slice 0 is again named `cdp4_n_s0` (its alias to `rd_b7` and the track now live in
   `trace/regs.txt`); no transistor's nets and no other name differ.
 
 Round 3: no findings.
@@ -1316,7 +1316,7 @@ Round 5: no findings that change a connection.
 
 Round 6 (full review, 2026-11-21 15:22 -0600; a fresh Fable reviewer, images in `cache/scratch/cdp4/review-6/`, 15;
 commit before the round 87c5f4f). Piece: x 16560-16970, y 15840-17390 (six tracks, five pads, five poly
-rows or columns, the join of column 7 with `cdp3_n_c7`). Told to suspect: the join (one metal from the
+rows or columns, the join of column 7 with `rd_b0`). Told to suspect: the join (one metal from the
 corner (16798,16714) to `dbus`'s pad (16993,16451)?); a contact where column 6's poly passes under column 7's
 corner; that poly's continuity across the 12 px gap, along its column and at its turn west; the pad pairs on
 one track position (read bus pad below, `d#_out_n` pad above); the nested corners; taps on the long runs;
@@ -1438,7 +1438,7 @@ pad or widening, no edge line across it under the rail); the metal on x 17602 by
 y 17479-17510 that are the edges of a poly row beneath, nothing north of the north pad or south of the
 south pad, no side arm); the hop (straight, the same row at both ends, field in the gap at x 17536); the
 y 18078 metal from x 17105 to x 17410 and the pad (17427,18079); the three parallel metals separate and
-straight, pad to pad; the extraction (`d6_out_n` = NOT `cdp3_n_c1`, `d6_pu` = NOR(`d6_out_n`, `d_hiz`), no
+straight, pad to pad; the extraction (`d6_out_n` = NOT `rd_b6`, `d6_pu` = NOR(`d6_out_n`, `d_hiz`), no
 transistor on the new wire) and `tools/unsure.py`.
 
 No finding (one wording correction to these notes: the north row is y 17332-17353, as drawn).
@@ -1471,7 +1471,7 @@ x 17595-17613, with field between it and `d_hiz`'s column above, under and below
 chip 1); the column as poly at every 4 px from y 18266 to y 18938 in three shots, with ground on both flanks
 throughout (the clean shot's lines west of it are absent from the other three shots); the corner, the row
 uniform under the rail, and the junction as one orange poly (column x 17812, y 18924-18952) into `dpad`'s
-strip 4; the extraction (`d7_out_n` = NOT `cdp3_n_c0`, `d7_pu`'s pull-down gated by it, `d6_out_n` separate)
+strip 4; the extraction (`d7_out_n` = NOT `rd_b7`, `d7_pu`'s pull-down gated by it, `d6_out_n` separate)
 and `tools/unsure.py`.
 
 No finding. Comments only (taken into Logic above): two more crossings without contact, the bottom row's

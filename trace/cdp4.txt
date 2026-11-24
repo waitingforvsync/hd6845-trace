@@ -659,7 +659,7 @@ C 10745,11458 s=24x40
 # ======================================================================
 # Run 4 (2026-11-21): the read bus. Each selector output row cdp4_n_s# (channel 2) runs on east of
 # x 10850 to a pad with a contact on one thin vertical metal track; the same track starts on a pad at
-# the east end of cdp3's bus N row cdp3_n_c#, and runs on south to a corner in the bottom bus field,
+# the east end of cdp3's bus N row rd_b(7-#), and runs on south to a corner in the bottom bus field,
 # where it turns east. No other contact on any track (notes, "The read bus").
 # ======================================================================
 @w M=12
@@ -717,20 +717,20 @@ M 11026,10482 y10505 11027,10520 y18170 x11230     # column 4
 M 11069,10526 y10548 11070,10563 y18128 x11230     # column 3
 M 11112,10569 y18085 x11230                        # column 2
 M 11157,10613 y18040 x11230                        # column 1
-N M 10897,12000 cdp3_n_c7
-N M 10940,12000 cdp3_n_c6
-N M 10984,12000 cdp3_n_c5
-N M 11027,12000 cdp3_n_c4
-N M 11070,12000 cdp3_n_c3
-N M 11112,12000 cdp3_n_c2
-N M 11157,12000 cdp3_n_c1
-@alias cdp3_n_c1 cdp4_n_s1
-@alias cdp3_n_c2 cdp4_n_s2
-@alias cdp3_n_c3 cdp4_n_s3
-@alias cdp3_n_c4 cdp4_n_s4
-@alias cdp3_n_c5 cdp4_n_s5
-@alias cdp3_n_c6 cdp4_n_s6
-@alias cdp3_n_c7 cdp4_n_s7
+N M 10897,12000 rd_b0
+N M 10940,12000 rd_b1
+N M 10984,12000 rd_b2
+N M 11027,12000 rd_b3
+N M 11070,12000 rd_b4
+N M 11112,12000 rd_b5
+N M 11157,12000 rd_b6
+@alias rd_b6 cdp4_n_s1
+@alias rd_b5 cdp4_n_s2
+@alias rd_b4 cdp4_n_s3
+@alias rd_b3 cdp4_n_s4
+@alias rd_b2 cdp4_n_s5
+@alias rd_b1 cdp4_n_s6
+@alias rd_b0 cdp4_n_s7
 # ======================================================================
 # Run 5 (2026-11-21): the read bus, columns 1-7, east along the bottom bus: each horizontal runs to a pad,
 # hops east in poly under the vertical trunks, climbs a 45-degree diagonal to its row, hops under trunks' X
@@ -756,7 +756,7 @@ P 15712,17776 15926,17777 w=20
 P 15909,17760:15943,17794
 C 15926,17777 s=20x20
 M 15926,17777 x16000 w=12
-N M 12000,18038 cdp3_n_c1
+N M 12000,18038 rd_b6
 # --- column 2
 M 11220,18085 11400,18082 12808,18082 w=12
 P 12791,18065:12825,18099
@@ -777,7 +777,7 @@ P 15754,17821 15969,17821 w=20
 P 15952,17804:15986,17838
 C 15969,17821 s=20x20
 M 15969,17821 x16000 w=12
-N M 12000,18082 cdp3_n_c2
+N M 12000,18082 rd_b5
 # --- column 3
 M 11220,18128 11400,18124 12853,18124 w=12
 P 12836,18107:12870,18141
@@ -798,7 +798,7 @@ P 15712,17864 15926,17864 w=20
 P 15909,17847:15943,17881
 C 15926,17864 s=20x20
 M 15926,17864 x16000 w=12
-N M 12000,18124 cdp3_n_c3
+N M 12000,18124 rd_b4
 # --- column 4
 M 11220,18170 11400,18168 12808,18168 w=12
 P 12791,18151:12825,18185
@@ -819,7 +819,7 @@ P 15755,17906 15969,17906 w=20
 P 15952,17889:15986,17923
 C 15969,17906 s=20x20
 M 15969,17906 x16000 w=12
-N M 12000,18168 cdp3_n_c4
+N M 12000,18168 rd_b3
 # --- column 5
 M 11220,18213 11400,18210 12851,18210 w=12
 P 12834,18193:12868,18227
@@ -840,7 +840,7 @@ P 15711,17951 15926,17951 w=20
 P 15909,17934:15943,17968
 C 15926,17951 s=20x20
 M 15926,17951 x16000 w=12
-N M 12000,18210 cdp3_n_c5
+N M 12000,18210 rd_b2
 # --- column 6
 M 11220,18256 11400,18254 12807,18254 w=12
 P 12790,18237:12824,18271
@@ -861,7 +861,7 @@ P 15755,17994 15969,17993 w=20
 P 15952,17976:15986,18010
 C 15969,17993 s=20x20
 M 15969,17993 x16000 w=12
-N M 12000,18254 cdp3_n_c6
+N M 12000,18254 rd_b1
 # --- column 7
 M 11220,18298 11400,18298 12852,18298 w=12
 P 12835,18281:12869,18315
@@ -882,7 +882,7 @@ P 15713,18037 15926,18039 w=20
 P 15909,18022:15943,18056
 C 15926,18039 s=20x20
 M 15926,18039 x16000 w=12
-N M 12000,18298 cdp3_n_c7
+N M 12000,18298 rd_b0
 # ======================================================================
 # Run 6 (2026-11-21): the read bus, columns 1-7, east of x 16000: each row ends on a pad (columns 1, 2) or
 # turns north at a corner to a pad (columns 3-7); from each pad a poly column goes north under the bundle of
@@ -949,7 +949,7 @@ M 16798,17430 y17380 w=12
 # pad a poly row goes west under the tracks west of it (no contact) toward the column of units at
 # x 16600-16790 (drawn to x 16790: ports). Column 6 ends on a pad; its poly runs east under column 7's
 # corner (no contact), north as a column x 16790-16810 and west at y 16384 (drawn to x 16780: port).
-# Column 7 turns east at (16798,16714) onto the metal that dbus draws from the pad of cdp3_n_c7.
+# Column 7 turns east at (16798,16714) onto the metal that dbus draws from the pad of rd_b0.
 # ======================================================================
 # --- column 2
 M 16580,17390 y16540 x16818 y15866 w=12
@@ -976,7 +976,7 @@ M 16755,17390 16752,16713 w=12
 P 16735,16696:16769,16730
 C 16752,16713 s=20x20
 P 16752,16712 x16800 y16384 x16780 w=20
-# --- column 7: onto dbus's metal (M 16993,16440 y16712 x16950) from the pad (16993,16451) of cdp3_n_c7
+# --- column 7: onto dbus's metal (M 16993,16440 y16712 x16950) from the pad (16993,16451) of rd_b0
 M 16798,17390 y16714 x16962 w=12
 # ======================================================================
 # Run 8 (2026-11-21): the data output inverters of bits 5-1. Five copies of one cell at pitch 130 between a
@@ -1040,7 +1040,7 @@ N M 16775,16030 dbus_le
 # ======================================================================
 # Run 9 (2026-11-21): the sixth data output inverter, on the read bus's column 1. A copy of cdp4_ro at
 # (-650,+1474) between regs' VCC rail (x 15795-15890) and a VSS rail x 16017-16059: its gate row is the band
-# of cdp3_n_c1 (the corner of the poly column drawn in run 6), its output box takes a poly row that runs
+# of rd_b6 (the corner of the poly column drawn in run 6), its output box takes a poly row that runs
 # east, south to a pad, east as a thin metal (y 17605) and south to a pad, and east in poly under a wide rail
 # to a pad (17066,18078). Believed d6_out_n (not joined to the pad cell yet: open join).
 # ======================================================================
@@ -1080,7 +1080,7 @@ P 17582,17324:17616,17358
 C 17599,17341 s=20x20
 P 17599,17342 x17825 w=22                # onto dpad's strip 4 of D6 (P 17802,17313:..., y 17313-17339): one poly, a step
 # ======================================================================
-# Run 11 (2026-11-21): the bit 7 output line into D7's pad cell. regs draws d7_out_n (= NOT cdp3_n_c0) to
+# Run 11 (2026-11-21): the bit 7 output line into D7's pad cell. regs draws d7_out_n (= NOT rd_b7) to
 # (16800,18012) on its poly row; the row runs on east under e_b's track and the wide rail (field) to a pad,
 # a thin metal east to a pad, a poly hop to a pad, a thin metal south on x 17558 to a pad, and a poly: east,
 # then a column x 17595-17613 south for 800 px (under the wide horizontal metal y 18175-18255, beside d_hiz's

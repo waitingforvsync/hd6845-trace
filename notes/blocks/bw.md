@@ -72,7 +72,7 @@ Everything in the survey; the far ends of the five lines (table); H4 west of x 1
 ## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
 
 - Survey of the bus field: "an eight-line bus between cdp3's rows and cdp4's rows" is the read bus of R12-R17
-  (`cdp3_n_c#` = `cdp4_n_s#`, firm; `regs` run 6, `cdp4` run 4) and runs on south of `cdp4`'s staircase to the
+  (`rd_b(7-#)` = `cdp4_n_s#`, firm; `regs` run 6, `cdp4` run 4) and runs on south of `cdp4`'s staircase to the
   bottom bus. The lower staircase of contacts begins at (11200,13330) (column 0), its second pad at about
   (11157,13375), not at (11070,13450); the upper one ends at (11200,10664), not about (11200,10630).
 - The field's westmost two lines are other nets: x 10852 is `rst_lat` (a reset copy, from `trunks`' diagonal

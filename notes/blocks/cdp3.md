@@ -22,7 +22,7 @@ Inside a column, from the left (x for c5, add 390.3 per column):
 | 9765-9815 at the top of row C and in channel B; 9725-9769 from y 9295 down through rows D-G | VCC rail ("rail a") |
 | 9808-9826 | line b: west output of the row C cell (`cdp3_cw_cN`) |
 | 9848-9865 | line c: read output of the row C cell (`cdp3_cq_cN`), jogging to 9812 above row E |
-| 9890-9908 | line h: node N of the column (`cdp3_n_cN`) from row E down to its channel G track |
+| 9890-9908 | line h: node N of the column (`rd_b(7-N)`) from row E down to its channel G track |
 
 The first run numbered "slices" `s0..s7` by a 390-px window that started at the VCC rail.
 Its slice sK is column cK for the VCC rail, lines b, c, h and the row E/F transistors,
@@ -205,11 +205,11 @@ reading 0. Bit order within a byte is not established here.
 
 ### Rows E and F (traced)
 
-    row E, c2..c7:  pass transistor, gate rsel12_buf, between cdp3_cq_cN and cdp3_n_cN
-    row E, c0, c1:  pass transistor, gate rsel12_buf, between VSS and cdp3_n_cN
-    row F, c0..c7:  pass transistor, gate rsel13_buf, between cdp3_hq_cN (row H cell) and cdp3_n_cN
+    row E, c2..c7:  pass transistor, gate rsel12_buf, between cdp3_cq_cN and rd_b(7-N)
+    row E, c0, c1:  pass transistor, gate rsel12_buf, between VSS and rd_b(7-N)
+    row F, c0..c7:  pass transistor, gate rsel13_buf, between cdp3_hq_cN (row H cell) and rd_b(7-N)
 
-All sixteen are W/L about 190/28. `cdp3_n_cN` leaves east on its channel G track. So N is
+All sixteen are W/L about 190/28. `rd_b(7-N)` leaves east on its channel G track. So N is
 an eight-line bus that gets the six row C bits (and 0 on c0, c1) when `rsel12_buf` is
 high and the eight row H values when `rsel13_buf` is high: a read bus, with the two
 unused top bits of the 6-bit register reading 0. That makes c0, c1 the two most
@@ -431,7 +431,7 @@ East edge, x 10850 (poly):
 
 | Name | y | What |
 |---|---|---|
-| cdp3_n_c7 .. cdp3_n_c0 | 10361, 10404, 10447, 10490, 10535, 10577, 10621, 10664 | bus N. c7's track ends at a metal contact at about 10855,10355 and c6's at about 10900,10400, each on a vertical metal line that comes down from the north with a diagonal jog at y 10250-10330 (seen at 0.85x); the other six run on east at least to x 10960 |
+| rd_b0 .. rd_b7 | 10361, 10404, 10447, 10490, 10535, 10577, 10621, 10664 | bus N. c7's track ends at a metal contact at about 10855,10355 and c6's at about 10900,10400, each on a vertical metal line that comes down from the north with a diagonal jog at y 10250-10330 (seen at 0.85x); the other six run on east at least to x 10960 |
 | wr_r14 | 8818 | in (believed): line into the row A cells; ends 43 px east of the edge on a contact to the vertical metal line x 10888 |
 | cdp3_c_wr | 9533 | in: write line of row C; ends 90 px east of the edge on a contact to the vertical metal line x 10935 |
 | wr_r13 | 10711 | in: write line of row H; runs on east past x 10990 |
@@ -779,7 +779,7 @@ Round 5: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20, second batch)
 
-- The gates of rows E and F ("drivers not known"): they are `rsel12_buf` and `rsel13_buf`, the read selects of R12 and R13 (`busl` run 8, pieces `r12`, `r13`: one thin metal each up the left bus field from `regs`' ports, no uncertain item). So R12 is read through row E (row C onto bus N) and R13 through row F (row H onto bus N). Seen in the extraction: in columns c0 and c1 the transistor gated by `rsel12_buf` lies between `vss` and `cdp3_n_c#` (t1523, t1977), in c2-c7 between `cdp3_cq_c#` and `cdp3_n_c#`: the two bits R12 does not have read as a fixed level. The two gate labels are renamed at the next refresh.
+- The gates of rows E and F ("drivers not known"): they are `rsel12_buf` and `rsel13_buf`, the read selects of R12 and R13 (`busl` run 8, pieces `r12`, `r13`: one thin metal each up the left bus field from `regs`' ports, no uncertain item). So R12 is read through row E (row C onto bus N) and R13 through row F (row H onto bus N). Seen in the extraction: in columns c0 and c1 the transistor gated by `rsel12_buf` lies between `vss` and `rd_b(7-#)` (t1523, t1977), in c2-c7 between `cdp3_cq_c#` and `rd_b(7-#)`: the two bits R12 does not have read as a fixed level. The two gate labels are renamed at the next refresh.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20, third batch)
 
@@ -793,12 +793,12 @@ Round 5: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
 
-- Ports table, `cdp3_n_c7 .. cdp3_n_c0` ("c7's track ends at a metal contact at about 10855,10355 and c6's at
+- Ports table, `rd_b0 .. rd_b7` ("c7's track ends at a metal contact at about 10855,10355 and c6's at
   about 10900,10400, each on a vertical metal line that comes down from the north ..."): the eight rows end on
   pads (10894,10360), (10938,10404), (10982,10446), (11025,10490), (11068,10534), (11112,10577),
   (11156,10621), (11199,10664), each the top end of a track that runs south; no metal comes from the north
-  (the diagonals there are `regs`' and `wrs`' write strobes). `cdp3_n_c#` and `cdp4_n_s#` are one net per
-  column (aliases in `trace/regs.txt` and `trace/cdp4.txt`), and `d#_out_n` = NOT `cdp3_n_c(7-#)` (`cdp4` runs
+  (the diagonals there are `regs`' and `wrs`' write strobes). `rd_b(7-#)` and `cdp4_n_s#` are one net per
+  column (aliases in `trace/regs.txt` and `trace/cdp4.txt`), and `d#_out_n` = NOT `rd_b#` (`cdp4` runs
   4-11, `regs` run 6).
 
 ## Corrections (coordinator, from the handoffs of `busl` runs 17-18, 2026-11-24)

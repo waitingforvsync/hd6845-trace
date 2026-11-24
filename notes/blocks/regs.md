@@ -28,21 +28,21 @@ Trace: `trace/regs.txt`. Scratch: `cache/scratch/regs/` (`survey.md`). Started 2
   bottom-centre logic's east gate column (drawn to y 17760). No uncertain item on it. Full extraction:
   2462 nets (no new net: the wire lies on a net that exists), 4594 transistors, 0 errors, 0 warnings.
 - **Piece `r9`, the ninth row y 17648: traced** (run 5, 2026-11-21 19:26 +0000; Kieran Connell's session,
-  on Fable). It is not a register's select either: it is a bottom-bus line, **`cdp3_n_c0`**, that ends as
+  on Fable). It is not a register's select either: it is a bottom-bus line, **`rd_b7`**, that ends as
   the gate of an undrawn inverter under the south end of `bd3`'s ground rail (x 15560-15900,
-  y 17370-17530): **`d7_out_n` = NOT `cdp3_n_c0`** (two transistors: pull-down 46/20, depletion load
+  y 17370-17530): **`d7_out_n` = NOT `rd_b7`** (two transistors: pull-down 46/20, depletion load
   24/54; no uncertain item). The wire is drawn from the bus pad (12806,17907) to the gate (two hops, four
   pads with contacts), and the output from the inverter to a pad (16773,18012) at the foot of the track
   x 16776 (two pads with contacts); both go on (ports): the bus metal y 17907 west of x 12770, the output's
   poly row y 18012 east of x 16800. Full extraction: 2525 nets, 4754 transistors, 0 errors, 0 warnings
   (two new nets, two new transistors; no join to a named net).
-- **Piece `n0`, the source of `cdp3_n_c0`: traced** (run 6, 2026-11-21 19:54 +0000; Kieran Connell's
-  session, on Fable). **`cdp3_n_c0` is bus N, column 0** (`cdp3_n_c0` = `cdp4_n_s0`): the bus metal runs
+- **Piece `n0`, the source of `rd_b7`: traced** (run 6, 2026-11-21 19:54 +0000; Kieran Connell's
+  session, on Fable). **`rd_b7` is bus N, column 0** (`rd_b7` = `cdp4_n_s0`): the bus metal runs
   west from (12770,17907) to a corner (11200,17911) and north on the track x 11200 of the bus field east of
   the central datapath, 7,245 px, through a pad (11200,13330) that ends `cdp4`'s row y 13333 (`cdp4_n_s0`,
   the R14-R17 selector's node of slice 0) to its end on a pad (11200,10664) that ends `cdp3`'s row y 10664
-  (`cdp3_n_c0`, the read bus of rows C and H, R12 and R13). So the inverter of run 5 is **`d7_out_n` =
-  NOT `cdp3_n_c0`: the first stage of the read path of R12-R17, column 0**, firm (`tools/unsure.py
+  (`rd_b7`, the read bus of rows C and H, R12 and R13). So the inverter of run 5 is **`d7_out_n` =
+  NOT `rd_b7`: the first stage of the read path of R12-R17, column 0**, firm (`tools/unsure.py
   --equations d7_out_n`: no uncertain item). Wiring only: two pads with contacts, two poly rows, no
   transistor. Full extraction: 2523 nets (two joins), 4782 transistors, 0 errors, 0 warnings.
 
@@ -72,7 +72,7 @@ Trace: `trace/regs.txt`. Scratch: `cache/scratch/regs/` (`survey.md`). Started 2
 | The seventh row | y 18125, x 6712-10137 | metal with the bus's three straight hops, pads 7382/7555, 8424/8641, 9596/9811 (each hop at 4-4.4x in both stripped shots: `h1.png`, `h2.png`, `h3.png`); `tl5_tracks.py h 18123 6600 10200`: metal at x 6740-7364, 7581-8405, 8669-9571, 9837-10117 |
 | First of the third diagonals | pad (10137,18124) to pad (10484,17994) | poly east to x 10184, diagonal x + y = 28308, row y 17995 east (3x in both stripped shots, `o4.png`): the band above `rsel16_buf`'s |
 | Track x 10485 | y 17994 north | thin metal from the pad (10484,17994), drawn to y 17760; north of that it passes over the boxes and rows of the gate column (Not done) |
-| `cdp3_n_c0`: bus metal and its pad | metal y 17907 west of the pad (12806,17907) | `follow.py 12770 17907 W` runs it 1,594 px to (11200,17913): not followed. Pad: bright centre in both metal shots, greenish centre in the clean shot (`px.py row 17907 12780 12830 5 metal,metal1,acid1b`) |
+| `rd_b7`: bus metal and its pad | metal y 17907 west of the pad (12806,17907) | `follow.py 12770 17907 W` runs it 1,594 px to (11200,17913): not followed. Pad: bright centre in both metal shots, greenish centre in the clean shot (`px.py row 17907 12780 12830 5 metal,metal1,acid1b`) |
 | Hop under the vertical trunks, and up to the second pad | poly row y 17897-17917, x 12806-13224; poly north x 13206-13224 to the pad (13240,17862) | straight (2.6x in three shots, `w6.png`); the row above (y 17862, pads (12845,17862) and (13172,17862)) is another net, undrawn; the corner and both pads at 4x in four shots (`w4.png`) |
 | Diagonal and row y 17648 | thin metal from the pad's east ring (13262,17857) on x + y = 31119 to the corner (13470,17649), east to the pad (14497,17648) | the diagonal lies beside and partly on `trunks`' poly diagonal of `rst_a` for 200 px, crosses that poly's row y 17815 (the follower's stop (13316,17803)) and its column x 13480: no pad, no ring (4x in four shots, `w2.png`, `w7.png`); the row passes over poly columns at x 13700 and 14195 (`r2.png`) |
 | Hop under `trunks`' X and the VCC rail | pads (14497,17648), (14714,17648) | straight, between `rsel14_buf`'s row y 17604 and `rsel13_buf`'s y 17691, whose pads sit one position west (2x in four shots, `h1.png`; `tl5_tracks.py h 17648 14380 15600`) |
@@ -211,9 +211,9 @@ load at the east end).
 
 ### The ninth row and its inverter (piece `r9`, run 5)
 
-Traced: `d7_out_n` = NOT `cdp3_n_c0`.
+Traced: `d7_out_n` = NOT `rd_b7`.
 
-- **`cdp3_n_c0`** arrives on the bottom bus (metal y 17907; its source is west of x 12770, not followed),
+- **`rd_b7`** arrives on the bottom bus (metal y 17907; its source is west of x 12770, not followed),
   hops east under the vertical trunks in poly, climbs to the row y 17648 on a thin diagonal metal, hops
   under `trunks`' X and the VCC rail like the eight rows above it, turns north at x 15560 and ends on a
   pad (15558,17428), whose poly runs east as the gate band y 17418-17438 of one pull-down. No tap, no
@@ -233,9 +233,9 @@ because they share the hop.
 
 ### Bus N, column 0, to the inverter (piece `n0`, run 6)
 
-Traced, firm: **`d7_out_n` = NOT `cdp3_n_c0`.**
+Traced, firm: **`d7_out_n` = NOT `rd_b7`.**
 
-`cdp3_n_c0` of run 5 is one net with `cdp3_n_c0` and `cdp4_n_s0` (aliases in `trace/regs.txt`; the rename is
+`rd_b7` of run 5 is one net with `rd_b7` and `cdp4_n_s0` (aliases in `trace/regs.txt`; the rename is
 the coordinator's refresh). The net now reads, in the full extraction: six read transistors (gates
 `rsel12_buf` .. `rsel17_buf`: rows C and H of `cdp3`, the four ways of `cdp4`'s selector), the pull-down
 gated by `cdp4_rst` = NOR of the six selects, and one load: the gate of this inverter. So bus N's column 0 is
@@ -244,7 +244,7 @@ register's bit, and leaves the datapath by the track x 11200 and the bottom bus 
 R13 select buffer, whose output `d7_out_n` goes east toward the data bus column (not followed).
 
 Believed, not traced: the other seven columns do the same. The upper staircase of pads (y 10361-10664, the
-east ends of `cdp3`'s rows `cdp3_n_c0` .. `c7`) and the lower one (from (11200,13330), `cdp4_n_s0` .. `s7`)
+east ends of `cdp3`'s rows `rd_b7` .. `c7`) and the lower one (from (11200,13330), `cdp4_n_s0` .. `s7`)
 put the eight columns on eight tracks of this bus field (`bw`'s survey says so); the rows through the hop
 x 14456-14714 below `rsel12_buf`'s (y about 17777, 17823, 17865, 17905) and the unit east of the VCC rail
 beside this inverter are probably theirs. Which data bit column 0 is, is not established here.
@@ -275,8 +275,8 @@ beside this inverter are probably theirs. Which data bit column 0 is, is not est
 | `lc2_w8450` | poly | (4920-4930, 16703-16723) | in | from `bl0`'s poly row (its port (4930,16713)) |
 | `lc2_w8450` | poly | (6008, 16791-16810) | out | the band under the rail x 6008-6055: believed the gate of a pull-down of the bottom-left logic (undrawn); the poly is drawn to its end, x 6065 |
 | `lc2_w8450` | metal | (10479-10491, 17760) | out | the track x 10485 on north beside the bottom-centre logic's east gate column: not followed (Not done) |
-| `cdp3_n_c0` | poly | (10840, 10654-10674) | in | `cdp3`'s row y 10664 (its east piece of s0, drawn there to x 10850): bus N column 0 (run 6; replaces run 5's port of `cdp3_n_c0` at (12770,17907)) |
-| `cdp3_n_c0` | poly | (10840, 13323-13343) | in | `cdp4`'s row y 13333 ("s0: n out to the right", drawn there to x 10850): `cdp4_n_s0`, the same net |
+| `rd_b7` | poly | (10840, 10654-10674) | in | `cdp3`'s row y 10664 (its east piece of s0, drawn there to x 10850): bus N column 0 (run 6; replaces run 5's port of `rd_b7` at (12770,17907)) |
+| `rd_b7` | poly | (10840, 13323-13343) | in | `cdp4`'s row y 13333 ("s0: n out to the right", drawn there to x 10850): `cdp4_n_s0`, the same net |
 | `d7_out_n` | poly | (16800, 18003-18021) | out | the poly row y 18012 on east under `e_b`'s track and a wide rail to a pad seen at (17065,18010): not followed |
 
 ## Ambiguities
@@ -340,7 +340,7 @@ beside this inverter are probably theirs. Which data bit column 0 is, is not est
    `textmap.py 8894 18108 8932 18144 3`); the metals x 10255-10270 and x 10300-10400 over the
    diagonal and the row y 17995 (no pad on the poly, trap 15).
 6. **Crossings and strips of piece `r9`** (run 5).
-   - `cdp3_n_c0`'s thin metal lies beside and partly on `trunks`' poly diagonal (`rst_a`) from about
+   - `rd_b7`'s thin metal lies beside and partly on `trunks`' poly diagonal (`rst_a`) from about
      (13465,17655) to (13330,17790), crosses that poly's row y 17815 at (13316,17803) and its column at
      (13480,17648). Read as no contact: no pad, no ring, the metal keeps its width (4x in four shots,
      `w2.png`, `w7.png`; traps 13, 15). The metal is dim where it lies on the poly (it fails the metal test at
@@ -569,7 +569,7 @@ Round 7: no findings.
   under `e_b`'s track x 16810 and a wide rail x 16940-17030 to a pad seen at (17065,18010), metal on
   east; `busc`'s region): believed toward the data bus column.
 - **The other seven columns of bus N** (believed, run 6): seven more tracks of the bus field from the
-  staircases of pads at y 10361-10621 (`cdp3_n_c1` .. `c7`; the next pad is at about (11155,10621)) and
+  staircases of pads at y 10361-10621 (`rd_b6` .. `c7`; the next pad is at about (11155,10621)) and
   y 13376-13633 (`cdp4_n_s1` .. `s7`; the next pad at about (11157,13375)), to wherever each goes; the
   same reading as piece `n0`, one line at a time (the lines step where a neighbour leaves: `bw`'s survey).
 - More undrawn metal rows go through the same hop below `rsel12_buf`'s: y about 17777 (pads at about
