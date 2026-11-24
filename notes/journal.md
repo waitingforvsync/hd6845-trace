@@ -3359,7 +3359,7 @@ Renames (all on firm joins; `tools/names.py compare` against the snapshot before
   `rd_b(7-#)` in the notes.
 
 Catch-up for branches in flight, after merging main:
-`tools/rename.py busl_y6805 cdp2_w6845 tc1_p4308 ck_a tc1_m6817 cnt_bus_b lc3_e9577 cdp3_cw_c7 lc3_e9621 cdp3_cw_c6 lc3_e9665 cdp3_cw_c5 lc3_e9708 cdp3_cw_c4 lc3_e9750 cdp3_cw_c3 lc3_e9793 cdp3_cw_c2 regs_w17462 d7_out_n regs_w17648 rd_b7 dbus_do0_in rd_b0 eof_w17515 h_eq_r1 eof_w17166 bc2_w14955 tr1_w12265 rst_lat tr1_w12005 cdp4_w10808 cdp3_n_c0 rd_b7 cdp3_n_c1 rd_b6 cdp3_n_c2 rd_b5 cdp3_n_c3 rd_b4 cdp3_n_c4 rd_b3 cdp3_n_c5 rd_b2 cdp3_n_c6 rd_b1 cdp3_n_c7 rd_b0`
+`tools/rename.py busl_y6805 cdp2_w6845 tc1_p4308 ck_a tc1_m6817 cnt_bus_b lc3_e9577 cdp3_cw_c7 lc3_e9621 cdp3_cw_c6 lc3_e9665 cdp3_cw_c5 lc3_e9708 cdp3_cw_c4 lc3_e9750 cdp3_cw_c3 lc3_e9793 cdp3_cw_c2 regs_w17462 d7_out_n regs_w17648 rd_b7 dbus_do0_in rd_b0 eof_w17515 h_eq_r1 eof_w17166 bc2_w14955 tr1_w12265 rst_lat tr1_w12005 cdp4_w10808 cdp3_n_c0 rd_b7 cdp3_n_c1 rd_b6 cdp3_n_c2 rd_b5 cdp3_n_c3 rd_b4 cdp3_n_c4 rd_b3 cdp3_n_c5 rd_b2 cdp3_n_c6 rd_b1 cdp3_n_c7 rd_b0`   (pairs: old -> new)
 
 Left on purpose (the master list's `rename` row): `lc3_e9798` / `lc2_w9125` (the net is joined elsewhere
 through uncertain items, `lc2_w9185`); `cdp2_w6845s` (`cdp2`'s `?M`); a functional name for
