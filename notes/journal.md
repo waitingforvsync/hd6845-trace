@@ -3379,3 +3379,20 @@ identical but for names).
 `out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 1,013
 floor-plan blocks. Coverage: 73.0% traced; in some package region 99.9%; untraced and in no Queue row
 0.4%. Cost report updated.
+
+## 2026-11-24 16:28 UTC  Queue reordered: the frame's last line first
+
+The user (2026-11-24, during `eof` run 69): "can you bump to the front of the queue anything which might
+touch this logic", the logic being what the chip decides at the start of the frame's last scan line (R4's
+row, before vertical adjust). Nothing in the handoffs of `busl` runs 17-19 or the fourteenth refresh bears
+on it; what is known is unchanged (`notes/operation.md`: R4's match has two loads in `bd1`'s gate column,
+an inverter and a latch gated by `rst_lat` that as read is open only during reset; the latch's output is
+the step term `rcs_e3`; the step request has it as NOT `rcs_e4` AND NOT (`rcs_e3` AND `rcs_a2`), with
+`rcs_a2` = NOR(`rst_ck`, `tl3_w3803`)).
+
+Done by the coordinator's session (on Fable 5.2, the session that holds `eof`'s claim): in the Queue of
+`notes/work-packages.md`, behind `eof`, now stand `bd1`-`bd3`, `tla` (continue), `tl1`-`tl6`, `mra`
+(continue), `ur` (continue), `lc1`-`lc3`, `amr` and `rdp1` (continue), each with its reason as the first
+sentence of its row; a paragraph above the table says what the order is. The other rows keep their order.
+No region changed (`tools/coverage.py` as before). The choice is a judgment from the rows' open items and
+the extraction's loads of `rc_eq_r4`, `bd1_an`, `rcs_e3`, `rcs_a2` and `cnt_gab`, not from new tracing.
