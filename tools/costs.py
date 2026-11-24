@@ -138,13 +138,21 @@ def traces(path):
 
 # What a tracing call works on. A main session is credited with a package's commit only for the
 # stretch in which it was itself working on THAT package: it ran the tracing wrapper for it
-# (tools/t.sh PACKAGE tool.py ...), shipped its files (tools/ship.sh "subject" trace/PACKAGE.txt ...)
-# or edited them. A command that merely mentions the scripts (cat tools/t.sh, a heredoc that edits
+# (tools/t.sh PACKAGE tool.py ...), shipped its files (tools/ship.sh "subject" trace/PACKAGE.txt ...;
+# not the coordinator's HD_COORD=1 shipping, below) or edited them. A command that merely mentions the scripts (cat tools/t.sh, a heredoc that edits
 # this file) names no package and counts for none, so a second session under the same git name that
 # is doing something else does not land on the package's gate (lc2, 2026-11-18: a second session's
 # coordination on another model was counted against a package traced on Fable, twice).
 T_RUN_RE = re.compile(r'tools/t\.sh\s+([a-z][a-z0-9_]*)\s+\S+\.py')
 SHIP_RUN_RE = re.compile(r'tools/ship\.sh\s+["\']')
+# The coordinator's shipping (HD_COORD=1 tools/ship.sh ..., on main: handoffs applied, a refresh's
+# renames) names other packages' files without tracing them: a Corrections section in a block's
+# notes, a renamed net, a floor-plan line. It is not a tracing call for those packages. A session
+# that does trace a package still counts for it by its tools/t.sh runs and its edits. (busl,
+# 2026-11-24: the one Opus response that shipped "Handoffs applied" with six blocks' notes among
+# its files was counted against each of the six and failed the gate's model check for packages
+# traced on Fable only.)
+COORD_SHIP_RE = re.compile(r'\bHD_COORD=\S+\s+(?:\S*/)?tools/ship\.sh\b')
 PKG_FILE_RE = re.compile(r'(?:^|[\s/"\'=])(?:trace/([a-z][a-z0-9_]*)\.txt|notes/blocks/([a-z][a-z0-9_]*)\.md|'
                          r'floorplan\.d/([a-z][a-z0-9_]*)\.txt|ports\.d/([a-z][a-z0-9_]*)\.txt)')
 
@@ -154,7 +162,7 @@ def call_packages(name, inp):
     if name == 'Bash':
         cmd = str(inp.get('command', ''))
         pk = set(T_RUN_RE.findall(cmd))
-        if SHIP_RUN_RE.search(cmd):
+        if SHIP_RUN_RE.search(cmd) and not COORD_SHIP_RE.search(cmd):
             pk.update(g for m in PKG_FILE_RE.finditer(cmd) for g in m.groups() if g)
         return pk
     if name in ('Edit', 'Write'):
