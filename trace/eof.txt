@@ -4913,9 +4913,12 @@ M 10573,16945 y17054 w=50              # the VSS rail, between piece u16864's st
 # field west), so the contact is drawn uncertain (notes, Ambiguity 219; review round 77). The metal is on
 # the track of regs' line lc2_w8450 (M 10485,17994 y17760), 700 px south: whether it is that line is not
 # shown. Drawn over the box only (PORTS at y 16960 and y 17024).
+# Run 70 (piece t10484): the `?C 10481,16996 s=14x20` and the metal `M 10482,16960 y17024 w=16` drawn here
+# are taken out. The box is the cell's unused exit, the closed stub that piece u15826 has (same size, same
+# place in the cell), not a contact's land; no hole, no pad, no bright centre; and u16303's output reaches
+# this very metal by a detour to a pad (10440,16215), which is how these cells join it. The metal is now
+# drawn up to the box from both sides by piece t10484 and left undrawn over it (notes, Ambiguity 219).
 D 10474,16980:10520,17012
-?C 10481,16996 s=14x20
-M 10482,16960 y17024 w=16
 N D 10512,17020 eof_w16996
 # The third pull-down, east of the rail: the poly row of piece u16864's end pad (10683,17035) runs west
 # over a diffusion x 10620-10650 that joins the node (north) to a diffusion y 17052-17068 (south), which is
@@ -5209,3 +5212,77 @@ B 10624,15766:10652,15787
 P 10686,15751:10714,15861              # the plate
 P 10694,15728:10714,15753              # its head, on cdp4's row
 N P 10700,15800 cdp4_w10808
+# ======================================================================
+# Run 70 (2026-11-24), piece `u17690`: the unit of rst_lat's branch row y 17682-17698 (run 52's `P 10355,17690
+# x10597`) in the column of the VSS rail x 10548-10598, south of piece ld566's unit: an inverter,
+# eof_w17734 = NOT rst_lat, of the column's build with a long weak load. Under the rail (tan x 10546-10588 in
+# the clean shot): vss y 17634-17676 with the rail contact (10560,17652), the gate (salmon) y 17682-17698, the
+# node y 17702-17734. West of the rail the row lies on field (khaki north of it at x 10515 and x 10530), so
+# the channel is the rail's width only: 42/16.
+D 10546,17634:10588,17736              # vss north of the gate row, the node south, through under the row
+C 10560,17652
+M 10573,17585 y17780 w=50              # the VSS rail, over this unit
+N M 10573,17620 vss
+# The node's west exit: a diffusion neck y 17723-17735 from the rail's west edge to the cell's buried
+# contact box (10492-10514, 17718-17746; interior (10498-10506, 17726-17740) tan in the clean shot), in which
+# a poly neck y 17725-17743 from the end pad (10439,17734) ends. The thin metal x 10476-10492 (piece t10484)
+# passes over the neck beside the box: no contact (no hole, no pad; the neck is protected poly under it).
+D 10519,17723:10550,17735              # the neck west of the rail
+D 10498,17722:10522,17742              # its end in the box
+B 10492,17718:10514,17746
+P 10439,17734 x10508 w=18              # the poly neck from the pad into the box
+P 10422,17717:10456,17751              # the end pad (10439,17734)
+C 10439,17734 s=20x20
+# The output metal: from the pad south on x 10434-10448 (8-9 px bars only, two-chip test, to y 18306). Drawn
+# to the claimed region's edge (PORT (10441,18010)); beyond, seen and not drawn: it turns east at y ~18295
+# onto a pad (10482,18295) whose poly row y 18286-18306 runs east under both rails; ck_out's ring corner
+# (10442,18342) is another metal 25 px south of its corner.
+M 10441,17734 y18010 w=14
+N M 10441,17900 eof_w17734
+# The load. The node leaves the rail's east edge at y 17716-17736 into a plain region x 10604-10626,
+# y 17716-17753, which runs north as an arm x 10612-10626 to y 17686: the west end of the strip y 17684-17708
+# under the plate x 10628-10722, y 17664-17730 (two edge lines across the plate, y 17680 and y 17708; the
+# clean shot bright red over the strip, dark red-brown beside it). The strip runs on into the box of the VCC
+# rail's contact (10743,17706). Between the rail and the arm, y 17680-17716, a notch of field with the gate
+# row's end cap. The tie: a leg of the plate's poly from its bottom edge at x 10638-10666 into a box
+# (10634-10668, 17738-17762) that the node's region reaches from the west along y 17738-17756.
+D 10586,17716:10626,17753              # the node east of the rail
+D 10612,17686:10626,17720              # the arm north to the strip
+D 10622,17684:10730,17708              # the strip under the plate, into the VCC box
+D 10724,17684:10770,17732              # the box of the VCC contact
+C 10743,17706
+M 10746,17555 y17780 w=48              # the VCC rail, on south over this unit
+N M 10746,17600 vcc
+P 10628,17664:10722,17730              # the plate
+P 10638,17728:10666,17752              # its leg south into the tie box
+D 10624,17738:10660,17756              # the node's tab under the tie box
+B 10634,17738:10668,17760
+# ======================================================================
+# Run 70 (2026-11-24), piece `t10484`: the thin metal x 10477-10491 between the patch of the pad (10440,16215)
+# (piece p16215, net eof_w16213) and regs' stretch `M 10485,17994 y17760` from the end pad (10484,17994) (net
+# lc2_w8450). Wiring only. Both metal shots show it without a break of more than 13 px (the edge bars of the
+# rows under it) except over five boxes, where it is dark for 36-39 px in both chips (tl3_thin.py 10474 10494
+# 16200 18010 --thr 176 --min 8): the west exit boxes of pieces u16303 (y 16241-16277), u16560 (y 16500-16537),
+# u16996 (y 16977-17014), ld566 (y 17457-17492) and u17690 (y 17716-17754). No contact at any of them: no
+# hole in the clean shot (red minus green 8-16 on the centre line against -15 on the pad (10484,17994)), no
+# pad, the metal's width unchanged on both sides. Over four of them the clean shot shows the metal was there
+# (the row that leaves the box west is protected cream poly at x 10473-10479 at mid-box, against dark
+# red-brown in the open gap 6 px west): drawn ?M (tracing guide, trap 27). The fifth, u16996's box, has no
+# row; its interior is protected tan like the others', against the dark interior of the uncovered stub box
+# of piece u15826. As one metal the track would join eof_w16213 (= NOT rst_lat) to lc2_w8450 (the reset in
+# the other sense): the stretch over that box, y 16977-17015, is NOT DRAWN, and each side keeps its name
+# (PORTS (10484,16977) and (10484,17015); notes, Ambiguity 219; AMB-060).
+?M 10484,16238 y16279 w=14             # over u16303's box (its own net's)
+M 10484,16277 y16501 w=14
+?M 10484,16499 y16539 w=14             # over u16560's box (eof_w16560's row under it)
+M 10484,16537 y16977 w=14
+N M 10484,16400 eof_w16213
+N M 10484,16700 eof_w16213
+M 10484,17015 y17458 w=14
+?M 10484,17456 y17494 w=14             # over ld566's box (bl0_w15566's row under it)
+M 10484,17492 y17717 w=14
+?M 10484,17715 y17756 w=14             # over u17690's box (eof_w17734's neck under it)
+M 10484,17754 y17766 w=14              # onto regs' M 10485,17994 y17760
+N M 10484,17200 lc2_w8450
+N M 10484,17600 lc2_w8450
+N M 10484,17762 lc2_w8450
