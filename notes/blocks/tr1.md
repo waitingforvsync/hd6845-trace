@@ -23,11 +23,11 @@ diffusion east of its source contact (next gate's) not drawn. All three load tie
 
 ## Logic
 
-Inverter A, x 11940-12065 (drawn; `tr1_w11960 = NOT tr1_w12005`; `unsure.py --equations`: DEPENDS on the two `?` items of the load tie, not firm):
+Inverter A, x 11940-12065 (drawn; `tr1_w11960 = NOT cdp4_w10808`; `unsure.py --equations`: DEPENDS on the two `?` items of the load tie, not firm):
 
 | Transistor | Gate | Between | W/L | Where |
 |---|---|---|---|---|
-| pull-down | `tr1_w12005` | `vss` - `tr1_w11960` | 47/22 | channel (12005,3758): diffusion box 11966-12062 x 3735-3782, source contact (12042,3758) on the upper rail |
+| pull-down | `cdp4_w10808` | `vss` - `tr1_w11960` | 47/22 | channel (12005,3758): diffusion box 11966-12062 x 3735-3782, source contact (12042,3758) on the upper rail |
 | load (depletion) | `tr1_w11960` (?) | `tr1_w11960` - `vcc` | 21/52 | channel (11972,3879): textured poly 11942-12003 x 3853-3905 over the strip x 11962-11983; drain in the box 11960-12020 x 3912-3962, contact (11988,3938) on the lower rail |
 
 Gate B, x 12065-12200 (drawn by hand from `b5.png`, 3x clean / chip-2 stripped / metal; `tr1_w12090 = NOT tr1_w12135`; DEPENDS on its own two `?` tie items):
@@ -49,11 +49,11 @@ the drain box (y 3900-3905). The clean-shot dot at (12183,3880) is about 5 px an
 in every shot (C's at (12305,3756): clean 50), so it is not a contact. Layer unsettled (an isolated
 diffusion or a field opening); either way it joins nothing of B, so it is NOT drawn. Open.
 
-Gate C, x 12195-12330 (drawn by hand from `c5.png` 2.5x and `c_east.png` 5x, clean / chip-2 stripped / metal; overlay `c_tr.png`; `tr1_w12220 = NOT tr1_w12265`; DEPENDS on its own two `?` tie items):
+Gate C, x 12195-12330 (drawn by hand from `c5.png` 2.5x and `c_east.png` 5x, clean / chip-2 stripped / metal; overlay `c_tr.png`; `tr1_w12220 = NOT rst_lat`; DEPENDS on its own two `?` tie items):
 
 | Transistor | Gate | Between | W/L | Where |
 |---|---|---|---|---|
-| pull-down | `tr1_w12265` | `vss` - `tr1_w12220` | 50/22 | channel (12265,3757): box 12222-12318 x 3732-3782, source contact (12305,3756) (dark dot, clean shot 5x); `px.py col 12265 3720 3805 5 acid1b,acid`: bright y 3740-3775 in both, poly end about 3795 |
+| pull-down | `rst_lat` | `vss` - `tr1_w12220` | 50/22 | channel (12265,3757): box 12222-12318 x 3732-3782, source contact (12305,3756) (dark dot, clean shot 5x); `px.py col 12265 3720 3805 5 acid1b,acid`: bright y 3740-3775 in both, poly end about 3795 |
 | load (depletion) | `tr1_w12220` (?) | `tr1_w12220` - `vcc` | 21/52 | channel (12232,3879): textured poly 12202-12263 x 3853-3905 over the strip x 12222-12243; drain box 12220-12280 x 3912-3962, contact (12245,3937) |
 
 5x crops of B's and C's buried contacts and ties (`b_bc5.png`, `b_tie5.png`, `c_bc5.png`,
@@ -83,7 +83,7 @@ output strip (thin metal or a field edge; not a contact on the strip, not drawn)
 poly at x 11960-11975 north of y 3650 and the poly x 12000 north of y 3650 (not followed).
 ## Ports
 
-`ports.d/tr1.txt`: `tr1_w12005` (in) and `tr1_w11960` (out), both poly ends at y 3650 where the drawing stops; neither followed north.
+`ports.d/tr1.txt`: `cdp4_w10808` (in) and `tr1_w11960` (out), both poly ends at y 3650 where the drawing stops; neither followed north.
 
 ## Ambiguities
 
@@ -146,7 +146,7 @@ Round 1 (gates B and C): no findings.
 
 ## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
 
-- `tr1_w12005` and `tr1_w12265` "from the track field to the north (not followed)" (here and in
-  `ports.d/tr1.txt`): followed by `cdp4` run 14: `tr1_w12265` (gate C's input) is `rst_lat`, `tr1_w12005`
+- `cdp4_w10808` and `rst_lat` "from the track field to the north (not followed)" (here and in
+  `ports.d/tr1.txt`): followed by `cdp4` run 14: `rst_lat` (gate C's input) is `rst_lat`, `cdp4_w10808`
   (inverter A's input) is `cdp4_w10808`; the two ports at y 3650 are met by geometry. Four undrawn gates
   further east in the row take the same two lines (`cdp4` run 15).

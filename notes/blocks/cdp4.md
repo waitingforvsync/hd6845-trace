@@ -768,7 +768,7 @@ that ambiguity is unchanged by this run.
 | thin metal east of the pad | along y 3592 | along y 3636 |
 | first tap (pad with a contact) | (12261,3593) | (12000,3636) |
 | the tap's poly | south, x 12252-12274, under the y 3636 metal, onto `tr1`'s `P 12265,3650 y3795` | the pad is the top of `tr1`'s `P 12005,3650 y3795` |
-| `tr1`'s name for that poly | `tr1_w12265`, the input of its gate C | `tr1_w12005`, the input of its inverter A |
+| `tr1`'s name for that poly | `rst_lat`, the input of its gate C | `cdp4_w10808`, the input of its inverter A |
 | drawn end of the metal (port) | (12400,3592) | (12400,3636) |
 
 - **The rows** (`tr_rows.png`, 1.6x, metal and clean): from the ports at x 10980 each runs east under three
@@ -793,7 +793,7 @@ that ambiguity is unchanged by this run.
     tr1_w12220 = NOT rst_lat             (tr1's gate C; its load's tie is marked uncertain there)
     tr1_w11960 = NOT cdp4_w10808         (tr1's inverter A; likewise)
 
-`@alias rst_lat tr1_w12265`, `@alias cdp4_w10808 tr1_w12005` (the renames are the coordinator's refresh).
+`@alias rst_lat w12265`, `@alias cdp4_w10808 w12005` (the renames are the coordinator's refresh).
 `tr1`'s three gates were traced on Opus (re-read item R31): the equations above rest on `tr1`'s gates as
 they stand; what this run adds is the two joins.
 
@@ -838,7 +838,7 @@ to an end pad (13560,3636) with a poly south (x 13550-13575), with one more tap 
   gates are not drawn (`tr1`'s; its drawn part ends at x 12320).
 
 So `rst_lat` has, in this row, three gate loads (the wire `tr1` called w12265 and two undrawn gates at about
-x 13822 and x 14044) and `cdp4_w10808` three (`tr1_w12005` and two at about x 13346 and x 13560).
+x 13822 and x 14044) and `cdp4_w10808` three (`cdp4_w10808` and two at about x 13346 and x 13560).
 
 ### Corner gate group: `cdp4_rst` = NOR of six select rows (run 2, 2026-11-19; traced)
 
@@ -904,7 +904,7 @@ islands are closed curves inside it, so they are the other class.
 | `cdp4_bus_s0`..`s7` | poly | x 7600, y 13333, 13376, 13420, 13463, 13505, 13548, 13590, 13633 | from outside | data into the row C latch |
 | `d5_out_n`..`d1_out_n` | poly | onto `dbus`'s rows at x 16822, 16870, 16912, 16957, 16957 (y 15824, 15954, 16085, 16215, 16345) | driven inside | the outputs of the data output inverters (run 8) |
 | `dbus_le` | metal, poly | x 16775, y 15930 (onto `dlat`'s end); the poly row's west end (16130, 16855-16875), on a framed box of an undrawn gate (runs 8, 13) | from that gate (read, not drawn) | the data input latches' enable, passing through the units (run 8; uncertain over four boxes) |
-| `cdp4_w10808` (= `tr1_w12005`) | poly | (13346,3675) and (13560,3675) (the polys south of its second tap and its end pad, into `tr1`'s gate row); (10694-10716, 15726-15748) (the corner of the row from its bottom pad: beyond, an undrawn unit of `bc2` that drives it) | driven from `bc2`'s unit (read, not drawn) | the first through line and its run in the top-right track field (runs 12, 14, 15) |
+| `cdp4_w10808` | poly | (13346,3675) and (13560,3675) (the polys south of its second tap and its end pad, into `tr1`'s gate row); (10694-10716, 15726-15748) (the corner of the row from its bottom pad: beyond, an undrawn unit of `bc2` that drives it) | driven from `bc2`'s unit (read, not drawn) | the first through line and its run in the top-right track field (runs 12, 14, 15) |
 | `rst_lat` | poly | (13822,3675) and (14044,3675) (the polys south of its second tap and its end pad, into `tr1`'s gate row); (10782-10797, 17700) (the column south of the bottom row's west end) | from `trunks`' inverter | the second through line and its run in the top-right track field (runs 12, 14, 15) |
 | `vcc`, `vss` | metal | x 16515 and x 16689 at y 15780 (onto `dlat`'s rails); `vcc` drawn to y 16440 (goes on south at least to y 16900), `vss` ends at y 16446 | - | the units' rails |
 | `cdp3_n_c7` (= `cdp4_n_s7` = `cdp3_n_c7`) | metal | (16950-16962, 16714): onto `dbus`'s metal | driven inside | the read bus, column 7 = the gate of D0's output chain (run 7) |
@@ -1604,7 +1604,7 @@ Round 14: no findings that change a connection.
 Round 15 (full review, 2026-11-21 18:08 -0600; a fresh Fable reviewer, images in `cache/scratch/cdp4/review-15/`, 11;
 commit before the round 2bc358b). Piece: the two rows from run 12's ports to their pads, the two metals to
 x 12400, the two taps and their joins with `tr1`'s polys (`rst_lat` = the wire `tr1` called w12265,
-`cdp4_w10808` = `tr1_w12005`). Told to suspect: each tap (a real contact? on which metal? which of `tr1`'s
+the wire `tr1` called w12005 = `cdp4_w10808`). Told to suspect: each tap (a real contact? on which metal? which of `tr1`'s
 polys does its poly become? a contact where tap A's poly crosses the y 3636 metal? a poly north of a pad?);
 every other crossing of the two metals; the rows under the plate and the three thin metals and at the join;
 each end pad; the metals' continuity and identity.

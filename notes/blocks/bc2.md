@@ -254,7 +254,7 @@ Round 1 (latch unit b): no findings.
   which runs on south ...") and its Not done: the metal x 10398 is followed (`eof` runs 55, 56, 59): south to a
   corner (10398,15738), west to (10354,15738), south onto a pad (10354,15781), a poly hop to the pad
   (10354,15867) and the thin metal x 10353 / 10397 / 10441 to the output pad (10441,17168) of a NOR under the
-  VSS rail x 10548-10598: **`bc2_w14955` = NOR(`rst_lat`, `ck_out`)** (firm; `eof_w17166` is an alias). The
+  VSS rail x 10548-10598: **`bc2_w14955` = NOR(`rst_lat`, `ck_out`)** (firm; `bc2_w14955` is an alias). The
   port `bc2_w14955` M (10398,15440) in `ports.d/bc2.txt` is met.
 - Copy b's enable `bc2_w15432` ("it goes on south (metal shot continuous to y 15718 at least; not followed)"):
   followed by `eof` run 60 (piece `en432`) through the pad (10441,15650), corners (10441,15788), (10393,15788),

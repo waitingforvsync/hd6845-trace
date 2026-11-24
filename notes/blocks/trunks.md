@@ -625,7 +625,7 @@ along the top of the central datapath) is the gap.
 
 - `h_eq_r1`, "poly west and south-west" with its diagonal to (10940,17598) (here and in the comment in
   `trace/trunks.txt`): followed by `eof` run 52: the diagonal becomes a row y 17592-17612 west to a column
-  x 10432-10448 north, the gate of the pull-down on `bl0_w15566` at (10548,17515). `eof_w17515` is an alias of
+  x 10432-10448 north, the gate of the pull-down on `bl0_w15566` at (10548,17515). `h_eq_r1` is an alias of
   `h_eq_r1`.
 
 ## Corrections (coordinator, from the handoffs of `eof` runs 55-62, 2026-11-23)

@@ -11,13 +11,13 @@ N M 11950,3766 vss
 M 11940,3942 x12065 w=44
 N M 11950,3942 vcc
 
-# ---- inverter A, x 11940-12065:  tr1_w11960 = NOT tr1_w12005
+# ---- inverter A, x 11940-12065:  tr1_w11960 = NOT cdp4_w10808
 # pull-down: diffusion box under the upper rail, source contact (12042,3758)
 D 11966,3735:12062,3782
 C 12042,3758
 # input poly from the north (leaves at y 3650), gate over the box, ends y 3795
 P 12005,3650 y3795 w=22
-N P 12005,3660 tr1_w12005
+N P 12005,3660 cdp4_w10808
 # output: diffusion west of the gate, north to a buried contact and poly going north
 D 11965,3705:11983,3850
 D 11945,3672:11988,3705
@@ -71,7 +71,7 @@ C 12117,3937 s=36x24
 # dark edge at x 12162-12170. Unresolved: diffusion or poly stub, and whether the dot is a contact.
 
 # ---- gate C, x 12195-12330, drawn from cache/scratch/tr1/c5.png (2.5x) and c_east.png (5x):
-#      tr1_w12220 = NOT tr1_w12265 (if the load tie holds)
+#      tr1_w12220 = NOT rst_lat (if the load tie holds)
 M 12195,3766 x12330 w=38
 N M 12320,3766 vss
 M 12195,3942 x12330 w=44
@@ -83,7 +83,7 @@ D 12222,3732:12318,3782
 C 12305,3756
 # input poly from the north; px col 12265: channel y 3738-3775 bright in both shots, poly end ~3795
 P 12265,3650 y3795 w=22
-N P 12265,3660 tr1_w12265
+N P 12265,3660 rst_lat
 # output strip west of the gate, north to a buried contact (ring 12207-12246 x 3668-3705) and a poly north
 D 12225,3705:12243,3850
 D 12207,3672:12246,3705

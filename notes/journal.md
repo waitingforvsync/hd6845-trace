@@ -3053,7 +3053,7 @@ What they establish (from the tracers' notes; marks as there):
   undrawn two-input NOR under `bd2`'s VSS rail; believed NOR(`cs_d`, X), as PR #17 had it.
 - **The two through lines east of the datapath** (`cdp4` runs 12-15): x 10852 is `rst_lat` (firm),
   x 10808 is `cdp4_w10808`, the output of an undrawn unit of `bc2`; both run 14,000 px north into `tr1`'s
-  gate row, three gate loads each (`tr1_w12265` = `rst_lat`, `tr1_w12005` = `cdp4_w10808`).
+  gate row, three gate loads each (`rst_lat` = `rst_lat`, `cdp4_w10808` = `cdp4_w10808`).
 - **`eof`: the NOR column's output reaches every row of the memory address counter** (runs 36-38):
   `eof_w15998` = `eof_w16218` = NOT `eof_w15781` (marked: AMB-050's ties), seven rows each, on the tracks
   x 4736 / x 4780 (the arm onto (4736,14155): AMB-052), with two more capacitor-like devices (AMB-051).
@@ -3067,7 +3067,7 @@ What they establish (from the tracers' notes; marks as there):
   and a pull-down on every Y gated by one line `eof_ypd` whose driver is open.
 - **`eof` runs 49-51**: the twin of `cap18`; the bus lines of `bl0_w15566` and (through a `?M`, AMB-057)
   `eof_w16040` east to `bc4`'s ground, where `eof_w17345` = NOR(`bl0_w15566`, `eof_w16040`) waits for its
-  load east of x 10600; `bl0_w15566` has a pull-down gated by `eof_w17515`.
+  load east of x 10600; `bl0_w15566` has a pull-down gated by `h_eq_r1`.
 
 Applied: master list rows `eof` (runs 36-51; a new Next, released), `cdp4` (continue) (runs 4-15,
 released), `regs` (runs 5-6), `cdp3` (continue) (only the cluster beside row A left), and the proposals
@@ -3112,7 +3112,7 @@ its two pads and run 54's metal x 10397 at 1x (`hR-20261122-eof53.png`).
 
 What they establish (from the tracer's notes; marks as there):
 
-- **`eof_w17515` is `h_eq_r1`** (run 52, firm): `bl0_w15566`, an input of the NOR `eof_w15523` in the chain
+- **`h_eq_r1` is `h_eq_r1`** (run 52, firm): `bl0_w15566`, an input of the NOR `eof_w15523` in the chain
   whose output reaches every row of the memory address counter, is pulled to `vss` while the horizontal
   counter equals R1. The first traced use of R1's match.
 - **`rst_lat` reaches the column of `bc4`'s VSS rail x 10548-10598** (runs 52-53): from `cdp4`'s port south,
@@ -3126,7 +3126,7 @@ What they establish (from the tracer's notes; marks as there):
 Applied: master list rows `eof` (runs 52-54; a new Next, released), `cdp4` (continue) (`rst_lat` south of
 its port drawn), `trunks` (continue) (`h_eq_r1`'s diagonal followed), `bc2`-`bc4` (the five undrawn gate rows
 on the east column's VSS rail, the rail contact (10560,17083) in no trace file, the unit with `rst_lat`'s
-pull-down, the metal round the end pad) and the `rename` row (`eof_w17515`, an alias of `h_eq_r1`).
+pull-down, the metal round the end pad) and the `rename` row (`h_eq_r1`, an alias of `h_eq_r1`).
 **Re-read list**: R52 new: follow-task wires drawn as one plain poly with no tap, flanks read by eye only
 (`eof`'s own rows and columns, `busl`, `regs`, `tl4` runs 11-12; `cdp4`'s wires of 2026-11-21 and `bl0`'s
 long segments already scanned by run 53, no branch). **Guide**: trap 13 (a poly row whose end is hidden under
@@ -3160,7 +3160,7 @@ What they establish (from the tracer's notes; marks as there):
   rail at y 17054-17250, its load on the VCC rail x 10722-10768, its output metal north 1,300 px and a poly hop
   onto `bc2`'s enable stub (10398,15440). The enable of the east column's latch unit a is NOT `ck_out` outside
   reset and low during reset; the same net is an input of the NOR `eof_w15172` (unit T, which sets the latch
-  that clocks the ripple counter) and the gate of two rows west of the rail. `eof_w17166` is an alias. The
+  that clocks the ripple counter) and the gate of two rows west of the rail. `bc2_w14955` is an alias. The
   dark spot (10567,17178) on the rail is assumed a blemish (AMB-059).
 - **`ck_out` #2 ends on the pad (10439,17238)** (run 55): `trunks` had drawn it on north through the NOR's
   output pad, joining the gate's output to its input; `trace/trunks.txt` was cut back by `eof` (cdc4d7d).
