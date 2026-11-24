@@ -1215,3 +1215,39 @@ N P 7000,9796 cdp3_cw_c2
 @alias cdp3_cw_c4 lc3_e9708
 @alias cdp3_cw_c3 lc3_e9750
 @alias cdp3_cw_c2 lc3_e9793
+# =====================================================================================
+# Piece ya (run 18, 2026-11-24): tc1_p4308 is ck_a. tc2's poly from its pad (6490,6108)
+# (`P 6492,6118 y6400 w=18`) runs on south from y 6400 as a straight poly column (cream
+# x 6488-6503 under the metals) under seven horizontal metals (y 6416 amrw's, y 6459
+# undrawn, y 6501 .. 6676 slbus's five: plain crossings, no pad, no hole), in the open from
+# y 6690, to an END pad (6491,6759): ring and bright centre in both chips, pits, poly from
+# the north only, metal east only. The pad's thin metal runs east along y 6762 over field,
+# over eofw's poly column x 6843 (plain) and, from x 7040, lying on fld's poly row y 6756
+# (cnt_la_a_n's line) for 380 px (no contact: no ring or widening in either metal shot, no hole in the clean
+# shot; trap 13), to a plain corner (7424,6762), and south on x 7424 over five poly rows
+# (y 6802, 6847, 7214, 7256, 7300: no pad) onto bw's metal `M 7421,7400 y7150 w=22`, which
+# ends on bw's pad (7419,7387) of ck_a.
+P 6496,6395 y6742 w=18                # the poly column from tc2's port, south to the pad
+P 6472,6740:6510,6778                 # the end pad
+C 6491,6759 s=24x24
+M 6491,6760 x7424 y7155 w=13          # metal y 6762 east, corner, track x 7424 south onto bw's metal
+N M 7000,6760 ck_a
+N P 6496,6600 ck_a
+@alias ck_a tc1_p4308
+# =====================================================================================
+# Piece yb: tc1_m6817 is cnt_bus_b. tc2's poly from its pad (6533,6152)
+# (`P 6524,6152:6544,6400`) runs on south from y 6400 as a straight poly column (cream
+# x 6531-6546) under the same seven metals (plain) to an END pad (6538,6717): ring and
+# bright centre in both chips, pits, poly from the north only, metal east only. The pad's
+# thin metal runs east along y 6718 over field, over eofw's poly column x 6843 (plain)
+# and, from x 7050, lying on fld's poly row y 6712 (rc0_n's line) for 420 px (no contact), to a plain
+# corner (7468,6718), and south on x 7468 over fld's row y 6756 and the same five rows
+# (no pad) onto bw's metal `M 7467,7357 y7150 w=23`, which ends on bw's pad (7466,7343)
+# of cnt_bus_b.
+P 6539,6395 y6700 w=18                # the poly column from tc2's port, south to the pad
+P 6519,6698:6557,6736                 # the end pad
+C 6538,6717 s=24x24
+M 6538,6717 x7468 y7155 w=13          # metal y 6718 east, corner, track x 7468 south onto bw's metal
+N M 7000,6717 cnt_bus_b
+N P 6539,6600 cnt_bus_b
+@alias cnt_bus_b tc1_m6817

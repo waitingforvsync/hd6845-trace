@@ -212,3 +212,8 @@ cdp3_cw_c5   P  7600,9656-9676     in  onto cdp3's row `P 7600,9668 x9825`
 cdp3_cw_c4   P  7600,9700-9720     in  onto cdp3's row `P 7600,9711 x9435`
 cdp3_cw_c3   P  7600,9743-9763     in  onto cdp3's row `P 7600,9754 x9045`
 cdp3_cw_c2   P  7600,9786-9806     in  onto cdp3's row `P 7600,9797 x8654`
+# pieces ya, yb (run 18): tc1_p4308 = ck_a, tc1_m6817 = cnt_bus_b (canonical ck_a, cnt_bus_b; @alias until the rename)
+tc1_p4308    P  6487-6505,6400     out onto tc2's poly from its pad (6490,6108) (its port tc1_p4308 (6492,6400)): the column runs south to an end pad (6491,6759), metal y 6762 east and x 7424 south
+ck_a         M  7418-7430,7150     in  onto bw's metal x 7421 (drawn there from y 7150 to its pad (7419,7387) of ck_a)
+tc1_m6817    P  6530-6548,6400     out onto tc2's poly from its pad (6533,6152) (its port tc1_m6817 (6534,6400)): the column runs south to an end pad (6538,6717), metal y 6718 east and x 7468 south
+cnt_bus_b    M  7462-7474,7150     ?   onto bw's metal x 7467 (drawn there from y 7150 to its pad (7466,7343) of cnt_bus_b)
