@@ -266,3 +266,9 @@ Round 1 (latch unit b): no findings.
   driver yet). The port (10353,15440) is met.
 - R31: the lines `M 10441,15180 y15392`, `M 10441,15392 x10398`, `M 10398,15386 y15440` and the reading "not
   joined to copy b's pad" were confirmed on Fable by review round 72 of `eof`.
+
+## Corrections (coordinator, from the handoff of `eof` run 70, 2026-11-24)
+
+- The `bc4` part of the rail column: the unit at x 10420-10775, y 17630-17765 is `eof`'s piece `u17690`,
+  `eof_w17734` = NOT `rst_lat` (firm; a weak load 24/94), on `rst_lat`'s branch row y 17682-17698; its output
+  leaves west by a pad (10439,17734) and a thin metal x 10441 south (drawn to y 18010).

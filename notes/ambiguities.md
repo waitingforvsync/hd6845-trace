@@ -1082,7 +1082,25 @@ both chips. A contact would put the node on `vss`: no gate, and `rst_lat`'s tran
 diffusions; the node also has a load and an exit of its own, which a grounded diffusion would not. Rests on it:
 `bc2_w14955` = NOR(`rst_lat`, `ck_out`). Would settle it: nothing more in these photos.
 
-## AMB-060: is the box (10476-10518, 16980-17012) of the latch node `eof_w16996` contacted by the thin metal x 10476-10492? (2026-11-23)
+## AMB-060: the thin metal x 10477-10491 beside `bc2`'s VSS rail column: one metal or two? (2026-11-23; restated 2026-11-24, `eof` run 70)
+
+Restated 2026-11-24 (`eof` run 70, piece `t10484`; review round 84). Its north end is on the pad (10440,16215) of
+`eof_w16213` = NOT `rst_lat` (`eof`, piece `u16303`, firm), its south end on `regs`' end pad (10484,17994) of
+`lc2_w8450` = NOT `lc1_w7170` (the reset in the other sense). `eof` run 70 read all of it: no stretch without
+metal longer than 13 px except over the west exit boxes of five units (y 16241-16277, 16500-16537, 16977-17014,
+17457-17492, 17716-17754), no contact, pad, hole or arm on it; over four of the boxes the clean shot shows the
+metal was there at mid-box, over the fifth (the latch node `eof_w16996`'s stub box) the box's interior is
+protected like the others'. So on the photos it is one metal, and then one of the two names is wrong
+(candidates: `regs`' route of thirteen pads, the staircase bundle above the left bus field's track x 4822,
+`lc2`'s uncertain output box, `rst_lat`'s identity at `cdp4`'s port (10789,17700); re-read item R56); or it is
+two metals parted inside a box stretch, each a stub with no load. Assumption in the trace: none; the metal is
+drawn from both ends up to the fifth box (`?M` over the other four) and not over it (y 16977-17015), so the two
+nets stay apart and both equations stand. The uncertain contact of the latch node to this metal (the block's
+Ambiguity 219, the question this entry first asked, below) is read as no contact and removed. Block:
+`notes/blocks/eof.md`, Ambiguities 219, 222.
+
+First asked 2026-11-23 as: is the box (10476-10518, 16980-17012) of the latch node `eof_w16996` contacted by the
+thin metal x 10476-10492?
 
 From `eof` run 63 (Kieran Connell; the block's Ambiguity 219; review round 77). The latch `eof_w16889` /
 `eof_w16996` in `bc2`'s rail column has no other visible exit for `eof_w16996`: no poly leaves the box (rows

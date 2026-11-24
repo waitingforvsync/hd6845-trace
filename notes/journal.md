@@ -3442,3 +3442,49 @@ fragment lines lie inside `bc2` / `bc4`'s coarse blocks, which other pieces stil
 floor-plan blocks. Coverage: 73.0% traced; in some package region 99.9%; untraced and in no Queue row
 0.4%. Not done here: the refresh (the rename above waits; `notes/operation.md`'s closing range still says
 AMB-001 to AMB-060).
+
+## 2026-11-24 22:50 UTC  Handoffs: `eof` run 70
+
+One handoff file, applied by the coordinator (on Opus 5.5; coordination, no tracing): `eof` run 70 (pieces
+`u17690`, `t10484`; waitingforvsync's claim, traced on Fable 5.2 in richtw1's session from 2026-11-24 20:11
++0100; merged 4e2871a; **claim released**). Full extraction after it 2,515 nets (run 69: 2,514), 4,838
+transistors (4,836), 0 errors, 0 warnings; 976 of 1,434 equations firm (was 975 of 1,433: the new inverter,
+firm); 110 nets joined only through uncertain items (was 109), 1,216 uncertain items (1,213: four `?M` added,
+one `?C` removed). Spot checks of the overlays: piece `u17690` (`cache/scratch/refresh/hR-20261124-eof70-u17690.png`)
+and the undrawn 38 px of piece `t10484` over the latch node's box (`hR-20261124-eof70-t10484.png`): the drawn
+shapes lie on the features, and the gap is where the notes put it.
+
+What it establishes (marks as in the tracer's notes):
+
+- **`eof_w17734` = NOT `rst_lat`** (piece `u17690`; firm, no uncertain item): the unit of `rst_lat`'s branch row
+  y 17682-17698 in `bc2`'s rail column (x 10420-10775, y 17630-17765, in `bc4`), a second inverter of the
+  reset copy with a long weak load (24/94); its output leaves by a pad (10439,17734) and a thin metal x 10441
+  south, drawn to y 18010 (seen beyond, not drawn: a pad (10482,18295) and a poly row east). `rst_lat`'s poly
+  has three gates in this column, all drawn now.
+- **The thin metal x 10477-10491** (piece `t10484`; wiring, four `?M`): on the photos one metal from the pad
+  (10440,16215) (`eof_w16213`) to `regs`' end pad (10484,17994) (`lc2_w8450`), with no contact between and no
+  break longer than 13 px outside five units' exit boxes. Its two ends carry opposite senses of the reset, so
+  one reading on the paths behind the two names is wrong, or the metal parts inside a box. The 38 px over the
+  latch node's box (y 16977-17015) are not drawn, so both nets and all equations stand; run 63's `?C` there is
+  read as no contact and removed.
+
+Review: round 84 (full), a fresh Fable 5.2 agent: no finding that changes a connection; three geometry
+remarks fixed (`tools/sameconn.py`: connections identical). `notes/operation.md`: changed by the tracer on the
+branch (the `ck_out` row: the thin metal followed, the second inverter `eof_w17734`); it stands.
+
+Applied: master list rows `eof` (run 70; claim released; Next: the two names (R56), `eof_w17734`'s wire south
+of (10441,18010), the column south of y 17765, the bus metal y 18420-18440 east of x 10850, `bc2_w15388`'s row
+east of x 10335, `eof_w16040`'s driver), `regs` (its port and Not done item on the track x 10485 are met),
+`bc2`-`bc4` (the unit is drawn), `busb` (lead: `eof_w17734`'s metal into the bus field) and the `rename` row
+(`eof_w17734` could take a name once its loads are read). **Re-read item R56** (a reading, not a method): the
+line `lc2_w8450` from `lc2` to the pad (10484,17994), and `rst_lat`'s poly at `cdp4`'s port (10789,17700).
+**AMB-060 restated** (one metal or two; the first question, the node's contact, kept as history). The block's
+Ambiguity 223 is local. No traps. Corrections sections in the notes of `regs` and `bc2`. Floor plan: the two
+new fragment lines lie inside `bc4`'s coarse block, which other pieces still need; nothing trimmed. Ports:
+`lc2_w8450` meets `regs`' port (10485,17760), same name, same layer; `eof_w17734` (10441,18010) and the two
+ports facing each other across the undrawn 38 px have no partner. No tool proposals.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 1,018
+floor-plan blocks. Coverage: 73.0% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%. Not done here: the refresh (`notes/operation.md`'s closing ranges still say AMB-001 to AMB-060 and
+R1-R55; the renames proposed in the `rename` row wait).

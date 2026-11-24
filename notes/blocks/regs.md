@@ -620,3 +620,15 @@ Round 7: no findings.
   `u16303`, firm). `lc2_w8450` is the reset in the other sense, so the track is not one metal on one net: the
   break or the wrong reading lies at one of the box stretches y 16500-16537, 16977-17014 (AMB-060),
   17457-17492, 17716-17754. Neither package joins them.
+
+## Corrections (coordinator, from the handoff of `eof` run 70, 2026-11-24)
+
+- "Two ends ... East" and Not done ("`lc2_w8450`'s track x 10485 north of y 17760 ... no metal north of y 16300,
+  so the track ends at about y 16340"; "its loads are not found"): the track runs on north to y 16224, where it
+  turns west onto the pad (10440,16215) (`eof`, pieces `p16215`, `t10484`). The stretches listed here without
+  metal at y 17326-17363, 17152-17188, 16914-17074, 16805-16840, 16673-16710 are the centre-line test failing
+  where the metal lies beside a poly's edge (trap 19): the whole-width test (`tools/tl3_thin.py 10474 10494
+  16200 18010 --thr 176 --min 8`) has only the five box stretches. No load of `lc2_w8450` is on the track; its
+  north end is the output pad of the inverter `eof_w16213` = NOT `rst_lat`, which contradicts the name
+  (AMB-060; R56 re-reads piece `w8450` and the line back to `lc2`). The port (10485,17760) is met by `eof`'s
+  port of the same name.
