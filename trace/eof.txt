@@ -5115,3 +5115,90 @@ D 10713,15945:10772,15993
 C 10745,15968
 M 10746,15920 y16020 w=48              # the VCC rail, over this unit only
 N M 10746,15930 vcc
+# ======================================================================
+# Run 69 (2026-11-24), piece `u16303`: the unit of rst_lat's north gate row (piece rln's row y 16293-16313) in
+# the column of the VSS rail x 10548-10598, between the units of pieces u15955 and u16560: an inverter,
+# eof_w16213 = NOT rst_lat. Of run 55's build (the gate row crosses under the rail). The channel is the
+# diffusion x 10500-10618 under the row: the node north of it (y 16266-16289), vss south (a band y 16318-16332
+# and, under the rail, the box of the rail contact (10560,16336), y 16318-16357).
+D 10500,16266:10618,16332              # node north of the gate, vss south, through under the row
+D 10542,16318:10600,16357              # the box of the rail contact
+C 10560,16336
+M 10573,16230 y16372 w=50              # the VSS rail, over this unit
+N M 10573,16250 vss
+# The node's west exit: a buried contact box (10490-10516, 16248-16282) in which piece p16215's row
+# y 16249-16267 (drawn to x 10481 under the thin metal x 10476-10492) ends: the net is eof_w16213.
+D 10494,16252:10518,16289
+B 10488,16247:10518,16283
+P 10481,16258 x10510 w=18
+# The load: the node's band y 16266-16283 runs east of the rail, through a dark box (10620-10650, 16264-16284)
+# (Ambiguity 216's: not a gate), and widens at x 10668 into a block y 16260-16320 that runs on under the plate
+# x 10686-10714 into the box of the VCC rail's contact (10745,16288). The plate is a column x 10686-10714,
+# y 16228-16338 with a bar y 16228-16250 west from its head to x 10622; the bar's west end turns south into
+# the tie box (10627-10650, 16243-16262), which sits directly on the band's north edge.
+D 10596,16266:10670,16283              # the band
+D 10668,16260:10718,16320              # the block and the strip under the plate
+D 10716,16260:10772,16324              # the box of the VCC contact
+C 10745,16288
+M 10746,16230 y16340 w=48              # the VCC rail, over this unit
+N M 10746,16240 vcc
+P 10686,16228:10714,16338              # the plate (it runs 16 px on south of the block's edge y 16322)
+P 10622,16228:10700,16250              # its bar west
+P 10627,16240:10650,16262              # the bar's end south into the tie box
+D 10627,16245:10650,16270              # the band's tab under the tie box
+B 10624,16243:10652,16264
+# ======================================================================
+# Run 69 (2026-11-24), piece `ld566`: the rest of the unit of bl0_w15566 (run 51 drew its exit box, the band to
+# x 10600 and the pull-down under the rail that h_eq_r1's row y 17507-17523 gates): it is piece u16303's unit
+# 1215 px south, shape for shape (findcell 0.87; every edge within 2 px of the master's: px.py col 10610,
+# 10637, 10675, 10700). So bl0_w15566 = NOT h_eq_r1, with its load.
+D 10584,17481:10618,17547              # the channel east of the rail: node north of the row, vss south
+P 10590,17515 x10638 w=16              # the row on east to its cap
+D 10596,17481:10670,17498              # the band
+D 10668,17475:10718,17535              # the block and the strip under the plate
+D 10716,17475:10772,17539              # the box of the VCC contact
+C 10745,17503
+M 10746,17380 y17560 w=48              # the VCC rail, on south over this unit
+N M 10746,17420 vcc
+P 10686,17443:10714,17553              # the plate
+P 10622,17443:10700,17465              # its bar west
+P 10627,17455:10650,17477              # the bar's end south into the tie box
+D 10627,17460:10650,17485              # the band's tab under the tie box
+B 10624,17458:10652,17479
+# ======================================================================
+# Run 69 (2026-11-24), piece `u15826`: the unit north of piece u15955's, between bc2's rail contact
+# (10558,15731) and the rail contact (10558,15870): piece u16303's unit 477 px north (findcell 0.85), an
+# inverter of eof_w15955. The metal of eof_w15955's pad (10441,15955) runs north on x 10434-10446 to an end
+# pad (10440,15825) (two-chip test: no metal north of the pad; only the two rings and 9 px bars between);
+# the pad's poly row y 15815-15835 runs east over the diffusion x 10494-10618 and under the VSS rail to a
+# cap at x ~10638. vss south of the row (on into the box of the rail contact (10558,15870), piece u15955's),
+# the node north.
+M 10441,15930 y15825 w=13
+P 10423,15808:10457,15842              # the end pad (10440,15825)
+C 10440,15825 s=20x20
+P 10440,15825 x10638 w=20
+D 10494,15789:10618,15855              # node north of the gate, vss south, through under the row
+D 10542,15838:10600,15880              # under the rail: on south into piece u15955's contact box
+M 10573,15740 y15850 w=50              # the VSS rail, from bc2's stretch to piece u15955's
+# The node's west exit is a stub: the cell's buried contact box (10488-10512, 15776-15797) under a poly pad
+# x 10474-10516, y 15765-15798 that is closed on every side (field west and north of it): no row leaves it.
+D 10494,15775:10518,15812
+B 10486,15768:10518,15800
+P 10474,15765:10516,15798
+# The load, the master's: band, dark box in the band, block, strip under the plate, the box of the VCC
+# contact (10745,15811); the tie box (10627-10650, 15766-15785) under the west end of the plate's bar.
+D 10596,15789:10670,15806              # the band
+D 10668,15783:10718,15843              # the block and the strip under the plate
+D 10716,15783:10772,15847              # the box of the VCC contact
+C 10745,15811
+M 10746,15740 y15925 w=48              # the VCC rail, from bc2's stretch to piece u15955's
+P 10622,15751:10700,15773              # the plate's bar west
+P 10627,15763:10650,15785              # the bar's end south into the tie box
+D 10627,15768:10650,15793              # the band's tab under the tie box
+B 10624,15766:10652,15787
+# The output leaves by the plate: its head runs on north of the bar into cdp4's row y 15726-15748
+# (cdp4's `P 10808,15737 x10694 w=22`, the row of the pad (10808,15738) of the thin metal x 10808), one
+# poly (orange without a break from y 15731 to y 15773 at x 10703 in both metal shots; field north of the
+# bar at x 10660). So the unit's output is cdp4_w10808 = NOT eof_w15955.
+P 10686,15730:10714,15861              # the plate, its head on cdp4's row
+N P 10700,15800 cdp4_w10808
