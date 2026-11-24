@@ -12520,7 +12520,7 @@ touches; the corrected poly path at (10441,16260) with no contact to the metal a
 
 Round 82: no findings that change a connection.
 
-### Round 83 (full review; run 69, pieces `u16303`, `ld566`, `u15826`; 2026-11-24, ended 18:00 +0100, at commit 50f0696)
+### Round 83 (full review; run 69, pieces `u16303`, `ld566`, `u15826`; 2026-11-24 17:33 to 17:54 +0100, at commit 50f0696)
 
 A fresh reviewer agent (Claude Fable 5.2), briefed with the three pieces' claims (the master's seven, the
 copy south as a copy, the copy north with its three differences) and told to suspect: the dark box in the
