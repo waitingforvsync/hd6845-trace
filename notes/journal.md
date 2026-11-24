@@ -3396,3 +3396,49 @@ Done by the coordinator's session (on Fable 5.2, the session that holds `eof`'s 
 sentence of its row; a paragraph above the table says what the order is. The other rows keep their order.
 No region changed (`tools/coverage.py` as before). The choice is a judgment from the rows' open items and
 the extraction's loads of `rc_eq_r4`, `bd1_an`, `rcs_e3`, `rcs_a2` and `cnt_gab`, not from new tracing.
+
+## 2026-11-24 18:50 UTC  Handoffs: `eof` run 69
+
+One handoff file, applied by the coordinator (on Opus 5.5; coordination, no tracing): `eof` run 69 (pieces
+`u16303`, `ld566`, `u15826`; waitingforvsync's claim, traced on Fable 5.2 in richtw1's session from
+2026-11-24 17:08 +0100; merged b65ea16; **claim released**). Three inverter units of one build in the column
+of `bc2`'s VSS rail x 10548-10598: 5 transistors, no new net, no uncertain item. Full extraction after it
+2,514 nets (as before), 4,836 transistors (run 68: 4,831), 0 errors, 0 warnings; 975 of 1,433 equations firm
+(was 972 of 1,430: the three new inverters, each firm); 109 nets joined only through uncertain items (1,213
+items): as before. Spot checks of the overlays: piece `u16303` (`rst_lat`'s row, the band, the tie box and
+the dark box; `cache/scratch/refresh/hR-20261124-eof69-u16303.png`) and piece `ld566`
+(`hR-20261124-eof69-ld566.png`): the drawn shapes lie on the features.
+
+What it establishes (marks as in the tracer's notes):
+
+- **`eof_w16213` = NOT `rst_lat`** (piece `u16303`; firm): `rst_lat`'s north gate row gates a pull-down
+  under the rail; the node leaves west by the cell's buried contact onto run 67's row, so the pad
+  (10440,16215) and the north end of the thin metal x 10476-10492 are this inverter's output. A strong load.
+- **`bl0_w15566` = NOT `h_eq_r1`** (piece `ld566`; firm): the net that had one pull-down and no load is R1's
+  match inverted. So `eof_w15523` = `h_eq_r1` AND NOT `rcs_e4` AND NOT `eof_w16040` (marked, as that NOR is)
+  and `eof_w17345` = `h_eq_r1` AND NOT `eof_w16040`. Believed, not traced: the line into the fourteen rows
+  of the memory address counter acts at the end of the displayed part of a scan line.
+- **`cdp4_w10808` = NOT `eof_w15955`** (piece `u15826`; firm): `cdp4`'s "undrawn unit of `bc2`". So
+  `tr1_w11960` = NOT `cdp4_w10808` = NOR(`ck_out`, `eof_w16432`) in the top-right gate row.
+- AMB-058 settled as far as the photos go; what is left is the dark box in each unit's node band (AMB-061).
+  The thin metal x 10476-10492 is `eof_w16213` at its north end and `regs`' `lc2_w8450` (the reset in the
+  other sense) at its south end: not one net (AMB-060 updated).
+
+Review: round 83 (full), a fresh Fable 5.2 agent: no finding that changes a connection; three geometry
+remarks fixed (connections identical). `notes/operation.md`: changed by the tracer on the branch (the NOR
+`eof_w15523`'s third input is R1's match inverted); it stands.
+
+Applied: master list rows `eof` (run 69; claim released; Next: the thin metal x 10476-10492 stretch by
+stretch, the column's units south of y 17560, the bus metal y 18420-18440 east of x 10850, `bc2_w15388`'s row
+east of x 10335, `eof_w16040`'s driver), `cdp4` (continue) (the unit is drawn; the comment in
+`trace/cdp4.txt` at `P 10808,15737` waits for `cdp4`'s next run), `bc2`-`bc4`, `tr1`/`tr2`, `bl0`, `regs`
+and the `rename` row (`bl0_w15566` -> proposed `h_eq_r1_n`, firm). **AMB-061 new** (the block's Ambiguity
+220); AMB-058 and AMB-060 updated; the block's Ambiguity 221 is local. No Re-read items, no traps.
+Corrections sections in the notes of `cdp4`, `bl0`, `bc1`, `tr1` and `regs`. Floor plan: the three new
+fragment lines lie inside `bc2` / `bc4`'s coarse blocks, which other pieces still need; nothing trimmed. Ports:
+`cdp4_w10808` agrees with `cdp4`'s port (same name, same layer). No tool proposals.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 1,016
+floor-plan blocks. Coverage: 73.0% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%. Not done here: the refresh (the rename above waits; `notes/operation.md`'s closing range still says
+AMB-001 to AMB-060).

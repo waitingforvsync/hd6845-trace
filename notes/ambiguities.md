@@ -1046,7 +1046,7 @@ line bright right after the ring. **Adopted: B.** Rests on it: that the line `eo
 (`eof_w17866`, gate of `eof_w17345`'s second pull-down) is `eof_w16040`. Would settle it: the line's east end
 logic; a sharper chip-1 view.
 
-## AMB-058: is the cap of `rst_lat`'s north gate row tied to the box north of it? (2026-11-21)
+## AMB-058: is the cap of `rst_lat`'s north gate row tied to the box north of it? (2026-11-21)  (settled as far as the photos go 2026-11-24; what is left is AMB-061)
 
 From `eof` run 53 (Matt Godbolt; the block's Ambiguity 216; raised by review round 65, read again by round
 66). The poly row y 16292-16314 from `rst_lat`'s end pad (10353,16345) ends in a cap x 10624-10640 east of
@@ -1064,6 +1064,11 @@ Updated 2026-11-23 (`eof` run 67, Kieran Connell): the "poly at y 16256" is the 
 pad (10440,16215) south and east (y 16249-16267) toward `rst_lat`'s unit's west box (port at x 10481), with the
 north end of the thin metal x 10476-10492 on the same net (AMB-060). Whether that poly joins the box is still
 open; it is `eof`'s next work (`rst_lat`'s unit), whose output is probably `eof_w16213`.
+
+Updated 2026-11-24 (`eof` run 69, richtw1's session): **settled as far as the photos go**. The unit is traced
+(piece `u16303`): `eof_w16213` = NOT `rst_lat` (firm), its output leaving west by the cell's buried contact
+onto run 67's row. The box north of the cap lies in the node's band directly south of the load's tie box and
+is read as part of the tie's buried-contact window; the cap is an end cap. What is left is AMB-061.
 
 ## AMB-059: is the dark spot (10567,17178) on the VSS rail a contact onto the NOR `bc2_w14955`'s node? (2026-11-22)
 
@@ -1096,3 +1101,21 @@ box of `eof_w16560` (y 16500-16537), which has a poly exit of its own; the metal
 unit along it (y 16240-16277, 16500-16537, 16977-17014, 17457-17492, 17716-17754). Would settle it: following
 the thin metal both ways, stretch by stretch (a pink protected strip beside each dark stretch in the clean
 shot, trap 27); finding `rst_lat`'s unit's output (probably `eof_w16213`), and what `eof_w16996` drives.
+
+Updated 2026-11-24 (`eof` run 69): the metal's north end is the output of the inverter `eof_w16213` = NOT
+`rst_lat` (piece `u16303`, firm), and its south end is `regs`' `lc2_w8450`: opposite senses of the reset, so
+the track is not one metal on one net. The break or the wrong reading is at one of the four box stretches
+y 16500-16537, 16977-17014 (this box), 17457-17492, 17716-17754; that is `eof`'s next item.
+
+## AMB-061: the dark box in the node's band of the inverters in `bc2`'s rail column (2026-11-24)
+
+From `eof` run 69 (richtw1's session; the block's Ambiguity 220, full text in `notes/blocks/eof.md`; review
+round 83). In each of the three inverter units of one build (pieces `u16303`, `ld566` at y +1215, `u15826` at
+y -477) a dark box (10620-10650, 16264-16284 in `u16303`) lies in the node's band directly south of the load's
+tie box: poly's hue at half of poly's brightness in both metal shots, dark and slightly green in the clean
+shot; the band's edge lines run through on both sides. Readings: (a) the uncovered south half of the tie's
+buried-contact window, the band one diffusion through it; (b) a poly across the band, a transistor in series
+between the node and the load (its gate on its own drain, or `rst_lat` in its own pull-up path). **Working
+assumption: (a), drawn so, no `?`.** Either way the three static equations hold (`eof_w16213` = NOT `rst_lat`,
+`bl0_w15566` = NOT `h_eq_r1`, `cdp4_w10808` = NOT `eof_w15955`); (b) would add a transistor per unit. Would
+settle it: a sharper shot; the three copies agree, which only says it is layout.

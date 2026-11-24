@@ -1349,3 +1349,9 @@ Round 14: no findings.
   `selg` (`eof_ga` = NOT `rcs_mv`).
 - The ports at x 4780 "into the left array": each row end now has its load in the left array's selector (`eof`
   run 43).
+
+## Corrections (coordinator, from the handoff of `eof` run 69, 2026-11-24)
+
+- `bl0_w15566` (run 12: "both ends open"): its driver is the inverter of `h_eq_r1` at (10480-10775,
+  17440-17560) under `bc2`'s VSS rail (`eof` piece `ld566`): `bl0_w15566` = NOT `h_eq_r1`, R1's match
+  inverted (firm).

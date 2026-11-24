@@ -1691,3 +1691,11 @@ Round 16: no findings that change a connection.
   (10352,17604), not "under a drawn metal's track ... not followed"; the column has a branch row y 17682-17698
   east to the gate of an undrawn pull-down under the VSS rail x 10548-10598. Its thin metal x 10353 runs on
   north to an end pad (10353,16345) with a tap (10353,17127) (`eof` run 53).
+
+## Corrections (coordinator, from the handoff of `eof` run 69, 2026-11-24)
+
+- The row's west end at `P 10808,15737 x10694 w=22` (here and the comment in `trace/cdp4.txt`): "part of an
+  undrawn unit of bc2 ... this net is that unit's output" is true and now drawn: `eof` piece `u15826`, an
+  inverter of `eof_w15955`, so `cdp4_w10808` = NOT `eof_w15955` (firm; the plate's join to the row is
+  `eof`'s Ambiguity 221, read as one poly). `ports.d/cdp4.txt`'s port (10694-10716, 15726-15748) is met by
+  `eof`'s port of the same name. The trace file's comment is left for `cdp4`'s next run to update.

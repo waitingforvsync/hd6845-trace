@@ -369,3 +369,8 @@ In order of value:
 
 - Its west gate column (rail x 7294-7342) is drawn by `eof` from y 15024 to y 16930 (eight units: an inverter,
   three NORs, two wide inverters on `eof_w15781`, two select-line inverters); `bc1` draws none of them.
+
+## Corrections (coordinator, from the handoff of `eof` run 69, 2026-11-24)
+
+- `bl0_w15566`, gate 3 of the NOR `eof_w15523` in the west gate column, is NOT `h_eq_r1` (`eof` piece
+  `ld566`, firm), so `eof_w15523` = `h_eq_r1` AND NOT `rcs_e4` AND NOT `eof_w16040` (marked, as that NOR is).

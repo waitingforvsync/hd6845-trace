@@ -150,3 +150,9 @@ Round 1 (gates B and C): no findings.
   `ports.d/tr1.txt`): followed by `cdp4` run 14: `rst_lat` (gate C's input) is `rst_lat`, `cdp4_w10808`
   (inverter A's input) is `cdp4_w10808`; the two ports at y 3650 are met by geometry. Four undrawn gates
   further east in the row take the same two lines (`cdp4` run 15).
+
+## Corrections (coordinator, from the handoff of `eof` run 69, 2026-11-24)
+
+- Inverter A's input `cdp4_w10808` is driven: `cdp4_w10808` = NOT `eof_w15955` (`eof` piece `u15826`, firm),
+  and `eof_w15955` = NOR(`ck_out`, `eof_w16432`), so `tr1_w11960` = NOT `cdp4_w10808` = NOR(`ck_out`,
+  `eof_w16432`) (as extracted: marked, through inverter A's own uncertain items).

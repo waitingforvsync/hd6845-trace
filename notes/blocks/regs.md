@@ -612,3 +612,11 @@ Round 7: no findings.
   with no other exit; `eof` draws a `?C` there (AMB-060). If that contact is real, the track is two metals end
   to end somewhere between y 17024 and y 17760 (trap 33; R53). `regs`' drawn stretch (to y 17760) is not
   affected.
+
+## Corrections (coordinator, from the handoff of `eof` run 69, 2026-11-24)
+
+- Piece J (the thin metal x 10485 north of the pad (10484,17994), `lc2_w8450`): the same track's north end is
+  `eof_w16213` = NOT `rst_lat`, the output of `rst_lat`'s inverter in `bc2`'s rail column (`eof` piece
+  `u16303`, firm). `lc2_w8450` is the reset in the other sense, so the track is not one metal on one net: the
+  break or the wrong reading lies at one of the box stretches y 16500-16537, 16977-17014 (AMB-060),
+  17457-17492, 17716-17754. Neither package joins them.
