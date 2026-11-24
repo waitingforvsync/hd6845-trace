@@ -504,7 +504,7 @@ N M 10485,17850 lc2_w8450
 # ======================================================================================
 # Run 5 (2026-11-21), piece r9: the ninth row y 17648 and the inverter it gates
 # ======================================================================================
-# regs_w17648: a line of the bottom bus (metal y 17907, on west: not followed, port) that hops east
+# cdp3_n_c0: a line of the bottom bus (metal y 17907, on west: not followed, port) that hops east
 # under the vertical trunks, climbs a diagonal to the row y 17648, hops under trunks' X and the VCC
 # rail and ends as the gate of one pull-down under the south end of bd3's ground rail.
 # --- A: bus metal y 17907 to its pad, poly hop east under the vertical trunks (straight; the row
@@ -519,7 +519,7 @@ C 13240,17862
 # The diagonal lies beside trunks' poly diagonal (rst_a) and the row crosses that poly's column
 # x 13480: no pad, no ring, no contact (traps 13, 15)
 M 13240,17862 13262,17857 13470,17649 14497,17648
-N M 14000,17648 regs_w17648
+N M 14000,17648 cdp3_n_c0
 # --- C: hop under trunks' X and the VCC rail (poly between two pads, straight)
 P 14480,17631:14514,17665
 C 14497,17648
@@ -531,7 +531,7 @@ M 14714,17648 x15560 y17428
 P 15540,17410:15577,17446
 C 15558,17428
 P 15558,17428 x15723 w=20
-# --- the inverter regs_w17462 = NOT regs_w17648
+# --- the inverter d7_out_n = NOT cdp3_n_c0
 # pull-down under the ground rail's south end: column, ground contact above the gate, drain below
 M 15690,17370 y17527 w=50
 N M 15690,17500 vss
@@ -558,7 +558,7 @@ B 15772,17400:15804,17428
 # x 15932 to a pad; thin metal east along y 17735, corner, south on x 16776 to a pad; poly on east
 # (under e_b's track and a wide rail to a pad (17065,18010)): not followed, port
 P 15587,17465 y17646 x15932 y17733 x15971
-N P 15700,17646 regs_w17462
+N P 15700,17646 d7_out_n
 P 15952,17715:15990,17751
 C 15971,17733
 M 15971,17735 x16776 y18012
@@ -567,7 +567,7 @@ C 16773,18012
 P 16773,18012 x16800
 
 # ======================================================================================
-# Run 6 (2026-11-21), piece n0: regs_w17648 is bus N, column 0
+# Run 6 (2026-11-21), piece n0: cdp3_n_c0 is bus N, column 0
 # ======================================================================================
 # The bus metal y 17907-17911 of run 5 runs west from (12770,17907) to a corner (11200,17911) and
 # north on the track x 11200 of the bus field east of the central datapath, 7,245 px, straight,
@@ -586,4 +586,3 @@ P 10840,13333 x11200
 P 11183,13313:11222,13348
 C 11200,13330
 @alias cdp3_n_c0 cdp4_n_s0
-@alias cdp3_n_c0 regs_w17648

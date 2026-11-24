@@ -275,7 +275,7 @@ Evidence (images in `cache/scratch/dpad/`):
   south into D7's protection node (seen by the second cycle's reviewer); not drawn.
 - Protection: the comb; D7's variant (its strip enters from the top near 17850,17538).
 - Input line of D7 from its protection to the column (D2-D6's are drawn by `dbus`, 2026-11-17).
-- `d#_out_n` outside the cells (D0's is drawn: `dbus`, from the contact (17597,7492) down the channel to the inverter `d0_out_n` = NOT `dbus_do0_in`) and the driver of `d_hiz`: `dbus`'s channel wiring. Lead (review round 1, confirmed): at (17630,17085) a metal leaves `d_hiz` west along y 17073-17095 to x 17355 and turns south along x 17350-17370 past y 17237 (`metal` at 2.4-3x): almost certainly its feed. It lies in `dbus`'s claimed region, so it is not drawn here.
+- `d#_out_n` outside the cells (D0's is drawn: `dbus`, from the contact (17597,7492) down the channel to the inverter `d0_out_n` = NOT `cdp3_n_c7`) and the driver of `d_hiz`: `dbus`'s channel wiring. Lead (review round 1, confirmed): at (17630,17085) a metal leaves `d_hiz` west along y 17073-17095 to x 17355 and turns south along x 17350-17370 past y 17237 (`metal` at 2.4-3x): almost certainly its feed. It lies in `dbus`'s claimed region, so it is not drawn here.
 - The straps' metal was checked per copy only at 0.42x [U_a, U_b]; the rows' metal of
   D1-D6 at 1.05x [Rm_all], D7 at 1.5x.
 

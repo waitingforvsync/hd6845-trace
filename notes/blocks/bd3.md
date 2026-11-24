@@ -255,5 +255,5 @@ turn west, at y 17302, 17346, 17388, 17432, and cross the supply rail the same w
 
 - The ground rail and the supply rail of the right-hand gate column do not end at y 17380: the ground rail's
   metal ends at about y 17527 and the supply rail runs on south past y 17760. Under the undrawn stretch is an
-  inverter (`regs` run 5: `regs_w17462` = NOT `cdp3_n_c0`, x 15577-15895, y 17372-17491); `trace/regs.txt`
+  inverter (`regs` run 5: `d7_out_n` = NOT `cdp3_n_c0`, x 15577-15895, y 17372-17491); `trace/regs.txt`
   draws the ground rail to y 17527 and the supply rail to y 17500.

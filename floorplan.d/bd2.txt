@@ -8,4 +8,4 @@
 ?15890,16540:16400,16730  logic  RS inverter and R/W gate | top gate pulled low by RS (its output is the NOT RS of the data register decode); the gate below it takes R/W: not traced
 16150,15900:16400,17100  route  R/W, RS, CS and E risers | E (x 16169), R/W (x 16298, ends y 16040), RS (x 16342, ends y 16603), CS (x 16385, ends y 16171), with the decode outputs between them
 ?15890,16730:16150,17100  logic  bus control gates (lower part) | not traced
-?16480,15770:17000,17100  unknown  right-hand column, lower part (untraced) | the drivers of d1_out_n..d5_out_n and dbus_do0_in, and dbus_le's driver; above y 15770 is dlat
+?16480,15770:17000,17100  unknown  right-hand column, lower part (untraced) | the drivers of d1_out_n..d5_out_n and cdp3_n_c7, and dbus_le's driver; above y 15770 is dlat

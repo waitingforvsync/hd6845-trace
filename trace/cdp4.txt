@@ -949,7 +949,7 @@ M 16798,17430 y17380 w=12
 # pad a poly row goes west under the tracks west of it (no contact) toward the column of units at
 # x 16600-16790 (drawn to x 16790: ports). Column 6 ends on a pad; its poly runs east under column 7's
 # corner (no contact), north as a column x 16790-16810 and west at y 16384 (drawn to x 16780: port).
-# Column 7 turns east at (16798,16714) onto the metal that dbus draws from the pad of dbus_do0_in.
+# Column 7 turns east at (16798,16714) onto the metal that dbus draws from the pad of cdp3_n_c7.
 # ======================================================================
 # --- column 2
 M 16580,17390 y16540 x16818 y15866 w=12
@@ -976,9 +976,8 @@ M 16755,17390 16752,16713 w=12
 P 16735,16696:16769,16730
 C 16752,16713 s=20x20
 P 16752,16712 x16800 y16384 x16780 w=20
-# --- column 7: onto dbus's metal (M 16993,16440 y16712 x16950) from the pad (16993,16451) of dbus_do0_in
+# --- column 7: onto dbus's metal (M 16993,16440 y16712 x16950) from the pad (16993,16451) of cdp3_n_c7
 M 16798,17390 y16714 x16962 w=12
-@alias cdp3_n_c7 dbus_do0_in
 # ======================================================================
 # Run 8 (2026-11-21): the data output inverters of bits 5-1. Five copies of one cell at pitch 130 between a
 # VCC rail (x 16491-16540, dlat's rail going on south) and a VSS rail (x 16666-16712): a depletion load
@@ -1081,7 +1080,7 @@ P 17582,17324:17616,17358
 C 17599,17341 s=20x20
 P 17599,17342 x17825 w=22                # onto dpad's strip 4 of D6 (P 17802,17313:..., y 17313-17339): one poly, a step
 # ======================================================================
-# Run 11 (2026-11-21): the bit 7 output line into D7's pad cell. regs draws regs_w17462 (= NOT cdp3_n_c0) to
+# Run 11 (2026-11-21): the bit 7 output line into D7's pad cell. regs draws d7_out_n (= NOT cdp3_n_c0) to
 # (16800,18012) on its poly row; the row runs on east under e_b's track and the wide rail (field) to a pad,
 # a thin metal east to a pad, a poly hop to a pad, a thin metal south on x 17558 to a pad, and a poly: east,
 # then a column x 17595-17613 south for 800 px (under the wide horizontal metal y 18175-18255, beside d_hiz's
@@ -1104,7 +1103,6 @@ P 17558,18140 x17613 w=20
 P 17604,18130 y18957 w=18
 P 17595,18946 x17825 w=22
 N M 17250,18014 d7_out_n
-@alias d7_out_n regs_w17462
 # ======================================================================
 # Run 12 (2026-11-21): the two thin metals east of the ninth VSS rail, west of the read bus: two through
 # lines from pads at the top of the datapath's east edge (y 3592, 3636) to pads in the bottom-centre logic

@@ -560,7 +560,7 @@ P 16950,14688:17167,14704          # leaves the region at x 16950
 D 17354,16390:17403,16497          # VSS land (runs on into chain 7's), channel, output node
 C 17372,16414 s=30x30              # VSS contact on that land (ring in both metal shots; review round 1)
 P 16985,16444:17418,16463          # gate band; its west end is a pad (run 4: it does NOT come in from
-N P 17100,16453 dbus_do0_in        # the west edge; nothing lies west of the pad at this y)
+N P 17100,16453 cdp3_n_c7        # the west edge; nothing lies west of the pad at this y)
 P 16977,16435:17012,16468          # pad
 C 16993,16451 s=26x26
 M 16993,16440 y16712 x16950 w=19   # metal south from the pad, west at y 16702-16722 out of the region

@@ -71,7 +71,7 @@ rows G and K are the pull-up gate node, not VCC; H and J are VSS; I is the pull-
 "green shapes" are field islands; the boxes at 18597-18632 x 7250-7298, 17835-17858 x
 7440-7460 and strip 4's end are not buried contacts; "gate 7170" is a field strip. The thin
 metal that carries D0's "P_y" is one line down the whole data bus column, D0's alone
-(`dbus`, run 3): `d0_out_n` = NOT `dbus_do0_in`.
+(`dbus`, run 3): `d0_out_n` = NOT `cdp3_n_c7`.
 
 ## AMB-004  L-shaped poly on the input inverters  (changed 2026-11-17: wrong in the data bus column)
 

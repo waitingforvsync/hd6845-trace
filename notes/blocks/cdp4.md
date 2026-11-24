@@ -46,7 +46,7 @@ bus, the turn north" under Logic.
 
 Run 7 (2026-11-21 15:06 -0600): **the read bus's six tracks north to their ends: column 7 is data bit 0** (wiring only, five
 pads with contacts, no transistor, no uncertain item). Column 7's track turns east onto the metal `dbus`
-draws from the pad of `dbus_do0_in`, the gate of D0's output chain: **`d0_out_n` = NOT `cdp3_n_c7`** in the
+draws from the pad of `cdp3_n_c7`, the gate of D0's output chain: **`d0_out_n` = NOT `cdp3_n_c7`** in the
 extraction (firm). Columns 2-5 end on pads in the staircase beside `dbus`'s `d5_out_n`..`d2_out_n` pads,
 each with a poly row west toward a column of five units; column 6 ends on a pad whose poly goes round to
 the fifth unit. With every file loaded: 2516 nets, 4796 transistors, 0 errors, 0 warnings. See "The read
@@ -74,7 +74,7 @@ D0-D6 read R12-R17 through the read bus. With every file loaded: 2517 nets, 4809
 0 warnings. See "The bit 6 line" under Logic.
 
 Run 11 (2026-11-21 16:39 -0600): **the bit 7 line into D7's pad cell: `d7_out_n` = NOT `cdp3_n_c0`** (wiring only, four pads
-with contacts, no uncertain item): `regs`' inverter output `regs_w17462` from its port (16800,18012) east by
+with contacts, no uncertain item): `regs`' inverter output `d7_out_n` from its port (16800,18012) east by
 two hops, south on a thin metal and 800 px of poly column into the west end of strip 4 of D7's pad cell.
 **All eight data pins now read R12-R17 through the read bus: `d#_out_n` = NOT `cdp3_n_c(7-#)`.** With every
 file loaded: 2516 nets, 4809 transistors, 0 errors, 0 warnings. See "The bit 7 line" under Logic.
@@ -368,7 +368,7 @@ c0 = s0 on x 11201):
 
 **Column 0 is drawn in `trace/regs.txt`** (piece `n0` of `regs` run 6, Kieran Connell's session, merged to main
 while this run was in review): the same track, the same two pads and row ends, read independently, and on
-east along y 17908 to the inverter `regs_w17462` = NOT `cdp3_n_c0`. This package's copy of column 0 (reviewed
+east along y 17908 to the inverter `d7_out_n` = NOT `cdp3_n_c0`. This package's copy of column 0 (reviewed
 in round 3 with the rest) was taken out again before the merge, so that the wire is drawn once; columns 1-7
 are drawn here.
 
@@ -519,8 +519,8 @@ East of x 16000 the seven rows fan into a staircase:
   columns 5, 4, 3, 2 (pairs of edge bars at x 16783-16798 and 16805-16815 on each: `tools/tl5_tracks.py h`)
   to y 16384 and turns west as a band y 16372-16395 (`r7_c6.png`). Drawn to x 16780 (port).
 - **Column 7** turns east at (16798,16714) and runs along y 16714 onto the metal that `dbus` draws from the
-  pad (16993,16451) of `dbus_do0_in` (`M 16993,16440 y16712 x16950`; `dbus`'s notes had followed it "west to
-  x 16795, then south to (16797,17434)"). One metal, no pad between: `@alias cdp3_n_c7 dbus_do0_in`.
+  pad (16993,16451) of `cdp3_n_c7` (`M 16993,16440 y16712 x16950`; `dbus`'s notes had followed it "west to
+  x 16795, then south to (16797,17434)"). One metal, no pad between: `@alias cdp3_n_c7 input`.
 
     d0_out_n = NOT cdp3_n_c7        (dbus's pull-down t at (17378,16454); firm)
 
@@ -600,13 +600,13 @@ pull-down column and VSS contact, gate row, output strip and box). Instance `u6`
   `tools/tl5_tracks.py h 17606 16270 16900` and `v 16907 17615 18040`: only edge bars of 8-12 px where it
   crosses the poly columns, no hole in the clean shot). From that pad a poly row runs east along y 18079
   under the wide rail x 16940-17030 (`tools/railprof.py 16955 17025 17980 18120`: poly over field) to a pad
-  (17080,18078), beside the parallel hop of `regs`' `regs_w17462` (NOT column 0) on y 18012. The pad's
+  (17080,18078), beside the parallel hop of `regs`' `d7_out_n` (NOT column 0) on y 18012. The pad's
   metal leaves east along y 18078 (`tools/follow.py 17130 18078 E --gap 16` runs it to a pad at about
   (17432,18080)); drawn to x 17115 (port).
 
 **Believed, not traced**: this is `d6_out_n` (the other five copies drive `d5_out_n`..`d1_out_n`; `dbus`'s
 notes have `d6_out_n` leaving D6's pad cell "west to a pad (17600,17340), then south by metal"), and
-`regs_w17462` is `d7_out_n`. The wire carried an open-join label until run 10 drew it into the pad cell.
+the wire `regs` called w17462 is `d7_out_n`. The wire carried an open-join label until run 10 drew it into the pad cell.
 
 ### The bit 6 line into D6's pad cell (run 10, 2026-11-21; traced)
 
@@ -628,13 +628,13 @@ From the port of run 9 at (17115,18078):
 
     d6_out_n = NOT cdp3_n_c1            d6_pu = NOR(d6_out_n, d_hiz)   (dpad)
 
-Beside it, not drawn: `regs_w17462` (NOT column 0) runs the same way to a pad (17427,18014), hops to a pad
+Beside it, not drawn: `d7_out_n` (NOT column 0) runs the same way to a pad (17427,18014), hops to a pad
 (17559,18014), and its metal goes SOUTH from there on x 17559 to about (17558,18149) (`tools/follow.py 17559
 18045 S --gap 16`), toward D7's pad cell; a third line on y 17945 turns north at its pad (17430,17945).
 
 ### The bit 7 line into D7's pad cell (run 11, 2026-11-21; traced)
 
-`regs` draws its inverter's output `regs_w17462` (= NOT `cdp3_n_c0`) to a port (16800,18012) on a poly row.
+`regs` draws its inverter's output `d7_out_n` (= NOT `cdp3_n_c0`) to a port (16800,18012) on a poly row.
 From there:
 
 - the poly row runs on east (y 18003-18022) under `e_b`'s track and the wide rail x 16940-17030
@@ -660,7 +660,7 @@ From there:
 
     d7_out_n = NOT cdp3_n_c0            d7_pu = NOR(d7_out_n, d_hiz)   (regs' inverter; dpad)
 
-`@alias d7_out_n regs_w17462` (the rename of `regs`' label is the coordinator's refresh).
+`@alias d7_out_n w17462` (the rename of `regs`' label is the coordinator's refresh).
 
 From the review (round 10), no contact at any: the first row also passes under this package's own
 `d6_out_n` metal at x 16897-16912 (and `e_b`'s metal is at x 16813-16828); the south metal crosses
@@ -907,9 +907,9 @@ islands are closed curves inside it, so they are the other class.
 | `cdp4_w10808` (= `tr1_w12005`) | poly | (13346,3675) and (13560,3675) (the polys south of its second tap and its end pad, into `tr1`'s gate row); (10694-10716, 15726-15748) (the corner of the row from its bottom pad: beyond, an undrawn unit of `bc2` that drives it) | driven from `bc2`'s unit (read, not drawn) | the first through line and its run in the top-right track field (runs 12, 14, 15) |
 | `rst_lat` | poly | (13822,3675) and (14044,3675) (the polys south of its second tap and its end pad, into `tr1`'s gate row); (10782-10797, 17700) (the column south of the bottom row's west end) | from `trunks`' inverter | the second through line and its run in the top-right track field (runs 12, 14, 15) |
 | `vcc`, `vss` | metal | x 16515 and x 16689 at y 15780 (onto `dlat`'s rails); `vcc` drawn to y 16440 (goes on south at least to y 16900), `vss` ends at y 16446 | - | the units' rails |
-| `cdp3_n_c7` (= `cdp4_n_s7` = `dbus_do0_in`) | metal | (16950-16962, 16714): onto `dbus`'s metal | driven inside | the read bus, column 7 = the gate of D0's output chain (run 7) |
+| `cdp3_n_c7` (= `cdp4_n_s7` = `cdp3_n_c7`) | metal | (16950-16962, 16714): onto `dbus`'s metal | driven inside | the read bus, column 7 = the gate of D0's output chain (run 7) |
 | `d6_out_n` | poly | (17800-17825, 17313-17350): onto `dpad`'s strip 4 of D6's pad cell | driven inside | the output of the sixth output inverter, joined to the pad cell (run 10) |
-| `d7_out_n` (= `regs_w17462`) | poly | (16795-16800, 18012): onto `regs`' row; and (17803-17825, 18918-18957): onto `dpad`'s strip 4 of D7's pad cell | from `regs`' inverter | the bit 7 output line (run 11) |
+| `d7_out_n` |  poly | (16795-16800, 18012): onto `regs`' row; and (17803-17825, 18918-18957): onto `dpad`'s strip 4 of D7's pad cell | from `regs`' inverter | the bit 7 output line (run 11) |
 | `vss` | metal | x 16017-16059 at y 17285 and y 17535 (drawn ends; not followed) | - | the rail of the sixth output inverter and of the unit above it |
 | `cdp4_n_s0` | poly | x 10850, y 13333 | driven inside | selector output of slice 0: on east to its pad (11200,13330) on the read bus track of column 0, drawn by `regs` (piece `n0`) |
 | `cdp4_a_s2`..`s7` = `cdp3_f_c2`..`c7` | metal | x 8511 + offset, y 11048 (the end of `cdp3`'s line f, y 11052) | from `cdp3`'s row A | selector input a (6 bits); crosses row R1 with no contact (run 3) |
@@ -1316,7 +1316,7 @@ Round 5: no findings that change a connection.
 
 Round 6 (full review, 2026-11-21 15:22 -0600; a fresh Fable reviewer, images in `cache/scratch/cdp4/review-6/`, 15;
 commit before the round 87c5f4f). Piece: x 16560-16970, y 15840-17390 (six tracks, five pads, five poly
-rows or columns, the join of column 7 with `dbus_do0_in`). Told to suspect: the join (one metal from the
+rows or columns, the join of column 7 with `cdp3_n_c7`). Told to suspect: the join (one metal from the
 corner (16798,16714) to `dbus`'s pad (16993,16451)?); a contact where column 6's poly passes under column 7's
 corner; that poly's continuity across the 12 px gap, along its column and at its turn west; the pad pairs on
 one track position (read bus pad below, `d#_out_n` pad above); the nested corners; taps on the long runs;
@@ -1455,7 +1455,7 @@ Round 9: no findings.
 Round 10 (full review, 2026-11-21 16:51 -0600; a fresh Fable reviewer, images in `cache/scratch/cdp4/review-10/`, 13;
 commit before the round 728c635). Piece: one wire from `regs`' row at (16795,18012) to D7's pad cell at
 (17825,18946) (four pads, two poly rows, two thin metals, the 800 px poly column, the bottom row) and the
-join of `regs_w17462` with `dpad`'s `d7_out_n`. Told to suspect: which of the two poly columns under the
+join of `d7_out_n` with `dpad`'s `d7_out_n`. Told to suspect: which of the two poly columns under the
 wide horizontal metal the pad's poly joins, and a bridge to `d_hiz`'s column or a contact from that metal;
 the long column (a gap, a branch, a diffusion it lies on, the parallel dark lines west of it in the clean
 shot); the corner, the row under the rail and the junction with the pad cell's strip; the join with `regs`'

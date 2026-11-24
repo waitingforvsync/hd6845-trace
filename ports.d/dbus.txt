@@ -35,7 +35,7 @@ d4_out_n      P  16860,15943-15965   in   D4's: west of its end pad (16907,15957
 d3_out_n      P  16905,16073-16096   in   D3's: west of its end pad (16950,16087); goes on west
 d2_out_n      P  16950,16203-16225   in   D2's: from its end pad (16993,16217); goes on west
 d1_out_n      P  16950,16334-16355   in   D1's output data line; its driver is west of here
-dbus_do0_in   M  16950,16702-16722   in   input of the inverter that drives d0_out_n; follow.py: on west to x 16795, south to (16797,17434)
+cdp3_n_c7   M  16950,16702-16722   in   input of the inverter that drives d0_out_n; follow.py: on west to x 16795, south to (16797,17434)
 d7_c          M  16950,16750-16766   ?    chain 7's c tap, probably to a capacitor; not followed
 
 # Inside the region: joins to other packages' wires

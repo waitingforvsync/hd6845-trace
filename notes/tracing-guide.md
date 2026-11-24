@@ -387,7 +387,7 @@ Traps, all of them real:
    had been drawn). Found 2026-11-21.
 
 25. **A port is drawn to the boundary only after the boundary itself has been looked at.** A
-   line still there 50 px short of the edge may end on a pad. `dbus`'s `dbus_do0_in` was drawn
+   line still there 50 px short of the edge may end on a pad. `dbus`'s `cdp3_n_c7` was drawn
    to x 16950 and ends 40 px before it. Found 2026-11-17 (R28).
    And "runs on" written at a port is a claim about the next 100 px: `cdp4` run 12 drew a poly row
    from a pad to a port just beyond a rail and wrote "on west" from one colour profile; the row turned
