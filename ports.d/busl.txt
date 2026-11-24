@@ -184,12 +184,11 @@ vss          M  7550-7555,14022-14075  -   onto cdp4's plate at the foot of its 
 vss          M  7383-7432,15000    -   the wide metal on south into bc1's ground (not followed)
 # piece ha (run 16): wl_h1 = wl_h1 (canonical wl_h1; @alias until the rename)
 wl_h1    P  5443-5465,6350     out onto tl5's poly column from T5's south pad (its port wl_h1 there): the wire comes from bw's pad (7031,7560), the west end of wl_h1's row y 7562
-# piece hb (run 16): cdp2_w6845 west of cdp2's port
-cdp2_w6845   M  7290-7300,6842-6854  ?  onto cdp2's metal west of its pad (7335,6845) (its port cdp2_w6845 (7290,6848))
-cdp2_w6845   P  6118,6836-6858     ?   the end pad (6146,6847)'s poly row on west (it runs under eight tracks to a pad (5668,6846), whose thin metal goes on west along y 6849 to about x 5339; not drawn: lc1's band)
+# piece hb (run 16): the metal west of cdp2's pad (7335,6845): cnt_gab since run 19 (it was labelled cdp2_w6845)
+cnt_gab      M  7290-7300,6842-6854  out onto cdp2's metal west of its pad (7335,6845) (cdp2's port there is still named cdp2_w6845: the pad's row is cnt_gab, run 19)
+cnt_gab      P  6118,6836-6858     in  the end pad (6146,6847)'s poly row on west (it runs under eight tracks to a pad (5668,6846), whose thin metal goes on west along y 6849 to about x 5339; not drawn: lc1's band); in is believed: no driver drawn, every end east of here is a gate
 # piece hc (run 16): busl_y6805, the metal north of it
 busl_y6805   P  6160,6705-6727     ?   the end pad (6189,6716)'s poly row on west (seen as a row to x 6040; not followed: lc1's band)
-busl_y6805   P  7410,6791-6813     ?   the pad (7380,6802)'s poly row on east (seen as a row to x 7500; not followed)
 # piece qc (run 17): lc2_w9125's poly onto lc3_e9798's metal (canonical lc2_w9125; @alias until the rename)
 lc2_w9125    P  6450,9526-9546     in  onto lc3's poly at its port (lc2's AND-OR-INVERT's output; marked in lc2): on east to an end pad (6514,9535)
 lc3_e9798    M  6450,9791-9805     out onto lc3's metal y 9798 at its port: the wire comes from the pad (6514,9535) of lc2_w9125's poly
@@ -217,3 +216,11 @@ tc1_p4308    P  6487-6505,6400     out onto tc2's poly from its pad (6490,6108) 
 ck_a         M  7418-7430,7150     in  onto bw's metal x 7421 (drawn there from y 7150 to its pad (7419,7387) of ck_a)
 tc1_m6817    P  6530-6548,6400     out onto tc2's poly from its pad (6533,6152) (its port tc1_m6817 (6534,6400)): the column runs south to an end pad (6538,6717), metal y 6718 east and x 7468 south
 cnt_bus_b    M  7462-7474,7150     ?   onto bw's metal x 7467 (drawn there from y 7150 to its pad (7466,7343) of cnt_bus_b)
+# piece yc (run 19): rcs_thin_e's line from ur's pad to the buried-contact box south of amr's slices
+rcs_thin_e   P  3975-3988,6402-6422  out onto ur's pad (3968,6410), whose metal goes north to tl3's pad (3973,6329) on rcs_thin_e's row
+rcs_thin_e   D  11692-11714,6510   in  the tongue under the buried-contact box (11703,6556): north of it a diffusion band y 6507-6522 along the foot of amr's slices, drawn by no package; in is believed (every other end of the net is a gate)
+# piece yd (run 19): busl_y6805's row through the knot onto cdp2's pad (canonical cdp2_w6845; @alias)
+cdp2_w6845   P  7975,6837-6857     ?   onto cdp2's pad (7987,6845), whose metal goes south to the pad (7878,8315)
+# piece ye (run 19): cnt_gab from cdp2's west row round the pad (7987,6845), through channel 2, onto wl's band H4
+cnt_gab      P  7790-7800,6838-6856  out onto cdp2's row from its pad (7335,6845) (drawn there to x 7800 since run 19)
+cnt_gab      P  11041-11060,7202-7220  out onto the west end of wl's band H4 (P 11040,7200:11700,7222)

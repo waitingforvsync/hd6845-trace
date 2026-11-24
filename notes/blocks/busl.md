@@ -497,6 +497,38 @@ joins.
   gathered by `@alias ck_a tc1_p4308` and `@alias cnt_bus_b tc1_m6817`; the renames are the
   coordinator's.
 
+Run 19 (richtw1's session, Claude Fable 5.2; 2026-11-24 15:42 +0100 on). The two items of this package's
+own left after run 18, and what they led to. Three pieces, wiring only, no uncertain item; one correction
+to `trace/cdp2.txt` (a commit of its own):
+
+- **The horizontal metal y 6459 is a link of `rcs_thin_e`'s line, which is drawn end to end** (piece `yc`):
+  from `ur`'s pad (3968,6410) (the pad `tl3` found to be `rcs_thin_e`'s, "its poly leaves east, not drawn")
+  7,700 px east, built like `amrw`'s line and `slbus`'s five beside it (poly row, metal, poly row, metal,
+  poly row, a pad with a contact at each change; the third poly row is the third line of `cdp2`'s channel
+  2), to a pad (11352,6455), a poly L under `ral`'s metal and a **buried-contact box (11703,6556) on a
+  diffusion band that runs along the foot of `amr`'s slices and is drawn by no package**. No tap on the way.
+  Every other end of the net is a gate (the select of `tla`'s selector `tla_w3417` and the inverter
+  `tla_w3505`), so the band is where `rcs_thin_e` is driven (believed: the band is not traced).
+- **`busl_y6805` is `cdp2_w6845`** (piece `yd`): the row y 6802 east of the pad (7380,6802) runs to the knot
+  at x 7860, steps down to y 6845 and ends on `cdp2`'s pad (7987,6845), whose metal goes south to the pad
+  (7878,8315) (an input of the cluster beside `cdp3`'s row A).
+- **The row of `cdp2`'s pad (7335,6845) is `cnt_gab`** (piece `ye`): `cdp2` had drawn it straight on to the
+  pad (7987,6845); the clean shot has field between (y 6845, x 7835-7847). The row turns south to y 6888,
+  runs round that pad in a U, back up to y 6845 at x 8080, through channel 2 (its line "y 6844") to
+  x 11050, south as an open poly column and, by an L corner, onto `wl`'s band H4, which is `cnt_gab` (the
+  gate line of the 19 counter bits' `_m`/`_mb` pass transistors and the force line of the RA latches,
+  "source not traced"). So **`cnt_gab` comes from the west**: by piece `hb`'s metal y 6848 from the end pad
+  (6146,6847), whose poly row runs on west into `lc1`'s band (to a pad (5668,6846) and a thin metal; not
+  followed: Not done). Piece `hb`'s label is changed from `cdp2_w6845` to `cnt_gab`.
+
+Full extraction with run 19: 2,514 nets (one fewer than run 18's 2,515: `busl_y6805` joins `cdp2_w6845`;
+the west row leaves `cdp2_w6845`'s net and joins `cnt_gab`; `rcs_thin_e` lengthens), 4,831 transistors,
+0 errors, 0 warnings; 972 of 1,430 equations firm and 109 nets joined only through uncertain items, both
+as before; `cnt_gab` has its 43 gate loads as before. `cdp2_w6845` was and is on `tools/unsure.py`'s list
+(`cdp2`'s `?M` over a node box, y 7087-7105, between its north and south parts): `busl_y6805` joins the
+north part without an uncertain item. The package by itself: 85 nets, 0 errors, 17 expected warnings (the
+sixteen of run 18 and `cnt_gab`, whose two pieces, `hb`'s metal and piece `ye`, meet on `cdp2`'s row).
+
 Full extraction with run 18: 2,515 nets (eight fewer than main's 2,523: the eight joins), 4,831
 transistors, 0 errors, 0 warnings; 972 of 1,430 equations firm and 109 nets joined only through uncertain
 items, both as on main; none of the eight nets is among them (`tools/unsure.py`; `tools/unsure.py
@@ -2106,6 +2138,61 @@ Views and measurements: `cache/scratch/busl/survey.md`, "Run 18, pieces ya, yb" 
   `cdp2`'s row y 6847, 330 px of field, `eofw`'s row y 7214 and pieces `qb`'s and `qa`'s rows y 7256 and
   y 7300. Bar pairs at each, no pad.
 
+### Pieces `yc`, `yd`, `ye` (run 19): `rcs_thin_e`'s line; the knot x 7800-8090; `cnt_gab` from the west
+
+Views and measurements: `cache/scratch/busl/survey.md`, "Run 19" (images `s19_*.png`; overlays
+`o19_pads.png`, `o19_box.png`, `o19_corner.png`, `o19_knot.png`, `o19_ue.png`).
+
+**Piece `yc`, west to east** (the wire has seven stretches; each end is a pad with a ring and a bright
+centre in both metal shots and a green hole in the clean shot: `o19_pads.png`, 4x):
+
+| Stretch | Where | Read how |
+|---|---|---|
+| `ur`'s pad | (3968,6410); `trace/ur.txt`: `P 3950,6393:3988,6428`, `C 3968,6410`, its metal north to `tl3`'s pad (3973,6329) on `rcs_thin_e`'s row | `ur`'s and `tl3`'s files; `s19_w1_strip.png` (2x, four shots) |
+| poly row, corner, poly row | y 6412 from the pad to (4564,6412), column x 4556-4572 south, y 6456 east to the pad (4972,6457) | `tools/amr_row.py 6411 3990 4550` and `6457 4580 4955`: no weak run; `tools/busl_roww.py 6411 3990 4550`: no widening; `tools/px.py col 4563 6390 6480 6` and `row 6435 4540 4590 3`; `s19_w3_c.png`, `s19_w3_m.png` (3.6x); crosses the metals x 4085, 4140, 4275, 4315, 4360, 4405 and the left array's rails plain |
+| metal | y 6458, pad (4972,6457) to pad (5669,6457), over the poly bus x 5000-5450 | `tools/follow.py 5600 6457 W|E --gap 16`: ends 4966, 5670; `tools/busl_padscan.py h 6458 4990 5650`: 0 stretches; `tools/tl5_tracks.py h 6458 4960 5680`: clean holes only at 4971 and 5667; `s19_p4972_m.png` (3.2x) and `tools/px.py row 6458 4960 5030 4` for the 22 px beside the pad (4972) that fail the metal test: the pad's ring, 4 px of metal, and the edge of `ur`'s poly column x 5002-5022 |
+| poly row | y 6456, pad (5669,6457) to pad (6188,6457) | `tools/amr_row.py 6457 5690 6170`: no weak run; `tools/tl5_tracks.py rows row 5540 6200 6 ...`; `s19_wend_m.png`, `s19_wend_a.png` (3.2x) |
+| metal | y 6458 (9-11 px), pad (6188,6457) to pad (7490,6457): the "metal y 6459" of the Not done list | `tools/follow.py 6800 6458 E|W --gap 16`: ends 7492, 6186; `tools/busl_padscan.py h 6458 6205 7470`: 0; `tools/tl5_tracks.py h 6458 6180 7500`: holes only at the two pads; `s19_eend_m.png`, `s19_eend_a.png` (3.2x) |
+| poly row | y 6456, pad (7490,6457) to pad (11066,6457): the third line of `cdp2`'s channel 2 | `tools/amr_row.py 6457 7510 11200`: two weak runs of 13 and 7 px (metal edges); `tools/busl_roww.py`: 22-24 px in both metal shots at every flagged place; `tools/tl5_tracks.py h 6456 7500 11110`: one hole, the pad's; strips `s19_e_strip_c.png`, `s19_e_strip_m.png` (1.7x) |
+| metal | y 6456, pad (11066,6457) to pad (11352,6455), over field | `tools/follow.py 11110 6457 E --gap 16`: end 11352; `s19_e2.png` (3x) |
+| poly L, L | from the pad east to x 11398, south (x 11391-11405) under `ral`'s metal x 11390-11402 to y 6606, east to x 11703, north (x 11697-11710) into the box | `tools/px.py col 11392 6440 6625 8 acid1b` (salmon throughout); `tools/tl5_tracks.py v 11396 6400 6640`: no break and no hole on `ral`'s metal; `tools/amr_row.py 6605 11410 11690`: no weak run; `s19_e3.png` (3x), `s19_e4.png` (2x), `s19_u1.png`, `s19_u1b.png` (3x) |
+| the box | (11690-11716, 6540-6578): heavy outline, plain interior y 6550-6563 | `s19_box_m.png`, `s19_box_a.png` (5.5x, four shots); `tools/px.py col 11703 6530 6620 4 metal,metal1,acid`: interior 160/135/87 and 174/140/79 in chip 2's metal shot (not orange; the poly column south of it is 160/115/53) between bars y 6540-6548 and y 6566-6578 |
+
+- **What the box joins.** North of the box lies a band that is diffusion by the chip-2 stripped shot's red
+  minus green (21-28 at (11700,6515), (11735,6512), (11740,6510-6515); the ground south-east of it 1-2,
+  south-west of it -8: `tools/px.py pt` and `col 11740 6490 6610 5`): y 6507-6522 east of x 11718, down to
+  y 6545 west of it, the box hanging from its south edge. Only the tongue under the box is drawn
+  (`D 11692,6510:11714,6566`), as the wire's port. At 1x (`s19_e5.png`, `s19_e6.png`) the band runs from
+  about x 11445 to x 12560 and on, along the foot of `amr`'s four slices; a poly row y 6485-6497 lies
+  against its north edge at x 11740 (one dark line between: a gate, or a row beside it; not read). **No
+  package draws the band or anything else at 11400-13050 x 6450-6600** but `slbus`'s rows, `amr`'s rail
+  feet and `ral`'s metal (`tools/busl_items.py 11380 6420 12630 6600`).
+- The row y 6606's east end at x 11718 is a plain end: field x 11722-11735, then `slbus`'s `sl3` row,
+  which bends up onto the position y 6605 at x 11760.
+
+**Pieces `yd`, `ye`: the knot.**
+
+| Element | Where | Read how |
+|---|---|---|
+| the field between the two rows on y 6845 | x 7835-7847, in the margin of `eofw`'s metal x 7829-7843 | `tools/px.py row 6845 7826 7858 3 acid1b,acid,metal,metal1`: clean shot pink 198/118/122; the same command on the rows y 6802 and y 6889: cream 213/166/110 at the same x; `tools/tl5_tracks.py rows col 6730 6910 3 7846`: poly at y 6754-6763, 6799-6805, 6889-6892, field y 6811-6874; `s19_k2_a.png`, `s19_k2_m.png` (4x, four shots) |
+| `ye`: column south of the west row | x 7812-7830, y 6845 to 6888, under `eofw`'s metal | `tools/px.py row 6866 7796 7840 4 acid1b`: cream x 7816-7826; col map x 7822: poly y 6844-6889 |
+| `ye`: row y 6888 | x 7812 to 8086, under `cdp2`'s metals x 7913-7931 and x 7981-7995 | `tools/tl5_tracks.py h 6888 7835 8085`: no hole; `s19_k3.png` (1.4x, four shots); `o19_knot.png` (2.95x) |
+| `ye`: column back north | x 8074-8086, y 6888 to 6845 | `tools/px.py row 6866 8056 8100 4 acid1b`; col map x 8076: poly y 6842-6893; `o19_ue.png` (5.5x) |
+| `ye`: row y 6845 | x 8080 to 11055: channel 2's line "y 6844" | `tools/amr_row.py 6845 8095 11150`: weak only beyond x 11065 (the row has turned); `tools/busl_roww.py`: no widening in both metal shots; `tools/tl5_tracks.py h 6845 8090 11060`: dips of 6-12 px at the x of the gaps between metal pairs (the same x as on the row y 6457: 8525/8529, 8823/8824, 10384/10386, 10433/10435), no pad's hole; strips `s19_g_strip_c.png`, `s19_g_strip_m.png` (1.65x) |
+| `ye`: column south | x 11044-11056, y 6845 to 7211, open poly between the metals x 11019-11031 and x 11082-11094 | `tools/px.py row 7000 11030 11070 4 metal`; `s19_ee1.png` (3x), `s19_ee3.png` (2.6x, four shots): no pad; the pad (11090,7125) is the east metal's own |
+| `ye`: corner onto `wl`'s H4 | (11050,7211); `wl`: `P 11040,7200:11700,7222` | `s19_ee2.png` (4.2x): an L, nothing leaves south or west |
+| `yd`: row y 6802 | from the pad (7380,6802) to x 7868 | `tools/amr_row.py 6802 7400 8100`: no weak run; `tools/tl5_tracks.py h 6802 7400 7865`: no hole; `s19_k1.png` (2x, three shots) |
+| `yd`: column | x 7855-7868, y 6796 to 6852, open poly | `tools/px.py col 7861 6790 6862 6 metal` (orange 150-168/108-124/53-62), `row 6824 7840 7880 4 metal`; col map x 7852, 7862 |
+| `yd`: row y 6845 to the pad | x 7855 to `cdp2`'s pad (7987,6845) (`P 7970,6828:8004,6862`) | `o19_knot.png`; east of the pad field at x 8029-8041 (`tools/tl5_tracks.py rows row 7990 8130 3 6845`) |
+
+- **Rows in, rows out** (trap 10): from the west y 6757, 6802, 6845 enter; `fld`'s `cnt_la_a_n` (from
+  y 6757, stepping to y 6800 at x 7901-7919), the pad (7987,6845) (from y 6802) and the row y 6845 east of
+  x 8086 (from y 6845, by the U) leave. The row y 6888 east of x 8672 is `cdp2`'s chain output
+  (`cdp2_b_s7_x`), another net: between x 8086 and x 8672 there is no row on y 6888 (`s19_k3.png`).
+- **`cdp2`'s note "Channel 2 west of the slices: a knot"** has the rule "6844 to 6888 by the same rule"
+  and "the line y 6888 ... is, west of the knot, the line at y 6844": the west row does go down to y 6888,
+  but comes back up to y 6845 at x 8080; it is not the chain output.
+
 ## Logic
 
 Wiring only. Traced: the eight joins above (no uncertain item on any). From `cdp3`'s notes:
@@ -2374,9 +2461,9 @@ here. No transistor.
 | `vss` | M | (4752-4802, 10590); (4645-4698, 10700) | supply | piece `vc`: onto the foot of `lc3`'s west rail; on south on the left array's side (`larr`) |
 | `vss` | M | (7550-7555, 14022-14075); (7383-7432, 15000) | supply | piece `vb`: onto `cdp4`'s plate; the limb on south into `bc1`'s ground |
 | the wire `tl5` called w3461 (= `wl_h1`) | P | (5443-5465, 6350) | out (toward `tl5`'s latch a) | piece `ha`: onto `tl5`'s poly column from T5's south pad; the other end is `bw`'s pad (7031,7560), inside the northern part |
-| `cdp2_w6845` | M | (7290-7300, 6848) | not known | piece `hb`: onto `cdp2`'s metal west of its pad (7335,6845) |
-| `cdp2_w6845` | P | (6118, 6836-6858) | not known | the end pad (6146,6847)'s row on west (`lc1`'s band): to a pad (5668,6846) and a thin metal on west along y 6849 to about x 5339, not drawn |
-| `busl_y6805` | P | (6160, 6705-6727); (7410, 6791-6813) | not known | piece `hc`: the rows beyond its two pads, on west (seen to x 6040) and on east (seen to x 7500) |
+| `cnt_gab` (piece `hb`; labelled `cdp2_w6845` until run 19) | M | (7290-7300, 6848) | out (toward the counters; believed: every drawn end east of here is a gate) | piece `hb`: onto `cdp2`'s metal west of its pad (7335,6845) |
+| `cnt_gab` (piece `hb`) | P | (6118, 6836-6858) | in (believed: the net's driver is not drawn, and every end east of here is a gate) | the end pad (6146,6847)'s row on west (`lc1`'s band): to a pad (5668,6846) and a thin metal on west along y 6849 to about x 5339, not drawn |
+| `busl_y6805` (one net with `cdp2_w6845` since run 19) | P | (6160, 6705-6727) | not known | piece `hc`: the row beyond its west pad (6189,6716), on west (seen to x 6040) |
 | `lc2_w9125` (run 17, piece `qc`) | P | (6450,9526-9546) | in (driven in `lc2`, marked there) | onto `lc3`'s poly `P 5933,9250 y9537 x6450 w=22` at its port |
 | `lc3_e9798` (piece `qc`; one net with `lc2_w9125`) | M | (6450,9791-9805) | out | onto `lc3`'s metal `M 6450,9798 x6428 y10400` at its port |
 | `lc3_e9756` (piece `qa`) | M | (6450,9749-9763) | not known | onto `lc3`'s metal `M 6450,9756 x6342 y10400` at its port |
@@ -2389,6 +2476,11 @@ here. No transistor.
 | `ck_a` (piece `ya`) | M | (7418-7430, 7150) | in (the clock block's phase, by `bw`'s poly and pad (7419,7387)) | onto `bw`'s metal `M 7421,7400 y7150 w=22` |
 | `tc1_m6817` (piece `yb`; one net with `cnt_bus_b`) | P | (6530-6548, 6400) | out (toward `tc2`'s pad (6533,6152) and `tc1`'s cell D) | onto `tc2`'s poly `P 6534,6152 y6400 w=20` at its port (6534,6400) |
 | `cnt_bus_b` (piece `yb`) | M | (7462-7474, 7150) | not known (no driver drawn on the net) | onto `bw`'s metal `M 7467,7357 y7150 w=23` |
+| `cdp2_w6845` (run 19, piece `yd`; one net with `busl_y6805`) | P | (7975, 6837-6857) | not known | onto `cdp2`'s pad (7987,6845) (`P 7970,6828:8004,6862`), whose metal goes south to the pad (7878,8315) |
+| `cnt_gab` (piece `ye`) | P | (7790-7800, 6838-6856) | out (toward the counters) | onto `cdp2`'s row from its pad (7335,6845) (`P 7335,6836:7800,6858` since run 19) |
+| `cnt_gab` (piece `ye`) | P | (11041-11060, 7202-7220) | out | onto the west end of `wl`'s band H4 (`P 11040,7200:11700,7222`) |
+| `rcs_thin_e` (piece `yc`) | P | (3975-3988, 6402-6422) | out (toward `tl3`'s pad (3973,6329) and `tla`'s selector) | onto `ur`'s pad (3968,6410) |
+| `rcs_thin_e` (piece `yc`) | D | (11692-11714, 6510) | in (believed: every other end of the net is a gate) | the tongue under the buried-contact box (11703,6556): north of it the diffusion band y 6507-6522 along the foot of `amr`'s slices, drawn by no package |
 
 ## Ambiguities
 
@@ -2643,6 +2735,26 @@ here. No transistor.
    round-18 reviewer; its `y_corner7468.png`, 9.5x). The candidate reading, a contact
    somewhere along the overlap, would join `ck_a` to `cnt_la_a_n` or `cnt_bus_b` to `rc0_n` (each of those has a driver of its own in
    the extraction, so the join would show as two drivers on one net).
+
+24. **The box (11703,6556) is read as a buried contact onto the band north of it** (run 19, piece `yc`;
+   guide, trap 24). Its interior is plain in both metal shots where the poly column that enters it is
+   orange, it has the heavy outline on all four sides, and the only things that touch it are the poly
+   from the south and the band on the north (field east and west by the chip-2 stripped shot). The band's
+   class (diffusion) is from the chip-2 stripped shot's red minus green with two field controls beside it,
+   not from a traced device: if the band were poly, the box would be a poly-to-poly feature that this
+   process does not have. What the band is part of is not read (Not done).
+25. **`ral`'s metal x 11390-11402 lies on piece `yc`'s poly column for 150 px (y 6455-6606) without a
+   contact** (guide, trap 13): the metal is unbroken and of constant width in both chips, the clean shot is
+   salmon throughout with no hole (`tools/tl5_tracks.py v 11396 6400 6640`). The metal is `cnt_gab`'s
+   (`wl`'s contact (11392,7210) north to `ral`): a contact would join `rcs_thin_e` to `cnt_gab`.
+26. **The field on y 6845 at x 7835-7847 is 12 px wide and lies in the margin of a metal** (pieces `yd`,
+   `ye`; traps 2, 34). It is read from the clean shot only (pink against cream on two control rows at the
+   same x, and field for 63 px down the column x 7846); chip 2's stripped shot is less clear there (red
+   minus green 6-29 on the suspect stretch, 20-37 on the control), and in the metal shots the stretch is
+   the metal's edge and the column's edge line. The reading is supported by the count of rows (three in,
+   three out) and by each row having a visible turn (the cream column x 7812-7830 under the metal, the
+   open column x 7855-7868). The other reading, one straight row as `cdp2` drew it, would join `cnt_gab`
+   to `cdp2_w6845` and `busl_y6805`.
 
 ## Review
 
@@ -3416,6 +3528,27 @@ beyond the joins.
 Round 1: no findings that change a connection.
 
 ## Not done
+
+**After run 19 (2026-11-24): both items of this package's own in the run-18 list are done** (pieces
+`yc`; `yd`, `ye`), and they open three leads, none in this package's region:
+
+- **`cnt_gab`'s source: the row west of the pad (6146,6847)** (`lc1`'s band; the first item of the list
+  "rows west of the pads"): under eight tracks to a pad (5668,6846), from which a thin metal goes on west
+  along y 6849, over the three poly diagonals without a tap, to about x 5339; its end is not read. This is
+  now the lead to what drives `cnt_gab` (AMB-017: the counters' `_m`/`_mb` pass gates and the RA force
+  line), the most useful next piece.
+- **`rcs_thin_e`'s driver: the diffusion band y 6507-6522 (to y 6545 west of x 11718), x 11445 to 12560 and
+  on, along the foot of `amr`'s slices**, with a poly row y 6485-6497 against its north edge, and whatever
+  else lies at 11400-13050 x 6450-6600: drawn by no package and named by no Queue row found
+  (`tools/busl_items.py 11380 6420 12630 6600`; `s19_e5.png`, `s19_e6.png` at 1x). Not read beyond the
+  box's surroundings.
+- **`busl_y6805` / `cdp2_w6845`'s source: the row west of the pad (6189,6716)** (`lc1`'s band; seen to
+  x 6040): the net's other end is `cdp2`'s pad (7878,8315), an input of the cluster beside `cdp3`'s row A.
+
+The other items of the lists below (5 to 9 of run 17's; the two rows of channel 2 that are still
+undrawn, y 6366 and the pieces of y 6714, are `cdp2`'s) stand as written. Cuts made in run 19, for what
+"nothing else is undrawn" is worth: none new; the three wires were followed, the strips beside them were
+not searched.
 
 **After run 18 (2026-11-24): items 1 and 2 of the list below are done, and item 4 but for one metal.**
 Item 1: piece `w6` (the six rows are drawn from x 6450 to x 7600 and are `cdp3_cw_c7` .. `cdp3_cw_c2`).
