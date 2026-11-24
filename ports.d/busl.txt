@@ -199,3 +199,16 @@ lc3_e9756    P  7600,7290-7310     ?   the poly row y 7300 on east: seen to abou
 # piece qb (run 17): busl_y7432, the poly row y 7431 of the crossing field
 busl_y7432   P  6450,7421-7441     ?   the row on west under eof's rst_ck arm and lc1's ck_out metal (no contact) to a pad (5536,7432) with a metal from the west (lc1's ground; not drawn)
 busl_y7432   P  7600,7246-7266     ?   the poly row y 7256 on east: seen to about x 7930, where it turns south (not followed: cdp2)
+# piece w6 (run 18): the six poly rows lc3_e9577 .. lc3_e9793 = cdp3_cw_c7 .. cdp3_cw_c2 (canonical cdp3_cw_c#; @alias until the rename)
+lc3_e9577    P  6450,9568-9588     out onto lc3's poly band at its port: the row comes straight from cdp3's row y 9581 at x 7600 (cdp3_cw_c7), no tap
+lc3_e9621    P  6450,9612-9632     out the same, from cdp3's row y 9624 (cdp3_cw_c6)
+lc3_e9665    P  6450,9656-9676     out the same, from cdp3's row y 9668 (cdp3_cw_c5)
+lc3_e9708    P  6450,9700-9720     out the same, from cdp3's row y 9711 (cdp3_cw_c4)
+lc3_e9750    P  6450,9743-9763     out the same, from cdp3's row y 9754 (cdp3_cw_c3)
+lc3_e9793    P  6450,9786-9806     out the same, from cdp3's row y 9797 (cdp3_cw_c2)
+cdp3_cw_c7   P  7600,9568-9588     in  onto cdp3's channel D row `P 7600,9581 x10606` (west output of row C's cell in column c7)
+cdp3_cw_c6   P  7600,9612-9632     in  onto cdp3's row `P 7600,9624 x10216`
+cdp3_cw_c5   P  7600,9656-9676     in  onto cdp3's row `P 7600,9668 x9825`
+cdp3_cw_c4   P  7600,9700-9720     in  onto cdp3's row `P 7600,9711 x9435`
+cdp3_cw_c3   P  7600,9743-9763     in  onto cdp3's row `P 7600,9754 x9045`
+cdp3_cw_c2   P  7600,9786-9806     in  onto cdp3's row `P 7600,9797 x8654`

@@ -1184,3 +1184,34 @@ N M 6731,7800 lc3_e9756
 P 6445,7431 x7318 y7256 x7600 w=20    # row y 7431 east, column x 7318 north (under eof's metal), row y 7256 east
 N P 7000,7431 busl_y7432
 N P 7500,7256 busl_y7432
+# =====================================================================================
+# Piece w6 (run 18, 2026-11-24): the six poly rows lc3_e9577 .. lc3_e9793 east of lc3's
+# ports at x 6450. Each is one straight poly row (no step: centres within 5 px along the
+# whole length, tools/busl_roww.py) from x 6450 east under twenty-three thin metal tracks
+# (x 6472 .. 7554; the track positions x 6818, 7165, 7511 are empty and the rows lie in the
+# open there) to x 7600, where trace/cdp3.txt draws it on east under its VSS rail as a
+# channel D track, the west output of one bit of row C (R12): cdp3_cw_c7 (y 9581) ..
+# cdp3_cw_c2 (y 9797). Six rows enter, six leave, in the same order. No pad, no widening,
+# no contact, no tee on any row: every crossing is plain (tools/busl_padscan.py and
+# tools/tl5_tracks.py v down every track: only the 8-12 px bars of the rows' edges; the
+# clean shot between the rows is pink field under every track and open field between
+# them). The metals y 9756 (piece qa) and y 9798 (piece qc) lie on the rows y 9753 and
+# y 9796 west of x 6480 / x 6520 without a contact (as lc3's file says of their west parts).
+P 6445,9578 x7605 w=20                # row 1: lc3_e9577 -> cdp3_cw_c7
+P 6445,9622 x7605 w=20                # row 2: lc3_e9621 -> cdp3_cw_c6
+P 6445,9666 x7605 w=20                # row 3: lc3_e9665 -> cdp3_cw_c5
+P 6445,9710 x7605 w=20                # row 4: lc3_e9708 -> cdp3_cw_c4
+P 6445,9753 x7605 w=20                # row 5: lc3_e9750 -> cdp3_cw_c3
+P 6445,9796 x7605 w=20                # row 6: lc3_e9793 -> cdp3_cw_c2
+N P 7000,9578 cdp3_cw_c7
+N P 7000,9622 cdp3_cw_c6
+N P 7000,9666 cdp3_cw_c5
+N P 7000,9710 cdp3_cw_c4
+N P 7000,9753 cdp3_cw_c3
+N P 7000,9796 cdp3_cw_c2
+@alias cdp3_cw_c7 lc3_e9577
+@alias cdp3_cw_c6 lc3_e9621
+@alias cdp3_cw_c5 lc3_e9665
+@alias cdp3_cw_c4 lc3_e9708
+@alias cdp3_cw_c3 lc3_e9750
+@alias cdp3_cw_c2 lc3_e9793
