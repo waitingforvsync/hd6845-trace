@@ -5121,7 +5121,9 @@ N M 10746,15930 vcc
 # eof_w16213 = NOT rst_lat. Of run 55's build (the gate row crosses under the rail). The channel is the
 # diffusion x 10500-10618 under the row: the node north of it (y 16266-16289), vss south (a band y 16318-16332
 # and, under the rail, the box of the rail contact (10560,16336), y 16318-16357).
-D 10500,16266:10618,16332              # node north of the gate, vss south, through under the row
+# review round 83 (geometry only): the diffusion's west edge is x ~10490 (clean shot: edge line x 10487-10490,
+# tan from x 10493 at y 16326)
+D 10490,16266:10618,16332              # node north of the gate, vss south, through under the row
 D 10542,16318:10600,16357              # the box of the rail contact
 C 10560,16336
 M 10573,16230 y16372 w=50              # the VSS rail, over this unit
@@ -5153,7 +5155,10 @@ B 10624,16243:10652,16264
 # 1215 px south, shape for shape (findcell 0.87; every edge within 2 px of the master's: px.py col 10610,
 # 10637, 10675, 10700). So bl0_w15566 = NOT h_eq_r1, with its load.
 D 10584,17481:10618,17547              # the channel east of the rail: node north of the row, vss south
-P 10590,17515 x10638 w=16              # the row on east to its cap
+# review round 83 (geometry only): the gate row is 21 px over the channel (y 17505-17526; run 51 drew it 16),
+# and the diffusion's west edge is x ~10490 as in the master (run 51: 10506)
+P 10500,17505:10638,17526              # the row over the channel, and on east to its cap
+D 10490,17490:10510,17548
 D 10596,17481:10670,17498              # the band
 D 10668,17475:10718,17535              # the block and the strip under the plate
 D 10716,17475:10772,17539              # the box of the VCC contact
@@ -5200,5 +5205,7 @@ B 10624,15766:10652,15787
 # (cdp4's `P 10808,15737 x10694 w=22`, the row of the pad (10808,15738) of the thin metal x 10808), one
 # poly (orange without a break from y 15731 to y 15773 at x 10703 in both metal shots; field north of the
 # bar at x 10660). So the unit's output is cdp4_w10808 = NOT eof_w15955.
-P 10686,15730:10714,15861              # the plate, its head on cdp4's row
+# review round 83 (geometry only): north of the bar the head is x ~10694-10714 (edge x 10688-10694 at y 15740)
+P 10686,15751:10714,15861              # the plate
+P 10694,15728:10714,15753              # its head, on cdp4's row
 N P 10700,15800 cdp4_w10808
