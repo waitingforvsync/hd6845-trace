@@ -586,7 +586,14 @@ N M 7988,7200 cdp2_w6845s
 @alias cdp2_w6845 cdp2_w6845s
 P 7970,6828:8004,6862
 C 7987,6845
-P 7335,6836:7987,6858                 # its poly row west to a pad (7335,6845)
+# (busl run 19, 2026-11-24) The row was drawn straight from the pad (7335,6845) to the pad (7987,6845):
+# it is two rows on two nets. The clean shot has field on y 6845 at x 7835-7847 (pink 198/118/122 where
+# the rows y 6802 and y 6889 read cream 213/166/110: tools/px.py row 6845 7826 7858 3 acid1b). The row
+# from the pad (7335,6845) turns south at x 7812-7830 to y 6888, runs round this pad and comes back up
+# to y 6845 at x 8080 (cnt_gab: trace/busl.txt, piece ye); the pad (7987,6845)'s own row comes from the
+# row y 6802 by a column x 7855-7868 (busl_y6805: trace/busl.txt, piece yd). Only the west row's stretch
+# as far as x 7800 is kept here.
+P 7335,6836:7800,6858                 # the poly row of the pad (7335,6845), east to the knot (cnt_gab)
 P 7318,6828:7352,6862
 C 7335,6845
 M 7290,6848 x7335 w=16                 # a metal from the west ends on that pad (port; follower: to (6142,6847))
