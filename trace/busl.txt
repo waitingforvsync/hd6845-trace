@@ -1103,7 +1103,7 @@ P 6127,6828:6165,6866                 # the end pad
 C 6146,6847 s=24x24
 P 6148,6847 x6118 w=22                # the poly row on west: a stub
 M 6144,6848 x7300 w=13                # metal east along y 6848 onto cdp2's metal
-N M 6700,6848 cdp2_w6845
+N M 6700,6848 cnt_gab                 # was labelled cdp2_w6845 until run 19: that name is the pad (7987,6845)'s net (piece ye)
 # Piece hc: busl_y6805, the metal north of it. From an end pad (6189,6716) of a poly row
 # from the west (seen to x 6040; a stub to x 6160) a metal runs south on x 6191 to a plain
 # corner (6191,6805) and east along y 6805 over the same seven polys, no pad or tap, to a
@@ -1115,7 +1115,7 @@ P 6191,6716 x6160 w=22                # the poly row on west: a stub
 M 6191,6714 y6805 x7382 w=13          # metal south on x 6191, corner, east along y 6805
 P 7361,6783:7399,6821                 # the east pad
 C 7380,6802 s=24x24
-P 7378,6802 x7410 w=22                # the poly row on east: a stub
+P 7378,6802 x7410 w=22                # the poly row on east: drawn on by piece yd (run 19)
 N M 6700,6805 busl_y6805
 # =====================================================================================
 # Run 17 (2026-11-21): the northern part's leftovers. Items (a), (b) and line Q of the Next
@@ -1297,3 +1297,34 @@ P 11352,6455 x11398 y6606 x11703 y6560 w=16   # east, south under ral's metal, e
 D 11692,6510:11714,6566               # the band's tongue under the box (the band itself is undrawn)
 B 11692,6548:11714,6566
 N P 9000,6456 rcs_thin_e
+# =====================================================================================
+# Pieces yd, ye (run 19, 2026-11-24): the knot x 7800-8090, where cdp2 drew one straight row
+# y 6845 from its pad (7335,6845) to its pad (7987,6845) (trace/cdp2.txt, corrected in a
+# commit of its own). They are two rows on two nets: the clean shot has field on y 6845 at
+# x 7835-7847, in the margin of eofw's metal x 7829-7843 (pink 198/118/122, where the rows
+# y 6802 and y 6889 read cream 213/166/110 at the same x). Three rows enter the knot from
+# the west (y 6757, 6802, 6845) and three leave (fld's cnt_la_a_n from y 6757 to y 6800; the
+# two below).
+#
+# Piece yd: busl_y6805 is cdp2_w6845. The row y 6802 from the pad (7380,6802) (piece hc) runs
+# east under the tracks x 7424, 7468, 7533 and cdp2's and eofw's metals (plain crossings, no
+# pad) to x 7868, turns south as a column x 7855-7868 (open poly, orange in both metal
+# shots) to y 6845 and runs east along y 6845 to cdp2's pad (7987,6845), whose metal x 7988
+# goes south to the pad (7878,8315) (cdp2: an input of the cluster beside cdp3's row A).
+# East of that pad there is field (x 8029-8041): the row ends on the pad.
+P 7400,6802 x7862 y6847 x7975 w=20
+@alias cdp2_w6845 busl_y6805
+#
+# Piece ye: the pad (7335,6845)'s row is cnt_gab. cdp2's row from its pad (7335,6845) (kept
+# there to x 7800; piece hb's metal y 6848 arrives on that pad from the west) turns south at
+# x 7812-7830 under eofw's metal (cream column, no contact: the metal is eofw's through
+# track), runs east along y 6888 under cdp2's metals x 7913-7931 and x 7981-7995 (the pad
+# (7987,6845)'s own metal going south: a plain crossing, no pad on the row) to x 8083, turns
+# north at x 8074-8086 and runs on east along y 6845: a U round the pad (7987,6845). From
+# there it is the line "y 6844" of cdp2's channel 2: 2,970 px under every slice's metals and
+# rails, no pad, no step, to x 11055, where it turns south as an open poly column
+# x 11044-11056 between the metals x 11019-11031 and x 11082-11094 (no pad), and at
+# y 7200-7222 turns east: an L corner onto wl's band H4 (`P 11040,7200:11700,7222`), which
+# wl, mra and ral join to cnt_gab (the contact (11392,7210), the line x 12902).
+P 7790,6847 x7821 y6888 x8080 y6845 x11050 y7211 x11060 w=18
+N P 9500,6845 cnt_gab
