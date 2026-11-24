@@ -1251,3 +1251,49 @@ M 6538,6717 x7468 y7155 w=13          # metal y 6718 east, corner, track x 7468 
 N M 7000,6717 cnt_bus_b
 N P 6539,6600 cnt_bus_b
 @alias cnt_bus_b tc1_m6817
+# =====================================================================================
+# Piece yc (run 19, 2026-11-24): the horizontal metal y 6459 is a link of rcs_thin_e's line,
+# which is drawn here from ur's pad (3968,6410) (trace/ur.txt: the pad whose metal comes from
+# tl3's pad (3973,6329) on the row of rcs_thin_e) east for 7,700 px to a buried-contact box
+# (11703,6556) south of amr's slices. Built like amrw's line (y 6410) and slbus's five
+# (y 6498 ..) beside it: poly / metal / poly / metal / poly, a pad with a contact at each
+# change. No tap, no pad and no tee between the ends:
+#  - poly row y 6412 east from ur's pad under six vertical metals (x 4085 .. 4405, plain) to a
+#    corner (4564,6412), column x 4556-4572 south, row y 6456 east under the left array's
+#    rails to the pad (4972,6457);
+#  - metal y 6458 east over the poly bus x 5000-5450 (no pad on it) to the pad (5669,6457);
+#  - poly row y 6456 east to the pad (6188,6457);
+#  - metal y 6458 (9-11 px) east over the crossing field's poly columns (pieces ya, yb among
+#    them: plain) to the pad (7490,6457);
+#  - poly row y 6456 east: the THIRD line of cdp2's channel 2, 3,580 px under every slice's
+#    metals and rails without a pad or a step, to the pad (11066,6457);
+#  - metal y 6456 east over field to the pad (11352,6455);
+#  - poly east from the pad, a column x 11391-11405 south under ral's metal x 11390-11402
+#    (which lies on it for 150 px without a contact: no break, no hole), a row y 6606 east
+#    under two wide metals to x 11703, and a column north into the box.
+# The box (11690-11716, 6540-6578; heavy outline, plain interior) is a buried contact onto a
+# diffusion band north of it (y 6507-6522 east of x 11718, to y 6545 west of it), which runs
+# east-west along the foot of amr's slices and is drawn by no package: only the tongue under
+# the box is drawn here, as the wire's port.
+P 3975,6412 x4564 y6456 x4972 w=20    # rows y 6412, y 6456 and the column x 4564 between them
+P 4954,6440:4990,6474
+C 4972,6457 s=24x24
+M 4972,6458 x5669 w=13                # over the poly bus x 5000-5450
+P 5651,6440:5687,6474
+C 5669,6457 s=24x24
+P 5669,6456 x6188 w=20
+P 6170,6440:6206,6474
+C 6188,6457 s=24x24
+M 6188,6458 x7490 w=11                # the metal "y 6459" of the Not done list
+P 7472,6440:7508,6474
+C 7490,6457 s=24x24
+P 7490,6456 x11066 w=20               # channel 2, third line
+P 11048,6440:11084,6474
+C 11066,6457 s=24x24
+M 11066,6456 x11352 w=13
+P 11334,6438:11370,6472
+C 11352,6455 s=24x24
+P 11352,6455 x11398 y6606 x11703 y6560 w=16   # east, south under ral's metal, east, north into the box
+D 11692,6510:11714,6566               # the band's tongue under the box (the band itself is undrawn)
+B 11692,6548:11714,6566
+N P 9000,6456 rcs_thin_e
