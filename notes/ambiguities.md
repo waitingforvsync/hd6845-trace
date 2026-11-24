@@ -454,6 +454,13 @@ normal use, or band H4 and the line x 12902 are not the counters' per-character 
 that `wl` and `mra` took them for. The routes from the cells to H4 were re-read and are right,
 so the question is H4 and x 12902 themselves.
 
+Updated 2026-11-24 by `busl` run 19: **the source is half found**. H4's west end (11040,7211) is an
+L corner onto a poly column x 11050 north to channel 2's row y 6845, which runs west through the
+central datapath (round the pad (7987,6845)) to `cdp2`'s pad (7335,6845) and on by `busl`'s metal
+(piece `hb`) to the end pad (6146,6847); its poly row goes on west into `lc1`'s band (to a pad
+(5668,6846) and a thin metal along y 6849 to about x 5339; not followed). No driver drawn yet: the
+lead is that row (the master list's `lc1` row).
+
 ## AMB-018: the `ral` cell: latch, and its device sizes (2026-11-17)  (resolved 2026-11-17)
 
 `notes/blocks/ral.md`; copies in `trace/ral.txt` (RA0-RA4) and `trace/mal.txt` (MA0-MA13).

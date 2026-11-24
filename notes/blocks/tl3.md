@@ -1828,3 +1828,9 @@ Round 1: no findings.
 ## Corrections (coordinator, from the handoffs of 2026-11-20, third batch)
 
 - The net with five loads and no driver (`tl1_w3636`, `tl3_w4978`, `tl3_w3373`, `tl4_w4545`, `tl4_w4686`; "driver not found", "believed in `bc1`'s group"): the driver is the clock buffer. The net is `ck_out` (`tl4` runs 11-12, 2026-11-20, firm joins: the metal x 6016 across y 6350-6900, and from the left bus field's foot through the bottom-centre logic onto `eof`'s row of the clock). `tl3`'s latches A and B are latches on the buffered clock.
+
+## Corrections (coordinator, from the handoff of `busl` run 19, 2026-11-24)
+
+- `rcs_thin_e`: `ur`'s pad (3968,6410)'s poly, "seen to x 4256, not drawn", is drawn end to end by
+  `busl` (piece `yc`) to a buried-contact box (11703,6556) on a diffusion band at the foot of `amr`'s
+  slices (undrawn; believed where `rcs_thin_e` is driven: every other end of the net is a gate).

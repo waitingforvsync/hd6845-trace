@@ -941,3 +941,26 @@ comparator's chain output is, west of the knot, the line at y 6844, which goes t
 
 - The reviewer of `cdp4` run 12 notes that the chain's poly row drawn to x 10842 at about y 6880-7262 ends at
   about x 10821; the track x 10808 (`cdp4_w10808`) lies lengthwise on it with no pad (no connection).
+
+## Corrections (coordinator, from the handoff of `busl` run 19, 2026-11-24)
+
+- "A through line ... a poly row y 6845 east to a pad (7987,6845)" from the pad (7335,6845) is **two nets**
+  (`busl` run 19; `trace/cdp2.txt` corrected, c17ed61: `P 7335,6836:7987,6858` became
+  `P 7335,6836:7800,6858`). The pad (7335,6845), its row (to x 7800 in this file) and the metal from the
+  west (piece `hb`) are `cnt_gab`: the row turns south at x 7821 to y 6888, comes back up at x 8080 and
+  runs east through channel 2 on y 6845 to `wl`'s band H4. The pad (7987,6845), its metal south and the
+  pad (7878,8315) are `cdp2_w6845`, whose row comes from the west on y 6802 (`busl_y6805`), stepping
+  down at x 7861. Evidence: field on y 6845 at x 7835-7847 in the clean shot (re-read items R54, R55).
+- "Channel 2 west of the slices: a knot": the rule "6844 to 6888 by the same rule" and "the line y 6888
+  that this block traced as its comparator's chain output is, west of the knot, the line at y 6844" are
+  wrong: the west row goes down to y 6888 and back up to y 6845 at x 8080; the chain output's row y 6888
+  starts at x 8672 and has no row west of it to x 8086 (R55).
+- Ports: `ports.d/cdp2.txt`'s line `cdp2_w6845 M 7290,6840-6856` is `cnt_gab`'s (renamed by the
+  coordinator).
+- "Channel 2 lines ... not drawn": the lines y 6456 (`rcs_thin_e`) and y 6844 east of x 8080 (`cnt_gab`)
+  are drawn by `busl` (pieces `yc`, `ye`). With `amrw`'s y 6410, `slbus`'s five, `fld`'s two and the
+  chain output, what is left undrawn of channel 2 is the line y 6366 and pieces of the line y 6714.
+- Seen by `busl`'s round-19 reviewer: the "contact (8548,6885) on a poly pad beside line 6888" is the end
+  of a thin metal x 8545-8558 from the north (to y 5778) on a pad with a contact (8552,6886), whose poly
+  leaves east and south; the metal crosses the rows y 6456 and y 6845 without a contact. Drawn by no
+  package.

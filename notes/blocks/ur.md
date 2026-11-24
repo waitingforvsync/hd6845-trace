@@ -126,3 +126,9 @@ What is left of the left column near the generator: the cell at y 7790-8000 is t
   `c4l_gab`. `c4l_l3` and `c4l_gab` are drawn 10-21 px off north of y 6700 in the old reading
   (corrected); `sl_l3`'s metal steps at y ~6665-6700 (drawn at 6560) and the `vcc` line x 3630 has no
   metal from y 6330 to about 6570 (not corrected: R44).
+
+## Corrections (coordinator, from the handoff of `busl` run 19, 2026-11-24)
+
+- The pad (3968,6410)'s poly, "leaves east along y 6402-6422 (seen to x 4256; not drawn)", is drawn end to
+  end by `busl` (piece `yc`): `rcs_thin_e`'s line, 7,700 px east by three poly rows and two metals (the
+  metal y 6459) to a buried-contact box (11703,6556) on a diffusion band at the foot of `amr`'s slices.

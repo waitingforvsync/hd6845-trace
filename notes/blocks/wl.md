@@ -175,3 +175,10 @@ cell for each copy. The extraction of this block is unchanged.
 ## Corrections (coordinator, from the handoffs of `busl` run 16, 2026-11-21)
 
 - `wl_h1` ("not identified"): its west end is the data input of `tl5`'s latch a in the top-left logic (`busl`, piece `ha`).
+
+## Corrections (coordinator, from the handoff of `busl` run 19, 2026-11-24)
+
+- Band H4 "comes from the bus field in the west": its west end (11040,7211) is an L corner onto a poly
+  column x 11050 north to channel 2's row y 6845, so `cnt_gab` comes through the central datapath's
+  channel 2 from the pad (7335,6845) and the left-centre band (firm for the wire; no driver drawn,
+  AMB-017).

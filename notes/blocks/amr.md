@@ -432,3 +432,11 @@ wording fixes are in.
 
 1. Where the selector's output `tla_w3417` goes (`notes/blocks/tla.md`: to the right
    cluster, not followed) and its other data input `tla_w3376`.
+
+## Corrections (coordinator, from the handoff of `busl` run 19, 2026-11-24)
+
+- The row "y 6452" beside this block's lines (the top rows y 6365, 6409, 6452) is `rcs_thin_e`'s
+  (`busl` piece `yc`). It ends on a buried-contact box (11703,6556) on a diffusion band y 6507-6522
+  at the foot of the slices, which no package has drawn; the band, its poly row y 6485-6497, the
+  outlined areas south of it and a second box (11544,6520) are now in this block's Queue row
+  (2026-11-24).

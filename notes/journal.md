@@ -3300,3 +3300,41 @@ proposals in these handoffs; the earlier list's (journal 2026-11-23 10:50) stand
 `out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 1,010
 floor-plan blocks. Coverage: 73.0% traced; in some package region 99.9%; untraced and in no Queue row
 0.4%. Not done here: the refresh (the renames above wait).
+
+## 2026-11-24 15:39 UTC  Handoff: `busl` run 19
+
+One handoff file, applied by the coordinator (on Opus 5.5; coordination, no tracing): `busl` run 19
+(pieces `yc`, `yd`, `ye`; waitingforvsync's claim, traced on Fable 5.2 in richtw1's session from
+2026-11-24 15:42 +0100; merged e4d484b; **claim released**). Wiring only, no transistor, no uncertain
+item; one correction to `trace/cdp2.txt` (c17ed61). Full extraction after it 2,514 nets (run 18: 2,515),
+4,831 transistors, 0 errors, 0 warnings; 972 of 1,430 equations firm; 109 nets joined only through
+uncertain items (1,213 items). Spot checks of the overlays: the knot at x 7700-8120, y 6760-6940 (the
+west row's turn south and the field on y 6845 at x 7835-7847; `cache/scratch/refresh/hR-20261124-busl19-knot.png`)
+and the box (11703,6556) (`hR-20261124-busl19-box.png`): the drawn shapes lie on the features.
+
+What it establishes (marks as in the tracer's notes):
+
+- **The metal y 6459 is a link of `rcs_thin_e`'s line** (piece `yc`; firm for the wire): from `ur`'s pad
+  (3968,6410) 7,700 px east, no tap, to a buried-contact box (11703,6556) on an undrawn diffusion band at
+  the foot of `amr`'s slices. Believed: `rcs_thin_e` (the select of `tla`'s selector) is driven there.
+- **`busl_y6805` is `cdp2_w6845`** (piece `yd`; firm for the join).
+- **`cnt_gab` comes from the west** (piece `ye`; firm for the wire): `cdp2`'s row from the pad (7335,6845)
+  goes round the pad (7987,6845) in a U and east through channel 2 to `wl`'s band H4. With piece `hb` the
+  net reaches the end pad (6146,6847); no driver drawn (AMB-017 updated: the source half found).
+- **`cdp2`'s row y 6845 was two nets**, drawn as one straight poly through a knot: corrected by the
+  tracer in `trace/cdp2.txt`.
+
+Review: round 19 (full), a fresh Fable 5.2 agent: no finding that changes a connection; two geometry
+remarks fixed (`tools/sameconn.py`: connections identical).
+
+Applied: master list rows `busl` (run 19; done as far as the package reaches, claim released), `cdp2`
+(continue) (the correction, the reviewer's thin metal x 8545-8558, channel 2's undrawn lines), `lc1`-`lc3`
+(the row west of (6146,6847) is `cnt_gab`'s source side, first), `wl` (band H4 is `cnt_gab`), `amr`
+(**the band at the foot of the slices, 11400-13050 x 6450-6600, added to its region**: it was in no Queue
+row; it is the lead to `rcs_thin_e`'s driver) and the `rename` row (`busl_y6805` -> `cdp2_w6845`).
+**Re-read items R54, R55 new** (`cdp2` piece `ga`'s other stretches; `cdp2`'s knot rule and whatever took
+the chain output to the pad (7335,6845)), and the lesson added to trap 33 of the guide ("a knot hides a
+break"). AMB-017 updated. Corrections sections in the notes of `cdp2`, `wl`, `ur`, `tl3`, `amr` and
+`slbus`; `ports.d/cdp2.txt`'s stale port at (7290,6848) renamed to `cnt_gab` (`tools/ports.py` now
+reports "same name"). Floor plan: nothing to trim. Coverage: 73.0% traced; in some package region 99.9%;
+untraced and in no Queue row 0.4%. `out/` is rebuilt by the refresh that follows.

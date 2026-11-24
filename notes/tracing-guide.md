@@ -533,6 +533,12 @@ Traps, all of them real:
    reused wherever a line ends: `eof` runs 55-62 met six places where two metals lie end to end 12-40 px
    apart. Before drawing a metal through a pad or past another line's end, run the two-chip test across
    it. Found 2026-11-22 (`eof` run 55; R53).
+   And **a knot hides a break**: `cdp2` drew the row y 6845 as one poly from the pad (7335,6845) to the
+   pad (7987,6845), from a view of about 3x, straight through a knot where a vertical metal's margin hides
+   12 px of field (x 7835-7847); it is two rows on two nets, one turning south under the metal and one
+   arriving from the north beside it. Where a row passes under the edge of a metal in a knot of turns,
+   read it at 4x in all four shots and measure the row across the knot (`tools/px.py row`, against the
+   rows above and below at the same x). Found 2026-11-24 (`busl` run 19; R54, R55).
 34. **A row that lines up with a poly beyond a rail's edge is not thereby the same poly.** In
    `lc2`'s west cluster the gate rows end at the rail's east edge and a different poly (the gate of
    a pull-down east of the rail) starts 20-30 px further on, in line. At 2.8x they look like one
