@@ -3239,3 +3239,64 @@ becomes `?C` (an item turned uncertain does not show as a difference). The earli
 
 `out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 1,002 floor-plan
 blocks. Coverage: 73.0% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
+
+## 2026-11-24 14:50 UTC  Handoffs: `busl` runs 17-18
+
+Two handoff files, applied by the coordinator (on Opus 5.5; coordination, no tracing), both for
+waitingforvsync's claim, traced on Fable 5.2: `busl` run 17 (pieces `qc`, `qa`, `qb`; traced 2026-11-21
+02:25-03:02 +0100 by the loop's tracer, which the usage limit stopped; finished 2026-11-24 in richtw1's
+session: the reviewer's report taken from the transcript, the round recorded; merged ff08ad8) and `busl`
+run 18 (pieces `w6`, `ya`, `yb`; richtw1's session, 2026-11-24 14:06 +0100 on; merged 3dc87fc). Claim
+kept, continuing. Wiring only, no transistor, no uncertain item. Full extraction after them 2,515 nets
+(eight fewer than at the last handoffs: run 17 one more and one fewer, run 18 eight joins), 4,831
+transistors, 0 errors, 0 warnings; 972 of 1,430 equations firm; 109 nets joined only through uncertain
+items (1,213 items): all as before. Spot checks of the overlays (the drawn shapes lie on the features):
+piece `w6`'s six rows with `lc2_w9125`'s pad at x 6400-7100 (`cache/scratch/refresh/hR-20261124-busl18-w6.png`),
+and pieces `ya`, `yb`'s end pads and thin metals at x 6440-7520, y 6650-6810
+(`hR-20261124-busl18-yayb.png`).
+
+What they establish (from the tracers' notes; marks as there):
+
+- **`lc3_e9798` is `lc2_w9125`** (run 17, piece `qc`; firm for the wire): the stage-select gate's output
+  (between the ripple counter's fourth and fifth stages) runs from its end pad (6514,9535) by the track
+  x 6514 onto `lc3`'s metal y 9798, and so down the whole left bus field to the foot row y 14567. That it is
+  that gate's output rests on `lc2`'s Ambiguity 8, as before.
+- **Line Q is `lc3_e9756`** (piece `qa`; firm): one wire of about 3,500 px to the poly rows y 7474 / y 7300,
+  drawn to x 7600, no tap; no driver or load drawn yet. **`busl_y7432`** (piece `qb`; firm; new name): the
+  row y 7431, column x 7318, row y 7256 to x 7600; neither end identified.
+- **The six rows `lc3_e9577` .. `lc3_e9793` are `cdp3_cw_c7` .. `cdp3_cw_c2`**, the west outputs of row C
+  (run 18, piece `w6`; firm for the six joins): each poly row runs 1,150 px from x 6450 to x 7600 without
+  pad, contact or tee. So each bit of row C reaches the selector's upper pass transistor (gate `eof_ga`) in
+  one of the left array's rows s8-s13, as R13's bits do in s0-s7. Believed: R12's bits 0-5 (row C is R12
+  through AMB-040), so the fourteen rows take the display start address.
+- **`tc1_p4308` is `ck_a`, `tc1_m6817` is `cnt_bus_b`** (pieces `ya`, `yb`; firm for the joins): `tc2`'s two
+  polys end on pads (6491,6759), (6538,6717), whose thin metals run east and south onto `bw`'s metals. So
+  `tc1_o4280` = NOT `ck_a`, `tc1_o2950` = NOT `cnt_bus_b` (each inverter's own equation marked in `tc1`).
+  `cnt_bus_b` has no driver drawn. The two metals lie on `fld`'s rows without a contact (the block's
+  Ambiguity 23).
+
+Reviews: round 17 (full) and round 18 (full), fresh Fable 5.2 agents: no finding on the geometry; two and
+three remarks on comments and notes, all fixed; `tools/sameconn.py` says `connections identical`.
+`notes/operation.md`: the tracer's own change stands.
+
+Applied: master list rows `busl` (runs 17 and 18; Next: the metal y 6459 and `busl_y6805`'s row east of
+(7380,6802)), `lc1`-`lc3` (the six rows and `lc3_e9798` identified; for `lc1`, `busl_y7432` west of x 6450
+and the rows west of the pads (6146,6847), (6189,6716)), `cdp2` (continue) (the rows y 7256, y 7300 east
+of x 7600 and the undrawn wide metal x 7577-7617), `larr` (continue) (the track x 4736 / x 4780 still on
+`busl`'s list; drawn by `eof` as `eof_w15998`: check what is left), `tla` (continue) (the diagonal's 16 px),
+`bw` (continue), `tc2`, and the `rename` row (nine more proposals: `lc3_e9798`, the six `lc3_e#`,
+`tc1_p4308`, `tc1_m6817`). No Re-read items, no traps, no new AMB entries (the block's Ambiguities 22-23
+are local; `lc2`'s Ambiguity 8 now covers `lc3_e9798`'s net as well). Corrections sections in the notes
+of `lc3`, `cdp3`, `tc1`, `tc2`, `bw`, `eof` and `tla`. Floor plan: the new fragment lines lie in strips
+covered only by coarse blocks other pieces still need; nothing trimmed.
+
+**Tools**: `tools/costs.py` changed on main (58a7d3e, richtw1 with the user's go-ahead, 2026-11-24): a Bash
+command run as `HD_COORD=1 tools/ship.sh` names no package, so the coordinator's shipping of corrections
+sections (a9f6a7b, 2026-11-21 10:40) is no longer counted against `busl`, `bc1`, `bc3`, `bl0`, `tla` and
+`tc2` by the merge gate's check 8b. In `costs/richtw1.json` $10.93 of $1,902 moves from packages to
+coordination; other contributors' reports change the same way when they next run `tools/costs.py`. No tool
+proposals in these handoffs; the earlier list's (journal 2026-11-23 10:50) stand.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 1,010
+floor-plan blocks. Coverage: 73.0% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%. Not done here: the refresh (the renames above wait).

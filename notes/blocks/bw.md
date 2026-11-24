@@ -78,3 +78,10 @@ Everything in the survey; the far ends of the five lines (table); H4 west of x 1
 - The field's westmost two lines are other nets: x 10852 is `rst_lat` (a reset copy, from `trunks`' diagonal
   up to y 3592), x 10808 is `cdp4_w10808` (the output of an undrawn unit of `bc2` at about (10620-10780,
   15750-15860)); both drawn by `cdp4` run 12.
+
+## Corrections (coordinator, from the handoffs of `busl` runs 17-18, 2026-11-24)
+
+- The metals north of the pads (7419,7387) (`ck_a`) and (7466,7343) (`cnt_bus_b`), "seen to y 7150", are followed
+  (`busl` run 18, pieces `ya`, `yb`): north to corners (7424,6762), (7468,6718), west to end pads (6491,6759),
+  (6538,6717), and by poly columns north to `tc2`'s pads: `tc1_p4308` and `tc1_m6817`. The two metals lie on
+  `fld`'s poly rows y 6756 / y 6712 for 380 / 420 px without a contact (`busl`'s Ambiguity 23).

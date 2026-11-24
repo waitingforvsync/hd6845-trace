@@ -13087,3 +13087,11 @@ Round 82: no findings that change a connection.
 ## Corrections (coordinator, from the handoffs of `busl` run 15, 2026-11-21)
 
 - Ambiguities 34 and 39, and the list "the poly Ls under the metals y 7173, 7216, 7303" among the things still undrawn beside its pieces: the four Ls are drawn (`busl`, pieces `ca`..`cd`); the polys under the four arms are `tc2_m6404` (y 7171), `tl6_p6187` (y 7214), `tl6_p6143` (y 7258), `tl6_p6101` (y 7300), and no arm has a contact onto them.
+
+## Corrections (coordinator, from the handoffs of `busl` runs 17-18, 2026-11-24)
+
+- Among the things "still undrawn" beside the northern part's pieces (runs 10-14): "the poly x 6492
+  (`tc1_p4308`'s)" and "the pad (6535,6715)" are drawn (`busl` run 18, pieces `ya`, `yb`). The pad belongs to a
+  second poly, x 6539 (`tc1_m6817`'s, which is `cnt_bus_b`), not to the poly x 6492 (which is `ck_a`).
+- The selector's labels `eof_mxn_s8` .. `s13` are on the nets `cdp3_cw_c7` .. `c2` (row C's west outputs; `busl`
+  run 18, piece `w6`): the sources believed in run 43 are found. The labels stay as the cell's own.
