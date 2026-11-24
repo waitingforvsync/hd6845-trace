@@ -523,3 +523,17 @@ Round 5: no findings that change a connection.
 ## Corrections (coordinator, from the handoffs of `busl` run 16, 2026-11-21)
 
 - Ports `vcc` (4924-4980,10600), `vcc` (5340-5390,10600), `vss` (4752-4802,10600): the two VCC metals are one metal (a band y 10597-10645 joins their feet; `busl`, piece `va`), and the west rail's foot turns west and south (piece `vc`).
+
+## Corrections (coordinator, from the handoffs of `busl` runs 17-18, 2026-11-24)
+
+- `lc3_e9798` and `lc3_e9756` (metals that turn south on x 6428 / x 6342, "east ends not followed"): `lc3_e9798`
+  comes from the end pad (6514,9535) of `lc2_w9125`'s own poly (the row `lc3` draws to its port (6450,9537)), by a
+  metal south on x 6514 over six poly rows without a tap and west along y 9798: one net with `lc2_w9125`, the
+  stage-select gate's output (`busl` run 17, piece `qc`; the wire firm, the name resting on `lc2`'s Ambiguity 8).
+  `lc3_e9756` runs on east and north as line Q to the poly rows y 7474 / y 7300, drawn to x 7600, no tap
+  (piece `qa`). Evidence: `notes/blocks/busl.md`, "Pieces `qc`, `qa`, `qb` (run 17)".
+- The six poly rows `lc3_e9577` .. `lc3_e9793` ("come from the east edge"): each runs straight on east of x 6450
+  for 1,150 px, without pad, contact or tee, onto `cdp3`'s channel D rows at x 7600: they are `cdp3_cw_c7` ..
+  `cdp3_cw_c2`, row C's west outputs (`busl` run 18, piece `w6`; firm). With `busl`'s piece `e6`, `bl0` and
+  `eof`'s piece `rj`, row C's bits reach the selector of the left array's rows s8-s13 (believed R12's bits 0-5,
+  through AMB-040).

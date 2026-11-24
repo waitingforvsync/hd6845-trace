@@ -1298,3 +1298,12 @@ Round 2: no findings.
 ## Corrections (coordinator, from the handoffs of `cdp2`, 2026-11-20)
 
 - Piece 11, `tc1_ns3` ("south of the island ... metal x 7661 to y 6400"): the metal ends on the pad (7662,7083), the output of `cdp2`'s inverter: `tc1_ns3` = NOT `tc2_sr_q` (marked: two `?B` of `cdp2`'s piece `ga`).
+
+## Corrections (coordinator, from the handoffs of `busl` runs 17-18, 2026-11-24)
+
+- `tc1_p4308`'s poly ("going on south" past y 6400) ends on an end pad (6491,6759) whose thin metal runs east along
+  y 6762 and south on x 7424 onto `bw`'s metal of `ck_a`: it is `ck_a` (`busl` run 18, piece `ya`; firm).
+  `tc1_m6817`'s poly ends on an end pad (6538,6717), thin metal east along y 6718 and south on x 7468 onto
+  `bw`'s metal of `cnt_bus_b`: it is `cnt_bus_b` (piece `yb`; firm). Geometry only: `tc2` draws the two polys
+  4-5 px west of where the clean shot has them (x 6492 / x 6534 against x 6488-6503 / x 6531-6546 under the
+  metal y 6546; `tools/px.py row 6545 6470 6560 3 acid1b`); they overlap.

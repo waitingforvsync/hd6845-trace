@@ -1588,3 +1588,10 @@ Round 1: no findings that change a connection.
 ## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
 
 - `c4l_l3`, `tl4_w5068`, `tc1_bus2814` ("a poly from the north") come from `tl6`'s strip: they are `c4l_l3`, `tl4_w5068` (the wire `tl5` called w5500) and `tl6_p6101` (`tlb` run 1; the last still through `tc1`'s own `?M` at (7140-7164, 2597)).
+
+## Corrections (coordinator, from the handoffs of `busl` runs 17-18, 2026-11-24)
+
+- `tc1_p4308` is `ck_a` and `tc1_m6817` ("driven from the south, not followed further") is `cnt_bus_b` (`busl`
+  run 18, pieces `ya`, `yb`; firm joins: end pads (6491,6759), (6538,6717), thin metals onto `bw`'s metals). So
+  `tc1_o4280` = NOT `ck_a` and `tc1_o2950` = NOT `cnt_bus_b` (each inverter's own equation as marked here).
+  `cnt_bus_b` has no driver drawn.
