@@ -1713,7 +1713,7 @@ build in the column of `bc2`'s VSS rail x 10548-10598: 5 transistors, no new net
 - **Checks**: full extraction 2,514 nets, 4,836 transistors, 0 errors, 0 warnings; the three equations
   firm (`tools/unsure.py --equations`).
 
-Run 70 (richtw1's session, Claude Fable 5.2; 2026-11-24, from 20:11 +0100). Two pieces, 2 transistors, four
+Run 70 (richtw1's session, Claude Fable 5.2; 2026-11-24 20:11 to 21:05 +0100). Two pieces, 2 transistors, four
 uncertain items (the thin metal over four boxes; no equation rests on them).
 
 - **Piece `t10484`: the thin metal x 10477-10491 is, on the photos, one metal from the pad (10440,16215) to
@@ -1735,6 +1735,8 @@ uncertain items (the thin metal over four boxes; no equation rests on them).
   A second inverter of `rst_lat` in this column, 1,400 px south of piece `u16303`'s, on a wire of its own.
 - **Checks**: full extraction 2,515 nets, 4,838 transistors, 0 errors, 0 warnings; `eof_w17734` firm
   (`tools/unsure.py --equations`).
+- **Review**: round 84 (full): no finding that changes a connection; three geometry remarks fixed
+  (the VCC rail's edge, the west box's size, a corner of the node's diffusion), connections identical.
 
 ## Inventory
 
@@ -1876,7 +1878,7 @@ uncertain items (the thin metal over four boxes; no equation rests on them).
 | `u16303`, `rst_lat`'s unit (run 69) | x 10480-10775, y 16225-16375 | diffusion (10490-10618, 16266-16332) under run 53's gate row y 16293-16313 (128/20), the box of the rail contact (10542-10600, 16318-16357) with the contact (10560,16336); west exit: tab (10494-10518, 16252-16289), buried contact box (10488-10518, 16247-16283), run 67's row drawn on to x 10510; load: band (10596-10670, 16266-16283), block and strip (10668-10718, 16260-16320), VCC box (10716-10772, 16260-16324) with the contact (10745,16288); plate (10686-10714, 16228-16338), its bar (10622-10700, 16228-16250), the bar's end (10627-10650, 16240-16262) in the tie box (10624-10652, 16243-16264) on a tab of the band; both rails over the unit. Two transistors |
 | `ld566`, the rest of `bl0_w15566`'s unit (run 69) | x 10584-10775, y 17440-17560 | piece `u16303`'s east part moved by (0,1215): the channel's east end (10584-10618, 17481-17547) and the row on to its cap x 10638; band, block, VCC box, contact (10745,17503), plate (10686-10714, 17443-17553), bar, tie box (10624-10652, 17458-17479); the VCC rail y 17380-17560. One transistor (the load), and run 51's pull-down completed: 130/20 (was 84/16), with the row 21 px over the channel and the diffusion's west end (10490-10510, 17490-17548) |
 | `u15826`, the inverter of `eof_w15955` (run 69) | x 10420-10775, y 15730-15880; the metal x 10434-10447, y 15825-15930 | piece `u16303`'s unit moved by (0,-477), with: an end pad (10440,15825) and its metal south to piece `u15955`'s pad; the row y 15815-15835 to x 10638; the diffusion from x 10494; `vss` south of the row on into piece `u15955`'s contact box; the west exit a closed poly pad (10474-10516, 15765-15798) on the box (10486-10518, 15768-15800); the plate (10686-10714, 15730-15861) with its head (10694-10714, 15728-15753) on `cdp4`'s row; VCC contact (10745,15811); both rails y 15740-15850 / 15925. Two transistors |
-| `u17690`, the second inverter of `rst_lat` (run 70) | x 10420-10775, y 17630-17765; the metal x 10434-10448, y 17734-18010 | diffusion (10546-10588, 17634-17736) under run 52's gate row y 17682-17698 (42/16) with the rail contact (10560,17652); west exit: neck (10519-10550, 17723-17735), tab (10498-10522, 17722-17742), buried contact (10492-10514, 17718-17746), poly neck y 17725-17743 to the end pad (10422-10456, 17717-17751) with a contact (10439,17734); output metal south to the port (10441,18010); load: the node east of the rail (10586-10626, 17716-17753), arm (10612-10626, 17686-17720), strip (10622-10730, 17684-17708) under the plate (10628-10722, 17664-17730) (24/94), VCC box (10724-10770, 17684-17732) with the contact (10743,17706); tie: the plate's leg (10638-10666, 17728-17752), tab (10624-10660, 17738-17756), buried contact (10634-10668, 17738-17760); the two rails over the unit |
+| `u17690`, the second inverter of `rst_lat` (run 70) | x 10420-10775, y 17630-17765; the metal x 10434-10448, y 17734-18010 | diffusion (10546-10588, 17634-17736) under run 52's gate row y 17682-17698 (42/16) with the rail contact (10560,17652); west exit: neck (10519-10550, 17723-17735), tab (10490-10522, 17722-17742), buried contact (10482-10518, 17718-17746), poly neck y 17725-17743 to the end pad (10422-10456, 17717-17751) with a contact (10439,17734); output metal south to the port (10441,18010); load: the node east of the rail (10586-10626, 17716-17738) and (10610-10626, 17716-17753), arm (10612-10626, 17686-17720), strip (10622-10730, 17684-17708) under the plate (10628-10722, 17664-17730) (24/94), VCC box (10724-10770, 17684-17732) with the contact (10743,17706); tie: the plate's leg (10638-10666, 17728-17752), tab (10624-10660, 17738-17756), buried contact (10634-10668, 17738-17760); the two rails over the unit |
 | `t10484`, the thin metal x 10477-10491 (run 70; wiring) | x 10477-10491, y 16238-17766 | metal y 16277-16501, y 16537-16977 (`eof_w16213`) and y 17015-17458, y 17492-17717, y 17754-17766 (`lc2_w8450`); `?M` over the boxes at y 16238-16279, y 16499-16539, y 17456-17494, y 17715-17756; nothing at y 16977-17015 |
 
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
@@ -12764,6 +12766,58 @@ and the box (10508-10543, 17532-17588); every unit's channel width and a second 
   part of the copy south, apart from the row's width.
 
 Round 83: no findings that change a connection.
+
+### Round 84 (full review; run 70, pieces `t10484`, `u17690`; 2026-11-24 20:40 to 21:00 +0100, at commit a43dba8)
+
+A fresh Fable 5.2 agent, briefed with the two pieces' claims and no reasoning. Told to suspect: whether any
+of the five box stretches of the thin metal hides an end or a contact, above all the latch node's box
+(y 16977-17014); the bars of 10-13 px (y 17021-17033, 17500-17511, 17152-17162, 17178-17188) as gaps between
+two metals; in the unit, the node's path from the rail to the load (the dark bar, a second channel on the
+arm, the region's extent), the tie box, the 12 px neck (diffusion or poly), the channel's width, the VCC
+contact, anything left out. 20 images in `cache/scratch/eof/review-84/` (`s1`-`s3`, `b3`, `e1` at 6x, `w1`,
+`w2`, `u1`, `u2`, `end_n`, `end_s`, mosaics `mos_metal`, `mos_metal1`, `mos_acid1b`, `mos_acid` of the five
+boxes, `ov_all`), with `tools/px.py` rows and columns in all four shots, `tools/tl3_thin.py` and the
+extraction.
+
+- **Finding 1, geometry only: the VCC rail's west edge is x ~10713-10718, drawn 10722**; the plate's east
+  end lies under it. **Confirmed in part** (`tools/px.py row 17750 10700 10732 3 metal,metal1`: edge line
+  x 10709-10712, metal from x 10715; `row 17640`: edge x 10715-10721, metal from x 10724: the rail is wider
+  south of the contact). **Fixed**: the rail's stretch over this unit is `M 10744,17555 y17780 w=52`.
+- **Finding 2, geometry only: the west exit's heavy box is x ~10482-10518, interior x 10492-10505** (drawn
+  `B 10492-10514`); the thin metal lies over its west wall, not beside the box. **Confirmed** (`px.py row
+  17732 10476 10522 3 metal,acid1b`: cream poly x 10476-10479, wall x 10482-10491, tan 180-206/140-179
+  x 10494-10503, wall x 10506). **Fixed**: `B 10482,17718:10518,17746`, the tab `D 10490,17722:10522,17742`.
+- **Finding 3, geometry only: the south-west corner of the node's rectangle east of the rail is field**
+  (the outline curves; `review-84/e1.png`, 6x). **Confirmed** (`px.py row 17748 10588 10780 4`: dark at
+  x 10604-10608, plain from x 10612; pink field under the rail at y 17748). **Fixed**: two rectangles,
+  (10586-10626, 17716-17738) and (10610-10626, 17716-17753).
+- **Proof that no connection changed**: `tools/t.sh eof sameconn.py a43dba8` ends `connections identical`
+  (1217 nets, 2038 transistors); `.venv/bin/python tools/sameconn.py a43dba8` ends `connections identical`
+  (2515 nets, 4838 transistors, 0 errors, 0 warnings).
+- **Checked and found as claimed, piece `u17690`**: one channel only, x 10548-10586, field under the row
+  west of the rail (chip-2 stripped red minus green about 0 at x 10522); the neck y 17723-17735 is
+  diffusion, not poly, and runs into the node with no edge line at the rail; the node joins the load at
+  y 17716-17738 (the line at the rail's edge there is the metal's own, as over plain ground); the arm
+  x 10613-10623 is plain from y 17688 to y 17748, so no second channel, and the notch x 10598-10606 is field
+  in both stripped shots; the tie box is one with the plate's leg and the node's tab; the plate is one poly
+  over the strip, which enters the VCC box; the pad (10439,17734) is real, with open ground between it and
+  `ck_out`'s metal at y 17708-17714; the output metal runs unbroken to a turn at y 18277-18305 with no arm
+  and no hole; the extraction's equation and sizes; nothing in the region is left undrawn (`ov_all.png`).
+- **Checked and found as claimed, piece `t10484`**: every bar of 8-13 px has a dark flank beyond the
+  metal's edges (an edge beneath, not a gap), y 17021-17033 and y 17500-17511 read sample by sample; the
+  track is x 10478-10490, 12-13 px wide, from end to end in both chips with no step; no bright metal beside
+  it between x 10449 and x 10546 except the north patch; no contact (no widening, no green hole but thin
+  slivers at the east edge, against a 13 px hole on the real pad at y 17986-18003); the five boxes read
+  alike (chip 2's red 110-143 at x 10479, no bright centre); over the latch node's box red minus green is
+  about +30 under the track and no metal reaches its interior, so taking out the `?C` is right; the thin
+  metal runs on from the patch in chip 1 (y 16224-16238); the south pad has no metal south or east.
+- **Not checked by the reviewer**: whether the metal is continuous over any of the five box stretches (the
+  undrawn one looks like the four drawn `?M`, and the clean shot has a pale protected band x 10477-10486
+  right through it: "leaving it out is a decision by the names, not by the photos", which is what Ambiguity
+  222 says); a gap of 12 px or less hidden in an edge bar; and, inherited, the pad-to-patch join, the rails'
+  identities and the row's identity as `rst_lat`.
+
+Round 84: no findings that change a connection.
 
 ## Not done
 

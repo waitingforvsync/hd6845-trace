@@ -5228,8 +5228,10 @@ N M 10573,17620 vss
 # a poly neck y 17725-17743 from the end pad (10439,17734) ends. The thin metal x 10476-10492 (piece t10484)
 # passes over the neck beside the box: no contact (no hole, no pad; the neck is protected poly under it).
 D 10519,17723:10550,17735              # the neck west of the rail
-D 10498,17722:10522,17742              # its end in the box
-B 10492,17718:10514,17746
+# review round 84 (geometry only): the heavy box is x ~10482-10518 with its interior x 10492-10505 (clean shot,
+# row y 17732: walls x 10482-10491 and x 10506, tan between); the thin metal lies over its west wall
+D 10490,17722:10522,17742              # its end in the box
+B 10482,17718:10518,17746
 P 10439,17734 x10508 w=18              # the poly neck from the pad into the box
 P 10422,17717:10456,17751              # the end pad (10439,17734)
 C 10439,17734 s=20x20
@@ -5246,12 +5248,17 @@ N M 10441,17900 eof_w17734
 # rail's contact (10743,17706). Between the rail and the arm, y 17680-17716, a notch of field with the gate
 # row's end cap. The tie: a leg of the plate's poly from its bottom edge at x 10638-10666 into a box
 # (10634-10668, 17738-17762) that the node's region reaches from the west along y 17738-17756.
-D 10586,17716:10626,17753              # the node east of the rail
+# review round 84 (geometry only): the region's south-west corner is field (at y 17748 the plain ground begins
+# at x ~10612, and under the rail there is field from y 17744): drawn as two rectangles
+D 10586,17716:10626,17738              # the node east of the rail
+D 10610,17716:10626,17753              # and on south beside the notch, to the tab of the tie box
 D 10612,17686:10626,17720              # the arm north to the strip
 D 10622,17684:10730,17708              # the strip under the plate, into the VCC box
 D 10724,17684:10770,17732              # the box of the VCC contact
 C 10743,17706
-M 10746,17555 y17780 w=48              # the VCC rail, on south over this unit
+# review round 84 (geometry only): south of the contact the rail's west edge is x ~10714 (edge line x 10709-10712
+# at y 17750; x 10715-10721 at y 17640), so the plate's east end lies under the rail: drawn 4 px wider here
+M 10744,17555 y17780 w=52              # the VCC rail, on south over this unit
 N M 10746,17600 vcc
 P 10628,17664:10722,17730              # the plate
 P 10638,17728:10666,17752              # its leg south into the tie box
