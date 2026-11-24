@@ -60,6 +60,6 @@
 6155,6695:7415,6825      route  a second line north of it | busl_y6805: from an end pad (6189,6716) south and east along y 6805 to a pad (7380,6802); neither end identified
 6440,9515:6540,9810      route  output of the ripple counter's stage-select gate, pad and metal | lc2_w9125's poly from the left-centre strip ends on a pad (6514,9535); metal south and west onto the line lc3_e9798 that runs down the left bus field
 6440,8600:6700,9765      route  line Q, lower part | lc3_e9756: metal from the left-centre strip's edge east, north on x 6472 / x 6516 and a diagonal to a pad (6687,8625)
-6670,7455:6750,8645      route  line Q, poly hop and upper track | a poly column under four staircase metals between pads (6687,8625) and (6687,8323), the track x 6688 / x 6731 north to an end pad (6731,7474)
+6670,7455:6750,8645      route  line Q, poly hop and upper track | a poly column under three staircase metals between pads (6687,8625) and (6687,8323), the track x 6688 / x 6731 north to an end pad (6731,7474)
 6712,7290:7600,7495      route  line Q, poly rows of the crossing field | lc3_e9756: row y 7474 east under twelve tracks, a poly column x 7362 north, row y 7300 east past x 7600
 6445,7246:7600,7442      route  a poly row of the crossing field, ends not identified | busl_y7432: row y 7431 from the west under eighteen tracks, a poly column x 7318 north under a metal, row y 7256 east past x 7600

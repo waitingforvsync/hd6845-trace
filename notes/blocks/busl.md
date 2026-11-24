@@ -443,7 +443,7 @@ only, no transistor, no uncertain item of this package; one join.
 - **Line Q is `lc3_e9756`, and it is the pad (6690,8621), the row y 7474 and the poly column
   x 7352-7372 of the Next list too** (piece `qa`): one wire of about 3,500 px from `lc3`'s metal end
   (6450,9756): a corner, the track x 6472 north, a step to x 6516, a diagonal to a pad (6687,8625), a
-  poly hop north under four staircase metals to a pad (6687,8323), the track x 6688 with a step (y 8195)
+  poly hop north under three staircase metals to a pad (6687,8323), the track x 6688 with a step (y 8195)
   to x 6731 (line Q) and north to an end pad (6731,7474); the pad's poly row y 7474 east under twelve
   tracks, a poly column x 7362 north (under `tc2_r5718`'s corner metal) and a poly row y 7300 east, drawn
   to the region's edge x 7600. It runs on to about x 7885 and turns south there (seen, not followed: it
@@ -3115,6 +3115,68 @@ Could not check: anything south of y 15000; `lc3`'s rail north of y 10570 (its b
 only); four of `va`'s eight diffusion rows were read by text only, and the clean shot's hole test is
 blind under that metal (a green stripe down its centre), so "no contact" there rests on the two metal
 shots; the metal y 6849 west of x 5339.
+
+Round 1: no findings that change a connection.
+
+**Run 17, pieces `qc`, `qa`, `qb`. Round 1: full review** (2026-11-21 02:48 to 03:01 +0100; a fresh
+Fable 5.2 reviewer agent, round 17 of the package; commit 71469a2; 29 images in
+`cache/scratch/busl/review-17/`). The tracing session was stopped by a usage limit one minute after the
+report arrived, while the two comments below were being corrected; this record was written on
+2026-11-24 12:14 +0100 from the reviewer's report as the session's transcript holds it, after both
+remarks were checked again in the photos (the measurements under each).
+Told to suspect: for `qc`, whether the track x 6516 from the north stops short of the pad (6514,9535)
+and only turns west (traps 16, 30), whether the metal y 9798 is continuous at x 6448-6478 where chip 1
+shows it dim orange on the row y 9793, and the dark blob on the metal y 9756 at x 6448-6458; for `qa`,
+the nested step at y 8195 (a swap with a neighbour's track: trap 10), the poly hop between the pads
+(6687,8625) and (6687,8323) (one poly; a contact from any metal over it, the metal y 8367 above all,
+where two packages' drawings of one metal meet), the diagonal's ends, a tap at any of the crossings
+(the greenish dips at (6472,9579), (6472,9709), (6514,9666), (6514,9753)), the corner of the row y 7474
+into the column x 7362 under `tc2_r5718`'s corner metal and the field on each side of that column; for
+`qb`, a contact along the column x 7318 under `eof`'s metal x 7315 (trap 13), the gap between its top
+and `eof`'s pad (7313,7215), and that the row y 7431 turns north there at all; both rows at the ports
+x 7600; anything undrawn that touches these wires.
+Checked and found as claimed (4-5x in two to four shots unless said): `qc`: the track x 6516 turns west
+at y 9495, with bare ground at y 9508-9516 in both chips and green in the clean shot; from the pad the
+poly leaves west only and the metal south only (`qc_pad.png`, 4.1x); the arm y 9798 continuous in both
+chips onto `lc3`'s metal, no ring at the corner (6514,9798), separate from the metal y 9756
+(`qc_arm6.png`, `qc_corner.png`); the tracks x 6472 and x 6514 of constant width over every row, no pad
+at the four dips (`qc_tracks.png`, 3.6x). `qa`: the plain corner (6472,9756), the step y 9495, the track
+x 6516 with nothing under it, the diagonal's ends on the corner (6516,8821) and the pad (6687,8625);
+the hop one straight poly, orange in every open stretch of chip 2, with no ring, widening or hole under
+any of the metals over it (`qa_hop_n.png`, `qa_hop_s.png`, `qa_hop_x.png`; the mark in the stripped shot
+at y 8367 is a diagonal streak); the step y 8195 three separate nested Ls, not swapped (`qa_step.png`,
+4.2x, both chips); the end pad (6731,7474) with ground north and west and about 10 px of field to the
+row y 7431; field at x 7338-7346 and x 7380-7392 on either side of the column x 7362, no contact under
+`tc2_r5718`'s corner, both column tops joined to their rows. `qb`: the row turns north at x 7318 with
+field east of it; no contact along the column under `eof`'s metal (a notch at y 7300-7312 is in chip 2
+only); 18 px of field below `eof`'s pad (7313,7215). Both rows plain under the wide metal at x 7600 and
+going on east. The extraction: 0 errors; `tools/unsure.py` lists none of these nets.
+Findings: none on the geometry. Two remarks on comments, both confirmed here and neither changing a
+connection (no shape of the trace was changed: one word in a comment, in the notes and in the floor-plan
+line, and a new comment):
+(1) `qa`: the trace file's comment, the notes and the floor-plan line said the poly column x 6687 passes
+under "four" staircase metals; there are three (y 8367, y 8411, y 8541), the metal y 8367 being one
+metal that two packages draw. Confirmed (`tools/busl_items.py 6675 8335 6700 8612 --layer M`: `eof`'s
+and `trunks`' items at y 8357-8375, `eofw`'s at y 8404-8418, `cdp3`'s at y 8534-8548); "three" now in
+all three places.
+(2) `qc`: a dim tick of 8 px on the arm y 9798 at x 6468-6476 in both chips (chip 2 159-166/121-128/
+39-45, chip 1 127-144/100-106/27-29), right below the corner (6472,9756) of `qa`'s track. The reviewer:
+darkened metal, far too short for a break, the clean shot's row protected right through, the ground at
+y 9777 bare, so not a join of the two wires; cause not known. Confirmed
+(`tools/t.sh busl px.py row 9798 6440 6520 4 metal,metal1,acid1b`: the tick 166-179/128-147/45-60 in
+chip 2 between stretches of 202-219, the clean shot 194-204/137-165 throughout;
+`px.py col 6472 9736 9816 4`: the metal y 9756 at y 9748-9760, an edge line, ground at y 9772-9780, an
+edge line, the metal y 9798 at y 9796-9804; `px.py row 9777 6440 6520 8`: one even ground from x 6440
+to x 6496, 174-182/145-147/80-88 in chip 2 and 145-158/117-125/74-91 in chip 1, with nothing brighter
+at x 6472, and the clean shot open field, 144-155/158-166/99-105): no metal joins the two, and the tick
+has no ring, no widening and no hole under it. Recorded as a comment in the trace file.
+Connections before and after the fixes:
+`tools/t.sh busl sameconn.py 71469a2`: `connections identical`;
+`.venv/bin/python tools/sameconn.py 71469a2`: `connections identical`.
+Could not check (the reviewer's list): the 12 + 18 row crossings and the six on x 6731 were viewed at
+1.75-2.3x in both chips and by the pad scan, not each at 4x; the crossings under the wide metal
+x 7577-7617 were not read in the chip-2 stripped shot at 4x; nothing west of x 6450 or east of x 7640;
+the undrawn rows `lc3_e9577` .. `lc3_e9793` only where these tracks cross them.
 
 Round 1: no findings that change a connection.
 

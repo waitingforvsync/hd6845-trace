@@ -1144,6 +1144,8 @@ N M 6700,6805 busl_y6805
 # the clean shot): not on the pad. West of x 6480 the metal y 9798 lies on the row y 9793
 # and is dim orange in chip 1's metal shot (yellow in chip 2); the clean shot (chip 1) has
 # the row protected there. 25 px of ground between the metals y 9756 and y 9798.
+# A dim tick of 8 px on the arm at x 6468-6476 in both chips (round-17 reviewer): darkened
+# metal, no ring, no widening, no hole in the clean shot under it: not a contact, not a break.
 P 6445,9536 x6514 w=20                # lc2_w9125's row on east from lc3's port to its end pad
 P 6495,9516:6533,9554                 # the end pad
 C 6514,9535 s=24x24
@@ -1156,7 +1158,7 @@ N M 6514,9700 lc3_e9798
 # metal end `M 6450,9756 x6342 y10400` the metal runs on east to a plain corner (6472,9756),
 # north on x 6472 over six poly rows (y 9537 .. 9750: no pad), one step east (arm y 9495)
 # to x 6516, north to (6516,8821), a 45-degree diagonal (x + y = 15337) to (6687,8650) and
-# onto a pad (6687,8625); a poly column x 6687 north under four metals of the staircases
+# onto a pad (6687,8625); a poly column x 6687 north under three metals of the staircases
 # (y 8541 cdp3's, y 8411 eofw's, y 8367 eof's link F / trunks' end; plain crossings, no
 # pad, no hole; open between cdp3's leg x 6667 and eofw's leg x 6710) to a pad
 # (6687,8323); metal north on x 6688, one step east (arm y 8195, the middle one of three
