@@ -1300,9 +1300,11 @@ N P 9000,6456 rcs_thin_e
 # =====================================================================================
 # Pieces yd, ye (run 19, 2026-11-24): the knot x 7800-8090, where cdp2 drew one straight row
 # y 6845 from its pad (7335,6845) to its pad (7987,6845) (trace/cdp2.txt, corrected in a
-# commit of its own). They are two rows on two nets: the clean shot has field on y 6845 at
-# x 7835-7847, in the margin of eofw's metal x 7829-7843 (pink 198/118/122, where the rows
-# y 6802 and y 6889 read cream 213/166/110 at the same x). Three rows enter the knot from
+# commit of its own). They are two rows on two nets: there is field on y 6845 at about
+# x 7830-7850, under eofw's metal (bright at x 7833-7846): the clean shot is pink there
+# (198/118/122, where the rows y 6802 and y 6889 read cream 213/166/110 at the same x), and
+# down the column x 7838 both metal shots stay bright from y 6825 to y 6865, with the dark
+# edge lines of a row only at y 6802 and y 6888. Three rows enter the knot from
 # the west (y 6757, 6802, 6845) and three leave (fld's cnt_la_a_n from y 6757 to y 6800; the
 # two below).
 #
@@ -1317,8 +1319,9 @@ P 7400,6802 x7862 y6847 x7975 w=20
 #
 # Piece ye: the pad (7335,6845)'s row is cnt_gab. cdp2's row from its pad (7335,6845) (kept
 # there to x 7800; piece hb's metal y 6848 arrives on that pad from the west) turns south at
-# x 7812-7830 under eofw's metal (cream column, no contact: the metal is eofw's through
-# track), runs east along y 6888 under cdp2's metals x 7913-7931 and x 7981-7995 (the pad
+# x 7809-7827, in the open gap just west of eofw's metal (orange in both metal shots, cream
+# in the clean shot; it does not lie under the metal), runs east along y 6888 under eofw's
+# metal and cdp2's metals x 7913-7931 and x 7981-7995 (the pad
 # (7987,6845)'s own metal going south: a plain crossing, no pad on the row) to x 8083, turns
 # north at x 8074-8086 and runs on east along y 6845: a U round the pad (7987,6845). From
 # there it is the line "y 6844" of cdp2's channel 2: 2,970 px under every slice's metals and
@@ -1326,5 +1329,5 @@ P 7400,6802 x7862 y6847 x7975 w=20
 # x 11044-11056 between the metals x 11019-11031 and x 11082-11094 (no pad), and at
 # y 7200-7222 turns east: an L corner onto wl's band H4 (`P 11040,7200:11700,7222`), which
 # wl, mra and ral join to cnt_gab (the contact (11392,7210), the line x 12902).
-P 7790,6847 x7821 y6888 x8080 y6845 x11050 y7211 x11060 w=18
+P 7790,6847 x7818 y6888 x8080 y6845 x11050 y7211 x11060 w=18
 N P 9500,6845 cnt_gab
