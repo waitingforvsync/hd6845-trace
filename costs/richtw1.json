@@ -1,26 +1,26 @@
 {
  "who": "richtw1",
- "generated": "2026-11-24T13:39:15+00:00",
+ "generated": "2026-11-24T15:20:01+00:00",
  "price_source": "Claude API list prices per million tokens, as of 2026-11-03",
  "unpriced_models": [
   "<synthetic>"
  ],
- "responses": 11696,
+ "responses": 11875,
  "first": "2026-11-14T17:52:50.853000+00:00",
- "last": "2026-11-24T13:38:42.031000+00:00",
- "total_cost": 1920.37,
- "review_cost": 200.67,
+ "last": "2026-11-24T15:19:47.183000+00:00",
+ "total_cost": 1941.83,
+ "review_cost": 208.59,
  "tokens": {
-  "input": 23736,
-  "output": 14738295,
-  "cache_write_5m": 23979433,
-  "cache_write_1h": 29167095,
-  "cache_read": 3365778563
+  "input": 24096,
+  "output": 14919396,
+  "cache_write_5m": 24219300,
+  "cache_write_1h": 29475646,
+  "cache_read": 3400144333
  },
  "by_model": {
   "claude-fable-5-2": {
-   "cost": 1809.63,
-   "responses": 10866
+   "cost": 1831.08,
+   "responses": 11045
   },
   "<synthetic>": {
    "cost": 0.0,
@@ -37,22 +37,22 @@
  },
  "by_package": {
   "(coordination)": {
-   "cost": 559.11,
+   "cost": 560.15,
    "review_cost": 6.53,
-   "responses": 2980,
+   "responses": 2989,
    "models": {
-    "claude-fable-5-2": 2150,
+    "claude-fable-5-2": 2159,
     "<synthetic>": 18,
     "claude-opus-5-5": 809,
     "claude-haiku-5-5": 3
    }
   },
   "busl": {
-   "cost": 309.94,
-   "review_cost": 111.18,
-   "responses": 2633,
+   "cost": 325.16,
+   "review_cost": 115.14,
+   "responses": 2798,
    "models": {
-    "claude-fable-5-2": 2633
+    "claude-fable-5-2": 2798
    }
   },
   "tla": {
@@ -87,20 +87,20 @@
     "claude-fable-5-2": 444
    }
   },
+  "cdp2": {
+   "cost": 50.8,
+   "review_cost": 3.96,
+   "responses": 439,
+   "models": {
+    "claude-fable-5-2": 439
+   }
+  },
   "rdp3": {
    "cost": 47.42,
    "review_cost": 0.0,
    "responses": 352,
    "models": {
     "claude-fable-5-2": 352
-   }
-  },
-  "cdp2": {
-   "cost": 45.61,
-   "review_cost": 0.0,
-   "responses": 354,
-   "models": {
-    "claude-fable-5-2": 354
    }
   },
   "eof": {
@@ -441,6 +441,6 @@
   "2026-11-19": 271.75,
   "2026-11-20": 276.14,
   "2026-11-21": 84.44,
-  "2026-11-24": 24.66
+  "2026-11-24": 46.11
  }
 }
