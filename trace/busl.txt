@@ -1236,7 +1236,7 @@ N P 6496,6600 ck_a
 @alias ck_a tc1_p4308
 # =====================================================================================
 # Piece yb: tc1_m6817 is cnt_bus_b. tc2's poly from its pad (6533,6152)
-# (`P 6524,6152:6544,6400`) runs on south from y 6400 as a straight poly column (cream
+# (`P 6534,6152 y6400 w=20`) runs on south from y 6400 as a straight poly column (cream
 # x 6531-6546) under the same seven metals (plain) to an END pad (6538,6717): ring and
 # bright centre in both chips, pits, poly from the north only, metal east only. The pad's
 # thin metal runs east along y 6718 over field, over eofw's poly column x 6843 (plain)

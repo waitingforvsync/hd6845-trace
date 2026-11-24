@@ -2082,7 +2082,7 @@ Views and measurements: `cache/scratch/busl/survey.md`, "Run 18, pieces ya, yb" 
 
 | Element | Piece `ya` (`ck_a`) | Piece `yb` (`cnt_bus_b`) | Read how |
 |---|---|---|---|
-| poly column from `tc2`'s port | x 6496 (cream x 6488-6503), y 6400 to the pad; `tc2`: `P 6492,6118 y6400 w=18` | x 6539 (cream x 6531-6546); `tc2`: `P 6524,6152:6544,6400` | `tools/px.py row 6545 6470 6560 3 acid1b` (under a metal: cream against pink field); `tools/tl5_tracks.py rows col 6385 6790 3 6492 6538`: poly without a break from y 6385 to each pad; `y_west.png` (3x, metal and clean) |
+| poly column from `tc2`'s port | x 6496 (cream x 6488-6503), y 6400 to the pad; `tc2`: `P 6492,6118 y6400 w=18` | x 6539 (cream x 6531-6546); `tc2`: `P 6534,6152 y6400 w=20` | `tools/px.py row 6545 6470 6560 3 acid1b` (under a metal: cream against pink field); `tools/tl5_tracks.py rows col 6385 6790 3 6492 6538`: poly without a break from y 6385 to each pad; `y_west.png` (3x, metal and clean) |
 | end pad | (6491,6759) | (6538,6717) | `tools/busl_padc.py`: (6489,6758) / (6492,6760) and (6539,6715) / (6536,6718); `y_pads.png` (4.7x, four shots): ring and bright centre in both chips, pits in the chip-2 stripped shot, green specks in the clean shot; poly from the north only, metal east only, ground south and west |
 | thin metal east | y 6762, x 6491 to 7424 | y 6718, x 6538 to 7468 | `tools/busl_both.py v 6650|6900|7200 6700 6780`: centres 6761-6763 and 6718; `tools/tl5_tracks.py h 6762 6470 7450`, `h 6718 6520 7490`: nothing of 14 px or more without metal between pad and corner; `y_mid1.png`, `y_mid2.png` (2.7x, both chips and clean) |
 | corner | (7424,6762) | (7468,6718) | `y_corners.png` (4.5x, four shots): plain, no pad |
@@ -2094,7 +2094,9 @@ Views and measurements: `cache/scratch/busl/survey.md`, "Run 18, pieces ya, yb" 
   on each (and on `tc2`'s y 6373, north of the piece): 0 stretches; `tools/tl5_tracks.py h` on each: bar
   pairs of 7-12 px at the columns' edges, no hole in the clean shot. Plain crossings.
 - **What the two metals cross**: `eofw`'s poly column x 6843 (bar pairs 6827-6835 / 6850-6858 on both;
-  clean dips of 6 px; no pad), and the three diagonals of `fld`'s polys at x 6975-7050.
+  clean dips of 6 px; no pad), and the two diagonals of `fld`'s polys at x 6975-7050 (the metal y 6718
+  crosses the first diagonal and meets the foot of the second: three edge bars; the metal y 6762 meets
+  only the first diagonal's foot).
 - **The two metals lie on `fld`'s poly rows** (`trace/fld.txt` lines 146 and 152: the rows y 6756 and
   y 6712, which come down the diagonals and run on east to x 7908 / x 7948 and into the counter channel):
   y 6762 on the row y 6756 from x 7040 to its corner, y 6718 on the row y 6712 from x 7050 to its corner.
@@ -2385,7 +2387,7 @@ here. No transistor.
 | `cdp3_cw_c7`, `cdp3_cw_c6`, `cdp3_cw_c5`, `cdp3_cw_c4`, `cdp3_cw_c3`, `cdp3_cw_c2` (piece `w6`) | P | x 7600, y 9568-9588, 9612-9632, 9656-9676, 9700-9720, 9743-9763, 9786-9806 | in (driven in `cdp3`: the row C cells' loads) | onto `cdp3`'s six channel D rows (`P 7600,9581 x10606` .. `P 7600,9797 x8654`) |
 | `tc1_p4308` (run 18, piece `ya`; one net with `ck_a`) | P | (6487-6505, 6400) | out (toward `tc2`'s pad (6490,6108) and `tc1`'s inverter) | onto `tc2`'s poly `P 6492,6118 y6400 w=18` at its port (6492,6400) |
 | `ck_a` (piece `ya`) | M | (7418-7430, 7150) | in (the clock block's phase, by `bw`'s poly and pad (7419,7387)) | onto `bw`'s metal `M 7421,7400 y7150 w=22` |
-| `tc1_m6817` (piece `yb`; one net with `cnt_bus_b`) | P | (6530-6548, 6400) | out (toward `tc2`'s pad (6533,6152) and `tc1`'s cell D) | onto `tc2`'s poly `P 6524,6152:6544,6400` at its port (6534,6400) |
+| `tc1_m6817` (piece `yb`; one net with `cnt_bus_b`) | P | (6530-6548, 6400) | out (toward `tc2`'s pad (6533,6152) and `tc1`'s cell D) | onto `tc2`'s poly `P 6534,6152 y6400 w=20` at its port (6534,6400) |
 | `cnt_bus_b` (piece `yb`) | M | (7462-7474, 7150) | not known (no driver drawn on the net) | onto `bw`'s metal `M 7467,7357 y7150 w=23` |
 
 ## Ambiguities
@@ -2632,7 +2634,13 @@ here. No transistor.
    beside the metal; a pad's ring is dark on both flanks for about 40 px). Each metal has its own pad at
    its west end and `bw`'s pad at its south end, and each row has its own ends, so no contact is needed. A
    dark blob in the clean shot at (7447,6762), in the 26 px gap between the two metals on the row y 6756,
-   is in neither chip-2 shot and not in chip 1's metal shot (trap 2). The candidate reading, a contact
+   is in neither chip-2 shot and not in chip 1's metal shot (trap 2). At the corner (7468,6718) chip 1's
+   metal is dim over about 16 x 18 px (red 116-121 at x 7470-7474 on the row y 6716, against 162-178 west of
+   it) and the chip-2 stripped shot has a dark patch there (red 82-88 at x 7462-7474); chip 2's metal is
+   bright through the corner (205-210/161-184) with no ring, the clean shot is uniform cream
+   (202-208/160-166, no hole; the control pad (6538,6717) reads 169/167 and 138/171 at its centre on the
+   same command, `tools/px.py row`), and the metal keeps its width: read as a plain corner (found by the
+   round-18 reviewer; its `y_corner7468.png`, 9.5x). The candidate reading, a contact
    somewhere along the overlap, would join `ck_a` to `cnt_la_a_n` or `cnt_bus_b` to `rc0_n` (each of those has a driver of its own in
    the extraction, so the join would show as two drivers on one net).
 
@@ -3353,6 +3361,60 @@ the undrawn rows `lc3_e9577` .. `lc3_e9793` only where these tracks cross them.
 
 Round 1: no findings that change a connection.
 
+**Run 18, pieces `w6`, `ya`, `yb`. Round 1: full review** (2026-11-24 14:24 to 14:37 +0100; a fresh
+general-purpose agent on Claude Fable 5.2, started for this round only; commit before the round fe92384;
+its images in `cache/scratch/busl/review-18/`, 23 used). One review for the three pieces (wiring of one
+build: poly rows and columns under thin metals, read by the same tools). It was given the claims of each
+piece (the six rows and their six joins; each column, pad, metal, corner and track of `ya` and `yb` and
+the two joins) and told to suspect: in `w6`, a row stepping a track, a tap at one of the 137 crossings
+(the greenish centres at (6774,9796), (6862,9709), (6689,9796)), the rows' identity at each end, a join
+to the ground rail x 7600-7646 or to the metals y 9756 / y 9798; in `ya` and `yb`, a contact along the
+380-420 px where the metals lie on `fld`'s rows, at the diagonals' feet or at the corners, the blob
+(7447,6762), two metals end to end on a track position, the pads as end pads, the columns' continuity
+with `tc2`'s polys and which is which, contacts of the seven horizontal metals, and metal west of
+either pad.
+
+What it checked. `w6`: the six rows from x 6400 to x 7740 on three views at 2.4x (metal and clean) and
+by `tools/busl_roww.py` (six in, six out, in order, centres within 9 px); poly at the three open
+positions in both metal shots (`tools/px.py pt`); the west ends on `lc3`'s bands at 3.6x and the east
+ends under the rail at 5.2x (no hole, no ring in chip 1; chip 2's blobs on the rail are not in chip 1);
+`tools/tl5_tracks.py v` on all twenty-six positions (edge bars only) and text maps at (6774,9796),
+(6862,9709), (6515,9754), (7295,9655), (7554,9750) (constant metal width, no ring); the corners
+(6472,9756) and (6514,9798) over rows 5 and 6 at 5x and 8x against the control pad (6514,9535) (no
+ring, no hole). `ya`, `yb`: the columns x 6496 and x 6539 continuous from `tc2`'s pads to the end pads,
+with a third column x 6454 beside them (2.85x, three shots; `tools/tl5_tracks.py rows` from y 6090); the
+seven metals crossing plainly; both end pads at 5.2x in four shots (poly from the north only, metal east
+only, field on the other sides, about 10 px of field between the column x 6496 and the upper pad); no
+metal west of either pad; the overlaps on `fld`'s rows at 2.6x and 5x and the diagonals' feet at 5.2x,
+with hole scans at four heights (no ring, pad or hole); both corners plain Ls with no metal beyond; the
+blob (7447,6758) open poly in both metal shots; the tracks x 7424 and x 7468 one metal each to `bw`'s
+pad rings at 3.8x (nothing over 11 px missing in both chips); the full extraction (0 errors, 0 warnings)
+and `tools/unsure.py` (none of these nets).
+
+Findings: none on the geometry. Three remarks, each checked and confirmed, none of which changes a
+connection:
+(1) Piece `yb`'s comment in the trace file (and two places in these notes) cited `tc2`'s poly as
+`P 6524,6152:6544,6400`; `trace/tc2.txt` line 144 has `P 6534,6152 y6400 w=20` (the same extent: the
+form came from `tools/busl_items.py`'s bounding box). Corrected in the comment and the notes.
+(2) The Inventory said the metals cross "the three diagonals of `fld`'s polys"; `fld` has two polys there
+(`tools/busl_items.py 6860 6560 7060 6780 --layer P`: `trace/fld.txt` lines 146 and 152): the three edge
+bars on y 6718 are one diagonal crossed and the second one's foot. Corrected, and with it a belief in Not
+done that `busl_y6805`'s row was "the third of `fld`'s diagonals' rows".
+(3) At the corner (7468,6718) chip 1's metal is dim over about 16 x 18 px and the chip-2 stripped shot
+has a dark patch; the reviewer read it as a plain corner (chip 2's metal bright with no ring, both chip-1
+stripped shots uniform cream against the control pad (6538,6717), the row 18 px wide throughout; its
+`y_corner7468.png`, 9.5x). Confirmed (`tools/t.sh busl px.py row 6716 7450 7486 4 metal,metal1,acid,acid1b`
+and `row 6717 6524 6552 4` on the control; `tools/textmap.py 7444 6696 7492 6744 3`: chip 2 bright
+through the corner at constant width, the clean shot without a green hole). Recorded under Ambiguity 23.
+Connections before and after the fixes:
+`tools/t.sh busl sameconn.py fe92384`: `connections identical`;
+`.venv/bin/python tools/sameconn.py fe92384`: `connections identical`.
+Could not check (the reviewer's list): each of the 137 crossings of `w6` at 4x (2.4x views and text
+scans only); `bw`'s pads south of y 7405 (text only); `lc3`'s, `cdp3`'s, `tc2`'s and `bw`'s own drawings
+beyond the joins.
+
+Round 1: no findings that change a connection.
+
 ## Not done
 
 **After run 18 (2026-11-24): items 1 and 2 of the list below are done, and item 4 but for one metal.**
@@ -3366,8 +3428,8 @@ y 7150 are those two metals' south legs (drawn); the metal y 6373 is drawn by `t
   `tools/busl_mdrawn.py v 6600` and `v 7300`). It crosses the two columns of pieces `ya`, `yb` without a
   pad; its ends are not read.
 - **`busl_y6805`'s row east of the pad (7380,6802)** (item 3): seen in run 18 to run on east under both
-  tracks x 7424 and x 7468 (bar pairs at y 6785-6795 / 6811-6818 on both; `y_tracks.png`); believed the
-  third of `fld`'s diagonals' rows; its east end is not read.
+  tracks x 7424 and x 7468 (bar pairs at y 6785-6795 / 6811-6818 on both; `y_tracks.png`); its east end is not read (`fld` has
+  only two polys here, the rows y 6712 and y 6756: this row is neither).
 - the rows west of the pads (6146,6847), (6189,6716) (`lc1`'s band; item 3).
 
 The other items of the list (5 to 9) stand as written. Cuts made in run 18, for what "nothing else is
