@@ -236,13 +236,13 @@ vss            M      3960-3982,10960           -    an arm of the same metal no
 # piece yg (run 48): the gate line of the fourteen pull-downs on Y, at the poly row that leaves its foot pad
 eof_ypd        P      3996,18247-18263          in   the poly row east of the foot pad (3957,18255) of the line eof_ypd, east end as drawn; it runs on east along the north side of a wide metal to about x 4138 (cream in the clean shot; not followed); the line's driver lies beyond
 # piece cap18b (run 49): the twin of cap18 on bl0_w15566; the bus line that leaves its pad east
-bl0_w15566     D      10600,17484-17500        in   piece u17345: the diffusion band bl0_w15566's row y 17473 is tied to by a buried contact, east under the VSS rail with no contact; the driver is expected on it (cdp4's strip): not drawn
+# piece ld566 (run 69): the port bl0_w15566 D 10600,17484-17500 is gone (the band is drawn on east to the load: bl0_w15566 = NOT h_eq_r1)
 vss            M      10548-10598,17054        -    pieces u17170, u17345: bc2's VSS rail, drawn over these two units (y 17054-17590); north of y 17054 another unit's contact area
 eof_w17866     M      9546-9560,17800          ?    piece bus2: the second metal of the pad (9553,17866), from the north (follower: to (9546,17645), west to (9266,17641)): not read
 eof_w17866     M      9806-9820,17800          ?    piece bus2: the second metal of the pad (9813,17866), from the north (follower: 1,800 px to (9961,16341)): not read
 eof_w17866     M      10350-10362,17885        ?    piece bus2 (review round 59): the metal x 10356 on south of the T (10356,17866) (follower: to a corner (10364,18387), east, south on x 10397 to a pad about (10397,18427)): not read
 rst_lat        P      10546-10598,17682-17698  out  piece rl (review round 63): the branch row east from rst_lat's column x 10355, under the VSS rail: the gate of an undrawn pull-down (rail diffusion with a contact (10560,17652) north of it, diffusion y 17705-17739 south of it)
-rst_lat        P      10497-10640,16292-16314  out  piece rln: the row of the end pad (10353,16345): the gate of an undrawn transistor (channel about x 10497-10620, the diffusion reaching 20 px east of the rail), ending in a cap x 10624-10640; a dark box north of the cap is read as not joined (eof's Ambiguity 216)
+# piece u16303 (run 69): the port rst_lat P 10497-10640,16292-16314 is gone (the gate of the inverter eof_w16213 = NOT rst_lat)
 vcc            M      10722-10770,17120        -    piece u17170: bc2's VCC rail over the load's contact (10745,17165), drawn y 17120-17215 only; runs on north and south
 vcc            M      10722-10770,17390        -    pieces u17170, ld345: the same rail, south end of the drawn stretch (y 17120-17390)
 bc2_w15432     P      10150,16118-16138        ?    piece en432: the row of the end pad (10180,16128) of the enable metal of bc2's latch copy b; on west under a metal lying on it: not read
@@ -254,5 +254,12 @@ vss            M      10548-10598,16800        -    pieces u16864, u16996: the V
 vcc            M      10722-10770,16810        -    pieces u16864, u16996: bc2's VCC rail over these units only (y 16810-17000)
 eof_w16432     M      10850,18420-18440        ?    piece r16432: the horizontal metal y 18420-18440 east of x 10806 that the east pad's metal runs into: a bus line in no trace file
 eof_w16213     M      10476-10492,16240        ?    piece p16215: the north end of the thin metal x 10476-10492, south: dark over a box at y 16240-16277, not followed
-eof_w16213     P      10481,16249-16267        ?    piece p16215: the row from the column's foot east toward the framed box of rst_lat's unit: not read
-eof_w15955     M      10435-10447,15925        out  piece u15955: the metal of the NOR's end pad (10441,15955), north: not followed
+# piece u16303 (run 69): the port eof_w16213 P 10481,16249-16267 is gone (the row ends in the unit's buried contact box)
+# piece u15826 (run 69): the port eof_w15955 M 10435-10447,15925 is gone (north to an end pad (10440,15825), the gate of the inverter cdp4_w10808)
+# run 69: pieces u16303, ld566, u15826
+cdp4_w10808    P      10694-10716,15726-15748  out  piece u15826: the head of the load's plate on cdp4's row from the pad (10808,15738): cdp4_w10808 = NOT eof_w15955
+vss            M      10548-10598,15740        -    piece u15826: the VSS rail, drawn from bc2's end (y 15746) to y 16060
+vss            M      10548-10598,16230        -    piece u16303: the VSS rail over rst_lat's unit (y 16230-16372)
+vcc            M      10722-10770,15740        -    piece u15826: bc2's VCC rail, drawn from bc2's end (y 15746) to y 16020
+vcc            M      10722-10770,16230        -    piece u16303: the VCC rail over rst_lat's unit (y 16230-16340)
+vcc            M      10722-10770,17560        -    piece ld566: the VCC rail, south end of the stretch y 17380-17560

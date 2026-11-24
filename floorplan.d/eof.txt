@@ -241,3 +241,6 @@
 10415,16410:10830,18445   route  a wire across the east column to the bottom bus | a poly row under both rails between two pads; a thin metal 2,000 px south from the east pad into a bus line
 10385,16190:10500,16410   route  pad group at the head of the east column's thin metals | two pads joined by a short poly column; thin metals to the north, the south and the east column
 10380,15845:10775,16060   logic  gate at the head of the east column | a two-input NOR in the ground rail's column, of the clock and a wire from the bottom bus; output by a row west to a pad
+10480,16225:10775,16375   logic  inverter of the reset copy, a driver | a wide pull-down under the ground rail gated by the reset copy's row, a strong load; output west by a buried contact, a poly row and a pad onto the east column's thin metal
+10584,17440:10775,17560   logic  load of the inverter of R1's match | the same unit as the reset copy's inverter: its output is the line beside the first latches' enable (R1's match inverted)
+10420,15730:10775,15880   logic  inverter of the gate at the head of the east column | the same unit again; its output leaves by the load's plate onto a poly row east and a thin metal 12,000 px north to the top-right logic
