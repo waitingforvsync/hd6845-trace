@@ -57,7 +57,7 @@ C 10356,18926
 P 10350,18940 y18540 w=40           # wide poly, 10330-10370, under the VCC band and the S line
 C 10355,18555
 M 10356,18568 y18473 w=18
-M 10311,17908 y18473 x10442 y18342 x10398 y17689 x10441 y16880 w=18   # ring; right-hand vertical goes on up (ck_out #2)
+M 10311,17908 y18473 x10442 y18342 x10398 y17689 x10441 y17238 w=18   # ring; the right-hand vertical (ck_out #2) ends on a pad (10439,17238) of a poly row (eof run 55: it was drawn on north to y 16880, across 40 px of open poly row y 17186-17225 where neither metal shot has a metal; the track x 10441 north of there is another metal, from a pad (10441,17168))
 M 10320,17908 x10230 w=16           # ck_out #1 turns left along y 17900-17915; west of x 10230 it is drawn by eof (piece in350)
 C 10358,18470 s=22x22
 P 10345,18470 x10600 w=24           # poly right, to a device at 10600-10710 x 18390-18525 (not traced)

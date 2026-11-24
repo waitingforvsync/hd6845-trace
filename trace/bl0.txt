@@ -349,10 +349,10 @@ P 7285,17629:7350,17651                            #   under the rail it lies 6 
 
 # ================================================================ piece u45 (run 4): the fourth and fifth units, a cross-coupled pair
 #     bl0_w17440 = NOT( bl0_w17210 OR bl0_w17610 )                     bl0_w17210 on two bands in series (A, B: one poly)
-#     bl0_w17610 = NOT( bl0_w17440 OR busl_x6906 OR (bl0_w17337 AND bl0_w17687) )
+#     bl0_w17610 = NOT( bl0_w17440 OR rst OR (bl0_w17337 AND bl0_w17687) )
 # The pull-downs are wide: their diffusion runs from an edge line x 7240 to the rail's east side. Unit 4
 # (top node bl0_w17440, bands A and B, the box of the rail contact (7322,17560)) and unit 5 (row
-# busl_x6906 over the open column, the node bl0_w17610 with its buried contact, bands C and D, the box
+# rst over the open column, the node bl0_w17610 with its buried contact, bands C and D, the box
 # of the rail contact (7308,17727)) each have a load east of the rail and one more pull-down there,
 # gated by the other's output.
 M 7317,17350 y17755 w=50                           # the rail on south to its end
@@ -395,7 +395,7 @@ D 7243,17528:7330,17546                            # strip below band B (on the 
 D 7243,17528:7278,17602                            # the open column: under R3 its east edge is x 7278 (a field pocket x 7278-7305)
 D 7243,17598:7292,17724                            #   the buried contact, C, D
 P 6970,17549:7297,17572                            # row R3 from the west: from the pad (6970,17561) under four tracks (piece w5)
-N P 7225,17560 busl_x6906
+N P 7225,17560 rst
 B 7240,17590:7268,17620
 P 7188,17595:7266,17615                            # X's poly west to a pad
 P 7172,17589:7206,17621
@@ -416,13 +416,13 @@ D 7243,17703:7420,17722                            # strip along the bottom
 D 7372,17660:7402,17705                            # T_n's channel from the block down to the strip
 
 # ================================================================ piece w5 (run 5): the three wires of the pair
-# ---- busl_x6906, the line that clears the pair: busl's track x 6841 ends at y 15000; it runs on south
+# ---- rst, the line that clears the pair: busl's track x 6841 ends at y 15000; it runs on south
 # to a pad (6842,16217), under the bus of horizontal metals as a poly column to a pad (6842,16562), on
 # south as a thin metal, east along y 17086, south at x 6970 to a pad (6970,17561), whose poly row is
 # the gate of the fifth unit's first pull-down. No pad, contact or branch on the way (it crosses three poly
 # rows north of the first pad, y 15088, 15132 and 15176, with no contact).
 M 6841,15000 y16217 w=14
-N M 6841,15500 busl_x6906
+N M 6841,15500 rst
 P 6826,16200:6858,16234                            # pad
 C 6842,16217
 P 6845,16217 y16562 w=18                           # poly column under the bus
@@ -585,39 +585,39 @@ P 4823,16703:4930,16723
 # of the sixth, fifth and third pads. Each pad has a neighbouring track 44 px west of its centre that
 # passes without touching it (15-20 px of open poly between the metal's edge and the pad's ring).
 # Named by the y of the row each ends on.
-# ---- bl0_w18081 (from x 5496)
+# ---- cdp3_g_c2 (from x 5496)
 M 5496,15000 y15090 x5410 y15438 x5366 y15915 x5322 y16565 x5279 y17043 x5236 y17521 x5193 y18084 x5106 w=14
-N M 5496,15040 bl0_w18081
+N M 5496,15040 cdp3_g_c2
 P 5089,18065:5125,18097                            # pad
 C 5106,18081
 P 4780,18081 x5106 w=22                            # poly row west into the left array (port at x 4780)
-# ---- bl0_w17603 (from x 5540)
+# ---- cdp3_g_c3 (from x 5540)
 M 5540,15000 y15134 x5453 y15481 x5409 y15958 x5366 y16608 x5323 y17086 x5279 y17603 x5236 w=14
-N M 5540,15040 bl0_w17603
+N M 5540,15040 cdp3_g_c3
 P 5219,17587:5254,17619                            # pad
 C 5236,17603
 P 4780,17603 x5236 w=22                            # poly row west (port at x 4780)
-# ---- bl0_w17126 (from x 5584)
+# ---- cdp3_g_c4 (from x 5584)
 M 5584,15000 y15177 x5496 y15522 x5453 y16001 x5409 y16652 x5366 y17127 x5322 w=14
-N M 5584,15040 bl0_w17126
+N M 5584,15040 cdp3_g_c4
 P 5304,17111:5341,17143                            # pad
 C 5322,17127
 P 4780,17126 x5322 w=22                            # poly row west (port at x 4780)
-# ---- bl0_w16649 (from x 5627)
+# ---- cdp3_g_c5 (from x 5627)
 M 5627,15000 y15221 x5540 y15568 x5497 y16046 x5453 y16649 w=14
-N M 5627,15040 bl0_w16649
+N M 5627,15040 cdp3_g_c5
 P 5436,16632:5471,16666                            # pad
 C 5453,16649
 P 4780,16649 x5453 w=22                            # poly row west (port at x 4780)
-# ---- bl0_w15999 (from x 5671)
+# ---- cdp3_g_c6 (from x 5671)
 M 5671,15000 y15264 x5584 y15999 x5538 w=14
-N M 5671,15040 bl0_w15999
+N M 5671,15040 cdp3_g_c6
 P 5521,15982:5557,16017                            # pad
 C 5538,15999
 P 4780,15999 x5538 w=22                            # poly row west (port at x 4780)
-# ---- bl0_w15522 (from x 5714)
+# ---- cdp3_g_c7 (from x 5714)
 M 5714,15000 y15308 x5627 y15522 w=14
-N M 5714,15040 bl0_w15522
+N M 5714,15040 cdp3_g_c7
 P 5608,15505:5645,15540                            # pad
 C 5626,15522
 P 4780,15522 x5626 w=22                            # poly row west (port at x 4780)
@@ -636,7 +636,7 @@ P 4780,15522 x5626 w=22                            # poly row west (port at x 47
 # Places where the wire crosses or lies on something with no contact: the metal x 7179-7197 (another
 # net: from a pad (7186,15520) south to a pad (7187,15696)) crosses the north row at x 7188; the thin
 # metal crosses poly rows at y 15738, 15825, 15998, 16540, 16780 (rcs_mv), 16866, 16996, 17040 and
-# 17560 (busl_x6906); the clean shot is green under it at y 15763-15815 (no pad, no ring: no contact);
+# 17560 (rst); the clean shot is green under it at y 15763-15815 (no pad, no ring: no contact);
 # the clock's branch x 7551-7566 crosses the row y 17866.
 P 7127,15550:7160,15583                            # north pad
 C 7143,15566

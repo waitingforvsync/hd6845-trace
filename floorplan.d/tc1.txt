@@ -1,6 +1,6 @@
 # tc1: top-centre logic, upper half. x0,y0:x1,y1  kind  name | description
-7600,3100:7900,4000   logic  gating for a datapath line | five static gates: f = a.NOT b + b.NOT a.NOT g + a.b.NOT i, and NOT a. f and a are poly lines into the datapath at y 3355 and y 3395. Signals not yet identified
-7330,3100:7600,4000   logic  2-bit decode drivers | NOT b; two strong NOR drivers giving (NOT a AND b) and (a AND b); NOR of the first with line W1. Outputs leave by the channel on the west
+7600,3100:7900,4000  logic  inverters on R9 bit 0 (tc1_r1_out, tc1_r4_out) | five static gates: f = a.NOT b + b.NOT a.NOT g + a.b.NOT i, and NOT a. f and a are poly lines into the datapath at y 3355 and y 3395. Signals not yet identified
+7330,3100:7600,4000  logic  RA0 source select (R8 interlace mode, R9 bit 0) | NOT b; two strong NOR drivers giving (NOT a AND b) and (a AND b); NOR of the first with line W1. Outputs leave by the channel on the west
 7170,2975:7330,3985   route  channel lines W1-W4 | four metal verticals serving the island; three are cut where a gate is inserted (a/NOT a/b/NOT b in, driver outputs out, all continuing south)
 7420,2975:7820,3040   power  VSS strap | joins the two outer rails of the island; the poly lines a and b run west under it
 7900,2950:8090,4060   route  island to datapath wiring | metal verticals joining the gates to each other, to the datapath and to the bus field below

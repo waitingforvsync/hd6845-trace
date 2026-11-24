@@ -350,3 +350,8 @@ Round 1: no findings.
 `d_hiz`'s contact candidates along it (y 9290-9573, 11168, 14500, 14798, 16754, 16827) are looked at
 by `dbus` run 7: none is a contact. The west branch at (17630,17085) is at y 17085, south of
 `dbus`'s region, in `busc`'s.
+
+## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
+
+- Left, "`d#_out_n` outside the cells": all eight are driven by inverters of the read bus (D0: `dbus`; D1-D6:
+  `cdp4`'s cell `cdp4_ro`; D7: `regs`), `d#_out_n` = NOT `cdp3_n_c(7-#)`, firm.

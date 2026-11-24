@@ -50,4 +50,4 @@ res_b       P  5182-5202,6350  in   from trunks' pad (5190,6065)
 lpstb_b     P  5227-5247,6350  in   from trunks' pad (5232,6105)
 tl5_w2722   P  5355-5375,6350  out  the strong inverter's output: from T3's south pad (5363,6108)
 bd1_n2   P  5402-5422,6350  ?    the row y 5761
-tl5_w3461   P  5443-5463,6350  in   latch a's data: from T5's south pad (5451,5759)
+wl_h1   P  5443-5463,6350  in   latch a's data: from T5's south pad (5451,5759)

@@ -5,8 +5,8 @@
 13690,15920:13740,16725   route  ck_out rail | NOT CLK at the left edge of the logic below the decode array, fed by a wide poly from x 13131
 13005,7270:13045,16950    route  ck_a rail | clock phase A up the right edge of the mid-right array, one tap per row
 12980,16940:13160,18480   route  clock verticals | ck_b (x 13022), ck_a (x 13066), ck_out (x 13132) crossing the bus field
-6780,13300:6880,18440     route  S in the left bus field | output of input-row gate 0 (NOT X, clock-like): innermost line of the bundle, then x 6862
-6790,18410:10280,18440    route  S along the bottom bus field | middle one of three bus lines, with three poly links
+6780,13300:6880,18440  route  rst_ck (line S) in the left bus field | output of input-row gate 0 (NOT X, clock-like): innermost line of the bundle, then x 6862
+6790,18410:10280,18440  route  rst_ck (line S) along the bottom bus field | middle one of three bus lines, with three poly links
 16150,17500:16840,18140   route  E, R/W, RS, CS to the core | e_b (metal, nested corner), rw_d / rs_d / cs_d (diagonal polys, then verticals at x 16298, 16342, 16385)
 5250,2080:6730,2160       route  RES and LPSTB to the core | res_b (y 2140) and lpstb_b (y 2095), then down a channel at x 5277 / 5320
 7480,18740:9490,19350     route  CLK pin to the bottom row | CLK pin node in wide poly and metal to the cell row above the CUDISP pad

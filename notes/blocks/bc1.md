@@ -358,3 +358,14 @@ In order of value:
 ## Corrections (coordinator, from the handoffs of `busl` run 16, 2026-11-21)
 
 - "The VSS plate at the foot of the s0 rail" / the wide metal over the row y 14870: it is VSS from `cdp4`'s plate (`busl`, piece `vb`) and leaves south at (7383-7432, 15000); RL2's top bar (y 14935-14970, east of x 7468) is separate from it.
+
+## Corrections (coordinator, from the handoffs of `eof` runs 28-35, 2026-11-21)
+
+- Ports, `bc1_dec01_n` "x 8056, y 16300 (continues down)": it continues to the pad (8010,17210) and is gate B of the NOR that makes `eof_w17338` (`trace/eof.txt`, piece `in207`; the neck at y 16613 uncertain, AMB-049). No other load was seen on the stretch south of y 16300.
+- Ports, `bc1_g6_out` ("poly, y 16107, drawn to x 8300 ... into the untraced gates at y 16000-16300") and Not done "Column A below y 16000": the gate fed by `bc1_g6_out` is the data input of the latch `lat18` (`trace/eof.txt`), a copy of `tl1`'s latch at y 16015-16447; the poly leaves the pad as the row y 16120-16138, not along y 16107 (geometry only: `trace/bc1.txt`'s `P 8221,16107 x8300` is a stub that joins nothing else; the block's Ambiguity 114 in `eof`).
+- The west gate column (rail x 7294-7342): four units are drawn by `eof` (y 15024-15900): `eof_w15128` = NOT `rst_n`; `eof_w15262` = NOR(`lc1_w7780`, `rcs_mv`); `eof_w15523` = NOR(`rcs_e4`, `eof_w16040`, `bl0_w15566`); `eof_w15781` = NOR(`eof_w15523`, `eof_w15262`, `eof_w15128`) (each marked by its two ties). The rail's north end turns east at y 15024-15069 onto the VSS metal x 7383-7432 (`busl`, piece `vb`). The box `D 7462,15194:7540,15284` also feeds the load of `eof_w15262` from its west side.
+
+## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
+
+- Its west gate column (rail x 7294-7342) is drawn by `eof` from y 15024 to y 16930 (eight units: an inverter,
+  three NORs, two wide inverters on `eof_w15781`, two select-line inverters); `bc1` draws none of them.

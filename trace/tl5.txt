@@ -16,8 +16,8 @@
 # Overlays a_ua.png, a_ub.png, b_ua.png, b_ub.png (3.6x clean), a_m.png (2.7x metal);
 # tools/cellcheck.py tl1_ua / tl1_ub (clean shot): 8-11 % bad blocks, all under RB or dirt;
 # rdp3_cmp.py 4900,3340:5210,3810 --offsets "0,0 0,477 0,954": the copies differ only under RB.
-#   tl5_w3364 = NOT tl5_w3461
-#   tl5_w3550 = NOT( tl5_w3461 AND tl5_w3505  OR  tl5_w3680 )
+#   tl5_w3364 = NOT wl_h1
+#   tl5_w3550 = NOT( wl_h1 AND tl5_w3505  OR  tl5_w3680 )
 #   tl5_w3680 = NOT( rst_a  OR  tl5_w3505 AND tl5_w3364  OR  tl5_w3550 )
 #   tl5_w3841 = NOT tl5_w3680
 #   tl5_w4027 = NOT( tl5_w3680 AND tl4_w4068  OR  tl5_w4160 )
@@ -58,7 +58,7 @@ P 5195,3452:5440,3471
 P 5432,3444:5476,3479
 C 5452,3461
 M 5451,3450 y5771                     # T5 south of the pad: one metal without another pad to its south pad (5451,5759) (the foot, below)
-N P 5300,3461 tl5_w3461
+N P 5300,3461 wl_h1
 # enable: row y 3496-3514 to the pad (5494,3505) on T6; T6 runs on south to a second pad
 # (5494,3722), where it ends (bare ground south), on the row y 3712-3732 of the lower unit's
 # series gate; that row runs on east through the pad and out of the strip. North of the upper

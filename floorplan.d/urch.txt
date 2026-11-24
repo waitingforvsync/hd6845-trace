@@ -1,2 +1,2 @@
 # urch: wiring channel east of the left array's counters
-4240,6140:4720,10520    route   counter outputs of the left array | nine tracks: the 4-bit counter's outputs go north to four poly lines east along y 6157-6280; the 5-bit counter's step east and go north to five poly lines along y 6498-6673, which run 9,000 px east through the central datapath's channel 2 to the upper right datapath
+4240,6140:4720,10520    route   counter outputs of the left array | nine tracks: the VSYNC width counter's outputs go north to four poly lines east along y 6157-6280; the 5-bit counter's step east and go north to five poly lines along y 6498-6673, which run 9,000 px east through the central datapath's channel 2 to the upper right datapath

@@ -255,6 +255,17 @@ Traps, all of them real:
    real end is a 90 px arm to a contact one bus line over. Before calling two coincident
    lines one net, find the contact: a pad, a ring in the metal shot, the green patch in
    the clean shot. If none of the three is there, they are two nets.
+   The other way round: **a poly row whose end is hidden under a metal lying on it is not another net's
+   until its end is seen.** `eof` run 52's survey saw a gate row y 17682-17698 running west under `ck_out`'s
+   jog metal toward the column being traced and wrote it down as another unit's row; its west 25 px lie in
+   a gap between two metals, where the clean shot shows only a dark ring, and it is a branch of that column
+   (found by review round 63). Before calling a poly "one wire with no tap", sample both its flanks for poly
+   leaving it (`tools/eof_tee.py h|v`; `tools/eof_teeall.py` for a whole trace file) and look at every hit; the tool is an aid, not a proof (its limits are
+   in its docstring). Found 2026-11-21 (R52).
+   And **a metal's corner over the foot of a poly column can look like a pad with a contact**: `eof` run 67
+   drew a contact at (10441,16260), where a thin metal turns over a poly column's foot, from 6-9 px dark bars
+   on three sides and a bright centre; it joined two nets. What told it apart: the metal keeps its 12 px width
+   (a pad widens), and neither chip-1 stripped shot has a hole there. Found 2026-11-23 (`eof` review round 81).
 14. **Where a tool says a line ends, look at the end at 5x in the metal shot.** A line ends
    on a contact; if you see none, the line has turned and the tool missed the corner.
 15. **Crossing fields without pads carry no taps.** In the fields where poly rows cross a
@@ -299,6 +310,12 @@ Traps, all of them real:
    `tools/railprof.py` call open poly "dark" and open field "diffusion", and do not tell a
    channel from poly over field there. In an open gap, decide in the chip-2 shots, where
    poly is orange. Found 2026-11-17 in `amr` (re-read item R16).
+   **Along a rail, `railprof.py` calls field "diffusion" too** (`eof` runs 32 and 35, 2026-11-21): it called
+   y 15633-15646 under the rail x 7295-7340 diffusion where the clean shot is greenish (127-130/130-159/87-105,
+   against the tan of diffusion, about 185/168/125) and the box's real edge is a dark line in both metal
+   shots, and it called 145 px of open field north of a unit "diffusion, dark 100%" (`tools/opendiff.py`
+   and `px.py pt` settled it). A box's end, or a unit's extent, under a rail is not taken from
+   `railprof.py` alone. Neither reading joined anything.
 19. **The metal test misses thin metal.** The follower's test (R > 177, G > 128) does not
    see thin, dim lines (under about 16 px): it reports breaks or no line at all. For those,
    profile along and across the line and compare with a known stretch of the same line.
@@ -308,6 +325,12 @@ Traps, all of them real:
    each half fails the test (`tools/follow.py` and `tools/eof_mrun.py` report no metal for
    215 px south of the pad (8592,15168), where both metal shots and the clean shot's pink
    protected strip show one). Found 2026-11-19 (`eof` run 15; R17).
+   Nor does the centre-line test help there: `tools/tl5_tracks.py v` tests a strip 7 px wide on the
+   centre line and lost `eof`'s thin metal x 4597-4613 for 116 px where it lies half on a poly column,
+   and another for 47 px. Test the whole width first (`tools/tl3_thin.py X0 X1 ... --thr 150`), or the
+   clean shot's protected colours across the track (`tools/px.py row Y X0 X1 3 acid1b` at three heights:
+   tan and cream where the metal was, open ground beside it); the centre-line test then says where to
+   look. Found 2026-11-21 (`eof` runs 39, 41).
 20. **A contact at low zoom does not say which way a signal goes.** Whether a line drives or
    receives depends on whether its contact lands on a gate poly or on a source or drain.
    Two packages called `amr`'s four outer lines outputs; they are gate inputs. Found
@@ -350,10 +373,27 @@ Traps, all of them real:
    once on the groups. Also: pass transistors on a land that widens under the gate are wider
    than the strip (`rdp3_lat`'s was 34 in the trace and is 70: R22), and a pull-down under a
    rail can continue as a separate patch on the rail's other side (R23). Found 2026-11-17.
+   Also, the other way round: a cell that will not read in single rows may read at once on a
+   sub-pixel-aligned median of its copies (`tools/cdp1_sr.py`). And a buried contact's centre does not
+   look like poly from above: poly on bare silicon reads plain in chip 1's metal shot (red equal to
+   green) and less orange in chip 2's, between two dark bands of 10-12 px, so a poly followed by colour
+   along its centre "ends" at every buried contact it passes through. `eof` run 44 read two polys, each
+   through a box, as one open column 390 px long "with dark lines across it". Control: the box
+   (14536,14941). Found 2026-11-21 (`eof` run 45).
+   And a framed block on a poly row is not a buried contact because one sits at the same x in the same
+   column: compare the interior, not the position. `eof` run 54 took a block at x 10497-10522 for the
+   buried-contact box that the unit 300 px south has there and built a tie and an equation on it; its
+   interior is ordinary poly (orange in both metal shots), the lower one's plain (review round 67; nothing
+   had been drawn). Found 2026-11-21.
 
 25. **A port is drawn to the boundary only after the boundary itself has been looked at.** A
    line still there 50 px short of the edge may end on a pad. `dbus`'s `dbus_do0_in` was drawn
    to x 16950 and ends 40 px before it. Found 2026-11-17 (R28).
+   And "runs on" written at a port is a claim about the next 100 px: `cdp4` run 12 drew a poly row
+   from a pad to a port just beyond a rail and wrote "on west" from one colour profile; the row turned
+   a corner at the rail's edge and was the plate of a depletion load with its tie box 80 px on, so the
+   net was a gate's output, not a wire going on (two fix rounds). Before writing "goes on" at a port,
+   look at a view of 150 px beyond the drawn end in two shots. Found 2026-11-21 (`cdp4` run 12).
 26. **A bright centre is not a contact without the hole.** Over a buried-contact box a metal can
    show a bright centre: a round one in a dark ring under a metal about 25 px wide (`tl4`, the box
    at (4684,3420)), a small one in a dark stretch on a thin metal (`tl3`, four boxes on the thin
@@ -400,6 +440,11 @@ Traps, all of them real:
    match, east of its ground rail: left undrawn for that reason, then read by `eof`). Test: chip
    1's *metal* shot against chip 2's, and a contact nearby in all four shots. Found 2026-11-19
    (`eof`, piece `r4lat`; R42).
+   And a narrow feature is classed on its centre line, against controls read with the same command:
+   a diffusion neck 12-15 px wide in the open (`eof`, row s1 of the left array, x 4549-4563,
+   y 11816-11838) reads like open poly on a column 4 px off its centre line (red-brown in the clean
+   shot, red over green by 20-43 in chip 2's stripped shot) and like diffusion on the centre line in all
+   four shots. Found 2026-11-21 (`eof` run 40).
 29. **A wire is not finished where it goes under a rail or a thin metal.** A stripe of diffusion
    colour under a thin metal is a diffusion until both its ends are found (`tl3`: 170 px of tan
    beside a load strip was a diffusion wire that turned under the rail to another transistor; a
@@ -409,6 +454,12 @@ Traps, all of them real:
    at 2x or more with every package's trace outlined (four views cover a 2,400 px column); listing
    contact candidates on a rail with `tools/tla_contacts.py` does not work (the grey under R2 and R3
    gives a candidate every 50-100 px). Found 2026-11-18 (`tl2`, `tl3`; R39, R40).
+   A rail drawn to a round coordinate ("runs on") can stop short of a unit under its end: `bd3`'s
+   ground rail was drawn to y 17380, its metal runs to y 17527, and an inverter under the undrawn
+   stretch was in no package (`regs` run 5). And a diffusion drawn to a port is read on both its long
+   edges first: a poly row lying against either edge with no field between makes it a drain (`eof` run
+   51 stopped a band at its claimed region's edge; the reviewer found the transistor; `tools/railprof.py`
+   100 px past the piece's edge shows it in one call). Found 2026-11-21.
 30. **Where `tools/follow.py` ends a metal is not where the metal ends.** It loses a narrow metal
    where it goes dark over what lies beneath and reports an end there (`tl3`: track A and the thin
    metal x 4101 run on); at its default `--gap 24` it runs 33-46 px past a pad over open poly and
@@ -456,6 +507,11 @@ Traps, all of them real:
    (`tools/tl5_tracks.py v` across the pad and 60 px either side); a pad ends a poly only if field
    is seen beyond it (`tools/px.py col` in the chip-2 stripped shot: poly red over green by 40-80,
    field under 25). Found 2026-11-18/19 (`lc2`, `eof`; R26, R43, R45).
+   Test a corner's far side too: a corner of a thin metal can be a T. Run `tools/tl5_tracks.py` 60 px
+   past the corner in the direction the line was travelling and in the direction opposite to its turn,
+   from the line's own centre, not its far edge (`eof` run 50 began the two-chip test 14 px beyond the
+   junction, on the far side of the arriving line, and missed the branch; caught by the review).
+   Found 2026-11-21.
 33. **Two pads on one line of sight are not thereby on one poly, and a through line is not
    straight because it is straight further on.** `ur` joined two pads 210 px apart at the same y
    across open field (it would have joined two unrelated nets), and drew the left array's through
@@ -470,6 +526,13 @@ Traps, all of them real:
    every cut and `tools/follow.py` jumps the gap. A long track is one metal only after a continuous
    two-chip test along all of it (`tools/tl5_tracks.py v`), and every stretch of 20 px or more
    without metal is looked at. Found 2026-11-20 (`eof` run 21; R44, R36).
+   And **a line drawn at 1x through a pad can be two metals that meet at it**: `trunks` drew "ck_out #2" as
+   one metal x 10441 through two pads 70 px apart ("contacts on it"); they are the ends of two metals with
+   40 px of open poly row between, and the line joined a NOR's output to its own input (caught only when the
+   gate was drawn and the extraction showed the short). In the bottom-centre logic a track position is
+   reused wherever a line ends: `eof` runs 55-62 met six places where two metals lie end to end 12-40 px
+   apart. Before drawing a metal through a pad or past another line's end, run the two-chip test across
+   it. Found 2026-11-22 (`eof` run 55; R53).
 34. **A row that lines up with a poly beyond a rail's edge is not thereby the same poly.** In
    `lc2`'s west cluster the gate rows end at the rail's east edge and a different poly (the gate of
    a pull-down east of the rail) starts 20-30 px further on, in line. At 2.8x they look like one
@@ -520,6 +583,12 @@ Traps, all of them real:
    area of the same unit do not separate in chip 2 (metal 165-176/115-118 against 170-185/121-135).
    What decides a gate's extent is the edge line crossing the poly, and the diffusion against both
    of the poly's edges.
+   Likewise **a gap of about 26 px between two thin metals can hold a poly column**: in `bc2`'s rail column
+   (`eof` run 64) a latch node's "stub" turns north as a poly column x 10456-10470 between the metals x 10441
+   and x 10476-10492 and is a gate of the next unit. The clean shot shows it dark red where field is olive;
+   `tools/px.py col` down the gap in both metal shots shows orange without a break, against plain ground
+   between the rows. Read every such gap before calling a row's end a stub. Found 2026-11-23 (`eof` run 64);
+   no earlier block is known to be affected.
 39. **A long row under rails and tracks is not poly because it is pale there.** In the clean shot a
    diffusion wire and a poly row are both pale under metal, and at 1-2x a row that crosses a rail
    field looks like every poly row beside it. The row y 14105-14122 in the left array's left column

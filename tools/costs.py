@@ -65,7 +65,9 @@ def transcript_dirs():
     base = os.path.expanduser('~/.claude/projects')
     common = git('rev-parse', '--path-format=absolute', '--git-common-dir').strip()
     main_root = os.path.dirname(common) if common.endswith('.git') else ROOT
-    key = main_root.replace('/', '-').replace('.', '-')      # also matches its worktrees' folders
+    # Claude Code names the folder from the path with every other character made '-' (on Windows the ':' and
+    # '\' too: C:\Dev\x -> C--Dev-x; proposed by `regs`' Windows run, tools/regs_costs.py).
+    key = re.sub(r'[^A-Za-z0-9_-]', '-', os.path.normpath(main_root))      # also matches its worktrees' folders
     return [d for d in glob.glob(os.path.join(base, key + '*')) if os.path.isdir(d)]
 
 

@@ -559,7 +559,8 @@ P 7662,7076:7998,7096                 # the row, west under the tracks to a pad 
 N P 7800,7086 cdp2_w7065
 P 7645,7066:7680,7100
 C 7662,7083
-M 7662,7040 y7083 w=14                 # a metal from the north ends on it (port)
+M 7662,6400 y7083 w=14                 # the metal from the north that ends on it is tc2's metal of tc1_ns3
+@alias tc1_ns3 cdp2_w7065               # (M 7661,6185 y6400 in trace/tc2.txt): one metal, y 6400-7083 drawn here
 # the load: neck east, strip under the poly block, box on the VCC metal; the block's tail ends on a
 # buried contact against the neck
 D 8103,7057:8145,7088
@@ -606,8 +607,7 @@ C 8405,7380
 P 8350,7290:8684,7311                 # row 1: east under the wide metal x 8595-8645 to a pad (8682,7300), on which the
 P 8664,7284:8700,7318                 #   metal of the comparator chain's output (M 8685,7006 y7300) ends
 C 8682,7300
-N P 8590,7300 cdp2_w7300
-@alias cdp2_b_s7_x cdp2_w7300          # the placeholder of the first merge: the row is the chain output's
+N P 8590,7300 cdp2_b_s7_x
 N P 8590,7300 cdp2_b_s7_x
 P 8350,7333:8660,7354                 # row 2: east into the plate of the load of cdp2_b_hl (piece gh)
 N P 8590,7344 cdp2_w7344
@@ -659,7 +659,7 @@ B 8296,7126:8324,7150
 P 8286,7008:8305,7068                 # the plate's poly north: the gate's output,
 P 8273,6980:8308,7015                 #   to a pad
 C 8290,6997
-M 8290,6940 y6997 w=14                 # a thin metal from the north ends on it (port)
+M 8290,5327 y6997 w=14                 # a thin metal from the north ends on it (piece wn: from a pad (8290,5327))
 N M 8290,6950 cdp2_w7092
 # the unused output box east of the column
 D 8444,7079:8460,7096                 # arm
@@ -681,7 +681,7 @@ C 8508,6325
 P 8508,6314:8680,6334                 # its poly row east to a second pad
 P 8662,6306:8698,6342
 C 8680,6324
-M 8683,6270 y6324 w=14                 # a metal from the north ends on that pad (port)
+M 8683,6270 y6324 w=14                 # a metal from the north ends on that pad (piece wn: from a contact (8705,4810))
 N P 8600,6324 cdp2_w7128
 
 # ---- piece gh: the load of the comparator's line cdp2_b_hl (x 8578-8745, y 7352-7432)
@@ -703,3 +703,16 @@ D 8695,7358:8715,7386                 # tab of the line's diffusion north
 P 8690,7355:8712,7372                 # the plate's corner on it
 ?B 8688,7352:8716,7376
 @alias cdp2_b_hl cdp2_w7344            # the placeholder of the earlier merge (it occurs in the coordinator's files)
+
+# ---- piece wn: the two metals of pieces gu's nets on north to their ends (wiring)
+# cdp2_w7092: the thin metal x 8283-8297 runs 1,670 px north from the pad (8290,6997) to a pad
+# (8290,5327), whose poly row goes east (port).
+P 8272,5310:8307,5345
+C 8290,5327
+P 8290,5316:8336,5336                 # its poly row east, 30 px to a heavy-outlined box (8335-8365, 5315-5345) (port at x 8336)
+# cdp2_w7128: the metal x 8676-8690 runs 1,430 px north from the pad (8680,6324), steps east by a
+# square jog at y 4862-4887 to x 8699-8713 and ends on a contact (8705,4810) to a diffusion land, the
+# west end of a band y 4776-4838 that goes on east (port).
+M 8683,6324 y4874 x8706 y4810 w=14     # a square jog at y 4862-4887 (review round 7)
+D 8690,4778:8745,4838                 # the land: the west end of a diffusion band that goes on east (port at x 8745)
+C 8705,4810

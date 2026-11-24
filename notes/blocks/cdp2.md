@@ -23,6 +23,19 @@ the most significant of the five compared bits, s7 the least.**
 
 ## Status
 
+- **Run of 2026-11-20 19:36 -0600**: **the inverter's output is `tc1_ns3`** (wiring, one join; it rests on piece `ga`'s two
+  `?B`): the metal that ends on the output row's pad (7662,7083) is one metal (x 7652-7670) with the
+  metal `tc2` draws from its pad (7660,6193) south to y 6400 as `tc1_ns3` (`tl5_tracks.py v 7661 6390
+  7070`: bars of 10 px or less; bare ground south of the pad: `px.py col 7661 7085 7120 5`). Drawn
+  y 6400-7083; `cdp2_w7065` is an alias of `tc1_ns3`. So **`tc1_ns3` = NOT `tc2_sr_q`** (marked): the line that
+  runs north past `rax`'s units into the top-centre logic is the inverted output of `tc2`'s latch.
+
+- **Run of 2026-11-20 19:10 -0600**: **piece `wn`** (wiring, 3,100 px, no uncertain item; reviewed: round 7 a port's side, fixed; round 8, the fix check, no findings): the two metals of the upper
+  series gate followed north to their ends. `cdp2_w7092` (the gate's output) ends on a pad (8290,5327)
+  whose poly row goes east (port: a gate in the logic at y 5300-5350, undrawn). `cdp2_w7128` (its row 1)
+  comes from a contact (8705,4810) on the west end of a diffusion band y 4776-4838 that goes on east
+  (port at x 8745: `cdp1`'s undrawn slice-0 logic).
+
 - **Run of 2026-11-20 18:57 -0600**: **piece `gh`, the load of the comparator's line `cdp2_b_hl`** (x 8578-8745,
   y 7352-7432; 1 transistor, one uncertain item, the load's tie; reviewed: round 6, no finding that changes a connection). `cdp2_b_hl`'s metal x 8715-8735 ends on a
   diffusion that a poly plate parts from a contact to the VCC metal x 8594-8644: a depletion load
@@ -508,6 +521,26 @@ cdp2_b_hl  = NOT( OR over s3..s7 of (cdp2_b_s#_p1 AND cdp2_b_s#_y) )
 Without the tie the plate would be a pull-up gated by an undriven poly, and the line would have no load
 anywhere: the tie is the only reading that makes a circuit, but the box's inside cannot be seen.
 
+### Piece `wn`: the upper series gate's two metals, north (2026-11-20; traced, wiring only)
+
+`cdp2_w7092`: the thin metal x 8283-8297 runs north from the pad (8290,6997) without a break
+(`tl5_tracks.py v 8290 5345 6975`: bars of 14 px or less; one stretch of 40 px at y 5682-5722 fails the
+test in both chips: on a view the metal is there, dimmer, with one edge bar at y 5683-5690 and no ring or
+widening: `cache/scratch/cdp2/y3.png`, 7x) to a pad (8290,5327) (ring and bright centre in chip
+2, a hole in the clean shot, weaker centre in chip 1: `textmap.py 8270 5306 8312 5346 3`; view
+`cache/scratch/cdp2/y1.png`), whose poly row y 5316-5336 runs 30 px east and ends on a heavy-outlined box (8335-8365, 5315-5345), not
+read (port at x 8336).
+
+`cdp2_w7128`: the metal x 8676-8690 runs north from the pad (8680,6324) (`tl5_tracks.py v 8684 4910 6300`:
+bars of 13 px or less; at y 5456-5510, the follower's candidate, the metal narrows beside a second
+bright stripe and has no ring: `textmap.py 8664 5456 8706 5512 3`), steps east by a square jog at
+y 4862-4887 (`textmap.py 8668 4838 8722 4906 4`: one metal, x 8676-8712 wide at the step) and ends on a
+contact (8705,4810) (ring and bright centre in both chips, a hole in the clean shot: `textmap.py 8684
+4790 8728 4832 3`) on a diffusion land (8690-8726, 4778-4838; view `cache/scratch/cdp2/y2.png`), the west end of a band that
+goes on east from x 8726 with field north of y 4776 (review round 7: chip-2 stripped red minus green
+21 at (8740,4800), 2 at (8740,4760)). So the
+upper gate's first input is the output node of something in the logic north of the datapath there.
+
 ## Ports
 
 | Name | Layer | Where it crosses | Direction | What |
@@ -633,7 +666,7 @@ Run of 2026-11-20:
   x 8780 they are interwoven with the logic there (pads on line 6714, bends at
   x 7800-8080, y 6780-6890).
 - **Channel 3 (y 7830-8030)**: five poly lines (Ports), not drawn.
-- **Logic left of the rows** (x 7600-8750, y 6000-7480): one gate traced (piece `ga`, 2026-11-20); both series gates traced (pieces `gl`, `gu`); the rest (`gu`'s output metal north of the pad (8290,6997), the poly row west of the pad (8332,6954), the unit at x 8140-8260, the gate at x 8560-8700, y 7370-7410) not traced. Open ends: `cdp2_w7065`'s metal north of the pad (7662,7083) (its loads); the through line `cdp2_w6845` west of the pad (7335,6845) (its source); a thin metal x 8152-8166 that crosses the gate, in line with row C's track b, drawn by no one north of y 7395. Beside piece `gl`, seen and not drawn: a poly column x 8565-8590 from the north ending at y 7266; a contact pad near (8605,7395). It receives
+- **Logic left of the rows** (x 7600-8750, y 6000-7480): one gate traced (piece `ga`, 2026-11-20); both series gates traced (pieces `gl`, `gu`); the rest (`gu`'s output metal north of the pad (8290,6997), the poly row west of the pad (8332,6954), the unit at x 8140-8260, the gate at x 8560-8700, y 7370-7410) not traced. Open ends: the through line `cdp2_w6845` west of the pad (7335,6845) (`busl` has since drawn it on west: its port at (6118,6847)); a thin metal x 8152-8166 that crosses the gate, in line with row C's track b, drawn by no one north of y 7395. Beside piece `gl`, seen and not drawn: a poly column x 8565-8590 from the north ending at y 7266; a contact pad near (8605,7395). It receives
   `cdp2_b_hl` (metal x 8725, ends about y 7400 on a diffusion) and `cdp2_b_s7_x` (metal
   x 8685, seen to y 7300), drives `cdp2_b_cin` (poly y 7252 at x 8650), takes L1/L2 (row
   C's s1, s2 outputs, y 7472/7513 at x 7990), `cdp2_trk_s3` (metal 8335,6066) and the
@@ -760,7 +793,7 @@ Findings:
 Round 4: one finding that changes a connection, fixed; geometry findings.
 
 Added with the fixes, for the same fix check: the lower gate's row 1 is drawn on east to its pad
-(8682,7300) and so joined to `cdp2_b_s7_x`. The row's placeholder name of the earlier merge, `cdp2_w7300`,
+(8682,7300) and so joined to `cdp2_b_s7_x`. The row's placeholder name of the earlier merge, `cdp2_b_s7_x`,
 is kept as an alias of `cdp2_b_s7_x` in the trace (it occurs in the coordinator's journal and master
 list, which are not a tracer's to edit); the next refresh can rename it.
 
@@ -802,6 +835,49 @@ Findings, geometry only:
 connections identical.
 
 Round 6: no findings that change a connection.
+
+Round 7 (full review of piece `wn`; fresh Fable 5.2 reviewer; 2026-11-20 19:21 -0600; commit 79d34e1; images
+`cache/scratch/cdp2/review-7/`). Told to suspect both north ends (the metal reaching the pad; a real
+contact; diffusion or poly), both metals over their length (the stretch y 5682-5722; the candidate
+(8684,5481); the step), contacts at the many crossings, the pad's polys. Checked: the pad (8290,5327) a
+real contact with metal from the south only and poly east only; wire 1 one metal at x 8290 throughout
+(at y 5682-5722 its west edge lies on a poly L, the east half bright in both chips); the contact
+(8705,4810) real and on diffusion, metal from the south only; neither arm continuing past the jog; at
+(8684,5481) a box under the metal's east edge, a pass-over; no hole in the clean shot on either wire.
+Not checked: most row crossings at 5x (hole scan and 1.6x views only).
+
+Findings:
+
+1. **A port's side** (counted as a connection by the workflow; no geometry of a net changes): the land
+   of the contact (8705,4810) is the west end of a diffusion band that goes on EAST from x 8726; north
+   of y 4776 is field. The port was given on the north edge. Confirmed (`px.py pt 8740,4800,3 8740,4760,3
+   acid`). Fixed: the land drawn to x 8745, the port moved to the east edge.
+2. Geometry: the step is a square jog y 4862-4887, not a diagonal. Fixed.
+3. Geometry: wire 1's poly row is 30 px long and ends on a heavy-outlined box (8335-8365, 5315-5345).
+   The port is now at x 8336 and the notes say what it meets.
+
+Round 7: one finding on a port's side, fixed; two geometry findings.
+
+Round 8 (fix check of round 7's fixes; fresh Fable 5.2 reviewer; 2026-11-20 19:25 -0600; against commit 79d34e1; images
+`cache/scratch/cdp2/review-8/`). Checked: the band one piece from the contact's ring to x 8756, no poly
+or edge line across it (row y 4808 flat over x 8728-8756 in both metal shots), its edges at y 4774-4778
+and 4838-4842, field north, south and west of the land, going on east under the metal at x 8760; the
+jog inside the metal in both chips, no metal at x 8725; the poly row x 8312-8331 running straight into
+the west outline of a box (8332-8368, 5309-5347) that reads as a buried-contact box at the poly's end
+(a gap under 10 px cannot be excluded). `.venv/bin/python tools/sameconn.py 79d34e1` and `TRACE=cdp2
+.venv/bin/python tools/sameconn.py 79d34e1`: connections identical.
+
+Round 8: no findings.
+
+Round 9 (full review of the join with `tc1_ns3`; fresh Fable 5.2 reviewer; 2026-11-20 19:39 -0600; commit 496a9cf; images
+`cache/scratch/cdp2/review-9/`). Checked: the metal continuous y 6380-7075 (bars of 8-12 px at the poly
+rows, nothing in the hole scan; a dark blob in the clean shot at (7665,6467) with no ring, centre or pad
+and field in the chip-2 stripped shot: a blemish); the same track throughout (row cuts every 12 px from
+y 6226 to 7060: x 7656-7669 in both chips, no jog, branch or pad; in line with `tc2`'s metal from the pad
+(7660,6193)); the metal reaching the pad (7662,7083) with no bare ground before the ring and nothing
+south of it; extraction and `sameconn.py 30c94a3` (only the two names joined and their consequences).
+
+Round 9: no findings.
 
 ## Correction from the coordinating session (2026-11-15)
 
@@ -860,3 +936,8 @@ comparator's chain output is, west of the knot, the line at y 6844, which goes t
 ## Corrections (coordinator, from the handoffs of `busl` run 16, 2026-11-21)
 
 - `cdp2_w6845`, "the metal west of the pad (7335,6845) (follower: to (6142,6847))": drawn by `busl` (piece `hb`) to an end pad (6146,6847); the wire goes on west in poly to a pad (5668,6846) and in metal along y 6849 to about x 5339 (`lc1`'s band, undrawn).
+
+## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
+
+- The reviewer of `cdp4` run 12 notes that the chain's poly row drawn to x 10842 at about y 6880-7262 ends at
+  about x 10821; the track x 10808 (`cdp4_w10808`) lies lengthwise on it with no pad (no connection).

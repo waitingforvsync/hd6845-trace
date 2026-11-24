@@ -610,3 +610,43 @@ along the top of the central datapath) is the gap.
 ## Corrections (coordinator, from the handoffs of `busl` run 15, 2026-11-21)
 
 - Taps in the left bus field (R4): none on the one line there between y 8995 and y 15000 (`busl`, under piece `xm`: method and numbers). South of y 15000 and its poly cross-unders are not checked.
+
+## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
+
+- `rst_lat`'s diagonal from the contact (11288,17517) ("poly west and south-west. Not followed", here and in
+  `trace/trunks.txt`): followed by `cdp4` run 12: it ends in a row y 17633-17653 through a pad (10852,17648)
+  on the track x 10852, which is `rst_lat` up the east side of the central datapath to y 3592 and into `tr1`'s
+  gate row.
+- The metal on the track position x 10810 south of y 16430 (a pad (10808,16430), then south to this block's
+  piece at y 18458) is a separate metal from `cdp4_w10808`'s track (650 px of bare ground between); y
+  16430-18458 of it is undrawn.
+
+## Corrections (coordinator, from the handoffs of `eof` runs 52-54, 2026-11-22)
+
+- `h_eq_r1`, "poly west and south-west" with its diagonal to (10940,17598) (here and in the comment in
+  `trace/trunks.txt`): followed by `eof` run 52: the diagonal becomes a row y 17592-17612 west to a column
+  x 10432-10448 north, the gate of the pull-down on `bl0_w15566` at (10548,17515). `eof_w17515` is an alias of
+  `h_eq_r1`.
+
+## Corrections (coordinator, from the handoffs of `eof` runs 55-62, 2026-11-23)
+
+- The table row `| 10433-10450 | <16880-17689 | metal | ck_out | "ck_out #2" continues up the left side of the
+  gate column ... (contacts on it at about y 17234 and 17168 ...`: the `ck_out` metal ends on the pad
+  (10439,17238) (the "contact at about y 17234"); the contact at y 17168 is the pad of another metal, the output
+  of the NOR `bc2_w14955` = NOR(`rst_lat`, `ck_out`), which runs north from there. `trace/trunks.txt`'s line
+  `M 10311,17908 y18473 x10442 y18342 x10398 y17689 x10441 y16880` now ends `y17238` (`eof`, cdc4d7d; open poly
+  at y 17206-17218 in both metal shots, no metal in either chip at y 17175-17199; review round 68 of `eof`).
+  The stretch y 16885-17168 is `eof`'s metal of that NOR. R53.
+- The poly row y 17772 between x 10075 and the pad (10262,17770), and the poly column x 10225 between y 16820
+  and y 16950, each have another net's metal (`eof_w16560`, `eof` run 62) lying on them with no contact: that
+  metal is not `rst_a`'s.
+
+## Corrections (coordinator, from the handoffs of `eof` runs 63-68, 2026-11-23)
+
+- `rst_a`'s poly row y 16950 (`P 10470,16950 10225,16950 10225,16820`, drawn to x 10470; "the second is a gate
+  row at x 10540-10585", "the poly along y 16950 east of x 10470, into the bottom-centre logic"): it runs on to a
+  cap at x ~10546 and is a gate of the NOR `eof_w16996` = NOR(`rst_a`, `eof_w17345`, `eof_w16889`) (drawn by
+  `eof` run 63, piece `u16996`), one half of a set/reset latch; it does not cross under the rail.
+- An undrawn bus metal at y 18420-18440, between bus line L4 (y 18385) and L6 (y 18470), runs east from
+  x 10806 (to x 10990 at least); `eof_w16432` (`eof` run 66) joins it from the north at x 10811 by a thin metal
+  x 10804-10817 and is not on `rst_ck`'s contact (10810,18470). Its source is in no trace file.
