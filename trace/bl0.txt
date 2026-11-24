@@ -517,40 +517,40 @@ M 6970,16519 y16780 w=14
 P 6952,16764:6985,16797
 C 6968,16780
 P 6968,16780 x7040 w=20
-# ---- lc3_e9577: busl's track x 5322 ends at y 15000; on south to a contact on a diffusion box
+# ---- cdp3_cw_c7: busl's track x 5322 ends at y 15000; on south to a contact on a diffusion box
 # (5325-5370, 15350-15392), from which a diffusion wire y 15362-15382 runs west under the tracks
 # (port at x 4780: it goes on into the left array).
 M 5322,15000 y15371 x5345 w=14
-N M 5322,15200 lc3_e9577
+N M 5322,15200 cdp3_cw_c7
 D 5325,15350:5370,15392
 C 5345,15371
 D 4780,15362:5330,15382
 
 # ================================================================ piece w10 (run 10): the other five through lines of lc3
 # Each is busl's track from y 15000 on south to a contact on a diffusion box, from which a diffusion
-# wire runs west under the tracks into the left array (ports at x 4780), like lc3_e9577 in piece w9.
+# wire runs west under the tracks into the left array (ports at x 4780), like cdp3_cw_c7 in piece w9.
 M 5279,15000 y15849 x5299 w=14
-N M 5279,15200 lc3_e9621
+N M 5279,15200 cdp3_cw_c6
 D 5279,15828:5324,15870
 C 5299,15849
 D 4780,15841:5284,15856
 M 5235,15000 y16496 x5252 w=14
-N M 5235,15200 lc3_e9665
+N M 5235,15200 cdp3_cw_c5
 D 5232,16475:5277,16517
 C 5252,16496
 D 4780,16493:5237,16508
 M 5192,15000 y16975 x5211 w=14
-N M 5192,15200 lc3_e9708
+N M 5192,15200 cdp3_cw_c4
 D 5191,16954:5236,16996
 C 5211,16975
 D 4780,16970:5196,16985
 M 5148,15000 y17453 x5170 w=14
-N M 5148,15200 lc3_e9750
+N M 5148,15200 cdp3_cw_c3
 D 5150,17432:5195,17474
 C 5170,17453
 D 4780,17447:5155,17461
 M 5105,15000 y17929 x5126 w=14
-N M 5105,15200 lc3_e9793
+N M 5105,15200 cdp3_cw_c2
 D 5106,17908:5151,17950
 C 5126,17929
 D 4780,17924:5111,17938

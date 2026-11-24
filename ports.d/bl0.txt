@@ -25,18 +25,18 @@ busl_x6820   M  6747-6761,17000   out  the thin metal on south (follower: corner
 rcs_mv       M  6964-6978,15000   in   busl's track x 6971, on north
 rcs_mv       P  7030,15291-15311  out  poly row east of the pad (6966,15305)
 rcs_mv       P  7040,16770-16790  out  poly row east of the pad (6968,16780)
-lc3_e9577    M  5315-5329,15000   in   busl's track x 5322, on north
-lc3_e9577    D  4780,15362-15382  out  diffusion wire on west into the left array
-lc3_e9621    M  5272-5286,15000   in   busl's track x 5279, on north
-lc3_e9621    D  4780,15841-15856  out  diffusion wire on west into the left array
-lc3_e9665    M  5228-5242,15000   in   busl's track x 5235, on north
-lc3_e9665    D  4780,16493-16508  out  diffusion wire on west into the left array
-lc3_e9708    M  5185-5199,15000   in   busl's track x 5192, on north
-lc3_e9708    D  4780,16970-16985  out  diffusion wire on west into the left array
-lc3_e9750    M  5141-5155,15000   in   busl's track x 5148, on north
-lc3_e9750    D  4780,17447-17461  out  diffusion wire on west into the left array
-lc3_e9793    M  5098-5112,15000   in   busl's track x 5105, on north
-lc3_e9793    D  4780,17924-17938  out  diffusion wire on west into the left array
+cdp3_cw_c7    M  5315-5329,15000   in   busl's track x 5322, on north
+cdp3_cw_c7    D  4780,15362-15382  out  diffusion wire on west into the left array
+cdp3_cw_c6    M  5272-5286,15000   in   busl's track x 5279, on north
+cdp3_cw_c6    D  4780,15841-15856  out  diffusion wire on west into the left array
+cdp3_cw_c5    M  5228-5242,15000   in   busl's track x 5235, on north
+cdp3_cw_c5    D  4780,16493-16508  out  diffusion wire on west into the left array
+cdp3_cw_c4    M  5185-5199,15000   in   busl's track x 5192, on north
+cdp3_cw_c4    D  4780,16970-16985  out  diffusion wire on west into the left array
+cdp3_cw_c3    M  5141-5155,15000   in   busl's track x 5148, on north
+cdp3_cw_c3    D  4780,17447-17461  out  diffusion wire on west into the left array
+cdp3_cw_c2    M  5098-5112,15000   in   busl's track x 5105, on north
+cdp3_cw_c2    D  4780,17924-17938  out  diffusion wire on west into the left array
 cdp4_bus_s0  M  5443-5459,15000   in   busl's track x 5451, on north
 cdp4_bus_s0  P  4780,15033-15053  out  poly row on west into the left array
 lc2_w8450    M  4815-4829,15000   in   busl's track x 4822, on north

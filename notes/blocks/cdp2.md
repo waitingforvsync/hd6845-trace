@@ -949,7 +949,7 @@ comparator's chain output is, west of the knot, the line at y 6844, which goes t
   `P 7335,6836:7800,6858`). The pad (7335,6845), its row (to x 7800 in this file) and the metal from the
   west (piece `hb`) are `cnt_gab`: the row turns south at x 7821 to y 6888, comes back up at x 8080 and
   runs east through channel 2 on y 6845 to `wl`'s band H4. The pad (7987,6845), its metal south and the
-  pad (7878,8315) are `cdp2_w6845`, whose row comes from the west on y 6802 (`busl_y6805`), stepping
+  pad (7878,8315) are `cdp2_w6845`, whose row comes from the west on y 6802 (`cdp2_w6845`), stepping
   down at x 7861. Evidence: field on y 6845 at x 7835-7847 in the clean shot (re-read items R54, R55).
 - "Channel 2 west of the slices: a knot": the rule "6844 to 6888 by the same rule" and "the line y 6888
   that this block traced as its comparator's chain output is, west of the knot, the line at y 6844" are

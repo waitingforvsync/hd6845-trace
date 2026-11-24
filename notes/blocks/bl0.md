@@ -42,10 +42,10 @@ uncertain item; reviewed (round 13: no findings): the last two tracks from the l
 Run 10 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 11:54 -0600). One piece of wiring, no transistor, no
 uncertain item; reviewed (round 12: no findings): the other five through lines of `lc3`.
 
-- **Piece `w10`** (wiring, 9,500 px). `lc3_e9621`, `lc3_e9665`, `lc3_e9708`, `lc3_e9750`, `lc3_e9793` (tracks
+- **Piece `w10`** (wiring, 9,500 px). `cdp3_cw_c6`, `cdp3_cw_c5`, `cdp3_cw_c4`, `cdp3_cw_c3`, `cdp3_cw_c2` (tracks
   x 5279, 5235, 5192, 5148, 5105) each run on south from y 15000 to a contact on a diffusion box, at
   (5299,15849), (5252,16496), (5211,16975), (5170,17453), (5126,17929), and from each box a diffusion wire
-  runs west under the tracks into the left array, like `lc3_e9577`'s (run 9). **So the six lines enter
+  runs west under the tracks into the left array, like `cdp3_cw_c7`'s (run 9). **So the six lines enter
   the left array as six diffusion wires about 478 px apart, at y 15372, 15849, 16501, 16978, 17454,
   17931**: one per row of its lower part (believed; the array's side is `larr`'s).
 
@@ -59,7 +59,7 @@ uncertain item; reviewed (round 11: no findings): three tracks of the left bus f
   - `rcs_mv` (track x 6971): through a pad (6966,15305) whose poly row goes east (port), to a pad
     (6970,16175), a poly column under the bus to a pad (6970,16519), a thin metal to a pad (6968,16780)
     whose poly row goes east (port).
-  - `lc3_e9577` (track x 5322): to a contact (5345,15371) on a diffusion box, from which **a diffusion
+  - `cdp3_cw_c7` (track x 5322): to a contact (5345,15371) on a diffusion box, from which **a diffusion
     wire** y 15362-15382 runs west under the tracks and on past x 4780 into the left array (port).
 
 Run 8 (Matt Godbolt's session, Claude Fable 5.2; 2026-11-20 11:28 -0600). One piece of wiring, no transistor, no
@@ -216,7 +216,7 @@ finding that changes a connection.
 | `bl0_w15412` to the left column | 2684-5600 | 15398-16103 | poly row y 15401-15425 west to a pad (4909,15415); track x 4902-4916 south, corner y 16087, pad (4868,16086); poly row y 16075-16097 west to x 2845; column x 2845-2867 north; row y 15988-16008 west under the supply rail to a pad (2700,15999) on the thin metal x 2690-2710 |
 | `busl_x6820` south | 6738-6771 | 15000-17000 | track x 6747-6761 to a pad (6754,16217); poly column to a pad (6754,16562); thin metal on south |
 | `rcs_mv` south | 6950-7040 | 15000-16797 | track x 6964-6978 through a pad (6966,15305) (poly row y 15291-15311 east) to a pad (6970,16175); poly column to a pad (6970,16519); thin metal to a pad (6968,16780) (poly row y 16770-16790 east) |
-| `lc3_e9577` south | 4780-5370 | 15000-15392 | track x 5315-5329 to a contact (5345,15371) on a diffusion box (5325-5370, 15350-15392); diffusion wire y 15362-15382 west |
+| `cdp3_cw_c7` south | 4780-5370 | 15000-15392 | track x 5315-5329 to a contact (5345,15371) on a diffusion box (5325-5370, 15350-15392); diffusion wire y 15362-15382 west |
 | the other five through lines | 4780-5324 | 15000-17950 | tracks x 5279, 5235, 5192, 5148, 5105 to contacts (5299,15849), (5252,16496), (5211,16975), (5170,17453), (5126,17929) on diffusion boxes; diffusion wires west at y 15841-15856, 16493-16508, 16970-16985, 17447-17461, 17924-17938 |
 | `cdp4_bus_s0` south | 4780-5459 | 15000-15060 | track x 5443-5459 to y 15045, west to a pad (5364,15044); poly row y 15033-15053 west |
 | `lc2_w8450`, second branch | 4806-4930 | 15000-16730 | track x 4815-4829 to a pad (4823,16713); poly row y 16703-16723 east |
@@ -585,7 +585,7 @@ south: `px.py col 6970 15276 15334 4`), whose poly row y 15291-15311 goes east, 
 (`follow.py 6971 16560 S`), whose poly row y 16770-16790 goes east under the tracks x 7015, 7055 and on.
 Four pads, each a ring with a centre (the pad (6970,16175)'s centre is weak in chip 2, strong in chip 1).
 
-`lc3_e9577`. `busl`'s track x 5322 ends on a large pad at (5345,15371) (`follow.py 5322 15010 S`). The
+`cdp3_cw_c7`. `busl`'s track x 5322 ends on a large pad at (5345,15371) (`follow.py 5322 15010 S`). The
 pad is on diffusion, not poly: the clean shot under it is tan with specks (red minus green 15-29 against
 33-41 on this package's poly pads; `px.py pt 5330,15380 5362,15360 6982,17556 4878,16094`), and the strip
 that leaves it west is tan too (red minus green about 10). The strip, y 15362-15382 between two edge
@@ -598,7 +598,7 @@ there is field: no transistor.
 ### Piece `w10` (run 10): the other five through lines
 
 `follow.py X 15010 S` for x 5279, 5235, 5192, 5148, 5105 ends at (5282,15858), (5239,16506),
-(5196,16982), (5151,17462), (5107,17938). Each end is the same build as `lc3_e9577`'s: the track merges
+(5196,16982), (5151,17462), (5107,17938). Each end is the same build as `cdp3_cw_c7`'s: the track merges
 into the west side of a pad whose bright centre lies about 20 px east of the track and 9 px north of the
 follower's end (text maps of both metal shots at each), on a box that is tan with specks in the clean
 shot, and a strip leaves the box west between two edge lines 15-18 px apart. Measured every 6 px from
@@ -622,8 +622,8 @@ row just south (from the track x 5495, along y 15088 to x 5405 and south) is ano
 `lc2_w8450`. `busl`'s track x 4822 runs south to a pad (4823,16713) (`follow.py 4822 15010 S`: end
 (4822,16718); metal bright to y 16688, then the ring; candidates (4823,15198), (4823,15305),
 (4823,15548), (4823,15723) not read one by one). The pad's poly row y 16703-16723 goes east (poly colour
-without a break from x 4845 to 4935). On its way the track crosses the diffusion wires of `lc3_e9577`,
-`lc3_e9621` and `lc3_e9665` (y 15372, 15849, 16500).
+without a break from x 4845 to 4935). On its way the track crosses the diffusion wires of `cdp3_cw_c7`,
+`cdp3_cw_c6` and `cdp3_cw_c5` (y 15372, 15849, 16500).
 
 ### Piece `t6` (run 12): six tracks to the six lower rows of the left array
 
@@ -751,18 +751,18 @@ something east of x 8360 on the row y 17821; neither end is traced, and which en
 | `rcs_mv` | M | (6964-6978, 15000) | in | `busl`'s track x 6971, on north |
 | `rcs_mv` | P | (7030, 15291-15311) | out | poly row east of the pad (6966,15305) |
 | `rcs_mv` | P | (7040, 16770-16790) | out | poly row east of the pad (6968,16780), under the tracks and on |
-| `lc3_e9577` | M | (5315-5329, 15000) | in | `busl`'s track x 5322, on north |
-| `lc3_e9577` | D | (4780, 15362-15382) | out | diffusion wire on west into the left array |
-| `lc3_e9621` | M | (5272-5286, 15000) | in | `busl`'s track x 5279, on north |
-| `lc3_e9621` | D | (4780, 15841-15856) | out | diffusion wire on west into the left array |
-| `lc3_e9665` | M | (5228-5242, 15000) | in | `busl`'s track x 5235, on north |
-| `lc3_e9665` | D | (4780, 16493-16508) | out | diffusion wire on west into the left array |
-| `lc3_e9708` | M | (5185-5199, 15000) | in | `busl`'s track x 5192, on north |
-| `lc3_e9708` | D | (4780, 16970-16985) | out | diffusion wire on west into the left array |
-| `lc3_e9750` | M | (5141-5155, 15000) | in | `busl`'s track x 5148, on north |
-| `lc3_e9750` | D | (4780, 17447-17461) | out | diffusion wire on west into the left array |
-| `lc3_e9793` | M | (5098-5112, 15000) | in | `busl`'s track x 5105, on north |
-| `lc3_e9793` | D | (4780, 17924-17938) | out | diffusion wire on west into the left array |
+| `cdp3_cw_c7` | M | (5315-5329, 15000) | in | `busl`'s track x 5322, on north |
+| `cdp3_cw_c7` | D | (4780, 15362-15382) | out | diffusion wire on west into the left array |
+| `cdp3_cw_c6` | M | (5272-5286, 15000) | in | `busl`'s track x 5279, on north |
+| `cdp3_cw_c6` | D | (4780, 15841-15856) | out | diffusion wire on west into the left array |
+| `cdp3_cw_c5` | M | (5228-5242, 15000) | in | `busl`'s track x 5235, on north |
+| `cdp3_cw_c5` | D | (4780, 16493-16508) | out | diffusion wire on west into the left array |
+| `cdp3_cw_c4` | M | (5185-5199, 15000) | in | `busl`'s track x 5192, on north |
+| `cdp3_cw_c4` | D | (4780, 16970-16985) | out | diffusion wire on west into the left array |
+| `cdp3_cw_c3` | M | (5141-5155, 15000) | in | `busl`'s track x 5148, on north |
+| `cdp3_cw_c3` | D | (4780, 17447-17461) | out | diffusion wire on west into the left array |
+| `cdp3_cw_c2` | M | (5098-5112, 15000) | in | `busl`'s track x 5105, on north |
+| `cdp3_cw_c2` | D | (4780, 17924-17938) | out | diffusion wire on west into the left array |
 | `cdp4_bus_s0` | M | (5443-5459, 15000) | in | `busl`'s track x 5451, on north |
 | `cdp4_bus_s0` | P | (4780, 15033-15053) | out | poly row on west into the left array |
 | `lc2_w8450` | M | (4815-4829, 15000) | in | `busl`'s track x 4822, on north |
@@ -1152,7 +1152,7 @@ Round 10: no findings.
 ### Run 9
 
 Round 11 (full review of piece `w9`; fresh Fable 5.2 reviewer; 2026-11-20 11:49 -0600; commit 2ffd23c; images
-`cache/scratch/bl0/review-11/`). Told to suspect: `lc3_e9577`'s strip as diffusion or poly, its
+`cache/scratch/bl0/review-11/`). Told to suspect: `cdp3_cw_c7`'s strip as diffusion or poly, its
 continuity, a poly crossing it, a join from a crossing track, the row south of the box; the metal at
 every pad's ring on all four sides and each pad as a contact; the two poly columns under the bus and
 whether each is the right one; the joins with `busl`'s tracks at y 15000; the row crossings; the thin
@@ -1247,7 +1247,7 @@ Two observations, neither a finding (the reviewer: "comment only"), both read ag
   clean 172/155/90). Not a contact: no ring in either metal shot, no hole in the clean shot (red minus
   green 16-30), the bars at x 7955-7964 and 7978-7987 are 9 px edge lines (the reviewer's `m_x1`..`m_x3`,
   4.3x and 10x, four shots).
-- (5192,15522): chip 2's metal shot has a ring-like blemish where `lc3_e9708`'s track crosses
+- (5192,15522): chip 2's metal shot has a ring-like blemish where `cdp3_cw_c4`'s track crosses
   `cdp3_g_c7`'s row (110/78/45). Chip 1 is bright there (197/161/71), the clean shot cream with no hole
   (209/166/108), the stripped shot has no box (the reviewer's `t_5192.png`, 9x): dirt on chip 2.
 
@@ -1290,7 +1290,7 @@ Round 14: no findings.
 - `rst_n` (the wire `bl0` called w15088) beyond this package: the gate under `bc1`'s rail at (7292-7342, 15088), and the
   poly column south of y 15800 at x 5725-5745 (the bottom-left logic, `bl1`/`bl2`).
 - Beyond this package: `busl_x6820` south of y 17000; `rcs_mv`'s two poly rows east of x 7030 and x 7040
-  (`bc1`, `bc3`); `lc3_e9577`'s diffusion wire west of x 4780 (the left array).
+  (`bc1`, `bc3`); `cdp3_cw_c7`'s diffusion wire west of x 4780 (the left array).
 - Beyond this package: `cdp4_bus_s0`'s poly row west of x 4780; `lc2_w8450`'s poly row east of x 4930.
 - The six diffusion wires west of x 4780 (the left array's side).
 - **The six lines of piece `t6` north of y 15000** (run 12; `busl`'s region, drawn by no one): the tracks x
@@ -1310,7 +1310,7 @@ Round 14: no findings.
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
 - G1's input ("a track x 4909 from the north reaches the west row's end; source not traced"; Not done, "its west row to the pad (4909,15088) and the track x 4909 north"): traced by `busl` run 9 (piece `p2`; firm). **The line is `rst_n`**, from `lc3`'s port (5475,10400) by a poly row y 10663, a pad (4907,10663) and the track x 4909, 4,400 px south without pad or contact. So `bl0_w15412` = NOT `rst_n`, a fourth copy of the reset in `rst`'s sense (high while RES and LPSTB are both low). The pad's contact is at (4909,15087); the track ends there (bare ground to y 15409, where `bl0_w15412`'s track begins on the same position). The port `P 5700,15078-15098` is met; `busl` drew the last 88 px of the track, the pad and the row from the pad to x 5700 inside this package's region. The label of G1's input is renamed at the next refresh.
-- Seven more tracks arrive from `busl` at y 15000 and are not followed: the six through lines `lc3_e9577`..`lc3_e9793` (x 5322, 5279, 5235, 5192, 5148, 5105; the follower's ends (5326,15381), (5284,15859), (5239,16506), (5194,16981), (5151,17462), (5107,17938)) and `lc2_w8450`'s second branch (x 4822; follower: to (4823,16690)). A metal jog on the row y 15088 at x 5400-5500 is another net's track (x 5495 north, x 5410 south), not followed.
+- Seven more tracks arrive from `busl` at y 15000 and are not followed: the six through lines `cdp3_cw_c7`..`cdp3_cw_c2` (x 5322, 5279, 5235, 5192, 5148, 5105; the follower's ends (5326,15381), (5284,15859), (5239,16506), (5194,16981), (5151,17462), (5107,17938)) and `lc2_w8450`'s second branch (x 4822; follower: to (4823,16690)). A metal jog on the row y 15088 at x 5400-5500 is another net's track (x 5495 north, x 5410 south), not followed.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20, third batch)
 

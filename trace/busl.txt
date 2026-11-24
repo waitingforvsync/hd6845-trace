@@ -563,12 +563,12 @@ P 6494,13744 x7560 w=20               # the row, east into the block of cdp4's g
 N P 7000,13744 rsel13_buf
 
 # =====================================================================================
-# Piece e6 (run 9, 2026-11-20): the six metal lines lc3_e9577 .. lc3_e9793 that leave lc3
+# Piece e6 (run 9, 2026-11-20): the six metal lines cdp3_cw_c7 .. cdp3_cw_c2 that leave lc3
 # south-west as diagonals at y 10400 (x 5915 .. 5588; trace/lc3.txt draws each from the pad of
 # its crossing row y 9577 .. 9793). They keep their order: each diagonal turns south (x 5691 ..
 # 5474), steps west along its own arm of a nest of Ls (y 10928 .. 10752) and runs 4,200 px down
 # the west side of the field on its own track (x 5322 .. 5106), out at y 15000. The sixth,
-# lc3_e9793, has no arm of its own: its metal ends on a pad (5473,10707), a poly goes south from
+# cdp3_cw_c2, has no arm of its own: its metal ends on a pad (5473,10707), a poly goes south from
 # the pad and west along y 10750 UNDER the fifth line's arm (no contact: traps 10, 13) to a pad
 # (5102,10750), where the track x 5105 starts. No other pad, contact or tap on any of the six
 # (scan cache/scratch/busl/r9_scan.txt): they cross the eight diffusion rows of piece h8 and the
@@ -576,26 +576,26 @@ N P 7000,13744 rsel13_buf
 # diffusion row, 48 crossings alike: the rows' colour).
 # =====================================================================================
 M 5915,10400 5691,10624 y10928 x5322 y15000 w=14
-N M 5322,13000 lc3_e9577
+N M 5322,13000 cdp3_cw_c7
 M 5851,10400 5648,10603 y10884 x5279 y15000 w=14
-N M 5279,13000 lc3_e9621
+N M 5279,13000 cdp3_cw_c6
 M 5785,10400 5604,10581 y10840 x5235 y15000 w=14
-N M 5235,13000 lc3_e9665
+N M 5235,13000 cdp3_cw_c5
 M 5722,10400 5562,10560 y10796 x5192 y15000 w=14
-N M 5192,13000 lc3_e9708
+N M 5192,13000 cdp3_cw_c4
 M 5655,10400 5518,10537 y10752 x5148 y15000 w=14
-N M 5148,13000 lc3_e9750
+N M 5148,13000 cdp3_cw_c3
 # the sixth: metal to a pad, a poly hop under the fifth's arm, a pad, the track
 M 5588,10400 5474,10514 y10702 w=14
 P 5458,10688:5492,10727               # the pad under the metal's end
 C 5473,10707 s=24x24
 P 5478,10710 y10750 w=20              # the pad's poly south onto the row
-P 5100,10750 x5490 w=20               # the row y 10750, under lc3_e9750's arm
+P 5100,10750 x5490 w=20               # the row y 10750, under cdp3_cw_c3's arm
 P 5080,10733:5126,10767               # the row's west end pad
 C 5102,10750 s=24x24
 M 5105,10745 y15000 w=14
-N M 5105,13000 lc3_e9793
-N P 5300,10750 lc3_e9793
+N M 5105,13000 cdp3_cw_c2
+N P 5300,10750 cdp3_cw_c2
 
 # =====================================================================================
 # Piece p2 (run 9, 2026-11-20): the two polys that leave lc3 south at y 10400 beside the six
@@ -610,7 +610,7 @@ N P 5300,10750 lc3_e9793
 #              x 5700: bl0's package region, drawn by no one). So rst_n is rst_n.
 #   lc2_w8450: column to y 10641, west to x 5457, diagonal to (5394,10706), row y 10706 west to
 #              the pad (4822,10708); the track x 4822 south, out at y 15000.
-# lc3_e9793's metal x 5474 lies on rst_n's column from y 10514 to 10608 and crosses
+# cdp3_cw_c2's metal x 5474 lies on rst_n's column from y 10514 to 10608 and crosses
 # lc2_w8450's row y 10641; the track x 4909 crosses lc2_w8450's row y 10706 30 px below its
 # own pad; a metal jog of another net lies on the row y 15088 at x 5400-5500: no pad, ring or
 # hole at any of them (traps 13, 15).
@@ -1104,7 +1104,7 @@ C 6146,6847 s=24x24
 P 6148,6847 x6118 w=22                # the poly row on west: a stub
 M 6144,6848 x7300 w=13                # metal east along y 6848 onto cdp2's metal
 N M 6700,6848 cnt_gab                 # was labelled cdp2_w6845 until run 19: that name is the pad (7987,6845)'s net (piece ye)
-# Piece hc: busl_y6805, the metal north of it. From an end pad (6189,6716) of a poly row
+# Piece hc: cdp2_w6845, the metal north of it. From an end pad (6189,6716) of a poly row
 # from the west (seen to x 6040; a stub to x 6160) a metal runs south on x 6191 to a plain
 # corner (6191,6805) and east along y 6805 over the same seven polys, no pad or tap, to a
 # pad (7380,6802) whose poly row runs on east (seen to x 7500; a stub to x 7410). Neither
@@ -1116,7 +1116,7 @@ M 6191,6714 y6805 x7382 w=13          # metal south on x 6191, corner, east alon
 P 7361,6783:7399,6821                 # the east pad
 C 7380,6802 s=24x24
 P 7378,6802 x7410 w=22                # the poly row on east: drawn on by piece yd (run 19)
-N M 6700,6805 busl_y6805
+N M 6700,6805 cdp2_w6845
 # =====================================================================================
 # Run 17 (2026-11-21): the northern part's leftovers. Items (a), (b) and line Q of the Next
 # list are three wires: pieces qc, qa, qb.
@@ -1185,7 +1185,7 @@ P 6445,7431 x7318 y7256 x7600 w=20    # row y 7431 east, column x 7318 north (un
 N P 7000,7431 busl_y7432
 N P 7500,7256 busl_y7432
 # =====================================================================================
-# Piece w6 (run 18, 2026-11-24): the six poly rows lc3_e9577 .. lc3_e9793 east of lc3's
+# Piece w6 (run 18, 2026-11-24): the six poly rows cdp3_cw_c7 .. cdp3_cw_c2 east of lc3's
 # ports at x 6450. Each is one straight poly row (no step: centres within 5 px along the
 # whole length, tools/busl_roww.py) from x 6450 east under twenty-three thin metal tracks
 # (x 6472 .. 7554; the track positions x 6818, 7165, 7511 are empty and the rows lie in the
@@ -1197,26 +1197,20 @@ N P 7500,7256 busl_y7432
 # clean shot between the rows is pink field under every track and open field between
 # them). The metals y 9756 (piece qa) and y 9798 (piece qc) lie on the rows y 9753 and
 # y 9796 west of x 6480 / x 6520 without a contact (as lc3's file says of their west parts).
-P 6445,9578 x7605 w=20                # row 1: lc3_e9577 -> cdp3_cw_c7
-P 6445,9622 x7605 w=20                # row 2: lc3_e9621 -> cdp3_cw_c6
-P 6445,9666 x7605 w=20                # row 3: lc3_e9665 -> cdp3_cw_c5
-P 6445,9710 x7605 w=20                # row 4: lc3_e9708 -> cdp3_cw_c4
-P 6445,9753 x7605 w=20                # row 5: lc3_e9750 -> cdp3_cw_c3
-P 6445,9796 x7605 w=20                # row 6: lc3_e9793 -> cdp3_cw_c2
+P 6445,9578 x7605 w=20                # row 1: lc3 wire e9577 -> cdp3_cw_c7
+P 6445,9622 x7605 w=20                # row 2: lc3 wire e9621 -> cdp3_cw_c6
+P 6445,9666 x7605 w=20                # row 3: lc3 wire e9665 -> cdp3_cw_c5
+P 6445,9710 x7605 w=20                # row 4: lc3 wire e9708 -> cdp3_cw_c4
+P 6445,9753 x7605 w=20                # row 5: lc3 wire e9750 -> cdp3_cw_c3
+P 6445,9796 x7605 w=20                # row 6: lc3 wire e9793 -> cdp3_cw_c2
 N P 7000,9578 cdp3_cw_c7
 N P 7000,9622 cdp3_cw_c6
 N P 7000,9666 cdp3_cw_c5
 N P 7000,9710 cdp3_cw_c4
 N P 7000,9753 cdp3_cw_c3
 N P 7000,9796 cdp3_cw_c2
-@alias cdp3_cw_c7 lc3_e9577
-@alias cdp3_cw_c6 lc3_e9621
-@alias cdp3_cw_c5 lc3_e9665
-@alias cdp3_cw_c4 lc3_e9708
-@alias cdp3_cw_c3 lc3_e9750
-@alias cdp3_cw_c2 lc3_e9793
 # =====================================================================================
-# Piece ya (run 18, 2026-11-24): tc1_p4308 is ck_a. tc2's poly from its pad (6490,6108)
+# Piece ya (run 18, 2026-11-24): tc1 wire p4308 is ck_a. tc2's poly from its pad (6490,6108)
 # (`P 6492,6118 y6400 w=18`) runs on south from y 6400 as a straight poly column (cream
 # x 6488-6503 under the metals) under seven horizontal metals (y 6416 amrw's, y 6459
 # undrawn, y 6501 .. 6676 slbus's five: plain crossings, no pad, no hole), in the open from
@@ -1233,9 +1227,8 @@ C 6491,6759 s=24x24
 M 6491,6760 x7424 y7155 w=13          # metal y 6762 east, corner, track x 7424 south onto bw's metal
 N M 7000,6760 ck_a
 N P 6496,6600 ck_a
-@alias ck_a tc1_p4308
 # =====================================================================================
-# Piece yb: tc1_m6817 is cnt_bus_b. tc2's poly from its pad (6533,6152)
+# Piece yb: tc1 wire m6817 is cnt_bus_b. tc2's poly from its pad (6533,6152)
 # (`P 6534,6152 y6400 w=20`) runs on south from y 6400 as a straight poly column (cream
 # x 6531-6546) under the same seven metals (plain) to an END pad (6538,6717): ring and
 # bright centre in both chips, pits, poly from the north only, metal east only. The pad's
@@ -1250,7 +1243,6 @@ C 6538,6717 s=24x24
 M 6538,6717 x7468 y7155 w=13          # metal y 6718 east, corner, track x 7468 south onto bw's metal
 N M 7000,6717 cnt_bus_b
 N P 6539,6600 cnt_bus_b
-@alias cnt_bus_b tc1_m6817
 # =====================================================================================
 # Piece yc (run 19, 2026-11-24): the horizontal metal y 6459 is a link of rcs_thin_e's line,
 # which is drawn here from ur's pad (3968,6410) (trace/ur.txt: the pad whose metal comes from
@@ -1308,14 +1300,13 @@ N P 9000,6456 rcs_thin_e
 # the west (y 6757, 6802, 6845) and three leave (fld's cnt_la_a_n from y 6757 to y 6800; the
 # two below).
 #
-# Piece yd: busl_y6805 is cdp2_w6845. The row y 6802 from the pad (7380,6802) (piece hc) runs
+# Piece yd: busl wire y6805 is cdp2_w6845. The row y 6802 from the pad (7380,6802) (piece hc) runs
 # east under the tracks x 7424, 7468, 7533 and cdp2's and eofw's metals (plain crossings, no
 # pad) to x 7868, turns south as a column x 7855-7868 (open poly, orange in both metal
 # shots) to y 6845 and runs east along y 6845 to cdp2's pad (7987,6845), whose metal x 7988
 # goes south to the pad (7878,8315) (cdp2: an input of the cluster beside cdp3's row A).
 # East of that pad there is field (x 8029-8041): the row ends on the pad.
 P 7400,6802 x7862 y6847 x7975 w=20
-@alias cdp2_w6845 busl_y6805
 #
 # Piece ye: the pad (7335,6845)'s row is cnt_gab. cdp2's row from its pad (7335,6845) (kept
 # there to x 7800; piece hb's metal y 6848 arrives on that pad from the west) turns south at

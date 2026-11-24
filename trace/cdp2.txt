@@ -591,7 +591,7 @@ C 7987,6845
 # the rows y 6802 and y 6889 read cream 213/166/110: tools/px.py row 6845 7826 7858 3 acid1b). The row
 # from the pad (7335,6845) turns south at x 7809-7827 to y 6888, runs round this pad and comes back up
 # to y 6845 at x 8080 (cnt_gab: trace/busl.txt, piece ye); the pad (7987,6845)'s own row comes from the
-# row y 6802 by a column x 7855-7868 (busl_y6805: trace/busl.txt, piece yd). Only the west row's stretch
+# row y 6802 by a column x 7855-7868 (cdp2_w6845: trace/busl.txt, piece yd). Only the west row's stretch
 # as far as x 7800 is kept here.
 P 7335,6836:7800,6858                 # the poly row of the pad (7335,6845), east to the knot (cnt_gab)
 P 7318,6828:7352,6862

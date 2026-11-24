@@ -244,7 +244,7 @@ P 6257,4815:6292,4850
 C 6274,4832
 M 6276,4832 y5612 x6400
 
-# ---- tc1_p4308 = the wire `tc2` called m6490: tc2's row y 5003 runs on west to a pad (6317,5000) (u4.png: bare
+# ---- ck_a = the wire `tc2` called m6490: tc2's row y 5003 runs on west to a pad (6317,5000) (u4.png: bare
 # ground north and west of the pad); metal south, corner (6320,5569), east onto tc2's metal
 P 6405,5003 x6317
 P 6300,4984:6335,5018

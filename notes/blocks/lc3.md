@@ -226,7 +226,7 @@ contacts (`textmap.py 6060 9728 6106 9772 3 --acid`: metal whole in both chips, 
 
 | Row | y | West end | East end |
 |---|---|---|---|
-| 1-6 | 9577, 9621, 9665, 9708, 9750, 9793 | pads (6037,9581), (5993,9623), (5950,9667), (5908,9711), (5865,9754), (5822,9797): the tops of six vertical metals (a staircase) | the east edge (`lc3_e9577` ... `lc3_e9793`) |
+| 1-6 | 9577, 9621, 9665, 9708, 9750, 9793 | pads (6037,9581), (5993,9623), (5950,9667), (5908,9711), (5865,9754), (5822,9797): the tops of six vertical metals (a staircase) | the east edge (`cdp3_cw_c7` ... `cdp3_cw_c2`) |
 | 7 | 9838 | END pad (5517,9838) of `lc2_w9079`'s track | pad (6386,9840), metal x 6379-6393 south |
 | 8 | 9880 | END pad (5558,9882) of `rst_c`'s track | pad (6298,9884) on the fifth line |
 | 9 | 9947 | stage B0's clock pad (5298,9990) | pad (6211,9948) on `lc3_w9947` |
@@ -514,7 +514,7 @@ Round 5: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
-- The six diagonals and the two polys at y 10400 ("sources and destinations not followed"): followed through the left bus field by `busl` run 9 (pieces `e6`, `p2`; no uncertain item). `lc3_e9577`..`lc3_e9793` are six through lines: they keep their order through a nest of Ls and run down six tracks (x 5322 .. 5105) out of the field at y 15000 with no tap (believed from the follower: each ends at one row of the left array's lower part). `rst_n`'s poly (5475,10400) runs to the track x 4909 and down the field's west edge to `bl0`'s wide inverter: `bl0_w15412` = NOT `rst_n`. `lc2_w8450`'s poly (5541,10400) is a second branch of that net: by a row y 10706 to a pad (4822,10708) and the track x 4822 south out of the field. All of this package's ports at y 10400 are now met but the VCC metal.
+- The six diagonals and the two polys at y 10400 ("sources and destinations not followed"): followed through the left bus field by `busl` run 9 (pieces `e6`, `p2`; no uncertain item). `cdp3_cw_c7`..`cdp3_cw_c2` are six through lines: they keep their order through a nest of Ls and run down six tracks (x 5322 .. 5105) out of the field at y 15000 with no tap (believed from the follower: each ends at one row of the left array's lower part). `rst_n`'s poly (5475,10400) runs to the track x 4909 and down the field's west edge to `bl0`'s wide inverter: `bl0_w15412` = NOT `rst_n`. `lc2_w8450`'s poly (5541,10400) is a second branch of that net: by a row y 10706 to a pad (4822,10708) and the track x 4822 south out of the field. All of this package's ports at y 10400 are now met but the VCC metal.
 
 ## Corrections (coordinator, from the handoffs of `busl` run 15, 2026-11-21)
 
@@ -532,7 +532,7 @@ Round 5: no findings that change a connection.
   stage-select gate's output (`busl` run 17, piece `qc`; the wire firm, the name resting on `lc2`'s Ambiguity 8).
   `lc3_e9756` runs on east and north as line Q to the poly rows y 7474 / y 7300, drawn to x 7600, no tap
   (piece `qa`). Evidence: `notes/blocks/busl.md`, "Pieces `qc`, `qa`, `qb` (run 17)".
-- The six poly rows `lc3_e9577` .. `lc3_e9793` ("come from the east edge"): each runs straight on east of x 6450
+- The six poly rows `cdp3_cw_c7` .. `cdp3_cw_c2` ("come from the east edge"): each runs straight on east of x 6450
   for 1,150 px, without pad, contact or tee, onto `cdp3`'s channel D rows at x 7600: they are `cdp3_cw_c7` ..
   `cdp3_cw_c2`, row C's west outputs (`busl` run 18, piece `w6`; firm). With `busl`'s piece `e6`, `bl0` and
   `eof`'s piece `rj`, row C's bits reach the selector of the left array's rows s8-s13 (believed R12's bits 0-5,

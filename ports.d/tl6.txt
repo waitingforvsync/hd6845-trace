@@ -35,9 +35,9 @@ rst_ck        P  6392,3994-4012  ?    into fld's pad (6400,4005)
 tcw_c        P  6310,4125-4143  ?    into fld's pad (6318,4135)
 tc1_o3527    M  6400,4472-4492  in   the bus metal y 4482, on east as tc2's piece
 ras_o0_alt2  M  6400,4777-4797  ?    the bus metal y 4787, on east as tc2's piece
-tc1_p4308    P  6400,4994-5012  ?    onto tc2's row y 5003; west end on the pad (6317,5000)
+ck_a    P  6400,4994-5012  ?    onto tc2's row y 5003; west end on the pad (6317,5000)
 tc2_o5175    P  6400,5163-5183  in   onto tc2's row y 5173 (its NOR's output); west to r9m's pad (5845,5045): = tc2_o5175
-tc1_p4308    M  6400,5563-5575  ?    = tc1_p4308: onto tc2's metal, from the pad (6317,5000)
+ck_a    M  6400,5563-5575  ?    = ck_a: onto tc2's metal, from the pad (6317,5000)
 lc3_w9947    M  6400,5606-5618  ?    = lc3_w9947: onto tc2's metal, from the pad (6274,4832)
 tc2_m6404    M  6400,6026-6038  ?    onto tc2's metal, from the pad (6229,4872)
 vss          M  6400,6193-6245  -    the wide ground metal, on east as tc2's piece

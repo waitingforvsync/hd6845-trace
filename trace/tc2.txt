@@ -53,7 +53,7 @@ P 6436,5026:6468,5068
 C 6450,5045
 N P 7017,4750 tc1_x1
 
-# --- tc1_p4308 (the input of tc1's inverter tc1_o4280): its pad (6620,4436) is tc1's; the metal
+# --- ck_a (the input of tc1's inverter tc1_o4280): its pad (6620,4436) is tc1's; the metal
 #     x 6612-6634 runs south (follower: (6623,4436) to (6622,5006)) to the pad (6620,5002); poly
 #     row y 4993-5012 west, under the metals x 6450 (tc1_x1) and x 6400-6417 without a pad, on
 #     past x 6400 (row5003.png 4.2x, three shots). East of the pad: field.
@@ -61,7 +61,7 @@ M 6623,4440 y5008 w=20
 P 6600,4984:6640,5020
 C 6620,5002
 P 6610,5003 x6400 w=18
-N P 6500,5003 tc1_p4308
+N P 6500,5003 ck_a
 
 # --- the NOR  tc2_o5175 = NOR(tc1_x1, fld_b_in)  (lg2.png 3.5x, node5.png 5x, lg4.png, lg5.png)
 # Diffusion strip x 6481-6520 from y 5096 to y 5250, west of the rail; each end is one
@@ -120,8 +120,8 @@ P 6437,4769:6467,4801
 C 6447,4786
 M 6455,4788 x6400 w=20
 
-# --- tc1_m6817: tc1's thin metal ends in a foot (6788-6826, 4366-4380), from which the metal
-#     goes on south at x 6789-6805 (m6817.png 4.6x; text map 6770 4405 6825 4470: over tc1_p4308's
+# --- cnt_bus_b: tc1's thin metal ends in a foot (6788-6826, 4366-4380), from which the metal
+#     goes on south at x 6789-6805 (m6817.png 4.6x; text map 6770 4405 6825 4470: over ck_a's
 #     row y 4438 the metal is whole in both chips, bars only at the row's edges, no hole in the
 #     clean shot: no contact; tc2_runs.py col 6793 4380 4815: no run over 21 px in chip 2) to the
 #     pad (6796,4829). Poly row y 4821-4837 west to the pad (6492,4828). Metal west along y 4834,
@@ -142,7 +142,7 @@ M 6500,4832 6364,4834 6364,5525 6494,5525 6494,5902 6536,5902 6536,6158 w=18
 P 6515,6134:6551,6170
 C 6533,6152
 P 6534,6152 y6400 w=20
-N P 6600,4829 tc1_m6817
+N P 6600,4829 cnt_bus_b
 
 # ===== Piece 3 (2026-11-17): the VCC rail through the crossing field.
 # tcw draws it to y 4455 (x 6687-6737, labelled vcc there through tc1's piece), fld from y 4990
@@ -339,7 +339,7 @@ P 8096,6183:8135,6202
 # Views: g2_pad6485.png (4.6x, four shots: the three pads), g2_nest1.png, g2_nest2.png (4.4x
 # tiles of the four corners, metal and clean), g2_polyS.png (4x, three shots, y 6125-6415).
 #
-# --- tc1_p4308: pad (6490,6108) (ring and bright centre in both metal shots, green hole in
+# --- ck_a: pad (6490,6108) (ring and bright centre in both metal shots, green hole in
 #     the pad in the clean shot). Metal north x 6480-6500 to y 5938, west to x 6448, north
 #     x 6438-6458 to y 5567, west past x 6400 (follower: on to x 6320 and north, end
 #     (6318,4999)); plain corners over field, no pad. Poly from the pad south x 6483-6501,
@@ -348,7 +348,7 @@ P 6475,6092:6508,6126
 C 6490,6108
 M 6490,6116 y5938 x6448 y5567 x6400 w=20
 P 6492,6118 y6400 w=18
-N M 6448,5750 tc1_p4308
+N M 6448,5750 ck_a
 # --- lc3_w9947: pad (6447,6150). Metal north x 6437-6457 to y 5981, west to x 6406, north
 #     x 6396-6416 (on the region's west edge) to y 5611, west past x 6400 (follower: on to
 #     x 6271 and north, end (6276,4825)). Poly from the pad south x 6443-6460 past y 6400.

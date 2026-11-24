@@ -17,7 +17,7 @@ Piece 3: the row y 5045 / y 5173, the row y 6238, the wide ground metal. **Eleve
 named nets, all without a `?` item** (`tools/unsure.py`): the wire `tl5` called w4395 = `tcw_m6320`,
 `c4l_gab`, the wire `tl5` called w4633 = `tcw_c`, `tl5_w4503` = the wire `tl5` called w4850, `ras_o0_alt2` =
 `ras_o0_alt2`, the wire `tl5` called w5544 = `tc1_o3527`, `rst_ck`, `lc3_w9947` (`tcw`'s gate line and `tc2`'s metal x 6447),
-`tc1_p4308` = the wire `tc2` called m6490, `tc2_o5175` = the wire `r9m` called l3, and U11 = `tc2_m6404`; `ral_stb` is taken
+`ck_a` = the wire `tc2` called m6490, `tc2_o5175` = the wire `r9m` called l3, and U11 = `tc2_m6404`; `ral_stb` is taken
 from `tc2`'s port to the south edge. Full extraction: 2299 nets, 4085 transistors (none
 added), 0 errors, 0 warnings. Not traced: Not done (one pad 13 px beyond the east edge;
 `tcw`'s own bus at x 6205-6400, y 2700-4420 was not re-read).
@@ -185,11 +185,11 @@ ends on a pad at about (6413,2617), 13 px beyond the strip's edge: seen on `w2.p
 drawn). `tcw`'s track x 6276 (`tcw_m6278`, drawn by `tcw` to y 2700) runs on north to a corner
 (6276,2665) and east across x 6400: drawn here.
 
-**South of the field**, one more metal of the nest: `tc2`'s row y 5003 (`tc1_p4308`) runs on
+**South of the field**, one more metal of the nest: `tc2`'s row y 5003 (`ck_a`) runs on
 west to a pad (6317,5000); the pad's metal goes south along x 6320 to a corner (6320,5569) and
-east onto `tc2`'s metal of its pad (6490,6108): **`tc1_p4308` = the wire `tc2` called m6490**. So three of
+east onto `tc2`'s metal of its pad (6490,6108): **`ck_a` = the wire `tc2` called m6490**. So three of
 `tc2`'s nest metals are identified from here: `tc2_m6404` is U11, the metal x 6447 is `lc3_w9947` (`tcw`'s gate line)
-(the common gate input of four pull-downs of `tcw`'s column), the wire `tc2` called m6490 is `tc1_p4308`.
+(the common gate input of four pull-downs of `tcw`'s column), the wire `tc2` called m6490 is `ck_a`.
 
 **Seen** (4x tiles as in piece 1):
 
@@ -234,7 +234,7 @@ y 5157-5193 are the edges of the rows y 5045 and y 5173 under the metals.
 - `lc3_w9947`, the common gate input of four pull-downs of `tcw`'s column (a clock or enable by
   its use), comes up from the south: down the field's poly x 6275, the nest, `tc2`'s pad
   (6447,6150) and a poly south across y 6400.
-- `tc1_p4308` (the input of an inverter in `tc1`'s west columns) likewise comes up from the
+- `ck_a` (the input of an inverter in `tc1`'s west columns) likewise comes up from the
   south by `tc2`'s pad (6490,6108).
 - U8, U9, U10 (`tl6_p6101`, `tl6_p6143`, `tl6_p6187`) only pass through: from the north or
   east edge, down the field, to three polys that leave south beside `tc2`'s three.
@@ -310,7 +310,7 @@ and each metal is seen arriving on its own pad at 4x (`u1.png`, `u2.png`); the f
 gives the same pairing. The three south pads (6275,6152), (6318,6110), (6360,6152) and
 `tc2`'s three: `u6.png`, `u7.png`.
 *Joins to other blocks.* `tc2`'s `M 6400,6026 x6406 y6112` (`tc2_m6404`), `M ... y5611 x6396`
-(`lc3_w9947`), `M ... y5567 x6400` (`tc1_p4308`), `P 6610,5003 x6400` (`tc1_p4308`),
+(`lc3_w9947`), `M ... y5567 x6400` (`ck_a`), `P 6610,5003 x6400` (`ck_a`),
 `P 6400,5161:6503,5185` (`tc2_o5175`), its `vss` metal at (6400, 6198-6243); `tcw`'s pad
 `P 6258,4388:6292,4422` (`lc3_w9947`) and its metal `M 6276,... y2700` (`tcw_m6278`); `r9m`'s
 pad and contact at (5845,5043) under the south end of `r9m`'s metal x 5848 (`tc2_o5175`); the pad and contact are drawn here (neither block had them: see Review round 1). `tools/amr_at.py` gives the joined name on every piece of ten of the joins at once and on this one after that contact was drawn. Note: an `@alias` does not connect anything: it only says which name a net keeps once the geometry makes it one net.
@@ -355,10 +355,10 @@ The same ports are in `ports.d/tl6.txt`. West-side ports carry `tl5`'s names (al
 | `tl6_p6187` | metal | (6400, 2567-2579) | ? | U10's north end, from the east |
 | `tc2_m6404` | metal | (6400, 2613-2625) | ? | U11's north end; ends on a pad at about (6413,2617), not drawn |
 | `tcw_m6278` | metal | (6400, 2659-2671) | ? | `tcw`'s track x 6276, from its corner (6276,2665) |
-| `tc1_p4308` | poly | (6400, 4994-5012) | ? | onto `tc2`'s row y 5003 |
+| `ck_a` | poly | (6400, 4994-5012) | ? | onto `tc2`'s row y 5003 |
 | `tc2_o5175` | poly | (6400, 5163-5183) | in | onto `tc2`'s row y 5173 (its NOR's output) |
 | `tc2_o5175` | poly | (5843, 5035-5055) | ? | into `r9m`'s pad (5845,5045) (`tc2_o5175`) |
-| `tc1_p4308` | metal | (6400, 5563-5575) | ? | = `tc1_p4308`; onto `tc2`'s metal |
+| `ck_a` | metal | (6400, 5563-5575) | ? | = `ck_a`; onto `tc2`'s metal |
 | `lc3_w9947` | metal | (6400, 5606-5618) | ? | = `lc3_w9947`; onto `tc2`'s metal |
 | `tc2_m6404` | metal | (6400, 6026-6038) | ? | onto `tc2`'s metal |
 | `vss` | metal | (6400, 6193-6245) | - | the wide ground metal, on east as `tc2`'s piece |

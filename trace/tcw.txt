@@ -343,12 +343,12 @@ D 6598,4240:6650,4258
 P 6622,4238:6650,4264
 B 6617,4236:6652,4260
 
-# ===== tc1_p4308: the row y 4428-4448 from tc1 ends on a pad =====
+# ===== ck_a: the row y 4428-4448 from tc1 ends on a pad =====
 # contact (6622,4440): bright centre in a dark ring in both metal shots, green hole in the clean
 # shot (text map); the thin metal goes south from it into fld's region
 P 6605,4428:6755,4448
 P 6603,4422:6641,4456
 C 6622,4440 s=14x14
 M 6621,4440 y4458 w=12
-N P 6700,4438 tc1_p4308
+N P 6700,4438 ck_a
 

@@ -804,6 +804,6 @@ Round 5: no findings that change a connection.
 ## Corrections (coordinator, from the handoffs of `busl` runs 17-18, 2026-11-24)
 
 - Channel D's tracks `cdp3_cw_c7` .. `c2` ("from the west edge"): west of x 7600 each runs on straight as a poly
-  row to `lc3`'s port at x 6450 (`lc3_e9577` .. `lc3_e9793`), and by `lc3`, `busl` (piece `e6`), `bl0` and `eof`
+  row to `lc3`'s port at x 6450 (`cdp3_cw_c7` .. `cdp3_cw_c2`), and by `lc3`, `busl` (piece `e6`), `bl0` and `eof`
   to the left array's rows s8-s13, onto the selector's upper pass transistor (gate `eof_ga`) (`busl` run 18,
   piece `w6`; firm). `cdp3` has no ports line for them at x 7600.

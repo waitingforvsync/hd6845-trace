@@ -34,16 +34,16 @@ lc3_e9756   M  6450,9749-9763    ?    a metal from the east, south on x 6342
 lc3_e9756   M  6335-6349,10400   ?    the same
 lc3_e9798   M  6450,9791-9805    ?    a metal from the east, south on x 6428
 lc3_e9798   M  6421-6435,10400   ?    the same
-lc3_e9577   P  6450,9566-9588    ?    crossing row 1, to the pad (6037,9581)
-lc3_e9577   M  5915,10400        ?    its metal x 6038, diagonal south-west from y 10277
-lc3_e9621   P  6450,9610-9632    ?    crossing row 2, to the pad (5993,9623)
-lc3_e9621   M  5851,10400        ?    its metal x 5995, diagonal from y 10256
-lc3_e9665   P  6450,9654-9676    ?    crossing row 3, to the pad (5950,9667)
-lc3_e9665   M  5785,10400        ?    its metal x 5952, diagonal from y 10233
-lc3_e9708   P  6450,9697-9719    ?    crossing row 4, to the pad (5908,9711)
-lc3_e9708   M  5722,10400        ?    its metal x 5909, diagonal from y 10213
-lc3_e9750   P  6450,9739-9761    ?    crossing row 5, to the pad (5865,9754)
-lc3_e9750   M  5655,10400        ?    its metal x 5865, diagonal from y 10190
-lc3_e9793   P  6450,9782-9804    ?    crossing row 6, to the pad (5822,9797)
-lc3_e9793   M  5588,10400        ?    its metal x 5822, diagonal from y 10166
+cdp3_cw_c7   P  6450,9566-9588    ?    crossing row 1, to the pad (6037,9581)
+cdp3_cw_c7   M  5915,10400        ?    its metal x 6038, diagonal south-west from y 10277
+cdp3_cw_c6   P  6450,9610-9632    ?    crossing row 2, to the pad (5993,9623)
+cdp3_cw_c6   M  5851,10400        ?    its metal x 5995, diagonal from y 10256
+cdp3_cw_c5   P  6450,9654-9676    ?    crossing row 3, to the pad (5950,9667)
+cdp3_cw_c5   M  5785,10400        ?    its metal x 5952, diagonal from y 10233
+cdp3_cw_c4   P  6450,9697-9719    ?    crossing row 4, to the pad (5908,9711)
+cdp3_cw_c4   M  5722,10400        ?    its metal x 5909, diagonal from y 10213
+cdp3_cw_c3   P  6450,9739-9761    ?    crossing row 5, to the pad (5865,9754)
+cdp3_cw_c3   M  5655,10400        ?    its metal x 5865, diagonal from y 10190
+cdp3_cw_c2   P  6450,9782-9804    ?    crossing row 6, to the pad (5822,9797)
+cdp3_cw_c2   M  5588,10400        ?    its metal x 5822, diagonal from y 10166
 vcc         M  5340-5390,10600   -    the wide metal's foot, on south

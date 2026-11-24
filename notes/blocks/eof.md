@@ -1125,8 +1125,8 @@ inputs are joined to the bus field's row ends**, so what the selector chooses be
   contact.
 - **The joins** (firm: `tools/unsure.py` lists none of the 28 nets). The diffusion line of rows s0-s7 is
   `cdp3_hw_c7` .. `cdp3_hw_c0`, **R13's bits 7-0 inverted** (`cdp3_hw_c#` = NOT `cdp3_h_c#_q1`, the west
-  outputs of `cdp3`'s register row H, which is R13 by its write strobe); of rows s8-s13 it is `lc3_e9577`,
-  `lc3_e9621`, `lc3_e9665`, `lc3_e9708`, `lc3_e9750`, `lc3_e9793` (the six through lines of the
+  outputs of `cdp3`'s register row H, which is R13 by its write strobe); of rows s8-s13 it is `cdp3_cw_c7`,
+  `cdp3_cw_c6`, `cdp3_cw_c5`, `cdp3_cw_c4`, `cdp3_cw_c3`, `cdp3_cw_c2` (the six through lines of the
   left-centre strip; their sources are not followed: believed R12's bits). The band of rows s0-s7 is
   `cdp4_bus_s7` .. `cdp4_bus_s0` (the eight lines compared with R15 and latched by `cdp4`'s row C), of
   rows s8-s13 `cdp3_g_c7` .. `cdp3_g_c2` (the six lines compared with R14 and latched by `cdp4`'s row D).
@@ -2517,7 +2517,7 @@ The path, from `tc2`'s poly to `lc2`'s metal end:
 | Stretch | What | Evidence |
 |---|---|---|
 | `tc2`'s poly | `P 6451,6160 y6400 w=17` from `tc2`'s pad (6447,6150), `lc3_w9947`; `tl6`: its metal is `lc3_w9947`'s | `notes/blocks/tc2.md` (piece 5), `notes/blocks/tl6.md` |
-| the poly x 6443-6460 | on south from y 6400, 725 px, to a pad. It is the middle one of three vertical polys (x 6408, `tc2_m6404`'s, runs on south past the pad; x 6492, `tc1_p4308`'s, ends on a pad (6490,6755)) and keeps its lane: a run within 6 px of x 6452 at 41 of 49 cuts in the clean shot, the others in the open gaps between metals, where the chip-2 stripped shot has it. Fourteen horizontal metals cross it (y 6408-6422, 6453-6465, 6498-6507, 6539-6551, 6584-6596, 6625-6639, 6668-6682, 6799-6811, 6842-6855, 6908-6920, 6952-6964, 6994-7006, 7037-7049, 7080-7093: the last four are the three rows' metals and `rcs_e4`'s), none with a pad, a ring or a hole (Ambiguity 46) | `eof_rows.py diag 6452 7105 6452 6385 --step 15 --reach 28`; `tl5_tracks.py v 6452 6400 7105 --half 2` (clean-shot dips only in the open gaps between the metals: y 6519, 6822, 6974, 7017, 7060); `n_p1.png` (2.5x, metal and chip-2 stripped), overlay `n_o3.png` (1.6x, both stripped shots) |
+| the poly x 6443-6460 | on south from y 6400, 725 px, to a pad. It is the middle one of three vertical polys (x 6408, `tc2_m6404`'s, runs on south past the pad; x 6492, `ck_a`'s, ends on a pad (6490,6755)) and keeps its lane: a run within 6 px of x 6452 at 41 of 49 cuts in the clean shot, the others in the open gaps between metals, where the chip-2 stripped shot has it. Fourteen horizontal metals cross it (y 6408-6422, 6453-6465, 6498-6507, 6539-6551, 6584-6596, 6625-6639, 6668-6682, 6799-6811, 6842-6855, 6908-6920, 6952-6964, 6994-7006, 7037-7049, 7080-7093: the last four are the three rows' metals and `rcs_e4`'s), none with a pad, a ring or a hole (Ambiguity 46) | `eof_rows.py diag 6452 7105 6452 6385 --step 15 --reach 28`; `tl5_tracks.py v 6452 6400 7105 --half 2` (clean-shot dips only in the open gaps between the metals: y 6519, 6822, 6974, 7017, 7060); `n_p1.png` (2.5x, metal and chip-2 stripped), overlay `n_o3.png` (1.6x, both stripped shots) |
 | the pad (6450,7127) | a poly pad x 6432-6470, y 7107-7147: ring and bright centre in both metal shots, a pitted box in the chip-2 stripped shot, a green hole in the clean shot. The poly arrives from the north, the metal leaves east; field south and west (the poly x 6408 passes 15 px west of the pad) | `eof_cchk.py 6450,7125` (hole -28; centre 216 / 223; the east ring not dark); `n_pA.png` (5.6x, four shots) |
 | the metal and the track | east along y 7122-7134 to a corner (6688,7128), south on x 6682-6694 for 1,030 px. Twelve pairs of 8-12 px bars, the edges of the poly rows it crosses (y 7158-7182, 7202-7226, 7246-7269, 7288-7313, 7375-7399, 7418-7443, 7505-7529, 7637-7660, 7768-7791, 7811-7835, 7879-7900, 8028-8052); no break, no hole. No poly under the metal y 7128 (the clean shot has none along it) | `follow.py 6690 7600 N --gap 16` (corner (6683,7130), end (6445,7128)) and `S` (corners (6686,8156), (6644,8153), end (6644,8253)); `tl5_tracks.py v 6687 7140 8150 --half 2`, `h 7128 6465 6680`; `eof_rows.py row 7128 6470 6700`; `n_s3.png` (1.7x), overlay `n_o2a.png` (3.6x, both metal shots) |
 | the L and the second pad | corner (6688,8151), west to (6644,8151), south to a pad with a contact (6645,8276): pad x 6626-6664, y 8257-8296. 30 px of bare ground between this arm and line Q's (the track x 6730's L at y 8190) | `eof_mrun.py col 6666 8120 8190 6660 6672` (the arm's centre y 8151 in both chips); `eof_cchk.py 6645,8275` (hole 8; centre 235 / 170); overlay `n_o2b.png` (3.6x, both metal shots and the clean shot); `n_pB.png` (3.1x, four shots) |
@@ -4220,7 +4220,7 @@ One wire of 5,900 px with five pads and no tap, from the lower inverter's port (
    `tools/follow.py 4732 17300 N --gap 16` ends at (4736,16928), not read) and **south** (found by review
    round 44; the first drawing had only the north side: `tools/tl5_tracks.py v 4736 17380 17800` is without
    metal in both chips in the ring, y 17388-17405 and y 17415-17432, 17 px on each side of the centre,
-   in two 8 px bars at y 17442-17468, the edges of `bl0`'s diffusion wire `lc3_e9750` beneath, and in two
+   in two 8 px bars at y 17442-17468, the edges of `bl0`'s diffusion wire `cdp3_cw_c3` beneath, and in two
    stretches of 9-11 px at y 17588-17598 and y 17612-17620, 150 px beyond the drawn end and not read;
    `tools/eof_mrun.py row 17436 4700 4820`: 4738(11) in both chips; the clean shot pink under it;
    `r37_k1.png`, 5x, four shots; drawn to y 17440, port; the follower runs it on to (4738,17864), not read).
@@ -4885,7 +4885,7 @@ the 28 nets is listed, so every join is firm. In each row:
 
 ```
 t gate eof_ga: eof_strap_s# <-> cdp3_hw_c(7-#)       s0-s7     (cdp3_hw_c# = NOT cdp3_h_c#_q1)
-t gate eof_ga: eof_strap_s# <-> lc3_e9577 .. 9793    s8-s13
+t gate eof_ga: eof_strap_s# <-> cdp3_cw_c7 .. 9793    s8-s13
 t gate eof_gb: eof_strap_s# <-> cdp4_bus_s(7-#)      s0-s7
 t gate eof_gb: eof_strap_s# <-> cdp3_g_c(15-#)       s8-s13    (c7 in s8 .. c2 in s13)
 ```
@@ -10798,7 +10798,7 @@ It reported **one finding, which changes a connection** (where `eof_w16218` leav
 1. **The pad (4735,17410): the thin metal x 4730-4742 also runs on south of the pad.** The trace had only
    the metal north (`M 4736,17410 y17340`) and the row west. `tl5_tracks.py v 4736 17380 17800`: without
    metal in both chips only y 17388-17405 and y 17415-17432 (the ring, 17 px each side, symmetric), then two
-   8 px bars at y 17442-17468 (over `bl0`'s diffusion wire `lc3_e9750`), then metal; `px.py row 17436`
+   8 px bars at y 17442-17468 (over `bl0`'s diffusion wire `cdp3_cw_c3`), then metal; `px.py row 17436`
    against `row 17385`: the same metal at x 4730-4742 in both chips; the clean shot pink under it; the
    follower runs it to (4738,17864). **Confirmed** (`tools/t.sh eof tl5_tracks.py v 4736 17380 17800`: the
    same four stretches and two more at y 17588-17598 and y 17612-17620, beyond what is drawn; chip 2 fails
@@ -10840,7 +10840,7 @@ y 17436, so it is separate from the wide metal and from the track x 4780; open p
 pad and x 4780 with no metal bridge, and at (4780,17408) no hole and no widening (a pass-over); at
 (4736,17452) the metal not widened over `bl0`'s diffusion wire and the clean shot tan without a hole (no
 contact); both `sameconn.py 2851abf` runs `connections identical`. `tools/ports.py` lists the new port
-38 px from `bl0`'s `lc3_e9750` D (4780,17454): the diffusion wire that passes under the track, proximity
+38 px from `bl0`'s `cdp3_cw_c3` D (4780,17454): the diffusion wire that passes under the track, proximity
 only.
 
 It reported **no findings**, and two remarks of geometry or wording, both checked here:
@@ -12534,7 +12534,7 @@ Round 82: no findings that change a connection.
   fifth ring** (x 3966-4100, y 11850-11965; item (b) of the list below, unchanged). (c) the three gap
   rows' west rows and gap 1 under rail E (Ambiguity 184); (d) the box north of the load line's gate
   (`eof_nbox_s#`); (e) the rest of the column x 4590-4700; (f) the pad (4778,17365); (g)
-  `bl0_w15566`'s driver and the twin of `cap18`; (h) the sources of `lc3_e9577` .. `lc3_e9793`; (i)
+  `bl0_w15566`'s driver and the twin of `cap18`; (h) the sources of `cdp3_cw_c7` .. `cdp3_cw_c2`; (i)
   rail G's foot and rail H; as in the lists below. Seen in run 48, not this package's: Vm6 ends on a
   pad (3915,18208) (`larr` draws it to y 18215, "not followed") and has a second pad at about
   (3912,18070) (`r48_foot.png`).
@@ -12557,7 +12557,7 @@ Round 82: no findings that change a connection.
   Views `r47_e1.png`, `r47_f1.png`, `r47_g1.png`; profiles in `cache/scratch/eof/survey.md` (RUN 47).
   (c) the three gap rows' west rows and gap 1 under rail E (Ambiguity 184); (d) the box north of the
   load line's gate (`eof_nbox_s#`); (e) the rest of the column x 4590-4700; (f) the pad (4778,17365);
-  (g) `bl0_w15566`'s driver and the twin of `cap18`; (h) the sources of `lc3_e9577` .. `lc3_e9793`;
+  (g) `bl0_w15566`'s driver and the twin of `cap18`; (h) the sources of `cdp3_cw_c7` .. `cdp3_cw_c2`;
   (i) rail G's foot and rail H; as in the lists below.
 - **Next (after run 46)**: the two pull-downs are drawn (piece `pd`: both nodes are NOT `eof_pdg_s#`), so
   item (a) of the list below is done. In order: (a) **the gate poly west of x 3990** (the row
@@ -12571,8 +12571,8 @@ Round 82: no findings that change a connection.
   leaves the strap's south box west** (4098, 11926-11944): to `larr`'s Z (`larr_z_s#`, drawn to
   x 3900)? (d) the three gap rows' west rows and gap 1 under rail E (Ambiguity 184); (e) the box north
   of the load line's gate (`eof_nbox_s#`); (f) the rest of the column x 4590-4700; (g) the pad
-  (4778,17365); (h) `bl0_w15566`'s driver and the twin of `cap18`; (i) the sources of `lc3_e9577` ..
-  `lc3_e9793`; (j) rail G's foot and rail H; as in the lists below.
+  (4778,17365); (h) `bl0_w15566`'s driver and the twin of `cap18`; (i) the sources of `cdp3_cw_c7` ..
+  `cdp3_cw_c2`; (j) rail G's foot and rail H; as in the lists below.
 - **Next (after run 45)**: the column is drawn to its end (piece `ol`: the compared line is the node of
   a depletion load on rail G; a second load holds the strap's node `eof_wstrap_s#`), so item (a) of the
   list below is done. In order: (a) **what pulls the two nodes down: the west half of the east cell**
@@ -12590,7 +12590,7 @@ Round 82: no findings that change a connection.
   the strap's south box west** (4098, 11926-11944): to `larr`'s Z (`larr_z_s#`, drawn to x 3900)? (c)
   the three gap rows' west rows and gap 1 under rail E (Ambiguity 184); (d) the box north of the load
   line's gate (`eof_nbox_s#`); (e) the rest of the column x 4590-4700; (f) the pad (4778,17365); (g)
-  `bl0_w15566`'s driver and the twin of `cap18`; (h) the sources of `lc3_e9577` .. `lc3_e9793`; (i)
+  `bl0_w15566`'s driver and the twin of `cap18`; (h) the sources of `cdp3_cw_c7` .. `cdp3_cw_c2`; (i)
   rail G's foot (y 18240 on: it turns west) and the other rails of the east cells (H is believed
   `vss`: at its top it meets the band y 10940-11000 that the `vss` metal x 4650-4700 crosses; not
   read); as in the lists below.
@@ -12610,15 +12610,15 @@ Round 82: no findings that change a connection.
   (4096, 18105-18123)): follow each west to the left column, and read x 3080-3380 of gap 1 under rail E
   (Ambiguity 184: the carry out of s6 against line H). (c) the box north of the load line's gate (what
   `eof_nbox_s#` is); (d) the rest of the column; (e) the pad (4778,17365); (f) `bl0_w15566`'s driver and
-  the twin of `cap18`; (g) the sources of `lc3_e9577` .. `lc3_e9793`; as in the lists below.
+  the twin of `cap18`; (g) the sources of `cdp3_cw_c7` .. `cdp3_cw_c2`; as in the lists below.
 - **Next (after run 43)**: the fourteen joins are drawn (piece `rj`: the selector's inputs are
   `cdp3_hw_c#` / `lc3_e#` and `cdp4_bus_s#` / `cdp3_g_c#`), so item (a) of the list below is done but for
   **the band west of x 4420**: each band's west end (port (4420, 11955-11972) in row s1) goes on into the
   array as open poly, toward the thin metal x 4338-4354 and the rail x 4256-4302: what in the row drives
   or reads the compared line. In order: (a) that band west of x 4420 in the master row s1; (b) the box
   north of the load line's gate (what `eof_nbox_s#` is); (c) the rest of the column; (d) the pad
-  (4778,17365); (e) `bl0_w15566`'s driver and the twin of `cap18`; (f) **the sources of `lc3_e9577` ..
-  `lc3_e9793`** (the six lines into rows s8-s13: `lc3`'s six poly rows at its east edge x 6450,
+  (4778,17365); (e) `bl0_w15566`'s driver and the twin of `cap18`; (f) **the sources of `cdp3_cw_c7` ..
+  `cdp3_cw_c2`** (the six lines into rows s8-s13: `lc3`'s six poly rows at its east edge x 6450,
   y 9577-9793; believed R12's outputs, `cdp3`'s row C); as in the lists below.
 - **Next (after run 42)**: the two select lines have their drivers (piece `selg`: `eof_ga` = NOT `rcs_mv`,
   `eof_gb` = NOT `eof_ga`), so item (a) of the list below is done. In order: (a) **the fourteen joins to
@@ -13091,7 +13091,7 @@ Round 82: no findings that change a connection.
 ## Corrections (coordinator, from the handoffs of `busl` runs 17-18, 2026-11-24)
 
 - Among the things "still undrawn" beside the northern part's pieces (runs 10-14): "the poly x 6492
-  (`tc1_p4308`'s)" and "the pad (6535,6715)" are drawn (`busl` run 18, pieces `ya`, `yb`). The pad belongs to a
-  second poly, x 6539 (`tc1_m6817`'s, which is `cnt_bus_b`), not to the poly x 6492 (which is `ck_a`).
+  (`ck_a`'s)" and "the pad (6535,6715)" are drawn (`busl` run 18, pieces `ya`, `yb`). The pad belongs to a
+  second poly, x 6539 (`cnt_bus_b`'s, which is `cnt_bus_b`), not to the poly x 6492 (which is `ck_a`).
 - The selector's labels `eof_mxn_s8` .. `s13` are on the nets `cdp3_cw_c7` .. `c2` (row C's west outputs; `busl`
   run 18, piece `w6`): the sources believed in run 43 are found. The labels stay as the cell's own.

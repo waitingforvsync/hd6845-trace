@@ -280,7 +280,7 @@ inverter the row has a second driver. Two inverters on one net is not impossible
 the joins at `tc1`'s pads (6962,4268) and (6968,3905) should be looked at again with this in
 mind. Nothing in `tc1`'s trace is changed here.
 
-### `tc1_p4308`'s row, y 4428-4448
+### `ck_a`'s row, y 4428-4448
 
 Ends on a pad with a metal contact at (6622,4440) (text map: bright centre in a dark ring in
 both metal shots, green hole in the clean shot); the thin metal leaves south at x 6621 into
@@ -383,8 +383,8 @@ Also in `ports.d/tcw.txt`.
 | Name | Layer | Where | Direction | What |
 |---|---|---|---|---|
 | `tc1_x1_u` | poly | x 6750, y 4383-4401 | out | output of the last inverter, east into `tc1` (its row to the pad (6947,4396)) |
-| `tc1_p4308` | poly | x 6750, y 4428-4448 | in | from `tc1`; ends on the pad (6622,4440) |
-| `tc1_p4308` | metal | x 6615-6627, y 4450 | ? | the thin metal from that pad, south into `fld` |
+| `ck_a` | poly | x 6750, y 4428-4448 | in | from `tc1`; ends on the pad (6622,4440) |
+| `ck_a` | metal | x 6615-6627, y 4450 | ? | the thin metal from that pad, south into `fld` |
 | `lc3_w9947` | poly | pad (6275,4405) | in | top of a vertical poly going south; gate input of four pull-downs |
 | `tcw_m6320` | poly | x 6205, y 3646-3664 | ? | poly going west from the pad (6315,3655) |
 | `tcw_m6278` | metal | x 6270-6282, y 2700 | ? | bus metal, drawn end |
@@ -544,7 +544,7 @@ strips between the rails as runs of `d`), then one view of both stripped shots a
 
 Two poly rows enter this region from `tc1` at x 6750: y 4385-4405 (`tc1_x1_u`, seen to about
 x 6445, passing under the ground rail x 6505-6560, not checked for a channel there) and
-y 4428-4448 (`tc1_p4308`, ending on a pad with a contact at (6620,4436); metal south along
+y 4428-4448 (`ck_a`, ending on a pad with a contact at (6620,4436); metal south along
 x 6621). `tc1_ns2` comes down a poly under the supply rail's edge at x 6725-6740. These are
 this block's to follow.
 

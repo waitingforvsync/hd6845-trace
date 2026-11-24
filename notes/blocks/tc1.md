@@ -24,8 +24,8 @@ and leaves east over the datapath. See "The driver gated by `tc1_g`".
 
 Run 4 (same day, same claim). Traced and extracting (37 transistors in all): **the inverter
 whose output is the strip on `tc1_x1`'s pad**: its load, supply contact and gate tie, added
-to the pull-down that run 3's review found: the strip's node = NOT `tc1_p4308`. See "The
-inverter of `tc1_p4308`". Run 3's work was not merged (its third review round had findings);
+to the pull-down that run 3's review found: the strip's node = NOT `ck_a`. See "The
+inverter of `ck_a`". Run 3's work was not merged (its third review round had findings);
 it goes in with this run's review. Runs 3 and 4 were merged at `3c0efe1`.
 
 Run 6 (same day, same claim). **The second driver**, north of the first: `tc1_o3740` =
@@ -55,8 +55,8 @@ not readable (Ambiguity 20). See "Cell C".
 52 transistors in all, no errors, no warnings.
 
 Run 10 (same day, same claim). **Cell D, the pull-down north of cell C**, with its load:
-`tc1_o2950` = NOT `tc1_m6817`, two transistors; its gate comes from **the north end of
-`tc1_m6817`** (a contact at (6815,2833)). Its output band ends in the box of Ambiguity 20. Of
+`tc1_o2950` = NOT `cnt_bus_b`, two transistors; its gate comes from **the north end of
+`cnt_bus_b`** (a contact at (6815,2833)). Its output band ends in the box of Ambiguity 20. Of
 the three joins there, two are drawn as `?` items with aliases and one is left out: the box
 joins the band to cell C's gate row 1 (J4, assumed), so `tc1_o3095` = NOR(`tc1_o2950`,
 `tc1_x1`, `tc1_m7100`); the thin metal of `tc1_o3740` goes on into an L-shaped metal (J6,
@@ -341,11 +341,11 @@ because of what follows.
 **What else is on that pad** (found by review round 2, then drawn; views `h1.png` ...
 `h5.png`, class map `h4.png`). A diffusion strip y 4270-4293 runs from the pad's west edge
 west under the rail to the diffusion under the thin metal x 6817. Under the rail the strip
-is one side of a pull-down: gate = a poly along y 4298-4320 (`tc1_p4308`; salmon under the
+is one side of a pull-down: gate = a poly along y 4298-4320 (`ck_a`; salmon under the
 rail at x 6878-6912) that turns south at x 6988-7002 (seen to y 4382: not followed),
 other side a diffusion (6877-6914, 4322-4368) with a **rail contact (6888,4338)** (a ring
 6870-6915 x 4320-4365 in both metal shots, a pit in the clean shot). Run 4 found the
-strip's load: it is the output of an inverter ("The inverter of `tc1_p4308`"). How the strip
+strip's load: it is the output of an inverter ("The inverter of `ck_a`"). How the strip
 meets the pad is not resolved (a dark line at x 6940-6957 between plain tan and the pad's
 ring), and **that join is not drawn** (Ambiguity 17). The strip is `?D` where it crosses
 the two gaps.
@@ -382,7 +382,7 @@ and `fld` make the same assumption for the same two rails, AMB-014).
 plus north arm), 51/18 at the west arm, 42/19 on the east column; `tc1_x1` 148/24 (upper
 U), 128/23 (lower U under the rail, the leg now a gate on its west side too), 96/27 (east
 leg and bar), 40/22 (the foot on the east column), 22/18 (the strip over the island's neck,
-`?D`); load 60/37; `tc1_p4308`'s pull-down 37/22. The north arm's and
+`?D`); load 60/37; `ck_a`'s pull-down 37/22. The north arm's and
 the strip's shares rest on `?D` items; the connections do not depend on them.
 
 **How each join was decided.**
@@ -443,16 +443,16 @@ the thin metal x 6968 (table above). So **the equation is firm; that the net on 
 channel metal x 7142 and the bus line y 2641 is this NOR's output is an assumption**
 (trap 17), resting on that one strip.
 
-## The inverter of `tc1_p4308` (run 4, 2026-11-17; traced, extracted)
+## The inverter of `ck_a` (run 4, 2026-11-17; traced, extracted)
 
-    tc1_o4280 = NOT tc1_p4308          (`tc1_o4280` is the strip's node: a net of its own in the trace)
+    tc1_o4280 = NOT ck_a          (`tc1_o4280` is the strip's node: a net of its own in the trace)
 
 Two transistors, at x 6688-7002, y 4243-4384, south of the driver. Views `k1.png` ...
 `k5.png` (overlay `k5.png`), `h1.png` ... `h6.png`.
 
 | Part | Where | Evidence |
 |---|---|---|
-| Pull-down | under the rail x 6858-6908: the strip y 4270-4297 / gate `tc1_p4308` y 4298-4320 / a diffusion (6877-6914, 4322-4368) with the rail contact (6888,4338) | class map `h4.png` (diffusion, poly over channel, diffusion); ring in both metal shots, pit in the clean shot; review rounds 2 and 3 of run 3 |
+| Pull-down | under the rail x 6858-6908: the strip y 4270-4297 / gate `ck_a` y 4298-4320 / a diffusion (6877-6914, 4322-4368) with the rail contact (6888,4338) | class map `h4.png` (diffusion, poly over channel, diffusion); ring in both metal shots, pit in the clean shot; review rounds 2 and 3 of run 3 |
 | Output node | the strip y 4270-4293 from x 6934, just short of the pad (6962,4268), west under the rail (`?D` in the two gaps) to the diffusion under the thin metal x 6817 (6803-6835, 4270-4337) | as above; the thin metal has no contact on it (text map: unbroken bright metal at y 4290-4329, the only dark bar the diffusion's south edge at y 4335) |
 | Load | the supply rail (x 6688-6736 here) contacts a diffusion pad (6690-6742, 4250-4322); a strip y 4268-4292 runs east from it under a poly block (6746-6798, 4246-4310) to the output node | pad: ring in both metal shots, pits at (6705,4283) and (6712,4300) in the clean shot. Block: orange in both chip-2 shots at y 4250-4258, 4270-4290 and 4298-4306 with the strip's two edge lines across it at y 4264 and y 4294 (column profile at x 6770); in the clean shot the middle band is the brighter (poly over a channel) |
 | Gate tie | the block's foot enters a buried-contact box (6774-6802, 4312-4342) on a tab of the output node's diffusion | box: dark ring and pale centre in both chip-2 shots (row y 4332, column x 6788), no pits, no metal |
@@ -478,8 +478,8 @@ Views `m1.png` ... `m5.png` in `cache/scratch/tc1/`; text maps and strips.
 
 | Row | Route | Evidence |
 |---|---|---|
-| `tc1_p4308` (y 4428-4448) | the inverter's gate poly goes on south at x 6988-7006 to y 4448 and turns west along y 4428-4448, under the rail x 6858-6908, the metal of `tc1_m6817` (x 6788-6806) and the supply rail x 6688-6736, to x 6750 (drawn). **Seen further, outside this package:** it ends on a pad with a contact at (6620,4436) (dark ring 6600-6640 x 4415-4455 with a bright centre in both metal shots, green hole in the clean shot); the pad's metal goes south along x 6621 to (6622,5006) by the follower, into `fld`'s upper group | clean shot: salmon all along under the metals, over pink (field: no transistor under either rail; `tools/railprof.py` says the same under the rail); chip-2 stripped shot: orange in the open stretches (x 6910-6990, x 6610-6724). No ring on any metal that crosses it (the metal of `tc1_m6817` is bright over it at y 4434-4446) |
-| `tc1_x1_u` (y 4385-4405) | the thin metal x 6968 runs on south from the pad (6962,4268) to y 4404 (x 6964-6980 there), where a foot spreads west over a poly pad (6928-6966, 4380-4412) onto the **contact (6947,4396)**; the pad's poly runs west along y 4385-4405 under the same three metals to x 6750 (drawn). **Seen further:** west under the ground rail x 6505-6560 (salmon there: not checked for a channel) to about x 6445, where a strip of the chip-2 stripped shot loses it | contact: ring with a bright centre in both metal shots (text map), green hole inside the salmon pad. The 20 px gap at x 6914-6930 between the row and the pad is orange in both metal shots (158/120/53 and 158/76/39) where the row between the two polys is bare ground (172/151/87, 157/125/68). The metal of `tc1_m6817` is bright over the row at y 4392-4401: no contact |
+| `ck_a` (y 4428-4448) | the inverter's gate poly goes on south at x 6988-7006 to y 4448 and turns west along y 4428-4448, under the rail x 6858-6908, the metal of `cnt_bus_b` (x 6788-6806) and the supply rail x 6688-6736, to x 6750 (drawn). **Seen further, outside this package:** it ends on a pad with a contact at (6620,4436) (dark ring 6600-6640 x 4415-4455 with a bright centre in both metal shots, green hole in the clean shot); the pad's metal goes south along x 6621 to (6622,5006) by the follower, into `fld`'s upper group | clean shot: salmon all along under the metals, over pink (field: no transistor under either rail; `tools/railprof.py` says the same under the rail); chip-2 stripped shot: orange in the open stretches (x 6910-6990, x 6610-6724). No ring on any metal that crosses it (the metal of `cnt_bus_b` is bright over it at y 4434-4446) |
+| `tc1_x1_u` (y 4385-4405) | the thin metal x 6968 runs on south from the pad (6962,4268) to y 4404 (x 6964-6980 there), where a foot spreads west over a poly pad (6928-6966, 4380-4412) onto the **contact (6947,4396)**; the pad's poly runs west along y 4385-4405 under the same three metals to x 6750 (drawn). **Seen further:** west under the ground rail x 6505-6560 (salmon there: not checked for a channel) to about x 6445, where a strip of the chip-2 stripped shot loses it | contact: ring with a bright centre in both metal shots (text map), green hole inside the salmon pad. The 20 px gap at x 6914-6930 between the row and the pad is orange in both metal shots (158/120/53 and 158/76/39) where the row between the two polys is bare ground (172/151/87, 157/125/68). The metal of `cnt_bus_b` is bright over the row at y 4392-4401: no contact |
 
 So the input of the inverter comes from the south, from the logic west of the selector
 (`fld`); and the net of the thin metal x 6968, which is `tc1_x1` if the `?P` holds, goes
@@ -581,7 +581,7 @@ metal, which turns west at y 4465-4495 to a contact at about (6965,4480), outsid
 package. With run 6: "the vertical at x 7002-7022" is four pieces, the top one cell B's
 input, the bottom one cell B's output.
 
-**The two thin metals over the buried contacts.** `tc1_m6817` is dark over the ladder
+**The two thin metals over the buried contacts.** `cnt_bus_b` is dark over the ladder
 (y 3458-3500: 29-96 in both metal shots, where the metal reads 180-230) and the thin metal
 x 6948 (`tc1_o3740`) is as dark over the middle node's box (y 3510-3546: 38-85). The box is
 plainly a buried contact with no hole, so a buried contact under a 12 px metal darkens it
@@ -614,7 +614,7 @@ the contact), `w1.png`/`w2.png` (load side, 3.8x), overlays `ov1.png`, `ov2.png`
 | The contact's metal | the upper piece of the channel metal x 7091-7110: `tools/follow.py` takes it north to y 2766, west along y 2766 to x 6947 and north to an end at (6949,2677), in the top bus field. Bare ground between its south end (y 3190) and the lower piece (`tc1_l4_out`, from y 3384) | follower; `a_metal.png` |
 | Middle node (output) | (6928-6968, 3319-3388), with a buried-contact box (6940-6970, 3338-3374) into which the C-shaped poly `tc1_o3353` (run 7) ends from the east | nested outlines at a poly end, as cell B's box (`e1.png`) |
 | Gate row 2, `tc1_l4_out` | poly y 3388-3403 from the contact (7100,3395) (run 1) west across the column to x 6916 | salmon over the column; in the gap x 6914-6928 orange in both metal shots at y 3390-3398 (column profile x 6921); pink field under the rail |
-| Output node, west | band y 3348-3363 from the middle node west under the rail to a region (6800-6836, 3347-3386) under `tc1_m6817` | tan under the rail (207/172/137). In both gaps (x 6843 and x 6921) the chip-2 stripped shot has red minus green 24-36 between edge lines at y 3345 and y 3364 and 2-7 outside them (the calibration at the top of these notes: diffusion 13-17, field 0-4) |
+| Output node, west | band y 3348-3363 from the middle node west under the rail to a region (6800-6836, 3347-3386) under `cnt_bus_b` | tan under the rail (207/172/137). In both gaps (x 6843 and x 6921) the chip-2 stripped shot has red minus green 24-36 between edge lines at y 3345 and y 3364 and 2-7 outside them (the calibration at the top of these notes: diffusion 13-17, field 0-4) |
 | Load | band y 3347-3378 from the region west under a poly block (6748-6798, 3328-3416) to the supply rail's contact region (6694-6742, 3347-3408), contact (6708,3378). The block's bottom runs east as an arm (y 3398-3416) onto a stub of the region (6816-6834, 3380-3416): buried contact (6808-6838, 3394-3420) | block: orange in both metal shots in the open at x 6750 from y 3330 to y 3414, the band's edges as dark lines at y 3346 and y 3374; arm: orange in the gap x 6792-6800 at y 3407 (chip 1: red minus green 67-85); stub: diffusion-coloured from the region down to the arm (text map); supply contact: ring 6695-6722 x 3355-3400, pits |
 
 **The row y 3170-3190 goes on west of the corner** (not drawn west of x 6975): it crosses
@@ -628,7 +628,7 @@ island's NOR(`ras_o0_sel2`, `tc1_w1`). The other two inputs come from the north 
 followed.
 
 **The thin metals over cell A** (all drawn through to y 3250-3300; text maps of each strip
-in both metal shots and the clean shot). `tc1_m6817` over the stub and the arm: dim from
+in both metal shots and the clean shot). `cnt_bus_b` over the stub and the arm: dim from
 y 3374 to y 3422, bright only at x 6818-6824, y 3404-3414 (B-D of 16 in chip 2, B in chip 1;
 cell B's ladder reads 8-A at the same place), no green hole in the clean shot: no contact
 drawn (Ambiguity 18). The thin metal x 6948 (`tc1_o3740`): bright over the finger between
@@ -661,12 +661,12 @@ band, 4.6x), `n1.png` ... `n5.png` (the north end), overlays `ov1.png`, `ov2.png
 | Gate row 2, `tc1_x1` | poly y 3127-3146 from x 6909 across the column, under the channel metal x 7003-7023 (edge bars only) to a pad (7042-7074, 3120-3156) with the **contact (7056,3138)**, the north end of `tc1_x1`'s channel metal x 7048-7068 | contact: bright centre in a dark ring in both chips, green hole; the follower from (7055,3330) north ends at (7054,3134); bare ground north of the pad in both chips. West end: orange to x 6911, the tan of region 2 from x 6902 west (row y 3136) |
 | Rail-contact region 2 | (6859-6902, 3127-3176), contact (6877,3146); finger east y 3152-3166 onto the column between gate rows 2 and 3 | tan box with pits, ring 6861-6892 x 3128-3163 |
 | Gate row 3, `tc1_m7100` | the row y 3170-3190 from the contact (7100,3180) (run 8), now drawn across the column to its end at x 6914 | salmon 245/172/124 over the column (row y 3178) |
-| Bottom region | column y 3190-3231; from it a band y 3206-3222 west under the rail, a strip x 6818-6836 north under `tc1_m6817` to a region (6804-6836, 3080-3106), and a band y 3085-3103 east under the rail back to the middle node | the outline of strip and bottom band is one line round the corner in both metal shots (`c1.png`); row y 3092: tan 206/169/141 from x 6846 to x 6911; strip at y 3160: 206/169/141; bottom band under the rail 205/155/137 (Ambiguity 19) |
+| Bottom region | column y 3190-3231; from it a band y 3206-3222 west under the rail, a strip x 6818-6836 north under `cnt_bus_b` to a region (6804-6836, 3080-3106), and a band y 3085-3103 east under the rail back to the middle node | the outline of strip and bottom band is one line round the corner in both metal shots (`c1.png`); row y 3092: tan 206/169/141 from x 6846 to x 6911; strip at y 3160: 206/169/141; bottom band under the rail 205/155/137 (Ambiguity 19) |
 | Load | band y 3078-3103 from the region west under a poly block (6748-6798, 3028-3120) to the supply rail's contact region (6692-6742, 3058-3160), contacts (6705,3078) and (6705,3136). The block's top runs east as an arm (y 3028-3048) onto a stub (6818-6836, 3034-3084) north of the region: buried contact (6804-6834, 3024-3052) | block: orange in the open at x 6750 from y 3031 to y 3116, edge lines at y 3076 and y 3104; arm: orange in the gap x 6792-6801 at y 3038; stub: tan from y 3036 to the region (column x 6828), with two duller patches at y 3044-3048 and y 3056-3060 |
 
 **The output node wraps rail-contact region 2**: gate row 2 pulls the middle node down to
 finger 2 from the north and gate row 3 pulls the bottom region down to it from the south;
-the two are one node through the strip under `tc1_m6817`.
+the two are one node through the strip under `cnt_bus_b`.
 
 **The north end of gate row 1 (open; Ambiguity 20).** Established: gate row 1's poly is
 one piece from the gate row north to y 2950 and west to about x 6980, with nothing joining it
@@ -697,7 +697,7 @@ NOR(`tc1_ns2`, `tc1_x1`), so `tc1_o3095` would be `tc1_ns2` AND NOT `tc1_x1` AND
 **The metals over the cell.** `tc1_o3740`'s thin metal: bright over the bottom region
 between the region's two edge bars (y 3200-3216; no ring, no hole: the follower's candidate
 (6948,3210) is not a contact), dim over the box y 3077-3113 as over the other two boxes.
-`tc1_m6817`: over the stub and arm as at cells A and B (Ambiguity 18). The channel metal
+`cnt_bus_b`: over the stub and arm as at cells A and B (Ambiguity 18). The channel metal
 x 7003-7023: dim for 12 px below its contact's ring, then only edge bars where gate row 2
 passes under it. The thin metal x 6765-6785 (`tc1_ns2`): its west edge is dim at
 y 3257-3263 in both chips, over plain field in the clean shot: nothing there to contact.
@@ -707,7 +707,7 @@ y 3257-3263 in both chips, over plain field in the clean shot: nothing there to 
 
 ## Cell D: the pull-down north of cell C, and where `tc1_o3740` goes (run 10, 2026-11-17; traced, extracted)
 
-    tc1_o2950 = NOT tc1_m6817                        (traced; the load's gate tie is `?`)
+    tc1_o2950 = NOT cnt_bus_b                        (traced; the load's gate tie is `?`)
     tc1_o3095 = NOR(tc1_o2950, tc1_x1, tc1_m7100)    (assumed: join J4 below)
     tc1_o3740 = NOR(tc1_ns2, tc1_x1_u)             (as before; it goes to the bus line y 2598 if J6 holds)
 
@@ -724,15 +724,15 @@ with its command.
 | Part | Where | Evidence |
 |---|---|---|
 | Rail-contact region | under the rail x 6858-6906, (6873-6920, 2862-2912), contact (6888,2885) | tan box with pits in the clean shot, ring 6876-6901 x 2872-2898 in the metal shot |
-| Gate, `tc1_m6817` | poly y 2912-2930 under the rail, channel x 6873-6918; its west end at x 6853. It is the bottom arm of a **C-shaped poly**: east in the open to x 6984, north along x 6963-6984 to y 2824, west along y 2824-2842 under the rail (over field) to a pad (6806-6838, 2819-2848) with the **contact (6815,2833)**, the north end of the thin metal `tc1_m6817` | `tools/railprof.py 6862 6904 2600 3050`: diffusion / gate 2913-2927 / diffusion. Row y 2920: salmon 232-251 from x 6860 to x 6908, field at x 6842 (chip-2 stripped 149/149), orange in the open x 6926-6980. Contact: bright centre (6808-6818, 2828-2836) in a dark ring in both metal shots, green hole (6814-6822, 2830-2842) in the pad, bare ground north of the pad (text map). The pocket inside the C (6925-6957, 2853-2899) is field (chip-2 stripped 155/153, as the field east of it) |
-| Output band | under the rail y 2930-2963 below the gate; west across the gap to a region (6803-6832, 2896-2964) under `tc1_m6817`; east across the gap to the box | both gaps: chip-2 stripped red minus green 18-39 at y 2946-2956 and about 0 outside (columns x 6845 and x 6921), the measure of cell A's bands |
+| Gate, `cnt_bus_b` | poly y 2912-2930 under the rail, channel x 6873-6918; its west end at x 6853. It is the bottom arm of a **C-shaped poly**: east in the open to x 6984, north along x 6963-6984 to y 2824, west along y 2824-2842 under the rail (over field) to a pad (6806-6838, 2819-2848) with the **contact (6815,2833)**, the north end of the thin metal `cnt_bus_b` | `tools/railprof.py 6862 6904 2600 3050`: diffusion / gate 2913-2927 / diffusion. Row y 2920: salmon 232-251 from x 6860 to x 6908, field at x 6842 (chip-2 stripped 149/149), orange in the open x 6926-6980. Contact: bright centre (6808-6818, 2828-2836) in a dark ring in both metal shots, green hole (6814-6822, 2830-2842) in the pad, bare ground north of the pad (text map). The pocket inside the C (6925-6957, 2853-2899) is field (chip-2 stripped 155/153, as the field east of it) |
+| Output band | under the rail y 2930-2963 below the gate; west across the gap to a region (6803-6832, 2896-2964) under `cnt_bus_b`; east across the gap to the box | both gaps: chip-2 stripped red minus green 18-39 at y 2946-2956 and about 0 outside (columns x 6845 and x 6921), the measure of cell A's bands |
 | Load | supply region (6688-6738, 2905-3000) with contacts (6710,2939) and (6710,2979); a strip y 2940-2968 east under a poly block (6748-6799, 2922-2982) to the region | pits in the clean shot, rings in the metal shot; block salmon from x 6757 in the clean shot and orange from x 6748 in both metal shots (the review), brighter over the strip, edge lines at y 2940 and y 2968 (columns x 6770, x 6790) |
 | Gate tie, **`?`** | a box (6778-6806, 2893-2914) on a tab west of the region's stub, directly above the block's top | pale cell (6780-6797, 2897-2910) with nested outlines; a dark line y 2912-2920 lies between box and block (`tie.png`), so the stem is `?P` and the box `?B`: joined by the build of every load here. Under the thin metal of `tc1_ns2` the chip-2 metal shot is dark over the box (trap 22): no contact drawn |
 
 **Not a contact:** a dark spot about 12 px across at (6811,2948) (the two reviews measured 6803-6815 x 2942-2954 and 6807-6818 x 2943-2952) in the clean shot on the region under
-`tc1_m6817`: both metal shots are bright across it (B-F of 16), no ring. A red dot
+`cnt_bus_b`: both metal shots are bright across it (B-F of 16), no ring. A red dot
 (6852-6856, 2830-2836) in the clean shot where the top arm crosses the gap between
-`tc1_m6817`'s pad and the rail: the gap's bar over poly (trap 2), no hole.
+`cnt_bus_b`'s pad and the rail: the gap's bar over poly (trap 2), no hole.
 
 **The junction (Ambiguity 20).** The band's east end lies under the box (6936-6974,
 2944-2972), on whose east outline cell C's gate row 1 poly ends; the contact (6948,2977) of
@@ -747,7 +747,7 @@ with its command.
 
 **Why J5 is left out.** With it the second driver's output, cell D's output, cell C's gate row
 1 and the bus line would be one net with two loads (60/36 and 28/51): `tc1_o3740` =
-NOR(`tc1_ns2`, `tc1_x1_u`, `tc1_m6817`). That would change a merged equation on an inference
+NOR(`tc1_ns2`, `tc1_x1_u`, `cnt_bus_b`). That would change a merged equation on an inference
 ("the contact must land on something"), which the photos do not show; the same was decided at
 `tc1_o4280` on `tc1_x1` (Ambiguity 17: also a small gate's output running up to a contact of a
 line that a larger gate drives). As drawn, the contact (6948,2977) lands on a patch with no
@@ -781,7 +781,7 @@ south to y 2858 and east to (7690,2858): not drawn); the bus metals y 2684 and y
 vertical (uniform poly, no pad; seen at 2.8x only).
 
 **What it means.** Both drivers of this column send their outputs east over the datapath on
-bus lines of the top bus field: `tc1_o4020` on y 2641, `tc1_o3740` on y 2598. `tc1_m6817`,
+bus lines of the top bus field: `tc1_o4020` on y 2641, `tc1_o3740` on y 2598. `cnt_bus_b`,
 which passes over the gate ties of the drivers and of cells A-C without contact (Ambiguities
 12, 18), is a signal with a gate at its north end: its far end (south of y 4530) is its source.
 
@@ -921,9 +921,9 @@ Run 3's ports (the driver; region edges as drawn):
 |---|---|---|---|---|
 | `tc1_o4020` | M | x 8350, y 2634-2648 (the bus line y 2641), going east | out | NOR(`tc1_g`, `tc1_x1`). The follower gives the metal's end at (9098,2639): not looked at. East of x 8250 it is outside this package
 | `tc1_x1` (run 3's port; closed in run 9: the metal ends on the contact (7056,3138), cell C's gate row 2) | M | x 7048-7068, y 3405, going north | in | the channel metal x 7053 runs on north of the driver's contact; drawn to y 3405 (run 7: no ring on it over y 3405-4060; the candidates (7058,3745), (7057,3717) are a notch with no hole under it). The follower gives its end at (7054,3134) (run 2 saw a contact (7056,3138) there) |
-| `tc1_m6817` | M | x 6811-6823 at y 3905; x 6788-6806 at y 4380, going south | ? | thin metal over the driver's west column, no contact drawn (Ambiguity 12). Follower (started either side of the strip, where it stops): from (6822,3496) south; it does not end at (6809,4379) as the follower says: there it has a foot (6788-6828, 4362-4380), a jog 20 px west, and goes on south at x 6788-6806 (bright again from y 4392 to at least y 4530, with the dark bars of poly rows across it: not followed, contacts not checked); candidates (6818,3883), (6813,3754), (6818,4309); the two at (6820,3977) and (6817,4211) are not contacts (text maps: unbroken metal, no ring) |
+| `cnt_bus_b` | M | x 6811-6823 at y 3905; x 6788-6806 at y 4380, going south | ? | thin metal over the driver's west column, no contact drawn (Ambiguity 12). Follower (started either side of the strip, where it stops): from (6822,3496) south; it does not end at (6809,4379) as the follower says: there it has a foot (6788-6828, 4362-4380), a jog 20 px west, and goes on south at x 6788-6806 (bright again from y 4392 to at least y 4530, with the dark bars of poly rows across it: not followed, contacts not checked); candidates (6818,3883), (6813,3754), (6818,4309); the two at (6820,3977) and (6817,4211) are not contacts (text maps: unbroken metal, no ring) |
 | `tc1_x1_u` (alias of `tc1_x1`) | M | x 6962-6974, y 3905 and y 4300 | ? | the thin metal x 6968: contact on the pad (6962,4268) at the end of `tc1_x1`'s branch; no contact to the driver's diffusion (Ambiguity 13). Follower: from (6966,3806) to (6975,4402) when started either side of the box at y 4033-4068, where it stops; candidates (6970,3947), (6972,4218) are not contacts (review round 1)
-| `tc1_p4308` | P | x 6750, y 4428-4448, going west | in | input of the inverter; ends on the pad (6620,4436), whose metal goes south along x 6621 to (6622,5006) (seen, not drawn) |
+| `ck_a` | P | x 6750, y 4428-4448, going west | in | input of the inverter; ends on the pad (6620,4436), whose metal goes south along x 6621 to (6622,5006) (seen, not drawn) |
 | `tc1_x1_u` | P | x 6750, y 4385-4405, going west | ? | the poly row from the thin metal x 6968's south pad (6947,4396); seen to about x 6445 |
 | `vcc` | M | rail x 6688-6736 at y 4330 | | the supply rail, narrower here than at the driver; goes on south |
 | `tc1_ns2` (closed in run 11: it is `tc1_ns2`) | M | x 6765-6785, y 2800, going north | in | gate 1 of the second driver: the vertical poly under the supply rail's east edge ends at a pad with the contact (6772,3591), and the thin metal x 6765-6785 goes north from it (run 7); drawn to y 2800 (run 10: dark over cell D's gate-tie box, no contact drawn; the review saw it end on a contact at about (6773,2789)) (runs 8, 9: no contact over the loads of cells A and C; the dim west edge at y 3257-3263 is over plain field) |
@@ -938,7 +938,7 @@ Run 3's ports (the driver; region edges as drawn):
 | `tl4_w5068` | P / M | poly x 7160-7176 at y 2500 (north); metal x 8350, y 2677-2691 (east) | ? | through line on the bus track y 2684 |
 | `c4l_l3` | P / M | poly x 7201-7218 at y 2500 (north); metal x 8350, y 2546-2560 (east) | ? | through line on the bus track y 2554 |
 | `vss` | M | the rail x 6858-6906 at y 2500 (it goes on north under a wide metal); its branch y 2614-2666 at x 6750, going west (over the rows of `r8_b5_q` and `tc1_m7100`, no contact) | | |
-| `tc1_m6817` | M | north end on the contact (6815,2833) (run 10) | ? | its gate is cell D's pull-down; its source is at its other end |
+| `cnt_bus_b` | M | north end on the contact (6815,2833) (run 10) | ? | its gate is cell D's pull-down; its source is at its other end |
 | `vss` | M | rail x 6858-6906 at y 2800 (run 10); x 6861-6932 at y 3905; x 6858-6908 at y 4380 (it narrows at y 4238) | | goes on both ways, not followed |
 | `vcc` | M | rail x 6690-6748 at y 3990 and y 4228 | | the same; `tcw` draws it at y 3440-3900 |
 
@@ -1063,13 +1063,13 @@ and touches neither (field at y 3896-3908 and 4056-4070, measured).
      (8370-8410, 4240-4270). Not looked at here.
    If all three hold, the line has two complete inverters on it (low if either input is
    high): possible, but nothing else traced is built so. If J3 is the wrong one, `tc1_x1` =
-   NOT `tc1_p4308` and `shm`'s inverter drives something else. If J1 or J2 is wrong, the
+   NOT `ck_a` and `shm`'s inverter drives something else. If J1 or J2 is wrong, the
    inverter here (with the thin metal x 6968, if J2 is the wrong one) is another net.
    **No reading adopted. J1 is left out of the trace so that no existing equation changes
    on a guess.** Would be settled by: a look at J3 in the clean shot; the thin metal
-   x 6968's other ends (y 3806, y 4402); `tc1_p4308`'s source.
+   x 6968's other ends (y 3806, y 4402); `ck_a`'s source.
 
-18. **The thin metals over cell B's two buried contacts** (run 7). `tc1_m6817` over the
+18. **The thin metals over cell B's two buried contacts** (run 7). `cnt_bus_b` over the
    ladder (6808-6838, 3458-3500) and the thin metal x 6948 (`tc1_o3740`) over the middle
    node's box (6940-6970, 3510-3546) are both dark for about 40 px in both metal shots, as
    in Ambiguities 12 and 13. Readings: (a) no metal contact, the metal passes over a buried
@@ -1081,15 +1081,15 @@ and touches neither (field at y 3896-3908 and 4056-4070, measured).
    cell A's output to cell B's, and cell B's gate row 1 is cell A's output; (b) on the
    x 6948 metal would also short `tc1_o3740` to both. For (b): nothing but the darkness; the
    follower stops at each. **(a) adopted.** Would be settled by either metal's far end
-   (`tc1_m6817` north of y 3300; south of y 4530).
-   Run 8: cell A has the same two stretches (`tc1_m6817` over its stub and arm, y 3374-3422;
+   (`cnt_bus_b` north of y 3300; south of y 4530).
+   Run 8: cell A has the same two stretches (`cnt_bus_b` over its stub and arm, y 3374-3422;
    the thin metal x 6948 over its box, y 3338-3371) and is drawn the same way. Over cell A's
-   arm `tc1_m6817` is brighter at its east edge than over cell B's (B-D against 8-A of 16, in
+   arm `cnt_bus_b` is brighter at its east edge than over cell B's (B-D against 8-A of 16, in
    both chips), still without a green hole in the clean shot. If (b) held at cell A's stub,
-   `tc1_m6817` would be `tc1_o3353`.
-   Run 9: cell C has the same pair (`tc1_m6817` over its stub and arm, y 3024-3084; the thin
+   `cnt_bus_b` would be `tc1_o3353`.
+   Run 9: cell C has the same pair (`cnt_bus_b` over its stub and arm, y 3024-3084; the thin
    metal over its box, y 3077-3113), drawn the same way. Three cells with a dark stretch of
-   `tc1_m6817` over each gate tie: if they were contacts, three outputs would be one net.
+   `cnt_bus_b` over each gate tie: if they were contacts, three outputs would be one net.
 19. **Cell C's strip and bottom band: diffusion or poly?** (run 9). The strip x 6818-6836,
    y 3100-3224 and the band y 3206-3222 under the rail read 203/158/119 and 205/155/137 in
    the clean shot at some samples (red minus green 45-50), between protected diffusion
@@ -1157,7 +1157,7 @@ profiles, text maps, the follower.
 
 | Finding | Outcome |
 |---|---|
-| 1. The pad (6962,4268) is joined from the west by a diffusion strip y 4270-4292 that runs under the rail, where it is one side of a transistor (gate poly y 4297-4318, a rail contact at about (6885,4340) on the other side) | **Confirmed** (my views `h1.png`-`h4.png`, a row profile at y 4280, overlay `h5.png`). Drawn: strip, pull-down, rail contact, the gate poly `tc1_p4308`; the strip's join to the pad `?B`. It makes the extraction's `tc1_x1` a NOR: Ambiguity 17 |
+| 1. The pad (6962,4268) is joined from the west by a diffusion strip y 4270-4292 that runs under the rail, where it is one side of a transistor (gate poly y 4297-4318, a rail contact at about (6885,4340) on the other side) | **Confirmed** (my views `h1.png`-`h4.png`, a row profile at y 4280, overlay `h5.png`). Drawn: strip, pull-down, rail contact, the gate poly `ck_a`; the strip's join to the pad `?B`. It makes the extraction's `tc1_x1` a NOR: Ambiguity 17 |
 | 2. The lower U's left leg starts at x 6862, not 6850, and the diffusion west of it is real | **Confirmed** by row profiles at y 4165 and 4190; redrawn, diffusion added (width only) |
 | 3. The diffusion under `tc1_g`'s west arm reaches x 6786 | **Adopted as `?D`** (a row profile at y 3972 agrees; width only) |
 | 4. The channel metal x 7003-7023 is not drawn | True; it has no contact here. Left in Not done with the reviewer's check |
@@ -1181,7 +1181,7 @@ all fixed.
 |---|---|
 | 1. The rail is drawn 72 px wide to y 4380; south of y 4238 it is x 6858-6908 | **Confirmed** (bare ground from x 6916 at y 4250, 4309, 4345 in both metal shots). Redrawn as two pieces; the contact (6888,4338) is inside the narrow one |
 | 2. The pull-down's gate and source diffusion are x 6876-6914, not 6862-6918 (W about 40, not 56) | **Confirmed** (edge at x 6874, field at x 6858-6866 at y 4345). Redrawn: W 37 |
-| 3. `tc1_p4308` does not come from the east: it turns south at x 6985-7000 | **Confirmed** (clean shot: salmon at x 6988-7000 from y 4322 to y 4382). Drawn to y 4384; notes and port corrected |
+| 3. `ck_a` does not come from the east: it turns south at x 6985-7000 | **Confirmed** (clean shot: salmon at x 6988-7000 from y 4322 to y 4382). Drawn to y 4384; notes and port corrected |
 
 Checked and found correct by the reviewer: the ring's closure round the redrawn leg (the
 lower foot's poly continuous over x 6842-6884); the gate crossing its whole diffusion; no
@@ -1214,7 +1214,7 @@ y 4280 and field at y 4255 and 4304; the column ending at y 4337 with nothing on
 load block being one block with the strip under it from pad to column (matched against the
 pilot load); the supply contact; the gate-tie box (matched against the pilot buried
 contact) with the foot reaching it; the strip separate from the driver's band. Could not
-check: the thin metal x 6968 across y 4277-4297; `tc1_p4308` south of y 4390.
+check: the thin metal x 6968 across y 4277-4297; `ck_a` south of y 4390.
 
 **Round 2** (2026-11-17 10:26 -0600; a fix check of the changes since commit `0833b4a`: the thin metal x 6817
 drawn on south, the `?B` and its alias removed; views `turn.png`, `south.png` in
@@ -1325,7 +1325,7 @@ Round 3: no findings.
 **Round 1** (2026-11-17 12:47 -0600; full review of cell B, x 6690-7160, y 3405-3625, and of its output's
 route south to y 4450, by a fresh agent: views at 4-8.5x in two to four shots in
 `cache/scratch/tc1/review-12/`, colour profiles, text maps, the extraction and
-`tools/unsure.py`). Told to suspect: `tc1_m6817` over the ladder and the thin metal x 6948
+`tools/unsure.py`). Told to suspect: `cnt_bus_b` over the ladder and the thin metal x 6948
 over the box (contact, break or neither); the ladder's build; the band under the rail and its
 joins across the two gaps; the pad's join to `tc1_ns2`'s vertical poly; the field slot and
 the fingers' joins; the column's width; the C-shaped poly and the metal x 7133-7152 over it;
@@ -1361,7 +1361,7 @@ Round 1: no findings.
 **Round 1** (2026-11-17 13:08 -0600; full review of cell A and its input route, x 6690-7160, y 3140-3420, by a
 fresh agent: twelve views at 4-9x in up to four shots in `cache/scratch/tc1/review-13/`,
 colour profiles, text maps, the follower, `tools/railprof.py`, the extraction and
-`tools/unsure.py`). Told to suspect: `tc1_m6817` over the stub and arm (contact, break or
+`tools/unsure.py`). Told to suspect: `cnt_bus_b` over the stub and arm (contact, break or
 neither); the thin metal x 6948 over the finger and over the box; the vertical poly
 x 6986-7006 (one piece, its two joins, a contact to the channel metal beside it); the west
 ends of both gate rows; the band across the two gaps and the load band at the supply
@@ -1376,9 +1376,9 @@ from y 3150 to y 3420 in both chips. The contact (7100,3180) is real, the follow
 y 3184 from the north and at y 3392 from the south with bare ground between, and neither
 channel metal taps the row. Both gate rows end at about x 6914, with field under the rail;
 no third gate. The column starts at y 3285; the finger and the band cross both gaps as
-diffusion and the band joins the region under `tc1_m6817`. The thin metal x 6948 has no ring
+diffusion and the band joins the region under `cnt_bus_b`. The thin metal x 6948 has no ring
 or hole at the finger or the box (one dark speck at (6947,3288), chip-2 stripped shot only).
-`tc1_m6817` over the ladder is neither a contact nor a break (clean shot 209/173/126 there
+`cnt_bus_b` over the ladder is neither a contact nor a break (clean shot 209/173/126 there
 against 143-180/152-164 at four real contacts, no pits); Ambiguity 18 stands, since only the
 green test separates the readings. The stub is continuous with the region and the arm is
 orange in the gap at y 3407; the contacts (6890,3276) and (6708,3378) are real and on the
@@ -1404,7 +1404,7 @@ follower, the extraction). Told to suspect: the strip and bottom band (diffusion
 shape or not); a contact on the bottom region; rail-contact region 2 touching the column
 beside gate row 2; the column's continuity and its separation from cell A; the three
 contacts and whether each metal ends there; gate row 1's poly and the area
-(6925-7010, 2935-2990); `tc1_m6817` over the gate tie; the bands across the gaps, the arm
+(6925-7010, 2935-2990); `cnt_bus_b` over the gate tie; the bands across the gaps, the arm
 and the stub; the supply and rail contacts; anything left out.
 
 **No finding changes a drawn connection.** Two findings about what the notes claimed at the
@@ -1420,7 +1420,7 @@ continuous in both gaps; the column is one piece y 3021-3219, all three gates cr
 separates it from cell A; no contact at (6948,3210); region 2 touches the column only through
 its finger; the contacts (7010,3093) and (7056,3138) are real with bare ground north of each;
 both rail contacts and both supply contacts are real; no contact where gate row 2 passes under
-the metal x 7003-7023; `tc1_m6817` over the gate tie is neither a contact nor a break; the
+the metal x 7003-7023; `cnt_bus_b` over the gate tie is neither a contact nor a break; the
 stub is continuous and the arm crosses its gap; nothing undrawn in the cell. Not checked:
 the rails' supplies; the diffusion under the north cell's poly block; the load band's 4 px
 junction at x 6742-6746 (edge line only).
@@ -1477,14 +1477,14 @@ contact of the thin metal x 6775 on the gate-tie box; the stem rightly `?`; the 
 listed pass-over; no diffusion crossing on the route. Seen, not drawn: the closed contact
 region (6685-6737, 2808-2870); the thin metal x 6775 ending on a contact at about (6773,2789).
 Not checked: which rail is VSS and which VCC; the metal east of x 7900; the far end of
-`tc1_m6817`.
+`cnt_bus_b`.
 
 **A connection changed all the same, by my own decision** (agreed with the owner while the
 round ran: J5 and J6 stay only with direct support in the photos). J5 had none, so it is out:
 the patch under the contact (6948,2977) no longer overlaps the band's end, and the aliases are
 now `tc1_p3051` to `tc1_o2950` and `tc1_m7056` to `tc1_o3740`. Against `1fea1ff` this splits
-one net in two and takes `tc1_m6817` out of `tc1_o3740`'s equation; against main (`d10a1eb`)
-`tc1_o3740`'s equation is unchanged and the new ones are `tc1_o2950` = NOT `tc1_m6817` and
+one net in two and takes `cnt_bus_b` out of `tc1_o3740`'s equation; against main (`d10a1eb`)
+`tc1_o3740`'s equation is unchanged and the new ones are `tc1_o2950` = NOT `cnt_bus_b` and
 `tc1_o3095` = NOR(`tc1_m7100`, `tc1_o2950`, `tc1_x1`).
 
 Round 1: no reviewer finding changes a connection; join J5 taken out by the tracer, which does. Fix check next.
@@ -1564,13 +1564,13 @@ Round 1: no findings that change a connection.
 - The second driver is traced (run 6). The "structure" at (6745-6800, 3810-3900) is open field (run 11: clean shot 161/145/104, chip-2 stripped shot red = green, `tools/opendiff.py 6730 3790 6820 3915` none): nothing to draw.
 - Cells B, A, C and D are traced (runs 7-10), and the column north of cell D (run 11: wiring
   only). Left there: Ambiguities 18 and 19; of Ambiguity 20's three joins two are assumed (`?`)
-  and J5 is not drawn; `tc1_m6817`'s south end (its source). The far ends of the lines of run 11
+  and J5 is not drawn; `cnt_bus_b`'s south end (its source). The far ends of the lines of run 11
   are all outside this package: west of x 6750 (`tcw`), north of y 2500, east of x 8350.
 - The driver gated by `tc1_g` is traced (run 3). Left there: Ambiguities 12 and 13 (the
   two thin metals over it), and the far ends of its ports: `tc1_o4020` east of x 8350 on
   the bus line y 2641 (follower: ends at (9098,2639)), `tc1_x1`'s metal north of y 4060
   (its top end at (7054,3134); the "ring" at about (7055,3730) is not a contact: see the
-  section "The second driver"), `tc1_m6817`, the thin metal x 6968
+  section "The second driver"), `cnt_bus_b`, the thin metal x 6968
   (`tc1_x1_u`: its ends at y 3806 and y 4402 and any other contact; the pad (6962,4268)'s
   west side, now drawn as the strip), both rails. **First for the next run**: the strip's
   node is done (run 4: an inverter); its input and the thin metal x 6968's south end are
@@ -1591,7 +1591,7 @@ Round 1: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of `busl` runs 17-18, 2026-11-24)
 
-- `tc1_p4308` is `ck_a` and `tc1_m6817` ("driven from the south, not followed further") is `cnt_bus_b` (`busl`
+- the wire `tc1` called p4308 is `ck_a` and `cnt_bus_b` ("driven from the south, not followed further") is `cnt_bus_b` (`busl`
   run 18, pieces `ya`, `yb`; firm joins: end pads (6491,6759), (6538,6717), thin metals onto `bw`'s metals). So
   `tc1_o4280` = NOT `ck_a` and `tc1_o2950` = NOT `cnt_bus_b` (each inverter's own equation as marked here).
   `cnt_bus_b` has no driver drawn.

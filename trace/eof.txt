@@ -4012,43 +4012,43 @@ N P 4750,15042 cdp4_bus_s0
 @alias cdp4_bus_s0 eof_mxs_s7
 # row s8
 D 4696,15362:4790,15382
-N D 4750,15372 lc3_e9577
-@alias lc3_e9577 eof_mxn_s8
+N D 4750,15372 cdp3_cw_c7
+@alias cdp3_cw_c7 eof_mxn_s8
 P 4696,15512:4790,15531
 N P 4750,15520 cdp3_g_c7
 @alias cdp3_g_c7 eof_mxs_s8
 # row s9
 D 4696,15839:4790,15859
-N D 4750,15849 lc3_e9621
-@alias lc3_e9621 eof_mxn_s9
+N D 4750,15849 cdp3_cw_c6
+@alias cdp3_cw_c6 eof_mxn_s9
 P 4696,15989:4790,16008
 N P 4750,15997 cdp3_g_c6
 @alias cdp3_g_c6 eof_mxs_s9
 # row s10
 D 4696,16489:4790,16509
-N D 4750,16499 lc3_e9665
-@alias lc3_e9665 eof_mxn_s10
+N D 4750,16499 cdp3_cw_c5
+@alias cdp3_cw_c5 eof_mxn_s10
 P 4696,16639:4790,16658
 N P 4750,16647 cdp3_g_c5
 @alias cdp3_g_c5 eof_mxs_s10
 # row s11
 D 4696,16967:4790,16987
-N D 4750,16977 lc3_e9708
-@alias lc3_e9708 eof_mxn_s11
+N D 4750,16977 cdp3_cw_c4
+@alias cdp3_cw_c4 eof_mxn_s11
 P 4696,17117:4790,17136
 N P 4750,17125 cdp3_g_c4
 @alias cdp3_g_c4 eof_mxs_s11
 # row s12
 D 4696,17444:4790,17464
-N D 4750,17454 lc3_e9750
-@alias lc3_e9750 eof_mxn_s12
+N D 4750,17454 cdp3_cw_c3
+@alias cdp3_cw_c3 eof_mxn_s12
 P 4696,17594:4790,17613
 N P 4750,17602 cdp3_g_c3
 @alias cdp3_g_c3 eof_mxs_s12
 # row s13
 D 4696,17921:4790,17941
-N D 4750,17931 lc3_e9793
-@alias lc3_e9793 eof_mxn_s13
+N D 4750,17931 cdp3_cw_c2
+@alias cdp3_cw_c2 eof_mxn_s13
 P 4696,18071:4790,18090
 N P 4750,18079 cdp3_g_c2
 @alias cdp3_g_c2 eof_mxs_s13

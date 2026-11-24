@@ -83,5 +83,5 @@ Everything in the survey; the far ends of the five lines (table); H4 west of x 1
 
 - The metals north of the pads (7419,7387) (`ck_a`) and (7466,7343) (`cnt_bus_b`), "seen to y 7150", are followed
   (`busl` run 18, pieces `ya`, `yb`): north to corners (7424,6762), (7468,6718), west to end pads (6491,6759),
-  (6538,6717), and by poly columns north to `tc2`'s pads: `tc1_p4308` and `tc1_m6817`. The two metals lie on
+  (6538,6717), and by poly columns north to `tc2`'s pads: `ck_a` and `cnt_bus_b`. The two metals lie on
   `fld`'s poly rows y 6756 / y 6712 for 380 / 420 px without a contact (`busl`'s Ambiguity 23).

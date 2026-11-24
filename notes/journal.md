@@ -2865,7 +2865,7 @@ What they establish (from the tracers' notes; marks as there):
   x 4953-5018 is VCC, one metal with `lc3`'s two VCC metals; the wide metal over the foot rows is VSS
   from `cdp4`'s column-0 plate, not joined to `bc1`'s RL2.
 - `cdp2_w6845` drawn west of `cdp2`'s port to an end pad (6146,6847) (it goes on west in `lc1`'s band);
-  a new wire `busl_y6805`, neither end identified. Seven items of the old Next list read with nothing
+  a new wire `cdp2_w6845`, neither end identified. Seven items of the old Next list read with nothing
   to draw (other packages' wires, or ghosts of a thin metal over field).
 - **`cdp2`'s two series gates are a chain, not a pair** (pieces `gu`, `gh`; 4 transistors; correcting
   the entry of 01:26, which had them "believed cross-coupled"): `cdp2_w7272` = NOT(`cdp2_b_hl` AND
@@ -3059,7 +3059,7 @@ What they establish (from the tracers' notes; marks as there):
   x 4736 / x 4780 (the arm onto (4736,14155): AMB-052), with two more capacitor-like devices (AMB-051).
 - **`eof`: what each row of the left array's east column does** (runs 39-48, 14 cells per piece): the
   line gates a pass transistor onto a strap node (AMB-053); a two-way selector gives that node R13's
-  inverted bit `cdp3_hw_c#` (or `lc3_e9577` .. `lc3_e9793` in rows s8-s13) while `rcs_mv` is low and the
+  inverted bit `cdp3_hw_c#` (or `cdp3_cw_c7` .. `cdp3_cw_c2` in rows s8-s13) while `rcs_mv` is low and the
   row's compared line `cdp4_bus_s#` / `cdp3_g_c#` while it is high (select drivers `eof_ga` = NOT `rcs_mv`,
   `eof_gb` = NOT `eof_ga`, marked); the compared line is `larr`'s line H of the row below (eleven rows
   firm; AMB-054), the node of a depletion load on rail G = `vcc` (AMB-055) pulled down by `eof_pdg_s#` =
@@ -3264,12 +3264,12 @@ What they establish (from the tracers' notes; marks as there):
 - **Line Q is `lc3_e9756`** (piece `qa`; firm): one wire of about 3,500 px to the poly rows y 7474 / y 7300,
   drawn to x 7600, no tap; no driver or load drawn yet. **`busl_y7432`** (piece `qb`; firm; new name): the
   row y 7431, column x 7318, row y 7256 to x 7600; neither end identified.
-- **The six rows `lc3_e9577` .. `lc3_e9793` are `cdp3_cw_c7` .. `cdp3_cw_c2`**, the west outputs of row C
+- **The six rows `cdp3_cw_c7` .. `cdp3_cw_c2` are `cdp3_cw_c7` .. `cdp3_cw_c2`**, the west outputs of row C
   (run 18, piece `w6`; firm for the six joins): each poly row runs 1,150 px from x 6450 to x 7600 without
   pad, contact or tee. So each bit of row C reaches the selector's upper pass transistor (gate `eof_ga`) in
   one of the left array's rows s8-s13, as R13's bits do in s0-s7. Believed: R12's bits 0-5 (row C is R12
   through AMB-040), so the fourteen rows take the display start address.
-- **`tc1_p4308` is `ck_a`, `tc1_m6817` is `cnt_bus_b`** (pieces `ya`, `yb`; firm for the joins): `tc2`'s two
+- **`ck_a` is `ck_a`, `cnt_bus_b` is `cnt_bus_b`** (pieces `ya`, `yb`; firm for the joins): `tc2`'s two
   polys end on pads (6491,6759), (6538,6717), whose thin metals run east and south onto `bw`'s metals. So
   `tc1_o4280` = NOT `ck_a`, `tc1_o2950` = NOT `cnt_bus_b` (each inverter's own equation marked in `tc1`).
   `cnt_bus_b` has no driver drawn. The two metals lie on `fld`'s rows without a contact (the block's
@@ -3279,13 +3279,13 @@ Reviews: round 17 (full) and round 18 (full), fresh Fable 5.2 agents: no finding
 three remarks on comments and notes, all fixed; `tools/sameconn.py` says `connections identical`.
 `notes/operation.md`: the tracer's own change stands.
 
-Applied: master list rows `busl` (runs 17 and 18; Next: the metal y 6459 and `busl_y6805`'s row east of
+Applied: master list rows `busl` (runs 17 and 18; Next: the metal y 6459 and `cdp2_w6845`'s row east of
 (7380,6802)), `lc1`-`lc3` (the six rows and `lc3_e9798` identified; for `lc1`, `busl_y7432` west of x 6450
 and the rows west of the pads (6146,6847), (6189,6716)), `cdp2` (continue) (the rows y 7256, y 7300 east
 of x 7600 and the undrawn wide metal x 7577-7617), `larr` (continue) (the track x 4736 / x 4780 still on
 `busl`'s list; drawn by `eof` as `eof_w15998`: check what is left), `tla` (continue) (the diagonal's 16 px),
 `bw` (continue), `tc2`, and the `rename` row (nine more proposals: `lc3_e9798`, the six `lc3_e#`,
-`tc1_p4308`, `tc1_m6817`). No Re-read items, no traps, no new AMB entries (the block's Ambiguities 22-23
+`ck_a`, `cnt_bus_b`). No Re-read items, no traps, no new AMB entries (the block's Ambiguities 22-23
 are local; `lc2`'s Ambiguity 8 now covers `lc3_e9798`'s net as well). Corrections sections in the notes
 of `lc3`, `cdp3`, `tc1`, `tc2`, `bw`, `eof` and `tla`. Floor plan: the new fragment lines lie in strips
 covered only by coarse blocks other pieces still need; nothing trimmed.
@@ -3317,7 +3317,7 @@ What it establishes (marks as in the tracer's notes):
 - **The metal y 6459 is a link of `rcs_thin_e`'s line** (piece `yc`; firm for the wire): from `ur`'s pad
   (3968,6410) 7,700 px east, no tap, to a buried-contact box (11703,6556) on an undrawn diffusion band at
   the foot of `amr`'s slices. Believed: `rcs_thin_e` (the select of `tla`'s selector) is driven there.
-- **`busl_y6805` is `cdp2_w6845`** (piece `yd`; firm for the join).
+- **`cdp2_w6845` is `cdp2_w6845`** (piece `yd`; firm for the join).
 - **`cnt_gab` comes from the west** (piece `ye`; firm for the wire): `cdp2`'s row from the pad (7335,6845)
   goes round the pad (7987,6845) in a U and east through channel 2 to `wl`'s band H4. With piece `hb` the
   net reaches the end pad (6146,6847); no driver drawn (AMB-017 updated: the source half found).

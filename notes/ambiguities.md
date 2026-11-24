@@ -504,7 +504,7 @@ bus names are aliases, not renamed.
 
 Proposed by `tc1` (Matt Godbolt, `notes/blocks/tc1.md`). `shm` draws `tc1_x1` as NOT `ras_o0_sel1`
 (inverter and load at x 8400-8650, y 4165-4280, joined to the `tc1_x1` poly through a `?B`).
-1,500 px west, `tc1` finds the inverter `tc1_o4280` = NOT `tc1_p4308`, whose output strip runs up
+1,500 px west, `tc1` finds the inverter `tc1_o4280` = NOT `ck_a`, whose output strip runs up
 to a pad at (6962,4268). A branch of the ring poly of the driver `tc1_o4020` (on the `tc1_x1`
 line by firm geometry) ends on that pad, and the pad's contact puts the thin metal x 6968 on it.
 Three joins: J1, **not drawn**, strip to pad (x 6934-6957); J2, drawn `?P`, branch poly to pad
@@ -513,7 +513,7 @@ true would mean two complete inverters on one line. The thin metal x 6968 is als
 the second driver `tc1_o3740` (firm, contact (7009,3789)), whose output does not return to
 `tc1_x1`; and the pad's net has a second destination west, the poly row y 4385-4405. **No reading
 adopted**; J1 is left out so that `tc1_x1`'s equation does not change on a guess. To settle: J3
-in the clean shot (a re-read under R12), the thin metal x 6968's other ends, `tc1_p4308`'s
+in the clean shot (a re-read under R12), the thin metal x 6968's other ends, `ck_a`'s
 source. Open join `tc1_x1_u`.
 
 Updated 2026-11-17 (evening). `tc1` is done (runs 10-11): twice in its gate column a small gate's
