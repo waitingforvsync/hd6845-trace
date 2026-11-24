@@ -3338,3 +3338,44 @@ break"). AMB-017 updated. Corrections sections in the notes of `cdp2`, `wl`, `ur
 `slbus`; `ports.d/cdp2.txt`'s stale port at (7290,6848) renamed to `cnt_gab` (`tools/ports.py` now
 reports "same name"). Floor plan: nothing to trim. Coverage: 73.0% traced; in some package region 99.9%;
 untraced and in no Queue row 0.4%. `out/` is rebuilt by the refresh that follows.
+
+## 2026-11-24 15:58 UTC  Refresh
+
+The fourteenth refresh (coordinator, on Opus 5.5), after the handoffs since the last one (2026-11-21
+11:00): `eof` runs 36-68, `cdp4` runs 4-15, `regs` runs 5-6, `cdp3`, `busl` runs 17-19.
+
+Renames (all on firm joins; `tools/names.py compare` against the snapshot before: 25 nets renamed,
+"only names changed"; old names under the glossary's Former names):
+
+- busl's joins: busl_y6805 -> cdp2_w6845; tc1_p4308 -> ck_a; tc1_m6817 -> cnt_bus_b; lc3_e9577,
+  lc3_e9621, lc3_e9665, lc3_e9708, lc3_e9750, lc3_e9793 -> cdp3_cw_c7 .. cdp3_cw_c2.
+- the read path: regs_w17462 -> d7_out_n (its met port in `ports.d/regs.txt` dropped); regs_w17648 ->
+  cdp3_n_c0; dbus_do0_in -> cdp3_n_c7.
+- eof and tr1: eof_w17515 -> h_eq_r1; eof_w17166 -> bc2_w14955; tr1_w12265 -> rst_lat; tr1_w12005 ->
+  cdp4_w10808.
+- **the read bus by data bit** (`cdp4`'s proposal of 2026-11-21): cdp3_n_c0 .. cdp3_n_c7 -> rd_b7 .. rd_b0.
+  `d#_out_n` = NOT `rd_b#` is firm for all eight bits (the glossary still said columns 1-6 "end beside"
+  their output units; `cdp4` runs 8-11 had joined them). Pattern references `cdp3_n_c#` became
+  `rd_b(7-#)` in the notes.
+
+Catch-up for branches in flight, after merging main:
+`tools/rename.py busl_y6805 cdp2_w6845 tc1_p4308 ck_a tc1_m6817 cnt_bus_b lc3_e9577 cdp3_cw_c7 lc3_e9621 cdp3_cw_c6 lc3_e9665 cdp3_cw_c5 lc3_e9708 cdp3_cw_c4 lc3_e9750 cdp3_cw_c3 lc3_e9793 cdp3_cw_c2 regs_w17462 d7_out_n regs_w17648 rd_b7 dbus_do0_in rd_b0 eof_w17515 h_eq_r1 eof_w17166 bc2_w14955 tr1_w12265 rst_lat tr1_w12005 cdp4_w10808 cdp3_n_c0 rd_b7 cdp3_n_c1 rd_b6 cdp3_n_c2 rd_b5 cdp3_n_c3 rd_b4 cdp3_n_c4 rd_b3 cdp3_n_c5 rd_b2 cdp3_n_c6 rd_b1 cdp3_n_c7 rd_b0`
+
+Left on purpose (the master list's `rename` row): `lc3_e9798` / `lc2_w9125` (the net is joined elsewhere
+through uncertain items, `lc2_w9185`); `cdp2_w6845s` (`cdp2`'s `?M`); a functional name for
+`bc2_w14955` = NOR(`rst_lat`, `ck_out`) (what its latch holds is open); cell pin names made from a
+template (`eof_mxn_s#`, `eof_mxs_s#`, `larr_h_s#`, `cdp4_n_s#`, `cdp4_a_s#`, `larr_cin_s10`,
+`cdp1_fx_b`, `cdp1_fy_b`, `ar#_q`, `*_tab`, `d#_in`); and what the twelfth and thirteenth refreshes left.
+A tool note: `tools/rename.py` skips a whole line that says "former name", so a glossary row that
+mentions one keeps the old names elsewhere in it; three rows were fixed by hand (`d#_out_n`, `rd_b0`,
+`regs_w#`).
+
+`notes/operation.md`: the tracers had kept it current through every package; changed here: the header
+(2026-11-24, 2,514 nets, 4,831 transistors), the firm count (972 of 1,430; was 917 of 1,370 on
+2026-11-21), the closing ranges (AMB-001 to AMB-060, R1-R55) and one sentence the renames had made
+circular. No equation changed status in the renames (`unsure.py --equations` before and after are
+identical but for names).
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 1,013
+floor-plan blocks. Coverage: 73.0% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%. Cost report updated.
