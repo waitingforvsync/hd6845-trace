@@ -986,6 +986,7 @@
 696	route	bl0_w15566, bottom bus line y 17824	8755,17807:10332,17837	thin metal east to a pad (9465,17822), a poly row under six vertical metals to a pad (9857,17822), metal east to a corner (10311,17823)
 711	route	eof_w17866 (believed eof_w16040), bottom bus line y 17866	8755,17851:10370,17881	thin metal east to a pad (9553,17866), a poly row under six vertical metals to a pad (9813,17866), metal east to a corner (10356,17866); each pad has a second metal north
 697	route	reset copy lc2_w8450 to the bottom-centre logic	10120,17750:10500,18105	the diagonal's corner and the thin track x 10485 north beside the east gate column
+-	route	reset copy to the clock gate	10434,18006:10914,18484	from the second inverter's thin metal: a pad, a poly row east under both rails of the column and a poly column south to the west end pad of the bus piece on the gate that holds ck_b low (rst_ck's stem beside it is not joined to that pad)
 712	route	bus N column 0 along the bottom bus	11190,17895:12790,17925	the row y 17909 east to the trunk hop
 -	route	read bus of R12-R17, bits of columns 1-7, east along the bottom bus	11230,18025:12870,18312	seven thin metals, no tap, to pads where they go under the vertical trunks in poly
 -	route	read bus, columns 1-7: diagonal fan up to the rows y 17777-18037	13140,17760:14480,18312	east of the hop under the trunks each line climbs 260 px on a diagonal

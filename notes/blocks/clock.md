@@ -224,3 +224,20 @@ the bundle that climbs the left bus field. Seen at 1x; not in the trace.
 ## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
 
 - The signal on track A / line X / the first through line of the left-centre strips, which these notes call a clock, a strobe "once per scan line" or leave without a source, **is the reset**: `rst_a`, the buffered copy of `rst` = NOR(`lpstb_b`, `res_b`) made by `lc1`'s gate 5 (`eof` run 10, piece `isrc5`, firm). `rst_ck`, `rst_rc` and `rst_lat` are further buffered copies of it: high while the RES and LPSTB pins are both low, and only then. The belief "a strobe once per scan line" is withdrawn. (`rst_ck`'s source was open here.)
+
+## Corrections (coordinator, from the handoff of `eof` run 71, 2026-11-25)
+
+- The summary ("g5 pulls line B (`ck_b`) down when a third signal, `rst_ck`, is high") and the gate table's
+  g5 row ("`rst_ck`: poly from a bus line at y 18455-18480 ... which leaves left (not followed)"): g5's input
+  is not `rst_ck`. The bus piece's west end pad (10895,18468) is the foot of a poly column x 10889-10907 from
+  the north, the net `eof_w17734` (`eof` piece `o734`, firm); so `ck_b` = NOR(`ck_clkn`, `ck_g4`,
+  `eof_w17734`). What `eof_w17734` is (a reset copy, believed; or NOT `rst_lat` as named, which would stop the
+  clock) is AMB-062. The "Correction (2026-11-15)" paragraph's "so `ck_b` is also held low whenever that core
+  signal is low" is withdrawn with it.
+- "Route of `rst_ck` to the left of the die" starts "From the bus piece at y 18458-18480 (which g5's gate also
+  hangs on): left to a contact at 10897,18468; a short poly link to a contact at 10808,18470 and, by a branch
+  up at x 10850-10870, to a contact at 10855,18385". True: the route starts at the contact (10857,18383) on bus
+  line L4; its stem's foot is joined to the west pad (10810,18470) only (10 px of open field at x 10870-10878);
+  the pad (10897,18468) and the bus piece are not on `rst_ck`. The rest of the route is still "seen at 1x"
+  (R4). Evidence: `notes/blocks/eof.md`, "Run 71" (the table of the row y 18468), review round 85; the trace
+  label `N M 11650,18467` is now `eof_w17734`.

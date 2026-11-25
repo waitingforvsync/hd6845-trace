@@ -1699,3 +1699,9 @@ Round 16: no findings that change a connection.
   inverter of `eof_w15955`, so `cdp4_w10808` = NOT `eof_w15955` (firm; the plate's join to the row is
   `eof`'s Ambiguity 221, read as one poly). `ports.d/cdp4.txt`'s port (10694-10716, 15726-15748) is met by
   `eof`'s port of the same name. The trace file's comment is left for `cdp4`'s next run to update.
+
+## Corrections (coordinator, from the handoff of `eof` run 71, 2026-11-25)
+
+- The read bus's track c7 (`rd_b0`, x 10897): the corner (10897,18298) of `rd_b0`'s metal lies over the
+  corner of `eof_w17734`'s poly (the row y 18288-18306 turning south into the column x 10889-10907). Read as
+  no contact (`eof`'s Ambiguity 224; review round 85): `rd_b0` and `eof_w17734` stay apart.

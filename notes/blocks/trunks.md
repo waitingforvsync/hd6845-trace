@@ -650,3 +650,17 @@ along the top of the central datapath) is the gap.
 - An undrawn bus metal at y 18420-18440, between bus line L4 (y 18385) and L6 (y 18470), runs east from
   x 10806 (to x 10990 at least); `eof_w16432` (`eof` run 66) joins it from the north at x 10811 by a thin metal
   x 10804-10817 and is not on `rst_ck`'s contact (10810,18470). Its source is in no trace file.
+
+## Corrections (coordinator, from the handoff of `eof` run 71, 2026-11-25)
+
+- "S: output of input-row gate 0", route items 4 and 5 ("Poly down from there (under L5) to a poly link between
+  contacts (10810,18470) and (10900,18470)"; "From (10900,18470): bus line L6 left piece right to x 11870:
+  gate g5 of the clock block ... and a capacitor rectangle"), and the table row "18460-18480 (L6, left piece)
+  ... S": the link reaches the west contact (10810,18470) only. Between the stem's foot (poly x 10832-10859)
+  and the east pad's ring (from x 10880) is 10 px of open field, in both metal shots and the clean shot (the
+  chip-2 stripped shot's reddish strip there is a fringe). The east pad (10895,18468), the L6 left piece, g5's
+  gate and the capacitor rectangle are on `eof_w17734`, whose poly column x 10889-10907 comes down from the
+  north (`eof` piece `o734`). The trace was cut in b345eda: `P 10796,18470 x10914 w=24` -> `P 10796,18470
+  x10866 w=24`, the east pad's box kept under its contact `C 10900,18470`. So S does not reach the clock
+  block; route item 6 (from (10810,18470) west) stands, read at 1x (R4). Evidence: `notes/blocks/eof.md`,
+  "Run 71", review round 85.

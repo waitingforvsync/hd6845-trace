@@ -1125,6 +1125,15 @@ Updated 2026-11-24 (`eof` run 69): the metal's north end is the output of the in
 the track is not one metal on one net. The break or the wrong reading is at one of the four box stretches
 y 16500-16537, 16977-17014 (this box), 17457-17492, 17716-17754; that is `eof`'s next item.
 
+Updated 2026-11-25 (`eof` run 71, piece `o734`; the block's Ambiguity 226; review round 85): a second,
+independent contradiction of the same kind. `eof_w17734` = NOT `rst_lat` (run 70, firm) runs on to the clock
+block and is the third input of the gate g5: `ck_b` = NOR(`ck_clkn`, `ck_g4`, `eof_w17734`), firm as drawn.
+With `rst_lat` as named (the reset copy, high only during reset), `eof_w17734` would be high whenever the chip
+is not in reset, and `ck_b` would be held low all the time the chip runs. Candidate (a) of
+the list above, "the poly that gates the units here is not `rst_lat`" (wrong sense), now explains two wires;
+the photos of the thin metal and of this wire show no fault. What would settle it: R56, starting with
+`trunks`' 1x line from `bd1`'s inverter 2 to the contact (11288,17517) and `cdp4`'s T2 pad row. See AMB-062.
+
 ## AMB-061: the dark box in the node's band of the inverters in `bc2`'s rail column (2026-11-24)
 
 From `eof` run 69 (richtw1's session; the block's Ambiguity 220, full text in `notes/blocks/eof.md`; review
@@ -1137,3 +1146,18 @@ between the node and the load (its gate on its own drain, or `rst_lat` in its ow
 assumption: (a), drawn so, no `?`.** Either way the three static equations hold (`eof_w16213` = NOT `rst_lat`,
 `bl0_w15566` = NOT `h_eq_r1`, `cdp4_w10808` = NOT `eof_w15955`); (b) would add a transistor per unit. Would
 settle it: a sharper shot; the three copies agree, which only says it is layout.
+
+## AMB-062: what holds `ck_b` low? (2026-11-25)
+
+From `eof` run 71 (richtw1's session; the block's Ambiguity 226, local items 224, 225, 227; review round 85).
+The gate is firm: g5 of the clock block pulls line B (`ck_b`) down, and its input is the bus piece L6-left,
+reached by `eof_w17734`'s poly column x 10889-10907 into the pad (10895,18468). `trunks`' link that put
+`rst_ck` on that pad is not there (10 px of open field, x 10870-10878, in both metal shots and the clean shot;
+cut in b345eda). So `ck_b` = NOR(`ck_clkn`, `ck_g4`, `eof_w17734`). The signal's sense is open. Readings:
+(a) a reset copy, made in `bc2`'s rail column by a weak-load inverter: needs the column's gate poly (named
+`rst_lat`) to be low during reset (believed; the clock notes' old belief that g5 is driven by a reset); (b)
+NOT `rst_lat` as named: excluded by function, the clock would not run outside reset; (c) this run's wire or the
+cut link is wrong: each local item (no contact at the corner under `cdp4`'s `rd_b0` metal, the gap where the
+link was drawn, L6's metal on the pad) was read in three or four shots and by the reviewer. **Working
+assumption (a), not traced; the trace draws what is seen, so the extraction gives (b).** Would settle it: R56
+(the sense of the column's gate poly); AMB-060 rests on the same question.

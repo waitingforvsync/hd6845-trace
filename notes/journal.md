@@ -3488,3 +3488,46 @@ ports facing each other across the undrawn 38 px have no partner. No tool propos
 floor-plan blocks. Coverage: 73.0% traced; in some package region 99.9%; untraced and in no Queue row
 0.4%. Not done here: the refresh (`notes/operation.md`'s closing ranges still say AMB-001 to AMB-060 and
 R1-R55; the renames proposed in the `rename` row wait).
+
+## 2026-11-25 13:11 UTC  Handoffs: `eof` run 71
+
+One handoff file, applied by the coordinator (on Opus 5.5; coordination, no tracing): `eof` run 71 (piece
+`o734`; waitingforvsync's claim, traced on Fable 5.2 in richtw1's session 2026-11-25 13:19 to 13:56 +0100;
+merged 7598505; **claim released**). Wiring only: 0 transistors, no uncertain item. Full extraction after it
+2,515 nets, 4,838 transistors, 0 errors, 0 warnings; 976 of 1,434 equations firm; 110 nets joined only through
+uncertain items, 1,216 uncertain items (all as after run 70). Spot checks of the overlays: piece `o734`
+(`cache/scratch/refresh/hR-20261125-eof71-o734.png`) and the cut link at y 18470 in the clean shot
+(`hR-20261125-eof71-link.png`): the drawn shapes lie on the features, and the gap x 10866-10880 is open field.
+
+What it establishes (marks as in the tracer's notes):
+
+- **`eof_w17734`'s wire to its end** (firm): from run 70's port (10441,18010) the thin metal x 10441 runs south to
+  a pad (10482,18297), a poly row y 18288-18306 east under both rails of `bc2`'s column (no gate) to x 10907,
+  south as a poly column x 10889-10907 under bus line L4 and the bus metal y 18420-18438 into the pad
+  (10895,18468): the west end of bus line L6's left piece, the input of g5 in the clock block.
+- **`trunks`' poly link from `rst_ck`'s stem to that pad does not exist** (corrected in b345eda: 10 px of open
+  field). So **`ck_b` = NOR(`ck_clkn`, `ck_g4`, `eof_w17734`)** (firm), not `rst_ck`.
+- As named (`eof_w17734` = NOT `rst_lat`) the clock would be stopped whenever the chip is not in reset: a second
+  wire out of `bc2`'s rail column that contradicts the name `rst_lat` on its gate poly. Believed, not traced:
+  that poly is low during reset, and `eof_w17734` is a reset copy (the clock notes' old belief about g5).
+
+Review: round 85 (full), a fresh Fable 5.2 agent: no findings; no trace line changed after the round.
+
+Applied: master list rows `eof` (run 71; claim released; Next: the sense of the column's gate poly (R56), the
+column south of y 17765, the bus metal y 18420-18440 east of x 10850, `bc2_w15388`'s row east of x 10335,
+`eof_w16040`'s driver, `rst_ck`'s first pads west of (10810,18470)), `trunks` (continue), `clock`
+(continue), `bc2`-`bc4`, `busb` (the run 70 lead is drawn) and the `rename` row (`eof_w17734` gets a name
+once its sense is settled). **Re-read items extended**: R56 (start with `trunks`' 1x line from `bd1`'s
+inverter 2 to the contact (11288,17517) and `cdp4`'s T2 pad row; the equations with `rst_lat` in the column
+carry the doubt) and R4 (one more 1x link was wrong; `trunks`' other 1x links on that line and the clock
+notes' route of `rst_ck` to be read at 4x; trap 33 already covers it, no new trap). **AMB-060 updated**;
+**AMB-062 new** (what holds `ck_b` low; working assumption a reset copy, not traced). The block's Ambiguities
+224, 225, 227 are local. Corrections sections in the notes of `clock` (g5's input; the start of `rst_ck`'s
+route), `trunks` (route items 4 and 5 of S, the L6 left piece's row) and `cdp4` (track c7's corner: no
+contact). Floor plan: the new fragment line lies inside `bc4`'s and the bottom bus field's coarse blocks,
+which other pieces still need; nothing trimmed. Ports: `eof_w17734`'s port moved to the end pad; no partner
+(`trunks` and `clock` have no ports file). No tool proposals.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 1,019
+floor-plan blocks. Coverage: 73.0% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
+The refresh follows.
