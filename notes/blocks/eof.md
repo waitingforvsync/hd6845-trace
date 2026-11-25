@@ -9047,8 +9047,9 @@ driver lies; the other three lead to the loads.
    (a) no contact, two nets crossing (as drawn): the clean shot is uniform cream with no hole and no specks
    (217-228/152-172/103-121), the metal is no wider at the corner than north of it, each bar lies over one
    of the poly's own edges or is the metal's own edge and is 6-8 px of red 65-134 (a real ring on this wire
-   and on this track is 9-12 px of red 27-73), and the chip-2 stripped shot is pale there as it is over the
-   same column under the two bus metals further south; (b) a contact: `rd_b0` would be one net with
+   and on this track is 9-12 px of red 27-73), and the chip-2 stripped shot has no pits there (it is paler, red minus green 4-22
+   at (10896-10904, 18298-18302), than over the same column under the two bus metals further south, 30 or
+   more: review round 85); (b) a contact: `rd_b0` would be one net with
    `eof_w17734` and the clock gate's input, a read bus line shorted to an inverter's output. Working
    assumption (a); no `?` (nothing is drawn there). What would settle it further: nothing more in these
    photos; `cdp4`'s pad (10896,13636), a real contact on the same track, shows no hole in the clean shot
@@ -9059,8 +9060,10 @@ driver lies; the other three lead to the loads.
    the foot (plain in both metal shots, green in the clean shot, the foot's east edge line beside it at every
    row y 18448-18478); the chip-2 stripped shot shows a reddish strip 8 px wide there between two green
    lines (121-143/78-92/61-70, like poly's 142-162/101-121/56-69 on the foot). Readings: (a) field: no link,
-   as drawn (the strip in the stripped shot is the ground between two edge lines; a link would have no
-   edge line across it, and both metal shots and the stripped shot show one on each side); (b) a link 8 px
+   as drawn (the strip in the stripped shot is a fringe of that shot: it reads red over green by 32-78 for
+   8-12 px east of every poly east edge over certain field, e.g. at (10870-10880, 18408) and
+   (10912-10918, 18345): review round 85; a link would have no edge line across it, and both metal shots
+   and the stripped shot show one on each side); (b) a link 8 px
    high or a sliver of poly: `rst_ck` and `eof_w17734` would be one net, two inverters' outputs of opposite
    sense as named. Working assumption (a). No `?`.
 226. **`eof_w17734` as named cannot be the input of the gate that holds `ck_b` low** (run 71; with Ambiguity
@@ -9074,6 +9077,14 @@ driver lies; the other three lead to the loads.
    assumption: the geometry of this run as drawn, and (a) believed, not traced. What would settle it: the
    re-read of the line `trunks` drew at 1x from `bd1`'s inverter 2 to the contact (11288,17517) and of
    `cdp4`'s track T2 and its pad row (R56).
+227. **Is bus line L6's metal on the pad (10895,18468)?** (run 71; `trunks`' `M 10888,18470 x11610`; the
+   reviewer of round 85 could not check it.) Between the contact's ring and the bright metal east of it lie
+   a medium strip of 4-6 px and one dark line of 6 px (x 10914-10919), 18 px without bright metal in chip 2
+   and 26 px in chip 1 (tracing guide, trap 16). Readings: (a) one metal with the pad: the dark line is the
+   pad poly's east edge beneath it, the medium strip the pad's rim (as drawn by `trunks`); a single dark
+   line with metal at once beyond it is not a gap, and a pad with a contact has to have a metal, and none
+   other leaves this one; (b) L6's metal ends 6 px short of the pad: then the pad's contact would lead
+   nowhere and L6's west end would be free. Working assumption (a). No `?` (not this package's item).
 
 ## Review
 
@@ -12966,6 +12977,73 @@ extraction.
   identities and the row's identity as `rst_lat`.
 
 Round 84: no findings that change a connection.
+
+### Round 85 (full review; run 71, piece `o734` and the correction to `trunks` / `clock`; 2026-11-25, ended about 14:25 +0100, at commit a536295)
+
+A fresh Fable 5.2 agent, briefed with the piece's seven claims (the metal to the pad (10482,18297); the row
+over field under both rails; no contact at the corner under `rd_b0`'s metal; the column under two bus metals;
+the end pad (10895,18468) and its metal east; `trunks`' link ending at the stem's foot; the resulting
+`ck_b` = NOR(`ck_clkn`, `ck_g4`, `eof_w17734`)). Told to suspect most: the gap x 10870-10878 at y 18446-18484
+(two nets or one; the chip-2 stripped shot reddish there); contact or none at the corner (10898,18298);
+whether the column runs into the end pad and whether anything else reaches it; a transistor under either
+rail, a contact under the thin metal x 10810 or a bus metal, a branch or a break; a second metal on the
+track x 10441 between y 18010 and y 18306. Images in `cache/scratch/eof/review-85/` (48 tool calls).
+
+What it checked, and how:
+
+- **The gap**: `l1.png` (4.6x, four shots), `tools/px.py` rows y 18440-18490 and the column x 10873. The
+  foot's east edge line (x 10864-10870) in all four shots; the strip beyond it plain in both metal shots
+  (chip 1 140/127/79 against the foot's poly 151/75/41) and green in the clean shot; control for the green:
+  poly crossing an etch boundary never reads green (rows at x 10540 and x 10798; the foot into the west
+  pad). **The chip-2 stripped shot's red strip is an artefact of that shot**: it reads red over green by
+  32-78 for 8-12 px east of every poly east edge over certain field, at (10870-10880, 18408) and
+  (10912-10918, 18345). Stem and column are separate further north too (pink field between them under L4
+  and under the second bus metal, bare ground at y 18405-18411). The foot is joined to the west pad (one
+  10 px ring, then orange poly, no plain or green strip: rows 18464, 18474).
+- **The corner (10898,18298)**: `p1.png` (8.5x), `mo_all.png` (against three real contacts and the corner
+  (10441,16260)): no contact. The clean shot uniform cream 212-229/140-173 as at the control (real contacts
+  104-170/88-119 with specks); no pits in the chip-2 stripped shot; the metal keeps its 18 px; the poly does
+  not run on north or east under `rd_b0` (pink).
+- **The end pad**: the column continuous into it (clean shot salmon y 18441-18462); field south, east (under
+  L6) and west of the pad.
+- **Row and column** (`row1.png`, `c1.png`, `ov1.png`): the row unbroken on its centre line (4 px profile),
+  field on both flanks under both rails (`tools/railprof.py`, clean shot); no hole or widening at the thin
+  metal x 10810, at L4 or at the second bus metal; `tools/eof_tee.py` finds no branch on row or column; no
+  poly column in the gap x 10775-10800; 8-10 px of field north of the row at the pad (10482,18297).
+- **The thin metal** (`w1.png`, `m1.png`): one metal from y 18010 to y 18306 (bars of 8-9 px; a 14 px
+  diagonal bar at y 18265-18278 is a diagonal row's edge beneath, the clean shot protected throughout); the
+  arm reaches the pad through a 10 px ring; bare ground y 18316-18327 before `ck_out`'s corner; not a T.
+- **The extraction**: 0 errors, `ck_b` = NOR(`ck_clkn`, `ck_g4`, `eof_w17734`), `eof_w17734` not in
+  `tools/unsure.py`.
+
+Findings: **none.** Three remarks, none a finding and none changing geometry; taken into the notes:
+
+1. For the stripped shot's red strip in the gap, the east-edge fringe with its two controls is the better
+   reason than trap 34 (comment only): Ambiguity 225 now says so.
+2. At the corner the chip-2 stripped shot reads paler (red minus green 4-22 at (10896-10904, 18298-18302))
+   than the same column under L4 and the second bus metal (30 or more); no pits (comment only): added to
+   Ambiguity 224.
+3. The thin metal's inner corner is chamfered (bright to x 10461 from y 18292): the drawn path is square
+   between the same two ends; not redrawn (geometry only, no trace line changed).
+
+What it could not check: (a) that L6's metal is on the pad (10895,18468): the strip x 10908-10913 between the
+ring and the pad's edge reads the same for dim metal and bare ground; accepted by it because no other metal
+reaches the pad. **Looked at by the tracer after the round** (`r71_e6.png`, 6.8x, both metal shots;
+`tools/px.py row 18464 / 18470 / 18476 10904 10940 3 metal,metal1`; `tools/textmap.py 10896 18446 10972 18494
+2`): the pad is a dark square frame x 10880-10919; on its east side the contact's ring (x 10904-10908), a
+medium strip (x 10910-10913: 137-168/100-124 in chip 2, 132-156/98-135 in chip 1), one dark line of 6 px
+(x 10914-10919) and then metal at once (chip 2 bright from x 10922; chip 1 yellow-green and rising from
+x 10922, bright from x 10930), where the west side has the ring and bare ground. One dark line with metal
+directly beyond it is an edge beneath (the pad poly's east edge), not a gap (a gap needs two edges with
+ground between); and nothing else leaves the pad (no metal over the column north of it: orange poly
+143-164/94-118/57-63 at y 18446-18452; open field west; open ground south). Read as one metal with the pad
+(Ambiguity 227; this is `trunks`' `M 10888,18470 x11610`, unchanged). (b) L6 east of x 11000: by
+`tools/tl5_tracks.py` only, no break of 20 px in both chips as far as the contact (11772,18467); not
+viewed. (c) Gate g5 itself (`clock`'s).
+
+No trace line changed after the round.
+
+Round 85: no findings.
 
 ## Not done
 
