@@ -1762,6 +1762,46 @@ item; and a correction to `trace/trunks.txt` / `trace/clock.txt` (commit b345eda
   (`tools/unsure.py --equations`); 110 nets joined only through uncertain items, 1,216 uncertain items (as
   before).
 
+Run 72 (richtw1's session, Claude Fable 5.2; 2026-11-25 22:51 +0100 on). One re-read that changed no geometry,
+and one piece: wiring and a plain diffusion, five uncertain items, no transistor.
+
+- **Re-read `rl56` (re-read item R56, its first item): the line named `rst_lat` is as drawn from `bd1`'s
+  inverter 2 to `cdp4`'s port (10789,17700).** Every pad on it read in three shots at 3-4x (six of `trunks`',
+  `cdp4`'s (10852,17648), four of `bd1`'s), every straight metal by the two-chip test, the poly hop under the
+  seven vertical metals on fourteen cuts (four rows in, the same four out, none steps), the corner at the
+  port by colour profiles in four shots. So the poly that gates `bc2`'s rail column is the output of `bd1`'s
+  inverter 2, as far back as that inverter's output contact (13695,15325). Not re-read: the inverter itself
+  and the inverter that makes `rst_a_n` (`bd1`'s units).
+- **Piece `l3tap`: the bus piece on the clock block's gate g5 has a second end, and `ck_out`'s bus line has a
+  contact on it** (traced; the contact uncertain: Ambiguity 228). The bus metal y 18455-18480 runs on 80 px
+  east of g5's contact to an end pad (11852,18467); the pad's poly is a column north under two bus metals
+  (no contact) to a head under `trunks`' bus line L3, which is `ck_out`, and **L3 has a slot contact on the
+  head**: the clean shot is vivid green for 36 x 12 px under a metal that both metal shots show running
+  through. `clock`'s first reading (2026-11-14) had this poly "up to a line at y 18345"; the correction of
+  2026-11-15 ("neither contact is there") is what this run contradicts. From the column a narrow strip runs
+  west in the gap between L3 and L4 to a plain rectangle 214 x 72 px under both metals: read as a plain
+  diffusion on the net, as on g5's output (uncertain: Ambiguity 229).
+- **So gate g5's input is `ck_out`, the clock, and not a reset copy: `ck_b` = NOR(`ck_clkn`, `ck_g4`,
+  `ck_out`)** (marked: it rests on the uncertain contact). With `ck_a` = NOR(`ck_b`, `ck_g2`, `clk_b`) the
+  two phases are then built alike: g6 holds `ck_a` low while `ck_b` is high, g5 holds `ck_b` low while
+  `ck_out` is high (CLK low). **AMB-062 and Ambiguity 226 fall away if the contact holds**: nothing then
+  says that the column's gate poly is low during reset, and the re-read above says it is `rst_lat`.
+- **Piece `u17690` (run 70) is then a unit on `ck_out`, not an inverter with an output of its own**: its node
+  is the net of run 71's wire, so the extraction now has `ck_out` = NOR(`ck_n2`, `rst_lat`) (marked) and
+  `eof_w17734` is an alias of `ck_out`. Believed, not traced: it is a top-up load, like g5 and g6 on the
+  phases (a depletion load 24/94 that takes `ck_out` to VCC, which the buffer's 483-wide pull-ups gated by
+  `ck_ga` may not do), and its 42/16 pull-down gated by `rst_lat` cannot hold the buffer's output low. Whether
+  the thin metal x 10441 south of its pad (10439,17734) is one metal with `ck_out`'s jog 45 px north of the
+  pad (run 70 read them as two) is open again (Not done).
+- **Looked at, not drawn: line B across gate g6** (Ambiguity 230). Between the contact of line B on g6's gate
+  poly (11985,18760) and a pad with a hole at (12034,18757) neither metal shot shows metal for 35 px and the
+  clean shot has an olive strip across the whole track: line B may be two metals there. Left as `clock` drew
+  it (one line), because with g5's input on `ck_out` the generator is consistent as drawn.
+- **Checks**: full extraction 2,514 nets (one fewer: the join), 4,838 transistors, 0 errors, 0 warnings;
+  `tools/unsure.py --equations`: 974 of 1,434 firm (was 976: `eof_w17734` = NOT `rst_lat` is gone and `ck_b`
+  now depends on the contact); `tools/unsure.py` lists `ck_out` as two pieces without the uncertain items;
+  `tools/signals.py`: 0 names outside the glossary.
+
 ## Inventory
 
 | Piece | Where | What |
@@ -6793,6 +6833,72 @@ believed of g5 all along; and piece `u16303`'s output on the thin metal x 10484 
 which agrees with `regs`' `lc2_w8450` at that metal's other end (Ambiguity 222). Two independent wires out of
 this column each contradict the name `rst_lat` on its gate poly, in the same way (Ambiguity 226; R56).
 
+### Run 72: the line named `rst_lat` re-read (`rl56`), and the east end of the bus piece on gate g5 (piece `l3tap`)
+
+**Re-read `rl56`** (no geometry changed; images `cache/scratch/eof/r72_*.png`, measurements in
+`cache/scratch/eof/survey.md`). The path, driver to port, and what was read at each place:
+
+| Stretch | Drawn in | Read |
+|---|---|---|
+| inverter 2's output contact (13695,15325), metal south, the T at y 15453 | `bd1` | 4x, both metal shots and the clean shot: the metal widens west at y 15450-15468 to the ring of the pad (13650,15453) and goes on south on x 13716 (one metal; 6 px would be left between pad and line otherwise). `tl5_tracks.py v 13696 15335 15445`, `v 13716 15465 15765`: continuous, holes at y 15543 and y 15760 (the latch's two gate contacts) |
+| poly row y 15447-15463 between the pads (13650,15453) and (13520,15455), under `rst_a_n`'s metal | `bd1` | `tl5_tracks.py rows row 13500 13680 4 15440 .. 15470`: poly from pad to pad; `eof_tee.py h 15445 15465 13540 13636`: no branch |
+| pad (13520,15455), metal x 13521 south to the pad (13520,15931) | `bd1` | 4x: the pad 65 px north of it on the same track, (13520,15388), is another line's end: plain ground y 15412-15435 between them in both chips, open ground in the clean shot. `v 13521 15465 15925`: continuous |
+| poly pad of (13520,15931) and its tail y 15945-15965 west to the pad (13432,15955) | `bd1` | 3.9x in the clean shot, chip 2's stripped shot and chip 2's metal shot: pad and tail are one outline, the tail ends at x 13545 (field east of it), and no metal lies between the pads (13432,15888) and (13432,15955) |
+| metal x 13435 south, the diagonal at y 16740-16890 to x 13303, the pad (13303,17688) | `bd1`, `trunks` | `v 13435 15960 16750`: no stretch over 12 px without metal in both chips; one metal layer keeps the order of the three lines that turn there (x 13306, 13435, 13477 to x 13215, 13303, 13348). `v 13303 16900 17705`: bars at the bus rows only. Pad at 3.75x in three shots: metal from the north, poly west, plain ground south |
+| poly row y 17684-17698 west under seven vertical metals to the pad (12850,17691) | `trunks` | fourteen cuts (`tl5_tracks.py rows col 17620 17840 4 12875 .. 13285`): rows at y 17640-17648, 17684-17692, 17772-17780, 17816-17820 at every cut from x 12875 to x 13260: the hop is straight (tracing guide, trap 10). Pad at 3.75x: metal from the west, poly east |
+| metal y 17692 west, north on x 11810, west on y 17518 to the pad (11288,17517) | `trunks` | `h 17692 11800 12870`: nothing over 14 px; `v 11810 17505 17700`: 13 px at the poly diagonals; the west arm's centre line is y 17518, not the drawn 17514 (`px.py col 11500 17500 17536 3`): `h 17517 11270 11820`: metal from the ring east. The two bends are the outer two of five nested ones (1.75x). Pad at 2.95x: metal from the east, poly west |
+| poly west along y 17518, the diagonal to (10975,17640), the row y 17637-17655 through the pad (10852,17648) to x 10780, the column south | `trunks`, `cdp4` | 2.2x in the clean shot: one tan band with dark outlines the whole way, beside `h_eq_r1`'s parallel one. Pad and corner at 2.9x in three shots: the thin metal T2 arrives from the north only; open poly column x 10782-10796 south of the corner (`px.py row 17670 / 17700 / 17730 10762 10826 4`: orange in both metal shots between dark edges, the metal x 10806-10818 east of it) |
+
+Also read, in `bd1`: `rst_a_n`'s horizontal metal y 16180-16200 crosses the poly link between the pads
+(13629,16150) and (13629,16235) of `rst_a`'s line without a pad (2.9x, three shots), as drawn.
+
+What this leaves of R56 and Ambiguity 226: the wire is right, so a wrong sense on the column's gate poly could
+only come from a unit (`bd1`'s inverter 2, the inverter that makes `rst_a_n`) or from what `rst_a` is. With
+piece `l3tap` below, the one contradiction that needed a wrong sense (the gate that holds `ck_b` low) has
+another explanation, and the other (the thin metal x 10484, Ambiguity 222, AMB-060) never needed one: that
+track may part inside a box stretch.
+
+**Piece `l3tap`** (traced: wiring and a plain diffusion; five uncertain items; image folder as above,
+`r72_g5`, `r72_n1` to `r72_n5`, `r72_ov1`).
+
+- **The bus piece's east end.** `clock` drew the bus metal y 18455-18480 from x 11600 to x 11877 with g5's
+  contact (11772,18467) on it. Its east end is a pad (11852,18467): ring and bright centre in both chips
+  (`tl5_tracks.py h 18467 11780 11900`: ring 11832-11847, centre 11847-11856, no metal from x 11856 on);
+  open ground from x 11875 to g6's pad (12108,18467) (`h 18467 11560 12420`; `px.py col 11950 18440 18492 4`:
+  uniform 160/134/83).
+- **The pad's poly goes north**: a column x 11849-11863, open poly in the two gaps it crosses (`px.py row
+  18409 11828 11876 3`: chip 2 164-170/120-127/54-62, chip 1 151-178/82-110/47-55, between dark edges) and
+  cream under the bus metal y 18420-18440 and under L4 (`px.py col 11852 18376 18446 5`: 199-226/134-181/
+  95-111), with no hole under either (`tl5_tracks.py h 18386`, `h 18430`): two plain crossings. `eof_tee.py v
+  11843 11862 18372 18446`: no branch.
+- **Its head lies under L3 (`ck_out`), and L3 has a slot contact on it.** `tools/textmap.py 11816 18328 11896
+  18400 3 --acid`: the clean shot is greener than red over x 11840-11876, y 18339-18351 (`px.py row 18343
+  11820 11892 4`: 102-123/165-171/97-104, against pink 174-180/127-133/114-116 either side), under a metal
+  that is there in both shots: chip 2 bright at y 18337-18340 and y 18346-18349 with a dim bar at y 18343
+  between and end bars at x 11835 and x 11877, chip 1 the same with the bar at y 18340. A pass-over of a box
+  or of a poly edge gives the same bar (tracing guide, trap 22) but leaves the clean shot protected, with no
+  hole; the control is L4 on the same column 40 px south (cream, no hole). Drawn `?C` on a `?P` head
+  (Ambiguity 228).
+- **The strip and the rectangle.** In the 26 px gap between L3 and L4 the column carries a heavy-outlined box
+  (x 11838-11870, y 18353-18375, in all three shots at 5x), and a strip y 18359-18368 runs west from it to the
+  east edge of a rectangle x 11510-11724, y 18327-18399 under L3 and L4. Under both metals the rectangle is
+  tan (`px.py col 11600 18316 18406 5`: 187-196/168-180/116-131) where the same metals have pink beside it
+  (`col 11460`: 176-182/117-125/120-123); no hole under either metal (`tl5_tracks.py h 18343 11480 11900`, `h
+  18386`: red minus green 4 at the least over 210 px); its four edges are heavy dark lines (`px.py row 18343
+  11492 11520 4`, `row 18343 11708 11736 4`, `col 11600 18314 18334 3`, `col 11600 18392 18410 3`). The strip
+  is plain, not orange, in both metal shots, with the column 45 px away as the control for poly (chip 2 blue
+  76-84 against 54-62, chip 1 green 116 against 82-110: `px.py col 11810 18348 18380 2`, `col 11780 18330
+  18400 3`), a little redder than the field in the same gap east of the column (`col 11900 18350 18378 4`),
+  and no edge crosses it where it meets the rectangle (`px.py row 18364 11690 11770 4`: 172-177 in chip 2 and
+  141-150 in chip 1 without a dip). Read as a diffusion arm of a plain diffusion rectangle, joined to the
+  column by a buried contact: `?B`, `?D`, `?D` (Ambiguity 229). `eof_tee.py h 18358 18369 11735 11838`: no
+  branch. No transistor: nothing crosses the rectangle but the two metals.
+- **Extraction.** The contact joins the net run 71 named `eof_w17734` to `ck_out` (`@alias ck_out
+  eof_w17734`): `ck_b` = NOR(`ck_clkn`, `ck_g4`, `ck_out`); `ck_out` = NOR(`ck_n2`, `rst_lat`), which is
+  piece `u17690`'s pull-down and load on the buffer's output (the buffer's own pull-ups, gated by `ck_ga`, are
+  not in the equation). Both DEPEND (`tools/unsure.py --equations`); without the uncertain items they are as
+  after run 71.
+
 ## Ports
 
 The net is driven outside the package (by `rdp2`'s NOR). `in` marks the port beyond which the
@@ -9077,6 +9183,10 @@ driver lies; the other three lead to the loads.
    assumption: the geometry of this run as drawn, and (a) believed, not traced. What would settle it: the
    re-read of the line `trunks` drew at 1x from `bd1`'s inverter 2 to the contact (11288,17517) and of
    `cdp4`'s track T2 and its pad row (R56).
+   **Run 72**: the re-read is done and the line is as drawn (piece `rl56`), so (a) has nothing under it; and
+   piece `l3tap` gives a fourth reading, (d): the bus piece on g5 has a second end whose poly is contacted
+   by `ck_out`'s bus line L3, so g5's input is the clock and `ck_b` = NOR(`ck_clkn`, `ck_g4`, `ck_out`).
+   Working assumption now (d), which rests on Ambiguity 228.
 227. **Is bus line L6's metal on the pad (10895,18468)?** (run 71; `trunks`' `M 10888,18470 x11610`; the
    reviewer of round 85 could not check it.) Between the contact's ring and the bright metal east of it lie
    a medium strip of 4-6 px and one dark line of 6 px (x 10914-10919), 18 px without bright metal in chip 2
@@ -9085,6 +9195,48 @@ driver lies; the other three lead to the loads.
    line with metal at once beyond it is not a gap, and a pad with a contact has to have a metal, and none
    other leaves this one; (b) L6's metal ends 6 px short of the pad: then the pad's contact would lead
    nowhere and L6's west end would be free. Working assumption (a). No `?` (not this package's item).
+
+228. **Is the slot under L3 at (11858,18345) a contact?** (run 72, piece `l3tap`; it decides what the clock
+   block's gate g5 takes, AMB-062.) L3 (`ck_out`, `trunks`' `M 11012,18342 x12820`) passes over the head of
+   the poly column from the pad (11852,18467). Readings: (a) a slot contact of L3 on the head: the clean
+   shot is vivid green (102-123/165-171/97-104) over 36 x 12 px exactly under the metal, both metal shots
+   have a dim lengthwise bar there between bright rows and end bars at x 11835 and x 11877, and chip 2's
+   stripped shot a pink blob; (b) a pass-over (tracing guide, traps 22, 26): the bar alone would allow it,
+   but a pass-over leaves the clean shot protected, as it is where L4 crosses the same column; (c) L3 is two
+   metals that end on the head: both metal shots have bright metal above and below the bar, so no. Not what
+   the guide's contacts look like in one respect: the metal is not widened (L3 is 16 px, the slot lies
+   inside it), and the green is more saturated than the holes of trap 26 (140-178/150-193/85-108). `clock`'s
+   first reading had the join; `trunks`' correction of 2026-11-15, "checked at 6x", said no contact. Working
+   assumption (a), drawn `?C` on `?P`. What would settle it: a second reader at 6x in both chips' stripped
+   shots (`acid`, `acid1`), and a control, a known slot contact of a 16 px bus line (L3's own west end
+   (11027,18340) is on a 40 px poly and looks different).
+229. **What the strip in the gap and the rectangle are** (run 72, piece `l3tap`). Readings: (a) a diffusion
+   arm y 18359-18368 from a buried contact on the column to a plain diffusion rectangle x 11510-11724,
+   y 18327-18399 under L3 and L4: capacitance on the net (as drawn, `?B`, `?D`, `?D`); (b) the strip is poly
+   and crosses the rectangle lengthwise in the gap: a transistor 214 wide between the rectangle's two
+   halves, which have no contact, so again only capacitance; (c) the rectangle is a poly plate: no, it is
+   tan under metal (red minus green 9-25) where the column 130 px east is cream (40-90). The strip's layer
+   rests on colours in a 26 px gap between two metals, where the clean shot is a dark bar whatever lies
+   there (trap 2). Working assumption (a). No equation depends on it.
+230. **Line B across gate g6 of the clock block** (run 72; looked at, not drawn; `clock`'s `M
+   11105,18745:13010,18768`, one line). `tools/textmap.py 11880 18738 12064 18772 4 --acid`, `px.py col X
+   18738 18774 4` at x 11915, 11950, 12006, 12012, 12018, 12060, images `r72_g2`, `r72_g3`, `r72_g4`,
+   `r72_g6`. Line B is bright from the west to x 11968; a ring x 11972-11998 with an orange centre on the top
+   of g6's gate poly (both stripped shots have a paler patch on the poly there: `clock`'s contact (11985,18760));
+   then 35 px without metal in either chip (x 11990-12025); a pad (12034,18757) with a bright centre and a
+   hole in the clean shot (151-159/175-178/112-119), with 11 px of ring on its east side and line B on east.
+   The clean shot between ring and pad: an olive strip (133-138/124-143/75-86 at x 12012 for the whole track,
+   y 18742-18766) between dark lines, the look of a gap between two metals (trap 2); protected pink, tan or
+   salmon at the other five columns. Readings: (a) one line, dark over g6's output strip and tie as it is
+   dark for 30-58 px over every gate of the row (`tl5_tracks.py h 18756 11100 12000`), as `clock` drew it; (b)
+   two metals: the west one ends on g6's gate contact, the east one starts on a contact on g6's output node,
+   where `clock` has a buried contact (12001-12040, 18738-18770); `clock`'s wide contact of line A on the same
+   node (11968-12028, 18703-18720) shows no ring and no hole (`tl5_tracks.py h 18712 11060 13090`; `textmap.py
+   11944 18698 12060 18728 4 --acid`) and would then be an outline. Under (b) g6's output is on `ck_b` and
+   g5's output is not on a phase line at all. Working assumption (a): with g5's input on `ck_out` the
+   generator as drawn is consistent (g5 and g6 are the two phases' top-up units, each holding its phase low
+   while the other signal is high). What would settle it: the gate row g1-g6 re-read from the stripped shots
+   (it was read from the metal shot in the first days, before the traps were written): proposed re-read item.
 
 ## Review
 
@@ -13047,6 +13199,20 @@ Round 85: no findings.
 
 ## Not done
 
+- **Next (after run 72)**: the line named `rst_lat` is re-read and stands (`rl56`): item (a) of the list
+  after run 71 is done. Piece `l3tap` puts gate g5's input on `ck_out`. Open: (a) **Ambiguity 228**: L3's
+  slot on the column's head, the one item AMB-062 now hangs on: a second reading at 6x in `acid` and `acid1`
+  with a control; (b) **piece `u17690` again**: it is now a unit on `ck_out`. Is the thin metal x 10441 south
+  of its pad (10439,17734) one metal with `ck_out`'s jog 45 px north of the pad (`trunks`' ring, `M
+  10311,17908 .. x10398 y17689 x10441 y17238`; run 70 read two metals), and is the metal's corner
+  (10441,18306) joined to the ring's corner 25 px south (run 71 read bare ground)? If the pad is a tap of
+  `ck_out`, look at the unit again as a NOR of `rst_lat` and `ck_out` like piece `u17170` 500 px north;
+  (c) **line B across g6** (Ambiguity 230) and with it the clock block's gate row g1-g6 from the stripped
+  shots; (d) the strip and the rectangle (Ambiguity 229): the junction at (11724,18364) and the box at 6x in
+  `acid1`; (e) R56's other items, which Ambiguity 222 (AMB-060) still needs: `lc2_w8450`'s path from `lc2`'s
+  output box to the pad (10484,17994), and the 38 px of the thin metal over the latch node's box; (f) `bd1`'s
+  inverter 2 and the inverter that makes `rst_a_n` (R1): the latch on R4's match is open only while
+  `rst_lat` is high, i.e. during reset, as read; (g) items (b) to (f) of the list after run 71.
 - **Next (after run 71)**: item (b) of the list after run 70 is done: `eof_w17734`'s wire is drawn to its end,
   the bus piece of the clock block's gate g5 (piece `o734`). Open: (a) **the sense of the column's gate
   poly** (Ambiguities 222 and 226, AMB-060, R56): two wires out of this column now contradict the name
