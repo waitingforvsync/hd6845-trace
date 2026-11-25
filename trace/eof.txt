@@ -5317,33 +5317,32 @@ P 10880,18454:10914,18484              # the end pad (10895,18468)
 N P 10650,18297 eof_w17734
 N P 10898,18350 eof_w17734
 # ======================================================================
-# Run 72 (2026-11-25), piece `l3tap`: the EAST end of the bus piece on gate g5 of the clock block (the net run 71
-# named eof_w17734). The bus metal y 18455-18480 does not stop at g5's contact (11772,18467): it runs on 80 px
-# to an end pad (11852,18467) (ring, bright centre in both chips; open ground east of x 11875 as far as g6's
-# pad (12108,18467): tl5_tracks.py h 18467 11560 12420). The pad's poly is a column x 11849-11863 north (open
+# Run 72 (2026-11-25), piece `cap5` (first shipped as `l3tap` with a contact of bus line L3 that is not there:
+# review round 86). The EAST end of the bus piece on gate g5 of the clock block (the net eof_w17734). The bus
+# metal y 18455-18480 does not stop at g5's contact (11772,18467): it runs on 80 px to an end pad
+# (11852,18467) (ring, bright centre in both chips; open ground east of x 11875 as far as g6's pad
+# (12108,18467): tl5_tracks.py h 18467 11560 12420). The pad's poly is a column x 11849-11863 north (open
 # poly, orange in both metal shots, in the gaps at y 18409 and y 18446; cream under the bus metal y 18420-18440
-# and under L4, no hole under either: plain crossings) to a head x 11836-11880, y 18336-18353 under trunks' bus
-# line L3 (ck_out). L3 HAS A SLOT CONTACT ON THE HEAD: the clean shot is vivid green (102-123/165-171/97-104)
-# over x 11840-11876, y 18339-18351 under a metal that both metal shots show running through (bright rows at
-# y 18337-18340 and y 18346-18349 in chip 2, a dim lengthwise bar between, end bars at x 11835 and x 11877).
-# L4, 40 px south, crosses the same column over protected cream with no hole: the control. Drawn uncertain
-# (`?C`): the join puts g5's input on ck_out, and one view decided it (notes, Ambiguity 228).
-?P 11836,18336:11880,18353             # the column's head under L3
-?C 11858,18345 s=34x10                 # L3's slot contact on it
-P 11856,18348 y18467 w=14              # the column
+# and under L4, no hole under either: plain crossings) into a rounded box x 11833-11877, y 18342-18386 that
+# lies in the gap between trunks' bus lines L3 (ck_out) and L4 and reaches 8-10 px under each (one heavy
+# outline in both metal shots and chip 2's stripped shot).
+# NO CONTACT of L3 on the box (notes, Ambiguity 228): the clean shot is green under L3 over x 11840-11876,
+# y 18339-18351, but so it is under L4's edge at the box's south corners ((11841,18380) 101/153/102,
+# (11873,18380) 127/182/108), and chip 2's stripped shot has the same pink there: the box's bare floor. L3
+# keeps its width, has no ring, and its real contacts (11027,18340), (12807,18339) are widened pads.
+P 11856,18360 y18467 w=14              # the column, from inside the box to the pad
 P 11836,18450:11870,18484              # the end pad (11852,18467)
 C 11852,18467 s=20x20
-# In the gap between L3 and L4 the column carries a heavy-outlined box (x 11838-11870, y 18353-18375 in all
-# three shots: a buried contact), and a narrow strip y 18359-18368 runs west from the box in that gap to the
-# east edge (x 11724) of a plain rectangle x 11510-11724, y 18327-18399 that lies under L3 and L4: tan under
-# both metals (187-196/168-180/116-131) where the same metals have pink beside it, no hole under either
-# (tl5_tracks.py h 18343 / h 18386: red minus green 4 at the least). The strip reads plain, not orange, in
-# both metal shots against the column 45 px away (chip 2 blue 76-84 against 54-62, chip 1 green 116 against
-# 82-110) and no edge crosses it at x 11724 (px.py row 18364 11690 11770 4): a diffusion arm of the rectangle.
-# Read as a plain diffusion on the net (added capacitance, like the rectangle on g5's output in
-# trace/clock.txt). The layer of the strip rests on colours in a 26 px gap: uncertain (notes, Ambiguity 229).
-?B 11840,18354:11868,18374             # the box: the column onto the strip
-?D 11720,18359:11866,18369             # the strip in the gap
-?D 11510,18327:11724,18399             # the rectangle under L3 and L4
+# The box is read as a buried contact of the column onto diffusion (uncertain: the column may instead cross the
+# box as a gate; no net differs: notes, Ambiguity 229). From the box a diffusion strip y 18357-18370 runs west
+# in the gap between L3 and L4 to a plain diffusion rectangle x 11510-11726, y 18282-18402 that lies under
+# cdp4's rd_b0 metal (y 18292-18306), L3 and L4: tan under all three (187-196/158-180/116-131) where the same
+# metals have pink beside it, no hole under any (tl5_tracks.py h 18300, h 18343, h 18386). Strip and rectangle
+# are plain, not orange, in both metal shots and chip 2's stripped shot (the column 45 px away is the control
+# for poly), one outline. Nothing crosses the rectangle but the three metals: no transistor. Plain diffusion
+# on the net: capacitance, like the rectangle on g5's output in trace/clock.txt.
+D 11835,18343:11875,18385              # the box's floor
+?B 11835,18343:11875,18385             # the column onto it
+D 11720,18357:11840,18370              # the strip in the gap
+D 11510,18282:11726,18402              # the rectangle
 N P 11856,18410 eof_w17734
-@alias ck_out eof_w17734
