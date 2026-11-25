@@ -5293,3 +5293,26 @@ M 10484,17754 y17766 w=14              # onto regs' M 10485,17994 y17760
 N M 10484,17200 lc2_w8450
 N M 10484,17600 lc2_w8450
 N M 10484,17762 lc2_w8450
+# ======================================================================
+# Run 71 (2026-11-25), piece `o734`: eof_w17734 (the output of piece u17690, = NOT rst_lat) on from run 70's
+# PORT (10441,18010) to its end. Wiring only; no uncertain item.
+# The thin metal x 10434-10448 runs on south (bars of 8-9 px only, tl3_thin.py 10433 10449 18000 18320) to
+# y 18306 and turns east (arm y 18293-18307) onto a pad (10482,18297): ring, bright centre in both chips, a
+# hole in the clean shot. 25 px of bare ground south of the corner, then ck_out's ring corner: another metal.
+M 10441,18006 y18300 x10488 w=14
+P 10464,18280:10500,18314              # the pad (10482,18297)
+C 10482,18297 s=20x20
+# The pad's poly row y 18288-18306 east: over field under the VSS rail x 10548-10598 and the VCC rail
+# x 10722-10770 (railprof.py: "poly over field" under both; no gate), under eof_w16432's thin metal
+# x 10804-10817 (no contact) to x 10907, where it turns south under the corner of cdp4's rd_b0 metal
+# (x 10897 / y 18298). NO CONTACT there (notes, Ambiguity 224): the clean shot is uniform cream with no hole,
+# the metal keeps its width, and the three dark bars round the bright patch are 6-8 px over the poly's own
+# edges. Then a column x 10889-10907 south, under trunks' bus line L4 (y 18375-18393) and the bus metal
+# y 18420-18438 (plain crossings: protected poly, the metal bright over it), into the pad (10895,18468):
+# trunks' contact `C 10900,18470`, whose metal is bus line L6's left piece to gate g5 of the clock block.
+# trunks' poly link from rst_ck's stem to this pad does not exist (10 px of open field x 10870-10878:
+# corrected in trace/trunks.txt; the label on the bus piece in trace/clock.txt changed to this net).
+P 10482,18297 x10898 y18472 w=18
+P 10880,18454:10914,18484              # the end pad (10895,18468)
+N P 10650,18297 eof_w17734
+N P 10898,18350 eof_w17734

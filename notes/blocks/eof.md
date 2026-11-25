@@ -1738,6 +1738,30 @@ uncertain items (the thin metal over four boxes; no equation rests on them).
 - **Review**: round 84 (full): no finding that changes a connection; three geometry remarks fixed
   (the VCC rail's edge, the west box's size, a corner of the node's diffusion), connections identical.
 
+Run 71 (richtw1's session, Claude Fable 5.2; 2026-11-25 13:19 +0100 on). One piece, wiring only, no uncertain
+item; and a correction to `trace/trunks.txt` / `trace/clock.txt` (commit b345eda).
+
+- **Piece `o734`: `eof_w17734`'s wire ends on the bus piece of the clock block's gate g5** (traced, firm). From
+  run 70's port (10441,18010) the thin metal runs on south to y 18306 and turns east onto a pad (10482,18297);
+  the pad's poly row y 18288-18306 runs east over field under both rails of the column (no gate) and under
+  `eof_w16432`'s thin metal to x 10907, turns south under the corner of `cdp4`'s `rd_b0` metal (read as no
+  contact: Ambiguity 224) and runs as a column x 10889-10907 under two bus metals into the pad (10895,18468),
+  the west end of bus line L6's left piece, whose only load is the gate of g5, the transistor that pulls
+  `ck_b` low.
+- **`trunks`' poly link from `rst_ck`'s stem to that pad does not exist** (Ambiguity 225): 10 px of open field
+  lie between the stem's foot and the pad's ring. So gate g5's input is not `rst_ck` but this wire:
+  **`ck_b` = NOR(`ck_clkn`, `ck_g4`, `eof_w17734`)** (firm in the extraction). `rst_ck`'s stem still joins bus
+  line L4 to the west pad (10810,18470) and the run to the left of the die: nothing else of `rst_ck` changes.
+- **What this says about the column's gate poly** (Ambiguity 226; R56, AMB-060). As named, `eof_w17734` =
+  NOT `rst_lat` is high whenever the chip is not in reset, which would hold `ck_b` low for good: the name
+  `rst_lat` on the poly that gates this column's units is very probably wrong in sense (the poly is low
+  during reset, as `rst_a_n` is). That is the same conclusion the thin metal x 10484 leads to (run 70: its
+  north end NOT `rst_lat`, its south end `lc2_w8450`, high during reset). Not resolved here: the poly's route
+  from `cdp4`'s port (10789,17700) back to its driver is `trunks`' and `cdp4`'s reading (re-read item R56).
+- **Checks**: full extraction 2,515 nets, 4,838 transistors, 0 errors, 0 warnings; `eof_w17734` and `ck_b` firm
+  (`tools/unsure.py --equations`); 110 nets joined only through uncertain items, 1,216 uncertain items (as
+  before).
+
 ## Inventory
 
 | Piece | Where | What |
@@ -1880,6 +1904,7 @@ uncertain items (the thin metal over four boxes; no equation rests on them).
 | `u15826`, the inverter of `eof_w15955` (run 69) | x 10420-10775, y 15730-15880; the metal x 10434-10447, y 15825-15930 | piece `u16303`'s unit moved by (0,-477), with: an end pad (10440,15825) and its metal south to piece `u15955`'s pad; the row y 15815-15835 to x 10638; the diffusion from x 10494; `vss` south of the row on into piece `u15955`'s contact box; the west exit a closed poly pad (10474-10516, 15765-15798) on the box (10486-10518, 15768-15800); the plate (10686-10714, 15730-15861) with its head (10694-10714, 15728-15753) on `cdp4`'s row; VCC contact (10745,15811); both rails y 15740-15850 / 15925. Two transistors |
 | `u17690`, the second inverter of `rst_lat` (run 70) | x 10420-10775, y 17630-17765; the metal x 10434-10448, y 17734-18010 | diffusion (10546-10588, 17634-17736) under run 52's gate row y 17682-17698 (42/16) with the rail contact (10560,17652); west exit: neck (10519-10550, 17723-17735), tab (10490-10522, 17722-17742), buried contact (10482-10518, 17718-17746), poly neck y 17725-17743 to the end pad (10422-10456, 17717-17751) with a contact (10439,17734); output metal south to the port (10441,18010); load: the node east of the rail (10586-10626, 17716-17738) and (10610-10626, 17716-17753), arm (10612-10626, 17686-17720), strip (10622-10730, 17684-17708) under the plate (10628-10722, 17664-17730) (24/94), VCC box (10724-10770, 17684-17732) with the contact (10743,17706); tie: the plate's leg (10638-10666, 17728-17752), tab (10624-10660, 17738-17756), buried contact (10634-10668, 17738-17760); the two rails over the unit |
 | `t10484`, the thin metal x 10477-10491 (run 70; wiring) | x 10477-10491, y 16238-17766 | metal y 16277-16501, y 16537-16977 (`eof_w16213`) and y 17015-17458, y 17492-17717, y 17754-17766 (`lc2_w8450`); `?M` over the boxes at y 16238-16279, y 16499-16539, y 17456-17494, y 17715-17756; nothing at y 16977-17015 |
+| `o734`, `eof_w17734`'s wire to the clock block's bus piece (run 71; wiring) | the metal x 10434-10448, y 18010-18307; x 10464-10914, y 18280-18314; x 10880-10914, y 18306-18484 | the thin metal on south to a corner (10441,18300) and an arm east onto the pad (10482,18297) (contact); the poly row y 18288-18306 east over field under the VSS rail x 10548-10598, the VCC rail x 10722-10770 and the thin metal x 10804-10817 to x 10907; a column x 10889-10907 south under bus line L4 (y 18375-18393) and the bus metal y 18420-18438 into the pad (10895,18468) (`trunks`' contact; bus line L6's left piece east to gate g5 of the clock block) |
 
 The bundle left of the right datapath has tracks L0..L11 at x 13348 + 43.4 k.
 
@@ -6681,6 +6706,93 @@ order of the staircase bundle above it) names another line; `lc2`'s inverter out
 box is uncertain); or the poly that gates the three units here is not `rst_lat` (it comes through `cdp4`'s
 port (10789,17700)).
 
+### Run 71: `eof_w17734`'s wire to the clock block's gate g5 (piece `o734`), and `trunks`' link that is not there
+
+Views `r71_s1.png` (1.3x, both shots, every package's trace outlined), `r71_e1.png` (3.2x, the row's east end,
+three shots), `r71_p1m.png`, `r71_p1a.png` (6.5x, the corner under `rd_b0`'s metal, four shots), `r71_c1.png`
+(2.7x, the column), `r71_l1m.png`, `r71_l1a.png` (4.6x, the two pads at y 18468 and the stem's foot, four
+shots), `r71_w1.png` (5.2x, the west corner and pad), overlays `r71_ov1.png` (3.6x), `r71_ov2.png` (4.5x). The
+survey with every measurement is `cache/scratch/eof/survey.md` ("run 71 survey").
+
+**Piece `o734`** (wiring only; x 10434-10914, y 18010-18484).
+
+- **The thin metal on south** (`tools/tl3_thin.py 10433 10449 18000 18320 --thr 176 --min 8`: bars of 8-9 px
+  only down to y 18246, dark from y 18307). `tools/px.py col 10441 18276 18330 3 metal,metal1,acid1b`: metal
+  to y 18306 (pink protected field under it in the clean shot), then bare ground y 18315-18327 (green in the
+  clean shot) and `ck_out`'s ring corner from y 18330: another metal (trap 33). It turns east: `px.py row
+  18299 10424 10476 3`: metal x 10436-10463, the ring of a pad x 10466-10475; the arm is y 18293-18307
+  (`px.py col 10462 18276 18324 3`).
+- **The pad (10482,18297)** (`tools/textmap.py 10454 18268 10512 18322 2 --acid`): a ring about 36 px across,
+  a bright centre x 10476-10484, y 18294-18300 in both chips, a hole ('g') in the clean shot at
+  (10480-10492, 18302-18306). Its poly row leaves east; nothing else leaves it (open ground north and south,
+  the metal west).
+- **The row y 18288-18306** (`px.py row 18296 10456 11000 8 metal,acid1b,acid`): open orange poly at
+  x 10512-10536, 10608-10712, 10784-10792 and 10832-10880 (164-171/109-129/49-69 in chip 2), protected cream
+  under the VSS rail (x 10544-10596), the VCC rail (x 10720-10770), `eof_w16432`'s thin metal (x 10804-10817)
+  and the corner of `rd_b0`'s metal (x 10888-10906). **No gate**: `tools/railprof.py 10548 10598 18180 18420`
+  gives "poly over field" at y 18288-18306 with field on both sides (y 18261-18287, y 18307-18398), and
+  `railprof.py 10722 10770 18180 18420` the same (y 18288-18307; field y 18265-18287 and y 18308-18368);
+  `tools/opendiff.py 10420 18240 10940 18480` lists no diffusion beside the row (the khaki windows south of
+  it are open field between the metals). No pad and no contact where it passes under the thin metal x 10810
+  (the metal keeps its width; clean shot cream 217/160/107 under it).
+- **The corner under `rd_b0`'s metal** ((10898,18298); Ambiguity 224). The row's east end and the head of a
+  poly column x 10890-10906 are one L of poly (clean shot: cream without a break from the row into the
+  column; field, pink, under the vertical metal north of y 18288 and under the bus metal east of x 10912).
+  `cdp4`'s `rd_b0` metal (the read bus's column 7: `M ... 10897,10390 y18298 x11230`) turns its corner
+  exactly over it. Read as no contact: the clean shot is uniform cream there (217-228/152-172/103-121;
+  `px.py row 18298 10876 10924 3 all`, `col 10899 18264 18322 3 all`) with no hole and no specks, where this
+  wire's two real contacts have a 'g' hole (the pad (10482,18297)) and dark specks (104-140/88-99/55-70, the
+  pad (10895,18468)); the metal keeps its width (x 10890-10906 north of the corner, the bright patch
+  x 10890-10908); and the three dark bars round the bright patch are 6-8 px of red 65-134, each over one of
+  the poly's own edges (north y 18282-18288, the row's top edge; east x 10908-10913, the column's east edge;
+  west, the metal's own edge), where a real ring here is 9-12 px of red 27-51 (the pad (10895,18468)) or
+  44-73 (`cdp4`'s pad (10896,13636) on the same track: `tools/textmap.py 10870 13610 10926 13664 2 --acid`).
+- **The column x 10889-10907, y 18306-18455** (`tools/textmap.py 10876 18306 10926 18462 3 --acid`): open poly
+  at y 18315-18369, y 18402-18411 and y 18444-18453 (edge lines x 10882-10888 and x 10906-10912 in both metal
+  shots); under `trunks`' bus line L4 (y 18375-18393, `rst_ck`) and under the bus metal y 18420-18438
+  (`eof_w16432`'s, in no trace file) protected poly (clean shot red minus green 48-72) with the metal bright
+  over it between the column's two edge bars: plain crossings, no ring, no hole.
+- **The end pad (10895,18468)** (`px.py col 10897 18438 18474 2 all`): the clean shot is salmon without a
+  break from y 18438 to y 18462, so the column runs into the pad; ring y 18456-18462, a bright centre
+  y 18466-18472 in both chips (202-204/170-181 and 209-221/190-205), dark specks in the clean shot. `trunks`
+  has its contact (`C 10900,18470`) and its metal east, bus line L6's left piece (`M 10888,18470 x11610`),
+  which `trace/clock.txt` carries on to the contact (11772,18467) on the gate poly of g5.
+
+    drawn: M 10441,18006 y18300 x10488; pad, contact (10482,18297); P 10482,18297 x10898 y18472; end pad box
+
+**`trunks`' link** (Ambiguity 225; corrected in `trace/trunks.txt`, the label in `trace/clock.txt` changed:
+commit b345eda). `trunks` (read at 1x) and the clock notes' "Route of `rst_ck`" had one poly link along y 18470
+from the west pad (10810,18470) through the foot of `rst_ck`'s stem (the poly down from L4's contact
+(10857,18383)) to the east pad. `px.py row 18468 10796 10922 3 all` (and rows 18452, 18460, 18476, 18484,
+18488, 18492 over x 10850-10890; `px.py col 10873 18440 18500 4 all`; `textmap.py 10792 18436 10926 18500 2
+--acid`):
+
+| x at y 18468 | chip-2 metal | chip-1 metal | clean | what |
+|---|---|---|---|---|
+| 10805-10814 | 185-235 bright | 147-188 | dark specks | the west pad's centre (contact) |
+| 10823-10829 | 59-120 dark | 73-103 | cream 178-216/157-178 | its ring, protected poly under it |
+| 10832-10859 | 148-172/107-115/47-63 | 134-152/68-80/34-41 | 97-126/59-100 dark red-brown | the stem's foot: open poly |
+| 10862-10868 | 63-130 | 86-121 | dark | the foot's east edge line |
+| 10871-10877 | 92-133/58-126/39-74 | 103-140/69-127/51-79 | 125-135/140-156/75-91 **green** | open field |
+| 10880-10889 | 34-98 dark | 52-139 | pink | the east pad's ring |
+| 10892-10901 | 171-207 bright | 149-210 | dark specks | the east pad's centre (contact) |
+
+The foot's east edge line is there at every row from y 18448 to y 18478 (chip-2 map: red 48-95 at x 10864-10870),
+and the strip x 10870-10878 is plain in both metal shots (chip 1 126-146/110-131/67-83, where the foot's poly
+is 134-152/68-80) and green in the clean shot from y 18444 to y 18476; the foot's bottom edge is y 18480-18486
+and the ground south of it is bare. The chip-2 stripped shot alone shows a reddish strip 8 px wide there
+(121-143/78-92/61-70) between two green lines: read as the ground between two edge lines (trap 34). So the
+foot is joined to the west pad only, and **the east pad, bus line L6's left piece and gate g5 are on
+`eof_w17734`**. `rst_ck` keeps its stem, the west pad and the run to the left of the die.
+
+**What the extraction says now.** `ck_b` = NOR(`ck_clkn`, `ck_g4`, `eof_w17734`), with `eof_w17734` = NOT
+`rst_lat` (both firm). As named that cannot be the chip: `ck_b` could rise only during reset. With the poly
+that gates this column's three units low during reset (`rst_a_n`'s sense) instead, `eof_w17734` is a reset
+copy made here by a weak-load inverter and `ck_b` is held low during reset, which is what the clock notes
+believed of g5 all along; and piece `u16303`'s output on the thin metal x 10484 is then a reset copy too,
+which agrees with `regs`' `lc2_w8450` at that metal's other end (Ambiguity 222). Two independent wires out of
+this column each contradict the name `rst_lat` on its gate poly, in the same way (Ambiguity 226; R56).
+
 ## Ports
 
 The net is driven outside the package (by `rdp2`'s NOR). `in` marks the port beyond which the
@@ -6850,7 +6962,8 @@ driver lies; the other three lead to the loads.
 | `vcc` | metal | (10722-10770, 15740), (10722-10770, 16230), (10722-10770, 16340) and (10722-10770, 17560) | - | pieces `u15826`, `u16303`, `ld566` (run 69): `bc2`'s VCC rail, drawn from `bc2`'s end y 15746 to y 16020, over `rst_lat`'s unit, and y 17380-17560 |
 | `lc2_w8450` | metal | (10477-10491, 17015) | ? | piece `t10484` (run 70): the north end of the drawn part of the thin metal that comes up from `regs`' end pad (10484,17994), at the south wall of the latch node's box; faces `eof_w16213`'s port at y 16977 (Ambiguity 222: on the photos one metal, by the two names two) |
 | `lc2_w8450` | metal | (10477-10491, 17760) | (met) | piece `t10484` (run 70): onto `regs`' `M 10485,17994 y17760` (its port "the track x 10485 on north") |
-| `eof_w17734` | metal | (10434-10448, 18010) | out | piece `u17690` (run 70): the output metal of the inverter `eof_w17734` = NOT `rst_lat`, drawn south to the claimed region's edge; it runs on to a corner at y ~18295, east onto a pad (10482,18295), and a poly row y 18286-18306 east past x 10830: not drawn |
+| `eof_w17734` | metal | (10434-10448, 18010) | (met) | **read by piece `o734` (run 71): the metal runs on to a pad (10482,18297); no longer a port.** Before: out | piece `u17690` (run 70): the output metal of the inverter `eof_w17734` = NOT `rst_lat`, drawn south to the claimed region's edge; it runs on to a corner at y ~18295, east onto a pad (10482,18295), and a poly row y 18286-18306 east past x 10830: not drawn |
+| `eof_w17734` | poly | (10880-10914, 18454-18484) | out | piece `o734` (run 71): the end pad (10895,18468) under `trunks`' contact `C 10900,18470`; on by `trunks`' bus line L6 (left piece) to gate g5 of the clock block. `trunks` and `clock` have no ports file |
 | `rst_lat` | poly | (10546-10597, 17682-17698) | (met) | **read by piece `u17690` (run 70): the gate of the inverter `eof_w17734`; no longer a port.** Before: run 52's branch row, "the gate of a pull-down nobody draws" |
 | `vss` | metal | (10548-10598, 17780) | - | piece `u17690` (run 70): the VSS rail, drawn on from y 17590 to y 17780; it runs on south |
 | `vcc` | metal | (10722-10770, 17780) | - | piece `u17690` (run 70): `bc2`'s VCC rail, drawn on from y 17560 to y 17780; it runs on south |
@@ -8926,6 +9039,41 @@ driver lies; the other three lead to the loads.
    from y 17686 to y 17750 in both metal shots (blue 82-92, where the row's poly has blue under 70) with no
    edge line across it. No `?`. The dark box that the three units of run 69 have in their node bands
    (Ambiguity 220) is not seen here: this unit's band is a different shape.
+
+224. **Is there a contact where `rd_b0`'s metal turns its corner over the poly corner (10898,18298)?** (piece
+   `o734`, run 71.) `cdp4`'s read bus metal of column 7 comes down x 10897 and turns east along y 18298
+   exactly over the place where `eof_w17734`'s row turns south. Both metal shots show a bright patch
+   x 10890-10908, y 18290-18306 between dark bars on three sides, which at 3x looks like a pad. Readings:
+   (a) no contact, two nets crossing (as drawn): the clean shot is uniform cream with no hole and no specks
+   (217-228/152-172/103-121), the metal is no wider at the corner than north of it, each bar lies over one
+   of the poly's own edges or is the metal's own edge and is 6-8 px of red 65-134 (a real ring on this wire
+   and on this track is 9-12 px of red 27-73), and the chip-2 stripped shot is pale there as it is over the
+   same column under the two bus metals further south; (b) a contact: `rd_b0` would be one net with
+   `eof_w17734` and the clock gate's input, a read bus line shorted to an inverter's output. Working
+   assumption (a); no `?` (nothing is drawn there). What would settle it further: nothing more in these
+   photos; `cdp4`'s pad (10896,13636), a real contact on the same track, shows no hole in the clean shot
+   either, so the clean shot's "no hole" is weaker here than the ring's width and the metal's width
+   (tracing guide, traps 13 and 26).
+225. **The gap between the foot of `rst_ck`'s stem and the east pad (10895,18468)** (run 71; `trunks`' link,
+   corrected in commit b345eda). Three shots show 10 px of field at x 10870-10878 over the whole height of
+   the foot (plain in both metal shots, green in the clean shot, the foot's east edge line beside it at every
+   row y 18448-18478); the chip-2 stripped shot shows a reddish strip 8 px wide there between two green
+   lines (121-143/78-92/61-70, like poly's 142-162/101-121/56-69 on the foot). Readings: (a) field: no link,
+   as drawn (the strip in the stripped shot is the ground between two edge lines; a link would have no
+   edge line across it, and both metal shots and the stripped shot show one on each side); (b) a link 8 px
+   high or a sliver of poly: `rst_ck` and `eof_w17734` would be one net, two inverters' outputs of opposite
+   sense as named. Working assumption (a). No `?`.
+226. **`eof_w17734` as named cannot be the input of the gate that holds `ck_b` low** (run 71; with Ambiguity
+   222, AMB-060 and R56). `ck_b` = NOR(`ck_clkn`, `ck_g4`, `eof_w17734`) and `eof_w17734` = NOT `rst_lat`,
+   both firm as drawn: `ck_b` could then rise only during reset. Readings: (a) the poly that gates this
+   column's units (run 52's branch from `cdp4`'s port (10789,17700)) is not `rst_lat` but a signal low
+   during reset: then `eof_w17734` and piece `u16303`'s `eof_w16213` are reset copies, `ck_b` is held low
+   during reset and the thin metal x 10484 agrees with `lc2_w8450` at its south end; one misnamed line
+   explains both contradictions; (b) this run's wire is wrong somewhere (the corner, Ambiguity 224; the
+   end pad; the link, Ambiguity 225); (c) the clock block's gate g5 is not what `clock` read. Working
+   assumption: the geometry of this run as drawn, and (a) believed, not traced. What would settle it: the
+   re-read of the line `trunks` drew at 1x from `bd1`'s inverter 2 to the contact (11288,17517) and of
+   `cdp4`'s track T2 and its pad row (R56).
 
 ## Review
 
@@ -12821,6 +12969,18 @@ Round 84: no findings that change a connection.
 
 ## Not done
 
+- **Next (after run 71)**: item (b) of the list after run 70 is done: `eof_w17734`'s wire is drawn to its end,
+  the bus piece of the clock block's gate g5 (piece `o734`). Open: (a) **the sense of the column's gate
+  poly** (Ambiguities 222 and 226, AMB-060, R56): two wires out of this column now contradict the name
+  `rst_lat` on it; re-read `trunks`' line from `bd1`'s inverter 2 (x 13435, y 16770; the contacts (13303,17688),
+  (12850,17691), (11288,17517); it runs beside `h_eq_r1`'s) and `cdp4`'s pad row y 17643 to the port
+  (10789,17700); (b) the column south of y 17765 (the rails run on; the bus rows cross under them over
+  field at y 18202-18222, 18246-18264 and 18288-18307: `tools/railprof.py`, run 71; diffusion under the VSS
+  rail from y 18399 and under the VCC rail at y 18369-18393 and from y 18401, not read); (c) the bus metal
+  y 18420-18440 east of x 10850 (`eof_w16432`; it passes over this run's column at x 10898 without a
+  contact); (d) `bc2_w15388`'s row east of x 10335; (e) `eof_w16040`'s driver; (f) the clock notes' "Route
+  of `rst_ck`" from the west pad (10810,18470) on was read at 1x like the link that was wrong (R4): its
+  first pads deserve the same look.
 - **Next (after run 70)**: the thin metal is drawn from both ends (piece `t10484`) and the last gate of
   `rst_lat`'s poly is drawn (piece `u17690`); item (a) of the list after run 69 is done as far as the photos
   go, item (b) for the unit at y 17630-17765. Open: (a) **the two names on the thin metal** (Ambiguity 222,

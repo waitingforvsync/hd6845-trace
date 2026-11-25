@@ -265,7 +265,7 @@ vcc            M      10722-10770,17560        -    piece ld566: the VCC rail, s
 # run 70: pieces t10484, u17690
 eof_w16213     M      10477-10491,16977        ?    piece t10484: the drawn south end of the thin metal from the pad (10440,16215), at the north wall of the latch node's box; the next 38 px are not drawn (Ambiguity 222, AMB-060)
 lc2_w8450      M      10477-10491,17015        ?    piece t10484: the drawn north end of the thin metal from regs' pad (10484,17994), at the south wall of the same box; faces the port above
-eof_w17734     M      10434-10448,18010        out  piece u17690: the output metal of the inverter eof_w17734 = NOT rst_lat, on south to a corner at y ~18295, a pad (10482,18295) and a poly row east: not drawn
+eof_w17734     P      10880-10914,18454-18484  out  piece o734 (run 71): the end pad (10895,18468) under trunks' contact C 10900,18470; on by trunks' bus line L6 (left piece) to gate g5 of the clock block
 vss            M      10548-10598,17780        -    piece u17690: the VSS rail, drawn on from y 17590 to y 17780; it runs on south
 vcc            M      10722-10770,17780        -    piece u17690: bc2's VCC rail, drawn on from y 17560 to y 17780; it runs on south
 lc2_w8450      M      10477-10491,17760        in   piece t10484: onto regs' M 10485,17994 y17760 (its port at the same place)
