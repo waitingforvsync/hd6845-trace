@@ -12978,7 +12978,7 @@ extraction.
 
 Round 84: no findings that change a connection.
 
-### Round 85 (full review; run 71, piece `o734` and the correction to `trunks` / `clock`; 2026-11-25, ended about 14:25 +0100, at commit a536295)
+### Round 85 (full review; run 71, piece `o734` and the correction to `trunks` / `clock`; 2026-11-25 13:35 to 13:50 +0100, at commit a536295)
 
 A fresh Fable 5.2 agent, briefed with the piece's seven claims (the metal to the pad (10482,18297); the row
 over field under both rails; no contact at the corner under `rd_b0`'s metal; the column under two bus metals;
