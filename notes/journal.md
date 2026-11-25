@@ -3531,3 +3531,31 @@ which other pieces still need; nothing trimmed. Ports: `eof_w17734`'s port moved
 `out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 1,019
 floor-plan blocks. Coverage: 73.0% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
 The refresh follows.
+
+## 2026-11-25 13:20 UTC  Refresh
+
+The fifteenth refresh (coordinator, on Opus 5.5), after `eof` runs 69-71 (the last refresh was 2026-11-24
+15:58 UTC). No claims active.
+
+Renames (one batch; `tools/names.py compare`: 1 net renamed, only names changed):
+
+- R1's match inverted: `bl0_w15566` -> `h_eq_r1_n` (`eof` run 69, piece `ld566`: `h_eq_r1_n` = NOT `h_eq_r1`,
+  firm). Glossary: a row of its own (the text moved out of the `bl0_w#` row). Catch-up for branches in flight:
+  `tools/rename.py bl0_w15566 h_eq_r1_n`.
+
+Left unrenamed on purpose: `eof_w16213` and `eof_w17734` (each NOT `rst_lat`, firm as drawn; `eof_w17734` is
+the input of the clock gate g5): the sense of the poly named `rst_lat` in `bc2`'s rail column is in doubt
+(R56, AMB-060, AMB-062), so they are named once it is settled; `cdp4_w10808` (NOT `eof_w15955`, whose input is
+a placeholder). `names.py candidates` section 1 lists only cell pin names made from a template (`ar#_q`,
+`d#_in`, `*_tab`, `cdp4_n_s#`), left as before; no placeholder aliases were added since the last refresh.
+
+`notes/operation.md`: header (2026-11-25; 2,515 nets, 4,838 transistors), 976 of 1,434 equations firm (was 972
+of 1,430: the three inverters of run 69 and the one of run 70, each firm), closing ranges AMB-001 to AMB-062 and
+R1-R56, the Clocks row on `ck_b` cites AMB-062. The tracer had already written run 71 into the Clocks and
+reset rows (g5's input is `eof_w17734`, not `rst_ck`); no equation changed status between the two snapshots
+other than by the rename.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 1,019 floor-plan
+blocks. The floor-plan label of `eof`'s new route said "reset copy to the clock gate", which is only the believed
+reading: changed to "wire to clock gate g5 (AMB-062)". Coverage: 73.0% traced; in some package region 99.9%;
+untraced and in no Queue row 0.4%. Cost report updated (`costs/richtw1.json`).
