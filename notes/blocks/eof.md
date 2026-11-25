@@ -13252,6 +13252,29 @@ as finding 1 intends (`.venv/bin/python tools/sameconn.py 5ba538c`: `ck_b` = NOR
 
 Round 86: one finding that changes a connection and one geometry finding, both confirmed and fixed. A fix check follows.
 
+### Round 87 (fix check; run 72, piece `cap5` after round 86's fixes; 2026-11-26 00:08 to 00:20 +0100, at commit 4e03147)
+
+A fresh Fable 5.2 agent, briefed with the diff since 5ba538c and the two findings it answers (the contact of
+L3 and the head removed, the box drawn as one `D` with `?B`, the column into it; the rectangle to y 18282, the
+strip, both without `?`), and told to check each change in the photos, every junction within 100 px, and both
+`sameconn.py` runs against 5ba538c. Images in `cache/scratch/eof/review-87/` (10 images at 4.5-5x in all four
+shots, `px.py` and `textmap.py`).
+
+What it checked and found right: the box one rounded outline x 11833-11877, y 18340-18386 in both metal shots
+and chip 2's stripped shot; no contact of L3 (the metal keeps its width; the floor's colours recur under L4 at
+the box's south corners; L3's contact (11027,18340) is a widened pad with a ring); no contact of L4 or of the
+bus metal y 18420-18440 on the column; the column's two edges inside the box at y 18363 (x 11845, 11867), its
+end by y 18353, nothing leaving north or east; the strip a feature and not field (against the same gap at
+x 11900-11930: 5 px narrower, red minus green +30 against +7 in the clean shot, +32 against +15 in chip 2's
+stripped shot) and plain, not poly (chip 2 blue 83-86 against the column's 57, chip 1 green 118 against 100);
+no edge across it at x 11726; the rectangle's outline x 11510-11727, y 18277-18405, one diffusion across both
+gaps (no extra edge lines against a field control at x 11470), flat tan under all three metals, nothing
+touching its edges; both `sameconn.py` runs show only the intended split (the two names apart, the two
+equations back, `ck_out`'s NOR gone; the 56 transistor differences of the full run identical once the two
+names are normalised), no new transistor or join.
+
+Round 87: no findings.
+
 ## Not done
 
 - **Next (after run 72)**: the line named `rst_lat` is re-read and stands (`rl56`): item (a) of the list
