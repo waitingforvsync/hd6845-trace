@@ -1402,4 +1402,4 @@ Round 13: no findings.
 
 ## Corrections (coordinator, from the handoff of `bl0` run 12, 2026-11-20)
 
-- For the record (nothing here was wrong): the thin metal inside the L of the clock's metal at x 7103, y 17305-17866 and along y 17866, and the metal along y 17866 / 17824 between the pads (7602,17866) and (8272,17821), south of `bl0_w17687`'s row and north of the clock's, are one wire, `bl0_w15566` (`bl0` run 12).
+- For the record (nothing here was wrong): the thin metal inside the L of the clock's metal at x 7103, y 17305-17866 and along y 17866, and the metal along y 17866 / 17824 between the pads (7602,17866) and (8272,17821), south of `bl0_w17687`'s row and north of the clock's, are one wire, `h_eq_r1_n` (`bl0` run 12).

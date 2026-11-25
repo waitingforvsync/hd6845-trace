@@ -641,7 +641,7 @@ P 4780,15522 x5626 w=22                            # poly row west (port at x 47
 P 7127,15550:7160,15583                            # north pad
 C 7143,15566
 P 7143,15566 x7260 w=22                            # poly row east, under the metal x 7179-7197 (no contact), into bc1's group (port at x 7260)
-N P 7230,15566 bl0_w15566
+N P 7230,15566 h_eq_r1_n
 M 7144,15566 y16259 w=14                           # thin metal x 7137-7151 south
 P 7127,16242:7160,16276                            # pad
 C 7143,16259

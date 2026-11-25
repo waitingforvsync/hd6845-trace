@@ -2674,7 +2674,7 @@ claims carry that name, like the `busl` session's; `costs/richtw1.json` is share
 One handoff file. Full extraction after it 2,462 nets, 4,594 transistors, 0 errors, 0 warnings; 914 of
 1,354 equations firm; 96 nets joined only through uncertain items (1,135 items): wiring only, seven new
 nets, no transistor, no uncertain item. Spot checks of the overlays: the six-line bundle's staircases and
-three of its pads at x 5050-5800, y 15450-16100, and `bl0_w15566`'s end pad (8272,17821)
+three of its pads at x 5050-5800, y 15450-16100, and `h_eq_r1_n`'s end pad (8272,17821)
 (`cache/scratch/refresh/h4_t6.png`, `h4_m7144.png`): the drawn shapes lie on the features.
 
 What it establishes (from the tracer's notes; marks as there):
@@ -2687,7 +2687,7 @@ What it establishes (from the tracer's notes; marks as there):
   each track north to the y of one of `bc1`'s six poly lines; the stretch (x 5490-7000, y 14080-15000)
   is `busl`'s and undrawn. If so the left array's fourteen rows take `cdp4_bus_s7`..`s0` and
   `cdp3_g_c7`..`c2`, the fourteen lines that R15 and R14 are compared with.
-- **`bl0_w15566`** (piece `m7144`; wiring, firm): the thin metal x 7144 is one wire from `bc1`'s gate
+- **`h_eq_r1_n`** (piece `m7144`; wiring, firm): the thin metal x 7144 is one wire from `bc1`'s gate
   group (port (7260,15566)) to a pad (8272,17821) and a poly row on east into `bc3` (port
   (8360,17821)); no transistor, no branch, both ends open.
 
@@ -2928,7 +2928,7 @@ What they establish (from the tracers' notes; marks as there):
 - **The first latch of both pairs has one enable** (run 31, firm), `eof_w16040`, followed 9,000 px to
   seven ends, all gates; **its driver is not found** (believed: the clock level opposite to `ck_out`).
 - **A chain of NORs under `bc1`'s west gate column** (runs 32-35; each marked by two ties, AMB-050):
-  `eof_w15523` = NOR(`rcs_e4`, `eof_w16040`, `bl0_w15566`); `eof_w15262` = NOR(`lc1_w7780`,
+  `eof_w15523` = NOR(`rcs_e4`, `eof_w16040`, `h_eq_r1_n`); `eof_w15262` = NOR(`lc1_w7780`,
   `rcs_mv`); `eof_w15128` = NOT `rst_n`; `eof_w15781` = NOR(`eof_w15523`, `eof_w15262`,
   `eof_w15128`). The row counter's step term and two of the wires that `busl` brought down the left
   bus field meet here. What the chain computes is open; `eof_w15781` gates two units further south.
@@ -3065,9 +3065,9 @@ What they establish (from the tracers' notes; marks as there):
   firm; AMB-054), the node of a depletion load on rail G = `vcc` (AMB-055) pulled down by `eof_pdg_s#` =
   NOT `larr_y_s#` on rail F = `vss` (firm), so the compared line and the strap node are Y inverted twice;
   and a pull-down on every Y gated by one line `eof_ypd` whose driver is open.
-- **`eof` runs 49-51**: the twin of `cap18`; the bus lines of `bl0_w15566` and (through a `?M`, AMB-057)
-  `eof_w16040` east to `bc4`'s ground, where `eof_w17345` = NOR(`bl0_w15566`, `eof_w16040`) waits for its
-  load east of x 10600; `bl0_w15566` has a pull-down gated by `h_eq_r1`.
+- **`eof` runs 49-51**: the twin of `cap18`; the bus lines of `h_eq_r1_n` and (through a `?M`, AMB-057)
+  `eof_w16040` east to `bc4`'s ground, where `eof_w17345` = NOR(`h_eq_r1_n`, `eof_w16040`) waits for its
+  load east of x 10600; `h_eq_r1_n` has a pull-down gated by `h_eq_r1`.
 
 Applied: master list rows `eof` (runs 36-51; a new Next, released), `cdp4` (continue) (runs 4-15,
 released), `regs` (runs 5-6), `cdp3` (continue) (only the cluster beside row A left), and the proposals
@@ -3112,7 +3112,7 @@ its two pads and run 54's metal x 10397 at 1x (`hR-20261122-eof53.png`).
 
 What they establish (from the tracer's notes; marks as there):
 
-- **`h_eq_r1` is `h_eq_r1`** (run 52, firm): `bl0_w15566`, an input of the NOR `eof_w15523` in the chain
+- **`h_eq_r1` is `h_eq_r1`** (run 52, firm): `h_eq_r1_n`, an input of the NOR `eof_w15523` in the chain
   whose output reaches every row of the memory address counter, is pulled to `vss` while the horizontal
   counter equals R1. The first traced use of R1's match.
 - **`rst_lat` reaches the column of `bc4`'s VSS rail x 10548-10598** (runs 52-53): from `cdp4`'s port south,
@@ -3164,7 +3164,7 @@ What they establish (from the tracer's notes; marks as there):
   dark spot (10567,17178) on the rail is assumed a blemish (AMB-059).
 - **`ck_out` #2 ends on the pad (10439,17238)** (run 55): `trunks` had drawn it on north through the NOR's
   output pad, joining the gate's output to its input; `trace/trunks.txt` was cut back by `eof` (cdc4d7d).
-- **`eof_w17345` = NOR(`bl0_w15566`, `eof_w17866`) is complete** (run 58: its load, a copy of run 55's); it
+- **`eof_w17345` = NOR(`h_eq_r1_n`, `eof_w17866`) is complete** (run 58: its load, a copy of run 55's); it
   depends only through AMB-057's alias of `eof_w17866`.
 - Wiring (runs 57, 60-62): `ck_out`'s branch north to an end pad (10311,15912); `bc2`'s copy-b enable
   `bc2_w15432` and data `bc2_w15388` followed south to end pads (10180,16128) and (10268,16389), no driver yet;
@@ -3414,7 +3414,7 @@ What it establishes (marks as in the tracer's notes):
 - **`eof_w16213` = NOT `rst_lat`** (piece `u16303`; firm): `rst_lat`'s north gate row gates a pull-down
   under the rail; the node leaves west by the cell's buried contact onto run 67's row, so the pad
   (10440,16215) and the north end of the thin metal x 10476-10492 are this inverter's output. A strong load.
-- **`bl0_w15566` = NOT `h_eq_r1`** (piece `ld566`; firm): the net that had one pull-down and no load is R1's
+- **`h_eq_r1_n` = NOT `h_eq_r1`** (piece `ld566`; firm): the net that had one pull-down and no load is R1's
   match inverted. So `eof_w15523` = `h_eq_r1` AND NOT `rcs_e4` AND NOT `eof_w16040` (marked, as that NOR is)
   and `eof_w17345` = `h_eq_r1` AND NOT `eof_w16040`. Believed, not traced: the line into the fourteen rows
   of the memory address counter acts at the end of the displayed part of a scan line.

@@ -149,9 +149,9 @@ vcc           M      8488-8558,17560          -    R2 on south of the NOR's VCC 
 bc1_g6_out    P      8214-8247,16090          in   the pad (8229,16107) on which bc1's metal x 8229 ends (bc1's contact): one poly with the latch lat18's data row
 vss           M      8336-8384,16040          -    column A's VSS rail, bc1's R1, drawn again over the latch lat18 (y 16040-16300)
 # Pieces en18, cap18 (run 31): the ports eof_w16040 M 8919-8931,16300 and eof_w16040 M 8223-8235,16425 are gone (drawn on: one net, eof_w16040); rst_a P 8326,16294-16312 and 8326,16900-16918 are gone (their loads are the clear gates of the latches lat18 and lat17)
-# Piece u15500 (run 32): the port eof_w16040 P 7290,15471-15489 is gone (the row is drawn on into its gate, gate 2 of the NOR eof_w15523 = NOR(rcs_e4, eof_w16040, bl0_w15566))
+# Piece u15500 (run 32): the port eof_w16040 P 7290,15471-15489 is gone (the row is drawn on into its gate, gate 2 of the NOR eof_w15523 = NOR(rcs_e4, eof_w16040, h_eq_r1_n))
 rcs_e4        P      7280,15425-15446         in   gate 1's row of the NOR, drawn again from x 7280 over tla's row (tla ends it at x 7370; here to its end x 7390)
-bl0_w15566    P      7255,15555-15577         in   gate 3's row of the NOR, on east from bl0's row end (bl0's port 7260,15566)
+h_eq_r1_n    P      7255,15555-15577         in   gate 3's row of the NOR, on east from bl0's row end (bl0's port 7260,15566)
 vss           M      7383-7432,14995          -    the rail of bc1's west gate column (drawn y 15024-15900 over four units): north it turns east at y 15024-15069 onto busl's VSS metal x 7383-7432 (busl's piece vb, drawn to y 15000)
 vcc           M      7470-7520,15435          -    bc1's RL2 (M 7495,14950 y16300 w=50), drawn again over the load's contacts (y 15435-15555)
 # piece cap18b (run 49): the port vcc D 8560,17964-17984 of piece cap18 is gone (the wire is drawn on to the twin device)
@@ -235,8 +235,8 @@ vss            M      3885,10925-10990          -    the wide metal that rail F'
 vss            M      3960-3982,10960           -    an arm of the same metal north from the band (bright in both metal shots at y 10940, dark edges at x 3958 and x 3982); not followed
 # piece yg (run 48): the gate line of the fourteen pull-downs on Y, at the poly row that leaves its foot pad
 eof_ypd        P      3996,18247-18263          in   the poly row east of the foot pad (3957,18255) of the line eof_ypd, east end as drawn; it runs on east along the north side of a wide metal to about x 4138 (cream in the clean shot; not followed); the line's driver lies beyond
-# piece cap18b (run 49): the twin of cap18 on bl0_w15566; the bus line that leaves its pad east
-# piece ld566 (run 69): the port bl0_w15566 D 10600,17484-17500 is gone (the band is drawn on east to the load: bl0_w15566 = NOT h_eq_r1)
+# piece cap18b (run 49): the twin of cap18 on h_eq_r1_n; the bus line that leaves its pad east
+# piece ld566 (run 69): the port h_eq_r1_n D 10600,17484-17500 is gone (the band is drawn on east to the load: h_eq_r1_n = NOT h_eq_r1)
 vss            M      10548-10598,17054        -    pieces u17170, u17345: bc2's VSS rail, drawn over these two units (y 17054-17590); north of y 17054 another unit's contact area
 eof_w17866     M      9546-9560,17800          ?    piece bus2: the second metal of the pad (9553,17866), from the north (follower: to (9546,17645), west to (9266,17641)): not read
 eof_w17866     M      9806-9820,17800          ?    piece bus2: the second metal of the pad (9813,17866), from the north (follower: 1,800 px to (9961,16341)): not read

@@ -349,7 +349,7 @@ In order of value:
 ## Corrections (coordinator, from the handoff of `bl0` run 12, 2026-11-20)
 
 - The six poly lines "line 1 .. line 6" (drawn from x 7000): believed to run on west to pads at about x 5760-5800, where six tracks start that `bl0` (run 12) draws from y 15000 south into the left array's six lower rows (follower only; not read; the stretch is in `busl`'s region).
-- A poly row out of the gate group at y 15566 (it runs on east under the rail x 7292-7342) ends west on a pad (7143,15566): it is `bl0_w15566` (`bl0` run 12, piece `m7144`), a wire with no transistor that goes south and east to a poly row east of (8360,17821) in `bc3`. A second net lies beside it (pads (7186,15520), (7187,15696)), undrawn.
+- A poly row out of the gate group at y 15566 (it runs on east under the rail x 7292-7342) ends west on a pad (7143,15566): it is `h_eq_r1_n` (`bl0` run 12, piece `m7144`), a wire with no transistor that goes south and east to a poly row east of (8360,17821) in `bc3`. A second net lies beside it (pads (7186,15520), (7187,15696)), undrawn.
 
 ## Corrections (coordinator, from the handoff of `busl` run 14, 2026-11-21)
 
@@ -363,7 +363,7 @@ In order of value:
 
 - Ports, `bc1_dec01_n` "x 8056, y 16300 (continues down)": it continues to the pad (8010,17210) and is gate B of the NOR that makes `eof_w17338` (`trace/eof.txt`, piece `in207`; the neck at y 16613 uncertain, AMB-049). No other load was seen on the stretch south of y 16300.
 - Ports, `bc1_g6_out` ("poly, y 16107, drawn to x 8300 ... into the untraced gates at y 16000-16300") and Not done "Column A below y 16000": the gate fed by `bc1_g6_out` is the data input of the latch `lat18` (`trace/eof.txt`), a copy of `tl1`'s latch at y 16015-16447; the poly leaves the pad as the row y 16120-16138, not along y 16107 (geometry only: `trace/bc1.txt`'s `P 8221,16107 x8300` is a stub that joins nothing else; the block's Ambiguity 114 in `eof`).
-- The west gate column (rail x 7294-7342): four units are drawn by `eof` (y 15024-15900): `eof_w15128` = NOT `rst_n`; `eof_w15262` = NOR(`lc1_w7780`, `rcs_mv`); `eof_w15523` = NOR(`rcs_e4`, `eof_w16040`, `bl0_w15566`); `eof_w15781` = NOR(`eof_w15523`, `eof_w15262`, `eof_w15128`) (each marked by its two ties). The rail's north end turns east at y 15024-15069 onto the VSS metal x 7383-7432 (`busl`, piece `vb`). The box `D 7462,15194:7540,15284` also feeds the load of `eof_w15262` from its west side.
+- The west gate column (rail x 7294-7342): four units are drawn by `eof` (y 15024-15900): `eof_w15128` = NOT `rst_n`; `eof_w15262` = NOR(`lc1_w7780`, `rcs_mv`); `eof_w15523` = NOR(`rcs_e4`, `eof_w16040`, `h_eq_r1_n`); `eof_w15781` = NOR(`eof_w15523`, `eof_w15262`, `eof_w15128`) (each marked by its two ties). The rail's north end turns east at y 15024-15069 onto the VSS metal x 7383-7432 (`busl`, piece `vb`). The box `D 7462,15194:7540,15284` also feeds the load of `eof_w15262` from its west side.
 
 ## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
 
@@ -372,5 +372,5 @@ In order of value:
 
 ## Corrections (coordinator, from the handoff of `eof` run 69, 2026-11-24)
 
-- `bl0_w15566`, gate 3 of the NOR `eof_w15523` in the west gate column, is NOT `h_eq_r1` (`eof` piece
+- `h_eq_r1_n`, gate 3 of the NOR `eof_w15523` in the west gate column, is NOT `h_eq_r1` (`eof` piece
   `ld566`, firm), so `eof_w15523` = `h_eq_r1` AND NOT `rcs_e4` AND NOT `eof_w16040` (marked, as that NOR is).

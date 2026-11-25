@@ -56,5 +56,5 @@ cdp3_g_c6   M  5664-5678,15000   ?    track on north; follower: to (5756,14261),
 cdp3_g_c6   P  4780,15988-16010  ?    poly row on west into the left array
 cdp3_g_c7   M  5707-5721,15000   ?    track on north; follower: to (5799,14304), the y of bc1's line of cdp3_g_c7
 cdp3_g_c7   P  4780,15511-15533  ?    poly row on west into the left array
-bl0_w15566   P  7260,15555-15577  ?    poly row east of the pad (7143,15566), on under bc1's rail x 7292-7342 (bc1's gate group)
-bl0_w15566   P  8360,17811-17831  ?    poly row east of the pad (8272,17821); seen as poly to about x 8690, then a metal along y 17821 to x 8955
+h_eq_r1_n   P  7260,15555-15577  ?    poly row east of the pad (7143,15566), on under bc1's rail x 7292-7342 (bc1's gate group)
+h_eq_r1_n   P  8360,17811-17831  ?    poly row east of the pad (8272,17821); seen as poly to about x 8690, then a metal along y 17821 to x 8955

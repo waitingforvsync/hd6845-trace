@@ -152,4 +152,4 @@ Round 1: no findings in what is drawn; one undrawn tap on the output listed in N
 ## Corrections (coordinator, from the handoffs of `eof` runs 28-35, 2026-11-21)
 
 - The survey's `findcell` list (`tl1_ua` 0.76 at 8414,16750 (5729,12275), and the copy 607 px above it): both copies are drawn in `trace/eof.txt` (`lat17` at 5729,12276, `lat18` at 5729,11669), with the inverter between them (`dinv17`); with `n338` column A's rail is drawn from y 16015 to y 17560.
-- The nest of Ls south of column B ("at least three other nets with pads at about (8640,17862), (8690,17815), (8720,17778)"): the pad (8643,17865) is `eof_w16040`'s (drawn); the pad (8688,17820) is the east end of `bl0_w15566`'s poly row y 17821 (seen, not drawn), with a poly south and east to the gate of the twin of `cap18` at about (8730,17970).
+- The nest of Ls south of column B ("at least three other nets with pads at about (8640,17862), (8690,17815), (8720,17778)"): the pad (8643,17865) is `eof_w16040`'s (drawn); the pad (8688,17820) is the east end of `h_eq_r1_n`'s poly row y 17821 (seen, not drawn), with a poly south and east to the gate of the twin of `cap18` at about (8730,17970).

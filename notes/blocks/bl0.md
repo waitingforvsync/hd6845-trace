@@ -21,7 +21,7 @@ uncertain item, seven new nets; reviewed (round 14: no findings): what the maste
   Believed, not traced: they are `cdp3_g_c7`..`cdp3_g_c2` (the follower runs each track north to an end at
   the y of one of `bc1`'s six poly lines; `busl`'s region).
 - **Piece `m7144`** (wiring, 4,400 px). The thin metal x 7137-7152 north of `bl0_w17337`'s pad is one
-  wire, `bl0_w15566`, from a pad (7143,15566) whose poly row goes east into `bc1`'s gate group, under the
+  wire, `h_eq_r1_n`, from a pad (7143,15566) whose poly row goes east into `bc1`'s gate group, under the
   wide bus metal as a poly column (pads (7143,16259), (7143,16474)), south, west and south inside the L
   of the clock's metal to a pad (7384,17866), by a poly row under the supply rail to a pad (7602,17866),
   by a metal east, 44 px north on another net's poly column (no contact) and east to a pad (8272,17821),
@@ -221,7 +221,7 @@ finding that changes a connection.
 | `cdp4_bus_s0` south | 4780-5459 | 15000-15060 | track x 5443-5459 to y 15045, west to a pad (5364,15044); poly row y 15033-15053 west |
 | `lc2_w8450`, second branch | 4806-4930 | 15000-16730 | track x 4815-4829 to a pad (4823,16713); poly row y 16703-16723 east |
 | six lines to the left array's lower rows | 4780-5721 | 15000-18097 | thin metals from y 15000 at x 5496, 5540, 5584, 5627, 5671, 5714, stepping west as nested L's (arms at y 15090-15308, 15438-15568, 15915-16046, 16565-16652, 17043-17086, 17521); end pads (5626,15522), (5538,15999), (5453,16649), (5322,17127), (5236,17603), (5106,18081); poly rows west at y 15522, 15999, 16649, 17126, 17603, 18081 |
-| `bl0_w15566` | 7103-8360 | 15550-17883 | pad (7143,15566) with a poly row east; thin metal x 7137-7151 to a pad (7143,16259); poly column to a pad (7143,16474); thin metal south, corner y 17305, x 7103 south, corner y 17866, east to a pad (7384,17866); poly row y 17855-17875 under the supply rail to a pad (7602,17866); metal east, corner x 7970, north to y 17824, east to a pad (8272,17821); poly row east |
+| `h_eq_r1_n` | 7103-8360 | 15550-17883 | pad (7143,15566) with a poly row east; thin metal x 7137-7151 to a pad (7143,16259); poly column to a pad (7143,16474); thin metal south, corner y 17305, x 7103 south, corner y 17866, east to a pad (7384,17866); poly row y 17855-17875 under the supply rail to a pad (7602,17866); metal east, corner x 7970, north to y 17824, east to a pad (8272,17821); poly row east |
 
 ## Logic
 
@@ -696,7 +696,7 @@ row from a pad further south whose metal comes from the east (pads (5322,17213) 
 5500-5560, y 16090-16190); tracks join the bundle from the east at y 15810-15850 (x 5627, 5671), y
 16240-16280 (x 5496, 5540), y 16690-16740 and y 16800-16900.
 
-### Piece `m7144` (run 12): the thin metal north of `bl0_w17337`'s pad, `bl0_w15566`
+### Piece `m7144` (run 12): the thin metal north of `bl0_w17337`'s pad, `h_eq_r1_n`
 
 One wire, 4,400 px, no transistor and no branch. From north to south:
 
@@ -793,8 +793,8 @@ something east of x 8360 on the row y 17821; neither end is traced, and which en
 | `cdp3_g_c6` | P | (4780, 15988-16010) | ? | poly row on west into the left array |
 | `cdp3_g_c7` | M | (5707-5721, 15000) | ? | track on north; follower: to (5799,14304) |
 | `cdp3_g_c7` | P | (4780, 15511-15533) | ? | poly row on west into the left array |
-| `bl0_w15566` | P | (7260, 15555-15577) | ? | poly row east of the pad (7143,15566), on under `bc1`'s rail x 7292-7342 |
-| `bl0_w15566` | P | (8360, 17811-17831) | ? | poly row east of the pad (8272,17821); seen to about x 8690 |
+| `h_eq_r1_n` | P | (7260, 15555-15577) | ? | poly row east of the pad (7143,15566), on under `bc1`'s rail x 7292-7342 |
+| `h_eq_r1_n` | P | (8360, 17811-17831) | ? | poly row east of the pad (8272,17821); seen to about x 8690 |
 
 ## Ambiguities
 
@@ -886,13 +886,13 @@ Run 12:
    the pad's own line (the same widths as at the pads (5322,17127) and (5236,17603), whose arms arrive
    the same way; a foot 25 px high against the track's 14; the clean shot's hole): `r12_t5pad.png`. If
    the arm ended short of the pad, the track would have no end and the row no source.
-19. **The clean shot is green under `bl0_w15566`'s thin metal at y 15763-15815** (red minus green down to
+19. **The clean shot is green under `h_eq_r1_n`'s thin metal at y 15763-15815** (red minus green down to
    -65 over 53 px, where it is pink under the same metal north and south of it). Read as no contact:
    both metal shots show the metal at full width and brightness all along, with no ring and no pad
    (`textmap.py 7112 15740 7178 15830 3 --acid`), and the chip-2 stripped shot's stripe under the metal is
    the same there as north of it. What makes the clean shot green there is not known (a pad of another
    net, (7187,15778), lies 40 px east in a large green area).
-20. **`bl0_w15566`'s 44 px north-south arm (x 7963-7977, y 17824-17866) lies on a poly column** x
+20. **`h_eq_r1_n`'s 44 px north-south arm (x 7963-7977, y 17824-17866) lies on a poly column** x
    7962-7983 that comes south from a pad (7968,17778) and runs on south. Read as no contact: the
    column is salmon in the clean shot from y 17792 to 17892 with no hole, neither metal shot has a
    ring, and the dark line between the arm and the east-going metal (x 7978-7987 at y 17822) is the
@@ -1243,7 +1243,7 @@ and of the clock's metal).
 Two observations, neither a finding (the reviewer: "comment only"), both read again by the tracer:
 
 - (7977,17821), Ambiguity 20: the chip-2 stripped shot has a greenish patch about 12 px across on the
-  poly column under the inner corner of `bl0_w15566`'s metal (`px.py pt 7977,17821`: stripped 125/159/104,
+  poly column under the inner corner of `h_eq_r1_n`'s metal (`px.py pt 7977,17821`: stripped 125/159/104,
   clean 172/155/90). Not a contact: no ring in either metal shot, no hole in the clean shot (red minus
   green 16-30), the bars at x 7955-7964 and 7978-7987 are 9 px edge lines (the reviewer's `m_x1`..`m_x3`,
   4.3x and 10x, four shots).
@@ -1266,11 +1266,11 @@ Round 14: no findings.
   **`bl0_w17610`'s use** is in the gate column east of the supply rail (the poly row west of the pad
   (7882,17389); `bc3`'s region). Neither group is drawn; they are those packages' work.
 - `rst`'s source is `busl`'s (north of y 10400).
-- **`bl0_w15566`'s two ends** (the thin metal x 7137-7152 north of the pad (7144,17340): drawn in run 12, piece
+- **`h_eq_r1_n`'s two ends** (the thin metal x 7137-7152 north of the pad (7144,17340): drawn in run 12, piece
   `m7144`): its north row east of x 7260 (under `bc1`'s rail x 7292-7342 at y 15566 and on: `bc1`'s gate
   group) and its south row east of x 8360 (poly to about x 8690 under four or five vertical metals, then
   a metal along y 17821 from x 8711 to 8955: read by text only).
-- Beside `bl0_w15566`, other nets, seen and not drawn: a metal x 7179-7197 from a pad (7186,15520) (poly
+- Beside `h_eq_r1_n`, other nets, seen and not drawn: a metal x 7179-7197 from a pad (7186,15520) (poly
   row east) to a pad (7187,15696) (poly row east); a pad (7187,15778) in a green area; a pad
   (7187,16430) with a metal south; the poly column x 7962-7983 south from a pad (7968,17778).
 - The column north of piece `n1` has a band at y 16866-16884 (`railprof.py 7295 7340 16860 17400`), not
@@ -1333,8 +1333,8 @@ Round 14: no findings.
 
 ## Corrections (coordinator, from the handoffs of `eof` runs 28-35, 2026-11-21)
 
-- `bl0_w15566` ("poly row east of the pad (7143,15566), on under bc1's rail x 7292-7342"): the row is gate 3 of the NOR `eof_w15523` and ends at x 7347; the metal x 7179-7197 from a pad (7186,15520) to a pad (7187,15696), "another net", is `eof_w15523`, that NOR's output. The pad (7186,15520) is not on `ck_out`'s corner 35 px north.
-- `bl0_w15566`'s unit at `bc1`'s rail ("a second net lies beside it"): the gate rows y 15427-15445 (`rcs_e4`), y 15493-15515 (`eof_w16040`) and y 15557-15580 (`bl0_w15566`) are the three inputs of that one NOR. Of the thin metal's crossings at y 15738, 15825, 15998 the first two are `eof_w15262` and `eof_w15128` (gates of the second NOR); the third is the row of another unit's exit box.
+- `h_eq_r1_n` ("poly row east of the pad (7143,15566), on under bc1's rail x 7292-7342"): the row is gate 3 of the NOR `eof_w15523` and ends at x 7347; the metal x 7179-7197 from a pad (7186,15520) to a pad (7187,15696), "another net", is `eof_w15523`, that NOR's output. The pad (7186,15520) is not on `ck_out`'s corner 35 px north.
+- `h_eq_r1_n`'s unit at `bc1`'s rail ("a second net lies beside it"): the gate rows y 15427-15445 (`rcs_e4`), y 15493-15515 (`eof_w16040`) and y 15557-15580 (`h_eq_r1_n`) are the three inputs of that one NOR. Of the thin metal's crossings at y 15738, 15825, 15998 the first two are `eof_w15262` and `eof_w15128` (gates of the second NOR); the third is the row of another unit's exit box.
 - `rcs_mv` ("a pad (6966,15305), whose poly row goes east (port)") and `rst_n` (Ports, (7280, 15078-15098)): drawn on by `eof`: gate 2 of `eof_w15262` (ending at x 7350) and the gate of the inverter `eof_w15128` = NOT `rst_n` (ending at x 7355). `bl0` draws the row of `rcs_mv` `w=20` on y 15301; measured y 15293-15317 (geometry only).
 
 ## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
@@ -1352,6 +1352,6 @@ Round 14: no findings.
 
 ## Corrections (coordinator, from the handoff of `eof` run 69, 2026-11-24)
 
-- `bl0_w15566` (run 12: "both ends open"): its driver is the inverter of `h_eq_r1` at (10480-10775,
-  17440-17560) under `bc2`'s VSS rail (`eof` piece `ld566`): `bl0_w15566` = NOT `h_eq_r1`, R1's match
+- `h_eq_r1_n` (run 12: "both ends open"): its driver is the inverter of `h_eq_r1` at (10480-10775,
+  17440-17560) under `bc2`'s VSS rail (`eof` piece `ld566`): `h_eq_r1_n` = NOT `h_eq_r1`, R1's match
   inverted (firm).

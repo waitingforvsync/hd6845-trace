@@ -575,7 +575,7 @@ Each is in the named block's notes in full; the trace fixes are on main.
 
 ## Corrections (coordinator, from the handoffs of `eof` runs 28-35, 2026-11-21)
 
-- `rcs_e4`'s wire ("the gate of a pull-down under the rail x 7290-7345 of bc1's untraced left column ... the poly ends at x 7370 ... its driver is NOT found"; also the comment in `trace/tla.txt`, not edited): the poly ends at about x 7390 over a field island; the pull-down is gate 1 of the NOR `eof_w15523` = NOR(`rcs_e4`, `eof_w16040`, `bl0_w15566`) (`eof`, piece `u15500`); the driver has been found since (`rcs_e4` = NOR(`tl1_w4678`, `tl3_e3550`), `tl1`).
+- `rcs_e4`'s wire ("the gate of a pull-down under the rail x 7290-7345 of bc1's untraced left column ... the poly ends at x 7370 ... its driver is NOT found"; also the comment in `trace/tla.txt`, not edited): the poly ends at about x 7390 over a field island; the pull-down is gate 1 of the NOR `eof_w15523` = NOR(`rcs_e4`, `eof_w16040`, `h_eq_r1_n`) (`eof`, piece `u15500`); the driver has been found since (`rcs_e4` = NOR(`tl1_w4678`, `tl3_e3550`), `tl1`).
 
 ## Corrections (coordinator, from the handoffs of `busl` runs 17-18, 2026-11-24)
 

@@ -966,7 +966,7 @@ west tie is not there the select line has no driver.
 ## AMB-051: the devices of `cap18`'s build (2026-11-21)
 
 From `eof` runs 37-38 (Tom Seddon; the block's Ambiguities 116, 144, 150). Four devices of one build:
-`cap18` on `eof_w16040`, its twin on `bl0_w15566` (drawn in run 49 as `cap18b`), `cap998` on `eof_w15998`
+`cap18` on `eof_w16040`, its twin on `h_eq_r1_n` (drawn in run 49 as `cap18b`), `cap998` on `eof_w15998`
 (tap pad (5627,16125)), `cap218` on `eof_w16218` (x 4850-5020, y 16700-16910). Each: a gate on the net, a
 channel between VCC and a closed diffusion whose contact's metal island also covers the gate and has no wire.
 Candidate readings: (a) a capacitor on the net; (b) a depletion load whose gate is tied to its source through
@@ -1037,7 +1037,7 @@ NOR under `bd2`'s VSS rail (PR #17 had a NOR as its driver); a NOR there makes o
 
 From `eof` run 49 (Tom Seddon; the block's Ambiguity 206; proposed there as AMB-051). One `?M`
 (`trace/eof.txt`, `?M 8643,17866 x8708 w=12`). Reading B (drawn): one metal from the pad east over
-`bl0_w15566`'s poly column x 8680-8698. For it: chip 2's metal shot (bright metal from x 8668, 26-27 px from
+`h_eq_r1_n`'s poly column x 8680-8698. For it: chip 2's metal shot (bright metal from x 8668, 26-27 px from
 the pad's centre, as at the control pads (8685,17821) and (8598,17908)); the clean shot's protected strip and
 the chip-2 stripped shot's ghost band at the line's height; the follower from the east runs to the pad; under
 the other reading the line would end 6-8 px from the pad's metal. Reading A: the line ends on the column,
@@ -1144,7 +1144,7 @@ shot; the band's edge lines run through on both sides. Readings: (a) the uncover
 buried-contact window, the band one diffusion through it; (b) a poly across the band, a transistor in series
 between the node and the load (its gate on its own drain, or `rst_lat` in its own pull-up path). **Working
 assumption: (a), drawn so, no `?`.** Either way the three static equations hold (`eof_w16213` = NOT `rst_lat`,
-`bl0_w15566` = NOT `h_eq_r1`, `cdp4_w10808` = NOT `eof_w15955`); (b) would add a transistor per unit. Would
+`h_eq_r1_n` = NOT `h_eq_r1`, `cdp4_w10808` = NOT `eof_w15955`); (b) would add a transistor per unit. Would
 settle it: a sharper shot; the three copies agree, which only says it is layout.
 
 ## AMB-062: what holds `ck_b` low? (2026-11-25)
