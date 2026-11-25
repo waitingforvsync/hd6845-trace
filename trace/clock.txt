@@ -127,7 +127,10 @@ P 11760,18455:11786,18957
 P 11760,18931:11866,18957
 C 11772,18467 s=24x24
 M 11600,18455:11877,18480          # bus line, leaves left (not yet followed)
-N M 11650,18467 rst_ck
+# eof run 71 (2026-11-25): this bus piece is not rst_ck. Its west end pad (10895,18468) is the foot of a poly
+# column from the north (eof's piece o734, the net eof_w17734); trunks' poly link from rst_ck's stem to that
+# pad does not exist (10 px of open field between: trace/trunks.txt at `P 10796,18470`).
+N M 11650,18467 eof_w17734
 
 # ====================================================================
 # Wiring between the gate row, the input row and the driver logic,

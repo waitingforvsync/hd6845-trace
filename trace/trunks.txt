@@ -106,7 +106,14 @@ C 12849,18384
 M 12862,18385 x10845 w=18           # bus line L4
 C 10857,18383
 P 10857,18370 y18470 w=18           # stem down, under L5
-P 10796,18470 x10914 w=24           # link
+# eof run 71 (2026-11-25): the link ends at the stem's foot. Between the foot's east edge (x 10862-10868, an
+# edge line at every row y 18448-18478) and the ring of the east pad (10895,18468) lie 10 px of open field
+# (x 10870-10878: plain in both metal shots, green in the clean shot at y 18444-18476; tools/px.py row 18468
+# 10796 10922 3 all, col 10873 18440 18500 4 all). The east pad is the foot of a poly column from the north
+# (x 10890-10906, eof's piece o734: the net eof_w17734), so bus line L6's left piece and gate g5 of the clock
+# block are on that net, not on rst_ck. Drawn at 1x as one link x 10796-10914 until then.
+P 10796,18470 x10866 w=24           # link: the west pad and the stem's foot
+P 10882,18456:10914,18484           # the east pad's poly (the foot of eof's column; not on the link)
 C 10810,18470 10900,18470
 M 10888,18470 x11610 w=20           # bus line L6, left piece, to the clock trace's piece
 # start of the run to the left: metal down, poly under the wide metal x 10722-10772,
