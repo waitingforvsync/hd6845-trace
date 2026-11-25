@@ -1583,7 +1583,7 @@ transistors
   t1577 at   7573, 15246  W/L   54/44   load  gate cdp4_ld6     vcc <-> cdp4_ld6
   t1578 at   7619, 15322  W/L  251/26   -     gate bc1_ld_n     vss <-> cdp4_ld6
   t1579 at   7302, 15218  W/L   71/22   -     gate lc1_w7780    vss <-> eof_w15262
-  t1580 at   7301, 15566  W/L   74/22   -     gate bl0_w15566   eof_w15523 <-> vss
+  t1580 at   7301, 15566  W/L   74/22   -     gate h_eq_r1_n    eof_w15523 <-> vss
   t1581 at   7440, 15528  W/L   35/40   load  gate eof_w15523   eof_w15523 <-> vcc
   t1582 at   7545, 15461  W/L   48/38   load  gate bc1_ld_n     vcc <-> bc1_ld_n
   t1583 at   7668, 15476  W/L   62/19   -     gate bc1_ld_in1   bc1_ld_n <-> n2316
@@ -2248,7 +2248,7 @@ transistors
   t2242 at   8359, 15910  W/L   50/22   -     gate bc1_g6_in    vss <-> bc1_g6_out
   t2243 at   8476, 16209  W/L   26/50   load  gate eof_w16215   eof_w16215 <-> vcc
   t2244 at   8476, 16816  W/L   26/50   load  gate eof_w17124   eof_w17124 <-> vcc
-  t2245 at   8755, 17973  W/L   48/28   -     gate bl0_w15566   vcc <-> eof_w17969
+  t2245 at   8755, 17973  W/L   48/28   -     gate h_eq_r1_n    vcc <-> eof_w17969
   t2246 at   8230, 17973  W/L   48/27   -     gate eof_w16040   eof_w17970 <-> vcc
   t2247 at   8282, 19794  W/L  743/18   -     gate cudisp_pu    vcc <-> cudisp
   t2248 at   8358, 19794  W/L  743/15   -     gate cudisp_pd    cudisp <-> vss
@@ -2552,7 +2552,7 @@ transistors
   t2546 at  10700, 16290  W/L   60/28   load  gate eof_w16213   eof_w16213 <-> vcc
   t2547 at  10556, 17126  W/L   69/22   -     gate rst_lat      vss <-> bc2_w14955
   t2548 at  10556, 17213  W/L   69/16   -     gate ck_out       bc2_w14955 <-> vss
-  t2549 at  10554, 17300  W/L   67/14   -     gate bl0_w15566   vss <-> eof_w17345
+  t2549 at  10554, 17300  W/L   67/14   -     gate h_eq_r1_n    vss <-> eof_w17345
   t2550 at  10554, 17387  W/L   67/14   -     gate eof_w16040   eof_w17345 <-> vss
   t2551 at  10666, 17346  W/L   38/43   load  gate eof_w17345   vcc <-> eof_w17345
   t2552 at  10666, 17171  W/L   38/43   load  gate bc2_w14955   vcc <-> bc2_w14955
@@ -2563,8 +2563,8 @@ transistors
   t2557 at  10685, 16853  W/L   26/53   load  gate eof_w16889   vcc <-> eof_w16889
   t2558 at  10514, 16864  W/L   29/22   -     gate bc2_w14955   eof_w16889 <-> vss
   t2559 at  10514, 17040  W/L   29/22   -     gate eof_w17345   eof_w16996 <-> vss
-  t2560 at  10554, 17515  W/L  130/20   -     gate h_eq_r1      vss <-> bl0_w15566
-  t2561 at  10700, 17505  W/L   60/28   load  gate bl0_w15566   bl0_w15566 <-> vcc
+  t2560 at  10554, 17515  W/L  130/20   -     gate h_eq_r1      vss <-> h_eq_r1_n
+  t2561 at  10700, 17505  W/L   60/28   load  gate h_eq_r1_n    h_eq_r1_n <-> vcc
   t2562 at  10675, 17696  W/L   24/94   load  gate eof_w17734   vcc <-> eof_w17734
   t2563 at  10567, 17690  W/L   42/16   -     gate rst_lat      vss <-> eof_w17734
   t2564 at  10468, 18941  W/L   59/32   clamp gate ck_out       vcc <-> n716
@@ -5179,8 +5179,8 @@ gates
   bc1_ld_n     = NAND(bc1_ld_in1, bc1_ld_in2)
   eof_w15262   = NOR(lc1_w7780, rcs_mv)
   eof_w15128   = NOT rst_n
-  eof_w15523   = NOR(bl0_w15566, eof_w16040, rcs_e4)
-  bl0_w15566   = NOT h_eq_r1
+  eof_w15523   = NOR(eof_w16040, h_eq_r1_n, rcs_e4)
+  h_eq_r1_n    = NOT h_eq_r1
   eof_w15781   = NOR(eof_w15128, eof_w15262, eof_w15523)
   bl0_w17210   = NOT bl0_w17085
   bc3_w17605   = NOT ck_out
@@ -5336,7 +5336,7 @@ gates
   eof_w16213   = NOT rst_lat
   eof_w16692   = NOR(bc2_w14955, eof_w16889)
   rst_lat      = NOT rst_a_n
-  eof_w17345   = NOR(bl0_w15566, eof_w16040)
+  eof_w17345   = NOR(eof_w16040, h_eq_r1_n)
   eof_w17734   = NOT rst_lat
   ck_t         = NOT clk
   vsync_pu     = NOT vsync_drv_in
@@ -6619,7 +6619,7 @@ not part of a static gate
   t2117 at 8090,11771 gate wr_r15: cdp4_lr_s1_a <-> cdp3_bl_c1
   t2123 at 8091,13028 gate bc1_ld_a: cdp4_bus_s1 <-> cdp4_lc_s1_a
   t2124 at 8090,13787 gate cdp4_ld6: cdp3_g_c2 <-> cdp4_ldr_s1_a
-  t2245 at 8755,17973 gate bl0_w15566: vcc <-> eof_w17969
+  t2245 at 8755,17973 gate h_eq_r1_n: vcc <-> eof_w17969
   t2246 at 8230,17973 gate eof_w16040: eof_w17970 <-> vcc
   t2247 at 8282,19794 gate cudisp_pu: vcc <-> cudisp
   t2248 at 8358,19794 gate cudisp_pd: cudisp <-> vss
