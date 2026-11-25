@@ -6,8 +6,8 @@ merged, or by `tools/claim.py release` if it is abandoned.
 | Field | Value |
 |---|---|
 | Who | waitingforvsync |
-| Claimed | 2026-11-25 22:51 +0100 |
-| Region | 10760-13480 x 16740-17730 |
-| What | eof run 72 (R56, first item): re-read the line named rst_lat from bd1's inverter 2 (13435,16770) by the contacts (13303,17688), (12850,17691), (11288,17517) and cdp4's pad row y 17643 to the port (10789,17700): the sense of the gate poly of bc2's rail column (AMB-060, AMB-062) |
+| Claimed | 2026-11-25 23:07 +0100 |
+| Region | 10760-13480 x 16740-17730; 11560-12200 x 18440-19060 |
+| What | eof run 72 (R56 first item, AMB-062): re-read of the line named rst_lat from bd1's inverter 2 to cdp4's port (10789,17700) (found as drawn); then the clock gate row's gates 5 and 6 (x 11740-12130, y 18450-19040): whether gate 5's output is on line B (ck_b) at the contact (11985,18760), and line B across x 11998-12027 |
 | Branch | eof |
 | Status | tracing |
