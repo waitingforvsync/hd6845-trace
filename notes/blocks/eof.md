@@ -13252,7 +13252,7 @@ as finding 1 intends (`.venv/bin/python tools/sameconn.py 5ba538c`: `ck_b` = NOR
 
 Round 86: one finding that changes a connection and one geometry finding, both confirmed and fixed. A fix check follows.
 
-### Round 87 (fix check; run 72, piece `cap5` after round 86's fixes; 2026-11-26 00:08 to 00:20 +0100, at commit 4e03147)
+### Round 87 (fix check; run 72, piece `cap5` after round 86's fixes; 2026-11-25 23:59 to 2026-11-26 00:07 +0100, at commit 4e03147)
 
 A fresh Fable 5.2 agent, briefed with the diff since 5ba538c and the two findings it answers (the contact of
 L3 and the head removed, the box drawn as one `D` with `?B`, the column into it; the rectangle to y 18282, the
