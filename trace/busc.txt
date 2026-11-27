@@ -132,14 +132,14 @@ C 17217,17657 17257,17658 17297,17660 17335,17657
 # crosses under the horizontal at x 17527-17545 (salmon, no hole). The vertical runs on south down the block's
 # west side (x 16976-17040 below y 17290): drawn to y 17420.
 M 16992,16974:17585,17018              # west from the rail's foot
-M 16992,16974:17060,17290              # south
-M 16976,17262:17066,17300
-M 16976,17290:17040,17420              # on south (port)
+M 16992,16974:17060,17282              # south (its east part ends at y 17282)
+M 16974,17214:17040,17420              # from y 17214 the west edge is x 16974; on south (port)
 # --- VSS: the strap over D2 runs on east over G7's poly column (its two edges print through the metal at
 # x 17416-17420 and x 17440-17444; no hole) into a wide metal x 17468-17518 that runs south, over cdp4's two
 # poly rows y 18000-18020 and y 18065-18085 (salmon, no hole) and otherwise field, to inrow's ground rail
 # (M 13707,18381:17480,18431, labelled vss there), which it meets by an arm west along y 18381-18431. An arm east
-# along y 18192-18254 runs on over the poly cross-under of dpad's d_hiz line (x 17633-17655): drawn to x 17720.
+# along y 18192-18254 runs on over cdp4's d7_out_n poly column (x 17595-17613) and the poly cross-under of dpad's
+# d_hiz line (x 17633-17655), both salmon with no ring: no contact; drawn to x 17720.
 M 17440,17866:17518,17906              # D2's strap, east
 M 17468,17866:17518,18430              # south
 M 17400,18381:17518,18431              # west onto inrow's rail

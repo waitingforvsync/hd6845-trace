@@ -169,8 +169,9 @@ reasoning (Ambiguity 1); both are now joined by drawing to rails other packages 
   turns west into a wide metal y 16974-17018 (down x 17300: metal y 16976-17016 in both chips; down x 17556:
   bright to y 17018, so rail and horizontal are one), which turns south at x 16992-17060 (row y 17060: metal
   x 16994-17058) and widens east at y 17130 into the driver's strap over A1 and A2 (row y 17200: metal x 16994
-  to x 17106 with one 8 px dark line at x 17074-17078, the west edge of G1's poly column under it). Below
-  y 17290 the vertical is x 16976-17040 and runs on south down the block's west side, apart from the thin
+  to x 17106 with one 8 px dark line at x 17074-17078, the west edge of G1's poly column under it). From
+  y 17214 its west edge is x 16974, its east part ends at y 17282, and below that the vertical is x 16974-17040
+  and runs on south down the block's west side, apart from the thin
   metal x 17082-17098 (bare ground x 17046-17066 between them at y 17330): drawn to y 17420. Under the L the
   clean shot is field throughout (pink and green interference colours; view `vcc2`); one poly column crosses
   under the horizontal at x 17527-17545 (salmon, no hole).
@@ -180,7 +181,8 @@ reasoning (Ambiguity 1); both are now joined by drawing to rails other packages 
   field but for `cdp4`'s two poly rows y 18000-18020 and y 18065-18085 (salmon, no hole; view `vss2`). At its
   foot an arm west along y 18381-18431 is one metal with `inrow`'s ground rail (`M 13707,18381:17480,18431`,
   "extent to the right not yet checked": it runs to x 17518; row y 18405 is metal from x 17400 to x 17516).
-  An arm east along y 18192-18254 passes over the poly cross-under of `dpad`'s `d_hiz` line (x 17633-17655;
+  An arm east along y 18192-18254 passes over `cdp4`'s `d7_out_n` poly column (x 17595-17613: salmon, no ring) and
+  the poly cross-under of `dpad`'s `d_hiz` line (x 17633-17655;
   `dpad`: "a poly cross-under below the wide horizontal metal at y 18175-18250") and joins the wide vertical
   metal from x 17690 on (`dbus`' "VSS trunk x 17690-17765"): drawn to x 17720.
 
@@ -238,3 +240,38 @@ Connections before and after the fixes (commit 8826117 against the fixed tree):
 Recorded 2026-11-27 07:06 -0600.
 
 Round 1: no findings that change a connection.
+
+### Round 2 (full review), 2026-11-27, piece `sup`
+
+A fresh Claude Fable 5.2 agent, on commit df72766, 14 images in `cache/scratch/busc/review-2/`. Told to suspect:
+each join claimed as one metal ((a) `dbus`' rail into the horizontal, (b) the corner, (c) the vertical into the
+driver's strap, (d) the strap into the wide ground metal across two dark lines, (e) the arm into `inrow`'s rail,
+(f) the east arm into the trunk), a touch with a neighbouring metal, contacts under the wide metals, and whether
+the other packages' rails are the metals joined here.
+
+**No finding changes a connection.** Three remarks, confirmed and fixed (geometry and wording):
+
+1. The VCC vertical's west edge steps west at y 17214 (to x 16972-16974), not at y 17262. Redrawn.
+2. The trace covered bare ground at (17040-17066, 17283-17300) (the vertical's east part ends at y 17282).
+   Removed.
+3. A second poly column crosses under the east arm, `cdp4`'s `d7_out_n` at x 17595-17613, without contact
+   (salmon, no ring in either metal shot): the comment and notes now say so.
+
+Checked and found correct by the reviewer: the joins (a)-(f), each at 4x or more in three shots with profiles,
+all one metal (the dark lines at (a) x 17524-17530 / 17548-17552 and (d) x 17416-17420 / 17440-17444 are 6-8 px
+poly edges over protected salmon, with no boundary strip between metals); `inrow`'s rail unbroken from x 16780 to
+x 17515 and `dbus`' rail from y 16490 to y 17018; no contact under either metal (three spots examined and
+rejected); the neighbours clear (the `d7_out_n` and `rd_data_e` pads, `d_hiz`'s metal ends, `inrow`'s VCC band's
+end at x 17413 against the vertical at x 17468); full extraction 0 errors. Not checked by the reviewer: `dbus`'
+rail north of y 16490, `inrow`'s rail west of x 16780, the trunk outside y 17700-18700, the VCC vertical south of
+y 17440; chip 2's stripped shot is fringes under these metals, so "no contact" rests on the clean shot and both
+metal shots.
+
+Connections before and after the fixes (commit df72766 against the fixed tree):
+
+    tools/t.sh busc sameconn.py df72766            ->  connections identical
+    .venv/bin/python tools/sameconn.py df72766    ->  connections identical
+
+Recorded 2026-11-27 07:56 -0600.
+
+Round 2: no findings that change a connection.
