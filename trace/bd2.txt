@@ -597,7 +597,7 @@ D 16022,17268:16066,17332              # L2
 D 16010,17284:16034,17320              # L2's west part
 D 16066,17270:16092,17332              # L2 east of the rail
 D 16034,17328:16066,17398              # under band D, ground land
-D 16066,17328:16076,17375              # the same east of the rail
+D 16066,17328:16095,17375              # the same east of the rail (the ground land's lip y 17358-17372 reaches x 16095)
 C 16045,17378
 M 16008,17112:16058,17400              # the ground rail, on south over cdp4's piece of it (M 16038,17285 y17535)
 P 16003,17114:16244,17134              # band A, gate: bd2_e_n (the column x 16226-16244 ends on it)
@@ -643,7 +643,8 @@ N D 16040,17300 rd_data_e
 # land; a poly block x 15908-15950, y 17265-17338 crosses it. The tie box is at the block's top. The wire W
 # (x 15974-15988, bright green in the clean shot from y 17150 to y 17290) runs from the band north, sends a
 # branch west into the box, and goes on north to L1's west end.
-D 15850,17282:15896,17322              # VCC land
+D 15850,17260:15896,17322              # VCC land
+C 15865,17302                          # pit in the clean shot, ring in chip 2's metal shot
 N D 15870,17300 vcc
 D 15890,17284:16010,17320              # band: channel, and east to the rail
 D 15974,17148:15988,17290              # W

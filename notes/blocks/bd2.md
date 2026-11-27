@@ -703,7 +703,7 @@ edge line (x 16095-16101 under band A, x 16086-16092 under bands B and C; rows y
   pocket (x 15990-16006, y 17165-17285: olive, 113 / 117 / 57) that holds the west end caps of bands B and C;
   it cannot be poly (it would join band B to band C, each driven from the east).
 - **Load**: the `dbus_le` NOR's load upside down. L2 runs west as a band y 17284-17320 to the VCC land under
-  the supply rail; a poly block x 15908-15950, y 17236-17338 crosses it (channel 36 wide, 42 long; the band's
+  the supply rail (land y 17260-17322, contact (15865,17302)); a poly block x 15908-15950, y 17236-17338 crosses it (channel 36 wide, 42 long; the band's
   edges print through the block at y 17280-17284 and y 17320-17325). **Tie**: W sends a branch west along
   y 17238-17256 into a framed box (15918-15952, 17236-17264; bright centre (15935,17250) in both metal shots)
   under the block's top. A small outlined patch (15955-15970, 17262-17280) between the block and W is field,
@@ -736,7 +736,7 @@ branch.
 14. **The link W** is read from colour over 140 px of a 14 px strip between two edge lines; in chip 2's
     metal and stripped shots its west half is redder and its east half plain, as on the `dbus_le` NOR's tie
     wire. If W were not diffusion north of the branch (y 17256), L1 would have neither load nor output.
-15. **Supply contact of the load**: not looked for west of x 15850; the land is labelled `vcc`.
+15. (Closed by review round 2: the load's VCC land runs from y 17260 and has its contact at (15865,17302).)
 
 ### Not done (piece `rdg`)
 
@@ -791,3 +791,46 @@ Connections before and after the fixes (commit 955655c against the fixed tree):
 Recorded 2026-11-27 06:05 -0600.
 
 Round 1: no findings that change a connection.
+
+### Round 2 (full review), 2026-11-27, piece `rdg`
+
+A fresh Claude Fable 5.2 agent, on commit 421ad7f, 19 images in `cache/scratch/bd2/review-2/` (to 6.4x, three
+and four shots, with `tools/px.py`, `tools/textmap.py`, `tools/tl5_tracks.py`, `tools/eof_tee.py`). Told to
+suspect: the wire W (diffusion along its whole length, joined at both ends) and the pocket beside it; whether
+the middle and south lands are ground, so that the gate is a NOR; band B's route (one poly with the L, the L on
+field, no contact to the `e_b` trunk, the pad on `cs_d`); band C's reach to the pad (16209,17212) and that pad
+apart from the pad (16210,17300); the load's tie box, the branch into it and the patch; the output's route (one
+metal, no contact, the grey spot at (16700-16712,17648), the two pads and the row between); how far east each
+land goes.
+
+Findings, neither of which changes a connection (both confirmed by me and fixed):
+
+1. **Band D's channel, east end**: the south ground land has a lip east of the rail to x 16095 (y 17358-17372),
+   so the diffusion's edge crosses band D at x 16096-16100, not x 16076. Confirmed (row y 17365 in chip 2's
+   stripped shot: R-G +11..+32 at x 16072-16088, edge at x 16096-16100). Drawn to x 16095.
+2. **The load's VCC land** runs north to about y 17255 and has a contact near (15868,17302). Confirmed (tan
+   down x 15874 from y 17264; `cdp4_padc.py`: hole (15866,17300), ring in chip 2's metal shot). Land from
+   y 17260, contact drawn at (15865,17302) under `bd3`'s rail; Ambiguity 15 closed.
+
+Checked and found as drawn by the reviewer: W is diffusion along its whole length (chip 2's metal R-G 35-38
+and stripped +14..+16 down x 15981 from y 17154 to y 17310, equal to the load band, against 20 and -3 for
+field), with no edge line across it at either end; the pocket is field, with no poly between the caps of bands
+B and C; both ground contacts have ring and bright centre in both metal shots, and L2 has none; band B is one
+poly across a single 8 px edge line at x 16088, the L lies on field, the `e_b` trunk has no ring and no hole
+over it, the pad (16384,17169) is on `cs_d`'s metal; band C's poly is continuous into the pad (16209,17212),
+with bare ground in both chips between that pad and (16210,17300); bands A and D continuous to the column and
+to the pad, the metal x 16255 ending on its pad; the tie box and the output cell have the buried contact's
+look, the patch is field; the route is one metal with no break of 20 px in either chip and neither corner a
+T, the smear at (16700-16712,17648) lies over field under bright metal with no ring, the far row and both pads
+are as drawn and the metal runs on east past x 17145; no branch on any poly, no contact at any crossing.
+Not checked by the reviewer: that the rail x 15795-15890 is VCC; where the port's metal goes; the clean shot's
+green under the middle of the wide rail x 16940-17030 (read as field).
+
+Connections before and after the fixes (commit 421ad7f against the fixed tree):
+
+    tools/t.sh bd2 sameconn.py 421ad7f            ->  connections identical
+    .venv/bin/python tools/sameconn.py 421ad7f    ->  connections identical
+
+Recorded 2026-11-27 06:26 -0600.
+
+Round 2: no findings that change a connection.
