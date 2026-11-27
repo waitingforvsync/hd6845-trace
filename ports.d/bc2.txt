@@ -17,5 +17,5 @@ bc2_e15343    M  10137,15290   out  NAND(bc2_e15215, bc2_e15085): thin metal nor
 bc2_e15517    M  10181,15290   out  NAND(tl6_p6101, bc2_e15085): thin metal east and north from its pad (10137,15608) (seen to a pad (10092,14740))
 bc2_e15690    M  10050,15830   out  NAND(bc2_e15215, tl6_p6143): thin metal east and south from its pad (10006,15782)
 # run 3, piece bus2: the two bus lines that feed the decode, joined to busl's rows
-tl6_p6101     P  7550,14393    in   busl's row (its port at the same place): on east as bus line y 14394 to the pad (9764,14393) and the thin metal x 10052
+tl6_p6101     P  7550,14393    in   busl's row (its port at the same place): on east as bus line y 14394 to the pad (9768,14393) and the thin metal x 10052
 tl6_p6143     P  7550,14437    in   busl's row (its port at the same place): on east as bus line y 14437 to the pad (9722,14438) and the thin metal x 10007 / x 9963

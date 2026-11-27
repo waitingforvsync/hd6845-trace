@@ -312,9 +312,9 @@ M 8598,14394 x9378 w=14
 P 9361,14377:9395,14411                # pad
 C 9378,14394 s=20x20
 P 9378,14381:9764,14399                # under the W rail, the M rail's stem and the E rail's feeder
-P 9747,14376:9781,14410                # pad
-C 9764,14393 s=20x20
-M 9757,14392 x10052 y14660 w=13         # east and south: the thin metal x 10052 of piece inv
+P 9752,14376:9788,14410                # pad (ring x 9750-9790, bright centre x 9763-9773 in both metal shots)
+C 9768,14393 s=20x20
+M 9760,14392 x10052 y14660 w=13         # east and south: the thin metal x 10052 of piece inv
 # --- line y 14437: tl6_p6143 (was bc2_m10007)
 P 7545,14428:7838,14446                # poly row from the west: busl's row tl6_p6143 (its port (7550,14437))
 P 7821,14420:7855,14454                # pad

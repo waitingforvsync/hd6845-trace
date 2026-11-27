@@ -406,8 +406,14 @@ dies, not a contact (Ambiguity 6).
 6. **(7664-7708, 14393)**: residue or a contact of `tl6_p6101`'s row to the wide vertical metal there. Read as no
    contact (no ring in either metal shot). If it were one, `tl6_p6101` would be on that metal too (it is in
    `bc1`'s undrawn bundle; nothing else would change here).
-7. **The pad (9764,14393)**'s hole is small and red-centred in the clean shot; the contact rests on both metal
+7. **The pad (9768,14393)**'s hole is small and red-centred in the clean shot; the contact rests on both metal
    shots.
+8. **(9476,14438)**, row B under the W rail's west margin (review round 4): the clean shot has a dark bar across the
+   row, chip 1's other stripped shot a green spot with a ring, chip 2's stripped shot a small green spot at
+   (9470,14431); neither metal shot has a ring and the row is not widened. The same kind of spot as Ambiguity 6: not
+   a contact.
+9. **(8940,14398)**: a dark notch on line A's metal in both chips; the metal is continuous beside it and the clean
+   shot is plain field beneath: not a break or a tap.
 
 ### Not done (run 3)
 
@@ -537,6 +543,40 @@ Connections before and after the fixes (commit 787a3c0 against the fixed tree):
 Recorded 2026-11-27 08:41 -0600.
 
 Round 3: no findings that change a connection.
+
+### Round 4 (full review), 2026-11-27: run 3, piece `bus2`
+
+A fresh Claude Fable 5.2 agent, on commit b5d1c34, 23 images in `cache/scratch/bc2/review-4/`. Told to suspect: the
+join to `busl`'s rows at the west end (the same row, no track step, no contact to the verticals there, the
+coloured patches at (7664-7708,14393)), each of the ten pads (a contact; the metal leaving only as drawn; a
+second poly), the metal stretches (a tap in mid-run, a break), the poly under the wide metals, the east pads'
+joins to the thin metals, the thin metals to y 14660.
+
+**No finding changes a connection.** One geometry remark, fixed: the pad drawn at (9764,14393) is about 5 px west
+of its place (ring x 9750-9790, bright centre x 9763-9773 in both metal shots): moved to (9768,14393). Three
+remarks for the notes, recorded as Ambiguities 6 (agreed: not a contact; the row y 14351 has the same green patch
+under the same metal, chip 1's metal bright across, no ring, the row not widened), 8 and 9.
+
+Checked and found correct by the reviewer: the west join (rows y 14393 and y 14437 unbroken from x 7300 to their
+pads with no track step: column maps at 25 positions and row profiles in four shots; no ring or hole at the
+metals x 7578-7622, 7664-7708, 7746-7757); the ten pads (ring and bright centre in both metal shots, except
+(9378,14394), which rests on chip 1 and the clean shot's hole; the two east pads also pitted boxes in chip 2's
+stripped shot; metal leaving only on the drawn side, bare ground north and south of each in all four shots); the
+metal runs (no gap of 8 px in both chips; field under their whole length in the clean shot, so no poly passes
+beneath; no tee); the poly under the six wide metals (salmon and unbroken, no ring in either metal shot; the gap
+rings absent from both chip-2 shots; no branch); the east thin metals (continuous, clean corners, crossing the
+poly rows y 14607 and y 14650 with edge bars only); the extraction. Not checked: `busl`'s own drawing west of
+x 7545; under the wide metals chip 2's stripped shot is fringed, so those readings rest on the clean shot and
+the two metal shots.
+
+Connections before and after the fix (commit b5d1c34 against the fixed tree):
+
+    tools/t.sh bc2 sameconn.py b5d1c34            ->  connections identical
+    .venv/bin/python tools/sameconn.py b5d1c34    ->  connections identical
+
+Recorded 2026-11-27 08:59 -0600.
+
+Round 4: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
