@@ -3541,7 +3541,7 @@ Renames (one batch; `tools/names.py compare`: 1 net renamed, only names changed)
 
 - R1's match inverted: `bl0_w15566` -> `h_eq_r1_n` (`eof` run 69, piece `ld566`: `h_eq_r1_n` = NOT `h_eq_r1`,
   firm). Glossary: a row of its own (the text moved out of the `bl0_w#` row). Catch-up for branches in flight:
-  `tools/rename.py bl0_w15566 h_eq_r1_n`.
+  `tools/rename.py bl0_w15566 h_eq_r1_n` (`bl0_w15566` -> `h_eq_r1_n`).
 
 Left unrenamed on purpose: `eof_w16213` and `eof_w17734` (each NOT `rst_lat`, firm as drawn; `eof_w17734` is
 the input of the clock gate g5): the sense of the poly named `rst_lat` in `bc2`'s rail column is in doubt
