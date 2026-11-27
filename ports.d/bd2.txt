@@ -1,0 +1,11 @@
+# NAME        LAYER  X,Y              DIR  note
+# bd2: bus control logic right of the register select gates. Started with run 3 (2026-11-27): that run's ports,
+# and the bundle's tracks at the region's south edge as runs 1-2 drew them. The rest of the notes' Ports table
+# (top and east edges) is not in this file yet.
+dbus_le       P      16130,16865      out  the output cell (16096-16128,16849-16882) of the NOR(cs_d, bd2_e_n) under the ground rail; cdp4's row leaves it east
+rd_data_e     M      17112,17950      out  the read gate's output (e_b AND NOT cs_d AND rw_d AND rs_d): thin metal east from the pad (17080,17949) into the block below the data bus column
+e_b           M      16169,17400      in   E buffered: the lower trunk, from the south (trunks draws it)
+rw_d          M      16298,17400      in   from the south; ends at (16297,16040)
+rs_d          M      16342,17400      in   from the south; ends at (16343,16603)
+cs_d          M      16385,17400      in   from the south; ends at (16386,16171); taps at (16384,16821) and (16384,17169)
+vss           M      16008-16058,17400  -   the ground rail of the left column; goes on south (cdp4 draws it to y 17535)

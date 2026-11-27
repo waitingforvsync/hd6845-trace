@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 """Audit the drawn metal of a wiring region against the photos, as text (re-read item R1's method).
 
-usage: bd1_audit.py X0 Y0 X1 Y1 [--gap 14] [--hole 24]     (run from the repository's root; set TRACE as usual,
-                                                             or leave it unset to load every trace file)
+usage: bd1_audit.py X0 Y0 X1 Y1 [--gap 14] [--hole 24] [--only NAME]   (run from the repository's root; set TRACE as
+                                                             usual, or leave it unset to load every trace file)
+       bd1_audit.py --tiles NAME [--size 1500]    every tile of the die that trace/NAME.txt draws in, with --only NAME
+
+--only NAME tests only the metals, polys and contacts that trace/NAME.txt draws (lists 1, 3, 4); the other files
+still count as drawn for list 2, which is then limited to metal within 40 px of one of NAME's metals.
 
 Four lists, each to be LOOKED AT on a view: the tool only says where to look.
 
@@ -29,10 +33,28 @@ from PIL import Image, ImageDraw
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import tracelib
 
-a = [v for v in sys.argv[1:] if not v.startswith('--')]
-x0, y0, x1, y1 = map(int, a[:4])
 def opt(name, d):
     return float(sys.argv[sys.argv.index(name) + 1]) if name in sys.argv else d
+def sopt(name):
+    return sys.argv[sys.argv.index(name) + 1] if name in sys.argv else None
+ONLY = sopt('--only')
+if '--tiles' in sys.argv:
+    import subprocess
+    name = sopt('--tiles'); size = int(opt('--size', 1500))
+    t = tracelib.Trace(); seen = set()
+    for it in t.items:
+        if ('/%s.txt' % name) in it.src and it.layer in 'MPC':
+            b = it.geom.bounds
+            for tx in range(int(b[0]) // size, int(b[2]) // size + 1):
+                for ty in range(int(b[1]) // size, int(b[3]) // size + 1):
+                    seen.add((tx, ty))
+    for tx, ty in sorted(seen):
+        sys.stdout.flush()
+        subprocess.run([sys.executable, __file__, str(tx * size), str(ty * size), str((tx + 1) * size), str((ty + 1) * size), '--only', name, '--brief'])
+    sys.exit(0)
+BRIEF = '--brief' in sys.argv
+a = [v for v in sys.argv[1:] if not v.startswith('--') and v.lstrip('-').isdigit()]
+x0, y0, x1, y1 = map(int, a[:4])
 GAP = int(opt('--gap', 14)); HOLE = opt('--hole', 24)
 W, H = x1 - x0, y1 - y0
 tr = tracelib.Trace()
@@ -44,6 +66,7 @@ def raster(items):
             d.polygon([(x - x0, y - y0) for x, y in poly.exterior.coords], fill=1)
     return np.array(im, bool)
 hits = tr.query(x0, y0, x1, y1)
+mine = (lambda it: ('/%s.txt' % ONLY) in it.src) if ONLY else (lambda it: True)
 metal_items = [it for it in hits if it.layer == 'M']
 def minwidth(it):
     r = it.geom.minimum_rotated_rectangle
@@ -55,6 +78,9 @@ drawn = raster(metal_items)
 dt = ndi.distance_transform_edt(drawn)
 core = ndi.maximum_filter(dt, 31)
 thin = drawn & (core <= 13.5)
+if ONLY:
+    own = raster([it for it in metal_items if mine(it)])
+    thin &= own
 m2 = np.asarray(np.load('cache/metal.npy', mmap_mode='r')[y0:y1, x0:x1, :3], float)
 m1 = np.asarray(np.load('cache/metal1.npy', mmap_mode='r')[y0:y1, x0:x1, :3], float)
 ac = np.asarray(np.load('cache/acid1b.npy', mmap_mode='r')[y0:y1, x0:x1, :3], float)
@@ -88,6 +114,8 @@ for cx, cy, w, h, f, note in sorted(out, key=lambda t: (t[0] // 30, t[1])):
     print('   %d,%d  %dx%d px  bare %.0f%%%s' % (cx, cy, w, h, 100 * f, note))
 # 2. undrawn metal
 und = seen_both & ~ndi.binary_dilation(drawn, iterations=6)
+if ONLY:
+    und &= ndi.binary_dilation(own, iterations=40)
 lab, n = ndi.label(ndi.binary_opening(und, structure=np.ones((3, 3))))
 out = []
 for i, sl in enumerate(ndi.find_objects(lab), 1):
@@ -101,6 +129,7 @@ for t in sorted(out, key=lambda t: (t[1] // 40, t[0])):
 hole = (ac[..., 0] - ac[..., 1] < HOLE) & (ac[..., 0] >= 110) & ndi.binary_erosion(thin, iterations=2)
 lab, n = ndi.label(ndi.binary_opening(hole, structure=np.ones((2, 2))))
 cons = [(it.geom.centroid.x, it.geom.centroid.y, it) for it in hits if it.layer == 'C']
+allcons = cons
 found = []
 print('\n3. HOLES in the clean shot under drawn thin metal:')
 for i, sl in enumerate(ndi.find_objects(lab), 1):
@@ -119,7 +148,7 @@ for cx, cy, it in cons:
         r = ac[int(cy) - y0 - 4:int(cy) - y0 + 5, int(cx) - x0 - 4:int(cx) - x0 + 5].reshape(-1, 3).mean(0)
         print('   %d,%d  %s  clean %d/%d/%d' % (cx, cy, it.src.split('/')[-1], r[0], r[1], r[2]))
 # 4. poly gaps: field under a drawn thin poly
-polys = [it for it in hits if it.layer == 'P']
+polys = [it for it in hits if it.layer == 'P' and mine(it)]
 pm = raster(polys)
 pdt = ndi.distance_transform_edt(pm)
 pthin = pm & (ndi.maximum_filter(pdt, 31) <= 13.5)
