@@ -1574,6 +1574,35 @@ Recorded 2026-11-27 13:56 -0600.
 
 Round 16: no findings.
 
+### Round 17 (full review), 2026-11-27: run 11, piece `dec1`
+
+A fresh Claude Fable 5.2 agent, on commit 8f08e20, 12 images in `cache/scratch/bc2/review-17/`. Told that the
+main question is a contact anywhere on the 535 px stretch (two-part test), then whether it is one metal (the
+narrow stretch y 16186-16230; south of y 16246; a branch), and whether the `?M` are the right stretches.
+
+**No finding changes a connection.** (1) No contact: the metal is never wider than about 14 px, nowhere a 34 px
+ringed pad (the reference pad (9552,14785) has one, with a green hole and dark core); the box
+(9548-9568, 15848-15868) has a bright centre of about 8 px at (9558,15860) in both metal shots but only a 4 px
+greenish band along its bottom edge in the clean shot, no core, and is poly-pink in chip 2's stripped shot: a
+pass-over; the other two boxes have no hole and no pad; green bands at y 15931-15936, 16045-16050 and
+16186-16190 span 30-42 px across the track (block edges, not holes); the tan over the three nodes is uniform.
+(2a) The narrow stretch is the same metal: an unbroken pink protected strip x 9544-9553 from y 16195 to y 16237 in
+the clean shot, metal-yellow in chip 2 at y 16195-16219 and in chip 1 at y 16195-16198 and y 16210-16227.
+Geometry remark, left as drawn: the narrowing is probably appearance (protected colour reaches x 9568; the
+metal likely x 9546-9559 with its east part dark over the diffusion's west edge). (2b) South of y 16246: both-dark
+bars of 8-13 px only. (2c) No branch. (3) The `?M` are right: they match `tools/tl3_thin.py`'s stretches and no
+other reaches 14 px. Not checked: continuity over the four `?M` (cannot be shown); south of y 16500. Beyond the
+port the metal runs on to at least y 16448, with a 30 px both-dark stretch at y 16385-16415 over another box.
+
+Connections (a comment only was changed; commit 8f08e20 against the tree):
+
+    tools/t.sh bc2 sameconn.py 8f08e20            ->  connections identical
+    .venv/bin/python tools/sameconn.py 8f08e20    ->  connections identical
+
+Recorded 2026-11-27 14:14 -0600.
+
+Round 17: no findings that change a connection.
+
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
 - "Latch unit a", row `bc2_w14912` ("goes west, not followed"): the pad (10395,14912) is the south end of a thin metal x 10397 that comes from north of y 14570 (`eof` run 17, at 1.28x and by `tools/eof_mrun.py col 10395 14640 15030`; not read at high zoom).

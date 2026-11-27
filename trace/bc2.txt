@@ -823,6 +823,7 @@ M 9552,15884 y15996 w=13               # over the node of bc2_w15915 (tan, no ho
 M 9552,16029 y16106 w=13               # over bc2_w16035's strip (tan, no hole) and the row y 16088-16106
 ?M 9552,16104 y16141 w=13              # over the box (9532-9562, 16116-16140)
 M 9553,16139 y16190 w=12               # over bc2_p16067's block (tan, no hole)
-M 9549,16186 y16230 w=8                # the narrow stretch, 5 px west, over field
+M 9549,16186 y16230 w=8                # the narrow stretch, 5 px west, over field (review round 17: probably full width, x 9546-9559,
+                                       # its east part dark over the block's west edge; left as it shows)
 ?M 9549,16228 y16246 w=8
 M 9551,16244 y16370 w=12               # over the row y 16243-16262, land 7's arm and on south (port)
