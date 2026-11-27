@@ -266,7 +266,7 @@ C 10006,15391 s=20x20
 P 9946,15424:10137,15442                # output row, east under all four metals (no contact)
 P 10120,15418:10154,15452               # pad: the south end of the thin metal x 10137
 C 10137,15435 s=20x20
-M 10137,15445 y15290 w=13               # north (port): tools/follow.py runs it to the pad (10135,14783) of a bus row
+M 10137,15445 y15290 w=13               # north; drawn on to its pad (10135,14783) in run 6, piece dec
 # unit 15517
 P 9946,15508:10050,15526                # band 1, east under x 9963, x 10007
 P 10033,15505:10067,15539               # end pad of tl6_p6101's metal
@@ -277,7 +277,7 @@ C 10006,15566 s=20x20
 P 9946,15598:10137,15616                # output row, east under x 9963 and x 10093 (no contact; no metal on x 10007, x 10052 here)
 P 10120,15591:10154,15625               # pad
 C 10137,15608 s=20x20
-M 10130,15608 x10181 y15290 w=18        # east and north on x 10172-10191 (port; seen on north to the corner y 14735 and a pad (10092,14740))
+M 10130,15608 x10181 y15290 w=18        # east and north on x 10172-10191; drawn on to its pad (10092,14740) in run 6, piece dec
 # unit 15690
 P 9946,15681:10006,15699                # band 1, east under x 9963
 P 9989,15679:10023,15713                # end pad of bc2_e15215's metal
@@ -604,3 +604,31 @@ P 8580,14464:8614,14498                # pad
 C 8597,14481 s=20x20
 M 8597,14481 x9357 y15522 w=14
 N M 8000,14481 busl_x7122
+
+# ================================================================ run 6 (2026-11-27), piece dec: where two of the three decode lines go
+# bc2_e15517: its metal x 10181 on north to a corner at y 14740 and west onto a pad (10092,14740); a poly row
+#   y 14731-14749 west under the thin metals x 10052, 10007, 9963, the E, M and W rails (no contact: no hole on the
+#   row but the two pads') to a pad (9397,14740); a thin metal x 9399 south, over the rows of the W rail's units
+#   and of the six-input NOR without contact (reviews 6-8), to y 15807, west to x 9357, onto a pad (9357,15824).
+#   The pad's poly goes south (not drawn: port).
+# bc2_e15343: its metal x 10137 on north to a pad (10135,14783); a poly row y 14777-14793 west under the same
+#   metals and the E and M rails to a pad (9552,14785); a thin metal x 9552 south over the tie boxes of the W
+#   rail's units and lengthwise over the NOR's wide strip, without contact (reviews 6-8). Drawn to y 15835 (port):
+#   below that it has a contact pad at (9558,15860) and metal again from y 15884; what it lands on is not read.
+M 10181,15290 y14740 x10092 w=16
+P 10075,14723:10109,14757              # pad
+C 10092,14740 s=20x20
+P 9397,14731:10092,14749               # row west
+P 9380,14723:9414,14757                # pad
+C 9397,14740 s=20x20
+M 9399,14740 y15807 x9357 w=13
+M 9357,15801 y15824 w=13
+P 9340,15807:9374,15841                # pad (its poly south is not drawn)
+C 9357,15824 s=20x20
+M 10137,15290 y14783 w=13
+P 10118,14766:10152,14800              # pad
+C 10135,14783 s=20x20
+P 9552,14777:10135,14793               # row west
+P 9535,14768:9569,14802                # pad
+C 9552,14785 s=20x20
+M 9552,14785 y15835 w=13               # south (port)

@@ -646,6 +646,41 @@ Built like the others (`tools/tl5_tracks.py h 14524 7540 9380`, `h 14481 ...`, `
 (7794,14481), (8250,14481), (8597,14481); corner x 9357; south to the pad (9357,15522)). Nine of the 13 lines
 are now drawn end to end.
 
+## Run 6 (2026-11-27), piece `dec`: where two of the three decode lines go (wiring; no join, no uncertain item)
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 11:23 -0600. Views in `cache/scratch/bc2/w4/` (`e343`, `hop`: the south end of the
+thin metal x 9552; overlays `ov_399`, `ov_517`) and `w1/` (`n_end`, `e_end`, `x9399`), `s1/` (`end399_m`,
+`end399_c`). Connections unchanged (`tools/sameconn.py`): both wires only grow.
+
+- **`bc2_e15517`** (low for R8 bits 7,6 = 0,1). Its metal x 10172-10191 runs on north from y 15290 to a corner at
+  y 14740 and west onto a pad (10092,14740) (`tools/tl5_tracks.py v 10181 14720 15620`: metal in both chips from
+  y 14740; it does not go on south of the turn at y 15608: `v 10181 15590 15720`). A poly row y 14731-14749 runs
+  west (`tools/tl5_tracks.py rows row 8600 10200 12 14741`: poly from x 9416 to x 10150; no hole on it but the
+  two pads': `h 14740 9380 10150`; `tools/eof_tee.py`: no branch) under the thin metals x 10052, 10007, 9963 and
+  the E, M and W rails to a pad (9397,14740). **The bus metal of line y 14741 does not reach that pad**: no metal
+  and no poly on the track from x 9106 to x 9390 (the bus line ends west of x 9100). A thin metal x 9392-9406 runs
+  south from the pad (`v 9399 14725 15815`: no break in both chips at once), over the rows of the W rail's two
+  units, of the six-input NOR and of its output without contact (review rounds 6, 7, 8), to y 15800-15814, west
+  to x 9350, and ends on a pad (9357,15824) (hole in the clean shot, ring in both metal shots). The pad's poly
+  goes south to a row y 15855-15875 that runs west (seen; not drawn: port).
+- **`bc2_e15343`** (low for bits 7,6 = 0,0). Its metal x 10137 runs on north to a pad (10135,14783)
+  (`v 10137 14760 15300`); a poly row y 14777-14793 west (`rows row 9540 10150 10 14785`: poly all the way; no
+  branch) under the same thin metals and the E and M rails to a pad (9552,14785); a thin metal x 9545-9560 south
+  (`v 9552 14770 15330`, `v 9552 15320 15800`: no break). It passes over the tie boxes of the W rail's units and
+  lies lengthwise over the wide strip of the six-input NOR, without contact (review rounds 6, 7, 8). **Drawn to
+  y 15835 (port).** Below that, measured but not understood: a contact pad at (9558,15860) (dark ring
+  y 15845-15851, bright centre y 15857-15866 in both metal shots, a green centre in the clean shot) inside a
+  framed box (9548-9568, 15848-15868) to which a poly row y 15847-15870 comes from a pad (9420,15862) in the
+  west, and metal again on the same x from y 15884 to y 15932 over a diffusion. Whether the box is that row's
+  end pad, a diffusion's contact, or both, is not read: the next piece.
+- **`bc2_e15690`** (bits 7,6 = 1,0): not drawn further. Its metal x 10050 runs south to y 16125 and east along
+  y 16118-16135 to x 10140, lengthwise over a poly row that runs from x 10040 to a pad (10180,16127); no hole
+  under the metal's east end (view `e690`). Where its contact is, is not read.
+- The other bus lines: the metals of lines y 14698 (`rst_c`) and y 14741 (`lc2_w8450`) end west of x 9100
+  (`tools/tl5_tracks.py h 14698 8600 10200`: metal to about x 9079 and a leg at x 9093-9100; `h 14741`: to
+  about x 9106), and line y 14785 (`lc3_w9947`) has no metal east of x 8600 but the piece `eof` drew: all three
+  end in `bc1`'s region.
+
 ## Review
 
 **Model note: latch unit a was traced AND reviewed on claude-opus, not claude-fable-5-2**

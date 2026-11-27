@@ -13,8 +13,8 @@ bc2_w15607    M  10267,15515   out  latch unit b's lower node (a's bc2_w15029 si
 bc2_p14823    P  9872,14823    in   input of the inverter bc2_e14955: poly row from the west, under the E rail
 # bc2_e14955: no port any more (run 4, piece w2): its output row ends west on the pad (9314,14870), whose thin metal goes south to the second unit of the W rail
 # run 2, piece nand: the three NANDs below them (the four metals above end inside this piece)
-bc2_e15343    M  10137,15290   out  NAND(bc2_e15215, bc2_e15085): thin metal north from its pad (10137,15435) (follower: to the pad (10135,14783) of a bus row)
-bc2_e15517    M  10181,15290   out  NAND(tl6_p6101, bc2_e15085): thin metal east and north from its pad (10137,15608) (seen to a pad (10092,14740))
+bc2_e15343    M  9552,15835    out  NAND(bc2_e15215, bc2_e15085) (R8 bits 7,6 = 0,0): by the row y 14785 and the thin metal x 9552 south; below the port a contact pad at (9558,15860), not read
+bc2_e15517    P  9357,15824    out  NAND(r8_b6_q, bc2_e15085) (bits 7,6 = 0,1): by the row y 14740 and the thin metal x 9399 to this pad; its poly goes south to a row y 15855-15875 going west (not drawn)
 bc2_e15690    M  10050,15830   out  NAND(bc2_e15215, tl6_p6143): thin metal east and south from its pad (10006,15782)
 # run 3, piece bus2: the two bus lines that feed the decode, joined to busl's rows
 tl6_p6101     P  7550,14393    in   busl's row (its port at the same place): on east as bus line y 14394 to the pad (9768,14393) and the thin metal x 10052
