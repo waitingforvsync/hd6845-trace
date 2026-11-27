@@ -218,3 +218,74 @@ M 10093,15252 y15300 w=13
 N M 10007,14900 bc2_m10007
 N M 10052,14900 bc2_m10052
 N P 9900,14823 bc2_p14823
+
+# ================================================================ run 2, piece nand (2026-11-27): three two-input NANDs on the E rail
+# Below the three inverters, three units of one build at a pitch of 173-174 px. Under the rail each has a VSS land with a
+# contact, two gate bands 44 px apart with a strip between them that has no exit, and an output land: two pull-downs in
+# series. Output box, load and tie as in bc2_einv. The bands' west end caps lie west of the rail (x 9782-9800).
+#     bc2_e15343 = NAND( bc2_e15215, bc2_e15085 )
+#     bc2_e15517 = NAND( bc2_m10052, bc2_e15085 )
+#     bc2_e15690 = NAND( bc2_e15215, bc2_m10007 )
+M 9808,15300:9864,15830                # E rail, on south
+M 9642,15300:9698,15830                # M rail, on south
+@cell bc2_enand tag=15343
+D 9828,15298:9868,15324                # VSS land, top part
+C 9842,15311
+D 9805,15322:9868,15436                # land, under band 1, strip, under band 2, output land (63 wide)
+P 9782,15334:9948,15352                # band 1 (the VSS side)
+P 9782,15378:9948,15396                # band 2
+D 9866,15422:9898,15442                # the output land's tab east of the rail
+D 9896,15422:9928,15444                # under the box
+B 9896,15420:9930,15446                # output box
+P 9902,15424:9948,15442                # its poly, east
+N D 9838,15415 bc2_e{}
+D 9642,15380:9696,15440                # VCC land
+C 9659,15399
+D 9690,15417:9812,15440                # band: the load's channel (W 23, L 56), and east to the rail
+P 9698,15397:9754,15462                # load gate
+D 9757,15372:9773,15430                # tie wire north from the band
+D 9730,15372:9773,15394                # and west into the box
+P 9730,15370:9754,15400                # the block's tab over the box
+B 9728,15370:9756,15396                # tie
+@end
+@inst bc2_enand 0,174 tag=15517
+@inst bc2_enand 0,347 tag=15690
+# ---------------------------------------------------------------- their inputs and outputs
+# The four thin metals of piece inv run on south and end here, each on a pad at the east end of a band:
+M 10093,15290 y15698 x9999 w=13         # bc2_e15215: over the tap (10091,15345), south, west at y 15698 to its end pad
+M 10007,15290 y15574 w=12               # bc2_e15085: over the tap (10006,15391) to its end pad (10006,15566)
+M 10052,15290 y15530 w=13               # bc2_m10052: to its end pad (10050,15522)
+M 9963,15290 y15746 w=13                # bc2_m10007: to its end pad (9963,15738)
+# unit 15343
+P 9946,15334:10091,15352                # band 1, east under x 9963, x 10007, x 10052 (no contact)
+P 10074,15328:10108,15362               # tap pad on bc2_e15215's metal
+C 10091,15345 s=20x20
+P 9946,15378:10006,15396                # band 2, east under x 9963
+P 9989,15374:10023,15408                # tap pad on bc2_e15085's metal
+C 10006,15391 s=20x20
+P 9946,15424:10137,15442                # output row, east under all four metals (no contact)
+P 10120,15418:10154,15452               # pad: the south end of the thin metal x 10137
+C 10137,15435 s=20x20
+M 10137,15445 y15290 w=13               # north (port): tools/follow.py runs it to the pad (10135,14783) of a bus row
+# unit 15517
+P 9946,15508:10050,15526                # band 1, east under x 9963, x 10007
+P 10033,15505:10067,15539               # end pad of bc2_m10052's metal
+C 10050,15522 s=20x20
+P 9946,15552:10006,15570                # band 2, east under x 9963
+P 9989,15549:10023,15583                # end pad of bc2_e15085's metal
+C 10006,15566 s=20x20
+P 9946,15598:10137,15616                # output row, east under x 9963 and x 10093 (no contact; no metal on x 10007, x 10052 here)
+P 10120,15591:10154,15625               # pad
+C 10137,15608 s=20x20
+M 10130,15608 x10176 y15290 w=14        # east and north on x 10176 (port; seen on north to the corner y 14735 and a pad (10092,14740))
+# unit 15690
+P 9946,15681:10006,15699                # band 1, east under x 9963
+P 9989,15679:10023,15713                # end pad of bc2_e15215's metal
+C 10006,15696 s=20x20
+P 9946,15725:9963,15743                 # band 2
+P 9946,15721:9980,15755                 # end pad of bc2_m10007's metal
+C 9963,15738 s=20x20
+P 9946,15771:10006,15789                # output row
+P 9989,15765:10023,15799                # pad
+C 10006,15782 s=20x20
+M 9999,15782 x10050 y15830 w=13         # east and south (port)

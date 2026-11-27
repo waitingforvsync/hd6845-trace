@@ -279,6 +279,70 @@ x 9300: the two inputs come off that bus.
 - The six wires of this piece beyond its edges (ports).
 - The two supply bands.
 
+## Run 2, piece `nand` (2026-11-27): three two-input NANDs on the E rail
+
+Same run, after piece `inv`'s review. Region x 9640-10190, y 15290-15830: 9 transistors, 3 named outputs, no
+uncertain item (full extraction 2,524 nets, 4,853 transistors, 0 errors). Views in `cache/scratch/bc2/n2/`:
+`u4_c`, `u4_m` (2.8x), `k4` (the load knot, 7x), `b4` (the output box, 7x), `o5_m`, `o5_c`, `o6_m` (4x), sheet
+`x1`, overlay `ov_c`.
+
+    bc2_e15343 = NAND( bc2_e15215, bc2_e15085 )
+    bc2_e15517 = NAND( bc2_m10052, bc2_e15085 )
+    bc2_e15690 = NAND( bc2_e15215, bc2_m10007 )
+
+With piece `inv` (`bc2_e15085` = NOT `bc2_m10007`, `bc2_e15215` = NOT `bc2_m10052`): three of the four minterms of
+the two wires `bc2_m10007` and `bc2_m10052`, each active low: `bc2_e15343` is low when both are low,
+`bc2_e15517` when `bc2_m10052` is high and `bc2_m10007` low, `bc2_e15690` when `bc2_m10007` is high and
+`bc2_m10052` low. A two-bit decode; what the two bits are is not known (they come off the poly bus above).
+
+### Cell `bc2_enand` (master: the unit with bands y 15334-15352 and y 15378-15396)
+
+Under the rail (`tools/bd2_umap.py 9796 15290 9960 15650 4 4`): VSS land y 15298-15332 with its contact
+(9842,15311) | band 1 y 15334-15352 | strip y 15354-15376 | band 2 y 15378-15396 | output land y 15394-15436;
+the diffusion is x 9805-9868 from y 15322 down (the land's top part x 9828-9868). The strip has no contact and
+no exit east or west (closed outlines both sides): two pull-downs in series, 63 wide. The bands' west end caps
+lie west of the rail at x 9782-9800. Output box (9896-9930, 15420-15446) on a tab of the land east of the rail,
+its poly east along y 15424-15442. Load and tie are `bc2_einv`'s: block (9698-9754, 15397-15462) over the band
+y 15417-15440 from the VCC land under M (9642-9696, 15380-15440; contact (9659,15399)), three orange bands with
+one dark line between each in chip 2's stripped shot (view `k4`); tie wire x 9757-9773 north from the band into
+the box (9728-9756, 15370-15396) on the block's top.
+
+Copies at +174 and +347 (`tools/findcell.py`, clean shot: 0.93 and 0.89); overlay `ov_c`.
+
+### Inputs and outputs
+
+The four thin metals of piece `inv` run on south and each ends here on a pad at the east end of a band:
+
+| Metal | Net | Tap | End |
+|---|---|---|---|
+| x 10093 | `bc2_e15215` | (10091,15345): band 1 of unit 15343 | south to y 15698, west to the pad (10006,15696): band 1 of unit 15690 |
+| x 10007 | `bc2_e15085` | (10006,15391): band 2 of unit 15343 | the pad (10006,15566): band 2 of unit 15517 |
+| x 10052 | `bc2_m10052` | (10050,15217): the inverter (piece `inv`) | the pad (10050,15522): band 1 of unit 15517 |
+| x 9963 | `bc2_m10007` | (9963,15087): the inverter | the pad (9963,15738): band 2 of unit 15690 |
+
+Outputs: `bc2_e15343`'s row y 15424-15442 east under all four metals to a pad (10137,15435), the south end of the
+thin metal x 10137 (bare ground on x 10137 from y 15464 to y 15584), which runs north (`tools/follow.py`: to the
+pad (10135,14783) of a bus row); `bc2_e15517`'s row y 15598-15616 east to a pad (10137,15608), whose metal goes
+east and north on x 10176 (seen on north to a corner at y 14735 and a pad (10092,14740)); `bc2_e15690`'s row
+y 15771-15789 east to a pad (10006,15782), whose metal goes east and south on x 10050. Each is drawn to this
+piece's edge (ports).
+
+Crossings (`cdp4_candh.py`, and the four it flagged on a four-shot sheet, `x1`): every band and row under a thin
+metal is a plain crossing (the row not widened, salmon, no hole). The test's flags at (9963,15563), (10007,15430),
+(10093,15430), (10052,15343) were dark specks beside the row; its flags at (10007,15607), (10052,15607),
+(9963,15780) are places with no metal at all (the open poly's green rim). The eight pads test as pads.
+
+### Ambiguities (piece `nand`)
+
+4. **The strip between the two bands** is taken as an internal node: no contact on it, closed outlines east and
+   west of the rail. If it had an exit the gate would not be a plain NAND.
+5. The boxes are drawn `B` as in piece `inv`.
+
+### Not done (piece `nand`)
+
+- The three outputs beyond their ports; the next unit down the E rail (from y 15830); the W rail's units; the M
+  rail's west-side loads; the bus rows.
+
 ## Review
 
 **Model note: latch unit a was traced AND reviewed on claude-opus, not claude-fable-5-2**
