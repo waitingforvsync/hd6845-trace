@@ -421,6 +421,37 @@ dies, not a contact (Ambiguity 6).
 - The centre block's east rail from y 15800 (first look in `cache/scratch/bc2/n3/notes.md`: an inverter at
   y 15805-15935 fed from a pad (10008,15866), then an irregular group).
 
+## Run 3, piece `inv7` (2026-11-27): the inverter below the decode on the E rail
+
+Same run. Region x 9640-10030, y 15805-16080: 2 transistors, no uncertain item. Views in `cache/scratch/bc2/n3/`:
+`s_c`, `s_m` (2.5x), `u7_a` (4.4x, chip 2 stripped), `u7k` (the tie knot, 8x), overlay `ov7_a`.
+
+    bc2_e15864 = NOT bc2_m15867
+
+- **Pull-down** under the rail (`tools/bd2_umap.py 9796 15796 9900 15950 4 4`): VSS land (9824-9868,
+  15816-15852) with its contact (9843,15838); gate band y 15856-15872; output land y 15872-15908, which widens
+  west to the rail's edge at y 15896-15912.
+- **Input**: the band's poly runs east to a pad (10007,15867) (hole in the clean shot, ring in both metal
+  shots), the north end of a thin metal x 10002-10014 that goes south (drawn to y 15960: port; seen to about
+  y 16190, where it turns east). Placeholder `bc2_m15867`.
+- **Output**: a tab of the land east of the rail into a framed box (9898-9928, 15898-15928), its poly east to a
+  pad (9963,15912), a thin metal south to a pad (9963,16062), whose poly is not drawn (port).
+- **Load** beside M: a poly block x 9698-9782, y 15845-15912 over the band y 15862-15882 from the VCC land under M
+  (9642-9696, 15850-15900; contact (9665,15877)): in chip 2's stripped shot three orange bands (y 15850-15858,
+  15862-15882, 15888-15905) with one dark line between each (W 20, L 84: a weaker load than `bc2_einv`'s).
+- **Tie**: the band's east end is the top of a diffusion strip x 9786-9800 between the block and the rail
+  (chip 2's metal shot 133-179 / 104-137 / 73-91 down it at y 15866, 15876, 15895, 15925: pinker than field, blue
+  above poly's; stripped R-G +15..+29), which runs south to y 15937 and widens west at y 15915-15937 into a framed
+  box (9746-9772, 15912-15940) under a tab of the block's bottom (view `u7k`).
+- **The strip meets the output land** at y 15896-15912 across the rail's west edge line (x 9800-9809): the land
+  is tan to x 9804 under the rail there (`bd2_umap` rows 15900-15912) and the strip is diffusion to x 9800; the
+  6 px between lie under the edge line (Ambiguity 10).
+
+### Ambiguities (piece `inv7`)
+
+10. **The join of the tie strip to the output land** rests on two diffusions meeting under the rail's 6-9 px
+    edge line. If they did not meet, the load would have no connection to the output, which a gate cannot lack.
+
 ## Review
 
 **Model note: latch unit a was traced AND reviewed on claude-opus, not claude-fable-5-2**

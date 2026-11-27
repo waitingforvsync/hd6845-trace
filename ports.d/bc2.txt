@@ -19,3 +19,6 @@ bc2_e15690    M  10050,15830   out  NAND(bc2_e15215, tl6_p6143): thin metal east
 # run 3, piece bus2: the two bus lines that feed the decode, joined to busl's rows
 tl6_p6101     P  7550,14393    in   busl's row (its port at the same place): on east as bus line y 14394 to the pad (9768,14393) and the thin metal x 10052
 tl6_p6143     P  7550,14437    in   busl's row (its port at the same place): on east as bus line y 14437 to the pad (9722,14438) and the thin metal x 10007 / x 9963
+# run 3, piece inv7
+bc2_m15867    M  10007,15960   in   input of the inverter bc2_e15864: thin metal south from its pad (10007,15867) (seen to about y 16190, then east)
+bc2_e15864    P  9963,16062    out  the inverter's output: the pad at the south end of its thin metal; the pad's poly is not drawn
