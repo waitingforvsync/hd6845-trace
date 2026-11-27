@@ -198,9 +198,12 @@ uncertain item. Views in `cache/scratch/bc2/`: `m1_top`, `top_m`, `top2_m` (over
 
 Three wide metals run down the block: W (x 9440-9500), M (x 9640-9700), E (x 9806-9866).
 
-- **M is VCC**: its top is the stem x 9550-9600 of the wide band y 14130-14180 (the stem steps east at
-  y 14700-14750 onto x 9640-9700), and that band is metal in both chips along y 14155 from x 9357 east to
-  x 10767, where the VCC rail x 10746 (`eof`, `bc2` unit a) stands. Every load of the block lies beside M.
+- **M is VCC**: its top is the stem x 9550-9600 (the stem steps east at y 14700-14750 onto x 9640-9700) of the
+  west piece, x 9347-9818, of the wide band y 14130-14180; that piece turns north at its east end as the
+  datapath's rail x 9765-9818, which `cdp4` labels `vcc` (`N M 9789,11800 vcc`; metal down x 9790 from y 13990
+  to y 14170 in both chips, crossed by poly rows). Every load of the block lies beside M. (The first version
+  of this note said the band runs east to the rail x 10746: wrong, the band is two pieces with bare ground at
+  x 9815-9941 and x 9987-10158; found by review round 2.)
 - **E is VSS**: its top turns west at y 14500-14550 to x 9640-9690 and north into the band y 14222-14268, which
   is metal along y 14245 from x 9654 to x 10593 (three 4 px edge lines on the way), where the VSS rail x 10570
   stands. The units' pull-downs lie under E.
@@ -213,7 +216,7 @@ The two bands are not drawn: M and E are labelled `vcc` and `vss` over this piec
 
 - **Pull-down** under the rail: VSS land (9828-9868, 14900-14945) with its contact (9843,14922) (pits in the
   clean shot, ring in both metal shots); gate band y 14947-14963 (salmon under the rail); output land
-  y 14967-14998 (x 9805-9870). Channel 40 wide (the VSS land's width), 16 long.
+  y 14967-14998 (x 9805-9870). Channel 44 wide (the VSS land's width, x 9824-9868), 16 long.
 - **Output**: the land has a tab east of the rail (bright green in the clean shot at (9879-9885, 14985-14990))
   into a framed box (9890-9928, 14980-15014: heavy outline, an L-shaped lighter interior, tan in chip 2's
   stripped shot), from which a poly leaves east.
@@ -260,10 +263,10 @@ x 9300: the two inputs come off that bus.
 
 ### Ambiguities (run 2)
 
-1. **The pull-down's width.** East of the rail the gate band has a green strip on each side in the clean shot
-   (north y 14937-14947, 8 px; south y 14963-14980, 15 px; x 9872-9945). If both are diffusion the channel is
-   about 125 wide, not 40; a poly in the open also has a thin green rim. Drawn 40 (under the rail only). The
-   connections are the same either way.
+1. **The pull-down's width** (settled by review round 2): east of the rail the gate band lies on field (north of
+   it chip 2's stripped shot reads R-G +1 to +6 at x 9880; south of it the tab's edge y 14978 is a separate line
+   from the band's edge y 14967), so the green strips beside it in the clean shot are the poly's rims. The channel
+   is the VSS land's width, 44.
 2. **The framed boxes** (three output boxes, three ties) are drawn `B`: heavy outline, lighter interior, at the
    end of a poly with no other driver (the load's gate) or of the output poly.
 3. **W's supply** is not decided; nothing drawn rests on it.
@@ -323,6 +326,44 @@ the tl1 master cell's width, unit a reads the same. Not checked: the gate widths
 and t1894; anything beyond y 15746.
 
 Round 1 (latch unit b): no findings.
+
+### Round 2 (full review), 2026-11-27: run 2, piece `inv` (traced and reviewed on Claude Fable 5.2)
+
+A fresh Claude Fable 5.2 agent, on commit e4d7fa8, 17 images in `cache/scratch/bc2/review-2/`. Told to suspect:
+the load (one poly over one band, the tie wire), the output box's joins to the land and to each unit's pad, unit
+1's input column under its own output metal, the gate band's east part (over diffusion or field), the two copies
+against the master, each thin metal's ends and crossings (x 10007's two pieces), the supply claim for M and E,
+anything undrawn.
+
+**No finding changes a connection.** Three findings, all confirmed and fixed:
+
+1. **M's supply evidence was wrong** (M = VCC holds): the band y 14130-14180 is two pieces; M's stem hangs on the
+   west one, which turns north as the datapath's rail x 9765-9818 (`cdp4`: `vcc`), not on the piece that reaches
+   the rail x 10746. Notes and trace comment corrected.
+2. **Unit 2's VCC land** is taller (y 15033-15135) and has a second contact at (9662,15055) (pits, ring in both
+   metal shots): drawn. Probably also the VCC end of an undrawn load west of M (open poly at x 9596-9628, y 15055).
+3. **Pull-down width**: the VSS land's west edge is x 9824 (drawn 9828): channel 44, and the band east of the rail
+   lies on field (Ambiguity 1 settled).
+
+Checked and found correct by the reviewer: the load in all three units (one poly block with single 6-8 px dark
+lines over one band; the tie wire diffusion, unbroken into the band; `tools/cellcheck.py`: 0.96 and 0.97 for the
+copies); tab, box and poly to each pad joined in all three; unit 1's row y 14815-14832 ending at x 9977 into the
+column, the column salmon with no hole under the metal, field between the band and the pad (9963,15000); 10-12 px
+of bare ground at y 15023-15033 between that pad and unit 2's input corner; x 10007 two pieces with no metal at
+y 15052-15126; nothing north of the pad (10094,15261); x 9963 and x 10052 through their pads; no contact at any
+crossing; no hidden branch on eight polys; E's band continuous along y 14245 from x 9640 to x 10594; no contact
+to E on the output lands. Could not check: the clean shot at the loads (displaced or inverted there: the load
+reading rests on both chip-2 shots and chip 1's metal shot); diffusion continuity exactly under the rail-edge
+lines; the wires beyond y 14660-15300.
+
+Connections before and after the fixes (commit e4d7fa8 against the fixed tree):
+
+    tools/t.sh bc2 sameconn.py e4d7fa8            ->  connections identical
+    .venv/bin/python tools/sameconn.py e4d7fa8    ->  connections identical
+
+Recorded 2026-11-27 08:25 -0600.
+
+Round 2: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
