@@ -1,26 +1,26 @@
 {
  "who": "Matt Godbolt",
- "generated": "2026-11-27T20:41:43+00:00",
+ "generated": "2026-11-27T21:26:13+00:00",
  "price_source": "Claude API list prices per million tokens, as of 2026-11-03",
  "unpriced_models": [
   "<synthetic>"
  ],
- "responses": 11126,
+ "responses": 11273,
  "first": "2026-11-17T14:25:20.582000+00:00",
- "last": "2026-11-27T20:41:29.091000+00:00",
- "total_cost": 1858.5,
- "review_cost": 720.37,
+ "last": "2026-11-27T21:26:04.861000+00:00",
+ "total_cost": 1881.98,
+ "review_cost": 735.13,
  "tokens": {
-  "input": 22898,
-  "output": 14945136,
-  "cache_write_5m": 30256139,
-  "cache_write_1h": 29349797,
-  "cache_read": 2842712971
+  "input": 23198,
+  "output": 15152316,
+  "cache_write_5m": 30796804,
+  "cache_write_1h": 29425286,
+  "cache_read": 2885599510
  },
  "by_model": {
   "claude-fable-5-2": {
-   "cost": 1788.5,
-   "responses": 10041
+   "cost": 1811.98,
+   "responses": 10188
   },
   "claude-sonnet-5-5": {
    "cost": 16.12,
@@ -37,11 +37,11 @@
  },
  "by_package": {
   "(coordination)": {
-   "cost": 376.4,
+   "cost": 376.77,
    "review_cost": 51.85,
-   "responses": 2581,
+   "responses": 2583,
    "models": {
-    "claude-fable-5-2": 1496,
+    "claude-fable-5-2": 1498,
     "claude-sonnet-5-5": 554,
     "<synthetic>": 3,
     "claude-opus-5-5": 528
@@ -72,11 +72,11 @@
    }
   },
   "bc2": {
-   "cost": 180.01,
-   "review_cost": 80.24,
-   "responses": 928,
+   "cost": 181.46,
+   "review_cost": 80.83,
+   "responses": 936,
    "models": {
-    "claude-fable-5-2": 928
+    "claude-fable-5-2": 936
    }
   },
   "tl4": {
@@ -135,6 +135,14 @@
     "claude-fable-5-2": 175
    }
   },
+  "bc4": {
+   "cost": 40.77,
+   "review_cost": 19.18,
+   "responses": 201,
+   "models": {
+    "claude-fable-5-2": 201
+   }
+  },
   "busc": {
    "cost": 37.44,
    "review_cost": 14.87,
@@ -165,14 +173,6 @@
    "responses": 121,
    "models": {
     "claude-fable-5-2": 121
-   }
-  },
-  "bc4": {
-   "cost": 19.1,
-   "review_cost": 5.01,
-   "responses": 64,
-   "models": {
-    "claude-fable-5-2": 64
    }
   },
   "bd1": {
@@ -242,6 +242,6 @@
   "2026-11-23": 28.3,
   "2026-11-24": 11.94,
   "2026-11-25": 1.7,
-  "2026-11-27": 421.84
+  "2026-11-27": 445.32
  }
 }
