@@ -43,7 +43,11 @@ M 14217,14770 y15580 w=20              # ends at the 3l inverter's input contact
 C 14607,14650
 P 14607,14636 y14825 x14333 w=22
 C 14347,14825
-M 14347,14812 y15254 w=18              # ends at the 2l inverter's input contact
+M 14347,14812 y14982 w=18              # ends at the 2l inverter's input contact
+?M 14347,14980 y15024 w=18             # over a framed box: dark in both metal shots for 36 px (review round 1, trap 27, R41)
+M 14347,15022 y15114 w=18
+?M 14347,15112 y15150 w=18             # over the second box: dark for 32 px (chip 1 partly bright)
+M 14347,15148 y15254 w=18
 
 # rsel1 (col x 14694): poly down to y 14865, left to x 14328, then down into the
 # first gate pair (left inverter input)
@@ -272,7 +276,7 @@ P 14870,15159:15490,15197
 C 15474,15172
 M 14912,15161 y16760 w=20
 N M 14912,16555 wr_stb_n
-M 15474,15098 y15218 x15561 w=20            # from the bar's contact (stub up to y 15098, no contact there) across to T15
+M 15474,15080 y15218 x15561 w=20            # from the bar's contact (stub up to y 15080, over the rsel16_buf row: no pad, ring or hole, no contact) across to T15
 # T15 carries the strobe: from a contact at 15622,14822 (poly arriving from the east
 # along y 14825) down the whole region.
 M 15635,14822 x15561 y16560 w=20
@@ -327,7 +331,7 @@ N D 15700,15066 rsel{}_buf            # rsel<N> buffered
 # buffer inputs
 P 15552,14880 y14910 x15612 w=22            # rsel16: its poly comes down x 15552 (under T15) and turns east
 P 15640,15170 x15612 w=22                   # rsel17: on from the poly along y 15175
-C 15340,15428                               # rsel15 on T10 (which runs on down)
+C 15342,15435                               # rsel15 on T10 (which runs on down)
 P 15326,15430 x15612 w=22
 C 15299,15692                               # rsel14 on T9 (which runs on down)
 P 15285,15690 x15612 w=22

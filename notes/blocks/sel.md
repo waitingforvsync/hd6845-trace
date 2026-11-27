@@ -199,6 +199,9 @@ and 13985-14030 to at least x 13880.
 
 ## Re-read item R3 (2026-11-27): the track field T0-T17
 
+(The item says T0-T17; the field has 16 tracks, T0-T15, x 14912-15561: review round 1 found no metal at
+x 15604 or x 15647 on any cut.)
+
 Matt Godbolt, on Claude Fable 5.2, 2026-11-27 07:33 -0600. Region x 14100-15850, y 14650-16550. **Found as drawn but for the
 place of two metal legs (geometry only).**
 
@@ -247,3 +250,42 @@ Connections before and after the two legs' fix (commit aa6682c against the fixed
 
 ## Review
 
+### Round 1 (full review), 2026-11-27: the re-read of the track field (R3)
+
+A fresh Claude Fable 5.2 agent, on commit 41f39c9, 20 images in `cache/scratch/sel/review-1/`. Told to suspect:
+an undrawn contact on T7 or T8, which track each drawn contact is on, each track's top and bottom end, the two
+moved legs, and the audit's blind spots. It took its own sample.
+
+**No finding changes a connection.** Five remarks on geometry and notes, all confirmed; three fixed in the trace:
+
+1. **T13's stub top** was drawn to y 15098; the metal runs to about y 15080, over the `rsel16_buf` row, with no
+   pad, ring or hole there (down x 15474: metal y 15082-15094 in both chips). Extended to y 15080. No contact.
+2. **Contact on T10**, drawn (15340,15428): its centre is (15342,15435) (`cdp4_padc.py`). Moved.
+3. **T5's top**: the metal x 15128 runs up to y 14777 and merges into the pad of (15152,14783) from the west,
+   not by a jog at y 14803. Same join; left as drawn.
+4. **The thin metal x 14347 (`rsel2`)** is dark in both metal shots over two framed boxes, y 14984-15020 and
+   y 15116-15148 (down x 14347; chip 1 partly bright over the second), and was drawn plain `M`: its continuity
+   rests on the clean shot's unbroken protected strip. By trap 27 those two stretches are now `?M` (re-read
+   item R41's class). **One equation loses its firm mark for it**: `rsel2_n` = NOT `rsel2` (976 -> 975 firm of
+   1,434; two uncertain items more). The equation itself is unchanged.
+5. The field has 16 tracks, not 18 (noted above).
+
+Checked and found correct by the reviewer: T7 and T8 end to end (`tools/follow.py`, `tools/tl5_tracks.py`, 4x
+strips in three shots): no break, the only crossing the strobe bar y 15160-15207, plain on both (no ring;
+clean shot 212/141/101 and 217/160/118), T8's first contact (15258,16560); the two legs (`rsel13` y 14864-14878,
+`rsel12` y 14908-14920, bare ground between, no T at either corner); T0-T6 and T9-T15 followed and all 16 plus
+seven west metals on the two-chip test (every dark stretch of 14 px or more is a drawn contact or a track
+gap); all 29 listed contacts on rings on their own track, the west half likewise; every row and track
+crossing sampled in the clean shot (poly, no hole); no poly column in the gaps between tracks; 19 row cuts
+with no undrawn metal; nine flagged spots dirt or plain crossings. Not checked by the reviewer: the gate
+columns x 14380-14890 and x 15600-15850; the west-gap poly columns (1.5x only); tracks other than T7 and T8
+at 4x along their length.
+
+Connections before and after the fixes (commit 41f39c9 against the fixed tree):
+
+    tools/t.sh sel sameconn.py 41f39c9            ->  connections identical
+    .venv/bin/python tools/sameconn.py 41f39c9    ->  connections identical
+
+Recorded 2026-11-27 07:50 -0600.
+
+Round 1: no findings that change a connection.
