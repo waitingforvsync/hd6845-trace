@@ -777,6 +777,8 @@ P 9270,16336:9345,16354                # its row east (port; review round 14: it
 #     not provable". Through it the node IS bc2_p16067.
 D 9540,16166:9574,16188                # the block: its wide part, where the neck enters
 D 9556,16120:9574,16292                # the block north to the strip, and south under the row to the arm
+D 9551,16142:9574,16166                # (review round 15: its west edge is x 9551 here)
+D 9556,16222:9596,16288                # (review round 15: the block widens east to x 9596 under the row: the channel is about 40 wide)
 D 9500,16268:9592,16288                # land 7's arm east
 P 9600,16210:9622,16262                # bc2_w16035's poly south from its pad
 P 9545,16243:9622,16262                # its foot west: the gate
@@ -784,8 +786,8 @@ D 9564,16116:9640,16142                # the strip under the plate, onto the VCC
 P 9578,16088:9631,16158                # the plate (gate C's poly)
 D 9635,16068:9691,16150                # VCC land, on south under the M rail's slot contact
 M 9642,16080:9698,16160                # M rail, on south
-?P 9548,16100:9560,16136               # tab of the row south
-?B 9546,16108:9562,16141               # tie (buried contact) on the block's tip
+?P 9534,16100:9560,16136               # tab of the row south
+?B 9532,16114:9562,16141               # tie (buried contact) on the block's tip (review round 15: the frame is x 9532-9562, y 16116-16140)
 D 9552,16118:9566,16142                # the block's tip under the box
 D 9413,16096:9443,16156                # the west strip under the thin metal x 9420
 D 9428,16150:9438,16190                # its foot

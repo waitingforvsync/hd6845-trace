@@ -877,7 +877,8 @@ The reviewer of round 14 found two more pull-downs on the node; the tracer measu
 
 ### Ambiguities (run 9)
 
-15. **The tie of the pull-up** (`?P 9548,16100:9560,16136`, `?B 9546,16108:9562,16141`). A framed box under the
+15. **The tie of the pull-up** (`?P 9534,16100:9560,16136`, `?B 9532,16114:9562,16141`; the frame is
+    x 9532-9562, y 16116-16140, 14 px further west than first drawn: review round 15). A framed box under the
     thin metal x 9552 at y 16106-16141: both metal shots dark for 34 px, dim tan inside, no hole
     (`tools/px.py col 9556 16100 16220 4 metal,acid,acid1b`), directly south of the poly row y 16088-16106 of
     `bc2_p16067` and on the block's tip. Reviewers of rounds 12 and 14: "probably a tie of the row, not
@@ -885,12 +886,18 @@ The reviewer of round 14 found two more pull-downs on the node; the tracer measu
     pull-downs and a pull-up gated by a net with no driver, which cannot be.
 16. **The west pull-down's source** (`?D 9438,16096:9462,16108`): whether the strip north of the row meets
     land 6. If not, that transistor's other end is not found.
+    Review round 15 reads it as joined (the gap band y 16094-16108 at x 9450 matches the arm and differs from the
+    field between them: stripped red - green 21-36, 14-16, 22-37; no edge line at x 9443, where y 16150 has one;
+    land 6's tan reaches x 9460 here against x 9468 at y 16128); round 14 had "probable". Kept `?`: the tracer's
+    own measurement does not separate it from plain ground.
 
 **Seen and NOT drawn**:
 - a framed box (9391-9427, 16159-16188) at the west arm's west end, half under the thin metal x 9420: not a
   contact of that metal (the metal is not widened; reviewer: interior tan, no hole; the tracer's row at y 16180
   reads grey, 121-155 / 126-155, at x 9414-9426, which is not a pad's hole either). No poly is seen leaving it.
-  What it is, is not read.
+  Review round 15: frame x 9389-9430, y 16157-16189; it sits on this net's diffusion, tan inside, frame lines
+  only towards the strip and the foot; field north, west and south; "a buried-contact-like box that joins nothing
+  I can find; unresolved".
 - the land's column south of y 16330: under a channel-bright band y 16338-16352 (the row from the pad
   (9270,16345): a gate of `bc2_w16035`) to diffusion y 16360-16390 (reviewer).
 - a dark dot at (9447,16233) in chip 1's clean shot only; the patch there reads field (reviewer).
@@ -1445,6 +1452,43 @@ belongs here; the fix check reads the additions against the photos.
 Recorded 2026-11-27 13:24 -0600.
 
 Round 14: two findings that change a connection (two pull-downs not drawn), fixed. Fix check next.
+
+### Round 15 (fix check), 2026-11-27: run 9, piece `w7`
+
+A fresh Claude Fable 5.2 agent, on the changes e6e99e4..8d840b9 only, 25 images in
+`cache/scratch/bc2/review-15/`. Asked to check, each against the photos: (A) the neck and the block; (B) the east
+pull-down (diffusion on both sides of the row, the arm, the row one poly with the stem and the pad, the row's
+west end against band E); (C) the pull-up's strip and plate; (D) the tie's box; (E) the west pull-down, its foot
+and arm, the `?D`, and the unread box; (F) the pad (9227,16130) and its row.
+
+**No finding changes a connection.** A correct (the neck diffusion in three shots across x 9521-9536, no vertical
+edge line; the block tan without a break from y 16118 to y 16236). B correct (tan / channel-bright salmon / tan
+down x 9566; the arm diffusion across the gap, tan under the rail and the thin metal; **the row ends at x 9545
+and does not reach band E**: plain ground at x 9527-9537 in both metal shots; stem, pad and row one poly; field
+east of x 9624 and south of y 16262). C correct (the plate one poly y 16088-16158; the strip's two edge lines of
+equal width with brighter salmon between; its west end continuous with the block, its east end onto the land;
+field between plate and pad). D: nothing contradicts the tie (the box is there; under the metal it is tan like
+the block, which adjoins it south and east across mild frame lines with no pink; a green field strip at
+x 9519-9529 separates it from land 6; no contact of the thin metal: no bright centre, no hole, the metal keeps
+its 14-15 px; poly continuity across the dark band y 16106-16116 not checkable). E correct (tan on both flanks
+under the thin metal with channel-bright poly between; the arm diffusion from x 9442 to x 9457, abutting the
+node's tan, level with the node and not with band D; the foot-to-arm junction at x 9437-9444 hidden behind the
+metal's edge line, taken as joined; the `?D` read as joined; the box not a contact of the thin metal). F correct
+(the contact passes both parts, the metal continues on both sides, the row unbroken to x 9455, edge bars only at
+x 9270, 9312, 9357).
+
+Geometry, fixed: the block's west edge is x 9551 at y 16142-16166; the block widens east under the row (an edge
+line across the row at x 9594-9599 in both chips: the channel about 40 wide, drawn so); the tie box's frame is
+x 9532-9562, y 16116-16140.
+
+Connections before and after these fixes (commit 8d840b9 against the fixed tree):
+
+    tools/t.sh bc2 sameconn.py 8d840b9            ->  connections identical
+    .venv/bin/python tools/sameconn.py 8d840b9    ->  connections identical
+
+Recorded 2026-11-27 13:43 -0600.
+
+Round 15: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
