@@ -3,3 +3,4 @@
 9640,14890:10110,15300  logic  three inverters (centre block, east rail) | bc2_e14955, bc2_e15085, bc2_e15215: each NOT of a wire off the bus above; loads beside the middle (VCC) rail
 9640,15290:10190,15830  logic  two-bit decode (centre block, east rail) | three NANDs of the two wires tl6_p6143, tl6_p6101 and their inverses: bc2_e15343, bc2_e15517, bc2_e15690, each low for one combination
 9640,15805:10030,15945  logic  inverter (centre block, east rail) | bc2_e15864 = NOT bc2_m15867, a wire that comes up a thin metal from the south
+9140,14940:9640,15170  logic  NOR (centre block, west rail, unit 1) | bc2_w15042 = NOR(lc2_w9079, lc3_e9756): two wires from the left-centre strips by bus lines y 14611 and y 14655
