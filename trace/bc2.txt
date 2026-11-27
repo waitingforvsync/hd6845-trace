@@ -231,7 +231,8 @@ M 9642,15300:9698,15830                # M rail, on south
 @cell bc2_enand tag=15343
 D 9828,15298:9868,15324                # VSS land, top part
 C 9842,15311
-D 9805,15322:9868,15436                # land, under band 1, strip, under band 2, output land (63 wide)
+D 9805,15322:9868,15436                # land, under band 1, strip, under band 2, output land
+D 9798,15334:9878,15398                # under the bands and the strip the diffusion is x 9798-9878 (edge lines across both bands: W about 78)
 P 9782,15334:9948,15352                # band 1 (the VSS side)
 P 9782,15378:9948,15396                # band 2
 D 9866,15422:9898,15442                # the output land's tab east of the rail
@@ -241,7 +242,8 @@ P 9902,15424:9948,15442                # its poly, east
 N D 9838,15415 bc2_e{}
 D 9642,15380:9696,15440                # VCC land
 C 9659,15399
-D 9690,15417:9812,15440                # band: the load's channel (W 23, L 56), and east to the rail
+D 9690,15417:9776,15440                # band: the load's channel (W 23, L 56)
+D 9770,15425:9812,15443                # and east to the rail (y 15425-15443 there)
 P 9698,15397:9754,15462                # load gate
 D 9757,15372:9773,15430                # tie wire north from the band
 D 9730,15372:9773,15394                # and west into the box
@@ -277,7 +279,7 @@ C 10006,15566 s=20x20
 P 9946,15598:10137,15616                # output row, east under x 9963 and x 10093 (no contact; no metal on x 10007, x 10052 here)
 P 10120,15591:10154,15625               # pad
 C 10137,15608 s=20x20
-M 10130,15608 x10176 y15290 w=14        # east and north on x 10176 (port; seen on north to the corner y 14735 and a pad (10092,14740))
+M 10130,15608 x10181 y15290 w=18        # east and north on x 10172-10191 (port; seen on north to the corner y 14735 and a pad (10092,14740))
 # unit 15690
 P 9946,15681:10006,15699                # band 1, east under x 9963
 P 9989,15679:10023,15713                # end pad of bc2_e15215's metal

@@ -16,5 +16,5 @@ bc2_m10007    M  10007,14660   in   input of bc2_e15085: thin metal from the nor
 bc2_m10052    M  10052,14660   in   input of bc2_e15215: thin metal from the north (follower: to a pad (9764,14394) on a bus line)
 # run 2, piece nand: the three NANDs below them (the four metals above end inside this piece)
 bc2_e15343    M  10137,15290   out  NAND(bc2_e15215, bc2_e15085): thin metal north from its pad (10137,15435) (follower: to the pad (10135,14783) of a bus row)
-bc2_e15517    M  10176,15290   out  NAND(bc2_m10052, bc2_e15085): thin metal east and north from its pad (10137,15608) (seen to a pad (10092,14740))
+bc2_e15517    M  10181,15290   out  NAND(bc2_m10052, bc2_e15085): thin metal east and north from its pad (10137,15608) (seen to a pad (10092,14740))
 bc2_e15690    M  10050,15830   out  NAND(bc2_e15215, bc2_m10007): thin metal east and south from its pad (10006,15782)

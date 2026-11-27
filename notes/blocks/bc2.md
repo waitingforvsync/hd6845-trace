@@ -282,7 +282,7 @@ x 9300: the two inputs come off that bus.
 ## Run 2, piece `nand` (2026-11-27): three two-input NANDs on the E rail
 
 Same run, after piece `inv`'s review. Region x 9640-10190, y 15290-15830: 9 transistors, 3 named outputs, no
-uncertain item (full extraction 2,524 nets, 4,853 transistors, 0 errors). Views in `cache/scratch/bc2/n2/`:
+uncertain item (full extraction 2,527 nets, 4,853 transistors, 0 errors). Views in `cache/scratch/bc2/n2/`:
 `u4_c`, `u4_m` (2.8x), `k4` (the load knot, 7x), `b4` (the output box, 7x), `o5_m`, `o5_c`, `o6_m` (4x), sheet
 `x1`, overlay `ov_c`.
 
@@ -300,7 +300,8 @@ the two wires `bc2_m10007` and `bc2_m10052`, each active low: `bc2_e15343` is lo
 Under the rail (`tools/bd2_umap.py 9796 15290 9960 15650 4 4`): VSS land y 15298-15332 with its contact
 (9842,15311) | band 1 y 15334-15352 | strip y 15354-15376 | band 2 y 15378-15396 | output land y 15394-15436;
 the diffusion is x 9805-9868 from y 15322 down (the land's top part x 9828-9868). The strip has no contact and
-no exit east or west (closed outlines both sides): two pull-downs in series, 63 wide. The bands' west end caps
+no exit east or west (closed outlines both sides): two pull-downs in series, about 78 wide (the diffusion's edge
+lines cross both bands at x 9796-9800 and x 9876-9880: review round 3). The bands' west end caps
 lie west of the rail at x 9782-9800. Output box (9896-9930, 15420-15446) on a tab of the land east of the rail,
 its poly east along y 15424-15442. Load and tie are `bc2_einv`'s: block (9698-9754, 15397-15462) over the band
 y 15417-15440 from the VCC land under M (9642-9696, 15380-15440; contact (9659,15399)), three orange bands with
@@ -323,7 +324,7 @@ The four thin metals of piece `inv` run on south and each ends here on a pad at 
 Outputs: `bc2_e15343`'s row y 15424-15442 east under all four metals to a pad (10137,15435), the south end of the
 thin metal x 10137 (bare ground on x 10137 from y 15464 to y 15584), which runs north (`tools/follow.py`: to the
 pad (10135,14783) of a bus row); `bc2_e15517`'s row y 15598-15616 east to a pad (10137,15608), whose metal goes
-east and north on x 10176 (seen on north to a corner at y 14735 and a pad (10092,14740)); `bc2_e15690`'s row
+east and north on x 10172-10191 (seen on north to a corner at y 14735 and a pad (10092,14740)); `bc2_e15690`'s row
 y 15771-15789 east to a pad (10006,15782), whose metal goes east and south on x 10050. Each is drawn to this
 piece's edge (ports).
 
@@ -428,6 +429,43 @@ Connections before and after the fixes (commit e4d7fa8 against the fixed tree):
 Recorded 2026-11-27 08:25 -0600.
 
 Round 2: no findings that change a connection.
+
+### Round 3 (full review), 2026-11-27: run 2, piece `nand`
+
+A fresh Claude Fable 5.2 agent, on commit 787a3c0, 28 images in `cache/scratch/bc2/review-3/`. Told to suspect:
+series or parallel (the strip between the bands: a contact, an exit), which metal each of the eleven pads is
+on and where each thin metal ends, the fourteen crossings (the tracer's pad test gave false alarms), the two pads
+on x 10137, the copies against the master, the load and tie, anything undrawn.
+
+**No finding changes a connection.** Three geometry remarks, confirmed and fixed:
+
+1. The pull-down diffusion under the bands is x 9798-9878, not x 9805-9868 (edge lines across both bands and on
+   the strip rows in three shots): W about 78.
+2. Unit 2's output metal's north leg is x 10172-10191 (drawn centred on x 10176).
+3. The output band east of the load is y 15425-15443 at x 9775-9800 (drawn y 15417-15440).
+
+Checked and found correct by the reviewer: the series stack in all three units (no contact on the strip in the
+clean shot or either metal shot; the strip closed at both rail edges with field outside; the west end caps
+separate from each other and from the tie wire); two specks that are not contacts ((9831,15372), (9820,15770): one
+chip only, no ring); all nine pads with their contacts; the metal ends (x 9963 at y 15743; x 10007 through its tap
+to y 15571; x 10052 at y 15527; x 10093 through its tap, round the corner to (10006,15696), not joined to x 9963;
+x 10137 on its pad at y 15435 with no metal from y 15442 to y 15604; unit 2's pad on the foot of the x 10181 metal
+only; unit 3's output east and south on x 10050); all 14 crossings plain; the rows continuous with no branch
+(`tools/eof_tee.py` on all nine); load, tie and output box identical in the three units, the VCC land joined to
+the channel with no edge line, the band unbroken to the rail; `tools/cellcheck.py`: 0 of 44 blocks bad in two
+shots; nothing undrawn at x 9700-9800 or x 9870-9950. Could not check: chip 2's stripped shot under the rail
+(fringes: "no contact on the strip" rests on the clean shot and both metal shots); the tie wire's class by colour
+(read as diffusion from its closed outline, as in `bc2_einv`); a green patch in the clean shot under the rail
+between consecutive units (read as field between two closed lands).
+
+Connections before and after the fixes (commit 787a3c0 against the fixed tree):
+
+    tools/t.sh bc2 sameconn.py 787a3c0            ->  connections identical
+    .venv/bin/python tools/sameconn.py 787a3c0    ->  connections identical
+
+Recorded 2026-11-27 08:41 -0600.
+
+Round 3: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
