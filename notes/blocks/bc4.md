@@ -38,9 +38,46 @@ metal over clean shot), `rowW`, `rowE` (the rows, 3.1x), `jog`, `jog_ov`. Connec
 So two of the three cursor-skew decode lines run as poly rows towards the two rails of the block below `bc2`,
 both at y 17170: `bc2_e15517` towards the west rail (x 9463-9513, which runs on south from `bc2`), `bc2_e15690`
 towards the east one. Believed, not read: that they end as gates there (review round 1: row A runs on in the
-open to about x 9456, and the clean shot under the west rail at that height is field pink). The third, `bc2_e15343`, runs through this region on x 9552 (`tl3_thin 9543 9562 16360 17575`: ten
-stretches of 14 px or more dark in both shots, over boxes: not drawn; `tools/follow.py`: to y 17568, west to
-x 9358, north to y 17428).
+open to about x 9456, and the clean shot under the west rail at that height is field pink).
+
+The third, `bc2_e15343`, is run 2.
+
+## Run 2 (2026-11-27), piece `dec1`: `bc2_e15343` to its end pad (wiring; no join; 6 `?M`)
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 14:46 -0600. Views in `cache/scratch/bc4/b/`: `s1`, `s2` (the metal from y 16370 to
+y 17045 in both metal shots and the clean shot, 4x), `corner`, `pad`, overlay `ov_pad`, `end`. Connections and
+equations unchanged against main (`tools/sameconn.py`; `bc2_e15343` stays firm: the `?M` lie beyond every drawn
+gate of the net).
+
+**`bc2_e15343`** (low for R8 bits 7,6 = 0,0). From `bc2`'s port (9551,16370) the thin metal (centre x 9552-9556,
+10-12 px wide: measured on each bright segment) runs south past the gates east of the west rail and **ends on a
+pad (9554,17518)**: a green hole (x 9545-9565, y 17508-17525) in the middle of a salmon pad (9530-9575,
+17500-17532) in the clean shot; ring y 17497-17508 and y 17524-17536 round a centre in both metal shots
+(`tools/px.py col 9552 17470 17560 3 metal,metal1,acid1b`; the centre is dim in chip 2, 99-153, bright in chip 1,
+167-180); bare ground south of the ring at y 17538-17548.
+
+- **`tools/follow.py` is wrong here**: it bridges from the pad onto another wire's horizontal metal
+  (y 17550-17570, which has its own pad at (9590,17560)) and reports a route "to y 17568, west to x 9358, north
+  to y 17428". That is not this net; `bc2`'s notes and handoffs of runs 11-12 quote it as the follower's and
+  should not be read as the wire's route.
+- **No contact on the way** (tracer's test, each long dark stretch: the widest bright metal across it is
+  14-20 px, never a pad's 34; of 120-140 clean-shot samples under each, 3-17 are hole-like, scattered at edges;
+  views `s1`, `s2`: the clean shot under the metal is tan, salmon or pink, with framed "bottle" boxes at
+  y 16455-16500 and y 16600-16650 and no hole).
+- **`?M` by trap 27** (`tools/tl3_thin.py 9543 9562 16360 17575 --thr 176 --min 8`: dark in both metal shots
+  for 14 px or more): y 16383-16418 (36 px), y 16449-16489 (41 px), y 16600-16614 and 16623-16638, y 16711-16747
+  (37 px), y 16837-16858 and 16865-16879, y 16989-17026 (38 px). Six `?M` pieces; elsewhere bars of 8-13 px.
+  What each lies over (boxes and node edges of gates that no package has drawn) is not read.
+- The pad's poly leaves south-west (salmon x 9528-9545 down to y 17545): not drawn (port).
+
+So all three decode lines of R8's bits 7,6 are followed to an end pad: `bc2_e15517` (9141,17171),
+`bc2_e15690` (10181,17170), `bc2_e15343` (9554,17518).
+
+### Ambiguities (run 2)
+
+1. **Continuity of `bc2_e15343`'s thin metal over six dark stretches** (the `?M`). For: the metal keeps its line
+   and width on both sides of each, and no hole lies under any. Against: the photos cannot show metal on a step
+   (trap 27), and two stretches are 41 and 38 px long.
 
 ## Ports
 
@@ -48,7 +85,7 @@ In `ports.d/bc4.txt`.
 
 ## Not done
 
-Everything else: what the two rows end in; the diffusion rectangle (9060-9255, 16782-16997) under wire A; `bc2_e15343`'s route; the rails; the rest of the region.
+Everything else: what the two rows and the third line's pad lead to; the diffusion rectangle (9060-9255, 16782-16997) under wire A; `bc2_e15343`'s route; the rails; the rest of the region.
 
 ## Review
 

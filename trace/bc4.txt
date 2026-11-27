@@ -22,3 +22,30 @@ P 10164,17153:10198,17187              # pad
 C 10181,17170 s=20x20
 P 9954,17159:10181,17180               # row west (port)
 N M 10182,16800 bc2_e15690
+
+# ================================================================ run 2 (2026-11-27), piece dec1: bc2_e15343 to its end pad
+# bc2_e15343 (low for R8 bits 7,6 = 0,0): the thin metal x 9547-9560 runs on from bc2's port (9551,16370) south
+# past the gates east of the west rail to its END on a pad (9552,17516): a green hole in the middle of a salmon pad
+# (9530-9575, 17500-17532) in the clean shot, ring and centre in both metal shots, bare ground south of the ring
+# (y 17538-17548) before another wire's horizontal metal (y 17550-17570: tools/follow.py bridges onto it and
+# reports a route west and north that is NOT this net's).
+# No contact on the way: the metal is never wider than 20 px between y 16370 and y 17490 and the clean shot has no
+# hole under it. tools/tl3_thin.py 9543 9562 16360 17575 --thr 176 --min 8: dark in both metal shots for 14 px or
+# more at y 16383-16418, 16449-16489, 16600-16614, 16623-16638, 16711-16747, 16837-16858, 16865-16879 and
+# 16989-17026 (over framed boxes and node edges of the gates there): those stretches are ?M (trap 27).
+M 9553,16360 y16385 w=12
+?M 9553,16381 y16420 w=12
+M 9553,16418 y16451 w=12
+?M 9553,16447 y16491 w=12
+M 9554,16489 y16602 w=12
+?M 9553,16598 y16640 w=12
+M 9552,16638 y16713 w=11
+?M 9553,16709 y16749 w=11
+M 9555,16747 y16839 w=10
+?M 9554,16835 y16881 w=11
+M 9553,16879 y16991 w=12
+?M 9553,16987 y17028 w=12
+M 9554,17026 y17518 w=12
+P 9530,17500:9575,17532                # pad (its poly leaves south-west at x 9528-9545: not drawn, port)
+C 9554,17518 s=20x20
+N M 9554,17300 bc2_e15343
