@@ -36,11 +36,11 @@ bc2_p15781    P  9160,15781    in   gate 5 of bc2_w15739: poly row from the west
 tc2_r5718     P  7550,14524    in   bus line y 14524: busl's poly row (its port at the same place), to gate 3 of bc2_w15739
 busl_x7122    P  7550,14480    in   bus line y 14481: busl's poly row (its port at the same place), to gate 2 of bc2_w15739
 # run 7, piece w5
-bc2_m15997    M  9312,16250    in   thin metal x 9312 from the south (follower: from (9552,17868)): gate D of bc2_w16182 at its pad (9313,16215), gate B of bc2_w16035 at its north end
+bc2_m15997    M  9312,16250    in   thin metal x 9312 from the south (follower: from (9552,17868)): gate D of the gate bc2_p16067 at its pad (9313,16215), gate B of bc2_w16035 at its north end
 bc2_w16035    P  9345,16345    out  second exit: the poly row y 16336-16354 east from the pad (9270,16345)
 # run 8, piece w6
 # run 9, piece w7 (bc2_w15915 has no port any more: its thin metal ends on gate E's pad)
-# run 9 after review round 14 (bc2_p16067 and bc2_w16182 have no port any more: the gate is drawn; bc2_w16035's pad at (9597,16197) feeds the gate's row)
+# run 9 after review round 14 (bc2_p16067 has no port any more: its gate is drawn; bc2_w16035's pad at (9597,16197) feeds the gate's row)
 bc2_m16130    M  9228,16100    in   thin metal x 9228 through the pad (9227,16130) (gate of a pull-down of bc2_p16067); north of here it turns west at y 15826 (from bc1's side)
 bc2_m16130    M  9228,16160    ?    the same metal, on south (follower: to y 17694, then east)
 vcc           M  9642-9698,16160  -  the M rail, on south
