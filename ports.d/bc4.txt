@@ -7,12 +7,12 @@ bc2_e15343    M  9551,16370    in   from bc2 (its port at the same place): thin 
 bc2_e15343    P  9532,17467    out  the pad's poly column x 9524-9540, north end: a framed patch (9526-9540, 17466-17482), not read (its south arm ends at y 17546)
 # run 3, piece n17127 (bc2_e15517's row has no port any more: it is the lower gate of bc4_w17127)
 bc4_w17127    M  9184,17200    out  NOR(bc4_m17040, bc2_e15517): thin metal south from the pad (9183,17127)
-bc4_m17040    M  9184,16990    in   the upper gate row's wire: thin metal x 9184 from the north, ending on the pad (9183,17040); not followed (seen to y 16700)
+bc4_m17040    P  9372,16649    in   the west NOR's other input: from its gate row by the pad (9183,17040), the thin metal x 9184 north, the pad (9184,16647) and the poly row y 16639-16659 east to here; beyond, a structure against the west rail, not read
 vss           M  9463-9513,17020  -  the west rail (bc2's W rail, on south), drawn y 17020-17250 only; by the gate's build
 vss           M  9463-9513,17250  -  the same, on south
 vcc           M  9638-9686,17100  -  the wide metal east of it (bc2's M rail's line), drawn y 17100-17180 only; by the gate's build
 # run 4, piece e17127 (bc2_e15690's row has no port any more: it is the lower gate of bc4_e17127)
 bc4_e17127    M  10008,17150   out  NOR(bc4_m17062, bc2_e15690): thin metal south from the pad (10007,17127)
-bc4_m17062    M  10007,17010   in   the upper gate row's wire: thin metal x 10008 from the north, ending on the pad (10005,17062); not followed
+bc4_m17062    P  9925,16777    in   the east NOR's other input: from its gate row by the pad (10005,17062), the thin metal x 10008 north, the pad (10007,16778) and the poly row y 16767-16788 west to here; beyond, a structure beside the east rail, not read
 vss           M  9810-9858,17000  -  the east rail (the line of bc2's E rail), drawn y 17000-17265 only; by the gate's build
 vss           M  9810-9858,17265  -  the same, on south
