@@ -951,14 +951,36 @@ to y 17428.
   (x 9545-9553), over field beside the block; bright in both metal shots (views `end_metal`, `end_metal1`),
   where `tools/tl5_tracks.py v 9552 16140 16700` reports "no metal" (its fixed column misses the jog).
 
-So of the three decode lines of R8's bits 7,6 only `bc2_e15517` ends inside this package (on the pad
-(9357,15824)); the other two leave it south.
+So of the three decode lines of R8's bits 7,6 two leave the package south (and the third too: run 12).
 
 ### Ambiguities (run 11)
 
 17. **Continuity of `bc2_e15343`'s thin metal over three boxes and one double edge** (the four `?M`). For: the
     metal keeps its line and width on both sides of each; pass-overs by the clean shot. Against: the photos
     cannot show metal on a step (trap 27).
+
+## Run 12 (2026-11-27), piece `dec2`: `bc2_e15517` on from its pad, out of the package (wiring; no join, no uncertain item)
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 14:16 -0600. Views in `cache/scratch/bc2/w9/` (`c`, `m`: 5x; overlay `ov`).
+Connections unchanged (`tools/sameconn.py`).
+
+**`bc2_e15517`** (low for R8 bits 7,6 = 0,1) does not end on the pad (9357,15824) of run 6. The pad's poly runs
+south (x 9345-9369, open red-brown poly) into a row y 15860-15880 that runs west (`tools/tl5_tracks.py rows row
+9180 9365 5 15867`: poly all the way; orange without a break in the metal shot; no branch:
+`tools/eof_tee.py h 15857 15877 9205 9340`) under the thin metals x 9314 (`bc2_w15739`'s) and x 9228
+(`bc2_m16130`'s) without contact (no hole on the row: `h 15867 9200 9350`; no ring or widening) to a pad
+(9184,15869) (a green hole in the pad's middle, ring and bright centre in both metal shots). From the pad a thin
+metal runs west to x 9142 and south (`tools/tl3_thin.py 9133 9150 15875 16375 --thr 176 --min 8`: no stretch
+dark in both metal shots at all; pink field under it throughout, no hole-like spot). Drawn to y 16370, the
+claim's south edge (port); `tools/follow.py 9150 15900 S`: on to y 17174.
+
+**Not diffusion**: in the clean shot two tan patches lie north and south of the row at x 9250-9298
+(y 15810-15848 and y 15888-15930). They are open field between the protected (pink) strips of the thin metals
+x 9228 and x 9314: khaki by the legend for open field, plain ground with no outline in the metal shot. The row
+is a wire there, not a gate.
+
+So all three decode lines of R8's bits 7,6 cross the centre block without a load in it and leave south:
+`bc2_e15343` at (9551,16370), `bc2_e15517` at (9142,16370), `bc2_e15690` at (10138,16300).
 
 ## Review
 

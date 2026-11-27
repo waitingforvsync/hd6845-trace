@@ -827,3 +827,16 @@ M 9549,16186 y16230 w=8                # the narrow stretch, 5 px west, over fie
                                        # its east part dark over the block's west edge; left as it shows)
 ?M 9549,16228 y16246 w=8
 M 9551,16244 y16370 w=12               # over the row y 16243-16262, land 7's arm and on south (port)
+
+# ================================================================ run 12 (2026-11-27), piece dec2: bc2_e15517 on from its pad, out of the package
+# The pad (9357,15824) at the end of the thin metal x 9399 is the top of a poly that runs south (x 9345-9369) into
+# a row y 15860-15880, west under the thin metals x 9314 and x 9228 (no contact: no hole, no ring) to a pad
+# (9184,15869), from which a thin metal runs west to x 9141 and south. Drawn to y 16370, the claim's south edge
+# (port): tools/follow.py runs it on to y 17174. The tan patches north and south of the row at x 9250-9298 in the
+# clean shot are open field between two thin metals' protected strips (khaki, plain ground in the metal shot),
+# not diffusion: the row is a wire there.
+P 9345,15838:9369,15880                # south from the pad
+P 9185,15860:9369,15880                # the row west
+P 9167,15852:9201,15886                # pad
+C 9184,15869 s=20x20
+M 9184,15871 x9142 y16370 w=14         # west and south (port)
