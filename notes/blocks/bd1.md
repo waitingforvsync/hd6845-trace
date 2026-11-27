@@ -510,9 +510,12 @@ the four shots of each listed spot side by side so that a list is looked at in o
    at (sheets `sh1`, `sh2`): (13127,14877), (13127,15398), (13520,15895), (13178,15918), (13589,16188),
    (13618,16182), (13215,16434) are a notch or speck on a poly band's edge, a gap ring between two metals, or
    dust, with the metal bright and unringed in both chips; (13630,15999), where `bd1_k`'s poly row passes under
-   `rst_a`'s metal, has an olive-brown band in the clean shot (150/128/52, against salmon 215/159/112 under X's
-   line 40 px east), but the band is not widened into a pad, the same olive-brown continues west of the metal in
-   the open, and neither chip has a ring: **no contact**, as drawn. Four drawn contacts had no olive hole,
+   `rst_a`'s metal, has an olive-brown band in the clean shot (150/128/52), but the clean shot's colour does not discriminate on
+   this row (plain crossings at (13630,16195) and (13716,16628) are olive too; the salmon 215/159/112 forty px
+   east that this note first cited as the control is `bd1_k`'s own pad, not a crossing: corrected by review
+   round 1). What decides it: the band is not widened into a pad in any of the four shots, chip 2's metal shot
+   shows only the row's two edge bars (y 15985-15988, y 16009-16012) as at the next crossing west, and neither
+   chip has a ring: **no contact**, as drawn. Four drawn contacts had no olive hole,
    (13567,15281), (13520,15455), (13629,15673), (13629,16235): each is a plain pad with ring and bright centre in
    both metal shots and a red-brown box in the clean shot (`sh2`): real. Below y 16470 the clean shot has
    interference colours under the tracks (green and pink bands: `sh4`), so its "holes" there mean nothing; the
@@ -534,9 +537,11 @@ y 16520-16560 and `eof`'s row y 16590-16612 (sheet `sh6`); the metal is one piec
   (view `k4`, four shots). No pad on it.
 - **One more load of `rst_a`** (`eof` run 8's lead): a pad with a contact (13628,16626) on `rst_a`'s metal
   x 13630 (ring and bright centre in both chips, the pad's box 13611-13645 x 16610-16642 in the clean shot), and
-  its poly east along y 16620-16636 under X's line (x 13672) and `ck_out`'s metal (x 13716) with no contact
-  (salmon, not widened, no hole), into the gate column: drawn to x 13760. Seen on to about x 13800, at the
-  ground rail's west edge; where it ends is not read.
+  its poly east along y 16620-16636 under X's line (x 13672: salmon, not widened, no hole) and `ck_out`'s metal
+  (x 13716: olive in the clean shot, as plain crossings on this row are; edges unchanged, no pad, 9-11 px edge
+  bars only in both metal shots, no pit in chip 2's stripped shot) with no contact, into the gate column: drawn
+  to x 13760. It runs on: at x 13776-13800, under the narrow metal x 13774-13790, the row is bright salmon
+  (228-248/150-179) over tan: probably a gate there (review round 1's lead; not drawn).
 
 **Not covered**: the tracks' lower ends in the field of diagonals below y 16740 (`eof`'s claim at the time); the
 audit does not test a contact on open diffusion beside a metal, and "no hole" under a metal is from the clean
@@ -547,8 +552,11 @@ shot only above y 16470.
 Under the ground rail (`tools/bd2_umap.py 13790 16270 13900 16910 5 6`): land y 16402-16440 with the rail's
 contact (13831,16415) | band y 16444-16460 | land | band y 16488-16502 | land y 16512-16552 | band
 y 16558-16572 | land y 16582-16626 | ... | land | band y 16696-16710 | land | band y 16744-16762 | land.
-The band y 16488-16502 starts west on the pad of `ck_out`'s tap (13716,16495); the band y 16444-16460 has a blunt
-west end under `ck_out`'s metal with no contact, and the two bands' east ends are separate (field between
+The band y 16488-16502 starts west on the pad of `ck_out`'s tap (13716,16495). **The band y 16444-16460 is fed by
+`h_eq_r0half`** (review round 1's lead, checked: the `?P` row y 16410 that k5's contact (13348,16411) feeds does not
+end at x 13700; in the gap between X's and `ck_out`'s metals it turns south, orange poly in both metal shots down
+x 13694 from y 16404 to y 16456 with no ground between, into the band's west end; not drawn, because the band
+is not). It passes under `ck_out`'s metal with no contact. The two bands' east ends are separate (field between
 them at x 13865-13880, y 16465-16485). A narrow metal x 13774-13790 runs from a pad (13777,16357) south to
 y 16772 over both bands without contact; the pad's poly goes east along y 16350-16362 under the rail. `ck_out`'s
 "tap" (13716,16562) is the east end of the wide poly row y 16520-16560 that `trunks` draws from the pad
@@ -557,3 +565,44 @@ y 16772 over both bands without contact; the pad's poly goes east along y 16350-
 
 ## Review
 
+### Round 1 (full review), 2026-11-27: run 3, the re-read of the channel (R1) and the two added wires
+
+A fresh Claude Fable 5.2 agent, on commit 9611f93, 25 images in `cache/scratch/bd1/review-1/`. Told to suspect:
+the lower zone y 16470-16740, where the clean shot has interference colours; (13630,15999); the tap
+(13628,16626), its metal and its poly row; k4's continuation and the dark stretch in chip 1; the track ends;
+the nested jogs. It took its own sample.
+
+**No finding changes a connection.** Two findings on wording, both confirmed and fixed (a trace comment and the
+notes; no geometry changed):
+
+1. (13630,15999): the notes' control was mislabelled (the salmon patch cited is `bd1_k`'s own pad), and the clean
+   shot's colour does not discriminate on that row. No contact stands on the other evidence (no widening in any
+   shot, edge bars only). Notes corrected.
+2. (13716,16628): the trace comment said "the same [salmon]" for the tap row under `ck_out`'s metal; the clean
+   shot is olive there. Still no contact (edges unchanged, no pad, 9-11 px bars in both metal shots, no pit in
+   chip 2's stripped shot). Comment and notes corrected.
+
+Two leads outside the claims, both checked by me and written into the notes above, neither drawn: the tap row
+runs on past x 13760 onto what is probably a gate under the narrow metal at about (13782,16628); the `?P` row
+y 16410 (`h_eq_r0half`) turns south at x 13694 into the gate band y 16444-16460.
+
+Checked and found correct by the reviewer: all 18 track positions by the two-chip test end to end
+(`tools/tl5_tracks.py v`), every jog arm, and 1.9x surveys of the whole channel in three shots: no break, no
+undrawn pad, no undrawn metal (19 cuts), no poly gap; the track ends k0, k6, k10, k12, k13, k14, k16, each on its
+pad with bare ground beyond in both chips at 4x; the nested jogs (identities below them as drawn); every
+crossing of the rows y 16520-16560, 16590-16612 and 16620-16636 at 4x in three shots (pads only where drawn);
+the contact (13628,16626) (ring 12 / centre 14 / ring 12 px in both chips, pits in both stripped shots) on the
+metal x 13630, which is continuous from the pad (13629,16235); the row past x 13672 without contact and without
+a branch; k4 one metal to (13259,16738) with the turn at about y 16690, the dark stretch in chip 1 a blemish;
+(13478,16594), (13564,16421), (13693,15185) plain crossings. Not checked by the reviewer: full-length 4x
+strips of the tracks (text test and 1.9x surveys, 4x at flagged spots only); chip 1 is damaged over
+x 13304-13521 below y 16520, so the evidence there is chip 2's two shots.
+
+Connections before and after the wording fixes (commit 9611f93 against the fixed tree):
+
+    tools/t.sh bd1 sameconn.py 9611f93            ->  connections identical
+    .venv/bin/python tools/sameconn.py 9611f93    ->  connections identical
+
+Recorded 2026-11-27 07:48 -0600.
+
+Round 1: no findings that change a connection.

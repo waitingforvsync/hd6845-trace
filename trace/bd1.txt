@@ -447,8 +447,10 @@ N M 13565,14700 hc1
 M 13304,16490 13304,16690 13259,16738 w=14
 # --- one more load of rst_a (eof run 8's lead): a pad with a contact on rst_a's metal x 13630 (ring and bright
 # centre in both metal shots, the pad's box and its tail in the clean shot); its poly runs east along y 16620-16636
-# under X's line (x 13672: salmon, band not widened, no hole) and ck_out's metal (x 13716: the same) into the gate
-# column; drawn to x 13760 (it is seen on to about x 13800, at the ground rail: not read).
+# under X's line (x 13672: salmon, band not widened, no hole) and ck_out's metal (x 13716: olive in the clean shot
+# there, as plain crossings on this row are; the row's edges y 16618 and y 16636 unchanged, no pad, edge bars only in
+# both metal shots: no contact) into the gate column; drawn to x 13760. It runs on: bright salmon over tan at
+# x 13776-13800 under the narrow metal, probably a gate there (review round 1's lead; not drawn).
 P 13611,16610:13645,16642              # pad
 C 13628,16626
 P 13640,16628 x13760 w=16
