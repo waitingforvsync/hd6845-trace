@@ -799,10 +799,10 @@ C 9227,16130 s=20x20
 M 9228,16100 y16160 w=13               # thin metal x 9228 through the pad (ports: north, where it comes from the west along y 15826; south)
 N M 9228,16156 bc2_m16130
 
-# ================================================================ run 9, piece dec3 (2026-11-27): the third decode line leaves south
-# bc2_e15690's metal runs on from y 15830: south on x 10050 to a corner at y 16127, east along y 16120-16136
+# ================================================================ run 10, piece dec3 (2026-11-27): the third decode line leaves south
+# bc2_e15690's metal runs on from y 15830: south on x 10050 to a corner at y 16130, east along y 16124-16137
 # lengthwise over a poly row (salmon unbroken under it, no hole: no contact) to a corner at x 10138, and south
 # on x 10131-10145 (an 6 px ridge at y 16137-16141 where it leaves the row's south edge) over field. Drawn to
 # y 16300, this package's south edge (port): tools/follow.py runs it on to y 16569, east to x 10182 and south to
 # y 17173. The pad (10180,16127) at the poly row's east end belongs to another thin metal, from the north on x 10180.
-M 10050,15830 y16128 x10138 y16300 w=13
+M 10050,15830 y16130 x10138 y16300 w=13

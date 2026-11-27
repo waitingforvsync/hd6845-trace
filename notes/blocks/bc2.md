@@ -1513,6 +1513,33 @@ Recorded 2026-11-27 13:43 -0600.
 
 Round 15: no findings that change a connection.
 
+### Round 16 (full review), 2026-11-27: run 10, piece `dec3`
+
+A fresh Claude Fable 5.2 agent, on commit ba5aa8e, 3 images in `cache/scratch/bc2/review-16/`. Told to suspect:
+each corner (one metal, or two that abut), the metal going on east of the east corner to the pad (10180,16127),
+a contact between the horizontal stretch and the poly row beneath it, contacts on the two vertical stretches,
+and the join to the earlier line at y 15830.
+
+**No findings.** The start is the same metal (no break y 15790-16110, 13-14 px wide in both chips); the vertical
+x 10050 crosses nothing (pink field throughout); the west corner is one metal (the dark stretch is 8 px,
+y 16113-16120, against 5-7 px for the neighbouring through metal x 10010 over the same row edge; no stub south);
+the horizontal is 9-12 px wide throughout without pad or ring, the clean shot unbroken salmon, no hole: no
+contact; the east corner is one metal (6-7 px dark at y 16136-16142, the horizontal's end flush with the
+vertical's east edge in both chips); east of it x 10153-10162 is open poly (as the open-poly control at
+x 10028-10032), 32 px without metal before the pad's ring: not joined to the pad (10180,16127); the vertical
+x 10138 is continuous over pink field with no contact from y 16143 to y 16480 and runs on past y 16300.
+Geometry: the horizontal is y 16124-16137 (drawn 2-3 px north: moved). Could not check: chip 2's stripped shot
+under the horizontal is fringed; south of y 16480 only `tools/follow.py`.
+
+Connections before and after the geometry fix (commit ba5aa8e against the fixed tree):
+
+    tools/t.sh bc2 sameconn.py ba5aa8e            ->  connections identical
+    .venv/bin/python tools/sameconn.py ba5aa8e    ->  connections identical
+
+Recorded 2026-11-27 13:56 -0600.
+
+Round 16: no findings.
+
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
 - "Latch unit a", row `bc2_w14912` ("goes west, not followed"): the pad (10395,14912) is the south end of a thin metal x 10397 that comes from north of y 14570 (`eof` run 17, at 1.28x and by `tools/eof_mrun.py col 10395 14640 15030`; not read at high zoom).
