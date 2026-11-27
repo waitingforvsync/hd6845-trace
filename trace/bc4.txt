@@ -88,3 +88,43 @@ M 9184,17040 y16990 w=13               # thin metal from the north, ending on th
 N M 9184,17000 bc4_m17040
 @alias bc4_w17127 bc2_w17127           # the cell names its output bc2_w{}: this unit's is bc4_w17127
 N P 9300,17127 bc4_w17127
+
+# ================================================================ run 4 (2026-11-27), piece e17127: the gate bc2_e15690 ends in
+#     bc4_e17127 = NOR(bc4_m17062, bc2_e15690)                    (depends on the tie and on 8 px of the lower arm: ?)
+# The mirror image (about x 9663.5, the M rail's line) of the unit bc4_w17127: two pull-downs in the gap EAST of the
+# east rail (x 9810-9858), on a diffusion column x 9884-9917 between the arms of the rail's lands above (contact
+# 9842,17040) and below (contact 9844,17205); gate rows y 17075-17092 (upper) and y 17162-17179 (lower: the row of
+# bc2_e15690); the middle row y 17118-17135 is the output, on a buried-contact box, east to a pad (10007,17127) and
+# a thin metal south; the strip WEST under the rail and across the open to the load block (9695-9749, 17104-17189)
+# and the VCC land under the M rail (the land of bc4_w17127's load: shared); the tie in the open between the
+# block and the rail. Drawn shape by shape from measurements here (the format has no mirrored instance).
+M 9810,17000:9858,17265                # E rail (vss by the gate's build)
+N M 9834,17100 vss
+D 9804,17008:9866,17066                # land above
+C 9842,17040
+D 9828,17188:9880,17260                # land below
+C 9844,17205
+D 9858,17052:9917,17068                # upper arm, east out from under the rail
+D 9884,17064:9917,17202                # the column
+D 9858,17188:9882,17202                # lower arm, under a tab of the rail's metal
+?D 9880,17188:9888,17202               # its last 6 px to the column, under the tab's edge line
+P 9866,17075:9927,17092                # upper gate row
+P 9866,17162:9956,17179                # lower gate row: bc2_e15690's row, on from its drawn end
+P 9925,17075:10020,17092               # the upper row east, under the thin metal x 9965 (no contact)
+P 9988,17045:10022,17092               # pad
+C 10005,17062 s=20x20
+M 10007,17062 y17010 w=13              # thin metal from the north, ending on the pad (port)
+N M 10007,17020 bc4_m17062
+P 9897,17118:10007,17135               # the middle row east: the output, under the thin metal x 9965 (no contact)
+B 9885,17114:9923,17140                # its buried contact on the column
+P 9990,17110:10024,17144               # pad
+C 10007,17127 s=20x20
+M 10008,17127 y17150 w=13              # thin metal south (port)
+N P 9950,17127 bc4_e17127
+D 9757,17119:9887,17139                # the strip west: gap, under the rail, across the open
+D 9682,17120:9767,17147                # wider under the load, onto the VCC land of bc4_w17127's load
+P 9695,17104:9749,17189                # load gate
+D 9762,17134:9790,17164                # tie finger, south from the strip (in the open)
+?D 9766,17160:9790,17190               # under the box
+?P 9745,17174:9790,17189               # the block's tab
+?B 9762,17162:9795,17192               # tie (buried contact): the inside of the box is not resolved

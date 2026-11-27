@@ -135,13 +135,73 @@ The unit has the build of `bc2`'s first two on this rail and is drawn as a copy 
   y 16335 and y 17020 is not drawn) and the wide metal x 9642-9698 its M rail's line. They are labelled `vss` and
   `vcc` here by the gate's build, as in `bc2`: neither is followed to a supply.
 
+## Run 4 (2026-11-27), piece `e17127`: the gate `bc2_e15690` ends in (3 transistors; 4 uncertain items)
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 15:37 -0600. Region x 9680-10030, y 17000-17265. Views in `cache/scratch/bc4/e/`:
+`a_acid1b`, `a_metal` (the gap east of the rail, 5.4x), `ld_acid1b`, `ld_metal`, `ld_acid` (the load side,
+6.5x), `east` (the rows' east ends, 7x), overlay `ov_m`.
+
+    bc4_e17127 = NOR(bc4_m17062, bc2_e15690)        (depends on the tie and on 6 px of the lower arm: Ambiguities 2, 3)
+
+The second load of a cursor-skew decode line, and the twin of `bc4_w17127`: the two NORs stand mirror-imaged
+about the M rail's line (x 9663.5) and share its VCC land. The format has no mirrored instance, so every shape is
+drawn from measurements here.
+
+- **Gate rows** east of the rail (`tools/px.py col 9990 17040 17210 3 metal`): poly at y 17079-17090,
+  17121-17130, 17163-17177: the heights of the west unit's rows.
+- **The column** x 9884-9917 in the gap east of the rail (x 9810-9858): dark lines at x 9880-9883 (its rail
+  side) and x 9916-9922 (its far side, in the open) in both metal shots on every row between the arms
+  (`tools/px.py row Y 9856 9960 3 metal,metal1,acid` for Y = 17084, 17105, 17150, 17170), with plain ground
+  between them reading diffusion on the stretches (y 17105: blue 77-86, stripped red - green 10-28; weaker at
+  y 17150: 2-26, as in the master's lower stretch) and poly on the two gate rows (blue 49-68); west of the first
+  line a pocket of field (y 17105, y 17150: stripped red - green -22..8) in which the two rows end with caps at
+  x 9866; east of the second line field.
+- **Upper arm**: at y 17060 plain from x 9868 to x 9913 with no line at x 9880 (172-175, blue 84-88, stripped
+  red - green 17-22), from the land under the rail (`tools/bd2_umap.py 9796 17000 9880 17070 4 4`: tan
+  y 17008-17066; contact (9842,17040): hole, ring in both chips).
+- **Lower arm**: the land below (tan (9828-9880, 17188-17260), contact (9844,17205)) reaches east under a tab of
+  the rail's metal (bright x 9862-9877 at y 17192-17198 in both chips, tan under it to x 9884:
+  `tools/bd2_umap.py 9800 17180 9884 17264 4 4`); east of the tab's edge line (x 9880-9886) plain diffusion
+  x 9889-9913 (stripped red - green 13-54). **The 6 px under that edge line are `?D`** (Ambiguity 3).
+- **Output**: at y 17128 the column's rail side is plain (the strip leaving west), then a frame (x 9889-9901) and
+  the box's interior, then poly from x 9925 east: the middle row's end in a framed box (9885-9923, 17114-17140),
+  as in the west unit. The row runs east under the thin metal x 9958-9972 (salmon, no hole:
+  `tools/tl5_tracks.py h 17127 9930 9995`; no branch) to a pad (10007,17127) (a green hole in a salmon pad, ring
+  and bright centre in the metal shot: view `east`); the thin metal x 10008 runs south from it
+  (`tools/tl5_tracks.py v 10008 16950 17260`: none between y 17066 and y 17122; metal from the pad south, with
+  bars where it crosses the row of `bc2_e15690`). Drawn to y 17150 (port).
+- **The upper gate row** runs east under the same thin metal (no hole: `h 17083 9930 9990`; no branch) to a pad
+  (10005,17062) (a green hole in a salmon pad (9990-10022, 17045-17090); ring and centre in chip 1's metal shot,
+  `padc`), on which a thin metal x 10008 from the north ends (`v 10008`: metal to y 17038, the pad's ring, no
+  metal y 17066-17122). Drawn to y 17010 (port): placeholder `bc4_m17062`.
+- **The lower gate row is `bc2_e15690`'s row** (run 1; drawn on from x 9954 to its cap at x 9866).
+- **Strip and load** (`tools/px.py row 17130 9676 9892 4 metal,acid,acid1b`): west from the column plain
+  diffusion across the gap (x 9868-9884), tan under the rail (x 9808-9860; `tools/bd2_umap.py 9796 17106 9870
+  17146 3 3`: y 17121-17131), plain diffusion in the open west of the rail (x 9760-9800: blue 70-91, stripped
+  red - green 17-29), under a poly block x 9700-9748 (`col 9722 17090 17200 4`: poly y 17102-17190 with edge
+  lines at y 17114-17122 and y 17146-17150), to the VCC land under the M rail (tan to x 9684; the land of
+  `bc4_w17127`'s load).
+- **Tie**: in the open between the block and the rail a diffusion finger runs south from the strip
+  (`col 9776 17110 17200 4`: plain, blue 82-88, stripped red - green 12-25, from y 17126 to y 17158) to a framed
+  box (about 9762-9795, 17162-17192; interior plain at (9773-9781, 17174-17186)); the block's poly reaches the
+  box's frame at x 9757 (`row 17180 9740 9806 3`). **What is inside the box is not resolved: `?`** (Ambiguity 2).
+- **Rails**: the wide metal x 9810-9858 is the line of `bc2`'s E rail; `vss` by the gate's build only.
+
+### Ambiguities (runs 3-4)
+
+2. **The tie of `bc4_e17127`'s load** (`?D 9766,17160:9790,17190`, `?P 9745,17174:9790,17189`,
+   `?B 9762,17162:9795,17192`): a framed box where the mirror image of the west unit's tie belongs; nothing
+   measured contradicts it, its inside is not read. Without it the load's gate has no connection.
+3. **6 px of `bc4_e17127`'s lower arm** (`?D 9880,17188:9888,17202`), under the edge line of the rail's metal
+   tab. Without it the pull-down gated by `bc2_e15690` has no ground.
+
 ## Ports
 
 In `ports.d/bc4.txt`.
 
 ## Not done
 
-Everything else: what `bc2_e15690`'s row and the third line's pad lead to; `bc4_m17040`'s source and `bc4_w17127`'s loads; a poly row y 17246-17263 that crosses under the west rail against the south edge of the land (9458-9502, 17188-17240) (a pull-down on that land: review round 3); a poly block east of the M rail from x 9698 (a mirror-image load on the same VCC land?); the diffusion rectangle (9060-9255, 16782-16997) under wire A; `bc2_e15343`'s route; the rails; the rest of the region.
+Everything else: what the third line's pad leads to; `bc4_m17062`'s source and `bc4_e17127`'s loads; `bc4_m17040`'s source and `bc4_w17127`'s loads; a poly row y 17246-17263 that crosses under the west rail against the south edge of the land (9458-9502, 17188-17240) (a pull-down on that land: review round 3); a poly block east of the M rail from x 9698 (a mirror-image load on the same VCC land?); the diffusion rectangle (9060-9255, 16782-16997) under wire A; `bc2_e15343`'s route; the rails; the rest of the region.
 
 ## Review
 
