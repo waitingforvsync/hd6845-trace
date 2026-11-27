@@ -559,7 +559,7 @@ N M 13348,11000 h_eq_r0half
 P 13328,12815:13364,12843
 C 13346,12829 s=26x26
 M 13347,12816 y13480 w=18
-N M 13347,13400 inh_rc
+N M 13347,13400 rst_rc
 # --- L1 from the north ends on a contact; poly link east (under L2, L3) to a contact
 # on L4, which goes on south: this net is wr_r4 at the south edge
 M 13391,10700 y12448 w=18
@@ -594,7 +594,7 @@ C 13565,12826 s=26x26
 P 13550,12815:13752,12837
 C 13736,12826 s=26x26
 M 13738,12815 y13480 w=18
-N M 13738,13400 rdp3_n7s9
+N M 13738,13400 rc_eq_r4
 # --- L8 from the north ends on a contact (13692,10745); poly west along y 10747, down
 # between L1 and L2 (x 13413), west along y 10965, out of the region
 M 13694,10700 y10756 w=18

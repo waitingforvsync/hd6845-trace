@@ -3,24 +3,24 @@
 # DIR is `in` where the driver is known to lie beyond that port, `?` otherwise.
 
 # West side (x 5683): tl5's east ports, under tl5's names (each is an alias of the net named in the note)
-tl5_w4395    M  5683,3652-3666  ?    = tcw_m6320: tl5's T10 metal (latch c's data) runs on east to the pad (5800,3658)
+tcw_m6320    M  5683,3652-3666  ?    = tcw_m6320: tl5's T10 metal (latch c's data) runs on east to the pad (5800,3658)
 tl5_w3505    P  5683,3712-3732  ?    latch a's enable: the row ends on U0's north pad (5712,3722)
-tl5_w4590    P  5683,3862-3882  ?    = tcw_m6232: tl5's row y 3872 (latch c's clear)
-tl5_w5500    P  5683,4427-4447  ?    the row to U5's pad (5928,4437)
-tl5_w5544    P  5683,4470-4490  ?    = tc1_o3527: tl5's pad (5666,4480): the row to the pad (6010,4480) of the bus metal y 4482
-tl5_w5457    P  5683,4511-4531  ?    the row to U4's pad (5886,4522)
+c4l_gab    P  5683,3862-3882  ?    = c4l_gab: tl5's row y 3872 (latch c's clear)
+tl4_w5068    P  5683,4427-4447  ?    the row to U5's pad (5928,4437)
+tc1_o3527    P  5683,4470-4490  ?    = tc1_o3527: tl5's pad (5666,4480): the row to the pad (6010,4480) of the bus metal y 4482
+c4l_l3    P  5683,4511-4531  ?    the row to U4's pad (5886,4522)
 tl5_w4503    P  5683,4580-4600  in   latch c's inverse output: the row to the pad (5797,4698)
-tl5_w4633    P  5683,4623-4643  in   = tcw_c: latch c's output: the row to the pad (5797,4633)
-tl5_w4807    P  5683,4798-4818  in   = ras_o0_alt2: inverter 1's output: the row to the pad (6058,4872)
-tl5_w4850    P  5683,4840-4858  ?    = tl5_w4503: inverter 1's gate: the row from the pad (5797,4850)
-tl5_w3982    P  5683,4970-4988  ?    = tl4_w4068: latch b's enable: the row to the pad (5798,4980)
-tl5_w5631    P  5683,5622-5642  ?    = tcw_a: tl5's pad (5666,5632): the row to the pad (5757,5632) on U1
-tl5_w5717    P  5683,6228-6248  ?    tl5's row y 6238: east to a corner at x 6236 and south
-tl5_w5674    P  5683,6142-6160  ?    tl5's pad (5667,6150): the row to the pad (6016,6150)
+tcw_c    P  5683,4623-4643  in   = tcw_c: latch c's output: the row to the pad (5797,4633)
+ras_o0_alt2    P  5683,4798-4818  in   = ras_o0_alt2: inverter 1's output: the row to the pad (6058,4872)
+tl5_w4503    P  5683,4840-4858  ?    = tl5_w4503: inverter 1's gate: the row from the pad (5797,4850)
+tl4_w4068    P  5683,4970-4988  ?    = tl4_w4068: latch b's enable: the row to the pad (5798,4980)
+rst_ck    P  5683,5622-5642  ?    = rst_ck: tl5's pad (5666,5632): the row to the pad (5757,5632) on U1
+rcs_mv    P  5683,6228-6248  ?    tl5's row y 6238: east to a corner at x 6236 and south
+ck_out    P  5683,6142-6160  ?    tl5's pad (5667,6150): the row to the pad (6016,6150)
 
 # North side (y 2500)
-tl5_w5457    P  5877-5897,2500  ?    poly north from U4's north pad (5887,2722), on under the wide metal band
-tl5_w5500    P  5918-5938,2500  ?    poly north from U5's north pad (5928,2680), on under the wide metal band
+c4l_l3    P  5877-5897,2500  ?    poly north from U4's north pad (5887,2722), on under the wide metal band
+tl4_w5068    P  5918-5938,2500  ?    poly north from U5's north pad (5928,2680), on under the wide metal band
 
 tl6_p6101    P  6052-6072,2500  ?    poly north from U8's north pad (6057,2595); turns east under the band's rim at y 2475-2500
 
@@ -30,15 +30,15 @@ tl6_p6187    M  6400,2567-2579  ?    U10's north end, from the east
 tc2_m6404    M  6400,2613-2625  ?    U11's north end; ends on a pad at about (6413,2617), not drawn
 tcw_m6278    M  6400,2659-2671  ?    tcw's track x 6276 from its corner (6276,2665)
 tcw_m6320    P  6212,3649-3667  ?    onto tcw's poly west of its pad (6315,3655)
-tcw_m6232    P  6225,3862-3882  ?    into tcw's pad (6232,3870)
-tcw_a        P  6392,3994-4012  ?    into fld's pad (6400,4005)
+c4l_gab    P  6225,3862-3882  ?    into tcw's pad (6232,3870)
+rst_ck        P  6392,3994-4012  ?    into fld's pad (6400,4005)
 tcw_c        P  6310,4125-4143  ?    into fld's pad (6318,4135)
 tc1_o3527    M  6400,4472-4492  in   the bus metal y 4482, on east as tc2's piece
 ras_o0_alt2  M  6400,4777-4797  ?    the bus metal y 4787, on east as tc2's piece
-tc1_p4308    P  6400,4994-5012  ?    onto tc2's row y 5003; west end on the pad (6317,5000)
-tc2_o5175    P  6400,5163-5183  in   onto tc2's row y 5173 (its NOR's output); west to r9m's pad (5845,5045): = r9m_l3
-tc2_m6490    M  6400,5563-5575  ?    = tc1_p4308: onto tc2's metal, from the pad (6317,5000)
-tc2_m6447    M  6400,5606-5618  ?    = tcw_m6404: onto tc2's metal, from the pad (6274,4832)
+ck_a    P  6400,4994-5012  ?    onto tc2's row y 5003; west end on the pad (6317,5000)
+tc2_o5175    P  6400,5163-5183  in   onto tc2's row y 5173 (its NOR's output); west to r9m's pad (5845,5045): = tc2_o5175
+ck_a    M  6400,5563-5575  ?    = ck_a: onto tc2's metal, from the pad (6317,5000)
+lc3_w9947    M  6400,5606-5618  ?    = lc3_w9947: onto tc2's metal, from the pad (6274,4832)
 tc2_m6404    M  6400,6026-6038  ?    onto tc2's metal, from the pad (6229,4872)
 vss          M  6400,6193-6245  -    the wide ground metal, on east as tc2's piece
 ral_stb      M  6400,6318-6338  ?    the metal y 6328, on east as tc2's piece
@@ -47,10 +47,10 @@ ral_stb      M  6400,6318-6338  ?    the metal y 6328, on east as tc2's piece
 ral_stb      M  5749-5761,6350  ?    from the pad (5755,6322)
 tl4_w4068    M  5793-5805,6350  ?    U2's south piece
 tl5_w3505    M  5966-5978,6350  ?    from the pad (5972,6193)
-tl5_w5674    M  6010-6022,6350  ?    from the pad (6016,6150)
-tcw_a        M  6099-6111,6350  ?    from the corner (6105,6066)
+ck_out    M  6010-6022,6350  ?    from the pad (6016,6150)
+rst_ck        M  6099-6111,6350  in   from the corner (6105,6066); driven from the south (rst_ck, eof run 2)
 vss          M  5882-5934,6350  -    the wide ground metal's west leg
-tl5_w5717    P  6226-6246,6350  ?    from the row y 6238's corner
+rcs_mv    P  6226-6246,6350  ?    from the row y 6238's corner
 tl6_p6101    P  6273-6291,6350  ?    from the pad (6275,6152)
 tl6_p6143    P  6313-6331,6350  ?    from the pad (6318,6110)
 tl6_p6187    P  6356-6374,6350  ?    from the pad (6360,6152)

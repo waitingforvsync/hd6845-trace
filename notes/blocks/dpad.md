@@ -247,7 +247,7 @@ Evidence (images in `cache/scratch/dpad/`):
 | `d#` | metal | the bond pad 18515-19024 x 6049-6558 + cell offset | pad | pad metal, contact box and series strip drawn; D0-D6: the same net as the protection node and the input line |
 | `d_hiz` | metal x 17631-17651 | y 7374-18850; contact 17637,7385 + cell offset in each cell; poly cross-under 17633-17655 x 18128-18304 between contacts 17643,18143 and 17643,18290 | into the cells | driver not found: `follow.py` reports contact candidates along it at y 9290-9573, 11168, 14500, 14798, 16754, 16827, none looked at |
 | `d0_out_n` | poly, then metal | cell, west along y 7480-7505 to the contact 17597,7492, metal x 17589-17609 south (drawn to y 7570) | into the cell | `dbus` notes: continues to 17597,8097 |
-| `d1_out_n` .. `d7_out_n` | poly | west end of strip 4 at 17800,7466-7492 + cell offset | into the cell | routes differ per pad; D0-D5's are drawn in `trace/dbus.txt` (D1-D5's to end pads at the column's west edge); D6's goes west to a pad (17600,17340) and south by metal, D7's north up the channel (`busC`). In every cell the poly at strip 4's west end is a block about 15 px lower than the cell draws it (geometry only) |
+| `d1_out_n` .. `d7_out_n` | poly | west end of strip 4 at 17800,7466-7492 + cell offset | into the cell | routes differ per pad; D0-D5's are drawn in `trace/dbus.txt` (D1-D5's to end pads at the column's west edge); D6's goes west to a pad (17600,17340) and south by metal, D7's north up the channel (`busc`). In every cell the poly at strip 4's west end is a block about 15 px lower than the cell draws it (geometry only) |
 | `d0` (alias `d0_in`) | metal, poly, metal | node column, contact 17835,6585, poly west along y 6573-6597 and south along x 17550-17572, contact 17555,6755, metal x 17548-17566 to `dbus`'s piece at y 8050 | out | joined: `dbus`'s input buffer reads `d0_a = NOT d0` |
 | `d1` (alias `d1_in`) | metal | node column to the contact 17836,8402, where `dbus`'s poly starts | out | joined: `d1_a = NOT d1` |
 | `d2` .. `d6` (the lines on to the input buffers drawn by `dbus` as `d2_in`..`d6_in`; node contacts (17837,10141), (17838,11727), (17838,13329), (17835,14887), (17838,16519)) | metal | node column, drawn to y 6560 + protection offset; in the composite the contact is near 17825,6665 + offset with poly leaving west | out | the line to `dbus`'s input buffer is not followed: that is what the `_u` aliases stand for |
@@ -275,7 +275,7 @@ Evidence (images in `cache/scratch/dpad/`):
   south into D7's protection node (seen by the second cycle's reviewer); not drawn.
 - Protection: the comb; D7's variant (its strip enters from the top near 17850,17538).
 - Input line of D7 from its protection to the column (D2-D6's are drawn by `dbus`, 2026-11-17).
-- `d#_out_n` outside the cells (D0's is drawn: `dbus`, from the contact (17597,7492) down the channel to the inverter `d0_out_n` = NOT `dbus_do0_in`) and the driver of `d_hiz`: `dbus`'s channel wiring. Lead (review round 1, confirmed): at (17630,17085) a metal leaves `d_hiz` west along y 17073-17095 to x 17355 and turns south along x 17350-17370 past y 17237 (`metal` at 2.4-3x): almost certainly its feed. It lies in `dbus`'s claimed region, so it is not drawn here.
+- `d#_out_n` outside the cells (D0's is drawn: `dbus`, from the contact (17597,7492) down the channel to the inverter `d0_out_n` = NOT `rd_b0`) and the driver of `d_hiz`: `dbus`'s channel wiring. Lead (review round 1, confirmed): at (17630,17085) a metal leaves `d_hiz` west along y 17073-17095 to x 17355 and turns south along x 17350-17370 past y 17237 (`metal` at 2.4-3x): almost certainly its feed. It lies in `dbus`'s claimed region, so it is not drawn here.
 - The straps' metal was checked per copy only at 0.42x [U_a, U_b]; the rows' metal of
   D1-D6 at 1.05x [Rm_all], D7 at 1.5x.
 
@@ -344,3 +344,14 @@ above 0.76x (covered by the first cycle), D1's input join, D0's pad metal under 
 bond-ball shadow, the undrawn comb and D7's protection (in Not done).
 
 Round 1: no findings.
+
+## Note (coordinator, from the handoffs of 2026-11-17/18)
+
+`d_hiz`'s contact candidates along it (y 9290-9573, 11168, 14500, 14798, 16754, 16827) are looked at
+by `dbus` run 7: none is a contact. The west branch at (17630,17085) is at y 17085, south of
+`dbus`'s region, in `busc`'s.
+
+## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
+
+- Left, "`d#_out_n` outside the cells": all eight are driven by inverters of the read bus (D0: `dbus`; D1-D6:
+  `cdp4`'s cell `cdp4_ro`; D7: `regs`), `d#_out_n` = NOT `rd_b#`, firm.

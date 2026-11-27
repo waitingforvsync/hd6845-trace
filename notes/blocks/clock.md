@@ -24,14 +24,14 @@ input buffer.
 
 Two small inverters in the gate row also sit on the phase lines: g6 pulls line A
 (`ck_a`) down when `ck_b` is high, and g5 pulls line B (`ck_b`) down when a third
-signal, `inh_ck`, is high. Their depletion loads can pull a phase fully to VCC,
+signal, `rst_ck`, is high. Their depletion loads can pull a phase fully to VCC,
 which a source-follower pull-up cannot.
 
 **Correction (2026-11-15, from the trunks block, checked at 6x).** An earlier version
-of this note said `inh_ck` was `ck_a` itself, joined by a link at y 18345. That link
+of this note said `rst_ck` was `ck_a` itself, joined by a link at y 18345. That link
 does not exist: the line at y 18335-18358 is `ck_out` and neither contact is there.
-`inh_ck` is the output of the lone inverter at the left end of the input buffer row
-(`inh_ck`), whose input comes down from the core (followed back to about
+`rst_ck` is the output of the lone inverter at the left end of the input buffer row
+(`rst_ck`), whose input comes down from the core (followed back to about
 (13565,15275); its source is not yet found). So `ck_b` is also held low whenever that
 core signal is low, and the same inverted signal is distributed along the bottom
 bus field and up the left bus field. What it is remains open; see
@@ -50,12 +50,12 @@ y 18795-18848. Two metal lines cross the loads: line A (y 18700-18722) and line 
 
 | Gate | Input | Output | Notes |
 |---|---|---|---|
-| g5 | `inh_ck`: poly from a bus line at y 18455-18480 above the VCC band, which leaves left (not followed) | line B (`ck_b`) | tall weak load; output also tapped to a plain diffusion rectangle at 11728-11897 x 18975-19150 (added capacitance) |
+| g5 | `rst_ck`: poly from a bus line at y 18455-18480 above the VCC band, which leaves left (not followed) | line B (`ck_b`) | tall weak load; output also tapped to a plain diffusion rectangle at 11728-11897 x 18975-19150 (added capacitance) |
 | g6 | line B | line A (`ck_a`) | strong load (W/L about 68/26); output also goes up in poly at x 12098-12125 to a bus line at y 18455-18480 that leaves right (not followed) |
 | g1, g2 | line B | `ck_g1`, `ck_g2` | so `ck_g2` = line B re-buffered |
 | g3, g4 | line A | `ck_g3`, `ck_g4` | so `ck_g4` = line A re-buffered |
 
-`inh_ck` is not `ck_a` (see the correction in the summary): g5's input is the output
+`rst_ck` is not `ck_a` (see the correction in the summary): g5's input is the output
 of input-row gate 0. Lines A and B also continue right
 along the row to x 13010 / 13090, where they turn up into the core (not followed).
 
@@ -94,7 +94,7 @@ N2 = NOT clk_b               inverter in the middle of the block
 
 So A can only be high while CLK is low and B while CLK is high, and each waits for
 the delayed copy of the other to fall. Lines A and B then go right along the gate
-row into the core, and A (as the line first called `inh_ck`) is carried round the
+row into the core, and A (as the line first called `rst_ck`) is carried round the
 bottom and left bus fields.
 
 Left half (output A), with coordinates:
@@ -208,7 +208,7 @@ Checked against the clean shot of chip 1 (2026-11-14):
 Not yet traced here: the load of `ck_ga` (the small device at 10030-10160 x
 19430-19680 is the candidate), and whether `ck_ga` is bootstrapped.
 
-## Route of `inh_ck` to the left of the die
+## Route of `rst_ck` to the left of the die
 
 From the bus piece at y 18458-18480 (which g5's gate also hangs on): left to a contact
 at 10897,18468; a short poly link to a contact at 10808,18470 and, by a branch up at
@@ -220,3 +220,24 @@ bottom bus field: poly links under vertical metals at x 9740-9840, 8440-8560 and
 7470-7510, ending at a contact at 6800,18420. A poly line runs up from there to a
 contact at 6800,17990 at the foot of the innermost vertical line (x about 6790) of
 the bundle that climbs the left bus field. Seen at 1x; not in the trace.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- The signal on track A / line X / the first through line of the left-centre strips, which these notes call a clock, a strobe "once per scan line" or leave without a source, **is the reset**: `rst_a`, the buffered copy of `rst` = NOR(`lpstb_b`, `res_b`) made by `lc1`'s gate 5 (`eof` run 10, piece `isrc5`, firm). `rst_ck`, `rst_rc` and `rst_lat` are further buffered copies of it: high while the RES and LPSTB pins are both low, and only then. The belief "a strobe once per scan line" is withdrawn. (`rst_ck`'s source was open here.)
+
+## Corrections (coordinator, from the handoff of `eof` run 71, 2026-11-25)
+
+- The summary ("g5 pulls line B (`ck_b`) down when a third signal, `rst_ck`, is high") and the gate table's
+  g5 row ("`rst_ck`: poly from a bus line at y 18455-18480 ... which leaves left (not followed)"): g5's input
+  is not `rst_ck`. The bus piece's west end pad (10895,18468) is the foot of a poly column x 10889-10907 from
+  the north, the net `eof_w17734` (`eof` piece `o734`, firm); so `ck_b` = NOR(`ck_clkn`, `ck_g4`,
+  `eof_w17734`). What `eof_w17734` is (a reset copy, believed; or NOT `rst_lat` as named, which would stop the
+  clock) is AMB-062. The "Correction (2026-11-15)" paragraph's "so `ck_b` is also held low whenever that core
+  signal is low" is withdrawn with it.
+- "Route of `rst_ck` to the left of the die" starts "From the bus piece at y 18458-18480 (which g5's gate also
+  hangs on): left to a contact at 10897,18468; a short poly link to a contact at 10808,18470 and, by a branch
+  up at x 10850-10870, to a contact at 10855,18385". True: the route starts at the contact (10857,18383) on bus
+  line L4; its stem's foot is joined to the west pad (10810,18470) only (10 px of open field at x 10870-10878);
+  the pad (10897,18468) and the bus piece are not on `rst_ck`. The rest of the route is still "seen at 1x"
+  (R4). Evidence: `notes/blocks/eof.md`, "Run 71" (the table of the row y 18468), review round 85; the trace
+  label `N M 11650,18467` is now `eof_w17734`.

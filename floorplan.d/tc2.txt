@@ -2,16 +2,16 @@
 6420,5020:6712,5290    logic   NOR of the shift-mode select and the bit-0 compare | tc2_o5175 = NOR(tc1_x1, fld_b_in): two pull-downs west of the ground rail, load east of it; output leaves west
 6400,4464:7025,4500    route   tc1 cell B output going west | tc1_o3527: pad, poly row under the rails, pad, metal west
 6436,4864:7073,5068    route   tc1_x1 to the NOR | from the contact (7055,4478) by poly and metal to the gate at (6500,5132)
-6400,4984:6640,5020    route   tc1_p4308 going west | metal from tc1's pad (6620,4436) to the pad (6620,5002), poly row west
+6400,4984:6640,5020    route   ck_a going west | metal from tc1's pad (6620,4436) to the pad (6620,5002), poly row west
 6400,4769:6950,4802    route   ras_o0_alt2 going west | row address bit 0 source (shift mode, R9 bit 0 clear): pad, poly row, pad, metal west
-6477,4808:6819,4848    route   tc1_m6817 row | from tc1's thin metal x 6797 to the pad (6492,4828)
-6355,4825:6373,5534    route   tc1_m6817 metal | west leg of the line, south along x 6364
-6485,5516:6545,6400    route   tc1_m6817 metal and poly | through the nest to the pad (6533,6152), poly south
+6477,4808:6819,4848    route   cnt_bus_b row | from tc1's thin metal x 6797 to the pad (6492,4828)
+6355,4825:6373,5534    route   cnt_bus_b metal | west leg of the line, south along x 6364
+6485,5516:6545,6400    route   cnt_bus_b metal and poly | through the nest to the pad (6533,6152), poly south
 6686,4450:6755,4996    power   VCC rail through the crossing field | joins the rail of the gate columns west of the island to the rail of the bit-0 inverters
-7955,5960:8200,6302    logic   latch with a common gate line | tc2_sr_q = NOR(tc2_sr_q_n, tc2_sr_c, tc2_sr_g AND tc2_sr_r); tc2_sr_q_n = NOR(tc2_sr_q, tc2_sr_g AND tc2_sr_s); stack of five gates under and west of the ground rail, two columns and two loads east of it
-7762,6004:7955,6278    route   pads of the latch's lines | tc2_sr_g (rows A and D, joined by an L of metal), tc2_sr_r, tc2_sr_c, tc2_sr_s, tc2_sr_q
-7826,5505:7872,6050    route   tc2_sr_r | metal from the pad (7836,5520) south to row B's pad
-7845,5504:8048,5537    route   reset line of the latch | cdp1_lw1 (tc2_sr_r): poly from the pad (7836,5520) east under the ground rail to the pad (8031,5520)
+7955,5960:8200,6302  logic  latch tc2_sr_q (on ck_out) | tc2_sr_q = NOR(tc2_sr_q_n, tc2_sr_c, ck_out AND cdp1_lw1); tc2_sr_q_n = NOR(tc2_sr_q, ck_out AND tc2_sr_s); stack of five gates under and west of the ground rail, two columns and two loads east of it
+7762,6004:7955,6278    route   pads of the latch's lines | ck_out (rows A and D, joined by an L of metal), cdp1_lw1, tc2_sr_c, tc2_sr_s, tc2_sr_q
+7826,5505:7872,6050    route   cdp1_lw1 | metal from the pad (7836,5520) south to row B's pad
+7845,5504:8048,5537    route   reset line of the latch | cdp1_lw1 (the wire `tc2` called sr_r): poly from the pad (7836,5520) east under the ground rail to the pad (8031,5520)
 8016,5050:8048,5537    route   reset line of the latch | cdp1_lw1: thin metal over the row address units 2-4 (no contact) to the pad (8031,5066)
 8016,5050:8308,5083    route   reset line of the latch | cdp1_lw1: poly row y 5066 from the pad (8031,5066) to the pad (8291,5066)
 8282,4966:8375,5083    route   reset line of the latch | cdp1_lw1: metal from the pad (8291,5066) north and east to the west end of the channel line (8353,4981)
@@ -25,11 +25,11 @@
 8117,5754:8248,5812    power   VCC rail | the turn east to the latch's rail
 8205,5754:8248,5965    power   VCC rail | down to the latch
 6400,6352:8250,6384    route   tc2_sr_c | top line of the channel below (poly y 6367) from its west pad (7490,6367), and the pad's metal going west
-7782,6278:7932,6400    route   tc2_sr_s, tc2_sr_g, tc2_sr_q going south | three metals x 7791, 7837, 7922
+7782,6278:7932,6400    route   tc2_sr_s, ck_out, tc2_sr_q going south | three metals x 7791, 7837, 7922
 7990,5625:8092,6400    power   ground rail | from the row address units' rail to the latch and on south
 8206,5960:8248,6400    power   VCC rail | the latch's two loads end on it
-6396,5557:6508,6170    route   tc2_m6490, tc2_m6447 | two metals of the nest from the west edge to their pads (6490,6108), (6447,6150)
-6443,6160:6501,6400    route   tc2_m6490, tc2_m6447 polys | from the two pads south under the supply metals
+6396,5557:6508,6170    route   ck_a, lc3_w9947 | two metals of the nest from the west edge to their pads (6490,6108), (6447,6150)
+6443,6160:6501,6400    route   ck_a, lc3_w9947 polys | from the two pads south under the supply metals
 6838,4375:6926,4996    power   ground rail east of the crossing field | joins the island's rail to the rail of the bit-0 inverters; no contact on it here
 8198,4445:8212,5690    route   RA latch strobe | ral_stb: thin metal from the bus field to its end pad (8204,5672); one contact (8204,5371)
 8188,5355:8250,5386    route   RA latch strobe | ral_stb: poly from the contact (8204,5371) east
@@ -52,7 +52,7 @@
 7368,6048:7440,6300    route   tc2_r5589 | poly west and south to the pad (7384,6282)
 6825,6264:7402,6300    route   tc2_r5589 | metal west along y 6283 to the pad (6840,6282)
 6833,6282:6853,6400    route   tc2_r5589 | poly south
-8170,4668:8352,4867    route   east end of r9m_l1w | the row y 4676 turns south and east to the pad (8246,4716); metal to the pad (8290,4850); poly east to a box at the datapath's west edge
+8170,4668:8352,4867    route   east end of sl_eq_r5_n | the row y 4676 turns south and east to the pad (8246,4716); metal to the pad (8290,4850); poly east to a box at the datapath's west edge
 6387,6012:6423,6400    route   tc2_m6404 | fourth line of the nest: metal from the west, pad (6404,6107), poly south
 6795,6030:6848,6155    power   VCC | the XOR cells' VCC rail turning east
 6795,6105:7752,6155    power   VCC band | wide metal y 6105-6155; no contact under it here

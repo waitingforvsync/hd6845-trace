@@ -1,34 +1,34 @@
 {
  "who": "richtw1",
- "generated": "2026-11-17T21:44:27+00:00",
+ "generated": "2026-11-25T13:18:17+00:00",
  "price_source": "Claude API list prices per million tokens, as of 2026-11-03",
  "unpriced_models": [
   "<synthetic>"
  ],
- "responses": 6284,
+ "responses": 12497,
  "first": "2026-11-14T17:52:50.853000+00:00",
- "last": "2026-11-17T21:44:06.648000+00:00",
- "total_cost": 1249.66,
- "review_cost": 0.0,
+ "last": "2026-11-25T13:17:01.102000+00:00",
+ "total_cost": 2024.9,
+ "review_cost": 233.24,
  "tokens": {
-  "input": 12738,
-  "output": 9331846,
-  "cache_write_5m": 12696353,
-  "cache_write_1h": 20966348,
-  "cache_read": 2220983592
+  "input": 25350,
+  "output": 15688341,
+  "cache_write_5m": 24959953,
+  "cache_write_1h": 30902328,
+  "cache_read": 3528607284
  },
  "by_model": {
   "claude-fable-5-2": {
-   "cost": 1184.54,
-   "responses": 5867
+   "cost": 1907.41,
+   "responses": 11525
   },
   "<synthetic>": {
    "cost": 0.0,
-   "responses": 15
+   "responses": 19
   },
   "claude-opus-5-5": {
-   "cost": 65.11,
-   "responses": 399
+   "cost": 117.48,
+   "responses": 950
   },
   "claude-haiku-5-5": {
    "cost": 0.01,
@@ -37,183 +37,198 @@
  },
  "by_package": {
   "(coordination)": {
-   "cost": 169.13,
-   "review_cost": 0.0,
-   "responses": 746,
+   "cost": 580.7,
+   "review_cost": 6.53,
+   "responses": 3212,
    "models": {
-    "claude-fable-5-2": 465,
-    "<synthetic>": 15,
-    "claude-opus-5-5": 263,
+    "claude-fable-5-2": 2240,
+    "<synthetic>": 19,
+    "claude-opus-5-5": 950,
     "claude-haiku-5-5": 3
    }
   },
-  "tla": {
-   "cost": 107.59,
-   "review_cost": 0.0,
-   "responses": 547,
+  "busl": {
+   "cost": 325.16,
+   "review_cost": 115.14,
+   "responses": 2798,
    "models": {
-    "claude-fable-5-2": 520,
-    "claude-opus-5-5": 27
+    "claude-fable-5-2": 2798
+   }
+  },
+  "tla": {
+   "cost": 107.82,
+   "review_cost": 0.0,
+   "responses": 450,
+   "models": {
+    "claude-fable-5-2": 450
+   }
+  },
+  "eof": {
+   "cost": 96.67,
+   "review_cost": 40.44,
+   "responses": 646,
+   "models": {
+    "claude-fable-5-2": 646
    }
   },
   "trunks": {
-   "cost": 83.49,
+   "cost": 87.05,
    "review_cost": 0.0,
-   "responses": 849,
+   "responses": 835,
    "models": {
-    "claude-fable-5-2": 849
-   }
-  },
-  "clock": {
-   "cost": 78.01,
-   "review_cost": 0.0,
-   "responses": 273,
-   "models": {
-    "claude-fable-5-2": 273
+    "claude-fable-5-2": 835
    }
   },
   "mra": {
-   "cost": 68.53,
+   "cost": 62.42,
    "review_cost": 0.0,
-   "responses": 622,
+   "responses": 469,
    "models": {
-    "claude-fable-5-2": 622
+    "claude-fable-5-2": 469
+   }
+  },
+  "bl0": {
+   "cost": 62.12,
+   "review_cost": 22.64,
+   "responses": 444,
+   "models": {
+    "claude-fable-5-2": 444
    }
   },
   "cdp2": {
-   "cost": 51.51,
-   "review_cost": 0.0,
-   "responses": 504,
+   "cost": 50.8,
+   "review_cost": 3.96,
+   "responses": 439,
    "models": {
-    "claude-fable-5-2": 504
+    "claude-fable-5-2": 439
    }
   },
   "rdp3": {
-   "cost": 51.23,
+   "cost": 47.42,
    "review_cost": 0.0,
-   "responses": 470,
+   "responses": 352,
    "models": {
-    "claude-fable-5-2": 417,
-    "claude-opus-5-5": 53
+    "claude-fable-5-2": 352
    }
   },
-  "bd1": {
-   "cost": 42.73,
-   "review_cost": 0.0,
-   "responses": 433,
+  "eofw": {
+   "cost": 39.17,
+   "review_cost": 34.7,
+   "responses": 330,
    "models": {
-    "claude-fable-5-2": 418,
-    "claude-opus-5-5": 15
-   }
-  },
-  "larr": {
-   "cost": 42.41,
-   "review_cost": 0.0,
-   "responses": 265,
-   "models": {
-    "claude-fable-5-2": 265
-   }
-  },
-  "bd2": {
-   "cost": 42.34,
-   "review_cost": 0.0,
-   "responses": 353,
-   "models": {
-    "claude-fable-5-2": 325,
-    "claude-opus-5-5": 28
+    "claude-fable-5-2": 330
    }
   },
   "cdp1": {
-   "cost": 38.24,
+   "cost": 37.75,
    "review_cost": 0.0,
-   "responses": 320,
+   "responses": 269,
    "models": {
-    "claude-fable-5-2": 287,
-    "claude-opus-5-5": 33
+    "claude-fable-5-2": 269
    }
   },
-  "cdp3": {
-   "cost": 37.12,
+  "bd2": {
+   "cost": 37.39,
    "review_cost": 0.0,
-   "responses": 254,
+   "responses": 234,
    "models": {
-    "claude-fable-5-2": 254
-   }
-  },
-  "ras": {
-   "cost": 32.01,
-   "review_cost": 0.0,
-   "responses": 235,
-   "models": {
-    "claude-fable-5-2": 225,
-    "claude-opus-5-5": 10
-   }
-  },
-  "areg": {
-   "cost": 31.65,
-   "review_cost": 0.0,
-   "responses": 325,
-   "models": {
-    "claude-fable-5-2": 325
+    "claude-fable-5-2": 234
    }
   },
   "wl": {
-   "cost": 30.0,
+   "cost": 36.23,
    "review_cost": 0.0,
-   "responses": 248,
+   "responses": 228,
    "models": {
-    "claude-fable-5-2": 248
+    "claude-fable-5-2": 228
    }
   },
-  "tc1": {
-   "cost": 29.68,
+  "cdp3": {
+   "cost": 35.15,
    "review_cost": 0.0,
-   "responses": 241,
+   "responses": 249,
    "models": {
-    "claude-fable-5-2": 210,
-    "claude-opus-5-5": 31
+    "claude-fable-5-2": 249
    }
   },
-  "pads": {
-   "cost": 28.04,
+  "bd1": {
+   "cost": 34.19,
    "review_cost": 0.0,
-   "responses": 144,
+   "responses": 239,
    "models": {
-    "claude-fable-5-2": 116,
-    "claude-opus-5-5": 28
+    "claude-fable-5-2": 239
    }
   },
-  "fld": {
-   "cost": 26.4,
+  "ras": {
+   "cost": 31.72,
    "review_cost": 0.0,
-   "responses": 179,
+   "responses": 207,
    "models": {
-    "claude-fable-5-2": 130,
-    "claude-opus-5-5": 49
+    "claude-fable-5-2": 207
    }
   },
-  "bd3": {
-   "cost": 25.17,
+  "larr": {
+   "cost": 31.15,
    "review_cost": 0.0,
-   "responses": 219,
+   "responses": 218,
    "models": {
-    "claude-fable-5-2": 219
+    "claude-fable-5-2": 218
+   }
+  },
+  "areg": {
+   "cost": 30.33,
+   "review_cost": 0.0,
+   "responses": 267,
+   "models": {
+    "claude-fable-5-2": 267
    }
   },
   "ur": {
-   "cost": 22.52,
+   "cost": 28.36,
    "review_cost": 0.0,
-   "responses": 153,
+   "responses": 62,
    "models": {
-    "claude-fable-5-2": 153
+    "claude-fable-5-2": 62
+   }
+  },
+  "tc1": {
+   "cost": 26.96,
+   "review_cost": 0.0,
+   "responses": 190,
+   "models": {
+    "claude-fable-5-2": 190
+   }
+  },
+  "fld": {
+   "cost": 24.78,
+   "review_cost": 0.0,
+   "responses": 112,
+   "models": {
+    "claude-fable-5-2": 112
+   }
+  },
+  "regs": {
+   "cost": 23.84,
+   "review_cost": 9.84,
+   "responses": 222,
+   "models": {
+    "claude-fable-5-2": 222
+   }
+  },
+  "bd3": {
+   "cost": 22.87,
+   "review_cost": 0.0,
+   "responses": 157,
+   "models": {
+    "claude-fable-5-2": 157
    }
   },
   "bc1": {
-   "cost": 18.8,
+   "cost": 18.75,
    "review_cost": 0.0,
-   "responses": 142,
+   "responses": 136,
    "models": {
-    "claude-fable-5-2": 142
+    "claude-fable-5-2": 136
    }
   },
   "dbus": {
@@ -225,301 +240,195 @@
    }
   },
   "wrs": {
-   "cost": 16.83,
+   "cost": 15.47,
    "review_cost": 0.0,
-   "responses": 126,
+   "responses": 89,
    "models": {
-    "claude-fable-5-2": 111,
-    "claude-opus-5-5": 15
-   }
-  },
-  "tcw": {
-   "cost": 14.53,
-   "review_cost": 0.0,
-   "responses": 98,
-   "models": {
-    "claude-fable-5-2": 70,
-    "claude-opus-5-5": 28
-   }
-  },
-  "zz_joins": {
-   "cost": 13.04,
-   "review_cost": 0.0,
-   "responses": 170,
-   "models": {
-    "claude-fable-5-2": 160,
-    "claude-opus-5-5": 10
-   }
-  },
-  "bw": {
-   "cost": 12.98,
-   "review_cost": 0.0,
-   "responses": 203,
-   "models": {
-    "claude-fable-5-2": 203
+    "claude-fable-5-2": 89
    }
   },
   "rdp2": {
-   "cost": 11.85,
+   "cost": 14.38,
    "review_cost": 0.0,
-   "responses": 192,
+   "responses": 76,
    "models": {
-    "claude-fable-5-2": 167,
-    "claude-opus-5-5": 25
-   }
-  },
-  "inrow": {
-   "cost": 11.02,
-   "review_cost": 0.0,
-   "responses": 117,
-   "models": {
-    "claude-fable-5-2": 117
-   }
-  },
-  "pilot": {
-   "cost": 9.08,
-   "review_cost": 0.0,
-   "responses": 47,
-   "models": {
-    "claude-fable-5-2": 47
-   }
-  },
-  "shm": {
-   "cost": 8.25,
-   "review_cost": 0.0,
-   "responses": 88,
-   "models": {
-    "claude-fable-5-2": 50,
-    "claude-opus-5-5": 38
-   }
-  },
-  "decode": {
-   "cost": 8.08,
-   "review_cost": 0.0,
-   "responses": 72,
-   "models": {
-    "claude-fable-5-2": 72
-   }
-  },
-  "pads_out": {
-   "cost": 7.51,
-   "review_cost": 0.0,
-   "responses": 39,
-   "models": {
-    "claude-fable-5-2": 39
-   }
-  },
-  "sel": {
-   "cost": 7.29,
-   "review_cost": 0.0,
-   "responses": 95,
-   "models": {
-    "claude-fable-5-2": 95
-   }
-  },
-  "urch": {
-   "cost": 6.4,
-   "review_cost": 0.0,
-   "responses": 117,
-   "models": {
-    "claude-fable-5-2": 117
-   }
-  },
-  "cdp4": {
-   "cost": 6.04,
-   "review_cost": 0.0,
-   "responses": 45,
-   "models": {
-    "claude-fable-5-2": 45
-   }
-  },
-  "r9c": {
-   "cost": 6.0,
-   "review_cost": 0.0,
-   "responses": 80,
-   "models": {
-    "claude-fable-5-2": 39,
-    "claude-opus-5-5": 41
-   }
-  },
-  "r9m": {
-   "cost": 5.13,
-   "review_cost": 0.0,
-   "responses": 60,
-   "models": {
-    "claude-fable-5-2": 37,
-    "claude-opus-5-5": 23
-   }
-  },
-  "mrach": {
-   "cost": 5.0,
-   "review_cost": 0.0,
-   "responses": 139,
-   "models": {
-    "claude-fable-5-2": 124,
-    "claude-opus-5-5": 15
-   }
-  },
-  "pads_in_top": {
-   "cost": 4.37,
-   "review_cost": 0.0,
-   "responses": 19,
-   "models": {
-    "claude-fable-5-2": 19
-   }
-  },
-  "rdp1": {
-   "cost": 3.8,
-   "review_cost": 0.0,
-   "responses": 116,
-   "models": {
-    "claude-fable-5-2": 91,
-    "claude-opus-5-5": 25
+    "claude-fable-5-2": 76
    }
   },
   "slbus": {
-   "cost": 3.57,
+   "cost": 13.98,
    "review_cost": 0.0,
-   "responses": 91,
+   "responses": 62,
    "models": {
-    "claude-fable-5-2": 91
+    "claude-fable-5-2": 62
    }
   },
-  "ral": {
-   "cost": 2.59,
+  "rdp1": {
+   "cost": 13.7,
+   "review_cost": 0.0,
+   "responses": 61,
+   "models": {
+    "claude-fable-5-2": 61
+   }
+  },
+  "zz_joins": {
+   "cost": 11.87,
+   "review_cost": 0.0,
+   "responses": 116,
+   "models": {
+    "claude-fable-5-2": 116
+   }
+  },
+  "bw": {
+   "cost": 11.5,
+   "review_cost": 0.0,
+   "responses": 130,
+   "models": {
+    "claude-fable-5-2": 130
+   }
+  },
+  "tcw": {
+   "cost": 9.38,
+   "review_cost": 0.0,
+   "responses": 33,
+   "models": {
+    "claude-fable-5-2": 33
+   }
+  },
+  "shm": {
+   "cost": 7.36,
+   "review_cost": 0.0,
+   "responses": 32,
+   "models": {
+    "claude-fable-5-2": 32
+   }
+  },
+  "cdp4": {
+   "cost": 6.08,
    "review_cost": 0.0,
    "responses": 48,
    "models": {
-    "claude-fable-5-2": 29,
-    "claude-opus-5-5": 19
+    "claude-fable-5-2": 48
    }
   },
-  "inprot": {
-   "cost": 2.07,
+  "sel": {
+   "cost": 5.85,
    "review_cost": 0.0,
-   "responses": 15,
+   "responses": 50,
    "models": {
-    "claude-fable-5-2": 15
+    "claude-fable-5-2": 50
    }
   },
-  "dpad": {
-   "cost": 2.07,
+  "r9c": {
+   "cost": 5.03,
    "review_cost": 0.0,
-   "responses": 75,
+   "responses": 21,
    "models": {
-    "claude-opus-5-5": 75
+    "claude-fable-5-2": 21
+   }
+  },
+  "clock": {
+   "cost": 3.51,
+   "review_cost": 0.0,
+   "responses": 54,
+   "models": {
+    "claude-fable-5-2": 54
+   }
+  },
+  "pads_in_top": {
+   "cost": 3.36,
+   "review_cost": 0.0,
+   "responses": 6,
+   "models": {
+    "claude-fable-5-2": 6
+   }
+  },
+  "urch": {
+   "cost": 2.83,
+   "review_cost": 0.0,
+   "responses": 26,
+   "models": {
+    "claude-fable-5-2": 26
    }
   },
   "rab": {
-   "cost": 1.97,
+   "cost": 1.77,
    "review_cost": 0.0,
-   "responses": 43,
+   "responses": 25,
    "models": {
-    "claude-fable-5-2": 43
-   }
-  },
-  "bust": {
-   "cost": 1.62,
-   "review_cost": 0.0,
-   "responses": 85,
-   "models": {
-    "claude-opus-5-5": 85
+    "claude-fable-5-2": 25
    }
   },
   "rax": {
-   "cost": 1.46,
+   "cost": 1.27,
    "review_cost": 0.0,
-   "responses": 23,
+   "responses": 5,
    "models": {
-    "claude-fable-5-2": 23
+    "claude-fable-5-2": 5
    }
   },
-  "mal": {
-   "cost": 0.78,
+  "decode": {
+   "cost": 0.85,
    "review_cost": 0.0,
-   "responses": 47,
+   "responses": 6,
    "models": {
-    "claude-opus-5-5": 47
+    "claude-fable-5-2": 6
    }
   },
-  "dbl": {
-   "cost": 0.7,
+  "mrach": {
+   "cost": 0.42,
    "review_cost": 0.0,
-   "responses": 38,
+   "responses": 7,
    "models": {
-    "claude-opus-5-5": 38
+    "claude-fable-5-2": 7
    }
   },
-  "amr": {
-   "cost": 0.47,
+  "lc1": {
+   "cost": 0.13,
    "review_cost": 0.0,
-   "responses": 52,
+   "responses": 6,
    "models": {
-    "claude-opus-5-5": 52
+    "claude-fable-5-2": 6
    }
   },
-  "ucz": {
-   "cost": 0.4,
+  "lc3": {
+   "cost": 0.1,
    "review_cost": 0.0,
-   "responses": 44,
+   "responses": 6,
    "models": {
-    "claude-opus-5-5": 44
+    "claude-fable-5-2": 6
    }
   },
-  "hcj": {
-   "cost": 0.31,
+  "tl4": {
+   "cost": 0.08,
    "review_cost": 0.0,
-   "responses": 34,
+   "responses": 2,
    "models": {
-    "claude-opus-5-5": 34
+    "claude-fable-5-2": 2
    }
   },
-  "r3d": {
-   "cost": 0.27,
+  "tc2": {
+   "cost": 0.05,
    "review_cost": 0.0,
-   "responses": 29,
+   "responses": 3,
    "models": {
-    "claude-opus-5-5": 29
+    "claude-fable-5-2": 3
    }
   },
-  "rad": {
-   "cost": 0.18,
+  "tl6": {
+   "cost": 0.05,
    "review_cost": 0.0,
-   "responses": 19,
+   "responses": 3,
    "models": {
-    "claude-opus-5-5": 19
+    "claude-fable-5-2": 3
    }
   },
-  "wrj": {
-   "cost": 0.18,
+  "tl5": {
+   "cost": 0.05,
    "review_cost": 0.0,
-   "responses": 19,
+   "responses": 3,
    "models": {
-    "claude-opus-5-5": 19
-   }
-  },
-  "rde": {
-   "cost": 0.09,
-   "review_cost": 0.0,
-   "responses": 10,
-   "models": {
-    "claude-opus-5-5": 10
-   }
-  },
-  "amrw": {
-   "cost": 0.06,
-   "review_cost": 0.0,
-   "responses": 8,
-   "models": {
-    "claude-opus-5-5": 8
-   }
-  },
-  "tl1": {
-   "cost": 0.06,
-   "review_cost": 0.0,
-   "responses": 8,
-   "models": {
-    "claude-opus-5-5": 8
+    "claude-fable-5-2": 3
    }
   }
  },
@@ -527,6 +436,12 @@
   "2026-11-14": 452.3,
   "2026-11-15": 386.92,
   "2026-11-16": 345.31,
-  "2026-11-17": 65.12
+  "2026-11-17": 67.63,
+  "2026-11-18": 11.2,
+  "2026-11-19": 271.75,
+  "2026-11-20": 276.14,
+  "2026-11-21": 84.44,
+  "2026-11-24": 107.87,
+  "2026-11-25": 21.32
  }
 }

@@ -1,0 +1,46 @@
+# bc2: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+# East column latch units a and b only (the rest of bc2 is not traced). Each is where the drawn wire ends.
+bc2_w14912    M  10385,14912   in   data of latch unit a: the metal at the pad goes west (not followed)
+bc2_w14955    M  10441,14940   in   enable of latch unit a: metal x 10441 goes on north of a's upper pad (not followed)
+bc2_w14955    M  10398,15440   in   enable of latch unit a: the same metal jogs west at y 15392 to x 10398 and runs on south (not followed)
+rst_a    M  10395,15110   in   clear of latch unit a: metal x 10395 going south from the pad: eof's piece isrc joins it to trunks' line
+bc2_w15000    M  10385,15000   out  output of latch unit a: a metal from the north-west ends on the pad (not followed)
+bc2_w15388    M  10353,15440   in   data of latch unit b: metal x 10353 from the pad (10352,15388) south (not followed)
+bc2_w15432    M  10441,15665   in   enable of latch unit b: metal x 10441 from b's two enable pads on south (not followed)
+bc2_w15565    M  10226,15515   in   clear of latch unit b: metal x 10226 from the pad (10226,15565) north (not followed)
+bc2_w15607    M  10267,15515   out  latch unit b's lower node (a's bc2_w15029 side): metal x 10267 from the pad (10267,15607) north (not followed)
+# run 2 (2026-11-27), piece inv: the three inverters on the centre block's east rail
+bc2_p14823    P  9872,14823    in   input of the inverter bc2_e14955: poly row from the west, under the E rail
+# bc2_e14955: no port any more (run 4, piece w2): its output row ends west on the pad (9314,14870), whose thin metal goes south to the second unit of the W rail
+# run 2, piece nand: the three NANDs below them (the four metals above end inside this piece)
+bc2_e15343    M  9551,16370    out  NAND(bc2_e15215, bc2_e15085) (R8 bits 7,6 = 0,0): by the row y 14785 and the thin metal x 9552 south through the package without a contact (four ?M over boxes), out at its south edge (follower: to y 17568, west to x 9358, north to y 17428)
+bc2_e15517    M  9142,16370    out  NAND(r8_b6_q, bc2_e15085) (R8 bits 7,6 = 0,1): by the row y 14740, the thin metal x 9399, the pad (9357,15824), the row y 15870 west and the pad (9184,15869) to a thin metal x 9142 south out of the package (follower: to y 17174)
+bc2_e15690    M  10138,16300   out  NAND(bc2_e15215, r8_b7_q) (R8 bits 7,6 = 1,0): its thin metal south on x 10050, east along y 16128, south on x 10138 out of the package (follower: to y 16569, east to x 10182, south to y 17173)
+# run 3, piece bus2: the two bus lines that feed the decode, joined to busl's rows
+tl6_p6101     P  7550,14393    in   busl's row (its port at the same place): on east as bus line y 14394 to the pad (9768,14393) and the thin metal x 10052
+tl6_p6143     P  7550,14437    in   busl's row (its port at the same place): on east as bus line y 14437 to the pad (9722,14438) and the thin metal x 10007 / x 9963
+# run 3, piece inv7
+bc2_m15867    M  10007,15960   in   input of the inverter bc2_e15864: thin metal south from its pad (10007,15867) (seen to about y 16190, then east)
+bc2_e15864    P  9963,16062    out  the inverter's output: the pad at the south end of its thin metal; the pad's poly is not drawn
+# run 4, pieces bus3 and w1
+lc2_w9079     P  7550,14611    in   bus line y 14611: busl's poly row (its port at the same place), by three pads and the leg x 9184 to the upper gate row of the W rail's first unit
+lc3_e9756     P  7550,14654    in   bus line y 14655: busl's poly row (its port at the same place), by three pads and the leg x 9141 to the pad (9140,14826) (bc2_e14955's input row) and the unit's lower gate row
+vss           M  9463-9513,14860  -  the W rail, on north (not followed to a ground rail)
+# run 4, piece w2
+lc2_w9125     P  7550,14567    in   bus line y 14568: busl's poly row (its port lc3_e9798 at the same place), by three pads and the leg x 9226 to the upper gate row of the W rail's second unit
+# run 5, pieces w3 and bus4 (bc2_w15042 and bc2_w15216 have no port any more: both end on gates of bc2_w15739)
+bc2_w15739    M  9356,15975    out  the six-input NOR: its metal through the pad (9356,15955) (gate A of bc2_w16035) and on south past y 16150
+vss           M  9463-9513,16335  -    the W rail, on south
+bc2_p15520    P  9160,15520    in   gate 1 of bc2_w15739: poly row from the west
+bc2_p15781    P  9160,15781    in   gate 5 of bc2_w15739: poly row from the west, lengthwise under bc2_w15042's metal
+tc2_r5718     P  7550,14524    in   bus line y 14524: busl's poly row (its port at the same place), to gate 3 of bc2_w15739
+busl_x7122    P  7550,14480    in   bus line y 14481: busl's poly row (its port at the same place), to gate 2 of bc2_w15739
+# run 7, piece w5
+bc2_m15997    M  9312,16250    in   thin metal x 9312 from the south (follower: from (9552,17868)): gate D of the gate bc2_p16067 at its pad (9313,16215), gate B of bc2_w16035 at its north end
+bc2_w16035    P  9345,16345    out  second exit: the poly row y 16336-16354 east from the pad (9270,16345)
+# run 8, piece w6
+# run 9, piece w7 (bc2_w15915 has no port any more: its thin metal ends on gate E's pad)
+# run 9 after review round 14 (bc2_p16067 has no port any more: its gate is drawn; bc2_w16035's pad at (9597,16197) feeds the gate's row)
+bc2_m16130    M  9228,16100    in   thin metal x 9228 through the pad (9227,16130) (gate of a pull-down of bc2_p16067); north of here it turns west at y 15826 (from bc1's side)
+bc2_m16130    M  9228,16160    ?    the same metal, on south (follower: to y 17694, then east)
+vcc           M  9642-9698,16160  -  the M rail, on south

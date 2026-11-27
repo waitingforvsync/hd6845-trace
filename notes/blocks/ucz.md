@@ -83,7 +83,7 @@ confirmed, and no two lines are swapped. The identity `rcK` rests on `mrach`'s a
 
 - cnt_bus_a, cnt_bus_b east of x 13425 (both go north through the nest; seen, above).
 - The bars of L0/L2 at
-  y 9663 and of L2/L7 at y 9920; L7's lower piece (`rdp3_n7s9`) north of y 10700.
+  y 9663 and of L2/L7 at y 9920; L7's lower piece (`rc_eq_r4`) north of y 10700.
 - Renaming `uc_b#` to `rc#` (`tools/rename.py`): the joins are firm, aliases are used for
   now; `rdp2`'s notes still say "believed" (corrections listed below).
 
@@ -97,3 +97,8 @@ confirmed, and no two lines are swapped. The identity `rcK` rests on `mrach`'s a
   9101 (b1), 9360 (b2), 9273 (b3), 9230 (b4), 9187 (b5), 9143 (b6).
 - `rdp2.md`: the metal on x 13890 ("T2 track position, metal y 9398-9629") starts at the
   foot of `rc1`'s pad (13932,9231), not at y 9398.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- Not done, "the bars of L0/L2 at y 9663 and of L2/L7 at y 9920": drawn by `eof` (piece `r4`); the bar
+  is at y 9916-9934, the contacts at (13433,9665), (13432,9925), (13650,9925).

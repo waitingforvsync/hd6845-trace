@@ -251,24 +251,24 @@ N M 7882,15700 bc1_ld_in2
 # Routing field: the six data lines of cdp4 row D.  Six horizontal poly lines (pitch 43)
 # run from the left edge of the block under the vertical metal bundles; each has a
 # contact to a vertical metal that arrives from above (staircase x 7180-7400).  Line 1
-# ends on the foot of track cdp4_in6_s1, line 2 steps up at x 8112-8122 and goes on
-# under the VCC rail to the foot of cdp4_in6_s2.  Lines 3-6 step up the same way
+# ends on the foot of track cdp3_g_c2, line 2 steps up at x 8112-8122 and goes on
+# under the VCC rail to the foot of cdp3_g_c3.  Lines 3-6 step up the same way
 # (nested) and continue right beyond x 8500: drawn only as far as they were followed.
 # ======================================================================================
 P 7000,14089 x8087 w=18                   # line 1
 C 8075,14084
-M 8073,14045 y14094 w=20                  # foot of cdp4_in6_s1
+M 8073,14045 y14094 w=20                  # foot of cdp3_g_c2
 P 7000,14132 x8118 y14087 x8475 w=18      # line 2
 C 8463,14083
-M 8465,14045 y14094 w=20                  # foot of cdp4_in6_s2
+M 8465,14045 y14094 w=20                  # foot of cdp3_g_c3
 P 7000,14175 x8040 w=18                   # line 3 (continues right: staircase, then beyond x 8500)
 P 7000,14218 x8040 w=18                   # line 4
 P 7000,14261 x8040 w=18                   # line 5
 P 7000,14304 x8040 w=18                   # line 6
-N P 8030,14175 bc1_d3
-N P 8030,14218 bc1_d4
-N P 8030,14261 bc1_d5
-N P 8030,14304 bc1_d6
+N P 8030,14175 cdp3_g_c4
+N P 8030,14218 cdp3_g_c5
+N P 8030,14261 cdp3_g_c6
+N P 8030,14304 cdp3_g_c7
 # verticals from above ending on the lines
 C 7188,14091 7230,14131 7274,14172 7317,14217 7361,14260 7405,14304
 M 7189,14040 y14102
@@ -277,3 +277,20 @@ M 7274,14040 y14184
 M 7317,14040 y14229
 M 7360,14040 y14272
 M 7404,14040 y14316
+
+# ================================================================ run of 2026-11-27, piece s01w: the decode's two inputs at their west ends
+# The bus lines y 14832 (bc1_s0) and y 14875 (bc1_s1) run on west of where they were drawn (x 8040) as plain metals
+# over field to a pad each, and each pad is the east end of a poly row that busl draws to x 7550: bc1_s0 is the net
+# busl calls tc2_m6404 (its port (7550,14827)), bc1_s1 is tl6_p6187 (its port (7550,14870)). Rows salmon and unbroken
+# in the clean shot under the vertical metals x 7575-7760 (no hole; a dark speck at (7654,14872) with bright metal in
+# both chips and no ring); pads with hole and ring; tools/eof_tee.py: no branch.
+P 7545,14818:7795,14836                # s0's poly row, from busl's end
+P 7778,14811:7812,14845                # pad
+C 7795,14828 s=20x20
+M 7795,14828 x8045 w=20
+P 7545,14862:7838,14880                # s1's poly row, from busl's end
+P 7821,14854:7855,14888                # pad
+C 7838,14871 s=20x20
+M 7838,14872 x8045 w=20
+@alias bc1_s0 tc2_m6404
+@alias bc1_s1 tl6_p6187

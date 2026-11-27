@@ -7,8 +7,15 @@ Use it the moment a signal is identified (rule 2 of notes/signals.md). Each OLD 
 by NEW as a whole word in trace/*.txt (labels, aliases and comments; cell, block and file
 names are left alone), notes/**/*.md, PLAN.md, CLAUDE.md, floorplan.txt, floorplan.d/*.txt and
 ports.d/*.txt,
-and a line "| OLD | NEW | |" is added to "Former names" in notes/signals.md. An @alias line
-that would then alias a name to itself is dropped.
+and a line "| OLD | NEW | |" is added to "Former names" in notes/signals.md (once: a pair
+already there is not added again). An @alias line that would then alias a name to itself is
+dropped.
+
+Records of renames are left as written, so that the command can be run again in a branch
+after merging main (the catch-up the journal asks for) without rewriting main's own records:
+in the documents, a line that says "old name" or "former name", and in notes/journal.md a line
+with "->" (a rename record or a catch-up command). These are the lines `signals.py --docs`
+passes over.
 
 It does not rename names that a cell builds from a template and a tag (`{}`): change the
 template or the tag in the trace file for those, then run this for the notes with the
@@ -53,18 +60,34 @@ def main():
             total += k
             if not dry:
                 open(path, 'w').write(''.join(out))
+    def keep(path, line):
+        """A record of a rename: the old name stands there on purpose (as signals.py --docs)."""
+        return ('old name' in line or 'former name' in line.lower()
+                or (path == 'notes/journal.md' and '->' in line))
+
+    def sub_doc(path, text):
+        out, k = [], 0
+        for line in text.split('\n'):
+            if not keep(path, line):
+                line, k1 = rx.subn(lambda q: m[q.group(1)], line)
+                k += k1
+            out.append(line)
+        return '\n'.join(out), k
+
     docs = (glob.glob('notes/*.md') + glob.glob('notes/blocks/*.md') + ['PLAN.md', 'CLAUDE.md', 'floorplan.txt']
             + glob.glob('floorplan.d/*.txt') + glob.glob('ports.d/*.txt'))
     for path in sorted(docs):
         s = open(path).read()
         if path == 'notes/signals.md':
             head, sep, tail = s.partition('## Former names')
-            head, k = rx.subn(lambda q: m[q.group(1)], head)
-            tail = tail.rstrip('\n') + '\n' + ''.join('| %s | %s | |\n' % kv for kv in m.items())
+            head, k = sub_doc(path, head)
+            have = set(tuple(c.strip() for c in l.split('|')[1:3]) for l in tail.split('\n') if l.startswith('|'))
+            new = [kv for kv in m.items() if kv not in have]
+            tail = tail.rstrip('\n') + '\n' + ''.join('| %s | %s | |\n' % kv for kv in new)
             s2 = head + sep + tail
-            k += len(m)
+            k += len(new)
         else:
-            s2, k = rx.subn(lambda q: m[q.group(1)], s)
+            s2, k = sub_doc(path, s)
         if k:
             print('%4d  %s' % (k, path))
             total += k

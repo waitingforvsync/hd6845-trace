@@ -57,8 +57,8 @@ C 10356,18926
 P 10350,18940 y18540 w=40           # wide poly, 10330-10370, under the VCC band and the S line
 C 10355,18555
 M 10356,18568 y18473 w=18
-M 10311,17908 y18473 x10442 y18342 x10398 y17689 x10441 y16880 w=18   # ring; right-hand vertical goes on up (ck_out #2)
-M 10320,17908 x10230 w=16           # ck_out #1 turns left along y 17900-17915 (followed to x 10230 only)
+M 10311,17908 y18473 x10442 y18342 x10398 y17689 x10441 y17238 w=18   # ring; the right-hand vertical (ck_out #2) ends on a pad (10439,17238) of a poly row (eof run 55: it was drawn on north to y 16880, across 40 px of open poly row y 17186-17225 where neither metal shot has a metal; the track x 10441 north of there is another metal, from a pad (10441,17168))
+M 10320,17908 x10230 w=16           # ck_out #1 turns left along y 17900-17915; west of x 10230 it is drawn by eof (piece in350)
 C 10358,18470 s=22x22
 P 10345,18470 x10600 w=24           # poly right, to a device at 10600-10710 x 18390-18525 (not traced)
 # (B)
@@ -94,10 +94,10 @@ M 13120,18471 x13066 y16952 x13025 y12921 w=21   # the rail up the right edge of
 N M 13066,17500 ck_a
 
 # ====================================================================
-# S: output of input-row gate 0 (inrow's inh_ck). Metal down and left, poly under the
+# S: output of input-row gate 0 (inrow's rst_ck). Metal down and left, poly under the
 # diagonal supply metals, up at x 13200, left in poly under the vertical metals, then
 # bus line L4 to the left. At its left end a poly T joins it to bus line L6's left
-# piece (the clock trace's inh_ck: gate g5's input) and to the contact at (10810,18470)
+# piece (the clock trace's rst_ck: gate g5's input) and to the contact at (10810,18470)
 # from which the run to the left of the die starts (clock.md; not yet re-followed).
 M 13849,18590 y18775 x13508 w=18
 C 13522,18774
@@ -106,7 +106,14 @@ C 12849,18384
 M 12862,18385 x10845 w=18           # bus line L4
 C 10857,18383
 P 10857,18370 y18470 w=18           # stem down, under L5
-P 10796,18470 x10914 w=24           # link
+# eof run 71 (2026-11-25): the link ends at the stem's foot. Between the foot's east edge (x 10862-10868, an
+# edge line at every row y 18448-18478) and the ring of the east pad (10895,18468) lie 10 px of open field
+# (x 10870-10878: plain in both metal shots, green in the clean shot at y 18444-18476; tools/px.py row 18468
+# 10796 10922 3 all, col 10873 18440 18500 4 all). The east pad is the foot of a poly column from the north
+# (x 10890-10906, eof's piece o734: the net eof_w17734), so bus line L6's left piece and gate g5 of the clock
+# block are on that net, not on rst_ck. Drawn at 1x as one link x 10796-10914 until then.
+P 10796,18470 x10866 w=24           # link: the west pad and the stem's foot
+P 10882,18456:10914,18484           # the east pad's poly (the foot of eof's column; not on the link)
 C 10810,18470 10900,18470
 M 10888,18470 x11610 w=20           # bus line L6, left piece, to the clock trace's piece
 # start of the run to the left: metal down, poly under the wide metal x 10722-10772,
@@ -267,7 +274,7 @@ C 11240,17475
 P 11222,17460:11262,17492
 P 11250,17476 11062,17476 10940,17598 w=18
 N M 12400,17648 h_eq_r1
-# inh_lat likewise: x 13435 turns south-west at y 16770, runs down x 13300 to a contact
+# rst_lat likewise: x 13435 turns south-west at y 16770, runs down x 13300 to a contact
 # (13303,17688); poly west along y 17691 to a contact (12850,17691); metal west to x 11810,
 # north to y 17514, west to a contact (11288,17517); poly west and south-west. Not followed.
 M 13435,16750 13435,16761 13305,16891 13303,17702 w=13
@@ -279,7 +286,7 @@ M 12862,17692 x11810 y17514 x11274 w=13
 C 11288,17517
 P 11270,17502:11308,17534
 P 11298,17518 11102,17518 10980,17640 w=18
-N M 12400,17692 inh_lat
+N M 12400,17692 rst_lat
 
 # ====================================================================
 # ck_out, the left-edge trunk above y 18300: tools/follow.py from (2500,7960) south follows one
@@ -292,7 +299,7 @@ N M 12400,17692 inh_lat
 M 2504,18310 2500,7990 w=18
 
 # ====================================================================
-# inh_src, followed from where trace/bd1.txt leaves it (13480,17150), 2026-11-16. It is a line of
+# rst_a, followed from where trace/bd1.txt leaves it (13480,17150), 2026-11-16. It is a line of
 # the bottom bus field, not something made near the strobe channel. Notes: notes/blocks/trunks.md.
 # Poly south under the horizontal metals to y 17650, south-west on a diagonal, west along y 17815
 # under the vertical trunks to a pad (12805,17815).
@@ -300,7 +307,7 @@ P 13480,17150 13480,17662 13328,17815 12805,17815 w=18
 P 12788,17798:12824,17832
 C 12805,17815
 # Metal west along y 17822; the middle one of three nested Z bends at x 11640-11725 (the same
-# braid that h_eq_r1 and inh_lat pass, the four poly diagonals from the south-west under it);
+# braid that h_eq_r1 and rst_lat pass, the four poly diagonals from the south-west under it);
 # west along y 17650 to a pad (11245,17650).
 M 12818,17822 x11682 y17650 x11232 w=13
 C 11245,17650
@@ -333,6 +340,6 @@ P 10293,16933:10327,16967
 P 10470,16950 10225,16950 10225,16820 w=18
 P 10208,16803:10242,16837
 C 10225,16820
-M 10225,16830 10225,15886 w=13
-N M 12400,17822 inh_src
-N M 10225,16400 inh_src
+M 10225,16830 10225,15905 w=13          # ends on the ring of the pad (10226,15912), eof's (was drawn to y 15886, over the open poly of the hop: eof's review round 5)
+N M 12400,17822 rst_a
+N M 10225,16400 rst_a

@@ -275,7 +275,7 @@ end up as that side left it. If main renamed a net that your files still use, ru
 merge resolution (`git commit` to conclude the merge is fine here).
 
 ```
-python3 tools/costs.py
+.venv/bin/python tools/costs.py
 tools/ship.sh "Cost report" costs/*.json
 .venv/bin/python tools/mergecheck.py PREFIX
 ```
@@ -288,6 +288,23 @@ and the gate fails if anything else did the package's work. Fix and re-run until
 ```
 git push origin HEAD:main
 ```
+
+**Run the gate and the push as two separate commands, and read the gate's result between them.**
+The gate takes a few minutes (give the command a long timeout) and exits non-zero on failure, but a
+pipe hides that: `mergecheck.py PREFIX | tail -3 && git push origin HEAD:main` pushes even when the
+gate prints FAIL, because `&&` tests `tail`. Run it unpiped, or to a file that you then read:
+
+```
+.venv/bin/python tools/mergecheck.py PREFIX > cache/scratch/PREFIX/gate.txt 2>&1
+tail -1 cache/scratch/PREFIX/gate.txt; grep '^FAIL' cache/scratch/PREFIX/gate.txt
+```
+
+Push only when the last line is `PASS` and no line begins `FAIL`. If the gate was moved to the
+background by a time limit, it has not passed until you have read its `PASS`. Never chain a step
+that cannot be taken back (this push, `tools/claim.py done`, removing the worktree) with `&&` or `;`
+after a piped command or after a step whose outcome you have not read. A failing gate is not pushed
+to be fixed afterwards; if a failing commit reaches main all the same, fix it at once with a further
+commit, pass the gate, push, and report it in the handoff (step 8).
 
 If the push is rejected, main has moved: go back to the top of this step. **Never** use
 `--force` or `--force-with-lease` on any push, and never push to main other than this way
@@ -330,7 +347,9 @@ A kept claim with no commits for 24 hours shows as stale on the dashboard: relea
 ## 9. Finish
 
 If you released the claim, remove the worktree's links and the worktree (`rm cache .venv` inside
-it, then `git worktree remove <dir>` from the main checkout); the branch stays on the remote.
+it, then `git worktree remove <dir>` from the main checkout); the branch stays on the remote. Do
+this as a command of its own, after you have seen that the push and `tools/claim.py done` went
+through: not chained behind them.
 If you kept it (`--continue`), keep the worktree for the next round. This is the point to
 compact the session or start a fresh one before the next piece.
 Report to the user in under 300 words: the package, what was traced, the review rounds

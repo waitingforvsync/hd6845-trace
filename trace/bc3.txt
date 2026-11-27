@@ -1,0 +1,44 @@
+# bc3: bottom-centre random logic (x 7000-9000, y 16300-18550). Traced on claude-opus.
+# Piece 1: an inverter at x 7475-7775, y 17575-17705: a copy of tl5_inv (findcell on the
+# clean shot, score 0.85 at 7644,17645; offset 2562,12797, no mirror). Overlay i1.png (3x,
+# metal + clean); west end w5.png (5x, metal, clean, chip-2 stripped).
+#   bc3_w17605 = NOT ck_out
+@requires tl5
+@inst tl5_inv 2562,12797 tag=i1
+# By hand (the cell does not carry them): the load's VCC box under the rail x 7463-7520
+# (box 7475-7520 x 17575-17665, contact (7490,17620): dot in the clean shot, ring in metal).
+D 7475,17575:7520,17665
+C 7490,17620
+M 7491,17560 y17700 w=56                 # rail piece
+N M 7491,17690 vcc
+# The rail x 7470-7520 is bc1's RL2 (VCC, drawn to y 16300) carried on: continuous metal in both
+# metal shots, y 16270-17580 (r1.png, r2.png, r3.png, 2.1-2.4x; contacts only inside it).
+M 7495,16290 y17560 w=50
+# The pull-down's box contacts the rail x 7641-7691 (contact (7676,17681), cell item).
+M 7666,17560 y17705 w=50                 # rail piece
+N M 7666,17570 vss
+# The rail x 7641-7691 is bc1's RL3 (VSS, drawn to y 16300) carried on: continuous metal in both
+# metal shots, y 16270-17580 (same views).
+M 7666,16290 y17560 w=50
+# Ends (x5.png, 5x metal, clean and chip-2 stripped shots): the output poly ends east in a pad
+# 7775-7820 x 17588-17625 with a contact (7795,17605) under metal; the gate row runs on east to a
+# pad 7820-7860 x 17632-17665 with a contact (7840,17648) under metal. Only the metal over each
+# contact is drawn: follow.py takes the output's metal north along x 7795 (to y 17328 at least)
+# and the input's along x 7839 (north to y 16588, south to y 17694): neither followed or drawn.
+P 7775,17590:7820,17625
+C 7795,17605
+M 7783,17593:7807,17617
+P 7775,17637:7822,17655
+P 7820,17633:7860,17663
+C 7840,17648
+M 7828,17636:7852,17660
+# The two metals, read on v1.png, v2.png (2x, metal and chip-1 metal) and a metal profile in both
+# shots (no stretch without metal over 19 px; the dark bands at y 17284-17410 are poly rows
+# printing through and a contact ring at (7795,17335)). Drawn only as far as seen continuous:
+# the output's x 7783-7806 north to y 17150 (it goes on north to a box near (7795,17130));
+# the input's x 7828-7850 north to y 16640 (it goes on to pads near (7835,16590)) and it also
+# continues south of y 17660. Contacts along them are not drawn (the ring at (7795,17335)).
+M 7795,17150 y17617 w=22
+M 7839,16640 y17660 w=22
+N P 7760,17605 bc3_w17605
+N P 7760,17646 ck_out

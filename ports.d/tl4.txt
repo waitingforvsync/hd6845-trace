@@ -2,4 +2,62 @@
 # The package's region is x 4250-4967, y 2500-6350. 
 
 # West side (x 4250)
-tl4_w4501   P  4250,4492-4512  in   row from the west across the bus field; gate 2 of the three-input NOR tl4_w4545
+sl_eq_r5_n   M  4250,2506-2518  ?    bus line 1 (y 2512), on west
+tl5_w4937   P  4250,2632-2650  out  the row of the pad (4279,2640), the west end of bus line 4, on west
+tl5_w2722   M  4250,2679-2691  out  bus line 5 (y 2685); it starts on a pad (4236,2683) in tl3's strip
+ck_out   P  4250,2801-2820  ?    the row of the pad (4366,2812), the north end of the track x 4366, on west
+ck_out   P  4250,3018-3038  out  the row of the pad (4366,3030) on the track x 4366: tl3's ck_out, the gate of its inverter E1
+tl3_e4243   M  4250,4236-4256  in   tl3's e3 output on the track x 4318 (alias tl3_e4243): the second latch's data and gate 1 of the top NOR
+tl3_w4546   P  4250,4364-4381  ?    the row of the pad (4321,4374), the north end of the metal x 4321: tl3's gate row of rcs_mv's NOR
+tl3_w4546   P  4250,5491-5510  ?    the row y 5500 of the pad (4321,5504), the south end of the same metal: on west
+rst_ck   P  4250,4492-4512  in   row from the west across the bus field; gate 2 of the three-input NOR tl4_w4545
+tl3_e4635   P  4250,4623-4642  ?    the row of the pad (4279,4636), the north end of the metal x 4279 (y 4622-5214): tl3's latch C data
+tl3_e4635   P  4250,5189-5207  in   the row of the pad (4279,5200), the south end of the same metal: tl3's inverter output (tl3_e4635)
+rcs_mv      P  4250,4733-4751  in   tl3's poly from its pad (4192,4743); an L in this strip, back out at y 4904-4925
+rcs_mv      P  4250,4904-4925  out  the same L, into tl3's pad (4234,4918) (rcs_mv)
+rcs_mv      M  4250,5754-5774  in   tl3's metal x 4236 from that pad, along y 5764 to the pad (4410,5764) (rcs_mv)
+ck_out   P  4250,5102-5121  ?    the row of the pad (4366,5112) on the track x 4366: tl3's ck_out (gate 2 of its NOR e5)
+tl3_e5240   P  4250,5233-5251  ?    the row that ends over the pad (4279,5265), the north end of the metal x 4279 (y 5251-5427)
+tl3_e5240   P  4250,5403-5422  ?    the row of the pad (4279,5413), the south end of the same metal
+c4l_l3   P  4250,5447-5467  out  the strong inverter's row, on west
+rst_ck       P  4250,5621-5641  ?    the row y 5631 (rst_ck), across the whole strip; on west to tl3's pad (4104,5633) (seen, tl3's to draw)
+tc1_o3527   P  4250,5708-5727  ?    the row of the pad (4497,5720), the south end of the jumper x 4497: on west
+rcs_x1      M  4250,5889-5901  in   tl3's metal of its latch C's clear (rcs_x1), east to the pad (4629,5891)
+tl3_w3982   M  4250,5933-5945  ?    the metal of the pad (4583,5936), on west
+c4l_gab   P  4250,6313-6333  ?    the row of the pad (4929,6323), on west
+
+# East side (x 4967)
+sl_eq_r5_n   P  4967,2542-2560  ?    the row of the pad (4908,2551), the east end of bus line 1
+tl5_w4937   P  4967,2675-2694  in   the row of the pad (4866,2681), the east end of bus line 4: tl5's inverter 2 output
+tl5_w2722   P  4967,2714-2733  in   the row of the pad (4822,2723), the east end of bus line 5
+tl3_e4243   P  4967,2801-2820  out  the row of the pad (4866,2812): tl3_e4243, the enable of tl5's latch c
+tl4_w3113   P  4967,2846-2865  out  the row of the pad (4823,2855): tl4_w3113
+tl5_w3245   P  4967,2890-2909  in   the row of the pad (4648,2898) at the north end of the track x 4581 (tl5_w3245)
+tl5_w3505   P  4967,2976-2996  in   the second latch's enable: the row of the north pad (4452,2985) of the track x 4452's north piece; tl5's row of the pad (5494,2985)
+c4l_l3   P  4967,5447-5467  out  the strong inverter's row: tl5's row of the pad (5538,5457) (c4l_l3)
+tl4_w5068   P  4967,5490-5510  out  the row of the pad (4625,5504): tl5's row of the pad (5493,5500) (tl4_w5068)
+tc1_o3527   P  4967,5534-5553  in   the row of the pad (4497,5547), the north end of the jumper x 4497 (tc1_o3527)
+rst_ck       P  4967,5621-5641  ?    the row y 5631 (rst_ck), across the whole strip without a contact
+ck_out   P  4967,5665-5684  ?    the row of the pad (4411,5676) at the south end of the track x 4366 (ck_out)
+rcs_mv      P  4967,5708-5728  out  the row y 5718's east piece, from the pad (4410,5764) (rcs_mv)
+bd1_n2   P  4967,5752-5772  in   the row of the pad (4626,5762) at the south end of the metal x 4538/4583 (bd1_n2)
+rcs_x1      P  4967,5880-5900  out  the row of the pad (4629,5891): rcs_x1, tl5's bus line x 5107
+tl3_w3982   P  4967,5926-5946  ?    the row of the pad (4583,5936): tl5's bus line x 5063
+c4l_gab   M  4967,5977-5991  ?    tl5's thin metal (the clear of its latch c), in along y 5984
+vss         M  4967,5891-5942  -    tl5's rail RC, turned west (top edge y 5891); it turns south at x 4841-4888
+vss         M  4967,2938-2997  -    RA's supply: the wide foot (y 2938-2997), on east
+
+# North side (y 2500)
+vss         M  4910-4967,2500  -    RA's supply: the vertical x 4949-4995 and the corner of the band north of y 2500
+tl4_w4068   P  4534-4550,2500  ?    the poly column north of pad E (4539,2768), on north under the wide band to y ~2165
+
+# South side (y 6350)
+c4l_gab   M  4922-4936,6350  ?    the thin metal x 4929, on south past its pad (4929,6323)
+vss         M  4667-4715,6350  -    RA's leg, on south
+vcc         M  4754-4801,6350  -    RB's leg, on south
+vss         M  4841-4888,6350  -    RC's leg, on south
+ck_out    M  6008-6024,6350   in   onto tl6's metal (which tl4 called w4590) from the pad (6016,6150): one net with the gate line of tc2's latch
+ck_out    M  6008-6024,6900   out  onto lc1's metal of ck_out (latch D's enable)
+ck_out    M  7180-7194,15000  in   busl's track x 7187, on north
+ck_out      P  8396,17898-17916 ?    the poly row east of the pad (8317,17863)'s neck, onto eof's poly west of its pad (8424,17908): ck_out
+ck_out      M  7828-7850,17655  ?    the branch from the pad (7641,17908) onto bc3's pad (7840,17648) and track (which bc3 called w17646)

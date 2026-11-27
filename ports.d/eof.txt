@@ -1,0 +1,271 @@
+# eof: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+# The package is follow-the-wire pieces, not a region. DIR is `in` where the driver lies beyond
+# that port, `?` where the port leads on towards the loads or back to another package's stretch.
+
+# Piece r4: R4's match
+rc_eq_r4   P  13420,9654-9672    in  from mrach's poly row y 9663 (its file ends it at x 13425); driver: rdp2's NOR
+rc_eq_r4   M  13641-13659,10705  ?   track L7 on into rdp3's piece (its name rc_eq_r4): towards the loads
+rc_eq_r4   M  13729-13747,13475  ?   track L9: rdp3's end (13738,13480)
+rc_eq_r4   M  13729-13747,14695  ?   track L9 on into bd1's track k15 (its name rc_eq_r4): the latch's data and inverter A
+
+# Piece r5inv: the inverter on R5's match
+sl_eq_r5   P  8352,4709-4729     in  cdp1's row y 4719 (its file ends it at x 8340): the inverter's input
+sl_eq_r5_n    P  8348,4840-4862     out the inverter's output onto tc2's poly from the pad (8290,4850)
+vss        M  8399-8469,4700     -   slice 0's VSS rail, on north (shm draws it at y 4130-4300)
+vss        M  8399-8469,4880     -   slice 0's VSS rail, on south
+vcc        M  8595-8645,4700     -   slice 0's VCC rail, on north
+vcc        M  8595-8645,4880     -   slice 0's VCC rail, on south
+
+# Piece r5w: the inverter's output on west (one net with sl_eq_r5_n)
+sl_eq_r5_n  P  5183,2542-2560     in  link C's east end on r9m's corner (5175,2550); driver: the inverter
+sl_eq_r5_n  P  4962,2542-2560     ?   link C's west end on tl4's row (4967,2551): towards the loads
+sl_eq_r5_n  M  4255,2506-2518     in  link D's east end on tl4's bus line 1 (4250,2512)
+sl_eq_r5_n  M  3528,2505-2519     ?   link D's west end on tl2's metal (3533,2509): towards the loads
+
+# Piece tcwa (run 2): the net is rst_ck. The driver (the inverter of the input buffer row) lies beyond link F's east end.
+rst_ck      M  6098-6112,6345     ?   link E's north end on tl6's metal (6105,6350): towards the loads
+rst_ck      M  6422-6438,8072     in  link E's south end on lc2's piece (rst_ck, M 6431,8067)
+# (the tap row now ends as row 1 of the gate: piece g7700, below)
+rst_ck  M  6445,8165-8179     ?   link F's west end on lc2's end (6450,8172): towards the loads
+rst_ck  M  6695,8360-8374     in  link F's east end on trunks' line S (its end x 6690): the net is rst_ck
+
+# Piece x1 (run 2): tl5's south poly bus down to its pads, the pads' metals onto lc1's wires
+rcs_x1     P  5097-5117,6345     ?   from tl5's bus line x 5107: towards the loads
+rcs_x1     M  5070-5090,6905     in  onto lc1's M_a (rcs_x1, gate 2's output: the driver)
+rst_a  P  5140-5160,6345     ?   from tl5's bus line x 5150 (= rst_a, the clear of four latches)
+rst_a  M  5116-5130,6905     in  onto lc1's M_b (rst_a, gate 5's output: a buffered copy of the reset NOR)
+res_b      P  5182-5202,6345     in  from tl5's bus line x 5192
+res_b      M  5183-5197,6905     ?   onto lc1's V2 (res_b: the NOR's lower input)
+lpstb_b    P  5227-5247,6345     in  from tl5's bus line x 5237
+lpstb_b    M  5229-5243,6905     ?   onto lc1's V3 (lpstb_b: the NOR's upper input)
+tl3_w3982  P  5053-5073,6345     ?   from tl5's bus line x 5063
+
+# Piece r5nor: the NOR on NOT R5's match (run 3)
+tl1_w5936   P  2362-2386,2506    in   from tl1's row y 2498-2515: a gate of the NOR
+rcs_c1      P  2405-2427,2506    in   from tl1's poly (2405-2420,2500): a gate of the NOR
+sl_eq_r5_n  P  2493-2515,2506    in   from tl1's poly (2493-2508,2500): a gate of the NOR, the net's first load
+tl1_w2637   P  2452-2472,2506    out  the NOR's output onto tl1's poly (2448-2463,2500)
+vss         M  2596,2347-2404    -    the arm into the VSS plane
+vcc         M  2250-2590,1900    -    the supply plane over the strap's head, on north (padring)
+
+# Piece isrc: rst_a on from two of its open ends (run 4)
+rst_a     P  10218-10234,15912  ?    link G: the pad under the north end of trunks' metal x 10225
+rst_a     M  10390-10402,15083  out  onto bc2's pad (10395,15087): the clear of latch unit a (a load)
+rst_a     P  9770,18072-18090   ?    link H: from trunks' pad (9770,18081)
+
+# Piece isrc4: rst_a is lc2's through line x 6299 (run 9)
+rst_a     P  7550,14904-14924   in   onto the east end of busl's poly row of rst_a (one net); the driver is beyond it: lc1's gate 5, rst_a (piece isrc5)
+
+# Piece g7700: the gate on rst_ck's tap row (run 5)
+eof_w7777   P  6450,7812-7830    in   row 3 of the gate, on west into lc1's strip (cluster E's undrawn west half)
+ck_out   P  7400,7203-7221    ?    the poly row east of the pad (7313,7215)
+ck_out   M  7262-7274,7800    ?    the metal south of row 2's pad (7267,7736)
+tc2_r5589   P  7272-7285,6875    out  the gate's output: the poly north of the pad (7272,6912)
+vss         M  7552-7598,7585    -    column 0's VSS rail, on north
+vcc         M  7725-7775,7720    -    the wide metal east of the load, on north
+
+# Piece ff3: the flip-flop that clocks lc2's ripple counter (run 6)
+lc2_w8475   M  4553-4575,9190    out  the copy's slave output on track C, onto lc2's L-shaped metal: the clock of lc2's first flip-flop
+eof_w9255   M  4553-4575,9990    in   the copy's clock: the L-shaped metal from the END pad (4648,9904), on south
+lc1_w7170   M  4466-4484,9060    in   track A on from lc2's drawn end; ends on the copy's pad (4473,9818)
+lc2_w8907   M  4508-4526,8700    in   track B (the clear) on from lc2's drawn end
+lc2_w8907   M  4508-4526,9420    ?    track B runs on south past the copy's pad (4517,9384)
+vss         M  4757-4808,9190    -    the west rail, from lc2's end
+vss         M  4757-4820,9970    -    the same, on south
+vcc         M  4924-4980,9190    -    the middle rail, from lc2's end
+vcc         M  4924-4980,9970    -    the same, on south
+bd1_n2        D      13868,15712-15728        out  piece r4lat: the lower half's load node onto bd1's N2 under the ground rail (bd1 has the link as ?D)
+bd1_n2        P      13895-13909,15618        in   from bd1's gate G4 block (bd1's bd1_q) to the band, the load's gate
+vcc           D      14004,15659-15689        -    the load's strip onto bd1's VCC land
+
+# Pieces n2out, n2w: the latch's output bd1_n2 (bd1's bd1_k) to the left bus field (run 8)
+bd1_n2        D      13795,15712-15736        in   piece n2out: N2 in the gap onto the lower segment of bd1's strip (bd1's bd1_k)
+vss           D      13832,15638-15652        -    piece n2out: the strip's top segment onto bd1's ground diffusion (bd1 has the link as ?D)
+bd1_n2        M      13515-13527,16260        in   piece n2w: from bd1's metal x 13521 (its bd1_k, drawn to y 16273)
+bd1_n2        M      6705-6718,15000          out  piece n2w: on north up the left bus field into busl's region; read there by text (run 14: x 6711 to a corner (6711,13249), east to (6777,13249), north), not drawn; it comes out at bd1_n2's port (6775,10400)
+
+# Piece isrc5: line X (the first through line of the left-centre strips) is `rst_a` (run 10). The poly south of rst_a's pad (5147,6803) is drawn on to lc2's metal end.
+rst_a       M  6450,8623-8637     out  onto lc2's diagonal metal end (its first through line, rst_a: its port (6450,8630)): one net, down the left-centre strips to rst_a's loads
+# Pieces rl and w5936 (run 11): res_b, lpstb_b and the wire `tl5` called w5936 (= tl3_w3982) drawn on from piece x1's poly ends
+# (their ports at (5196-5210,6900), (5232-5248,6872), (5054-5072,6880) are gone)
+res_b       M  6450,8685-8699     out  onto lc2's metal end (its second through line, res_b: its port (6450,8692)): one net, down the left-centre strips and the left bus field to (6366,15000)
+lpstb_b     M  6450,8749-8763     out  onto lc2's metal end (its third through line, lpstb_b: its port (6450,8756)): one net, to (6408,15000)
+tl3_w3982   M  6465-6477,8067     out  onto lc2's metal x 6471 of tl3_w3982 (pad (6470,8127)): latch C's data
+# Piece d3982 (run 12): the three inverters that drive tl3_w3982 (the port tl3_w3982 P 7492,8417-8439 is gone: U4's output box)
+lc1_w7928   P  6401-6416,8067     in   from lc2's poly P 6401,8067:6415,8092 (its port there; both label the poly lc2_w8083, an alias): latch D's lower node, the input of the three inverters
+vss         M  7552-7598,8460     -    the gate column's VSS rail on south (cdp3's c0 rail)
+vcc         M  7722-7776,8460     -    the wide metal east of the column on south (VCC by the loads' contacts)
+# Pieces ck5 and rc (run 13): the ripple counter's clock, and the fifth corner-bundle line of `lc3` on to `rst_c`
+lc3_w9947   P  6443-6460,6390     ?    onto tc2's poly of lc3_w9947 (its port (6451,6400)), lc3_w9947's line: one net; gates in tcw
+lc3_w9947   M  6440-6450,9161-9174  ?  onto lc2's metal end (its fourth through line, lc3_w9947: its port (6450,9165)): the ripple counter's clock
+rst_c       P  6450,8911-8936     in   from lc2's diagonal poly (its port there), from latch C's clear pad
+rst_c       M  6440-6450,9445-9459  out  onto lc3's metal end (its fifth corner-bundle line, rst_c: its port (6450,9448-9462))
+# Piece n2n (run 14): the latched R4 match's track from busl's north edge to tl5's bus poly (bd1_n2)
+bd1_n2      M      6769-6782,10400          in   the track x 6775 from busl's region: believed bd1_n2, from the port (6711,15000); the 4,600 px between are drawn by no one
+bd1_n2     P      5403-5421,6345           out  onto tl5's poly end (its port bd1_n2 (5402-5422,6350)): the input of tl4's inverter that makes rcs_e3
+# Piece ck6 (run 15): the ripple counter's clock to its driver, the inverter U
+lc3_w9947     P      7550,14772-14796         out  onto busl's row end (its port there): the ripple counter's clock, driven by the inverter U at (8733,15000)
+vss           M      8687-8737,14900          -    column B's VSS rail north of the inverter (it turns west as a band y 14816-14878 to the rail x 8510-8560)
+# Piece vw (run 16): the units V and W, the latch that makes eof_w15127 (the clock inverter's input)
+eof_w15300    P      8818-8854,15440-15472    out  W's output at the pad (8836,15456), the south end of its metal; the pad's poly is the next unit's (not drawn)
+vss           M      8687-8737,15465          -    column B's VSS rail on south
+vcc           M      8510-8558,15340          -    R2 (bc1's M 8534,14990 y16300), drawn again over the VCC boxes
+# Pieces in390 and in172 (run 17): two of the latch's inputs followed to bc2's east gate column
+# (the ports eof_w15172 P 9150,14645-14662 and the one at P 9002-9020,14790 are gone: the wires are drawn on)
+bc2_w15607    M      10261-10275,15520        in   bc2_w15607's metal x 10268 onto bc2's metal x 10267 (its port bc2_w15607 (10267,15515)): latch unit b's lower node, the lower gate of W's stack
+bc2_w15000    M      10392,14993-15007        in   gate row 1 of the NOR T: pad A's metal x 10355, its foot east onto bc2's output pad (10395,15000) of latch unit a (its port bc2_w15000 (10385,15000))
+bc2_w14955    M      10434-10448,14946        in   gate row 3 of the NOR T: pad B's metal x 10441 onto bc2's enable metal x 10441 of latch unit a (its port bc2_w14955 (10441,14940))
+vss           M      10543-10597,14590        -    the east column's VSS rail on north of the NOR T (bc2's M 10568,14790 y15270 goes on south from y 14790)
+vcc           M      10721-10771,14590        -    the east column's VCC rail on north of the NOR T (bc2's M 10746,14790 y15270 south of it)
+# Piece in350 (run 18): the upper gate of W's stack is ck_out
+# (the port at M 8873-8889,15465 is gone: the metal is drawn on)
+ck_out        M      10245,17902-17918        in   onto the west end of trunks' ck_out #1 (M 10320,17908 x10230): the clock's driver is the clock block's buffer
+ck_out        P      8392,17898-17916         ?    the poly west of the pad (8424,17908) (seen to x 8312, where it turns north; another net's metal lies on it from x 8390 west)
+ck_out        M      9589-9604,17866          ?    the metal that ends on the pad (9596,17909) from the north (follower: west along y 17606, north on x 9315 to (9315,16818); not checked)
+ck_out        M      9762-9778,17866          ?    the metal that ends on the pad (9769,17910) from the north (follower: east along y 17649, north on x 10050, west, north on x 9965 to (9964,16950); not checked)
+# Pieces lat16, inv16 (run 19): the latch that ck_out's two pads enable, and the inverter on its data
+# Pieces lat15, cap16, w16693 (run 20): the upper latch copy, and the lower latch's two outputs on east
+# (gone: eof_w16388 M 9004-9018,16340 and eof_w16693 M 9006-9018,16850 and eof_w16823 P 9062,16724-16745: the wires are drawn on;
+#  rst_a P 8930,16728-16746 and P 8930,16163-16181: the rows are the two latch copies' clear rows, drawn;
+#  the rails' ports at y 16300 moved to y 15870)
+eof_w16000    P      8800,15727-15745         in   the upper latch's data: the poly row west of the pad (8880,15738), into a heavy-outlined box (8762-8795,15722-15757) at column B's east edge (not read)
+eof_w16000    M      8831-8845,16030          ?    the track x 8838 on south of the data pad (8838,16000) (follower: to (8838,17306); not checked)
+vss           M      8686-8732,15870          -    column B's VSS rail, drawn over the two latch copies and the inverter only (y 15870-16985); it runs on north
+vcc           M      8510-8560,15870          -    R2 (bc1's M 8534,14990 y16300, drawn again from y 15870) over the VCC boxes of the two latch copies and the inverter
+# Pieces inv17, nor17, in212 (run 21): the two gates south of the second latch, and the NOR's second input to a pad
+# (gone: eof_w16823 P 8760,16986-17003 and eof_w16693 P 8800,17116-17135: the unit they entered is drawn;
+#  the rails' ports at y 16985 / 16960 moved to y 17300 / 17240)
+# Pieces o040, o168 (run 22): the two outputs followed (the ports eof_w17040 M 9001-9015,17610 and eof_w17168 M 9050-9064,17600 are gone)
+bc1_g6_in     M      8136-8150,16292          out  eof_w17040's metal x 8143 onto bc1's metal end (8143,16300) of bc1_g6_in: the input of bc1's inverter 6
+# Piece g174 (run 23): the pull-down column that eof_w17168 gates (the port eof_w17168 P 8245,17419-17440 is gone: the row is drawn on to the hairpin)
+eof_w17472    P      8226-8242,17560          ?    the lower poly's west leg on south (poly to y 17585; not followed)
+vss           M      8338-8382,16300          -    column A's VSS rail, bc1's R1, drawn on south from bc1's end to the rail's end at y 17568
+eof_w17212    P      8990,15812-15832         in   the NOR's second input: the poly row west of the pad (9053,15822) (believed: to the pad (8838,15822) of the thin metal x 8792)
+vss           M      8686-8732,17300          -    column B's VSS rail on south of the NOR's second VSS box (drawn y 15870-17300)
+# Piece g174e (run 24): the east side of the same unit; the six ports of piece g174 on the rail's east edge (x 8368-8372) are gone: drawn on
+vcc           M      8488-8558,17560          -    R2 on south of the NOR's VCC box and past this unit's load (drawn y 15870-17560; x 8488-8558 south of y 17236; it runs on)
+# Piece n338 (run 28): eof_w17338's port at (8245,17341) is gone: the row is drawn on to its driver, a NOR; its two inputs
+# Pieces en17, dinv17, lat18 (run 30): the ports ck_out M 8223-8235,17030, ck_out M 8418-8430,17866 and eof_w16737 P 8270,16553-16573 are gone: drawn on
+bc1_g6_out    P      8214-8247,16090          in   the pad (8229,16107) on which bc1's metal x 8229 ends (bc1's contact): one poly with the latch lat18's data row
+vss           M      8336-8384,16040          -    column A's VSS rail, bc1's R1, drawn again over the latch lat18 (y 16040-16300)
+# Pieces en18, cap18 (run 31): the ports eof_w16040 M 8919-8931,16300 and eof_w16040 M 8223-8235,16425 are gone (drawn on: one net, eof_w16040); rst_a P 8326,16294-16312 and 8326,16900-16918 are gone (their loads are the clear gates of the latches lat18 and lat17)
+# Piece u15500 (run 32): the port eof_w16040 P 7290,15471-15489 is gone (the row is drawn on into its gate, gate 2 of the NOR eof_w15523 = NOR(rcs_e4, eof_w16040, h_eq_r1_n))
+rcs_e4        P      7280,15425-15446         in   gate 1's row of the NOR, drawn again from x 7280 over tla's row (tla ends it at x 7370; here to its end x 7390)
+h_eq_r1_n    P      7255,15555-15577         in   gate 3's row of the NOR, on east from bl0's row end (bl0's port 7260,15566)
+vss           M      7383-7432,14995          -    the rail of bc1's west gate column (drawn y 15024-15900 over four units): north it turns east at y 15024-15069 onto busl's VSS metal x 7383-7432 (busl's piece vb, drawn to y 15000)
+vcc           M      7470-7520,15435          -    bc1's RL2 (M 7495,14950 y16300 w=50), drawn again over the load's contacts (y 15435-15555)
+# piece cap18b (run 49): the port vcc D 8560,17964-17984 of piece cap18 is gone (the wire is drawn on to the twin device)
+vcc           M      8512-8558,17997          -    R2 on south (drawn y 17550-17997 over the box of piece cap18; it runs on)
+# Pieces u15760, in15760 (run 33): the ports eof_w15523 P 7290,15687-15704 and vss M 7294-7340,15655 are gone (the row is drawn on into its gate, gate 1 of the NOR eof_w15781 = NOR(eof_w15523, eof_w15262, eof_w15128); the rail is drawn on south)
+# Pieces u15960, u16175 (run 36): the two ports eof_w15781 P 7228,15945-15968 and 7228,16160-16186 are gone (the rows are drawn on as the gates of two wide inverters, eof_w15998 = NOT eof_w15781 and eof_w16218 = NOT eof_w15781)
+vcc           M      7470-7520,16000          -    bc1's RL2, drawn again over the upper inverter's supply box (y 16000-16085)
+vcc           M      7470-7520,16205          -    bc1's RL2, drawn again over the lower inverter's supply box (y 16205-16300; bc3 draws RL2 from y 16290)
+# Piece u15260 (run 34): the port eof_w15262 P 7225,15251-15273 is gone (the row is drawn on to the exit box of its driver, the NOR eof_w15262 = NOR(lc1_w7780, rcs_mv)); the rail is drawn on north to y 15140
+lc1_w7780     P      7165,15207-15229         in   gate 1's row of the NOR eof_w15262, on east from busl's row end (busl's port 7170,15218)
+rcs_mv        P      7025,15293-15317         in   gate 2's row of that NOR, on east from bl0's row end (bl0's port 7030,15301)
+vcc           D      7480,15246-15280         -    the NOR's load band into bc1's box under RL2 (bc1: D 7462,15194:7540,15284)
+# Piece u15100 (run 35): the port eof_w15128 P 7225,15119-15142 is gone (the row is drawn on to the exit box of its driver, the inverter eof_w15128 = NOT rst_n); the rail is drawn on north to its turn east onto busl's VSS metal
+rst_n         P      7275,15076-15097         in   the gate row of the inverter eof_w15128, on east from bl0's row end (bl0's port 7280,15078-15098)
+vcc           M      7470-7520,15060          -    bc1's RL2, drawn again over the inverter's supply box (y 15060-15150)
+vss           M      7294-7340,16930          -    the rail of bc1's west gate column on south over the two select inverters (drawn y 15024-16930; it meets bl0's piece, drawn from y 16925)
+vcc           M      7470-7520,15690          -    bc1's RL2, drawn again over the second NOR's load contact (y 15690-15860)
+# Pieces o998, cap998, o218 (run 37): the two ports eof_w15998 M 6990,16255-16269 and eof_w16218 M 6990,16297-16310 are gone (both bus metals are drawn on to the left array's east edge)
+vcc           M      4953-5018,16020          -    the wide VCC metal x 4953-5018 (busl's rail, one metal from y 15000), drawn over the box of cap998's diffusion wire (y 16020-16110)
+vcc           M      4953-5018,16110          -    the same metal on south
+# Pieces t4736s, cap218, t4780n (run 38): the three metal ports of run 37 (eof_w15998 M 4773-4786,17150; eof_w16218 M 4730-4742,17340 and 17440) are gone: both tracks are drawn to their ends. Each of the fourteen pads' poly rows leaves west into the left array
+vcc           M      4953-5018,16700          -    the wide VCC metal x 4953-5018 again, drawn over the box of cap218's diffusion wire (y 16700-16800)
+vcc           M      4953-5018,16800          -    the same metal on south
+eof_nbox_s0    D      4566-4632,11216          ?    north end of the diffusion of the transistor the line gates in row s0 of the left array; it ends 14 px north of the gate on a heavy-outlined box, not drawn
+eof_nbox_s1    D      4566-4632,11694          ?    north end of the diffusion of the transistor the line gates in row s1 of the left array; it ends 14 px north of the gate on a heavy-outlined box, not drawn
+eof_nbox_s2    D      4566-4632,12171          ?    north end of the diffusion of the transistor the line gates in row s2 of the left array; it ends 14 px north of the gate on a heavy-outlined box, not drawn
+eof_nbox_s3    D      4566-4632,12648          ?    north end of the diffusion of the transistor the line gates in row s3 of the left array; it ends 14 px north of the gate on a heavy-outlined box, not drawn
+eof_nbox_s4    D      4566-4632,13125          ?    north end of the diffusion of the transistor the line gates in row s4 of the left array; it ends 14 px north of the gate on a heavy-outlined box, not drawn
+eof_nbox_s5    D      4566-4632,13603          ?    north end of the diffusion of the transistor the line gates in row s5 of the left array; it ends 14 px north of the gate on a heavy-outlined box, not drawn
+eof_nbox_s6    D      4566-4632,14079          ?    north end of the diffusion of the transistor the line gates in row s6 of the left array; it ends 14 px north of the gate on a heavy-outlined box, not drawn
+eof_nbox_s7    D      4567-4633,14773          ?    north end of the diffusion of the transistor the line gates in row s7 of the left array; it ends 14 px north of the gate on a heavy-outlined box, not drawn
+eof_nbox_s8    D      4567-4633,15251          ?    north end of the diffusion of the transistor the line gates in row s8 of the left array; it ends 14 px north of the gate on a heavy-outlined box, not drawn
+eof_nbox_s9    D      4567-4633,15728          ?    north end of the diffusion of the transistor the line gates in row s9 of the left array; it ends 14 px north of the gate on a heavy-outlined box, not drawn
+eof_nbox_s10   D      4567-4633,16378          ?    north end of the diffusion of the transistor the line gates in row s10 of the left array; it ends 14 px north of the gate on a heavy-outlined box, not drawn
+eof_nbox_s11   D      4567-4633,16856          ?    north end of the diffusion of the transistor the line gates in row s11 of the left array; it ends 14 px north of the gate on a heavy-outlined box, not drawn
+eof_nbox_s12   D      4567-4633,17333          ?    north end of the diffusion of the transistor the line gates in row s12 of the left array; it ends 14 px north of the gate on a heavy-outlined box, not drawn
+eof_nbox_s13   D      4567-4633,17810          ?    north end of the diffusion of the transistor the line gates in row s13 of the left array; it ends 14 px north of the gate on a heavy-outlined box, not drawn
+# piece mx1 (run 40): the two pass transistors on the strap's node in each row of the left array (the fourteen eof_strap_s# ports are gone: the box is drawn whole)
+# piece hj (run 44): each band is drawn on west to the poly column x 4152-4164 (the fourteen ports at x 4420 are gone); the column goes on north, and in rows s6, s9, s13 the row west of its foot goes on into a gap
+# piece ol (run 45): the column of piece hj is drawn on north to its end, a buried contact on the west diffusion of a load (cell eof_ol); its 14 port lines are replaced by these
+eof_wstrap_s0  D      4098,11449-11467          ?    the diffusion box of the strap's south contact (4118,11451): a strip leaves its west side (seen on the fourteen-row median; believed larr's Z of the row, larr_z_s0; not followed)
+eof_wstrap_s1  D      4098,11926-11944          ?    the diffusion box of the strap's south contact (4118,11928): a strip leaves its west side (seen on the fourteen-row median; believed larr's Z of the row, larr_z_s1; not followed)
+eof_wstrap_s2  D      4098,12403-12421          ?    the diffusion box of the strap's south contact (4118,12405): a strip leaves its west side (seen on the fourteen-row median; believed larr's Z of the row, larr_z_s2; not followed)
+eof_wstrap_s3  D      4098,12880-12898          ?    the diffusion box of the strap's south contact (4118,12882): a strip leaves its west side (seen on the fourteen-row median; believed larr's Z of the row, larr_z_s3; not followed)
+eof_wstrap_s4  D      4098,13357-13375          ?    the diffusion box of the strap's south contact (4118,13359): a strip leaves its west side (seen on the fourteen-row median; believed larr's Z of the row, larr_z_s4; not followed)
+eof_wstrap_s5  D      4098,13835-13853          ?    the diffusion box of the strap's south contact (4118,13837): a strip leaves its west side (seen on the fourteen-row median; believed larr's Z of the row, larr_z_s5; not followed)
+eof_wstrap_s6  D      4098,14312-14330          ?    the diffusion box of the strap's south contact (4118,14314): a strip leaves its west side (seen on the fourteen-row median; believed larr's Z of the row, larr_z_s6; not followed)
+eof_wstrap_s7  D      4099,15005-15023          ?    the diffusion box of the strap's south contact (4119,15007): a strip leaves its west side (seen on the fourteen-row median; believed larr's Z of the row, larr_z_s7; not followed)
+eof_wstrap_s8  D      4099,15483-15501          ?    the diffusion box of the strap's south contact (4119,15485): a strip leaves its west side (seen on the fourteen-row median; believed larr's Z of the row, larr_z_s8; not followed)
+eof_wstrap_s9  D      4099,15960-15978          ?    the diffusion box of the strap's south contact (4119,15962): a strip leaves its west side (seen on the fourteen-row median; believed larr's Z of the row, larr_z_s9; not followed)
+eof_wstrap_s10 D      4099,16610-16628          ?    the diffusion box of the strap's south contact (4119,16612): a strip leaves its west side (seen on the fourteen-row median; believed larr's Z of the row, larr_z_s10; not followed)
+eof_wstrap_s11 D      4099,17088-17106          ?    the diffusion box of the strap's south contact (4119,17090): a strip leaves its west side (seen on the fourteen-row median; believed larr's Z of the row, larr_z_s11; not followed)
+eof_wstrap_s12 D      4099,17565-17583          ?    the diffusion box of the strap's south contact (4119,17567): a strip leaves its west side (seen on the fourteen-row median; believed larr's Z of the row, larr_z_s12; not followed)
+eof_wstrap_s13 D      4099,18042-18060          ?    the diffusion box of the strap's south contact (4119,18044): a strip leaves its west side (seen on the fourteen-row median; believed larr's Z of the row, larr_z_s13; not followed)
+cdp4_bus_s1    P      4095,14375-14393          ?    the poly row west of the column's foot in row s6 of the left array, west end as drawn; it goes on west into gap 1 (open poly; in the other eleven rows this row is larr's H3, larr_h_s#)
+cdp3_g_c6      P      4096,16023-16041          ?    the poly row west of the column's foot in row s9 of the left array, west end as drawn; it goes on west into gap 2 (open poly; in the other eleven rows this row is larr's H3, larr_h_s#)
+cdp3_g_c2      P      4096,18105-18123          ?    the poly row west of the column's foot in row s13 of the left array, west end as drawn; it goes on west into the channel below the array (open poly; in the other eleven rows this row is larr's H3, larr_h_s#)
+rcs_mv        P      7035,16771-16787         in   piece selg (run 42): bl0's row (port (7040,16770-16790)) on east to the gate of the lower select inverter (eof_ga = NOT rcs_mv)
+vss           M      7200,16349-16391         -    piece selg: a wide arm of the ground rail x 7294-7340 on west across the bus field (seen to x 6850); not followed
+vcc           M      7470-7520,16455          -    piece selg: bc3's RL2 (M 7495,16290 y17560 w=50), drawn again over the upper supply box (y 16455-16605)
+vcc           M      7470-7520,16925          -    piece selg: the same over the lower supply box (y 16815-16925)
+vcc            M      4173-4219,18240           -    rail G of the left array (one metal with ur's vcc metal x 4128-4172 from y 11022), south end as drawn: it widens and turns west at y 18250-18330 (not followed)
+# piece pd (run 46): the two pull-downs west of the strap are drawn (cell eof_pd), so the west diffusions and tabs of piece ol are no longer ports (56 lines removed)
+# piece yi (run 47): the pull-downs' gate poly has its driver (cell eof_yi: eof_pdg_s# = NOT larr_y_s#), so its 14 ports under rail F are removed; Y's diffusion runs on south beyond what is drawn (its 14 east ends are no longer ports: piece yg, run 48, draws the transistor there)
+larr_y_s0      D      3898-3930,11347          in   line Y of row s0: south side of its diffusion as drawn; a leg runs on south under Vm6 to y 11891 (row s1) and east along y 11879-11892 to the knot at rail F's fifth ring; not drawn
+larr_y_s1      D      3898-3930,11824          in   line Y of row s1: south side of its diffusion as drawn; a leg runs on south under Vm6 to y 11891 (row s1) and east along y 11879-11892 to the knot at rail F's fifth ring; not drawn
+larr_y_s2      D      3898-3930,12301          in   line Y of row s2: south side of its diffusion as drawn; a leg runs on south under Vm6 to y 11891 (row s1) and east along y 11879-11892 to the knot at rail F's fifth ring; not drawn
+larr_y_s3      D      3898-3930,12778          in   line Y of row s3: south side of its diffusion as drawn; a leg runs on south under Vm6 to y 11891 (row s1) and east along y 11879-11892 to the knot at rail F's fifth ring; not drawn
+larr_y_s4      D      3898-3930,13255          in   line Y of row s4: south side of its diffusion as drawn; a leg runs on south under Vm6 to y 11891 (row s1) and east along y 11879-11892 to the knot at rail F's fifth ring; not drawn
+larr_y_s5      D      3898-3930,13733          in   line Y of row s5: south side of its diffusion as drawn; a leg runs on south under Vm6 to y 11891 (row s1) and east along y 11879-11892 to the knot at rail F's fifth ring; not drawn
+larr_y_s6      D      3898-3930,14210          in   line Y of row s6: south side of its diffusion as drawn; a leg runs on south under Vm6 to y 11891 (row s1) and east along y 11879-11892 to the knot at rail F's fifth ring; not drawn
+larr_y_s7      D      3899-3931,14903          in   line Y of row s7: south side of its diffusion as drawn; a leg runs on south under Vm6 to y 11891 (row s1) and east along y 11879-11892 to the knot at rail F's fifth ring; not drawn
+larr_y_s8      D      3899-3931,15381          in   line Y of row s8: south side of its diffusion as drawn; a leg runs on south under Vm6 to y 11891 (row s1) and east along y 11879-11892 to the knot at rail F's fifth ring; not drawn
+larr_y_s9      D      3899-3931,15858          in   line Y of row s9: south side of its diffusion as drawn; a leg runs on south under Vm6 to y 11891 (row s1) and east along y 11879-11892 to the knot at rail F's fifth ring; not drawn
+larr_y_s10     D      3899-3931,16508          in   line Y of row s10: south side of its diffusion as drawn; a leg runs on south under Vm6 to y 11891 (row s1) and east along y 11879-11892 to the knot at rail F's fifth ring; not drawn
+larr_y_s11     D      3899-3931,16986          in   line Y of row s11: south side of its diffusion as drawn; a leg runs on south under Vm6 to y 11891 (row s1) and east along y 11879-11892 to the knot at rail F's fifth ring; not drawn
+larr_y_s12     D      3899-3931,17463          in   line Y of row s12: south side of its diffusion as drawn; a leg runs on south under Vm6 to y 11891 (row s1) and east along y 11879-11892 to the knot at rail F's fifth ring; not drawn
+larr_y_s13     D      3899-3931,17940          in   line Y of row s13: south side of its diffusion as drawn; a leg runs on south under Vm6 to y 11891 (row s1) and east along y 11879-11892 to the knot at rail F's fifth ring; not drawn
+# rail F's top (run 46; found undrawn by review round 54): the vss metal that the rail hangs from runs on beyond the band drawn
+vss            M      3885,10925-10990          -    the wide metal that rail F's band (y 10966-11014) is part of, running on west of ur's vss metal x 3889-3937 (bright in both metal shots at x 3856-3868, y 10958); not followed
+vss            M      3960-3982,10960           -    an arm of the same metal north from the band (bright in both metal shots at y 10940, dark edges at x 3958 and x 3982); not followed
+# piece yg (run 48): the gate line of the fourteen pull-downs on Y, at the poly row that leaves its foot pad
+eof_ypd        P      3996,18247-18263          in   the poly row east of the foot pad (3957,18255) of the line eof_ypd, east end as drawn; it runs on east along the north side of a wide metal to about x 4138 (cream in the clean shot; not followed); the line's driver lies beyond
+# piece cap18b (run 49): the twin of cap18 on h_eq_r1_n; the bus line that leaves its pad east
+# piece ld566 (run 69): the port h_eq_r1_n D 10600,17484-17500 is gone (the band is drawn on east to the load: h_eq_r1_n = NOT h_eq_r1)
+vss            M      10548-10598,17054        -    pieces u17170, u17345: bc2's VSS rail, drawn over these two units (y 17054-17590); north of y 17054 another unit's contact area
+eof_w17866     M      9546-9560,17800          ?    piece bus2: the second metal of the pad (9553,17866), from the north (follower: to (9546,17645), west to (9266,17641)): not read
+eof_w17866     M      9806-9820,17800          ?    piece bus2: the second metal of the pad (9813,17866), from the north (follower: 1,800 px to (9961,16341)): not read
+eof_w17866     M      10350-10362,17885        ?    piece bus2 (review round 59): the metal x 10356 on south of the T (10356,17866) (follower: to a corner (10364,18387), east, south on x 10397 to a pad about (10397,18427)): not read
+rst_lat        P      10546-10598,17682-17698  out  piece rl (review round 63): the branch row east from rst_lat's column x 10355, under the VSS rail: the gate of an undrawn pull-down (rail diffusion with a contact (10560,17652) north of it, diffusion y 17705-17739 south of it)
+# piece u16303 (run 69): the port rst_lat P 10497-10640,16292-16314 is gone (the gate of the inverter eof_w16213 = NOT rst_lat)
+vcc            M      10722-10770,17120        -    piece u17170: bc2's VCC rail over the load's contact (10745,17165), drawn y 17120-17215 only; runs on north and south
+vcc            M      10722-10770,17390        -    pieces u17170, ld345: the same rail, south end of the drawn stretch (y 17120-17390)
+bc2_w15432     P      10150,16118-16138        ?    piece en432: the row of the end pad (10180,16128) of the enable metal of bc2's latch copy b; on west under a metal lying on it: not read
+bc2_w15388     P      10335,16378-16400        ?    piece d388: the row of the end pad (10268,16389) of the data line of bc2's latch copy b; on east toward the rail column: not read
+eof_w16560     P      9860,17767-17787         ?    piece w16560: the row of the end pad (9893,17777), on west: not read
+# piece t10484 (run 70): the ports eof_w16996 M 10476-10492,16960 and 10476-10492,17024 are gone (the metal stub and the uncertain contact over the node's box are taken out: notes, Ambiguity 219)
+vss            M      10548-10598,16800        -    pieces u16864, u16996: the VSS rail, drawn from y 16800 south to run 55's stretch
+vcc            M      10722-10770,16810        -    pieces u16864, u16996: bc2's VCC rail over these units only (y 16810-17000)
+eof_w16432     M      10850,18420-18440        ?    piece r16432: the horizontal metal y 18420-18440 east of x 10806 that the east pad's metal runs into: a bus line in no trace file
+# piece t10484 (run 70): the port eof_w16213 M 10476-10492,16240 is followed: see below
+# piece u16303 (run 69): the port eof_w16213 P 10481,16249-16267 is gone (the row ends in the unit's buried contact box)
+# piece u15826 (run 69): the port eof_w15955 M 10435-10447,15925 is gone (north to an end pad (10440,15825), the gate of the inverter cdp4_w10808)
+# run 69: pieces u16303, ld566, u15826
+cdp4_w10808    P      10694-10716,15726-15748  out  piece u15826: the head of the load's plate on cdp4's row from the pad (10808,15738): cdp4_w10808 = NOT eof_w15955
+vss            M      10548-10598,15740        -    piece u15826: the VSS rail, drawn from bc2's end (y 15746) to y 16060
+vss            M      10548-10598,16230        -    piece u16303: the VSS rail over rst_lat's unit (y 16230-16372)
+vcc            M      10722-10770,15740        -    piece u15826: bc2's VCC rail, drawn from bc2's end (y 15746) to y 16020
+vcc            M      10722-10770,16230        -    piece u16303: the VCC rail over rst_lat's unit (y 16230-16340)
+vcc            M      10722-10770,17560        -    piece ld566: the VCC rail, south end of the stretch y 17380-17560
+# run 70: pieces t10484, u17690
+eof_w16213     M      10477-10491,16977        ?    piece t10484: the drawn south end of the thin metal from the pad (10440,16215), at the north wall of the latch node's box; the next 38 px are not drawn (Ambiguity 222, AMB-060)
+lc2_w8450      M      10477-10491,17015        ?    piece t10484: the drawn north end of the thin metal from regs' pad (10484,17994), at the south wall of the same box; faces the port above
+eof_w17734     P      10880-10914,18454-18484  out  piece o734 (run 71): the end pad (10895,18468) under trunks' contact C 10900,18470; on by trunks' bus line L6 (left piece) to gate g5 of the clock block
+vss            M      10548-10598,17780        -    piece u17690: the VSS rail, drawn on from y 17590 to y 17780; it runs on south
+vcc            M      10722-10770,17780        -    piece u17690: bc2's VCC rail, drawn on from y 17560 to y 17780; it runs on south
+lc2_w8450      M      10477-10491,17760        in   piece t10484: onto regs' M 10485,17994 y17760 (its port at the same place)

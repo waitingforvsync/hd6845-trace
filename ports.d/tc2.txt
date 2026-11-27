@@ -1,31 +1,31 @@
 # tc2: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
 tc1_o3527    M  6400,4470-4494   out  cell B's output of tc1, going on west (follower: end (6012,4484))
-tc1_p4308    P  6400,4993-5012   in   believed: the row from the pad (6620,5002), going on west
+ck_a    P  6400,4993-5012   in   believed: the row from the pad (6620,5002), going on west
 tc2_o5175    P  6400,5161-5185   out  NOR(tc1_x1, fld_b_in), going west
 tc1_o3527    M  7003-7023,4450   in   from tc1
 tc1_x1       M  7048-7068,4450   in   from tc1
-tc1_p4308    M  6612-6634,4450   ?    tc1's pad (6620,4436) is 14 px north of the edge
+ck_a    M  6612-6634,4450   ?    tc1's pad (6620,4436) is 14 px north of the edge
 fld_b_in     P  6560,5337-5356   in   fld's row y 5345, where this package's drawing meets fld's
 vss          M  6537-6583,4450   -    tcw's ground rail
 ras_o0_alt2  M  6400,4778-4798   ?    row y 4786 from ras's pad (6928,4786); the metal goes on west (follower: end (6059,4876))
-tc1_m6817    M  6789-6805,4450   out  to tc1's foot (6797,4372), 70 px north of the edge; the gate of tc1's cell D
-tc1_m6817    P  6524-6544,6400   in   poly from the pad (6533,6152) going on south
+cnt_bus_b    M  6789-6805,4450   out  to tc1's foot (6797,4372), 70 px north of the edge; the gate of tc1's cell D
+cnt_bus_b    P  6524-6544,6400   in   poly from the pad (6533,6152) going on south
 vcc          M  6687-6737,4450   -    tcw's VCC rail
-tc2_sr_g     M  7827-7847,6400   in   the latch's gate line (rows A and D), going on south (follower: end (7835,7218))
+ck_out     M  7827-7847,6400   in   the latch's gate line (rows A and D), going on south (follower: end (7835,7218))
 tc2_sr_s     M  7782-7800,6400   in   row E's line, going on south (follower: end (7791,6958))
 tc2_sr_q     M  7913-7931,6400   out  the latch's node q, going on south (follower: end (7922,7046))
 tc2_sr_q     P  8250,6163-6180   out  the arm of q's load poly, going on east under the VCC rail
-cdp1_lw1     P  8340-8375,4975-4987  ?    the pad (8353,4981): tc2_sr_r (an alias) meets cdp1's poly; the line goes on east through cdp1 to x 15584
+cdp1_lw1     P  8340-8375,4975-4987  ?    the pad (8353,4981): cdp1_lw1 (an alias) meets cdp1's poly; the line goes on east through cdp1 to x 15584
 tc2_sr_c     P  8250,6358-6376   ?    top line of cdp2's channel 2, going on east
 tc2_sr_c     M  6400,6360-6380   ?    metal from the pad (7490,6367), going on west (follower: end (6184,6370))
 vss          M  7990-8040,5625   -    meets rax's rail step (x 7945-8035, y 5600-5650)
 vss          M  8030-8075,6400   -    the ground rail going on south
 vcc          M  8206-8248,6400   -    going on south (cdp2's vcc rail x 8229 from y 7425)
 vcc          M  8117-8163,4450   -    meets tc1's VCC rail (x 8116-8165)
-tc2_m6490    M  6400,5557-5577   ?    metal of the nest, going on west (follower: end (6318,4999))
-tc2_m6490    P  6483-6501,6400   ?    poly from the pad (6490,6108), going on south
-tc2_m6447    M  6400,5601-5621   ?    metal of the nest, going on west (follower: end (6276,4825))
-tc2_m6447    P  6443-6460,6400   ?    poly from the pad (6447,6150), going on south
+ck_a    M  6400,5557-5577   ?    metal of the nest, going on west (follower: end (6318,4999))
+ck_a    P  6483-6501,6400   ?    poly from the pad (6490,6108), going on south
+lc3_w9947    M  6400,5601-5621   ?    metal of the nest, going on west (follower: end (6276,4825))
+lc3_w9947    P  6443-6460,6400   ?    poly from the pad (6447,6150), going on south
 vss          M  6860-6907,4380   -    east ground rail of the crossing field: meets tc1's rail
 vss          M  6882-6926,4990   -    east ground rail of the crossing field: meets fld's rail
 ral_stb      M  8198-8212,4450   ?    from tc1 (its bus metal ns4)
@@ -37,7 +37,7 @@ tc1_ns3      M  7894-7909,4450   ?    from tc1 (its contact (7905,4370))
 tc1_ns3      M  7652-7670,6400   ?    metal from the pad (7660,6193), going on south (follower: end (7661,7088))
 tc2_r5589    P  8275,5252-5272   ?    poly from the pad (8248,5262), going on east to a pad (8490,5262), seen
 tc2_r5589    P  6835-6851,6400   ?    poly from the pad (6840,6282), going on south
-r9m_l1w      P  8352,4840-4860   ?    poly from the pad (8290,4850); ends in a box at (8370,4850) at cdp1's west edge, not traced
+sl_eq_r5_n      P  8352,4840-4860   in   poly from the pad (8290,4850); the box at (8370,4850) is the output node of eof's inverter NOT sl_eq_r5
 tc2_m6404    M  6400,6012-6040   ?    metal of the nest, going on west and north (x 6352-6372, seen to y 5955)
 tc2_m6404    P  6395-6415,6400   ?    poly from the pad (6404,6107), going on south
 vcc          M  7695-7752,6400   -    the wide VCC metal's south leg (from fld's VCC rail by the band y 6105-6155), going on south

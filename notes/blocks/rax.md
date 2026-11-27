@@ -65,3 +65,10 @@ value; and the tracks are these outputs.
 
 The load; the unit east of x 8000; the three thin metals; a unit-by-unit check of the
 four copies beyond the strips.
+
+## Note (coordinator, from the handoffs of 2026-11-17/18)
+
+From `tc2`: the thin metal x 8022-8040 is one line, not pieces, with no contact in the units; the
+"poly pads with contact" are poly end caps and buried-contact boxes; the load candidates are
+settled by `tc2`'s `tc2_rxl` (the units' loads). The unit poly runs on to x 8040, and the
+pull-down diffusion may end at x 8017 rather than 8000 (W about 127, not 112): seen, not verified.

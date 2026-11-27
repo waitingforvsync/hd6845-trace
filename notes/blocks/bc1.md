@@ -17,7 +17,7 @@ overlays checked on the clean, stripped and metal shots):
    four one-of-four lines (active low), plus one inverter with a weak load. All their
    wiring in the channel is traced.
 3. **Routing field**: the six data lines of `cdp4` row D as far as they were followed
-   (lines 1 and 2 joined to `cdp4_in6_s1`, `cdp4_in6_s2`).
+   (lines 1 and 2 joined to `cdp3_g_c2`, `cdp3_g_c3`).
 
 Not traced: the sources of `bc1_ld_in1` / `bc1_ld_in2` (lower left gate group), the
 left column of the left group, the dense column B right of the VCC rail x 8534, the
@@ -184,9 +184,9 @@ Recorded so the next agent can start here; none of it is in the trace.
 ### Row D data lines (traced in part)
 
 Six poly lines at y 14089, 14132, 14175, 14218, 14261, 14304 from x 7000 eastwards.
-Line 1 ends on the foot contact of `cdp4_in6_s1` at (8075,14084). Line 2 steps up at
-x 8118 to y 14087 and ends on the foot contact of `cdp4_in6_s2` at (8463,14083). Lines
-3-6 (`bc1_d3`..`bc1_d6`) step up in the same nested way (x 8150-8200) and continue
+Line 1 ends on the foot contact of `cdp3_g_c2` at (8075,14084). Line 2 steps up at
+x 8118 to y 14087 and ends on the foot contact of `cdp3_g_c3` at (8463,14083). Lines
+3-6 (`cdp3_g_c4`..`cdp3_g_c7`) step up in the same nested way (x 8150-8200) and continue
 right past x 8500, in order, presumably to `cdp4_in6_s3`..`s6` (not followed). Each
 line also has a contact to a vertical metal that arrives from above and ends on it:
 (7188,14091), (7230,14131), (7274,14172), (7317,14217), (7361,14260), (7405,14304).
@@ -246,9 +246,9 @@ The vertical x 8837 has further contacts at about y 15127, 15300, 15455, 15520.
 | `bc1_ld_a` | metal | x 7448, y 14050 (continues up) | driven inside | twin of the strobe; believed to go to `cdp4_ld` |
 | `bc1_ld_in1` | poly | y 15822, drawn to x 7750 (continues left into the lower left group) | from the lower left group | NAND input next to the output |
 | `bc1_ld_in2` | metal | x 7882, y 16300 (continues down); tap poly y 16258 drawn to x 7750 | unknown | NAND input next to VSS |
-| `cdp4_in6_s1` | poly | y 14089, x 7000; metal x 7189, y 14040 | unknown | row D data line 1 |
-| `cdp4_in6_s2` | poly | y 14132, x 7000; metal x 7231, y 14040 | unknown | row D data line 2 |
-| `bc1_d3`..`bc1_d6` | poly | y 14175, 14218, 14261, 14304 at x 7000; drawn east to x 8040 (continue); metal x 7274, 7317, 7360, 7404 at y 14040 | unknown | row D data lines 3-6 (believed `cdp4_in6_s3`..`s6`) |
+| `cdp3_g_c2` | poly | y 14089, x 7000; metal x 7189, y 14040 | unknown | row D data line 1 |
+| `cdp3_g_c3` | poly | y 14132, x 7000; metal x 7231, y 14040 | unknown | row D data line 2 |
+| `cdp3_g_c4`..`cdp3_g_c7` | poly | y 14175, 14218, 14261, 14304 at x 7000; drawn east to x 8040 (continue); metal x 7274, 7317, 7360, 7404 at y 14040 | unknown | row D data lines 3-6 (believed `cdp4_in6_s3`..`s6`) |
 | `bc1_s0` | metal | bus line y 14832, drawn from x 8040 (the line continues left to about x 7790) | from outside | decoder input, low bit |
 | `bc1_s1` | metal | bus line y 14873, drawn from x 8040 (continues left to about x 7790) | from outside | decoder input, high bit |
 | `bc1_dec01_n` | metal | x 8056, y 16300 (continues down) | driven inside | low when s1=0, s0=1 |
@@ -319,3 +319,115 @@ In order of value:
 - Routing field: the 13-line bus (where `bc1_s0`, `bc1_s1` and the other 11 lines come
   from and go), data lines 3-6 east of x 8040, the supply joints.
 - Channel tracks x 7924, 7969 and 8012 below y 15865.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, third batch)
+
+- "Believed, not traced: `bc1_ld_a` goes up the bundle left of `cdp4` to the strobe of its 8-bit row C
+  latch (`cdp4_ld`)" and Not done "Where `bc1_ld_a` goes above y 14050": traced (`busl`, piece `ctl`):
+  x 7448 north to y 13982, east to x 7556, north over a box to the pad (7556,12983) on `cdp4_ld`'s row.
+  Marked (one `?M`; AMB-038).
+- "the 13 bus lines at their left ends (x 7790)": the poly rows arriving there are identified for seven
+  (`busl`, piece `lc9`): row y 14567 `lc3_e9798`, 14611 `lc2_w9079`, 14654 `lc3_e9756`, 14697 `rst_c`,
+  14740 `lc2_w8450`, 14784 `lc3_w9947` (the ripple counter's clock), 14914 `rst_a`; row y 14523 is two
+  nets (`rcs_e4` to the pad (7012,14522), another from the pad (7100,14522) east), as R10 says.
+- Survey ("Not traced: track 7969 (from a contact at (7880,14910) via a horizontal at y 14912, down the
+  whole channel to a contact at (7968,16300))") and Not done ("Channel tracks x 7924, 7969 and 8012 below
+  y 15865"): track 7969 is drawn by `eof` (piece `isrc4`) and is `rst_a`; its top contact (7880,14914)
+  is on the poly row y 14914 that `busl` brings from the west.
+- The six verticals "from above ending on the lines" (x 7189 .. 7404, drawn from y 14040) are
+  `cdp3_g_c2` .. `c7`, line g of `cdp3`'s row A cells (`busl`, piece `d6`).
+- A seventh track (x 7145 / 7187 / 7231 between y 13680 and 15000, running on to about (7100,16279)) is
+  `ck_out` (`busl`, piece `sr`): it lies on line 3 at y 14176 (x 7145-7187) and crosses line 6 at
+  (7231,14304) without a contact. Its driver is expected in the group x 7000-7860, y 15000-16300.
+
+## Corrections (coordinator, from the handoffs of 2026-11-20)
+
+- Survey, "Right ends: most lines end on contacts at x 8250-8290 and continue (in poly under the rails x 8300-8560, then metal again from x 8560) towards x 9000": not so for the line y 14786 (`lc3_w9947`): from its pad (8293,14785) the poly goes south 40 px and east along y 14816-14834 under the rails and the VSS band to a turn at x 8968 and a pad (8967,14870), with no metal between (`eof`, piece `ck6`).
+- Ports, `bc1_g6_in` "from outside (below)": the metal continues 1,520 px down the bundle and by two pads and a poly row to the output of `eof`'s inverter `inv17` (`eof_w17040` = NOT `eof_w16823`; `notes/blocks/eof.md`, piece `o040`). The join passes three uncertain stretches of a thin metal (an alias, not a rename).
+- Column B (x 8508-8940) is drawn by `eof` from y 14942 to 15472 and from y 15886 south; column A's VSS rail (R1) is drawn on south of y 16300 to its end at y 17568.
+
+## Corrections (coordinator, from the handoff of `bl0` run 12, 2026-11-20)
+
+- The six poly lines "line 1 .. line 6" (drawn from x 7000): believed to run on west to pads at about x 5760-5800, where six tracks start that `bl0` (run 12) draws from y 15000 south into the left array's six lower rows (follower only; not read; the stretch is in `busl`'s region).
+- A poly row out of the gate group at y 15566 (it runs on east under the rail x 7292-7342) ends west on a pad (7143,15566): it is `h_eq_r1_n` (`bl0` run 12, piece `m7144`), a wire with no transistor that goes south and east to a poly row east of (8360,17821) in `bc3`. A second net lies beside it (pads (7186,15520), (7187,15696)), undrawn.
+
+## Corrections (coordinator, from the handoff of `busl` run 14, 2026-11-21)
+
+- Not done / the correction above ("The six poly lines ... believed to run on west to pads at about x 5760-5800"): drawn (`busl` run 14, piece `a6`): pads at (5757,14092), (5800,14136), (5756,14178), (5800,14223), (5757,14265), (5800,14308), no tap between; from them six nested Ls to `bl0`'s six tracks. The lines are `cdp3_g_c2`..`c7` to the left array's six lower rows.
+
+## Corrections (coordinator, from the handoffs of `busl` run 16, 2026-11-21)
+
+- "The VSS plate at the foot of the s0 rail" / the wide metal over the row y 14870: it is VSS from `cdp4`'s plate (`busl`, piece `vb`) and leaves south at (7383-7432, 15000); RL2's top bar (y 14935-14970, east of x 7468) is separate from it.
+
+## Corrections (coordinator, from the handoffs of `eof` runs 28-35, 2026-11-21)
+
+- Ports, `bc1_dec01_n` "x 8056, y 16300 (continues down)": it continues to the pad (8010,17210) and is gate B of the NOR that makes `eof_w17338` (`trace/eof.txt`, piece `in207`; the neck at y 16613 uncertain, AMB-049). No other load was seen on the stretch south of y 16300.
+- Ports, `bc1_g6_out` ("poly, y 16107, drawn to x 8300 ... into the untraced gates at y 16000-16300") and Not done "Column A below y 16000": the gate fed by `bc1_g6_out` is the data input of the latch `lat18` (`trace/eof.txt`), a copy of `tl1`'s latch at y 16015-16447; the poly leaves the pad as the row y 16120-16138, not along y 16107 (geometry only: `trace/bc1.txt`'s `P 8221,16107 x8300` is a stub that joins nothing else; the block's Ambiguity 114 in `eof`).
+- The west gate column (rail x 7294-7342): four units are drawn by `eof` (y 15024-15900): `eof_w15128` = NOT `rst_n`; `eof_w15262` = NOR(`lc1_w7780`, `rcs_mv`); `eof_w15523` = NOR(`rcs_e4`, `eof_w16040`, `h_eq_r1_n`); `eof_w15781` = NOR(`eof_w15523`, `eof_w15262`, `eof_w15128`) (each marked by its two ties). The rail's north end turns east at y 15024-15069 onto the VSS metal x 7383-7432 (`busl`, piece `vb`). The box `D 7462,15194:7540,15284` also feeds the load of `eof_w15262` from its west side.
+
+## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
+
+- Its west gate column (rail x 7294-7342) is drawn by `eof` from y 15024 to y 16930 (eight units: an inverter,
+  three NORs, two wide inverters on `eof_w15781`, two select-line inverters); `bc1` draws none of them.
+
+## Corrections (coordinator, from the handoff of `eof` run 69, 2026-11-24)
+
+- `h_eq_r1_n`, gate 3 of the NOR `eof_w15523` in the west gate column, is NOT `h_eq_r1` (`eof` piece
+  `ld566`, firm), so `eof_w15523` = `h_eq_r1` AND NOT `rcs_e4` AND NOT `eof_w16040` (marked, as that NOR is).
+
+## Run of 2026-11-27, piece `s01w`: what the decode's two inputs are
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 09:02 -0600. Wiring only, x 7545-8045, y 14811-14888: no transistor, no
+uncertain item; two joins (full extraction 2,513 nets, was 2,515; 4,838 transistors, 0 errors). Views in
+`cache/scratch/bc1/s/`: `w` (x 7540-7870, 4x) and `e` (x 7860-8200, 3.8x), each metal over clean shot with every
+package's trace.
+
+**`bc1_s0` is the net `busl` calls `tc2_m6404`, and `bc1_s1` is `tl6_p6187`.** The bus lines y 14832 and
+y 14875, which this block drew from x 8040, run on west as plain metals over field (pink in the clean shot under
+their whole length; `tools/tl5_tracks.py h 14828 7540 8200` and `h 14872 ...`: metal in both chips from each pad
+east) to a pad each, (7795,14828) and (7838,14871) (hole in the clean shot; ring and bright centre in chip 2's
+metal shot for the first, in both for the second), and each pad is the east end of a poly row that `busl` draws to
+x 7550 and gives a port: `tc2_m6404` at (7550,14827), `tl6_p6187` at (7550,14870). The rows are salmon and
+unbroken in the clean shot from x 7550 to the pads under the vertical metals x 7575-7760 (view `w`), with no hole
+(a dark speck at (7654,14872) lies under bright, unringed metal in both chips) and no branch (`tools/eof_tee.py`).
+
+Both names are kept (`@alias bc1_s0 tc2_m6404`, `@alias bc1_s1 tl6_p6187`), so the decode's equations read as
+before. Both wires come from the top-left logic across the left bus field (`busl`); the glossary has
+`tl6_p6187` as one of three believed outputs of R8, and `tc2_m6404` enters `tl6` beside them (a metal along
+y 2619 next to theirs at y 2530 and y 2573). `bc2`'s centre block has a second decode of the same build on the
+other two, `tl6_p6101` and `tl6_p6143` (`bc2` runs 2-3, same day). So, believed: the two decodes are R8's two
+two-bit skew fields, this one (which feeds the DISPTMG path through `bc1_dec01_n`) the display enable's.
+
+Not done: the wires' north ends (in `tl6`, `tc2`, `tlb`); the other bus lines.
+
+## Review
+
+### Round 1 (full review), 2026-11-27: piece `s01w`
+
+A fresh Claude Fable 5.2 agent, on commit de735bd, 8 images in `cache/scratch/bc1/review-1/`. Told to suspect:
+which row meets which pad (a step of one track under the vertical metals would swap or misname the inputs), a
+contact from either row to a vertical metal (the speck at (7654,14872)), the two pads, the metal stretches to
+x 8040 and their join to the earlier drawing, and which bus line turns south where.
+
+**No finding changes a connection.** One geometry remark, fixed: the two new metals were drawn 14 wide and are
+about 20 (y 14818-14838, y 14862-14882); the earlier-drawn parts sit up to 4 px off the metal (left as drawn).
+
+Checked and found correct by the reviewer: `busl`'s rows end at x 7550 on the same bands (y 14816-14838 and
+y 14859-14881) and each runs straight to its own pad (the field lines y 14806, 14849, 14892 carry no poly from
+x 6860 to the pads: no track step); no contact to the vertical metals (no ring in either metal shot, no hole in
+the clean shot, the rows keep their 18 px width; no branch); the speck at (7654,14872) an artefact (the same
+pattern on the row y 14914 under the same step of that metal); both pads with ring and bright centre in both
+chips, a hole in the clean shot, field north and south, open poly west and metal leaving east only; both metals
+continuous in both chips over plain field; row 0 feeds the outer L (south at x 8186, `bc1_s0`) and row 1 the
+inner (x 8143, `bc1_s1`), 24 px apart at the corner. Could not check: chip 2's stripped shot under the wide
+metals (fringes), so "no contact" there rests on the two metal shots and the clean shot; the three vertical
+metals over the rows are drawn by no package at this height.
+
+Connections before and after the fix (commit de735bd against the fixed tree):
+
+    tools/t.sh bc1 sameconn.py de735bd            ->  connections identical
+    .venv/bin/python tools/sameconn.py de735bd    ->  connections identical
+
+Recorded 2026-11-27 09:11 -0600.
+
+Round 1: no findings that change a connection.

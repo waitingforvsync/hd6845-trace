@@ -276,9 +276,13 @@ rc_eq_r4  = NOR(the seven x)              high when the seven uc lines equal RE
   drawn. Seen at 1.28x (`bundle1.png`), coordinates approximate: L3 (`h_eq_r2`) ends on
   a contact at (13475,9705), poly west along y 9705; L2's piece from the north ends at
   (13433,9922), poly bar y 9915-9932 east to a contact at (13649,9919), which is the top
-  of L7 south (`rdp3_n7s9`); L7's piece y 9593-9733 ends on a contact at (13649,9747),
+  of L7 south (`rc_eq_r4`); L7's piece y 9593-9733 ends on a contact at (13649,9747),
   poly west along y 9745; L8's top contact at (13691,9485); L0's upper piece
   (y 9396-9646) and L2's top end share a poly bar at y 9661 that goes west. Track scan of
   all twelve (gap 8) is in the run's log, not kept.
 - The upper pad (13692,10748) on L8 is in rdp3's file (`rc3`).
 - Which slice is which data bit (needs the data bus followed to the D pads).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- Not done, the left bundle's L2 piece and the bar to L7: drawn by `eof` (piece `r4`), as `rc_eq_r4`.

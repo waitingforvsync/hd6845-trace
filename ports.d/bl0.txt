@@ -1,0 +1,60 @@
+# bl0: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+res_b        M  6359-6373,15000   in   busl's track x 6366
+lpstb_b      M  6401-6415,15000   in   busl's track x 6408
+rst_n   P  7280,15078-15098  out  rst_n's poly row on east: a gate band under bc1's rail x 7292-7342 at y 15088, ending at about x 7350
+rst_n   P  5700,15078-15098  ?    poly row on west to a pad (4909,15088); a track x 4909 from the north ends there
+rst_n   P  5725-5745,15800   out  rst_n's poly column south of the pad (5737,15759), into the bottom-left logic
+bl0_w15412   M  2694-2706,15972   out  the thin metal x 2690-2710 north of the pad (2700,15999): believed the MA cells' force line (a tab to mal_frc_m9's pad at y 15578 seen)
+bl0_w15412   M  2694-2706,16026   out  the same thin metal, on south of the pad
+vss          M  6013-6067,15800   -    the U's left arm runs on south
+vss          M  6273-6328,15800   -    the U's right arm runs on south
+vcc          M  6187-6241,15800   -    the inner rail runs on south
+larr_l0_g0   D  2876,14105-14122  in   the diffusion wire is one piece with the box of larr's contact (2893,14114)
+bl0_w14308   P  2405,14687-14708  out  the third pad's row runs on west of the pad (not read)
+larr_cin_s7  P  2850,14559-14574  out  onto larr's poly row y 14566
+larr_l0_g1   D  2860,14517-14533  ?    onto larr's diffusion (2850-2880, 14508-14540) and its contact (2892,14523)
+vss          M  2605-2655,14090   -    the left edge column's vss rail, on north
+vss          M  2605-2655,14770   -    the same, on south
+vcc          M  2783-2832,14090   -    the left edge column's vcc rail, on north
+vcc          M  2783-2832,14770   -    the same, on south
+rst   M  6834-6848,15000   in   busl's track x 6841, on north; here south to the gate that clears the pair bl0_w17610
+bl0_w17687   P  7790,15682-15702  in   poly row west of the pad (7925,15696), into bc1's gate group at about (7745,15690): what clears the light pen flag once the strobe is low
+bl0_w17610   P  7760,17378-17398  out  poly row west of the pad (7882,17389), into the gate column east of the supply rail x 7470-7520 (bc3's region): the light pen flag
+busl_x6820   M  6747-6761,15000   in   busl's track x 6754, on north
+busl_x6820   M  6747-6761,17000   out  the thin metal on south (follower: corner (6767,18040), east past (7417,18035))
+rcs_mv       M  6964-6978,15000   in   busl's track x 6971, on north
+rcs_mv       P  7030,15291-15311  out  poly row east of the pad (6966,15305)
+rcs_mv       P  7040,16770-16790  out  poly row east of the pad (6968,16780)
+cdp3_cw_c7    M  5315-5329,15000   in   busl's track x 5322, on north
+cdp3_cw_c7    D  4780,15362-15382  out  diffusion wire on west into the left array
+cdp3_cw_c6    M  5272-5286,15000   in   busl's track x 5279, on north
+cdp3_cw_c6    D  4780,15841-15856  out  diffusion wire on west into the left array
+cdp3_cw_c5    M  5228-5242,15000   in   busl's track x 5235, on north
+cdp3_cw_c5    D  4780,16493-16508  out  diffusion wire on west into the left array
+cdp3_cw_c4    M  5185-5199,15000   in   busl's track x 5192, on north
+cdp3_cw_c4    D  4780,16970-16985  out  diffusion wire on west into the left array
+cdp3_cw_c3    M  5141-5155,15000   in   busl's track x 5148, on north
+cdp3_cw_c3    D  4780,17447-17461  out  diffusion wire on west into the left array
+cdp3_cw_c2    M  5098-5112,15000   in   busl's track x 5105, on north
+cdp3_cw_c2    D  4780,17924-17938  out  diffusion wire on west into the left array
+cdp4_bus_s0  M  5443-5459,15000   in   busl's track x 5451, on north
+cdp4_bus_s0  P  4780,15033-15053  out  poly row on west into the left array
+lc2_w8450    M  4815-4829,15000   in   busl's track x 4822, on north
+lc2_w8450    P  4930,16703-16723  out  poly row east of the pad (4823,16713), into the bottom-left logic
+vss          M  7292-7342,16925   -    the gate column's rail x 7317, on north
+vcc          M  7470-7520,17020   -    bc3's rail x 7495, on north
+vcc          M  7470-7520,17670   -    the same, on south
+cdp3_g_c2   M  5489-5503,15000   ?    track on north in the left bus field, drawn by no one (busl's region); follower: one staircase east, to an end at (5760,14092), the y of bc1's poly line of cdp3_g_c2
+cdp3_g_c2   P  4780,18070-18092  ?    poly row on west into the left array (its lowest row)
+cdp3_g_c3   M  5533-5547,15000   ?    track on north; follower: to (5803,14135), the y of bc1's line of cdp3_g_c3
+cdp3_g_c3   P  4780,17593-17614  ?    poly row on west into the left array
+cdp3_g_c4   M  5577-5591,15000   ?    track on north; follower: to (5761,14177), the y of bc1's line of cdp3_g_c4
+cdp3_g_c4   P  4780,17116-17137  ?    poly row on west into the left array
+cdp3_g_c5   M  5620-5634,15000   ?    track on north; follower: to (5804,14223), the y of bc1's line 4
+cdp3_g_c5   P  4780,16639-16659  ?    poly row on west into the left array
+cdp3_g_c6   M  5664-5678,15000   ?    track on north; follower: to (5756,14261), the y of bc1's line of cdp3_g_c6
+cdp3_g_c6   P  4780,15988-16010  ?    poly row on west into the left array
+cdp3_g_c7   M  5707-5721,15000   ?    track on north; follower: to (5799,14304), the y of bc1's line of cdp3_g_c7
+cdp3_g_c7   P  4780,15511-15533  ?    poly row on west into the left array
+h_eq_r1_n   P  7260,15555-15577  ?    poly row east of the pad (7143,15566), on under bc1's rail x 7292-7342 (bc1's gate group)
+h_eq_r1_n   P  8360,17811-17831  ?    poly row east of the pad (8272,17821); seen as poly to about x 8690, then a metal along y 17821 to x 8955

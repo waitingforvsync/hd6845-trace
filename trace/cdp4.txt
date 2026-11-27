@@ -14,10 +14,10 @@ P 7600,12223 x10588 w=23           # sel1: gates T1 of row A (branch down at eac
 P 7600,12481 x10592 w=23           # sel2: gates T2 of row A
 P 7600,12530 x10592 w=23           # sel3: gates T2 of row B
 P 7600,12786 x10586 w=23           # sel4: gates T1 of row B
-N P 7610,12223 cdp4_sel1
-N P 7610,12481 cdp4_sel2
-N P 7610,12530 cdp4_sel3
-N P 7610,12786 cdp4_sel4
+N P 7610,12223 rsel14_buf
+N P 7610,12481 rsel15_buf
+N P 7610,12530 rsel17_buf
+N P 7610,12786 rsel16_buf
 
 @cell cdp4_mux tag=s2
 # --- row A, T1: a -> n, gate = sel1
@@ -279,7 +279,7 @@ P 7600,13333 x7693 w=22            # s0: in
 P 7662,13316:7707,13349
 C 7683,13333 s=26x24
 M 7683,13290 y13347 w=24
-N P 7610,13333 cdp4_in_s0
+N P 7610,13333 cdp4_bus_s0
 P 7764,13333 x10850 w=22            # s0: n out to the right
 P 7750,13316:7798,13349
 C 7774,13333 s=26x24
@@ -288,7 +288,7 @@ P 7600,13376 x8084 w=22            # s1: in
 P 8053,13359:8098,13392
 C 8074,13376 s=26x24
 M 8074,13290 y13390 w=24
-N P 7610,13376 cdp4_in_s1
+N P 7610,13376 cdp4_bus_s1
 P 8155,13376 x10850 w=22            # s1: n out to the right
 P 8141,13359:8189,13392
 C 8165,13376 s=26x24
@@ -297,7 +297,7 @@ P 7600,13420 x8475 w=22            # s2: in
 P 8444,13403:8489,13436
 C 8465,13420 s=26x24
 M 8465,13290 y13434 w=24
-N P 7610,13420 cdp4_in_s2
+N P 7610,13420 cdp4_bus_s2
 P 8546,13420 x10850 w=22            # s2: n out to the right
 P 8532,13403:8580,13436
 C 8556,13420 s=26x24
@@ -306,7 +306,7 @@ P 7600,13463 x8866 w=22            # s3: in
 P 8835,13446:8880,13479
 C 8856,13463 s=26x24
 M 8856,13290 y13477 w=24
-N P 7610,13463 cdp4_in_s3
+N P 7610,13463 cdp4_bus_s3
 P 8937,13463 x10850 w=22            # s3: n out to the right
 P 8923,13446:8971,13479
 C 8947,13463 s=26x24
@@ -315,7 +315,7 @@ P 7600,13505 x9256 w=22            # s4: in
 P 9225,13488:9270,13521
 C 9246,13505 s=26x24
 M 9246,13290 y13519 w=24
-N P 7610,13505 cdp4_in_s4
+N P 7610,13505 cdp4_bus_s4
 P 9327,13505 x10850 w=22            # s4: n out to the right
 P 9313,13488:9361,13521
 C 9337,13505 s=26x24
@@ -324,7 +324,7 @@ P 7600,13548 x9645 w=22            # s5: in
 P 9614,13531:9659,13564
 C 9635,13548 s=26x24
 M 9635,13290 y13562 w=24
-N P 7610,13548 cdp4_in_s5
+N P 7610,13548 cdp4_bus_s5
 P 9716,13548 x10850 w=22            # s5: n out to the right
 P 9702,13531:9750,13564
 C 9726,13548 s=26x24
@@ -333,7 +333,7 @@ P 7600,13590 x10035 w=22            # s6: in
 P 10004,13573:10049,13606
 C 10025,13590 s=26x24
 M 10025,13290 y13604 w=24
-N P 7610,13590 cdp4_in_s6
+N P 7610,13590 cdp4_bus_s6
 P 10106,13590 x10850 w=22            # s6: n out to the right
 P 10092,13573:10140,13606
 C 10116,13590 s=26x24
@@ -342,7 +342,7 @@ P 7600,13633 x10426 w=22            # s7: in
 P 10395,13616:10440,13649
 C 10416,13633 s=26x24
 M 10416,13290 y13647 w=24
-N P 7610,13633 cdp4_in_s7
+N P 7610,13633 cdp4_bus_s7
 P 10497,13633 x10850 w=22            # s7: n out to the right
 P 10483,13616:10531,13649
 C 10507,13633 s=26x24
@@ -380,14 +380,14 @@ C 8335,13677 s=26x24
 P 8313,13677 x8533 w=22            # poly link to the c track of s2
 C 8511,13677 s=26x24
 M 8511,13655 y13692 w=22
-N M 8073,14050 cdp4_in6_s1
+N M 8073,14050 cdp3_g_c2
 @inst cdp4_lat 0,759 tag=ldr_s2
 M 8727,13664 y13800 w=24            # output of the cell under s2, up to the link
 C 8727,13677 s=26x24
 P 8705,13677 x8924 w=22            # poly link to the c track of s3
 C 8902,13677 s=26x24
 M 8902,13655 y13692 w=22
-N M 8465,14050 cdp4_in6_s2
+N M 8465,14050 cdp3_g_c3
 @inst cdp4_lat 390,759 tag=ldr_s3
 M 9117,13664 y13800 w=24            # output of the cell under s3, up to the link
 C 9117,13677 s=26x24
@@ -421,27 +421,781 @@ C 10354,13906 s=28x40
 
 # ======================================================================
 # Row R1, lower half (y 11490-11850): eight more latches of the same cell, upside down
-# (findcell: dy -1466, mirrored top to bottom, score 0.82-0.83). Strobe cdp4_ld8b.
+# (findcell: dy -1466, mirrored top to bottom, score 0.82-0.83). Strobe wr_r15.
 # Its buffered output is the selector's b input: the d land's contact falls at
 # (8712 + dx, 11772), under the top end of the b track.
 # ======================================================================
 P 7600,11837 x10600 w=22           # strobe (poly line seen under all slices; ends not examined)
-N P 7610,11837 cdp4_ld8b
+N P 7610,11837 wr_r15
 @inst cdp4_lat -782,-1466 mx=8610 rot=180 o=8610,13132.5 tag=lr_s0
-N M 7683,11510 cdp4_in8b_s0
+N M 7683,11510 cdp3_bl_c0
 @inst cdp4_lat -392,-1466 mx=8610 rot=180 o=8610,13132.5 tag=lr_s1
-N M 8073,11510 cdp4_in8b_s1
+N M 8073,11510 cdp3_bl_c1
 @inst cdp4_lat 0,-1466 mx=8610 rot=180 o=8610,13132.5 tag=lr_s2
-N M 8465,11510 cdp4_in8b_s2
+N M 8465,11510 db_b5
 @inst cdp4_lat 390,-1466 mx=8610 rot=180 o=8610,13132.5 tag=lr_s3
-N M 8855,11510 cdp4_in8b_s3
+N M 8855,11510 cdp3_bl_c3
 @inst cdp4_lat 780,-1466 mx=8610 rot=180 o=8610,13132.5 tag=lr_s4
-N M 9245,11510 cdp4_in8b_s4
+N M 9245,11510 cdp3_bl_c4
 @inst cdp4_lat 1170,-1466 mx=8610 rot=180 o=8610,13132.5 tag=lr_s5
-N M 9635,11510 cdp4_in8b_s5
+N M 9635,11510 cdp3_bl_c5
 @inst cdp4_lat 1560,-1466 mx=8610 rot=180 o=8610,13132.5 tag=lr_s6
-N M 10025,11510 cdp4_in8b_s6
+N M 10025,11510 cdp3_bl_c6
 @inst cdp4_lat 1951,-1467 mx=8610 rot=180 o=8610,13132.5 tag=lr_s7
-N M 10416,11510 cdp4_in8b_s7
+N M 10416,11510 cdp3_bl_c7
 D 10722,11623:10751,11797           # VSS land under the ninth rail for the s7 cell of row R1
 C 10745,11652 s=28x40
+# ======================================================================
+# Corner gate group, x 7550-7870, y 13640-14055 (run 2, 2026-11-19): cdp4_rst = NOR of six
+# select rows. Three VSS pockets on the column under the VSS rail, each between two gates and
+# closed on the east by a field island; the diffusion around them is the output.
+# ======================================================================
+M 7622,13640 y14050 w=46              # the s0 VSS rail on south over the column
+M 7550,14024:7645,14055               # the rail widens west into a plate from y 14022 (seen x 7488-7645, y 14022-14075; drawn only inside the region): it covers row 6's step block, no contact
+M 7837,13520 y13570 x7795 y14050 w=46 # the s0 VCC rail: bends west at y 13547-13593, then south
+C 7610,13720 7610,13838 7610,13995    # VSS onto the three pockets
+D 7584,13660:7707,14055               # the column and its east part, up to the islands' west edges
+D 7700,13660:7747,13677               # top strip east to the bus
+D 7727,13660:7747,13785               # bus, north stretch
+D 7700,13773:7757,13790               # neck between rows 2 and 3, east to the bus
+D 7738,13780:7757,13950               # bus, middle stretch (east of the second island)
+D 7700,13895:7757,13947               # the big segment east to the bus (under the box)
+D 7730,13945:7757,14055               # bus, south stretch
+D 7700,14042:7757,14055               # bottom strip
+D 7540,13905:7590,13940               # the big segment west into the box
+# gates: row and head
+P 7550,13678:7578,13712               # row 1's block at the step (busl's row y 13701 ends on it)
+P 7545,13688 x7665 w=22
+P 7660,13681:7715,13707
+N P 7600,13688 rsel14_buf
+P 7550,13732:7578,13770               # row 2's block at the step
+P 7570,13759 x7665 w=22
+P 7660,13742:7715,13767
+N P 7600,13759 rsel13_buf
+P 7545,13803 x7665 w=22
+P 7660,13797:7715,13822
+N P 7600,13803 rsel17_buf
+P 7545,13873 x7665 w=22
+P 7660,13857:7722,13882
+N P 7600,13873 rsel12_buf
+P 7545,13958 x7665 w=22
+P 7660,13953:7712,13980
+N P 7600,13958 rsel16_buf
+P 7545,14004 x7562 w=22                # busl's row y 14004 on to the step
+P 7552,14010:7580,14040               # row 6's block at the step
+P 7570,14028 x7665 w=22
+P 7660,14007:7715,14035
+N P 7600,14028 rsel15_buf
+# output: buried contact of cdp4_rst's poly in the west box
+P 7528,13906:7562,13929
+B 7538,13904:7564,13931
+N P 7550,13917 cdp4_rst
+# load: gate tied to the bus by the east box, drain on VCC
+D 7775,13825:7823,13977
+D 7750,13961:7780,13975               # the passage from the bus to the load's source
+C 7798,13850 s=22x36
+P 7733,13912:7768,13935
+P 7760,13900:7833,13937
+B 7731,13910:7759,13937
+
+# ======================================================================
+# Row R1, upper half (y 11050-11492; run 3, 2026-11-19): the comparator of the eight bus
+# lines with R15. Per slice (cell cdp4_xr): nor = NOR(bus, q) and ne = NOR(nor, bus AND q)
+# = bus XOR q, where bus is the slice's bus-tap metal (cdp4_bus_sK) and q the poly that
+# comes up from the R15 latch below. ne gates a wide pull-down (cell cdp4_xpd; s0's is
+# shorter and drawn by hand) on a diffusion wire through the row, bus_eq_r15, whose load
+# stands east of s0 and which leaves west by busl's pad at (7555,11118).
+# ======================================================================
+@cell cdp4_xr tag=s2
+# VSS box and the neck to the pull-down's source pocket; the stub of the pull-down's gate
+# poly, onto node ne by a buried contact
+D 8387,11172:8437,11232
+D 8430,11168:8450,11198
+C 8400,11197 s=24x30
+P 8458,11205:8480,11264
+B 8457,11246:8484,11268
+D 8460,11248:8482,11270
+# node ne: the land, its west column down to the VSS diffusion (gate H), the strip east
+D 8425,11267:8535,11289
+D 8425,11267:8462,11425
+D 8524,11267:8540,11306
+D 8524,11290:8672,11306
+D 8668,11290:8795,11360
+N D 8440,11278 cdp4_xr_{}_ne
+# load of ne: gate tied to ne by the pad's buried contact
+D 8440,11333:8647,11357
+D 8600,11333:8650,11385
+C 8618,11345 s=24x24
+P 8466,11297:8506,11323
+P 8500,11314:8521,11325
+P 8440,11300:8470,11320
+B 8438,11298:8464,11322
+P 8497,11320:8527,11335
+P 8483,11328:8527,11362
+# the bus tap's two polys: north to the series gate, south to the gate of nor's pull-down
+C 8556,11261 8556,11449 s=22x22
+P 8550,11246:8582,11278
+P 8566,11261:8722,11283
+P 8696,11261:8722,11370
+P 8542,11436:8578,11466
+P 8478,11446:8560,11468
+# q: the latch's poly, up the east side
+P 8723,11448:8745,11505
+P 8719,11410:8767,11450
+P 8742,11275:8767,11412
+# node nor: poly H (gate of ne's pull-down) and the plate under the VCC rail (load gate),
+# tied to the nor diffusion by the buried contact east of the plate
+P 8408,11392:8600,11412
+P 8596,11385:8674,11433
+P 8672,11412:8697,11447
+D 8675,11436:8697,11458
+B 8673,11434:8699,11449
+D 8620,11380:8652,11492
+D 8488,11474:8622,11492
+D 8650,11455:8795,11492
+N D 8636,11470 cdp4_xr_{}_nor
+# VSS diffusion: the big land with its contact, the wrap south of the field island,
+# the column under the south tap poly, the strip under the next slice's rail
+D 8384,11420:8462,11492
+D 8384,11422:8532,11444
+D 8488,11422:8532,11492
+D 8768,11290:8795,11492
+C 8400,11455 s=24x40
+# the bus-tap metal, from its top end down through the R15 latch (no contact there)
+M 8556,11062 y11795 w=22
+@end
+@inst cdp4_xr -782,0 tag=s0
+@inst cdp4_xr -391,0 tag=s1
+@inst cdp4_xr 391,0 tag=s3
+@inst cdp4_xr 781,0 tag=s4
+@inst cdp4_xr 1170,0 tag=s5
+@inst cdp4_xr 1560,0 tag=s6
+@inst cdp4_xr 1951,0 tag=s7
+
+# the pull-down of the match line, slices s1..s7: the line's three pieces, the diffusion
+# under poly A and its leg (channel on the north and east of the source pocket), poly B
+@cell cdp4_xpd tag=s2
+D 8370,11104:8456,11125
+D 8437,11114:8680,11200
+D 8650,11108:8776,11125
+P 8425,11138:8655,11162
+P 8630,11138:8655,11228
+P 8455,11205:8655,11228
+@end
+@inst cdp4_xpd -391,0 tag=s1
+@inst cdp4_xpd 391,0 tag=s3
+@inst cdp4_xpd 781,0 tag=s4
+@inst cdp4_xpd 1170,0 tag=s5
+@inst cdp4_xpd 1560,0 tag=s6
+@inst cdp4_xpd 1951,0 tag=s7
+# s0's pull-down: poly A is shorter and its leg lies on field
+D 7588,11100:7674,11125
+D 7655,11112:7800,11200
+D 7795,11093:7990,11117
+D 7766,11074:7788,11114              # a tab of the line up under the top end of s0's tap track (no contact read: Ambiguity 12)
+P 7625,11138:7822,11162
+P 7802,11138:7822,11228
+P 7673,11205:7822,11228
+N D 7620,11112 bus_eq_r15
+# the load of the match line, east of s0: VCC contact under a pad of the rail, gate tied
+# to the line by a buried contact on its head
+D 7838,11160:7968,11228
+D 7947,11093:7968,11228
+M 7815,11160:7878,11226
+C 7850,11190 s=24x24
+P 7903,11140:7945,11242
+P 7918,11105:7945,11142
+B 7916,11101:7947,11119
+
+# rails through the row (cdp3's VSS rails end at y 11200, its VCC rails at y 11052)
+M 7622,11190 y11490 w=46
+M 8013,11190 y11490 w=46
+M 8404,11190 y11490 w=46
+M 8795,11190 y11490 w=46
+M 9185,11190 y11490 w=46
+M 9574,11190 y11490 w=46
+M 9964,11190 y11490 w=46
+M 10355,11190 y11490 w=46
+M 7837,11045 y11490 w=44
+M 8228,11045 y11490 w=44
+M 8619,11045 y11490 w=44
+M 9010,11045 y11490 w=44
+M 9400,11045 y11490 w=44
+M 9789,11045 y11490 w=44
+M 10179,11045 y11490 w=44
+M 10570,11045 y11490 w=44
+# the in tracks (cdp3's bit lines) down to the R15 latch, no contact in this row
+M 7687,11048 y11510 w=22
+M 8076,11048 y11510 w=22
+M 8466,11048 y11510 w=22
+M 8857,11048 y11510 w=22
+M 9248,11048 y11510 w=22
+M 9638,11048 y11510 w=22
+M 10028,11048 y11510 w=22
+M 10419,11048 y11510 w=22
+# the a tracks (cdp3's line f) through this row and the R15 latch, no contact in either
+M 8511,11048 y11795 w=20
+M 8902,11048 y11795 w=20
+M 9293,11048 y11795 w=20
+M 9683,11048 y11795 w=20
+M 10073,11048 y11795 w=20
+M 10464,11048 y11795 w=20
+# s0, s1: a metal at the a position too, but a stub with no contact (y 11068-11843)
+M 7729,11068 y11843 w=20
+M 8119,11068 y11843 w=20
+# east end: the match line ends under the ninth VSS rail (no contact); the rail through
+# the row; s7's VSS strip widens to a land with the rail's contact
+D 10720,11108:10766,11125
+M 10746,11190 y11490 w=46
+D 10719,11425:10772,11492
+C 10745,11458 s=24x40
+# the in tracks are cdp3's bit lines and the a tracks cdp3's line f: one metal each (run 3)
+@alias cdp3_f_c2 cdp4_a_s2
+@alias cdp3_f_c3 cdp4_a_s3
+@alias cdp3_f_c4 cdp4_a_s4
+@alias cdp3_f_c5 cdp4_a_s5
+@alias cdp3_f_c6 cdp4_a_s6
+@alias cdp3_f_c7 cdp4_a_s7
+# ======================================================================
+# Run 4 (2026-11-21): the read bus. Each selector output row cdp4_n_s# (channel 2) runs on east of
+# x 10850 to a pad with a contact on one thin vertical metal track; the same track starts on a pad at
+# the east end of cdp3's bus N row rd_b(7-#), and runs on south to a corner in the bottom bus field,
+# where it turns east. No other contact on any track (notes, "The read bus").
+# ======================================================================
+@w M=12
+# cdp3's bus N rows, east of x 10850, to their end pads (the tracks' top ends)
+P 10840,10361 x10911 w=20
+P 10877,10343:10911,10377
+C 10894,10360 s=20x20
+P 10840,10404 x10955 w=20
+P 10921,10387:10955,10421
+C 10938,10404 s=20x20
+P 10840,10447 x10999 w=20
+P 10965,10429:10999,10463
+C 10982,10446 s=20x20
+P 10840,10490 x11042 w=20
+P 11008,10473:11042,10507
+C 11025,10490 s=20x20
+P 10840,10535 x11085 w=20
+P 11051,10517:11085,10551
+C 11068,10534 s=20x20
+P 10840,10577 x11129 w=20
+P 11095,10560:11129,10594
+C 11112,10577 s=20x20
+P 10840,10621 x11173 w=20
+P 11139,10604:11173,10638
+C 11156,10621 s=20x20
+# cdp4's n rows, east of x 10850, to their pads (each track runs on through its pad)
+P 10840,13376 x11173 w=22
+P 11139,13360:11173,13394
+C 11156,13377 s=20x20
+P 10840,13420 x11130 w=22
+P 11096,13403:11130,13437
+C 11113,13420 s=20x20
+P 10840,13463 x11087 w=22
+P 11053,13445:11087,13479
+C 11070,13462 s=20x20
+P 10840,13505 x11044 w=22
+P 11010,13490:11044,13524
+C 11027,13507 s=20x20
+P 10840,13548 x11000 w=22
+P 10966,13532:11000,13566
+C 10983,13549 s=20x20
+P 10840,13590 x10956 w=22
+P 10922,13575:10956,13609
+C 10939,13592 s=20x20
+P 10840,13633 x10913 w=22
+P 10879,13619:10913,13653
+C 10896,13636 s=20x20
+# the tracks, top pad to bottom corner, and the horizontal east of the corner to x 11230.
+# Column 0 (track x 11200, pads (11200,10664) and (11200,13330), its two row ends, its corner and the bus
+# row y 17908 east) is drawn in trace/regs.txt (piece n0), which reached main first; not repeated here.
+M 10895,10352 y10375 10897,10390 y18298 x11230     # bit of column 7
+M 10939,10396 y10418 10940,10432 y18256 x11230     # column 6
+M 10983,10438 y10460 10984,10475 y18213 x11230     # column 5
+M 11026,10482 y10505 11027,10520 y18170 x11230     # column 4
+M 11069,10526 y10548 11070,10563 y18128 x11230     # column 3
+M 11112,10569 y18085 x11230                        # column 2
+M 11157,10613 y18040 x11230                        # column 1
+N M 10897,12000 rd_b0
+N M 10940,12000 rd_b1
+N M 10984,12000 rd_b2
+N M 11027,12000 rd_b3
+N M 11070,12000 rd_b4
+N M 11112,12000 rd_b5
+N M 11157,12000 rd_b6
+@alias rd_b6 cdp4_n_s1
+@alias rd_b5 cdp4_n_s2
+@alias rd_b4 cdp4_n_s3
+@alias rd_b3 cdp4_n_s4
+@alias rd_b2 cdp4_n_s5
+@alias rd_b1 cdp4_n_s6
+@alias rd_b0 cdp4_n_s7
+# ======================================================================
+# Run 5 (2026-11-21): the read bus, columns 1-7, east along the bottom bus: each horizontal runs to a pad,
+# hops east in poly under the vertical trunks, climbs a 45-degree diagonal to its row, hops under trunks' X
+# and a supply rail, runs east and hops under a third rail. Drawn to x 16000 (ports). No tap on the way.
+# ======================================================================
+# --- column 1
+M 11220,18040 11400,18038 12851,18038 w=12
+P 12834,18021:12868,18055
+C 12851,18038 s=20x20
+P 12851,18038 13174,18035 w=20
+P 13157,18018:13191,18052
+C 13174,18035 s=20x20
+M 13174,18035 13284,18039 13543,17779 14456,17776 w=12
+P 14439,17759:14473,17793
+C 14456,17776 s=20x20
+P 14456,17776 14672,17777 w=20
+P 14655,17760:14689,17794
+C 14672,17777 s=20x20
+M 14672,17777 15712,17776 w=12
+P 15695,17759:15729,17793
+C 15712,17776 s=20x20
+P 15712,17776 15926,17777 w=20
+P 15909,17760:15943,17794
+C 15926,17777 s=20x20
+M 15926,17777 x16000 w=12
+N M 12000,18038 rd_b6
+# --- column 2
+M 11220,18085 11400,18082 12808,18082 w=12
+P 12791,18065:12825,18099
+C 12808,18082 s=20x20
+P 12808,18082 13219,18079 w=20
+P 13202,18062:13236,18096
+C 13219,18079 s=20x20
+M 13219,18079 13302,18082 13562,17822 14499,17821 w=12
+P 14482,17804:14516,17838
+C 14499,17821 s=20x20
+P 14499,17821 14716,17821 w=20
+P 14699,17804:14733,17838
+C 14716,17821 s=20x20
+M 14716,17821 15754,17821 w=12
+P 15737,17804:15771,17838
+C 15754,17821 s=20x20
+P 15754,17821 15969,17821 w=20
+P 15952,17804:15986,17838
+C 15969,17821 s=20x20
+M 15969,17821 x16000 w=12
+N M 12000,18082 rd_b5
+# --- column 3
+M 11220,18128 11400,18124 12853,18124 w=12
+P 12836,18107:12870,18141
+C 12853,18124 s=20x20
+P 12853,18124 13174,18120 w=20
+P 13157,18103:13191,18137
+C 13174,18120 s=20x20
+M 13174,18120 13324,18125 13583,17866 14457,17864 w=12
+P 14440,17847:14474,17881
+C 14457,17864 s=20x20
+P 14457,17864 14673,17864 w=20
+P 14656,17847:14690,17881
+C 14673,17864 s=20x20
+M 14673,17864 15712,17864 w=12
+P 15695,17847:15729,17881
+C 15712,17864 s=20x20
+P 15712,17864 15926,17864 w=20
+P 15909,17847:15943,17881
+C 15926,17864 s=20x20
+M 15926,17864 x16000 w=12
+N M 12000,18124 rd_b4
+# --- column 4
+M 11220,18170 11400,18168 12808,18168 w=12
+P 12791,18151:12825,18185
+C 12808,18168 s=20x20
+P 12808,18168 13219,18163 w=20
+P 13202,18146:13236,18180
+C 13219,18163 s=20x20
+M 13219,18163 13346,18169 13605,17909 14500,17908 w=12
+P 14483,17891:14517,17925
+C 14500,17908 s=20x20
+P 14500,17908 14715,17907 w=20
+P 14698,17890:14732,17924
+C 14715,17907 s=20x20
+M 14715,17907 15755,17906 w=12
+P 15738,17889:15772,17923
+C 15755,17906 s=20x20
+P 15755,17906 15969,17906 w=20
+P 15952,17889:15986,17923
+C 15969,17906 s=20x20
+M 15969,17906 x16000 w=12
+N M 12000,18168 rd_b3
+# --- column 5
+M 11220,18213 11400,18210 12851,18210 w=12
+P 12834,18193:12868,18227
+C 12851,18210 s=20x20
+P 12851,18210 13174,18208 w=20
+P 13157,18191:13191,18225
+C 13174,18208 s=20x20
+M 13174,18208 13368,18212 13627,17953 14456,17951 w=12
+P 14439,17934:14473,17968
+C 14456,17951 s=20x20
+P 14456,17951 14671,17951 w=20
+P 14654,17934:14688,17968
+C 14671,17951 s=20x20
+M 14671,17951 15711,17951 w=12
+P 15694,17934:15728,17968
+C 15711,17951 s=20x20
+P 15711,17951 15926,17951 w=20
+P 15909,17934:15943,17968
+C 15926,17951 s=20x20
+M 15926,17951 x16000 w=12
+N M 12000,18210 rd_b2
+# --- column 6
+M 11220,18256 11400,18254 12807,18254 w=12
+P 12790,18237:12824,18271
+C 12807,18254 s=20x20
+P 12807,18254 13219,18249 w=20
+P 13202,18232:13236,18266
+C 13219,18249 s=20x20
+M 13219,18249 13390,18256 13650,17996 14499,17994 w=12
+P 14482,17977:14516,18011
+C 14499,17994 s=20x20
+P 14499,17994 14715,17994 w=20
+P 14698,17977:14732,18011
+C 14715,17994 s=20x20
+M 14715,17994 15755,17994 w=12
+P 15738,17977:15772,18011
+C 15755,17994 s=20x20
+P 15755,17994 15969,17993 w=20
+P 15952,17976:15986,18010
+C 15969,17993 s=20x20
+M 15969,17993 x16000 w=12
+N M 12000,18254 rd_b1
+# --- column 7
+M 11220,18298 11400,18298 12852,18298 w=12
+P 12835,18281:12869,18315
+C 12852,18298 s=20x20
+P 12852,18298 13174,18296 w=20
+P 13157,18279:13191,18313
+C 13174,18296 s=20x20
+M 13174,18296 13412,18298 13672,18039 14457,18037 w=12
+P 14440,18020:14474,18054
+C 14457,18037 s=20x20
+P 14457,18037 14672,18037 w=20
+P 14655,18020:14689,18054
+C 14672,18037 s=20x20
+M 14672,18037 15713,18037 w=12
+P 15696,18020:15730,18054
+C 15713,18037 s=20x20
+P 15713,18037 15926,18039 w=20
+P 15909,18022:15943,18056
+C 15926,18039 s=20x20
+M 15926,18039 x16000 w=12
+N M 12000,18298 rd_b0
+# ======================================================================
+# Run 6 (2026-11-21): the read bus, columns 1-7, east of x 16000: each row ends on a pad (columns 1, 2) or
+# turns north at a corner to a pad (columns 3-7); from each pad a poly column goes north under the bundle of
+# horizontal metals y 17590-17745. Columns 2-7 step east on an arm (each in a gap between two of those
+# metals, or north of them) and come up to a pad on a metal track that goes on north (ports at y 17380).
+# Column 1's column runs north beside trunks' metal x 16163-16178 into a gate group (port at y 17480).
+# ======================================================================
+# --- column 1
+M 15990,17777 16145,17776 w=12
+P 16128,17759:16162,17793
+C 16145,17776 s=20x20
+P 16148,17776 y17480 w=18
+# --- column 2
+M 15990,17821 16513,17820 w=12
+P 16496,17803:16530,17837
+C 16513,17820 s=20x20
+P 16517,17820 y17470 x16579 w=22
+P 16562,17456:16596,17490
+C 16579,17473 s=20x20
+M 16580,17473 y17380 w=12
+# --- column 3
+M 15990,17864 16557,17864 16557,17775 w=12
+P 16540,17758:16574,17792
+C 16557,17775 s=20x20
+P 16560,17775 y17517 x16626 y17427 w=22
+P 16606,17410:16640,17444
+C 16623,17427 s=20x20
+M 16624,17427 y17380 w=12
+# --- column 4
+M 15990,17906 16601,17907 16601,17820 w=12
+P 16584,17803:16618,17837
+C 16601,17820 s=20x20
+P 16605,17820 y17558 x16671 y17473 w=22
+P 16649,17456:16683,17490
+C 16666,17473 s=20x20
+M 16667,17473 y17380 w=12
+# --- column 5
+M 15990,17951 16643,17951 16643,17775 w=12
+P 16626,17758:16660,17792
+C 16643,17775 s=20x20
+P 16650,17775 y17629 x16711 y17427 w=22
+P 16692,17410:16726,17444
+C 16709,17427 s=20x20
+M 16711,17427 y17380 w=12
+# --- column 6
+M 15990,17993 16687,17994 16687,17820 w=12
+P 16670,17803:16704,17837
+C 16687,17820 s=20x20
+P 16693,17820 y17672 x16758 y17473 w=22
+P 16735,17456:16769,17490
+C 16752,17473 s=20x20
+M 16755,17473 y17380 w=12
+# --- column 7
+M 15990,18039 16730,18038 16730,17776 w=12
+P 16713,17759:16747,17793
+C 16730,17776 s=20x20
+P 16735,17776 y17714 x16802 y17430 w=22
+P 16779,17413:16813,17447
+C 16796,17430 s=20x20
+M 16798,17430 y17380 w=12
+# ======================================================================
+# Run 7 (2026-11-21): the read bus, columns 2-7, the six tracks north of y 17380. Columns 2-5 turn east
+# at nested corners and north again to end pads in the staircase beside dbus's d#_out_n pads; from each end
+# pad a poly row goes west under the tracks west of it (no contact) toward the column of units at
+# x 16600-16790 (drawn to x 16790: ports). Column 6 ends on a pad; its poly runs east under column 7's
+# corner (no contact), north as a column x 16790-16810 and west at y 16384 (drawn to x 16780: port).
+# Column 7 turns east at (16798,16714) onto the metal that dbus draws from the pad of rd_b0.
+# ======================================================================
+# --- column 2
+M 16580,17390 y16540 x16818 y15866 w=12
+P 16801,15849:16835,15883
+C 16818,15866 s=20x20
+P 16790,15866 x16818 w=22
+# --- column 3
+M 16624,17390 y16582 x16861 y15996 w=12
+P 16844,15979:16878,16013
+C 16861,15996 s=20x20
+P 16790,15996 x16861 w=22
+# --- column 4
+M 16667,17390 y16626 x16905 y16128 w=12
+P 16888,16111:16922,16145
+C 16905,16128 s=20x20
+P 16790,16128 x16905 w=22
+# --- column 5
+M 16711,17390 y16672 x16948 y16257 w=12
+P 16931,16240:16965,16274
+C 16948,16257 s=20x20
+P 16790,16257 x16948 w=22
+# --- column 6
+M 16755,17390 16752,16713 w=12
+P 16735,16696:16769,16730
+C 16752,16713 s=20x20
+P 16752,16712 x16800 y16384 x16780 w=20
+# --- column 7: onto dbus's metal (M 16993,16440 y16712 x16950) from the pad (16993,16451) of rd_b0
+M 16798,17390 y16714 x16962 w=12
+# ======================================================================
+# Run 8 (2026-11-21): the data output inverters of bits 5-1. Five copies of one cell at pitch 130 between a
+# VCC rail (x 16491-16540, dlat's rail going on south) and a VSS rail (x 16666-16712): a depletion load
+# (plate tied to the output by a buried contact at the foot of a branch of the output diffusion) and one
+# pull-down under the VSS rail gated by a read bus row. The output diffusion runs east to a framed box, a
+# buried contact with the poly row of d#_out_n. Master: the unit of d4_out_n (read bus column 3).
+# ======================================================================
+M 16515,15780 y16440 w=48                # VCC rail (dlat draws it to y 15790); goes on south
+N M 16515,16100 vcc
+M 16689,15780 y16446 w=46                # VSS rail (dlat's), ends below the last contact
+N M 16689,16100 vss
+@cell cdp4_ro tag=u2
+D 16497,15950:16547,16012                # VCC box
+C 16510,15978 s=24x34
+D 16540,15954:16606,15982                # the strip under the plate: the load's channel
+P 16548,15937:16603,15998                # the plate
+D 16600,15959:16690,15979                # the output strip east of the plate, to under the VSS rail
+D 16680,15959:16722,16056                # drain, channel and source of the pull-down under the rail
+C 16697,16032 s=24x28                    # VSS contact on the source box
+P 16657,15996 x16795 w=22                # the gate: the read bus row, from its west end
+D 16715,15960:16752,15977                # the output east of the rail
+D 16746,15948:16782,15976                # the output box (buried contact with the d#_out_n row, below)
+D 16614,15973:16632,16025                # branch south from the output strip
+D 16583,16004:16620,16025                # ... and west to the tie box
+P 16585,15990:16607,16021                # the plate's tab into the box
+B 16581,16002:16611,16027                # buried contact: plate tied to the output
+@end
+@inst cdp4_ro 0,-130 tag=u1
+# u1 only: its VCC box runs on north to y 15772 (one tan box, no edge across it) and has a second contact
+# of the rail there (ring and bright centre in both metal shots): found by the review, round 7
+D 16497,15772:16547,15826
+C 16512,15794 s=24x30
+@inst cdp4_ro 0,130 tag=u3
+@inst cdp4_ro 0,261 tag=u4
+@inst cdp4_ro 0,391 tag=u5
+# the d#_out_n rows, from where dbus's drawing of each ends, west under the read bus tracks to the boxes
+P 16757,15954 x16870 w=22                # d4_out_n
+B 16754,15946:16784,15972
+P 16757,16085 x16912 w=22                # d3_out_n
+B 16754,16076:16784,16102
+P 16757,16215 x16957 w=22                # d2_out_n
+B 16754,16207:16784,16233
+P 16757,16345 x16957 w=22                # d1_out_n
+B 16754,16337:16784,16363
+P 16757,15824 x16822 w=22                # d5_out_n
+B 16754,15816:16784,15842
+# dbus_le's thin metal (x 16768-16782; dlat draws it to (16774,15935)) on south through the units. Over each
+# output box it is dark in both metal shots for 53-60 px (y 15937-15990, 16067-16124, 16197-16255,
+# 16323-16383) and the clean shot is greenish under it: continuity cannot be shown there, and no contact is
+# read (a contact would short the outputs together): drawn uncertain over the boxes (tracing guide, trap 27).
+?M 16775,15930 y15992 w=14
+M 16775,15990 y16069 w=14
+?M 16775,16067 y16126 w=14
+M 16775,16124 y16199 w=14
+?M 16775,16197 y16257 w=14
+M 16775,16255 y16325 w=14
+?M 16775,16323 y16385 w=14
+M 16775,16383 y16450 w=14
+N M 16775,16030 dbus_le
+# ======================================================================
+# Run 9 (2026-11-21): the sixth data output inverter, on the read bus's column 1. A copy of cdp4_ro at
+# (-650,+1474) between regs' VCC rail (x 15795-15890) and a VSS rail x 16017-16059: its gate row is the band
+# of rd_b6 (the corner of the poly column drawn in run 6), its output box takes a poly row that runs
+# east, south to a pad, east as a thin metal (y 17605) and south to a pad, and east in poly under a wide rail
+# to a pad (17066,18078). Believed d6_out_n (not joined to the pad cell yet: open join).
+# ======================================================================
+@inst cdp4_ro -650,1474 tag=u6
+M 15842,17415:15890,17495                # the part of regs' VCC rail (x 15795-15890) over the unit's VCC box
+N M 15866,17425 vcc
+M 16038,17285 y17535 w=42                # the VSS rail of the unit (and of the unit above it); ends not followed
+N M 16038,17300 vss
+P 16139,17459:16157,17482                # the corner of column 1's poly: the column of run 6 onto the gate row
+# the output: from the box east under two vertical metals (no contact), south, a pad
+P 16107,17428 x16257 y17602 w=22
+B 16104,17420:16134,17446
+P 16236,17585:16270,17619
+C 16253,17602 s=20x20
+M 16253,17603 16906,17607 16906,18086 w=12
+P 16888,18063:16922,18097
+C 16905,18080 s=20x20
+P 16905,18079 x17080 w=20                # under the wide rail x 16940-17030 (field), beside regs' row y 18012
+P 17063,18061:17097,18095
+C 17080,18078 s=20x20
+M 17080,18078 x17115 w=12                # the pad's metal leaves east along y 18078 (port; runs on)
+N M 16600,17605 d6_out_n
+# ======================================================================
+# Run 10 (2026-11-21): the bit 6 output line on east into D6's pad cell. From the port of run 9 the thin
+# metal runs east to a pad, a poly row hops east under a wide rail and a thin metal (field) to a pad, a thin
+# metal runs north on x 17602 to a pad (17599,17341), and a poly row runs east under a thin metal and the
+# rail x 17690-17760 (field) into the west end of strip 4 of D6's pad cell (dpad's {}_out_n poly, x 17800).
+# ======================================================================
+M 17105,18078 17427,18079 w=12
+P 17410,18062:17444,18096
+C 17427,18079 s=20x20
+P 17427,18079 17602,18078 w=22
+P 17585,18061:17619,18095
+C 17602,18078 s=20x20
+M 17602,18084 y17335 w=12
+P 17582,17324:17616,17358
+C 17599,17341 s=20x20
+P 17599,17342 x17825 w=22                # onto dpad's strip 4 of D6 (P 17802,17313:..., y 17313-17339): one poly, a step
+# ======================================================================
+# Run 11 (2026-11-21): the bit 7 output line into D7's pad cell. regs draws d7_out_n (= NOT rd_b7) to
+# (16800,18012) on its poly row; the row runs on east under e_b's track and the wide rail (field) to a pad,
+# a thin metal east to a pad, a poly hop to a pad, a thin metal south on x 17558 to a pad, and a poly: east,
+# then a column x 17595-17613 south for 800 px (under the wide horizontal metal y 18175-18255, beside d_hiz's
+# cross-under, then in the open west of d_hiz's metal), then a row east under the rail x 17690-17765 into
+# the west end of strip 4 of D7's pad cell (dpad's {}_out_n poly): one poly, a step, as at D6.
+# ======================================================================
+P 16795,18012 x17080 w=20
+P 17063,17996:17097,18030
+C 17080,18013 s=20x20
+M 17080,18013 17428,18014 w=12
+P 17411,17997:17445,18031
+C 17428,18014 s=20x20
+P 17428,18014 17557,18014 w=22
+P 17540,17997:17574,18031
+C 17557,18014 s=20x20
+M 17557,18008 17558,18152 w=12
+P 17541,18129:17575,18163
+C 17558,18146 s=20x20
+P 17558,18140 x17613 w=20
+P 17604,18130 y18957 w=18
+P 17595,18946 x17825 w=22
+N M 17250,18014 d7_out_n
+# ======================================================================
+# Run 12 (2026-11-21): the two thin metals east of the ninth VSS rail, west of the read bus: two through
+# lines from pads at the top of the datapath's east edge (y 3592, 3636) to pads in the bottom-centre logic
+# (y 15738) and the bottom bus (y 17648). No tap on either. From each pad a poly row leaves.
+# ======================================================================
+# --- T1 (x 10808): cdp4_w10808
+P 10787,3619:10821,3653
+C 10804,3636 s=20x20
+P 10804,3635 x10980 w=22                 # the row east from its top pad, under T2 and wrs' wr_r8 metal (no contact): port
+M 10804,3628 10808,3700 10809,12000 10810,15000 10808,15746 w=12
+P 10791,15721:10825,15755
+C 10808,15738 s=20x20
+# the row west from its bottom pad under bc2's VCC rail (no contact) to its corner at the rail's west edge.
+# Drawn to the corner only (port): beyond it the same poly is part of an undrawn unit of bc2: it runs south as
+# the plate of a depletion load (block x 10685-10716, y 15782-15849, beside the rail's contact box
+# (10722-10775, 15782-15848)) and west along y 15750-15771 to its end at x 10623 on a heavy-outlined box
+# (10622-10650, 15760-15790), read as the plate's tie: this net is that unit's output (notes; fix check 12)
+P 10808,15737 x10694 w=22
+N M 10809,9000 cdp4_w10808
+# --- T2 (x 10852): rst_lat
+P 10832,3575:10866,3609
+C 10849,3592 s=20x20
+P 10849,3590 x10980 w=20                 # the row east from its top pad, under wr_r8's metal (no contact): port
+M 10849,3584 10852,3700 10851,9000 10853,15000 10852,17656 w=12
+P 10835,17631:10869,17665
+C 10852,17648 s=20x20
+# the row through its bottom pad: east under the read bus tracks c7 and c6 (no contact) to the bend onto the
+# poly diagonal that trunks draws from rst_lat's contact (11288,17517) (its end (10980,17640)); west to
+# x 10787, where a poly column goes south (port at y 17700)
+P 10787,17643 10960,17643 10986,17634 w=20
+P 10789,17636 y17700 w=14
+N M 10852,9000 rst_lat
+# ======================================================================
+# Run 13 (2026-11-21): dbus_le south of the output inverters to the output box of its driver. From the end of
+# run 8's thin metal: south to a corner, west along y 16498 to a pad, a poly hop west under the VCC rail (no
+# contact) to a pad, a thin metal south on x 16427 to a pad, and a poly row west under six trunk metals (no
+# contact) to x 16130, where it ends on a framed box (16100-16128, 16850-16876) of an undrawn gate under
+# bd2's VSS rail: read as that gate's output (not drawn: port).
+# ======================================================================
+M 16775,16440 y16498 x16578 w=14
+P 16561,16479:16595,16513
+C 16578,16496 s=20x20
+P 16447,16506 x16578 w=40                # the hop under the VCC rail x 16491-16540 (one block y 16486-16527)
+P 16430,16479:16464,16513
+C 16447,16496 s=20x20
+M 16447,16496 x16429 y16864 w=14
+P 16409,16847:16443,16881
+C 16426,16864 s=20x20
+P 16130,16865 x16426 w=20                # west under cs_d, rs_d (x 16342), rw_d, bd2_rs_n, x 16211 and e_b
+N M 16427,16700 dbus_le
+# ======================================================================
+# Run 14 (2026-11-21): the two through lines' top rows east into the top-right logic's track field. Each poly
+# row runs east from run 12's port under three thin metals and a wide metal plate (no contact) to a pad; a
+# thin metal runs on east from the pad along the track field. Each metal has a tap within 700 px: a pad with a
+# contact on a poly that runs south to a gate input of tr1 (drawn there from y 3650 south). The metals are
+# drawn to x 12400 (ports): each runs on east to further taps.
+# ======================================================================
+# --- rst_lat (track y 3592)
+P 10975,3590 x11695 w=20
+P 11678,3575:11712,3609
+C 11695,3592 s=20x20
+M 11695,3592 x12400 w=14
+P 12244,3576:12278,3610                  # tap: a pad on the poly that runs south under the y 3636 metal (no contact)
+C 12261,3593 s=20x20
+P 12263,3593 y3655 w=22                  # ... onto tr1's P 12265,3650 y3795 (rst_lat: gate C's input)
+# --- cdp4_w10808 (track y 3636)
+P 10975,3635 x11652 w=22
+P 11635,3618:11669,3652
+C 11652,3635 s=20x20
+M 11652,3636 x12400 w=14
+P 11983,3619:12017,3653                  # tap: a pad at the top of tr1's P 12005,3650 y3795 (cdp4_w10808: inverter A's input)
+C 12000,3636 s=20x20
+P 12004,3636 y3655 w=22
+# ======================================================================
+# Run 15 (2026-11-21): the two metals of run 14 east of x 12400 to their ends in the top-right logic's track
+# field. rst_lat's runs along y 3592 to a corner (13467,3592), north to y 3550 and east to an end pad
+# (14016,3551), with one tap (13821,3549); cdp4_w10808's runs along y 3636 to an end pad (13560,3636), with one
+# tap (13345,3636). From each tap and end pad a poly runs south into the undrawn gate rows of tr1 (drawn to
+# y 3675: ports).
+# ======================================================================
+# --- rst_lat
+M 12390,3592 x13475 y3550 x14016 w=14
+P 13804,3532:13838,3566                  # tap
+C 13821,3549 s=20x20
+P 13822,3552 y3675 w=20                  # south under the y 3592 metal of another net (no contact)
+P 13999,3534:14033,3568                  # end pad
+C 14016,3551 s=20x20
+P 14016,3552 x14044 y3675 w=22           # east and south, under the y 3592 and y 3636 metals of other nets
+# --- cdp4_w10808
+M 12390,3636 x13560 w=14
+P 13328,3620:13362,3654                  # tap
+C 13345,3637 s=20x20
+P 13346,3640 y3675 w=22
+P 13543,3619:13577,3653                  # end pad
+C 13560,3636 s=20x20
+P 13560,3640 y3675 w=22

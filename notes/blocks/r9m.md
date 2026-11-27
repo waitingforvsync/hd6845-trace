@@ -18,12 +18,12 @@ poly steps down one track going east. The trace was redrawn accordingly:
   `rcs_mv`". Firm geometry (no `?` on the path).
 - Pad (4912,2641), with the metal down x 4194, the stub and track P's lower piece, belongs
   to the poly that steps down to a pad (5405,2681) and the metal along y 2685 to x 5848
-  and south to (5845,5045): "bundle line 3", named `r9m_l3`. Track P's split (AMB-013)
+  and south to (5845,5045): "bundle line 3", named `tc2_o5175`. Track P's split (AMB-013)
   stands, confirmed by the review's measurements, but the two pieces carry the opposite
   nets to what the earlier text below says.
 - Pad (5400,2596) does not join line 1's west part: its poly turns north at x 5175 and
   ends near y 2545 (not followed). The metal from it (y 2599, x 6022, the crossing field,
-  pad (7855,4676)) is named `r9m_l1w`. At `cdp1`'s west edge every row steps down one
+  pad (7855,4676)) is named `sl_eq_r5_n`. At `cdp1`'s west edge every row steps down one
   track (nested L's at x 8215-8345, `cache/scratch/bust/stair2.png`), so this row does
   **not** become `cdp1_l4676`: it turns south near x 8190. `cdp1_l4676` (the line from
   `amr` c3, east of `cdp1`) is fed instead by the west row y 4635.
@@ -193,3 +193,24 @@ The first line's source: the logic block x 12600-12900, y 5600-6400, from the pa
 about (12786,5570); the split of track P proposed above (for the coordinator); where R9's match goes south of y 3596;
 the other two lines of the bundle; the pads (4270,2640) and (4232,2683) west into the cluster; `rcs_e3`'s metal
 beyond (4494,3813).
+
+## Note (coordinator, from the handoffs of 2026-11-17/18)
+
+`sl_eq_r5_n`'s east end is drawn by `tc2` (not an open end). the wire `r9m` called l3 has a driver: `tc2_o5175`, joined
+by `tl6` (join 10, contact (5845,5043)).
+
+## Correction from `tl3` (coordinator, from the handoffs of 2026-11-18, second batch)
+
+- "The lower piece ends on a contact at about (4148,3588), whose poly runs west along y about 3583 into
+  the middle cluster's gate column, not traced": traced by `tl3` run 7: the pad (4148,3592) gates
+  `tl3_e3550` = NOR(`rcs_mu`, `tc2_o5175`) and `tl3_e3712` = NOT `tc2_o5175`; both rest on this block's
+  stub join at y 3376 (AMB-035).
+- What R9's match does in the step logic: "`rcs_mu` = NOT R9's match" stands; "term 1 = R9's match AND
+  NOT `rcs_mv`" does not. R9's match is an input of `rcs_mn3852`, and reaches the step request by
+  `tl3_e3550` and `rcs_e4` (marked: AMB-013, AMB-032).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- `sl_eq_r5_n` has a driver: NOT `sl_eq_r5` (`eof`). "Pad (5400,2596) ... its poly turns north at x 5175
+  and ends near y 2545 (not followed)": it turns west there and is `tl4`'s row of the pad (4908,2551)
+  (bus line 1), which `eof` joins on west through `tl3`'s strip to `sl_eq_r5_n` and north into `tlb`.

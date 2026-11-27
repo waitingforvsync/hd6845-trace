@@ -5,6 +5,6 @@
 4250,10992:4720,18063  ?array  MA row cells, right column | one cell per counter row; not looked at
 2860,14333:4720,14549  ?route  carry gap 1 | carry out of bits 0-6 leaves here, carry into bit 7 arrives; horizontal poly bands
 2860,15981:4720,16154  ?route  carry gap 2 | carry out of bits 7-9; all-ones line of bits 7-9 becomes carry into bit 10
-2480,6700:2860,18500   ?logic  left column beside the arrays | cells on the row boundaries; the inputs of the MA8 and MA9 output drivers end in the cells at the s4/s5 and s8/s9 boundaries (traced), so these are the MA output stages; group carry logic believed here too. Cells not traced
+2480,6700:2860,18500   ?logic  left column beside the arrays | cells on the row boundaries: the MA output stages are mal's (14 ral cells, traced); what else is here (group carry logic, believed) not traced
 2140,6400:2520,18600   route  MA line bundle | nine vertical metal tracks between the left column and the MA output drivers; lines step from track to track
 4450,8250:4780,10500   ?logic  block right of the upper rows | not surveyed

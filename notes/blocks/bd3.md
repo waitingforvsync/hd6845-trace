@@ -245,3 +245,71 @@ turn west, at y 17302, 17346, 17388, 17432, and cross the supply rail the same w
   from a contact at (15560,17430) on a metal line that comes up x 15560 from the south
   (not T15, which ended at y 17072).
 - The tracks south of y 17100 and the west-going bundle beyond x 14100.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- Not done, the four strobe tracks south of y 17100: followed by `regs` (run 1: the write strobes of R12-R15 to their rows).
+- `rsel12_buf` and `rsel13_buf` are followed by `regs` (run 3; pads (14195,17730), (15512,17688)).
+
+## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
+
+- The ground rail and the supply rail of the right-hand gate column do not end at y 17380: the ground rail's
+  metal ends at about y 17527 and the supply rail runs on south past y 17760. Under the undrawn stretch is an
+  inverter (`regs` run 5: `d7_out_n` = NOT `rd_b7`, x 15577-15895, y 17372-17491); `trace/regs.txt`
+  draws the ground rail to y 17527 and the supply rail to y 17500.
+
+## Re-read item R2 (2026-11-27): the channel's 16 tracks
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 07:29 -0600. Region x 14100-15880, y 16550-17100. **Found as drawn; no trace
+line changed.**
+
+R2 asks for the 16 tracks end to end in the clean shot (the notes cited the metal shot for the track checks).
+Done with the audit written for R1, `tools/bd1_audit.py 14100 16550 15880 17100` (every trace file loaded:
+55 drawn metal items), and `tools/bd1_sheet.py` for the flagged spots (sheet `cache/scratch/bd3/r2/sh1.png`):
+
+1. Breaks (a drawn thin metal with no metal in either metal shot along 14 px or more): **none**.
+2. Undrawn metal: **none**; and on two overlays of the whole region (`ovw.png`, `ove.png`, 1.5x, metal shot
+   with every package's trace) every metal has its outline: the 16 tracks x 14998-15560 top to bottom, the
+   rails, the horizontal lines y 16920-17090 and the short verticals of the west half.
+3. Contact holes in the clean shot under drawn thin metal: 19, of which 17 are drawn contacts (`sel`'s and
+   `bd3`'s). The other two: (15214,16709) is a triangular scratch beside a plain track (bright and unringed in
+   both chips); (14307,16754) is the upper rim of the drawn contact (14306,16778)'s pad. Three drawn contacts
+   had no olive hole, (14456,17084), (14239,16865), (14306,16778): each is a pad with ring and bright centre in
+   both metal shots and a red-brown box in the clean shot: real. So **no contact that is not drawn, and every
+   drawn contact real**.
+4. Poly gaps (field colour inside a drawn thin poly): **none**.
+
+Limits as in the tool's docstring: its metal thresholds are weak on dim tracks (hence the two overlays), and it
+does not look for a contact on open diffusion beside a metal.
+
+## Review
+
+### Round 1 (full review), 2026-11-27: the re-read of the channel (R2)
+
+A fresh Claude Fable 5.2 agent, on commit bd5e6a1, images in `cache/scratch/bd3/review-1/`. Told to suspect: a
+contact on a track that is not drawn, a track that ends or jogs where it is drawn straight (the staircase at
+x 15220-15350, y 16880-17010), which track each drawn contact is on, and the audit's blind spots (dim metals,
+contacts beside a metal). It took its own sample and did not rely on the audit.
+
+**No findings** in `bd3`'s drawing. Checked and found correct: all 16 tracks by `tools/follow.py` and the
+two-chip test `tools/tl5_tracks.py v` (the only stretches without metal are the drawn ones: T7 y 16870-16905, T8
+y 16674-16729 and y 16916-16946, T9 y 16961-16990, T10 y 17004-17033; T5 starts at its pad; T15 ends at its
+pad); the tight gaps (T7's pad to `wr_r12`'s corner is open poly; T10's arm to the `wr_r13` pad 9 px of bare
+ground; bare ground between T8's two pads in all four shots; `wr_stb_n`'s corner clear of the pad
+(14306,16778)); the staircase's three arms; all 37 crossings of the rows y 16560, 16650, 16732, 16778, 16862,
+17036 with the tracks at 3-4x in three or four shots (plain except the drawn pads; each row ends as drawn); all
+18 listed contacts real and on the stated track; line X over the strobe poly (no ring in either chip); eleven
+clean-shot specks and a dot on the rail at (14432,16655) (residue: no ring); no undrawn metal on 16 cuts
+(`tools/busl_mdrawn.py`) and two overlays; no lengthwise poly under any track but the drawn columns x 14912
+and x 15214. Not checked by the reviewer: plain track stretches between rows at 4x (text tools and 1.7x only),
+the gate columns' cells and rail contacts, under the wide rail, row ends east of x 15580.
+
+Two geometry remarks on **other packages' lines** in this region (not `bd3`'s files; in the handoff as
+proposals, nothing changed here): `sel`'s contact at T15's lower end, drawn (15560,17072) by its cell, has its
+centre at about (15560,17082), and the metal ends at about y 17097 (drawn 17085); `trunks`' line X
+(`trunks.txt:159`) is drawn along y 16992 and its centre is y 16998 (a metal test along y 16992 reads its north
+edge and reports false breaks).
+
+No trace line changed before or after the round. Recorded 2026-11-27 07:41 -0600.
+
+Round 1: no findings.

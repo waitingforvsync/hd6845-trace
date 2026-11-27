@@ -13,7 +13,7 @@ State at the end of the first session (2026-11-15). Everything below is in
 | `ck_out` | all four routes out of the clock block, to their entry points | top end of the left-edge trunk (x 2504; seen only at 0.5x above y 18300); `ck_out` #1 beyond x 10230; the taps |
 | `ck_a` | rail up the right edge of the mid-right array to its end; second entry at the array's bottom row | nothing outside the array |
 | `ck_b` | bottom row of the mid-right array (its only route) | nothing outside the array |
-| S (`inh_ck`, the clock notes' `inh_ck`) | gate g5; the long run along the bottom and up the left bus field to (6690,8366), still running | where it ends; its taps |
+| S (`rst_ck`, the clock notes' `rst_ck`) | gate g5; the long run along the bottom and up the left bus field to (6690,8366), still running | where it ends; its taps |
 | X (input of gate 0, so S = NOT X) | back to (13566,15880) in the channel right of the mid-right array | **its source** (most likely `ck_b`, not shown) |
 | `e_b` | entry below the decode logic at (16170,17690); seen running up to y 16400 | where it ends |
 | `rw_d`, `rs_d`, `cs_d` | entry below the decode logic; verticals to about y 16200 | upper ends of `rw_d`, `rs_d` |
@@ -21,7 +21,7 @@ State at the end of the first session (2026-11-15). Everything below is in
 | `clk` | contact (7500,18772) on a cell row by the CUDISP pad | that row |
 | `clk_b` | not looked at (it enters the clock driver logic; whether it also leaves the clock block is not known) | all |
 
-The line the clock notes call `inh_ck` is **not** `ck_a` (Ambiguities A1).
+The line the clock notes call `rst_ck` is **not** `ck_a` (Ambiguities A1).
 
 ## How to use this file
 
@@ -307,7 +307,7 @@ above y 15900 into dense logic; not followed.
 The metal lines at y 18703-18722 and y 18742-18760 below the row are the RS and CS pin
 nodes arriving from their protection cells, not outputs.
 
-## S: output of input-row gate 0 (`inh_ck`; the clock notes' `inh_ck`)
+## S: output of input-row gate 0 (`rst_ck`; the clock notes' `rst_ck`)
 
 Source: the single inverter at the left end of the input row (gate 0, x 13730-13925).
 S = NOT X. It is one of the most widely distributed lines on the die and behaves like
@@ -395,10 +395,10 @@ whether a branch leaves the block was not checked.
 
 ## Ambiguities
 
-### A1. `inh_ck` is not `ck_a`: trace/clock.txt has a wrong link
+### A1. `rst_ck` is not `ck_a`: trace/clock.txt has a wrong link
 
 `trace/clock.txt` ends with eight uncertain shapes ("seen at 1.1x; drawn roughly") and
-`@alias ck_a inh_ck`. They say that the bus piece feeding gate g5 (L6 left piece) is
+`@alias ck_a rst_ck`. They say that the bus piece feeding gate g5 (L6 left piece) is
 joined to gate g6's output through a line at y 18335-18358 with contacts at
 (12741,18347) and (11852,18347). Checked at 2.25x-6x in all four shots:
 
@@ -416,9 +416,9 @@ the other way: L4, the poly at x 13200, and the metal at y 18775 lead to the out
 of input-row gate 0.
 
 Consequence for the extraction: with `clock.txt` as it stands, `ck_out`, `ck_a` and
-`inh_ck` are shorted (reported as one error by `netlist.py`). Fix in `clock.txt`:
-delete the eight `?` shapes after "line A is also the line first labelled inh_ck"
-and the `@alias ck_a inh_ck`.
+`rst_ck` are shorted (reported as one error by `netlist.py`). Fix in `clock.txt`:
+delete the eight `?` shapes after "line A is also the line first labelled rst_ck"
+and the `@alias ck_a rst_ck`.
 
 Consequence for the clock block's logic (not re-traced here): gate g5's input is S,
 not `ck_a`. The clock notes have g5's output on line B and g6 (input line B) driving
@@ -484,7 +484,7 @@ contact at (5145,6110) under a metal from the north). All five lines go south to
 fan out diagonally and become horizontal metals going east from pads at x 6130-6165,
 y 6950-7350. Not followed beyond the pads except `rcs_e4`.
 
-## `h_eq_r0`, `h_eq_r1` and `inh_lat` (coordinating session, 2026-11-16)
+## `h_eq_r0`, `h_eq_r1` and `rst_lat` (coordinating session, 2026-11-16)
 
 - **Joins closed.** The R0 and R1 match lines are single straight metals between the right
   datapath's bundle (y 13480) and the strobe channel's tracks k7 and k8 (y 14690):
@@ -496,7 +496,7 @@ y 6950-7350. Not followed beyond the pads except `rcs_e4`.
   under the wide VCC rail to a contact (12805,17647); metal west to x 11851, north to
   y 17476, west to a contact (11240,17475); poly west and then diagonally south-west
   (seen to (10940,17598)): **into the bottom-centre logic**. Not followed further.
-- **`inh_lat`** takes the parallel route one line over: x 13435 turns south-west at
+- **`rst_lat`** takes the parallel route one line over: x 13435 turns south-west at
   y 16761, down x 13303 to a contact (13303,17688), poly west along y 17691, contact
   (12850,17691), metal west to x 11810, north to y 17514, west to a contact (11288,17517),
   poly west and south-west (seen to (10980,17640)).
@@ -526,7 +526,7 @@ x 8580: 17,238 px, the same line. Drawn in `trace/trunks.txt`.
   (y 8360, 8965, 9573, 10181, 10831, 11440, 12142 ...): the trunk's taps into the left
   column cells of the left array. Not looked at.
 
-## `inh_src` followed west (2026-11-16)
+## `rst_a` followed west (2026-11-16)
 
 Drawn in `trace/trunks.txt` (last section); views `cache/scratch/bd1/inh1.png` ...
 `inh17.png`. From where `trace/bd1.txt` left it at (13480,17150):
@@ -540,16 +540,16 @@ Drawn in `trace/trunks.txt` (last section); views `cache/scratch/bd1/inh1.png` .
 | from the pad (10075,18080): north along x 10075, east along y 17770 | poly | pad (10262,17770) |
 | north along x 10266, jog at y 17428, north along x 10312 | metal | pad (10310,16950) |
 | from that pad west along y 16950 and north | poly | pad (10225,16820) |
-| north along x 10225 | metal | y 15886 at least (follower); end not looked at |
+| north along x 10225 | metal | ends on a pad with a contact (10226,15912) (`eof`, piece `isrc`, 2026-11-19; the drawing shortened from y 15886) |
 
-Three ends are open: the metal x 10225 north of y 15886; the poly along y 16950 east of
+**All three ends are followed since 2026-11-19** (`notes/blocks/eof.md`, piece `isrc`): the first is the clear of `bc2`'s latch unit a, the third feeds a metal x 8968 with taps into the gate column x 8650-8800, the second is a gate row at x 10540-10585; no driver on any. As written then, three ends are open: the metal x 10225 north of y 15886; the poly along y 16950 east of
 x 10470, into the bottom-centre logic; the bus line west of the pad (9770,18081) (poly
 under two vertical metals to a pad at about x 9562, then metal to x 8978 at least). So
-`inh_src` is a widely distributed line of the bottom bus, and its driver is at none of
+`rst_a` is a widely distributed line of the bottom bus, and its driver is at none of
 the places looked at so far. The full extraction is unchanged by the new geometry
 (one net, no new joins).
 
-On the way: `inh_lat`'s poly from the pad (11288,17517) goes west along y 17515,
+On the way: `rst_lat`'s poly from the pad (11288,17517) goes west along y 17515,
 south-west to (10960,17640), west along y 17645 over a pad at (10850,17645) on the
 vertical metal x 10850, and on west. `h_eq_r1`'s goes west along y 17600 past x 10800.
 Neither drawn beyond what the trace had.
@@ -576,3 +576,91 @@ None of these has been joined to the row address selector's outputs (`notes/bloc
 which were followed only to x 7860. The stretch between (x 7860 to 11650, y 4450-4800,
 along the top of the central datapath) is the gap.
 
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- Line S (lines 16, 106, 340, 454) does not end in the left-centre logic: from (6690,8366) it runs west
+  to (6559,8367), north, west and north through `lc2`'s and `lc1`'s strips without a gate, with one tap
+  at (6427,7648), and on into the top-left logic as `rst_ck` (`eof` run 2). S = `rst_ck`.
+  R4: part done there (`eof`); chip 1 is damaged on line S at y 16570-16650, 16822, 17483.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, third batch)
+
+- "source of X": X (`rst_a`) is `lc2`'s first through line (`eof` run 9): the driver
+  is at or beyond `lc2`'s east edge (6450,8630).
+- `trace/trunks.txt`, `ck_out #1` (`M 10320,17908 x10230`, "followed to x 10230 only"): it lies for 96 px
+  on `bd1_n2`'s poly row without a contact and runs on west to a pad at about (9770,17910), with a poly
+  beyond to a pad (9595,17905); its end is not drawn (`eof` run 8; R4).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- The signal on track A / line X / the first through line of the left-centre strips, which these notes call a clock, a strobe "once per scan line" or leave without a source, **is the reset**: `rst_a`, the buffered copy of `rst` = NOR(`lpstb_b`, `res_b`) made by `lc1`'s gate 5 (`eof` run 10, piece `isrc5`, firm). `rst_ck`, `rst_rc` and `rst_lat` are further buffered copies of it: high while the RES and LPSTB pins are both low, and only then. The belief "a strobe once per scan line" is withdrawn. So "source of X" is found.
+- `res_b` and `lpstb_b` do not end at `lc1`'s NOR: they run on down the left-centre strips and the left bus field to (6366,15000) and (6408,15000) (`eof` run 11, piece `rl`).
+
+## Corrections (coordinator, from the handoffs of 2026-11-20)
+
+- `ck_out #1` "turns left along y 17900-17915 (followed to x 10230; not yet further)": it runs on west, unbroken, to a pad with a contact (9769,17910), then by a poly to a pad (9596,17909) and a metal to a pad (8598,17908), drawn by `eof` (piece `in350`, run 18); from there one metal goes north to the latch behind the ripple counter's clock and a poly west to a pad (8424,17908). Four open ends of `ck_out` there are not followed.
+
+## Corrections (coordinator, from the handoffs of 2026-11-20, `bl0`)
+
+- `res_b` and `lpstb_b` do not end at (6366,15000) and (6408,15000) nor in `bl0`'s gate group: each runs
+  on east in poly and south by a track to a pad, (6882,16170) and (6928,16217), and on south in poly
+  (drawn to y 16250; `notes/blocks/bl0.md`, piece `pe`). In the gate group they make `lpstb_nres` =
+  NOR(NOT `lpstb_b`, `res_b`), which forces the carry into the address counter's row s7.
+
+## Corrections (coordinator, from the handoffs of `busl` run 15, 2026-11-21)
+
+- Taps in the left bus field (R4): none on the one line there between y 8995 and y 15000 (`busl`, under piece `xm`: method and numbers). South of y 15000 and its poly cross-unders are not checked.
+
+## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
+
+- `rst_lat`'s diagonal from the contact (11288,17517) ("poly west and south-west. Not followed", here and in
+  `trace/trunks.txt`): followed by `cdp4` run 12: it ends in a row y 17633-17653 through a pad (10852,17648)
+  on the track x 10852, which is `rst_lat` up the east side of the central datapath to y 3592 and into `tr1`'s
+  gate row.
+- The metal on the track position x 10810 south of y 16430 (a pad (10808,16430), then south to this block's
+  piece at y 18458) is a separate metal from `cdp4_w10808`'s track (650 px of bare ground between); y
+  16430-18458 of it is undrawn.
+
+## Corrections (coordinator, from the handoffs of `eof` runs 52-54, 2026-11-22)
+
+- `h_eq_r1`, "poly west and south-west" with its diagonal to (10940,17598) (here and in the comment in
+  `trace/trunks.txt`): followed by `eof` run 52: the diagonal becomes a row y 17592-17612 west to a column
+  x 10432-10448 north, the gate of the pull-down on `h_eq_r1_n` at (10548,17515). `h_eq_r1` is an alias of
+  `h_eq_r1`.
+
+## Corrections (coordinator, from the handoffs of `eof` runs 55-62, 2026-11-23)
+
+- The table row `| 10433-10450 | <16880-17689 | metal | ck_out | "ck_out #2" continues up the left side of the
+  gate column ... (contacts on it at about y 17234 and 17168 ...`: the `ck_out` metal ends on the pad
+  (10439,17238) (the "contact at about y 17234"); the contact at y 17168 is the pad of another metal, the output
+  of the NOR `bc2_w14955` = NOR(`rst_lat`, `ck_out`), which runs north from there. `trace/trunks.txt`'s line
+  `M 10311,17908 y18473 x10442 y18342 x10398 y17689 x10441 y16880` now ends `y17238` (`eof`, cdc4d7d; open poly
+  at y 17206-17218 in both metal shots, no metal in either chip at y 17175-17199; review round 68 of `eof`).
+  The stretch y 16885-17168 is `eof`'s metal of that NOR. R53.
+- The poly row y 17772 between x 10075 and the pad (10262,17770), and the poly column x 10225 between y 16820
+  and y 16950, each have another net's metal (`eof_w16560`, `eof` run 62) lying on them with no contact: that
+  metal is not `rst_a`'s.
+
+## Corrections (coordinator, from the handoffs of `eof` runs 63-68, 2026-11-23)
+
+- `rst_a`'s poly row y 16950 (`P 10470,16950 10225,16950 10225,16820`, drawn to x 10470; "the second is a gate
+  row at x 10540-10585", "the poly along y 16950 east of x 10470, into the bottom-centre logic"): it runs on to a
+  cap at x ~10546 and is a gate of the NOR `eof_w16996` = NOR(`rst_a`, `eof_w17345`, `eof_w16889`) (drawn by
+  `eof` run 63, piece `u16996`), one half of a set/reset latch; it does not cross under the rail.
+- An undrawn bus metal at y 18420-18440, between bus line L4 (y 18385) and L6 (y 18470), runs east from
+  x 10806 (to x 10990 at least); `eof_w16432` (`eof` run 66) joins it from the north at x 10811 by a thin metal
+  x 10804-10817 and is not on `rst_ck`'s contact (10810,18470). Its source is in no trace file.
+
+## Corrections (coordinator, from the handoff of `eof` run 71, 2026-11-25)
+
+- "S: output of input-row gate 0", route items 4 and 5 ("Poly down from there (under L5) to a poly link between
+  contacts (10810,18470) and (10900,18470)"; "From (10900,18470): bus line L6 left piece right to x 11870:
+  gate g5 of the clock block ... and a capacitor rectangle"), and the table row "18460-18480 (L6, left piece)
+  ... S": the link reaches the west contact (10810,18470) only. Between the stem's foot (poly x 10832-10859)
+  and the east pad's ring (from x 10880) is 10 px of open field, in both metal shots and the clean shot (the
+  chip-2 stripped shot's reddish strip there is a fringe). The east pad (10895,18468), the L6 left piece, g5's
+  gate and the capacitor rectangle are on `eof_w17734`, whose poly column x 10889-10907 comes down from the
+  north (`eof` piece `o734`). The trace was cut in b345eda: `P 10796,18470 x10914 w=24` -> `P 10796,18470
+  x10866 w=24`, the east pad's box kept under its contact `C 10900,18470`. So S does not reach the clock
+  block; route item 6 (from (10810,18470) west) stands, read at 1x (R4). Evidence: `notes/blocks/eof.md`,
+  "Run 71", review round 85.

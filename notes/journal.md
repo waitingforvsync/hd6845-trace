@@ -133,9 +133,9 @@ Result
   push-pull pair whose pull-up gate is the inverse of its pull-down gate. No gating,
   no division. Output `ck_out` goes up into the core at x 10845-10870 and away to
   the left at y 19240-19262.
-- A gate row of six inverters buffers a global signal `inh_ck` into both polarities
+- A gate row of six inverters buffers a global signal `rst_ck` into both polarities
   (lines A and B). Those go right into the core, and down into a "driver logic" of
-  two mirrored circuits together with CLK. `inh_ck` was followed 4000 px along the
+  two mirrored circuits together with CLK. `rst_ck` was followed 4000 px along the
   bottom bus field to the foot of the left bus field; its source is not known.
 - The driver logic is not traced (AMB-007).
 
@@ -163,7 +163,7 @@ Method notes
 Next
 - M2: bus interface and register decode. `rw`, `rs`, `cs` and `e` are ready at the
   input row; the decode array is at 14180-15780 x 13480-14680.
-- Carry AMB-007 and the source of `inh_ck` as open items to pick up from the core.
+- Carry AMB-007 and the source of `rst_ck` as open items to pick up from the core.
 
 ## 2026-11-14 23:19  Second die, clock generator, register decode
 
@@ -245,12 +245,12 @@ Established by tracing
   node q with group look-ahead, toggle-like logic, a stage clocked by `ck_a` and
   `ck_b`; right-hand columns not traced.
 - Global wiring: `ck_out`, `ck_a`, `ck_b`, E, R/W, RS, CS, RES, LPSTB mapped to their
-  first entries. The clock block's `inh_ck` is not `ck_a`: it is the inverse of a
+  first entries. The clock block's `rst_ck` is not `ck_a`: it is the inverse of a
   core signal X, whose driver is an inverter in the gate column left of the select
   logic; X also gates a latch there.
 
 Corrections made during the round (each was a wrong statement at the time)
-- `inh_ck` = `ck_a` (mine, from a 1.1x view): no such link.
+- `rst_ck` = `ck_a` (mine, from a 1.1x view): no such link.
 - "strobe = NOT E" (one agent): the line it followed is broken; settled by a second
   agent's measurement.
 - "this row is R0" (one agent): a track-scanning tool bridged a jog; two later runs
@@ -377,7 +377,7 @@ Serial. Blocks `wl` (new, complete) and `bw` (new, wiring part-way). Full extrac
   NOR(NOT p, buffered slave clock). The two NOR drivers are 350 px wide with strong loads.
   So the row counter's master latches take the next count while `p` is high and its slaves
   pass it on when `p` is low again: one step per pulse of `p`.
-- **`p` = NOR(a, b).** `a` is `inh_rc`, the same core signal whose other copy (`inh_ck`)
+- **`p` = NOR(a, b).** `a` is `rst_rc`, the same core signal whose other copy (`rst_ck`)
   holds `ck_b` low in the clock block: one signal stops both the horizontal counter's
   master clock and the row counter's step. `b` comes from far away: followed west along the
   central datapath's channel 3, north in a nested bundle at x 7790-7930, west through the
@@ -419,7 +419,7 @@ earlier work goes on that list in the same commit; a remark in a report does not
 
 1. The source of `b`: the metal x 5841 north of y 6300 (top-left logic, `tl`). That is
    where the row counter's step is decided (scan line count, end of line): M4.
-2. What `a` / `inh_ck` is: bd1's `inh_src`, which comes from the bottom bus field.
+2. What `a` / `rst_ck` is: bd1's `rst_a`, which comes from the bottom bus field.
 3. Re-read R8/R9 in the counters (the line x 12285 and node `z`), then the rest of the bit
    cell (node `m`'s pull-up, B3/B4): the counters' next-state and clear are still not
    extracted.
@@ -521,7 +521,7 @@ scan-line comparisons" is a guess from the formula's shape.
 2. The rest of this cluster: y 3400-4590 east, the west side above y 4940, b1's load.
 3. `in1` (bus field x 4140-4420, then the middle or right gate column), `e3`, `a2`, `x1`
    to the east.
-4. As before: what `a` (`inh_rc`) is; re-read R8/R9; `amr`; the bus fields.
+4. As before: what `a` (`rst_rc`) is; re-read R8/R9; `amr`; the bus fields.
 
 ## 2026-11-16 01:00  The chase of e4
 
@@ -588,8 +588,8 @@ Done, at the source:
   bits (`hc0`-`hc7`, `rc0`-`rc6`, `hsw0`-`hsw3` and their nodes), registers and comparators
   by register number and bit (`r1_b3_q`, `r0c_b5_x`), match lines (`h_eq_r0`...), write
   strobes (`wr_r6`), the row counter's clocks and step (`rc_ck_m`, `rc_step`,
-  `rc_stepreq_n`), the inhibit signal and its copies (`inh_n`, `inh_ck`, `inh_rc`,
-  `inh_lat`), bus control (`wr_data_sel`...). Extraction unchanged: 1,683 nets, 2,789
+  `rc_stepreq_n`), the inhibit signal and its copies (`rst_a_n`, `rst_ck`, `rst_rc`,
+  `rst_lat`), bus control (`wr_data_sel`...). Extraction unchanged: 1,683 nets, 2,789
   transistors, 0 errors, 0 warnings.
 - The same table applied to every note, the plan, the instructions and the floor-plan
   descriptions (771 replacements). **This journal was rewritten too**: entries above use
@@ -623,7 +623,7 @@ discoveries reveal the nature of e4". Full extraction at the end: see the ship l
 - Signal names: see the entry above ("Signal names"). The glossary check is part of the
   build and stays at zero uncovered names.
 - Two open joins closed by drawing them: `h_eq_r0` and `h_eq_r1` between the right
-  datapath and the strobe channel. `h_eq_r1` and `inh_lat` followed on, through the bottom
+  datapath and the strobe channel. `h_eq_r1` and `rst_lat` followed on, through the bottom
   bus field, to poly lines entering the bottom-centre logic at (10940,17598).
 
 **The step logic (block `tla`)**
@@ -670,7 +670,7 @@ first cluster; every contact on its 17,000 px is a gate.
    4320-4535, 4830-5330 east; the whole west column above y 4940).
 3. The gate column of the strobe channel (y 15860-16125), where `h_eq_r0` is sampled on
    `ck_out`: observations are in `notes/blocks/bd1.md`.
-4. The bottom-centre logic, which receives `h_eq_r1`, `inh_lat` and e4.
+4. The bottom-centre logic, which receives `h_eq_r1`, `rst_lat` and e4.
 
 **Addendum, same session: the strobe has a driver.** The strobe (former name `rcs_bb3807`) is now `clk_tl`:
 it is the output of an inverter at (2626,7908) in the left column beside upper row 2 of
@@ -759,7 +759,7 @@ registers (central datapath), R3's other nibble, R8.
    `rc_eq_r6` and `h_eq_r0` (strobe channel gate column), `h_eq_r1` (bottom-centre).
 4. The rest of the step-logic clusters; the 4-bit left counter's outputs; `e4`.
 
-## 2026-11-16 10:48  the row address selector; `inh_src` is a bus line
+## 2026-11-16 10:48  the row address selector; `rst_a` is a bus line
 
 Questions from the user: is the scan line counter put out directly as RA0-4; how do the
 R5 and R9 compares work; what makes VSYNC width 0 special. And two sets of questions on
@@ -774,7 +774,7 @@ what `inh` does).
   k to output k+1, and output 0 has two more gated sources. A shift by one bit with a
   separate bit 0: the shape of interlace sync and video. 3,375 transistors, 2,025 nets,
   no errors.
-- `inh_src` followed 3,700 px west from the strobe channel and drawn: a bottom-bus line
+- `rst_a` followed 3,700 px west from the strobe channel and drawn: a bottom-bus line
   with four branches, three still open (`notes/blocks/trunks.md`). Not made locally.
 - RA0's and RA1's pad driver inputs followed from the pads to x 15300, y 4140-4800,
   where they meet metals from the west (not drawn; `notes/blocks/trunks.md`).
@@ -802,7 +802,7 @@ what `inh` does).
 1. The selector's five outputs to their ends, and the nest of metals at x 7530-7715 into
    channel 1; then the two gate lines and bit 0's extra sources (interlace logic).
 2. Where `lc_step` is made; where `sl_eq_r5` goes.
-3. `inh_src`'s three open ends.
+3. `rst_a`'s three open ends.
 4. As before: `rdp2`'s routing zone; the other match lines; the step-logic clusters;
    `c4l`'s outputs and R3's high nibble; `e4`.
 
@@ -862,7 +862,7 @@ strap between two poly pads, destination not read.
 2. `bd2`'s gate group east of the rail: `wr_data_e_n`'s destination.
 3. `rax`: the load and the east half of the unit.
 4. The selector's two gate lines and bit 0's extra sources (interlace logic).
-5. As before: `lc_step`; `sl_eq_r5`; `inh_src`'s three ends; `rdp2`'s routing zone; R3's
+5. As before: `lc_step`; `sl_eq_r5`; `rst_a`'s three ends; `rdp2`'s routing zone; R3's
    high nibble and `c4l`; `e4`.
 
 ## 2026-11-16 13:15  R8, R9, R10, R11 identified by their write strobes
@@ -1014,7 +1014,7 @@ join `tc1_x1` to `fld_a_in` although the first view suggested it: they are two l
 - `fld_a_in` and `fld_y_b` drawn end to end (1,500 and 2,300 px, two poly cross-unders
   of the six-line bus each) to one gate group at x 6380-6700, y 3880-4220: a series pair
   pulls `fld_a_in` low, a single gate pulls `fld_y_b` low (loads untraced, AMB-014).
-- The three inputs of that group (`tcw_a`, `tcw_b`, `tcw_c`) come on thin metals from the
+- The three inputs of that group (`rst_ck`, `tcw_b`, `tcw_c`) come on thin metals from the
   next rows north. The region west of the island is one untraced block (`tcw` in the
   queue); it is where the field flip-flop has to be, and it should be traced as a block.
 
@@ -1034,7 +1034,7 @@ Method: before joining the line along y 4937/4915 I looked at its unclear 80 px 
 - `tools/findcell.py` with six known cells: nothing in the column but weak matches of
   `fld`'s inverter. It is hand work.
 - The row above the bit-0 source gates is an AND-OR-invert:
-  `tcw_o3820` = NOT(`tcw_x3855` OR (`tcw_a` AND `tcw_c`)). `tcw_a` and `tcw_c` are shared
+  `tcw_o3820` = NOT(`tcw_x3855` OR (`rst_ck` AND `tcw_c`)). `rst_ck` and `tcw_c` are shared
   with the group below, so the same two signals gate both the bit-0 source lines and
   this gate; neither is driven in the part traced.
 - The class map with `--open` is not usable east of the rail at y 3940-4200 as it stands
@@ -1071,8 +1071,8 @@ That is three images for five transistors, against six or more by views alone.
 The two shots not used there before (chip 1's metal shot and its fringed stripped shot)
 gave three joins, all drawn as uncertain items (AMB-015): the two upper stacks are one
 gate; the inverter below them has its load; its output goes back up a bus metal to the
-middle gate of the first stack. Extracted: `tcw_o3550` = NOT `tcw_m6232`; `tcw_o3326` low
-through `tcw_m6362a`, `tcw_m6404`, or `tcw_o3550` AND `tcw_m6320`. 2,041 nets, 3,423
+middle gate of the first stack. Extracted: `tcw_o3550` = NOT `c4l_gab`; `tcw_o3326` low
+through `tcw_m6362a`, `lc3_w9947`, or `tcw_o3550` AND `tcw_m6320`. 2,041 nets, 3,423
 transistors. Not found: the top node's connection, the load of `tcw_o3326`, where it goes.
 
 Method: the chip-2 stripped shot's legend (diffusion tan, field greener, poly orange) is
@@ -1086,7 +1086,7 @@ used as evidence.
 three pairs) is drawn with its pads, polys and bus metals; the overlay sits on every pad
 ring. The first column of `tcw` now has sixteen of its seventeen gates in the trace.
 
-- The bus metal `tcw_m6404` gates four pull-downs of the column: a common enable.
+- The bus metal `lc3_w9947` gates four pull-downs of the column: a common enable.
 - The top pair's output is the bus net that gates stretch B's big gate (AMB-016).
 - What I held this stretch back for yesterday (two NANDs feeding each other) came from
   assuming a poly reached a node; the class map shows 30 px of field between. Not drawn.
@@ -1099,11 +1099,11 @@ bus, look at the metal shots; the profile is not evidence either way.
 
 1. East of the rail for the whole column (loads, output arms), now that every node on
    the rail is named: start with pair 3's middle node and stretch B's big gate.
-2. The sources of `tcw_m6404`, `tcw_m6320`, `tcw_m6278`, `tcw_m6232` (their far ends).
+2. The sources of `lc3_w9947`, `tcw_m6320`, `tcw_m6278`, `c4l_gab` (their far ends).
 3. The second column; then the standing list (R8, `ras_o0_alt2`, `r9m`, `ral`, `bd2`).
 
-**Same day, later.** The bus metals followed south: the common enable `tcw_m6404` comes up
-from the vertical poly field under the six bus metals (pad (6275,4405)); `tcw_m6232`'s
+**Same day, later.** The bus metals followed south: the common enable `lc3_w9947` comes up
+from the vertical poly field under the six bus metals (pad (6275,4405)); `c4l_gab`'s
 lower pad sends a poly to the rail at the height where the profile had reported a dull
 poly, right beside `fld_a_in`'s node (AMB-014 extended: possibly a third pull-down). A
 third metal on the x 6362 track gates the column's last pull-down. 2,050 nets, 3,430
@@ -1442,7 +1442,7 @@ errors, 0 warnings; 777 of 1,124 equations firm.
 
 - **Master list.** `dbus` partial, 127 transistors, claim released by its tracer; the queue row
   `dbus (continue)` now lists only the wiring left (`d2_out_n`..`d7_out_n`, the drivers of
-  `dbus_do0_in` and `d1_out_n`, `d7_in`, the capacitor taps, `d_hiz`'s driver, AMB-021). `r9c`: its
+  `rd_b0` and `d1_out_n`, `d7_in`, the capacitor taps, `d_hiz`'s driver, AMB-021). `r9c`: its
   units' loads are traced (in `trace/dbus.txt`, cell `dbus_r9l`).
 - **AMB-012** resolved for the loads and the rails (the east rail is VCC): `ra#_cmp` = NOT `ra#_drv_in`.
   Left: `r9c`'s `?B` ties at the units' west ends. Notes of `r9c`, its floor-plan line, the glossary
@@ -1464,7 +1464,7 @@ claim kept).
 
 - Master list: `dbus` down to AMB-021 and a look along `d_hiz` inside its region; what leaves it
   went to `busC` (`d6_out_n`, `d7_out_n`, `d7_in`, `d7_c`, `d_hiz`'s driver) and `bd2` (rest) (the
-  drivers of `d1_out_n`..`d5_out_n` and `dbus_do0_in`, a second staircase of pads). `tc1` done
+  drivers of `d1_out_n`..`d5_out_n` and `rd_b0`, a second staircase of pads). `tc1` done
   (54 transistors, 41 nets). `tcw`'s south end complete; its region is now x 6380-6760. `tl1`: the
   west column is two latches in series in front of `rcs_e4`'s NOR (marked).
 - **AMB-020** grew: `tcw` drives the row `tc1_x1_u`, and with `tc1`'s alias the extraction gives
@@ -1492,3 +1492,2070 @@ through `bust`'s two `?P` rows), and the deliberate aliases (`ar#_q`, `*_tab`, `
 main. `operation.md`: the tracers had already added their rows (`tl1`'s latches, `tcw`'s field
 latch); header and count updated. Extraction 2,191 nets, 3,890 transistors, 0 errors, 0 warnings;
 779 of 1,136 equations firm. Coverage: traced 60.3 %, in a package 99.3 %, in neither 0.0 %.
+
+## 2026-11-18 11:26  32 handoffs processed (overnight); Refresh
+
+Merged overnight by their tracers: `dbus` run 7 (Matt Godbolt), `dlat` (Tom Seddon, done), `tc2`
+(dp111, four runs, done), `tcw` run 3 (Matt), `tl1` (dp111, fourth run, released), `tl2` (Matt run 1,
+Tom runs 2-3), `tl3` and `tl4` (Matt, claims kept), `tl5` and `tl6` (dp111, done), and five small
+packages by dp111 on Opus (below). Extraction 2,347 nets, 4,156 transistors, 0 errors, 0 warnings;
+822 of 1,222 equations firm; traced 62.2 %, in a package 99.3 %, in neither 0.0 %.
+
+- **Opus work.** dp111's Fable allowance ran out (about a week). `bc2` (22 transistors), `bc3` (2),
+  `lc2` (22), `lc3` (4) and `tr1` (6) were traced and reviewed on claude-opus and merged although the
+  gate's model check (8b) failed; the handoffs said so. The user (2026-11-18): **keep them on main,
+  have each reviewed on Fable (R31), and no more Opus merges** (dp111 to pause until Fable is back;
+  a message drafted for the user). `bc4` is a survey on its branch only.
+- **Master list.** `dbus` done (the `dbus (continue)` row dropped; AMB-021 kept by three readers);
+  `dlat` done, so **PR #17 can now be compared** with it; `tc2` done as far as the photos allow;
+  `tl1`-`tl6`, `lc1`-`lc3`, `bc2`-`bc4`, `tr1`/`tr2` now give each part's status; the `tcw` row's name
+  and region repaired (my edit of 2026-11-17 had overwritten the name). `lc1` is claimed by Matt for
+  scarybeasts (no write access yet). New in the `tl` row: the wide metal band y 2180-2500 north of the
+  strips is drawn by no block.
+- **Re-read** R31 (the Opus pieces, a Fable review), R32 (`tl2`'s five traps in the clusters: rows run
+  onto a pad across a gap, one poly drawn across a rail/thin-metal gap, load ties by analogy, load
+  gate polys stopped at the tie, NORs short of inputs), R33 (`railprof.py` under rails), R34
+  (mirrored `findcell` copies may be re-drawn layouts), R35 (`tl1`'s cells omit the thin metal
+  through each unit; their master geometry), R36 (rails drawn to a round coordinate), R37 (every
+  `@alias`: it joins nothing). R20 and R26 extended.
+- **Ambiguities.** AMB-009 corrected (the pass transistor's gate is `tl3_w3982`, not `clk_tl`);
+  AMB-014, 015, 020, 021, 026 updated; new AMB-027 (`tc2`'s latch joins), 028 (`tc1_ns3` over `rax`;
+  `cdp1_lw1`), 029 (`tl2`'s pair through one load tie), 030 (`tl3`'s gate to the lower unit's arm).
+- **Other blocks' notes**: `dbus`, `dpad`, `areg`, `bd2`, `rdp3`, `rax`, `fld`, `r9m`, `tc2`, `tl1`, `tl5`,
+  `bust`, `tla` (a corrections section from `tl1`-`tl4`); glossary rows `rcs_thin_e`, `tla_w#`, `tc2_o5175`;
+  `ports.d/tl1.txt` (`tl1_w5936` is an input). Floor plan: `areg`'s untraced strip removed and
+  `bd2`'s right-hand column trimmed (both now `dlat`), the coarse lower top-centre block removed
+  (`tc2`). `tools/ports.py --near` no longer crashes on two ports at equal distance (from `tc2`).
+
+**Refresh.** Renamed (`names.py compare`: only names changed): `areg_w6` -> `dl7_q_n`, `areg_w7` ->
+`dl6_q_n` (the bit 7 and bit 6 latch outputs, proposed by `dlat`); the glossary row `areg_w#` dropped.
+Left on purpose: `rcs_a2` and `rcs_x1` gather placeholders of `tl1` and `tl3` but are themselves
+unidentified, and `tl3` is claimed; the deliberate aliases as before. `operation.md`: the tracers had
+added their rows (`tl2`'s step-logic gates, `rcs_x1` as the clear of four latches, `tl4`, `tl5`,
+`tc2`, `dlat`); header and count updated.
+
+## 2026-11-18 23:58  15 handoffs and pull request #20 processed
+
+Pulled 110 commits: `tl1` run 5, `tl2` runs 4-5, `tl3` runs 5-10, `tl4` runs 6-10 (Tom Seddon,
+Matt Godbolt), `lc1` (scarybeasts, pull request #20, merged by Matt as d1f70ac), and Matt's dashboard
+fixes. Full extraction before any change: 2,363 nets, 4,224 transistors, 0 errors, 0 warnings; one
+open join (`ck_a_u`). Claims now: `tl3` (Tom, run 11), `lc2` (Matt, continuing dp111's latches).
+
+- **Done.** `tl4`: the whole strip x 4250-4967 (47 transistors, all wiring and rails; claim released).
+  `tl2` done as far as its strip goes. `lc1` partial (24 transistors, Fable only): `lc_step` = NOT
+  `lc1_w7040`, the output of a latch whose lower half lies in `lc2`.
+- **What changed in the step logic.** AMB-009 resolved the other way: `rcs_cond` =
+  NOR(`rcs_cond_n`, `tl3_w3982`), and `rcs_cond_lat` is an inverter's output (AMB-031), not a latch
+  node. `rcs_in1` = NOT `rcs_mv` (`tla`'s column ran through field, split by `tl3`); R9's match is an
+  input of `rcs_mn3852` and reaches the step request through `tl3_e3550` and `rcs_e4` (marked,
+  AMB-032). `tl1_w3594` = `rst_ck` (marked, AMB-033): `tl1`'s two latches and `tl3`'s latches B and C
+  are master/slave pairs on `rst_ck`. Latch C's clear is `rcs_x1`.
+- **Master list.** Rows `tl1`-`tl6`, `lc1`-`lc3` and `tla` updated. New rows `decode`, `clock` and
+  `pads`: blocks traced early that had no row, so the dashboard and `coverage.py` could not show them
+  (Matt's handoff). New queue row `tlb`: the wide metal band y 2180-2500 north of the top-left strips,
+  carved out of `padring`. Six wires of `tl1`/`tl2` and the rails RA and RC end on it.
+- **Re-read** R38 (ends taken from `tools/follow.py`), R39 (poly stubs ending under rails; undrawn
+  units), R40 (`tla`'s units in the middle cluster's east column), R41 (thin metals across tie boxes:
+  `tools/tl3_thin.py`, `?M` with aliases), R42 (gates at a rail's edge from the clean shot). R20, R30,
+  R34, R35, R36 extended; R35(b)'s inverter gate done at the master.
+- **Traps 26-31** in the tracing guide: a bright centre without the hole; thin metals over boxes;
+  the rail/thin-metal gap; wires under rails; where the follower ends; half a cell at a package
+  boundary.
+- **Ambiguities.** AMB-009 resolved; AMB-013, 026 and 029 updated. New: AMB-031 (`rcs_cond_lat` through
+  a load tie), AMB-032 and AMB-033 (the middle cluster's two thin metals), AMB-034 (`tl4`'s ring-like
+  marks), AMB-035 (`tc2_o5175` to `tl3`'s gates through `r9m`'s stub).
+- **Other blocks' notes.** Corrections appended to `tla`, `tl1`, `tl2`, `tl4`, `tl5`, `r9m` and `ur`.
+  `ports.d/tl1.txt` gains the VSS arm at x 2817. Not edited, because they are under active claims:
+  `tl3.md` (`tl4`'s corrections on `rcs_mv`'s direction, `ck_out`, the rows at x 4250) and `lc2.md`
+  (`lc1`'s latch D lower unit and the joins `rst_c`, `lc2_w8169`). Both are listed in the master list
+  rows for their claimants.
+- **Floor plan.** The coarse top-left block is trimmed to strip 3 (`tl3`); the fragments of
+  `tl1`, `tl2` and `tl4`-`tl6` cover the rest.
+- **Dashboard.** Matt fixed `read_master()`: it dropped the first row after each blank line, so
+  eight packages were missing. It also gained legend hover. That was a Sonnet session doing tooling,
+  not tracing, so the Fable rule does not apply.
+- **`tools/costs.py` (Matt, 1add61d; with the user's approval).** A main session's response now counts
+  as coordination unless the same transcript made a tracing call (`tools/t.sh`, `tools/ship.sh`, or an
+  Edit/Write of `trace/*.txt` or `notes/blocks/*.md`) between it and the commit it would join. This is
+  so that a second session under one git name no longer lands on another package's gate (`lc2` failed
+  8b on nine Sonnet responses from dashboard work). Reviewed: the change is right for that case. One
+  gap: a session that writes trace files through Bash (a heredoc, `sed -i`, a Python script) without
+  `t.sh` or `ship.sh` is not seen as tracing, so another model's responses could pass 8b. A package whose
+  responses are all coordination still fails 8b ("models seen: none"). Reported to the user, not
+  changed. `lc2`'s claim was released, paused; run 3's piece is on its branch.
+
+
+## 2026-11-19 00:06  Refresh
+
+- **Renamed** (`names.py compare`: only names changed): `tl4_w3808` -> `rcs_e3`, `tl5_w5717` ->
+  `rcs_mv`, `tl5_w5890` -> `rcs_x1` (`tl4`'s firm joins, runs 7-9). Three tautologies that the rename
+  left in the prose (a name set equal to itself) were reworded by hand.
+- **Left on purpose.** `tl3`'s firm renames wait for Tom's active claim to end, because they would
+  rewrite `trace/tl3.txt` under his branch: `tl3_e5240` -> `tl3_w5025`,
+  `tl3_e4372` -> `tl3_w4546`,
+  and the open join of latch C's data. The joins through `?M` stay as aliases (AMB-032, AMB-033), and so does
+  `rcs_cond_lat` (AMB-031). Placeholder-to-placeholder aliases such as `tl4_w3070` -> `tl3_e4243` are
+  not renamed. All of this is listed in the master list's `rename` row.
+- **`operation.md`.** The tracers had kept their rows current (AMB-009's resolution, `rcs_in1` = NOT
+  `rcs_mv`, the foot's joins, `tl1_w3594` = `rst_ck`, the top of `tl4`'s strip, `lc_step`). I updated
+  the header (2,363 nets, 4,224 transistors), the firm count (832 of 1,246 equations) and the ranges
+  (AMB-001 to AMB-035, R1-R42).
+- **`out/` rebuilt**: 0 errors, 0 warnings, 0 names outside the glossary; one open join (`ck_a_u`).
+  Coverage: 62.6% traced, 99.7% in a package, 0.0% in neither.
+
+## 2026-11-19 00:12  End-of-frame lead group at the head of the queue
+
+On the user's request, a new queue row `eof` goes first, so `/trace6845` without a prefix takes it. It
+holds the follow tasks that block the end-of-frame sequence, in order: where R4's match
+`rc_eq_r4` goes (east of x 13425 at y 9663, from track T6 of the counter channel); where R5's match
+`sl_eq_r5` goes (west of x 8340); `rst_ck`'s source (eleven gate loads, among them the master/slave
+latch pairs and the field latch path); the driver of `rcs_x1` (beyond `tl5`'s bus line x 5107).
+`bd1`-`bd3` moves up to second. `ck_out`'s driver (in `tl3`'s strip) and `lc2`'s latch D data wait
+for their claims.
+
+## 2026-11-19 00:16  The left bus field second in the queue
+
+On the user's request, `busL` (4780-7550 x 10400-15000) is split from the `busL`, `busB`, `busT` row
+and placed second in the queue, after `eof`. It is wiring with few or no transistors expected; the point
+is the joins between the left array and the central datapath, so that names can be carried across the
+two halves of the die. The row asks for `ports.d/busL.txt` at both edges and points at trap 10 and
+R1-R4 (poly under the tracks). The floor plan's label names the package.
+
+## 2026-11-19 10:11  Nine handoffs processed (eof, tl3, lc2, costs.py)
+
+Pulled: `eof` runs 1-2 (Tom Seddon), `tl3` run 11 (Tom), `lc2` runs 3-10 (Matt Godbolt), and a second
+change to `tools/costs.py` (Matt, at the user's instruction). Full extraction before any change: 2,379
+nets, 4,282 transistors, 0 errors, 0 warnings. No active claims.
+
+- **End of frame (`eof`, the lead group's first two runs).** R4's match `rc_eq_r4` is drawn end to end
+  and is the data of `bd1`'s latch gated by `rst_lat` and the input of `bd1`'s inverter A (firm join;
+  AMB-036 on one contact). R5's match `sl_eq_r5` drives one inverter in `cdp1`'s slice-0 position
+  (`sl_eq_r5_n` = NOT `sl_eq_r5`, firm), whose output runs west through the top-left strips into the band
+  `tlb`, where its loads must be. **`rst_ck` is `rst_ck`** (firm): `trunks`' line S climbs on to the top
+  left, so the inhibit/strobe of the input buffer row is what opens the vertical control's master/slave
+  latch pairs and the field latch path. **`rcs_x1` = NOT `lc1_w7170`**, and **`rst` =
+  NOR(`lpstb_b`, `res_b`)** (firm; believed the reset), whose buffered copies clear `tl4`'s and `tl5`'s
+  latches and latch D.
+- **`lc2` is done but for its edges** (80 transistors, Fable): latch D, the `lc_step` latch, is
+  complete (data `lc1_w7780`); and the west gate cluster is **a two-stage ripple counter** (two toggle
+  flip-flops), held clear with `rcs_x1`'s input, clocked from `lc3`. A 2-bit counter beside the scan
+  line counter's step latch is a candidate for counting the first cycles of a line (believed only).
+  R31 done for `lc2`.
+- **`tl3` run 11**: the 4-bit counter's L3 line is `tl4`'s strong inverter (`c4l_l3`; the first counter
+  L3 with a traced driver), its gab is `c4l_gab`; `rcs_thin_e` is not `sl_l3` (`trace/ur.txt`
+  corrected).
+- **Master list.** The `eof` row gives the lead group's state and next steps in order: `tlb` (moved up
+  to third), `rst_a`'s source, the gate group at `rst_ck`'s tap (7540-7780, 7600-7820), `lc3` (the
+  counter's clock), `bd1`'s latch, `lc1_w7170`'s driver. Rows `tl1`-`tl6` (`tl3` released), `lc1`-`lc3`,
+  `ur`, `r9m`, `trunks` (continue) updated. Re-read R43 (polys that go on below a pad), R44 (`ur`'s
+  through lines and rows between pads), R45 (copies' pads); R4, R26, R31 (done for `lc2`), R36, R41
+  extended. Traps 32-36 (look all round every pad; two pads on a line; rows beyond a rail's edge; a
+  load's plate away from its output; bright stretches that are diffusion), trap 30 extended.
+- **Ambiguities.** AMB-033 updated (track A is `rst_ck`); new AMB-036 (`rdp3`'s contact on R4's path),
+  AMB-037 (`rst_ck`'s staircase over other nets).
+- **Other blocks' notes**: corrections appended to `bust`, `cdp1`, `tc2`, `r9m`, `tl1`, `tl2`, `tl4`, `tl5`,
+  `tl6`, `rdp2`, `rdp3`, `bd1`, `hcj`, `ucz`, `mrach`, `lc1`, `lc3`, `trunks`, `tcw`, `fld`, `ur`, `tla`,
+  `urch`; `tl3.md` now that its claim has ended (including `tl4`'s corrections of 2026-11-18).
+  `ports.d/tl6.txt` (`rst_ck` in) and `ports.d/tc2.txt` (`sl_eq_r5_n` in). Not changed: comments in
+  `trace/bust.txt` and `trace/tc2.txt` that the notes now correct.
+- **Floor plan.** The coarse left-centre block is split into what `lc1` and `lc3` have not drawn
+  (`lc2` is its fragment); the top-left strip 3 block is cut to the rows above y 2890.
+- **`tools/costs.py`, second change** (Matt, e836694, at the user's instruction): a main session is
+  credited with a package only for its own calls on that package (`tools/t.sh PACKAGE`, `ship.sh` of its
+  files, Edit/Write of them). It fixes the cross-session case. The gap noted on 2026-11-18 remains: a
+  session that edits trace files through Bash is not seen as working on the package.
+- **From `tl3`'s handoff, on the merge step:** main moved under the gate six times in a row during the
+  last handoff pass and refresh. Each move meant a re-merge and a fresh cost-report commit. Proposal:
+  the coordinator pushes its series as one push where it can, or `mergecheck.py` says at once that main
+  has moved. Taken: from this pass the handoff work goes in one push and the refresh in as few as its
+  steps allow.
+
+## 2026-11-19 10:22  Refresh
+
+- **Renamed** (`names.py compare` after each batch: only names changed; 26 nets). No claims were
+  open, so `tl3`'s and `lc2`'s placeholders could be taken too.
+  - Batch 1: `tcw_a`, `lc2_w8172`, `tl3_e4152`, `tl4_w4501`, `tl5_w5631` -> `inh_ck`.
+  - Batch 2, firm joins into names already in use:
+    `lc1_w7140`, `tl1_w4025`, `tl3_w3506`, `tl3_w4200` -> `rcs_x1`;
+    `tl3_w5112`, `tl3_e4808`, `rcs_g4240` -> `rcs_x1`; `tl3_e4915` -> `rcs_mv`;
+    `tl3_w3765` -> `rcs_a2`; `lc1_w7343` -> `res_b`; `lc1_w7257` -> `lpstb_b`; `bd1_a`, `rdp3_n7s9`
+    -> `rc_eq_r4`; `tl4_w5455`, `tl5_w5457` -> `c4l_l3`; `tcw_m6232`, `tl5_w4590` -> `c4l_gab`.
+  - Batch 3, new names: `r9m_l1w`, `tl4_w2512`, `tl1_w2592` -> `sl_eq_r5_n`; `lc1_w7304` -> `rst`,
+    `lc1_w7468` -> `rst_n`, `lc1_w7606`/`tl5_w3636`/`tl4_w4198` -> `rst_a`, `lc1_w7734` -> `rst_b`,
+    `lc1_w7864` -> `rst_c`; the open join `tl3_e4635_u` -> `tl3_e4635`.
+  - `rst` is named for what its traced equation does (NOR of the two pins, clearing latches). That it
+    is the datasheet's reset is believed, and its glossary row says so.
+  - The renames left about 45 tautologies in the prose ("X = X") across notes, journal, trace
+    comments and floor-plan labels. They were reworded by script and by hand. Older journal entries
+    were reworded where the former-names check required it.
+- **Left on purpose**: the joins through `?M` (AMB-032, AMB-033), `rcs_cond_lat` (AMB-031), and
+  placeholder-to-placeholder aliases (listed in the `rename` row).
+- **`operation.md`**: header (2,379 nets, 4,282 transistors), 839 of 1,261 equations firm, ranges
+  AMB-001 to AMB-037 and R1-R45. The `rst_ck`, `rcs_x1` and reset passages were reworded after the
+  renames (`rcs_x1`'s input is `lc2`'s staircase line, which also clears `lc2`'s counter). The
+  "Not established" bullet on the end-of-frame sequence now says what the lead group has traced
+  towards it.
+- **`out/` rebuilt**: 0 errors, 0 warnings, 0 names outside the glossary, one open join (`ck_a_u`).
+  Coverage: 63.0% traced, 99.7% in a package, 0.0% in neither.
+- **Pushed in two pushes** (handoffs, then the refresh), following `tl3`'s request to spare the
+  tracers' gate runs.
+
+## 2026-11-19 10:32  Floor plan of the top-left logic brought up to date
+
+The user asked whether the floor plan reflects the latest top-left findings. Every traced piece had
+its box, but the labels lagged:
+- `tl4`'s and `tl5`'s blocks were still drawn provisional although both packages are done. The
+  `?` is dropped on all of them except `tl5`'s rail RC, which is VSS by structure only.
+- Labels now say what is known: "latch that drives the 4-bit counter's L3 line", "c4l_l3 driver",
+  "data inverter of the c4l_l3 latch", "inverter that makes rcs_e3", "latch c: field flip-flop
+  candidate".
+- `tla`'s fragment predated `tl1`-`tl5`. It drew coarse provisional blocks over the middle and
+  right clusters ("not traced"), the second bus field and the small cluster; these are removed, since
+  the strips' own fragments cover them. Its step-logic cluster, vertical bus and second crossing
+  field are no longer provisional. The poly bus label now names its five lines (`eof`).
+- Still provisional, rightly: `tla`'s rows along the top (y 2620-2900, `tl3`'s last item) and the
+  diagonal fan in `lc1`'s strip.
+- `out/` rebuilt.
+
+## 2026-11-19 10:59  Queue: the central column's registers and the rest of the top left
+
+The user asked for priority on the top-left random logic and on the registers and latches down the
+central column (R12-R17). After `eof`, `busL` and `tlb` the queue now runs:
+1. `regs`: a follow lead group. It takes `wr_r14`, `wr_r15`, `rsel12`, `rsel13` and the four read
+   selects from `sel`'s bottom edge to the rows they strobe, to say which row is which register.
+2. `tl3` (continue): the rows above y 2890, which hold the only way left to `ck_out`'s driver.
+3. `cdp4` (continue), moved up.
+4. `cdp3` (continue): row A's six large cells, with `cdp2`'s row D, the top of the same cells.
+5. `tla` (continue): its Left list and R38-R42.
+6. `cdp2` (continue).
+7. `cdp1` (continue).
+
+Floor plan: `ral`'s label was still "believed a latch per bit (partly traced)" and provisional,
+although `ral` has been done since 2026-11-17 (a static latch per bit, firm in all 19 copies). The
+label is corrected. `out/` rebuilt.
+
+## 2026-11-19 11:08  Floor plan: a sweep for stale labels
+
+The user asked for every stale label to go and for everything now identified to be named.
+
+**Method.**
+- Every block (628) that was provisional or whose text said "not traced", "believed", "unknown" or the
+  like was checked against the master list and the notes.
+- Every signal name in a label was checked against the netlist.
+
+**Changed.**
+- `mal`: was "believed a latch per bit (partly traced)"; now a static latch per bit, firm (as `ral`).
+- `bd1`: its labels now name R4's match (`rc_eq_r4`), the latch gated by `rst_lat`, and the `rst_rc` /
+  `rst_lat` inverters and `rst_a_n`'s driver, instead of "line X" and "NOT X".
+- `cdp1`: R8 by its data bus joins, not "believed"; the data bus channel names `db_b0`..`db_b7`.
+- `rdp2`: R4's comparator is against the row counter `rc0`..`rc6` (firm), not "believed the row
+  counter", and its output goes to `bd1`.
+- `amr`: the compared lines are `c4l0`..`c4l3`, not `cdp1`'s old line names.
+- `dbus`: D7's input buffer is no longer provisional.
+- `tl1`: two gates no longer provisional; the wide metal is labelled as the VSS arm onto R3's top.
+- `tl3`: latch C's data join is drawn now.
+- `tla`, `bw`: "the step signal b" is now `rc_stepreq_n`; the step formula uses the `rcs_` names.
+- `tc1`: `l2_out`/`l3_out` are now `ras_o0_sel2`/`ras_o0_sel1`.
+- `tcw`: its latch is marked as the field latch path.
+- The input buffer row's extra inverter is named as `rst_ck`'s.
+- New provisional block for the metal band north of the top-left strips (`tlb`).
+
+**Removed as superseded** (another fragment now covers them):
+- `tc1`'s four "gate columns, not traced" blocks at x 6400-6750 (`tcw`'s);
+- `fld`'s "upper group (untraced)" (`tc2`'s);
+- `fld`'s "bit-0 source gates, partial" (`tcw`'s latch).
+
+**`operation.md`**: "`amr_eq_r3` is believed to be `amr_eq_r3` ... not joined" corrected: `amr` joined it
+firmly on 2026-11-17.
+
+**Still provisional, rightly** (not traced):
+- the top-left's last rows, `lc1`'s rest and `lc3`, `tr1`/`tr2`;
+- the bottom-centre and bottom-left logic;
+- `bc3`'s groups, `bd1`'s two lower gate columns, `bd2`'s lower part;
+- `cdp1`'s rows D/E and the large cells of `cdp2`/`cdp3`;
+- `larr`'s middle and right columns and carry gaps;
+- `tla`'s top lines and the diagonal fan, D7's protection;
+- the comb cells by LPSTB/RES, the small cell by the die marking.
+
+## 2026-11-19 11:17  Floor plan: the logic west of the large cells
+
+The user saw untraced logic left of the row A cells with no block on the floor plan.
+
+**New provisional blocks in `floorplan.txt`**, from views of the clean shot:
+- a gate column x 7460-7800, y 7580-8440: about six units with loads; its top is the gate group at
+  the end of `rst_ck`'s tap row, `eof` (c);
+- gates below it at y 8620-8800;
+- the cluster x 7850-8300, y 8260-8800 ("the logic beside row A" of `cdp3`'s notes).
+
+**Master list.** The `cdp3` (continue) row now covers them: region 7460-10850 x 7580-8800.
+
+**Labels.** `cdp2`'s "row of large cells" and `cdp3`'s "row A cells" are the same six cells cut by
+the two packages' boundary. They are now labelled "six large cells, upper part (cdp2's row D)" and
+"... lower part (cdp3's row A)".
+
+`out/` rebuilt.
+
+## 2026-11-19 11:23  Die coverage: a stricter check, and the gaps it found
+
+The user asked for confirmation of full die coverage. `tools/coverage.py` said 0.0% "in neither", but
+it counts a spot as covered if any region anywhere in the master list contains it, done packages
+included. `/trace6845` picks only from the Queue, so a gap can hide inside a done or partial
+package's region. That is how the logic beside the large cells went unnamed.
+
+**The tool.** `coverage.py` now also prints "in a Queue row's region" and "untraced and in no Queue
+row" (CLAUDE.md: the latter must hold only empty field, supply metal and the die marking). The first
+run gave 0.8%.
+
+**Fixed.**
+- Twelve partial packages had no Queue row: `larr`, `bc1`, `rdp2`, `fld`, `tcw`, `bw`, `rdp1`, `ur`,
+  `urch`, `mra`, `rax`, `clock`. Each now has a "(continue)" row at the end of the queue, with its
+  Left list. `fld`'s old 6250-12480 x 3880-12480 blanket is cut to 6250-7100 x 3880-6200.
+- `busL` gains its northern part, 6450-7600 x 6750-10400: the strip between the left-centre logic and
+  the central datapath, with `bw`'s crossing field.
+- `lc1`-`lc3` gains the band 4400-6450 x 6350-6900 above `lc1`.
+- `mra` (continue) starts at y 6850, for three small gates at the counter array's top.
+- `padring`'s west region now reaches x 2400, closing a 50 px sliver beside `larr`.
+- `teststr` names the die marking.
+- An untraced gate group at `cdp4`'s bottom-left corner (x 7560-7860, y 13650-14030) goes to `cdp4`
+  (continue) and gets a floor-plan block.
+
+**Now 0.4% is untraced and in no Queue row.** I looked at each piece:
+- the wide supply plates east of the right datapath (x 16950-17700, y 2675-8375);
+- the supply band at y 5325-5525;
+- empty field east of `wl` and at `cdp4`'s bottom-right;
+- a few slivers of wiring under 100 px.
+
+## 2026-11-19 11:38  Pull requests #17 and #19; Refresh
+
+Both reviewed at the user's request, and closed with the user's approval.
+
+**#19** (Tom Seddon): adds a missing count ("29 meetings, 16 ports without a partner") to a `tl3`
+handoff that was processed and removed on 2026-11-18. Merging it would have brought the file back.
+Closed with the count noted in the comment.
+
+**#17** (dp111, dbus-cont, open since 2026-11-17): compared with main as planned.
+- The bits 4-7 latches and bus drivers (its `trace/dbus_h.txt`) against Tom's `dlat`: all 40
+  transistors pair up within 25 px, and every gate and channel terminal is on the same named net. That
+  is an independent confirmation of `dlat`.
+- Its `dbus_n9` is `dbus`'s `d0_out_n` = NOT `rd_b0`, the same two transistors.
+- Not merged:
+  - it rewrites `dbus`'s files, which Tom has since traced;
+  - dp111's cost report shows part of this work on Opus (Fable-only rule; no further non-Fable merges).
+- Its one new piece is `dbus_le`'s route south from (16774,15935) to a NOR under `bd2`'s VSS rail,
+  `dbus_le` = NOR(`cs_d`, X). It is recorded as a lead in the `bd1`-`bd3` row, to be traced again on
+  Fable, and as "believed" in `operation.md`'s `dbus_le` row.
+- The `dlat` row and `operation.md`'s data bits 4-7 row now note the confirmation.
+
+**Handoffs:** none waiting. **Claims:** none.
+
+**Refresh:**
+- Renamed (`names.py compare`: only names changed): `lc2_w8254`, `lc2_w8731` -> `rst_c`.
+- `operation.md`: totals unchanged (2,379 nets, 4,282 transistors; 839 of 1,261 equations firm).
+- `out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary.
+- Coverage: 63.0% traced; untraced and in no Queue row 0.4% (supply plates and empty field).
+
+## 2026-11-19 12:26  Handoff: eof run 3, the NOR on R5's inverted match
+
+Traced by this session with `/trace6845` (claim 6a6bfba, merged 17714ea, claim released); the handoff
+processed at the user's request.
+
+**What came in** (`notes/blocks/eof.md`, piece `r5nor`; 4 transistors, no uncertain items):
+- The four polys that leave `tl1`'s strip north at x 2362-2515 end on one gate in the band, at
+  x 2330-2550, y 2180-2470: `tl1_w2637` = NOR(`tl1_w5936`, `rcs_c1`, `sl_eq_r5_n`) (firm).
+- So R5's match, inverted once, is gated by `rcs_c1` and `tl1_w5936` into the data of the middle
+  cluster's latch A. It is the first load of `sl_eq_r5_n` that is drawn; its poly ends there.
+- The load is fed by a diffusion strap from seven contacts under the plane north of y 1963, named
+  `vcc` from the load's orientation only (its Ambiguity 8; for `padring`).
+- Review: one full round on Fable, no finding that changes a connection; three geometry fixes (two
+  pad edges, the head and its contacts), both `sameconn` runs identical.
+
+**Checks:** overlay of the merged piece at 1.7x on the chip-2 metal and clean shots
+(`cache/scratch/eof_handoff_ov.png`): every outline on its feature. Full extraction 2,379 nets,
+4,286 transistors, 0 errors, 0 warnings; `tools/unsure.py`: 90 nets joined only through uncertain
+items, none of them this piece's.
+
+**Applied:**
+- Master list: the `eof` row's task (a) marked done as a gate, with what is next on that path
+  (latch A's enable `ck_out`, by `tl3` (continue)'s row (4250,2810)); the `tlb` row no longer
+  leads the end-of-frame group and lists what is left of the band (four of its six edge wires closed).
+- `notes/blocks/tl1.md`: the three ports north and the Not done entry now say where the polys end.
+- `floorplan.txt`: the band's coarse block trimmed to x 2600-6400.
+- `notes/operation.md`: totals (4,286 transistors; 840 of 1,262 equations firm).
+- No Re-read item, no new AMB entry.
+- `out/` rebuilt: 0 names outside the glossary. Coverage: 63.1% traced; untraced and in no Queue
+  row 0.4%, as before.
+
+**Handoffs:** none waiting. **Claims:** none.
+
+## 2026-11-19 12:50  Handoff: eof run 4, rst_a's open ends (driver not found)
+
+Traced by this session with `/trace6845` (claim 54fc826, merged a4d06bc, claim released); the handoff
+processed at the user's request.
+
+**What came in** (`notes/blocks/eof.md`, piece `isrc`; wiring only, no uncertain items):
+- `rst_a` is the clear of `bc2`'s latch unit a (joined to that unit's clear pad by an alias; the unit still waits for R31).
+- Its west bus line is drawn on from the pad (9770,18081) to a pad (8967,17735), from which a metal runs
+  north along x 8968 for 2,470 px with two tap pads and an end pad, and a second metal west. Four polys
+  leave those pads west into the gate column x 8650-8800: stubs and ports, not followed.
+- The task's goal, `rst_a`'s driver, is **not found**: every end seen is a gate.
+- Review: one full round on Fable, no finding that changes a connection; three geometry or comment fixes.
+
+**Checks:** overlay of the metal x 8968 and its two tap pads at 1.3x
+(`cache/scratch/eof_handoff_ov2.png`): on the features. Full extraction 2,378 nets (one fewer: the
+join), 4,286 transistors, 0 errors, 0 warnings; `tools/unsure.py` does not list `rst_a`.
+
+**Applied:**
+- `trace/trunks.txt`: the metal x 10225 shortened from y 15886 to y 15905 (it ends on the ring of the
+  pad (10226,15912); it was drawn 48 px over open poly). `tools/sameconn.py HEAD`: connections identical.
+- Master list: the `eof` row's task (b) marked not found, with the six places to go on from; notes
+  added to the `trunks` (continue), `bc1` (continue) and `bc2`/`bc3`/`bc4` rows.
+- `notes/blocks/trunks.md` and `bc2.md`: the ends that are now followed.
+- `notes/operation.md`: the net count.
+- No Re-read item, no new AMB entry. The clear pad's placeholder name is left as an alias of `rst_a` for the next refresh.
+- `out/` rebuilt.
+
+**Handoffs:** none waiting. **Claims:** none.
+
+## 2026-11-19 12:59  Refresh
+
+At the user's request, after the two `eof` handoffs of today. **Handoffs:** none waiting. **Claims:** none.
+
+**Renamed** (`names.py compare`: only names changed; one batch):
+- the clear of `bc2`'s latch unit a (its placeholder is under Former names in the glossary) -> `rst_a`:
+  a firm join, `eof`'s piece `isrc`, link G; the alias in `trace/eof.txt` is dropped by the rename.
+
+**Left on purpose** (`names.py candidates`, section 1): `ar#_q`, `d#_in`, the `*_tab` cell pins (a
+cell's own name for a pin), `db_b6`/`db_b5` (kept with their row under AMB-019).
+Section 2 (joins through uncertain geometry) untouched, as the rule says.
+
+**`operation.md`** (seventh refresh): header (2,378 nets, 4,286 transistors; 840 of 1,262 equations
+firm, unchanged since `eof`'s run 3); the `rst_a` row now gives the equation of the latch it clears
+(marked); R5's path (the NOR into latch A's data) was taken in with run 3. No equation changed status
+(`eq_before` against `eq_after`). AMB-001 to AMB-037 and R1-R45 unchanged.
+
+**`out/`** rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 630 floor-plan blocks.
+Coverage: 63.3% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
+
+## 2026-11-19 13:50  Bus-field packages renamed to lower case
+
+At the user's request ("please sort out the issue with busL"). `tools/claim.py` accepts only lower-case
+prefixes, and the master list named four packages with a capital, so none of them could be claimed
+(found when `/trace6845` tried to take the queue's second row). A prefix names files and a branch,
+which must not differ only by case, so the names changed, not the tool:
+
+- busL -> `busl`, busB -> `busb`, busC -> `busc`, busT -> `bustop` (`bust` is taken: the contributor
+  package that did busT's data bus part).
+- Changed in `notes/work-packages.md` (with a paragraph on the rule), `floorplan.txt`,
+  `notes/blocks/bust.md`, `dbus.md`, `dpad.md` and a comment in `trace/bust.txt`. Left as written:
+  earlier journal entries, `notes/blocks/eof.md` (one mention; `eof` is claimed and being edited)
+  and the waiting handoff.
+- `out/` rebuilt: 2,382 nets, 4,290 transistors, 0 errors, 0 warnings (this takes in `eof`'s run 5,
+  whose handoff `handoffs/eof-20261119-133240-431bea8.md` is still to be applied).
+
+**Handoffs:** one waiting (`eof` run 5). **Claims:** `eof` (tom-seddon), `tlb` (this session; to be
+released for `busl`, which the user wants done next).
+
+## 2026-11-19 16:18  Handoffs: eof runs 5 and 6, busl runs 1 and 2, lc3 runs 2 and 2b, eofw; a test of effort
+
+At the user's request ("apply waiting handoffs"). Seven handoffs, applied together.
+
+**What came in**
+
+- `eof` run 5 (richtw1; piece `g7700`, 4 transistors): the gate at the end of `rst_ck`'s tap row, one
+  AND-OR-INVERT under column 0's VSS rail (firm).
+- `eof` run 6 (Tom Seddon; piece `ff3`, 19 transistors): the clock of `lc2`'s first flip-flop is the
+  slave output of a third copy of `lc2_ff` in `lc3`'s column A; `lc2_w8475` = NOT(`eof_w9472` AND
+  (`eof_w9255` OR `eof_w9505`)) (firm).
+- `lc3` runs 2 and 2b (Matt Godbolt; 37 transistors and the wiring): two more counter stages (E4 a
+  turned copy, B0 folded over both columns, by hand): **the ripple counter has five stages**, clocked by
+  `lc2`'s through line `lc3_w9947`; the gate pair: **`lc1_w7170` = NOT `rst_c`** (the driver `eof`
+  (f) asked for) and `lc2_w9079` = NOT `lc3_w9299`, so `lc2_w9125` chooses between the counter's fourth
+  and fifth outputs. R31 done for `lc3`. Released: done but for its edges.
+- `busl` runs 1 and 2 (richtw1; wiring, 16 nets): `cdp3`'s row H west outputs reach eight diffusion rows
+  of the left array (piece `h8`); `cdp4_bus_s#` = `cdp4_in_s#` for all eight slices, each also on a poly
+  row of the left array (piece `ch1`). Claimed, continuing.
+- `eofw` (richtw1; wiring, new package): the three wires of `g7700` followed to named nets:
+  **`tc2_r5589` = NOT(`lc1_w7170` AND (`rst_ck` OR `ck_out`))**, and **`ck_out` is the wire `lc1` called w7908**, the
+  enable of latch D. Two open ends at a corner pad (7446,8732) into `cdp3`'s gate column.
+
+**The test of effort** (user: "test the results against a high effort trace"). `g7700` had been traced
+in a 15-minute run. A fresh agent at high effort traced the gate again from the commit before that
+run, without sight of it (39 minutes). On the gate the two agree in every connection: the same four
+transistors and equation, and drawn together they merge net for net with no short (coordinates within
+4 px; where they differ at the wires' ends the second is nearer the photos by 3-5 px). The difference
+was how far the wires were followed: the first run left each at a port within 1,200 px, the second
+reached a named net on each. That part became `eofw`, reviewed by a fresh reviewer at high effort
+(round 1: no findings that change a connection). The user then asked for a high-effort review of the
+other pieces claimed that day: `eof`'s `r5nor` and `isrc`, `busl`'s `h8` and `ch1`, each by a fresh
+Fable reviewer at high effort. **None found anything that changes a connection**; the geometry and
+notes items they found are in the master list's `eof` and `busl` rows for the claims' holders. One
+sample, and the two tracing runs had different briefs, so "followed further" cannot be put down to
+effort alone; the lesson taken is a rule for follow tasks (below).
+
+**Checks:** overlays at 1.15-1.5x of `ff3` (`cache/scratch/handoff/h_ff3.png`), `lc3`'s stage B0 and its
+wiring east of the counter (`h_b0.png`, `h_lc3e.png`): on the features; `eofw`'s joins at 3-4x
+(`cache/scratch/eofw/join1.png`, `join2.png`). Full extraction 2,400 nets, 4,344 transistors, 0 errors,
+0 warnings; `tools/unsure.py`: 90 nets joined only through uncertain items (none of them from these
+packages' own geometry: the cell copies carry `lc2`'s `?D`).
+
+**Applied:**
+- Master list: `eof` row ((c) done, (d) done as far as `eof` goes, (f)'s driver found by `lc3`; what is
+  left; the geometry fixes waiting in `trace/eof.txt`; the follow-task rule); `busl` row (status, what
+  arrives from `lc3`, what `eofw` draws in the northern part, the second-look review's notes);
+  `lc1`-`lc3` row (`lc3` done but for its edges; `lc1`'s corrections); `cdp3` (continue), `bl0`,
+  `urch` (continue) rows; R31 (done for `lc3`), R45 (applied by `eof` run 6 and `lc3`). `eofw`'s row,
+  added to the Queue at 15:25 so that it could be claimed, is moved to the contributor table as done.
+- `notes/tracing-guide.md`: trap 30 gets `tl5_tracks.py`'s "hole" where a line has stepped off its
+  track; new **trap 37** (a second copy of a cell may be folded: try the halves, read every row end);
+  section 5 gets a paragraph on `@alias` (one canonical name per net, no chains; a label of the
+  canonical name in one's own file) and one on follow tasks (finished at a drawn net, not at the first
+  pad). No Re-read item: no earlier block is known to be affected by trap 37, and the first run of
+  `g7700` misread nothing.
+- `trace/cdp3.txt`: column 0's VSS rail `M 7623,8450 y11200 w=46` began 106 px too far north (bare
+  ground at x 7612-7660 down to y 8548 in both metal shots; seen independently by both tracers of
+  `g7700`); now from y 8556, its label moved onto it. `tools/sameconn.py HEAD`: connections identical.
+- Corrections sections added to `notes/blocks/lc1.md`, `lc2.md`, `lc3.md`, `cdp3.md`, `cdp4.md`,
+  `larr.md`, `tc2.md`. Not edited: `notes/blocks/eof.md` (claimed: Tom Seddon) and `busl.md` (claimed);
+  what concerns them is in their master-list rows.
+- `floorplan.txt`: the coarse block for the left-centre strip 3 removed (`lc3`'s and `eof`'s fragments
+  cover it); the gate column west of the large cells trimmed to start below `eof`'s gate (y 7860).
+- No new AMB entry (none proposed).
+- `out/` rebuilt. Coverage: 65.5% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
+
+**Handoffs:** none waiting. **Claims:** `busl` (waitingforvsync), `eof` (tom-seddon).
+
+## 2026-11-19 16:20  Handoff: eof run 7, the latch on R4's match closes
+
+It arrived (bb9af14) while the entry above was being pushed; applied in the same sitting.
+
+**What came in** (Tom Seddon; piece `r4lat`, 1 transistor, three uncertain items): the load of the lower
+half of `bd1`'s latch on R4's match, a block under `bd1`'s band east of the ground rail
+(x 13937-13992, y 15630-15702), with a tie box (13889-13913, 15660-15682) drawn uncertain. With it
+`bd1_q` is `bd1_n2` (alias) and the pair is cross-coupled: `bd1_n1` = NOT(`bd1_n2` OR (`rst_lat` AND
+`rc_eq_r4`)), `bd1_n2` = NOT((`bd1_an` AND `rst_lat`) OR `bd1_n1`) (marked: the two load ties): a
+transparent latch of R4's match, open while `rst_lat` is high. Where its outputs go is not found.
+Review: round 9 on Fable, no finding that changes a connection.
+
+**Checks:** overlay at 4x, metal and clean (`cache/scratch/handoff/h_r4lat.png`): on the features.
+Full extraction 2,399 nets (one fewer: the alias), 4,345 transistors, 0 errors, 0 warnings.
+
+**Applied:**
+- Master list: `eof` row ((e): the latch complete, what is left of it); `bd1` row and the `bd1`-`bd3`
+  queue row; **R42 extended** in this commit: in an open group beside a rail the clean shot can be
+  inverted as a whole and read as a misregistration; to re-read with that in mind: `bd1`'s gate column
+  y 15850-16125, `bd2` (rest).
+- `notes/tracing-guide.md`: trap 28 gets the same.
+- `notes/blocks/bd1.md`: a corrections section; `floorplan.d/bd1.txt`: the lower half's line.
+- `trace/bd1.txt`: the band `P 13896,15630:13996,15650` ends at x 13993 (`eof`'s review round 9);
+  `tools/sameconn.py HEAD`: connections identical. Its two `?` items that `eof` re-read are left
+  marked (`trace/eof.txt` draws firm items over both).
+- No new AMB entry. `out/` rebuilt.
+
+**Handoffs:** none waiting. **Claims:** `busl` (waitingforvsync), `eof` (tom-seddon).
+
+## 2026-11-19 16:26  Refresh
+
+At the user's request, after the eight handoffs above. **Handoffs:** none waiting. **Claims:** `busl`
+(waitingforvsync), `eof` (tom-seddon).
+
+**Renamed:** nothing. `names.py candidates`, section 1, lists only the deliberate aliases, as before
+(`ar#_q`, `d#_in`, the `*_tab` cell pins, `db_b6`/`db_b5` under AMB-019).
+
+**Left on purpose:** the day's new joins are placeholder to placeholder, kept as `@alias` until one
+side has a functional name: `tc2_r5589` / the wire `eof` called w7818; `ck_out` / the wire `eof` called w7718 / `ck_out`;
+`lc1_w7170` / `lc2_w8474` / `eof_w7777` / `lc3_w9432`; `lc2_w9079` / the wire `lc3` called w9337; `lc3_w9947` /
+`lc3_w9947`; `cdp4_bus_s#` / `cdp4_in_s#` (eight); `bd1_n2` / `bd1_q` (through an uncertain tie).
+Section 2 (joins through uncertain geometry) untouched, as the rule says. The glossary rows of
+`ck_out` and `tc2_r#` now say where those two lines go.
+
+**`operation.md`** (eighth refresh): header (2,399 nets, 4,345 transistors; 847 of 1,276 equations
+firm, from 840 of 1,262). Taken in: the gate on `rst_ck`'s tap row is named on every side,
+`tc2_r5589` = NOT(`lc1_w7170` AND (`rst_ck` OR `ck_out`)) (firm, now also in the name `lc1_w7170`:
+`lc3`'s gate pair ends on the same line); latch D's enable the wire `lc1` called w7908 is `ck_out`; "Not
+established at all" no longer says the ripple counter's length and consumers are untraced (five
+stages, clock `lc3_w9947` with its source open, `lc2_w9125` choosing between the fourth and fifth
+outputs). The tracers had already written the counter's table, `lc1_w7170`'s driver and the latch on
+R4's match. Against the last refresh's equations: 16 new (9 firm), two gone by name (`lc3_w9432`,
+`lc2_w9079`, now `lc1_w7170` and `lc2_w9079`), none changed status. AMB-001 to AMB-037 and R1-R45
+unchanged in range (R31, R42, R45 edited).
+
+**`out/`** rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 647 floor-plan blocks; the
+floor plan looked at round the left-centre strips and the new routes (`cache/scratch/refresh/fp_crop.png`):
+no label over another. Coverage: 65.5% traced; in some package region 99.9%; untraced and in no Queue
+row 0.4%.
+
+## 2026-11-19 18:36  Handoffs: eof runs 8 and 9, busl runs 3 to 6
+
+At the user's request ("when this lands, please apply the handoffs and refresh"), after `busl` run 6
+was merged (d911059). Six handoffs, applied together.
+
+**What came in**
+
+- `eof` run 8 (Tom Seddon; pieces `n2out`, `n2w`; no transistor): the exit of the latch on R4's match.
+  `bd1_k` is `bd1_n2` (alias): the strip under `rst_a`'s gate is a third pull-down of N2, so
+  **`bd1_n2` = NOT((`bd1_an` AND `rst_lat`) OR `bd1_n1` OR `rst_a`)** (marked: the load's tie): R4's
+  match as latched, shown only while `rst_a` is low. The output is drawn 11,900 px, no gate and no
+  tap, along the bottom bus field and up the left bus field to (6711,15000). Review round 10: no
+  finding that changes a connection.
+- `eof` run 9 (Tom Seddon; piece `isrc4`; wiring): **`rst_a` is `lc2`'s through line x 6299** (firm), by a poly row,
+  `bc3`'s track bundle, `bc1`'s track 7969 and the row y 14914 onto `busl`'s row end. So the driver of
+  `rst_a` is not in the bottom-centre logic: the line enters `lc2` from the east at (6450,8630).
+  Review round 11: no findings.
+- `busl` run 3 (richtw1; piece `lc9`): `lc3`'s nine metals at y 10400 down the field with `rcs_e4`;
+  seven onto poly rows toward `bc1`'s 13-line bus (the ripple counter's clock, `rst_c`, the clear,
+  `lc2_w9079`, `rst_a`'s line among them).
+- `busl` run 4 (piece `ctl`): `cdp4`'s four selects come from south of y 15000 and each also feeds the
+  corner gate group; `cdp4_rst` ends on a box of that group; **`cdp4_ld` = `bc1_ld_a`** (marked: one
+  `?M` over the box), so latch rows C and D load together.
+- `busl` run 5 (piece `d6`): **line g of `cdp3`'s row A cells is the data of `cdp4`'s 6-bit latch row
+  D** (`cdp3_g_c2`..`c7` onto `bc1`'s lines 1-6; firm).
+- `busl` run 6 (pieces `sr`, `kb`): **`ck_out` runs from `eofw`'s corner pad down the whole field
+  into `bc1`'s ground** (no tap; its driver is expected there); `bus_eq_r15` comes from a diffusion under
+  `cdp3`'s column 0 rail. Review: no finding that changes a connection.
+
+**Checks:** overlays of `isrc4`'s join on row y 14914 at 3x and of `n2out`'s links at 4.5x, metal and
+clean shots (`cache/scratch/handoff/h_isrc4.png`, `h_n2out.png`): on the features; `busl`'s own overlays
+(`cache/scratch/busl/sr_o1.png`, `sr_o2.png`, `kb_o1.png`). Full extraction 2,390 nets, 4,345
+transistors, 0 errors, 0 warnings; `tools/unsure.py`: 92 nets joined only through uncertain items.
+
+**Applied:**
+- Master list: `eof` row (runs 8 and 9; what is left of (b) and (e)); `busl` row (status to run 6;
+  next: `bd1_n2`'s metal north of (6711,15000), then `rst_a`'s line east of (6450,8630)); `bd1`,
+  `bd1`-`bd3`, `bc1` (continue), `bc2`-`bc4`, `bl0`, `cdp4` (continue), `cdp3` (continue), `trunks`
+  (continue), `lc1`-`lc3` rows; R4 (`ck_out #1` runs on west of x 10230, and lies on `bd1_n2`'s row).
+  No new Re-read item (none proposed: the handoffs' cases fall under traps 2, 13, 30, 32 as written).
+- `notes/ambiguities.md`: **AMB-038** (the box under `cdp4_ld`'s metal at (7535-7580, 13903-13940)),
+  **AMB-039** (`ck_out`'s track dark over the poly row y 13744 in both metal shots; drawn as a plain
+  crossing).
+- Corrections sections (third batch) in `notes/blocks/bd1.md`, `bc1.md`, `bc3.md`, `cdp3.md`, `cdp4.md`,
+  `lc2.md`, `lc3.md`, `trunks.md`, `eofw.md`. `notes/blocks/eof.md` is not edited (claimed: Tom Seddon).
+- `trace/bd1.txt`: the gate poly of `rst_a` lengthened from x 13805 to x 13812 (orange to x 13810 in
+  the chip-2 metal shot, `tools/px.py row 15671 13796 13822 2`; `eof`'s review round 10);
+  `tools/sameconn.py HEAD`: connections identical.
+- `floorplan.txt`: nothing trimmed (the new fragments are routes inside coarse blocks that stay).
+- `out/` rebuilt: 668 floor-plan blocks. Coverage: 66.5% traced; in some package region 99.9%;
+  untraced and in no Queue row 0.4%.
+
+**Handoffs:** none waiting. **Claims:** `busl` (waitingforvsync), `eof` (tom-seddon).
+
+## 2026-11-19 18:42  Refresh
+
+At the user's request, after the six handoffs above. **Handoffs:** none waiting. **Claims:** `busl`
+(waitingforvsync), `eof` (tom-seddon).
+
+**Renamed** (one batch; `names.py compare`: only names changed, 1 net): the first through line of the
+left-centre strips -> `rst_a` (`eof`'s piece `isrc4`: a firm join, 4,700 px with no uncertain item, and
+none on `busl`'s, `lc3`'s and `lc2`'s stretches). The old name is under Former names in the glossary;
+the `@alias` in `trace/eof.txt` is gone. Sentences the rename made circular ("X is X") were reworded in
+`notes/blocks/eof.md`, `busl.md`, `lc2.md`, `lc3.md`, `trunks.md`, the glossary, the master list,
+`floorplan.d/eof.txt` and `ports.d/eof.txt`. **Tom Seddon's `eof` branch** uses the old name: after
+merging main, `tools/rename.py` with the old and new names (as `/trace6845` step 7 says).
+
+**Left on purpose:** `bd1_n2` / `bd1_k`, `cdp3_g_c2`, `c3` / `cdp3_g_c2`, `s2`, `cdp3_g_c4`..`c7` /
+`cdp3_g_c4`..`cdp3_g_c7` (placeholder to placeholder, kept as `@alias`); `bc1_ld_a` / `cdp4_ld` (joined
+through an uncertain metal, AMB-038: section 2, not renamed); the earlier deliberate aliases, as before.
+
+**`operation.md`** (ninth refresh): header (2,390 nets, 4,345 transistors; 847 of 1,276 equations firm,
+unchanged). The tracers had already written the afternoon's results (`rst_a`'s line, the latch's
+third pull-down, rows C and D loading together, row D's data from line g). Added: `ck_out`'s third
+branch down the left bus field into the bottom-centre logic's ground (marked: AMB-039). Against the last
+refresh's equations: one changed, `bd1_n2` = NOT((`bd1_an` AND `rst_lat`) OR `bd1_n1` OR `rst_a`)
+(still marked: the load's tie); none changed status. AMB-001 to AMB-039; R1-R45 unchanged in range (R4
+edited).
+
+**`out/`** rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 668 floor-plan blocks; the floor
+plan looked at beside the central datapath (`cache/scratch/refresh/fp_crop.png`): no label over another.
+Coverage: 66.5% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
+
+## 2026-11-19 23:01  Handoffs: eof runs 10-14, regs runs 1-3, tlb, busl run 7
+
+Eleven handoff files, ten pieces of work (one of `eof`'s, written 17:51 +0000, repeated run 8's, which
+was applied at 18:36). Full extraction after them 2,375 nets, 4,351 transistors, 0 errors, 0 warnings;
+849 of 1,279 equations firm. Spot checks: `busl`'s three tracks at the step and at both edges
+(`cache/scratch/busl/n2_o1.png` .. `n2_o3.png`), `eof`'s inverter chain (`cache/scratch/refresh/spot_d3982.png`).
+
+What they establish (each from the tracers' notes; marks as there):
+
+- **The signal the notes called a strobe "once per scan line" is the reset** (`eof` run 10, firm): line
+  X / track A is `rst_a`, the buffered NOR(`lpstb_b`, `res_b`) of `lc1`'s gate 5; `rst_ck`, `rst_rc`,
+  `rst_lat` are further copies. The belief is withdrawn in `notes/operation.md` (by the tracer) and in
+  eleven block notes (corrections sections).
+- **The buffered pins RES and LPSTB** run down the left-centre strips and the left bus field as the
+  second and third through lines and leave south at (6366,15000), (6408,15000) (`eof` run 11, firm).
+- **`tl3_w3982`**, which holds the step condition low, is latch C's data and is driven by three
+  inverters in series from latch D's lower node (`eof` runs 11-12; 6 transistors).
+- **The left-centre ripple counter's clock is `lc3_w9947`'s net** (driver not found), and the fifth
+  corner-bundle line is `rst_c`, so `rcs_x1`, the clear of the step logic's five latches, is the reset
+  two inverters later (`eof` run 13, firm).
+- **`rcs_e3` = NOT `bd1_n2`**: the latch on R4's match drives the step logic's inverter, wire only
+  between (`eof` runs 8 and 14 and `busl` run 7, which drew the last 4,600 px: x 6711, an arm at
+  y 13247, x 6776; no tap; the join has no uncertain item, the equation stays marked for the latch's
+  load tie and an item at the inverter).
+- **Registers** (`regs`, Matt Godbolt, runs 1-3; released): the write strobes of R13, R14, R15 reach
+  `cdp3`'s row H, the line into row A's cells and `cdp4`'s row R1 lower half (firm), R12's reaches row
+  C through one `?M` (marked); `cdp4`'s four-way selector is the read multiplexer of R14-R17 (firm);
+  R12 and R13 are read through `cdp3`'s rows E and F by two tracks that cross `busl`'s region (read, not
+  drawn: two open joins, now first in `busl`'s row).
+- `tlb` (Matt Godbolt; done): the VSS plane north of the top-left strips and four joins under it.
+
+Applied: master list rows `eof`, `busl`, `tlb`, `regs`, `bw` (continue), `tcw` (continue), `trunks`
+(continue), `bl0`, `lc1`-`lc3`, `cdp3` (continue), `tl1`-`tl6`, `bd1`. Ambiguities: AMB-040 (the
+structure on R12's write strobe, `bw`), AMB-041 (`rst_a`'s track over latch C's data row at
+(6558,7886)), AMB-042 (the ripple counter's clock lying on `rst_c`'s poly, and the knot at
+(6472,9161-9227)); AMB-039 annotated (row y 13744 is read by `regs` as R13's read select). No new
+Re-read item. Guide: trap 26 gains "a real contact need not show the green hole in chip 1's clean
+shot" (`eof`). Corrections sections in 23 block notes. No coarse floor-plan block trimmed (all pieces
+are wiring inside regions that stay).
+
+**A shared tool changed** (c4411de, 22:35): `tools/netlist.py` accepts an alias that reaches the net's
+canonical name through another alias. Two packages met the case the same evening (a wire joining two
+nets that each had aliases in other packages' files): `eof` run 13 worked round it by editing
+`trace/tl6.txt`'s alias line, `busl` run 7 could not. The guide's section 5 says what to write now.
+Not changed: `tools/signals.py` counts open joins by canonical names only (`eof`'s remark), so an
+aliased `_u` name is not in its count.
+
+## 2026-11-19 23:10  Refresh
+
+Tenth refresh. Renames, in three batches, each checked with `tools/names.py compare` ("only names
+changed"), `tools/signals.py` (0 outside the glossary) and `signals.py --docs` (no former names):
+
+- `inh_src` -> `rst_a` (`eof` run 10, firm)
+- `lc2_x6342` -> `res_b`, `lc2_x6387` -> `lpstb_b` (`eof` run 11, firm)
+- `lc3_w9470` -> `rst_c` (`eof` run 13, firm)
+- `cdp4_sel1` -> `rsel14_buf`, `cdp4_sel2` -> `rsel15_buf`, `cdp4_sel3` -> `rsel17_buf`, `cdp4_sel4` -> `rsel16_buf` (`regs` run 2, firm)
+- `cdp3_h_wr` -> `wr_r13`, `cdp3_l8819` -> `wr_r14`, `cdp4_ld8b` -> `wr_r15` (`regs` run 1, firm)
+- `bd1_n2_u` -> `bd1_n2`, `tl4_w3850` -> `bd1_n2`, `tl5_w5761` -> `bd1_n2` (`busl` run 7 with `eof` run 14, no uncertain item)
+- `tc1_bus2554` -> `c4l_l3` (`tlb` run 1, firm)
+
+**Branches in flight** (`eof`, tom-seddon; `busl`) must run `tools/rename.py` with these pairs after
+merging main. Left on purpose (the master list's `rename` row has the reasons): `cdp3_c_wr` (R12's
+strobe through one `?M`), `rsel12_buf` / `rsel13_buf` (open joins), the ripple counter's clock
+(four placeholder names, driver not found), `tl3_w3982`'s and `tl4_w4068`'s families (placeholder to
+placeholder), `bd1_k`, `bd1_q`, and **`rst_ck`, `rst_rc`, `rst_lat`, `rst_a_n`**: they are now known to be
+copies of the reset and their names say "inhibit"; they are distinct nets, so no rename is forced, and
+better names are the user's call. The renames left about sixty circular sentences ("X is X") in notes,
+glossary, master list and trace comments; each was reworded to name the old wire by what it was (the
+first through line, the select of `cdp4`, the bus line x 5412 of `tl5`).
+
+**`operation.md`** (tenth refresh): header (2,375 nets, 4,351 transistors; 849 of 1,279 equations firm);
+the tracers had written their own rows (the reset identity, R12-R17, the ripple counter's clock);
+`busl` run 7 changed three passages (R4's latched match is drawn to `rcs_e3`'s inverter). No equation
+changed status against the baseline taken before the renames. AMB-001 to AMB-042; R1-R45.
+
+**`out/`** rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 707
+floor-plan blocks. Coverage: 67.9% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%.
+
+## 2026-11-19 23:27  Refresh, second pass: names consolidated
+
+The user, on the refresh of 23:10: "rename / consolidate any signals which are known to be the same
+with their proper name. I thought that was the point in the rename step." The first pass had renamed
+only placeholders that sat beside a functional name and had left placeholder-to-placeholder aliases
+and the "inhibit" names. Done now, each batch checked with `tools/names.py compare` ("only names
+changed"), `tools/signals.py`, `signals.py --docs` and the extraction (2,375 nets, 4,351 transistors,
+0 errors, 0 warnings; 849 of 1,279 equations firm, unchanged):
+
+**Every net with several names on firm geometry has one name, its canonical one** (56 names, 44 nets):
+
+- `tc1_f` -> `cdp1_b5_a`
+- `tc2_sr_r` -> `cdp1_lw1`
+- `cdp4_in6_s1` -> `cdp3_g_c2`
+- `cdp4_in6_s2` -> `cdp3_g_c3`
+- `bc1_d3` -> `cdp3_g_c4`
+- `bc1_d4` -> `cdp3_g_c5`
+- `bc1_d5` -> `cdp3_g_c6`
+- `bc1_d6` -> `cdp3_g_c7`
+- `cdp4_in_s0` -> `cdp4_bus_s0`
+- `cdp4_in_s1` -> `cdp4_bus_s1`
+- `cdp4_in_s2` -> `cdp4_bus_s2`
+- `cdp4_in_s3` -> `cdp4_bus_s3`
+- `cdp4_in_s4` -> `cdp4_bus_s4`
+- `cdp4_in_s5` -> `cdp4_bus_s5`
+- `cdp4_in_s6` -> `cdp4_bus_s6`
+- `cdp4_in_s7` -> `cdp4_bus_s7`
+- `cdp2_c_s2_bus` -> `db_b5`
+- `cdp2_c_s1_bus` -> `db_b6`
+- `lc2_w8857` -> `lc2_w8298`
+- `lc2_w8930` -> `lc2_w8692`
+- `lc3_w9337` -> `lc2_w9079`
+- `lc2_w9166` -> `lc3_w9299`
+- `lc2_x6432` -> `lc3_w9947`, `tc2_m6447` -> `lc3_w9947`, `tcw_m6404` -> `lc3_w9947`
+- `tl5_w4807` -> `ras_o0_alt2`
+- `tc1_p3698` -> `tc1_ns2`
+- `tl3_w4763` -> `tc1_o3527`, `tl3_w4414` -> `tc1_o3527`, `tl5_w5544` -> `tc1_o3527`
+- `tc2_m6490` -> `tc1_p4308`
+- `r9m_l3` -> `tc2_o5175`
+- `eof_w7818` -> `tc2_r5589`
+- `eof_w7718` -> `tc2_sr_g`, `lc1_w7908` -> `tc2_sr_g`
+- `tl5_w4633` -> `tcw_c`
+- `tl5_w4395` -> `tcw_m6320`
+- `tl3_w3333` -> `tl1_w2637`
+- `tl4_w3070` -> `tl3_e4243`, `tl5_w4458` -> `tl3_e4243`
+- `tl3_w4112` -> `tl3_w3939`
+- `tl5_w5936` -> `tl3_w3982`, `lc2_w8906` -> `tl3_w3982`, `tl3_w4290` -> `tl3_w3982`
+- `tl3_w4503` -> `tl3_w4373`
+- `tl3_e4372` -> `tl3_w4546`
+- `tl5_w2855` -> `tl4_w3113`
+- `tl1_w3333` -> `tl4_w4068`, `tl5_w3982` -> `tl4_w4068`
+- `tl3_e5114` -> `tl4_w4590`, `tl3_e3028` -> `tl4_w4590`, `tl5_w5674` -> `tl4_w4590`
+- `tc1_bus2684` -> `tl4_w5068`, `tl5_w5500` -> `tl4_w5068`
+- `tl4_w4718` -> `tl5_w3245`
+- `tl5_w4850` -> `tl5_w4503`
+
+**The four nets that said "inhibit" are named as the reset copies they are** (distinct nets, so four
+names; the roles kept as suffixes):
+
+- `inh_n` -> `rst_a_n` (NOT `rst_a`), `inh_ck` -> `rst_ck` (the copy that holds `ck_b` low and is the
+  top-left logic's track A), `inh_rc` -> `rst_rc` (the copy at the row counter's step gate),
+  `inh_lat` -> `rst_lat` (the copy that gates the latch on R4's match)
+
+Left, each for a reason (the master list's `rename` row): 46 nets whose names meet only through an
+uncertain item (trap 17: renamed when the item is settled); 17 where the second name is a cell's own
+pin name made from a template; `rsel12_buf` / `rsel13_buf` (open joins). 98 `@alias` lines remain in
+the trace files, all of those two kinds.
+
+How the sentences were kept readable: where a note said "A is B" and both are now one name, the old
+wire is described by its former owner ("the wire `tl5` called w5936 is `tl3_w3982`"); alias lines
+quoted in notes read "an alias (dropped at the rename of 2026-11-19)"; rename records in this journal
+(lines with an arrow) were left as written.
+
+**Branches in flight** (`eof`, tom-seddon): after merging main, run these three commands in the branch
+(each changes only what is still old there; then the extraction and `tools/signals.py --docs`):
+
+```
+tools/rename.py inh_src rst_a lc2_x6342 res_b lc2_x6387 lpstb_b lc3_w9470 rst_c cdp4_sel1 rsel14_buf cdp4_sel2 rsel15_buf cdp4_sel3 rsel17_buf cdp4_sel4 rsel16_buf cdp3_h_wr wr_r13 cdp3_l8819 wr_r14 cdp4_ld8b wr_r15 bd1_n2_u bd1_n2 tl4_w3850 bd1_n2 tl5_w5761 bd1_n2 tc1_bus2554 c4l_l3    # pairs: old -> new
+tools/rename.py tc1_f cdp1_b5_a tc2_sr_r cdp1_lw1 cdp4_in6_s1 cdp3_g_c2 cdp4_in6_s2 cdp3_g_c3 bc1_d3 cdp3_g_c4 bc1_d4 cdp3_g_c5 bc1_d5 cdp3_g_c6 bc1_d6 cdp3_g_c7 cdp4_in_s0 cdp4_bus_s0 cdp4_in_s1 cdp4_bus_s1 cdp4_in_s2 cdp4_bus_s2 cdp4_in_s3 cdp4_bus_s3 cdp4_in_s4 cdp4_bus_s4 cdp4_in_s5 cdp4_bus_s5 cdp4_in_s6 cdp4_bus_s6 cdp4_in_s7 cdp4_bus_s7 cdp2_c_s2_bus db_b5 cdp2_c_s1_bus db_b6 lc2_w8857 lc2_w8298 lc2_w8930 lc2_w8692 lc3_w9337 lc2_w9079 lc2_w9166 lc3_w9299 lc2_x6432 lc3_w9947 tc2_m6447 lc3_w9947 tcw_m6404 lc3_w9947 tl5_w4807 ras_o0_alt2 tc1_p3698 tc1_ns2 tl3_w4763 tc1_o3527 tl3_w4414 tc1_o3527 tl5_w5544 tc1_o3527 tc2_m6490 tc1_p4308 r9m_l3 tc2_o5175 eof_w7818 tc2_r5589 eof_w7718 tc2_sr_g lc1_w7908 tc2_sr_g tl5_w4633 tcw_c tl5_w4395 tcw_m6320 tl3_w3333 tl1_w2637 tl4_w3070 tl3_e4243 tl5_w4458 tl3_e4243 tl3_w4112 tl3_w3939 tl5_w5936 tl3_w3982 lc2_w8906 tl3_w3982 tl3_w4290 tl3_w3982 tl3_w4503 tl3_w4373 tl3_e4372 tl3_w4546 tl5_w2855 tl4_w3113 tl1_w3333 tl4_w4068 tl5_w3982 tl4_w4068 tl3_e5114 tl4_w4590 tl3_e3028 tl4_w4590 tl5_w5674 tl4_w4590 tc1_bus2684 tl4_w5068 tl5_w5500 tl4_w5068 tl4_w4718 tl5_w3245 tl5_w4850 tl5_w4503    # pairs: old -> new
+tools/rename.py inh_n rst_a_n inh_ck rst_ck inh_rc rst_rc inh_lat rst_lat    # pairs: old -> new
+```
+
+Until that is done such a branch fails the gate (a net carries two names where main dropped the alias;
+former names in its documents). Work that reaches main with old names anyway is put right by running
+the same commands on main. `out/` rebuilt.
+
+## 2026-11-19 23:41  Floor plan labels; the data sheet on RES and LPSTB
+
+Asked by the user. **Floor plan**: labels brought up to the day's identifications: `cdp3`'s row H is
+"R13 register", row C "?R12 register" (marked), the six large cells "R14's cells" (both halves), rows
+E and F "?read gates of R12 and R13"; `cdp4`'s rows are "R15 register (8-bit latch)", "read multiplexer
+of R14-R17", "R17: 8-bit latch (?light pen, low byte)", "R16: 6-bit latch (?light pen, high bits)"; the
+blocks on the reset copies say so (`bd1`, `wl`, `eof`). Coarse blocks: the band north of the top-left
+strips removed (`floorplan.d/tlb.txt` replaces it; missed when `tlb`'s handoff was applied at 23:01); the
+gate column west of the large cells trimmed to its one undrawn unit (U1); the left bus field, `lc1`'s
+strip, `cdp4`'s corner group and the RES/LPSTB buffers reworded. `out/` rebuilt (706 blocks); the
+central datapath looked at (`cache/scratch/refresh/fp_cdp2.png`): every new label fits its box.
+
+**RES and LPSTB**: the Hitachi data sheet (`cache/ds/p-08.png`, "Reset (RES)") says "RES has capability
+of reset function only when LPSTB is at Low level", which is what the trace has: `rst` = NOR(`lpstb_b`,
+`res_b`), firm. It names no test mode. Added to `notes/operation.md`, "Reset from the pins", with the
+belief (not traced, not in this data sheet) that RES low with LPSTB high is a test mode, and where to
+look: the loads of the two buffered pins in the bottom-left logic.
+
+## 2026-11-20 11:28  Handoffs: eof runs 15-23, cdp4 runs 2-3, cdp3 row A, tl3 run 12
+
+Thirteen handoff files, thirteen pieces of work (Tom Seddon: `eof` runs 15-23, 2026-11-19 21:11 to
+2026-11-20 07:51 +0000; Matt Godbolt: `tl3` run 12, `cdp4` runs 2 and 3, `cdp3` row A). Full extraction
+after them 2,451 nets, 4,560 transistors, 0 errors, 0 warnings; 901 of 1,341 equations firm. Spot checks
+of the overlays: `eof`'s clock latch and its unit of three pull-downs, `cdp4`'s NOR and one slice of its
+comparator (`cache/scratch/refresh/spot_vw.png`, `spot_g174.png`, `spot_rst.png`, `spot_r15.png`).
+
+What they establish (from the tracers' notes; marks as there):
+
+- **The left-centre ripple counter's clock has its driver and its sources** (`eof` runs 15-18):
+  `lc3_w9947` = NOT `eof_w15127`, one side of a set/reset latch in the bottom-centre logic's column B
+  (`eof_w15127` = NOT(`eof_w15172` OR `eof_w15300`), `eof_w15300` = NOT((`ck_out` AND `bc2_w15607`) OR
+  `eof_w15127` OR `rst_a`); marked for load ties, and AMB-043). The set is `eof_w15172` =
+  NOR(`bc2_w14955`, `bc2_w15000`) (firm), from `bc2`'s latch unit a; the clear needs `ck_out` (firm join
+  onto `trunks`' `ck_out #1`) and `bc2`'s latch unit b's lower node (firm join). What the two `bc2`
+  latches store is open.
+- **Two latches in series on `ck_out`'s metal** (`eof` runs 19-21; 29 transistors): copies of `tl1`'s
+  latch under the rail x 8686-8731 with an inverter between, the second open while `ck_out` is high, the
+  first while `eof_w16040` is high (not followed; believed the opposite clock level), both cleared by
+  `rst_a`; an inverter and a NOR on the second latch's outputs. **The inverter's output is `bc1_g6_in`**
+  (run 22; through three uncertain stretches of a thin metal: an alias), and the NOR's output gates a
+  unit of three wide pull-downs under column A's rail (run 23; its east side is read, not drawn).
+- **The six large cells are R14's latch under a comparator** (`cdp3` row A, 91 transistors, firm): line g
+  (`cdp3_g_c#`) is compared with R14, match line `g_eq_r14`. **`cdp4`'s row R1 upper is the comparator of
+  the eight bus lines with R15** (run 3, 65 transistors, firm), match line `bus_eq_r15`. The NAND beside
+  `cdp3`'s row C takes both: NOT((`cdp4_bus_s#` = R15) AND (`cdp3_g_c#` = R14)). Believed: the cursor
+  match, active low; where its output goes rests on an uncertain box.
+- **`cdp4_rst` = NOR of six select rows** (`cdp4` run 2, 7 transistors, firm): four are the read selects
+  of R14-R17; two are open joins (`rsel13_buf`, `rsel12_buf`) through `busl`'s region.
+- `tl3` (run 12; done): four rows drawn through the strip; three step-logic gates have all inputs
+  identified. **`ck_out` has five loads and no driver**: a queue row now (`tl4` (continue)).
+
+Applied: master list rows `eof`, `busl`, `cdp2`, `cdp3`, `cdp4` (wave and continue rows), `tl1`-`tl6`,
+`bc1` (continue), `bc2`-`bc4`, `trunks` (continue); the row `tl3` (continue) is replaced by `tl4`
+(continue), the search for `ck_out`'s driver; two open joins added to the table. **Re-read list**:
+R46 (bands between gate rows in an open gap drawn as field from colour: the latch units of `tl1`'s build),
+R47 (pad joins accepted across a "dim metal" stretch: `tl2`-`tl4`), R48 (`cdp4`'s three strobe polys are
+probably serpentines; geometry), R49 (`eof`'s own bands of AMB-043, to be measured with a control); R4, R17
+and R44 extended. **Guide**: trap 38 (new: a band between gate rows in an open gap is not classed by
+colour, nor from one row), additions to traps 2 (residue strips between close tracks), 16 ("dim is not a
+colour"), 19 (a metal half over a poly column fails the metal test) and 33 (two metals end to end on one
+track position). **Ambiguities**: AMB-038 resolved as (a); AMB-042 resolved as (a) (the clock's driver is
+not the reset); AMB-039 annotated; AMB-043 new. Corrections sections in eleven block notes. Floor plan:
+the coarse block of `cdp4`'s corner gate group removed, and the two "R14's cells" blocks that `cdp3`'s new
+fragment lines replace. `trace/cdp3.txt`: fourteen uncertain metal pieces at y 11048-11200 removed
+(`cdp4` draws the same metals firm; `tools/sameconn.py`: connections identical; 1,134 uncertain items).
+
+**A shared tool changed**: `tools/rename.py` leaves records of renames as written (journal lines with an
+arrow, lines that say "former name" or "old name", and pairs already in the glossary's Former names).
+`eof` run 15 reported that the catch-up commands of 2026-11-19 23:27, run in a branch after merging main,
+rewrote 240 places in main's own records; run now on main they change nothing.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 3 open joins, 732 floor-plan blocks.
+Coverage: 68.7% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
+
+## 2026-11-20 11:42  Refresh
+
+Eleventh refresh, after the thirteen handoffs of this morning. Renames in four batches, each checked with
+`tools/names.py compare` ("only names changed"), `tools/signals.py` (0 outside the glossary) and
+`signals.py --docs` (no former names):
+
+- `eof_w15350` -> `ck_out`, `eof_w15390` -> `bc2_w15607` (`eof` runs 17-18, firm joins)
+- `tl2_w3722` -> `tl5_w4937`, `rcs_g3245` -> `tl5_w2722`, `tl1_w3678` -> `tl4_w4590`, `tl1_w2857` -> `rcs_mn3852` (`tl3` run 12, no uncertain item on the joins)
+- `cdp4_in8b_s0` -> `cdp3_bl_c0`, `cdp4_in8b_s1` -> `cdp3_bl_c1`, `cdp4_in8b_s2` -> `cdp3_bl_c2`, `cdp4_in8b_s3` -> `cdp3_bl_c3`, `cdp4_in8b_s4` -> `cdp3_bl_c4`, `cdp4_in8b_s5` -> `cdp3_bl_c5`, `cdp4_in8b_s6` -> `cdp3_bl_c6`, `cdp4_in8b_s7` -> `cdp3_bl_c7` (`cdp4` run 3: single metals)
+- `cdp3_k_b` -> `bus_eq_r15`, `cdp3_k_c` -> `g_eq_r14` (the match lines of the two comparators, firm; proposed by the tracer)
+
+On the last pair: each is named for what is traced (equal to R15, equal to R14); "bus" and "g" stand for
+the compared lines, which are not identified. If they turn out to be the memory address the names can
+become the address counter's. **Left on purpose** (the master list's `rename` row): `bc1_g6_in` /
+`eof_w17040` (joined through three uncertain stretches; trap 17); `cdp3_f_c#` / `cdp4_a_s#` (a cell's
+own pin name from a template); the latch nodes of R12-R17 (no `r14_b#_q` yet: which data bit each column
+is has not been traced, and whether the bit lines are `db_b#` is open above y 8040); the two new open
+joins `rsel13_buf`, `rsel12_buf` (`busl`); the ripple counter's clock `lc3_w9947` and the `eof_w#`
+nodes behind it (what the counter is for is not established). The glossary row `rcs_g#` is removed (no
+net matches it); rows for `bus_eq_r15` / `g_eq_r14` and `cdp3_k_a` rewritten. About forty sentences that
+the renames made circular were reworded to name the old wire by its former owner.
+
+**Branches in flight** (`eof`, tom-seddon; `busl`): after merging main, run in the branch (it now leaves
+main's records alone: `tools/rename.py` was changed this morning):
+
+```
+tools/rename.py eof_w15350 ck_out eof_w15390 bc2_w15607 tl2_w3722 tl5_w4937 rcs_g3245 tl5_w2722 tl1_w3678 tl4_w4590 tl1_w2857 rcs_mn3852 cdp4_in8b_s0 cdp3_bl_c0 cdp4_in8b_s1 cdp3_bl_c1 cdp4_in8b_s2 cdp3_bl_c2 cdp4_in8b_s3 cdp3_bl_c3 cdp4_in8b_s4 cdp3_bl_c4 cdp4_in8b_s5 cdp3_bl_c5 cdp4_in8b_s6 cdp3_bl_c6 cdp4_in8b_s7 cdp3_bl_c7 cdp3_k_b bus_eq_r15 cdp3_k_c g_eq_r14    # pairs: old -> new
+```
+
+**`operation.md`** (eleventh): header (2,451 nets, 4,560 transistors; 901 of 1,341 equations firm; no
+equation changed status against the baseline taken before the renames). The tracers had written their own
+rows (the ripple clock's latch and what follows it, the two comparators, `cdp4_rst`, `tl3`'s four joins).
+Changed here: the short answers (a sixth counter with a marked clock; the R14 and R15 matches meet in a
+NAND), three "open" lists that named signals since found (`rcs_mn3852`, `tl5_w4937`, `tl5_w2722`, the
+clock latch's three inputs), row H is R13, row A is R14's latch row, the Comparators section (R14 and R15
+found; R11, R12, R13 not), "Not established at all" on the cursor. AMB-001 to AMB-043; R1-R49.
+
+**`out/`** rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 3 open joins (`ck_a_u`,
+`rsel12_buf`, `rsel13_buf`), 733 floor-plan blocks (the NAND beside `cdp3`'s row C relabelled; one
+route of `eof` split in two because its label covered the bottom-centre logic; looked at
+`cache/scratch/refresh/fp_cdp34.png`, `fp_bc2.png`). Coverage: 68.7% traced; in some package region
+99.9%; untraced and in no Queue row 0.4%.
+
+## 2026-11-20 13:24  RES low with LPSTB high: `bl0` traced, merged and applied; `eof` run 24 applied
+
+The user asked which block would show what the chip does while RES is low and LPSTB is high, and for it
+to be traced next. It is `bl0`: the gate group between the left bus field and the bottom-left logic that
+both buffered pins reach. The coordinating session put it at the top of the queue (93684dd), claimed it
+and traced it (branch `bl0`, four pieces, 13 transistors, no uncertain item; merged ef7f510 through the
+gate; claim released).
+
+**What is traced** (`notes/blocks/bl0.md`; `notes/operation.md`, "RES low with LPSTB high"):
+
+- `lpstb_nres` = NOR(NOT `lpstb_b`, `res_b`): high only while LPSTB is high and RES is low, the one case
+  in which RES is low and the reset NOR gives no reset.
+- Its one load is in the left column of the memory address counter, at the gap between rows s6 and s7,
+  3,300 px away by a poly row, a track x 4867 and a poly row y 14436 across the whole left array:
+  `bl0_w14308` = NOT(`larr_l0_g0` OR `lpstb_nres`); `larr_cin_s7` = NOT `bl0_w14308`; and
+  `bl0_w14308` gates a pull-down on `larr_l0_g1` (the carry into s10). All three are joined to
+  `larr`'s nets by drawn geometry.
+- So while RES is low and LPSTB is high the carry into row s7 is forced on: the counter's upper seven rows
+  count on every step whatever the lower seven hold. That this is the family's test mode is believed.
+- Both pin lines go on from the gate group to pads (6882,16170), (6928,16217) and further south: not
+  followed (the master list's `bl0` row, next step 1).
+
+**Review.** Round 1 (pieces `pin`, `g1`): one finding that changes a connection, confirmed: the row
+y 14105-14122 drawn as poly is a diffusion wire, one piece with `larr_l0_g0`'s contact box and joined to
+the NOR's gate by a buried contact. Round 2 (the fix and the new pieces `s7`, `pe`): two geometry-only
+findings, fixed, connections identical. **Re-read list**: R50 (new: long rows drawn as poly through rail
+fields without an open stretch read; first `larr`'s gap rows), R49 extended (`tools/eof_band.py`).
+**Guide**: trap 39 (new: a long row under rails is not poly because it is pale there); trap 38 extended
+(from `eof` run 24: the band's own rows only; a poly's colour in the open does not class what lies under
+it).
+
+**`eof` run 24** (Tom Seddon, merged 4872929, claim kept): the unit that `eof_w17168` gates is whole,
+`disptmg_drv_in` = NOR(`eof_w17338`, `eof_w17168`, `eof_w17472`) (firm), a driver whose output is drawn to a
+pad (8467,17603); the block's Ambiguity 85 resolved (a field island: two nets). The label of the node
+below the bar is dropped: `eof_w17552` -> `eof_w17362` (glossary's Former names; the master list's row;
+one comment in `trace/eof.txt` reworded to say "former name"). Its next step, the output's thin metal
+south and west towards `cudisp_drv_in`, is in the `eof` row.
+
+Corrections sections in `larr`, `busl` and `trunks` notes. `out/` rebuilt: 2,455 nets, 4,574
+transistors, 0 errors, 0 warnings, 0 names outside the glossary, 3 open joins, 738 floor-plan blocks.
+Coverage: 69.1% traced; in some package region 99.9%; untraced and in no Queue row 0.4%. Spot checks:
+`cache/scratch/refresh/bl0_check.png`, `eof_g174e.png`. Not done here: the refresh (the header counts of
+`notes/operation.md` are the eleventh refresh's).
+
+## 2026-11-20 15:18  Handoffs: `bl0` run 2, `eof` runs 25-26, `busl` runs 8-9
+
+Five handoff files (Matt Godbolt: `bl0` run 2, merged 4c432de; Tom Seddon: `eof` runs 25 and 26, merged
+a85229b and d3e9ceb, claim kept; richtw1's other session: `busl` runs 8 and 9, merged 5f91aa5 and 1aac536,
+claim kept). Full extraction after them 2,453 nets, 4,579 transistors, 0 errors, 0 warnings; 909 of 1,349
+equations firm; 96 nets joined only through uncertain items (1,134 items). Spot checks of the overlays:
+`bl0`'s gate under the rail x 7292-7342, `eof`'s end pad (6322,18472), `busl`'s two taps and its pad
+(4909,15087) (`cache/scratch/refresh/h_bl0_gate.png`, `h_eof_end.png`, `h_busl_taps.png`,
+`h_busl_4909.png`): the drawn shapes lie on the features.
+
+What they establish (from the tracers' notes; marks as there):
+
+- **Where RES and LPSTB end** (`bl0` run 2; 5 transistors, firm): both buffered pin lines run on south
+  and east to one gate in the bottom-centre logic, `bl0_w17085` = NOT(`lpstb_b` AND `res_b`), inverted
+  once: `bl0_w17210` = `lpstb_b` AND `res_b`, the light pen strobe passed only while RES is high. So
+  `res_b` has three uses and no more (`lc1`'s reset NOR, `lpstb_nres`, this gate). The loads of
+  `bl0_w17210` are not traced (believed the light pen register's latch strobe).
+- **R12 and R13 are read through `cdp3`'s rows E and F** (`busl` run 8; wiring, firm): `rsel12_buf` and
+  `rsel13_buf` are drawn up the left bus field on one metal each to the rows' read gates, and each has
+  one tap into `cdp4`'s corner NOR, so **`cdp4_rst` = NOR of the six read selects R12-R17** (firm). The
+  two open joins of that NOR are closed (one is left, `ck_a_u`).
+- **A fourth copy of the reset** (`busl` run 9; firm): `rst_n` runs from `lc3` down the west edge of
+  the left bus field (the track x 4909) to `bl0`'s wide inverter: `bl0_w15412` = NOT `rst_n`. Its loads
+  are open. `lc3`'s six diagonals are six through lines out of the field at y 15000 (no tap), and
+  `lc2_w8450` has a second branch down the track x 4822.
+- **The end-of-frame lead group's NOR driver output is not CUDISP's by this route** (`eof` runs 25-26;
+  wiring, firm): `disptmg_drv_in` is drawn 840 px south and 2,150 px west, the last 1,060 px on the bottom bus line y 18473,
+  to the line's end pad (6322,18472) and 60 px of its poly row; it passes `cudisp_drv_in`'s label by
+  1,400 px with no tap. No load reached yet; the row goes on west into the bottom-left logic.
+
+Applied: master list rows `bl0` (run 2; next step 1 is now the loads of `bl0_w17210`; step 4 reworded,
+the source being found; the seven tracks arriving from `busl`), `eof`, `busl` (status to run 9, the
+registers step done, a new Next), `cdp4` (continue), `bc2`-`bc4` (the gate column under the rail
+x 7292-7342 is in `bc3`'s region, two of its units drawn by `bl0`), `bl1`/`bl2` and `busb` (what
+arrives and what was seen beside `eof`'s wire), the `rename` row (three renames wait for the refresh);
+the Open joins row of the two read selects removed. **Ambiguities**: AMB-039 resolved as (a), a plain
+crossing (the row y 13744 has its own driver, `rsel13_buf`); AMB-044 new (the track of `rsel12_buf`
+over the row y 13375 at (6452,13372-13389): the same kind, assumed a plain crossing, no `?` item).
+**Re-read list**: nothing new (`eof` run 26 met trap 39 once more, in a comment only: a column under a
+thin metal called poly from its colour is a diffusion wire; nothing drawn was affected). Corrections
+sections in `regs`, `cdp3`, `cdp4`, `bl0`, `lc3`, `bc3` and `busl` notes. `notes/operation.md`: the
+tracers had written their own passages; here only the place of the fourth reset copy's bullet (last in
+the list, with the sentence above it reworded) and the register's range. Floor plan: no coarse block is
+replaced; the left bus field's line says fourteen pieces.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join, 748 floor-plan blocks.
+Coverage: 69.4% traced; in some package region 99.9%; untraced and in no Queue row 0.4%. Not done here:
+the refresh (three renames wait, in the master list's `rename` row; the header counts of
+`notes/operation.md` are the eleventh refresh's).
+
+## 2026-11-20 21:48  Handoffs: `bl0` runs 3-11, `tl4` runs 11-12, `cdp3` west logic, `eof` run 27, `busl` runs 10-13
+
+Eighteen handoff files (Matt Godbolt: `bl0` runs 3-11, merged b3720ed to 7d797fe, claim released; `tl4`
+runs 11-12, merged f4d4451, released; `cdp3`, three handoffs, merged 503941e, c29da4f, 740bfe3, released;
+Tom Seddon: `eof` run 27, merged 81638e2, claim kept; richtw1's other session: `busl` runs 10-13, merged
+384bd6a, c4e8d5c, 1c4c1b5, b13d34a, claim kept). Full extraction after them 2,455 nets, 4,594
+transistors, 0 errors, 0 warnings; 914 of 1,354 equations firm; 96 nets joined only through uncertain
+items (1,135 items). Spot checks of the overlays: `bl0`'s cross-coupled pair, `eof`'s wire into the
+DISPTMG driver, `cdp3`'s clock inverter, `tl4`'s join onto `eof`'s row of the clock
+(`cache/scratch/refresh/h3_flag.png`, `h3_disptmg.png`, `h3_ckinv.png`, `h3_ckjoin.png`): the drawn
+shapes lie on the features.
+
+What they establish (from the tracers' notes; marks as there):
+
+- **The net with five loads and no driver is the clock** (`tl4` runs 11-12; wiring, firm): the enable
+  of `tl3`'s latch A, the gate line of `tc2`'s latch and the enable of `lc1`'s latch D are one net, and
+  it is `ck_out`: from the foot of the left bus field through the bottom-centre logic onto the row
+  `eof` draws west of its pad (8424,17908). A branch reaches `bc3`'s pad (7840,17648). Eleven equations
+  change the name of one input.
+- **A clock inverter beside `cdp3`'s gate column** (`cdp3`; 4 transistors, firm): `lc2_w8646` = NOT
+  `ck_out`, the enable of `lc2`'s latch C and the input of U1 (`cdp3_w8063`, a buffered `ck_out` into
+  the cluster beside row A). **R14 is written from D5-D0**: `cdp3`'s six bit lines are `cdp2`'s bus
+  lines. The cluster beside row A (about 14 transistors) is not in the trace: AMB-047.
+- **DISPTMG's driver input is traced** (`eof` run 27; wiring, firm): `disptmg_drv_in` =
+  NOR(`eof_w17338`, `eof_w17168`, `eof_w17472`), so DISPTMG = `eof_w17338` OR `eof_w17168` OR
+  `eof_w17472`. One term is the second of two latches in series on `ck_out` (marked). What the terms
+  mean is not traced.
+- **A light pen flag** (`bl0` runs 3-6; 11 transistors, firm): the strobe gated by RES sets a
+  cross-coupled pair, `bl0_w17610`; it is cleared by `rst` (a line from north of the left bus
+  field) or, with the strobe low, by `bl0_w17687` (from `bc1`'s gate group). Its load is a unit of
+  `bc3`'s gate column, undrawn. Believed: it times the latching of R16/R17.
+- **The fourth reset copy crosses the left array** (`bl0` run 7; firm to the pad): `bl0_w15412` runs
+  through Gap 2 to a pad on the thin metal between the left column's rails; believed `mal`'s force
+  line (a tab to `mal_frc_m9` seen; the thin metal is at the photos' limit and not drawn).
+- **Nine tracks of the left bus field on south** (`bl0` runs 8-11): `rst_n`'s other ends, `busl_x6820`,
+  `rcs_mv`, `cdp4_bus_s0`, `lc2_w8450`'s second branch, and `lc3`'s six through lines, which enter
+  the left array as six diffusion wires about 478 px apart.
+- **The left bus field's staircase bundle is complete, fourteen lines** (`busl` runs 10-13; wiring):
+  `rcs_mv` leaves the top-left logic and runs down the whole field; `tc2_r5718`, `lc1_w7780` (latch
+  D's data) and `tl5_w2722` (the input of `rcs_u3288`'s NOR) each run 9,000-11,000 px to the foot rows
+  of the bottom-centre bus with no tap; five more lines whose ends are not identified
+  (`tl6_p6187`, `tc2_m6404`, `busl_x7122`, `tl6_p6143`, `busl_x6603`).
+
+**A correction to the trace by the coordinator** (proposed by `busl` run 11): `cdp3_k_a`'s metal x 7835
+was drawn from the contact pad (7835,8862) south; both metal shots show no metal there between y 8880
+and y 9160 (`cache/scratch/refresh/h_k_a.png`): the pad's metal goes north, and `cdp3_k_a` starts at its
+contact (7833,9165). `trace/cdp3.txt`: the metal starts at y 9150, the `?P` of the row y 8864 is
+lengthened 8 px west onto `busl`'s row (`busl_x7122`, still through an uncertain stretch), a 76 px
+stub of the pad's metal north is drawn. `tools/sameconn.py HEAD`: connections identical (no transistor
+is on either net there). One comment in `trace/eof.txt` corrected (five polys, not ten).
+
+Applied: master list rows `bl0` (mostly done; what is left is in other rows), `eof`, `busl` (status to
+run 13, a new Next), `tl4` (continue) (done), `cdp3` and `cdp3` (continue), `cdp2` (continue),
+`bc1` (continue) (five leads into its gate group; fourteen rows at x 7550; it does not hold the clock's
+driver), `bc2`-`bc4`, `bl1`/`bl2`, `busb`, `larr` (continue), `lc1`-`lc3`, `tl1`-`tl6`, `tc2`, and
+the `rename` row (what waits for the refresh). **Re-read list**: R26 extended (every thin metal joined
+through a pad on the follower's word with `--gap` above the default: `bl0` run 3's reviewer found one,
+taken out before the merge). **Guide**: trap 30 extended twice (a large `--gap` passes over a real
+break beside a pad; a staircase whose arms lie on poly rows is not read from the follower's corners),
+trap 2 extended (a dark bar in a gap between two metals is a crossing diffusion or two edges meeting:
+a control in the same gap first). **Ambiguities**: AMB-045 (`busl_x7122`'s track over `rsel13_buf`'s
+row), AMB-046 (the row y 8863 under `cdp3`'s rail, with the correction of `cdp3_k_a`), AMB-047 (the
+cluster beside `cdp3`'s row A); AMB-039 and AMB-044 annotated. Corrections sections in the notes of
+`bc3`, `busl`, `mal`, `bl0`, `cdp2`, `cdp3`, `lc1`, `lc2`, `eof`, `eofw`, `tl1`, `tl2`, `tl3`, `tl5`,
+`tl6`, `tc2`, `pads`; glossary rows `cdp3_k_a` and `mal_frc_m#`. Floor plan: no coarse block is
+replaced; the left bus field's line says twenty-three pieces.
+
+**A slip reported by a tracer** (`cdp3`, second handoff): main carried one extraction warning for about
+three minutes (commit 95bbae7 pushed although the gate had printed FAIL: the push was chained after
+`tail`, whose exit status hid the gate's); corrected by the next commit.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 786
+floor-plan blocks. Coverage: 70.1% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%. The refresh follows.
+
+## 2026-11-20 22:08  Refresh
+
+Twelfth refresh, after the eighteen handoffs of this evening. Renames in two batches, each checked with
+`tools/names.py compare` ("only names changed"), `tools/signals.py` (0 outside the glossary) and
+`signals.py --docs` (no former names):
+
+- `tc2_sr_g` -> `ck_out`, `tl4_w4590` -> `ck_out`, `bc3_w17646` -> `ck_out` (`tl4` runs 11-12: three firm joins; the gate line of the latches of the top-left, top-centre and left-centre logic is the buffered clock)
+- `cdp3_bl_c2` -> `db_b5` (`cdp3`: one metal with `cdp2`'s bus line); `cdp3_w7996` -> `lc2_w8646` (`cdp3`, piece `ckb`); `eof_w17362` -> `disptmg_drv_in` (`eof` run 27); `bl0_w15088` -> `rst_n` (`busl` run 9); `rsel12_buf_u` -> `rsel12_buf`, `cdp3_gate_e` -> `rsel12_buf`, `rsel13_buf_u` -> `rsel13_buf`, `cdp3_gate_f` -> `rsel13_buf` (`busl` run 8; the last three sets waited since this afternoon)
+
+One open join is left (`ck_a_u`). **Left on purpose** (the master list's `rename` row): `cdp3_bl_c3`..`c7`.
+Each is one firm metal with `cdp2`'s column lines `cdp2_c_s3_bus`..`s7_bus`, and those meet
+`db_b4`..`db_b0` only through the narrow necks of AMB-019 (trap 17), so they join the column names
+that already wait for that item; a rename onto another placeholder would have to be undone. `cdp3`'s
+tracer proposed all six onto `db_b#`: only c2's join is free of an uncertain item. Also left:
+`cdp3_bl_c1`, `cdp3_bl_c0` (not followed north); `bc1_g6_in` / `eof_w17040` and `bc1_ld_a` / `cdp4_ld`
+(through uncertain stretches); the template pin names; the `eof_w#` terms of DISPTMG's NOR and the
+light pen flag `bl0_w17610` with its clears (function not established). Glossary: the rows of
+`ck_out` (rewritten: the whole route of the clock to the latches), `tl3_e3000`, `cdp1_lw1` at
+`tc2`'s latch (the row that was the gate line's), `bl0_w#`, `cdp3_w#`, `cdp3_bl_c#` and the two
+rows of the R12/R13 read selects. About sixty sentences that the renames made circular or false
+("the driver is not found") were reworded; nine and twenty-nine of them rebuilt from the committed
+text with the old wire named by its former owner.
+
+**Branches in flight** (`eof`, tom-seddon; `busl`): after merging main, run in the branch:
+
+```
+tools/rename.py tc2_sr_g ck_out tl4_w4590 ck_out bc3_w17646 ck_out cdp3_bl_c2 db_b5 cdp3_w7996 lc2_w8646 eof_w17362 disptmg_drv_in bl0_w15088 rst_n rsel12_buf_u rsel12_buf cdp3_gate_e rsel12_buf rsel13_buf_u rsel13_buf cdp3_gate_f rsel13_buf    # pairs: old -> new
+```
+
+**`operation.md`** (twelfth): header (2,455 nets, 4,594 transistors; 914 of 1,354 equations firm; no
+equation changed status against the baseline taken before the renames). The tracers had written the
+DISPTMG section, the light pen flag and the clock's second inverter. Changed here: the short answer
+(DISPTMG is the OR of three signals, none yet traced to a comparator); the row on `ck_out` (the gate
+line of the latches is the clock) and six rows and lists that still said its driver was open; latch D
+is open while CLK is low and its data `lc1_w7780` runs down the left bus field; `rcs_mv`,
+`tl5_w2722` and `tc2_r5589` leave for the bottom-centre logic (firm wires, loads open); the fourth
+reset copy's route across the left array (believed the MA cells' force line); R14's data lines (firm
+for bit 5, marked for bits 4-0); "Not established at all" on the light pen. AMB-001 to AMB-047; R1-R50.
+
+**`out/`** rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join, 789 floor-plan
+blocks (two of `bl0`'s routes split because their labels covered the bottom-centre logic; `eof`'s
+three routes named for DISPTMG; `cdp3`'s read gates of R12 and R13 no longer marked "?"; looked at
+`cache/scratch/refresh/fp12_bl2.png`, `fp12_nw.png`). Coverage: 70.1% traced; in some package region
+99.9%; untraced and in no Queue row 0.4%.
+
+## 2026-11-20 23:00  Handoff: `bl0` run 12, six more lines into the left array; a tracer loop
+
+The user set a loop going in the coordinating session (2026-11-20, minutes before the first claim): one fresh Fable 5.2 agent at
+high effort per package, each following `/trace6845` for the first free Queue row, the next started
+when the last has handed off and its handoff is applied. The first took `bl0` (run 12; claimed 22:17,
+merged 8342270 at 22:55, claim released). The machine's `gh` login is `waitingforvsync`, so the loop's
+claims carry that name, like the `busl` session's; `costs/richtw1.json` is shared with that session.
+
+One handoff file. Full extraction after it 2,462 nets, 4,594 transistors, 0 errors, 0 warnings; 914 of
+1,354 equations firm; 96 nets joined only through uncertain items (1,135 items): wiring only, seven new
+nets, no transistor, no uncertain item. Spot checks of the overlays: the six-line bundle's staircases and
+three of its pads at x 5050-5800, y 15450-16100, and `h_eq_r1_n`'s end pad (8272,17821)
+(`cache/scratch/refresh/h4_t6.png`, `h4_m7144.png`): the drawn shapes lie on the features.
+
+What it establishes (from the tracer's notes; marks as there):
+
+- **Six more lines into the left array's six lower rows** (piece `t6`; wiring, firm): what the master
+  list had as "one undrawn metal on `rst_n`'s row" is the first of six thin metals that cross y 15000 at
+  x 5496-5714; each steps west and ends on a pad whose poly row runs west into one lower row of the array
+  (`cdp3_g_c7`, `cdp3_g_c6`, `cdp3_g_c5`, `cdp3_g_c4`, `cdp3_g_c3`, `cdp3_g_c2`). **Believed,
+  not traced**: they are `cdp3_g_c7`..`cdp3_g_c2`, the six lines compared with R14: the follower runs
+  each track north to the y of one of `bc1`'s six poly lines; the stretch (x 5490-7000, y 14080-15000)
+  is `busl`'s and undrawn. If so the left array's fourteen rows take `cdp4_bus_s7`..`s0` and
+  `cdp3_g_c7`..`c2`, the fourteen lines that R15 and R14 are compared with.
+- **`h_eq_r1_n`** (piece `m7144`; wiring, firm): the thin metal x 7144 is one wire from `bc1`'s gate
+  group (port (7260,15566)) to a pad (8272,17821) and a poly row on east into `bc3` (port
+  (8360,17821)); no transistor, no branch, both ends open.
+
+One review round (round 14, both pieces, 34 images): no findings.
+
+Applied: master list rows `bl0` (done as far as the package reaches; nothing of its own left), `busl`
+(the six tracks north of y 15000, to draw and join), `larr` (continue), `bc1` (continue), `bc2`-`bc4`,
+`bl1`/`bl2`. **Re-read list**: nothing new. **Ambiguities**: none. Corrections sections in the notes of
+`busl`, `bc1` and `tl4`. `notes/operation.md`: unchanged (nothing about clocks, resets, comparators
+or outputs changes; the six lines' identity is believed only). Floor plan: no coarse block is replaced;
+`floorplan.d/bl0.txt` has five more route lines, whose labels were not looked at.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 794
+floor-plan blocks. Coverage: 70.3% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%. Not done here: the refresh (the header counts of `notes/operation.md` are the twelfth refresh's).
+
+## 2026-11-20 23:48  Handoff: `regs` run 4, the seventh row's wire is a reset copy
+
+The loop's second tracer (a fresh Fable 5.2 agent, high effort) took `regs`, the first free Queue row
+with work in its own region (`tlb` has none left): claimed 23:05, merged ffe5906 at 23:44, claim
+released. One handoff file. Full extraction after it 2,462 nets, 4,594 transistors, 0 errors,
+0 warnings; 914 of 1,354 equations firm; 96 nets joined only through uncertain items (1,135 items): no
+count changes, the wire lies on a net that exists. Spot checks of the overlays: the wire's west end
+(the corner (5845,16713), the pad (5909,16800), the band under the rail x 6008-6055) and its east end
+(the diagonal, the pad (10484,17994), the track x 10485) (`cache/scratch/refresh/h5_w8450_w.png`,
+`h5_w8450_e.png`): the drawn shapes lie on the features.
+
+What it establishes (from the tracer's notes; marks as there):
+
+- **The "seventh row's wire" on the bottom bus is `lc2_w8450`, a reset copy, not a register's wire**
+  (piece `w8450`; wiring, firm: thirteen pads, six poly links, no uncertain item): from `bl0`'s port
+  (4930,16713) through the bottom-left logic, where it ends as a band under the rail x 6008-6055
+  (believed the gate of one pull-down; the unit is not traced), and from a pad on that row by the
+  track x 6408 and the bottom bus row y 18125 to the thin track x 10485 beside the bottom-centre
+  logic's east gate column, drawn north to y 17760. Its loads there are open.
+- The earlier reading of that row ("north on x 6711, `bd1_n2`'s track") was the follower jumping
+  8-10 px of bare ground from the row's end pad (trap 30; R26 has the method; it was in notes only).
+
+One review round (round 5): no finding that changes a connection; three geometry or notes findings
+fixed (`tools/sameconn.py`: connections identical). **Not reached**: the ninth row y 17648, claimed in
+this run; it stays in the `regs` row.
+
+Applied: master list rows `regs` (run 4; what is left), `bc2`-`bc4` (the track x 10485 and its
+loads), `bl1`/`bl2` (the pull-down under the rail x 6008-6055). **Re-read list**: nothing new.
+**Ambiguities**: none. Corrections section in `bl0`'s notes; the glossary's row `lc2_w#` says where the
+second branch goes. `notes/operation.md`: the tracer's paragraph after "Reset from the pins" stands.
+Floor plan: the tracer's one route box covered the bottom-centre logic and is split in four
+(`floorplan.d/regs.txt`), as it proposed; the labels were not looked at. A new package tool,
+`tools/regs_polyy.py`.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 798
+floor-plan blocks. Coverage: 70.4% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%. Not done here: the refresh. Next in the loop, at the user's word (2026-11-20 23:38): `busl`,
+continued on its own branch by the loop's tracer.
+
+## 2026-11-21 00:39  Handoff: `busl` run 14, R14's six compared lines reach the left array; the light pen flag is cleared by `rst`
+
+The loop's third tracer (a fresh Fable 5.2 agent, high effort) continued `busl` on its branch, at the
+user's word (the claim is the user's): run 14, two pieces, merged a2dc105 at 00:32, claim kept. One
+handoff file. Full extraction after it 2,455 nets (seven joins: seven nets fewer), 4,594 transistors,
+0 errors, 0 warnings; 914 of 1,354 equations firm; 96 nets joined only through uncertain items (1,135
+items). Spot checks of the overlays: the six west end pads of piece `a6` (x 5757 / 5800, y 14092-14308)
+and the poly hop of piece `xn` between the pads (7077,8495) and (7077,8755)
+(`cache/scratch/refresh/h6_a6_pads.png`, `h6_xn_hop.png`): the drawn shapes lie on the features.
+
+What it establishes (from the tracer's notes; marks as there):
+
+- **The six lines compared with R14 reach the left array's six lower rows** (piece `a6`; wiring, firm,
+  no uncertain item): each of `bc1`'s six poly lines `cdp3_g_c2`..`c7` runs on west of x 7000 as one
+  poly row under about thirty tracks, with no pad or tap, to an end pad, and by one of six nested Ls
+  onto one of the six tracks that `bl0` run 12 drew from y 15000 south. What `bl0` believed from the
+  follower is so, in that order: the wire `bl0` called w18081 = `cdp3_g_c2` .. the wire `bl0` called w15522 = `cdp3_g_c7`. So the
+  left array's fourteen rows, north to south, carry `cdp4_bus_s7`..`s0` and `cdp3_g_c7`..`c2`: the
+  fourteen lines that R15 and R14 are compared with. **Believed, not traced**: the array's rows drive
+  them (the memory address); no drawn end drives `cdp3_g_c#`.
+- **The light pen flag is cleared by `rst` itself** (piece `xn`; wiring, firm): `rst`, the
+  flag's clear, is `lc1`'s row of `rst` = NOR(`lpstb_b`, `res_b`), run on east to an end pad
+  (7076,7388), south on the metal x 7078, through a poly hop and a diagonal onto the track x 6906. The
+  extraction gives, firm: `bl0_w17610` = NOT((`bl0_w17337` AND `bl0_w17687`) OR `bl0_w17440` OR
+  `rst`).
+
+One review round (round 14 of the package, both pieces): no findings. The reviewer did not check
+`a6`'s crossings one by one at 4x (3x and measured). Two readings are recorded in the notes without a
+`?`: the pad (7077,8755) has a red centre, not a green hole, in the clean shot (taken as a contact:
+ring and bright centre in both metal shots, the metal ends on it), and a greenish patch where
+`lc2_w8646`'s metal crosses `rst`'s poly column (no contact).
+
+Applied: master list rows `busl` (run 14; the two items done, the Next list), `larr` (continue) (the
+six rows' names; the lines' driver to be found in the array), `bc1` (continue), `bl0`, and the
+`rename` row (seven renames wait for the refresh: `bl0`'s w18081..w15522 onto `cdp3_g_c2`..`c7`,
+`busl`'s x6906 onto `rst`; aliases in `trace/busl.txt` until then). **Re-read list**: nothing new.
+**Ambiguities**: none. Corrections sections in the notes of `bl0`, `lc1`, `bc1` and `eof`.
+`notes/operation.md` and the glossary: the tracer's own edits stand (the fourteen lines; the flag's
+clear). Floor plan: no coarse block is replaced; the left bus field's line says twenty-five pieces;
+`floorplan.d/busl.txt` has five more lines, whose labels were not looked at.
+
+Also on main since the last entry, not the loop's: Matt Godbolt's claim of `cdp2` (c6b3093) and his
+change to the workflow, "the gate's result decides the push" (3ff2f92).
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 803
+floor-plan blocks. Coverage: 70.4% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%. Not done here: the refresh (seven renames wait).
+
+## 2026-11-21 01:26  Handoffs: `busl` run 15, `cdp2` pieces `ga` and `gl`
+
+Three handoff files (the loop's fourth tracer, a fresh Fable 5.2 agent at high effort: `busl` run 15,
+merged f7b0f8e at 01:19, claim kept; Matt Godbolt: `cdp2` pieces `ga` and `gl`, merged 3cdd18c and
+7e7cb96 on 2026-11-20 17:54 and 18:14 -0600, claim kept). Full extraction after them 2,456 nets, 4,599
+transistors, 0 errors, 0 warnings; 915 of 1,356 equations firm; 97 nets joined only through uncertain
+items (1,139 items). Spot checks of the overlays: the corner of `busl`'s four rows under `eof`'s metal
+arms at x 6240-6540, y 7130-7350, and `cdp2`'s series gate at x 8190-8620, y 7150-7420
+(`cache/scratch/refresh/h7_ca_corner.png`, `h7_cdp2_gl.png`): the drawn shapes lie on the features.
+
+What they establish (from the tracers' notes; marks as there):
+
+- **The main part of the left bus field has no undrawn row and no undrawn signal track** (`busl` run
+  15): the Next list's "undrawn rows of the bands y 11850-12150 and below" were rows drawn before or
+  since. Undrawn there: supply metals, the poly row y 10560 and the top band's ninth row, two spots not
+  looked at.
+- **Four wires from the top-left logic's sixth strip run the whole left bus field to the bottom-centre
+  bus** (`busl` run 15, pieces `ca`-`cd`; wiring, firm in `busl`): the crossing field's rows y 7171,
+  7214, 7258, 7300 run west under `eof`'s four metal arms (no contact) and turn north into four poly
+  columns onto `tc2`'s and `tl6`'s poly ends: `tc2_m6404`, `tl6_p6187`, `tl6_p6143`, `tl6_p6101`
+  are the wires on the foot rows y 14827, 14870, 14437, 14393. **Believed, not traced: four outputs of
+  R8** (the skew bits would fit). Their top ends (x 6400-6750, y 2500-2630) would decide it: a task now
+  in the `tcw` (continue) row.
+- **`busl_x6820` is `lc3_m5756`** (piece `xm`; firm in `busl`): the track ends on the east end pad of
+  `lc3`'s crossing row 10. Neither end of the wire is identified.
+- **`trunks`' line in the left bus field has no tap between y 8995 and y 15000** (R4, part done).
+- **The logic left of `cdp2`'s rows B** (`cdp2`; 5 transistors): an inverter `cdp2_w7065` = NOT
+  `tc2_sr_q` (marked: two `?B`); a through line `cdp2_w6845` from the west to the pad (7878,8315), an
+  input of the cluster beside `cdp3`'s row A (one `?M`); the lower of two series gates, `cdp2_w7272`
+  = NOT(`cdp2_b_s7_x` AND `cdp2_w7344`) (firm), believed cross-coupled with the gate above it.
+
+Reviews: `busl` round 15, no findings (every crossing read at 4x or 5x in the chip-2 metal shot and the
+clean shot; chip 1's metal shot not by eye at the 64 column crossings). `cdp2` rounds 1-3: one finding
+that changed connections in round 1 (two boxes drawn as metal contacts are buried contacts with the
+metal passing over), fixed; the rest geometry.
+
+Applied: master list rows `busl` (run 15; a new, short Next list: one more run could close the
+package), `cdp2` (continue), `cdp3` (continue), `tcw` (continue) (the task on the four lines' top
+ends), `bc1` (continue), `lc1`-`lc3`, `tl1`-`tl6`, `tc2`, `bl0`, `trunks` (continue), and the
+`rename` row (five more renames wait, all onto names that are placeholders themselves). **Re-read
+list**: R51 (new, proposed by `cdp2`'s tracer: a small box under a thin metal accepted as a contact
+from the metal shots and the text map alone; first `cdp3`'s cluster beside row A); R4 part done for
+the left bus field. **Guide**: trap 27 extended (a ring with a bright centre on a 20 px box under a
+thin metal is not a contact; what a real one has). **Ambiguities**: AMB-047 annotated (the two boxes
+are probably such pass-overs; the pad (7878,8315)'s line is `cdp2_w6845`). Corrections sections in the
+notes of `lc3`, `bl0`, `tl6`, `tc2`, `eof`, `trunks` and `cdp3`. `notes/operation.md`: not changed
+by the tracers or here (the four wires' identity is believed only; `cdp2`'s gates are not yet joined to
+anything this page states). Floor plan: no coarse block is replaced; the left bus field's line says
+thirty pieces; the new fragment lines' labels were not looked at.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 810
+floor-plan blocks. Coverage: 70.4% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%. Not done here: the refresh (twelve renames wait).
+
+## 2026-11-21 02:23  Handoffs: `busl` run 16, `cdp2` pieces `gu` and `gh`
+
+Three handoff files (the loop's fifth tracer, a fresh Fable 5.2 agent at high effort: `busl` run 16,
+merged 2ddf89e at 02:14, claim kept; Matt Godbolt: `cdp2` pieces `gu` and `gh`, merged 2e8d6ef and
+5d52ee6 on 2026-11-20 18:52 and 19:06 -0600, claim kept). Full extraction after them 2,457 nets, 4,603
+transistors, 0 errors, 0 warnings; 915 of 1,358 equations firm; 98 nets joined only through uncertain
+items (1,141 items). Spot checks of the overlays: the end pad (6188,6956) of `busl`'s piece `ha` with
+its neighbours, and `cdp2`'s upper series gate at x 8230-8630, y 7050-7270
+(`cache/scratch/refresh/h8_ha_pad.png`, `h8_cdp2_gu.png`): the drawn shapes lie on the features.
+
+What they establish (from the tracers' notes; marks as there):
+
+- **The data of `tl5`'s latch a is `wl_h1`** (`busl` run 16, piece `ha`; wiring, firm): the third
+  diagonal of `lc1`'s bundle, the row y 6953, the metal y 6957 and the track x 7035 are one wire from
+  `tl5`'s poly end (5453,6350) onto `bw`'s pad (7031,7560), the line from the poly band H1 above the
+  mid-right array's counters. What `wl_h1` is at its other end is open.
+- **The main part's supply metals** (`busl` run 16, pieces `va`, `vc`, `vb`): the wide metal
+  x 4953-5018 is VCC, one metal with `lc3`'s two VCC metals; the wide metal over the foot rows is VSS
+  from `cdp4`'s column-0 plate, not joined to `bc1`'s RL2.
+- `cdp2_w6845` drawn west of `cdp2`'s port to an end pad (6146,6847) (it goes on west in `lc1`'s band);
+  a new wire `cdp2_w6845`, neither end identified. Seven items of the old Next list read with nothing
+  to draw (other packages' wires, or ghosts of a thin metal over field).
+- **`cdp2`'s two series gates are a chain, not a pair** (pieces `gu`, `gh`; 4 transistors; correcting
+  the entry of 01:26, which had them "believed cross-coupled"): `cdp2_w7272` = NOT(`cdp2_b_hl` AND
+  `cdp2_b_s7_x`) (the comparator's row line and the comparator chain's output; marked: one `?B`) and
+  `cdp2_w7092` = NOT(`cdp2_w7128` AND `cdp2_w7272`) (firm), whose output leaves north. The load of
+  `cdp2_b_hl` is drawn, so that line extracts as a gate for the first time.
+
+Reviews: `busl` round 16, no finding that changes a connection; three findings of completeness written
+into notes (a row and a metal on west of `hb`'s pad, a plain crossing not listed, two thin metals drawn
+by no package); four of `va`'s eight diffusion-row crossings were read by text only. `cdp2` rounds 4-6:
+one finding that changed a connection in round 4 (a gate row drawn on `db_b5`, whose metal turns away
+37 px short of the pad), fixed.
+
+Applied: master list rows `busl` (run 16; the Next list is the northern part's leftovers, and the
+package's northern region now starts at y 6400: the strip x 6450-7600, y 6400-6750 was in no Queue
+row), `larr` (continue) (a thin track on its east boundary, x 4780, in no trace), `bl1`/`bl2`,
+`bc1` (continue), `lc1`-`lc3`, `tl1`-`tl6`, `bw` (continue), `cdp4` (continue), `cdp2` (continue),
+`wl`, and the `rename` row (three more wait: fifteen in all). **Re-read list**: R26 extended (proposed
+by `cdp2`'s tracer: a pad joined to a track that runs toward it on the pad's own line, on the
+follower's word or one off-centre profile). **Guide**: trap 30 extended (the same), trap 40 new
+("nothing undrawn" holds only inside its cuts; a poly-colour mask of the chip-2 stripped shot takes a
+thin metal's ghost for a row). **Ambiguities**: AMB-048 new (the tie of `cdp2_b_hl`'s load; adopted:
+tied). Corrections sections in the notes of `bw`, `tl5`, `wl`, `lc1`, `lc3`, `cdp4`, `cdp2` and
+`bc1`. `notes/operation.md`: the tracer's own change stands (latch a's data is `wl_h1`). Floor plan:
+no coarse block is replaced; the left bus field's line says thirty-six pieces; the new fragment
+lines' labels were not looked at.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 820
+floor-plan blocks. Coverage: 70.4% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%. Not done here: the refresh (fifteen renames wait).
+
+## 2026-11-21 10:40  The tracer loop stopped at the Fable limit; handoffs: `eof` runs 28-35, `cdp2` (`wn`, a join)
+
+**The loop.** The coordinating session's loop (one fresh Fable 5.2 agent per package, 2026-11-20 22:15
+to 2026-11-21 02:47) ran six tracers: `bl0` run 12, `regs` run 4, `busl` runs 14, 15 and 16 (merged,
+applied above), and `busl` run 17, started at 02:23 and stopped at about 02:47 by the account's Fable
+usage limit (it resets 2026-11-22 18:00 Europe/Madrid). Run 17 left one pushed commit on the branch `busl`
+(71469a2, "draw line Q (`lc3_e9756`), `lc2_w9125`'s pad, row y 7432"), not reviewed and not merged, and
+uncommitted changes in `../hd6845-trace-busl`; they are left as they are so the run can be resumed
+(the master list's `busl` row says so). The user asked for the loop to stop at the limit. This entry and
+the refresh after it are the coordinator's, on Opus 5.5 (coordination; no tracing).
+
+Ten handoff files (Tom Seddon: `eof` runs 28-35, 2026-11-21 03:22 to 09:21 +0000, merged 519987d to
+5f48624, claim kept; Matt Godbolt: `cdp2` piece `wn` and a join, merged 268252b and e745442 on
+2026-11-20, claim released). Full extraction after them 2,472 nets, 4,644 transistors, 0 errors,
+0 warnings; 917 of 1,370 equations firm; 103 nets joined only through uncertain items (1,176 items).
+Spot checks of the overlays: the four units under `bc1`'s west gate column's rail (x 7160-7560,
+y 15000-15900) and the neck of AMB-049 at 6x in both metal shots (`cache/scratch/refresh/h9_bc1col.png`,
+`h9_neck.png`): the drawn shapes lie on the features; the neck is as ambiguous as the tracer says.
+
+What they establish (from the tracers' notes; marks as there):
+
+- **DISPTMG's terms reach two latch pairs in series** (`eof` runs 28-30). `eof_w17338` =
+  NOR(`eof_w17124`, `eof_w17207`) (marked); `eof_w17207` is `bc1`'s decode line `bc1_dec01_n`
+  (marked: a `?M` neck, AMB-049); `eof_w17124` is a latch (a copy of `tl1`'s) enabled by `ck_out` (firm)
+  whose data is a second latch copy fed from `bc1_g6_out`, i.e. column B's latch pair's value. So
+  DISPTMG = (`eof_w16823` AND NOT `eof_w17212`) OR (NOT `eof_w17124` AND NOT `bc1_dec01_n`) OR
+  `eof_w17472`. **Believed, not traced**: the second term is the display enable one stage later,
+  selected by `bc1`'s decode line 01: R8's DISPTMG skew.
+- **The first latch of both pairs has one enable** (run 31, firm), `eof_w16040`, followed 9,000 px to
+  seven ends, all gates; **its driver is not found** (believed: the clock level opposite to `ck_out`).
+- **A chain of NORs under `bc1`'s west gate column** (runs 32-35; each marked by two ties, AMB-050):
+  `eof_w15523` = NOR(`rcs_e4`, `eof_w16040`, `h_eq_r1_n`); `eof_w15262` = NOR(`lc1_w7780`,
+  `rcs_mv`); `eof_w15128` = NOT `rst_n`; `eof_w15781` = NOR(`eof_w15523`, `eof_w15262`,
+  `eof_w15128`). The row counter's step term and two of the wires that `busl` brought down the left
+  bus field meet here. What the chain computes is open; `eof_w15781` gates two units further south.
+- **`tc1_ns3` = NOT `tc2_sr_q`** (`cdp2`; marked): the inverter left of rows B drives `tc2`'s wire.
+
+Applied: master list rows `eof` (runs 28-35; a new Next), `bc1` (continue), `bc2`-`bc4`, `bl0`,
+`busl` (the meetings, and run 17's state), `cdp2` (continue) (claim released; what is left), `cdp1`
+(continue), `tc2`, and the `rename` row (five more). **Re-read list**: nothing new. **Guide**: trap 18
+extended (`railprof.py` calls field "diffusion" along a rail too; `eof` runs 32, 35). **Ambiguities**:
+AMB-049 (the neck), AMB-050 (the column's ties). Corrections sections in the notes of `bc1`, `bc3`,
+`bl0`, `busl`, `tla` and `tc2`. `notes/operation.md` and the glossary: the tracers' own edits stand
+(DISPTMG's rows; the reset paragraph). Floor plan: no coarse block is replaced; `floorplan.d/eof.txt`'s
+new lines were not looked at.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 834
+floor-plan blocks. Coverage: 70.4% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%. The refresh follows.
+
+## 2026-11-21 11:00  Refresh
+
+Thirteenth refresh (the coordinator, on Opus 5.5), after the handoffs since the twelfth: `bl0` run 12,
+`regs` run 4, `busl` runs 14-16, `cdp2` (six pieces), `eof` runs 28-35. Renames in three batches, each
+checked with `tools/names.py compare` ("only names changed"), `tools/signals.py` (0 outside the
+glossary) and `signals.py --docs` (no former names). Only joins on nets that `tools/unsure.py` does not
+list were renamed. Before each batch, the sentences that named both names were reworded to name the old
+wire by its owner ("the wire `busl` called x6906 is `rst`"), so that the renames left none circular.
+
+- bl0_w18081 -> cdp3_g_c2, bl0_w17603 -> cdp3_g_c3, bl0_w17126 -> cdp3_g_c4, bl0_w16649 -> cdp3_g_c5, bl0_w15999 -> cdp3_g_c6, bl0_w15522 -> cdp3_g_c7, busl_x6906 -> rst (`busl` run 14)
+- busl_x6992 -> tc2_m6404, busl_x6949 -> tl6_p6187, busl_x6559 -> tl6_p6143 (`busl` run 15)
+- tl5_w3461 -> wl_h1 (`busl` run 16), eof_w16778 -> ck_out (`eof` run 30), eof_w16172 -> eof_w16040 (`eof` run 31), cdp2_w7300 -> cdp2_b_s7_x (`cdp2`, piece `gu`)
+
+**Left on purpose** (the master list's `rename` row): `busl_x6820` / `lc3_m5756` and `busl_x6603` /
+`tl6_p6101` (`busl`'s joins are firm, but each net is joined elsewhere through uncertain items);
+`cdp2_w7344` / `cdp2_b_hl` (AMB-048); `cdp2_w7065` / `tc1_ns3` (the two `?B` of `cdp2`'s piece
+`ga`); `eof_w17207` / `bc1_dec01_n` (AMB-049); the node aliases of `bc1`'s west gate column (AMB-050);
+`eof_w15128` (proposed `rst_d`, when its ties are accepted); and what the twelfth refresh left.
+`names.py candidates` also lists `ar#` / `ar#_q`, `d#` / `d#_in` and the `_tab` names of the look-ahead
+lines: the glossary gives the reason both names are kept (a cell's node, a pad's protected input, a
+template's spare finger), as in earlier refreshes.
+
+**Branches in flight** (`busl`, whose run 17 stopped at the Fable limit with work uncommitted in
+`../hd6845-trace-busl`; `eof`, tom-seddon): after merging main, run in the branch:
+
+```
+tools/rename.py bl0_w18081 cdp3_g_c2 bl0_w17603 cdp3_g_c3 bl0_w17126 cdp3_g_c4 bl0_w16649 cdp3_g_c5 bl0_w15999 cdp3_g_c6 bl0_w15522 cdp3_g_c7 busl_x6906 rst busl_x6992 tc2_m6404 busl_x6949 tl6_p6187 busl_x6559 tl6_p6143 tl5_w3461 wl_h1 eof_w16778 ck_out eof_w16172 eof_w16040 cdp2_w7300 cdp2_b_s7_x    # pairs: old -> new
+```
+
+**`operation.md`** (thirteenth): header (2,472 nets, 4,644 transistors; 917 of 1,370 equations firm; no
+equation changed status against the baseline taken before the renames). The tracers had written their own
+rows (DISPTMG's inner NOR, the two latch pairs and the NOR chain under `bc1`'s rail; the light pen flag's
+clear; the fourteen compared lines into the left array; `lc2_w8450` across the bottom; latch a's data).
+Changed here: the short answers (DISPTMG traced back through two latch pairs, marked; R9's match reaches
+the bottom-centre logic through `rcs_e4`); "Not established at all" (the first latches' enable without a
+driver, and the NOR chain); two "until the rename" remarks; AMB-001 to AMB-050, R1-R51. Not on the page:
+`cdp2`'s gates left of rows B (`tc1_ns3` = NOT `tc2_sr_q`, the chain on `cdp2_b_hl`), whose
+comparator and use are not identified.
+
+**`out/`** rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 834
+floor-plan blocks (looked at the bottom-centre logic and the left bus field's north part,
+`cache/scratch/refresh/fp13_bc.png`, `fp13_busl.png`: numbered labels, no overlap). Coverage: 70.4%
+traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
+
+## 2026-11-21 11:19  Floor plan: a sweep of the labels
+
+At the user's request, every label of `floorplan.txt` and `floorplan.d/` was checked against what is now
+established, and about 110 were renamed (commits 1a0292d and after; no coordinate changed). The rules
+asked for: name a block by its function where the trace gives one; drop the datapath's row and channel
+letters where the register is known; drop a '?' where the reading is now firm. What was done:
+
+- **The 4-bit counter of the left array is the VSYNC width counter** (its outputs are compared with
+  R3 bits 4-7, the vertical sync width, by `amr`'s firm joins); its clock generator, its L3 line's latch
+  and driver in `tl4`, and four descriptions say so.
+- The central datapath's registers by number: R12 (its read path is firm, so the '?' goes), R13, R14,
+  R15, R16 and R17 as the light pen register's high and low parts, the cursor match (the NAND of the R14
+  and R15 comparators), the NOR of the read selects R12-R17, the R16/R17 latch strobe in `bc1`; the
+  left bus field's routes of R13's outputs and of the lines compared with R14 and R15.
+- The top-left logic by the nets its blocks drive (from the extraction): the two R9-match latches and
+  their enable, the step term `rcs_e4`, `rcs_e3`, the step condition latch and inverter, step input
+  a2, the R5-match latch (latch A) and the latch that gates R5's match, latch C into `rcs_mv`, the
+  clock inverters, `tl5`'s latches by their data and enables; the RA0 source select in `tc1`.
+- The bottom-centre logic: DISPTMG's terms 1 and 2 and its two latch pairs, the NOR column under `bc1`'s
+  rail by output; the left-centre ripple counter's five stages by the names of `notes/operation.md`.
+- '?' removed from `eof`'s four routes of the latched R4 match (the 4,600 px between are drawn by
+  `busl`'s piece `n2`), from the crossing field west of the datapath and from the diagonal fan.
+- Three coarse blocks of `floorplan.txt` that fragments now replace were removed (strip 3's rows above
+  y 2890, inverter U1, the gates below the column west of R14); "logic beside the large cells (row A)"
+  is now the untraced gate cluster beside R14 (AMB-047, R51).
+- Descriptions: R10 and R11 "not yet established" corrected (their write strobes, firm joins).
+- `notes/operation.md`: one stale sentence corrected (the join of the latched R4 match up the left bus
+  field "drawn by no one": `busl` has drawn it).
+
+Kept as they are, for want of a function: the datapath's channels B, G and 2, `cdp1`'s rows D and E,
+`larr`'s untraced columns, `tcw`'s gate column, the top-right gate rows, and the gate names of
+`tc1`'s column (they already carry their equations). `eof` run 36 (merged during the sweep) added two
+inverters on the NOR column's output; their labels were brought into line in the merge. Its handoff
+is not applied yet. `out/` rebuilt: 2,474 nets, 4,648 transistors, 0 errors, 0 warnings, 833 floor-plan
+blocks.
+
+## 2026-11-21 18:59  Handoffs: `eof` runs 36-51, `cdp4` runs 4-15, `regs` runs 5-6, `cdp3`
+
+Thirty-one handoff files, applied by the coordinator (on Opus 5.5; coordination, no tracing): Tom Seddon,
+`eof` runs 36-49 (2026-11-21 10:17-21:16 +0000, merged 4c53c1a .. 964dc12, claim kept through them);
+Kieran Connell's session, `eof` runs 50-51 (merged 3ef0a7a, 0e68afe, claim released) and `regs` runs 5-6
+(merged 41e794f, c0cffa9; one of its three files, `regs-...-200605-c0cffa9`, repeated run 5's text by
+mistake, as the run 6 file says, and was removed unused); Matt Godbolt, `cdp4` runs 4-15 (merged 7a4a3d8 ..
+c44b6fd, claim released) and one item of `cdp3` (merged 0d349fe, claim released).
+Full extraction after them 2,517 nets, 4,812 transistors, 0 errors, 0 warnings; 966 of 1,423 equations
+firm; 109 nets joined only through uncertain items (1,212 items). Spot checks of the overlays (the drawn
+shapes lie on the features): `regs`' inverter under `bd3`'s rail end at 2.5x in `metal` and `acid1b`
+(`cache/scratch/refresh/h10_regs_inv.png`), and row s1 of the left array's east column at 1.4x in `acid1b`
+(`h10_eof_s1.png`).
+
+What they establish (from the tracers' notes; marks as there):
+
+- **The read path of R12-R17 is complete, registers to pins** (`cdp4` runs 4-11 with `regs` runs 5-6;
+  firm). `cdp3_n_c#` = `cdp4_n_s#` is one 8-bit bus on eight thin tracks east of the datapath, down to
+  the bottom bus, east through three poly hops and north to the data output units: **`d#_out_n` = NOT
+  `cdp3_n_c(7-#)` for all eight bits** (D0 `dbus`'s inverter, D1-D6 the new cell `cdp4_ro`, D7 `regs`'
+  inverter under the stretch of `bd3`'s ground rail that `bd3` had not drawn). The datapath's column K is
+  data bit 7 - K. With `d_hiz` low each data pin is one column of the read bus in true sense.
+- **`dbus_le`** runs from `dlat` south over four output boxes (`?M`, AMB-056) to the output box of an
+  undrawn two-input NOR under `bd2`'s VSS rail; believed NOR(`cs_d`, X), as PR #17 had it.
+- **The two through lines east of the datapath** (`cdp4` runs 12-15): x 10852 is `rst_lat` (firm),
+  x 10808 is `cdp4_w10808`, the output of an undrawn unit of `bc2`; both run 14,000 px north into `tr1`'s
+  gate row, three gate loads each (`rst_lat` = `rst_lat`, `cdp4_w10808` = `cdp4_w10808`).
+- **`eof`: the NOR column's output reaches every row of the memory address counter** (runs 36-38):
+  `eof_w15998` = `eof_w16218` = NOT `eof_w15781` (marked: AMB-050's ties), seven rows each, on the tracks
+  x 4736 / x 4780 (the arm onto (4736,14155): AMB-052), with two more capacitor-like devices (AMB-051).
+- **`eof`: what each row of the left array's east column does** (runs 39-48, 14 cells per piece): the
+  line gates a pass transistor onto a strap node (AMB-053); a two-way selector gives that node R13's
+  inverted bit `cdp3_hw_c#` (or `cdp3_cw_c7` .. `cdp3_cw_c2` in rows s8-s13) while `rcs_mv` is low and the
+  row's compared line `cdp4_bus_s#` / `cdp3_g_c#` while it is high (select drivers `eof_ga` = NOT `rcs_mv`,
+  `eof_gb` = NOT `eof_ga`, marked); the compared line is `larr`'s line H of the row below (eleven rows
+  firm; AMB-054), the node of a depletion load on rail G = `vcc` (AMB-055) pulled down by `eof_pdg_s#` =
+  NOT `larr_y_s#` on rail F = `vss` (firm), so the compared line and the strap node are Y inverted twice;
+  and a pull-down on every Y gated by one line `eof_ypd` whose driver is open.
+- **`eof` runs 49-51**: the twin of `cap18`; the bus lines of `h_eq_r1_n` and (through a `?M`, AMB-057)
+  `eof_w16040` east to `bc4`'s ground, where `eof_w17345` = NOR(`h_eq_r1_n`, `eof_w16040`) waits for its
+  load east of x 10600; `h_eq_r1_n` has a pull-down gated by `h_eq_r1`.
+
+Applied: master list rows `eof` (runs 36-51; a new Next, released), `cdp4` (continue) (runs 4-15,
+released), `regs` (runs 5-6), `cdp3` (continue) (only the cluster beside row A left), and the proposals
+for `larr` (continue), `bc1` (continue), `bc2`-`bc4`, `bl0`, `busl`, `bl1`/`bl2`, `busc`, `bd1`-`bd3`,
+`tr1`/`tr2`, `trunks` (continue), `lc1`-`lc3`, `dpad`, `dlat`, `bw` (continue) and the `rename` row (the
+selector's and line H's aliases are to stay aliases). **Re-read list**: R50 gets `larr`'s H3 in the
+eleven rows (it now carries eleven joins; one row sampled) and gap 1's band; R26 gets `eof`'s own piece
+`en18` (`eof_w16040`'s eleven pads not read all round; `eof` run 49 found a line leaving one east).
+**Guide**: traps 19 (the centre-line test loses a thin metal half on a poly; test the whole width),
+24 (sub-pixel medians; a buried contact's centre does not look like poly), 25 ("runs on" at a port is a
+claim about the next 100 px), 28 (class a narrow feature on its centre line), 29 (a rail drawn to a round
+coordinate can hide a unit; read a diffusion's long edges before a port) and 32 (test a corner's far
+side: it may be a T) extended. **Ambiguities**: AMB-047 annotated (`cdp3`'s lead on the box (7935,8648)),
+AMB-050 extended (the two select drivers), AMB-051 to AMB-057 new (`eof`'s run 49 proposal "AMB-051"
+is AMB-057). Corrections sections in the notes of `bd3`, `bw`, `cdp3`, `regs`, `dbus`, `dlat`, `dpad`,
+`trunks`, `cdp2`, `tr1`, `busl`, `bc1`, `bl0`, `larr` and `bc2`. `notes/operation.md` and the glossary:
+the tracers' own edits stand. Floor plan: the fragments' new blocks lie inside coarse blocks that they do
+not replace whole (`bc3`'s north-west corner, x 7190-7530, y 16290-16930, is inside the large "bottom-centre
+logic" block); nothing trimmed. `dlat`'s plain `M` over the first output box is left as drawn (AMB-056).
+
+Tools, from the Windows runs (`regs`, `eof` 50-51): `tools/costs.py` now names the transcripts' folder as
+Claude Code does on Windows too (`tools/regs_costs.py`'s one line; `regs_costs.py` itself is `regs`' and
+stays), `/trace6845` runs `costs.py` with the venv's Python, and `notes/workflow.md` has a paragraph for
+Windows collaborators (Developer Mode and `MSYS=winsymlinks:nativestrict`, `flock`, lone carriage returns).
+**Not done, proposals left open**: `tools/claim.py done` refusing a handoff file older than the merged
+commit (the cause of `regs`' mis-filed handoff); `tools/mergecheck.py` checking that the last "Round N:"
+line of the notes is this run's (the slip `cdp4` run 15 caught before its push).
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 985 floor-plan
+blocks. Coverage: 72.9% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
+
+## 2026-11-22 00:36  Handoffs: `eof` runs 52-54
+
+Three handoff files, applied by the coordinator (on Opus 5.5; coordination, no tracing): Matt Godbolt's
+session, on Fable, `eof` runs 52-54 (2026-11-21 21:20-22:39 -0600, merged fde9969, 6410bab, 74c859a; claim
+released after each). Wiring only: three pads with contacts, no transistor, no uncertain item.
+Full extraction after them 2,516 nets (one fewer than at the last handoffs: run 52's join), 4,812
+transistors, 0 errors, 0 warnings; 966 of 1,423 equations firm; 109 nets joined only through uncertain items
+(1,212 items). Spot checks of the overlays (the drawn shapes lie on the features): run 52's two pieces at 1.8x
+in `metal` and `acid1b` (`cache/scratch/refresh/hR-20261122-eof52.png`), and `rst_lat`'s metal x 10353 with
+its two pads and run 54's metal x 10397 at 1x (`hR-20261122-eof53.png`).
+
+What they establish (from the tracer's notes; marks as there):
+
+- **`h_eq_r1` is `h_eq_r1`** (run 52, firm): `h_eq_r1_n`, an input of the NOR `eof_w15523` in the chain
+  whose output reaches every row of the memory address counter, is pulled to `vss` while the horizontal
+  counter equals R1. The first traced use of R1's match.
+- **`rst_lat` reaches the column of `bc4`'s VSS rail x 10548-10598** (runs 52-53): from `cdp4`'s port south,
+  west and north to a pad (10352,17604), then a thin metal x 10353 north to an end pad (10353,16345) with a
+  tap (10353,17127). It gates three transistors under that rail (y 16297-16316, 17119-17132, 17681-17696),
+  none of them drawn; the box north of the north row's cap is AMB-058 (assumed no tie).
+- **`eof_w17345`'s output metal** (run 54) runs north to an end pad (10397,17040); the pad's row goes east to
+  a patch x 10530-10542 west of the rail, not read. A first belief (a buried contact onto the rail diffusion,
+  with an equation on it) was withdrawn by review round 67; nothing of it was ever drawn.
+
+Applied: master list rows `eof` (runs 52-54; a new Next, released), `cdp4` (continue) (`rst_lat` south of
+its port drawn), `trunks` (continue) (`h_eq_r1`'s diagonal followed), `bc2`-`bc4` (the five undrawn gate rows
+on the east column's VSS rail, the rail contact (10560,17083) in no trace file, the unit with `rst_lat`'s
+pull-down, the metal round the end pad) and the `rename` row (`h_eq_r1`, an alias of `h_eq_r1`).
+**Re-read list**: R52 new: follow-task wires drawn as one plain poly with no tap, flanks read by eye only
+(`eof`'s own rows and columns, `busl`, `regs`, `tl4` runs 11-12; `cdp4`'s wires of 2026-11-21 and `bl0`'s
+long segments already scanned by run 53, no branch). **Guide**: trap 13 (a poly row whose end is hidden under
+a metal lying on it is not another net's until its end is seen; `tools/eof_tee.py`) and trap 24 (a framed
+block is not a buried contact by position: compare the interior) extended. **Ambiguities**: AMB-058 new (the
+block's Ambiguity 216). Corrections sections in the notes of `cdp4` and `trunks`. Floor plan: run 52-53's
+route blocks lie inside the coarse bottom-centre block; nothing trimmed.
+
+**Not done, proposals left open**: committing `cache/scratch/eof/teeall.py` (the tracer's loop of
+`eof_tee.py` over a trace file's long straight `P` segments), offered by run 53 for R52.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 988 floor-plan
+blocks. Coverage: 72.9% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
+
+## 2026-11-23 02:37 UTC  Handoffs: `eof` runs 55-62
+
+Eight handoff files, applied by the coordinator (on Opus 5.5; coordination, no tracing): Kieran Connell's
+session, on Fable, `eof` runs 55-62 (2026-11-22 23:17 to 2026-11-23 01:28 +0000, merged 1fa3bde, 545d59e,
+188346b, 1e79cbf, 70cbb56, 4b24684, fc3f1f2, eb1f72e; claim kept through run 61, released with run 62).
+4 transistors (run 55's NOR, run 58's load), the rest wiring; no uncertain item; review rounds 68-75, no
+finding that changes a connection. Full extraction after them 2,517 nets (one more than at the last
+handoffs: run 55's net, then run 59's join, then run 62's new net `eof_w16560`), 4,816 transistors, 0 errors,
+0 warnings; 967 of 1,425 equations firm; 109 nets joined only through uncertain items (1,212 items). Spot
+checks of the overlays (the drawn shapes lie on the features): run 55's unit in `metal` and `acid1b` at 1.6x
+(`cache/scratch/refresh/hR-20261122-eof55.png`), and runs 56-61's metals x 10180-10441, y 15400-16400 at 0.9x
+(`hR-20261122-eof59.png`).
+
+What they establish (from the tracer's notes; marks as there):
+
+- **`bc2_w14955` = NOR(`rst_lat`, `ck_out`)** (runs 55, 56, 59, firm): the unit under `bc2`'s east column VSS
+  rail at y 17054-17250, its load on the VCC rail x 10722-10768, its output metal north 1,300 px and a poly hop
+  onto `bc2`'s enable stub (10398,15440). The enable of the east column's latch unit a is NOT `ck_out` outside
+  reset and low during reset; the same net is an input of the NOR `eof_w15172` (unit T, which sets the latch
+  that clocks the ripple counter) and the gate of two rows west of the rail. `bc2_w14955` is an alias. The
+  dark spot (10567,17178) on the rail is assumed a blemish (AMB-059).
+- **`ck_out` #2 ends on the pad (10439,17238)** (run 55): `trunks` had drawn it on north through the NOR's
+  output pad, joining the gate's output to its input; `trace/trunks.txt` was cut back by `eof` (cdc4d7d).
+- **`eof_w17345` = NOR(`h_eq_r1_n`, `eof_w17866`) is complete** (run 58: its load, a copy of run 55's); it
+  depends only through AMB-057's alias of `eof_w17866`.
+- Wiring (runs 57, 60-62): `ck_out`'s branch north to an end pad (10311,15912); `bc2`'s copy-b enable
+  `bc2_w15432` and data `bc2_w15388` followed south to end pads (10180,16128) and (10268,16389), no driver yet;
+  `eof_w16560`, a metal of 1,560 px lying on `rst_a`'s poly twice without a contact, neither end read. Seven
+  gate rows end west of the rail column x 10497-10600 in one build; their units are the package's next work.
+
+Applied: master list rows `eof` (runs 55-62; a new Next, released), `bc2`-`bc4` (the drawn unit and load
+strip, `bc2`'s three ports met, the seven gate rows on the rail column, what was seen and is in no trace
+file), `trunks` (continue) (ck_out #2's end; `eof_w16560` on `rst_a`'s poly), the `rename` row
+(`eof_w17166` -> `bc2_w14955`, a functional name due), R31 (`bc2`'s three enable lines of unit a confirmed on
+Fable by review round 72 of `eof`) and R4 (pointer to R53). **Re-read list**: R53 new: `trunks` lines with
+contacts "on it" not drawn by `trunks`, and `trunks` / `bc*` metals in the bottom-centre logic drawn at 1x
+through a pad or past a line's end (six places where two metals lie end to end 12-40 px apart met by runs
+55-62). **Guide**: trap 33 extended (a line drawn at 1x through a pad can be two metals meeting at it).
+**Ambiguities**: AMB-059 new (the block's Ambiguity 217). Corrections sections in the notes of `trunks` and
+`bc2`. Floor plan: the eight runs' blocks lie inside the coarse bottom-centre block; nothing trimmed.
+
+**Not done, proposals left open** (tools): fold `tools/eof_costs.py`'s `HD_COSTS_ALSO` (earlier transcript
+folders of a moved checkout) into `tools/costs.py`; `tools/netlist.py`'s report lists no named net without a
+transistor, so a wiring-only net shows only as the count going up; `tools/t.sh eof` does not load `trunks`
+(not in `eof`'s `@requires`), so a short through a `trunks` line shows only in the full extraction.
+`ports.d/bc2.txt`'s three ports met by `eof` (lines 5, 8, 9) can go: for `bc2`'s next tracer.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 996 floor-plan
+blocks. Coverage: 72.9% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
+
+## 2026-11-23 10:50 UTC  Handoffs: `eof` runs 63-68
+
+Four handoff files, applied by the coordinator (on Opus 5.5; coordination, no tracing): Kieran Connell's
+session, on Fable, `eof` runs 63-68 (2026-11-23 06:38 to 08:34 +0000, merged 573d43b, 19501dc, 1788e28,
+85797e3; claim kept through run 66, released with runs 67-68). 15 transistors (run 63's latch 7, runs 64-65's
+NOR and inverter 5, run 68's NOR 3), runs 66-67 wiring; one uncertain item (the latch's exit contact, AMB-060;
+no equation rests on it); review rounds 76-82, three findings that changed a connection (rounds 76, 78, 81),
+all fixed in the same runs. Full extraction after them 2,523 nets (six more than at the last handoffs: two in run
+63, one each in runs 64, 66, 67, 68), 4,831 transistors, 0 errors, 0 warnings; 972 of 1,430 equations firm; 109 nets joined
+only through uncertain items (1,213 items). Spot checks of the overlays (the drawn shapes lie on the
+features): run 63's latch in `metal` and `acid1b` at 1.8x (`cache/scratch/refresh/hR-20261123-eof63.png`),
+and runs 64-68's units and the pad group x 10360-10840, y 15840-16480 at 1x (`hR-20261123-eof67.png`).
+
+What they establish (from the tracer's notes; marks as there):
+
+- **A set/reset latch in `bc2`'s rail column** (run 63, firm): `eof_w16889` = NOR(`bc2_w14955`, `eof_w16996`),
+  `eof_w16996` = NOR(`rst_a`, `eof_w17345`, `eof_w16889`). `bc2_w14955` (= NOR(`rst_lat`, `ck_out`)) sets
+  `eof_w16996`; `rst_a` or `eof_w17345` clears it. Where `eof_w16996` leaves is open (AMB-060).
+- **`eof_w16692` = NOR(`bc2_w14955`, `eof_w16889`), `eof_w16560` = NOT `eof_w16692`** (runs 64-65, firm): the
+  driver of run 62's wire to the bus field, so `eof_w16560` = `bc2_w14955` OR `eof_w16889`. The latch node's
+  "stub" is a poly column in a 26 px gap between two thin metals (new note in trap 38).
+- **`eof_w15955` = NOR(`ck_out`, `eof_w16432`)** at the head of the rail column (run 68, firm), with
+  `eof_w16432` from an undrawn bus metal y 18420-18440 by a 2,000 px thin metal x 10811, the row y 16432 across
+  the column, and the tracks x 10439 / x 10397 (runs 66-67).
+- **`eof_w16213`** (run 67): the pad (10440,16215), the north end of the thin metal x 10476-10492 (`regs`'
+  `lc2_w8450` track) and a poly toward `rst_lat`'s unit (AMB-058's "poly at y 16256"). A contact first drawn
+  at (10441,16260) was a metal corner lying on a poly column's foot (trap 13, review round 81).
+- The rail column's build is read: a gate row from the west, a diffusion strip x 10500-10529, a cap at the
+  rail's edge, the node east under the rail to a load on `bc2`'s VCC rail. Every gate row from y 15911 to
+  y 17040 is now read except `rst_lat`'s (y 16303).
+
+Applied: master list rows `eof` (runs 63-68; a new Next; released), `bc2`-`bc4` (the rail column's rows read,
+its build), `trunks` (continue) (`rst_a`'s row y 16950 is a gate of `eof_w16996`; the undrawn bus metal
+y 18420-18440 east of x 10806). **Re-read list**: R53 extended (the thin metal x 10476-10492's dark stretches
+over boxes, one of which may be two metals end to end; the tracks x 10397 at y 16486-16545 and y 16268-16298;
+x 10441 at y 15790-15822). **Guide**: trap 13 (a metal's corner over a poly column's foot read as a pad with a
+contact) and trap 38 (a 26 px gap between two thin metals can hold a poly column; no earlier block known to be
+affected). **Ambiguities**: AMB-060 new (the block's Ambiguity 219); AMB-058 updated (its "poly at y 16256" is
+`eof_w16213`'s row; the join to the box still open). Corrections sections in the notes of `trunks` and
+`regs`. No rename proposals in these handoffs. Floor plan: the runs' blocks lie inside the coarse
+bottom-centre block; nothing trimmed.
+
+**Not done, proposals left open** (tools): `tools/sameconn.py` reports `connections identical` when a `C`
+becomes `?C` (an item turned uncertain does not show as a difference). The earlier list's three (journal
+2026-11-23 02:37) stand.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 1,002 floor-plan
+blocks. Coverage: 73.0% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
+
+## 2026-11-24 14:50 UTC  Handoffs: `busl` runs 17-18
+
+Two handoff files, applied by the coordinator (on Opus 5.5; coordination, no tracing), both for
+waitingforvsync's claim, traced on Fable 5.2: `busl` run 17 (pieces `qc`, `qa`, `qb`; traced 2026-11-21
+02:25-03:02 +0100 by the loop's tracer, which the usage limit stopped; finished 2026-11-24 in richtw1's
+session: the reviewer's report taken from the transcript, the round recorded; merged ff08ad8) and `busl`
+run 18 (pieces `w6`, `ya`, `yb`; richtw1's session, 2026-11-24 14:06 +0100 on; merged 3dc87fc). Claim
+kept, continuing. Wiring only, no transistor, no uncertain item. Full extraction after them 2,515 nets
+(eight fewer than at the last handoffs: run 17 one more and one fewer, run 18 eight joins), 4,831
+transistors, 0 errors, 0 warnings; 972 of 1,430 equations firm; 109 nets joined only through uncertain
+items (1,213 items): all as before. Spot checks of the overlays (the drawn shapes lie on the features):
+piece `w6`'s six rows with `lc2_w9125`'s pad at x 6400-7100 (`cache/scratch/refresh/hR-20261124-busl18-w6.png`),
+and pieces `ya`, `yb`'s end pads and thin metals at x 6440-7520, y 6650-6810
+(`hR-20261124-busl18-yayb.png`).
+
+What they establish (from the tracers' notes; marks as there):
+
+- **`lc3_e9798` is `lc2_w9125`** (run 17, piece `qc`; firm for the wire): the stage-select gate's output
+  (between the ripple counter's fourth and fifth stages) runs from its end pad (6514,9535) by the track
+  x 6514 onto `lc3`'s metal y 9798, and so down the whole left bus field to the foot row y 14567. That it is
+  that gate's output rests on `lc2`'s Ambiguity 8, as before.
+- **Line Q is `lc3_e9756`** (piece `qa`; firm): one wire of about 3,500 px to the poly rows y 7474 / y 7300,
+  drawn to x 7600, no tap; no driver or load drawn yet. **`busl_y7432`** (piece `qb`; firm; new name): the
+  row y 7431, column x 7318, row y 7256 to x 7600; neither end identified.
+- **The six rows `cdp3_cw_c7` .. `cdp3_cw_c2` are `cdp3_cw_c7` .. `cdp3_cw_c2`**, the west outputs of row C
+  (run 18, piece `w6`; firm for the six joins): each poly row runs 1,150 px from x 6450 to x 7600 without
+  pad, contact or tee. So each bit of row C reaches the selector's upper pass transistor (gate `eof_ga`) in
+  one of the left array's rows s8-s13, as R13's bits do in s0-s7. Believed: R12's bits 0-5 (row C is R12
+  through AMB-040), so the fourteen rows take the display start address.
+- **`ck_a` is `ck_a`, `cnt_bus_b` is `cnt_bus_b`** (pieces `ya`, `yb`; firm for the joins): `tc2`'s two
+  polys end on pads (6491,6759), (6538,6717), whose thin metals run east and south onto `bw`'s metals. So
+  `tc1_o4280` = NOT `ck_a`, `tc1_o2950` = NOT `cnt_bus_b` (each inverter's own equation marked in `tc1`).
+  `cnt_bus_b` has no driver drawn. The two metals lie on `fld`'s rows without a contact (the block's
+  Ambiguity 23).
+
+Reviews: round 17 (full) and round 18 (full), fresh Fable 5.2 agents: no finding on the geometry; two and
+three remarks on comments and notes, all fixed; `tools/sameconn.py` says `connections identical`.
+`notes/operation.md`: the tracer's own change stands.
+
+Applied: master list rows `busl` (runs 17 and 18; Next: the metal y 6459 and `cdp2_w6845`'s row east of
+(7380,6802)), `lc1`-`lc3` (the six rows and `lc3_e9798` identified; for `lc1`, `busl_y7432` west of x 6450
+and the rows west of the pads (6146,6847), (6189,6716)), `cdp2` (continue) (the rows y 7256, y 7300 east
+of x 7600 and the undrawn wide metal x 7577-7617), `larr` (continue) (the track x 4736 / x 4780 still on
+`busl`'s list; drawn by `eof` as `eof_w15998`: check what is left), `tla` (continue) (the diagonal's 16 px),
+`bw` (continue), `tc2`, and the `rename` row (nine more proposals: `lc3_e9798`, the six `lc3_e#`,
+`ck_a`, `cnt_bus_b`). No Re-read items, no traps, no new AMB entries (the block's Ambiguities 22-23
+are local; `lc2`'s Ambiguity 8 now covers `lc3_e9798`'s net as well). Corrections sections in the notes
+of `lc3`, `cdp3`, `tc1`, `tc2`, `bw`, `eof` and `tla`. Floor plan: the new fragment lines lie in strips
+covered only by coarse blocks other pieces still need; nothing trimmed.
+
+**Tools**: `tools/costs.py` changed on main (58a7d3e, richtw1 with the user's go-ahead, 2026-11-24): a Bash
+command run as `HD_COORD=1 tools/ship.sh` names no package, so the coordinator's shipping of corrections
+sections (a9f6a7b, 2026-11-21 10:40) is no longer counted against `busl`, `bc1`, `bc3`, `bl0`, `tla` and
+`tc2` by the merge gate's check 8b. In `costs/richtw1.json` $10.93 of $1,902 moves from packages to
+coordination; other contributors' reports change the same way when they next run `tools/costs.py`. No tool
+proposals in these handoffs; the earlier list's (journal 2026-11-23 10:50) stand.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 1,010
+floor-plan blocks. Coverage: 73.0% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%. Not done here: the refresh (the renames above wait).
+
+## 2026-11-24 15:39 UTC  Handoff: `busl` run 19
+
+One handoff file, applied by the coordinator (on Opus 5.5; coordination, no tracing): `busl` run 19
+(pieces `yc`, `yd`, `ye`; waitingforvsync's claim, traced on Fable 5.2 in richtw1's session from
+2026-11-24 15:42 +0100; merged e4d484b; **claim released**). Wiring only, no transistor, no uncertain
+item; one correction to `trace/cdp2.txt` (c17ed61). Full extraction after it 2,514 nets (run 18: 2,515),
+4,831 transistors, 0 errors, 0 warnings; 972 of 1,430 equations firm; 109 nets joined only through
+uncertain items (1,213 items). Spot checks of the overlays: the knot at x 7700-8120, y 6760-6940 (the
+west row's turn south and the field on y 6845 at x 7835-7847; `cache/scratch/refresh/hR-20261124-busl19-knot.png`)
+and the box (11703,6556) (`hR-20261124-busl19-box.png`): the drawn shapes lie on the features.
+
+What it establishes (marks as in the tracer's notes):
+
+- **The metal y 6459 is a link of `rcs_thin_e`'s line** (piece `yc`; firm for the wire): from `ur`'s pad
+  (3968,6410) 7,700 px east, no tap, to a buried-contact box (11703,6556) on an undrawn diffusion band at
+  the foot of `amr`'s slices. Believed: `rcs_thin_e` (the select of `tla`'s selector) is driven there.
+- **`cdp2_w6845` is `cdp2_w6845`** (piece `yd`; firm for the join).
+- **`cnt_gab` comes from the west** (piece `ye`; firm for the wire): `cdp2`'s row from the pad (7335,6845)
+  goes round the pad (7987,6845) in a U and east through channel 2 to `wl`'s band H4. With piece `hb` the
+  net reaches the end pad (6146,6847); no driver drawn (AMB-017 updated: the source half found).
+- **`cdp2`'s row y 6845 was two nets**, drawn as one straight poly through a knot: corrected by the
+  tracer in `trace/cdp2.txt`.
+
+Review: round 19 (full), a fresh Fable 5.2 agent: no finding that changes a connection; two geometry
+remarks fixed (`tools/sameconn.py`: connections identical).
+
+Applied: master list rows `busl` (run 19; done as far as the package reaches, claim released), `cdp2`
+(continue) (the correction, the reviewer's thin metal x 8545-8558, channel 2's undrawn lines), `lc1`-`lc3`
+(the row west of (6146,6847) is `cnt_gab`'s source side, first), `wl` (band H4 is `cnt_gab`), `amr`
+(**the band at the foot of the slices, 11400-13050 x 6450-6600, added to its region**: it was in no Queue
+row; it is the lead to `rcs_thin_e`'s driver) and the `rename` row (`busl_y6805` -> `cdp2_w6845`).
+**Re-read items R54, R55 new** (`cdp2` piece `ga`'s other stretches; `cdp2`'s knot rule and whatever took
+the chain output to the pad (7335,6845)), and the lesson added to trap 33 of the guide ("a knot hides a
+break"). AMB-017 updated. Corrections sections in the notes of `cdp2`, `wl`, `ur`, `tl3`, `amr` and
+`slbus`; `ports.d/cdp2.txt`'s stale port at (7290,6848) renamed to `cnt_gab` (`tools/ports.py` now
+reports "same name"). Floor plan: nothing to trim. Coverage: 73.0% traced; in some package region 99.9%;
+untraced and in no Queue row 0.4%. `out/` is rebuilt by the refresh that follows.
+
+## 2026-11-24 15:58 UTC  Refresh
+
+The fourteenth refresh (coordinator, on Opus 5.5), after the handoffs since the last one (2026-11-21
+11:00): `eof` runs 36-68, `cdp4` runs 4-15, `regs` runs 5-6, `cdp3`, `busl` runs 17-19.
+
+Renames (all on firm joins; `tools/names.py compare` against the snapshot before: 25 nets renamed,
+"only names changed"; old names under the glossary's Former names):
+
+- busl's joins: busl_y6805 -> cdp2_w6845; tc1_p4308 -> ck_a; tc1_m6817 -> cnt_bus_b; lc3_e9577,
+  lc3_e9621, lc3_e9665, lc3_e9708, lc3_e9750, lc3_e9793 -> cdp3_cw_c7 .. cdp3_cw_c2.
+- the read path: regs_w17462 -> d7_out_n (its met port in `ports.d/regs.txt` dropped); regs_w17648 ->
+  cdp3_n_c0; dbus_do0_in -> cdp3_n_c7.
+- eof and tr1: eof_w17515 -> h_eq_r1; eof_w17166 -> bc2_w14955; tr1_w12265 -> rst_lat; tr1_w12005 ->
+  cdp4_w10808.
+- **the read bus by data bit** (`cdp4`'s proposal of 2026-11-21): cdp3_n_c0 .. cdp3_n_c7 -> rd_b7 .. rd_b0.
+  `d#_out_n` = NOT `rd_b#` is firm for all eight bits (the glossary still said columns 1-6 "end beside"
+  their output units; `cdp4` runs 8-11 had joined them). Pattern references `cdp3_n_c#` became
+  `rd_b(7-#)` in the notes.
+
+Catch-up for branches in flight, after merging main:
+`tools/rename.py busl_y6805 cdp2_w6845 tc1_p4308 ck_a tc1_m6817 cnt_bus_b lc3_e9577 cdp3_cw_c7 lc3_e9621 cdp3_cw_c6 lc3_e9665 cdp3_cw_c5 lc3_e9708 cdp3_cw_c4 lc3_e9750 cdp3_cw_c3 lc3_e9793 cdp3_cw_c2 regs_w17462 d7_out_n regs_w17648 rd_b7 dbus_do0_in rd_b0 eof_w17515 h_eq_r1 eof_w17166 bc2_w14955 tr1_w12265 rst_lat tr1_w12005 cdp4_w10808 cdp3_n_c0 rd_b7 cdp3_n_c1 rd_b6 cdp3_n_c2 rd_b5 cdp3_n_c3 rd_b4 cdp3_n_c4 rd_b3 cdp3_n_c5 rd_b2 cdp3_n_c6 rd_b1 cdp3_n_c7 rd_b0`   (pairs: old -> new)
+
+Left on purpose (the master list's `rename` row): `lc3_e9798` / `lc2_w9125` (the net is joined elsewhere
+through uncertain items, `lc2_w9185`); `cdp2_w6845s` (`cdp2`'s `?M`); a functional name for
+`bc2_w14955` = NOR(`rst_lat`, `ck_out`) (what its latch holds is open); cell pin names made from a
+template (`eof_mxn_s#`, `eof_mxs_s#`, `larr_h_s#`, `cdp4_n_s#`, `cdp4_a_s#`, `larr_cin_s10`,
+`cdp1_fx_b`, `cdp1_fy_b`, `ar#_q`, `*_tab`, `d#_in`); and what the twelfth and thirteenth refreshes left.
+A tool note: `tools/rename.py` skips a whole line that says "former name", so a glossary row that
+mentions one keeps the old names elsewhere in it; three rows were fixed by hand (`d#_out_n`, `rd_b0`,
+`regs_w#`).
+
+`notes/operation.md`: the tracers had kept it current through every package; changed here: the header
+(2026-11-24, 2,514 nets, 4,831 transistors), the firm count (972 of 1,430; was 917 of 1,370 on
+2026-11-21), the closing ranges (AMB-001 to AMB-060, R1-R55) and one sentence the renames had made
+circular. No equation changed status in the renames (`unsure.py --equations` before and after are
+identical but for names).
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 1,013
+floor-plan blocks. Coverage: 73.0% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%. Cost report updated.
+
+## 2026-11-24 16:28 UTC  Queue reordered: the frame's last line first
+
+The user (2026-11-24, during `eof` run 69): "can you bump to the front of the queue anything which might
+touch this logic", the logic being what the chip decides at the start of the frame's last scan line (R4's
+row, before vertical adjust). Nothing in the handoffs of `busl` runs 17-19 or the fourteenth refresh bears
+on it; what is known is unchanged (`notes/operation.md`: R4's match has two loads in `bd1`'s gate column,
+an inverter and a latch gated by `rst_lat` that as read is open only during reset; the latch's output is
+the step term `rcs_e3`; the step request has it as NOT `rcs_e4` AND NOT (`rcs_e3` AND `rcs_a2`), with
+`rcs_a2` = NOR(`rst_ck`, `tl3_w3803`)).
+
+Done by the coordinator's session (on Fable 5.2, the session that holds `eof`'s claim): in the Queue of
+`notes/work-packages.md`, behind `eof`, now stand `bd1`-`bd3`, `tla` (continue), `tl1`-`tl6`, `mra`
+(continue), `ur` (continue), `lc1`-`lc3`, `amr` and `rdp1` (continue), each with its reason as the first
+sentence of its row; a paragraph above the table says what the order is. The other rows keep their order.
+No region changed (`tools/coverage.py` as before). The choice is a judgment from the rows' open items and
+the extraction's loads of `rc_eq_r4`, `bd1_an`, `rcs_e3`, `rcs_a2` and `cnt_gab`, not from new tracing.
+
+## 2026-11-24 18:50 UTC  Handoffs: `eof` run 69
+
+One handoff file, applied by the coordinator (on Opus 5.5; coordination, no tracing): `eof` run 69 (pieces
+`u16303`, `ld566`, `u15826`; waitingforvsync's claim, traced on Fable 5.2 in richtw1's session from
+2026-11-24 17:08 +0100; merged b65ea16; **claim released**). Three inverter units of one build in the column
+of `bc2`'s VSS rail x 10548-10598: 5 transistors, no new net, no uncertain item. Full extraction after it
+2,514 nets (as before), 4,836 transistors (run 68: 4,831), 0 errors, 0 warnings; 975 of 1,433 equations firm
+(was 972 of 1,430: the three new inverters, each firm); 109 nets joined only through uncertain items (1,213
+items): as before. Spot checks of the overlays: piece `u16303` (`rst_lat`'s row, the band, the tie box and
+the dark box; `cache/scratch/refresh/hR-20261124-eof69-u16303.png`) and piece `ld566`
+(`hR-20261124-eof69-ld566.png`): the drawn shapes lie on the features.
+
+What it establishes (marks as in the tracer's notes):
+
+- **`eof_w16213` = NOT `rst_lat`** (piece `u16303`; firm): `rst_lat`'s north gate row gates a pull-down
+  under the rail; the node leaves west by the cell's buried contact onto run 67's row, so the pad
+  (10440,16215) and the north end of the thin metal x 10476-10492 are this inverter's output. A strong load.
+- **`h_eq_r1_n` = NOT `h_eq_r1`** (piece `ld566`; firm): the net that had one pull-down and no load is R1's
+  match inverted. So `eof_w15523` = `h_eq_r1` AND NOT `rcs_e4` AND NOT `eof_w16040` (marked, as that NOR is)
+  and `eof_w17345` = `h_eq_r1` AND NOT `eof_w16040`. Believed, not traced: the line into the fourteen rows
+  of the memory address counter acts at the end of the displayed part of a scan line.
+- **`cdp4_w10808` = NOT `eof_w15955`** (piece `u15826`; firm): `cdp4`'s "undrawn unit of `bc2`". So
+  `tr1_w11960` = NOT `cdp4_w10808` = NOR(`ck_out`, `eof_w16432`) in the top-right gate row.
+- AMB-058 settled as far as the photos go; what is left is the dark box in each unit's node band (AMB-061).
+  The thin metal x 10476-10492 is `eof_w16213` at its north end and `regs`' `lc2_w8450` (the reset in the
+  other sense) at its south end: not one net (AMB-060 updated).
+
+Review: round 83 (full), a fresh Fable 5.2 agent: no finding that changes a connection; three geometry
+remarks fixed (connections identical). `notes/operation.md`: changed by the tracer on the branch (the NOR
+`eof_w15523`'s third input is R1's match inverted); it stands.
+
+Applied: master list rows `eof` (run 69; claim released; Next: the thin metal x 10476-10492 stretch by
+stretch, the column's units south of y 17560, the bus metal y 18420-18440 east of x 10850, `bc2_w15388`'s row
+east of x 10335, `eof_w16040`'s driver), `cdp4` (continue) (the unit is drawn; the comment in
+`trace/cdp4.txt` at `P 10808,15737` waits for `cdp4`'s next run), `bc2`-`bc4`, `tr1`/`tr2`, `bl0`, `regs`
+and the `rename` row (`bl0_w15566` -> proposed `h_eq_r1_n`, firm). **AMB-061 new** (the block's Ambiguity
+220); AMB-058 and AMB-060 updated; the block's Ambiguity 221 is local. No Re-read items, no traps.
+Corrections sections in the notes of `cdp4`, `bl0`, `bc1`, `tr1` and `regs`. Floor plan: the three new
+fragment lines lie inside `bc2` / `bc4`'s coarse blocks, which other pieces still need; nothing trimmed. Ports:
+`cdp4_w10808` agrees with `cdp4`'s port (same name, same layer). No tool proposals.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 1,016
+floor-plan blocks. Coverage: 73.0% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%. Not done here: the refresh (the rename above waits; `notes/operation.md`'s closing range still says
+AMB-001 to AMB-060).
+
+## 2026-11-24 22:50 UTC  Handoffs: `eof` run 70
+
+One handoff file, applied by the coordinator (on Opus 5.5; coordination, no tracing): `eof` run 70 (pieces
+`u17690`, `t10484`; waitingforvsync's claim, traced on Fable 5.2 in richtw1's session from 2026-11-24 20:11
++0100; merged 4e2871a; **claim released**). Full extraction after it 2,515 nets (run 69: 2,514), 4,838
+transistors (4,836), 0 errors, 0 warnings; 976 of 1,434 equations firm (was 975 of 1,433: the new inverter,
+firm); 110 nets joined only through uncertain items (was 109), 1,216 uncertain items (1,213: four `?M` added,
+one `?C` removed). Spot checks of the overlays: piece `u17690` (`cache/scratch/refresh/hR-20261124-eof70-u17690.png`)
+and the undrawn 38 px of piece `t10484` over the latch node's box (`hR-20261124-eof70-t10484.png`): the drawn
+shapes lie on the features, and the gap is where the notes put it.
+
+What it establishes (marks as in the tracer's notes):
+
+- **`eof_w17734` = NOT `rst_lat`** (piece `u17690`; firm, no uncertain item): the unit of `rst_lat`'s branch row
+  y 17682-17698 in `bc2`'s rail column (x 10420-10775, y 17630-17765, in `bc4`), a second inverter of the
+  reset copy with a long weak load (24/94); its output leaves by a pad (10439,17734) and a thin metal x 10441
+  south, drawn to y 18010 (seen beyond, not drawn: a pad (10482,18295) and a poly row east). `rst_lat`'s poly
+  has three gates in this column, all drawn now.
+- **The thin metal x 10477-10491** (piece `t10484`; wiring, four `?M`): on the photos one metal from the pad
+  (10440,16215) (`eof_w16213`) to `regs`' end pad (10484,17994) (`lc2_w8450`), with no contact between and no
+  break longer than 13 px outside five units' exit boxes. Its two ends carry opposite senses of the reset, so
+  one reading on the paths behind the two names is wrong, or the metal parts inside a box. The 38 px over the
+  latch node's box (y 16977-17015) are not drawn, so both nets and all equations stand; run 63's `?C` there is
+  read as no contact and removed.
+
+Review: round 84 (full), a fresh Fable 5.2 agent: no finding that changes a connection; three geometry
+remarks fixed (`tools/sameconn.py`: connections identical). `notes/operation.md`: changed by the tracer on the
+branch (the `ck_out` row: the thin metal followed, the second inverter `eof_w17734`); it stands.
+
+Applied: master list rows `eof` (run 70; claim released; Next: the two names (R56), `eof_w17734`'s wire south
+of (10441,18010), the column south of y 17765, the bus metal y 18420-18440 east of x 10850, `bc2_w15388`'s row
+east of x 10335, `eof_w16040`'s driver), `regs` (its port and Not done item on the track x 10485 are met),
+`bc2`-`bc4` (the unit is drawn), `busb` (lead: `eof_w17734`'s metal into the bus field) and the `rename` row
+(`eof_w17734` could take a name once its loads are read). **Re-read item R56** (a reading, not a method): the
+line `lc2_w8450` from `lc2` to the pad (10484,17994), and `rst_lat`'s poly at `cdp4`'s port (10789,17700).
+**AMB-060 restated** (one metal or two; the first question, the node's contact, kept as history). The block's
+Ambiguity 223 is local. No traps. Corrections sections in the notes of `regs` and `bc2`. Floor plan: the two
+new fragment lines lie inside `bc4`'s coarse block, which other pieces still need; nothing trimmed. Ports:
+`lc2_w8450` meets `regs`' port (10485,17760), same name, same layer; `eof_w17734` (10441,18010) and the two
+ports facing each other across the undrawn 38 px have no partner. No tool proposals.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 1,018
+floor-plan blocks. Coverage: 73.0% traced; in some package region 99.9%; untraced and in no Queue row
+0.4%. Not done here: the refresh (`notes/operation.md`'s closing ranges still say AMB-001 to AMB-060 and
+R1-R55; the renames proposed in the `rename` row wait).
+
+## 2026-11-25 13:11 UTC  Handoffs: `eof` run 71
+
+One handoff file, applied by the coordinator (on Opus 5.5; coordination, no tracing): `eof` run 71 (piece
+`o734`; waitingforvsync's claim, traced on Fable 5.2 in richtw1's session 2026-11-25 13:19 to 13:56 +0100;
+merged 7598505; **claim released**). Wiring only: 0 transistors, no uncertain item. Full extraction after it
+2,515 nets, 4,838 transistors, 0 errors, 0 warnings; 976 of 1,434 equations firm; 110 nets joined only through
+uncertain items, 1,216 uncertain items (all as after run 70). Spot checks of the overlays: piece `o734`
+(`cache/scratch/refresh/hR-20261125-eof71-o734.png`) and the cut link at y 18470 in the clean shot
+(`hR-20261125-eof71-link.png`): the drawn shapes lie on the features, and the gap x 10866-10880 is open field.
+
+What it establishes (marks as in the tracer's notes):
+
+- **`eof_w17734`'s wire to its end** (firm): from run 70's port (10441,18010) the thin metal x 10441 runs south to
+  a pad (10482,18297), a poly row y 18288-18306 east under both rails of `bc2`'s column (no gate) to x 10907,
+  south as a poly column x 10889-10907 under bus line L4 and the bus metal y 18420-18438 into the pad
+  (10895,18468): the west end of bus line L6's left piece, the input of g5 in the clock block.
+- **`trunks`' poly link from `rst_ck`'s stem to that pad does not exist** (corrected in b345eda: 10 px of open
+  field). So **`ck_b` = NOR(`ck_clkn`, `ck_g4`, `eof_w17734`)** (firm), not `rst_ck`.
+- As named (`eof_w17734` = NOT `rst_lat`) the clock would be stopped whenever the chip is not in reset: a second
+  wire out of `bc2`'s rail column that contradicts the name `rst_lat` on its gate poly. Believed, not traced:
+  that poly is low during reset, and `eof_w17734` is a reset copy (the clock notes' old belief about g5).
+
+Review: round 85 (full), a fresh Fable 5.2 agent: no findings; no trace line changed after the round.
+
+Applied: master list rows `eof` (run 71; claim released; Next: the sense of the column's gate poly (R56), the
+column south of y 17765, the bus metal y 18420-18440 east of x 10850, `bc2_w15388`'s row east of x 10335,
+`eof_w16040`'s driver, `rst_ck`'s first pads west of (10810,18470)), `trunks` (continue), `clock`
+(continue), `bc2`-`bc4`, `busb` (the run 70 lead is drawn) and the `rename` row (`eof_w17734` gets a name
+once its sense is settled). **Re-read items extended**: R56 (start with `trunks`' 1x line from `bd1`'s
+inverter 2 to the contact (11288,17517) and `cdp4`'s T2 pad row; the equations with `rst_lat` in the column
+carry the doubt) and R4 (one more 1x link was wrong; `trunks`' other 1x links on that line and the clock
+notes' route of `rst_ck` to be read at 4x; trap 33 already covers it, no new trap). **AMB-060 updated**;
+**AMB-062 new** (what holds `ck_b` low; working assumption a reset copy, not traced). The block's Ambiguities
+224, 225, 227 are local. Corrections sections in the notes of `clock` (g5's input; the start of `rst_ck`'s
+route), `trunks` (route items 4 and 5 of S, the L6 left piece's row) and `cdp4` (track c7's corner: no
+contact). Floor plan: the new fragment line lies inside `bc4`'s and the bottom bus field's coarse blocks,
+which other pieces still need; nothing trimmed. Ports: `eof_w17734`'s port moved to the end pad; no partner
+(`trunks` and `clock` have no ports file). No tool proposals.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 1,019
+floor-plan blocks. Coverage: 73.0% traced; in some package region 99.9%; untraced and in no Queue row 0.4%.
+The refresh follows.
+
+## 2026-11-25 13:20 UTC  Refresh
+
+The fifteenth refresh (coordinator, on Opus 5.5), after `eof` runs 69-71 (the last refresh was 2026-11-24
+15:58 UTC). No claims active.
+
+Renames (one batch; `tools/names.py compare`: 1 net renamed, only names changed):
+
+- R1's match inverted: `bl0_w15566` -> `h_eq_r1_n` (`eof` run 69, piece `ld566`: `h_eq_r1_n` = NOT `h_eq_r1`,
+  firm). Glossary: a row of its own (the text moved out of the `bl0_w#` row). Catch-up for branches in flight:
+  `tools/rename.py bl0_w15566 h_eq_r1_n` (`bl0_w15566` -> `h_eq_r1_n`).
+
+Left unrenamed on purpose: `eof_w16213` and `eof_w17734` (each NOT `rst_lat`, firm as drawn; `eof_w17734` is
+the input of the clock gate g5): the sense of the poly named `rst_lat` in `bc2`'s rail column is in doubt
+(R56, AMB-060, AMB-062), so they are named once it is settled; `cdp4_w10808` (NOT `eof_w15955`, whose input is
+a placeholder). `names.py candidates` section 1 lists only cell pin names made from a template (`ar#_q`,
+`d#_in`, `*_tab`, `cdp4_n_s#`), left as before; no placeholder aliases were added since the last refresh.
+
+`notes/operation.md`: header (2026-11-25; 2,515 nets, 4,838 transistors), 976 of 1,434 equations firm (was 972
+of 1,430: the three inverters of run 69 and the one of run 70, each firm), closing ranges AMB-001 to AMB-062 and
+R1-R56, the Clocks row on `ck_b` cites AMB-062. The tracer had already written run 71 into the Clocks and
+reset rows (g5's input is `eof_w17734`, not `rst_ck`); no equation changed status between the two snapshots
+other than by the rename.
+
+`out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary, 1 open join (`ck_a_u`), 1,019 floor-plan
+blocks. The floor-plan label of `eof`'s new route said "reset copy to the clock gate", which is only the believed
+reading: changed to "wire to clock gate g5 (AMB-062)". Coverage: 73.0% traced; in some package region 99.9%;
+untraced and in no Queue row 0.4%. Cost report updated (`costs/richtw1.json`).

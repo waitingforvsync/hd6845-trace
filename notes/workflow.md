@@ -64,6 +64,11 @@ working tree. A remote collaborator with a separate clone needs `cache/` built o
 (`tools/prepare.py`, then `tools/align.py`) (they write only under `cache/`: `align.py` keeps its fit in
 `cache/align.json`; the tracked `trace/align.json` is the coordinator's record, changed only
 with `--record`, and the merge gate refuses a branch that changes it) and the Python packages listed in `CLAUDE.md`.
+On Windows (Git for Windows; `regs` and `eof`, 2026-11-21): turn on Developer Mode and set
+`MSYS=winsymlinks:nativestrict` before `tools/newwork.sh`, or `ln -s` silently copies `cache/` (7 GB) and
+`.venv` and the gate dies at `os.symlink`; `tools/ship.sh` needs `flock`, which Git for Windows lacks (one
+shipper per clone: a no-op `flock` on PATH works); a script that edits notes under `core.autocrlf` must not
+leave a lone carriage return (git then takes the file for binary).
 
 What you may change on your branch:
 
@@ -200,9 +205,29 @@ With write access, the package goes into main directly, but only through the gat
 
 ```
 git fetch origin && git merge origin/main      # resolve: keep both sides' rows in signals.md / operation.md
-.venv/bin/python tools/mergecheck.py PREFIX    # until it prints PASS
-git push origin HEAD:main                      # rejected? main moved: merge again, gate again
+.venv/bin/python tools/mergecheck.py PREFIX    # on its own, not piped; until its last line is PASS
+git push origin HEAD:main                      # a separate command, after you have read PASS
+                                               # rejected? main moved: merge again, gate again
 ```
+
+**The gate's result decides the push; the command line must not be able to decide otherwise.**
+`tools/mergecheck.py` exits non-zero when it fails, but a pipe throws that away: in
+`mergecheck.py PREFIX | tail -3 && git push origin HEAD:main` the `&&` tests `tail`, which always
+succeeds, so the push goes out with the gate printing FAIL. That happened on 2026-11-20: a commit
+with an extraction warning reached main and was there until the next commit fixed it. So:
+
+- Run the gate as a command of its own, unpiped, or with its output sent to a file and then read
+  (`.venv/bin/python tools/mergecheck.py PREFIX > gate.txt 2>&1; tail -1 gate.txt; grep -c '^FAIL' gate.txt`).
+  It takes a few minutes: give it a long timeout. A gate that outlives the shell's time limit and
+  finishes in the background has not passed until you have read its `PASS`.
+- Push in a separate command, and only after the last line read `PASS` and no line began `FAIL`.
+- The same holds for every step that cannot be taken back: the push to main, `tools/claim.py done`,
+  removing the worktree. Never chain one of them with `&&` or `;` after a piped command, or after
+  any step whose outcome you have not read (a rejected push followed in the same line by
+  `git worktree remove` removed a working tree, also on 2026-11-20).
+- A failing gate is never pushed "to be tidied afterwards". If a failing commit does reach main,
+  fix it at once with a further commit (no rewrite, no force), pass the gate, push, and say what
+  happened in the handoff.
 
 `tools/mergecheck.py` checks that the branch contains main, that only your own files
 (`ports.d/PREFIX.txt` among them), the glossary, `operation.md` and (named) fixes to other blocks' traces changed, that

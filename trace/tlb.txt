@@ -1,0 +1,39 @@
+@block tlb
+# The wide metal band north of the top-left strips (x 2100-6400, y 2180-2500): the VSS plane and what
+# passes under it. No transistor. Notes: notes/blocks/tlb.md.
+
+# ---- The plane (vss). North edge y 2193, west edge x 2593 (eof's arm of the NOR r5nor joins it there at
+# y 2347-2404). Lower edge: y 2506 from x 2593 to 3388 (tl1's R1 and tl2's strip hang from it), y 2462 from
+# x 3388 to 4914 but for a tab south at x 3645-3770 (onto tl3's west rail), y 2505 from x 4914 east (tl4's
+# RA at x 4940-4995, tl5's RC at x 5081-5127, tc1's rail x 6858-6906 hang from it). It goes on east of
+# x 7240 (not followed). Edges from the metal test in both metal shots at 28 cuts (survey.md).
+M 2593,2193:7240,2462
+M 2593,2455:3388,2506
+M 3645,2455:3770,2500                # the tab; it runs on south to tl3's rail (M 3670,2622 ...)
+M 4914,2455:7240,2505
+N M 3000,2300 vss
+
+# ---- the wire `tl1` called w3333 is tl4_w4068. tl2's poly (3450-3470, 2500) runs north under the plane (tlb_scan.py: x 3453-3466
+# at seven cuts) and under mal's metal y 2142 (no pad) to a pad with a contact (3458,2096); a metal y 2091-2105
+# east to a pad with a contact (4540,2098) (follow.py --gap 16: 3452 to 4540, no tap; the candidate at x 4370
+# is a speck in the clean shot only); the poly from that pad south under mal's metal and the plane
+# (x 4536-4549) is tl4's column (4534-4550, 2500). Views a1.png, a2.png, a3.png.
+P 3440,2076:3478,2112                # pad
+C 3458,2096
+P 3460,2100 y2506 w=18
+M 3447,2098 x4551 w=14
+P 4522,2080:4560,2115                # pad
+C 4540,2098
+P 4542,2105 y2506 w=18
+N P 3460,2300 tl4_w4068
+
+# ---- Three polys under the plane's south-east part, nested: each comes north from tl6's strip, turns east,
+# runs 1,100-1,300 px and turns south onto tc1's bus fan. Rows from tlb_scan.py v at ten x (y 2394-2406,
+# 2437-2450, 2480-2495, straight); corners in b1.png (west) and b3.png (east), both stripped shots.
+P 5887,2506 y2400 x7209 y2506 w=18   # c4l_l3: tl6's (5877-5897, 2500) to c4l_l3's (7201-7218, 2500)
+N P 6500,2400 c4l_l3
+P 5928,2506 y2444 x7168 y2506 w=18   # tl6's tl4_w5068 (5918-5938, 2500) to tl4_w5068's (7160-7176, 2500)
+N P 6500,2444 tl4_w5068
+P 6062,2506 y2488 x7125 y2506 w=18   # tl6_p6101 (6052-6072, 2500) to tc1_bus2814's (7117-7133, 2500)
+N P 6500,2488 tl6_p6101
+@alias tl6_p6101 tc1_bus2814

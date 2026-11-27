@@ -65,7 +65,9 @@ def transcript_dirs():
     base = os.path.expanduser('~/.claude/projects')
     common = git('rev-parse', '--path-format=absolute', '--git-common-dir').strip()
     main_root = os.path.dirname(common) if common.endswith('.git') else ROOT
-    key = main_root.replace('/', '-').replace('.', '-')      # also matches its worktrees' folders
+    # Claude Code names the folder from the path with every other character made '-' (on Windows the ':' and
+    # '\' too: C:\Dev\x -> C--Dev-x; proposed by `regs`' Windows run, tools/regs_costs.py).
+    key = re.sub(r'[^A-Za-z0-9_-]', '-', os.path.normpath(main_root))      # also matches its worktrees' folders
     return [d for d in glob.glob(os.path.join(base, key + '*')) if os.path.isdir(d)]
 
 
@@ -134,6 +136,65 @@ def traces(path):
     return False
 
 
+# What a tracing call works on. A main session is credited with a package's commit only for the
+# stretch in which it was itself working on THAT package: it ran the tracing wrapper for it
+# (tools/t.sh PACKAGE tool.py ...), shipped its files (tools/ship.sh "subject" trace/PACKAGE.txt ...;
+# not the coordinator's HD_COORD=1 shipping, below) or edited them. A command that merely mentions the scripts (cat tools/t.sh, a heredoc that edits
+# this file) names no package and counts for none, so a second session under the same git name that
+# is doing something else does not land on the package's gate (lc2, 2026-11-18: a second session's
+# coordination on another model was counted against a package traced on Fable, twice).
+T_RUN_RE = re.compile(r'tools/t\.sh\s+([a-z][a-z0-9_]*)\s+\S+\.py')
+SHIP_RUN_RE = re.compile(r'tools/ship\.sh\s+["\']')
+# The coordinator's shipping (HD_COORD=1 tools/ship.sh ..., on main: handoffs applied, a refresh's
+# renames) names other packages' files without tracing them: a Corrections section in a block's
+# notes, a renamed net, a floor-plan line. It is not a tracing call for those packages. A session
+# that does trace a package still counts for it by its tools/t.sh runs and its edits. (busl,
+# 2026-11-24: the one Opus response that shipped "Handoffs applied" with six blocks' notes among
+# its files was counted against each of the six and failed the gate's model check for packages
+# traced on Fable only.)
+COORD_SHIP_RE = re.compile(r'\bHD_COORD=\S+\s+(?:\S*/)?tools/ship\.sh\b')
+PKG_FILE_RE = re.compile(r'(?:^|[\s/"\'=])(?:trace/([a-z][a-z0-9_]*)\.txt|notes/blocks/([a-z][a-z0-9_]*)\.md|'
+                         r'floorplan\.d/([a-z][a-z0-9_]*)\.txt|ports\.d/([a-z][a-z0-9_]*)\.txt)')
+
+
+def call_packages(name, inp):
+    """The packages one tool call works on (empty: not a tracing call)."""
+    if name == 'Bash':
+        cmd = str(inp.get('command', ''))
+        pk = set(T_RUN_RE.findall(cmd))
+        if SHIP_RUN_RE.search(cmd) and not COORD_SHIP_RE.search(cmd):
+            pk.update(g for m in PKG_FILE_RE.finditer(cmd) for g in m.groups() if g)
+        return pk
+    if name in ('Edit', 'Write'):
+        return {g for m in PKG_FILE_RE.finditer(str(inp.get('file_path', ''))) for g in m.groups() if g}
+    return set()
+
+
+def trace_times(path):
+    """This transcript's own tracing tool calls, as (time, packages) in time order. Used for a main
+    session, which can trace one package in one hour and do something else, such as a dashboard fix
+    or another package, in the next: a response with no tracing call FOR THAT PACKAGE between it and
+    the commit it would be attributed to is not that package's work."""
+    out = []
+    with open(path, errors='replace') as f:
+        for line in f:
+            if '"tool_use"' not in line:
+                continue
+            try:
+                e = json.loads(line)
+                c = (e.get('message') or {}).get('content')
+            except ValueError:
+                continue
+            for x in c if isinstance(c, list) else []:
+                if not isinstance(x, dict) or x.get('type') != 'tool_use':
+                    continue
+                pk = call_packages(x.get('name'), x.get('input') or {})
+                if pk and e.get('timestamp'):
+                    out.append((ts(e['timestamp']), frozenset(pk)))
+    out.sort(key=lambda r: r[0])
+    return out
+
+
 def is_side(path):
     """A subagent that is neither a reviewer nor doing tracing: a side task (a tool or CI fix, an
     investigation) that happened to run between two commits of a package. Its responses count
@@ -152,6 +213,7 @@ def responses():
         for path in glob.glob(os.path.join(d, '**', '*.jsonl'), recursive=True):
             review = is_review(path)
             side = is_side(path)
+            tt = None if os.sep + 'subagents' + os.sep in path else trace_times(path)
             with open(path, errors='replace') as f:
                 for line in f:
                     if '"usage"' not in line:
@@ -167,7 +229,7 @@ def responses():
                     if key in seen:
                         continue
                     seen.add(key)
-                    out.append((ts(e['timestamp']), e.get('sessionId', path), m.get('model', '?'), m['usage'], review, side))
+                    out.append((ts(e['timestamp']), e.get('sessionId', path), m.get('model', '?'), m['usage'], review, side, tt))
     out.sort(key=lambda r: r[0])
     return out
 
@@ -220,7 +282,7 @@ def main():
     tot = collections.Counter()
     total_cost, unknown = 0.0, set()
     rs = responses()
-    for t, sess, model, u, review, side in rs:
+    for t, sess, model, u, review, side, tt in rs:
         tok, cost, known = price(model, u)
         if not known:
             unknown.add(model)
@@ -235,6 +297,14 @@ def main():
         pk = []
         if not side and i < len(commits) and (commits[i][0] - t).total_seconds() <= 6 * 3600:
             pk = sorted(commits[i][1])
+            if tt is not None and not review:
+                # the packages this session itself worked on between this response and that commit
+                j = bisect.bisect_left(tt, (t, frozenset()))
+                mine = set()
+                while j < len(tt) and tt[j][0] <= commits[i][0]:
+                    mine |= tt[j][1]
+                    j += 1
+                pk = [p for p in pk if p in mine]
         for p in pk or ['(coordination)']:
             by_pkg[p]['cost'] += cost / max(1, len(pk))
             if review:

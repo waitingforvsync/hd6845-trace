@@ -1,4 +1,4 @@
-# bust: the bus between the central datapath and the right datapath (queue: busT), y 4550-5200,
+# bust: the bus between the central datapath and the right datapath (queue: bustop), y 4550-5200,
 # x 10845-16930. notes/blocks/bust.md. Wiring only.
 # West of x 10845 the lines are cdp1's big channel (trace/cdp1.txt), named there. Each runs
 # east as poly under the bus field and the wide supply metal x 11280-11600, drops about 65 px
@@ -174,7 +174,7 @@ M 16926,5625 y6744 x16839 y12370 w=12
 #   pad (7810,4547) -> c4l1 (amr c1)
 #   pad (7848,4592) -> cdp1_l4632 (amr c2)
 #   pad (7830,4635) -> cdp1_l4676 (amr c3)
-#   pad (7855,4676) -> turns south near x 8190 (r9m's r9m_l1w, not into cdp1)
+#   pad (7855,4676) -> turns south near x 8190 (r9m's sl_eq_r5_n, not into cdp1)
 P 7870,4500 x8337 y4544 x8345 w=12
 P 7805,4547 x8297 y4588 x8345 w=12
 P 7793,4530:7827,4564

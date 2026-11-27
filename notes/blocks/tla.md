@@ -31,8 +31,8 @@ rcs_bc3460 = NOR(e3, e4)                 a second copy of in3's function        
 rcs_cond_n = NOR(in2, in3)               "m2": the step condition inverted              (3046,4765)
 rcs_cond   = NOT rcs_cond_n              inverter on the column above; on bus piece A3   (3046,4636)
 rcs_cond_lat <- rcs_cond while clk_tl  pass transistor latch (AMB-009)                (3046,4546)
-rcs_u3288  = NOR(rcs_g3245, rcs_bd3330)                                                (3046,3288)
-rcs_n4200  = NOT(rcs_cond AND clk_tl OR rcs_g4240)   AND-OR-INVERT under the rail (3008,4200)
+rcs_u3288  = NOR(tl5_w2722, rcs_bd3330)                                                (3046,3288)
+rcs_n4200  = NOT(rcs_cond AND clk_tl OR rcs_x1)   AND-OR-INVERT under the rail (3008,4200)
 in1        = NOR(rcs_mu, rcs_mv)         middle cluster                                (4081,4072)
 rcs_mu     = NOT ra_eq_r9              middle cluster, inverter                      (4050,3374)
 rcs_mn3852 = NOR(?, in1)                 middle cluster; second gate not read
@@ -67,8 +67,8 @@ rcs_bc3460 = NOR(e3, e4)          unit at y 3892: a second copy of in3's functio
                                   goes up bus line C's upper piece to the unit at y 3425
 rcs_u3425  = NOT rcs_bc3460       = e3 OR e4. An inverter: one pull-down, nothing above the node.
                                   Its load and its destination are in the dense part west of the rail
-rcs_u3288  = NOR(rcs_g3245, rcs_bd3330)   unit at y 3288. Output up bus line C's top piece and west
-                                  along y 2728 to about x 2822 (not looked at). rcs_g3245 comes from
+rcs_u3288  = NOR(tl5_w2722, rcs_bd3330)   unit at y 3288. Output up bus line C's top piece and west
+                                  along y 2728 to about x 2822 (not looked at). tl5_w2722 comes from
                                   the east; rcs_bd3330 is a piece of bus line D (y 3330-4380)
 ```
 
@@ -97,7 +97,7 @@ y 3805: towards the **right cluster** (x 4650-5050).
 ```
 rcs_cond     = NOT rcs_cond_n           = NOT e4 AND NOT (e3 AND a2): the bracket of the step formula
 rcs_cond_lat <- rcs_cond while clk_tl is high      pass transistor: a dynamic latch
-rcs_n4200    = NOT( rcs_cond AND clk_tl  OR  rcs_g4240 )
+rcs_n4200    = NOT( rcs_cond AND clk_tl  OR  rcs_x1 )
 ```
 
 `clk_tl` is **the clock**: NOT `ck_out`, i.e. CLK polarity (identified 2026-11-16 by
@@ -491,3 +491,93 @@ Round 3: no findings.
 follower stop: `tl1` found no stretch of it fully dark for more than 20 px from y 3030 to y 5952.
 `rcs_e4`'s driver is the wide NOR in `tl1` (`notes/blocks/tl1.md`). Two VCC boxes here need
 correcting (master list, `tla` row; R29).
+
+## Corrections from `tl1`-`tl4` (coordinator, from the handoffs of 2026-11-17/18)
+
+Each is in the named block's notes in full; the trace fixes are on main.
+- `rcs_c1`'s poly is drawn (by `tl1`). `ck_out`'s row y 5849 ends at R1's east edge (x ~2658), not on
+  the pad (2745,5842), which is the top of thin metal x 2742 (fixed, ee9c0d0).
+- The middle cluster's east VSS rail runs up to y 2595 and joins the west rail there (`tl3` draws
+  y 2622-3060).
+- The pass transistor of `rcs_cond_lat` is gated by `tl3_w3982`, not `clk_tl` (fixed, 1915f94,
+  fa2a849; AMB-009). So "`rcs_cond_lat` <- `rcs_cond` while `clk_tl`" and "the step condition is
+  sampled while CLK is high" are not supported. `clk_tl`'s gate contacts: (3150,3812) and
+  (3150,4418) are pads with rows west into what `tl2` traced; (3152,4548) gates nothing.
+- `x1`'s row ends at x 3470 on the pad (3454,3504) of the bus metal x 3456 (which also carries
+  `rcs_x1`); the poly that leaves east along y 3752-3770 (`a2`) is the
+  output of `tl3`'s NOR 1.
+- Bus pieces: D upper and F are drawn by `tl2`, as is D middle's bottom contact (3237,4376).
+- `rcs_bc3460` = NOR(`rcs_e3`, `rcs_e4`, `tl5_w4937`, `clk_tl`): two inputs more than this file says
+  (so `rcs_u3425` is not simply `rcs_e3` OR `rcs_e4`); the step formula stands. `rcs_bd3330` has its
+  driver (`tl2`'s piece 2, AMB-029). `rcs_n4200` has a third input, `rcs_bd3330` (marked), on the west
+  part of g3, which is two polys (fixed, 0239da7).
+- `tla_w3376`'s metal does not end in the small cluster: it passes over it and leaves the strip at
+  y 6350. Thin E south of y 5400 is drawn by `tl2` (to a pad (2913,6327), row east along y 6316-6337).
+- `tla_w3417`'s poly along y 4461 ends on gate 1 of `tl4_w4545` (`tl4`).
+- The right cluster (x 4650-5050) is the same column build as the first cluster's west column,
+  2125 px east and 434 px north; there is no thin metal at the place of thin metal W (`tl4`).
+- The buried-contact box at (3045-3070, 3415-3440): in `tl3`'s mirror of that unit it carries the poly
+  to a metal pad; part of the unit's pattern, used or not per copy (AMB-030).
+- Re-read items R29, R30, R32, R33 apply here.
+
+## Corrections from `tl2`-`tl4` (coordinator, from the handoffs of 2026-11-18, second batch)
+
+- **`rcs_cond` and `rcs_cond_lat`** (`tl2` run 4, Tom Seddon; AMB-009 resolved the other way): wherever
+  this file gives `rcs_cond` = NOT `rcs_cond_n` and `rcs_cond_lat` <- `rcs_cond` through a pass
+  transistor (AMB-009), "the step condition is sampled into `rcs_cond_lat` while CLK is high", and the
+  correction above that the pass transistor is gated by `tl3_w3982`: the band of `tl3_w3982` at
+  (3046,4546) is a pull-down to VSS, so **`rcs_cond` = NOR(`rcs_cond_n`, `tl3_w3982`)**, and
+  `rcs_cond_lat` = NOT `rcs_cond` by an inverter in `tl2`'s strip at y 4005-4145 (through its load's
+  tie, AMB-031). `trace/tla.txt` was fixed in `tl2`'s commits d64bc8c and d362cb4. The statement that
+  `rcs_cond` = NOT `e4` AND NOT (`e3` AND `a2`) gains the factor NOT `tl3_w3982`; the step formula does
+  not use `rcs_cond` and stands.
+- The unit of `rcs_n4200`: the diffusion under the g1 band is drawn from x 2990; its west edge is at
+  x 2968-2971, and g1's poly runs on west over field to the gap and north (drawn in `trace/tl2.txt`).
+  A width only.
+- **`rcs_in1` and `rcs_mn3852`** (`tl3` runs 7-8, Tom Seddon; AMB-013): `rcs_in1` = NOT `rcs_mv`, not
+  NOR(`rcs_mu`, `rcs_mv`); its node is the load strip y 4070-4096 and the box, its only pull-down under
+  gate `rcs_mv`. The transistor under gate `rcs_mu` belongs to `rcs_mn3852` = NOR(`tl3_e3712`,
+  `rcs_in1`, `rcs_mu`), by a diffusion branch under the thin metal x 3948-3962 and the VSS rail.
+  `D 4052,3955:4090,4135` ran through 70 px of field and was split (e22fb03). `rcs_mn3852`'s upper gate
+  (the bottom band of `tl3_e3712`'s poly), its VSS box, arm, column and load are drawn in
+  `trace/tl3.txt`; "its other gate (above the node) is not read yet" in this file and in
+  `trace/tla.txt` is out of date. Not checked, from `tl3`'s reviewer (R40): gate `rcs_mu`'s channel is
+  x ~4072-4108, not 4052-4110, and the piece below it an L; east of the rail below gate `rcs_mv` reads
+  field, so `D 4052,4066:4090,4135` may stop at y ~4096 and the `?D` VSS land may not exist.
+- **`rcs_mv`**: its track ends on a pad with a contact (4192,4743), whose poly leaves east (`tl3`), and
+  it is driven at (4193,4420) by `tl3`'s NOR `rcs_mv` = NOR(`tl3_e4852`, `tl3_w4546`) at y 4345-4514.
+  It has a second gate: `tl3`'s unit e3, pad (4190,4288).
+- `rcs_in1`'s unit: the VSS land below gate `rcs_mv`, drawn `?D 4005,4130:4092,4165` with
+  `?C 4018,4148`, is the rail's VSS box above `tl3`'s unit e3, which `tl3` draws firm (Matt Godbolt).
+- The bus piece `M 4148,3371 y3596`: its south end is a pad with a contact (4148,3592) (in
+  `trace/tl3.txt`), gate of `tl3_e3550`'s NOR and of `tl3_e3712`'s inverter.
+- **Bus line E is driven from `tl4`**: its top pad's poly to the pad (4270,2725) is under the sixth bus
+  line, which comes down the track x 4496 from `tl4`'s inverter: `rcs_e3` = NOT `bd1_n2`. The pad
+  rectangle `P 4250,2708:4290,2742` is about 8 px west of the pad (x 4258-4298): geometry only.
+- The VCC rail `M 3846,3040 y5497` goes on north to y ~2922 (drawn in `trace/tl3.txt`, with E1's VCC
+  contact); the VSS rail `M 4017,3050 y5300`'s south end is at y ~5296, as drawn.
+- Re-read items R38 (the follower's ends here), R39, R40, R41 (thin metal E), R42 apply here.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- `rcs_thin_e`'s south end: its row y 6327 ends on the pad (3973,6329), whose metal goes south to `ur`'s
+  pad (3968,6410) and a poly east along y 6402-6422 (`tl3` run 11; not `sl_l3`).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- `tl3_w3982`'s driver is `eof`'s inverter U4 at (7575,8386) (run 12). For the reader of `rcs_e4`'s line through the nest at y 7888-8275: the tracks west of it are named (x 6645 `lpstb_b`, 6602 `res_b`, 6558 `rst_a`, 6514 `tl3_w3982`; `eof` runs 10-11).
+
+## Corrections (coordinator, from the handoffs of 2026-11-20)
+
+- The input of `rcs_u3288` that this file called g3245 ("comes from ..."): it is `tl5_w2722` = NOT `tl4_w3113` (`tl3` run 12: its row y 2683 is drawn through strip 3 onto `tl4`'s bus line 5; renamed at the refresh of 2026-11-20).
+- The third input of `rcs_bc3460` (`tl2`'s w3722): it is `tl5_w4937` = NOT `tl4_w4068` (`tl3` run 12: the row y 2639 onto `tl4`'s bus line 4; renamed).
+- The data of `tl1`'s first latch (`tl1`'s w2857) is `rcs_mn3852` (the row y 2857 is one poly from `rcs_mn3852`'s unit to the latch; renamed).
+
+## Corrections (coordinator, from the handoffs of `eof` runs 28-35, 2026-11-21)
+
+- `rcs_e4`'s wire ("the gate of a pull-down under the rail x 7290-7345 of bc1's untraced left column ... the poly ends at x 7370 ... its driver is NOT found"; also the comment in `trace/tla.txt`, not edited): the poly ends at about x 7390 over a field island; the pull-down is gate 1 of the NOR `eof_w15523` = NOR(`rcs_e4`, `eof_w16040`, `h_eq_r1_n`) (`eof`, piece `u15500`); the driver has been found since (`rcs_e4` = NOR(`tl1_w4678`, `tl3_e3550`), `tl1`).
+
+## Corrections (coordinator, from the handoffs of `busl` runs 17-18, 2026-11-24)
+
+- Geometry only, same ends: the diagonal of `rcs_e4` south of its pad (6730,8580), drawn `6732,8655 6560,8828`,
+  lies 16 px west of its metal (x + y = 15403; `tools/busl_mdrawn.py h 8700`, `h 8760`; `busl` run 17).

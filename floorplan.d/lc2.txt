@@ -1,4 +1,13 @@
 5590,8055:5895,8560  logic  latch B | tl1's latch (tl1_ub + tl1_ua upside down): lc2_w8341 = NOT(lc2_w8450 AND lc2_w8169 OR lc2_w8215); traced
-5887,8589:6142,9029  ?logic  latch C | findcell hits of tl1's latch cells; not checked
-5840,9025:6140,9155  ?logic  inverter | findcell hit of tl1's inverter; not checked
-4480,8380:5330,9160  ?logic  west gate cluster | three rails, two gate columns; not traced
+5887,8589:6142,9029  logic  latch C | tl1's latch turned left-right; clear rst_c (shared with latch D)
+5836,9040:6230,9150  logic  inverter of latch C's output | lc2_w9124 = NOT lc2_w8822, onto the thin metal that runs north through latches C and D
+4440,8945:4990,9190  logic  ripple counter: lc2 stage 1, gate K4 | lc2_w8692 = NOT(lc1_w7170 & lc2_w8298 & (lc2_w8475 | lc2_w8552)); with K3 the slave of a toggle flip-flop (master: latch K)
+4620,8750:4985,8945  logic  ripple counter: lc2 stage 1, gate K3 | lc2_w8298 = NOT(lc2_w8692 & (lc2_w8725 | lc2_w8475))
+4500,8350:4985,8750  logic  ripple counter: lc2 stage 1, master (latch K) | lc2_w8552 = NOT(lc2_w8475 & lc2_w8298 | lc2_w8450 | lc2_w8725), lc2_w8725 = NOT(lc2_w8475 & lc2_w8692 | lc2_w8552)
+5887,8067:6142,8290  logic  latch D, lower unit | with lc1's upper unit the latch whose inverse is lc_step: open while ck_out, data lc1_w7780, clear rst_c
+6142,8067:6490,8560  route  bus field east of the latches | enable, clear and data of latches C and D from the north; two metals east
+5545,8880:5848,9000  logic  inverter of latch B's data | lc2_w8450 = NOT lc2_w8474, on the thin metal x 5626
+5545,9000:5848,9256  logic  AND-OR-INVERT gate | lc2_w9125 = NOT(lc2_w9034 AND lc2_w9079 OR lc3_w9299 AND lc2_w9210); output on a poly east and south
+4755,8030:5145,8160  logic  gate 9 of the gate column | lc2_w8127 = NOT lc1_w7990; output back north on a metal
+4990,8370:5365,9233  logic  ripple counter: lc2 stage 2 | the cell lc2_ff turned 180 degrees: a toggle flip-flop clocked by lc2_w8298 (flip-flop 1: latch K, gates K3, K4); outputs lc2_w8992, lc2_w8914, lc2_w9034, lc2_w8862
+6280,8600:6450,9233  route  through lines | four metal lines from the east edge to the south edge, no contact in the strip (rst_a, res_b, lpstb_b, lc3_w9947)

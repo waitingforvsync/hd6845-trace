@@ -246,7 +246,9 @@ class Netlist:
             seen.setdefault(lb.name, nid)
         for n in self.nodes.values():
             canon = [nm for nm in n.names if nm not in tracelib.ALIASES]
-            if len(canon) == 1 and all(tracelib.ALIASES.get(nm) == canon[0]
+            # an alias may reach the canonical name through another alias (two families of
+            # aliases meet when a wire joins two nets that each had other names: 2026-11-19)
+            if len(canon) == 1 and all(tracelib.canonical(nm) == canon[0]
                                        for nm in n.names if nm != canon[0]):
                 n.names = canon + [nm for nm in n.names if nm != canon[0]]
                 continue

@@ -59,16 +59,16 @@ from a contact (11287,7752) on the output of a NOR at y 7650-7860:
 
 ```
 p = NOR(a, b)              pull-downs 44/22 each, load 31/40
-a = inh_rc                band H3 (y 7158-7178) -> contact (11240,7168) -> metal x 11232-11252
+a = rst_rc                band H3 (y 7158-7178) -> contact (11240,7168) -> metal x 11232-11252
 b = rc_stepreq_n                   poly line y 7915-7937 from the bus field -> contact (11243,7925) -> metal
 ```
 
-`a` is the line the strobe channel calls `inh_rc` (NOT X, where X is the line whose
-inverse, made by input-row gate 0, is the clock block's `inh_ck`: so `a` and `inh_ck` are
-two copies of one signal, `NOT X`). In the clock block a high `inh_ck` holds `ck_b` low.
+`a` is the line the strobe channel calls `rst_rc` (NOT X, where X is the line whose
+inverse, made by input-row gate 0, is the clock block's `rst_ck`: so `a` and `rst_ck` are
+two copies of one signal, `NOT X`). In the clock block a high `rst_ck` holds `ck_b` low.
 Here a high `a` holds `p` low. So **one core signal stops both the horizontal counter's
 master clock and the row counter's step**; what it is has still to be found at its source
-(bd1's `inh_src`, which comes from the bottom bus field). While `a` is low, `p = NOT b`: the
+(bd1's `rst_a`, which comes from the bottom bus field). While `a` is low, `p = NOT b`: the
 row counter steps on a low pulse of `b`.
 
 ## The two inverters
@@ -105,7 +105,7 @@ Horizontal poly bands at the top (all go on east over the top of the mid-right a
 | H1 | 7068-7088 | pad, contact (11155,7078): metal down, jogging west at y 7273, to a contact (11107,7972) on a poly line from the west (y 7960-7982) | pad, contact (11978,7083), metal strap north to a contact (11978,7000) on a poly going north | `wl_h1` |
 | H2 west | 7112-7132 | pad, contact (11092,7122), metal x 11080-11100 north | pad, contact (11285,7122): metal down to I1's output | `cnt_la_a_n` |
 | H2 east | 7112-7132 | pad, contact (11350,7122): metal down to I1's gate | pad, contact (12285,7124): the line x 12285 down the array | `cnt_la_a` |
-| H3 | 7158-7178 | pad, contact (11240,7168): metal down to gate a | into the wiring channel (mrach) | `inh_rc` |
+| H3 | 7158-7178 | pad, contact (11240,7168): metal down to gate a | into the wiring channel (mrach) | `rst_rc` |
 | H4 | 7200-7222 | runs on west into the bus field | feed of mra's line x 12902 (`cnt_gab`); on the way a pad with a contact (11392,7210) under a metal that leaves north (x 11380-11400) | `cnt_gab` |
 
 Vertical metals over the clock drivers (no contact to them). Each steps one pitch east by a
@@ -172,3 +172,13 @@ as the cell `wl_ckgen` (tag `rc` here, `lc` there); the rails, the VCC strip, th
 clock metals, and the pad and metal that bring the step signal are drawn outside the
 cell for each copy. The extraction of this block is unchanged.
 
+## Corrections (coordinator, from the handoffs of `busl` run 16, 2026-11-21)
+
+- `wl_h1` ("not identified"): its west end is the data input of `tl5`'s latch a in the top-left logic (`busl`, piece `ha`).
+
+## Corrections (coordinator, from the handoff of `busl` run 19, 2026-11-24)
+
+- Band H4 "comes from the bus field in the west": its west end (11040,7211) is an L corner onto a poly
+  column x 11050 north to channel 2's row y 6845, so `cnt_gab` comes through the central datapath's
+  channel 2 from the pad (7335,6845) and the left-centre band (firm for the wire; no driver drawn,
+  AMB-017).

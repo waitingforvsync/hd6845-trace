@@ -1,2 +1,2 @@
 # mal: the copies of the RA/MA output stage in the left array's left column
-2540,7960:2840,18780   ?logic  MA output stages (14 ral cells) | the ral cell turned 90 degrees, once per MA bit; strobed by ck_out (the left-edge trunk); believed a latch per bit (partly traced)
+2540,7960:2840,18780   logic   MA output stages (14 ral cells) | the ral cell turned 90 degrees, once per MA bit: a static latch per bit (firm, as all 19 ral copies), strobed by ck_out (the left-edge trunk), forced high by mal_frc_m#

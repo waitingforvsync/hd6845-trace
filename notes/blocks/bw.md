@@ -64,3 +64,24 @@ only the staircases.
 ## Not done
 
 Everything in the survey; the far ends of the five lines (table); H4 west of x 11040.
+
+## Corrections (coordinator, from the handoffs of `busl` run 16, 2026-11-21)
+
+- The table's row `wl_h1` ("metal x 7025-7048, direction not followed") and the comment in `trace/bw.txt`: the metal goes north on x 7034 to a corner (7034,6957), west along y 6957 to a pad (6188,6956), and by a poly row, a diagonal and the poly column x 5454 onto `tl5`'s poly end (5453,6350): it is `wl_h1`, the data of `tl5`'s latch a (`busl`, piece `ha`).
+
+## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
+
+- Survey of the bus field: "an eight-line bus between cdp3's rows and cdp4's rows" is the read bus of R12-R17
+  (`rd_b(7-#)` = `cdp4_n_s#`, firm; `regs` run 6, `cdp4` run 4) and runs on south of `cdp4`'s staircase to the
+  bottom bus. The lower staircase of contacts begins at (11200,13330) (column 0), its second pad at about
+  (11157,13375), not at (11070,13450); the upper one ends at (11200,10664), not about (11200,10630).
+- The field's westmost two lines are other nets: x 10852 is `rst_lat` (a reset copy, from `trunks`' diagonal
+  up to y 3592), x 10808 is `cdp4_w10808` (the output of an undrawn unit of `bc2` at about (10620-10780,
+  15750-15860)); both drawn by `cdp4` run 12.
+
+## Corrections (coordinator, from the handoffs of `busl` runs 17-18, 2026-11-24)
+
+- The metals north of the pads (7419,7387) (`ck_a`) and (7466,7343) (`cnt_bus_b`), "seen to y 7150", are followed
+  (`busl` run 18, pieces `ya`, `yb`): north to corners (7424,6762), (7468,6718), west to end pads (6491,6759),
+  (6538,6717), and by poly columns north to `tc2`'s pads: `ck_a` and `cnt_bus_b`. The two metals lie on
+  `fld`'s poly rows y 6756 / y 6712 for 380 / 420 px without a contact (`busl`'s Ambiguity 23).

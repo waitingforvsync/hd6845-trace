@@ -25,7 +25,8 @@ access). In short:
    changed, at most three rounds in all; only findings that change a connection count against
    that limit (geometry-only ones are fixed and shown harmless with `tools/sameconn.py`);
    recorded in the block notes.
-6. Merge main into the branch, pass `tools/mergecheck.py PREFIX`, push to main, and hand
+6. Merge main into the branch, pass `tools/mergecheck.py PREFIX` (run it unpiped, read `PASS`, and only
+   then push, in a separate command: a pipe such as `| tail` hides a failing gate from `&&`), push to main, and hand
    off with `tools/claim.py done` (proposals for the coordinator's files go there, not in
    those files). Without write access: a pull request with the template instead.
 
@@ -37,6 +38,8 @@ access). In short:
   whose cost report (`tools/costs.py`, committed as `costs/<git name>.json`) shows any other
   model doing its work. The coordinator may use another model for coordination
   (`.claude/settings.local.json`).
+  Work merged anyway from another model (dp111's Opus pieces, 2026-11-18) stays on main
+  but gets a Fable review (re-read item R31); no more such merges (user, 2026-11-18).
 
 - Trace independently. Do not open Lance Ewing's HD6845 reverse-engineering work (on
   GitHub) or any other 6845 netlist/schematic effort until our own trace of the
@@ -82,8 +85,10 @@ access). In short:
 
 - **Dates** (user, 2026-11-16: "the journal dates are nonsense"): take the date and time
   from `date`, and when something was done from `git log`. Never advance the date by
-  guess between pieces of work. Journal headings carry date and time (`## YYYY-MM-DD
-  HH:MM  title`).
+  guess between pieces of work. Journal headings carry date and time in UTC, from
+  `date -u '+%Y-%m-%d %H:%M'` (`## YYYY-MM-DD HH:MM UTC  title`; user, 2026-11-23: handoffs from
+  other zones made local-time headings look out of order). Headings before 2026-11-23 are the
+  owner's local time (CST, UTC-6) and carry no zone.
 - **`notes/operation.md`** (user, 2026-11-16): keep it current and readable. It states
   only what the extraction supports, marked firm (`tools/unsure.py --equations` says the
   equation survives without every uncertain item), marked, or open. When a block changes
@@ -140,7 +145,7 @@ coordinating session, the owner's.
   identified (checked with `tools/names.py compare`: only names may change), bring
   `notes/operation.md` up to date, rebuild `out/`, journal. Run it after a batch of merges.
 - Keep the master list covering the whole die: after changing it, `tools/coverage.py`
-  must show no red (untraced and in no package) except empty field and supply metal. Stacked pull requests: merge the tips (the first round's notes are in
+  must show no red (untraced and in no package) except empty field and supply metal. Its stricter line, "untraced and in no Queue row", must also hold only empty field, supply metal and the die marking: a partial package or an untraced spot that no Queue row names is picked by no one (2026-11-19). Stacked pull requests: merge the tips (the first round's notes are in
   the journal, 2026-11-17).
 - Every tracer, whoever: `notes/tracing-guide.md`. Tools run through `tools/t.sh PREFIX
   tool.py ...` (sets `TRACE=PREFIX` so other blocks' unfinished files are not loaded).

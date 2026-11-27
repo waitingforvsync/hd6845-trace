@@ -22,7 +22,7 @@ datapath (`rdp2`, `rdp3`) and the strobe channel (`bd1`) by geometry alone.
 | T0 | y 7130-8727 | `hsw0` | leaves north; contact (13087,8711) on r3's line |
 | T0 | y 8822-14690 | `wr_r6` | contact (13086,8836), poly diagonal and north beside T5, leaves east at (13425,8299) = rdp2's RF strobe: **RF is R6**; south = bd1's k0 |
 | T1 | y 7130-7380 | `hsw2` | leaves north; contact (13129,7365), poly west and south under T0 to r1's line (y 7748-7769) |
-| T1 | y 7417-12586 | `inh_rc` | contact (13129,7431) on the poly from the band above r0; contact (13130,12570), poly south under T1 and east along y 12830 to rdp3's pad under T6 |
+| T1 | y 7417-12586 | `rst_rc` | contact (13129,7431) on the poly from the band above r0; contact (13130,12570), poly south under T1 and east along y 12830 to rdp3's pad under T6 |
 | T2 | y 7130-12616, then T1 to 14690 | `wr_r5` | leaves north; bd1's k1 |
 | T3 | y 7130-7489 | `hsw1` | leaves north; contact (13215,7474), poly west and south under T2 to r2's line (y 8225-8246) |
 | T3 | y 7527-12659, then T2 | `wr_r7` | contact (13217,7541), poly leaves east at (13425,7541) (into rdp1: R7's strobe); bd1's k2 |
@@ -31,10 +31,10 @@ datapath (`rdp2`, `rdp3`) and the strobe channel (`bd1`) by geometry alone.
 | T5 | y 7571-12745, then T4 | `rc_eq_r6` | contact (13300,7585), poly leaves east at (13425,7585) (into rdp1) |
 | T6 | y 9346-9678 | `rc_eq_r4` | "uc = R4" match: from the east at (13425,8343), poly south in the open strip x 13334, contacts (13348,9360) and (13349,9663), poly east again at y 9663 |
 | T6 | y 9822-12789, then T5 | `h_eq_r0half` | rdp2's and rdp3's L0; bd1's k5 |
-| T6 | y 12816-14690 | `inh_rc` | rdp3's pad and contact (13346,12829); bd1's k6 |
+| T6 | y 12816-14690 | `rst_rc` | rdp3's pad and contact (13346,12829); bd1's k6 |
 
 So the four outputs of the 4-bit counter (rows r0-r3), the strobes of R3 and R5 and one
-line of `inh_rc`'s net (the band above r0, going west) leave the array **northwards**:
+line of `rst_rc`'s net (the band above r0, going west) leave the array **northwards**:
 whatever compares the 4-bit counter (R3, the sync widths) is up there.
 
 ## Counter outputs (`n1` = master output of each bit)
@@ -84,3 +84,7 @@ datapath, which compares it with R4 and R6: the character-row counter.
 - The z stubs: in every row the poly of net `z` ends free about 12 px east of the rail. In
   no row of this channel does it go on.
 - Row r17's output, and the lower channel y 14700-17000 beyond what bd1 drew.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- T6's row "poly east again at y 9663": drawn by `eof`: it is `rc_eq_r4`, on to `bd1`'s latch.

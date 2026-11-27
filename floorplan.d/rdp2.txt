@@ -4,6 +4,6 @@
 13800,9440:14170,10084  route  routing column | exit lines of both comparators, R0 bit 7 going north and round the array, poly bars from the bundle to tracks going north
 13340,9440:13780,10700  route  left-edge bundle L0-L8 | continues rdp3's; the two comparator outputs join it here
 13360,8807:16160,9077  array  R4 register (7 bit) | vertical total; latches loaded by wr_r4 (strobe comes up bundle track L1); feeds the comparator above
-13360,8415:16160,8806  array  R4 comparator (7 bit) | XOR per bit and wired NOR against the upper array's seven c lines (believed the row counter); output leaves west at y 8339
+13360,8415:16160,8806  array  R4 comparator (7 bit) | XOR per bit and wired NOR against the row counter rc0..rc6 (the upper array's c lines, joined on firm geometry); output rc_eq_r4 leaves west at y 8339 to bd1's latch (eof)
 13360,8048:16160,8318  array  R6 register (7 bit) | vertical displayed. Same latch cells on the same data lines as R4; its strobe runs down the wiring channel to the R6 write strobe (so this is R6); its comparator is above (rdp1)
 13360,9080:16950,9560  route  routing zone | horizontal poly lines; carries R0 bit 7 (y 9487) and comparator D's output (y 9532); otherwise not traced

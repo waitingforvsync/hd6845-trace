@@ -1,0 +1,5 @@
+4440,9940:5480,10580  logic  ripple counter: stage B0 (first) | the counter's first flip-flop, folded: lc2_ff's latch K in the west column, its gates K3, K4 turned in the east one, five crossing rows below; clock lc3_w9947 (from the east); its slave output clocks stage W3 (eof's ff3)
+4990,9150:5450,9945  logic  ripple counter: stage E4 (last) | the cell lc2_ff turned 180 degrees: a toggle flip-flop clocked by lc2_w9034; its slave output is lc2_w9210 (an input of lc2_w9125)
+5540,9255:5900,9520  logic  inverters lc1_w7170 = NOT rst_c and lc2_w9079 | two inverters, mirror images: lc3_w9432 = NOT rst_c, lc2_w9079 = NOT lc3_w9299
+5440,9520:5800,10400  route  track field | rst_n, lc2_w9079, rst_c, lc2_w8450, lc3_m5756 south to their end pads; the VCC metal's two diagonals
+5800,9233:6450,10400  route  crossing field and corner bundle | eleven poly rows under about fifteen vertical metals, pads only at row ends; lc2's four through lines and three more turn south; six staircase lines leave diagonally south-west

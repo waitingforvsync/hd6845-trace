@@ -14,9 +14,9 @@
 
 # ---- gate lines: horizontal poly from the west edge, one per row, ending at slice s7
 P 7600,10057 x10664 w=20             # gates of the row E transistors
-N P 7610,10057 cdp3_gate_e
+N P 7610,10057 rsel12_buf
 P 7600,10317 x10664 w=20             # gates of the row F transistors
-N P 7610,10317 cdp3_gate_f
+N P 7610,10317 rsel13_buf
 
 # ---- row E transistor as it is in s3..s7: gate vertical, joined to the gate line below it
 @cell cdp3_e tag=c4
@@ -124,7 +124,7 @@ C 7948,10664 s=28x28
 M 7948,9956 y10676                  # line h: row E right contact, row F right contact, east piece
 M 7861,10175 y10520 7905,10568 y10745     # row F left contact down into the row H cell
 N P 7610,10664 cdp3_hw_c0
-N P 10840,10664 cdp3_n_c0
+N P 10840,10664 rd_b7
 N M 7905,10710 cdp3_hq_c0
 # s1
 P 7600,10621 x8264
@@ -135,7 +135,7 @@ C 8338,10621 s=28x28
 M 8338,9956 y10633                  # line h: row E right contact, row F right contact, east piece
 M 8251,10175 y10533 8295,10583 y10745     # row F left contact down into the row H cell
 N P 7610,10621 cdp3_hw_c1
-N P 10840,10621 cdp3_n_c1
+N P 10840,10621 rd_b6
 N M 8295,10710 cdp3_hq_c1
 # s2
 P 7600,10577 x8654
@@ -146,7 +146,7 @@ C 8728,10577 s=28x28
 M 8728,9913 y10589                  # line h: row E right contact, row F right contact, east piece
 M 8641,10175 y10489 8685,10539 y10745     # row F left contact down into the row H cell
 N P 7610,10577 cdp3_hw_c2
-N P 10840,10577 cdp3_n_c2
+N P 10840,10577 rd_b5
 N M 8685,10710 cdp3_hq_c2
 # s3
 P 7600,10535 x9045
@@ -157,7 +157,7 @@ C 9119,10535 s=28x28
 M 9119,9872 y10547                  # line h: row E right contact, row F right contact, east piece
 M 9032,10175 y10447 9076,10497 y10745     # row F left contact down into the row H cell
 N P 7610,10535 cdp3_hw_c3
-N P 10840,10535 cdp3_n_c3
+N P 10840,10535 rd_b4
 N M 9076,10710 cdp3_hq_c3
 # s4
 P 7600,10490 x9435
@@ -168,7 +168,7 @@ C 9509,10490 s=28x28
 M 9509,9872 y10502                  # line h: row E right contact, row F right contact, east piece
 M 9422,10175 y10394 9466,10447 y10745     # row F left contact down into the row H cell
 N P 7610,10490 cdp3_hw_c4
-N P 10840,10490 cdp3_n_c4
+N P 10840,10490 rd_b3
 N M 9466,10710 cdp3_hq_c4
 # s5
 P 7600,10447 x9825
@@ -179,7 +179,7 @@ C 9899,10447 s=28x28
 M 9899,9872 y10459                  # line h: row E right contact, row F right contact, east piece
 M 9812,10175 y10359 9856,10409 y10745     # row F left contact down into the row H cell
 N P 7610,10447 cdp3_hw_c5
-N P 10840,10447 cdp3_n_c5
+N P 10840,10447 rd_b2
 N M 9856,10710 cdp3_hq_c5
 # s6
 P 7600,10404 x10216
@@ -190,7 +190,7 @@ C 10290,10404 s=28x28
 M 10290,9872 y10416                  # line h: row E right contact, row F right contact, east piece
 M 10203,10175 y10316 10247,10366 y10745     # row F left contact down into the row H cell
 N P 7610,10404 cdp3_hw_c6
-N P 10840,10404 cdp3_n_c6
+N P 10840,10404 rd_b1
 N M 10247,10710 cdp3_hq_c6
 # s7
 P 7600,10361 x10606
@@ -201,7 +201,7 @@ C 10680,10361 s=28x28
 M 10680,9872 y10373                  # line h: row E right contact, row F right contact, east piece
 M 10593,10175 y10273 10637,10323 y10745     # row F left contact down into the row H cell
 N P 7610,10361 cdp3_hw_c7
-N P 10840,10361 cdp3_n_c7
+N P 10840,10361 rd_b0
 N M 10637,10710 cdp3_hq_c7
 
 # =====================================================================================
@@ -426,7 +426,7 @@ C 10736,9322 10736,9365 10736,9437
 @inst cdp3_reg 0,1549 my=9347.5 tag=h_c5
 @inst cdp3_reg 390,1549 my=9347.5 tag=h_c6
 @inst cdp3_reg 781,1549 my=9347.5 tag=h_c7
-N P 9650,10757 cdp3_h_wr
+N P 9650,10757 wr_r13
 @inst cdp3_c_vss -1562,1549 my=9347.5 tag=h_c1
 @inst cdp3_c_vss -1172,1549 my=9347.5 tag=h_c2
 @inst cdp3_c_vss -781,1549 my=9347.5 tag=h_c3
@@ -440,7 +440,7 @@ N P 9650,10757 cdp3_h_wr
 M 8076,9555 y10690 w=20
 N M 8076,9600 cdp3_bl_c1
 M 8466,9555 y10690 w=20
-N M 8466,9600 cdp3_bl_c2
+N M 8466,9600 db_b5
 M 8857,9555 y10690 w=20
 N M 8857,9600 cdp3_bl_c3
 M 9248,9555 y10690 w=20
@@ -481,12 +481,20 @@ P 10705,9533 x10850 w=22              # row C's: runs on east
 # line east of the region (x 10888, which comes up from the south and ends there) west to
 # x 8528 in c2. Seen unbroken in the clean shot at 1.5x. It passes just below the bit-line
 # contact of every row A cell; its branches into those cells are not traced.
-P 8528,8818 x10850 w=16
-N P 10840,8818 cdp3_l8819
+# the strobe is a serpentine (review, 2026-11-19): under each bit line and line f metal there is
+# field at this height; the band is joined through each latch cell's loop (legs and gate bar)
+P 8528,8818 x8836 w=16
+P 8913,8818 x9226 w=16
+P 9303,8818 x9616 w=16
+P 9693,8818 x10006 w=16
+P 10083,8818 x10396 w=16
+P 10473,8818 x10850 w=16
+P 8388,8818 x8440 w=16                 # west stub under c2's VSS rail: a dead end, no contact
+N P 10840,8818 wr_r14
 
 # --- VSS rails c0..c8 over the full height (straight; contacts are drawn with the cells)
-M 7623,8450 y11200 w=46
-N M 7623,8460 vss
+M 7623,8556 y11200 w=46              # from y 8556: above it the ground at x 7600-7646 is bare and the rail is the metal x 7552-7598 (coordinator, 2026-11-19; px.py row 8500, col 7623)
+N M 7623,8570 vss
 M 8013,8450 y11200 w=46
 N M 8013,8460 vss
 M 8403,8450 y11200 w=46
@@ -535,34 +543,15 @@ N M 10528,9600 vcc
 # others by profile) and, uncertain, through the row A cells to the top edge. Each row A cell
 # has a contact on its bit line at about y 8782 (seen in c2 and c5); not drawn, row A is not traced.
 M 8466,8790 y9195 w=20
-?M 8466,8450 y8795 w=20
 M 8857,8790 y9195 w=20
-?M 8857,8450 y8795 w=20
 M 9248,8790 y9195 w=20
-?M 9248,8450 y8795 w=20
 M 9638,8790 y9195 w=20
-?M 9638,8450 y8795 w=20
 M 10028,8790 y9195 w=20
-?M 10028,8450 y8795 w=20
 M 10419,8790 y9195 w=20
-?M 10419,8450 y8795 w=20
 
-# --- bit lines and lines f below row H, to the bottom edge: metal is present at these x all the
-# way (profile); row I, which they cross, is not traced
-?M 7687,11048 y11200 w=20
-?M 8076,11048 y11200 w=20
-?M 8466,11048 y11200 w=20
-?M 8857,11048 y11200 w=20
-?M 9248,11048 y11200 w=20
-?M 9638,11048 y11200 w=20
-?M 10028,11048 y11200 w=20
-?M 10419,11048 y11200 w=20
-?M 8511,11048 y11200 w=17
-?M 8902,11048 y11200 w=17
-?M 9293,11048 y11200 w=17
-?M 9683,11048 y11200 w=17
-?M 10073,11048 y11200 w=17
-?M 10464,11048 y11200 w=17
+# --- bit lines and lines f below row H, y 11048-11200: drawn firm by `cdp4` (run 3: they are its in
+# tracks and a tracks through the R15 comparator row); the uncertain pieces that stood here were
+# removed 2026-11-20 (coordinator; connections identical)
 
 # =====================================================================================
 # Gate beside row C, in c0-c1 (x 7600-8360, y 9150-9500): one two-input NAND on c1's line e
@@ -580,7 +569,7 @@ P 7868,9325:7890,9432                 # ... down the left side ...
 P 7868,9423 x8348 w=17                # ... and east along y 9423 to a contact on the x 8327 line
 C 8335,9428
 M 8327,9150 y9442 w=26                # x 8327 line: comes down from above the region shown
-N M 8327,9160 cdp3_k_c
+N M 8327,9160 g_eq_r14
 # --- load: strip from the output east under the poly block to the VCC contact
 D 8055,9248:8215,9273
 D 8148,9250:8212,9300
@@ -605,18 +594,25 @@ M 7880,9150 y9242 w=22                # upper piece: runs on up past y 9150
 # --- gate 1 input: poly from the west edge along y 9450, contact, metal bar, up the lower piece
 # of the x 7880 line to the pad of gate 1
 P 7600,9450 x7785 w=18
-N P 7610,9450 cdp3_k_b
+N P 7610,9450 bus_eq_r15
 C 7765,9448
 M 7752,9451 x7892 w=22
 M 7880,9285 y9462 w=22
 C 7878,9297
-# --- a line that only passes: x 7835 metal from channel B (contact on the y 8864 poly, seen by the
-# first run only) down to a contact on the y 9168 poly (which runs east to a contact at 8290,9165)
-# and to a poly cross-under below the metal bar; then west and down on the x 7772 line, which ends
-# at a contact at about (7770,10135) that is not traced
-?P 7600,8864 x7848 w=18
+# --- a line that only passes: x 7835 metal from a contact on the y 9168 poly (which runs east to a
+# contact at 8290,9165) to a poly cross-under below the metal bar; then west and down on the x 7772
+# line, which ends at a contact at about (7770,10135) that is not traced.
+# Corrected 2026-11-20 (coordinator, from busl run 11's handoff; both metal shots,
+# cache/scratch/refresh/h_k_a.png): the metal does not come from channel B. There is no metal at
+# x 7835 between y 8880 and y 9160 (only the poly rows of the field); the metal starts at the contact
+# (7833,9165). The poly row y 8864 and its contact pad (7834,8862) are another net, busl's
+# busl_x7122 (its row is drawn to x 7592; this ?P is lengthened 8 px west to meet it, still
+# uncertain under the wide rail: busl's Ambiguity 17). That pad's metal goes NORTH to a pad at about
+# (7834,8645): not drawn.
+?P 7592,8864 x7848 w=18
 ?C 7834,8862 s=24x24
-M 7835,8850 y9414 w=24
+M 7835,8876 y8800 w=24                # stub of that pad's metal north (both metal shots); not followed
+M 7835,9150 y9414 w=24
 C 7833,9165 s=24x24
 P 7820,9168 x8305 w=18
 C 8290,9165 s=24x24
@@ -626,3 +622,223 @@ P 7826,9390:7848,9502                 # cross-under: no metal over it between th
 C 7835,9490 s=24x24
 M 7848,9490 x7772 y10150 w=18
 N M 7835,9300 cdp3_k_a
+
+# ======================================================================
+# Row A (y 8040-8830; run of 2026-11-19): six copies of cdp4's comparator cell over six
+# copies of cdp4's latch cell (upside down, as cdp4's row R1): findcell dy -3015.
+# ======================================================================
+@requires cdp4
+@inst cdp4_xr 0,-3015 tag=c2
+@inst cdp4_lat 0,-4481 mx=8610 rot=180 o=8610,13132.5 tag=la_c2
+@inst cdp4_xr 390,-3015 tag=c3
+@inst cdp4_lat 390,-4481 mx=8610 rot=180 o=8610,13132.5 tag=la_c3
+@inst cdp4_xpd 390,-3015 tag=c3
+@inst cdp4_xr 780,-3015 tag=c4
+@inst cdp4_lat 780,-4481 mx=8610 rot=180 o=8610,13132.5 tag=la_c4
+@inst cdp4_xpd 780,-3015 tag=c4
+@inst cdp4_xr 1170,-3015 tag=c5
+@inst cdp4_lat 1170,-4481 mx=8610 rot=180 o=8610,13132.5 tag=la_c5
+@inst cdp4_xpd 1170,-3015 tag=c5
+@inst cdp4_xr 1560,-3015 tag=c6
+@inst cdp4_lat 1560,-4481 mx=8610 rot=180 o=8610,13132.5 tag=la_c6
+@inst cdp4_xpd 1560,-3015 tag=c6
+@inst cdp4_xr 1950,-3015 tag=c7
+@inst cdp4_lat 1950,-4481 mx=8610 rot=180 o=8610,13132.5 tag=la_c7
+@inst cdp4_xpd 1950,-3015 tag=c7
+# c2's pull-down (poly A shorter, its leg on field) and the load of the match line east of
+# it: the same layout as cdp4's slice s0, 782 px east and 3015 px north
+D 8370,8085:8456,8110
+D 8437,8097:8582,8185
+D 8577,8078:8772,8102
+D 8548,8059:8570,8106
+P 8407,8123:8604,8147
+P 8584,8123:8604,8213
+P 8455,8190:8604,8213
+D 8620,8145:8750,8213
+D 8729,8078:8750,8213
+M 8597,8145:8660,8211
+C 8632,8175 s=24x24
+P 8685,8125:8727,8227
+P 8700,8090:8727,8127
+B 8698,8086:8729,8104
+# rails, bit lines, line f's upper part (a stub above its link, top end y 8052) and the
+# join of each cell's tap metal to line g, through row A
+M 8403,8040 y8455 w=46
+M 8793,8040 y8455 w=46
+M 9184,8040 y8455 w=46
+M 9574,8040 y8455 w=46
+M 9964,8040 y8455 w=46
+M 10355,8040 y8455 w=46
+M 10743,8040 y8455 w=46
+M 8618,8040 y8795 w=44
+M 9009,8040 y8795 w=44
+M 9400,8040 y8795 w=44
+M 9790,8040 y8795 w=44
+M 10180,8040 y8795 w=44
+M 10571,8040 y8795 w=44
+M 8466,8040 y8795 w=20
+M 8857,8040 y8795 w=20
+M 9248,8040 y8795 w=20
+M 9638,8040 y8795 w=20
+M 10028,8040 y8795 w=20
+M 10419,8040 y8795 w=20
+M 8512,8052 y8795 w=18
+M 8902,8052 y8795 w=18
+M 9293,8052 y8795 w=18
+M 9683,8052 y8795 w=18
+M 10073,8052 y8795 w=18
+M 10464,8052 y8795 w=18
+M 8558,8770 y8795 w=18
+M 8948,8770 y8795 w=18
+M 9339,8770 y8795 w=18
+M 9729,8770 y8795 w=18
+M 10119,8770 y8795 w=18
+M 10510,8770 y8795 w=18
+# the latch's buffered output: its contact pad joins the metal down to the link poly (y 8862)
+M 8722,8765 y8795 w=18
+M 9113,8765 y8795 w=18
+M 9503,8765 y8795 w=18
+M 9893,8765 y8795 w=18
+M 10284,8765 y8795 w=18
+M 10674,8765 y8795 w=18
+# east end, under the ninth VSS rail (as in cdp4's rows R1): the match line's end, the
+# land with the rail's contact for c7's comparator, the land for c7's latch
+D 10720,8093:10766,8110
+D 10719,8410:10772,8477
+C 10745,8443 s=24x40
+D 10722,8608:10751,8782
+C 10745,8637 s=28x40
+# west end of the match line: the band ends in a buried contact box under no metal; a poly
+# south to a pad, whose contact starts the thin metal x 8336 down to the NAND's gate 2 (g_eq_r14)
+D 8330,8085:8375,8110
+D 8330,8098:8368,8120
+P 8333,8100:8350,8195
+B 8328,8096:8370,8122
+P 8323,8192:8357,8227
+C 8334,8209 s=22x22
+M 8335,8200 y9160 w=14
+
+# ================================================================ run of 2026-11-20 (west logic)
+# ---- piece u1: U1 of the gate column (y 7940-8060): eof's inverter cell eof_dinv moved by 0,-390,
+# written out here (the cell is eof's file's) and to be fitted to this copy's own measurements.
+D 7546,7940:7603,8036
+C 7568,7958
+P 7313,7986:7614,8006                 # gate row, from the pad (7313,7995) to its rounded end east of the rail
+P 7296,7979:7330,8012                 # pad
+C 7313,7995
+N P 7450,7996 lc2_w8646
+D 7488,8014:7556,8038
+D 7488,8014:7522,8052
+B 7486,8012:7524,8054
+P 7480,8028:7520,8049                 # a poly cap on the node's buried contact (it goes nowhere)
+D 7594,8015:7734,8042
+D 7728,7984:7778,8042
+C 7750,8018
+P 7666,7993:7722,8070                 # the load plate; its foot runs east as the output
+P 7700,8054:7838,8072                 # the foot: east to a pad
+P 7821,8046:7855,8080                 # pad (7838,8062)
+C 7838,8062
+N P 7760,8063 cdp3_w8063
+D 7640,7967:7660,8020
+D 7640,7967:7690,7987
+P 7666,7970:7690,8000
+B 7662,7965:7694,7991
+M 7575,7925 y8060 w=46                 # the VSS rail (eof draws it north and south of this unit)
+N M 7575,7930 vss
+M 7749,7925 y8060 w=54                 # the wide VCC metal
+N M 7749,7930 vcc
+# input: a thin metal x 7309-7323 between the row's pad and a pad (7313,8625); it ends on both pads.
+# The lower pad's poly leads to a third pad, on which a metal from the west ends: the unit's input
+# arrives from the bus field west of the block.
+M 7316,7995 y8625 w=14
+P 7296,8608:7330,8642
+C 7313,8625
+P 7313,8615:7415,8635                 # the pad's poly east,
+P 7393,8615:7415,8780                 #   south under a horizontal metal y 8700-8715 (another net; no contact),
+P 7383,8762:7420,8798                 #   to a pad (7400,8778)
+C 7400,8778
+M 7330,8757 x7400 y8778 w=16           # a metal from the west along y 8749-8765 ends on that pad
+# ... which is a line of the bus field's staircase: west along y 8757, north at x 7146, west along y 8713,
+# north at x 7012, west along y 8621, north at x 6843, west along y 8541, north at x 6667, west along
+# y 8452, north at x 6467 onto lc2's metal B (M 6168,8301 x6450: the branch of latch C's enable metal).
+M 7330,8757 x7146 y8713 x7012 y8621 x6843 y8541 x6667 y8452 x6467 y8301 x6450 w=14
+# output: a metal x 7826-7848 from the foot's pad south through a pad (7836,8430) to a pad
+# (7838,8582), where it ends. The two pads' polys are gates of the cluster beside row A (ports).
+M 7837,8062 y8582 w=20
+P 7818,8413:7855,8447                 # pad (7836,8430)
+C 7836,8430
+P 7836,8419:7950,8441                 # its poly row east, into the cluster (port at x 7950)
+P 7820,8566:7856,8598                 # pad (7838,8582)
+C 7838,8582
+P 7790,8566:7838,8590                 # its poly west (port at x 7790)
+
+# ---- the line of the gate beside row C (its output, the upper piece of the x 7880 line): the metal runs
+# on north from y 9150 to a pad (7878,8385), where it ends; the pad's poly row goes east into the
+# cluster beside row A (port). A second metal on the same x comes from the north and ends on a pad
+# (7878,8315), 70 px further north: another net (bare ground between the two pads).
+M 7880,8385 y9150 w=22
+P 7860,8368:7896,8402                 # pad
+C 7878,8385
+P 7878,8377:7950,8400                 # its poly row east (port at x 7950)
+
+# ================================================================ run of 2026-11-20: the bit lines are cdp2's bus lines
+# cdp2 draws each slice's bus-line metal up... down to y 7556; this file's bit lines start at y 8040.
+# Between, each is one metal (tools/tl5_tracks.py v X 7560 8050: no stretch without metal over 21 px; the
+# longer dark stretches are the rings of contacts on the line, taps in cdp2's channel 3, not drawn here).
+M 8466,7556 y8040 w=18
+M 8857,7556 y8040 w=18
+M 9248,7556 y8040 w=18
+M 9638,7556 y8040 w=18
+M 10028,7556 y8040 w=18
+M 10419,7556 y8040 w=18
+@alias cdp2_c_s3_bus cdp3_bl_c3
+@alias cdp2_c_s4_bus cdp3_bl_c4
+@alias cdp2_c_s5_bus cdp3_bl_c5
+@alias cdp2_c_s6_bus cdp3_bl_c6
+@alias cdp2_c_s7_bus cdp3_bl_c7
+
+# ================================================================ piece ckb (2026-11-20): a wide inverter of ck_out
+#     lc2_w8646 = NOT ck_out
+# West of the gate column, under the VSS rail (x 7552-7645 here) and the wide VCC metal (x 7682-7770):
+# one diffusion x 7547-7712, y 8660-8770. The poly of eofw's corner pad (7446,8732) (ck_out) enters from
+# the west along y 8722-8745, turns north at x 7625-7648 and east along y 8678-8698: it parts the top-left
+# of the diffusion (two rail contacts) from the rest, the output node. A second poly, y 8772-8802, crosses
+# the node's south end east of the rail: the load, down to a box on the VCC metal; its gate is tied to
+# the node by a buried contact on a tab. The node leaves west by a neck into a buried contact under the
+# end of a poly row that runs west onto the pad (7400,8778) of piece u1's input wire: the inverter drives
+# U1's input and the staircase metal that ends on that pad.
+D 7547,8660:7712,8770
+D 7494,8658:7550,8764                 # it runs on west of the rail to x 7494 (review round 4)
+C 7572,8680
+C 7592,8688
+M 7598,8640 y8800 w=92                 # the VSS rail here (x 7552-7645)
+N M 7598,8650 vss
+P 7475,8722:7648,8745                 # ck_out's poly from the corner pad, east,
+P 7625,8678:7648,8745                 #   north,
+P 7625,8678:7722,8698                 #   and east again to its end
+# the load
+D 7645,8768:7712,8845
+P 7640,8772:7722,8802
+P 7600,8792:7650,8808                 # the gate's tail west
+P 7600,8772:7624,8808                 #   and up into the tie
+B 7598,8768:7626,8798
+D 7600,8766:7624,8796
+D 7710,8818:7735,8845
+D 7730,8795:7780,8842                 # box on the VCC metal
+C 7755,8818
+M 7726,8640 y8850 w=88                 # the wide VCC metal (x 7682-7770)
+N M 7726,8650 vcc
+# the output
+D 7530,8750:7550,8764                 # neck west from the node
+D 7497,8750:7535,8790
+B 7495,8762:7533,8792
+P 7400,8768:7522,8790                 # poly row west onto the pad (7400,8778): U1's input net lc2_w8646
+# busl_x7122's metal on north of the stub (run of 2026-11-21): from the pad (7835,8862) it runs north on
+# x 7835 over U1's second row (no contact) to its end on a pad (7834,8647) (65 px south of cdp3_w8063's pad
+# (7838,8582): two metals end to end, bare ground between). The pad's poly row runs east (y 8637-8658) under
+# the x 7880 metal (no contact) toward the box (7935,8648) of the gate cluster beside row A (AMB-047): drawn to
+# x 7905 (port); how it meets that box is not read.
+M 7835,8810 y8640 w=14
+P 7817,8630:7851,8660
+C 7834,8647 s=20x20
+P 7834,8647 x7905 w=20

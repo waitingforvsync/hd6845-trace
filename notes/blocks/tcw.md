@@ -8,7 +8,7 @@ Partial. 23 transistors in `trace/tcw.txt` (plus three pull-downs in `trace/fld.
   with both loads, the inverter `fld_y_b`, and the last inverter, which drives the row
   `tc1_x1_u`. Sections "Run 2" and "AND-OR-invert" below.
 - **Stretch B, y 3200-3620** (run 3, 2026-11-17): the big gate has its output and load,
-  `tcw_o3240` = NOT(`tcw_m6320` AND `tcw_o3550` AND (`tcw_m6362a` OR `tcw_m6404`)), and the
+  `tcw_o3240` = NOT(`tcw_m6320` AND `tcw_o3550` AND (`tcw_m6362a` OR `lc3_w9947`)), and the
   inverter `tcw_o3550` was complete already. Its output leaves north on a poly along x 6584-6600, drawn to y 3150; beyond is not traced.
   Section "Run 3".
 - **Stretch A, y 2690-3220**: the pull-downs under the ground rail and the bus metals of their
@@ -38,16 +38,16 @@ the bundle that carries R9's match passes it (`notes/blocks/r9m.md`). The field
 
 ### AND-OR-invert at y 3690-3905 (extracted)
 
-    tcw_o3820 = NOT( fld_a_in OR (tcw_a AND tcw_c) )      (third input identified in run 2)
+    tcw_o3820 = NOT( fld_a_in OR (rst_ck AND tcw_c) )      (third input identified in run 2)
 
 Under the rail one diffusion column: rail contact (6512,3708) | gate `tcw_c` (y 3732-3750)
-| node | gate `tcw_a` (y 3777-3795) | output | gate `fld_a_in` (y 3845-3863) | rail contact
+| node | gate `rst_ck` (y 3777-3795) | output | gate `fld_a_in` (y 3845-3863) | rail contact
 (6535,3905). The output node has an arm east (y 3808-3836) to a load whose gate poly is
 one piece with a pad (6648,3785) above it; the pad's tail goes west and down onto the arm
 (buried contact, `?`). From the pad a thin metal runs south along x 6645 to a pad
 (6646,3986): the output's way out. That pad's poly gates a pull-down of `fld_a_in` (run 2).
 
-- `tcw_c` and `tcw_a` are the same nets as two of the three inputs of the group below:
+- `tcw_c` and `rst_ck` are the same nets as two of the three inputs of the group below:
   their thin metals (x 6319, x 6403) end on pads at (6318,3740) and (6400,3788), and from
   each pad the poly goes east as a gate of this stack. So neither net is driven here;
   their drivers are further on (each also has a poly going west from its lower pad, along
@@ -61,7 +61,7 @@ shots. The supply assignment of the two rails is the layout rule (AMB-014).
 
 ### The group at y 3940-4200 (in `trace/fld.txt`; pull-downs only)
 
-`fld_a_in` low through `tcw_a` AND `tcw_b`; `fld_y_b` low through `tcw_c`. Their loads, and a
+`fld_a_in` low through `rst_ck` AND `tcw_b`; `fld_y_b` low through `tcw_c`. Their loads, and a
 third pull-down of `fld_a_in`, were found in run 2 (below).
 
 ## Read, not drawn (2026-11-16)
@@ -115,7 +115,7 @@ Seventeen gates under the rail x 6505-6560, in five stretches of diffusion:
 
 West of the column a bus of thin vertical metals (x 6232, 6276, 6319, 6360, 6403, 6465)
 brings the inputs: each gate's poly runs west to a pad on one of them. A net can have
-pads at several rows (`tcw_a`, `tcw_c` do), so the bus metals have to be followed pad by
+pads at several rows (`rst_ck`, `tcw_c` do), so the bus metals have to be followed pad by
 pad; a metal at one x is several nets along its length.
 
 ### Stretch B, y 3230-3620: three pull-down stacks with their inputs (drawn, partial)
@@ -125,8 +125,8 @@ transistors. From the extraction:
 
     tcw_o3326 : to the rail through tcw_m6362a; and through tcw_m6362b, then tcw_m6320, to
                 the top node of the stack (y 3232-3250), whose connection is not found
-    tcw_o3437 : to the rail through tcw_m6404
-    tcw_o3550 : to the rail through tcw_m6232
+    tcw_o3437 : to the rail through lc3_w9947
+    tcw_o3550 : to the rail through c4l_gab
 
 Each gate poly runs west to a pad on one of the bus metals (pads at (6315,3263),
 (6378,3355), (6408,3393), (6222,3526); the second gate's poly goes round by x 6289 to a
@@ -137,7 +137,7 @@ Read but not drawn as joins:
 
 - `tcw_m6362b` has a lower pad (6385,3567) whose poly goes east to the foot of the third
   stack's output (`tcw_o3550`): probably that output's way out (then the second gate of
-  the first stack is NOT `tcw_m6232`). The join itself is not read.
+  the first stack is NOT `c4l_gab`). The join itself is not read.
 - `tcw_m6320` has a lower pad (6315,3655) with a poly going west along y 3655.
 - If the first stack's top node is on ground, `tcw_o3326` = NOT(`tcw_m6362a` OR
   (`tcw_m6320` AND `tcw_m6362b`)), the same shape as `tcw_o3820`.
@@ -156,15 +156,15 @@ things; each is in the trace with a `?` and in AMB-015:
 
 - The output arms of stacks 1 and 2 are joined by a diffusion strip along x 6588-6612, so
   the two stacks are one gate with the rail contact in its middle.
-- Stack 3 is a complete inverter: `tcw_o3550` = NOT `tcw_m6232` (extracted), load under the
+- Stack 3 is a complete inverter: `tcw_o3550` = NOT `c4l_gab` (extracted), load under the
   block (6625-6680, 3540-3570), supply contact (6700,3545).
 - Its output goes west through a buried contact onto the poly of the pad (6385,3567), up
   the bus metal `tcw_m6362b` and round to the middle gate of stack 1.
 
 So, as extracted:
 
-    tcw_o3550 = NOT tcw_m6232
-    tcw_o3326 : low through tcw_m6362a, or through tcw_m6404, or through
+    tcw_o3550 = NOT c4l_gab
+    tcw_o3326 : low through tcw_m6362a, or through lc3_w9947, or through
                 (tcw_o3550 AND tcw_m6320) to the top node of stack 1 (connection not found)
 
 Also seen, not drawn: a supply contact ring at (6705,3375) (the box (6690-6730,
@@ -180,20 +180,20 @@ rings), `railA.png`, `A_cm.png` (class maps at 4x); gate positions from
 `tools/railprof.py`; overlay check `A_chk.png` (it sits on all eight pad rings, the five
 bus metals and the three rail contacts). Six more transistors. From the extraction:
 
-    pair 1:  tcw_m6362a  low through tcw_m6404 AND tcw_m6320
-    pair 2:  tcw_o2993   low through tcw_m6404 AND tcw_m6278
-    pair 3:  rail | gate tcw_o2993 | tcw_o3115 | gate tcw_m6404 | tcw_o3180
+    pair 1:  tcw_m6362a  low through lc3_w9947 AND tcw_m6320
+    pair 2:  tcw_o2993   low through lc3_w9947 AND tcw_m6278
+    pair 3:  rail | gate tcw_o2993 | tcw_o3115 | gate lc3_w9947 | tcw_o3180
 
 | Gate (y under the rail) | Pad | Bus metal |
 |---|---|---|
-| 2740-2760 | (6403,2745) | `tcw_m6404` (top end) |
+| 2740-2760 | (6403,2745) | `lc3_w9947` (top end) |
 | 2786-2806 | (6310,2787) | `tcw_m6320` (top end) |
-| 2910-2930 | (6400,2915) | `tcw_m6404` |
+| 2910-2930 | (6400,2915) | `lc3_w9947` |
 | 2957-2975 | (6272,2958) | `tcw_m6278` |
 | 3081-3099 | none: a C-shaped poly from pair 2's output arm | (`tcw_o2993`) |
-| 3130-3150 | (6400,3135) | `tcw_m6404` |
+| 3130-3150 | (6400,3135) | `lc3_w9947` |
 
-- **`tcw_m6404` is one metal** from its top pad (6403,2745) through the pads (6400,2915)
+- **`lc3_w9947` is one metal** from its top pad (6403,2745) through the pads (6400,2915)
   and (6400,3135) to (6408,3393): seen continuous in both metal shots, a ring at each pad.
   It gates four pull-downs of the column: a common enable or clock.
 - **Pair 1's output is `tcw_m6362a`**: the output node has an arm west (class map: open
@@ -221,25 +221,25 @@ Corrections to what I wrote on 2026-11-16, when I held this stretch back:
   under it. The metal shots are the evidence for the bus metals, not that profile.
 
 Not resolved in this stretch: where `tcw_m6278`'s poly along y 3180 ends; what the poly
-from `tcw_m6232`'s top pad (6230,2875) does at the rail's west edge (it arrives at the
+from `c4l_gab`'s top pad (6230,2875) does at the rail's west edge (it arrives at the
 height of the first contact box); the loads; everything east of the rail.
 
 ### The bus metals south of the column, and the last gate (2026-11-16; drawn)
 
 `tools/follow.py` and one view of both shots (`m6404s.png`).
 
-- **`tcw_m6404`, the common enable, comes from the south**: from the column's foot it runs
+- **`lc3_w9947`, the common enable, comes from the south**: from the column's foot it runs
   west along y 3708, south along x 6275, steps west round `fld_a_in`'s pad (y 3919,
   x 6233), back east at y 4231 and south along x 6282 to a pad (6275,4405) at the top of
   the vertical poly x 6275 of the field under the six bus metals. That poly goes on south
   to a pad (6275,4825) (`w1a.png`) and beyond: not drawn.
-- **`tcw_m6232`** ends in the south on a pad (6232,3870); from it a poly runs east along
+- **`c4l_gab`** ends in the south on a pad (6232,3870); from it a poly runs east along
   y 3912 to the ground rail, which it reaches between the rail contact (6535,3905) and
   the node of `fld_a_in`. The rail profile reported a dull "poly over field" at exactly
   y 3910-3934. Whether the poly only crosses, or gates a third pull-down of `fld_a_in`'s
   node, was open; a colour check the same day shows it does not cross the rail (AMB-014): it
   ends at the rail's west edge, 30 px above the end of `fld_a_in`'s poly, possibly on the
-  same node (then `tcw_m6232` would be `fld_a_in`). Drawn to the rail's west edge only.
+  same node (then `c4l_gab` would be `fld_a_in`). Drawn to the rail's west edge only.
 - **A third metal on the x 6362 track**, `tcw_m6362c`, from a pad (6362,3832) to a pad
   (6362,4266). The upper pad's poly goes east towards the west side of `tcw_o3820`'s
   output node (drawn to x 6440; the join is not read). The lower pad's poly is the gate
@@ -280,7 +280,7 @@ inverter the row has a second driver. Two inverters on one net is not impossible
 the joins at `tc1`'s pads (6962,4268) and (6968,3905) should be looked at again with this in
 mind. Nothing in `tc1`'s trace is changed here.
 
-### `tc1_p4308`'s row, y 4428-4448
+### `ck_a`'s row, y 4428-4448
 
 Ends on a pad with a metal contact at (6622,4440) (text map: bright centre in a dark ring in
 both metal shots, green hole in the clean shot); the thin metal leaves south at x 6621 into
@@ -288,12 +288,12 @@ both metal shots, green hole in the clean shot); the thin metal leaves south at 
 
 ### The group at y 3900-4200, east of the rail: a cross-coupled pair (traced)
 
-    fld_a_in  = NOT( (tcw_a AND tcw_b) OR tcw_o3820 )
-    tcw_o3820 = NOT( fld_a_in OR (tcw_a AND tcw_c) )
+    fld_a_in  = NOT( (rst_ck AND tcw_b) OR tcw_o3820 )
+    tcw_o3820 = NOT( fld_a_in OR (rst_ck AND tcw_c) )
     fld_y_b   = NOT tcw_c
 
-A latch gated by `tcw_a`: with `tcw_a` low both keep their state; with it high `tcw_b` pulls
-`fld_a_in` low and `tcw_c` pulls `tcw_o3820` low (traced; "a transparent latch with `tcw_a` as
+A latch gated by `rst_ck`: with `rst_ck` low both keep their state; with it high `tcw_b` pulls
+`fld_a_in` low and `tcw_c` pulls `tcw_o3820` low (traced; "a transparent latch with `rst_ck` as
 its enable" is the reading, not a traced fact about what the signals are).
 
 - **`fld_a_in`'s node** (the top node of `fld`'s stack, y 3956-3985 under the rail) has an arm
@@ -329,7 +329,7 @@ the thin metal x 6612-6628 left an etch-boundary line on each side of itself in 
 stripped shot (x about 6607 and 6635, on every row from y 3190 to y 3290), and the rail one at
 x about 6585; they cross every feature and are not layout (trap 4).
 
-    tcw_o3240 = NOT( tcw_m6320 AND tcw_o3550 AND (tcw_m6362a OR tcw_m6404) )
+    tcw_o3240 = NOT( tcw_m6320 AND tcw_o3550 AND (tcw_m6362a OR lc3_w9947) )
 
 (as extracted; it rests on the strip of AMB-015, which is still drawn `?`).
 
@@ -383,14 +383,14 @@ Also in `ports.d/tcw.txt`.
 | Name | Layer | Where | Direction | What |
 |---|---|---|---|---|
 | `tc1_x1_u` | poly | x 6750, y 4383-4401 | out | output of the last inverter, east into `tc1` (its row to the pad (6947,4396)) |
-| `tc1_p4308` | poly | x 6750, y 4428-4448 | in | from `tc1`; ends on the pad (6622,4440) |
-| `tc1_p4308` | metal | x 6615-6627, y 4450 | ? | the thin metal from that pad, south into `fld` |
-| `tcw_m6404` | poly | pad (6275,4405) | in | top of a vertical poly going south; gate input of four pull-downs |
+| `ck_a` | poly | x 6750, y 4428-4448 | in | from `tc1`; ends on the pad (6622,4440) |
+| `ck_a` | metal | x 6615-6627, y 4450 | ? | the thin metal from that pad, south into `fld` |
+| `lc3_w9947` | poly | pad (6275,4405) | in | top of a vertical poly going south; gate input of four pull-downs |
 | `tcw_m6320` | poly | x 6205, y 3646-3664 | ? | poly going west from the pad (6315,3655) |
 | `tcw_m6278` | metal | x 6270-6282, y 2700 | ? | bus metal, drawn end |
 | `vss`, `vcc` | metal | x 6507-6557 and x 6687-6737, y 4450 | - | the two rails |
 
-`tcw_a`, `tcw_b`, `tcw_c`, `fld_a_in` and `fld_y_b` leave through `fld`'s geometry (pads west of
+`rst_ck`, `tcw_b`, `tcw_c`, `fld_a_in` and `fld_y_b` leave through `fld`'s geometry (pads west of
 the rail), not through a boundary of this package.
 
 ## Ambiguities
@@ -532,7 +532,7 @@ North of y 3660 the loads and outputs. What run 2 saw there, not drawn (views `b
   gate and output.
 - y 2500-2690: not looked at.
 - `tcw_b`'s metal (x 6465) north of y 3990 and its poly east from (6580,3647); the polys of
-  `tcw_a` and `tcw_c` going west along y 4000 and y 4130 (west of this package's region).
+  `rst_ck` and `tcw_c` going west along y 4000 and y 4130 (west of this package's region).
 - Re-read items R16, R19, R20, R23 for the 2026-11-16 work north of y 3660 are still open; the
   south end was read in the chip-2 stripped shot in run 2.
 
@@ -544,6 +544,16 @@ strips between the rails as runs of `d`), then one view of both stripped shots a
 
 Two poly rows enter this region from `tc1` at x 6750: y 4385-4405 (`tc1_x1_u`, seen to about
 x 6445, passing under the ground rail x 6505-6560, not checked for a channel there) and
-y 4428-4448 (`tc1_p4308`, ending on a pad with a contact at (6620,4436); metal south along
-x 6621). `tc1_p3698` comes down a poly under the supply rail's edge at x 6725-6740. These are
+y 4428-4448 (`ck_a`, ending on a pad with a contact at (6620,4436); metal south along
+x 6621). `tc1_ns2` comes down a poly under the supply rail's edge at x 6725-6740. These are
 this block's to follow.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- `rst_ck` is `rst_ck` (`eof` run 2, firm): the output of the lone inverter of the input buffer row.
+- `c4l_gab` is also the 4-bit counter's pass-gate line `c4l_gab` (`tl3` run 11).
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- The signal on track A / line X / the first through line of the left-centre strips, which these notes call a clock, a strobe "once per scan line" or leave without a source, **is the reset**: `rst_a`, the buffered copy of `rst` = NOR(`lpstb_b`, `res_b`) made by `lc1`'s gate 5 (`eof` run 10, piece `isrc5`, firm). `rst_ck`, `rst_rc` and `rst_lat` are further buffered copies of it: high while the RES and LPSTB pins are both low, and only then. The belief "a strobe once per scan line" is withdrawn.
+- `lc3_w9947` ("a common enable or clock") is the clock net of the left-centre ripple counter (`eof` run 13, piece `ck5`); its driver is not in this block's drawn part nor in the left-centre strips. South of y 2500 between x 6400 and 6750 the pad (6413,2617) with its poly east, `tl6_p6143`'s poly along y 2530 and the metals y 2575-2620 are undrawn (`tlb` run 1).

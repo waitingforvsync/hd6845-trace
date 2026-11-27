@@ -1,11 +1,81 @@
 # lc2: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
-# The package's region is x 4400-6450, y 8067-9233. Only latch B (x 5590-5895, y 8055-8560) is drawn.
+# The package's region is x 4400-6450, y 8067-9233. Latch B (x 5590-5895, y 8055-8560) and latch C (x 5840-6275, y 8525-9030) are drawn.
 
 lc2_w8169   M  5549-5571,8067  in   latch B's enable: the metal x 5560 from its two pads (5558,8169), (5558,8386) runs on north into lc1 (believed to (5558,7646); not drawn north of y 8067)
-lc2_w8254   M  5461-5487,8238-8272  in   latch B's clear: drawn only over the pad (5472,8254); the metal x 5460-5490 runs on (not followed)
-lc2_w8341   M  5503-5525,8326-8357  out  latch B's output Na: drawn only over the pad (5514,8341); the metal runs on (not followed)
-lc2_w8450   M  5547-5569,8480  in   latch B's data: the metal from the pad (5558,8450) runs on south (not followed)
 vss         M  5659-5705,8060  -    rail over latch B, runs on north into lc1 (the copy's VSS box reaches y 8062)
-vss         M  5659-5705,8560  -    rail runs on south (not drawn further)
 vcc         M  5840-5890,8067  -    rail runs on north
-vcc         M  5840-5890,8560  -    rail runs on south (not drawn further)
+
+# Run 3: latch D's lower unit and the bus field east of the latches (x 6140-6490, y 8067-8560)
+lc1_w7928   M  5918-5932,8067  out  the lower unit's node, by the thin metal from its plate's pad (5927,8131) to lc1's upper unit
+lc1_w7928   P  6401-6415,8067  out  the same node's row (label lc2_w8083), north out of the strip
+vss         M  6015-6063,8067  -    the east rail, one metal from lc1's piece to latch C's
+lc2_w8646   M  6159-6177,8067  in   latch C's enable: the metal runs north out of the strip (lc1 has no port there)
+lc2_w8646   M  6450,8292-8310  ?    its branch east (metal B)
+ck_out   M  6203-6221,8067  in   latch D's enable, through the pad (6212,8128)
+ck_out   M  6450,8250-8268  out  on east (metal A)
+rst_c   M  6248-6264,8067  in   latch D's clear, and by a cross-under and a metal latch C's
+lc1_w7780   M  6287-6307,8067  in   latch D's data, to the pad (6297,8170)
+lc2_w8474   M  6332-6350,8067  ?    the metal of the pad (6341,8214)
+rst_ck   M  6422-6440,8067  ?    a metal from the north that turns east
+rst_ck   M  6450,8163-8181  ?    on east
+tl3_w3982   M  6462-6480,8067  in   latch C's data: the metal of the pad (6470,8127), 20 px east of the strip
+
+# Run 4: the inverter below latch C and its thin metal
+lc2_w9124   M  5967-5981,8067  out  the thin metal: NOT lc2_w8822 (latch C's Na), from the inverter below latch C north through latches C and D into lc1
+rst_c   M  5466-5486,8067  in   latch B's clear: lc1's metal on south to the pad (5472,8254)
+lc2_w8341   M  5508-5524,8067  out  latch B's output Na: the metal from the pad (5514,8341) runs north out of the strip
+lc2_w8474   P  5400,8509-8526  ?    drawn end: the poly from the pad (5428,8516) runs on west (seen to x 5150)
+lc2_w8474   M  5421-5437,9233  ?    the same metal runs on south into lc3
+rst_c   P  6450,8911-8936  out  the poly from latch C's clear pad (6257,8731), diagonally south-east out of the strip
+
+# Run 5: the gate column south of latch B (the inverter of latch B's data; an AND-OR-INVERT gate)
+lc2_w8450   M  5618-5634,9256  out  latch B's data: the west thin metal on south (meets lc3_m5626)
+vss         M  5659-5705,9256  -    latch B's rail on south (meets lc3's)
+vcc         M  5840-5890,9256  -    the rail on south (meets lc3's)
+lc3_w9299   M  5550-5568,9256  out  row 4's metal on south to lc3's pad (5560,9299)
+lc3_m5756   M  5749-5763,8067  ?    the east thin metal, north through latch B into lc1; no contact found on it in the strip
+lc3_m5756   M  5749-5763,9256  ?    the same metal on south (meets lc3's)
+lc2_w9125   P  5924-5940,9256  out  the AND-OR-INVERT's output poly (label lc2_w9185), south into lc3
+
+# Run 6: three lines of the staircase west of latch B
+lc1_w7170   M  5030-5046,8067  ?    lc2_w8474's metal north as lc1's thin metal T1 (the input of lc1's gate 2)
+rst_n   M  5073-5093,8067  in   lc1's metal M_c2, down the staircase
+rst_n   M  5465-5481,9233  out  the same metal on south into lc3 (no contact in the strip)
+lc3_w9299   M  5422-5438,8067  in   row 4's metal, north into lc1
+lc2_w8450   M  5378-5394,9233  ?    the staircase's fourth line (label lc2_w8907; lc2_w8450 through an uncertain buried contact) on south into lc3
+lc2_w8450   P  5240,8941-8958  ?    drawn end: the second poly of the pad (5386,8951) (label lc2_w8907) runs on west into the gate cluster
+
+# Run 7: gate 9 of lc1's gate column
+lc2_w8127   M  5118-5136,8067  out  gate 9's output: metal from the pad (5127,8080) north into lc1
+lc1_w7990   P  5072-5092,8067  in   gate 9's input: lc1's poly under M_c2
+vcc         M  4755-4803,8067  -    rail 1 from lc1
+
+# Run 7: the three rows above the west cluster and their tracks
+lc2_w8450   M  4508-4526,8330  ?    drawn end: row B's track (label lc2_w8907) runs on south (to about y 9360)
+lc2_w8298   M  5249-5265,8334  ?    drawn end: the fifth staircase line runs on south (to about y 9056)
+vss         M  4928-4980,8067  -    rail 2 from lc1
+
+# Run 8: the west cluster's supplies and latch K
+vcc         M  4924-4980,9190  -    the cluster's middle rail: drawn end, runs on south into lc3
+vss         M  4757-4820,9190  -    the cluster's west rail (VSS by structure): drawn end, runs on south into lc3
+vss         M  4668-4712,8067  -    the west rail's feed, north into lc1
+lc2_w8907   M  4508-4526,8700  ?    track B, drawn end: runs on south past the pad (4517,8604) of K1's clear row
+lc2_w8475   M  4553-4575,9190  in   the clock of the flip-flop: an L-shaped metal from the south, to the pad (4648,9124): drawn end
+# Run 9: gates K3 and K4
+lc1_w7170   M  4466-4484,9060  ?    track A, drawn end: runs on south past the pad (4473,9038) of K4's row
+# Run 10: the east column (second flip-flop)
+lc2_w9034   M  5247-5263,9233  out  the second flip-flop's slave output, south into lc3
+vss         M  5084-5148,9256  -    the east rail on south into lc3
+vss         D  5104-5158,9250  -    the VSS node (contact (5124,9224)) of the stack under the east rail south of the east column, on into lc3
+lc2_w9171   D  5062-5078,9256  ?    the stack's top node leaves by the diffusion strip beside that rail, on into lc3 (it ends about y 9290)
+# Run 10, piece P: through lines and row ends
+rst_a   M  6450,8630       ?    through line, east edge
+rst_a   M  6299,9233       ?    through line, south edge
+res_b   M  6450,8692       ?    through line, east edge
+res_b   M  6342,9233       ?    through line, south edge
+lpstb_b   M  6450,8756       ?    through line, east edge
+lpstb_b   M  6387,9233       ?    through line, south edge
+lc3_w9947   M  6450,9165       ?    through line, east edge
+lc3_w9947   M  6432,9233       ?    through line, south edge
+lc2_w9079   M  5509-5527,9233  in   row 3's thin metal from its pad (5520,9081), south into lc3
+lc2_w9210   M  5334-5350,9233  in   row 5's metal from its pad (5341,9211), south into lc3

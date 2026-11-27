@@ -1,0 +1,29 @@
+# NAME        LAYER  X,Y              DIR  note
+wr_r12        M      15214,17290      in   from bd3's line (T7's position)
+wr_r14        M      15258,17290      in   from bd3
+wr_r15        M      15301,17290      in   from bd3
+wr_r13        M      15344,17290      in   from bd3
+wr_r12        P      10835,9522-9544  out  onto cdp3_c_wr (row C's write line); marked: one ?M on the way
+wr_r14        P      10835,8810-8826  out  onto wr_r14 (line into row A)
+wr_r13        P      10835,10699-10719 out onto wr_r13 (row H's write line)
+wr_r15        P      10590,11825-11845 out onto wr_r15 (row R1 lower half's strobe)
+rsel16_buf    M      15388,17290      in   from bd3
+rsel17_buf    M      15431,17290      in   from bd3
+rsel15_buf    M      15474,17290      in   from bd3
+rsel14_buf    M      15517,17290      in   from bd3
+rsel16_buf    M      6661-6675,14990  out  onto busl's rsel16_buf track
+rsel17_buf    M      6617-6631,14990  out  onto busl's rsel17_buf track
+rsel15_buf    M      6574-6588,14990  out  onto busl's rsel15_buf track
+rsel14_buf    M      6531-6545,14990  out  onto busl's rsel14_buf track
+rsel12_buf    P      14190-14208,17290 in  from bd3's poly x 14199
+rsel13_buf    P      15502-15522,17490 in  from bd3's poly x 15512
+rsel12_buf    M      6445-6459,14990  out  track x 6452 into busl's region (drawn there, busl run 8: to the track x 6690 at y 10400)
+rsel13_buf    M      6487-6501,14990  out  track x 6494 into busl's region (drawn there, busl run 8: to the track x 6733 at y 10400)
+rsel12_buf   M      6684-6696,10400  in   track x 6690 from busl's region (busl run 8: one metal with the track x 6452 at y 14990)
+rsel13_buf   M      6727-6739,10400  in   track x 6733 from busl's region (busl run 8: one metal with the track x 6494 at y 14990)
+# piece w8450 (run 4): lc2_w8450 from bl0's port across the bottom-left logic and along the bottom bus
+lc2_w8450     P      4920-4930,16703-16723  in   from bl0's poly row east of the pad (4823,16713) (bl0's port (4930,16713))
+lc2_w8450     P      6008,16791-16810  out  the band under the rail x 6008-6055: believed the gate of a pull-down of the bottom-left logic (undrawn); poly drawn to its end x 6065
+lc2_w8450     M      10479-10491,17760  out  the thin track x 10485 on north beside the bottom-centre logic's east gate column: passes over boxes (dark stretches), not followed
+rd_b7     P      10840,10654-10674 in   cdp3's row y 10664 (east piece of s0, drawn there to x 10850): bus N column 0
+rd_b7     P      10840,13323-13343 in   cdp4's row y 13333 (s0: n out to the right, drawn there to x 10850): cdp4_n_s0, the same net

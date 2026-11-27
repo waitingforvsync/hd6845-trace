@@ -8,7 +8,7 @@
 # thin metal W x 2689-2703), y 3558-3742: a NOR unit. findcell: tla's in2 unit
 # (2535-2790 x 5120-5290) recurs here at -1,-1562 with score 0.92 (acid1b); the geometry
 # below is that unit's, moved, and checked on b1.png (2.7x acid1b) and m1.png (2.7x metal).
-#   tl1_w3636 = NOR(tl1_w3594, tl1_w3678)
+#   tl1_w3636 = NOR(tl1_w3594, ck_out)
 # Column x 2549-2591 west of R1 between the rail's VSS boxes at y 3530-3588 (tla's, contact
 # (2612,3550)) and y 3697-3742 (contact (2622,3722)).
 D 2549,3558:2604,3578                 # top arm onto tla's rail box
@@ -26,7 +26,7 @@ N P 2530,3592 tl1_w3594
 P 2460,3668:2598,3688
 P 2440,3663:2476,3693
 C 2457,3678
-N P 2500,3678 tl1_w3678
+N P 2500,3678 ck_out
 # output: buried contact (concentric box) on the node between the gates, poly west along
 # y 3625-3645 to a pad with a contact (2283,3636) at the north end of a metal x 2283
 B 2547,3620:2577,3652
@@ -140,13 +140,13 @@ P 2732,4848:2770,4914
 
 # ====================================================================
 # West column, y 4590-4800: the gate that drives tl1_w4678 (first input of rcs_e4's NOR).
-#   tl1_w4678 = NOT( tl1_w4025  OR  tl1_w3594 AND tl1_w4360  OR  tl1_w4703 )
+#   tl1_w4678 = NOT( rcs_x1  OR  tl1_w3594 AND tl1_w4360  OR  tl1_w4703 )
 # The third pull-down and the load are east of R1 (end of the cell).
 # Read on p2a.png (6.8x acid1b), p2m.png (3.4x both metal shots), p4.png (3.75x), profiles
 # with tools/px.py and tools/textmap.py --acid (notes: "The gate that drives tl1_w4678").
 # A column of diffusion west of R1, x 2553-2588, mostly under the thin metal x 2557-2573, as
 # in the NOR units: an arm at its top (y 4598-4616) onto the rail's VSS box (y 4590-4640,
-# contact (2628,4610)); the row of tl1_w4025 (y 4625-4643, from the pad (2458,4635)) crosses
+# contact (2628,4610)); the row of rcs_x1 (y 4625-4643, from the pad (2458,4635)) crosses
 # it and ends at x 2598; below the row the node, with a buried contact (heavy box 2551-2575,
 # 4663-4692) onto the east end of tl1_w4678's row. From y 4670 the node widens east, across
 # the gap between the thin metal and R1, to the diffusion under R1 (y 4668-4700).
@@ -155,7 +155,7 @@ D 2600,4590:2655,4640                 # rail box, VSS contact
 C 2628,4610
 D 2553,4598:2604,4616                 # arm
 D 2553,4598:2588,4692                 # the column
-P 2540,4625:2598,4643                 # tl1_w4025's row, on east across the column
+P 2540,4625:2598,4643                 # rcs_x1's row, on east across the column
 B 2551,4663:2575,4692
 P 2540,4668:2573,4688                 # east end of tl1_w4678's row, on the box
 # The stack under R1 and in the gap west of it (x 2580-2657): node (y 4668-4700; it goes on
@@ -221,7 +221,7 @@ N P 2620,4362 tl1_w4360
 # The same unit 608 px higher (findcell on the clean shot: 2535-2790 x 4590-4780 recurs at
 # 0,-608 with score 0.94; the unit above it, 2535-2790 x 4345-4585, at 0,-608 with 0.93), with
 # the north piece of the thin metal x 2557-2573 (follow.py: (2563,3756)-(2566,4172)):
-#   tl1_w4070 = NOT( tl1_w4025  OR  tl1_w3636 AND tl1_w3752  OR  tl1_w4095 )
+#   tl1_w4070 = NOT( rcs_x1  OR  tl1_w3636 AND tl1_w3752  OR  tl1_w4095 )
 # Its own VSS box below the stack (y 4170-4215), where the master has the NOR's.
 @inst tl1_ub 0,-608
 D 2600,4170:2655,4215
@@ -236,9 +236,9 @@ N P 2545,4070 tl1_w4070
 # ====================================================================
 # West column, y 4340-4590 (and its copy 608 px higher, y 3732-3982): an inverter and a
 # three-input gate, which with the unit below (tl1_ub) makes a cross-coupled pair.
-#   tl1_w4360 = NOT tl1_w4243                               (copy: tl1_w3752 = NOT tl1_w2857)
+#   tl1_w4360 = NOT tl1_w4243                               (copy: tl1_w3752 = NOT rcs_mn3852)
 #   tl1_w4703 = NOT( tl1_w4243 AND tl1_w3594  OR  tl1_w4678 )
-#                               (copy: tl1_w4287 = tl1_w4095 = NOT( tl1_w2857 AND tl1_w3636 OR tl1_w4070 ))
+#                               (copy: tl1_w4287 = tl1_w4095 = NOT( rcs_mn3852 AND tl1_w3636 OR tl1_w4070 ))
 # Read on u1_a.png, u1_m1.png (4.1x clean shot and chip-1 metal), u2_a.png, u2_m.png (6x, four
 # shots), u3_a.png, u3_a2.png (6x both stripped shots), u4_all.png (west box, master and copy);
 # tools/railprof.py 2604 2646 4380 4600 (and 3772 3992); profiles in the notes.
@@ -251,7 +251,7 @@ N P 2545,4070 tl1_w4070
 D 2600,4403:2650,4447
 C 2620,4420
 D 2645,4403:2716,4440
-P 2651,4388:2663,4470
+P 2651,4388:2672,4470                 # gate x 2651-2672, about 21 long (run 5, 2026-11-18; re-read item R35): the bright band x 2654-2662 of the clean shot is only the part R1's margin protected; the poly's east edge line is at x 2674-2676 in all four shots on the band, the cap and the row's end, and the gap x 2664-2672 has the third gate's poly colour in the chip-1 metal shot (tools/tl1_band.py; notes)
 # the inverter's node: wide part under thin W, a column north to y 4350, and at the column's
 # top a buried contact (heavy arch, tan inside where the row's poly lies on it) with the row
 # y 4353-4372 of the pad (2562,4361): the output, and the plate's stem
@@ -351,18 +351,18 @@ M 2371,3925 y4300
 P 2354,3923:2392,3953
 C 2372,3938
 P 2386,3929:2545,3949
-# tl1_w2857: metal x 2370, y 2843-3863. Top pad (2372,2857): poly row east along y 2848-2866,
+# rcs_mn3852: metal x 2370, y 2843-3863. Top pad (2372,2857): poly row east along y 2848-2866,
 # under R1 and on east out of the strip. Bottom pad (2372,3851): poly row east along
 # y 3841-3861, a gate of the unit at y 3740-3960 (cell tl1_ua's copy)
 M 2371,2843 y3863
 P 2354,2842:2392,2872
 C 2372,2857
 P 2386,2848:2817,2866
-N P 2700,2857 tl1_w2857
+N P 2700,2857 rcs_mn3852
 P 2354,3836:2392,3866
 C 2372,3851
 P 2386,3841:2545,3861
-# tl1_w3678 (the NOR's second gate): metal x 2457, y 2800-3690. Top pad (2458,2812): poly
+# ck_out (the NOR's second gate): metal x 2457, y 2800-3690. Top pad (2458,2812): poly
 # row east along y 2803-2821 out of the strip
 M 2457,2800 y3690
 P 2440,2797:2478,2827
@@ -384,7 +384,7 @@ P 2512,4494:2545,4512
 P 2482,4703:2520,4733
 C 2499,4718
 P 2512,4708:2545,4728
-# tl1_w4025: metal x 2457 from a pad (2458,4026) south, 1,350 px, to y 5372 and east to a
+# rcs_x1: metal x 2457 from a pad (2458,4026) south, 1,350 px, to y 5372 and east to a
 # pad (2521,5372), whose poly row runs east along y 5362-5382 under the foot (seen straight
 # to x 3400, f2.png; drawn to the strip's edge). Contact on the way at (2458,4635). The pads'
 # rows go east into the units at y 4000-4200 and y 4590-4800 (cell tl1_ub). follow.py: one
@@ -394,7 +394,7 @@ M 2457,4012 y5372 x2532
 P 2440,4011:2478,4041
 C 2458,4026
 P 2470,4017:2545,4036
-N P 2520,4026 tl1_w4025
+N P 2520,4026 rcs_x1
 P 2440,4620:2478,4650
 C 2458,4635
 P 2470,4625:2545,4643
@@ -444,7 +444,7 @@ C 2500,6239
 P 2514,6228:2817,6246                 # likewise (sc11.png)
 
 # ====================================================================
-# tl1_w3333: a long wire down the west side, from the top of the strip to the small cluster.
+# tl4_w4068: a long wire down the west side, from the top of the strip to the small cluster.
 #   - metal: from a pad with a contact (2563,2550) west along y 2553 to a corner (2199,2556)
 #     and south at x 2199 to a contact (2197,3333) (follow.py: one piece, 836 + 362 px;
 #     ends on w1.png 3.1x, w2.png 2.4x). The top pad's poly goes on east under R1 (seen to
@@ -466,7 +466,7 @@ M 2826,2553 x2852 w=16
 P 2170,3282:2187,3360
 P 2180,3318:2215,3350
 C 2197,3333
-N P 2178,3300 tl1_w3333
+N P 2178,3300 tl4_w4068
 P 2170,3355:2187,4535
 P 2170,4530:2187,4550
 P 2170,4533:2333,4550
@@ -485,10 +485,10 @@ P 2134,5793:2545,5810
 # tools/railprof.py 2604 2646 5650 6350 gives the same stack as the master's, 1345 lower.
 # Overlay of the copy on four shots, 4x: sc3Aa/sc3Am, sc3Ba/sc3Bm, sc3Ca/sc3Cm.png;
 # cellcheck.py: median ncc 0.95-0.97 in the clean shot and 0.94-0.95 in the metal shot.
-#   tl1_w5706 = NOT tl1_w3333
-#   tl1_w5841 = NOT( tl1_w3333 AND ck_out  OR  tl1_w6022 )
+#   tl1_w5706 = NOT tl4_w4068
+#   tl1_w5841 = NOT( tl4_w4068 AND ck_out  OR  tl1_w6022 )
 #   tl1_w6022 = NOT( tl1_w5978  OR  ck_out AND tl1_w5706  OR  tl1_w5841 )
-# The rows that enter the copy from the west are the ones drawn above to x 2545: tl1_w3333
+# The rows that enter the copy from the west are the ones drawn above to x 2545: tl4_w4068
 # (y 5793-5810: gate 1 and the inverter's gate), tla's ck_out row from (2365,5847) (gate 2;
 # it ends at the rail's east edge like the master's: see the correction in trace/tla.txt),
 # tl1_w5978 (y 5969-5987: the pull-down west of the rail), tl1_w6022 (y 6013-6031: on the
@@ -547,7 +547,7 @@ P 2405,2500:2420,2728
 # east into a row that runs under R1 and the wide metal, over field, without a pad (n4, n5):
 #   tl1_w2637: down to y 2645, row y 2627-2645, to a pad with a contact (2827,2637) just east
 #              of the strip's edge; a metal leaves it east along y 2630-2645 (n7.png)
-#   tl1_w2592: down to y 2600, row y 2582-2600, drawn to the strip's edge; it goes on to a
+#   sl_eq_r5_n: down to y 2600, row y 2582-2600, drawn to the strip's edge; it goes on to a
 #              pad with a contact at about (2867,2595) with a metal going east (n7.png)
 P 2448,2500:2463,2645
 P 2448,2627:2817,2645
@@ -557,12 +557,12 @@ M 2827,2637 x2852 w=16
 N P 2600,2636 tl1_w2637
 P 2493,2500:2508,2600
 P 2493,2582:2817,2600
-N P 2600,2591 tl1_w2592
+N P 2600,2591 sl_eq_r5_n
 # A poly along the strip's north edge: from the west (x < 2100) along y 2498-2515 under the MA
 # metals to a corner at x 2372-2388, where it turns north out of the strip (n11.png, 3x, both
 # stripped shots). No connection in the strip.
 P 2100,2498:2388,2515
-N P 2250,2506 tl1_w2506
+N P 2250,2506 tl1_w5936
 # R1 north of tla's piece (which begins at y 3000): the same rail, x 2600-2650, without a
 # break from y 3005 up to the strip's north edge (n9.png 2.2x, n5.png, n3.png). No contact
 # under it here: the rows pass over field.
@@ -579,3 +579,37 @@ M [ 2733,2500 x2785 y2905 x2817 y2955 x2733 ]
 # the tracer on k2.png). So it is VSS, not a net of its own.
 M 2600,2470:2832,2508               # the plane's lower edge (it goes on north out of the strip)
 N M 2760,2700 vss
+
+# --- Run 5 (2026-11-18): the wire down the west margin. tl1_w5936 and the poly along the
+# strip's north edge (formerly tl1_w5936) are ONE net: the row y 5935 turns north at x 2094,
+# and by two cross-unders of the MA driver lines reaches the pad at the west end of the
+# north-edge poly. Stretches 1-3, 5-7 and part of 8 lie 0-140 px west of the strip (x < 2100),
+# in no other package's trace; they are drawn here because the wire is this strip's.
+# Views w_e, w_n, w_s, w_f, w_d, w_d2, w_g, w_h, sweep w_sv; profiles in the notes.
+# 9, 8: from the drawn row's west end (x 2110) west to the corner, north along x 2087-2100
+# (in the gap between ma3_drv_in's and ma1_drv_in's metals) to y 4950, west along y 4950-4966
+# to a pad with a contact (1978,4957).
+P 2087,5926:2112,5944
+P 2087,4950:2100,5944
+P 1996,4950:2100,4966
+P 1964,4942:1998,4973
+C 1978,4957
+# 6: metal x 1980 north to a pad with a contact (1979,4200). follow.py's contact candidate
+# (1978,4722) is dirt (no pad, no ring, field under it).
+M 1980,4957 y4200 w=12
+P 1962,4183:1998,4215
+C 1979,4200
+# 5, 4: poly east along y 4190-4206 under ma2, ma3, ma1 to x 2144, north along x 2129-2144 in
+# the gap between ma1_drv_in's and ma0_drv_in's metals to y 3193, west along y 3193-3208 to a
+# pad with a contact (2068,3200).
+P 1996,4190:2144,4206
+P 2129,3193:2144,4206
+P 2084,3193:2144,3208
+P 2052,3186:2086,3214
+C 2068,3200
+# 3, 2, 1: metal x 2064 north to the pad with a contact (2064,2507) on the west end of the
+# north-edge poly (drawn above from x 2100).
+M 2064,3200 y2507 w=12
+P 2050,2492:2088,2520
+C 2064,2507
+P 2086,2498:2102,2515

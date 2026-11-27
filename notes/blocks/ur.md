@@ -110,3 +110,25 @@ ends on something at about (5030,7000-7150)). Not traced there.
 What is left of the left column near the generator: the cell at y 7790-8000 is the
 `clk_tl` inverter (`notes/blocks/tla.md`); the cells below it are not traced.
 
+## Correction from `lc1` (coordinator, from pull request #20, 2026-11-18)
+
+- "Where `lc_step` comes from ... it ends on something at about (5030,7000-7150). Not traced there": it
+  ends on the output box of `lc1`'s gate 1 at (5006-5053, 6985-7022); `lc_step` = NOT `lc1_w7040`, the
+  output of latch D's upper unit (`notes/blocks/lc1.md`).
+- `trace/ur.txt`: the poly `P 3355,6368 x5012 y6900 w=20` is drawn about 9 px west of the photo's band
+  (x 5011-5031) over its last stretch. Geometry only; it still overlaps.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- From `tl3` run 11 (trace corrected, a1c5d8b): the 5-bit counter's L3 line is fed only from the west
+  (the poly along y 6410 west of the pad (3757,6410)); the pad (3968,6410) is `rcs_thin_e`'s, with a poly
+  leaving east. The 4-bit counter's L3 is `c4l_l3` (`tl4`'s latch inverted), its gab is
+  `c4l_gab`. `c4l_l3` and `c4l_gab` are drawn 10-21 px off north of y 6700 in the old reading
+  (corrected); `sl_l3`'s metal steps at y ~6665-6700 (drawn at 6560) and the `vcc` line x 3630 has no
+  metal from y 6330 to about 6570 (not corrected: R44).
+
+## Corrections (coordinator, from the handoff of `busl` run 19, 2026-11-24)
+
+- The pad (3968,6410)'s poly, "leaves east along y 6402-6422 (seen to x 4256; not drawn)", is drawn end to
+  end by `busl` (piece `yc`): `rcs_thin_e`'s line, 7,700 px east by three poly rows and two metals (the
+  metal y 6459) to a buried-contact box (11703,6556) on a diffusion band at the foot of `amr`'s slices.

@@ -130,7 +130,7 @@ M 13567,15180 y16188 x13672 w=20   # X: track k11, then east along y 16188 (trun
 P 13657,16176:13688,16204          # X's tap: a poly leaves east from here (see the gate column)
 C 13672,16190
 M 13672,16178 y16610 w=20          # X south on x 13672 (drawn in trunks.txt from y 16600)
-N M 13567,15600 inh_n
+N M 13567,15600 rst_a_n
 
 # --- inverter 1 (gate bar y 15183-15203)
 P 13567,15193 x13900 w=20          # gate bar 1, from X's upper contact
@@ -145,7 +145,7 @@ P 13782,15151 x13333 w=14          # output 1 west along y 15151, under tracks k
 P 13331,15135:13363,15167
 C 13347,15150                      # ... to track k6, which ends here
 M 13348,14690 y15163 w=20
-N M 13348,14700 inh_rc          # inverter 1's output leaves north on track k6
+N M 13348,14700 rst_rc          # inverter 1's output leaves north on track k6
 D 13898,15157:13962,15177          # output band 1 east to the load
 D 13905,15130:13927,15160          # bump up under the load's gate tie
 B 13904,15128:13928,15154
@@ -154,7 +154,7 @@ P 13925,15122:13970,15138          # ... east to the load block
 P 13962,15122:14000,15226          # load gate
 D 13945,15150:14050,15220          # load: strip west of the gate, channel, supply land
 C 14022,15185 s=26x36
-N D 13860,15170 inh_rc
+N D 13860,15170 rst_rc
 
 # --- inverter 2 (gate bar y 15271-15291)
 P 13567,15281 x13917 w=20          # gate bar 2, from X's lower contact
@@ -172,7 +172,7 @@ P 13925,15333:14000,15349          # ... east along y 15341 to the foot of the l
 P 13959,15250:14000,15340          # load gate
 D 13926,15257:14049,15326          # load: strip west of the gate, channel, supply land
 C 14022,15289 14035,15311
-N D 13860,15305 inh_lat
+N D 13860,15305 rst_lat
 
 # ================================================================ track k17 into the mid-right array
 # k17 jogs west to k16's track at y 14975 (k16 having ended at wr_r1's contact), runs
@@ -204,7 +204,7 @@ N M 13848,16280 vss                # narrow lines (not traced), so this piece is
 # up under the rail, east along y 16194 and ends as a block (x 13886-13926).
 P 13614,15658:13648,15688
 C 13629,15673
-P 13640,15671 x13805 w=20           # poly east from the top contact into the gate column: gate of the pull-down of bd1_k
+P 13640,15671 x13812 w=20           # poly east from the top contact into the gate column: gate of the pull-down of bd1_k
 #                                     on the strip x 13773-13804 (see "gate column, y 15385-15850")
 M 13630,15660 y16163 w=20
 P 13613,16136:13646,16164
@@ -222,10 +222,10 @@ M 13711,17082 x13467 w=18           # metal west along y 17082
 C 13480,17083
 P 13464,17067:13496,17098
 P 13480,17083 y17150 w=18           # poly south, leaving the region (seen to y 17145)
-N P 13480,17145 inh_src
+N P 13480,17145 rst_a
 P [ 13640,16220 13802,16220 13846,16184 13890,16184 13890,16205 13853,16205 13812,16243 13640,16243 ]
 P 13886,16183:13926,16258          # the block at its east end
-N P 13700,16232 inh_src
+N P 13700,16232 rst_a
 # --- diffusion under the rail: X above the gate, ground below
 D 13817,16154:13888,16275
 C 13855,16250 s=22x34              # ground rail to source
@@ -305,11 +305,11 @@ M 13435,15942 y16769 w=20            # ... and south on k8's position (scan: met
 #   N2 - G5[xn2] - N3 - G6[an] - vss(13842,15832)
 # East of the rail are the loads; the supply land x 14000-14048 feeds them.
 
-# --- bd1_a: enters from the north on track k15, jogs west to k13's position (x 13652) and runs to a contact
+# --- rc_eq_r4: enters from the north on track k15, jogs west to k13's position (x 13652) and runs to a contact
 # at 13655,15391; poly east, south along x 13723 under xn2's metal, east along y 15498 across the
 # column (P2) and north again east of the rail (P4), ending in a rounded cap at y 15427.
 M 13738,14690 y15087 x13652 y15404 w=20   # track k15 jogs west at y 15087 to k13's position (3.1x metal view)
-N M 13738,14700 bd1_a
+N M 13738,14700 rc_eq_r4
 P 13640,15377:13670,15405
 C 13655,15391
 P 13655,15392 x13723 w=14
@@ -317,7 +317,7 @@ P 13711,15385:13735,15508          # P1: south along x 13723
 P 13711,15488:13890,15508          # P2: gate across the column, y 15488-15508
 P 13868,15427:13890,15508          # P4: gate between the ground diffusion and inverter A's output
 
-# --- inverter A: bd1_an = NOT bd1_a. Pull-down P4 (W/L 38/22), load block x 13936-13992.
+# --- inverter A: bd1_an = NOT rc_eq_r4. Pull-down P4 (W/L 38/22), load block x 13936-13992.
 D 13815,15439:13867,15490          # ground diffusion under the rail
 C 13832,15461 s=26x30
 D 13861,15440:13929,15478          # under P4 and on east: the output node
@@ -349,7 +349,7 @@ C 13845,15657 s=26x30
 P 13804,15602:13912,15623          # G4: gate y 15602-15623, rounded west end at x 13804; east of the rail a block
 N P 13890,15612 bd1_q
 ?P 13896,15618:13908,15642         # ... from the block south (colour profile; 4.85x)
-P 13896,15630:13996,15650          # ... into a band going east to the edge of the supply land (what it does there: not traced)
+P 13896,15630:13993,15650          # ... into a band going east to the edge of the supply land (what it does there: not traced)
 # N1's west end: buried contact to a poly pad that ends 20 px further west (nothing else joins it)
 D 13770,15575:13800,15597
 B 13766,15572:13802,15600
@@ -372,7 +372,7 @@ N M 13957,15650 bd1_n1
 ?B 13894,15558:13926,15576
 ?D 13896,15560:13924,15570
 
-# --- pull-down of bd1_k gated by inh_src, on a strip under bd1_an's metal
+# --- pull-down of bd1_k gated by rst_a, on a strip under bd1_an's metal
 D 13773,15634:13804,15730          # strip: top segment, channel under g (y 15661-15681), lower segment
 ?D 13800,15634:13830,15650         # top segment to the ground diffusion through the gap between the two metals (see notes)
 B 13768,15699:13792,15733          # lower segment to the poly from the west
@@ -383,7 +383,7 @@ M 13674,15702 y15988 w=20          # bd1_k south on x 13674 to a contact at 1367
 N M 13674,15800 bd1_k
 C 13674,15975
 P 13658,15960:13692,16008
-P 13522,15997 x13690 w=20          # poly west under inh_src's and X's metal (4.3x metal view)
+P 13522,15997 x13690 w=20          # poly west under rst_a's and X's metal (4.3x metal view)
 P 13506,15982:13540,16014
 C 13522,15999
 M 13521,15986 y16273 w=20          # ... and south on k10's position (scan: metal to y 16273; lower end not traced)
@@ -412,7 +412,7 @@ P 13902,15782:13958,15806          # the block
 
 # ================================================================ tracks k7, k8, k9, k11 (second run)
 # Nested jogs at y 15087-15176 (3.1x metal view): each steps one track east after the track
-# east of it has ended. k15 steps west and is bd1_a (drawn with the gate column).
+# east of it has ended. k15 steps west and is rc_eq_r4 (drawn with the gate column).
 # k7: east at y 15176 to k8's position, south to a contact at 13432,15888; poly east along y 15889
 # under five lines into the gate column (seen to x 13695; what it does there is not traced).
 M 13391,14690 y15176 x13435 y15901 w=20
@@ -437,3 +437,20 @@ M 13565,14690 y15005 x13608 y15621 w=20
 P 13594,15594:13626,15622
 C 13609,15608
 N M 13565,14700 hc1
+
+# ================================================================ run 3 (2026-11-27): re-read item R1, the channel's tracks
+# Audit of every drawn thin metal of the channel (x 13040-13700, y 14700-16740) against both metal shots and the
+# clean shot (tools/bd1_audit.py, every flagged spot looked at on a four-shot sheet, tools/bd1_sheet.py): no break,
+# no contact that is not drawn, every drawn contact real (notes/blocks/bd1.md, "Run 3"). Two things were not drawn:
+# --- k4 (rc_eq_r6) south of y 16500: the metal runs on down x 13304 to y 16690 and turns south-west along a
+# diagonal (x + y = 29997) into the field of diagonals; drawn to the edge of this run's region (y 16738).
+M 13304,16490 13304,16690 13259,16738 w=14
+# --- one more load of rst_a (eof run 8's lead): a pad with a contact on rst_a's metal x 13630 (ring and bright
+# centre in both metal shots, the pad's box and its tail in the clean shot); its poly runs east along y 16620-16636
+# under X's line (x 13672: salmon, band not widened, no hole) and ck_out's metal (x 13716: olive in the clean shot
+# there, as plain crossings on this row are; the row's edges y 16618 and y 16636 unchanged, no pad, edge bars only in
+# both metal shots: no contact) into the gate column; drawn to x 13760. It runs on: bright salmon over tan at
+# x 13776-13800 under the narrow metal, probably a gate there (review round 1's lead; not drawn).
+P 13611,16610:13645,16642              # pad
+C 13628,16626
+P 13640,16628 x13760 w=16

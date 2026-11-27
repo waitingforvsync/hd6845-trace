@@ -52,6 +52,7 @@ jobs:
             costs
             notes
             dashboard
+            tutorial
             tools/dashboard.py
             out/report.txt
             out/netlist.json
@@ -59,6 +60,8 @@ jobs:
           sparse-checkout-cone-mode: false
       - run: |
           python3 tools/dashboard.py --out _site/dashboard
+          cp -r tutorial _site/tutorial
+          rm -f _site/tutorial/export.py _site/tutorial/README.md
           printf '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=dashboard/"><title>HD6845S trace</title><a href="dashboard/">Dashboard</a>\n' > _site/index.html
       - uses: actions/upload-pages-artifact@v5
         with:

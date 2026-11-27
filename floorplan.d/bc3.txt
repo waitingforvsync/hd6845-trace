@@ -1,0 +1,7 @@
+# bc3: bottom-centre random logic (x 7000-9000, y 16300-18550)
+7475,17575:7860,17705  logic  inverter (copy of tl5_inv) | bc3_w17605 = NOT ck_out; output and input each end in a contact to metal at x 7795 and 7840
+7050,16350:7850,17575  ?logic  left gate group | gate units on both sides of the rails x 7463 and x 7641; not traced
+8150,16350:8950,17650  ?logic  right gate group | gate units on both sides of the rails x ~8350 and ~8540; not traced
+7000,17710:9000,18550  ?route  routing field | horizontal rows at pitch ~45, contact columns at x ~7400, 7550, 8380, 8600; not traced
+7470,16290:7520,17700  route  VCC rail RL2 | bc1's rail carried on south
+7641,16290:7691,17705  route  VSS rail RL3 | bc1's rail carried on south

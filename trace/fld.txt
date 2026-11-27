@@ -210,7 +210,7 @@ C 6400,4180
 #   y 3956-3986 node N1 | gate y 3986-4004 | node | gate y 4031-4052 | y 4052-4118 rail contacts
 #   | gate y 4126-4143 | y 4143-4195 node N3
 # N1 is cut off from the rail contact above it (3905) by a strip of field at y 3948-3956.
-#   fld_a_in pulled to the rail through two gates in series (tcw_a AND tcw_b)
+#   fld_a_in pulled to the rail through two gates in series (rst_ck AND tcw_b)
 #   fld_y_b  pulled to the rail through one gate (tcw_c)
 # ASSUMPTIONS: the rail is VSS (not followed); N1 and N3 have loads (candidates east of the rail:
 # blocks at (6600-6670, 4025-4050) and (6625-6670, 4130-4190)); the two buried contacts.
@@ -224,7 +224,7 @@ P 6383,3988:6418,4022                 # pad (6400,4005): metal from the north (x
 C 6400,4005
 P 6400,3986:6568,4004                 # gate 1
 M 6403,4005 y3786 w=12
-N M 6403,3900 tcw_a
+N M 6403,3900 rst_ck
 P 6438,4028:6475,4062                 # pad (6455,4045): metal from the north (x 6465, not followed)
 C 6455,4045
 M 6462,4045 y3990 w=12                 # stub: the metal goes on north along x 6465 (not followed)

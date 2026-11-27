@@ -1,0 +1,32 @@
+# NAME        LAYER  X,Y              DIR  note
+rsel14_buf    P      7550,13701       in   busl's row end; gate 1 of the corner group's NOR (cdp4_rst)
+rsel13_buf  P      7550,13751       in   the block at the step of the group's row 2 (y 13759 east of it); west of x 7550 it is busl's undrawn row y 13744, believed rsel13_buf
+rsel17_buf    P      7550,13809       in   busl's row end; gate 3
+rsel12_buf  P      7550,13873       in   the group's row 4; west of x 7550 it is busl's undrawn row y 13852 (steps north to it at x 7535-7550), believed rsel12_buf
+rsel16_buf    P      7550,13961       in   busl's row end; gate 5
+rsel15_buf    P      7550,14004       in   busl's row end; gate 6 (the row steps south to y 14028 at x 7552-7580)
+cdp4_rst      P      7532,13916       out  the NOR's output: buried contact of this poly in the box (7537-7582,13903-13940)
+bus_eq_r15      D      7600,11109       out  the comparator's match line (NOR of the eight slices' not-equal nodes; load east of s0) onto busl's band and pad (7555,11118)
+cdp3_bl_c0    M      7687,11048       in   cdp3's bit line = the in track of slice s0, down to the R15 latch
+cdp3_bl_c1    M      8076,11048       in   the same, s1
+db_b5    M      8466,11048       in   the same, s2
+cdp3_bl_c3    M      8857,11048       in   the same, s3
+cdp3_bl_c4    M      9248,11048       in   the same, s4
+cdp3_bl_c5    M      9638,11048       in   the same, s5
+cdp3_bl_c6    M      10028,11048      in   the same, s6
+cdp3_bl_c7    M      10419,11048      in   the same, s7
+cdp3_f_c2     M      8511,11048       in   cdp3's line f = the a track of slice s2 (cdp4_a_s2), through rows R1 to the read selector
+cdp3_f_c3     M      8902,11048       in   the same, s3
+cdp3_f_c4     M      9293,11048       in   the same, s4
+cdp3_f_c5     M      9683,11048       in   the same, s5
+cdp3_f_c6     M      10073,11048      in   the same, s6
+cdp3_f_c7     M      10464,11048      in   the same, s7
+vcc           M      16491-16540,16440 -   the units' VCC rail (dlat's, from the north), drawn end; goes on south at least to y 16900
+vss           M      16017-16059,17285 -   the rail of the sixth output inverter, drawn end (goes on north past the unit above); its south end is at about y 17540
+rst_lat       P      10782-10797,17700 out  the same line: a poly column south from the west end of the row through its bottom pad (10852,17648)
+cdp4_w10808   P      10694-10716,15726-15748 in   the same line: the corner of the poly row from its bottom pad (10808,15738), at the west edge of bc2's VCC rail (drawn end). Beyond it, read and not drawn: the plate of a depletion load (x 10685-10716, y 15782-15849) and a row west along y 15762 to a tie box (10622-10650,15760-15790): an undrawn unit of bc2 drives this net
+dbus_le       P      16130,16855-16875 in   the data input latches' enable: the west end of its poly row, on a framed box (16100-16128,16850-16876) read as the output of an undrawn gate under bd2's VSS rail (the row is drawn from the pad (16426,16864))
+rst_lat       P      13822,3675       out  the reset copy: the poly south of its tap (13821,3549), into tr1's gate row (y 3690-3800), where it is a gate input (the gate is not drawn)
+rst_lat       P      14044,3675       out  the same net: the poly column south of its end pad (14016,3551), into tr1's gate row: a gate input (not drawn)
+cdp4_w10808   P      13346,3675       out  the first through line: the poly south of its tap (13345,3636), into tr1's gate row: a gate input (not drawn)
+cdp4_w10808   P      13560,3675       out  the same net: the poly south of its end pad (13560,3636), into tr1's gate row: a gate input (not drawn)

@@ -232,7 +232,7 @@ shows it unbroken to x 7900 at least.
 y 3340-3362 (`cdp1_b5_a`) and y 3385-3408 (`r9_b0_q`), from their pads at x 10660-10694
 and 10612-10652 west under every rail and bit line (no contact: colour test at every
 crossing) to x 8285, where they meet the two polys that `trace/tc1.txt` draws to
-x 8290: **`cdp1_b5_a` is tc1's `tc1_f` and `r9_b0_q` is tc1's `tc1_a`**. tc1's island
+x 8290: **`cdp1_b5_a` is tc1's the wire `tc1` called f and `r9_b0_q` is tc1's `tc1_a`**. tc1's island
 gives (its notes): `f = a.NOT b + b.NOT a.NOT g + a.b.NOT i`. So the fifth comparator bit
 sees row C's fifth bit itself when `ras_shift` is low, and a modified bit when it is high.
 
@@ -291,7 +291,7 @@ have to be followed east.
 | `r8_b0_q` | P | 10665,2950 (pad with metal contact at 10655,2940 just above) | out | row A bit, slice 5 |
 | `wr_r8` | P | 10850,3311 going east; contact (10890,3308) to metal south at x 10894, shifting to x 10937 at y 4420-4440; that line is at x 10937 at y 5700 | in | row A write line. Not followed to its strobe |
 | `wr_r9` | P | 10850,4505 going east; contact (10893,4505) to metal south at x 10894; at x 10894 at y 5700 | in | row C write line. Not followed to its strobe |
-| `cdp1_b5_a` | P | 8285,3351 (drawn to there to meet `trace/tc1.txt`) | in | = `tc1_f`. A input of slice 5's XOR |
+| `cdp1_b5_a` | P | 8285,3351 (drawn to there to meet `trace/tc1.txt`) | in | = `cdp1_b5_a`. A input of slice 5's XOR |
 | `r9_b0_q` | P | 8285,3396 (likewise) | out | = `tc1_a`. Row C's fifth bit |
 | `cdp1_bK_b` (K = 1..5) | P | 10850, y 4176, 4132, 4089, 4046, 4003 | in | the compare value, one bit per line; K = 5 is the top line |
 | `db_b6` | P | 8340,4372 going west | in/out | bit line of a3 |
@@ -455,3 +455,10 @@ By their write lines, followed to the strobe tracks and joined in the extraction
 comparator. The five compare-value lines of channel B/C leave east along y 4003-4176 and
 were followed 3,300 px east to the RA pad drivers' input lines (not drawn).
 
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- The "more [logic] at y 4740-4870" in the slice-0 position is an inverter, `sl_eq_r5_n` = NOT `sl_eq_r5`
+  (x 8330-8650, y 4700-4880; drawn by `eof` with slice 0's rails there). The row y 4719 does not end at
+  x 8340, and it is 22-25 px wide, not 12 (R36).
+- The slice-0 data line `M 8466,3325 8466,3350 8509,3382 y4952 w=16` crosses that inverter's tie box at
+  (8508-8538, 4783-4815), dark in both metal shots: by trap 27 it should be `?M` there (R41).

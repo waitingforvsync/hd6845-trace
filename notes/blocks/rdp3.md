@@ -286,7 +286,7 @@ a net. Each net, from north to south (all drawn; overlay `ov_bun1.png`):
 | Net | North end | Path | South end |
 |---|---|---|---|
 | `h_eq_r0half` | L0 at y 10700 | straight down L0 to y 12789, steps left to x 13307 | leaves the region west/south at (13307,12850); the track at x 13307 above y 12745 is another line, which turns west there |
-| `inh_rc` | poly pad from the west, contact (13346,12829) | L0 | L0 at y 13480 (bd1's k6 = `inh_rc`) |
+| `rst_rc` | poly pad from the west, contact (13346,12829) | L0 | L0 at y 13480 (bd1's k6 = `rst_rc`) |
 | `wr_r4` | L1 at y 10700 | L1 to contact (13390,12438); poly link east y 12426-12454 under L2, L3; contact (13522,12440); L4 | L4 at y 13480 = bd1's k10 = **`wr_r4`** (so R4's write strobe goes north on L1) |
 | `h_eq_r0` | L2 at y 10700 | L2, jog left at y 12486, L1 | L1 at y 13480 (bd1's k7, untraced there) |
 | `h_eq_r2` | L3 at y 10700 | L3 down to contact (13477,10857) | (poly east to comparator B) |
@@ -294,7 +294,7 @@ a net. Each net, from north to south (all drawn; overlay `ov_bun1.png`):
 | `rc0` | L4 at y 10700 | L4 to contact (13522,12375); poly west y 12387-12407 under L3..L0 | leaves west at (13330,12397) |
 | `rc1` | L5 at y 10700 | L5 to contact (13565,11920); poly west y 11910-11931 | leaves west at (13330,11920) |
 | `rc2` | L6 at y 10700 | L6 to contact (13608,11438); poly west y 11429-11452 | leaves west at (13330,11440) |
-| `rdp3_n7s9` | L7 at y 10700 | L7, jog left at y 11507, L6, jog left at y 12313, L5 to contact (13565,12826); poly link east y 12815-12837 under L6, L7, L8; contact (13736,12826); L9 | L9 at y 13480 (bd1's k15, untraced there) |
+| `rc_eq_r4` | L7 at y 10700 | L7, jog left at y 11507, L6, jog left at y 12313, L5 to contact (13565,12826); poly link east y 12815-12837 under L6, L7, L8; contact (13736,12826); L9 | L9 at y 13480 (bd1's k15, untraced there) |
 | `rc3` | L8 at y 10700 | L8 to contact (13692,10745); poly west y 10737-10758, down between L1 and L2 (x 13413), west y 10954-10976 | leaves west at (13330,10965) |
 | `wr_r0` | contact (13690,10815) on RC's strobe poly | L8, jog left at y 12400, L7 | L7 at y 13480 = bd1's k13 = **`wr_r0`** |
 | `wr_r2` | contact (13648,11571) on RB's strobe poly | L7, jog left at y 12357, L6 | L6 at y 13480 = bd1's k12 = **`wr_r2`** |
@@ -378,7 +378,7 @@ North edge, y 10700 (all metal, all continue into rdp2):
 | `rc0` | 13521 (L4) | ? | turns west at y 12397 |
 | `rc1` | 13565 (L5) | ? | turns west at y 11920 |
 | `rc2` | 13608 (L6) | ? | turns west at y 11440 |
-| `rdp3_n7s9` | 13651 (L7) | ? | leaves south on L9; rdp2: its top is a contact at (13649,9919), poly bar from L2's upper piece |
+| `rc_eq_r4` | 13651 (L7) | ? | leaves south on L9; rdp2: its top is a contact at (13649,9919), poly bar from L2's upper piece |
 | `rc3` | 13694 (L8) | ? | turns west at y 10965 |
 | `vss` | 13783 + 390 k (9 rails) | - | |
 | `vcc` | 13990 + 390 k (8 rails) | - | |
@@ -395,7 +395,7 @@ West edge, x 13330 (all poly, going west):
 | `rc1` | 11920 | from L5 north |
 | `rc0` | 12397 | from L4 north |
 | `h_eq_r0half` | 12789 (metal, stepping to x 13307) | from L0 north |
-| `inh_rc` | 12829 (pad at 13328-13364) | to L0 south (`inh_rc`); the pad's poly comes from the west, not followed |
+| `rst_rc` | 12829 (pad at 13328-13364) | to L0 south (`rst_rc`); the pad's poly comes from the west, not followed |
 | `hc7` | 13004 | c line of slice s0 |
 | `hc6` | 13418 | c line of slice s7 |
 
@@ -403,7 +403,7 @@ South edge, y 13480 (metal unless noted):
 
 | Name | x | bd1's track at y 14700 | What |
 |---|---|---|---|
-| `inh_rc` | 13347 (L0) | k6 `inh_rc` | |
+| `rst_rc` | 13347 (L0) | k6 `rst_rc` | |
 | `h_eq_r0` | 13391 (L1) | k7 (untraced) | **R0 = c** (`h_eq_r0`), out |
 | `h_eq_r1` | 13434 (L2) | k8 (untraced) | **R1 = c**, out |
 | `hc2` | 13478 (L3) | k9 (untraced) | |
@@ -412,7 +412,7 @@ South edge, y 13480 (metal unless noted):
 | `wr_r2` | 13608 (L6) | k12 `wr_r2` | in: RB's load strobe |
 | `wr_r0` | 13651 (L7) | k13 `wr_r0` | in: RC's load strobe |
 | `hc3` | 13694 (L8) | k14 `hc3` | |
-| `rdp3_n7s9` | 13738 (L9) | k15 (untraced) | |
+| `rc_eq_r4` | 13738 (L9) | k15 (untraced) | |
 | `hc5` | 13782 (L10) | (ends at 13782,13893 on poly going west) | |
 | `wr_r1` | 13825 (L11) | jogs to L10 at y 14000: k16 `wr_r1` | in: RA's load strobe |
 | `hc0` | 13871 (poly) | by scan: metal x 13868 from y 13630, k17 `hc0` | |
@@ -428,7 +428,7 @@ Lower right, y 12900 (x > 15800):
 | Name | Layer | x | What |
 |---|---|---|---|
 | `db_b7` | poly | 16798 | going south |
-| `db_b4`, `s6`, `s7` | metal | 16818, 16862, 16908 | going south |
+| `db_b4`, `s6`, `s7` | metal | 16818, 16862, 16908 | going south: each ends on the output of one of `dlat`'s bus inverters (as does `db_b7` above); none goes further |
 | `vcc` | metal | 16262 (diagonal), 16520 | |
 | `vss` | metal | 16428, 16690 | |
 
@@ -477,7 +477,13 @@ seen) and not drawn.
   goes from (13478,10700) (by scan to about y 9960) and the nine other bundle lines.
 - `h_eq_r1` south of y 13480: bd1's track k8, untraced there. By scan the metal on
   x 13434 runs to about y 15139, with a jog between L2 and L3 at y 15126-15136.
-- The poly pad of `inh_rc` at (13328-13364,12829): where its poly goes west.
+- The poly pad of `rst_rc` at (13328-13364,12829): where its poly goes west.
 - The stretch y 13480-14700 of the bundle (no package): followed by measurement only.
 - AMB-3 (T2 and the strap).
 - Which slice is which data bit.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19)
+
+- `rc_eq_r4` (lines 297, 381, 415) is `rc_eq_r4` (`eof`): its top is the contact (13650,9925); the
+  bar comes from L2's upper piece, which starts at the contact (13433,9665). The contact (13736,12826)
+  at the top of L9 is on that path (AMB-036).

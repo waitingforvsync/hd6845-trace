@@ -155,8 +155,9 @@ def main():
             x, y = (int(v) for v in a.near.split(','))
         except ValueError:
             sys.exit('--near X,Y')
-        hits = sorted((p.dist_pt(x, y), p) for p in ports
-                      if p.dist_pt(x, y) <= a.radius and (not a.prefix or p.prefix == a.prefix))
+        hits = sorted(((p.dist_pt(x, y), p) for p in ports
+                       if p.dist_pt(x, y) <= a.radius and (not a.prefix or p.prefix == a.prefix)),
+                      key=lambda dp: (dp[0], dp[1].prefix, dp[1].at))
         print('within %d px of %d,%d:' % (a.radius, x, y))
         for d, p in hits:
             print('  %4d px  %s  %s' % (d, p.text(), p.note))

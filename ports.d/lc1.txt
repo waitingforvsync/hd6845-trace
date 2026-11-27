@@ -1,0 +1,36 @@
+# lc1: ports. Format: NAME  LAYER  X,Y  DIR  note   (ports.d/README.md; tools/ports.py)
+# The package's region is x 4400-6450, y 6900-8067.
+
+# North side (y 6900)
+vcc         M  4755-4803,6900   -    rail 1 (VCC by structure), runs on north
+vss         M  4842-4893,6900   -    rail 2's arm north
+lc_step     P  5012-5030,6890   out  gate 1's output; joins ur's poly, which ends at (5012,6900)
+rcs_x1   M  5070-5090,6900   out  gate 2's output on the metal M_a; still metal at y 6840
+rst_a   M  5117-5133,6900   out  gate 5's output on the metal M_b; followed to y 6800
+res_b   M  5180-5200,6900   in   gate 3's lower input on the metal V2; followed to y 6844
+lpstb_b   M  5224-5246,6900   in   gate 3's upper input on the metal V3; followed to y 6800
+rst_b   M  5288-5310,6900   out  gate 6's output on the metal V4; followed to y 6720, where it turns east
+rst_c   M  5705-5721,6900   out  gate 7's output, the branch north from the pad (5583,7519); followed to y 6365
+ck_out   M  6007-6025,6900   in   latch D's enable, from the north (followed straight to y 6150)
+
+# South side (y 8067)
+vcc         M  4755-4803,8067   -    rail 1, runs on south
+vss         M  4928-4980,8067   -    rail 2, runs on south
+lc1_w7170   M  5030-5046,8067   in   thin metal T1: gate 2's input, from the south
+rst_n   M  5073-5093,8067   out  metal M_c2: NOT rst, runs on south
+lc1_w7990   P  5072-5092,8067   out  poly under M_c2 (no contact): NOT rst_c, to the ninth gate of the column (lc2)
+rst_c   M  5466-5486,8067   out  gate 7's output, south; followed to y 8262
+vcc         M  5840-5892,8067   -    cluster E's VCC rail, runs on south
+lc1_w7928   M  5918-5932,8067   in   thin metal from the pad (5929,7929): from latch D's lower unit in lc2 (believed its output plate, pad about (5934,8133))
+vss         M  6015-6063,8067   -    cluster E's east VSS rail, runs on south
+lc1_w7862   M  6096-6110,8067   in   the cell's thin metal from the pad (6117,7862): from latch D's lower unit in lc2 (believed the inverse of its data)
+ck_out   M  6204-6221,8067   out  latch D's enable, on south to the lower unit's enable row (pad about (6212,8141))
+rst_c   M  6247-6263,8067   out  latch D's clear, on south from the pad (6255,7996); followed to y 8218
+lc1_w7780   M  6287-6307,8067   out  gate E1's output, south from the pad (6296,7781); followed to y 8175
+
+# East side (x 6450)
+rst   P  6450,7379-7397   out  gate 3's output on a long poly row; seen to x 6710
+lc1_w7780   P  6450,7772-7788   out  gate E1's output row; seen to x 6710
+
+# Drawn ends inside the strip (the wires go on; not traced yet)
+lc1_w7733   P  6240,7552-7570   in   gate E1's input: the row y 7561 west of the pad (6297,7561); its west end is a pad (5537,7561)

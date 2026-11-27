@@ -13,8 +13,8 @@ M 6715,3660 y3900 w=50
 N M 6715,3680 vcc
 
 # ===== AND-OR-invert, y 3690-3905 (views cache/scratch/rax/t1a.png, t1m.png, t1cm.png, t1load.png) =====
-#   tcw_o3820 = NOT( fld_a_in OR (tcw_a AND tcw_c) )     (gate 3 identified in run 2)
-# diffusion column under the rail: rail contact | gate tcw_c | node | gate tcw_a | OUT | gate x | rail contact
+#   tcw_o3820 = NOT( fld_a_in OR (rst_ck AND tcw_c) )     (gate 3 identified in run 2)
+# diffusion column under the rail: rail contact | gate tcw_c | node | gate rst_ck | OUT | gate x | rail contact
 D 6500,3695:6545,3925
 C 6512,3708
 D 6500,3870:6560,3925
@@ -23,7 +23,7 @@ C 6535,3905
 P 6300,3723:6336,3757
 C 6318,3740
 P 6318,3732:6550,3750
-# gate 2: tcw_a, from the pad (6400,3788) at the top of the metal x 6403
+# gate 2: rst_ck, from the pad (6400,3788) at the top of the metal x 6403
 P 6383,3771:6418,3805
 C 6400,3788
 P 6400,3777:6550,3795
@@ -51,7 +51,7 @@ C 6646,3986 s=14x14
 # d2m.png (both metal shots), d3.png (6x); class of the open areas from tools/tcw_cls.py (the
 # chip-2 stripped shot: diffusion red-green 16+, field under 10, poly blue under 84) and
 # tools/px.py profiles (notes).
-#   fld_a_in = NOT( (tcw_a AND tcw_b) OR tcw_o3820 )      tcw_o3820 = NOT( fld_a_in OR (tcw_a AND tcw_c) )
+#   fld_a_in = NOT( (rst_ck AND tcw_b) OR tcw_o3820 )      tcw_o3820 = NOT( fld_a_in OR (rst_ck AND tcw_c) )
 #   fld_y_b  = NOT tcw_c
 # --- fld_a_in: the top node of fld's stack (y 3956-3985 under the rail) has an arm east
 # (y 3960-3974) to a vertical strip x 6603-6622, y 3904-4075
@@ -95,8 +95,8 @@ B 6625,4106:6654,4132
 # nodes are drawn with their arms east only.
 #   tcw_o3326 : low through tcw_m6362a, or through tcw_m6320 AND tcw_m6362b in series to the top
 #               node (y 3232-3250), which is the gate's OUTPUT tcw_o3240 (run 3, below)
-#   tcw_o3437 : low through tcw_m6404
-#   tcw_o3550 : low through tcw_m6232
+#   tcw_o3437 : low through lc3_w9947
+#   tcw_o3550 : low through c4l_gab
 M 6532,3200 y3660 w=50
 # stack 1: top node | gate | node | gate | OUT | gate | rail contact (two pits)
 D 6503,3232:6560,3400
@@ -132,7 +132,7 @@ P 6222,3520:6572,3540                 # gate at y 3520-3540
 # --- the bus metals, from tools/tla_tracks.py (runs with gaps under 34 px bridged). Their ends and
 # any other taps along them have NOT been looked at: uncertain as nets.
 M 6232,2875 y3872 w=12
-N M 6232,3700 tcw_m6232
+N M 6232,3700 c4l_gab
 M 6316,2787 y3662 w=12
 N M 6320,3500 tcw_m6320
 P 6298,3638:6334,3672                 # its lower pad (6315,3655); poly on west along y 3655 (not followed)
@@ -147,7 +147,7 @@ P 6368,3550:6402,3584                 # its lower pad (6385,3567); poly east tow
 C 6385,3567
 P 6385,3567 x6440 w=18
 M 6404,2745 y3708 w=12
-N M 6404,3600 tcw_m6404
+N M 6404,3600 lc3_w9947
 
 # ===== stretch B, east side (2026-11-16): what could be read with all five shots =====
 # Views cache/scratch/rax/eastB_m.png (both metal shots), strapB.png (chip-1 fringed and chip-2
@@ -179,7 +179,7 @@ P 6436,3558:6484,3576
 # ===== stretch B, the big gate's output, load and tie (run 3, 2026-11-17) =====
 # Views cache/scratch/tcw/B_a.png, B_c.png (3.4x, both stripped shots), B2.png (5x), B_m.png (both
 # metal shots), B5.png, B6.png; tools/px.py profiles and tools/textmap.py (notes).
-#   tcw_o3240 = NOT( tcw_m6320 AND tcw_o3550 AND (tcw_m6362a OR tcw_m6404) )
+#   tcw_o3240 = NOT( tcw_m6320 AND tcw_o3550 AND (tcw_m6362a OR lc3_w9947) )
 # The output is the TOP node of stack 1 (y 3232-3250 under the rail): its arm runs east along
 # y 3232-3246 (under the thin metal, no contact) and turns south as a strip x 6640-6656.
 D 6555,3232:6656,3246
@@ -221,9 +221,9 @@ C 6637,3166 s=14x14
 # Views cache/scratch/rax/bus2.png (clean), bus2m.png (both metal shots: the bus metals and their
 # pad rings), railA.png, A_cm.png (class maps at 4x); gate positions from tools/railprof.py.
 # Outputs' loads and what lies east of the rail are NOT TRACED.
-#   tcw_m6362a (alias tcw_o2823): low through tcw_m6404 AND tcw_m6320            (pair 1)
-#   tcw_o2993                   : low through tcw_m6404 AND tcw_m6278            (pair 2)
-#   pair 3: rail contact | gate tcw_o2993 | tcw_o3115 | gate tcw_m6404 | tcw_o3180
+#   tcw_m6362a (alias tcw_o2823): low through lc3_w9947 AND tcw_m6320            (pair 1)
+#   tcw_o2993                   : low through lc3_w9947 AND tcw_m6278            (pair 2)
+#   pair 3: rail contact | gate tcw_o2993 | tcw_o3115 | gate lc3_w9947 | tcw_o3180
 #           (which of the two nodes is the output is not settled: see the notes)
 M 6532,2690 y3200 w=50
 # pair 1: rail contact | gate | node | gate | output, with an arm west
@@ -276,7 +276,7 @@ N M 6276,3050 tcw_m6278
 P 6255,3161:6289,3195
 C 6272,3178
 P 6272,3172:6462,3190
-# --- the top end of tcw_m6232: pad (6230,2875) with a poly east along y 2877 to the rail's west edge
+# --- the top end of c4l_gab: pad (6230,2875) with a poly east along y 2877 to the rail's west edge
 # (what it does there is not resolved)
 P 6212,2858:6248,2892
 C 6230,2875
@@ -284,14 +284,14 @@ P 6230,2868:6497,2886
 
 # ===== the bus metals south of the column (2026-11-16) =====
 # tools/follow.py and one view of both shots (cache/scratch/rax/m6404s.png, x 6190-6440, y 3690-4430).
-# tcw_m6404: from the column's foot west along y 3708, south along x 6275, a step west round the
+# lc3_w9947: from the column's foot west along y 3708, south along x 6275, a step west round the
 # pad (6272,3957) of fld_a_in (y 3919, x 6233), back east at y 4231, south along x 6282 to a pad
 # (6275,4405) at the top of the vertical poly x 6275 of the field under the six bus metals
 # (NOT DRAWN further: the common enable comes from the south).
 M 6404,3702 y3708 x6275 y3919 x6233 y4231 x6282 y4410 w=12
 P 6258,4388:6292,4422
 C 6275,4405
-# tcw_m6232: lower pad (6232,3870); poly from it east along y 3912 to the ground rail, which it
+# c4l_gab: lower pad (6232,3870); poly from it east along y 3912 to the ground rail, which it
 # reaches between the rail contact (6535,3905) and the node of fld_a_in. Whether it only crosses
 # or gates a third pull-down of that node is NOT RESOLVED (AMB-014): drawn to the rail's edge only.
 P 6214,3853:6250,3888
@@ -343,12 +343,12 @@ D 6598,4240:6650,4258
 P 6622,4238:6650,4264
 B 6617,4236:6652,4260
 
-# ===== tc1_p4308: the row y 4428-4448 from tc1 ends on a pad =====
+# ===== ck_a: the row y 4428-4448 from tc1 ends on a pad =====
 # contact (6622,4440): bright centre in a dark ring in both metal shots, green hole in the clean
 # shot (text map); the thin metal goes south from it into fld's region
 P 6605,4428:6755,4448
 P 6603,4422:6641,4456
 C 6622,4440 s=14x14
 M 6621,4440 y4458 w=12
-N P 6700,4438 tc1_p4308
+N P 6700,4438 ck_a
 

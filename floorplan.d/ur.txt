@@ -1,5 +1,5 @@
 # ur: upper rows of the left array
-2918,6543:4240,8452     array   4-bit counter (left array) | four copies of the counter bit cell of the mid-right array (c4l3..c4l0 from the top); shares its master and slave clock with the 5-bit counter below; not yet identified
+2918,6543:4240,8452  array  VSYNC width counter (4 bit) | four copies of the counter bit cell of the mid-right array (c4l3..c4l0 from the top); shares its master and slave clock with the 5-bit counter below; its outputs are compared with R3 bits 4-7, the vertical sync width (amr, firm joins): the VSYNC width counter
 2918,8539:4240,10924    array   scan line counter (5 bit) | five copies of the counter bit cell (sl4..sl0 from the top), a plain ripple chain; stepped once per pulse of lc_step; compared with R5 in the upper right datapath
 3560,6340:4260,6540     route   clock lines into the left array's counters | four poly lines from the west: master clock (y 6500), slave clock (y 6455), the 5-bit counter's L3 (y 6410), one more
-2262,6719:2837,7729     logic   clock generator of the left array's counters | second copy of the row counter's generator: two non-overlapping clocks from one step pulse lc_step, which comes from the left-centre logic
+2262,6719:2837,7729  logic  clock generator of the scan line and VSYNC width counters | second copy of the row counter's generator: two non-overlapping clocks from one step pulse lc_step, which comes from the left-centre logic

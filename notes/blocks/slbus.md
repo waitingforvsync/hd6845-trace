@@ -53,3 +53,10 @@ zone of the upper right datapath: (14660,6603), (14268,6645), (13878,6690), (150
 The sixth line that leaves the knot northwards, and the line that starts on the bottom
 position east of it (y 6820; in the routing zone this position carries R7's match line
 westwards: not followed between).
+
+## Corrections (coordinator, from the handoff of `busl` run 19, 2026-11-24)
+
+- The row "y 6452" beside the five lines is `rcs_thin_e`'s (`busl` piece `yc`). `sl3`'s corner beside
+  the box (11703,6556) has its west edge at x 11735-11738, where `P 11345,6645 x11760 y6605 x14670`
+  puts the bend at x 11751-11769 (geometry only: about 18 px of field remain between it and `busl`'s
+  column either way; not changed).

@@ -6,8 +6,8 @@
 17255,14503:17590,15103  io  D5 input buffer | same cell; input traced from the D5 pad (the line runs up the channel under the d_hiz metal)
 16960,8445:17040,8880  io  D0 buffer capacitors | plain diffusion rectangles for d0_b (contact cut, not strapped) and d0_c
 17262,15150:17590,15770  io  D6 input buffer | four inverters in series from the D6 pin (d6_a..d6_d), another layout of the chain, upside down; d6_d leaves west at y 15173 towards the latch of bit 6
-17262,15780:17590,16400  ?io  D7 input buffer | the same cell; input line goes south towards the D7 pad; d7_d leaves west at y 15650
-17300,16415:17590,16590  logic  D0 output data inverter | d0_out_n = NOT dbus_do0_in; drives the thin metal x 17438-17459 that runs up the whole column to the D0 pad cell
+17262,15780:17590,16400  io   D7 input buffer | the same chain (another layout, as D6's); the pin assigned by position; input line goes south towards the D7 pad; d7_d leaves west at y 15650
+17300,16415:17590,16590  logic  D0 output data inverter | d0_out_n = NOT rd_b0; drives the thin metal x 17438-17459 that runs up the whole column to the D0 pad cell
 17147,16776:17257,16905  io  D6 buffer capacitor | plain diffusion rectangle on d6_c
 16950,13984:17270,14316  route  d4_d | buffered D4 leaves the column west along y 14000
 16950,14683:17270,15079  route  d5_d | buffered D5 leaves the column west along y 14696

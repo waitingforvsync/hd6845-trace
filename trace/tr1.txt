@@ -1,0 +1,103 @@
+# tr1: top-right logic rows, part 1 (x 11900-14150, y 3400-4500)
+# Gate row y 3650-3980: upper rail y 3747-3785 (vss), lower rail y 3920-3964 (vcc), both named
+# from structure only (pull-down source contacts on the upper, load drains on the lower).
+# Traced on claude-opus. View: cache/scratch/tr1/a.png (3.5x, clean / chip-2 stripped / metal).
+@block tr1
+@w M=24 P=20
+
+# ---- rails, only the pieces inverter A needs
+M 11940,3766 x12065 w=38
+N M 11950,3766 vss
+M 11940,3942 x12065 w=44
+N M 11950,3942 vcc
+
+# ---- inverter A, x 11940-12065:  tr1_w11960 = NOT cdp4_w10808
+# pull-down: diffusion box under the upper rail, source contact (12042,3758)
+D 11966,3735:12062,3782
+C 12042,3758
+# input poly from the north (leaves at y 3650), gate over the box, ends y 3795
+P 12005,3650 y3795 w=22
+N P 12005,3660 cdp4_w10808
+# output: diffusion west of the gate, north to a buried contact and poly going north
+D 11965,3705:11983,3850
+D 11945,3672:11988,3705
+B 11945,3672:11988,3705
+P 11961,3650 y3700 w=22
+N P 11961,3660 tr1_w11960
+# arm east to the load's gate tie
+D 11965,3825:12030,3848
+D 12008,3825:12036,3878
+# load: depletion transistor, poly over the strip x 11962-11983, drain in the VCC box
+D 11962,3850:11983,3912
+P 11942,3853:12003,3905
+D 11960,3912:12020,3962
+C 11988,3938 s=36x24
+# gate tie: the load poly is believed to reach the box at x 12003-12010 (dark at x 12005-12017
+# on the y 3865 profile): uncertain
+?P 12000,3855:12020,3875
+?B 12006,3853:12022,3877
+
+# ---- gate B, x 12065-12200, drawn from cache/scratch/tr1/b5.png (3x, clean/stripped/metal):
+#      tr1_w12090 = NOT tr1_w12135 (if the load tie holds)
+M 12065,3766 x12200 w=38
+N M 12190,3766 vss
+M 12065,3942 x12200 w=44
+N M 12190,3942 vcc
+# pull-down box under the upper rail; source contact east of the gate (ring in the metal shot)
+D 12092,3732:12195,3782
+C 12165,3755
+# input poly from the north; px col 12135: channel y 3738-3778 bright in both shots, poly end ~3795
+P 12135,3650 y3795 w=22
+N P 12135,3660 tr1_w12135
+# output strip west of the gate, north to a buried contact and a poly north
+D 12095,3705:12113,3850
+D 12077,3672:12116,3705
+B 12077,3672:12116,3705
+P 12091,3650 y3700 w=22
+N P 12091,3660 tr1_w12090
+# arm east to the load's gate tie
+D 12095,3825:12160,3848
+D 12138,3825:12166,3878
+# load: textured poly over the strip, drain box on the lower rail
+D 12092,3850:12113,3912
+P 12072,3853:12133,3905
+D 12090,3912:12150,3962
+C 12117,3937 s=36x24
+# gate tie as in A: px row 3865 dark x 12136-12148 in both stripped shots: uncertain
+?P 12130,3855:12150,3875
+?B 12136,3853:12152,3877
+# NOT drawn: B's extra box 12168-12195 x 3850-3905 (bright in both stripped shots at y 3865,
+# x 12172-12192, a dot at (12183,3880) in the clean shot); separated from the tie lobe by a
+# dark edge at x 12162-12170. Unresolved: diffusion or poly stub, and whether the dot is a contact.
+
+# ---- gate C, x 12195-12330, drawn from cache/scratch/tr1/c5.png (2.5x) and c_east.png (5x):
+#      tr1_w12220 = NOT rst_lat (if the load tie holds)
+M 12195,3766 x12330 w=38
+N M 12320,3766 vss
+M 12195,3942 x12330 w=44
+N M 12320,3942 vcc
+# pull-down box; source contact (12305,3756) (dark dot in the clean shot at 5x). The diffusion
+# runs on east past the contact to x 12340, where the next gate's poly (x 12340-12365) crosses it,
+# and turns south at x 12318-12340: that part belongs to the next gate and is NOT drawn here.
+D 12222,3732:12318,3782
+C 12305,3756
+# input poly from the north; px col 12265: channel y 3738-3775 bright in both shots, poly end ~3795
+P 12265,3650 y3795 w=22
+N P 12265,3660 rst_lat
+# output strip west of the gate, north to a buried contact (ring 12207-12246 x 3668-3705) and a poly north
+D 12225,3705:12243,3850
+D 12207,3672:12246,3705
+B 12207,3672:12246,3705
+P 12221,3650 y3700 w=22
+N P 12221,3660 tr1_w12220
+# arm east to the load's gate tie
+D 12225,3825:12290,3848
+D 12268,3825:12296,3878
+# load: textured poly over the strip, drain box on the lower rail (contact dot (12245,3937))
+D 12222,3850:12243,3912
+P 12202,3853:12263,3905
+D 12220,3912:12280,3962
+C 12245,3937 s=36x24
+# gate tie as in A and B: px row 3865 dark x 12271-12279 (clean), 12267-12275 (chip-2): uncertain
+?P 12260,3855:12280,3875
+?B 12266,3853:12282,3877

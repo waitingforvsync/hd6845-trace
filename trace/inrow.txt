@@ -23,8 +23,8 @@ P 13765,18150 y18362 x13809 y18504 w=27     # input, L-shaped gate
 P 13838,18382:13863,18555          # output continues down in poly
 C 13850,18537 s=26x26
 M 13849,18522 y18600 w=22          # output leaves downward (routing to be traced)
-N P 13765,18160 inh_n
-N M 13849,18590 inh_ck
+N P 13765,18160 rst_a_n
+N M 13849,18590 rst_ck
 
 # ---- big buffers. buf3f is an inverter with a three-finger pull-down, buf2f one with
 # a two-finger pull-down. CLK and E each go through a buf3f then a buf2f (E's pair is

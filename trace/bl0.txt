@@ -1,0 +1,661 @@
+# bl0: the gate group that the buffered RES and LPSTB pins reach, between the left bus field and the
+# bottom-left logic (user, 2026-11-20: what the chip does while RES is low and LPSTB is high).
+# Evidence: cache/scratch/bl0/ (survey.md; g_*.png 2.6x, q1-q6.png 4x three shots, pads3.png, pads_e.png,
+# spot.png, in1pads.png; overlays o_*.png). tools/bl0_edges.py prints the edge lines along a cut.
+@block bl0
+@w M=20 P=22
+@s 28x28
+
+# ================================================================ piece pin: three gates on one ground rail
+# Recovered:
+#     bl0_w15412  = NOT rst_n                       (G1, wide pull-down, strong load)
+#     bl0_lpstb_n = NOT lpstb_b                          (G2)
+#     lpstb_nres  = NOT( bl0_lpstb_n OR res_b )          (G3, G4)   = lpstb_b AND NOT res_b
+# Supplies by the orientation of the loads (neither rail is followed to a named supply yet): the U of
+# wide metal that carries the four pull-down contacts is vss, the rail inside it with the three load
+# contacts is vcc.
+
+# ---- supplies
+M 6040,15800 y15242 x6300 y15800 w=54              # the U: left arm x 6013-6067, top bar y 15216-15268, right arm x 6273-6328
+N M 6040,15250 vss
+M 6214,15317 y15800 w=54                           # the rail inside the U, top end y 15317
+N M 6214,15600 vcc
+
+# ---- the two pin lines. busl's tracks end at y 15000; each runs on to a pad whose metal turns west
+# and whose poly goes on east under the tracks (drawn to x 6450 here: piece east).
+M 6366,15000 y15131 w=14                           # res_b: track from the left bus field
+M 6375,15133 x5866 y15719 x5922                    # west along y 15133, corner (5866,15133), south, east onto G4's pad
+C 6363,15132 5910,15719
+P 6349,15119:6381,15145                            # pad
+P 6365,15132 x6885 w=20                            # poly row on east under the tracks (piece pe)
+N M 6366,15050 res_b
+M 6408,15000 y15175 w=14                           # lpstb_b: track from the left bus field
+M 6420,15177 x5910 y15512                          # west along y 15177, corner (5910,15177), south onto G2's pad
+C 6408,15176 5910,15501
+P 6394,15163:6424,15189                            # pad
+P 6408,15176 x6929 w=20                            # poly row on east under the tracks (piece pe)
+N M 6408,15050 lpstb_b
+
+# ---- the line rst_n: a metal between two pads, each pad the end of a poly row (west and east:
+# ports), with a third pad between them from which a poly column runs south to G1's gate, and a thin
+# metal south from the west pad (port).
+M 5745,15090 x6332                                 # metal y 15080-15100 from the pad (5755,15088) to the pad (6320,15088)
+C 5755,15088 5932,15088 6320,15088
+P 5740,15075:5770,15101                            # west pad; its poly row runs on west (port)
+P 5700,15088 x5755 w=20
+P 6305,15075:6336,15101                            # east pad; its poly row runs on east (port)
+P 6320,15088 x7280 w=20                            # on east under the tracks to bc1's rail x 7292-7342, where it is a gate (port at x 7280; piece w8)
+M 5757,15088 y15761 x5737 w=14                     # thin metal south from the west pad onto a pad (5737,15759) (piece w8)
+P 5720,15742:5753,15776                            # pad
+C 5737,15759
+P 5735,15759 y15800 w=20                           # its poly column south, under the horizontal metals y 15800, 15850 (port at y 15800)
+P 5916,15073:5948,15101                            # middle pad
+P 5935,15088 y15380 w=22                           # poly column x 5924-5946 south under res_b's and lpstb_b's metals to G1
+N M 6100,15090 rst_n
+
+# ---- G1: inverter. Diffusion box x 5957-6090 under the gate band y 15357-15380 (W about 133).
+P 5924,15357:6098,15380                            # gate band, east end x 6098
+D 6008,15312:6058,15345                            # source cap under the rail
+C 6030,15328
+D 5957,15338:6090,15403                            # source strip, channel, node A
+D 5957,15398:5987,15430                            # node A's tab south-west, under the end of the row y 15412
+B 5955,15399:5988,15430
+P 4909,15401:5986,15425                            # node A's poly row, west to a pad (4909,15415) (piece w7)
+N P 5800,15412 bl0_w15412
+D 6058,15389:6140,15405                            # node A's strip east from the rail
+D 6092,15389:6122,15439                            # its tab south under the load's foot
+B 6091,15404:6124,15441
+D 6135,15350:6192,15415                            # flare under the load plate to the supply box
+D 6190,15350:6242,15417
+C 6212,15378
+P 6155,15336:6188,15445                            # load plate x 6155-6188
+P 6095,15420:6188,15445                            # its foot west onto node A's tab
+
+# ---- G2: inverter of lpstb_b. Channel x 6008-6058.
+P 5895,15485:5927,15517                            # pad of lpstb_b's metal
+P 5910,15487:6081,15510                            # gate band
+D 6008,15441:6058,15487                            # source cap
+C 6033,15466
+D 6008,15487:6058,15510                            # channel
+D 6008,15510:6075,15545                            # node B under the rail
+D 5957,15524:6010,15542                            # its neck west (about 14 px between its edge lines) to the box at the end of the L's top arm
+D 5957,15524:5990,15550
+B 5955,15525:5988,15552
+P 5925,15526:5987,15550                            # the L: top arm onto node B's box,
+P 5925,15526:5947,15640                            #   down the west side,
+P 5925,15618:6072,15640                            #   and east as G3's gate band
+N P 5936,15580 bl0_lpstb_n
+D 6058,15521:6192,15547                            # node B's strip east under the load plate (W 26, L 61)
+D 6190,15486:6242,15548
+C 6212,15515
+P 6127,15497:6188,15567                            # load plate
+P 6127,15473:6153,15500                            # its top-left end, tied to node B by the L below
+B 6125,15471:6155,15498
+D 6103,15475:6122,15530                            # L of diffusion from the strip up
+D 6103,15475:6153,15496                            #   and east into the box
+
+# ---- G3, G4: NOR. Shared output node C between the two gate bands; sources at both ends on the rail.
+P 5895,15704:5927,15735                            # pad of res_b's metal
+P 5910,15705:6072,15728                            # G4's gate band
+D 6008,15571:6058,15779                            # the column: cap, G3, node C, G4, cap
+C 6030,15588 6031,15753
+D 5987,15596:6010,15752                            # its west margin beside the rail (both channels W 5987-6058)
+D 5957,15662:5990,15690                            # node C's tab west, under the end of the row y 15675
+B 5955,15661:5988,15691
+P 4852,15662:5986,15690                            # node C's poly row, west under the tracks to a pad (4867,15675) (piece g1)
+N P 5800,15676 lpstb_nres
+D 6058,15653:6192,15693                            # node C's strip east under the load plate (W 40, L 42)
+D 6185,15648:6242,15694
+C 6212,15671
+P 6113,15637:6155,15742                            # load plate
+D 6080,15690:6100,15745                            # L of diffusion from the strip down
+D 6080,15716:6140,15745                            #   and east into the box under the plate's lower end
+B 6103,15711:6142,15746
+
+# ================================================================ piece g1: lpstb_nres to its loads in the left array
+# (the memory address counter, larr). The wire: the poly row y 15676 west to a pad (4867,15675), a track
+# x 4867 north through the left bus field's south-west corner (nothing else of busl's is there) to a pad
+# (4867,14436), a poly row y 14436 west across the whole array in its Gap 1 (between the carry groups
+# s0-s6 and s7-s9), under the left column's vcc rail, north and west to a gate band under the vss rail.
+# There:
+#     bl0_w14308  = NOT( larr_l0_g0 OR lpstb_nres )            (two pull-downs with the output between them)
+#     larr_l0_g1 is pulled to vss while bl0_w14308 is high     (one transistor east of the vss rail)
+# larr_l0_g1 is larr's all-ones line of group s7-s9 and the carry into s10 (notes/blocks/larr.md).
+# The two rails are the left edge column's (vss x 2605-2655, vcc x 2783-2832: tla, tl1, ur name them so
+# further north, each by the loads; they are not drawn between there and here).
+
+# ---- the wire
+P 4852,15660:4884,15690                            # pad at the row's west end
+C 4867,15675
+M 4867,15690 y14422 w=18                           # track x 4858-4876 north; no break (tl5_tracks.py v 4867 14415 15700)
+C 4867,14436
+P 4850,14422:4884,14450                            # pad at the track's north end
+P 2798,14425:4867,14447                            # poly row west across the array (Gap 1)
+P 2798,14362:2818,14447                            # north under the vcc rail
+P 2669,14362:2818,14380                            # west along y 14371
+P 2669,14350:2692,14380                            # where the row meets the band's east end
+P 2537,14339:2692,14361                            # gate band B under the vss rail; west end x 2537
+N P 3600,14436 lpstb_nres
+
+# ---- supplies (the stretch of each rail over this cell)
+M 2630,14090 y14560 w=50
+N M 2630,14500 vss
+M 2807,14090 y14560 w=49
+N M 2807,14400 vcc
+
+# ---- the NOR under the vss rail. One diffusion column x 2603-2651 with a west margin x 2580-2603 in
+# the open: source box with a contact, gate band A, the output node, gate band B, source with two contacts.
+D 2603,14209:2651,14415
+D 2580,14228:2605,14385                            # west margin: both channels are W 2580-2651
+D 2613,14410:2667,14460                            # the lower source widens east at its foot
+C 2618,14228 2620,14385 2633,14433
+P 2517,14253:2664,14274                            # gate band A
+P 2517,14102:2539,14274                            # its poly north along the west side into a buried contact
+B 2513,14100:2545,14125                            #   on the west end of the row y 14113 (box x 2516-2540, y 14102-14124: review round 1)
+D 2515,14105:2876,14122                            # the row y 14105-14122 is a DIFFUSION wire (review round 1): east under both rails,
+                                                   #   one piece with the box of larr's contact (2893,14114) on larr_l0_g0's metal; west end x 2515
+N D 2700,14113 larr_l0_g0
+D 2651,14292:2780,14326                            # output strip east under the load plate
+D 2776,14288:2836,14338                            # box under the vcc rail
+C 2803,14312
+P 2706,14262:2748,14342                            # load plate (strip W 34, L 42)
+P 2706,14243:2733,14268                            # its finger north into the box of the L below
+B 2704,14241:2735,14267
+D 2673,14238:2690,14300                            # L of diffusion from the strip north
+D 2673,14238:2734,14262                            #   and east under the finger
+D 2555,14296:2582,14320                            # output tab west of the margin
+B 2553,14294:2580,14321
+P 2445,14298:2578,14318                            # output poly row west under the track x 2493-2512 (not drawn)
+P 2443,14292:2476,14322                            # pad
+N P 2520,14308 bl0_w14308
+M 2459,14300 y14706 w=18                           # metal south through three pads; ends on the third (tl5_tracks.py v 2459 14290 14780)
+C 2459,14307 2459,14505 2459,14700
+P 2440,14488:2478,14518                            # second pad, on the lower side of the row y 14467-14494
+P 2432,14467:2777,14494                            # that row: the gate of the transistor on larr_l0_g1; ends at both field islands
+P 2405,14687:2662,14708                            # third pad's row y 14687-14708: east it is the gate band of the inverter below (piece s7); west end not read
+P 2441,14684:2478,14714                            # third pad
+
+# ---- the transistor on larr_l0_g1, east of the vss rail, between two field islands (x 2661-2687 and
+# x 2760-2777). Its source is the NOR's lower source by a neck y 14434-14446 north of the west island.
+D 2660,14434:2776,14446                            # neck and top band
+D 2689,14434:2760,14532                            # source, channel (W 71), drain
+D 2689,14517:2860,14533                            # drain strip east under the vcc rail onto larr's diffusion (2850-2880, 14508-14540)
+N D 2800,14525 larr_l0_g1
+
+# ================================================================ piece s7: the carry into row s7
+#     larr_cin_s7 = NOT bl0_w14308        ( = larr_l0_g0 OR lpstb_nres )
+# An inverter under the same vss rail, one cell south of the NOR: its gate band is the row of the
+# metal's third pad; its output goes west by a buried contact onto a poly that runs north to the row
+# y 14559-14574, which larr draws from x 2850 east as larr_cin_s7.
+M 2630,14560 y14770 w=50                           # the two rails on south over this cell
+N M 2630,14600 vss
+M 2807,14560 y14770 w=49
+N M 2807,14600 vcc
+D 2603,14660:2651,14757                            # column: output node y 14660-14686, channel, source box
+D 2582,14660:2605,14728                            # west margin (an edge line crosses the band at x 2582): W 2582-2651
+C 2622,14736
+D 2550,14645:2605,14684                            # output tab west
+B 2548,14643:2577,14670
+P 2520,14645:2573,14668                            # poly from the box west
+P 2520,14559:2540,14668                            #   and north (one orange run y 14560-14661: bl0_edges.py col 2530)
+P 2520,14559:2850,14574                            # the row y 14559-14574 east under both rails onto larr's P at x 2850
+N P 2700,14566 larr_cin_s7
+D 2651,14662:2705,14678                            # output strip east: y 14662-14678 from the rail (review round 2),
+D 2700,14654:2780,14690                            #   widening to y 14654-14690 under the load plate (W 36, L 37)
+D 2778,14643:2835,14692                            # box under the vcc rail
+C 2805,14674
+P 2740,14633:2777,14722                            # load plate
+P 2722,14697:2745,14722                            # its arm west into the box of the tab below
+B 2700,14695:2724,14726
+D 2700,14664:2720,14724                            # tab of diffusion from the strip south
+
+# ================================================================ piece pe: the two pin lines beyond the gate group
+# Each pin's poly row ends on a pad east of the track bundle, and a track runs south from it to a pad
+# in a staggered row of pads north of a bus of horizontal metals; a poly column goes on south from
+# each (drawn to y 16250: ports). No break and no contact on either track between its pads
+# (tl5_tracks.py v 6883 / 6926 15120 16240); res_b's track crosses lpstb_b's row at (6885,15176)
+# with two edge bars and no hole.
+P 6868,15116:6901,15144                            # res_b: pad at the row's east end
+C 6885,15130
+M 6885,15122 y16182 w=20                           # track x 6875-6895 south
+C 6882,16170
+P 6866,16155:6899,16186                            # pad
+P 6888,16170 y16250 w=22                           # poly column x 6877-6899 on south (port)
+P 6913,15163:6946,15191                            # lpstb_b: pad at the row's east end
+C 6929,15177
+M 6929,15167 y16229 w=20                           # track x 6919-6939 south
+C 6928,16217
+P 6912,16202:6945,16232                            # pad
+P 6931,16217 y16250 w=22                           # poly column x 6920-6942 on south (port)
+
+# ================================================================ piece xu: both pin lines under the metal bus and on to their gate
+# South of the staggered pads each line goes under a bus of five horizontal metals (y 16255, 16300,
+# 16340-16390, 16430, 16475) as a poly column to a second pad, south again as a thin metal, east at a
+# corner to a third pad, and east as a poly row to a gate column under a rail x 7292-7342 (piece n1).
+# No transistor and no contact on the way: field beside both columns and both rows.
+P 6888,16250 y16515 w=22                           # res_b: poly column x 6877-6899 under the bus
+P 6869,16499:6903,16531                            # pad south of the bus
+C 6885,16516
+M 6888,16508 y17039 x6951 w=18                     # thin metal south, corner (6888,17040), east onto the pad
+C 6951,17038
+P 6937,17025:6969,17056                            # pad
+P 6951,17029:7385,17051                            # poly row east under three tracks: gate band B of piece n1
+P 6931,16250 y16560 w=22                           # lpstb_b: poly column x 6920-6942 under the bus
+P 6913,16543:6947,16578                            # pad south of the bus
+C 6929,16560
+M 6930,16552 y16995 x6990 w=18                     # thin metal south, corner (6931,16997), east onto the pad
+C 6990,16996
+P 6972,16981:7008,17012                            # pad
+P 6990,16986:7385,17007                            # poly row east: gate band A of piece n1
+
+# ================================================================ piece n1: the gate both pin lines end on
+#     bl0_w17085 = NOT( lpstb_b AND res_b )
+# Two pull-downs in series under the rail: a source box with a contact, band A (lpstb_b), a node with
+# no contact, band B (res_b), the output node. The output goes east as a strip under a load plate to a
+# box on the supply rail x 7470-7520 (bc3 names it vcc), and west by a tab and a buried contact onto a
+# poly that runs south and back east as the gate band of the next unit (piece n2).
+M 7317,16925 y17110 w=50                           # rail x 7292-7342 (vss by the orientation of the loads)
+N M 7317,16930 vss
+D 7289,16941:7341,16967                            # source box
+C 7308,16960
+D 7289,16965:7360,17092                            # column: source, band A, node, band B, output node (W 7289-7360)
+D 7358,17074:7404,17092                            # output strip east
+D 7400,17061:7470,17091                            #   under the load plate (W 30, L 62)
+D 7468,17030:7522,17090                            # box on the supply rail
+C 7493,17052
+M 7495,17020 y17110 w=50                           # the supply rail over the box (bc3 draws the whole rail)
+N M 7495,17030 vcc
+D 7390,17021:7402,17078                            # neck of diffusion from the strip north, west of the plate
+D 7390,17021:7447,17039                            #   and east above the plate's top
+B 7403,17021:7432,17040
+P 7405,17023:7430,17042                            # the plate's finger onto it
+P 7404,17041:7465,17108                            # load plate
+D 7238,17074:7291,17093                            # output tab west
+B 7238,17072:7268,17096
+P 7203,17070:7268,17097                            # output poly: west,
+P 7203,17070:7227,17180                            #   south,
+P 7203,17160:7358,17180                            #   and east as the gate band of piece n2
+N P 7215,17120 bl0_w17085
+
+# ================================================================ piece n2: the inverter after it
+#     bl0_w17210 = NOT bl0_w17085        ( = lpstb_b AND res_b )
+M 7317,17110 y17240 w=50                           # the rail on south
+N M 7317,17120 vss
+D 7290,17110:7340,17186                            # source box and channel (W 7290-7340)
+C 7308,17130
+D 7281,17182:7357,17215                            # output node, wider than the channel
+D 7355,17192:7404,17215                            # output strip east
+D 7400,17190:7470,17218                            #   under the load plate (W 28, L 62)
+D 7468,17158:7522,17243                            # box on the supply rail
+C 7488,17178
+M 7495,17110 y17240 w=50
+N M 7495,17120 vcc
+D 7383,17142:7402,17195                            # neck north, west of the plate
+D 7383,17142:7447,17164                            #   and east above the plate's top
+B 7403,17143:7432,17165
+P 7405,17146:7430,17168                            # the plate's finger
+P 7404,17166:7465,17235                            # load plate
+D 7238,17192:7283,17215                            # output tab west
+B 7238,17194:7268,17226
+P 7180,17203:7268,17223                            # output poly west to a pad
+P 7172,17195:7206,17227                            # pad
+C 7188,17210
+M 7188,17200 y17310 w=20                           # metal south to the next pad (17300)
+N M 7188,17250 bl0_w17210
+
+# ================================================================ piece u3 (run 3): the third unit under the rail
+#     bl0_w17337 = NOT bl0_w17210        ( = NOT( lpstb_b AND res_b ) again, on a long track )
+# Same build as n2: source box with the rail contact, one gate band (the poly row of the pad (7188,17300)),
+# output node, strip east under a load plate to a box on the supply rail, the plate's finger on a buried
+# contact at the end of a neck of diffusion; west a tab and a buried contact onto a poly row that runs
+# west under bl0_w17210's metal to a pad, from which a thin metal x 7137-7152 runs south.
+M 7317,17230 y17350 w=50                           # the rail on south
+D 7292,17247:7338,17317                            # source box and channel (W 7292-7338)
+C 7308,17265
+D 7286,17313:7354,17341                            # output node
+D 7352,17324:7404,17344                            # output strip east
+D 7400,17322:7470,17350                            #   under the load plate (W 28, L 56)
+D 7468,17251:7522,17350                            # box on the supply rail (its own box: an edge at y 17245-17249 parts it from n2's)
+C 7495,17300
+M 7495,17230 y17350 w=50
+D 7384,17275:7399,17326                            # neck north, west of the plate
+D 7384,17275:7440,17296                            #   and east above the plate's top
+B 7402,17270:7436,17298
+P 7406,17272:7432,17302                            # the plate's finger
+P 7406,17300:7462,17362                            # load plate
+D 7264,17324:7290,17346                            # output tab west
+B 7236,17322:7266,17352
+P 7144,17334:7266,17353                            # output poly west, under the metal x 7178-7198 (a crossing: no ring, no hole), to a pad
+P 7128,17324:7160,17356                            # pad
+C 7144,17340
+N P 7215,17338 bl0_w17337
+P 7172,17285:7206,17317                            # pad of bl0_w17210's metal
+C 7188,17300
+P 7188,17290:7357,17311                            # gate band, east end x 7357
+M 7188,17300 y17472 w=20                           # bl0_w17210's metal on south to its last pad; it ends there
+P 7172,17457:7206,17488                            # pad (7188,17472)
+C 7188,17472
+P 7188,17461:7338,17483                            # its poly row east: gate band A of the fourth unit (piece u45)
+
+# ---- the track of bl0_w17337: a thin metal x 7137-7152 from the pad (7144,17340) south to a pad
+# (7143,17647) whose poly row goes east (port). It starts at the pad: the thin metal on the same x north
+# of it turns west at a corner (7144,17305) and goes on south at x 7097-7110, another net (bare ground
+# between the corner and the pad at y 17314-17326; review round 4).
+M 7144,17340 y17647 w=14
+P 7127,17631:7160,17663                            # pad
+C 7143,17647
+P 7143,17636:7295,17656                            # poly row east: gate band C of the fifth unit (piece u45)
+P 7285,17629:7350,17651                            #   under the rail it lies 6 px further north
+
+# ================================================================ piece u45 (run 4): the fourth and fifth units, a cross-coupled pair
+#     bl0_w17440 = NOT( bl0_w17210 OR bl0_w17610 )                     bl0_w17210 on two bands in series (A, B: one poly)
+#     bl0_w17610 = NOT( bl0_w17440 OR rst OR (bl0_w17337 AND bl0_w17687) )
+# The pull-downs are wide: their diffusion runs from an edge line x 7240 to the rail's east side. Unit 4
+# (top node bl0_w17440, bands A and B, the box of the rail contact (7322,17560)) and unit 5 (row
+# rst over the open column, the node bl0_w17610 with its buried contact, bands C and D, the box
+# of the rail contact (7308,17727)) each have a load east of the rail and one more pull-down there,
+# gated by the other's output.
+M 7317,17350 y17755 w=50                           # the rail on south to its end
+M 7495,17350 y17670 w=50
+# ---- unit 4
+D 7243,17425:7352,17458                            # top node N0
+B 7240,17423:7270,17450
+P 7218,17412:7268,17448                            # poly cap on the buried contact (ends there)
+D 7243,17455:7327,17548                            # stack: band A, node, band B, strip below
+P 7185,17483:7205,17527                            # the pad's poly south onto band B
+P 7185,17504:7338,17527                            # band B
+D 7305,17543:7355,17582                            # box with the rail contact
+C 7322,17560
+D 7350,17425:7410,17452                            # N0's strip east
+D 7404,17422:7470,17447                            #   under the load plate
+D 7468,17370:7522,17470
+C 7495,17420
+P 7408,17403:7462,17490                            # load plate and, in one poly, the pad south of it
+C 7432,17470
+P 7374,17460:7410,17488                            # its finger west onto the buried contact
+B 7372,17458:7410,17492
+D 7366,17450:7404,17540                            # tab south from the strip: buried contact, then the channel of T_x
+D 7325,17537:7402,17553                            # T_x's source: strip east from the box of the rail contact
+N P 7435,17480 bl0_w17440
+M 7435,17470 y17684 w=22                           # N0's thin metal south
+P 7418,17667:7452,17700                            # pad
+C 7434,17684
+P 7366,17668:7420,17695                            # T_n's gate
+# ---- X's poly: T_x's gate, the bar under the thin metal, X's load plate and its finger
+P 7362,17505:7420,17528
+P 7416,17502:7436,17600
+P 7406,17575:7462,17632
+P 7412,17630:7460,17646                            # the plate runs on south of the strip and ends on field
+P 7368,17578:7410,17598                            # the plate's finger west onto a buried contact
+B 7366,17574:7402,17614
+D 7368,17576:7400,17616                            # diffusion under it, down into the block
+N P 7424,17550 bl0_w17610
+# ---- unit 5
+D 7243,17528:7330,17546                            # strip below band B (on the rail by the box)
+D 7243,17528:7278,17602                            # the open column: under R3 its east edge is x 7278 (a field pocket x 7278-7305)
+D 7243,17598:7292,17724                            #   the buried contact, C, D
+P 6970,17549:7297,17572                            # row R3 from the west: from the pad (6970,17561) under four tracks (piece w5)
+N P 7225,17560 rst
+B 7240,17590:7268,17620
+P 7188,17595:7266,17615                            # X's poly west to a pad
+P 7172,17589:7206,17621
+C 7188,17605
+M 7188,17605 y17782 x7384 w=16                     # the second metal on x 7178-7198: south, a corner (7192,17786), east to a pad (piece w5)
+D 7290,17603:7370,17616                            # X under the rail and east into the buried contact's diffusion
+D 7290,17603:7343,17702                            # under the rail: X, band C, node, band D
+D 7364,17612:7402,17664                            # the block east of the rail (X)
+D 7398,17603:7470,17630                            #   its strip under the load plate
+D 7468,17570:7522,17660
+C 7495,17615
+P 7139,17676:7295,17698                            # row D, from the pad (7142,17713) (piece w5)
+P 7285,17672:7350,17696                            #   under the rail, a few px further north
+N P 7225,17687 bl0_w17687
+D 7290,17700:7347,17752                            # box with the rail contact
+C 7308,17727
+D 7243,17703:7420,17722                            # strip along the bottom
+D 7372,17660:7402,17705                            # T_n's channel from the block down to the strip
+
+# ================================================================ piece w5 (run 5): the three wires of the pair
+# ---- rst, the line that clears the pair: busl's track x 6841 ends at y 15000; it runs on south
+# to a pad (6842,16217), under the bus of horizontal metals as a poly column to a pad (6842,16562), on
+# south as a thin metal, east along y 17086, south at x 6970 to a pad (6970,17561), whose poly row is
+# the gate of the fifth unit's first pull-down. No pad, contact or branch on the way (it crosses three poly
+# rows north of the first pad, y 15088, 15132 and 15176, with no contact).
+M 6841,15000 y16217 w=14
+N M 6841,15500 rst
+P 6826,16200:6858,16234                            # pad
+C 6842,16217
+P 6845,16217 y16562 w=18                           # poly column under the bus
+P 6826,16546:6858,16578                            # pad
+C 6842,16562
+M 6842,16562 y17085 x6970 y17561 w=14
+P 6954,17545:6988,17578                            # pad
+C 6970,17561
+# ---- bl0_w17687 (band D): its row ends west on a pad (7142,17713); a thin metal runs south, east at a
+# corner (7151,17829) to a pad (7424,17822), whose poly row goes on east (port).
+P 7126,17690:7160,17732                            # pad, one poly with the row's west end
+C 7142,17713
+M 7144,17713 y17826 x7424 w=14
+P 7408,17803:7441,17838                            # pad
+C 7424,17822
+P 7424,17821 x7925 w=20                            # poly row east, under the supply rail and on (piece w6)
+# ---- bl0_w17610: the end of its metal, a pad (7384,17779) whose poly row goes on east (port).
+P 7367,17758:7401,17795                            # pad
+C 7384,17779
+P 7384,17776 x7555 w=23                            # poly row east, under the supply rail, to a pad (piece w6)
+
+# ================================================================ piece w6 (run 6): both wires on east and north
+# ---- bl0_w17610: pad (7555,17778), metal east to a pad (7795,17778), poly east under the track x 7840
+# to a pad (7880,17777), a track x 7875-7889 north to a pad (7882,17389), whose poly row goes west into
+# the gate column east of the supply rail (port).
+P 7539,17762:7572,17794
+C 7555,17778
+M 7555,17778 x7795 w=14
+P 7779,17762:7812,17794
+C 7795,17778
+P 7795,17778 x7880 w=20
+P 7864,17761:7897,17794
+C 7880,17777
+M 7882,17777 y17389 w=14
+P 7866,17373:7899,17405
+C 7882,17389
+P 7760,17378:7884,17398                            # poly row west (port at x 7760)
+# ---- bl0_w17687: its poly row runs east (for 300 px under a metal of another net that lies along it,
+# x 7545-7845) to a pad (7925,17821); a track x 7918-7932 runs north 2,125 px to a pad (7925,15696),
+# whose poly row goes west into bc1's gate group (port).
+P 7909,17805:7942,17838
+C 7925,17821
+M 7925,17821 y15696 w=14
+P 7909,15680:7942,15712
+C 7925,15696
+P 7790,15682:7927,15702                            # poly row west (port at x 7790)
+
+# ================================================================ piece w7 (run 7): bl0_w15412 to the left array's left column
+# The row y 15401-15425 ends west on a pad (4909,15415); a track x 4902-4916 runs south to a corner at
+# y 16087 and west onto a pad (4868,16086); a poly row y 16075-16097 runs west across the whole left
+# array in its Gap 2 (2,000 px, no pad, no transistor), turns north at x 2845-2867 and west at
+# y 15988-16008 under the left column's supply rail to a pad (2700,15999) on a thin metal x 2690-2710
+# that runs on both north and south of the pad (ports: the force line of the MA cells, not drawn).
+P 4893,15398:4926,15431
+C 4909,15415
+M 4909,15415 y16087 x4868 w=14
+P 4850,16070:4885,16103
+C 4868,16086
+P 2845,16075:4868,16097
+P 2845,15988:2867,16097
+P 2700,15988:2867,16008
+P 2684,15982:2717,16015
+C 2700,15999
+M 2700,15972 y16026 w=12                           # the thin metal through the pad (ports north and south)
+
+# ================================================================ piece w9 (run 9): three tracks of the left bus field, on south
+# ---- busl_x6820: busl's track x 6754 ends at y 15000; on south to a pad (6754,16217), a poly column
+# under the bus of horizontal metals to a pad (6754,16562), a thin metal on south (port at y 17000: the
+# follower runs it to a corner (6767,18040) and east). It crosses the poly rows y 15088, 15132, 15176.
+M 6754,15000 y16217 w=14
+N M 6754,15500 busl_x6820
+P 6738,16200:6771,16234
+C 6754,16217
+P 6757,16217 y16562 w=18
+P 6738,16546:6771,16579
+C 6754,16562
+M 6754,16562 y17000 w=14
+# ---- rcs_mv: busl's track x 6971 ends at y 15000; on south through a pad (6966,15305), whose poly row
+# goes east (port), to a pad (6970,16175), a poly column under the bus to a pad (6970,16519), a thin
+# metal south to a pad (6968,16780), whose poly row goes east (port).
+M 6971,15000 y16175 w=14
+N M 6971,15500 rcs_mv
+P 6950,15289:6984,15321
+C 6966,15305
+P 6966,15301 x7030 w=20
+P 6954,16159:6987,16192
+C 6970,16175
+P 6972,16175 y16519 w=18
+P 6954,16502:6987,16536
+C 6970,16519
+M 6970,16519 y16780 w=14
+P 6952,16764:6985,16797
+C 6968,16780
+P 6968,16780 x7040 w=20
+# ---- cdp3_cw_c7: busl's track x 5322 ends at y 15000; on south to a contact on a diffusion box
+# (5325-5370, 15350-15392), from which a diffusion wire y 15362-15382 runs west under the tracks
+# (port at x 4780: it goes on into the left array).
+M 5322,15000 y15371 x5345 w=14
+N M 5322,15200 cdp3_cw_c7
+D 5325,15350:5370,15392
+C 5345,15371
+D 4780,15362:5330,15382
+
+# ================================================================ piece w10 (run 10): the other five through lines of lc3
+# Each is busl's track from y 15000 on south to a contact on a diffusion box, from which a diffusion
+# wire runs west under the tracks into the left array (ports at x 4780), like cdp3_cw_c7 in piece w9.
+M 5279,15000 y15849 x5299 w=14
+N M 5279,15200 cdp3_cw_c6
+D 5279,15828:5324,15870
+C 5299,15849
+D 4780,15841:5284,15856
+M 5235,15000 y16496 x5252 w=14
+N M 5235,15200 cdp3_cw_c5
+D 5232,16475:5277,16517
+C 5252,16496
+D 4780,16493:5237,16508
+M 5192,15000 y16975 x5211 w=14
+N M 5192,15200 cdp3_cw_c4
+D 5191,16954:5236,16996
+C 5211,16975
+D 4780,16970:5196,16985
+M 5148,15000 y17453 x5170 w=14
+N M 5148,15200 cdp3_cw_c3
+D 5150,17432:5195,17474
+C 5170,17453
+D 4780,17447:5155,17461
+M 5105,15000 y17929 x5126 w=14
+N M 5105,15200 cdp3_cw_c2
+D 5106,17908:5151,17950
+C 5126,17929
+D 4780,17924:5111,17938
+
+# ================================================================ piece w11 (run 11): two more tracks of the left bus field
+# ---- cdp4_bus_s0: busl's track x 5451 ends at y 15000; on south 45 px, west along y 15045 to a pad
+# (5364,15044), whose poly row y 15033-15053 runs west under the tracks into the left array (port).
+M 5451,15000 y15045 x5364 w=16
+N M 5451,15010 cdp4_bus_s0
+P 5348,15027:5382,15060
+C 5364,15044
+P 4780,15033:5366,15053
+# ---- lc2_w8450, second branch: busl's track x 4822 ends at y 15000; on south to a pad (4823,16713),
+# whose poly row y 16703-16723 goes east (port).
+M 4822,15000 y16713 w=14
+N M 4822,15500 lc2_w8450
+P 4806,16697:4840,16730
+C 4823,16713
+P 4823,16703:4930,16723
+# ================================================================ piece t6 (run 12): six tracks from the left bus field to six rows of the left array
+# Six thin metals cross y 15000 east of cdp4_bus_s0's track, at x 5496, 5540, 5584, 5627, 5671, 5714
+# (north of y 15000 they are in busl's region and drawn by no one yet: ports). Each ends on a pad with a
+# contact whose poly row runs west under the tracks into the left array (ports at x 4780), one row per
+# array row, 150 px south of the diffusion wire of lc3's through line of that row (pieces w9, w10):
+# rows y 15522, 15999, 16649, 17126, 17603, 18081. On the way the bundle steps west as nested L's
+# (no line can cross another: one metal layer): by two track positions (88 px) at y 15090-15308 (round
+# cdp4_bus_s0's end), then by one position (44 px) below each of lc3's lines as it ends (y 15438-15568,
+# 15915-16046, 16565-16652, 17043-17086, 17521). No pad, contact or branch on any of them between
+# y 15000 and its end pad (tl5_tracks.py v/h on every segment: no stretch without metal over 13 px, no
+# hole in the clean shot). Four arms lie ON a poly row for 45-90 px without a contact (trap 13): the
+# first line's arm y 15090 on rst_n's row, and the fourth line's arms y 15522, 16001, 16652 on the rows
+# of the sixth, fifth and third pads. Each pad has a neighbouring track 44 px west of its centre that
+# passes without touching it (15-20 px of open poly between the metal's edge and the pad's ring).
+# Named by the y of the row each ends on.
+# ---- cdp3_g_c2 (from x 5496)
+M 5496,15000 y15090 x5410 y15438 x5366 y15915 x5322 y16565 x5279 y17043 x5236 y17521 x5193 y18084 x5106 w=14
+N M 5496,15040 cdp3_g_c2
+P 5089,18065:5125,18097                            # pad
+C 5106,18081
+P 4780,18081 x5106 w=22                            # poly row west into the left array (port at x 4780)
+# ---- cdp3_g_c3 (from x 5540)
+M 5540,15000 y15134 x5453 y15481 x5409 y15958 x5366 y16608 x5323 y17086 x5279 y17603 x5236 w=14
+N M 5540,15040 cdp3_g_c3
+P 5219,17587:5254,17619                            # pad
+C 5236,17603
+P 4780,17603 x5236 w=22                            # poly row west (port at x 4780)
+# ---- cdp3_g_c4 (from x 5584)
+M 5584,15000 y15177 x5496 y15522 x5453 y16001 x5409 y16652 x5366 y17127 x5322 w=14
+N M 5584,15040 cdp3_g_c4
+P 5304,17111:5341,17143                            # pad
+C 5322,17127
+P 4780,17126 x5322 w=22                            # poly row west (port at x 4780)
+# ---- cdp3_g_c5 (from x 5627)
+M 5627,15000 y15221 x5540 y15568 x5497 y16046 x5453 y16649 w=14
+N M 5627,15040 cdp3_g_c5
+P 5436,16632:5471,16666                            # pad
+C 5453,16649
+P 4780,16649 x5453 w=22                            # poly row west (port at x 4780)
+# ---- cdp3_g_c6 (from x 5671)
+M 5671,15000 y15264 x5584 y15999 x5538 w=14
+N M 5671,15040 cdp3_g_c6
+P 5521,15982:5557,16017                            # pad
+C 5538,15999
+P 4780,15999 x5538 w=22                            # poly row west (port at x 4780)
+# ---- cdp3_g_c7 (from x 5714)
+M 5714,15000 y15308 x5627 y15522 w=14
+N M 5714,15040 cdp3_g_c7
+P 5608,15505:5645,15540                            # pad
+C 5626,15522
+P 4780,15522 x5626 w=22                            # poly row west (port at x 4780)
+
+# ================================================================ piece m7144 (run 12): the thin metal x 7137-7152 north of the pad (7144,17340)
+# Another net than bl0_w17337 (run 3, review round 4: bare ground between its corner and that pad,
+# re-measured in run 12: px.py col 7144 17296 17352). One wire, 4,400 px, no transistor, no branch:
+# a pad (7143,15566) whose poly row goes east into bc1's gate group (port); a thin metal south to a pad
+# (7143,16259); a poly column under the wide bus metal (over field) to a pad (7143,16474); a thin metal
+# south to a corner (7144,17305), west to x 7103, south to a corner (7103,17866) and east to a pad
+# (7384,17866), inside the L of the clock's metal (tl4: x 7058, y 17908); a poly row east under the
+# supply rail x 7470-7520 (no diffusion under the rail) to a pad (7602,17866); a metal east to a corner
+# (7970,17866), north 44 px LYING ON a poly column x 7962-7983 of another net (no contact: salmon in the
+# clean shot all along, no ring in either metal shot) and east along y 17824 to a pad (8272,17821),
+# whose poly row runs on east (port; seen as open poly to about x 8690).
+# Places where the wire crosses or lies on something with no contact: the metal x 7179-7197 (another
+# net: from a pad (7186,15520) south to a pad (7187,15696)) crosses the north row at x 7188; the thin
+# metal crosses poly rows at y 15738, 15825, 15998, 16540, 16780 (rcs_mv), 16866, 16996, 17040 and
+# 17560 (rst); the clean shot is green under it at y 15763-15815 (no pad, no ring: no contact);
+# the clock's branch x 7551-7566 crosses the row y 17866.
+P 7127,15550:7160,15583                            # north pad
+C 7143,15566
+P 7143,15566 x7260 w=22                            # poly row east, under the metal x 7179-7197 (no contact), into bc1's group (port at x 7260)
+N P 7230,15566 h_eq_r1_n
+M 7144,15566 y16259 w=14                           # thin metal x 7137-7151 south
+P 7127,16242:7160,16276                            # pad
+C 7143,16259
+P 7144,16259 y16474 w=20                           # poly column under the wide bus metal y 16340-16400
+P 7126,16457:7160,16492                            # pad
+C 7143,16474
+M 7144,16474 y17305 x7103 y17866 x7384 w=14        # south, the corner 35 px short of bl0_w17337's pad, west, south, east
+P 7367,17849:7401,17883                            # pad
+C 7384,17866
+P 7384,17865 x7602 w=20                            # poly row east under the supply rail
+P 7585,17849:7619,17883                            # pad
+C 7602,17866
+M 7602,17866 x7970 y17824 x8272 w=14               # east, north on another net's poly column (no contact), east
+P 8255,17805:8291,17839                            # pad
+C 8272,17821
+P 8272,17821 x8360 w=20                            # poly row on east (port at x 8360)
+

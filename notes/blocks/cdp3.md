@@ -22,7 +22,7 @@ Inside a column, from the left (x for c5, add 390.3 per column):
 | 9765-9815 at the top of row C and in channel B; 9725-9769 from y 9295 down through rows D-G | VCC rail ("rail a") |
 | 9808-9826 | line b: west output of the row C cell (`cdp3_cw_cN`) |
 | 9848-9865 | line c: read output of the row C cell (`cdp3_cq_cN`), jogging to 9812 above row E |
-| 9890-9908 | line h: node N of the column (`cdp3_n_cN`) from row E down to its channel G track |
+| 9890-9908 | line h: node N of the column (`rd_b(7-N)`) from row E down to its channel G track |
 
 The first run numbered "slices" `s0..s7` by a 390-px window that started at the VCC rail.
 Its slice sK is column cK for the VCC rail, lines b, c, h and the row E/F transistors,
@@ -54,8 +54,34 @@ Which columns each row occupies:
   - rows E and F (two pass transistors per column), their two gate lines, the tracks of
     channels D and G and the vertical metal joining them;
   - channel B: six tracks onto line g, six poly links from line f to the "x 9893" line.
-- NOT traced: row A (a different, larger cell, cut by the top edge), row I (the top
-  150 px of cdp4's row R1), the logic beside row A (x 7600-8400, y 8440-8800).
+- **Row A (y 8040-8830), traced** (run of 2026-11-19 22:35 -0600; 91 transistors, no uncertain item):
+  six copies of `cdp4`'s comparator cell over six copies of `cdp4`'s latch cell: **R14 and its
+  comparator with line g.** `g_eq_r14` = NOR of the six cells' "not equal" nodes. With every file loaded:
+  2439 nets, 4541 transistors, 0 errors, 0 warnings. See "Row A" under Logic.
+- **West logic, run of 2026-11-20 13:32 -0600** (Matt Godbolt's session, Claude Fable 5.2; 2 transistors and
+  wiring, no uncertain item): **U1 of the gate column** (y 7940-8060), `cdp3_w8063` = NOT the wire `cdp3` called w7996 (now `lc2_w8646`), with
+  its input wire (from a staircase metal of the bus field, by two poly hops) and its output wire (a metal
+  x 7826-7848 to two pads whose polys go into the cluster beside row A); and **the output line of the gate
+  beside row C** (the x 7880 line) drawn up to its end pad (7878,8385). See "West logic" under Logic.
+- **A clock inverter west of the gate column** (run of 2026-11-20 13:55 -0600; piece `ckb`, 2 transistors and
+  1,300 px of wire, no uncertain item): **`lc2_w8646` = NOT `ck_out`**, a wide inverter (pull-down W about 260)
+  at x 7475-7780, y 8660-8845 whose gate is the poly of `eofw`'s corner pad (7446,8732). Its output is
+  U1's input (so `cdp3_w8063` = NOT `lc2_w8646`, a buffered copy of `ck_out` into the cluster beside row
+  A) and, by a staircase line of the bus field, **the enable of `lc2`'s latch C**. The first handoff's name for U1's input
+  (`cdp3`'s w7996) was an alias of `lc2_w8646` until the refresh of 2026-11-20 renamed it. See "The clock inverter" under Logic.
+- **The bit lines are the data bus** (run of 2026-11-20 13:40 -0600; wiring, six joins, no uncertain item):
+  each of the six bit lines of columns c2..c7 runs on north of y 8040 as the same metal as `cdp2`'s bus
+  line of that slice (drawn y 7556-8040): **the bit lines of c2..c7 (`cdp3`'s bl_c2 and `cdp3_bl_c3`..`c7`) = `db_b5`, `db_b4`, `db_b3`, `db_b2`, `db_b1`,
+  `db_b0`.** So R14's six latch cells (row A) and the register cells of rows C and H in these columns
+  are written from data bus bits 5-0. See "The bit lines north of row A" under Logic.
+- NOT traced: the gate cluster beside row A (x 7780-8200, y 8260-8800): surveyed, with a draft, and
+  left out of the trace because five diffusion boundaries in it cannot be decided from the photos
+  (Not done).
+
+Run of 2026-11-21 18:37 -0600 (one small item of the Left list; wiring only, one pad with a contact, no transistor): **the
+metal north of the pad (7835,8862)** (the east end of `busl_x7122`'s row y 8863): it ends on a pad
+(7834,8647), whose poly row runs east toward the second box of the cluster beside row A (AMB-047); drawn to
+x 7905 (port). See "`busl_x7122`'s metal north" under Logic.
 
 ## Inventory
 
@@ -77,13 +103,13 @@ Horizontal poly lines (y centres):
 
 | y | Line |
 |---|---|
-| 8818 | `cdp3_l8819`: poly line of channel B, y 8810-8826. East end: a pad with a metal contact at about (10893,8817), on a vertical metal line at x 10888 that comes up from the south and ends there. West end: x 8528 in c2 (field west of it to x 8440, measured). It passes 30 px below the bit-line contact of each row A cell (c5: 9636,8782); its branches into the row A cells are not traced |
+| 8818 | `wr_r14`: poly line of channel B, y 8810-8826. East end: a pad with a metal contact at about (10893,8817), on a vertical metal line at x 10888 that comes up from the south and ends there. West end: x 8528 in c2 (field west of it to x 8440, measured). It passes 30 px below the bit-line contact of each row A cell (c5: 9636,8782); its branches into the row A cells are not traced |
 | 8907 ... 9123 | channel B tracks onto line g of c7 ... c2 |
 | 9533 | `cdp3_c_wr`, write line of row C: runs along y 9520-9546 and in every cell loops up (x 9581-9603 in c5), east along y 9476-9498 over the write transistor, and down again (x 9697-9719). West of c2 and east of c7 it runs straight on (seen to x 8355 and x 10900). The first run listed its two levels as separate lines "9493" and "9537". Its west end is the loop of c2 (x 8370; no poly at y 9533 west of that, measured). East end: a pad with a metal contact at about (10940,9531), on a vertical metal line at x 10935 that comes up from the south and ends there |
 | 9581, 9624, 9668, 9711, 9754, 9797 | channel D tracks of c7 ... c2: from the west edge to the tap contact under line b |
 | 10057, 10317 | gate lines of rows E and F |
 | 10361 ... 10664 | channel G tracks of c7 ... c0, each in a west piece (to the row H cell) and an east piece (node N, to the east edge) |
-| 10711 | `cdp3_h_wr`, write line of row H: the mirror image of row C's, along y 10700-10722 with a loop down to y 10746-10768 in every cell. Its west end is the loop of c0 (x 7605). It runs on east past x 10990, under five vertical metal lines (x 10803, 10848, 10888, 10935, 10975) without a contact |
+| 10711 | `wr_r13`, write line of row H: the mirror image of row C's, along y 10700-10722 with a loop down to y 10746-10768 in every cell. Its west end is the loop of c0 (x 7605). It runs on east past x 10990, under five vertical metal lines (x 10803, 10848, 10888, 10935, 10975) without a contact |
 
 ## Logic
 
@@ -162,7 +188,7 @@ the 6-bit readable registers of this chip type; which one this is depends on whe
 score 0.40 at offset 0,1538" was the unmirrored cell locking onto the rails. Same
 equations with
 
-    x  = bl while cdp3_h_wr is high
+    x  = bl while wr_r13 is high
     hw = NOT q1       west output: line b up to the west piece of the channel G track
     hq = NOT q1       read output: line c up to the row F pass transistor -> bus N
 
@@ -179,13 +205,13 @@ reading 0. Bit order within a byte is not established here.
 
 ### Rows E and F (traced)
 
-    row E, c2..c7:  pass transistor, gate cdp3_gate_e, between cdp3_cq_cN and cdp3_n_cN
-    row E, c0, c1:  pass transistor, gate cdp3_gate_e, between VSS and cdp3_n_cN
-    row F, c0..c7:  pass transistor, gate cdp3_gate_f, between cdp3_hq_cN (row H cell) and cdp3_n_cN
+    row E, c2..c7:  pass transistor, gate rsel12_buf, between cdp3_cq_cN and rd_b(7-N)
+    row E, c0, c1:  pass transistor, gate rsel12_buf, between VSS and rd_b(7-N)
+    row F, c0..c7:  pass transistor, gate rsel13_buf, between cdp3_hq_cN (row H cell) and rd_b(7-N)
 
-All sixteen are W/L about 190/28. `cdp3_n_cN` leaves east on its channel G track. So N is
-an eight-line bus that gets the six row C bits (and 0 on c0, c1) when `cdp3_gate_e` is
-high and the eight row H values when `cdp3_gate_f` is high: a read bus, with the two
+All sixteen are W/L about 190/28. `rd_b(7-N)` leaves east on its channel G track. So N is
+an eight-line bus that gets the six row C bits (and 0 on c0, c1) when `rsel12_buf` is
+high and the eight row H values when `rsel13_buf` is high: a read bus, with the two
 unused top bits of the 6-bit register reading 0. That makes c0, c1 the two most
 significant bits if the order is monotonic (not established).
 
@@ -196,12 +222,12 @@ Where row C has no cells there is one gate. Its pull-down chain is a diffusion
 rail at the bottom (8000,9378); its load is a poly block 8116-8150 over a strip to a VCC
 contact (8178,9275) under a wide VCC metal that becomes c1's VCC rail.
 
-    out = NAND(cdp3_k_b, cdp3_k_c)        extracted as cdp3_bl_c1 (see below)
+    out = NAND(bus_eq_r15, g_eq_r14)        extracted as cdp3_bl_c1 (see below)
 
-- `cdp3_k_b` (gate 1, y 9279-9300): poly from the west edge along y 9450 to a contact
+- `bus_eq_r15` (gate 1, y 9279-9300): poly from the west edge along y 9450 to a contact
   (7765,9448), a metal bar east along y 9451, up the lower piece of the x 7880 line to
   the gate's pad (contact 7878,9297).
-- `cdp3_k_c` (gate 2, y 9328-9348): the gate poly runs down the left side and east along
+- `g_eq_r14` (gate 2, y 9328-9348): the gate poly runs down the left side and east along
   y 9423 to a contact (8335,9428) on a metal line at x 8327 that comes down from above
   y 9150 (not followed).
 - Output: (1) a buried contact at the top left of the chain (7924-7958 x 9238-9271) to a
@@ -217,9 +243,124 @@ contact (8178,9275) under a wide VCC metal that becomes c1's VCC rail.
   the west edge: seen by the first run, not re-checked, drawn `?`) down to a contact
   (7833,9165) on a poly line y 9168 that runs east to a contact at (8290,9165) (metal
   there not followed), on down to a contact (7835,9401), a poly cross-under below the
-  metal bar of `cdp3_k_b` (no metal over it, checked at 4x in both metal shots), contact
+  metal bar of `bus_eq_r15` (no metal over it, checked at 4x in both metal shots), contact
   (7835,9490), metal west and then down at x 7772 to a contact at about (7770,10135)
   between rows E and F, which is not traced.
+
+### West logic: U1 and the lines into the cluster beside row A (2026-11-20; traced)
+
+**U1** (x 7296-7855, y 7940-8080) is the unit of the gate column between `eof`'s `g7700` and its three
+inverters U2-U4: `eof`'s inverter cell `eof_dinv` moved by (0,-390), written out here and fitted (the
+overlay `cache/scratch/cdp3/u1.png` fits; this copy's node has a poly cap on its buried contact that goes
+nowhere, and its load plate's foot is the output):
+
+```
+cdp3_w8063 = NOT lc2_w8646          pull-down W 57; load 27/56
+```
+
+- **Input** `lc2_w8646`: the gate row y 7986-8006 runs west to a pad (7313,7995); a thin metal
+  x 7309-7323 runs south from it to a pad (7313,8625) and ends on both (bare ground north of the first,
+  `px.py col 7316 7950 7985 5`, and south of the second, `px.py col 7316 8636 8660 4`; `tl5_tracks.py v
+  7316 8010 8610`: bars only). That pad's poly runs east and south (a column x 7393-7415, under a
+  horizontal metal y 8700-8715 with no contact) to a pad (7400,8778), on which a metal from the west
+  along y 8749-8765 ends (`textmap.py 7380 8762 7424 8802 3`; `px.py row 8757 7340 7400 6`). That metal is
+  a line of the bus field's staircase (`follow.py 7340 8757 W`: corners (7146,8752), (7145,8714),
+  (7013,8710), (7011,8628), (6843,8618), end (6843,8536)): drawn to x 7330 (port).
+- **Output** `cdp3_w8063`: the plate's foot runs east to a pad (7838,8062); a metal x 7826-7848 runs
+  south through a pad (7836,8430) to a pad (7838,8582), where it ends (`tl5_tracks.py v 7837 8080 8600`).
+  The first pad's poly row goes east and the second's goes west and round into a row y 8675-8697: two
+  gates of the cluster beside row A (ports).
+
+**The output line of the gate beside row C** (the upper piece of the x 7880 line): one metal from
+y 9150 north to a pad (7878,8385), where it ends (`tl5_tracks.py v 7879 8400 9240`: bars of 14 px or
+less). The pad's poly row goes east into the cluster (port). A second metal on the same x comes from the
+north and ends on a pad (7878,8315), 70 px away: another net (bare ground between,
+`px.py col 7880 8330 8372 4`).
+
+### The bit lines north of row A (2026-11-20; traced, wiring only)
+
+`cdp2` draws each slice's bus-line metal to y 7556 at s2 and, through its latch cell placed at dy 1476, to y 7821 at s3..s7 with the contact at y 7789 (x 8465, 8855, 9246, 9636, 10026, 10416; review round 3: the lines drawn here duplicate that stretch); this file's
+bit lines start at y 8040 (x 8466, 8857, 9248, 9638, 10028, 10419). Between the two each is one metal:
+`tools/tl5_tracks.py v X 7560 8050` for the six x finds no stretch without metal over 21 px, and the
+stretches over 14 px are the ring of the contact at y 7789 ON the line (bright centre and ring in both metal shots; at (8466,7604) and y 7700-7730 the dark stretches have no hole in the clean shot and are not breaks: review round 3), `textmap.py 8836 7754 8880 7824 3`, `8444 7574 8490 7620 3`): taps of
+`cdp2`'s channel 3, which are that package's and are not drawn here. View `cache/scratch/cdp3/bl3.png`
+(c3, 3.6x). The names are joined by `@alias` (the bus names are canonical):
+
+| bit line | x | is |
+|---|---|---|
+| `db_b5` | 8466 | `db_b5` |
+| `cdp3_bl_c3` | 8857 | `cdp2_c_s3_bus` = `db_b4` |
+| `cdp3_bl_c4` | 9248 | `cdp2_c_s4_bus` = `db_b3` |
+| `cdp3_bl_c5` | 9638 | `cdp2_c_s5_bus` = `db_b2` |
+| `cdp3_bl_c6` | 10028 | `cdp2_c_s6_bus` = `db_b1` |
+| `cdp3_bl_c7` | 10419 | `cdp2_c_s7_bus` = `db_b0` |
+
+No gate's equation changes: six bus equations (`db_b#` = NOT `dl#_q_n`) gain the alias, and 108 transistor
+terminals in this package now read `db_b#`. **Not joined**: c1's line e (x 8076). Its metal north of
+y 9150 fails the metal test on long stretches inside the cluster beside row A (y 8377-8768, narrow and
+dim); `cdp2` names the bus line at x 8075 `db_b6`. If they are one metal, the gate beside row C has
+`db_b6` on its load's pad (the `?B` there): not established.
+
+### The clock inverter (piece `ckb`, 2026-11-20; traced)
+
+Under the VSS rail (x 7552-7645 at this height) and the wide VCC metal (x 7682-7770) lies one diffusion,
+x 7494-7712, y 8658-8770 (it runs on 50 px west of the rail: review round 4) (`railprof.py 7560 7615 8640 8810`, `7685 7710 8640 8860`). The poly of `eofw`'s
+corner pad (7446,8732), which is `ck_out`, enters from the west along y 8722-8745, turns north at
+x 7625-7648 and east along y 8678-8698 to its end at x 7722: it parts the top-left of the diffusion (two
+rail contacts, (7572,8680) and (7592,8688)) from the rest, the output node. East of the rail a second
+poly (y 8772-8802) crosses the node's south end down to a diffusion that runs east to a box with a
+contact (7755,8818) on the VCC metal: the load, its gate tied to the node by a tail west and a buried
+contact (7598-7626, 8768-8798) on a tab. The thin outlined strip at x 7655-7672 between the two metals
+is the usual artefact of a gap between metals (layers notes), not layout.
+
+```
+lc2_w8646 = NOT ck_out            pull-down W about 260 (the poly's whole path across the diffusion); load 70/29
+```
+
+The node leaves west by a neck (y 8750-8764: a tab bounded by edge lines at y 8747 and 8765 in both
+chip-2 shots, `cache/scratch/cdp3/w3.png`, 9x) into a buried contact (7495-7533, 8762-8792) under the end
+of a poly row y 8768-8790, which runs west under the track x 7455-7475 (poly colours without a break,
+`px.py row 8778 7400 7556 8`) onto the pad (7400,8778): the pad of U1's input wire. So the two pieces of
+this run are one circuit: this inverter drives U1 and the metal that ends on that pad.
+
+That metal is a line of the bus field's staircase. From the pad it runs west along y 8757, north at
+x 7146, west along y 8713, north at x 7012, west along y 8621, north at x 6843, west along y 8541, north
+at x 6667, west along y 8452 and north at x 6467 onto the metal that `lc2` draws as the branch of latch
+C's enable (`M 6168,8301 x6450`). Every piece passes the two-chip metal test with bars of 14 px or less
+(`tl5_tracks.py` on the ten pieces: the bars are the edges of the poly columns under the staircase). At
+(6843,8533) the follower stops on such a bar; the metal turns west there (`px.py row 8541 6790 6850 4`:
+metal at x 6794-6802, 6814-6830, 6838-6848 with two 8 px bars; `cache/scratch/cdp3/st2.png`, 6x).
+With every package loaded the join gives:
+
+```
+lc2_w8822 = NOT((lc2_w8646 & tl3_w3982) | lc2_w8688)        lc2's latch C, enabled while ck_out is low
+lc2_w8688 = NOT((lc2_w8646 & lc2_w9005) | lc2_w8822 | rst_c)
+cdp3_w8063 = NOT lc2_w8646                                  U1
+```
+
+### `busl_x7122`'s metal north of its pad (2026-11-21; traced, wiring only)
+
+The pad (7835,8862) at the east end of `busl_x7122`'s row y 8863 (the row and the pad's contact are marked
+uncertain where the row lies under the wide rail: `busl`'s Ambiguity 17) carries a thin metal (12 px) that
+runs north on x 7835:
+
+- from the stub drawn before (to y 8800) on north to its end on a pad with a contact at (7834,8647)
+  (`tools/follow.py 7835 8800 N --gap 16` ends at (7834,8642); ring, bright centre and a hole in the clean
+  shot: `cache/scratch/cdp4/padc.py`). On the way it passes over U1's second row y 8675-8697 (two edge bars,
+  `tools/tl5_tracks.py v 7835 8665 8850`; no hole): no contact.
+- **It is not the metal of `cdp3_w8063`**, whose pad (7838,8582) lies 65 px further north on the same track
+  position: between the two pads' rings (y 8600 and y 8630) there is bare ground (163-168 in the chip-2 metal
+  shot at y 8610-8620, `tools/px.py col 7834 8590 8640 5`): two metals end to end.
+- From the pad a poly row runs east (y 8637-8658): open poly at x 7850-7868, under the metal x 7874-7886
+  (the x 7880 line of the gate beside row C's output) with no contact (bright metal between two edge bars,
+  clean shot salmon with no hole), open poly again at x 7898-7918, and then the ring and bright centre of the
+  box (7935,8648) under the metal x 7927-7957 (`tools/px.py row 8647 7790 7960 6`; `x7835_a.png`,
+  `ov_x7835.png`). Nothing leaves the pad west or north (field).
+
+The row is drawn to x 7905 (port). **How it meets the box (7935,8648) is not read here**: that box is one of
+the two "contacts" of the metal x 7927-7957 that AMB-047 turns on. This row arriving at it from the west fits
+the reading that the box is a poly pad (a pad of this row with a contact from that metal) rather than a
+diffusion: a lead for whoever reads the cluster, not a finding.
 
 ### Channel B (traced, wiring only)
 
@@ -232,6 +373,46 @@ contact (8178,9275) under a wide VCC metal that becomes c1's VCC rail.
   y 8862 for c2, c3, c5, c6 and at y 9144 for c4, c7). Line f then runs down through the
   row C cell without a contact and on to the bottom edge.
 
+### Row A: R14's latch row and the comparator of line g with R14 (2026-11-19; traced)
+
+Row A is, in each of c2..c7, the cell pair of `cdp4`'s row R1, 3015 px north (`tools/findcell.py 8370
+11060 8790 11490` and `... 8370 11495 8790 11845`: six hits each at dy -3015/-3016, scores 0.83-0.88; c2's
+comparator 0.72, see below). It is placed from `cdp4`'s cells (`@requires cdp4`), and every copy was
+checked with `tools/cellcheck.py`. The gates in full are in `notes/blocks/cdp4.md` ("Row R1 upper", "Row
+C latch"); with this row's names:
+
+    cdp4_la_c#_a   : storage node, written from the bit line cdp3_bl_c# while wr_r14 is high
+    cdp4_la_c#_n2  = NOT cdp4_la_c#_a
+    cdp4_la_c#_q   = NOT cdp4_la_c#_n2
+    cdp3_f_c#      = NOT cdp4_la_c#_n2            (the buffered output: R14 as read, cdp4's selector source a)
+    cdp4_xr_c#_nor = NOR(cdp3_g_c#, cdp4_la_c#_q)
+    cdp4_xr_c#_ne  = NOT((cdp3_g_c# AND cdp4_la_c#_q) OR cdp4_xr_c#_nor)        = cdp3_g_c# XOR cdp4_la_c#_q
+    g_eq_r14       = NOR(cdp4_xr_c2_ne, ..., cdp4_xr_c7_ne)                     high when line g equals R14's q in all six columns
+
+- **Latch row** (y 8490-8830): the latch cell upside down, strobe `wr_r14` (the poly y 8818 already drawn),
+  data from the bit line (line e; contact (8466+dx, 8794)), buffered output by the land's contact
+  (8712+dx, 8757) onto the metal x 8722 (the "x 9500 line") and the link poly to line f. So **row A is
+  R14** (firm: `wr_r14` by `regs`), and line f is R14's buffered output.
+- **Comparator row** (y 8040-8490): the bus-tap metal of the cell (x 8556+dx, top end y 8047) is line g,
+  which the tracks of channel B bring from the west. Line f's metal runs on up through the row as a stub
+  (top end y 8052, no contact above the link).
+- **c2** has the short pull-down and, east of it, the match line's load, exactly as `cdp4`'s slice s0
+  (hand-drawn, `cdp4`'s items moved by +782,-3015): poly A x 8407-8604 with its leg on field, VCC
+  contact (8632,8175) under a pad of the rail, load gate x 8685-8727 with a buried contact on the line at
+  its head, and the same tab of the line under the top end of the tap track (8548-8570, 8059-8099; no
+  contact read, as `cdp4`'s Ambiguity 12).
+- **West end of the match line**: the band ends in a framed box (8328-8368, 8098-8145) read as a buried
+  contact; a poly runs south from it (x 8333-8350) to a pad (8323-8357, 8192-8227) whose contact
+  (8334,8209) starts the thin metal x 8336. `tools/follow.py 8330 8260 S` follows that metal to (8336,9430),
+  the contact of the NAND's gate 2: **the match line is `g_eq_r14`**. The one contact candidate on the way
+  (8336,9090) is a crossing (`tools/textmap.py 8318 9072 8354 9110 3`: no hole).
+- **East end**: the line stops under the ninth VSS rail; c7's comparator and latch take VSS from lands
+  under that rail (contacts (10745,8443), (10745,8637)).
+
+So the NAND beside row C is NAND(`bus_eq_r15`, `g_eq_r14`) = NOT((bus lines = R15) AND (line g = R14)): with
+the bus lines and line g believed to be the low eight and high six address bits, **the cursor match,
+active low** (believed for what the lines are; the gates are firm).
+
 ## Ports
 
 West edge, x 7600 (all poly, all continue west beyond x 7540):
@@ -240,20 +421,20 @@ West edge, x 7600 (all poly, all continue west beyond x 7540):
 |---|---|---|---|
 | cdp3_g_c7 .. cdp3_g_c2 | 8907, 8950, 8994, 9037, 9080, 9123 | ? | one line into each row A cell |
 | cdp3_k_a | 8864 | ? | poly to the x 7835 metal (first run's observation, drawn `?`); passes the gate beside row C and ends at about (7770,10135). The y 9168 poly on the same net starts at x 7820, not at the west edge |
-| cdp3_k_b | 9450 | in | gate 1 of the NAND beside row C |
+| bus_eq_r15 | 9450 | in | gate 1 of the NAND beside row C |
 | cdp3_cw_c7 .. cdp3_cw_c2 | 9581, 9624, 9668, 9711, 9754, 9797 | out | row C register outputs (true), each from a 26/16 load |
-| cdp3_gate_e | 10057 | in | read row C onto N |
-| cdp3_gate_f | 10317 | in | read row H onto N |
+| rsel12_buf | 10057 | in | read row C onto N |
+| rsel13_buf | 10317 | in | read row H onto N |
 | cdp3_hw_c7 .. cdp3_hw_c0 | 10361, 10404, 10447, 10490, 10535, 10577, 10621, 10664 | out | row H register outputs (true), each from a 26/16 load |
 
 East edge, x 10850 (poly):
 
 | Name | y | What |
 |---|---|---|
-| cdp3_n_c7 .. cdp3_n_c0 | 10361, 10404, 10447, 10490, 10535, 10577, 10621, 10664 | bus N. c7's track ends at a metal contact at about 10855,10355 and c6's at about 10900,10400, each on a vertical metal line that comes down from the north with a diagonal jog at y 10250-10330 (seen at 0.85x); the other six run on east at least to x 10960 |
-| cdp3_l8819 | 8818 | in (believed): line into the row A cells; ends 43 px east of the edge on a contact to the vertical metal line x 10888 |
+| rd_b0 .. rd_b7 | 10361, 10404, 10447, 10490, 10535, 10577, 10621, 10664 | bus N. c7's track ends at a metal contact at about 10855,10355 and c6's at about 10900,10400, each on a vertical metal line that comes down from the north with a diagonal jog at y 10250-10330 (seen at 0.85x); the other six run on east at least to x 10960 |
+| wr_r14 | 8818 | in (believed): line into the row A cells; ends 43 px east of the edge on a contact to the vertical metal line x 10888 |
 | cdp3_c_wr | 9533 | in: write line of row C; ends 90 px east of the edge on a contact to the vertical metal line x 10935 |
-| cdp3_h_wr | 10711 | in: write line of row H; runs on east past x 10990 |
+| wr_r13 | 10711 | in: write line of row H; runs on east past x 10990 |
 
 The vertical metal lines east of the region (x 10803, 10848, 10888, 10935, 10975, seen at
 y 8780-8860, 9490-9575, 10670-10750) are not in this block: 10888 and 10935 end at the
@@ -272,11 +453,17 @@ Into parts not yet traced (the labels sit on the stubs):
 
 | Name | Layer | Where | To |
 |---|---|---|---|
-| cdp3_k_c | metal | x 8327, y 9150, going up | gate 2 of the NAND; source above not followed |
+| g_eq_r14 | metal | x 8327, y 9150, going up | gate 2 of the NAND; source above not followed |
 | cdp3_bl_c1 | metal | x 7880, y 9150, going up (output of the NAND) and x 8076, y 9150, going up (line e of c1) | logic beside row A |
 | cdp3_k_a | metal | stub at (8290,9150-9178); and x 7772, y 10150 | not followed |
 | cdp3_g_cN (N 2..7) | metal | x 9731 + 390 (N-5), y 8790 | row A cell |
 | x 9893 line (same net as cdp3_f_cN) | metal | x 9893 + 390 (N-5), y 8790 | row A cell |
+
+Into the cluster beside row A (run of 2026-11-21):
+
+| Name | Layer | Where | Direction | What |
+|---|---|---|---|---|
+| `busl_x7122` | poly | (7905, 8637-8658) | from `busl`'s row (through its uncertain stretch under the wide rail) | the poly row east of the pad (7834,8647) at the north end of the metal x 7835; runs on 15 px to the box (7935,8648) of the cluster (AMB-047), not read |
 
 ## Ambiguities
 
@@ -315,7 +502,73 @@ Into parts not yet traced (the labels sit on the stubs):
 - Neighbours: `cdp4` (below) tags the column whose VSS rail is at x 8405 as its s2, so its
   sK is column c(K) here; `cdp2` (above) uses the same numbering as cdp4.
 
+- **A tab of row A's match line under the top end of c2's tap track**, (8548-8570, 8059-8106), as in
+  `cdp4`'s slice s0 (its Ambiguity 12). Both metal shots show a bright centre about 12-15 px across in a
+  dark ring at (8557,8068); c3's track end is plain. Neither stripped shot shows a pit there (clean shot
+  200/174/135, flat), while the known contacts (8712,8757) and (8632,8178) do. Read as no contact by the
+  tracer and the reviewer; a contact would short `cdp3_g_c2` to `g_eq_r14`. The tab is drawn, no contact.
+
 ## Not done
+
+- **The gate cluster beside row A** (x 7780-8200, y 8260-8800; run of 2026-11-20): surveyed at 5-9x and
+  drafted, **not in the trace**. Survey and draft: `cache/scratch/cdp3/survey.md`, `draft-ku.txt`; views
+  `ka_*`, `kb_*`, `cm_a`, `cm_b`, `k1_*`, `kB`, `kC1`-`kC3`, `kL1`, `kL2`, `j1`-`j5`. What is read:
+  - Three gates on the rail x 7986-8030 (`vss`: contacts (7998,8338), (7995,8562), (7992,8788)) with
+    three loads east of it under a wide metal x 8160-8200 (boxes with contacts (8187,8362), (8185,8480),
+    (8173,8575)); each load's plate has a buried contact to its node.
+  - Their gate polys: the row of the pad (7878,8385) (the gate beside row C's output), which crosses the
+    rail's diffusion at y 8383-8405 and turns north east of the rail to cross a strip y 8335-8375; the
+    row of U1's output (pad (7836,8430)) at y 8428-8452; an L from the pad (7878,8315) to a row
+    y 8502-8525 over two fingers (x 7932-7966, x 8003-8040), which runs on east and south into the third
+    load's plate; U1's second row y 8675-8697; a row y 8730-8752 from a pad (7945,8750); a row
+    y 8645-8668 from a pad (8118,8660) east of the rail.
+  - A metal x 7927-7957 from a pad (7940,8300) (the poly of the first load's plate) contacts two
+    diffusions, at (7937,8474) and (7935,8648), and goes on.
+  - **Undecided**: five boundaries between diffusions lie in the 25 px gaps between two metals (x 7960-7985
+    and x 8040-8060), where the clean shot shows a dark bar whether the diffusion is continuous or two
+    edges meet, and the chip-2 stripped shot is fringes: the contact box (7930-7966, 8457-8498) against
+    the node east of it; the box (7930-7968, 8527-8560) against the rail box (7985-8035, 8537-8592); the
+    stem (7945-7968, 8660-8672) against the arm x 7985-8010; the box (7945-7968, 8700-8722) against the
+    node east of it; the band y 8612-8632 (x 7985-8045) against the diffusion x 8060-8095. With all five
+    joined the third gate would gate its own node; with none joined two transistors hang on closed
+    boxes. Which are joined decides whether there are two or three separate gate outputs. One reading
+    that makes sense throughout (second and fourth joined, first separate): `P` = NOT(row C gate's
+    output OR `A` OR `cdp3_w8063` AND row y 8740), `N` = NOT(`A` OR row C gate's output AND `cdp3_w8063`),
+    `A` = the third node. Believed at most.
+  - **Review round 2's independent reading** (2026-11-20): all five boundaries are one diffusion each
+    (controls in the same gap: field shows a green strip at x 7968-7974 in the clean shot and an edge
+    line in both metal shots; two diffusions, at the box (7935,8648), show the box's edge and green
+    field; the five pairs show neither). And: the row y 8502-8525 may not be continuous under the rail at
+    x 7984-8005 (pink in the clean shot there, an orange patch inside a dark ring in both metal
+    shots). If it is two polys, the west one (from the pad (7878,8315)) and the east one (into the
+    third load's plate) are different nets, which may remove the contradiction. Start there.
+  - **Checked 2026-11-20 13:52: the row is two polys.** At y 8502-8525 the west poly (from the pad
+    (7878,8315)) ends at about x 7977 and the east poly starts at about x 7995: between them the clean
+    shot is pink (field under metal) and chip 2's metal shot grey bare ground, in a notch of the rail
+    (`cache/scratch/cdp3/j6.png`, 9x, three shots; `textmap.py 7960 8490 8050 8536 3`). The east poly
+    crosses the east finger (x 8003-8040) and runs on east and south (x 8058-8072, y 8505-8545) into the
+    third load's plate. With all five boundaries joined this still leaves a transistor whose gate and
+    drain are one net (the east finger: gate = the third load's plate, which is tied to its node, which
+    by boundaries (e), (c) and the metal x 7927-7957 is the node above the finger). So one of these is
+    still misread: the two contacts of that metal ((7937,8474), (7935,8648)), the plates' ties, or a
+    boundary. Not resolved; nothing of the cluster is drawn.
+  - A last observation (2026-11-20 14:12): in the chip-2 stripped shot the box of the first contact
+    (7930-7950, 8455-8485) reads orange, red far over green, like poly (`textmap.py 7918 8452 7964 8496 2
+    --acid`; `cache/scratch/cdp3/c1.png`, 10x), where the clean shot has it tan like diffusion; it lies
+    under the 30 px metal, where the stripped shot may be fringes. If that box (and its twin at
+    (7935,8648)) is a poly pad and not a contact to diffusion, the metal x 7927-7957 joins three polys and
+    the contradiction goes away. Whoever takes this up: settle those two boxes first.
+  - Known inputs of the cluster: `cdp3_w8063` (a buffered `ck_out`, two rows), the gate beside row C's
+    output line (`cdp3_bl_c1` as extracted), and a line from a pad (7987,6845) by a metal to the pad
+    (7878,8315) (source west of (7335,6845), not followed).
+  - Also there and not drawn: two thin metals at x 8050-8058 and x 8076-8084 (narrow, in pieces), the
+    metal from the pad (8118,8448) south, the metal from the north onto the pad (7878,8315) (follower:
+    a corner (7989,7386), end (7986,6844)).
+- (Done 2026-11-19: row A, y 8040-8830, and what the notes called row I, which is `cdp4`'s comparator
+  row, traced there in its run 3. The items below on the row A cell and row I are superseded by "Row A"
+  under Logic.) Left from row A: (done 2026-11-20: the bit lines join `cdp2`'s bus lines; they are `db_b5`..`db_b0`;
+  c1's line e at x 8076 is not followed north of y 9150); the logic beside row A (x 7600-8300, y 8040-8800), through which `g_eq_r14`'s
+  thin metal only passes.
 
 - Row A cell (c2..c7, y about 8400-8790, cut by the top edge): not a copy of `cdp3_reg` in
   any orientation (findcell finds nothing above 0.5 in y 8250-8900). Not traced.
@@ -328,7 +581,7 @@ Into parts not yet traced (the labels sit on the stubs):
 - What is known of the row A cell (c5 coordinates, from a 1.5x view): spans y about
   8330-8790 and probably further up (cdp2 calls y 7980-8450 its row D); contacts on the
   VSS rail at 9568,8437 / 9568,8510 / 9570,8635 / 9565,8780; a bit-line contact on a
-  diffusion box 9615-9680 x 8752-8812 (9636,8782), 30 px above `cdp3_l8819`; other metal
+  diffusion box 9615-9680 x 8752-8812 (9636,8782), 30 px above `wr_r14`; other metal
   contacts at about 9716,8427 / 9838,8537 / 9828,8622 / 9760,8687 / 9872,8750; line g
   (from the west, channel B) and the x 9893 line (to line f, going south to cdp4) end
   in it. *Believed:* a second 6-bit register on the same bit lines, with more logic per
@@ -340,6 +593,9 @@ Into parts not yet traced (the labels sit on the stubs):
   to the usual VCC position x 7775-7822 above row H; a thin line at x 7772 comes down from
   the logic above and ends at the 7770,10135 contact. c1's VCC rail starts at y 9750 with
   a tab to x 8255; above it a narrower line at x 8215-8255 comes down from the logic.
+
+- From the run of 2026-11-21: `busl_x7122`'s row east of (7905,8647): its meeting with the box (7935,8648) under
+  the metal x 7927-7957 (part of the cluster's question, AMB-047).
 
 ## Tools and method notes
 
@@ -360,3 +616,194 @@ Into parts not yet traced (the labels sit on the stubs):
   mirrored top to bottom, which the first run's search (two orientations) missed.
 - `tools/cdp3_prof.py --mode metal` needs `--thr 150`; with a lower threshold plain field
   counts as metal.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, second batch)
+
+- The channel G west pieces (`cdp3_hw_c7` .. `cdp3_hw_c0`, x 7600, y 10361 .. 10664) have their far
+  ends (`busl`, piece `h8`): each runs across the left bus field to a diffusion row of the left array at
+  x 4780, y 11338, 11815, 12291, 12768, 13247, 13725, 14202, 14894 (c7 northernmost).
+- The top unit of the gate column x 7460-7800 (y 7585-7860) is drawn by `eof` (piece `g7700`):
+  `tc2_r5589` = NOT(`lc1_w7170` AND (`rst_ck` OR `ck_out`)) in the names `eofw` joined it to.
+- Two wires of `ck_out` enter the gate column from a corner pad with a contact (7446,8732) (`eofw`): a
+  poly east at (7490, 8722-8745) and a metal south at (7458-7474, 8800). Not followed.
+- **Trace corrected** (geometry only): column 0's VSS rail `M 7623,8450 y11200 w=46` began 106 px too far
+  north. At y 8500 the ground at x 7612-7660 is bare in both metal shots (163/135/85, 139/113/74) and the
+  rail is the metal x 7552-7600; at x 7623 the metal begins at y 8556-8560 (`tools/px.py row 8500 7540
+  7660 8 metal,metal1`, `col 7623 8500 8590 8 metal,metal1`; seen independently by `eof`'s run 5 and by
+  `eofw`'s tracer). Now `M 7623,8556 y11200 w=46`; `tools/sameconn.py`: connections identical. The rail
+  north of there is the metal x 7552-7598, drawn by `eof` for y 7585-7860 and by nobody between.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, third batch)
+
+- Ports, "`cdp3_g_c7` .. `cdp3_g_c2` | 8907 .. 9123 | ? | one line into each row A cell": the other end of
+  each is traced (`busl`, piece `d6`): a row-end pad just west of x 7600 (x 7336-7553), a track down the
+  left bus field, and `bc1`'s row D data line of the same order (c2 to `cdp3_g_c2`). So line g is what
+  `cdp4`'s 6-bit latch row D latches on `cdp4_ld6`; believed an output of the row A cell, not "a line in
+  from the west".
+- `bus_eq_r15` ("in", gate 1 of the NAND beside row C): its row y 9450 ends west on a pad (7554,9450)
+  whose metal track runs south on x 7555 to a contact (7555,11118) on a diffusion pad; the diffusion
+  runs east under column 0's VSS rail at y 11092-11127 (`busl`, piece `kb`; not drawn in `cdp3`). That
+  diffusion is the net's only possible driver drawn so far.
+- The metal south of `eofw`'s corner pad (7446,8732) does not enter the gate column: it is `ck_out`'s
+  branch down the left bus field (`busl`, piece `sr`). The pad's poly on east is still open.
+
+## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
+
+- Row H's write line ("runs on east past x 10990 ... without a contact") ends on a pad with a metal contact at (11243,10705) on the write strobe of R13 (`regs` run 1, firm): **row H is R13**. The line into row A's six large cells is R14's write strobe (firm), and row C's write line is R12's (marked: one `?M` on the way).
+- The gate column x 7460-7800 ("about six units with loads"): below `eof`'s `g7700` there are four inverters at a pitch of 130 (U1 y 7940-8060, U2, U3, U4); U2-U4 are drawn by `eof` (run 12, piece `d3982`: three inverters in series, `tl3_w3982` = NOT NOT NOT `lc1_w7928`); U1 is not drawn.
+- `bus_eq_r15` comes from a diffusion band at (7600, 11092-11127) under column 0's VSS rail (`busl` run 6), undrawn here.
+- `rsel12_buf` and `rsel13_buf` enter from the west on pads (6730,10055) and (6730,10317), each with a track from the south (`regs` run 3); believed the read selects of R12 and R13 (two open joins through the left bus field): rows E and F are then the read gates of R12 and R13.
+
+## Review
+
+### Row A (run of 2026-11-19)
+
+Round 1 (full review, 2026-11-19 22:51 -0600; a fresh Fable reviewer, images in `cache/scratch/cdp3/review-1/`;
+commit before the round e1b2cc7). Piece: row A, x 8280-10800, y 8030-8840, and the thin metal x 8336 to
+y 9160. Told to suspect: the west end (box, poly, pad, the metal's start and run), the latch gates' poly
+being `wr_r14`, the joins at y 8765-8795, line f's and the bit line's lack of contacts, c2's hand-drawn
+part and its tab, c2's copy, the east end, anything left out. Checked at 4x or more in up to four shots
+with profiles and text maps: the west end (pad contact with ring and bright centre in both chips, no metal
+north of the pad, the metal continuous to (8336,9430), the crossing at y 9090 a poly-row edge); the copies
+(c3..c7 at most 4 % bad blocks in three shots, c2's all in the hand-drawn part and the west rail edge);
+c2's leg on field, load, head box, VCC contact; the metals' top ends and joins; the east end's lands and
+contacts; the extraction (91 transistors, equations as claimed).
+
+- Finding 1, **geometry only**: `wr_r14`'s poly (an older line, `P 8528,8818 x10850`) is not straight:
+  under every bit line and line f metal there is field at y 8812-8830; the band is joined through each
+  latch cell's loop. Confirmed (`tools/px.py row 8820 8826 8930 8 acid1b,acid`: pink 201/117/115 at
+  x 8850-8866 and 8898-8906; view `strobe.png`). Redrawn as six segments, with the dead-end stub under c2's
+  VSS rail.
+- Finding 2, **geometry only**: the tab joined the pocket by a 2 px overlap. Lengthened to y 8106.
+- Finding 3, **geometry only**: the six older `?M` bit-line pieces (y 8450-8795) doubled the firm metals.
+  Removed.
+- Ambiguity recorded: the tab under c2's tap track (no contact read by both).
+- Not checked by the reviewer: c4..c7 individually above 1x (composite and `cellcheck.py` only); the
+  masters' internals (reviewed in `cdp4`).
+
+`tools/t.sh cdp3 sameconn.py e1b2cc7`: connections identical.
+`.venv/bin/python tools/sameconn.py e1b2cc7`: connections identical.
+
+Round 1: no findings that change a connection.
+
+### West logic and the bit lines (run of 2026-11-20)
+
+Round 2 (full review of the west-logic piece; fresh Fable 5.2 reviewer; 2026-11-20 13:46 -0600; commit 2eb4695; images
+`cache/scratch/cdp3/review-2/`). Told to suspect the metal at every pad's ring, the inverter copy's fit,
+contacts at the crossings, a pad on the x 7880 metal, anything left out. Checked at 4-6x in two or more
+shots with `tl5_tracks.py` and `px.py`: the U1 copy (rail contact, gate row, node, the closed west box,
+strip, tail, tie, VCC box); the pads (7838,8062), (7836,8430) (metal through, rings both sides),
+(7838,8582) (metal ends), (7313,7995), (7313,8625), (7400,8778); the metal x 7837 over the rows at
+y 8305-8330 and 8500-8522; the gate row under the metals x 7355 and x 7400; the row y 8615-8635 under
+`tc2_r5718`'s metal (8 px of field from that metal's pad poly); the column under the metal y 8700-8715;
+the metal x 7880 as one metal from y 9150 to the pad (7878,8385), bare ground y 8327-8382 to the next
+pad. Not checked: the staircase metal west of x 7330; the polys beyond the ports.
+
+Findings, geometry only: the load plate's lower-left corner steps in to x 7700 below y 8050 (over field;
+left as drawn).
+
+The same reviewer read the five undecided boundaries of the cluster beside row A independently (Not
+done): all five as one diffusion each, against three controls in the same gap, and noted that the row
+y 8502-8525 may be broken under the rail at x 7984-8005.
+
+Round 2: no findings that change a connection.
+
+Round 3 (full review of the six bit-line joins; fresh Fable 5.2 reviewer; 2026-11-20 13:46 -0600; commit c411e90; images
+`cache/scratch/cdp3/review-3/`). Checked: all six lines continuous y 7480-8110 (no stretch without metal
+over 21 px; every stretch of 15 px or more on 4x views of both metal shots, c2 and c5 at 6x in three
+shots); the same track at both ends, no jog; no other metal joins or crosses; whole-die extraction 0
+errors; `sameconn.py 2eb4695`: every difference carries `db_b5..7` or `db_b0..5`. Remarks, notes
+only: `cdp2`'s cell already draws the metal to y 7821 with the contact at y 7789 (the notes said y 7556
+and "taps not drawn"; corrected); c7's metal centre is x 10414-10416 (drawn 10419, overlapping).
+
+Round 3: no findings.
+
+Round 4 (full review of piece `ckb`; fresh Fable 5.2 reviewer; 2026-11-20 14:02 -0600; commit 8bfbad7; images
+`cache/scratch/cdp3/review-4/`). Told to suspect the staircase line as a whole (nine corners, the wrong
+neighbour, the corner at (6843,8541), the meeting with `lc2`'s metal), the neck and buried contact of
+the output, diffusion round the gate poly's ends, the strip between the two metals, the load's tie.
+Checked: all nine corners at 4x in both metal shots (one metal round each, nothing beyond, bare ground
+to the neighbour); all ten pieces by `tl5_tracks.py` (bars of 15 px or less, no hole), three at 4.6-6x;
+the poly across the whole diffusion with its east cap past the edge; the rail contact; no contact on
+the node; the strip x 7655-7672 absent from three shots (the gap is diffusion there); the load, tail,
+tie, VCC box and contact; the output row continuous to the pad; extraction and `sameconn.py`. Could not
+check: diffusion under the rail's edge line at x 7547; the buried contacts' insides; `lc2`'s metal west
+of x 6450 beyond the metal test.
+
+Findings, geometry only:
+
+1. The diffusion runs on west of the rail to x 7494 (an outlined box x 7494-7546, y 8658-8716, and the
+   band south of the poly; chip-2 stripped red minus green 18-21 there against -3 to -16 on field): the
+   pull-down is about 260 wide, not 210. Confirmed (`px.py row 8690 7476 7544 8 acid`); fixed.
+
+`tools/t.sh cdp3 sameconn.py 8bfbad7`: connections identical. `.venv/bin/python tools/sameconn.py 8bfbad7`:
+connections identical.
+
+Round 4: no findings that change a connection.
+
+### `busl_x7122`'s metal north of its pad (run of 2026-11-21)
+
+Round 5 (full review, 2026-11-21 18:46 -0600; a fresh Fable reviewer, images in `cache/scratch/cdp3/review-5/`, 5;
+commit before the round a4ababb). Piece: the metal x 7835 from the stub at y 8800 to its end pad (7834,8647)
+and the pad's poly row east to x 7905. Told to suspect: whether the metal from the south is separate from
+the pad (7838,8582) of `cdp3_w8063` 65 px further north; whether the pad (7834,8647) is a real contact with
+the metal on it; the crossing of the row y 8675-8697; the row east (one poly, a contact under the metal
+x 7874-7886, anything else leaving the pad); the south pad.
+
+It checked: bare ground at y 8606-8622 across the whole width x 7814-7860 in both metal shots (chip 2
+155-170/140/88), khaki in the clean shot and red minus green about 0 in the chip-2 stripped shot (two metals
+end to end, no off-centre link; 6x); the pad (ring with bright centre, dimmer in chip 1 than the north pad's;
+a hole in the clean shot like that of (7838,8582); the dark stretch on the arrival side 12-14 px against a
+14-16 px ring on the north); the metal continuous from y 8668 to y 8841 with no side arm, landing on the
+south pad; the crossing (metal bright between two 4-6 px edge bars, no widening, no hole, no pits); the row
+(one poly from the pad to x 7918, no ring, hole or widening under the metal x 7874-7886, field north and
+south of it at the port); nothing else leaving the pad (field north; a field stripe x 7812-7816 against
+`cdp3_w8063`'s poly strip on the west; field y 8662-8674 on the south); the extraction (the new pieces on
+`busl_x7122`'s net, apart from `cdp3_w8063` and `cdp3_bl_c1`).
+
+No finding that changes a connection. Geometry only, fixed: the pad's south edge is at y ~8658 (drawn to
+y 8664; now y 8660).
+
+`tools/t.sh cdp3 sameconn.py a4ababb`: connections identical.
+`.venv/bin/python tools/sameconn.py a4ababb`: connections identical.
+
+Not checked by it: how the row meets the box (7935,8648) (out of scope: AMB-047).
+
+Round 5: no findings that change a connection.
+
+## Corrections (coordinator, from the handoffs of 2026-11-20)
+
+- "Row I (y 11050-11200+) ... not traced" and Not done: it is the top of `cdp4`'s comparator row (the bus lines against R15), traced in `cdp4` run 3; lines e and f pass through it with no contact. The uncertain metal pieces of the bit lines and line f at y 11048-11200 were removed from `trace/cdp3.txt` (`cdp4` draws the same metals firm; `tools/sameconn.py`: connections identical).
+- `bus_eq_r15` ("in"): its driver is `cdp4`'s comparator: `bus_eq_r15` = NOR of the eight "not equal" nodes `cdp4_xr_s#_ne`.
+- Ambiguities, "A gate driving a bit line" (reading (a), the `?B` at 8081-8105 x 9221-9254): the NAND's output is extracted on `cdp3_bl_c1`, which is now known to run on south as `cdp4`'s in track of slice 1, the data line of R15's latch, and both NAND inputs are the two comparators' match lines. A gate output on a register's data line adds to the doubt on reading (a); the box is to be read again (the master list's row `cdp3` (continue)).
+
+## Corrections (coordinator, from the handoffs of 2026-11-20, second batch)
+
+- The gates of rows E and F ("drivers not known"): they are `rsel12_buf` and `rsel13_buf`, the read selects of R12 and R13 (`busl` run 8, pieces `r12`, `r13`: one thin metal each up the left bus field from `regs`' ports, no uncertain item). So R12 is read through row E (row C onto bus N) and R13 through row F (row H onto bus N). Seen in the extraction: in columns c0 and c1 the transistor gated by `rsel12_buf` lies between `vss` and `rd_b(7-#)` (t1523, t1977), in c2-c7 between `cdp3_cq_c#` and `rd_b(7-#)`: the two bits R12 does not have read as a fixed level. The two gate labels are renamed at the next refresh.
+
+## Corrections (coordinator, from the handoffs of 2026-11-20, third batch)
+
+- "`cdp3_k_a` only passes: metal at x 7835 from channel B (contact on the y 8864 poly from the west edge ...) down to a contact (7833,9165)", and the two table rows for `cdp3_k_a`: the poly y 8864 and its contact pad (7835,8862) are there, but the pad's metal goes **north**, to a pad at about (7834,8645); there is no metal at x 7835 between y 8880 and about y 9160 (`busl` run 11 and its reviewer; the coordinator's view of both metal shots, `cache/scratch/refresh/h_k_a.png`). So `cdp3_k_a`'s metal starts at its contact (7833,9165), and the row y 8864 is another net, `busl_x7122` (through the uncertain stretch under the rail: AMB-046). `trace/cdp3.txt` is corrected (2026-11-20): the metal starts at y 9150; the `?P` is lengthened 8 px west to meet `busl`'s row; a 76 px stub of the pad's metal north is drawn. `tools/sameconn.py HEAD`: connections identical (no transistor is on either net there).
+- The proposed register entry for the cluster beside row A is AMB-047.
+
+## Corrections (coordinator, from the handoffs of `cdp2`, 2026-11-20)
+
+- Not done (the cluster beside row A): its "line from the north" onto the pad (7878,8315) is `cdp2_w6845`, a through line whose source is west of the pad (7335,6845) (a metal along y 6848, follower to (6142,6847)); it is not the output of `cdp2`'s inverter.
+- The cluster's two "contacts" under the metal x 7927-7957, at (7937,8474) and (7935,8648), are very probably buried-contact boxes with the metal passing over (re-read item R51; trap 27's addition of 2026-11-21): that would remove the contradiction recorded here. Nothing of the cluster is drawn.
+
+## Corrections (coordinator, from the handoffs of `cdp3`, `cdp4` runs 4-15, `eof` runs 36-51 and `regs` runs 5-6, 2026-11-21)
+
+- Ports table, `rd_b0 .. rd_b7` ("c7's track ends at a metal contact at about 10855,10355 and c6's at
+  about 10900,10400, each on a vertical metal line that comes down from the north ..."): the eight rows end on
+  pads (10894,10360), (10938,10404), (10982,10446), (11025,10490), (11068,10534), (11112,10577),
+  (11156,10621), (11199,10664), each the top end of a track that runs south; no metal comes from the north
+  (the diagonals there are `regs`' and `wrs`' write strobes). `rd_b(7-#)` and `cdp4_n_s#` are one net per
+  column (aliases in `trace/regs.txt` and `trace/cdp4.txt`), and `d#_out_n` = NOT `rd_b#` (`cdp4` runs
+  4-11, `regs` run 6).
+
+## Corrections (coordinator, from the handoffs of `busl` runs 17-18, 2026-11-24)
+
+- Channel D's tracks `cdp3_cw_c7` .. `c2` ("from the west edge"): west of x 7600 each runs on straight as a poly
+  row to `lc3`'s port at x 6450 (`cdp3_cw_c7` .. `cdp3_cw_c2`), and by `lc3`, `busl` (piece `e6`), `bl0` and `eof`
+  to the left array's rows s8-s13, onto the selector's upper pass transistor (gate `eof_ga`) (`busl` run 18,
+  piece `w6`; firm). `cdp3` has no ports line for them at x 7600.

@@ -12,7 +12,7 @@
 # placed are both). Overlays b1.png, b2.png (4x clean), b3.png (2.5x metal).
 #   tl4_w3928 = NOT tl4_w4025
 #   tl4_w4113 = NOT( tl4_w4025 AND tl4_w4068  OR  tl4_w4243 )
-#   tl4_w4243 = NOT( tl4_w4198  OR  tl4_w4068 AND tl4_w3928  OR  tl4_w4113 )
+#   tl4_w4243 = NOT( rst_a  OR  tl4_w4068 AND tl4_w3928  OR  tl4_w4113 )
 @inst tl1_ua 2125,-434
 @inst tl1_ub 2125,-434
 # What the copy has of its own (b1-b4.png; follow.py; text maps in the notes):
@@ -59,7 +59,7 @@ P 4515,4183:4551,4213
 C 4533,4198
 P 4545,4190:4670,4208
 M 4537,3895 y4816
-N P 4600,4199 tl4_w4198
+N P 4600,4199 rst_a
 # output: the node's box poly west to a pad (4490,4243), metal x 4494 south (followed to (4507,5336))
 P 4472,4228:4508,4258
 C 4490,4243
@@ -99,7 +99,7 @@ P 4330,3062:4723,3082
 P 4302,3055:4338,3085
 C 4320,3070
 M 4318,3058 y3230
-N P 4500,3072 tl4_w3070
+N P 4500,3072 tl3_e4243
 # gate 2: row y 3148-3168 from the pad (4413,3178); metal x 4410 south (followed to y 3599)
 P 4425,3148:4723,3168
 P 4395,3150:4435,3195
@@ -137,15 +137,15 @@ P 4506,3797:4703,3815
 P 4478,3793:4514,3823
 C 4495,3808
 M 4496,3775 y3820
-N P 4600,3806 tl4_w3808
+N P 4600,3806 rcs_e3
 P 4468,3841:4795,3859
 P 4437,3835:4473,3866
 C 4455,3850
 M 4462,3852 x4412 y3900 w=20
-N P 4600,3850 tl4_w3850
+N P 4600,3850 bd1_n2
 
 # ====================================================================
-# Unit (a), y 4410-4640: a three-input NOR.   tl4_w4545 = NOR(tla_w3417, tl4_w4501, tl4_w4590)
+# Unit (a), y 4410-4640: a three-input NOR.   tl4_w4545 = NOR(tla_w3417, rst_ck, ck_out)
 # Read on u2.png (clean), u3.png (chip-2 stripped), u4.png (metal), u5.png (chip-1 stripped), all
 # 3.9x; tie1.png, tie2.png (9x, four shots); rows on r1.png (2.7x, stripped and metal).
 # A column of diffusion in the open west of RA (x 4677-4716) crossed by three poly rows from
@@ -170,14 +170,14 @@ C 4745,4627
 P 4515,4452:4728,4470
 # gate 2: a row from the west, across the whole bus field without a pad (r1.png)
 P 4250,4492:4728,4512
-N P 4400,4502 tl4_w4501
+N P 4400,4502 rst_ck
 # gate 3: a row from a pad with a contact (4364,4590) on the track x 4362 (follow.py: one
 # metal from y 2810 to y 5682; only this stub of it is drawn so far)
 P 4347,4575:4385,4605
 C 4364,4590
 M 4364,4565 y4785 w=12
 P 4380,4578:4728,4598
-N P 4500,4588 tl4_w4590
+N P 4500,4588 ck_out
 # the node's buried contact west of the column's middle (concentric rings in the clean shot),
 # the poly west to a pad with a contact (4620,4545), and the metal x 4626 south from the pad
 # (follow.py: (4623,4544)-(4623,4900))
@@ -202,8 +202,8 @@ P 4812,4590:4850,4612
 # The cross-coupled pair at y 4645-5000 (hand-traced; no cell matches). Here the stack lies
 # under RA and in the open west of it as ONE diffusion (x 4677-4764: no edge between the column
 # and the part under RA, px.py row 4740/4785/4910/4955), so each row is one wide gate.
-#   tl4_w4686 = NOT( tl4_w4718 AND tl4_w4590  OR  tl4_w4850 )
-#   tl4_w4850 = NOT( tl4_w4198  OR  tl4_w4545  OR  tl4_w4686 )   (tl4_w4545 on two gates in series)
+#   tl4_w4686 = NOT( tl5_w3245 AND ck_out  OR  tl4_w4850 )
+#   tl4_w4850 = NOT( rst_a  OR  tl4_w4545  OR  tl4_w4686 )   (tl4_w4545 on two gates in series)
 # Read on b_*.png (3.3x), c_/d_/e_/f_*.png (5-5.6x), g1/g2.png (8x, four shots), h_*.png (4x),
 # j1/j2.png (6x, four shots), t2a/t2b.png (9x), w_*.png (2.8x), k1.png; profiles in the notes.
 M 4759,4650 y5005 w=54                # RA goes on south
@@ -239,8 +239,8 @@ P 4563,4700:4598,4735
 C 4580,4718
 M 4581,4690 y4730 w=12
 P 4595,4708:4770,4728
-N P 4640,4718 tl4_w4718
-# gate 2: row from a pad with a contact (4364,4762) on the track x 4362 (tl4_w4590)
+N P 4640,4718 tl5_w3245
+# gate 2: row from a pad with a contact (4364,4762) on the track x 4362 (ck_out)
 P 4347,4747:4385,4778
 C 4364,4762
 P 4380,4752:4776,4772
@@ -267,7 +267,7 @@ P 4828,4820:4852,4842
 ?D 4805,4822:4830,4865
 ?B 4803,4820:4832,4848
 # gate 3: row from a pad with a contact (4537,4808) at the south end of the track x 4537
-# (tl4_w4198: follow.py, one metal from y 2938 to y 4814). West of RA only.
+# (rst_a: follow.py, one metal from y 2938 to y 4814). West of RA only.
 P 4520,4792:4556,4826
 C 4537,4808
 P 4550,4797:4730,4815
@@ -291,3 +291,584 @@ P 4640,4925:4786,4946
 # the upper node (thin metal, pad contact (4868,4930)) gates the lower node's east leg
 P 4800,4918:4892,4946
 C 4868,4930
+
+# ====================================================================
+# The NOR below the pair, y 4990-5170 (hand-traced):
+#   tl4_w5068 = NOR( tl4_w4545, tl4_w4850 )
+# Read on n_*.png (2.8x), p_*.png (6x, the load), q_*.png (5x, the west side); profiles in the
+# notes. The stack is one diffusion from the pair's lower VSS box (contact (4747,4975)) down to a
+# VSS box with a contact (4750,5145): under RA and in the open west of it (x 4703-4728), as in
+# the pair. Two rows cross it; the node between them (y 5038-5098) leaves west through a buried
+# contact onto the poly of a pad, and east as the strip under the load plate.
+M 4759,5005 y5180 w=54                # RA goes on south
+M 4928,5005 y5180 w=44                # RB likewise
+D 4703,4992:4780,5150                 # the stack: VSS, gate 1, node, gate 2, VSS
+D 4728,5122:4782,5170                 # the lower VSS box
+C 4750,5145
+# gate 1: tl4_w4545's vertical poly (from the pad (4623,4893)) turns east at its south end
+P 4619,4988:4643,5033
+P 4619,5011:4792,5033
+# gate 2: row from the pad with a contact (4583,5108) at the south end of the track x 4581
+# (tl4_w4850: the metal ends on this pad)
+P 4563,5092:4600,5128
+C 4583,5108
+P 4595,5100:4791,5122
+# the node's arm west with a buried contact (heavy box) onto the poly of a pad with a contact
+# (4625,5068): the north end of the track x 4625's south part (follow.py: (4626,5064)-(4624,5506),
+# contact candidate (4625,5257); drawn to y 5250 so far)
+D 4676,5055:4706,5083
+B 4674,5053:4703,5085
+P 4640,5057:4702,5082
+P 4608,5050:4645,5088
+C 4625,5068
+M 4625,5058 y5250 w=14
+N P 4655,5068 tl4_w5068
+# load: plate x 4832-4873 over the strip y 5050-5086 from the node to the VCC box under RB
+# (contact (4925,5068)). The node's tail runs south west of the plate (x 4799-4820) and east
+# under the plate's foot, where a heavy box sits: the tie, uncertain as in the other loads (AMB-026)
+D 4776,5050:4910,5086
+P 4832,5032:4873,5132
+D 4905,5040:4958,5092
+C 4925,5068 s=22x30
+?D 4799,5084:4820,5140
+?D 4815,5122:4856,5140
+?B 4829,5106:4858,5134
+
+# ====================================================================
+# The two inverters below the NOR, y 5175-5450.
+#   tl4_w4025 = NOT tl4_w5068        (the data of the latch at y 3906-4390)
+#   c4l_l3 = NOT tl4_w4243        (the latch's output, through a strong inverter)
+# Read on n_*.png (2.8x), r_*.png and s_*.png (4.8x, three shots), v_*.png (7x, the lower
+# load), u_*.png (the rows' pads in the bus field), y1/y2.png (the two tracks), x_*.png (south).
+M 4759,5180 y5420 w=54                # RA goes on south
+M 4928,5180 y5420 w=44                # RB likewise
+# ---- the upper inverter, y 5175-5312: the body of the inverter at y 3781-3911 (tl1's inverter)
+# moved by 1,1389 (findcell: tl1's at 2126,955, clean shot, score 0.75); rows read here
+D 4724,5203:4781,5256
+D 4724,5250:4778,5312
+C 4748,5283 s=22x36
+D 4666,5186:4708,5223
+D 4700,5203:4728,5223                 # the arm is narrower next to RA (review round 6)
+B 4664,5184:4708,5220
+D 4776,5201:4851,5224
+D 4846,5196:4918,5221
+D 4906,5194:4958,5258
+C 4927,5229
+D 4825,5221:4845,5272
+P 4848,5176:4902,5248
+?P 4842,5246:4877,5280
+?B 4840,5244:4879,5282
+# output row y 5186-5206 from the node box west to a pad with a contact (4455,5197): the south
+# end of the track x 4452 (tl4_w4025; y1/y2.png: straight, no pad between y 4395 and here)
+P 4470,5186:4703,5206
+P 4437,5179:4474,5215
+C 4455,5197
+M 4452,4390 y5205
+# gate row y 5231-5251 across RA from the second pad of the track x 4625 (tl4_w5068)
+P 4640,5231:4797,5251
+P 4608,5222:4645,5258
+C 4625,5240
+# ---- the lower inverter, y 5297-5450 (hand-traced). One wide gate (x 4675-4808, in the open
+# west of RA, under it and east of it) between a VSS strip along the top (y 5297-5315, on the
+# upper inverter's VSS box) and the node (y 5340-5368).
+D 4675,5297:4808,5368
+# gate row y 5316-5338 from a pad with a contact (4537,5325); the track x 4496 (tl4_w4243)
+# turns east onto the pad (y1/y2.png: straight, no pad between y 4395 and here)
+P 4550,5316:4830,5338
+P 4520,5307:4556,5345
+C 4537,5325
+M 4495,4390 y5327 x4540
+# the node west: a buried contact (heavy box) onto a poly that runs south into a row
+# y 5445-5465 (x_metal.png: a T; the row crosses the whole strip, only a stub is drawn)
+D 4672,5360:4702,5390
+B 4664,5356:4702,5392
+P 4667,5362:4691,5450
+P 4650,5445:4710,5465
+N P 4679,5420 c4l_l3
+# the node east: a strip (y 5348-5375) to a leg north (x 4853-4873), then under the load plate
+# (x 4873-4900: a short, wide load) to the VCC box under RB (ring (4925, 5320-5360))
+D 4800,5348:4860,5375
+D 4853,5303:4910,5375
+D 4905,5303:4958,5377
+C 4927,5340 s=22x44
+P 4873,5292:4908,5385
+P 4835,5380:4908,5402                 # the plate's foot, west to a heavy box on the node's strip:
+?P 4812,5362:4840,5400                # the tie, uncertain as in the other loads (AMB-026)
+?B 4808,5357:4842,5394
+
+# ====================================================================
+# The second latch, y 3225-3765: a transparent latch with its data inverter, the same circuit as
+# the latch at y 3906-4390 but laid out by hand (no findcell match), strapped by two short metals
+# (x 4680-4704, y 3235-3718; x 4851-4881, y 3380-3628).
+#   tl4_w3245 = NOT tl3_e4243                                              (data inverter)
+#   tl4_w3390 = NOT( tl3_e4243 AND tl5_w3505  OR  rst_a  OR  tl4_w3178 )
+#   tl4_w3178 = NOT( tl4_w3245 AND tl5_w3505  OR  tl4_w3390 )
+# Views h1-h7_*.png (6x, three shots), k1/k2_*.png (bus field 2.75x); profiles in the notes.
+# In this column a diffusion's edges under a poly plate show as dark lines across the plate.
+# rails, between the pieces drawn above
+M 4752,3225 y3775 w=46
+M 4928,3225 y3775 w=44
+
+# ---- rows from the bus field, each from a pad with a contact on a track
+# data: pad (4320,3372) on the track x 4318 (tl3_e4243, one metal from the NOR's pad: follow.py);
+# row y 3362-3382 east, a riser x 4558-4578 north, row y 3322-3342 east: crosses the stack under
+# RA (gate), jogs 10 px south under RA, and ends in the vertical gate east of RA
+M 4318,3225 y3390
+P 4302,3357:4340,3388
+C 4320,3372
+P 4330,3362:4578,3382
+P 4558,3322:4578,3382
+P 4558,3322:4748,3342
+P 4738,3331:4800,3351
+P 4788,3265:4812,3357
+# enable: the track x 4452's north piece (follow.py: (4451,2984)-(4452,3640)), three pads.
+# Upper pad (4455,3415): row y 3406-3427 east, riser x 4602-4622 north, row y 3366-3386 east,
+# jogging 10 px south at RA's west edge: second gate of the stack; ends at x 4790.
+# Lower pad (4455,3635): row y 3625-3645 east across the lower stack; ends rounded at x 4772.
+M 4452,2975 y3648 w=14
+# its north end: a pad with a contact (4452,2985); the poly row y 2976-2996 goes on east from it,
+# under the corner of tl4_w4068's metal (no contact) and under the wide metal y 2955-2997 east
+# of x 4730, to the strip's east edge: tl5's row of latch a's enable, tl5_w3505 (m1-m4.png;
+# px.py row 2986 4700 4980 6 acid1b: salmon all the way)
+P 4436,2970:4472,3000
+C 4452,2985
+P 4462,2976:4972,2996
+N M 4452,3520 tl5_w3505
+P 4438,3400:4474,3430
+C 4455,3415
+P 4465,3406:4622,3427
+P 4602,3366:4622,3427
+P 4602,3366:4722,3386
+P 4712,3376:4790,3396
+P 4438,3619:4474,3652
+C 4455,3635
+P 4465,3625:4772,3645
+# clear: pad (4540,3462) on the track x 4537 (rst_a); row y 3452-3472 east to x 4724 (west
+# piece of the row; the east piece is another net)
+M 4537,3440 y3900
+P 4522,3446:4560,3478
+C 4540,3462
+P 4550,3452:4724,3472
+# output tl4_w3178 (the NOR's second input): the track x 4410 ends on the pad (4413,3592); row
+# y 3582-3602 east onto a heavy box (4673-4707, 3578-3607) at the top of the lower stack's west column
+M 4410,3225 y3606
+P 4396,3576:4432,3608
+C 4413,3592
+P 4425,3582:4705,3602
+B 4673,3578:4709,3607
+
+# ---- the data inverter, east of RA at y 3229-3360.  tl4_w3245 = NOT tl3_e4243
+# RA's VSS box (contact ring (4745,3285)); a diffusion band y 3283-3320 (3314 under the plate) from it east: under the
+# vertical gate (x 4788-4812), a patch (the node), under the plate, to the VCC box under RB
+D 4725,3265:4778,3322
+C 4745,3285
+D 4770,3283:4832,3320
+D 4826,3283:4912,3314
+D 4905,3240:4958,3338
+C 4930,3257 4926,3305
+# plate, and its poly north and west (bar y 3229-3249 over field under RA) to a pad with a
+# contact (4690,3247): the top of the metal x 4680-4704
+P 4847,3262:4898,3330
+P 4847,3229:4870,3266
+P 4690,3229:4870,3249
+P 4672,3231:4708,3263
+C 4690,3247
+M 4693,3237 y3716 w=28
+N M 4693,3320 tl4_w3245
+# the plate's tie: its lower band's west end hooks down onto a heavy box (4838-4872, 3330-3360),
+# and a narrow strip leads there from the patch
+?D 4820,3310:4836,3352
+?D 4820,3338:4862,3356
+?P 4838,3320:4870,3358
+?B 4834,3334:4866,3360
+# bottom of the metal: pad with a contact (4690,3703), row y 3681-3700 east across the lower stack
+P 4678,3684:4712,3716
+C 4690,3703
+P 4700,3681:4812,3700
+# a heavy box (4677-4698, 3408-3432) under the same metal at the node's west edge, like the
+# buried-contact box at y 3593 but with no poly leaving it: NOT a contact of the metal (no hole
+# in the clean shot; review round 7). Drawn as a lobe of the node's diffusion (Ambiguities 4):
+# a contact here would short tl4_w3245 to tl4_w3390
+?D 4662,3404:4703,3438
+
+# ---- the upper stack under RA and its node tl4_w3390 (y 3300-3545)
+# VSS box - data row - d1 - enable row - node. The diffusion is wider than RA: x 4700-4776.
+D 4700,3300:4776,3447
+# the node's two more pull-downs, side by side with a field box (4722-4752, 3442-3488) between
+# them, each under its own piece of the row y 3452-3472, both onto RA's second VSS box
+D 4675,3441:4714,3510
+D 4753,3436:4790,3500
+D 4705,3490:4778,3510
+D 4724,3490:4778,3542
+C 4745,3512
+# east piece of the row: from a vertical poly east of RA (x 4793-4825), which is the foot of the
+# lower load's plate (tl4_w3178)
+P 4747,3452:4800,3472
+P 4793,3449:4825,3515
+P 4793,3492:4852,3515
+# load: band y 3423-3443 from the node east under the plate (x 4848-4900) to the VCC box under RB
+D 4785,3423:4912,3443
+D 4840,3423:4912,3448
+D 4905,3400:4960,3482
+C 4930,3443 s=24x50
+P 4848,3378:4900,3463
+C 4863,3390
+M 4866,3380 y3628 w=30
+N M 4866,3480 tl4_w3390
+# the plate's tie: small boxes north of the band, west of the plate
+?D 4805,3396:4822,3427
+?P 4803,3384:4850,3406
+?B 4801,3388:4826,3410
+# bottom of the metal x 4866: pad with a contact (4863,3612); row y 3587-3610 west = gate across
+# the lower node's east column
+P 4846,3592:4890,3630
+C 4863,3612
+P 4788,3587:4852,3610
+
+# ---- the lower node tl4_w3178 (y 3497-3765)
+# east of RA: patch (4800-4843, 3520-3582), load band y 3523-3551 east under the plate
+# (x 4847-4900, y 3497-3568) to the VCC box under RB; the column goes on south under the row of
+# tl4_w3390 and as a J (x 4820-4842 to y 3730, west along y 3707-3730) to RA's third VSS box
+D 4800,3520:4843,3640
+D 4838,3523:4912,3551
+D 4905,3500:4960,3652
+C 4930,3578 s=24x110
+P 4847,3497:4900,3568
+D 4820,3605:4842,3730
+D 4788,3707:4842,3730
+# the plate's tie
+?P 4803,3510:4824,3545
+?B 4801,3518:4826,3547
+# under RA: a bar west from the patch (y 3557-3582), a strip south (x 4740-4762), widening west
+# above the enable row to the west column (x 4687-4722); below the row the node d3, then the
+# row of tl4_w3245, then the VSS box (contact (4750,3725))
+D 4740,3557:4805,3582
+D 4740,3557:4762,3660
+D 4687,3590:4714,3664
+D 4705,3607:4745,3664
+D 4725,3650:4762,3680
+D 4725,3664:4792,3728
+D 4725,3700:4778,3755
+C 4750,3725
+
+# ====================================================================
+# The bus field's wires west of the gate column and the routing channel south of it
+# (x 4250-4967, y 4300-5790). No device: poly rows under metal tracks, pads with contacts.
+# Read on n1_*.png (1.9x), n2_*.png (3.8x metal + clean), n3_pads1/2.png, n5_pads3/4.png
+# (5x mosaics, three shots), n4_*.png, n6_*.png, n7_b.png, n8_top.png, n9_join.png (8x);
+# tools/tl5_tracks.py (metal test, contact scan, row maps), tools/tl4_edges.py, follow.py.
+# The channel's rows meet tl5's at x 4967 (same y ranges) and tl3's wires at x 4250.
+
+# RA and RB through the channel: RA turns west at y 5712-5770 and goes on south at x 4665-4715
+M 4759,5420 y5768 w=54
+M 4665,5715:4786,5768
+M 4692,5715 y5790 w=52
+M 4928,5420 y5790 w=44
+
+# --- c4l_l3: the strong inverter's row y 5447-5467, across the whole strip, under seven
+# metals without a contact. East it is tl5's row to the pad (5538,5457) (c4l_l3).
+P 4250,5447:4967,5467
+
+# --- tl4_w5068: the track x 4625's south part ends on the pad (4625,5504); row y 5490-5510
+# east from the pad, under RA and RB, to tl5's pad (5493,5500) (tl4_w5068)
+M 4625,5240 y5518
+P 4607,5487:4645,5521
+C 4625,5504
+P 4640,5490:4967,5510
+
+# --- tl3_w4546: row y 5491-5510 from the west edge to the pad (4321,5504); metal x 4321 north
+# (one piece, no contact on the way: tl5_tracks.py v 4321 4350 5520) to the pad (4321,4374),
+# whose row runs west along y 4364-4381 out of the strip: tl3's gate row of rcs_mv's NOR.
+# The poly x 4319-4337 under this metal from y 4555 to y 4900 is another net (below).
+P 4250,5491:4310,5510
+P 4302,5487:4340,5521
+C 4321,5504
+M 4321,4360 y5518
+P 4303,4357:4342,4392
+C 4321,4374
+P 4250,4364:4310,4381
+N M 4321,5000 tl3_w4546
+
+# --- tc1_o3527 (tl5's the wire `tl5` called w5544, aliased in trace/tl6.txt: the output of tc1's NOR cell B):
+# row y 5534-5553 from tl5's pad (5538,5544) west to the pad (4497,5547);
+# metal x 4497 south (a jumper over rows y 5585 and y 5631 and the row y 5675: no contact)
+# to the pad (4497,5720); row y 5708-5727 west from that pad out of the strip.
+# 45 px of bare ground between the pad (4497,5547) and tla's pad (4408,5545) at the same y.
+P 4512,5534:4967,5553
+P 4479,5530:4517,5564
+C 4497,5547
+M 4497,5533 y5734
+P 4477,5703:4519,5737
+C 4497,5720
+P 4250,5708:4485,5727
+N M 4497,5630 tc1_o3527
+
+# --- rst_ck (tl5's rst_ck, aliased in trace/tl6.txt): row y 5621-5641 across the whole strip,
+# under every metal without a contact. West of x 4250 it runs on to tl3's pad (4104,5633)
+# (of7_r5.png, three shots: unbroken); tl3 has drawn it to x 4160 only (rst_ck).
+P 4250,5621:4967,5641
+N P 4700,5631 rst_ck
+
+# --- ck_out: the track x 4366 runs on south from the pad (4364,4762): a pad with a contact
+# (4366,5112) whose row leaves west along y 5102-5121 (tl3's ck_out, gate 2 of its NOR e5),
+# and at the south end an L east onto the pad (4411,5676); row y 5665-5684 east from the pad
+# to tl5's pad (5493,5674) (ck_out).
+M 4366,4780 y5676 x4425
+P 4347,5095:4386,5129
+C 4366,5112
+P 4250,5102:4355,5121
+P 4392,5659:4430,5693
+C 4411,5676
+P 4425,5665:4967,5684
+
+# --- rcs_mv: tl3's poly comes in at (4250, 4733-4751), turns south at x 4276-4292 under the
+# metal x 4279 (no contact), and west again along y 4904-4925 to tl3's pad (4234,4918), whose
+# metal x 4236 comes back in along y 5764 (rcs_mv) to the pad (4410,5764); poly east along
+# y 5752-5772 to a corner at x 4533-4555, north to y 5708 and east as the row y 5708-5728 to
+# tl5 (rcs_mv). 16 px of field between the corner and the pad (4497,5720) of tc1_o3527.
+P 4250,4733:4292,4751
+P 4276,4733:4292,4925
+P 4250,4904:4292,4925
+M 4250,5764 x4424 w=20
+P 4392,5747:4430,5781
+C 4410,5764
+P 4425,5752:4555,5772
+P 4533,5708:4555,5772
+P 4533,5708:4967,5728
+
+# --- bd1_n2 (the input of the inverter at y 3781-3911): its metal x 4410 runs south to
+# the pad (4410,4332); row y 4320-4338 west under the track x 4366 to the pad (4279,4332);
+# metal x 4279 south to the pad (4279,4571); an arm east y 4555-4580 onto a poly x 4319-4337
+# that runs south under the metal x 4321 (no contact) to y 4902; row y 4884-4902 east to the
+# pad (4538,4895); metal x 4538 south, a jog east at y 5236-5250, x 4583 south to y 5764 and
+# east onto the pad (4626,5762); row y 5752-5772 east to tl5 (bd1_n2: its bus line x 5412).
+M 4411,3895 y4346
+P 4392,4314:4430,4348
+C 4410,4332
+P 4296,4320:4396,4338
+P 4261,4314:4299,4348
+C 4279,4332
+M 4279,4320 y4585
+P 4261,4554:4299,4588
+C 4279,4571
+P 4296,4555:4337,4580
+P 4319,4555:4337,4902
+P 4330,4884:4524,4902
+P 4519,4878:4557,4912
+C 4538,4895
+M 4538,4881 y5243 x4583 y5764 x4640
+P 4607,5746:4646,5780
+C 4626,5762
+P 4640,5752:4967,5772
+
+# --- tl3_e4635 (the data of tl3's latch C): row y 4623-4642 from the west edge to the pad
+# (4279,4636); metal x 4279 south to the pad (4279,5200); row y 5189-5207 west out of the strip
+P 4250,4623:4268,4642
+P 4261,4619:4299,4653
+C 4279,4636
+M 4279,4622 y5214
+P 4261,5183:4299,5217
+C 4279,5200
+P 4250,5189:4268,5207
+N M 4279,4900 tl3_e4635
+# tl3 (run 8) drew the row y 5190-5205 up to x 4250 as tl3_e4635, the output of its inverter
+# at y 5180-5300 (= NOT tl3_e5240): the pad (4279,5200) and this metal are the join it left open
+
+# --- tl3_e5240 (tl3's name: the gate row of its inverter at y 5180-5300, drawn there to x 4250):
+# row y 5233-5251 from the west edge, ending over the top of the pad (4279,5265)
+# (no field between row and pad in the clean shot, n9_join.png); metal x 4279 south to the pad
+# (4279,5413); row y 5403-5422 west out of the strip. Both ends leave west.
+P 4250,5233:4300,5251
+P 4261,5245:4299,5281
+C 4279,5265
+M 4279,5251 y5427
+P 4261,5396:4299,5430
+C 4279,5413
+P 4250,5403:4268,5422
+N M 4279,5340 tl3_e5240
+
+# --- the wire `tl4` called w3070 is tl3's tl3_e4243 (= NOR(rst_ck, rcs_mv), e3's output): the track x 4318
+# runs on south from the pad (4320,3372) without a contact to a corner (4318,4247) and west
+# out of the strip along y 4235-4255
+M 4318,3385 y4246 x4250 w=14
+
+# ====================================================================
+# The tracks' north ends, the knot of pads y 2740-2910 and the bus lines y 2500-2740
+# (x 4250-4967). Wiring only, no device. Read on g2_*.png (3.1x, four shots), g4_*.png (5.6x,
+# three shots), g5_w.png, g8_pads.png (5x pad mosaics, four shots), g6_*.png (3.3x east pads);
+# every metal with tools/follow.py and tools/tl5_tracks.py (notes: "The tracks' north ends").
+# --- tl3_e4243: the track x 4321 runs on north from the pad (4318,3070) to a corner (4321,2771)
+# and east to pad A (4410,2767); A's poly: an arm east, south at x 4449-4468, east along
+# y 2801-2821 under the track x 4496 to pad B (4583,2811); metal east along y 2812 to the pad
+# (4866,2812), whose row runs east to x 4967: tl5's row of latch c's enable.
+M 4320,3064 y2771 x4412
+P 4398,2751:4425,2782
+C 4410,2767
+P 4420,2759:4468,2776
+P 4449,2759:4468,2821
+P 4449,2801:4572,2821
+P 4566,2796:4600,2826
+C 4584,2811
+M 4583,2813 x4866
+P 4852,2797:4885,2825
+C 4866,2812
+P 4878,2801:4967,2820
+# --- ck_out: the track x 4366 from its drawn piece (y 4565) north to its end on the pad
+# (4366,2812), over the pad (4366,3030); both pads' rows run west across x 4250 (the south one
+# is tl3's ck_out, the gate of its inverter E1)
+M 4366,2802 y4572
+P 4352,2797:4386,2826
+C 4366,2812
+P 4250,2801:4360,2820
+P 4352,3014:4386,3044
+C 4366,3030
+P 4250,3018:4360,3038
+# --- tl4_w3113: the track x 4408 north from its drawn piece to a corner (4411,2858), east to
+# pad C (4454,2857); poly east under the track x 4496 to pad D (4538,2857); metal east along
+# y 2857 to the pad (4823,2855), whose row runs east to x 4967 (tl4_w3113)
+M 4411,3036 y2858 x4456
+P 4441,2842:4469,2870
+C 4454,2857
+P 4463,2847:4532,2864
+P 4525,2842:4554,2870
+C 4538,2857
+M 4538,2857 x4822
+P 4810,2840:4842,2868
+C 4823,2855
+P 4835,2846:4967,2865
+# --- rcs_e3: the track x 4496 north from its drawn piece (y 3775) to a corner (4496,2728)
+# and west as the sixth bus line to tla's pad (4270,2725)
+M 4496,3782 y2728 x4326
+# --- tl5_w3245: the track x 4581 north from its drawn piece (y 4690) to a corner (4582,2897),
+# east to the pad (4648,2898) on the row y 2890-2909, which runs east to x 4967 (tl5's)
+M 4582,4696 y2897 x4650
+P 4632,2884:4665,2913
+C 4648,2898
+P 4660,2890:4967,2909
+# --- tl4_w4068: tl5's pad (4910,2767) has a second metal, west along y 2770 to pad E
+# (4539,2768), whose poly runs north as a column x 4534-4550 under the bus lines and across
+# y 2500 (it goes on under the wide band to y ~2165: g8_col.png)
+M 4540,2771 x4905
+P 4528,2751:4557,2781
+C 4539,2768
+P 4534,2500:4550,2756
+# --- bus line 1: from x 4250 along y 2512, a diagonal (4669,2512)-(4712,2555), east to the pad
+# (4908,2551); its row runs east across x 4967. The pad's metal ends 25 px short of the wide
+# vertical supply metal x 4950-4995 (tl5_tracks.py h 2551 4700 4965)
+M 4250,2512 x4669 4712,2555 x4908 w=12
+P 4894,2537:4926,2565
+C 4908,2551
+P 4920,2542:4967,2560
+N M 4400,2512 sl_eq_r5_n
+# --- bus line 4: from the pad (4279,2640), whose poly comes from the west, a diagonal
+# (4604,2641)-(4647,2684), east to the pad (4866,2681); its row runs east to x 4967 (tl5_w4937)
+P 4250,2632:4270,2650
+P 4263,2626:4297,2656
+C 4279,2640
+M 4281,2641 x4604 4647,2684 x4866 w=12
+P 4851,2667:4884,2695
+C 4866,2681
+P 4878,2675:4967,2694
+# --- bus line 5: from x 4250 along y 2685, a diagonal (4580,2685)-(4622,2727), east to the pad
+# (4822,2723); its row runs east to x 4967 (tl5_w2722)
+M 4250,2685 x4580 4622,2727 x4822 w=12
+P 4808,2709:4841,2738
+C 4822,2723
+P 4835,2714:4967,2733
+
+# ====================================================================
+# South of the routing channel (x 4250-4967, y 5790-6350): two metals from the west with a pad
+# each and their rows east, tl5's thin metal to a pad on the row y 6323, and the legs of the
+# three rails. Wiring only, no device. Read on h1_m.png, h1_a.png (1.8x), h2_e.png (3.1x),
+# h2_s.png, h3_pads.png (5x, four shots); tools/tl5_tracks.py and tools/px.py (notes).
+# --- rcs_x1: tl3's metal (rcs_x1, the clear of its latch C) runs on east along y 5895 to the
+# pad (4629,5891); its row runs east under RA's and RB's legs to x 4967 (rcs_x1, bus line x 5107)
+M 4250,5895 x4628
+P 4615,5877:4647,5905
+C 4629,5891
+P 4641,5880:4967,5900
+# --- a second metal from the west along y 5939 to the pad (4583,5936); row east to x 4967
+# (tl3_w3982, bus line x 5063)
+M 4250,5939 x4582
+P 4573,5921:4602,5949
+C 4583,5936
+P 4596,5926:4967,5946
+# --- tl5's thin metal (c4l_gab, the clear of its latch c) comes from the east along y 5984,
+# turns south at x 4929, has a contact on the pad (4929,6323) and runs on south out of the
+# strip; the pad's row runs west across the whole strip (y 6313-6333)
+M 4967,5984 x4929 y6350 w=14
+P 4913,6309:4947,6337
+C 4929,6323
+P 4250,6313:4920,6333
+# --- the rails' legs. RA's leg x 4667-4715 on south; RB to a corner, west along y 5806-5856 (it
+# lies on tla's row y 5838-5858 there, no contact) and south as a leg x 4754-4801; tl5's rail
+# RC, turned west along y 5891-5942, turns south as a leg x 4841-4888. All three leave the strip at y 6350. No contact on any of them here.
+M 4691,5785 y6350 w=48
+M 4928,5785 y5856 w=44
+M 4754,5806:4950,5856
+M 4777,5806 y6350 w=46
+M 4841,5891:4967,5942
+M 4865,5891 y6350 w=46
+
+# ====================================================================
+# RA's supply (x 4732-4967, y 2500-3004). A wide metal "foot" along y 2938-2997 runs from RA's
+# top end east across the strip's edge; RA (x 4729-4775) is its continuation south: the dark
+# line across RA's top at y 2994-3000 is the south edge of the row y 2976-2996 under the metal
+# (the same line as at the row's north edge, y 2973; pink field under metal on both sides of
+# the row in the clean shot at x 4729-4775, open field south of the row east of x 4781). At
+# the strip's east edge a wide vertical metal (x 4949-4995, its east part in tl5's strip) runs
+# from the foot north across all the rows, no contact, to the wide band north of y 2500, whose
+# corner (x 4910-4967, y 2500-2507) is inside the strip. Read on g7_sup.png (2.1x), i1_foot.png
+# (4.1x metal and clean shot); tools/px.py and tools/tl5_tracks.py (notes: "RA's supply").
+# The foot's north edge is y 2938: the row y 2930-2950 is under it too, no contact (review
+# round 11; notes, Ambiguity 12).
+M 4732,2938:4967,2997
+M 4732,2990:4775,3004
+M 4949,2500:4967,2960
+M 4910,2500:4967,2507
+
+# ================================================================ run 11: ck_out is ck_out
+# tl6 ends ck_out's metal x 6016 at its strip's foot (6016,6350); lc1 starts the metal of ck_out
+# on the same x at (6016,6900). Between them it is one metal, x 6008-6024, over the eight poly rows of
+# the band y 6350-6720 and one at y 6840, with no pad and no contact (tools/tl5_tracks.py v 6016 6340
+# 6910: no stretch without metal over 16 px; c1.png). So the two names are one net.
+M 6016,6350 y6900 w=16
+
+# ---- ck_out in the bottom-centre logic: busl's track x 7187 ends at y 15000. It runs on south to a
+# corner at y 15480, west to x 7103, south to a pad (7100,16303), under the wide bus metal as a poly
+# column to a pad (7100,16432), on south to a corner at y 17262, west to x 7058, south to a corner at
+# y 17908 and east to a pad (7426,17908); a poly row y 17897-17917 runs east under the supply rail to a
+# pad (7641,17908); a metal runs on east to a corner (8018,17904), north 40 px and east along y 17864
+# to a pad (8317,17863), where it ends (the pad's poly goes on: port). No other pad, contact or branch.
+M 7187,15000 y15480 x7103 y16303 w=14
+N M 7187,15200 ck_out
+P 7084,16287:7117,16320
+C 7100,16303
+P 7100,16303 y16432 w=18
+P 7084,16416:7117,16449
+C 7100,16432
+M 7101,16432 y17262 x7058 y17908 x7426 w=14
+P 7409,17892:7443,17925
+C 7426,17908
+P 7426,17907 x7641 w=20
+P 7624,17891:7658,17925
+C 7641,17908
+M 7558,17908 x8018 y17864 x8317 w=12
+P 8300,17847:8334,17880
+C 8317,17863
+
+# ---- the branch at the pad (7641,17908) (review round 12): the metal on that pad does not start free
+# west of it. At (7558,17908) it turns north, runs x 7551-7566 to a corner (7557,17824), east along
+# y 17812-17832 (lengthwise on bl0's poly row of bl0_w17687: no contact) to x 7840, and north on the
+# track x 7828-7850 onto the pad (7840,17648) that bc3 draws with the track north of it as ck_out,
+# the gate of bc3's inverter. So ck_out is ck_out.
+M 7558,17908 y17824 x7840 y17655 w=14
+
+# ================================================================ run 12: ck_out is ck_out
+# The pad (8317,17863) at the end of the metal: its poly goes south 30 px (a 6 px dark bar at y 17888-
+# 17893, between the pad's metal and a metal of another net that lies along the row, keeps poly colours
+# in the clean and the chip-2 stripped shot) into the poly row y 17898-17916, which runs east onto the
+# poly that eof draws west of its pad (8424,17908) (trace/eof.txt, piece in350, part C: "seen to x 8312,
+# where it turns north"): ck_out. So ck_out, with ck_out and ck_out, is ck_out.
+P 8310,17880:8332,17916
+P 8310,17898:8396,17916
