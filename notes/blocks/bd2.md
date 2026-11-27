@@ -551,7 +551,7 @@ next unit south under the rail (not drawn).
 ### The column under the rail (x 16008-16058), y 16540-17110
 
 `tools/bd2_umap.py 15990 16540 16150 17110 4 5`, from the top: output land y 16575-16590 | band y 16594-16612
-(`rs_d`) | ground land y 16620-16677 (contact 16041,16663) | band y 16681-16699 (`rw_d`) | output land
+(`rs_d`) | ground land y 16620-16677 (contact 16044,16652, a tall oval) | band y 16681-16699 (`rw_d`) | output land
 y 16705-16722 | field y 16735-16760 | ground land y 16765-16805 (contact 16042,16782) | band y 16812-16828
 (`cs_d`) | output land y 16835-16895 | band y 16898-16915 (`bd2_e_n`) | ground land y 16920-16960 (contact
 16042,16945) | field y 16965-16995 | output land y 17005-17020 | band y 17030-17045 (`e_b`) | ground land
@@ -564,7 +564,7 @@ Unit 1 (`rs_d`, y 16529-16642) and unit 3 (`e_b`, 434 px lower) are the same lay
 turned over about y 16647 and shares its ground land. The gate-level cell, on unit 1:
 
 - **Pull-down.** The diffusion under the rail goes on east of it to x 16121 on both sides of the band (the
-  ground land's east arm y 16620-16636; a field pocket y 16642-16660 separates it from unit 2's arm), so the
+  ground land's east arm y 16620-16636; a field pocket y 16642-16660, east of x 16082, separates it from unit 2's arm), so the
   transistor is about 113 wide and 18 long. Run 2 had drawn it 58 wide (the part under the rail). The band's
   poly ends west of the rail at x 15976.
 - **Output cell** (run 2): a framed box on the output land's east end with the poly that leaves east.
@@ -580,9 +580,11 @@ turned over about y 16647 and shares its ground land. The gate-level cell, on un
   edge; the block's north arm (y 16529-16552) ends in the box. Row y 16574 across the junction: after the
   box's east edge (x 15996) the metal shots are plain and pinker than field (158-174 / 105-135 / 72-91) to
   the rail's edge line at x 16010, with no second edge line: one diffusion.
-- **VCC.** Units 1 and 2 have a contact speck on their VCC lands in the clean shot ((15872,16607), 65 dark
-  px; (15869,16715)), drawn as contacts to the supply rail `bd3` draws (`@requires bd3`). Unit 3's and the
-  NOR's lands show none east of x 15850 (labelled `vcc`; under the rail further west not looked at).
+- **VCC.** Each of the four VCC lands has a contact to the supply rail at x 15863: ring and bright core in
+  both metal shots, hole in the clean shot ((15863,16587), (15863,16725), (15863,16885), (15863,17023);
+  `cdp4_padc.py`). The rail is `bd3`'s (`@requires bd3`), whose `sel_rwr` copies have the same four as `?C`:
+  the lands are shared with `sel`'s loads on the rail's other side. (Before the review the notes had two
+  contacts on clean-shot specks 12-20 px off the rings and none for unit 3 and the NOR: corrected.)
 
 Unit 2's own things: band y 16681-16699 east across the bundle to `rw_d`'s tap pad (centre 16296,16690; hole
 in the clean shot); output cell (16088-16132, 16712-16750) on the output land's south side; its poly east along
@@ -642,8 +644,10 @@ unit 3's pad test as pads. `eof_tee.py` on the five new rows and the column: no 
 12. **Under-band diffusion west of x 16008**: in units 1-3 the diffusion's west edge under the band may lie at
     about x 15997 rather than at the rail's edge (a dark line x 15995-16000 beside the rail in the metal
     shots); the bands are drawn over diffusion from x 16008. Width only (113 against perhaps 124).
-13. **Supply contacts of unit 3's and the NOR's loads** are not seen (no speck east of x 15850); the lands are
-    labelled `vcc` as run 2 labelled group 3's.
+13. **A dark patch in the clean shot under the rail**, x 16005-16030, y 16918-16940, below the west stub of
+    the NOR's band 2 (57 / 39 / 29 against pink field 188 / 129 / 126 at y 16950; green in chip 2's stripped
+    shot, which has fringes under metal). Both metal shots are bright there with no edge line, and band 1 has
+    no counterpart. Not drawn: taken as residue on chip 1 (review round 1 took it so too).
 
 ### Not done (run 3)
 
@@ -657,3 +661,47 @@ unit 3's pad test as pads. `eof_tee.py` on the five new rows and the column: no 
 ## Review
 
 Run 3 is the first piece of this block traced under the review rule (runs 1-2 predate it).
+
+### Round 1 (full review), 2026-11-27, piece `g4n`
+
+A fresh Claude Fable 5.2 agent, on commit 955655c, images in `cache/scratch/bd2/review-1/` (4.3-8.5x in four
+shots, with profiles: `tools/px.py`, `tools/textmap.py`, `tools/bd2_umap.py`, `tools/follow.py`,
+`tools/eof_tee.py`). Told to suspect: the loads west of the rail (one poly over one diffusion, or separate
+polys; the strip between unit 1's and unit 2's blocks), each drain strip's way through its tie box into the
+output land, the NOR's tie wire and the patch beside it, the contact on the `e_b` trunk, the tee and the
+column in the gap between two metals, every crossing claimed to have no contact, the pad (16208,16733) and
+the track x 16210 north of it, the NOR's east column, the VCC lands and their contacts.
+
+Findings, none of which changes a connection (all confirmed by me and fixed):
+
+1. **VCC contacts.** All four lands have a contact ring at x 15855-15870 in both metal shots, which the notes
+   denied for unit 3 and the NOR, and the two contacts drawn were on clean-shot specks 12-20 px away.
+   Confirmed (`cdp4_padc.py 15862,16586 15862,16724 15862,16886 15862,17024`: a hole of 356-516 px and both
+   metal centres at each). Now four contacts at the rings. The lands were on `vcc` before and after.
+2. **Ground contact of units 1-2** (run 2's `C 16041,16663`) reached to within 1 px of the new band y 16681;
+   it is a tall oval about (16044,16652). Moved, 24 x 34.
+3. **Ground lands.** Units 1-2: the land reaches x 16082 between the two arms (drawn to 16066): added. Unit 3:
+   it narrows to x 16030-16066 below y 17070 (drawn full width): narrowed.
+4. **The NOR cell's poly** ended 2 px into `cdp4`'s row: extended to x 16136.
+
+Unexplained by the reviewer and by me: the dark patch under the rail (Ambiguity 13, not drawn).
+
+Checked and found correct by the reviewer: the three load blocks are one poly each (single 8 px edge lines;
+chip 2's stripped shot shows the poly unbroken down x 15912); the strip between the blocks is field; the
+corridors into the output lands are diffusion to x 16004 with edge lines in line with the lands' edges; the
+NOR's tie (the band's bottom edge open at x 15993, closed at x 15980; the patch field; the arm diffusion);
+the four contacts (16166,17037), (16208,16733), (16296,16690), (16384,16821), and the `e_b` trunk one metal
+through its pad; the track x 16210 bare ground at y 16632-16672 (the metal runs from the pad south only); the
+tee and the column (unbroken y 16900-17131, field north of band 2, pink under x 16255 throughout); all listed
+crossings; the NOR's east column one diffusion; nothing undrawn in the gaps between the tracks x 16190-16407.
+Could not check: that the seven boxes are buried contacts beyond their look (Ambiguity 11); the 6 px under
+the rail's edge line at each corridor-to-land join.
+
+Connections before and after the fixes (commit 955655c against the fixed tree):
+
+    tools/t.sh bd2 sameconn.py 955655c            ->  connections identical
+    .venv/bin/python tools/sameconn.py 955655c    ->  connections identical
+
+Recorded 2026-11-27 06:05 -0600.
+
+Round 1: no findings that change a connection.

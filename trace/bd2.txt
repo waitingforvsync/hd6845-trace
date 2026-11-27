@@ -422,7 +422,7 @@ N D 16040,16331 wr_addr_sel
 # and 16343,16603 (top end of the rs_d metal). Under the e_b trunk, the bd2_rs_n metal
 # and the rw_d metal it is salmon: no contact.
 D 16008,16575:16066,16677              # output land, under the band, ground land
-C 16041,16663
+C 16044,16652 s=24x34                  # a tall oval in the chip-1 metal shot and the clean shot's hole (moved by run 3's review: was 16041,16663)
 P 16008,16594:16358,16612              # gate: rs_d
 P 16194,16590:16228,16622              # pad
 C 16211,16606
@@ -456,13 +456,13 @@ N D 16040,16582 bd2_rs_n
 D 16066,16590:16121,16636              # under the band east of the rail, and the ground land's north arm
 P 15976,16594:16010,16612              # the band's west end
 # Load, west of the rail: a poly block x 15894-15932, y 16529-16642 over a diffusion from the VCC land under the
-# supply rail (east edge x 15893; contact speck 15874,16607 in the clean shot) to a drain strip x 15934-15948.
+# supply rail (east edge x 15893; its contact to the rail at 15863,16587) to a drain strip x 15934-15948.
 # The diffusion's top and bottom edges print through the block as dark lines at y 16560 and y 16629 (one edge
 # line each, 7-9 px), so the channel is 69 wide and 38 long. The strip's top joins east (y 16562-16584) through
 # the tie box (15958-15996, 16542-16582: heavy outline, tan centre in the clean shot) into the output land's
 # north-west corner under the rail's edge; the block's north arm (y 16534-16556) ends in the box.
 D 15850,16555:15896,16627              # VCC land under the supply rail
-C 15874,16607
+C 15863,16587                          # ring and bright core in both metal shots, hole in the clean shot (bd3's sel_rwr copy has it as ?C)
 N D 15870,16580 vcc
 D 15890,16560:15948,16629              # channel and drain strip
 D 15934,16562:16012,16584              # east through the tie box
@@ -481,6 +481,7 @@ B 15954,16540:15998,16584              # tie: load gate to the output
 # y 16754-17745).
 D 16008,16677:16066,16722              # under the band, output land
 D 16066,16663:16121,16703              # ground land's south arm, and under the band east of the rail
+D 16066,16636:16082,16663              # the ground land between the two arms (the field pocket begins at x 16082)
 P 15976,16681:16298,16699              # gate: rw_d
 P 16280,16674:16312,16706              # pad
 C 16296,16690
@@ -495,7 +496,7 @@ M 16210,16723 y17100 w=18              # south; seen on to y 17745 by run 1's tr
 N M 16210,16800 bd2_rw_n
 N D 16040,16712 bd2_rw_n
 D 15850,16672:15896,16748              # VCC land
-C 15874,16717
+C 15863,16725
 N D 15870,16700 vcc
 D 15890,16669:15948,16740              # channel and drain strip
 D 15934,16708:16012,16732              # east through the tie box
@@ -524,7 +525,7 @@ C 16042,16945
 N D 16048,16775 vss
 D 16008,16847:16034,16881              # output land, wider to the west
 D 16092,16852:16124,16880              # under the output cell
-P 16100,16853:16132,16877              # poly of the cell
+P 16100,16853:16136,16877              # poly of the cell
 B 16096,16849:16128,16882              # output cell
 N D 16048,16865 dbus_le
 P 16014,16810:16386,16828              # band 1, gate: cs_d
@@ -538,6 +539,7 @@ N P 16150,16908 bd2_e_n
 # south to y 16930 and turns west along y 16912-16930 into a box (15944-15978, 16903-16927) under the block's
 # lower part.
 D 15850,16845:15896,16912              # VCC land
+C 15863,16885
 N D 15870,16865 vcc
 D 15890,16847:16010,16881              # band: channel, and east to the rail
 D 15986,16881:16000,16930              # tie wire south
@@ -554,7 +556,8 @@ B 15944,16903:15978,16932              # tie
 # into the column of the NOR's band 2. The ground land (contact 16040,17086) runs on south to the next band
 # (y 17115-17130, not drawn).
 M 16008,17050:16058,17112              # the ground rail goes on south (run 2 drew it to y 17050; its end is not looked at)
-D 16008,17009:16066,17108              # output land, under the band, ground land
+D 16008,17009:16066,17072              # output land, under the band, ground land
+D 16030,17072:16066,17108              # the ground land narrows below y 17070
 C 16040,17086
 D 16056,17009:16126,17024              # output land's east end
 D 16066,17024:16121,17070              # under the band east of the rail, and the ground land's north arm
@@ -567,6 +570,7 @@ B 16088,16978:16132,17018              # output cell
 P 16128,16987:16244,17003              # east into the column
 N D 16040,17016 bd2_e_n
 D 15850,16989:15896,17061              # VCC land
+C 15863,17023
 N D 15870,17010 vcc
 D 15890,16994:15948,17063              # channel and drain strip
 D 15934,16996:16012,17018              # east through the tie box
