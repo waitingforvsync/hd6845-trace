@@ -234,8 +234,8 @@ blocks and boxes lie on the features. Two more partial matches (+440: 0.60, +613
 another build.
 
     bc2_e14955 = NOT bc2_p14823
-    bc2_e15085 = NOT bc2_m10007
-    bc2_e15215 = NOT bc2_m10052
+    bc2_e15085 = NOT tl6_p6143
+    bc2_e15215 = NOT tl6_p6101
 
 ### Inputs and outputs (drawn to this piece's edges; view `wire_e_m`, overlay `ov_w`)
 
@@ -245,12 +245,12 @@ another build.
   (port at the rail's east edge). Output: the box's poly ends on a pad (9963,15000); a thin metal north to
   y 14870, west to a pad (9897,14869); its poly row y 14860-14878 leaves west under the rail (port). Between
   the band's end and the pad the clean shot is pink under the thin metal (y 14966-14980): field.
-- **Unit 2.** Input `bc2_m10007`: the band ends east on a pad (9963,15087) of a thin metal that comes from the
+- **Unit 2.** Input `tl6_p6143`: the band ends east on a pad (9963,15087) of a thin metal that comes from the
   north on x 10007, turns west at y 15046 and runs on south on x 9963 through the pad (`tools/follow.py`: north
   to a corner (10004,14436) and west to a pad (9722,14437); south to y 15742). Output: the box's poly east under
   that metal (no contact) to a pad (10006,15131), the north end of a thin metal x 10007 south (follow: to
   y 15570). So x 10007 carries two nets: the input above y 15046, the output below y 15122.
-- **Unit 3.** Input `bc2_m10052`: the band's poly east under the metals x 9963 and x 10007 (no contact) to a tap
+- **Unit 3.** Input `tl6_p6101`: the band's poly east under the metals x 9963 and x 10007 (no contact) to a tap
   pad (10050,15217) on the thin metal x 10052, which runs through (follow: north to a corner (10052,14390) and a
   pad (9764,14394); south to y 15526). Output: the box's poly east under x 9963, x 10007 and x 10052 (no contact)
   to a pad (10094,15261), the north end of a thin metal south (follow: a corner (10089,15698), west to
@@ -287,13 +287,13 @@ uncertain item (full extraction 2,527 nets, 4,853 transistors, 0 errors). Views 
 `x1`, overlay `ov_c`.
 
     bc2_e15343 = NAND( bc2_e15215, bc2_e15085 )
-    bc2_e15517 = NAND( bc2_m10052, bc2_e15085 )
-    bc2_e15690 = NAND( bc2_e15215, bc2_m10007 )
+    bc2_e15517 = NAND( tl6_p6101, bc2_e15085 )
+    bc2_e15690 = NAND( bc2_e15215, tl6_p6143 )
 
-With piece `inv` (`bc2_e15085` = NOT `bc2_m10007`, `bc2_e15215` = NOT `bc2_m10052`): three of the four minterms of
-the two wires `bc2_m10007` and `bc2_m10052`, each active low: `bc2_e15343` is low when both are low,
-`bc2_e15517` when `bc2_m10052` is high and `bc2_m10007` low, `bc2_e15690` when `bc2_m10007` is high and
-`bc2_m10052` low. A two-bit decode; what the two bits are is not known (they come off the poly bus above).
+With piece `inv` (`bc2_e15085` = NOT `tl6_p6143`, `bc2_e15215` = NOT `tl6_p6101`): three of the four minterms of
+the two wires `tl6_p6143` and `tl6_p6101`, each active low: `bc2_e15343` is low when both are low,
+`bc2_e15517` when `tl6_p6101` is high and `tl6_p6143` low, `bc2_e15690` when `tl6_p6143` is high and
+`tl6_p6101` low. A two-bit decode; what the two bits are is not known (they come off the poly bus above).
 
 ### Cell `bc2_enand` (master: the unit with bands y 15334-15352 and y 15378-15396)
 
@@ -318,8 +318,8 @@ The four thin metals of piece `inv` run on south and each ends here on a pad at 
 |---|---|---|---|
 | x 10093 | `bc2_e15215` | (10091,15345): band 1 of unit 15343 | south to y 15698, west to the pad (10006,15696): band 1 of unit 15690 |
 | x 10007 | `bc2_e15085` | (10006,15391): band 2 of unit 15343 | the pad (10006,15566): band 2 of unit 15517 |
-| x 10052 | `bc2_m10052` | (10050,15217): the inverter (piece `inv`) | the pad (10050,15522): band 1 of unit 15517 |
-| x 9963 | `bc2_m10007` | (9963,15087): the inverter | the pad (9963,15738): band 2 of unit 15690 |
+| x 10052 | `tl6_p6101` | (10050,15217): the inverter (piece `inv`) | the pad (10050,15522): band 1 of unit 15517 |
+| x 9963 | `tl6_p6143` | (9963,15087): the inverter | the pad (9963,15738): band 2 of unit 15690 |
 
 Outputs: `bc2_e15343`'s row y 15424-15442 east under all four metals to a pad (10137,15435), the south end of the
 thin metal x 10137 (bare ground on x 10137 from y 15464 to y 15584), which runs north (`tools/follow.py`: to the
@@ -343,6 +343,77 @@ metal is a plain crossing (the row not widened, salmon, no hole). The test's fla
 
 - The three outputs beyond their ports; the next unit down the E rail (from y 15830); the W rail's units; the M
   rail's west-side loads; the bus rows.
+
+## Run 3 (2026-11-27), piece `bus2`: the decode's two inputs are `tl6_p6101` and `tl6_p6143`
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 08:47 -0600. Wiring only: two bus lines end to end, x 7545-10052, y 14377-14454,
+and their thin metals down to piece `inv`'s (y 14660). No transistor, no uncertain item. Full extraction 2,525
+nets (two joins), 4,853 transistors, 0 errors. Views in `cache/scratch/bc2/n4/`: `a` (west ends, 4x), `b`
+(x 8220-8680), `c` (x 9340-9800), `w` (x 6700-7800 with `busl`'s rows), `gap` (x 7530-7790, 5x); each metal over
+clean shot.
+
+### What it establishes
+
+The two wires that piece `inv` called `bc2_m10052` and `bc2_m10007` are **`tl6_p6101` and `tl6_p6143`**: the two
+nets `busl` brought across the left bus field from the top-left logic to "a poly row at the field's foot toward
+the bottom-centre logic's bus (y 14393, 14437)" (its ports (7550,14393) and (7550,14437)). So
+
+    bc2_e15215 = NOT tl6_p6101          bc2_e15085 = NOT tl6_p6143
+    bc2_e15343 = NAND(bc2_e15215, bc2_e15085)     low when both are low
+    bc2_e15517 = NAND(tl6_p6101, bc2_e15085)      low when tl6_p6101 = 1, tl6_p6143 = 0
+    bc2_e15690 = NAND(bc2_e15215, tl6_p6143)      low when tl6_p6101 = 0, tl6_p6143 = 1
+
+all firm. The glossary has `tl6_p6101`, `tl6_p6143` and `tl6_p6187` as "believed three of R8's outputs" (north
+ends not followed): if so this is the decode of a two-bit field of R8. The third, `tl6_p6187`, arrives at
+y 14870, the height of `bc1`'s bus line `bc1_s1` (y 14873), one input of `bc1`'s own three-NAND decode: a
+lead, not followed here.
+
+### The two lines
+
+Lines 2 and 3 of the 13-line bus that `bc1` describes (its y 14397 and y 14439). Each is metal where it is free
+and poly under the two groups of three wide vertical metals, with a pad and contact at each change:
+
+| | `tl6_p6101` (y 14394) | `tl6_p6143` (y 14437) |
+|---|---|---|
+| poly row from `busl`'s end (x 7550) under `bc1`'s vertical metals | to the pad (7795,14394) | to the pad (7838,14438) |
+| metal | x 7795-8250 | x 7838-8293 |
+| pad, poly under `bc1`'s rails x 8335-8555, pad | (8250,14394) - (8598,14394) | (8293,14438) - (8641,14437) |
+| metal | x 8598-9378 | x 8641-9421 |
+| pad, poly under the W rail, M's stem and E's feeder (x 9455-9690), pad | (9378,14394) - (9764,14393) | (9421,14438) - (9722,14438) |
+| thin metal east, south | to x 10052, down to the tap (10050,15217) and the end pad (10050,15522) | to x 10007, down, west at y 15046, down x 9963 to the pad (9963,15087) and the end pad (9963,15738) |
+
+Evidence: `tools/tl5_tracks.py h 14394 7700 9800` and `h 14437 ...`: metal in both chips on the metal stretches
+(no gap of 8 px), no metal on the poly stretches except the wide verticals crossing them, and in the clean shot
+a hole (red minus green under 24) only at the eight pads and the two east ones; `cdp4_padc.py` on the ten pads:
+hole, and ring with bright centre in at least one metal shot each ((9378,14394): chip 1 only; (9764,14393): a
+small red-centred hole, ring and bright centre in both metal shots). Under the wide metals the rows are salmon
+and unbroken in the clean shot (views `b`, `c`); the dark rings beside them at x 8320, 8400, 8480, 8560, 9520,
+9610, 9700 lie in the gaps between two metals (the layers note's trap), not on the rows.
+`tools/eof_tee.py` on the poly stretches: no branch.
+
+**The join to `busl`'s rows** (x 7550-7778 / 7821): each row runs on east from `busl`'s drawn end under `bc1`'s
+vertical metals x 7575-7760 to its pad: poly throughout (`tl5_tracks.py rows row 7520 7800 4 14392 14437`: poly
+under metal or in the open at every sample but the 8-12 px dark edges of the metals; no pink field). No contact
+to any of the verticals: chip 1's metal shot is plain bright metal over both rows. One place needs saying: under
+the wide metal x 7664-7708 the clean shot shows the row y 14393 as three small patches of different colours
+(grey, green, orange-red, 59-136 red against 200 or more for salmon) and chip 2's metal shot is dim there
+(138-156 at x 7680-7688), while chip 1's is bright right across (201-219) with only the row's two edge lines
+(down x 7685: dark at y 14380 and y 14404, 221-223 between). No ring in either chip: read as residue on the two
+dies, not a contact (Ambiguity 6).
+
+### Ambiguities (run 3)
+
+6. **(7664-7708, 14393)**: residue or a contact of `tl6_p6101`'s row to the wide vertical metal there. Read as no
+   contact (no ring in either metal shot). If it were one, `tl6_p6101` would be on that metal too (it is in
+   `bc1`'s undrawn bundle; nothing else would change here).
+7. **The pad (9764,14393)**'s hole is small and red-centred in the clean shot; the contact rests on both metal
+   shots.
+
+### Not done (run 3)
+
+- `tl6_p6187` / `bc1_s1` (the lead above); the other bus lines east of x 9300.
+- The centre block's east rail from y 15800 (first look in `cache/scratch/bc2/n3/notes.md`: an inverter at
+  y 15805-15935 fed from a pad (10008,15866), then an irregular group).
 
 ## Review
 

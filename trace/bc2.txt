@@ -215,8 +215,6 @@ P 9944,15246:10094,15272
 P 10077,15244:10111,15278              # pad
 C 10094,15261 s=20x20
 M 10093,15252 y15300 w=13
-N M 10007,14900 bc2_m10007
-N M 10052,14900 bc2_m10052
 N P 9900,14823 bc2_p14823
 
 # ================================================================ run 2, piece nand (2026-11-27): three two-input NANDs on the E rail
@@ -224,8 +222,8 @@ N P 9900,14823 bc2_p14823
 # contact, two gate bands 44 px apart with a strip between them that has no exit, and an output land: two pull-downs in
 # series. Output box, load and tie as in bc2_einv. The bands' west end caps lie west of the rail (x 9782-9800).
 #     bc2_e15343 = NAND( bc2_e15215, bc2_e15085 )
-#     bc2_e15517 = NAND( bc2_m10052, bc2_e15085 )
-#     bc2_e15690 = NAND( bc2_e15215, bc2_m10007 )
+#     bc2_e15517 = NAND( tl6_p6101, bc2_e15085 )
+#     bc2_e15690 = NAND( bc2_e15215, tl6_p6143 )
 M 9808,15300:9864,15830                # E rail, on south
 M 9642,15300:9698,15830                # M rail, on south
 @cell bc2_enand tag=15343
@@ -256,8 +254,8 @@ B 9728,15370:9756,15396                # tie
 # The four thin metals of piece inv run on south and end here, each on a pad at the east end of a band:
 M 10093,15290 y15698 x9999 w=13         # bc2_e15215: over the tap (10091,15345), south, west at y 15698 to its end pad
 M 10007,15290 y15574 w=12               # bc2_e15085: over the tap (10006,15391) to its end pad (10006,15566)
-M 10052,15290 y15530 w=13               # bc2_m10052: to its end pad (10050,15522)
-M 9963,15290 y15746 w=13                # bc2_m10007: to its end pad (9963,15738)
+M 10052,15290 y15530 w=13               # tl6_p6101: to its end pad (10050,15522)
+M 9963,15290 y15746 w=13                # tl6_p6143: to its end pad (9963,15738)
 # unit 15343
 P 9946,15334:10091,15352                # band 1, east under x 9963, x 10007, x 10052 (no contact)
 P 10074,15328:10108,15362               # tap pad on bc2_e15215's metal
@@ -271,7 +269,7 @@ C 10137,15435 s=20x20
 M 10137,15445 y15290 w=13               # north (port): tools/follow.py runs it to the pad (10135,14783) of a bus row
 # unit 15517
 P 9946,15508:10050,15526                # band 1, east under x 9963, x 10007
-P 10033,15505:10067,15539               # end pad of bc2_m10052's metal
+P 10033,15505:10067,15539               # end pad of tl6_p6101's metal
 C 10050,15522 s=20x20
 P 9946,15552:10006,15570                # band 2, east under x 9963
 P 9989,15549:10023,15583                # end pad of bc2_e15085's metal
@@ -285,9 +283,52 @@ P 9946,15681:10006,15699                # band 1, east under x 9963
 P 9989,15679:10023,15713                # end pad of bc2_e15215's metal
 C 10006,15696 s=20x20
 P 9946,15725:9963,15743                 # band 2
-P 9946,15721:9980,15755                 # end pad of bc2_m10007's metal
+P 9946,15721:9980,15755                 # end pad of tl6_p6143's metal
 C 9963,15738 s=20x20
 P 9946,15771:10006,15789                # output row
 P 9989,15765:10023,15799                # pad
 C 10006,15782 s=20x20
 M 9999,15782 x10050 y15830 w=13         # east and south (port)
+
+# ================================================================ run 3 (2026-11-27), piece bus2: the decode's two inputs along the bus
+# Lines 2 and 3 of the 13-line bus that bc1 describes (y 14397 and y 14439 there), end to end. Each is metal where it
+# is free and poly under the two groups of three wide vertical metals (bc1's rails x 8335-8555, this block's x 9455-9690),
+# with a pad and contact at each change (hole in the clean shot, ring and bright centre in both metal shots). West of
+# its first pad each goes on as a poly row into the left bus field (ports). tools/tl5_tracks.py h along both lines finds
+# no other hole in the clean shot.
+# --- line y 14394: tl6_p6101 (was labelled bc2_m10052 until the join to busl's row was drawn)
+P 7545,14384:7795,14402                # poly row from the west: busl's row tl6_p6101 (its port (7550,14393)), under the
+                                        # vertical metals x 7575-7760 with no contact (chip 1's metal shot is plain metal over the row;
+                                        # under the wide metal x 7664-7708 the clean shot has residue colours, no ring in either chip)
+P 7778,14377:7812,14411                # pad
+C 7795,14394 s=20x20
+M 7795,14394 x8250 w=14
+P 8233,14377:8267,14411                # pad
+C 8250,14394 s=20x20
+P 8250,14383:8598,14401                # under bc1's three rails
+P 8581,14377:8615,14411                # pad
+C 8598,14394 s=20x20
+M 8598,14394 x9378 w=14
+P 9361,14377:9395,14411                # pad
+C 9378,14394 s=20x20
+P 9378,14381:9764,14399                # under the W rail, the M rail's stem and the E rail's feeder
+P 9747,14376:9781,14410                # pad
+C 9764,14393 s=20x20
+M 9757,14392 x10052 y14660 w=13         # east and south: the thin metal x 10052 of piece inv
+# --- line y 14437: tl6_p6143 (was bc2_m10007)
+P 7545,14428:7838,14446                # poly row from the west: busl's row tl6_p6143 (its port (7550,14437))
+P 7821,14420:7855,14454                # pad
+C 7838,14438 s=20x20
+M 7838,14437 x8293 w=14
+P 8276,14420:8310,14454                # pad
+C 8293,14438 s=20x20
+P 8293,14428:8641,14446                # under bc1's three rails
+P 8624,14420:8658,14454                # pad
+C 8641,14437 s=20x20
+M 8641,14437 x9421 w=14
+P 9404,14420:9438,14454                # pad
+C 9421,14438 s=20x20
+P 9421,14428:9722,14446                # under the three wide metals
+P 9705,14420:9739,14454                # pad
+C 9722,14438 s=20x20
+M 9715,14437 x10007 y14660 w=13         # east and south: the thin metal x 10007 of piece inv
