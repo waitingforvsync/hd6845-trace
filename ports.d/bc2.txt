@@ -11,7 +11,7 @@ bc2_w15565    M  10226,15515   in   clear of latch unit b: metal x 10226 from th
 bc2_w15607    M  10267,15515   out  latch unit b's lower node (a's bc2_w15029 side): metal x 10267 from the pad (10267,15607) north (not followed)
 # run 2 (2026-11-27), piece inv: the three inverters on the centre block's east rail
 bc2_p14823    P  9872,14823    in   input of the inverter bc2_e14955: poly row from the west, under the E rail
-bc2_e14955    P  9872,14869    out  output row west under the E rail, from the pad (9897,14869)
+# bc2_e14955: no port any more (run 4, piece w2): its output row ends west on the pad (9314,14870), whose thin metal goes south to the second unit of the W rail
 # run 2, piece nand: the three NANDs below them (the four metals above end inside this piece)
 bc2_e15343    M  10137,15290   out  NAND(bc2_e15215, bc2_e15085): thin metal north from its pad (10137,15435) (follower: to the pad (10135,14783) of a bus row)
 bc2_e15517    M  10181,15290   out  NAND(tl6_p6101, bc2_e15085): thin metal east and north from its pad (10137,15608) (seen to a pad (10092,14740))
@@ -27,4 +27,7 @@ lc2_w9079     P  7550,14611    in   bus line y 14611: busl's poly row (its port 
 lc3_e9756     P  7550,14654    in   bus line y 14655: busl's poly row (its port at the same place), by three pads and the leg x 9141 to the pad (9140,14826) (bc2_e14955's input row) and the unit's lower gate row
 bc2_w15042    M  9185,15130    out  NOR(lc2_w9079, lc3_e9756): metal south from its pad (9183,15043) (follower: to y 15784, then east to x 9274)
 vss           M  9463-9513,14860  -  the W rail, on north (not followed to a ground rail)
-vss           M  9463-9513,15170  -  the W rail, on south
+vss           M  9463-9513,15330  -  the W rail, on south
+# run 4, piece w2
+lc2_w9125     P  7550,14567    in   bus line y 14568: busl's poly row (its port lc3_e9798 at the same place), by three pads and the leg x 9226 to the upper gate row of the W rail's second unit
+bc2_w15216    P  9222-9240,15300  out  NOR(lc2_w9125, bc2_e14955): the middle row west and south in the open on x 9222-9240

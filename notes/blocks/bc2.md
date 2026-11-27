@@ -531,6 +531,44 @@ stripped shots, 7x), `ld_*` (the load end, 8x, four shots), `x9399`, overlay `ov
 - **The rail is VSS** by the gate's build (pull-downs on its lands, the load's far end on the M rail, which is
   VCC by drawing). Its join to a ground rail is not drawn.
 
+### Piece `w2`: the W rail's second unit and its inputs (3 transistors, no uncertain item)
+
+2026-11-27 10:07 -0600. Views in `cache/scratch/bc2/w2/`: `west` (the rows' west ends, 4x), `p568a`, `p568c` (pads of the bus
+line), overlay `ov_m`; unit 1's views `col2`, `u2k` in `w1/`.
+
+    bc2_w15216 = NOR(lc2_w9125, bc2_e14955)        (lc2_w9125 is the wire busl also calls lc3_e9798)
+
+With `bc2_e14955` = NOT `lc3_e9756`: high when `lc3_e9756` is high and `lc2_w9125` is low.
+
+- **The unit is a copy of the first, 174 px south** (unit 1 is now the cell `bc2_wnor`; `sameconn` against the
+  commit before: identical). Measured, not assumed: gate rows y 15165-15182 and y 15252-15269 and the middle row
+  y 15208-15225 (`tools/px.py col 9376 ...`: 174 px below unit 1's, each); the same dark line x 9445-9448
+  across both gate rows and both stretches between them, absent on the arms and at the strip (`tools/px.py row Y
+  9406 9466 3 metal,metal1` for Y = 15150 arm, 15172 row, 15194, 15215 strip, 15240, 15260 row, 15283 arm); the
+  middle row's poly end at x 9418-9424 inside the box and plain diffusion at x 9439-9457 east of it; the tie under
+  the thin metal x 9552 (finger tan to y 15248, box y 15252-15279, no hole: `tools/px.py col 9552 15180 15300 4
+  acid1b`).
+- **Lands.** Upper arm: land 2's lower arm y 15142-15158 (land 2 has two arms west with field between them:
+  stripped red - green -8..1 at y 15125-15137). Lower arm: the next land (9458-9502, 15278-15314) with a contact
+  (9479,15292) (`tools/bd2_umap.py 9450 15262 9530 15340 4 4`; `padc`: hole, ring in both chips).
+- **Load.** The strip ends on the VCC land of the inverter `bc2_e15215` under the M rail (contact (9668,15223),
+  piece `inv`): `tools/bd2_umap.py 9626 15196 9704 15250 3 3`.
+- **Upper gate row** from a pad (9227,15173), the south end of the leg x 9226 of **bus line y 14568**, built like
+  the others: `busl`'s row `lc3_e9798` (port (7550,14567)) to a pad (7794,14569), a metal east, a pad
+  (8250,14568), an underpass under the three wide metals, a pad (8597,14567), a metal east over field (nothing
+  under it: `tools/tl5_tracks.py rows row 7540 9240 12 14568`) to the corner x 9226 and south
+  (`tools/tl5_tracks.py h 14568 7540 9240`, `v 9226 14560 15180`: metal in both chips but for the pads, the
+  underpass and 8-10 px ridges at the rows the leg crosses). No branch on the poly stretches.
+- **Lower gate row** from a pad (9312,15261), the south end of a thin metal x 9307-9319 that starts on the pad
+  (9314,14870) (`tools/follow.py 9312 15215 N`: ends there), which is the west end of `bc2_e14955`'s output row
+  y 14860-14878: poly all the way from the row's drawn end at x 9872 (`tools/tl5_tracks.py rows row 9300 9890 10
+  14869`), under the E, M and W rails and the thin metals x 9552, 9399, 9355 without contact (no branch).
+- **Output.** The middle row runs west under the thin metals x 9399, 9355, 9313, 9269 to x 9222, below the pad
+  (9227,15173) and 18 px clear of it, and turns south in the open as a poly column x 9222-9240 (drawn to y 15300:
+  port).
+- Not drawn: the W rail south of y 15330 (the next land down is 32 px tall and there is no third unit of this
+  build under it).
+
 ### Ambiguities (run 4)
 
 11. *(Closed by review round 6: both stretches are firm.)* **The column's two stretches between the gates and the box** (`?D` at (9416-9446, 15008-15034) and
