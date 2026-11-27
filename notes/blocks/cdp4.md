@@ -1,7 +1,10 @@
 # cdp4: central datapath, bottom part (x 7600-10850, y 11200-14000)
 
-Trace: `trace/cdp4.txt`. Scratch: `cache/scratch/cdp4/`. Own tool: `tools/cdp4_tri.py`
-(layers of one region in a single row). Median composite of the eight row C cells:
+Trace: `trace/cdp4.txt`. Scratch: `cache/scratch/cdp4/`. Own tools: `tools/cdp4_tri.py`
+(layers of one region in a single row); and four text measures written during runs 4-15 and committed
+2026-11-27 (until then they lay in the scratch folder, which is not in git, and these notes cited them
+there): `tools/cdp4_cand.py` and `tools/cdp4_candh.py` (is this spot on a thin metal a contact pad?),
+`tools/cdp4_padc.py` (a pad's centre), `tools/cdp4_track.py` (a thin metal's position along a walk). Median composite of the eight row C cells:
 `--comp cdp4_c` (master frame x 8360-8800, y 12790-13300).
 
 ## Status
@@ -374,7 +377,7 @@ are drawn here.
 
 - **North end.** `cdp3` draws its bus N rows to x 10850; each runs on east as one poly row under the
   tracks west of its own and ends in a pad about 34 px square with a contact (ring and bright centre in
-  both metal shots, green hole in the clean shot: `cache/scratch/cdp4/padc.py`). The track starts there:
+  both metal shots, green hole in the clean shot: `tools/cdp4_padc.py`). The track starts there:
   no metal north of any pad (`tools/tl5_tracks.py v X 10300 13760`; `tools/follow.py X 13290 N` ends on
   each pad). The diagonals north-east of the staircase are `regs`' and `wrs`' write strobe lines.
 - **`cdp4`'s staircase.** Each selector output row runs on east of x 10850 to a pad of the same kind; the
@@ -382,7 +385,7 @@ are drawn here.
   (`tools/textmap.py 11176 13306 11228 13362 3`), so it runs through.
 - **No other contact.** Every contact candidate `tools/follow.py` lists on the eight tracks (about 110)
   was read as three strips, along the track in both metal shots and in the clean shot
-  (`cache/scratch/cdp4/cand.py`): none has a pad's pattern (bright, a dark ring of 12-15 px, a bright
+  (`tools/cdp4_cand.py`): none has a pad's pattern (bright, a dark ring of 12-15 px, a bright
   centre, a ring, bright; the metal widened). The dark bars across the tracks are edges underneath:
   `wr_r15`'s poly row (y 11819-11851), the two long edges of the diffusion-coloured rectangle of
   AMB-040 (y 11919-11927, 12178-12186; the tracks cross it, tan under them, with no contact), the n
@@ -418,13 +421,13 @@ north by the same kind of route to its inverter. Each line, from its port of run
 | 7 | 18298 | (12852,18298) - (13174,18296) | (13412,18298) - (13672,18039) | 18037 | (14457,18037) - (14672,18037) | (15713,18037) - (15926,18039) |
 
 - **The horizontals** (thin metal, 12 px): `tools/follow.py 11400 Y E` ends each on its pad; the 68 contact
-  candidates it lists were put through the pad test (`cache/scratch/cdp4/candh.py`): no ring pattern in
+  candidates it lists were put through the pad test (`tools/cdp4_candh.py`): no ring pattern in
   either metal shot at any (five small clean-shot specks).
 - **Hop 1**, under the vertical trunks (x 12880-13130): seven straight poly rows, each between a west pad
   (x 12808 or 12852, alternating) and an east pad (x 13219 or 13174) at the same y; read in the clean shot
   at 2.9x (`hop1_c.png`): no row steps a track.
 - **Diagonals**: east of its pad each line runs east, climbs 260 px north-east and runs east on its row;
-  the ends are from a walk along the metal (`cache/scratch/cdp4/track.py X0 Y0 14440 60`, which cannot
+  the ends are from a walk along the metal (`tools/cdp4_track.py X0 Y0 14440 60`, which cannot
   leave a line: it re-centres within 7 px every 2 px) and an overlay (`ov5d.png`). North-west of them, in
   the same fan, are `regs`' three lines (column 0's and two write/select lines).
 - Crossings named by the review (round 4), none with a pad, ring or pits: a poly column x 12732-12756 under
@@ -594,7 +597,7 @@ pull-down column and VSS contact, gate row, output strip and box). Instance `u6`
 - **Output.** From the framed box (16096-16132, 17422-17450; no thin metal over it in this copy) a poly row
   runs east along y 17428 under two vertical metals (x 16163-16178, `trunks`'; x 16200-16218) with no
   contact, turns south at x 16257 and ends on a pad (16253,17602) (ring and bright centre in both metal
-  shots, green hole in the clean shot: `g5_s.png`, `cache/scratch/cdp4/padc.py`). A thin metal leaves the
+  shots, green hole in the clean shot: `g5_s.png`, `tools/cdp4_padc.py`). A thin metal leaves the
   pad east along y 17605 (one of the four horizontals over the staircase of run 6), turns south at
   (16906,17607) and ends on a pad (16905,18080) (`tools/follow.py 16300 17603 E --gap 16`;
   `tools/tl5_tracks.py h 17606 16270 16900` and `v 16907 17615 18040`: only edge bars of 8-12 px where it
@@ -686,7 +689,7 @@ and D6's the cell `cdp4_ro`, D7's in `regs`).
   metal from pad to pad; the centres at twelve cuts (`tools/busl_both.py h Y 10785 10875`) stay within 3 px.
   `tools/tl5_tracks.py v 10808 3640 15710` and `v 10852 3600 17645`: 134 and 138 dark stretches, all under
   15 px (the edge bars of the poly rows of `cdp1`-`cdp4` that pass under) except four, each read as three
-  strips (`cache/scratch/cdp4/cand.py`) and found to be crossings with no pad: both tracks at y 4660-4677;
+  strips (`tools/cdp4_cand.py`) and found to be crossings with no pad: both tracks at y 4660-4677;
   T2 at y 13633-13651 (`cdp4`'s s7 selector row passing under: two edge bars and dim metal between,
   `tools/textmap.py 10836 13612 10872 13668 3 --acid`) and y 14574-14589. The clean shot's only "holes" are
   the diffusion-coloured rectangle of AMB-040 under both (y 11933-12181) and a dirt particle on the clean
@@ -747,7 +750,7 @@ From the south end of run 8's thin metal (16775,16450):
   16848`: nothing);
 - a poly row west from that pad (y 16855-16875) under six vertical metals (x 16386 `cs_d`, 16342 `rs_d`, 16298
   `rw_d`, 16255 `bd2_rs_n`, 16211, 16168 `e_b`), with no contact (each metal bright between two edge bars in
-  both metal shots, clean shot salmon 42-52 with no hole: `cache/scratch/cdp4/candh.py -v v`; `le_b.png`), to
+  both metal shots, clean shot salmon 42-52 with no hole: `tools/cdp4_candh.py -v v`; `le_b.png`), to
   x ~16130.
 
 **The row's west end** (`le_box.png`, 5x, four shots): at x 16122-16130 the row meets a framed box
@@ -777,7 +780,7 @@ that ambiguity is unchanged by this run.
   9 px) finds no stretch under 24 except the two end pads and three 5 px dips at metal edges ((11052,3635),
   (11268,3635), (11617,3635)).
 - **The pads and metals** (`tr_e.png`, 2.2x): ring, bright centre and hole at (11695,3592) and (11652,3635)
-  (`cache/scratch/cdp4/padc.py`); a thin metal leaves each east. `tools/tl5_tracks.py h 3592 11715 13465` and
+  (`tools/cdp4_padc.py`); a thin metal leaves each east. `tools/tl5_tracks.py h 3592 11715 13465` and
   `h 3636 11672 13545`: no gap of 20 px in both chips; the clean shot's holes on them are the taps.
 - **The taps** (`tap_a.png`, `tap_b.png`, 4.3x; `ov14.png`, 3.3x with `tr1`'s trace; `tools/textmap.py 12232
   3566 12300 3616 3 --acid` and `11976 3612 12040 3660 3 --acid`): each is a widened pad with a ring, a bright
@@ -825,11 +828,11 @@ to an end pad (13560,3636) with a poly south (x 13550-13575), with one more tap 
   12-14 for the metals) and the clean shot is green there (open field); that pad's metal runs east from
   x 13539 along y 3592.
 - **The taps and end pads** (`t15_a.png` .. `t15_d.png`, 3.6-4x, metal and clean;
-  `cache/scratch/cdp4/candh.py -v h`): each a widened pad with ring, bright centre and a hole in the clean shot.
+  `tools/cdp4_candh.py -v h`): each a widened pad with ring, bright centre and a hole in the clean shot.
 - **The polys south**: each is orange in the chip-2 metal shot and red over green by 28-62 in the chip-2
   stripped shot from its pad to y 3680 (`tools/px.py col`). `rst_lat`'s tap poly passes under the other
   net's y 3592 metal, and its end column under that metal and under a third metal on y 3636, with no pad
-  (`candh.py -v h 13822,3592 14039,3592 14039,3636`). The end column (x 14033-14055) is separated from the
+  (`tools/cdp4_candh.py -v h 13822,3592 14039,3592 14039,3636`). The end column (x 14033-14055) is separated from the
   pad (14000,3632) of that third metal by 16 px of field (`tools/px.py row 3632 13984 14060 4`, four shots:
   chip-2 stripped red minus green -5 to -13 at x 14016-14032 against 40-56 on the column) and from that pad's
   own poly at y 3660 by bare ground (x 14020-14028).
@@ -1577,7 +1580,7 @@ leaves north or south; no poly on the land west of the box at y 16865; the box's
 verified buried contact in both chip-2 shots, no metal over it, no pits; it sits on the east edge of a
 diffusion land x ~16030-16097, y 16838-16893 between two gate rows, and the VSS rail has contact rings on
 the lands north and south of it, (16043,16782) and (16043,16940), and none on this one: an output node; the
-row's end is 27 px clear of `e_b`); the six crossings (`cache/scratch/cdp4/candh.py`: no pad, clean-shot
+row's end is 27 px clear of `e_b`); the six crossings (`tools/cdp4_candh.py`: no pad, clean-shot
 minimum 42-52, its three control pads all read as pads; one straight row y 16858-16870; field east and
 south of the pad (16426,16864)); the hop (clean shot uniform with no hole, no ring in either metal shot,
 unlike the rail's real contact (16510,16368); no edge line across it under the rail); the corner (continuous,
