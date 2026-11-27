@@ -374,3 +374,60 @@ In order of value:
 
 - `h_eq_r1_n`, gate 3 of the NOR `eof_w15523` in the west gate column, is NOT `h_eq_r1` (`eof` piece
   `ld566`, firm), so `eof_w15523` = `h_eq_r1` AND NOT `rcs_e4` AND NOT `eof_w16040` (marked, as that NOR is).
+
+## Run of 2026-11-27, piece `s01w`: what the decode's two inputs are
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 09:02 -0600. Wiring only, x 7545-8045, y 14811-14888: no transistor, no
+uncertain item; two joins (full extraction 2,513 nets, was 2,515; 4,838 transistors, 0 errors). Views in
+`cache/scratch/bc1/s/`: `w` (x 7540-7870, 4x) and `e` (x 7860-8200, 3.8x), each metal over clean shot with every
+package's trace.
+
+**`bc1_s0` is the net `busl` calls `tc2_m6404`, and `bc1_s1` is `tl6_p6187`.** The bus lines y 14832 and
+y 14875, which this block drew from x 8040, run on west as plain metals over field (pink in the clean shot under
+their whole length; `tools/tl5_tracks.py h 14828 7540 8200` and `h 14872 ...`: metal in both chips from each pad
+east) to a pad each, (7795,14828) and (7838,14871) (hole in the clean shot; ring and bright centre in chip 2's
+metal shot for the first, in both for the second), and each pad is the east end of a poly row that `busl` draws to
+x 7550 and gives a port: `tc2_m6404` at (7550,14827), `tl6_p6187` at (7550,14870). The rows are salmon and
+unbroken in the clean shot from x 7550 to the pads under the vertical metals x 7575-7760 (view `w`), with no hole
+(a dark speck at (7654,14872) lies under bright, unringed metal in both chips) and no branch (`tools/eof_tee.py`).
+
+Both names are kept (`@alias bc1_s0 tc2_m6404`, `@alias bc1_s1 tl6_p6187`), so the decode's equations read as
+before. Both wires come from the top-left logic across the left bus field (`busl`); the glossary has
+`tl6_p6187` as one of three believed outputs of R8, and `tc2_m6404` enters `tl6` beside them (a metal along
+y 2619 next to theirs at y 2530 and y 2573). `bc2`'s centre block has a second decode of the same build on the
+other two, `tl6_p6101` and `tl6_p6143` (`bc2` runs 2-3, same day). So, believed: the two decodes are R8's two
+two-bit skew fields, this one (which feeds the DISPTMG path through `bc1_dec01_n`) the display enable's.
+
+Not done: the wires' north ends (in `tl6`, `tc2`, `tlb`); the other bus lines.
+
+## Review
+
+### Round 1 (full review), 2026-11-27: piece `s01w`
+
+A fresh Claude Fable 5.2 agent, on commit de735bd, 8 images in `cache/scratch/bc1/review-1/`. Told to suspect:
+which row meets which pad (a step of one track under the vertical metals would swap or misname the inputs), a
+contact from either row to a vertical metal (the speck at (7654,14872)), the two pads, the metal stretches to
+x 8040 and their join to the earlier drawing, and which bus line turns south where.
+
+**No finding changes a connection.** One geometry remark, fixed: the two new metals were drawn 14 wide and are
+about 20 (y 14818-14838, y 14862-14882); the earlier-drawn parts sit up to 4 px off the metal (left as drawn).
+
+Checked and found correct by the reviewer: `busl`'s rows end at x 7550 on the same bands (y 14816-14838 and
+y 14859-14881) and each runs straight to its own pad (the field lines y 14806, 14849, 14892 carry no poly from
+x 6860 to the pads: no track step); no contact to the vertical metals (no ring in either metal shot, no hole in
+the clean shot, the rows keep their 18 px width; no branch); the speck at (7654,14872) an artefact (the same
+pattern on the row y 14914 under the same step of that metal); both pads with ring and bright centre in both
+chips, a hole in the clean shot, field north and south, open poly west and metal leaving east only; both metals
+continuous in both chips over plain field; row 0 feeds the outer L (south at x 8186, `bc1_s0`) and row 1 the
+inner (x 8143, `bc1_s1`), 24 px apart at the corner. Could not check: chip 2's stripped shot under the wide
+metals (fringes), so "no contact" there rests on the two metal shots and the clean shot; the three vertical
+metals over the rows are drawn by no package at this height.
+
+Connections before and after the fix (commit de735bd against the fixed tree):
+
+    tools/t.sh bc1 sameconn.py de735bd            ->  connections identical
+    .venv/bin/python tools/sameconn.py de735bd    ->  connections identical
+
+Recorded 2026-11-27 09:11 -0600.
+
+Round 1: no findings that change a connection.
