@@ -257,3 +257,30 @@ turn west, at y 17302, 17346, 17388, 17432, and cross the supply rail the same w
   metal ends at about y 17527 and the supply rail runs on south past y 17760. Under the undrawn stretch is an
   inverter (`regs` run 5: `d7_out_n` = NOT `rd_b7`, x 15577-15895, y 17372-17491); `trace/regs.txt`
   draws the ground rail to y 17527 and the supply rail to y 17500.
+
+## Re-read item R2 (2026-11-27): the channel's 16 tracks
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 07:29 -0600. Region x 14100-15880, y 16550-17100. **Found as drawn; no trace
+line changed.**
+
+R2 asks for the 16 tracks end to end in the clean shot (the notes cited the metal shot for the track checks).
+Done with the audit written for R1, `tools/bd1_audit.py 14100 16550 15880 17100` (every trace file loaded:
+55 drawn metal items), and `tools/bd1_sheet.py` for the flagged spots (sheet `cache/scratch/bd3/r2/sh1.png`):
+
+1. Breaks (a drawn thin metal with no metal in either metal shot along 14 px or more): **none**.
+2. Undrawn metal: **none**; and on two overlays of the whole region (`ovw.png`, `ove.png`, 1.5x, metal shot
+   with every package's trace) every metal has its outline: the 16 tracks x 14998-15560 top to bottom, the
+   rails, the horizontal lines y 16920-17090 and the short verticals of the west half.
+3. Contact holes in the clean shot under drawn thin metal: 19, of which 17 are drawn contacts (`sel`'s and
+   `bd3`'s). The other two: (15214,16709) is a triangular scratch beside a plain track (bright and unringed in
+   both chips); (14307,16754) is the upper rim of the drawn contact (14306,16778)'s pad. Three drawn contacts
+   had no olive hole, (14456,17084), (14239,16865), (14306,16778): each is a pad with ring and bright centre in
+   both metal shots and a red-brown box in the clean shot: real. So **no contact that is not drawn, and every
+   drawn contact real**.
+4. Poly gaps (field colour inside a drawn thin poly): **none**.
+
+Limits as in the tool's docstring: its metal thresholds are weak on dim tracks (hence the two overlays), and it
+does not look for a contact on open diffusion beside a metal.
+
+## Review
+
