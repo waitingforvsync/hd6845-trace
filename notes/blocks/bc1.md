@@ -374,3 +374,31 @@ In order of value:
 
 - `h_eq_r1_n`, gate 3 of the NOR `eof_w15523` in the west gate column, is NOT `h_eq_r1` (`eof` piece
   `ld566`, firm), so `eof_w15523` = `h_eq_r1` AND NOT `rcs_e4` AND NOT `eof_w16040` (marked, as that NOR is).
+
+## Run of 2026-11-27, piece `s01w`: what the decode's two inputs are
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 09:02 -0600. Wiring only, x 7545-8045, y 14811-14888: no transistor, no
+uncertain item; two joins (full extraction 2,513 nets, was 2,515; 4,838 transistors, 0 errors). Views in
+`cache/scratch/bc1/s/`: `w` (x 7540-7870, 4x) and `e` (x 7860-8200, 3.8x), each metal over clean shot with every
+package's trace.
+
+**`bc1_s0` is the net `busl` calls `tc2_m6404`, and `bc1_s1` is `tl6_p6187`.** The bus lines y 14832 and
+y 14875, which this block drew from x 8040, run on west as plain metals over field (pink in the clean shot under
+their whole length; `tools/tl5_tracks.py h 14828 7540 8200` and `h 14872 ...`: metal in both chips from each pad
+east) to a pad each, (7795,14828) and (7838,14871) (hole in the clean shot; ring and bright centre in chip 2's
+metal shot for the first, in both for the second), and each pad is the east end of a poly row that `busl` draws to
+x 7550 and gives a port: `tc2_m6404` at (7550,14827), `tl6_p6187` at (7550,14870). The rows are salmon and
+unbroken in the clean shot from x 7550 to the pads under the vertical metals x 7575-7760 (view `w`), with no hole
+(a dark speck at (7654,14872) lies under bright, unringed metal in both chips) and no branch (`tools/eof_tee.py`).
+
+Both names are kept (`@alias bc1_s0 tc2_m6404`, `@alias bc1_s1 tl6_p6187`), so the decode's equations read as
+before. Both wires come from the top-left logic across the left bus field (`busl`); the glossary has
+`tl6_p6187` as one of three believed outputs of R8, and `tc2_m6404` enters `tl6` beside them (a metal along
+y 2619 next to theirs at y 2530 and y 2573). `bc2`'s centre block has a second decode of the same build on the
+other two, `tl6_p6101` and `tl6_p6143` (`bc2` runs 2-3, same day). So, believed: the two decodes are R8's two
+two-bit skew fields, this one (which feeds the DISPTMG path through `bc1_dec01_n`) the display enable's.
+
+Not done: the wires' north ends (in `tl6`, `tc2`, `tlb`); the other bus lines.
+
+## Review
+

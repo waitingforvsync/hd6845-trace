@@ -277,3 +277,20 @@ M 7274,14040 y14184
 M 7317,14040 y14229
 M 7360,14040 y14272
 M 7404,14040 y14316
+
+# ================================================================ run of 2026-11-27, piece s01w: the decode's two inputs at their west ends
+# The bus lines y 14832 (bc1_s0) and y 14875 (bc1_s1) run on west of where they were drawn (x 8040) as plain metals
+# over field to a pad each, and each pad is the east end of a poly row that busl draws to x 7550: bc1_s0 is the net
+# busl calls tc2_m6404 (its port (7550,14827)), bc1_s1 is tl6_p6187 (its port (7550,14870)). Rows salmon and unbroken
+# in the clean shot under the vertical metals x 7575-7760 (no hole; a dark speck at (7654,14872) with bright metal in
+# both chips and no ring); pads with hole and ring; tools/eof_tee.py: no branch.
+P 7545,14818:7795,14836                # s0's poly row, from busl's end
+P 7778,14811:7812,14845                # pad
+C 7795,14828 s=20x20
+M 7795,14828 x8045 w=14
+P 7545,14862:7838,14880                # s1's poly row, from busl's end
+P 7821,14854:7855,14888                # pad
+C 7838,14871 s=20x20
+M 7838,14872 x8045 w=14
+@alias bc1_s0 tc2_m6404
+@alias bc1_s1 tl6_p6187
