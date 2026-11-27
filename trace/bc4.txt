@@ -131,16 +131,17 @@ D 9768,17134:9788,17164                # tie finger, south from the strip (in th
 # ================================================================ run 5 (2026-11-27), piece in2: the two NORs' other inputs to their north ends
 # bc4_m17040: the thin metal x 9177-9191 runs north from y 16990 (over the undrawn diffusion rectangle
 # y 16782-16997 without contact: plain tan, no hole, the metal not widened; then over field) to its END on a pad
-# (9184,16647); the pad's poly row y 16639-16659 runs east under the thin metals x 9270, 9313, 9357 (no contact)
+# (9184,16647); the pad's poly row y 16639-16659 runs east under the thin metals x 9229, 9270, 9313, 9357 (no contact)
 # to x 9372 (port): beyond, at x 9375-9460 against the west rail, a structure that is not read.
 M 9184,16990 y16647 w=13
 P 9167,16630:9203,16664                # pad
 C 9184,16647 s=20x20
 P 9184,16639:9372,16659                # row east (port)
-# bc4_m17062: the thin metal x 10001-10014 runs north from y 17010 over field to its END on a pad (10007,16778);
+# bc4_m17062: the thin metal x 10001-10014 runs north from y 17010 (over field and, without contact, over a poly
+# row y 16857-16872: review round 6) to its END on a pad (10007,16778);
 # the pad's poly row y 16767-16788 runs west under the thin metal x 9958-9972 (no contact) to x 9925 (port):
 # beyond, at x 9870-9920 beside the east rail, a structure that is not read.
 M 10007,17010 y16778 w=13
 P 9990,16761:10024,16795               # pad
 C 10007,16778 s=20x20
-P 9925,16767:10007,16788               # row west (port)
+P 9930,16767:10007,16788               # row west (port; review round 6: stopped short of the box's frame line x 9918-9926)

@@ -13,6 +13,6 @@ vss           M  9463-9513,17250  -  the same, on south
 vcc           M  9638-9686,17100  -  the wide metal east of it (bc2's M rail's line), drawn y 17100-17180 only; by the gate's build
 # run 4, piece e17127 (bc2_e15690's row has no port any more: it is the lower gate of bc4_e17127)
 bc4_e17127    M  10008,17150   out  NOR(bc4_m17062, bc2_e15690): thin metal south from the pad (10007,17127)
-bc4_m17062    P  9925,16777    in   the east NOR's other input: from its gate row by the pad (10005,17062), the thin metal x 10008 north, the pad (10007,16778) and the poly row y 16767-16788 west to here; beyond, a structure beside the east rail, not read
+bc4_m17062    P  9930,16777    in   the east NOR's other input: from its gate row by the pad (10005,17062), the thin metal x 10008 north, the pad (10007,16778) and the poly row y 16767-16788 west to here; beyond, a structure beside the east rail, not read
 vss           M  9810-9858,17000  -  the east rail (the line of bc2's E rail), drawn y 17000-17265 only; by the gate's build
 vss           M  9810-9858,17265  -  the same, on south

@@ -208,13 +208,16 @@ Matt Godbolt, on Claude Fable 5.2, 2026-11-27 15:57 -0600. Views in `cache/scrat
   (9184,16647)**: ring, bright centre, ring down the track in both metal shots and a green centre in the clean
   shot (`tools/px.py col 9184 16625 16700 3 metal,metal1,acid1b`), ground north of it. The pad's poly row
   y 16639-16659 runs east (`tools/tl5_tracks.py rows row 9190 9480 6 16649`: poly to x 9412) under the thin
-  metals x 9270, 9313, 9357 without contact (no hole: `h 16649 9210 9370`; no branch) to x 9372 (port).
+  metals x 9221-9237, 9270, 9313, 9357 (four: review round 6) without contact (no hole: `h 16649 9210 9370`; no
+  branch) to x 9372 (port). A 10 px dark spot on the metal at (9183,16926), in both metal shots, is not a contact
+  (review round 6: opposite halves of the metal in the two chips, width kept, the clean shot uniform tan).
   Beyond, between x 9375 and the west rail, stands a structure that is not read.
-- **`bc4_m17062`**: the thin metal x 10001-10014 runs north from y 17010 over field (`tl3_thin 10000 10016 16730
-  17015`: bars of 10-11 px at y 16849 and y 16872) and **ends on a pad (10007,16778)** (the same profile:
+- **`bc4_m17062`**: the thin metal x 10001-10014 runs north from y 17010 over field and, without contact, over a poly row y 16857-16872
+  (review round 6; `tl3_thin 10000 10016 16730 17015`: bars of 10-11 px at y 16849 and y 16872, its edges;
+  metal bright between them, salmon without a hole) and **ends on a pad (10007,16778)** (the same profile:
   `tools/px.py col 10007 16755 16830 3 ...`; a green centre in a salmon pad (9990-10025, 16762-16792): view
   `e_end`), ground north of it. The pad's poly row y 16767-16788 runs west under the thin metal x 9958-9972
-  without contact (no hole: `h 16777 9930 9990`; no branch) to x 9925 (port). Beyond, at x 9870-9920 beside the
+  without contact (no hole: `h 16777 9930 9990`; no branch) to x 9930 (port). Beyond, at x 9870-9920 beside the
   east rail, stands a structure with a framed box that is not read.
 
 **Believed, not read**: each of these rows is the output row of another unit of the same build on its rail (the
@@ -401,3 +404,31 @@ Connections before and after the fixes (commit 47a222a against the fixed tree):
 Recorded 2026-11-27 15:51 -0600.
 
 Round 5: no findings that change a connection.
+
+### Round 6 (full review), 2026-11-27: run 5, piece `in2`
+
+A fresh Claude Fable 5.2 agent, on commit fe6a495, 11 images in `cache/scratch/bc4/review-6/`. Told to test: the two
+end pads (two-part test; the metals ending; anything else leaving), a contact on the way (wire W over the
+diffusion rectangle; the spot (9186,16887)), each metal one piece and the same as the earlier-drawn part, the
+rows (one poly, no contact at the crossings, no branch, not a gate; the drawn ends short of the unread
+structures).
+
+**No finding changes a connection.** Notes corrected: row W crosses four thin metals, not three (the fourth at
+x 9221-9237, no contact); wire E is not over field all the way (a poly row y 16857-16872 under it, no contact);
+a 10 px dark spot on wire W at (9183,16926) is not a contact. Geometry: row E's drawn end moved from x 9925,
+which sat on the frame line (x 9918-9926) of the box beyond, to x 9930.
+
+Verdicts: both pads real contacts (a green hole in a salmon pad; ring with a bright centre in both metal shots),
+each metal ending there with bare ground north for 50 px or more, nothing else leaving either pad; no contact
+on the way ((9186,16887) is a chip-2-only speck); each metal one piece across y 16990 and y 17010, no branch;
+each row one poly, no contact at any crossing, no branch, field on both sides; x 9372 is 26 px short of the
+change at about x 9398. Not checked: the structures beyond both ports.
+
+Connections before and after (commit fe6a495 against the fixed tree):
+
+    tools/t.sh bc4 sameconn.py fe6a495            ->  connections identical
+    .venv/bin/python tools/sameconn.py fe6a495    ->  connections identical
+
+Recorded 2026-11-27 16:05 -0600.
+
+Round 6: no findings that change a connection.
