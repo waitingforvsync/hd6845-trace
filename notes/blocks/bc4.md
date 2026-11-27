@@ -250,3 +250,23 @@ here; the fix check reads the addition against the photos.
 Recorded 2026-11-27 15:17 -0600.
 
 Round 3: one finding that changes a connection (a wire's end: a pad and its metal not drawn), fixed. Fix check next.
+
+### Round 4 (fix check), 2026-11-27: run 3, piece `n17127`
+
+A fresh Claude Fable 5.2 agent, on the changes 3874460..677970d only, 5 images in `cache/scratch/bc4/review-4/`.
+Asked: is (9183,17040) a real contact, the pad one poly with the column and the row, the metal ending on it from
+the north, nothing else leaving it, and no link to the output's pad 87 px south; the supply contact's centre
+and the rail's width; the label's point.
+
+**No findings.** The pad: a ring of about 40 px with a yellow centre in both metal shots, a dark hole mid-pad in
+both chip-1 stripped shots (93/82/44 against salmon 182/145/89) and a pit in chip 2's; one poly (salmon to
+y 17061, then open poly to the row, orange in both metal shots with no cross line); the metal yellow at
+x 9178-9193 from y 17002 to y 17017 and north of y 16990 (the 8 px bar at y 16992-17000 crosses the neighbouring
+metals and ground too: an edge underneath), none from y 17044 to y 17121; nothing else leaves the pad; plain
+ground between the two pads at y 17098-17104. The supply contact's centre (9660,17142), the land
+(9635-9690, 17121-17162) and the metal's edges x 9637 / 9686 as drawn. The label lies on the metal; the
+extraction gives `bc4_w17127` = NOR(`bc2_e15517`, `bc4_m17040`). Nothing changed in the trace.
+
+Recorded 2026-11-27 15:26 -0600.
+
+Round 4: no findings.
