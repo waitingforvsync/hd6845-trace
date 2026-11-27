@@ -1147,7 +1147,7 @@ P 7117,2500:7133,2582              # from the north (open poly y 2518-2572, salm
 P 7104,2577:7140,2612              # pad
 C 7120,2596 s=14x14
 M 7114,2597 x7142 w=13             # on the pad, to its east edge
-?M 7140,2597 x7164 w=13            # across the gap between the pad's east edge and the west end of tl4_w5068's strip: a bright piece at x 7146-7154 between two dark bars. Chip 1 reads metal there (A-C against 7-9 for bare ground), chip 2 only 9-A, which is bare-ground level; the clean shot is protected either way. Drawn because the follower runs through and the pad has no other way out; the review could not confirm it in chip 2
+M 7140,2597 x7164 w=13            # across the gap between the pad's east edge and the west end of tl4_w5068's strip: a bright piece at x 7146-7154 between two dark bars. Chip 1 reads metal there (A-C against 7-9 for bare ground), chip 2 only 9-A, which is bare-ground level; the clean shot is protected either way. Drawn because the follower runs through and the pad has no other way out; the review could not confirm it in chip 2  [run 12's review, 2026-11-27: metal there, so no longer `?`: edge lines y 2584-2588 and y 2606-2610 across the gap in both metal shots, chip 1 at 184-233 on it, clean shot pink over its full height]
 M 7162,2597 x7314 y2814 x7714 w=13 # east, lengthwise over that strip without contact, south at x 7308-7320, east on the track y 2814
 P 7692,2798:7722,2830              # pad
 C 7706,2814 s=14x14
@@ -1220,7 +1220,8 @@ P 6469,2652:6750,2666              # tc1_m7100's row, on west
 P 6452,2644:6486,2678              # pad
 C 6469,2661 s=16x16
 M 6400,2663 x6469 w=16             # tl6's metal from tcw's track x 6276
-M 6750,2640 x6532 y2700 w=52       # the ground branch, on west and south into tcw's rail
+M 6750,2638 x6507 w=64             # the ground branch, on west (review of run 12: its north edge is about y 2604-2606)
+M 6532,2606 y2700 w=50             # and south at its west end into tcw's rail
 P 8350,2890:8398,2907              # tc1_bus2814's poly, on east
 P 8381,2880:8415,2914              # pad
 C 8398,2897 s=16x16

@@ -845,6 +845,8 @@ bright piece at x 7146-7154 between two dark bars (the pad's east edge and the s
 end), then the line (`tools/textmap.py 7100 2576 7190 2616 2`: chip 1 A-C there against 7-9 for
 bare ground; chip 2 only 9-A). The pad has no other way out. Because chip 2 does not show it, that piece is drawn `?M`
 (x 7140-7164): `tc1_bus2814`'s north poly and its track are joined only through it.
+(Run 12's review, 2026-11-27: read as metal by a second, independent reading, on the edge lines in both
+metal shots; the piece is now plain `M`. See "Run 12's review".)
 
 A small spot on `c4l_l3`'s poly at (7208-7212, 2506-2510), ring-like in the clean shot at
 4x, is not a contact: `tools/textmap.py 7150 2490 7230 2526 2` shows no 'g' hole (R-G drops to
@@ -892,7 +894,7 @@ same shape; `bc1_dec01_n` (bits 5,4 = 1,0) is the line that passes the second la
 path (`notes/blocks/eof.md`). `bc2`'s decode reads `bc2_e15215` = NOT `r8_b6_q`, `bc2_e15085` = NOT
 `r8_b7_q` and its three NANDs likewise: bits 7,6, the datasheet's cursor skew.
 
-**One uncertain item lies on bit 6's route**, drawn in run 11: the `?M` at (7140-7164, 2597) between the pad
+**One uncertain item lay on bit 6's route** (settled by this run's review, below: the piece is now plain `M`, and all eleven equations of the two decodes are firm), drawn in run 11: the `?M` at (7140-7164, 2597) between the pad
 (7120,2596) and the track. So `bc2_e15215` = NOT `r8_b6_q` and `bc2_e15517` depend on it
 (`tools/unsure.py --equations`); the other three bits' routes carry none, and `bc1`'s five equations and
 `bc2_e15085`, `bc2_e15690`, `bc2_e15343` are firm. Measured again this run, for the reviewer to judge:
@@ -1635,6 +1637,47 @@ shot and the hole in chip 1's stripped shot: two chips). The four placeholders w
 `tc1_bus#` (`tc1_b` is a former name). Neither changes a connection:
 `tools/t.sh tc1 sameconn.py 0690a1c`: `connections identical`;
 `.venv/bin/python tools/sameconn.py 0690a1c`: `connections identical`.
+
+Round 1: no findings that change a connection.
+
+### Run 12's review
+
+**Round 1 (full review, 2026-11-27 09:35 -0600; fresh reviewer on Claude Fable 5.2, on commit `1f0ff16`, 14 images in
+`cache/scratch/tc1/review-20/`).** Covered: piece `r8hi`, both regions. Told to suspect: a step of one track
+(which line joins which, in the gap and along the two tracks), a contact or break on any long stretch (the two
+rows under the ground branch; taps on the tracks), each of the nine pads, the two underpasses, whether the branch
+and `tcw`'s rail are one metal, the corner (9875,2897) and the pad below it. Asked besides for an independent
+verdict on run 11's `?M 7140,2597 x7164`.
+
+**No findings.** One geometry remark, fixed: the ground branch's north edge is at about y 2604, not 2614 (drawn
+now y 2606-2670, the leg south as its own line x 6507-6557).
+
+**The `?M` at (7140-7164, 2597): metal there** (the reviewer's own evidence): chip 1's metal shot reads 184-233
+at x 7147-7150, y 2594-2602 against 141-159 for bare ground beside it; both metal shots have unbroken dark edge
+lines at y 2584-2588 and y 2606-2610 right across x 7140-7160, as dark as the edges of certain metal (control:
+the track at x 8430), where open field would have none; chip 2's stripped shot has the metal ghost's two outlines
+at the same heights; the clean shot is pink over the full height y 2586-2610 at x 7149, as under certain metal.
+Chip 2's brightness alone (165-189) is ground level, but chip 2 dims every short piece between two dark bars (the
+pad's own crescent reads 125-141); the two bars at x 7141 and x 7156 are the pad's and the strip's poly edges
+under the metal. With the tracer's column profiles (run 12's notes) this is two independent readings: the item
+is now plain `M`. Ambiguity closed; `bc2_e15215` = NOT `r8_b6_q` and `bc2_e15517` = NAND(`bc2_e15085`,
+`r8_b6_q`) go from "depends" to firm.
+
+Checked and found correct by the reviewer. Region 1: all four lines run straight across at `tl6`'s heights and
+run 11's; row a and metal b unbroken, no branch, no contact; pads (6426,2619) and (6469,2661) with ring, bright
+centre and clean-shot hole, their metals arriving from the west and ending there, one poly leaving each to the
+east; rows c and d unbroken salmon under the branch, no hole; the branch and `tcw`'s rail one metal (the dark
+line at y 2688-2692 is 4-6 px, the diffusion edge beneath, and chip 1 is bright through it). Region 2: each west
+poly enters its own pad; all seven pads have contacts; both tracks pass the two-chip test end to end with no
+branch but the two south arms; pink under both (two dark patches in the clean shot, at (9267-9285, 2925-2958)
+and (9494-9503, 2894-2902), have bright unringed metal in both chips); underpasses straight, salmon, no hole or
+ring; the upper track turns at (9875,2897) onto the pad (9874,2941), no metal east or north, the pad's poly
+going south; the lower turns at x 9507 and is continuous to the pad (9506,3026). Not checked on a view (text
+tools only): the track stretches x 8470-9020 and x 9340-9470; `tl6`'s and `cdp1`'s own geometry beyond the joins.
+
+Connections before and after the fixes (commit `1f0ff16` against the fixed tree):
+`tools/t.sh tc1 sameconn.py 1f0ff16`: `connections identical`;
+`.venv/bin/python tools/sameconn.py 1f0ff16`: `connections identical`.
 
 Round 1: no findings that change a connection.
 
