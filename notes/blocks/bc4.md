@@ -87,10 +87,10 @@ Matt Godbolt, on Claude Fable 5.2, 2026-11-27 15:02 -0600. Region x 9160-9700, y
 `a_acid1b`, `a_metal`, `a_acid` (the gap west of the rail, 7x), `u_c`, `u_m` (the unit, 4.3x), `ld_acid1b`,
 `ld_metal`, `ld_acid` (the load end, 8x), `west` (the rows' west ends, 7x), overlays `ov`, `ov_m`.
 
-    bc4_w17127 = NOR(bc4_p17084, bc2_e15517)                    (firm)
+    bc4_w17127 = NOR(bc4_m17040, bc2_e15517)                    (firm)
 
 **The first load of a cursor-skew decode line**: the output is low whenever R8's bits 7,6 are not 0,1
-(`bc2_e15517` high) or `bc4_p17084` is high.
+(`bc2_e15517` high) or `bc4_m17040` is high.
 
 The unit has the build of `bc2`'s first two on this rail and is drawn as a copy of its cell
 (`@inst bc2_wnor 0,2084`). Each part was measured here, not taken from the cell:
@@ -116,7 +116,8 @@ The unit has the build of `bc2`'s first two on this rail and is drawn as a copy 
   plain across the gap (`tools/px.py row 17127 9436 9660 4 metal,acid,acid1b`: blue 87-91, stripped red - green
   18-30), tan under the thin metal x 9545-9560, under a poly block x 9584-9628 (`col 9600 17085 17200 4`: poly
   y 17105-17189 with edge lines at y 17117-17121 and y 17145-17153), onto a land under the M rail
-  (`tools/bd2_umap.py 9626 17090 9704 17170 3 4`: tan (9635-9690, 17122-17160); contact (9650,17150): hole, ring).
+  (`tools/bd2_umap.py 9626 17090 9704 17170 3 4`: tan (9635-9690, 17122-17160); contact centred (9661,17143):
+  hole, ring in both chips; review round 3 moved it from (9650,17150)).
 - **Tie**: under the thin metal x 9545-9560 the strip's tan runs on south to y 17160, then a framed box
   (y 17162-17190) to which the block's bottom-left reaches (view `ld_acid1b`). **No contact of the thin metal**
   (`bc2_e15343`'s) there: it is not widened (17-19 px bright at y 17150-17158, none over the frame), the clean
@@ -125,7 +126,11 @@ The unit has the build of `bc2`'s first two on this rail and is drawn as a copy 
 - **The upper gate row** runs west under the same five thin metals without contact (`h 17084 9205 9400`: no
   hole; no branch) to x 9200, where it meets a poly column x 9178-9200 that comes from the north
   (`tools/tl5_tracks.py rows col 16980 17100 6 9189`: poly y 17052-17086; orange with an outline on its west
-  and south in the metal shot: view `west`). Drawn to y 17055 (port): placeholder `bc4_p17084`.
+  and south in the metal shot: view `west`). **It ends on a contact pad (9183,17040)** (review round 3; the tracer
+  had stopped the poly at y 17055 as a port "from the north"): pad 9166-9200 x 17023-17057, a hole in the clean
+  shot and ring with a bright centre in both metal shots (`padc`), on which a thin metal x 9177-9193 from the north
+  ends (`tools/tl3_thin.py 9176 9194 16700 17020`: bars of 8-9 px only down to the pad). Drawn to y 16990 (port):
+  placeholder `bc4_m17040`.
 - **Rails**: the wide metal x 9463-9513 is the west rail of `bc2` (it runs on south from there; its metal between
   y 16335 and y 17020 is not drawn) and the wide metal x 9642-9698 its M rail's line. They are labelled `vss` and
   `vcc` here by the gate's build, as in `bc2`: neither is followed to a supply.
@@ -136,7 +141,7 @@ In `ports.d/bc4.txt`.
 
 ## Not done
 
-Everything else: what `bc2_e15690`'s row and the third line's pad lead to; `bc4_p17084`'s source and `bc4_w17127`'s loads; the diffusion rectangle (9060-9255, 16782-16997) under wire A; `bc2_e15343`'s route; the rails; the rest of the region.
+Everything else: what `bc2_e15690`'s row and the third line's pad lead to; `bc4_m17040`'s source and `bc4_w17127`'s loads; a poly row y 17246-17263 that crosses under the west rail against the south edge of the land (9458-9502, 17188-17240) (a pull-down on that land: review round 3); a poly block east of the M rail from x 9698 (a mirror-image load on the same VCC land?); the diffusion rectangle (9060-9255, 16782-16997) under wire A; `bc2_e15343`'s route; the rails; the rest of the region.
 
 ## Review
 
@@ -205,3 +210,43 @@ nothing else):
 Recorded 2026-11-27 14:58 -0600.
 
 Round 2: no findings that change a connection.
+
+### Round 3 (full review), 2026-11-27: run 3, piece `n17127`
+
+A fresh Claude Fable 5.2 agent, on commit 3874460, 19 images in `cache/scratch/bc4/review-3/`. Told that the cell's
+master stands and the copy's fit is unchecked; to suspect each shape of the shifted cell, the column and its side
+of the edge line, the arms and lands, the middle box, the strip to the VCC land, a contact of the thin metal
+x 9552, the block, the crossings, the output pad, the upper row's corner and what lies beyond it, and anything
+the cell does not have.
+
+**The gate and its equation stand. One finding changes where a wire ends, fixed:** the upper input's poly column
+does not come "from the north" past y 17055: it ends on a contact pad, centre about (9183,17040), on which a thin
+metal x 9177-9193 from the north ends (`tools/tl5_tracks.py v 9184 17000 17260`: metal to y 17016, ring
+y 17017-17036, bright centre y 17037-17043 in both chips, no metal y 17044-17121, a clean-shot hole at y 17039).
+The tracer checked it (`padc`: hole, ring in both chips) and drew the pad, the contact and the metal to y 16990;
+the net's placeholder is now `bc4_m17040` (it had a poly-row placeholder before, which never reached main).
+
+Geometry, fixed: the VCC contact is centred about (9661,17143), not (9650,17150); the M rail is x 9638-9686 here.
+For the record (in "Not done"): from x 9698 an undrawn poly block (y 17102-17190) carries the same two edge
+lines, a mirror-image load, so the VCC land is probably shared eastwards; and a poly row y 17246-17263 crosses
+under the west rail directly against the lower land's south edge (tan, salmon, tan down x 9490 with no field
+between): a pull-down with that land as its source, not this gate's.
+
+Checked and found correct: the copy against the master (row profiles at seven heights and side-by-side views:
+every cell shape within about 3 px at +2,084); the column (the edge line x 9446-9449 across both gate rows and
+both bands, absent on the arms and where the strip leaves; field east of it); both arms continuous tan into
+their lands, each land one region with one contact; the box a buried contact, no third gate; the strip unbroken
+from x 9442 to the VCC land with no poly and no contact under the rail or the thin metal; the tie a pass-over
+(the metal stays 12 px wide, no hole); no contact at any crossing, including the output's metal over the lower
+row at (9184,17170); no link between the rows, no branch; the pad (9183,17127) a real contact with the metal
+leaving south only; the corner one poly with the upper row, nothing west or south. Could not check: the
+column's bands between the gate rows are diffusion by edge lines only (chip 2's stripped colour reads
+field-like there, in the master too); the strip under the load block is inferred from the two edge lines; poly
+continuity across the 8 px dark lines at x 9408-9414 and at the tie box's frame.
+
+The fix adds a pad, a contact and a metal to one net and renames it, so no "connections identical" line belongs
+here; the fix check reads the addition against the photos.
+
+Recorded 2026-11-27 15:17 -0600.
+
+Round 3: one finding that changes a connection (a wire's end: a pad and its metal not drawn), fixed. Fix check next.

@@ -1,2 +1,2 @@
 # bc4: bottom-centre random logic, south part
-9160,17020:9700,17250  logic  NOR (west rail, y 17127) | bc4_w17127 = NOR(bc4_p17084, bc2_e15517): the first load of a cursor-skew decode line
+9160,17020:9700,17250  logic  NOR (west rail, y 17127) | bc4_w17127 = NOR(bc4_m17040, bc2_e15517): the first load of a cursor-skew decode line
