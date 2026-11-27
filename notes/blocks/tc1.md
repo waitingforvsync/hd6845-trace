@@ -867,6 +867,89 @@ right rail shows the same) and dirt: nothing drawn. Under the rail's west branch
 is 169/139/119, nearer to protected diffusion (167/137/120 on the supply region) than to pink;
 it lies between two poly rows 4-6 px away and has no ring on it: nothing drawn.
 
+## The links of R8's four high bits (run 12, 2026-11-27; wiring, traced, extracted)
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 09:23 -0600. Piece `r8hi`. Wiring only: no transistor, no uncertain item; six
+joins. Branch `tc1` contains branches `bc1` and `bc2` (their pieces of the same day), so that the names can be
+checked together: full extraction 2,519 nets, 4,855 transistors, 0 errors. Views in `cache/scratch/tc1/r8/`:
+`w` (the west gap, 3.3x), `pad_a`, `pad_b` (its two pads in four shots, 6x), `vss` (the ground branch's end),
+`e1` (the two polys' east ends), `e3` and overlay `ov_u` (the underpasses), `e2` (the ends at R8's cells).
+
+**Result: the four wires that end in the two two-bit decodes of the bottom-centre logic are R8's bits 4-7.**
+
+| wire | is | by |
+|---|---|---|
+| `bc1_s0` (`tc2_m6404`) | `r8_b5_q` | the row y 2612-2626, pad (6426,2619), `tl6`'s metal y 2619 |
+| `bc1_s1` (`tl6_p6187`) | `r8_b4_q` | one metal y 2575 from x 6750 to `tl6`'s at x 6400 |
+| `tl6_p6143` (`tc1_bus2858`) | `r8_b7_q` | west: one open poly row y 2520-2540; east: the track y 2941 |
+| `tl6_p6101` (`tc1_bus2814`) | `r8_b6_q` | east: the track y 2897 (west: `tlb`'s poly, already drawn) |
+
+So `bc1`'s decode reads `bc1_s0_n` = NOT `r8_b5_q`, `bc1_s1_n` = NOT `r8_b4_q`, `bc1_dec00_n` =
+NAND(`bc1_s0_n`, `bc1_s1_n`), `bc1_dec10_n` = NAND(`bc1_s0_n`, `r8_b4_q`), `bc1_dec01_n` =
+NAND(`bc1_s1_n`, `r8_b5_q`) (all firm): one line low for each of R8's bits 5,4 = 00, 01, 10, none for 11. The
+datasheet's table for these two bits (DISPTMG skew: none, one character, two characters, output off) has the
+same shape; `bc1_dec01_n` (bits 5,4 = 1,0) is the line that passes the second latch pair's value on the DISPTMG
+path (`notes/blocks/eof.md`). `bc2`'s decode reads `bc2_e15215` = NOT `r8_b6_q`, `bc2_e15085` = NOT
+`r8_b7_q` and its three NANDs likewise: bits 7,6, the datasheet's cursor skew.
+
+**One uncertain item lies on bit 6's route**, drawn in run 11: the `?M` at (7140-7164, 2597) between the pad
+(7120,2596) and the track. So `bc2_e15215` = NOT `r8_b6_q` and `bc2_e15517` depend on it
+(`tools/unsure.py --equations`); the other three bits' routes carry none, and `bc1`'s five equations and
+`bc2_e15085`, `bc2_e15690`, `bc2_e15343` are firm. Measured again this run, for the reviewer to judge:
+`tools/px.py col 7149 2580 2620 2 metal,metal1` has the track's two edge lines there in both chips (y 2584-2588
+at 52-84, y 2606-2610 at 80-89, between them 165-189 in chip 2 and 158-233 in chip 1), the same profile as on the
+certain metal at x 7180 and x 7225 (lines at the same y; band 174-206 / 133-243), with field (148-173) below.
+
+### (1) The gap x 6400-6750 between the top bus field and `tl6`
+
+Run 11 drew the field's lines to x 6750 and `tl6` drew its own to x 6400. Between them (view `w`):
+
+- **Row y 2520-2540** (`tc1_bus2858`): one poly in the open across the whole gap (red-brown with a green rim in
+  the clean shot, brown in the metal shots, no metal over it; `tools/tl5_tracks.py rows row 6396 6756 8 2530`:
+  poly at every sample but three single ones), no branch (`tools/eof_tee.py h 2521 2539 6405 6745`: none). It is
+  `tl6`'s poly along y 2530 (`tl6_p6143`).
+- **Metal y 2575** (`r8_b4_q`): one metal over plain field (`tools/tl5_tracks.py h 2574 6380 6780`: no break
+  in either chip, nothing but pink under it). It is `tl6`'s metal y 2573 (`tl6_p6187`).
+- **Row y 2612-2626** (`r8_b5_q`): salmon under the ground branch from x 6750 to its end at x 6507, open poly
+  x 6445-6505, then a pad (6426,2619) (hole in the clean shot, ring and bright centre in both metal shots), on
+  which `tl6`'s metal y 2619 (`tc2_m6404`) ends from the west. No branch (`eof_tee`: none).
+- **Row y 2652-2666** (`tc1_m7100`): the same build one track south: salmon under the branch, a pad
+  (6469,2661), and the metal y 2652-2668 west to x 6400, which `tl6` draws on to `tcw`'s track x 6276
+  (`tcw_m6278`). So `tc1_m7100` = `tcw_m6278`: the input of `tc1`'s NORs `tc1_o3095` and `tc1_o3353` is
+  the wire that gates two pull-downs of `tcw` (pair 2: low through `lc3_w9947` AND it). Its source is still
+  not known (`tcw`'s track is not followed south of its pads).
+- **The ground branch** (y 2614-2666, from `tc1`'s rail x 6858-6906) ends at x 6507 and turns south there
+  (x 6507-6557) into `tcw`'s rail (`M 6532,2690` in `trace/tcw.txt`, contact (6522,2712)): one metal (view
+  `vss`: its outline is unbroken round the corner). It lies over the two rows without contact (salmon and
+  unbroken under it in the clean shot). So `tcw`'s rail and `tc1`'s are one metal.
+
+### (2) East of x 8350: the two tracks to R8's bit 6 and bit 7
+
+- **`tc1_bus2814`** (poly y 2890-2907 at x 8350) ends on a pad (8398,2897); a metal track y 2897 runs east over
+  plain field to a pad (9092,2897); a poly y 2889-2906 passes under the wide vertical metal x 9130-9205 (salmon
+  and unbroken under it, no hole; open poly x 9210-9270) to a pad (9290,2899); the track goes on east to a
+  corner (9875,2897) and south to a pad (9874,2941), which is the top of the poly `cdp1` draws up from R8's
+  bit 6 cell (`r8_b6_q`: "jogs left, up to a pad at 9865,2940").
+- **`tc1_bus2858`** (poly y 2933-2950 at x 8350) ends on a pad (8360,2940); track y 2941 east to a pad
+  (9050,2943); poly y 2932-2949 under the same wide metal to a pad (9246,2943); track on east to x 9507, where
+  it turns south: the metal `cdp1` draws up from bit 7's pad (9506,3026) (`r8_b7_q`: "metal up, turns left at
+  y 2940").
+- All seven pads: hole in the clean shot (`cache/scratch/cdp4/padc.py`, on branch `cdp4` as
+  `tools/cdp4_padc.py`), ring in at least one metal shot (chip 2's shows none at (9050,2943), (9246,2943):
+  chip 1's does). Tracks: `tools/tl5_tracks.py h 2897 8340 9960` and `h 2940 ...`: metal in both chips except
+  at the pads and underpasses (and two dull patches in chip 1 only, at x 8794-8814 on y 2940 and x 9687-9710 on
+  y 2897, where chip 2 is bright); nothing but pink under them. Underpasses: `eof_tee`: no branch.
+- The wide vertical metal x 9130-9205 is drawn by no package at y 2860-2950 (`cdp1` draws it from y 2950
+  south).
+
+### Names
+
+Aliases in `trace/tc1.txt`: `r8_b5_q` over `bc1_s0`, `r8_b4_q` over `bc1_s1`, `r8_b6_q` over `tl6_p6101`,
+`r8_b7_q` over `tl6_p6143` and `tc1_bus2858`, `tc1_m7100` over `tcw_m6278`. The extraction shows each net
+under R8's name. **Merged equations whose text changes** (the nets are the same; only `bc1`'s decode on main):
+`bc1_s0_n`, `bc1_s1_n`, `bc1_dec10_n`, `bc1_dec01_n` now read `r8_b5_q` / `r8_b4_q` where they read
+`bc1_s0` / `bc1_s1`. `tc1_o3095` and `tc1_o3353` keep `tc1_m7100`.
+
 ## Ports
 
 Region edges: x 8250 on the east (drawn to x 8350, where the datapath's first slice

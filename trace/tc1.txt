@@ -1190,3 +1190,62 @@ C 6773,2790 s=14x14                # bright centre (6766-6780, 2784-2796) in a d
 P 6785,2782:7026,2798              # row east: open poly x 6802-6850, salmon under the rail, on to x 7026. NOT joined to the row on the same y east of x 7048 (run 10)
 P 7008,2782:7026,2887              # south in the open (column x 7017: poly from y 2780 to y 2884)
 P 7008,2867:7185,2885              # east under tc1_o3740's, tc1_m7100's and tc1_o4020's metals without contact, into ns2's west poly (drawn from x 7180 in run 2)
+
+# =====================================================================================
+# Run 12 (2026-11-27), piece r8hi: the missing links of R8's four high bits. Wiring only.
+# Views cache/scratch/tc1/r8/.
+# (1) The gap x 6400-6750 between the top bus field and the strip tl6: four lines run straight
+#     across it, and the ground branch ends in it.
+#   row y 2520-2540 (tc1_bus2858)  = tl6's poly along y 2530 (tl6_p6143): one open poly
+#   metal y 2575 (r8_b4_q)         = tl6's metal y 2573 (tl6_p6187): one metal over field
+#   row y 2612-2626 (r8_b5_q)      -> pad (6426,2619) -> tl6's metal y 2619 (tc2_m6404)
+#   row y 2652-2666 (tc1_m7100)    -> pad (6469,2661) -> tl6's metal y 2665 (tcw_m6278)
+#   the ground branch y 2614-2666  ends at x 6507 and turns south (x 6507-6557) into tcw's rail
+#     (M 6532,2690 in trace/tcw.txt): one metal, over the two rows without contact.
+# (2) East of x 8350 the two polys of the nest above r8_b4_q end on a pad each, and a metal track
+#     runs east from each over field, with one poly underpass under the wide vertical metal
+#     x 9130-9205, to R8's bit 6 and bit 7 outputs in cdp1's row:
+#   poly y 2898 (tc1_bus2814) -> pad (8398,2897) -> metal y 2897 -> pad (9092,2897) -> poly ->
+#     pad (9290,2899) -> metal y 2897 -> corner (9875,2897) -> south -> pad (9874,2941), the top
+#     of cdp1's poly r8_b6_q
+#   poly y 2941 (tc1_bus2858) -> pad (8360,2940) -> metal y 2941 -> pad (9050,2943) -> poly ->
+#     pad (9246,2943) -> metal y 2941 -> corner x 9507 -> south: cdp1's metal r8_b7_q
+P 6400,2520:6750,2540              # tc1_bus2858's row, on west to tl6's poly
+M 6400,2575 x6750 w=14             # r8_b4_q's metal, on west to tl6's
+P 6426,2612:6750,2626              # r8_b5_q's row, on west (open poly x 6445-6505)
+P 6409,2602:6443,2636              # pad
+C 6426,2619 s=16x16
+M 6400,2619 x6426 w=14             # tl6's metal U11 ends here
+P 6469,2652:6750,2666              # tc1_m7100's row, on west
+P 6452,2644:6486,2678              # pad
+C 6469,2661 s=16x16
+M 6400,2663 x6469 w=16             # tl6's metal from tcw's track x 6276
+M 6750,2640 x6532 y2700 w=52       # the ground branch, on west and south into tcw's rail
+P 8350,2890:8398,2907              # tc1_bus2814's poly, on east
+P 8381,2880:8415,2914              # pad
+C 8398,2897 s=16x16
+M 8398,2897 x9092 w=16
+P 9075,2880:9109,2914              # pad
+C 9092,2897 s=16x16
+P 9092,2889:9290,2906              # underpass (salmon under the wide metal x 9130-9205, open poly x 9210-9270)
+P 9273,2882:9307,2916              # pad
+C 9290,2899 s=16x16
+M 9290,2898 x9875 y2941 w=16
+P 9857,2924:9891,2958              # pad at the top of cdp1's poly r8_b6_q
+C 9874,2941 s=16x16
+P 8350,2933:8360,2950              # tc1_bus2858's poly, on east
+P 8343,2923:8377,2957              # pad
+C 8360,2940 s=16x16
+M 8360,2941 x9050 w=16
+P 9033,2926:9067,2960              # pad
+C 9050,2943 s=16x16
+P 9050,2932:9246,2949              # underpass
+P 9229,2926:9263,2960              # pad
+C 9246,2943 s=16x16
+M 9246,2941 x9507 y2955 w=16       # to cdp1's metal r8_b7_q (M 9507,3044 y2950)
+@alias r8_b5_q bc1_s0
+@alias r8_b4_q bc1_s1
+@alias r8_b6_q tl6_p6101
+@alias r8_b7_q tl6_p6143
+@alias r8_b7_q tc1_bus2858
+@alias tc1_m7100 tcw_m6278
