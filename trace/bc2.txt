@@ -816,7 +816,8 @@ M 10050,15830 y16130 x10138 y16300 w=13
 # y 16228-16244 (the south edge of bc2_p16067's block and the north edge of the row y 16243-16262); elsewhere
 # bars of 8-13 px. Those four stretches are ?M (trap 27). From y 16188 to y 16228 the metal is 5 px further
 # west and about 8 px wide, over field beside the block. Drawn to y 16370, the claim's south edge (port):
-# tools/follow.py runs it on to y 17568, west to x 9358 and north to y 17428.
+# bc4 draws it on to its end pad (9554,17518) (trace/bc4.txt, run 2); tools/follow.py's route beyond that pad
+# ("to y 17568, west to x 9358, north to y 17428") is another wire's.
 ?M 9555,15840 y15886 w=13              # over the box (9548-9568, 15848-15868)
 M 9552,15884 y15996 w=13               # over the node of bc2_w15915 (tan, no hole) and gate rows' edges
 ?M 9552,15994 y16031 w=13              # over the box (9538-9564, 15992-16020)

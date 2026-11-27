@@ -935,8 +935,9 @@ equations unchanged (`tools/sameconn.py`; `bc2_e15343` = NAND(`bc2_e15085`, `bc2
 
 **`bc2_e15343`** (low for R8 bits 7,6 = 0,0) has no load in this package south of its decode: its thin metal
 x 9545-9562 runs from the port of run 6 (y 15835) south past the three gates on the W rail's east side and out
-at y 16370 (the claim's edge). `tools/follow.py 9554 16160 S --gap 45`: on to y 17568, west to x 9358 and north
-to y 17428.
+at y 16370 (the claim's edge). `bc4` run 2 follows it to its end on a pad (9554,17518). (`tools/follow.py 9554 16160 S
+--gap 45` reports "to y 17568, west to x 9358 and north to y 17428": it bridges from that pad onto another wire's
+metal; that route is not this net's.)
 
 - **No contact on the way**: the clean shot under it has no hole (tan over the nodes of `bc2_w15915`,
   `bc2_w16035` and `bc2_p16067`, salmon over the rows, pink over field; profile down the metal from y 16096 to
