@@ -1,0 +1,23 @@
+# bc4: the bottom-centre logic south of bc2 (9000-11000 x 16300-18550). Started 2026-11-27 with wiring only:
+# two of the three decode lines of R8's bits 7,6 from bc2's south edge to the rows they end on.
+# Coordinates: chip-2 metal-shot pixels.
+
+# ================================================================ run 1 (2026-11-27), piece dec: bc2_e15517 and bc2_e15690 to their rows
+# bc2_e15517 (low for R8 bits 7,6 = 0,1): the thin metal x 9135-9149 runs on from bc2's port (9142,16370) south
+# over field (no stretch dark in both metal shots but bars of 8 px) to its end on a pad (9141,17171); the pad's
+# poly row y 17160-17180 runs east under six thin vertical metals (x 9185, 9228, 9270, 9312, 9357, 9399; no
+# contact) to x 9406. Drawn to there (port): beyond is a structure at the west rail's edge (x 9415-9460), not read.
+M 9142,16360 y17171 w=14
+P 9124,17154:9158,17188                # pad
+C 9141,17171 s=20x20
+P 9141,17160:9406,17180                # row east (port)
+N M 9142,16800 bc2_e15517
+# bc2_e15690 (low for bits 7,6 = 1,0): the thin metal x 10131-10145 runs on from bc2's port (10138,16300) south to
+# a corner at y 16564, east to x 10182 and south on x 10174-10189 to its end on a pad (10181,17170); the pad's
+# poly row y 17159-17180 runs west under four thin vertical metals (x 10140, 10100, 10060, 10000; no contact) to
+# x 9954. Drawn to there (port): beyond is a structure east of the east rail (x 9860-9945), not read.
+M 10138,16290 y16564 x10182 y17170 w=13
+P 10164,17153:10198,17187              # pad
+C 10181,17170 s=20x20
+P 9954,17159:10181,17180               # row west (port)
+N M 10182,16800 bc2_e15690

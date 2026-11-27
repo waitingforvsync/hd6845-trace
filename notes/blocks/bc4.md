@@ -1,125 +1,47 @@
-# bc4: bottom-centre random logic (x 9000-11000, y 16300-18550)
+# bc4: the bottom-centre logic south of `bc2` (9000-11000 x 16300-18550)
 
-Trace: `trace/bc4.txt` (not yet started). Scratch: `cache/scratch/bc4/`. Coordinates are
-metal-shot pixels.
+Nothing of this region's logic is traced yet. This file starts with the wiring that `bc2`'s work led into.
 
-## Status
+## Run 1 (2026-11-27), piece `dec`: two decode lines of R8's bits 7,6 to the rows they end on (wiring; no join, no uncertain item)
 
-Survey only, traced on claude-opus (Fable allowance exhausted). Nothing of this block is
-drawn yet (`trace/bc4.txt` does not exist; no ports, no signals). Survey views: `cache/scratch/bc4/survey.png` (whole region, metal | acid1b,
-0.57x, all blocks' geometry overlaid), `cache/scratch/bc4/left.png` (acid1b, 1x,
-x 9050-10050, y 16350-17600).
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 14:28 -0600. Views in `cache/scratch/bc4/d/`: `p142`, `p181` (the end pads, 7x,
+metal over clean shot), `rowW`, `rowE` (the rows, 3.1x), `jog`, `jog_ov`. Connections unchanged against main
+(`tools/sameconn.py`): both nets only grow.
 
-## Inventory
+- **`bc2_e15517`** (low for R8 bits 7,6 = 0,1). From `bc2`'s port (9142,16370) the thin metal x 9135-9149 runs
+  south over field (`tools/tl3_thin.py 9133 9150 16360 17200 --thr 176 --min 8`: bars of 8 px only, at y 16473,
+  16602, 16777, 16992, down to the pad's ring at y 17149-17166) and **ends on a pad (9141,17171)**: a green hole
+  in the middle of a salmon pad (9125-9158, 17155-17188) in the clean shot, ring and bright centre in the metal
+  shot, bare ground south of the ring (view `p142`). The pad's poly row y 17160-17180 runs east
+  (`tools/tl5_tracks.py rows row 9120 10210 8 17170`: poly from x 9128 to x 9456) under six thin vertical
+  metals (x 9185, 9228, 9270, 9312, 9357, 9399) without contact (`h 17170 9150 9460`: no hole; the metals keep
+  their width; no branch: `tools/eof_tee.py h 17160 17180 9165 9405`). Small dark dots on the row's edge at each
+  crossing in the clean shot (about 8 px, at x 9148, 9190, 9230, 9272, 9315, 9357) are on the row above too
+  (y 17120-17140) and have no pad: not holes. Drawn to x 9406 (port). Beyond, at x 9415-9460 against the west
+  rail's edge, the row enters a structure that is not read.
+- **`bc2_e15690`** (low for bits 7,6 = 1,0). From `bc2`'s port (10138,16300) the thin metal x 10131-10145 runs
+  south (`tl3_thin 10130 10146 16290 16575`: no stretch dark in both shots) to a corner at y 16557-16571
+  (`tools/px.py col 10160 16545 16595 3 metal,metal1,acid1b`), east to x 10182 and south on x 10174-10189
+  (`tl3_thin 10173 10190 16575 17190`: nothing but the pad's ring at y 17147-17165 and y 17175-17190) to its
+  **end on a pad (10181,17170)** (ring and bright centre in the metal shot; in the clean shot a mottled dark
+  olive hole in the middle of a salmon pad (10163-10198, 17153-17186); bare ground south: view `p181`). The
+  pad's poly row y 17159-17180 runs west under four thin vertical metals (x 10140, 10100, 10060, 10000) without
+  contact (no hole: `h 17170 9930 10170`; no branch) to x 9954 (port). Beyond, at x 9860-9945 beside the east
+  rail, it enters a structure that is not read.
 
-Read at 0.57x and 1x only; every coordinate below is approximate (+-15 px) until read
-at 4x.
+So two of the three cursor-skew decode lines end as gate rows at the two rails of the block below `bc2`, both
+at y 17170: `bc2_e15517` at the west rail (x 9463-9513, which runs on south from `bc2`), `bc2_e15690` at the
+east one. The third, `bc2_e15343`, runs through this region on x 9552 (`tl3_thin 9543 9562 16360 17575`: ten
+stretches of 14 px or more dark in both shots, over boxes: not drawn; `tools/follow.py`: to y 17568, west to
+x 9358, north to y 17428).
 
-**Supplies.** Wide speckled vertical metal rails (metal shot) at about x 9440-9480,
-x 9625-9690, x 10530-10590 and x 10730-10760, running the height of the gate fields
-(y 16300 to about 17550 for the left two, to about 18450 for the right two). Which is
-VSS and which VCC is not yet read. A wide horizontal supply band along the bottom edge
-from about y 18470 (whole width), joined by the left rails at about x 9300-9340 and
-x 9640-9690 coming down through the track field. Not checked against `bc1`'s rails.
+## Ports
 
-**Left gate field, x 9050-10000, y 16350-17550.** Dense random logic, columns of
-gates either side of the rails:
-- x 9050-9200, y 16400-17000: two or three large diffusion areas (wide transistors,
-  probably drivers or loads), poly gates crossing them horizontally.
-- x 9330-9560 and x 9690-9950: vertical stacks of small gates (pitch about 50 in y),
-  many contacts; a dark (thin-oxide, likely depletion) diffusion stripe pattern at
-  x 9530-9580 and x 9700-9760 suggests load transistors in columns beside the rails.
-- Horizontal poly lines leave the field to the left at y about 16450, 16640, 16740,
-  16790, 16850, 17110, 17150, 17210, 17510 (many with contacts at x 9120-9180).
-
-**Right gate column, x 10280-10980, y 16350-17750.** A narrower column of gates beside
-the rails x 10530-10590 / 10730-10760, poly inputs entering from the left in
-horizontal pairs.
-
-**Wiring field between, x 10000-10280, y 16300-17700.** Vertical metal tracks at
-pitch about 22-25 (roughly ten tracks), some turning into the gate fields.
-
-**Track field, y 17550-18450 (whole width).** Horizontal metal tracks, pitch about 22,
-turning in nested L shapes (the tracks of the left gate field bending down and right),
-and from y 18000 to 18350 a bus of about fifteen horizontal lines with contact columns
-at x about 9290, 9330, 9380, 9410 (metal-to-poly ladders) running right; at
-x 10200-10450 the bus bends diagonally down-right towards the bottom right corner.
-
-**Already drawn by other blocks** (from the overlay with `TRACE=` empty):
-- A metal track with label `inh_src` at x 10220, y 16390, running down x 10220 to
-  y 16820, then a poly jog to (10305, 16945) and metal down x 10310 to about y 17560,
-  then x 10270 down to y 18030.
-- Metal x 10380 from y 16880 down to about y 18520 (with jogs at y 17680, 18320).
-- Poly x 10140-10215 at y 17760 down to y 18070 and a metal line y 18070 from x 9770
-  left to x 10150.
-- Poly and metal y 17945 from x 10230 to about x 10950 and a diagonal leaving to the
-  right at x 10930-11000, y 17600-17900.
-- Short poly y 18420 between contacts at x 9555 and x 9775; contacts and metal at
-  x 10290-10560, y 18440-18510 along the bottom.
-These are other packages' routing ends; this block must join, not redraw, them.
-
-**Cell hits** (`tools/t.sh bc4 findcell.py ... --region 9000,16300:11000,18550 --min 0.6`):
-
-| cell | @inst | score | at |
-|---|---|---|---|
-| `tl1_ub` (2535,4347:2838,4797) | `@inst tl1_ub 6856,12101` | 0.79 | 9542,16673 |
-| `tl1_ub` | `@inst tl1_ub 7096,12231 mx=2686.5` | 0.60 | 9782,16803 |
-| `tl5_inv` (4951,4786:5213,4910) | `@inst tl5_inv 4430,12414 rot=180 o=5082,4848` | 0.64 | 9512,17262 |
-| `bc1_drv` (7530,14978:7795,15163) | `@inst bc1_drv 2917,3383 mx=7662.5` | 0.65 | 10580,18454 |
-
-Only the `tl1_ub` hit at 0.79 is worth checking first; the others are below 0.7 and the
-`bc1_drv` hit lies on the bottom supply band, so it is probably not a real copy. None
-has been checked against the photos.
-
-## Checks after the survey
-
-- **`tl1_ub` hit at (9542,16673) rejected** (`cache/scratch/bc4/ub.png` against the
-  master `ubm.png`, 2x, acid1b and metal, cell overlaid): the master's thin vertical metal
-  (x 2557-2573, copy x 9413-9429) and its top pad/contact have no counterpart, the poly
-  and diffusion between copy x 9500 and 9560 differ, and the master's VCC box contact
-  (2808,4600) falls on the copy's rail metal without a matching contact seen. Not a copy;
-  the score 0.79 comes from the rail and column rhythm. The other hits (0.60-0.65) were
-  not drawn either.
-- **Right gate column, x 10460-10760, y 16480-16780** (`right.png` 1.3x,
-  `r1.png` 2.2x, acid1b | metal): a unit repeated at about y +170 to +180
-  (16500, 16680, 16850, ...): a wide diffusion area x 10600-10700 between the rails
-  x 10565-10595 and x 10720-10760 (metal), with a dark area
-  x 10655-10700 at y 16500-16570 and again at y 16680-16760, each next to a pad with a round contact at about (10737,16530) / (10740,16705).
-  Read at 4x (`r5a.png` acid1b | metal, `r5b.png` acid | metal1, `r4.png` acid1b):
-  the pad x 10715-10755, y 16510-16550 is tan with a dark outline under the rail metal
-  (x 10720 and east) with a contact ring in both metal shots, so by the `acid1b` legend
-  it is a **diffusion box contacted to the rail x 10720-10760**, and the dark red-brown
-  textured area x 10668-10712, y 16500-16575 is poly in the open over the band from that
-  box: the **load** of a gate, which makes the rail x 10720-10760 most likely **VCC**
-  (assumption: rail identity not yet followed to a pad). The earlier reading "dark =
-  depletion" was wrong; layers.md says the implant is not visible. Not yet read: the
-  load gate's buried tie to the output, the output band (x 10600-10700, y 16550-16700,
-  tan; a ring at (10642,16632) in `acid1b` has no contact in the metal shot at 2.7x, `r7.png`: not a contact unless a 5x read shows one), and the pull-downs west of it under the rail
-  x 10565-10595 (contact (10555,16622) in the box x 10540-10590, y 16550-16640).
-  This repeated unit is the best first piece: once one copy is read, it can be a cell.
-
-- **Supply band** (`rails.png`, metal 0.45x; `j1.png`, metal | acid1b 1.6x,
-  x 10450-10850, y 18250-18800): the wide speckled band at the bottom (from y about
-  18640, x 9000-11000) is joined from below by the strip x 10650-10700 that `clock`
-  labels `vcc` at (10687,19100) (seen at 0.45x only). At 1.6x the rail **x 10725-10770
-  runs without a break into the band** (bright metal continuous y 18275-18650), so it is
-  VCC if the band is; this agrees with the load reading above. The rail **x 10545-10595
-  ends at y about 18555**, above a horizontal metal line y 18590-18605 and field, so it is
-  **not** joined to the band: it is probably VSS (not followed). Rails x 9440-9480 and
-  x 9625-9690 not checked. `j2.png` (metal | metal1, 1.5x, x 10550-10850,
-  y 18600-19160): the strip x 10668-10712 leaves the band at y 18790 and runs down to
-  `clock`'s `vcc` label at (10687,19100) unbroken in both metal shots (the dark line
-  across it at y 18935 is an edge underneath, trap of layers.md), so **the band and rail
-  x 10725-10770 are VCC** (firm enough to label when drawn; re-check at 4x then). Rail
-  x 10545-10595 still unnamed.
+In `ports.d/bc4.txt`.
 
 ## Not done
 
-Everything: rail identity (VSS/VCC), every gate, the track field, joins to the routes
-already drawn listed above. Resume with the load unit of the right gate column at
-(10460-10760, 16480-16640): read the load's buried tie, the output band and the
-pull-downs at 5x in `acid1b`, `acid`, `metal` and `metal1`, draw it as a cell, then
-place its copies at y about 16680 and 16850 after checking each. The `tl1_ub` hit was
-rejected (see Checks); no cell copy of another block is known here.
+Everything else: the gates the two rows end in; `bc2_e15343`'s route; the rails; the rest of the region.
 
 ## Review
+
