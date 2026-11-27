@@ -631,7 +631,7 @@ C 10135,14783 s=20x20
 P 9552,14777:10135,14793               # row west
 P 9535,14768:9569,14802                # pad
 C 9552,14785 s=20x20
-M 9552,14785 y15835 w=13               # south (port)
+M 9552,14785 y15842 w=13               # south; drawn on in run 11, piece dec1
 
 # ================================================================ run 7 (2026-11-27), piece w5: an AND-OR-INVERT under the W rail
 #     bc2_w16035 = NOT( bc2_p16067 OR (bc2_w15739 AND bc2_m15997) )          (the tie of its load is uncertain: ?B)
@@ -806,3 +806,23 @@ N M 9228,16156 bc2_m16130
 # y 16300, this package's south edge (port): tools/follow.py runs it on to y 16569, east to x 10182 and south to
 # y 17173. The pad (10180,16127) at the poly row's east end belongs to another thin metal, from the north on x 10180.
 M 10050,15830 y16130 x10138 y16300 w=13
+
+# ================================================================ run 11 (2026-11-27), piece dec1: bc2_e15343's thin metal on south, out of the package
+# From y 15835 the thin metal x 9545-9562 runs on south past the gates on the W rail's east side WITHOUT a contact
+# (no hole in the clean shot under it anywhere, the metal never widened: reviews 10, 13, 14, 15 for the boxes) and
+# leaves the package. tools/tl3_thin.py 9545 9562 15830 16375 --thr 176 --min 8: dark in both metal shots for
+# 14 px or more at y 15842-15857 and 15866-15884 (the tie-and-exit box of bc2_w15915), y 15994-16006 and
+# 16010-16029 (the tie box of bc2_w16035's load), y 16104-16139 (the tie box of bc2_p16067's load) and
+# y 16228-16244 (the south edge of bc2_p16067's block and the north edge of the row y 16243-16262); elsewhere
+# bars of 8-13 px. Those four stretches are ?M (trap 27). From y 16188 to y 16228 the metal is 5 px further
+# west and about 8 px wide, over field beside the block. Drawn to y 16370, the claim's south edge (port):
+# tools/follow.py runs it on to y 17568, west to x 9358 and north to y 17428.
+?M 9555,15840 y15886 w=13              # over the box (9548-9568, 15848-15868)
+M 9552,15884 y15996 w=13               # over the node of bc2_w15915 (tan, no hole) and gate rows' edges
+?M 9552,15994 y16031 w=13              # over the box (9538-9564, 15992-16020)
+M 9552,16029 y16106 w=13               # over bc2_w16035's strip (tan, no hole) and the row y 16088-16106
+?M 9552,16104 y16141 w=13              # over the box (9532-9562, 16116-16140)
+M 9553,16139 y16190 w=12               # over bc2_p16067's block (tan, no hole)
+M 9549,16186 y16230 w=8                # the narrow stretch, 5 px west, over field
+?M 9549,16228 y16246 w=8
+M 9551,16244 y16370 w=12               # over the row y 16243-16262, land 7's arm and on south (port)

@@ -926,6 +926,40 @@ row's metal ends 20 px short of that pad's ring (orange open poly between, x 101
 So all three decode lines of R8's bits 7,6 leave the decode: `bc2_e15343` and `bc2_e15517` west across the block
 and south along its west rail (run 6), `bc2_e15690` south out of the block.
 
+## Run 11 (2026-11-27), piece `dec1`: `bc2_e15343`'s thin metal on south, out of the package (wiring; 4 `?M`)
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 14:04 -0600. Views in `cache/scratch/bc2/w8/` (`end_metal`, `end_metal1`,
+`end_acid1b`: the narrow stretch, 10x; overlay `ov1`) and `w4/` (`e343`, `pa_*`, `pb_*`). Connections and
+equations unchanged (`tools/sameconn.py`; `bc2_e15343` = NAND(`bc2_e15085`, `bc2_e15215`) stays firm: the
+`?M` lie beyond every gate of this net that is drawn).
+
+**`bc2_e15343`** (low for R8 bits 7,6 = 0,0) has no load in this package south of its decode: its thin metal
+x 9545-9562 runs from the port of run 6 (y 15835) south past the three gates on the W rail's east side and out
+at y 16370 (the claim's edge). `tools/follow.py 9554 16160 S --gap 45`: on to y 17568, west to x 9358 and north
+to y 17428.
+
+- **No contact on the way**: the clean shot under it has no hole (tan over the nodes of `bc2_w15915`,
+  `bc2_w16035` and `bc2_p16067`, salmon over the rows, pink over field; profile down the metal from y 16096 to
+  y 16420), and the metal is never widened into a pad (12-15 px, 8 px on the narrow stretch). The three framed
+  boxes it lies over were each judged a pass-over by a reviewer (rounds 10, 13, 15).
+- **`?M` by trap 27** (`tools/tl3_thin.py 9545 9562 15830 16375 --thr 176 --min 8`: dark in both metal shots for
+  14 px or more): y 15842-15857 and 15866-15884 (the tie-and-exit box of `bc2_w15915`), y 15994-16006 and
+  16010-16029 (the tie box of `bc2_w16035`'s load), y 16104-16139 (the tie box of `bc2_p16067`'s load), and
+  y 16228-16244 (17 px: no box there, the south edge of `bc2_p16067`'s block and the north edge of the row
+  y 16243-16262 follow each other). Elsewhere only bars of 8-13 px.
+- **The narrow stretch**: from y 16188 to y 16228 the metal is about 8 px wide and 5 px further west
+  (x 9545-9553), over field beside the block; bright in both metal shots (views `end_metal`, `end_metal1`),
+  where `tools/tl5_tracks.py v 9552 16140 16700` reports "no metal" (its fixed column misses the jog).
+
+So of the three decode lines of R8's bits 7,6 only `bc2_e15517` ends inside this package (on the pad
+(9357,15824)); the other two leave it south.
+
+### Ambiguities (run 11)
+
+17. **Continuity of `bc2_e15343`'s thin metal over three boxes and one double edge** (the four `?M`). For: the
+    metal keeps its line and width on both sides of each; pass-overs by the clean shot. Against: the photos
+    cannot show metal on a step (trap 27).
+
 ## Review
 
 **Model note: latch unit a was traced AND reviewed on claude-opus, not claude-fable-5-2**
