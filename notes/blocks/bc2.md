@@ -822,6 +822,39 @@ Recorded 2026-11-27 10:03 -0600.
 
 Round 6: no findings that change a connection.
 
+### Round 7 (full review), 2026-11-27: run 4, piece `w2`
+
+A fresh Claude Fable 5.2 agent, on commit 3e2c859, 20 images in `cache/scratch/bc2/review-7/`. Told that the
+cell's master stands and that what is unchecked is whether the copy fits the second unit, and the unit's own
+wiring; to suspect: every feature of the copy against the photo, the edge line x 9445-9448, both arms' joins to
+their lands (land 2's second arm), the middle box, a contact of the thin metal at (9552,15270), the strip's end
+on the M rail's land, anything the first unit does not have; bus line y 14568, its pads, its leg's crossings and
+its end; the inverter's output row to the pad (9314,14870), the thin metal x 9313 and its crossings; the output
+row's turn south and its clearance from the pad (9227,15173).
+
+**No findings.** Geometry within 3-4 px everywhere measured; nothing changed in the trace.
+
+Checked and found correct by the reviewer. The copy: the edge line dark in both metal shots at y 15172, 15194,
+15240, 15260 and absent at 15150, 15215, 15283; the column tan in the clean shot under the thin metal's margin
+on both arms, both stretches and the box, against grey field at y 15130 and y 15302 on; both arms join their
+lands (the land's west edge line x 9454-9458 present on the field rows y 15128, 15306, absent on the arm rows
+y 15150, 15284), field between land 2's two arms; the middle box a buried contact (poly ends at x 9418-9426
+inside a heavy frame, plain diffusion east of it); the strip tan under the W rail and the thin metal, reaching
+the M rail's land at x 9635-9645 only on rows y 15211-15232; no contact at (9552,15270) (tan, no hole or core,
+the metal does not widen); nothing extra against unit 1. Upper input: three pads are contacts, row and underpass
+straight on y 14568, metal continuous in both chips over x 7819-8229 and x 8623-9235 and down the leg to the pad
+(9227,15173), no pad or hole at any crossing, no metal beyond the corner or south of the pad. Lower input: the
+row poly and unbroken from x 9872 to the pad (9314,14870) with no hole or ring under the three rails and the
+thin metals and no branch; the thin metal x 9313 continuous y 14891-15239, ending on both pads. Output: the row
+turns south at x 9222-9240, plain field between it and the pad's ring at y 15198-15204 in all four shots, field
+west of x 9218. Beyond the piece: the output column runs past its port to a pad with a contact at about
+(9228,15388), a thin metal going on south. Not checked: `busl` west of x 7530; the thin metal x 9552's own
+continuity over the tie box; the rails' supply identity; the W rail north of y 14860 and south of y 15330.
+
+Recorded 2026-11-27 10:42 -0600.
+
+Round 7: no findings.
+
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
 - "Latch unit a", row `bc2_w14912` ("goes west, not followed"): the pad (10395,14912) is the south end of a thin metal x 10397 that comes from north of y 14570 (`eof` run 17, at 1.28x and by `tools/eof_mrun.py col 10395 14640 15030`; not read at high zoom).
