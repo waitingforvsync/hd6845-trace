@@ -186,6 +186,272 @@ In order:
    x 10310, 10355, 10398 west of unit b); joins to `bc1`'s bus ends at x 9000, to `bw` and to `cdp4`;
    floor-plan fragment.
 
+## Run 2 (2026-11-27): the centre block, piece `inv`
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 08:11 -0600. The centre block of the bottom-centre logic (x 9100-10250,
+y 14650-16300) was untraced: three rails with gate columns between them and nested wires on both sides. This
+piece is its first three units on the east rail, x 9640-10110, y 14815-15300: 6 transistors, 3 named outputs, no
+uncertain item. Views in `cache/scratch/bc2/`: `m1_top`, `top_m`, `top2_m` (overviews), `u1_*`, `e1_*`, `e1e_*`,
+`e1w_*`, `e1n_*`, `knot` (photos at 3-8x), `wire_e_m`, `ov23_c`, `ov_w` (overlays).
+
+### The rails
+
+Three wide metals run down the block: W (x 9440-9500), M (x 9640-9700), E (x 9806-9866).
+
+- **M is VCC**: its top is the stem x 9550-9600 (the stem steps east at y 14700-14750 onto x 9640-9700) of the
+  west piece, x 9347-9818, of the wide band y 14130-14180; that piece turns north at its east end as the
+  datapath's rail x 9765-9818, which `cdp4` labels `vcc` (`N M 9789,11800 vcc`; metal down x 9790 from y 13990
+  to y 14170 in both chips, crossed by poly rows). Every load of the block lies beside M. (The first version
+  of this note said the band runs east to the rail x 10746: wrong, the band is two pieces with bare ground at
+  x 9815-9941 and x 9987-10158; found by review round 2.)
+- **E is VSS**: its top turns west at y 14500-14550 to x 9640-9690 and north into the band y 14222-14268, which
+  is metal along y 14245 from x 9654 to x 10593 (three 4 px edge lines on the way), where the VSS rail x 10570
+  stands. The units' pull-downs lie under E.
+- **W** comes from the band y 14270-14300 from the west; not decided (it crosses the positions of both the
+  VCC rail x 8534 and the VSS rail x 8712).
+
+The two bands are not drawn: M and E are labelled `vcc` and `vss` over this piece's units (joined by name).
+
+### Cell `bc2_einv`: an inverter on the E rail (master: the top unit, gate band y 14947-14963)
+
+- **Pull-down** under the rail: VSS land (9828-9868, 14900-14945) with its contact (9843,14922) (pits in the
+  clean shot, ring in both metal shots); gate band y 14947-14963 (salmon under the rail); output land
+  y 14967-14998 (x 9805-9870). Channel 44 wide (the VSS land's width, x 9824-9868), 16 long.
+- **Output**: the land has a tab east of the rail (bright green in the clean shot at (9879-9885, 14985-14990))
+  into a framed box (9890-9928, 14980-15014: heavy outline, an L-shaped lighter interior, tan in chip 2's
+  stripped shot), from which a poly leaves east.
+- **Load** beside the M rail: the output land runs west as a band y 14978-15000 under a poly block
+  (9698-9754, 14955-15022) to the VCC land under M (9642-9696, 14945-15005; contact (9668,14963)). In chip 2's
+  stripped shot the block is three orange bands (y 14958-14970, 14978-15000, 15008-15020) separated by one dark
+  line each (y 14970-14977, y 15001-15008): the band's two edges under one poly (view `knot`, 8x). Channel 22
+  wide, 56 long.
+- **Tie**: a diffusion wire x 9758-9776 leaves the band north (tan in the stripped shot, orange-west /
+  plain-east in chip 2's metal shot down x 9762-9771 from y 14937 to y 14994) and turns west at y 14932-14950
+  into a framed box (9726-9756, 14930-14952; pinkish window) on the block's top.
+
+Copies at +130 and +260 (`tools/findcell.py` on the clean shot: 0.84 and 0.87); overlay `ov23_c`: lands, bands,
+blocks and boxes lie on the features. Two more partial matches (+440: 0.60, +613: 0.62) are not placed: units of
+another build.
+
+    bc2_e14955 = NOT bc2_p14823
+    bc2_e15085 = NOT tl6_p6143
+    bc2_e15215 = NOT tl6_p6101
+
+### Inputs and outputs (drawn to this piece's edges; view `wire_e_m`, overlay `ov_w`)
+
+- **Unit 1.** Input `bc2_p14823`: the band's poly runs on east of the rail to x 9976 and north as a column
+  x 9950-9976 **under the thin metal of the unit's own output** (clean shot salmon from y 14858 to y 14960, no
+  hole; `cdp4_candh.py v 9963,14900 9963,14930`: plain) to the poly row y 14815-14832, which comes from the west
+  (port at the rail's east edge). Output: the box's poly ends on a pad (9963,15000); a thin metal north to
+  y 14870, west to a pad (9897,14869); its poly row y 14860-14878 leaves west under the rail (port). Between
+  the band's end and the pad the clean shot is pink under the thin metal (y 14966-14980): field.
+- **Unit 2.** Input `tl6_p6143`: the band ends east on a pad (9963,15087) of a thin metal that comes from the
+  north on x 10007, turns west at y 15046 and runs on south on x 9963 through the pad (`tools/follow.py`: north
+  to a corner (10004,14436) and west to a pad (9722,14437); south to y 15742). Output: the box's poly east under
+  that metal (no contact) to a pad (10006,15131), the north end of a thin metal x 10007 south (follow: to
+  y 15570). So x 10007 carries two nets: the input above y 15046, the output below y 15122.
+- **Unit 3.** Input `tl6_p6101`: the band's poly east under the metals x 9963 and x 10007 (no contact) to a tap
+  pad (10050,15217) on the thin metal x 10052, which runs through (follow: north to a corner (10052,14390) and a
+  pad (9764,14394); south to y 15526). Output: the box's poly east under x 9963, x 10007 and x 10052 (no contact)
+  to a pad (10094,15261), the north end of a thin metal south (follow: a corner (10089,15698), west to
+  (10003,15696)); bare ground north of the pad.
+- The four pads test as pads and the six crossings as plain (`cdp4_candh.py`: clean shot minimum R-G 32-47 at
+  the crossings, -23 to -37 at the pads).
+
+The pads (9722,14437) and (9764,14394) lie on two of the poly bus lines y 14354-14873 that `bc1` draws west of
+x 9300: the two inputs come off that bus.
+
+### Ambiguities (run 2)
+
+1. **The pull-down's width** (settled by review round 2): east of the rail the gate band lies on field (north of
+   it chip 2's stripped shot reads R-G +1 to +6 at x 9880; south of it the tab's edge y 14978 is a separate line
+   from the band's edge y 14967), so the green strips beside it in the clean shot are the poly's rims. The channel
+   is the VSS land's width, 44.
+2. **The framed boxes** (three output boxes, three ties) are drawn `B`: heavy outline, lighter interior, at the
+   end of a poly with no other driver (the load's gate) or of the output poly.
+3. **W's supply** is not decided; nothing drawn rests on it.
+
+### Not done (run 2)
+
+- The rest of the block: the E rail's units below y 15300 (two more of another build at about y 15400 and
+  y 15570, and on), the W rail's units, the M rail's other loads, the nested wires on both sides and the bus
+  rows y 14690-14880 east of x 9870.
+- The six wires of this piece beyond its edges (ports).
+- The two supply bands.
+
+## Run 2, piece `nand` (2026-11-27): three two-input NANDs on the E rail
+
+Same run, after piece `inv`'s review. Region x 9640-10190, y 15290-15830: 9 transistors, 3 named outputs, no
+uncertain item (full extraction 2,527 nets, 4,853 transistors, 0 errors). Views in `cache/scratch/bc2/n2/`:
+`u4_c`, `u4_m` (2.8x), `k4` (the load knot, 7x), `b4` (the output box, 7x), `o5_m`, `o5_c`, `o6_m` (4x), sheet
+`x1`, overlay `ov_c`.
+
+    bc2_e15343 = NAND( bc2_e15215, bc2_e15085 )
+    bc2_e15517 = NAND( tl6_p6101, bc2_e15085 )
+    bc2_e15690 = NAND( bc2_e15215, tl6_p6143 )
+
+With piece `inv` (`bc2_e15085` = NOT `tl6_p6143`, `bc2_e15215` = NOT `tl6_p6101`): three of the four minterms of
+the two wires `tl6_p6143` and `tl6_p6101`, each active low: `bc2_e15343` is low when both are low,
+`bc2_e15517` when `tl6_p6101` is high and `tl6_p6143` low, `bc2_e15690` when `tl6_p6143` is high and
+`tl6_p6101` low. A two-bit decode; what the two bits are is not known (they come off the poly bus above).
+
+### Cell `bc2_enand` (master: the unit with bands y 15334-15352 and y 15378-15396)
+
+Under the rail (`tools/bd2_umap.py 9796 15290 9960 15650 4 4`): VSS land y 15298-15332 with its contact
+(9842,15311) | band 1 y 15334-15352 | strip y 15354-15376 | band 2 y 15378-15396 | output land y 15394-15436;
+the diffusion is x 9805-9868 from y 15322 down (the land's top part x 9828-9868). The strip has no contact and
+no exit east or west (closed outlines both sides): two pull-downs in series, about 78 wide (the diffusion's edge
+lines cross both bands at x 9796-9800 and x 9876-9880: review round 3). The bands' west end caps
+lie west of the rail at x 9782-9800. Output box (9896-9930, 15420-15446) on a tab of the land east of the rail,
+its poly east along y 15424-15442. Load and tie are `bc2_einv`'s: block (9698-9754, 15397-15462) over the band
+y 15417-15440 from the VCC land under M (9642-9696, 15380-15440; contact (9659,15399)), three orange bands with
+one dark line between each in chip 2's stripped shot (view `k4`); tie wire x 9757-9773 north from the band into
+the box (9728-9756, 15370-15396) on the block's top.
+
+Copies at +174 and +347 (`tools/findcell.py`, clean shot: 0.93 and 0.89); overlay `ov_c`.
+
+### Inputs and outputs
+
+The four thin metals of piece `inv` run on south and each ends here on a pad at the east end of a band:
+
+| Metal | Net | Tap | End |
+|---|---|---|---|
+| x 10093 | `bc2_e15215` | (10091,15345): band 1 of unit 15343 | south to y 15698, west to the pad (10006,15696): band 1 of unit 15690 |
+| x 10007 | `bc2_e15085` | (10006,15391): band 2 of unit 15343 | the pad (10006,15566): band 2 of unit 15517 |
+| x 10052 | `tl6_p6101` | (10050,15217): the inverter (piece `inv`) | the pad (10050,15522): band 1 of unit 15517 |
+| x 9963 | `tl6_p6143` | (9963,15087): the inverter | the pad (9963,15738): band 2 of unit 15690 |
+
+Outputs: `bc2_e15343`'s row y 15424-15442 east under all four metals to a pad (10137,15435), the south end of the
+thin metal x 10137 (bare ground on x 10137 from y 15464 to y 15584), which runs north (`tools/follow.py`: to the
+pad (10135,14783) of a bus row); `bc2_e15517`'s row y 15598-15616 east to a pad (10137,15608), whose metal goes
+east and north on x 10172-10191 (seen on north to a corner at y 14735 and a pad (10092,14740)); `bc2_e15690`'s row
+y 15771-15789 east to a pad (10006,15782), whose metal goes east and south on x 10050. Each is drawn to this
+piece's edge (ports).
+
+Crossings (`cdp4_candh.py`, and the four it flagged on a four-shot sheet, `x1`): every band and row under a thin
+metal is a plain crossing (the row not widened, salmon, no hole). The test's flags at (9963,15563), (10007,15430),
+(10093,15430), (10052,15343) were dark specks beside the row; its flags at (10007,15607), (10052,15607),
+(9963,15780) are places with no metal at all (the open poly's green rim). The eight pads test as pads.
+
+### Ambiguities (piece `nand`)
+
+4. **The strip between the two bands** is taken as an internal node: no contact on it, closed outlines east and
+   west of the rail. If it had an exit the gate would not be a plain NAND.
+5. The boxes are drawn `B` as in piece `inv`.
+
+### Not done (piece `nand`)
+
+- The three outputs beyond their ports; the next unit down the E rail (from y 15830); the W rail's units; the M
+  rail's west-side loads; the bus rows.
+
+## Run 3 (2026-11-27), piece `bus2`: the decode's two inputs are `tl6_p6101` and `tl6_p6143`
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 08:47 -0600. Wiring only: two bus lines end to end, x 7545-10052, y 14377-14454,
+and their thin metals down to piece `inv`'s (y 14660). No transistor, no uncertain item. Full extraction 2,525
+nets (two joins), 4,853 transistors, 0 errors. Views in `cache/scratch/bc2/n4/`: `a` (west ends, 4x), `b`
+(x 8220-8680), `c` (x 9340-9800), `w` (x 6700-7800 with `busl`'s rows), `gap` (x 7530-7790, 5x); each metal over
+clean shot.
+
+### What it establishes
+
+The two wires that piece `inv` called `bc2_m10052` and `bc2_m10007` are **`tl6_p6101` and `tl6_p6143`**: the two
+nets `busl` brought across the left bus field from the top-left logic to "a poly row at the field's foot toward
+the bottom-centre logic's bus (y 14393, 14437)" (its ports (7550,14393) and (7550,14437)). So
+
+    bc2_e15215 = NOT tl6_p6101          bc2_e15085 = NOT tl6_p6143
+    bc2_e15343 = NAND(bc2_e15215, bc2_e15085)     low when both are low
+    bc2_e15517 = NAND(tl6_p6101, bc2_e15085)      low when tl6_p6101 = 1, tl6_p6143 = 0
+    bc2_e15690 = NAND(bc2_e15215, tl6_p6143)      low when tl6_p6101 = 0, tl6_p6143 = 1
+
+all firm. The glossary has `tl6_p6101`, `tl6_p6143` and `tl6_p6187` as "believed three of R8's outputs" (north
+ends not followed): if so this is the decode of a two-bit field of R8. The third, `tl6_p6187`, arrives at
+y 14870, the height of `bc1`'s bus line `bc1_s1` (y 14873), one input of `bc1`'s own three-NAND decode: a
+lead, not followed here.
+
+### The two lines
+
+Lines 2 and 3 of the 13-line bus that `bc1` describes (its y 14397 and y 14439). Each is metal where it is free
+and poly under the two groups of three wide vertical metals, with a pad and contact at each change:
+
+| | `tl6_p6101` (y 14394) | `tl6_p6143` (y 14437) |
+|---|---|---|
+| poly row from `busl`'s end (x 7550) under `bc1`'s vertical metals | to the pad (7795,14394) | to the pad (7838,14438) |
+| metal | x 7795-8250 | x 7838-8293 |
+| pad, poly under `bc1`'s rails x 8335-8555, pad | (8250,14394) - (8598,14394) | (8293,14438) - (8641,14437) |
+| metal | x 8598-9378 | x 8641-9421 |
+| pad, poly under the W rail, M's stem and E's feeder (x 9455-9690), pad | (9378,14394) - (9764,14393) | (9421,14438) - (9722,14438) |
+| thin metal east, south | to x 10052, down to the tap (10050,15217) and the end pad (10050,15522) | to x 10007, down, west at y 15046, down x 9963 to the pad (9963,15087) and the end pad (9963,15738) |
+
+Evidence: `tools/tl5_tracks.py h 14394 7700 9800` and `h 14437 ...`: metal in both chips on the metal stretches
+(no gap of 8 px), no metal on the poly stretches except the wide verticals crossing them, and in the clean shot
+a hole (red minus green under 24) only at the eight pads and the two east ones; `cdp4_padc.py` on the ten pads:
+hole, and ring with bright centre in at least one metal shot each ((9378,14394): chip 1 only; (9764,14393): a
+small red-centred hole, ring and bright centre in both metal shots). Under the wide metals the rows are salmon
+and unbroken in the clean shot (views `b`, `c`); the dark rings beside them at x 8320, 8400, 8480, 8560, 9520,
+9610, 9700 lie in the gaps between two metals (the layers note's trap), not on the rows.
+`tools/eof_tee.py` on the poly stretches: no branch.
+
+**The join to `busl`'s rows** (x 7550-7778 / 7821): each row runs on east from `busl`'s drawn end under `bc1`'s
+vertical metals x 7575-7760 to its pad: poly throughout (`tl5_tracks.py rows row 7520 7800 4 14392 14437`: poly
+under metal or in the open at every sample but the 8-12 px dark edges of the metals; no pink field). No contact
+to any of the verticals: chip 1's metal shot is plain bright metal over both rows. One place needs saying: under
+the wide metal x 7664-7708 the clean shot shows the row y 14393 as three small patches of different colours
+(grey, green, orange-red, 59-136 red against 200 or more for salmon) and chip 2's metal shot is dim there
+(138-156 at x 7680-7688), while chip 1's is bright right across (201-219) with only the row's two edge lines
+(down x 7685: dark at y 14380 and y 14404, 221-223 between). No ring in either chip: read as residue on the two
+dies, not a contact (Ambiguity 6).
+
+### Ambiguities (run 3)
+
+6. **(7664-7708, 14393)**: residue or a contact of `tl6_p6101`'s row to the wide vertical metal there. Read as no
+   contact (no ring in either metal shot). If it were one, `tl6_p6101` would be on that metal too (it is in
+   `bc1`'s undrawn bundle; nothing else would change here).
+7. **The pad (9768,14393)**'s hole is small and red-centred in the clean shot; the contact rests on both metal
+   shots.
+8. **(9476,14438)**, row B under the W rail's west margin (review round 4): the clean shot has a dark bar across the
+   row, chip 1's other stripped shot a green spot with a ring, chip 2's stripped shot a small green spot at
+   (9470,14431); neither metal shot has a ring and the row is not widened. The same kind of spot as Ambiguity 6: not
+   a contact.
+9. **(8940,14398)**: a dark notch on line A's metal in both chips; the metal is continuous beside it and the clean
+   shot is plain field beneath: not a break or a tap.
+
+### Not done (run 3)
+
+- `tl6_p6187` / `bc1_s1` (the lead above); the other bus lines east of x 9300.
+- The centre block's east rail from y 15800 (first look in `cache/scratch/bc2/n3/notes.md`: an inverter at
+  y 15805-15935 fed from a pad (10008,15866), then an irregular group).
+
+## Run 3, piece `inv7` (2026-11-27): the inverter below the decode on the E rail
+
+Same run. Region x 9640-10030, y 15805-16080: 2 transistors, no uncertain item. Views in `cache/scratch/bc2/n3/`:
+`s_c`, `s_m` (2.5x), `u7_a` (4.4x, chip 2 stripped), `u7k` (the tie knot, 8x), overlay `ov7_a`.
+
+    bc2_e15864 = NOT bc2_m15867
+
+- **Pull-down** under the rail (`tools/bd2_umap.py 9796 15796 9900 15950 4 4`): VSS land (9824-9868,
+  15816-15852) with its contact (9843,15838); gate band y 15856-15872; output land y 15872-15908, which widens
+  west to the rail's edge at y 15896-15912.
+- **Input**: the band's poly runs east to a pad (10007,15867) (hole in the clean shot, ring in both metal
+  shots), the north end of a thin metal x 10002-10014 that goes south (drawn to y 15960: port; seen to about
+  y 16190, where it turns east). Placeholder `bc2_m15867`.
+- **Output**: a tab of the land east of the rail into a framed box (9898-9928, 15898-15928), its poly east to a
+  pad (9963,15912), a thin metal south to a pad (9963,16062), whose poly is not drawn (port).
+- **Load** beside M: a poly block x 9698-9782, y 15845-15912 over the band y 15862-15882 from the VCC land under M
+  (9642-9696, 15850-15900; contact (9665,15877)): in chip 2's stripped shot three orange bands (y 15850-15858,
+  15862-15882, 15888-15905) with one dark line between each (W 20, L 84: a weaker load than `bc2_einv`'s).
+- **Tie**: the band's east end is the top of a diffusion strip x 9786-9800 between the block and the rail
+  (chip 2's metal shot 133-179 / 104-137 / 73-91 down it at y 15866, 15876, 15895, 15925: pinker than field, blue
+  above poly's; stripped R-G +15..+29), which runs south to y 15937 and widens west at y 15915-15937 into a framed
+  box (9746-9772, 15912-15940) under a tab of the block's bottom (view `u7k`).
+- **The strip meets the output land** at y 15896-15912 across the rail's west edge line (x 9800-9809): the land
+  is tan to x 9804 under the rail there (`bd2_umap` rows 15900-15912) and the strip is diffusion to x 9800; the
+  6 px between lie under the edge line (Ambiguity 10).
+
+### Ambiguities (piece `inv7`)
+
+10. **The join of the tie strip to the output land** rests on two diffusions meeting under the rail's 6-9 px
+    edge line. If they did not meet, the load would have no connection to the output, which a gate cannot lack.
+
 ## Review
 
 **Model note: latch unit a was traced AND reviewed on claude-opus, not claude-fable-5-2**
@@ -233,6 +499,152 @@ the tl1 master cell's width, unit a reads the same. Not checked: the gate widths
 and t1894; anything beyond y 15746.
 
 Round 1 (latch unit b): no findings.
+
+### Round 2 (full review), 2026-11-27: run 2, piece `inv` (traced and reviewed on Claude Fable 5.2)
+
+A fresh Claude Fable 5.2 agent, on commit e4d7fa8, 17 images in `cache/scratch/bc2/review-2/`. Told to suspect:
+the load (one poly over one band, the tie wire), the output box's joins to the land and to each unit's pad, unit
+1's input column under its own output metal, the gate band's east part (over diffusion or field), the two copies
+against the master, each thin metal's ends and crossings (x 10007's two pieces), the supply claim for M and E,
+anything undrawn.
+
+**No finding changes a connection.** Three findings, all confirmed and fixed:
+
+1. **M's supply evidence was wrong** (M = VCC holds): the band y 14130-14180 is two pieces; M's stem hangs on the
+   west one, which turns north as the datapath's rail x 9765-9818 (`cdp4`: `vcc`), not on the piece that reaches
+   the rail x 10746. Notes and trace comment corrected.
+2. **Unit 2's VCC land** is taller (y 15033-15135) and has a second contact at (9662,15055) (pits, ring in both
+   metal shots): drawn. Probably also the VCC end of an undrawn load west of M (open poly at x 9596-9628, y 15055).
+3. **Pull-down width**: the VSS land's west edge is x 9824 (drawn 9828): channel 44, and the band east of the rail
+   lies on field (Ambiguity 1 settled).
+
+Checked and found correct by the reviewer: the load in all three units (one poly block with single 6-8 px dark
+lines over one band; the tie wire diffusion, unbroken into the band; `tools/cellcheck.py`: 0.96 and 0.97 for the
+copies); tab, box and poly to each pad joined in all three; unit 1's row y 14815-14832 ending at x 9977 into the
+column, the column salmon with no hole under the metal, field between the band and the pad (9963,15000); 10-12 px
+of bare ground at y 15023-15033 between that pad and unit 2's input corner; x 10007 two pieces with no metal at
+y 15052-15126; nothing north of the pad (10094,15261); x 9963 and x 10052 through their pads; no contact at any
+crossing; no hidden branch on eight polys; E's band continuous along y 14245 from x 9640 to x 10594; no contact
+to E on the output lands. Could not check: the clean shot at the loads (displaced or inverted there: the load
+reading rests on both chip-2 shots and chip 1's metal shot); diffusion continuity exactly under the rail-edge
+lines; the wires beyond y 14660-15300.
+
+Connections before and after the fixes (commit e4d7fa8 against the fixed tree):
+
+    tools/t.sh bc2 sameconn.py e4d7fa8            ->  connections identical
+    .venv/bin/python tools/sameconn.py e4d7fa8    ->  connections identical
+
+Recorded 2026-11-27 08:25 -0600.
+
+Round 2: no findings that change a connection.
+
+### Round 3 (full review), 2026-11-27: run 2, piece `nand`
+
+A fresh Claude Fable 5.2 agent, on commit 787a3c0, 28 images in `cache/scratch/bc2/review-3/`. Told to suspect:
+series or parallel (the strip between the bands: a contact, an exit), which metal each of the eleven pads is
+on and where each thin metal ends, the fourteen crossings (the tracer's pad test gave false alarms), the two pads
+on x 10137, the copies against the master, the load and tie, anything undrawn.
+
+**No finding changes a connection.** Three geometry remarks, confirmed and fixed:
+
+1. The pull-down diffusion under the bands is x 9798-9878, not x 9805-9868 (edge lines across both bands and on
+   the strip rows in three shots): W about 78.
+2. Unit 2's output metal's north leg is x 10172-10191 (drawn centred on x 10176).
+3. The output band east of the load is y 15425-15443 at x 9775-9800 (drawn y 15417-15440).
+
+Checked and found correct by the reviewer: the series stack in all three units (no contact on the strip in the
+clean shot or either metal shot; the strip closed at both rail edges with field outside; the west end caps
+separate from each other and from the tie wire); two specks that are not contacts ((9831,15372), (9820,15770): one
+chip only, no ring); all nine pads with their contacts; the metal ends (x 9963 at y 15743; x 10007 through its tap
+to y 15571; x 10052 at y 15527; x 10093 through its tap, round the corner to (10006,15696), not joined to x 9963;
+x 10137 on its pad at y 15435 with no metal from y 15442 to y 15604; unit 2's pad on the foot of the x 10181 metal
+only; unit 3's output east and south on x 10050); all 14 crossings plain; the rows continuous with no branch
+(`tools/eof_tee.py` on all nine); load, tie and output box identical in the three units, the VCC land joined to
+the channel with no edge line, the band unbroken to the rail; `tools/cellcheck.py`: 0 of 44 blocks bad in two
+shots; nothing undrawn at x 9700-9800 or x 9870-9950. Could not check: chip 2's stripped shot under the rail
+(fringes: "no contact on the strip" rests on the clean shot and both metal shots); the tie wire's class by colour
+(read as diffusion from its closed outline, as in `bc2_einv`); a green patch in the clean shot under the rail
+between consecutive units (read as field between two closed lands).
+
+Connections before and after the fixes (commit 787a3c0 against the fixed tree):
+
+    tools/t.sh bc2 sameconn.py 787a3c0            ->  connections identical
+    .venv/bin/python tools/sameconn.py 787a3c0    ->  connections identical
+
+Recorded 2026-11-27 08:41 -0600.
+
+Round 3: no findings that change a connection.
+
+### Round 4 (full review), 2026-11-27: run 3, piece `bus2`
+
+A fresh Claude Fable 5.2 agent, on commit b5d1c34, 23 images in `cache/scratch/bc2/review-4/`. Told to suspect: the
+join to `busl`'s rows at the west end (the same row, no track step, no contact to the verticals there, the
+coloured patches at (7664-7708,14393)), each of the ten pads (a contact; the metal leaving only as drawn; a
+second poly), the metal stretches (a tap in mid-run, a break), the poly under the wide metals, the east pads'
+joins to the thin metals, the thin metals to y 14660.
+
+**No finding changes a connection.** One geometry remark, fixed: the pad drawn at (9764,14393) is about 5 px west
+of its place (ring x 9750-9790, bright centre x 9763-9773 in both metal shots): moved to (9768,14393). Three
+remarks for the notes, recorded as Ambiguities 6 (agreed: not a contact; the row y 14351 has the same green patch
+under the same metal, chip 1's metal bright across, no ring, the row not widened), 8 and 9.
+
+Checked and found correct by the reviewer: the west join (rows y 14393 and y 14437 unbroken from x 7300 to their
+pads with no track step: column maps at 25 positions and row profiles in four shots; no ring or hole at the
+metals x 7578-7622, 7664-7708, 7746-7757); the ten pads (ring and bright centre in both metal shots, except
+(9378,14394), which rests on chip 1 and the clean shot's hole; the two east pads also pitted boxes in chip 2's
+stripped shot; metal leaving only on the drawn side, bare ground north and south of each in all four shots); the
+metal runs (no gap of 8 px in both chips; field under their whole length in the clean shot, so no poly passes
+beneath; no tee); the poly under the six wide metals (salmon and unbroken, no ring in either metal shot; the gap
+rings absent from both chip-2 shots; no branch); the east thin metals (continuous, clean corners, crossing the
+poly rows y 14607 and y 14650 with edge bars only); the extraction. Not checked: `busl`'s own drawing west of
+x 7545; under the wide metals chip 2's stripped shot is fringed, so those readings rest on the clean shot and
+the two metal shots.
+
+Connections before and after the fix (commit b5d1c34 against the fixed tree):
+
+    tools/t.sh bc2 sameconn.py b5d1c34            ->  connections identical
+    .venv/bin/python tools/sameconn.py b5d1c34    ->  connections identical
+
+Recorded 2026-11-27 08:59 -0600.
+
+Round 4: no findings that change a connection.
+
+### Round 5 (full review), 2026-11-27: run 3, piece `inv7`
+
+A fresh Claude Fable 5.2 agent, on commit 3370fb2, 12 images in `cache/scratch/bc2/review-5/`. Told to suspect:
+the join of the tie strip to the output land under the rail's edge line (Ambiguity 10) and any other place the
+load's band could meet the output, the strip and its box, whether the load is one poly block, the three pads and
+their metals' directions, the band and the output poly east of the rail, and anything undrawn on these nets.
+
+**No finding changes a connection.** Three geometry remarks, all fixed:
+
+- the gate band is y 15857-15879, not 15856-15872 (clean shot at x 9844 salmon y 15858-15876; orange y 15860-15877
+  east of the rail in chip 2's shots): L about 21, not 16;
+- the load block's west end is x 9691 under M's margin, not 9698;
+- the VCC land runs on south under M to about y 15966 with a second contact (9662,15938) (hole in the clean shot,
+  ring in both metal shots; `tools/bd2_umap.py 9640 15896 9700 15984 4 4`): drawn; the M rail drawn on to y 15980.
+
+**Ambiguity 10: the join stands**, on the reviewer's own evidence: chip 1's metal shot has no extra edge at the
+junction (at y 15901 / 15907 the rail's edge line is no wider or darker than beside plain field, while at y 15876
+and y 15928 it is 6 px wider westward); the clean shot's rows y 15901 / 15907 have no green field strip (the mirror
+image of the tab's crossing at the rail's east edge); and the direct alternative is out (x 9808-9822,
+y 15856-15880 is the band's poly end cap, the land's west edge x 9824 is dark in all shots, pink field at
+y 15882-15896). The 6 px under the edge line themselves stay unseen.
+
+Checked and found correct by the reviewer: the strip is diffusion y 15865-15928 with no crossing line; the tie box
+and the output box match the pilot box; the load is one poly block and the VCC land enters under it with no field
+between; no contact on the output land; three pads with contacts, no metal north of either upper pad, the x 9963
+metal continuous y 15936-16042; field between the band and the output poly; nothing undrawn touches these nets.
+Not checked: the x 10007 metal south of y 16000; the poly leaving the pad (9963,16062).
+
+Connections before and after the fixes (commit 3370fb2 against the fixed tree):
+
+    tools/t.sh bc2 sameconn.py 3370fb2            ->  connections identical
+    .venv/bin/python tools/sameconn.py 3370fb2    ->  connections identical
+
+Recorded 2026-11-27 09:17 -0600.
+
+Round 5: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
