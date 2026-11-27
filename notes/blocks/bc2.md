@@ -768,13 +768,13 @@ shots), `r_c`, `r_m`, overlay `ov6`.
   7 px line with orange poly on both sides at x 9524). West of it land 5 (tan to x 9503), east of it a node:
   `tools/px.py row 15915 9450 9644 3 metal,acid,acid1b`, `row 15903`, `row 15928`: tan from x 9536 to x 9573,
   the two dark lines inside it (x 9543, x 9564) being the edges of the thin metal x 9545-9562 that lies over it.
-  The poly is brighter over the channel (241-243 at y 15904-15925 against 187-225 at its ends). W 26, L 22.
+  The poly is brighter over the channel (241-243 at y 15904-15925 against 187-225 at its ends). W 31, L 22 (review round 13: the active strip is y 15901-15932; the branch has an end cap to y 15884).
 - **The node** (9536-9574, 15898-15934): tan under the thin metal x 9552 of `bc2_e15343`, which has no contact
   to it (plain tan 186-198 / 152-174 down x 9558 from y 15884 to y 15926; the metal not widened; review round 10).
   Field south of it (pink under the metal from y 15941).
 - **Load**: the node's band y 15907-15934 runs east under a poly block x 9579-9628, y 15890-15938
-  (`tools/px.py col 9605 15880 15948 ...`, `col 9622 ...`: poly y 15892-15931 with one dark line at
-  y 15904-15910, the band's north edge; the block's bottom line at y 15934-15937) onto the VCC land under the M
+  (`tools/px.py col 9605 15880 15948 ...`, `col 9622 ...`: poly from y 15892 to y 15956 with two dark lines, y 15904-15910 and
+  y 15934-15938, the band's two edges: corrected in review round 13, the tracer had the second as the block's bottom) onto the VCC land under the M
   rail (`tools/bd2_umap.py 9626 15880 9704 15975 3 4`: the land reaches west to x 9635 at y 15904-15932;
   contact (9662,15938), drawn in run 3, whose review noted it as "probably the supply end of an undrawn load
   west of the M rail"). W 27, L 49.
@@ -1272,6 +1272,44 @@ end, and no tie was looked for, so "load" is unproven. Nothing changed in the tr
 Recorded 2026-11-27 12:31 -0600.
 
 Round 12: no findings.
+
+### Round 13 (full review), 2026-11-27: run 8, piece `w6`
+
+A fresh Claude Fable 5.2 agent, on commit 6783e1a, 17 images in `cache/scratch/bc2/review-13/`. Told to suspect:
+whether the branch is one poly with band A and a gate with diffusion on both flanks; the load's band under the
+block to the M rail's land; every drawn poly end (the tracer mis-ended wires in run 7); another exit or a contact
+on the node; the uncertain box's three joins, each separately, against two certain boxes; the pad (9420,15862).
+
+**No finding changes a connection.** Geometry, all fixed: the load block's poly runs to y 15956 (orange in three
+shots at y 15941-15953, outline at y 15956, field from y 15962; nothing touches the extra strip); the branch has
+an end cap to y 15884 and ends there (field y 15873-15879 between it and the row); the active strip is
+y 15901-15932 (W 31).
+
+Verdicts: the branch is **one poly with band A** (the lines y 15897-15900 and y 15934-15938 are the active
+strip's two edges, 7 px each, orange poly beyond both) and **a gate** (land 5's tan reaches x 9503; the clean
+shot brighter over the channel; the strip east of the gate pinker than field, bounded by the same two edge
+lines, no vertical edge before the node); **no contact** of the thin metal on the node; the load's band correct
+(both lines cross the whole block; tan reaches west to x 9635 only at y 15906-15930, the land's edge line absent
+there); the stem one poly with the block, field above y 15842 and east of it; the pad (9420,15862) a real
+contact with plain ground north and west; the row continuous under the rail with field south of it.
+
+**The box** (Ambiguity 14; it is of the same kind as both reference boxes): the finger **yes** (tan continuous
+from y 15884 to the node, field north of the box); the stem's poly **probably yes** (its west edge steps west at
+the box's height only; the frame is 9 px, as on the reference tie's joined side); the row's poly **probably yes,
+cannot be proved** (its two edge lines continue to x 9548 in both metal shots; the clean shot there is not field
+pink but not salmon either); **no metal contact** (the metal keeps its edges, chip 2's stripped shot shows a
+pink ghost without pits). "`?` on all four box items is right": they stay `?`.
+
+Not checked: the thin metal's continuity over the box; the thin metal x 9420 south of y 15990.
+
+Connections before and after the fixes (commit 6783e1a against the fixed tree):
+
+    tools/t.sh bc2 sameconn.py 6783e1a            ->  connections identical
+    .venv/bin/python tools/sameconn.py 6783e1a    ->  connections identical
+
+Recorded 2026-11-27 12:52 -0600.
+
+Round 13: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
