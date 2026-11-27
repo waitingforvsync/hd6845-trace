@@ -4,7 +4,8 @@
 
 # ================================================================ run 1 (2026-11-27), piece dec: bc2_e15517 and bc2_e15690 to their rows
 # bc2_e15517 (low for R8 bits 7,6 = 0,1): the thin metal x 9135-9149 runs on from bc2's port (9142,16370) south
-# over field (no stretch dark in both metal shots but bars of 8 px) to its end on a pad (9141,17171); the pad's
+# (over field and, without contact, over two diffusion rectangles at y 16477-16607, eof's, and y 16782-16997,
+# undrawn: review round 1; bars of 8 px at their edges) to its end on a pad (9141,17171); the pad's
 # poly row y 17160-17180 runs east under six thin vertical metals (x 9185, 9228, 9270, 9312, 9357, 9399; no
 # contact) to x 9406. Drawn to there (port): beyond is a structure at the west rail's edge (x 9415-9460), not read.
 M 9142,16360 y17171 w=14
@@ -14,7 +15,7 @@ P 9141,17160:9406,17180                # row east (port)
 N M 9142,16800 bc2_e15517
 # bc2_e15690 (low for bits 7,6 = 1,0): the thin metal x 10131-10145 runs on from bc2's port (10138,16300) south to
 # a corner at y 16564, east to x 10182 and south on x 10174-10189 to its end on a pad (10181,17170); the pad's
-# poly row y 17159-17180 runs west under four thin vertical metals (x 10140, 10100, 10060, 10000; no contact) to
+# poly row y 17159-17180 runs west under five thin vertical metals (x 10138, 10095, 10051, 10008, 9965; no contact) to
 # x 9954. Drawn to there (port): beyond is a structure east of the east rail (x 9860-9945), not read.
 M 10138,16290 y16564 x10182 y17170 w=13
 P 10164,17153:10198,17187              # pad
