@@ -139,3 +139,77 @@ N P 10330,15608 bc2_w15607
 # inverter's output (the cell's thin metal x 10500):
 N P 10495,15477 bc2_w15476
 N M 10500,15326 bc2_w15352
+
+# ================================================================ run 2 (2026-11-27): the centre block, piece inv
+# Three rails run down the block: W (x 9440-9500), M (x 9640-9700, VCC: one metal with the band y 14130-14180 that
+# runs east to the VCC rail x 10746) and E (x 9806-9866, VSS: one metal with the band y 14222-14268 that runs east
+# to the VSS rail x 10570). Named here by label; the bands are not drawn (notes/blocks/bc2.md, "Run 2").
+M 9808,14560:9864,15300                # E rail (drawn over this piece's units)
+N M 9836,14700 vss
+M 9642,14750:9698,15300                # M rail
+N M 9670,14800 vcc
+# ---------------------------------------------------------------- cell bc2_einv: an inverter on the E rail
+# Pull-down under the E rail, depletion load beside the M rail. The master is the top unit (gate band y 14947-14963).
+@cell bc2_einv tag=14955
+D 9828,14900:9868,14998                # VSS land, under the band, output land (the channel is the land's width, 40)
+C 9843,14922
+D 9805,14967:9870,14998                # output land under the rail
+P 9805,14947:9948,14963                # gate band; east of the rail it is wiring to the input
+D 9868,14972:9896,14996                # the output land's tab east of the rail
+D 9890,14982:9926,15012                # under the box
+B 9890,14980:9928,15014                # output box (buried contact)
+P 9896,14986:9946,15012                # its poly, east
+N D 9838,14985 bc2_e{}
+# load: a poly block over the band that runs from the VCC land under the M rail east into the output land
+D 9642,14945:9696,15005                # VCC land
+C 9668,14963
+D 9690,14978:9812,15000                # band: channel under the block (W 22, L 56), and east to the rail
+P 9698,14955:9754,15022                # load gate (the band's edges print through it at y 14970-14977 and y 15001-15008)
+D 9758,14930:9776,14990                # tie wire: from the band north
+D 9728,14932:9776,14950                # and west into the box
+P 9728,14930:9754,14958                # the block's tab over the box
+B 9726,14930:9756,14952                # tie (buried contact)
+@end
+@inst bc2_einv 0,130 tag=15085
+@inst bc2_einv 0,260 tag=15215
+# ---------------------------------------------------------------- the three inverters' inputs and outputs (to this piece's edges)
+# Unit 1 (14955). Input: the band's poly turns north at x 9950-9976, runs under the thin metal of its own output (clean shot
+# salmon from y 14858 to y 14960, no hole) to the row y 14815-14832, which comes from the west (port at the rail's edge).
+# Output: the box's poly ends on a pad (9963,15000); a thin metal north to y 14870 and west to a pad (9897,14869); its poly
+# row y 14860-14878 goes west under the rail (port). Field under the thin metal between the band and the pad (y 14966-14980).
+P 9946,14947:9976,14963                # the band, on east
+P 9950,14815:9976,14963                # input column
+P 9872,14815:9976,14832                # input row, from the west (port)
+P 9945,14984:9981,15016                # output pad
+C 9963,15000 s=20x20
+M 9963,15008 y14870 x9890 w=13
+P 9880,14853:9914,14885                # pad
+C 9897,14869 s=20x20
+P 9872,14860:9897,14878                # output row, west (port)
+# Unit 2 (15085). Input: the band ends east on a pad (9963,15087) of a thin metal that comes from the north on x 10007,
+# turns west at y 15046 and runs on south on x 9963 through the pad (tools/follow.py: north to a corner (10004,14436) and a
+# pad (9722,14437); south to y 15742): drawn from y 14660 to y 15300 (ports). Output: the box's poly east under that metal
+# (no contact) to a pad (10006,15131), the north end of a thin metal x 10007 south (port).
+P 9946,15077:9963,15093
+P 9945,15070:9981,15104                # pad
+C 9963,15087 s=20x20
+M 10007,14660 y15046 x9963 y15300 w=13
+P 9944,15116:10007,15142
+P 9989,15114:10023,15148               # pad
+C 10006,15131 s=20x20
+M 10007,15122 y15300 w=12
+# Unit 3 (15215). Input: the band's poly east under the metals x 9963 and x 10007 (no contact) to a tap pad (10050,15217) on
+# the thin metal x 10052, which runs through from the north (follow: corner (10052,14390), pad (9764,14394)) to the south
+# (follow: end y 15526): drawn y 14660-15300 (ports). Output: the box's poly east under x 9963, x 10007 and x 10052 (no
+# contact) to a pad (10094,15261), the north end of a thin metal south (port); bare ground north of the pad.
+P 9946,15207:10050,15223
+P 10033,15200:10067,15234              # pad
+C 10050,15217 s=20x20
+M 10052,14660 y15300 w=13
+P 9944,15246:10094,15272
+P 10077,15244:10111,15278              # pad
+C 10094,15261 s=20x20
+M 10093,15252 y15300 w=13
+N M 10007,14900 bc2_m10007
+N M 10052,14900 bc2_m10052
+N P 9900,14823 bc2_p14823

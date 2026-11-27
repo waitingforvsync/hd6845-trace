@@ -9,3 +9,12 @@ bc2_w15388    M  10353,15440   in   data of latch unit b: metal x 10353 from the
 bc2_w15432    M  10441,15665   in   enable of latch unit b: metal x 10441 from b's two enable pads on south (not followed)
 bc2_w15565    M  10226,15515   in   clear of latch unit b: metal x 10226 from the pad (10226,15565) north (not followed)
 bc2_w15607    M  10267,15515   out  latch unit b's lower node (a's bc2_w15029 side): metal x 10267 from the pad (10267,15607) north (not followed)
+# run 2 (2026-11-27), piece inv: the three inverters on the centre block's east rail
+bc2_p14823    P  9872,14823    in   input of the inverter bc2_e14955: poly row from the west, under the E rail
+bc2_e14955    P  9872,14869    out  output row west under the E rail, from the pad (9897,14869)
+bc2_m10007    M  10007,14660   in   input of bc2_e15085: thin metal from the north (follower: to a pad (9722,14437) on a bus line)
+bc2_m10007    M  9963,15300    ?    the same metal runs on south on x 9963 (follower: to y 15742)
+bc2_e15085    M  10007,15300   out  thin metal south from its pad (10006,15131) (follower: to y 15570)
+bc2_m10052    M  10052,14660   in   input of bc2_e15215: thin metal from the north (follower: to a pad (9764,14394) on a bus line)
+bc2_m10052    M  10052,15300   ?    the same metal runs on south (follower: to y 15526)
+bc2_e15215    M  10093,15300   out  thin metal south from its pad (10094,15261) (follower: corner (10089,15698), west to (10003,15696))

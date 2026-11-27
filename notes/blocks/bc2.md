@@ -186,6 +186,96 @@ In order:
    x 10310, 10355, 10398 west of unit b); joins to `bc1`'s bus ends at x 9000, to `bw` and to `cdp4`;
    floor-plan fragment.
 
+## Run 2 (2026-11-27): the centre block, piece `inv`
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 08:11 -0600. The centre block of the bottom-centre logic (x 9100-10250,
+y 14650-16300) was untraced: three rails with gate columns between them and nested wires on both sides. This
+piece is its first three units on the east rail, x 9640-10110, y 14815-15300: 6 transistors, 3 named outputs, no
+uncertain item. Views in `cache/scratch/bc2/`: `m1_top`, `top_m`, `top2_m` (overviews), `u1_*`, `e1_*`, `e1e_*`,
+`e1w_*`, `e1n_*`, `knot` (photos at 3-8x), `wire_e_m`, `ov23_c`, `ov_w` (overlays).
+
+### The rails
+
+Three wide metals run down the block: W (x 9440-9500), M (x 9640-9700), E (x 9806-9866).
+
+- **M is VCC**: its top is the stem x 9550-9600 of the wide band y 14130-14180 (the stem steps east at
+  y 14700-14750 onto x 9640-9700), and that band is metal in both chips along y 14155 from x 9357 east to
+  x 10767, where the VCC rail x 10746 (`eof`, `bc2` unit a) stands. Every load of the block lies beside M.
+- **E is VSS**: its top turns west at y 14500-14550 to x 9640-9690 and north into the band y 14222-14268, which
+  is metal along y 14245 from x 9654 to x 10593 (three 4 px edge lines on the way), where the VSS rail x 10570
+  stands. The units' pull-downs lie under E.
+- **W** comes from the band y 14270-14300 from the west; not decided (it crosses the positions of both the
+  VCC rail x 8534 and the VSS rail x 8712).
+
+The two bands are not drawn: M and E are labelled `vcc` and `vss` over this piece's units (joined by name).
+
+### Cell `bc2_einv`: an inverter on the E rail (master: the top unit, gate band y 14947-14963)
+
+- **Pull-down** under the rail: VSS land (9828-9868, 14900-14945) with its contact (9843,14922) (pits in the
+  clean shot, ring in both metal shots); gate band y 14947-14963 (salmon under the rail); output land
+  y 14967-14998 (x 9805-9870). Channel 40 wide (the VSS land's width), 16 long.
+- **Output**: the land has a tab east of the rail (bright green in the clean shot at (9879-9885, 14985-14990))
+  into a framed box (9890-9928, 14980-15014: heavy outline, an L-shaped lighter interior, tan in chip 2's
+  stripped shot), from which a poly leaves east.
+- **Load** beside the M rail: the output land runs west as a band y 14978-15000 under a poly block
+  (9698-9754, 14955-15022) to the VCC land under M (9642-9696, 14945-15005; contact (9668,14963)). In chip 2's
+  stripped shot the block is three orange bands (y 14958-14970, 14978-15000, 15008-15020) separated by one dark
+  line each (y 14970-14977, y 15001-15008): the band's two edges under one poly (view `knot`, 8x). Channel 22
+  wide, 56 long.
+- **Tie**: a diffusion wire x 9758-9776 leaves the band north (tan in the stripped shot, orange-west /
+  plain-east in chip 2's metal shot down x 9762-9771 from y 14937 to y 14994) and turns west at y 14932-14950
+  into a framed box (9726-9756, 14930-14952; pinkish window) on the block's top.
+
+Copies at +130 and +260 (`tools/findcell.py` on the clean shot: 0.84 and 0.87); overlay `ov23_c`: lands, bands,
+blocks and boxes lie on the features. Two more partial matches (+440: 0.60, +613: 0.62) are not placed: units of
+another build.
+
+    bc2_e14955 = NOT bc2_p14823
+    bc2_e15085 = NOT bc2_m10007
+    bc2_e15215 = NOT bc2_m10052
+
+### Inputs and outputs (drawn to this piece's edges; view `wire_e_m`, overlay `ov_w`)
+
+- **Unit 1.** Input `bc2_p14823`: the band's poly runs on east of the rail to x 9976 and north as a column
+  x 9950-9976 **under the thin metal of the unit's own output** (clean shot salmon from y 14858 to y 14960, no
+  hole; `cdp4_candh.py v 9963,14900 9963,14930`: plain) to the poly row y 14815-14832, which comes from the west
+  (port at the rail's east edge). Output: the box's poly ends on a pad (9963,15000); a thin metal north to
+  y 14870, west to a pad (9897,14869); its poly row y 14860-14878 leaves west under the rail (port). Between
+  the band's end and the pad the clean shot is pink under the thin metal (y 14966-14980): field.
+- **Unit 2.** Input `bc2_m10007`: the band ends east on a pad (9963,15087) of a thin metal that comes from the
+  north on x 10007, turns west at y 15046 and runs on south on x 9963 through the pad (`tools/follow.py`: north
+  to a corner (10004,14436) and west to a pad (9722,14437); south to y 15742). Output: the box's poly east under
+  that metal (no contact) to a pad (10006,15131), the north end of a thin metal x 10007 south (follow: to
+  y 15570). So x 10007 carries two nets: the input above y 15046, the output below y 15122.
+- **Unit 3.** Input `bc2_m10052`: the band's poly east under the metals x 9963 and x 10007 (no contact) to a tap
+  pad (10050,15217) on the thin metal x 10052, which runs through (follow: north to a corner (10052,14390) and a
+  pad (9764,14394); south to y 15526). Output: the box's poly east under x 9963, x 10007 and x 10052 (no contact)
+  to a pad (10094,15261), the north end of a thin metal south (follow: a corner (10089,15698), west to
+  (10003,15696)); bare ground north of the pad.
+- The four pads test as pads and the six crossings as plain (`cdp4_candh.py`: clean shot minimum R-G 32-47 at
+  the crossings, -23 to -37 at the pads).
+
+The pads (9722,14437) and (9764,14394) lie on two of the poly bus lines y 14354-14873 that `bc1` draws west of
+x 9300: the two inputs come off that bus.
+
+### Ambiguities (run 2)
+
+1. **The pull-down's width.** East of the rail the gate band has a green strip on each side in the clean shot
+   (north y 14937-14947, 8 px; south y 14963-14980, 15 px; x 9872-9945). If both are diffusion the channel is
+   about 125 wide, not 40; a poly in the open also has a thin green rim. Drawn 40 (under the rail only). The
+   connections are the same either way.
+2. **The framed boxes** (three output boxes, three ties) are drawn `B`: heavy outline, lighter interior, at the
+   end of a poly with no other driver (the load's gate) or of the output poly.
+3. **W's supply** is not decided; nothing drawn rests on it.
+
+### Not done (run 2)
+
+- The rest of the block: the E rail's units below y 15300 (two more of another build at about y 15400 and
+  y 15570, and on), the W rail's units, the M rail's other loads, the nested wires on both sides and the bus
+  rows y 14690-14880 east of x 9870.
+- The six wires of this piece beyond its edges (ports).
+- The two supply bands.
+
 ## Review
 
 **Model note: latch unit a was traced AND reviewed on claude-opus, not claude-fable-5-2**
