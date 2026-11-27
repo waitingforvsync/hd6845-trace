@@ -141,8 +141,9 @@ N P 10495,15477 bc2_w15476
 N M 10500,15326 bc2_w15352
 
 # ================================================================ run 2 (2026-11-27): the centre block, piece inv
-# Three rails run down the block: W (x 9440-9500), M (x 9640-9700, VCC: one metal with the band y 14130-14180 that
-# runs east to the VCC rail x 10746) and E (x 9806-9866, VSS: one metal with the band y 14222-14268 that runs east
+# Three rails run down the block: W (x 9440-9500), M (x 9640-9700, VCC: its stem x 9550-9600 hangs on the west piece,
+# x 9347-9818, of the band y 14130-14180, which turns north as the datapath's rail x 9765-9818 that cdp4 labels vcc)
+# and E (x 9806-9866, VSS: one metal with the band y 14222-14268 that runs east
 # to the VSS rail x 10570). Named here by label; the bands are not drawn (notes/blocks/bc2.md, "Run 2").
 M 9808,14560:9864,15300                # E rail (drawn over this piece's units)
 N M 9836,14700 vss
@@ -151,7 +152,7 @@ N M 9670,14800 vcc
 # ---------------------------------------------------------------- cell bc2_einv: an inverter on the E rail
 # Pull-down under the E rail, depletion load beside the M rail. The master is the top unit (gate band y 14947-14963).
 @cell bc2_einv tag=14955
-D 9828,14900:9868,14998                # VSS land, under the band, output land (the channel is the land's width, 40)
+D 9824,14900:9868,14998                # VSS land, under the band, output land (the channel is the land's width, 44)
 C 9843,14922
 D 9805,14967:9870,14998                # output land under the rail
 P 9805,14947:9948,14963                # gate band; east of the rail it is wiring to the input
@@ -172,6 +173,10 @@ B 9726,14930:9756,14952                # tie (buried contact)
 @end
 @inst bc2_einv 0,130 tag=15085
 @inst bc2_einv 0,260 tag=15215
+# Unit 2's VCC land is taller than the master's (y 15033-15135) and has a second contact (review round 2): probably
+# also the supply end of an undrawn load west of the M rail.
+D 9642,15033:9696,15080
+C 9662,15055
 # ---------------------------------------------------------------- the three inverters' inputs and outputs (to this piece's edges)
 # Unit 1 (14955). Input: the band's poly turns north at x 9950-9976, runs under the thin metal of its own output (clean shot
 # salmon from y 14858 to y 14960, no hole) to the row y 14815-14832, which comes from the west (port at the rail's edge).
