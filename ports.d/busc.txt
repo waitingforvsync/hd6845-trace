@@ -2,5 +2,7 @@
 # busc run 1 (2026-11-27): the driver of d_hiz below the data bus column.
 rd_data_e     M      17100,17950      in   bd2's thin metal from its pad (17080,17949): the gate of stage 1's pull-down
 d_hiz         M      17641,17084      out  the driver's output, into the data bus column's d_hiz metal x 17631-17651 (dpad)
-vcc           M      17040,17130-17270  -  the wide metal from the data bus column's VCC rail (west side)
-vss           M      17452,17850-17906  -  the east rail's foot; goes on east and south by a wide metal x 17465-17520 to inrow's vss rail (review round 1's following; not drawn)
+vcc           M      17527-17585,17018  -  the wide VCC metal's east end: one metal with dbus' VCC rail (which dbus draws to y 17000)
+vcc           M      16976-17040,17420  -  the wide VCC metal runs on south down the driver's west side; not followed
+vss           M      17400-17518,18381-18431  -  the driver's ground metal meets inrow's ground rail (M 13707,18381:17480,18431)
+vss           M      17720,18192-18254  -  its east arm, into dbus' VSS trunk (x 17690-17765)

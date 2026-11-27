@@ -130,7 +130,7 @@ and y 17915-17935); the area east of the top group (17385-17460, 17105-17260).
 
 ### Ambiguities
 
-1. **The east rail is VSS by reasoning, not by drawing.** If it were not, nothing here would work as a
+1. (Closed by run 2, piece `sup`: the rail is drawn to `inrow`'s ground rail.) **The east rail is VSS by reasoning, not by drawing.** If it were not, nothing here would work as a
    circuit. Review round 1 followed its foot to `inrow`'s `vss` rail by a wide metal (x 17465-17520) that no
    package draws yet.
 2. **The two framed boxes** (the ties of the two loads) are drawn `B`: heavy outline, lighter centre, each at
@@ -156,6 +156,35 @@ and y 17915-17935); the area east of the top group (17385-17460, 17105-17260).
 
 - Where the east rail goes from its foot.
 - The rest of `busc`'s region.
+
+## Run 2 (2026-11-27), piece `sup`: the driver's two supply metals
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 07:44 -0600. Wiring only: 8 metal rectangles, no transistor, no contact, no
+uncertain item. Its purpose: run 1 named the driver's west supply VCC from a view and its east rail VSS by
+reasoning (Ambiguity 1); both are now joined by drawing to rails other packages name. The full extraction's
+`vss` falls from 167 separately drawn pieces to 164 and `vcc` from 117 to 116; no other net changes
+(`tools/sameconn.py d9bab64`: connections identical, alone and with every file).
+
+- **VCC.** The data bus column's VCC rail (`dbus`: x 17527-17585, drawn to y 17000) runs on to y 17018 and
+  turns west into a wide metal y 16974-17018 (down x 17300: metal y 16976-17016 in both chips; down x 17556:
+  bright to y 17018, so rail and horizontal are one), which turns south at x 16992-17060 (row y 17060: metal
+  x 16994-17058) and widens east at y 17130 into the driver's strap over A1 and A2 (row y 17200: metal x 16994
+  to x 17106 with one 8 px dark line at x 17074-17078, the west edge of G1's poly column under it). Below
+  y 17290 the vertical is x 16976-17040 and runs on south down the block's west side, apart from the thin
+  metal x 17082-17098 (bare ground x 17046-17066 between them at y 17330): drawn to y 17420. Under the L the
+  clean shot is field throughout (pink and green interference colours; view `vcc2`); one poly column crosses
+  under the horizontal at x 17527-17545 (salmon, no hole).
+- **VSS.** The strap over D2 runs on east over G7's poly column (its two edges print through the metal at
+  x 17416-17420 and x 17440-17444 on row y 17880, orange-tinted metal between, no hole) into a wide metal
+  x 17468-17518 (row y 18100) that starts at y 17864 and runs south to y 18430. Under it the clean shot is
+  field but for `cdp4`'s two poly rows y 18000-18020 and y 18065-18085 (salmon, no hole; view `vss2`). At its
+  foot an arm west along y 18381-18431 is one metal with `inrow`'s ground rail (`M 13707,18381:17480,18431`,
+  "extent to the right not yet checked": it runs to x 17518; row y 18405 is metal from x 17400 to x 17516).
+  An arm east along y 18192-18254 passes over the poly cross-under of `dpad`'s `d_hiz` line (x 17633-17655;
+  `dpad`: "a poly cross-under below the wide horizontal metal at y 18175-18250") and joins the wide vertical
+  metal from x 17690 on (`dbus`' "VSS trunk x 17690-17765"): drawn to x 17720.
+
+So Ambiguity 1 of run 1 is closed as far as `inrow`'s rail and `dbus`' trunk are VSS.
 
 ## Review
 
