@@ -437,3 +437,20 @@ M 13565,14690 y15005 x13608 y15621 w=20
 P 13594,15594:13626,15622
 C 13609,15608
 N M 13565,14700 hc1
+
+# ================================================================ run 3 (2026-11-27): re-read item R1, the channel's tracks
+# Audit of every drawn thin metal of the channel (x 13040-13700, y 14700-16740) against both metal shots and the
+# clean shot (tools/bd1_audit.py, every flagged spot looked at on a four-shot sheet, tools/bd1_sheet.py): no break,
+# no contact that is not drawn, every drawn contact real (notes/blocks/bd1.md, "Run 3"). Two things were not drawn:
+# --- k4 (rc_eq_r6) south of y 16500: the metal runs on down x 13304 to y 16690 and turns south-west along a
+# diagonal (x + y = 29997) into the field of diagonals; drawn to the edge of this run's region (y 16738).
+M 13304,16490 13304,16690 13259,16738 w=14
+# --- one more load of rst_a (eof run 8's lead): a pad with a contact on rst_a's metal x 13630 (ring and bright
+# centre in both metal shots, the pad's box and its tail in the clean shot); its poly runs east along y 16620-16636
+# under X's line (x 13672: salmon, band not widened, no hole) and ck_out's metal (x 13716: olive in the clean shot
+# there, as plain crossings on this row are; the row's edges y 16618 and y 16636 unchanged, no pad, edge bars only in
+# both metal shots: no contact) into the gate column; drawn to x 13760. It runs on: bright salmon over tan at
+# x 13776-13800 under the narrow metal, probably a gate there (review round 1's lead; not drawn).
+P 13611,16610:13645,16642              # pad
+C 13628,16626
+P 13640,16628 x13760 w=16

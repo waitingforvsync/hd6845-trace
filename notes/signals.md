@@ -81,7 +81,8 @@ Central datapath (registers identified by their write strobes, `notes/blocks/wrs
 | `*_pu`, `*_pd` | inside an output pad cell: gate of the pull-up fingers (first inverter) and of the pull-down fingers (second inverter) |
 | `d#_in` | data pin D# behind its protection, at its input buffer. With the pad's series strip drawn it is the pad's own net: an alias of `d#` (`trace/dpad.txt`) |
 | `d#` | data pins D0-D7: the bond pad, the metal of the output fingers, and (D0-D6) the series strip, the protection node and the line to the input buffer. On the chip the strip is a diffused resistor between pad and node; the netlist has one net (`notes/blocks/dpad.md`) |
-| `d_hiz` | output disable of the data pins, one line common to the eight pad cells (metal x 17631-17651, y 7374-18850, a contact in each cell): high turns off both output gates of every data pad. Driven from the bus-interface column; the driver is not traced. The "P_x" of the first notes |
+| `d_hiz` | output disable of the data pins, one line common to the eight pad cells (metal x 17631-17651, y 7374-18850, a contact in each cell): high turns off both output gates of every data pad. Driven by the block below the data bus column (`notes/blocks/busc.md`): `d_hiz` = NOT `rd_data_e`, buffered. The "P_x" of the first notes |
+| `rd_data_e_n`, `rd_data_e_b` | inside `d_hiz`'s driver: NOT `rd_data_e` (the gates of the output stage's pull-ups) and its inverse (the gates of its pull-downs) |
 | `d#_out_n` | the per-bit data line into data pad cell #, from the bus-interface column: while `d_hiz` is low the pin D# is its inverse. The "P_y" of the first notes. `d0_out_n` is the thin metal x 17438-17459 down the whole column, driven by an inverter at its foot (y 16415-16590); `d1_out_n` is drawn from D1's pad cell to the column's west edge at (16950,16344). **`d5_out_n`..`d1_out_n` = NOT `rd_b5`..`rd_b1`**: five inverters (cell `cdp4_ro`) south-west of the column, each gated by one read bus row (`cdp4` run 8, 2026-11-21, firm); **`d6_out_n` = NOT `rd_b6`**: a sixth copy of the cell further south-west, its output drawn by pads (16253,17602), (16905,18080), (17080,18078), (17427,18079), (17602,18078), (17599,17341) into D6's pad cell (`cdp4` runs 9-10, firm); **`d7_out_n` = NOT `rd_b7`**: `regs`' inverter output `d7_out_n` (renamed by the refresh of 2026-11-24, former name `regs_w17462`), drawn on from `regs`' port by pads (17080,18013), (17428,18014), (17557,18014), (17558,18146) and an 800 px poly column x 17595-17613 into D7's pad cell (`cdp4` run 11, firm). So `d#_out_n` = NOT `cdp3_n_c(7-#)` for all eight bits |
 | `d#_pu`, `d#_pd` | inside data pad cell #: gate of the pull-up fingers, NOR(`d_hiz`, `d#_out_n`), and gate of the pull-down fingers, NOR(`d_hiz`, `d#_pu`) |
 | `d#_a`, `d#_b`, `d#_c`, `d#_d` | the four inverters of data input buffer #: `_a`, `_c` inverted, `_b`, `_d` true. Buffers 0-5 are cell `dbus_in`, 6 and 7 cell `dbus_in2` (`notes/blocks/dbus.md`). `d#_d` feeds the input latch: in the data bus column for bits 0-3; `d4_d`..`d7_d` leave it west at x 16950 and enter the latches of bits 4-7 in the column x 16466-16848 (`notes/blocks/dlat.md`) |
@@ -272,7 +273,10 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | `wr_data_lat`, `wr_data_lat_n` | transparent latch of `wr_data_sel`, open while `e_b` is high |
 | `wr_data_e_n` | NOT(`wr_data_sel` AND `e_b`) |
 | `wr_addr_sel` | NOR(`rw_d`, `rs_d`, `cs_d`): a write to the address register is addressed |
-| `bd2_rs_n` | believed NOT `rs_d` (its gate is not fully traced) |
+| `bd2_rs_n` | NOT `rs_d` (an inverter under `bd2`'s ground rail; load traced by `bd2` run 3) |
+| `bd2_rw_n` | NOT `rw_d`: the inverter below it; south on the metal x 16210 to the read gate |
+| `bd2_e_n` | NOT `e_b`: an inverter in the same column (its gate band taps the `e_b` trunk at (16166,17037)); the second input of `dbus_le`'s NOR and an input of the read gate |
+| `rd_data_e` | NOR(`bd2_e_n`, `cs_d`, `bd2_rw_n`, `bd2_rs_n`) = `e_b` AND NOT `cs_d` AND `rw_d` AND `rs_d`: a read of the data register, while E is high. Leaves `bd2` south and east to a pad (17080,17949) at the block below the data bus column |
 | `bd2_x` | second term of the address register load, from the untraced right-hand column |
 
 ## Strobe channel gate column (`notes/blocks/bd1.md`)
