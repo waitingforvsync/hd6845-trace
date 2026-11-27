@@ -706,12 +706,15 @@ Matt Godbolt, on Claude Fable 5.2, 2026-11-27 11:42 -0600. Region x 9250-9700, y
   x 9305-9320 that comes from the south (`tools/follow.py 9312 16060 S`: 2,150 px, to (9552,17868)); under the
   thin metals x 9357 and x 9420 without contact (`cdp4/candh.py` flags (9422,15997) as pad-like, clean-shot
   minimum +37: a row's edges, no hole). Placeholder `bc2_m15997`.
-- **Gate C** (corrected in review round 10): the band's west end is closed at x 9452 (field beyond); it runs on
-  east past the rail's edge (orange at x 9519-9537 in chip 2's metal shot), turns south as a column x 9536-9549
-  (salmon, unbroken, y 16062-16104) and east as a row y 16088-16106 under the thin metals x 9552 and x 9600
-  (no hole) to x 9632 (`tools/tl5_tracks.py rows row 9500 9760 6 16067 16096`, `rows col 16050 16130 4 9540`;
-  views `c_c`, `c_m`). Drawn to x 9632: port, placeholder `bc2_p16067`; a wider salmon block (9590-9632,
-  16085-16110) stands there, not read. It is not joined to the row y 16040's box (field between).
+- **Gate C** (corrected in review rounds 10 and 11): the band's west end is closed at x 9452 (field beyond); it
+  runs on east past the rail's edge, turns south as a column x 9530-9549 (orange, unbroken in both metal shots,
+  y 16062-16104) and east as a row y 16088-16106 under the thin metal x 9552 (no hole, no ring). **From x 9578
+  to x 9631 that poly is the plate of another transistor** (review round 11): it runs on south to about y 16158,
+  with one edge line at y 16110-16118 (the same in all four shots as the strip-edge line y 16016-16022 across the
+  load above), channel-bright poly y 16118-16142, a second edge line y 16142-16148; a diffusion strip
+  y 16116-16142 leaves it east onto the VCC land and west (tan x 9564-9574). So `bc2_p16067` is the gate of a
+  pull-up from VCC, the load of the next gate south, whose tie and output are not read. Drawn to the plate's
+  west edge x 9578 (port); the plate and its strip are the next piece.
 - **Load.** X2 leaves the rail east at y 16022-16048 (`tools/px.py row 16035 9500 9650 3 metal,acid,acid1b`):
   diffusion across the gap (plain, blue 82-86), tan under the thin metal x 9545-9560, to x 9575; then under a
   poly x 9579-9628 (orange in the open, salmon under the thin metal x 9594-9608) onto a VCC land under the M rail
@@ -742,8 +745,9 @@ Matt Godbolt, on Claude Fable 5.2, 2026-11-27 11:42 -0600. Region x 9250-9700, y
 10 below): (a) the thin metal x 9552 of `bc2_e15343` passes over the tie box (9538-9564, 15992-16020) and over the
 box (9548-9568, 15848-15868) further north **without contact** (reviewer; the tracer's first reading of both as
 contact pads was wrong); its continuity over the first cannot be shown from the metal shots (dark y 15992-16006
-and y 16010-16029). It ends at y 16104 over gate C's poly row, with no ring and no hole seen: where its contact
-is, is open (a contact there would make gate C `bc2_e15343`). (b) The vertical poly x 9507-9529, y 15895-15932
+and y 16010-16029). Whether it ends at y 16104 over gate C's poly row is not shown (review round 11): both
+chips are dark from y 16104 to y 16142 and bright again on the same line from y 16142, over a dark-framed tan
+block (9550-9558, 16118-16137); on the row itself nothing is visible (no hole, no ring, the metal not widened). (b) The vertical poly x 9507-9529, y 15895-15932
 is one poly with gate A (reviewer: one 7 px line at y 15933-15939 with orange poly on both sides) and is a gate
 between land 5 and the diffusion (9536-9575, 15885-15932): `bc2_w15739` gates a second pull-down, not drawn yet
 (the next piece), whose node has a poly block (9579-9628, 15890-15935) and the M rail's land east of it and a
@@ -1168,6 +1172,41 @@ only a stub of its own, so the extraction's nets do not change):
 Recorded 2026-11-27 12:05 -0600.
 
 Round 10: two findings that change a connection (a contact that is not one; a wire's open end), fixed. Fix check next.
+
+### Round 11 (fix check), 2026-11-27: run 7, piece `w5`
+
+A fresh Claude Fable 5.2 agent, on the changes 79b0b7e..70a523a only, 12 images in `cache/scratch/bc2/review-11/`.
+Asked to check: gate C's corrected route and its no-contact claims, and what is seen where the thin metal x 9552
+ends; the load's gate poly to y 16064; the tie's box; the exit west drawn firm and the removal of the contact
+(9421,16040); the VCC contact.
+
+**One finding changes a connection, fixed:** the "row east" of gate C drawn to a port at x 9632 is not a wire.
+Its east end is closed at x 9631, and from x 9578 to x 9631 the poly runs on south to about y 16158 as the plate
+of a transistor: one edge line y 16110-16118 (width, depth and colours in all four shots those of the strip-edge
+line y 16016-16022 across the load above: `tools/px.py col 9622`, `col 9601`), channel-bright poly
+y 16118-16142, a second edge line y 16142-16148, a lip to y 16158, then field; a diffusion strip about
+y 16116-16142 leaves it east onto the VCC land (whose edge steps from x 9646 to x 9634 there, as at the upper
+strip) and west (tan x 9564-9574). So `bc2_p16067` is the gate of a second, undrawn pull-up from VCC. The row is
+now drawn only to the plate's west edge (x 9578), and the port says what it is.
+
+The rest holds: gate C's west end closed at about x 9450; band, column and row one poly (the column is
+x 9530-9549: drawn so); no contact at x 9594-9608 and none visible at the thin metal x 9545-9560 on the row.
+**B** correct (the plate ends at y 16062-16064, pink field y 16066-16084 before the row; the top band continuous
+salmon x 9542-9590). **C**: the box is where drawn (frames x 9536-9544 and x 9556-9564, y 15994-16002 and
+y 16012-16020), interior tan, no hole, the metal not widened: nothing contradicts a tie. **D** correct (the arm
+x 9442-9456 matches the strip east in all four shots, tan on to x 9430; the row's poly orange to x 9400; the box's
+centre without a hole and the metal 10 px wide: no contact; gate C's band stays clear). **E** correct
+((9660,16048) lies inside the rail's slot contact (9652-9675, 16040-16120); the land runs on south past y 16150).
+
+Connections before and after this fix (commit 70a523a against the fixed tree; a wire's drawn end moved, no net
+changes):
+
+    tools/t.sh bc2 sameconn.py 70a523a            ->  connections identical
+    .venv/bin/python tools/sameconn.py 70a523a    ->  connections identical
+
+Recorded 2026-11-27 12:22 -0600.
+
+Round 11: one finding that changes a connection (a wire's end is a transistor's plate), fixed. Last fix check next.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 

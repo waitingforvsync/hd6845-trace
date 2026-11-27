@@ -661,12 +661,14 @@ M 9312,15997 y16028 w=12               # south (port)
 N M 9312,16020 bc2_m15997
 P 9312,15988:9512,16004                # gate B
 # gate C (review round 10: the band's west end is closed at x 9452; it runs on EAST of the rail): band x 9452-9549,
-# a column south on x 9536-9549 (salmon, unbroken) and a row y 16088-16106 east under the thin metals x 9552 and
-# x 9600 (no hole) to x 9632 (port: not followed further). The thin metal x 9552 (bc2_e15343's, not drawn here)
-# ends at y 16104 over this row: no ring and no hole seen there (not read).
+# a column south on x 9530-9549 (orange, unbroken in both metal shots) and a row y 16088-16106 east under the thin
+# metal x 9552 (no hole, no ring, the metal 14-16 px wide as elsewhere). Drawn to x 9578 (port). Review round 11:
+# from x 9578 to x 9631 this poly is NOT a wire: it widens south to y 16158 into the plate of an undrawn
+# transistor (a diffusion strip y 16116-16142 under it, east onto the VCC land, west to x 9564): the next gate's
+# load. So this net is that load's gate.
 P 9452,16060:9549,16074                # gate C
-P 9536,16060:9549,16106                # south
-P 9536,16088:9632,16106                # east (port)
+P 9530,16060:9549,16106                # south
+P 9530,16088:9578,16106                # east, to the plate's west edge (port)
 N P 9460,16067 bc2_p16067
 # X2's strip east, the load and the output
 D 9500,16022:9645,16048                # the strip: gap, thin metal x 9552, under the load, onto the VCC land

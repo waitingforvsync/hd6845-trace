@@ -38,6 +38,6 @@ busl_x7122    P  7550,14480    in   bus line y 14481: busl's poly row (its port 
 # run 7, piece w5
 bc2_w16035    M  9600,16060    out  NOT(bc2_p16067 OR (bc2_w15739 AND bc2_m15997)): thin metal south from the pad (9597,15995) (to about y 16173)
 bc2_m15997    M  9312,16028    in   gate B of bc2_w16035: thin metal x 9312 from the south (follower: from (9552,17868))
-bc2_p16067    P  9632,16097    in   gate C of bc2_w16035: its poly runs east of the rail, south and east along y 16088-16106 to here; not followed further
+bc2_p16067    P  9578,16097    ?    gate C of bc2_w16035: its poly runs east of the rail, south and east along y 16088-16106; from here to x 9631 it is the plate (to y 16158) of an undrawn pull-up from VCC, the next gate's load: this net is that load's gate
 bc2_w16035    M  9270,16075    out  second exit: by the arm west and the row y 16040 to the pad (9270,16041), thin metal south (to y 16351)
 vcc           M  9642-9698,16080  -  the M rail, on south
