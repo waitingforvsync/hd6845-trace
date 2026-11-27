@@ -607,7 +607,7 @@ N M 8000,14481 busl_x7122
 
 # ================================================================ run 6 (2026-11-27), piece dec: where two of the three decode lines go
 # bc2_e15517: its metal x 10181 on north to a corner at y 14740 and west onto a pad (10092,14740); a poly row
-#   y 14731-14749 west under the thin metals x 10052, 10007, 9963, the E, M and W rails (no contact: no hole on the
+#   y 14731-14749 west under the thin metals x 10052 and x 10007, the E, M and W rails (no contact: no hole on the
 #   row but the two pads') to a pad (9397,14740); a thin metal x 9399 south, over the rows of the W rail's units
 #   and of the six-input NOR without contact (reviews 6-8), to y 15807, west to x 9357, onto a pad (9357,15824).
 #   The pad's poly goes south (not drawn: port).
@@ -621,8 +621,8 @@ C 10092,14740 s=20x20
 P 9397,14731:10092,14749               # row west
 P 9380,14723:9414,14757                # pad
 C 9397,14740 s=20x20
-M 9399,14740 y15807 x9357 w=13
-M 9357,15801 y15824 w=13
+M 9399,14740 y15802 x9357 w=13         # review round 9: the arm west is y 15797-15808
+M 9357,15796 y15824 w=13
 P 9340,15807:9374,15841                # pad (its poly south is not drawn)
 C 9357,15824 s=20x20
 M 10137,15290 y14783 w=13

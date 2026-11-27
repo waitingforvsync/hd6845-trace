@@ -656,8 +656,9 @@ thin metal x 9552; overlays `ov_399`, `ov_517`) and `w1/` (`n_end`, `e_end`, `x9
   y 14740 and west onto a pad (10092,14740) (`tools/tl5_tracks.py v 10181 14720 15620`: metal in both chips from
   y 14740; it does not go on south of the turn at y 15608: `v 10181 15590 15720`). A poly row y 14731-14749 runs
   west (`tools/tl5_tracks.py rows row 8600 10200 12 14741`: poly from x 9416 to x 10150; no hole on it but the
-  two pads': `h 14740 9380 10150`; `tools/eof_tee.py`: no branch) under the thin metals x 10052, 10007, 9963 and
-  the E, M and W rails to a pad (9397,14740). **The bus metal of line y 14741 does not reach that pad**: no metal
+  two pads': `h 14740 9380 10150`; `tools/eof_tee.py`: no branch) under the thin metals x 10052 and x 10007 and
+  the E, M and W rails (review round 9: the M rail's metal is wide here, x 9552-9686 at y 14747 and north, undrawn
+  north of y 14750; no thin metal x 9963 at this height) to a pad (9397,14740). **The bus metal of line y 14741 does not reach that pad**: no metal
   and no poly on the track from x 9106 to x 9390 (the bus line ends west of x 9100). A thin metal x 9392-9406 runs
   south from the pad (`v 9399 14725 15815`: no break in both chips at once), over the rows of the W rail's two
   units, of the six-input NOR and of its output without contact (review rounds 6, 7, 8), to y 15800-15814, west
@@ -1014,6 +1015,40 @@ Connections before and after the fixes (commit 6871ead against the fixed tree):
 Recorded 2026-11-27 11:14 -0600.
 
 Round 8: no findings that change a connection.
+
+### Round 9 (full review), 2026-11-27: run 6, piece `dec`
+
+A fresh Claude Fable 5.2 agent, on commit c8ed645, 13 images in `cache/scratch/bc2/review-9/`. Told to suspect: a
+contact from either poly row to a metal above it, a link between the two rows, a contact along the thin metals
+x 9399 and x 9552 where earlier reviews had not looked (with the caveat that a thin metal over a row's edges or
+a framed box looks like a pad in the metal shots), each of the five pads and what leaves it, the corner
+(10181,14740), and the claim that the bus metal of line y 14741 does not reach the pad (9397,14740).
+
+**No finding changes a connection.** Geometry, fixed: the arm of `bc2_e15517`'s metal west onto its end pad is
+y 15797-15808 (drawn on y 15807; now y 15802). Description, corrected above: there is no thin metal x 9963 at
+y 14740 / 14785, and row A lies under a wide metal from x 9552 to x 9686 (the M rail's metal, wider there), with
+no contact (metal unbroken in both chips, no hole; a thin diagonal mark at (9670,14741) is in the clean shot
+only).
+
+Checked and found correct by the reviewer: all five pads are contacts, and nothing else leaves them (no metal
+north or west of (9397,14740) or (9552,14785); only the undrawn poly south of (9357,15824)); no metal north or
+east of the corner (10181,14740), the metal x 10181 continuous y 14737-15617 with no widening or hole and nothing
+south of y 15618; about 10 px of bare ground between that arm and the pad (10135,14783); the two rows straight
+under the E, M and W rails and x 10007, x 10052, field between them throughout, no branch, pad or channel; the
+thin metal x 9399 never widened and without a hole from y 14760 to y 15800 (rows y 14823, y 14869 and
+y 15280-15420 viewed); the same for x 9552, the boxes (9552,15097) and (9552,15270) passed over; the bus metal of
+line y 14741 turns south at x 9085-9105, and from there to x 9390 the track holds only crossing vertical metals
+and bare ground. Not checked: x 9552 below y 15835 and the poly south of (9357,15824); x 9399 at y 14990-15270
+and y 15420-15790 by text scans only.
+
+Connections before and after the fix (commit c8ed645 against the fixed tree):
+
+    tools/t.sh bc2 sameconn.py c8ed645            ->  connections identical
+    .venv/bin/python tools/sameconn.py c8ed645    ->  connections identical
+
+Recorded 2026-11-27 11:34 -0600.
+
+Round 9: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
