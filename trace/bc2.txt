@@ -632,3 +632,62 @@ P 9552,14777:10135,14793               # row west
 P 9535,14768:9569,14802                # pad
 C 9552,14785 s=20x20
 M 9552,14785 y15835 w=13               # south (port)
+
+# ================================================================ run 7 (2026-11-27), piece w5: an AND-OR-INVERT under the W rail
+#     bc2_w16035 = NOT( bc2_p16067 OR (bc2_w15739 AND bc2_m15997) )          (the tie of its load is uncertain: ?B)
+# The column under the rail goes on south of the hop row's field (y 15866-15900): land 5 (y 15908-15942, contact
+# 9473,15917), gate A (y 15946-15960), node X1 (y 15964-15986, no contact), gate B (y 15988-16004), node X2
+# (y 16008-16058, no contact: bright unringed metal over it in both chips), gate C (y 16060-16074), land 6
+# (y 16078-16134, contact 9480,16107). X2 leaves east at y 16022-16048: across the gap, under the thin metal
+# x 9545-9560, to x 9575, and under a poly (9579-9628) onto the VCC land under the M rail (contact 9663,16043).
+# That poly is the south part of a poly pad (9540-9628, 15978-16050; one dark line across it at y 16018-16021,
+# the strip's edge) with a contact (9597,15995), from which a thin metal x 9594-9608 goes south: the output.
+M 9463,15840:9513,16140                # W rail, on south
+D 9458,15908:9503,16134                # the column: land 5, X1, X2, land 6
+C 9473,15917
+C 9480,16107
+N D 9480,16035 bc2_w16035
+# gate A: bc2_w15739. Its metal runs on from y 15800 south to y 15919, east to x 9356 and south through a pad
+# (9356,15955) (it goes on south: port); the pad's row east under the thin metal x 9420 (no contact) to the rail
+M 9314,15800 y15919 x9356 y15975 w=13
+P 9339,15938:9373,15972                # pad
+C 9356,15955 s=20x20
+P 9356,15946:9524,15960                # gate A
+# gate B: from a pad (9312,15997), the north end of a thin metal x 9312 from the south (port); its row east under
+# the thin metals x 9357 and x 9420 (no contact) to the rail
+P 9295,15980:9329,16014                # pad
+C 9312,15997 s=20x20
+M 9312,15997 y16028 w=12               # south (port)
+N M 9312,16020 bc2_m15997
+P 9312,15988:9512,16004                # gate B
+# gate C: a band whose west end is at x 9447, beside a framed pad (9410-9435, 16030-16050) of the thin metal x 9420;
+# its source is not read (port)
+P 9447,16060:9512,16074                # gate C
+N P 9452,16067 bc2_p16067
+# X2's strip east, the load and the output
+D 9500,16022:9645,16048                # the strip: gap, thin metal x 9552, under the load, onto the VCC land
+D 9635,16026:9691,16072                # VCC land under the M rail
+C 9663,16043
+M 9642,15980:9698,16080                # M rail, on south
+P 9579,15980:9628,16050                # the load's gate: the pad's east part and the block over the strip
+P 9540,15978:9628,15993                # the pad's top band, west to x 9540
+C 9597,15995 s=16x16
+M 9600,15995 y16060 w=12               # output metal south (port: it runs on to about y 16173)
+?D 9566,15997:9578,16024               # tie finger: diffusion from the strip north, in the open beside the pad (bright green in the clean shot)
+?B 9564,15990:9580,16000               # tie: the pad's poly over the finger's top
+# X2's exit west (uncertain): in the gap west of the rail the stripped shot reads diffusion at y 16030-16046
+# (red - green 23-37 at x 9443-9455; 7-20 at y 16020, -5..12 beside X1), an arm like the one of the six-input
+# NOR's node N3, up to the frame (x 9437-9441) of a pad (9410-9436, 16030-16050). That pad is the east end of a
+# poly row y 16031-16049 from a pad (9270,16041) in the west, and the thin metal x 9415-9430 has a contact on it
+# at (9421,16040) (bright centre between two dark arcs in both metal shots, a hole in the clean shot). Whether the
+# pad's poly lies on the arm (a buried contact, as at N3's box) is not seen: ?D, ?B.
+?D 9432,16030:9460,16046               # arm west
+?B 9408,16028:9438,16052               # buried contact of the row's end pad on the arm
+P 9404,16031:9436,16049                # the row's end pad
+C 9421,16040 s=14x14
+M 9421,16026 y16054 w=13               # the thin metal x 9420 through the pad (ports north and south; not followed here; no name of
+                                       # its own: through the ?B it is bc2_w16035)
+P 9270,16031:9410,16049                # the row west, under the thin metals x 9357 and x 9312 (no contact)
+P 9253,16024:9287,16058                # pad
+C 9270,16041 s=20x20
+M 9270,16041 y16075 w=13               # thin metal south (port)

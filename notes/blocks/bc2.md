@@ -682,6 +682,69 @@ thin metal x 9552; overlays `ov_399`, `ov_517`) and `w1/` (`n_end`, `e_end`, `x9
   about x 9106), and line y 14785 (`lc3_w9947`) has no metal east of x 8600 but the piece `eof` drew: all three
   end in `bc1`'s region.
 
+## Run 7 (2026-11-27), piece `w5`: an AND-OR-INVERT under the W rail (4 transistors; 4 uncertain items)
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 11:42 -0600. Region x 9250-9700, y 15895-16140. Views in `cache/scratch/bc2/w4/`:
+`s_c`, `s_m` (x 9390-9650, 4.9x), `w_c`, `w_m` (west of the rail, 5x), `l2_c`, `l2_m` (the load side, 6.5x),
+`x2` (node X2), `pb_*` (the pad's south-west corner, 12x), `gc` (gate C's west end), overlay `ov5`.
+
+    bc2_w16035 = NOT( bc2_p16067 OR (bc2_w15739 AND bc2_m15997) )        (depends on the tie, Ambiguity 12)
+
+- **Under the rail** (clean shot; `tools/bd2_umap.py 9424 15836 9534 16140 3 4` and a column classed at x 9470,
+  9480, 9492): south of the six-input NOR's land 4 the rail lies over field from y 15866 to y 15900, crossed by one
+  poly row (y 15848-15862: not a gate, field on both sides; not drawn). Then one diffusion column x 9458-9503:
+  land 5 (y 15908-15942; contact (9473,15917)), **gate A** (y 15946-15960), node X1 (y 15964-15986), **gate B**
+  (y 15988-16004), node X2 (y 16008-16058), **gate C** (y 16060-16074), land 6 (y 16078-16134; contact
+  (9480,16107): ring in both metal shots, pits). X1 and X2 have no contact (`padc` counts metal at (9480,16030),
+  but view `x2` shows bright unringed metal over plain tan in both shots). So X2 is pulled to land 6 through C and
+  to land 5 through A and B in series.
+- **Gate A is `bc2_w15739`.** The six-input NOR's output metal runs on from its port: south on x 9314 to
+  y 15919, east to x 9356 and south through a pad (9356,15955) (hole, ring; `tools/tl5_tracks.py v 9314 15790
+  15930`, `v 9357 15900 16150`: no break but the pad; the metal goes on south past y 16150: port). The pad's row
+  y 15946-15960 runs east under the thin metal x 9420 (no pad pattern, no hole) to the rail and ends at x 9524.
+- **Gate B**: a row y 15988-16004 from a pad (9312,15997) (hole, ring in chip 1), the north end of a thin metal
+  x 9305-9320 that comes from the south (`tools/follow.py 9312 16060 S`: 2,150 px, to (9552,17868)); under the
+  thin metals x 9357 and x 9420 without contact (`cdp4/candh.py` flags (9422,15997) as pad-like, clean-shot
+  minimum +37: a row's edges, no hole). Placeholder `bc2_m15997`.
+- **Gate C**: a band x 9447-9512 whose west end stands beside the pad of the row y 16040 (below); where it comes
+  from is not read (view `gc`). Placeholder `bc2_p16067`, port at its west end.
+- **Load.** X2 leaves the rail east at y 16022-16048 (`tools/px.py row 16035 9500 9650 3 metal,acid,acid1b`):
+  diffusion across the gap (plain, blue 82-86), tan under the thin metal x 9545-9560, to x 9575; then under a
+  poly x 9579-9628 (orange in the open, salmon under the thin metal x 9594-9608) onto a VCC land under the M rail
+  (9635-9691, 16026-16072; contact (9663,16043)). W 26, L 49.
+- **The load's gate** is the south part of a poly pad (9540-9628, 15978-16050): `tools/px.py col 9620 15970 16062
+  3 metal,acid,acid1b` has poly from y 15982 to y 16045 with one dark line at y 16018-16021, the strip's north
+  edge printing through (two polys would show a gap). The pad has a contact (9597,15995) (hole, ring in both
+  chips), from which a thin metal x 9594-9608 runs south (`v 9600 15970 16210`: to about y 16173; drawn to
+  y 16060: port).
+
+### Ambiguities (run 7)
+
+12. **The tie of the load** (`?D 9566,15997:9578,16024`, `?B 9564,15990:9580,16000`). In the clean shot a
+    bright green strip (open diffusion by the legend) runs from the strip's top at (9566-9578, 16020) north to
+    y 15997 in a notch of the pad's south-west corner, with the pad's salmon over its top (view `pb_acid1b`).
+    Not measured against a control; the frame of a buried contact is not seen. Without it the pad is not on
+    X2 and the load would be a transistor gated by whatever the pad's metal carries.
+13. **X2's exit west** (`?D 9432,16030:9460,16046`, `?B 9408,16028:9438,16052`). In the gap west of the rail
+    chip 2's stripped shot reads red - green 23-37 at x 9443-9455, y 16035 (7-20 at y 16020; -5..12 beside X1 at
+    y 15975; 15-22 beside land 6 at y 16100): an arm like node N3's in run 5, up to the frame (x 9437-9441) of a
+    pad (9410-9436, 16030-16050). The pad is the east end of a poly row y 16031-16049 (`tools/tl5_tracks.py rows
+    row 9300 9470 6 16040`) from a pad (9270,16041) in the west, whose thin metal goes south (`follow`: to
+    y 16351), and the thin metal x 9415-9430 has a contact on it at (9421,16040) (bright centre x 9418-9424
+    between dark arcs in both metal shots; `candh`: clean-shot minimum -17, a hole). Whether the pad's poly lies
+    on the arm is not seen. If it does, X2 goes out on that row and on the thin metal x 9420, which runs north to
+    the pad (9420,15862) and south to about y 16253.
+
+**Read and NOT drawn** (measurements in `cache/scratch/bc2/w1/notes.md`, last section): (a) the thin metal
+x 9552 of `bc2_e15343` passes this gate: bright to y 15993 over the pad's top band (salmon under it at
+y 15984-15987, no hole), then ring / small centre (9546-9558, 16004-16010) / ring, and metal again from y 16022
+over X2's strip: a contact pad at about (9552,16007) in a framed box (9543-9558, 16000-16013) west of the tie
+finger. What that box is on is not read; it is not drawn, and the thin metal still ends at its port y 15835.
+(b) A vertical poly x 9507-9529, y 15895-15932 beside land 5, with one dark line (y 15934-15940) between it and
+gate A's east end: probably one poly, the gate of a pull-down from land 5 to the diffusion (9532-9576,
+15885-15932) east of it, which has a poly block (9579-9628, 15890-15935) and the M rail's land (contact
+(9662,15938)) beyond. Not drawn.
+
 ## Review
 
 **Model note: latch unit a was traced AND reviewed on claude-opus, not claude-fable-5-2**

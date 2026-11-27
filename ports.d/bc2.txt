@@ -29,9 +29,17 @@ vss           M  9463-9513,14860  -  the W rail, on north (not followed to a gro
 # run 4, piece w2
 lc2_w9125     P  7550,14567    in   bus line y 14568: busl's poly row (its port lc3_e9798 at the same place), by three pads and the leg x 9226 to the upper gate row of the W rail's second unit
 # run 5, pieces w3 and bus4 (bc2_w15042 and bc2_w15216 have no port any more: both end on gates of bc2_w15739)
-vss           M  9463-9513,15840  -    the W rail, on south (more lands and gate bands from y 15850)
-bc2_w15739    M  9314,15800    out  the six-input NOR: metal west and south from its pad (9356,15739) (follower: to y 15919, then east to x 9363)
+bc2_w15739    M  9356,15975    out  the six-input NOR: its metal through the pad (9356,15955) (gate A of bc2_w16035) and on south past y 16150
+vss           M  9463-9513,16140  -    the W rail, on south
 bc2_p15520    P  9160,15520    in   gate 1 of bc2_w15739: poly row from the west
 bc2_p15781    P  9160,15781    in   gate 5 of bc2_w15739: poly row from the west, lengthwise under bc2_w15042's metal
 tc2_r5718     P  7550,14524    in   bus line y 14524: busl's poly row (its port at the same place), to gate 3 of bc2_w15739
 busl_x7122    P  7550,14480    in   bus line y 14481: busl's poly row (its port at the same place), to gate 2 of bc2_w15739
+# run 7, piece w5
+bc2_w16035    M  9600,16060    out  NOT(bc2_p16067 OR (bc2_w15739 AND bc2_m15997)): thin metal south from the pad (9597,15995) (to about y 16173)
+bc2_m15997    M  9312,16028    in   gate B of bc2_w16035: thin metal x 9312 from the south (follower: from (9552,17868))
+bc2_p16067    P  9447,16067    in   gate C of bc2_w16035: the band's west end; source not read
+bc2_w16035    M  9421,16026    ?    the thin metal x 9420 at the pad (9421,16040), north (to the pad (9420,15862)); on this net only through a ?B
+bc2_w16035    M  9421,16054    ?    the same thin metal, south (to about y 16253)
+bc2_w16035    M  9270,16075    ?    thin metal south from the pad (9270,16041) of the row y 16040 (to y 16351); on this net only through a ?B
+vcc           M  9642-9698,16080  -  the M rail, on south
