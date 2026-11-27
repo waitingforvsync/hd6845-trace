@@ -196,3 +196,96 @@ and 13985-14030 to at least x 13880.
 - Outside the region, seen while following wires: the gate column has one more,
   different, row at y 16740-16870 (bd3); the west outputs' bars continue past x 13880
   (bd1); the strobe's poly continues east of x 15850 at y 14825.
+
+## Re-read item R3 (2026-11-27): the track field T0-T17
+
+(The item says T0-T17; the field has 16 tracks, T0-T15, x 14912-15561: review round 1 found no metal at
+x 15604 or x 15647 on any cut.)
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 07:33 -0600. Region x 14100-15850, y 14650-16550. **Found as drawn but for the
+place of two metal legs (geometry only).**
+
+R3 asks for the track field between and below the gates checked like R1 and R2 (every track end, every
+interruption, contacts, poly under tracks), "`rsel12`/`rsel13` carried through with no contact in particular".
+Done with `tools/bd1_audit.py 14100 14650 15850 16550` (every trace file loaded; output kept in
+`cache/scratch/sel/r3/audit.txt`) and `tools/bd1_sheet.py` for the flagged spots (sheets `sh1`..`sh4`, views
+`v1`, `v2` in `cache/scratch/sel/r3/`):
+
+1. **Breaks**: 8 candidates, 7 of them the rings of drawn contacts. The eighth, (15249,14847), is a real
+   misplacement: the horizontal leg of `rsel13`'s metal from its contact (15300,14783) west to track T7 was
+   drawn along y 14860 and lies at y 14864-14880; the same leg of `rsel12`'s metal (to T8) was drawn along
+   y 14905 and lies at y 14907-14922 (down x 15250 and x 15320 in both metal shots). Redrawn along y 14872 and
+   y 14914: same ends, same nets. No break.
+2. **Undrawn metal**: none.
+3. **Contact holes in the clean shot under drawn thin metal**: every drawn contact on the tracks has its hole
+   (29 on T0-T17; (14128,16171) alone has a red-brown box instead, with ring and bright centre in both metal
+   shots: real). Spots with no drawn contact, each looked at: (15258,14856), (15223,14857), (15343,14899),
+   (15285,14900) were open ground under the two misplaced legs (gone after the fix); (15152,14807),
+   (14947,14816), (14222,15544) are the rims of drawn contacts' pads; (15210,15267), (14124,15388),
+   (14912,16238), (15090,16387) are specks beside plain tracks; (15085,15542) is a green interference patch
+   under a plain track (bright and unringed in both chips); (14348,15000), (14341,15001), (14350,15015),
+   (14350,15124), (14345,15132) are the cream centres of two framed boxes of the write-strobe gate column
+   (drawn `B`) that the thin metal x 14338-14356 passes over: the class of re-read item R41 (a thin metal over
+   node boxes), not a new finding and not settled here.
+4. **`rsel12` and `rsel13` carried through with no contact**: along T7 (x 15214) and T8 (x 15258) from y 14890
+   to y 16552 the clean shot is pink (field under metal) for 1,619 and 1,587 of 1,662 px and salmon (a poly
+   row crossing, no hole) for 32 and 37; the only other stretches are one 6 px speck each ((15214,15266),
+   (15258,15334)). Confirmed: no tap on either before the region's bottom edge.
+5. **Poly gaps**: 7 candidates. Four at the top edge (y 14700-14738, x 14446-14794) are the pink field beside
+   poly columns that are orange and unbroken (sheet `sh3`). (15552,14852): `rsel16`'s poly column is drawn at
+   x 15541-15563 and lies under the track at x 15557-15569 (salmon there, pink at x 15552): 10 px west of its
+   place, not a gap (left as drawn: the same ends). (15745,15170) and (15745,15430): the gate bar of the
+   right-hand column's cell (`P 15600,14910 x15757` in the cell, drawn "schematically") is drawn to x 15757,
+   and at x 15745 all four shots are plain field: the bar ends further west. Geometry of a cell master
+   (a pull-down's width), left for whoever next opens the gate column; noted in the handoff.
+
+Limits: the audit's (its docstring); the ring detector is useless here (a poly row under a track every 20 px
+looks like a ring), so "no undrawn contact" rests on the clean shot, which is free of interference colours
+along the tracks but for the one patch named.
+
+Connections before and after the two legs' fix (commit aa6682c against the fixed tree):
+
+    tools/t.sh sel sameconn.py aa6682c            ->  connections identical
+    .venv/bin/python tools/sameconn.py aa6682c    ->  connections identical
+
+## Review
+
+### Round 1 (full review), 2026-11-27: the re-read of the track field (R3)
+
+A fresh Claude Fable 5.2 agent, on commit 41f39c9, 20 images in `cache/scratch/sel/review-1/`. Told to suspect:
+an undrawn contact on T7 or T8, which track each drawn contact is on, each track's top and bottom end, the two
+moved legs, and the audit's blind spots. It took its own sample.
+
+**No finding changes a connection.** Five remarks on geometry and notes, all confirmed; three fixed in the trace:
+
+1. **T13's stub top** was drawn to y 15098; the metal runs to about y 15080, over the `rsel16_buf` row, with no
+   pad, ring or hole there (down x 15474: metal y 15082-15094 in both chips). Extended to y 15080. No contact.
+2. **Contact on T10**, drawn (15340,15428): its centre is (15342,15435) (`cdp4_padc.py`). Moved.
+3. **T5's top**: the metal x 15128 runs up to y 14777 and merges into the pad of (15152,14783) from the west,
+   not by a jog at y 14803. Same join; left as drawn.
+4. **The thin metal x 14347 (`rsel2`)** is dark in both metal shots over two framed boxes, y 14984-15020 and
+   y 15116-15148 (down x 14347; chip 1 partly bright over the second), and was drawn plain `M`: its continuity
+   rests on the clean shot's unbroken protected strip. By trap 27 those two stretches are now `?M` (re-read
+   item R41's class). **One equation loses its firm mark for it**: `rsel2_n` = NOT `rsel2` (976 -> 975 firm of
+   1,434; two uncertain items more). The equation itself is unchanged.
+5. The field has 16 tracks, not 18 (noted above).
+
+Checked and found correct by the reviewer: T7 and T8 end to end (`tools/follow.py`, `tools/tl5_tracks.py`, 4x
+strips in three shots): no break, the only crossing the strobe bar y 15160-15207, plain on both (no ring;
+clean shot 212/141/101 and 217/160/118), T8's first contact (15258,16560); the two legs (`rsel13` y 14864-14878,
+`rsel12` y 14908-14920, bare ground between, no T at either corner); T0-T6 and T9-T15 followed and all 16 plus
+seven west metals on the two-chip test (every dark stretch of 14 px or more is a drawn contact or a track
+gap); all 29 listed contacts on rings on their own track, the west half likewise; every row and track
+crossing sampled in the clean shot (poly, no hole); no poly column in the gaps between tracks; 19 row cuts
+with no undrawn metal; nine flagged spots dirt or plain crossings. Not checked by the reviewer: the gate
+columns x 14380-14890 and x 15600-15850; the west-gap poly columns (1.5x only); tracks other than T7 and T8
+at 4x along their length.
+
+Connections before and after the fixes (commit 41f39c9 against the fixed tree):
+
+    tools/t.sh sel sameconn.py 41f39c9            ->  connections identical
+    .venv/bin/python tools/sameconn.py 41f39c9    ->  connections identical
+
+Recorded 2026-11-27 07:50 -0600.
+
+Round 1: no findings that change a connection.
