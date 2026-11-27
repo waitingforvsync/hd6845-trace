@@ -1625,6 +1625,35 @@ Recorded 2026-11-27 14:14 -0600.
 
 Round 17: no findings that change a connection.
 
+### Round 18 (full review), 2026-11-27: run 12, piece `dec2`
+
+A fresh Claude Fable 5.2 agent, on commit 6a13e86, 7 images in `cache/scratch/bc2/review-18/`. Told to test:
+whether the row is only a wire or also a gate (the two tan patches beside it at x 9250-9298), contacts under the
+thin metals x 9228 and x 9314, the two pads and anything else leaving them, the thin metal from the west pad and
+its corner.
+
+**No findings that change a connection.** (1) A wire, not a gate: both patches read as field in all four shots
+and equal the field controls at (9185,15915) and (9390,15905) (metal 168/138/86, chip 1 139/114/77; the
+open-diffusion controls at (9530,15467) and (9450,15740) read 185/130/86 and 163/118/78: red minus green 46-55
+and 38-45 against 30 and 25 for the patches); no outline at x 9248 or x 9296 in either metal shot or in chip 2's
+stripped shot; pink under both thin metals; no edge line across the row's poly at x 9244-9300. (2) No contact at
+x 9228 or x 9314 (uniform salmon, no hole, the metal keeps its width, no ring). (3) Both pads real contacts
+(bright centre, ring of about 34 px, green hole); the stem continuous orange from the pad's ring into the row;
+field east of x 9372 and south of y 15880; pink west of the pad (9184,15869); the metal y 15815-15838 north of
+that pad separate (an open strip at y 15842-15848); no branch. (4) One metal with a plain corner (ground north
+and west of it), no stretch dark in both chips, pink under it at every 2 px from y 15884 to y 16372; it runs on
+past y 16370. Geometry, fixed: the stem is x 9349-9372 (drawn 3 px west). Not checked: poly under the pad rings;
+the metal south of y 16370.
+
+Connections before and after the fix (commit 6a13e86 against the fixed tree):
+
+    tools/t.sh bc2 sameconn.py 6a13e86            ->  connections identical
+    .venv/bin/python tools/sameconn.py 6a13e86    ->  connections identical
+
+Recorded 2026-11-27 14:21 -0600.
+
+Round 18: no findings that change a connection.
+
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
 - "Latch unit a", row `bc2_w14912` ("goes west, not followed"): the pad (10395,14912) is the south end of a thin metal x 10397 that comes from north of y 14570 (`eof` run 17, at 1.28x and by `tools/eof_mrun.py col 10395 14640 15030`; not read at high zoom).

@@ -835,7 +835,7 @@ M 9551,16244 y16370 w=12               # over the row y 16243-16262, land 7's ar
 # (port): tools/follow.py runs it on to y 17174. The tan patches north and south of the row at x 9250-9298 in the
 # clean shot are open field between two thin metals' protected strips (khaki, plain ground in the metal shot),
 # not diffusion: the row is a wire there.
-P 9345,15838:9369,15880                # south from the pad
+P 9348,15838:9372,15880                # south from the pad (review round 18: its edges are x 9349 and x 9372)
 P 9185,15860:9369,15880                # the row west
 P 9167,15852:9201,15886                # pad
 C 9184,15869 s=20x20
