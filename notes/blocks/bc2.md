@@ -601,6 +601,9 @@ in the clean, metal and chip-2 stripped shots, 5x; `b_c`, `b_a`: y 15590-15830; 
   plain with stripped red - green 20-31 at x 9572-9584 (`tools/px.py row 15520 9516 9616 4 metal,acid`, `row
   15650`) inside an outline that starts at the corner (9597,15452) (`row 15440`: no line, field) and runs down
   x 9590-9597; field west of the thin metal (x 9524-9536: red - green -14..9).
+  (Review round 8: the colour alone does not set the strip off from the ground east of it and above its outline,
+  red - green 11-24 there against 17-29 inside; the closed outline, y 15455 and x 9594 into the tie box, carries
+  the reading.)
 - **No contact of the thin metal x 9552** (`bc2_e15343`'s) to the strip under it: the clean shot is plain tan at
   the follower's candidates (9552,15614) and (9552,15787) (R 192-200, G 166-180, no hole, no core).
 - **Load** at the strip's south end: under the thin metal the strip runs to y 15797 and turns east at
@@ -921,6 +924,61 @@ continuity over the tie box; the rails' supply identity; the W rail north of y 1
 Recorded 2026-11-27 10:42 -0600.
 
 Round 7: no findings.
+
+### Round 8 (full review), 2026-11-27: run 5, pieces `w3` and `bus4`
+
+A fresh Claude Fable 5.2 agent, on commit 6871ead, 24 images in `cache/scratch/bc2/review-8/`. Told to suspect,
+for `w3`: the three necks and the wide strip (one net? diffusion or a poly wire? how wide), a contact of the thin
+metal x 9545-9560 to the strip, whether all six bands are gates and the column continuous through them, the load,
+the tie box and the stem, the output box (buried contact or gate) and any other exit of the net, the two gaps
+(gate 1's corner against the pad (9357,15522); gate 5's row end against the pad (9271,15784)), the L turns, the
+pads, contacts at the rows' crossings, and a missed transistor in the gap west of the rail. For `bus4`: pads,
+track steps, contacts to the metals above, corners and legs.
+
+**No finding changes a connection.** Verdicts, on the reviewer's own evidence:
+
+- **Necks and wide strip: one net.** `tools/px.py row 15466 / 15595 / 15745`: the clean shot tan to x 9518 and
+  from x 9542, and between them both metal shots plain with no edge crossing; the necks' centres are diffusion,
+  not poly (chip 2 blue 81-93, chip 1 green 114-118). Under the thin metal the strip is unbroken tan y 15464-15784,
+  pink field above y 15458; east of it no line crosses x 9580 from y 15464 to y 15710.
+- **Thin metal x 9545-9560: no contact** (`tools/textmap.py` over y 15440-15830 against the pad (9552,14785): no
+  ring, no widening, no hole; a dark notch at y 15533-15545 is in chip 2 only).
+- **Gate 1's corner and the pad (9357,15522): separate** (plain ground at x 9330-9338 in both metal shots, green
+  in the clean shot, unbroken y 15495-15550). **Gate 5's row and the pad (9271,15784): separate** (pink field at
+  x 9247-9256 under the metal on rows 15776 / 15781 / 15786; the salmon poly ends at x 9235).
+- **Output box: a buried contact; the arm is joined to N3** (both metal shots plain at x 9442-9457; the clean
+  shot's dark line at x 9454 is the rail's margin edge, absent from the other three shots); the row ends on the
+  pad (9356,15739), which has ring and hole.
+
+Geometry, fixed: N1's neck is y 15458-15476 and N2's y 15587-15603 (drawn 12 px each); N3's neck has no south
+edge in the gap: at x 9530-9545 diffusion runs y 15730-15795, round the east end of gate 6's poly (drawn; land 4
+stays separate, field at x 9512 from y 15798); the tie box's frame is x 9568-9600, y 15718-15748 in three shots
+and the "stem from y 15705" shows in the clean shot only (stem drawn from y 15718). And the notes' "field
+outside" for the strip east of the thin metal was stronger than the colours allow (corrected above).
+
+Notes: the pad (8641,14525) has no green hole in the clean shot; its contact rests on ring and bright centre in
+both metal shots and a pitted box in chip 2's stripped shot. The thin metals x 9399 and x 9552 are drawn by no
+package at y 15290-15840; x 9399 is dark over the output box's west frame at y 15720-15756 (trap 27) and has no
+contact to any of the six rows or the output row.
+
+Checked and found correct. `w3`: six gate bands, four contacts, no seventh band, no contact on a node; the
+patches in the gap west of the rail are field (no missed pull-down); every pad has a contact and nothing leaves
+it beyond what is drawn; no contact at any row crossing under x 9185, 9228, 9270, 9314, 9357 or on the
+lengthwise row y 15772-15790; load, VCC land tab and the three L turns as drawn; no hidden branch
+(`tools/eof_tee.py`). `bus4`: six pads with contacts, no track step, no contact to the metals over rows or
+underpasses; corners at x 9270 (y 14524) and x 9357 (y 14481), nothing beyond; legs continuous to their end pads.
+Not checked: poly continuity exactly under the rail's west edge line (x 9453-9462); the legs at 5x along their
+length; the south ends of the thin metals x 9552 and x 9399; the sources of `bc2_p15520` and `bc2_p15781` (both
+run on west past x 9040); the rails' supply identities.
+
+Connections before and after the fixes (commit 6871ead against the fixed tree):
+
+    tools/t.sh bc2 sameconn.py 6871ead            ->  connections identical
+    .venv/bin/python tools/sameconn.py 6871ead    ->  connections identical
+
+Recorded 2026-11-27 11:14 -0600.
+
+Round 8: no findings that change a connection.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 

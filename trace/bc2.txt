@@ -522,15 +522,16 @@ C 9477,15400
 C 9478,15528
 C 9485,15660
 C 9475,15813
-D 9500,15461:9546,15473                # N1's neck east
-D 9500,15591:9546,15603                # N2's neck
+D 9500,15458:9546,15476                # N1's neck east (review round 8: y 15458-15476)
+D 9500,15587:9546,15603                # N2's neck (y 15587-15603)
 D 9500,15734:9546,15762                # N3's neck
+D 9528,15730:9546,15797                # and on south in the gap, round the east end of gate 6's poly (review round 8)
 D 9542,15457:9590,15745                # the wide strip (east part to the tie box)
 D 9542,15700:9568,15797                # its south end under the thin metal
 D 9542,15770:9645,15797                # east under the load onto the VCC land
 P 9572,15750:9628,15818                # load gate
-P 9575,15705:9598,15752                # its stem north over the strip's corner
-B 9573,15703:9600,15747                # tie (buried contact; the frame is y 15722-15747)
+P 9575,15718:9598,15752                # its stem north over the strip's corner
+B 9568,15716:9600,15749                # tie (buried contact; review round 8: the frame is x 9568-9600, y 15718-15748)
 N D 9580,15600 bc2_w15739
 D 9412,15733:9466,15748                # N3's arm west
 P 9356,15732:9426,15747                # the output's poly row, west
