@@ -1208,6 +1208,26 @@ Recorded 2026-11-27 12:22 -0600.
 
 Round 11: one finding that changes a connection (a wire's end is a transistor's plate), fixed. Last fix check next.
 
+### Round 12 (last fix check), 2026-11-27: run 7, piece `w5`
+
+A fresh Claude Fable 5.2 agent, on the one change 70a523a..b13214a, 5 images in `cache/scratch/bc2/review-12/`.
+Asked: is gate C's row right as drawn to x 9578 and free of contacts; is the statement about what lies beyond
+(the plate of a transistor) right; is the column's new x right.
+
+**No findings.** The column runs into the row with no edge line (x 9535, y 16076-16104 orange in both metal
+shots); the row is continuous to x 9578 (salmon under the thin metal, orange in both metal shots at x 9568-9588);
+the thin metal x 9552 has no contact on it (edge minima at x 9542 / 9564 at y 16060, 16097 and 16150: no pad; no
+green hole, the same colours as at the x 9600 crossing); no branch (`tools/eof_tee.py`). Beyond x 9578: field
+south of the row at x 9571 and x 9576, none at x 9583; poly y 16088-16158 at x 9583, 9602, 9622, crossed only by
+single 6-8 px edge lines at y 16114 and y 16144, the band between brighter; tan diffusion west (x 9565-9574) and
+east (x 9636 on): the net is that transistor's gate. The column's west edge is x 9528-9530. Noted for whoever
+draws that transistor: the thin metal x 9552 is dark in both chips over y 16104-16140, over the strip's west
+end, and no tie was looked for, so "load" is unproven. Nothing changed in the trace.
+
+Recorded 2026-11-27 12:31 -0600.
+
+Round 12: no findings.
+
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
 - "Latch unit a", row `bc2_w14912` ("goes west, not followed"): the pad (10395,14912) is the south end of a thin metal x 10397 that comes from north of y 14570 (`eof` run 17, at 1.28x and by `tools/eof_mrun.py col 10395 14640 15030`; not read at high zoom).
