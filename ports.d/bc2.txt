@@ -30,16 +30,17 @@ vss           M  9463-9513,14860  -  the W rail, on north (not followed to a gro
 lc2_w9125     P  7550,14567    in   bus line y 14568: busl's poly row (its port lc3_e9798 at the same place), by three pads and the leg x 9226 to the upper gate row of the W rail's second unit
 # run 5, pieces w3 and bus4 (bc2_w15042 and bc2_w15216 have no port any more: both end on gates of bc2_w15739)
 bc2_w15739    M  9356,15975    out  the six-input NOR: its metal through the pad (9356,15955) (gate A of bc2_w16035) and on south past y 16150
-vss           M  9463-9513,16140  -    the W rail, on south
+vss           M  9463-9513,16335  -    the W rail, on south
 bc2_p15520    P  9160,15520    in   gate 1 of bc2_w15739: poly row from the west
 bc2_p15781    P  9160,15781    in   gate 5 of bc2_w15739: poly row from the west, lengthwise under bc2_w15042's metal
 tc2_r5718     P  7550,14524    in   bus line y 14524: busl's poly row (its port at the same place), to gate 3 of bc2_w15739
 busl_x7122    P  7550,14480    in   bus line y 14481: busl's poly row (its port at the same place), to gate 2 of bc2_w15739
 # run 7, piece w5
-bc2_w16035    M  9600,16060    out  NOT(bc2_p16067 OR (bc2_w15739 AND bc2_m15997)): thin metal south from the pad (9597,15995) (to about y 16173)
-bc2_m15997    M  9312,16028    in   gate B of bc2_w16035: thin metal x 9312 from the south (follower: from (9552,17868))
+bc2_w16035    P  9600,16215    out  the poly pad (9580-9625, 16180-16215) at the south end of its thin metal x 9600 (contact (9597,16197)); the pad's poly south is not drawn
+bc2_m15997    M  9312,16250    in   thin metal x 9312 from the south (follower: from (9552,17868)): gate D of bc2_w16182 at its pad (9313,16215), gate B of bc2_w16035 at its north end
 bc2_p16067    P  9578,16097    ?    gate C of bc2_w16035: its poly runs east of the rail, south and east along y 16088-16106; from here to x 9631 it is the plate (to y 16158) of an undrawn pull-up from VCC, the next gate's load: this net is that load's gate
-bc2_w16035    M  9270,16075    out  second exit: by the arm west and the row y 16040 to the pad (9270,16041), thin metal south (to y 16351)
+bc2_w16035    P  9345,16345    out  second exit: the poly row y 16336-16354 east from the pad (9270,16345)
 vcc           M  9642-9698,16080  -  the M rail, on south
 # run 8, piece w6
-bc2_w15915    M  9421,15900    out  NOT bc2_w15739 (tie and exit through a ?B): thin metal x 9420 south from the pad (9420,15862) (to about y 16253)
+# run 9, piece w7 (bc2_w15915 has no port any more: its thin metal ends on gate E's pad)
+bc2_w16182    D  9542,16177    ?    the node above gates D and E: its neck east into a diffusion block under the thin metal x 9552 (not drawn: its pull-up is there)

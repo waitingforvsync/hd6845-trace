@@ -725,3 +725,37 @@ P 9420,15849:9540,15865                # the row from the west: under the rail (
 P 9403,15845:9437,15879                # pad
 C 9420,15862 s=20x20
 M 9421,15862 y15900 w=13               # thin metal x 9420 south (port: to about y 16253)
+
+# ================================================================ run 9 (2026-11-27), piece w7: two series gates under the W rail, and four thin metals' routes
+# Only what is firm. Under the rail south of land 6 and a stretch of field (y 16138-16168): a node (y 16170-16195,
+# placeholder bc2_w16182; no contact), gate D (y 16198-16216), a node (y 16220-16242), gate E (y 16244-16264,
+# stepped), land 7 (y 16268-16330; contact 9476,16290). So bc2_w16182 is pulled to ground through D AND E.
+#   gate D is bc2_m15997: the thin metal x 9312 passes through a pad (9313,16215), whose row runs east
+#   gate E is bc2_w15915 (through run 8's ?B): the thin metal x 9420 ends on a pad (9407,16262), whose row runs east
+# The node bc2_w16182 leaves east by a neck (y 16170-16184) across the gap into a diffusion block under and beside
+# the thin metal x 9552 (about 9540-9575, 16116-16240), which is NOT drawn: port. Its pull-up and what else is on
+# that block are not read (the block reaches the strip under the plate of bc2_p16067).
+# The east ends of bands D and E (x 9514, at the rail's edge) are not verified in the gap beyond: see the notes.
+M 9463,16140:9513,16335                # W rail, on south
+D 9458,16170:9508,16330                # the column: node, D, node, E, land 7
+C 9476,16290
+D 9500,16170:9542,16184                # the upper node's neck east (port)
+N D 9480,16182 bc2_w16182
+M 9312,16028 y16250 w=12               # bc2_m15997's thin metal, on south through its pad (port: it runs on far south)
+P 9296,16198:9330,16232                # pad
+C 9313,16215 s=20x20
+P 9313,16204:9460,16222                # row east
+P 9450,16198:9514,16216                # gate D
+M 9421,15900 y16258 x9407 w=13         # bc2_w15915's thin metal, on south to its end
+P 9390,16245:9424,16279                # pad
+C 9407,16262 s=20x20
+P 9407,16250:9482,16270                # row east
+P 9468,16244:9514,16264                # gate E
+# bc2_w16035's two exits, to their pads
+M 9600,16060 y16197 w=12
+P 9580,16180:9625,16215                # poly pad (its poly south is not drawn: port)
+C 9597,16197 s=16x16
+M 9270,16075 y16345 w=13
+P 9253,16328:9287,16362                # pad
+C 9270,16345 s=20x20
+P 9270,16336:9345,16354                # its row east (port)
