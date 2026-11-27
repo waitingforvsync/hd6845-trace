@@ -1,5 +1,2 @@
-# bc4: bottom-centre random logic (x 9000-11000, y 16300-18550); survey only
-9050,16350:10000,17550  logic  gate field (left) | dense random logic either side of supply rails x 9460, x 9660; untraced
-10280,16350:10980,17750  logic  gate column (right) | gates beside the rails x 10560, x 10745; untraced
-10000,16300:10280,17700  route  vertical tracks | about ten metal tracks between the two gate fields
-9000,17550:11000,18450  route  track field | horizontal metal tracks and a bus of about fifteen lines bending down-right at x 10200-10450
+# bc4: bottom-centre random logic, south part
+9160,17020:9700,17250  logic  NOR (west rail, y 17127) | bc4_w17127 = NOR(bc4_m17040, bc2_e15517): the first load of a cursor-skew decode line
