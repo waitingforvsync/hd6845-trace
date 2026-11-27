@@ -402,3 +402,32 @@ Not done: the wires' north ends (in `tl6`, `tc2`, `tlb`); the other bus lines.
 
 ## Review
 
+### Round 1 (full review), 2026-11-27: piece `s01w`
+
+A fresh Claude Fable 5.2 agent, on commit de735bd, 8 images in `cache/scratch/bc1/review-1/`. Told to suspect:
+which row meets which pad (a step of one track under the vertical metals would swap or misname the inputs), a
+contact from either row to a vertical metal (the speck at (7654,14872)), the two pads, the metal stretches to
+x 8040 and their join to the earlier drawing, and which bus line turns south where.
+
+**No finding changes a connection.** One geometry remark, fixed: the two new metals were drawn 14 wide and are
+about 20 (y 14818-14838, y 14862-14882); the earlier-drawn parts sit up to 4 px off the metal (left as drawn).
+
+Checked and found correct by the reviewer: `busl`'s rows end at x 7550 on the same bands (y 14816-14838 and
+y 14859-14881) and each runs straight to its own pad (the field lines y 14806, 14849, 14892 carry no poly from
+x 6860 to the pads: no track step); no contact to the vertical metals (no ring in either metal shot, no hole in
+the clean shot, the rows keep their 18 px width; no branch); the speck at (7654,14872) an artefact (the same
+pattern on the row y 14914 under the same step of that metal); both pads with ring and bright centre in both
+chips, a hole in the clean shot, field north and south, open poly west and metal leaving east only; both metals
+continuous in both chips over plain field; row 0 feeds the outer L (south at x 8186, `bc1_s0`) and row 1 the
+inner (x 8143, `bc1_s1`), 24 px apart at the corner. Could not check: chip 2's stripped shot under the wide
+metals (fringes), so "no contact" there rests on the two metal shots and the clean shot; the three vertical
+metals over the rows are drawn by no package at this height.
+
+Connections before and after the fix (commit de735bd against the fixed tree):
+
+    tools/t.sh bc1 sameconn.py de735bd            ->  connections identical
+    .venv/bin/python tools/sameconn.py de735bd    ->  connections identical
+
+Recorded 2026-11-27 09:11 -0600.
+
+Round 1: no findings that change a connection.
