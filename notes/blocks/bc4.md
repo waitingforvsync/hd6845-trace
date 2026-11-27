@@ -81,13 +81,62 @@ So all three decode lines of R8's bits 7,6 are followed to an end pad: `bc2_e155
    and width on both sides of each, and no hole lies under any. Against: the photos cannot show metal on a step
    (trap 27), and two stretches are 41 and 38 px long.
 
+## Run 3 (2026-11-27), piece `n17127`: the gate `bc2_e15517` ends in (3 transistors, no uncertain item)
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 15:02 -0600. Region x 9160-9700, y 17020-17250. Views in `cache/scratch/bc4/g/`:
+`a_acid1b`, `a_metal`, `a_acid` (the gap west of the rail, 7x), `u_c`, `u_m` (the unit, 4.3x), `ld_acid1b`,
+`ld_metal`, `ld_acid` (the load end, 8x), `west` (the rows' west ends, 7x), overlays `ov`, `ov_m`.
+
+    bc4_w17127 = NOR(bc4_p17084, bc2_e15517)                    (firm)
+
+**The first load of a cursor-skew decode line**: the output is low whenever R8's bits 7,6 are not 0,1
+(`bc2_e15517` high) or `bc4_p17084` is high.
+
+The unit has the build of `bc2`'s first two on this rail and is drawn as a copy of its cell
+(`@inst bc2_wnor 0,2084`). Each part was measured here, not taken from the cell:
+
+- **Gate rows** (`tools/px.py col 9376 17050 17200 3 metal`): poly at y 17077-17090, 17120-17133, 17164-17177:
+  2,084 px below unit 1's three rows, each.
+- **The column** in the gap between the thin metal x 9399 and the rail: its east edge line at x 9446-9449 in both
+  metal shots across the upper row (`tools/px.py row 17090 9404 9466 3 metal,metal1`: 53-64 / 30-39 between
+  poly at 128-167), the stretch below it (`row 17105`: 55-75), the stretch above the lower row (`row 17150`:
+  57-75) and the lower row (`row 17170`: 57-65); absent on the upper arm (`row 17056`, `17060`: plain 150-174
+  from x 9419 to x 9455, stripped red - green 16-27), on the lower arm (`row 17192`: plain 164-172 to x 9455)
+  and where the strip leaves (`row 17128`: a frame line at x 9428-9434, plain from x 9440).
+- **Lands** under the rail (`tools/bd2_umap.py 9446 17010 9530 17110 4 4`, `9440 17100 9530 17250 3 4`): above,
+  y 17030-17068 with a contact (9478,17044); below, y 17188-17240 with a contact (9479,17210) (`padc`: hole,
+  ring in both chips, each). Between them the rail lies over field (pink; a dark stripe x 9482-9494 down its
+  middle is in the clean shot only, as further north).
+- **Output**: the middle row's end in a framed box at the column (as unit 1's); the row runs west under the thin
+  metals x 9399, 9357, 9312, 9270, 9228 without contact (`tools/tl5_tracks.py h 17127 9205 9400`: no hole; no
+  branch) to a pad (9183,17127) (a green hole in a salmon pad (9165-9210, 17112-17140), ring and bright centre
+  in the metal shot: view `west`); a thin metal x 9177-9191 runs south from the pad (`tools/tl3_thin.py 9177
+  9193 17135 17480`: the pad's ring, then bars of 8-10 px; none north of the pad). Drawn to y 17200 (port).
+- **Strip and load**: tan under the rail at y 17120-17132 (`tools/bd2_umap.py 9450 17106 9530 17146 3 3`),
+  plain across the gap (`tools/px.py row 17127 9436 9660 4 metal,acid,acid1b`: blue 87-91, stripped red - green
+  18-30), tan under the thin metal x 9545-9560, under a poly block x 9584-9628 (`col 9600 17085 17200 4`: poly
+  y 17105-17189 with edge lines at y 17117-17121 and y 17145-17153), onto a land under the M rail
+  (`tools/bd2_umap.py 9626 17090 9704 17170 3 4`: tan (9635-9690, 17122-17160); contact (9650,17150): hole, ring).
+- **Tie**: under the thin metal x 9545-9560 the strip's tan runs on south to y 17160, then a framed box
+  (y 17162-17190) to which the block's bottom-left reaches (view `ld_acid1b`). **No contact of the thin metal**
+  (`bc2_e15343`'s) there: it is not widened (17-19 px bright at y 17150-17158, none over the frame), the clean
+  shot is tan without a hole; review round 2 judged this box (9551,17180) a pass-over independently.
+- **The lower gate row is `bc2_e15517`'s row** (run 1; drawn on the 6 px to the cell).
+- **The upper gate row** runs west under the same five thin metals without contact (`h 17084 9205 9400`: no
+  hole; no branch) to x 9200, where it meets a poly column x 9178-9200 that comes from the north
+  (`tools/tl5_tracks.py rows col 16980 17100 6 9189`: poly y 17052-17086; orange with an outline on its west
+  and south in the metal shot: view `west`). Drawn to y 17055 (port): placeholder `bc4_p17084`.
+- **Rails**: the wide metal x 9463-9513 is the west rail of `bc2` (it runs on south from there; its metal between
+  y 16335 and y 17020 is not drawn) and the wide metal x 9642-9698 its M rail's line. They are labelled `vss` and
+  `vcc` here by the gate's build, as in `bc2`: neither is followed to a supply.
+
 ## Ports
 
 In `ports.d/bc4.txt`.
 
 ## Not done
 
-Everything else: what the two rows and the third line's pad lead to; the diffusion rectangle (9060-9255, 16782-16997) under wire A; `bc2_e15343`'s route; the rails; the rest of the region.
+Everything else: what `bc2_e15690`'s row and the third line's pad lead to; `bc4_p17084`'s source and `bc4_w17127`'s loads; the diffusion rectangle (9060-9255, 16782-16997) under wire A; `bc2_e15343`'s route; the rails; the rest of the region.
 
 ## Review
 
