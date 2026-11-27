@@ -196,3 +196,54 @@ and 13985-14030 to at least x 13880.
 - Outside the region, seen while following wires: the gate column has one more,
   different, row at y 16740-16870 (bd3); the west outputs' bars continue past x 13880
   (bd1); the strobe's poly continues east of x 15850 at y 14825.
+
+## Re-read item R3 (2026-11-27): the track field T0-T17
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 07:33 -0600. Region x 14100-15850, y 14650-16550. **Found as drawn but for the
+place of two metal legs (geometry only).**
+
+R3 asks for the track field between and below the gates checked like R1 and R2 (every track end, every
+interruption, contacts, poly under tracks), "`rsel12`/`rsel13` carried through with no contact in particular".
+Done with `tools/bd1_audit.py 14100 14650 15850 16550` (every trace file loaded; output kept in
+`cache/scratch/sel/r3/audit.txt`) and `tools/bd1_sheet.py` for the flagged spots (sheets `sh1`..`sh4`, views
+`v1`, `v2` in `cache/scratch/sel/r3/`):
+
+1. **Breaks**: 8 candidates, 7 of them the rings of drawn contacts. The eighth, (15249,14847), is a real
+   misplacement: the horizontal leg of `rsel13`'s metal from its contact (15300,14783) west to track T7 was
+   drawn along y 14860 and lies at y 14864-14880; the same leg of `rsel12`'s metal (to T8) was drawn along
+   y 14905 and lies at y 14907-14922 (down x 15250 and x 15320 in both metal shots). Redrawn along y 14872 and
+   y 14914: same ends, same nets. No break.
+2. **Undrawn metal**: none.
+3. **Contact holes in the clean shot under drawn thin metal**: every drawn contact on the tracks has its hole
+   (29 on T0-T17; (14128,16171) alone has a red-brown box instead, with ring and bright centre in both metal
+   shots: real). Spots with no drawn contact, each looked at: (15258,14856), (15223,14857), (15343,14899),
+   (15285,14900) were open ground under the two misplaced legs (gone after the fix); (15152,14807),
+   (14947,14816), (14222,15544) are the rims of drawn contacts' pads; (15210,15267), (14124,15388),
+   (14912,16238), (15090,16387) are specks beside plain tracks; (15085,15542) is a green interference patch
+   under a plain track (bright and unringed in both chips); (14348,15000), (14341,15001), (14350,15015),
+   (14350,15124), (14345,15132) are the cream centres of two framed boxes of the write-strobe gate column
+   (drawn `B`) that the thin metal x 14338-14356 passes over: the class of re-read item R41 (a thin metal over
+   node boxes), not a new finding and not settled here.
+4. **`rsel12` and `rsel13` carried through with no contact**: along T7 (x 15214) and T8 (x 15258) from y 14890
+   to y 16552 the clean shot is pink (field under metal) for 1,619 and 1,587 of 1,662 px and salmon (a poly
+   row crossing, no hole) for 32 and 37; the only other stretches are one 6 px speck each ((15214,15266),
+   (15258,15334)). Confirmed: no tap on either before the region's bottom edge.
+5. **Poly gaps**: 7 candidates. Four at the top edge (y 14700-14738, x 14446-14794) are the pink field beside
+   poly columns that are orange and unbroken (sheet `sh3`). (15552,14852): `rsel16`'s poly column is drawn at
+   x 15541-15563 and lies under the track at x 15557-15569 (salmon there, pink at x 15552): 10 px west of its
+   place, not a gap (left as drawn: the same ends). (15745,15170) and (15745,15430): the gate bar of the
+   right-hand column's cell (`P 15600,14910 x15757` in the cell, drawn "schematically") is drawn to x 15757,
+   and at x 15745 all four shots are plain field: the bar ends further west. Geometry of a cell master
+   (a pull-down's width), left for whoever next opens the gate column; noted in the handoff.
+
+Limits: the audit's (its docstring); the ring detector is useless here (a poly row under a track every 20 px
+looks like a ring), so "no undrawn contact" rests on the clean shot, which is free of interference colours
+along the tracks but for the one patch named.
+
+Connections before and after the two legs' fix (commit aa6682c against the fixed tree):
+
+    tools/t.sh sel sameconn.py aa6682c            ->  connections identical
+    .venv/bin/python tools/sameconn.py aa6682c    ->  connections identical
+
+## Review
+
