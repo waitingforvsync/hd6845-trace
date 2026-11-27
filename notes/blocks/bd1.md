@@ -222,11 +222,11 @@ gate is `rst_lat`, the inverse of line X.
 | k1 13131 | wr_r5 | jogs to x 13088 at y 14912, down to contact (13085,15563) |
 | k2 13174 | wr_r7 | jogs to x 13218 at y 15390, down to contact (13218,16642) |
 | k3 13218 | wr_r3 | jogs to x 13261 at y 15346, down to contact (13262,16456) |
-| k4 13261 | rc_eq_r6 | jogs to x 13304 at y 15308; by scan runs on past y 16700 |
+| k4 13261 | rc_eq_r6 | jogs to x 13304 at y 15308; runs on south to y 16690 and turns south-west along a diagonal into the field of diagonals (drawn to (13259,16738), run 3) |
 | k5 13304 | h_eq_r0half | jogs to x 13348 at y 15262, down to contact (13348,16411); poly east along y 16410 towards the gate column (seen to x 13700 at 0.9x, not followed) |
 | k6 13348 | rst_rc | ends at contact (13347,15150) |
 | k7 13391 | h_eq_r0 | jogs to x 13435 at y 15176, down to contact (13432,15888); poly east along y 15889 under five lines into the gate column's dense group (seen to x 13695) |
-| k8 13435 | h_eq_r1 | jogs to x 13478 at y 15130, runs south; by scan metal to y 16594, a 23 px break, then to y 16797. Lower end not traced |
+| k8 13435 | h_eq_r1 | jogs to x 13478 at y 15130, runs south; one metal to y 16780 (the "23 px break" of the scan at y 16594 is the dark edges of two poly rows it crosses: run 3); `trunks` draws it on from there |
 | k9 13478 | hc2 | jogs to x 13521 at y 15087, **ends at contact (13520,15390)**; poly west along y 15388 (under wr_r7's jog, no contact), corner at x 13108, south, west into the mid-right array at (13035,15497) (the poly's route is from the first run, `?`) |
 | k10 13521 | wr_r4 | ends at contact (13521,15042) |
 | k11 13565 | hc1 | jogs to x 13608 at y 15005, down to a contact at (13609,15608) (scan, 1.5x); poly west then diagonally down-left to counter row r17's n1 (drawn by `hcj`) |
@@ -489,3 +489,71 @@ x 13806), which means a gap of field or a diffusion edge is being misread there.
 ## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
 
 - The latch's output `bd1_n2` is drawn to its load (`eof` runs 8 and 14, `busl` run 7): the inverter of `tl4`'s right cluster that makes `rcs_e3`, 23,000 px away, with no other gate on the wire. Line X is the reset copy `rst_a` (`eof` run 10).
+
+## Run 3 (2026-11-27): re-read item R1, the channel's tracks
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 07:27 -0600. Region x 13040-13700, y 14700-16740 (below y 16740 the field of
+diagonals is `eof`'s claim). No transistor; two wires added; no uncertain item.
+
+**Method.** R1 asks for all 18 tracks end to end in the clean shot: every end, every interruption, poly under
+tracks. Done with a new tool, `tools/bd1_audit.py 13040 14700 13700 16740` (every trace file loaded), which
+compares what is drawn with the photos and prints four lists, and a second, `tools/bd1_sheet.py`, which puts
+the four shots of each listed spot side by side so that a list is looked at in one read:
+
+1. **Breaks** (a drawn thin metal with no metal in either metal shot along 14 px or more, across its width):
+   11 candidates, 9 of them the rings of drawn contacts. The other two, (13564,16421) and (13693,15185), are a
+   poly row crossing under the track (clean shot: the row salmon and unbroken under the metal, pink field above
+   and below; sheet `sh3`). **No break.**
+2. **Undrawn metal**: one piece, (13290-13311, 16652-16709): track k4's continuation (below).
+3. **Contact holes in the clean shot under drawn thin metal, against the drawn contacts.** Above y 16470: every
+   hole of 100 px2 or more is a drawn contact. Eight smaller spots (30-103 px2) with no drawn contact were looked
+   at (sheets `sh1`, `sh2`): (13127,14877), (13127,15398), (13520,15895), (13178,15918), (13589,16188),
+   (13618,16182), (13215,16434) are a notch or speck on a poly band's edge, a gap ring between two metals, or
+   dust, with the metal bright and unringed in both chips; (13630,15999), where `bd1_k`'s poly row passes under
+   `rst_a`'s metal, has an olive-brown band in the clean shot (150/128/52, against salmon 215/159/112 under X's
+   line 40 px east), but the band is not widened into a pad, the same olive-brown continues west of the metal in
+   the open, and neither chip has a ring: **no contact**, as drawn. Four drawn contacts had no olive hole,
+   (13567,15281), (13520,15455), (13629,15673), (13629,16235): each is a plain pad with ring and bright centre in
+   both metal shots and a red-brown box in the clean shot (`sh2`): real. Below y 16470 the clean shot has
+   interference colours under the tracks (green and pink bands: `sh4`), so its "holes" there mean nothing; the
+   six largest and the six strongest ring candidates of both metal shots (`cache/scratch/busc/rings.py`, now
+   `tools/busc_rings.py` on branch `busc`) were looked at (`sh4`, `sh5`): plain tracks and plain crossings of the
+   poly rows, except one real pad, (13628,16626) (below).
+4. **Poly gaps** (field colour inside a drawn thin poly): one candidate, (13687,14955) on `wr_r2`'s row: the row
+   is orange and unbroken in both metal shots and chip 2's stripped shot (`sh7`). **No gap.**
+
+**Found as drawn**: all 18 tracks, their jogs, ends and contacts, and the poly rows under them, within the
+region. `k8`'s "23 px break" at y 16594 is the pair of dark edges where it crosses the wide poly row
+y 16520-16560 and `eof`'s row y 16590-16612 (sheet `sh6`); the metal is one piece.
+
+**Added:**
+
+- **k4 (`rc_eq_r6`) south of y 16500**: the metal runs on down x 13304 (10-12 px of bright metal about x 13302)
+  to y 16690 and turns south-west along a diagonal (x + y = 29997; `cdp4_track.py`), to (13259,16738) at this
+  run's edge. Chip 1's metal shot has a dark blemish on it at y 16604-16634; chip 2's is metal throughout
+  (view `k4`, four shots). No pad on it.
+- **One more load of `rst_a`** (`eof` run 8's lead): a pad with a contact (13628,16626) on `rst_a`'s metal
+  x 13630 (ring and bright centre in both chips, the pad's box 13611-13645 x 16610-16642 in the clean shot), and
+  its poly east along y 16620-16636 under X's line (x 13672) and `ck_out`'s metal (x 13716) with no contact
+  (salmon, not widened, no hole), into the gate column: drawn to x 13760. Seen on to about x 13800, at the
+  ground rail's west edge; where it ends is not read.
+
+**Not covered**: the tracks' lower ends in the field of diagonals below y 16740 (`eof`'s claim at the time); the
+audit does not test a contact on open diffusion beside a metal, and "no hole" under a metal is from the clean
+shot only above y 16470.
+
+### Leads for the gate column's lower part (x 13690-14100, y 16280-16900), seen in this run, NOT drawn, NOT reviewed
+
+Under the ground rail (`tools/bd2_umap.py 13790 16270 13900 16910 5 6`): land y 16402-16440 with the rail's
+contact (13831,16415) | band y 16444-16460 | land | band y 16488-16502 | land y 16512-16552 | band
+y 16558-16572 | land y 16582-16626 | ... | land | band y 16696-16710 | land | band y 16744-16762 | land.
+The band y 16488-16502 starts west on the pad of `ck_out`'s tap (13716,16495); the band y 16444-16460 has a blunt
+west end under `ck_out`'s metal with no contact, and the two bands' east ends are separate (field between
+them at x 13865-13880, y 16465-16485). A narrow metal x 13774-13790 runs from a pad (13777,16357) south to
+y 16772 over both bands without contact; the pad's poly goes east along y 16350-16362 under the rail. `ck_out`'s
+"tap" (13716,16562) is the east end of the wide poly row y 16520-16560 that `trunks` draws from the pad
+(13131,16562). East of the rail (x 13860-14000) the photos are at their limit even sharpened
+(`tools/rdp3_sharp.py`); nothing there was read.
+
+## Review
+
