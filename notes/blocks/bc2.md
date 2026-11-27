@@ -754,6 +754,51 @@ between land 5 and the diffusion (9536-9575, 15885-15932): `bc2_w15739` gates a 
 framed box (9548-9568, 15848-15868) north of it at which a poly row from the pad (9420,15862), the block's stem
 and a diffusion finger meet.
 
+## Run 8 (2026-11-27), piece `w6`: the second pull-down of `bc2_w15739` (2 transistors; 4 uncertain items, one box)
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 12:36 -0600. Region x 9400-9700, y 15840-15945. Views in `cache/scratch/bc2/w4/`:
+`k_acid1b`, `k_metal`, `k_acid` (8x), `pa_*` (the box, 12x, four shots), `hop` (the row from the west, three
+shots), `r_c`, `r_m`, overlay `ov6`.
+
+    bc2_w15915 = NOT bc2_w15739                 (depends on the tie, Ambiguity 14)
+
+- **The gate** is a branch of gate A's poly north along the rail's east edge, x 9507-9529, y 15898-15946
+  (`tools/px.py col 9516 15868 15972 3 metal,acid,acid1b`: salmon y 15901-15931, one dark line y 15934-15940,
+  salmon again from y 15943: one poly, the line a diffusion edge; review round 10 read it so independently: one
+  7 px line with orange poly on both sides at x 9524). West of it land 5 (tan to x 9503), east of it a node:
+  `tools/px.py row 15915 9450 9644 3 metal,acid,acid1b`, `row 15903`, `row 15928`: tan from x 9536 to x 9573,
+  the two dark lines inside it (x 9543, x 9564) being the edges of the thin metal x 9545-9562 that lies over it.
+  The poly is brighter over the channel (241-243 at y 15904-15925 against 187-225 at its ends). W 26, L 22.
+- **The node** (9536-9574, 15898-15934): tan under the thin metal x 9552 of `bc2_e15343`, which has no contact
+  to it (plain tan 186-198 / 152-174 down x 9558 from y 15884 to y 15926; the metal not widened; review round 10).
+  Field south of it (pink under the metal from y 15941).
+- **Load**: the node's band y 15907-15934 runs east under a poly block x 9579-9628, y 15890-15938
+  (`tools/px.py col 9605 15880 15948 ...`, `col 9622 ...`: poly y 15892-15931 with one dark line at
+  y 15904-15910, the band's north edge; the block's bottom line at y 15934-15937) onto the VCC land under the M
+  rail (`tools/bd2_umap.py 9626 15880 9704 15975 3 4`: the land reaches west to x 9635 at y 15904-15932;
+  contact (9662,15938), drawn in run 3, whose review noted it as "probably the supply end of an undrawn load
+  west of the M rail"). W 27, L 49.
+- **The block's stem** runs north, x 9579-9600, to y 15850 (`tools/px.py col 9588 15838 15945 ...`: orange poly
+  from y 15853 to y 15901 without a line: one poly with the block); a dark frame closes it at y 15845.
+- **The row from the west**: a pad (9420,15862) (hole in its middle, ring in both metal shots: `padc`; it is the
+  north end of the thin metal x 9415-9430, which goes south: no metal north of it) with a poly row y 15849-15865
+  east: open poly x 9440-9455, salmon under the rail (over field: land 4 ends at y 15830 and the column starts
+  again at y 15908, so it is no gate), orange in the gap to x 9538
+  (`tools/tl5_tracks.py rows row 9400 9560 5 15857`; `tools/px.py row 15858 9432 9582 3 ...`).
+
+### Ambiguities (run 8)
+
+14. **The box (9548-9568, 15848-15868): the node's tie and its exit** (`?D 9553,15862:9567,15900`,
+    `?P 9562,15850:9582,15866`, `?P 9538,15850:9556,15866`, `?B 9548,15848:9568,15868`). A diffusion finger
+    runs north from the node (tan x 9555-9566 at y 15890; a pale box y 15870-15880; green in chip 2's stripped
+    shot at (9557,15874)) into a framed box, at which the stem (from x 9578 in the east) and the row (to x 9538
+    in the west) both arrive: 12 px of frame lie between the row's end and the box's middle, 15 px between the
+    middle and the stem. Review round 10: "row, stem and a diffusion finger meet at it; whether row and stem
+    each join cannot be told." Drawn: both join (the stem makes the block a tied load; the row takes the output
+    west to the pad (9420,15862) and the thin metal x 9420). If only the stem joins, the gate has no exit; if
+    only the row joins, the block is a pull-up gated by something else. The thin metal x 9552 passes over this
+    box without contact (review round 10: no hole, the box's interior off-centre from the metal).
+
 ## Review
 
 **Model note: latch unit a was traced AND reviewed on claude-opus, not claude-fable-5-2**

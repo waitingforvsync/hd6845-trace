@@ -7,3 +7,4 @@
 9210,15140:9640,15330  logic  NOR (centre block, west rail, unit 2) | bc2_w15216 = NOR(lc2_w9125, bc2_e14955)
 9210,15370:9640,15840  logic  six-input NOR (centre block, under the west rail) | bc2_w15739 = NOR of the two units above it, two bus lines (tc2_r5718, busl_x7122) and two rows from the west
 9250,15895:9700,16140  logic  AND-OR-INVERT (centre block, under the west rail) | bc2_w16035 = NOT(bc2_p16067 OR (bc2_w15739 AND bc2_m15997))
+9400,15840:9700,15945  logic  inverter (centre block, east of the west rail) | bc2_w15915 = NOT bc2_w15739 (tie uncertain)

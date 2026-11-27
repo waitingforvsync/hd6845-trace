@@ -697,3 +697,31 @@ P 9270,16031:9426,16049                # the row west
 P 9253,16024:9287,16058                # pad
 C 9270,16041 s=20x20
 M 9270,16041 y16075 w=13               # thin metal south (port)
+
+# ================================================================ run 8 (2026-11-27), piece w6: the pull-down beside land 5
+#     bc2_w15915 = NOT bc2_w15739                                   (its tie and its exit are uncertain: ?)
+# Gate A's poly has a branch north at the rail's east edge (x 9507-9529, y 15898-15946: one poly with the band,
+# the 7 px line at y 15933-15939 being a diffusion edge: review round 10), which is a gate between land 5 (to
+# x 9503) and a node east of it (9536-9574, 15898-15934, tan under the thin metal x 9552, which has no contact
+# to it). Load: the node's band y 15907-15934 runs east under a poly block (9579-9628, 15890-15938: one dark line
+# across it at y 15904-15910, the band's north edge) onto the VCC land under the M rail (contact 9662,15938,
+# drawn in run 3). The block has a stem north (x 9579-9600, to y 15850).
+# North of the node a diffusion finger (x 9553-9567) runs up to a framed box (9548-9568, 15848-15868), at which
+# the stem and a poly row from the west (y 15849-15865, from a pad (9420,15862) under and beyond the rail) arrive
+# (review round 10: "row, stem and a diffusion finger meet at it; whether row and stem each join cannot be
+# told"). Drawn as the node's tie and its exit, all ?.
+P 9507,15898:9529,15950                # gate A's branch north: the pull-down's gate
+D 9500,15906:9540,15932                # channel, from land 5's east edge
+D 9536,15898:9574,15934                # the node
+N D 9556,15915 bc2_w15915
+D 9570,15907:9645,15934                # band east under the load onto the VCC land
+P 9579,15890:9628,15938                # load gate
+P 9579,15850:9600,15892                # its stem north
+?D 9553,15862:9567,15900               # finger north into the box
+?P 9562,15850:9582,15866               # the stem's tab west into the box
+?P 9538,15850:9556,15866               # the row's end in the box
+?B 9548,15848:9568,15868               # tie and exit (buried contact)
+P 9420,15849:9540,15865                # the row from the west: under the rail (over field: no gate) and the gap
+P 9403,15845:9437,15879                # pad
+C 9420,15862 s=20x20
+M 9421,15862 y15900 w=13               # thin metal x 9420 south (port: to about y 16253)
