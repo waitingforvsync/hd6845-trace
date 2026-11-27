@@ -682,7 +682,7 @@ thin metal x 9552; overlays `ov_399`, `ov_517`) and `w1/` (`n_end`, `e_end`, `x9
   about x 9106), and line y 14785 (`lc3_w9947`) has no metal east of x 8600 but the piece `eof` drew: all three
   end in `bc1`'s region.
 
-## Run 7 (2026-11-27), piece `w5`: an AND-OR-INVERT under the W rail (4 transistors; 4 uncertain items)
+## Run 7 (2026-11-27), piece `w5`: an AND-OR-INVERT under the W rail (4 transistors; 3 uncertain items, one tie)
 
 Matt Godbolt, on Claude Fable 5.2, 2026-11-27 11:42 -0600. Region x 9250-9700, y 15895-16140. Views in `cache/scratch/bc2/w4/`:
 `s_c`, `s_m` (x 9390-9650, 4.9x), `w_c`, `w_m` (west of the rail, 5x), `l2_c`, `l2_m` (the load side, 6.5x),
@@ -706,8 +706,12 @@ Matt Godbolt, on Claude Fable 5.2, 2026-11-27 11:42 -0600. Region x 9250-9700, y
   x 9305-9320 that comes from the south (`tools/follow.py 9312 16060 S`: 2,150 px, to (9552,17868)); under the
   thin metals x 9357 and x 9420 without contact (`cdp4/candh.py` flags (9422,15997) as pad-like, clean-shot
   minimum +37: a row's edges, no hole). Placeholder `bc2_m15997`.
-- **Gate C**: a band x 9447-9512 whose west end stands beside the pad of the row y 16040 (below); where it comes
-  from is not read (view `gc`). Placeholder `bc2_p16067`, port at its west end.
+- **Gate C** (corrected in review round 10): the band's west end is closed at x 9452 (field beyond); it runs on
+  east past the rail's edge (orange at x 9519-9537 in chip 2's metal shot), turns south as a column x 9536-9549
+  (salmon, unbroken, y 16062-16104) and east as a row y 16088-16106 under the thin metals x 9552 and x 9600
+  (no hole) to x 9632 (`tools/tl5_tracks.py rows row 9500 9760 6 16067 16096`, `rows col 16050 16130 4 9540`;
+  views `c_c`, `c_m`). Drawn to x 9632: port, placeholder `bc2_p16067`; a wider salmon block (9590-9632,
+  16085-16110) stands there, not read. It is not joined to the row y 16040's box (field between).
 - **Load.** X2 leaves the rail east at y 16022-16048 (`tools/px.py row 16035 9500 9650 3 metal,acid,acid1b`):
   diffusion across the gap (plain, blue 82-86), tan under the thin metal x 9545-9560, to x 9575; then under a
   poly x 9579-9628 (orange in the open, salmon under the thin metal x 9594-9608) onto a VCC land under the M rail
@@ -720,30 +724,31 @@ Matt Godbolt, on Claude Fable 5.2, 2026-11-27 11:42 -0600. Region x 9250-9700, y
 
 ### Ambiguities (run 7)
 
-12. **The tie of the load** (`?D 9566,15997:9578,16024`, `?B 9564,15990:9580,16000`). In the clean shot a
-    bright green strip (open diffusion by the legend) runs from the strip's top at (9566-9578, 16020) north to
-    y 15997 in a notch of the pad's south-west corner, with the pad's salmon over its top (view `pb_acid1b`).
-    Not measured against a control; the frame of a buried contact is not seen. Without it the pad is not on
-    X2 and the load would be a transistor gated by whatever the pad's metal carries.
-13. **X2's exit west** (`?D 9432,16030:9460,16046`, `?B 9408,16028:9438,16052`). In the gap west of the rail
-    chip 2's stripped shot reads red - green 23-37 at x 9443-9455, y 16035 (7-20 at y 16020; -5..12 beside X1 at
-    y 15975; 15-22 beside land 6 at y 16100): an arm like node N3's in run 5, up to the frame (x 9437-9441) of a
-    pad (9410-9436, 16030-16050). The pad is the east end of a poly row y 16031-16049 (`tools/tl5_tracks.py rows
-    row 9300 9470 6 16040`) from a pad (9270,16041) in the west, whose thin metal goes south (`follow`: to
-    y 16351), and the thin metal x 9415-9430 has a contact on it at (9421,16040) (bright centre x 9418-9424
-    between dark arcs in both metal shots; `candh`: clean-shot minimum -17, a hole). Whether the pad's poly lies
-    on the arm is not seen. If it does, X2 goes out on that row and on the thin metal x 9420, which runs north to
-    the pad (9420,15862) and south to about y 16253.
+12. **The tie of the load** (`?D 9541,15996:9561,16024`, `?P 9541,15990:9561,16014`, `?B 9538,15992:9564,16020`;
+    moved in review round 10). It is the framed box (9538-9564, 15992-16020) at the pad's south-west corner,
+    under the thin metal x 9552: heavy east and west frames that the field control at y 15958 lacks, a weak
+    south line onto the strip, the pad's top band on its north: the first unit's tie, mirrored. The overlap of
+    poly and diffusion inside it cannot be resolved (its centre in chip 2's stripped shot is grey, not
+    poly-coloured like the control), hence `?`. The first reading (a finger at x 9566-9578) was wrong: an edge
+    line crosses its foot at y 16016-16022 and the pocket reads field.
+13. *(Closed in review round 10.)* **X2's exit west**: the arm (x 9441-9457, y 16016-16047, no edge line inside,
+    stripped red - green 16-37 as on the strip east) and the buried contact of the row y 16040's end on it are
+    confirmed by the reviewer (the box has the x-structure of the six-input NOR's output box: frames x 9402-9414
+    and x 9429-9438, interior x 9414-9426) and are drawn firm. So X2 leaves on the poly row y 16031-16049 west
+    to a pad (9270,16041), the north end of a thin metal going south (`tools/follow.py`: to y 16351).
+    **The thin metal x 9415-9430 has NO contact on that box** (drawn as one before the review: wrong).
 
-**Read and NOT drawn** (measurements in `cache/scratch/bc2/w1/notes.md`, last section): (a) the thin metal
-x 9552 of `bc2_e15343` passes this gate: bright to y 15993 over the pad's top band (salmon under it at
-y 15984-15987, no hole), then ring / small centre (9546-9558, 16004-16010) / ring, and metal again from y 16022
-over X2's strip: a contact pad at about (9552,16007) in a framed box (9543-9558, 16000-16013) west of the tie
-finger. What that box is on is not read; it is not drawn, and the thin metal still ends at its port y 15835.
-(b) A vertical poly x 9507-9529, y 15895-15932 beside land 5, with one dark line (y 15934-15940) between it and
-gate A's east end: probably one poly, the gate of a pull-down from land 5 to the diffusion (9532-9576,
-15885-15932) east of it, which has a poly block (9579-9628, 15890-15935) and the M rail's land (contact
-(9662,15938)) beyond. Not drawn.
+**Read and NOT drawn** (measurements in `cache/scratch/bc2/w1/notes.md`, last sections; verdicts of review round
+10 below): (a) the thin metal x 9552 of `bc2_e15343` passes over the tie box (9538-9564, 15992-16020) and over the
+box (9548-9568, 15848-15868) further north **without contact** (reviewer; the tracer's first reading of both as
+contact pads was wrong); its continuity over the first cannot be shown from the metal shots (dark y 15992-16006
+and y 16010-16029). It ends at y 16104 over gate C's poly row, with no ring and no hole seen: where its contact
+is, is open (a contact there would make gate C `bc2_e15343`). (b) The vertical poly x 9507-9529, y 15895-15932
+is one poly with gate A (reviewer: one 7 px line at y 15933-15939 with orange poly on both sides) and is a gate
+between land 5 and the diffusion (9536-9575, 15885-15932): `bc2_w15739` gates a second pull-down, not drawn yet
+(the next piece), whose node has a poly block (9579-9628, 15890-15935) and the M rail's land east of it and a
+framed box (9548-9568, 15848-15868) north of it at which a poly row from the pad (9420,15862), the block's stem
+and a diffusion finger meet.
 
 ## Review
 
@@ -1112,6 +1117,57 @@ Connections before and after the fix (commit c8ed645 against the fixed tree):
 Recorded 2026-11-27 11:34 -0600.
 
 Round 9: no findings that change a connection.
+
+### Round 10 (full review), 2026-11-27: run 7, piece `w5`
+
+A fresh Claude Fable 5.2 agent, on commit 79b0b7e, 13 images in `cache/scratch/bc2/review-10/`. Told what was
+drawn firm (the column and its three gate bands, the rows of A and B and their pads, gate C's band, the strip
+east, the load, the pad and its contact), what was drawn `?` (the tie at x 9566-9578; the exit west with a
+contact of the thin metal x 9420), and asked for independent verdicts on things read and not drawn (the thin
+metal x 9552 at (9552,16007) and (9558,15860); the vertical poly beside land 5).
+
+**Two findings change a connection; both fixed:**
+
+- **F1. `C 9421,16040` was not a contact.** The "pad" is a framed box with the x-structure of the six-input
+  NOR's output box, which has no metal over it; clean-shot interior tan (red - green +24..+33), only its south
+  rim green (as that box's and the gate bands'), where the certain contact (9356,15955) has a 12 px hole of
+  -10..-27 in a 34 px pad; chip 2's stripped shot centre red - green 57-68 (pass-over control (9552,15097): 72;
+  certain contacts 4-32); the metal is 10 px wide at the box and 16 px at y 16067: no pad. The contact and the
+  metal stub are taken out: the thin metal x 9420 is not on the row y 16040 or on X2. (The tracer's evidence had
+  been `candh`'s flag and a clean-shot minimum of -17, which was the rim.)
+- **F2. Gate C's open end was on the wrong side**: closed at x 9452 in the west; the band runs on east and south
+  (now drawn: see the piece's notes). The port moved from (9447,16067) to (9632,16097).
+
+Verdicts on the questions: the pad and the block are **one poly** (the line y 16018-16022 is 7 px, identical to
+the strip's south-edge line y 16048-16052; geometry: the block ends at about y 16064); **no tie finger at
+x 9566-9578** (field; an edge line across its foot): the tie is the framed box under the thin metal (moved, kept
+`?`: Ambiguity 12); **the arm west and its buried contact: yes** (now firm: Ambiguity 13 closed); **no contact of
+the thin metal x 9552 at (9552,16007)** (clean interior tan 186-194/151-172, no hole, where the certain contact
+(9140,14826) reads green 105-142/111-141; metal 10-12 px, no pad) and **a pass-over at (9558,15860)** (the box's
+interior is off-centre from the metal, no hole, stripped red - green 50-70); **the vertical poly beside land 5
+is one poly with gate A and is a gate** (not drawn in this piece). Geometry, fixed: the arm is x 9441-9457,
+y 16016-16047; the VCC contact is centred about (9660,16048).
+
+Checked and found correct: the column under the rail (lands, A, X1, B, X2, C), its two contacts, no contact on
+X1 or X2, no fourth band, field east and west of X1; the pads (9356,15955) (metal through), (9312,15997) and
+(9270,16041) (metals' north ends); the row y 16040 ends at its box; no holes where the rows of A, B and y 16040
+pass under x 9312, 9357, 9420; the strip east, the load (L about 54), the contact (9597,15995) at the metal's
+north end. Could not check: the thin metal x 9552 at y 16104-16142; the pad (9420,15862); gate C's row east of
+x 9630; land 6's contact (text map only).
+
+Lesson for the tracer (also for the guide's trap 27): `candh`'s "PAD" and a negative clean-shot minimum are not a
+contact when the box under a thin metal has a green RIM; the test is a hole in the box's middle and a widened
+metal.
+
+Connections before and after the fixes (commit 79b0b7e against the fixed tree; the removed contact joined
+only a stub of its own, so the extraction's nets do not change):
+
+    tools/t.sh bc2 sameconn.py 79b0b7e            ->  connections identical
+    .venv/bin/python tools/sameconn.py 79b0b7e    ->  connections identical
+
+Recorded 2026-11-27 12:05 -0600.
+
+Round 10: two findings that change a connection (a contact that is not one; a wire's open end), fixed. Fix check next.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 

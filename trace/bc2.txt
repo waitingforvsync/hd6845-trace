@@ -660,34 +660,38 @@ C 9312,15997 s=20x20
 M 9312,15997 y16028 w=12               # south (port)
 N M 9312,16020 bc2_m15997
 P 9312,15988:9512,16004                # gate B
-# gate C: a band whose west end is at x 9447, beside a framed pad (9410-9435, 16030-16050) of the thin metal x 9420;
-# its source is not read (port)
-P 9447,16060:9512,16074                # gate C
-N P 9452,16067 bc2_p16067
+# gate C (review round 10: the band's west end is closed at x 9452; it runs on EAST of the rail): band x 9452-9549,
+# a column south on x 9536-9549 (salmon, unbroken) and a row y 16088-16106 east under the thin metals x 9552 and
+# x 9600 (no hole) to x 9632 (port: not followed further). The thin metal x 9552 (bc2_e15343's, not drawn here)
+# ends at y 16104 over this row: no ring and no hole seen there (not read).
+P 9452,16060:9549,16074                # gate C
+P 9536,16060:9549,16106                # south
+P 9536,16088:9632,16106                # east (port)
+N P 9460,16067 bc2_p16067
 # X2's strip east, the load and the output
 D 9500,16022:9645,16048                # the strip: gap, thin metal x 9552, under the load, onto the VCC land
 D 9635,16026:9691,16072                # VCC land under the M rail
-C 9663,16043
+C 9660,16048
 M 9642,15980:9698,16080                # M rail, on south
-P 9579,15980:9628,16050                # the load's gate: the pad's east part and the block over the strip
+P 9579,15980:9628,16064                # the load's gate: the pad's east part and the block over the strip (review round 10: one poly, to y 16064)
 P 9540,15978:9628,15993                # the pad's top band, west to x 9540
 C 9597,15995 s=16x16
 M 9600,15995 y16060 w=12               # output metal south (port: it runs on to about y 16173)
-?D 9566,15997:9578,16024               # tie finger: diffusion from the strip north, in the open beside the pad (bright green in the clean shot)
-?B 9564,15990:9580,16000               # tie: the pad's poly over the finger's top
-# X2's exit west (uncertain): in the gap west of the rail the stripped shot reads diffusion at y 16030-16046
-# (red - green 23-37 at x 9443-9455; 7-20 at y 16020, -5..12 beside X1), an arm like the one of the six-input
-# NOR's node N3, up to the frame (x 9437-9441) of a pad (9410-9436, 16030-16050). That pad is the east end of a
-# poly row y 16031-16049 from a pad (9270,16041) in the west, and the thin metal x 9415-9430 has a contact on it
-# at (9421,16040) (bright centre between two dark arcs in both metal shots, a hole in the clean shot). Whether the
-# pad's poly lies on the arm (a buried contact, as at N3's box) is not seen: ?D, ?B.
-?D 9432,16030:9460,16046               # arm west
-?B 9408,16028:9438,16052               # buried contact of the row's end pad on the arm
-P 9404,16031:9436,16049                # the row's end pad
-C 9421,16040 s=14x14
-M 9421,16026 y16054 w=13               # the thin metal x 9420 through the pad (ports north and south; not followed here; no name of
-                                       # its own: through the ?B it is bc2_w16035)
-P 9270,16031:9410,16049                # the row west, under the thin metals x 9357 and x 9312 (no contact)
+# the tie (review round 10: not at x 9566-9578, where the pocket is field; it is the framed box (9538-9564,
+# 15992-16020) under the thin metal x 9552, which passes over it without contact: the unit's tie mirrored). The
+# overlap of poly and diffusion inside the box is not resolved: ?
+?D 9541,15996:9561,16024               # finger: from the strip north into the box
+?P 9541,15990:9561,16014               # the top band's tab south over it
+?B 9538,15992:9564,16020               # tie (buried contact)
+# X2's exit west (review round 10: the arm and the buried contact confirmed; the thin metal x 9415-9430 passes
+# over the box WITHOUT contact: no hole, no pad, 10 px wide there). In the gap west of the rail a diffusion arm
+# x 9441-9457, y 16016-16047 (no edge line inside; stripped red - green 16-37, as the strip east) runs up to the
+# framed box (frames x 9402-9414 and x 9429-9438, interior x 9414-9426) at the east end of a poly row
+# y 16031-16049: the same build as the output box of the six-input NOR. The row runs west under the thin metals
+# x 9357 and x 9312 (no contact) to a pad (9270,16041), the north end of a thin metal going south.
+D 9412,16016:9460,16047                # arm west, to under the box
+B 9402,16030:9440,16052                # buried contact of the row's end on the arm
+P 9270,16031:9426,16049                # the row west
 P 9253,16024:9287,16058                # pad
 C 9270,16041 s=20x20
 M 9270,16041 y16075 w=13               # thin metal south (port)
