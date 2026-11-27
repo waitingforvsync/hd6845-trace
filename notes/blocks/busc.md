@@ -32,9 +32,10 @@ a metal north along x 17363 and east along y 17084 into the data bus column's `d
 **Which rail is which.** The west supply is VCC by drawing: it is one metal with the data bus column's VCC
 rail (`dbus`: `M 17527,8287:17585,17000`), through the wide metal y 16970-17020 that the rail turns west into
 and that metal's turn south along x 16990-17060 to the strap over islands A1 and A2 (view `top_m`). The east
-rail (x 17400-17442) is **taken as VSS and labelled so**: the pull-downs of both inverters and of the output
+rail (x 17406-17452) is **taken as VSS and labelled so**: the pull-downs of both inverters and of the output
 end on it, both loads have their gates tied to the node on their other side, and nothing else fits; where it
-goes from its foot (east at y 17850-17906) is not followed (Ambiguity 1).
+goes from its foot (east at y 17850-17906) is not drawn; review round 1 followed it east and south on a wide
+metal x 17465-17520 to `inrow`'s `vss` rail (Ambiguity 1).
 
 ### Layout: one stack of strips
 
@@ -45,8 +46,8 @@ contacts at a 40 px pitch. From the top (y of each strip from the clean shot dow
 |---|---|---|
 | 17128-17188 | islands A1 (x 17118-17220) and A2 (x 17250-17324), field between them | VCC |
 | 17189-17211 (17173-17211 over A2) | gate G1 | `rd_data_e_n` |
-| 17213-17256 | strip A3 (x 17118-17336) | `d_hiz` |
-| 17284-17327 | strip B1 (x 17170-17369) | VSS |
+| 17213-17256 | strip A3 (x 17118-17336; a field notch 17225-17245 down to y 17222 between the islands) | `d_hiz` |
+| 17284-17327 | strip B1 (x 17160-17369) | VSS |
 | 17329-17347 | gate G2 | `rd_data_e_b` |
 | 17352-17398 | strip B2 | `d_hiz` |
 | 17400-17418 | gate G3 | `rd_data_e_n` |
@@ -60,7 +61,7 @@ contacts at a 40 px pitch. From the top (y of each strip from the clean shot dow
 | 17690-17727 | the E block: poly over the column x 17305-17362 | `rd_data_e_b` (stage 2's load) |
 | 17730-17778 | the load's box, contact (17335,17753) | VCC |
 | 17706-17748 | Ds1 (x 17119-17196), contact (17158,17726) | VCC |
-| 17750-17788 | gate Gs (x 17100-17226) | `rd_data_e_n` (stage 1's load) |
+| 17750-17788 | gate Gs (x 17088-17226) | `rd_data_e_n` (stage 1's load) |
 | 17799-17842 | strip D1 (x 17118-17362) | `rd_data_e_n` |
 | 17845-17867 | gate G7 | `rd_data_e` |
 | 17869-17908 | strip D2 | VSS |
@@ -101,9 +102,10 @@ G5 250/16, G6 188/22, G7 244/22, loads 59/37 (stage 2) and 77/38 (stage 1).
 ### The metals, and the gaps between them
 
 - **VCC**: the wide metal's foot (x 17040-17112), its strap over A1 and A2, south along x 17078-17112 to
-  y 17366, an inner rail x 17106-17140 from y 17320 to y 17748 with straps over B3 and Ds1, and an arm east
-  along y 17706-17746 to the load's box.
-- **VSS**: the east rail x 17400-17442 from y 17286 to its foot at y 17906, with straps over B1, B5 and D2.
+  y 17366 (x 17080-17100 down to y 17262, to x 17121 below), an inner rail x 17124-17156 from y 17320 to
+  y 17748 with straps over B3 and Ds1, and an arm east along y 17706-17746 (y 17727-17746 where it passes
+  stage 2's tie box) to the load's box.
+- **VSS**: the east rail x 17406-17452 from y 17286 to its foot at y 17906, with straps over B1, B5 and D2.
 - **`d_hiz`**: the strap over A3; a link x 17176-17206 south (over B1's west end and G2: no pit, salmon) to the
   strap over B2; from that strap's east end a link x 17338-17372 south (over the east ends of G3 and G4 and
   the east end of B3: no pit) to the strap over B4; and from A3's strap the output north along x 17353-17373
@@ -129,7 +131,8 @@ and y 17915-17935); the area east of the top group (17385-17460, 17105-17260).
 ### Ambiguities
 
 1. **The east rail is VSS by reasoning, not by drawing.** If it were not, nothing here would work as a
-   circuit; but its path to a supply is not followed.
+   circuit. Review round 1 followed its foot to `inrow`'s `vss` rail by a wide metal (x 17465-17520) that no
+   package draws yet.
 2. **The two framed boxes** (the ties of the two loads) are drawn `B`: heavy outline, lighter centre, each at
    the end of a load's gate poly that has no other driver.
 3. **Stage 2's load diffusion under the E block** is not seen (poly and metal lie over it); it is drawn
@@ -156,3 +159,53 @@ and y 17915-17935); the area east of the top group (17385-17460, 17105-17260).
 
 ## Review
 
+### Round 1 (full review), 2026-11-27, piece `dhz`
+
+A fresh Claude Fable 5.2 agent, on commit 8826117, 20 images in `cache/scratch/busc/review-1/` (4.3-6x in two
+or more shots, with `tools/px.py`, `tools/textmap.py`, `tools/follow.py`, `tools/busl_mdrawn.py`). Told to
+suspect: which strap is on which metal (the two `d_hiz` links past B1's and B3's straps, the east link against
+the VSS rail, the thin metal against the inner rail and the VCC metal's south end, the straps over B4, B5 and
+B6 against the inner rail, B1's and B5's straps into the east rail, B3's and Ds1's into the inner rail); the
+strap over A1 and A2 and whether the wide metal is the VCC rail's; the poly joins and any contact on either
+poly column; the two buried contacts and whether the loads' diffusions exist; a contact from the VCC arm to
+the E block; G1's two parts and the loop between the islands; the output's metal; anything not drawn.
+
+Findings, none of which changes a connection (all confirmed by me and fixed):
+
+1. **Inner VCC rail** is x 17124-17156, not x 17106-17140 (row y 17515: metal x 17126-17154 in both chips,
+   bare ground x 17105-17117). Moved, with the straps that start on it.
+2. **East rail** is x 17406-17452 (row y 17505), drawn x 17400-17442. Moved.
+3. **The VCC arm** was drawn over the lower half of stage 2's tie box; at x 17250-17280 it is y 17727-17746 and
+   clears the box. Narrowed there. No contact either way.
+4. **The west VCC metal** is x 17080-17100 for y 17180-17258 and widens to x 17121 only below y 17262. Redrawn.
+5. **Gs** runs west to x 17088 (drawn 17100), **G7** to x 17096 (17110), **B1**'s west edge is x 17160 (17170).
+6. **The loop between the islands** is a field notch in A3 (17225-17245, down to y 17222); G1 is one poly, 36-38
+   long over A2 and 20 over A1. Notch drawn (Ambiguity 5 stands: the reason for the longer part is not known).
+
+Checked and found as drawn by the reviewer: every gap between metals of different nets is bare ground between
+two edge lines in both chips, with no pit or hole under either link or under the inner rail over B2, B4 and
+B5; the strap over A1 and A2 is one metal with the wide VCC metal, which runs to `dbus`' rail; B1, B5 and D2
+join the east rail, B3 and Ds1 the inner rail; the poly joins (G1, the west column and P3, with open poly
+y 17372-17388; G3, G4 and G6 from their pads, stopping at x 17386 with field before the rail; G2 and G5 into
+the east column; the foot into the E block; G7 to its pad); no contact on either poly column, on G7's column
+or on the E block (chip 2's dark patch is absent in chip 1); stage 2's channel exists (diffusion edge lines
+cross the open poly at x 17300-17306 and x 17369-17375), Ds1 runs under Gs into D1, both tie boxes read as
+buried contacts; the output is one metal to (17641,17084), joined to the column, crossing a poly column at
+x 17528-17548 without contact; the three outlined areas and the strip x 17045-17068 are field.
+**The east rail** (the reviewer's own following, not drawn here): from its foot east, then south on a wide
+metal x 17465-17520 to `inrow`'s `vss` rail (y 18381-18431), clear of `inrow`'s VCC band. So Ambiguity 1 has
+a second leg to stand on; the wide metal is no package's yet.
+Could not be settled from the photos (reviewer): the thin metal through the rims of P4 and P6 (6 px bands
+that read orange in chip 2 and yellow in chip 1; read as metal over poly, and nothing else could feed G4 and
+G6); B5's strap into the rail (a 9-12 px dark line that coincides with the poly column's west edge beneath);
+a greenish patch at (17265,17710) in stage 2's tie box in the clean shot, like a contact hole, with no bright
+centre in either metal shot (stage 1's box, with no metal near, shows the same green).
+
+Connections before and after the fixes (commit 8826117 against the fixed tree):
+
+    tools/t.sh busc sameconn.py 8826117            ->  connections identical
+    .venv/bin/python tools/sameconn.py 8826117    ->  connections identical
+
+Recorded 2026-11-27 07:06 -0600.
+
+Round 1: no findings that change a connection.
