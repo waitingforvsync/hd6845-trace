@@ -728,19 +728,17 @@ M 9421,15862 y15900 w=13               # thin metal x 9420 south (port: to about
 
 # ================================================================ run 9 (2026-11-27), piece w7: two series gates under the W rail, and four thin metals' routes
 # Only what is firm. Under the rail south of land 6 and a stretch of field (y 16138-16168): a node (y 16170-16195,
-# placeholder bc2_w16182; no contact), gate D (y 16198-16216), a node (y 16220-16242), gate E (y 16244-16264,
-# stepped), land 7 (y 16268-16330; contact 9476,16290). So bc2_w16182 is pulled to ground through D AND E.
+# no contact; it has no name of its own: see below), gate D (y 16198-16216), a node (y 16220-16242), gate E (y 16244-16264,
+# stepped), land 7 (y 16268-16330; contact 9476,16290). So the node is pulled to ground through D AND E.
 #   gate D is bc2_m15997: the thin metal x 9312 passes through a pad (9313,16215), whose row runs east
 #   gate E is bc2_w15915 (through run 8's ?B): the thin metal x 9420 ends on a pad (9407,16262), whose row runs east
-# The node bc2_w16182 leaves east by a neck (y 16170-16184) across the gap into a diffusion block under and beside
-# the thin metal x 9552 (about 9540-9575, 16116-16240), which is NOT drawn: port. Its pull-up and what else is on
-# that block are not read (the block reaches the strip under the plate of bc2_p16067).
-# The east ends of bands D and E (x 9514, at the rail's edge) are not verified in the gap beyond: see the notes.
+# The node leaves east by a neck (y 16166-16188) across the gap into a diffusion block under and beside the thin
+# metal x 9552; the block, the node's two further pull-downs and its pull-up are drawn below (review round 14).
+# Bands D and E end at about x 9522 (review round 14: an end line at x 9523-9526, plain ground beyond).
 M 9463,16140:9513,16335                # W rail, on south
 D 9458,16170:9508,16330                # the column: node, D, node, E, land 7
 C 9476,16290
-D 9500,16170:9542,16184                # the upper node's neck east (port)
-N D 9480,16182 bc2_w16182
+D 9500,16166:9545,16188                # the upper node's neck east, into the block (review round 14: y 16166-16188)
 M 9312,16028 y16250 w=12               # bc2_m15997's thin metal, on south through its pad (port: it runs on far south)
 P 9296,16198:9330,16232                # pad
 C 9313,16215 s=20x20
@@ -753,9 +751,48 @@ P 9407,16250:9482,16270                # row east
 P 9468,16244:9514,16264                # gate E
 # bc2_w16035's two exits, to their pads
 M 9600,16060 y16197 w=12
-P 9580,16180:9625,16215                # poly pad (its poly south is not drawn: port)
+P 9580,16180:9625,16215                # poly pad; its poly south is drawn below (review round 14)
 C 9597,16197 s=16x16
 M 9270,16075 y16345 w=13
 P 9253,16328:9287,16362                # pad
 C 9270,16345 s=20x20
-P 9270,16336:9345,16354                # its row east (port)
+P 9270,16336:9345,16354                # its row east (port; review round 14: it runs on to the rail, the band y 16338-16352 under it)
+
+# ---------------------------------------------------------------- run 9, after review round 14: the rest of the node's gate
+#     bc2_p16067 = NOT( bc2_w16035 OR bc2_m16130 OR (bc2_m15997 AND bc2_w15915) )      (through the tie ?B and one ?D)
+# The node under the rail has two more pull-downs and a pull-up (found by the reviewer; measured again by the tracer):
+# (1) East: the block (tan under and east of the thin metal x 9552, x 9556-9574, y 16120-16238, one region with
+#     the neck) ends on a poly row y 16243-16262, south of which a diffusion arm y 16268-16288 comes east from land 7
+#     (to x 9592). The row is the foot of the poly that leaves bc2_w16035's pad (9580-9625, 16180-16215) south on
+#     x 9600-9622: a pull-down gated by bc2_w16035.
+# (2) West: under the thin metal x 9415-9430 (no contact) a diffusion strip x 9413-9443, y 16096-16156, crossed by
+#     a poly row y 16119-16137 that comes from a pad (9227,16130) on a thin metal x 9221-9236 passing through it
+#     (placeholder bc2_m16130: that metal comes from the west along y 15826 and goes on far south). South of the
+#     row the strip narrows (x 9428-9438, to y 16184) and an arm y 16166-16194 crosses the gap east to the node.
+#     North of the row the strip meets land 6 through the gap at y 16096-16108: probable, ?D.
+# (3) Pull-up: the block's north end is the west end of the strip y 16116-16142 under the plate (9578-9631,
+#     16088-16158) of gate C's poly bc2_p16067, which ends on the VCC land under the M rail.
+# (4) Tie (?): a framed box under the thin metal x 9552 at y 16106-16141 (both metal shots dark for 34 px, dim tan
+#     inside, no hole): a tab of the row y 16088-16106 south onto the block's tip. Two reviewers: "probably a tie,
+#     not provable". Through it the node IS bc2_p16067.
+D 9540,16166:9574,16188                # the block: its wide part, where the neck enters
+D 9556,16120:9574,16292                # the block north to the strip, and south under the row to the arm
+D 9500,16268:9592,16288                # land 7's arm east
+P 9600,16210:9622,16262                # bc2_w16035's poly south from its pad
+P 9545,16243:9622,16262                # its foot west: the gate
+D 9564,16116:9640,16142                # the strip under the plate, onto the VCC land
+P 9578,16088:9631,16158                # the plate (gate C's poly)
+D 9635,16068:9691,16150                # VCC land, on south under the M rail's slot contact
+M 9642,16080:9698,16160                # M rail, on south
+?P 9548,16100:9560,16136               # tab of the row south
+?B 9546,16108:9562,16141               # tie (buried contact) on the block's tip
+D 9552,16118:9566,16142                # the block's tip under the box
+D 9413,16096:9443,16156                # the west strip under the thin metal x 9420
+D 9428,16150:9438,16190                # its foot
+D 9428,16166:9462,16194                # arm east to the node
+?D 9438,16096:9462,16108               # the strip's join to land 6 across the gap
+P 9227,16119:9456,16137                # the gate's row, from its pad
+P 9210,16113:9244,16147                # pad
+C 9227,16130 s=20x20
+M 9228,16100 y16160 w=13               # thin metal x 9228 through the pad (ports: north, where it comes from the west along y 15826; south)
+N M 9228,16156 bc2_m16130

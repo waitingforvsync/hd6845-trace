@@ -799,7 +799,7 @@ shots), `r_c`, `r_m`, overlay `ov6`.
     only the row joins, the block is a pull-up gated by something else. The thin metal x 9552 passes over this
     box without contact (review round 10: no hole, the box's interior off-centre from the metal).
 
-## Run 9 (2026-11-27), piece `w7`: two series gates under the W rail, and four thin metals' routes (2 transistors, no uncertain item)
+## Run 9 (2026-11-27), piece `w7`: a second NOR-AND gate on the W rail, cross-coupled with `bc2_w16035` (5 transistors; 3 uncertain items)
 
 Matt Godbolt, on Claude Fable 5.2, 2026-11-27 13:01 -0600. Region x 9250-9640, y 15900-16365. Only what is firm is drawn; what is
 seen and not read is listed at the end. Views in `cache/scratch/bc2/w7/`: `g_c`, `g_m` (the gates, 6.5x),
@@ -811,8 +811,8 @@ pads), `e_acid1b`, `e_acid`, `e_metal` (east of the rail, 7x), overlay `ov7`.
   diffusion column x 9458-9508: a node (y 16170-16195), **gate D** (y 16198-16216), a node (y 16220-16242),
   **gate E** (y 16244-16264 at x 9490, stepped 6 px lower west of x 9475), land 7 (y 16268-16330 and on; contact
   (9476,16290): a dark dot in the clean shot, ring and bright centre in the metal shot, pits below it). The upper
-  node has no contact (plain tan; bright mottled metal without a ring). So the upper node, placeholder
-  `bc2_w16182`, is pulled to ground through D and E in series.
+  node has no contact (plain tan; bright mottled metal without a ring). So the upper node is pulled to ground
+  through D and E in series (it has no name of its own: through the tie it is `bc2_p16067`).
 - **Gate D is `bc2_m15997`.** The thin metal x 9305-9320 (from the pad (9312,15997), gate B of `bc2_w16035`)
   runs on south (`tools/tl5_tracks.py v 9313 15990 16260`) through a pad (9313,16215): ring and bright centre in
   both metal shots, a green hole in the pad's middle in the clean shot (6 of 9 samples of the middle 7 x 7 px green,
@@ -836,18 +836,65 @@ pads), `e_acid1b`, `e_acid`, `e_metal` (east of the rail, 7x), overlay `ov7`.
   (9270,16345) (ring, bright centre, hole: view `p270`), whose poly row y 16336-16354 goes east (drawn to
   x 9345: port).
 
-**Seen and NOT drawn** (not read to the standard of a drawing):
-- the block under the thin metal x 9552 that the neck enters (about 9540-9575, y 16116-16240): it reaches the
-  strip under the plate of `bc2_p16067` (y 16116-16142) in the north; under the thin metal at y 16104-16142 both
-  chips are dark over tan without a hole (a framed box: a tie of gate C's poly onto this block?); a poly row
-  y 16240-16262 crosses its south part. If the box is a tie, `bc2_p16067` is this node and the plate is its
-  load: `bc2_p16067` = NAND(`bc2_m15997`, `bc2_w15915`). Not drawn, not claimed.
-- the east ends of bands D and E at the rail's edge (x 9514): in the gap beyond stands a rounded outline
-  (9518-9535, 16192-16268) that is plain in chip 2's metal shot and olive in its stripped shot; whether either
-  band runs on into it is not read.
-- a dark dot at (9447,16233) in the clean shot, in a tan patch west of the lower node (no metal over it).
-- a tan block west of the rail at (9390-9455, 16285-16330) beside land 7.
-- the poly leaving the pad (9580-9625, 16180-16215) south (x 9600-9620, to about y 16260).
+### After review round 14: the rest of the node's gate (3 more transistors; 3 uncertain items)
+
+    bc2_p16067 = NOT( bc2_w16035 OR bc2_m16130 OR (bc2_m15997 AND bc2_w15915) )     (depends on the tie, Ambiguity 15)
+    bc2_w16035 = NOT( bc2_p16067 OR (bc2_m15997 AND bc2_w15739) )                   (run 7)
+
+With `bc2_w15915` = NOT `bc2_w15739` the two gates are cross-coupled: **a latch** with data `bc2_w15739` (the
+six-input NOR), enable `bc2_m15997` and a third input `bc2_m16130` that forces `bc2_p16067` low; outputs
+`bc2_w16035` and `bc2_p16067`. (As extracted; it stands on Ambiguities 12, 14 and 15.)
+
+The reviewer of round 14 found two more pull-downs on the node; the tracer measured both again before drawing:
+
+- **East, gated by `bc2_w16035`.** The neck enters a diffusion block under and east of the thin metal x 9552
+  (`tools/px.py col 9566 16150 16300 4 metal,acid,acid1b`: tan y 16166-16234, a dark line y 16238-16242,
+  channel-bright salmon y 16246-16258 (233-245 / 159-180), a line at y 16262, tan y 16266-16286, field from
+  y 16290). South of the poly a diffusion arm y 16268-16288 comes east from land 7 (`row 16280 9496 9610 4`: tan
+  under the rail's edge and under the thin metal; plain with blue 86-88 and stripped red - green 16-29 in the gap;
+  it ends at x 9592). The poly is a row y 16243-16262 from x 9545 to x 9622 (`row 16252 9530 9640 4`: orange,
+  blue 57-69, east of the thin metal), the foot of a poly that comes south on x 9600-9622 from the pad
+  (9580-9625, 16180-16215) of `bc2_w16035`'s thin metal (`col 9612 16195 16275 4`: orange without a line from
+  y 16215 to y 16259). `tools/eof_tee.py` finds that stem as the row's only branch. W 18, L 19.
+- **West, gated by `bc2_m16130`.** Under the thin metal x 9415-9430 (`tools/bd2_umap.py 9400 16084 9448 16200 3
+  4`): tan y 16100-16112, salmon y 16120-16132, tan y 16144-16152 at x 9415-9442, narrowing to x 9430-9438 down
+  to y 16180: a diffusion strip crossed by a poly row. From the strip's foot an arm y 16166-16194 crosses the gap
+  east to the node (`tools/px.py row 16180 9396 9470 3 ...`: stripped red - green 30-37 at x 9441-9456, against
+  0-17 at y 16148). **North of the row the strip's join to land 6** across the gap at y 16096-16108 is weaker
+  (`row 16101`: stripped red - green 19-29 in the gap against 15-23 on plain ground west of the thin metal):
+  `?D` (Ambiguity 16). The row y 16119-16137 comes from a pad (9227,16130) (a green hole in a salmon pad
+  9212-9245, ring and centre in the metal shot: view `r128w`), through which a thin metal x 9221-9236 passes;
+  it runs east under the thin metals x 9270, 9312, 9357 over field (no hole: `tools/tl5_tracks.py h 16128 9240
+  9460`; no branch) and ends with a cap in the gap at about x 9456. That thin metal, placeholder `bc2_m16130`,
+  comes from the west along y 15815-15837 and turns south at x 9228 (view `top228`); it goes on far south
+  (`tools/follow.py 9228 16160 S`). W 30, L 18.
+- **Pull-up.** The block's north end (tan at x 9566 from y 16124, one faint line at y 16157: reviewer) is the west
+  end of the strip y 16116-16142 under the plate (9578-9631, 16088-16158) of gate C's poly `bc2_p16067` (review
+  rounds 11 and 12), which runs east onto the VCC land under the M rail (whose slot contact is 9652-9675,
+  16040-16120). W 26, L 53.
+- Bands D and E end at about x 9522 (reviewer: an end line at x 9523-9526 at the bands' heights, plain ground
+  beyond; the rounded outline east of it is a field pocket).
+
+### Ambiguities (run 9)
+
+15. **The tie of the pull-up** (`?P 9548,16100:9560,16136`, `?B 9546,16108:9562,16141`). A framed box under the
+    thin metal x 9552 at y 16106-16141: both metal shots dark for 34 px, dim tan inside, no hole
+    (`tools/px.py col 9556 16100 16220 4 metal,acid,acid1b`), directly south of the poly row y 16088-16106 of
+    `bc2_p16067` and on the block's tip. Reviewers of rounds 12 and 14: "probably a tie of the row, not
+    provable". With it the node is `bc2_p16067` and the plate is its load; without it the node has only
+    pull-downs and a pull-up gated by a net with no driver, which cannot be.
+16. **The west pull-down's source** (`?D 9438,16096:9462,16108`): whether the strip north of the row meets
+    land 6. If not, that transistor's other end is not found.
+
+**Seen and NOT drawn**:
+- a framed box (9391-9427, 16159-16188) at the west arm's west end, half under the thin metal x 9420: not a
+  contact of that metal (the metal is not widened; reviewer: interior tan, no hole; the tracer's row at y 16180
+  reads grey, 121-155 / 126-155, at x 9414-9426, which is not a pad's hole either). No poly is seen leaving it.
+  What it is, is not read.
+- the land's column south of y 16330: under a channel-bright band y 16338-16352 (the row from the pad
+  (9270,16345): a gate of `bc2_w16035`) to diffusion y 16360-16390 (reviewer).
+- a dark dot at (9447,16233) in chip 1's clean shot only; the patch there reads field (reviewer).
+- the thin metal x 9552 of `bc2_e15343`: still not found where it makes contact.
 
 ## Review
 
@@ -1360,6 +1407,44 @@ Connections before and after the fixes (commit 6783e1a against the fixed tree):
 Recorded 2026-11-27 12:52 -0600.
 
 Round 13: no findings that change a connection.
+
+### Round 14 (full review), 2026-11-27: run 9, piece `w7`
+
+A fresh Claude Fable 5.2 agent, on commit e6e99e4, 19 images in `cache/scratch/bc2/review-14/`. Told that the
+tracer drew only what it took for firm, and to test hardest the two kinds of claim it had got wrong in run 7
+(contacts under thin metals, by the two-part test; poly ends); asked for verdicts on seven items and for a
+reading of the undrawn block east of the rail.
+
+**Nothing drawn was wrong; two findings change a connection by omission** (the node had two more pull-downs
+than D and E), both drawn now, each after the tracer measured it again (see "After review round 14" in the
+run's notes):
+
+- **F1 (east)**: land 7 has an arm east y 16268-16288 to about x 9592; the poly row y 16243-16262 lies between it
+  and the block the neck enters and is channel-bright there; that row is the poly leaving `bc2_w16035`'s pad
+  south. A pull-down of the node gated by `bc2_w16035`. ("The notes' conditional NAND(D,E) does not hold.")
+- **F2 (west, probable)**: a diffusion strip under the thin metal x 9415-9430 crossed by the poly row
+  y 16118-16138 (tan on both flanks there, pink field on both flanks under the other three thin metals; the row
+  channel-bright; chip 2's stripped shot red); its south end joined to the node by an arm y 16166-16194; its
+  north end meeting land 6 "probable". A framed box (9391-9427, 16159-16188) on the arm's west end, not a
+  contact, nature not read.
+
+Verdicts on the drawn items: (1) two bands, no third, both across the column, no contact on either node, the
+land's contact real (its centre nearer (9477,16303): geometry); the lower node's west patch is field, the dot in
+chip 1's clean shot only. (2) correct: the contact passes both tests, metal on both sides of the ring, the row
+unbroken with no hole under x 9357 or x 9420. (3) the contact real, the metal ends there and is continuous
+without contact. (4) the neck is diffusion and joined, its edges y 16166-16188 (fixed). (5), (6) correct; the row
+from the pad (9270,16345) runs on to the rail and is the band y 16338-16352 under it. (7) both bands end at
+about x 9522. The block: one diffusion region joined to the strip y 16116-16142; a framed box under the thin
+metal at y 16106-16141, "probably a tie of the row y 16088-16106, not provable". Not checked: the west box's
+nature; the strip's join to land 6 beyond colour class; the row y 16118-16138 west of x 9250; the thin metal
+x 9552.
+
+The additions change the extraction (three transistors and two names more), so no "connections identical" line
+belongs here; the fix check reads the additions against the photos.
+
+Recorded 2026-11-27 13:24 -0600.
+
+Round 14: two findings that change a connection (two pull-downs not drawn), fixed. Fix check next.
 
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
