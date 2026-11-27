@@ -3,11 +3,9 @@
 # and the bundle's tracks at the region's south edge as runs 1-2 drew them. The rest of the notes' Ports table
 # (top and east edges) is not in this file yet.
 dbus_le       P      16130,16865      out  the output cell (16096-16128,16849-16882) of the NOR(cs_d, bd2_e_n) under the ground rail; cdp4's row leaves it east
-bd2_rw_n      M      16210,17100      out  NOT rw_d, on the track x 16210 from its pad (16208,16733); runs on south (run 1's track scan: to y 17745), not followed
-bd2_e_n       P      16235,17110      out  NOT e_b: the poly column x 16226-16244 in the gap between the tracks x 16210 and x 16255; goes on into the band y 17115-17130, a gate of the next unit south under the rail (not drawn)
-bd2_rs_n      M      16255,17100      out  NOT rs_d; runs on south (seen to y 17300 at least), not followed
-e_b           M      16169,17100      in   E buffered: the lower trunk, from the south
-rw_d          M      16298,17100      in   from the south; ends at (16297,16040)
-rs_d          M      16342,17100      in   from the south; ends at (16343,16603)
-cs_d          M      16385,17100      in   from the south; ends at (16386,16171)
-vss           M      16008-16058,17112  -   the ground rail of the left column; goes on south (drawn to y 17112)
+rd_data_e     M      17112,17950      out  the read gate's output (e_b AND NOT cs_d AND rw_d AND rs_d): thin metal east from the pad (17080,17949) into the block below the data bus column
+e_b           M      16169,17400      in   E buffered: the lower trunk, from the south (trunks draws it)
+rw_d          M      16298,17400      in   from the south; ends at (16297,16040)
+rs_d          M      16342,17400      in   from the south; ends at (16343,16603)
+cs_d          M      16385,17400      in   from the south; ends at (16386,16171); taps at (16384,16821) and (16384,17169)
+vss           M      16008-16058,17400  -   the ground rail of the left column; goes on south (cdp4 draws it to y 17535)

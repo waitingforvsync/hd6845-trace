@@ -78,6 +78,7 @@ So `wr_stb_n = NOT wr_data_lat`, and `wr_data_lat` is the Q of the latch below.
     bd2_rw_n  = NOT rw_d                                     run 3       traced
     dbus_le   = NOR( cs_d, bd2_e_n )                         run 3       traced
     bd2_e_n   = NOT e_b                                      run 3       traced
+    rd_data_e = NOR( bd2_e_n, cs_d, bd2_rw_n, bd2_rs_n )     run 3       traced
     ar_load = NOT ar_load_n                                 G2          traced
     ar_load_n  = NOT( bd2_x OR (e_b AND wr_addr_sel) )           gate group  pull-downs traced; load not, tie to G2 inferred
     wr_addr_sel  = NOR( rw_d, rs_d, cs_d )                      group 3     traced (by the pattern of group 2 west of the rail)
@@ -125,7 +126,8 @@ and on the data path; it is what the silicon here says.
 | `bd2_rw_n` = NOT `rw_d` | 15850-16312 x 16654-16765 | traced (run 3) |
 | `dbus_le` = NOR(`cs_d`, `bd2_e_n`) | 15850-16400 x 16760-16965 | traced (run 3) |
 | `bd2_e_n` = NOT `e_b` | 15850-16244 x 16962-17110 | traced (run 3) |
-| Left column below y 17110 | x 15890-16260, y 17110 on (the rail runs on south past the region's edge) | not traced |
+| `rd_data_e` = NOR(`bd2_e_n`, `cs_d`, `bd2_rw_n`, `bd2_rs_n`) | 15850-16400 x 17108-17400, and its route to (17112,17950) | traced (run 3, piece `rdg`) |
+| Left column below y 17400 | under the rail (a land from y 17435 on) | not traced |
 | Right-hand column | x 16480-16800, y 14700-16450; routing east and south of it | not looked at; the metal ending at about (16772,15800) and running north along x 16818 with eight tapped pads is `dbus_le`, the data input latches' enable (`dbus`, 2026-11-17); the column is the bits 4-7 latch column, package `dlat` |
 
 ## Logic
@@ -368,8 +370,8 @@ Diffusion column x 16312-16366 under the ground rail x 16312-16362
 | 16210 | 15771-15967 | `wr_addr_sel`: contact 16207,15778 (band G_e), then east along y 15957 and down x 16339 |
 | 16210 | 15990-16096 | `wr_data_sel`: contact 16211,15997 (poly up to row 3's lower band) to contact 16210,16086 (group 2's output) |
 | 16210 | 16378-16616 | `rs_d`: contact 16211,16388 (band S' of group 3) to contact 16211,16606 (group 4's band) |
-| 16210 | 16723-17745 | `bd2_rw_n` (run 3): from the pad (16208,16733) of the `rw_d` inverter's output south; not followed below y 17100 |
-| 16255 | 16118-17300+ | `bd2_rs_n`: contact 16252,16128 (band S of group 2), contact 16255,16562 (group 4's output band), on south |
+| 16210 | 16723-17222 | `bd2_rw_n` (run 3): from the pad (16208,16733) of the `rw_d` inverter's output south to the pad (16209,17212) of the read gate's band C. Bare from there to y 17290, where `rd_data_e`'s metal starts at its pad (16210,17300) (run 1's scan took the two for one track to y 17745) |
+| 16255 | 16118-17348 | `bd2_rs_n`: contact 16252,16128 (band S of group 2), contact 16255,16562 (group 4's output band), south to its end on the pad (16253,17342) of the read gate's band D (run 3) |
 | 16255 | 15947-15983 | this is the bar of `wr_addr_sel` crossing the track |
 | 16277 | 15466-15872 | `wr_data_sel`: contact 16260,15473 (G_a) to contact 16274,15872 (row 3's lower band) |
 | 16299 | 16030-17569 | `rw_d`: top end at contact 16297,16040 (group 2); taps 16298,16302 (group 3), 16298,16690 (group 4, not traced) |
@@ -392,10 +394,8 @@ Diffusion column x 16312-16366 under the ground rail x 16312-16362
 | `rw_d` | metal | x 16298, y 17100 | from outside | per trunks.md; ends at 16297,16040 |
 | `rs_d` | metal | x 16342, y 17100 | from outside | per trunks.md; ends at 16343,16603 |
 | `cs_d` | metal | x 16385, y 17100 | from outside | per trunks.md; ends at 16386,16171 |
-| `bd2_rs_n` | metal | x 16255, y 17100 | driven here (group 4) | NOT `rs_d`; runs on south, destination unknown |
-| `bd2_rw_n` | metal | x 16210, y 17100 | driven here (run 3) | NOT `rw_d`; runs on south (track scan: to y 17745), not followed |
 | `dbus_le` | poly | x 16130, y 16865 (inside the region) | driven here (run 3) | the NOR's output cell; `cdp4`'s row leaves it east to the pad (16426,16864) |
-| `bd2_e_n` | poly | x 16235, y 17110 (the region's south edge is y 17100) | driven here (run 3) | NOT `e_b`: the column x 16226-16244 goes on into the band y 17115-17130, a gate of the next unit south |
+| `rd_data_e` | metal | x 17112, y 17950 (far outside the region: the end of its route) | driven here (run 3, piece `rdg`) | the read gate's output; a thin metal goes on east into the block below the data bus column |
 | `bd2_x` | poly | x 16376, y 15647 (inside the region) | from the untraced part | band arriving from the east; second term of `ar_load` |
 | `wr_data_e_n` | diffusion | x 16374, y 15555 (inside the region) | driven here | goes east, not followed |
 | ? | metal | x 16016-16026, y 17100 | ? | thin line where the ground rail was; not looked at |
@@ -468,8 +468,7 @@ The lists marked ? at the south, east and top edges come from `tools/sel_cut.py`
   group's rail, x 16370-16480; seen in one 3x view, `gg4.png`: a poly bar 16395-16483 x
   15475-15498 turning down at x 16465-16483, contact 16450,15539 with a thin metal
   x 16444-16459 down to contact 16450,15740, the wide vertical x 16489-16547).
-- **The column below y 17110** (run 3 traced group 4 and the column down to there: see its Not done);
-  `cs_d`'s tap at about y 17170; where `bd2_rs_n` and `bd2_rw_n` go south of y 17100.
+- **The column below y 17400** (run 3 traced group 4 and the column down to there: see its two sections).
 - **Right-hand column** (x 16480-16800, y 14700-16450) and the routing east and south of
   it: not looked at. `dl7_q_n`, `dl6_q_n`, and probably `bd2_x`, `wr_data_e_n` go there.
 
@@ -544,9 +543,8 @@ and the chip is selected, in reads as well as writes** (R/W does not enter), and
 falls or CS rises. The join of this gate's output to the eight latches' gate bands is `cdp4`'s (runs 7-13):
 it rests on the metal x 16762-16780 over five output boxes, four `?M` (AMB-056); the equation here does not.
 
-Where `bd2_rw_n` goes is not followed: its metal x 16210 runs south from its pad (16208,16733) (run 1's track
-scan: to y 17745). `bd2_e_n` has a second load: its poly column ends on the band y 17115-17130, a gate of the
-next unit south under the rail (not drawn).
+`bd2_rw_n`, `bd2_rs_n` and `bd2_e_n` (its poly column ends on band A) all go on to the read gate south of
+unit 3: piece `rdg`, below.
 
 ### The column under the rail (x 16008-16058), y 16540-17110
 
@@ -651,12 +649,100 @@ unit 3's pad test as pads. `eof_tee.py` on the five new rows and the column: no 
 
 ### Not done (run 3)
 
-- The next unit south (band y 17115-17130, gate `bd2_e_n`; ground land shared with unit 3) and the rest of
-  the column to the rail's end: bands at y 17175-17190, 17245-17260, 17335-17345 and on (`bd2_umap.py 15990
-  17000 16150 17460 4 5`), with `cs_d`'s second tap (16385,17170), a pad (16210,17300), `bd2_rs_n`'s contact
-  at about (16258,17340). Partly in `busc`'s region.
-- `bd2_rw_n`'s metal x 16210 south of y 17100.
-- The rail's south end; the supply rail's contacts west of x 15850.
+- The next gate south: done as piece `rdg`, below.
+- The rail's south end.
+
+## Run 3, piece `rdg` (2026-11-27): the read gate and its output's route
+
+Same run, after piece `g4n`'s review. Region x 15850-16420, y 17108-17400 for the gate; its output's route
+to (17112,17950). 5 transistors and 1 net more in the full extraction (4,851 and 2,518), 0 errors, 0
+warnings, no uncertain item. Views in `cache/scratch/bd2/p2/`: `b1_*`, `b2_*`, `b3_ld`, `b3_ldm`, `b4_wq`
+(photos), `o_r1`, `o_r2`, `o_r3`, `o_route`, `o_rt1`, `o_end`, `o_end2` (overlays).
+
+### What it establishes
+
+    rd_data_e = NOR( bd2_e_n, cs_d, bd2_rw_n, bd2_rs_n )        one gate, four pull-downs, one load
+
+Firm in `tools/unsure.py --equations`. With piece `g4n`'s three inverters: `rd_data_e` = `e_b` AND NOT `cs_d`
+AND `rw_d` AND `rs_d`. Read as logic (believed, from the pins' senses): **high while E is high in a read of
+the data register by the selected chip**. It is the mirror of the write decode above it (`wr_data_sel` has
+`rw_d` where this has `bd2_rw_n`, and is latched by E where this is gated by E). Its output leaves the
+block east and south to a pad (17080,17949) at the west edge of the untraced block below the data bus column
+(x 17100-17700, y 17000-18400), where a thin metal goes on east. Believed, not traced: that block makes the
+data pins' output enable from it (`tools/follow.py 17110 17947 E` runs along a metal with a contact
+candidate every 30-40 px and comes out, after many corners, on the metal x 17645 that `dbus` knows as
+`d_hiz`'s; the follower can merge metals at wide places, so this is a lead, not a reading).
+
+### The gate
+
+Under the rail (`tools/bd2_umap.py 15990 17000 16150 17460 4 5`): unit 3's ground land | band A y 17114-17134
+| land L1 y 17138-17170 | band B y 17173-17193 | ground land y 17197-17242 (contact 16035,17217: pits in
+the clean shot, ring in the metal shot) | band C y 17245-17265 | land L2 y 17269-17330 | band D
+y 17333-17351 | ground land y 17355-17398 (contact 16045,17378) | field. East of the rail every land goes on
+to x 16076-16097 (down x 16078 all nine zones show), and the bands cross the diffusion's east edge as one
+edge line (x 16095-16101 under band A, x 16086-16092 under bands B and C; rows y 17122, 17183, 17255).
+
+- **Band A, gate `bd2_e_n`**: from x 16003 east to the column x 16226-16244 of piece `g4n`, which ends on it
+  (orange to y 17134; the gap x 16225-16243 is plain below y 17136).
+- **Band B, gate `cs_d`**: the band's poly goes on east of the rail into an L: south along x 16093-16111 to
+  y 17221, east along y 17203-17221 to under the `e_b` trunk, north under the trunk (x 16163-16180, salmon in
+  the clean shot, no hole: `cdp4_candh.py v 16169,17190 16169,17205`) to y 17160, and east along y 17160-17180
+  under the whole bundle to `cs_d`'s second tap pad (16384,17169) (`trunks`' "tap at 17170"). East of the rail
+  the plain areas the L encloses are field (chip 2's stripped shot R-G -10..+3 there against +14..+26 on
+  diffusion): the L is wiring, not a gate.
+- **Band C, gate `bd2_rw_n`**: east under the `e_b` trunk to x 16222, north along x 16202-16222 to the pad
+  (16209,17212), the south end of `bd2_rw_n`'s metal x 16210 (`tools/follow.py 16210 16760 S`: end
+  (16210,17216), no contact candidate on the way). Below the pad the track is bare to y 17290 (orange poly
+  to y 17265, then field: `tools/px.py col 16210 17212 17300 6`), so this metal and the output's are apart.
+- **Band D, gate `bd2_rs_n`**: east to the pad (16253,17342), the south end of `bd2_rs_n`'s metal x 16255
+  (`tools/follow.py 16255 17110 S`: end (16251,17348)).
+- **L1 and L2 are one node.** A diffusion wire W, x 15974-15988, runs west of the rail from L1's west end
+  (it turns east into L1 along y 17148-17164) south to the load's band: bright green in the clean shot at
+  x 15978-15988 from y 17150 to y 17290 without a break (108-127 / 132-152 / 87-95 down x 15984), pink-tan
+  in chip 2's stripped and metal shots (view `b4_wq`, 6x, three shots). Between W and the rail lies a field
+  pocket (x 15990-16006, y 17165-17285: olive, 113 / 117 / 57) that holds the west end caps of bands B and C;
+  it cannot be poly (it would join band B to band C, each driven from the east).
+- **Load**: the `dbus_le` NOR's load upside down. L2 runs west as a band y 17284-17320 to the VCC land under
+  the supply rail; a poly block x 15908-15950, y 17236-17338 crosses it (channel 36 wide, 42 long; the band's
+  edges print through the block at y 17280-17284 and y 17320-17325). **Tie**: W sends a branch west along
+  y 17238-17256 into a framed box (15918-15952, 17236-17264; bright centre (15935,17250) in both metal shots)
+  under the block's top. A small outlined patch (15955-15970, 17262-17280) between the block and W is field,
+  like the tongue in the `dbus_le` NOR's load.
+- **Output cell** (16092-16130, 17286-17314) on L2's east end; its poly east along y 17293-17307 under the
+  `e_b` trunk to the pad (16210,17300).
+
+### The output's route
+
+`tools/follow.py 16210 17296 S`: a thin metal from the pad south along x 16210-16217 to a corner
+(16217,17648), east along y 17648 (between `d6_out_n`'s line y 17603 and `e_b`'s y 17691; `busl_mdrawn.py`
+listed it undrawn at three cuts) to a corner (16863,17655), south along x 16862 to a pad (16862,17948) with a
+hole in the clean shot. No contact on the way: `cdp4_candh.py` every 6-8 px along all three legs finds no pad
+but the end one; the follower's candidate (16711,17646) is a grey smear in the clean shot (151-162 / 128-131 /
+107-113, 30 px, no edge) under bright metal with no ring in either chip. From the pad a poly row y 17938-17956
+runs east under the metal x 16906 and the wide rail x 16940-17030 (salmon 205-225 / 151-176 throughout, dark
+red in the gap x 16924-16942) to a second pad (17080,17949) (hole; ring in both metal shots), from which a
+thin metal leaves east along y 17950: drawn 30 px, port.
+
+### Crossings with no contact (piece `rdg`)
+
+`cdp4_candh.py v`: the row y 17170 under 16342, 16298, 16255, 16211, 16169; the route under the `e_b` trunk
+at y 17190 and 17205; band A under 16169, 16211; band C under 16169; the output row under 16169; band D
+under 16169, 16211; the far row under 16906: all plain (clean shot salmon, minimum R-G 35-52). The four pads
+test as pads. `tools/eof_tee.py` on every leg of the four gate polys, the output row and the far row: no
+branch.
+
+### Ambiguities (piece `rdg`)
+
+14. **The link W** is read from colour over 140 px of a 14 px strip between two edge lines; in chip 2's
+    metal and stripped shots its west half is redder and its east half plain, as on the `dbus_le` NOR's tie
+    wire. If W were not diffusion north of the branch (y 17256), L1 would have neither load nor output.
+15. **Supply contact of the load**: not looked for west of x 15850; the land is labelled `vcc`.
+
+### Not done (piece `rdg`)
+
+- The block below the data bus column that `rd_data_e` enters at (17112,17950) (`busc`'s region).
+- The ground rail south of y 17400 (`cdp4` draws it from y 17285 to y 17535); the column under it below
+  y 17400 (a land from y 17435 on).
 
 ## Review
 

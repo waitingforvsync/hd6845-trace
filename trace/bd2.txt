@@ -492,7 +492,7 @@ B 16088,16712:16132,16750              # output cell
 P 16128,16722:16192,16740
 P 16190,16717:16224,16749              # pad
 C 16208,16733
-M 16210,16723 y17100 w=18              # south; seen on to y 17745 by run 1's track scan, not followed
+M 16210,16723 y17222 w=18              # south to its end on the pad (16209,17212) (tools/follow.py: end 16210,17216; piece rdg)
 N M 16210,16800 bd2_rw_n
 N D 16040,16712 bd2_rw_n
 D 15850,16672:15896,16748              # VCC land
@@ -532,7 +532,7 @@ P 16014,16810:16386,16828              # band 1, gate: cs_d
 P 16368,16805:16400,16837              # pad
 C 16384,16821
 P 16012,16898:16244,16918              # band 2, gate
-P 16226,16898:16244,17110              # south in the gap between the tracks; goes on into the band y 17115-17130 (port)
+P 16226,16898:16244,17134              # south in the gap between the tracks, to band A of the read gate (piece rdg)
 N P 16150,16908 bd2_e_n
 # Load, west of the rail: the output land runs west as a band y 16847-16881 to the VCC land under the supply
 # rail; a poly block x 15932-15970 crosses it (L 38, W 34). Tie: a diffusion wire x 15986-16000 leaves the band
@@ -579,3 +579,76 @@ P 15894,16962:15932,17076              # load gate
 P 15894,16962:15992,16985              # its arm into the tie box
 P 15958,16962:15992,17012              # poly of the box
 B 15954,16974:15998,17018              # tie
+
+# ================================================================ run 3, piece rdg (2026-11-27)
+# The read gate: one four-input NOR under the rail, y 17108-17400.
+#     rd_data_e = NOR( bd2_e_n, cs_d, bd2_rw_n, bd2_rs_n )
+# Under the rail (tools/bd2_umap.py 15990 17000 16150 17460 4 5): unit 3's ground land | band A y 17114-17134 |
+# land L1 y 17138-17170 | band B y 17173-17193 | ground land y 17197-17242 (contact 16035,17217) | band C
+# y 17245-17265 | land L2 y 17269-17330 | band D y 17333-17351 | ground land y 17355-17398 (contact 16045,17378).
+# L1 and L2 are one node: a diffusion wire x 15974-15988 west of the rail joins them (below).
+D 16034,17108:16066,17172              # under band A, L1
+D 16010,17146:16034,17168              # L1's west part
+D 16066,17092:16097,17170              # east of the rail: unit 3's ground land, under band A, L1
+D 16022,17168:16066,17272              # under band B, ground land, under band C
+D 16066,17168:16087,17272              # the same east of the rail
+C 16035,17217
+D 16022,17268:16066,17332              # L2
+D 16010,17284:16034,17320              # L2's west part
+D 16066,17270:16092,17332              # L2 east of the rail
+D 16034,17328:16066,17398              # under band D, ground land
+D 16066,17328:16076,17375              # the same east of the rail
+C 16045,17378
+M 16008,17112:16058,17400              # the ground rail, on south over cdp4's piece of it (M 16038,17285 y17535)
+P 16003,17114:16244,17134              # band A, gate: bd2_e_n (the column x 16226-16244 ends on it)
+P 16003,17173:16111,17193              # band B, gate: cs_d
+P 16093,17173:16111,17221              # south
+P 16093,17203:16180,17221              # east, to under the e_b trunk
+P 16163,17160:16180,17221              # north under the trunk (salmon, no hole: no contact)
+P 16163,17160:16384,17180              # east under the bundle to cs_d's second tap
+P 16368,17153:16400,17185              # pad
+C 16384,17169
+M 16385,17100 y17190 w=18              # cs_d's metal over the tap (trunks draws the whole line)
+P 16003,17245:16222,17265              # band C, gate: bd2_rw_n
+P 16202,17222:16222,17265              # north to the pad
+P 16193,17196:16225,17228              # pad: the south end of bd2_rw_n's metal
+C 16209,17212
+P 16003,17333:16253,17351              # band D, gate: bd2_rs_n
+P 16237,17326:16269,17358              # pad: the south end of bd2_rs_n's metal (tools/follow.py: end 16251,17348)
+C 16253,17342
+M 16255,17100 y17354 w=18
+# Output cell on L2's east end; its poly east under the e_b trunk to a pad on a metal that leaves south.
+D 16092,17288:16126,17312              # under the cell
+P 16100,17290:16136,17310              # poly of the cell
+B 16092,17286:16130,17314              # output cell
+P 16128,17293:16194,17307
+P 16194,17284:16226,17316              # pad
+C 16210,17300
+# The output's route (tools/follow.py 16210 17296 S: corners (16217,17648) and (16863,17655), end (16862,17953)):
+# a thin metal south from the pad, east along y 17648 between d6_out_n's line (y 17603) and e_b's (y 17691),
+# south along x 16862 to a pad (16862,17948). No pad on the way (cdp4_candh every 6-8 px: none; a grey smear in
+# the clean shot at (16700-16712,17648) has no ring in either metal shot). From the pad a poly row y 17938-17956
+# east, under the metal x 16906 and the wide rail x 16940-17030 (salmon, no hole), to a second pad
+# (17080,17949), where a thin metal leaves east along y 17950 into the block below the data bus column (port).
+M 16210,17290 y17320 16213,17340 y17600 16217,17640 y17648 x16850 16862,17657 y17962 w=16
+N M 16213,17500 rd_data_e
+P 16846,17932:16878,17964              # pad
+C 16862,17948 s=20x20
+P 16862,17938:17080,17956              # east
+P 17064,17933:17096,17965              # pad
+C 17080,17949 s=20x20
+M 17072,17950 x17112 w=12              # east; goes on (port)
+N D 16040,17300 rd_data_e
+# Load, west of the rail: the dbus_le NOR's load upside down. L2 runs west as a band y 17284-17320 to the VCC
+# land; a poly block x 15908-15950, y 17265-17338 crosses it. The tie box is at the block's top. The wire W
+# (x 15974-15988, bright green in the clean shot from y 17150 to y 17290) runs from the band north, sends a
+# branch west into the box, and goes on north to L1's west end.
+D 15850,17282:15896,17322              # VCC land
+N D 15870,17300 vcc
+D 15890,17284:16010,17320              # band: channel, and east to the rail
+D 15974,17148:15988,17290              # W
+D 15974,17148:16012,17164              # its top, east into L1
+D 15944,17238:15988,17256              # branch west into the tie box
+P 15908,17265:15950,17338              # load gate
+P 15908,17236:15950,17265              # its top, over the box
+B 15918,17236:15952,17264              # tie

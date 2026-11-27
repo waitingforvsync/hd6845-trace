@@ -273,8 +273,9 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | `wr_data_e_n` | NOT(`wr_data_sel` AND `e_b`) |
 | `wr_addr_sel` | NOR(`rw_d`, `rs_d`, `cs_d`): a write to the address register is addressed |
 | `bd2_rs_n` | NOT `rs_d` (an inverter under `bd2`'s ground rail; load traced by `bd2` run 3) |
-| `bd2_rw_n` | NOT `rw_d`: the inverter below it; leaves south on the metal x 16210 (not followed) |
-| `bd2_e_n` | NOT `e_b`: an inverter in the same column (its gate band taps the `e_b` trunk at (16166,17037)); the second input of `dbus_le`'s NOR, and a gate of the next unit south |
+| `bd2_rw_n` | NOT `rw_d`: the inverter below it; south on the metal x 16210 to the read gate |
+| `bd2_e_n` | NOT `e_b`: an inverter in the same column (its gate band taps the `e_b` trunk at (16166,17037)); the second input of `dbus_le`'s NOR and an input of the read gate |
+| `rd_data_e` | NOR(`bd2_e_n`, `cs_d`, `bd2_rw_n`, `bd2_rs_n`) = `e_b` AND NOT `cs_d` AND `rw_d` AND `rs_d`: a read of the data register, while E is high. Leaves `bd2` south and east to a pad (17080,17949) at the block below the data bus column |
 | `bd2_x` | second term of the address register load, from the untraced right-hand column |
 
 ## Strobe channel gate column (`notes/blocks/bd1.md`)
