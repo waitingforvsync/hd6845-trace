@@ -500,3 +500,106 @@ C 9312,15261 s=20x20
 P 9312,15252:9402,15269                # lower gate row, to the cell
 P 9222,15208:9402,15225                # middle row: the output, from the cell west
 P 9222,15208:9240,15300                # south in the open (port)
+
+# ================================================================ run 5 (2026-11-27), piece w3: a six-input NOR under the W rail
+#     bc2_w15739 = NOR(bc2_p15520, busl_x7122, tc2_r5718, bc2_w15216, bc2_p15781, bc2_w15042)
+# South of the second unit the pull-downs lie UNDER the rail (readable in the clean shot): one diffusion column
+# x 9462-9506 from y 15382 to y 15830 with four lands that have a contact to the rail (y 15382-15418, 15508-15547,
+# 15638-15680, 15795-15830) and six gate bands between them, two to each of three nodes N1 (y 15440-15482),
+# N2 (y 15570-15612), N3 (y 15702-15770). Each node has a diffusion neck east across the gap (y 15461-15473,
+# 15591-15603, 15734-15762) into ONE wide diffusion strip x 9542-9590 that lies half under the thin metal
+# x 9545-9560 (bc2_e15343's, no contact: no hole at the follower's candidates (9552,15614), (9552,15787)) and runs
+# from y 15457 south: so the three nodes are one. Load at its south end: the strip turns east at y 15770-15797
+# under a poly block (9572-9628, 15750-15818; the strip's edges print through it at y 15768 and y 15800) onto the
+# VCC land of the NAND bc2_e15690 under the M rail (contact 9659,15746). Tie: a stem of the block north over
+# the strip's south-east corner, in a framed box (9575-9598, 15722-15747).
+# Output: N3 has an arm WEST out from under the rail (y 15733-15748) to a framed box (9402-9440, 15727-15752), the
+# buried contact of a poly row y 15732-15747 that runs west under the thin metal x 9399 to a pad (9356,15739); a
+# metal goes west and south from it (port).
+M 9463,15330:9513,15840                # W rail, on south
+D 9462,15382:9506,15830                # the column under the rail
+C 9477,15400
+C 9478,15528
+C 9485,15660
+C 9475,15813
+D 9500,15461:9546,15473                # N1's neck east
+D 9500,15591:9546,15603                # N2's neck
+D 9500,15734:9546,15762                # N3's neck
+D 9542,15457:9590,15745                # the wide strip (east part to the tie box)
+D 9542,15700:9568,15797                # its south end under the thin metal
+D 9542,15770:9645,15797                # east under the load onto the VCC land
+P 9572,15750:9628,15818                # load gate
+P 9575,15705:9598,15752                # its stem north over the strip's corner
+B 9573,15703:9600,15747                # tie (buried contact; the frame is y 15722-15747)
+N D 9580,15600 bc2_w15739
+D 9412,15733:9466,15748                # N3's arm west
+P 9356,15732:9426,15747                # the output's poly row, west
+B 9402,15727:9440,15752                # its buried contact on the arm
+P 9339,15722:9373,15756                # pad
+C 9356,15739 s=20x20
+M 9356,15740 x9314 y15800 w=13         # metal west and south (port: the follower runs it to y 15919 and east to x 9363)
+# gate 1 (y 15422-15440): a poly row from the west along y 15511-15530 to x 9320, north on x 9300-9320, east
+P 9160,15511:9320,15530                # from the west (port)
+P 9300,15422:9320,15530
+P 9300,15422:9520,15440
+N P 9200,15520 bc2_p15520
+# gate 2 (y 15482-15499): bus line y 14481's leg x 9357 ends on a pad (9357,15522); its row east, north on x 9412-9440, east
+P 9340,15505:9374,15539                # pad
+C 9357,15522 s=20x20
+P 9357,15512:9440,15530
+P 9412,15482:9440,15530
+P 9412,15482:9520,15499
+# gate 3 (y 15552-15570): bus line y 14524's leg x 9270 ends on a pad (9270,15566); its row east
+P 9253,15549:9287,15583                # pad
+C 9270,15566 s=20x20
+P 9270,15553:9520,15570
+# gate 4 (y 15612-15628): the second unit's output. Its poly column x 9222-9240 runs on south from y 15300 to a pad
+# (9226,15391); a thin metal south and east to a pad (9268,15652); its row east, north on x 9415-9440, east
+P 9222,15300:9240,15391
+P 9209,15374:9243,15408                # pad
+C 9226,15391 s=20x20
+M 9227,15391 y15652 x9268 w=12
+P 9251,15635:9285,15669                # pad
+C 9268,15652 s=20x20
+P 9268,15643:9440,15660
+P 9415,15612:9440,15660
+P 9415,15612:9520,15628
+# gate 5 (y 15683-15702): a poly row from the west along y 15772-15790 (lengthwise under the metal of gate 6's wire,
+# no contact) to x 9242, north on x 9222-9242, east
+P 9160,15772:9242,15790                # from the west (port)
+P 9222,15685:9242,15790
+P 9222,15685:9520,15702
+N P 9170,15781 bc2_p15781
+# gate 6 (y 15770-15786): the first unit's output. Its metal x 9185 runs on south from y 15130 to y 15784 and east to
+# a pad (9271,15784); its row east
+M 9185,15130 y15784 x9271 w=12
+P 9254,15767:9288,15801                # pad
+C 9271,15784 s=20x20
+P 9271,15770:9520,15786
+
+# ---------------------------------------------------------------- run 5, piece bus4: bus lines y 14524 and y 14481 end to end
+# Built like the other lines: y 14524 (busl's tc2_r5718): pads (7837,14524), (8294,14524), (8641,14525), corner
+# x 9270, south to the pad (9270,15566); y 14481 (busl's busl_x7122): pads (7794,14481), (8250,14481),
+# (8597,14481), corner x 9357, south to the pad (9357,15522).
+P 7545,14514:7837,14533
+P 7820,14507:7854,14541                # pad
+C 7837,14524 s=20x20
+M 7837,14524 x8294 w=16
+P 8277,14507:8311,14541                # pad
+C 8294,14524 s=20x20
+P 8294,14514:8641,14533                # underpass
+P 8624,14508:8658,14542                # pad
+C 8641,14525 s=20x20
+M 8641,14524 x9270 y15566 w=14
+N M 8000,14524 tc2_r5718
+P 7545,14471:7794,14490
+P 7777,14464:7811,14498                # pad
+C 7794,14481 s=20x20
+M 7794,14481 x8250 w=16
+P 8233,14464:8267,14498                # pad
+C 8250,14481 s=20x20
+P 8250,14471:8597,14490                # underpass
+P 8580,14464:8614,14498                # pad
+C 8597,14481 s=20x20
+M 8597,14481 x9357 y15522 w=14
+N M 8000,14481 busl_x7122

@@ -576,6 +576,73 @@ With `bc2_e14955` = NOT `lc3_e9756`: high when `lc3_e9756` is high and `lc2_w912
     gate row needs diffusion on both sides; the box sits in the column. Against: the stripped shot's colour is
     weak there (above). Without them the two pull-downs do not reach the output.
 
+## Run 5 (2026-11-27): a six-input NOR under the W rail, and two more bus lines
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 10:57 -0600. Views in `cache/scratch/bc2/w3/` (`a_c`, `a_m`, `a_a`: y 15370-15595
+in the clean, metal and chip-2 stripped shots, 5x; `b_c`, `b_a`: y 15590-15830; `ld`, `out_m`: the load end;
+`j781`: the junction at (9245,15780); overlay `ov_a`) and `s1/` (the west channel south of unit 2).
+
+### Piece `w3`: the NOR (7 transistors, no uncertain item)
+
+    bc2_w15739 = NOR(bc2_p15520, busl_x7122, tc2_r5718, bc2_w15216, bc2_p15781, bc2_w15042)
+
+- **Under the rail** (x 9463-9513; the clean shot is reliable there: `tools/bd2_umap.py 9440 15330 9580 15560 4 5`,
+  `... 15560 ... 15750 4 4`, `... 15750 9660 15990 4 5`): one diffusion column x 9462-9506 from y 15382 to
+  y 15830. Four lands with a contact to the rail: y 15382-15418 (9477,15400), y 15508-15547 (9478,15528),
+  y 15638-15680 (9485,15660), y 15795-15830 (9475,15813) (`padc`: hole and ring each). Six salmon gate bands:
+  y 15422-15440, 15482-15499, 15552-15570, 15612-15628, 15683-15702, 15770-15786. Between them three nodes: N1
+  (y 15440-15482), N2 (y 15570-15612), N3 (y 15702-15770), each between two gates that lead to a land.
+- **The three nodes are one.** Each has a diffusion neck east across the gap between the rail and the thin metal
+  x 9545-9560: y 15461-15473, y 15591-15603, y 15734-15762 (in the gap, by trap 28's test on the centre line:
+  `tools/px.py col 9530 15440 15492 3 metal,acid`, `col 9528 15570 15612 ...`, `col 9528 15700 15772 ...`:
+  chip-2 metal plain with blue 80-93, stripped red - green 17-42, between two dark lines, field outside). The necks
+  end in one wide diffusion strip x 9542-9590 from y 15457 south: tan under the thin metal
+  (`bd2_umap`: `d` on x 9548-9566 from y 15460 to y 15790, pink field above y 15455), and east of the thin metal
+  plain with stripped red - green 20-31 at x 9572-9584 (`tools/px.py row 15520 9516 9616 4 metal,acid`, `row
+  15650`) inside an outline that starts at the corner (9597,15452) (`row 15440`: no line, field) and runs down
+  x 9590-9597; field west of the thin metal (x 9524-9536: red - green -14..9).
+- **No contact of the thin metal x 9552** (`bc2_e15343`'s) to the strip under it: the clean shot is plain tan at
+  the follower's candidates (9552,15614) and (9552,15787) (R 192-200, G 166-180, no hole, no core).
+- **Load** at the strip's south end: under the thin metal the strip runs to y 15797 and turns east at
+  y 15770-15797 under a poly block (9572-9628, 15750-15818: three orange bands in chip 2's stripped shot, the
+  strip's edges printing through at y 15768 and y 15800 and running on west of the block in the metal shot) onto
+  the VCC land of the NAND `bc2_e15690` under the M rail (contact (9659,15746); `tools/bd2_umap.py 9626 15700 9704
+  15810 3 4`: the land reaches x 9632 at y 15768-15790). W 27, L 56.
+- **Tie**: a stem of the block runs north (x 9575-9598, open red-brown poly from y 15705) over the strip's
+  south-east corner, in a framed box (9575-9598, 15722-15747) (views `ld`, `out_m`).
+- **Output**: node N3 has an arm west out from under the rail, y 15733-15748 (`tools/px.py col 9447 15700 15776 3
+  metal,acid`: plain, blue 88, red - green 20-34 between two dark lines), to a framed box (9402-9440,
+  15727-15752) that holds the end of a poly row y 15732-15747 (`tools/px.py row 15740 9366 9470 3
+  metal,acid,acid1b`: poly to x 9423 inside the frame, diffusion from x 9438: the same build as the first unit's
+  middle box). The row runs west under the thin metal x 9399 (salmon, no hole) to a pad (9356,15739); a metal goes
+  west and south from it (drawn to y 15800: port; `tools/follow.py 9330 15738 W`: south on x 9314 to y 15919,
+  east to x 9363). No arm of this kind at N1 or N2 (the framed shapes in the gap there are in the clean shot
+  only: plain in both metal shots).
+- **The six gates' wires** (`tools/tl5_tracks.py rows row 9100 9470 8 15432 15491 15520 15562 15620 15651 15693
+  15781`):
+  1. y 15422-15440: a poly row from the west along y 15511-15530 (port at x 9160, placeholder `bc2_p15520`) to
+     x 9320, north on x 9300-9320, east. It ends 20 px short of gate 2's pad (9357,15522).
+  2. y 15482-15499: `busl_x7122`: bus line y 14481's leg x 9357 ends on the pad (9357,15522); its row east to
+     x 9440, north on x 9412-9440, east.
+  3. y 15552-15570: `tc2_r5718`: bus line y 14524's leg x 9270 ends on the pad (9270,15566); its row east.
+  4. y 15612-15628: `bc2_w15216`: the second unit's output column x 9222-9240 runs on south to a pad
+     (9226,15391); a thin metal south to y 15652 and east to a pad (9268,15652); its row east to x 9440, north
+     on x 9415-9440, east.
+  5. y 15683-15702: a poly row from the west along y 15772-15790 (port at x 9160, placeholder `bc2_p15781`),
+     lengthwise under the metal of gate 6's wire without contact (salmon, no hole), to x 9242; north on
+     x 9222-9242, east. It ends 13 px short of gate 6's pad (pink field between: view `j781`).
+  6. y 15770-15786: `bc2_w15042`: the first unit's output metal x 9185 runs on south to y 15784 and east to a
+     pad (9271,15784); its row east.
+- The W rail is drawn on to y 15840; it goes on south (more lands and gate bands from y 15850: not drawn).
+
+### Piece `bus4`: bus lines y 14524 and y 14481 end to end (wiring)
+
+Built like the others (`tools/tl5_tracks.py h 14524 7540 9380`, `h 14481 ...`, `rows row ...`, `v 9270 14515
+15575`, `v 9357 14472 15535`; `padc` on each pad): y 14524 is `busl`'s `tc2_r5718` (pads (7837,14524),
+(8294,14524), (8641,14525); corner x 9270; south to the pad (9270,15566)); y 14481 is `busl_x7122` (pads
+(7794,14481), (8250,14481), (8597,14481); corner x 9357; south to the pad (9357,15522)). Nine of the 13 lines
+are now drawn end to end.
+
 ## Review
 
 **Model note: latch unit a was traced AND reviewed on claude-opus, not claude-fable-5-2**
