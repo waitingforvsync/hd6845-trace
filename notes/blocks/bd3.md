@@ -284,3 +284,32 @@ does not look for a contact on open diffusion beside a metal.
 
 ## Review
 
+### Round 1 (full review), 2026-11-27: the re-read of the channel (R2)
+
+A fresh Claude Fable 5.2 agent, on commit bd5e6a1, images in `cache/scratch/bd3/review-1/`. Told to suspect: a
+contact on a track that is not drawn, a track that ends or jogs where it is drawn straight (the staircase at
+x 15220-15350, y 16880-17010), which track each drawn contact is on, and the audit's blind spots (dim metals,
+contacts beside a metal). It took its own sample and did not rely on the audit.
+
+**No findings** in `bd3`'s drawing. Checked and found correct: all 16 tracks by `tools/follow.py` and the
+two-chip test `tools/tl5_tracks.py v` (the only stretches without metal are the drawn ones: T7 y 16870-16905, T8
+y 16674-16729 and y 16916-16946, T9 y 16961-16990, T10 y 17004-17033; T5 starts at its pad; T15 ends at its
+pad); the tight gaps (T7's pad to `wr_r12`'s corner is open poly; T10's arm to the `wr_r13` pad 9 px of bare
+ground; bare ground between T8's two pads in all four shots; `wr_stb_n`'s corner clear of the pad
+(14306,16778)); the staircase's three arms; all 37 crossings of the rows y 16560, 16650, 16732, 16778, 16862,
+17036 with the tracks at 3-4x in three or four shots (plain except the drawn pads; each row ends as drawn); all
+18 listed contacts real and on the stated track; line X over the strobe poly (no ring in either chip); eleven
+clean-shot specks and a dot on the rail at (14432,16655) (residue: no ring); no undrawn metal on 16 cuts
+(`tools/busl_mdrawn.py`) and two overlays; no lengthwise poly under any track but the drawn columns x 14912
+and x 15214. Not checked by the reviewer: plain track stretches between rows at 4x (text tools and 1.7x only),
+the gate columns' cells and rail contacts, under the wide rail, row ends east of x 15580.
+
+Two geometry remarks on **other packages' lines** in this region (not `bd3`'s files; in the handoff as
+proposals, nothing changed here): `sel`'s contact at T15's lower end, drawn (15560,17072) by its cell, has its
+centre at about (15560,17082), and the metal ends at about y 17097 (drawn 17085); `trunks`' line X
+(`trunks.txt:159`) is drawn along y 16992 and its centre is y 16998 (a metal test along y 16992 reads its north
+edge and reports false breaks).
+
+No trace line changed before or after the round. Recorded 2026-11-27 07:41 -0600.
+
+Round 1: no findings.
