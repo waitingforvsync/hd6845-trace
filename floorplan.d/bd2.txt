@@ -5,7 +5,8 @@
 16240,15400:16480,15850  logic  address load gate | under a ground rail: ar_load_n = NOT(bd2_x OR (E AND wr_addr_sel)) for the address register strobe, and wr_data_e_n = NOT(wr_data_sel AND E); loads and inputs from the east not traced
 15890,15985:16400,16210  logic  data register write decode | 3-input NOR of R/W, NOT RS and CS: write AND chip selected AND RS high; data input of the write strobe latch
 15890,16245:16400,16470  logic  address register write decode | 3-input NOR of R/W, RS and CS: write AND chip selected AND RS low; gates the address register strobe
-?15890,16540:16400,16730  logic  RS inverter and R/W gate | top gate pulled low by RS (its output is the NOT RS of the data register decode); the gate below it takes R/W: not traced
+15850,16529:16400,16765  logic  RS and R/W inverters | two inverters back to back under the ground rail: bd2_rs_n = NOT RS (for the data register decode) and bd2_rw_n = NOT R/W (leaves south on the track x 16210)
 16150,15900:16400,17100  route  R/W, RS, CS and E risers | E (x 16169), R/W (x 16298, ends y 16040), RS (x 16342, ends y 16603), CS (x 16385, ends y 16171), with the decode outputs between them
-?15890,16730:16150,17100  logic  bus control gates (lower part) | not traced
+15850,16765:16400,16965  logic  data latch enable gate | dbus_le = NOR(CS, NOT E): the data input latches are open while E is high and the chip is selected
+15850,16965:16260,17110  logic  E inverter | bd2_e_n = NOT E, for the enable gate above and the next gate south
 ?16480,15770:17000,17100  unknown  right-hand column, lower part (untraced) | the drivers of d1_out_n..d5_out_n and rd_b0, and dbus_le's driver; above y 15770 is dlat
