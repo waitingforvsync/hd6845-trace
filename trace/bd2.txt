@@ -4,6 +4,7 @@
 # pull-downs under the ground rail x 16008-16055.
 @requires sel
 @requires areg
+@requires bd3                          # the supply rail x 15795-15890 south of y 16550 is drawn there (run 3's VCC contacts)
 @block bd2
 @w M=20 P=22
 @s 30x30
@@ -421,7 +422,7 @@ N D 16040,16331 wr_addr_sel
 # and 16343,16603 (top end of the rs_d metal). Under the e_b trunk, the bd2_rs_n metal
 # and the rw_d metal it is salmon: no contact.
 D 16008,16575:16066,16677              # output land, under the band, ground land
-C 16041,16663
+C 16044,16652 s=24x34                  # a tall oval in the chip-1 metal shot and the clean shot's hole (moved by run 3's review: was 16041,16663)
 P 16008,16594:16358,16612              # gate: rs_d
 P 16194,16590:16228,16622              # pad
 C 16211,16606
@@ -442,3 +443,213 @@ P 16128,16554:16270,16570
 P 16238,16546:16270,16578              # pad
 C 16255,16562
 N D 16040,16582 bd2_rs_n
+
+# ================================================================ run 3 (2026-11-27), piece g4n
+# The left column's three gates below group 3, x 15850-16420, y 16530-16990 (notes/blocks/bd2.md, "Run 3").
+# Read from numbers (tools/bd2_umap.py under the rail, tools/bd2_prof4.py rows and columns in all four shots)
+# and checked on overlays at 4.4x.
+#
+# ---------------------------------------------------------------- unit 1: bd2_rs_n = NOT rs_d, the rest
+# Run 2 drew the pull-down under the rail and the output cell. The diffusion goes on east of the rail to
+# x 16121 on both sides of the band (the output land's east end was drawn; the ground land's arm was not),
+# so the pull-down is about 118 wide. The band's poly ends west of the rail at x 15976.
+D 16066,16590:16121,16636              # under the band east of the rail, and the ground land's north arm
+P 15976,16594:16010,16612              # the band's west end
+# Load, west of the rail: a poly block x 15894-15932, y 16529-16642 over a diffusion from the VCC land under the
+# supply rail (east edge x 15893; its contact to the rail at 15863,16587) to a drain strip x 15934-15948.
+# The diffusion's top and bottom edges print through the block as dark lines at y 16560 and y 16629 (one edge
+# line each, 7-9 px), so the channel is 69 wide and 38 long. The strip's top joins east (y 16562-16584) through
+# the tie box (15958-15996, 16542-16582: heavy outline, tan centre in the clean shot) into the output land's
+# north-west corner under the rail's edge; the block's north arm (y 16534-16556) ends in the box.
+D 15850,16555:15896,16627              # VCC land under the supply rail
+C 15863,16587                          # ring and bright core in both metal shots, hole in the clean shot (bd3's sel_rwr copy has it as ?C)
+N D 15870,16580 vcc
+D 15890,16560:15948,16629              # channel and drain strip
+D 15934,16562:16012,16584              # east through the tie box
+D 16000,16562:16022,16590              # into the output land
+P 15894,16529:15932,16642              # load gate
+P 15894,16529:15992,16552              # its arm into the tie box
+P 15958,16529:15992,16578              # poly of the box
+B 15954,16540:15998,16584              # tie: load gate to the output
+
+# ---------------------------------------------------------------- unit 2: bd2_rw_n = NOT rw_d
+# Unit 1 turned over about y 16647, sharing its ground land. Band y 16681-16699 from x 15976 east across the
+# bundle (salmon under the e_b trunk, the track x 16210 and bd2_rs_n's metal: no contact) to rw_d's tap pad
+# (centre 16296,16690; hole in the clean shot). Output land y 16703-16722, east to x 16126 with the output
+# cell on its south side; a poly leaves the cell east along y 16722-16740 to a pad whose contact (hole in the
+# clean shot, y 16732-16740) is the north end of the metal x 16210 (bd2's unidentified track 16210,
+# y 16754-17745).
+D 16008,16677:16066,16722              # under the band, output land
+D 16066,16663:16121,16703              # ground land's south arm, and under the band east of the rail
+D 16066,16636:16082,16663              # the ground land between the two arms (the field pocket begins at x 16082)
+P 15976,16681:16298,16699              # gate: rw_d
+P 16280,16674:16312,16706              # pad
+C 16296,16690
+D 16056,16703:16126,16722              # output land's east end
+D 16092,16703:16126,16740              # under the cell
+P 16096,16716:16136,16746              # poly of the cell
+B 16088,16712:16132,16750              # output cell
+P 16128,16722:16192,16740
+P 16190,16717:16224,16749              # pad
+C 16208,16733
+M 16210,16723 y17222 w=18              # south to its end on the pad (16209,17212) (tools/follow.py: end 16210,17216; piece rdg)
+N M 16210,16800 bd2_rw_n
+N D 16040,16712 bd2_rw_n
+D 15850,16672:15896,16748              # VCC land
+C 15863,16725
+N D 15870,16700 vcc
+D 15890,16669:15948,16740              # channel and drain strip
+D 15934,16708:16012,16732              # east through the tie box
+D 16000,16705:16022,16732              # into the output land
+P 15894,16654:15932,16765              # load gate
+P 15894,16743:15992,16765              # its arm into the tie box
+P 15958,16714:15992,16765              # poly of the box
+B 15954,16710:15998,16750              # tie
+
+# ---------------------------------------------------------------- the NOR: dbus_le = NOR( cs_d, bd2_e_n )
+# bd2_e_n is unit 3's output, below.
+# Two pull-downs between two ground lands and the output land in the middle. The diffusion is x 16030-16066
+# under the rail and a column x 16066-16096 east of it (its east edge prints through both bands at x 16098).
+# Band 1 (y 16810-16828) runs east under the whole bundle to cs_d's tap pad (16384,16821). Band 2
+# (y 16898-16918) runs east to x 16242 and turns south as a poly column x 16226-16244 in the gap between the
+# track x 16210 and bd2_rs_n's metal: orange in both metal shots and chip 2's stripped shot from y 16900 to
+# y 17134 without a break (tools/bd2_prof4.py col 16234 16850 17150 3). On the way it takes the row y 16987-17003
+# from unit 3's output cell (below), and it ends on the band y 17115-17130, a gate of the next unit south under
+# the rail (not drawn: the column is drawn to y 17110).
+# The output cell (16096-16128, 16849-16882) is at the land's east end; cdp4's row (P 16130,16865 x16426,
+# dbus_le) leaves it east.
+D 16030,16762:16066,16962              # ground land, band 1, output land, band 2, ground land
+D 16066,16788:16096,16943              # the same east of the rail
+C 16042,16782
+C 16042,16945
+N D 16048,16775 vss
+D 16008,16847:16034,16881              # output land, wider to the west
+D 16092,16852:16124,16880              # under the output cell
+P 16100,16853:16136,16877              # poly of the cell
+B 16096,16849:16128,16882              # output cell
+N D 16048,16865 dbus_le
+P 16014,16810:16386,16828              # band 1, gate: cs_d
+P 16368,16805:16400,16837              # pad
+C 16384,16821
+P 16012,16898:16244,16918              # band 2, gate
+P 16226,16898:16244,17134              # south in the gap between the tracks, to band A of the read gate (piece rdg)
+N P 16150,16908 bd2_e_n
+# Load, west of the rail: the output land runs west as a band y 16847-16881 to the VCC land under the supply
+# rail; a poly block x 15932-15970 crosses it (L 38, W 34). Tie: a diffusion wire x 15986-16000 leaves the band
+# south to y 16930 and turns west along y 16912-16930 into a box (15944-15978, 16903-16927) under the block's
+# lower part.
+D 15850,16845:15896,16912              # VCC land
+C 15863,16885
+N D 15870,16865 vcc
+D 15890,16847:16010,16881              # band: channel, and east to the rail
+D 15986,16881:16000,16930              # tie wire south
+D 15950,16912:16000,16930              # and west into the box
+P 15932,16830:15970,16932              # load gate
+B 15944,16903:15978,16932              # tie
+
+# ---------------------------------------------------------------- unit 3: bd2_e_n = NOT e_b
+# Unit 1 again, 434 px lower (load block's top 16962 against 16529, diffusion edges under it 16994 and 17063
+# against 16560 and 16629, band centre 17037 against 16603). Its band y 17028-17046 ends east on a pad under the
+# e_b trunk whose contact shows in all shots (hole in the clean shot x 16160-16172, bright centre and rings in
+# both metal shots; cdp4_candh: PAD): the trunk's "scan gap" at y 17018-17044 of run 1. The output cell's poly
+# leaves east along y 16987-17003, under the e_b trunk and the track x 16210 (salmon, no hole: no contact),
+# into the column of the NOR's band 2. The ground land (contact 16040,17086) runs on south to the next band
+# (y 17115-17130, not drawn).
+M 16008,17050:16058,17112              # the ground rail goes on south (run 2 drew it to y 17050; its end is not looked at)
+D 16008,17009:16066,17072              # output land, under the band, ground land
+D 16030,17072:16066,17108              # the ground land narrows below y 17070
+C 16040,17086
+D 16056,17009:16126,17024              # output land's east end
+D 16066,17024:16121,17070              # under the band east of the rail, and the ground land's north arm
+P 15976,17028:16180,17046              # gate: e_b
+P 16150,17021:16182,17053              # pad
+C 16166,17037
+D 16092,16992:16126,17024              # under the cell
+P 16096,16986:16136,17016              # poly of the cell
+B 16088,16978:16132,17018              # output cell
+P 16128,16987:16244,17003              # east into the column
+N D 16040,17016 bd2_e_n
+D 15850,16989:15896,17061              # VCC land
+C 15863,17023
+N D 15870,17010 vcc
+D 15890,16994:15948,17063              # channel and drain strip
+D 15934,16996:16012,17018              # east through the tie box
+D 16000,16996:16022,17024              # into the output land
+P 15894,16962:15932,17076              # load gate
+P 15894,16962:15992,16985              # its arm into the tie box
+P 15958,16962:15992,17012              # poly of the box
+B 15954,16974:15998,17018              # tie
+
+# ================================================================ run 3, piece rdg (2026-11-27)
+# The read gate: one four-input NOR under the rail, y 17108-17400.
+#     rd_data_e = NOR( bd2_e_n, cs_d, bd2_rw_n, bd2_rs_n )
+# Under the rail (tools/bd2_umap.py 15990 17000 16150 17460 4 5): unit 3's ground land | band A y 17114-17134 |
+# land L1 y 17138-17170 | band B y 17173-17193 | ground land y 17197-17242 (contact 16035,17217) | band C
+# y 17245-17265 | land L2 y 17269-17330 | band D y 17333-17351 | ground land y 17355-17398 (contact 16045,17378).
+# L1 and L2 are one node: a diffusion wire x 15974-15988 west of the rail joins them (below).
+D 16034,17108:16066,17172              # under band A, L1
+D 16010,17146:16034,17168              # L1's west part
+D 16066,17092:16097,17170              # east of the rail: unit 3's ground land, under band A, L1
+D 16022,17168:16066,17272              # under band B, ground land, under band C
+D 16066,17168:16087,17272              # the same east of the rail
+C 16035,17217
+D 16022,17268:16066,17332              # L2
+D 16010,17284:16034,17320              # L2's west part
+D 16066,17270:16092,17332              # L2 east of the rail
+D 16034,17328:16066,17398              # under band D, ground land
+D 16066,17328:16095,17375              # the same east of the rail (the ground land's lip y 17358-17372 reaches x 16095)
+C 16045,17378
+M 16008,17112:16058,17400              # the ground rail, on south over cdp4's piece of it (M 16038,17285 y17535)
+P 16003,17114:16244,17134              # band A, gate: bd2_e_n (the column x 16226-16244 ends on it)
+P 16003,17173:16111,17193              # band B, gate: cs_d
+P 16093,17173:16111,17221              # south
+P 16093,17203:16180,17221              # east, to under the e_b trunk
+P 16163,17160:16180,17221              # north under the trunk (salmon, no hole: no contact)
+P 16163,17160:16384,17180              # east under the bundle to cs_d's second tap
+P 16368,17153:16400,17185              # pad
+C 16384,17169
+M 16385,17100 y17190 w=18              # cs_d's metal over the tap (trunks draws the whole line)
+P 16003,17245:16222,17265              # band C, gate: bd2_rw_n
+P 16202,17222:16222,17265              # north to the pad
+P 16193,17196:16225,17228              # pad: the south end of bd2_rw_n's metal
+C 16209,17212
+P 16003,17333:16253,17351              # band D, gate: bd2_rs_n
+P 16237,17326:16269,17358              # pad: the south end of bd2_rs_n's metal (tools/follow.py: end 16251,17348)
+C 16253,17342
+M 16255,17100 y17354 w=18
+# Output cell on L2's east end; its poly east under the e_b trunk to a pad on a metal that leaves south.
+D 16092,17288:16126,17312              # under the cell
+P 16100,17290:16136,17310              # poly of the cell
+B 16092,17286:16130,17314              # output cell
+P 16128,17293:16194,17307
+P 16194,17284:16226,17316              # pad
+C 16210,17300
+# The output's route (tools/follow.py 16210 17296 S: corners (16217,17648) and (16863,17655), end (16862,17953)):
+# a thin metal south from the pad, east along y 17648 between d6_out_n's line (y 17603) and e_b's (y 17691),
+# south along x 16862 to a pad (16862,17948). No pad on the way (cdp4_candh every 6-8 px: none; a grey smear in
+# the clean shot at (16700-16712,17648) has no ring in either metal shot). From the pad a poly row y 17938-17956
+# east, under the metal x 16906 and the wide rail x 16940-17030 (salmon, no hole), to a second pad
+# (17080,17949), where a thin metal leaves east along y 17950 into the block below the data bus column (port).
+M 16210,17290 y17320 16213,17340 y17600 16217,17640 y17648 x16850 16862,17657 y17962 w=16
+N M 16213,17500 rd_data_e
+P 16846,17932:16878,17964              # pad
+C 16862,17948 s=20x20
+P 16862,17938:17080,17956              # east
+P 17064,17933:17096,17965              # pad
+C 17080,17949 s=20x20
+M 17072,17950 x17112 w=12              # east; goes on (port)
+N D 16040,17300 rd_data_e
+# Load, west of the rail: the dbus_le NOR's load upside down. L2 runs west as a band y 17284-17320 to the VCC
+# land; a poly block x 15908-15950, y 17265-17338 crosses it. The tie box is at the block's top. The wire W
+# (x 15974-15988, bright green in the clean shot from y 17150 to y 17290) runs from the band north, sends a
+# branch west into the box, and goes on north to L1's west end.
+D 15850,17260:15896,17322              # VCC land
+C 15865,17302                          # pit in the clean shot, ring in chip 2's metal shot
+N D 15870,17300 vcc
+D 15890,17284:16010,17320              # band: channel, and east to the rail
+D 15974,17148:15988,17290              # W
+D 15974,17148:16012,17164              # its top, east into L1
+D 15944,17238:15988,17256              # branch west into the tie box
+P 15908,17265:15950,17338              # load gate
+P 15908,17236:15950,17265              # its top, over the box
+B 15918,17236:15952,17264              # tie

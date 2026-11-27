@@ -1,0 +1,146 @@
+# busc: the bus field between the strobe logic and the input buffer row.
+# Run 1 (2026-11-27), piece dhz: the block below the data bus column, x 17040-17450, y 17080-17960:
+# the driver of d_hiz, the data pins' output enable (notes/blocks/busc.md).
+#
+#     rd_data_e_n = NOT rd_data_e                      stage 1 (pull-down G7, load Gs)
+#     rd_data_e_b = NOT rd_data_e_n                    stage 2 (pull-down G6, load under the E block)
+#     d_hiz: pulled to VCC while rd_data_e_n is high (G1, G3, G4), to VSS while rd_data_e_b is high (G2, G5)
+#
+# Read from the clean shot (diffusions and polys: tan and salmon under the straps, pits where contacts were)
+# and both metal shots (straps and contact rings). The supply on the west side is VCC: it is one metal with
+# the data bus column's VCC rail (dbus: M 17527,8287:17585,17000), by the wide metal y 16970-17020 and its
+# turn south along x 16990-17060. The east rail is taken as VSS (every pull-down ends on it; not followed).
+@block busc
+@w M=12 P=18
+@s 22x22
+
+# ---------------------------------------------------------------- polys
+# rd_data_e_n: gate G1 (y 17189-17211 over the left island, y 17173-17211 over the right one), its west
+# end south as a column under the VCC metal to the pad P3, gate G3 east from that pad; gates G4 and G6 from
+# their own pads. One thin metal x 17083 joins the three pads (below).
+P 17083,17189:17228,17211              # G1, left part
+P 17224,17173:17340,17211              # G1, right part (the poly is 38 long there)
+P 17083,17189:17099,17400              # west column
+P 17068,17388:17100,17420              # pad P3
+C 17084,17404
+P 17084,17400:17376,17418              # G3
+P 17084,17471:17376,17489              # G4
+P 17067,17476:17099,17508              # pad P4
+C 17083,17492
+P 17084,17612:17372,17634              # G6
+P 17066,17604:17098,17636              # pad P6
+C 17082,17620
+# rd_data_e_b: gates G2 and G5, joined by a column along the block's east side; the column's foot turns
+# west into a block over the load's diffusion, and an arm of it ends in a framed box on a tongue of strip B6.
+P 17140,17329:17424,17347              # G2
+P 17406,17329:17424,17704              # east column
+P 17100,17542:17424,17558              # G5
+P 17340,17686:17424,17704              # the column's foot, west
+P 17305,17690:17362,17727              # block over the load's channel
+P 17252,17698:17307,17722              # arm west into the tie box
+B 17250,17686:17280,17724              # tie: rd_data_e_b's poly to strip B6
+# rd_data_e: gate G7, east and south to the pad where the thin metal from bd2's pad (17080,17949) ends.
+P 17096,17845:17440,17867              # G7
+P 17420,17845:17440,17948              # south
+P 17412,17933:17444,17965              # pad
+C 17428,17949
+M 17100,17950 x17428 w=12              # from bd2's port (17112,17950)
+N M 17250,17950 rd_data_e
+# stage 1's load gate, tied to its output strip D1 by a framed box at its east end
+P 17088,17750:17226,17788              # Gs
+P 17222,17756:17248,17790              # into the box
+B 17222,17756:17252,17792              # tie: Gs to D1
+
+# ---------------------------------------------------------------- diffusions
+# Top group: two islands above G1 (both on VCC), one strip below (the output).
+D 17118,17130:17220,17213              # island A1, and under G1
+D 17250,17128:17324,17213              # island A2, and under G1
+D 17118,17213:17225,17256              # strip A3, west of the notch
+D 17245,17213:17336,17256              # east of it
+D 17225,17222:17245,17256              # below the field notch (17225-17245, y 17213-17222) between the islands
+# The stack: six strips B1-B6 with five gates between them, one diffusion.
+D 17160,17284:17369,17352              # B1, under G2
+D 17157,17352:17369,17376              # B2, upper part
+D 17119,17376:17369,17598              # B2 lower part, under G3, B3, under G4, B4, under G5, B5 upper part
+D 17181,17598:17369,17640              # B5 lower part, under G6
+D 17181,17636:17362,17680              # B6
+D 17256,17676:17274,17722              # tongue of B6 into the tie box
+D 17305,17676:17362,17778              # the load of stage 2: from B6 south under the E block to its VCC box
+# Stage 1.
+D 17119,17706:17196,17802              # Ds1 (VCC), under Gs, into D1
+D 17118,17799:17362,17842              # D1
+D 17226,17760:17250,17802              # tab of D1 into the tie box
+D 17118,17842:17362,17869              # under G7
+D 17118,17869:17370,17908              # D2
+
+# ---------------------------------------------------------------- metals and contacts
+# VCC: the wide metal from the north-west, its strap over A1 and A2, south along the block's west side
+# (over the poly column, no contact) to an inner rail x 17106-17140; straps over B3 and Ds1; an arm east to
+# the box of stage 2's load.
+M 17040,17130:17326,17166              # from the west, and the strap over A1 and A2
+M 17040,17130:17100,17270              # the wide metal's foot
+M 17080,17130:17100,17366              # south
+M 17080,17262:17121,17366              # wider below y 17262
+M 17080,17320:17156,17366
+M 17124,17320:17156,17748              # inner rail (x 17126-17154 in both chips)
+M 17124,17426:17326,17462              # strap over B3
+M 17124,17706:17252,17746              # strap over Ds1, and the arm east
+M 17248,17727:17300,17746              # the arm past the tie box of stage 2 (it clears the box)
+M 17296,17704:17362,17776              # over the E block's lower part (no contact) and the load's box
+N M 17060,17150 vcc
+C 17176,17150 17276,17150 17307,17145
+C 17140,17440 17178,17445 17216,17445 17257,17444 17295,17445
+C 17158,17726
+C 17335,17753
+# VSS: the east rail and its straps over B1, B5 and D2.
+M 17406,17286:17452,17906              # east rail (goes on east from its foot: not drawn)
+M 17230,17286:17452,17322              # strap over B1
+M 17182,17570:17452,17604              # strap over B5
+M 17110,17874:17452,17906              # strap over D2
+N M 17420,17700 vss
+C 17256,17303 17295,17303 17335,17304
+C 17216,17587 17255,17588 17293,17587 17332,17590
+C 17136,17890 17177,17889 17217,17891 17256,17890 17295,17890 17335,17890
+# d_hiz: the strap over A3, a link south to the strap over B2, from its east end a link south over the east
+# ends of G3 and G4 (no contact) to the strap over B4; and the output north along x 17367 and east along
+# y 17084 to the data bus column's d_hiz metal (dpad: M 17641,7374 y18155).
+M 17140,17218:17376,17254              # strap over A3
+M 17176,17254:17206,17392              # link south (over B1's west end and G2: no contact)
+M 17176,17356:17372,17392              # strap over B2
+M 17338,17356:17372,17532              # link south
+M 17180,17500:17372,17532              # strap over B4
+M 17363,17077 y17254 w=20              # north
+M 17353,17084 x17641 w=14              # east to the column's d_hiz metal
+N M 17363,17150 d_hiz
+C 17177,17235 17266,17236 17305,17236
+C 17215,17376 17255,17374 17296,17372 17336,17376
+C 17216,17516 17256,17515 17295,17515 17333,17516
+# rd_data_e_n: the strap over D1, west and north along x 17083 over the three gate pads.
+M 17075,17806:17354,17836              # strap over D1
+M 17083,17394 y17822 w=18
+N M 17083,17700 rd_data_e_n
+C 17138,17819 17177,17820 17217,17819 17256,17819 17296,17819 17336,17819
+# rd_data_e_b: the strap over B6 (the strip's node is the poly's, through the tie box).
+M 17186,17642:17352,17674
+N M 17260,17658 rd_data_e_b
+C 17217,17657 17257,17658 17297,17660 17335,17657
+
+# ================================================================ run 2 (2026-11-27), piece sup: the driver's two supply metals
+# --- VCC: the data bus column's VCC rail (dbus: M 17527,8287:17585,17000) turns west at its foot into a wide
+# metal y 16974-17018, which turns south at x 16992-17060 and widens east at y 17130 into the driver's strap.
+# Under it the clean shot is field throughout (pink and green interference colours, no hole); one poly column
+# crosses under the horizontal at x 17527-17545 (salmon, no hole). The vertical runs on south down the block's
+# west side (x 16976-17040 below y 17290): drawn to y 17420.
+M 16992,16974:17585,17018              # west from the rail's foot
+M 16992,16974:17060,17282              # south (its east part ends at y 17282)
+M 16974,17214:17040,17420              # from y 17214 the west edge is x 16974; on south (port)
+# --- VSS: the strap over D2 runs on east over G7's poly column (its two edges print through the metal at
+# x 17416-17420 and x 17440-17444; no hole) into a wide metal x 17468-17518 that runs south, over cdp4's two
+# poly rows y 18000-18020 and y 18065-18085 (salmon, no hole) and otherwise field, to inrow's ground rail
+# (M 13707,18381:17480,18431, labelled vss there), which it meets by an arm west along y 18381-18431. An arm east
+# along y 18192-18254 runs on over cdp4's d7_out_n poly column (x 17595-17613) and the poly cross-under of dpad's
+# d_hiz line (x 17633-17655), both salmon with no ring: no contact; drawn to x 17720.
+M 17440,17866:17518,17906              # D2's strap, east
+M 17468,17866:17518,18430              # south
+M 17400,18381:17518,18431              # west onto inrow's rail
+M 17468,18192:17720,18254              # east arm (port)

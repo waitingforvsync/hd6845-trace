@@ -1,0 +1,2 @@
+# busc: bus field between the strobe logic and the input buffer row. Format: x0,y0:x1,y1  kind  name | description
+17040,17120:17450,17965  io  data output enable driver | d_hiz = NOT rd_data_e, buffered: two inverters and a push-pull output stage of wide transistors; d_hiz north and east to the pad cells

@@ -1,0 +1,4 @@
+# NAME        LAYER  X,Y              DIR  note
+# bc1: started 2026-11-27 with the two ports of piece s01w.
+bc1_s0        P      7550,14827       in   the decode's low input: busl's poly row tc2_m6404 (its port at the same place), east to the pad (7795,14828) and the bus line y 14832
+bc1_s1        P      7550,14870       in   the decode's high input: busl's poly row tl6_p6187 (its port at the same place), east to the pad (7838,14871) and the bus line y 14875
