@@ -343,11 +343,11 @@ M 9715,14437 x10007 y14660 w=13         # east and south: the thin metal x 10007
 # west part across the rail's edge line at y 15896-15912 (6 px hidden under the line), and widens west at
 # y 15915-15937 into a framed box (9746-9772, 15912-15940) under a tab of the block's bottom: the tie.
 M 9808,15830:9864,15950                # E rail, on south
-M 9642,15830:9698,15950                # M rail, on south
+M 9642,15830:9698,15980                # M rail, on south
 D 9824,15816:9868,15908                # VSS land, under the band, output land
 C 9843,15838
 D 9798,15896:9868,15912                # the output land's west part, to the tie strip
-P 9805,15856:10007,15872               # gate band, and east to its pad
+P 9805,15856:10007,15879               # gate band, and east to its pad (review round 5: y 15857-15879, L about 21)
 P 9990,15851:10024,15885               # pad: the north end of a thin metal x 10007
 C 10007,15867 s=20x20
 M 10007,15860 y15960 w=12              # south (port)
@@ -362,10 +362,11 @@ M 9963,15905 y16064 w=12               # thin metal south to a pad
 P 9946,16046:9980,16080                # pad (port: its poly is not drawn)
 C 9963,16062 s=20x20
 N D 9846,15890 bc2_e15864
-D 9642,15850:9696,15900                # VCC land
+D 9642,15850:9691,15966                # VCC land (review round 5: on south under M to y 15966, a second contact)
 C 9665,15877
-D 9690,15862:9800,15882                # band: the load's channel, and east to the strip
-P 9698,15845:9782,15912                # load gate
+C 9662,15938
+D 9686,15862:9800,15882                # band: the load's channel, and east to the strip
+P 9691,15845:9782,15912                # load gate (review round 5: its west end is x 9691)
 D 9786,15862:9800,15937                # the strip south
 D 9748,15915:9800,15937                # and west into the tie box
 P 9744,15908:9772,15942                # the block's tab over the box

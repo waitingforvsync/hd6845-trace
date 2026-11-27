@@ -609,6 +609,43 @@ Recorded 2026-11-27 08:59 -0600.
 
 Round 4: no findings that change a connection.
 
+### Round 5 (full review), 2026-11-27: run 3, piece `inv7`
+
+A fresh Claude Fable 5.2 agent, on commit 3370fb2, 12 images in `cache/scratch/bc2/review-5/`. Told to suspect:
+the join of the tie strip to the output land under the rail's edge line (Ambiguity 10) and any other place the
+load's band could meet the output, the strip and its box, whether the load is one poly block, the three pads and
+their metals' directions, the band and the output poly east of the rail, and anything undrawn on these nets.
+
+**No finding changes a connection.** Three geometry remarks, all fixed:
+
+- the gate band is y 15857-15879, not 15856-15872 (clean shot at x 9844 salmon y 15858-15876; orange y 15860-15877
+  east of the rail in chip 2's shots): L about 21, not 16;
+- the load block's west end is x 9691 under M's margin, not 9698;
+- the VCC land runs on south under M to about y 15966 with a second contact (9662,15938) (hole in the clean shot,
+  ring in both metal shots; `tools/bd2_umap.py 9640 15896 9700 15984 4 4`): drawn; the M rail drawn on to y 15980.
+
+**Ambiguity 10: the join stands**, on the reviewer's own evidence: chip 1's metal shot has no extra edge at the
+junction (at y 15901 / 15907 the rail's edge line is no wider or darker than beside plain field, while at y 15876
+and y 15928 it is 6 px wider westward); the clean shot's rows y 15901 / 15907 have no green field strip (the mirror
+image of the tab's crossing at the rail's east edge); and the direct alternative is out (x 9808-9822,
+y 15856-15880 is the band's poly end cap, the land's west edge x 9824 is dark in all shots, pink field at
+y 15882-15896). The 6 px under the edge line themselves stay unseen.
+
+Checked and found correct by the reviewer: the strip is diffusion y 15865-15928 with no crossing line; the tie box
+and the output box match the pilot box; the load is one poly block and the VCC land enters under it with no field
+between; no contact on the output land; three pads with contacts, no metal north of either upper pad, the x 9963
+metal continuous y 15936-16042; field between the band and the output poly; nothing undrawn touches these nets.
+Not checked: the x 10007 metal south of y 16000; the poly leaving the pad (9963,16062).
+
+Connections before and after the fixes (commit 3370fb2 against the fixed tree):
+
+    tools/t.sh bc2 sameconn.py 3370fb2            ->  connections identical
+    .venv/bin/python tools/sameconn.py 3370fb2    ->  connections identical
+
+Recorded 2026-11-27 09:17 -0600.
+
+Round 5: no findings that change a connection.
+
 ## Corrections (coordinator, from the handoffs of 2026-11-20)
 
 - "Latch unit a", row `bc2_w14912` ("goes west, not followed"): the pad (10395,14912) is the south end of a thin metal x 10397 that comes from north of y 14570 (`eof` run 17, at 1.28x and by `tools/eof_mrun.py col 10395 14640 15030`; not read at high zoom).
