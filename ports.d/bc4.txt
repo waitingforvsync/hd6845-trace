@@ -6,4 +6,4 @@ bc2_e15690    M  10138,16300   in   from bc2 (its port at the same place): thin 
 bc2_e15690    P  9954,17170    out  the pad's poly row y 17159-17180 west, drawn end; beyond it a structure beside the east rail (x 9860-9945), not read
 # run 2, piece dec1
 bc2_e15343    M  9551,16370    in   from bc2 (its port at the same place): thin metal x 9553 south (six ?M over boxes) to the pad (9554,17518)
-bc2_e15343    P  9536,17532    out  the pad's poly, leaving south-west (x 9528-9545, to about y 17545); not drawn further
+bc2_e15343    P  9532,17467    out  the pad's poly column x 9524-9540, north end: a framed patch (9526-9540, 17466-17482), not read (its south arm ends at y 17546)

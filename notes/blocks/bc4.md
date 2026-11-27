@@ -57,7 +57,7 @@ pad (9554,17518)**: a green hole (x 9545-9565, y 17508-17525) in the middle of a
 167-180); bare ground south of the ring at y 17538-17548.
 
 - **`tools/follow.py` is wrong here**: it bridges from the pad onto another wire's horizontal metal
-  (y 17550-17570, which has its own pad at (9590,17560)) and reports a route "to y 17568, west to x 9358, north
+  (y 17550-17570, which has its own pad at about (9597,17558)) and reports a route "to y 17568, west to x 9358, north
   to y 17428". That is not this net; `bc2`'s notes and handoffs of runs 11-12 quote it as the follower's and
   should not be read as the wire's route.
 - **No contact on the way** (tracer's test, each long dark stretch: the widest bright metal across it is
@@ -68,7 +68,9 @@ pad (9554,17518)**: a green hole (x 9545-9565, y 17508-17525) in the middle of a
   for 14 px or more): y 16383-16418 (36 px), y 16449-16489 (41 px), y 16600-16614 and 16623-16638, y 16711-16747
   (37 px), y 16837-16858 and 16865-16879, y 16989-17026 (38 px). Six `?M` pieces; elsewhere bars of 8-13 px.
   What each lies over (boxes and node edges of gates that no package has drawn) is not read.
-- The pad's poly leaves south-west (salmon x 9528-9545 down to y 17545): not drawn (port).
+- The pad's poly is a column x 9524-9540 along its west side, y 17467-17546 (review round 2; the tracer had it
+  leaving south-west only): south a 14 px foot that ends at y 17546 (field under the horizontal metal beyond);
+  north to a rounded framed patch (9526-9540, 17466-17482), buried-contact-like, not read: port.
 
 So all three decode lines of R8's bits 7,6 are followed to an end pad: `bc2_e15517` (9141,17171),
 `bc2_e15690` (10181,17170), `bc2_e15343` (9554,17518).
@@ -121,3 +123,36 @@ Connections (comments only changed; commit f32c9a1 against the tree):
 Recorded 2026-11-27 14:41 -0600.
 
 Round 1: no findings that change a connection.
+
+### Round 2 (full review), 2026-11-27: run 2, piece `dec1`
+
+A fresh Claude Fable 5.2 agent, on commit 72500b7, 19 images in `cache/scratch/bc4/review-2/`. Told to test,
+hardest first: a contact anywhere on the 1,150 px (two-part test; every dark stretch of 14 px or more and every
+pair of bars 10-16 px apart), one metal on one line, the end pad and its separation from the horizontal metal
+south of it, the `?M` stretches, the join with `bc2`'s metal.
+
+**No finding changes a drawn connection.** One finding changes the port: the pad's poly leaves NORTH as well as
+south: one column x 9524-9540 from y 17467 to y 17546 along the pad's west side (orange in both metal shots with
+no edge line across), its south arm a 14 px foot that ends, its north end a rounded framed patch (9526-9540,
+17466-17482), buried-contact-like, not read. Drawn now, with the port at its north end. Geometry: at
+y 16804-16834 the visible metal is x 9546-9552 (drawn so). Notes: the other wire's pad is at about (9597,17558).
+
+Verdicts: (1) no contact: a green-patch scan of the clean shot under x 9546-9560 from y 16360 to y 17540 finds
+only the end pad's hole (12 x 13 px); the bright metal is never wider than 14 px; the closest look-alikes,
+(9551,16617) and (9551,17180), are framed boxes of about 26 x 30 with tan interiors, no pit in chip 2's stripped
+shot and no widening, like `bc2`'s tie box under this same metal. (2) One metal on one line, x 9546-9561
+throughout, no neighbouring metal within 30 px. (3) The end pad a real contact and the metal ends on it: the
+strip y 17540-17548 is at bare-ground level in both chips and green in the clean shot; no metal leaves east or
+west. (4) The `?M` are right: every stretch of 14 px or more is covered. (5) The same metal as `bc2`'s (overlap
+y 16360-16370). Not checked: continuity through the six `?M` (the photos cannot show it); what the column's
+north end joins.
+
+Connections before and after the fixes (commit 72500b7 against the fixed tree; the added poly column joins
+nothing else):
+
+    tools/t.sh bc4 sameconn.py 72500b7            ->  connections identical
+    .venv/bin/python tools/sameconn.py 72500b7    ->  connections identical
+
+Recorded 2026-11-27 14:58 -0600.
+
+Round 2: no findings that change a connection.

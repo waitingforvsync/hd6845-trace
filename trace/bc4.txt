@@ -41,11 +41,14 @@ M 9554,16489 y16602 w=12
 ?M 9553,16598 y16640 w=12
 M 9552,16638 y16713 w=11
 ?M 9553,16709 y16749 w=11
-M 9555,16747 y16839 w=10
+M 9555,16747 y16806 w=10
+M 9551,16802 y16839 w=8                # (review round 2: the visible metal is x 9546-9552 at y 16804-16834)
 ?M 9554,16835 y16881 w=11
 M 9553,16879 y16991 w=12
 ?M 9553,16987 y17028 w=12
 M 9554,17026 y17518 w=12
-P 9530,17500:9575,17532                # pad (its poly leaves south-west at x 9528-9545: not drawn, port)
+P 9530,17500:9575,17532                # pad
+P 9524,17467:9540,17546                # the pad's poly column along its west side (review round 2): north to a framed patch
+                                       # (9526-9540, 17466-17482), not read (port); south a 14 px foot that ends at y 17546
 C 9554,17518 s=20x20
 N M 9554,17300 bc2_e15343
