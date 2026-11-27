@@ -288,7 +288,7 @@ C 9963,15738 s=20x20
 P 9946,15771:10006,15789                # output row
 P 9989,15765:10023,15799                # pad
 C 10006,15782 s=20x20
-M 9999,15782 x10050 y15830 w=13         # east and south (port)
+M 9999,15782 x10050 y15830 w=13         # east and south; drawn on in run 10, piece dec3
 
 # ================================================================ run 3 (2026-11-27), piece bus2: the decode's two inputs along the bus
 # Lines 2 and 3 of the 13-line bus that bc1 describes (y 14397 and y 14439 there), end to end. Each is metal where it
@@ -798,3 +798,11 @@ P 9210,16113:9244,16147                # pad
 C 9227,16130 s=20x20
 M 9228,16100 y16160 w=13               # thin metal x 9228 through the pad (ports: north, where it comes from the west along y 15826; south)
 N M 9228,16156 bc2_m16130
+
+# ================================================================ run 9, piece dec3 (2026-11-27): the third decode line leaves south
+# bc2_e15690's metal runs on from y 15830: south on x 10050 to a corner at y 16127, east along y 16120-16136
+# lengthwise over a poly row (salmon unbroken under it, no hole: no contact) to a corner at x 10138, and south
+# on x 10131-10145 (an 6 px ridge at y 16137-16141 where it leaves the row's south edge) over field. Drawn to
+# y 16300, this package's south edge (port): tools/follow.py runs it on to y 16569, east to x 10182 and south to
+# y 17173. The pad (10180,16127) at the poly row's east end belongs to another thin metal, from the north on x 10180.
+M 10050,15830 y16128 x10138 y16300 w=13

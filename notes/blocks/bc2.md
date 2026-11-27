@@ -903,6 +903,29 @@ The reviewer of round 14 found two more pull-downs on the node; the tracer measu
 - a dark dot at (9447,16233) in chip 1's clean shot only; the patch there reads field (reviewer).
 - the thin metal x 9552 of `bc2_e15343`: still not found where it makes contact.
 
+## Run 10 (2026-11-27), piece `dec3`: the third decode line leaves south (wiring; no join, no uncertain item)
+
+Matt Godbolt, on Claude Fable 5.2, 2026-11-27 13:48 -0600. Views in `cache/scratch/bc2/e1/` (`end`: the east end, 8x; overlay
+`ov`) and `w4/e690`. Connections unchanged (`tools/sameconn.py`).
+
+**`bc2_e15690`** (low for R8 bits 7,6 = 1,0). Its metal runs on from y 15830: south on x 10044-10057 to a
+corner at y 16128 (`tools/tl5_tracks.py v 10050 15820 16135`: metal in both chips but for an 11 px ridge at
+y 16111-16122, where it steps onto a poly row's north edge), east along y 16120-16136 lengthwise over that poly
+row (`rows row 10030 10200 6 16128`: poly from x 10036 to x 10162; salmon unbroken under the metal, no hole:
+`h 16128 10040 10150`: no contact), to a corner at x 10138, and **south** on x 10131-10145
+(`tools/px.py col 10138 16110 16180 3 metal,metal1,acid1b`: bright y 16125-16134, a 6 px ridge at y 16137-16140
+where it leaves the row's south edge, bright again from y 16143 over pink field; `v 10138 16140 16320`: no break
+in either chip). `tools/follow.py` had stopped at the corner (its "end 10144,16131"), which run 6's notes took
+for the metal's end. Drawn to y 16300, the package's south edge (port); `tools/follow.py 10138 16155 S`: on
+to y 16569, east to x 10182 and south to y 17173, in `bc4`'s region.
+
+The poly row under the horizontal stretch ends east on a pad (10180,16127) (a green hole in a salmon pad, ring
+and bright centre) that belongs to another thin metal, which comes onto it from the north on x 10170-10190; the
+row's metal ends 20 px short of that pad's ring (orange open poly between, x 10150-10162). Neither is drawn.
+
+So all three decode lines of R8's bits 7,6 leave the decode: `bc2_e15343` and `bc2_e15517` west across the block
+and south along its west rail (run 6), `bc2_e15690` south out of the block.
+
 ## Review
 
 **Model note: latch unit a was traced AND reviewed on claude-opus, not claude-fable-5-2**
