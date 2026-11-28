@@ -41,7 +41,7 @@ P 16256,14860 y15046 x16190
 B 16185,15030:16218,15058
 N M 16100,14868 wr_stb_n
 # VCC contacts and load
-D 15850,15022:15898,15140
+D 15850,15022:15888,15140              # (run 10: the land's east edge is x 15886-15888 above the strip; was 15898)
 C 15862,15048 15862,15108 s=26x40
 D 15850,15075:15978,15145              # strip under the load block
 P 15903,15030:15942,15160              # load gate
@@ -49,6 +49,7 @@ D 15916,15032:15950,15060              # under the load's tie
 B 15912,15028:15948,15062
 # output node: left of the gate's vertical leg, then the strip above the gate band
 D 15945,15040:15978,15145
+D 15975,15040:15993,15055              # (run 10) the node's top part runs east to x 15993: the corner above the strip
 D 15945,15050:16216,15078
 D 16183,15032:16216,15078
 N D 16100,15064 wr_stb_n
@@ -100,21 +101,21 @@ P 16105,15257 x16255
 B 16098,15243:16132,15277
 N M 16297,15100 ar_load
 # VCC contact and load
-D 15850,15262:15895,15342
+D 15850,15262:15888,15342              # (run 10: the land's east edge, as G1's; was 15895, which now reached under the load gate)
 C 15863,15300 s=26x60
-D 15850,15258:15955,15332              # strip under the load block
-P 15898,15232:15940,15335              # load gate
-P 15898,15228:15992,15250              # arm to the tie
+D 15850,15258:15951,15329              # strip under the load block (run 10: edge lines y 15255-15262 and y 15325-15332, east end line x 15947-15953; was to 15955,15332)
+P 15893,15232:15932,15340              # load gate (run 10: x 15893-15932, east edge line x 15930-15935 in both metal shots; was 15898-15940, to y 15335)
+P 15893,15228:15992,15250              # arm to the tie
 B 15963,15243:15995,15272
 D 15940,15252:16003,15288              # output node, under the tie
-D 16003,15262:16132,15290
+D 15996,15262:16132,15290              # (run 10: the diffusion's west edge is the line x 15991-15997 across the band; was 16003)
 D 16096,15245:16132,15290
 # pull-down: band y 15290-15312, source below
 P 15978,15290:16195,15312
 P 16190,15283:16230,15318              # pad
 C 16210,15300
-D 16003,15262:16130,15332              # through under the band
-D 16003,15312:16068,15358
+D 15996,15262:16130,15332              # through under the band
+D 16030,15325:16068,15358              # ground land below the strip: x 16030-16068 (run 10; pink field west of x 16027 below y 15334)
 C 16040,15338
 N P 16100,15301 ar_load_n
 # G2's gate is NOT e_b (correction, second run). From the gate pad 16210,15300 only a
