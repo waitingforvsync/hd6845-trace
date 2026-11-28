@@ -1,5 +1,5 @@
 14280,16740:14930,16925  logic  R12 select buffer | two inverters: rsel12 buffered, leaves south in poly at x 14199 (?read enable of R12)
-15540,16540:15890,17130  logic  write strobes R12, R13 | inverter + NOR with the strobe, as for R14/R15; outputs down the tracks at x 15214 and 15344
+15540,16490:15895,17160  logic  write strobes R12, R13 | inverter + NOR with the strobe (cell bd3_rwr, real loads), as for R14/R15; outputs down the tracks at x 15214 and 15344
 15540,17130:15890,17365  logic  R13 select buffer | two inverters: rsel13 buffered, leaves south in poly at x 15512 (?read enable of R13)
 14890,16550:15580,17100  route  middle bundle, lower part | T0 (strobe) ends; T1-T6 turn west; T7/T8 selects end at their gates; write strobes and buffered selects go on south
 14100,16980:14930,17280  route  write strobes going west | wr_r5 w3 w8 w9 w11 w10 on metal at y 17041-17258, crossing the supply rail x 14609 in poly; the strobe's poly link to the left strobe line along y 16996

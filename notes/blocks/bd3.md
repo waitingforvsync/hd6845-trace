@@ -393,6 +393,18 @@ all`, `row 17112 15600 15642 3 all`): residue on chip 1.
   they are field under the middle of the supply rail (greenish grey in the clean shot there), which the tool's
   docstring excludes.
 
+### Ambiguities of run 3
+
+1. **The joins in the ground rail's west edge line** (x 15660-15666): the inverter's output wire to its band
+   under the rail (y 16586-16599), and the NOR's two slivers (y 16662-16673, y 16796-16809) to ground lands 2
+   and 3. The rail's edge line hides them and the clean shot is inverted just west of the rail. Drawn joined:
+   the dark line there is 4-6 px wide, against 12 px where a land ends (review round 2). If a sliver were cut
+   off, that pull-down would be 42 wide instead of 68; the equations would be the same. The same in the copy.
+2. **The output wire's widening under the inverter load's plate**: the wire is y 16584-16600 at x 15745 and the
+   strip y 16578-16609 under the plate; where it widens (drawn at x 15771) was not measured. Sizes only.
+3. The NOR's gate bars and the inverter's end at different x east of the rail (15721 and 15729): as measured,
+   all three past the strip's edge (x 15708).
+
 ### Piece `buf`: the R12 select buffer's pull-downs (gate column, y 16740-16845)
 
 The notes carried both pull-downs as "W about 135, uncertain by 30%": each gate bar runs 50-90 px beyond its
@@ -450,3 +462,55 @@ edge and reports false breaks).
 No trace line changed before or after the round. Recorded 2026-11-27 07:41 -0600.
 
 Round 1: no findings.
+
+### Round 2 (full review), 2026-11-28: run 3's pieces `rwr` and `buf`
+
+A fresh Claude Fable 5.2 agent, on commit 1b59c905, images in `cache/scratch/bd3/review-2/` (12 used). Pieces:
+`rwr` (the cell `bd3_rwr` at R12 and its copy at R13) and `buf` (the R12 select buffer's two pull-downs). Told
+to suspect: whether the inverter's bar lies on field west of the ground rail (master and copy); both loads'
+ties (the arm, the box, the plate's clearance); whether each load's strip reaches its supply land, and the
+supply contacts; the field under the ground rail between the inverter's output band and the NOR's land (else
+`rsel12_n` would be grounded) and the slivers' joins to the lands; the strip's edge lines at x 15639 and
+x 15708; the output boxes as buried contacts and the output poly's C; every difference of the R13 copy (its
+lower end, its output row y 17038, the strobe contact on T15); in `buf` a sliver beside the first inverter's
+bar east of the rail, the channel's east edge under the rail, and the second inverter's edge lines.
+
+**One finding, geometry only** (confirmed by the tracer, fixed):
+
+- The NOR's gate B was drawn to x 15729, 3 px from the load's tie arm (x 15732), and gate A to the same x. The
+  poly of both ends at the ground rail's east edge, about x 15721 (`px.py row 16779 15706 15740 2
+  metal,metal1,acid1b`: dark x 15716-15722, plain 72/63/36 and 76-90/74-90 at x 15724-15728, the arm's own edge
+  at x 15730-15734; `px.py row 16691`: dark x 15716-15724, field from x 15728). Both bars now end at x 15721;
+  each still crosses the whole strip (to x 15708), and the arm is uncrossed (`px.py col 15740`: unbroken
+  diffusion y 16722-16800). The inverter's bar does end at x 15729 (orange at x 15723-15726, row 16563) and is
+  left. Does not change a connection.
+
+  `tools/t.sh bd3 sameconn.py 1b59c905`: `connections identical`
+  `.venv/bin/python tools/sameconn.py 1b59c905`: `connections identical`
+
+Checked by the reviewer and found correct (4x in two to four shots, profiles and text maps): the inverter's bar
+on field west of the rail in master and copy (no edge line across it x 15606-15654 in either metal shot, where
+the NOR's bars have one at x 15636-15642; field north of it in both chip-2 shots, red minus green 1-6 against
+15-25 on the NOR's slivers); field under the ground rail at y 16604-16632 (edge lines at y 16600 and y 16632
+in both metal shots; the same at y 16908-16932 in the copy); the inverter load's tie (arm unbroken from the
+wire to y 16540, one 12 px outline to the box with no field stripe, plain centre, poly continuous from box to
+plate; the arm's and the plate's edges merge at x 15770-15778, both on `rsel12_n`); the NOR load's tie (arm
+continuous with the band, foot reaching the box, a field stripe x 15753-15759 between arm and plate); both
+strips unbroken tan to their supply lands, both supply contacts (ring and bright centre in both metal shots,
+pits in the clean shot); the two output boxes (no metal above, plain centres) and the C-shaped output poly, with
+field between the input bar and the column's top; the strip's edges x 15639 and x 15708; the R13 copy at +304
+by overlay and by every profile repeated, its rows y 16862 and y 17038 continuous without taps, the pad
+(15344,17036) clear of T10's corner, the strobe contact (15559,17084) real with T15 ending there; in `buf` no
+edge across the first bar x 14824-14896 with field north of it and the clean shot's channel x 14776-14816, and
+the second inverter's edge lines at x 14350 and x 14485 with diffusion on both sides between; the extraction
+(0 errors, sizes as claimed, no uncertain join); the green areas `tools/opendiff.py` lists under the supply
+rail are field.
+
+Not checked (could not be): the joins that lie exactly in the ground rail's west edge line (the output wire to
+the band at x 15660-15666, the two slivers to the lands), where the clean shot is inverted; only the narrowness
+of the dark line there (4-6 px, against 12 px where a land ends) supports them. And that poly and diffusion join
+inside each box, which is read from the box's form. Both are in "Ambiguities of run 3".
+
+Recorded 2026-11-28 12:47 +0000.
+
+Round 2: no findings that change a connection.

@@ -101,7 +101,7 @@ D 15662,16574:15724,16601          # output band under the rail
 D 15634,16586:15666,16599          # ... a wire west to the output box
 D 15606,16585:15636,16611
 B 15606,16585:15636,16611          # output to poly
-P 15625,16598 x15587 y16691 x15729 w=22    # output poly: west, south, then east as NOR gate A
+P 15625,16598 x15587 y16691 x15721 w=22    # output poly: west, south, then east as NOR gate A (ends at the rail's east edge)
 N D 15690,16590 rsel{}_n
 # its load, east of the ground rail: a wire to a strip under a poly block, supply land under the supply rail
 D 15720,16585:15775,16600          # output wire east of the rail
@@ -117,7 +117,7 @@ B 15772,16532:15800,16558          # tie box (plain centre at (15787,16546) in b
 D 15666,16634:15708,16670          # ground land 2
 D 15640,16662:15708,16809          # strip: ground sliver, gate A, output node, gate B, ground sliver
 D 15666,16800:15708,16853          # ground land 3
-P 15546,16779 x15729 w=22          # gate B: strobe, from a contact on T15
+P 15546,16779 x15721 w=22          # gate B: strobe, from a contact on T15 (ends at the rail's east edge, 11 px short of the tie arm)
 C 15559,16780
 D 15606,16722:15644,16750
 B 15606,16722:15636,16750          # output to poly (leaves west per instance)
