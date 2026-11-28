@@ -1710,7 +1710,8 @@ buried contacts: Ambiguity 37).
     pale triangle x 15955-15995, y 14950-15040; small feet at (16010,14838) and (16050,14838); a ring at
     (16115,14992). The last four were compared with chip 2's two shots on views `r10_b`, `r10_c1`, `r10_c2` only.
     Taken as residue; nothing drawn. And three dark spots on chip 2's ground metal, at (16022,15030),
-    (16035,15235) and (16095,14920), are bright metal in chip 1 with pink field under them.
+    (16035,15235) and (16095,14920), are bright metal in chip 1 with pink field under them (review round 9 adds
+    two more of the kind, at (16206,14932) and (16280,14932), and found the four marks in the clean shot only).
 37. **The four boxes are drawn as buried contacts (`B`), not uncertain (`?B`)**, as run 1 drew them: G1's tie
     (15912-15948 x 15028-15062) and output box (16185-16218 x 15030-15058), G2's tie (15963-15995 x 15243-15272)
     and output box (16098-16132 x 15243-15277). At 5.5x in four shots each is one heavy-outlined box with a plain
@@ -2132,3 +2133,53 @@ After the fixes (commit before them ba9f84af):
 Recorded 2026-11-28 07:33 +0000.
 
 Round 8: no findings that change a connection.
+
+### Round 9 (full review), 2026-11-28, piece `g12`
+
+One fresh reviewer (Claude Fable 5.2), on commit ef240ed2, 23 images in `cache/scratch/bd2/review-9/` (it reports 24 used; views at
+2.4x of the whole piece in three shots, 4-4.2x in four shots of each gate's two halves, 7x of the pad
+(16255,15258), the pilot's buried contact; mostly `tools/px.py`, `tools/textmap.py`, `tools/follow.py --gap 16`,
+`tools/tl5_tracks.py`, the extraction). It was given the piece's seven claims (G1 with its load, tie, L-shaped
+gate and contacts; `wr_stb_n`'s route by the box, the poly under the ground band, the metal y 14868 and the poly
+under the supply rail into `sel`, apart from the gate's own pad; the metal `wr_data_lat` from G1's pad to its end,
+crossing G2's two polys without contact; G2 with its load, arm, tie, node, band and lands; `ar_load`'s route by
+the box, the poly under the trunk, the pad (16255,15258), the metal, the poly under the ground band and the metal
+x 16299, apart from G2's own pad and from the metal north of its pad; G2's gate pad with one metal leaving;
+nothing else in the region) and told to suspect: the two gaps between each output's poly and the gate's own pad;
+the pad (16255,15258) and the 22 px dip of its metal (which metal it is on); a contact at each crossing (trunk
+over two polys, two polys under the ground band, the poly under the supply rail); the four boxes drawn as certain
+buried contacts, against the pilot's; G1's leg and node; G2's node between block, tie box and rail, the ground
+west of the band's cap, where the pull-down begins; each load's strip under the rail's edge and each block with
+its tie as one poly; anything undrawn in the open ground and under the ground rail between the gates (the
+grey-green stripe); each metal as one piece with no undrawn contact.
+
+It reported **no findings**: nothing that changes a connection and no geometry error worth a fix. Checked and
+found as drawn: both gaps (G1: plain ground y 15058-15066 at x 16230-16268 in chip 2's two shots; G2: plain
+ground y 15276-15282 across x 16188-16230 in both metal shots and chip 2's stripped shot, the clean shot alone
+reddish at x 16200-16214, chip 1's other stripped shot and its metal shot plain there); the pad (16255,15258) on
+the metal from the east only (clean shot salmon to x 16270 with the poly's edge line at x 16272-16276 under the
+metal's dark line, the dim stretch not bare-poly colour, blue 90-97; plain ground and green north of the pad; the
+pads (16255,14868) and (16296,15003) show the same 15-21 px stretch); every crossing without contact (the trunk
+over both polys: no pad, no hole, chip 2 dark for 14 px over the band's upper half where chip 1 is dark for 5;
+both polys under the ground band; the poly under the supply rail, 212-221/158-172, the colour of poly over
+field, so no transistor in the tint there); the four boxes each a heavy-outlined box with a pale centre at a
+poly's end, like the pilot's; G1's leg with the diffusion's edge line at y 15146, node on its west and ground on
+its east, the node one diffusion, the load's strip tan up to the block; G2's arm one poly with the block, the
+node through to the rail past the box, the line across the band at x 15990-15997, field west of the cap, the
+stack under and east of the rail; every metal one piece between its contacts, the corner (16168,15222) a corner
+and not a T, field under each metal beyond each pad; nothing undrawn (the wedge, feet, wavy strip and specks in
+the clean shot only; the dark spots on chip 2's ground metal bright in chip 1, two more of them at (16206,14932)
+and (16280,14932)); the extraction (0 errors, both equations).
+
+Its remarks, none of them a finding, and nothing redrawn for them: G2's arm is drawn to y 15250 while its box
+runs to y 15272 (the arm's end turns down into the box: "Run 10", G2's node; the box drawn over both joins
+them); the node's rectangle under G2's tie is drawn full where the photographs show the box and a neck of 6-8 px
+(both sides abut the box); two VCC lands of `sel` under the supply rail (y 14895-14960 and y 15160-15215) lie
+inside the piece's rectangle, with field east of both (they are `sel`'s loads' lands). Not checked, because the
+photographs do not show it: the windows of the four boxes; G2's neck under the tie box; that the grey-green
+tint under the rails' middles is nothing (no outline and no edge line in either metal shot, but the clean shot
+alone cannot show it).
+
+Recorded 2026-11-28 08:14 +0000.
+
+Round 9: no findings.
