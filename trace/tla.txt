@@ -34,7 +34,7 @@ D 2900,4903:2950,4918
 D 2888,4903:2905,5047
 D 2888,5030:2950,5047
 # in1: poly y 4929-4947 from a pad with a contact (3360,4937) under a vertical metal x 3350-3372
-P 2924,4929:3345,4947                 # west end: seen to x 2932 in the gap, then under E's edge line (drawn across the box's edge)
+P 2913,4929:3345,4947                 # west end under thin metal E at x ~2913, past the box's edge (review round 6: chip-2 stripped red over green by 16-42 on the row over x 2912-2924, green between the rows: px.py row 4938 / 4972 2906 2930 2 acid,acid1b; drawn to 2924 before)
 P 3340,4920:3382,4954
 C 3360,4937
 N P 3200,4938 rcs_in1
@@ -44,7 +44,7 @@ P 3000,4970:3135,4992
 P 3128,4961:3170,4993
 C 3148,4976
 P 3000,4968:3012,5022
-P 2924,5001:3012,5020
+P 2918,5001:3012,5020                 # west end under E at x ~2919 (review round 6: px.py row 5010 2906 2930 2 acid,acid1b; drawn to 2924 before)
 N P 3060,4981 rcs_in2
 # in3: poly y 5055-5075 from a pad with a contact (3108,5068) under a vertical metal
 # x 3097-3120; gate on the narrower box below the node (VSS contact (2987,5108))
@@ -260,7 +260,7 @@ M 2698,4940 y5330 w=20                # thin metal W: passes over the load boxes
 N M 2698,5100 rcs_thin_w
 
 # ---- in2 = NOR(w2, e4)
-D 2598,5080:2652,5142                 # rail box, VSS contact
+D 2598,5080:2648,5142                 # rail box, VSS contact (review round 6: east edge at the line x 2647-2650, as the channel above; drawn to 2652 before)
 C 2622,5110 s=24x40
 D 2598,5258:2652,5297                 # rail box, VSS contact
 C 2625,5278
@@ -889,7 +889,7 @@ M 2625,3000 y4600 w=50
 # (y 3364-3387), node, gate 3 (y 3451-3473), gate 4 (y 3494-3515), VSS. Between the gates of a
 # pair there is only plain diffusion (no contact: three shots). The small dark ovals at x 2665-
 # 2680 between the polys are the gap between R1 and thin metal W (layers.md), not layout.
-D 2600,3254:2652,3305                 # VSS box above (shared with the inverter above: its gate is the box's top edge)
+D 2600,3254:2648,3305                 # (east edge at the line x 2647-2650, run 4; drawn to 2652 before) VSS box above (shared with the inverter above: its gate is the box's top edge)
 C 2620,3277 s=24x30
 D 2558,3300:2693,3535
 D 2600,3530:2652,3588                 # VSS box below
