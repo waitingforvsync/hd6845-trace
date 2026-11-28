@@ -71,6 +71,8 @@ M 16255,15076 y15222 x16168 y15442
 # the metal x 16210, slanting down under the e_b trunk to y 15664-15680, and ends on the
 # buried contact at the east end of row 1's output strip (the "hook"). The salmon of the
 # clean shot is unbroken under both metals (tools/bd2_umap.py 16140 15580 16260 15700).
+# (run 6, piece ggw: re-read with tools/px.py col 16169 15402 15530 and rows 15460, 15490 in both metal shots:
+# y 15456-15465 orange in both chips, 34 px without metal below the centre against 16-19 px at the other taps.)
 C 16167,15432
 P 16152,15418:16184,15448              # pad
 P 16168,15440 y15505 16210,15565 y15612 w=24
@@ -123,6 +125,8 @@ N P 16100,15301 ar_load_n
 # 15500): the poly "strip 2" under it starts only at y 15358, where the branch from the
 # e_b pad 16122,15388 arrives, and there is no contact where the metal crosses that
 # poly (metal bright and unbroken y 15364-15400, salmon unbroken under it).
+# (run 6, piece ggw: the metal is one piece between its two contacts, tools/tl5_tracks.py v 16211 15285 15800; no
+# contact on strip 2, strip 1 or the band under it; 12 px between the block's foot and this pad's top line: apart.)
 M 16210,15290 y15700
 C 16205,15690
 P 16190,15675:16230,15710              # pad
@@ -369,6 +373,8 @@ P 16286,15868:16398,15887              # row: open x 16372-16396, under the rail
 
 # ---------------------------------------------------------------- bundle, y 15700-15900
 # Taps on the e_b trunk: a contact on a poly pad each.
+# (run 6, piece ggw: G_d's row passes between the two pads on the track x 16210, open ground 14-17 px each side;
+# the thin metal x 16270-16284 crosses G_b, G_d and G_e without contact: no ring, no hole, not widened.)
 C 16167,15735
 P 16152,15722:16185,15750              # pad
 P 16180,15737 x16262 w=18              # east: band G_d of the gate group right of the bundle
