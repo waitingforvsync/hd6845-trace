@@ -35,7 +35,7 @@ rsel16_buf    M      15388,17300      out  T11 south
 rsel17_buf    M      15431,17300      out  T12 south
 rsel15_buf    M      15474,17300      out  T13 south
 rsel14_buf    M      15517,17300      out  T14 south
-rsel13_buf    P      15502-15522,17500  out  R13's select buffered (driven here): poly south on x 15512; regs follows it
+rsel13_buf    P      15511-15529,17500  out  R13's select buffered (driven here): poly south on x 15520, under T14's metal without contact; regs follows it (its poly is drawn on x 15512)
 vcc           M      14584-14634,17300  -   supply rail of the gate column, on south
 vcc           M      14060,16907-16954  -   the wide rail, on west
 vss           M      15663-15718,17380  -   ground rail of the right-hand column (regs draws it on to y 17527)

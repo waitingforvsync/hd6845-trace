@@ -152,7 +152,8 @@ y 16651, down x 14135 and west again along y 16864 (4x), out of the region.
 
 Two inverters in series, drawn from the photos in run 4 (until then a copy of `sel`'s cell `sel_rbuf` at
 dy 2258, with schematic loads; details under "Run 4"). Gate bars at y 17170 and y 17301. Output: buried
-contact at (15620,17342), poly west along y 17340, then south along x 15512; seen to y 17700, still going.
+contact at (15620,17342), poly west along y 17340, then south along x 15520, directly under T14's metal
+(`rsel14_buf`; no contact) to y 17500, where `regs` takes it on.
 
 So R12 and R13 each have an ordinary write strobe and a buffered select, exactly like
 R14 and R15. (R12's buffer sits in the gate column and is called `rsel12_buf`; R13's is in
@@ -194,7 +195,7 @@ turn west, at y 17302, 17346, 17388, 17432, and cross the supply rail the same w
 | rsel12, rsel13, wr_rN, rselN_buf | metal | tracks at y 16550 (top) | in | see the track table |
 | wr_r7 | poly | 14100,16864 (west) | out | turns west at y 16864 (from x 14135); goes on past x 14040 |
 | rsel12_buf | poly | 14199,17100 (bottom; drawn to 17300) | out | rsel12 buffered; seen to y 17320 |
-| rsel13_buf | poly | 15512,17500 (drawn to there) | out | rsel13 buffered; poly going south, seen to y 17700 |
+| rsel13_buf | poly | 15520,17500 (drawn to there; x 15511-15529) | out | rsel13 buffered; poly going south under T14's metal, seen to y 17700 |
 | (trunks' X) | metal | 14100,16998 (west) and 14543,17100 (bottom) | through | not one of the tracks and not drawn in bd3.txt: see Ambiguities |
 | wr_r5 | metal | 14100,17041 (west) | out | |
 | wr_r3 | metal | 14100,17084 (west) | out | |
@@ -642,3 +643,58 @@ inside each box, which is read from the box's form. Both are in "Ambiguities of 
 Recorded 2026-11-28 12:47 +0000.
 
 Round 2: no findings that change a connection.
+
+### Round 3 (full review), 2026-11-28: run 4's pieces `rbuf` and `buf2`
+
+A fresh Claude Fable 5.2 agent, on commit 046c4ade, images in `cache/scratch/bd3/review-3/`. Pieces: `rbuf` (the
+R13 select buffer, x 15575-15895, y 17100-17376) and `buf2` (the R12 select buffer's loads and second inverter,
+x 14290-14740, y 16740-16855). Told to suspect, in `rbuf`: the second load's tie box (read from its form; the
+clean shot inverted there), whether the poly foot row ends in it and the output wire lies against it; the 10 px
+output wire between x 15741 and x 15793 (unbroken, diffusion, reaching the strip); whether bar 2 has diffusion on
+both sides west and east of the rail (132 wide or 44) and bar 1 lies on field; the field under the ground rail at
+y 17209-17240 and y 17343-17364; the first load's tie, strip and supply land, both supply contacts, both output
+boxes, the output poly column's path; plate 2 across its whole strip and the foot row's join to it. In `buf2`: the
+second load's foot row (place, joins to plate and box), the box under the band, the band into the load's output
+side, the diffusion under the plate; the first load's strip join to the supply land, its box and arm. And
+anything undrawn in either region.
+
+**Two findings, both geometry only** (each confirmed by the tracer and fixed):
+
+- `rsel13_buf`'s poly south of the buffer was drawn on x 15512 (x 15502-15522); it lies directly under T14's
+  metal, x 15511-15529 (`px.py row 17450 15490 15544 2 all`: clean shot salmon x 15514-15527 between edges at
+  x 15510 and x 15529; the same at y 17400 and y 17352). Redrawn on x 15520, w 18; the port moves 8 px, inside
+  the wire's own width, and still meets `regs`' continuation (10 px, `tools/ports.py --prefix bd3`). The
+  reviewer found no contact to T14 down to y 17528 (text map: no hole). `regs`' own poly below y 17490 is drawn
+  on x 15512: in the handoff. Does not change a connection.
+- The R12 buffer's output band is narrower over its tie box and on to the load's output side than drawn: y 16802-
+  16812 from x 14487 to x 14529, drawn y 16795-16817 (`px.py col 14506 16786 16824 2 all`, `col 14520`: edge lines
+  at y 16798-16800 and y 16812-16818). Unbroken (chip 2's stripped shot red over green by 17-28 along it). Redrawn
+  in two parts. Does not change a connection.
+
+  `tools/t.sh bd3 sameconn.py 046c4ade`: `connections identical`
+  `.venv/bin/python tools/sameconn.py 046c4ade`: `connections identical`
+
+Checked by the reviewer and found correct (4x in four shots, 7x at the second tie box, profiles and text maps; the
+extraction: 43/20, 28/54, 132/22, 68/39; 135/22, 67/31, 27/56; four NOT equations; `tools/unsure.py`: 0 nets). In
+`rbuf`: the second tie box (plain centre between single 8 px dark bands to the wire and to the foot row; the same
+form in all five buffer copies of the column in four shots, and in R12's); the output wire unbroken from x 15741 to
+x 15790 in both metal shots and diffusion (chip 2's stripped shot red over green by 30 or more; chip 1 green
+113-123 against 86-96 on the foot row), the strip's west edge line absent where the wire enters; edge lines across
+bar 2 at x 15608-15612 and x 15740-15744 in both chips with diffusion on both sides of the rail; no edge across
+bar 1 west of the rail and field north of it; field under the ground rail at y 17209-17240 and y 17343-17364;
+the first load's arm, box and strip; plate 2 across the whole strip (poly y 17264-17372) and the foot row
+continuous into it under the rail; both supply contacts, both ground contacts, both output boxes; 12 px of field
+between `rsel13`'s row and the output column. In `buf2`: the first load's strip into the supply land, its box,
+stem and arm; the second load's band into the output side without an edge, the foot row y 16834-16850 continuous
+into the plate, the tie box, the plate's top at y 16744; the second inverter's edges at x 14350-14354 and
+x 14482-14486; both output boxes, the pad contact (14306,16778), the supply contact (14609,16790); no contact
+where the input metal x 14305 crosses the output poly. Nothing undrawn in either region; three spots are dirt
+((14437,16803) chip 2 only, (15700,17346) chip 1 only, (15592,17363) clean shot only).
+
+Not checked (could not be): that any buried-contact box joins its poly and its diffusion (form only); the 4-6 px
+of the wire-to-strip junction under the supply rail's edge line (x 15792-15797); the R12 buffer's first pull-down
+and the tracks were not in this round (round 2 and round 1).
+
+Recorded 2026-11-28 13:32 +0000.
+
+Round 3: no findings that change a connection.

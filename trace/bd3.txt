@@ -63,7 +63,8 @@ P 14293,16763:14321,16793
 P 14315,16778 x14496 w=22          # gate bar of the second inverter
 # second inverter (left half): pull-down under the left ground rail, stronger load
 D 14353,16747:14488,16798          # ground above the bar (joins the R7 NOR's strip), output below
-D 14370,16795:14535,16817          # output band: west to the buried contact, east to the load
+D 14370,16795:14487,16817          # output band: west to the buried contact, east to the load ...
+D 14480,16801:14535,16813          # ... narrower (y 16802-16812) over the tie box and into the load's output side (review round 3)
 B 14350,16803:14383,16843          # output to poly
 D 14352,16800:14381,16841
 B 14481,16810:14513,16841          # load gate tied to the output: a box hanging under the output band (plain centre y 16821-16833)
@@ -180,7 +181,7 @@ P 15746,17366 x15830 w=16          # the plate's foot: a poly row west along y 1
 P 15747,17340:15769,17374          # ... its end up into the tie box
 D 15745,17330:15771,17360          # a tab of the output wire down into the box
 B 15743,17333:15773,17362          # tie box (plain centre at (15758,17346))
-P 15620,17340 x15512 y17500 w=20   # its output: poly west along y 17340, then south along x 15512
+P 15620,17340 x15520 y17500 w=18   # its output: poly west along y 17340, then south under T14's metal, x 15511-15529 (no contact; review round 3: drawn at x 15512 before)
 # outputs: poly west to a contact on a track
 P 15632,16735 x15244 w=20          # wr_r12: from the NOR's output box west to T8's lower part
 C 15258,16734
