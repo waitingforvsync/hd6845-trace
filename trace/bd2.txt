@@ -255,6 +255,8 @@ M 16312,15400:16362,15920             # (run 5: drawn on to the rail's south end
 N M 16337,15500 vss
 # upper gate
 D 16314,15420:16366,15565              # ground land, under G_a, node, under G_b, wr_data_e_n
+D 16288,15456:16316,15548              # the stack is wider than runs 2-4 drew it: land, channels and nodes run west to x 16288 (clean shot tan at
+                                       # x 16290-16296 between the bands, field at x 16276-16282; review round 4)
 C 16338,15432
 P 16250,15458:16286,15492              # pad of G_a
 C 16260,15473
@@ -268,11 +270,19 @@ N D 16340,15552 wr_data_e_n
 # contact: their centres are cream in the clean shot like diffusion under metal, not the
 # olive green of the four known contacts of this metal and its neighbours.
 M 16250,15460:16286,15488
-M 16277,15466 y15882 w=14
+M 16277,15466 y15550 w=14
+?M 16277,15546 y15580 w=14             # over the boxed cell at the west end of wr_data_e_n: a bright centre between two 9-10 px bars, read as no
+M 16277,15576 y15682 w=14              # contact (clean shot cream 187/185/129, metal not widened); uncertain as trap 27 asks (review round 4)
+?M 16277,15678 y15716 w=14             # over the boxed cell at the west end of ar_load_n: the same
+M 16277,15712 y15882 w=14
+N P 16268,15475 bd2_w15872             # the label is on G_a's pad, so that the join to wr_addr_sel_n is listed as passing through the two
+                                       # uncertain stretches as well as the tie box (the alias is in piece ggs, below)
 C 16274,15872
 P 16258,15856:16292,15888              # pad
 # lower gate
 D 16312,15596:16350,15832              # ground land, under band x, ar_load_n, under G_d, node, under G_e, ground land
+D 16288,15700:16314,15806              # the lower stack likewise: ar_load_n's foot, under G_d, node, under G_e and a tab of the ground land run west
+                                       # to x 16288 (review round 4); the land north of band x and band x's channel do not (field at x 16276-16290)
 C 16327,15612 16330,15812
 P 16292,15638:16376,15656              # gate bd2_x: the band of the upper node's load poly (run 4, piece gge); west end at x 16290 (review round 3)
 N P 16366,15647 bd2_x
@@ -351,7 +361,6 @@ C 16513,15799 16514,15844
 # -- the node's wire south to the box, and the output row west to the pad
 D 16406,15836:16421,15884
 P 16286,15868:16398,15887              # row: open x 16372-16396, under the rail's south end, x 16294-16310, into the pad
-N P 16300,15878 bd2_w15872
 @alias wr_addr_sel_n bd2_w15872
 # the box (heavy outline x 16400-16426, y 15860-15892; plain patch x 16410-16418 between two dark bands): the row's
 # end and the arm taken into it over the wire (window not resolved: drawn uncertain)

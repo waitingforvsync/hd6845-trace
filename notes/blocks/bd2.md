@@ -1032,7 +1032,20 @@ at its two real contacts; `tools/textmap.py 16244 15538 16312 15584 3 --acid`, `
 - the metal is not widened: its bright part is 8 px wide over each box against 15 px over field;
 - the dark bars are 9-10 px (edges underneath), not a ring.
 
-It stays a reading (Ambiguity 22).
+It stays a reading (Ambiguity 22), and since review round 4 the two stretches (y 15546-15580, y 15678-15716)
+are drawn `?M`, as trap 27 asks, with the label `bd2_w15872` on G_a's pad: `tools/unsure.py` lists
+`wr_addr_sel_n` as joined to it only through uncertain items (the two stretches and the tie box).
+
+### The stacks are wider than runs 2-4 drew them (review round 4)
+
+The diffusion under bands G_a and G_b runs west to x 16288, not x 16314: between the bands the clean shot is tan
+at x 16290-16296 and pink field at x 16276-16282 (`tools/bd2_umap.py 16276 15416 16330 15580 2 4`; row y 15504
+is tan without a break from x 16290 to the rail), and both metal shots have an edge line at x 16284-16292
+across each band (`tools/px.py row 15478`, `15520 16272 16300 3`). The same for G_d and G_e, the foot of
+`ar_load_n` (y 15710-15724) and a tab of the south ground land (x 16286-16302, y 15794-15806)
+(`tools/bd2_umap.py 16276 15590 16330 15840 2 4`); the north ground land and band x's channel do not run west
+(field at x 16276-16290, y 15594-15662). Drawn: the upper stack's pull-downs are 78/22 (were 52/22), the lower
+stack's 62/18 (were 38/18). Widths only.
 
 ### Ambiguities (run 5)
 
@@ -1040,8 +1053,11 @@ It stays a reading (Ambiguity 22).
     wire are joined there is read from the box's look and from what ends at it; the window is not resolved.
     Without it the row (and so G_a) has no driver and the load's gate is tied to nothing.
 22. **The thin metal x 16270-16284 over the two boxed cells**: no contact, by the clean shot's colour and the
-    metal's width (above). A contact at either would short the inverter's output to a node of the latch.
-    The cell at the west end of `wr_data_e_n` still has no poly leaving it (run 2's Ambiguity 2).
+    metal's width (above); drawn `?M` there. A contact at either would short the inverter's output to a node of
+    the latch. The cell at the west end of `wr_data_e_n` still has no poly leaving it (run 2's Ambiguity 2): a
+    small poly island lies at its west end (x 16244-16256, y 15550-15574), closed, with field for 8 px or more
+    between it and the feed of band G_b north of it (`tools/bd2_cmap.py 16226 15500 16268 15584 3`; review
+    round 4). Not drawn: it joins nothing.
 23. **The gate's west side** is under the rail's margin: that the ground land reaches the column rests on the
     clean shot's missing edge line there (two rows, two controls). If the land ended short of it the
     pull-down would have no source.
@@ -1185,3 +1201,49 @@ After the fixes (commit before them 3d7ebc37):
     .venv/bin/python tools/sameconn.py 3d7ebc37      connections identical
 
 Round 3: no findings that change a connection.
+
+### Round 4 (full review), 2026-11-28, piece `ggs`
+
+One fresh reviewer (Claude Fable 5.2), on commit f15d5ae5, 15 images in `cache/scratch/bd2/review-4/` (to about
+5x, four shots; mostly `tools/px.py`, `tools/textmap.py`, `tools/bd2_prof4.py`, `tools/tl5_tracks.py`,
+`tools/cdp4_candh.py`, the extraction). It was given the piece's ten claims and told to suspect: the gap between
+row 3's band and the pad (16274,15873), and anything else reaching that pad; the thin metal over the two boxed
+cells (contact or pass-over) and its two ends; the output row under the rail (one poly, no contact, the smear);
+whether the column is G_e's poly, where it ends, and whether it is a gate (the land against its west edge, the
+edge lines across it, diffusion or field east of it); the load (one poly, the strip's two ends, the contacts,
+the rail); the arm, the wire and what the box joins; anything undrawn in x 16366-16490, y 15757-15925 and under
+the rail's south end.
+
+Findings, each checked by the tracer in the photos; none changes a connection:
+
+1. **The thin metal was drawn plain over both boxed cells.** The reviewer agrees there is no contact, but it
+   is a reading, and trap 27 asks for `?M`. Confirmed; the two stretches are `?M` and the label is on G_a's
+   pad. Marking only.
+2. **The stacks' diffusion is wider than drawn** (runs 2-4's geometry): to x 16288 under G_a, G_b, G_d, G_e,
+   with a tab of the south ground land. Confirmed (the section above). Two rectangles added. Widths only.
+3. **A poly island at the west end of the cell at `wr_data_e_n`'s west arm** is not drawn. Confirmed as an
+   island (Ambiguity 22); left undrawn. No connection.
+
+Checked and found as drawn: x 16235-16252 bare field in all four shots on every row y 15836-15905, the band's
+poly turning south under the metal x 16200-16222 with no contact, only the thin metal and the east row on the
+pad; the boxes' centres 182-187/185/129-130 in the clean shot against holes of 160-181/176-195/101-109 at the
+metal's two real contacts, and a pale pitted patch in chip 2's stripped shot at both contacts and at neither
+box; the metal one piece (no gap of 25 px, `tools/tl5_tracks.py v 16274` / `16277`), ending on both pads, G_a's
+pad on its band; the row one poly from pad to box with unbroken edge lines under the rail and no contact, the
+smear without edge lines in either metal shot (the same grey lies under the VCC rail at (16506-16526, 15896));
+the column continuous with G_e, its cap near y 15850 with pink field at (16370, 15852-15864) before the row,
+the diffusion's edge lines (y 15802, 15841) across it in both metal shots and the land against it with no
+edge line; the node diffusion and the area north of it field (stripped red minus green 14-23 against 1-5);
+the load one poly, its strip reaching node and land, both contacts and the rail; the arm unbroken to y 15884,
+the wire unbroken to the box with field south of it, the box plain between dark bands of 12 and 10 px; the
+equations; the rail's end at y 15919. Not checked: the box's window (`?B` is the right marking, it said); the
+cap's exact y; runs 1-2's other joins (box 2's `?B`, the `e_b` taps); east of the VCC rail.
+
+After the fixes (commit before them f15d5ae5):
+
+    tools/t.sh bd2 sameconn.py f15d5ae5              connections identical
+    .venv/bin/python tools/sameconn.py f15d5ae5      connections identical
+
+Recorded 2026-11-28 04:44 +0000.
+
+Round 4: no findings that change a connection.
