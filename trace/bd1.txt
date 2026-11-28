@@ -494,6 +494,7 @@ P 13798,16348:13912,16365          # output bar west, under the rail over field
 P 13760,16343:13800,16372          # pad
 C 13779,16360
 M 13783,16347 y16752 w=20          # h_eq_r0half_n south on x 13783 (no contact on the way: no pad, no ring)
+                                   # review round 2: at y 16690-16750 chip 1 has no metal (dark in its metal shot, open green in the clean shot: local damage); chip 2's two shots show it
 M 13753,16744:13792,16779          # pad at its foot
 C 13768,16761
 N M 13783,16560 h_eq_r0half_n

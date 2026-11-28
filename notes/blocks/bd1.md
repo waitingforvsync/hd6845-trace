@@ -589,7 +589,7 @@ contacts, and eight colour points read the same in the four shots (`tools/px.py 
 pull-down is poly in both, chip-2 metal blue 55-69 and chip-1 metal green 82-87; the band below it is diffusion,
 red minus green 21 in the chip-2 stripped shot; the island west of the arm is field, -5). The geometry is the
 master's lines moved 955 px south and fitted on overlays (sharpened clean shot at 3.9x, both metal shots at 1.7x
-and 2.1x); every contact sits on a ring in both metal shots.
+and 2.1x); every contact sits on a ring in both metal shots (one metal's last 60 px are seen in chip 2 only: Ambiguity 8).
 
 ```
 h_eq_r0half_n   = NOT h_eq_r0half                                                  inverter B (firm)
@@ -656,7 +656,9 @@ metal y 18422-18436 that runs 2,000 px west to x 10806, where `eof`'s metal x 10
 (10808,16426)). The bus metal is one piece: `tools/tl5_tracks.py h 18429 10800 12815` finds no stretch of 25 px
 without metal in both chips and no hole in the clean shot; its longest dark stretches (x 10840-10853 and
 10856-10872, with two bright pixels between in chip 2) are the two edge bars of a 20 px poly column crossing
-beneath, with the metal dim but present between them and the clean shot protected throughout (`textmap.py 10828
+beneath; between them the metal is barely brighter than open poly (179-200/119-126/55-71 in chip 2 against 165-174/103-109
+for the open poly just north; review round 2), and what shows it is that the metal's two edge lines (y 18416-18420 and
+y 18438-18442) cross the column unbroken and dark in both chips, with the clean shot protected throughout (`textmap.py 10828
 18414 10884 18446 2 --acid`; view `g1`, four shots at 4.1x); strips of the whole line in the chip-2 metal shot and
 the clean shot at 2.4x (`tools/strips.py 10790 18395 2060 70 --n 4 --horizontal`) show five plain poly crossings
 (x 10850, 10890, 11020, 11855, 12735), no pad and no branch.
@@ -696,6 +698,12 @@ full extraction). It is also listed against `eof`'s `eof_w17734` P (10897,18469)
    `out2`'s poly under the four strobe metals at x 13890 and under the bus metals down x 13720 (no pad on the
    poly, no widening of any metal: 1.9x and 2.5x views only); `ck_b`'s and `ck_a`'s metals over the row y 18428
    (3x); five poly columns under the bus metal.
+8. **`h_eq_r0half_n`'s metal x 13773-13793 above its foot pad, y 16690-16750, is seen in chip 2 only** (review round 2).
+   Chip 1's metal shot is dark there for 55 px (red 16-90) and its clean shot open green at y 16689-16701 and
+   y 16725-16743; chip 2's metal shot has the metal to the pad (red 176-239, bars of 6-9 px where G5's band crosses)
+   and its stripped shot the ghost (`textmap.py 13762 16680 13804 16770 3`). Read as damage on chip 1 (its two shots are
+   of one die); the wire's last 60 px, and so G6's gate on the inverter's output, rest on chip 2. Drawn firm. In the
+   master both chips show the metal.
 7. `ck_out`'s metal between band A and the tap (y 16464-16490) is dark in chip 2 (red 64-130) and bright for
    10 px in chip 1; the clean shot is pink (protected) under it. One metal, as `trunks` draws it.
 
@@ -750,3 +758,54 @@ Connections before and after the wording fixes (commit 9611f93 against the fixed
 Recorded 2026-11-27 07:48 -0600.
 
 Round 1: no findings that change a connection.
+
+### Round 2 (full review), 2026-11-28: run 4, pieces `lat2` and `out2` and the row y 16410
+
+A fresh Claude Fable 5.2 agent, on commit c22bbb7b, 17 images in `cache/scratch/bd1/review-2/`. Told to suspect:
+any place where the copy differs from the master unnoticed; the row y 16410 (made firm from centre-line profiles);
+the turn and band A under `ck_out`'s metal; the two stubs; the join of the block to the column; on `out2` every
+corner, the leg x 13880-13900 at y 16900-17050, `rst_a`'s column against the corner (13720,17148), the channel
+x 13710-13730 (read at 1.9x), the three pads, the diagonal, the row under the wide supply metal, the bus metal
+(the dark stretch x 10840-10872, two metals end to end) and the join with `eof`'s metal.
+
+**No finding changes a connection.** Three remarks, each checked by me:
+
+1. (13773-13793, 16690-16750): `h_eq_r0half_n`'s metal above its foot pad is absent in chip 1 (metal shot dark,
+   clean shot open green) and present in chip 2 (metal shot and the ghost in its stripped shot); the notes' "both
+   metal shots" did not hold there. **Confirmed** (`textmap.py 13762 16680 13804 16770 3`: chip 1 red 16-90 for
+   55 px, chip 2 red 176-239 between bars). Geometry unchanged (drawn firm on chip 2's two shots); recorded as
+   Ambiguity 8 and in a trace comment. Not a connection change.
+2. (10840-10872, 18429): over the poly column the bus metal is barely brighter than open poly, weaker than "dim
+   but present"; what shows the metal is its two edge lines crossing the column unbroken in both chips.
+   **Confirmed** (my own text map of the spot shows both lines); the notes' wording corrected. Not a connection change.
+3. (13827-13873, 16635-16657): "the ground land under the rail has a narrow tail to y 16657 (drawn to 16635); one
+   dark line (y 16660-16666) separates it from N2". **Not adopted**: `px.py col 13835 / 13848 / 13860 16626 16670 3
+   acid1b,metal,metal1` has the land's tan (197-205/170-178/117-135) end at y 16631 on a dark line y 16635-16638 in
+   all three shots at all three columns, and the band y 16641-16659 below it pink or olive (162-188/131-134/116-121;
+   129-155/148-155/95-123), not tan: it is the field band the master has at y 15682-15706, between two dark lines.
+   Either way geometry only: the band does not reach N2.
+
+Checked and found correct by the reviewer (4x or more, or text maps, in two to four shots): the row y 16410 (poly
+in every gap in four shots at 4 px steps; under each of the five tracks no pad, hole or ring; `tools/eof_tee.py`:
+no branch); the turn (a corner, not a T) and band A under `ck_out`'s metal with no contact; both stubs dead ends
+(pink field under `ck_out`'s metal at y 16670, bare ground west of the stub; N1's stub a closed box clear of band B
+and of `trunks`' pad); both gap diffusions (`eof`'s tests, field control at y 16645); P4's cap clear of the output
+bar, G5 and G6 clear of the block, G4 continuous into the band; `ck_out`'s metal one piece through its three
+contacts; master and copy the same but for the known places (mosaics in three shots, a text difference map); the
+block's join the same single 8 px line as the master's; on `out2` every corner a corner, the row y 16810-16830
+clear of the pad (13957,16860), the leg x 13880-13900 continuous with three plain crossings, `rst_a`'s column
+ending about 40 px short of the corner, the channel x 13710-13730 continuous with no pad and no widening (a 3 px
+text map of all 940 px), the pad (13715,18078) not joined to the bus metal above it, the diagonal continuous in
+chip 2 (dirt on chip 1 at x 13452-13476), both pads at y 18428 real, the spot on the supply metal dirt, the bus line
+without hole or branch (both edge lines dark from x 10880 to x 12790). Not checked by the reviewer: the two load
+ties (`?`); the N1 and N2 diffusions under the rail's east edge (cannot be seen there); the bus line beyond its west
+end by text tests only.
+
+Connections before and after the fixes (a trace comment and the notes; commit c22bbb7b against the fixed tree):
+
+    tools/t.sh bd1 sameconn.py c22bbb7b            ->  connections identical
+    .venv/bin/python tools/sameconn.py c22bbb7b    ->  connections identical
+
+Recorded 2026-11-28 09:58 +0000.
+
+Round 2: no findings that change a connection.
