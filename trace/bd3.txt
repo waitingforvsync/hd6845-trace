@@ -81,11 +81,56 @@ P 14378,16822 x14199 y17300 w=18
 P 14135,16750 y16864 x14090 w=22
 
 # ---------------------------------------------------------------- right-hand gate column, continued
-# Two more inverter + NOR pairs of the cell sel_rwr (trace/sel.txt), for R12 and R13.
+# Two more inverter + NOR pairs, for R12 and R13: the circuit of sel's cell sel_rwr (trace/sel.txt).
 M 15690,16550 y17110 w=55          # ground rail
 M 15795,16550:15890,17110          # supply rail
-@inst sel_rwr 0,600 tag=12
-@inst sel_rwr 0,900 tag=13
+# Inverter + 2-input NOR with the strobe, read at its own place (run 3): sel's cell `sel_rwr` has
+# schematic loads and, placed at multiples of 300, lies 8-12 px north of these two copies (the
+# column's pitch is 304).
+@cell bd3_rwr tag=12
+@s 30x34
+C 15683,16518                      # ground: land 1 (the NOR above shares it)
+C 15683,16652                      # ground: land 2
+C 15683,16814                      # ground: land 3 (the inverter below shares it)
+# --- inverter: pull-down under the ground rail only (the bar lies on field west of the rail)
+D 15665,16492:15708,16578          # ground land 1 and the channel (edges across the bar at x 15664 and 15708)
+P 15588,16562 x15729 w=20          # gate bar (the select's poly arrives from the west, per instance)
+D 15662,16574:15724,16601          # output band under the rail
+D 15634,16586:15666,16599          # ... a wire west to the output box
+D 15606,16585:15636,16611
+B 15606,16585:15636,16611          # output to poly
+P 15625,16598 x15587 y16691 x15729 w=22    # output poly: west, south, then east as NOR gate A
+N D 15690,16590 rsel{}_n
+# its load, east of the ground rail: a wire to a strip under a poly block, supply land under the supply rail
+D 15720,16585:15775,16600          # output wire east of the rail
+D 15771,16580:15852,16608          # strip under the block (edges across the poly at y 16578, 16609) and neck
+P 15780,16562:15834,16623          # load plate; its west 17 px in the open, the rest under the supply rail
+D 15848,16551:15890,16626          # supply land
+C 15862,16582 s=24x56              # supply contact (oval ring y 16546-16614)
+D 15756,16538:15770,16600          # tie: a diffusion arm north from the wire ...
+D 15756,16538:15786,16556          # ... turning east under the plate's north arm
+P 15777,16532:15800,16566          # the plate's north arm
+B 15772,16532:15800,16558          # tie box (plain centre at (15787,16546) in both metal shots)
+# --- NOR: the strip runs 26 px west of the rail (edge across both bars at x 15639)
+D 15666,16634:15708,16670          # ground land 2
+D 15640,16662:15708,16809          # strip: ground sliver, gate A, output node, gate B, ground sliver
+D 15666,16800:15708,16853          # ground land 3
+P 15546,16779 x15729 w=22          # gate B: strobe, from a contact on T15
+C 15559,16780
+D 15606,16722:15644,16750
+B 15606,16722:15636,16750          # output to poly (leaves west per instance)
+N D 15690,16735 wr_r{}
+# its load
+D 15700,16719:15850,16752          # output band east under the plate to the supply land (edges y 16717, 16754)
+P 15763,16698:15803,16776          # load plate (x 15762-15804), mostly in the open
+D 15848,16673:15890,16754          # supply land
+C 15864,16712 s=24x56              # supply contact
+D 15732,16745:15749,16802          # tie: a diffusion arm south from the band ...
+D 15732,16784:15770,16802          # ... its foot east under the plate's south end
+P 15758,16774:15790,16804          # the plate's south end
+B 15756,16776:15790,16803          # tie box (plain centre at (15773,16790))
+@end
+@inst bd3_rwr 0,304 tag=13
 M 15561,16550 y17085 w=20          # T15 (strobe) ends at the R13 NOR's contact
 P 15590,16558 x15612 w=20          # rsel12's poly (from the contact at 15258,16560) joins the gate bar
 M 15214,16550 y16877 w=20          # T7 (rsel13) ends at a contact
@@ -99,9 +144,9 @@ M 15795,17100:15890,17380          # supply rail runs on
 @inst sel_rbuf 0,2258 tag=13
 P 15620,17340 x15512 y17500 w=20   # its output: poly west along y 17340, then south along x 15512
 # outputs: poly west to a contact on a track
-P 15615,16732 x15244 w=20
+P 15632,16735 x15244 w=20          # wr_r12: from the NOR's output box west to T8's lower part
 C 15258,16734
-P 15615,17032 x15330 w=20
+P 15632,17038 x15330 w=20          # wr_r13: from the NOR's output box west to the line on T10's x
 C 15344,17036
 
 # ---------------------------------------------------------------- tracks below y 16550

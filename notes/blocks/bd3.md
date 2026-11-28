@@ -282,6 +282,99 @@ Done with the audit written for R1, `tools/bd1_audit.py 14100 16550 15880 17100`
 Limits as in the tool's docstring: its metal thresholds are weak on dim tracks (hence the two overlays), and it
 does not look for a contact on open diffusion beside a metal.
 
+## Run 3 (2026-11-28): the right-hand column's R12 and R13 strobe cells, read at their own place
+
+Tom Seddon's session, on Claude Fable 5.2, 2026-11-28 from 12:13 +0000. Piece `rwr`: x 15575-15895, y 16490-17160.
+
+Until this run the two inverter + NOR pairs were copies of `sel`'s cell `sel_rwr` (`@inst sel_rwr 0,600` and
+`0,900`), whose four loads are schematic (`?`) shapes and whose pull-downs were drawn from a low-zoom view. They
+are now `bd3`'s own cell **`bd3_rwr`**, drawn from the photos at R12 (the master) and placed once more for R13 at
+0,304. **No connection changed** (`tools/t.sh bd3 sameconn.py 0ed5ae7`: connections identical; `rsel12_n` = NOT
+`rsel12`, `wr_r12` = NOR(`rsel12_n`, `wr_stb_n`), and the same for R13, as before). What changed is every size,
+and the four loads are real geometry with no `?` item.
+
+| Transistor | W/L now | W/L in `sel_rwr` | How read |
+|---|---|---|---|
+| inverter pull-down | 43/20 | 123/22 | the gate bar lies on field west of the rail; the channel is under the rail only |
+| inverter load | 28/54 | schematic | plate x 15780-15834, y 16562-16623, strip edges across it at y 16578 and 16609 |
+| NOR pull-downs (two) | 68/22 | 90/24 | the strip runs 26 px west of the rail: an edge line crosses both bars at x 15639 |
+| NOR load | 33/40 | schematic | plate x 15762-15804, y 16697-16772, band edges across it at y 16717 and 16754 |
+
+Pull-down against load is about 4 for both gates (2.2 against 0.52; 3.1 x 2 inputs each against 0.83), where the
+old inverter's 123/22 against any load of this size would have been 10.
+
+**The pitch of this column is 304, not 300.** `tools/dbus_localmatch.py 15580 16500 15895 16830 0 303 15`: R13 at
+0,303 (clean shot, 0.87) and 0,304 (both chip-2 shots, 0.81, 0.82); R14 at 0,-304 and R15 at 0,-607/-608 the same
+way. `sel`'s master is drawn at R15 and placed at multiples of 300, so its copies lay 4 px (R14), 8 px (R12) and
+12 px (R13) north of the features (`tools/railprof.py 15666 15712 16490 17130`: gate bars under the rail at
+y 16554-16574, 16685-16705, 16771-16791 for R12, where the copy had 16545-16567, 16670-16694, 16760-16784). The
+two output rows are redrawn to match: `wr_r12`'s poly row is at y 16735 (was 16732), `wr_r13`'s at y 17038 (was
+17032; `px.py col 15592 17014 17062 3`: poly y 17031-17045, and salmon y 17032-17044 under the tracks at x 15400).
+
+### The inverter (master, R12)
+
+- Ground land 1 under the rail, x 15666-15708 (`px.py row 16528 15624 15740 4`: tan x 15668-15704 in the clean
+  shot, edge 15708-15712, pink field under the rail's margin at 15716), from the NOR above (`sel`'s R14) down to
+  the gate. Ground contact about (15683,16518).
+- Gate bar y 16552-16572 (`px.py col 15648`, `col 15686`), from the select's poly in the west to its end at
+  x 15729. **West of the rail it lies on field**: no edge line crosses it from x 15576 to x 15654 in either metal
+  shot (`px.py row 16563 15570 15760 3 all`: chip 2 150-178/100-126/45-68 without a dip), and at x 15648 there is
+  field directly north of it (one edge line y 16544-16550, then 160/140/75) and, south of it, a lighter gap of
+  6 px (y 16576-16580) between the bar's edge line and the edge line of the output wire (`px.py col 15648 16526
+  16626 2 all`): the wire runs beside the bar, not against it. Under the rail the channel's edges cross the bar at
+  x 15664 (with the rail's own edge) and x 15708 (dark in the clean shot at 15708-15711, in chip 2's metal at
+  15705-15708, with metal on both sides).
+- Output band under the rail y 16575-16600; a wire y 16586-16598 west to the output box (x 15606-15636,
+  y 16585-16611: dark ring, plain centre), from which the output poly runs west, south as a column x 15576-15598
+  and east again as the NOR's gate A (one orange C in both chip-2 shots, 4.4x, `o3-col.png`); the ground it
+  encloses (x 15600-15640, y 16618-16660) is field (`px.py col 15650 16610 16816 3`).
+- East of the rail the wire (y 16584-16600 at x 15745: `px.py col 15745`) runs to a strip y 16580-16608 under the
+  load plate and on, as a neck, to the supply land x 15850-15890, y 16551-16626 under the supply rail, with an
+  oval supply contact (ring y 16546-16614: `px.py col 15862`).
+- **The tie**: a diffusion arm x 15756-15770 runs north from the wire to y 16538 (`px.py col 15765`: pinker than
+  field in chip 2's metal shot, green in the clean shot, from y 16540 to y 16598), and the plate has a north arm
+  x 15777-15800 (orange at x 15787, y 16564-16572) into a box x 15772-15800, y 16530-16558 whose centre is plain
+  in both metal shots (chip 2 150/105/60 to 150/126/69, chip 1 103/103/79, red equal to green) between dark bands
+  of 10-12 px: a buried contact as trap 24 describes it. The load's gate is on its output side: a depletion load.
+
+### The NOR (master, R12)
+
+- Ground land 2 under the rail, y 16634-16680, x 15666-15708; between it and the inverter's output band the rail
+  lies on **field** for 30 px (y 16604-16632: greenish grey 141/148/105 in the clean shot against tan 199/180/131
+  for the band; `tools/railprof.py` calls it diffusion, trap 18). Ground land 3, y 16790-16853, is also the next
+  cell's land 1.
+- The strip under the two gate bars runs from x 15640 to x 15708: an edge line crosses both bars at x 15636-15642
+  in both metal shots and the clean shot (`px.py row 16695`, `row 16781`), and west of the rail there is
+  diffusion on both sides of each bar (`px.py col 15650 16610 16816 3`: a sliver y 16662-16672 north of gate A,
+  the output node y 16709-16758 between the bars, a sliver y 16797-16808 south of gate B; pinker than field in
+  chip 2's metal shot, red over green by 14-24 in its stripped shot, where the enclosed field reads -5 to -9).
+- Gate A (y 16680-16702) is the inverter's output poly; gate B (y 16768-16790) comes from the contact on T15,
+  about (15559,16780).
+- Output node: west to the output box x 15606-15636, y 16722-16750 (the output row leaves west from it), east as
+  a band y 16719-16752 under the load plate to the supply land x 15848-15890, y 16673-16754 with its oval
+  contact (`px.py col 15865`).
+- **The tie**: a diffusion arm x 15732-15749 runs south from the band to y 16802 (`px.py col 15741`), its foot
+  turns east, and the plate's south end lies on it in a box x 15756-15790, y 16776-16803 with a plain centre at
+  (15773,16790) in both metal shots (`px.py col 15778`: 137/133/74 and 137/134/58). Between the arm and the plate
+  above the box there is 8 px of field (text map, y 16759-16771).
+
+### The copy (R13, at 0,304)
+
+Overlay at 2x on the metal shot and the clean shot (`o2-r13.png`): every outline on its feature, the loads, tie
+boxes, lands and contacts included. Its land 3 (y 17104-17157) is the land of the R13 select buffer's first
+inverter. Two ring-like specks inside the enclosed field of this copy, at (15627,16952) and (15610,17112), are
+in the clean shot only (flat field in both metal shots and chip 2's stripped shot: `px.py row 16952 15606 15648 3
+all`, `row 17112 15600 15642 3 all`): residue on chip 1.
+
+### Traps met
+
+- The clean shot is inverted in the open gap between the two rails' margins at the inverter load's tie (x 15770-
+  15798): pale where both metal shots have a dark wall (row y 16546, x 15773-15779). Trap 28; the tie was read
+  from the two metal shots and chip 2's stripped shot.
+- `tools/opendiff.py 14100 16550 15850 17100` lists three "green" areas at x 15822-15850 as undrawn diffusion:
+  they are field under the middle of the supply rail (greenish grey in the clean shot there), which the tool's
+  docstring excludes.
+
 ## Review
 
 ### Round 1 (full review), 2026-11-27: the re-read of the channel (R2)
