@@ -25,6 +25,12 @@ drawn**: the fifteen pull-downs of the east column and the two of the west colum
 gate row runs on under a rail, and the one uncertain item among them, the VSS join at (3020,3500), is drawn firm
 (`rcs_b1` is firm now). See "Run 3" at the end.
 
+**Run 4 (2026-11-28): the cluster's rail gates are re-read (R23, R42)**: no connection changed; six pull-downs
+changed width. The step gate's three are 69, 69 and 70 wide (were 52, 52, 38: the box under R3 runs on west to thin
+metal E, and gate `in3`'s pull-down has a second part east of the rail); `rcs_w2` and `tla_w3505` under R1 are 44
+(were 54, 57); the pull-down of `clk_tl`'s driver at (2626,7908) is 66 (was 52: a second part west of its rail). See
+"Run 4" at the end.
+
 ```
 rc_stepreq_n = NOR(in1, in2, in3)        the row counter's step request (active low)   (2975,5035)
 in2        = NOR(w2, e4)                 west column                                   (2571,5197)
@@ -942,5 +948,151 @@ under the rail ends against field (y 3200). What is read is what lies either sid
   units of this piece** (R30; R32(c)-(e): the ties at y 3134, 3307, 4615, 4790, 5216 drawn by analogy, each
   load's gate poly beyond its tie box; R41: thin metal E over the tie boxes), R32(a) (the gate rows' ends on the
   bus pads), R29, R38's other ends, R39.
+- The rest of this file's Not done list is unchanged (`rcs_iso2958`; the west column y 3590-4940; thin metal W;
+  the boxes without a poly; bus pieces; `ports.d/tla.txt` for the file's older wires).
+
+## Run 4 (2026-11-28): re-read items R23 and R42, the first cluster's rail gates
+
+Tom Seddon's session, on Claude Fable 5.2, from 2026-11-28 15:14 +0000. Piece `rg`: the pull-downs of this file that
+sit under a rail ("rail gates"), re-read for R23 (a second closed patch of the same device beyond the rail) and R42
+(the box's edges against the rail's own edge lines; poly against diffusion in the gap between a rail and a thin
+metal): the step gate's three under R3 (x 2880-3080, y 4890-5150), `rcs_w2` (x 2530-2700, y 5000-5110) and
+`tla_w3505` (x 2560-2700, y 3190-3300) under R1, and, of the same build in this file though outside the package's
+region, the pull-down of `clk_tl`'s driver (x 2525-2700, y 7845-7970). Not in this piece: the top unit
+`rcs_u3288_n` (found on both sides of R1 in 2026-11-17's review rounds 1 and 2), the selector (drawn across R1 from
+the start), the AND-OR-INVERT's gates under R3 (R32(b); `tl2` re-read its g3) and `rcs_iso2958`'s transistor.
+Scratch: `cache/scratch/tla/survey.md` ("run 4"), images `rg_s1`-`rg_s5`, overlays `rg_o1`, `rg_o2`;
+`cache/scratch/tla/mat.py` prints a matrix of `tools/px.py`'s numbers (the commands below give the same numbers row
+by row).
+
+**Result: no connection changed; six widths.** `tools/t.sh tla sameconn.py 73f39883` and `.venv/bin/python
+tools/sameconn.py 73f39883`: connections identical. Full extraction 2,547 nets, 4,931 transistors, 0 errors, 0
+warnings.
+
+| Pull-down | Gate | Was | Is | What was found |
+|---|---|---|---|---|
+| step gate, (2964,4938) | `rcs_in1` | 52/18 | 69/18 | the box runs on west of R3 to thin metal E |
+| step gate, (2964,5010) | `rcs_in2` | 52/19 | 69/19 | the same box |
+| step gate, (3004,5065) | `rcs_in3` | 38/20 | 70/20 | a second part east of R3 (R23) |
+| `rcs_w2`, (2626,5066) | `rcs_c1` | 54/18 | 44/18 | the box's east edge is 12 px inside R1's edge line |
+| `tla_w3505`, (2626,3243) | `rcs_thin_e` | 57/18 | 44/18 | the same |
+| `clk_tl`'s driver, (2615,7908) | `ck_out` | 52/24 | 66/24 | a second part west of its rail (R23); east edge as `rcs_w2`'s |
+
+### The rails' own edge lines
+
+Under a rail a diffusion's edge and the rail's edge are two lines, and which is which is read from a row where the
+rail lies on field. R3's east edge line is at x 3006 (`px.py row 4882 2984 3030 2 metal`: bright to x 3000, 62-70 at
+x 3006, 143 at x 3012; the same at y 4876-4894, above the step gate); its west edge line at x 2950-2954, thin metal
+E's east edge line at x 2926-2928, and the open gap between them x 2930-2948. R1's metal at these units is bright
+x 2608-2650 with edge lines at x 2601 and x 2659.
+
+### The step gate's box under R3: gates `in1` and `in2` (traced; 69 wide)
+
+- **East edge, as drawn** (x 2998): a second line 8 px inside the rail's own (`px.py row 4912 / 4936 / 5008 2984
+  3030 2 metal`: red 83-92, 65-75 and 72-119 at x 2998, a bump at x 3000-3002, the rail's line at x 3006; clean shot
+  dark at x 2996-2999, then the margin's pink or salmon). It is absent at y 5038-5044, where the node's strip goes
+  on east, and at gate `in3`'s rows. East of the rail above `in1`'s row and between the two rows is field (chip-2
+  stripped red minus green -4 to +8 at y 4915 and y 4960), and no edge line crosses `in1`'s row there (`px.py row
+  4936 2984 3030 2 metal`: 145-178 over x 3012-3030). No second part in the east.
+- **West: the box runs on out of the rail through the gap to thin metal E** (`rg_s4.png`, 5.5x, three shots). The
+  trace had its west edge at x 2947, the rail's. Read:
+  - in the gap (x 2932-2948) the two gate rows are poly (chip-2 metal blue 35-61) and the stretches above, between
+    and below them are plain (blue 78-92): the U's top band (y 4904-4916), **the stretch between the rows
+    (y 4955-4992)** and the U's bottom band (y 5030-5042). The three read alike and unlike the field in the same
+    gap above and below the gate, in all four shots (`px.py pt 2940,4860 2940,4884 2940,4910 2940,4972 2940,4982
+    2940,5036 2940,5092 2940,5112 2940,5180 2940,5300 all --r 3`): chip-2 stripped red minus green 28-47 against
+    4-13; clean shot red over green by 30-40 against green at or above red; chip-2 metal 170-172/133-136 against
+    162-164/139-145;
+  - no edge line crosses either gate row between E's edge line and the rail's (`px.py row 4934 / 5006 2922 2962 2
+    metal,metal1`: chip-2 red 154-168 flat over x 2934-2946) (trap 38's test);
+  - the U's inner field is the strip x 2906-2926, y 4920-5027 **under thin metal E**: a closed rounded outline,
+    green inside in the chip-2 stripped shot, pink in the clean shot (193/140/112 at (2918,4972), against
+    158/164/101 on the top band under E at (2914,4915)). The gap's stretches lie outside that outline.
+- So the VSS box and both channels are x 2930-2998. The gate rows are seen as far as x 2932 and go under E's edge
+  line; they are drawn across the box's edge (to x 2924).
+- Gate lengths in the open gap (`px.py col 2940 4898 5054 6 metal`): edge lines at y 4922 and y 4952, y 4994 and
+  y 5024 (30 centre to centre, poly about 22); drawn 18 and 19, not redrawn.
+
+### Gate `in3` (traced; 70 wide): a second part east of the rail
+
+`rg_s2.png` (5.5x, four shots); `px.py row 5066 / 5090 3004 3064 2 metal,metal1`.
+
+- **One heavy line, in both metal shots and the chip-2 stripped shot**, comes down x 3038-3040 from the node's
+  buried-contact box, **crosses the gate row** (chip-2 metal red 47-62, chip 1 35-45, on a poly that reads 150-188
+  either side, blue 47-71), goes on to y 5096, west along y 5098-5100 to x 3018, south along x 3017 to y 5120 and
+  east along y 5121 as the upper edge of the unit's arm. East of it and in the pocket x 3020-3060, y 5104-5118 is
+  field (chip-2 stripped red minus green -8 to +6; clean shot khaki, green 131-143).
+- Inside it, below the gate, is a plain patch x 3012-3036, y 5084-5096: not poly (chip-2 metal blue 74-88); chip-2
+  stripped red minus green 13-28 at y 5092 and 7-16 at y 5086 (a 12 px band between two edges: trap 38's flanks);
+  in the clean shot red-brown like the arm at y 5128-5134 (green 66-100, red over green by 23-54).
+- Above the gate the node's strip (y 5030-5048) lies against the row from the rail to the same line.
+- Between the patch and the box under the rail lies the rail's own edge line (x 3006; clean shot tan to x 3008,
+  dark x 3011-3017): one line, the standing of every arm of this column (run 3, Ambiguity 1).
+- The box's west edge under the rail is the dark line x 2966-2968 of the clean shot (`px.py row 5088 / 5064 2944
+  2990 2 acid1b`: tan, and at the gate rows bright salmon 213-252, from x 2972; pink field west of it); the poly
+  runs on over field to x ~2956 (paler salmon x 2956-2962).
+- So the channel is x 2969-3039: the pull-down drawn 38 wide under the rail is 70.
+
+### `rcs_w2` and `tla_w3505` under R1 (traced; 44 wide each)
+
+`rg_s3.png` (4x, four shots; `rcs_w2`); `px.py row 5040 / 5064 / 5096 2584 2692 3 metal,acid1b` and `row 3216 / 3244
+/ 3264 2581 2692 3 metal,acid1b`.
+
+- **East edge**: a line at x 2647 in the chip-2 metal shot, 12 px inside the rail's edge line, and dark x 2647-2650
+  in the clean shot, **at the gate rows and the VSS rows and not at the node rows** (y 5036-5044; y 3212-3220: tan
+  through to x 2662, the node's strip going east to the load). East of it under the rail's margin the gate rows are
+  salmon (poly over field, 215-240/135-176 at x 2656-2662) and the VSS rows pink (`px.py col 2656 4980 5130 6
+  acid1b,metal,acid,metal1`: 186-197/105-131/100-128 beside the VSS box as above the unit, where the rail lies on
+  field; at 4x the pink strip beside the salmon looks like more of the gate). The poly ends at x ~2672, as drawn.
+- **West edge**: one line at x 2599-2602, bright salmon from x 2605.
+- **No second part** (R23). West of R1 below each gate is field (chip-2 stripped red minus green -18 to +7 at
+  y 5084-5108 and -22 to +7 at y 3264-3294; chip-2 metal plain from the row's lower edge down, with no line), and no
+  edge line crosses either row west of the rail (`px.py row 5066 / 3244 2560 2612 3 metal,metal1`: chip 2 151-169
+  flat). In the gap east of R1 (x 2662-2680) below each gate the chip-2 stripped shot reads about 0-20 (a streak of
+  12-29 at x 2668 at both units), against 22-52 on the node strips (y 5042, y 3220) and on the selector's diffusion
+  in the same gap (y 3308-3340).
+- So each channel is x 2604-2648, 44 wide, like units A and C of the middle cluster (run 2). The node above each
+  gate is drawn across the rail as before (it joins the part west of the rail to the strip east of it).
+
+### The pull-down of `clk_tl`'s driver (traced; 66 wide): a second part west of its rail
+
+In this file since 2026-11-16 ("a rail gate like `rcs_w2`'s"), at (2626,7908), outside the package's region.
+`rg_s5.png` (4x, four shots); `px.py row 7908 2562 2612 2 metal,metal1`; `px.py col 2590 7890 7952 2 all`.
+
+- **West**: the same figure as gate `in3`'s east part. One heavy line comes down x 2576-2580 from the node's
+  buried-contact box, crosses the gate row (60-66 in chip 2, 42-60 in chip 1, on a poly reading 155-173 either
+  side), goes on to y 7940 and east along y 7940-7944 to the rail. Inside it below the gate a plain patch
+  x 2584-2599, y 7926-7938 (chip-2 metal 136-178/112-144/62-96; chip-2 stripped red minus green -9 on its north
+  flank and +35 on its south, against -34 to -11 on the field below the line). The rail's edge line (x 2604-2606)
+  lies between the patch and the box under the rail.
+- **East**: as `rcs_w2`'s: dark x 2650 in the clean shot at the gate rows and the VSS rows, pink field at x 2656
+  below the gate, tan through at the node rows (y 7880-7884).
+- So the channel is x 2582-2648, 66 wide (was 52).
+
+### Ambiguities of run 4
+
+1. **The second parts join the boxes under their rails across the rail's own edge line** (gate `in3` at x 3006,
+   `clk_tl`'s driver at x 2604-2606), and the step gate's box crosses R3's west edge line (x 2950-2954) into the
+   gap. Each is read from diffusion on both sides of one line, as every arm of the columns is (run 3, Ambiguity 1).
+   If `in3`'s or the driver's were cut, the patch below the gate would be a diffusion on nothing and the device
+   would be the width it was drawn before; the gate, the node and the supply are the same either way.
+2. **Where the step gate's two gate rows end in the west** is under thin metal E's edge line (seen to x 2932; the
+   box's edge is put at x 2930 and the rows drawn to x 2924). If a row stopped short of the box's edge, the node
+   would be shorted to VSS round its end, which no gate is built to do; not seen directly.
+3. **The patches below the gates are 12 px bands between two edge lines**, classed by the heavy line that bounds
+   them and crosses the gate row in three shots, by the chip-2 metal shot's blue (not poly) and by the chip-2
+   stripped shot against the field beyond the line; the two flanks of such a band read differently there (trap 38).
+
+### Not done after run 4
+
+- R23 and R42 are done for the rail gates named above. **Left of R23 / R42 / R32(b) in this file**: the
+  AND-OR-INVERT's gates under R3 (g1, g2 at y 4116, 4162, with the metal of `rcs_cond_lat` beside the rail) and
+  `rcs_iso2958`'s transistor under R3's west edge (y 3462-3500).
+- Next, in the order of the re-read list: **the loads west of R3 and east of R1 of the first cluster's units**
+  (R30; R32(c)-(e): the ties at y 3134, 3307, 4615, 4790, 5216 drawn by analogy, each load's gate poly beyond its
+  tie box; R41: thin metal E over the tie boxes), the step gate's load and its uncertain tie at (2885-2908,
+  4958-4996), R32(a) (the gate rows' ends on the bus pads), R29, R38's other ends, R39.
+- Seen in passing, not drawn: gate `in2`'s poly east of the rail is a curved band from the row y 4970-4992 down to
+  the gate band (x ~3005-3035 on `rg_o1.png`), drawn as a straight stub x 3000-3012; same ends.
 - The rest of this file's Not done list is unchanged (`rcs_iso2958`; the west column y 3590-4940; thin metal W;
   the boxes without a poly; bus pieces; `ports.d/tla.txt` for the file's older wires).

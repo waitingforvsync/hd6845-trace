@@ -18,13 +18,23 @@ N M 2803,4700 vcc
 # b = NOR(in1, in2, in3): the row counter's step signal (rc_stepreq_n). Three pull-downs on the VSS
 # rail's diffusion, load to the VCC rail. The output node is a U of diffusion round the VSS
 # contact box: top (y 4903-4927), west arm and strip x 2888-2905, bottom (y 5022-5050).
-D 2947,4903:2999,5050
+# Re-read 2026-11-28 (run 4, R23/R42): the box under R3 was drawn x 2947-2999 (the rail's width). Its east edge is
+# right: a second line at x 2998 in both metal shots, 8 px inside the rail's own edge line (x 3006), at every row
+# except the node's way east (y 5038-5044). In the WEST it runs on out of the rail through the open gap to the east
+# edge of thin metal E (x ~2930): the gap x 2932-2948 between the two gate rows (y 4955-4992) reads as the U's top
+# and bottom bands in the same gap and unlike the field in that gap above and below the gate, in all four shots
+# (chip-2 stripped red minus green 28-47 against 4-13; clean shot red over green by 30-40 against green >= red:
+# px.py pt 2940,4860 2940,4884 2940,4910 2940,4972 2940,4982 2940,5036 2940,5092 2940,5112 all --r 3), and no edge
+# line crosses either gate row between E's edge line and the rail's (px.py row 4934 / 5006 2922 2962 2 metal,metal1).
+# The U's inner field is the strip x 2906-2926, y 4920-5027 under thin metal E (closed outline, green in the chip-2
+# stripped shot). So in1's and in2's pull-downs are 69 wide (were 52).
+D 2930,4903:2999,5050
 C 2966,4972 s=30x34
 D 2900,4903:2950,4918
 D 2888,4903:2905,5047
 D 2888,5030:2950,5047
 # in1: poly y 4929-4947 from a pad with a contact (3360,4937) under a vertical metal x 3350-3372
-P 2940,4929:3345,4947
+P 2924,4929:3345,4947                 # west end: seen to x 2932 in the gap, then under E's edge line (drawn across the box's edge)
 P 3340,4920:3382,4954
 C 3360,4937
 N P 3200,4938 rcs_in1
@@ -34,13 +44,24 @@ P 3000,4970:3135,4992
 P 3128,4961:3170,4993
 C 3148,4976
 P 3000,4968:3012,5022
-P 2942,5001:3012,5020
+P 2924,5001:3012,5020
 N P 3060,4981 rcs_in2
 # in3: poly y 5055-5075 from a pad with a contact (3108,5068) under a vertical metal
 # x 3097-3120; gate on the narrower box below the node (VSS contact (2987,5108))
-D 2972,5045:3010,5140
+# Re-read 2026-11-28 (run 4, R23): this pull-down runs on EAST of the rail. One heavy line in both metal shots and
+# the chip-2 stripped shot comes down x 3038-3040 from the node's buried-contact box, crosses the gate row (chip-2
+# metal red 47-62, chip 1 35-45, on a poly that reads 150-188 either side: px.py row 5066 3004 3064 2 metal,metal1),
+# goes on to y 5096, west along y 5098-5100 to x 3018 and south to the upper edge of the unit's arm (y 5121). Inside
+# it below the gate is a plain patch x 3012-3036, y 5084-5096 (not poly: chip-2 metal blue 74-88; chip-2 stripped
+# red minus green 13-28 at y 5092 against -8..+6 on the enclosed field x 3023-3044, y 5104-5116; red-brown in the
+# clean shot like the arm), with only the rail's edge line (x 3006) between it and the box under the rail. Above
+# the gate the node's strip lies against the row as far as the same line. So the channel is x 2969-3039, 70 wide
+# (was 38). West edge of the box: the dark line x 2966-2968 in the clean shot (px.py row 5088 2944 2990 2 acid1b);
+# the poly runs on over field to x ~2956.
+D 2969,5045:3010,5140
+D 3005,5045:3039,5096                 # the part east of the rail: node side above the gate, VSS side below it
 C 2987,5108 s=24x44
-P 2966,5055:3100,5075
+P 2958,5055:3100,5075
 P 3090,5050:3126,5086
 C 3108,5068
 N P 3050,5065 rcs_in3
@@ -259,7 +280,14 @@ N P 2470,5153 rcs_w2
 # it), gate = poly y 5057-5075 across the rail from a pad with a contact (2414,5067) at the
 # bottom end of the metal x 2404-2430 (c1, from the north). The node reaches west to the
 # buried contact with w2's poly and east to its load.
-D 2598,5028:2652,5082
+# Re-read 2026-11-28 (run 4, R23/R42): the channel is x 2604-2648, 44 wide (was 54). R1's own edge lines are at
+# x 2601 and x 2659 here; the VSS box and the channel end in the east at a line at x 2647 (dark x 2647-2650 in the
+# clean shot at the gate rows and the VSS rows, not at the node rows, where the strip goes on east), with poly over
+# field (salmon) and field (pink, 184-198/94-114 at x 2656) under the rail's margin east of it; in the west one line
+# x 2599-2602, bright salmon from x 2605. No second patch: field west of the rail below the gate (chip-2 stripped
+# red minus green -18..+7), and in the gap east of it (about 0-20, against 22-35 on the node's strip at y 5042).
+D 2598,5028:2652,5050                 # the node above the gate, across the rail
+D 2604,5045:2648,5082                 # the channel and the way down to the VSS box
 P 2420,5057:2672,5075
 P 2396,5050:2434,5084
 C 2414,5067
@@ -807,7 +835,16 @@ M 2626,7800 y8000 w=52
 N M 2626,7830 vss
 M 2806,7800 y8000 w=52
 N M 2806,7830 vcc
-D 2600,7868:2652,7990
+# Re-read 2026-11-28 (run 4, R23/R42): (a) the pull-down runs on WEST of the rail: one heavy line in both metal
+# shots and the chip-2 stripped shot comes down x 2578-2582 from the node's buried-contact box, crosses the gate row,
+# goes on to y 7940 and east along y 7940-7944 to the rail; inside it below the gate is a plain patch x 2584-2599,
+# y 7926-7938 (px.py row 7908 2562 2612 2 metal,metal1; px.py col 2590 7890 7952 2 all). (b) In the east the
+# VSS box and the channel end at x 2648 (dark x 2647-2650 in the clean shot at the gate rows and the VSS rows, pink
+# field at x 2656 below the gate; not at the node rows y 7880-7884, where the strip goes on east). So the channel is
+# x 2582-2648, 66 wide (was 52, under the rail only).
+D 2600,7868:2652,7893                 # the node above the gate, across the rail
+D 2600,7888:2648,7990                 # the channel under the rail and the VSS box
+D 2582,7888:2604,7938                 # the part west of the rail: node side above the gate, VSS side below it
 C 2625,7945 s=30x30
 # gate: poly y 7896-7920 from a pad with a contact (2500,7907)
 P 2515,7896:2662,7920
@@ -938,7 +975,12 @@ B 2712,3334:2759,3362
 # the gate is the VSS box it shares with the mux unit. Gate: poly y 3234-3252 from a pad with a
 # contact (2326,3243) on the metal x 2326. Output: buried contact (concentric box x 2548-2578,
 # y 3195-3222) with the poly y 3192-3212, west to the pad (2283,3202) of the metal x 2283.
-D 2598,3207:2655,3258
+# Re-read 2026-11-28 (run 4, R23/R42): the channel is x 2604-2648, 44 wide (was 57), read as rcs_w2's: the line
+# at x 2647 at the gate rows and the VSS rows (not at the node rows y 3212-3220), pink field at x 2656 below the
+# gate, one line x 2599-2602 in the west. No second patch (field west of the rail y 3264-3294, chip-2 stripped red
+# minus green -22..+7; the gap east about 0-20 against 26-52 on the node's strip and on the mux unit's diffusion).
+D 2598,3207:2655,3232                 # the node above the gate, across the rail
+D 2604,3228:2648,3258                 # the channel, down onto the VSS box shared with the mux unit
 D 2540,3190:2602,3227
 B 2538,3188:2582,3224
 P 2296,3192:2578,3212
