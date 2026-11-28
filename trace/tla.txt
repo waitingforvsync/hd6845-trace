@@ -113,8 +113,8 @@ P 3048,4762 x3196 y4636 x3022 w=19
 N P 3120,4762 rcs_cond_n
 # gate E0 = m2 on the upper part of the column: below it the column joins rail box 1 (VSS);
 # above it the column goes on north (next piece)
-D 3005,4650:3063,4663
-D 3028,4600:3063,4663
+D 3005,4650:3063,4671                 # (review round 5: lower edge line at y 4670-4672, px.py col 3018 4640 4716 2; drawn to 4663 before)
+D 3028,4600:3063,4671
 
 # ====================================================================
 # in3 = NOR(e3, e4): the same kind of small gate on the column x 3030-3063, one rail
@@ -123,10 +123,10 @@ D 3028,4600:3063,4663
 # diffusion strip WEST under the VSS rail (y 5186-5208) to its load; and from the load side
 # by a contact (2915,5250) up the thin metal x 2903-2923.
 D 3005,5122:3063,5142
-D 3030,5122:3063,5266
+D 3030,5122:3063,5276
 D 2965,5258:3008,5297                 # rail box below, contact to VSS
 C 2985,5276
-D 3000,5252:3063,5266
+D 3000,5252:3063,5276                 # (review round 5: lower edge line at y 5276, px.py col 3018 5242 5276 2, col 3036 5104 5304 4; drawn to 5266 before)
 # gate E3: poly y 5147-5167 from a pad with a contact (3283,5152) at the bottom end of bus
 # line E's upper piece
 P 3012,5157 x3270 w=20
@@ -244,8 +244,8 @@ C 2622,5110 s=24x40
 D 2598,5258:2652,5297                 # rail box, VSS contact
 C 2625,5278
 D 2550,5120:2605,5140
-D 2550,5120:2592,5282
-D 2550,5262:2605,5282
+D 2550,5120:2592,5275
+D 2550,5262:2605,5275                 # (review round 5: lower edge line at y 5274-5276, field from y 5280: px.py col 2575 5246 5294 2; drawn to 5282 before)
 # gate w2: poly y 5142-5164. At its west end it turns north under the metal x 2361-2389
 # (poly x 2346-2363, y 5015-5161: hidden in the metal shots) and comes back east along
 # y 5015-5032 to a buried contact on the node of the inverter below: w2 = NOT c1.
@@ -310,10 +310,10 @@ B 2684,5237:2708,5262
 D 2966,3014:3014,3063                 # VSS box above
 C 2985,3035 s=24x30
 D 3005,3039:3063,3059
-D 3030,3039:3063,3183
+D 3030,3039:3063,3195
 D 2966,3172:3014,3234                 # VSS box below
 C 2985,3200 s=24x40
-D 3000,3169:3063,3183
+D 3000,3169:3063,3195                 # (review round 5: the arm's lower edge line is at y 3194-3196, px.py col 3018 3160 3244 2 metal,metal1; drawn to 3183 before)
 B 3042,3098:3068,3131
 P 3045,3103:3095,3125
 P 3090,3098:3128,3130
@@ -352,7 +352,7 @@ B 2908,3155:2932,3182
 # ====================================================================
 # b1 = NOR(x1, a2): east unit at y 3515-3660 (in3's unit moved up 1607 px). Output by the
 # buried contact and a poly east to B1's bottom contact (3150,3590).
-D 3030,3478:3063,3662
+D 3030,3478:3063,3671
 # VSS box under the rail (contact (2990,3500)) and its join to the column's VSS section y 3478-3530 (the large
 # open diffusion between rcs_u3425's gate and gate x1). Re-read 2026-11-28 (run 3, R40's second half; it was ?D,
 # "join seen only as a heavy line at the rail's edge: assumed"): diffusion on both sides right up to ONE line of
@@ -365,7 +365,7 @@ D 2968,3470:3035,3528
 C 2990,3500 s=30x34
 D 2966,3655:3014,3725                 # VSS box below
 C 2985,3690 s=24x40
-D 3000,3648:3063,3662
+D 3000,3648:3063,3671                 # (review round 5: lower edge line at y 3670-3672, px.py col 3018 3640 3676 2; drawn to 3662 before)
 # gate x1: poly y 3538-3556, which comes from the east across the whole bus without a contact
 P 3012,3538:3400,3556
 N P 3300,3547 rcs_x1
@@ -384,7 +384,7 @@ C 3150,3590
 # over a channel; diffusion on both sides) and the part below links east to the VSS box.
 # The pad is the bottom end of a metal strap whose top end is the load gate of the inverter
 # rcs_u3425. So rcs_b1 = NOR(rcs_x1, rcs_a2, rcs_u3425).
-D 2935,3575:3048,3600                 # b1's strip under the rail
+D 2935,3583:3048,3607                 # b1's strip under the rail (review round 5: edge lines at y 3582 and y 3608 east of the rail, tan y 3586-3604 under it: px.py col 3018 / col 2980 3566 3620 2; drawn 8 px north before)
 D 2900,3562:2940,3668                 # box under thin E: b1 above the gate, VSS side below
 D 2935,3643:2970,3668                 # link to the VSS box under the rail
 P 2848,3615:2896,3656                 # the strap's bottom pad, contact (2865,3640)
@@ -431,8 +431,8 @@ N P 2959,3530 rcs_iso2958
 # rcs_c1's, 173 px lower). Output by the buried contact and a poly east to the bottom contact
 # (3192,3288) of bus line C's top piece, which runs north to y 2728 and west along
 # y 2718-2738 to about x 2822 (its west end: not looked at).
-D 3005,3218:3063,3236                 # arm from the VSS box above (2966-3014, 3172-3234)
-D 3030,3218:3063,3372
+D 3005,3210:3063,3236                 # arm from the VSS box above (2966-3014, 3172-3234); its upper edge line is at y 3208-3210 (review round 5; drawn from 3218 before)
+D 3030,3210:3063,3372
 D 2955,3350:3002,3395                 # VSS box below
 C 2978,3372 s=30x30
 D 2995,3350:3063,3372
@@ -513,7 +513,7 @@ P 3045,3882:3180,3902
 P 3172,3876:3214,3910
 C 3192,3892
 # load (the standard one)
-D 2925,3882:3048,3901
+D 2925,3890:3048,3909                 # (review round 5: the strip's edge lines are at y 3890 and y 3909, px.py col 3018 3872 3920 2 metal,metal1; drawn 8 px north before)
 D 2898,3882:2932,3915
 D 2913,3911:2929,3957
 D 2835,3882:2905,3909

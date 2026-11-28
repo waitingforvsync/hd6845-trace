@@ -538,6 +538,51 @@ was not examined; Ambiguities 3 and 4 of run 2); the three metals beyond the reg
 
 Round 4: no findings that change a connection.
 
+Round 5 (full review, 2026-11-28 15:07 +0000, a fresh agent on claude-fable-5-2, at commit 556b4842; images in
+`cache/scratch/tla/review-5/`, 21 used). Piece `r40b` of run 3 only: the nine units on the columns beside R3 and R1
+(x 2940-3090, y 3000-5310; x 2520-2660, y 5095-5310). Told to suspect: the join at (3010-3026, 3478-3530), made
+firm in this run (one diffusion, or two facing each other across the rail's edge; whether the open area east of it
+is diffusion at all); the same at the fourteen arms; a gate row running on under the rail, or a tap or second
+transistor between the rail's edge and the column or between the column and bus line A; the column's edges, a side
+branch, a column continuing through a field pocket; "nothing above the node" of `rcs_u3425`; the top of
+`rcs_cond`'s unit. It read the join at 5.5x in four shots and rows y 3486-3522, each arm at 4.2x in three shots
+with a row across it, all seventeen gate rows under the rails, column profiles down x 3078, x 3018 and x 2535 for
+undrawn rows, the field pockets, the node strips, `rcs_u3425`'s node and `rcs_cond`'s top at 5.5x, the extraction,
+`tools/unsure.py` and `tools/sameconn.py f5adf76a`.
+Found correct: the join (clean shot tan to x 3018, chip-2 metal plain from x 3021, both stripped shots one box
+colour up to the line; the open area is diffusion, chip-2 stripped red minus green 22-28 against 2-8 on the field
+east of the column); all fourteen arm joins (one edge line; where a box ends against field the line is double, 14
+px); no gate row under R3 or R1 (pink and olive at all seventeen rows, control rail gates 240/175; no lines across
+the rail in chip 2's metal shot); exactly two edge dips on every row, no undrawn poly row; every field pocket
+field; the band y 3824-3838 between `tl2`'s gate and gate `rcs_e3` diffusion; the node strips diffusion with no
+contact on `rcs_u3425`'s; field above `rcs_u3425`'s node (its box's poly is a closed cap ending at x ~3084, short
+of bus line A: still AMB-030); `rcs_cond`'s top; the nine equations.
+Findings, each checked by the tracer, **all geometry only**:
+1. Two node strips were drawn about 8 px north of where they are: `rcs_b1`'s (`D 2935,3575:3048,3600`) and
+   `rcs_bc3460`'s (`D 2925,3882:3048,3901`). Confirmed (`px.py col 3018 3566 3620 2 metal,metal1`: edge lines at
+   y 3582-3584 and y 3606-3608; `col 2980 3566 3620 2 acid1b`: tan y 3586-3604 under the rail; `col 3018 3872 3920
+   2`: lines at y 3890 and y 3908-3910; control `rcs_c1`'s strip, lines at y 3107 and y 3126 against 3105-3124
+   drawn). Fixed: y 3583-3607 and y 3890-3909. Same ends.
+2. Several arms were drawn 5-8 px off in y. Each arm measured (`px.py col 3018 Y0 Y1 2 metal,metal1` at the eleven
+   east arms, `col 2575` at the two west ones). Off by 7-12 px and fixed, with the column's end: `rcs_c1`'s lower
+   arm (lower edge line y 3194-3196, drawn to 3183), `rcs_u3288`'s upper (y 3208-3210, drawn from 3218), `rcs_b1`'s
+   lower (y 3670-3672, drawn to 3662), `rcs_cond`'s lower (y 4670-4672, drawn to 4663), `rcs_in3`'s lower (y 5276,
+   drawn to 5266), `rcs_in2`'s lower (y 5274-5276 with field from y 5280, drawn to 5282). Within 4 px and left: the
+   other seven. Left on purpose: `rcs_bc3460`'s upper arm (upper edge line y 3824, drawn from 3818): its top is
+   where `tl2`'s column meets it. Same ends.
+3. An observation, no change: at the join the rail's metal bulges east round its contact (chip 1's metal bright to
+   x 3012 at y 3488-3497), so every shot's edge line lies about 10 px east of its place at the arms; R3 is drawn
+   straight. This is why the line at the join is at x 3016-3026 (run 3's text above) and supports reading it as the
+   rail's edge line.
+Connections before and after the fixes (against 556b4842):
+`tools/t.sh tla sameconn.py 556b4842`: `connections identical`;
+`.venv/bin/python tools/sameconn.py 556b4842`: `connections identical`.
+Could not be checked: the 2-4 px directly under each edge line (the joins rest on diffusion seen on both sides:
+Ambiguity 1 of run 3); chip 2 under the rail by colour (fringes), only its metal shot's absence of lines; the
+loads west of R3, the rows east of x 3090 and the column outside the units' y ranges, which are outside the piece.
+
+Round 5: no findings that change a connection.
+
 ## Corrections from `tl1`-`tl4` (coordinator, from the handoffs of 2026-11-17/18)
 
 Each is in the named block's notes in full; the trace fixes are on main.
@@ -815,7 +860,7 @@ first cluster" (R40): every unit drawn on the column just east of R3 (x 3030-306
 | `rcs_in3` | 5122-5266 | `rcs_e3` 5157, `rcs_e4` 5240 |
 | `rcs_in2` (west) | 5120-5282 | `rcs_w2` 5153, `rcs_e4` 5240 |
 
-**Result: found as drawn. No connection changed, no geometry moved; one item lost its `?`.** `rcs_b1` =
+**Result: found as drawn. No connection changed; one item lost its `?`; review round 5 moved two node strips and six arm ends by 7-12 px (geometry only).** `rcs_b1` =
 NOR(`rcs_a2`, `rcs_u3425`, `rcs_x1`) is firm now (`tools/unsure.py --equations rcs_b1`; 1,002 of 1,464 equations
 firm, was 1,001; uncertain items 1,235, was 1,236). Full extraction 2,547 nets, 4,931 transistors, 0 errors, 0
 warnings; `tools/t.sh tla sameconn.py f5adf76a` and `.venv/bin/python tools/sameconn.py f5adf76a`: connections
