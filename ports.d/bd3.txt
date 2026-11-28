@@ -1,0 +1,42 @@
+# NAME        LAYER  X,Y              DIR  note
+# bd3: below the register-select gates. File made in run 3 (2026-11-28) from the notes' Ports table; each place is
+# where the drawn wire ends. DIR at a place: in = the signal arrives there from outside, out = it leaves there
+# (a through wire of sel's is `in` at the top edge and `out` where it goes on).
+wr_stb_n      M      14307,16739      in   strobe: sel's metal x 14307 from the north (bd3 draws it from its corner at y 16739)
+wr_stb_n      M      14912,16750      in   strobe on T0, from sel
+wr_stb_n      M      15561,16550      in   strobe on T15, from sel
+wr_r5         M      14954,16550      in   T1, from sel
+wr_r3         M      14998,16550      in   T2, from sel
+wr_r8         M      15041,16550      in   T3, from sel
+wr_r9         M      15085,16550      in   T4, from sel
+wr_r11        M      15128,16750      in   T5, from sel (it starts at a pad in sel's last row)
+wr_r10        M      15171,16550      in   T6, from sel
+rsel13        M      15214,16550      in   T7, from sel; ends at the contact (15214,16864)
+rsel12        M      15258,16565      in   T8, from sel; ends at the contact (15258,16668)
+wr_r14        M      15301,16550      in   T9, from sel
+wr_r15        M      15344,16550      in   T10, from sel
+rsel16_buf    M      15388,16550      in   T11, from sel
+rsel17_buf    M      15431,16550      in   T12, from sel
+rsel15_buf    M      15474,16550      in   T13, from sel
+rsel14_buf    M      15517,16550      in   T14, from sel
+wr_r7         P      14090,16853-16875  out  sel's gate output: poly west along y 16864, goes on past x 14040
+wr_r5         M      14090,17041      out  west along y 17041
+wr_r3         M      14090,17084      out  west along y 17084
+wr_r8         M      14090,17128      out  west along y 17128
+wr_r9         M      14090,17172      out  west along y 17172
+wr_r11        M      14090,17215      out  west along y 17215
+wr_r10        M      14090,17258      out  west along y 17258
+rsel12_buf    P      14190-14208,17300  out  R12's select buffered (driven here): poly south on x 14199; regs follows it
+wr_r12        M      15214,17300      out  driven here (bd3_rwr, R12): on T7's line south; regs follows it
+wr_r14        M      15258,17300      out  on T8's line south
+wr_r15        M      15301,17300      out  on T9's line south
+wr_r13        M      15344,17300      out  driven here (bd3_rwr, R13): on T10's line south
+rsel16_buf    M      15388,17300      out  T11 south
+rsel17_buf    M      15431,17300      out  T12 south
+rsel15_buf    M      15474,17300      out  T13 south
+rsel14_buf    M      15517,17300      out  T14 south
+rsel13_buf    P      15502-15522,17500  out  R13's select buffered (driven here): poly south on x 15512; regs follows it
+vcc           M      14584-14634,17300  -   supply rail of the gate column, on south
+vcc           M      14060,16907-16954  -   the wide rail, on west
+vss           M      15663-15718,17380  -   ground rail of the right-hand column (regs draws it on to y 17527)
+vcc           M      15795-15890,17380  -   supply rail of the right-hand column (regs draws it on to y 17500)

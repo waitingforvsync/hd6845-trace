@@ -38,7 +38,9 @@ C 15258,16668
 P 15272,16668 x15196 y16778 w=18
 P 15205,16778 x14742 w=22          # gate bar of the first inverter
 # first inverter (right half): pull-down under the right ground rail, weak load
-D 14756,16755:14890,16797          # ground above the bar (joins the R11 NOR's strip), output below
+D 14774,16750:14818,16800          # ground above the bar (the R11 NOR's strip), the channel, the output below: under the rail only.
+                                   # Run 3: the bar lies on field east of the rail (no edge crosses it x 14822-14896, field north of it
+                                   # at x 14830, 14850, 14884); runs 1-2 drew the channel 134 wide, x 14756-14890
 D 14700,16797:14860,16816          # output band: west to the load, east to the buried contact
 B 14843,16803:14879,16836          # output to poly
 D 14845,16795:14877,16834

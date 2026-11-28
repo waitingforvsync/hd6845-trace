@@ -18,8 +18,11 @@
 - The strobe has no driver inside the region; it was followed east to its driver at
   x 15900-16270, y 15030-15160 (package bd2's area), which is traced too:
   **strobe = NOT e_b**, one big inverter. So wr_rN = rselN AND E.
-- Not traced: anything south of y 17100 except T3-T6's corners and the R13 buffer. The
-  loads of the three new right-hand cells are the schematic (`?`) loads of sel's cells.
+- Not traced: anything south of y 17100 except T3-T6's corners and the R13 buffer.
+- **Run 3 (2026-11-28)**: the two strobe pairs of the right-hand column (R12, R13) are `bd3`'s own cell
+  `bd3_rwr`, drawn from the photos with real loads (no `?` item), and the first inverter of the R12 select
+  buffer has its real width (44, was 134). No connection changed. Still schematic: the two loads of the R13
+  select buffer (`sel`'s cell `sel_rbuf`, south of y 17100). See "Run 3".
 - Every piece was checked by overlay (1.1x-1.65x for wiring, 3-6x at the junctions
   that decide a net: the strobe link, the driver's output and input, the rsel12 bar
   under the tracks).
@@ -34,7 +37,7 @@
 | Wide rail | y 16907-16954, x 14060-14634 | joins the supply rail at its east end (seen at 1.1x and 1.65x, no dark line between); so `vcc`. Runs on west of x 14060 and turns north near x 13970-14030 |
 | Strobe link | poly, contact 14239,16865 - x 14242 south - y 16996 east - contact 14673,16997 | joins `wr_stb_n` to T0 (`wr_stb_n`) |
 | Horizontal bundle | y 16998-17258 (and on to 17432), x < 14912 | T0-T6 after turning west, pitch 43.3. Each crosses the supply rail in poly between two contacts (x 14672/14713 east, 14456/14499 west, alternating) |
-| Right-hand gate column | x 15540-15890, y 16540-17360 | cell `sel_rwr` (from sel.txt) twice more: dy 600 (R12) and dy 900 (R13); then `sel_rbuf` at dy 2258 (R13 buffer) |
+| Right-hand gate column | x 15540-15890, y 16490-17360 | the circuit of `sel`'s cell `sel_rwr` twice more, since run 3 as `bd3`'s own cell `bd3_rwr` (master at R12, y 16490-16855; R13 at 0,304); then `sel_rbuf` at dy 2258 (R13 buffer) |
 | Track shuffle | x 15214-15344, y 16860-17040 | T8, T9, T10 each step one track left where the track to their left has ended |
 
 ## Logic
@@ -102,7 +105,7 @@ y 16651, down x 14135 and west again along y 16864 (4x), out of the region.
 
 ### R12 select buffer (row y 16740-16870)
 
-    rsel12_bufn = NOT rsel12        (right half; pull-down W/L 134/22, weak load 27/56)
+    rsel12_bufn = NOT rsel12        (right half; pull-down W/L 44/22 since run 3 (was drawn 134/22), weak load 27/56)
     rsel12_buf = NOT rsel12_bufn       (left half;  pull-down W/L 135/22, load 64/31)
 
 - Input: T8's upper part (rsel12) ends at a contact at (15258,16668). Poly from it goes
@@ -122,17 +125,20 @@ y 16651, down x 14135 and west again along y 16864 (4x), out of the region.
 
 ### Right-hand gate column, continued
 
-    rsel12_n = NOT rsel12     wr_r12 = NOR(rsel12_n, wr_stb_n)     gates at y 16556; 16682, 16772
-    rsel13_n = NOT rsel13     wr_r13 = NOR(rsel13_n, wr_stb_n)     gates at y 16856; 16982, 17072
+    rsel12_n = NOT rsel12     wr_r12 = NOR(rsel12_n, wr_stb_n)     gates at y 16562; 16691, 16779
+    rsel13_n = NOT rsel13     wr_r13 = NOR(rsel13_n, wr_stb_n)     gates at y 16866; 16995, 17083
+
+(Gate positions as read in run 3; runs 1-2 had them 6-12 px north, from `sel`'s cell placed at multiples of 300.)
 
 - rsel12: contact (15258,16560) on T8, poly east (in sel.txt).
 - rsel13: T7 ends at a contact at (15214,16864); poly east along y 16862 to the inverter.
   The same poly also runs south from the pad along x 15216, directly under the metal
   that occupies T7's line below y 16902 (which is wr_r12), to y 17168, and east along
   y 17168 to the R13 buffer (below).
-- Strobe gates: contacts on T15 at (15560,16772) and (15560,17072); T15 ends there.
-- Outputs: poly west along y 16732 to a contact at (15258,16734) (T8's lower part starts
-  there), and along y 17032 to a contact at (15344,17036) (a new line starts there on
+- Strobe gates: contacts on T15 at about (15559,16780) and (15559,17084) (run 3; runs 1-2: (15560,16772),
+  (15560,17072)); T15 ends there.
+- Outputs: poly west along y 16735 to a contact at (15258,16734) (T8's lower part starts
+  there), and along y 17038 to a contact at (15344,17036) (a new line starts there on
   T10's x).
 
 ### R13 select buffer (right-hand column, y 17130-17360)
@@ -199,11 +205,13 @@ turn west, at y 17302, 17346, 17388, 17432, and cross the supply rail the same w
 | rsel17_buf | metal | 15431,17100 (bottom) | out | |
 | rsel15_buf | metal | 15474,17100 (bottom) | out | |
 | rsel14_buf | metal | 15517,17100 (bottom) | out | |
-| e_b | metal | 16167,16410 | in | input of the strobe's driver; joins trunks' `e_b` (x 16170, y 16400) |
-| vss | metal | 16012-16065, 14990-15180 | - | rail the strobe driver's source sits on; only this piece drawn |
 | vcc | metal | 14584-14634, 17100 (bottom); 14060, 16907-16954 (west) | - | supply rail and the wide rail |
 | vss | metal | 15663-15718, 17100 (bottom) | - | ground rail of the right-hand column runs on |
 | vcc | metal | 15795-15890, 17100 (bottom) | - | supply rail of the right-hand column runs on |
+
+The same ports, one per line with the place where each drawn wire ends, are in `ports.d/bd3.txt` (made in run 3).
+The two rows of the strobe's driver (`e_b`, its ground rail) left this table in run 3: that drawing was removed
+from the trace by the coordinator (the driver is `bd2`'s).
 
 ## Ambiguities
 
@@ -229,22 +237,32 @@ turn west, at y 17302, 17346, 17388, 17432, and cross the supply rail the same w
   (16255,15085). So the strobe is the inverter's output (NOT `e_b`), not `e_b`.
 - sel.txt draws `wr_stb_n`'s metal straight down to y 16760; it really turns west at
   y 16739. Harmless (the overshoot touches nothing).
-- Loads of `sel_rwr` (R12, R13 pairs) are sel's schematic `?` loads; at 1.3x the real
-  load blocks are where the cell puts them. Exact outlines not traced.
-- Pull-down diffusion of the two buffer inverters: the gate bars extend 50-70 px
-  beyond the ground rail on the outer side with only slivers of diffusion visible above
-  and below them; drawn as full-width transistors (W about 135). W is uncertain by 30%.
+- Loads of `sel_rwr` (R12, R13 pairs): **settled in run 3** (real geometry in `bd3_rwr`). The R13 select
+  buffer (`sel_rbuf` at dy 2258) still has `sel`'s two schematic `?` loads.
+- Pull-down diffusion of the two buffer inverters: **settled in run 3**. The first inverter's bar lies on
+  field east of its rail (W 44, under the rail only); the second inverter's bar has diffusion on both sides
+  for its whole drawn width (W 135: edge lines across the bar at x 14352 and x 14485).
 
 ## Not done
 
-- Around the strobe's driver (bd2's area): the other taps of `e_b`, where the rail
-  x 16012-16065 comes from, exact outline of the drain (drawn from 2x and 3x views).
-- Where `rsel12_buf` (poly x 14199, south of y 17700) and `rsel13_buf` (poly x 15512, south
-  of y 17700) go.
-- The right-hand column goes on below the R13 buffer: next gate bar at y 17427, fed
-  from a contact at (15560,17430) on a metal line that comes up x 15560 from the south
-  (not T15, which ended at y 17072).
-- The tracks south of y 17100 and the west-going bundle beyond x 14100.
+As of run 3 (2026-11-28). The older items are done elsewhere: the strobe's driver is `bd2`'s; `rsel12_buf`,
+`rsel13_buf` and the tracks south of y 17100 are followed by `regs`; the unit below the R13 buffer is `regs`'
+inverter (`d7_out_n`).
+
+- **The R13 select buffer** (x 15575-15895, y 17105-17365; `@inst sel_rbuf 0,2258` in `trace/bd3.txt`): its two
+  loads are `sel`'s schematic `?` shapes, its pull-downs are drawn 133 wide from a low-zoom view, and the copy is
+  placed by `sel`'s pitch of 260 (not checked against the photos in run 3). To do as run 3 did the strobe
+  pairs: `tools/railprof.py 15666 15712 17100 17380`, the edge lines across each gate bar west of the rail
+  (`px.py row` along the bar's centre in both metal shots), each load's plate, strip and tie box. The loads
+  should look like the strobe inverter's (a plate half under the supply rail, tie box at its north-west corner).
+  It lies south of the row's region (y 17100), in `busc`'s.
+- The same for `sel`'s own six cells of this column (four `sel_rbuf`, two `sel_rwr`, y 14850-16550): `sel`'s
+  file, not this package's. `bd3_rwr` placed at 0,-304 and 0,-608 is the starting point for R14 and R15
+  (`tools/dbus_localmatch.py` puts them there, scores 0.80-0.89; not checked by overlay).
+- The west-going bundle beyond x 14100 (`wr_r5`, `wr_r3`, `wr_r8`, `wr_r9`, `wr_r11`, `wr_r10`, and `wr_r7`'s
+  poly): drawn to x 14090; `bd1`'s notes say `wr_r9`, `wr_r11`, `wr_r10` west of x 14100 lie in `busc`'s region.
+- The R12 select buffer's two loads and the second inverter were not re-read in run 3 (drawn by run 1 from 3-6x
+  views, no `?` item).
 
 ## Corrections (coordinator, from the handoffs of 2026-11-19, fourth batch)
 
@@ -374,6 +392,32 @@ all`, `row 17112 15600 15642 3 all`): residue on chip 1.
 - `tools/opendiff.py 14100 16550 15850 17100` lists three "green" areas at x 15822-15850 as undrawn diffusion:
   they are field under the middle of the supply rail (greenish grey in the clean shot there), which the tool's
   docstring excludes.
+
+### Piece `buf`: the R12 select buffer's pull-downs (gate column, y 16740-16845)
+
+The notes carried both pull-downs as "W about 135, uncertain by 30%": each gate bar runs 50-90 px beyond its
+ground rail. Read by the same test as the strobe cell (an edge line across the bar; diffusion against both of
+the bar's edges):
+
+- **First inverter (right half, ground rail drawn x 14763-14815): W 44, not 134.** East of the rail no edge line crosses the
+  bar from x 14822 to x 14896 in either metal shot (`px.py row 16778 14730 14906 4`; the dip at x 14898-14902 is
+  T0's metal edge), and there is field directly north of the bar at x 14830, 14850 and 14884 (`px.py col`: one
+  edge line y 16760-16766, then 157-166/131-139/75-85; chip 2's stripped shot red over green by 1-7) and, south
+  of it, a 6 px lighter gap before the output band's own edge (x 14830, 14850) or field (x 14884). So the bar
+  lies on field there. Under the rail the channel runs from x 14773 (edge in the clean shot at 14770-14774) to
+  x 14817 (bright salmon to 14814, edge 14818-14822); the land north of the bar is x 14776-14814 (`px.py row
+  16755`: tan, with pink field under the rail's margin west of it), and it is the foot of the R11 NOR's strip
+  (`sel`). The diffusion `D 14756,16755:14890,16797` is redrawn `D 14774,16750:14818,16800`. Pull-down against
+  load is now 2.0 against 0.48 (was 6.1 against 0.48).
+- **Second inverter (left half, ground rail drawn x 14408-14460): W 135 stands.** Edge lines cross its bar at x 14348-14356
+  and x 14484 in both metal shots and the clean shot (`px.py row 16778 14296 14508 4`), and between them the bar
+  has diffusion on both sides in the open stretches (`px.py col 14380`, `col 14474`: a sliver y 16752-16759
+  north of the bar and the output band south of it, pinker than field in chip 2's metal shot and red over
+  green by 23-31 in its stripped shot); west of the edge line there is field on both sides (`px.py col 14338`).
+  Against its load of 64/31 that is 6.1 against 2.1: a driver, where 44 would give 1.
+
+`tools/t.sh bd3 sameconn.py 0ed5ae7`: connections identical (`rsel12_bufn` = NOT `rsel12`, `rsel12_buf` = NOT
+`rsel12_bufn`, as before). Overlay `b2-inv1-new.png` (2.8x, metal and clean shot).
 
 ## Review
 
