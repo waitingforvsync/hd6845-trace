@@ -66,11 +66,12 @@ D 14353,16747:14488,16798          # ground above the bar (joins the R7 NOR's st
 D 14370,16795:14535,16817          # output band: west to the buried contact, east to the load
 B 14350,16803:14383,16843          # output to poly
 D 14352,16800:14381,16841
-B 14479,16805:14518,16838          # load gate tied to the output
-D 14481,16803:14516,16836
-P 14505,16832 x14580 w=18          # load gate poly from the tie ...
-P 14551,16750:14582,16841          # ... to the load gate block
-D 14529,16756:14632,16820          # load: output side, channel under the block, supply contact land
+B 14481,16810:14513,16841          # load gate tied to the output: a box hanging under the output band (plain centre y 16821-16833)
+D 14483,16803:14511,16838          # ... a tab of the band down into it
+P 14488,16822:14508,16851          # ... the foot row's end up into it
+P 14498,16843 x14580 w=16          # the load plate's foot: a poly row west along y 16835-16851 (run 4: runs 1-3 had it 11 px north)
+P 14551,16744:14582,16851          # load plate (poly from y 16744 to y 16851 at x 14566)
+D 14529,16756:14632,16823          # load: output side, channel under the plate (edges across it at y 16757 and y 16825), supply contact land
 C 14609,16790 s=28x44              # supply contact shared by both loads
 N D 14430,16806 rsel12_buf            # rsel12 buffered
 # output: poly west along y 16822, then south along x 14199 (under the wide rail and
@@ -140,10 +141,45 @@ C 15214,16864
 P 15200,16862 x15612 w=22          # rsel13: poly east to its inverter
 P 15216,16870 y17168 x15612 w=18   # rsel13: poly also south, under the metal of x 15214 (which is wr_r12 there),
                                    # then east along y 17168 to its buffer
-# R13 select buffer: sel's two-inverter cell once more, below the R13 strobe pair
+# R13 select buffer: two inverters in series below the R13 strobe pair, read at its own place (run 4).
+# Until run 4 a copy of sel's cell `sel_rbuf` (schematic loads, both pull-downs drawn 133 wide).
 M 15690,17100 y17380 w=55          # ground rail runs on
 M 15795,17100:15890,17380          # supply rail runs on
-@inst sel_rbuf 0,2258 tag=13
+# --- first inverter: the strobe cell's inverter once more, 608 px (two pitches) south of R12's
+D 15665,17100:15708,17186          # ground land 1 (the R13 NOR's land 3, with its contact) and the channel under the rail
+P 15588,17170 x15729 w=20          # gate bar 1: rsel13's poly from the west; on field west of the rail
+D 15662,17182:15724,17209          # output band under the rail
+D 15634,17194:15666,17207          # ... a wire west to the output box
+D 15606,17193:15636,17219
+B 15606,17193:15636,17219          # output to poly
+P 15625,17206 x15587 y17301 x15758 w=22    # output poly: west, south, then east as gate bar 2 (end cap at x 15758)
+N D 15690,17195 rsel13_bn          # NOT rsel13
+D 15720,17193:15775,17208          # output wire east of the rail
+D 15771,17188:15852,17216          # strip under the plate (edges across the poly at y 17187, 17215) and neck
+P 15780,17170:15834,17231          # load plate, half under the supply rail
+D 15848,17159:15890,17214          # supply land (20 px shorter than the strobe cell's)
+C 15862,17186 s=24x50              # supply contact
+D 15756,17146:15770,17208          # tie: a diffusion arm north from the wire ...
+D 15756,17146:15786,17164          # ... turning east under the plate's north arm
+P 15777,17140:15800,17174          # the plate's north arm
+B 15772,17140:15800,17166          # tie box (plain centre at (15787,17152) in both metal shots)
+# --- second inverter: wide pull-down, strong load
+C 15683,17263 s=30x34              # ground: land 2
+D 15663,17240:15712,17290          # ground land 2 under the rail
+D 15609,17269:15741,17327          # a sliver north of the bar, the channel (edges across the bar at x 15609 and 15741), the output band
+D 15662,17312:15741,17338          # output band, deeper under the rail and east of it
+D 15606,17320:15636,17356          # output box, hanging under the band's west end
+B 15604,17328:15636,17356          # output to poly
+N D 15690,17322 rsel13_buf         # rsel13 buffered
+D 15735,17322:15797,17334          # output wire east to the load's strip
+D 15793,17277:15852,17345          # strip under the plate (W 68)
+P 15805,17262:15844,17374          # load plate under the supply rail
+D 15848,17255:15892,17345          # supply land
+C 15863,17298 s=24x56              # supply contact
+P 15746,17366 x15830 w=16          # the plate's foot: a poly row west along y 17358-17374 ...
+P 15747,17340:15769,17374          # ... its end up into the tie box
+D 15745,17330:15771,17360          # a tab of the output wire down into the box
+B 15743,17333:15773,17362          # tie box (plain centre at (15758,17346))
 P 15620,17340 x15512 y17500 w=20   # its output: poly west along y 17340, then south along x 15512
 # outputs: poly west to a contact on a track
 P 15632,16735 x15244 w=20          # wr_r12: from the NOR's output box west to T8's lower part
