@@ -75,7 +75,7 @@ M 16255,15076 y15222 x16168 y15442
 # y 15456-15465 orange in both chips, 34 px without metal below the centre against 16-19 px at the other taps.)
 C 16167,15432
 P 16152,15418:16184,15448              # pad
-P 16168,15440 y15505 16210,15565 y15612 w=24
+P 16168,15440 y15518 16210,15560 y15612 w=24   # (review round 5: the diagonal 4-6 px further south: in the gap at x 16190 the poly is y 15529-15551)
 P 16205,15598:16232,15614              # strip 1 into the block (continuous salmon x 16206-16226 under the metal)
 P 16226,15598:16248,15662              # block
 P [ 16118,15664 16152,15664 16184,15643 16232,15643 y15657 16186,15657 16154,15680 16118,15680 ]   # band

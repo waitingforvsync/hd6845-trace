@@ -1325,3 +1325,62 @@ After the fixes (commit before them f15d5ae5):
 Recorded 2026-11-28 04:44 +0000.
 
 Round 4: no findings that change a connection.
+
+### Round 5 (full review), 2026-11-28, piece `ggw`
+
+One fresh reviewer (Claude Fable 5.2), on commit 118fd0c0, images in `cache/scratch/bd2/review-5/` (views to
+about 4x in three and four shots; mostly `tools/px.py`, `tools/textmap.py`, `tools/tl5_tracks.py`,
+`tools/follow.py`, `tools/bd2_umap.py`, `tools/eof_tee.py`, the extraction). It was given the piece's nine
+claims (the two metals on the track x 16169 and the break between them; `e_b`'s corner, pad and taps; strip 1
+with its block and band; `e_b`'s branch, strip 2 and G_b; `ar_load_n`'s metal from G2's pad to the pad
+(16205,15690), the bar and the cell; the other metal from (16207,15778) and G_e; G_d's row between the two
+pads; the thin metal's three crossings; field between all of these) and told to suspect: the break (bare in
+both chips, or a dim stretch of one metal); the join of the horizontal metal to the lower trunk; the metal
+x 16200-16222 (one piece, a contact on any of the three polys under it, where it stops); the 12 px between the
+block's foot and the pad and bar, and G_d's row against the two pads; each long poly end to end, strips 1 and 2
+where both lie under one metal, a poly column in the gap between the metals, anything else leaving a pad; the
+thin metal over G_d and G_e, which an automatic pad test calls pad-like; the bar, and the undrawn cell 135 px
+north of it.
+
+It reported **no findings**, and three remarks it called geometry only, each checked by the tracer:
+
+1. **Strip 1's diagonal lies about 6 px south of where it was drawn in the gap between the two metals.**
+   Confirmed: `tools/px.py col 16190 15514 15566 3 metal,metal1,acid` has the poly at y 15529-15551 between
+   its two edge lines (centre y 15540; drawn centre y 15536, in a diagonal drawn steeper than it is), and
+   `tools/bd2_umap.py 16156 15500 16228 15580 4 4` has it leave the trunk at y 15520-15532 and reach the metal
+   x 16200-16222 at y 15540-15556. Redrawn (`P 16168,15440 y15518 16210,15560 y15612`). Geometry only: a path
+   between the same two ends.
+2. **The upper boxed cell (16243-16292, 15548-15576) is undrawn**, with a closed west end and an orange patch
+   at x 16247-16254. Known (Ambiguity 22); the reviewer found field west, north and south of it in both chips
+   and pink under the thin metal above and below it: no poly reaches it, and it is not joined to the block
+   below. Left undrawn. No connection.
+3. **The upper trunk is dark for 13 px (chip 2) over G2's band**, with no hole and no pad: an edge underneath.
+   Nothing to change.
+
+Checked and found as drawn: the break (y 15456-15465 orange in both chips like five open-poly controls nearby,
+35 px without metal against 13-20 px at the other taps, `tools/follow.py --gap 16` from the north ending at
+(16165,15438)); `e_b`'s corner (the dark line x 16154-16162 is 9 px and as deep as a known poly edge under the
+same trunk, the clean shot's pink unbroken to strip 1's edge, a field pocket between the arm and the pad
+above, the follower turning west and north to (16123,15388)); strip 1, the block and the band (salmon under
+both metals, orange in the gap, the block one poly, the band orange to x 16126, no holes); the branch, strip 2
+and G_b, with pink field between strips 1 and 2 under the metal at y 15512-15536 and no poly column in the gap
+x 16182-16198 over its whole length; field all round every pad; the metal x 16200-16222 one piece from y 15300
+to y 15690 (longest dark stretch 16 px, holes only at the two contacts), the bar reaching the cell and the arm
+the rail; no metal y 15700-15775 in either chip and a new metal from (16207,15778); G_d's row continuous
+x 16185-16260 with field on both sides; the thin metal over G_b, G_d and G_e (clean shot salmon, red minus
+green 29-77, no ring, no widening, against the contact at (16274,15873)); the block's foot against the pad and
+bar (field at x 16228-16252, y 15664-15676, pink under the metal) and against `bd2_x`'s band (field
+x 16252-16288); `tools/eof_tee.py` on eleven poly stretches: no branches. Not checked: the `?B` window of the
+lower cell and the `?M` stretches (excluded by the brief; it notes that `tools/tl5_tracks.py` reads the clean
+shot green over both cells, -16 and -17, as over the real contact, -11: Ambiguity 22 stands as a reading);
+poly continuity across the 6-8 px edge lines at metal edges, which is inferred; anything west of x 16118 or
+east of x 16312.
+
+After the fix (commit before it 118fd0c0):
+
+    tools/t.sh bd2 sameconn.py 118fd0c0              connections identical
+    .venv/bin/python tools/sameconn.py 118fd0c0      connections identical
+
+Recorded 2026-11-28 05:17 +0000.
+
+Round 5: no findings that change a connection.
