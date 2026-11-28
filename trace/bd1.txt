@@ -415,7 +415,7 @@ P 13902,15782:13958,15806          # the block
 # Nested jogs at y 15087-15176 (3.1x metal view): each steps one track east after the track
 # east of it has ended. k15 steps west and is rc_eq_r4 (drawn with the gate column).
 # k7: east at y 15176 to k8's position, south to a contact at 13432,15888; poly east along y 15889
-# under six lines into the gate column, where it ends on the buried contact of box B1 (run 5, piece eol).
+# under five lines into the gate column, where it ends on the buried contact of box B1 (run 5, piece eol).
 M 13391,14690 y15176 x13435 y15901 w=20
 C 13432,15888
 P 13418,15874:13449,15904
@@ -605,7 +605,7 @@ N M 12000,18429 eof_w16432
 # edge lines of what lies under it; the clean shot pink or protected under all of it). A bump round the contact on bar R.
 M 13843,15840 y16135 w=54
 M 13856,15882:13886,15918
-# --- T1. h_eq_r0's row (k7's poly, firm since this run: orange in every gap, salmon under each of the six tracks with
+# --- T1. h_eq_r0's row (k7's poly, firm since this run: orange in every gap, salmon under each of the five tracks with
 # edge bars only, no branch) ends on a pad in a heavy-outlined nested box B1: a buried contact onto a land.
 P 13695,15889 x13790 w=18
 P 13759,15877:13793,15903
@@ -634,11 +634,18 @@ D 13823,16040:13880,16160
 C 13843,16108
 D 13878,16040:13928,16140
 D 13778,16101:13825,16123          # the ground land's west end beyond the rail (plain, a diffusion: stripped shot 16-23)
-?D 13797,16118:13820,16165         # under G2's west arm, to X's diffusion west of the rail (not measured; changes W only)
+?D 13778,16118:13820,16165         # under G2's west arm, to X's diffusion west of the rail (the reviewer: its edge line
+#                                    crosses the arm at x 13775; changes W only)
+# the ground land's north-east tab east of X's metal (13938-13952, 16088-16104: the clean shot is one flat tan from
+# under the metal to x 13938 at y 16097; a ring-like box in the metal shots, first drawn as a tie), and the channel
+# under G2 as far as the land's east edge, the dark line x 13950-13954 across the band
+D 13926,16088:13950,16136
 # the inverter's node: D1 runs east under X's metal, then north-east (its north-west edge is the diagonal line from
 # (13905,16036) to (13930,16005)) into the narrow strip K2 between X's metal and the load (x 13937-13948), which runs
-# north to a closed arc at y 15963 and south past the load to a small box at y 16087-16103
-D [ 13878,16040 13905,16040 13934,16012 13950,16012 13950,16102 13940,16102 13940,16054 13878,16054 ]
+# north to a closed arc at y 15965. K2 ENDS in the south at y 16046 (an edge line y 16044-16050 crosses it; south of
+# it, between G1's end and the column, is field: review round 3)
+D [ 13878,16040 13905,16040 13934,16012 13950,16012 13950,16046 13932,16046 13932,16054 13878,16054 ]
+D 13936,15968:13950,16014
 N D 13944,16030 h_eq_r0_q_n
 # its load: plate x 13954-13991 (an edge line across it at y 16008-16012), supply land with a contact on the VCC rail
 P 13954,15994:13991,16047
@@ -653,12 +660,8 @@ P 13966,16040:13990,16128
 P [ 13763,16128 13820,16129 13873,16130 13883,16107 13990,16107 13990,16129 13883,16129 13873,16149 13820,16150 13763,16151 ]
 N P 13975,16080 bd1_q3
 @alias h_eq_r0_q_n bd1_q3
-# the plate's ties to its node, both uncertain: a small heavy-outlined box (13937-13953, 16087-16103) at K2's south
-# end against the foot of the column, and a box of the usual size at the plate's north end beside K2's arc
-?P 13937,16087:13954,16110
-?B 13935,16085:13956,16104
+# the plate's tie to its node, uncertain: a box of the usual size at the plate's north end beside K2's arc
 ?P 13954,15962:13980,15996
-?D 13936,15965:13950,16014
 ?D 13948,15965:13980,15990
 ?B 13950,15960:13982,15992
 # --- X's metal from the contact (13917,16155) on the driver's node north to a contact on a diffusion box E
@@ -669,11 +672,15 @@ D 13907,15892:13958,15945
 # --- the hold device. Bar R: a poly with a contact from the rail (13870,15900: ring, 12 px centre, green hole), down
 # the rail's east side into a plate x 13791-13875, y 15967-16023. Two lines cross the plate (y 15987-15990 and
 # y 16010-16013) and the band between them is brighter: the edges of a diffusion strip under it, as in rdp3_lat.
-# The strip is measured in the gap east of the rail (px.py col 13889: diffusion y 15990-16005, field below it) and is
-# not seen under the plate; from the gap it is taken to join the column K1 under X's metal that leaves box E south.
-# K1's layer and that junction are not resolved (Ambiguities): strip and K1 are drawn uncertain.
-P [ 13857,15878 13884,15878 13884,15914 13875,15914 13875,16023 13791,16023 13791,15978 13812,15967 13857,15967 ]
+# The strip is not seen under the plate (drawn uncertain). East of the rail it is a block of diffusion in the gap
+# (13882-13899, 15990-16008; px.py col 13889), and from the block a narrow diffusion runs NORTH in the gap between
+# the rail and X's metal (x 13889-13897, plain and unbroken in both metal shots from y 15932: px.py col 13893) to the
+# south-west corner of box E, where the box's outline is weak (y 15929-15937; the neck is drawn uncertain). Found by
+# review round 3: the first drawing had a column under X's metal instead, where there is no diffusion.
+P [ 13857,15878 13884,15878 13884,15914 13875,15914 13875,16023 13791,16023 13791,15978 13814,15978 13814,15967 13857,15967 ]
 C 13870,15900
-?D 13780,15990:13910,16010
-?D 13908,15940:13927,16012
+?D 13780,15990:13886,16010
+D 13882,15990:13899,16010
+D 13888,15932:13899,15995
+?D 13894,15927:13910,15939
 A 13795,15985:13870,16015 kind=hold

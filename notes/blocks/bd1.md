@@ -735,9 +735,10 @@ uncertain strip); full extraction 2,547 nets (was 2,545), 4,930 transistors (was
 ```
 h_eq_r0_q    <- h_eq_r0  while ck_out is high         T1: pass transistor, 91/21 (35/21 if the land stops short of the bar)
 h_eq_r0_q_n  =  NOT h_eq_r0_q                         G1 105/21 under the ground rail, load 34/37 (marked: the load's tie)
-rst_a_n      =  NOR( rst_a, h_eq_r0_q_n )             G2 119/18, a second pull-down beside the existing one in X's driver
+rst_a_n      =  NOR( rst_a, h_eq_r0_q_n )             G2 141/19, a second pull-down beside the existing one in X's driver
                                                       (marked: G2's gate is the load's plate, `bd1_q3`; the tie again)
-h_eq_r0_q   <-> rst_a_n                               hold device 20/84, gate on vss (uncertain: the strip and its east end)
+h_eq_r0_q   <-> rst_a_n                               hold device 20/84, gate on vss (uncertain: the strip under the plate, and the
+                                                      neck where its wire meets the contact box of X's metal)
 ```
 
 **What it is.** A latch of the family of `rdp3_lat` (pass transistor, inverter, second inverter, weak hold device
@@ -787,7 +788,7 @@ contact (13843,16108) | gate G2 y 16130-16149 | X's node (the existing diffusion
   below the row, the strip x 13832-13852 east of bar L (closed by an arc at y 15895) and the wire W. Bar L's body is
   over diffusion (salmon 236-245 against 198-209 for its top end over field; the line across it at y 15890-15893).
 - **The row from the track is now firm** (run 1 drew it uncertain "to about x 13700"): `px.py row 15889 13440 13762 6
-  metal,acid,acid1b` has poly in every gap between the six tracks it passes (orange, chip-2 blue 48-68) and salmon
+  metal,acid,acid1b` has poly in every gap between the five tracks it passes (x 13476, 13520, 13562, 13630, 13672) (orange, chip-2 blue 48-68) and salmon
   under each; `tools/t.sh bd1 textmap.py 13460 15868 13690 15912 3` has each track bright across the row between the
   row's two edge bars, no ring and no hole; `tools/eof_tee.py h 15880 15898 13455 13750`: no branch.
 - **W, B2, G1.** W runs south as a narrow diffusion wire x 13767-13785 (plain between two edge lines; classes above)
@@ -801,13 +802,19 @@ contact (13843,16108) | gate G2 y 16130-16149 | X's node (the existing diffusion
   flat tan from x 13918 to x 13940 with no line (`px.py row 16025 13894 13962 2`), where both metal shots and the
   stripped shot have the line of the metal's own edge. D1's north-west edge is a diagonal line from (13905,16036) to
   (13930,16005). The load is a plate x 13954-13991, y 15994-16047 with the usual line across (y 16008-16012), a supply
-  land east of it and a contact (14018,16025) on the column's VCC rail. K2 runs on south past the plate as a plain
-  strip (`px.py col 13942 15956 16112 3`: diffusion y 16010-16040 and y 16052-16082; `row 16066 13896 13972 2`:
-  field east of it from x 13948 to the column) to a small heavy-outlined box (13937-13953, 16087-16103).
+  land east of it and a contact (14018,16025) on the column's VCC rail. K2 runs north beside the plate, unbroken, to a
+  closed arc at y 15965 beside the plate's tie box. **K2 ends in the south at y 16046** (review round 3; the first
+  drawing ran it on to a "small box" as a second tie): an edge line y 16044-16050 crosses it (`px.py col 13944 16034
+  16060 2`), and between G1's end and the column, y 16053-16083, is field (`row 16066 13896 13972 2`: stripped shot red
+  minus green -7 to -19 from x 13950; the reddish 6 px beside the line x 13934-13938 are its shading). The small
+  ring-like box (13937-13953, 16087-16103) is the north-east tab of the ground land: the clean shot is one flat tan
+  from under X's metal to x 13938 at y 16097 (`row 16097 13912 13964 2 all`: 190-192/178-183/133-138 with no line where
+  both metal shots have the metal's own edge).
 - **The plate's poly is G2.** It runs on south as a column x 13966-13990 and at y 16107-16129 turns west as a band:
   east of the rail at y 16107-16129, a step down in the gap, under the rail at y 16130-16149, and a west arm with a
   rounded end at x 13763 (views `x1b`, `q1`, `q2`; open poly in both metal shots, `px.py col 13797 16084 16162 3 all`).
-  Under the rail and east of it the band lies between the ground land and X's node: a pull-down of X. **The column
+  Under the rail and east of it the band lies between the ground land and X's node: a pull-down of X, as far east as
+  the land's own edge, the dark line x 13950-13954 that crosses the band. **The column
   ends at y 16128**: below it are 12 px of field (`px.py col 13972 16040 16200 3 all`: chip-2 stripped 120-158/125-160,
   red minus green 0 or less, both metal shots plain, y 16136-16145) before the tie box of X's own load, so the plate
   is not on X's net. The block north of the west arm (13778-13825, 16101-16123) is plain, a diffusion (stripped shot
@@ -816,34 +823,39 @@ contact (13843,16108) | gate G2 y 16130-16149 | X's node (the existing diffusion
   contact (13926,15917) on a diffusion box E (13907-13958, 15892-15945; pits in both stripped shots). Between its two
   contacts it shows edge bars only, in both chips (`textmap.py 13896 15948 13938 16150 3`).
 - **The hold device.** Bar R runs from its contact down the rail's east side into a plate x 13791-13875,
-  y 15967-16023 (one poly with the bar: salmon without a break at y 15976-15985). Two lines cross the plate, at
+  y 15967-16023 under the rail (its north edge west of the rail is at y 15977; one poly with the bar: salmon without
+  a break at y 15976-15985). Two lines cross the plate, at
   y 15987-15990 and y 16010-16013, and the band between is brighter: the three "fingers" of the earlier passes. As in
   `rdp3_lat` (`notes/blocks/rdp3.md`, "Hold device": the same proportions, 22/82 there) this is one poly with the
   edges of a diffusion strip showing through; gaps of 3 px are far below any spacing rule. The strip is seen at both
   ends: against W in the west (one 6 px line between W's plain and the plate's orange, `px.py row 16000 13762 13826
   2 all`) and in the gap east of the rail, where y 15990-16005 is a diffusion (chip-2 metal 158-175/122-134/80-89,
-  stripped 145-161/124-137) between dim ground above and field below (y 16017-16029, stripped red minus green 0).
+  stripped 145-161/124-137) with field below (y 16017-16029, stripped red minus green 0). **From that block a narrow
+  diffusion runs north in the gap between the rail and X's metal** (x 13889-13897; `px.py col 13893 15920 16000 3 all`:
+  plain and unbroken from y 15932 to the block in both metal shots, 136-165/105-118/69-81 in chip 2, the stripped shot
+  17-47 redder than green; `row 15970 13876 13912 2 all`) to the south-west corner of box E, where the box's outline
+  is weak (`row 15934 13878 13920 2 all`: a dip to 72-86 at x 13908-13912 against 30-45 for the outline elsewhere).
+  This is review round 3's finding: the first drawing had the wire as a column under X's metal, where there is no
+  diffusion (box E is closed along its south side by an edge bar y 15943-15947).
 
 ### Ambiguities of run 5
 
-1. **Where the hold strip ends in the east, and what K1 is** (drawn `?D`: the strip x 13780-13910, y 15990-16010 and
-   the column K1 x 13908-13927, y 15940-16012). Box E has a metal contact and a heavy outline that is open only at its
-   south-west, where a strip K1 runs south under X's metal. K1 must be a diffusion (the box has no other way out), but
-   its colour is not readable (the inverted zone), and the clean shot has an edge line at x 13906-13910 between the
-   strip's east end and K1 at the strip's own height (`px.py row 15999 13872 13934 2 all`). For the join: the strip's
-   level is where K1's west edge line stops showing under the west half of X's metal in chip 2 (dim half-metal
-   y 15963-15993, full width from y 15996: the text map above; chip 1 does not show it), and K1 has no other end:
-   below y 16013 the clean shot has a 10 px dark band at x 13917 and then the tan of the inverter's node. **Read: the
-   strip joins K1, so the hold device is between the storage node and `rst_a_n`**, the level the node itself produces
-   (a positive loop: node high, `h_eq_r0_q_n` low, X high). The other candidate, that K1 and the inverter's node are
-   one diffusion, is excluded by firm items: X would then be the node that gates its own pull-down G2. What would
-   settle it: nothing more in these photos; the simulation will show whether the latch holds.
-2. **The plate's tie to its node** (two boxes, both `?`): the small box at K2's south end (a ring with a plain centre
-   in three shots, 16 px across, which is how a buried contact's centre reads: trap 24) and a box of the usual size
-   (13952-13980, 15960-15989) at the plate's north end beside K2's arc, whose centre is orange. That `bd1_q3` (the
-   plate, the column and G2) is the node `h_eq_r0_q_n` rests on them (`tools/unsure.py` lists the net); a depletion
-   load's plate is on its own node by construction, and the plate has no other source. K2's upper part (y 15965-16012)
-   is drawn uncertain with the upper box.
+1. **The hold device's strip under the plate, and the neck at box E** (two `?D` items: x 13780-13886, y 15990-16010
+   under the plate; the neck (13894-13910, 15927-15939)). The strip is seen at both ends and not under the plate
+   (edge lines and a brighter band only, as in `rdp3_lat`). East of the rail its wire is drawn firm: the block in the
+   gap and the narrow diffusion north to box E's south-west corner (measured, above). At the corner one weak line
+   (red 72-86 against 30-45 for the box's outline) lies between the wire and the box: read as the edge of the
+   contact's pad showing through, with the diffusion going on. **Read: the hold device is between the storage node and
+   `rst_a_n`**, the level the node itself produces (a positive loop: node high, `h_eq_r0_q_n` low, X high). If the
+   neck were closed the wire from the strip would end nowhere and box E would have no way out. What would settle it:
+   the simulation (does the latch hold while `ck_out` is low); these photos give no more. (The first drawing's column
+   "K1" under X's metal is withdrawn: review round 3.)
+2. **The plate's tie to its node** (`?B`, `?P`, `?D`): a box of the usual size (13952-13980, 15960-15989) at the
+   plate's north end beside K2's arc; its centre is orange in chip 2 and plain in chip 1 (92/82/77, the reviewer's
+   reading: a buried contact's centre, trap 24). Whether K2 enters the box is not seen. That `bd1_q3` (the plate, the
+   column and G2) is the node `h_eq_r0_q_n` rests on it alone (`tools/unsure.py` lists the net); a depletion load's
+   plate is on its own node by construction, and the plate has no other source: its column ends in field, and the
+   small box at the foot of the column, first drawn as a second tie, is a tab of the ground land (above).
 3. **Whether the land of B1 reaches bar L** (one edge line at x 13800-13806 against the bar, read as the bar's own
    edge with the diffusion going on beneath). If it stops short, only the row gates T1 (35/21 and not 91/21) and the
    bar lies on the storage node as a capacitor. The connections are the same.
@@ -851,12 +863,13 @@ contact (13843,16108) | gate G2 y 16130-16149 | X's node (the existing diffusion
    from y 16027 to y 16048, between the plate's south-west corner and box B2, which would tie the VSS plate to the
    storage node. It is the shading of B2's outline: `px.py row 16033 13782 13826 2 all` has 4-6 px of dark red and then
    field from x 13802 (stripped 153-162/143-160), no orange 14 px wide.
-5. **The ground land's west end and G2's west arm** (`?D` 13797-13820, 16118-16165): whether the arm has a channel
-   west of the rail between that block and X's diffusion there was not measured; it changes G2's width only.
+5. **The ground land's west end and G2's west arm** (`?D` 13778-13820, 16118-16165): a channel under the arm west of
+   the rail, between that block and X's diffusion there (the reviewer: the diffusion's edge line crosses the arm at
+   x 13775); it changes G2's width only.
 6. **A dark oval at (13833,15948) in chip 1's metal shot only**, over the storage node's foot: the bar of the foot's
    upper edge (`textmap.py 13812 15938 13856 15966 2`: no ring; the clean shot flat tan, no hole). No contact.
 7. Crossings read as no contact, none drawn uncertain: the rail over bar L, the foot, the plate, G1 and G2; X's metal
-   over K1, the diagonal, G1, the ground land and G2; the six tracks over `h_eq_r0`'s row.
+   over the diagonal, G1, the ground land and G2; the five tracks over `h_eq_r0`'s row.
 
 ### Not done after run 5
 
@@ -960,3 +973,56 @@ Connections before and after the fixes (a trace comment and the notes; commit c2
 Recorded 2026-11-28 09:58 +0000.
 
 Round 2: no findings that change a connection.
+
+### Round 3 (full review), 2026-11-28: run 5, piece `eol`
+
+A fresh Claude Fable 5.2 agent, on commit b624423a, 19 images in `cache/scratch/bd1/review-3/`. Told to suspect: the
+spot (13821,15888); the junction of `ck_out`'s row with bar L; B1 and its land against the bar; W's layer; G1's east
+end and its stretch in the gap; D1 into K2 and K2 against the column under X's metal; the column's south end, G2's
+join to it, its step and its west arm; the two tie boxes; the hold device altogether (bar R and the plate, the three
+bands, the strip, its east end, box E's exits); the red line beside B2; other contacts on the rail and on X's metal;
+the tracer's distrust of the clean shot east of the rail; anything left out.
+
+**No finding changes a net or an equation.** Two findings moved or removed uncertain items, each checked by me and
+confirmed; because one removes a drawn (uncertain) buried contact and the other re-routes the hold device's wire, they
+are treated as changing a connection and go to a fix check:
+
+1. **The wire from the hold strip to box E is not under X's metal.** The trace had a column `?D` (13908-13927,
+   15940-16012) south from box E. The reviewer: box E is closed along its south side (an edge bar y 15943-15947 in both
+   metal shots), opens at its south-west corner (y 15929-15937, a dip to 72-76 against 30-45), and from there a plain
+   strip x 13889-13897 runs south in the gap between the rail and X's metal into the strip's block (13882-13898,
+   15992-16008); under X's metal there is no diffusion. **Confirmed** (`px.py col 13893 15920 16000 3 all`: plain and
+   unbroken from y 15932 to the block, 136-165/105-118/69-81 in chip 2, 131-157/93-131 in chip 1; `row 15934 13878
+   13920 2 all`; `row 15970 13876 13912 2 all`). Redrawn: the block and the wire firm, the neck at the corner `?D`,
+   the strip under the plate `?D` as before. The device is between the same two nets.
+2. **The south "tie box" is not a tie, and K2 ends at y 16046.** The trace had K2 running south to a `?B`
+   (13935-13956, 16085-16104) under a `?P` tab. The reviewer: an edge line y 16044-16050 crosses K2; x 13938-13962,
+   y 16053-16083 is field (stripped shot -7 to -19); the box is the ground land's north-east tab (the clean shot flat tan
+   from under X's metal to x 13938, no west outline), and the line x 13950-13956 across G2's band is that land's east
+   edge. **Confirmed** (`px.py row 16097 13912 13964 2 all`: 190-192/178-183/133-138 from x 13912 to x 13938 with no
+   line; `col 13944 16034 16060 2`; my own `row 16066` had the field from x 13950 and I had taken the line's 6 px of
+   red shading for the strip). Removed: K2's south part, the tab, the `?B`. Added: the land's tab and the channel under
+   G2 to x 13950. `bd1_q3` is tied to `h_eq_r0_q_n` by the north box alone (uncertain, as before).
+3. Geometry only, all taken: the plate's north edge west of the rail is y 15977 (drawn 15967 there); the uncertain
+   diffusion under G2's west arm spans x 13778-13820 (drawn from 13797); K2's upper part is unbroken (now firm, with
+   the tie box still uncertain); five tracks cross `h_eq_r0`'s row, not six (notes and comments).
+
+Checked and found correct by the reviewer (4x or more, or text maps, in two to four shots): (13821,15888) no contact
+(clean shot 204/155/108 with no hole, against 82/115/52 in bar R's hole); the rail one metal with two contacts;
+`h_eq_r0`'s row without ring, hole or branch; B1 and B2 with plain centres; `ck_out`'s row into bar L (one edge line)
+and the contact (13713,15931); W not poly; the storage strip and foot unbroken tan; the plate one poly with bar R; the
+hold strip opening from W at y 15992-16008; D1 into K2 flat in the clean shot at y 16028; G1 poly in the gap and ending
+at x 13936 or less; the column ending at y 16128 with field below; G2 continuous through the step; the red line beside
+B2 an outline; the north box reading as a buried contact; no other contact on X's metal (`follow.py`, `textmap.py`);
+the chip-1 oval a blemish; `tools/opendiff.py` finds nothing. Not checked by the reviewer: the diffusion under the plate
+beneath the rail (edge lines and a redder band only); whether B1's land reaches the gate; whether K2 enters the north
+box.
+
+Connections before and after the fixes (commit b624423a against the fixed tree):
+
+    tools/t.sh bd1 sameconn.py b624423a            ->  connections identical
+    .venv/bin/python tools/sameconn.py b624423a    ->  connections identical
+
+Recorded 2026-11-28 11:22 +0000.
+
+Round 3: two findings, fixed.
