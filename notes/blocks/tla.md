@@ -31,6 +31,15 @@ metal E, and gate `in3`'s pull-down has a second part east of the rail); `rcs_w2
 (were 54, 57); the pull-down of `clk_tl`'s driver at (2626,7908) is 66 (was 52: a second part west of its rail). See
 "Run 4" at the end.
 
+**Run 5 (2026-11-28): the last rail-edge units are re-read (R23, R42, R32(b), R32(d)), and the gate called
+`rcs_iso2958` has a feed.** Its stub turns west as a foot at the height of the arm of `rcs_b1`'s load plate and
+reaches that arm's tie box: drawn joined through one uncertain piece, so **`rcs_u3425` = NOR(`rcs_bc3460`,
+`rcs_b1`) (marked), a cross-coupled pair with `rcs_b1`** = NOR(`rcs_x1`, `rcs_a2`, `rcs_u3425`), as `tl3` reads
+its mirror image of the pair (AMB-030). **The step formula below assumed that gate low and is superseded by the
+one in "Run 5"** if the join is real. The transistor's diffusion link is firm now. The AND-OR-INVERT's stack under
+gates g1 and g2 is one diffusion x 2971-3040 across the gap (69 wide; drawn 56), the two bands bent; same nets. See
+"Run 5" at the end.
+
 ```
 rc_stepreq_n = NOR(in1, in2, in3)        the row counter's step request (active low)   (2975,5035)
 in2        = NOR(w2, e4)                 west column                                   (2571,5197)
@@ -40,6 +49,7 @@ c1         = NOR(a2, b1)                 east column, top of the cluster        
 b1         = NOR(x1, a2, rcs_u3425)      east column; third pull-down west of the rail (3046,3590), (2920,3628)
 rcs_u3425  = NOR(rcs_bc3460, rcs_iso2958) inverter; its output goes by a strap to b1's third gate. rcs_iso2958 is a
                                          gate poly with no connection found (2958,3481): see "The west column" below
+                                         (run 5: its feed is believed to be rcs_b1's load plate: NOR(rcs_bc3460, rcs_b1))
 tla_w3417  = NOT(rcs_thin_e AND tla_w3376 OR tla_w3505 AND amr_eq_r3)   west column, selector (2626,3418)
 tla_w3505  = NOT rcs_thin_e              west column, rail gate under R1               (2626,3243)
 rcs_u3288_n = NOT rcs_u3288              west column, top unit: rail gate with a strong load; drives thin metal W (2626,3112)
@@ -1137,3 +1147,158 @@ In this file since 2026-11-16 ("a rail gate like `rcs_w2`'s"), at (2626,7908), o
   the gate band (x ~3005-3035 on `rg_o1.png`), drawn as a straight stub x 3000-3012; same ends.
 - The rest of this file's Not done list is unchanged (`rcs_iso2958`; the west column y 3590-4940; thin metal W;
   the boxes without a poly; bus pieces; `ports.d/tla.txt` for the file's older wires).
+
+## Run 5 (2026-11-28): the AND-OR-INVERT's gates under R3, and the gate called `rcs_iso2958`
+
+Tom Seddon's session, on Claude Fable 5.2, from 2026-11-28 15:54 +0000. Two pieces, what run 4 left of R23 / R42 /
+R32(b): piece `aoi`, gates g1 and g2 of `rcs_n4200`'s unit and the stack under them (x 2930-3140, y 4080-4190),
+and piece `iso`, the second transistor on `rcs_u3425` (x 2890-3010, y 3440-3560), which also falls under R32(d)
+(a load's gate poly beyond its tie box). Scratch: `cache/scratch/tla/survey.md` ("run 5"), `draft-aoi.txt`,
+`draft-iso.txt`, images `aoi_s1.png` (3x, four shots), `iso_s1.png` (5x), `iso_s2.png` (7x), overlays `aoi_o1.png`,
+`iso_o1.png`; `cache/scratch/tla/mat.py` prints the matrices cited as "mat.py" (the same numbers as
+`tools/px.py`).
+
+**Result.** One connection changed, through an uncertain piece: the gate of the second transistor on `rcs_u3425`
+is drawn onto `rcs_b1`'s load plate. One `?D` became firm. Two pull-downs changed width. Full extraction 2,546
+nets (one fewer: the gate's net is `rcs_b1`'s), 4,931 transistors, 0 errors, 0 warnings; `tools/unsure.py
+--equations`: 1,002 of 1,464 firm (was 1,002: `rcs_u3425`'s equation DEPENDS before and after, on a different
+item), 1,235 uncertain items (one `?D` fewer, one `?P` more).
+
+```
+rcs_u3425 = NOR(rcs_bc3460, rcs_b1)                  marked: the ?P through the tie box's east outline (was NOR(rcs_bc3460, rcs_iso2958), a gate with no feed)
+rcs_b1    = NOR(rcs_x1, rcs_a2, rcs_u3425)           firm, as before
+rcs_n4200 = NOT((clk_tl AND rcs_cond) OR rcs_bd3330 OR rcs_x1)   as before (marked through tl2's item); g1, g2 80/20 along the bent bands (69 across; were 60/23, 56/25)
+```
+
+### Piece `iso`: the gate has a feed (believed), and the pair is a latch
+
+What was drawn: a vertical poly x 2950-2968, y 3449-3547 under R3's west edge, "rounded cap at the top, a 45 px
+stub over field at the bottom, no connection found" (AMB-022), over a diffusion link drawn `?D`.
+
+- **The poly, end to end** (`tools/px.py col 2958 3436 3680 4 all`, clean shot): cap y 3448-3458 (poly over
+  field, 198-223/112-174/90-120), edge line y 3460-3464, channel y 3468-3496 (245-253/164-184/125-130), edge
+  line y 3500-3504, poly over field y 3508-3544 (210-228/124-174/108-124), end at y ~3547, pink field
+  y 3552-3576 (195-201/110-128/120-132), `rcs_b1`'s strip from y 3588. The cap ends 15 px above the channel
+  and 2-4 px below the lower edge line of `rcs_u3425`'s strip: an ordinary overhang.
+- **The bottom end turns west as a foot** (`iso_s2.png`, 7x, four shots; `px.py row 3518 / 3534 / 3540 / 3546 /
+  3552 2900 2982 3 all`; `col 2940 / 2945 3504 3562 3 all`). At y 3531-3546, x 2942-2950, in the gap just west
+  of R3's edge line, **both metal shots show open poly**: chip 2 128-146/98-116/44-63, chip 1 145-178/75-95/43-56
+  (control, the row of `rcs_cond_lat` crossing the same gap over field at y 4020, `px.py row 4020 2915 2960 3
+  all`: chip 2 163-170/125-132/60-65, chip 1 134-149/67-82/34-48). Above the foot, y 3507-3528, the same x is a
+  dark line (59-67/50-68/25-36), the stub's west edge; below it, y 3549-3552, the gap is green in the clean shot
+  (113/112/55, 111/124/67).
+- **Foot and stub are one poly**: in the clean shot row 3540 is salmon without a line from x 2948 to x 2963
+  (194-228/126-183); the dip at x 2951-2954 in the metal shots (85-93) is R3's own edge line, the same as at
+  y 4020 (91-97), where a poly certainly runs on under the rail.
+- **West of the foot lies one dark band, then the tie box of `rcs_b1`'s load** (`px.py row 3540 2876 2932 3 all`
+  with the row above; `col 2925 3512 3572 3 all`). From the plate eastwards along y 3540, clean shot: the arm
+  (salmon to x 2903, dark red in the open sliver between the strap and thin metal E, x 2891-2897), the box's
+  west outline x 2906-2917, its interior x 2919-2929 (tan 192-205/162-172/115-141; y 3533-3546), **its east
+  outline x 2931-2938 (62-65/63-91/45-69)**, the foot (dark red x 2939-2946 in the open sliver, salmon from
+  x 2948). The east side reads as the west side does: outline band, then poly. The foot's height (y 3530-3547)
+  is the height of the arm inside the box (y 3533-3546).
+- **No field between the foot and the box**: in the gap at y 3534-3546, x 2930-2939 is dark in both metal shots
+  (35-88) where the field of the same gap, 20 px north (`col 2940`, y 3510-3519), is plain and bright
+  (133-138/127-134/72-78).
+- **What is not seen**: poly through the 7-10 px of the box's east outline, as at every buried contact (run 2,
+  Ambiguity 1). So the arm is drawn firm into the box (`P 2888,3531:2930,3553`), the foot firm from x 2942
+  (`P 2942,3531:2968,3547`), and the stretch through the outline uncertain (`?P 2928,3531:2944,3547`). The tie
+  box was drawn to x 2946, over the foot; it is drawn to its outline (x 2938) with its diffusion (x 2936), so
+  that without the `?P` the stub is an unnamed gate again and `tools/unsure.py --equations rcs_u3425` says
+  DEPENDS (`without ?: NOR(n…, rcs_bc3460)`). The poly's old name `rcs_iso2958` is kept as an alias of
+  `rcs_b1`, with its label on the uncertain piece.
+- **For the join**, beside the photos: the stub runs 45 px past its channel to exactly the arm's height and
+  ends there; the same unit mirrored in the middle cluster has the same vertical poly ending at its lower
+  unit's plate arm (`tl3`, AMB-030: drawn joined, `?`); and the unit below this one in the same column has the
+  build once more, a load plate's poly that runs on past its tie box to a gate under R3 (`tl2_w4260`, the west
+  gate of `rcs_n4200`'s third pull-down: firm poly, uncertain tie). **Against**: nothing but the unseen 7-10 px.
+  Without the join the gate has no feed at all, in a unit with no other spare device.
+- **The diffusion link is firm** (was `?D 2936,3462:2972,3500`; `px.py row 3470 / 3488 / 3516 2924 2974 2 all`;
+  mat.py over x 2898-3010, y 3436-3536). In the 24 px gap between thin metal E and R3, x 2934-2940: the chip-2
+  stripped shot reads red over green by 34-45 at y 3470 and y 3488 against 8-10 on the field of the same gap at
+  y 3516; the clean shot a dark bar (54-61) against an olive strip (91-110/103-118/52-67) (trap 2's pair); the
+  metal shots are plain in both places and decide nothing. The diffusion's top edge is one line y 3460-3464
+  from x 2938 across the poly to x ~2994, its bottom edge one line y 3500-3504 from under thin E to x 2974, and
+  no line lies between the column under thin E and the gap at y 3464-3472. East of the poly the VSS box has a
+  part x 2972-2994 that reaches up to the top line (under the rail's middle the box's top is y 3482; tan from
+  y ~3476, the clean shot's green minus blue 33-61 against -9 to +14 on the pink field above the line). Channel
+  y 3464-3500: 36-38 wide, as drawn (39/18).
+
+**What the pair does (traced equations; the reading is a consequence, marked like them).** With S = `rcs_bc3460`
+= NOR(`rcs_e3`, `rcs_e4`, `tl5_w4937`, `clk_tl`) and R = `rcs_x1` OR `rcs_a2`:
+
+```
+rcs_u3425 = NOT S AND NOT rcs_b1
+rcs_b1    = NOT R AND NOT rcs_u3425 = NOT R AND (S OR rcs_b1)
+```
+
+`rcs_b1` is a latch: cleared while `rcs_x1` or `rcs_a2` is high, set while `rcs_bc3460` is high with both low
+(that needs `clk_tl` low: CLK low), holding otherwise. The step request, with `rcs_c1` = NOT `rcs_a2` AND NOT
+`rcs_b1` (unchanged):
+
+**step = in1 OR ( NOT e4 AND ( NOT e3 OR ( NOT a2 AND NOT rcs_b1 ) ) )**
+
+Without the join (the gate taken as low, as "Status" did) `rcs_b1` is combinational, NOT `rcs_x1` AND NOT
+`rcs_a2` AND `rcs_bc3460`, and the bracket reduces to NOT (e3 AND a2): the old formula. The two differ while
+`e3` is high, `e4` and `a2` low: the old formula steps; the new one steps only if the latch has been cleared
+(by `rcs_x1` or `rcs_a2`) since it was last set. `rcs_cond_n` = NOR(in2, in3) follows the same bracket.
+
+### Piece `aoi`: the stack under g1 and g2 (traced; one diffusion 69 wide, bands bent)
+
+`aoi_s1.png` (3x, four shots). The metals here: R3 with edge lines at x 2950-2954 and x 3006; the thin metal of
+`rcs_cond_lat` with edge lines at x 3026 and x 3062; the gap between them x 3008-3024.
+
+- **West edge x 2968-2972**: one dark line in the clean shot and both metal shots at y 4122, 4144 and 4167
+  (`px.py row 4122 / 4144 / 4167 2946 2980 2 acid1b,metal,metal1`), from the VSS box down to y 4194 (mat.py
+  `acid1b r 2942 3078 4 4086 4194 6`). West of it the rail lies on field (pink, 195-203/117-134/122-129 at
+  y 4144), except `tl2`'s poly (g1's west end) and g2's own end: salmon x 2960-2966 at y 4167, pink west of
+  x 2958. The stack was drawn from x 2990 ("the bands' west ends bend"); `tl2` run 4 had the edge at
+  x 2968-2971.
+- **East edge x 3038-3044**: one dark line in all three shots at the same rows (`px.py row … 3030 3050 2`),
+  under the middle of the thin metal, from y 4086 to y 4182; east of it the gate rows are poly over field
+  (217-234 against 240-254 over the channel) and pink between and above. Drawn to x 3046 before.
+- **The gap is diffusion from above g1 to node N** (R32(b); `px.py col 3012 / 3016 / 3020 4080 4272 4 all`).
+  Both gate rows cross it as poly (chip-2 metal blue 46-72 between edge lines at y 4100 and y 4126-4128, y 4146-
+  4148 and y 4180-4182). Between the rows (y 4132-4140): chip-2 metal 163-173/129-153/75-91, the chip-2 stripped
+  shot bright (105-141) with red over green by 9-46, the clean shot a dark bar without green: **like node N in
+  the same gap** (y 4188-4212: 175-182/138-144/85-91; stripped 140-154/107-114; clean 49-59) **and unlike the
+  field island under g3** (y 4232-4252: metal dim 75-100/68-89/31-38, stripped green over red, clean green
+  100-131/153-166/85-96). No vertical line between the two metals' edge lines at y 4092, 4134 or 4194.
+- **The bands are bent** (edge line to edge line, `px.py col 2982 / 3000 / 3030 / 3054 4096 4184 2 acid1b`):
+  g1 lies at y 4113-4135 under R3 west of x ~2995 and at y 4101-4123 from there east; g2 at y 4157-4178 under R3
+  and at y 4145-4167 from the gap east (in the gap the chip-2 metal shot shows poly y 4147-4181). Both were
+  drawn straight (y 4103-4128, y 4150-4175). g2's west end is at x ~2960; it was drawn from x 2985, which only
+  worked because the stack was drawn from x 2990.
+- **R23**: nothing of the stack beyond the two edges (field west of x 2968 and east of x 3044 at every row).
+- Node N's rectangle now starts at y 4182 (was 4176: g2's west part reaches y 4178). Its own outline was not
+  re-read (Not done).
+
+### Ambiguities of run 5
+
+1. **The join of `rcs_iso2958`'s poly to `rcs_b1`'s plate arm** (`?P 2928,3531:2944,3547`): believed, not seen;
+   the evidence is above. This is AMB-022, with a reading adopted. What would settle it: nothing more in these
+   photos that the tracer can think of (the stretch is a buried-contact box's outline in a 24 px gap between
+   two metals); a delayered or sharper shot of (2935,3540), or the behaviour of the row counter's step.
+2. **The stack's part east of R3 reaches VSS only through the gap stretch above g1** (x 3008-3024, y 4088-4098,
+   10-12 px between the east column's top edge line at y ~4086 and g1's top edge): read as diffusion (both metal
+   shots plain and bright, 162-178/142-144/84-92, with no vertical line; the clean shot red-brown at x 3020, not
+   olive). If it were field, g1 would be 37 wide and not 69, g2 unchanged; same nets, same equation.
+3. In the full extraction g1's channel is 84/20 and not 80/20, because `tl2`'s piece of the same band (`P
+   2938,4107:2990,4130` in `trace/tl2.txt`) is drawn 5 px north of where the band lies west of x 2990. Not
+   edited (another package's file); geometry only.
+
+### Not done after run 5
+
+- **R23, R42 and R32(b) are done for this file** (runs 3-5). R32(d) is done for `rcs_b1`'s load (this run) and
+  open for the other loads.
+- Next, in the order of the re-read list: **the loads west of R3 and east of R1 of the first cluster's units**
+  (R30; R32(c)-(e): the ties at y 3134, 3307, 4615, 4790, 5216 drawn by analogy, each load's gate poly beyond
+  its tie box; R41: thin metal E over the tie boxes), the step gate's load and its uncertain tie at (2885-2908,
+  4958-4996) with the 6-9 px between the step request's buried-contact box and `rcs_in3`'s row (run 4), R32(a),
+  R29, R38's other ends, R39.
+- Seen in passing, not drawn: the arm of `rcs_b1`'s plate is drawn y 3531-3553 and lies at y ~3531-3547; node
+  N's outline (its east part's top edge is a line at y ~4186, drawn 4182; whether it reaches x 2950 in the west
+  above y 4226 was not read: the clean shot is pink at x 2954-2958, y 4176-4194).
+- The rest of this file's Not done list is unchanged (the west column y 3590-4940; thin metal W; the boxes
+  without a poly; bus pieces; `ports.d/tla.txt` for the file's older wires). **`rcs_iso2958`'s two entries in
+  the old "Not done" list above are answered by this run** (the cap is an overhang; the feed is the foot).

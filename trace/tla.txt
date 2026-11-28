@@ -424,9 +424,9 @@ D 2785,3540:2842,3612
 C 2805,3570 s=24x30
 D 2836,3562:2905,3590
 P 2845,3528:2895,3597
-P 2888,3531:2942,3553
-B 2903,3527:2946,3558
-D 2903,3528:2940,3566
+P 2888,3531:2930,3553                 # the arm, into the tie box (to x 2942 before run 5: its stretch through the box's east outline is the ?P below)
+B 2903,3527:2938,3558                 # the tie box: east outline x 2931-2938 (px.py row 3540 2876 2932 3 / 2900 2982 3 all); drawn to x 2946 before run 5
+D 2903,3528:2936,3566
 # rcs_u3425's load and the strap: VCC box (contact (2805,3440)), strip under plate A to the
 # column under thin E (x 2900-2940, which ends at y 3500: field below it), and that column is
 # the west end of the inverter's node strip. Plate A and the pad below it are one poly, tied
@@ -440,19 +440,39 @@ C 2865,3488
 P 2888,3478:2926,3498
 B 2893,3474:2928,3501
 M 2868,3474 y3656 w=36                # the strap (x 2850-2886)
-# A second transistor on rcs_u3425's node (found 2026-11-17): a vertical poly x 2950-2968,
-# y 3447-3547, under the west edge of the VSS rail, crosses a diffusion (y 3462-3500) that
-# links the column under thin E to the rail's VSS box. Measured in the clean shot: the poly is
-# 245/178/128 over y 3466-3496 (poly over a channel under this rail: 238/176/128) and
-# 221/167/118 over y 3508-3540 (poly over field: 214-220/165/117), with dark lines across it
-# at y 3462 and y 3502. The link west of the poly lies in the 27 px gap between thin E and
-# the rail (a dark bar in the clean shot; plain tan in the chip-2 shot, where the field just
-# below it is green): drawn uncertain. The poly has a rounded cap at the top and a 45 px stub
-# over field at the bottom and NO connection was found (no pad, no patch, no arm; two passes,
-# four shots at 5-6x): if it is contacted by the rail above it, the transistor is always off.
-?D 2936,3462:2972,3500
+# A second transistor on rcs_u3425's node (found 2026-11-17; re-read in run 5, 2026-11-28): a vertical poly
+# x 2950-2968, y 3447-3547, under the west edge of the VSS rail, crosses a diffusion (y 3462-3500) that links
+# the column under thin E to the rail's VSS box. Clean shot down x 2958 (px.py col 2958 3436 3680 4 all): cap
+# y 3448-3458 (poly over field, 198-223), edge line y 3460-3464, channel y 3468-3496 (245-253/164-184/125-130;
+# a gate over its channel under this rail 238/176/128), edge line y 3500-3504, poly over field y 3508-3544
+# (210-228), end y ~3547, pink field below.
+# The link west of the poly, in the 24 px gap between thin E and the rail, was ?D and is firm since run 5
+# (px.py row 3470 / 3488 / 3516 2924 2974 2 all): at x 2934-2940 the chip-2 stripped shot reads red over green
+# by 34-45 at y 3470 and y 3488 against 8-10 on the field in the same gap at y 3516; the clean shot a dark bar
+# (54-61) against an olive strip (91-110/103-118/52-67); the diffusion's top edge is one line y 3460-3464 from
+# x 2938 across the poly to x ~2994, and no line lies between the column under thin E and the gap at
+# y 3464-3472. East of the poly the VSS box has a part x 2972-2994 up to that line (the box's top under the
+# rail's middle is y 3482).
+D 2936,3462:2972,3500
 P 2950,3449:2968,3547
-N P 2959,3530 rcs_iso2958
+# THE GATE'S FEED (run 5; AMB-022): the stub's bottom end turns west as a foot at y 3531-3547, the height of
+# the arm of rcs_b1's load plate. Both metal shots show the foot as open poly in the gap at x 2942-2950
+# (px.py row 3534 / 3540 2900 2982 3 all; col 2945 3504 3562 3 all: chip 2 128-146/98-116/44-63, chip 1
+# 145-178/75-95/43-56; the same x is a dark line at y 3507-3528), and in the clean shot foot and stub are one
+# salmon band from x 2948 (the dip at x 2951-2954 in the metal shots is R3's edge line, as at y 4020 where a
+# poly certainly runs on under the rail). West of the foot lies ONE dark band, x 2931-2938 (the tie box's east
+# outline, with thin E's edge line), then the box's interior x 2919-2929, its west outline x 2906-2917 and the
+# arm from the plate: the east side reads as the west side does. No field between foot and box (the gap is
+# plain bright where it is field: y 3510-3519). Poly through the outline itself is not seen in any shot, as
+# at every buried contact: drawn ?P. With it the gate is rcs_b1 (the load plate's poly, tied to rcs_b1's
+# node by the box): rcs_u3425 = NOR(rcs_bc3460, rcs_b1), a cross-coupled pair with rcs_b1. tl3's mirror of
+# the pair reads the same (AMB-030).
+P 2942,3531:2968,3547                 # the foot (seen)
+?P 2928,3531:2944,3547                # through the box's east outline (not seen)
+# The poly's old name stays as an alias, with its label ON the uncertain piece (it was on the stub): without
+# the ?P the stub is an unnamed gate again, so tools/unsure.py --equations marks rcs_u3425's equation DEPENDS
+N P 2936,3539 rcs_iso2958
+@alias rcs_b1 rcs_iso2958
 
 # ====================================================================
 # East column, unit at y 3288: rcs_u3288 = NOR(tl5_w2722, rcs_bd3330). Standard unit (as
@@ -706,8 +726,15 @@ B 3913,3345:3946,3377
 # (2985,4070)), gate g1, gate g2 (in series), node N, gate g3, VSS (contact (2985,4292)).
 D 2968,4045:3018,4105
 C 2985,4070 s=26x30
-D 2990,4098:3046,4182                 # under g1 and g2 (the bands' west ends bend, so the stack is drawn from x 2990)
-D 2950,4176:3072,4230                 # node N
+# the stack under g1 and g2 (re-read in run 5, R32(b) / R42): ONE diffusion x 2971-3040 under R3, across the gap
+# x 3008-3024 and under the west half of the thin metal. West edge: one line x 2968-2972 in the clean shot and
+# both metal shots (px.py row 4122 / 4144 / 4167 2946 2980 2 acid1b,metal,metal1); east edge: one line
+# x 3038-3044 (row ... 3030 3050 2), under the thin metal (drawn x 2990-3046 before). In the gap both gate rows
+# are poly and the stretch between them reads as node N does in the same gap and unlike the field island under
+# g3 (px.py col 3016 4080 4272 4 all: chip-2 stripped 105-141 with red over green by 9-46 against green over
+# red; clean shot a dark bar against green 153-166; no vertical line between the two metals' edge lines).
+D 2971,4088:3040,4186
+D 2950,4182:3072,4230                 # node N (from y 4182 since run 5: g2's west part reaches y 4178)
 # under g3 the diffusion is two columns with an island of field between them in the gap between
 # R3 and the thin metal (x 2990-3030, y 4222-4265; tl2 run 3, review round 2): the clean shot is
 # green (open field, 110-132/163-174/85-98) down x 3014 from y 4228 to y 4260. Joined again below
@@ -716,14 +743,21 @@ D 3030,4226:3066,4288                 # under g3, east column (under the thin me
 D 2950,4266:3066,4288                 # down to the VSS strip
 D 2965,4270:3016,4320
 C 2985,4292 s=26x26
-# g1: poly y 4103-4128 from the pad (contact (3105,4112)) at the top of bus line A's piece A3
-P 2985,4103:3095,4128
+# g1: poly from the pad (contact (3105,4112)) at the top of bus line A's piece A3. The band is bent under R3:
+# y 4101-4123 east of x ~3000, y 4113-4135 west of it (edge line to edge line: px.py col 2982 / 3000 / 3030 /
+# 3054 4096 4184 2 acid1b); drawn straight, y 4103-4128, before run 5. Its west end is tl2's (trace/tl2.txt)
+P 2960,4113:3002,4135                 # from x 2960 so that the band crosses the stack's west edge in this file too (tl2 draws the same poly on west: P 2938,4107:2990,4130 there)
+P 2996,4101:3095,4123
 P 3090,4096:3128,4130
 C 3105,4112
 M 3108,4098 y4606 w=22
 N M 3108,4300 rcs_cond
-# g2: poly y 4150-4175 from the pad (contact (3150,4160)) on bus line B's piece y 3807-4552
-P 2985,4150:3140,4175
+# g2: poly from the pad (contact (3150,4160)) on bus line B's piece y 3807-4552. Bent in the gap between R3
+# and the thin metal: y 4145-4167 east of the gap, y 4157-4178 under R3 (the same columns; in the gap chip-2
+# metal shows poly y 4147-4181). Its west end is at x ~2960, 10 px past the stack's edge (px.py row 4167 2946
+# 2980 2 acid1b: salmon x 2960-2966, pink field west of x 2958); drawn straight from x 2985 before run 5
+P 2960,4157:3020,4178
+P 3006,4145:3140,4167
 P 3132,4142:3172,4180
 C 3150,4160
 M 3152,3807 y4566 w=20
