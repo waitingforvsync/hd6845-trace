@@ -1721,3 +1721,53 @@ After the fixes (commit before them 1b7006b2):
 Recorded 2026-11-28 06:04 +0000.
 
 Round 6: no findings that change a connection.
+
+### Round 7 (full review), 2026-11-28, piece `slw`
+
+One fresh reviewer (Claude Fable 5.2), on commit f7fc8247, 10 images in `cache/scratch/bd2/review-7/` (the two
+pads at 5.5-6.2x and the two cells at 8x in four shots, the break, row 2's end, two overlays; otherwise
+`tools/px.py`, `tools/textmap.py`, the extraction, `tools/unsure.py`, `tools/opendiff.py`). It was given the
+piece's ten claims (the thin metal `wr_data_sel_n` as one metal between two contacts with two `?M` stretches;
+each pad one poly with its band or bar and nothing else leaving it; the hook cell, its bar and band; the unused
+cell as a poly island; row 1's lower band and the `e_b` band of rows 2-3 to their taps; the `wr_data_sel` band
+under the thin metal and the trunk to the poly column under the track x 16210 and the pad (16211,15997); the
+two metals on that track with the break between; row 2's band's end; no contact on the trunk from y 15840 to
+y 15995) and told to suspect: a contact or a break at either `?M` stretch; a poly leaving the unused cell's
+outline; the dim metal between the top pad and y 15630; the gap between the hook's bar and the lower band;
+the upper band's join to its pad and what the pad's outline could hide; the three crossings that
+`tools/cdp4_candh.py` calls pad-like; the poly column under the track x 16210 and the break.
+
+Findings, each checked by the tracer in the photos; neither changes a connection:
+
+1. **The hook's band under the `e_b` trunk is a step, not a diagonal** (about (16172,15660)). Confirmed
+   (`tools/px.py col 16162 / 16172 / 16179 15634 15686 3 acid1b`: salmon y 15664-15676 at x 16162, y 15646-15676
+   at x 16172, y 15646-15658 at x 16179; no hole): the west arm runs to about x 16177 and the east arm from
+   about x 16164, overlapping under the trunk. The polygon redrawn so. A path between the same ends.
+2. **The poly column under the track x 16210 lies 3 px further east** (x 16207-16221). Confirmed (`tools/px.py
+   row 15920 / 15953 / 15977 16196 16228 2 acid1b,metal`: salmon x 16208-16218 with its edges at x 16207 and
+   x 16221). Moved. An edge.
+
+Checked and found as drawn: both end contacts (ring, bright centre, hole, four shots); the two cells (a core of
+4-6 px at 100-160 and 110-180, no pad, the metal over only 3-6 px of each cell's pale window, the greenish
+patch the rim that every tan area has along its south edge here, as at (16095,15893) on the ground land); the
+metal's core from the top pad to y 15633 in both chips with only edge bars of 8-10 px; bare ground round both
+pads, and the upper band's junction with its pad the same in profile as the lower band's crossing of the same
+diffusion edge; field at y 15624-15631 between the lower band and the hook's bar in three columns and three
+shots, the bar orange without a break from y 15642 to y 15678; bare ground north, south and east of the unused
+cell's outline in both metal shots, no poly leaving it under the thin metal; the three bands to their ends, the
+crossings salmon without a hole, the `wr_data_sel` band orange across the gap x 16184-16196 and ending at
+x 16222; the break at y 15970-15982, open poly in both chips, and the 5 px line in the corner of the upper
+piece an edge underneath; pink field under the thin metal at row 2's band's height; field under the trunk from
+y 15840 to y 15995 (a dark spot at (16166,15972) in chip 2 only). The extraction and `tools/unsure.py`
+(`wr_data_sel_n` in four pieces) as claimed. Not checked, because the photographs do not show it: whether the
+thin metal is continuous under the two dark stretches (`?M` is the right record, it said); the windows of the
+two `?B` cells; chip 2's stripped shot beside the metals (ghost strips); anything west of x 16058.
+
+After the fixes (commit before them f7fc8247):
+
+    tools/t.sh bd2 sameconn.py f7fc8247              connections identical
+    .venv/bin/python tools/sameconn.py f7fc8247      connections identical
+
+Recorded 2026-11-28 06:49 +0000.
+
+Round 7: no findings that change a connection.

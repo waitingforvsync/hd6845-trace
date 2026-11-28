@@ -78,7 +78,7 @@ P 16152,15418:16184,15448              # pad
 P 16168,15440 y15518 16210,15560 y15612 w=24   # (review round 5: the diagonal 4-6 px further south: in the gap at x 16190 the poly is y 15529-15551)
 P 16205,15598:16232,15614              # strip 1 into the block (continuous salmon x 16206-16226 under the metal)
 P 16226,15598:16248,15662              # block
-P [ 16118,15664 16152,15664 16184,15643 16232,15643 y15657 16186,15657 16154,15680 16118,15680 ]   # band
+P [ 16118,15664 x16164 y15643 x16232 y15657 x16177 y15680 x16118 ]   # band: two arms that overlap in a step under the e_b trunk (review round 7: salmon y 15644-15677 at x 16172; runs 2-7 drew a diagonal)
 P 16104,15640:16136,15668              # poly over the output strip's end: box 16102-16118 x 15644-15654 and the bar x 16130-16134 down into the band
 D 16095,15628:16128,15657              # east end of row 1's output strip
 ?B 16100,15636:16132,15662             # box with plain centre and heavy outline, as on G1 and G2; the window itself is not resolved
@@ -420,7 +420,7 @@ M 16210,15768 y15957 x16339 y16354
 N M 16210,15900 wr_addr_sel
 P 16327,16328:16359,16360              # pad
 C 16343,16344
-P 16211,15867 y15990 w=14              # poly from the wr_data_sel band down under the metal
+P 16214,15867 y15990 w=14              # poly from the wr_data_sel band down under the metal (review round 7: x 16207-16221 in the clean shot)
 P 16194,15980:16228,16014              # pad
 C 16211,15997
 M 16210,15987 y16100
