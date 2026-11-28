@@ -524,90 +524,142 @@ N M 4017,4000 vss
 M 3846,3040 y5497 w=44               # VCC rail (extent from a profile of its centre line)
 N M 3846,4000 vcc
 
-# ---- rcs_in1 = NOR(rcs_mu, rcs_mv): east column, node y 3952-4098
-D 3995,3885:4045,3935                 # VSS box under the rail, with an arm east along y 3905-3925
-C 4018,3910 s=30x34
-D 4040,3905:4110,3925
-D 4052,3920:4110,3960                 # column under gate mu
-# (2026-11-18, tl3 run 8, found by its review: this was one column D 4052,3955:4090,4135. Between
-# y 3988 and y 4060 the column is FIELD: px.py col 4070 3944 4112 4 reads 151-158/135-143/97-106
-# in the clean shot and 156-160/147-158/97-103 in the chip-2 stripped shot there, the values of
-# open field, against 147/84/76 and 178/137/109 on the diffusion at y 3968-3980, and both metal
-# shots have an edge line across at y 3984-3988. So the diffusion below gate mu is NOT in1's node:
-# it goes west under the VSS rail as a band y 3966-3984, drawn in trace/tl3.txt, to the node of
-# rcs_mn3852.)
-D 4052,3955:4092,3984                 # below gate mu: ends at the edge line y ~3984
-D 4052,4066:4090,4135                 # in1's node (the load strip y 4070-4096 and the box), and on down under gate mv
+# ---- The three units of this file in the middle cluster's east column, RE-READ 2026-11-28 (run 2 of
+# this file's second owner; re-read item R40; notes/blocks/tla.md, "Run of 2026-11-28"). What changed:
+#  - there is NO diffusion column x 4052-4110 "just east of the rail". East of the rail the open gap
+#    x 4050-4070 is field; the column is x 4072-4108 (its east third under the thin metal x 4099-4111)
+#    and exists only at unit B (tl3 draws its top, D 4072,3778:4106,3842).
+#  - units A (rcs_mu) and C (rcs_in1) are RAIL GATES: one pull-down each, under the rail only.
+#  - unit A's load is drawn (it was "not drawn"), units A's and C's ties are read at their own place.
+#
+# ---- unit C: rcs_in1 = NOT rcs_mv.  Under the rail, top to bottom: the node (the load strip,
+# y 4080-4098), gate mv (y 4103-4122), the rail's VSS box (tl3's cell tl3_enor: D 4008,4141:4056,4190,
+# contact (4027,4162)). px.py col 4026 4050 4182 4 acid1b,metal1: tan y 4082-4098, salmon 235-240/149-171
+# y 4106-4118 (a gate over its channel), tan from y 4130. px.py row 4112 3980 4062 3: the channel is
+# x 4013-4051 (an edge line across the poly at x 4007-4010, poly over field west of it); row 4136: the
+# VSS box x 4013-4051, pink field west of it.
+# East of the rail BELOW gate mv is FIELD (px.py col 4068 4046 4180 3 all: y 4133-4160 reads as the
+# open field at y 4046-4058 in all four shots), so the transistor drawn there until now (38/22, on
+# a ?D land with a ?C) does not exist: the gate poly only passes on east to its pad.
+D 4012,4079:4050,4146                 # under the rail: node, channel under gate mv (W 38), down onto tl3's VSS box
+D 4046,4079:4086,4095                 # the node's strip east of the rail to the output box
 B 4076,4056:4114,4094
 D 4082,4060:4112,4092
 P 4085,4062:4135,4082                 # output poly to the pad of in1's metal
 P 4125,4055:4165,4087
 C 4143,4070
-# gate mu: poly y 3930-3950 from the bottom contact (4188,3938) of a bus piece that comes
-# down x 4183-4200 from y 3416 (follow.py; its top end not looked at)
-P 4045,3930:4180,3950
-P 4172,3922:4208,3955
-C 4188,3938
-M 4192,3952 y3416 w=20
-N M 4192,3700 rcs_mu
 # gate mv: poly y 4102-4124 from the top contact (4195,4112) of a bus piece that runs down
-# x 4183-4205 to y 4748 (follow.py; bottom end not looked at). The poly runs on west under
-# the VSS rail to x 3995 and is bright there: it also gates something under the rail (not read).
+# x 4183-4205 to y 4748 (tl3: pad (4192,4743)). West end under the rail's west margin, x ~3994,
+# over field west of x 4010.
 P 3995,4102:4182,4124
 P 4175,4096:4212,4130
 C 4195,4112
 M 4192,4098 y4748 w=20
 N M 4192,4400 rcs_mv
-?D 4005,4130:4092,4165                # VSS land below gate mv (its contact to the rail not looked at)
-?C 4018,4148
-# load: strip from the VCC box (contact (3840,4100)) under the plate x 3885-3935 (W/L 26/50),
-# on east under the thin metal and the VSS rail to the node. Tie of the plate to the node:
-# a tail under the thin metal and a buried contact with the plate's tab (as in the first
-# cluster; drawn uncertain here)
-D 3828,4072:3870,4130
-C 3840,4100 s=24x30
-D 3865,4070:4056,4096
-P 3885,4050:3930,4145
-D 3934,4092:3950,4142
-?P 3926,4120:3952,4142
-?B 3930,4116:3953,4144
+# load 26/56: strip from the VCC box (x 3824-3878, y 4071-4130: textmap 3818 4040 3884 4180 3, one
+# contact, ring and bright centre x 3839-3851, y 4088-4112; tl3 draws the same contact) under the
+# plate (x 3882-3938, y 4048-4118: px.py col 3927 4040 4160 3 all, the strip's edges across it at
+# y 4067-4073 and y 4094-4100), under the thin metal x 3948-3962, through the gap (px.py row 4084
+# 3820 3996 4 all) and under the rail.
+D 3826,4072:3878,4130
+C 3845,4100 s=20x30
+D 3870,4072:3966,4097
+D 3960,4079:4020,4097
+P 3882,4048:3938,4118
+# the tie: a heavy box (3912-3944, 4120-4150; plain centre x 3920-3932, y 4130-4136) hangs on the
+# plate's lower edge at its east end (one 10 px dark band, y 4118-4127, between the plate's lower bar
+# and the centre: px.py col 3927), and east of it the tail: diffusion under the thin metal, clean
+# shot tan without a break from the strip down to y 4134 (px.py col 3956 4050 4166 4: no edge at the
+# strip's lower side), x 3943-3963 (px.py row 4133 3890 3984 3 all). The plate has no other exit.
+D 3944,4092:3964,4140                 # the tail
+D 3918,4124:3950,4142                 # its foot under the box
+P 3916,4112:3940,4146                 # the plate's tab into the box
+B 3913,4119:3946,4149
 
-# ---- unit above it: rcs_mn3852 = NOR(?, rcs_in1). Node y 3836-3880 above gate in1; its
-# other gate (above the node) is not read yet. Output by a buried contact and a poly east to
-# the bottom contact (4225,3852) of a bus piece that goes up x 4222-4245 to y 2852.
-D 4052,3838:4110,3910
+# ---- unit B: rcs_mn3852 = NOR(tl3_e3712, rcs_in1, rcs_mu) (the top gate, the load and the branch
+# under the rail are in trace/tl3.txt). Output by a buried contact and a poly east to the bottom
+# contact (4225,3852) of a bus piece that goes up x 4222-4245 to y 2852.
+# The column x 4072-4108 (px.py row 3875/3895/3917/3941/3960/3976 4042 4126 3 all: an edge line
+# crosses both gate rows at x 4069-4075, chip-2 metal 59/26/5; west of it the rows lie on field, row
+# 3875 x 4054-4066 and row 3960 x 4054-4063 green-plain; under the thin metal the clean shot is tan
+# between the rows and bright salmon 219-249/146-188 under them, with the column's east edge a dark
+# line at x 4108-4111 at every height). Down it (px.py col 4082 3838 3998 3 metal,acid; col 4101 the
+# same in acid1b,metal1): node, gate in1 y 3886-3906, VSS y 3909-3926, gate mu y 3929-3950, the
+# branch's end y 3952-3981, field from y 3988. Both pull-downs are 36 wide (were drawn 58).
+D 4072,3838:4108,3982                 # the column, from tl3's top part down to its south end
+D 4050,3847:4076,3862                 # the node's band from the rail (tl3: D 3986,3846:4056,3862) to the column
 B 4076,3836:4112,3870
 P 4085,3842:4215,3860
 P 4207,3836:4245,3868
 C 4225,3852
 M 4233,3866 y2852 w=20
 N M 4233,3300 rcs_mn3852
-# gate in1: poly y 3883-3902 from a second contact (4270,3893) on in1's metal
-P 4045,3883:4260,3902
+# the rail's VSS box (px.py row 3895 3984 4056 4, col 4020 3830 4000 4: tan x 4004-4040, y 3890-3926)
+# and its arm east between the two gate rows onto the column (row 3917: no edge line from the box to
+# x 4090; interior y 3912-3924)
+D 4002,3888:4050,3928
+C 4018,3910 s=30x34
+D 4044,3911:4076,3924
+# gate in1: poly y 3886-3905 from a second contact (4270,3893) on in1's metal (y from px.py col 4135
+# and col 4215 3872 3916 2; it was drawn 3 px north). Its west end is at the rail's edge, x ~4050.
+P 4050,3886:4260,3905
 P 4252,3876:4290,3910
 C 4270,3893
+# gate mu: poly y 3929-3950 from the bottom contact (4188,3938) of a bus piece that comes down
+# x 4183-4200 from its top pad (4192,3413), the output of unit A. Its west tip lies in the rail's
+# margin over field (px.py row 3941 3984 4056 4: pink x 3988-4040).
+P 4045,3930:4180,3950
+P 4172,3922:4208,3955
+C 4188,3938
+M 4192,3952 y3416 w=20
+N M 4192,3700 rcs_mu
+# below gate mu the column ends at y ~3982 and a band y 3968-3982 leaves it west (row 3976: plain
+# x 4051-4090 without an edge) onto tl3's band under the rail (D 3954,3966:4056,3984), the branch
+# that makes this transistor the third pull-down of rcs_mn3852 (tl3 run 8). Between the band and
+# gate mu west of the column is field (px.py col 4063 3830 3996 3 all: y 3954-3961).
+D 4050,3968:4076,3982
 
-# ---- rcs_mu = NOT ra_eq_r9: an inverter. One gate (y 3363-3385) that is a pull-down both
-# under the VSS rail (between the rail's box, contact (4030,3350), and the node's strip
-# y 3393-3415, which runs on west under the rail to its load: not drawn) and on the column
-# east of the rail. Below the node east of the rail is field (classmap --open), so there is no
-# second pull-down. Output by the buried contact and a poly east to the top contact (4192,3413)
-# of mu's bus piece.
-D 4008,3320:4052,3420
+# ---- unit A: rcs_mu = NOT ra_eq_r9, a rail gate with a load 24/56.
+# Under the rail (px.py col 4028 3306 3440 4 acid1b,metal1; rows 3340/3374/3400 3980 4062 3): the VSS
+# box (contact (4030,3348)), the gate y 3364-3385 (bright salmon x 4013-4051, an edge line at
+# x 4007-4010), the node y 3388-3412. East of the rail ABOVE the gate is FIELD (px.py col 4070 3316
+# 3452 4 all; col 4070 3200 3316 8: the same khaki for 150 px north, the open gap between the rail
+# and the thin metal, no box), so the pull-down is 38 wide, not 84.
+D 4012,3320:4050,3418
 C 4030,3348 s=28x26
-D 4050,3340:4092,3436
-B 4078,3398:4116,3432
-D 4082,3400:4114,3430
-P 4088,3408:4180,3428
-P 4174,3398:4210,3430
-C 4192,3413
-D 3960,3393:4012,3415                 # the node's strip going west under the rail (to its load, not drawn)
-P 3995,3363:4142,3385
+P 3995,3364:4142,3385
 P 4132,3318:4166,3388                 # stem up to the pad, contact (4148,3335)
 C 4148,3335
 M 4148,3320 y3341 w=20                # bus piece x 4138-4160: upper part, ends at y 3341 (split by r9m, 2026-11-17:
 M 4148,3371 y3596 w=20                #   no metal at y 3341-3371 in either metal shot; notes/blocks/r9m.md, AMB-013)
 N M 4148,3330 ra_eq_r9
+# the node's strip east of the rail (interior y 3402-3412 between two edge lines) to the output box,
+# and the output poly to the top pad (4192,3413) of mu's bus piece (the pad's metal arrives from the
+# south only: tl5_tracks.py v 4192 3300 3470, textmap 4160 3330 4222 3440 3; the diagonal metal that
+# passes 16 px north of the ring is another net)
+D 4046,3397:4086,3415
+B 4078,3398:4116,3432
+D 4082,3400:4114,3430
+P 4088,3408:4180,3428
+P 4174,3398:4210,3430
+C 4192,3413
+# load: the node's strip west under the rail, through the open gap (px.py row 3404 3856 4056 4: open
+# diffusion x 3944-3984, chip-2 stripped red minus green 18-24) and under the plate (x 3882-3938,
+# y 3378-3440: px.py col 3928 3336 3450 3 all, the strip's edges across it at y 3390-3396 and
+# y 3420-3426) onto tl3's VCC box (D 3819,3363:3879,3572).
+D 3872,3396:3944,3420
+D 3938,3397:4016,3416
+P 3882,3378:3938,3440
+# the tie, all in the open (no metal over it; s3_mu_load.png 4.6x four shots): a heavy box
+# (3914-3946, 3345-3378; plain centre x 3923-3932, y 3357-3363) sits on the plate's upper edge at its
+# east end (one 12 px dark band, y 3366-3378, between the centre and the plate's upper bar), and
+# east of it the tail, a diffusion x 3945-3962 (chip-2 metal plain, blue 80-92) from y 3354 down into
+# the strip with no edge line across (px.py col 3951 3336 3430 4 all; row 3358 3896 3980 3 all).
+# The plate has no other exit.
+D 3944,3352:3962,3402                 # the tail
+D 3918,3352:3950,3370                 # its head under the box
+P 3916,3348:3940,3382                 # the plate's tab into the box
+B 3913,3345:3946,3377
 
 # ====================================================================
 # AOI unit of the first cluster, y 4045-4320: rcs_n4200 = NOT( rcs_cond . clk_tl + rcs_x1 ).
