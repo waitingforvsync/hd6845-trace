@@ -497,6 +497,42 @@ follower stop: `tl1` found no stretch of it fully dark for more than 20 px from 
 `rcs_e4`'s driver is the wide NOR in `tl1` (`notes/blocks/tl1.md`). Two VCC boxes here need
 correcting (master list, `tla` row; R29).
 
+Round 4 (full review, 2026-11-28 14:20 +0000, a fresh agent on claude-fable-5-2, at commit 072f3ba5; images in
+`cache/scratch/tla/review-4/`, 11 used). Piece `r40` of run 2 only: the three units of this file in the middle
+cluster's east column (x 3820-4300, y 3300-4170). Told to suspect: "field east of the rail" at units A and C;
+unit B's column edges and its continuity; the arm and the two bands against the gate rows (an extra channel at
+x 4050-4072); the two ties drawn firm and a contact of the thin metal x 3948-3962 on unit C's tail; the joins
+under the rail's east edge line; the channel under the rail at unit C; the pad (4192,3413) against the diagonal
+metal north of it and the pad (4148,3335); anything undrawn. It read the junctions at 4.5-5x in two to four shots
+and measured with `tools/px.py` rows and columns, `tools/tl3_thin.py` and the extraction with every file.
+Found correct: the field pockets east of the rail at A and C (they match certain field in all four shots; chip-2
+stripped red minus green 0-11 against 29-41 on the strips in the same gap); unit B's column (an edge line across
+both gate rows at x 4068-4074, absent at y 3917 where the arm passes; continuous to y ~3980; field west of it
+between the three bands); all five joins under the rail's edge; both ties (box and tail share one outline, the
+tail runs into the strip with no edge, the plates have no other exit); no contact of the thin metal x 3948-3962
+on unit C's tail (edge bars of 8-9 px only, no ring, hole or widening); the pads (4192,3413) fed from the south
+only and (4148,3335) from the north only; no undrawn tap on the three metals inside the region; nothing undrawn
+with every package outlined; the extraction and `tools/unsure.py` as claimed. Three findings, each checked by
+the tracer, **all geometry only**:
+1. The rail gates of units A and C are about 44 wide, not 38: the box's and the channel's east edge is a second
+   dark line at x ~4056 in both metal shots, east of the rail's own edge line at x 4046. Confirmed (`px.py row
+   3340 / 3374 / 4113 / 4136 4038 4066 2 all`: minima at x 4046 and x 4056 with a hump between in both chips, and
+   the chip-2 stripped shot dark at x 4050-4058; the node rows 3407 and 4088 have the one line). Fixed: both
+   diffusions drawn to x 4056. Same nets.
+2. Unit B's VSS box was drawn 10 px too far east (to x 4050, touching gate `rcs_in1`'s poly): outside the arm's
+   height its east edge is x ~4040. Confirmed (`px.py col 4036 / 4043 / 4047 3878 3936 3 acid1b,acid`). Fixed:
+   box to x 4040, the arm from x 4034. No transistor had been extracted there. Same nets.
+3. The contact (4270,3893) on `rcs_in1`'s metal is at about (4277,3898). Confirmed (`tools/textmap.py 4248 3872
+   4296 3918 3`: bright centre x 4272-4281, y 3893-3902 in both chips, hole x 4272-4284). Moved; same pad and metal.
+Connections before and after the fixes (against 072f3ba5):
+`tools/t.sh tla sameconn.py 072f3ba5`: `connections identical`;
+`.venv/bin/python tools/sameconn.py 072f3ba5`: `connections identical`.
+Could not be checked: the inside of the buried-contact boxes; the thin metal x 4099-4111 over the three output
+boxes (`tl3`'s `?M`: at `rcs_in1`'s box it reads as a pass-over, at `rcs_mu`'s only one row was read, `rcs_mn3852`'s
+was not examined; Ambiguities 3 and 4 of run 2); the three metals beyond the region.
+
+Round 4: no findings that change a connection.
+
 ## Corrections from `tl1`-`tl4` (coordinator, from the handoffs of 2026-11-17/18)
 
 Each is in the named block's notes in full; the trace fixes are on main.
@@ -600,9 +636,9 @@ net had a pull-down and no load, so the extraction printed no equation for it). 
 there is field and are now drawn where they are, on the same nets; three widths changed.
 
 ```
-rcs_mu     = NOT ra_eq_r9                       unit A: pull-down 38/21 under the rail, load 24/56     firm
+rcs_mu     = NOT ra_eq_r9                       unit A: pull-down 44/21 under the rail, load 24/56     firm
 rcs_mn3852 = NOR(tl3_e3712, rcs_in1, rcs_mu)    unit B: the two lower pull-downs are 36/20 (were 58)    marked (tl3's load tie)
-rcs_in1    = NOT rcs_mv                         unit C: pull-down 38/22 under the rail, load 25/56     firm
+rcs_in1    = NOT rcs_mv                         unit C: pull-down 44/22 under the rail, load 25/56     firm
 ```
 
 (`tools/unsure.py --equations NAME`: `rcs_mu` and `rcs_in1` FIRM; `rcs_mn3852` DEPENDS, on `tl3`'s uncertain tie
@@ -636,10 +672,11 @@ first cluster". `tl3` run 8 found 70 px of it to be field. The rest, read here:
 ### Unit A: `rcs_mu` = NOT `ra_eq_r9` (traced; firm)
 
 - Under the rail (`px.py col 4028 3306 3440 4 acid1b,metal1`; `row 3340 / 3374 / 3400 3980 4062 3
-  acid1b,metal1`): the VSS box x 4012-4051, y 3322-3348 with its contact (4030,3348); the gate y 3364-3385,
+  acid1b,metal1`): the VSS box x 4012-4056, y 3322-3348 with its contact (4030,3348); the gate y 3364-3385,
   bright salmon 229-244/156-181 over x 4013-4051 with an edge line across the poly at x 4007-4010 and paler
-  salmon (poly over field, 211-229/152-169) west of it; the node, tan, y 3388-3412. **Pull-down 38/21** (was
-  84/22, half of it on the field east of the rail).
+  salmon (poly over field, 211-229/152-169) west of it; the node, tan, y 3388-3412. The box and the channel end in the east at a second dark line at x ~4056 in both metal
+  shots, 9 px beyond the rail's own edge line (review round 4; `px.py row 3340 / 3374 4038 4066 2 all`; the node's
+  row 3407 has the rail's line only). **Pull-down 44/21** (was 84/22, half of it on the field east of the rail).
 - East of the rail the node is a narrow strip (light interior y 3402-3412 between two edge lines; `px.py col 4070
   3316 3452 4 all`) from under the rail, with no edge line at the rail's edge, to the output box
   (4078-4116, 3398-3432). The gate poly runs on east over field to its stem and pad (4148,3335).
@@ -668,7 +705,8 @@ first cluster". `tl3` run 8 found 70 px of it to be field. The rest, read here:
 - The node's band y 3847-3862 comes from under the rail (`tl3`'s strip) to the column; between it and gate
   `rcs_in1`'s row west of the column is field (`px.py col 4063 3830 3996 3 all`, y 3872-3878 green over red in
   the chip-2 stripped shot), and under the rail there too (pink, 188/127/118 at (4042,3875)).
-- The rail's VSS box x 4002-4050, y 3888-3928 (`px.py row 3895 3984 4056 4`, `col 4020 3830 4000 4`), contact
+- The rail's VSS box x 4002-4040, y 3888-3928 (`px.py row 3895 3984 4056 4`, `col 4020 3830 4000 4`; its east
+  edge from review round 4: `px.py col 4043` and `col 4047 3878 3936 3` are tan only at the arm's height), contact
   (4018,3910) as before; its arm east, interior y 3912-3924, joins the column between the two gate rows with no
   edge line from the box to x 4090 (`px.py row 3917`).
 - Below gate `rcs_mu` the column ends at y ~3982 and a band y 3968-3982 leaves it west onto `tl3`'s band under
@@ -685,7 +723,8 @@ first cluster". `tl3` run 8 found 70 px of it to be field. The rest, read here:
   y 4082-4098, gate `rcs_mv` y 4103-4122 bright salmon 235-240/149-171 (a gate over its channel), tan again from
   y 4130: the rail's VSS box, which `tl3`'s cell `tl3_enor` draws with its contact (4027,4162). The channel is
   x 4013-4051 (`px.py row 4112 3980 4062 3 acid1b,acid,metal1`: an edge line across the poly at x 4007-4010,
-  poly over field west of it; `row 4136`: the box x 4013-4051, pink field west of it). **38/22.** This is what
+  poly over field west of it; `row 4136`: the box x 4013-4051, pink field west of it), and its east edge, like unit A's, is the second dark line
+  at x ~4056 (review round 4; `px.py row 4113 / 4136 4038 4066 2 all`). **44/22.** This is what
   this file's old comment meant by "the poly runs on west under the rail and is bright there: it also gates
   something under the rail (not read)".
 - **East of the rail below gate `rcs_mv` is field** (`px.py col 4068 4046 4180 3 all`: y 4133-4160 reads as the

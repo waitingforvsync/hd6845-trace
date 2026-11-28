@@ -541,7 +541,9 @@ N M 3846,4000 vcc
 # East of the rail BELOW gate mv is FIELD (px.py col 4068 4046 4180 3 all: y 4133-4160 reads as the
 # open field at y 4046-4058 in all four shots), so the transistor drawn there until now (38/22, on
 # a ?D land with a ?C) does not exist: the gate poly only passes on east to its pad.
-D 4012,4079:4050,4146                 # under the rail: node, channel under gate mv (W 38), down onto tl3's VSS box
+D 4012,4079:4056,4146                 # under the rail: node, channel under gate mv (W 44), down onto tl3's VSS box
+# (review round 4: the box's and the channel's east edge is a second dark line at x ~4056 in both metal
+# shots, 9 px east of the rail's own edge line: px.py row 4113 / 4136 4038 4066 2 all; drawn to x 4050 before)
 D 4046,4079:4086,4095                 # the node's strip east of the rail to the output box
 B 4076,4056:4114,4094
 D 4082,4060:4112,4092
@@ -597,14 +599,14 @@ N M 4233,3300 rcs_mn3852
 # the rail's VSS box (px.py row 3895 3984 4056 4, col 4020 3830 4000 4: tan x 4004-4040, y 3890-3926)
 # and its arm east between the two gate rows onto the column (row 3917: no edge line from the box to
 # x 4090; interior y 3912-3924)
-D 4002,3888:4050,3928
+D 4002,3888:4040,3928                 # east edge x ~4040 (review round 4: px.py col 4043, col 4047 3878 3936 3: tan only at the arm's height)
 C 4018,3910 s=30x34
-D 4044,3911:4076,3924
+D 4034,3911:4076,3924
 # gate in1: poly y 3886-3905 from a second contact (4270,3893) on in1's metal (y from px.py col 4135
 # and col 4215 3872 3916 2; it was drawn 3 px north). Its west end is at the rail's edge, x ~4050.
 P 4050,3886:4260,3905
 P 4252,3876:4290,3910
-C 4270,3893
+C 4277,3898                           # centre and hole x 4272-4284, y 3893-3905 (review round 4: textmap 4248 3872 4296 3918 3)
 # gate mu: poly y 3929-3950 from the bottom contact (4188,3938) of a bus piece that comes down
 # x 4183-4200 from its top pad (4192,3413), the output of unit A. Its west tip lies in the rail's
 # margin over field (px.py row 3941 3984 4056 4: pink x 3988-4040).
@@ -624,8 +626,8 @@ D 4050,3968:4076,3982
 # box (contact (4030,3348)), the gate y 3364-3385 (bright salmon x 4013-4051, an edge line at
 # x 4007-4010), the node y 3388-3412. East of the rail ABOVE the gate is FIELD (px.py col 4070 3316
 # 3452 4 all; col 4070 3200 3316 8: the same khaki for 150 px north, the open gap between the rail
-# and the thin metal, no box), so the pull-down is 38 wide, not 84.
-D 4012,3320:4050,3418
+# and the thin metal, no box), so the pull-down is 44 wide, not 84.
+D 4012,3320:4056,3418                 # east edge x ~4056 (review round 4: px.py row 3340 / 3374 4038 4066 2 all; the node row 3407 has the rail's line only)
 C 4030,3348 s=28x26
 P 3995,3364:4142,3385
 P 4132,3318:4166,3388                 # stem up to the pad, contact (4148,3335)
