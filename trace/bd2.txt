@@ -417,9 +417,16 @@ N M 16210,16050 wr_data_sel
 # R-G +24 in chip 2's stripped shot against +3 for field) goes down to y 16208 and back
 # east under the rail into the lower piece.
 D 16032,15987:16060,16086              # ground land, under R, output
+# (run 7: the land, R's channel and the output run on EAST of the rail. A heavy outline comes down x 16074-16080
+# to y 16005, steps east along y 16008-16012 and runs down x 16095-16100 across band R and past the output's
+# tab: view r7_g2R, four shots; band R is bright (channel: chip-2 metal 174-182/131-140) x 16071-16092 and
+# ordinary poly (163/87-104) east of the edge line. So R's pull-down is 64 wide, not 28.)
+D 16056,15987:16074,16020              # the land's east part beside the rail
+D 16056,16014:16096,16084              # the lobe east of the rail: land, under R, output
 C 16044,16008
 D 16008,16056:16060,16208              # output, under S, ground land, under T, output
 D 15992,16113:16060,16155              # ground land between S and T
+D 15990,16066:16012,16206              # the column's west part (run 7): the stack runs west to the edge line x 15984-15990, so S and T are 70 wide; the bands end over a field pocket x 15968-15986
 C 16025,16132
 P 16018,16032:16312,16048              # band R: gate rw_d, east under the e_b trunk and the wr_data_sel metal (no contacts) to rw_d's top end
 P 16282,16024:16314,16056              # pad
@@ -454,10 +461,15 @@ D 15914,16122:15950,16144              # the wire's bulge under the cell
 # leaves it east along y 16078-16092 (dark in the open, salmon under the e_b trunk: no
 # contact) to the contact 16210,16086 (olive footprint) at the lower end of the wr_data_sel
 # metal.
+# (run 7: re-read. The plain tab x 16068-16098, y 16058-16078 is the diffusion's east end (chip-2 metal blue
+# 82-94: not poly; run 2's "poly round the foot" is withdrawn). East of it a framed box, plain centre
+# x 16107-16118, y 16076-16093 between dark frames of 8-10 px; the band is orange from x 16129. The window is
+# not resolved: ?B, on the box.)
 D 16056,16056:16100,16084
-P 16068,16068:16110,16084              # poly round the foot of the cell (orange x 16067-16085, y 16069-16078)
-P 16100,16078:16226,16092
-?B 16062,16054:16106,16088             # the boxed cell
+D 16090,16070:16118,16092              # the tab taken into the box
+P 16104,16072:16132,16094              # the band's end in the box
+P 16126,16078:16226,16092
+?B 16100,16070:16124,16096             # the boxed cell
 P 16194,16070:16228,16102              # pad
 C 16210,16086
 N D 16040,16070 wr_data_sel
@@ -472,9 +484,12 @@ N D 16040,16070 wr_data_sel
 # of the wr_addr_sel metal. Contacts by their olive footprints in the clean shot; the bands
 # are salmon (no contact) under every other metal they cross.
 D 16032,16248:16060,16347              # ground land, under R', output
+D 16056,16248:16074,16281              # run 7, as in group 2: the land's east part beside the rail
+D 16056,16275:16096,16345              # the lobe east of the rail (edge line x 16095-16098 across R'): R' is 64 wide
 C 16044,16268
 D 16008,16317:16060,16469              # output, under S', ground land, under T', output
 D 15992,16374:16060,16416              # ground land between S' and T'
+D 15990,16327:16012,16467              # the column's west part (run 7), as in group 2
 C 16025,16393
 P 16018,16293:16312,16309              # band R': gate rw_d (tap)
 P 16282,16286:16314,16318              # pad
@@ -492,16 +507,18 @@ D 15944,16325:16012,16341              # output: arm west of the rail
 D 15944,16325:15964,16469              # diffusion wire
 D 15944,16457:16012,16469
 D 15890,16329:15948,16357              # load strip from the VCC land
-D 15850,16321:15898,16365              # VCC land under the rail (no contact drawn: not looked for)
+D 15850,16321:15898,16365              # VCC land under the rail
+C 15864,16352 s=24x30                  # run 7: a tall oval, bright centre x 15857-15869, y 16339-16369 in both metal shots, like group 2's
 N D 15870,16343 vcc
 P 15898,16307:15938,16379              # load gate
 P 15918,16371:15940,16403
 D 15914,16383:15950,16405
 ?B 15914,16381:15944,16407             # tie (boxed cell, by the pattern of group 2; cell seen at 15922-15934 x 16392-16398)
-D 16056,16317:16100,16345              # east end of the upper output piece
-P 16068,16329:16110,16345
-P 16100,16339:16350,16353              # output band east to the contact 16343,16344
-?B 16062,16315:16106,16349             # boxed cell (by the pattern of group 2; not looked at closely)
+D 16056,16317:16100,16345              # east end of the upper output piece (the plain tab x 16072-16093)
+D 16090,16331:16118,16353              # the tab taken into the box (run 7: read like group 2's; centre x 16108-16117, y 16338-16350)
+P 16104,16333:16132,16355              # the band's end in the box
+P 16126,16339:16350,16353              # output band east to the contact 16343,16344
+?B 16100,16331:16124,16357             # the boxed cell; window not resolved
 N D 16040,16331 wr_addr_sel
 
 # ---------------------------------------------------------------- group 4, first gate (y 16570-16680): PULL-DOWN ONLY
