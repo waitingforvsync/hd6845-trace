@@ -820,6 +820,7 @@ N M 16905,17060 bd2_cap17060
 # areg_rail_r's metal x 16355-16405 (drawn to y 15330) widens west at y 15322 into a slab x 16317-16408 and goes on
 # south from y 15376 as the gate group's rail x 16317-16366 (drawn from y 15400): one metal, over plain field
 # (clean shot pink, with the grey-green tint of the rails' middles; no outline, no hole). The dark spot at
-# (16374,15336) is on chip 2's metal only (chip 1 bright there).
+# (16376,15334) is on chip 2's metal only; chip 1 has its own, smaller, at (16372,15328) and (16352,15337). No ring,
+# no bright centre, nothing in either stripped shot: marks.
 M 16314,15322:16406,15376              # the slab
-M 16314,15370:16364,15405              # down into the gate group's rail
+M 16314,15370:16366,15405              # down into the gate group's rail (its east edge line is x 16366-16371: review round 10)

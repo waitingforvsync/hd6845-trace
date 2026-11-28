@@ -2327,3 +2327,66 @@ alone cannot show it).
 Recorded 2026-11-28 08:14 +0000.
 
 Round 9: no findings.
+
+### Round 10 (full review), 2026-11-28, piece `d7c`
+
+One fresh reviewer (Claude Fable 5.2), on commit d9b3a020, 27 images in `cache/scratch/bd2/review-10/` (views at
+1.3-2.4x of the whole corner with every package outlined, 4.5-5.5x of the end pad, the two dots, the dim stretch
+and the corner, the rail and the jog; mostly `tools/px.py`, `tools/textmap.py`, `tools/tl5_tracks.py`,
+`tools/busl_mdrawn.py`, `tools/opendiff.py`, the extraction). It was given the piece's nine claims (`d7_c`'s
+metal one piece from `dbus`'s end by a corner to its end; the end pad with its contact on the column's metal and
+on a plain rectangle; two more rectangles each with a contact and a dot of metal, joined to nothing; no contact
+on `d7_c`'s metal between corner and pad, none on the second rectangle; no poly on any rectangle, three separate
+diffusions; `d7_c`'s metal apart from its three neighbours; the supply rail one metal to y 17100 with nothing
+under it but `cdp4`'s poly row, crossed without contact; the ground rail's jog one slab with both rails, no
+contact, field under it, apart from `dlat`'s diagonal poly; nothing else undrawn east of the supply rail) and
+told to suspect: the end pad as a separate dot beside the column (trap 16) and the column running on; a contact
+or a break where the metal lies against the second rectangle (y 16997-17130), the dim stretch y 17034-17044, the
+dark patch y 17010-17019; a branch at the corner; a thin metal or a poly at either dot; a poly on any rectangle,
+and whether they are diffusion; what the south rectangle touches; anything under the rail, a contact on the poly
+row, the rail through y 16440; the slab's outline, the dark spot (16376,15334), the diagonal poly; a thin metal,
+poly or diffusion that no package draws in x 16540-17000, y 15750-17100.
+
+It reported **no findings**: nothing that changes a connection. Two remarks, both checked here and taken up
+(geometry and a comment only):
+
+1. **The trace's comment on the slab's dark spot** said "on chip 2's metal only (chip 1 bright there)"; chip 1
+   has a small shallow spot of its own about 5 px away (103/65/56 for 8 px, `tools/px.py row 15332`), as these
+   notes say ("Run 11", the jog). Confirmed (`r11_spot`): the comment now says so. Neither has a ring or a bright
+   centre and the clean shot is plain there: no contact. A comment; no connection.
+2. **The lower rail's east edge in the jog** reads x 16366-16371; the joining piece was drawn to x 16364.
+   Confirmed (`cache/scratch/bd2/r11_edges.py row 15410 16280 16440`: 16366-16371 in both metal shots): the piece
+   is now `M 16314,15370:16366,15405`. Geometry only.
+
+Proof that the fixes changed no connection (against d9b3a020, the commit the round read):
+
+    tools/t.sh bd2 sameconn.py d9b3a020            ->  connections identical
+    .venv/bin/python tools/sameconn.py d9b3a020    ->  connections identical
+
+Checked and found as drawn: `d7_c`'s metal without a gap over 10 px on the row and on the column
+(`tools/tl5_tracks.py`); at the dim stretch y 17034-17044 the column's west edge line dark in both chips from
+y 16990 to y 17134, chip 1's centre yellow, the clean shot's pink strip unbroken (5.5x); the dark patch at
+y 17010-17019 in chip 2 only; the corner with bare ground north and west in both chips; the pad the column's
+foot (one outline in both metal shots, one cream L with pits in the clean shot, 5.5x; the row y 17297), nothing
+leaving south or west; both dots in closed rings with plain diffusion all round in both chips and pitted boxes
+in chip 2's stripped shot (4.5x); no hole, ring or widening along y 16997-17130 (clean shot pink, edge line, tan
+diffusion); three closed outlines with field between them (column x 16900: chip 2's stripped shot red over
+green by 5-17 inside, -3 to 3 between), no poly on or against any edge, `tools/opendiff.py` 100% drawn; bare
+ground between `d7_c` and all three neighbours; the rail one metal through y 16440 to y 17100 with only the poly
+row under it (salmon, no hole), edge notches at (16490,16990) and (16490,17012) one per chip; the slab one metal
+with both rails, the outline fitting, the diagonal poly passing under its north-east corner without a ring in
+either metal shot; `tools/busl_mdrawn.py` on rows every 30 px and columns every 20 px over x 16540-17000,
+y 15750-17100, where the only hits skim drawn edges or are `cdp4`'s contact centre (16905,16128), and views with
+every trace outlined showing nothing undrawn; the full extraction (2,541 nets, 0 errors, 0 warnings).
+
+Not checked, as it says: under the rail and under the slab chip 2's stripped shot shows only fringes, so "nothing
+beneath" rests on chip 1's clean shot and on the absence of edge lines in both metal shots; a thin dim metal
+would not appear on the cuts, so that part of the last claim rests on the views, and other packages' geometry
+there was checked for presence, not correctness; the south rectangle's surroundings beyond y 17400.
+
+Its remark that the diagonal poly passes under the slab's north-east corner corrects these notes' "clear of the
+slab's interior" only in wording: it crosses under the corner without a contact ("Crossings with no contact").
+
+Recorded 2026-11-28 08:52 +0000.
+
+Round 10: no findings that change a connection.
