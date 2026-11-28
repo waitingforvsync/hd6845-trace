@@ -233,11 +233,39 @@ C 2805,5212
 P 2842,5168:2897,5265
 P 2890,5240:2926,5262
 B 2908,5237:2932,5264
-M 2740,2986 x2914 y5400 w=20          # thin metal E: horizontal part y 2977-2996 (right over c1's poly line,
-                                      # no contact) and turns down the cluster; passes over the load boxes. Ends not yet read
-N M 2913,5000 rcs_thin_e
+# thin metal E: horizontal part y 2977-2996 (right over c1's poly line, no contact), then down the cluster over the
+# loads' boxes; its north end is the selector's gates (below), its south end tl2's pad (2913,6327).
+# In pieces since run 6 (2026-11-28, R41; trap 27): tools/tl3_thin.py 2903 2925 2996 5400 --thr 176 --min 8 lists 43
+# stretches where neither metal shot shows metal anywhere across its width. Bars of 8-10 px lie over single edges.
+# Stretches of 14 px or more, or a pair of bars round a half-bright centre, lie over the ten places drawn ?M below:
+# eight tie boxes and the two gate-row ends of the step gate. The claim there: one metal, no break, no contact (no
+# pad, no widening, no green hole in the clean shot: the box centres are tan); the photos do not show it. Between
+# them the metal is drawn firm. Not dark over rcs_bc3460's tongue and field island (y 3841-3878: 8 px only).
+M 2740,2986 x2914 y3148 w=20
+?M 2914,3146 y3193 w=20               # over rcs_c1's tie box: dark y 3148-3191 (44 px; half-bright centre y 3163-3178)
+M 2914,3191 y3323 w=20
+?M 2914,3321 y3366 w=20               # over rcs_u3288's tie box: dark y 3323-3338 and y 3349-3364
+M 2914,3364 y3475 w=20
+?M 2914,3473 y3565 w=20               # over rcs_u3425's pad tie (dark y 3475-3483, y 3499-3512) and rcs_b1's tie box (y 3522-3563, 42 px)
+M 2914,3563 y4167 w=20                # (over rcs_bc3460's tongue and field island at y 3841-3878: bright)
+?M 2914,4165 y4208 w=20               # over rcs_n4200's tie box: dark y 4167-4178 and y 4189-4206
+M 2914,4206 y4293 w=20
+?M 2914,4291 y4313 w=20               # over the tie box of rcs_bd3330's load (tl2): dark y 4293-4311 (chip 1 to y 4333)
+M 2914,4311 y4625 w=20
+?M 2914,4623 y4669 w=20               # over rcs_cond's tie box: dark y 4625-4640 and y 4653-4667
+M 2914,4667 y4799 w=20
+?M 2914,4797 y4842 w=20               # over rcs_cond_n's tie box: dark y 4799-4811 and y 4827-4840 (full-bright centre between)
+M 2914,4840 y4916 w=20
+?M 2914,4914 y4956 w=20               # over the step gate's top band and the west end of gate in1's row: dark y 4916-4931 and y 4935-4954
+M 2914,4954 y4991 w=20
+?M 2914,4989 y5035 w=20               # over the west end of gate in2's row and the bottom band: dark y 4991-5004 and y 5016-5033
+M 2914,5033 y5233 w=20
+?M 2914,5231 y5275 w=20               # over rcs_in3's tie box: dark y 5233-5245 and y 5259-5273 (chip 1: y 5233-5273)
+M 2914,5273 y5400 w=20
+N M 2913,5100 rcs_thin_e              # (label at y 5000 before run 6: that stretch is ?M now)
+N M 2800,2986 rcs_thin_e              # the north piece carries the name too, so that tools/unsure.py lists the join through the ?M pieces
 
-# ---- load of m2: the same construction one unit up. Strip west under the VSS rail
+# ---- load of m2 (the standard one: see rcs_c1's; tie read at its own place in run 6): the same construction one unit up. Strip west under the VSS rail
 # (y 4755-4772) to a box under the thin metal, strip under the plate x 2842-2897 (y 4742-4832)
 # to the VCC box (contact (2812,4790)); tail and buried contact at (2920,4817).
 D 2925,4755:3048,4772
@@ -366,7 +394,16 @@ P 3090,3745:3130,3778
 C 3103,3762
 P 3125,3752:3400,3770
 N P 3060,3157 rcs_a2
-# load
+# load. THE STANDARD LOAD of this column (five copies: rcs_c1's here, rcs_u3288's, rcs_cond's, rcs_cond_n's and
+# rcs_in3's; rcs_bc3460's is built differently). The four others' ties were drawn by analogy with this one; all
+# five are read at their own place since run 6 (2026-11-28, R32(c)/(d), R30: cache/scratch/tla/ld.py YT, mat.py,
+# the same reading at each): the tail under thin metal E is tan without a line across from the node box down
+# into the box's centre (px.py col 2918), a heavy line closes the box below and pink field follows; the plate's
+# tab runs east from the plate's lower corner (poly colour in both metal shots to x ~2899; the chip-2 stripped
+# shot red over green from the plate into the box, where 12 px above the tab the same stretch is green field;
+# not at rcs_cond_n's, where it is 0-11 above the tab too); east of the box, in the open gap to R3, field at
+# every one (no foot: the plate's poly ends in the box), and only the node strip crosses the gap. What is not
+# seen is poly through the 6 px of the box's west outline under E's edge line, as at every buried contact.
 D 2925,3105:3048,3124
 D 2898,3105:2932,3138
 D 2913,3134:2929,3180
@@ -512,7 +549,7 @@ P 2575,2717:2815,2735
 P 2545,2710:2582,2742
 C 2562,2725
 M 2576,2727 x2283 y3126 w=12
-# load (the standard one)
+# load (the standard one: see rcs_c1's; tie read at its own place in run 6)
 D 2925,3278:3048,3297
 D 2898,3278:2932,3311
 D 2913,3307:2929,3353
@@ -561,16 +598,32 @@ B 3042,3878:3068,3910
 P 3045,3882:3180,3902
 P 3172,3876:3214,3910
 C 3192,3892
-# load (the standard one)
+# load. NOT the standard one (re-read in run 6, 2026-11-28, R32(c)): it was drawn as rcs_c1's, with a tail, a tab
+# and a tie box below the plate at (2908-2932, 3932-3959), by analogy. Nothing is there: under thin metal E below
+# the node box the clean shot is pink field from y 3916 to y 3976 (181-200/108-129/112-131), the chip-2 stripped
+# shot green, E bright throughout (px.py col 2918 3896 3976 4 all), and the plate ends at y 3928 with open field
+# below it (px.py col 2870 3826 3990 4 all: edge lines y 3878-3882 and y 3906-3910 = the strip's, y 3926-3930 the
+# plate's; then metal 160/137/87, chip-2 stripped 151/148/96, clean khaki 155/140/100 down to y 3990).
+# The tie is at the plate's TOP: a heavy rounded box (2868-2900, 3835-3860) sits on the top edge of the plate's east
+# part (one dark band y 3855-3866 between its centre and the plate's top bar). Its centre (2878-2892, 3845-3852)
+# reads as the centres of the middle cluster's tie boxes do in all four shots and not as poly (px.py pt 2884,3848
+# 3927,3360 3926,4133 2870,3871 all: chip-1 metal red = green, 120/110 against 145/81 on the plate; chip-2 metal
+# blue 78 against 44-60). East of the centre the box is open: the clean shot has no dark line along y 3845-3848
+# from x 2887 to the node strip under E's east half (mat.py acid1b r 2869 2938 3 3827 3893 3): a tongue of the node
+# strip, y 3841-3855, runs west under E into the box. E passes over the tongue (not widened, no hole).
+# The oval at (2899-2916, 3858-3878) between the tongue, the strip, the node box and the plate's top bar is an
+# island of FIELD (green in the chip-2 stripped shot, bright under E in both metal shots, lines on all four
+# sides): not a tie and not a contact (tl2 run 3 drew it ?D; its reviewer read it as field).
 D 2925,3890:3048,3909                 # (review round 5: the strip's edge lines are at y 3890 and y 3909, px.py col 3018 3872 3920 2 metal,metal1; drawn 8 px north before)
 D 2898,3882:2932,3915
-D 2913,3911:2929,3957
 D 2835,3882:2905,3909
 D 2785,3849:2840,3927
 C 2805,3887 s=24x44
-P 2842,3867:2897,3960
-P 2890,3935:2926,3957
-B 2908,3932:2932,3959
+P 2845,3864:2895,3928                 # the plate (to y 3960 before run 6)
+P 2872,3840:2896,3868                 # the plate's poly up into the tie box
+B 2868,3836:2900,3859                 # the tie box
+D 2874,3842:2920,3854                 # the tongue of the node strip, under E
+D 2917,3842:2934,3886                 # the node strip from the tongue down to the node box (tl2 draws the same strip from the north: D 2915,3757:2935,3890)
 
 # ====================================================================
 # Middle cluster (x 3450-4110): the same construction as the first, 1042 px east. Rails:
@@ -826,7 +879,7 @@ P 3046,4580:3095,4600
 B 3038,4574:3070,4606
 P 3088,4575:3125,4606
 C 3105,4590
-# load of rcs_cond (standard unit geometry, 175 px above rcs_cond_n's)
+# load of rcs_cond (the standard one: see rcs_c1's; tie read at its own place in run 6)
 D 2925,4580:3048,4597
 D 2898,4582:2932,4618
 D 2913,4615:2929,4653

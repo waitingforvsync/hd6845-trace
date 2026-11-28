@@ -40,6 +40,14 @@ one in "Run 5"** if the join is real. The transistor's diffusion link is firm no
 gates g1 and g2 is one diffusion x 2971-3040 across the gap (69 wide; drawn 56), the two bands bent; same nets. See
 "Run 5" at the end.
 
+**Run 6 (2026-11-28): the six loads between R2 and R3 that were drawn as "the standard one" are read at their own
+place (R32(c), R32(d), R30), and thin metal E is drawn in pieces (R41).** Five ties are as drawn (`rcs_c1`,
+`rcs_u3288`, `rcs_cond`, `rcs_cond_n`, `rcs_in3`). **The sixth, `rcs_bc3460`'s, is built differently**: the tail, tab
+and tie box drawn below its plate by analogy are not there (field), the plate is 33 px shorter, and the tie is a box
+on the plate's top edge, on a tongue of the node strip that runs west under thin E. Same nets, same equation. Thin
+metal E is uncertain (`?M`) at the ten places where neither metal shot shows it, so that the selector's gates are on
+the wire from the far side of the die only through those. No connection changed. See "Run 6" at the end.
+
 ```
 rc_stepreq_n = NOR(in1, in2, in3)        the row counter's step request (active low)   (2975,5035)
 in2        = NOR(w2, e4)                 west column                                   (2571,5197)
@@ -1346,3 +1354,161 @@ Without the join (the gate taken as low, as "Status" did) `rcs_b1` is combinatio
 - The rest of this file's Not done list is unchanged (the west column y 3590-4940; thin metal W; the boxes
   without a poly; bus pieces; `ports.d/tla.txt` for the file's older wires). **`rcs_iso2958`'s two entries in
   the old "Not done" list above are answered by this run** (the cap is an overhang; the feed is the foot).
+
+## Run 6 (2026-11-28): the "standard" loads between R2 and R3, and thin metal E over their boxes
+
+Tom Seddon's session, on Claude Fable 5.2, from 2026-11-28 16:46 +0000. Two pieces, the next of the re-read list
+after run 5: piece `lt`, the six loads west of R3 that this file drew as "the standard one" (R32(c): four of their
+ties were drawn by analogy with `rcs_c1`'s; R32(d): each load's gate poly beyond its tie box; R30: each load's far
+side), and piece `te`, thin metal E where it passes over the boxes (R41). Scratch: `cache/scratch/tla/survey.md`
+("run 6"), `draft-lt.txt`, `draft-te.txt`; `cache/scratch/tla/ld.py YT` prints the profiles of one tie (YT = the
+tab's top as drawn: 3158, 3331, 4631, 4806, 5240) and `mat.py` the matrices, both the same numbers as
+`tools/px.py`. Images `ld_s1_c1.png` (5x, four shots), `ld_s2_bc.png`, `ld_s3_bc_n.png` (4x), `ld_s4_bc_tie.png`
+(8x), `ld_s5_bc_tie3.png` (5.9x), `ld_m1_metal.png`, `ld_m2_acid.png` (the four other standard loads side by side,
+2.6x), overlay `ld_o1_bc.png` (5x).
+
+**Result.** No connection changed (`tools/sameconn.py b2b4a85b`: connections identical, package alone and every
+trace file). One load redrawn: `rcs_bc3460`'s (27/50, was 27/55). Ten stretches of thin metal E are `?M`. Full
+extraction 2,546 nets, 4,931 transistors, 0 errors, 0 warnings; `tools/unsure.py --equations`: 1,002 of 1,464 firm,
+as before; 1,245 uncertain items (ten more, the `?M`); `tools/unsure.py` lists `rcs_thin_e` as joined only
+through uncertain items (Ambiguity 2).
+
+### Piece `lt`: five standard ties, read at their own place (as drawn)
+
+The loads of `rcs_c1` (tab top y 3158), `rcs_u3288` (3331), `rcs_cond` (4631), `rcs_cond_n` (4806) and `rcs_in3`
+(5240) are one build, and each reads the same way (`ld.py YT`; `mat.py LAYER CH 2884 2950 3 YT-22 YT+38 3`; the
+two mosaics):
+
+- **The tail** under thin metal E, x 2913-2927 between edge lines at x 2910 and x 2931-2937: in the clean shot tan
+  (190-205/156-175) from the node box down with no dark line across (`col x 2918`: only dips to 135-160 where the
+  tab's top edge crosses, at YT-6 and YT+3; an edge there reads 40-90), a bright centre at YT+8 to YT+18
+  (199-213/150-179), a heavy line at YT+20 to YT+26 (43-86), and below it pink field (188-195/125-128/126), green
+  in the chip-2 stripped shot (red minus green -20 to -50).
+- **The tab** runs east from the plate's lower corner at about YT+5 to YT+20. Both metal shots show poly colour to
+  x ~2899 (chip-2 blue 48-58, like the plate's 43-66); then come E's own edge line and the box's west outline
+  (dark x 2901-2913). The chip-2 stripped shot stays red over green from the plate into the box (`rcs_c1`: 29, 17,
+  12, 8, 18, 22 at x 2895-2910; `rcs_u3288` 15-20; `rcs_cond` 3-10; `rcs_cond_n` 8-26; `rcs_in3` 15-25) where 12 px
+  above the tab the same stretch is green field (-6 to -30, -8 to -30, -5 to -19, -1 to -17; not at `rcs_cond_n`'s,
+  where it reads 0-11 there too: Ambiguity 3). In the clean shot the stretch x 2898-2907 at the tab is salmon or
+  tan (162-193/106-147/69-110), not pink.
+- **East of the box** (R32(d)): its outline x 2931-2937, then the open gap to R3, x 2940-2948, is field at every
+  one of the five (clean shot olive 82-101/67-103, chip-2 stripped red minus green -3 to +10, both metal shots
+  plain with blue 72-84). No foot like `rcs_b1`'s: the plate's poly ends in the box. Below the box: the heavy
+  line, then field.
+- **The far side** (R30; `ld.py YT d`, the gap's column x 2941): only the node strip crosses the gap (y 3108-3124,
+  3281-3297, 4585-4597, 4760-4772, 5190-5206: red minus green 20-52 between two lines), field above and below it.
+  No load of the five reaches a VSS box.
+- **The plates** are closed on the west, north and south (mosaics; `rcs_c1`'s down x 2870: edge lines at y 3086-3089,
+  3107-3110, 3134-3137, 3179-3185, so plate y 3088-3182 and a channel 28 wide, as drawn).
+
+What is not seen, at any of the five: poly through the 6 px of the box's west outline, which lies under E's edge
+line. That is the standing of every buried contact (run 2, Ambiguity 1); the ties stay drawn firm.
+
+### Piece `lt`: `rcs_bc3460`'s load is not the standard one (traced; same nets)
+
+This file drew it as the others, "the standard one": plate y 3867-3960, a tail down from the node box, a tab at
+the plate's lower corner and a tie box at (2908-2932, 3932-3959). `tl2` (run 3) had met "an oval at (2909,3868)
+that this run read as the load's tie box and the reviewer as an island of field" and left it `?D`.
+
+- **Nothing is below the node box** (`tools/px.py col 2918 3896 3976 4 all`): the box's bottom line at y 3908-3912,
+  then from y 3916 to y 3976 the clean shot is pink (181-200/108-129/112-131: field under metal), the chip-2
+  stripped shot green from y 3932 (red minus green down to -53), and E is bright throughout in both metal shots.
+  No tail, no box, no tab.
+- **The plate ends at y 3928** (`px.py col 2870 3826 3990 4 all`): top bar y 3866-3876, the strip's edge lines at
+  y 3878-3882 and y 3906-3910 (channel 28 wide, as drawn), bottom bar y 3914-3922, the plate's edge y 3926-3930,
+  then open field to y 3990 (chip-2 metal 160/137/87, chip-2 stripped 151/148/96, clean shot khaki 155/140/100).
+  North of the unit, x 2840-2895, y 3700-3830: field, no poly (`ld_s3_bc_n.png`).
+- **The tie is a box on the plate's top edge**: a heavy rounded outline x 2868-2900, y 3835-3860 over the east part
+  of the plate, with one dark band of 10-12 px (y 3855-3866) between its centre and the plate's top bar. Its
+  centre (x 2878-2892, y 3845-3852) reads as the centres of the middle cluster's tie boxes do, in all four shots,
+  and not as poly (`px.py pt 2884,3848 3927,3360 3926,4133 2870,3871 2880,3872 2868,3166 all --r 2`):
+
+  | | chip-2 metal | chip-1 metal | chip-2 stripped | clean |
+  |---|---|---|---|---|
+  | this box's centre (2884,3848) | 153/118/78 | 120/110/56 | 163/139/91 | 89/71/59 |
+  | run 2's tie boxes (3927,3360), (3926,4133) | 155/134/71, 169/134/83 | 130/130/73, 135/122/58 | 159/144/83, 166/148/102 | 100/79/61, 89/79/59 |
+  | plate poly (2870,3871), (2880,3872), (2868,3166) | 156/115/58, 141/97/44, 158/107/60 | 145/81/42, 139/76/39, 138/77/45 | 137/114/58, 146/100/47, 169/126/72 | 114/73/49, 139/95/48, 187/96/63 |
+
+- **The box is open to the east: a tongue of the node strip.** Along y 3845-3848 the clean shot has no dark line
+  from the centre to the node strip under E's east half (`mat.py acid1b r 2869 2938 3 3827 3893 3`: 74-105 on the
+  centre, 135-142 at x 2890-2896, 182-187 at x 2899, a dip to 145-163 at x 2902-2905, 188-208 from x 2908 to
+  x 2926). The tongue is y 3841-3855 (its edges at x 2899-2914: dark at y 3836-3839 and y 3857-3860); the chip-2
+  stripped shot is red over green along it (12-42). The strip it leaves is the one `tl2` draws down from the unit
+  above (`D 2915,3757:2935,3890` there). In the metal shots only E's own edge line (x 2896-2905) lies between
+  box and strip.
+- **Thin E passes over the tongue**: bright in both metal shots at y 3842-3854, x 2908-2920, the width it has
+  everywhere (`tools/textmap.py 2884 3824 2938 3892 3 --acid`), tan under it in the clean shot, no hole.
+- **The oval is an island of field**, as `tl2`'s reviewer read it: x 2899-2916, y 3858-3878, between the tongue
+  (north), the strip (east), the node box (south) and the plate's top bar (west), with a line on each side. Its
+  interior (x 2905-2911, y 3863-3873) is green in the chip-2 stripped shot (98-147/106-162), like the field under
+  E below the node box, and bright under E in both metal shots. Not a tie, not a contact.
+
+Drawn: the plate to y 3928, the plate's poly up into the box, the box, the tongue and, so that the file extracts
+by itself, the strip from the tongue down to the node box (the same strip as `tl2`'s). Removed: the tail, the tab
+and the box below. `rcs_bc3460` = NOR(`rcs_e3`, `rcs_e4`, `tl5_w4937`, `clk_tl`) as before (firm), load 27/50.
+
+"Reading aids" above says every load plate of a column has its tab at the lower corner: five of the six between
+R2 and R3 do.
+
+### Piece `te`: thin metal E over the boxes (R41)
+
+`tools/tl3_thin.py 2903 2925 2996 5400 --thr 176 --min 8` lists 43 stretches where neither metal shot shows
+metal anywhere across E's width. Bars of 8-10 px lie over single edges. Stretches of 14 px or more, or pairs of
+bars round a half-bright centre, lie at ten places, now drawn `?M` (the metal between them is firm):
+
+| `?M` | dark in both metal shots | what lies under E |
+|---|---|---|
+| y 3146-3193 | y 3148-3191 (44 px; half-bright centre y 3163-3178) | `rcs_c1`'s tie box |
+| y 3321-3366 | y 3323-3338, y 3349-3364 | `rcs_u3288`'s tie box |
+| y 3473-3565 | y 3475-3483, y 3499-3512, y 3522-3563 (42 px) | `rcs_u3425`'s pad tie and `rcs_b1`'s tie box |
+| y 4165-4208 | y 4167-4178, y 4189-4206 | `rcs_n4200`'s tie box |
+| y 4291-4313 | y 4293-4311 (chip 1 to y 4333) | the tie box of `rcs_bd3330`'s load (`tl2`) |
+| y 4623-4669 | y 4625-4640, y 4653-4667 | `rcs_cond`'s tie box |
+| y 4797-4842 | y 4799-4811, y 4827-4840 (full-bright between) | `rcs_cond_n`'s tie box |
+| y 4914-4956 | y 4916-4931, y 4935-4954 | the step gate's top band and the west end of gate `in1`'s row |
+| y 4989-5035 | y 4991-5004, y 5016-5033 | the west end of gate `in2`'s row and the bottom band |
+| y 5231-5275 | y 5233-5245, y 5259-5273 (chip 1: y 5233-5273) | `rcs_in3`'s tie box |
+
+At none of them is there a pad, a widening of the metal or a green hole in the clean shot (the box centres are
+tan: 199-213/150-179), and a contact on any tie box would short that gate's output to the select line. The reading
+stays "one metal that passes over"; the photos do not show it there. Over `rcs_bc3460`'s tongue and island E is
+not dark (8 px at y 3835-3842 only). The label `rcs_thin_e` moved from y 5000 (now inside a `?M`) to y 5100, and
+the north piece carries the name too (`N M 2800,2986`), so that `tools/unsure.py` lists the join and the
+selector's equation keeps its form without the uncertain items.
+
+### Ambiguities of run 6
+
+1. **`rcs_bc3460`'s tie**: the plate's poly through the 10-12 px band between the plate's top bar and the box's
+   centre is not seen (as at every tie box: run 2, Ambiguity 1), nor is the tongue under E's own edge line
+   (x 2896-2905) in the metal shots; the clean shot shows the tongue there. Drawn firm. If the box were not the
+   plate's, the load would have no tie at all (the plate has no other exit: field north, west and south, the
+   strip's VCC box and node box at its ends).
+2. **Thin metal E at ten places** (`?M`; AMB-032 and AMB-033 are the same question on `tl3`'s two thin metals):
+   that it is one metal without a contact from its north end (the selector's gates, by the metal x 2696, the poly
+   y 2768 and the metal x 2326) to `tl2`'s piece south of y 5400 is believed, not seen. `tools/unsure.py` lists
+   `rcs_thin_e` as three pieces joined only through uncertain items (the north piece; the piece y 5033-5231; and the
+   south end with `tl2`'s, `tl3`'s and `busl`'s stretches of the wire). What rests on it: that the selector
+   `tla_w3417`'s select and the gate of `tla_w3505` are the wire `busl` followed to the far side of the die
+   (`notes/operation.md`). What would settle it: nothing more in these photos; a contact would show a pad.
+3. At `rcs_cond_n`'s tie the stretch between plate and tail 12 px above the tab is not green in the chip-2
+   stripped shot (red minus green 0-11 at x 2899-2911, y 4794) as it is at the four others: the tab may be taller
+   there (its top nearer y 4795 than y 4806). Geometry only; not redrawn.
+4. `tl2`'s `?D 2903,3845:2917,3890` (in `trace/tl2.txt`) covers the island of field and the tongue's east end. It
+   joins nothing that is not joined anyway. Not edited (another package's file); in the handoff.
+
+### Not done after run 6
+
+- **R32(c) is done for this file** (the five ties drawn by analogy, and `rcs_bc3460`'s), **R41 for thin metal E**,
+  and R30 and R32(d) for these six loads.
+- Next, in the order of the re-read list: the loads that are not of the standard build, each with its tie:
+  the step gate's load and its uncertain tie at (2885-2908, 4958-4996), with the 6-9 px between the step request's
+  buried-contact box and `rcs_in3`'s row (run 4); `rcs_n4200`'s load and its pad's arm (B 2896,4158:2940,4200);
+  `rcs_u3425`'s pad tie (B 2893,3474:2928,3501); then the loads east of R1 (R30, R32(c)-(e) for the west column:
+  `rcs_in2`'s, `rcs_w2`'s, the selector's, `tla_w3505`'s uncertain tie, the top unit's) with thin metal W over
+  them (R41: W is drawn in two pieces, y 3027-4002? and y 4940-5330, not shown to be one metal); R32(a), R29,
+  R38's other ends, R39.
+- Seen in passing, not drawn: thin metal E is drawn 20 wide and is about 14 (bright x 2908-2920 in both metal
+  shots; `tl2` draws its south part 14 wide); the standard tabs are drawn y YT to YT+22 and lie at about YT+5 to
+  YT+20.
+- The rest of this file's Not done list is unchanged.
+
