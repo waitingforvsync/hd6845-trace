@@ -353,8 +353,16 @@ B 2908,3155:2932,3182
 # b1 = NOR(x1, a2): east unit at y 3515-3660 (in3's unit moved up 1607 px). Output by the
 # buried contact and a poly east to B1's bottom contact (3150,3590).
 D 3030,3478:3063,3662
-?D 2968,3470:3035,3528                # VSS box under the rail and its join to the column's top (join seen only as a
-C 2990,3500 s=30x34                   # heavy line at the rail's edge: assumed, as in the other units)
+# VSS box under the rail (contact (2990,3500)) and its join to the column's VSS section y 3478-3530 (the large
+# open diffusion between rcs_u3425's gate and gate x1). Re-read 2026-11-28 (run 3, R40's second half; it was ?D,
+# "join seen only as a heavy line at the rail's edge: assumed"): diffusion on both sides right up to ONE line of
+# 6-9 px (clean shot tan 195-204/150-183 from x 2986 to x 3018, line at x 3022-3026, green open diffusion beyond;
+# chip-2 stripped line at x 3016-3022 with red minus green 16-25 west of it and 23-46 east: px.py row 3490 /
+# 3500 / 3515 2986 3040 2 all), the box's edges y 3482-3532 against the open part's y 3477-3535 (px.py col 3008 /
+# 3014 / 3040 3462 3544 2 acid,acid1b). The line is the rail's edge line, as at every arm of this column; what is
+# under it is not seen (notes, "Run 3", Ambiguity 1).
+D 2968,3470:3035,3528
+C 2990,3500 s=30x34
 D 2966,3655:3014,3725                 # VSS box below
 C 2985,3690 s=24x40
 D 3000,3648:3063,3662

@@ -20,6 +20,11 @@ thin metal E, and a second transistor on `rcs_u3425` whose gate has no connectio
 drawn where they are (units A and C are rail gates; unit B's column is x 4072-4108). See "Run 2" at the end; the
 lines for `in1`, `rcs_mu` and `rcs_mn3852` in the table below are as first read and are superseded there.
 
+**Run 3 (2026-11-28): the units on the columns beside R3 and R1 are re-read (R40's second half) and found as
+drawn**: the fifteen pull-downs of the east column and the two of the west column are where this file has them, no
+gate row runs on under a rail, and the one uncertain item among them, the VSS join at (3020,3500), is drawn firm
+(`rcs_b1` is firm now). See "Run 3" at the end.
+
 ```
 rc_stepreq_n = NOR(in1, in2, in3)        the row counter's step request (active low)   (2975,5035)
 in2        = NOR(w2, e4)                 west column                                   (2571,5197)
@@ -790,3 +795,107 @@ ports file; `rcs_mv`: `tl3` lists the pad's poly at x 4250, not the pad).
   `rcs_iso2958`; the west column y 3590-4940; thin metal W).
 - `ports.d/tla.txt` holds only this piece's three wire ends; the file's other ports are still only in the tables
   of "Status" and "The west column".
+
+## Run 3 (2026-11-28): re-read item R40's second half, the columns beside R3 and R1
+
+Tom Seddon's session, on Claude Fable 5.2, from 2026-11-28 14:28 +0000. Piece `r40b`: "the same check in `tla`'s
+first cluster" (R40): every unit drawn on the column just east of R3 (x 3030-3063) and on its mirror west of R1
+(x 2550-2592). Regions x 2940-3090, y 3000-5310 and x 2520-2660, y 5095-5310. Scratch: `cache/scratch/tla/survey.md`
+("run 3"), images `r40b_s1`-`r40b_s8` (`s3`-`s7` with every package's trace outlined).
+
+| Unit | y | Pull-downs (gate, y) |
+|---|---|---|
+| `rcs_c1` | 3039-3183 | `rcs_b1` 3074, `rcs_a2` 3157 |
+| `rcs_u3288` | 3218-3372 | `tl5_w2722` 3246, `rcs_bd3330` 3330 |
+| `rcs_u3425` | 3402-3482 | `rcs_bc3460` 3461 (its second transistor, `rcs_iso2958`'s, is under the rail: not this piece) |
+| `rcs_b1` | 3478-3662 | `rcs_x1` 3547, `rcs_a2` 3638 (its third, under thin metal E: not this piece) |
+| `rcs_bc3460` | 3818-3972 | `rcs_e3` 3852, `rcs_e4` 3940 (`tl2` draws the two above, y 3722 and 3808) |
+| `rcs_cond` | 4514-4663 | `tl3_w3982` 4546, `rcs_cond_n` 4636 |
+| `rcs_cond_n` | 4690-4842 | `rcs_in2` 4722, `rcs_in3` 4806 |
+| `rcs_in3` | 5122-5266 | `rcs_e3` 5157, `rcs_e4` 5240 |
+| `rcs_in2` (west) | 5120-5282 | `rcs_w2` 5153, `rcs_e4` 5240 |
+
+**Result: found as drawn. No connection changed, no geometry moved; one item lost its `?`.** `rcs_b1` =
+NOR(`rcs_a2`, `rcs_u3425`, `rcs_x1`) is firm now (`tools/unsure.py --equations rcs_b1`; 1,002 of 1,464 equations
+firm, was 1,001; uncertain items 1,235, was 1,236). Full extraction 2,547 nets, 4,931 transistors, 0 errors, 0
+warnings; `tools/t.sh tla sameconn.py f5adf76a` and `.venv/bin/python tools/sameconn.py f5adf76a`: connections
+identical.
+
+### Why the middle cluster's mistake is not repeated here
+
+In the middle cluster (run 2) the "column just east of the rail" lay in a 50 px gap between the rail and a thin
+metal, where the clean shot's open colours between two protected margins pass for an outlined box. **Here nothing
+lies east of R3 before bus line A (x 3097): the column is in the open**, and both chip-2 shots show it plainly
+(outline, gate rows, node boxes: `r40b_s2.png` at 4x, `s3`-`s6` at 2.7-3x). Measured all the same, as R40 asks:
+
+- **Every column end to end** (`tools/px.py col 3046 3000 3700 6 acid1b,acid,metal`; `col 3036 3784 4004 4`,
+  `col 3036 4496 4860 4`, `col 3036 5104 5304 4`, `col 2571 5104 5304 4 metal,acid,acid1b`). In the chip-2
+  stripped shot red minus green is -9 to +6 on the field between the units (y 3198-3204, 3378-3396, 3678-3684,
+  3976-4000, 4672-4680, 4848-4860, 5284-5304), 15-30 on the column's diffusion and 30-45 on the gate rows. Each
+  unit reads arm, gate, node, gate, arm, as drawn. The VSS section between `rcs_u3425`'s gate and `rcs_b1`'s gate
+  `rcs_x1` (y 3478-3530) is a large open diffusion (clean shot green, 133-143/140-164/84-104; chip-2 stripped
+  165/141/99: trap 21).
+- **Each gate's channel** (`px.py row Y 2952 3084 3 metal,metal1,acid,acid1b` at the fifteen gate rows; `row 3074 /
+  3246 / 3547 / 4722 3016 3074 1 metal`): a diffusion edge line crosses every gate row on each side of the column,
+  at x 3027-3028 and x 3064-3065, and at x 3031-3032 and x 3068-3069 for the four rows of `rcs_b1` and `rcs_bc3460`
+  (those two units lie 4 px east, in both chips). 37 px centre to centre; drawn x 3030-3063 (33). Each edge is
+  within 2-5 px of its line: **not redrawn**. The west unit (`row 5153 / 5240 2528 2612 3`): lines at x 2549-2552
+  and x 2588-2591, about 39; drawn 42. Gate lengths (`px.py col 3052 Y-22 Y+22 1 metal`): the two edge lines are 28
+  px apart centre to centre at every gate (a bright band of about 20); drawn 16 to 25, not redrawn.
+- **What the gate rows do under the rail: nothing.** Each row comes from the east, crosses the column, lies on
+  field for x 3009-3021 and ends at the rail's edge line (x 3004-3009). Under R3 at every one of the fifteen rows
+  the clean shot is the rail's field (pink 184-205/115-128 with the olive stripe 152-170/139-157 down the middle),
+  never the salmon of a poly: no rail gate like units A and C of the middle cluster. The west unit's two rows end
+  at R1's west edge likewise (`px.py row 5153 / 5240 2594 2662 3 acid1b,metal1`: pink and olive under R1; the rail
+  gate of `rcs_w2` at y 5066, for comparison, 238-250/168-183).
+- **The nodes' strips west under the rail** are the pale bands of the chip-2 stripped shot at y 3105-3124,
+  3278-3297, 3412-3445, 3882-3901, 4578-4600, 4755-4772 and 5186-5208 (east) and y 5193-5207 (west, eastwards), as
+  drawn. Their loads west of R3 are not part of this piece (R30, R32(c)-(e), R41).
+- Nothing is undrawn inside the units' own rectangles (x 2940-3080 at y 3000-3195 on `r40b_s1.png` with this
+  file's trace; y 3195-3675, 3770-4015, 4490-4870 and 5095-5310 on `s3`-`s6`, and x 2520-2660, y 5095-5310 on
+  `s7`, with every package's trace outlined), except the node box without a poly at (3045-3070, 3415-3440), which
+  is AMB-030. The stretches of the column between those cuts (y 3675-3770, 4015-4490, 4870-5095) hold other units
+  (`tl2`'s, the AND-OR-INVERT, the step gate) and were not looked at in this piece.
+
+### The VSS join at (3020,3500): `?D` made firm
+
+`?D 2968,3470:3035,3528` was the box under R3 with the contact (2990,3500) and "its join to the column's top (join
+seen only as a heavy line at the rail's edge: assumed, as in the other units)". Read (`r40b_s8.png`, 4.2x, three
+shots; `px.py row 3490 / 3500 / 3515 2986 3040 2 all`; `px.py col 3008 / 3014 / 3040 3462 3544 2 acid,acid1b`):
+
+- under the rail the clean shot is tan (195-204/150-183) without a break from x 2986 to x 3018; then one line (red
+  83-94 at x 3024, 3-5 px under 110); then the open diffusion. In the chip-2 stripped shot the line is at
+  x 3016-3022 (red 60, 7-9 px under 100), with red minus green 16-25 west of it and 23-46 east of it;
+- the box's upper and lower edges under the rail are at y 3482 and y 3532, the open part's at y 3477 and y 3535
+  (the two gate rows);
+- one line of 6-9 px cannot be two diffusion edges with field between.
+
+So it is one diffusion with the rail's edge line across it, and it is drawn `D`. **The same is true of every arm of
+these columns** (fourteen joins of an arm to its box under the rail, drawn firm from the start). The line's depth
+does not tell a join from a gap: across x 3000-3030 the chip-2 stripped shot's darkest red is 39-84 at the arms,
+60 at this join, and 31 and 83 at two places with field on both sides (y 3390, y 3290); 42 over 14 px where a box
+under the rail ends against field (y 3200). What is read is what lies either side of the line.
+
+### Ambiguities of run 3
+
+1. **The joins under R3's east edge line and R1's west edge line**: every arm of the columns to its VSS box under
+   the rail, and the join at (3020,3500). Each is read from diffusion on both sides up to one line of 6-9 px at the
+   rail's edge, and edges that agree within 5 px; under the line itself nothing is seen in any shot (the rail's
+   edge in the metal shots, the etch line in the stripped ones). If one were cut, that unit's column would have no
+   VSS at that end. This is Ambiguity 2 of run 2 for this cluster.
+2. `rcs_u3425` = NOR(`rcs_bc3460`, `rcs_iso2958`) stays marked: `rcs_iso2958`'s transistor rests on the link
+   `?D 2936,3462:2972,3500` in the gap between thin metal E and the rail, and its gate has no connection found
+   (Not done, above). Not re-read here.
+
+### Not done after run 3
+
+- R40 is done for `tla` with this run (both halves).
+- Next for this file, in the order of the re-read list: **R23 and R42 for the first cluster's rail gates** (the
+  step gate's three pull-downs at y 4938, 5010, 5065 under R3; `rcs_w2` at (2625,5066) and `tla_w3505` at
+  (2626,3243) under R1): a second patch of the same device beyond the rail, and the box's edge at the second dark
+  line about 9 px beyond the rail's own (run 2, review round 4). Then **the loads west of R3 and east of R1 of the
+  units of this piece** (R30; R32(c)-(e): the ties at y 3134, 3307, 4615, 4790, 5216 drawn by analogy, each
+  load's gate poly beyond its tie box; R41: thin metal E over the tie boxes), R32(a) (the gate rows' ends on the
+  bus pads), R29, R38's other ends, R39.
+- The rest of this file's Not done list is unchanged (`rcs_iso2958`; the west column y 3590-4940; thin metal W;
+  the boxes without a poly; bus pieces; `ports.d/tla.txt` for the file's older wires).
