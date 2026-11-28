@@ -1,12 +1,12 @@
 13040,14700:13850,15100  route  write strobes turning north | wr_r6 w1 w2 w0 w4 arrive in poly and each ends on a contact under a track of the 18-line bundle (x 13088-13826) that carries it north
 13040,15100:13700,17100  route  strobe track channel | 18 vertical metal tracks with poly cross-unders; wr_r5 and wr_r7 climb it from the bottom and leave north on tracks k1, k2; other lines go into the mid-right array
-13760,15120:14055,15350  logic  reset copies rst_rc and rst_lat (two inverters) | both driven by rst_a_n (line X, the input of input-row gate 0): rst_rc leaves north on track k6, rst_lat south on x 13716
+13760,15120:14055,15350  logic  the two inverters of line X: rst_rc and rst_lat | both NOT rst_a_n (line X, the input of input-row gate 0; rst_a_n = NOR(rst_a, h_eq_r0_q_n) since bd1's run 5, so they are high in reset and whenever the latched R0 match is low): rst_rc leaves north on track k6, rst_lat south on x 13716
 13860,15385:14050,15515  logic  inverter of R4's match | bd1_an = NOT rc_eq_r4; output goes south on a metal line (x 13783) to the latch's lower half
 13700,15468:14050,15700  logic  latch on R4's match, gated by rst_lat (upper half) | bd1_n1 = NOT(rc_eq_r4.rst_lat + bd1_q); output on a metal line x 13957
 13770,15634:13806,15735  logic  pull-down | gate rst_a (the input of X's driver)
 13700,15700:14050,15860  logic  latch on R4's match, gated by rst_lat (lower half) | bd1_n2: pull-downs bd1_an.rst_lat and bd1_n1 traced; its load (north-east, y 15630-15702) is drawn by eof (piece r4lat): bd1_q is bd1_n2, the latch is complete
-13700,15860:14080,16125  ?logic gate column (untraced) | gates under the ground rail x 13848; ck_out tap at y 15930
-13760,16125:14055,16280  logic  reset inverted (rst_a_n, line X) | one inverter, rst_a_n = NOT rst_a; rst_a arrives in poly along y 16231 from a line at x 13630
+13740,15860:14055,16100  logic  latch on R0's match (end of line) | h_eq_r0 passed while ck_out is high onto a storage node (pass transistor with an L-shaped gate), inverter h_eq_r0_q_n, weak hold device (a plate tied to the ground rail); its inverted output gates a pull-down of line X's driver below
+13760,16100:14055,16280  logic  line X's driver: R0's latched match gated by the reset | rst_a_n = NOR(rst_a, h_eq_r0_q_n): high only while the latched R0 match is high outside reset; rst_a arrives in poly along y 16231 from a line at x 13630
 13690,16340:14050,16520  logic  inverter of R0-half's match | h_eq_r0half_n = NOT h_eq_r0half; output goes south on a metal line (x 13783) to the latch's lower half
 13690,16440:14050,16660  logic  latch on R0-half's match, enabled by ck_out (upper half) | eof_w16432 = NOT(h_eq_r0half.ck_out + h_eq_r0half_q); a copy of the latch on R4's match; this node's wire leaves south to the bottom bus (eof_w16432)
 13700,16660:14050,16815  logic  latch on R0-half's match (lower half) | h_eq_r0half_q = NOT(h_eq_r0half_n.ck_out + eof_w16432 + rst_a): the match as latched while CLK is low, cleared by the reset copy

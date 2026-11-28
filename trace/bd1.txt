@@ -114,7 +114,7 @@ N P 12990,17125 wr_r8
 # x 13910-13958 through an arm at y 15215-15246.
 M 13934,14690 y15246 w=48          # wide rail from the north; ends at the arm
 M 13860,15215:13958,15246          # arm to the column's ground rail
-M 13848,15100 y15845 w=46          # ground rail of the gate column (drawn as far as traced; below y 15833 it becomes two narrow lines)
+M 13848,15100 y15845 w=46          # ground rail of the gate column (it runs on south as one metal: run 5, piece eol)
 N M 13934,14700 vss
 M 14021,14690 y16290 w=46          # supply rail of the gate column (drawn as far as traced; by scan it runs on to y 16960)
 N M 14021,14700 vcc
@@ -197,8 +197,8 @@ N M 13826,14700 hc0
 # One inverter: X = NOT g. The output diffusion (above the gate, under the rail) is tied
 # to X's tap poly by a buried contact, and has a metal contact at 13917,16155 to a line
 # going north. Sizes match the two inverters X drives at the top of the column.
-M 13848,16129 y16290 w=46          # ground rail here. Between y 15833 and 15991 the rail is two
-N M 13848,16280 vss                # narrow lines (not traced), so this piece is named from the pull-downs
+M 13848,16129 y16290 w=46          # ground rail here (one metal with the rail above: run 5, piece eol)
+N M 13848,16280 vss
 # --- g: track x 13630 from a contact at 13629,15673 down to a contact at 13629,16150; poly
 # link south under X's horizontal metal to a pad with a second contact at 13629,16235
 # (a metal line goes on south from it); from the pad the gate poly runs east, diagonally
@@ -237,7 +237,7 @@ P 13672,16194 x13770 w=20          # X's tap: poly east from the contact 13672,1
 P 13764,16174:13797,16207
 D 13880,16133:13945,16178          # X: east of the rail, with a metal contact
 C 13917,16155
-?M 13917,16168 y16040 13922,16000 y15905 w=24   # metal north to a contact near 13928,15916 (dense group, not traced)
+# (X's metal north from this contact: run 5, piece eol, at the end of this file)
 D 13930,16170:13953,16265          # X: strip down the west side of the load
 ?D 13880,16207:13940,16254         # under the gate's end block: a second pull-down, ground to X (continuity under the poly assumed)
 ?D 13764,16200:13820,16275         # west of the rail: X (below the buried contact) and a ground strip (heavy-outlined box
@@ -415,11 +415,11 @@ P 13902,15782:13958,15806          # the block
 # Nested jogs at y 15087-15176 (3.1x metal view): each steps one track east after the track
 # east of it has ended. k15 steps west and is rc_eq_r4 (drawn with the gate column).
 # k7: east at y 15176 to k8's position, south to a contact at 13432,15888; poly east along y 15889
-# under five lines into the gate column (seen to x 13695; what it does there is not traced).
+# under six lines into the gate column, where it ends on the buried contact of box B1 (run 5, piece eol).
 M 13391,14690 y15176 x13435 y15901 w=20
 C 13432,15888
 P 13418,15874:13449,15904
-?P 13432,15889 x13700 w=18
+P 13432,15889 x13700 w=18          # firm since run 5: orange in every gap, salmon under each track, edge bars only
 N M 13391,14700 h_eq_r0
 # k8: east at y 15130 to k9's position, south (scan: metal to y 16594, a 23 px break, then to y 16797; lower end not traced)
 M 13435,14690 y15130 x13478 y16590 w=20
@@ -591,3 +591,89 @@ P 12790,18412:12824,18444          # pad
 C 12806,18428 s=20x20
 M 12808,18429 x10840 w=14          # the bus line; eof's M 10811,16432 y18430 x10850 ends on it
 N M 12000,18429 eof_w16432
+
+# ================================================================ run 5, piece eol: the group y 15860-16130
+# A latch on R0's match built to order (the rdp3_lat family: pass transistor, inverter, a second pull-down on the next
+# gate, weak hold device), wound round the ground rail between the latch on R4's match and X's driver:
+#     h_eq_r0_q    <- h_eq_r0 while ck_out is high        T1, an L-shaped gate round the land of box B1
+#     h_eq_r0_q_n  = NOT h_eq_r0_q                        G1 under the rail; load east of X's metal
+#     rst_a_n      = NOR( rst_a, h_eq_r0_q_n )            G2, a second pull-down of X's driver, gate = the load's plate
+#     h_eq_r0_q   <-> rst_a_n                             hold device: a plate tied to the rail over a diffusion strip
+# Read in four shots (views and measurements: notes/blocks/bd1.md, "Run 5"). The clean shot's colours are inverted east
+# of the rail here (tracing guide, trap 28): east of x 13875 the classes come from the chip-2 pair and the edge lines.
+# --- the ground rail is one metal through the group, x 13816-13870 (both metal shots bright in every band between the
+# edge lines of what lies under it; the clean shot pink or protected under all of it). A bump round the contact on bar R.
+M 13843,15840 y16135 w=54
+M 13856,15882:13886,15918
+# --- T1. h_eq_r0's row (k7's poly, firm since this run: orange in every gap, salmon under each of the six tracks with
+# edge bars only, no branch) ends on a pad in a heavy-outlined nested box B1: a buried contact onto a land.
+P 13695,15889 x13790 w=18
+P 13759,15877:13793,15903
+B 13752,15872:13796,15906
+# ck_out: trunks' metal x 13703-13727 ends on a pad (13713,15931); the poly row y 15923-15944 runs east and turns north
+# under the rail's west edge as bar L (x 13808-13830, to y 15880): ONE poly (orange without a line from x 13786 to the
+# metal's edge line x 13812-13816 in both metal shots, against an edge at x 13800-13806 in the control row y 15905).
+# The bright spot (13821,15888) in the rail over the bar's top end is NOT a contact (no hole in the clean shot, which
+# is salmon there; the bar's end over field under the rail: traps 13, 26). The bar's body lies on diffusion (brighter
+# salmon than its top end; the line across it at y 15890-15893 is the diffusion's edge).
+P [ 13697,15916 13733,15916 13733,15923 13808,15923 13808,15880 13830,15880 13830,15944 13733,15944 13733,15948 13697,15948 ]
+C 13713,15931
+N P 13760,15933 ck_out
+# the land inside the L (h_eq_r0's side), the channel under the L, and the storage node: the foot below the row, the
+# strip east of bar L (closed at y 15895), the narrow wire W south (x 13767-13785: plain between two edge lines; metal
+# blue 82 and green 130 against poly's 59, stripped shot red minus green 25 against field's -5) to the land of box B2
+D [ 13755,15874 13808,15874 13808,15895 13852,15895 13852,15961 13785,15961 13785,16042 13802,16042 13802,16080 13764,16080 13764,16042 13767,16042 13767,15922 13755,15922 ]
+N D 13776,16000 h_eq_r0_q
+# --- box B2 (nested, heavy outline): W's land under the west end of gate G1's poly, which runs east under the rail,
+# through the gap and under X's metal to a rounded end at x 13934
+P 13782,16056:13934,16077
+B 13779,16052:13805,16080
+# --- the rail's diffusion column: D1 (the inverter's node) | G1 | ground land with the rail's contact | G2 | X's node
+# (the existing diffusion of X's driver, from y 16154). In the gap x 13873-13900 each band was measured (px.py col 13889).
+D 13823,16040:13880,16160
+C 13843,16108
+D 13878,16040:13928,16140
+D 13778,16101:13825,16123          # the ground land's west end beyond the rail (plain, a diffusion: stripped shot 16-23)
+?D 13797,16118:13820,16165         # under G2's west arm, to X's diffusion west of the rail (not measured; changes W only)
+# the inverter's node: D1 runs east under X's metal, then north-east (its north-west edge is the diagonal line from
+# (13905,16036) to (13930,16005)) into the narrow strip K2 between X's metal and the load (x 13937-13948), which runs
+# north to a closed arc at y 15963 and south past the load to a small box at y 16087-16103
+D [ 13878,16040 13905,16040 13934,16012 13950,16012 13950,16102 13940,16102 13940,16054 13878,16054 ]
+N D 13944,16030 h_eq_r0_q_n
+# its load: plate x 13954-13991 (an edge line across it at y 16008-16012), supply land with a contact on the VCC rail
+P 13954,15994:13991,16047
+D 13946,16012:14050,16046
+D 13998,16000:14050,16057
+C 14018,16025 s=26x40
+# the plate's poly runs on south as a column (x 13966-13990) to y 16128, where it turns west as gate G2: east of the
+# rail y 16107-16129, a step down in the gap, under the rail y 16130-16149, a west arm to a rounded end at x 13763.
+# The column ENDS at y 16128: 12 px of field (stripped shot red minus green 0 or less, y 16136-16145) lie between it
+# and the tie box of X's own load.
+P 13966,16040:13990,16128
+P [ 13763,16128 13820,16129 13873,16130 13883,16107 13990,16107 13990,16129 13883,16129 13873,16149 13820,16150 13763,16151 ]
+N P 13975,16080 bd1_q3
+@alias h_eq_r0_q_n bd1_q3
+# the plate's ties to its node, both uncertain: a small heavy-outlined box (13937-13953, 16087-16103) at K2's south
+# end against the foot of the column, and a box of the usual size at the plate's north end beside K2's arc
+?P 13937,16087:13954,16110
+?B 13935,16085:13956,16104
+?P 13954,15962:13980,15996
+?D 13936,15965:13950,16014
+?D 13948,15965:13980,15990
+?B 13950,15960:13982,15992
+# --- X's metal from the contact (13917,16155) on the driver's node north to a contact on a diffusion box E
+M 13916,16168 y15950 w=22
+M 13908,15900:13944,15952
+C 13926,15917
+D 13907,15892:13958,15945
+# --- the hold device. Bar R: a poly with a contact from the rail (13870,15900: ring, 12 px centre, green hole), down
+# the rail's east side into a plate x 13791-13875, y 15967-16023. Two lines cross the plate (y 15987-15990 and
+# y 16010-16013) and the band between them is brighter: the edges of a diffusion strip under it, as in rdp3_lat.
+# The strip is measured in the gap east of the rail (px.py col 13889: diffusion y 15990-16005, field below it) and is
+# not seen under the plate; from the gap it is taken to join the column K1 under X's metal that leaves box E south.
+# K1's layer and that junction are not resolved (Ambiguities): strip and K1 are drawn uncertain.
+P [ 13857,15878 13884,15878 13884,15914 13875,15914 13875,16023 13791,16023 13791,15978 13812,15967 13857,15967 ]
+C 13870,15900
+?D 13780,15990:13910,16010
+?D 13908,15940:13927,16012
+A 13795,15985:13870,16015 kind=hold
