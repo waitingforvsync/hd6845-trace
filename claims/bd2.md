@@ -10,4 +10,4 @@ merged, or by `tools/claim.py release` if it is abandoned.
 | Region | 15850-17000 x 14700-17100 |
 | What | bd2 run 4 (continue): the gate group east of the bundle's rail (x 16370-16490, y 15400-15860): loads of wr_data_e_n and ar_load_n, where wr_data_e_n goes, the end of bd2_x's band |
 | Branch | bd2 |
-| Status | tracing (part merged e87cba8 at 2026-11-28 06:10 +0000) |
+| Status | tracing (part merged 950f905 at 2026-11-28 06:55 +0000) |
