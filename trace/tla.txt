@@ -70,15 +70,29 @@ N P 3050,5065 rcs_in3
 D 2995,5030:3050,5048
 D 3045,5015:3068,5047
 B 3042,5012:3071,5049
-# load: strip from the VCC box under R2 (contact (2805,5030)) east under the gate plate
-# x 2845-2875 (W/L about 29/30) to the strip of the node; the plate's poly runs up to
-# y 4962 and (believed) east onto the strip by a buried contact
+# load: strip from the VCC box under R2 (contact (2805,5030)) east under the gate plate to the U's west arm.
+# Re-read 2026-11-28 (run 7, R32(c)-(e), R30). The plate is x 2843-2879, y 4995-5064, and the strip's edge lines
+# cross it at y 5010-5013 and y 5046-5049 (px.py col 2862 4986 5076 3 all; row 5032 2826 2912 3 all): 36/36 (was
+# drawn 29/30, with a neck up to y 4962 and a ?P east from it onto a ?B on the U's west arm at (2885-2908,
+# 4958-4996); the arm is plain strip there at every y from 4950 to 5010, nothing on it).
+# THE TIE is a buried-contact box on the plate's TOP edge, as rcs_bc3460's is: heavy outline x 2857-2887,
+# y 4960-4987, field north and west of it. Its centre (2872,4976) reads 159/139/77, 156/134/57, 163/154/86,
+# 84/73/57 (chip-2 metal, chip-1 metal, chip-2 stripped, clean), like run 6's tie-box centres and unlike plate
+# poly. Between centre and plate 12 px of dark in both metal shots (y 4983-4994); the chip-2 stripped shot has
+# no heavy line there (76-128, red over green by 8-32 from centre to plate; the box's top outline reads 33-55).
+# The U's west arm (strip x 2890-2901) sends a short tongue west into the box at y 4970-4984: its west edge
+# line (x 2886-2890 at y 4952 and y 4990) is absent at the box's height in the chip-2 stripped shot (94-109
+# there against 47-93), in the clean shot (171-190 tan, then green, against 37-59) and in chip 1's metal shot
+# (x 2890: 86-93 against 45-47); chip 2's metal shot has one dark band x 2880-2889 between centre and strip
+# (px.py row 4952 / 4970 / 4976 / 4980 / 4990 2872 2902 2 all). Poly through the 12 px band and the tongue
+# under the box's east outline are not seen as such (as at every tie box: run 6, Ambiguity 1); drawn firm.
 D 2778,4990:2838,5080
 C 2805,5030 s=22x50
-D 2830,5018:2892,5047
-P 2845,4962:2875,5052
-?P 2845,4962:2898,4992
-?B 2885,4958:2908,4996
+D 2830,5012:2892,5048
+P 2843,4995:2879,5064                 # the plate
+P 2858,4972:2884,4998                 # its poly up into the box
+B 2858,4962:2886,4986                 # the tie box
+D 2864,4970:2892,4984                 # the tongue of the U's west arm into the box
 
 # ---- the three input lines are pieces of the vertical bus x 3095-3380 (each piece joins two
 # or three poly lines by contacts and has plain ends)
@@ -475,8 +489,15 @@ D 2836,3422:2946,3446
 D 2900,3420:2940,3500
 P 2845,3415:2895,3502
 C 2865,3488
-P 2888,3478:2926,3498
-B 2893,3474:2928,3501
+# The pad tie, re-read 2026-11-28 (run 7, R32(c)-(e)): as drawn in its connections; outlines corrected. The arm
+# is y 3484-3497: in the clean shot salmon from the pad to x 2898, ONE thin line x 2900-2903 (72), then the box's
+# bright interior; in the chip-2 stripped shot x 2896-2904 reads 81-133 with red over green by 31-54 on the arm's
+# row and 29-56 with 4-11 on the row y 3468 above it (px.py row 3490 / 3468 2878 2912 2 all). The box is
+# x 2899-2935, y 3477-3503; the column enters it from the north without a line at x 2923-2926 (px.py col 2924
+# 3456 3508 3 all: clean shot 136-204 down to the bottom line), under E's centre the box's top outline crosses
+# it (y 3477-3483). South of the box field, east of it the link to rcs_iso2958's channel: no poly leaves it.
+P 2888,3484:2920,3497                 # the arm (drawn y 3478-3498 to x 2926 before run 7)
+B 2898,3478:2935,3501                 # the tie box (drawn 2893,3474:2928,3501 before run 7)
 M 2868,3474 y3656 w=36                # the strap (x 2850-2886)
 # A second transistor on rcs_u3425's node (found 2026-11-17; re-read in run 5, 2026-11-28): a vertical poly
 # x 2950-2968, y 3447-3547, under the west edge of the VSS rail, crosses a diffusion (y 3462-3500) that links
@@ -832,12 +853,20 @@ N P 3300,4240 rcs_x1
 # that runs south to about y 4400: the unit's output wire.
 D 2785,4190:2842,4262
 C 2806,4205 s=24x24
+# Re-read 2026-11-28 (run 7, R32(c)-(e), R30): as drawn in its connections; outlines corrected. The arm leaves
+# the pad's east edge at y 4172-4192 (clean shot salmon without a line to x 2908; orange in chip 2's metal shot
+# at x 2896, y 4175-4190). The box is x 2900-2940, y 4168-4197 (in the gap x 2929-2935 both metal shots show its
+# top line y 4170-4178, a plain interior y 4181-4190 and its bottom line y 4193-4196; east outline x 2938-2944).
+# The diffusion comes up into its east part from the strip at x ~2918-2932: in the clean shot x 2923-2926 runs
+# from the box's cream interior (190-204) down to the strip with two mild dips (103-134 at y 4190, 151-154 at
+# y 4202) where a line reads 35-100 (mat.py acid1b r 2878 2950 3 4148 4236 3). North of the box pink field under
+# E, east of it the gap is plain (no poly leaves the box); the load's far side is node N, not a VSS box.
 D 2836,4203:2956,4228
-D 2898,4180:2938,4230
+D 2914,4176:2936,4230                 # box interior and its neck down to the strip (drawn x 2898-2938 from y 4180 before run 7)
 P 2845,4155:2895,4246
 C 2862,4172
-P 2888,4162:2936,4196
-B 2896,4158:2940,4200
+P 2888,4172:2924,4192                 # the arm (drawn y 4162-4196 to x 2936 before run 7)
+B 2900,4168:2940,4197                 # the tie box (drawn 2896,4158:2940,4200 before run 7)
 M 2865,4158 y4400 w=38
 N M 2865,4300 rcs_n4200
 # the signal metal over the stack: from a pad (contact (3040,4028)) down to y 4490; the pad's
