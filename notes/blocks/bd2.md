@@ -1,14 +1,16 @@
 # bd2: bus control logic right of the register select gates
 
 Region x 15850-17000, y 14700-17100. Trace: `trace/bd2.txt` (`@requires sel`, `areg`, `bd3`).
-Extracts with 0 errors, 0 warnings. Seven runs; this file was rewritten by the second, the third
+Extracts with 0 errors, 0 warnings. Eight runs; this file was rewritten by the second, the third
 (2026-11-27: the column from group 4 down to `dbus_le`'s driver) has its own section, "Run 3", below, the
 fourth (2026-11-28: the gate group east of its rail) the section "Run 4", the fifth (2026-11-28: the
 inverter of `wr_addr_sel` south of the group, which corrects what gates the upper gate) the section "Run 5",
 the sixth (2026-11-28: a re-read of runs 1-2's wiring between the bundle and the gate group, found as
 drawn) the section "Run 6", and the seventh (2026-11-28: a re-read of groups 2 and 3, the two NORs of R/W, RS
 and CS; connections as drawn, widths and two cells' places corrected, group 3's VCC contact found) the section
-"Run 7".
+"Run 7", and the eighth (2026-11-28: a re-read of the strobe latch's wiring east of its rail; connections as
+drawn, the thin metal `wr_data_sel_n` drawn uncertain over two boxed cells, the second of them drawn) the
+section "Run 8".
 
 ## Status
 
@@ -37,6 +39,11 @@ and CS; connections as drawn, widths and two cells' places corrected, group 3's 
   photographs and not from group 2's pattern; its VCC contact is drawn. All three pull-downs of each are
   64-70 wide (run 2 had 28 and 52): the stack runs west of the rail to x 15990 and, at the R/W input, east of
   it to x 16096. Each output's boxed cell is drawn where its box is (30 px east of run 2's).
+- **The strobe latch's wiring east of its rail is re-read** (run 8, 2026-11-28): the thin metal `wr_data_sel_n`
+  from the pad of row 1's upper band to the pad of G4's bar (both contacts real, none between), the hook cell on
+  row 1's output and its bar into the band for G1, the two taps of `e_b`, and `wr_data_sel`'s way from group 2 to
+  row 3's band. Found as run 2 drew it. The "second boxed structure" under the thin metal is drawn: an unused
+  output cell, a poly island. Over it and over the hook cell the thin metal is now an uncertain item (`?M`).
 - **Three results of the first run are corrected**: `ar_load` is not `NOT e_b` (G2's
   gate is a separate net, `ar_load_n`); row 1 has a third pull-down and a load; the metal
   at x 16210 is two wires (a second break, at y 15968-15988).
@@ -92,7 +99,7 @@ So `wr_stb_n = NOT wr_data_lat`, and `wr_data_lat` is the Q of the latch below.
     wr_stb_n = NOT wr_data_lat                                   G1          traced
     wr_data_lat    = NOT( wr_data_lat_n OR (e_b AND wr_data_sel_n) )             row 1       traced
     wr_data_lat_n    = NOT( wr_data_lat OR (e_b AND wr_data_sel) )             rows 2-3    traced
-    wr_data_sel_n     = NOT wr_data_sel                                    G4          traced (the tie of its output to the bar is inferred)
+    wr_data_sel_n     = NOT wr_data_sel                                    G4          traced (the tie of its output to the bar is inferred; marked since run 8: its thin metal is `?M` over two boxed cells)
     wr_data_sel     = NOR( rw_d, bd2_rs_n, cs_d )                  group 2     traced
     bd2_rs_n  = NOT rs_d                                     group 4     traced (load: run 3)
     bd2_rw_n  = NOT rw_d                                     run 3       traced
@@ -395,7 +402,7 @@ Diffusion column x 16312-16366 under the ground rail x 16312-16362
 
 | x | Segment | Net |
 |---|---|---|
-| 16104 | 15560-15962 | `wr_data_sel_n`: contact 16114,15560 (row 1 upper band) to contact 16105,15962 (G4's bar) |
+| 16101 | 15560-15962 | `wr_data_sel_n`: contact 16114,15560 (row 1 upper band) to contact 16105,15962 (G4's bar); the metal is x 16094-16108 from y 15671 to y 15940, 5 px further east above the hook cell; `?M` over the hook cell (y 15624-15675) and the unused cell (y 15764-15802) (run 8) |
 | 16122 | 15384-15490 | `e_b`: contact 16122,15388 down to the corner into the lower trunk |
 | 16169 | 15211-15443 | `wr_data_lat` (upper trunk), contact 16167,15432 at its lower end |
 | 16169 | 15470-17702 | `e_b` (lower trunk); taps 16167,15605 (row 1), 16167,15735 (G_d), 16166,15822 (row 3), **16166,17037 (run 3: the gate of the inverter `bd2_e_n`; the "scan gap" of run 1)**. No contact where it crosses the bands of groups 2-4 and of run 3's gates (salmon in the clean shot) |
@@ -457,11 +464,16 @@ The lists marked ? at the south, east and top edges come from `tools/sel_cut.py`
    to clear; a contact from `wr_data_sel` to the second would short group 2's output to
    `wr_data_e_n`. The clean shot shows no contact footprint on either (cream / tan, not
    olive). Working assumption: unused cells, no contact.
+   **Run 8** re-read the first (its section below, "The unused cell"): it is drawn, as a poly island on the
+   output's east end; the thin metal over it is `?M` (Ambiguity 29). The second was re-read by run 5 (the thin
+   metal there is `bd2_w15872`, not `wr_data_sel`; `?M` since review round 4).
 3. **`wr_data_sel_n` across rows 1 and 3** is only a 3-6 px bright core in the metal shots
    between y 15566-15668 and 15800-15898, dark where it crosses the two boxed cells.
    Taken as one metal from 16114,15560 to 16105,15962 because the clean shot has a
    protected (pink) strip under it all the way and the core is metal-yellow over the
    orange band at y 15606 in both chips. No contact on rows 1 or 3's bands.
+   **Run 8** measured it end to end (its section below): the protected strip is unbroken but for the two
+   boxed cells, where the metal is drawn `?M` (Ambiguity 29).
 4. **G4's output cell** (15966-15978 x 15956-15970): that it ties both the load gate and
    the bar (and so the thin metal `wr_data_sel_n`) to G4's output is inferred: the bar has no
    other driver and row 1's upper band no other source.
@@ -499,8 +511,9 @@ The lists marked ? at the south, east and top edges come from `tools/sel_cut.py`
   section below), with both ties uncertain; the group's south part by run 5 (the inverter of `wr_addr_sel`),
   which also answers Ambiguity 16. Runs 1-2's joins between the bundle and the group are re-read by run 6
   (found as drawn). Left there: the three ties (Ambiguities 17 and 21) and the tie of `ar_load_n`'s west cell
-  (Ambiguity 5); the strobe latch's own wiring west of the `e_b` trunk is still unreviewed (run 6's Not
-  done). Groups 2 and 3 are re-read by run 7.
+  (Ambiguity 5). Groups 2 and 3 are re-read by run 7, the strobe latch's wiring east of its rail by run 8
+  (its Not done: the latch's gates under and west of the rail, y 15500-15985, are the last unreviewed part of
+  runs 1-2).
 - **The column below y 17400** (run 3 traced group 4 and the column down to there: see its two sections).
 - **Right-hand column** (x 16480-16800, y 14700-16450) and the routing east and south of
   it: not looked at. `dl7_q_n`, `dl6_q_n`, and probably `bd2_x`, `wr_data_e_n` go there.
@@ -1271,6 +1284,159 @@ y 15980-16224 and y 16241-16485). In both:
   `wr_data_sel_n`, the hook cell on row 1's output, the undrawn boxed structure at (16088-16142, 15764-15798)
   (Ambiguities 2-4): unreviewed. Next.
 - The boxed cells' windows (Ambiguity 1), here four: two load ties, two output cells.
+- The column under the left rail below y 17400; east of the VCC rail x 16491-16538 south of y 15770.
+
+## Run 8 (2026-11-28): the strobe latch's wiring east of its rail, re-read
+
+Tom Seddon, on Claude Fable 5.2, 2026-11-28 from 06:11 +0000. Piece `slw`: x 16058-16260, y 15536-15995, what
+run 2 drew east of the strobe latch's rail and no review had read (run 7's Not done): the thin metal
+`wr_data_sel_n` with its two end contacts, the hook cell on row 1's output, the "second boxed structure" under
+the thin metal (Ambiguities 2-4), the east ends of the five bands, and `wr_data_sel`'s way from group 2 to row
+3's band under the track x 16210. **A re-read: every connection is as drawn** (`tools/sameconn.py` against the
+last merge, b84de218: connections identical, the package alone and with every trace file; 4,913 transistors,
+2,539 nets, 0 errors, 0 warnings). What changed: two stretches of the thin metal are now uncertain items, the
+second boxed cell is drawn, the metal's place, one band's end, three labels. Views in `cache/scratch/bd2/`:
+`r8_s1`, `r8_s2` (2.8x, four shots), `r8_p1` (5.6x, the top pad), `r8_c1`, `r8_c2` (8x, the two cells, four
+shots), overlay `r8_o1`. The numbers decide, as before: `tools/textmap.py`, `tools/tl3_thin.py`,
+`tools/tl5_tracks.py`, `tools/px.py`, `tools/bd2_prof4.py`, `tools/bd2_umap.py`, `tools/cdp4_candh.py`,
+`tools/cdp4_padc.py`, `tools/opendiff.py`.
+
+### What it confirms
+
+    wr_data_lat   = NOT( wr_data_lat_n OR (e_b AND wr_data_sel_n) )     row 1's upper band is on the thin metal
+    wr_data_sel_n = NOT wr_data_sel                                      G4's bar is on the thin metal
+    wr_stb_n      = NOT wr_data_lat                                      row 1's output reaches the band for G1 through the hook cell
+
+Marked, all three, as before and for one reason more: the thin metal passes over two boxed cells where the
+photographs do not show it (below), and the hook cell and G4's output cell are `?B` (Ambiguities 1, 4).
+
+- **Both ends of the thin metal are contacts on pads.** The top pad (centre (16113,15561)) and the bottom pad
+  (centre (16104,15962)) each have a ring about 40 px across with a full-bright centre in both metal shots
+  (`tools/textmap.py 16080 15536 16150 15990 3 --acid`: centre B-D in both; `tools/px.py row 15962 16090 16124 2
+  all`: 191-209/134-199 and 202-219/176-197 over 10 px) and a hole in the clean shot (top: 166-180/178-194/96-110
+  over 12 px, `row 15558`; bottom: 126-142/133-152/74-78 over 10 px). `tools/cdp4_padc.py`: metal centres
+  (16113,15561) / (16116,15560) with the hole at (16115,15560); (16104,15963) / (16103,15962) with the hole at
+  (16103,15961).
+- **Nothing else leaves either pad** (trap 32). Round the top pad the heavy outline is closed (x 16096-16140,
+  y 15540-15582): what the stripped map shows as a column of poly-red at x 16134-16140 and a row at y 15539 is
+  that outline, dark in every shot (`tools/px.py col 16137 15500 15600 4 all`: 70/39/36, 55/42/38, 70/30/30),
+  with field north and east of it in four shots (view `r8_p1`). South of the bottom pad both metal shots are
+  bare from y 15986 and the clean shot has no protected strip; east of it bare ground to the trunk. The red
+  strip beside the metal in chip 2's stripped shot (x 16116-16131, the whole way down) is the metal's ghost
+  boundary: bare ground in both metal shots.
+- **The upper band is one poly with the top pad, and G4's bar with the bottom pad.** Between the band and the
+  pad's hole there is one dark line of 5-6 px (`tools/px.py row 15566 16084 16112 2 acid1b,acid`: salmon to
+  x 16098, dark x 16101-16105, the pad from x 16106), the stack's east edge under the poly, as on the lower
+  band; the bar is salmon without a line from x 16090 into the bottom pad's hole (`row 15962`).
+- **One metal between the two pads, with no contact on the way, as far as the photographs show.** Where it is
+  plain to see it is x 16094-16108: full-bright in both chips from y 15671 to y 15760 and from y 15905 to
+  y 15940, with the clean shot's pink strip x 16096-16112 under it (fine map: `tools/textmap.py 16084 15748
+  16122 15906 2`). Above the hook cell it lies 5 px further east (chip 1 has metal at x 16106 at y 15586 and
+  y 15602-15606: `tools/bd2_prof4.py col 16106 15566 15690 2`), on the east edge of row 1's diffusion column,
+  whose line under it (x 16101-16107, dark in the clean shot from the pad to y 15636) is why it is so dim
+  there (trap 19). Below y 15796 it lies on the east edge of the diffusion of rows 2-3 (visible core
+  x 16094-16100, the edge's red line x 16108-16110 in the clean shot, pink beyond). `tools/tl3_thin.py 16094
+  16114 15540 15985 --thr 176 --min 8`: besides the two cells every dark stretch is 9-18 px, each at an edge
+  that passes under (the pad's ring with the upper band's lower edge, 18; the lower band's two edges, 13 and
+  13; the four edges of the two bands of rows 2-3, 12-15); at the default threshold of 150 they are 8-11 px.
+- **No contact at any band.** Under the metal's core the clean shot is salmon on row 1's lower band
+  (y 15603-15625), on the `e_b` band of rows 2-3 (y 15811-15831) and on the `wr_data_sel` band
+  (y 15857-15877), with no hole. The greenish strip that `tools/tl5_tracks.py v 16104` lists as two "holes" of
+  32-33 px (y 15778-15810, y 15822-15854) is the strip along the diffusion's east edge under the metal
+  (173/175/139, 168/182/132: pale, blue 126-139; `tools/px.py col 16100 15752 15808 3 all`), not a hole (a
+  hole is 10-12 px, blue 74-110). `tools/cdp4_candh.py -v v` calls the crossings pad-like from the edge bars;
+  its clean minimum there is +17 to +52.
+- **The hook cell's bar is one poly with the band for G1, and apart from the lower band.** Down x 16133
+  (`tools/bd2_prof4.py col 16133 15592 15692 2`) the bar is orange in three shots without a break from
+  y 15648 to y 15680, into the band. Between the lower band's arm (to y 15615) and the bar's top (y 15640)
+  there are 10 px of field (`tools/px.py col 16133 15614 15648 2 all`: 132-177/134-144/84-89, chip 2's
+  stripped shot greener than red) between the two outlines.
+- **`e_b`'s two taps and `wr_data_sel`'s feed.** `tools/tl5_tracks.py v 16169 15790 15995`: one hole, at
+  y 15824 (the tap of rows 2-3); the trunk has only edge bars over the `wr_data_sel` band. `v 16211 15760
+  16010`: holes at y 15781 and y 15997 and no metal in either chip from y 15964 to y 15993: the break of run
+  2, with open poly in it (`tools/px.py col 16211 15944 16004 3 all`: 152-167/105-107/47-53 and
+  137-162/83-87/35-52 at y 15974-15980). `h 15957 16200 16350`: the upper piece's bar east is one metal with
+  no hole. Under the upper piece the band's poly turns south and runs as a salmon column x 16208-16212 from
+  y 15858 to the lower pad (`tools/bd2_umap.py 16152 15846 16232 16008 4 4`), so **`wr_data_sel` reaches row
+  3's band from the contact (16211,15997)**, as drawn. (Row 1's tap (16167,15605): run 6.)
+- `tools/opendiff.py 16058 15540 16260 15995`: no open diffusion undrawn.
+
+### The two boxed cells under the thin metal
+
+The hook cell on row 1's output (x 16100-16132, y 15636-15662) and the structure that Ambiguity 2 left
+undrawn (x 16088-16142, y 15764-15798) are **the same cell twice**, 135 px apart (views `r8_c1`, `r8_c2`;
+`tools/px.py row` at y 15647, 15651, 15655 and y 15772, 15778, 15783, 15788, 15792, 15797, x 16088-16142):
+
+| | hook cell | lower cell |
+|---|---|---|
+| closed heavy outline | y 15632-15660 | x 16088-16142, y 15764-15798 |
+| pale rectangle (one in the clean shot, two patches in the other three) | x 16105-16121, y 15642-15656 | x 16105-16121, y 15773-15792 |
+| its colour in the clean shot | cream 200/185/133, a green rim below (175/185/128) | cream 192-202/171-184/119-136, a green rim below (124-139/146-159/97-102) |
+| dark divider | x 16122-16128 | x 16122-16128 |
+| poly bar (orange in both chip-2 shots and chip 1's metal, red-brown in the clean shot) | x 16129-16137, on south into the band | x 16129-16137, y 15773-15791 only |
+
+The plain centre between dark frames is the look of poly on bare silicon (trap 24; run 7 read group 2's output
+cell so). **The lower cell's bar ends inside the outline at both ends**: north of the outline (y 15755-15764,
+x 16119-16149) and south of it (y 15800-15806) both metal shots are bare ground, and the `e_b` band's own
+edge line begins at y 15809 (`tools/bd2_prof4.py col 16133 15752 15814 2`). So it is a poly island on the east
+end of the output of rows 2-3: an output cell that is not used (the output leaves west, to its load and the
+metal x 15924). It is drawn like the hook cell (the output's tab into the cell, the cell's poly with its bar,
+`?B`); tied to `wr_data_lat_n` or not, it joins nothing, and the extraction gains neither a net nor a
+transistor. The diffusion runs into the cell without an edge line (`row 15783`: tan from x 16088, the cell's
+west patch, cream to x 16118).
+
+**The thin metal over them.** Over each cell neither metal shot shows the metal at full brightness: 42 px
+over the hook cell (y 15630-15671), 22 and 12 px over the lower cell (y 15763-15784, y 15789-15800). Inside
+each a core of about 6 px (x 16102-16108) shows:
+
+| | top contact | bottom contact | hook cell | lower cell |
+|---|---|---|---|---|
+| centre, chip 2 | 189/136/91 | 209/194/109 | 138/97/64 | 152-153/119/68-79 |
+| centre, chip 1 | 198/186/74 | 219/194/90 | 168/138/76 | 174-179/126-140/72-97 |
+| width of the centre | 8-10 px, in a 30 px pad | 10 px, in a 30 px pad | 4-6 px, no pad | 6 px, 14 px long, no pad |
+| clean shot under it | hole 166-180/178-194/96-110, 12 px | hole 126-142/133-152/74-78, 10 px | 109-136/120-151/81-104 over 4 px | 113-117/114/81-85 (red equal to green) |
+| `tools/cdp4_candh.py -v v`, clean minimum | -25 | -12 | -6 | -3 |
+
+Read as passing over both (traps 22, 26, 27): no pad, the metal not widened (its visible core is narrower
+there than the 14 px it has 50 px away), no full-bright centre, no hole of a contact's size and colour. The
+yellow patch chip 1 shows on each cell (view `r8_c2`) is the metal's east part on the flat of the cell, between
+the steps of its frame. **Drawn uncertain over both** (`?M`, trap 27), with `wr_data_sel_n`'s label on each of
+the four pieces (the upper band, the metal between the cells, G4's bar, G4's output land), so that
+`tools/unsure.py` lists the net: "4 pieces without the uncertain items". Supporting only (logic, not
+photographs): a contact on either cell would tie G4's output to a node of the latch (`wr_data_lat` at the hook
+cell, `wr_data_lat_n` at the lower cell), and the latch could then not change state; the two cells look
+alike, and both cannot be contacts.
+
+### What it corrects (geometry; no connection)
+
+- **The thin metal's place**: x 16094-16108 from the hook cell down (run 2 had x 16097-16111), x 16099-16113
+  between the top pad and the hook cell; where it steps between the two is under the hook cell's dark stretch
+  and is drawn inside the `?M`.
+- **Row 2's band ends at x 16094**, at the thin metal's west edge (`tools/px.py row 15735 16076 16114 2 all`:
+  salmon x 16088-16092, pink field from x 16096 under the metal); drawn to x 16096 (was 16100).
+
+### Ambiguities (run 8)
+
+29. **The thin metal `wr_data_sel_n` over the hook cell and over the unused cell** (y 15624-15675 and
+    y 15764-15802; replaces what Ambiguities 2 and 3 said of this metal). (a) One metal passing over both
+    without contact: adopted, on the table above. (b) A contact on one of them: nothing a contact has is
+    there, but a 6 px core that is brighter than bare ground is, and the lower cell's is the brighter and
+    longer of the two; with (b) the latch would not work. (c) The metal ends at one cell and another begins:
+    the clean shot's protected strip is unbroken above, between and below the cells, and neither cell has
+    room for two ends and a gap. What would settle it: a photograph at higher resolution, or the simulation
+    (M5).
+30. **The unused cell's window** is not resolved, like the hook cell's (Ambiguity 1): whether the island is
+    tied to `wr_data_lat_n` changes nothing.
+
+### Not done (run 8)
+
+- **The strobe latch's gates under and west of the rail** (x 15850-16100, y 15500-15985: rows 1-3 and G4 with
+  their loads, ties and the metal x 15924): run 2's, the last part of runs 1-2 that no review has read. Next.
+  To look at there, from run 7: the stacks' widths (run 2 drew pull-downs only as wide as the rail; groups 2
+  and 3 ran 18 px west and 40 px east of it). Seen in passing in this run, not read: a dark blob in the clean
+  shot at (16078,15583) in row 1's column between the two bands (not in chip 2's shots: taken for dirt on
+  chip 1).
+- The boxed cells' windows (Ambiguities 1, 30) and the gate group's four uncertain ties (Ambiguities 5, 17, 21).
 - The column under the left rail below y 17400; east of the VCC rail x 16491-16538 south of y 15770.
 
 ## Review

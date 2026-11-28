@@ -191,7 +191,7 @@ D 15850,15682:15898,15912              # VCC land under the rail (one land for r
 C 15866,15729 15869,15822 s=24x30      # two of its contacts (specks in the clean shot)
 P 15902,15664:15952,15735              # load gate: thin bar, block over the strip, west end of the band
 P 15945,15712:15992,15735              # band, west part
-P 15985,15722:16100,15747              # band, east part: gate of row 2
+P 15985,15722:16096,15747              # band, east part: gate of row 2; ends at x 16094, at the west edge of the thin metal wr_data_sel_n (run 8: pink field under that metal)
 P 15986,15660:16008,15726              # finger up to the tie
 D 15986,15650:16008,15682              # output diffusion under the tie
 ?B 15984,15656:16010,15684             # boxed cell 15988-16006 x 15660-15680, light centre in all shots
@@ -242,10 +242,31 @@ P 16088,15944:16128,15984              # pad
 C 16105,15962
 # wr_data_sel_n: thin metal from that contact up to the pad of row 1's upper band. Narrow (about
 # 13 px) where it crosses rows 1 and 3, 16 px between. No contact on the way: it passes
-# over row 1's output contact and over a second boxed structure at 16088-16142 x
-# 15764-15798 (not drawn; see notes, Ambiguities).
-M 16112,15548 y15572 x16104 y15975 w=14
-N M 16104,15700 wr_data_sel_n
+# over row 1's output contact (the hook cell) and over a second boxed cell at 16088-16142 x
+# 15764-15798 (run 8: drawn below, an unused output cell).
+# (run 8, piece slw: re-read. Both end contacts are real: ring, full-bright centre and a hole in the clean shot.
+# The metal is x 16094-16108 from y 15671 to y 15940, 5 px further east above the hook cell. Over each of the two
+# cells neither metal shot shows it at full brightness (42 px and 22 + 12 px, tools/tl3_thin.py --thr 176): a 6 px
+# core at 138-167 / 168-179 against 189-219 on the contacts, no pad, no hole in the clean shot: read as passing
+# over, and drawn uncertain there as trap 27 asks. Elsewhere the clean shot's protected strip is unbroken and the
+# bands under it are salmon.)
+M 16113,15548 y15570 16106,15580 y15628 w=14           # from the pad's contact south; below the pad the metal is 7 px further west
+?M 16106,15624 y15640 16101,15660 y15675 w=14          # over the hook cell on row 1's output: no contact read
+M 16101,15671 y15768 w=14
+?M 16101,15764 y15802 w=14                             # over the unused cell on wr_data_lat_n's output: no contact read
+M 16101,15798 y15945 16105,15952 y15975 w=14           # on down the east edge of rows 2-3's diffusion to the pad of G4's bar
+N M 16101,15700 wr_data_sel_n
+N P 16050,15566 wr_data_sel_n                          # row 1's upper band, beyond the first uncertain stretch
+N P 16050,15964 wr_data_sel_n                          # G4's bar, beyond the second
+N D 15975,15900 wr_data_sel_n                          # G4's output land (joined to the bar through the boxed cell, ?B)
+# The unused cell (run 8): at the east end of the output of rows 2-3 the same boxed cell as the hook cell of row 1,
+# 135 px lower: a closed heavy outline (x 16088-16142, y 15764-15798), a pale rectangle x 16105-16121,
+# y 15773-15792, a dark divider and a poly bar x 16129-16137 that ends inside the outline at both ends (bare ground
+# north and south of the outline in both metal shots): a poly island, tied or not to wr_data_lat_n, with nothing
+# leaving it. Drawn like the hook cell; the window is not resolved.
+D 16095,15768:16128,15796              # east end of the output of rows 2-3, into the cell
+P 16104,15770:16138,15793              # the cell's poly with its bar; an island
+?B 16100,15766:16132,15796             # the boxed cell
 
 # ---------------------------------------------------------------- gate group right of the bundle
 # x 16240-16480, y 15400-15850. Diffusion column under the ground rail x 16312-16362 (the
