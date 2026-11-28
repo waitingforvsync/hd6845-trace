@@ -1026,3 +1026,25 @@ Connections before and after the fixes (commit b624423a against the fixed tree):
 Recorded 2026-11-28 11:22 +0000.
 
 Round 3: two findings, fixed.
+
+### Round 4 (fix check), 2026-11-28: the corrections of round 3
+
+A fresh Claude Fable 5.2 agent, on commit 87049ad1 against b624423a, 8 images in `cache/scratch/bd1/review-4/`. Told
+what changed and why (the three findings of round 3), and to look at what the new firm diffusions touch: the wire in
+the gap against bar R, its contact, the rail's bump and the plate's east edge; the tab and channel against G1's free
+end, the column and G2's foot, the field south of the column and the lower load's tie box; the diffusion south of G2.
+
+**No findings.** Checked and found right (profiles and views at 4x or more in two to four shots): box E's south
+outline crosses under the vertical metal in all four shots (nothing leaves south); the strip x 13889-13897 plain and
+unbroken from y 15933 to y 16005 in both metal shots, its blue too high for poly against G1 and G2 in the same gap, and
+pinker than the field at y 16017-16030; the neck open, the dip at x 13908-13912 weak in both metal shots (75 against
+28-36) and absent in the chip-2 stripped shot, `?D` appropriate; the new firm diffusion clear of bar R, its contact, the
+bump and the plate; K2 ending on the line y 16044-16050; x 13940-13962 at y 16068 one plain region, greenish in the
+stripped shot (field); the tab not poly, the clean shot flat tan from under the metal to x 13938; tab, the line across
+G2 and the patch south of G2 (x 13938-13950, y 16135-16147) sharing one east edge at x 13952-13956; the new diffusion
+clear of G1, the column and the lower tie box; the three geometry items. Both `tools/sameconn.py` runs against b624423a:
+connections identical.
+
+Recorded 2026-11-28 11:35 +0000.
+
+Round 4: no findings.
