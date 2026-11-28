@@ -1,9 +1,10 @@
 # bd2: bus control logic right of the register select gates
 
 Region x 15850-17000, y 14700-17100. Trace: `trace/bd2.txt` (`@requires sel`, `areg`, `bd3`).
-Extracts with 0 errors, 0 warnings. Four runs; this file was rewritten by the second, the third
-(2026-11-27: the column from group 4 down to `dbus_le`'s driver) has its own section, "Run 3", below, and the
-fourth (2026-11-28: the gate group east of its rail) the section "Run 4".
+Extracts with 0 errors, 0 warnings. Five runs; this file was rewritten by the second, the third
+(2026-11-27: the column from group 4 down to `dbus_le`'s driver) has its own section, "Run 3", below, the
+fourth (2026-11-28: the gate group east of its rail) the section "Run 4", and the fifth (2026-11-28: the
+inverter of `wr_addr_sel` south of the group, which corrects what gates the upper gate) the section "Run 5".
 
 ## Status
 
@@ -19,10 +20,15 @@ fourth (2026-11-28: the gate group east of its rail) the section "Run 4".
 - **The gate group right of the bundle is a cross-coupled pair as drawn** (run 4, 2026-11-28): both loads and a
   third pull-down of the upper gate are traced; `bd2_x` is the upper node's own load poly, and the lower
   node's load poly comes back as the gate of the upper gate's third pull-down. Both ties are uncertain items.
+- **The pair is a D latch of `wr_addr_sel`, open while E is high** (run 5, 2026-11-28): south of the group a
+  third unit, an inverter, makes `wr_addr_sel_n` = NOT `wr_addr_sel`, and its output is what gates the upper
+  gate's stack (band G_a), by the pad (16274,15873) and the thin metal x 16270-16284. Runs 1-4 had `wr_data_sel`
+  there: run 2 drew the band of row 3 on east to that pad, across 26 px of field. So `ar_load` is `wr_addr_sel`
+  as it was while E was last high, the same circuit as the strobe latch beside it. Marked: three uncertain ties.
 - **Three results of the first run are corrected**: `ar_load` is not `NOT e_b` (G2's
   gate is a separate net, `ar_load_n`); row 1 has a third pull-down and a load; the metal
   at x 16210 is two wires (a second break, at y 15968-15988).
-- **Not traced**: the column below y 17400, the group's south part (y 15757-15860 east of its rail), the `?B` cells of runs 1-2. See Not done.
+- **Not traced**: the column below y 17400, the `?B` cells of runs 1-2. See Not done.
   (The rest of group 4 and the column to y 17110 are run 3's.)
 - Images used: about 44 (first run) + 46 (second). What worked in the second run was
   **numbers instead of pictures**: character maps of small areas by colour class
@@ -84,7 +90,8 @@ So `wr_stb_n = NOT wr_data_lat`, and `wr_data_lat` is the Q of the latch below.
     ar_load = NOT ar_load_n                                 G2          traced
     ar_load_n  = NOT( wr_data_e_n OR (e_b AND wr_addr_sel) )     gate group  traced (run 4); marked: `bd2_x` is `wr_data_e_n` through an uncertain tie; tie to G2 inferred
     wr_addr_sel  = NOR( rw_d, rs_d, cs_d )                      group 3     traced (by the pattern of group 2 west of the rail)
-    wr_data_e_n    = NOT( ar_load_n OR (wr_data_sel AND e_b) )          gate group  traced (run 4); marked: the third pull-down's gate is `ar_load_n` through an uncertain tie
+    wr_addr_sel_n = NOT wr_addr_sel                             run 5       traced; marked: its way out to G_a is through an uncertain tie
+    wr_data_e_n    = NOT( ar_load_n OR (wr_addr_sel_n AND e_b) )        gate group  traced (runs 4, 5); marked: the third pull-down's gate is `ar_load_n` through an uncertain tie, G_a is `wr_addr_sel_n` through another
 
 Read as logic (believed; `rw_d`, `rs_d`, `cs_d` have the sense of their pins):
 
@@ -100,11 +107,13 @@ Read as logic (believed; `rw_d`, `rs_d`, `cs_d` have the sense of their pins):
   - **Cleared** (strobes off): `e_b AND wr_data_sel_n`, i.e. `e_b AND NOT wr_data_sel`, pulls `wr_data_lat` low.
   - **Held**: the cross-coupling `wr_data_lat` -> row 2's gate, `wr_data_lat_n` -> row 1's third
     pull-down, whenever `e_b` is low.
-- `ar_load = wr_data_e_n OR (e_b AND wr_addr_sel)` with `wr_data_e_n = NOT(ar_load_n OR (wr_data_sel AND e_b))`
-  (run 4): as drawn the two gates are a set/reset pair, set by E high in a write to the address register and
-  cleared by E high in a write to a data register, so that `ar_load` would stay high from an address write
-  until the next data write. **That is what the drawing says, not what the chip is believed to do**: see
-  "Run 4", Ambiguity 16.
+- `ar_load = wr_data_e_n OR (e_b AND wr_addr_sel)` with `wr_data_e_n = NOT(ar_load_n OR (wr_addr_sel_n AND e_b))`
+  (runs 4 and 5): the two gates and the inverter are a second transparent latch, the mirror of rows 1-3 with
+  G4: while `e_b` is high `ar_load = wr_addr_sel`; while it is low both nodes hold. So the address register's
+  load strobe goes high when E rises in a write to the address register and stays high until E next rises
+  with `wr_addr_sel` low (any other cycle, or a deselected one), exactly as the write strobe does for the data
+  registers. (Run 4's reading, a set/reset pair cleared only by a data write, came from run 2's wrong join of
+  G_a to `wr_data_sel`: "Run 5".)
 
 Nothing in the traced part turns the write strobe off when E falls: as traced, the
 selected register's strobe stays on from E rising in a data write until E next rises
@@ -124,7 +133,8 @@ and on the data path; it is what the silicon here says.
 | Row 1 (latch, Q side) | 15900-16150 x 15500-15715 | traced |
 | Rows 2-3 (latch, Q bar side) | 15900-16150 x 15655-15915 | traced |
 | G4 (`wr_data_sel_n = NOT wr_data_sel`) | 15900-16125 x 15857-15985 | traced |
-| Gate group right of the bundle | x 16240-16500, y 15400-15760 | traced (pull-downs run 2; loads, third pull-down and ties run 4, the ties uncertain); y 15757-15860 east of the rail not traced |
+| Gate group right of the bundle | x 16240-16500, y 15400-15760 | traced (pull-downs run 2; loads, third pull-down and ties run 4, the ties uncertain; G_a's gate corrected by run 5) |
+| Inverter `wr_addr_sel_n` = NOT `wr_addr_sel` | x 16286-16545, y 15770-15900 | traced (run 5): pull-down beside the ground land, load on the VCC rail x 16491-16538, output row west under the rail's end to the pad (16274,15873) |
 | Group 2 (`wr_data_sel`, NOR of R/W, NOT RS, CS) | 15890-16400 x 15985-16210 | traced |
 | Group 3 (`wr_addr_sel`, NOR of R/W, RS, CS) | 15890-16400 x 16245-16470 | traced, west part by the pattern of group 2 |
 | Group 4, first gate (`bd2_rs_n` = NOT `rs_d`) | 15850-16360 x 16529-16680 | traced (load: run 3) |
@@ -262,6 +272,11 @@ not be that close), and that poly is tied to the output at a boxed cell.
 
 ### Gate group right of the bundle (pull-downs traced, second run)
 
+**Corrected by run 5** (its section below): band G_a is not gated by `wr_data_sel`. The pad (16274,15872) is
+not on row 3's lower band (26 px of field between them); it is the west end of the output row of the inverter
+of `wr_addr_sel`. Where this section writes `wr_data_sel` for G_a, its pad and the thin metal x 16270-16284,
+read `bd2_w15872` = `wr_addr_sel_n`. The rest stands.
+
 Diffusion column x 16312-16366 under the ground rail x 16312-16362
 (`bd2_umap.py 16250 15404 16384 15850`).
 
@@ -379,7 +394,7 @@ Diffusion column x 16312-16366 under the ground rail x 16312-16362
 | 16210 | 16723-17222 | `bd2_rw_n` (run 3): from the pad (16208,16733) of the `rw_d` inverter's output south to the pad (16209,17212) of the read gate's band C. Bare from there to y 17290, where `rd_data_e`'s metal starts at its pad (16210,17300) (run 1's scan took the two for one track to y 17745) |
 | 16255 | 16118-17348 | `bd2_rs_n`: contact 16252,16128 (band S of group 2), contact 16255,16562 (group 4's output band), south to its end on the pad (16253,17342) of the read gate's band D (run 3) |
 | 16255 | 15947-15983 | this is the bar of `wr_addr_sel` crossing the track |
-| 16277 | 15466-15872 | `wr_data_sel`: contact 16260,15473 (G_a) to contact 16274,15872 (row 3's lower band) |
+| 16277 | 15466-15872 | `bd2_w15872` (= `wr_addr_sel_n` through its tie; run 5): contact 16260,15473 (G_a) to contact 16274,15873, the pad of the inverter's output row. Runs 1-4 had `wr_data_sel` here: row 3's lower band does not reach that pad |
 | 16299 | 16030-17569 | `rw_d`: top end at contact 16297,16040 (group 2); taps 16298,16302 (group 3), 16298,16690 (group 4, not traced) |
 | 16339 | 15957-16354 | `wr_addr_sel`: down to contact 16343,16344 (group 3's output band) |
 | 16342 | 16593-17515 | `rs_d`: top end at contact 16343,16603 (group 4's band) |
@@ -468,8 +483,9 @@ The lists marked ? at the south, east and top edges come from `tools/sel_cut.py`
 ## Not done
 
 - **`bd2_x`, the loads of `wr_data_e_n` and `ar_load_n`, where `wr_data_e_n` goes**: done by run 4 (its
-  section below), with both ties uncertain. Left there: the two ties (Ambiguity 17), the function
-  (Ambiguity 16), and the group's south part, x 16366-16490, y 15757-15860 (run 4's Not done).
+  section below), with both ties uncertain; the group's south part by run 5 (the inverter of `wr_addr_sel`),
+  which also answers Ambiguity 16. Left there: the three ties (Ambiguities 17 and 21) and the rest of runs
+  1-2's joins round the group, still unreviewed (run 5's Not done).
 - **The column below y 17400** (run 3 traced group 4 and the column down to there: see its two sections).
 - **Right-hand column** (x 16480-16800, y 14700-16450) and the routing east and south of
   it: not looked at. `dl7_q_n`, `dl6_q_n`, and probably `bd2_x`, `wr_data_e_n` go there.
@@ -884,7 +900,9 @@ in four shots, in the open stretch west of the strap):
 
 ### Ambiguities (run 4)
 
-16. **The function as drawn is not believable as it stands.** With both ties the two gates are a set/reset
+16. **The function as drawn is not believable as it stands.** (**Answered by run 5**: the wrong join was run
+    2's, G_a on `wr_data_sel`; with G_a on the inverter of `wr_addr_sel` the pair is a D latch. Kept as
+    written.) With both ties the two gates are a set/reset
     pair: `ar_load` goes high in a write to the address register (E high) and stays high until E is high in a
     write to a data register. `ar_load` is the gate of the address register's five write transistors (`areg`),
     and the data input latches follow the pins in every selected cycle, reads included (`dbus_le`, run 3), so
@@ -907,10 +925,136 @@ in four shots, in the open stretch west of the strap):
 
 ### Not done (run 4)
 
-- The group's south part east of the rail, x 16366-16490, y 15757-15860: band G_e's east end (run 2 saw it
-  run on to x 16372), a poly block (16432-16486, 15778-15796), a green-rimmed band along y 15757-15765 that
-  turns back at x 16485 along y 15772-15778 (clean shot, view `l1`).
-- The ties (Ambiguity 17) and the function (Ambiguity 16).
+- The group's south part east of the rail: done by run 5.
+- The ties (Ambiguity 17). The function (Ambiguity 16) is answered by run 5.
+
+## Run 5 (2026-11-28): the inverter of `wr_addr_sel`, and what gates the upper gate
+
+Tom Seddon, on Claude Fable 5.2, 2026-11-28 from 04:02 +0000. Piece `ggs`: the gate group's south part east
+of its rail (x 16366-16545, y 15757-15900), the rail's south end (x 16312-16362, y 15832-15922) and the pad
+(16274,15873) with what reaches it. 2 transistors and 1 net more in the full extraction (4,913; 2,539), 0
+errors, 0 warnings; one uncertain tie added, and **one join of run 2 removed**. Views in `cache/scratch/bd2/`:
+`r5_s1` (4x, four shots), `r5_s2` (2.4x), `r5_u1` (5.8x), `r5_u2` (5x, under the rail's end), `r5_j1` (4.9x,
+the pad and the ground west of it), overlay `r5_o1`. As in runs 2-4 the pictures place things and the numbers
+decide: `tools/px.py`, `tools/bd2_cmap.py`, `tools/bd2_umap.py`, `tools/bd2_prof4.py`, `tools/textmap.py`,
+`tools/cdp4_candh.py`, `tools/cdp4_padc.py`, `tools/follow.py`.
+
+### What it establishes
+
+    wr_addr_sel_n = NOT wr_addr_sel                                  (new: 38/20 against a load of 24/50)
+    wr_data_e_n   = NOT( ar_load_n OR (wr_addr_sel_n AND e_b) )      (G_a's gate corrected)
+    ar_load_n     = NOT( wr_data_e_n OR (e_b AND wr_addr_sel) )      (as run 4)
+
+**The address register's strobe is a transparent latch of `wr_addr_sel`, open while `e_b` is high**: the same
+circuit as the write strobe latch (rows 1-3 with G4), with the inverter here in G4's place. Marked: the
+inverter's output reaches G_a through a tie drawn `?B` (Ambiguity 21), and the two cross terms through run 4's
+(Ambiguity 17).
+
+**Run 2's join of G_a to `wr_data_sel` is withdrawn.** Run 2 drew the lower band of row 3 (`wr_data_sel`,
+y 15857-15877) on east to the pad (16274,15872), the foot of the thin metal that goes up to G_a's pad. Between
+the metal x 16200-16222, under which that band ends and its poly turns south to the pad (16211,15997), and the
+pad's outline at x 16253 there is open field in all four shots:
+
+- `tools/px.py row 15868 16216 16264 3`: x 16237-16249 chip 2 stripped 154-156/156-162/88-95 (red minus green
+  -1 to -13), chip 2 metal 167-170/138-143/80-88, chip 1 metal 137-142/112-115/75-82, clean 152-158/130-150/89-101
+  (khaki). Poly here is 165-180/107-128/56-66 in chip 2's metal shot and red over green by 40-70 in its stripped
+  shot.
+- `tools/bd2_prof4.py row 15862 / 15868 / 15874 16150 16440 3`: plain in all four shots from x 16231 to x 16252
+  on all three rows; `tools/textmap.py 16244 15846 16312 15900 3 --acid`: the stripped shot is greener than red
+  at x 16244-16256 on every row from y 15846 to y 15897. View `r5_j1`.
+
+So nothing of row 3's reaches the pad. What does reach it is a poly row from the east.
+
+### The inverter
+
+- **Gate.** Band G_e (`wr_addr_sel`, y 15770-15788) turns south at the rail's east edge: a poly column
+  x 16364-16384 from the band to a cap at y 15852 (`tools/bd2_prof4.py col 16376 15756 15900 2`: orange in
+  both chip-2 shots and chip 1's metal shot y 15782-15798, 15808-15836, 15846-15850; salmon in the clean shot
+  under the rail's margin, x 16364-16371, `tools/bd2_umap.py 16336 15740 16392 15846 2 2`). Two dark lines cross
+  it, at y 15800-15806 and y 15838-15844: a diffusion's edges.
+- **Source.** West of the column the ground land under the rail (contact (16330,15812)) runs to the column's
+  edge with no edge line: `tools/px.py row 15812 16346 16376 2 acid1b` gives tan 195/181/139, then 164/113/105
+  and 209/103/87 (the poly's red outline), then salmon 246/146/99; row y 15822 the same. Controls with the same
+  command: row y 15752 (the node above G_e, where the land ends in field) is dark, 84/80/64 and 93/47/41, for
+  6 px and then pink; row y 15778 (G_e over the column's edge) dark 75/66/58, 93/45/39.
+- **Drain, the node.** East of the column a diffusion x 16392-16424, y 15806-15836 (`tools/px.py row 15812`,
+  `row 15822`, `col 16400`: stripped red minus green +14 to +39, metal 173-179/132-138/85-92; field 20 px north,
+  (16405,15788), stripped 0). The dark line x 16382-16390 between column and node is the column's own outline:
+  it runs the column's whole length, also where field is east of it (`tools/bd2_prof4.py col 16386`).
+- **Load.** East of the node a poly x 16432-16482: bar y 15784-15797, block y 15804-15826, south bar
+  y 15834-15843, with single dark lines of 6-8 px between and orange on both sides of each
+  (`tools/px.py col 16455` and `col 16474 15780 15846 2`; the same look as the two loads north of it, control
+  `col 16474 15578 15630 2`): one poly over a strip. The strip leaves the node without an edge line (rows
+  y 15812, 15822: plain from x 16392 to the poly's outline at x 16428) and reaches the VCC land under the rail
+  x 16491-16538: the land is tan x 16500-16540 from y 15772 to y 15872 and comes west to x 16484 only at
+  y 15804-15820 (`tools/bd2_umap.py 16340 15744 16560 15876 4 4`). Contacts (16513,15799) and (16514,15844)
+  (`tools/cdp4_padc.py`: bright centre in both metal shots, a hole of 420 px in the clean shot at each). The
+  rail's metal is drawn on to y 15900; it runs further.
+- **The load poly's arm.** From the south bar a poly column x 16432-16452 runs south to y 15886
+  (`tools/bd2_prof4.py col 16441 15826 15902 2`: orange without a break y 15834-15884 in three shots, field from
+  y 15892). The area inside the L (x 16456-16484, y 15848-15912) is field, open to the south
+  (`col 16468`; (16470,15860) stripped +1).
+- **The node's wire.** From the node's south-east corner a diffusion x 16406-16421 runs south
+  (`tools/bd2_prof4.py col 16412 15790 15900 2`: diffusion colours y 15806-15858 with no line across, a dark
+  line y 15860-15868, a plain patch y 15870-15886).
+- **The box** (Ambiguity 21). The patch is x 16410-16418, between two dark bands of 10-12 px (x 16396-16408
+  and x 16420-16429; `tools/px.py row 15878 16366 16462 3`), inside a heavy outline about x 16400-16426,
+  y 15860-15892. West of it a poly row ends, east of it the arm. It is the boxed cell of this block
+  (Ambiguity 1) and what a poly through a buried contact looks like from above (tracing guide, trap 24). Drawn
+  as the row's poly taken through to the arm over the wire's end, with a `?B`.
+- **The output row.** Poly y 15868-15887 from the box west: open x 16372-16396 (orange in three shots), under
+  the rail's south end (salmon y 15869-15884 across x 16314-16370 with no line along it or across it:
+  `tools/px.py col 16322`, `col 16344`, `col 16364 15830 15912 3`), x 16294-16310, into the pad (16253-16292,
+  15852-15892). The pad's contact (16274,15873): `tools/cdp4_candh.py -v v 16276,15872`: PAD, clean minimum red
+  minus green -25 (view `r5_j1`: green hole, bright centre in chip 1). The thin metal: `tools/follow.py 16277
+  15700 N` and `S` end at (16277,15468) and (16273,15880), G_a's pad and this one.
+- The rail x 16312-16362 is drawn on to its south end (y 15920). Under it south of the land the clean shot is
+  pink field but for a grey-olive smear x 16334-16352 north and south of the row (145/151/111, no outline, both
+  metal shots plain apart from the row's two edge lines): residue, not drawn (view `r5_u2`).
+- Field, checked: x 16385-16485, y 15758-15778 and x 16388-16428, y 15778-15798 (stripped red minus green 0 to
+  -16 at five points; the clean shot's green double lines there are rims); the pocket x 16378-16400,
+  y 15843-15858 (stripped 130/149/92). `tools/opendiff.py 16366 15757 16490 15940`: no large open diffusion
+  undrawn.
+
+### The thin metal over the two boxed cells (run 2's Ambiguity 2, re-read)
+
+The net of G_a now being this inverter's output, a contact from the thin metal x 16270-16284 to either boxed
+cell it crosses (the west ends of `wr_data_e_n`, y 15548-15578, and of `ar_load_n`, y 15680-15713) would short
+that output to a latch node. `tools/cdp4_candh.py -v v` calls both pad-like (a bright centre between two dark
+bars in both metal shots, clean minimum -20 and -33). Read as no contact, as run 2 did, on three counts
+(`tools/px.py row 15563`, `15697` against `15600`, `15650` on the same metal over field and `15875`, `15473`
+at its two real contacts; `tools/textmap.py 16244 15538 16312 15584 3 --acid`, `16244 15668 16312 15720 3 --acid`):
+
+- the clean shot under the centre is cream, 187/185/129 and 182/185/130, with a greenish spot 3-6 px wide
+  beside it (153/172/132, 144/173/136): blue 129-136. The holes of the two real contacts are 9-12 px wide,
+  150-175/184-193/103-109 (trap 26's two classes: 186-203/176-182/131-139 for a pass-over, blue 85-108 for a
+  hole);
+- the metal is not widened: its bright part is 8 px wide over each box against 15 px over field;
+- the dark bars are 9-10 px (edges underneath), not a ring.
+
+It stays a reading (Ambiguity 22).
+
+### Ambiguities (run 5)
+
+21. **The inverter's tie box** (16400-16426, 15860-15892): that the row, the load poly's arm and the node's
+    wire are joined there is read from the box's look and from what ends at it; the window is not resolved.
+    Without it the row (and so G_a) has no driver and the load's gate is tied to nothing.
+22. **The thin metal x 16270-16284 over the two boxed cells**: no contact, by the clean shot's colour and the
+    metal's width (above). A contact at either would short the inverter's output to a node of the latch.
+    The cell at the west end of `wr_data_e_n` still has no poly leaving it (run 2's Ambiguity 2).
+23. **The gate's west side** is under the rail's margin: that the ground land reaches the column rests on the
+    clean shot's missing edge line there (two rows, two controls). If the land ended short of it the
+    pull-down would have no source.
+24. **The poly column's south end**: drawn to y 15852 (orange y 15846-15850 at x 16376, salmon at y 15844 under
+    the margin); the cap itself is not resolved. Length only.
+
+### Not done (run 5)
+
+- Runs 1-2's other joins round the group, still unreviewed: G2's gate on `ar_load_n` through the `?B` at
+  (16262-16292, 15682-15706); group 3 west of the rail (drawn "by the pattern of group 2"); the taps of
+  `e_b` on bands G_b and G_d. Run 5 re-read only G_a's net.
+- The column under the left rail below y 17400; the `?B` cells of runs 1-2.
+- East of the VCC rail x 16491-16538 south of y 15770 (the right-hand column's lower part): not looked at.
 
 ## Review
 

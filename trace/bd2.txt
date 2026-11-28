@@ -204,7 +204,8 @@ N D 16060,15790 wr_data_lat_n
 P 16020,15811:16160,15831              # band: gate e_b, from the tap on the trunk
 C 16166,15822
 P 16152,15808:16185,15840              # pad
-P 16004,15857:16290,15877              # band: gate wr_data_sel; runs on east to the contact 16270,15870
+P 16004,15857:16222,15877              # band: gate wr_data_sel; ends under the metal x 16200-16222, where its poly turns south (run 5: runs 1-2 drew it on
+                                       # east to the pad (16274,15873); x 16226-16252 is field in all four shots, and that pad is wr_addr_sel_n's)
 N P 16130,15867 wr_data_sel
 # Load of rows 2-3 and the tie that makes its gate wr_data_lat_n: strip from the VCC land under
 # a poly block; block, thin bar above and the contact pad below are one poly; the pad's
@@ -247,21 +248,22 @@ N M 16104,15700 wr_data_sel_n
 # rail the first run followed from areg_rail_r; its jog at y 15330-15400 is not drawn,
 # the pieces are joined by name). Two gates, pull-downs read from the clean shot under
 # the rail (tools/bd2_umap.py 16250 15404 16384 15850):
-#     wr_data_e_n   = NOT( wr_data_sel AND e_b )                         y 15420-15565
+#     wr_data_e_n   = NOT( wr_addr_sel_n AND e_b )                       y 15420-15565   (G_a's gate corrected by run 5)
 #     ar_load_n = NOT( bd2_x OR (e_b AND wr_addr_sel) )           y 15596-15832
 # Their loads, a third pull-down of the upper gate and both nodes' exits are run 4's (piece gge, below).
-M 16312,15400:16362,15850
+M 16312,15400:16362,15920             # (run 5: drawn on to the rail's south end; it crosses the inverter's output row without contact)
 N M 16337,15500 vss
 # upper gate
 D 16314,15420:16366,15565              # ground land, under G_a, node, under G_b, wr_data_e_n
 C 16338,15432
 P 16250,15458:16286,15492              # pad of G_a
 C 16260,15473
-P 16280,15466:16378,15488              # G_a: gate wr_data_sel (the band may run on east: not followed)
+P 16280,15466:16378,15488              # G_a: gate wr_addr_sel_n (run 5; runs 1-4 had wr_data_sel). Ends at x 16378 (run 4)
 P 16280,15509:16378,15531              # G_b: gate e_b (strip 2)
 N D 16340,15552 wr_data_e_n
-# wr_data_sel: metal pad on that contact and a thin metal x 16270-16284 down to contact
-# 16274,15872 on the east end of row 3's lower band. It passes over two boxed cells (west
+# bd2_w15872 (= wr_addr_sel_n through its tie): metal pad on that contact and a thin metal x 16270-16284 down to
+# contact 16274,15872 on the pad of the inverter's output row (run 5, piece ggs: not row 3's band). It passes
+# over two boxed cells (west
 # ends of wr_data_e_n and ar_load_n, 16266-16296 x 15552-15570 and 15684-15704) without
 # contact: their centres are cream in the clean shot like diffusion under metal, not the
 # olive green of the four known contacts of this metal and its neighbours.
@@ -279,16 +281,16 @@ P 16226,15688:16274,15702              # bar from the pad 16205,15690 into the c
 ?B 16262,15682:16292,15706             # boxed cell; joined here because the bar and G2's gate have no other driver
 N D 16330,15690 ar_load_n
 P 16255,15726:16352,15744              # G_d: gate e_b
-P 16255,15770:16376,15788              # G_e: gate wr_addr_sel (the band runs on east of the column: not followed)
+P 16255,15770:16376,15788              # G_e: gate wr_addr_sel; turns south at the rail's east edge (run 5, piece ggs, below)
 
 # ---------------------------------------------------------------- gate group, east of its rail (run 4, piece gge)
 # x 16366-16500, y 15440-15760 (notes/blocks/bd2.md, "Run 4"). The two gates of the group are a cross-coupled
 # pair as drawn: each node has a third pull-down or a load whose gate poly is the other node's (through a `?B`).
-#     wr_data_e_n = NOT( ar_load_n OR (wr_data_sel AND e_b) )
+#     wr_data_e_n = NOT( ar_load_n OR (wr_addr_sel_n AND e_b) )      (run 5: G_a is on the inverter of wr_addr_sel, piece ggs below)
 #     ar_load_n   = NOT( wr_data_e_n OR (e_b AND wr_addr_sel) )
 # The VCC rail x 16491-16538 is dlat's (M 16515,13060 y15790 w=48); the piece beside this group is repeated here
 # so that the file extracts by itself, with the land under it and dlat's long contact.
-M 16515,15570 y15720 w=48
+M 16515,15570 y15900 w=48              # (run 5: on south over the inverter's VCC land; the metal runs on past y 15900)
 N M 16515,15600 vcc
 C 16502,15616:16522,15650
 # -- the third pull-down of wr_data_e_n (39/26): ground tongue T, a strip south under the block, the node's wire
@@ -327,6 +329,34 @@ P 16391,15745:16436,15757              # row west from pad L
 ?D 16393,15706:16409,15735
 ?P 16391,15717:16411,15750
 ?B 16391,15715:16411,15737
+
+# ---------------------------------------------------------------- gate group, south part: the inverter of wr_addr_sel (run 5, piece ggs)
+# x 16286-16545, y 15770-15900 (notes/blocks/bd2.md, "Run 5"). G_e's band turns south at the rail's east edge and
+# crosses a diffusion that runs from the ground land (under the rail, y 15790-15840) east to a node with its own
+# load on the VCC rail x 16491-16538:
+#     wr_addr_sel_n = NOT wr_addr_sel
+# The node's wire goes south to a framed box between the load poly's south arm and a poly row that runs west under
+# the rail's south end to the pad (16274,15873), the foot of the thin metal x 16270-16284 to G_a's pad: the upper
+# gate's stack is gated by this unit's output, not by wr_data_sel (run 2 drew row 3's band on east to that pad;
+# x 16226-16252 is field in all four shots).
+P 16364,15770:16384,15852              # G_e's poly turned south: gate (dark lines cross it at y 15800-15806 and y 15838-15844)
+D 16340,15802:16424,15840              # from the ground land under the rail (no edge line at the column's west edge) through under the column to the node
+N D 16408,15820 wr_addr_sel_n
+# -- its load (24/50): strip from the node east under the block to the VCC land
+D 16390,15802:16504,15826
+P 16432,15782:16482,15844              # one poly: bar, block (over the strip), south bar
+P 16432,15836:16452,15888              # the south bar's arm south (x 16432-16452) to the box
+D 16498,15774:16542,15872              # VCC land under the rail (tan y 15772-15872), comes west to x 16484 only at the strip's rows
+C 16513,15799 16514,15844
+# -- the node's wire south to the box, and the output row west to the pad
+D 16406,15836:16421,15884
+P 16286,15868:16398,15887              # row: open x 16372-16396, under the rail's south end, x 16294-16310, into the pad
+N P 16300,15878 bd2_w15872
+@alias wr_addr_sel_n bd2_w15872
+# the box (heavy outline x 16400-16426, y 15860-15892; plain patch x 16410-16418 between two dark bands): the row's
+# end and the arm taken into it over the wire (window not resolved: drawn uncertain)
+?P 16396,15868:16434,15887
+?B 16402,15866:16426,15890
 
 # ---------------------------------------------------------------- bundle, y 15700-15900
 # Taps on the e_b trunk: a contact on a poly pad each.
