@@ -7,5 +7,8 @@
 13700,15700:14050,15860  logic  latch on R4's match, gated by rst_lat (lower half) | bd1_n2: pull-downs bd1_an.rst_lat and bd1_n1 traced; its load (north-east, y 15630-15702) is drawn by eof (piece r4lat): bd1_q is bd1_n2, the latch is complete
 13700,15860:14080,16125  ?logic gate column (untraced) | gates under the ground rail x 13848; ck_out tap at y 15930
 13760,16125:14055,16280  logic  reset inverted (rst_a_n, line X) | one inverter, rst_a_n = NOT rst_a; rst_a arrives in poly along y 16231 from a line at x 13630
-13700,16280:14080,16900  ?logic gate column (untraced) | gates; ck_out taps at y 16490, 16565, 16711
+13690,16340:14050,16520  logic  inverter of R0-half's match | h_eq_r0half_n = NOT h_eq_r0half; output goes south on a metal line (x 13783) to the latch's lower half
+13690,16440:14050,16660  logic  latch on R0-half's match, enabled by ck_out (upper half) | eof_w16432 = NOT(h_eq_r0half.ck_out + h_eq_r0half_q); a copy of the latch on R4's match; this node's wire leaves south to the bottom bus (eof_w16432)
+13700,16660:14050,16815  logic  latch on R0-half's match (lower half) | h_eq_r0half_q = NOT(h_eq_r0half_n.ck_out + eof_w16432 + rst_a): the match as latched while CLK is low, cleared by the reset copy
+13700,16815:14000,17160  route  latched R0-half match leaving south | poly from the latch's upper node, between the strobe metals to the bus field channel x 13720
 13380,16840:14100,17140  route  write strobes from below | wr_r7 w5 w3 w8 from bd3: w7 and w5 turn north into the channel, w3 goes north in poly, w8 west in poly along y 17125

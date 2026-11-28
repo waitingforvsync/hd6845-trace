@@ -1,4 +1,5 @@
 # NAME        LAYER  X,Y              DIR  note
 # bd1: started with run 3 (2026-11-27): that run's two ports only.
 rc_eq_r6      M      13259,16738      ?    track k4's line, after its turn south-west (x + y = 29997) into the field of diagonals; runs on
-rst_a         P      13760,16628      in   the poly of rst_a's tap (13628,16626), east into the gate column; seen on to about x 13800, not read
+eof_w16432    M      10850,18420-18440  out  run 4, piece out2: the lower latch's upper node N1 (NOT the latched R0-half match); the bus line y 18429 from the pad (12806,18428) ends on the corner of eof's metal x 10811
+vcc           M      13998-14044,16900  -    the gate column's supply rail, drawn to here; runs on south to bd3's wide rail (by scan)

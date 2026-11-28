@@ -6,6 +6,7 @@
 @block bd1
 @requires sel
 @requires bd3
+@requires trunks
 @w M=20 P=18
 @s 26x26
 
@@ -275,7 +276,7 @@ N M 13261,14700 rc_eq_r6
 M 13304,14690 y15262 x13348 y16423 w=20
 P 13337,16398:13369,16427
 C 13348,16411
-?P 13360,16410 x13700 w=16              # seen to x 13565 at 3.6x, to about x 13700 at 0.9x; not followed
+P 13360,16410 x13700 w=16               # run 4: one poly to x 13695 (clean shot salmon under the five tracks, dark red-brown between; chip-2 metal orange: tools/px.py row 16411); it turns south into band A of the lower latch (piece lat2)
 N M 13304,14700 h_eq_r0half
 
 # ================================================================ where inverter 2's output goes
@@ -454,3 +455,138 @@ M 13304,16490 13304,16690 13259,16738 w=14
 P 13611,16610:13645,16642              # pad
 C 13628,16626
 P 13640,16628 x13760 w=16
+
+# ================================================================ run 4 (2026-11-28), piece lat2: the gate column y 16340-16815
+# A second copy of the latch on R4's match (y 15385-15852: drawn above and in eof's pieces r4lat and n2out), 955 px
+# south of it (tools/findcell.py 13790 15440 14050 15840: 0.90 in the clean shot, 0.85 in the metal shot; master and copy
+# side by side in three shots, tools/mosaic.py, and at eight colour points). Data h_eq_r0half, enable ck_out, clear rst_a:
+#     h_eq_r0half_n   = NOT h_eq_r0half                                                  inverter B
+#     h_eq_r0half_q_n = NOT( h_eq_r0half AND ck_out  OR  h_eq_r0half_q )                 upper node N1; leaves as eof_w16432
+#     h_eq_r0half_q   = NOT( h_eq_r0half_n AND ck_out  OR  h_eq_r0half_q_n  OR  rst_a )  lower node N2
+# Geometry: the master's lines moved 955 px south and fitted on overlays (sharpened clean shot at 3.9x, both metal
+# shots); the uncertain items are the master's (the two load ties, the diffusions of the third pull-down). The copy
+# differs from the master in four places: (a) the data comes from the west on band A; (b) the enable pads lie under
+# ck_out's metal; (c) N2's west buried contact ends in a dead-end stub; (d) N1's poly runs on south past the block
+# (piece out2, below).
+# --- the rails: one metal each through the copy (both metal shots)
+M 13848,16280 y16815 w=44          # ground rail: ends at y 16815 below its last contact
+M 14021,16280 y16900 w=46          # supply rail: runs on south (to bd3's wide rail, by scan)
+# --- (a) the data: h_eq_r0half's row y 16410 (run 1 drew it uncertain; firm above) turns south in the gap between
+# X's metal and ck_out's (x 13688-13702: orange in both metal shots from y 16404 to y 16456, no ground between) into
+# band A, which passes under ck_out's metal with no contact (no pad, no hole, no ring: tools/textmap.py)
+P 13688,16402:13702,16463          # the turn
+P 13688,16443:13890,16463          # band A: gate P2 across the column, y 16443-16463
+P 13868,16382:13890,16463          # P4: north again east of the rail, gate of inverter B (rounded cap at y 16382)
+# --- inverter B: h_eq_r0half_n = NOT h_eq_r0half
+D 13815,16394:13867,16445          # ground diffusion under the rail
+C 13832,16416 s=26x30
+D 13861,16395:13929,16433          # under P4 and on east: the output node
+D 13917,16355:13931,16400          # output: neck up to the buried contact
+B 13910,16353:13934,16379          # output to poly: the load's gate tie and the bar going west
+P 13908,16344:13936,16379
+P 13908,16344:13954,16357          # ... east to the load gate's neck
+P 13936,16344:13954,16391          # neck down to the load block
+P 13936,16387:13992,16445          # load gate (the strip under it is y 16402-16433)
+D 13925,16402:14000,16433          # load channel strip
+D 13996,16401:14043,16467          # supply land
+C 14019,16439 s=26x30
+P 13798,16348:13912,16365          # output bar west, under the rail over field
+P 13760,16343:13800,16372          # pad
+C 13779,16360
+M 13783,16347 y16752 w=20          # h_eq_r0half_n south on x 13783 (no contact on the way: no pad, no ring)
+M 13753,16744:13792,16779          # pad at its foot
+C 13768,16761
+N M 13783,16560 h_eq_r0half_n
+# --- the column, upper half: N1
+D 13789,16423:13861,16511          # ground - P2 - mid strip - P3 - top of N1
+P 13703,16481:13737,16509          # (b) pad of P3 under ck_out's metal: the tap (13716,16495), ring and green hole
+C 13717,16496
+N P 13712,16488 ck_out
+P 13705,16485:13874,16505          # P3: gate, y 16485-16505
+D 13787,16507:13882,16556          # N1
+N D 13850,16530 h_eq_r0half_q_n
+D 13827,16550:13873,16635          # N1 - G4 - ground
+C 13842,16607 s=26x30
+P 13804,16557:13912,16578          # G4: gate y 16557-16578, rounded west end at x 13804; east of the rail a block
+N P 13890,16567 bd1_q2
+P 13895,16573:13909,16597          # ... from the block south
+P 13896,16585:13993,16605          # ... into the band that is N2's load gate (below)
+# N1's west end: buried contact to a poly pad that ends 20 px further west (a dead end, as in the master)
+D 13770,16530:13800,16552
+B 13766,16527:13802,16555
+P 13749,16530:13799,16552
+# N1's load: poly block x 13938-13992, y 16478-16563 over the strip y 16520-16548; the block has a metal contact
+# at 13956,16493 to the line that carries N1 south
+D 13875,16520:14004,16548          # N1 east of the rail, the load channel
+D 14000,16522:14048,16642          # supply land
+C 14020,16542 14018,16567 14022,16595 14022,16623
+P 13938,16478:13992,16563
+C 13956,16493
+M 13957,16480 y16708 w=22          # N1's line south on x 13957
+C 13957,16695
+P 13946,16680:13985,16713          # poly pad at its foot
+N M 13957,16600 eof_w16432
+# the load's gate tie: as in the master, a box on N1 east of the rail joined to the block's top by a poly arm in a
+# dark complex whose shape is not resolved: uncertain
+?P 13896,16478:13940,16495
+?P 13896,16478:13926,16529
+?B 13894,16513:13926,16531
+?D 13896,16515:13924,16525
+@alias eof_w16432 h_eq_r0half_q_n
+# --- the clear: a third pull-down of N2 on a strip under h_eq_r0half_n's metal, gate = rst_a's tap row y 16628
+D 13773,16589:13804,16685          # strip: top segment, channel under the gate (y 16618-16638), lower segment
+D 13795,16593:13840,16607          # top segment east through the gap between the two metals onto the ground diffusion
+P 13755,16618:13812,16638          # rst_a's row (run 3 drew it to x 13760) on as the gate; ends at x 13812
+# (c) the lower segment's buried contact leads only to a stub with a rounded west end at x 13749 (four shots;
+# pink field under ck_out's metal at this height): the master's exit west is not built here
+B 13768,16654:13792,16688
+P 13749,16655:13790,16686
+# --- the column, lower half: N2 - G5[ck_out] - strip - G6[h_eq_r0half_n] - ground
+D 13817,16664:13876,16700          # N2
+N D 13850,16677 h_eq_r0half_q
+D 13795,16667:13830,16691          # N2 west of the rail, in the gap, onto the strip's lower segment
+D 13797,16693:13873,16807
+P 13705,16700:13737,16730          # (b) pad of G5 under the foot of ck_out's metal: the tap (13715,16711)
+C 13716,16715
+N P 13712,16722 ck_out
+P 13730,16701:13876,16721          # G5: gate
+P 13748,16745:13792,16773          # pad under the foot of h_eq_r0half_n's metal
+P 13748,16746:13876,16765          # G6: gate
+C 13842,16790 s=24x24
+# --- N2's load and tie (the master's are eof's piece r4lat): block from the band down over a strip from the supply land
+P 13937,16599:13992,16659
+D 13916,16614:14004,16644
+D 13908,16639:13929,16683          # the strip's west end turns south ...
+D 13868,16667:13930,16683          # ... and west to N2 under the rail
+?B 13889,16615:13913,16637         # the tie: a heavy-outlined box below the band's west end; uncertain as in the master
+?P 13893,16599:13908,16631
+?D 13893,16618:13922,16640
+@alias h_eq_r0half_q bd1_q2
+# --- N2's pull-down east of the rail, gate = N1's poly (the block): diffusions uncertain as in the master. The dark
+# line between the block and the column (x 13952-13960) is as dark as an edge in both metal shots and half as deep in
+# the chip-2 stripped shot: read as the diffusion's east edge under one poly, drawn uncertain
+?D 13919,16675:13936,16740
+?D 13919,16721:13957,16775
+?D 13868,16770:13958,16788
+P 13902,16737:13958,16761          # the block
+?P 13950,16737:13970,16761         # ... joined on the east to the column
+
+# ================================================================ run 4, piece out2: N1's wire, to eof's eof_w16432
+# (d) The poly column from N1's pad does not end at the block: it runs on south, west and south between the horizontal
+# metals of the bottom bundle (orange in both chip-2 shots, salmon under each metal in the clean shot; no pad on the
+# way), down a channel of the bottom bus field under about twenty bus metals with no pad, to a pad with a contact
+# (13715,18078); a thin metal runs south-west on a diagonal (x + y = 31777) and west along y 18428 to a pad
+# (13151,18427); a poly row west under ck_a, ck_b and the wide supply metal to a pad (12806,18428); the bus metal
+# y 18422-18436 west, one metal over five plain poly crossings (tools/tl5_tracks.py h 18429 10800 12815: no stretch of
+# 25 px without metal in both chips, no hole), to the corner where eof's metal x 10811 turns into it (eof's port).
+P 13976,16700 y16820 x13890 y17148 x13720 y18070 w=20
+P 13699,18062:13737,18098          # pad
+C 13715,18078 s=20x20
+M 13716,18078 13699,18078 13349,18428 13148,18428 w=16
+P 13135,18410:13169,18443          # pad
+C 13151,18427 s=20x20
+P 12806,18428 x13151 w=16          # under the wide supply metal (two dark spots on it, at different places in the two chips: no contact), ck_b, ck_a
+P 12790,18412:12824,18444          # pad
+C 12806,18428 s=20x20
+M 12808,18429 x10840 w=14          # the bus line; eof's M 10811,16432 y18430 x10850 ends on it
+N M 12000,18429 eof_w16432
