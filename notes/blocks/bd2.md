@@ -1243,6 +1243,13 @@ y 15980-16224 and y 16241-16485). In both:
   rail's other side: tan at y 16245-16297 and y 16409-16445 beside group 3, at y 16108-16140 beside group 2,
   where the land is one piece with group 2's and shares its oval).
 
+- **The bands are 20-22 long and the VCC lands run further south** (review round 6): each of the ten bands was
+  drawn 14-18 long; between its two edge lines it is 20-22 (`tools/bd2_prof4.py col 16135 16020 16190 2` and
+  `16281 16451`, `col 16040` under the rail; the trunk's edge bars in `tools/tl5_tracks.py v 16169`). Group 2's
+  VCC land is tan in the clean shot from y 16066 to y 16147 (drawn to y 16104), group 3's from y 16325 to
+  y 16387 (drawn to y 16365) (`col 15866 16050 16160 2`, `16311 16421`). Redrawn; the pull-downs are 64/22 and
+  70/22.
+
 ### Ambiguities (run 7)
 
 27. **A green patch between the pad (16210,16086) and band U** (x 16203-16224, y 16108-16119; the one group
@@ -1500,3 +1507,51 @@ After the fix (commit before it 118fd0c0):
 Recorded 2026-11-28 05:17 +0000.
 
 Round 5: no findings that change a connection.
+
+### Round 6 (full review), 2026-11-28, piece `g23`
+
+One fresh reviewer (Claude Fable 5.2), on commit 1b7006b2, 22 images in `cache/scratch/bd2/review-6/` (views at
+4-5x in three and four shots, one at 8x; mostly `tools/px.py`, `tools/bd2_prof4.py`, `tools/railprof.py`,
+`tools/tl5_tracks.py`, `tools/textmap.py`, mosaics of group 3 against group 2, the extraction). It was given the
+piece's fourteen claims (group 2's stack, its west edge and pocket, the lobe east of the rail, the arm, wire and
+way back, the load and its tie, bands R, S with its link and U, T, the output cell and band; group 3 as the same
+gate 261 px south with its own four ends; the empty stretches of the tracks x 16210 and x 16340) and told to
+suspect: group 3 west of the rail, first drawn as a copy; the lobe (diffusion or not, one piece with the land,
+band R across all of it); the stack's west edge and the pocket (diffusion round a band's end, a band reaching
+the wire); the 6-10 px between each output's tab or box and the link and band S south of it; the output cells,
+moved 30 px east; every crossing of a band under a metal and each of the nine pads; the load's strip, the tie
+cell and the new VCC contact; the green patch (16203-16224, 16108-16119); anything undrawn north of the loads,
+between the groups and beside the bands.
+
+Findings, each checked by the tracer in the photos; neither changes a connection:
+
+1. **The bands are drawn too thin** (14-18 px; the photos give 20-25). Confirmed at 20-22 between the edge
+   lines (the section above). All ten bands redrawn. Lengths only.
+2. **The VCC lands run further south than drawn** (group 2 to y 16147, group 3 to y 16384). Confirmed. Two
+   rectangles added. Extent only: both are `vcc` already.
+
+Checked and found as drawn: group 3 against group 2, feature for feature (mosaics in two shots, the same rows
+and columns plus 261); the pocket field (chip 2's stripped shot red minus green -4 to -7 against 0 to +2 for
+field and +12 to +27 for the wire and arm), bands S, T, S', T' across the edge line x 15984-15988 and ending at
+about x 15972, the wire unbroken; the lobe one piece with the land and the tab (the clean shot tan without a
+break across the rail's edge on four rows) and R, R' across all of it (edge line x 16096-16100 across both
+bands in both chips); S and S' running on into their links (the same look at the rail's edge as T and T'),
+with a plain strip between each link and the output box; each load's strip on the VCC land without an edge
+line on its rows, 18 px of field between land and tie cell; no hole in the clean shot under any metal at any
+band (six tracks); the nine pads, each end and tap as claimed, no poly leaving a pad eastward; the green patch
+(the rim along U's top edge, plain ground in both metal shots); nothing undrawn north of the loads, between the
+groups or between the bands (cuts on six rows and seven columns). Two spots that looked odd and are not:
+`wr_addr_sel`'s metal is dim in chip 2 at y 16312-16322 (metal in chip 1), and the contact (16252,16128) has a
+dim centre in chip 2 only. Not checked: the windows of the four boxes (`?B` is the right marking, it said);
+the dark band between each tab and its link's top (y 16078-16091, y 16339-16352), two edge lines that do not
+separate, so whether a few pixels of poly lie over the tab's edge is not resolved (no device either way); the
+nets' identities beyond the piece.
+
+After the fixes (commit before them 1b7006b2):
+
+    tools/t.sh bd2 sameconn.py 1b7006b2              connections identical
+    .venv/bin/python tools/sameconn.py 1b7006b2      connections identical
+
+Recorded 2026-11-28 06:04 +0000.
+
+Round 6: no findings that change a connection.
