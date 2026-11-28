@@ -1,7 +1,7 @@
 # bd2: bus control logic right of the register select gates
 
 Region x 15850-17000, y 14700-17100. Trace: `trace/bd2.txt` (`@requires sel`, `areg`, `bd3`).
-Extracts with 0 errors, 0 warnings. Eight runs; this file was rewritten by the second, the third
+Extracts with 0 errors, 0 warnings. Nine runs; this file was rewritten by the second, the third
 (2026-11-27: the column from group 4 down to `dbus_le`'s driver) has its own section, "Run 3", below, the
 fourth (2026-11-28: the gate group east of its rail) the section "Run 4", the fifth (2026-11-28: the
 inverter of `wr_addr_sel` south of the group, which corrects what gates the upper gate) the section "Run 5",
@@ -10,7 +10,9 @@ drawn) the section "Run 6", and the seventh (2026-11-28: a re-read of groups 2 a
 and CS; connections as drawn, widths and two cells' places corrected, group 3's VCC contact found) the section
 "Run 7", and the eighth (2026-11-28: a re-read of the strobe latch's wiring east of its rail; connections as
 drawn, the thin metal `wr_data_sel_n` drawn uncertain over two boxed cells, the second of them drawn) the
-section "Run 8".
+section "Run 8", and the ninth (2026-11-28: a re-read of the strobe latch's gates under and west of its rail, the
+last part of runs 1-2 that no review had read; connections as drawn, four widths and three shapes corrected) the
+section "Run 9".
 
 ## Status
 
@@ -44,6 +46,10 @@ section "Run 8".
   row 1's output and its bar into the band for G1, the two taps of `e_b`, and `wr_data_sel`'s way from group 2 to
   row 3's band. Found as run 2 drew it. The "second boxed structure" under the thin metal is drawn: an unused
   output cell, a poly island. Over it and over the hook cell the thin metal is now an uncertain item (`?M`).
+- **The strobe latch's gates are re-read** (run 9, 2026-11-28): rows 1-3 and G4 under and west of the rail, with
+  their loads, the third pull-down's loop, the metal `wr_data_lat_n` (x 15924) and the seven contacts. Found as
+  run 2 drew them. Row 1's stack is 78 wide and runs 45 px east of the rail, as drawn; the third pull-down is 41
+  wide (was 36), the loads of rows 2-3 and G4 25 and 24 (were 19), G4's pull-down 34 (was 28).
 - **Three results of the first run are corrected**: `ar_load` is not `NOT e_b` (G2's
   gate is a separate net, `ar_load_n`); row 1 has a third pull-down and a load; the metal
   at x 16210 is two wires (a second break, at y 15968-15988).
@@ -512,8 +518,10 @@ The lists marked ? at the south, east and top edges come from `tools/sel_cut.py`
   which also answers Ambiguity 16. Runs 1-2's joins between the bundle and the group are re-read by run 6
   (found as drawn). Left there: the three ties (Ambiguities 17 and 21) and the tie of `ar_load_n`'s west cell
   (Ambiguity 5). Groups 2 and 3 are re-read by run 7, the strobe latch's wiring east of its rail by run 8
-  (its Not done: the latch's gates under and west of the rail, y 15500-15985, are the last unreviewed part of
-  runs 1-2).
+  (its Not done: the latch's gates under and west of the rail, y 15500-15985, were the last unreviewed part of
+  runs 1-2), and those gates by run 9 (found as drawn). **What no review has read of runs 1-2 is now only G1 and G2
+  themselves** (x 15850-16300, y 14800-15360: the two drivers with their loads and their output routes north into
+  `sel` and `areg`; run 6 read the wiring of their gates).
 - **The column below y 17400** (run 3 traced group 4 and the column down to there: see its two sections).
 - **Right-hand column** (x 16480-16800, y 14700-16450) and the routing east and south of
   it: not looked at. `dl7_q_n`, `dl6_q_n`, and probably `bd2_x`, `wr_data_e_n` go there.
@@ -1438,6 +1446,139 @@ alike, and both cannot be contacts.
   chip 1).
 - The boxed cells' windows (Ambiguities 1, 30) and the gate group's four uncertain ties (Ambiguities 5, 17, 21).
 - The column under the left rail below y 17400; east of the VCC rail x 16491-16538 south of y 15770.
+
+## Run 9 (2026-11-28): the strobe latch's gates under and west of the rail, re-read
+
+Tom Seddon, on Claude Fable 5.2, 2026-11-28 from 06:56 +0000. Piece `slg`: x 15850-16110, y 15500-15990, the ten
+transistors of the strobe latch that run 2 drew and no review had read (run 8's Not done): rows 1-3 of the left
+gate column and G4, with their loads, the third pull-down's loop west of the rail, the three ties, the metal
+`wr_data_lat_n` (x 15924) and the seven contacts. **A re-read: every connection is as drawn** (`tools/sameconn.py`
+against the last merge, 8ab3f603: connections identical, the package alone and with every trace file; 4,913
+transistors, 2,539 nets, 0 errors, 0 warnings). What changed is geometry: four widths, the shape of two lands, one
+gate's end. Views in `cache/scratch/bd2/`: `r9_w1`, `r9_w2` (2.2x, three shots), `r9_b`, `r9_c`, `r9_d` (3.4x),
+`r9_e` (3.1x), `r9_a` (4.9x, four shots: row 1 east of the rail), `r9_f1`, `r9_f2` (3.7x, four shots: rows 2-3 east
+of the rail), overlays `r9_o1`, `r9_o2`. The numbers decide, as before: `tools/bd2_umap.py`, `tools/bd2_prof4.py`,
+`tools/px.py`, `tools/tl5_tracks.py`, `tools/tl3_thin.py`, `tools/cdp4_padc.py`, `tools/opendiff.py`.
+
+### What it confirms
+
+    wr_data_lat   = NOT( wr_data_lat_n OR (e_b AND wr_data_sel_n) )     row 1: two in series under the rail, a third west of it
+    wr_data_lat_n = NOT( wr_data_lat OR (e_b AND wr_data_sel) )         rows 2-3
+    wr_data_sel_n = NOT wr_data_sel                                      G4
+
+Marked, all three, as before: each load's gate is on its node through a boxed cell drawn `?B` (Ambiguity 1), the
+metal `wr_data_lat_n` is on the output of rows 2-3 through one of them, and `wr_data_sel_n`'s thin metal is `?M`
+over two cells (Ambiguity 29).
+
+- **The stacks under the rail** (`tools/bd2_umap.py 15984 15490 16072 15990 4 3`, the clean shot's three colours
+  under the metal). Row 1: ground land, band y 15553-15577, node, band y 15603-15619, output y 15628-15652. Rows
+  2-3: ground land, band y 15724-15739, output y 15751-15808, band y 15814-15826, node, band y 15856-15871, ground
+  land y 15883-15919. Every band is salmon across its whole column and each node tan, with one dark line between.
+- **Row 1's column is x 16023-16103.** Its west edge is a dark line at x 16020-16025 under the rail, 15 px inside
+  the rail's edge, with the bands' ends salmon and the ground pink (field) west of it (`tools/px.py row 15566 16004
+  16036 2 acid1b`, and `15590`, `15612`). East of the rail the column runs on under the thin metal `wr_data_sel_n`:
+  down x 16093, in that metal's protected margin, the clean shot has both bands at the brightness of poly over a
+  channel (249/184/131, 252/173/122) and tan between and below them (188-204/178-190/133-142) (`tools/px.py col
+  16093 15546 15662 3 all`); the edge is the line x 16101-16105 that run 8 read. In the open gap between the two
+  metals chip 2's metal shot has the bands orange and the node and the output plain with blue 82-91 (`col 16080
+  15546 15662 4`). So both series pull-downs are 78 wide, as run 2 drew them (it had 82); unlike groups 2 and 3
+  (run 7), nothing here was drawn only as wide as the rail.
+- **Rows 2-3's column is x 16035-16082 for the upper pull-down and x 16035-16102 below y 15768**, as drawn. West
+  edge: the dark line x 16032-16037 (`row 15735`, `15762`, `15845 16004 16050 2 acid1b`); the upper band runs on
+  west of it over field (salmon to x 16010, pink above and below). East: at the upper band both metal shots have an
+  edge line across the poly at x 16078-16081 and the clean shot's tan ends at x 16077 on the land above it (`row
+  15712`, `15735 16057 16111 3 all`); down x 16090 the clean shot is khaki above y 15765 and tan from y 15772, with
+  the two lower bands channel-bright (`col 16090 15744 15926 3`).
+- **The third pull-down's loop is one diffusion from the ground land round to the output, with the bar of the
+  L-shaped poly across it.** The arm (y 15537-15552) and the return (y 15638-15657) are tan without an edge line
+  from the stack to the rail's west edge (the map above) and plain or green west of it (`tools/bd2_prof4.py row
+  15544 15880 16112 2`, `row 15648`); the bar is orange in both metal shots and chip 2's stripped shot with two edge
+  lines across it, at x 15932-15938 and x 15974-15980 (`row 15566`); below the bar the diffusion is plain between
+  lines at x 15956 and x 15977 (`tools/px.py row 15620 15938 15986 3 all`: 171-177/112-139/84-85, blue of a
+  diffusion) and no line crosses it from y 15590 to y 15660 (`tools/bd2_prof4.py col 15968 15510 15760 2`). The
+  pocket inside the loop is plain field in four shots (`col 16000`: y 15558-15630). East of the bar's end and west of
+  the rail nothing lies in the pocket.
+- **The metal `wr_data_lat_n` (x 15914-15934) is one piece between two contacts, with none between**: clean-shot
+  holes only at y 15627 and y 15827 (`tools/tl5_tracks.py v 15924 15595 15850`); between the two rings its dark
+  stretches are 8-10 px, each at an edge passing under (`tools/tl3_thin.py 15914 15934 15600 15850 --thr 176 --min
+  8`; 16-17 px at the rings themselves); `tools/cdp4_padc.py`: metal centres in both chips and a hole at
+  (15924,15628) and (15925,15828). No metal north of the upper pad or south of the lower (views `r9_b`, `r9_d`).
+  From the upper pad only the neck leaves (north, to the bar); from the lower only the poly along the foot of the
+  boxed cell.
+- **The loads.** Each is a strip from the one VCC land east under a poly block to its node, and block, bar above
+  and bar (band, pad) below are one poly: one dark line of 6-8 px at each of the strip's two edges, orange on both
+  sides of it (`tools/px.py col 15944 15655 15745 3 all` for row 1, `col 15944 15748 15934 3` for rows 2-3 and G4;
+  rows `15693`, `15788`, `15900` along the strips). Under the metal x 15924 the clean shot has the blocks at the
+  brightness of poly over a channel (237-244/163-180). The blocks end at x 15954 and each node is plain diffusion
+  east of that (blue 81-91 in chip 2's metal shot): row 1's goes south from the loop (x 15958-15976), the other two
+  run east into the rail without an edge line. The VCC land is one land from y 15684 to y 15906 under the supply
+  rail, with the three strips leaving it east at y 15684-15702, y 15776-15796 and y 15896-15906
+  (`tools/bd2_umap.py 15836 15500 15904 15990 4 4`); the lands under the same rail at y 15544-15604 and from y 15944
+  are `sel`'s (its loads on the rail's other side).
+- **G4.** The gate is the `wr_data_sel` band's own poly: down x 16012 the clean shot is salmon from the band's turn
+  (y 15861-15879) through one dark line (y 15883-15889, red: the strip's upper edge) to y 15918, brighter below the
+  line (246-252/169-173: over the channel) (`tools/px.py col 16012 15852 15926 3 acid1b,acid`). The strip has the
+  same two edge lines (y 15885-15888 and y 15924-15929) at x 15984, in the output land, and at x 15998, against the
+  gate's west outline (`col 15984` and `col 15998 15876 15930 3 all`): the land reaches the gate. The output's
+  diffusion south to the boxed cell is plain in both metal shots from the land (no line across at y 15918) to the
+  cell's frame at y 15944 (`tools/bd2_prof4.py col 15973 15740 15990 2`); the load gate's down-turn is orange
+  without a break from y 15920 to y 15970 (`col 15942`); the bar under the rail is poly with field above and below
+  (`tools/px.py col 16030 15946 15982 2 acid1b,acid,metal1`: 198-221/147-170 between pink 176-180/122-131 and dark
+  pink; chip 2's stripped shot red over green by 30-52).
+- **The seven contacts** each have a bright centre in both metal shots and a hole in the clean shot
+  (`tools/cdp4_padc.py`): the three on the ground rail at (16046,15526), (16050,15702), (16050,15900), the two of
+  the VCC land at (15862,15728), (15866,15823), and the two pads of the metal x 15924.
+- `tools/opendiff.py 15850 15500 16110 15990`: no open diffusion undrawn in the open. It lists two groups under
+  the VCC rail (Ambiguity 33).
+
+### What it corrects (geometry; no connection)
+
+- **The third pull-down is 41 wide, not 36**: the loop's west edge is the line that crosses the bar at
+  x 15932-15938 (drawn at x 15942; run 2's own comment says x 15937).
+- **Row 1's column begins at x 16023** (drawn 16018): the two series pull-downs are 78 and 83 wide in the
+  extraction (were 83 and 88; the upper one counts the pad's overlap).
+- **The load strips of rows 2-3 and G4 are 25 and 24 tall** (drawn 19 each): between edge lines at y 15775-15778
+  and y 15802-15808, and at y 15883-15889 and y 15913-15916 (`tools/px.py col 15944 15748 15934 3`). Loads 25/50
+  and 24/56; row 1's is 22/50 as drawn (24 measured).
+- **G4's strip is 34 tall and its gate's end cap runs past it.** The strip's lower edge is the line
+  y 15924-15929 (drawn at y 15918); the gate's poly is salmon for 4-6 px beyond that line (206-209/136-153) and
+  ends at y 15936, with pink field from y 15939 (`tools/px.py col 16012 15915 15945 2 acid1b,acid`). Pull-down 34/18
+  (was 28/18).
+- **Row 3's ground land is not a rectangle**: east of the rail it reaches x 16102 only down to y 15897 (`col
+  16090`); below that it ends at x 16080 (`tools/px.py row 15908 16052 16104 3`: tan to x 16076, a dark line, khaki
+  and then pink field under the thin metal).
+
+### Ambiguities (run 9)
+
+31. **A dark stripe in the clean shot down x 16075-16084**, through both of row 1's bands, the node between them
+    (where it is the "dark blob" of run 8's Not done, (16078,15583)) and the output strip, and again down rows 2-3.
+    It lies in the 25-30 px gap between the rail and the thin metal `wr_data_sel_n`, where the clean shot shows a
+    dark bar across whatever is underneath (`notes/layers.md`, traps); chip 2's two shots have ordinary bands and
+    plain diffusion there. Not layout; nothing drawn.
+32. **A dark line at x 16088-16091 in both metal shots down the whole of row 1's column** (bands, node, output).
+    (a) The west edge line of the thin metal `wr_data_sel_n`, which lies half over the column's east edge and is
+    dim there (run 8): adopted, because the clean shot has channel-bright poly and tan diffusion east of it, at
+    x 16093. (b) The column's east edge: the two series pull-downs would then be 66 wide and not 78. No connection
+    either way.
+33. **Two green patches under the VCC rail** (x 15850-15872, y 15500-15536 and y 15621-15674; the two groups
+    `tools/opendiff.py` lists): between the lands, where the ground is pink at x 15876-15890 and turns green
+    westwards toward the rail's middle (`tools/px.py row 15645 15836 15900 4 acid1b,acid,metal`: 190/122/127 at
+    x 15888, 112/167/99 at x 15840; chip 2's stripped shot plain, red over green by 5-25). Under metal, where that
+    tool's rule does not hold, and on `sel`'s side of the rail. Not read; nothing of this piece reaches there.
+34. **Row 1's tie cell is two plain patches one above the other** (x 15988-16006, y 15662-15682 and x 15990-16006,
+    y 15697-15707), each in a dark frame, between the output's return strip and the band (`tools/bd2_prof4.py col
+    15990` and `col 16000 15510 15760 2`; view `r9_c`). Run 2 drew the lower part as a poly finger from the band up
+    to a `?B` on the upper patch, and that is kept: the window is not resolved (Ambiguity 1), and either patch as
+    the window gives the same tie.
+
+### Not done (run 9)
+
+- The boxed cells' windows (Ambiguities 1, 30, 34) and the gate group's four uncertain ties (Ambiguities 5, 17, 21):
+  at the photographs' limit; what would settle them is a sharper photograph or the simulation.
+- The column under the left rail below y 17400; east of the VCC rail x 16491-16538 south of y 15770.
+- **G1 and G2 themselves** (x 15850-16300, y 14800-15360: the drivers of `wr_stb_n` and `ar_load`, first run,
+  with their loads and their output routes north into `sel` and `areg`): the last part of runs 1-2 that no review
+  has read (run 6 read the wiring of their gates; runs 7, 8 and 9 the rest). Next.
 
 ## Review
 

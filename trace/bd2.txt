@@ -155,7 +155,7 @@ N M 16169,16000 e_b
 # ---------------------------------------------------------------- row 1 (y 15500-15670)
 D 16028,15505:16075,15545              # ground land
 C 16047,15522
-D 16018,15535:16100,15650              # column, through under both bands
+D 16023,15535:16100,15650              # column, through under both bands (run 9: its west edge is the line x 16020-16025, 15 px inside the rail's edge)
 P 16005,15555:16105,15578              # upper band: gate wr_data_sel_n
 P 16098,15545:16135,15580              # pad
 C 16114,15560
@@ -169,8 +169,8 @@ N D 16060,15638 wr_data_lat
 # the L-shaped poly (channel: the poly is brighter over it, and the arm's left edge crosses
 # the bar at x 15937) and comes back east along y 15638-15657 into the output strip. The
 # pocket 15978-16020 x 15590-15637 inside this loop is field.
-D 15942,15537:16032,15552              # arm of the ground land
-D 15942,15537:15978,15600              # down, through under the bar
+D 15937,15537:16032,15552              # arm of the ground land
+D 15937,15537:15978,15600              # down, through under the bar (run 9: the west edge crosses the bar at x 15932-15938 in both metal shots)
 D 15958,15587:15978,15657
 D 15958,15638:16030,15657              # into the output strip, under the rail
 P 15908,15558:15992,15587              # bar: gate wr_data_lat_n
@@ -202,7 +202,8 @@ D 15986,15650:16008,15682              # output diffusion under the tie
 # y 15778-15798 under the rail to its load.
 D 16036,15678:16085,15810              # ground land, under the first band, output
 C 16047,15700
-D 16038,15768:16102,15915              # output's lower part, under the two bands, ground land
+D 16038,15768:16102,15897              # output's lower part, under the two bands, ground land
+D 16038,15890:16080,15921              # the ground land's south part ends at x 16080 (run 9: tools/px.py row 15908 16052 16104 3)
 C 16047,15898
 N D 16060,15790 wr_data_lat_n
 P 16020,15811:16160,15831              # band: gate e_b, from the tap on the trunk
@@ -215,7 +216,7 @@ N P 16130,15867 wr_data_sel
 # a poly block; block, thin bar above and the contact pad below are one poly; the pad's
 # poly wraps a boxed cell (15956-15996 x 15800-15842) that sits on the output's west arm.
 D 15958,15778:16040,15798              # west arm of the output
-D 15890,15778:15962,15797              # load strip from the VCC land
+D 15890,15777:15962,15802              # load strip from the VCC land (run 9: between the edge lines y 15775-15778 and y 15802-15808)
 P 15902,15757:15952,15847              # load gate: thin bar, block, pad
 C 15925,15825
 P 15946,15830:15992,15844              # the pad's poly along the foot of the boxed cell
@@ -230,10 +231,10 @@ D 15958,15795:15990,15842              # output diffusion under the cell
 # boxed cell at 15966-15978 x 15956-15970, where the output diffusion ends; the poly bar
 # y 15955-15973 starts on the other side of that cell and runs east under the rail (field
 # above and below it there: a wire) to the contact 16105,15962 on the thin metal wr_data_sel_n.
-P 16004,15857:16022,15925              # gate: wr_data_sel
-D 15958,15890:16040,15918              # output land, channel, ground land
+P 16004,15857:16022,15936              # gate: wr_data_sel (run 9: its end cap runs 10 px past the strip's lower edge, to y 15936)
+D 15958,15890:16040,15924              # output land, channel, ground land (run 9: between the edge lines y 15885-15888 and y 15924-15929)
 D 15966,15915:15980,15972              # output diffusion going south to the boxed cell
-D 15890,15890:15962,15909              # load strip from the VCC land
+D 15890,15888:15962,15912              # load strip from the VCC land (run 9: between the edge lines y 15883-15889 and y 15913-15916)
 P 15900,15868:15956,15929              # load gate: bar, block, bar
 P 15933,15925:15952,15973              # ... turning down
 P 15933,15955:16125,15973              # through the boxed cell and east under the rail
