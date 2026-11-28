@@ -2,7 +2,7 @@
 15895,15220:16280,15365  logic  address load driver | inverter: ar_load = NOT ar_load_n = bd2_x OR (E AND write to the address register); output up the bundle to the address register
 15895,15500:16150,15990  logic  write strobe latch | D latch open while E is high: two cross-coupled AND-OR-invert gates plus the inverter of its data input; holds "write to a data register" through E low; its Q drives the write strobe driver
 16090,14700:16300,15900  route  strobe and E bundle | ar_load and wr_stb_n up, E (x 16169) from below, latch data input (x 16277) and its inverse (x 16104)
-16240,15400:16480,15850  logic  address load gate | under a ground rail: ar_load_n = NOT(bd2_x OR (E AND wr_addr_sel)) for the address register strobe, and wr_data_e_n = NOT(wr_data_sel AND E); loads and inputs from the east not traced
+16240,15400:16500,15760  logic  address load latch | two cross-coupled AND-OR-invert gates as drawn (ties uncertain): ar_load_n = NOT(wr_data_e_n OR (E AND write to the address register)), wr_data_e_n = NOT(ar_load_n OR (E AND write to a data register)); loads on the VCC rail east of them
 15890,15985:16400,16210  logic  data register write decode | 3-input NOR of R/W, NOT RS and CS: write AND chip selected AND RS high; data input of the write strobe latch
 15890,16245:16400,16470  logic  address register write decode | 3-input NOR of R/W, RS and CS: write AND chip selected AND RS low; gates the address register strobe
 15850,16529:16400,16765  logic  RS and R/W inverters | two inverters back to back under the ground rail: bd2_rs_n = NOT RS (for the data register decode) and bd2_rw_n = NOT R/W (leaves south on the track x 16210)

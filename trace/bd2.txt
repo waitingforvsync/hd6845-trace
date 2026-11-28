@@ -249,7 +249,7 @@ N M 16104,15700 wr_data_sel_n
 # the rail (tools/bd2_umap.py 16250 15404 16384 15850):
 #     wr_data_e_n   = NOT( wr_data_sel AND e_b )                         y 15420-15565
 #     ar_load_n = NOT( bd2_x OR (e_b AND wr_addr_sel) )           y 15596-15832
-# THEIR LOADS ARE NOT TRACED (east of the rail, x 16370-16480), nor where wr_data_e_n goes.
+# Their loads, a third pull-down of the upper gate and both nodes' exits are run 4's (piece gge, below).
 M 16312,15400:16362,15850
 N M 16337,15500 vss
 # upper gate
@@ -272,7 +272,7 @@ P 16258,15856:16292,15888              # pad
 # lower gate
 D 16312,15596:16350,15832              # ground land, under band x, ar_load_n, under G_d, node, under G_e, ground land
 C 16327,15612 16330,15812
-P 16306,15638:16376,15656              # gate bd2_x: band arriving from the east (not followed)
+P 16306,15638:16376,15656              # gate bd2_x: the band of the upper node's load poly (run 4, piece gge)
 N P 16366,15647 bd2_x
 D 16266,15686:16316,15704              # ar_load_n: west arm to the boxed cell
 P 16226,15688:16274,15702              # bar from the pad 16205,15690 into the cell
@@ -280,6 +280,50 @@ P 16226,15688:16274,15702              # bar from the pad 16205,15690 into the c
 N D 16330,15690 ar_load_n
 P 16255,15726:16352,15744              # G_d: gate e_b
 P 16255,15770:16376,15788              # G_e: gate wr_addr_sel (the band runs on east of the column: not followed)
+
+# ---------------------------------------------------------------- gate group, east of its rail (run 4, piece gge)
+# x 16366-16500, y 15440-15760 (notes/blocks/bd2.md, "Run 4"). The two gates of the group are a cross-coupled
+# pair as drawn: each node has a third pull-down or a load whose gate poly is the other node's (through a `?B`).
+#     wr_data_e_n = NOT( ar_load_n OR (wr_data_sel AND e_b) )
+#     ar_load_n   = NOT( wr_data_e_n OR (e_b AND wr_addr_sel) )
+# The VCC rail x 16491-16538 is dlat's (M 16515,13060 y15790 w=48); the piece beside this group is repeated here
+# so that the file extracts by itself, with the land under it and dlat's long contact.
+M 16515,15570 y15720 w=48
+N M 16515,15600 vcc
+C 16502,15616:16522,15650
+# -- the third pull-down of wr_data_e_n (39/26): ground tongue T, a strip south under the block, the node's wire
+D 16360,15449:16453,15462              # T: a tongue of the ground land east of the rail (tan to the margin's limit only at y 15448-15458)
+D 16411,15449:16450,15516              # strip north-south under the block: its edges cross the block at x 16408-16411 and x 16450-16455
+D 16409,15500:16425,15621              # the node's wire south (12-16 px wide) to the load's strip
+D 16360,15553:16425,15568              # the node's east arm from the column (no edge line along y 15562, x 16377-16425)
+P 16394,15472:16480,15498              # the block: gate; west end cap x 16394-16410 over field, east part over field
+P 16455,15490:16478,15530              # its tail south to the pad
+P 16436,15522:16476,15560              # pad U
+C 16453,15539
+# -- the strap: thin metal from pad U to pad L, no contact between (over the three blocks below)
+M 16456,15528 y15750
+N M 16456,15640 bd2_w15540
+@alias ar_load_n bd2_w15540
+# -- load of wr_data_e_n (22/50): strip from the node's wire east under the block to the VCC land
+D 16409,15597:16500,15619
+P 16432,15580:16482,15650              # one poly: bar A, block 1 (over the strip), block 2 = the band's east end
+P 16370,15632:16436,15652              # the band of bd2_x east of the rail
+@alias wr_data_e_n bd2_x
+# its tie: a framed box under the node's arm, the band's poly taken north into it (not resolved: drawn uncertain)
+?D 16378,15566:16398,15595
+?P 16381,15572:16396,15636
+?B 16379,15570:16398,15597
+# -- load of ar_load_n (23/50): the node's east arm, on east under block 3 to the VCC land
+D 16344,15690:16500,15713
+D 16496,15580:16542,15708              # the VCC land under the rail (dlat draws it to y 15645): one tan area to y 15706, contact pits
+P 16432,15674:16482,15722              # one poly: bar C, block 3 (over the strip), on south into pad L
+P 16434,15719:16482,15757              # pad L
+C 16452,15740
+P 16391,15745:16436,15757              # row west from pad L
+# its tie: a framed box under the arm at the row's west end (not resolved: drawn uncertain)
+?D 16393,15706:16409,15735
+?P 16391,15717:16411,15750
+?B 16391,15715:16411,15737
 
 # ---------------------------------------------------------------- bundle, y 15700-15900
 # Taps on the e_b trunk: a contact on a poly pad each.

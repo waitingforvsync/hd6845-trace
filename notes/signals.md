@@ -262,7 +262,7 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | `db_b#` | **the internal data bus, bit #** (0-7). One net per bit across the chip: the right datapath's data lines (formerly `ubus_b#` in the upper array and `rbus_b#` in the lower one), the central datapath's bit lines (`notes/blocks/bust.md`), R3's data lines, `amr`'s inner lines. It writes R0-R11 by the register widths of the datasheet (`tools/bust_fanout.py`). The bit numbers rest on the counters' carry direction (the comparators) and on that fan-out; bits 0 and 1 also end in the D0 and D1 units of `dbus` (`notes/blocks/dbl.md`). Bits 0-3 are driven onto the bus by the input latches of pins D0-D3 in the data bus column (`dbus`: `db_b#` = NOT `dl#_q_n`), bits 4-7 the same way by the latches and inverters of `dlat` (`notes/blocks/dlat.md`). Bits 0-4 continue to R10 and R11 only through `?M` (AMB-019): the names `cdp2_a_s#_bus`, `cdp2_c_s#_bus` stay aliases there |
 | `ar#`, `ar#_n` | address register bit # and its inverse (rows of the decode array) |
 | `ar#_a`, `ar#_n2`, `ar#_q`, `ar#_trk` | nodes of address register bit #: storage node, its inverse, output, and the track that takes it to the decode |
-| `ar_load`, `ar_load_n` | load strobe of the address register and its inverse |
+| `ar_load`, `ar_load_n` | load strobe of the address register and its inverse; `ar_load_n` = NOT(`wr_data_e_n` OR (`e_b` AND `wr_addr_sel`)) (marked, `bd2` run 4) |
 
 ## Bus control
 
@@ -271,13 +271,14 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | `wr_data_sel` | NOR(`rw_d`, `bd2_rs_n`, `cs_d`): a write to the data register is addressed |
 | `wr_data_sel_n` | NOT `wr_data_sel` |
 | `wr_data_lat`, `wr_data_lat_n` | transparent latch of `wr_data_sel`, open while `e_b` is high |
-| `wr_data_e_n` | NOT(`wr_data_sel` AND `e_b`) |
+| `wr_data_e_n` | NOT(`ar_load_n` OR (`wr_data_sel` AND `e_b`)): the upper gate of `bd2`'s gate group; the cross term is marked (an uncertain tie, `bd2` run 4) |
 | `wr_addr_sel` | NOR(`rw_d`, `rs_d`, `cs_d`): a write to the address register is addressed |
 | `bd2_rs_n` | NOT `rs_d` (an inverter under `bd2`'s ground rail; load traced by `bd2` run 3) |
 | `bd2_rw_n` | NOT `rw_d`: the inverter below it; south on the metal x 16210 to the read gate |
 | `bd2_e_n` | NOT `e_b`: an inverter in the same column (its gate band taps the `e_b` trunk at (16166,17037)); the second input of `dbus_le`'s NOR and an input of the read gate |
 | `rd_data_e` | NOR(`bd2_e_n`, `cs_d`, `bd2_rw_n`, `bd2_rs_n`) = `e_b` AND NOT `cs_d` AND `rw_d` AND `rs_d`: a read of the data register, while E is high. Leaves `bd2` south and east to a pad (17080,17949) at the block below the data bus column |
-| `bd2_x` | second term of the address register load, from the untraced right-hand column |
+| `bd2_x` | the band that gates the first pull-down of `ar_load_n`: the load poly of `wr_data_e_n`, an alias of it through an uncertain tie (`bd2` run 4); it has no other source |
+| `bd2_w15540` | the poly of the pads (16453,15539) and (16452,15740) and the thin metal between them: gate of the third pull-down of `wr_data_e_n` and of `ar_load_n`'s load; an alias of `ar_load_n` through an uncertain tie (`bd2` run 4) |
 
 ## Strobe channel gate column (`notes/blocks/bd1.md`)
 
