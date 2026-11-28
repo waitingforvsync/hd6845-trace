@@ -1,7 +1,7 @@
 # bd2: bus control logic right of the register select gates
 
 Region x 15850-17000, y 14700-17100. Trace: `trace/bd2.txt` (`@requires sel`, `areg`, `bd3`).
-Extracts with 0 errors, 0 warnings. Ten runs; this file was rewritten by the second, the third
+Extracts with 0 errors, 0 warnings. Eleven runs; this file was rewritten by the second, the third
 (2026-11-27: the column from group 4 down to `dbus_le`'s driver) has its own section, "Run 3", below, the
 fourth (2026-11-28: the gate group east of its rail) the section "Run 4", the fifth (2026-11-28: the
 inverter of `wr_addr_sel` south of the group, which corrects what gates the upper gate) the section "Run 5",
@@ -14,7 +14,9 @@ section "Run 8", and the ninth (2026-11-28: a re-read of the strobe latch's gate
 last part of runs 1-2 that no review had read; connections as drawn, four widths and three shapes corrected) the
 section "Run 9", and the tenth (2026-11-28: a re-read of G1 and G2 themselves, the drivers of `wr_stb_n` and
 `ar_load`, with their output routes; connections as drawn, G2's load gate and four lands' edges corrected) the
-section "Run 10".
+section "Run 10", and the eleventh (2026-11-28: what was left east of the supply rail x 16490-16541: the rail's
+stretch to the region's south edge, `d7_c`'s metal to its capacitor with two rectangles that carry only a dot of
+metal, and the jog of the ground rail; wiring and plain diffusion, no transistor) the section "Run 11".
 
 ## Status
 
@@ -57,6 +59,11 @@ section "Run 10".
   `wr_data_lat`. Found as run 1 drew them: each output's poly ends on its box and is apart from the gate's own pad
   (8 px of plain ground at G1, 6-10 at G2), and no wire of the piece has a contact where it crosses another. G2's
   load gate is x 15893-15932 (was drawn 8 px east); load 71/39 (was 75/42), pull-down 135 wide (was 128).
+- **East of the supply rail x 16490-16541 nothing is left undrawn** (run 11, 2026-11-28): `d7_c`, the third
+  inverter's output of data input buffer 7, ends on a contact on a plain diffusion rectangle (a junction
+  capacitor, as `dbus` found for bits 0-6); two more rectangles beside its metal carry only a dot of metal (the
+  capacitors of `d6_b` and `d7_b`, not strapped). The supply rail runs on south over plain field. The jog of the
+  ground rail at y 15322-15400 is drawn. No transistor.
 - **Three results of the first run are corrected**: `ar_load` is not `NOT e_b` (G2's
   gate is a separate net, `ar_load_n`); row 1 has a third pull-down and a load; the metal
   at x 16210 is two wires (a second break, at y 15968-15988).
@@ -159,7 +166,7 @@ and on the data path; it is what the silicon here says.
 | VCC rail | x 15795-15890, whole height (shared with `sel`'s right-hand column); band y 14745-14805 to areg's inverter rail x 16142-16194 | drawn |
 | VCC land under that rail | x 15850-15898, continuous from y 15682 down at least to y 16120 | drawn in pieces where a load uses it |
 | Ground rail of the left column | x 16008-16058, y 14908 to about 17050; joined by the band y 14908-14960 to `areg_rail_r` | drawn; lower end not looked at |
-| `areg_rail_r` | x 16401-16450 above y 14908; jogs to x 16355-16405 (y 14908-15330), then to x 16312-16362 (y 15400 on), the ground rail of the gate group, which **ends at y 15922** | drawn to y 15330 and y 15400-15850; the jog between is the first run's observation, not drawn |
+| `areg_rail_r` | x 16401-16450 above y 14908; jogs to x 16355-16405 (y 14908-15330), then to x 16312-16362 (y 15400 on), the ground rail of the gate group, which **ends at y 15922** | drawn; the jog between (a slab x 16317-16408, y 15325-15376) by run 11 |
 | G1, driver of `wr_stb_n` | 15900-16272 x 15030-15160 | traced |
 | G2, driver of `ar_load` | 15895-16272 x 15225-15360 | traced |
 | Row 1 (latch, Q side) | 15900-16150 x 15500-15715 | traced |
@@ -175,7 +182,10 @@ and on the data path; it is what the silicon here says.
 | `bd2_e_n` = NOT `e_b` | 15850-16244 x 16962-17110 | traced (run 3) |
 | `rd_data_e` = NOR(`bd2_e_n`, `cs_d`, `bd2_rw_n`, `bd2_rs_n`) | 15850-16400 x 17108-17400, and its route to (17112,17950) | traced (run 3, piece `rdg`) |
 | Left column below y 17400 | under the rail (a land from y 17435 on) | not traced |
-| Right-hand column | x 16480-16800, y 14700-16450; routing east and south of it | not looked at; the metal ending at about (16772,15800) and running north along x 16818 with eight tapped pads is `dbus_le`, the data input latches' enable (`dbus`, 2026-11-17); the column is the bits 4-7 latch column, package `dlat` |
+| VCC rail of the right-hand column | x 16490-16541, whole height (`dlat` to y 15790, `cdp4` to y 16440) | drawn on to y 17100 (run 11); over plain field south of y 16440; goes on south past y 17560 |
+| `d7_c`'s capacitor | metal y 16750-16766 from `dbus`'s end (16950,16758) west to a corner (16841,16758), x 16833-16849 south to the contact (16860,17297) on a plain rectangle x 16824-16933, y 17213-17343 | traced (run 11); the rectangle lies south of the region's edge |
+| Two rectangles with a dot of metal each | x 16868-16976, y 16780-16909, contact (16947,16865); x 16847-16954, y 16997-17126, contact (16905,17060) | traced (run 11): `bd2_cap16865`, `bd2_cap17060`, joined to nothing |
+| Right-hand column | x 16480-16800, y 14700-16450; routing east and south of it | `dlat`'s (above y 15770) and `cdp4`'s (the data output inverters of bits 5-1 and the read bus tracks); run 11 found nothing else undrawn there. Earlier text: not looked at; the metal ending at about (16772,15800) and running north along x 16818 with eight tapped pads is `dbus_le`, the data input latches' enable (`dbus`, 2026-11-17); the column is the bits 4-7 latch column, package `dlat` |
 
 ## Logic
 
@@ -452,13 +462,15 @@ Diffusion column x 16312-16366 under the ground rail x 16312-16362
 | `rd_data_e` | metal | x 17112, y 17950 (far outside the region: the end of its route) | driven here (run 3, piece `rdg`) | the read gate's output; a thin metal goes on east into the block below the data bus column |
 | (`bd2_x`, `wr_data_e_n`) | | | | no longer ports (run 4): the band of `bd2_x` is the load poly of `wr_data_e_n` and ends under the strap at x 16482; the node's arm ends on its own load and pull-down |
 | ? | metal | x 16016-16026, y 17100 | ? | thin line where the ground rail was; not looked at |
-| ? | metal, 49 wide | x 16492-16540, y 17100; x 16505-16540 at y 14700 | supply? | wide vertical of the right-hand column, whole height |
-| ? x 6 | metal | x 16580, 16624, 16668, 16711, 16755, 16799 at y 17100 | ? | six lines on a 43.5 px pitch leaving south |
-| ? | metal | x 16837 (faint), 17001 at y 17100 | ? | |
-| ? | metal | x 16586, 16621, 16732, 16816, 16950, 16992 at y 14720 (top) | ? | lines of the right-hand column continuing into areg's untraced part |
-| ? | metal | x 17000 (east), y about 14694, 14728, 14761, 14798, 14834, 14916, 14992, 15022, 15096, 15175, 15199, 15323, 15532, 15674, 15741, 15796, 15844, 15936, 16106, 16215, 16508, 16580, 16632, 16685, 16759, 16984, 17010, 17048, 17085 | ? | raw output of `sel_cut.py v 16995`; not checked by eye |
+| `vcc` | metal | x 16490-16541, y 17100 (bottom) | supply | the right-hand column's supply rail (run 11: drawn from `cdp4`'s end at y 16440; `dlat` draws it through y 14700); goes on south, not read beyond y 17100 |
+| `d7_c` | metal | x 16950, y 16750-16766 (inside the region: where `dbus` ends it) | from outside | data input buffer 7's third inverter's output, on its way to its capacitor (run 11) |
+| (six lines at y 17100) | metal | x 16581, 16624, 16666, 16710, 16754, 16798 | - | not ports of this package: `cdp4`'s read bus columns (`trace/cdp4.txt`, lines 955-980) |
+| (x 16837, 17001 at y 17100) | metal | | - | x 16837 is `d7_c`'s metal, which ends inside its capacitor at (16860,17297) (run 11); x 17001 is `busc`'s |
+| (top edge east of x 16450) | metal | x 16586, 16621, 16732, 16816, 16950, 16992 at y 14720 | - | not ports of this package: `dlat`'s and `dbus`'s lines, all drawn (run 11: view `r11_top`, every metal outlined) |
+| (east edge) | metal | x 17000 (east), y about 14694, 14728, 14761, 14798, 14834, 14916, 14992, 15022, 15096, 15175, 15199, 15323, 15532, 15674, 15741, 15796, 15844, 15936, 16106, 16215, 16508, 16580, 16632, 16685, 16759, 16984, 17010, 17048, 17085 | - | raw output of `sel_cut.py v 16995`. Run 11: `tools/busl_mdrawn.py v 16995 14700 17100` finds 40 metals on that cut and every one drawn by some package (`dbus`, `dlat`, `cdp4`, `busc`); none is a wire of this package |
 
-The lists marked ? at the south, east and top edges come from `tools/sel_cut.py` only.
+The lists at the south, east and top edges came from `tools/sel_cut.py` only; run 11 went through them (above). Left
+with a `?`: the thin line at x 16016-16026, y 17100.
 
 ## Ambiguities
 
@@ -531,7 +543,8 @@ The lists marked ? at the south, east and top edges come from `tools/sel_cut.py`
   (found as drawn). **Every part of runs 1-2 has now been read by a review.**
 - **The column below y 17400** (run 3 traced group 4 and the column down to there: see its two sections).
 - **Right-hand column** (x 16480-16800, y 14700-16450) and the routing east and south of
-  it: not looked at. `dl7_q_n`, `dl6_q_n`, and probably `bd2_x`, `wr_data_e_n` go there.
+  it: `dlat`'s and `cdp4`'s; what they left east of the supply rail is run 11's (the rail, `d7_c`'s capacitor,
+  two unstrapped rectangles). Nothing else is undrawn there (run 11's cuts).
 
 ## Where `wr_data_e_n` goes: looked at 2026-11-16, not resolved
 
@@ -1739,6 +1752,137 @@ buried contacts: Ambiguity 37).
   surveyed).
 - The lists marked ? in the Ports table (top, east and south edges, from `tools/sel_cut.py` only), and the jog of
   `areg_rail_r` at y 15330-15400 (the Inventory: observed, not drawn).
+
+## Run 11 (2026-11-28): what was left east of the supply rail, and the ground rail's jog
+
+Tom Seddon, on Claude Fable 5.2, 2026-11-28 from 08:21 +0000. Piece `d7c`: three things that run 10's Not done
+listed, all wiring and plain diffusion: (1) what lies east of the supply rail x 16490-16541 south of y 15770 and
+is in no package's trace: the rail itself south of y 16440, the metal of `d7_c` west of `dbus`'s end at
+(16950,16758), and three plain diffusion rectangles; (2) the jog of the ground rail at y 15322-15400; (3) the
+port lists of the south, east and top edges that came from `tools/sel_cut.py` only. **No transistor; three nets
+touched** (`d7_c`, and two new ones that are joined to nothing). Full extraction 2,541 nets (was 2,539: the two
+dots), 4,913 transistors, 0 errors, 0 warnings. Views in `cache/scratch/bd2/`: `r11_s1` (the whole corner at 1x,
+every package outlined), `r11_a`, `r11_a2` and `r11_b`, `r11_b2` (2.6x, four shots: the corner and two
+rectangles; the metal's end), `r11_c` (the rail, 1.8x, four shots), `r11_j`, `r11_spot` (the jog; a spot on it at
+3.8x), `r11_top` (the top edge), overlays `r11_ov1`, `r11_jov`. The numbers are in
+`cache/scratch/bd2/survey.md`, "Run 11", each with its command.
+
+### What it establishes
+
+- **`d7_c` ends on a capacitor, like `d0_c`..`d6_c`** (traced). `dbus` left the metal of data input buffer 7's
+  third inverter's output at its west edge (16950,16758), "probably to a capacitor". It runs on west along
+  y 16750-16766 to a corner at (16841,16758), south along x 16833-16849 for 550 px, and ends on a contact
+  (16860,17297) on a plain diffusion rectangle x 16824-16933, y 17213-17343 (bright green in the clean shot, no
+  poly on it): junction capacitance to the substrate on `d7_c`, nothing else. The rectangle is south of this
+  package's region (y 17100), in `busc`'s; it is drawn here as the wire's end.
+- **Two more rectangles carry only a dot of metal** (traced): x 16868-16976, y 16780-16909 with a contact at
+  (16947,16865), and x 16847-16954, y 16997-17126 with a contact at (16905,17060). Each contact has a ring 36 px
+  across with a bright centre in both metal shots and bare ground all round: no metal leaves either. They are
+  what `dbus` found beside buffers 0-5 (`dbus_cap0b`..`dbus_cap5b`): the capacitor that a strap would have put
+  on the second inverter's output, a metal option not taken. `dbus` has the metals of `d6_b` and `d7_b` ending on
+  nothing at (17165,16742) and (17124,16806), 150-320 px east of these two. Which rectangle was meant for which
+  is not shown by anything, so they are named for their places: `bd2_cap16865`, `bd2_cap17060`.
+- **The supply rail x 16490-16541 runs on south over plain field** (traced): from `cdp4`'s end (y 16440) to the
+  region's edge (y 17100) there is nothing under it but `cdp4`'s poly row y 16486-16530 (`dbus_le`'s hop), which
+  it crosses without contact. It goes on south past y 17560 (not read beyond y 17100).
+- **The ground rail's jog is one slab** (traced): `areg_rail_r`'s metal x 16355-16405 widens west at y 15322 to
+  x 16317-16408 and goes on south from y 15376 as the gate group's rail. Over plain field. Runs 1-10 had the two
+  rails joined by name only.
+- **The port lists of the south, east and top edges hold no wire of this package that is undrawn** (cuts, below).
+
+### `d7_c`'s metal
+
+- One metal from `dbus`'s end to its pad. Along y 16758 both chips pass the metal test from x 16836 to x 17090
+  without a gap (`tools/tl5_tracks.py h 16758 16826 17090`). Down x 16841 from y 16752 to y 17307 the stretches
+  where neither chip passes are 10 px at y 17034-17044 (both dim, 9-B in `tools/textmap.py`'s scale, the clean
+  shot's pink protected strip unbroken under it) and 9 px at y 17210-17219 (the south rectangle's north edge
+  underneath). Chip 2 alone is dark across the metal at y 17010-17019 where chip 1 is full bright: a mark.
+- The corner (16834-16849, 16750-16766) is a corner: bare ground west of x 16831 and north of y 16747 in both
+  metal shots (`tools/textmap.py 16804 16732 16876 16792 3`); the next metal west is `cdp4`'s track x 16790-16806,
+  25 px away.
+- Width 16: bright y 16752-16764 on the row, x 16834-16848 on the column, the clean shot's pink strip 4 px wider
+  each side.
+- **Beside the lower rectangle the metal reads narrow, and there is no contact.** From y 16998 to y 17130 chip 2's
+  metal fails the test: the rectangle's west edge line lies under the metal's east 5 px (dark x 16843-16852; the
+  metal's bright core is x 16834-16840 there). The clean shot under the metal is pink (field) at x 16837-16840 on
+  every row from y 17004 to y 17139, the edge line at x 16843-16846, protected diffusion from x 16849; no hole,
+  no ring, no bright centre, no widening anywhere along it (`tools/textmap.py 16816 16980 16876 17140 3 --acid`).
+  `tools/follow.py`'s contact candidates at (16841,16952), (16842,16983), (16841,17063), (16841,17154) are none
+  of them contacts by that map.
+- **The end.** The column ends at y 17307 with a foot east: the pad x 16833-16876, y 17283-17311, contact centre
+  (16860,17297) (253/220/141 in chip 2, 180/196 in chip 1, pits in the clean shot's cream box). Between the
+  column's bright core (x 16836-16844) and the centre (x 16854-16866) the metal dips for 6-8 px to 82-97 (chip 2)
+  and 85-95 (chip 1), against 48-66 for 10 px in the ring on the east side; the clean shot is one cream area
+  through the dip (190-196/168-170). `dbus`'s strap contact of `d6_c`, (17228,16843), read with the same command,
+  has the same shape (dip 82-90, east ring 36-46): the metal arrives from the column's side (trap 16, test b).
+
+### The three rectangles
+
+Edge lines by cuts in all four shots (`cache/scratch/bd2/r11_edges.py`, the dark runs along a row or column):
+
+| Rectangle | West | East | North | South | Drawn |
+|---|---|---|---|---|---|
+| upper | 16865-16871 | 16973-16980 | 16777-16783 | 16906-16913 | 16868,16780:16976,16909 |
+| lower | 16844-16856 (with the metal's east edge) | 16951-16958 | 16993-17000 | 17123-17129 | 16847,16997:16954,17126 |
+| south (on `d7_c`) | 16821-16831 | 16930-16936 | 17210-17217 | 17340-17346 | 16824,17213:16933,17343 |
+
+Each is green in the clean shot where open (109-139/139-157/73-90, `tools/px.py pt` at two points of each and the
+row y 17085) and tan within 10 px of the metal (196/175/122), plain in both metal shots (chip 2's blue 81-90: no
+poly), and reads red over green by 5-14 in chip 2's stripped shot against -2 to 1 on the field beside it (trap
+21). `tools/opendiff.py 16810 16740 17000 17360`: every green area of the three is drawn as diffusion. No poly crosses any of them. The marks inside
+(rings and specks in the upper two, a dash at (16865-16880,17062-17069)) are in the clean shot only.
+
+### The rail, and the ground rail's jog
+
+- Rail: edge lines x 16487-16490 and x 16541-16546 at y 16460, 16600, 16900 and 17095. Under it the clean shot is
+  pink at the flanks with the grey-green tint down the middle (132-138/144-150/101-108: the tint run 10 found
+  under the ground rail's middle), no outline, no pits; the poly row y 16486-16530 is cream without a hole, and the
+  dim patches of the rail over it are at different places in the two chips (`tools/textmap.py 16478 16466 16556
+  16540 3`).
+- Jog: edge lines x 16313-16317 (west), x 16402-16414 (east, to y 15376), y 15319-15325 (top, west part),
+  y 15374-15378 (bottom, east part), then x 16366-16371 (the lower rail's east edge). Pink under it with the same
+  tint in the middle. A dark round spot at (16376,15334) is on chip 2's metal only; chip 1 has its own at
+  (16352,15337) and a small one at (16372,15328); neither stripped shot shows anything at any of the three
+  (`r11_spot`, 3.8x, four shots; `tools/px.py row 15336 16350 16400 3 all`). No contact. `dlat`'s diagonal poly of
+  `dl7_q_n` passes under the upper rail's east part and clear of the slab's interior; no contact there either.
+
+### What is undrawn east of the rail: the cuts
+
+`tools/busl_mdrawn.py` (the metals along a cut that pass the two-chip test, and the trace item covering each):
+rows y 15760, 16450, 16560, 16650, 16730, 16780, 16850, 16950, 17050, 17095 over x 16470-17010; columns x 16515
+(y 15700-17600), x 16841 (y 16600-17600), x 16880, 16930, 16990 (y 15750-17110), x 16995 (y 14700-17100); row
+y 16762 over x 16700-17100. Before this run the only undrawn metals on them were the rail and `d7_c`'s; after it
+none (the tool does not list thin, dim metals, so the claim is also from the views `r11_s1`, `r11_a`, `r11_b`
+with every package outlined). The six lines at the south edge are `cdp4`'s read bus columns; the 40 metals
+crossing x 16995 are all drawn by `dbus`, `dlat`, `cdp4` or `busc`; the lines at the top edge east of x 16450 are
+`dlat`'s and `dbus`'s.
+
+### Crossings with no contact (run 11)
+
+- `d7_c`'s metal past the lower rectangle's west edge, y 16997-17126 (above).
+- The supply rail over `cdp4`'s poly row y 16486-16530.
+- The ground rail's slab beside `dl7_q_n`'s diagonal poly.
+
+### Ambiguities (run 11)
+
+41. **Which buffer's spare each unstrapped rectangle is.** Not decidable from the layout (nothing joins them);
+    they are named by place. The upper one's east edge is about 150 px west of where `d7_b`'s metal ends and
+    190 px west of where `d6_b`'s does: it could be either's.
+42. **The lower rectangle's west edge under `d7_c`'s metal** overlaps the metal by about 3 px in the drawing
+    (edge line x 16843-16852, metal x 16833-16849). No contact was found by any test; a contact there would only
+    add the rectangle to `d7_c`'s capacitance.
+43. **The rail south of y 17100** is not read (it is `busc`'s region): `tools/railprof.py` calls y 17112-17251
+    and y 17282-17299 under it "diffusion", which it also says of plain field (trap 18).
+44. **The marks on the slab** (above): one dark spot per chip at different places, nothing in the stripped
+    shots. Taken as marks.
+
+### Not done (run 11)
+
+- The boxed cells' windows (Ambiguities 1, 30, 34, 37) and the gate group's four uncertain ties (Ambiguities 5,
+  17, 21): at the photographs' limit.
+- The column under the left rail below y 17400 (in `busc`'s region; `cdp4`'s notes have readings of it).
+- The thin line at x 16016-16026, y 17100 of the Ports table (where the ground rail was read by a scan).
+- Under the supply rail x 16490-16541 south of y 17100 (`busc`'s region).
 
 ## Review
 

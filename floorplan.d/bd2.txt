@@ -11,4 +11,4 @@
 15850,16765:16400,16965  logic  data latch enable gate | dbus_le = NOR(CS, NOT E): the data input latches are open while E is high and the chip is selected
 15850,16965:16260,17110  logic  E inverter | bd2_e_n = NOT E, for the enable gate above and the read gate below
 15850,17110:16400,17400  logic  read gate | rd_data_e = NOR(NOT E, CS, NOT R/W, NOT RS): a read of the data register while E is high; output south and east to the block below the data bus column
-?16480,15770:17000,17100  unknown  right-hand column, lower part (untraced) | the drivers of d1_out_n..d5_out_n and rd_b0, and dbus_le's driver; above y 15770 is dlat
+16820,16745:16985,17345  io  D7 buffer capacitor and two spare rectangles | plain diffusion rectangle on d7_c (the third inverter's output of data input buffer 7), reached by a metal from the data bus column; two more rectangles beside the metal carry only a dot of metal (the capacitors of d6_b and d7_b: a metal option not taken); no transistor

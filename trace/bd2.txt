@@ -272,8 +272,8 @@ P 16104,15770:16138,15793              # the cell's poly with its bar; an island
 
 # ---------------------------------------------------------------- gate group right of the bundle
 # x 16240-16480, y 15400-15850. Diffusion column under the ground rail x 16312-16362 (the
-# rail the first run followed from areg_rail_r; its jog at y 15330-15400 is not drawn,
-# the pieces are joined by name). Two gates, pull-downs read from the clean shot under
+# rail the first run followed from areg_rail_r; its jog at y 15322-15400 is drawn by run 11,
+# at the end of this file). Two gates, pull-downs read from the clean shot under
 # the rail (tools/bd2_umap.py 16250 15404 16384 15850):
 #     wr_data_e_n   = NOT( wr_addr_sel_n AND e_b )                       y 15420-15565   (G_a's gate corrected by run 5)
 #     ar_load_n = NOT( bd2_x OR (e_b AND wr_addr_sel) )           y 15596-15832
@@ -787,3 +787,39 @@ D 15944,17238:15988,17256              # branch west into the tie box
 P 15908,17265:15950,17338              # load gate
 P 15908,17236:15950,17265              # its top, over the box
 B 15918,17236:15952,17264              # tie
+
+# ---------------------------------------------------------------- the VCC rail south of cdp4's end (run 11, piece d7c)
+# The rail x 16490-16541 (dlat's M 16515,13060 y15790, cdp4's M 16515,15780 y16440) runs on south over plain field
+# (clean shot pink at its flanks, a grey-green tint down its middle, no outline) to the region's edge and beyond
+# (past y 17560). One poly row passes under it, cdp4's y 16486-16530 to the pad (16577,16495): no contact.
+M 16515,16430 y17100 w=48              # VCC rail; goes on south (port)
+N M 16515,16800 vcc
+
+# ---------------------------------------------------------------- d7_c's capacitor, and two rectangles with a dot each (run 11, piece d7c)
+# x 16820-16985, y 16745-17345 (notes/blocks/bd2.md, "Run 11"). As dbus's chains 0-6: the third inverter's output
+# of data input buffer 7, d7_c, comes west from the data bus column in metal (dbus's M 17080,15964 y16758 x16950)
+# and ends on a contact on a plain diffusion rectangle (junction capacitance to the substrate). Two more plain
+# rectangles lie beside the metal, each with a contact that carries only a dot of metal: the capacitors a strap
+# would have put on d6_b and d7_b, whose metals end on nothing in dbus (a metal option not taken). No poly on
+# any of the three: no transistor. The south rectangle lies beyond the region's edge (y 17100): the wire's end.
+M 16960,16758 x16841 y17307 w=16       # d7_c: west from dbus's end, a corner (no T), south past both rectangles to its pad
+N M 16841,16900 d7_c
+M 16833,17283:16876,17311              # the pad: a foot east of the column's end
+C 16860,17297 s=24x24                  # bright centre in both metal shots, pits in the clean shot's cream box
+D 16824,17213:16933,17343              # capacitor rectangle (plain diffusion) on d7_c; the metal runs over its west part
+D 16868,16780:16976,16909              # rectangle, contact present, not strapped
+C 16947,16865 s=24x24
+M 16933,16850:16963,16880              # the dot: a ring 36 px across, bare ground all round
+N M 16947,16865 bd2_cap16865
+D 16847,16997:16954,17126              # rectangle, contact present, not strapped; its west edge lies under d7_c's metal: no contact there
+C 16905,17060 s=24x24
+M 16891,17046:16921,17076              # the dot
+N M 16905,17060 bd2_cap17060
+
+# ---------------------------------------------------------------- the jog of the ground rail (run 11, piece d7c)
+# areg_rail_r's metal x 16355-16405 (drawn to y 15330) widens west at y 15322 into a slab x 16317-16408 and goes on
+# south from y 15376 as the gate group's rail x 16317-16366 (drawn from y 15400): one metal, over plain field
+# (clean shot pink, with the grey-green tint of the rails' middles; no outline, no hole). The dark spot at
+# (16374,15336) is on chip 2's metal only (chip 1 bright there).
+M 16314,15322:16406,15376              # the slab
+M 16314,15370:16364,15405              # down into the gate group's rail

@@ -280,6 +280,7 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | `rd_data_e` | NOR(`bd2_e_n`, `cs_d`, `bd2_rw_n`, `bd2_rs_n`) = `e_b` AND NOT `cs_d` AND `rw_d` AND `rs_d`: a read of the data register, while E is high. Leaves `bd2` south and east to a pad (17080,17949) at the block below the data bus column |
 | `bd2_x` | the band that gates the first pull-down of `ar_load_n`: the load poly of `wr_data_e_n`, an alias of it through an uncertain tie (`bd2` run 4); it has no other source |
 | `bd2_w15872` | the poly row from the inverter's tie box west under the ground rail's south end to the pad (16274,15873), the thin metal x 16270-16284 and band G_a of the upper gate: an alias of `wr_addr_sel_n` through an uncertain tie (`bd2` run 5). Runs 1-4 had this metal as `wr_data_sel` |
+| `bd2_cap#` | `bd2_cap16865`, `bd2_cap17060` (# = the y of the contact): a plain diffusion rectangle with a contact that carries only a dot of metal, joined to nothing, beside the metal of `d7_c` south-west of the data bus column. As `dbus_cap#b`: the capacitors a strap would have put on `d6_b` and `d7_b` (a metal option not taken); which is which is not known (`notes/blocks/bd2.md`, "Run 11") |
 | `bd2_w15540` | the poly of the pads (16453,15539) and (16452,15740) and the thin metal between them: gate of the third pull-down of `wr_data_e_n` and of `ar_load_n`'s load; an alias of `ar_load_n` through an uncertain tie (`bd2` run 4) |
 
 ## Strobe channel gate column (`notes/blocks/bd1.md`)
