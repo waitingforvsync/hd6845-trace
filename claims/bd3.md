@@ -10,4 +10,4 @@ merged, or by `tools/claim.py release` if it is abandoned.
 | Region | 14100-15850 x 16550-17100 |
 | What | bd3 run 3: the real loads of the right-hand column's R12 and R13 write-strobe cells (x 15700-15890, y 16540-17100; now sel's schematic ? loads; open diffusions x 15822-15850 undrawn), then the R12 select buffer's pull-down widths (y 16740-16870) |
 | Branch | bd3 |
-| Status | tracing |
+| Status | tracing (part merged c3af22f at 2026-11-28 12:54 +0000) |
