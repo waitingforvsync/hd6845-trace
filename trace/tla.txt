@@ -389,7 +389,8 @@ D 3030,3478:3063,3671
 # 3500 / 3515 2986 3040 2 all), the box's edges y 3482-3532 against the open part's y 3477-3535 (px.py col 3008 /
 # 3014 / 3040 3462 3544 2 acid,acid1b). The line is the rail's edge line, as at every arm of this column; what is
 # under it is not seen (notes, "Run 3", Ambiguity 1).
-D 2968,3470:3035,3528
+D 2979,3482:3035,3528                 # the VSS box under R3 (review round 7: west edge below the channel x ~2979, px.py row 3516 2964 2990 2 acid1b: dark x 2968-2978; top y 3482 east of x ~2997, px.py col 3010 3462 3492 3; drawn 2968,3470 before)
+D 2968,3464:2996,3502                 # its part beside rcs_iso2958's channel, up to the diffusion's top edge line y 3460-3464
 C 2990,3500 s=30x34
 D 2966,3655:3014,3725                 # VSS box below
 C 2985,3690 s=24x40

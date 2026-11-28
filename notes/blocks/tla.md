@@ -635,6 +635,47 @@ each unit at 4.5-5x in four shots with profiles (`tools/px.py row / col`, `tools
 
 Round 6: no findings that change a connection.
 
+Round 7 (full review, 2026-11-28 16:15-16:37 +0000, a fresh agent on Claude Fable 5.2, at commit 26f28ec5; nine images
+in `cache/scratch/tla/review-7/`). Pieces `iso` and `aoi` of run 5 (eleven claims: the transistor under R3's west
+edge, its diffusion link, its free top end, the foot, the join to `rcs_b1`'s plate arm through the `?P`, no contact
+on the poly; the stack as one diffusion across the gap, its two edges, each gate band one poly across it, the series
+order, no contact of the thin metal). Told to suspect: the join of the foot to the tie box (poly, field, or two
+polys' ends), whether the foot exists and is one poly with the stub, the box's east outline and the arm's entry,
+anything else at the stub's bottom end (`rcs_x1`'s row); the link in the gap between thin metal E and R3; the cap
+against the strip above; the gap between R3 and the thin metal x 3026-3062 between the gate rows and above g1; the
+stack's edges; the bands through their bends and whether they touch; g2's west end; a contact of the thin metal. It
+looked at both pieces at 5-8x in four shots with profiles and text maps (`tools/px.py`, `tools/textmap.py`) and the
+extraction.
+
+- Finding 1, **geometry only, confirmed**: the VSS box `D 2968,3470:3035,3528` (a line from before run 5): below
+  the channel its west edge is at x ~2979, not 2968 (tracer: `px.py row 3516 2964 2990 2 acid1b,metal`: dark
+  x 2968-2978, tan from x 2982), so the drawn box lay against the stub's east edge where the photo has field; and
+  its top is y 3482 east of x ~2997 (`px.py col 3010 3462 3492 3 acid1b`: pink to y 3471, line y 3480-3483, tan
+  from y 3489; drawn 3470). Redrawn as the box `D 2979,3482:3035,3528` and its part beside the channel `D
+  2968,3464:2996,3502`. The transistor is 39/18 before and after.
+- Found correct. `iso`: the channel y 3466-3499 with edge lines in all four shots, cap and lower stub poly over
+  field; the link's bottom edge one line from under E through the gap to the poly, the gap's interior red over green
+  by 31-47 in the chip-2 stripped shot against 7-23 on field, no vertical line between column and link, tan east of
+  the poly from x 2974 into the box; the cap ends flush on the strip's edge line with no box and no poly over the
+  strip, field west of it; **the foot is orange at x 2942-2950, y 3531-3546 in both metal shots** (chip 2
+  151/113/58, chip 1 173/90/54), the stub's west edge line (red 61-80 at y 3522-3528) is absent there and only R3's
+  edge line remains, the clean shot salmon from x 2948 with no pink; **the join, against a control**: at g2's west
+  end (y 4167), where a poly certainly ends, there are a bare strip x 2944-2948 and pink field x 2952-2958, and the
+  foot has neither; the box's interior ends x ~2930, outline x 2932-2937, red from x 2938; the arm enters from the
+  west; no ring in chip 1 and no green hole on the poly (a dark blob at (2962-2974, 3536-3550) is in chip 2 only);
+  `rcs_x1`'s row ends at x ~3010 with pink field under R3. `aoi`: against a real edge in the same gap (row 4070: a
+  dark line x 3016-3020 in both metal shots) the rows 4094 and 4135 read like node N's row 4200, no line in either
+  metal shot, tan to x 3010 and from x 3022; edges x 2968-2972 and ~3041; both bands continuous orange through the
+  gap in both metal shots, never touching; g2 ends at x ~2960; both pads real contacts; no ring or hole on the thin
+  metal; pink field east of x 3046.
+- Could not check: poly through the box's east outline (x 2931-2938), invisible in every shot ("`?P` is right to
+  stay"); the chip-2 stripped shot does not resolve the foot; a faint tan streak under R3 at x 2976-2988
+  (y 3448-3458, 3546-3576) without outline or ring in any shot, read as tint.
+- After the fix: `tools/t.sh tla sameconn.py 26f28ec5`: `connections identical`; `.venv/bin/python tools/sameconn.py
+  26f28ec5`: `connections identical` (2,546 nets, 4,931 transistors, 0 errors, 0 warnings before and after).
+
+Round 7: no findings that change a connection.
+
 ## Corrections from `tl1`-`tl4` (coordinator, from the handoffs of 2026-11-17/18)
 
 Each is in the named block's notes in full; the trace fixes are on main.
@@ -1163,6 +1204,8 @@ is drawn onto `rcs_b1`'s load plate. One `?D` became firm. Two pull-downs change
 nets (one fewer: the gate's net is `rcs_b1`'s), 4,931 transistors, 0 errors, 0 warnings; `tools/unsure.py
 --equations`: 1,002 of 1,464 firm (was 1,002: `rcs_u3425`'s equation DEPENDS before and after, on a different
 item), 1,235 uncertain items (one `?D` fewer, one `?P` more).
+Review round 7 (full): no finding that changes a connection; one geometry-only fix (the VSS box's outline beside
+the channel; `tools/sameconn.py 26f28ec5`: connections identical, package alone and every trace file).
 
 ```
 rcs_u3425 = NOR(rcs_bc3460, rcs_b1)                  marked: the ?P through the tie box's east outline (was NOR(rcs_bc3460, rcs_iso2958), a gate with no feed)
@@ -1222,7 +1265,8 @@ stub over field at the bottom, no connection found" (AMB-022), over a diffusion 
   no line lies between the column under thin E and the gap at y 3464-3472. East of the poly the VSS box has a
   part x 2972-2994 that reaches up to the top line (under the rail's middle the box's top is y 3482; tan from
   y ~3476, the clean shot's green minus blue 33-61 against -9 to +14 on the pink field above the line). Channel
-  y 3464-3500: 36-38 wide, as drawn (39/18).
+  y 3464-3500: 36-38 wide, as drawn (39/18). The box itself is drawn to its outline since review round 7: west edge
+  x ~2979 below the channel, top y 3482.
 
 **What the pair does (traced equations; the reading is a consequence, marked like them).** With S = `rcs_bc3460`
 = NOR(`rcs_e3`, `rcs_e4`, `tl5_w4937`, `clk_tl`) and R = `rcs_x1` OR `rcs_a2`:
