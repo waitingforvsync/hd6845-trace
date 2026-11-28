@@ -1533,6 +1533,8 @@ over two cells (Ambiguity 29).
 
 ### What it corrects (geometry; no connection)
 
+- **The L-shaped poly's neck is x 15908-15925** (review round 8; drawn to x 15937, against the loop's edge): 12 px
+  of two edge lines lie between it and the loop.
 - **The third pull-down is 41 wide, not 36**: the loop's west edge is the line that crosses the bar at
   x 15932-15938 (drawn at x 15942; run 2's own comment says x 15937).
 - **Row 1's column begins at x 16023** (drawn 16018): the two series pull-downs are 78 and 83 wide in the
@@ -1569,7 +1571,8 @@ over two cells (Ambiguity 29).
     y 15697-15707), each in a dark frame, between the output's return strip and the band (`tools/bd2_prof4.py col
     15990` and `col 16000 15510 15760 2`; view `r9_c`). Run 2 drew the lower part as a poly finger from the band up
     to a `?B` on the upper patch, and that is kept: the window is not resolved (Ambiguity 1), and either patch as
-    the window gives the same tie.
+    the window gives the same tie. Review round 8 read the same: the lower patch is plain in chip 2, so the
+    finger's poly between the box and the band is not shown by colour.
 
 ### Not done (run 9)
 
@@ -1912,3 +1915,64 @@ After the fixes (commit before them f7fc8247):
 Recorded 2026-11-28 06:49 +0000.
 
 Round 7: no findings that change a connection.
+
+### Round 8 (full review), 2026-11-28, piece `slg`
+
+One fresh reviewer (Claude Fable 5.2), on commit ba9f84af, 24 images in `cache/scratch/bd2/review-8/` (views to
+about 6x in three and four shots, among them `neck.png` at 5.3x, `tie1.png` at 6x and `m3.png`; mostly
+`tools/px.py`, `tools/textmap.py`, `tools/bd2_umap.py`, `tools/tl3_thin.py`, `tools/tl5_tracks.py`). It was given
+the piece's eight claims (row 1's two pull-downs in series on a column x 16023-16100; the third pull-down's loop
+west of the rail under the bar of the L-shaped poly; the metal x 15914-15934 as one piece between two contacts;
+row 1's load, its poly on east as row 2's band, and the tie; rows 2-3 with the column widening below y 15768 and
+the ground land's cut corner; their load and tie; G4 with its gate off the `wr_data_sel` band, its load, the
+boxed cell and the bar to the contact (16105,15962); nothing else in the region) and told to suspect: where row
+1's column ends east of the rail (the line x 16088-16091 in both metal shots, the clean shot's stripe
+x 16075-16084 and the blob); the east edge of rows 2-3 at the first band; whether the loop is one diffusion, the
+pocket field, the bar fully across, and whether the bar's end or a band's end joins anything; a contact or a
+break on the metal x 15924 and anything else leaving its pads; G4's gate against the band (the line
+y 15883-15889), the strip between land and gate, the narrow feature x 15966-15980, the bar under the rail; the
+three boxed cells; the VCC land and whose lands lie under that rail, and the two green patches; each load's
+block and bars as one poly; a poly column in the gaps x 16068-16089 and x 15890-15914.
+
+It reported **no findings that change a connection**, and two it called geometry only, each checked by the
+tracer in the photos:
+
+1. **The neck of the L-shaped poly is narrower than drawn** (drawn x 15908-15937, y 15580-15612, touching the
+   loop's diffusion along x 15937). Confirmed (`tools/px.py row 15594 15905 15962 3 metal,metal1,acid`, and
+   `15600`, `15606`): orange x 15911-15921 in three shots, then 12 px of dark with a lighter middle
+   (x 15926-15938: the neck's edge, a sliver of ground, the diffusion's edge), then the diffusion, plain with blue
+   85-94, from x 15941. Redrawn to x 15925. An edge: the bar still crosses the loop, and the neck never lay on it.
+2. **Row 1's tie cell: the lower patch is plain in chip 2, not orange, and the output's diffusion runs up to
+   the band's north edge** (x 15992-16002, y 15697-15705: 141-174/135-140/76-88, `tools/px.py col 16000 15690
+   15722 3 metal,metal1,acid`; at x 15972 plain to y 15704, 12 px dark, the band from y 15722, `col 15972 15698
+   15724 3 metal,acid`). Confirmed, and already this run's Ambiguity 34: the finger's poly between the box and the
+   band is not shown by colour; the tie is the same with either patch as the window, and stays `?B`. The
+   diffusion's south end moved from y 15712, where it touched the band's edge, to y 15708; the finding is written
+   into the finger's comment. Nothing else redrawn.
+
+Checked and found as drawn: row 1's column to x 16100 (clean shot tan to x 16096, dark x 16098-16104), the line
+x 16088-16091 the thin metal's west edge, the blob absent from both chip-2 shots and nothing else on the node;
+rows 2-3's edge at x 16080-16084 at the land and the first band, which runs on over field, the widening at
+y 15768-15772 and the two lower bands across to x 16102; the loop continuous at the arm, under the bar and at the
+return with no edge line, the pocket field, the bar past the loop's east edge by 10 px, field at x 15998-16004
+between the bar's end and the band's end in three shots; the metal x 15914-15934 one piece (dark bars of 6-12 px,
+each at an edge; holes only at y 15627 and y 15827; field round both pads); each load's block and bars one poly
+with single lines of 6-9 px, one VCC land from y 15684 to y 15906, the land y 15545-15605 not this piece's (field
+at x 15897-15903 before the L-shaped poly), the green patches a tint under intact metal with no outline; G4's
+gate one poly with the band (a single line y 15883-15889 in two shots), the strip's edge lines on to the gate's
+outline at x 15998, the feature x 15966-15980 diffusion, the bar one wire to the contact with field on both
+sides, the box's centre plain between the orange ends of the two polys; field between row 2's band and the arm,
+between the two stacks (y 15664-15674) and south of G4's end cap; no poly column in either gap. Not checked,
+because the photographs do not show it: the windows of the three boxed cells; the bands' west ends at
+x 16005-16010 under the rail's edge line (the clean shot only); the structure under the rail rests on chip 1's
+clean shot and on edge lines in the metal shots (chip 2's stripped shot is fringes there); whether G4's bar under
+the rail is poly or diffusion (colour only; the same connection).
+
+After the fixes (commit before them ba9f84af):
+
+    tools/t.sh bd2 sameconn.py ba9f84af              connections identical
+    .venv/bin/python tools/sameconn.py ba9f84af      connections identical
+
+Recorded 2026-11-28 07:33 +0000.
+
+Round 8: no findings that change a connection.

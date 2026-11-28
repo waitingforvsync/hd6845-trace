@@ -174,7 +174,7 @@ D 15937,15537:15978,15600              # down, through under the bar (run 9: the
 D 15958,15587:15978,15657
 D 15958,15638:16030,15657              # into the output strip, under the rail
 P 15908,15558:15992,15587              # bar: gate wr_data_lat_n
-P 15908,15580:15937,15612              # neck
+P 15908,15580:15925,15612              # neck (review round 8: orange x 15911-15923 only; 12 px of two edge lines between it and the loop's diffusion)
 P 15906,15606:15946,15646              # pad
 C 15925,15625
 M 15924,15615 y15835                   # wr_data_lat_n: metal down to the pad of row 2's load gate
@@ -185,14 +185,14 @@ N M 15924,15700 wr_data_lat_n
 # between them are the strip's edges), and the band runs on east as the gate of row 2.
 # A finger of the band (15986-16008 x 15658-15712) ends in a boxed cell with a light
 # centre on the output diffusion: the tie.
-D 15962,15650:15981,15712              # output diffusion going south
+D 15962,15650:15981,15708              # output diffusion going south; it ends against the band's north edge (12 px dark, y 15706-15718)
 D 15850,15682:15970,15704              # load strip from the VCC land
 D 15850,15682:15898,15912              # VCC land under the rail (one land for rows 1-3 and G4)
 C 15866,15729 15869,15822 s=24x30      # two of its contacts (specks in the clean shot)
 P 15902,15664:15952,15735              # load gate: thin bar, block over the strip, west end of the band
 P 15945,15712:15992,15735              # band, west part
 P 15985,15722:16096,15747              # band, east part: gate of row 2; ends at x 16094, at the west edge of the thin metal wr_data_sel_n (run 8: pink field under that metal)
-P 15986,15660:16008,15726              # finger up to the tie
+P 15986,15660:16008,15726              # finger up to the tie (the cell's lower patch, x 15992-16002, y 15697-15705, is plain in chip 2, not orange: the finger is not shown by colour; notes, Ambiguity 34)
 D 15986,15650:16008,15682              # output diffusion under the tie
 ?B 15984,15656:16010,15684             # boxed cell 15988-16006 x 15660-15680, light centre in all shots
 
