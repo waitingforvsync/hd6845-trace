@@ -194,9 +194,9 @@ P 13131,16413 y16451 x13040 w=20    # poly on into the mid-right array: it is th
 N M 13826,14700 hc0
 
 # ================================================================ X's driver (y 16125-16280)
-# One inverter: X = NOT g. The output diffusion (above the gate, under the rail) is tied
-# to X's tap poly by a buried contact, and has a metal contact at 13917,16155 to a line
-# going north. Sizes match the two inverters X drives at the top of the column.
+# The pull-down on rst_a and the load of the NOR that drives X (the second pull-down, G2, is run 5's piece eol at the
+# end of this file). The output diffusion (above the gate, under the rail) is tied to X's tap poly by a buried
+# contact, and has a metal contact at 13917,16155 to a line going north. Geometry re-read in run 6 (piece xdrv).
 M 13848,16129 y16290 w=46          # ground rail here (one metal with the rail above: run 5, piece eol)
 N M 13848,16280 vss
 # --- g: track x 13630 from a contact at 13629,15673 down to a contact at 13629,16150; poly
@@ -224,13 +224,22 @@ C 13480,17083
 P 13464,17067:13496,17098
 P 13480,17083 y17150 w=18           # poly south, leaving the region (seen to y 17145)
 N P 13480,17145 rst_a
-P [ 13640,16220 13802,16220 13846,16184 13890,16184 13890,16205 13853,16205 13812,16243 13640,16243 ]
-P 13886,16183:13926,16258          # the block at its east end
+# The gate (re-read in run 6, piece xdrv): the band from the pad runs east (y 16220-16243), crosses the diffusion west of
+# the rail from x 13769 (the active area's edge line crosses the band at x 13760-13768 in both metal shots), runs
+# diagonally up under the rail, east along y 16184-16205 and turns SOUTH as a column x 13902-13925 (not a 40 px block):
+# an L round the north-east corner of the ground land. The column lies between the land's extension east of the rail
+# (x 13878-13900) and X's strip (x 13932-13946) as far as the active area's edge, a line across it at y 16248-16254 in
+# both metal shots, and ends 10 px further on (y 16264) over field.
+P [ 13640,16220 13802,16220 13846,16184 13925,16184 13925,16264 13902,16264 13902,16205 13853,16205 13812,16243 13640,16243 ]
 N P 13700,16232 rst_a
 # --- diffusion under the rail: X above the gate, ground below
 D 13817,16154:13888,16275
 C 13855,16250 s=22x34              # ground rail to source
-D 13795,16160:13820,16200          # X: west to the buried contact
+# west of the rail (firm since run 6): X's node above the band (one piece with the node under the rail: no line but
+# the rail's own edge), the channel under the band, and below it the heavy-outlined box, which is the ground land's
+# west part (no line between it and the land under the rail; diffusion by the chip-2 stripped shot, red minus green
+# 19-29 against -1 for the field below it)
+D 13769,16158:13820,16276
 D 13764,16172:13800,16208
 B 13762,16170:13800,16210          # X's tap poly to the output diffusion
 P 13672,16194 x13770 w=20          # X's tap: poly east from the contact 13672,16190
@@ -238,14 +247,16 @@ P 13764,16174:13797,16207
 D 13880,16133:13945,16178          # X: east of the rail, with a metal contact
 C 13917,16155
 # (X's metal north from this contact: run 5, piece eol, at the end of this file)
-D 13930,16170:13953,16265          # X: strip down the west side of the load
-?D 13880,16207:13940,16254         # under the gate's end block: a second pull-down, ground to X (continuity under the poly assumed)
-?D 13764,16200:13820,16275         # west of the rail: X (below the buried contact) and a ground strip (heavy-outlined box
-#                                    x 13759-13805, y 16247-16277) either side of the gate poly, as in the two inverters above
-# --- load
+D 13930,16170:13950,16262          # X: strip down the west side of the load (x 13932-13946; one piece with the contact's box)
+# east of the rail (firm since run 6): X above the gate's horizontal part, the ground land's extension inside the L
+# (x 13878-13900, y 16207-16252; diffusion by the stripped shot, 15-21 like X's contact box; one piece with the land
+# under the rail), and the channel under the column
+D 13878,16170:13940,16252
+# --- load: a nested, heavy-outlined tie box at the plate's north end, against X's strip; the plate's channel runs from
+# the edge line y 16192-16198 to the edge line y 16261-16267, and the plate ends 10 px further on (y 16275)
 D 13940,16142:13983,16172          # bump of X under the load's gate tie
 B 13953,16142:13985,16174
-P 13953,16140:13991,16265          # load gate, from the tie down
+P 13953,16140:13991,16275          # load gate, from the tie down
 D 13945,16196:14050,16263          # load channel and supply land
 C 14017,16228 s=26x40
 
@@ -634,8 +645,8 @@ D 13823,16040:13880,16160
 C 13843,16108
 D 13878,16040:13928,16140
 D 13778,16101:13825,16123          # the ground land's west end beyond the rail (plain, a diffusion: stripped shot 16-23)
-?D 13778,16118:13820,16165         # under G2's west arm, to X's diffusion west of the rail (the reviewer: its edge line
-#                                    crosses the arm at x 13775; changes W only)
+D 13778,16118:13820,16165          # under G2's west arm, to X's diffusion west of the rail: a channel (firm since run 6:
+#                                    the active area's edge line crosses the arm at x 13772-13778, diffusion above and below)
 # the ground land's north-east tab east of X's metal (13938-13952, 16088-16104: the clean shot is one flat tan from
 # under the metal to x 13938 at y 16097; a ring-like box in the metal shots, first drawn as a tie), and the channel
 # under G2 as far as the land's east edge, the dark line x 13950-13954 across the band

@@ -25,6 +25,10 @@ Trace: `trace/bd1.txt` (`@requires sel`, `@requires bd3`). Coordinates are metal
   **`rst_a_n` = NOR(`rst_a`, `h_eq_r0_q_n`)**, so `rst_rc`, `rst_lat` and `rst_ck` are not plain reset copies.
   See "Run 5". The gate column is now traced from y 15100 to y 16815; where this page still calls those lines
   copies of the reset, read it with that section.
+- **Run 6 (2026-11-28): line X's driver's own geometry is re-read** (y 16100-16290; run 1's, with three uncertain
+  diffusions). No connection changes. All three are channels, now firm: the pull-down on `rst_a` is one gate 216/22
+  that crosses the diffusion west of the rail, runs diagonally under the rail and turns south east of it as a column
+  (run 1's "block") round the ground land's corner; G2's west arm is a channel too. See "Run 6".
 
 How the gate column was read: plain views are not enough. `tools/rdp3_sharp.py` at 4.3-6.4x
 with `acid1b` and a metal shot side by side, plus two text tools written for this block:
@@ -62,7 +66,7 @@ and is the quickest check.
 | Latch, lower half | x 13797-13990, y 15705-15852 | node `bd1_n2`; pull-downs G5, G6 under the rail and a third (gate `bd1_n1`) east of it |
 | (not traced) | x 13876-13995, y 15640-15705 | N2's load and the driver of `bd1_q` |
 | Latch on R0's match (run 5) | x 13740-14055, y 15860-16135 | pass transistor on `ck_out` (pad (13713,15931), an L-shaped gate), storage node `h_eq_r0_q`, inverter (G1 under the rail, load at x 13954-13991), hold device (a plate tied to the rail by the contact (13870,15900)); the load's plate runs south as gate G2 of X's driver |
-| X's driver | x 13760-14050, y 16100-16280 | a two-input NOR since run 5: the pull-down on `rst_a` (input poly along y 16231) and a second one, G2 (y 16107-16149), on the latch's `h_eq_r0_q_n` |
+| X's driver | x 13760-14050, y 16100-16280 | a two-input NOR since run 5: the pull-down on `rst_a` (input poly along y 16231; an L-shaped gate 216/22, re-read in run 6) and a second one, G2 (y 16107-16149), on the latch's `h_eq_r0_q_n`; load 67/38 east of X's strip |
 | Latch on R0-half's match (run 4) | x 13690-14050, y 16340-16815 | a copy of the latch at y 15385-15852, 955 px south: inverter B, upper half (node N1, the wire `eof_w16432`), lower half (node `h_eq_r0half_q`), a clear pull-down on `rst_a`; `ck_out`'s taps (13716,16495) and (13715,16711) are its two enable gates; (13716,16562) is the east end of `trunks`' wide poly row. y 16280-16340 is empty field; the ground rail ends at y 16815 |
 | ck_out rail | x 13703-13727, y 15918-16724 | drawn in trunks.txt, not here; its north end is the pad of the pass transistor's gate (run 5) |
 | Bottom bundle | y 16862-17128, x 13380-14100 | strobes from bd3 turning north or west; line X's corner |
@@ -121,7 +125,8 @@ rst_lat = NOT rst_a_n       lower inverter, gate bar y 15271-15291
   side of the load. Load: poly block x 13953-13991, y 16140-16265, tied to the output by
   a buried contact at its top (13953-13985, 16142-16174), supply contact (14017,16228).
   W/L of the load 68/37; of the pull-down 90/24 as certain, up to 188/26 with the two
-  uncertain pieces (Ambiguities).
+  uncertain pieces (Ambiguities). **Run 6: both pieces are channels, and the "block" east of the rail is a
+  column; the pull-down is 216/22, the load 67/38** (section "Run 6").
 - `rst_a` is on a metal line at x 13630 with a contact at each end. Top end,
   (13629,15673): a poly goes east into the gate column along y 15671, crosses a 30 px
   wide diffusion strip (x 13772-13802, lying under the metal line on x 13782) and ends
@@ -315,7 +320,7 @@ X's lines, contact (13522,15999), metal south on x 13521 to about y 16273.
 
 ## Ambiguities
 
-- **Width of the pull-down of X's driver.** Certain: the gate poly crosses the
+- **Width of the pull-down of X's driver.** **Settled in run 6 (both are channels; section "Run 6").** As it stood: Certain: the gate poly crosses the
   diffusion under the rail (x 13817-13888). Uncertain, both drawn `?D`: (a) the poly
   ends east of the rail in a block (x 13886-13926, y 16183-16258) lying between the
   ground diffusion and the output strip, which would be a second channel (58 wide,
@@ -410,7 +415,9 @@ Channel:
   16899-16964.
 - k11's poly from (13609,15608). (k7's poly, `h_eq_r0`, ends on the buried contact of the pass transistor's
   land: run 5.) (k5's poly, `h_eq_r0half`, is the data of the lower latch: run 4.)
-- Lines on x 13608 at y 16167-16224 and x 13565 at y 16251-16572 (scan only).
+- Lines on x 13608 at y 16167-16224 and x 13565 at y 16251-16572 (scan only). (Run 6: nothing is undrawn at x 13608
+  there: `tools/bd1_audit.py 13580 16120 13660 16260`, every trace file loaded, lists no undrawn metal; what the scan saw
+  is X's metal along y 16188 and `rst_a`'s two pads. The line on x 13565 is `bd1_n2`'s, drawn by `eof`.)
 - The diagonals at x 13150-13450, y 16680-16890: three metal lines step two tracks east
   there (seen at 1.5x), wr_r7's poly passes under them.
 - Bottom edge: a long vertical poly at x 13870-13885 passing under all the horizontal
@@ -865,7 +872,7 @@ contact (13843,16108) | gate G2 y 16130-16149 | X's node (the existing diffusion
    field from x 13802 (stripped 153-162/143-160), no orange 14 px wide.
 5. **The ground land's west end and G2's west arm** (`?D` 13778-13820, 16118-16165): a channel under the arm west of
    the rail, between that block and X's diffusion there (the reviewer: the diffusion's edge line crosses the arm at
-   x 13775); it changes G2's width only.
+   x 13775); it changes G2's width only. **Settled in run 6: a channel, drawn firm** (section "Run 6", item 3).
 6. **A dark oval at (13833,15948) in chip 1's metal shot only**, over the storage node's foot: the bar of the foot's
    upper edge (`textmap.py 13812 15938 13856 15966 2`: no ring; the clean shot flat tan, no hole). No contact.
 7. Crossings read as no contact, none drawn uncertain: the rail over bar L, the foot, the plate, G1 and G2; X's metal
@@ -878,6 +885,93 @@ contact (13843,16108) | gate G2 y 16130-16149 | X's node (the existing diffusion
 - Whether `h_eq_r0` is high or low on a match (the comparator's cells: `rdp2`/`rdp3`), which decides whether the three
   lines are low or high in the character for which the match is latched.
 - What `cdp4_w10808` does in the top-right gate row (`tr1`); the bus field's lines beside y 18428 (run 4's list).
+
+## Run 6 (2026-11-28): line X's driver, its own geometry re-read
+
+Tom Seddon, on Claude Fable 5.2, 2026-11-28 11:42 +0000. Piece `xdrv`, x 13740-14055, y 16100-16290: the pull-down on
+`rst_a` and the load of the NOR that drives line X, which still had run 1's geometry with two `?D` items, and run 5's
+`?D` under G2's west arm. **No connection changes** (`tools/t.sh bd1 sameconn.py 7a32b255` and `.venv/bin/python
+tools/sameconn.py 7a32b255`, before the review: connections identical, both); three uncertain items become firm (127 -> 124 in `tools/unsure.py`), one
+poly is redrawn. Full extraction 2,547 nets, 4,930 transistors, 0 errors, 0 warnings, as before.
+
+```
+rst_a_n = NOR( rst_a, h_eq_r0_q_n )      pull-down on rst_a 216/22 (was 188/26 with the two uncertain pieces), G2 141/19 + 42/22,
+                                         load 67/38 (marked as before, and only by G2's gate: the tie of run 5's load)
+```
+
+**How it was read.** Two sharpened four-shot views (`tools/rdp3_sharp.py` at 4x: `x6a` chip-2 stripped over chip-2 metal,
+`x6b` clean over chip-1 metal), four at 7x, and colour profiles (`tools/px.py`) for everything that decides a channel.
+The test is the guide's trap 38: a gate's extent is decided by the active area's edge line crossing the poly in both
+metal shots, and by diffusion against both of the poly's edges. Controls, read with the same commands: field
+(13913,16280): chip-2 metal 162/139/86, chip-2 stripped 151/155/93 (red minus green -4); a certain diffusion, the box
+of X's metal contact (13890,16150-16171): stripped red minus green 15-21; open poly on the column (13913,16220): metal
+170/120/61. The clean shot's colours are of no use in the open here (field and diffusion both khaki; inverted east of
+the rail, trap 28); it is used under the rail and for edges.
+
+1. **West of the rail: a channel under the band** (was `?D 13764,16200:13820,16275`). `px.py row 16232 13750 13830 2
+   metal,metal1,acid,acid1b`: an edge line crosses the gate band at x 13760-13768 (chip 2 red 53-88, chip 1 35-45);
+   west of it the band is poly over field (145/92/42), east of it brighter (171-179/121-130/60-66) with no line as far
+   as the rail's own edge at x 13818. Above the band is X's node (the land of the tap's buried contact), below it the
+   heavy-outlined box (13769-13815, 16250-16276), which is diffusion (`px.py col 13790 16096 16290 3`: stripped red
+   minus green 19-29, against -1 for the field below y 16282) and **the west part of the ground land**: `px.py row
+   16264 13756 13850 3` has no line between x 13771 and the rail's edge in either metal shot, and the clean shot is tan
+   (diffusion under metal) from x 13819; its one line, x 13812-13816, is the edge of the rail's protected margin (the
+   same line is on the field row y 16290). X's node west of the rail is one piece with the node under the rail by the
+   same reading (`px.py row 16168 / 16176 13794 13836 2`: stripped 14-19 at x 13794-13804, field -1 to -9 on the row
+   y 16290; no line but the rail's edge; views `x6c`, `x6d` at 7x).
+2. **East of the rail: the "block" is a column, the gate an L round the ground land's corner** (was `P
+   13886,16183:13926,16258` over `?D 13880,16207:13940,16254`). `px.py row 16232 13866 14000 2`: rail's edge
+   x 13872-13878 | plain x 13880-13892 | edge x 13896-13904 | poly x 13906-13920 (162-166/104-125/46-64) | edge
+   x 13922-13930 | X's strip x 13932-13944 | edge | the load's plate x 13956-13988 | edge | supply land. So the poly is
+   22 px wide, a gate's length, not 40. `px.py col 13913 16172 16290 2` down the column: poly from y 16184 to y 16246
+   with no line across in chip 2, **an edge line at y 16248-16254** (chip 2 red 39-75, chip 1 32-52), poly again for
+   8 px, the end at y 16262-16268, field from y 16270: the column lies over active area as far as that line and ends
+   10 px beyond it, as a gate's end does. The plain strip west of it (`px.py col 13890 16150 16292 3`: y 16213-16246,
+   stripped red minus green 15-21, as X's contact box above the gate on the same column) is a diffusion, the ground
+   land's extension inside the L: the clean shot is tan to x 13878 on the row y 16232, then the margin's line
+   (x 13882-13886) and 6 px of open ground before the column's edge, which leaves no room for a field gap; and the
+   outline of land and extension is one contour with a step at (13880, 16255-16278). East of the column is X's strip.
+   So the gate has X on its outside all the way (the node under the rail, the contact's box, the strip) and ground on
+   its inside. **One transistor, 216/22.**
+3. **G2's west arm is a channel** (run 5's `?D 13778,16118:13820,16165`, its Ambiguity 5). `px.py row 16140 13754 13832
+   2`: the arm's rounded end at x 13760-13762, poly over field x 13764-13770, an edge line at x 13772-13778 (chip 2 red
+   60-93, chip 1 36-54), poly over active area from x 13782 to the rail. Above the arm the ground land's west end
+   (`col 13790`: y 16111-16123, stripped 22-24), below it X's node (y 16162-16171). It adds 42/22 to G2.
+4. **X's strip and the load** (found as drawn). The strip x 13932-13946 is one piece with the box of X's metal contact
+   (`px.py col 13938 16150 16292 3`: no line at y 16177-16192 in either metal shot; the clean shot's line at y 16180 is
+   the edge of the pad's margin) and ends at y 16258. The load's plate x 13956-13988: `px.py col 13972 16150 16292 3`
+   has the tie box's dark complex y 16150-16180, poly, an edge line y 16192-16198, the channel y 16201-16258, an edge
+   line y 16261-16267, 6 px of poly and the end at y 16276 (drawn to y 16265 before: lengthened to 16275). The tie is
+   a nested, heavy-outlined box (outer 13952-13985 x 16148-16180, inner 13958-13975 x 16158-16172) at the plate's north
+   end, against X's strip with only the box's own outline between (`px.py row 16162 13924 13996 2`; views `x6e`,
+   `x6f` at 7x, where no more is resolved): a buried contact as run 1 drew it. It stays firm (see Ambiguities).
+5. **No contact where the two rows pass under `ck_out`'s metal** (x 13703-13727; `trunks`'): the tap row y 16186-16198
+   and the gate band y 16228-16243 each show the metal bright between the row's two edge bars and salmon without a hole
+   in the clean shot (`tools/t.sh bd1 textmap.py 13694 16168 13738 16258 3`), against ring, centre and hole on `ck_out`'s
+   tap pad (13716,16495) (`textmap.py 13694 16474 13738 16516 3`).
+
+### Ambiguities of run 6
+
+1. **The load's tie box is drawn firm, unlike the other units' ties in this column.** There the box and the plate are
+   joined inside a dark complex of unresolved shape, some way from the node; here the box sits at the plate's own end
+   directly beside X's strip, and the plate carries on from it (poly at y 16183-16189 between the box and the channel's
+   edge line). Not seen, as at every buried contact: the diffusion under the box's outline. If the tie were absent the
+   plate would float and the extraction would show a load without a gate; nothing else reaches the plate (field above
+   the box, y 16136-16145: run 5).
+2. **The join of the land's extension to the land under the rail** (x 13872-13886, y 16207-16252) lies under the
+   rail's edge line in both metal shots and the margin's line in the clean shot; read as one diffusion because
+   diffusion is seen within 4 px on either side (item 2). If it were cut, the column would be a gate between X's strip
+   and a diffusion with no contact: the width of the pull-down would be 169, the equation the same.
+
+### Not done after run 6
+
+- The gate column is traced from y 15100 to y 16815 and X's driver is re-read. Left in the column: the load ties
+  marked uncertain (the latch on R4's match, the latch on R0-half's match, the inverter of the latch on R0's match),
+  which these photos do not resolve further.
+- Channel (unchanged): the lower ends of k4, k8 and `rst_lat`'s line on x 13435 in the field of diagonals below
+  y 16740 (`eof`'s claimed region; R1's remainder); the diagonals at x 13150-13450, y 16680-16890. `wr_r9`,
+  `wr_r11`, `wr_r10` west of x 14100 lie below y 17100, in `busc`'s region.
+- Whether `h_eq_r0` is high or low on a match (`rdp2`/`rdp3`); what `cdp4_w10808` does in `tr1` (run 5's list).
 
 ## Review
 
