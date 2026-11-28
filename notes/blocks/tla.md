@@ -684,6 +684,50 @@ extraction.
 
 Round 7: no findings that change a connection.
 
+Round 8 (full review, 2026-11-28 17:05-17:21 +0000, a fresh agent on Claude Fable 5.2, at commit e405a349; 16 images
+in `cache/scratch/tla/review-8/`; the brief is `cache/scratch/tla/brief-8.txt`). Covered: run 6's two pieces, `lt`
+(the six loads between R2 and R3) and `te` (thin metal E, y 2986-5400).
+
+- Told to suspect: all of `rcs_bc3460`'s redrawn load (whether the box at (2868-2900, 3835-3860) is a buried
+  contact of the plate's poly, whether the tongue is continuous to the strip under E's edge line, whether the oval
+  (2909,3868) is field, a tie box or a contact of thin E, a contact of E at (2912,3848), whether the plate ends at
+  y 3928 and what lies below it, anything missed round the unit); each standard tab under E's west edge line,
+  `rcs_cond_n`'s tab, anything leaving a tie box east or south, a tail cut from its node box; on thin E a real
+  contact or break at any dark stretch, a dark stretch of 14 px or more inside a firm piece, a `?M` that does not
+  cover its stretch.
+- Finding 1, **geometry only (marking)**: `?M 2914,4291 y4313` stops short. E stays dim to y ~4334: chip 2 passes
+  the tool's test there only on a 4 px sliver at x 2908-2911 (161-189), chip 1 fails it at y 4322-4333;
+  `tools/tl3_thin.py 2903 2925 4280 4345 --thr 190`: dark y 4293-4325 and y 4329-4334; the clean shot under it a
+  grey-green strip at x 2907-2911, y 4312-4330 (155-160/160-163/127), no pad, no widening, no round hole.
+  **Confirmed** (`tools/px.py col 2916 4286 4342 4 metal,metal1`: E's centre line reads 27-134 in chip 2 and 44-134
+  in chip 1 from y 4294 to y 4334, bright from y 4338; `col 2910` shows the sliver). Fixed: the `?M` runs to
+  y 4337. Same net.
+- Finding 2, **a note only**: `rcs_cond_n`'s tab is not taller (run 6, Ambiguity 3): at x 2904 chip 1's metal shot
+  shows the poly band at YT+6 to YT+18 as at the other four, and the plate's east edge line is there at y 4796 in
+  both metal shots. **Confirmed** (`px.py col 2904 4794 4832 3 metal1,metal,acid`: red over green by 31-66 at
+  y 4812-4824, red equal to green at y 4794-4800). Ambiguity 3 is answered; nothing redrawn.
+- Finding 3, **a record only**: `ports.d/tla.txt` had no line for `rcs_thin_e` at (2914,5400), where this file's
+  metal ends and `tl2`'s `M 2913,5395` takes it on. **Confirmed**; the line is added (direction `?`) and is in
+  "Ports of run 6" below. The wire is not redrawn.
+- Checked and found correct, at 5-8x in four shots and by `px.py`, `textmap.py`, `opendiff.py`, the extraction:
+  `rcs_bc3460`'s box centre reads like the buried contacts at (3055,3894) and (3055,3590), not like poly or field;
+  field north and west of the box, no other exit; the tongue tan from x 2908 into the strip with no line across,
+  the strip's west edge line absent at y 3840-3854; the strip unbroken from y 3761 to y 3899; the oval field (clean
+  shot pink, chip-2 stripped smooth green, no pits); thin E 13 px wide at y 3848 as at y 3960, no hole; the plate
+  ends at y ~3928 with field to y 4000 (`opendiff.py` finds nothing); only the two strips cross the gap at x 2941;
+  NOR of four inputs with a load 27/50. All five standard loads: tab poly-coloured through x 2896-2908 in both
+  metal shots and the chip-2 stripped shot against field 10 px above, tail tan from the node box into the box
+  centre with no heavy line, pink field south of each box and field east, only the node strips at x 2941, no poly
+  leaving west under R2. Thin E: every stretch of 12 px or more at threshold 176 lies inside a `?M`; no pad,
+  widening or green hole at any of the ten; the bright centres at `rcs_u3425`'s pad tie and `rcs_cond_n`'s box no
+  wider than E, over tan; the corner (2914,2986) one metal.
+- Could not check: poly through any tie box's outline (at `rcs_bc3460`'s the 12 px band y 3855-3867); E's
+  continuity inside the `?M` stretches; earlier runs' geometry elsewhere in the region.
+- After the fixes: `tools/t.sh tla sameconn.py e405a349`: `connections identical`; `.venv/bin/python
+  tools/sameconn.py e405a349`: `connections identical`.
+
+Round 8: no findings that change a connection.
+
 ## Corrections from `tl1`-`tl4` (coordinator, from the handoffs of 2026-11-17/18)
 
 Each is in the named block's notes in full; the trace fixes are on main.
@@ -1372,6 +1416,8 @@ trace file). One load redrawn: `rcs_bc3460`'s (27/50, was 27/55). Ten stretches 
 extraction 2,546 nets, 4,931 transistors, 0 errors, 0 warnings; `tools/unsure.py --equations`: 1,002 of 1,464 firm,
 as before; 1,245 uncertain items (ten more, the `?M`); `tools/unsure.py` lists `rcs_thin_e` as joined only
 through uncertain items (Ambiguity 2).
+Review round 8 (full): no finding that changes a connection; one `?M` lengthened and a port line added
+(`tools/sameconn.py e405a349`: connections identical, package alone and every trace file).
 
 ### Piece `lt`: five standard ties, read at their own place (as drawn)
 
@@ -1462,7 +1508,7 @@ bars round a half-bright centre, lie at ten places, now drawn `?M` (the metal be
 | y 3321-3366 | y 3323-3338, y 3349-3364 | `rcs_u3288`'s tie box |
 | y 3473-3565 | y 3475-3483, y 3499-3512, y 3522-3563 (42 px) | `rcs_u3425`'s pad tie and `rcs_b1`'s tie box |
 | y 4165-4208 | y 4167-4178, y 4189-4206 | `rcs_n4200`'s tie box |
-| y 4291-4313 | y 4293-4311 (chip 1 to y 4333) | the tie box of `rcs_bd3330`'s load (`tl2`) |
+| y 4291-4337 | y 4293-4311 at the tool's threshold; on E's centre line to y 4334 (review round 8) | the tie box of `rcs_bd3330`'s load (`tl2`) |
 | y 4623-4669 | y 4625-4640, y 4653-4667 | `rcs_cond`'s tie box |
 | y 4797-4842 | y 4799-4811, y 4827-4840 (full-bright between) | `rcs_cond_n`'s tie box |
 | y 4914-4956 | y 4916-4931, y 4935-4954 | the step gate's top band and the west end of gate `in1`'s row |
@@ -1475,6 +1521,12 @@ stays "one metal that passes over"; the photos do not show it there. Over `rcs_b
 not dark (8 px at y 3835-3842 only). The label `rcs_thin_e` moved from y 5000 (now inside a `?M`) to y 5100, and
 the north piece carries the name too (`N M 2800,2986`), so that `tools/unsure.py` lists the join and the
 selector's equation keeps its form without the uncertain items.
+
+### Ports of run 6
+
+| Name | Layer | Where | Direction | What |
+|---|---|---|---|---|
+| `rcs_thin_e` | M | (2914,5400) | ? | thin metal E, the south end of this file's drawn length; `tl2` draws it on (`M 2913,5395 y6334`) to the pad (2913,6327). Every end in this file is a gate |
 
 ### Ambiguities of run 6
 
@@ -1492,7 +1544,8 @@ selector's equation keeps its form without the uncertain items.
    (`notes/operation.md`). What would settle it: nothing more in these photos; a contact would show a pad.
 3. At `rcs_cond_n`'s tie the stretch between plate and tail 12 px above the tab is not green in the chip-2
    stripped shot (red minus green 0-11 at x 2899-2911, y 4794) as it is at the four others: the tab may be taller
-   there (its top nearer y 4795 than y 4806). Geometry only; not redrawn.
+   there (its top nearer y 4795 than y 4806). Geometry only; not redrawn. **Answered by review round 8: it is not
+   taller** (chip 1's metal shot at x 2904: the poly band at y 4812-4824, red equal to green above it).
 4. `tl2`'s `?D 2903,3845:2917,3890` (in `trace/tl2.txt`) covers the island of field and the tongue's east end. It
    joins nothing that is not joined anyway. Not edited (another package's file); in the handoff.
 

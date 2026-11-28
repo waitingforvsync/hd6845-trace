@@ -5,3 +5,4 @@
 ra_eq_r9     M  4148,3320        in   north end of the bus piece x 4138-4160 above unit A's gate pad (4148,3335); R9's match, from r9m
 rcs_mn3852   M  4233,2852        out  top of the bus piece x 4222-4245 from unit B's output pad (4225,3852); tl3's row y 2857 lands on its top pad
 rcs_mv       M  4192,4748        in   south end of the bus piece x 4183-4205 from unit C's gate pad (4195,4112); tl3 draws its pad (4192,4743) and its driver's contact (4193,4420)
+rcs_thin_e   M  2914,5400        ?    thin metal E, south out of this file's drawn length (run 6; review round 8); tl2 draws it on (M 2913,5395 y6334) to the pad (2913,6327). Every end in tla is a gate (the selector and tla_w3505)
