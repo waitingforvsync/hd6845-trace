@@ -870,11 +870,17 @@ in four shots, in the open stretch west of the strap):
   between it and the arm's heavy bottom line (y 15708-15718), and a smaller cell east of it (16418-16427,
   15720-15733) (view `j3`). It is the "boxed cell" of this block (Ambiguity 1): drawn as a diffusion tab from
   the arm, the row's poly turned north over it, and a `?B`.
-- **Upper.** Under the arm of `wr_data_e_n` a framed box (16376-16399, 15574-15595) with a light centre
-  (bright green in the clean shot, yellow-green in chip 2's stripped shot), inside a heavy arch whose right leg
-  (x 16400-16408, dark red in every shot) runs down to the dark band along the top of `bd2_x`'s band
-  (y 15620-15632); a poly piece at (16381-16394, 15609-15618) (view `j2`). Drawn as a tab from the arm, a
-  poly column from the band and a `?B`. The column's path between y 15597 and y 15632 is not seen.
+- **Upper** (moved by review round 3). The framed box is at x 16368-16404, y 15596-15629: a dark frame 8-10 px
+  thick on all four sides round a plain centre x 16383-16392, y 15611-15617 (`tools/px.py col 16388 15566 15640 3`
+  and `row 15614 16362 16416 3`: centre metal 166/137/88, chip 1 155/129/69, stripped R-G +22..+37; the clean
+  shot is dark there). Its south frame lies on the top of `bd2_x`'s band and its east frame against the west
+  side of the node's wire (diffusion from x 16407 on row y 15614). Drawn as the band's poly taken north into
+  it, the wire's west side taken into it, and a `?B`. Run 4 first drew this tie 30 px further north, on the
+  plain area under the arm's arch (16376-16399, 15574-15595): that area is field (stripped R-G -9..-22 down
+  x 16388, y 15578-15590; like the pocket at (16395,15530)), and the box here was the "poly piece" left out.
+- **The band's path**: at the rail's height (y 15638-15657) from its west end at x 16290 (orange in the 10 px
+  between the thin metal x 16270-16284 and the rail; pink field under that metal) as far as x 16392, then
+  y 15633-15651 on east to the block (review round 3; `tools/px.py col 16380` and `col 16410`).
 
 ### Ambiguities (run 4)
 
@@ -890,7 +896,7 @@ in four shots, in the open stretch west of the strap):
 17. **The two ties** are read from the look of a framed box at the end of a poly that has no other driver
     (each poly was followed to all its ends: a load's channel, one other gate, the strap's pads). Neither
     window is resolved at 9x in four shots. If the upper tie is not there, `bd2_x`'s band has no driver at
-    all: its west end under the rail (x 16306, run 2) was not re-read.
+    all: its west end (x 16290, re-read by review round 3) has none.
 18. **T's join to the ground land** rests on the tongue of tan in the clean shot under the rail's margin; the
     last 6 px are not seen. If T were not on the land the third pull-down would have no source.
 19. **The block's west cap** (16394-16410, 15472-15499) has the heavy outline of a framed box. It lies over
@@ -996,3 +1002,42 @@ Connections before and after the fixes (commit 421ad7f against the fixed tree):
 Recorded 2026-11-27 06:26 -0600.
 
 Round 2: no findings that change a connection.
+
+### Round 3 (full review), 2026-11-28, piece `gge`
+
+One fresh reviewer (Claude Fable 5.2), on commit 3d7ebc37, images in `cache/scratch/bd2/review-3/` (14 views,
+2.5x to 8x, four shots; mostly `tools/px.py`, `tools/textmap.py`, `tools/railprof.py`, `tools/follow.py`).
+It was given the piece's nine claims and told to suspect: which way the diffusion runs under the block at
+y 15472-15498 and whether T is on the ground land; the block's west cap; whether each load's bar, block and
+band or pad are one poly; the two ties and any other driver of the two polys (the strap's crossings, the
+band's west end, the pads' other sides); whether the strips reach the VCC land and their nodes; the arm's join
+to the wire; the items left out (two green rings, a small cell, an olive strip, a poly piece); and, because
+of Ambiguity 16, any wrong connection in the piece or where it joins the two stacks under the rail.
+
+Findings, each checked by the tracer in the photos:
+
+1. **The upper tie was drawn on a field pocket; the framed box is 30 px south**, at (16370-16404, 15598-15628).
+   Confirmed (`tools/px.py pt 16388,15585`: stripped R-G -9, metal 175/157/83; `col 16388` and `row 15614`:
+   the frame and its plain centre). The three `?` items redrawn there. Geometry only: the tie still joins
+   `bd2_x` to `wr_data_e_n`, and stays uncertain.
+2. **The band of `bd2_x`** steps 6 px north at x 16392 and ends in the west at x 16290, not x 16306.
+   Confirmed (`tools/px.py col 16380`, `col 16410`, `row 15647 16282 16318 3`: orange at x 16294-16300).
+   Redrawn. Geometry only; no driver at the west end.
+
+Checked and found correct: T on the ground land (the land's east edge line at x 16357 is present at
+y 15430/15440 and absent at y 15452/15456 in both metal shots; clean tan to x 16372), field east of T; the two
+edge lines across the block, the cap as poly over field with 8 px of field to G_a's end; wire and arm one
+plain area with no line across; the strap (constant width at the three crossings, no hole, `follow.py` ends
+on both pads, nothing else leaves either pad); each line between a load's poly parts a single 6-8 px edge
+with poly colour on both sides at x 16474; the land's west edge line (x 16495) absent only at the strips'
+rows; the row from pad L ending at x 16392; the lower tie rightly uncertain; the left-out items field or
+outline; the stacks under the rail as the trace has them. Not checked: the diffusion side of either tie
+window; the identities of the stacks' inputs (earlier runs); anything south of y 15757. It found no wrong
+connection behind Ambiguity 16 in this piece.
+
+After the fixes (commit before them 3d7ebc37):
+
+    tools/t.sh bd2 sameconn.py 3d7ebc37              connections identical
+    .venv/bin/python tools/sameconn.py 3d7ebc37      connections identical
+
+Round 3: no findings that change a connection.

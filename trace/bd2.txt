@@ -272,7 +272,7 @@ P 16258,15856:16292,15888              # pad
 # lower gate
 D 16312,15596:16350,15832              # ground land, under band x, ar_load_n, under G_d, node, under G_e, ground land
 C 16327,15612 16330,15812
-P 16306,15638:16376,15656              # gate bd2_x: the band of the upper node's load poly (run 4, piece gge)
+P 16292,15638:16376,15656              # gate bd2_x: the band of the upper node's load poly (run 4, piece gge); west end at x 16290 (review round 3)
 N P 16366,15647 bd2_x
 D 16266,15686:16316,15704              # ar_load_n: west arm to the boxed cell
 P 16226,15688:16274,15702              # bar from the pad 16205,15690 into the cell
@@ -307,12 +307,15 @@ N M 16456,15640 bd2_w15540
 # -- load of wr_data_e_n (22/50): strip from the node's wire east under the block to the VCC land
 D 16409,15597:16500,15619
 P 16432,15580:16482,15650              # one poly: bar A, block 1 (over the strip), block 2 = the band's east end
-P 16370,15632:16436,15652              # the band of bd2_x east of the rail
+P 16370,15638:16396,15657              # the band of bd2_x east of the rail: at the rail's height as far as x 16392,
+P 16388,15633:16436,15651              # then 6 px further north (review round 3)
 @alias wr_data_e_n bd2_x
-# its tie: a framed box under the node's arm, the band's poly taken north into it (not resolved: drawn uncertain)
-?D 16378,15566:16398,15595
-?P 16381,15572:16396,15636
-?B 16379,15570:16398,15597
+# its tie: a framed box (frame x 16368-16404, y 15596-15629; plain centre x 16383-16392, y 15611-15617) between the
+# band and the node's wire: the band's poly taken north into it, the wire's west side taken into it (window not
+# resolved: drawn uncertain). Review round 3 moved it here from the field pocket 30 px north.
+?D 16383,15606:16412,15622
+?P 16381,15604:16396,15642
+?B 16381,15604:16398,15624
 # -- load of ar_load_n (23/50): the node's east arm, on east under block 3 to the VCC land
 D 16344,15690:16500,15713
 D 16496,15580:16542,15708              # the VCC land under the rail (dlat draws it to y 15645): one tan area to y 15706, contact pits
