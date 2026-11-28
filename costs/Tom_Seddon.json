@@ -1,19 +1,19 @@
 {
  "who": "Tom Seddon",
- "generated": "2026-11-28T11:35:30+00:00",
+ "generated": "2026-11-28T12:05:16+00:00",
  "price_source": "Claude API list prices per million tokens, as of 2026-11-03",
  "unpriced_models": [],
- "responses": 12644,
+ "responses": 12728,
  "first": "2026-11-17T14:22:35.769000+00:00",
- "last": "2026-11-28T11:35:20.741000+00:00",
- "total_cost": 1872.91,
- "review_cost": 652.9,
+ "last": "2026-11-28T12:05:08.995000+00:00",
+ "total_cost": 1886.13,
+ "review_cost": 657.25,
  "tokens": {
-  "input": 25754,
-  "output": 16836561,
-  "cache_write_5m": 20888351,
-  "cache_write_1h": 27715472,
-  "cache_read": 2821809224
+  "input": 25924,
+  "output": 16956610,
+  "cache_write_5m": 21050173,
+  "cache_write_1h": 27955286,
+  "cache_read": 2836618482
  },
  "by_model": {
   "claude-opus-5-5": {
@@ -21,8 +21,8 @@
    "responses": 420
   },
   "claude-fable-5-2": {
-   "cost": 1834.08,
-   "responses": 12224
+   "cost": 1847.3,
+   "responses": 12308
   }
  },
  "by_package": {
@@ -35,12 +35,12 @@
    }
   },
   "(coordination)": {
-   "cost": 223.59,
+   "cost": 224.77,
    "review_cost": 4.69,
-   "responses": 1695,
+   "responses": 1705,
    "models": {
     "claude-opus-5-5": 420,
-    "claude-fable-5-2": 1275
+    "claude-fable-5-2": 1285
    }
   },
   "dbus": {
@@ -68,11 +68,11 @@
    }
   },
   "bd1": {
-   "cost": 66.24,
-   "review_cost": 26.75,
-   "responses": 378,
+   "cost": 78.28,
+   "review_cost": 31.1,
+   "responses": 452,
    "models": {
-    "claude-fable-5-2": 378
+    "claude-fable-5-2": 452
    }
   },
   "tl2": {
@@ -122,6 +122,6 @@
   "2026-11-19": 322.7,
   "2026-11-20": 271.87,
   "2026-11-21": 504.41,
-  "2026-11-28": 231.85
+  "2026-11-28": 245.07
  }
 }
