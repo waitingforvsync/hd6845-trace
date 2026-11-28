@@ -941,7 +941,10 @@ the rail, trap 28); it is used under the rail and for edges.
    (`px.py col 13938 16150 16292 3`: no line at y 16177-16192 in either metal shot; the clean shot's line at y 16180 is
    the edge of the pad's margin) and ends at y 16258. The load's plate x 13956-13988: `px.py col 13972 16150 16292 3`
    has the tie box's dark complex y 16150-16180, poly, an edge line y 16192-16198, the channel y 16201-16258, an edge
-   line y 16261-16267, 6 px of poly and the end at y 16276 (drawn to y 16265 before: lengthened to 16275). The tie is
+   line y 16261-16267, 6 px of poly and the end at y 16276 (drawn to y 16265 before: lengthened to 16275). The
+   full-width plate begins at y 16178; north of it there is only the tie box's poly (x 13953-13983), and beside the box,
+   x 13982-13992, y 16138-16172, is field (`px.py col 13987 16130 16200 3`: plain in both metal shots, 147-162/143-148/81-92
+   in chip 2 against 160/118/70 for the plate below; review round 5, which found run 1's plate drawn through it). The tie is
    a nested, heavy-outlined box (outer 13952-13985 x 16148-16180, inner 13958-13975 x 16158-16172) at the plate's north
    end, against X's strip with only the box's own outline between (`px.py row 16162 13924 13996 2`; views `x6e`,
    `x6f` at 7x, where no more is resolved): a buried contact as run 1 drew it. It stays firm (see Ambiguities).
@@ -1142,3 +1145,51 @@ connections identical.
 Recorded 2026-11-28 11:35 +0000.
 
 Round 4: no findings.
+
+### Round 5 (full review), 2026-11-28: run 6, piece `xdrv`
+
+A fresh Claude Fable 5.2 agent, on commit ea38b484, 10 images in `cache/scratch/bd1/review-5/`. Given the piece's
+claims (the one pull-down on `rst_a` with its three channel stretches, X's node as one net, the load and its tie, G2's
+west arm, no contact under `ck_out`'s and X's metals, the equation) and told to suspect: the column east of the rail
+(22 px of poly with a diffusion strip west of it, or a 40 px block); the joins across the rail's two edges; the edge
+line across the column at y 16248-16254; the box and X's node west of the rail and the clean shot's line at
+x 13812-13816; the edge lines across the gate band and G2's west arm; the load's tie box and the plate's ends; X's strip
+and its south end.
+
+Findings, both geometry only, both confirmed and fixed:
+
+1. **The load plate's north end** (`P 13953,16140:13991,16275`): the full-width plate stops at y about 16180; north of
+   it only the tie box exists (x 13950-13982, y 16148-16182), and x 13982-13992, y 16138-16172 is field (its `px.py col
+   13987`, views `t1`, `t2` at 7x). Confirmed (`px.py col 13987 16130 16200 3 metal,metal1,acid,acid1b`: plain, not
+   orange, in both metal shots; overlay `x6o3` at 6x). The plate is now `P 13953,16178:13991,16275` with the box's poly
+   `P 13953,16148:13983,16182`; the buried contact and its land are moved 6 px south onto the box (`B
+   13951,16146:13985,16181`, `D 13940,16148:13983,16178`). No diffusion lies in the withdrawn corner: no connection
+   changes.
+2. **A stale comment** in `trace/bd1.txt` ("ends as a block (x 13886-13926)") above the run 6 comment that says
+   otherwise: corrected.
+
+Checked and found right (6x views, 4x overlays, `px.py` in all four shots): the column x 13902-13925 with no line
+across it from y 16186 to y 16246 in either metal shot, the edge line y 16248-16254 continuous with the contour along
+the bottoms of the land's extension and of X's strip, the poly's end at y 16262; the strip x 13880-13896 a diffusion and
+one piece with the ground land (`col 13881` plain in both metal shots from y 16208 to y 16274; the clean shot flat tan
+at x 13878); X's box to the node under the rail (one 6 px line, the rail's edge, tan on both sides, no green strip);
+X's strip one piece with the contact's box, ending at y 16260 with field below; west of the rail the active area's
+edge one contour (x 13777 north of y 16158, x 13766 south of it) crossing G2's arm and the gate band, with X's node,
+the land's west end and the south-west box all diffusion in the stripped shot (red minus green 15-29, field -8 to 2),
+and the clean shot's line x 13812-13816 also on the field row y 16290; the load's edge lines y 16194-16198 and
+y 16262-16266, the plate's end at y 16277, 12 px of field between G2's column and the tie box, the supply land and its
+contact; no contact under `ck_out`'s metal or X's metal on either row (`textmap.py 13650 16168 13740 16258`); the
+extraction's equation and sizes, `opendiff.py` (nothing listed), `unsure.py` (nothing on `rst_a_n`).
+
+Could not check: the diffusion under the tie box's outline (7x resolves no more; a buried contact by its shape and
+place); the joins across the rail's two edges directly (under the rail's edge line and the clean shot's margin line:
+inferred from diffusion seen within 4-8 px on either side). Both are this run's Ambiguities 1 and 2.
+
+Proof that the fixes changed no connection, against ea38b484 (the commit the round read):
+
+    tools/t.sh bd1 sameconn.py ea38b484            -> connections identical
+    .venv/bin/python tools/sameconn.py ea38b484    -> connections identical
+
+Recorded 2026-11-28 12:04 +0000.
+
+Round 5: no findings that change a connection.

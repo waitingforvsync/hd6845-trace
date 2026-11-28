@@ -202,7 +202,7 @@ N M 13848,16280 vss
 # --- g: track x 13630 from a contact at 13629,15673 down to a contact at 13629,16150; poly
 # link south under X's horizontal metal to a pad with a second contact at 13629,16235
 # (a metal line goes on south from it); from the pad the gate poly runs east, diagonally
-# up under the rail, east along y 16194 and ends as a block (x 13886-13926).
+# up under the rail, east along y 16194 and turns south as a column x 13902-13925 (run 6; run 1 read a block there).
 P 13614,15658:13648,15688
 C 13629,15673
 P 13640,15671 x13812 w=20           # poly east from the top contact into the gate column: gate of the pull-down of bd1_k
@@ -254,9 +254,12 @@ D 13930,16170:13950,16262          # X: strip down the west side of the load (x 
 D 13878,16170:13940,16252
 # --- load: a nested, heavy-outlined tie box at the plate's north end, against X's strip; the plate's channel runs from
 # the edge line y 16192-16198 to the edge line y 16261-16267, and the plate ends 10 px further on (y 16275)
-D 13940,16142:13983,16172          # bump of X under the load's gate tie
-B 13953,16142:13985,16174
-P 13953,16140:13991,16275          # load gate, from the tie down
+# (review round 5: the full-width plate begins at y 16178; north of it only the tie box's poly, x 13953-13983: beside
+# it, x 13982-13992, y 16138-16172, is field, plain in both metal shots)
+D 13940,16148:13983,16178          # bump of X under the load's gate tie
+B 13951,16146:13985,16181
+P 13953,16148:13983,16182          # the tie box's poly
+P 13953,16178:13991,16275          # load gate, from the tie down
 D 13945,16196:14050,16263          # load channel and supply land
 C 14017,16228 s=26x40
 
